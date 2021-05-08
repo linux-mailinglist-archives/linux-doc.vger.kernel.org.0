@@ -2,223 +2,168 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 309873772A8
-	for <lists+linux-doc@lfdr.de>; Sat,  8 May 2021 17:33:45 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 3AAFC3772D3
+	for <lists+linux-doc@lfdr.de>; Sat,  8 May 2021 17:55:21 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S229552AbhEHPep (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Sat, 8 May 2021 11:34:45 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:45150 "EHLO
+        id S229500AbhEHP4V (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Sat, 8 May 2021 11:56:21 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:49964 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S229500AbhEHPep (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Sat, 8 May 2021 11:34:45 -0400
-Received: from mail-ot1-x335.google.com (mail-ot1-x335.google.com [IPv6:2607:f8b0:4864:20::335])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id A4FA3C061574
-        for <linux-doc@vger.kernel.org>; Sat,  8 May 2021 08:33:43 -0700 (PDT)
-Received: by mail-ot1-x335.google.com with SMTP id i23-20020a9d68d70000b02902dc19ed4c15so6561964oto.0
-        for <linux-doc@vger.kernel.org>; Sat, 08 May 2021 08:33:43 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc:content-transfer-encoding;
-        bh=Jk5W1IlivVUTP3fh63b7UgukSs4fSVQXUKxaUfDEKfs=;
-        b=Q85rsHLFypoVWud1Ky2ckiEmQgjQ5J8kComOzM3pPf1QIrScaGyXjuxxralQyP8YmA
-         PDrQ5G2UxuaERVFlg6efBvxJ6HOo/icGNi0kA3UrtySpCUe0x+vcgx9tVZ+O++vTxC+Q
-         jSaFTNx9bgCxmkCdDhQgJn65ONStw7gUU6fnc+zawYOkGpqJODQfsuV8nica5+VRqR6z
-         yyoAUK1tq7QkyukVm09pgd9fENW/7Cz+CDBwCcrX7wcx79k7dXfHg/qJiGawEGZDKCYz
-         D80lfW5ah+o6Vq/ZWRX1axnGd89DfWxChbq/O5Rv8kb3n8hJpYIDoweYVbcaX2fKHVnK
-         9W0w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc:content-transfer-encoding;
-        bh=Jk5W1IlivVUTP3fh63b7UgukSs4fSVQXUKxaUfDEKfs=;
-        b=L4eKoyc811tL03wGkOn6pkKW6sovNBw3/UVrJ8s4CzPh4X6/e5VbFe1O+7xTa7tCrt
-         bnFF5dWW18P4+lKkeUVTOpreswBuCyCNELvbVBKlWeO+0jcym60CQwLQ3aKwhABE+9NK
-         gaGUf64ovS2F3Hpffn/8INfxoXa7eBlr5C/tdNkSRwdHPPd9PhEPpZJnbgre2DrYEori
-         qWGZLg9jQuHVAQ7IN+RZphyl6E1XHUcnrm/6VRHQK+fF5RIhk92ka+8bQcSqJCzEuON/
-         K8+EQLH/kfuuR5IJvIxK3E/IgGcw5sCsi0/+WZiwhLQlBMGd6Rl5safHI+I10iSGeWfX
-         DwNw==
-X-Gm-Message-State: AOAM533k3WGXMQ5b471U2cjk+6Iq7LCqgJijMuDCg7z74I1cw1JDlZZv
-        Mh5NzFBrbEsdQPU9OOHWkxrDZ8OBmS2krpk5BKU2seEEzlfXTw==
-X-Google-Smtp-Source: ABdhPJxqe+TaGl/ILsOlfJZ3kBUZzJOPWL8FecIH5KD9AdxeSMUIKuX7BAei+HNF1RlJyfc52KxDDZZrwVg6WB1ZBXs=
-X-Received: by 2002:a05:6830:1e70:: with SMTP id m16mr5954889otr.340.1620488022996;
- Sat, 08 May 2021 08:33:42 -0700 (PDT)
+        with ESMTP id S229521AbhEHP4V (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Sat, 8 May 2021 11:56:21 -0400
+Received: from bombadil.infradead.org (bombadil.infradead.org [IPv6:2607:7c80:54:e::133])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 61123C061574
+        for <linux-doc@vger.kernel.org>; Sat,  8 May 2021 08:55:19 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+        d=infradead.org; s=bombadil.20210309; h=Content-Transfer-Encoding:
+        Content-Type:In-Reply-To:MIME-Version:Date:Message-ID:From:References:Cc:To:
+        Subject:Sender:Reply-To:Content-ID:Content-Description;
+        bh=QKPAWlId70tl1To7T1s4kmN1atFjaIJssdGSeq5kJqA=; b=36QOicAmd9KfqN2zfEjA7DHbHJ
+        2REdrBNm1kwyMRTmoD2cgrA4c2KuCHp0oxKL2qLmfCEkiZ4XsCwG2a7ptbQYlz+O5FUA33rrY3n38
+        dOr9K6kXCbie3iRvsM123V07fbY0KwVQ7IHRpHhfH51YP/iJA0P3fmqY0rD4oEb/JLlacXLZO/UTo
+        hRejriIwd0JBDlD+Kao5t6mTPhEyfXAfGOwOhsQZExSPO4bYmhxrxkPrwD17RQcK4VCjm33qhvjSY
+        85v/XojNgLmQm+eC5V3Qq2cmMlLUC+lsc9WOUKXhMfXac97HDtrs0zVSZDTyoKaCLWlM612KcmBa/
+        /gy9yoSw==;
+Received: from [2601:1c0:6280:3f0::7376]
+        by bombadil.infradead.org with esmtpsa (Exim 4.94 #2 (Red Hat Linux))
+        id 1lfPIP-007cgi-2S; Sat, 08 May 2021 15:55:13 +0000
+Subject: Re: Sphinx parallel build error: UnicodeEncodeError: 'latin-1' codec
+ can't encode characters in position 18-20: ordinal not in range(256)
+To:     Mauro Carvalho Chehab <mchehab@kernel.org>,
+        =?UTF-8?Q?Michal_Such=c3=a1nek?= <msuchanek@suse.de>
+Cc:     Matthew Wilcox <willy@infradead.org>,
+        Markus Heiser <markus.heiser@darmarit.de>,
+        linux-doc@vger.kernel.org, Jonathan Corbet <corbet@lwn.net>
+References: <20210506103913.GE6564@kitsune.suse.cz>
+ <30f2117f-aa38-6d60-f020-ff5cf8f004b5@darmarit.de>
+ <20210506184641.6348a621@coco.lan>
+ <0fd5bb54-a8fc-84b2-2bd6-31ab12f12303@darmarit.de>
+ <20210506192756.2a2cc273@coco.lan>
+ <cecb28f8-dfaa-3584-c9f5-fe15145ef3cf@infradead.org>
+ <20210506180842.GD388843@casper.infradead.org>
+ <be21de46-6655-152e-e431-144c2be6137c@infradead.org>
+ <20210507083924.7b8ec1fe@coco.lan> <20210508112205.41946ac7@coco.lan>
+ <20210508104157.GC12700@kitsune.suse.cz> <20210508164145.26f7b1e0@coco.lan>
+From:   Randy Dunlap <rdunlap@infradead.org>
+Message-ID: <347657c8-f5ae-517c-0b43-fb60d50f1dd8@infradead.org>
+Date:   Sat, 8 May 2021 08:55:11 -0700
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
+ Thunderbird/78.9.1
 MIME-Version: 1.0
-References: <cover.1620284974.git.siyanteng@loongson.cn> <13db946725e43f1b490142f745e03ec63a7cec3b.1620284974.git.siyanteng@loongson.cn>
- <20210508053105.GA7017@bobwxc.top>
-In-Reply-To: <20210508053105.GA7017@bobwxc.top>
-From:   yanteng si <siyanteng01@gmail.com>
-Date:   Sat, 8 May 2021 23:33:32 +0800
-Message-ID: <CAEensMw0RVDXUupUn_td674yiE5cOM513dAztB5xc5k5x3baeQ@mail.gmail.com>
-Subject: Re: [PATCH v2 3/3] docs/zh_CN: add parisc registers.rst translation
-To:     "Wu X.C." <bobwxc@email.cn>
-Cc:     Yanteng Si <siyanteng@loongson.cn>,
-        Jonathan Corbet <corbet@lwn.net>, Alex Shi <alexs@kernel.org>,
-        Huacai Chen <chenhuacai@kernel.org>,
-        Jiaxun Yang <jiaxun.yang@flygoat.com>,
-        linux-doc@vger.kernel.org, Puyu Wang <realpuyuwang@gmail.com>,
-        huangjianghui@uniontech.com
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: base64
+In-Reply-To: <20210508164145.26f7b1e0@coco.lan>
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
+Content-Transfer-Encoding: 8bit
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-V3UgWC5DLiA8Ym9id3hjQGVtYWlsLmNuPiDkuo4yMDIx5bm0NeaciDjml6Xlkajlha0g5LiL5Y2I
-MTozMeWGmemBk++8mg0KPg0KPiBPbiBGcmksIE1heSAwNywgMjAyMSBhdCAwNjowNzowNVBNICsw
-ODAwLCBZYW50ZW5nIFNpIHdyb3RlOg0KPiA+IFRoaXMgcGF0Y2ggdHJhbnNsYXRlcyBEb2N1bWVu
-dGF0aW9uL3BhcmlzYy9yZWdpc3RlcnMucnN0IGludG8gQ2hpbmVzZS4NCj4gPg0KPiA+IFNpZ25l
-ZC1vZmYtYnk6IFlhbnRlbmcgU2kgPHNpeWFudGVuZ0Bsb29uZ3Nvbi5jbj4NCj4gPiAtLS0NCj4g
-PiAgLi4uL3RyYW5zbGF0aW9ucy96aF9DTi9wYXJpc2MvaW5kZXgucnN0ICAgICAgIHwgICAyICst
-DQo+ID4gIC4uLi90cmFuc2xhdGlvbnMvemhfQ04vcGFyaXNjL3JlZ2lzdGVycy5yc3QgICB8IDE1
-MyArKysrKysrKysrKysrKysrKysNCj4gPiAgMiBmaWxlcyBjaGFuZ2VkLCAxNTQgaW5zZXJ0aW9u
-cygrKSwgMSBkZWxldGlvbigtKQ0KPiA+ICBjcmVhdGUgbW9kZSAxMDA2NDQgRG9jdW1lbnRhdGlv
-bi90cmFuc2xhdGlvbnMvemhfQ04vcGFyaXNjL3JlZ2lzdGVycy5yc3QNCj4gPg0KPiA+IGRpZmYg
-LS1naXQgYS9Eb2N1bWVudGF0aW9uL3RyYW5zbGF0aW9ucy96aF9DTi9wYXJpc2MvaW5kZXgucnN0
-IGIvRG9jdW1lbnRhdGlvbi90cmFuc2xhdGlvbnMvemhfQ04vcGFyaXNjL2luZGV4LnJzdA0KPiA+
-IGluZGV4IGI5MTNkNjY0ZTczNS4uYTQ3NDU0ZWJlMzJlIDEwMDY0NA0KPiA+IC0tLSBhL0RvY3Vt
-ZW50YXRpb24vdHJhbnNsYXRpb25zL3poX0NOL3BhcmlzYy9pbmRleC5yc3QNCj4gPiArKysgYi9E
-b2N1bWVudGF0aW9uL3RyYW5zbGF0aW9ucy96aF9DTi9wYXJpc2MvaW5kZXgucnN0DQo+ID4gQEAg
-LTE0LDEwICsxNCwxMCBAQCBQQS1SSVND5L2T57O75p625p6EDQo+ID4gICAgIDptYXhkZXB0aDog
-Mg0KPiA+DQo+ID4gICAgIGRlYnVnZ2luZw0KPiA+ICsgICByZWdpc3RlcnMNCj4gPg0KPiA+ICBU
-b2RvbGlzdDoNCj4gPg0KPiA+IC0gICByZWdpc3RlcnMNCj4gPiAgICAgZmVhdHVyZXMNCj4gPg0K
-PiA+ICAuLiBvbmx5OjogIHN1YnByb2plY3QgYW5kIGh0bWwNCj4gPiBkaWZmIC0tZ2l0IGEvRG9j
-dW1lbnRhdGlvbi90cmFuc2xhdGlvbnMvemhfQ04vcGFyaXNjL3JlZ2lzdGVycy5yc3QgYi9Eb2N1
-bWVudGF0aW9uL3RyYW5zbGF0aW9ucy96aF9DTi9wYXJpc2MvcmVnaXN0ZXJzLnJzdA0KPiA+IG5l
-dyBmaWxlIG1vZGUgMTAwNjQ0DQo+ID4gaW5kZXggMDAwMDAwMDAwMDAwLi5lY2FlMWIwNzlhZWMN
-Cj4gPiAtLS0gL2Rldi9udWxsDQo+ID4gKysrIGIvRG9jdW1lbnRhdGlvbi90cmFuc2xhdGlvbnMv
-emhfQ04vcGFyaXNjL3JlZ2lzdGVycy5yc3QNCj4gPiBAQCAtMCwwICsxLDE1MyBAQA0KPiA+ICsu
-LiBpbmNsdWRlOjogLi4vZGlzY2xhaW1lci16aF9DTi5yc3QNCj4gPiArDQo+ID4gKzpPcmlnaW5h
-bDogRG9jdW1lbnRhdGlvbi9wYXJpc2MvcmVnaXN0ZXJzLnJzdA0KPiA+ICs6VHJhbnNsYXRvcjog
-WWFudGVuZyBTaSA8c2l5YW50ZW5nQGxvb25nc29uLmNuPg0KPiA+ICsNCj4gPiArLi4gX2NuX3Bh
-cmlzY19yZWdpc3RlcnM6DQo+ID4gKw0KPiA+ICs9PT09PT09PT09PT09PT09PT09PT09PT09DQo+
-ID4gK0xpbnV4L1BBLVJJU0PnmoTlr4TlrZjlmajnlKjms5UNCj4gPiArPT09PT09PT09PT09PT09
-PT09PT09PT09PQ0KPiA+ICsNCj4gPiArWyDnlKjmmJ/lj7fooajnpLrnm67liY3lsJrmnKrlrp7n
-jrDnmoTorqHliJLnlKjpgJTjgIIgXQ0KPiA+ICsNCj4gPiArQUJJ57qm5a6a55qE6YCa55So5a+E
-5a2Y5ZmoDQo+ID4gKz09PT09PT09PT09PT09PT09PT0NCj4gPiArDQo+ID4gK+aOp+WItuWvhOWt
-mOWZqA0KPiA+ICstLS0tLS0tLS0tDQo+ID4gKw0KPiA+ICs9PT09PT09PT09PT09PT09PT09PT09
-PT09PT09ICAgID09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PQ0KPiA+ICtDUiAwICjm
-gaLlpI3orqHmlbDlmagpICAgICAgICAgICAgICAg55So5LqOcHRyYWNlDQo+ID4gK0NSIDEtQ1Ig
-Nyjml6DlrprkuYkpICAgICAgICAgICAgICAg5pyq5L2/55SoDQo+ID4gK0NSIDggKFByb3RlY3Rp
-b24gSUQpICAgICAgICAgICAg5q+P6L+b56iL5YC8Kg0KPiA+ICtDUiA5LCAxMiwgMTMgKFBJRFMp
-ICAgICAgICAgICAgIOacquS9v+eUqA0KPiA+ICtDUjEwIChDQ1IpICAgICAgICAgICAgICAgICAg
-ICAgIEZQVeW7tui/n+S/neWtmCoNCj4gPiArQ1IxMSAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICDmjInnhadBQknnmoTop4TlrprvvIhTQVLvvIkNCj4gPiArQ1IxNCAo5Lit5pat5ZCR6YePKSAg
-ICAgICAgICAgICAgICAg5Yid5aeL5YyW5Li6IGZhdWx0X3ZlY3Rvcg0KPiA+ICtDUjE1IChFSUVN
-KSAgICAgICAgICAgICAgICAgICAgIOaJgOacieS9jeWIneWni+WMluS4ujEqDQo+ID4gK0NSMTYg
-KOmXtOmalOiuoeaXtuWZqCkgICAgICAgICAgICAgICDor7vlj5blkajmnJ/mlbAv5YaZ5YWl5byA
-5aeL5pe26Ze06Ze06ZqU6K6h5pe25ZmoDQo+ID4gK0NSMTctQ1IyMiAgICAgICAgICAgICAgICAg
-ICAgICAg5Lit5pat5Y+C5pWwDQo+ID4gK0NSMTkgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-5Lit5pat5oyH5Luk5a+E5a2Y5ZmoDQo+ID4gK0NSMjAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAg5Lit5pat56m66Ze05a+E5a2Y5ZmoDQo+ID4gK0NSMjEgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAg5Lit5pat5YGP56e76YeP5a+E5a2Y5ZmoDQo+ID4gK0NSMjIgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAg5Lit5patIFBTVw0KPiA+ICtDUjIzIChFSVJSKSAgICAgICAgICAgICAgICAg
-ICAgIOivu+WPluacquWGs+S4reaWrS/lhpnlhaXmuIXpmaTkvY0NCj4gPiArQ1IyNCAoVFIgMCkg
-ICAgICAgICAgICAgICAgICAgICDlhoXmoLjnqbrpl7TpobXnm67lvZXmjIfpkogNCj4gPiArQ1Iy
-NSAoVFIgMSkgICAgICAgICAgICAgICAgICAgICDnlKjmiLfnqbrpl7TpobXnm67lvZXmjIfpkogN
-Cj4gPiArQ1IyNiAoVFIgMikgICAgICAgICAgICAgICAgICAgICDkuI3kvb/nlKgNCj4gPiArQ1Iy
-NyAoVFIgMykgICAgICAgICAgICAgICAgICAgICDnur/nqIvmj4/ov7DnrKbmjIfpkogNCj4gPiAr
-Q1IyOCAoVFIgNCkgICAgICAgICAgICAgICAgICAgICDkuI3kvb/nlKgNCj4gPiArQ1IyOSAoVFIg
-NSkgICAgICAgICAgICAgICAgICAgICDkuI3kvb/nlKgNCj4gPiArQ1IzMCAoVFIgNikgICAgICAg
-ICAgICAgICAgICAgICDlvZPliY0gLyAwDQo+ID4gK0NSMzEgKFRSIDcpICAgICAgICAgICAgICAg
-ICAgICAg5Li05pe25a+E5a2Y5Zmo77yM5Zyo5LiN5ZCM5Zyw5pa55L2/55SoDQo+ID4gKz09PT09
-PT09PT09PT09PT09PT09PT09PT09PT0gICAgPT09PT09PT09PT09PT09PT09PT09PT09PT09PT09
-PT09DQo+ID4gKw0KPiA+ICvnqbrpl7Tlr4TlrZjlmajvvIjlhoXmoLjmqKHlvI/vvIkNCj4gPiAr
-LS0tLS0tLS0tLS0tLS0tLS0tLS0tLQ0KPiA+ICsNCj4gPiArPT09PT09PT0gICAgICAgICAgICAg
-ICAgICAgICAgICA9PT09PT09PT09PT09PT09PT09PT09PT09PT09PT0NCj4gPiArU1IwICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICDkuLTml7bnqbrpl7Tlr4TlrZjlmagNCj4gPiArU1I0LVNS
-NyAgICAgICAgICAgICAgICAgICAgICAgICDorr7nva7kuLowDQo+ID4gK1NSMSAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAg5Li05pe256m66Ze05a+E5a2Y5ZmoDQo+ID4gK1NSMiAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAg5YaF5qC45LiN5bqU6K+l56C05Z2P5a6DDQo+ID4gK1NSMyAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAg55So5LqO55So5oi356m66Ze06K6/6Zeu77yI5b2T
-5YmN6L+b56iL77yJDQo+ID4gKz09PT09PT09ICAgICAgICAgICAgICAgICAgICAgICAgPT09PT09
-PT09PT09PT09PT09PT09PT09PT09PT09DQo+ID4gKw0KPiA+ICvnqbrpl7Tlr4TlrZjlmajvvIjn
-lKjmiLfmqKHlvI/vvIkNCj4gPiArLS0tLS0tLS0tLS0tLS0tLS0tLS0tLQ0KPiA+ICsNCj4gPiAr
-PT09PT09PT0gICAgICAgICAgICAgICAgICAgICAgICA9PT09PT09PT09PT09PT09PT09PT09PT09
-PT09DQo+ID4gK1NSMCAgICAgICAgICAgICAgICAgICAgICAgICAgICAg5Li05pe256m66Ze05a+E
-5a2Y5ZmoDQo+ID4gK1NSMSAgICAgICAgICAgICAgICAgICAgICAgICAgICAg5Li05pe256m66Ze0
-5a+E5a2Y5ZmoDQo+ID4gK1NSMiAgICAgICAgICAgICAgICAgICAgICAgICAgICAg5L+d5a2YTGlu
-dXggZ2F0ZXdheSBwYWdl55qE56m66Ze0DQo+ID4gK1NSMyAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAg5Zyo5YaF5qC45Lit5L+d5a2Y55So5oi35Zyw5Z2A56m66Ze055qE5YC8DQo+ID4gK1NS
-NC1TUjcgICAgICAgICAgICAgICAgICAgICAgICAg5a6a5LmJ5LqG55So5oi3L+WGheaguOeahOef
-reWcsOWdgOepuumXtA0KPiA+ICs9PT09PT09PSAgICAgICAgICAgICAgICAgICAgICAgID09PT09
-PT09PT09PT09PT09PT09PT09PT09PT0NCj4gPiArDQo+ID4gKw0KPiA+ICvlpITnkIblmajnirbm
-gIHlrZcNCj4gPiArLS0tLS0tLS0tLS0tDQo+ID4gKw0KPiA+ICs9PT09PT09PT09PT09PT09PT09
-PT09ICAgICAgICAgID09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09
-PT09PQ0KPiA+ICtXIO+8iDY05L2N5Zyw5Z2A77yJICAgICAgICAgICAgICAgICAgMA0KPiA+ICtF
-IO+8iOWwj+Wwvuerr++8iSAgICAgICAgICAgICAgICAgICAgMA0KPiA+ICtTIO+8iOWuieWFqOmX
-tOmalOiuoeaXtuWZqO+8iSAgICAgICAgICAgIDANCj4gPiArVCDvvIjkuqfnlJ/liIbmlK/pmbfp
-mLHvvIkgICAgICAgICAgICAgIDANCj4gPiArSCDvvIjpq5jnibnmnYPnuqfpmbfpmLHvvIkgICAg
-ICAgICAgICAgIDANCj4gPiArTCDvvIjkvY7nibnmnYPnuqfpmbfpmLHvvIkgICAgICAgICAgICAg
-IDANCj4gPiArTiDvvIjmkqTplIDkuIvkuIDmnaHmjIfku6TvvIkgICAgICAgICAgICDooqtD5Luj
-56CB5L2/55SoDQo+ID4gK1gg77yI5pWw5o2u5a2Y5YKo5Lit5pat56aB55So77yJICAgICAgICAg
-IDANCj4gPiArQiDvvIjkuqfnlJ/liIbmlK/vvIkgICAgICAgICAgICAgICAgICDooqtD5Luj56CB
-5L2/55SoDQo+ID4gK0Mg77yI5Luj56CB5Zyw5Z2A6L2s6K+R77yJICAgICAgICAgICAgICAxLCDl
-nKjmiafooYzlrp7mqKHlvI/ku6PnoIHml7bkuLowDQo+ID4gK1Yg77yI6Zmk5rOV5q2l6ZW/5qCh
-5q2j77yJICAgICAgICAgICAgICDooqtD5Luj56CB5L2/55SoDQo+ID4gK00g77yISFBNQyDmjqnn
-oIHvvIkgICAgICAgICAgICAgICAgIDAsIOWcqOaJp+ihjEhQTUPmk43kvZwq5pe25Li6MQ0KPiA+
-ICtDL0Ig77yI6L+bL+WAnyDkvY3vvIkgICAgICAgICAgICAgICAg6KKrQ+S7o+eggeS9v+eUqA0K
-PiA+ICtPIO+8iOacieW6j+W8leeUqO+8iSAgICAgICAgICAgICAgICAgIDEqDQo+ID4gK0Yg77yI
-5oCn6IO955uR6KeG5Zmo77yJICAgICAgICAgICAgICAgIDANCj4gPiArUiDvvIjlm57mlLborqHm
-lbDlmajpmbfpmLHvvIkgICAgICAgICAgICAwDQo+ID4gK1Eg77yI5pS26ZuG5Lit5pat54q25oCB
-77yJICAgICAgICAgICAgICAxIO+8iOWcqHJmaeS5i+WJjeeahOS7o+eggeS4reS4ujDvvIkNCj4g
-PiArUCDvvIjkv53miqTmoIfor4bnrKbvvIkgICAgICAgICAgICAgICAgMSoNCj4gPiArRCDvvIjm
-lbDmja7lnLDlnYDovazor5HvvIkgICAgICAgICAgICAgIDEsIOWcqOaJp+ihjOWunuaooeW8j+S7
-o+eggeaXtuS4ujANCj4gPiArSSDvvIjlpJbpg6jkuK3mlq3mjqnnoIHvvIkgICAgICAgICAgICAg
-IOeUsWNsaSgpL3N0aSgp5a6P5L2/55So44CCDQo+ID4gKz09PT09PT09PT09PT09PT09PT09PT0g
-ICAgICAgICAgPT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09
-DQo+ID4gKw0KPiA+ICvigJzpmpDlvaLigJ3lr4TlrZjlmajvvIjlvbHlrZDlr4TlrZjlmajvvIkN
-Cj4gPiArLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tDQo+ID4gKw0KPiA+ICs9PT09PT09PT09
-PT09ICAgICAgICAgICAgICAgICAgID09PT09PT09PT09PT09PT09PT0NCj4gPiArUFNXIFcg6buY
-6K6k5YC8ICAgICAgICAgICAgICAgICAgICAwDQo+ID4gK1BTVyBFIOm7mOiupOWAvCAgICAgICAg
-ICAgICAgICAgICAgMA0KPiA+ICvlvbHlrZDlr4TlrZjlmaggICAgICAgICAgICAgICAgICAgICAg
-6KKr5Lit5pat5aSE55CG5Luj56CB5L2/55SoDQo+ID4gK1RPQ+WQr+eUqOS9jSAgICAgICAgICAg
-ICAgICAgICAgICAgMQ0KPiA+ICs9PT09PT09PT09PT09ICAgICAgICAgICAgICAgICAgID09PT09
-PT09PT09PT09PT09PT0NCj4gPiArDQo+ID4gKy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
-LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0NCj4gPiArDQo+ID4gK1BBLVJJU0PmnrbmnoTl
-rprkuYnkuoY35Liq5a+E5a2Y5Zmo5L2c5Li64oCc5b2x5a2Q5a+E5a2Y5Zmo4oCd44CC6L+Z5Lqb
-5a+E5a2Y5Zmo5ZyoDQo+ID4gK1JFVFVSTiBGUk9NIElOVEVSUlVQVElPTiBBTkQgUkVTVE9SReaM
-h+S7pOS4reS9v+eUqO+8jOmAmui/h+a2iA0KPiA+ICvpmaTkuK3mlq3lpITnkIbnqIvluo/kuK3l
-r7nkuIDoiKzlr4TlrZjlmajvvIhHUu+8ieeahOS/neWtmOWSjOaBouWkjeeahOmcgOimgeadpeWH
-jw0KPiA+ICvlsJHnirbmgIHkv53lrZjlkozmgaLlpI3ml7bpl7TjgILlvbHlrZDlr4TlrZjlmajm
-mK9HUnMgMSwgOCwgOSwgMTYsIDE3LA0KPiA+ICsyNOWSjDI144CCDQo+ID4gKw0KPiA+ICstLS0t
-LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
-LS0tLS0tLS0tLS0tDQo+ID4gKw0KPiA+ICvlr4TlrZjlmajkvb/nlKjor7TmmI7vvIzmnIDliJ3n
-lLHnuqbnv7At6ams5paHSm9obiBNYXJ2aW7mj5DkvpvvvIzlubbnlLFSYW5kb2xwaCBDaHVuZ+aP
-kOS+m+S4gOS6m+ihpeWFheivtOaYjuOAgg0KPiAgICAgICAgICAgICAgICAgICAgICAgICAgXl5e
-Xl5eXl5eDQo+IGRlbCDnuqbnv7At6ams5paHDQo+ID4gKw0KPiA+ICvlr7nkuo7pgJrnlKjlr4Tl
-rZjlmag6DQo+ID4gKw0KPiA+ICtyMSxyMixyMTktcjI2LHIyOCxyMjkgJiByMzHlj6/ku6XlnKjk
-uI3kv53lrZjlroPku6znmoTmg4XlhrXkuIvooqvkvb/nlKjjgILlvZPnhLbvvIzlpoLmnpzkvaAN
-Cj4gPiAr5YWz5b+D5a6D5Lus77yM5Zyo6LCD55So5Y+m5LiA5Liq56iL5bqP5LmL5YmN77yM5L2g
-5Lmf6ZyA6KaB5L+d5a2Y5a6D5Lus44CC5LiK6Z2i55qE5LiA5Lqb5a+E5a2Y5Zmo56Gu5a6eDQo+
-ID4gK+acieeJueauiueahOWQq+S5ie+8jOS9oOW6lOivpeazqOaEj+S4gOS4izoNCj4gPiArDQo+
-ID4gKyAgICByMToNCj4gPiArICAgICAgIGFkZGls5oyH5Luk5piv56Gs5oCn6KeE5a6a5bCG5YW2
-57uT5p6c5pS+5ZyocjHkuK3vvIzmiYDku6XlpoLmnpzkvaDkvb/nlKjov5nmnaHmjIfku6TopoEN
-Cj4gPiArICAgICAgIOazqOaEj+i/meeCueOAgg0KPiA+ICsNCj4gPiArICAgIHIyOg0KPiA+ICsg
-ICAgICAg6L+Z5bCx5piv6L+U5Zue5oyH6ZKI44CC5LiA6Iis5p2l6K+077yM5L2g5LiN5oOz5L2/
-55So5a6D77yM5Zug5Li65L2g6ZyA6KaB6L+Z5Liq5oyH6ZKI5p2l6L+UDQo+ID4gKyAgICAgICDl
-m57nu5nkvaDnmoTosIPnlKjogIXjgILnhLbogIzvvIzlroPkuI7ov5nnu4Tlr4TlrZjlmajnu4Tl
-kIjlnKjkuIDotbfvvIzlm6DkuLrosIPnlKjogIXkuI3og70NCj4gPiArICAgICAgIOS+nei1luS9
-oOi/lOWbnuaXtueahOWAvOaYr+ebuOWQjOeahO+8jOS5n+WwseaYr+ivtO+8jOS9oOWPr+S7peWw
-hnIy5aSN5Yi25Yiw5Y+m5LiA5Liq5a+E5a2YDQo+ID4gKyAgICAgICDlmajvvIzlubblnKjkvZzl
-up9yMuWQjumAmui/h+ivpeWvhOWtmOWZqOi/lOWbnu+8jOi/meW6lOivpeS4jeS8mue7meiwg+eU
-qOeoi+W6j+W4puadpemXrumimOOAgg0KPiA+ICsNCj4gPiArICAgIHIxOS1yMjI6DQo+ID4gKyAg
-ICAgICDov5nkupvpgJrluLjooqvorqTkuLrmmK/kuLTml7blr4TlrZjlmajjgIINCj4gPiArICAg
-ICAgIOivt+azqOaEj++8jOWcqDY05L2N5Lit5a6D5Lus5pivYXJnNy1hcmc044CCDQo+ID4gKw0K
-PiA+ICsgICAgcjIzLXIyNjoNCj4gPiArICAgICAgIOi/meS6m+aYr2FyZzMtYXJnMO+8jOS5n+Ww
-seaYr+ivtO+8jOWmguaenOS9oOS4jeWGjeWFs+W/g+S8oOWFpeeahOWAvO+8jOS9oOWPr+S7peS9
-v+eUqA0KPiA+ICsgICAgICAg5a6D5Lus44CCDQo+ID4gKw0KPiA+ICsgICAgcjI4LHIyOToNCj4g
-PiArICAgICAgIOi/meS/qeaYr3JldDDlkoxyZXQx44CC5a6D5Lus5piv5L2g5Lyg5YWl6L+U5Zue
-5YC855qE5Zyw5pa544CCcjI45piv5Li76L+U5Zue5YC844CC5b2T6L+U5ZueDQo+ID4gKyAgICAg
-ICDlsI/nu5PmnoTkvZPml7bvvIxyMjnkuZ/lj6/ku6XnlKjmnaXlsIbmlbDmja7kvKDlm57nu5no
-sIPnlKjnqIvluo/jgIINCj4gPiArDQo+ID4gKyAgICByMzA6DQo+ID4gKyAgICAgICDmoIjmjIfp
-kogNCj4gPiArDQo+ID4gKyAgICByMzE6DQo+ID4gKyAgICAgICBibGXmjIfku6TlsIbov5Tlm57m
-jIfpkojmlL7lnKjov5nph4zjgIINCj4gPiArDQo+ID4gKw0KPg0KPiBJJ3ZlIHNwZWNpZmljYWxs
-eSByZW1pbmRlZCB5b3UgdGhhdCB0aGVyZSdzIG5vIG5lZWQgdG8gY2hhbmdlIHRoZSBpbmRlbnRh
-dGlvbg0KPiBvZiB0aGUgbmV4dCBwYXJhZ3JhcGggLg0KDQp+Pl88fg0KPg0KPg0KPiA+ICsgICAg
-ICAgcjMtcjE4LHIyNyxyMzDpnIDopoHooqvkv53lrZjlkozmgaLlpI3jgIJyMy1yMTjlj6rmmK/k
-uIDoiKznlKjpgJTnmoTlr4TlrZjlmajjgIINCj4gPiArICAgICAgIHIyN+aYr+aVsOaNruaMh+mS
-iO+8jOeUqOadpeS9v+WvueWFqOWxgOWPmOmHj+eahOW8leeUqOabtOWuueaYk+OAgnIzMOaYr+ag
-iOaMh+mSiOOAgg0KPiA+IC0tDQo+ID4gMi4yNy4wDQo+DQo+IFJldmlld2VkLWJ5OiBXdSBYaWFu
-Z0NoZW5nIDxib2J3eGNAZW1haWwuY24+DQoNClRoYW5rIHlvdSBmb3IgeW91ciByZXZpZXchDQoN
-ClRoYW5rcywNCllhbnRlbmcNCj4NCj4NCj4gVGhhbmtzLA0KPiBXdSBYLkMNCj4NCg==
+Hi Mauro,
+
+On 5/8/21 7:41 AM, Mauro Carvalho Chehab wrote:
+> Em Sat, 8 May 2021 12:41:57 +0200
+> Michal Suchánek <msuchanek@suse.de> escreveu:
+> 
+>> On Sat, May 08, 2021 at 11:22:05AM +0200, Mauro Carvalho Chehab wrote:
+>>> Em Fri, 7 May 2021 08:39:24 +0200
+>>> Mauro Carvalho Chehab <mchehab@kernel.org> escreveu:
+>>>   
+>>>> Em Thu, 6 May 2021 14:21:01 -0700
+>>>> Randy Dunlap <rdunlap@infradead.org> escreveu:
+>>>>   
+>>>   
+>>>> I'll prepare a patch fixing it. Some care should be taken, however, as
+>>>> it has two places where UTF-8 chars should be used[2].  
+>>>
+>>> Ok, I did a small script in order to check what special chars we
+>>> currently have (next-20210507) at Documentation/ excluding the
+>>> translations.
+>>>
+>>> Based on my script results, we have those groups:
+>>>
+>>> 1. Latin accented characters:
+>>> 	- U+00c7 (LATIN CAPITAL LETTER C WITH CEDILLA) (Ç)
+>>> 	- U+00df (LATIN SMALL LETTER SHARP S) (ß)
+>>> 	- U+00e1 (LATIN SMALL LETTER A WITH ACUTE) (á)
+>>> 	- U+00e4 (LATIN SMALL LETTER A WITH DIAERESIS) (ä)
+>>> 	- U+00e6 (LATIN SMALL LETTER AE) (æ)
+>>> 	- U+00e7 (LATIN SMALL LETTER C WITH CEDILLA) (ç)
+>>> 	- U+00e9 (LATIN SMALL LETTER E WITH ACUTE) (é)
+>>> 	- U+00ea (LATIN SMALL LETTER E WITH CIRCUMFLEX) (ê)
+>>> 	- U+00eb (LATIN SMALL LETTER E WITH DIAERESIS) (ë)
+>>> 	- U+00f3 (LATIN SMALL LETTER O WITH ACUTE) (ó)
+>>> 	- U+00f4 (LATIN SMALL LETTER O WITH CIRCUMFLEX) (ô)
+>>> 	- U+00f6 (LATIN SMALL LETTER O WITH DIAERESIS) (ö)
+>>> 	- U+00f8 (LATIN SMALL LETTER O WITH STROKE) (ø)
+>>> 	- U+00fc (LATIN SMALL LETTER U WITH DIAERESIS) (ü)
+>>> 	- U+011f (LATIN SMALL LETTER G WITH BREVE) (ğ)
+>>> 	- U+0142 (LATIN SMALL LETTER L WITH STROKE) (ł)
+>>>
+>>> 2. symbols:
+>>> 	- U+00a9 (COPYRIGHT SIGN) (©)
+>>> 	- U+2122 (TRADE MARK SIGN) (™)
+>>> 	- U+00ae (REGISTERED SIGN) (®)
+>>> 	- U+00b0 (DEGREE SIGN) (°)
+>>> 	- U+00b1 (PLUS-MINUS SIGN) (±)
+>>> 	- U+00b2 (SUPERSCRIPT TWO) (²)
+>>> 	- U+00b5 (MICRO SIGN) (µ)
+>>> 	- U+00bd (VULGAR FRACTION ONE HALF) (½)
+>>> 	- U+2026 (HORIZONTAL ELLIPSIS) (…)
+>>>
+>>> 3. arrows:
+>>> 	- U+2191 (UPWARDS ARROW) (↑)
+>>> 	- U+2192 (RIGHTWARDS ARROW) (→)
+>>> 	- U+2193 (DOWNWARDS ARROW) (↓)
+>>> 	- U+2b0d (UP DOWN BLACK ARROW) (⬍)
+>>>
+>>> 4. box drawings:
+>>> 	- U+2500 (BOX DRAWINGS LIGHT HORIZONTAL) (─)
+>>> 	- U+2502 (BOX DRAWINGS LIGHT VERTICAL) (│)
+>>> 	- U+2514 (BOX DRAWINGS LIGHT UP AND RIGHT) (└)
+>>> 	- U+251c (BOX DRAWINGS LIGHT VERTICAL AND RIGHT) (├)
+>>>
+>>> 5. math symbols:
+>>> 	- U+00b7 (MIDDLE DOT) (·)
+>>> 	- U+00d7 (MULTIPLICATION SIGN) (×)
+>>> 	- U+2212 (MINUS SIGN) (−)
+>>> 	- U+2217 (ASTERISK OPERATOR) (∗)
+>>> 	- U+223c (TILDE OPERATOR) (∼)
+>>> 	- U+2264 (LESS-THAN OR EQUAL TO) (≤)
+>>> 	- U+2265 (GREATER-THAN OR EQUAL TO) (≥)
+>>> 	- U+27e8 (MATHEMATICAL LEFT ANGLE BRACKET) (⟨)
+>>> 	- U+27e9 (MATHEMATICAL RIGHT ANGLE BRACKET) (⟩)
+>>> 	- U+00ac (NOT SIGN) (¬)  
+>>
+> 
+>>
+>> Use of ¬ is also very dubious in documentation (in fonts it is understandable):
+>> Documentation/ABI/obsolete/sysfs-kernel-fadump_registered:This ABI is renamed and moved to a new location /sys/kernel/fadump/registered.¬
+>> Documentation/ABI/obsolete/sysfs-kernel-fadump_release_mem:This ABI is renamed and moved to a new location /sys/kernel/fadump/release_mem.¬
+> 
+> 
+>> Documentation/powerpc/transactional_memory.rst:  if (MSR 29:31 ¬ = 0b010 | SRR1 29:31 ¬ = 0b000) then
+> 
+> Yeah, this should probably be better written as:
+> 
+>   if (MSR 29:31 == 0b010 | SRR1 29:31 == 0b000) then
+
+If the original with the 'NOT SIGN' was correct, then this
+version can't be correct. Or do you suspect that the "original"
+was corrupted somehow?
+
+
+> In the mean time, I'm already preparing a patch series addressing
+> the issues inside documentation, using some scripting to avoid
+> manual mistakes:
+> 
+> 	https://git.linuxtv.org/mchehab/experimental.git/log/?h=fix_utf8
+> 
+> (patch series is not 100% yet... some adjustments are still
+> needed on some places).
+
+
+Thanks for digging into this and providing fixes.
+
+-- 
+~Randy
+
