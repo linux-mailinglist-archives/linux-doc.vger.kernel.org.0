@@ -2,203 +2,182 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 9F66B378F34
-	for <lists+linux-doc@lfdr.de>; Mon, 10 May 2021 15:52:58 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 2DA9F378FE8
+	for <lists+linux-doc@lfdr.de>; Mon, 10 May 2021 16:07:38 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S231391AbhEJNnH (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 10 May 2021 09:43:07 -0400
-Received: from mail.kernel.org ([198.145.29.99]:41772 "EHLO mail.kernel.org"
-        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S1353064AbhEJNjY (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Mon, 10 May 2021 09:39:24 -0400
-Received: by mail.kernel.org (Postfix) with ESMTPSA id BC3B261421;
-        Mon, 10 May 2021 13:38:10 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-        s=k20201202; t=1620653898;
-        bh=POTo3HRRxAhY1WWlaeFo6BkcTm5UFXPjKCsWF/vTqlE=;
-        h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
-        b=P/4kt59ATJt3MMq8o3rrK9LzWa5UoPyyn/Qv8Q6NsR+ovsaNgOhGumkJ3s+QeyZlY
-         mkp1RSJDBywuRK2pqIzCfULgKANDf0kVzPkShXm7Qraf/KL42h8sHNzwIIIZziepHU
-         1cBc0VMGP5ZXCvpOozd/XPhpRcKII2GV+t+2//cIV3cuDJc3nOaIF/eyI7STcvNwxN
-         jcxTZBK8NBHOGI9kqRh0ffPb4rvNMVcODBe0KVX9czYjhKVi+9lVKEPkHn0PIjvDDH
-         U/oUPFuGfszy5HRsPJnifB10869mpbS6mtWdO6hSvo3gHoQbR2cZYguXdpJ4LGaYVv
-         DmXbC6buzATmw==
-Date:   Mon, 10 May 2021 15:38:07 +0200
-From:   Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
-To:     Edward Cree <ecree.xilinx@gmail.com>
-Cc:     David Woodhouse <dwmw2@infradead.org>,
-        Linux Doc Mailing List <linux-doc@vger.kernel.org>,
-        linux-kernel@vger.kernel.org, Jonathan Corbet <corbet@lwn.net>,
-        alsa-devel@alsa-project.org, coresight@lists.linaro.org,
-        dri-devel@lists.freedesktop.org, intel-gfx@lists.freedesktop.org,
-        intel-wired-lan@lists.osuosl.org, keyrings@vger.kernel.org,
-        kvm@vger.kernel.org, linux-acpi@vger.kernel.org,
-        linux-arm-kernel@lists.infradead.org, linux-edac@vger.kernel.org,
-        linux-ext4@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net,
-        linux-fpga@vger.kernel.org, linux-hwmon@vger.kernel.org,
-        linux-iio@vger.kernel.org, linux-input@vger.kernel.org,
-        linux-integrity@vger.kernel.org, linux-media@vger.kernel.org,
-        linux-pci@vger.kernel.org, linux-pm@vger.kernel.org,
-        linux-rdma@vger.kernel.org, linux-riscv@lists.infradead.org,
-        linux-sgx@vger.kernel.org, linux-usb@vger.kernel.org,
-        mjpeg-users@lists.sourceforge.net, netdev@vger.kernel.org,
-        rcu@vger.kernel.org, x86@kernel.org
-Subject: Re: [PATCH 00/53] Get rid of UTF-8 chars that can be mapped as
- ASCII
-Message-ID: <20210510153807.4405695e@coco.lan>
-In-Reply-To: <df6b4567-030c-a480-c5a6-fe579830e8c0@gmail.com>
-References: <cover.1620641727.git.mchehab+huawei@kernel.org>
-        <2ae366fdff4bd5910a2270823e8da70521c859af.camel@infradead.org>
-        <20210510135518.305cc03d@coco.lan>
-        <df6b4567-030c-a480-c5a6-fe579830e8c0@gmail.com>
-X-Mailer: Claws Mail 3.17.8 (GTK+ 2.24.33; x86_64-redhat-linux-gnu)
+        id S240903AbhEJN53 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 10 May 2021 09:57:29 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:55640 "EHLO
+        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S242960AbhEJNxt (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Mon, 10 May 2021 09:53:49 -0400
+Received: from mail-pf1-x435.google.com (mail-pf1-x435.google.com [IPv6:2607:f8b0:4864:20::435])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 1336BC06137E;
+        Mon, 10 May 2021 06:33:27 -0700 (PDT)
+Received: by mail-pf1-x435.google.com with SMTP id 10so13751250pfl.1;
+        Mon, 10 May 2021 06:33:27 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=KXKAAx7CLKZeMl7TpKKmKCAcmvO/BVIrKGp8RbmnYl4=;
+        b=CNSZK/Cinvl8bScaoPMZT4drw0OIphHipTKR4GsQk9OwP5Boy0WFaPP2no815SiFav
+         ZJD85u8udlrqYDxEVvJf4p6R9koLDGkQswNrQFoTnDf6G3hJWPpMJuTZclp7HGfpqmbf
+         UzrUpFCOqxNAU8zb2qD45tjBue+d+UheMCNdjRVnGthrb9YCSz1IVBU879DUdpDW/QvJ
+         1w+noTjxr/L7Hsoau9oqGBSbP58w0wbgYhhEFEtFRZseC2L0DegCczSGGoVIA6uxvlUL
+         EhJFZVilpUZS8DZNT4aCnbvW94+7qjuyT70hy/yKnWlxzjKqduphmelVl89l7m/ckltq
+         pSNA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=KXKAAx7CLKZeMl7TpKKmKCAcmvO/BVIrKGp8RbmnYl4=;
+        b=dwSesHdUjHKupMhAljuVGarSwgDtRsMmGm4tcAvvF2pYM/yzKo27OSrLkrMf1ej/7m
+         VH2yyTfCyIt2/7zqMethaulvIuf4RDPoMAB9eEdWqNWXDFcS1FjB9IRBvl8eEPYbYOL7
+         /z+kJ4TEyIKTw/yyP/psFdZgr991OJWSu0NxhCu5aY0GiiBptzCywH9bZumpqfEvQBO6
+         8kztVyno9wyim+I+X6JxKvW6JJr8FkdIXz/jT8PLfPlgDlDDMWRHJ/0R7s66MFlaPnjU
+         nXeRpGwf8m/tRhdBxgW4ik5jIUu6PtWejpRR1oArspGJ7Ls0XardlGskvUYFuMN9fIhq
+         XgNg==
+X-Gm-Message-State: AOAM530VUNttRxL6GJvV5Xv0psSUpTmxdDPus1FYlhvWVMCj72G2upuy
+        KnIkLIeQj3ddEXif1hLCHqYp62kNcS4=
+X-Google-Smtp-Source: ABdhPJzc2Zel/3nvTwKMN44cVHNoEyqNpKn793SdY/mTZkl8/DFrtvzmEKYdGeMflsrOwdO6pypBCA==
+X-Received: by 2002:a62:e704:0:b029:2c4:b81e:d1a7 with SMTP id s4-20020a62e7040000b02902c4b81ed1a7mr2414098pfh.31.1620653606116;
+        Mon, 10 May 2021 06:33:26 -0700 (PDT)
+Received: from fainelli-desktop.igp.broadcom.net ([192.19.223.252])
+        by smtp.gmail.com with ESMTPSA id w127sm7906564pfw.4.2021.05.10.06.33.24
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 10 May 2021 06:33:25 -0700 (PDT)
+From:   Florian Fainelli <f.fainelli@gmail.com>
+To:     stable@vger.kernel.org
+Cc:     Florian Fainelli <f.fainelli@gmail.com>,
+        Jonathan Corbet <corbet@lwn.net>,
+        Russell King <linux@armlinux.org.uk>,
+        Linus Walleij <linus.walleij@linaro.org>,
+        Ard Biesheuvel <ardb@kernel.org>,
+        Nicolas Pitre <nico@fluxnic.net>,
+        Sasha Levin <sashal@kernel.org>,
+        linux-doc@vger.kernel.org (open list:DOCUMENTATION),
+        linux-kernel@vger.kernel.org (open list),
+        linux-arm-kernel@lists.infradead.org (moderated list:ARM PORT),
+        Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+Subject: [PATCH stable 5.4 v2 0/4] ARM FDT relocation backports
+Date:   Mon, 10 May 2021 06:33:17 -0700
+Message-Id: <20210510133321.1790243-1-f.fainelli@gmail.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Em Mon, 10 May 2021 14:16:16 +0100
-Edward Cree <ecree.xilinx@gmail.com> escreveu:
+Hi Greg, Sasha,
 
-> On 10/05/2021 12:55, Mauro Carvalho Chehab wrote:
-> > The main point on this series is to replace just the occurrences
-> > where ASCII represents the symbol equally well =20
->=20
-> > 	- U+2014 ('=E2=80=94'): EM DASH =20
-> Em dash is not the same thing as hyphen-minus, and the latter does not
->  serve 'equally well'.  People use em dashes because =E2=80=94 even in
->  monospace fonts =E2=80=94 they make text easier to read and comprehend, =
-when
->  used correctly.
+These patches were not marked with a Fixes: tag but they do fix booting
+ARM 32-bit platforms that have specific FDT placement and would cause
+boot failures like these:
 
-True, but if you look at the diff, on several places, IMHO a single
-hyphen would make more sensus. Maybe those places came from a converted
-doc.
+[    0.000000] 8<--- cut here ---
+[    0.000000] Unable to handle kernel paging request at virtual address
+ffa14000
+[    0.000000] pgd = (ptrval)
+[    0.000000] [ffa14000] *pgd=80000040007003, *pmd=00000000
+[    0.000000] Internal error: Oops: 206 [#1] SMP ARM
+[    0.000000] Modules linked in:
+[    0.000000] CPU: 0 PID: 0 Comm: swapper Not tainted 5.4.85-1.0 #1
+[    0.000000] Hardware name: Broadcom STB (Flattened Device Tree)
+[    0.000000] PC is at fdt_check_header+0xc/0x21c
+[    0.000000] LR is at __unflatten_device_tree+0x7c/0x2f8
+[    0.000000] pc : [<c0d30e44>]    lr : [<c0a6c0fc>]    psr: 600000d3
+[    0.000000] sp : c1401eac  ip : c1401ec8  fp : c1401ec4
+[    0.000000] r10: 00000000  r9 : c150523c  r8 : 00000000
+[    0.000000] r7 : c124eab4  r6 : ffa14000  r5 : 00000000  r4 :
+c14ba920
+[    0.000000] r3 : 00000000  r2 : c150523c  r1 : 00000000  r0 :
+ffa14000
+[    0.000000] Flags: nZCv  IRQs off  FIQs off  Mode SVC_32  ISA ARM
+Segment user
+[    0.000000] Control: 30c5383d  Table: 40003000  DAC: fffffffd
+[    0.000000] Process swapper (pid: 0, stack limit = 0x(ptrval))
+[    0.000000] Stack: (0xc1401eac to 0xc1402000)
+[    0.000000] 1ea0:                            c14ba920 00000000
+ffa14000 c1401ef4 c1401ec8
+[    0.000000] 1ec0: c0a6c0fc c0d30e44 c124eab4 c124eab4 00000000
+c14ebfc0 c140e5b8 00000000
+[    0.000000] 1ee0: 00000001 c126f5a0 c1401f14 c1401ef8 c1250064
+c0a6c08c 00000000 c1401f08
+[    0.000000] 1f00: c022ddac c140ce80 c1401f9c c1401f18 c120506c
+c125002c 00000000 00000000
+[    0.000000] 1f20: 00000000 00000000 ffffffff c1401f94 c1401f6c
+c1406308 3fffffff 00000001
+[    0.000000] 1f40: 00000000 00000001 c1432b58 c14ca180 c1213ca4
+c1406308 c1406300 30c0387d
+[    0.000000] 1f60: c1401f8c c1401f70 c028e0ec 00000000 c1401f94
+c1406308 c1406300 30c0387d
+[    0.000000] 1f80: 00000000 7fa14000 420f1000 30c5387d c1401ff4
+c1401fa0 c1200c98 c120467c
+[    0.000000] 1fa0: 00000000 00000000 00000000 00000000 00000000
+00000000 00000000 c127fa44
+[    0.000000] 1fc0: 00000000 00000000 00000000 c1200330 00000000
+30c0387d ffffffff 7fa14000
+[    0.000000] 1fe0: 420f1000 30c5387d 00000000 c1401ff8 00000000
+c1200c28 00000000 00000000
+[    0.000000] Backtrace:
+[    0.000000] [<c0d30e38>] (fdt_check_header) from [<c0a6c0fc>]
+(__unflatten_device_tree+0x7c/0x2f8)
+[    0.000000]  r6:ffa14000 r5:00000000 r4:c14ba920
+[    0.000000] [<c0a6c080>] (__unflatten_device_tree) from [<c1250064>]
+(unflatten_device_tree+0x44/0x54)
+[    0.000000]  r10:c126f5a0 r9:00000001 r8:00000000 r7:c140e5b8
+r6:c14ebfc0 r5:00000000
+[    0.000000]  r4:c124eab4 r3:c124eab4
+[    0.000000] [<c1250020>] (unflatten_device_tree) from [<c120506c>]
+(setup_arch+0x9fc/0xc84)
+[    0.000000]  r4:c140ce80
+[    0.000000] [<c1204670>] (setup_arch) from [<c1200c98>]
+(start_kernel+0x7c/0x540)
+[    0.000000]  r10:30c5387d r9:420f1000 r8:7fa14000 r7:00000000
+r6:30c0387d r5:c1406300
+[    0.000000]  r4:c1406308
+[    0.000000] [<c1200c1c>] (start_kernel) from [<00000000>] (0x0)
+[    0.000000]  r10:30c5387d r9:420f1000 r8:7fa14000 r7:ffffffff
+r6:30c0387d r5:00000000
+[    0.000000]  r4:c1200330
+[    0.000000] Code: e89da800 e1a0c00d e92dd870 e24cb004 (e5d03000)
+[    0.000000] random: get_random_bytes called from
+print_oops_end_marker+0x50/0x58 with crng_init=0
+[    0.000000] ---[ end trace f34b4929828506c1 ]---
+[    0.000000] Kernel panic - not syncing: Attempted to kill the idle
+task!
+[    0.000000] ---[ end Kernel panic - not syncing: Attempted to kill
+the idle task! ]---
 
-> I accept that some of the other distinctions =E2=80=94 like en dashes =E2=
-=80=94 are
->  needlessly pedantic (though I don't doubt there is someone out there
->  who will gladly defend them with the same fervour with which I argue
->  for the em dash) and I wouldn't take the trouble to use them myself;
->  but I think there is a reasonable assumption that when someone goes
->  to the effort of using a Unicode punctuation mark that is semantic
->  (rather than merely typographical), they probably had a reason for
->  doing so.
->=20
-> > 	- U+2018 ('=E2=80=98'): LEFT SINGLE QUOTATION MARK
-> > 	- U+2019 ('=E2=80=99'): RIGHT SINGLE QUOTATION MARK
-> > 	- U+201c ('=E2=80=9C'): LEFT DOUBLE QUOTATION MARK
-> > 	- U+201d ('=E2=80=9D'): RIGHT DOUBLE QUOTATION MARK =20
-> (These are purely typographic, I have no problem with dumping them.)
->=20
-> > 	- U+00d7 ('=C3=97'): MULTIPLICATION SIGN =20
-> Presumably this is appearing in mathematical formulae, in which case
->  changing it to 'x' loses semantic information.
->=20
-> > Using the above symbols will just trick tools like grep for no good
-> > reason. =20
-> NBSP, sure.  That one's probably an artefact of some document format
->  conversion somewhere along the line, anyway.
-> But what kinds of things with =C3=97 or =E2=80=94 in are going to be grep=
-t for?
+Changes in v2:
 
-Actually, on almost all places, those aren't used inside math formulae, but
-instead, they describe video some resolutions:
+- include "ARM: 9027/1: head.S: explicitly map DT even if it lives in
+  the first physical section" as suggested by Ard.
 
-	$ git grep =C3=97 Documentation/
-	Documentation/devicetree/bindings/display/panel/asus,z00t-tm5p5-nt35596.ya=
-ml:title: ASUS Z00T TM5P5 NT35596 5.5" 1080=C3=971920 LCD Panel
-	Documentation/devicetree/bindings/display/panel/panel-simple-dsi.yaml:    =
-    # LG ACX467AKM-7 4.95" 1080=C3=971920 LCD Panel
-	Documentation/devicetree/bindings/sound/tlv320adcx140.yaml:      1 - Mic b=
-ias is set to VREF =C3=97 1.096
-	Documentation/userspace-api/media/v4l/crop.rst:of 16 =C3=97 16 pixels. The=
- source cropping rectangle is set to defaults,
-	Documentation/userspace-api/media/v4l/crop.rst:which are also the upper li=
-mit in this example, of 640 =C3=97 400 pixels at
-	Documentation/userspace-api/media/v4l/crop.rst:offset 0, 0. An application=
- requests an image size of 300 =C3=97 225 pixels,
-	Documentation/userspace-api/media/v4l/crop.rst:The driver sets the image s=
-ize to the closest possible values 304 =C3=97 224,
-	Documentation/userspace-api/media/v4l/crop.rst:is 608 =C3=97 224 (224 =C3=
-=97 2:1 would exceed the limit 400). The offset 0, 0 is
-	Documentation/userspace-api/media/v4l/crop.rst:rectangle of 608 =C3=97 456=
- pixels. The present scaling factors limit
-	Documentation/userspace-api/media/v4l/crop.rst:cropping to 640 =C3=97 384,=
- so the driver returns the cropping size 608 =C3=97 384
-	Documentation/userspace-api/media/v4l/crop.rst:and adjusts the image size =
-to closest possible 304 =C3=97 192.
-	Documentation/userspace-api/media/v4l/diff-v4l.rst:size bitmap of 1024 =C3=
-=97 625 bits. Struct :c:type:`v4l2_window`
-	Documentation/userspace-api/media/v4l/vidioc-cropcap.rst:       Assuming p=
-ixel aspect 1/1 this could be for example a 640 =C3=97 480
-	Documentation/userspace-api/media/v4l/vidioc-cropcap.rst:       rectangle =
-for NTSC, a 768 =C3=97 576 rectangle for PAL and SECAM
+Ard Biesheuvel (4):
+  ARM: 9011/1: centralize phys-to-virt conversion of DT/ATAGS address
+  ARM: 9012/1: move device tree mapping out of linear region
+  ARM: 9020/1: mm: use correct section size macro to describe the FDT
+    virtual address
+  ARM: 9027/1: head.S: explicitly map DT even if it lives in the first
+    physical section
 
-it is a way more likely that, if someone wants to grep, they would be=20
-doing something like this, in order to get video resolutions:
+ Documentation/arm/memory.rst  |  7 ++++++-
+ arch/arm/include/asm/fixmap.h |  2 +-
+ arch/arm/include/asm/memory.h |  5 +++++
+ arch/arm/include/asm/prom.h   |  4 ++--
+ arch/arm/kernel/atags.h       |  4 ++--
+ arch/arm/kernel/atags_parse.c |  6 +++---
+ arch/arm/kernel/devtree.c     |  6 +++---
+ arch/arm/kernel/head.S        |  9 ++++-----
+ arch/arm/kernel/setup.c       | 19 ++++++++++++++-----
+ arch/arm/mm/init.c            |  1 -
+ arch/arm/mm/mmu.c             | 20 ++++++++++++++------
+ arch/arm/mm/pv-fixup-asm.S    |  4 ++--
+ 12 files changed, 56 insertions(+), 31 deletions(-)
 
-	$ git grep -E "\b[1-9][0-9]+\s*x\s*[0-9]+\b" Documentation/
-	Documentation/ABI/obsolete/sysfs-driver-hid-roccat-koneplus:Description:  =
-      When read the mouse returns a 30x30 pixel image of the
-	Documentation/ABI/obsolete/sysfs-driver-hid-roccat-konepure:Description:  =
-      When read the mouse returns a 30x30 pixel image of the
-	Documentation/ABI/testing/sysfs-bus-event_source-devices-hv_24x7:         =
-      Provides access to the binary "24x7 catalog" provided by the
-	Documentation/ABI/testing/sysfs-bus-event_source-devices-hv_24x7:         =
-      https://raw.githubusercontent.com/jmesmon/catalog-24x7/master/hv-24x7=
--	catalog.h
-	Documentation/ABI/testing/sysfs-bus-event_source-devices-hv_24x7:         =
-      Exposes the "version" field of the 24x7 catalog. This is also
-	Documentation/ABI/testing/sysfs-bus-event_source-devices-hv_24x7:         =
-      HCALLs to retrieve hv-24x7 pmu event counter data.
-	Documentation/ABI/testing/sysfs-bus-vfio-mdev:          "2 heads, 512M FB,=
- 2560x1600 maximum resolution"
-	Documentation/ABI/testing/sysfs-driver-wacom:           of the device. The=
- image is a 64x32 pixel 4-bit gray image. The
-	Documentation/ABI/testing/sysfs-driver-wacom:           1024 byte binary i=
-s split up into 16x 64 byte chunks. Each 64
-	Documentation/ABI/testing/sysfs-driver-wacom:           image has to conta=
-in 256 bytes (64x32 px 1 bit colour).
-	Documentation/admin-guide/edid.rst:commonly used screen resolutions (800x6=
-00, 1024x768, 1280x1024, 1600x1200,
-	Documentation/admin-guide/edid.rst:1680x1050, 1920x1080) as binary blobs, =
-but the kernel source tree does
-	Documentation/admin-guide/edid.rst:If you want to create your own EDID fil=
-e, copy the file 1024x768.S,
-	Documentation/admin-guide/kernel-parameters.txt:                        ed=
-id/1024x768.bin, edid/1280x1024.bin,
-	Documentation/admin-guide/kernel-parameters.txt:                        ed=
-id/1680x1050.bin, or edid/1920x1080.bin is given
-	Documentation/admin-guide/kernel-parameters.txt:                        2 =
-- The VGA Shield is attached (1024x768)
-	Documentation/admin-guide/media/dvb_intro.rst:signal encoded at a resoluti=
-on of 768x576 24-bit color pixels over 25
-	Documentation/admin-guide/media/imx.rst:1280x960 input frame to 640x480, a=
-nd then /2 downscale in both
-	Documentation/admin-guide/media/imx.rst:dimensions to 320x240 (assumes ipu=
-1_csi0 is linked to ipu1_csi0_mux):
-	Documentation/admin-guide/media/imx.rst:   media-ctl -V "'ipu1_csi0_mux':2=
-[fmt:UYVY2X8/1280x960]"
+-- 
+2.25.1
 
-which won't get the above, due to the usage of the UTF-8 alternative.
-
-In any case, replacing all the above by 'x' seems to be the right thing,
-at least on my eyes.
-
-> If there are em dashes lying around that semantically _should_ be
->  hyphen-minus (one of your patches I've seen, for instance, fixes an
->  *en* dash moonlighting as the option character in an `ethtool`
->  command line), then sure, convert them.
-> But any time someone is using a Unicode character to *express
->  semantics*, even if you happen to think the semantic distinction
->  involved is a pedantic or unimportant one, I think you need an
->  explicit grep case to justify ASCIIfying it.
-
-Yeah, in the case of hyphen/dash it seems to make sense to double check
-it.
-
-Thanks,
-Mauro
