@@ -2,102 +2,109 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 261273788A5
-	for <lists+linux-doc@lfdr.de>; Mon, 10 May 2021 13:48:27 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 07A703788A9
+	for <lists+linux-doc@lfdr.de>; Mon, 10 May 2021 13:48:35 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S234257AbhEJLWg convert rfc822-to-8bit (ORCPT
-        <rfc822;lists+linux-doc@lfdr.de>); Mon, 10 May 2021 07:22:36 -0400
-Received: from mga04.intel.com ([192.55.52.120]:7182 "EHLO mga04.intel.com"
+        id S234319AbhEJLWm (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 10 May 2021 07:22:42 -0400
+Received: from mail.kernel.org ([198.145.29.99]:40598 "EHLO mail.kernel.org"
         rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S238305AbhEJLRV (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Mon, 10 May 2021 07:17:21 -0400
-IronPort-SDR: 0zN4AI+9+dm6QeGdeyG7W/Pvh1EEzs2Qrv1mpYqwt0n+5b3zHuz1qtYWvKdfWSJFpz0LK9dexj
- dt6krpAbylmA==
-X-IronPort-AV: E=McAfee;i="6200,9189,9979"; a="197184662"
-X-IronPort-AV: E=Sophos;i="5.82,287,1613462400"; 
-   d="scan'208";a="197184662"
-Received: from orsmga008.jf.intel.com ([10.7.209.65])
-  by fmsmga104.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 10 May 2021 04:16:16 -0700
-IronPort-SDR: 6f7483hNhBYZ6quW3AIAvXtqyjGE63Mhhqh6TMeYQme1IdnqDs+NRHcY9ZfhmJJcCXLHx3iMr+
- r0uzfvmVKEPg==
-X-IronPort-AV: E=Sophos;i="5.82,287,1613462400"; 
-   d="scan'208";a="436099598"
-Received: from solender-mobl.ger.corp.intel.com (HELO localhost) ([10.252.48.101])
-  by orsmga008-auth.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 10 May 2021 04:16:10 -0700
-From:   Jani Nikula <jani.nikula@linux.intel.com>
-To:     Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
-        Linux Doc Mailing List <linux-doc@vger.kernel.org>
-Cc:     Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
-        Mali DP Maintainers <malidp@foss.arm.com>,
-        "James \(Qian\) Wang" <james.qian.wang@arm.com>,
-        Jonathan Corbet <corbet@lwn.net>,
-        Daniel Vetter <daniel@ffwll.ch>,
-        David Airlie <airlied@linux.ie>,
-        Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
-        Liviu Dudau <liviu.dudau@arm.com>,
-        Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
-        Maxime Ripard <mripard@kernel.org>,
-        Mihail Atanassov <mihail.atanassov@arm.com>,
-        Rodrigo Vivi <rodrigo.vivi@intel.com>,
-        Thomas Zimmermann <tzimmermann@suse.de>,
+        id S239112AbhEJLVG (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Mon, 10 May 2021 07:21:06 -0400
+Received: by mail.kernel.org (Postfix) with ESMTPSA id CC8EA6101E;
+        Mon, 10 May 2021 11:19:53 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+        s=k20201202; t=1620645601;
+        bh=W7iAKST7BRDMlEttXNNjJ33EX76A4qp8I6GEgdSMv7U=;
+        h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
+        b=gmDmb0dM5IcZQ9rSlubjtF+K7WR5CTuBYzK7hGG8NgJ6VoZl1xWTpOcwkH/5/0zA/
+         vlx1VxEGYzpDqoIrEOS4Gq4vleDywsH/Tbkz7KjwQOxa0gHoTz3ZfhQBobu6oYwUNn
+         Apktwvurhr0XmVvzqYbUbTW3FMnBkgNdhIrbGi6F2SzZTvdCwG1IcEdUG7Tg53VOjZ
+         rsHYuTEPmzH2qPOyCxJC2wx/q7V+K8nhKe4JHOwCkQGI9ADck3Kw17WLNRkmbFOBip
+         a9pcqsOJVVBc05NJGVPFoJfSO03eP8zjvIV4wRYaZYLrBIVfbDQLgQs1bXlcp7w7lK
+         9KVTRb7Ve04dg==
+Date:   Mon, 10 May 2021 13:19:50 +0200
+From:   Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
+To:     Thorsten Leemhuis <linux@leemhuis.info>
+Cc:     Linux Doc Mailing List <linux-doc@vger.kernel.org>,
+        linux-kernel@vger.kernel.org, Jonathan Corbet <corbet@lwn.net>,
+        alsa-devel@alsa-project.org, coresight@lists.linaro.org,
         dri-devel@lists.freedesktop.org, intel-gfx@lists.freedesktop.org,
-        linux-kernel@vger.kernel.org
-Subject: Re: [PATCH 44/53] docs: gpu: avoid using UTF-8 chars
-In-Reply-To: <36bc1118467da645a57515743c9f6c1cd86abe8c.1620641727.git.mchehab+huawei@kernel.org>
-Organization: Intel Finland Oy - BIC 0357606-4 - Westendinkatu 7, 02160 Espoo
-References: <cover.1620641727.git.mchehab+huawei@kernel.org> <36bc1118467da645a57515743c9f6c1cd86abe8c.1620641727.git.mchehab+huawei@kernel.org>
-Date:   Mon, 10 May 2021 14:16:08 +0300
-Message-ID: <87sg2uvnyf.fsf@intel.com>
+        intel-wired-lan@lists.osuosl.org, keyrings@vger.kernel.org,
+        kvm@vger.kernel.org, linux-acpi@vger.kernel.org,
+        linux-arm-kernel@lists.infradead.org, linux-edac@vger.kernel.org,
+        linux-ext4@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net,
+        linux-fpga@vger.kernel.org, linux-hwmon@vger.kernel.org,
+        linux-iio@vger.kernel.org, linux-input@vger.kernel.org,
+        linux-integrity@vger.kernel.org, linux-media@vger.kernel.org,
+        linux-pci@vger.kernel.org, linux-pm@vger.kernel.org,
+        linux-rdma@vger.kernel.org, linux-riscv@lists.infradead.org,
+        linux-sgx@vger.kernel.org, linux-usb@vger.kernel.org,
+        mjpeg-users@lists.sourceforge.net, netdev@vger.kernel.org,
+        rcu@vger.kernel.org, x86@kernel.org
+Subject: Re: [PATCH 00/53] Get rid of UTF-8 chars that can be mapped as
+ ASCII
+Message-ID: <20210510131950.063f0608@coco.lan>
+In-Reply-To: <c4479ced-f4d8-1a1e-ee54-9abc55344187@leemhuis.info>
+References: <cover.1620641727.git.mchehab+huawei@kernel.org>
+        <c4479ced-f4d8-1a1e-ee54-9abc55344187@leemhuis.info>
+X-Mailer: Claws Mail 3.17.8 (GTK+ 2.24.33; x86_64-redhat-linux-gnu)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: 8BIT
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Mon, 10 May 2021, Mauro Carvalho Chehab <mchehab+huawei@kernel.org> wrote:
-> While UTF-8 characters can be used at the Linux documentation,
-> the best is to use them only when ASCII doesn't offer a good replacement.
-> So, replace the occurences of the following UTF-8 characters:
->
-> 	- U+2019 ('’'): RIGHT SINGLE QUOTATION MARK
->
-> Signed-off-by: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
+Em Mon, 10 May 2021 12:52:44 +0200
+Thorsten Leemhuis <linux@leemhuis.info> escreveu:
 
-Acked-by: Jani Nikula <jani.nikula@intel.com>
+> On 10.05.21 12:26, Mauro Carvalho Chehab wrote:
+> >
+> > As Linux developers are all around the globe, and not everybody has UTF=
+-8
+> > as their default charset, better to use UTF-8 only on cases where it is=
+ really
+> > needed.
+> > [=E2=80=A6]
+> > The remaining patches on series address such cases on *.rst files and=20
+> > inside the Documentation/ABI, using this perl map table in order to do =
+the
+> > charset conversion:
+> >=20
+> > my %char_map =3D (
+> > [=E2=80=A6]
+> > 	0x2013 =3D> '-',		# EN DASH
+> > 	0x2014 =3D> '-',		# EM DASH =20
 
 
-> ---
->  Documentation/gpu/i915.rst       | 2 +-
->  Documentation/gpu/komeda-kms.rst | 2 +-
->  2 files changed, 2 insertions(+), 2 deletions(-)
->
-> diff --git a/Documentation/gpu/i915.rst b/Documentation/gpu/i915.rst
-> index 486c720f3890..2cbf54460b48 100644
-> --- a/Documentation/gpu/i915.rst
-> +++ b/Documentation/gpu/i915.rst
-> @@ -361,7 +361,7 @@ Locking Guidelines
->  	  real bad.
->  
->  #. Do not nest different lru/memory manager locks within each other.
-> -   Take them in turn to update memory allocations, relying on the object’s
-> +   Take them in turn to update memory allocations, relying on the object's
->     dma_resv ww_mutex to serialize against other operations.
->  
->  #. The suggestion for lru/memory managers locks is that they are small
-> diff --git a/Documentation/gpu/komeda-kms.rst b/Documentation/gpu/komeda-kms.rst
-> index eb693c857e2d..c2067678e92c 100644
-> --- a/Documentation/gpu/komeda-kms.rst
-> +++ b/Documentation/gpu/komeda-kms.rst
-> @@ -324,7 +324,7 @@ the control-abilites of device.
->  
->  We have &komeda_dev, &komeda_pipeline, &komeda_component. Now fill devices with
->  pipelines. Since komeda is not for D71 only but also intended for later products,
-> -of course we’d better share as much as possible between different products. To
-> +of course we'd better share as much as possible between different products. To
->  achieve this, split the komeda device into two layers: CORE and CHIP.
->  
->  -   CORE: for common features and capabilities handling.
+> I might be performing bike shedding here, but wouldn't it be better to
+> replace those two with "--", as explained in
+> https://en.wikipedia.org/wiki/Dash#Approximating_the_em_dash_with_two_or_=
+three_hyphens
+>=20
+> For EM DASH there seems to be even "---", but I'd say that is a bit too
+> much.
 
--- 
-Jani Nikula, Intel Open Source Graphics Center
+Yeah, we can do, instead:
+
+ 	0x2013 =3D> '--',		# EN DASH
+ 	0x2014 =3D> '---',	# EM DASH =20
+
+I was actually in doubt about those ;-)
+
+Btw, when producing HTML documentation,  Sphinx should convert:
+	-- into EN DASH
+and:
+	--- into EM DASH
+
+So, the resulting html will be identical.
+
+> Or do you fear the extra work as some lines then might break the
+> 80-character limit then?
+
+No, I suspect that the line size won't be an issue. Some care should
+taken when EN DASH and EM DASH are used inside tables.
+
+Thanks,
+Mauro
