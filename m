@@ -2,189 +2,100 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 212AB379077
-	for <lists+linux-doc@lfdr.de>; Mon, 10 May 2021 16:19:08 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 4B26437901A
+	for <lists+linux-doc@lfdr.de>; Mon, 10 May 2021 16:08:02 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S233115AbhEJOUF (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 10 May 2021 10:20:05 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:60140 "EHLO
-        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S235134AbhEJORr (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Mon, 10 May 2021 10:17:47 -0400
-Received: from mail-ej1-x631.google.com (mail-ej1-x631.google.com [IPv6:2a00:1450:4864:20::631])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 0C271C061377
-        for <linux-doc@vger.kernel.org>; Mon, 10 May 2021 06:53:44 -0700 (PDT)
-Received: by mail-ej1-x631.google.com with SMTP id l4so24632069ejc.10
-        for <linux-doc@vger.kernel.org>; Mon, 10 May 2021 06:53:43 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=google.com; s=20161025;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc:content-transfer-encoding;
-        bh=3/BpnWJEv4o5FfX0aIZJ40Ru/5e0Tbvo6Tknzzoadv8=;
-        b=UkesQq7U/Vv6j8enBp4w98nDH5cgHq2J7P37F7StYDrpooPI34/pzSH+hT06U1W2/C
-         SrQRPskipuF0pIQL1UWCrC9wa00Z1+Yz3mVw580J9TEeRv3YPQHJNDnWVxiWayqSliYW
-         RvfQn8L7qemW7Hrg0OdX5lvb5WihYgqnewGXnOLz045bXvi4zEi2/Oxj+Wauz/coV+oI
-         ruLiqiRfuX3z5K7puwuN3t4pIlz9v0QtXaRPLKqSGgZn8bn9dS0VOVSQB9yNuoNxLH6Y
-         +PLT34lTaDhXYKBD18/9HqcwDBz7y26rzkTPDRoLriu+O7/qfQSeCtDJd0B1431ESYj1
-         CgPw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc:content-transfer-encoding;
-        bh=3/BpnWJEv4o5FfX0aIZJ40Ru/5e0Tbvo6Tknzzoadv8=;
-        b=beGACoy9yRz5J7CnKRP8P9thP6o3Ve3jy67cuR106vBpbnNgtXy3/9SmAOkZsPpoMp
-         ZvvsXCea7oqmpPTtFL7x12X1v50xEs269D1dfoPCTEcgk/su/w6ooM+7cLBwoCJUrGvN
-         SzHbI/7//jHPbVf4/HmmCAdgPdmDYM9IW5xQ4sN/68pnpRmerQRSO5hyuIWBbNz13OiR
-         MgxqfeEpZT048dE/q3zbFhkk2C4/FpdfwvoXOfkXgGyWu5WtaTQDYPx3slBPxDOSdcTn
-         x48EsysvduMfiHFp10Uwf4F2342z7DFXt3by0UvyzfLOXglaHGVeSMEdTFPR0NDhUUhJ
-         X2BQ==
-X-Gm-Message-State: AOAM5330uVIdT2fyZewFi42zf9ewYkuqon0gJwTZibeEmBfojNY6aDE4
-        bEavR0469UKFku7SOg45F2lDO1ShU15pMEU2qFPshA==
-X-Google-Smtp-Source: ABdhPJxTc1BkzCj3RKu6aUlgFJxgyFP3L14QOJWTKLIzRzZDXDruv3cMRlZzIFPCM95csvx+Esb4EjCSrpUflzt4+aE=
-X-Received: by 2002:a17:906:fa86:: with SMTP id lt6mr25351839ejb.547.1620654822363;
- Mon, 10 May 2021 06:53:42 -0700 (PDT)
-MIME-Version: 1.0
-References: <cover.1620641727.git.mchehab+huawei@kernel.org> <16298d18c8bada9775e32d5f7f9edf664bce820d.1620641727.git.mchehab+huawei@kernel.org>
-In-Reply-To: <16298d18c8bada9775e32d5f7f9edf664bce820d.1620641727.git.mchehab+huawei@kernel.org>
-From:   Guenter Roeck <groeck@google.com>
-Date:   Mon, 10 May 2021 06:53:30 -0700
-Message-ID: <CABXOdTctRP0qHzgJGKXuE6AnroP-J1yJVYEDNQ4O-NKMC0ajcA@mail.gmail.com>
-Subject: Re: [PATCH 41/53] docs: ABI: avoid using UTF-8 chars
+        id S233131AbhEJOIN (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 10 May 2021 10:08:13 -0400
+Received: from new4-smtp.messagingengine.com ([66.111.4.230]:37919 "EHLO
+        new4-smtp.messagingengine.com" rhost-flags-OK-OK-OK-OK)
+        by vger.kernel.org with ESMTP id S235412AbhEJOBt (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Mon, 10 May 2021 10:01:49 -0400
+Received: from compute3.internal (compute3.nyi.internal [10.202.2.43])
+        by mailnew.nyi.internal (Postfix) with ESMTP id 14AAD5807B2;
+        Mon, 10 May 2021 10:00:38 -0400 (EDT)
+Received: from mailfrontend1 ([10.202.2.162])
+  by compute3.internal (MEProxy); Mon, 10 May 2021 10:00:38 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=benboeckel.net;
+         h=date:from:to:cc:subject:message-id:references:mime-version
+        :content-type:in-reply-to; s=fm1; bh=fwXudyHn8IUNsmfHA12W5pUxFzr
+        IcUsJJs6niPOOwGc=; b=gQh6u0zhPsG//1fbjCgHH3SUq5OZEixVi+ckcNcOvNr
+        8f8S6u6OqczboxIeZQzxpdw3AUy1t45vyyuSQKDA1+yJJEqv0Na0yFB8YXQoxGQa
+        A5mz/uekXLKQlXSBVpDzZgWHaTwxLQ8cfd/84Seg6MJA86M+DwrG/rxkfmjHnsDx
+        Vsn+We4G3Oh5Yvv4HNwlluWEHPMQsGoYqOZqIpzyUGPfcSXaDfcxgaoBasafO20O
+        Nia4uZb9+lsHdBKwEogjjnykkTJJzKThWOeq3e2hyjT/F/nLvkiGpnFJ0uMYCJ5w
+        yhbph4b45d/9JdizeckN5aTq6WAACtGxOiZQK1Svtuw==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
+        messagingengine.com; h=cc:content-type:date:from:in-reply-to
+        :message-id:mime-version:references:subject:to:x-me-proxy
+        :x-me-proxy:x-me-sender:x-me-sender:x-sasl-enc; s=fm2; bh=fwXudy
+        Hn8IUNsmfHA12W5pUxFzrIcUsJJs6niPOOwGc=; b=FkYLunR8+bNyojGntZzlTv
+        lNhoU5Ih8GFYdgqBiM9GEeBgkR7PC0rd49vKxgNK2oVHYiwvnJ0pFHee6wyNEefG
+        07iyoKlPp2/47lNX2/0a3w6XYC3Muan3VrHn9DIyh2AJDD/sq19lwcD+nClmgOGW
+        3kjTJut/WH9S1nO20R6vTeVSVeiFhLK/oh1ul5trEQZynTCu46HI2dcf9dXPVKk9
+        sOjDpOdiQFUH6B6gq1Emr8rDL+S3scV3gAHdetS1J2hIDO0dgu0hscWNc8fHxaey
+        25F3JvGPZJisNAQmAtq62YqH7TCAIzVvBqJwx8rI9Oyho2YDtxrFPxf1S0VsKOTA
+        ==
+X-ME-Sender: <xms:hDyZYCqZ48w__j-3J2DdcFFyCNO8Px1wZAdweI2vgyXQ5g_1A_avfw>
+    <xme:hDyZYAoPMp-2hhXE5dIuFZVKJLDFR-LeVjsu56BtdhTJGnUi8Md4Pqb1pnf9Vqqdn
+    t02Gw-Ku9S6gnwxX4I>
+X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgeduledrvdegkedgjedvucetufdoteggodetrfdotf
+    fvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdfqfgfvpdfurfetoffkrfgpnffqhgen
+    uceurghilhhouhhtmecufedttdenucesvcftvggtihhpihgvnhhtshculddquddttddmne
+    cujfgurhepfffhvffukfhfgggtuggjfgesthdtredttderjeenucfhrhhomhepuegvnhcu
+    uehovggtkhgvlhcuoehmvgessggvnhgsohgvtghkvghlrdhnvghtqeenucggtffrrghtth
+    gvrhhnpeevffdtteetgfdttdekueefgedttddtueeugeekgeetffeuteffjeduieehhfek
+    tdenucfkphepvdegrdduieelrddvtddrvdehheenucevlhhushhtvghrufhiiigvpedtne
+    curfgrrhgrmhepmhgrihhlfhhrohhmpehmvgessggvnhgsohgvtghkvghlrdhnvght
+X-ME-Proxy: <xmx:hDyZYHO7a0I2ObO3iNQCJFMynfyvzQSxH3x8A4ShPc13xjvG6wh63A>
+    <xmx:hDyZYB6OL9_iqJiCXEkFvw1uMnu0UHjkSyxn6Irx0qOidEFWAmkwbA>
+    <xmx:hDyZYB472gSq8MYTawlNh6oofIzwaZQvJxltEegElvbnNVF17UiCaA>
+    <xmx:hjyZYNFuZhUi4dOrdPamnliiTh3owe6Tf-ewK9C2k9SXGvHlGfVlTg>
+Received: from localhost (unknown [24.169.20.255])
+        by mail.messagingengine.com (Postfix) with ESMTPA;
+        Mon, 10 May 2021 10:00:35 -0400 (EDT)
+Date:   Mon, 10 May 2021 10:00:34 -0400
+From:   Ben Boeckel <me@benboeckel.net>
 To:     Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
-Cc:     Linux Doc Mailing List <linux-doc@vger.kernel.org>,
-        Jonathan Corbet <corbet@lwn.net>,
-        Benson Leung <bleung@chromium.org>,
-        Enric Balletbo i Serra <enric.balletbo@collabora.com>,
-        Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
-        Guenter Roeck <groeck@chromium.org>,
-        Steven Price <steven.price@arm.com>,
-        Sudeep Holla <sudeep.holla@arm.com>,
-        Suzuki K Poulose <suzuki.poulose@arm.com>,
-        Tom Rix <trix@redhat.com>,
-        Vaibhav Jain <vaibhav@linux.ibm.com>,
-        linux-kernel <linux-kernel@vger.kernel.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Cc:     David Woodhouse <dwmw2@infradead.org>,
+        Linux Doc Mailing List <linux-doc@vger.kernel.org>,
+        linux-kernel@vger.kernel.org, Jonathan Corbet <corbet@lwn.net>,
+        alsa-devel@alsa-project.org, coresight@lists.linaro.org,
+        dri-devel@lists.freedesktop.org, intel-gfx@lists.freedesktop.org,
+        intel-wired-lan@lists.osuosl.org, keyrings@vger.kernel.org,
+        kvm@vger.kernel.org, linux-acpi@vger.kernel.org,
+        linux-arm-kernel@lists.infradead.org, linux-edac@vger.kernel.org,
+        linux-ext4@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net,
+        linux-fpga@vger.kernel.org, linux-hwmon@vger.kernel.org,
+        linux-iio@vger.kernel.org, linux-input@vger.kernel.org,
+        linux-integrity@vger.kernel.org, linux-media@vger.kernel.org,
+        linux-pci@vger.kernel.org, linux-pm@vger.kernel.org,
+        linux-rdma@vger.kernel.org, linux-riscv@lists.infradead.org,
+        linux-sgx@vger.kernel.org, linux-usb@vger.kernel.org,
+        mjpeg-users@lists.sourceforge.net, netdev@vger.kernel.org,
+        rcu@vger.kernel.org, x86@kernel.org
+Subject: Re: [PATCH 00/53] Get rid of UTF-8 chars that can be mapped as ASCII
+Message-ID: <YJk8gkMlk8dtaEsz@erythro.dev.benboeckel.internal>
+References: <cover.1620641727.git.mchehab+huawei@kernel.org>
+ <2ae366fdff4bd5910a2270823e8da70521c859af.camel@infradead.org>
+ <20210510135518.305cc03d@coco.lan>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+In-Reply-To: <20210510135518.305cc03d@coco.lan>
+User-Agent: Mutt/2.0.5 (2021-01-21)
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Mon, May 10, 2021 at 3:27 AM Mauro Carvalho Chehab
-<mchehab+huawei@kernel.org> wrote:
->
-> While UTF-8 characters can be used at the Linux documentation,
-> the best is to use them only when ASCII doesn't offer a good replacement.
-> So, replace the occurences of the following UTF-8 characters:
->
->         - U+2013 ('=E2=80=93'): EN DASH
->         - U+2018 ('=E2=80=98'): LEFT SINGLE QUOTATION MARK
->         - U+2019 ('=E2=80=99'): RIGHT SINGLE QUOTATION MARK
->
-> Signed-off-by: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
+On Mon, May 10, 2021 at 13:55:18 +0200, Mauro Carvalho Chehab wrote:
+>     $ git grep "CPU 0 has been" Documentation/RCU/
+>       Documentation/RCU/Design/Data-Structures/Data-Structures.rst:| #. CPU 0 has been in dyntick-idle mode for quite some time. When it   |
+>       Documentation/RCU/Design/Data-Structures/Data-Structures.rst:|    notices that CPU 0 has been in dyntick idle mode, which qualifies  |
 
-Reviewed-by: Guenter Roeck <groeck@chromium.org>
+The kernel documentation uses hard line wraps, so such a naive grep is
+going to always fail unless such line wraps are taken into account. Not
+saying this isn't an improvement in and of itself, but smarter searching
+strategies are likely needed anyways.
 
-> ---
->  .../ABI/testing/sysfs-class-chromeos-driver-cros-ec-lightbar  | 2 +-
->  Documentation/ABI/testing/sysfs-class-net-cdc_ncm             | 2 +-
->  Documentation/ABI/testing/sysfs-devices-platform-ipmi         | 2 +-
->  Documentation/ABI/testing/sysfs-devices-platform-trackpoint   | 2 +-
->  Documentation/ABI/testing/sysfs-devices-soc                   | 4 ++--
->  5 files changed, 6 insertions(+), 6 deletions(-)
->
-> diff --git a/Documentation/ABI/testing/sysfs-class-chromeos-driver-cros-e=
-c-lightbar b/Documentation/ABI/testing/sysfs-class-chromeos-driver-cros-ec-=
-lightbar
-> index 57a037791403..a7fb8f1169f2 100644
-> --- a/Documentation/ABI/testing/sysfs-class-chromeos-driver-cros-ec-light=
-bar
-> +++ b/Documentation/ABI/testing/sysfs-class-chromeos-driver-cros-ec-light=
-bar
-> @@ -29,7 +29,7 @@ KernelVersion:        4.2
->  Description:
->                 This allows you to control each LED segment. If the
->                 lightbar is already running one of the automatic
-> -               sequences, you probably won=E2=80=99t see anything change=
- because
-> +               sequences, you probably won't see anything change because
->                 your color setting will be almost immediately replaced.
->                 To get useful results, you should stop the lightbar
->                 sequence first.
-> diff --git a/Documentation/ABI/testing/sysfs-class-net-cdc_ncm b/Document=
-ation/ABI/testing/sysfs-class-net-cdc_ncm
-> index 06416d0e163d..41a1eef0d0e7 100644
-> --- a/Documentation/ABI/testing/sysfs-class-net-cdc_ncm
-> +++ b/Documentation/ABI/testing/sysfs-class-net-cdc_ncm
-> @@ -93,7 +93,7 @@ Contact:      Bj=C3=B8rn Mork <bjorn@mork.no>
->  Description:
->                 - Bit 0: 16-bit NTB supported (set to 1)
->                 - Bit 1: 32-bit NTB supported
-> -               - Bits 2 =E2=80=93 15: reserved (reset to zero; must be i=
-gnored by host)
-> +               - Bits 2 - 15: reserved (reset to zero; must be ignored b=
-y host)
->
->  What:          /sys/class/net/<iface>/cdc_ncm/dwNtbInMaxSize
->  Date:          May 2014
-> diff --git a/Documentation/ABI/testing/sysfs-devices-platform-ipmi b/Docu=
-mentation/ABI/testing/sysfs-devices-platform-ipmi
-> index 07df0ddc0b69..3935cdedea0e 100644
-> --- a/Documentation/ABI/testing/sysfs-devices-platform-ipmi
-> +++ b/Documentation/ABI/testing/sysfs-devices-platform-ipmi
-> @@ -52,7 +52,7 @@ Date:         Mar, 2006
->  KernelVersion: v2.6.17
->  Contact:       openipmi-developer@lists.sourceforge.net
->  Description:
-> -               (RO) Lists the IPMI =E2=80=98logical device=E2=80=99 comm=
-ands and functions
-> +               (RO) Lists the IPMI 'logical device' commands and functio=
-ns
->                 that the controller supports that are in addition to the
->                 mandatory IPM and Application commands.
->
-> diff --git a/Documentation/ABI/testing/sysfs-devices-platform-trackpoint =
-b/Documentation/ABI/testing/sysfs-devices-platform-trackpoint
-> index df11901a6b3d..82a38ac0435c 100644
-> --- a/Documentation/ABI/testing/sysfs-devices-platform-trackpoint
-> +++ b/Documentation/ABI/testing/sysfs-devices-platform-trackpoint
-> @@ -105,7 +105,7 @@ KernelVersion:      3.19
->  Contact:       linux-input@vger.kernel.org
->  Description:
->                 (RW) This parameter controls the period of time to test f=
-or a
-> -               =E2=80=98hands off=E2=80=99 condition (i.e. when no force=
- is applied) before a
-> +               'hands off' condition (i.e. when no force is applied) bef=
-ore a
->                 drift (noise) calibration occurs.
->
->                 IBM Trackpoints have a feature to compensate for drift by
-> diff --git a/Documentation/ABI/testing/sysfs-devices-soc b/Documentation/=
-ABI/testing/sysfs-devices-soc
-> index ea999e292f11..7f90c6a44610 100644
-> --- a/Documentation/ABI/testing/sysfs-devices-soc
-> +++ b/Documentation/ABI/testing/sysfs-devices-soc
-> @@ -27,11 +27,11 @@ Description:
->                 (e.g. DB8500).
->
->                 On many of ARM based silicon with SMCCC v1.2+ compliant f=
-irmware
-> -               this will contain the JEDEC JEP106 manufacturer=E2=80=99s=
- identification
-> +               this will contain the JEDEC JEP106 manufacturer's identif=
-ication
->                 code. The format is "jep106:XXYY" where XX is identity co=
-de and
->                 YY is continuation code.
->
-> -               This manufacturer=E2=80=99s identification code is define=
-d by one
-> +               This manufacturer's identification code is defined by one
->                 or more eight (8) bit fields, each consisting of seven (7=
-)
->                 data bits plus one (1) odd parity bit. It is a single fie=
-ld,
->                 limiting the possible number of vendors to 126. To expand
-> --
-> 2.30.2
->
+--Ben
