@@ -2,34 +2,41 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 6A6BD37A957
-	for <lists+linux-doc@lfdr.de>; Tue, 11 May 2021 16:31:45 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id A2C4837A983
+	for <lists+linux-doc@lfdr.de>; Tue, 11 May 2021 16:36:39 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S231809AbhEKOct convert rfc822-to-8bit (ORCPT
-        <rfc822;lists+linux-doc@lfdr.de>); Tue, 11 May 2021 10:32:49 -0400
-Received: from eu-smtp-delivery-151.mimecast.com ([185.58.85.151]:41254 "EHLO
-        eu-smtp-delivery-151.mimecast.com" rhost-flags-OK-OK-OK-OK)
-        by vger.kernel.org with ESMTP id S231804AbhEKOct (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 11 May 2021 10:32:49 -0400
-Received: from AcuMS.aculab.com (156.67.243.121 [156.67.243.121]) (Using
- TLS) by relay.mimecast.com with ESMTP id
- uk-mta-32-ksxxKfZ1MOGdNqOWBkuFfw-1; Tue, 11 May 2021 15:31:40 +0100
-X-MC-Unique: ksxxKfZ1MOGdNqOWBkuFfw-1
-Received: from AcuMS.Aculab.com (fd9f:af1c:a25b:0:994c:f5c2:35d6:9b65) by
- AcuMS.aculab.com (fd9f:af1c:a25b:0:994c:f5c2:35d6:9b65) with Microsoft SMTP
- Server (TLS) id 15.0.1497.2; Tue, 11 May 2021 15:31:38 +0100
-Received: from AcuMS.Aculab.com ([fe80::994c:f5c2:35d6:9b65]) by
- AcuMS.aculab.com ([fe80::994c:f5c2:35d6:9b65%12]) with mapi id
- 15.00.1497.015; Tue, 11 May 2021 15:31:38 +0100
-From:   David Laight <David.Laight@ACULAB.COM>
-To:     'Petr Mladek' <pmladek@suse.com>
-CC:     'Steven Rostedt' <rostedt@goodmis.org>,
+        id S231681AbhEKOho (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 11 May 2021 10:37:44 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:50530 "EHLO
+        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S231652AbhEKOhn (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 11 May 2021 10:37:43 -0400
+Received: from casper.infradead.org (casper.infradead.org [IPv6:2001:8b0:10b:1236::1])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 227A1C061574;
+        Tue, 11 May 2021 07:36:37 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+        d=infradead.org; s=casper.20170209; h=In-Reply-To:Content-Type:MIME-Version:
+        References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
+        Content-Transfer-Encoding:Content-ID:Content-Description;
+        bh=INAkIN4SBQvoIBYvJ03SumbjRNWdtamuLnKi9O35Hxc=; b=Uv1dwxn5bh2d/tg/FP0HBf+mqY
+        NEQBgZwWFCoph900CFGJ6NE4qFrtVmwssRC92hw4fjI9xfykBbinku1r+3waXe3hGG0igMHXtlQcf
+        84vEFr/lv1EkydVj+IbjB6z4DcDMtoTXr0csjCfDN7hHsYqR3t9wFlYSUOdC4X+NLypjuyDnKPxVf
+        Oxib7suJdC08HbdjrkyqO1l6zeDvwNhd+zt1xGOzNIb7A4Kbdi306RN+5ajt5qfLoO1+KIPE2EBol
+        hcB5/IL1rZPgO++DBXlz5tiN9wYSyjDrvbqjKfHYaTjexZMo5F1G5uemEgUTpPtkqsPN6l+MgWQwF
+        Gt0T+LQQ==;
+Received: from willy by casper.infradead.org with local (Exim 4.94 #2 (Red Hat Linux))
+        id 1lgTTu-007Mpv-Ly; Tue, 11 May 2021 14:35:39 +0000
+Date:   Tue, 11 May 2021 15:35:30 +0100
+From:   Matthew Wilcox <willy@infradead.org>
+To:     David Laight <David.Laight@aculab.com>
+Cc:     'Petr Mladek' <pmladek@suse.com>,
+        'Steven Rostedt' <rostedt@goodmis.org>,
         'Stephen Boyd' <swboyd@chromium.org>,
         Andrew Morton <akpm@linux-foundation.org>,
         "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
-        "Alexei Starovoitov" <ast@kernel.org>,
+        Alexei Starovoitov <ast@kernel.org>,
         Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
-        Baoquan He <bhe@redhat.com>, "Borislav Petkov" <bp@alien8.de>,
+        Baoquan He <bhe@redhat.com>, Borislav Petkov <bp@alien8.de>,
         Catalin Marinas <catalin.marinas@arm.com>,
         Dave Young <dyoung@redhat.com>,
         Evan Green <evgreen@chromium.org>,
@@ -41,8 +48,7 @@ CC:     'Steven Rostedt' <rostedt@goodmis.org>,
         "linux-arm-kernel@lists.infradead.org" 
         <linux-arm-kernel@lists.infradead.org>,
         "linux-doc@vger.kernel.org" <linux-doc@vger.kernel.org>,
-        Matthew Wilcox <willy@infradead.org>,
-        "Rasmus Villemoes" <linux@rasmusvillemoes.dk>,
+        Rasmus Villemoes <linux@rasmusvillemoes.dk>,
         Sasha Levin <sashal@kernel.org>,
         Sergey Senozhatsky <sergey.senozhatsky@gmail.com>,
         Thomas Gleixner <tglx@linutronix.de>,
@@ -50,75 +56,25 @@ CC:     'Steven Rostedt' <rostedt@goodmis.org>,
         "x86@kernel.org" <x86@kernel.org>,
         Christoph Hellwig <hch@infradead.org>,
         peter enderborg <peter.enderborg@sony.com>
-Subject: RE: [PATCH v6 00/13] Add build ID to stacktraces
-Thread-Topic: [PATCH v6 00/13] Add build ID to stacktraces
-Thread-Index: AQHXRf4HnT90HedmH0WFx6bjKadex6reN/jQ///0T4CAABGGcIAAB3WAgAASvAA=
-Date:   Tue, 11 May 2021 14:31:38 +0000
-Message-ID: <f09e9d68e4b14de58e881050a3c78ec1@AcuMS.aculab.com>
+Subject: Re: [PATCH v6 00/13] Add build ID to stacktraces
+Message-ID: <YJqWMgiirWPNNvnX@casper.infradead.org>
 References: <20210511003845.2429846-1-swboyd@chromium.org>
  <b30f6d396edf4db5974a2b90364b6314@AcuMS.aculab.com>
  <20210511085235.09bc38a7@gandalf.local.home>
- <37ca7834a8514a5695ed002e073a83b6@AcuMS.aculab.com> <YJqTB5pJiRqS1yGY@alley>
-In-Reply-To: <YJqTB5pJiRqS1yGY@alley>
-Accept-Language: en-GB, en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-ms-exchange-transport-fromentityheader: Hosted
-x-originating-ip: [10.202.205.107]
+ <37ca7834a8514a5695ed002e073a83b6@AcuMS.aculab.com>
+ <YJqTB5pJiRqS1yGY@alley>
+ <f09e9d68e4b14de58e881050a3c78ec1@AcuMS.aculab.com>
 MIME-Version: 1.0
-Authentication-Results: relay.mimecast.com;
-        auth=pass smtp.auth=C51A453 smtp.mailfrom=david.laight@aculab.com
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: aculab.com
-Content-Language: en-US
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8BIT
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <f09e9d68e4b14de58e881050a3c78ec1@AcuMS.aculab.com>
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-From: Petr Mladek
-> Sent: 11 May 2021 15:22
-> 
-> On Tue 2021-05-11 12:58:47, David Laight wrote:
-> > From: Steven Rostedt
-> > > Sent: 11 May 2021 13:53
-> > >
-> > > On Tue, 11 May 2021 12:36:06 +0000
-> > > David Laight <David.Laight@ACULAB.COM> wrote:
-> > >
-> > > > >  x1 : ffffff93fef15788 x0 : ffffffe3622352e0
-> > > > >  Call trace:
-> > > > >   lkdtm_WARNING+0x28/0x30 [lkdtm ed5019fdf5e53be37cb1ba7899292d7e143b259e]
-> > > > >   direct_entry+0x16c/0x1b4 [lkdtm ed5019fdf5e53be37cb1ba7899292d7e143b259e]
-> > > > >   full_proxy_write+0x74/0xa4
-> > > >
-> > > > Is there any way to get it to print each module ID only once?
-> > >
-> > > If there's a trivial way to do that, then perhaps it should be done, but for
-> > > now, this patch series isn't as obnoxious as the previous versions. It only
-> > > affects stack traces, and I'm fine with that.
-> >
-> > True. Printing the id in the module list was horrid.
-> >
-> > The real downside is all the extra text that will overflow the
-> > in-kernel buffer.
-> > At least it shouldn't be extra lines causing screen wrap.
-> > Unless the variable names are long - hi rust :-)
-> 
-> Note that the ID is printed only when CONFIG_STACKTRACE_BUILD_ID
-> is enabled. It will be used only by some distros/vendors that
-> use it to download the debuginfo packages.
+On Tue, May 11, 2021 at 02:31:38PM +0000, David Laight wrote:
+> Actually, for the use case, the id could be trimmed significantly.
+> It is only trying to differentiate between builds of a specific module.
+> So even 8 digits would be plenty.
 
-Until Ubuntu decide to turn it on :-)
-
-Actually, for the use case, the id could be trimmed significantly.
-It is only trying to differentiate between builds of a specific module.
-So even 8 digits would be plenty.
-
-	David
-
--
-Registered Address Lakeside, Bramley Road, Mount Farm, Milton Keynes, MK1 1PT, UK
-Registration No: 1397386 (Wales)
-
+asked and answered.  please review the bidding.
