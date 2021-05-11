@@ -2,173 +2,97 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id C1B8937AA04
-	for <lists+linux-doc@lfdr.de>; Tue, 11 May 2021 16:57:07 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 534AD37AA1A
+	for <lists+linux-doc@lfdr.de>; Tue, 11 May 2021 17:01:45 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S231735AbhEKO6M (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 11 May 2021 10:58:12 -0400
-Received: from mga03.intel.com ([134.134.136.65]:1059 "EHLO mga03.intel.com"
+        id S231934AbhEKPCr (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 11 May 2021 11:02:47 -0400
+Received: from mail.kernel.org ([198.145.29.99]:35152 "EHLO mail.kernel.org"
         rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S231604AbhEKO6M (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Tue, 11 May 2021 10:58:12 -0400
-IronPort-SDR: apC16J+4AF0c2a+ZLQMklF7Q9r6o/cV8k/aqDaynICZjdfFdrlf84osuzd9JE8yj5pOLszTKi9
- f9tQLgSWqo2g==
-X-IronPort-AV: E=McAfee;i="6200,9189,9981"; a="199514448"
-X-IronPort-AV: E=Sophos;i="5.82,291,1613462400"; 
-   d="scan'208";a="199514448"
-Received: from fmsmga002.fm.intel.com ([10.253.24.26])
-  by orsmga103.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 11 May 2021 07:57:05 -0700
-IronPort-SDR: 8PQcwvpWU6Dh0UpthJR9/VCiXxCuDjTvMOh/WTQFuV/wJApSX5qc5E38iTSMC3V6n/LRYT2qN2
- dP3l2iQdzTCg==
-X-IronPort-AV: E=Sophos;i="5.82,291,1613462400"; 
-   d="scan'208";a="468941442"
-Received: from smile.fi.intel.com (HELO smile) ([10.237.68.40])
-  by fmsmga002-auth.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 11 May 2021 07:57:00 -0700
-Received: from andy by smile with local (Exim 4.94)
-        (envelope-from <andriy.shevchenko@linux.intel.com>)
-        id 1lgToe-00BTUX-KM; Tue, 11 May 2021 17:56:56 +0300
-Date:   Tue, 11 May 2021 17:56:56 +0300
-From:   Andy Shevchenko <andriy.shevchenko@linux.intel.com>
-To:     Petr Mladek <pmladek@suse.com>
-Cc:     JC Kuo <jckuo@nvidia.com>, Joe Perches <joe@perches.com>,
-        Sumit Garg <sumit.garg@linaro.org>, linux-doc@vger.kernel.org,
-        linux-kernel@vger.kernel.org, linux-usb@vger.kernel.org,
-        linux-tegra@vger.kernel.org, linux-nilfs@vger.kernel.org,
-        kgdb-bugreport@lists.sourceforge.net,
-        Steven Rostedt <rostedt@goodmis.org>,
-        Sergey Senozhatsky <senozhatsky@chromium.org>,
-        Rasmus Villemoes <linux@rasmusvillemoes.dk>,
-        Jonathan Corbet <corbet@lwn.net>,
-        Mathias Nyman <mathias.nyman@intel.com>,
-        Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
-        Thierry Reding <thierry.reding@gmail.com>,
-        Jonathan Hunter <jonathanh@nvidia.com>,
-        Ryusuke Konishi <konishi.ryusuke@gmail.com>,
-        Jason Wessel <jason.wessel@windriver.com>,
-        Daniel Thompson <daniel.thompson@linaro.org>,
-        Douglas Anderson <dianders@chromium.org>
-Subject: Re: [PATCH v1 1/4] lib/vsprintf: Allow to override date and time
- separator
-Message-ID: <YJqbONasNp9BXx9Q@smile.fi.intel.com>
-References: <20210510150413.59356-1-andriy.shevchenko@linux.intel.com>
- <YJqRYNlAu0SfWpb5@alley>
+        id S231782AbhEKPCo (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Tue, 11 May 2021 11:02:44 -0400
+Received: by mail.kernel.org (Postfix) with ESMTPSA id 7F217613C1;
+        Tue, 11 May 2021 15:01:37 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+        s=k20201202; t=1620745297;
+        bh=CGntqTzT0CjwBnD8m2IoNs2tKZ5vRmYFfQ0jAL/UEb8=;
+        h=From:To:Cc:Subject:Date:From;
+        b=panu4sVvuTFMZuqoZPlBkXPO1+Kh+4Bp7wMgfwwhZeIJ22TPqPX+LNgC81uNqjndt
+         Yr99x1IRXYnyYKXssWNKnICXlOMNRnUy0uE5I3bPlgo2t9CStA38Vy3VkQC5iqM6ni
+         apXbgb5KKoleKiXgAGhnYEV3iXjZTDgpkKJKqo10RnzxpF0C/p8ixNRp0t857htG06
+         RvTMwBONaCF/Z3OZOfdrF0JmxogubCngp2wgSEjXEUoRlOKrakqnOZlp9ktaXJYMhq
+         EJ7nfcBbg0H39QjX+8+xJtNS6UOYdTcYNKJda7JGVIJy69mksb5VWbVtI/oYJuVijz
+         9Ft1gfPEazwXg==
+Received: by mail.kernel.org with local (Exim 4.94.2)
+        (envelope-from <mchehab@kernel.org>)
+        id 1lgTt7-000k0z-Pq; Tue, 11 May 2021 17:01:33 +0200
+From:   Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
+To:     Linux Doc Mailing List <linux-doc@vger.kernel.org>
+Cc:     Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
+        linux-kernel@vger.kernel.org, Jonathan Corbet <corbet@lwn.net>,
+        "David S. Miller" <davem@davemloft.net>,
+        Guenter Roeck <linux@roeck-us.net>,
+        Jakub Kicinski <kuba@kernel.org>,
+        Jean Delvare <jdelvare@suse.com>, Jens Axboe <axboe@kernel.dk>,
+        intel-wired-lan@lists.osuosl.org, linux-hwmon@vger.kernel.org,
+        netdev@vger.kernel.org
+Subject: [PATCH 0/5] Fix some UTF-8 bad usages
+Date:   Tue, 11 May 2021 17:01:27 +0200
+Message-Id: <cover.1620744606.git.mchehab+huawei@kernel.org>
+X-Mailer: git-send-email 2.30.2
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <YJqRYNlAu0SfWpb5@alley>
-Organization: Intel Finland Oy - BIC 0357606-4 - Westendinkatu 7, 02160 Espoo
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+Sender: Mauro Carvalho Chehab <mchehab@kernel.org>
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Tue, May 11, 2021 at 04:14:56PM +0200, Petr Mladek wrote:
-> On Mon 2021-05-10 18:04:10, Andy Shevchenko wrote:
-> > ISO 8601 defines 'T' as a separator between date and time. Though,
-> > some ABIs use time and date with ' ' separator instead.
-> > 
-> > Add a flavour to the %pt specifier to override default separator.
+This series follow up this past series:
+	https://lore.kernel.org/lkml/cover.1620641727.git.mchehab+huawei@kernel.org/
 
-...
+Containing just the manual fixes from it. I'll respin the remaining
+patches on a separate series.
 
-> >  	%pt[RT]			YYYY-mm-ddTHH:MM:SS
-> > +	%pt[RT]s		YYYY-mm-dd HH:MM:SS
-> >  	%pt[RT]d		YYYY-mm-dd
-> >  	%pt[RT]t		HH:MM:SS
-> > -	%pt[RT][dt][r]
-> > +	%pt[RT][dt][rs]
-> 
-> Sigh, we do not have clear rules what [xy] means. It might be:
-> 
->       + always use one of them
->       + optionally use one of them
->       + always use any of them
->       + optionally use any of them
-> 
-> %pt[RT][dt][rs] is a great mix:
-> 
->       + R or T is required, the rest is optional
->       + 'd' or 't' can be used but both together are not supported 
->       + any variant of 'r' and 's' is supported including various ordering
-> 
-> Honestly, I do not know about any magic solution that might make it
-> easier to understand these monster modifiers.
-> 
-> Well, what about using the following at least in this case:
-> 
-> 	%pt[RT][dt][r][s]
-> 
-> It might help to understand that both 'r' and 's' can be used at the
-> same time.
+Please note that patches 1 to 3 are identical to the ones posted
+on the original series.
 
-This is the case, yes, thanks for catching it.
+Patch 1 is special: it fixes some left-overs from a convertion
+from cdrom-standard.tex: there, some characters that are
+valid in C were converted to some visually similar UTF-8 by LaTeX.
 
-> An attempt to distinguishing all the possibilities might be:
-> 
-> 	%pt{RT}[{dt}][r][s]
-> 
-> where [] means that it is optional and {} means one of them must be
-> chosen. But I am not sure if it really makes the life easier. Anyway,
-> this would be for another patch that updates the entire printk-formats.rst.
+Patch 2 remove U+00ac ('¬'): NOT SIGN characters at the end of
+the first line of two files. No idea why those ended being there :-p
 
-No, this is not the case, the d and t can go in any combinations: none, d, t,
-dt, or td.
+Patch 3 replaces:
+	KernelVersion:»·3.3
+by:
+	KernelVersion:	3.3
 
-> 
-> >  For printing date and time as represented by::
-> >  
-> > @@ -528,6 +529,9 @@ in human readable format.
-> >  By default year will be incremented by 1900 and month by 1.
-> >  Use %pt[RT]r (raw) to suppress this behaviour.
-> >  
-> > +The %pt[RT]s (space) will override ISO 8601 by using ' ' instead of 'T'
-> > +between date and time. It won't have any effect when date or time is omitted.
+which is the expected format for the KernelVersion field;
 
-...
+Patches 4 and 5 fix some bad usages of EM DASH/EN DASH on
+places that it should be, instead, a normal hyphen. I suspect
+that they ended being there due to the usage of some conversion
+toolset.
 
-> > +	do {
-> > +		switch (fmt[count++]) {
-> > +		case 'r':
-> > +			raw = true;
-> > +			break;
-> > +		case 's':
-> > +			space = true;
-> > +			break;
-> > +		default:
-> > +			found = false;
-> > +			break;
-> > +		}
-> > +	} while (found);
-> >  
-> >  	if (have_d)
-> >  		buf = date_str(buf, end, tm, raw);
-> >  	if (have_d && have_t) {
-> >  		/* Respect ISO 8601 */
-> 
-> The comment is slightly misleding now. What about something like?
-> 
-> 		/* 'T' by ISO 8601. */
-> 
-> Or maybe call the variable: iso_8601, remove the comment, and
-> invert the logic:
+Mauro Carvalho Chehab (5):
+  docs: cdrom-standard.rst: get rid of uneeded UTF-8 chars
+  docs: ABI: remove a meaningless UTF-8 character
+  docs: ABI: remove some spurious characters
+  docs: hwmon: tmp103.rst: fix bad usage of UTF-8 chars
+  docs: networking: device_drivers: fix bad usage of UTF-8 chars
 
-Okay, I will think how to improve, thanks!
-
-> 		bool iso_8601 = true;
-> 
-> 		case 's':
-> 			iso_8601 = false;
-> 			break;
-> 
-> 		*buf = iso_8601 ? 'T' : ' ';
-> 
-> >  		if (buf < end)
-> > -			*buf = 'T';
-> > +			*buf = space ? ' ' : 'T';
-> >  		buf++;
-> >  	}
+ .../obsolete/sysfs-kernel-fadump_registered   |  2 +-
+ .../obsolete/sysfs-kernel-fadump_release_mem  |  2 +-
+ Documentation/ABI/testing/sysfs-module        |  4 +--
+ Documentation/cdrom/cdrom-standard.rst        | 30 +++++++++----------
+ Documentation/hwmon/tmp103.rst                |  4 +--
+ .../device_drivers/ethernet/intel/i40e.rst    |  4 +--
+ .../device_drivers/ethernet/intel/iavf.rst    |  2 +-
+ 7 files changed, 24 insertions(+), 24 deletions(-)
 
 -- 
-With Best Regards,
-Andy Shevchenko
+2.30.2
 
 
