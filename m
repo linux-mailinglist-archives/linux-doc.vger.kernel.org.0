@@ -2,91 +2,96 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 6304437B7A4
-	for <lists+linux-doc@lfdr.de>; Wed, 12 May 2021 10:16:17 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id B569437B7BD
+	for <lists+linux-doc@lfdr.de>; Wed, 12 May 2021 10:20:29 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S230037AbhELIPp (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 12 May 2021 04:15:45 -0400
-Received: from mail.kernel.org ([198.145.29.99]:33804 "EHLO mail.kernel.org"
-        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S229968AbhELIPo (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Wed, 12 May 2021 04:15:44 -0400
-Received: by mail.kernel.org (Postfix) with ESMTPSA id 4DD40613C0;
-        Wed, 12 May 2021 08:14:35 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-        s=k20201202; t=1620807276;
-        bh=NpIFlszRtKWRCTyCPgKhgBzC2KWJNOHscSYvFzJ1CcM=;
-        h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
-        b=gcHovoQQ2+ccEfVf0QZz6L1Z9eyxVOZqPyh/OWDH/9HlxcWhr0asX/mnwSelJQv3j
-         uRKdfk4dCN9VDJUUi9cQFDPJFLC5MOEZRgYDu7876eKnzMfx96tuY+AOBQhgNXgRqq
-         O0VkKLyeiCsapUUwVIpD0e55mK9h8jCrf4pkR3QBTmjOohZWcyIyGvXp02+6lNPIAl
-         Xcqacc/pA8b87BkY6j4R3Rv2gvFl/hM2E7N5ksHXOGn5OnjJ5IHB53gYO7+cYg4saO
-         B4NHdM7WUwiskhlPuAhbfHHXB3YNA1jiSkUMAla6fcevqt/aquFbf+nHF58yEcYKq0
-         JhH3Y7aIkNSgg==
-Date:   Wed, 12 May 2021 10:14:32 +0200
-From:   Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
-To:     David Gow <davidgow@google.com>
-Cc:     Linux Doc Mailing List <linux-doc@vger.kernel.org>,
-        Jonathan Corbet <corbet@lwn.net>,
-        Daniel Latypov <dlatypov@google.com>,
-        Marco Elver <elver@google.com>,
-        Linux Kernel Mailing List <linux-kernel@vger.kernel.org>
-Subject: Re: [PATCH 39/53] docs: dev-tools: testing-overview.rst: avoid
- using UTF-8 chars
-Message-ID: <20210512101432.32f91125@coco.lan>
-In-Reply-To: <CABVgOSn67XkxasNeMvcs-ciL8F8zmMEVoZMNqf8xRdUg1heX_g@mail.gmail.com>
-References: <cover.1620641727.git.mchehab+huawei@kernel.org>
-        <1591224255d095d14ff3bc2bf4e7796dcc55c77d.1620641727.git.mchehab+huawei@kernel.org>
-        <CABVgOSn67XkxasNeMvcs-ciL8F8zmMEVoZMNqf8xRdUg1heX_g@mail.gmail.com>
-X-Mailer: Claws Mail 3.17.8 (GTK+ 2.24.33; x86_64-redhat-linux-gnu)
+        id S229968AbhELIVe (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 12 May 2021 04:21:34 -0400
+Received: from mail.loongson.cn ([114.242.206.163]:50686 "EHLO loongson.cn"
+        rhost-flags-OK-OK-OK-FAIL) by vger.kernel.org with ESMTP
+        id S230181AbhELIVd (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Wed, 12 May 2021 04:21:33 -0400
+Received: from localhost.localdomain (unknown [112.3.197.94])
+        by mail.loongson.cn (Coremail) with SMTP id AQAAf9DxP+7Aj5tgJWQVAA--.17234S2;
+        Wed, 12 May 2021 16:20:17 +0800 (CST)
+From:   Yanteng Si <siyanteng@loongson.cn>
+To:     corbet@lwn.net, alexs@kernel.org
+Cc:     Yanteng Si <siyanteng@loongson.cn>, chenhuacai@kernel.org,
+        jiaxun.yang@flygoat.com, linux-doc@vger.kernel.org,
+        realpuyuwang@gmail.com, bobwxc@email.cn, siyanteng01@gmail.com,
+        huangjianghui@uniontech.com
+Subject: [PATCH v4 0/3] docs/zh_CN: add parisc Chinese documents
+Date:   Wed, 12 May 2021 16:20:56 +0800
+Message-Id: <cover.1620805100.git.siyanteng@loongson.cn>
+X-Mailer: git-send-email 2.27.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
+X-CM-TRANSID: AQAAf9DxP+7Aj5tgJWQVAA--.17234S2
+X-Coremail-Antispam: 1UD129KBjvJXoW7Aw1UZw13Ar1fCw47ZFW5ZFb_yoW8Wr4Upa
+        s3Kr1fGa18Aryakr4xCr47Xry7C3WfG3y5GFW2qwnaqrs8Kr95tr15K39I9a9xWry8ZF4U
+        Xr4fKry8u34jyrJanT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+        9KBjDU0xBIdaVrnRJUUUvF14x267AKxVW8JVW5JwAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
+        rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2ocxC64kIII0Yj41l84x0c7CEw4AK67xGY2AK02
+        1l84ACjcxK6xIIjxv20xvE14v26ryj6F1UM28EF7xvwVC0I7IYx2IY6xkF7I0E14v26F4j
+        6r4UJwA2z4x0Y4vEx4A2jsIE14v26F4UJVW0owA2z4x0Y4vEx4A2jsIEc7CjxVAFwI0_Gc
+        CE3s1le2I262IYc4CY6c8Ij28IcVAaY2xG8wAqx4xG64xvF2IEw4CE5I8CrVC2j2WlYx0E
+        2Ix0cI8IcVAFwI0_Jr0_Jr4lYx0Ex4A2jsIE14v26r1j6r4UMcvjeVCFs4IE7xkEbVWUJV
+        W8JwACjcxG0xvY0x0EwIxGrwACjI8F5VA0II8E6IAqYI8I648v4I1lFIxGxcIEc7CjxVA2
+        Y2ka0xkIwI1l42xK82IYc2Ij64vIr41l4I8I3I0E4IkC6x0Yz7v_Jr0_Gr1lx2IqxVAqx4
+        xG67AKxVWUJVWUGwC20s026x8GjcxK67AKxVWUGVWUWwC2zVAF1VAY17CE14v26r1q6r43
+        MIIYrxkI7VAKI48JMIIF0xvE2Ix0cI8IcVAFwI0_Jr0_JF4lIxAIcVC0I7IYx2IY6xkF7I
+        0E14v26r1j6r4UMIIF0xvE42xK8VAvwI8IcIk0rVWrJr0_WFyUJwCI42IY6I8E87Iv67AK
+        xVWUJVW8JwCI42IY6I8E87Iv6xkF7I0E14v26r4j6r4UJbIYCTnIWIevJa73UjIFyTuYvj
+        fUoOJ5UUUUU
+X-CM-SenderInfo: pvl1t0pwhqwqxorr0wxvrqhubq/
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Em Tue, 11 May 2021 07:35:29 +0800
-David Gow <davidgow@google.com> escreveu:
+v3 -> v4:
 
-> On Mon, May 10, 2021 at 6:27 PM Mauro Carvalho Chehab
-> <mchehab+huawei@kernel.org> wrote:
-> >
-> > While UTF-8 characters can be used at the Linux documentation,
-> > the best is to use them only when ASCII doesn't offer a good replacemen=
-t.
-> > So, replace the occurences of the following UTF-8 characters:
-> >
-> >         - U+2014 ('=E2=80=94'): EM DASH
-> >
-> > Signed-off-by: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
-> > --- =20
->=20
-> Oh dear, I do have a habit of overusing em-dashes. I've no problem in
-> theory with exchanging them for an ASCII approximation.
-> I suppose there's a reason it's the one dash to rule them all: :-)
-> https://twitter.com/FakeUnicode/status/727888721312260096/photo/1
+fix detailed description of the contents of the patch 1/3 and 2/3.
 
-No, there's no such rule, although there's a preference to keep
-the texts easy to edit/read as text files[1]. The main rationale for
-this series is that the conversion from other formats to ReST ended
-introducing a lot of UTF-8 noise.
+diff:
 
-[1] IMO, the best is to use UTF-8 characters for symbols that
-    aren't properly represented in ASCII, like Latin accents,
-    Greek letters, etc.
+-This ptch translates Documentation/parisc/index.rst into Chinese.
++This patch translates Documentation/parisc/index.rst into Chinese.
 
-In the specific case of dashes, you can use:
+-This translates Documentation/parisc/debugging.rst into Chinese.
++This patch translates Documentation/parisc/debugging.rst into Chinese.
 
-	"--" for EN DASH
-	"---" for EM DASH
+v2 -> v3
 
-Those will automatically be translated by Sphinx when building=20
-the docs. Using ASCII there usually makes life simpler for
-developers whose editors can't easily type EN/EM DASH.
+* Pick Xiangcheng Wu's review-by tag for [patch 2-3/3]
 
-Btw, Sphinx will also replace commas to curly commas
-automatically on its output (except for literal blocks).
+v1 -> v2:
 
-Thanks,
-Mauro
+* Some bad translations have been modified as suggested by Xiangcheng.Thank you for your review.
+    https://lore.kernel.org/linux-doc/cover.1619665430.git.siyanteng@loongson.cn/T/#t
+
+* Update [PATCH 1/3].
+    Because zh_CN/inxdex.rst has been refactored by Xiangcheng Wu.
+
+* Pick Xiangcheng Wu's review-by tag for [patch 1/3]
+
+v1:
+
+* This set translates Documentation/parisc/* into Chinese.
+
+Yanteng Si (3):
+  docs/zh_CN: add parisc index translation
+  docs/zh_CN: add parisc debugging.rst translation
+  docs/zh_CN: add parisc registers.rst translation
+
+ Documentation/translations/zh_CN/index.rst    |   2 +-
+ .../translations/zh_CN/parisc/debugging.rst   |  42 +++++
+ .../translations/zh_CN/parisc/index.rst       |  28 ++++
+ .../translations/zh_CN/parisc/registers.rst   | 153 ++++++++++++++++++
+ 4 files changed, 224 insertions(+), 1 deletion(-)
+ create mode 100644 Documentation/translations/zh_CN/parisc/debugging.rst
+ create mode 100644 Documentation/translations/zh_CN/parisc/index.rst
+ create mode 100644 Documentation/translations/zh_CN/parisc/registers.rst
+
+-- 
+2.27.0
+
