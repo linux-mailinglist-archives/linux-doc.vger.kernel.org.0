@@ -2,40 +2,40 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 1D95D37BD48
-	for <lists+linux-doc@lfdr.de>; Wed, 12 May 2021 14:52:51 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 27CDA37BD45
+	for <lists+linux-doc@lfdr.de>; Wed, 12 May 2021 14:52:50 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S231715AbhELMxo (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 12 May 2021 08:53:44 -0400
-Received: from mail.kernel.org ([198.145.29.99]:53250 "EHLO mail.kernel.org"
+        id S232211AbhELMxn (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 12 May 2021 08:53:43 -0400
+Received: from mail.kernel.org ([198.145.29.99]:52504 "EHLO mail.kernel.org"
         rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S231713AbhELMxE (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Wed, 12 May 2021 08:53:04 -0400
-Received: by mail.kernel.org (Postfix) with ESMTPSA id C70A461411;
+        id S231757AbhELMxF (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Wed, 12 May 2021 08:53:05 -0400
+Received: by mail.kernel.org (Postfix) with ESMTPSA id C858961461;
         Wed, 12 May 2021 12:51:47 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
         s=k20201202; t=1620823907;
-        bh=KTM32Ye2fL9Id0AwrSb2rffCbYWJx7KuFaES6hlu5vM=;
+        bh=5Y/5Sq1wRSGXoldO0sQDb3+KvKQ0vjGyLgU9p/3cJcA=;
         h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-        b=Kruu/u5A/QkxqqDE+ru62qmCOYAdppcU1W6wmi4zAlPcy6mKfGryGQS5qu5w63qCj
-         3+qEdtb+6WX6wb0qoYBxakkuJzq7ubxLRl9PX6auSiI6nN/6Fgki065sgHUFU7RUBT
-         e9U6EWnAV0md1mBj740yGthGxBYO4WA6J4R8GnYhT7jKCPx+xuQcDsPu0N9qTDRQ2B
-         gMt9hojMCxc8v6UoRsyfMweXIShsa5/l10rRfOqJOJFrxoimVO7RmGQ+F9z34K4v95
-         yQm8WR8c3xktpQb3hMxHE/ouxb9Yyegg26O33m/1Mm66GCoqONVEBjV5BY/d5j4hIV
-         6ZfI2MKCu5XhQ==
+        b=tfM97qNJ3LzXj70sWi7fbjJTJHTrkyFFQvRmdST/NWO8zL4EZwfpCHjYkc5bYp5Ik
+         z+Q6Yx/g4ex3MNRyNsnnTf+QKfnDbFsgIpaYj3lYqmp1lxTj6CHcwickbCwo/pMUci
+         xd0dh7/PaLIfJxw9S4TcvcpeLWwSD2Lh0FzPiIcLkRqYhmp8XPgcgGHBxDb67GdGE6
+         PEy4nzVXNqfkUl3xEO+jjaT2Uj4LKH8xMwV4Oqp46RzUcPFg79IuscMKrvniqMbnRk
+         SxE2HxVCqk7cczDqLzn1wHHCP8Okz3+CJij4BH2xsMZETi6MgvRtlY3qI7n9Y3mXMt
+         IgbkyHC42TAvw==
 Received: by mail.kernel.org with local (Exim 4.94.2)
         (envelope-from <mchehab@kernel.org>)
-        id 1lgoL3-0018na-MF; Wed, 12 May 2021 14:51:45 +0200
+        id 1lgoL3-0018ne-O1; Wed, 12 May 2021 14:51:45 +0200
 From:   Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 To:     Linux Doc Mailing List <linux-doc@vger.kernel.org>
 Cc:     Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
         "Jonathan Corbet" <corbet@lwn.net>,
-        Catalin Marinas <catalin.marinas@arm.com>,
-        Will Deacon <will@kernel.org>,
-        linux-arm-kernel@lists.infradead.org, linux-kernel@vger.kernel.org
-Subject: [PATCH v2 34/40] docs: arm64: arm-acpi.rst: Use ASCII subset instead of UTF-8 alternate symbols
-Date:   Wed, 12 May 2021 14:50:38 +0200
-Message-Id: <4ea53cd3be333779091bea0c4680b11b83129f69.1620823573.git.mchehab+huawei@kernel.org>
+        Doug Ledford <dledford@redhat.com>,
+        Jason Gunthorpe <jgg@ziepe.ca>, linux-kernel@vger.kernel.org,
+        linux-rdma@vger.kernel.org
+Subject: [PATCH v2 35/40] docs: infiniband: tag_matching.rst: Use ASCII subset instead of UTF-8 alternate symbols
+Date:   Wed, 12 May 2021 14:50:39 +0200
+Message-Id: <e24e9f703d46b4faadff0fad462d3139efc71b2a.1620823573.git.mchehab+huawei@kernel.org>
 X-Mailer: git-send-email 2.30.2
 In-Reply-To: <cover.1620823573.git.mchehab+huawei@kernel.org>
 References: <cover.1620823573.git.mchehab+huawei@kernel.org>
@@ -66,46 +66,25 @@ So, replace the occurences of the following UTF-8 characters:
 
 Signed-off-by: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 ---
- Documentation/arm64/arm-acpi.rst | 8 ++++----
- 1 file changed, 4 insertions(+), 4 deletions(-)
+ Documentation/infiniband/tag_matching.rst | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/Documentation/arm64/arm-acpi.rst b/Documentation/arm64/arm-acpi.rst
-index 47ecb9930dde..ceb109ff82aa 100644
---- a/Documentation/arm64/arm-acpi.rst
-+++ b/Documentation/arm64/arm-acpi.rst
-@@ -36,12 +36,12 @@ of the summary text almost directly, to be honest.
+diff --git a/Documentation/infiniband/tag_matching.rst b/Documentation/infiniband/tag_matching.rst
+index ef56ea585f92..f7583b48963f 100644
+--- a/Documentation/infiniband/tag_matching.rst
++++ b/Documentation/infiniband/tag_matching.rst
+@@ -14,9 +14,9 @@ match the following source and destination parameters:
+ The ordering rules require that when more than one pair of send and receive
+ message envelopes may match, the pair that includes the earliest posted-send
+ and the earliest posted-receive is the pair that must be used to satisfy the
+-matching operation. However, this doesn’t imply that tags are consumed in
++matching operation. However, this doesn't imply that tags are consumed in
+ the order they are created, e.g., a later generated tag may be consumed, if
+-earlier tags can’t be used to satisfy the matching rules.
++earlier tags can't be used to satisfy the matching rules.
  
- The short form of the rationale for ACPI on ARM is:
- 
---  ACPI’s byte code (AML) allows the platform to encode hardware behavior,
-+-  ACPI's byte code (AML) allows the platform to encode hardware behavior,
-    while DT explicitly does not support this.  For hardware vendors, being
-    able to encode behavior is a key tool used in supporting operating
-    system releases on new hardware.
- 
---  ACPI’s OSPM defines a power management model that constrains what the
-+-  ACPI's OSPM defines a power management model that constrains what the
-    platform is allowed to do into a specific model, while still providing
-    flexibility in hardware design.
- 
-@@ -69,7 +69,7 @@ Key to the use of ACPI is the support model.  For servers in general, the
- responsibility for hardware behaviour cannot solely be the domain of the
- kernel, but rather must be split between the platform and the kernel, in
- order to allow for orderly change over time.  ACPI frees the OS from needing
--to understand all the minute details of the hardware so that the OS doesn’t
-+to understand all the minute details of the hardware so that the OS doesn't
- need to be ported to each and every device individually.  It allows the
- hardware vendors to take responsibility for power management behaviour without
- depending on an OS release cycle which is not under their control.
-@@ -81,7 +81,7 @@ in place.  DT does exactly what Linux needs it to when working with vertically
- integrated devices, but there are no good processes for supporting what the
- server vendors need.  Linux could potentially get there with DT, but doing so
- really just duplicates something that already works.  ACPI already does what
--the hardware vendors need, Microsoft won’t collaborate on DT, and hardware
-+the hardware vendors need, Microsoft won't collaborate on DT, and hardware
- vendors would still end up providing two completely separate firmware
- interfaces -- one for Linux and one for Windows.
- 
+ When a message is sent from the sender to the receiver, the communication
+ library may attempt to process the operation either after or before the
 -- 
 2.30.2
 
