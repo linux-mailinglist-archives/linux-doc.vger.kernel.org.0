@@ -2,72 +2,66 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 53F7B380643
-	for <lists+linux-doc@lfdr.de>; Fri, 14 May 2021 11:30:43 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id E5786380646
+	for <lists+linux-doc@lfdr.de>; Fri, 14 May 2021 11:30:56 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S232644AbhENJbx (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Fri, 14 May 2021 05:31:53 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:41536 "EHLO
+        id S232697AbhENJcG (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Fri, 14 May 2021 05:32:06 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:41588 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S232332AbhENJbw (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Fri, 14 May 2021 05:31:52 -0400
-Received: from mail-pj1-x1030.google.com (mail-pj1-x1030.google.com [IPv6:2607:f8b0:4864:20::1030])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id B1CA4C06174A
-        for <linux-doc@vger.kernel.org>; Fri, 14 May 2021 02:30:40 -0700 (PDT)
-Received: by mail-pj1-x1030.google.com with SMTP id q6so1197766pjj.2
-        for <linux-doc@vger.kernel.org>; Fri, 14 May 2021 02:30:40 -0700 (PDT)
+        with ESMTP id S230440AbhENJcG (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Fri, 14 May 2021 05:32:06 -0400
+Received: from mail-pj1-x1035.google.com (mail-pj1-x1035.google.com [IPv6:2607:f8b0:4864:20::1035])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 92D20C061574
+        for <linux-doc@vger.kernel.org>; Fri, 14 May 2021 02:30:55 -0700 (PDT)
+Received: by mail-pj1-x1035.google.com with SMTP id o17-20020a17090a9f91b029015cef5b3c50so1381035pjp.4
+        for <linux-doc@vger.kernel.org>; Fri, 14 May 2021 02:30:55 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=subject:to:cc:references:from:message-id:date:user-agent
          :mime-version:in-reply-to:content-language:content-transfer-encoding;
-        bh=A09+EYA0PXskdAXtM3BzR+9Ud3Hu/4OzprRYy1tbjn8=;
-        b=K3sIBrPRzJXGTXtWGLeWV3Ayc0eobDuqIJqPt3KLyf2sIgeK7xK6rDlHpOICkMdZ4+
-         QUXABQcOrXOReKgwYA4FsxOsPC6Y82oLmdpBSaVPi9TCo/aisckevrv5fdrZzwisi4Ll
-         FUh5XIJXt0nZdWU3sdDMNZ04gYytcWl5x8+UxUHQRV9J0y4VcGGLZvUKwLl2064UClAq
-         61RR0nThg5FPRFzxjGBEKqn3UjXUCpOtERHuaGHWMReiW1c/2kth8EJ9EkbxW43CjtZS
-         TIOAZ2VTDa2zPzipr9lQG9YIRZr37HBQe6Lwp9aPvqKhb3N+EB3sPsWuXE+PKLFGCYJ5
-         anPg==
+        bh=94YPOinxQrcgwz9y/LSGoxsE090NjEt4+K58ZqBhz1E=;
+        b=YsUEVO4gaqiVT8fq5gnPe14tDNxmVnf48zne8Nj9wz04j7yh3GycEkwMtZM5UFRh/q
+         1ETWs1r+b5fEace934FrAc4B/8ycXaYeuJzr7HFuaTquyJFx1/NoZfFNMYuMqTl7ZmAA
+         86hAMmVK6u6H/u7nTs0KJRFf3sPLiaHbQg7zdUgmfvv47zyPqOZckPVXWvwt75K/rRdT
+         cOirRloNW++29dV054siDp3kHTiiv+MFAy4hamSiGr8f4gG27mvfiSMaaFk/zW9FpM+v
+         RiOh3lWl979FbdRUb1oT4xLPmFgcZkZ94AUr5SbvI8MMogX72dr9YlTI2f+GNZT0XVpA
+         KUNw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:subject:to:cc:references:from:message-id:date
          :user-agent:mime-version:in-reply-to:content-language
          :content-transfer-encoding;
-        bh=A09+EYA0PXskdAXtM3BzR+9Ud3Hu/4OzprRYy1tbjn8=;
-        b=HZwpEb8b9aPpPiGlPWpMqXhZfmpFixfKctJL8gSLeOq3PchYPzaO9LwkEcEdJBi+t8
-         ZVHp4CNjQAUjPe1LQOWbStoJ4y7pLIlKyISI58cL8dqs6zGmm0qxjTtsFLO5RmpRMYBe
-         YlLgVoo4GQXDuMAP37e5KLYzLwzUhYW2iwhE8HqYu5HCtkpm6T8w7374ShRZgyf3Hsu1
-         Tfe/uFLa1aEXqSAo4vqzhfOIdz0rTWl1c9WEt5NGdiD+VPVojO+Zp2ByCangvccrZeMZ
-         av1V7DAHLlPeoGkwY+O5ZShNBaRHmuWL+3iies6G5n2BJ65eOAeYjjg8ZoFMPP7gnW2P
-         fv4Q==
-X-Gm-Message-State: AOAM531V0Qbj1BiDXENE/LRUsXJW6fYw3/o0etH4X2CIjV/wi5tUHFbn
-        j/gTp4KtxXli04WLMptzhkc=
-X-Google-Smtp-Source: ABdhPJyaQcPHCeMXw8V0GcSOyxMzTLXo3f3YIRF5J94YlLiH/d9N3Lf236ichfEAxsKw9U6y7H9dpA==
-X-Received: by 2002:a17:90b:193:: with SMTP id t19mr48821411pjs.35.1620984640359;
-        Fri, 14 May 2021 02:30:40 -0700 (PDT)
+        bh=94YPOinxQrcgwz9y/LSGoxsE090NjEt4+K58ZqBhz1E=;
+        b=Jz5wzJpRK1GuaX1OaTjScsmle8CtNecGAwchJcG7l5GVP6ZVWdmbQvYVYsoqBzUpJJ
+         VsgBMF3wGJ2xQ5CEbvyHC0FQ2tcNjFQjwXQdbBSEtPihxMFx6fbaRznuWv9CGX6Y/LXA
+         yrY97GP74BtTK0wu7580TVA1ahFXCazTZ/MLzlAyxAlroep/XPFqUzy+0ltoKtvxeITd
+         ep0YRK1Xx9pYSITXBhGG317jSTgoEB6dOlNi/sBNsMn18W0pIjrYJdh8+G1IXubTAdr3
+         KqJjmACeQQzoG1TnTEwg1YFjEqaIHcwpb3MMOIQKCL5ReHU9kh3oV5bq+auz/ah4VBOg
+         cDmQ==
+X-Gm-Message-State: AOAM532Xfu56iyZ6kqh7HdytkQP3m62Qj4mgPHzlc2dTHkjMNzU/5mOk
+        ljcRTnUFAl7uIzMs3Yj5x9Y=
+X-Google-Smtp-Source: ABdhPJzMO1UE/xgXX9fjMfhZdmtuyWP1Fq6L9Vbg+JLqZ8/QrdmQFw8t5b4W24V+hTsiAYMwGb1wbA==
+X-Received: by 2002:a17:90b:1e43:: with SMTP id pi3mr51536715pjb.51.1620984655107;
+        Fri, 14 May 2021 02:30:55 -0700 (PDT)
 Received: from [172.28.99.179] ([119.28.155.243])
-        by smtp.gmail.com with ESMTPSA id m8sm3717159pfk.49.2021.05.14.02.30.35
+        by smtp.gmail.com with ESMTPSA id kk7sm5739656pjb.16.2021.05.14.02.30.52
         (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Fri, 14 May 2021 02:30:39 -0700 (PDT)
-Subject: Re: [PATCH v3] docs/zh_CN: add core-api workqueue.rst translation
-To:     yanteng si <siyanteng01@gmail.com>
-Cc:     Jonathan Corbet <corbet@lwn.net>,
-        Yanteng Si <siyanteng@loongson.cn>,
-        Alex Shi <alexs@kernel.org>,
-        Huacai Chen <chenhuacai@kernel.org>,
-        Jiaxun Yang <jiaxun.yang@flygoat.com>,
-        linux-doc@vger.kernel.org, Puyu Wang <realpuyuwang@gmail.com>,
-        Wu XiangCheng <bobwxc@email.cn>, huangjianghui@uniontech.com
-References: <20210512083341.914-1-siyanteng@loongson.cn>
- <87lf8i7jbj.fsf@meer.lwn.net> <87o8de61zz.fsf@meer.lwn.net>
- <4eb9f549-d734-a5d2-aa2a-e66d009a31e5@gmail.com>
- <CAEensMx6HxD5_Gv2Snd+OGOF0MNU4fsuB_z_pCDWyW8z+5SC=Q@mail.gmail.com>
+        Fri, 14 May 2021 02:30:54 -0700 (PDT)
+Subject: Re: [PATCH v3 6/6] docs/zh_CN: Add translation
+ zh_CN/maintainer/modifying-patches.rst
+To:     Wu XiangCheng <bobwxc@email.cn>, Jonathan Corbet <corbet@lwn.net>
+Cc:     Alex Shi <alexs@kernel.org>, linux-doc@vger.kernel.org,
+        Yanteng Si <siyanteng@loongson.cn>
+References: <cover.1620932189.git.bobwxc@email.cn>
+ <683aff6409087841713738816067a01f250008c8.1620932189.git.bobwxc@email.cn>
 From:   Alex Shi <seakeel@gmail.com>
-Message-ID: <c91e7f95-0c48-292c-d353-d2ca4ac62051@gmail.com>
-Date:   Fri, 14 May 2021 17:30:34 +0800
+Message-ID: <11ebacfe-994b-5df6-8411-3830d8df3ca7@gmail.com>
+Date:   Fri, 14 May 2021 17:30:51 +0800
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
  Thunderbird/68.10.0
 MIME-Version: 1.0
-In-Reply-To: <CAEensMx6HxD5_Gv2Snd+OGOF0MNU4fsuB_z_pCDWyW8z+5SC=Q@mail.gmail.com>
+In-Reply-To: <683aff6409087841713738816067a01f250008c8.1620932189.git.bobwxc@email.cn>
 Content-Type: text/plain; charset=utf-8
 Content-Language: en-US
 Content-Transfer-Encoding: 8bit
@@ -77,59 +71,92 @@ X-Mailing-List: linux-doc@vger.kernel.org
 
 
 
-On 2021/5/14 下午5:09, yanteng si wrote:
-> Alex Shi <seakeel@gmail.com> 于2021年5月14日周五 下午12:53写道：
->>
->>
->>
->> On 2021/5/14 上午12:18, Jonathan Corbet wrote:
->>>>> This patch translates Documentation/core-api/workqueue.rst into Chinese.
->>>>>
->>>>>
->>>>> Signed-off-by: Yanteng Si <siyanteng@loongson.cn>
->>>>> Reviewed-by: Alex Shi <alexs@kenrel.org>
->>>> I fixed that typo too - it appears to originate from Alex...:)
->>
->> Sorry for the typo.
->>
->>> Actually, I've dropped this back out; it creates vast numbers of
->>> warnings:
->>>
->>>> Documentation/core-api/workqueue:398: ./include/linux/workqueue.h:3: WARNING: Duplicate C declaration, also
->>>> defined at translations/zh_CN/core-api/workqueue:3.
->>> This will be the result of the ".. kernel-doc::" directives at the end,
->>> which create new definitions (within sphinx) for all the symbols pulled
->>> in.
->>>
->>> In the long term, we may want to try to find some sort of fix for this.
->>> But we're really just recreating a bunch of (English-language)
->>> documentation that's already rendered once; I'm not sure it makes any
->>> real sense to do that.  So I would suggest that, for now, when you are
->>> translating documents with kernel-doc directives, you should leave those
->>> directives out.  Stick in a note directing readers to the original if
->>> they want to see that material...
->>>
->>> Make sense?
->>
->> Yes, it is a reasonable solution for now.
-> OK, I will.
-> I will remove them and then direct the reader to the original
-> document. just like:
+On 2021/5/14 上午3:08, Wu XiangCheng wrote:
+> Add a new translation
+>   Documentation/translations/zh_CN/maintainer/modifying-patches.rst
+> and link it to zh_CN/maintainer/index.rst
 > 
-> .. note:: 抱歉，由于原始文档在此处交叉引用了代码中的注释，而现在并不是翻译这些注释的好时机（将会带来很多编译警告），所以请暂时浏览英文文档，链接在本文档顶部。
-
-Jon said just remove kernel-doc, not all line? If so, don't need above explanation.
-
-
-
+> Signed-off-by: Wu XiangCheng <bobwxc@email.cn>
+> Reviewed-by: Yanteng Si <siyanteng@loongson.cn>
+> ---
+>  .../translations/zh_CN/maintainer/index.rst   |  4 +-
+>  .../zh_CN/maintainer/modifying-patches.rst    | 51 +++++++++++++++++++
+>  2 files changed, 52 insertions(+), 3 deletions(-)
+>  create mode 100644 Documentation/translations/zh_CN/maintainer/modifying-patches.rst
 > 
-> Thanks，
-> Yanteng
->>
->> Thanks
->> Alex
->>>
->>> Thanks,
->>>
->>> jon
->>>
+> diff --git a/Documentation/translations/zh_CN/maintainer/index.rst b/Documentation/translations/zh_CN/maintainer/index.rst
+> index 18a820741f52..eb75ccea9a21 100644
+> --- a/Documentation/translations/zh_CN/maintainer/index.rst
+> +++ b/Documentation/translations/zh_CN/maintainer/index.rst
+> @@ -17,7 +17,5 @@
+>     rebasing-and-merging
+>     pull-requests
+>     maintainer-entry-profile
+> +   modifying-patches
+>  
+> -TODOList:
+> -
+> --   modifying-patches
+> diff --git a/Documentation/translations/zh_CN/maintainer/modifying-patches.rst b/Documentation/translations/zh_CN/maintainer/modifying-patches.rst
+> new file mode 100644
+> index 000000000000..6f3bf493440c
+> --- /dev/null
+> +++ b/Documentation/translations/zh_CN/maintainer/modifying-patches.rst
+> @@ -0,0 +1,51 @@
+> +.. include:: ../disclaimer-zh_CN.rst
+> +
+> +:Original: Documentation/maintainer/modifying-patches.rst
+> +
+> +:译者:
+> +
+> + 吴想成 Wu XiangCheng <bobwxc@email.cn>
+> +
+> +.. _modifyingpatches_zh:
+> +
+> +修改补丁
+> +========
+> +
+> +如果你是子系统或者分支的维护者，由于代码在你的和提交者的树中并不完全相同，
+> +有时你需要稍微修改一下收到的补丁以合并它们。
+> +
+> +如果你严格遵守开发者来源证书的规则（c），你应该要求提交者重做，但这完全是会
+> +适得其反的时间、精力浪费。规则（b）允许你调整代码，但这样修改提交者的代码并
+> +让他背书你的错误是非常不礼貌的。为解决此问题，建议在你之前最后一个
+> +Signed-off-by标签和你的之间添加一行，以指示更改的性质。这没有强制性要求，最
+> +好在描述前面加上你的邮件和/或姓名，用方括号括住整行，以明显指出你对最后一刻
+> +的更改负责。例如::
+> +
+> +        Signed-off-by: Random J Developer <random@developer.example.org>
+> +        [lucky@maintainer.example.org: struct foo moved from foo.c to foo.h]
+> +        Signed-off-by: Lucky K Maintainer <lucky@maintainer.example.org>
+> +
+> +如果您维护着一个稳定的分支，并希望同时明确贡献、跟踪更改、合并修复，并保护
+> +提交者免受责难，这种做法尤其有用。请注意，在任何情况下都不得更改作者的身份
+> +（From头），因为它会在变更日志中显示。
+> +
+> +回传（back-port）者特别要注意：为了便于跟踪，请在提交消息的顶部（就在主题行
+
+I saw backport was translated a lot as 回合. Need a reconsideration?
+
+Thanks
+Alex
+
+> +之后）插入补丁的来源，这是一种常见而有用的做法。例如，我们可以在3.x稳定版本
+> +中看到以下内容::
+> +
+> +        Date:   Tue Oct 7 07:26:38 2014 -0400
+> +
+> +        libata: Un-break ATA blacklist
+> +
+> +        commit 1c40279960bcd7d52dbdf1d466b20d24b99176c8 upstream.
+> +
+> +下面是一个旧的内核在某补丁被回传后会出现的::
+> +
+> +        Date:   Tue May 13 22:12:27 2008 +0200
+> +
+> +        wireless, airo: waitbusy() won't delay
+> +
+> +        [backport of 2.6 commit b7acbdfbd1f277c1eb23f344f899cfa4cd0bf36a]
+> +
+> +不管什么格式，这些信息都为人们跟踪你的树，以及试图解决你树中的错误的人提供了
+> +有价值的帮助。
