@@ -2,246 +2,116 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 815B53816BE
-	for <lists+linux-doc@lfdr.de>; Sat, 15 May 2021 10:02:08 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 9FE9E3816C4
+	for <lists+linux-doc@lfdr.de>; Sat, 15 May 2021 10:10:02 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S229659AbhEOIDE (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Sat, 15 May 2021 04:03:04 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:58344 "EHLO
-        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S230426AbhEOICt (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Sat, 15 May 2021 04:02:49 -0400
-Received: from mail-wm1-x334.google.com (mail-wm1-x334.google.com [IPv6:2a00:1450:4864:20::334])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id E8985C06175F
-        for <linux-doc@vger.kernel.org>; Sat, 15 May 2021 01:01:32 -0700 (PDT)
-Received: by mail-wm1-x334.google.com with SMTP id z130so826405wmg.2
-        for <linux-doc@vger.kernel.org>; Sat, 15 May 2021 01:01:32 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=google.com; s=20161025;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc;
-        bh=3GhGIQXJYm3c9wF2B/g2I1QQEI83xUicEz8GuTG+nec=;
-        b=sptYazft61QRyDzC3g2bXrAXAFkXewkyaSM0Snfr3lCwbfIyhDAosebG49Yhnq5gl6
-         wd3lzsEdQfgoA2cyu+VYUGk4vnBsWK5077EjSlRv2XF3gmPvx1mUp2x8w9nOzjCE3b/N
-         PP/0mzEbi+iRsOFGyNtJ6yL1jpR3hFIFJ3PJdQIEdGtnXYXoix2hwFVwsqXeGtWZw2sP
-         PzbektU/KdyJC2lzEt6/0yvKv9EnYOX/FpoT6gZZj99xPSTcCYmFGGIfOxhsmzO/EDBg
-         nu/ys0LT9+M+QDSz+T3oHzHHFp5OeJW9iTTLx7NlpGB40QjTRNG3UQ5l0tdHB4qv4bWV
-         4xsQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc;
-        bh=3GhGIQXJYm3c9wF2B/g2I1QQEI83xUicEz8GuTG+nec=;
-        b=Soe1LZO6h7PuEkynB4pp5EukyN+Of+X/G1YEgLTPZby4vbVLaiM8tYHLO1OtWH4qSB
-         5H3eZnHgNLgM7pJdFvFv+CERvtgdK0vo3ku2cJIlWOsvSDunPq/FiixCrB7fcXRqnLDh
-         5BBlVECWjj35/awwiFBCQBBn/KkG8s488DAZw9v7IFUdsnCdZQyZjokq0CG6cOLx8b8f
-         nEFF0EhZdwkjoY74q5J1jdM05VpYOU0R0Y+xIc/Q5akZXY0+Nhl5objXsIPnIM+Q6p4F
-         x+l/pkB8pck9z9mKVL3bgPTmzHUf8vIlvV1m9aPqLohrH355cx7wrrssYiOeRd2cXDIF
-         6zIg==
-X-Gm-Message-State: AOAM5313cw8LVYVVOBfHCUiPqk871YcU4zFWfRUP4M+xFWuCmLeBLjPt
-        xPWs6KGVckEtR3hHUjYm2SwbZIFnmQkZxBtgXphu/Q==
-X-Google-Smtp-Source: ABdhPJyKPIlIZ0bxkvUSqXLXQZ9YQLa9M+aKwQT7Edx2LUu1xpXuxf0xpJtdqHQnkEjzic0CariTe6Mxs8xDoVd/PoQ=
-X-Received: by 2002:a05:600c:3205:: with SMTP id r5mr53380672wmp.78.1621065691477;
- Sat, 15 May 2021 01:01:31 -0700 (PDT)
+        id S231260AbhEOILN (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Sat, 15 May 2021 04:11:13 -0400
+Received: from mail.loongson.cn ([114.242.206.163]:48626 "EHLO loongson.cn"
+        rhost-flags-OK-OK-OK-FAIL) by vger.kernel.org with ESMTP
+        id S230478AbhEOILL (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Sat, 15 May 2021 04:11:11 -0400
+Received: from localhost.localdomain (unknown [112.20.109.240])
+        by mail.loongson.cn (Coremail) with SMTP id AQAAf9Dx3+3MgZ9gctIWAA--.17843S2;
+        Sat, 15 May 2021 16:09:49 +0800 (CST)
+From:   Yanteng Si <siyanteng@loongson.cn>
+To:     corbet@lwn.net, alexs@kernel.org
+Cc:     Yanteng Si <siyanteng@loongson.cn>, chenhuacai@kernel.org,
+        jiaxun.yang@flygoat.com, linux-doc@vger.kernel.org,
+        realpuyuwang@gmail.com, bobwxc@email.cn, siyanteng01@gmail.com,
+        huangjianghui@uniontech.com
+Subject: [PATCH v6 0/3] docs/zh_CN add three core api docs
+Date:   Sat, 15 May 2021 16:10:28 +0800
+Message-Id: <cover.1621062577.git.siyanteng@loongson.cn>
+X-Mailer: git-send-email 2.27.0
 MIME-Version: 1.0
-References: <20210507213110.155492-1-brendanhiggins@google.com> <20210507213110.155492-5-brendanhiggins@google.com>
-In-Reply-To: <20210507213110.155492-5-brendanhiggins@google.com>
-From:   David Gow <davidgow@google.com>
-Date:   Sat, 15 May 2021 16:01:20 +0800
-Message-ID: <CABVgOSnnb=LB2hQOVqarDd3Tv17f7JHHomvSfWeQaFSsH1PD2g@mail.gmail.com>
-Subject: Re: [PATCH v1 4/4] Documentation: kunit: document support for QEMU in kunit_tool
-To:     Brendan Higgins <brendanhiggins@google.com>
-Cc:     Shuah Khan <shuah@kernel.org>,
-        "open list:KERNEL SELFTEST FRAMEWORK" 
-        <linux-kselftest@vger.kernel.org>,
-        KUnit Development <kunit-dev@googlegroups.com>,
-        Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
-        Jonathan Corbet <corbet@lwn.net>,
-        "open list:DOCUMENTATION" <linux-doc@vger.kernel.org>,
-        Stephen Boyd <sboyd@kernel.org>,
-        Kees Cook <keescook@chromium.org>,
-        Frank Rowand <frowand.list@gmail.com>,
-        Daniel Latypov <dlatypov@google.com>
-Content-Type: multipart/signed; protocol="application/pkcs7-signature"; micalg=sha-256;
-        boundary="000000000000b8df5a05c259c406"
+Content-Transfer-Encoding: 8bit
+X-CM-TRANSID: AQAAf9Dx3+3MgZ9gctIWAA--.17843S2
+X-Coremail-Antispam: 1UD129KBjvJXoWxCFyxtFykZw4UAF43Zw1rCrg_yoW5Cw4kpF
+        W7KrWSq3W3GF1Uuwn7W3y8Zr1UWa4xuws8K3y7XwnYqFs8Kr40yw4jgFyaqas3tr1vqF1F
+        vF43KFyq934jyrJanT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+        9KBjDU0xBIdaVrnRJUUUvK14x267AKxVW8JVW5JwAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
+        rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2ocxC64kIII0Yj41l84x0c7CEw4AK67xGY2AK02
+        1l84ACjcxK6xIIjxv20xvE14v26r4j6ryUM28EF7xvwVC0I7IYx2IY6xkF7I0E14v26r4j
+        6F4UM28EF7xvwVC2z280aVAFwI0_Gr1j6F4UJwA2z4x0Y4vEx4A2jsIEc7CjxVAFwI0_Gc
+        CE3s1le2I262IYc4CY6c8Ij28IcVAaY2xG8wAqx4xG64xvF2IEw4CE5I8CrVC2j2WlYx0E
+        2Ix0cI8IcVAFwI0_Jr0_Jr4lYx0Ex4A2jsIE14v26r1j6r4UMcvjeVCFs4IE7xkEbVWUJV
+        W8JwACjcxG0xvY0x0EwIxGrwACjI8F5VA0II8E6IAqYI8I648v4I1lFIxGxcIEc7CjxVA2
+        Y2ka0xkIwI1lc2xSY4AK67AK6r43MxAIw28IcxkI7VAKI48JMxC20s026xCaFVCjc4AY6r
+        1j6r4UMI8I3I0E5I8CrVAFwI0_Jr0_Jr4lx2IqxVCjr7xvwVAFwI0_JrI_JrWlx4CE17CE
+        b7AF67AKxVWUtVW8ZwCIc40Y0x0EwIxGrwCI42IY6xIIjxv20xvE14v26r1j6r1xMIIF0x
+        vE2Ix0cI8IcVCY1x0267AKxVWUJVW8JwCI42IY6xAIw20EY4v20xvaj40_WFyUJVCq3wCI
+        42IY6I8E87Iv67AKxVWUJVW8JwCI42IY6I8E87Iv6xkF7I0E14v26r1j6r4UYxBIdaVFxh
+        VjvjDU0xZFpf9x0JUhdbbUUUUU=
+X-CM-SenderInfo: pvl1t0pwhqwqxorr0wxvrqhubq/
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
---000000000000b8df5a05c259c406
-Content-Type: text/plain; charset="UTF-8"
+v5 -> v6:
 
-On Sat, May 8, 2021 at 5:31 AM Brendan Higgins
-<brendanhiggins@google.com> wrote:
->
-> Document QEMU support, what it does, and how to use it in kunit_tool.
->
-> Signed-off-by: Brendan Higgins <brendanhiggins@google.com>
-> ---
+fix build warnings.
 
-This is a good start, and probably meets the minimum requirements, but
-I do have a number of comments and suggestions below.
+https://lore.kernel.org/linux-doc/CAEensMwf+w8aOuMqBy_wrWGBVBnVZdjKNJgS4jRQTAO4zwN1vw@mail.gmail.com/T/#t
+https://lore.kernel.org/linux-doc/CAEensMzL31Lq2NTVC74hfQyPy+7mTd=74p5Kkamf4LZ_GAieLA@mail.gmail.com/T/#t
 
-Cheers,
--- David
+v4 -> v5:
 
->  Documentation/dev-tools/kunit/usage.rst | 37 +++++++++++++++++++++----
->  1 file changed, 31 insertions(+), 6 deletions(-)
->
-> diff --git a/Documentation/dev-tools/kunit/usage.rst b/Documentation/dev-tools/kunit/usage.rst
-> index 650f99590df57..b74bd7c87cc20 100644
-> --- a/Documentation/dev-tools/kunit/usage.rst
-> +++ b/Documentation/dev-tools/kunit/usage.rst
-> @@ -612,14 +612,39 @@ only things to be aware of when doing so.
->  The biggest impediment will likely be that certain KUnit features and
->  infrastructure may not support your target environment. For example, at this
->  time the KUnit Wrapper (``tools/testing/kunit/kunit.py``) does not work outside
-> -of UML. Unfortunately, there is no way around this. Using UML (or even just a
-> -particular architecture) allows us to make a lot of assumptions that make it
-> -possible to do things which might otherwise be impossible.
-> +of UML and QEMU. Unfortunately, there is no way around this. Using UML and QEMU
-> +(or even just a particular architecture) allows us to make a lot of assumptions
-> +that make it possible to do things which might otherwise be impossible.
+* Pick Alex's review-by tag for [patch 1-3/3]
 
-This is a bit more awkward now, and I don't think gives quite the
-right impression. Particularly the "Unfortunately, there is no way
-around this." bit: there's no fundamental reason that someone couldn't
-implement support for some other emulator (or even a setup which
-pushed to real hardware and read results over serial), it'd just take
-a bit of work to implement (like this patch series has done for qemu).
+v3 -> v4:
 
-Personally, I think it'd be easiest to simplify this section and say
-that kunit_tool currently only fully supports some architectures, via
-UML and QEMU.
+Some bad translations have been modified as suggested by Jiaxun. Thank you for your review.
 
->
->  Nevertheless, all core KUnit framework features are fully supported on all
-> -architectures, and using them is straightforward: all you need to do is to take
-> -your kunitconfig, your Kconfig options for the tests you would like to run, and
-> -merge them into whatever config your are using for your platform. That's it!
-> +architectures, and using them is straightforward: Most popular architectures
-> +are supported directly in the KUnit Wrapper via QEMU.  Currently, supported
-> +architectures on QEMU include:
-> +
-> +*   i386
-> +*   x86_64
-> +*   arm
-> +*   arm64
-> +*   alpha
-> +*   powerpc
-> +*   riscv
-> +*   s390
-> +*   sparc
-> +
-> +In order to run KUnit tests on one of these architectures via QEMU with the
-> +KUnit wrapper, all you need to do is specify the flags ``--arch`` and
-> +``--cross_compile`` when invoking the KUnit Wrapper. For example, we could run
-> +the default KUnit tests on ARM in the following manner (assuming we have an ARM
-> +toolchain installed):
-> +
-> +.. code-block:: bash
-> +
-> +       tools/testing/kunit/kunit.py run --timeout=60 --jobs=12 --arch=arm --cross_compile=arm-linux-gnueabihf-
-> +
+v2 -> v3:
 
-Is it worth also documenting the --qemu_config option here?
-(Particularly given the restriction on its path?) Or is that something
-best added to the kunit_tool page?
+* Pick Xiangcheng Wu's review-by tag for [patch 1-3/3]
 
-That being said, changes to the kunit_tool page are probably worth
-adding as a section in the updated page:
-https://patchwork.kernel.org/project/linux-kselftest/patch/20210417034553.1048895-1-davidgow@google.com/
+* fix two original links. [1/3 and 3/3]
 
-At the very least, it'd be nice to have the new QEMU-related options
-documented there.
+v1 -> v2:
 
+* Some bad translations have been modified as suggested by Xiangcheng.Thank you for your review
 
-> +Alternatively, if you want to run your tests on real hardware or in some other
-> +emulation environment, all you need to do is to take your kunitconfig, your
-> +Kconfig options for the tests you would like to run, and merge them into
-> +whatever config your are using for your platform. That's it!
->
->  For example, let's say you have the following kunitconfig:
->
-> --
-> 2.31.1.607.g51e8a6a459-goog
->
+  https://lore.kernel.org/linux-doc/cover.1618836460.git.siyanteng@loongson.cn/T/#t
 
---000000000000b8df5a05c259c406
-Content-Type: application/pkcs7-signature; name="smime.p7s"
-Content-Transfer-Encoding: base64
-Content-Disposition: attachment; filename="smime.p7s"
-Content-Description: S/MIME Cryptographic Signature
+* As Matthew and Xiangcheng suggested:
 
-MIIPnAYJKoZIhvcNAQcCoIIPjTCCD4kCAQExDzANBglghkgBZQMEAgEFADALBgkqhkiG9w0BBwGg
-ggz2MIIEtjCCA56gAwIBAgIQeAMYYHb81ngUVR0WyMTzqzANBgkqhkiG9w0BAQsFADBMMSAwHgYD
-VQQLExdHbG9iYWxTaWduIFJvb3QgQ0EgLSBSMzETMBEGA1UEChMKR2xvYmFsU2lnbjETMBEGA1UE
-AxMKR2xvYmFsU2lnbjAeFw0yMDA3MjgwMDAwMDBaFw0yOTAzMTgwMDAwMDBaMFQxCzAJBgNVBAYT
-AkJFMRkwFwYDVQQKExBHbG9iYWxTaWduIG52LXNhMSowKAYDVQQDEyFHbG9iYWxTaWduIEF0bGFz
-IFIzIFNNSU1FIENBIDIwMjAwggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQCvLe9xPU9W
-dpiHLAvX7kFnaFZPuJLey7LYaMO8P/xSngB9IN73mVc7YiLov12Fekdtn5kL8PjmDBEvTYmWsuQS
-6VBo3vdlqqXZ0M9eMkjcKqijrmDRleudEoPDzTumwQ18VB/3I+vbN039HIaRQ5x+NHGiPHVfk6Rx
-c6KAbYceyeqqfuJEcq23vhTdium/Bf5hHqYUhuJwnBQ+dAUcFndUKMJrth6lHeoifkbw2bv81zxJ
-I9cvIy516+oUekqiSFGfzAqByv41OrgLV4fLGCDH3yRh1tj7EtV3l2TngqtrDLUs5R+sWIItPa/4
-AJXB1Q3nGNl2tNjVpcSn0uJ7aFPbAgMBAAGjggGKMIIBhjAOBgNVHQ8BAf8EBAMCAYYwHQYDVR0l
-BBYwFAYIKwYBBQUHAwIGCCsGAQUFBwMEMBIGA1UdEwEB/wQIMAYBAf8CAQAwHQYDVR0OBBYEFHzM
-CmjXouseLHIb0c1dlW+N+/JjMB8GA1UdIwQYMBaAFI/wS3+oLkUkrk1Q+mOai97i3Ru8MHsGCCsG
-AQUFBwEBBG8wbTAuBggrBgEFBQcwAYYiaHR0cDovL29jc3AyLmdsb2JhbHNpZ24uY29tL3Jvb3Ry
-MzA7BggrBgEFBQcwAoYvaHR0cDovL3NlY3VyZS5nbG9iYWxzaWduLmNvbS9jYWNlcnQvcm9vdC1y
-My5jcnQwNgYDVR0fBC8wLTAroCmgJ4YlaHR0cDovL2NybC5nbG9iYWxzaWduLmNvbS9yb290LXIz
-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
-ILbFHw0h01NI0v+AeczGMEwGA1UdIARFMEMwQQYJKwYBBAGgMgEoMDQwMgYIKwYBBQUHAgEWJmh0
-dHBzOi8vd3d3Lmdsb2JhbHNpZ24uY29tL3JlcG9zaXRvcnkvMAkGA1UdEwQCMAAwgZoGCCsGAQUF
-BwEBBIGNMIGKMD4GCCsGAQUFBzABhjJodHRwOi8vb2NzcC5nbG9iYWxzaWduLmNvbS9jYS9nc2F0
-bGFzcjNzbWltZWNhMjAyMDBIBggrBgEFBQcwAoY8aHR0cDovL3NlY3VyZS5nbG9iYWxzaWduLmNv
-bS9jYWNlcnQvZ3NhdGxhc3Izc21pbWVjYTIwMjAuY3J0MB8GA1UdIwQYMBaAFHzMCmjXouseLHIb
-0c1dlW+N+/JjMEYGA1UdHwQ/MD0wO6A5oDeGNWh0dHA6Ly9jcmwuZ2xvYmFsc2lnbi5jb20vY2Ev
-Z3NhdGxhc3Izc21pbWVjYTIwMjAuY3JsMA0GCSqGSIb3DQEBCwUAA4IBAQCNr3LBERPjVctGdVEb
-/hN6/N6F2eUWxZLSUbuV7fOle0OvI8xz2AUBrOYQLp94ox9LqmsATKPsBl2uiktsvfs/AXNMcmOz
-qsWHzfqp4XlvNgQsC/UyUMWxZoEyTDfTSat09yQjkFJ7viwzrqqscmTx5oTZz8TPRt0mbxwx3qry
-wDzYxadSUQXNpNnfi0FBDYUUfuCLFWPsPsAXmgh483u0RbNik9OY/ozNq1Gvg/U0jQOlJf2IiKbE
-kUL5Vq8gDDu6bETx5bHmRmSjHhwo7eVbxywczpzdFsU3dauZ3BzqhLy2pRGGzZybSH/3mf7o9y15
-gmRHE7WzPLrsULHG/TM8MYICajCCAmYCAQEwaDBUMQswCQYDVQQGEwJCRTEZMBcGA1UEChMQR2xv
-YmFsU2lnbiBudi1zYTEqMCgGA1UEAxMhR2xvYmFsU2lnbiBBdGxhcyBSMyBTTUlNRSBDQSAyMDIw
-AhABm/kO+4pd09krN7Fjk8ypMA0GCWCGSAFlAwQCAQUAoIHUMC8GCSqGSIb3DQEJBDEiBCCqE3J4
-R8hdya2vZJzwNsq5lX45jIvSqV4aLximl+BRCzAYBgkqhkiG9w0BCQMxCwYJKoZIhvcNAQcBMBwG
-CSqGSIb3DQEJBTEPFw0yMTA1MTUwODAxMzFaMGkGCSqGSIb3DQEJDzFcMFowCwYJYIZIAWUDBAEq
-MAsGCWCGSAFlAwQBFjALBglghkgBZQMEAQIwCgYIKoZIhvcNAwcwCwYJKoZIhvcNAQEKMAsGCSqG
-SIb3DQEBBzALBglghkgBZQMEAgEwDQYJKoZIhvcNAQEBBQAEggEANLOdBegAVhX5dZi9kQkCgBkI
-LYHabOC661IUPKvd51qwregM2+OThiZ0HyfdM5PUjLAu/U+EIvc+GymF44N5l8tCFlQGt0ysqRWj
-vAh7KX24h1v9oJiUx3obCTWsi6SbOp95JzEAyA70sAm/BrIMkTgmLPtMzEFwyF5t5/Wnz1l5S7En
-5U2Nttv4+SgFb0h/igeUhyWOfnBeMvmz6kpK9+y5OaJHuiPhS5cQz4n1rgFltdf9X/bZU3grzkGL
-EjX4T17L3Al3JLBQCLQR4F/etdbFHAWv96jcdtpbAdIQKvYw1wE0ilbZfP/HdddHfbwLzQXCwpj4
-6UobTD6PO2I22w==
---000000000000b8df5a05c259c406--
+  call kernel-doc to generate related docs (0001 and 0002).Thanks!
+
+  I tested it on other computers (at least three) with no problem,
+  But on my computers it prints 1000+ warnings, I tried to find the
+  cause in the past few days but no clue.
+  So, the two patches may print as follows:(maybe your computer won't print anything)
+
+  linux-next/Documentation/translations/zh_CN/core-api/kernel-api.rst:235: WARNING: Duplicate C declaration, also defined at core-api/kernel-api:235.
+  Declaration is '.. c:None:: struct list_head *prev'.
+  linux-next/Documentation/translations/zh_CN/core-api/kernel-api.rst:235: WARNING: Duplicate C declaration, also defined at core-api/kernel-api:235.
+  Declaration is '.. c:None:: struct list_head *next'.
+  linux-next/Documentation/translations/zh_CN/core-api/kernel-api.rst:235: WARNING: Duplicate C declaration, also defined at core-api/kernel-api:235.
+  Declaration is '.. c:None:: void (*sync)(void)'.
+  linux-next/Documentation/translations/zh_CN/core-api/kernel-api.rst:283: WARNING: Duplicate C declaration, also defined at core-api/kernel-api:283.
+  Declaration is '.. c:function:: void list_splice_init_rcu(struct list_head *list, struct list_head *head, void (*sync)(void))'.
+  linux-next/Documentation/translations/zh_CN/core-api/kernel-api.rst:283: WARNING: Duplicate C declaration, also defined at core-api/kernel-api:283.
+  Declaration is '.. c:None:: struct list_head *list'.
+  ...
+
+  I'm a little skeptical now that something's wrong with my computer.
+
+Yanteng Si (3):
+  docs/zh_CN: add core-api kernel-api.rst translation
+  docs/zh_CN: add core-api printk-basics.rst translation
+  docs/zh_CN: add core-api printk-formats.rst translation
+
+ .../translations/zh_CN/core-api/index.rst     |   7 +-
+ .../zh_CN/core-api/kernel-api.rst             | 385 ++++++++++++
+ .../zh_CN/core-api/printk-basics.rst          | 111 ++++
+ .../zh_CN/core-api/printk-formats.rst         | 580 ++++++++++++++++++
+ 4 files changed, 1081 insertions(+), 2 deletions(-)
+ create mode 100644 Documentation/translations/zh_CN/core-api/kernel-api.rst
+ create mode 100644 Documentation/translations/zh_CN/core-api/printk-basics.rst
+ create mode 100644 Documentation/translations/zh_CN/core-api/printk-formats.rst
+
+-- 
+2.27.0
+
