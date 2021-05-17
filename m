@@ -2,66 +2,65 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 12313383988
-	for <lists+linux-doc@lfdr.de>; Mon, 17 May 2021 18:20:56 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 5A880383B97
+	for <lists+linux-doc@lfdr.de>; Mon, 17 May 2021 19:49:11 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1345434AbhEQQVa convert rfc822-to-8bit (ORCPT
-        <rfc822;lists+linux-doc@lfdr.de>); Mon, 17 May 2021 12:21:30 -0400
-Received: from mga05.intel.com ([192.55.52.43]:52983 "EHLO mga05.intel.com"
+        id S239628AbhEQRu0 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 17 May 2021 13:50:26 -0400
+Received: from ms.lwn.net ([45.79.88.28]:48018 "EHLO ms.lwn.net"
         rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S1345781AbhEQQUo (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Mon, 17 May 2021 12:20:44 -0400
-IronPort-SDR: kmU6xCnCNKl9vJX0xQFN73tsR3zkzrUV40Uy5IqPIT4OJoSITHW638R3ETA1bVYdU+HekrDunW
- 6G4rmtCcerPA==
-X-IronPort-AV: E=McAfee;i="6200,9189,9987"; a="286031446"
-X-IronPort-AV: E=Sophos;i="5.82,307,1613462400"; 
-   d="scan'208";a="286031446"
-Received: from orsmga008.jf.intel.com ([10.7.209.65])
-  by fmsmga105.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 17 May 2021 09:11:37 -0700
-IronPort-SDR: 4uRZisQkY0v1wgg3I9c0I+LCJefuPBxXQnE5aPdODni2uP7snwEmunJ27rT0KY3XO3oLyjGPg9
- 7I1d9/xoyJSw==
-X-IronPort-AV: E=Sophos;i="5.82,307,1613462400"; 
-   d="scan'208";a="438977527"
-Received: from jbrandeb-mobl4.amr.corp.intel.com (HELO localhost) ([10.212.212.39])
-  by orsmga008-auth.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 17 May 2021 09:11:37 -0700
-Date:   Mon, 17 May 2021 09:11:36 -0700
-From:   Jesse Brandeburg <jesse.brandeburg@intel.com>
-To:     Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
-Cc:     Linux Doc Mailing List <linux-doc@vger.kernel.org>,
-        "David S. Miller" <davem@davemloft.net>,
-        "Jonathan Corbet" <corbet@lwn.net>,
-        Jakub Kicinski <kuba@kernel.org>,
-        Tony Nguyen <anthony.l.nguyen@intel.com>,
-        intel-wired-lan@lists.osuosl.org, linux-kernel@vger.kernel.org,
-        netdev@vger.kernel.org
-Subject: Re: [PATCH v3 11/16] docs: networking: device_drivers: replace some
- characters
-Message-ID: <20210517091136.00000e96@intel.com>
-In-Reply-To: <23247f10ab58ae1b54ac368f8a2d2769562adcf4.1621159997.git.mchehab+huawei@kernel.org>
-References: <cover.1621159997.git.mchehab+huawei@kernel.org>
-        <23247f10ab58ae1b54ac368f8a2d2769562adcf4.1621159997.git.mchehab+huawei@kernel.org>
-X-Mailer: Claws Mail 3.12.0 (GTK+ 2.24.28; i686-w64-mingw32)
+        id S235250AbhEQRu0 (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Mon, 17 May 2021 13:50:26 -0400
+Received: from localhost (unknown [IPv6:2601:281:8300:104d::5f6])
+        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+        (No client certificate requested)
+        by ms.lwn.net (Postfix) with ESMTPSA id 3614F2E7;
+        Mon, 17 May 2021 17:49:09 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 ms.lwn.net 3614F2E7
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=lwn.net; s=20201203;
+        t=1621273749; bh=iWmm4hnq2CtqA3pXgnL0gun99p0HjfnwoUQ5bnL5xUw=;
+        h=From:To:Cc:Subject:In-Reply-To:References:Date:From;
+        b=Dh6l9slO5Rjlx2Alqras6Ho1QBga++8vMcOzhoQq+BQYowEF3ttjETzhETTjfdVmQ
+         z0UxwlG29pu7+czVO5o40Airn26gLaKCDwcCOfHtUMPh75ZoQ30WvmKu8xB1X064tf
+         MGTqEPO4GK0YVwV7Ril2VTX3kyaVRFgPD0wVVKMIbYSNnuGGFLEMpskVswlDQ0EhfX
+         DW2E6tbY2VfINtDO4FIjpYs500ukh0XkVb4NXfcmHrLe9NjgkclljQuDiVfc2Cnekk
+         eOiuU3zgf7sN8CqdSD9gEgURb6Q1V2Xr2PkaW6KFhhWuzu+cT9XePDAPhwrnNVMXsX
+         X/2KK8OeVnODQ==
+From:   Jonathan Corbet <corbet@lwn.net>
+To:     Aditya Srivastava <yashsri421@gmail.com>
+Cc:     yashsri421@gmail.com, lukas.bulwahn@gmail.com, willy@infradead.org,
+        linux-kernel-mentees@lists.linuxfoundation.org,
+        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org
+Subject: Re: [RFC v4] scripts: kernel-doc: reduce repeated regex expressions
+ into variables
+In-Reply-To: <20210514144244.25341-1-yashsri421@gmail.com>
+References: <87bl9ujy2r.fsf@meer.lwn.net>
+ <20210514144244.25341-1-yashsri421@gmail.com>
+Date:   Mon, 17 May 2021 11:49:08 -0600
+Message-ID: <878s4d45ez.fsf@meer.lwn.net>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 8BIT
+Content-Type: text/plain
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Mauro Carvalho Chehab wrote:
+Aditya Srivastava <yashsri421@gmail.com> writes:
 
-> The conversion tools used during DocBook/LaTeX/html/Markdown->ReST
-> conversion and some cut-and-pasted text contain some characters that
-> aren't easily reachable on standard keyboards and/or could cause
-> troubles when parsed by the documentation build system.
-> 
-> Replace the occurences of the following characters:
-> 
-> 	- U+00a0 (' '): NO-BREAK SPACE
-> 	  as it can cause lines being truncated on PDF output
-> 
-> Signed-off-by: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
+> There are some regex expressions in the kernel-doc script, which are used
+> repeatedly in the script.
+>
+> Reduce such expressions into variables, which can be used everywhere.
+>
+> A quick manual check found that no errors and warnings were added/removed
+> in this process.
+>
+> Suggested-by: Jonathan Corbet <corbet@lwn.net>
+> Signed-off-by: Aditya Srivastava <yashsri421@gmail.com>
+> ---
+> Changes in v4:
+> - Fix htmldocs warning at function parsing, involving repeated $type2 identifiers capture
+> - Re-tested against all files in kernel tree
 
-For the Intel Ethernet Docs, LGTM!
+Applied, thanks for stickint with this.
 
-Reviewed-by: Jesse Brandeburg <jesse.brandeburg@intel.com>
+jon
