@@ -2,148 +2,123 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id E96943826F5
-	for <lists+linux-doc@lfdr.de>; Mon, 17 May 2021 10:25:51 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id B34D0382753
+	for <lists+linux-doc@lfdr.de>; Mon, 17 May 2021 10:45:52 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S235656AbhEQI1G (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 17 May 2021 04:27:06 -0400
-Received: from mail-ej1-f44.google.com ([209.85.218.44]:37432 "EHLO
-        mail-ej1-f44.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S235599AbhEQI1F (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Mon, 17 May 2021 04:27:05 -0400
-Received: by mail-ej1-f44.google.com with SMTP id et19so810898ejc.4;
-        Mon, 17 May 2021 01:25:48 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:subject:to:cc:references:from:message-id:date
-         :user-agent:mime-version:in-reply-to:content-language
-         :content-transfer-encoding;
-        bh=zlEP3w+94KRiLe6VBAU5FX/rnIZsbArHdn1PJkGhu/w=;
-        b=rqrye2H5JrwHeNZM/NIhM2t3tXRyM8o6FoaHCUj0ocLwGBe1UOjepDuXf37dE9sUX0
-         xF86S5ACLkcJE9HROT9J5wVTXZhEgLL6yuBInnfMj2fPR/IYJ6TPX2+DP0tv4joDH/mR
-         OMLdBG6OeyTygGzbaSW5+NfUuoc5kkrvG50VYzYZ7017WUKXqHBxyXveQjptjJVid+Kn
-         09jPdGmDgvShZpCjn8kOErEG4Ti940wkbFqEyxn4ugoi8eOa35DK6txJAXebbXOy5OPd
-         xxaiP7cNc/uhTTZVN0uG4r7ZTdLqGYrEmy2hJgY2bqgCbNQ9a7AypE/AjHaNeQtP3BAg
-         d4mQ==
-X-Gm-Message-State: AOAM530CXHO1kRRnwtQ3tqSJ79ZsA7UVf/aOkKTD7MMzyhXQqrAnmQmp
-        faHAeSd39m3cOd5pmsLRK9SgBOTQVLT1aA==
-X-Google-Smtp-Source: ABdhPJyqqz3mcU71IqpGIyIUK/HQ/Lm1GTsUPyLxcZAw9oL1LIwER0Hox94JVW4oWm3lJmSdGPtG0A==
-X-Received: by 2002:a17:906:4155:: with SMTP id l21mr10207322ejk.424.1621239947675;
-        Mon, 17 May 2021 01:25:47 -0700 (PDT)
-Received: from ?IPv6:2a0b:e7c0:0:107::70f? ([2a0b:e7c0:0:107::70f])
-        by smtp.gmail.com with ESMTPSA id n12sm756976edr.84.2021.05.17.01.25.46
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Mon, 17 May 2021 01:25:47 -0700 (PDT)
-Subject: Re: [PATCH] serial/liteuart; Add support for earlycon
-To:     Stafford Horne <shorne@gmail.com>
-Cc:     LKML <linux-kernel@vger.kernel.org>,
-        Florent Kermarrec <florent@enjoy-digital.fr>,
-        Mateusz Holenko <mholenko@antmicro.com>,
-        Joel Stanley <joel@jms.id.au>,
-        "Gabriel L . Somlo" <gsomlo@gmail.com>,
-        Jonathan Corbet <corbet@lwn.net>,
-        Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
-        Karol Gugala <kgugala@antmicro.com>,
-        "Paul E. McKenney" <paulmck@kernel.org>,
-        Randy Dunlap <rdunlap@infradead.org>,
-        Andrew Morton <akpm@linux-foundation.org>,
-        Thomas Gleixner <tglx@linutronix.de>,
-        Viresh Kumar <viresh.kumar@linaro.org>,
-        Mike Kravetz <mike.kravetz@oracle.com>,
-        Peter Zijlstra <peterz@infradead.org>,
-        linux-doc@vger.kernel.org, linux-serial@vger.kernel.org
-References: <20210515084519.167343-1-shorne@gmail.com>
- <adb78be2-18a6-224d-1fa7-36b7912fa1cf@kernel.org> <YKIn6PHlGGsK+70W@antec>
-From:   Jiri Slaby <jirislaby@kernel.org>
-Message-ID: <d17a43ab-facf-8ffb-5147-7492fb85b0b5@kernel.org>
-Date:   Mon, 17 May 2021 10:25:46 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
- Thunderbird/78.10.1
+        id S235573AbhEQIrH (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 17 May 2021 04:47:07 -0400
+Received: from mail.loongson.cn ([114.242.206.163]:38372 "EHLO loongson.cn"
+        rhost-flags-OK-OK-OK-FAIL) by vger.kernel.org with ESMTP
+        id S235579AbhEQIrC (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Mon, 17 May 2021 04:47:02 -0400
+Received: from localhost.localdomain (unknown [112.20.109.240])
+        by mail.loongson.cn (Coremail) with SMTP id AQAAf9CxucksLaJgfzwYAA--.37122S2;
+        Mon, 17 May 2021 16:45:33 +0800 (CST)
+From:   Yanteng Si <siyanteng@loongson.cn>
+To:     corbet@lwn.net, alexs@kernel.org
+Cc:     Yanteng Si <siyanteng@loongson.cn>, chenhuacai@kernel.org,
+        jiaxun.yang@flygoat.com, linux-doc@vger.kernel.org,
+        realpuyuwang@gmail.com, bobwxc@email.cn, siyanteng01@gmail.com,
+        huangjianghui@uniontech.com
+Subject: [PATCH v7 0/3] docs/zh_CN add three core api docs
+Date:   Mon, 17 May 2021 16:46:12 +0800
+Message-Id: <cover.1621239725.git.siyanteng@loongson.cn>
+X-Mailer: git-send-email 2.27.0
 MIME-Version: 1.0
-In-Reply-To: <YKIn6PHlGGsK+70W@antec>
-Content-Type: text/plain; charset=iso-8859-2; format=flowed
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
+X-CM-TRANSID: AQAAf9CxucksLaJgfzwYAA--.37122S2
+X-Coremail-Antispam: 1UD129KBjvJXoWxXrWUZFWUZF1DKFW8XFy7Jrb_yoW5uFWDpa
+        y7KrWaq3W5GF1Uuws7W3y8Zr1UWa4xuws8K39rXwnYqFs0krW0yw4jgFyaqas3tr1vgF1F
+        vF43KFyq934jyrJanT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+        9KBjDU0xBIdaVrnRJUUUvK14x267AKxVW8JVW5JwAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
+        rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2ocxC64kIII0Yj41l84x0c7CEw4AK67xGY2AK02
+        1l84ACjcxK6xIIjxv20xvE14v26ryj6F1UM28EF7xvwVC0I7IYx2IY6xkF7I0E14v26F4j
+        6r4UJwA2z4x0Y4vEx4A2jsIE14v26F4UJVW0owA2z4x0Y4vEx4A2jsIEc7CjxVAFwI0_Gc
+        CE3s1le2I262IYc4CY6c8Ij28IcVAaY2xG8wAqx4xG64xvF2IEw4CE5I8CrVC2j2WlYx0E
+        2Ix0cI8IcVAFwI0_Jr0_Jr4lYx0Ex4A2jsIE14v26r1j6r4UMcvjeVCFs4IE7xkEbVWUJV
+        W8JwACjcxG0xvY0x0EwIxGrwACjI8F5VA0II8E6IAqYI8I648v4I1lFIxGxcIEc7CjxVA2
+        Y2ka0xkIwI1lc2xSY4AK67AK6r43MxAIw28IcxkI7VAKI48JMxC20s026xCaFVCjc4AY6r
+        1j6r4UMI8I3I0E5I8CrVAFwI0_Jr0_Jr4lx2IqxVCjr7xvwVAFwI0_JrI_JrWlx4CE17CE
+        b7AF67AKxVWUtVW8ZwCIc40Y0x0EwIxGrwCI42IY6xIIjxv20xvE14v26r1j6r1xMIIF0x
+        vE2Ix0cI8IcVCY1x0267AKxVWUJVW8JwCI42IY6xAIw20EY4v20xvaj40_WFyUJVCq3wCI
+        42IY6I8E87Iv67AKxVWUJVW8JwCI42IY6I8E87Iv6xkF7I0E14v26r1j6r4UYxBIdaVFxh
+        VjvjDU0xZFpf9x0JUhdbbUUUUU=
+X-CM-SenderInfo: pvl1t0pwhqwqxorr0wxvrqhubq/
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On 17. 05. 21, 10:23, Stafford Horne wrote:
-> On Mon, May 17, 2021 at 10:16:43AM +0200, Jiri Slaby wrote:
->> On 15. 05. 21, 10:45, Stafford Horne wrote:
->>> Most litex boards using RISC-V soft cores us the sbi earlycon, however
->>> this is not available for non RISC-V litex SoC.  This patch enables
->>> earlycon for liteuart which is available on all Litex SoC's making
->>> support for earycon debugging more widely available.
->>>
->>> Signed-off-by: Stafford Horne <shorne@gmail.com>
->>> Cc: Florent Kermarrec <florent@enjoy-digital.fr>
->>> Cc: Mateusz Holenko <mholenko@antmicro.com>
->>> Cc: Joel Stanley <joel@jms.id.au>
->>> Cc: Gabriel L. Somlo <gsomlo@gmail.com>
->>> ---
->>>    .../admin-guide/kernel-parameters.txt         |  5 +++
->>>    drivers/tty/serial/Kconfig                    |  1 +
->>>    drivers/tty/serial/liteuart.c                 | 31 +++++++++++++++++++
->>>    3 files changed, 37 insertions(+)
->>>
->>> diff --git a/Documentation/admin-guide/kernel-parameters.txt b/Documentation/admin-guide/kernel-parameters.txt
->>> index 04545725f187..2d4a43af8de2 100644
->>> --- a/Documentation/admin-guide/kernel-parameters.txt
->>> +++ b/Documentation/admin-guide/kernel-parameters.txt
->>> @@ -1084,6 +1084,11 @@
->>>    			the driver will use only 32-bit accessors to read/write
->>>    			the device registers.
->>> +		liteuart,<addr>
->>> +			Start an early console on a litex serial port at the
->>> +			specified address. The serial port must already be
->>> +			setup and configured. Options are not yet supported.
->>> +
->>>    		meson,<addr>
->>>    			Start an early, polled-mode console on a meson serial
->>>    			port at the specified address. The serial port must
->>> diff --git a/drivers/tty/serial/Kconfig b/drivers/tty/serial/Kconfig
->>> index 0c4cd4a348f4..9ceffe6ab6fd 100644
->>> --- a/drivers/tty/serial/Kconfig
->>> +++ b/drivers/tty/serial/Kconfig
->>> @@ -1531,6 +1531,7 @@ config SERIAL_LITEUART
->>>    	depends on OF || COMPILE_TEST
->>>    	depends on LITEX
->>>    	select SERIAL_CORE
->>> +	select SERIAL_EARLYCON
->>>    	help
->>>    	  This driver is for the FPGA-based LiteUART serial controller from LiteX
->>>    	  SoC builder.
->>> diff --git a/drivers/tty/serial/liteuart.c b/drivers/tty/serial/liteuart.c
->>> index 64842f3539e1..38c472487e68 100644
->>> --- a/drivers/tty/serial/liteuart.c
->>> +++ b/drivers/tty/serial/liteuart.c
->>> @@ -372,6 +372,37 @@ static int __init liteuart_console_init(void)
->>>    console_initcall(liteuart_console_init);
->>>    #endif /* CONFIG_SERIAL_LITEUART_CONSOLE */
->>> +#ifdef CONFIG_SERIAL_EARLYCON
->>> +static void early_liteuart_putc(struct uart_port *port, int c)
->>> +{
->>> +	while (litex_read8(port->membase + OFF_TXFULL))
->>> +		cpu_relax();
->>> +
->>> +	litex_write8(port->membase + OFF_RXTX, c);
->>
->> Hi,
->>
->> am I missing something or this doesn't differ to liteuart_putchar?
-> 
-> Hi, No you are right, I missed that thanks for catching it.
-> 
-> I should be able to remove this function and use putchar below.
+v6 -> v7:
 
-OK.
+* Translate sentences introduced by fixing build warnings.
+* Pick Jiaxun's review-by tag for [patch 2-3/3]
 
-I've just noticed you add an ifdef CONFIG_SERIAL_EARLYCON here, but you 
-select SERIAL_EARLYCON in Kconfig above. So the ifdef is sort of 
-pointless? (Or you shouldn't select SERIAL_EARLYCON.)
+https://lore.kernel.org/linux-doc/cover.1621062577.git.siyanteng@loongson.cn/T/#t
 
-thanks,
+v5 -> v6:
+
+* fix build warnings.
+
+https://lore.kernel.org/linux-doc/CAEensMwf+w8aOuMqBy_wrWGBVBnVZdjKNJgS4jRQTAO4zwN1vw@mail.gmail.com/T/#t
+https://lore.kernel.org/linux-doc/CAEensMzL31Lq2NTVC74hfQyPy+7mTd=74p5Kkamf4LZ_GAieLA@mail.gmail.com/T/#t
+
+v4 -> v5:
+
+* Pick Alex's review-by tag for [patch 1-3/3]
+
+v3 -> v4:
+
+Some bad translations have been modified as suggested by Jiaxun. Thank you for your review.
+
+v2 -> v3:
+
+* Pick Xiangcheng Wu's review-by tag for [patch 1-3/3]
+
+* fix two original links. [1/3 and 3/3]
+
+v1 -> v2:
+
+* Some bad translations have been modified as suggested by Xiangcheng.Thank you for your review
+
+  https://lore.kernel.org/linux-doc/cover.1618836460.git.siyanteng@loongson.cn/T/#t
+
+* As Matthew and Xiangcheng suggested:
+
+  call kernel-doc to generate related docs (0001 and 0002).Thanks!
+
+  I tested it on other computers (at least three) with no problem,
+  But on my computers it prints 1000+ warnings, I tried to find the
+  cause in the past few days but no clue.
+  So, the two patches may print as follows:(maybe your computer won't print anything)
+
+  linux-next/Documentation/translations/zh_CN/core-api/kernel-api.rst:235: WARNING: Duplicate C declaration, also defined at core-api/kernel-api:235.
+  Declaration is '.. c:None:: struct list_head *prev'.
+  linux-next/Documentation/translations/zh_CN/core-api/kernel-api.rst:235: WARNING: Duplicate C declaration, also defined at core-api/kernel-api:235.
+  Declaration is '.. c:None:: struct list_head *next'.
+  linux-next/Documentation/translations/zh_CN/core-api/kernel-api.rst:235: WARNING: Duplicate C declaration, also defined at core-api/kernel-api:235.
+  Declaration is '.. c:None:: void (*sync)(void)'.
+  linux-next/Documentation/translations/zh_CN/core-api/kernel-api.rst:283: WARNING: Duplicate C declaration, also defined at core-api/kernel-api:283.
+  Declaration is '.. c:function:: void list_splice_init_rcu(struct list_head *list, struct list_head *head, void (*sync)(void))'.
+  linux-next/Documentation/translations/zh_CN/core-api/kernel-api.rst:283: WARNING: Duplicate C declaration, also defined at core-api/kernel-api:283.
+  Declaration is '.. c:None:: struct list_head *list'.
+  ...
+
+  I'm a little skeptical now that something's wrong with my computer.
+
+Yanteng Si (3):
+  docs/zh_CN: add core-api kernel-api.rst translation
+  docs/zh_CN: add core-api printk-basics.rst translation
+  docs/zh_CN: add core-api printk-formats.rst translation
+
+ .../translations/zh_CN/core-api/index.rst     |   7 +-
+ .../zh_CN/core-api/kernel-api.rst             | 369 +++++++++++
+ .../zh_CN/core-api/printk-basics.rst          | 110 ++++
+ .../zh_CN/core-api/printk-formats.rst         | 580 ++++++++++++++++++
+ 4 files changed, 1064 insertions(+), 2 deletions(-)
+ create mode 100644 Documentation/translations/zh_CN/core-api/kernel-api.rst
+ create mode 100644 Documentation/translations/zh_CN/core-api/printk-basics.rst
+ create mode 100644 Documentation/translations/zh_CN/core-api/printk-formats.rst
+
 -- 
-js
-suse labs
+2.27.0
+
