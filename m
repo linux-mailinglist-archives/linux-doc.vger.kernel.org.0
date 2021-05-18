@@ -2,175 +2,165 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 56F70387550
-	for <lists+linux-doc@lfdr.de>; Tue, 18 May 2021 11:40:14 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 560D038782E
+	for <lists+linux-doc@lfdr.de>; Tue, 18 May 2021 13:58:20 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S242327AbhERJla (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 18 May 2021 05:41:30 -0400
-Received: from mailgw02.mediatek.com ([210.61.82.184]:51855 "EHLO
-        mailgw02.mediatek.com" rhost-flags-OK-FAIL-OK-FAIL) by vger.kernel.org
-        with ESMTP id S240515AbhERJla (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 18 May 2021 05:41:30 -0400
-X-UUID: 30e0b3933f134d05825acd877fbc2e0e-20210518
-X-UUID: 30e0b3933f134d05825acd877fbc2e0e-20210518
-Received: from mtkcas11.mediatek.inc [(172.21.101.40)] by mailgw02.mediatek.com
-        (envelope-from <miles.chen@mediatek.com>)
-        (Generic MTA with TLSv1.2 ECDHE-RSA-AES256-SHA384 256/256)
-        with ESMTP id 995296549; Tue, 18 May 2021 17:40:10 +0800
-Received: from mtkcas10.mediatek.inc (172.21.101.39) by
- mtkmbs08n2.mediatek.inc (172.21.101.56) with Microsoft SMTP Server (TLS) id
- 15.0.1497.2; Tue, 18 May 2021 17:40:09 +0800
-Received: from mtksdccf07.mediatek.inc (172.21.84.99) by mtkcas10.mediatek.inc
- (172.21.101.73) with Microsoft SMTP Server id 15.0.1497.2 via Frontend
- Transport; Tue, 18 May 2021 17:40:09 +0800
-From:   Miles Chen <miles.chen@mediatek.com>
-To:     Dave Young <dyoung@redhat.com>, Baoquan He <bhe@redhat.com>,
-        Vivek Goyal <vgoyal@redhat.com>,
-        Jonathan Corbet <corbet@lwn.net>,
-        Michael Ellerman <mpe@ellerman.id.au>,
-        Benjamin Herrenschmidt <benh@kernel.crashing.org>,
-        Paul Mackerras <paulus@samba.org>,
-        Andrew Morton <akpm@linux-foundation.org>,
-        Mike Rapoport <rppt@kernel.org>
-CC:     <kexec@lists.infradead.org>, <linux-doc@vger.kernel.org>,
-        <linuxppc-dev@lists.ozlabs.org>, <linux-mm@kvack.org>,
-        <linux-arm-kernel@lists.infradead.org>,
-        <linux-mediatek@lists.infradead.org>,
-        Miles Chen <miles.chen@mediatek.com>, Kazu <k-hagio-ab@nec.com>
-Subject: [PATCH v2 2/2] mm: replace contig_page_data with node_data
-Date:   Tue, 18 May 2021 17:24:46 +0800
-Message-ID: <20210518092446.16382-3-miles.chen@mediatek.com>
-X-Mailer: git-send-email 2.18.0
-In-Reply-To: <20210518092446.16382-1-miles.chen@mediatek.com>
-References: <20210518092446.16382-1-miles.chen@mediatek.com>
+        id S243320AbhERL7g (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 18 May 2021 07:59:36 -0400
+Received: from mail-dm6nam11on2044.outbound.protection.outlook.com ([40.107.223.44]:22752
+        "EHLO NAM11-DM6-obe.outbound.protection.outlook.com"
+        rhost-flags-OK-OK-OK-FAIL) by vger.kernel.org with ESMTP
+        id S242936AbhERL7g (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Tue, 18 May 2021 07:59:36 -0400
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=FAAQVohUw5spyVEhK+J7yggMzQO9zEhnTJ43pFKFaUyLDiRiXLLl6K47RG8yPDcPVJR5794hvrUWE5flUwFDi4mnHEjJ4l7fC1xOE7yNWvnYu7dXx1x9PZ3cho5tCcw9WA5+9BFCXnFyCY9xKbsEqrPnMD19zTJa7C3fDpQLOSutlz9125Jkm5C9oilW4fi2bvdpMgQby0jzpzMk0bMQXdTJJfirgpaqbT2bhVMfB8Qe4yNV500EbH0BvVdNZbmOzMW5e8SNe4tvll8CCqjDkaX+s+B5NP9Im1u2QlhHhGfBdIwFw6aokaEIfrt44J0SjgQvQOiyvd5H9bPAzAj2Uw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=kK2QEwg/XBH3F3RK5WAljT743S3J7ZCvjM5u19bbObU=;
+ b=CTtOxa9QfT3QiXY/pgbZrAVXjVCm2+yYBpkCfJ6+o5X+KRZoaf/4vh3+650NwQU50Y4erkwNRLtS7bJ4rfB1tKo0WRS7pIi7+aqgosh0SLTO1+yTRwZmO0QuoMS8hLzicbgwFHsi8EGp2mDYzNSmBi7UgiqtqLir2tG8U+SNBsWiu4socor8w485YZnsXBG1EyMzodcCLOwjdZ+zoxpXpMOOmsmLK5eocLV4M/eqH3OAmncl/Z6agVHc4uN6KEIROEVwe5hL2qcaf1i436wiYTweGU7DTx6ejY4ot5zhCr8m8geGbDs1fUdaxHq341gelIDdRtM1iis/bCzd5AdSDA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 216.228.112.34) smtp.rcpttodomain=infradead.org smtp.mailfrom=nvidia.com;
+ dmarc=pass (p=none sp=none pct=100) action=none header.from=nvidia.com;
+ dkim=none (message not signed); arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
+ s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=kK2QEwg/XBH3F3RK5WAljT743S3J7ZCvjM5u19bbObU=;
+ b=k+YEvP04DoRZpwXwAl78Skp3bdMx7SurLpS5o3AZvGCeT7T9R4DW1kSOHmkP5ceCDk01PUUIjoq/qMKkV60ep33BzDtqzDDzkwfyPcj5sAuRH5xjGT8oaGR4W+U9YD0f/cCVX9Lbi1YYvbCVEsXVxdhThwYmjtSrkUGoUpMfbZdE2YJfSuVvnAWkst41TqiK4cZfH/typdavtMnp6H5S5cw60V6qOYSH61Og0nVFQ1GDGF5JMoytT22RO80vpsvlqLkKDZEtixulsaHAya8bKPaQ0KIamfSRk3RGZy7d1rV0cHtiOV5ASIYycIdirkD2GwBuLQOVhCvkestkCEo0/Q==
+Received: from BN6PR22CA0038.namprd22.prod.outlook.com (2603:10b6:404:37::24)
+ by BN6PR12MB1617.namprd12.prod.outlook.com (2603:10b6:405:d::23) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4129.25; Tue, 18 May
+ 2021 11:58:16 +0000
+Received: from BN8NAM11FT040.eop-nam11.prod.protection.outlook.com
+ (2603:10b6:404:37:cafe::ff) by BN6PR22CA0038.outlook.office365.com
+ (2603:10b6:404:37::24) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4108.25 via Frontend
+ Transport; Tue, 18 May 2021 11:58:16 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 216.228.112.34)
+ smtp.mailfrom=nvidia.com; infradead.org; dkim=none (message not signed)
+ header.d=none;infradead.org; dmarc=pass action=none header.from=nvidia.com;
+Received-SPF: Pass (protection.outlook.com: domain of nvidia.com designates
+ 216.228.112.34 as permitted sender) receiver=protection.outlook.com;
+ client-ip=216.228.112.34; helo=mail.nvidia.com;
+Received: from mail.nvidia.com (216.228.112.34) by
+ BN8NAM11FT040.mail.protection.outlook.com (10.13.177.166) with Microsoft SMTP
+ Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384) id
+ 15.20.4129.25 via Frontend Transport; Tue, 18 May 2021 11:58:16 +0000
+Received: from nvdebian.localnet (172.20.145.6) by HQMAIL107.nvidia.com
+ (172.20.187.13) with Microsoft SMTP Server (TLS) id 15.0.1497.2; Tue, 18 May
+ 2021 11:58:11 +0000
+From:   Alistair Popple <apopple@nvidia.com>
+To:     Peter Xu <peterx@redhat.com>
+CC:     <linux-mm@kvack.org>, <nouveau@lists.freedesktop.org>,
+        <bskeggs@redhat.com>, <akpm@linux-foundation.org>,
+        <linux-doc@vger.kernel.org>, <linux-kernel@vger.kernel.org>,
+        <dri-devel@lists.freedesktop.org>, <jhubbard@nvidia.com>,
+        <rcampbell@nvidia.com>, <jglisse@redhat.com>, <jgg@nvidia.com>,
+        <hch@infradead.org>, <daniel@ffwll.ch>, <willy@infradead.org>,
+        <bsingharora@gmail.com>, Christoph Hellwig <hch@lst.de>
+Subject: Re: [PATCH v8 1/8] mm: Remove special swap entry functions
+Date:   Tue, 18 May 2021 21:58:09 +1000
+Message-ID: <2009782.faHf7sVjGQ@nvdebian>
+In-Reply-To: <YKMjvKGIHdwQN2Ml@t490s>
+References: <20210407084238.20443-1-apopple@nvidia.com> <20210407084238.20443-2-apopple@nvidia.com> <YKMjvKGIHdwQN2Ml@t490s>
 MIME-Version: 1.0
-Content-Type: text/plain
-X-MTK:  N
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/plain; charset="us-ascii"
+X-Originating-IP: [172.20.145.6]
+X-ClientProxiedBy: HQMAIL101.nvidia.com (172.20.187.10) To
+ HQMAIL107.nvidia.com (172.20.187.13)
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-Office365-Filtering-Correlation-Id: 0e74b7bf-743b-4368-e3b2-08d919f438b3
+X-MS-TrafficTypeDiagnostic: BN6PR12MB1617:
+X-Microsoft-Antispam-PRVS: <BN6PR12MB1617E628F848E50075D0BD3ADF2C9@BN6PR12MB1617.namprd12.prod.outlook.com>
+X-MS-Oob-TLC-OOBClassifiers: OLM:10000;
+X-MS-Exchange-SenderADCheck: 1
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: dhZyjhtzq+w2F7MEBwd6talLQ1aWAfeQakn2i7/TteuTrKW1UHVJq8fe+pWy3bOVnHQBQU+U6tMemDANVTP9t3P38Ixo7LFMNpdh+dVkwkIIZK+VL6N9sRLNfWKqb07H89iL5A+k85YyBvSLtfO31Ox4eZKc+gTLw+yOLVFTPtUdzXM6TjIXk//yiVt8ZCOtDm+TGymYR3Tn7stDX/escgLuWMHXHNjVQuvdtPXzBEdvsrn9S5F1+7C+lKWDv85fhPTgAS2h8Lgk3NO9rqxy41FrNTCxO2YnlGWfC24g2u2w0QzIgySs0wWZ3JAzXRfI21iU1hjttpFXeVFUZiMqfm9QL/fb3LcUvKGT60XYgYpKJVKyV1kdeKS99T27Wr3v6JAF0+yapwt1cvbrrmBxpQLBLzOh7DckxF45f9Nc6It/xdmtbinToZucrQmn6eCuUpNk9t/6XWJ3CINN/maaUbV2FqiVFxV9Gwp6y2kYcF1ukdHHhSDky6Z/V73CpOyEnTxlHKogwJTotmjSi2CtryzHd98ZS/dnZrj7Z3+h32iR+grX71pkZ8n/e43zAipsjM2OuKxgL1GWEFNtBgD67DJ6/s/addw00Dasqxbdy14F38VppQZyAzp0OIOuzduPMuFd+TQyf3Q2yanvvgreBKIZnj13pmTr+XYGU4zkHfLCRJPozgQckOcJPNS3P+ncz5MsLUEEKLWGOKYxcD+mNvlTORmoAXinWU9cyhyA4ho1faBAWVxfJhEwDkSH8oSWheLZqHs9gZYnP5c9IchTkyWH8QRrWiscuuSZjna5OEk=
+X-Forefront-Antispam-Report: CIP:216.228.112.34;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:mail.nvidia.com;PTR:schybrid03.nvidia.com;CAT:NONE;SFS:(4636009)(376002)(396003)(346002)(39860400002)(136003)(46966006)(36840700001)(426003)(356005)(82740400003)(7636003)(336012)(26005)(47076005)(16526019)(186003)(36860700001)(82310400003)(83380400001)(7416002)(2906002)(33716001)(478600001)(36906005)(316002)(54906003)(966005)(8676002)(8936002)(6916009)(9576002)(9686003)(4326008)(5660300002)(86362001)(70586007)(70206006)(39026012)(21314003);DIR:OUT;SFP:1101;
+X-OriginatorOrg: Nvidia.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 18 May 2021 11:58:16.1894
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 0e74b7bf-743b-4368-e3b2-08d919f438b3
+X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=43083d15-7273-40c1-b7db-39efd9ccc17a;Ip=[216.228.112.34];Helo=[mail.nvidia.com]
+X-MS-Exchange-CrossTenant-AuthSource: BN8NAM11FT040.eop-nam11.prod.protection.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: BN6PR12MB1617
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Replace contig_page_data with node_data. Change the definition
-of NODE_DATA(nid) from (&contig_page_data) to (node_data[0]).
+On Tuesday, 18 May 2021 12:17:32 PM AEST Peter Xu wrote:
+> On Wed, Apr 07, 2021 at 06:42:31PM +1000, Alistair Popple wrote:
+> > +static inline struct page *pfn_swap_entry_to_page(swp_entry_t entry)
+> > +{
+> > +     struct page *p = pfn_to_page(swp_offset(entry));
+> > +
+> > +     /*
+> > +      * Any use of migration entries may only occur while the
+> > +      * corresponding page is locked
+> > +      */
+> > +     BUG_ON(is_migration_entry(entry) && !PageLocked(p));
+> > +
+> > +     return p;
+> > +}
+> 
+> Would swap_pfn_entry_to_page() be slightly better?
+> 
+> The thing is it's very easy to read pfn_*() as a function to take a pfn as
+> parameter...
+> 
+> Since I'm also recently working on some swap-related new ptes [1], I'm
+> thinking whether we could name these swap entries as "swap XXX entries". 
+> Say, "swap hwpoison entry", "swap pfn entry" (which is a superset of "swap
+> migration entry", "swap device exclusive entry", ...).  That's where I came
+> with the above swap_pfn_entry_to_page(), then below will be naturally
+> is_swap_pfn_entry().
 
-Remove contig_page_data from the tree.
+Equally though "hwpoison swap entry", "pfn swap entry", "migration swap 
+entry", etc. also makes sense (at least to me), but does that not fit in as 
+well with your series? I haven't looked too deeply at your series but have 
+been meaning to so thanks for the pointer.
 
-Cc: Mike Rapoport <rppt@kernel.org>
-Cc: Baoquan He <bhe@redhat.com>
-Cc: Kazu <k-hagio-ab@nec.com>
-Signed-off-by: Miles Chen <miles.chen@mediatek.com>
----
- Documentation/admin-guide/kdump/vmcoreinfo.rst | 13 -------------
- arch/powerpc/kexec/core.c                      |  5 -----
- include/linux/gfp.h                            |  3 ---
- include/linux/mmzone.h                         |  3 +--
- kernel/crash_core.c                            |  1 -
- mm/memblock.c                                  |  2 --
- 6 files changed, 1 insertion(+), 26 deletions(-)
+> No strong opinion as this is already a v8 series (and sorry to chim in this
+> late), just to raise this up.
 
-diff --git a/Documentation/admin-guide/kdump/vmcoreinfo.rst b/Documentation/admin-guide/kdump/vmcoreinfo.rst
-index 3861a25faae1..74185245c580 100644
---- a/Documentation/admin-guide/kdump/vmcoreinfo.rst
-+++ b/Documentation/admin-guide/kdump/vmcoreinfo.rst
-@@ -81,14 +81,6 @@ into that mem_map array.
- 
- Used to map an address to the corresponding struct page.
- 
--contig_page_data
------------------
--
--Makedumpfile gets the pglist_data structure from this symbol, which is
--used to describe the memory layout.
--
--User-space tools use this to exclude free pages when dumping memory.
--
- mem_section|(mem_section, NR_SECTION_ROOTS)|(mem_section, section_mem_map)
- --------------------------------------------------------------------------
- 
-@@ -531,11 +523,6 @@ node_data|(node_data, MAX_NUMNODES)
- 
- See above.
- 
--contig_page_data
------------------
--
--See above.
--
- vmemmap_list
- ------------
- 
-diff --git a/arch/powerpc/kexec/core.c b/arch/powerpc/kexec/core.c
-index 56da5eb2b923..41f31dfb540c 100644
---- a/arch/powerpc/kexec/core.c
-+++ b/arch/powerpc/kexec/core.c
-@@ -68,13 +68,8 @@ void machine_kexec_cleanup(struct kimage *image)
- void arch_crash_save_vmcoreinfo(void)
- {
- 
--#ifdef CONFIG_NEED_MULTIPLE_NODES
- 	VMCOREINFO_SYMBOL(node_data);
- 	VMCOREINFO_LENGTH(node_data, MAX_NUMNODES);
--#endif
--#ifndef CONFIG_NEED_MULTIPLE_NODES
--	VMCOREINFO_SYMBOL(contig_page_data);
--#endif
- #if defined(CONFIG_PPC64) && defined(CONFIG_SPARSEMEM_VMEMMAP)
- 	VMCOREINFO_SYMBOL(vmemmap_list);
- 	VMCOREINFO_SYMBOL(mmu_vmemmap_psize);
-diff --git a/include/linux/gfp.h b/include/linux/gfp.h
-index 11da8af06704..ba8c511c402f 100644
---- a/include/linux/gfp.h
-+++ b/include/linux/gfp.h
-@@ -493,9 +493,6 @@ static inline int gfp_zonelist(gfp_t flags)
-  * This zone list contains a maximum of MAX_NUMNODES*MAX_NR_ZONES zones.
-  * There are two zonelists per node, one for all zones with memory and
-  * one containing just zones from the node the zonelist belongs to.
-- *
-- * For the normal case of non-DISCONTIGMEM systems the NODE_DATA() gets
-- * optimized to &contig_page_data at compile-time.
-  */
- static inline struct zonelist *node_zonelist(int nid, gfp_t flags)
- {
-diff --git a/include/linux/mmzone.h b/include/linux/mmzone.h
-index 557918dcc755..c0769292187c 100644
---- a/include/linux/mmzone.h
-+++ b/include/linux/mmzone.h
-@@ -1043,9 +1043,8 @@ extern char numa_zonelist_order[];
- 
- #ifndef CONFIG_NEED_MULTIPLE_NODES
- 
--extern struct pglist_data contig_page_data;
--#define NODE_DATA(nid)		(&contig_page_data)
- extern struct pglist_data *node_data[];
-+#define NODE_DATA(nid)		(node_data[0])
- #define NODE_MEM_MAP(nid)	mem_map
- 
- #else /* CONFIG_NEED_MULTIPLE_NODES */
-diff --git a/kernel/crash_core.c b/kernel/crash_core.c
-index 825284baaf46..d1e324be67f9 100644
---- a/kernel/crash_core.c
-+++ b/kernel/crash_core.c
-@@ -457,7 +457,6 @@ static int __init crash_save_vmcoreinfo_init(void)
- 
- #ifndef CONFIG_NEED_MULTIPLE_NODES
- 	VMCOREINFO_SYMBOL(mem_map);
--	VMCOREINFO_SYMBOL(contig_page_data);
- #endif
- #ifdef CONFIG_SPARSEMEM
- 	VMCOREINFO_SYMBOL_ARRAY(mem_section);
-diff --git a/mm/memblock.c b/mm/memblock.c
-index ebddb57ea62d..7cfc9a9d6243 100644
---- a/mm/memblock.c
-+++ b/mm/memblock.c
-@@ -93,8 +93,6 @@
-  */
- 
- #ifndef CONFIG_NEED_MULTIPLE_NODES
--struct pglist_data __refdata contig_page_data;
--EXPORT_SYMBOL(contig_page_data);
- struct pglist_data *node_data[MAX_NUMNODES];
- #endif
- 
--- 
-2.18.0
+No worries, it's good timing as I was about to send a v9 which was just a 
+rebase anyway. I am hoping to try and get this accepted for the next merge 
+window but I will wait before sending v9 to see if anyone else has thoughts on 
+the naming here.
+
+I don't have a particularly strong opinion either, and your justification is 
+more thought than I gave to naming these originally so am happy to rename if 
+it's more readable or fits better with your series.
+
+Thanks.
+
+ - Alistair
+
+> [1] https://lore.kernel.org/lkml/20210427161317.50682-1-peterx@redhat.com/
+> 
+> Thanks,
+> 
+> > +
+> > +/*
+> > + * A pfn swap entry is a special type of swap entry that always has a pfn
+> > stored + * in the swap offset. They are used to represent unaddressable
+> > device memory + * and to restrict access to a page undergoing migration.
+> > + */
+> > +static inline bool is_pfn_swap_entry(swp_entry_t entry)
+> > +{
+> > +     return is_migration_entry(entry) || is_device_private_entry(entry);
+> > +}
+> 
+> --
+> Peter Xu
+
+
+
 
