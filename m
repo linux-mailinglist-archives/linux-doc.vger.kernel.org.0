@@ -2,524 +2,828 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 3C9D33880E8
-	for <lists+linux-doc@lfdr.de>; Tue, 18 May 2021 22:06:00 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 12BF7388161
+	for <lists+linux-doc@lfdr.de>; Tue, 18 May 2021 22:28:07 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S239208AbhERUHR (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 18 May 2021 16:07:17 -0400
-Received: from mx0b-00069f02.pphosted.com ([205.220.177.32]:10284 "EHLO
-        mx0b-00069f02.pphosted.com" rhost-flags-OK-OK-OK-OK)
-        by vger.kernel.org with ESMTP id S237988AbhERUHQ (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 18 May 2021 16:07:16 -0400
-Received: from pps.filterd (m0246632.ppops.net [127.0.0.1])
-        by mx0b-00069f02.pphosted.com (8.16.0.43/8.16.0.43) with SMTP id 14IJx5dS009382;
-        Tue, 18 May 2021 20:04:56 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=oracle.com; h=from : to : cc :
- subject : date : message-id : references : in-reply-to : content-type :
- content-id : content-transfer-encoding : mime-version; s=corp-2020-01-29;
- bh=AYh/7aNyPIielV487TyQr4hPVYaH3V4ZNB6zEymZOTo=;
- b=ozHy3Dk31CZgvpD3UcG+5gsq8kpwKQoe8C6IIkBjPczu+NEFPN3CICVsjuG5FrEXj5OS
- QJunrpsGPPNTsZlBm4Z04RbEJl3HKs/CC/PWB19ndPp0EuZZko1vxCXQeke0xLTuWaTD
- nCsVmCddcx/Bo4vkj6U64DpKoel/8JyAIwXu7MTMExcAfi7nDJvOw/NHY+YmmAXvY2DR
- Xm4ifhLeBSNPIBXj+CamlQcL/HuD30fhj72xydbPkhHlJKM5qAGhhR0MELuV2Ce15oMI
- wiwokjMFrJBubjjFT8qe6o0K6FcCHPvsP5M3grYy9847eda73iijp1rslYvR97cfF1Vi FA== 
-Received: from oracle.com (userp3020.oracle.com [156.151.31.79])
-        by mx0b-00069f02.pphosted.com with ESMTP id 38kh0h8thq-1
-        (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
-        Tue, 18 May 2021 20:04:55 +0000
-Received: from userp3020.oracle.com (userp3020.oracle.com [127.0.0.1])
-        by pps.podrdrct (8.16.0.36/8.16.0.36) with SMTP id 14IJxMjl116347;
-        Tue, 18 May 2021 20:04:54 GMT
-Received: from nam02-sn1-obe.outbound.protection.outlook.com (mail-sn1anam02lp2048.outbound.protection.outlook.com [104.47.57.48])
-        by userp3020.oracle.com with ESMTP id 38kb3889av-1
-        (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
-        Tue, 18 May 2021 20:04:54 +0000
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=WzSNHLQ29+0IBRdIH1blySQTxSfFGhad0ETPpfx1QFdGFaCES3gdTmvABwUCdEcS818fU8sbUeHJS9dGd7NjeW9Wd9lYoYm7a+Ce4NwV2kp30y/1FlHVAxETtPVI5xyB5DqovoEzbOKxj4uqOPtUVb/xQxuVFzXATNjx2ICQMfgk3lCN+mZ26LIHzCy99vnH/qzVc0JaQ71xwCWT86O3UxSncfXL5JsQvaYbmgRpGqRVOX2isEggOy++WO8+9cN6AUQBU4KRYNEhsdC9DJZvVsqyG/bRbGSx2EdElv0vGDaaF/TpX08RLFjCTa/EdhEEFf9xwNx3niCIUa2DA03PWA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=AYh/7aNyPIielV487TyQr4hPVYaH3V4ZNB6zEymZOTo=;
- b=CPV7cuNHoobCspTEoJVOumWm54FG9vki8MNTpo/uHMxcLxM9PdcZBrkieiKjZKIX3bgEKJ6tjO2qS6fn/FJfMOSGYU4r86eWehTzHEbibrKDz3VmZWKemoAoud/wpsPHY1m44b5lv2M27vxieQl48nvcLQW8Ly8sICym9G/maaYDh7FoTiZuCBQxsMz45gL3gOKo8WVbO0VR0d4biLT34Qn1S8zka556g1UvDhtTS6aoVgxA4M0Hdx6/hmAvqImrbFvQzMg9r0O1c8i8MNI/VWWymg8rLloXdnT9uGR7J/SxIhcp+lySDuScZfr2svzfdCBMg7XNrANAN2MIyfv6Nw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=oracle.com; dmarc=pass action=none header.from=oracle.com;
- dkim=pass header.d=oracle.com; arc=none
+        id S241984AbhERU3X (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 18 May 2021 16:29:23 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:52052 "EHLO
+        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S241895AbhERU3X (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 18 May 2021 16:29:23 -0400
+Received: from mail-pf1-x435.google.com (mail-pf1-x435.google.com [IPv6:2607:f8b0:4864:20::435])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id DC891C061573
+        for <linux-doc@vger.kernel.org>; Tue, 18 May 2021 13:28:03 -0700 (PDT)
+Received: by mail-pf1-x435.google.com with SMTP id x18so3987421pfi.9
+        for <linux-doc@vger.kernel.org>; Tue, 18 May 2021 13:28:03 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oracle.onmicrosoft.com; s=selector2-oracle-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=AYh/7aNyPIielV487TyQr4hPVYaH3V4ZNB6zEymZOTo=;
- b=MKDF8/P5J9hSF1AOPe3HqW3O22Y9Ql+16ZMePI47B3FKCyu8umXjsPtrzX8EUpsd1uC+UqLArNEMwUJDc7D649W+gklPRwQyfH8fXWEFJ4+rpr/ZHbqw4XO4yUE4Lif/+yJiO/GvOml1H60fMDj/RklpW6xlOTOV0WstFj52+FU=
-Received: from MWHPR10MB1582.namprd10.prod.outlook.com (2603:10b6:300:22::8)
- by MWHPR10MB1583.namprd10.prod.outlook.com (2603:10b6:300:27::22) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4129.26; Tue, 18 May
- 2021 20:04:52 +0000
-Received: from MWHPR10MB1582.namprd10.prod.outlook.com
- ([fe80::353a:1802:6e91:1811]) by MWHPR10MB1582.namprd10.prod.outlook.com
- ([fe80::353a:1802:6e91:1811%8]) with mapi id 15.20.4129.032; Tue, 18 May 2021
- 20:04:52 +0000
-From:   Liam Howlett <liam.howlett@oracle.com>
-To:     Alistair Popple <apopple@nvidia.com>
-CC:     "linux-mm@kvack.org" <linux-mm@kvack.org>,
-        "nouveau@lists.freedesktop.org" <nouveau@lists.freedesktop.org>,
-        "bskeggs@redhat.com" <bskeggs@redhat.com>,
-        "akpm@linux-foundation.org" <akpm@linux-foundation.org>,
-        "linux-doc@vger.kernel.org" <linux-doc@vger.kernel.org>,
-        "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
-        "dri-devel@lists.freedesktop.org" <dri-devel@lists.freedesktop.org>,
-        "jhubbard@nvidia.com" <jhubbard@nvidia.com>,
-        "rcampbell@nvidia.com" <rcampbell@nvidia.com>,
-        "jglisse@redhat.com" <jglisse@redhat.com>,
-        "jgg@nvidia.com" <jgg@nvidia.com>,
-        "hch@infradead.org" <hch@infradead.org>,
-        "daniel@ffwll.ch" <daniel@ffwll.ch>,
-        "willy@infradead.org" <willy@infradead.org>,
-        "bsingharora@gmail.com" <bsingharora@gmail.com>,
-        Christoph Hellwig <hch@lst.de>
-Subject: Re: [PATCH v8 3/8] mm/rmap: Split try_to_munlock from try_to_unmap
-Thread-Topic: [PATCH v8 3/8] mm/rmap: Split try_to_munlock from try_to_unmap
-Thread-Index: AQHXK4oPyN3KgFk4qEysJNDFdITYW6rp6v0A
-Date:   Tue, 18 May 2021 20:04:51 +0000
-Message-ID: <20210518191451.fcjw6tlgow33gxbq@revolver>
-References: <20210407084238.20443-1-apopple@nvidia.com>
- <20210407084238.20443-4-apopple@nvidia.com>
-In-Reply-To: <20210407084238.20443-4-apopple@nvidia.com>
-Accept-Language: en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-authentication-results: nvidia.com; dkim=none (message not signed)
- header.d=none;nvidia.com; dmarc=none action=none header.from=oracle.com;
-x-originating-ip: [23.233.25.87]
-x-ms-publictraffictype: Email
-x-ms-office365-filtering-correlation-id: 53a85e3e-31b2-47a0-ce0e-08d91a3832ad
-x-ms-traffictypediagnostic: MWHPR10MB1583:
-x-microsoft-antispam-prvs: <MWHPR10MB1583B1ECD624E3AD45937206FD2C9@MWHPR10MB1583.namprd10.prod.outlook.com>
-x-ms-oob-tlc-oobclassifiers: OLM:10000;
-x-ms-exchange-senderadcheck: 1
-x-microsoft-antispam: BCL:0;
-x-microsoft-antispam-message-info: 63aTd1AWMmSORovuUk1KE2jcsi18CMI0u4PBitU54Yx57konjnB/XHMAW8izsyjcSMI1N7YDqnn3M1n7iWIgvk5W8RMiSifoGvfDRLJBF0PzgbmIZM6IuezFGnFMxWLyZOmPhyxuh2eBmFiPMWTZjgZ22sJ6rxH/TAFUbHABtUvI4NBh1HIrwf+R2aRSrCgT8wVtowtiMDI9cM+ED1NZwa+oVIzff1iNCKrvWcnS1rCLCK/P2xK8/GEODc6T/hTC7iH0zNLXPSvlOqBDSdkb3eBwuvjRBwrh4lhuJRZnb78DMLavAwz6Ls76mR1s2jAF0kMu4psoLRDeGu1s9SQBZjlpx1Vva4WRZoM1N9CA60P40gXbTIN35Ic3J1+UGZdUZNXd76JBSE1/Z9bjhvdPiXRq35Bisd/zskshUNgsmSjPGAU7TWv3HC+59LL6P8YmiJ+wjgX6oEAuD/SX3Wlp60sPLivrISdjoskqx9IF9wVX95x0hicPCOneRrw3N/fiI17GHAeHGeWkC99EA4arXOnSpTpxvj8e9hNST5bzaZpuJytC8Ke+BtKZcdOH8B4NEbMOIm6Lp/mfe+jLnfuoIC5ccxhdeqiY5Vk5HEOjjL0=
-x-forefront-antispam-report: CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:MWHPR10MB1582.namprd10.prod.outlook.com;PTR:;CAT:NONE;SFS:(7916004)(39860400002)(376002)(396003)(366004)(346002)(136003)(71200400001)(44832011)(66946007)(66556008)(478600001)(33716001)(8936002)(26005)(66446008)(54906003)(30864003)(7416002)(1076003)(64756008)(316002)(83380400001)(66476007)(38100700002)(8676002)(122000001)(6916009)(86362001)(5660300002)(6512007)(186003)(76116006)(2906002)(9686003)(6506007)(4326008)(91956017)(6486002);DIR:OUT;SFP:1101;
-x-ms-exchange-antispam-messagedata: =?us-ascii?Q?HntgeosxWJlBKuwCDn3JJa+shqI5k/Wp4d1iBdyPsGV8kudbeOA3wIQFDTka?=
- =?us-ascii?Q?SkxisT317roqZlo7TApvrz8RTwVN1P7MZyGHDVNz2ei4T7XQ/040/j71qyJM?=
- =?us-ascii?Q?4ZgMejrWNy241j11qMmHmd4fC+o5WgPEhjX5IshjsnDn5s1DrIwc5UaaN4Zh?=
- =?us-ascii?Q?LWWyMoB6ianeXFPvuN1LFOJ9jksU7QhYv9E5px0p+Dbk9ucNfX+3e60HfVzf?=
- =?us-ascii?Q?ocoYpMF5j80yZs7Ireh5NU7vdVYPgvxvE0nduleMDHADG8u9qzagyZ+71Kll?=
- =?us-ascii?Q?GR++l4JuYzxbuAMsG8tbzBt2OU2IjbhQ+utVMReiXFQNv6017i8RyQ3D1HSq?=
- =?us-ascii?Q?bRjfLlOLkGr3y0bNAh9Bki+bDRvxaKy4uNbXCnJX/XF8KJKAd8dLqi5NB7x1?=
- =?us-ascii?Q?4r6G08Hl+dcJw3RO7z71FT/qEs7FAXrCgWBEPFjAIp6m5ztIWr7USuXbJxXl?=
- =?us-ascii?Q?Ge9SWjI9s2sK6AYGd8uJRRAD94RaiOcmV067ziSDzagCw6rt4PSoXILpjvnx?=
- =?us-ascii?Q?+4emiSxfTKDdwoK4SA7B2+UohFDxhAfQTo+cO4mPrG/WJyaNoMPGJul4FRYj?=
- =?us-ascii?Q?cMiAh0QlRpWsxLLXfXPPAWhODcWW2Mu/75OUFd8oJO5AWEU3IPpB8dRyQp4y?=
- =?us-ascii?Q?FpqS9VIY69Gv1GyHow/LXZ2L+datAPKLVncylDjiAM891kpClWGPghp+QVFF?=
- =?us-ascii?Q?AfLg3QuPPnE2ycE38+B5nxu+NitjjhT48NJUV9s+nlBJcijGsEUUZJC2fECa?=
- =?us-ascii?Q?lWkbHiOJ/XIYYamgK7IdEQUu5agj2WCOOuASYm6u6BdlqHh5zsL1mfxZR2ER?=
- =?us-ascii?Q?1B7kiAc4iCaTY8dKXTD4LGIfqVWqRJ70JXPvbneaobDfPFV3og1KaTbqz5Fi?=
- =?us-ascii?Q?dZ+lBDro6UAFv/nFQTsmVrr9/nfmT7cw09F76d5Edkio5CK+yKK/DPa4jRAu?=
- =?us-ascii?Q?oMVWJDIdtnf7aVspedAG5wt5Gh+TtjfQzMDP7kAzxL/vpYYvHoRjUjejwB6y?=
- =?us-ascii?Q?ebyGPtdsrF7hhnJGE6uIOiJQOgkQh+guP2Y3RXDDNu8On1T/EJ51mhG3iOn+?=
- =?us-ascii?Q?6LBCWdeDuDVqOtDbQRUS8qVeUIdH9fn+IBacUf0EiUvbw6wY6EXEjCYX65pb?=
- =?us-ascii?Q?EL9Tj8nYbd36OT6kDUC5Dl0hTxyMxXfvL1815XTcoBme0/0n/mQ+hDGADMgL?=
- =?us-ascii?Q?rsIP59XNju04fra8Iq2Bos5CdFS6qANu53vgaq7v2HfSB/qXD+ga+LnosATT?=
- =?us-ascii?Q?wFsw2EbaO2NV6R1Az0pRHFkwNvfPl2wHKOUp0QoTfL5igI0n9hmv8yGt9tG2?=
- =?us-ascii?Q?uGjA7uSJcNYsgFoCAX4AeEQj?=
-x-ms-exchange-transport-forked: True
-Content-Type: text/plain; charset="us-ascii"
-Content-ID: <3DF2400BEFAA8A4789DA65AF2013FEAD@namprd10.prod.outlook.com>
-Content-Transfer-Encoding: quoted-printable
+        d=google.com; s=20161025;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc;
+        bh=kGBPmocnJHC9r42BD5cSDGfOp9SQUetbvgKqWGaNlWA=;
+        b=ovoiivCYmV1wLmUnZ8sdwbKkqqZtTyGsYrlKjLX+5oLFNBG/ILtTM30usG5jkGEsBZ
+         R0clZFPU5XtAX28VD7tqAIUn/JlaaW/NHdrSZF2m81wQw3jm7RioH2rfr8RPpo6Y9IuP
+         5I0DE8Q61YWhYZLy6qhdZlafDAXFqWoMWjRMssEPIsvGeMg5jnM0m+DkXpQaxzjcl5He
+         4KCJai/RP6wNGin9nUQjvQLLIUlpj5WdyKrt7lSMBQL2+Q7pk3EOiR2arNl6KqLUjB5a
+         QYhrg2a0jKGSmuCaNq3sVTxkrQsr4oqo3G8q13fffonwLG5J6zC/dcjwveO7FW8+0i7v
+         bBKQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=kGBPmocnJHC9r42BD5cSDGfOp9SQUetbvgKqWGaNlWA=;
+        b=F+1SUhc57+gAAbEO9qUIzdu07aQ5CV6oN5Xfyss9B1LgcryWYBho37Moukxe5TXpBH
+         ALUb4n6Ld5OSTq45ngVZ5YZVmnFZkMYRSEcM/yEBHdcVauu17IoEXkYtetZuFuQ0ks4z
+         T8urAx492A/hcD3jXNVMmpethd5lV9KPtSkEgq/zkwvnkUn6paYJZJeQffjoBZTXvZui
+         igVetdEc8nY3kzg36L3VN9Liq5gKZwogC1DZlrM0t3eHt+f8Wki196DKAWmsx+VO20Pm
+         OiVvzwKYHJ684dkOVYC37PH9LEg4NlGBu25vG+kQI3k1S3kKv+56/W2hTyzWZ857zcZf
+         vvcg==
+X-Gm-Message-State: AOAM530VrHrx2NSr6kNVNgTZ0lsC6uy/YtyxLlklcut36OwCKw3RnHej
+        kdoU+VLxQXSYNbDXH7xovez1nJwCdzYBJOqun6Wymw==
+X-Google-Smtp-Source: ABdhPJw0ocf03fMnV9QKxLnYs/7r4eUDyN8fOsKioKe+9iW6fKibhR69jTGttPrtjtP/nYdgCoHxSyS7lI32hcvrkh4=
+X-Received: by 2002:a63:4f4a:: with SMTP id p10mr6967449pgl.384.1621369682835;
+ Tue, 18 May 2021 13:28:02 -0700 (PDT)
 MIME-Version: 1.0
-X-OriginatorOrg: oracle.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: MWHPR10MB1582.namprd10.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 53a85e3e-31b2-47a0-ce0e-08d91a3832ad
-X-MS-Exchange-CrossTenant-originalarrivaltime: 18 May 2021 20:04:51.9688
- (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: 4e2c6054-71cb-48f1-bd6c-3a9705aca71b
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: jemm6G8UwZyRj3qeFaWM5xFqCObZefox7S5nPSAPzwPvR8tWWS8WPVZauTBoFUwvp+jPs8mAFmDf8W9jYQDHfw==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: MWHPR10MB1583
-X-Proofpoint-Virus-Version: vendor=nai engine=6200 definitions=9988 signatures=668683
-X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 bulkscore=0 malwarescore=0 mlxscore=0
- adultscore=0 spamscore=0 phishscore=0 suspectscore=0 mlxlogscore=999
- classifier=spam adjust=0 reason=mlx scancount=1 engine=8.12.0-2104190000
- definitions=main-2105180139
-X-Proofpoint-GUID: 2yogDlchJd1i16LuQkxuDyKqs3gFVtU6
-X-Proofpoint-ORIG-GUID: 2yogDlchJd1i16LuQkxuDyKqs3gFVtU6
+References: <20210507213110.155492-1-brendanhiggins@google.com>
+ <20210507213110.155492-4-brendanhiggins@google.com> <CABVgOSmEe32_kT9TR0-H8biuWGc1Rexne86DgLxths+GUHHgig@mail.gmail.com>
+In-Reply-To: <CABVgOSmEe32_kT9TR0-H8biuWGc1Rexne86DgLxths+GUHHgig@mail.gmail.com>
+From:   Brendan Higgins <brendanhiggins@google.com>
+Date:   Tue, 18 May 2021 13:27:51 -0700
+Message-ID: <CAFd5g47s3EbLow6zZpX-vs2KMK+uQyiRjhNtqjQZWXH-ALki8Q@mail.gmail.com>
+Subject: Re: [PATCH v1 3/4] kunit: tool: add support for QEMU
+To:     David Gow <davidgow@google.com>
+Cc:     Shuah Khan <shuah@kernel.org>,
+        "open list:KERNEL SELFTEST FRAMEWORK" 
+        <linux-kselftest@vger.kernel.org>,
+        KUnit Development <kunit-dev@googlegroups.com>,
+        Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
+        Jonathan Corbet <corbet@lwn.net>,
+        "open list:DOCUMENTATION" <linux-doc@vger.kernel.org>,
+        Stephen Boyd <sboyd@kernel.org>,
+        Kees Cook <keescook@chromium.org>,
+        Frank Rowand <frowand.list@gmail.com>,
+        Daniel Latypov <dlatypov@google.com>
+Content-Type: text/plain; charset="UTF-8"
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-* Alistair Popple <apopple@nvidia.com> [210407 04:43]:
-> The behaviour of try_to_unmap_one() is difficult to follow because it
-> performs different operations based on a fairly large set of flags used
-> in different combinations.
->=20
-> TTU_MUNLOCK is one such flag. However it is exclusively used by
-> try_to_munlock() which specifies no other flags. Therefore rather than
-> overload try_to_unmap_one() with unrelated behaviour split this out into
-> it's own function and remove the flag.
->=20
-> Signed-off-by: Alistair Popple <apopple@nvidia.com>
-> Reviewed-by: Ralph Campbell <rcampbell@nvidia.com>
-> Reviewed-by: Christoph Hellwig <hch@lst.de>
->=20
-> ---
->=20
-> v8:
-> * Renamed try_to_munlock to page_mlock to better reflect what the
->   function actually does.
-> * Removed the TODO from the documentation that this patch addresses.
->=20
-> v7:
-> * Added Christoph's Reviewed-by
->=20
-> v4:
-> * Removed redundant check for VM_LOCKED
-> ---
->  Documentation/vm/unevictable-lru.rst | 33 ++++++++-----------
->  include/linux/rmap.h                 |  3 +-
->  mm/mlock.c                           | 10 +++---
->  mm/rmap.c                            | 48 +++++++++++++++++++++-------
->  4 files changed, 55 insertions(+), 39 deletions(-)
->=20
-> diff --git a/Documentation/vm/unevictable-lru.rst b/Documentation/vm/unev=
-ictable-lru.rst
-> index 0e1490524f53..eae3af17f2d9 100644
-> --- a/Documentation/vm/unevictable-lru.rst
-> +++ b/Documentation/vm/unevictable-lru.rst
-> @@ -389,14 +389,14 @@ mlocked, munlock_vma_page() updates that zone stati=
-stics for the number of
->  mlocked pages.  Note, however, that at this point we haven't checked whe=
-ther
->  the page is mapped by other VM_LOCKED VMAs.
-> =20
-> -We can't call try_to_munlock(), the function that walks the reverse map =
-to
-> +We can't call page_mlock(), the function that walks the reverse map to
->  check for other VM_LOCKED VMAs, without first isolating the page from th=
-e LRU.
-> -try_to_munlock() is a variant of try_to_unmap() and thus requires that t=
-he page
-> +page_mlock() is a variant of try_to_unmap() and thus requires that the p=
-age
->  not be on an LRU list [more on these below].  However, the call to
-> -isolate_lru_page() could fail, in which case we couldn't try_to_munlock(=
-).  So,
-> +isolate_lru_page() could fail, in which case we can't call page_mlock().=
-  So,
->  we go ahead and clear PG_mlocked up front, as this might be the only cha=
-nce we
-> -have.  If we can successfully isolate the page, we go ahead and
-> -try_to_munlock(), which will restore the PG_mlocked flag and update the =
-zone
-> +have.  If we can successfully isolate the page, we go ahead and call
-> +page_mlock(), which will restore the PG_mlocked flag and update the zone
->  page statistics if it finds another VMA holding the page mlocked.  If we=
- fail
->  to isolate the page, we'll have left a potentially mlocked page on the L=
-RU.
->  This is fine, because we'll catch it later if and if vmscan tries to rec=
-laim
-> @@ -545,31 +545,24 @@ munlock or munmap system calls, mm teardown (munloc=
-k_vma_pages_all), reclaim,
->  holepunching, and truncation of file pages and their anonymous COWed pag=
-es.
-> =20
-> =20
-> -try_to_munlock() Reverse Map Scan
-> +page_mlock() Reverse Map Scan
->  ---------------------------------
-> =20
-> -.. warning::
-> -   [!] TODO/FIXME: a better name might be page_mlocked() - analogous to =
-the
-> -   page_referenced() reverse map walker.
-> -
->  When munlock_vma_page() [see section :ref:`munlock()/munlockall() System=
- Call
->  Handling <munlock_munlockall_handling>` above] tries to munlock a
->  page, it needs to determine whether or not the page is mapped by any
->  VM_LOCKED VMA without actually attempting to unmap all PTEs from the
->  page.  For this purpose, the unevictable/mlock infrastructure
-> -introduced a variant of try_to_unmap() called try_to_munlock().
-> +introduced a variant of try_to_unmap() called page_mlock().
-> =20
-> -try_to_munlock() calls the same functions as try_to_unmap() for anonymou=
-s and
-> -mapped file and KSM pages with a flag argument specifying unlock versus =
-unmap
-> -processing.  Again, these functions walk the respective reverse maps loo=
-king
-> -for VM_LOCKED VMAs.  When such a VMA is found, as in the try_to_unmap() =
-case,
-> -the functions mlock the page via mlock_vma_page() and return SWAP_MLOCK.=
-  This
-> -undoes the pre-clearing of the page's PG_mlocked done by munlock_vma_pag=
-e.
-> +page_mlock() walks the respective reverse maps looking for VM_LOCKED VMA=
-s. When
-> +such a VMA is found the page is mlocked via mlock_vma_page(). This undoe=
-s the
-> +pre-clearing of the page's PG_mlocked done by munlock_vma_page.
-> =20
-> -Note that try_to_munlock()'s reverse map walk must visit every VMA in a =
-page's
-> +Note that page_mlock()'s reverse map walk must visit every VMA in a page=
-'s
->  reverse map to determine that a page is NOT mapped into any VM_LOCKED VM=
-A.
->  However, the scan can terminate when it encounters a VM_LOCKED VMA.
-> -Although try_to_munlock() might be called a great many times when munloc=
-king a
-> +Although page_mlock() might be called a great many times when munlocking=
- a
->  large region or tearing down a large address space that has been mlocked=
- via
->  mlockall(), overall this is a fairly rare event.
-> =20
-> @@ -602,7 +595,7 @@ inactive lists to the appropriate node's unevictable =
-list.
->  shrink_inactive_list() should only see SHM_LOCK'd pages that became SHM_=
-LOCK'd
->  after shrink_active_list() had moved them to the inactive list, or pages=
- mapped
->  into VM_LOCKED VMAs that munlock_vma_page() couldn't isolate from the LR=
-U to
-> -recheck via try_to_munlock().  shrink_inactive_list() won't notice the l=
-atter,
-> +recheck via page_mlock().  shrink_inactive_list() won't notice the latte=
-r,
->  but will pass on to shrink_page_list().
-> =20
->  shrink_page_list() again culls obviously unevictable pages that it could
-> diff --git a/include/linux/rmap.h b/include/linux/rmap.h
-> index def5c62c93b3..38a746787c2f 100644
-> --- a/include/linux/rmap.h
-> +++ b/include/linux/rmap.h
-> @@ -87,7 +87,6 @@ struct anon_vma_chain {
-> =20
->  enum ttu_flags {
->  	TTU_MIGRATION		=3D 0x1,	/* migration mode */
-> -	TTU_MUNLOCK		=3D 0x2,	/* munlock mode */
-> =20
->  	TTU_SPLIT_HUGE_PMD	=3D 0x4,	/* split huge PMD if any */
->  	TTU_IGNORE_MLOCK	=3D 0x8,	/* ignore mlock */
-> @@ -239,7 +238,7 @@ int page_mkclean(struct page *);
->   * called in munlock()/munmap() path to check for other vmas holding
->   * the page mlocked.
->   */
-> -void try_to_munlock(struct page *);
-> +void page_mlock(struct page *page);
-> =20
->  void remove_migration_ptes(struct page *old, struct page *new, bool lock=
-ed);
-> =20
-> diff --git a/mm/mlock.c b/mm/mlock.c
-> index f8f8cc32d03d..9b8b82cfbbff 100644
-> --- a/mm/mlock.c
-> +++ b/mm/mlock.c
-> @@ -108,7 +108,7 @@ void mlock_vma_page(struct page *page)
->  /*
->   * Finish munlock after successful page isolation
->   *
-> - * Page must be locked. This is a wrapper for try_to_munlock()
-> + * Page must be locked. This is a wrapper for page_mlock()
->   * and putback_lru_page() with munlock accounting.
->   */
->  static void __munlock_isolated_page(struct page *page)
-> @@ -118,7 +118,7 @@ static void __munlock_isolated_page(struct page *page=
-)
->  	 * and we don't need to check all the other vmas.
->  	 */
->  	if (page_mapcount(page) > 1)
-> -		try_to_munlock(page);
-> +		page_mlock(page);
-> =20
->  	/* Did try_to_unlock() succeed or punt? */
->  	if (!PageMlocked(page))
-> @@ -158,7 +158,7 @@ static void __munlock_isolation_failed(struct page *p=
-age)
->   * munlock()ed or munmap()ed, we want to check whether other vmas hold t=
-he
->   * page locked so that we can leave it on the unevictable lru list and n=
-ot
->   * bother vmscan with it.  However, to walk the page's rmap list in
-> - * try_to_munlock() we must isolate the page from the LRU.  If some othe=
-r
-> + * page_mlock() we must isolate the page from the LRU.  If some other
->   * task has removed the page from the LRU, we won't be able to do that.
->   * So we clear the PageMlocked as we might not get another chance.  If w=
-e
->   * can't isolate the page, we leave it for putback_lru_page() and vmscan
-> @@ -168,7 +168,7 @@ unsigned int munlock_vma_page(struct page *page)
->  {
->  	int nr_pages;
-> =20
-> -	/* For try_to_munlock() and to serialize with page migration */
-> +	/* For page_mlock() and to serialize with page migration */
->  	BUG_ON(!PageLocked(page));
->  	VM_BUG_ON_PAGE(PageTail(page), page);
-> =20
-> @@ -205,7 +205,7 @@ static int __mlock_posix_error_return(long retval)
->   *
->   * The fast path is available only for evictable pages with single mappi=
-ng.
->   * Then we can bypass the per-cpu pvec and get better performance.
-> - * when mapcount > 1 we need try_to_munlock() which can fail.
-> + * when mapcount > 1 we need page_mlock() which can fail.
->   * when !page_evictable(), we need the full redo logic of putback_lru_pa=
-ge to
->   * avoid leaving evictable page in unevictable list.
->   *
-> diff --git a/mm/rmap.c b/mm/rmap.c
-> index 977e70803ed8..f09d522725b9 100644
-> --- a/mm/rmap.c
-> +++ b/mm/rmap.c
-> @@ -1405,10 +1405,6 @@ static bool try_to_unmap_one(struct page *page, st=
-ruct vm_area_struct *vma,
->  	struct mmu_notifier_range range;
->  	enum ttu_flags flags =3D (enum ttu_flags)(long)arg;
-> =20
-> -	/* munlock has nothing to gain from examining un-locked vmas */
-> -	if ((flags & TTU_MUNLOCK) && !(vma->vm_flags & VM_LOCKED))
-> -		return true;
-> -
->  	if (IS_ENABLED(CONFIG_MIGRATION) && (flags & TTU_MIGRATION) &&
->  	    is_zone_device_page(page) && !is_device_private_page(page))
->  		return true;
-> @@ -1469,8 +1465,6 @@ static bool try_to_unmap_one(struct page *page, str=
-uct vm_area_struct *vma,
->  				page_vma_mapped_walk_done(&pvmw);
->  				break;
->  			}
-> -			if (flags & TTU_MUNLOCK)
-> -				continue;
->  		}
-> =20
->  		/* Unexpected PMD-mapped THP? */
-> @@ -1784,8 +1778,39 @@ bool try_to_unmap(struct page *page, enum ttu_flag=
-s flags)
->  	return !page_mapcount(page) ? true : false;
->  }
-> =20
+On Sat, May 15, 2021 at 12:59 AM David Gow <davidgow@google.com> wrote:
+>
+> On Sat, May 8, 2021 at 5:31 AM Brendan Higgins
+> <brendanhiggins@google.com> wrote:
+> >
+> > Add basic support to run QEMU via kunit_tool. Add support for i386,
+> > x86_64, arm, arm64, and a bunch more.
+> >
+> > Signed-off-by: Brendan Higgins <brendanhiggins@google.com>
+> > Tested-by: David Gow <davidgow@google.com>
+> > ---
+> >
+> > Changes since last revision:
+> >
+> > - A number of minor obvious issues pointed out by David and Daniel.
+> > - Added facility for merging Kconfigs at Daniel's suggestion.
+> > - Broke out qemu_configs each into their own config file which is loaded
+> >   dynamically - mostly at David's suggestion.
+> >
+> > ---
+>
+> This seems pretty good to me. I only have one real complaint --
+> qemu_configs needing to be in a subdirectory of ./tools/testing/kunit
+> -- but am able to tolerate that (even if I'd prefer not to have it) if
+> it's documented properly.
+>
+> Otherwise, save for a couple of minor nitpicks, this seems good to go.
+>
+> Reviewed-by: David Gow <davidgow@google.com>
+>
+>
+> >  tools/testing/kunit/kunit.py                |  57 ++++++-
+> >  tools/testing/kunit/kunit_config.py         |   7 +-
+> >  tools/testing/kunit/kunit_kernel.py         | 170 ++++++++++++++++----
+> >  tools/testing/kunit/kunit_tool_test.py      |  18 ++-
+> >  tools/testing/kunit/qemu_config.py          |  17 ++
+> >  tools/testing/kunit/qemu_configs/alpha.py   |  10 ++
+> >  tools/testing/kunit/qemu_configs/arm.py     |  13 ++
+> >  tools/testing/kunit/qemu_configs/arm64.py   |  12 ++
+> >  tools/testing/kunit/qemu_configs/i386.py    |  10 ++
+> >  tools/testing/kunit/qemu_configs/powerpc.py |  12 ++
+> >  tools/testing/kunit/qemu_configs/riscv.py   |  31 ++++
+> >  tools/testing/kunit/qemu_configs/s390.py    |  14 ++
+> >  tools/testing/kunit/qemu_configs/sparc.py   |  10 ++
+> >  tools/testing/kunit/qemu_configs/x86_64.py  |  10 ++
+> >  14 files changed, 350 insertions(+), 41 deletions(-)
+> >  create mode 100644 tools/testing/kunit/qemu_config.py
+> >  create mode 100644 tools/testing/kunit/qemu_configs/alpha.py
+> >  create mode 100644 tools/testing/kunit/qemu_configs/arm.py
+> >  create mode 100644 tools/testing/kunit/qemu_configs/arm64.py
+> >  create mode 100644 tools/testing/kunit/qemu_configs/i386.py
+> >  create mode 100644 tools/testing/kunit/qemu_configs/powerpc.py
+> >  create mode 100644 tools/testing/kunit/qemu_configs/riscv.py
+> >  create mode 100644 tools/testing/kunit/qemu_configs/s390.py
+> >  create mode 100644 tools/testing/kunit/qemu_configs/sparc.py
+> >  create mode 100644 tools/testing/kunit/qemu_configs/x86_64.py
+> >
+> > diff --git a/tools/testing/kunit/kunit.py b/tools/testing/kunit/kunit.py
+> > index 5da8fb3762f98..be8d8d4a4e08f 100755
+> > --- a/tools/testing/kunit/kunit.py
+> > +++ b/tools/testing/kunit/kunit.py
+> > @@ -70,10 +70,10 @@ def build_tests(linux: kunit_kernel.LinuxSourceTree,
+> >         kunit_parser.print_with_timestamp('Building KUnit Kernel ...')
+> >
+> >         build_start = time.time()
+> > -       success = linux.build_um_kernel(request.alltests,
+> > -                                       request.jobs,
+> > -                                       request.build_dir,
+> > -                                       request.make_options)
+> > +       success = linux.build_kernel(request.alltests,
+> > +                                    request.jobs,
+> > +                                    request.build_dir,
+> > +                                    request.make_options)
+> >         build_end = time.time()
+> >         if not success:
+> >                 return KunitResult(KunitStatus.BUILD_FAILURE,
+> > @@ -189,6 +189,31 @@ def add_common_opts(parser) -> None:
+> >                              'will get  automatically appended.',
+> >                              metavar='kunitconfig')
+> >
+> > +       parser.add_argument('--arch',
+> > +                           help=('Specifies the architecture to run tests under. '
+> > +                                 'The architecture specified here must match the '
+> > +                                 'string passed to the ARCH make param, '
+> > +                                 'e.g. i386, x86_64, arm, um, etc. Non-UML '
+> > +                                 'architectures run on QEMU.'),
+> > +                           type=str, default='um', metavar='arch')
+> > +
+> > +       parser.add_argument('--cross_compile',
+> > +                           help=('Sets make\'s CROSS_COMPILE variable; it should '
+> > +                                 'be set to a toolchain path prefix (the prefix '
+> > +                                 'of gcc and other tools in your toolchain, for '
+> > +                                 'example `sparc64-linux-gnu-` if you have the '
+> > +                                 'sparc toolchain installed on your system, or '
+> > +                                 '`$HOME/toolchains/microblaze/gcc-9.2.0-nolibc/microblaze-linux/bin/microblaze-linux-` '
+> Super-minor nit: is there a shorter example we can give that's not
+> much longer than all the surrounding lines?
 
-Please add a comment here, especially around locking.
+I wanted something which actually uses the paths that matches real gcc
+toolchains and they don't get much shorter than this (I guess I could
+drop $HOME/toolchains/microblaze, but it would still be very long).
+Think maybe I should just drop this secondary example entirely? Anyone
+trying to download and use a toolchain probably has better resources
+to follow anyway.
 
-> +static bool page_mlock_one(struct page *page, struct vm_area_struct *vma=
-,
-> +				 unsigned long address, void *arg)
-> +{
-> +	struct page_vma_mapped_walk pvmw =3D {
-> +		.page =3D page,
-> +		.vma =3D vma,
-> +		.address =3D address,
-> +	};
-> +
-> +	/* munlock has nothing to gain from examining un-locked vmas */
-> +	if (!(vma->vm_flags & VM_LOCKED))
-> +		return true;
+> > +                                 'if you have downloaded the microblaze toolchain '
+> > +                                 'from the 0-day website to a directory in your '
+> > +                                 'home directory called `toolchains`).'),
+> > +                           metavar='cross_compile')
+> > +
+> > +       parser.add_argument('--qemu_config',
+> > +                           help=('Takes a path to a path to a file containing '
+> > +                                 'a QemuArchParams object.'),
+> > +                           type=str, metavar='qemu_config')
+> > +
+>
+> If (as noted below) this file needs to be in a subdirectory of the
+> kunit_tool directory, we should document this, or maybe make this path
+> relative to the kunit_tool directory.
 
-The logic here doesn't make sense.  You called page_mlock_one() on a VMA
-that isn't locked and it returns true?  Is this a check to see if the
-VMA has zero mlock'ed pages?
+I'll go into more detail below, but I was able to change this to take
+a config from anywhere.
 
-> +
-> +	while (page_vma_mapped_walk(&pvmw)) {
-> +		/* PTE-mapped THP are never mlocked */
-> +		if (!PageTransCompound(page)) {
-> +			/*
-> +			 * Holding pte lock, we do *not* need
-> +			 * mmap_lock here
-> +			 */
+> >  def add_build_opts(parser) -> None:
+> >         parser.add_argument('--jobs',
+> >                             help='As in the make command, "Specifies  the number of '
+> > @@ -270,7 +295,11 @@ def main(argv, linux=None):
+> >                         os.mkdir(cli_args.build_dir)
+> >
+> >                 if not linux:
+> > -                       linux = kunit_kernel.LinuxSourceTree(cli_args.build_dir, kunitconfig_path=cli_args.kunitconfig)
+> > +                       linux = kunit_kernel.LinuxSourceTree(cli_args.build_dir,
+> > +                                       kunitconfig_path=cli_args.kunitconfig,
+> > +                                       arch=cli_args.arch,
+> > +                                       cross_compile=cli_args.cross_compile,
+> > +                                       qemu_config_path=cli_args.qemu_config)
+> >
+> >                 request = KunitRequest(cli_args.raw_output,
+> >                                        cli_args.timeout,
+> > @@ -289,7 +318,11 @@ def main(argv, linux=None):
+> >                         os.mkdir(cli_args.build_dir)
+> >
+> >                 if not linux:
+> > -                       linux = kunit_kernel.LinuxSourceTree(cli_args.build_dir, kunitconfig_path=cli_args.kunitconfig)
+> > +                       linux = kunit_kernel.LinuxSourceTree(cli_args.build_dir,
+> > +                                       kunitconfig_path=cli_args.kunitconfig,
+> > +                                       arch=cli_args.arch,
+> > +                                       cross_compile=cli_args.cross_compile,
+> > +                                       qemu_config_path=cli_args.qemu_config)
+> >
+> >                 request = KunitConfigRequest(cli_args.build_dir,
+> >                                              cli_args.make_options)
+> > @@ -301,7 +334,11 @@ def main(argv, linux=None):
+> >                         sys.exit(1)
+> >         elif cli_args.subcommand == 'build':
+> >                 if not linux:
+> > -                       linux = kunit_kernel.LinuxSourceTree(cli_args.build_dir, kunitconfig_path=cli_args.kunitconfig)
+> > +                       linux = kunit_kernel.LinuxSourceTree(cli_args.build_dir,
+> > +                                       kunitconfig_path=cli_args.kunitconfig,
+> > +                                       arch=cli_args.arch,
+> > +                                       cross_compile=cli_args.cross_compile,
+> > +                                       qemu_config_path=cli_args.qemu_config)
+> >
+> >                 request = KunitBuildRequest(cli_args.jobs,
+> >                                             cli_args.build_dir,
+> > @@ -315,7 +352,11 @@ def main(argv, linux=None):
+> >                         sys.exit(1)
+> >         elif cli_args.subcommand == 'exec':
+> >                 if not linux:
+> > -                       linux = kunit_kernel.LinuxSourceTree(cli_args.build_dir)
+> > +                       linux = kunit_kernel.LinuxSourceTree(cli_args.build_dir,
+> > +                                       kunitconfig_path=cli_args.kunitconfig,
+> > +                                       arch=cli_args.arch,
+> > +                                       cross_compile=cli_args.cross_compile,
+> > +                                       qemu_config_path=cli_args.qemu_config)
+> >
+> >                 exec_request = KunitExecRequest(cli_args.timeout,
+> >                                                 cli_args.build_dir,
+> > diff --git a/tools/testing/kunit/kunit_config.py b/tools/testing/kunit/kunit_config.py
+> > index 1e2683dcc0e7a..c77c7d2ef6220 100644
+> > --- a/tools/testing/kunit/kunit_config.py
+> > +++ b/tools/testing/kunit/kunit_config.py
+> > @@ -52,8 +52,13 @@ class Kconfig(object):
+> >                                 return False
+> >                 return True
+> >
+> > +       def merge_in_entries(self, other: 'Kconfig') -> None:
+> > +               if other.is_subset_of(self):
+> > +                       return
+> > +               self._entries = list(self.entries().union(other.entries()))
+> > +
+> >         def write_to_file(self, path: str) -> None:
+> > -               with open(path, 'w') as f:
+> > +               with open(path, 'a+') as f:
+> >                         for entry in self.entries():
+> >                                 f.write(str(entry) + '\n')
+> >
+> > diff --git a/tools/testing/kunit/kunit_kernel.py b/tools/testing/kunit/kunit_kernel.py
+> > index e22ade9d91ad5..2bd196fd69e5c 100644
+> > --- a/tools/testing/kunit/kunit_kernel.py
+> > +++ b/tools/testing/kunit/kunit_kernel.py
+> > @@ -6,23 +6,31 @@
+> >  # Author: Felix Guo <felixguoxiuping@gmail.com>
+> >  # Author: Brendan Higgins <brendanhiggins@google.com>
+> >
+> > +from __future__ import annotations
+> > +import importlib.util
+> >  import logging
+> >  import subprocess
+> >  import os
+> >  import shutil
+> >  import signal
+> >  from typing import Iterator
+> > +from typing import Optional
+> >
+> >  from contextlib import ExitStack
+> >
+> > +from collections import namedtuple
+> > +
+> >  import kunit_config
+> >  import kunit_parser
+> > +import qemu_config
+> >
+> >  KCONFIG_PATH = '.config'
+> >  KUNITCONFIG_PATH = '.kunitconfig'
+> >  DEFAULT_KUNITCONFIG_PATH = 'arch/um/configs/kunit_defconfig'
+> >  BROKEN_ALLCONFIG_PATH = 'tools/testing/kunit/configs/broken_on_uml.config'
+> >  OUTFILE_PATH = 'test.log'
+> > +ABS_TOOL_PATH = os.path.abspath(os.path.dirname(__file__))
+> > +QEMU_CONFIGS_DIR = os.path.join(ABS_TOOL_PATH, 'qemu_configs')
+> >
+> >  def get_file_path(build_dir, default):
+> >         if build_dir:
+> > @@ -40,6 +48,10 @@ class BuildError(Exception):
+> >  class LinuxSourceTreeOperations(object):
+> >         """An abstraction over command line operations performed on a source tree."""
+> >
+> > +       def __init__(self, linux_arch: str, cross_compile: Optional[str]):
+> > +               self._linux_arch = linux_arch
+> > +               self._cross_compile = cross_compile
+> > +
+> >         def make_mrproper(self) -> None:
+> >                 try:
+> >                         subprocess.check_output(['make', 'mrproper'], stderr=subprocess.STDOUT)
+> > @@ -48,12 +60,21 @@ class LinuxSourceTreeOperations(object):
+> >                 except subprocess.CalledProcessError as e:
+> >                         raise ConfigError(e.output.decode())
+> >
+> > +       def make_arch_qemuconfig(self, kconfig: kunit_config.Kconfig) -> None:
+> > +               pass
+> > +
+> > +       def make_allyesconfig(self, build_dir, make_options) -> None:
+> > +               raise ConfigError('Only the "um" arch is supported for alltests')
+> > +
+> >         def make_olddefconfig(self, build_dir, make_options) -> None:
+> > -               command = ['make', 'ARCH=um', 'olddefconfig']
+> > +               command = ['make', 'ARCH=' + self._linux_arch, 'olddefconfig']
+> > +               if self._cross_compile:
+> > +                       command += ['CROSS_COMPILE=' + self._cross_compile]
+> >                 if make_options:
+> >                         command.extend(make_options)
+> >                 if build_dir:
+> >                         command += ['O=' + build_dir]
+> > +               print('Populating config with:\n$', ' '.join(command))
+> >                 try:
+> >                         subprocess.check_output(command, stderr=subprocess.STDOUT)
+> >                 except OSError as e:
+> > @@ -61,6 +82,79 @@ class LinuxSourceTreeOperations(object):
+> >                 except subprocess.CalledProcessError as e:
+> >                         raise ConfigError(e.output.decode())
+> >
+> > +       def make(self, jobs, build_dir, make_options) -> None:
+> > +               command = ['make', 'ARCH=' + self._linux_arch, '--jobs=' + str(jobs)]
+> > +               if make_options:
+> > +                       command.extend(make_options)
+> > +               if self._cross_compile:
+> > +                       command += ['CROSS_COMPILE=' + self._cross_compile]
+> > +               if build_dir:
+> > +                       command += ['O=' + build_dir]
+> > +               print('Building with:\n$', ' '.join(command))
+> > +               try:
+> > +                       proc = subprocess.Popen(command,
+> > +                                               stderr=subprocess.PIPE,
+> > +                                               stdout=subprocess.DEVNULL)
+> > +               except OSError as e:
+> > +                       raise BuildError('Could not call execute make: ' + str(e))
+> > +               except subprocess.CalledProcessError as e:
+> > +                       raise BuildError(e.output)
+> > +               _, stderr = proc.communicate()
+> > +               if proc.returncode != 0:
+> > +                       raise BuildError(stderr.decode())
+> > +               if stderr:  # likely only due to build warnings
+> > +                       print(stderr.decode())
+> > +
+> > +       def run(self, params, timeout, build_dir, outfile) -> None:
+> > +               pass
+> > +
+> > +
+> > +class LinuxSourceTreeOperationsQemu(LinuxSourceTreeOperations):
+> > +
+> > +       def __init__(self, qemu_arch_params: qemu_config.QemuArchParams, cross_compile: Optional[str]):
+> > +               super().__init__(linux_arch=qemu_arch_params.linux_arch,
+> > +                                cross_compile=cross_compile)
+> > +               self._qemuconfig = qemu_arch_params.qemuconfig
+> > +               self._qemu_arch = qemu_arch_params.qemu_arch
+> > +               self._kernel_path = qemu_arch_params.kernel_path
+> > +               self._kernel_command_line = qemu_arch_params.kernel_command_line + ' kunit_shutdown=reboot'
+> > +               self._extra_qemu_params = qemu_arch_params.extra_qemu_params
+> > +
+> > +       def make_arch_qemuconfig(self, base_kunitconfig: kunit_config.Kconfig) -> None:
+> > +               qemuconfig = kunit_config.Kconfig()
+> > +               qemuconfig.parse_from_string(self._qemuconfig)
+> > +               base_kunitconfig.merge_in_entries(qemuconfig)
+> > +
+> > +       def run(self, params, timeout, build_dir, outfile):
+> > +               kernel_path = os.path.join(build_dir, self._kernel_path)
+> > +               qemu_command = ['qemu-system-' + self._qemu_arch,
+> > +                               '-nodefaults',
+> > +                               '-m', '1024',
+> > +                               '-kernel', kernel_path,
+> > +                               '-append', '\'' + ' '.join(params + [self._kernel_command_line]) + '\'',
+> > +                               '-no-reboot',
+> > +                               '-nographic',
+> > +                               '-serial stdio'] + self._extra_qemu_params
+> > +               print('Running tests with:\n$', ' '.join(qemu_command))
+> > +               with open(outfile, 'w') as output:
+> > +                       process = subprocess.Popen(' '.join(qemu_command),
+> > +                                                  stdin=subprocess.PIPE,
+> > +                                                  stdout=output,
+> > +                                                  stderr=subprocess.STDOUT,
+> > +                                                  text=True, shell=True)
+> > +               try:
+> > +                       process.wait(timeout=timeout)
+> > +               except Exception as e:
+> > +                       print(e)
+> > +                       process.terminate()
+> > +               return process
+> > +
+> > +class LinuxSourceTreeOperationsUml(LinuxSourceTreeOperations):
+> > +       """An abstraction over command line operations performed on a source tree."""
+> > +
+> > +       def __init__(self, cross_compile=None):
+> > +               super().__init__(linux_arch='um', cross_compile=cross_compile)
+> > +
+> >         def make_allyesconfig(self, build_dir, make_options) -> None:
+> >                 kunit_parser.print_with_timestamp(
+> >                         'Enabling all CONFIGs for UML...')
+> > @@ -83,32 +177,16 @@ class LinuxSourceTreeOperations(object):
+> >                 kunit_parser.print_with_timestamp(
+> >                         'Starting Kernel with all configs takes a few minutes...')
+> >
+> > -       def make(self, jobs, build_dir, make_options) -> None:
+> > -               command = ['make', 'ARCH=um', '--jobs=' + str(jobs)]
+> > -               if make_options:
+> > -                       command.extend(make_options)
+> > -               if build_dir:
+> > -                       command += ['O=' + build_dir]
+> > -               try:
+> > -                       proc = subprocess.Popen(command,
+> > -                                               stderr=subprocess.PIPE,
+> > -                                               stdout=subprocess.DEVNULL)
+> > -               except OSError as e:
+> > -                       raise BuildError('Could not call make command: ' + str(e))
+> > -               _, stderr = proc.communicate()
+> > -               if proc.returncode != 0:
+> > -                       raise BuildError(stderr.decode())
+> > -               if stderr:  # likely only due to build warnings
+> > -                       print(stderr.decode())
+> > -
+> > -       def linux_bin(self, params, timeout, build_dir) -> None:
+> > +       def run(self, params, timeout, build_dir, outfile):
+> >                 """Runs the Linux UML binary. Must be named 'linux'."""
+> >                 linux_bin = get_file_path(build_dir, 'linux')
+> >                 outfile = get_outfile_path(build_dir)
+> >                 with open(outfile, 'w') as output:
+> >                         process = subprocess.Popen([linux_bin] + params,
+> > +                                                  stdin=subprocess.PIPE,
+> >                                                    stdout=output,
+> > -                                                  stderr=subprocess.STDOUT)
+> > +                                                  stderr=subprocess.STDOUT,
+> > +                                                  text=True)
+> >                         process.wait(timeout)
+> >
+> >  def get_kconfig_path(build_dir) -> str:
+> > @@ -120,13 +198,49 @@ def get_kunitconfig_path(build_dir) -> str:
+> >  def get_outfile_path(build_dir) -> str:
+> >         return get_file_path(build_dir, OUTFILE_PATH)
+> >
+> > +def get_source_tree_ops(arch: str, cross_compile: Optional[str]) -> LinuxSourceTreeOperations:
+> > +       config_path = os.path.join(QEMU_CONFIGS_DIR, arch + '.py')
+> > +       if arch == 'um':
+> > +               return LinuxSourceTreeOperationsUml(cross_compile=cross_compile)
+> > +       elif os.path.isfile(config_path):
+> > +               return get_source_tree_ops_from_qemu_config(config_path, cross_compile)[1]
+> > +       else:
+> > +               raise ConfigError(arch + ' is not a valid arch')
+> > +
+> > +def get_source_tree_ops_from_qemu_config(config_path: str,
+> > +                                        cross_compile: Optional[str]) -> tuple[
+> > +                                                        str, LinuxSourceTreeOperations]:
+> > +       abs_config_path = os.path.abspath(config_path)
+> > +       if os.path.commonpath([ABS_TOOL_PATH, abs_config_path]) != ABS_TOOL_PATH:
+> > +               raise ConfigError('Given QEMU config file is not in a child directory of KUnit tool.')
+>
+> I really don't like this requirement: it feels very arbitrary and
+> undercuts the value of the --qemu_config option a bit: we almost might
+> as well keep everything in the QEMU_CONFIG_DIR.
+>
+> I assume it's here because of the need to import the QemuArchParams
+> definition: I take it there's no convenient way to do that?
 
-Are you sure?  I think you at least need to hold the mmap lock for
-reading to ensure there's no race here?  mlock_vma_page() eludes to such
-a scenario when lazy mlocking.
+I thought it was a requirement, but I was wrong. I was able to fix it.
+In the next revision, no such requirement will exist.
 
-The mmap_lock is held for writing in the scenarios I have checked.
+> At the very least, let's document this restriction properly, as it was
+> a bit of a weird one I wasn't expecting. Then people can either put
+> their custom qemu configs in the qemu_configs/ directory, or in
+> something like a custom_qemu_configs/ one. And if we later can work
+> out a more convenient way of removing this restriction entirely, we
+> can do so.
 
-> +			mlock_vma_page(page);
-> +		}
-> +		page_vma_mapped_walk_done(&pvmw);
-> +
-> +		/* found a mlocked page, no point continuing munlock check */
+No worries, we won't have to have the configs live in any particular
+location in future revisions.
 
-I think you need to check_pte() to be sure it is mapped?
+> > +       relative_config_path = os.path.relpath(abs_config_path, ABS_TOOL_PATH)
+> > +       spec = importlib.util.spec_from_file_location('.' + relative_config_path, config_path)
+> > +       config = importlib.util.module_from_spec(spec)
+> > +       # TODO(brendanhiggins@google.com): I looked this up and apparently other
+> > +       # Python projects have noted that pytype complains that "No attribute
+> > +       # 'exec_module' on _importlib_modulespec._Loader". Disabling for now.
+> > +       spec.loader.exec_module(config) # pytype: disable=attribute-error
+> > +       return config.QEMU_ARCH.linux_arch, LinuxSourceTreeOperationsQemu(
+> > +                       config.QEMU_ARCH, cross_compile=cross_compile)
+> > +
+> >  class LinuxSourceTree(object):
+> >         """Represents a Linux kernel source tree with KUnit tests."""
+> >
+> > -       def __init__(self, build_dir: str, load_config=True, kunitconfig_path='') -> None:
+> > +       def __init__(
+> > +             self,
+> > +             build_dir: str,
+> > +             load_config=True,
+> > +             kunitconfig_path='',
+> > +             arch=None,
+> > +             cross_compile=None,
+> > +             qemu_config_path=None) -> None:
+> >                 signal.signal(signal.SIGINT, self.signal_handler)
+> > -
+> > -               self._ops = LinuxSourceTreeOperations()
+> > +               if qemu_config_path:
+> > +                       self._arch, self._ops = get_source_tree_ops_from_qemu_config(
+> > +                                       qemu_config_path, cross_compile)
+> > +               else:
+> > +                       self._arch = 'um' if arch is None else arch
+> > +                       self._ops = get_source_tree_ops(self._arch, cross_compile)
+> >
+> >                 if not load_config:
+> >                         return
+> > @@ -170,8 +284,9 @@ class LinuxSourceTree(object):
+> >                 kconfig_path = get_kconfig_path(build_dir)
+> >                 if build_dir and not os.path.exists(build_dir):
+> >                         os.mkdir(build_dir)
+> > -               self._kconfig.write_to_file(kconfig_path)
+> >                 try:
+> > +                       self._ops.make_arch_qemuconfig(self._kconfig)
+> > +                       self._kconfig.write_to_file(kconfig_path)
+> >                         self._ops.make_olddefconfig(build_dir, make_options)
+> >                 except ConfigError as e:
+> >                         logging.error(e)
+> > @@ -184,6 +299,7 @@ class LinuxSourceTree(object):
+> >                 if os.path.exists(kconfig_path):
+> >                         existing_kconfig = kunit_config.Kconfig()
+> >                         existing_kconfig.read_from_file(kconfig_path)
+> > +                       self._ops.make_arch_qemuconfig(self._kconfig)
+> >                         if not self._kconfig.is_subset_of(existing_kconfig):
+> >                                 print('Regenerating .config ...')
+> >                                 os.remove(kconfig_path)
+> > @@ -194,7 +310,7 @@ class LinuxSourceTree(object):
+> >                         print('Generating .config ...')
+> >                         return self.build_config(build_dir, make_options)
+> >
+> > -       def build_um_kernel(self, alltests, jobs, build_dir, make_options) -> bool:
+> > +       def build_kernel(self, alltests, jobs, build_dir, make_options) -> bool:
+> >                 try:
+> >                         if alltests:
+> >                                 self._ops.make_allyesconfig(build_dir, make_options)
+> > @@ -211,8 +327,8 @@ class LinuxSourceTree(object):
+> >                 args.extend(['mem=1G', 'console=tty','kunit_shutdown=halt'])
+> >                 if filter_glob:
+> >                         args.append('kunit.filter_glob='+filter_glob)
+> > -               self._ops.linux_bin(args, timeout, build_dir)
+> >                 outfile = get_outfile_path(build_dir)
+> > +               self._ops.run(args, timeout, build_dir, outfile)
+> >                 subprocess.call(['stty', 'sane'])
+> >                 with open(outfile, 'r') as file:
+> >                         for line in file:
+> > diff --git a/tools/testing/kunit/kunit_tool_test.py b/tools/testing/kunit/kunit_tool_test.py
+> > index 2e809dd956a77..a3b7f68e1cf9f 100755
+> > --- a/tools/testing/kunit/kunit_tool_test.py
+> > +++ b/tools/testing/kunit/kunit_tool_test.py
+> > @@ -303,7 +303,7 @@ class KUnitMainTest(unittest.TestCase):
+> >
+> >                 self.linux_source_mock = mock.Mock()
+> >                 self.linux_source_mock.build_reconfig = mock.Mock(return_value=True)
+> > -               self.linux_source_mock.build_um_kernel = mock.Mock(return_value=True)
+> > +               self.linux_source_mock.build_kernel = mock.Mock(return_value=True)
+> >                 self.linux_source_mock.run_kernel = mock.Mock(return_value=all_passed_log)
+> >
+> >         def test_config_passes_args_pass(self):
+> > @@ -314,7 +314,7 @@ class KUnitMainTest(unittest.TestCase):
+> >         def test_build_passes_args_pass(self):
+> >                 kunit.main(['build'], self.linux_source_mock)
+> >                 self.assertEqual(self.linux_source_mock.build_reconfig.call_count, 0)
+> > -               self.linux_source_mock.build_um_kernel.assert_called_once_with(False, 8, '.kunit', None)
+> > +               self.linux_source_mock.build_kernel.assert_called_once_with(False, 8, '.kunit', None)
+> >                 self.assertEqual(self.linux_source_mock.run_kernel.call_count, 0)
+> >
+> >         def test_exec_passes_args_pass(self):
+> > @@ -396,7 +396,7 @@ class KUnitMainTest(unittest.TestCase):
+> >         def test_build_builddir(self):
+> >                 build_dir = '.kunit'
+> >                 kunit.main(['build', '--build_dir', build_dir], self.linux_source_mock)
+> > -               self.linux_source_mock.build_um_kernel.assert_called_once_with(False, 8, build_dir, None)
+> > +               self.linux_source_mock.build_kernel.assert_called_once_with(False, 8, build_dir, None)
+> >
+> >         def test_exec_builddir(self):
+> >                 build_dir = '.kunit'
+> > @@ -410,14 +410,22 @@ class KUnitMainTest(unittest.TestCase):
+> >                 mock_linux_init.return_value = self.linux_source_mock
+> >                 kunit.main(['run', '--kunitconfig=mykunitconfig'])
+> >                 # Just verify that we parsed and initialized it correctly here.
+> > -               mock_linux_init.assert_called_once_with('.kunit', kunitconfig_path='mykunitconfig')
+> > +               mock_linux_init.assert_called_once_with('.kunit',
+> > +                                                       kunitconfig_path='mykunitconfig',
+> > +                                                       arch='um',
+> > +                                                       cross_compile=None,
+> > +                                                       qemu_config_path=None)
+> >
+> >         @mock.patch.object(kunit_kernel, 'LinuxSourceTree')
+> >         def test_config_kunitconfig(self, mock_linux_init):
+> >                 mock_linux_init.return_value = self.linux_source_mock
+> >                 kunit.main(['config', '--kunitconfig=mykunitconfig'])
+> >                 # Just verify that we parsed and initialized it correctly here.
+> > -               mock_linux_init.assert_called_once_with('.kunit', kunitconfig_path='mykunitconfig')
+> > +               mock_linux_init.assert_called_once_with('.kunit',
+> > +                                                       kunitconfig_path='mykunitconfig',
+> > +                                                       arch='um',
+> > +                                                       cross_compile=None,
+> > +                                                       qemu_config_path=None)
+> >
+> >  if __name__ == '__main__':
+> >         unittest.main()
+> > diff --git a/tools/testing/kunit/qemu_config.py b/tools/testing/kunit/qemu_config.py
+> > new file mode 100644
+> > index 0000000000000..aff1fe0442dbc
+> > --- /dev/null
+> > +++ b/tools/testing/kunit/qemu_config.py
+> > @@ -0,0 +1,17 @@
+> > +# SPDX-License-Identifier: GPL-2.0
+> > +#
+> > +# Collection of configs for building non-UML kernels and running them on QEMU.
+> > +#
+> > +# Copyright (C) 2021, Google LLC.
+> > +# Author: Brendan Higgins <brendanhiggins@google.com>
+> > +
+> > +from collections import namedtuple
+> > +
+> > +
+> > +QemuArchParams = namedtuple('QemuArchParams', ['linux_arch',
+> > +                                              'qemuconfig',
+> > +                                              'qemu_arch',
+> > +                                              'kernel_path',
+> > +                                              'kernel_command_line',
+> > +                                              'extra_qemu_params'])
+> > +
+>
+> Nit: newline at end of file.
 
-> +		return false;
-> +	}
-> +
-> +	return true;
+Thanks, will fix.
 
-Again, I don't get the return values.  If page_mlock_one() returns true,
-I'd expect for my page to now be locked.  This isn't the case here,
-page_mlock_one() returns true if there are no pages present for a locked
-VMA, correct?
-
-> +}
-> +
->  /**
-> - * try_to_munlock - try to munlock a page
-> + * page_mlock - try to munlock a page
-
-Is this an mlock or an munlock?  I'm not confident it's either, but more
-of a check to see if there are pages mapped in a locked VMA?
-
->   * @page: the page to be munlocked
->   *
->   * Called from munlock code.  Checks all of the VMAs mapping the page
-> @@ -1793,11 +1818,10 @@ bool try_to_unmap(struct page *page, enum ttu_fla=
-gs flags)
->   * returned with PG_mlocked cleared if no other vmas have it mlocked.
->   */
-> =20
-> -void try_to_munlock(struct page *page)
-> +void page_mlock(struct page *page)
->  {
->  	struct rmap_walk_control rwc =3D {
-> -		.rmap_one =3D try_to_unmap_one,
-> -		.arg =3D (void *)TTU_MUNLOCK,
-> +		.rmap_one =3D page_mlock_one,
->  		.done =3D page_not_mapped,
->  		.anon_lock =3D page_lock_anon_vma_read,
-> =20
-> @@ -1849,7 +1873,7 @@ static struct anon_vma *rmap_walk_anon_lock(struct =
-page *page,
->   * Find all the mappings of a page using the mapping pointer and the vma=
- chains
->   * contained in the anon_vma struct it points to.
->   *
-> - * When called from try_to_munlock(), the mmap_lock of the mm containing=
- the vma
-> + * When called from page_mlock(), the mmap_lock of the mm containing the=
- vma
->   * where the page was found will be held for write.  So, we won't rechec=
-k
->   * vm_flags for that VMA.  That should be OK, because that vma shouldn't=
- be
->   * LOCKED.
-> @@ -1901,7 +1925,7 @@ static void rmap_walk_anon(struct page *page, struc=
-t rmap_walk_control *rwc,
->   * Find all the mappings of a page using the mapping pointer and the vma=
- chains
->   * contained in the address_space struct it points to.
->   *
-> - * When called from try_to_munlock(), the mmap_lock of the mm containing=
- the vma
-> + * When called from page_mlock(), the mmap_lock of the mm containing the=
- vma
->   * where the page was found will be held for write.  So, we won't rechec=
-k
-
-Above it is stated that the lock does not need to be held, but this
-comment says it is already held for writing - which is it?
-
->   * vm_flags for that VMA.  That should be OK, because that vma shouldn't=
- be
->   * LOCKED.
-> --=20
-> 2.20.1
->=20
-
-munlock_vma_pages_range() comments references try_to_{munlock|unmap}
+> > diff --git a/tools/testing/kunit/qemu_configs/alpha.py b/tools/testing/kunit/qemu_configs/alpha.py
+> > new file mode 100644
+> > index 0000000000000..2cc64f848ca2c
+> > --- /dev/null
+> > +++ b/tools/testing/kunit/qemu_configs/alpha.py
+> > @@ -0,0 +1,10 @@
+> > +from ..qemu_config import QemuArchParams
+> > +
+> > +QEMU_ARCH = QemuArchParams(linux_arch='alpha',
+> > +                          qemuconfig='''
+> > +CONFIG_SERIAL_8250=y
+> > +CONFIG_SERIAL_8250_CONSOLE=y''',
+> > +                          qemu_arch='alpha',
+> > +                          kernel_path='arch/alpha/boot/vmlinux',
+> > +                          kernel_command_line='console=ttyS0',
+> > +                          extra_qemu_params=[''])
+> > diff --git a/tools/testing/kunit/qemu_configs/arm.py b/tools/testing/kunit/qemu_configs/arm.py
+> > new file mode 100644
+> > index 0000000000000..29a043b0531a0
+> > --- /dev/null
+> > +++ b/tools/testing/kunit/qemu_configs/arm.py
+> > @@ -0,0 +1,13 @@
+> > +from ..qemu_config import QemuArchParams
+> > +
+> > +QEMU_ARCH = QemuArchParams(linux_arch='arm',
+> > +                          qemuconfig='''
+> > +CONFIG_ARCH_VIRT=y
+> > +CONFIG_SERIAL_AMBA_PL010=y
+> > +CONFIG_SERIAL_AMBA_PL010_CONSOLE=y
+> > +CONFIG_SERIAL_AMBA_PL011=y
+> > +CONFIG_SERIAL_AMBA_PL011_CONSOLE=y''',
+> > +                          qemu_arch='arm',
+> > +                          kernel_path='arch/arm/boot/zImage',
+> > +                          kernel_command_line='console=ttyAMA0',
+> > +                          extra_qemu_params=['-machine virt'])
+> > diff --git a/tools/testing/kunit/qemu_configs/arm64.py b/tools/testing/kunit/qemu_configs/arm64.py
+> > new file mode 100644
+> > index 0000000000000..1ba200bc99f0f
+> > --- /dev/null
+> > +++ b/tools/testing/kunit/qemu_configs/arm64.py
+> > @@ -0,0 +1,12 @@
+> > +from ..qemu_config import QemuArchParams
+> > +
+> > +QEMU_ARCH = QemuArchParams(linux_arch='arm64',
+> > +                          qemuconfig='''
+> > +CONFIG_SERIAL_AMBA_PL010=y
+> > +CONFIG_SERIAL_AMBA_PL010_CONSOLE=y
+> > +CONFIG_SERIAL_AMBA_PL011=y
+> > +CONFIG_SERIAL_AMBA_PL011_CONSOLE=y''',
+> > +                          qemu_arch='aarch64',
+> > +                          kernel_path='arch/arm64/boot/Image.gz',
+> > +                          kernel_command_line='console=ttyAMA0',
+> > +                          extra_qemu_params=['-machine virt', '-cpu cortex-a57'])
+> > diff --git a/tools/testing/kunit/qemu_configs/i386.py b/tools/testing/kunit/qemu_configs/i386.py
+> > new file mode 100644
+> > index 0000000000000..3998af306468e
+> > --- /dev/null
+> > +++ b/tools/testing/kunit/qemu_configs/i386.py
+> > @@ -0,0 +1,10 @@
+> > +from ..qemu_config import QemuArchParams
+> > +
+> > +QEMU_ARCH = QemuArchParams(linux_arch='i386',
+> > +                          qemuconfig='''
+> > +CONFIG_SERIAL_8250=y
+> > +CONFIG_SERIAL_8250_CONSOLE=y''',
+> > +                          qemu_arch='x86_64',
+> > +                          kernel_path='arch/x86/boot/bzImage',
+> > +                          kernel_command_line='console=ttyS0',
+> > +                          extra_qemu_params=[''])
+> > diff --git a/tools/testing/kunit/qemu_configs/powerpc.py b/tools/testing/kunit/qemu_configs/powerpc.py
+> > new file mode 100644
+> > index 0000000000000..46292ce9e368e
+> > --- /dev/null
+> > +++ b/tools/testing/kunit/qemu_configs/powerpc.py
+> > @@ -0,0 +1,12 @@
+> > +from ..qemu_config import QemuArchParams
+> > +
+> > +QEMU_ARCH = QemuArchParams(linux_arch='powerpc',
+> > +                          qemuconfig='''
+> > +CONFIG_PPC64=y
+> > +CONFIG_SERIAL_8250=y
+> > +CONFIG_SERIAL_8250_CONSOLE=y
+> > +CONFIG_HVC_CONSOLE=y''',
+> > +                          qemu_arch='ppc64',
+> > +                          kernel_path='vmlinux',
+> > +                          kernel_command_line='console=ttyS0',
+> > +                          extra_qemu_params=['-M pseries', '-cpu power8'])
+> > diff --git a/tools/testing/kunit/qemu_configs/riscv.py b/tools/testing/kunit/qemu_configs/riscv.py
+> > new file mode 100644
+> > index 0000000000000..de8c62d465723
+> > --- /dev/null
+> > +++ b/tools/testing/kunit/qemu_configs/riscv.py
+> > @@ -0,0 +1,31 @@
+> > +from ..qemu_config import QemuArchParams
+> > +import os
+> > +import os.path
+> > +import sys
+> > +
+> > +GITHUB_OPENSBI_URL = 'https://github.com/qemu/qemu/raw/master/pc-bios/opensbi-riscv64-generic-fw_dynamic.bin'
+> > +OPENSBI_FILE = os.path.basename(GITHUB_OPENSBI_URL)
+> > +
+> > +if not os.path.isfile(OPENSBI_FILE):
+> > +       print('\n\nOpenSBI file is not in the current working directory.\n'
+> > +             'Would you like me to download it for you from:\n' + GITHUB_OPENSBI_URL + ' ?\n')
+> > +       response = input('yes/[no]: ')
+> > +       if response.strip() == 'yes':
+> > +               os.system('wget ' + GITHUB_OPENSBI_URL)
+> > +       else:
+> > +               sys.exit()
+> > +
+> > +QEMU_ARCH = QemuArchParams(linux_arch='riscv',
+> > +                          qemuconfig='''
+> > +CONFIG_SOC_VIRT=y
+> > +CONFIG_SERIAL_8250=y
+> > +CONFIG_SERIAL_8250_CONSOLE=y
+> > +CONFIG_SERIAL_OF_PLATFORM=y
+> > +CONFIG_SERIAL_EARLYCON_RISCV_SBI=y''',
+> > +                          qemu_arch='riscv64',
+> > +                          kernel_path='arch/riscv/boot/Image',
+> > +                          kernel_command_line='console=ttyS0',
+> > +                          extra_qemu_params=[
+> > +                                          '-machine virt',
+> > +                                          '-cpu rv64',
+> > +                                          '-bios opensbi-riscv64-generic-fw_dynamic.bin'])
+> > diff --git a/tools/testing/kunit/qemu_configs/s390.py b/tools/testing/kunit/qemu_configs/s390.py
+> > new file mode 100644
+> > index 0000000000000..04c90332f1098
+> > --- /dev/null
+> > +++ b/tools/testing/kunit/qemu_configs/s390.py
+> > @@ -0,0 +1,14 @@
+> > +from ..qemu_config import QemuArchParams
+> > +
+> > +QEMU_ARCH = QemuArchParams(linux_arch='s390',
+> > +                          qemuconfig='''
+> > +CONFIG_EXPERT=y
+> > +CONFIG_TUNE_ZEC12=y
+> > +CONFIG_NUMA=y
+> > +CONFIG_MODULES=y''',
+> > +                          qemu_arch='s390x',
+> > +                          kernel_path='arch/s390/boot/bzImage',
+> > +                          kernel_command_line='console=ttyS0',
+> > +                          extra_qemu_params=[
+> > +                                          '-machine s390-ccw-virtio',
+> > +                                          '-cpu qemu',])
+> > diff --git a/tools/testing/kunit/qemu_configs/sparc.py b/tools/testing/kunit/qemu_configs/sparc.py
+> > new file mode 100644
+> > index 0000000000000..f26b5f27cc5a1
+> > --- /dev/null
+> > +++ b/tools/testing/kunit/qemu_configs/sparc.py
+> > @@ -0,0 +1,10 @@
+> > +from ..qemu_config import QemuArchParams
+> > +
+> > +QEMU_ARCH = QemuArchParams(linux_arch='sparc',
+> > +                          qemuconfig='''
+> > +CONFIG_SERIAL_8250=y
+> > +CONFIG_SERIAL_8250_CONSOLE=y''',
+> > +                          qemu_arch='sparc',
+> > +                          kernel_path='arch/sparc/boot/zImage',
+> > +                          kernel_command_line='console=ttyS0 mem=256M',
+> > +                          extra_qemu_params=['-m 256'])
+> > diff --git a/tools/testing/kunit/qemu_configs/x86_64.py b/tools/testing/kunit/qemu_configs/x86_64.py
+> > new file mode 100644
+> > index 0000000000000..bd5ab733b92ac
+> > --- /dev/null
+> > +++ b/tools/testing/kunit/qemu_configs/x86_64.py
+> > @@ -0,0 +1,10 @@
+> > +from ..qemu_config import QemuArchParams
+> > +
+> > +QEMU_ARCH = QemuArchParams(linux_arch='x86_64',
+> > +                          qemuconfig='''
+> > +CONFIG_SERIAL_8250=y
+> > +CONFIG_SERIAL_8250_CONSOLE=y''',
+> > +                          qemu_arch='x86_64',
+> > +                          kernel_path='arch/x86/boot/bzImage',
+> > +                          kernel_command_line='console=ttyS0',
+> > +                          extra_qemu_params=[''])
+> > --
+> > 2.31.1.607.g51e8a6a459-goog
+> >
