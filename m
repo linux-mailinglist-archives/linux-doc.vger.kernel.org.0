@@ -2,155 +2,121 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 887DA38717F
-	for <lists+linux-doc@lfdr.de>; Tue, 18 May 2021 07:56:20 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id EB2B6387551
+	for <lists+linux-doc@lfdr.de>; Tue, 18 May 2021 11:40:14 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S240978AbhERF5g (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 18 May 2021 01:57:36 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:50812 "EHLO
-        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S240152AbhERF5e (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 18 May 2021 01:57:34 -0400
-Received: from mail.skyhub.de (mail.skyhub.de [IPv6:2a01:4f8:190:11c2::b:1457])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 44873C061573;
-        Mon, 17 May 2021 22:56:17 -0700 (PDT)
-Received: from zn.tnic (p200300ec2f0ae2005a49629880ac02d2.dip0.t-ipconnect.de [IPv6:2003:ec:2f0a:e200:5a49:6298:80ac:2d2])
-        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
-        (No client certificate requested)
-        by mail.skyhub.de (SuperMail on ZX Spectrum 128k) with ESMTPSA id A18381EC04BF;
-        Tue, 18 May 2021 07:56:14 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=alien8.de; s=dkim;
-        t=1621317374;
-        h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-         to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-         content-transfer-encoding:in-reply-to:in-reply-to:  references:references;
-        bh=CoUZNshFKwxzJxvmNesTEWJlLKO0exgHkOr0ngGYwGI=;
-        b=W6eJZYjN6OnGJsyDztzN/sdVdUAbQx1dIeHKqupFUaPUwJGH0Cv+k6IWqpHcsdMOFLs4Om
-        2yzHcQIIT7BswXG35L+1FYQ2Q3QHSgvXmQrXO2fond/n0k1FEGWEXFfiA7QWi3O/ZYUVj+
-        fZFj44LzauzVdhV4ExYc6fy4mBxiFRs=
-Date:   Tue, 18 May 2021 07:56:09 +0200
-From:   Borislav Petkov <bp@alien8.de>
-To:     "Yu, Yu-cheng" <yu-cheng.yu@intel.com>
-Cc:     x86@kernel.org, "H. Peter Anvin" <hpa@zytor.com>,
-        Thomas Gleixner <tglx@linutronix.de>,
-        Ingo Molnar <mingo@redhat.com>, linux-kernel@vger.kernel.org,
-        linux-doc@vger.kernel.org, linux-mm@kvack.org,
-        linux-arch@vger.kernel.org, linux-api@vger.kernel.org,
-        Arnd Bergmann <arnd@arndb.de>,
-        Andy Lutomirski <luto@kernel.org>,
-        Balbir Singh <bsingharora@gmail.com>,
-        Cyrill Gorcunov <gorcunov@gmail.com>,
-        Dave Hansen <dave.hansen@linux.intel.com>,
-        Eugene Syromiatnikov <esyr@redhat.com>,
-        Florian Weimer <fweimer@redhat.com>,
-        "H.J. Lu" <hjl.tools@gmail.com>, Jann Horn <jannh@google.com>,
+        id S240515AbhERJlb (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 18 May 2021 05:41:31 -0400
+Received: from mailgw02.mediatek.com ([210.61.82.184]:51855 "EHLO
+        mailgw02.mediatek.com" rhost-flags-OK-FAIL-OK-FAIL) by vger.kernel.org
+        with ESMTP id S241065AbhERJlb (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 18 May 2021 05:41:31 -0400
+X-UUID: c8d085b27e6f43a3b8daca99f7e1c1a8-20210518
+X-UUID: c8d085b27e6f43a3b8daca99f7e1c1a8-20210518
+Received: from mtkcas11.mediatek.inc [(172.21.101.40)] by mailgw02.mediatek.com
+        (envelope-from <miles.chen@mediatek.com>)
+        (Generic MTA with TLSv1.2 ECDHE-RSA-AES256-SHA384 256/256)
+        with ESMTP id 1650008695; Tue, 18 May 2021 17:40:10 +0800
+Received: from mtkcas10.mediatek.inc (172.21.101.39) by
+ mtkmbs08n2.mediatek.inc (172.21.101.56) with Microsoft SMTP Server (TLS) id
+ 15.0.1497.2; Tue, 18 May 2021 17:40:08 +0800
+Received: from mtksdccf07.mediatek.inc (172.21.84.99) by mtkcas10.mediatek.inc
+ (172.21.101.73) with Microsoft SMTP Server id 15.0.1497.2 via Frontend
+ Transport; Tue, 18 May 2021 17:40:08 +0800
+From:   Miles Chen <miles.chen@mediatek.com>
+To:     Dave Young <dyoung@redhat.com>, Baoquan He <bhe@redhat.com>,
+        Vivek Goyal <vgoyal@redhat.com>,
         Jonathan Corbet <corbet@lwn.net>,
-        Kees Cook <keescook@chromium.org>,
-        Mike Kravetz <mike.kravetz@oracle.com>,
-        Nadav Amit <nadav.amit@gmail.com>,
-        Oleg Nesterov <oleg@redhat.com>, Pavel Machek <pavel@ucw.cz>,
-        Peter Zijlstra <peterz@infradead.org>,
-        Randy Dunlap <rdunlap@infradead.org>,
-        "Ravi V. Shankar" <ravi.v.shankar@intel.com>,
-        Vedvyas Shanbhogue <vedvyas.shanbhogue@intel.com>,
-        Dave Martin <Dave.Martin@arm.com>,
-        Weijiang Yang <weijiang.yang@intel.com>,
-        Pengfei Xu <pengfei.xu@intel.com>,
-        Haitao Huang <haitao.huang@intel.com>
-Subject: Re: [PATCH v26 24/30] x86/cet/shstk: Introduce shadow stack token
- setup/verify routines
-Message-ID: <YKNW+eiosSVDCTsA@zn.tnic>
-References: <20210427204315.24153-1-yu-cheng.yu@intel.com>
- <20210427204315.24153-25-yu-cheng.yu@intel.com>
- <YKIfIEyW+sR+bDCk@zn.tnic>
- <e225e357-a1d5-9596-8900-79e6b94cf924@intel.com>
+        Michael Ellerman <mpe@ellerman.id.au>,
+        Benjamin Herrenschmidt <benh@kernel.crashing.org>,
+        Paul Mackerras <paulus@samba.org>,
+        Andrew Morton <akpm@linux-foundation.org>,
+        Mike Rapoport <rppt@kernel.org>
+CC:     <kexec@lists.infradead.org>, <linux-doc@vger.kernel.org>,
+        <linuxppc-dev@lists.ozlabs.org>, <linux-mm@kvack.org>,
+        <linux-arm-kernel@lists.infradead.org>,
+        <linux-mediatek@lists.infradead.org>,
+        Miles Chen <miles.chen@mediatek.com>
+Subject: [PATCH v2 0/2] mm: unify the allocation of pglist_data instances
+Date:   Tue, 18 May 2021 17:24:44 +0800
+Message-ID: <20210518092446.16382-1-miles.chen@mediatek.com>
+X-Mailer: git-send-email 2.18.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-In-Reply-To: <e225e357-a1d5-9596-8900-79e6b94cf924@intel.com>
+Content-Type: text/plain
+X-MTK:  N
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Mon, May 17, 2021 at 01:55:01PM -0700, Yu, Yu-cheng wrote:
-> If 32-bit apps are not supported, there should be no need of 32-bit shadow
-> stack write, otherwise there is a bug.
+This patches is created to fix the __pa() warning messages when
+CONFIG_DEBUG_VIRTUAL=y by unifying the allocation of pglist_data
+instances.
 
-Aha, just a precaution. Then you can reduce the ifdeffery a bit (ontop
-of yours):
+In current implementation of node_data, if CONFIG_NEED_MULTIPLE_NODES=y,
+pglist_data is allocated by a memblock API. If CONFIG_NEED_MULTIPLE_NODES=n,
+we use a global variable named "contig_page_data".
 
----
-diff --git a/arch/x86/include/asm/special_insns.h b/arch/x86/include/asm/special_insns.h
-index f962da1fe9b5..5b48c91fa8d4 100644
---- a/arch/x86/include/asm/special_insns.h
-+++ b/arch/x86/include/asm/special_insns.h
-@@ -235,9 +235,14 @@ static inline void clwb(volatile void *__p)
- }
- 
- #ifdef CONFIG_X86_SHADOW_STACK
--#if defined(CONFIG_IA32_EMULATION) || defined(CONFIG_X86_X32)
- static inline int write_user_shstk_32(u32 __user *addr, u32 val)
- {
-+	if (WARN_ONCE(!IS_ENABLED(CONFIG_IA32_EMULATION) &&
-+		      !IS_ENABLED(CONFIG_X86_X32),
-+		      "%s used but not supported.\n", __func__)) {
-+		return -EFAULT;
-+	}
-+
- 	asm_volatile_goto("1: wrussd %[val], (%[addr])\n"
- 			  _ASM_EXTABLE(1b, %l[fail])
- 			  :: [addr] "r" (addr), [val] "r" (val)
-@@ -246,13 +251,6 @@ static inline int write_user_shstk_32(u32 __user *addr, u32 val)
- fail:
- 	return -EFAULT;
- }
--#else
--static inline int write_user_shstk_32(u32 __user *addr, u32 val)
--{
--	WARN_ONCE(1, "%s used but not supported.\n", __func__);
--	return -EFAULT;
--}
--#endif
- 
- static inline int write_user_shstk_64(u64 __user *addr, u64 val)
- {
+If CONFIG_DEBUG_VIRTUAL is not enabled. __pa() can handle both
+allocation and symbol cases. But if CONFIG_DEBUG_VIRTUAL is set,
+we will have the "virt_to_phys used for non-linear address" warning
+when booting.
 
-> These are static functions.  I thought that would make the static scope
-> clear.  I can remove "_".
+To fix the warning, always allocate pglist_data by memblock APIs and
+remove the usage of contig_page_data.
 
-No, "_" or "__" prefixed functions are generally supposed to denote
-internal interfaces which should not be used by other kernel facilities.
-In that case you have the external api <function_name> and the lower
-level helpers _<function_name>, __<function_name>, etc. They can be
-static but not necessarily.
+Warning message:
+[    0.000000] ------------[ cut here ]------------
+[    0.000000] virt_to_phys used for non-linear address: (____ptrval____) (contig_page_data+0x0/0x1c00)
+[    0.000000] WARNING: CPU: 0 PID: 0 at arch/arm64/mm/physaddr.c:15 __virt_to_phys+0x58/0x68
+[    0.000000] Modules linked in:
+[    0.000000] CPU: 0 PID: 0 Comm: swapper Tainted: G        W         5.13.0-rc1-00074-g1140ab592e2e #3
+[    0.000000] Hardware name: linux,dummy-virt (DT)
+[    0.000000] pstate: 600000c5 (nZCv daIF -PAN -UAO -TCO BTYPE=--)
+[    0.000000] pc : __virt_to_phys+0x58/0x68
+[    0.000000] lr : __virt_to_phys+0x54/0x68
+[    0.000000] sp : ffff800011833e70
+[    0.000000] x29: ffff800011833e70 x28: 00000000418a0018 x27: 0000000000000000
+[    0.000000] x26: 000000000000000a x25: ffff800011b70000 x24: ffff800011b70000
+[    0.000000] x23: fffffc0001c00000 x22: ffff800011b70000 x21: 0000000047ffffb0
+[    0.000000] x20: 0000000000000008 x19: ffff800011b082c0 x18: ffffffffffffffff
+[    0.000000] x17: 0000000000000000 x16: ffff800011833bf9 x15: 0000000000000004
+[    0.000000] x14: 0000000000000fff x13: ffff80001186a548 x12: 0000000000000000
+[    0.000000] x11: 0000000000000000 x10: 00000000ffffffff x9 : 0000000000000000
+[    0.000000] x8 : ffff8000115c9000 x7 : 737520737968705f x6 : ffff800011b62ef8
+[    0.000000] x5 : 0000000000000000 x4 : 0000000000000001 x3 : 0000000000000000
+[    0.000000] x2 : 0000000000000000 x1 : ffff80001159585e x0 : 0000000000000058
+[    0.000000] Call trace:
+[    0.000000]  __virt_to_phys+0x58/0x68
+[    0.000000]  check_usemap_section_nr+0x50/0xfc
+[    0.000000]  sparse_init_nid+0x1ac/0x28c
+[    0.000000]  sparse_init+0x1c4/0x1e0
+[    0.000000]  bootmem_init+0x60/0x90
+[    0.000000]  setup_arch+0x184/0x1f0
+[    0.000000]  start_kernel+0x78/0x488
+[    0.000000] ---[ end trace f68728a0d3053b60 ]---
 
-This is not the case here so you can simply drop the "_" prefixes.
+[1] https://lore.kernel.org/patchwork/patch/1425110/
 
-> If the busy bit is set, it is only for SAVEPREVSSP, and invalid as a
-> normal restore token.
+Change since v1:
+- use memblock_alloc() to create pglist_data when CONFIG_NUMA=n
 
-Sure but the busy bit is independent from the mode.
+Miles Chen (2):
+  mm: introduce prepare_node_data
+  mm: replace contig_page_data with node_data
 
-> With the lower two bits masked out, the restore token must point
-> directly above itself.
+ Documentation/admin-guide/kdump/vmcoreinfo.rst | 13 -------------
+ arch/powerpc/kexec/core.c                      |  5 -----
+ include/linux/gfp.h                            |  3 ---
+ include/linux/mm.h                             |  2 ++
+ include/linux/mmzone.h                         |  4 ++--
+ kernel/crash_core.c                            |  1 -
+ mm/memblock.c                                  |  3 +--
+ mm/page_alloc.c                                | 16 ++++++++++++++++
+ mm/sparse.c                                    |  2 ++
+ 9 files changed, 23 insertions(+), 26 deletions(-)
 
-That I know - I'm just questioning the design. It should be
 
-	addr = ALIGN_DOWN(ssp, 8);
-
-Plain and simple.
-
-Not this silly pushing and popping of stuff. But it is too late now
-anyway and it's not like hw people talk to software people who get to
-implement their shit.
-
-> Ok, then, we don't use #define's. I will put in comments about what it
-> is doing, and fix the rest.
-
-Thx.
-
+base-commit: 8ac91e6c6033ebc12c5c1e4aa171b81a662bd70f
 -- 
-Regards/Gruss,
-    Boris.
+2.18.0
 
-https://people.kernel.org/tglx/notes-about-netiquette
