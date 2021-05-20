@@ -2,108 +2,125 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 9166B389F4B
-	for <lists+linux-doc@lfdr.de>; Thu, 20 May 2021 09:57:46 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 6974538A05E
+	for <lists+linux-doc@lfdr.de>; Thu, 20 May 2021 10:57:38 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S231330AbhETH6t (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 20 May 2021 03:58:49 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:52132 "EHLO
-        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S231262AbhETH6g (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Thu, 20 May 2021 03:58:36 -0400
-Received: from mail-qk1-x72a.google.com (mail-qk1-x72a.google.com [IPv6:2607:f8b0:4864:20::72a])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id D2B86C06138B;
-        Thu, 20 May 2021 00:57:12 -0700 (PDT)
-Received: by mail-qk1-x72a.google.com with SMTP id q10so15300074qkc.5;
-        Thu, 20 May 2021 00:57:12 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=from:to:cc:subject:date:message-id:in-reply-to:references;
-        bh=HqCRLHZPebCKJ+eV3cYONSq5nOItE3CxF9a/qB8bJmo=;
-        b=BNOTZEtgEfVspx4CmWaJkVA8C3cPBUcLtMblROTklmk9OIM6gXbh3agajl4uEj8lmq
-         1mHJo/yKf28lBO1/JpXY5/rwtL6e1q2B/BXrNKqDH5J6nrxMYSsqD3G+Yy1h/suxmHxu
-         IWFYFe181dgjGtr/2OqskvVieaeZA7rn7OYlvjt0WVvaJwIG/MROCc5A7zODMKPuaHJF
-         LUegtCUaha9wvL+syh0iIwGN5U6GgkiIybX4qPMkP/jPzoUK3GbTiQe9yYpK3xnB21X2
-         uh8AwATFlILVWdiqqBYv5nUf0UNjsGDIOEKFUc+QLUgTIqziiYCJ0t7RycIC1R1+Wud7
-         mbLg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-         :references;
-        bh=HqCRLHZPebCKJ+eV3cYONSq5nOItE3CxF9a/qB8bJmo=;
-        b=lPgw0pr//coui1qwPCygSJD9gCvmT1QUoF5qPH6zASISGMw31carptvoIiVlvg7vVI
-         7AQU7bnfxY2Kjdfk/C8YkZgt1HsZ+y5MPBeANQATcuShMwJlYcyB8d5+ApEgHdoKKiNY
-         Q1IjriV6koSouEnDHG6SQawyNNCwHoKttwY1TVajc3hUMvxyygslkDrPLYUnHH3XjUf1
-         ph8qDhRAev5skFLW0nB+fzHyIyXakF7sZ/M6Kx0UJuvNokKuLMffqRv7IhmOiMKFK5mL
-         VNtnyII5bKf+rYfz0B4iKLLaTrpN9WEHqNwohN0b2149p8htgZcIMGBQQN4MPjs/QeKM
-         ZarQ==
-X-Gm-Message-State: AOAM5336+kWyLCtQiyqzGuuIFzXk9oBi7JsOYlWpMxWBBSQxzJNxvZNe
-        gxyyvSl4joWteBs22bVHDBc=
-X-Google-Smtp-Source: ABdhPJx2AvHchFYCHw1n1NpGRJOt4GXKkZfVBF9Awri0GCZ8bPFW1HozNPlRP9GHH2hs+sQ1XoC6SA==
-X-Received: by 2002:a05:620a:12a4:: with SMTP id x4mr3448782qki.487.1621497432051;
-        Thu, 20 May 2021 00:57:12 -0700 (PDT)
-Received: from localhost.localdomain (ec2-35-169-212-159.compute-1.amazonaws.com. [35.169.212.159])
-        by smtp.gmail.com with ESMTPSA id g9sm1478254qka.38.2021.05.20.00.57.11
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 20 May 2021 00:57:11 -0700 (PDT)
-From:   SeongJae Park <sj38.park@gmail.com>
-To:     akpm@linux-foundation.org
-Cc:     SeongJae Park <sjpark@amazon.de>, Jonathan.Cameron@Huawei.com,
-        acme@kernel.org, alexander.shishkin@linux.intel.com,
-        amit@kernel.org, benh@kernel.crashing.org,
-        brendanhiggins@google.com, corbet@lwn.net, david@redhat.com,
-        dwmw@amazon.com, elver@google.com, fan.du@intel.com,
-        foersleo@amazon.de, greg@kroah.com, gthelen@google.com,
-        guoju.fgj@alibaba-inc.com, mgorman@suse.de, minchan@kernel.org,
-        mingo@redhat.com, namhyung@kernel.org, peterz@infradead.org,
-        riel@surriel.com, rientjes@google.com, rostedt@goodmis.org,
-        rppt@kernel.org, shakeelb@google.com, shuah@kernel.org,
-        sj38.park@gmail.com, snu@amazon.de, vbabka@suse.cz,
-        vdavydov.dev@gmail.com, zgf574564920@gmail.com,
-        linux-damon@amazon.com, linux-mm@kvack.org,
-        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org
-Subject: [PATCH v29 13/13] MAINTAINERS: Update for DAMON
-Date:   Thu, 20 May 2021 07:56:29 +0000
-Message-Id: <20210520075629.4332-14-sj38.park@gmail.com>
-X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20210520075629.4332-1-sj38.park@gmail.com>
-References: <20210520075629.4332-1-sj38.park@gmail.com>
+        id S231482AbhETI6x (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 20 May 2021 04:58:53 -0400
+Received: from frasgout.his.huawei.com ([185.176.79.56]:3087 "EHLO
+        frasgout.his.huawei.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S231415AbhETI6s (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Thu, 20 May 2021 04:58:48 -0400
+Received: from fraeml714-chm.china.huawei.com (unknown [172.18.147.201])
+        by frasgout.his.huawei.com (SkyGuard) with ESMTP id 4Fm3LP4CsTz6wjc7;
+        Thu, 20 May 2021 16:48:45 +0800 (CST)
+Received: from roberto-ThinkStation-P620.huawei.com (10.204.62.217) by
+ fraeml714-chm.china.huawei.com (10.206.15.33) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2176.2; Thu, 20 May 2021 10:57:20 +0200
+From:   Roberto Sassu <roberto.sassu@huawei.com>
+To:     <zohar@linux.ibm.com>, <mjg59@srcf.ucam.org>
+CC:     <linux-integrity@vger.kernel.org>,
+        <linux-security-module@vger.kernel.org>,
+        <linux-doc@vger.kernel.org>, <linux-kernel@vger.kernel.org>,
+        Roberto Sassu <roberto.sassu@huawei.com>
+Subject: [PATCH 0/7] ima: Add template fields to verify EVM portable signatures
+Date:   Thu, 20 May 2021 10:56:54 +0200
+Message-ID: <20210520085701.465369-1-roberto.sassu@huawei.com>
+X-Mailer: git-send-email 2.25.1
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7BIT
+Content-Type:   text/plain; charset=US-ASCII
+X-Originating-IP: [10.204.62.217]
+X-ClientProxiedBy: lhreml752-chm.china.huawei.com (10.201.108.202) To
+ fraeml714-chm.china.huawei.com (10.206.15.33)
+X-CFilter-Loop: Reflected
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-From: SeongJae Park <sjpark@amazon.de>
+The recent patch set 'evm: Improve usability of portable signatures' added
+the possibility to include EVM portable signatures in the IMA measurement
+list.
 
-This commit updates MAINTAINERS file for DAMON related files.
+However, the information necessary to verify the signature were not
+included in the IMA measurement list. This patch set introduces new
+template fields to accomplish this goal:
 
-Signed-off-by: SeongJae Park <sjpark@amazon.de>
----
- MAINTAINERS | 12 ++++++++++++
- 1 file changed, 12 insertions(+)
+- 'iuid': the inode UID;
+- 'igid': the inode GID;
+- 'mntuidmap': the UID mappings of the idmapped mount (nr extents,
+  [ uid_gid_extent1 ] ... [ uid_gid_extentN ], all u32 in canonical
+  format);
+- 'mntgidmap': the GID mappings of the idmapped mount (same format as
+  'mntuidmap');
+- 'imode': the inode mode;
+- 'evmxattrs': the EVM protected xattrs (num xattrs (u32 in canonical
+   format), xattr names separated by \0, xattr lengths (u32 in canonical
+   format) and xattr values).
 
-diff --git a/MAINTAINERS b/MAINTAINERS
-index ba0cc0a67b32..a2794f5f0360 100644
---- a/MAINTAINERS
-+++ b/MAINTAINERS
-@@ -5040,6 +5040,18 @@ F:	net/ax25/ax25_out.c
- F:	net/ax25/ax25_timer.c
- F:	net/ax25/sysctl_net_ax25.c
- 
-+DATA ACCESS MONITOR
-+M:	SeongJae Park <sjpark@amazon.de>
-+L:	linux-mm@kvack.org
-+S:	Maintained
-+F:	Documentation/admin-guide/mm/damon/*
-+F:	Documentation/vm/damon/*
-+F:	include/linux/damon.h
-+F:	include/trace/events/damon.h
-+F:	mm/damon/*
-+F:	tools/damon/*
-+F:	tools/testing/selftests/damon/*
-+
- DAVICOM FAST ETHERNET (DMFE) NETWORK DRIVER
- L:	netdev@vger.kernel.org
- S:	Orphan
+mntuidmap and mntgidmap are not empty only if the measurement is performed
+on an idmapped mount. In that case, the inode UID and GID need to be
+converted with the provided mappings.
+
+Patches 1-4, 6 introduce new template fields. Patch 5 make it possible to
+verify EVM portable signatures which protect xattrs belonging to LSMs not
+enabled in the target platform. Patch 7 fixes a small issue in
+evm_write_xattrs() when audit is not enabled.
+
+This patch set has been tested with:
+
+https://github.com/robertosassu/ima-evm-utils/blob/ima-template-fields-v1-devel-v1/tests/verify_evmsig.test
+https://github.com/robertosassu/ima-evm-utils/blob/ima-template-fields-v1-devel-v1/tests/evm_hmac_non_enabled_xattrs.test
+
+The first test sets the IMA template format to:
+
+d-ng|n-ng|sig|evmxattrs|iuid|igid|imode|mntuidmap|mntgidmap
+
+Then, it creates a test file, sets some metadata and reads the file to
+generate a measurement entry. To verify that the information provided by
+IMA are correct, the test creates another file and sets the metadata
+obtained from the measurement list. Finally, it executes evmctl to verify
+the signature on the second file.
+
+The test is performed without and with an idmapped mount. evmctl has been
+extended to parse mntuidmap and mntgidmap (only one mapping), so that it
+can convert the mapped UID and GID from the measurement list to the
+original ones. In this way, the signature can be verified.
+
+The second test verifies that setting a non-enabled xattr does not change
+the HMAC.
+
+The test results are available at:
+
+https://travis-ci.com/github/robertosassu/ima-evm-utils/jobs/506431933
+https://travis-ci.com/github/robertosassu/ima-evm-utils/jobs/506431937
+
+This patch set has been also tested on s390x, with and without the
+canonical format enabled (the test results are not shown, as the UML kernel
+used in Travis is not available for this architecture).
+
+Roberto Sassu (7):
+  ima: Add ima_show_template_uint() template library function
+  ima: Introduce template fields iuid and igid
+  ima: Introduce template fields mntuidmap and mntgidmap
+  ima: Introduce template field imode
+  evm: Verify portable signatures against all protected xattrs
+  ima: Introduce template field evmxattrs
+  evm: Don't return an error in evm_write_xattrs() if audit is not
+    enabled
+
+ Documentation/security/IMA-templates.rst  |  10 +
+ include/linux/evm.h                       |   6 +
+ security/integrity/evm/evm.h              |   1 +
+ security/integrity/evm/evm_crypto.c       |   7 +
+ security/integrity/evm/evm_main.c         |  56 +++-
+ security/integrity/evm/evm_secfs.c        |  18 +-
+ security/integrity/ima/ima_template.c     |  14 +
+ security/integrity/ima/ima_template_lib.c | 322 +++++++++++++++++++++-
+ security/integrity/ima/ima_template_lib.h |  14 +
+ 9 files changed, 434 insertions(+), 14 deletions(-)
+
 -- 
-2.17.1
+2.25.1
 
