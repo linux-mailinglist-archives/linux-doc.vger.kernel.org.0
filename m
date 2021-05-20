@@ -2,107 +2,83 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 0D64838AC0F
-	for <lists+linux-doc@lfdr.de>; Thu, 20 May 2021 13:32:31 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id CBD1538AD24
+	for <lists+linux-doc@lfdr.de>; Thu, 20 May 2021 13:56:33 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S241155AbhETLdH (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 20 May 2021 07:33:07 -0400
-Received: from office2.cesnet.cz ([195.113.144.244]:40924 "EHLO
-        office2.cesnet.cz" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S241101AbhETLbF (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Thu, 20 May 2021 07:31:05 -0400
-X-Greylist: delayed 94763 seconds by postgrey-1.27 at vger.kernel.org; Thu, 20 May 2021 07:31:00 EDT
-Received: from localhost (ip-78-45-210-72.net.upcbroadband.cz [78.45.210.72])
-        (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-         key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
-        (No client certificate requested)
-        by office2.cesnet.cz (Postfix) with ESMTPSA id 6BE9D40006B;
-        Thu, 20 May 2021 13:29:24 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cesnet.cz;
-        s=office2-2020; t=1621510164;
-        bh=hlH5MiV+pHvEjTzZVRlEtFB7ucGjCHd76P6F/bq75QQ=;
-        h=From:To:Cc:Subject:Date:In-Reply-To:References;
-        b=Y499jaLrNQDvGYFs6T1IcIQh63oVg1U0GvxX99UTXLVXpA11kxXA0hp6+oqn4+zi1
-         jl4blfDxEiANWLJwJr7nuzIpmsestbwKmXCSPgfwEIyDt7cvb2gDniOQkhTuBI2av3
-         6evzJb1+GJTmSneRbst0CNovvWl0LT+w0nFm6OQul6381rNvJuRWODCiM2RmNJlaUA
-         IQlCtDSPsCNxywRrrjbBpWWnKg+bXdVSsP9LBeEvJTNaafkZGvNSXKNS1I2atSUs+x
-         fkPyOw0wWSizodMaTJ/y4bmGNZV8fTNOR7nA7EXaDDyJQ+VadzelaBzue6GlDhHmxn
-         vYIxWZBZdpepw==
-From:   =?iso-8859-1?Q?Jan_Kundr=E1t?= <jan.kundrat@cesnet.cz>
-To:     Guenter Roeck <linux@roeck-us.net>,
-        =?iso-8859-1?Q?V=E1clav_Kubern=E1t?= <kubernat@cesnet.cz>
-Cc:     Jean Delvare <jdelvare@suse.com>, Jonathan Corbet <corbet@lwn.net>,
-        <linux-hwmon@vger.kernel.org>, <linux-doc@vger.kernel.org>,
-        <linux-kernel@vger.kernel.org>
-Subject: Re: [PATCH v5 2/5] hwmon: (max31790) Fix and split =?iso-8859-1?Q?pwm*=5Fenable?=
-Date:   Thu, 20 May 2021 13:29:24 +0200
+        id S237468AbhETL5f (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 20 May 2021 07:57:35 -0400
+Received: from frasgout.his.huawei.com ([185.176.79.56]:3091 "EHLO
+        frasgout.his.huawei.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S236669AbhETLzf (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Thu, 20 May 2021 07:55:35 -0400
+Received: from fraeml708-chm.china.huawei.com (unknown [172.18.147.226])
+        by frasgout.his.huawei.com (SkyGuard) with ESMTP id 4Fm7Bn1QpXz6J68Q;
+        Thu, 20 May 2021 19:42:25 +0800 (CST)
+Received: from fraeml714-chm.china.huawei.com (10.206.15.33) by
+ fraeml708-chm.china.huawei.com (10.206.15.36) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2176.2; Thu, 20 May 2021 13:54:09 +0200
+Received: from fraeml714-chm.china.huawei.com ([10.206.15.33]) by
+ fraeml714-chm.china.huawei.com ([10.206.15.33]) with mapi id 15.01.2176.012;
+ Thu, 20 May 2021 13:54:09 +0200
+From:   Roberto Sassu <roberto.sassu@huawei.com>
+To:     Christian Brauner <christian.brauner@ubuntu.com>
+CC:     "zohar@linux.ibm.com" <zohar@linux.ibm.com>,
+        "mjg59@srcf.ucam.org" <mjg59@srcf.ucam.org>,
+        "linux-integrity@vger.kernel.org" <linux-integrity@vger.kernel.org>,
+        "linux-security-module@vger.kernel.org" 
+        <linux-security-module@vger.kernel.org>,
+        "linux-doc@vger.kernel.org" <linux-doc@vger.kernel.org>,
+        "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>
+Subject: RE: [PATCH 3/7] ima: Introduce template fields mntuidmap and
+ mntgidmap
+Thread-Topic: [PATCH 3/7] ima: Introduce template fields mntuidmap and
+ mntgidmap
+Thread-Index: AQHXTVYl5/ijYWmHy0e6NDJab3clu6rr+yiAgAABJoCAAEZSAA==
+Date:   Thu, 20 May 2021 11:54:08 +0000
+Message-ID: <f3dfccf2aa5f4c5b96ff6c55a222b7dd@huawei.com>
+References: <20210520085701.465369-1-roberto.sassu@huawei.com>
+ <20210520085701.465369-4-roberto.sassu@huawei.com>
+ <20210520093659.oeeytegx2tvzp33e@wittgenstein>
+ <20210520094105.x2k3bc53xejfl5b2@wittgenstein>
+In-Reply-To: <20210520094105.x2k3bc53xejfl5b2@wittgenstein>
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [10.221.98.153]
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 MIME-Version: 1.0
-Message-ID: <9bbdc7a7-f34d-4e3a-8e64-c20810456d11@cesnet.cz>
-In-Reply-To: <76619e11-3999-1e89-de93-fb5942970844@roeck-us.net>
-References: <20210518211609.GA3532746@roeck-us.net>
- <6f256c72-df4d-4f9a-ba5f-eabfd9f2365f@cesnet.cz>
- <76619e11-3999-1e89-de93-fb5942970844@roeck-us.net>
-Organization: CESNET
-User-Agent: Trojita/unstable-2020-07-06; Qt/5.15.2; xcb; Linux; 
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: quoted-printable
+X-CFilter-Loop: Reflected
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-> As for fan[7-12]_enable, I don't even know if those can be enabled
-> separately. I see two options: Drop those attributes entirely (
-> assuming that those fan inputs are always enabled if the associated
-> pins are configured as inputs), or align them with fan[1-6]_enable.
-
-I think we need to decide first who provides the initial configuration for=20=
-
-this chip. There's always at least six TACH inputs, and then there's six=20
-more pins where each can be either a PWM output or a TACH input. Who=20
-decides that? Is the kernel supposed to export six knobs to the userspace?=20=
-
-So far, I've assumed that this should be driven via sysfs. But perhaps you=20=
-
-would you like to rely on the FW (?) to set this up properly? (On our=20
-board, that would be a few random calls to `i2cset` from a U-Boot boot=20
-script. Not pretty, but doable. Just one more place to keep track of.)
-
-It's proabably "tricky" to do this at runtime -- and I don't expect to see=20=
-
-many boards where you have such a big freedom of reconnecting the actual=20
-fans once manufactured, anyway. So, either some DT parameters, or an=20
-autodetection based on whatever is in the registers at power up, which=20
-would make an explicit assumption that "something" has set up the nPWM/TACH=20=
-
-bits properly in the Fan Configuration Register. OK, that might work, but=20
-the kernel must not ever reset that chip afterwards.
-
-There's also the Fan Fault Mask register, which controls which fans=20
-propagate their failures to the nFAN_FAIL output pin. This one requires a=20
-semi-independent control than the nPWM/TACH bit above. It's feasible that=20
-not all TACH inputs have an actual fan connected, and this can well vary=20
-between products. For example, ours has just four fan connectors, so we=20
-don't want "failures" of fans 5 and 6 to assert the nFAN_FAIL pin. Also,=20
-there should be a check which prevents unmasking these failures for those=20
-TACH channels which are configured as PWM outputs. Or we can once again=20
-ignore this one and rely on the FW.
-
-The current kernel code in max31790_read_fan() reads beyond the end of=20
-data->fan_dynamics, hitting the content of `fault_status` or `tach` fields=20=
-
-instead, and therefore returning garbage. Not a big deal, just a missing %=20=
-
-operator I guess, but to me, that's a pretty strong suggestion that nobody=20=
-
-has used or even tested monitoring more than six fans on this chip, ever.=20
-(And yeah, the datasheet is not clear on how it's supposed to work anyway.=20=
-
-Using a modulo is just a guess.)
-
-Neither Vaclav nor me have any way of testing this feature -- hence my=20
-proposal to only improve what we need, and ignore TACH channels 7-12. But I=20=
-
-guess it's not OK from your point of view?
-
-With kind regards,
-Jan
+PiBGcm9tOiBDaHJpc3RpYW4gQnJhdW5lciBbbWFpbHRvOmNocmlzdGlhbi5icmF1bmVyQHVidW50
+dS5jb21dDQo+IFNlbnQ6IFRodXJzZGF5LCBNYXkgMjAsIDIwMjEgMTE6NDEgQU0NCj4gT24gVGh1
+LCBNYXkgMjAsIDIwMjEgYXQgMTE6Mzc6MDdBTSArMDIwMCwgQ2hyaXN0aWFuIEJyYXVuZXIgd3Jv
+dGU6DQo+ID4gT24gVGh1LCBNYXkgMjAsIDIwMjEgYXQgMTA6NTY6NTdBTSArMDIwMCwgUm9iZXJ0
+byBTYXNzdSB3cm90ZToNCj4gPiA+IFRoaXMgcGF0Y2ggaW50cm9kdWNlcyB0aGUgbmV3IHRlbXBs
+YXRlIGZpZWxkcyBtbnR1aWRtYXAgYW5kIG1udGdpZG1hcCwNCj4gPiA+IHdoaWNoIGluY2x1ZGUg
+cmVzcGVjdGl2ZWx5IHRoZSBVSUQgYW5kIEdJRCBtYXBwaW5ncyBvZiB0aGUgaWRtYXBwZWQNCj4g
+bW91bnQsDQo+ID4gPiBpZiB0aGUgdXNlciBuYW1lc3BhY2UgaXMgbm90IHRoZSBpbml0aWFsIG9u
+ZS4NCj4gPiA+DQo+ID4gPiBUaGVzZSB0ZW1wbGF0ZSBmaWVsZHMsIHdoaWNoIHNob3VsZCBiZSBp
+bmNsdWRlZCB3aGVuZXZlciB0aGUgaXVpZCBhbmQgdGhlDQo+ID4gPiBpZ2lkIGZpZWxkcyBhcmUg
+aW5jbHVkZWQsIGFsbG93IHJlbW90ZSB2ZXJpZmllcnMgdG8gZmluZCB0aGUgb3JpZ2luYWwgVUlE
+DQo+ID4gPiBhbmQgR0lEIG9mIHRoZSBpbm9kZSBkdXJpbmcgc2lnbmF0dXJlIHZlcmlmaWNhdGlv
+bi4gVGhlIGl1aWQgYW5kIGlnaWQNCj4gPiA+IGZpZWxkcyBpbmNsdWRlIHRoZSBtYXBwZWQgVUlE
+IGFuZCBHSUQgd2hlbiB0aGUgaW5vZGUgaXMgaW4gYW4gaWRtYXBwZWQNCj4gPiA+IG1vdW50Lg0K
+PiA+ID4NCj4gPiA+IFRoaXMgc29sdXRpb24gaGFzIGJlZW4gcHJlZmVycmVkIHRvIHByb3ZpZGlu
+ZyBhbHdheXMgdGhlIG9yaWdpbmFsIFVJRCBhbmQNCj4gPiA+IEdJRCwgcmVnYXJkbGVzcyBvZiB3
+aGV0aGVyIHRoZSBpbm9kZSBpcyBpbiBhbiBpZG1hcHBlZCBtb3VudCBvciBub3QsIGFzDQo+ID4g
+PiB0aGUgbWFwcGVkIFVJRCBhbmQgR0lEIGFyZSB0aG9zZSBzZWVuIGJ5IHByb2Nlc3NlcyBhbmQg
+bWF0Y2hlZCB3aXRoDQo+IHRoZSBJTUENCj4gPiA+IHBvbGljeS4NCj4gPg0KPiA+IEhtLCBsb29r
+aW5nIGF0IHRoZSBjb2RlIHRoaXMgZG9lc24ndCBzZWVtIGxpa2UgYSBnb29kIGlkZWEgdG8gbWUu
+IEkNCj4gPiB0aGluayB3ZSBzaG91bGQgYXZvaWQgdGhhdCBhbmQganVzdCByZWx5IG9uIHRoZSBv
+cmlnaW5hbCB1aWQgYW5kIGdpZC4NCj4gDQo+IEl0J2QgYmUgb2sgdG8gaW5jbHVkZSB0aGUgbWFw
+cGVkIHVpZC9naWQgYnV0IGRvbid0IGNvcHkgdGhlIG1hcHBpbmcNCj4gaXRzZWxmLg0KDQpVaG0s
+IHdlIHdvdWxkIG5lZWQgYSB3YXkgdG8gb2J0YWluIHRoZSBvcmlnaW5hbCBVSUQgYW5kIEdJRCB0
+bw0KdmVyaWZ5IHRoZSBwb3J0YWJsZSBzaWduYXR1cmUuDQoNClJvYmVydG8NCg0KSFVBV0VJIFRF
+Q0hOT0xPR0lFUyBEdWVzc2VsZG9yZiBHbWJILCBIUkIgNTYwNjMNCk1hbmFnaW5nIERpcmVjdG9y
+OiBMaSBQZW5nLCBMaSBKaWFuLCBTaGkgWWFubGkNCg==
