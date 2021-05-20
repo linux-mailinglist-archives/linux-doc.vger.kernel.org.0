@@ -2,116 +2,52 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 0618638A130
-	for <lists+linux-doc@lfdr.de>; Thu, 20 May 2021 11:27:41 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 50D3838A3CD
+	for <lists+linux-doc@lfdr.de>; Thu, 20 May 2021 11:56:30 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S231640AbhETJ27 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 20 May 2021 05:28:59 -0400
-Received: from mail.skyhub.de ([5.9.137.197]:34194 "EHLO mail.skyhub.de"
+        id S234421AbhETJ5D (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 20 May 2021 05:57:03 -0400
+Received: from mail.kernel.org ([198.145.29.99]:54742 "EHLO mail.kernel.org"
         rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S231811AbhETJ1t (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Thu, 20 May 2021 05:27:49 -0400
-Received: from zn.tnic (p200300ec2f0eb6008eba81a1ad09a99c.dip0.t-ipconnect.de [IPv6:2003:ec:2f0e:b600:8eba:81a1:ad09:a99c])
-        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
-        (No client certificate requested)
-        by mail.skyhub.de (SuperMail on ZX Spectrum 128k) with ESMTPSA id 4721A1EC051F;
-        Thu, 20 May 2021 11:26:26 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=alien8.de; s=dkim;
-        t=1621502786;
-        h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-         to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-         content-transfer-encoding:in-reply-to:in-reply-to:  references:references;
-        bh=sBPCBfFxpVVzA8qvfueuilIPqhAowYTHXr3cnG4eLoI=;
-        b=Ps5CMwItn7MpMTJ7xjmt5Te7zi7KyKAeJu1+YnmeLarTJdGGkhGNyRrYiLuMWqemQBxvJk
-        anKV0jiMn14lqWauALXkE4RwiiUPsYosxjjwmgqbyTltUkyT44O2vOA8LqAg/+ijlDlpav
-        xmBC5chCNww4ZWjVHkkaXZJu2/rHo+4=
-Date:   Thu, 20 May 2021 11:26:25 +0200
-From:   Borislav Petkov <bp@alien8.de>
-To:     "Yu, Yu-cheng" <yu-cheng.yu@intel.com>
-Cc:     x86@kernel.org, "H. Peter Anvin" <hpa@zytor.com>,
-        Thomas Gleixner <tglx@linutronix.de>,
-        Ingo Molnar <mingo@redhat.com>, linux-kernel@vger.kernel.org,
-        linux-doc@vger.kernel.org, linux-mm@kvack.org,
-        linux-arch@vger.kernel.org, linux-api@vger.kernel.org,
-        Arnd Bergmann <arnd@arndb.de>,
-        Andy Lutomirski <luto@kernel.org>,
-        Balbir Singh <bsingharora@gmail.com>,
-        Cyrill Gorcunov <gorcunov@gmail.com>,
-        Dave Hansen <dave.hansen@linux.intel.com>,
-        Eugene Syromiatnikov <esyr@redhat.com>,
-        Florian Weimer <fweimer@redhat.com>,
-        "H.J. Lu" <hjl.tools@gmail.com>, Jann Horn <jannh@google.com>,
-        Jonathan Corbet <corbet@lwn.net>,
-        Kees Cook <keescook@chromium.org>,
-        Mike Kravetz <mike.kravetz@oracle.com>,
-        Nadav Amit <nadav.amit@gmail.com>,
-        Oleg Nesterov <oleg@redhat.com>, Pavel Machek <pavel@ucw.cz>,
-        Peter Zijlstra <peterz@infradead.org>,
-        Randy Dunlap <rdunlap@infradead.org>,
-        "Ravi V. Shankar" <ravi.v.shankar@intel.com>,
-        Vedvyas Shanbhogue <vedvyas.shanbhogue@intel.com>,
-        Dave Martin <Dave.Martin@arm.com>,
-        Weijiang Yang <weijiang.yang@intel.com>,
-        Pengfei Xu <pengfei.xu@intel.com>,
-        Haitao Huang <haitao.huang@intel.com>,
-        Mark Brown <broonie@kernel.org>,
-        Catalin Marinas <catalin.marinas@arm.com>
-Subject: Re: [PATCH v26 26/30] ELF: Introduce arch_setup_elf_property()
-Message-ID: <YKYrQQ6tKfifjNjW@zn.tnic>
-References: <20210427204315.24153-1-yu-cheng.yu@intel.com>
- <20210427204315.24153-27-yu-cheng.yu@intel.com>
- <YKVUgzJ0MVNBgjDd@zn.tnic>
- <c29348d8-caae-5226-d095-ae3992d88338@intel.com>
+        id S234898AbhETJzE (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Thu, 20 May 2021 05:55:04 -0400
+Received: by mail.kernel.org (Postfix) with ESMTPSA id CC5CD613E1;
+        Thu, 20 May 2021 09:37:02 +0000 (UTC)
+Date:   Thu, 20 May 2021 11:36:59 +0200
+From:   Christian Brauner <christian.brauner@ubuntu.com>
+To:     Roberto Sassu <roberto.sassu@huawei.com>
+Cc:     zohar@linux.ibm.com, mjg59@srcf.ucam.org,
+        linux-integrity@vger.kernel.org,
+        linux-security-module@vger.kernel.org, linux-doc@vger.kernel.org,
+        linux-kernel@vger.kernel.org
+Subject: Re: [PATCH 3/7] ima: Introduce template fields mntuidmap and
+ mntgidmap
+Message-ID: <20210520093659.oeeytegx2tvzp33e@wittgenstein>
+References: <20210520085701.465369-1-roberto.sassu@huawei.com>
+ <20210520085701.465369-4-roberto.sassu@huawei.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=utf-8
 Content-Disposition: inline
-In-Reply-To: <c29348d8-caae-5226-d095-ae3992d88338@intel.com>
+In-Reply-To: <20210520085701.465369-4-roberto.sassu@huawei.com>
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Wed, May 19, 2021 at 03:14:58PM -0700, Yu, Yu-cheng wrote:
-> However, those parsing functions take (struct arch_elf_state *) as an input.
-
-Exactly.
-
-> It probably makes sense to have ARCH_USE_GNU_PROPERTY dependent on
-> ARCH_BINFMT_ELF_STATE.  It would be ok as-is too.  ARM people might have
-> other plans in mind.
-
-Well, let's look at ARM, ARM64 in particular. They have defined struct
-arch_elf_state without the ifdeffery in
-
-arch/arm64/include/asm/elf.h
-
-and are using that struct in arch_parse_elf_property().
-
-And they have selected ARCH_BINFMT_ELF_STATE just so that they disable
-those dummy accessors in fs/binfmt_elf.c
-
-And you're practically glueing together ARCH_BINFMT_ELF_STATE and
-ARCH_USE_GNU_PROPERTY. However, all the functionality is for adding
-the gnu property note so I think you should select both but only use
-ARCH_USE_GNU_PROPERTY in all the ifdeffery in your patch to at least
-have this as simple as possible.
-
-> I just looked at the ABI document.
-
-Which document is that? Link?
-
-> ARM has GNU_PROPERTY_AARCH64_FEATURE_1_AND 0xc0000000
+On Thu, May 20, 2021 at 10:56:57AM +0200, Roberto Sassu wrote:
+> This patch introduces the new template fields mntuidmap and mntgidmap,
+> which include respectively the UID and GID mappings of the idmapped mount,
+> if the user namespace is not the initial one.
 > 
-> X86 has:
-> 	GNU_PROPERTY_X86_ISA_1_USED	0xc0000000
-> 	GNU_PROPERTY_X86_ISA_1_NEEDED	0xc0000001
-> 	GNU_PROPERTY_X86_FEATURE_1_AND	0xc0000002
+> These template fields, which should be included whenever the iuid and the
+> igid fields are included, allow remote verifiers to find the original UID
+> and GID of the inode during signature verification. The iuid and igid
+> fields include the mapped UID and GID when the inode is in an idmapped
+> mount.
+> 
+> This solution has been preferred to providing always the original UID and
+> GID, regardless of whether the inode is in an idmapped mount or not, as
+> the mapped UID and GID are those seen by processes and matched with the IMA
+> policy.
 
-Our defines should at least have a comment pointing to that document.
-
-Thx.
-
--- 
-Regards/Gruss,
-    Boris.
-
-https://people.kernel.org/tglx/notes-about-netiquette
+Hm, looking at the code this doesn't seem like a good idea to me. I
+think we should avoid that and just rely on the original uid and gid.
