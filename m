@@ -2,107 +2,126 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id E94C838C214
-	for <lists+linux-doc@lfdr.de>; Fri, 21 May 2021 10:38:36 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 0445838C25B
+	for <lists+linux-doc@lfdr.de>; Fri, 21 May 2021 10:55:39 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S230176AbhEUIj6 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Fri, 21 May 2021 04:39:58 -0400
-Received: from mail.loongson.cn ([114.242.206.163]:39636 "EHLO loongson.cn"
-        rhost-flags-OK-OK-OK-FAIL) by vger.kernel.org with ESMTP
-        id S233022AbhEUIj6 (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Fri, 21 May 2021 04:39:58 -0400
-Received: from localhost.localdomain (unknown [112.20.113.102])
-        by mail.loongson.cn (Coremail) with SMTP id AQAAf9DxX0OCcadglScCAA--.1073S2;
-        Fri, 21 May 2021 16:38:27 +0800 (CST)
-From:   Yanteng Si <siyanteng@loongson.cn>
-To:     corbet@lwn.net, alexs@kernel.org
-Cc:     chenhuacai@kernel.org, jiaxun.yang@flygoat.com,
-        linux-doc@vger.kernel.org, realpuyuwang@gmail.com, bobwxc@email.cn,
-        siyanteng01@gmail.com, Yanteng Si <siyanteng@loongson.cn>
-Subject: [PATCH] docs: zh_CN: update Chinese translations
-Date:   Fri, 21 May 2021 16:39:08 +0800
-Message-Id: <20210521083908.3783492-1-siyanteng@loongson.cn>
-X-Mailer: git-send-email 2.27.0
+        id S234151AbhEUI5A (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Fri, 21 May 2021 04:57:00 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:50778 "EHLO
+        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S233621AbhEUI47 (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Fri, 21 May 2021 04:56:59 -0400
+Received: from mail-qv1-xf2e.google.com (mail-qv1-xf2e.google.com [IPv6:2607:f8b0:4864:20::f2e])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 4464BC0613CE;
+        Fri, 21 May 2021 01:55:36 -0700 (PDT)
+Received: by mail-qv1-xf2e.google.com with SMTP id eb9so10010121qvb.6;
+        Fri, 21 May 2021 01:55:36 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=date:from:to:cc:subject:message-id:references:mime-version
+         :content-disposition:in-reply-to;
+        bh=Kp/ysYVEmYIMLiNSKzfBzrR9z7OzmQLKQ2Sawak68LY=;
+        b=YPBVlWE4l2A4ezAJHFNC+Il1+5+5W12wlemT+PDD4ckOlhVCiC/+9aUy98jCR/BPV/
+         0Und1ZHWCRP7Cb3P+Zl7er4AFX0BtB9boljRfeWE6mwkdBV1ufM09WTLjigU3uLuAVur
+         Uu38UA4LotXZqXdVdEGUYLugFyufHcWfDwVJ/Q6bHtNO0UurK3fiSh0AhH2zhtLMdppZ
+         OjEdVtuVAafnBEwt9rWhYNH3QS6bJIKjYtquGrAaR8aT2lyoXjBsUBxGTD+xArspOX+p
+         cgf66olHRhaDmcwB91E5vFdWmXHRJ2BQCC3yA5TgWa4hvba/pPODIi0OyIu5cCGFx1vj
+         9nzQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+         :mime-version:content-disposition:in-reply-to;
+        bh=Kp/ysYVEmYIMLiNSKzfBzrR9z7OzmQLKQ2Sawak68LY=;
+        b=jX+IvVUny6nEatNS6SzKTvhbiE2sPVNHMzNjxC708TQeTwZXa9cgTc+QJMBmgu7d28
+         qZALV7H6MLe1cm8ZLjYqWj0+nwPMVI1AzIa/UyOhrJYUw6QRB8XXGlXwZhX0xDQexMKb
+         ofdwrzB4SDbiMYwBzry0fZX/nSv4vnh+nVJCV/Vv+CL8ESR/xp3VZmwbOLg0JIYu44FE
+         RnyC4iCeEV7DpAtqgzcJTUMK7k8REKg0y2CzXBRYoUOeQjG0sbiNnx95eBlhIbr7kOky
+         8hWZsKKmMkjO9F7OReGV6yey/0dUaX67f+PeuAgFGVO5Gubs0cggYbTfrUKN28Rgc07Y
+         98vQ==
+X-Gm-Message-State: AOAM533IcTJXPt7yKZMeQtSTu7RC9Gl4W5jDGN5Q5UfcI2v1Ywdbgt7r
+        QEnbDeGvzCZyvqdpQWiA94M=
+X-Google-Smtp-Source: ABdhPJxw7sz5aIuW4iLCr915B8yRlIiLDiAP9oofNv+2RTvcpwKIYwRj+m4cjAgJ02Nrlp/9gllK6g==
+X-Received: by 2002:a05:6214:391:: with SMTP id l17mr11269278qvy.22.1621587335199;
+        Fri, 21 May 2021 01:55:35 -0700 (PDT)
+Received: from auth2-smtp.messagingengine.com (auth2-smtp.messagingengine.com. [66.111.4.228])
+        by smtp.gmail.com with ESMTPSA id w189sm4545620qkb.39.2021.05.21.01.55.34
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Fri, 21 May 2021 01:55:34 -0700 (PDT)
+Received: from compute6.internal (compute6.nyi.internal [10.202.2.46])
+        by mailauth.nyi.internal (Postfix) with ESMTP id D7F7D27C0054;
+        Fri, 21 May 2021 04:55:33 -0400 (EDT)
+Received: from mailfrontend1 ([10.202.2.162])
+  by compute6.internal (MEProxy); Fri, 21 May 2021 04:55:33 -0400
+X-ME-Sender: <xms:hHWnYAyskXIZunEPr7pbZHwONJPXJFnD8eLq-qJzZprtyNChv1oPqg>
+    <xme:hHWnYEQln_O7b0fyjfkbM3AGoa-t676mJjP3L16hAKoFVqjJvnHgSL2o_lRJGS_bH
+    6V19LCaN45uCetEIg>
+X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgeduledrvdejfedguddtucetufdoteggodetrfdotf
+    fvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdfqfgfvpdfurfetoffkrfgpnffqhgen
+    uceurghilhhouhhtmecufedttdenucenucfjughrpeffhffvuffkfhggtggujgesthdtre
+    dttddtvdenucfhrhhomhepuehoqhhunhcuhfgvnhhguceosghoqhhunhdrfhgvnhhgsehg
+    mhgrihhlrdgtohhmqeenucggtffrrghtthgvrhhnpedvleeigedugfegveejhfejveeuve
+    eiteejieekvdfgjeefudehfefhgfegvdegjeenucfkphepudefuddruddtjedruddrvdeh
+    geenucevlhhushhtvghrufhiiigvpedtnecurfgrrhgrmhepmhgrihhlfhhrohhmpegsoh
+    hquhhnodhmvghsmhhtphgruhhthhhpvghrshhonhgrlhhithihqdeiledvgeehtdeigedq
+    udejjeekheehhedvqdgsohhquhhnrdhfvghngheppehgmhgrihhlrdgtohhmsehfihigmh
+    gvrdhnrghmvg
+X-ME-Proxy: <xmx:hHWnYCVOTgANXFIGudOCzU24BaVzd0oOoyFux7QVb2Te0ND3J3K1Hw>
+    <xmx:hHWnYOjvi-ASIsXvBePK82oucn2cjbSD_dHuFg1YG9hMA-dE3bDoYw>
+    <xmx:hHWnYCBaQ-twQ9KbfEUewKL3--UZJVkf9ktkj3e5M7duNpAkLdCITw>
+    <xmx:hXWnYICI7G6vBX8T_N6Djb9U7Xe6RkDmzIZQl5wEfk65A0nw9FpYsSdlaQw>
+Received: from localhost (unknown [131.107.1.254])
+        by mail.messagingengine.com (Postfix) with ESMTPA;
+        Fri, 21 May 2021 04:55:32 -0400 (EDT)
+Date:   Fri, 21 May 2021 16:55:05 +0800
+From:   Boqun Feng <boqun.feng@gmail.com>
+To:     Xiongwei Song <sxwjean@me.com>
+Cc:     peterz@infradead.org, mingo@redhat.com, will@kernel.org,
+        longman@redhat.com, corbet@lwn.net, linux-kernel@vger.kernel.org,
+        linux-doc@vger.kernel.org, Xiongwei Song <sxwjean@gmail.com>
+Subject: Re: [PATCH] docs: lockdep-design: correct the notation for writer
+Message-ID: <YKd1aVkojNsx4wrl@boqun-archlinux>
+References: <1621578594-13237-1-git-send-email-sxwjean@me.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-CM-TRANSID: AQAAf9DxX0OCcadglScCAA--.1073S2
-X-Coremail-Antispam: 1UD129KBjvJXoW7Cw48Cry8Wr1UKw45Gr4xXrb_yoW5JFWrpa
-        1akrnxKanrZrnrZFn7KryUWry5CFZ5ua4UC3s7Xrn5ZF1kZr9YyF4xKr95uF92gFyUXa4r
-        tFs7tryDXayjywUanT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
-        9KBjDU0xBIdaVrnRJUUUkv14x267AKxVW8JVW5JwAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
-        rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2ocxC64kIII0Yj41l84x0c7CEw4AK67xGY2AK02
-        1l84ACjcxK6xIIjxv20xvE14v26ryj6F1UM28EF7xvwVC0I7IYx2IY6xkF7I0E14v26F4j
-        6r4UJwA2z4x0Y4vEx4A2jsIE14v26rxl6s0DM28EF7xvwVC2z280aVCY1x0267AKxVW0oV
-        Cq3wAS0I0E0xvYzxvE52x082IY62kv0487Mc02F40EFcxC0VAKzVAqx4xG6I80ewAv7VC0
-        I7IYx2IY67AKxVWUJVWUGwAv7VC2z280aVAFwI0_Jr0_Gr1lOx8S6xCaFVCjc4AY6r1j6r
-        4UM4x0Y48IcxkI7VAKI48JM4x0x7Aq67IIx4CEVc8vx2IErcIFxwCY02Avz4vE14v_GFyl
-        42xK82IYc2Ij64vIr41l4I8I3I0E4IkC6x0Yz7v_Jr0_Gr1lx2IqxVAqx4xG67AKxVWUJV
-        WUGwC20s026x8GjcxK67AKxVWUGVWUWwC2zVAF1VAY17CE14v26r1q6r43MIIYrxkI7VAK
-        I48JMIIF0xvE2Ix0cI8IcVAFwI0_Jr0_JF4lIxAIcVC0I7IYx2IY6xkF7I0E14v26r1j6r
-        4UMIIF0xvE42xK8VAvwI8IcIk0rVWrZr1j6s0DMIIF0xvEx4A2jsIE14v26r1j6r4UMIIF
-        0xvEx4A2jsIEc7CjxVAFwI0_Gr0_Gr1UYxBIdaVFxhVjvjDU0xZFpf9x0JUhdbbUUUUU=
-X-CM-SenderInfo: pvl1t0pwhqwqxorr0wxvrqhubq/
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <1621578594-13237-1-git-send-email-sxwjean@me.com>
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Two new commits were added to the original document:
+On Fri, May 21, 2021 at 02:29:54PM +0800, Xiongwei Song wrote:
+> From: Xiongwei Song <sxwjean@gmail.com>
+> 
+> The block condition matrix is using 'E' as the writer noation here, so it
+> would be better to use 'E' as the reminder rather than 'W'.
+> 
 
-commit ddba35031db2ea89facc91c745e5ad55ba2e0e7f
-commit 20bc8c1e972f29afcac85e524e430c11a6df5f58
+Good catch!
 
-translate them into Chinese.
+> Signed-off-by: Xiongwei Song <sxwjean@gmail.com>
 
-Signed-off-by: Yanteng Si <siyanteng@loongson.cn>
----
- .../zh_CN/core-api/printk-formats.rst           | 17 ++++++++++++++++-
- 1 file changed, 16 insertions(+), 1 deletion(-)
+Reviewed-by: Boqun Feng <boqun.feng@gmail.com>
 
-diff --git a/Documentation/translations/zh_CN/core-api/printk-formats.rst b/Documentation/translations/zh_CN/core-api/printk-formats.rst
-index 624a090e6ee5..a680c8f164c3 100644
---- a/Documentation/translations/zh_CN/core-api/printk-formats.rst
-+++ b/Documentation/translations/zh_CN/core-api/printk-formats.rst
-@@ -122,6 +122,17 @@ seq_printf()，而不是printk()）由用户空间进程读取，使用下面描
- ``B`` 占位符的结果是带有偏移量的符号名，在打印堆栈回溯时应该使用。占位符将考虑编译器优化
- 的影响，当使用尾部调用并使用noreturn GCC属性标记时，可能会发生这种优化。
- 
-+如果指针在一个模块内，模块名称和可选的构建ID将被打印在符号名称之后，并在说明符的末尾添加
-+一个额外的 ``b`` 。
-+
-+::
-+
-+	%pS	versatile_init+0x0/0x110 [module_name]
-+	%pSb	versatile_init+0x0/0x110 [module_name ed5019fdf5e53be37cb1ba7899292d7e143b259e]
-+	%pSRb	versatile_init+0x9/0x110 [module_name ed5019fdf5e53be37cb1ba7899292d7e143b259e]
-+		(with __builtin_extract_return_addr() translation)
-+	%pBb	prev_fn_of_versatile_init+0x88/0x88 [module_name ed5019fdf5e53be37cb1ba7899292d7e143b259e]
-+
- 来自BPF / tracing追踪的探查指针
- ----------------------------------
- 
-@@ -483,9 +494,10 @@ Fwnode handles
- ::
- 
- 	%pt[RT]			YYYY-mm-ddTHH:MM:SS
-+	%pt[RT]s		YYYY-mm-dd HH:MM:SS
- 	%pt[RT]d		YYYY-mm-dd
- 	%pt[RT]t		HH:MM:SS
--	%pt[RT][dt][r]
-+	%pt[RT][dt][r][s]
- 
- 用于打印日期和时间::
- 
-@@ -497,6 +509,9 @@ Fwnode handles
- 默认情况下，年将以1900为单位递增，月将以1为单位递增。 使用%pt[RT]r (raw)
- 来抑制这种行为。
- 
-+%pt[RT]s（空格）将覆盖ISO 8601的分隔符，在日期和时间之间使用''（空格）而
-+不是'T'（大写T）。当日期或时间被省略时，它不会有任何影响。
-+
- 通过引用传递。
- 
- clk结构体
--- 
-2.27.0
+Regards,
+Boqun
 
+> ---
+>  Documentation/locking/lockdep-design.rst | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+> 
+> diff --git a/Documentation/locking/lockdep-design.rst b/Documentation/locking/lockdep-design.rst
+> index 9f3cfca..c3b923a 100644
+> --- a/Documentation/locking/lockdep-design.rst
+> +++ b/Documentation/locking/lockdep-design.rst
+> @@ -462,7 +462,7 @@ Block condition matrix, Y means the row blocks the column, and N means otherwise
+>  	| R | Y | Y | N |
+>  	+---+---+---+---+
+>  
+> -	(W: writers, r: non-recursive readers, R: recursive readers)
+> +	(E: writers, r: non-recursive readers, R: recursive readers)
+>  
+>  
+>  acquired recursively. Unlike non-recursive read locks, recursive read locks
+> -- 
+> 2.7.4
+> 
