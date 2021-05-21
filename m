@@ -2,69 +2,114 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 79EF338CC3A
-	for <lists+linux-doc@lfdr.de>; Fri, 21 May 2021 19:34:35 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 644BF38CC42
+	for <lists+linux-doc@lfdr.de>; Fri, 21 May 2021 19:36:07 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S233534AbhEURf5 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Fri, 21 May 2021 13:35:57 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:55482 "EHLO
-        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S234177AbhEURfz (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Fri, 21 May 2021 13:35:55 -0400
-Received: from mail-pl1-x62c.google.com (mail-pl1-x62c.google.com [IPv6:2607:f8b0:4864:20::62c])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 1BCE4C061574
-        for <linux-doc@vger.kernel.org>; Fri, 21 May 2021 10:34:30 -0700 (PDT)
-Received: by mail-pl1-x62c.google.com with SMTP id p6so11346421plr.11
-        for <linux-doc@vger.kernel.org>; Fri, 21 May 2021 10:34:30 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=intel-com.20150623.gappssmtp.com; s=20150623;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc;
-        bh=9X9c0fkCccIua6Hwft+M9DYb/rx4VT7EOGO5pCKU8j0=;
-        b=AZ1gML0WzHsR6m5px+VEzQ6Vb03sGBj8WEW8/udaZfLk1fYgwypI0xC1QDu6dd0e64
-         fE9/dzW5Ni3FYzrMlHtnHLadmGcz8O/0Y2dskxs3PK4JWq3muxdKPaVOho6Mmr3zbNfE
-         1ZnnT7zYhkqX7UXV4X/0DQFE3NfGuu5/Ag114G1KAbpf/UsK2wUns+TnA3ILkHXFeKtX
-         q2GDKHh/4Ulordv+OtdDzfrEYy1GqBnfOoyYk2rjkwuoT4QIO6aUUdBjDQGNpJvnX/Yy
-         NQAz/+UeuyfB72PdeGhbuLNsmiOr5B0ZcegFX/6mfht3LQ+Z33BVEQijxFDk02Rm93nC
-         /3Fg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc;
-        bh=9X9c0fkCccIua6Hwft+M9DYb/rx4VT7EOGO5pCKU8j0=;
-        b=CqIgY3LyV94PAvwHOuVbl0C8Q+itinEulD9GvCV8c3Wb/azxtOgMD7Abg/2T+LlMGL
-         4ZHZOJb6CRhBjHwW7yxWcnP1/1X2wlf3CaaOyfyeoF+nk5t6+y1VcEHby32E7HQxPweH
-         FEMguWMUQqa18JOuDiMbPeWQzEzd5cjlkMA5XQJvvaQqXMp7RFa64tBTZlbr4aHpn4Qw
-         f/wCJ2Tz/FmYGKH+4SRoA2Uzrw1O5TJeeStCQuKA3Jl2gLpRRSL6Hvr6dSnKyvFq/KY4
-         JEKdyF6XlhOK9aAesbeHp4dTAoilHn+Nta4iim+AJzMSb/P1lyg85E76aXtqPKJTNsNQ
-         XFQg==
-X-Gm-Message-State: AOAM532yA81qU2D3TrA9A8gbI7UXy0cHZgkhLtI/bto9olGtKp4duF82
-        RfO07zDtn9ejXAW/P8HlBJ3nREslhl8WSbfPDEX65g==
-X-Google-Smtp-Source: ABdhPJyBSkQWGIPw2UY29oz0DyJ7pbcctbQdLfnI8FCaM5oCcut4dYq2v2w6z6HS6hNkud1BQpaqjw0nNdj+Z5pFRNc=
-X-Received: by 2002:a17:90b:3709:: with SMTP id mg9mr11791387pjb.149.1621618469644;
- Fri, 21 May 2021 10:34:29 -0700 (PDT)
+        id S233332AbhEURh3 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Fri, 21 May 2021 13:37:29 -0400
+Received: from mail.kernel.org ([198.145.29.99]:49372 "EHLO mail.kernel.org"
+        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
+        id S233220AbhEURh3 (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Fri, 21 May 2021 13:37:29 -0400
+Received: by mail.kernel.org (Postfix) with ESMTPSA id BEB0261168;
+        Fri, 21 May 2021 17:36:05 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+        s=k20201202; t=1621618565;
+        bh=4aOxbiHGvShE6QjDYszuUr7TvUl6/VFWQI8sBfUysUU=;
+        h=Date:From:To:Cc:Subject:Reply-To:References:In-Reply-To:From;
+        b=hi/W261FoFNP/QGvNDUiE95mXNskFLc5lTf+X6+xBckoXCXTUbFgBWOs+mNSEimqc
+         BECCpY4bBmHV9tLiHbfx+KXp4E63V22HCPy0T6uV/K2UYGY2ePy9x1kylXpk2K7muk
+         yStUy+YvZw89WdmyeBt5bXCI1yJkcaypO2RAc9T9MUCIQDJni65alU1znT8iCKiMmU
+         JzrsPKJO+ZpUWot7kc3/bMwwNuGag2n3kAsl71E/apkcFjZXbK2Tf3zylLniNoISFz
+         kEt6RDV6MEVncFpP0DTRAtzEz8msJ1TNDFsQPC6LgjAhnSj57wx9rk6roxQkD3+d6i
+         Jl97pgwyVSl7w==
+Received: by paulmck-ThinkPad-P17-Gen-1.home (Postfix, from userid 1000)
+        id 89EBE5C0164; Fri, 21 May 2021 10:36:05 -0700 (PDT)
+Date:   Fri, 21 May 2021 10:36:05 -0700
+From:   "Paul E. McKenney" <paulmck@kernel.org>
+To:     Akira Yokosawa <akiyks@gmail.com>
+Cc:     Josh Triplett <josh@joshtriplett.org>,
+        Steven Rostedt <rostedt@goodmis.org>,
+        Mathieu Desnoyers <mathieu.desnoyers@efficios.com>,
+        Lai Jiangshan <jiangshanlai@gmail.com>,
+        Joel Fernandes <joel@joelfernandes.org>,
+        Jonathan Corbet <corbet@lwn.net>, rcu@vger.kernel.org,
+        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org
+Subject: Re: [PATCH -rcu] Documentation/RCU: Fix nested inline markup
+Message-ID: <20210521173605.GA4441@paulmck-ThinkPad-P17-Gen-1>
+Reply-To: paulmck@kernel.org
+References: <e23acc77-8b10-493e-63fa-76150be325f9@gmail.com>
 MIME-Version: 1.0
-References: <20210521173028.37989-1-festevam@gmail.com>
-In-Reply-To: <20210521173028.37989-1-festevam@gmail.com>
-From:   Dan Williams <dan.j.williams@intel.com>
-Date:   Fri, 21 May 2021 10:34:20 -0700
-Message-ID: <CAPcyv4hOZnRewRMzOETCewE8HhjNrmfA0ejkfyB2MPGijhkdAA@mail.gmail.com>
-Subject: Re: [PATCH] docs: cxl/core: Fix the title underline
-To:     Fabio Estevam <festevam@gmail.com>
-Cc:     Jonathan Corbet <corbet@lwn.net>,
-        Linux Doc Mailing List <linux-doc@vger.kernel.org>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <e23acc77-8b10-493e-63fa-76150be325f9@gmail.com>
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Fri, May 21, 2021 at 10:31 AM Fabio Estevam <festevam@gmail.com> wrote:
->
-> Commit 5f653f7590ab ("cxl/core: Rename bus.c to core.c") has changed
-> the title, but missed to update the underline length, which causes
-> the following 'make htmldocs' build warning:
->
-> Documentation/driver-api/cxl/memory-devices.rst:32: WARNING: Title underline too short.
->
+On Fri, May 21, 2021 at 11:16:04AM +0900, Akira Yokosawa wrote:
+> To avoid the ``foo`` markup inside the `bar`__ hyperlink marker,
+> use the "replace" directive [1].
+> 
+> This should restore the intended appearance of the link.
+> 
+> Tested with sphinx versions 1.7.9 and 2.4.4.
+> 
+> [1]: https://docutils.sourceforge.io/docs/ref/rst/directives.html#replace
+> 
+> Signed-off-by: Akira Yokosawa <akiyks@gmail.com>
 
-Thanks, already reported and fixed. Will appear in -next shortly.
+Queued, thank you!  Or if this should instead go via the Documentation
+tree:
+
+Acked-by: Paul E. McKenney <paulmck@kernel.org>
+
+> ---
+> Hi Paul,
+> 
+> This fixes broken-looking cross reference in section
+> "Publish/Subscribe Guarantee" at:
+> 
+> https://www.kernel.org/doc/html/latest/RCU/Design/Requirements/Requirements.html#publish-subscribe-guarantee
+> 
+> To-be-replaced macro string can be much shorter.
+> I preserved the whole string considering the readability of .rst.
+
+And completely agreed on keeping the .rst readable.
+
+							Thanx, Paul
+
+>         Thanks, Akira
+> --
+>  Documentation/RCU/Design/Requirements/Requirements.rst | 8 +++++---
+>  1 file changed, 5 insertions(+), 3 deletions(-)
+> 
+> diff --git a/Documentation/RCU/Design/Requirements/Requirements.rst b/Documentation/RCU/Design/Requirements/Requirements.rst
+> index 38a39476fc24..45278e2974c0 100644
+> --- a/Documentation/RCU/Design/Requirements/Requirements.rst
+> +++ b/Documentation/RCU/Design/Requirements/Requirements.rst
+> @@ -362,9 +362,8 @@ do_something_gp() uses rcu_dereference() to fetch from ``gp``:
+>        12 }
+>  
+>  The rcu_dereference() uses volatile casts and (for DEC Alpha) memory
+> -barriers in the Linux kernel. Should a `high-quality implementation of
+> -C11 ``memory_order_consume``
+> -[PDF] <http://www.rdrop.com/users/paulmck/RCU/consume.2015.07.13a.pdf>`__
+> +barriers in the Linux kernel. Should a |high-quality implementation of
+> +C11 memory_order_consume [PDF]|_
+>  ever appear, then rcu_dereference() could be implemented as a
+>  ``memory_order_consume`` load. Regardless of the exact implementation, a
+>  pointer fetched by rcu_dereference() may not be used outside of the
+> @@ -374,6 +373,9 @@ element has been passed from RCU to some other synchronization
+>  mechanism, most commonly locking or `reference
+>  counting <https://www.kernel.org/doc/Documentation/RCU/rcuref.txt>`__.
+>  
+> +.. |high-quality implementation of C11 memory_order_consume [PDF]| replace:: high-quality implementation of C11 ``memory_order_consume`` [PDF]
+> +.. _high-quality implementation of C11 memory_order_consume [PDF]: http://www.rdrop.com/users/paulmck/RCU/consume.2015.07.13a.pdf
+> +
+>  In short, updaters use rcu_assign_pointer() and readers use
+>  rcu_dereference(), and these two RCU API elements work together to
+>  ensure that readers have a consistent view of newly added data elements.
+> -- 
+> 2.17.1
+> 
