@@ -2,202 +2,147 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 2BBE138ECBA
-	for <lists+linux-doc@lfdr.de>; Mon, 24 May 2021 17:21:16 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 619F738EC18
+	for <lists+linux-doc@lfdr.de>; Mon, 24 May 2021 17:10:53 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S233976AbhEXPWc (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 24 May 2021 11:22:32 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:42632 "EHLO
-        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S234556AbhEXPQC (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Mon, 24 May 2021 11:16:02 -0400
-Received: from mail-il1-x132.google.com (mail-il1-x132.google.com [IPv6:2607:f8b0:4864:20::132])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 29C1DC061344;
-        Mon, 24 May 2021 07:52:56 -0700 (PDT)
-Received: by mail-il1-x132.google.com with SMTP id b5so5212502ilc.12;
-        Mon, 24 May 2021 07:52:56 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=date:from:to:cc:subject:message-id:references:mime-version
-         :content-disposition:in-reply-to;
-        bh=yW6xxqoFqjdbNxGybwNPD8otEN5g9CMdaIvijDpl8O0=;
-        b=YG998/Adp6FNLqctJvDtccznSREYmD1mmYlwzYnDEAb3j2lEoIHiRuwAaZ7jRu532r
-         x5zGs1YGgjCF0mNuWeJtPGQN7gjo86NwKcarGrjw3NTlK2oiPvP69c8ujzo7gnY/6Gpq
-         64n3RWSkERQEwI2Yol1Hvx6lDX8Qf2Q37J50cFLC8z67y+f6N9mH7NgE0OZiisSiTF+K
-         TfUQw4AprvwBkE4jtL98xZhGeC72lG76tKl03DUi0PK/wl7qQ2gD5uYAV8MxUZucUygt
-         1oqh0ZfqMDQCMLNEq3ONkvy+8goSVdXLqGs43UPzJJWWxhdd6wPt99yEhQmg87wIkcNr
-         3rOA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:date:from:to:cc:subject:message-id:references
-         :mime-version:content-disposition:in-reply-to;
-        bh=yW6xxqoFqjdbNxGybwNPD8otEN5g9CMdaIvijDpl8O0=;
-        b=GfPJjPFJrAZt/2zD5QqFVdhLxjQ7R1JdgyrsTfD0+hzTuOnO0DP8ZbIQoEgX8npce9
-         H7HZcNzqrphid+JDRSmMpbp+c7AaIuEyMvew7ntsNgiFSlxyP2yh2irBcSXdwPV0PKt4
-         1ukR58Sa+fPlUEYaK6f0IivBhlFbdajwwIHAgiYTHT2bVrc9nWF5hEzMC1hLY/VA/A6i
-         Mg+hYviUTcG8lIHkPaZ90wGU3XBG+HVi9YkXhI6t1COKuxyVDXnBcF01R4c+8U4MGIvb
-         VguWXZcqMYYfaXNp6O0R5YfHfkA+RleCG0udoU7efTMtZlnoNVi2akociN0uqCyfD0ni
-         kAnQ==
-X-Gm-Message-State: AOAM532qn8yO0EDcnutVDeB5hnlc9vBvRCAkHLeRzx1QrLiTVEeuArrS
-        XU9BvY98/QCD66sohhGBVIU=
-X-Google-Smtp-Source: ABdhPJyf4JdMyvNDf4B94zYpXpKtQnc4BcErdNlGmC9cdsi061geJGkk3D0utp+nBI3kiroqRr/pRw==
-X-Received: by 2002:a92:c5ca:: with SMTP id s10mr5953834ilt.32.1621867975418;
-        Mon, 24 May 2021 07:52:55 -0700 (PDT)
-Received: from auth1-smtp.messagingengine.com (auth1-smtp.messagingengine.com. [66.111.4.227])
-        by smtp.gmail.com with ESMTPSA id b10sm11047903ioz.35.2021.05.24.07.52.53
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 24 May 2021 07:52:54 -0700 (PDT)
-Received: from compute1.internal (compute1.nyi.internal [10.202.2.41])
-        by mailauth.nyi.internal (Postfix) with ESMTP id 8A4B027C0054;
-        Mon, 24 May 2021 10:52:53 -0400 (EDT)
-Received: from mailfrontend2 ([10.202.2.163])
-  by compute1.internal (MEProxy); Mon, 24 May 2021 10:52:53 -0400
-X-ME-Sender: <xms:xL2rYN9s7JZK7Ki7BdlpqNe9XYHFRMDrInKNlhi7TE01XI1SphEW-g>
-    <xme:xL2rYBvRBLRnpHtSfTSkHOX2yMujLoPDQGsU2Aicc8MczkK00l-a9CjgUdUNWhtz6
-    8JmwQCtFNHCh4rJjA>
-X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgeduledrvdejledgkeefucetufdoteggodetrfdotf
-    fvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdfqfgfvpdfurfetoffkrfgpnffqhgen
-    uceurghilhhouhhtmecufedttdenucesvcftvggtihhpihgvnhhtshculddquddttddmne
-    cujfgurhepfffhvffukfhfgggtuggjsehttdertddttddvnecuhfhrohhmpeeuohhquhhn
-    ucfhvghnghcuoegsohhquhhnrdhfvghnghesghhmrghilhdrtghomheqnecuggftrfgrth
-    htvghrnhepvdelieegudfggeevjefhjeevueevieetjeeikedvgfejfeduheefhffggedv
-    geejnecukfhppedufedurddutdejrddugeejrdduvdeinecuvehluhhsthgvrhfuihiivg
-    eptdenucfrrghrrghmpehmrghilhhfrhhomhepsghoqhhunhdomhgvshhmthhprghuthhh
-    phgvrhhsohhnrghlihhthidqieelvdeghedtieegqddujeejkeehheehvddqsghoqhhunh
-    drfhgvnhhgpeepghhmrghilhdrtghomhesfhhigihmvgdrnhgrmhgv
-X-ME-Proxy: <xmx:xL2rYLCiLyBUkk6aekMIKrgnjrtIPPCw4mfUoTiAXKKiqOT1luf5aA>
-    <xmx:xL2rYBfRlV8Ec925v5Tm2ob-gn3WlpvjrUtcOrcxu-fWqD8NYBfy0A>
-    <xmx:xL2rYCN1HDwRQ3Kt9mH50e2X_D65IeTxCpKcAp_C2IJm_YMUU9UuNA>
-    <xmx:xb2rYBfYgJEY1C7h1T-nLU5WcdguG-t-ZdBlAECUFixiBUp_Qd7I_ccxtIY>
-Received: from localhost (unknown [131.107.147.126])
-        by mail.messagingengine.com (Postfix) with ESMTPA;
-        Mon, 24 May 2021 10:52:52 -0400 (EDT)
-Date:   Mon, 24 May 2021 22:52:16 +0800
-From:   Boqun Feng <boqun.feng@gmail.com>
-To:     Waiman Long <llong@redhat.com>
-Cc:     Xiongwei Song <sxwjean@gmail.com>, Xiongwei Song <sxwjean@me.com>,
-        peterz@infradead.org, mingo@redhat.com, will@kernel.org,
-        corbet@lwn.net,
-        Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
-        linux-doc@vger.kernel.org
-Subject: Re: [PATCH] docs: lockdep-design: correct the notation for writer
-Message-ID: <YKu9oDtJ7l00k+Yh@boqun-archlinux>
-References: <1621578594-13237-1-git-send-email-sxwjean@me.com>
- <e0c0302f-e63f-7eba-872b-85e21b0b1622@redhat.com>
- <CAEVVKH9nwPmQo8L-eRsWST+gPaJ73MSHZfJ-mM8qWvPaiejdrA@mail.gmail.com>
- <YKuAvt3WXBVASuhY@boqun-archlinux>
- <ab3c5c38-1447-99e1-ee22-9e5af906d8b4@redhat.com>
-MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <ab3c5c38-1447-99e1-ee22-9e5af906d8b4@redhat.com>
+        id S233693AbhEXPL7 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 24 May 2021 11:11:59 -0400
+Received: from smtp.outgoing.loopia.se ([93.188.3.37]:31264 "EHLO
+        smtp.outgoing.loopia.se" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S234540AbhEXPEZ (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Mon, 24 May 2021 11:04:25 -0400
+Received: from s807.loopia.se (localhost [127.0.0.1])
+        by s807.loopia.se (Postfix) with ESMTP id 259182E6B8C5
+        for <linux-doc@vger.kernel.org>; Mon, 24 May 2021 17:02:53 +0200 (CEST)
+Received: from s899.loopia.se (unknown [172.22.191.5])
+        by s807.loopia.se (Postfix) with ESMTP id 157782E2B914;
+        Mon, 24 May 2021 17:02:53 +0200 (CEST)
+Received: from s475.loopia.se (unknown [172.22.191.6])
+        by s899.loopia.se (Postfix) with ESMTP id 113592C8B9BF;
+        Mon, 24 May 2021 17:02:53 +0200 (CEST)
+X-Virus-Scanned: amavisd-new at amavis.loopia.se
+X-Spam-Flag: NO
+X-Spam-Score: -1
+X-Spam-Level: 
+X-Spam-Status: No, score=-1 tagged_above=-999 required=6.2
+        tests=[ALL_TRUSTED=-1] autolearn=disabled
+Received: from s934.loopia.se ([172.22.191.5])
+        by s475.loopia.se (s475.loopia.se [172.22.190.15]) (amavisd-new, port 10024)
+        with UTF8LMTP id 7D9-IReWEXmx; Mon, 24 May 2021 17:02:52 +0200 (CEST)
+X-Loopia-Auth: user
+X-Loopia-User: carl@hgsystem.se
+X-Loopia-Originating-IP: 155.4.133.180
+Received: from localhost.localdomain (h-155-4-133-180.NA.cust.bahnhof.se [155.4.133.180])
+        (Authenticated sender: carl@hgsystem.se)
+        by s934.loopia.se (Postfix) with ESMTPSA id 3B1FE7CE987;
+        Mon, 24 May 2021 17:02:52 +0200 (CEST)
+From:   Erik Rosen <erik.rosen@metormote.com>
+To:     Jean Delvare <jdelvare@suse.com>,
+        Guenter Roeck <linux@roeck-us.net>,
+        Jonathan Corbet <corbet@lwn.net>, linux-hwmon@vger.kernel.org,
+        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org
+Cc:     Erik Rosen <erik.rosen@metormote.com>
+Subject: [PATCH v3 0/6] hwmon: (pmbus/pim4328) Add pim4328 PMBus driver
+Date:   Mon, 24 May 2021 17:02:40 +0200
+Message-Id: <20210524150246.90546-1-erik.rosen@metormote.com>
+X-Mailer: git-send-email 2.11.0 (Apple Git-81)
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Mon, May 24, 2021 at 09:42:20AM -0400, Waiman Long wrote:
-> On 5/24/21 6:32 AM, Boqun Feng wrote:
-> > On Mon, May 24, 2021 at 12:24:00PM +0800, Xiongwei Song wrote:
-> > > On Fri, May 21, 2021 at 11:17 PM Waiman Long <llong@redhat.com> wrote:
-> > > > On 5/21/21 2:29 AM, Xiongwei Song wrote:
-> > > > > From: Xiongwei Song <sxwjean@gmail.com>
-> > > > > 
-> > > > > The block condition matrix is using 'E' as the writer noation here, so it
-> > > > > would be better to use 'E' as the reminder rather than 'W'.
-> > > > > 
-> > > > > Signed-off-by: Xiongwei Song <sxwjean@gmail.com>
-> > > > > ---
-> > > > >    Documentation/locking/lockdep-design.rst | 2 +-
-> > > > >    1 file changed, 1 insertion(+), 1 deletion(-)
-> > > > > 
-> > > > > diff --git a/Documentation/locking/lockdep-design.rst b/Documentation/locking/lockdep-design.rst
-> > > > > index 9f3cfca..c3b923a 100644
-> > > > > --- a/Documentation/locking/lockdep-design.rst
-> > > > > +++ b/Documentation/locking/lockdep-design.rst
-> > > > > @@ -462,7 +462,7 @@ Block condition matrix, Y means the row blocks the column, and N means otherwise
-> > > > >        | R | Y | Y | N |
-> > > > >        +---+---+---+---+
-> > > > > 
-> > > > > -     (W: writers, r: non-recursive readers, R: recursive readers)
-> > > > > +     (E: writers, r: non-recursive readers, R: recursive readers)
-> > > > > 
-> > > > > 
-> > > > >    acquired recursively. Unlike non-recursive read locks, recursive read locks
-> > > > I would say it should be the other way around. Both W and E refer to the
-> > > > same type of lockers. W emphasizes writer aspect of it and E for
-> > > > exclusive. I think we should change the block condition matrix to use W
-> > > > instead of E.
-> > > The doc uses 'E'  to describe dependency egdes too. Should we change them
-> > > to 'W'? Personally,  both 'W' and 'E' are fine.
-> > > 
-> > I also think Waiman's suggestion is solid, there are two ways to
-> > classify locks:
-> > 
-> > 1.	W (Writers), R (Recursive Readers), r (Non-recursive Readers)
-> > 
-> > 2.	E (Exclusive locks), S (Shared locks), R (Recursive Readers),
-> > 	N (Non-recursive locks)
-> > 
-> > And the relations between them are as follow:
-> > 
-> > 	E = W
-> > 	R = R
-> > 	N = W \/ r
-> > 	S = R \/ r
-> > 
-> > , where "\/" is the set union.
-> > 
-> > The story is that I used the way #1 at first, and later on realized way
-> > #2 is better for BFS implementation, also for reasoning, so here came
-> > this leftover..
-> > 
-> My suggestion was based on the fact that it is harder to associate E with
-> writer. So from a readability perspective, it is better to change the block
-> condition matrix to use 'W' to make it more readable.
-> 
+Add hardware monitoring support for the Flex power interface modules
+PIM4006, PIM4328 and PIM4820.
 
-Yes, I agree. It's probably due to the curse of knowledge, I cannot see
-the difficultly of associating E with writer ;-) So thanks for pointing
-out!
+The modules are equipped with dual feed input and has support for
+hotswap, holdup and various circuit protection functionality.
 
-Actually there are two block condition matrices in my mind:
+[PATCH 1/6]
+The modules have no CAPABILITY or WRITE_PROTECT commands. If these
+commands are read, the modules return invalid data (0xFF),
+so in addition to the NO_CAPABILITY flag we need a NO_WRITE_PROTECT
+flag to tell the pmbus_core driver to not access this register.
 
-The block condition matrix describes the natural of block conditions of
-write/read locks, this one provides better readability for lock users,
-it can be used to answer questions like: which lock blocks another lock.
+[PATCH 2/6]
+PIM4328 and PIM4820 use the direct mode data format so a new function
+is added to the pmbus_core driver to be able to read and decode
+the COEFFICIENTS command.
 
-	|   | W | r | R |
-	+---+---+---+---+
-	| W | Y | Y | Y |
-	+---|---+---+---+
-	| r | Y | Y | N |
-	+---+---+---+---+
-	| R | Y | Y | N |
+[PATCH 3/6]
+This is a tentative implementation of core driver support for reading
+and decoding direct format coefficients. If the new flag
+PMBUS_USE_COEFFICIENTS_CMD is set, the driver will use the 
+attribute information in the pmbus_sensor_attr structs together
+with the COEFFICIENTS command to read and set the relevant
+direct mode coefficients.
 
-(answer whether row blocks column)
+Please have a look and comment.
 
-Based on this, we have a more abstract block condition matrix in
-lockdep, it's used to reason about deadlock possibility and implement
-the deadlock detection, it might not be the good one for normal lock
-users to read.
+[PATCH 4/6]
+The two inputs are modelled using virtual phases but there
+is a limitation in the pmbus_core that disallows monitoring
+of phase functions if there is no corresponding function on
+the page level.
 
-	|   |  N  |  R  |
-	+---+-----+-----+
-	| E | Yes | Yes |
-	+---+-----+-----+
-	| S | Yes | No  |
+In this specific case the PIM4006 module allows
+monitoring of current on each input separately,
+but there is no corresponding command on the page level.
 
-(answer whether row blocks column)
+Is there a specific reason for this limitation?
+Otherwise we suggest relaxing this criteria.
 
-FWIW, if we are going to put the second block condition matrix in the
-doc, we'd better place it somewhere in the section "Dependency types and
-strong dependency paths".
+[PATCH 5/6]
+All modules use manufacturer specific registers (mfr) for
+status data and only supports the CML bit in the PMBus
+STATUS register. The driver overrides reading the STATUS
+register and maps the bits in the mfr registers to the STATUS
+register alarm bits.
 
-Just clarify a little while we are at it.
+PATCH 6/6]
+Add driver documentation
 
-Regards,
-Boqun
+This patch has been tested with PIM4406, PIM4280 and PIM4328
+modules.
 
-> Cheers,
-> Longman
-> 
+v2
+-Remove the for_reading parameter from the pmbus_read_coefficients
+function.
+-Use the correct namespace macro for the pmbus_read_coefficients
+function.
+-Fix alphabetic ordering of includes
+-Remove override of STATUS_WORD since it will never get called by
+the core driver.
+-Add new patch with tentative implementation of core driver support
+for reading direct mode coefficients using the COEFFICIENTS command.
+
+v3
+-Rework and simplify the code for initialization of direct mode
+coefficients according to comments by Guenter.
+-Updated commit message for patch 2/6
+
+Erik Rosen (6):
+  Add new pmbus flag NO_WRITE_PROTECT
+  Add function for reading direct mode coefficients
+  Add support for reading and decoding direct format coefficients
+  Allow phase function even if it does not exist not on the associated
+    page
+  Add PMBus driver for PIM4006, PIM4328 and PIM4820
+  Add documentation for the pim4328 PMBus driver
+
+ Documentation/hwmon/index.rst    |   1 +
+ Documentation/hwmon/pim4328.rst  | 105 ++++++++++++++
+ MAINTAINERS                      |   7 +
+ drivers/hwmon/pmbus/Kconfig      |   9 ++
+ drivers/hwmon/pmbus/Makefile     |   1 +
+ drivers/hwmon/pmbus/pim4328.c    | 240 +++++++++++++++++++++++++++++++
+ drivers/hwmon/pmbus/pmbus.h      |   4 +
+ drivers/hwmon/pmbus/pmbus_core.c | 145 +++++++++++++++++--
+ include/linux/pmbus.h            |  17 +++
+ 9 files changed, 518 insertions(+), 11 deletions(-)
+ create mode 100644 Documentation/hwmon/pim4328.rst
+ create mode 100644 drivers/hwmon/pmbus/pim4328.c
+
+
+base-commit: 6efb943b8616ec53a5e444193dccf1af9ad627b5
+-- 
+2.20.1
+
