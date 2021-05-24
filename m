@@ -2,76 +2,101 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 8CF7638EC1E
-	for <lists+linux-doc@lfdr.de>; Mon, 24 May 2021 17:10:55 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 0708038F00B
+	for <lists+linux-doc@lfdr.de>; Mon, 24 May 2021 17:59:41 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S234496AbhEXPMG (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 24 May 2021 11:12:06 -0400
-Received: from pv50p00im-hyfv10011601.me.com ([17.58.6.43]:54633 "EHLO
-        pv50p00im-hyfv10011601.me.com" rhost-flags-OK-OK-OK-OK)
-        by vger.kernel.org with ESMTP id S234488AbhEXPIG (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Mon, 24 May 2021 11:08:06 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=me.com; s=1a1hai;
-        t=1621868783; bh=wvA5ikLwZnEI3QS9n87SZab2KPDLJgG1LFxrfbcnH6Y=;
-        h=From:To:Subject:Date:Message-Id;
-        b=UycgsU+owGV4UizBJ0XMDKcFlf7nZ7LUJuMLTFdAF0liRX6EfyWw80Oh9NSSc8j9M
-         SFce8ssG+fR/4n6WD7dtaCzsjkjtraYMmCjBPwPK8hUILqLyZ6BIqwChwQBRjsbn6A
-         H5LwVCV/JG8iejiq4RsHIa/svVVMwWrny3NZ3mrhNOEwSO7FuAWIvcI9WIzCySKBXt
-         aKuVNWTbPTwcnI1utzL7mRM1K6aitAzVyu3dslTZ9aRDU480tPUrioNmlbuDt8iFiq
-         3YSvpf/X5g4DrJpb2NNvqeSh5LVNoAvxBxRRd4/1i4xsTsvPQRMrUGZjPm2C319gHC
-         eiy1OmRtDtdRA==
-Received: from pek-xsong2-d1.wrs.com (unknown [60.247.85.82])
-        by pv50p00im-hyfv10011601.me.com (Postfix) with ESMTPSA id 826BA3804F0;
-        Mon, 24 May 2021 15:06:20 +0000 (UTC)
-From:   Xiongwei Song <sxwjean@me.com>
-To:     peterz@infradead.org, mingo@redhat.com, will@kernel.org,
-        longman@redhat.com, boqun.feng@gmail.com, corbet@lwn.net
-Cc:     linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
-        Xiongwei Song <sxwjean@gmail.com>
-Subject: [PATCH] docs: lockdep-design: improve readability of the block matrix
-Date:   Mon, 24 May 2021 23:05:45 +0800
-Message-Id: <1621868745-23311-1-git-send-email-sxwjean@me.com>
-X-Mailer: git-send-email 2.7.4
-X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.391,18.0.761
- definitions=2021-05-24_08:2021-05-24,2021-05-24 signatures=0
-X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 suspectscore=0 malwarescore=0
- phishscore=0 bulkscore=0 spamscore=0 clxscore=1015 mlxscore=0
- mlxlogscore=680 adultscore=0 classifier=spam adjust=0 reason=mlx
- scancount=1 engine=8.0.1-2009150000 definitions=main-2105240094
+        id S235546AbhEXQBA (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 24 May 2021 12:01:00 -0400
+Received: from m32-153.88.com ([43.250.32.153]:60956 "EHLO email.cn"
+        rhost-flags-OK-OK-OK-FAIL) by vger.kernel.org with ESMTP
+        id S235702AbhEXQAJ (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Mon, 24 May 2021 12:00:09 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=email.cn;
+        s=dkim; h=Date:From:To; bh=eTi1+Ts+2Eo57YYXEQfPHusA2s3E5JfUy53ss
+        sDiL7A=; b=lawxqCx5Oz/PZTRgGYJSV3O5fWUGiJDnVY8z6z2ePoJZ/c/1GRBl6
+        FZuqpKvg0/EM8t7vi6apjH+u5g+X3Xa8kcrUa+ZIm14KMtoMge9Gs+ptPv4hzka4
+        o3k3UwIQdQnyZkZX1Qbed/mkUFxAw2S7UjJ8U+8F64b2pDZJhgecrE=
+Received: from bobwxc.top (unknown [120.238.248.9])
+        by v_coremail2-frontend-2 (Coremail) with SMTP id GiKnCgDXJlkgzatgBVFGAA--.41751S2;
+        Mon, 24 May 2021 23:58:26 +0800 (CST)
+Date:   Mon, 24 May 2021 23:58:24 +0800
+From:   "Wu X.C." <bobwxc@email.cn>
+To:     Hu Haowen <src.res@email.cn>
+Cc:     alexs@kernel.org, corbet@lwn.net, maskray@google.com,
+        bernard@vivo.com, linux-doc@vger.kernel.org,
+        linux-kernel@vger.kernel.org
+Subject: Re: [PATCH v2 2/3] docs/zh_CN: create new translations for
+ zh_CN/dev-tools/testing-overview
+Message-ID: <20210524155823.GA28790@bobwxc.top>
+References: <20210523140332.GA1097@bobwxc.top>
+ <c5f5ee6a-46f8-ff72-059d-baeba42d234f@email.cn>
+MIME-Version: 1.0
+Content-Type: multipart/signed; micalg=pgp-sha512;
+        protocol="application/pgp-signature"; boundary="gBBFr7Ir9EOA20Yy"
+Content-Disposition: inline
+In-Reply-To: <c5f5ee6a-46f8-ff72-059d-baeba42d234f@email.cn>
+User-Agent: Mutt/1.10.1 (2018-07-13)
+X-CM-TRANSID: GiKnCgDXJlkgzatgBVFGAA--.41751S2
+X-Coremail-Antispam: 1UD129KBjDUn29KB7ZKAUJUUUUU529EdanIXcx71UUUUU7v73
+        VFW2AGmfu7bjvjm3AaLaJ3UjIYCTnIWjp_UUU5d7CY07I20VC2zVCF04k26cxKx2IYs7xG
+        6rWj6s0DM28lY4IEw2IIxxk0rwA2F7IY1VAKz4vEj48ve4kI8wA2z4x0Y4vE2Ix0cI8IcV
+        AFwI0_Jr0_JF4l84ACjcxK6xIIjxv20xvEc7CjxVAFwI0_Jr0_Gr1l84ACjcxK6I8E87Iv
+        67AKxVWxJr0_GcWl84ACjcxK6I8E87Iv6xkF7I0E14v26r4UJVWxJr1le2I262IYc4CY6c
+        8Ij28IcVAaY2xG8wASzI0EjI02j7AqF2xKxwAqx4xG64xvF2IEw4CE5I8CrVC2j2WlYx0E
+        74AGY7Cv6cx26F4UJr1UMcvjeVCFs4IE7xkEbVWUJVW8JwACjcxG0xvEwIxGrwACjI8F5V
+        A0II8E6IAqYI8I648v4I1l42xK82IYc2Ij64vIr41l42xK82IY6x8ErcxFaVAv8VWxJr1U
+        JwCFx2IqxVCFs4IE7xkEbVWUJVW8JwC20s026c02F40E14v26r1j6r18MI8I3I0E7480Y4
+        vE14v26r106r1rMI8E67AF67kF1VAFwI0_JF0_Jw1lIxkGc2Ij64vIr41lIxAIcVC0I7IY
+        x2IY67AKxVWUJVWUCwCI42IY6xIIjxv20xvEc7CjxVAFwI0_Jr0_Gr1lIxAIcVCF04k26c
+        xKx2IYs7xG6r1j6r1xMIIF0xvEx4A2jsIE14v26r1j6r4UMIIF0xvEx4A2jsIEc7CjxVAF
+        wI0_Jr0_GrUvcSsGvfC2KfnxnUUI43ZEXa7VU0mhF7UUUUU==
+X-Originating-IP: [120.238.248.9]
+X-CM-SenderInfo: pere453f6hztlloou0/
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-From: Xiongwei Song <sxwjean@gmail.com>
 
-The block condition matrix is using 'E' as the writer notation, however,
-the writer reminder below the matrix is using 'W', to make them consistent
-and make the matrix more readable, we'd better to use 'W' to represent
-writer.
+--gBBFr7Ir9EOA20Yy
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Suggested-by: Waiman Long <llong@redhat.com>
-Suggested-by: Boqun Feng <boqun.feng@gmail.com>
-Signed-off-by: Xiongwei Song <sxwjean@gmail.com>
----
- Documentation/locking/lockdep-design.rst | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+On Mon, May 24, 2021 at 08:13:50PM +0800, Hu Haowen wrote:
+>=20
+> OK, I'll correct them.
+>=20
+>=20
+> Because this is my first time to kernel translation work, there might
+> be something wrong, after all thanks for pointing them out.
+>=20
 
-diff --git a/Documentation/locking/lockdep-design.rst b/Documentation/locking/lockdep-design.rst
-index 9f3cfca..82f36ca 100644
---- a/Documentation/locking/lockdep-design.rst
-+++ b/Documentation/locking/lockdep-design.rst
-@@ -453,9 +453,9 @@ There are simply four block conditions:
- Block condition matrix, Y means the row blocks the column, and N means otherwise.
- 
- 	+---+---+---+---+
--	|   | E | r | R |
-+	|   | W | r | R |
- 	+---+---+---+---+
--	| E | Y | Y | Y |
-+	| W | Y | Y | Y |
- 	+---+---+---+---+
- 	| r | Y | Y | N |
- 	+---+---+---+---+
--- 
-2.7.4
+Welcome to join us! <http://fars.ee/3TKR.gif>
+
+The points which I given are just suggestions. If you have any ideas or
+questions, just ask/say.
+
+Thanks,
+         Wu X.C.
+
+
+--gBBFr7Ir9EOA20Yy
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEERbo3U5kJpaCtFl1PtlsoEiKCsIUFAmCrzRsACgkQtlsoEiKC
+sIWA3gv9FX1AiiM5eHPPqkPAK9HTqqjE/U89WpSgnfdx5hyxO3AQxdmLWj+MudOc
+rWE3bBj1Sy4K1AKmeUliKl94Z/8l2cAGREASbpHGIVR7WevS8sdTiry7Wm18yOjT
+GZoLYDomq1JBfsT1Emnfvpu58RrOHEw+9+1hShaA6yWCsR08BPiYmaMwm4o7NgxW
+ClXgbo2rT+MqEyybfDkKf+WodZq9CPcoG5gr6JVuVBPhhvAs7JeiLwrb6EhOi70c
+yr/gJrQZc0tmoazTC+HcSdrgDqto5EfRbPwftUDfdj69FPdutviPg2qRaipfiZT1
+TOwFzWy87+aS+p0Vdu2OUrmusLSjWdvoDu/FtiHUZ2ojnw+fHLctu+d9LYcXtc0D
+WO0w0qkSS40TJ3U0moWFrxuT1HQZXK6+yiZzllUzKoeuMY2FNsVgudcX3MM8vLpf
+F/pqzvUXJdweAk9wv/XHQep4XXqcUv8nQaE7rcKoBLhvZ07JhrL6U1Z1Z7QHss3v
+L5yc3F7T
+=wHUy
+-----END PGP SIGNATURE-----
+
+--gBBFr7Ir9EOA20Yy--
 
