@@ -2,167 +2,101 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id C1A3C396876
-	for <lists+linux-doc@lfdr.de>; Mon, 31 May 2021 21:49:42 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id C13BD396892
+	for <lists+linux-doc@lfdr.de>; Mon, 31 May 2021 21:56:15 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S231673AbhEaTvT (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 31 May 2021 15:51:19 -0400
-Received: from mga05.intel.com ([192.55.52.43]:6903 "EHLO mga05.intel.com"
-        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S231563AbhEaTvS (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Mon, 31 May 2021 15:51:18 -0400
-IronPort-SDR: llgHi44og4euXMoGje9G5HJUcfP+D62CPMMSq4BlmGXi6VDK1vpG6F596kwawZQgw9ZUvlEpxj
- McsPxp5Nvjjg==
-X-IronPort-AV: E=McAfee;i="6200,9189,10001"; a="289027850"
-X-IronPort-AV: E=Sophos;i="5.83,238,1616482800"; 
-   d="scan'208";a="289027850"
-Received: from orsmga003.jf.intel.com ([10.7.209.27])
-  by fmsmga105.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 31 May 2021 12:49:35 -0700
-IronPort-SDR: V7ODrX3xLgQyAgWRdFqSl+psciNKF2/BbgM4EGLlNy0C6Qg7uBmF0wcNEQA7/7utGJmctNSwBw
- kRlVu71KxxqQ==
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.83,238,1616482800"; 
-   d="scan'208";a="399062437"
-Received: from black.fi.intel.com ([10.237.72.28])
-  by orsmga003.jf.intel.com with ESMTP; 31 May 2021 12:49:31 -0700
-Received: by black.fi.intel.com (Postfix, from userid 1003)
-        id 4E0655B6; Mon, 31 May 2021 22:49:51 +0300 (EEST)
-From:   Andy Shevchenko <andriy.shevchenko@linux.intel.com>
-To:     =?UTF-8?q?Uwe=20Kleine-K=C3=B6nig?= 
-        <u.kleine-koenig@pengutronix.de>,
-        Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
-        Flavio Suligoi <f.suligoi@asem.it>,
-        Thierry Reding <thierry.reding@gmail.com>,
-        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
-        linux-pwm@vger.kernel.org, linux-acpi@vger.kernel.org
-Cc:     Jonathan Corbet <corbet@lwn.net>, Lee Jones <lee.jones@linaro.org>,
-        "Rafael J. Wysocki" <rjw@rjwysocki.net>,
-        Len Brown <lenb@kernel.org>
-Subject: [PATCH v2 7/7] pwm: core: Simplify some devm_*pwm*() functions
-Date:   Mon, 31 May 2021 22:49:47 +0300
-Message-Id: <20210531194947.10770-7-andriy.shevchenko@linux.intel.com>
-X-Mailer: git-send-email 2.30.2
-In-Reply-To: <20210531194947.10770-1-andriy.shevchenko@linux.intel.com>
-References: <20210531194947.10770-1-andriy.shevchenko@linux.intel.com>
+        id S231418AbhEaT5x (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 31 May 2021 15:57:53 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:59522 "EHLO
+        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S230385AbhEaT5w (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Mon, 31 May 2021 15:57:52 -0400
+Received: from mail-qt1-x834.google.com (mail-qt1-x834.google.com [IPv6:2607:f8b0:4864:20::834])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id ABE10C061574;
+        Mon, 31 May 2021 12:56:11 -0700 (PDT)
+Received: by mail-qt1-x834.google.com with SMTP id m13so8605916qtk.13;
+        Mon, 31 May 2021 12:56:11 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=CgVBqkQLZmOYqPkge4g0jcqhV/Khxx+58SBmawGWouA=;
+        b=AaVt4mkEetpGQ/YDrne8rVrkdxgcLFaCcuqa2pUcjTewMqFwyyZeI3SY0T0RrYtmQP
+         1y2kNQ8bzSEPhTp1qjdbtjIgpETUH7hV4h6TM03iVwy+obHyh+SrAcD7YVGTOnfuvk62
+         FBdXLObEgGd5zZr9fT9/S3m6iLu/6ddkiknGcsvq0VMhfchzkEwhbBXdnu2akeMFf9V2
+         xezfBqo4E9/O6GWrK5Ys3xDY7v5O7BLR2uW7GdhQEhLGL1QjAfvgpdjr47FPD6FKEf35
+         o6In377vVYEC5nEysyzrFo9w7TYxa8r8Yk5Ka0fW9ZIrEB1pxu9O6GMnUFSovgSCEkZs
+         X8Og==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=CgVBqkQLZmOYqPkge4g0jcqhV/Khxx+58SBmawGWouA=;
+        b=X83zDBRQPnx/5bT7ABZoE9gIlXfDQ5oES0ll0bXalakHRh4lyClBUZgviVoACI5esz
+         M6oMl6PYCPjgImQQrx2VTMeK8+I9uvVdlFkj6HZBGV3bpmAsEQTw97tbJmleVcMLzKn9
+         EVcIskLraiyGeRM+UndjD8TBIZpKHkDuWZZ1fwKocaTb5BzGgKxV4QoF9YFN+UHE1CX2
+         94Qj41IKuRQ5oBlX8LVELgE3dVXhReNFaSghufeinf9Ppf7u89XwlCyZ/fZ9UrPq9AqO
+         ZzNoIrklhClebJPBpJ5nJWwoJinLZPoIP9WU/13nmNlDCf59HmXwWCqKwTajGhxWAtpW
+         fOPQ==
+X-Gm-Message-State: AOAM532iIMAKQkTUXJRJLBayf174y3ZfQ3rDXCZgmfRsH5HXGzRgRBKP
+        FhSsJgd8PF6a/us6b6R+zwUmqDofsdUaiQxz
+X-Google-Smtp-Source: ABdhPJxnnTX9v6s/AghcsXuakbSWvaFzCo2NeHxn03hMexmFROnoVK+PRmrMFVhsN0Ct03xtXU3MEQ==
+X-Received: by 2002:ac8:4ccb:: with SMTP id l11mr11402701qtv.127.1622490970809;
+        Mon, 31 May 2021 12:56:10 -0700 (PDT)
+Received: from localhost.localdomain (pool-108-54-205-133.nycmny.fios.verizon.net. [108.54.205.133])
+        by smtp.gmail.com with ESMTPSA id d18sm9939549qkc.28.2021.05.31.12.56.10
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 31 May 2021 12:56:10 -0700 (PDT)
+From:   grantseltzer <grantseltzer@gmail.com>
+To:     andrii@kernel.org, daniel@iogearbox.net, corbet@lwn.net
+Cc:     linux-doc@vger.kernel.org, grantseltzer@gmail.com,
+        bpf@vger.kernel.org
+Subject: [PATCH bpf-next 0/2] Autogenerating libbpf API documentation
+Date:   Mon, 31 May 2021 19:55:51 +0000
+Message-Id: <20210531195553.168298-1-grantseltzer@gmail.com>
+X-Mailer: git-send-email 2.29.2
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Use devm_add_action_or_reset() instead of devres_alloc() and
-devres_add(), which works the same. This will simplify the
-code. There is no functional changes.
+This patch series is meant to start the initiative to document libbpf.
+It includes .rst files which are text documentation describing building, 
+API naming convention, as well as an index to generated API documentation.
 
-Signed-off-by: Andy Shevchenko <andriy.shevchenko@linux.intel.com>
----
-v2: new patch
- drivers/pwm/core.c | 60 +++++++++++++++++++---------------------------
- 1 file changed, 25 insertions(+), 35 deletions(-)
+In this approach the generated API documentation is enabled by the kernels
+existing kernel documentation system which uses sphinx. The resulting docs
+would then be synced to kernel.org/doc
 
-diff --git a/drivers/pwm/core.c b/drivers/pwm/core.c
-index 6d4410bd9793..9f643414676b 100644
---- a/drivers/pwm/core.c
-+++ b/drivers/pwm/core.c
-@@ -1059,9 +1059,9 @@ void pwm_put(struct pwm_device *pwm)
- }
- EXPORT_SYMBOL_GPL(pwm_put);
- 
--static void devm_pwm_release(struct device *dev, void *res)
-+static void devm_pwm_release(void *pwm)
- {
--	pwm_put(*(struct pwm_device **)res);
-+	pwm_put(pwm);
- }
- 
- /**
-@@ -1077,19 +1077,16 @@ static void devm_pwm_release(struct device *dev, void *res)
-  */
- struct pwm_device *devm_pwm_get(struct device *dev, const char *con_id)
- {
--	struct pwm_device **ptr, *pwm;
--
--	ptr = devres_alloc(devm_pwm_release, sizeof(*ptr), GFP_KERNEL);
--	if (!ptr)
--		return ERR_PTR(-ENOMEM);
-+	struct pwm_device *pwm;
-+	int ret;
- 
- 	pwm = pwm_get(dev, con_id);
--	if (!IS_ERR(pwm)) {
--		*ptr = pwm;
--		devres_add(dev, ptr);
--	} else {
--		devres_free(ptr);
--	}
-+	if (IS_ERR(pwm))
-+		return pwm;
-+
-+	ret = devm_add_action_or_reset(dev, devm_pwm_release, pwm);
-+	if (ret)
-+		return ERR_PTR(ret);
- 
- 	return pwm;
- }
-@@ -1110,19 +1107,16 @@ EXPORT_SYMBOL_GPL(devm_pwm_get);
- struct pwm_device *devm_of_pwm_get(struct device *dev, struct device_node *np,
- 				   const char *con_id)
- {
--	struct pwm_device **ptr, *pwm;
--
--	ptr = devres_alloc(devm_pwm_release, sizeof(*ptr), GFP_KERNEL);
--	if (!ptr)
--		return ERR_PTR(-ENOMEM);
-+	struct pwm_device *pwm;
-+	int ret;
- 
- 	pwm = of_pwm_get(dev, np, con_id);
--	if (!IS_ERR(pwm)) {
--		*ptr = pwm;
--		devres_add(dev, ptr);
--	} else {
--		devres_free(ptr);
--	}
-+	if (IS_ERR(pwm))
-+		return pwm;
-+
-+	ret = devm_add_action_or_reset(dev, devm_pwm_release, pwm);
-+	if (ret)
-+		return ERR_PTR(ret);
- 
- 	return pwm;
- }
-@@ -1144,23 +1138,19 @@ struct pwm_device *devm_fwnode_pwm_get(struct device *dev,
- 				       struct fwnode_handle *fwnode,
- 				       const char *con_id)
- {
--	struct pwm_device **ptr, *pwm = ERR_PTR(-ENODEV);
--
--	ptr = devres_alloc(devm_pwm_release, sizeof(*ptr), GFP_KERNEL);
--	if (!ptr)
--		return ERR_PTR(-ENOMEM);
-+	struct pwm_device *pwm = ERR_PTR(-ENODEV);
-+	int ret;
- 
- 	if (is_of_node(fwnode))
- 		pwm = of_pwm_get(dev, to_of_node(fwnode), con_id);
- 	else if (is_acpi_node(fwnode))
- 		pwm = acpi_pwm_get(fwnode);
-+	if (IS_ERR(pwm))
-+		return pwm;
- 
--	if (!IS_ERR(pwm)) {
--		*ptr = pwm;
--		devres_add(dev, ptr);
--	} else {
--		devres_free(ptr);
--	}
-+	ret = devm_add_action_or_reset(dev, devm_pwm_release, pwm);
-+	if (ret)
-+		return ERR_PTR(ret);
- 
- 	return pwm;
- }
+You can test this by running `make htmldocs` and serving the html in 
+Documentation/output. Since libbpf does not yet have comments in kernel
+doc format, see kernel.org/doc/html/latest/doc-guide/kernel-doc.html for
+an example so you can test this.
+
+The advantage of this approach is to use the existing sphinx
+infrastructure that the kernel has, and have libbpf docs in
+the same place as everything else.
+
+The perhaps large disadvantage of this approach is that libbpf versions
+independently from the kernel. If it's possible to version libbpf
+separately without having duplicates that would be the ideal scenario.
+
+grantseltzer (2):
+  Add documentation for libbpf including API autogen
+  Remove duplicate README doc from libbpf
+
+ Documentation/bpf/index.rst                   | 13 +++++++
+ Documentation/bpf/libbpf.rst                  | 14 +++++++
+ Documentation/bpf/libbpf_api.rst              | 18 +++++++++
+ Documentation/bpf/libbpf_build.rst            | 37 +++++++++++++++++++
+ .../bpf/libbpf_naming_convention.rst          | 20 +++++-----
+ 5 files changed, 93 insertions(+), 9 deletions(-)
+ create mode 100644 Documentation/bpf/libbpf.rst
+ create mode 100644 Documentation/bpf/libbpf_api.rst
+ create mode 100644 Documentation/bpf/libbpf_build.rst
+ rename tools/lib/bpf/README.rst => Documentation/bpf/libbpf_naming_convention.rst (96%)
+
 -- 
-2.30.2
+2.29.2
 
