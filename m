@@ -2,132 +2,162 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id EA98F3977A4
-	for <lists+linux-doc@lfdr.de>; Tue,  1 Jun 2021 18:12:06 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 832FC397849
+	for <lists+linux-doc@lfdr.de>; Tue,  1 Jun 2021 18:44:00 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S234072AbhFAQNq (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 1 Jun 2021 12:13:46 -0400
-Received: from mga11.intel.com ([192.55.52.93]:40749 "EHLO mga11.intel.com"
-        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S230523AbhFAQNp (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Tue, 1 Jun 2021 12:13:45 -0400
-IronPort-SDR: 6Dkv8BuOKeY+L7xXcEHmzPTLyKWGWDZixwFkq9yD2vweJlIYLn6oQPK8dNSfT9EL/8mStwBcrJ
- oD1Tl+0XTZhQ==
-X-IronPort-AV: E=McAfee;i="6200,9189,10002"; a="200564663"
-X-IronPort-AV: E=Sophos;i="5.83,240,1616482800"; 
-   d="scan'208";a="200564663"
-Received: from fmsmga001.fm.intel.com ([10.253.24.23])
-  by fmsmga102.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 01 Jun 2021 09:10:50 -0700
-IronPort-SDR: p6iGhjR6RZGIaThSJIMsrDMkBC2yTJlyRQMHAQQu9Ss7eIs9YVt2ec8zXDcXUzwZchHJzXPSuv
- K1tCePzPVo4Q==
-X-IronPort-AV: E=Sophos;i="5.83,240,1616482800"; 
-   d="scan'208";a="549777277"
-Received: from smile.fi.intel.com (HELO smile) ([10.237.68.40])
-  by fmsmga001-auth.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 01 Jun 2021 09:10:45 -0700
-Received: from andy by smile with local (Exim 4.94)
-        (envelope-from <andy.shevchenko@gmail.com>)
-        id 1lo6yX-00GTkz-TQ; Tue, 01 Jun 2021 19:10:41 +0300
-Date:   Tue, 1 Jun 2021 19:10:41 +0300
-From:   Andy Shevchenko <andy.shevchenko@gmail.com>
-To:     Matthew Wilcox <willy@infradead.org>
-Cc:     Justin He <Justin.He@arm.com>,
-        Linus Torvalds <torvalds@linux-foundation.org>,
-        Petr Mladek <pmladek@suse.com>,
-        Steven Rostedt <rostedt@goodmis.org>,
-        Sergey Senozhatsky <senozhatsky@chromium.org>,
-        Rasmus Villemoes <linux@rasmusvillemoes.dk>,
+        id S233925AbhFAQpk (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 1 Jun 2021 12:45:40 -0400
+Received: from smtp.outgoing.loopia.se ([93.188.3.37]:14533 "EHLO
+        smtp.outgoing.loopia.se" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S233301AbhFAQpj (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 1 Jun 2021 12:45:39 -0400
+Received: from s807.loopia.se (localhost [127.0.0.1])
+        by s807.loopia.se (Postfix) with ESMTP id DD9FF2E6294E
+        for <linux-doc@vger.kernel.org>; Tue,  1 Jun 2021 18:43:54 +0200 (CEST)
+Received: from s630.loopia.se (unknown [172.22.191.5])
+        by s807.loopia.se (Postfix) with ESMTP id CD3ED2E2C68D;
+        Tue,  1 Jun 2021 18:43:54 +0200 (CEST)
+Received: from s470.loopia.se (unknown [172.22.191.6])
+        by s630.loopia.se (Postfix) with ESMTP id BF84913B93C4;
+        Tue,  1 Jun 2021 18:43:54 +0200 (CEST)
+X-Virus-Scanned: amavisd-new at amavis.loopia.se
+X-Spam-Flag: NO
+X-Spam-Score: -1
+X-Spam-Level: 
+X-Spam-Status: No, score=-1 tagged_above=-999 required=6.2
+        tests=[ALL_TRUSTED=-1] autolearn=disabled
+Received: from s645.loopia.se ([172.22.191.6])
+        by s470.loopia.se (s470.loopia.se [172.22.190.10]) (amavisd-new, port 10024)
+        with LMTP id xhxZkGMz75sh; Tue,  1 Jun 2021 18:43:53 +0200 (CEST)
+X-Loopia-Auth: user
+X-Loopia-User: carl@hgsystem.se
+X-Loopia-Originating-IP: 178.28.230.104
+Received: from localhost.localdomain (c-b21ce668-74736162.cust.telenor.se [178.28.230.104])
+        (Authenticated sender: carl@hgsystem.se)
+        by s645.loopia.se (Postfix) with ESMTPSA id BE5781579F7E;
+        Tue,  1 Jun 2021 18:43:52 +0200 (CEST)
+From:   Erik Rosen <erik.rosen@metormote.com>
+To:     Jean Delvare <jdelvare@suse.com>,
+        Guenter Roeck <linux@roeck-us.net>,
         Jonathan Corbet <corbet@lwn.net>,
-        Alexander Viro <viro@zeniv.linux.org.uk>,
-        Luca Coelho <luciano.coelho@intel.com>,
-        Kalle Valo <kvalo@codeaurora.org>,
-        "David S. Miller" <davem@davemloft.net>,
-        Jakub Kicinski <kuba@kernel.org>,
-        Heiko Carstens <hca@linux.ibm.com>,
-        Vasily Gorbik <gor@linux.ibm.com>,
-        Christian Borntraeger <borntraeger@de.ibm.com>,
-        Johannes Berg <johannes.berg@intel.com>,
-        "linux-doc@vger.kernel.org" <linux-doc@vger.kernel.org>,
-        "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
-        "linux-wireless@vger.kernel.org" <linux-wireless@vger.kernel.org>,
-        "netdev@vger.kernel.org" <netdev@vger.kernel.org>,
-        "linux-s390@vger.kernel.org" <linux-s390@vger.kernel.org>,
-        Linux FS Devel <linux-fsdevel@vger.kernel.org>
-Subject: Re: [PATCH RFCv2 2/3] lib/vsprintf.c: make %pD print full path for
- file
-Message-ID: <YLZcAesVG1SYL5fp@smile.fi.intel.com>
-References: <YLDpSnV9XBUJq5RU@casper.infradead.org>
- <AM6PR08MB437691E7314C6B774EFED4BDF7229@AM6PR08MB4376.eurprd08.prod.outlook.com>
- <YLEDwFCPcFx+qeul@casper.infradead.org>
- <AM6PR08MB437615DB6A6DEC33223A3138F7229@AM6PR08MB4376.eurprd08.prod.outlook.com>
- <YLEKqGkm8bX6LZfP@casper.infradead.org>
- <AM6PR08MB43764764B52AAC7F05B71056F73E9@AM6PR08MB4376.eurprd08.prod.outlook.com>
- <YLZSgZIcWyYTmqOT@casper.infradead.org>
- <CAHp75VfYgEtJeiVp8b10Va54QShyg4DmWeufuB_WGC8C2SE2mQ@mail.gmail.com>
- <YLZVwFh9MZJR3amM@casper.infradead.org>
- <YLZX9oicn8u4ZVCl@smile.fi.intel.com>
-MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <YLZX9oicn8u4ZVCl@smile.fi.intel.com>
-Organization: Intel Finland Oy - BIC 0357606-4 - Westendinkatu 7, 02160 Espoo
+        Daniel Nilsson <daniel.nilsson@flex.com>,
+        linux-hwmon@vger.kernel.org, linux-doc@vger.kernel.org,
+        linux-kernel@vger.kernel.org
+Cc:     Erik Rosen <erik.rosen@metormote.com>
+Subject: [PATCH v4 0/6] hwmon: (pmbus/pim4328) Add pim4328 PMBus driver
+Date:   Tue,  1 Jun 2021 18:43:15 +0200
+Message-Id: <20210601164320.2907-1-erik.rosen@metormote.com>
+X-Mailer: git-send-email 2.11.0 (Apple Git-81)
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Tue, Jun 01, 2021 at 06:53:26PM +0300, Andy Shevchenko wrote:
-> On Tue, Jun 01, 2021 at 04:44:00PM +0100, Matthew Wilcox wrote:
-> > On Tue, Jun 01, 2021 at 06:36:41PM +0300, Andy Shevchenko wrote:
-> > > On Tue, Jun 1, 2021 at 6:32 PM Matthew Wilcox <willy@infradead.org> wrote:
-> > > > On Tue, Jun 01, 2021 at 02:42:15PM +0000, Justin He wrote:
-> > > 
-> > > ...
-> > > 
-> > > > Just don't put anything
-> > > > in the buffer if the user didn't supply enough space.  As long as you
-> > > > get the return value right, they know the string is bad (or they don't
-> > > > care if the string is bad)
-> > > 
-> > > It might be that I'm out of context here, but printf() functionality
-> > > in the kernel (vsprintf() if being precise)  and its users consider
-> > > that it should fill buffer up to the end of whatever space is
-> > > available.
-> > 
-> > Do they though?  What use is it to specify a small buffer, print a
-> > large filename into it and then use that buffer, knowing that it wasn't
-> > big enough?  That would help decide whether we should print the
-> > start or the end of the filename.
-> > 
-> > Remember, we're going for usefulness here, not abiding by the letter of
-> > the standard under all circumstances, no matter the cost.  At least
-> > partially because we're far outside the standard here; POSIX does
-> > not specify what %pD does.
-> > 
-> > "The argument shall be a pointer to void. The value of the
-> > pointer is converted to a sequence of printable characters, in an
-> > implementation-defined manner."
-> 
-> All nice words, but don't forget kasprintf() or other usages like this.
-> For the same input we have to have the same result independently on the room in
-> the buffer.
-> 
-> So, if I print "Hello, World" I should always get it, not "Monkey's Paw".
-> I.o.w.
-> 
->  snprintf(10) ==> "Hello, Wor"
->  snprintf(5)  ==> "Hello"
->  snprintf(2)  !=> "Mo"
->  snprintf(1)  !=> "M"
->  snprintf(1)  ==> "H"
-> 
-> Inconsistency here is really not what we want.
+Add hardware monitoring support for the Flex power interface modules
+PIM4006, PIM4328 and PIM4820.
 
-I have to add that in light of the topic those characters should be counted
-from the end of the filename. So, we will give user as much as possible of useful
-information. I.o.w. always print the last part of filename up to the buffer
-size or if the filename is shorter than buffer we will have it in full.
+The modules are equipped with dual feed input and has support for
+hotswap, holdup and various circuit protection functionality.
 
+[PATCH 1/5]
+The modules have no CAPABILITY or WRITE_PROTECT commands. If these
+commands are read, the modules return invalid data (0xFF),
+so in addition to the NO_CAPABILITY flag we need a NO_WRITE_PROTECT
+flag to tell the pmbus_core driver to not access this register.
+
+[PATCH 2/5]
+PIM4328 and PIM4820 use the direct mode data format so new functionality
+is added to the pmbus_core driver to be able to read and decode
+the COEFFICIENTS command.
+
+This is a tentative implementation of core driver support for reading
+and decoding direct format coefficients. If the new flag
+PMBUS_USE_COEFFICIENTS_CMD is set, the driver will use the 
+attribute information in the pmbus_sensor_attr structs together
+with the COEFFICIENTS command to read and set the relevant
+direct mode coefficients.
+
+Please have a look and comment.
+
+[PATCH 3/5]
+The two inputs are modelled using virtual phases but there
+is a limitation in the pmbus_core that disallows monitoring
+of phase functions if there is no corresponding function on
+the page level.
+
+In this specific case the PIM4006 module allows
+monitoring of current on each input separately,
+but there is no corresponding command on the page level.
+
+Is there a specific reason for this limitation?
+Otherwise we suggest relaxing this criteria.
+
+[PATCH 4/5]
+All modules use manufacturer specific registers (mfr) for
+status data and only supports the CML bit in the PMBus
+STATUS register. The driver overrides reading the STATUS
+register and maps the bits in the mfr registers to the STATUS
+register alarm bits.
+
+PATCH 5/5]
+Add driver documentation
+
+This patch has been tested with PIM4406, PIM4280 and PIM4328
+modules.
+
+v2
+-Remove the for_reading parameter from the pmbus_read_coefficients
+function.
+-Use the correct namespace macro for the pmbus_read_coefficients
+function.
+-Fix alphabetic ordering of includes
+-Remove override of STATUS_WORD since it will never get called by
+the core driver.
+-Add new patch with tentative implementation of core driver support
+for reading direct mode coefficients using the COEFFICIENTS command.
+
+v3
+-Rework and simplify the code for initialization of direct mode
+coefficients according to comments by Guenter.
+-Updated commit message for patch 2/6
+
+v4
+-Use tabs for aligning #define.
+-Move phase check before switch.
+-Return immediately on error.
+-Use existing PB_STATUS_ bit masks.
+-Add missing error checks.
+-Remove unnecessary !=0 check.
+-Move pdata allocation ahead of the switch statement.
+-Do not export the pmbus_read_coefficients function
+-Change nattr type in struct pmbus_class_attr_map to int.
+-Remove unnecessary initialization in pmbus_init_coefficients.
+-Moved function pmbus_read_coefficients to keep related code together.
+-Rewrite init and read coefficients functions to get rid of ugly cast.
+-Squashed [PATCH 2/6] & [PATCH 3/6].
+-Added Acked-By maintainer.
+
+Erik Rosen (5):
+  Add new pmbus flag NO_WRITE_PROTECT
+  Add support for reading direct mode coefficients
+  Allow phase function even if it does not exist not on the associated
+    page
+  Add PMBus driver for PIM4006, PIM4328 and PIM4820
+  Add documentation for the pim4328 PMBus driver
+
+ Documentation/hwmon/index.rst    |   1 +
+ Documentation/hwmon/pim4328.rst  | 105 ++++++++++++++
+ MAINTAINERS                      |   7 +
+ drivers/hwmon/pmbus/Kconfig      |   9 ++
+ drivers/hwmon/pmbus/Makefile     |   1 +
+ drivers/hwmon/pmbus/pim4328.c    | 233 +++++++++++++++++++++++++++++++
+ drivers/hwmon/pmbus/pmbus_core.c | 141 +++++++++++++++++--
+ include/linux/pmbus.h            |  17 +++
+ 8 files changed, 503 insertions(+), 11 deletions(-)
+ create mode 100644 Documentation/hwmon/pim4328.rst
+ create mode 100644 drivers/hwmon/pmbus/pim4328.c
+
+
+base-commit: 6efb943b8616ec53a5e444193dccf1af9ad627b5
 -- 
-With Best Regards,
-Andy Shevchenko
-
+2.20.1
 
