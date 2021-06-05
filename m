@@ -2,213 +2,201 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id EF55E39C80A
-	for <lists+linux-doc@lfdr.de>; Sat,  5 Jun 2021 14:11:39 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 377ED39C878
+	for <lists+linux-doc@lfdr.de>; Sat,  5 Jun 2021 15:18:50 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S229933AbhFEMNZ (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Sat, 5 Jun 2021 08:13:25 -0400
-Received: from m34-101.88.com ([104.250.34.101]:37324 "EHLO 88.com"
-        rhost-flags-OK-OK-OK-FAIL) by vger.kernel.org with ESMTP
-        id S229931AbhFEMNY (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Sat, 5 Jun 2021 08:13:24 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=email.cn;
-        s=dkim; h=From:To:Date; bh=u+hKeiabGOshfj1YllaLsm5aJat7BJBTEB04L
-        dMpjSs=; b=I260UqAmcq69G9MrNLlV43m+BwCQ64UG+thXBmPqAkggxlg0+sKdv
-        AS/6qRu+oHf5qW62C/CfDu8oCSJJARmchkaxoJ0ugd8k37PW42HCfFhPdAMpeVIO
-        cid9P1I2J2w4rrgGcICQ7Mr2th4mNAJdXJx4k5TKVI+VI64uNdgaKg=
-Received: from localhost.localdomain (unknown [113.251.11.103])
-        by v_coremail2-frontend-2 (Coremail) with SMTP id GiKnCgD3RVhyaLtgGHhmAA--.3388S2;
-        Sat, 05 Jun 2021 20:05:08 +0800 (CST)
-From:   Hu Haowen <src.res@email.cn>
-To:     alexs@kernel.org, corbet@lwn.net, bobwxc@email.cn,
-        bernard@vivo.com, maskray@google.com
-Cc:     linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
-        Hu Haowen <src.res@email.cn>
-Subject: [PATCH v3] docs/zh_CN: create new translations for zh_CN/dev-tools/testing-overview
-Date:   Sat,  5 Jun 2021 20:05:04 +0800
-Message-Id: <20210605120504.40246-1-src.res@email.cn>
-X-Mailer: git-send-email 2.25.1
+        id S230266AbhFENUc (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Sat, 5 Jun 2021 09:20:32 -0400
+Received: from mail.kernel.org ([198.145.29.99]:35038 "EHLO mail.kernel.org"
+        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
+        id S230050AbhFENU0 (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Sat, 5 Jun 2021 09:20:26 -0400
+Received: by mail.kernel.org (Postfix) with ESMTPSA id 8B7676140C;
+        Sat,  5 Jun 2021 13:18:37 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+        s=k20201202; t=1622899117;
+        bh=oJLjhT+Bdkuogp9lcH0/DqQMHssScmlrFluWHGdXmSs=;
+        h=From:To:Cc:Subject:Date:From;
+        b=KfRX9ZYH+GSgzlTzpxjctPEmvJkfTKXl+Y+RucBzSz4WBnbvAWthrJ/curB8ax41d
+         0RamzCUbuHW+hNvsvxFRNLKpwhOj6yb5j+G4AvESC4L/Ra8OFvHySvf0In/pjnoYho
+         eY0513uUzhTlAd81LYiZhM6d2eqjTpr7yOp0/3DCmJ+GuyAF6WqO8Qm1KuhLNbxF9b
+         yJTI8f1KZmiDb5cy+VNqUfelbe5X2IHFBMjmYFqyjzC6dFH+JcvuqE43jlUMhFuRed
+         3tc3s4M5VtPfikIOxkkQLqaG0CgwsjLGBqPIdOsXSEfmrN3+1RgsbpsRRxwHBsB0s5
+         0vEzE1EocfgEA==
+Received: by mail.kernel.org with local (Exim 4.94.2)
+        (envelope-from <mchehab@kernel.org>)
+        id 1lpWCB-008GEU-71; Sat, 05 Jun 2021 15:18:35 +0200
+From:   Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
+To:     "Jonathan Corbet" <corbet@lwn.net>,
+        Linux Doc Mailing List <linux-doc@vger.kernel.org>
+Cc:     Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
+        linux-kernel@vger.kernel.org, bpf@vger.kernel.org,
+        coresight@lists.linaro.org, devicetree@vger.kernel.org,
+        kunit-dev@googlegroups.com, kvm@vger.kernel.org,
+        linux-acpi@vger.kernel.org, linux-arm-kernel@lists.infradead.org,
+        linux-gpio@vger.kernel.org, linux-hwmon@vger.kernel.org,
+        linux-i2c@vger.kernel.org, linux-kselftest@vger.kernel.org,
+        linux-media@vger.kernel.org, linux-pci@vger.kernel.org,
+        linux-pm@vger.kernel.org, linux-security-module@vger.kernel.org,
+        netdev@vger.kernel.org
+Subject: [PATCH 00/34] docs: avoid using ReST :doc:`foo` tag
+Date:   Sat,  5 Jun 2021 15:17:59 +0200
+Message-Id: <cover.1622898327.git.mchehab+huawei@kernel.org>
+X-Mailer: git-send-email 2.31.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-CM-TRANSID: GiKnCgD3RVhyaLtgGHhmAA--.3388S2
-X-Coremail-Antispam: 1UD129KBjvJXoW3Gr17KFy3JF1fXw1xCryfJFb_yoW3AF43pr
-        Wv9r97K3WUury7A340ka4jqr1UCFn7uF43tF18Ja4Sqr18AFsYkrsFgFyqq3y3WrW8ZF98
-        AF4rKFyj9w1vy3JanT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
-        9KBjDU0xBIdaVrnRJUUUg01xkIjI8I6I8E6xAIw20EY4v20xvaj40_JFC_Wr1l8cAvFVAK
-        0II2c7xJM28CjxkF64kEwVA0rcxSw2x7M28EF7xvwVC0I7IYx2IY67AKxVWUJVWUCwA2z4
-        x0Y4vE2Ix0cI8IcVCY1x0267AKxVWUJVW8JwA2z4x0Y4vEx4A2jsIE14v26r4UJVWxJr1l
-        84ACjcxK6I8E87Iv6xkF7I0E14v26r4UJVWxJr1le2I262IYc4CY6c8Ij28IcVAaY2xG8w
-        Aqx4xG64xvF2IEw4CE5I8CrVC2j2WlYx0E74AGY7Cv6cx26F4UJr1UMcvjeVCFs4IE7xkE
-        bVWUJVW8JwACjcxG0xvY0x0EwIxGrwACjI8F5VA0II8E6IAqYI8I648v4I1l42xK82IYc2
-        Ij64vIr41l42xK82IY6x8ErcxFaVAv8VWxJr1UJwCFx2IqxVCFs4IE7xkEbVWUJVW8JwC2
-        0s026c02F40E14v26r1j6r18MI8I3I0E7480Y4vE14v26r106r1rMI8E67AF67kF1VAFwI
-        0_Jw0_GFylIxkGc2Ij64vIr41lIxAIcVC0I7IYx2IY67AKxVWUJVWUCwCI42IY6xIIjxv2
-        0xvEc7CjxVAFwI0_Jr0_Gr1lIxAIcVCF04k26cxKx2IYs7xG6r1j6r1xMIIF0xvEx4A2js
-        IE14v26r1j6r4UMIIF0xvEx4A2jsIEc7CjxVAFwI0_Jr0_GrUvcSsGvfC2KfnxnUUI43ZE
-        Xa7VU0mhF7UUUUU==
-X-Originating-IP: [113.251.11.103]
-X-CM-SenderInfo: hvufh21hv6vzxdlohubq/
+Sender: Mauro Carvalho Chehab <mchehab@kernel.org>
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Create new translations for dev-tools/testing-overview.rst and link it
-to dev-tools/index.rst with TODOList modifications.
+As discussed at:
+	https://lore.kernel.org/linux-doc/871r9k6rmy.fsf@meer.lwn.net/
 
-Signed-off-by: Hu Haowen <src.res@email.cn>
----
- .../translations/zh_CN/dev-tools/index.rst    |   5 +
- .../zh_CN/dev-tools/testing-overview.rst      | 110 ++++++++++++++++++
- 2 files changed, 115 insertions(+)
- create mode 100644 Documentation/translations/zh_CN/dev-tools/testing-overview.rst
+It is better to avoid using :doc:`foo` to refer to Documentation/foo.rst, as the
+automarkup.py extension should handle it automatically, on most cases.
 
-diff --git a/Documentation/translations/zh_CN/dev-tools/index.rst b/Documentation/translations/zh_CN/dev-tools/index.rst
-index fd73c479917b..6424590ea382 100644
---- a/Documentation/translations/zh_CN/dev-tools/index.rst
-+++ b/Documentation/translations/zh_CN/dev-tools/index.rst
-@@ -11,6 +11,9 @@
- 目前这些文档已经整理在一起，不需要再花费额外的精力。
- 欢迎任何补丁。
- 
-+有关测试专用工具的简要概述，参见
-+Documentation/dev-tools/translations/zh_CN/testing-overview.rst
-+
- .. class:: toc-title
- 
- 	   目录
-@@ -19,6 +22,7 @@
-    :maxdepth: 2
- 
-    gcov
-+   testing-overview
- 
- Todolist:
- 
-@@ -29,6 +33,7 @@ Todolist:
-  - ubsan
-  - kmemleak
-  - kcsan
-+ - kfence
-  - gdb-kernel-debugging
-  - kgdb
-  - kselftest
-diff --git a/Documentation/translations/zh_CN/dev-tools/testing-overview.rst b/Documentation/translations/zh_CN/dev-tools/testing-overview.rst
-new file mode 100644
-index 000000000000..a2746c81033b
---- /dev/null
-+++ b/Documentation/translations/zh_CN/dev-tools/testing-overview.rst
-@@ -0,0 +1,110 @@
-+.. SPDX-License-Identifier: GPL-2.0
-+
-+.. include:: ../disclaimer-zh_CN.rst
-+
-+:Original: Documentation/dev-tools/testing-overview.rst
-+:Translator: 胡皓文 Hu Haowen <src.res@email.cn>
-+
-+============
-+内核测试指南
-+============
-+
-+有许多不同的工具可以用于测试Linux内核，因此了解什么时候使用它们可能
-+很困难。本文档粗略概述了它们之间的区别，并阐释了它们是怎样糅合在一起
-+的。
-+
-+编写和运行测试
-+==============
-+
-+大多数内核测试都是用kselftest或KUnit框架之一编写的。它们都让运行测试
-+更加简化，并为编写新测试提供帮助。
-+
-+如果你想验证内核的行为——尤其是内核的特定部分——那你就要使用kUnit或
-+kselftest。
-+
-+KUnit和kselftest的区别
-+----------------------
-+
-+.. note::
-+     由于本文段中部分术语尚无较好的对应中文释义，可能导致与原文含义
-+     存在些许差异，因此建议读者结合原文
-+     （Documentation/dev-tools/testing-overview.rst）辅助阅读。
-+
-+     如对部分翻译有异议或有更好的翻译意见，欢迎联系译者进行修订。
-+
-+KUnit（Documentation/dev-tools/kunit/index.rst）是用于“白箱”测
-+试的一个完整的内核内部系统：因为测试代码是内核的一部分，所以它能够访
-+问用户空间不能访问到的内部结构和功能。
-+
-+因此，KUnit测试最好针对内核中较小的、自包含的部分，以便能够独立地测
-+试。“单元”测试的概念亦是如此。
-+
-+比如，一个KUnit测试可能测试一个单独的内核功能（甚至通过一个函数测试
-+一个单一的代码路径，例如一个错误处理案例），而不是整个地测试一个特性。
-+
-+这也使得KUnit测试构建和运行非常地快，从而能够作为开发流程的一部分被
-+频繁地运行。
-+
-+有关更详细的介绍，请参阅KUnit测试代码风格指南
-+Documentation/dev-tools/kunit/style.rst
-+
-+kselftest（Documentation/dev-tools/kselftest.rst），相对来说，大量用
-+于用户空间，并且通常测试用户空间的脚本或程序。
-+
-+这使得编写复杂的测试，或者需要操作更多全局系统状态的测试更加容易（诸
-+如生成进程之类）。然而，从kselftest直接调用内核函数是不行的。这也就
-+意味着只有通过某种方式（如系统调用、驱动设备、文件系统等）导出到了用
-+户空间的内核功能才能使用kselftest来测试。为此，有些测试包含了一个伴
-+生的内核模块用于导出更多的信息和功能。不过，对于基本上或者完全在内核
-+中运行的测试，KUnit可能是更佳工具。
-+
-+kselftest也因此非常适合于全部功能的测试，因为这些功能会将接口暴露到
-+用户空间，从而能够被测试，而不是展现实现细节。“system”测试和
-+“end-to-end”测试亦是如此。
-+
-+比如，一个新的系统调用应该伴随有新的kselftest测试。
-+
-+代码覆盖率工具
-+==============
-+
-+支持两种不同代码之间的覆盖率测量工具。它们可以用来验证一项测试执行的
-+确切函数或代码行。这有助于决定内核被测试了多少，或用来查找合适的测试
-+中没有覆盖到的极端情况。
-+
-+:doc:`gcov` 是GCC的覆盖率测试工具，能用于获取内核的全局或每个模块的
-+覆盖率。与KCOV不同的是，这个工具不记录每个任务的覆盖率。覆盖率数据可
-+以通过debugfs读取，并通过常规的gcov工具进行解释。
-+
-+:doc:`kcov` 是能够构建在内核之中，用于在每个任务的层面捕捉覆盖率的一
-+个功能。因此，它对于模糊测试和关于代码执行期间信息的其它情况非常有用，
-+比如在一个单一系统调用里使用它就很有用。
-+
-+动态分析工具
-+============
-+
-+内核也支持许多动态分析工具，用以检测正在运行的内核中出现的多种类型的
-+问题。这些工具通常每个去寻找一类不同的缺陷，比如非法内存访问，数据竞
-+争等并发问题，或整型溢出等其他未定义行为。
-+
-+如下所示：
-+
-+* kmemleak检测可能的内存泄漏。参阅
-+  Documentation/dev-tools/kmemleak.rst
-+* KASAN检测非法内存访问，如数组越界和释放后重用（UAF）。参阅
-+  Documentation/dev-tools/kasan.rst
-+* UBSAN检测C标准中未定义的行为，如整型溢出。参阅
-+  Documentation/dev-tools/ubsan.rst
-+* KCSAN检测数据竞争。参阅 Documentation/dev-tools/kcsan.rst
-+* KFENCE是一个低开销的内存问题检测器，比KASAN更快且能被用于批量构建。
-+  参阅 Documentation/dev-tools/kfence.rst
-+* lockdep是一个锁定正确性检测器。参阅
-+  Documentation/locking/lockdep-design.rst
-+* 除此以外，在内核中还有一些其它的调试工具，大多数能在
-+  lib/Kconfig.debug 中找到。
-+
-+这些工具倾向于对内核进行整体测试，并且不像kselftest和KUnit一样“传递”。
-+它们可以通过在启用这些工具时运行内核测试以与kselftest或KUnit结合起来：
-+之后你就能确保这些错误在测试过程中都不会发生了。
-+
-+一些工具与KUnit和kselftest集成，并且在检测到问题时会自动打断测试。
-+
+There are a couple of exceptions to this rule:
+
+1. when :doc:  tag is used to point to a kernel-doc DOC: markup;
+2. when it is used with a named tag, e. g. :doc:`some name <foo>`;
+
+It should also be noticed that automarkup.py has currently an issue:
+if one use a markup like:
+
+	Documentation/dev-tools/kunit/api/test.rst
+	  - documents all of the standard testing API excluding mocking
+	    or mocking related features.
+
+or, even:
+
+	Documentation/dev-tools/kunit/api/test.rst
+	    documents all of the standard testing API excluding mocking
+	    or mocking related features.
+	
+The automarkup.py will simply ignore it. Not sure why. This patch series
+avoid the above patterns (which is present only on 4 files), but it would be
+nice to have a followup patch fixing the issue at automarkup.py.
+
+On this series:
+
+Patch 1 manually adjust the references inside driver-api/pm/devices.rst,
+as there it uses :file:`foo` to refer to some Documentation/ files;
+
+Patch 2 converts a table at Documentation/dev-tools/kunit/api/index.rst
+into a list, carefully avoiding the 
+
+Patch 3 converts the cross-references at the media documentation, also
+avoiding the automarkup.py bug;
+
+Patches 4-34 convert the other occurrences via a replace script. They were
+manually edited, in order to honour 80-columns where possible.
+
+I did a diff between the Sphinx 2.4.4 output before and after this patch
+series in order to double-check that all converted Documentation/ 
+references will produce <a href=<foo>.rst>foo title</a> tags.
+
+Mauro Carvalho Chehab (34):
+  docs: devices.rst: better reference documentation docs
+  docs: dev-tools: kunit: don't use a table for docs name
+  media: docs: */media/index.rst: don't use ReST doc:`foo`
+  media: userspace-api: avoid using ReST :doc:`foo` markup
+  media: driver-api: drivers: avoid using ReST :doc:`foo` markup
+  media: admin-guide: avoid using ReST :doc:`foo` markup
+  docs: admin-guide: pm: avoid using ReSt :doc:`foo` markup
+  docs: admin-guide: hw-vuln: avoid using ReST :doc:`foo` markup
+  docs: admin-guide: sysctl: avoid using ReST :doc:`foo` markup
+  docs: block: biodoc.rst: avoid using ReSt :doc:`foo` markup
+  docs: bpf: bpf_lsm.rst: avoid using ReSt :doc:`foo` markup
+  docs: core-api: avoid using ReSt :doc:`foo` markup
+  docs: dev-tools: testing-overview.rst: avoid using ReSt :doc:`foo`
+    markup
+  docs: dev-tools: kunit: avoid using ReST :doc:`foo` markup
+  docs: devicetree: bindings: submitting-patches.rst: avoid using ReSt
+    :doc:`foo` markup
+  docs: doc-guide: avoid using ReSt :doc:`foo` markup
+  docs: driver-api: avoid using ReSt :doc:`foo` markup
+  docs: driver-api: gpio: using-gpio.rst: avoid using ReSt :doc:`foo`
+    markup
+  docs: driver-api: surface_aggregator: avoid using ReSt :doc:`foo`
+    markup
+  docs: driver-api: usb: avoid using ReSt :doc:`foo` markup
+  docs: firmware-guide: acpi: avoid using ReSt :doc:`foo` markup
+  docs: hwmon: adm1177.rst: avoid using ReSt :doc:`foo` markup
+  docs: i2c: avoid using ReSt :doc:`foo` markup
+  docs: kernel-hacking: hacking.rst: avoid using ReSt :doc:`foo` markup
+  docs: networking: devlink: avoid using ReSt :doc:`foo` markup
+  docs: PCI: endpoint: pci-endpoint-cfs.rst: avoid using ReSt :doc:`foo`
+    markup
+  docs: PCI: pci.rst: avoid using ReSt :doc:`foo` markup
+  docs: process: submitting-patches.rst: avoid using ReSt :doc:`foo`
+    markup
+  docs: security: landlock.rst: avoid using ReSt :doc:`foo` markup
+  docs: trace: coresight: coresight.rst: avoid using ReSt :doc:`foo`
+    markup
+  docs: trace: ftrace.rst: avoid using ReSt :doc:`foo` markup
+  docs: userspace-api: landlock.rst: avoid using ReSt :doc:`foo` markup
+  docs: virt: kvm: s390-pv-boot.rst: avoid using ReSt :doc:`foo` markup
+  docs: x86: avoid using ReSt :doc:`foo` markup
+
+ .../PCI/endpoint/pci-endpoint-cfs.rst         |  2 +-
+ Documentation/PCI/pci.rst                     |  6 +--
+ .../special-register-buffer-data-sampling.rst |  3 +-
+ Documentation/admin-guide/media/bt8xx.rst     | 15 ++++----
+ Documentation/admin-guide/media/bttv.rst      | 21 ++++++-----
+ Documentation/admin-guide/media/index.rst     | 12 +++---
+ Documentation/admin-guide/media/saa7134.rst   |  3 +-
+ Documentation/admin-guide/pm/intel_idle.rst   | 16 +++++---
+ Documentation/admin-guide/pm/intel_pstate.rst |  9 +++--
+ Documentation/admin-guide/sysctl/abi.rst      |  2 +-
+ Documentation/admin-guide/sysctl/kernel.rst   | 37 ++++++++++---------
+ Documentation/block/biodoc.rst                |  2 +-
+ Documentation/bpf/bpf_lsm.rst                 | 13 ++++---
+ .../core-api/bus-virt-phys-mapping.rst        |  2 +-
+ Documentation/core-api/dma-api.rst            |  5 ++-
+ Documentation/core-api/dma-isa-lpc.rst        |  2 +-
+ Documentation/core-api/index.rst              |  4 +-
+ Documentation/dev-tools/kunit/api/index.rst   |  8 ++--
+ Documentation/dev-tools/kunit/faq.rst         |  2 +-
+ Documentation/dev-tools/kunit/index.rst       | 14 +++----
+ Documentation/dev-tools/kunit/start.rst       |  6 +--
+ Documentation/dev-tools/kunit/tips.rst        |  5 ++-
+ Documentation/dev-tools/kunit/usage.rst       |  8 ++--
+ Documentation/dev-tools/testing-overview.rst  | 16 ++++----
+ .../bindings/submitting-patches.rst           | 11 +++---
+ Documentation/doc-guide/contributing.rst      |  8 ++--
+ Documentation/driver-api/gpio/using-gpio.rst  |  4 +-
+ Documentation/driver-api/ioctl.rst            |  2 +-
+ .../driver-api/media/drivers/bttv-devel.rst   |  2 +-
+ Documentation/driver-api/media/index.rst      | 10 +++--
+ Documentation/driver-api/pm/devices.rst       |  8 ++--
+ .../surface_aggregator/clients/index.rst      |  3 +-
+ .../surface_aggregator/internal.rst           | 15 ++++----
+ .../surface_aggregator/overview.rst           |  6 ++-
+ Documentation/driver-api/usb/dma.rst          |  6 +--
+ .../acpi/dsd/data-node-references.rst         |  3 +-
+ .../firmware-guide/acpi/dsd/graph.rst         |  2 +-
+ .../firmware-guide/acpi/enumeration.rst       |  7 ++--
+ Documentation/hwmon/adm1177.rst               |  3 +-
+ Documentation/i2c/instantiating-devices.rst   |  2 +-
+ Documentation/i2c/old-module-parameters.rst   |  3 +-
+ Documentation/i2c/smbus-protocol.rst          |  4 +-
+ Documentation/kernel-hacking/hacking.rst      |  4 +-
+ .../networking/devlink/devlink-region.rst     |  2 +-
+ .../networking/devlink/devlink-trap.rst       |  4 +-
+ Documentation/process/submitting-patches.rst  | 32 ++++++++--------
+ Documentation/security/landlock.rst           |  3 +-
+ Documentation/trace/coresight/coresight.rst   |  8 ++--
+ Documentation/trace/ftrace.rst                |  2 +-
+ Documentation/userspace-api/landlock.rst      | 11 +++---
+ .../userspace-api/media/glossary.rst          |  2 +-
+ Documentation/userspace-api/media/index.rst   | 12 +++---
+ Documentation/virt/kvm/s390-pv-boot.rst       |  2 +-
+ Documentation/x86/boot.rst                    |  4 +-
+ Documentation/x86/mtrr.rst                    |  2 +-
+ 55 files changed, 217 insertions(+), 183 deletions(-)
+
 -- 
-2.25.1
+2.31.1
+
 
