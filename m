@@ -2,44 +2,42 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id C3FCD39C9BB
-	for <lists+linux-doc@lfdr.de>; Sat,  5 Jun 2021 18:06:47 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 55ABF39C9CA
+	for <lists+linux-doc@lfdr.de>; Sat,  5 Jun 2021 18:13:20 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S229933AbhFEQIe (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Sat, 5 Jun 2021 12:08:34 -0400
-Received: from mail.kernel.org ([198.145.29.99]:55724 "EHLO mail.kernel.org"
+        id S229981AbhFEQPH (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Sat, 5 Jun 2021 12:15:07 -0400
+Received: from mail.kernel.org ([198.145.29.99]:56546 "EHLO mail.kernel.org"
         rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S229930AbhFEQIe (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Sat, 5 Jun 2021 12:08:34 -0400
-Received: by mail.kernel.org (Postfix) with ESMTPSA id 8B71C6140B;
-        Sat,  5 Jun 2021 16:06:44 +0000 (UTC)
+        id S229930AbhFEQPG (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Sat, 5 Jun 2021 12:15:06 -0400
+Received: by mail.kernel.org (Postfix) with ESMTPSA id 415F261107;
+        Sat,  5 Jun 2021 16:13:17 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-        s=k20201202; t=1622909206;
-        bh=16nOXmG0A75mh++Cnr2mQNH2BWxmrGJci/q8393J0ng=;
+        s=k20201202; t=1622909598;
+        bh=SA5TEU+2VLG56VJsWiXFfbq1+IATGpk0WcRtynKouYQ=;
         h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
-        b=LK6agVgfW6Qhhaok3/QYxQeDm6R58cHTjR2b+2WupbyIjNLutdiAi/+ao9tK9oRyS
-         Id6Bp0AiN6GzUYIW3iyYNDY4hnR5Sl1MOyvdQkCz2Jc9yGEDlr3/D1Q/HXxPnYo++G
-         qnxvY7WQ1gID49kKY5u/EYA5Rthl83Obs8Et4FLfz0oNAIQ6d8cTUGiUlH1P1BVLRm
-         z2wUB5Fb98LPnHFF2kLbXIQXXuz7rdS6van5rA2HxOrgwIApN/XYL3+u3zmIhNhVIo
-         Mytj/aJysUEd7AmjEKzIor8G9Z1mGaPLF+I0+Uev8/XysnOo4ARWjANsfwpGq3fKbt
-         kf6FBlVqFwNWQ==
-Date:   Sat, 5 Jun 2021 18:06:41 +0200
+        b=h8je3nNfdPMWLaSstwksH2HUFfv92PhNait5QX6wGaW6wJu2PYnONmGWNPvewgMMx
+         m2coc7Ajx5QYNAsd5PcE29AshjLvujwf98ajO97ibsGlQQgt/IPk27C7jmA6y1YDjo
+         v43xIsTn2ZMs7T/EvAj/7enc6bO/84cIzevLaAN8fCaUxru1ZIV5LLK3VvKHLvb7P/
+         nKgHGI9mndrTluywCQaCpxcoY9SgrLknMuxrB8GJe+dmm+UXEAkcvus0sObF79ELu1
+         SMI1GCWHejulJjZttGbpzs0xfiuw5cPmllOOhs88CWLQPpG+GeerS6zMVTsnxbZFGx
+         PylZk6V8d1e6w==
+Date:   Sat, 5 Jun 2021 18:13:14 +0200
 From:   Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 To:     David Gow <davidgow@google.com>
 Cc:     Jonathan Corbet <corbet@lwn.net>,
         Linux Doc Mailing List <linux-doc@vger.kernel.org>,
-        Brendan Higgins <brendanhiggins@google.com>,
-        KUnit Development <kunit-dev@googlegroups.com>,
-        Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
-        "open list:KERNEL SELFTEST FRAMEWORK" 
-        <linux-kselftest@vger.kernel.org>
-Subject: Re: [PATCH 02/34] docs: dev-tools: kunit: don't use a table for
- docs name
-Message-ID: <20210605180641.67ed6831@coco.lan>
-In-Reply-To: <CABVgOSmheB_f5gNc_zyuDHrwdRs_x_osutorJbLUMGpRRU4nzA@mail.gmail.com>
+        Daniel Latypov <dlatypov@google.com>,
+        Marco Elver <elver@google.com>,
+        Linux Kernel Mailing List <linux-kernel@vger.kernel.org>
+Subject: Re: [PATCH 13/34] docs: dev-tools: testing-overview.rst: avoid
+ using ReSt :doc:`foo` markup
+Message-ID: <20210605181314.1e76f10d@coco.lan>
+In-Reply-To: <CABVgOS=vcZX5w4tyQg9nsDyJ0sKdS-McgVNzVd9mqeLy1NTCFA@mail.gmail.com>
 References: <cover.1622898327.git.mchehab+huawei@kernel.org>
-        <08ac283ac5bdc2664255a7ad34514e50d3ed85d8.1622898327.git.mchehab+huawei@kernel.org>
-        <CABVgOSmheB_f5gNc_zyuDHrwdRs_x_osutorJbLUMGpRRU4nzA@mail.gmail.com>
+        <63fe86c8de5cced00a1bb5d18d6c7f087268565a.1622898327.git.mchehab+huawei@kernel.org>
+        <CABVgOS=vcZX5w4tyQg9nsDyJ0sKdS-McgVNzVd9mqeLy1NTCFA@mail.gmail.com>
 X-Mailer: Claws Mail 3.17.8 (GTK+ 2.24.33; x86_64-redhat-linux-gnu)
 MIME-Version: 1.0
 Content-Type: text/plain; charset=US-ASCII
@@ -48,73 +46,35 @@ Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Em Sat, 5 Jun 2021 23:43:22 +0800
+Em Sat, 5 Jun 2021 23:43:55 +0800
 David Gow <davidgow@google.com> escreveu:
 
 > On Sat, Jun 5, 2021 at 9:18 PM Mauro Carvalho Chehab
 > <mchehab+huawei@kernel.org> wrote:
 > >
-> > We'll be replacing :doc:`foo` references to
-> > Documentation/foo.rst. Yet, here it happens inside a table.
-> > Doing a search-and-replace would break it.
-> >
-> > Yet, as there's no good reason to use a table there,
-> > let's just convert it into a list.
+> > The :doc:`foo` tag is auto-generated via automarkup.py.
+> > So, use the filename at the sources, instead of :doc:`foo`.
 > >
 > > Signed-off-by: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 > > ---  
 > 
-> While I personally quite like the look of the table when rendered by
-> Sphinx, I think the list is much more readable as plain-text, so this
-> is okay by me.
-> 
-> That being said, a definition list[1] seems like it should be better
-> still, though I can't get it to work with the kernel's Sphinx
-> configuration, so let's stick with this for now. (Given we've only got
-> one page of documentation here, the whole thing doesn't matter much
-> anyway.)
+> Hmm... I'd originally wanted this to read more like the name of the
+> tool than the path to the doc file, but given the :doc: prefix and
+> backticks are equally ugly, and no less confusing to the plain-text
+> reader than the filename, I'm happy to have this changed. Particularly
+> if we're standardising on this across the kernel documentation.
 
-This works:
+Yeah, the idea is to avoid :doc: treewide, at least for simple cases.
 
-	foo
-		bar
+I'm proposing that we should still keep using:
 
-But automarkup.py currently ignores definition list syntaxes like:
+	:doc:`some description <foo>`
 
-	Documentation/dev-tools/kunit/api/test.rst
-	  documents all of the standard testing API excluding mocking
-	  or mocking related features.
+for named references, which is still ugly in plain-text, but can be
+used to provide a better hyperlink when the docs are converted
+into html/LaTeX/pdf, as it would be converted (in html) as:
 
-Not sure why, as the regex it uses should have caught it:
-
-    RE_doc = re.compile(r'(\bDocumentation/)?((\.\./)*[\w\-/]+)\.(rst|txt)')
-
-Which is parsed from this loop:
-
-    #
-    # This loop could eventually be improved on.  Someday maybe we
-    # want a proper tree traversal with a lot of awareness of which
-    # kinds of nodes to prune.  But this works well for now.
-    #
-    # The nodes.literal test catches ``literal text``, its purpose is to
-    # avoid adding cross-references to functions that have been explicitly
-    # marked with cc:func:.
-    #
-    for para in doctree.traverse(nodes.paragraph):
-        for node in para.traverse(nodes.Text):
-            if not isinstance(node.parent, nodes.literal):
-                node.parent.replace(node, markup_refs(name, app, node))
-
-Maybe definition list is outside "nodes.Text", but I'm not a Python
-expert, nor I know how Sphinx/docutils internally represents a definition 
-list. 
-
-So, the next best thing seems to be as proposed on this patch:
-
-	Documentation/dev-tools/kunit/api/test.rst
-
-	- documents all of the standard testing API excluding mocking
-	  or mocking related features.
+	<a href="foo.html">some description</a>
 
 > Reviewed-by: David Gow <davidgow@google.com>
 
@@ -122,38 +82,43 @@ Thanks!
 Mauro
 
 > 
-> Cheers,
+> 
 > -- David
 > 
-> [1] https://rest-sphinx-memo.readthedocs.io/en/latest/ReST.html#definition-list
-> 
-> 
-> >  Documentation/dev-tools/kunit/api/index.rst | 8 ++++----
-> >  1 file changed, 4 insertions(+), 4 deletions(-)
+> >  Documentation/dev-tools/testing-overview.rst | 16 ++++++++--------
+> >  1 file changed, 8 insertions(+), 8 deletions(-)
 > >
-> > diff --git a/Documentation/dev-tools/kunit/api/index.rst b/Documentation/dev-tools/kunit/api/index.rst
-> > index 9b9bffe5d41a..b33ad72bcf0b 100644
-> > --- a/Documentation/dev-tools/kunit/api/index.rst
-> > +++ b/Documentation/dev-tools/kunit/api/index.rst
-> > @@ -10,7 +10,7 @@ API Reference
-> >  This section documents the KUnit kernel testing API. It is divided into the
-> >  following sections:
+> > diff --git a/Documentation/dev-tools/testing-overview.rst b/Documentation/dev-tools/testing-overview.rst
+> > index b5b46709969c..65feb81edb14 100644
+> > --- a/Documentation/dev-tools/testing-overview.rst
+> > +++ b/Documentation/dev-tools/testing-overview.rst
+> > @@ -71,15 +71,15 @@ can be used to verify that a test is executing particular functions or lines
+> >  of code. This is useful for determining how much of the kernel is being tested,
+> >  and for finding corner-cases which are not covered by the appropriate test.
 > >
-> > -================================= ==============================================
-> > -:doc:`test`                       documents all of the standard testing API
-> > -                                  excluding mocking or mocking related features.
-> > -================================= ==============================================
-> > +Documentation/dev-tools/kunit/api/test.rst
-> > +
-> > + - documents all of the standard testing API excluding mocking
-> > +   or mocking related features.
+> > -:doc:`gcov` is GCC's coverage testing tool, which can be used with the kernel
+> > -to get global or per-module coverage. Unlike KCOV, it does not record per-task
+> > -coverage. Coverage data can be read from debugfs, and interpreted using the
+> > -usual gcov tooling.
+> > +Documentation/dev-tools/gcov.rst is GCC's coverage testing tool, which can be
+> > +used with the kernel to get global or per-module coverage. Unlike KCOV, it
+> > +does not record per-task coverage. Coverage data can be read from debugfs,
+> > +and interpreted using the usual gcov tooling.
+> >
+> > -:doc:`kcov` is a feature which can be built in to the kernel to allow
+> > -capturing coverage on a per-task level. It's therefore useful for fuzzing and
+> > -other situations where information about code executed during, for example, a
+> > -single syscall is useful.
+> > +Documentation/dev-tools/kcov.rst is a feature which can be built in to the
+> > +kernel to allow capturing coverage on a per-task level. It's therefore useful
+> > +for fuzzing and other situations where information about code executed during,
+> > +for example, a single syscall is useful.
+> >
+> >
+> >  Dynamic Analysis Tools
 > > --
 > > 2.31.1
-> >
-> > --
-> > You received this message because you are subscribed to the Google Groups "KUnit Development" group.
-> > To unsubscribe from this group and stop receiving emails from it, send an email to kunit-dev+unsubscribe@googlegroups.com.
-> > To view this discussion on the web visit https://groups.google.com/d/msgid/kunit-dev/08ac283ac5bdc2664255a7ad34514e50d3ed85d8.1622898327.git.mchehab%2Bhuawei%40kernel.org.  
+> >  
 
 
 
