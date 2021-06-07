@@ -2,48 +2,51 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 5C7BE39D9CD
-	for <lists+linux-doc@lfdr.de>; Mon,  7 Jun 2021 12:35:59 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id D687139D9C4
+	for <lists+linux-doc@lfdr.de>; Mon,  7 Jun 2021 12:35:10 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S230266AbhFGKhp (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 7 Jun 2021 06:37:45 -0400
-Received: from mail-ed1-f43.google.com ([209.85.208.43]:35613 "EHLO
-        mail-ed1-f43.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S230252AbhFGKho (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Mon, 7 Jun 2021 06:37:44 -0400
-Received: by mail-ed1-f43.google.com with SMTP id ba2so17990214edb.2
-        for <linux-doc@vger.kernel.org>; Mon, 07 Jun 2021 03:35:39 -0700 (PDT)
+        id S230481AbhFGKgr (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 7 Jun 2021 06:36:47 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:57262 "EHLO
+        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S230396AbhFGKgr (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Mon, 7 Jun 2021 06:36:47 -0400
+Received: from mail-ed1-x52a.google.com (mail-ed1-x52a.google.com [IPv6:2a00:1450:4864:20::52a])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 72E5CC061766
+        for <linux-doc@vger.kernel.org>; Mon,  7 Jun 2021 03:34:42 -0700 (PDT)
+Received: by mail-ed1-x52a.google.com with SMTP id g18so17714433edq.8
+        for <linux-doc@vger.kernel.org>; Mon, 07 Jun 2021 03:34:42 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=sartura-hr.20150623.gappssmtp.com; s=20150623;
         h=from:to:cc:subject:date:message-id:in-reply-to:references
          :mime-version:content-transfer-encoding;
-        bh=vgsncdvLmdHsU/1c1h0SAn08txT9+pvHmgBRKaZGxnU=;
-        b=Y5+sYcP12AU9+nSL0rR24Tm+WCMD6ByYuo/k6ES3uomE0fKDJ/gtc+GnLCYf94OkVJ
-         Pa/ZWB+1ueMshsQimx8jXXo0KRg+sJUVw06w70HBb8XxnsUIo/d3SR9Paj/RQl4iWHrh
-         9v+my4x8gN/HM4sM4tYv43PL5E1eE+V0emvn7dwRmvES4wNzRE/nO7+YAkhfbHPsk456
-         8OgFqIMuTToDbniBWzoBh0CfMmPnJ28IBjr+J55l7Pz+Qd8lNeyJQ/R9vHc1zY9fX+Z+
-         o5HtIT965jQ5byQEsVpuShiPD3KUiomQeUeQ3OGw+Mk8VgvA3qlWZCb9cIlJetM7yoJP
-         +0eA==
+        bh=18khHUA2AJ3ib5wXxPFFaQIfHWGb1QOUw5+Na90fAf4=;
+        b=n4oXtQgnDbe6I7n8UhQvti9n25PNkA+8CaB7/gRPiiU3ZyE93Zst5Lo98mfSLLITrQ
+         m+Sm2IiZ4+HBfyRQSFd1677F5fwG2ouPOfavvFFcQYOR13rX4RsL8Yz3vUBFDQQeXYMd
+         MD2zqP/28PRP+IfgT3IOgucxndZGyt6c/LIqEFq1zO1ZL9a6S8VLzo54oQFvctiQzp3s
+         sJqxCQppIhK2QaWgg6L06Mtp85vchsoV6xYDCcwx68AjI1iyw5irnFTWFujkoZTqDFcL
+         0PUk1z/BnIGy7xjf+qyFpNm9ROOAI2pXvK8nl5IVyA9Sx2ZmDaYoeRb9ZHdAuT/NVCX/
+         T72A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
          :references:mime-version:content-transfer-encoding;
-        bh=vgsncdvLmdHsU/1c1h0SAn08txT9+pvHmgBRKaZGxnU=;
-        b=ZV+3VFpJx7iE/NBaDFmJMAqUMMFuoxMHI/P5eBcXBnAxtgX70a+9YYAFjyw1YBrwPv
-         /GT9J+LpFfrmxl80qFd1W9I78L29KmP4/4OYpreVrDVrLrmnBz/4FFQVMU+U+aDvI9yp
-         rWoV0Fi0fjAvMhaM/MiRXV1A6UU3DUDQ3ZwvfVHHSz8vWnYvjtSC7tkpjfYrFgAAkFdB
-         Jbi9eBfFxC7+r1J5hzl4+4Apd5tVh2ftxTTqkehk4xb/0dICMcT2zkDVxEeeBD2Kjtz1
-         XZkWZSZKL8VrndHSVl9+DlpFvQecbM9Uj+5BmJvOSz0bqUUb3BWkPApeFrCEOBD/Gy/B
-         4PEw==
-X-Gm-Message-State: AOAM530rMi39v1eudjHZk5/yngDfmQ7EK7MOpbKiKylep/tiRdbfLw+f
-        UVoT1OCv+Jjtwb1HK3BMomaMFA==
-X-Google-Smtp-Source: ABdhPJz+jLvE5NKH5gEqXje/mFle1nM9LSCeJiOfsSqvHNWYSi82AU4IlfFsbyKOw0XIedpyBsljuQ==
-X-Received: by 2002:a50:ee18:: with SMTP id g24mr19439130eds.11.1623062078574;
-        Mon, 07 Jun 2021 03:34:38 -0700 (PDT)
+        bh=18khHUA2AJ3ib5wXxPFFaQIfHWGb1QOUw5+Na90fAf4=;
+        b=QjUaJEHnzTsDx8OU7vxPGbw05QpXPo9HMiTBgbVnbX6zMi7PqR2ZKFR5oOjQ3379vK
+         fY7ba1YvkOxA9NcQisSH7chSF3XbEAem1fIY/v5PyLuUOlxsibX6bb99NklQ1oBNvo15
+         OdHiYUHZyY60Xir3st5+nzG6VWiszodnz8a3biqsb1rl4BUNH2V6GgHCh90w6HPpVj9Z
+         uFioI0b5w8qcBZTJjr458INMsyG0g6PCgREA/Fu9bViJYWC4GiZcLeaf3AiA+tS8nwnp
+         P4W+ZUvKFvojghemOqP7PeXIzouwNRXlIvUoOMlt7mrI7icc0hlGHTxZcN5gc7a0nc2Q
+         CKwQ==
+X-Gm-Message-State: AOAM532TRtUz/dmFZvEhsp0PWZL5v8Gd3twKjt7MAOverxOBEY7e8IaC
+        hcXBMznp45YpnoVyzsRXD3q/NO+fRCb+Wg==
+X-Google-Smtp-Source: ABdhPJyBBEVMU+l3zZzaxsGHeW4GrlFSXJO8KYLsFCW+34uBpPVt4npJyi0x8cFnKWTER2OPtMwc+Q==
+X-Received: by 2002:a05:6402:548:: with SMTP id i8mr19605259edx.344.1623062080229;
+        Mon, 07 Jun 2021 03:34:40 -0700 (PDT)
 Received: from localhost.localdomain (dh207-96-76.xnet.hr. [88.207.96.76])
-        by smtp.googlemail.com with ESMTPSA id b25sm7521037edv.9.2021.06.07.03.34.37
+        by smtp.googlemail.com with ESMTPSA id b25sm7521037edv.9.2021.06.07.03.34.39
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 07 Jun 2021 03:34:38 -0700 (PDT)
+        Mon, 07 Jun 2021 03:34:39 -0700 (PDT)
 From:   Robert Marko <robert.marko@sartura.hr>
 To:     robh+dt@kernel.org, jdelvare@suse.com, linux@roeck-us.net,
         corbet@lwn.net, trivial@kernel.org, devicetree@vger.kernel.org,
@@ -51,9 +54,9 @@ To:     robh+dt@kernel.org, jdelvare@suse.com, linux@roeck-us.net,
         linux-doc@vger.kernel.org
 Cc:     luka.perkov@sartura.hr, jmp@epiphyte.org, pmenzel@molgen.mpg.de,
         buczek@molgen.mpg.de, Robert Marko <robert.marko@sartura.hr>
-Subject: [PATCH v4 2/3] dt-bindings: trivial-devices: Add Delta DPS920AB
-Date:   Mon,  7 Jun 2021 12:34:30 +0200
-Message-Id: <20210607103431.2039073-2-robert.marko@sartura.hr>
+Subject: [PATCH v4 3/3] MAINTAINERS: Add Delta DPS920AB PSU driver
+Date:   Mon,  7 Jun 2021 12:34:31 +0200
+Message-Id: <20210607103431.2039073-3-robert.marko@sartura.hr>
 X-Mailer: git-send-email 2.31.1
 In-Reply-To: <20210607103431.2039073-1-robert.marko@sartura.hr>
 References: <20210607103431.2039073-1-robert.marko@sartura.hr>
@@ -63,29 +66,34 @@ Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Add trivial device entry for Delta DPS920AB PSU.
+Add maintainers entry for the Delta DPS920AB PSU driver.
 
 Signed-off-by: Robert Marko <robert.marko@sartura.hr>
 ---
 Changes in v2:
-* Drop custom bindings file and use trivial-devices
+* Drop YAML bindings
 
- Documentation/devicetree/bindings/trivial-devices.yaml | 2 ++
- 1 file changed, 2 insertions(+)
+ MAINTAINERS | 7 +++++++
+ 1 file changed, 7 insertions(+)
 
-diff --git a/Documentation/devicetree/bindings/trivial-devices.yaml b/Documentation/devicetree/bindings/trivial-devices.yaml
-index a327130d1faa..1cb6c1fc0903 100644
---- a/Documentation/devicetree/bindings/trivial-devices.yaml
-+++ b/Documentation/devicetree/bindings/trivial-devices.yaml
-@@ -68,6 +68,8 @@ properties:
-           - dallas,ds4510
-             # Digital Thermometer and Thermostat
-           - dallas,ds75
-+          # Delta Electronics DPS920AB 920W 54V Power Supply
-+          - delta,dps920ab
-             # 1/4 Brick DC/DC Regulated Power Module
-           - delta,q54sj108a2
-             # Devantech SRF02 ultrasonic ranger in I2C mode
+diff --git a/MAINTAINERS b/MAINTAINERS
+index 82d9c2943c34..0707986e9bb1 100644
+--- a/MAINTAINERS
++++ b/MAINTAINERS
+@@ -5105,6 +5105,13 @@ F:	Documentation/devicetree/bindings/reset/delta,tn48m-reset.yaml
+ F:	drivers/gpio/gpio-tn48m.c
+ F:	include/dt-bindings/reset/delta,tn48m-reset.h
+ 
++DELTA DPS920AB PSU DRIVER
++M:	Robert Marko <robert.marko@sartura.hr>
++L:	linux-hwmon@vger.kernel.org
++S:	Maintained
++F:	Documentation/hwmon/dps920ab.rst
++F:	drivers/hwmon/pmbus/dps920ab.c
++
+ DENALI NAND DRIVER
+ L:	linux-mtd@lists.infradead.org
+ S:	Orphan
 -- 
 2.31.1
 
