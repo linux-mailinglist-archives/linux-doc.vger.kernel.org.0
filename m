@@ -2,106 +2,125 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id A3F0639EB97
-	for <lists+linux-doc@lfdr.de>; Tue,  8 Jun 2021 03:42:47 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id E180139EC76
+	for <lists+linux-doc@lfdr.de>; Tue,  8 Jun 2021 04:59:13 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S230502AbhFHBoi (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 7 Jun 2021 21:44:38 -0400
-Received: from mail-pl1-f169.google.com ([209.85.214.169]:33323 "EHLO
-        mail-pl1-f169.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S230426AbhFHBoi (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Mon, 7 Jun 2021 21:44:38 -0400
-Received: by mail-pl1-f169.google.com with SMTP id c13so9775773plz.0;
-        Mon, 07 Jun 2021 18:42:33 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc:content-transfer-encoding;
-        bh=PfXqzz4sMmnIIeJlTbdp97TxIJoZmr301IeumzQVHiI=;
-        b=KdSiPZo5+dJYJpHvjKkOa8cWg9Y+We/1nkLe2+QXGhDiNuGGL1CkN7zAJrIHZt2B4m
-         zbF05BC+bqRnuJglRceg4qk+DdPiUnNMqAN/PmiEpTLln3oFEdOYbD16xrPQBJULbyZD
-         6+cRYCk0KSOJZ2U02/s+nFr63CjjIT85OTArabvezz0b3A36BfNXYmtwlJz3w9XsQIUo
-         A8l+aXUKpM4tJaS3UPlC17R5c5rlVjhcvmijONR2RdL3DRHL/QjtJ8vsWkAwb4xabqko
-         ldMxfJxQRnYdoH80Jf95UpZZTlzbm4L/T2ixm1RIUkxaQqubQHuZRUWrTNMYVzvNG+4Z
-         Bwzg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc:content-transfer-encoding;
-        bh=PfXqzz4sMmnIIeJlTbdp97TxIJoZmr301IeumzQVHiI=;
-        b=DWSEQhHn6jGiLXhl1FdE+OSytmTokO8urCGsAVZ7sysR2VpntcDYCaOxVUv3B6htsv
-         133Q4Zp/5Ef3PAI87HQ1nGiLXfxm83JPBykqLG0ifqN+s1QnQbBOXLSgqjVY/Ufi194v
-         yKTeX7jSqGIPGTHUFTAykBu3Z680I5e1L/+W+/ftUM00RkHvccSUqiqLXJt+HJi9uEvZ
-         77vxirvaYEHdPs8bUJQMFKve/zwPnP/ZtZn6u1DGWb42g/yaF0SDc31uvS4dda6IuwOX
-         jYyGLOzOsDdaBdhaBEerX9uNgBTWt0BfoCQkYi3d6PRXErajw88+tcjc6yBABXfP1AC2
-         IT2g==
-X-Gm-Message-State: AOAM531kqrpHav6xDyiof822SA5m2nTxXuw33DsNXvkKyY/YZLYg2MHf
-        NPy6/8dSIG9MhrMmUln9f1e/vQwR649HmC8P5fTx1aeukN5bWBlle60=
-X-Google-Smtp-Source: ABdhPJz3pbX+sJbviVNBvQS+Bn4x7mKUXkFeD5pgkYvCvR7fLJBE9WO0b8AoSMY6T1rja4HCxv5HVGNNd6cIB0eWTJs=
-X-Received: by 2002:a17:902:f688:b029:112:7c0e:d027 with SMTP id
- l8-20020a170902f688b02901127c0ed027mr7877565plg.34.1623116492873; Mon, 07 Jun
- 2021 18:41:32 -0700 (PDT)
-MIME-Version: 1.0
-References: <20210607093433.39160-1-src.res@email.cn> <CAMU9jJrkxTUgS0P3tpr-Udw9WqUgqCJ2D0G+ja5UX=B+4DRw7g@mail.gmail.com>
- <f9418c90-fe60-b26c-18d3-ecd3e9c506ab@email.cn>
-In-Reply-To: <f9418c90-fe60-b26c-18d3-ecd3e9c506ab@email.cn>
-From:   teng sterling <sterlingteng@gmail.com>
-Date:   Tue, 8 Jun 2021 09:41:22 +0800
-Message-ID: <CAMU9jJq95fasAjbosE23gziHNL5zAcC-OUe-=uqDMefXCif-rw@mail.gmail.com>
-Subject: Re: [PATCH] docs/zh_CN: add a translation for index
+        id S230266AbhFHDBE (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 7 Jun 2021 23:01:04 -0400
+Received: from [43.250.32.171] ([43.250.32.171]:61801 "EHLO email.cn"
+        rhost-flags-FAIL-FAIL-OK-FAIL) by vger.kernel.org with ESMTP
+        id S230233AbhFHDBE (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Mon, 7 Jun 2021 23:01:04 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=email.cn;
+        s=dkim; h=Date:From:To; bh=xeVn0pq+FA2Ofzo8XmxTNibXjPD8cpbni56ED
+        xo9rIw=; b=TWC5mB2Ds3mYhsRxVGvIYnQypzcF0RCpzdhUv0cLuT6HkFvd4PS9V
+        LK9ixjDYW/Qh25bmVXsh5gXCIYYAe0F1g9qVOALyL2h6MkZyZox6YrXCH4ZQyWd3
+        OkhC/a2fAgicpiIf1PNW4EQWrJppP+gqx5cMFooiVoGn4aZI3yMbuA=
+Received: from bobwxc.top (unknown [120.238.248.220])
+        by v_coremail2-frontend-1 (Coremail) with SMTP id LCKnCgAHozaY2b5gTe0DAA--.10018S2;
+        Tue, 08 Jun 2021 10:44:42 +0800 (CST)
+Date:   Tue, 8 Jun 2021 10:44:40 +0800
+From:   "Wu X.C." <bobwxc@email.cn>
 To:     Hu Haowen <src.res@email.cn>
-Cc:     Alex Shi <alexs@kernel.org>, Jonathan Corbet <corbet@lwn.net>,
-        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
-        Yanteng Si <siyanteng@loongson.cn>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: base64
+Cc:     alexs@kernel.org, corbet@lwn.net, bernard@vivo.com,
+        maskray@google.com, linux-doc@vger.kernel.org,
+        linux-kernel@vger.kernel.org
+Subject: Re: [PATCH v3] docs/zh_CN: create new translations for
+ zh_CN/dev-tools/testing-overview
+Message-ID: <20210608024439.GA3207@bobwxc.top>
+References: <20210605120504.40246-1-src.res@email.cn>
+MIME-Version: 1.0
+Content-Type: multipart/signed; micalg=pgp-sha512;
+        protocol="application/pgp-signature"; boundary="Nq2Wo0NMKNjxTN9z"
+Content-Disposition: inline
+In-Reply-To: <20210605120504.40246-1-src.res@email.cn>
+User-Agent: Mutt/1.10.1 (2018-07-13)
+X-CM-TRANSID: LCKnCgAHozaY2b5gTe0DAA--.10018S2
+X-Coremail-Antispam: 1UD129KBjvdXoW7GF1fGr4rXryUtFW5Zw4ruFg_yoWfuFb_Ww
+        s3tayUCrn3XF17WayIyrs8JrZagws8Xr1qkF4DZr98Xw13Ca97X3WDW3Z8KFyIgFsxZ39r
+        Cr40gF1Iqr4IyjkaLaAFLSUrUUUUUb8apTn2vfkv8UJUUUU8Yxn0WfASr-VFAUDa7-sFnT
+        9fnUUIcSsGvfJTRUUUboxFc2x0x2IEx4CE42xK8VAvwI8IcIk0rVWrJVCq3wA2ocxC64kI
+        II0Yj41l84x0c7CEw4AK67xGY2AK021l84ACjcxK6xIIjxv20xvE14v26r4j6ryUM28EF7
+        xvwVC0I7IYx2IY6xkF7I0E14v26r4j6F4UM28EF7xvwVC2z280aVAFwI0_Gr1j6F4UJwA2
+        z4x0Y4vEx4A2jsIEc7CjxVAFwI0_Gr1j6F4UJwAS0I0E0xvYzxvE52x082IY62kv0487M2
+        AExVA0xI801c8C04v7Mc02F40EFcxC0VAKzVAqx4xG6I80ewAv7VCjz48v1sIEY20_Cr1U
+        Jr1lOx8S6xCaFVCjc4AY6r1j6r4UM4x0Y48IcVAKI48JM4x0x7Aq67IIx4CEVc8vx2IErc
+        IFxwCF04k20xvY0x0EwIxGrwCF04k20xvE74AGY7Cv6cx26F4UJr1UMxC20s026xCaFVCj
+        c4AY6r1j6r4UMI8I3I0E5I8CrVAFwI0_Jr0_Jr4lx2IqxVCjr7xvwVAFwI0_JrI_JrWlx4
+        CE17CEb7AF67AKxVWUAVWUtwCIc40Y0x0EwIxGrwCI42IY6xIIjxv20xvE14v26r1j6r1x
+        MIIF0xvE2Ix0cI8IcVCY1x0267AKxVWUJVW8JwCI42IY6xAIw20EY4v20xvaj40_Jr0_JF
+        4lIxAIcVC2z280aVAFwI0_Jr0_Gr1lIxAIcVC2z280aVCY1x0267AKxVWUJVW8JbIYCTnI
+        WIevJa73UjIFyTuYvjfUsvtCUUUUU
+X-Originating-IP: [120.238.248.220]
+X-CM-SenderInfo: pere453f6hztlloou0/
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-SHUgSGFvd2VuIDxzcmMucmVzQGVtYWlsLmNuPiDkuo4yMDIx5bm0NuaciDfml6XlkajkuIAg5LiL
-5Y2IOTo1MuWGmemBk++8mg0KPg0KPg0KPiDlnKggMjAyMS82Lzcg5LiL5Y2IOTo0MCwgdGVuZyBz
-dGVybGluZyDlhpnpgZM6DQo+ID4gQ0Mgc2l5YW50ZW5nQGxvb25nc29uLmNuDQo+ID4gSHUgSGFv
-d2VuIDxzcmMucmVzQGVtYWlsLmNuPiDkuo4yMDIx5bm0NuaciDfml6XlkajkuIAg5LiL5Y2INToz
-N+WGmemBk++8mg0KPiA+PiBUaGUgb3JpZ2luYWwgZmlsZSBoYXMgYWRkZWQgYSBmb3JtZXIgaW50
-cm8gaW4gY29tbWl0IGI1MTIwOGQ0MWM2YTRlN2ZjMmYwDQo+ID4+ICgiZG9jczogVHdlYWsgdGhl
-IHRvcC1sZXZlbCBTcGhpbnggcGFnZSIpIGFuZCBoZW5jZSB1cGRhdGUgdGhlIENoaW5lc2UNCj4g
-Pj4gdmVyc2lvbiBmb3IgaXQuDQo+ID4+DQo+ID4+IFNpZ25lZC1vZmYtYnk6IEh1IEhhb3dlbiA8
-c3JjLnJlc0BlbWFpbC5jbj4NCj4gPj4gLS0tDQo+ID4+ICAgRG9jdW1lbnRhdGlvbi90cmFuc2xh
-dGlvbnMvemhfQ04vaW5kZXgucnN0IHwgNSArKysrKw0KPiA+PiAgIDEgZmlsZSBjaGFuZ2VkLCA1
-IGluc2VydGlvbnMoKykNCj4gPj4NCj4gPj4gZGlmZiAtLWdpdCBhL0RvY3VtZW50YXRpb24vdHJh
-bnNsYXRpb25zL3poX0NOL2luZGV4LnJzdCBiL0RvY3VtZW50YXRpb24vdHJhbnNsYXRpb25zL3po
-X0NOL2luZGV4LnJzdA0KPiA+PiBpbmRleCAxZjk1M2QzNDM5YTUuLjAwMzEyNmFiYzBkNiAxMDA2
-NDQNCj4gPj4gLS0tIGEvRG9jdW1lbnRhdGlvbi90cmFuc2xhdGlvbnMvemhfQ04vaW5kZXgucnN0
-DQo+ID4+ICsrKyBiL0RvY3VtZW50YXRpb24vdHJhbnNsYXRpb25zL3poX0NOL2luZGV4LnJzdA0K
-PiA+PiBAQCAtMTcsNiArMTcsMTEgQEANCj4gPj4gICAgICAqKue/u+ivkeiuoeWIkjoqa2VybmVs
-J3MgZG9jdW1lbnRhdGlvbioNCj4gPj4gICAgICDlhoXmoLjkuK3mlofmlofmoaPmrKLov47ku7vk
-vZXnv7vor5HmipXnqL/vvIznibnliKvmmK/lhbPkuo7lhoXmoLjnlKjmiLflkoznrqHnkIblkZjm
-jIfljZfpg6jliIbjgIINCj4gPj4NCj4gPj4gK+i/meaYr+WGheaguOaWh+aho+agkeeahOmhtue6
-p+ebruW9leOAguWGheaguOaWh+aho++8jOWwseWDj+WGheaguOacrOi6q+S4gOagt++8jOWcqOW+
-iOWkp+eoi+W6puS4iuaYr+S4gOmhueatow0KPiA+IGhvdyBhYm91dDoNCj4gPg0KPiA+IOi/meaY
-r+S4reaWh+WGheaguOaWh+aho+agkeeahOmhtue6p+ebruW9leOAgg0KPg0KPg0KPiBCdXQgdGhl
-IEVuZ2xpc2ggdmVyc2lvbiBzYXlzICJrZXJuZWwncyBkb2N1bWVudGF0aW9uIi4gSXQgc2VlbXMg
-dGhhdCB3ZQ0KPiBzaG91bGQgYWRkIGFuIGV4cGxhbmF0aW9uIGZvciByZWFkZXJzIGluIG9yZGVy
-IHRvIGRyYWcgdGhlbSBvdXQgb2YgdGhlDQo+IGRpbGVtbWEgb24gd2hldGhlciBoZSBvciBzaGUg
-c2hvdWxkIHVwZGF0ZSBFbiB2ZXJzaW9uIGF0IGZpcnN0LCBhcyB5b3VyDQo+IHRob3VnaHQgcGlj
-a2luZyBpZGVhcyBmcm9tICJkaXNjbGFpbWVyLXpoX0NOIi4NCj4NCj4gV2hhdCdzIHlvdXIgb3Bp
-bmlvbiwgbWFpbnRhaW5lcnM/DQpXaGVuIHRoZSBvcmlnaW5hbCBkb2N1bWVudGF0aW9uIGlzIHVw
-ZGF0ZWQsIHRoZSBDaGluZXNlIGRvY3VtZW50YXRpb24NCmhhcyB0byBmb2xsb3cuIEkgdGhpbmsg
-d2UgaGF2ZSByZWFjaGVkIGEgY29uc2Vuc3VzIG9uIHRoaXMgcG9pbnQuDQpIb3dldmVyLCB0aGlz
-IGZpbGUgaXMgZGVzY3JpYmVkIGluIHRoaXMgZGlyZWN0b3J5IGFzIHpoX0NOLCBzbyBJIHRoaW5r
-DQppdCBuZWVkcyB0byBiZSBsb2NhbGl6ZWQuIEJ1dCB0aGUgbG9jYWxpemF0aW9uIHdpbGwgY29u
-ZmxpY3Qgd2l0aA0KImRpc2NsYWltZXItemhfQ04iLg0KDQpUaGFua3MsDQpZYW50ZW5nDQo+DQo+
-DQo+ID4+ICvlnKjov5vooYznmoTlt6XkvZzvvJvlvZPmiJHku6zliqrlipvlsIborrjlpJrliIbm
-laPnmoTmlofku7bmlbTlkIjmiJDkuIDkuKrov57otK/nmoTmlbTkvZPml7blsKTlhbblpoLmraTj
-gILlj6YNCj4gPj4gK+Wklu+8jOmaj+aXtuasoui/juaCqOWvueWGheaguOaWh+aho+i/m+ihjOaU
-uei/m++8m+WmguaenOaCqOaDs+aPkOS+m+W4ruWKqe+8jOivt+WKoOWFpXZnZXIua2VybmVsLm9y
-Zw0KPiA+IOS4reaWh+WGheaguOaWh+aho+i/m+ihjOaUuei/m++8mw0KPiA+PiAr5LiK55qEbGlu
-dXgtZG9j6YKu5Lu25YiX6KGo44CCDQo+ID4g5LiK55qEbGludXgtZG9j6YKu5Lu25YiX6KGo77yM
-5YWI5pS56L+b5Y6f5aeL6Iux5paH5paH5qGj77yM5YaN5bCG5YW257+76K+R5Li65Lit5paH5ZCO
-77yM5pu05paw55u45bqU55qE5Lit5paH5paH5qGj44CCDQo+ID4+ICsNCj4gPj4gICDorrjlj6/o
-r4HmlofmoaMNCj4gPj4gICAtLS0tLS0tLS0tDQo+ID4+DQo+ID4+IC0tDQo+ID4+IDIuMjUuMQ0K
-PiA+Pg0KPiA+IEJUVywgSSB0aGluayB0aGVzZSBhcmUgc2ltaWxhciB0byAiZGlzY2xhaW1lci16
-aF9DTiIsIGJ1dCBub3QgYXMgZ29vZA0KPiA+IGFzIHRoZSBsYXR0ZXIuDQo+ID4NCj4gPiBBbGV4
-IGFuZCBYaWFuZ2NoZW5nLCB3aGF0IGRvIHlvdSB0aGluaz8NCj4gPg0KPiA+IFRoYW5rcywNCj4g
-PiBZYW50ZW5nDQo+DQo=
+
+--Nq2Wo0NMKNjxTN9z
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+On Sat, Jun 05, 2021 at 08:05:04PM +0800, Hu Haowen wrote:
+> Create new translations for dev-tools/testing-overview.rst and link it
+> to dev-tools/index.rst with TODOList modifications.
+>=20
+> Signed-off-by: Hu Haowen <src.res@email.cn>
+> ---
+>  .../translations/zh_CN/dev-tools/index.rst    |   5 +
+>  .../zh_CN/dev-tools/testing-overview.rst      | 110 ++++++++++++++++++
+[...]
+> +
+> +=E4=BB=A3=E7=A0=81=E8=A6=86=E7=9B=96=E7=8E=87=E5=B7=A5=E5=85=B7
+> +=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+> +
+> +=E6=94=AF=E6=8C=81=E4=B8=A4=E7=A7=8D=E4=B8=8D=E5=90=8C=E4=BB=A3=E7=A0=81=
+=E4=B9=8B=E9=97=B4=E7=9A=84=E8=A6=86=E7=9B=96=E7=8E=87=E6=B5=8B=E9=87=8F=E5=
+=B7=A5=E5=85=B7=E3=80=82=E5=AE=83=E4=BB=AC=E5=8F=AF=E4=BB=A5=E7=94=A8=E6=9D=
+=A5=E9=AA=8C=E8=AF=81=E4=B8=80=E9=A1=B9=E6=B5=8B=E8=AF=95=E6=89=A7=E8=A1=8C=
+=E7=9A=84
+
+Linux=E5=86=85=E6=A0=B8=E6=94=AF=E6=8C=81=E4=B8=A4=E7=A7=8D=E4=B8=8D=E5=90=
+=8C=E7=9A=84=E4=BB=A3=E7=A0=81=E8=A6=86=E7=9B=96=E7=8E=87=E6=B5=8B=E8=AF=95=
+=E5=B7=A5=E5=85=B7=E3=80=82
+
+> +=E7=A1=AE=E5=88=87=E5=87=BD=E6=95=B0=E6=88=96=E4=BB=A3=E7=A0=81=E8=A1=8C=
+=E3=80=82=E8=BF=99=E6=9C=89=E5=8A=A9=E4=BA=8E=E5=86=B3=E5=AE=9A=E5=86=85=E6=
+=A0=B8=E8=A2=AB=E6=B5=8B=E8=AF=95=E4=BA=86=E5=A4=9A=E5=B0=91=EF=BC=8C=E6=88=
+=96=E7=94=A8=E6=9D=A5=E6=9F=A5=E6=89=BE=E5=90=88=E9=80=82=E7=9A=84=E6=B5=8B=
+=E8=AF=95
+> +=E4=B8=AD=E6=B2=A1=E6=9C=89=E8=A6=86=E7=9B=96=E5=88=B0=E7=9A=84=E6=9E=81=
+=E7=AB=AF=E6=83=85=E5=86=B5=E3=80=82
+> +
+
+OK, good job!
+
+Just need to fix a small problem, after that
+
+Reviewed-by: Wu XiangCheng <bobwxc@email.cn>
+
+Thanks,
+	Wu X.C.
+
+--Nq2Wo0NMKNjxTN9z
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEERbo3U5kJpaCtFl1PtlsoEiKCsIUFAmC+2Y4ACgkQtlsoEiKC
+sIUf6Qv/YNJKKNFFRa6M7Z1NGnPhMUCd5s/R/9aWTRFXwt63nayVkAZ8F4mmcX+H
+ujmPyxAQtEaZ3MI43fcmSXNmwGS36z54dDaHSv31OXP33v+hxgj6sccN/lAAiUYb
+wFK9xvnH7BZ3hfmaAPMogMK1gdTldkODmY/34O8BjOX82NMWyYDE/v5CBqmRq8Yl
+qdlpKpmo6c+YRL19ysPOep1Q5OGAzQ8nn2vEBWYv6BlCYrTbxN6iteKyZbBlBUjT
+zuz1T0jrx7RCS0oR0m303PWjjkVO+8csF5hgR5Qt6Dva6Cwvp4NU7N/sIya/ijb/
+NE7kdHYZYhB6u2PW4hR5We6BxJ9QQ2FcIw5aO5ksALcxx8Tf4WhrBupeofLRBsJX
+Rs3e2NVRvA6QnnD26PWI1zCv94o+K4QeNNPlnLCkHcvYhMlYrFDFSN6Yvu4FZk49
+eN6p9myKynwYY1u+/jnryY+Wo0IzOxXnRvsx/UN7c7mSr7mv/n6PS91wRwqt2mLm
+fGbt+3zW
+=dUSj
+-----END PGP SIGNATURE-----
+
+--Nq2Wo0NMKNjxTN9z--
+
