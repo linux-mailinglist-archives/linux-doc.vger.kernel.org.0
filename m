@@ -2,163 +2,116 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 3F51839FA46
-	for <lists+linux-doc@lfdr.de>; Tue,  8 Jun 2021 17:22:23 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 3EDCF39FA8A
+	for <lists+linux-doc@lfdr.de>; Tue,  8 Jun 2021 17:26:09 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S231530AbhFHPYO (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 8 Jun 2021 11:24:14 -0400
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124]:42763 "EHLO
-        us-smtp-delivery-124.mimecast.com" rhost-flags-OK-OK-OK-OK)
-        by vger.kernel.org with ESMTP id S231237AbhFHPYH (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 8 Jun 2021 11:24:07 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-        s=mimecast20190719; t=1623165734;
-        h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-         to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-         content-transfer-encoding:content-transfer-encoding:
-         in-reply-to:in-reply-to:references:references;
-        bh=bYJWERLFV2zpboPIkx4EOqOO/7XiVLEK1TH9KtKSuvE=;
-        b=BJoVemsqnkpD3cciV1iUYUmGBd1sLF3HCIiFuK+Czwme0FPSHaZs47gmHNaR4T8CD1m0ac
-        pWn2o5bvty+jmKNN4GH0Nm8zIiuUY/Oa03/X4yZeCMqRbH9UxXZdWa8nEdHmytoMAFKnYh
-        CBZbp0zJBUgyLkW3HBUJMiVAq2AKJ5U=
-Received: from mail-wr1-f70.google.com (mail-wr1-f70.google.com
- [209.85.221.70]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-374-bIZoyBfwPIeft_xintUHHQ-1; Tue, 08 Jun 2021 11:22:12 -0400
-X-MC-Unique: bIZoyBfwPIeft_xintUHHQ-1
-Received: by mail-wr1-f70.google.com with SMTP id z3-20020adfdf830000b02901198337bc39so9008322wrl.0
-        for <linux-doc@vger.kernel.org>; Tue, 08 Jun 2021 08:22:12 -0700 (PDT)
+        id S232678AbhFHP1Q (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 8 Jun 2021 11:27:16 -0400
+Received: from mail-pg1-f174.google.com ([209.85.215.174]:43994 "EHLO
+        mail-pg1-f174.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S232683AbhFHP0m (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 8 Jun 2021 11:26:42 -0400
+Received: by mail-pg1-f174.google.com with SMTP id e22so16754856pgv.10
+        for <linux-doc@vger.kernel.org>; Tue, 08 Jun 2021 08:24:33 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=linaro.org; s=google;
+        h=date:from:to:cc:subject:message-id:references:mime-version
+         :content-disposition:in-reply-to;
+        bh=F1u/sq4+NodWoa8+/tIGnW/u+8jUU5i2k1PbVs04i1k=;
+        b=zp73gvRufUtOPQl6Tgh5tNMqErkVi4m6Xn3gsrAnWMX4ypdt3u1orMYpyKN/OJDTb3
+         kg8/9cexawx9Rp6gD5ePPhNIV43vjgUdR7dZ9R9C0zBFxQG/J00YwLQ8DIMT0B57XWex
+         4p+4TCQoLZ+IMPgqCvwnCb81YEZTK7T6MVz9jmew2F2SM32AQhI/LGRxoMHbAz3fPZsn
+         7HxynysUrbOlpfRemiMDc5y9fwdRjpo+RWI4WXo14H8D3tGhpetrbpAi0U2jIbia2J2i
+         r7mCR8eF0shCgHELJArdIn1tc0VzkD3meFAdrgVEJc2FNdj8J/TJZJq6bgFYrVDGWoBT
+         P1Rw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:to:cc:references:from:organization:subject
-         :message-id:date:user-agent:mime-version:in-reply-to
-         :content-language:content-transfer-encoding;
-        bh=bYJWERLFV2zpboPIkx4EOqOO/7XiVLEK1TH9KtKSuvE=;
-        b=IcFu5P8NOKFMUna8tzIH4/EKTlH6no4z0MMVojuJp2bU68o2V/WG+UYhICUgTthv5j
-         7x8zAFocSyKhIgCEJeVOrEQN6EukftAWa7UvkxUQ6RfLf7iahp8l6p0rCXC6EOGo2cv4
-         nPvwWE0jHS8/gPlwIQl3qyu1O6PeUNr/uPiQiwRFHkOgGTu/hvDDiFyUONtmP4m1M0e1
-         ZwoaJ2SyjybLLWKgjIE0Lw8H5Q5GWR66Mid6EyEnu/panSG8t5ml0VCQcMvp9xn4rtLJ
-         cTd2cwXKMRSI4LdjDlc3cjHQnh93aqRvcD9TICsbvb+/9rj2t6HijNqQExHFLjadrst+
-         AOrQ==
-X-Gm-Message-State: AOAM533xdHal77GNGKxJ3khCc+4qb+iGpsjhglhpahFXlG4GxYJOhMIo
-        ETIRRTBuo5g8dqnMY0PVP9mFfua4A65fCsCH1ZFlMH5GOe2gX5edN27EiCoQitm/EyUPSqJxfGz
-        kmGgp/fK6JIBYpshFhx4S0o3cyPozrNYT4M2JDFEHQNQ6WFyLHLYAMCaU2sEgkFDn8pQg
-X-Received: by 2002:a5d:58d3:: with SMTP id o19mr23877984wrf.404.1623165731837;
-        Tue, 08 Jun 2021 08:22:11 -0700 (PDT)
-X-Google-Smtp-Source: ABdhPJwb1sRNRT4qwoKU9b9zHGD5+IxEr/zHjaok1kMzPylTCrAALnQPr0r5QUFLCaneAiDJ3AGpaQ==
-X-Received: by 2002:a5d:58d3:: with SMTP id o19mr23877952wrf.404.1623165731625;
-        Tue, 08 Jun 2021 08:22:11 -0700 (PDT)
-Received: from [192.168.3.132] (p5b0c61cf.dip0.t-ipconnect.de. [91.12.97.207])
-        by smtp.gmail.com with ESMTPSA id l16sm1358435wmq.28.2021.06.08.08.22.10
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Tue, 08 Jun 2021 08:22:11 -0700 (PDT)
-To:     Mike Rapoport <rppt@kernel.org>
-Cc:     linux-kernel@vger.kernel.org, linux-mm@kvack.org,
-        Andrew Morton <akpm@linux-foundation.org>,
-        Oscar Salvador <osalvador@suse.de>,
-        Michal Hocko <mhocko@suse.com>,
-        Mike Kravetz <mike.kravetz@oracle.com>,
-        Dave Hansen <dave.hansen@linux.intel.com>,
-        Matthew Wilcox <willy@infradead.org>,
-        Anshuman Khandual <anshuman.khandual@arm.com>,
-        Muchun Song <songmuchun@bytedance.com>,
-        Pavel Tatashin <pasha.tatashin@soleen.com>,
-        Jonathan Corbet <corbet@lwn.net>,
-        Stephen Rothwell <sfr@canb.auug.org.au>,
-        linux-doc@vger.kernel.org
-References: <20210525102604.8770-1-david@redhat.com>
- <YK3wvMWaJaS73HXb@kernel.org>
- <385d2bd0-8857-9d40-c8f9-c302f0b56e12@redhat.com>
- <YL97z8DsjQfcAYBX@kernel.org>
-From:   David Hildenbrand <david@redhat.com>
-Organization: Red Hat
-Subject: Re: [PATCH v1] memory-hotplug.rst: complete admin-guide overhaul
-Message-ID: <ac60f6ba-c0bf-5c8e-7bde-c673b7409835@redhat.com>
-Date:   Tue, 8 Jun 2021 17:22:10 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
- Thunderbird/78.10.1
+        h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+         :mime-version:content-disposition:in-reply-to;
+        bh=F1u/sq4+NodWoa8+/tIGnW/u+8jUU5i2k1PbVs04i1k=;
+        b=H6cBKPI6WMCJZtKL98dMdHR178WQeI7lrg24okhiiUiI2kEycv9EnSQF5HQZbLdIyG
+         y2iICA2WLszA/4BPT54xtTbT8kpDuJ9eW1a+AJWbaADzvqIodfdGEJdQv9COl2uqKxbP
+         Xnzo2UZb2ro7PW0UaxzDQKYeYvO+sIp6QIlBk3Jv11H33YcFRputeoAqJpiK9po9lIsJ
+         kCPjNq77Slmh1Hw51rwXIQuwISRBQCGde97GRILuN24TGeX7Dejj0ngH8QKpXknmCN7R
+         DUKuCytxoQDIA1QHTcMksAFMYDMywt40V49Ix4DX1wm1o600jX9vMzccpqKsLVGu1Sm8
+         heaQ==
+X-Gm-Message-State: AOAM53162fxLryv2M2CaJCVEJGV7mj8zlAKrcYZY1i2BElw5KooBWB7/
+        ynvL4+8x1JA18MnS8uvUO6vQAQ==
+X-Google-Smtp-Source: ABdhPJxrU3XrTV8YmAtHJ0kr101O+F8cpASifFf34ctCO0UnCfCrJoZW1UaqXnkyMLhHPZfu+Wop6Q==
+X-Received: by 2002:aa7:8bd9:0:b029:2f2:f491:8836 with SMTP id s25-20020aa78bd90000b02902f2f4918836mr403820pfd.47.1623165812456;
+        Tue, 08 Jun 2021 08:23:32 -0700 (PDT)
+Received: from p14s (S0106889e681aac74.cg.shawcable.net. [68.147.0.187])
+        by smtp.gmail.com with ESMTPSA id p36sm11793879pgm.74.2021.06.08.08.23.30
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 08 Jun 2021 08:23:31 -0700 (PDT)
+Date:   Tue, 8 Jun 2021 09:23:29 -0600
+From:   Mathieu Poirier <mathieu.poirier@linaro.org>
+To:     Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
+Cc:     Jonathan Corbet <corbet@lwn.net>,
+        Linux Doc Mailing List <linux-doc@vger.kernel.org>,
+        Leo Yan <leo.yan@linaro.org>,
+        Mike Leach <mike.leach@linaro.org>,
+        Suzuki K Poulose <suzuki.poulose@arm.com>,
+        coresight@lists.linaro.org, linux-arm-kernel@lists.infradead.org,
+        linux-kernel@vger.kernel.org
+Subject: Re: [PATCH 30/34] docs: trace: coresight: coresight.rst: avoid using
+ ReSt :doc:`foo` markup
+Message-ID: <20210608152329.GB325089@p14s>
+References: <cover.1622898327.git.mchehab+huawei@kernel.org>
+ <a7a4fe3295b543d361541fd5f1c6fadc9e255dec.1622898327.git.mchehab+huawei@kernel.org>
 MIME-Version: 1.0
-In-Reply-To: <YL97z8DsjQfcAYBX@kernel.org>
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Language: en-US
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <a7a4fe3295b543d361541fd5f1c6fadc9e255dec.1622898327.git.mchehab+huawei@kernel.org>
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-
-Looks like a was too fast with my resend ;)
-
->>>> -Phases of memory hotplug
->>>> +Further, the basic memory hot(un)plug infrastructure in Linux is nowadays
->>>> +also used to expose PMEM, other performance-differentiated
->>>
->>>                         ^ persistent memory (PMEM)
->>>
+On Sat, Jun 05, 2021 at 03:18:29PM +0200, Mauro Carvalho Chehab wrote:
+> The :doc:`foo` tag is auto-generated via automarkup.py.
+> So, use the filename at the sources, instead of :doc:`foo`.
 > 
-> Just in case you've missed this one ^ ;-)
+> Signed-off-by: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
+> ---
+>  Documentation/trace/coresight/coresight.rst | 8 +++++---
+>  1 file changed, 5 insertions(+), 3 deletions(-)
+>
 
-I did catch that :)
+Reviewed-by: Mathieu Poirier <mathieu.poirier@linaro.org>
 
-[...]
-
->>
->> "If it fails, an error will be returned by the kernel via the systemcall
->> that triggered modifying of the respective file."
+> diff --git a/Documentation/trace/coresight/coresight.rst b/Documentation/trace/coresight/coresight.rst
+> index 169749efd8d1..1ec8dc35b1d8 100644
+> --- a/Documentation/trace/coresight/coresight.rst
+> +++ b/Documentation/trace/coresight/coresight.rst
+> @@ -315,7 +315,8 @@ intermediate links as required.
+>  
+>  Note: ``cti_sys0`` appears in two of the connections lists above.
+>  CTIs can connect to multiple devices and are arranged in a star topology
+> -via the CTM. See (:doc:`coresight-ect`) [#fourth]_ for further details.
+> +via the CTM. See (Documentation/trace/coresight/coresight-ect.rst)
+> +[#fourth]_ for further details.
+>  Looking at this device we see 4 connections::
+>  
+>    linaro-developer:~# ls -l /sys/bus/coresight/devices/cti_sys0/connections
+> @@ -606,7 +607,8 @@ interface provided for that purpose by the generic STM API::
+>      crw-------    1 root     root       10,  61 Jan  3 18:11 /dev/stm0
+>      root@genericarmv8:~#
+>  
+> -Details on how to use the generic STM API can be found here:- :doc:`../stm` [#second]_.
+> +Details on how to use the generic STM API can be found here:
+> +- Documentation/trace/stm.rst [#second]_.
+>  
+>  The CTI & CTM Modules
+>  ---------------------
+> @@ -616,7 +618,7 @@ individual CTIs and components, and can propagate these between all CTIs via
+>  channels on the CTM (Cross Trigger Matrix).
+>  
+>  A separate documentation file is provided to explain the use of these devices.
+> -(:doc:`coresight-ect`) [#fourth]_.
+> +(Documentation/trace/coresight/coresight-ect.rst) [#fourth]_.
+>  
+>  
+>  .. [#first] Documentation/ABI/testing/sysfs-bus-coresight-devices-stm
+> -- 
+> 2.31.1
 > 
-> I also think that write(2) to /sys/devices/system/memory/memoryXXX/online
-> will fail.  But the inner workings of system call, its return value and the
-> ERRNO are probably not very interesting to a person that did
-> 
-> echo 0 > /sys/devices/system/memory/memoryXXX/online
-> 
-> Maybe something like
-> 
->    If it fails, the state of the memory block will remain unchanged and the
->    above command will fail.
-
-Thanks, I'll use that.
-
-> 
-> And maybe an example of how echo reports some unrelated error message :)
-> 
->>>> +Observing the State of Memory Blocks
-> 
-> ...
-> 
->>>> -Now, a boot option for making a memory block which consists of migratable pages
->>>> -is supported. By specifying "kernelcore=" or "movablecore=" boot option, you can
->>>> -create ZONE_MOVABLE...a zone which is just used for movable pages.
->>>> -(See also Documentation/admin-guide/kernel-parameters.rst)
->>>> +		    For online memory blocks, ``DMA``, ``DMA32``, ``Normal``,
->>>> +		    ``Movable`` and ``none`` may be returned. ``none`` indicates
->>>
->>> Highmem? Or we don't support hotplug on 32 bits?
->>
->> We only support 64 bit:
->>
->> config MEMORY_HOTPLUG
->> 	...
->> 	depends on 64BIT || BROKEN
->>
->> Worth a comment in the document "Introduction":
->>
->> "Linux only supports memory hot(un)plug on selected 64 bit architectures,
->> such as x86_64, aarch64, ppc64, s390x and ia64."
->   
->                   ^ arm64 ?
-
-I think aarch64 is historically actually the right(tm) thing to use in 
-general ... but nowadays it doesn't matter anymore. It's "arch/arm64" 
-... the inconsistency is real. (interesting read: 
-https://stackoverflow.com/questions/31851611/differences-between-arm64-and-aarch64)
-
-But it's the same mess as using x86 vs. x86_64 vs. x64 vs. AMD64 for the 
-64 bit extension of IA-32.
-
-So I'll convert that to arm64.
-
--- 
-Thanks,
-
-David / dhildenb
-
