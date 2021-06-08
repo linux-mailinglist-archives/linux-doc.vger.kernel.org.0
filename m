@@ -2,128 +2,123 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 174463A0561
-	for <lists+linux-doc@lfdr.de>; Tue,  8 Jun 2021 22:56:40 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id B00653A05D3
+	for <lists+linux-doc@lfdr.de>; Tue,  8 Jun 2021 23:24:32 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S233161AbhFHU62 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 8 Jun 2021 16:58:28 -0400
-Received: from mail.kernel.org ([198.145.29.99]:60712 "EHLO mail.kernel.org"
-        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S229526AbhFHU62 (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Tue, 8 Jun 2021 16:58:28 -0400
-Received: by mail.kernel.org (Postfix) with ESMTPSA id 7782F61183;
-        Tue,  8 Jun 2021 20:56:34 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=linux-foundation.org;
-        s=korg; t=1623185794;
-        bh=OJGgtBm3q7tcqDwa9BJEaBavdukZSO3qBK6MijhoVOg=;
-        h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
-        b=MQXq/Hx3fjxqEhCexwtfrIC4TuKeq0UtnAQnOl5JKeaOWFHZ+zyWV4fTfIiaIlw4K
-         SxaE7nlGyVrx0rFi9o1tWINlsPPixyQqqyXOZEM9yFm0rul6G3zhMr9fo6POaZlDJ4
-         bUyXf6NboSgc8nM6iqvfiiqoaIlkxRjXPgzyf0jI=
-Date:   Tue, 8 Jun 2021 13:56:33 -0700
-From:   Andrew Morton <akpm@linux-foundation.org>
-To:     Kees Cook <keescook@chromium.org>
-Cc:     Marco Elver <elver@google.com>, "Lin, Zhenpeng" <zplin@psu.edu>,
-        stable@vger.kernel.org, Vlastimil Babka <vbabka@suse.cz>,
-        Christoph Lameter <cl@linux.com>,
-        Pekka Enberg <penberg@kernel.org>,
-        David Rientjes <rientjes@google.com>,
-        Joonsoo Kim <iamjoonsoo.kim@lge.com>,
-        Roman Gushchin <guro@fb.com>, linux-kernel@vger.kernel.org,
-        linux-doc@vger.kernel.org, linux-mm@kvack.org,
-        "Lin, Zhenpeng" <zplin@psu.edu>
-Subject: Re: [PATCH v4 3/3] mm/slub: Actually fix freelist pointer vs
- redzoning
-Message-Id: <20210608135633.167bd07cf8011a792a128976@linux-foundation.org>
-In-Reply-To: <20210608183955.280836-4-keescook@chromium.org>
-References: <20210608183955.280836-1-keescook@chromium.org>
-        <20210608183955.280836-4-keescook@chromium.org>
-X-Mailer: Sylpheed 3.5.1 (GTK+ 2.24.31; x86_64-pc-linux-gnu)
-Mime-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: 7bit
+        id S234587AbhFHV0U (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 8 Jun 2021 17:26:20 -0400
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124]:51590 "EHLO
+        us-smtp-delivery-124.mimecast.com" rhost-flags-OK-OK-OK-OK)
+        by vger.kernel.org with ESMTP id S234404AbhFHV0N (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 8 Jun 2021 17:26:13 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+        s=mimecast20190719; t=1623187459;
+        h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+         to:to:cc:cc:mime-version:mime-version:
+         content-transfer-encoding:content-transfer-encoding;
+        bh=9WOcYtG36rVjuPEj8K6lgDL7dCdoY9WpL7jwDyU54B8=;
+        b=g1XWXdcZQMPMIfRXd0zkrS3oqjdyVbfRxUMPWoUfgcUM+3quUHJ3aM19opH+WrN1rhPJC4
+        zcAnQF5Cjkjap/GuI3XLKhaXHXG99r2HnOpERpioT5ojihTpRbexNn95ioeLPLGgFNhX55
+        Ep/MoD9KtfWNy949YGiLPgeYRzNjTNM=
+Received: from mail-oi1-f200.google.com (mail-oi1-f200.google.com
+ [209.85.167.200]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-470-xu4Naf7JNHCkNqVUvALU_w-1; Tue, 08 Jun 2021 17:24:00 -0400
+X-MC-Unique: xu4Naf7JNHCkNqVUvALU_w-1
+Received: by mail-oi1-f200.google.com with SMTP id 19-20020aca12130000b02901f43fbf2170so2375734ois.5
+        for <linux-doc@vger.kernel.org>; Tue, 08 Jun 2021 14:24:00 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=9WOcYtG36rVjuPEj8K6lgDL7dCdoY9WpL7jwDyU54B8=;
+        b=J0A53cpecClkSnvFxkSzAvfTbXQUGpwQ4hHPPM40g+cvXqVf83Mo/Dx0DsFQH8Jtf3
+         nUURk3769D+qBx1mQEg8iSjasKKITSlkDW9SEi35t5KCyvk351/yn2GvLL9GkO30qW2c
+         bZVe3Rky7s96XbqG60grOUOfrKajQ/kZnjA8nVBdHhTDhvoqIwI0mCTaLRwnjCYVyfLp
+         u4YoYnhl6hhMHPKTD74lexazVzmCW9TH6WtwN5giEaTejVRim6ghGlTAcmtxAYGnMI3P
+         wLc/pRo9zB3STKsGZNDaKojBHhjx8YGnqjkP/VBsxAnoD6mmK/Fo7NobYqI5fbehSWso
+         jkwg==
+X-Gm-Message-State: AOAM532ppqCrE9KzRhiFFa9EyEtKRDLptk+YUiiRuNSnYQXyP1gOtUwj
+        mLvtZ55hW/bye+GQaLRb/z38FPe55lwsYkpuqJoq3BNDJCdNtNGDXy8fNAr5ytSFzK3Pqzx8JkO
+        ggnWOZM1GO42kCx2Q9YDM
+X-Received: by 2002:a54:4091:: with SMTP id i17mr4211792oii.96.1623187439563;
+        Tue, 08 Jun 2021 14:23:59 -0700 (PDT)
+X-Google-Smtp-Source: ABdhPJw/slvYeAdnbZ/SPI7BCq6DWlaOdgzks9roBFKWnERshaA7TkLI+lr32K9zzB6m1V9KMz0o0A==
+X-Received: by 2002:a54:4091:: with SMTP id i17mr4211765oii.96.1623187439400;
+        Tue, 08 Jun 2021 14:23:59 -0700 (PDT)
+Received: from localhost.localdomain.com (075-142-250-213.res.spectrum.com. [75.142.250.213])
+        by smtp.gmail.com with ESMTPSA id x199sm1954310oif.5.2021.06.08.14.23.57
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 08 Jun 2021 14:23:59 -0700 (PDT)
+From:   trix@redhat.com
+To:     mdf@kernel.org, robh+dt@kernel.org, hao.wu@intel.com,
+        corbet@lwn.net, fbarrat@linux.ibm.com, ajd@linux.ibm.com,
+        bbrezillon@kernel.org, arno@natisbad.org, schalla@marvell.com,
+        herbert@gondor.apana.org.au, davem@davemloft.net,
+        gregkh@linuxfoundation.org, Sven.Auhagen@voleatech.de,
+        grandmaster@al2klimov.de
+Cc:     linux-fpga@vger.kernel.org, devicetree@vger.kernel.org,
+        linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org,
+        linuxppc-dev@lists.ozlabs.org, linux-crypto@vger.kernel.org,
+        linux-staging@lists.linux.dev, Tom Rix <trix@redhat.com>
+Subject: [PATCH 00/11] fpga: change FPGA indirect article to an
+Date:   Tue,  8 Jun 2021 14:23:38 -0700
+Message-Id: <20210608212350.3029742-1-trix@redhat.com>
+X-Mailer: git-send-email 2.26.3
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Tue,  8 Jun 2021 11:39:55 -0700 Kees Cook <keescook@chromium.org> wrote:
+From: Tom Rix <trix@redhat.com>
 
-> It turns out that SLUB redzoning ("slub_debug=Z") checks from
-> s->object_size rather than from s->inuse (which is normally bumped
-> to make room for the freelist pointer), so a cache created with an
-> object size less than 24 would have the freelist pointer written beyond
-> s->object_size, causing the redzone to be corrupted by the freelist
-> pointer. This was very visible with "slub_debug=ZF":
-> 
-> BUG test (Tainted: G    B            ): Right Redzone overwritten
-> -----------------------------------------------------------------------------
-> 
-> INFO: 0xffff957ead1c05de-0xffff957ead1c05df @offset=1502. First byte 0x1a instead of 0xbb
-> INFO: Slab 0xffffef3950b47000 objects=170 used=170 fp=0x0000000000000000 flags=0x8000000000000200
-> INFO: Object 0xffff957ead1c05d8 @offset=1496 fp=0xffff957ead1c0620
-> 
-> Redzone  (____ptrval____): bb bb bb bb bb bb bb bb               ........
-> Object   (____ptrval____): 00 00 00 00 00 f6 f4 a5               ........
-> Redzone  (____ptrval____): 40 1d e8 1a aa                        @....
-> Padding  (____ptrval____): 00 00 00 00 00 00 00 00               ........
-> 
-> Adjust the offset to stay within s->object_size.
-> 
-> (Note that no caches of in this size range are known to exist in the
-> kernel currently.)
+A treewide followup of
+https://lore.kernel.org/linux-fpga/2faf6ccb-005b-063a-a2a3-e177082c4b3c@silicom.dk/
 
-We already have
-https://lkml.kernel.org/r/6746FEEA-FD69-4792-8DDA-C78F5FE7DA02@psu.edu.
-Is this patch better?
+Change the use of 'a fpga' to 'an fpga'
+Ref usage in wiki
+https://en.wikipedia.org/wiki/Field-programmable_gate_array
+and Intel's 'FPGAs For Dummies'
+https://plan.seek.intel.com/PSG_WW_NC_LPCD_FR_2018_FPGAforDummiesbook
 
-> --- a/mm/slub.c
-> +++ b/mm/slub.c
-> @@ -3689,7 +3689,6 @@ static int calculate_sizes(struct kmem_cache *s, int forced_order)
->  {
->  	slab_flags_t flags = s->flags;
->  	unsigned int size = s->object_size;
-> -	unsigned int freepointer_area;
->  	unsigned int order;
->  
->  	/*
-> @@ -3698,13 +3697,6 @@ static int calculate_sizes(struct kmem_cache *s, int forced_order)
->  	 * the possible location of the free pointer.
->  	 */
->  	size = ALIGN(size, sizeof(void *));
-> -	/*
-> -	 * This is the area of the object where a freepointer can be
-> -	 * safely written. If redzoning adds more to the inuse size, we
-> -	 * can't use that portion for writing the freepointer, so
-> -	 * s->offset must be limited within this for the general case.
-> -	 */
-> -	freepointer_area = size;
->  
->  #ifdef CONFIG_SLUB_DEBUG
->  	/*
-> @@ -3730,7 +3722,7 @@ static int calculate_sizes(struct kmem_cache *s, int forced_order)
->  
->  	/*
->  	 * With that we have determined the number of bytes in actual use
-> -	 * by the object. This is the potential offset to the free pointer.
-> +	 * by the object and redzoning.
->  	 */
->  	s->inuse = size;
->  
-> @@ -3753,13 +3745,13 @@ static int calculate_sizes(struct kmem_cache *s, int forced_order)
->  		 */
->  		s->offset = size;
->  		size += sizeof(void *);
-> -	} else if (freepointer_area > sizeof(void *)) {
-> +	} else {
->  		/*
->  		 * Store freelist pointer near middle of object to keep
->  		 * it away from the edges of the object to avoid small
->  		 * sized over/underflows from neighboring allocations.
->  		 */
-> -		s->offset = ALIGN(freepointer_area / 2, sizeof(void *));
-> +		s->offset = ALIGN_DOWN(s->object_size / 2, sizeof(void *));
->  	}
->  
->  #ifdef CONFIG_SLUB_DEBUG
-> -- 
-> 2.25.1
+Change was mechanical
+ !/bin/sh                                                        
+ for f in `find . -type f`; do
+   sed -i.bak 's/ a fpga/ an fpga/g' $f
+   sed -i.bak 's/ A fpga/ An fpga/g' $f
+   sed -i.bak 's/ a FPGA/ an FPGA/g' $f
+   sed -i.bak 's/ A FPGA/ An FPGA/g' $f
+ done
+
+
+Tom Rix (11):
+  dt-bindings: fpga: fpga-region: change FPGA indirect article to an
+  Documentation: fpga: dfl: change FPGA indirect article to an
+  Documentation: ocxl.rst: change FPGA indirect article to an
+  crypto: marvell: cesa: change FPGA indirect article to an
+  fpga: change FPGA indirect article to an
+  fpga: bridge: change FPGA indirect article to an
+  fpga-mgr: change FPGA indirect article to an
+  fpga: region: change FPGA indirect article to an
+  fpga: of-fpga-region: change FPGA indirect article to an
+  fpga: stratix10-soc: change FPGA indirect article to an
+  staging: fpgaboot: change FPGA indirect article to an
+
+ .../devicetree/bindings/fpga/fpga-region.txt  | 22 +++++++++----------
+ Documentation/fpga/dfl.rst                    |  4 ++--
+ .../userspace-api/accelerators/ocxl.rst       |  2 +-
+ drivers/crypto/marvell/cesa/cesa.h            |  2 +-
+ drivers/fpga/Kconfig                          |  4 ++--
+ drivers/fpga/fpga-bridge.c                    | 22 +++++++++----------
+ drivers/fpga/fpga-mgr.c                       | 22 +++++++++----------
+ drivers/fpga/fpga-region.c                    | 14 ++++++------
+ drivers/fpga/of-fpga-region.c                 |  8 +++----
+ drivers/fpga/stratix10-soc.c                  |  2 +-
+ drivers/staging/gs_fpgaboot/README            |  2 +-
+ include/linux/fpga/fpga-bridge.h              |  2 +-
+ include/linux/fpga/fpga-mgr.h                 |  2 +-
+ 13 files changed, 54 insertions(+), 54 deletions(-)
+
+-- 
+2.26.3
+
