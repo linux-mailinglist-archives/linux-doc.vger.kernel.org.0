@@ -2,120 +2,398 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id A369F3A13FA
-	for <lists+linux-doc@lfdr.de>; Wed,  9 Jun 2021 14:14:41 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 3F9F23A142C
+	for <lists+linux-doc@lfdr.de>; Wed,  9 Jun 2021 14:21:08 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S239734AbhFIMQS (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 9 Jun 2021 08:16:18 -0400
-Received: from us-smtp-delivery-124.mimecast.com ([216.205.24.124]:44280 "EHLO
+        id S235836AbhFIMWV (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 9 Jun 2021 08:22:21 -0400
+Received: from us-smtp-delivery-124.mimecast.com ([216.205.24.124]:58821 "EHLO
         us-smtp-delivery-124.mimecast.com" rhost-flags-OK-OK-OK-OK)
-        by vger.kernel.org with ESMTP id S235237AbhFIMQR (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Wed, 9 Jun 2021 08:16:17 -0400
+        by vger.kernel.org with ESMTP id S235782AbhFIMWU (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Wed, 9 Jun 2021 08:22:20 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-        s=mimecast20190719; t=1623240862;
+        s=mimecast20190719; t=1623241225;
         h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
          to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-         content-transfer-encoding:content-transfer-encoding:
          in-reply-to:in-reply-to:references:references;
-        bh=77QSgyc+8Sk7HYHiam0rcRrsIJ/0Q1AlHtkTPqxgLeg=;
-        b=X3f+vlqesy4PLQ3lYsUdNRyNw+gR+g4X5vxkg98WMCLToW7vrIsSH7iiFjgPd+0sReHINH
-        zDlYJLej5Mf9owUbRwaOKQIeZVnpIuf9UBb5a4YZYZw0vEOKsrGz3g3MUMJZQiPhBLZlaQ
-        3/pcpz3YeT00BRaeBMlyblH1aRuX174=
-Received: from mail-ed1-f71.google.com (mail-ed1-f71.google.com
- [209.85.208.71]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-339-Y-Va4aGRP-2df9MfIxiv7Q-1; Wed, 09 Jun 2021 08:14:20 -0400
-X-MC-Unique: Y-Va4aGRP-2df9MfIxiv7Q-1
-Received: by mail-ed1-f71.google.com with SMTP id z5-20020a05640235c5b0290393974bcf7eso3762119edc.2
-        for <linux-doc@vger.kernel.org>; Wed, 09 Jun 2021 05:14:20 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:subject:to:cc:references:from:message-id:date
-         :user-agent:mime-version:in-reply-to:content-language
-         :content-transfer-encoding;
-        bh=77QSgyc+8Sk7HYHiam0rcRrsIJ/0Q1AlHtkTPqxgLeg=;
-        b=YG+JRMbomPlnS2RsnTvqFCMFbnv8T2XHsZJiyT/oXPn7tvbgwR4BfqHYxA+QiIIpMk
-         MlIhpu5GbNgNqTJ4zyYGaTHTObVsM6ArmTbisZoBB/m4LIUcguY2nv//CJjKzuQH52XQ
-         13/T/hyX6IcofjpwcR2gcX4N2tD9M9M4wi7WGP5/+6hfJo59M7ERorbQQwoljiEugrnk
-         OdVeinihYzLn2PEe7gPk+XT5Ozs2fq/TRCKox2S0Ozv7tZ+4WTbnCofnwiQf+DPUgpp/
-         wIlJzwXQIDyNy2dAz8vknSdDwHMlEU9+hIG5/w1oRZXyKwcDBzDCLVmnrSfsWf44RqM7
-         LeJg==
-X-Gm-Message-State: AOAM531l9XDUNlHrU8BAxACh+n71TYE9jowzJ9ELx5+VamdIMhPjTmYN
-        cKDm9HoJHQ6TWnaKpeAut+yzt47GSFvCbtOnylOB/JZCU4C2Ras6bRd9zNqScfozyA7bYoIWo2x
-        Nj1y1z/bqsQ+O7XimvN4A+S2mBQHfdOdicxE0iQQnUwjqMzVFkUk4CGeN+ceTobSOQI1pyuM=
-X-Received: by 2002:a05:6402:3082:: with SMTP id de2mr17956662edb.214.1623240859156;
-        Wed, 09 Jun 2021 05:14:19 -0700 (PDT)
-X-Google-Smtp-Source: ABdhPJxgQ3/5uZSB81cgZ2oYq3QcOkGNys6k5P1fZOknM8dVYLnNp0EXgn9LjvtdDU4a96tdwdbEbw==
-X-Received: by 2002:a05:6402:3082:: with SMTP id de2mr17956632edb.214.1623240858901;
-        Wed, 09 Jun 2021 05:14:18 -0700 (PDT)
-Received: from x1.bristot.me (host-79-23-205-114.retail.telecomitalia.it. [79.23.205.114])
-        by smtp.gmail.com with ESMTPSA id gv11sm1054485ejb.13.2021.06.09.05.14.18
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Wed, 09 Jun 2021 05:14:18 -0700 (PDT)
-Subject: Re: [PATCH V3 8/9] tracing: Add osnoise tracer
-To:     Steven Rostedt <rostedt@goodmis.org>
-Cc:     linux-kernel@vger.kernel.org, Phil Auld <pauld@redhat.com>,
-        Sebastian Andrzej Siewior <bigeasy@linutronix.de>,
-        Kate Carcia <kcarcia@redhat.com>,
-        Jonathan Corbet <corbet@lwn.net>,
-        Ingo Molnar <mingo@redhat.com>,
-        Peter Zijlstra <peterz@infradead.org>,
-        Thomas Gleixner <tglx@linutronix.de>,
-        Alexandre Chartre <alexandre.chartre@oracle.com>,
-        Clark Willaims <williams@redhat.com>,
-        John Kacur <jkacur@redhat.com>,
-        Juri Lelli <juri.lelli@redhat.com>, linux-doc@vger.kernel.org
-References: <cover.1621024265.git.bristot@redhat.com>
- <bd09a2be9cd0cecee86374dbb49235dd2ef9d750.1621024265.git.bristot@redhat.com>
- <20210604172803.527aa070@oasis.local.home>
-From:   Daniel Bristot de Oliveira <bristot@redhat.com>
-Message-ID: <06d72b7d-4beb-1dff-b537-e7449abf3d4e@redhat.com>
-Date:   Wed, 9 Jun 2021 14:14:17 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
- Thunderbird/78.10.1
+        bh=s3So3eXu9Jji/CYu6NFcSpH3STDHueDz7kvp12XZ/r8=;
+        b=N36t5Z4mq1NjJ2V3R/d/ysGotG8JwwvzoW8+ZydxtEl9R4JGPfJ9SdxmjexhtzfcCC+TMz
+        75xOj0hwNX0a7FyPrKiA5hR28O3+p0TEKLQbrOIsYJ1JWQARMmPTQDpbHcKbE2ajo9YtnT
+        msrG8algPs+8jO9nbbhWrfKQ2BBeFTk=
+Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
+ [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-587-96dvHYg7PX2v6brJCGaaSw-1; Wed, 09 Jun 2021 08:20:23 -0400
+X-MC-Unique: 96dvHYg7PX2v6brJCGaaSw-1
+Received: from smtp.corp.redhat.com (int-mx04.intmail.prod.int.phx2.redhat.com [10.5.11.14])
+        (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+        (No client certificate requested)
+        by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 10EC88D2081;
+        Wed,  9 Jun 2021 12:20:11 +0000 (UTC)
+Received: from dhcp-128-65.nay.redhat.com (ovpn-12-35.pek2.redhat.com [10.72.12.35])
+        by smtp.corp.redhat.com (Postfix) with ESMTPS id C3C795D9C6;
+        Wed,  9 Jun 2021 12:20:03 +0000 (UTC)
+Date:   Wed, 9 Jun 2021 20:20:00 +0800
+From:   Dave Young <dyoung@redhat.com>
+To:     Baoquan He <bhe@redhat.com>
+Cc:     linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org,
+        kexec@lists.infradead.org, Jonathan Corbet <corbet@lwn.net>,
+        akpm@linux-foundation.org,
+        Catalin Marinas <catalin.marinas@arm.com>,
+        Will Deacon <will@kernel.org>,
+        Michael Ellerman <mpe@ellerman.id.au>,
+        Hari Bathini <hbathini@linux.ibm.com>,
+        Heiko Carstens <hca@linux.ibm.com>,
+        Vasily Gorbik <gor@linux.ibm.com>,
+        Christian Borntraeger <borntraeger@de.ibm.com>,
+        Russell King <linux@armlinux.org.uk>,
+        Thomas Bogendoerfer <tsbogend@alpha.franken.de>,
+        "H. Peter Anvin" <hpa@zytor.com>, vgoyal@redhat.com,
+        x86@kernel.org, Eric Biederman <ebiederm@xmission.com>
+Subject: Re: [PATCH v3] Documentation: kdump: update kdump guide
+Message-ID: <YMCx8ENofEwkdQfR@dhcp-128-65.nay.redhat.com>
+References: <20210609083218.GB591017@MiWiFi-R3L-srv>
 MIME-Version: 1.0
-In-Reply-To: <20210604172803.527aa070@oasis.local.home>
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20210609083218.GB591017@MiWiFi-R3L-srv>
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.14
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On 6/4/21 11:28 PM, Steven Rostedt wrote:
->> +#ifdef CONFIG_X86_LOCAL_APIC
-> I wonder if we should move this into a separate file, making the
-> __trace_irq_entry() a more name space safe name and have it call that.
-> I have a bit of a distaste for arch specific code in a generic file.
+On 06/09/21 at 04:32pm, Baoquan He wrote:
+> Some parts of the guide are aged, hence need be updated.
+> 
+> 1) The backup area of the 1st 640K on X86_64 has been removed
+>    by below commits, update the description accordingly.
+> 
+>    commit 7c321eb2b843 ("x86/kdump: Remove the backup region handling")
+>    commit 6f599d84231f ("x86/kdump: Always reserve the low 1M when the crashkernel option is specified")
+> 
+> 2) Sort out the descripiton of "crashkernel syntax" part.
+> 
+> 3) And some other minor cleanups.
+> 
+> Signed-off-by: Baoquan He <bhe@redhat.com>
+> ---
+> v2->v3:
+>  Fix several spell checking issues pointed out by Dave.
+> 
+> v1->v2:
+>  Update the obsolete descriptions about SMP and RELOCATABLE according
+>  to Dave's comment.
+> 
+>  Documentation/admin-guide/kdump/kdump.rst | 169 ++++++++++++++--------
+>  1 file changed, 108 insertions(+), 61 deletions(-)
+> 
+> diff --git a/Documentation/admin-guide/kdump/kdump.rst b/Documentation/admin-guide/kdump/kdump.rst
+> index 75a9dd98e76e..a04fc854749d 100644
+> --- a/Documentation/admin-guide/kdump/kdump.rst
+> +++ b/Documentation/admin-guide/kdump/kdump.rst
+> @@ -2,7 +2,7 @@
+>  Documentation for Kdump - The kexec-based Crash Dumping Solution
+>  ================================================================
+>  
+> -This document includes overview, setup and installation, and analysis
+> +This document includes overview, setup, installation, and analysis
+>  information.
+>  
+>  Overview
+> @@ -13,9 +13,9 @@ dump of the system kernel's memory needs to be taken (for example, when
+>  the system panics). The system kernel's memory image is preserved across
+>  the reboot and is accessible to the dump-capture kernel.
+>  
+> -You can use common commands, such as cp and scp, to copy the
+> -memory image to a dump file on the local disk, or across the network to
+> -a remote system.
+> +You can use common commands, such as cp, scp or makedumpfile to copy
+> +the memory image to a dump file on the local disk, or across the network
+> +to a remote system.
+>  
+>  Kdump and kexec are currently supported on the x86, x86_64, ppc64, ia64,
+>  s390x, arm and arm64 architectures.
+> @@ -26,13 +26,15 @@ the dump-capture kernel. This ensures that ongoing Direct Memory Access
+>  The kexec -p command loads the dump-capture kernel into this reserved
+>  memory.
+>  
+> -On x86 machines, the first 640 KB of physical memory is needed to boot,
+> -regardless of where the kernel loads. Therefore, kexec backs up this
+> -region just before rebooting into the dump-capture kernel.
+> +On x86 machines, the first 640 KB of physical memory is needed for boot,
+> +regardless of where the kernel loads. For simpler handling, the whole
+> +low 1M is reserved to avoid any later kernel or device driver writing
+> +data into this area. Like this, the low 1M can be reused as system RAM
+> +by kdump kernel without extra handling.
+>  
+> -Similarly on PPC64 machines first 32KB of physical memory is needed for
+> -booting regardless of where the kernel is loaded and to support 64K page
+> -size kexec backs up the first 64KB memory.
+> +On PPC64 machines first 32KB of physical memory is needed for booting
+> +regardless of where the kernel is loaded and to support 64K page size
+> +kexec backs up the first 64KB memory.
+>  
+>  For s390x, when kdump is triggered, the crashkernel region is exchanged
+>  with the region [0, crashkernel region size] and then the kdump kernel
+> @@ -46,14 +48,14 @@ passed to the dump-capture kernel through the elfcorehdr= boot
+>  parameter. Optionally the size of the ELF header can also be passed
+>  when using the elfcorehdr=[size[KMG]@]offset[KMG] syntax.
+>  
+> -
+>  With the dump-capture kernel, you can access the memory image through
+>  /proc/vmcore. This exports the dump as an ELF-format file that you can
+> -write out using file copy commands such as cp or scp. Further, you can
+> -use analysis tools such as the GNU Debugger (GDB) and the Crash tool to
+> -debug the dump file. This method ensures that the dump pages are correctly
+> -ordered.
+> -
+> +write out using file copy commands such as cp or scp. You can also use
+> +makedumpfile utility to analyze and write out filtered contents with
+> +options, e.g with '-d 31' it will only write out kernel data. Further,
+> +you can use analysis tools such as the GNU Debugger (GDB) and the Crash
+> +tool to debug the dump file. This method ensures that the dump pages are
+> +correctly ordered.
+>  
+>  Setup and Installation
+>  ======================
+> @@ -125,9 +127,18 @@ dump-capture kernels for enabling kdump support.
+>  System kernel config options
+>  ----------------------------
+>  
+> -1) Enable "kexec system call" in "Processor type and features."::
+> +1) Enable "kexec system call" or "kexec file based system call" in
+> +   "Processor type and features."::
+> +
+> +	CONFIG_KEXEC=y or CONFIG_KEXEC_FILE=y
+> +
+> +   And both of them will select KEXEC_CORE::
+>  
+> -	CONFIG_KEXEC=y
+> +	CONFIG_KEXEC_CORE=y
+> +
+> +   Subsequently, CRASH_CORE is selected by KEXEC_CORE::
+> +
+> +	CONFIG_CRASH_CORE=y
+>  
+>  2) Enable "sysfs file system support" in "Filesystem" -> "Pseudo
+>     filesystems." This is usually enabled by default::
+> @@ -175,17 +186,19 @@ Dump-capture kernel config options (Arch Dependent, i386 and x86_64)
+>  
+>  	CONFIG_HIGHMEM4G
+>  
+> -2) On i386 and x86_64, disable symmetric multi-processing support
+> -   under "Processor type and features"::
+> +2) With CONFIG_SMP=y, usually nr_cpus=1 need specified on the kernel
+> +   command line when loading the dump-capture kernel because one
+> +   CPU is enough for kdump kernel to dump vmcore on most of systems.
+>  
+> -	CONFIG_SMP=n
+> +   However, you can also specify nr_cpus=X to enable multiple processors
+> +   in kdump kernel. In this case, "disable_cpu_apicid=" is needed to
+> +   tell kdump kernel which cpu is 1st kernel's BSP. Please refer to
+> +   admin-guide/kernel-parameters.txt for more details.
+>  
+> -   (If CONFIG_SMP=y, then specify maxcpus=1 on the kernel command line
+> -   when loading the dump-capture kernel, see section "Load the Dump-capture
+> -   Kernel".)
+> +   With CONFIG_SMP=n, the above things are not related.
+>  
+> -3) If one wants to build and use a relocatable kernel,
+> -   Enable "Build a relocatable kernel" support under "Processor type and
+> +3) A relocatable kernel is suggested to be built by default. If not yet,
+> +   enable "Build a relocatable kernel" support under "Processor type and
+>     features"::
+>  
+>  	CONFIG_RELOCATABLE=y
+> @@ -232,7 +245,7 @@ Dump-capture kernel config options (Arch Dependent, ia64)
+>    as a dump-capture kernel if desired.
+>  
+>    The crashkernel region can be automatically placed by the system
+> -  kernel at run time. This is done by specifying the base address as 0,
+> +  kernel at runtime. This is done by specifying the base address as 0,
+>    or omitting it all together::
+>  
+>  	crashkernel=256M@0
+> @@ -241,10 +254,6 @@ Dump-capture kernel config options (Arch Dependent, ia64)
+>  
+>  	crashkernel=256M
+>  
+> -  If the start address is specified, note that the start address of the
+> -  kernel will be aligned to 64Mb, so if the start address is not then
+> -  any space below the alignment point will be wasted.
+> -
+>  Dump-capture kernel config options (Arch Dependent, arm)
+>  ----------------------------------------------------------
+>  
+> @@ -260,46 +269,81 @@ Dump-capture kernel config options (Arch Dependent, arm64)
+>    on non-VHE systems even if it is configured. This is because the CPU
+>    will not be reset to EL2 on panic.
+>  
+> -Extended crashkernel syntax
+> +crashkernel syntax
+>  ===========================
+> +1) crashkernel=size@offset
+>  
+> -While the "crashkernel=size[@offset]" syntax is sufficient for most
+> -configurations, sometimes it's handy to have the reserved memory dependent
+> -on the value of System RAM -- that's mostly for distributors that pre-setup
+> -the kernel command line to avoid a unbootable system after some memory has
+> -been removed from the machine.
+> +   Here 'size' specifies how much memory to reserve for the dump-capture kernel
+> +   and 'offset' specifies the beginning of this reserved memory. For example,
+> +   "crashkernel=64M@16M" tells the system kernel to reserve 64 MB of memory
+> +   starting at physical address 0x01000000 (16MB) for the dump-capture kernel.
+>  
+> -The syntax is::
+> +   The crashkernel region can be automatically placed by the system
+> +   kernel at run time. This is done by specifying the base address as 0,
+> +   or omitting it all together::
+>  
+> -    crashkernel=<range1>:<size1>[,<range2>:<size2>,...][@offset]
+> -    range=start-[end]
+> +         crashkernel=256M@0
+> +   or::
+>  
+> -For example::
+> +         crashkernel=256M
+>  
+> -    crashkernel=512M-2G:64M,2G-:128M
+> +   If the start address is specified, note that the start address of the
+> +   kernel will be aligned to a value (which is Arch dependent), so if the
+> +   start address is not then any space below the alignment point will be
+> +   wasted.
+>  
+> -This would mean:
+> +2) range1:size1[,range2:size2,...][@offset]
+>  
+> -    1) if the RAM is smaller than 512M, then don't reserve anything
+> -       (this is the "rescue" case)
+> -    2) if the RAM size is between 512M and 2G (exclusive), then reserve 64M
+> -    3) if the RAM size is larger than 2G, then reserve 128M
+> +   While the "crashkernel=size[@offset]" syntax is sufficient for most
+> +   configurations, sometimes it's handy to have the reserved memory dependent
+> +   on the value of System RAM -- that's mostly for distributors that pre-setup
+> +   the kernel command line to avoid a unbootable system after some memory has
+> +   been removed from the machine.
+>  
+> +   The syntax is::
+>  
+> +       crashkernel=<range1>:<size1>[,<range2>:<size2>,...][@offset]
+> +       range=start-[end]
+>  
+> -Boot into System Kernel
+> -=======================
+> +   For example::
+> +
+> +       crashkernel=512M-2G:64M,2G-:128M
+> +
+> +   This would mean:
+>  
+> +       1) if the RAM is smaller than 512M, then don't reserve anything
+> +          (this is the "rescue" case)
+> +       2) if the RAM size is between 512M and 2G (exclusive), then reserve 64M
+> +       3) if the RAM size is larger than 2G, then reserve 128M
+> +
+> +3) crashkernel=size,high and crashkernel=size,low
+> +
+> +   If memory above 4G is preferred, crashkernel=size,high can be used to
+> +   fulfill that. With it, physical memory is allowed to be allocated from top,
+> +   so could be above 4G if system has more than 4G RAM installed. Otherwise,
+> +   memory region will be allocated below 4G if available.
+> +
+> +   When crashkernel=X,high is passed, kernel could allocate physical memory
+> +   region above 4G, low memory under 4G is needed in this case. There are
+> +   three ways to get low memory:
+> +
+> +      1) Kernel will allocate at least 256M memory below 4G automatically
+> +         if crashkernel=Y,low is not specified.
+> +      2) Let user specify low memory size instead.
+> +      3) Specified value 0 will disable low memory allocation::
+> +
+> +            crashkernel=0,low
+> +
+> +Boot into System Kernel
+> +-----------------------
+>  1) Update the boot loader (such as grub, yaboot, or lilo) configuration
+>     files as necessary.
+>  
+> -2) Boot the system kernel with the boot parameter "crashkernel=Y@X",
+> -   where Y specifies how much memory to reserve for the dump-capture kernel
+> -   and X specifies the beginning of this reserved memory. For example,
+> -   "crashkernel=64M@16M" tells the system kernel to reserve 64 MB of memory
+> -   starting at physical address 0x01000000 (16MB) for the dump-capture kernel.
+> +2) Boot the system kernel with the boot parameter "crashkernel=Y@X".
+>  
+> -   On x86 and x86_64, use "crashkernel=64M@16M".
+> +   On x86 and x86_64, use "crashkernel=Y[@X]". Most of the time, the
+> +   start address 'X' is not necessary, kernel will search a suitable
+> +   area. Unless an explicit start address is expected.
+>  
+>     On ppc64, use "crashkernel=128M@32M".
+>  
+> @@ -331,8 +375,8 @@ of dump-capture kernel. Following is the summary.
+>  
+>  For i386 and x86_64:
+>  
+> -	- Use vmlinux if kernel is not relocatable.
+>  	- Use bzImage/vmlinuz if kernel is relocatable.
+> +	- Use vmlinux if kernel is not relocatable.
+>  
+>  For ppc64:
+>  
+> @@ -392,7 +436,7 @@ loading dump-capture kernel.
+>  
+>  For i386, x86_64 and ia64:
+>  
+> -	"1 irqpoll maxcpus=1 reset_devices"
+> +	"1 irqpoll nr_cpus=1 reset_devices"
+>  
+>  For ppc64:
+>  
+> @@ -400,7 +444,7 @@ For ppc64:
+>  
+>  For s390x:
+>  
+> -	"1 maxcpus=1 cgroup_disable=memory"
+> +	"1 nr_cpus=1 cgroup_disable=memory"
+>  
+>  For arm:
+>  
+> @@ -408,7 +452,7 @@ For arm:
+>  
+>  For arm64:
+>  
+> -	"1 maxcpus=1 reset_devices"
+> +	"1 nr_cpus=1 reset_devices"
+>  
+>  Notes on loading the dump-capture kernel:
+>  
+> @@ -488,6 +532,10 @@ the following command::
+>  
+>     cp /proc/vmcore <dump-file>
+>  
+> +You can also use makedumpfile utility to write out the dump file
+> +with specified options to filter out unwanted contents, e.g::
+> +
+> +   makedumpfile -l --message-level 1 -d 31 /proc/vmcore <dump-file>
+>  
+>  Analysis
+>  ========
+> @@ -535,8 +583,7 @@ This will cause a kdump to occur at the add_taint()->panic() call.
+>  Contact
+>  =======
+>  
+> -- Vivek Goyal (vgoyal@redhat.com)
+> -- Maneesh Soni (maneesh@in.ibm.com)
+> +- kexec@lists.infradead.org
+>  
+>  GDB macros
+>  ==========
+> -- 
+> 2.17.2
 > 
 
-I am placing the intel specific file in:
+Acked-by: Dave Young <dyoung@redhat.com>
 
-arch/x86/kernel/trace_osnoise.c
-
-and the kernel/trace/trace_osnoise.h looks like this:
-
-#ifdef CONFIG_X86_LOCAL_APIC
-int osnoise_arch_register(void);
-int osnoise_arch_unregister(void);
-#else /* CONFIG_X86_LOCAL_APIC */
-#define osnoise_arch_register() do {} while (0)
-#define osnoise_arch_unregister() do {} while (0)
-#endif /* CONFIG_X86_LOCAL_APIC */
-
-This can be used by other archs as well...
-
-sound reasonable?
-
--- Daniel
-
-
->> +/**
->> + * trace_intel_irq_entry - record intel specific IRQ entry
->> + */
->> +void trace_intel_irq_entry(void *data, int vector)
->> +{
->> +	__trace_irq_entry(vector);
->> +}
->> +
-
+Thanks
+Dave
 
