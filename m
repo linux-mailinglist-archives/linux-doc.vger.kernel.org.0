@@ -2,68 +2,97 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 79E833A1535
-	for <lists+linux-doc@lfdr.de>; Wed,  9 Jun 2021 15:12:26 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 325B53A1514
+	for <lists+linux-doc@lfdr.de>; Wed,  9 Jun 2021 15:03:34 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S236125AbhFINOO (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 9 Jun 2021 09:14:14 -0400
-Received: from flippie-beckerswealthsa.xyz ([62.173.138.170]:60612 "EHLO
-        host.flippie-beckerswealthsa.xyz" rhost-flags-OK-OK-OK-OK)
-        by vger.kernel.org with ESMTP id S236080AbhFINON (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Wed, 9 Jun 2021 09:14:13 -0400
-Received: from flippie-beckerswealthsa.xyz (ec2-18-118-29-154.us-east-2.compute.amazonaws.com [18.118.29.154])
-        by host.flippie-beckerswealthsa.xyz (Postfix) with ESMTPA id A5A5730AC43B
-        for <linux-doc@vger.kernel.org>; Wed,  9 Jun 2021 15:09:32 +0300 (MSK)
-DKIM-Filter: OpenDKIM Filter v2.11.0 host.flippie-beckerswealthsa.xyz A5A5730AC43B
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=flippie-beckerswealthsa.xyz; s=default; t=1623240573;
-        bh=h0ivQLrZuUWuyEKz/TWb+FP9AASpHhVqOsJtRcwKQV4=;
-        h=Reply-To:From:To:Subject:Date:From;
-        b=SX3Tha99RBRa1VB55l89cMewTyNNUz93DBIs7hpy2faMLp4Xmz29sezIjQWCGqqBM
-         ZaNVaRJAG7mlAEWC9PObUm0LsLVAxot1cWf/tEXEl3zsKYoucPrKJrpAwUl++JBSOs
-         Qhtt3SSmivew++LJe5nelRS5oOJ2eiiQxEOtRRqQ=
-DKIM-Filter: OpenDKIM Filter v2.11.0 host.flippie-beckerswealthsa.xyz A5A5730AC43B
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=flippie-beckerswealthsa.xyz; s=default; t=1623240573;
-        bh=h0ivQLrZuUWuyEKz/TWb+FP9AASpHhVqOsJtRcwKQV4=;
-        h=Reply-To:From:To:Subject:Date:From;
-        b=SX3Tha99RBRa1VB55l89cMewTyNNUz93DBIs7hpy2faMLp4Xmz29sezIjQWCGqqBM
-         ZaNVaRJAG7mlAEWC9PObUm0LsLVAxot1cWf/tEXEl3zsKYoucPrKJrpAwUl++JBSOs
-         Qhtt3SSmivew++LJe5nelRS5oOJ2eiiQxEOtRRqQ=
-Reply-To: jmasuku40@flippiebeckerwealthservices.com
-From:   Jotham Masuku <jmasuku40@flippie-beckerswealthsa.xyz>
-To:     linux-doc@vger.kernel.org
-Subject: Projects
-Date:   09 Jun 2021 12:09:32 +0000
-Message-ID: <20210609120932.98CD979CAD037809@flippie-beckerswealthsa.xyz>
-Mime-Version: 1.0
-Content-Type: text/plain;
-        charset="utf-8"
-Content-Transfer-Encoding: quoted-printable
+        id S231925AbhFINF0 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 9 Jun 2021 09:05:26 -0400
+Received: from mail.kernel.org ([198.145.29.99]:60368 "EHLO mail.kernel.org"
+        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
+        id S231466AbhFINF0 (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Wed, 9 Jun 2021 09:05:26 -0400
+Received: from oasis.local.home (cpe-66-24-58-225.stny.res.rr.com [66.24.58.225])
+        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+        (No client certificate requested)
+        by mail.kernel.org (Postfix) with ESMTPSA id A276061108;
+        Wed,  9 Jun 2021 13:03:30 +0000 (UTC)
+Date:   Wed, 9 Jun 2021 09:03:29 -0400
+From:   Steven Rostedt <rostedt@goodmis.org>
+To:     Daniel Bristot de Oliveira <bristot@redhat.com>
+Cc:     linux-kernel@vger.kernel.org, Phil Auld <pauld@redhat.com>,
+        Sebastian Andrzej Siewior <bigeasy@linutronix.de>,
+        Kate Carcia <kcarcia@redhat.com>,
+        Jonathan Corbet <corbet@lwn.net>,
+        Ingo Molnar <mingo@redhat.com>,
+        Peter Zijlstra <peterz@infradead.org>,
+        Thomas Gleixner <tglx@linutronix.de>,
+        Alexandre Chartre <alexandre.chartre@oracle.com>,
+        Clark Willaims <williams@redhat.com>,
+        John Kacur <jkacur@redhat.com>,
+        Juri Lelli <juri.lelli@redhat.com>, linux-doc@vger.kernel.org
+Subject: Re: [PATCH V3 8/9] tracing: Add osnoise tracer
+Message-ID: <20210609090329.53679e79@oasis.local.home>
+In-Reply-To: <06d72b7d-4beb-1dff-b537-e7449abf3d4e@redhat.com>
+References: <cover.1621024265.git.bristot@redhat.com>
+        <bd09a2be9cd0cecee86374dbb49235dd2ef9d750.1621024265.git.bristot@redhat.com>
+        <20210604172803.527aa070@oasis.local.home>
+        <06d72b7d-4beb-1dff-b537-e7449abf3d4e@redhat.com>
+X-Mailer: Claws Mail 3.17.3 (GTK+ 2.24.33; x86_64-pc-linux-gnu)
+MIME-Version: 1.0
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 7bit
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Hello there,
+On Wed, 9 Jun 2021 14:14:17 +0200
+Daniel Bristot de Oliveira <bristot@redhat.com> wrote:
 
-I hope this message finds you in good spirits especially during=20
-this challenging time of coronavirus pandemic. I hope you and=20
-your family are well and keeping safe. Anyway, I am Jotham=20
-Masuku, a broker working with Flippiebecker Wealth. I got your=20
-contact (along with few other contacts) through an online=20
-business directory and I thought I should contact you to see if=20
-you are interested in this opportunity. I am contacting you=20
-because one of my high profile clients is interested in investing=20
-abroad and has asked me to look for individuals and companies=20
-with interesting business ideas and projects that he can invest=20
-in. He wants to invest a substantial amount of asset abroad.
+> On 6/4/21 11:28 PM, Steven Rostedt wrote:
+> >> +#ifdef CONFIG_X86_LOCAL_APIC  
+> > I wonder if we should move this into a separate file, making the
+> > __trace_irq_entry() a more name space safe name and have it call that.
+> > I have a bit of a distaste for arch specific code in a generic file.
+> >   
+> 
+> I am placing the intel specific file in:
+> 
+> arch/x86/kernel/trace_osnoise.c
 
-Please kindly respond back to this email if you are interested in=20
-this opportunity. Once I receive your response, I will give you=20
-more details and we can plan a strategy that will be beneficial=20
-to all parties.
+I would make it just arch/x86/kernel/trace.c
 
-Best regards
+so that it can hold all arch specific tracing information, and not need
+to create a file for anything else we might need later.
 
-J Masuku
-Flippiebecker Wealth
+> 
+> and the kernel/trace/trace_osnoise.h looks like this:
+> 
+> #ifdef CONFIG_X86_LOCAL_APIC
+> int osnoise_arch_register(void);
+> int osnoise_arch_unregister(void);
+> #else /* CONFIG_X86_LOCAL_APIC */
+> #define osnoise_arch_register() do {} while (0)
+> #define osnoise_arch_unregister() do {} while (0)
+> #endif /* CONFIG_X86_LOCAL_APIC */
+> 
+> This can be used by other archs as well...
+> 
+> sound reasonable?
+> 
+
+The proper way to d that is to use weak functions in the C code in the
+generic file.
+
+int __weak osnoise_arch_register(void)
+{
+	return 0;
+}
+
+int __weak osnoise_arch_unregister(void)
+{
+	return 0;
+}
+
+Hmm, does the unregister really need a return value?
+
+-- Steve
