@@ -2,109 +2,97 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 09D6B3A12C8
-	for <lists+linux-doc@lfdr.de>; Wed,  9 Jun 2021 13:32:39 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 117F33A1404
+	for <lists+linux-doc@lfdr.de>; Wed,  9 Jun 2021 14:16:09 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S238768AbhFILea (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 9 Jun 2021 07:34:30 -0400
-Received: from mout.kundenserver.de ([217.72.192.73]:56329 "EHLO
-        mout.kundenserver.de" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S234695AbhFILea (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Wed, 9 Jun 2021 07:34:30 -0400
-Received: from mail-wm1-f47.google.com ([209.85.128.47]) by
- mrelayeu.kundenserver.de (mreue107 [213.165.67.113]) with ESMTPSA (Nemesis)
- id 1MeTHG-1lIhYi06xY-00aXJb; Wed, 09 Jun 2021 13:32:32 +0200
-Received: by mail-wm1-f47.google.com with SMTP id l18-20020a1ced120000b029014c1adff1edso4037255wmh.4;
-        Wed, 09 Jun 2021 04:32:31 -0700 (PDT)
-X-Gm-Message-State: AOAM531MtLqkz6c784MFtQZns9lthn21/JNIrLLelOQnk1FoPQu8fEM0
-        GWOQGmM2juT/VRjRxeEztY/WzXmANm1nRMzNoGU=
-X-Google-Smtp-Source: ABdhPJzoAPnjJWGlDyxsxVrxhheEMZ1P753dKM++est77A1JSiUJC5TRRvOf+sTRALv47GHRkLWv+YzLbHb9Ukp7IwY=
-X-Received: by 2002:a1c:7d15:: with SMTP id y21mr9135927wmc.120.1623238351528;
- Wed, 09 Jun 2021 04:32:31 -0700 (PDT)
+        id S232726AbhFIMSB (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 9 Jun 2021 08:18:01 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:37170 "EHLO
+        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S232476AbhFIMSA (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Wed, 9 Jun 2021 08:18:00 -0400
+Received: from mail-pg1-x52e.google.com (mail-pg1-x52e.google.com [IPv6:2607:f8b0:4864:20::52e])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 38542C06175F
+        for <linux-doc@vger.kernel.org>; Wed,  9 Jun 2021 05:16:06 -0700 (PDT)
+Received: by mail-pg1-x52e.google.com with SMTP id 27so19306446pgy.3
+        for <linux-doc@vger.kernel.org>; Wed, 09 Jun 2021 05:16:06 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=bytedance-com.20150623.gappssmtp.com; s=20150623;
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=wprdMWfJiXYwt+byCaL17b8Ql6JNBi5HmdAMUTjvSbc=;
+        b=V+MbqtjhsFxJ9XUKWyH9b56cSIZdlel2+2J+6Y0VjDs0KVJP/tVYXUiqHSXhbQWa4T
+         NRBvXHKhwwkgnNsJ2bpdbP5e+ZKvM0r9ZOiN5uvAa1qAzUX7T9Uh6JGu8eRp0iQ+6bTy
+         7/uGiQlRBK19yPMEh1VkiGnTTl34a1ApoBZ7crHxjUqUUAA/v7if1iJcadXbgv+11/rP
+         oVXj4HDLmR4EgDnpECdZqNnw/ioCtWRUsmu83SLvWTqOURAOuK8a9LE/Uof55nQcCnYH
+         +g3rUisaThQgqytwPQnm6x0cHrlXtbn5LZOWe5ZLY/dtsbYrL7pc0eutYOxZef60yA1M
+         ZuMg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=wprdMWfJiXYwt+byCaL17b8Ql6JNBi5HmdAMUTjvSbc=;
+        b=h8KeeRudHZnIcyR3QKIY/boooxalynOkQjdBnLQA3LXnpyh1nU7raB2mCrEbr3gx6y
+         f7H7wLahdLE5Rhqmbd2pLdYaa7B8iGD/2qRXg7VQpy9L6Wg+MrkCpu3EIgyCtTFYD7/8
+         HnFrVZ4RvbmfsEHzsudYF8IyPlkqhg/wnssQ0lqXIYJJQgsYUg9L30+iE9UChkJSaGfu
+         eDjETKIHTYg/mv3nulKsoRtD9ofLYXp88YVZXkxrRzOZEaEeeZeK/QNOI6dU1EDjbIjk
+         AGhFhLv3x2PwGbfHeMtYbnTjlX/4C4NC4n03cIxNfgJgkLIeedaY9sCYiKNxjLlaLzdE
+         Gziw==
+X-Gm-Message-State: AOAM533loqk75/Xn8NygezcozmcNwxstOMb/BMsfWgF4zDYpio3rxYfc
+        q6E96hTFZ4v3evfd07hp5qzxKg==
+X-Google-Smtp-Source: ABdhPJxOzhPyB/B/fwjQm3fVVbXISdPVlMybZd7K3dy83KhCsPp0ST1pBO2gb286LZ/N8Wmg3LYsRw==
+X-Received: by 2002:a05:6a00:23cf:b029:2d5:302e:dc77 with SMTP id g15-20020a056a0023cfb02902d5302edc77mr4973334pfc.63.1623240964882;
+        Wed, 09 Jun 2021 05:16:04 -0700 (PDT)
+Received: from localhost.localdomain ([139.177.225.254])
+        by smtp.gmail.com with ESMTPSA id h16sm13689224pfk.119.2021.06.09.05.15.59
+        (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
+        Wed, 09 Jun 2021 05:16:04 -0700 (PDT)
+From:   Muchun Song <songmuchun@bytedance.com>
+To:     mike.kravetz@oracle.com, akpm@linux-foundation.org,
+        osalvador@suse.de, mhocko@suse.com, song.bao.hua@hisilicon.com,
+        david@redhat.com, chenhuang5@huawei.com, bodeddub@amazon.com,
+        corbet@lwn.net
+Cc:     duanxiongchun@bytedance.com, fam.zheng@bytedance.com,
+        zhengqi.arch@bytedance.com, linux-doc@vger.kernel.org,
+        linux-kernel@vger.kernel.org, linux-mm@kvack.org,
+        Muchun Song <songmuchun@bytedance.com>
+Subject: [PATCH 0/5] Split huge PMD mapping of vmemmap pages
+Date:   Wed,  9 Jun 2021 20:13:05 +0800
+Message-Id: <20210609121310.62229-1-songmuchun@bytedance.com>
+X-Mailer: git-send-email 2.21.0 (Apple Git-122)
 MIME-Version: 1.0
-References: <20210604064916.26580-1-rppt@kernel.org>
-In-Reply-To: <20210604064916.26580-1-rppt@kernel.org>
-From:   Arnd Bergmann <arnd@arndb.de>
-Date:   Wed, 9 Jun 2021 13:30:39 +0200
-X-Gmail-Original-Message-ID: <CAK8P3a2tZDJDqgr9-1vJrnbDhd_36eKq8LMEznDkU7rvuAnAag@mail.gmail.com>
-Message-ID: <CAK8P3a2tZDJDqgr9-1vJrnbDhd_36eKq8LMEznDkU7rvuAnAag@mail.gmail.com>
-Subject: Re: [PATCH v2 0/9] Remove DISCINTIGMEM memory model
-To:     Mike Rapoport <rppt@kernel.org>
-Cc:     Andrew Morton <akpm@linux-foundation.org>,
-        Geert Uytterhoeven <geert@linux-m68k.org>,
-        Ivan Kokshaysky <ink@jurassic.park.msu.ru>,
-        Jonathan Corbet <corbet@lwn.net>,
-        Matt Turner <mattst88@gmail.com>,
-        Mike Rapoport <rppt@linux.ibm.com>,
-        Richard Henderson <rth@twiddle.net>,
-        Vineet Gupta <vgupta@synopsys.com>, kexec@lists.infradead.org,
-        alpha <linux-alpha@vger.kernel.org>,
-        linux-arch <linux-arch@vger.kernel.org>,
-        Linux ARM <linux-arm-kernel@lists.infradead.org>,
-        "open list:DOCUMENTATION" <linux-doc@vger.kernel.org>,
-        linux-ia64@vger.kernel.org,
-        Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
-        linux-m68k <linux-m68k@lists.linux-m68k.org>,
-        "open list:BROADCOM NVRAM DRIVER" <linux-mips@vger.kernel.org>,
-        Linux-MM <linux-mm@kvack.org>,
-        linux-riscv <linux-riscv@lists.infradead.org>,
-        linux-s390 <linux-s390@vger.kernel.org>,
-        Linux-sh list <linux-sh@vger.kernel.org>,
-        "open list:SYNOPSYS ARC ARCHITECTURE" 
-        <linux-snps-arc@lists.infradead.org>,
-        "open list:TENSILICA XTENSA PORT (xtensa)" 
-        <linux-xtensa@linux-xtensa.org>,
-        linuxppc-dev <linuxppc-dev@lists.ozlabs.org>,
-        sparclinux <sparclinux@vger.kernel.org>
-Content-Type: text/plain; charset="UTF-8"
-X-Provags-ID: V03:K1:H5v968KC2M79DkfYJyPJxj8yupcPqCQCJ1N4Z1HmTCSClKb4RJo
- ba0OO00j+bQ0/ZfbbpxKSiQVStQhbD856cKnMY+4A0fxTdaC6uxId9Y1ipxTmxRBkJuctyA
- Y1reZ/b/kYT1BSOx482r5mSswn4b7jlFqgsC78pIMEkGVNc1cjI0RWjJZWCt4GG6WoMXbNZ
- Ljxrl+h40xce8+eZXhgpw==
-X-Spam-Flag: NO
-X-UI-Out-Filterresults: notjunk:1;V03:K0:5bmpDHZqtKc=:Snj2gFdCvD9hMNFA7myfNf
- S7TJYfwc92EMXo9TCc/9co0khSPe0xtvvBaf8aiHVsurZ3oP2AmcRX6BVUP7Xkj9BDw9JrZ8r
- Z2wILA9mD/T8ZjTMdp8kP7qRSEOVHhc7Au1DQbVYZorVj7P2leDN1uEjVAhYCl9pkDkOhflPK
- vR3qGESRcP/fRxk0ek/C5PAEwYFJjR5/IGZq2vJEr7WZdjAI+bQjrRwd+D7thELunwixQ+PpT
- WI8xpyv1ks8xUxKZI9AWGNw6UhNUsBufMWKZ85ybM1bhKHgP4NQsoHnWhobO8rOzd7mmp+jxB
- EQh62WMcePgVMwuNW5SPP4rcyv9jVb4grdp2JrCbcR8rqJzreIfWKIdLr156lCln5HUoPhyOz
- ntXk9hTPzQ2q7S3c/MqI0in2kpmJVNcVYFmVrGCmGA8tZ7xuH9IOakNeAFkCRFqBUgKX/IXpl
- UEQflHiNkQiWJe4xHAM7PtCA+SqMph+XVbJl6LVS/uvozw/5S4vyBWrztTOXrWo7TaJflWn5P
- kgirFMtxuf9q5XsoobMr8Ol4RQnTDMy8uXmfTDS58mC/9bsqrpXrOnVt7H9AxIUxbuWsocMKR
- GATG5+nWJuFn2SSP0/UPYKl4jJ1LD+cCBubY6cirUnIUoYxqSzBOh21rRTqGQSReM2zHPuCDc
- 5yks=
+Content-Transfer-Encoding: 8bit
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Fri, Jun 4, 2021 at 8:49 AM Mike Rapoport <rppt@kernel.org> wrote:
->
-> From: Mike Rapoport <rppt@linux.ibm.com>
->
-> Hi,
->
-> SPARSEMEM memory model was supposed to entirely replace DISCONTIGMEM a
-> (long) while ago. The last architectures that used DISCONTIGMEM were
-> updated to use other memory models in v5.11 and it is about the time to
-> entirely remove DISCONTIGMEM from the kernel.
->
-> This set removes DISCONTIGMEM from alpha, arc and m68k, simplifies memory
-> model selection in mm/Kconfig and replaces usage of redundant
-> CONFIG_NEED_MULTIPLE_NODES and CONFIG_FLAT_NODE_MEM_MAP with CONFIG_NUMA
-> and CONFIG_FLATMEM respectively.
->
-> I've also removed NUMA support on alpha that was BROKEN for more than 15
-> years.
->
-> There were also minor updates all over arch/ to remove mentions of
-> DISCONTIGMEM in comments and #ifdefs.
+In order to reduce the difficulty of code review in series[1]. We disable
+huge PMD mapping of vmemmap pages when that feature is enabled. In this
+series, we do not disable huge PMD mapping of vmemmap pages anymore. We
+will split huge PMD mapping when needed.
 
-Hi Mike and Andrew,
+[1] https://lore.kernel.org/linux-doc/20210510030027.56044-1-songmuchun@bytedance.com/
 
-It looks like everyone is happy with this version so far. How should we merge it
-for linux-next? I'm happy to take it through the asm-generic tree, but linux-mm
-would fit at least as well. In case we go for linux-mm, feel free to add
+Muchun Song (5):
+  mm: hugetlb: introduce helpers to preallocate/free page tables
+  mm: hugetlb: introduce helpers to preallocate page tables from bootmem
+    allocator
+  mm: sparsemem: split the huge PMD mapping of vmemmap pages
+  mm: sparsemem: use huge PMD mapping for vmemmap pages
+  mm: hugetlb: introduce CONFIG_HUGETLB_PAGE_FREE_VMEMMAP_DEFAULT_ON
 
-Acked-by: Arnd Bergmann <arnd@arndb.de>
+ Documentation/admin-guide/kernel-parameters.txt |  10 +-
+ arch/x86/mm/init_64.c                           |   8 +-
+ fs/Kconfig                                      |  10 ++
+ include/linux/hugetlb.h                         |  28 ++----
+ include/linux/mm.h                              |   2 +-
+ mm/hugetlb.c                                    |  42 +++++++-
+ mm/hugetlb_vmemmap.c                            | 126 +++++++++++++++++++++++-
+ mm/hugetlb_vmemmap.h                            |  25 +++++
+ mm/memory_hotplug.c                             |   2 +-
+ mm/sparse-vmemmap.c                             |  61 ++++++++++--
+ 10 files changed, 267 insertions(+), 47 deletions(-)
 
-for the whole series.
+-- 
+2.11.0
+
