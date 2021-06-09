@@ -2,145 +2,120 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 915513A1413
-	for <lists+linux-doc@lfdr.de>; Wed,  9 Jun 2021 14:17:22 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id A369F3A13FA
+	for <lists+linux-doc@lfdr.de>; Wed,  9 Jun 2021 14:14:41 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S232658AbhFIMSp (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 9 Jun 2021 08:18:45 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:37290 "EHLO
-        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S235102AbhFIMSo (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Wed, 9 Jun 2021 08:18:44 -0400
-Received: from mail-pf1-x435.google.com (mail-pf1-x435.google.com [IPv6:2607:f8b0:4864:20::435])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 31492C061574
-        for <linux-doc@vger.kernel.org>; Wed,  9 Jun 2021 05:16:35 -0700 (PDT)
-Received: by mail-pf1-x435.google.com with SMTP id q25so18251193pfh.7
-        for <linux-doc@vger.kernel.org>; Wed, 09 Jun 2021 05:16:35 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=bytedance-com.20150623.gappssmtp.com; s=20150623;
-        h=from:to:cc:subject:date:message-id:in-reply-to:references
-         :mime-version:content-transfer-encoding;
-        bh=tTl4UccQsOsZ7x/J6uEesGioaOGAN8DIKPZAiWCgVB8=;
-        b=pUrg+IUIYAa870AP/uTMqgxs/hNNa64H0IDqPvy2JmAIvWBKiuXjtOLMdyse81wG8D
-         WRbbR4uZgvPBXCGyhgzP/wqY9aYRqL+ZoV+55cQjs+c9cm60asG69y8qJ1wlODMfUnn2
-         34cg+mlhNukSqKfoHVyTp5z8MEwHPU9o8jOMNGCVGf8c/Df94k3QiCzFxJc1ognSj0pP
-         Mx0wzc+B1XWe4+wcrKEqEZ4LNxVCLVcerdQUHKwN+3ZNI7kFNrLlt1e7DzIMzfu3l9q5
-         v4/W69wvh74zLdx14G8oBO5H3e/RKBvMCJN23kDW77DCFhOgIubiri/Qdiq2aEIxu2yc
-         ADpw==
+        id S239734AbhFIMQS (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 9 Jun 2021 08:16:18 -0400
+Received: from us-smtp-delivery-124.mimecast.com ([216.205.24.124]:44280 "EHLO
+        us-smtp-delivery-124.mimecast.com" rhost-flags-OK-OK-OK-OK)
+        by vger.kernel.org with ESMTP id S235237AbhFIMQR (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Wed, 9 Jun 2021 08:16:17 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+        s=mimecast20190719; t=1623240862;
+        h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+         to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+         content-transfer-encoding:content-transfer-encoding:
+         in-reply-to:in-reply-to:references:references;
+        bh=77QSgyc+8Sk7HYHiam0rcRrsIJ/0Q1AlHtkTPqxgLeg=;
+        b=X3f+vlqesy4PLQ3lYsUdNRyNw+gR+g4X5vxkg98WMCLToW7vrIsSH7iiFjgPd+0sReHINH
+        zDlYJLej5Mf9owUbRwaOKQIeZVnpIuf9UBb5a4YZYZw0vEOKsrGz3g3MUMJZQiPhBLZlaQ
+        3/pcpz3YeT00BRaeBMlyblH1aRuX174=
+Received: from mail-ed1-f71.google.com (mail-ed1-f71.google.com
+ [209.85.208.71]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-339-Y-Va4aGRP-2df9MfIxiv7Q-1; Wed, 09 Jun 2021 08:14:20 -0400
+X-MC-Unique: Y-Va4aGRP-2df9MfIxiv7Q-1
+Received: by mail-ed1-f71.google.com with SMTP id z5-20020a05640235c5b0290393974bcf7eso3762119edc.2
+        for <linux-doc@vger.kernel.org>; Wed, 09 Jun 2021 05:14:20 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-         :references:mime-version:content-transfer-encoding;
-        bh=tTl4UccQsOsZ7x/J6uEesGioaOGAN8DIKPZAiWCgVB8=;
-        b=LYayTY97tNoEegggVfJQQSQKAq7rtzNQNyA8oElL80N+mB7tymnp4yHUCIoqZyLOGA
-         ura8bJWg09HhwkE2JGHZN5lhjRU2d9gpDuCg6FhGLHS3PI3f4tbYYgXDQGzrE9PnZ9sr
-         HFZTLUVkbdOW7sOUECZUXlHXd2I+r4V2mPPGTQ0FJmFNi05Z2O+M60XrqBud2dw5+5vB
-         PeGw9W3zZ7WMnLcwsx8AzI6TdA7WsmzzdP0LDx9hto9pnLJLdzCV5q6dVl1HIJUqQrNK
-         6DQNVrXUGqwZNNx6F+FKWqxV25BUWZ6L+j7R+a3t8r75nrw30lS/hxarLzHXxI53xlxD
-         8nuA==
-X-Gm-Message-State: AOAM533L1jiJOVo7DTLvt9hLN8J7dKv3XiuI7dB/0y8piL145Y9zSGgy
-        +DSJ5I3WHi0lhZDOKhwU1a8W0w==
-X-Google-Smtp-Source: ABdhPJy/g1DbQ4/wfWWkn6IXh4LI8nxts1Sh2nq2bT5Zi7Saxf7F7hs8/+84CR2ArxeYPuxbatrEpw==
-X-Received: by 2002:aa7:8588:0:b029:28e:dfa1:e31a with SMTP id w8-20020aa785880000b029028edfa1e31amr4821652pfn.77.1623240994717;
-        Wed, 09 Jun 2021 05:16:34 -0700 (PDT)
-Received: from localhost.localdomain ([139.177.225.254])
-        by smtp.gmail.com with ESMTPSA id h16sm13689224pfk.119.2021.06.09.05.16.28
-        (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
-        Wed, 09 Jun 2021 05:16:34 -0700 (PDT)
-From:   Muchun Song <songmuchun@bytedance.com>
-To:     mike.kravetz@oracle.com, akpm@linux-foundation.org,
-        osalvador@suse.de, mhocko@suse.com, song.bao.hua@hisilicon.com,
-        david@redhat.com, chenhuang5@huawei.com, bodeddub@amazon.com,
-        corbet@lwn.net
-Cc:     duanxiongchun@bytedance.com, fam.zheng@bytedance.com,
-        zhengqi.arch@bytedance.com, linux-doc@vger.kernel.org,
-        linux-kernel@vger.kernel.org, linux-mm@kvack.org,
-        Muchun Song <songmuchun@bytedance.com>
-Subject: [PATCH 5/5] mm: hugetlb: introduce CONFIG_HUGETLB_PAGE_FREE_VMEMMAP_DEFAULT_ON
-Date:   Wed,  9 Jun 2021 20:13:10 +0800
-Message-Id: <20210609121310.62229-6-songmuchun@bytedance.com>
-X-Mailer: git-send-email 2.21.0 (Apple Git-122)
-In-Reply-To: <20210609121310.62229-1-songmuchun@bytedance.com>
-References: <20210609121310.62229-1-songmuchun@bytedance.com>
+        h=x-gm-message-state:subject:to:cc:references:from:message-id:date
+         :user-agent:mime-version:in-reply-to:content-language
+         :content-transfer-encoding;
+        bh=77QSgyc+8Sk7HYHiam0rcRrsIJ/0Q1AlHtkTPqxgLeg=;
+        b=YG+JRMbomPlnS2RsnTvqFCMFbnv8T2XHsZJiyT/oXPn7tvbgwR4BfqHYxA+QiIIpMk
+         MlIhpu5GbNgNqTJ4zyYGaTHTObVsM6ArmTbisZoBB/m4LIUcguY2nv//CJjKzuQH52XQ
+         13/T/hyX6IcofjpwcR2gcX4N2tD9M9M4wi7WGP5/+6hfJo59M7ERorbQQwoljiEugrnk
+         OdVeinihYzLn2PEe7gPk+XT5Ozs2fq/TRCKox2S0Ozv7tZ+4WTbnCofnwiQf+DPUgpp/
+         wIlJzwXQIDyNy2dAz8vknSdDwHMlEU9+hIG5/w1oRZXyKwcDBzDCLVmnrSfsWf44RqM7
+         LeJg==
+X-Gm-Message-State: AOAM531l9XDUNlHrU8BAxACh+n71TYE9jowzJ9ELx5+VamdIMhPjTmYN
+        cKDm9HoJHQ6TWnaKpeAut+yzt47GSFvCbtOnylOB/JZCU4C2Ras6bRd9zNqScfozyA7bYoIWo2x
+        Nj1y1z/bqsQ+O7XimvN4A+S2mBQHfdOdicxE0iQQnUwjqMzVFkUk4CGeN+ceTobSOQI1pyuM=
+X-Received: by 2002:a05:6402:3082:: with SMTP id de2mr17956662edb.214.1623240859156;
+        Wed, 09 Jun 2021 05:14:19 -0700 (PDT)
+X-Google-Smtp-Source: ABdhPJxgQ3/5uZSB81cgZ2oYq3QcOkGNys6k5P1fZOknM8dVYLnNp0EXgn9LjvtdDU4a96tdwdbEbw==
+X-Received: by 2002:a05:6402:3082:: with SMTP id de2mr17956632edb.214.1623240858901;
+        Wed, 09 Jun 2021 05:14:18 -0700 (PDT)
+Received: from x1.bristot.me (host-79-23-205-114.retail.telecomitalia.it. [79.23.205.114])
+        by smtp.gmail.com with ESMTPSA id gv11sm1054485ejb.13.2021.06.09.05.14.18
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Wed, 09 Jun 2021 05:14:18 -0700 (PDT)
+Subject: Re: [PATCH V3 8/9] tracing: Add osnoise tracer
+To:     Steven Rostedt <rostedt@goodmis.org>
+Cc:     linux-kernel@vger.kernel.org, Phil Auld <pauld@redhat.com>,
+        Sebastian Andrzej Siewior <bigeasy@linutronix.de>,
+        Kate Carcia <kcarcia@redhat.com>,
+        Jonathan Corbet <corbet@lwn.net>,
+        Ingo Molnar <mingo@redhat.com>,
+        Peter Zijlstra <peterz@infradead.org>,
+        Thomas Gleixner <tglx@linutronix.de>,
+        Alexandre Chartre <alexandre.chartre@oracle.com>,
+        Clark Willaims <williams@redhat.com>,
+        John Kacur <jkacur@redhat.com>,
+        Juri Lelli <juri.lelli@redhat.com>, linux-doc@vger.kernel.org
+References: <cover.1621024265.git.bristot@redhat.com>
+ <bd09a2be9cd0cecee86374dbb49235dd2ef9d750.1621024265.git.bristot@redhat.com>
+ <20210604172803.527aa070@oasis.local.home>
+From:   Daniel Bristot de Oliveira <bristot@redhat.com>
+Message-ID: <06d72b7d-4beb-1dff-b537-e7449abf3d4e@redhat.com>
+Date:   Wed, 9 Jun 2021 14:14:17 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
+ Thunderbird/78.10.1
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+In-Reply-To: <20210604172803.527aa070@oasis.local.home>
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
+Content-Transfer-Encoding: 7bit
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-When using HUGETLB_PAGE_FREE_VMEMMAP, the freeing unused vmemmap pages
-associated with each HugeTLB page is default off. Now the vmemmap is PMD
-mapped. So there is no side effect when this feature is enabled with no
-HugeTLB pages in the system. Someone may want to enable this feature in
-the compiler time instead of using boot command line. So add a config to
-make it default on when someone do not want to enable it via command line.
+On 6/4/21 11:28 PM, Steven Rostedt wrote:
+>> +#ifdef CONFIG_X86_LOCAL_APIC
+> I wonder if we should move this into a separate file, making the
+> __trace_irq_entry() a more name space safe name and have it call that.
+> I have a bit of a distaste for arch specific code in a generic file.
+> 
 
-Signed-off-by: Muchun Song <songmuchun@bytedance.com>
----
- Documentation/admin-guide/kernel-parameters.txt |  3 +++
- fs/Kconfig                                      | 10 ++++++++++
- mm/hugetlb_vmemmap.c                            |  6 ++++--
- 3 files changed, 17 insertions(+), 2 deletions(-)
+I am placing the intel specific file in:
 
-diff --git a/Documentation/admin-guide/kernel-parameters.txt b/Documentation/admin-guide/kernel-parameters.txt
-index a01aadafee38..8eee439d943c 100644
---- a/Documentation/admin-guide/kernel-parameters.txt
-+++ b/Documentation/admin-guide/kernel-parameters.txt
-@@ -1604,6 +1604,9 @@
- 			on:  enable the feature
- 			off: disable the feature
- 
-+			Built with CONFIG_HUGETLB_PAGE_FREE_VMEMMAP_DEFAULT_ON=y,
-+			the default is on.
-+
- 			This is not compatible with memory_hotplug.memmap_on_memory.
- 			If both parameters are enabled, hugetlb_free_vmemmap takes
- 			precedence over memory_hotplug.memmap_on_memory.
-diff --git a/fs/Kconfig b/fs/Kconfig
-index f40b5b98f7ba..e78bc5daf7b0 100644
---- a/fs/Kconfig
-+++ b/fs/Kconfig
-@@ -245,6 +245,16 @@ config HUGETLB_PAGE_FREE_VMEMMAP
- 	depends on X86_64
- 	depends on SPARSEMEM_VMEMMAP
- 
-+config HUGETLB_PAGE_FREE_VMEMMAP_DEFAULT_ON
-+	bool "Default freeing vmemmap pages of HugeTLB to on"
-+	default n
-+	depends on HUGETLB_PAGE_FREE_VMEMMAP
-+	help
-+	  When using HUGETLB_PAGE_FREE_VMEMMAP, the freeing unused vmemmap
-+	  pages associated with each HugeTLB page is default off. Say Y here
-+	  to enable freeing vmemmap pages of HugeTLB by default. It can then
-+	  be disabled on the command line via hugetlb_free_vmemmap=off.
-+
- config MEMFD_CREATE
- 	def_bool TMPFS || HUGETLBFS
- 
-diff --git a/mm/hugetlb_vmemmap.c b/mm/hugetlb_vmemmap.c
-index 01f3652fa359..b5f4f29e042a 100644
---- a/mm/hugetlb_vmemmap.c
-+++ b/mm/hugetlb_vmemmap.c
-@@ -186,7 +186,7 @@
- #define RESERVE_VMEMMAP_NR		2U
- #define RESERVE_VMEMMAP_SIZE		(RESERVE_VMEMMAP_NR << PAGE_SHIFT)
- 
--bool hugetlb_free_vmemmap_enabled;
-+bool hugetlb_free_vmemmap_enabled = IS_ENABLED(CONFIG_HUGETLB_PAGE_FREE_VMEMMAP_DEFAULT_ON);
- 
- static int __init early_hugetlb_free_vmemmap_param(char *buf)
- {
-@@ -201,7 +201,9 @@ static int __init early_hugetlb_free_vmemmap_param(char *buf)
- 
- 	if (!strcmp(buf, "on"))
- 		hugetlb_free_vmemmap_enabled = true;
--	else if (strcmp(buf, "off"))
-+	else if (!strcmp(buf, "off"))
-+		hugetlb_free_vmemmap_enabled = false;
-+	else
- 		return -EINVAL;
- 
- 	return 0;
--- 
-2.11.0
+arch/x86/kernel/trace_osnoise.c
+
+and the kernel/trace/trace_osnoise.h looks like this:
+
+#ifdef CONFIG_X86_LOCAL_APIC
+int osnoise_arch_register(void);
+int osnoise_arch_unregister(void);
+#else /* CONFIG_X86_LOCAL_APIC */
+#define osnoise_arch_register() do {} while (0)
+#define osnoise_arch_unregister() do {} while (0)
+#endif /* CONFIG_X86_LOCAL_APIC */
+
+This can be used by other archs as well...
+
+sound reasonable?
+
+-- Daniel
+
+
+>> +/**
+>> + * trace_intel_irq_entry - record intel specific IRQ entry
+>> + */
+>> +void trace_intel_irq_entry(void *data, int vector)
+>> +{
+>> +	__trace_irq_entry(vector);
+>> +}
+>> +
+
 
