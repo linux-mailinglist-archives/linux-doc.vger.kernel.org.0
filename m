@@ -2,147 +2,227 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 976733A3747
-	for <lists+linux-doc@lfdr.de>; Fri, 11 Jun 2021 00:42:58 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 14F8F3A3733
+	for <lists+linux-doc@lfdr.de>; Fri, 11 Jun 2021 00:35:40 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S230212AbhFJWoy (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 10 Jun 2021 18:44:54 -0400
-Received: from mail-dm6nam11on2069.outbound.protection.outlook.com ([40.107.223.69]:21132
-        "EHLO NAM11-DM6-obe.outbound.protection.outlook.com"
-        rhost-flags-OK-OK-OK-FAIL) by vger.kernel.org with ESMTP
-        id S230001AbhFJWox (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Thu, 10 Jun 2021 18:44:53 -0400
+        id S230001AbhFJWhf (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 10 Jun 2021 18:37:35 -0400
+Received: from userp2130.oracle.com ([156.151.31.86]:45272 "EHLO
+        userp2130.oracle.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S230190AbhFJWhf (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Thu, 10 Jun 2021 18:37:35 -0400
+Received: from pps.filterd (userp2130.oracle.com [127.0.0.1])
+        by userp2130.oracle.com (8.16.0.42/8.16.0.42) with SMTP id 15AMWCtB106254;
+        Thu, 10 Jun 2021 22:35:09 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=oracle.com; h=subject : to : cc :
+ references : from : message-id : date : in-reply-to : content-type :
+ content-transfer-encoding : mime-version; s=corp-2020-01-29;
+ bh=YhJaFPjrfxzz6rQgWz0uSuU4qeFcxGv1iOI7O060YFo=;
+ b=frnTDeV0JWQBztFSkjEBdSnAsoLrxXAaCYqYgww1IRttmXsEtY4NKQX1rBUhcG+qLLqZ
+ 4Sxz1ghIRxdNNlfdbE/RZubKKplZn4QU/4p398aAAjAl7bfTupL//GAhpj0P63OhJ6wl
+ qZ6P3bGElAgvMJFe3yt2pNaL1UyYHGeIHH7kK8HkLI/eBu0Q33z4XXMc7ZTBs4LCpmgM
+ nzRqPlh41uBlS6box/J633Shw0jb6mUB6QJZWAdxNQZjv9HAyh+qztoaLM+tnfo05tXM
+ ohy0dDla0ZGT/7qOUFbmifYjuBpK5G8OwLbuwxWKL0ocdfsMzXpDFnjrXtkg21BJ60g4 zw== 
+Received: from aserp3030.oracle.com (aserp3030.oracle.com [141.146.126.71])
+        by userp2130.oracle.com with ESMTP id 3900psd7es-1
+        (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+        Thu, 10 Jun 2021 22:35:08 +0000
+Received: from pps.filterd (aserp3030.oracle.com [127.0.0.1])
+        by aserp3030.oracle.com (8.16.0.42/8.16.0.42) with SMTP id 15AMV0n3161438;
+        Thu, 10 Jun 2021 22:35:08 GMT
+Received: from nam04-bn8-obe.outbound.protection.outlook.com (mail-bn8nam08lp2049.outbound.protection.outlook.com [104.47.74.49])
+        by aserp3030.oracle.com with ESMTP id 38yyacx74y-1
+        (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+        Thu, 10 Jun 2021 22:35:07 +0000
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=cggqDglPXC+NL3kCMw6q1wKex0DdN1XBweAko1B3+ZVF390EdTMTaRbxbRnUF210u9usELRgXFRH68pHL4RphKIM+gEgRx0jkW1Sb08b2Qb1lug8Oaduoj4gsHqQZathx6TnF8oSYvVuD58vd9z8pCeeJRcVjbCllDexDPKTYRAx7duqril7VU1csUc6EEKWmoW7pa0zProH6XHOXCmVeSOINXQAYL/Bd3TMQwnLA8TkiDjt9FsJabnaP25+VKMjgF5Or+oySsPbBjyn4FCdD8aN17hNMBQWnfLYMNwgDK3YLhCOOiTy2B8dKnBNIDwb8eGesC+zX0zs8uMLZcp77Q==
+ b=OK9HmFOqpmtY2quU3SylNsN2lxPzsdwbChzqS609bMuLAVNUWpusutnH1Ryt9flPMGgHgIR4b8W3+J7inOMf6F1vpR/fBcZqZuQ09SBELfpjaXjmL6/lP5VULmCCargPYO2SLC/kdTJ60Fam5uIVr5A0vSHuqR3HjdnSqC8ZGidEiadJaq9TC43d+GhaP+S7Ayp74AiL66BL+A00MhYrWs2QxMZEuk1mR+VlczKy3rjLbwDaamAce0o2IdTd4V8Ier7d1Fi/X6sJtGQyT7umwZ61cpyrSURvTwF8KiCfXGhnxfqA07X+iirGT1/fY4I/mofpRkxus4bDpF64BAYLgw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=3EsbqD5LC03Enq3JmB7NRNk+4LM/vxDOezh0MnKCGXY=;
- b=cmLWTozeoNGqCl0wcAL5JAECYWnvXBdPf6/1m0oaNywwq0vMFNOpaAR1o1y2qmXqjohZgiVggh9LoF/caX9OIJOYz0em90w3LlLqDV5H4UIAof5m7prBQAfK1TSUNtY6J3SLuCxDIF46kRm11fm0kIaIV+lzRagGAQw/Icaus3VnMd5GKOYQ6g7/2TFfOyZz+Zibjd96FtvbJfO2K5NnmZ2QJciNT9XCyVLIVB+o4tqB8kvsjZ+yifrvjY3U1LNCq6IO/xJNRNg51mSN1iUXlEUL9CgcrDJDfZFGdlICSpHGVLt37amdUuiDobg8mBj9whNRgmgCSluTYvuVOC8q2A==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 216.228.112.34) smtp.rcpttodomain=redhat.com smtp.mailfrom=nvidia.com;
- dmarc=pass (p=none sp=none pct=100) action=none header.from=nvidia.com;
- dkim=none (message not signed); arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
- s=selector2;
+ bh=YhJaFPjrfxzz6rQgWz0uSuU4qeFcxGv1iOI7O060YFo=;
+ b=mjcpf/KwaPXxPJsTgWqHn0ed5k2UE7S6T+fkpajc7wb1UoHrHyeDqmOtSXZgvEK+5VKlTNQcWMvf3dbo18uSjOpgNLQsdt2q7kG2eMWm7Foiztns3YctMW3I9KfaOol69k2M22+viaAd93KvjUay0OGEr932KNCf+GYfoMDZGbwdLXr3ePeWJHGN3fSoxbV/jpEWCSMVr+oPeV90bnX9YqINPCzKm5fR3KRdP/aAqN82lggC7Liqw8OCqBgyqmhHufJyrNem2+YkSiTPnAHBkrDiCMfCQxr0ReXgegwIAp1IOJl+91mZkRwtDWptD+1zCy2dNdcAj/i4JDBlX0hP2A==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=oracle.com; dmarc=pass action=none header.from=oracle.com;
+ dkim=pass header.d=oracle.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=oracle.onmicrosoft.com; s=selector2-oracle-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=3EsbqD5LC03Enq3JmB7NRNk+4LM/vxDOezh0MnKCGXY=;
- b=UE0BL/XJmsMwx8UvHflqlx8gMlbgu6mMAu3di0t77e3DFbBf0JvYf4lD+ZSQ/OsLNcJYABy++D4GGSa/il0aoy0jSDRSWVi91OIzrcVKAHKiiZKdJY4PSqG8Oh5wgkogQPgqjHKzmdSpssU/nQQHmyHU8/5QJmRSYNZVQiSfD67yWe/QPpNpaj1c4+GdLueuvAfKKM5H4EAgKaHZ3u2Lx/aEctRmgLw5ibfanQUrRhUw9NXMzUrKF5u00vGzklAy5ZoW9CqCyG6j33pmbVAJGmN7yd8Anv4Op976gf6pL3epuJ1HiGGIlO145tVHVgzqp1x2LxpKJ+FL4KBrrRJ93g==
-Received: from MW4PR03CA0051.namprd03.prod.outlook.com (2603:10b6:303:8e::26)
- by BY5PR12MB5557.namprd12.prod.outlook.com (2603:10b6:a03:1d4::18) with
+ bh=YhJaFPjrfxzz6rQgWz0uSuU4qeFcxGv1iOI7O060YFo=;
+ b=Xu9TnXi6XSUtp61xRj+uswLnicEXTr9HhI9E09EeIm/epzJdMF9vfEjPawWj8zjWevclB6DS0dRk2ddcb890eHa3NVMdg72JtXjYIsAt/IIF42OBPEvSUXwBGSBLjAd+9Vi4/fphnmTWpKAH6MELcD77dVXlPVy65W9SFLnuMWQ=
+Authentication-Results: kvack.org; dkim=none (message not signed)
+ header.d=none;kvack.org; dmarc=none action=none header.from=oracle.com;
+Received: from BY5PR10MB4196.namprd10.prod.outlook.com (2603:10b6:a03:20d::23)
+ by BYAPR10MB2551.namprd10.prod.outlook.com (2603:10b6:a02:b6::10) with
  Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4219.22; Thu, 10 Jun
- 2021 22:42:55 +0000
-Received: from CO1NAM11FT018.eop-nam11.prod.protection.outlook.com
- (2603:10b6:303:8e:cafe::e7) by MW4PR03CA0051.outlook.office365.com
- (2603:10b6:303:8e::26) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4219.20 via Frontend
- Transport; Thu, 10 Jun 2021 22:42:55 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 216.228.112.34)
- smtp.mailfrom=nvidia.com; redhat.com; dkim=none (message not signed)
- header.d=none;redhat.com; dmarc=pass action=none header.from=nvidia.com;
-Received-SPF: Pass (protection.outlook.com: domain of nvidia.com designates
- 216.228.112.34 as permitted sender) receiver=protection.outlook.com;
- client-ip=216.228.112.34; helo=mail.nvidia.com;
-Received: from mail.nvidia.com (216.228.112.34) by
- CO1NAM11FT018.mail.protection.outlook.com (10.13.175.16) with Microsoft SMTP
- Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384) id
- 15.20.4219.21 via Frontend Transport; Thu, 10 Jun 2021 22:42:54 +0000
-Received: from nvdebian.localnet (172.20.187.5) by HQMAIL107.nvidia.com
- (172.20.187.13) with Microsoft SMTP Server (TLS) id 15.0.1497.2; Thu, 10 Jun
- 2021 22:42:50 +0000
-From:   Alistair Popple <apopple@nvidia.com>
-To:     Peter Xu <peterx@redhat.com>
-CC:     <linux-mm@kvack.org>, <akpm@linux-foundation.org>,
-        <rcampbell@nvidia.com>, <linux-doc@vger.kernel.org>,
-        <nouveau@lists.freedesktop.org>, <hughd@google.com>,
-        <linux-kernel@vger.kernel.org>, <dri-devel@lists.freedesktop.org>,
-        <hch@infradead.org>, <bskeggs@redhat.com>, <jgg@nvidia.com>,
-        <shakeelb@google.com>, <jhubbard@nvidia.com>,
-        <willy@infradead.org>, Christoph Hellwig <hch@lst.de>
-Subject: Re: [PATCH v10 07/10] mm: Device exclusive memory access
-Date:   Fri, 11 Jun 2021 00:21:26 +1000
-Message-ID: <6429491.QiJgnDeYu7@nvdebian>
-In-Reply-To: <YMJUM4sx1VclR7oz@t490s>
-References: <20210607075855.5084-1-apopple@nvidia.com> <2773835.D95cIkl9rl@nvdebian> <YMJUM4sx1VclR7oz@t490s>
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4195.25; Thu, 10 Jun
+ 2021 22:35:05 +0000
+Received: from BY5PR10MB4196.namprd10.prod.outlook.com
+ ([fe80::5d11:ae6d:24b6:e838]) by BY5PR10MB4196.namprd10.prod.outlook.com
+ ([fe80::5d11:ae6d:24b6:e838%3]) with mapi id 15.20.4219.023; Thu, 10 Jun 2021
+ 22:35:04 +0000
+Subject: Re: [PATCH 3/5] mm: sparsemem: split the huge PMD mapping of vmemmap
+ pages
+To:     Muchun Song <songmuchun@bytedance.com>, akpm@linux-foundation.org,
+        osalvador@suse.de, mhocko@suse.com, song.bao.hua@hisilicon.com,
+        david@redhat.com, chenhuang5@huawei.com, bodeddub@amazon.com,
+        corbet@lwn.net
+Cc:     duanxiongchun@bytedance.com, fam.zheng@bytedance.com,
+        zhengqi.arch@bytedance.com, linux-doc@vger.kernel.org,
+        linux-kernel@vger.kernel.org, linux-mm@kvack.org
+References: <20210609121310.62229-1-songmuchun@bytedance.com>
+ <20210609121310.62229-4-songmuchun@bytedance.com>
+From:   Mike Kravetz <mike.kravetz@oracle.com>
+Message-ID: <1c910c9a-d5fd-8eb8-526d-bb1f71833c30@oracle.com>
+Date:   Thu, 10 Jun 2021 15:35:02 -0700
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.1.1
+In-Reply-To: <20210609121310.62229-4-songmuchun@bytedance.com>
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
+Content-Transfer-Encoding: 7bit
+X-Originating-IP: [50.38.35.18]
+X-ClientProxiedBy: MW4PR04CA0320.namprd04.prod.outlook.com
+ (2603:10b6:303:82::25) To BY5PR10MB4196.namprd10.prod.outlook.com
+ (2603:10b6:a03:20d::23)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 7Bit
-Content-Type: text/plain; charset="us-ascii"
-X-Originating-IP: [172.20.187.5]
-X-ClientProxiedBy: HQMAIL111.nvidia.com (172.20.187.18) To
- HQMAIL107.nvidia.com (172.20.187.13)
-X-EOPAttributedMessage: 0
+X-MS-Exchange-MessageSentRepresentingType: 1
+Received: from [192.168.2.112] (50.38.35.18) by MW4PR04CA0320.namprd04.prod.outlook.com (2603:10b6:303:82::25) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4219.20 via Frontend Transport; Thu, 10 Jun 2021 22:35:03 +0000
 X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: 9aa8e496-4249-4fc4-0857-08d92c61163d
-X-MS-TrafficTypeDiagnostic: BY5PR12MB5557:
-X-Microsoft-Antispam-PRVS: <BY5PR12MB5557AB25F46C4F72ED031029DF359@BY5PR12MB5557.namprd12.prod.outlook.com>
-X-MS-Oob-TLC-OOBClassifiers: OLM:6790;
+X-MS-Office365-Filtering-Correlation-Id: 391a1760-618b-47fb-41c9-08d92c5ffdf6
+X-MS-TrafficTypeDiagnostic: BYAPR10MB2551:
+X-Microsoft-Antispam-PRVS: <BYAPR10MB2551EDA69BBB4F9AC59E01F6E2359@BYAPR10MB2551.namprd10.prod.outlook.com>
+X-MS-Oob-TLC-OOBClassifiers: OLM:4502;
 X-MS-Exchange-SenderADCheck: 1
 X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: Zh7WcoeLnhgrUG5yC8bTc9B8S1OHb5IOiwd/kTZgelVlx0emN6IoBNDYeLuOHI+UkBB9FJ04kmX/uOAW5N11zGcegV4QeRbj2i62U5nZGaCzoj+ZMNZy2KavFPuNkTmgwx60/4TVsyGWeUHb1stRmIU0KHosWjTROqPGdH104BREu9g9V8e9f9rFk8Lw17ubYhay0qtkQ+dHIb7WMIAG1G0r7BEOytfOz2atnXmrRGyOCk4JbAhAyF96zuli+Xss0lD5dTzHGkO2RoIiOxHOe268Sr13rvQTgShMuwTkte7IEtCCpQXiUhU3m2zvAW5pAMhVrRxQAuK2r0c8rk2EWE0fIEDVnXlYRN3di4uAMYtgnQZl1JJGlGn21vhOR6Y8papqEh7CW5+nc5exMyMQx/Y2bQNdjEfrESICY6IUu/PhZrGH5RaBxqZfEoUdDuPbxKQHCNq5moI0pdZSbpLm1dnRYCCwIXvStTK0aF5zYvkz6LWmrvWiDrw8Tu/uPLZuohQWOn7lRkdc2+eNkUW93NTA41upkkTqGyluWA4GjmPU/7hfymBQXVjkWcYziI5mjrH6HeXNEr9Gz+kCsNqsAwjN+Zs1UpUUMcBbra54CFbsy9HnWmJIOTOEPFAwVBJryRi3gGb0vQRdI4zkzBtGuBDzCBy100bDDCnSMowG9n7DhpLy/KdsNfbGru+cu7Sq
-X-Forefront-Antispam-Report: CIP:216.228.112.34;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:mail.nvidia.com;PTR:schybrid03.nvidia.com;CAT:NONE;SFS:(4636009)(376002)(396003)(39860400002)(346002)(136003)(46966006)(36840700001)(426003)(6916009)(8676002)(8936002)(54906003)(70586007)(4326008)(70206006)(82310400003)(478600001)(47076005)(7636003)(16526019)(26005)(5660300002)(6666004)(33716001)(316002)(36860700001)(9576002)(2906002)(82740400003)(9686003)(7416002)(356005)(86362001)(336012)(186003)(39026012);DIR:OUT;SFP:1101;
-X-OriginatorOrg: Nvidia.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 10 Jun 2021 22:42:54.4515
+X-Microsoft-Antispam-Message-Info: SzWBQicQ75hGHvJZfm/6+QkZtbpUM+EfVxLCqUBcGDeJhLs2zRMDVgvaMBD2FWWl6b7V2/h/tbOB+3JqKE4weF+pWrT6s60ybYzMMniSzNxXJf/pIP45+FJ5pgLIggSFvqfWe02be3bczAzwFEJ1pY4CzKAqGtAuU/Ao9Tx8jA/s59wcPh5HL/a93JFZm7ca/Fjxhl3xGGIuhhyjFD8rq1Edr630c3D1UeFDk1UBOhftv3MUzeYpICdI2c5likwsGdyL2NgHcZNf+xms9FLrDd86lHrJ00fYp9d1gUsr4+MAekbspG5oALHhxsgpqBF/jn6azuu5hYbfNBXuJPt3XberB2nhbyBHloGxnOhZLo1AIW8Pnu7MQwZq0QpqEwGIUllTfABgnHlt+GvynDWb5KwR8kD7Kn3y7gjTANvFgvCyCmykVdeqhiQoVxq4KtywyrYukcEQiAnoeV6lY/ysFBNVvH8F8d5lGGENPC9CMXFvYrkbrNuMBtwC2WtaT4+psYAVplakLD3M63rnYcJt2QoxiDnA70B5z++1rl5LLNfI2AceEJCQNtCqbHCfuzQ+UxMhDh6T5YdauKjcIsBNVqGHh+LomNIUkYS7JjNF4s3elmDTk7E2FUiHULuCivrYk+BidRA3U89iAkarJJRq06hjF6qWI1kUt4MB1Xwl7qb/RYveTW97NqyWdgVDkMI5fI635oRbKFrG4iNTSZgfRlmxRvw57ld7dBxN2nCqvGUReMr9xTz+jg+/kS6/aTEw
+X-Forefront-Antispam-Report: CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BY5PR10MB4196.namprd10.prod.outlook.com;PTR:;CAT:NONE;SFS:(346002)(39850400004)(366004)(396003)(136003)(376002)(53546011)(5660300002)(478600001)(26005)(83380400001)(8936002)(7416002)(44832011)(8676002)(2906002)(66476007)(956004)(66556008)(2616005)(66946007)(186003)(31686004)(16526019)(316002)(16576012)(38100700002)(6486002)(38350700002)(86362001)(31696002)(4326008)(36756003)(52116002)(14583001)(43740500002)(45980500001);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?M1M4eERoQWg4ZnJlYmNndGRrcExJNFNiR2JnNXRjd3RUWEJjeU95QjZQMk5k?=
+ =?utf-8?B?NDdsa2g2aTZqWW1iUHVzQ3J6MFF5RW5WQmtQaGhJeFNaaEJMcW4ycDNSbXhw?=
+ =?utf-8?B?NWx4NGx1SUM3WFVBTU9JZjNRVFBiZEQwNWVEL0pRSmJwR29GUWFNem9mWFpH?=
+ =?utf-8?B?VEpSLzVIV2FTOXFUN3hzRlZhaFVSSmkvSmxpMDRZT0h4MkZXdVZUUnFlbHFL?=
+ =?utf-8?B?WTN2QW9OVDNEUllpTkp1ZkJrYUg0WDRiclQyMEtWQjFxbXU0L1c1QmJKaXU1?=
+ =?utf-8?B?TzdqSmlpMndhNFE0czRKQ0xBTWVnN09FZHFldDVPd3E0VXlYamJzSEhweG1y?=
+ =?utf-8?B?VUtPTFVxckIzQ0NZZUVVT2xSSFhMUkVaLzhIQml5YWp5cnNDbWExVHFib01H?=
+ =?utf-8?B?eWxBUkJCekk1dDhCTzJpemt4MmZCY05lUThDTllNVUZDa0NDMWliMVNRNGVM?=
+ =?utf-8?B?VW5oeFVWbzI5NW5Ob3ViS0pnNDJUQXliWWtKV002WUJzeDdrZ2tKVktEZEtF?=
+ =?utf-8?B?N3hiR1pRNXQ0UkZJNUFaSzBnYklXN0NzbXVrT1Rhc00yS253VUNnS0kydElw?=
+ =?utf-8?B?bHltNVdialQwZEFNL0JyQW9wTnFqSXYyb21GeWF3bTJiZWg1NDltYVpQTURr?=
+ =?utf-8?B?ZUhXdVhlVjFlTXBFcjFnNXhLblFkWmxrOHMzK1VhSGFyQmF6dTI3SHByWFJN?=
+ =?utf-8?B?U2VYeHdaUnB0Z25qQ09OdnlUcDVVaFFXLzlUZzd6R1lBNTkwSTlzWGdOd2tv?=
+ =?utf-8?B?aU1WWDZJeTRCV0JUTDZlWU5jL2RzNjNmMlp2eGwrbWFMekpXNmg4MXdxRGg5?=
+ =?utf-8?B?dUtyZENuWEVRU3VqN2JyQ1NPbG9FbWxXV2pyaVJ5YjNuU01XOW9PalV4Nmp4?=
+ =?utf-8?B?OGM0eElpZkZHd2w2U1ZNbDBuRXZDeTRBUGgrRm9XUldHbVU1QktnRFFaR2xE?=
+ =?utf-8?B?azlPeklmalZaZGIxY3NRSnpjbi9OeXBsSC9KbTR1cUpIcTdLNlkzYU44c2lP?=
+ =?utf-8?B?TDdlRkRPbDNWelhLUlduS0FxajZuUkpaWjl1L3hTb0oxbDB2TGtiTUlPdnZG?=
+ =?utf-8?B?VkU3S1VkNkMwNmREY3ZIbnNWWUFIc2Q2b21UYm1aM2MvMklYZEdBVWdJOTZu?=
+ =?utf-8?B?ZmVzUVZFZitOZGtkOENkQkN4ZkR1KytjbThILy9Rb3NGL2NOcXp2dGFtK3NM?=
+ =?utf-8?B?Mm02WFhrZW9pcGg0U3VqV29PNUF6Q0s4ZVUrL3dSQlpxaWtuUnpRKzFxZ2pB?=
+ =?utf-8?B?ZWdsc3F0SmRHV3FjY25JejVOT3pwNlZ0VTFYVHlPUUZ0eWtYOTVDOHJNUHBx?=
+ =?utf-8?B?NW9zcS9XSGJ3amFXcThNSXppOUZDMlJNc3BYSWxMRkduNG05VmpwaEpmVUs4?=
+ =?utf-8?B?VzBwbHY3VFMvSVkraUxMM1FwUisvclZkSnJITkRwYmVPUW8zai9pRy91TDdm?=
+ =?utf-8?B?ZndwNVl3cXozTGxDYi82K1EyVDNnQnBudXo0UGJTVUdDSTVaQVBvV2pDalR6?=
+ =?utf-8?B?ZzI5ZWtTRXlSN2tONUdOK1ZLKy9ROFVRQ2c2YW9YTi8vV1l5SUlVRFVuUkF2?=
+ =?utf-8?B?RzJsdUt3SXZ4M25nY2taN08vbXJpeHdGbTkzcFFEaWlUWXU5SEtaNXFTQm5S?=
+ =?utf-8?B?aTdvTXdBVTZ0aG8weFEvb2RLSUtHNTB4RnJSbjdFc05jNFlnTmlHS0FIUnFs?=
+ =?utf-8?B?ZXNoQnhVdyt1Q3dkNlFmZWd6RUdnY1A1SG4rdWZLOHNJSVZ0TlBydzVZSHRr?=
+ =?utf-8?Q?5NiAuNoKBFry94Ch4duT21gbbsGWhO3TIKAW0y5?=
+X-OriginatorOrg: oracle.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 391a1760-618b-47fb-41c9-08d92c5ffdf6
+X-MS-Exchange-CrossTenant-AuthSource: BY5PR10MB4196.namprd10.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 10 Jun 2021 22:35:04.7330
  (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 9aa8e496-4249-4fc4-0857-08d92c61163d
-X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=43083d15-7273-40c1-b7db-39efd9ccc17a;Ip=[216.228.112.34];Helo=[mail.nvidia.com]
-X-MS-Exchange-CrossTenant-AuthSource: CO1NAM11FT018.eop-nam11.prod.protection.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: BY5PR12MB5557
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 4e2c6054-71cb-48f1-bd6c-3a9705aca71b
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: uGjUUXq5Mdibox40k9YBpV1SM4++f3P4xRWedYbPTNsJMK4aTweDWiuTuJBipUfeehceka9iJkPHm9Y0fTJYEg==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: BYAPR10MB2551
+X-Proofpoint-Virus-Version: vendor=nai engine=6200 definitions=10011 signatures=668682
+X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 phishscore=0 malwarescore=0 spamscore=0
+ adultscore=0 suspectscore=0 mlxscore=0 mlxlogscore=999 bulkscore=0
+ classifier=spam adjust=0 reason=mlx scancount=1 engine=8.12.0-2104190000
+ definitions=main-2106100134
+X-Proofpoint-GUID: iWuCJM87vT8XJ2uhv5UgUJj9GcSau2uj
+X-Proofpoint-ORIG-GUID: iWuCJM87vT8XJ2uhv5UgUJj9GcSau2uj
+X-Proofpoint-Virus-Version: vendor=nai engine=6200 definitions=10011 signatures=668682
+X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 priorityscore=1501 clxscore=1015
+ bulkscore=0 spamscore=0 mlxscore=0 adultscore=0 malwarescore=0
+ phishscore=0 suspectscore=0 lowpriorityscore=0 mlxlogscore=999
+ impostorscore=0 classifier=spam adjust=0 reason=mlx scancount=1
+ engine=8.12.0-2104190000 definitions=main-2106100134
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Friday, 11 June 2021 4:04:35 AM AEST Peter Xu wrote:
-> External email: Use caution opening links or attachments
+On 6/9/21 5:13 AM, Muchun Song wrote:
+> If the vmemmap is huge PMD mapped, we should split the huge PMD firstly
+> and then we can change the PTE page table entry. In this patch, we add
+> the ability of splitting the huge PMD mapping of vmemmap pages.
 > 
+> Signed-off-by: Muchun Song <songmuchun@bytedance.com>
+> ---
+>  include/linux/mm.h   |  2 +-
+>  mm/hugetlb.c         | 42 ++++++++++++++++++++++++++++++++++--
+>  mm/hugetlb_vmemmap.c |  3 ++-
+>  mm/sparse-vmemmap.c  | 61 +++++++++++++++++++++++++++++++++++++++++++++-------
+>  4 files changed, 96 insertions(+), 12 deletions(-)
 > 
-> On Thu, Jun 10, 2021 at 10:18:25AM +1000, Alistair Popple wrote:
-> > > > The main problem is split_huge_pmd_address() unconditionally calls a mmu
-> > > > notifier so I would need to plumb in passing an owner everywhere which could
-> > > > get messy.
-> > >
-> > > Could I ask why?  split_huge_pmd_address() will notify with CLEAR, so I'm a bit
-> > > confused why we need to pass over the owner.
-> >
-> > Sure, it is the same reason we need to pass it for the exclusive notifier.
-> > Any invalidation during the make exclusive operation will break the mmu read
-> > side critical section forcing a retry of the operation. The owner field is what
-> > is used to filter out invalidations (such as the exclusive invalidation) that
-> > don't need to be retried.
-> 
-> Do you mean the mmu_interval_read_begin|retry() calls?
+> diff --git a/include/linux/mm.h b/include/linux/mm.h
+> index cadc8cc2c715..b97e1486c5c1 100644
+> --- a/include/linux/mm.h
+> +++ b/include/linux/mm.h
+> @@ -3056,7 +3056,7 @@ static inline void print_vma_addr(char *prefix, unsigned long rip)
+>  #endif
+>  
+>  void vmemmap_remap_free(unsigned long start, unsigned long end,
+> -			unsigned long reuse);
+> +			unsigned long reuse, struct list_head *pgtables);
+>  int vmemmap_remap_alloc(unsigned long start, unsigned long end,
+>  			unsigned long reuse, gfp_t gfp_mask);
+>  
+> diff --git a/mm/hugetlb.c b/mm/hugetlb.c
+> index c3b2a8a494d6..3137c72d9cc7 100644
+> --- a/mm/hugetlb.c
+> +++ b/mm/hugetlb.c
+> @@ -1609,6 +1609,13 @@ static void __prep_account_new_huge_page(struct hstate *h, int nid)
+>  static void __prep_new_huge_page(struct hstate *h, struct page *page)
+>  {
+>  	free_huge_page_vmemmap(h, page);
+> +	/*
+> +	 * Because we store preallocated pages on @page->lru,
+> +	 * vmemmap_pgtable_free() must be called before the
+> +	 * initialization of @page->lru in INIT_LIST_HEAD().
+> +	 */
+> +	vmemmap_pgtable_free(&page->lru);
+> +
+>  	INIT_LIST_HEAD(&page->lru);
+>  	set_compound_page_dtor(page, HUGETLB_PAGE_DTOR);
+>  	hugetlb_set_page_subpool(page, NULL);
+> @@ -1775,14 +1782,29 @@ static struct page *alloc_fresh_huge_page(struct hstate *h,
+>  		nodemask_t *node_alloc_noretry)
+>  {
+>  	struct page *page;
+> +	LIST_HEAD(pgtables);
+> +
+> +	if (vmemmap_pgtable_prealloc(h, &pgtables))
+> +		return NULL;
 
-Yep.
-
-> Hmm, the thing is.. to me FOLL_SPLIT_PMD should have similar effect to explicit
-> call split_huge_pmd_address(), afaict.  Since both of them use __split_huge_pmd()
-> internally which will generate that unwanted CLEAR notify.
-
-Agree that gup calls __split_huge_pmd() via split_huge_pmd_address()
-which will always CLEAR. However gup only calls split_huge_pmd_address() if it
-finds a thp pmd. In follow_pmd_mask() we have:
-
-	if (likely(!pmd_trans_huge(pmdval)))
-		return follow_page_pte(vma, address, pmd, flags, &ctx->pgmap);
-
-So I don't think we have a problem here.
-
-> If that's the case, I think it fails because split_huge_pmd_address() will
-> trigger that CLEAR notify unconditionally (even if it's not a thp; not sure
-> whether it should be optimized to not notify at all... definitely another
-> story), while FOLL_SPLIT_PMD will skip the notify as it calls split_huge_pmd()
-> instead, who checks the pmd before calling __split_huge_pmd().
-> 
-> Does it also mean that if there's a real THP it won't really work?  As then
-> FOLL_SPLIT_PMD will start to trigger that CLEAR notify too, I think..
-> 
-> --
-> Peter Xu
-> 
+In the previous two patches I asked:
+- Can we wait until later to prealloc vmemmap pages for gigantic pages
+  allocated from bootmem?
+- Should we fail to add a hugetlb page to the pool if we can not do
+  vmemmap optimization?
 
 
+Depending on the answers to those questions, we may be able to eliminate
+these vmemmap_pgtable_prealloc/vmemmap_pgtable_free calls in hugetlb.c.
+What about adding the calls to free_huge_page_vmemmap?
+At the beginning of free_huge_page_vmemmap, allocate any vmemmap pgtable
+pages.  If it fails, skip optimization.  We can free any pages before
+returning to the caller.
 
-
+Since we also know the page/address in the page table can we check to see
+if it is already PTE mapped.  If so, can we then skip allocation?
+-- 
+Mike Kravetz
