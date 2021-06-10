@@ -2,64 +2,124 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id D0AFA3A264A
-	for <lists+linux-doc@lfdr.de>; Thu, 10 Jun 2021 10:11:29 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id B6E373A26EA
+	for <lists+linux-doc@lfdr.de>; Thu, 10 Jun 2021 10:25:10 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S229895AbhFJINY (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 10 Jun 2021 04:13:24 -0400
-Received: from smtp-out1.suse.de ([195.135.220.28]:53000 "EHLO
-        smtp-out1.suse.de" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S229823AbhFJINY (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Thu, 10 Jun 2021 04:13:24 -0400
-Received: from relay2.suse.de (relay2.suse.de [149.44.160.134])
-        by smtp-out1.suse.de (Postfix) with ESMTP id 8FFB1219A2;
-        Thu, 10 Jun 2021 08:11:27 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
-        t=1623312687; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-         mime-version:mime-version:content-type:content-type:
-         in-reply-to:in-reply-to:references:references;
-        bh=q/qN38v+c+vF8Gv0G9DgzhLoJzrM+S9m5VKWUDPTrQg=;
-        b=TsFbPNHjUqTk6D/CRAmQaM4uf1zgDwGjnJp0sgvmyo5ZM0V7VjO/bteB1jD1Uv02DCkc3f
-        CPDJXXYi1QTJ8+n+iSiHhAEjEEzQLFXdfZp/cFkPESCC//Fj6PD6Y6XOfSZ5+PTt0HV8BR
-        tyVFxh+bAVTgJtUIrHQJ7kOAEKmKPZw=
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
-        s=susede2_ed25519; t=1623312687;
-        h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-         mime-version:mime-version:content-type:content-type:
-         in-reply-to:in-reply-to:references:references;
-        bh=q/qN38v+c+vF8Gv0G9DgzhLoJzrM+S9m5VKWUDPTrQg=;
-        b=d3PLz7lJu6FRcLjIjywvG08BSfv13J441viAmOKbPXkPmeqsGHAxxcGWvbzzBSXjxHjbuc
-        Ao8E5WKMp6opjMBw==
-Received: from alsa1.suse.de (alsa1.suse.de [10.160.4.42])
-        by relay2.suse.de (Postfix) with ESMTP id 56F1BA3B84;
-        Thu, 10 Jun 2021 08:11:27 +0000 (UTC)
-Date:   Thu, 10 Jun 2021 10:11:27 +0200
-Message-ID: <s5hr1ha9m1c.wl-tiwai@suse.de>
-From:   Takashi Iwai <tiwai@suse.de>
-To:     huangjianghui <huangjianghui@uniontech.com>
-Cc:     Jonathan Corbet <corbet@lwn.net>, alsa-devel@alsa-project.org,
+        id S230350AbhFJI1F (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 10 Jun 2021 04:27:05 -0400
+Received: from mail-pg1-f176.google.com ([209.85.215.176]:34649 "EHLO
+        mail-pg1-f176.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S230317AbhFJI1E (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Thu, 10 Jun 2021 04:27:04 -0400
+Received: by mail-pg1-f176.google.com with SMTP id l1so22011967pgm.1
+        for <linux-doc@vger.kernel.org>; Thu, 10 Jun 2021 01:25:09 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=linaro.org; s=google;
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=dx3LD+QONQZ90XyumvQYMedCFWUAyiq58QYIKI9G5zg=;
+        b=P2q0IrTnZYJcNJxgCNUHZgCPckId6L8Xpz9JvHK94UQxbHTBsvAoHdRevTah0jtZ3C
+         DCZ6YmT9q2kBAB7ezTldLlg1d+TpPCX4gGqUxhneVHoJ49Uc/el/KNIL60EsASs+ZlNC
+         JEDN6py3rNeV5OcXFDOtSDN0tP/JK+MbjrpCq1S4hdgRmboCcjRNphTQdxRzsuiHmmb5
+         yfyQl++2mNNsb7k2L/BGPE9wUTxeN1Nskrt0HKrJjII+LfLXiGwuZz6Vu3TTHIMFcgAB
+         Wmy5LLcTK/ZMpMXPY4uhxUvBaF/ddyPrNPoR0AcOk9q9cdPYIl8Yze1Zad+LaPa2WcsZ
+         4aiQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=dx3LD+QONQZ90XyumvQYMedCFWUAyiq58QYIKI9G5zg=;
+        b=IWQ0XBV7TpFkznmhkxrnB1Mm50RycQiJjOl7UDzB+84SvcfgX2e1K8KrZt1aaXrG09
+         Pbgh86+890EsIzySsgSIliUJh64iutfFkRjnFIg4xQTHpq5klABZzm256w+iLjPeFR7t
+         Rfv4tVwAJ8cGid5HqO2+Ztc6lxmrsT9zc3jkwytrhm9D5RRcRuPNxdGRWveCD5oUeiaX
+         +rMAW/QfQpYQyVUlTXBl7f5W12UTwTDomBZ4+8xh6JAw/ZFDV++6kaECR4GUNwNPBcSj
+         FA9/J/1VQ2g4DiC1FrEC3aA8t8wcS0tTFJYBzVid2rVWofvAcwa1clZrN7g59zecNXqO
+         AmFA==
+X-Gm-Message-State: AOAM531AVshXsrZKtN/p07d/Y8wgn5K1xu9sWeyBbWCcBoiZ0c8mjhaW
+        PCDkEfmokqOuROIzAZg9GZNFKg==
+X-Google-Smtp-Source: ABdhPJyi+O4KwGPfvZR518NR4+exaoYeuUIiRL46B3bKaN8ChQ5bmYUKDSfTaz+qd2RgLjB3qxti9A==
+X-Received: by 2002:aa7:8888:0:b029:2ec:763f:4bcc with SMTP id z8-20020aa788880000b02902ec763f4bccmr1846743pfe.35.1623313448946;
+        Thu, 10 Jun 2021 01:24:08 -0700 (PDT)
+Received: from localhost ([136.185.169.128])
+        by smtp.gmail.com with ESMTPSA id h7sm1739207pfe.62.2021.06.10.01.24.07
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 10 Jun 2021 01:24:08 -0700 (PDT)
+From:   Viresh Kumar <viresh.kumar@linaro.org>
+To:     Rafael Wysocki <rjw@rjwysocki.net>,
+        Qian Cai <quic_qiancai@quicinc.com>,
+        Benjamin Herrenschmidt <benh@kernel.crashing.org>,
+        Jonathan Corbet <corbet@lwn.net>, Len Brown <lenb@kernel.org>,
+        Michael Ellerman <mpe@ellerman.id.au>,
+        Paul Mackerras <paulus@samba.org>,
+        Srinivas Pandruvada <srinivas.pandruvada@linux.intel.com>,
+        Viresh Kumar <viresh.kumar@linaro.org>
+Cc:     linux-pm@vger.kernel.org,
+        Vincent Guittot <vincent.guittot@linaro.org>,
+        Ionela Voinescu <ionela.voinescu@arm.com>,
+        Dirk Brandewie <dirk.j.brandewie@intel.com>,
         linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
-        Takashi Iwai <tiwai@suse.com>
-Subject: Re: [PATCH] Docs: hda: Fix spelling mistakes
-In-Reply-To: <20210610062036.30300-1-huangjianghui@uniontech.com>
-References: <20210610062036.30300-1-huangjianghui@uniontech.com>
-User-Agent: Wanderlust/2.15.9 (Almost Unreal) SEMI/1.14.6 (Maruoka)
- FLIM/1.14.9 (=?UTF-8?B?R29qxY0=?=) APEL/10.8 Emacs/25.3
- (x86_64-suse-linux-gnu) MULE/6.0 (HANACHIRUSATO)
-MIME-Version: 1.0 (generated by SEMI 1.14.6 - "Maruoka")
-Content-Type: text/plain; charset=US-ASCII
+        linuxppc-dev@lists.ozlabs.org
+Subject: [PATCH 0/5] cpufreq: cppc: Fix suspend/resume specific races with FIE code
+Date:   Thu, 10 Jun 2021 13:53:56 +0530
+Message-Id: <cover.1623313323.git.viresh.kumar@linaro.org>
+X-Mailer: git-send-email 2.31.1.272.g89b43f80a514
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Thu, 10 Jun 2021 08:20:36 +0200,
-huangjianghui wrote:
-> 
-> correct Reatek to Realtek
-> 
-> Signed-off-by: huangjianghui <huangjianghui@uniontech.com>
+Hi Qian,
 
-Applied, thanks.
+It would be helpful if you can test this patchset and confirm if the races you
+mentioned went away or not and that the FIE code works as we wanted it to.
 
+I don't have a real setup and so it won't be easy for me to test this out.
 
-Takashi
+I have already sent a temporary fix for 5.13 and this patchset is targeted for
+5.14 and is based over that.
+
+-------------------------8<-------------------------
+
+The CPPC driver currently stops the frequency invariance related
+kthread_work and irq_work from cppc_freq_invariance_exit() which is only
+called during driver's removal.
+
+This is not sufficient as the CPUs can get hot-plugged out while the
+driver is in use, the same also happens during system suspend/resume.
+
+In such a cases we can reach a state where the CPU is removed by the
+kernel but its kthread_work or irq_work aren't stopped.
+
+Fix this by implementing the start_cpu() and stop_cpu() callbacks in the
+cpufreq core, which will be called for each CPU's addition/removal.
+
+A similar call was already available in the cpufreq core, which isn't required
+anymore and so its users are migrated to use exit() callback instead.
+
+This is targeted for v5.14-rc1.
+
+--
+Viresh
+
+Viresh Kumar (5):
+  cpufreq: cppc: Migrate to ->exit() callback instead of ->stop_cpu()
+  cpufreq: intel_pstate: Migrate to ->exit() callback instead of
+    ->stop_cpu()
+  cpufreq: powerenv: Migrate to ->exit() callback instead of
+    ->stop_cpu()
+  cpufreq: Add start_cpu() and stop_cpu() callbacks
+  cpufreq: cppc: Fix suspend/resume specific races with the FIE code
+
+ Documentation/cpu-freq/cpu-drivers.rst |   7 +-
+ drivers/cpufreq/Kconfig.arm            |   1 -
+ drivers/cpufreq/cppc_cpufreq.c         | 163 ++++++++++++++-----------
+ drivers/cpufreq/cpufreq.c              |  11 +-
+ drivers/cpufreq/intel_pstate.c         |   9 +-
+ drivers/cpufreq/powernv-cpufreq.c      |  23 ++--
+ include/linux/cpufreq.h                |   5 +-
+ 7 files changed, 119 insertions(+), 100 deletions(-)
+
+-- 
+2.31.1.272.g89b43f80a514
+
