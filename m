@@ -2,146 +2,111 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 8B9AB3A3A1E
-	for <lists+linux-doc@lfdr.de>; Fri, 11 Jun 2021 05:08:57 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 8D1AE3A3A36
+	for <lists+linux-doc@lfdr.de>; Fri, 11 Jun 2021 05:24:01 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S230468AbhFKDKx (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 10 Jun 2021 23:10:53 -0400
-Received: from mail-pl1-f179.google.com ([209.85.214.179]:43629 "EHLO
-        mail-pl1-f179.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S230377AbhFKDKx (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Thu, 10 Jun 2021 23:10:53 -0400
-Received: by mail-pl1-f179.google.com with SMTP id v12so2093676plo.10;
-        Thu, 10 Jun 2021 20:08:44 -0700 (PDT)
+        id S230236AbhFKDZ5 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 10 Jun 2021 23:25:57 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:47446 "EHLO
+        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S230482AbhFKDZ4 (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Thu, 10 Jun 2021 23:25:56 -0400
+Received: from mail-pf1-x432.google.com (mail-pf1-x432.google.com [IPv6:2607:f8b0:4864:20::432])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 67963C061574
+        for <linux-doc@vger.kernel.org>; Thu, 10 Jun 2021 20:23:46 -0700 (PDT)
+Received: by mail-pf1-x432.google.com with SMTP id q25so3311208pfh.7
+        for <linux-doc@vger.kernel.org>; Thu, 10 Jun 2021 20:23:46 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=from:to:cc:subject:date:message-id:in-reply-to:references
-         :mime-version:content-transfer-encoding;
-        bh=EeiiZk029aDgyJMHooCPOqX+d9TplBH+7i69WXM5i/M=;
-        b=WT2aoFBdPydSDmrn1yO0fHAUPDEAYD8a9mHe8XjvtW9fLhxMHmjcnM+pkx9v0Xrpv5
-         jDd7sTd3hYf4vh0OkgSUC2lxL0buxzs1POSItzfLDAVmy0v2DUSoJuCzlt9Kx7iFY6YJ
-         pM76Wuo1vpzDqz1fDOuXgnCo+QOtu9SHZjKLdajyiUC5awhBBWp770RNdKB3AJbsz6lN
-         BMYCG33ggxjCA83y++ONGSN589hWNiijlte7NIODvsKcMaWXkT0foYWIDy+PsLMprEq2
-         nTkbho5+jOD+ddNi9FlhfP6c2SsgZF2a6Hfl3vvqgp6NiiKiZkp9ToALMj0+fd+OJe8v
-         8HNg==
+        d=bytedance-com.20150623.gappssmtp.com; s=20150623;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc;
+        bh=7AeKnAwYLMBGaOYXVe0aYJA8bYJeJ8yHr06kQ7H8lQk=;
+        b=z1JaIyy3oBxQ0LvjmKJujrq4DLvCIXj/kORRhsaXg4FQ8DyRctogXMzDi8qjXDfQX5
+         IKsP3vuoBpAqtIx3s5bdvnzUpIeeRRCbXmx3P8ROeTxD7Dj/Jsy/Avdbww6VSx59/K8D
+         iUPh4Py7w8IqPQcntjuuQaevgG3LPszKolcGImKdWcGlHAGZvrh9vJi6CKUQyWfJ1Yyd
+         PU0ZfLbagM3GP8lnH/ORNOcrYGlxxaQVN8yeSkskSY/x04RGUCBjKjf8uLNop7r5Cuvd
+         VoonSIU6JwPPUN4NZcJsNZkFcvSQA0jSfJz5BDjQV9nO4B+v1YUvTluAk8VZv0XVnw1r
+         n8BA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-         :references:mime-version:content-transfer-encoding;
-        bh=EeiiZk029aDgyJMHooCPOqX+d9TplBH+7i69WXM5i/M=;
-        b=UyOpSX/vFjXklW0rpulRf0lHyhQ7/lX52yhcSLEbpN9Ao5EZcszzog7KHLtrUiiMnd
-         nAlUEEA9TO62fawk3TpSFAyK+Cv4KuxaZQ46cg93A0pL4IdEx6rkqKa7gBOR2Epiu+vM
-         ezoHNEjW5+havRjD+/rFp5cwp9nqcCjXNBz437ou7REhjCQNQpGRq6LPpIqXqz1Pg2nP
-         svAatzy/YLtH0RQ5kXhQ2IPqbcv6kma5XE4TYVpXM/nNtujDeQ0bM5tIz8KqGqrHdiCi
-         q3tUZLlOnGvNZ2mjYkXrM0mDVGM/a1YOEem4ZuAXX98KlQw+FSySnN2oy/0cIZlb2lC6
-         RsnA==
-X-Gm-Message-State: AOAM530KU559kE+LASH2f3+oS5LhkzXv0nC3eEC428K+Vr+jfFc+uaq4
-        u8lXvjtogbWnlfMYUhDXZnzVzasNwVKILw==
-X-Google-Smtp-Source: ABdhPJyRMcJGAqIuulTTWK0Gt0FXBytUTB/g1mrb7FUWLqKqzfNb97tg0pJ+VvPscSmLHPlElB7FYA==
-X-Received: by 2002:a17:90a:7349:: with SMTP id j9mr2148641pjs.234.1623380863978;
-        Thu, 10 Jun 2021 20:07:43 -0700 (PDT)
-Received: from kir-rhat.redhat.com (c-76-104-243-248.hsd1.wa.comcast.net. [76.104.243.248])
-        by smtp.gmail.com with ESMTPSA id q2sm3774319pje.50.2021.06.10.20.07.43
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 10 Jun 2021 20:07:43 -0700 (PDT)
-From:   Kir Kolyshkin <kolyshkin@gmail.com>
-To:     linux-doc@vger.kernel.org
-Cc:     Jonathan Corbet <corbet@lwn.net>, tj@kernel.org, axboe@kernel.dk,
-        paolo.valente@linaro.org, cgroups@vger.kernel.org,
-        Kir Kolyshkin <kolyshkin@gmail.com>
-Subject: [PATCH 3/3] docs/cgroup-v1/blkio: update for 5.x kernels
-Date:   Thu, 10 Jun 2021 20:07:37 -0700
-Message-Id: <20210611030737.1984343-4-kolyshkin@gmail.com>
-X-Mailer: git-send-email 2.31.1
-In-Reply-To: <20210611030737.1984343-1-kolyshkin@gmail.com>
-References: <20210611030737.1984343-1-kolyshkin@gmail.com>
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=7AeKnAwYLMBGaOYXVe0aYJA8bYJeJ8yHr06kQ7H8lQk=;
+        b=DBXHDER1X9RC+1yTyFCG0Gd4F7Dfg6C4aBu2TeyjvgsCydbSq87Yhgf2wNSjezT7Cx
+         NMyCGsAB59/hv0C+fOl/maxloyEjY40StqQ4gFONDSxGesQ7lXJhT5RYqCRC00tZLfYg
+         yrTU1Ef0kX/3sTVt4p3BtwOsNZILsMxpxYpBSAIkrMeozF9xAYNCX/jtQ7+v/6t+dQP/
+         /7REAKkMyCrL/KEf7PiuF68RzvTN+e8bGLtBetdh+cdighbHg2K6hQlHzJdM8N6kai4M
+         zKQANWc5n0sOZHdPEoEpDsJPFdiC0XBaV4i/hUSC/vI/kb+0FM8k/8JcdH5LstyWuUNY
+         H7dQ==
+X-Gm-Message-State: AOAM531mLxjN5Wool6QROTT7fCxA/DPGJ5S22Kv8G60OfgULWG4oVSLR
+        0IwaQwew0NuQupVbXp06yBb5kfTGpqK39x43FgMDYw==
+X-Google-Smtp-Source: ABdhPJyG1SmyYhbDe27LGm31FcQiX4uFLQqmV5JyJlZX78C2tXhJbU2v24B9Q5YXghs5rIB++Fm1LCjVeqLZ1wrr7og=
+X-Received: by 2002:a65:5288:: with SMTP id y8mr1489206pgp.31.1623381824894;
+ Thu, 10 Jun 2021 20:23:44 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20210609121310.62229-1-songmuchun@bytedance.com> <d4fa211e-e896-e1da-017e-dafd120d3583@oracle.com>
+In-Reply-To: <d4fa211e-e896-e1da-017e-dafd120d3583@oracle.com>
+From:   Muchun Song <songmuchun@bytedance.com>
+Date:   Fri, 11 Jun 2021 11:23:07 +0800
+Message-ID: <CAMZfGtW_oSv+Wz7ztwAdZfs2PVEsZtTmszD33vwQht=241CZPg@mail.gmail.com>
+Subject: Re: [External] Re: [PATCH 0/5] Split huge PMD mapping of vmemmap pages
+To:     Mike Kravetz <mike.kravetz@oracle.com>
+Cc:     Andrew Morton <akpm@linux-foundation.org>,
+        Oscar Salvador <osalvador@suse.de>,
+        Michal Hocko <mhocko@suse.com>,
+        "Song Bao Hua (Barry Song)" <song.bao.hua@hisilicon.com>,
+        David Hildenbrand <david@redhat.com>,
+        Chen Huang <chenhuang5@huawei.com>,
+        "Bodeddula, Balasubramaniam" <bodeddub@amazon.com>,
+        Jonathan Corbet <corbet@lwn.net>,
+        Xiongchun duan <duanxiongchun@bytedance.com>,
+        fam.zheng@bytedance.com, zhengqi.arch@bytedance.com,
+        linux-doc@vger.kernel.org, LKML <linux-kernel@vger.kernel.org>,
+        Linux Memory Management List <linux-mm@kvack.org>
+Content-Type: text/plain; charset="UTF-8"
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Commit bf382fb0bcef4 ("block: remove legacy IO schedulers", Oct 12 2018)
-removes the CFQ scheduler, together with blkio.weight and
-blkio.weight_device described in cgroup v1 documentation. Users are
-supposed to use the BFQ scheduler, which cgroup file for setting weight
-is blkio.bfq.weight, but there is no way to set per-device weight.
+On Fri, Jun 11, 2021 at 5:33 AM Mike Kravetz <mike.kravetz@oracle.com> wrote:
+>
+> On 6/9/21 5:13 AM, Muchun Song wrote:
+> > In order to reduce the difficulty of code review in series[1]. We disable
+> > huge PMD mapping of vmemmap pages when that feature is enabled. In this
+> > series, we do not disable huge PMD mapping of vmemmap pages anymore. We
+> > will split huge PMD mapping when needed.
+>
+> Thank you Muchun!
+>
+> Adding this functionality should reduce the decisions a sys admin needs
+> to make WRT vmemmap reduction for hugetlb pages.  There should be no
+> downside to enabling vmemmap reduction as moving from PMD to PTE mapping
+> happens 'on demand' as hugetlb pages are added to the pool.
 
-Later, commit 795fe54c2a8 per-device weights for BFQ, meaning that
-blkio.bfq.weight and blkio.bfq.weight_device can be used in a way
-similar to the old CFQ cgroup interface.
+Agree.
 
-Yet, the cgroup v1 docs were never updated. Fix this:
- - use the new file names;
- - fix the range for weight (used to be 10..1000, now 1..1000);
- - link to BFQ scheduler docs.
+>
+> I just want to clarify something for myself and possibly other
+> reviewers.   At hugetlb page allocation time, we move to PTE mappings.
+> When hugetlb pages are freed from the pool we do not attempt coalasce
+> and move back to a PMD mapping.  Correct?  I am not suggesting we do
+> this and I suspect it is much more complex.  Just want to make sure I
+> understand the functionality of this series.
 
-Signed-off-by: Kir Kolyshkin <kolyshkin@gmail.com>
----
- .../cgroup-v1/blkio-controller.rst            | 31 ++++++++++---------
- 1 file changed, 16 insertions(+), 15 deletions(-)
+Totally right. Coalescing is very complex. So I do not do this in this
+series.
 
-diff --git a/Documentation/admin-guide/cgroup-v1/blkio-controller.rst b/Documentation/admin-guide/cgroup-v1/blkio-controller.rst
-index 8101dcba381d..16253eda192e 100644
---- a/Documentation/admin-guide/cgroup-v1/blkio-controller.rst
-+++ b/Documentation/admin-guide/cgroup-v1/blkio-controller.rst
-@@ -97,40 +97,41 @@ Details of cgroup files
- Proportional weight policy files
- --------------------------------
- 
--  blkio.weight
-+  blkio.bfq.weight
- 	  Specifies per cgroup weight. This is default weight of the group
--	  on all the devices until and unless overridden by per device rule.
--	  (See blkio.weight_device).
--	  Currently allowed range of weights is from 10 to 1000.
-+	  on all the devices until and unless overridden by per device rule
-+	  (see `blkio.bfq.weight_device` below).
- 
--  blkio.weight_device
--	  One can specify per cgroup per device rules using this interface.
--	  These rules override the default value of group weight as specified
--	  by blkio.weight.
-+	  Currently allowed range of weights is from 1 to 1000. For more details,
-+          see Documentation/block/bfq-iosched.rst.
-+
-+  blkio.bfq.weight_device
-+          Specifes per cgroup per device weights, overriding the default group
-+          weight. For more details, see Documentation/block/bfq-iosched.rst.
- 
- 	  Following is the format::
- 
--	    # echo dev_maj:dev_minor weight > blkio.weight_device
-+	    # echo dev_maj:dev_minor weight > blkio.bfq.weight_device
- 
- 	  Configure weight=300 on /dev/sdb (8:16) in this cgroup::
- 
--	    # echo 8:16 300 > blkio.weight_device
--	    # cat blkio.weight_device
-+	    # echo 8:16 300 > blkio.bfq.weight_device
-+	    # cat blkio.bfq.weight_device
- 	    dev     weight
- 	    8:16    300
- 
- 	  Configure weight=500 on /dev/sda (8:0) in this cgroup::
- 
--	    # echo 8:0 500 > blkio.weight_device
--	    # cat blkio.weight_device
-+	    # echo 8:0 500 > blkio.bfq.weight_device
-+	    # cat blkio.bfq.weight_device
- 	    dev     weight
- 	    8:0     500
- 	    8:16    300
- 
- 	  Remove specific weight for /dev/sda in this cgroup::
- 
--	    # echo 8:0 0 > blkio.weight_device
--	    # cat blkio.weight_device
-+	    # echo 8:0 0 > blkio.bfq.weight_device
-+	    # cat blkio.bfq.weight_device
- 	    dev     weight
- 	    8:16    300
- 
--- 
-2.31.1
+>
+> BTW - Just before you sent this series I had worked up a version of
+> hugetlb page demote [2] with vmemmap optimizations.  That code will need
+> to be reworked.  However, if we never coalesce and move back to PMD
+> mappings it might make that effort easier.
+>
+> [2] https://lore.kernel.org/linux-mm/20210309001855.142453-1-mike.kravetz@oracle.com/
 
+I've not looked at this deeply. I will go take a look.
+
+Thanks Mike.
+
+> --
+> Mike Kravetz
