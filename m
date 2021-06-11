@@ -2,56 +2,59 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 269353A3A12
-	for <lists+linux-doc@lfdr.de>; Fri, 11 Jun 2021 05:02:23 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 3E5E13A3A0B
+	for <lists+linux-doc@lfdr.de>; Fri, 11 Jun 2021 05:01:23 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S230407AbhFKDET (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 10 Jun 2021 23:04:19 -0400
-Received: from mail-pj1-f46.google.com ([209.85.216.46]:52083 "EHLO
-        mail-pj1-f46.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S230205AbhFKDER (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Thu, 10 Jun 2021 23:04:17 -0400
-Received: by mail-pj1-f46.google.com with SMTP id k5so4867310pjj.1
-        for <linux-doc@vger.kernel.org>; Thu, 10 Jun 2021 20:02:08 -0700 (PDT)
+        id S231297AbhFKDDT (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 10 Jun 2021 23:03:19 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:42570 "EHLO
+        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S230500AbhFKDDS (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Thu, 10 Jun 2021 23:03:18 -0400
+Received: from mail-pf1-x434.google.com (mail-pf1-x434.google.com [IPv6:2607:f8b0:4864:20::434])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 32D18C0617AD
+        for <linux-doc@vger.kernel.org>; Thu, 10 Jun 2021 20:01:10 -0700 (PDT)
+Received: by mail-pf1-x434.google.com with SMTP id x73so3259179pfc.8
+        for <linux-doc@vger.kernel.org>; Thu, 10 Jun 2021 20:01:10 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:cc:subject:date:message-id:in-reply-to:references
          :mime-version:content-transfer-encoding;
-        bh=tE83joOLGGHG+6LYIjaFeBXyGSvmADIRz7I0QGk9qxY=;
-        b=Fx6vtB1EnbC275SmndXkPiI6PwIyM6SUKGThGZ+la4Lbcq7ZMUJWyA1BCMIT/Ckl5y
-         8Vdaqnmv0A9pneOD/qw38xz03J+oDGYYRkjOJfpwoDmGix05NAa199Gcrl/xKlW8+RuJ
-         2biejSjK5GL/mN3JJs7cKFxmf0gSPBFO3k/CiYIvXtcH66ponyvK+gOZEM6C4im7WRn1
-         VGQYE7jSfyN6qAKnep2xHxwXhalEYdPJ7tOoYWibMNlrQmoXJAGcsXNjQETMGWdSYJDt
-         IHLOKtuNu/UuY73FUpqeDYl7j23WjKcX0Grh3Oyhu22GUoOELsOdhk7phV+vi3Z2kJsE
-         98ng==
+        bh=LuRF2Uw9JRiSKgOzW2yj1WCtNFvC9o9Zyt1kUPtqaWw=;
+        b=iMWNZh95tFSTj7vPD/6b9sNi1SmcKzwRhyhXEoYtOMTS29/w5ZNyQc8ene2611FF2S
+         LWQrSsjisSj4Y2UuZHBjwk/ZG/3gNcTy2oxrp8FEjBojeLkVC0SO6mqPh4+jqt6n/avj
+         I1014QXtW+ManZhUolvwqUCYDfLpVJJPN7085II8oYZnBF07OhAn5GC/J2uUimxV6/ZL
+         Q3MXN8rJkTvS6MCYbOzeQQRkhW5GyF7oJ18q9nktbB3gdJ0pg615VAsO0KskuiOnFWv7
+         Rq3utWxL7SKPpDY7Z9VggsaKYB8FoSsEzYbrYKc/0k/3nEuneedrtLkHqpNVsjFRgOJd
+         nr4A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
          :references:mime-version:content-transfer-encoding;
-        bh=tE83joOLGGHG+6LYIjaFeBXyGSvmADIRz7I0QGk9qxY=;
-        b=L0RfVtOkUn9DZhjKNDKnjcSBzi2CjE+ps6fekwJ0BU+wMGinkMbI76sOOGCDWehjfI
-         BNf6yHP1WWowoQSyhPXBzq3GPYcnCM4qeMdGeizBqE38R6EttXL9dh0mNevwQLXeOHSk
-         Sbvgi9LVQ4s9/1+i1ET1+4RVSUE5xWDLosAIIoLaatp8LPYGFo//W+cinLk2Vb9hPqpV
-         w80gi8PklAdIL3htMghWeO20IFFmQDdXewUDCs37NHHuEs2hMG9Z9rWp4nJg6mAKqgll
-         /CWJKOiQyEwv7QQecCVzfCLqSXZdEw3agk3BGGTIWmCQyxbwwq+ZrtnFiUMq7/O9arfp
-         F92Q==
-X-Gm-Message-State: AOAM532f7DHYymJulYAdEJCG/GDy/Tdwge2x87PY1CH5UCDXtdBD4VN2
-        hK7r9DMTjR7q9Q15fqWQa2EFUBZBIBI=
-X-Google-Smtp-Source: ABdhPJyBw647fEmvrrvXKp07HroSBH2Eh6eWtqRg1iF0vdg9xKEz5UW6lJrNcAppbwJTWD4XycJZlQ==
-X-Received: by 2002:a17:903:228e:b029:101:af04:4e24 with SMTP id b14-20020a170903228eb0290101af044e24mr1844825plh.3.1623380468533;
-        Thu, 10 Jun 2021 20:01:08 -0700 (PDT)
+        bh=LuRF2Uw9JRiSKgOzW2yj1WCtNFvC9o9Zyt1kUPtqaWw=;
+        b=VPR0pkpGhNrkQq6yAJfzuwbNwB429DpSDeLBlhoaTXcubjDg92WtUo0b74l0CUcyjN
+         5BjVBfOB1NgcfaafpMsubPW4lUdQ0SddCFvIk12cLaZ/K4/cWZi6+jM8KgxSfVE2VP+F
+         i0paDZfwBRSaqCLN+ZuU/QUM0VhYaxCmJAX0SsA9XoLCvmqeDEoW9rKXZtRuSVPjw3Jl
+         jgKLt3lMJNPmkhxBY60fP9ku+Fov805ObpyBSNUGAHh51hFs4RgE8p8+JTYhxTVFvWY3
+         9Bo5ZJzc0SR0clfvp1PX02rTsPVNvHesxySruU+GL01d05xGPZ49ChVIzV39cN+zrG21
+         HIWw==
+X-Gm-Message-State: AOAM533Zs8WMlePd3wbFCXfQ8bIAL0SCGrnBSzRP8eVbD7rdzI7vgZWT
+        3RCGdvytZnssUn9+kHdI/JfXkbA4svE=
+X-Google-Smtp-Source: ABdhPJwD4i0KMCj52TYZNVtX7PVkeoMAMah5aIzjQYidt201NBoBfyTbDzqz0Y8fkFmfn4r/BJSQPQ==
+X-Received: by 2002:aa7:84c7:0:b029:2e9:2d18:54a5 with SMTP id x7-20020aa784c70000b02902e92d1854a5mr5974306pfn.44.1623380469453;
+        Thu, 10 Jun 2021 20:01:09 -0700 (PDT)
 Received: from kir-rhat.redhat.com (c-76-104-243-248.hsd1.wa.comcast.net. [76.104.243.248])
-        by smtp.gmail.com with ESMTPSA id ev11sm8856748pjb.36.2021.06.10.20.01.07
+        by smtp.gmail.com with ESMTPSA id ev11sm8856748pjb.36.2021.06.10.20.01.08
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 10 Jun 2021 20:01:08 -0700 (PDT)
+        Thu, 10 Jun 2021 20:01:09 -0700 (PDT)
 From:   Kir Kolyshkin <kolyshkin@gmail.com>
 To:     linux-doc@vger.kernel.org
 Cc:     Jonathan Corbet <corbet@lwn.net>,
         Kir Kolyshkin <kolyshkin@gmail.com>,
-        Sebastian Reichel <sebastian.reichel@collabora.com>
-Subject: [PATCH 1/3] docs: fix bad cross-links in motorola-cpcap
-Date:   Thu, 10 Jun 2021 20:00:42 -0700
-Message-Id: <20210611030044.1982911-2-kolyshkin@gmail.com>
+        Geert Uytterhoeven <geert+renesas@glider.be>
+Subject: [PATCH 2/3] docs/devicetree: fix a cross-ref
+Date:   Thu, 10 Jun 2021 20:00:43 -0700
+Message-Id: <20210611030044.1982911-3-kolyshkin@gmail.com>
 X-Mailer: git-send-email 2.31.1
 In-Reply-To: <20210611030044.1982911-1-kolyshkin@gmail.com>
 References: <20210611030044.1982911-1-kolyshkin@gmail.com>
@@ -61,40 +64,45 @@ Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Commits 3c5be0454 and ce49e4282 renamed the files being referenced,
-but forgot to modify the document that references them.
+Commit 56b01acc1c79 renames the file being referred to.
+Fix the references accordingly.
 
-This fixes the following warnings:
-
-> Warning: Documentation/devicetree/bindings/mfd/motorola-cpcap.txt
-> references a file that doesn't exist:
-> Documentation/devicetree/bindings/power/supply/cpcap-battery.txt
-
-> Warning: Documentation/devicetree/bindings/mfd/motorola-cpcap.txt
-> references a file that doesn't exist:
-> Documentation/devicetree/bindings/power/supply/cpcap-charger.txt
-
-Cc: Sebastian Reichel <sebastian.reichel@collabora.com>
+Cc: Geert Uytterhoeven <geert+renesas@glider.be>
 Signed-off-by: Kir Kolyshkin <kolyshkin@gmail.com>
 ---
- Documentation/devicetree/bindings/mfd/motorola-cpcap.txt | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ Documentation/devicetree/bindings/leds/leds-bcm6328.txt | 3 ++-
+ Documentation/devicetree/bindings/leds/leds-bcm6358.txt | 4 ++--
+ 2 files changed, 4 insertions(+), 3 deletions(-)
 
-diff --git a/Documentation/devicetree/bindings/mfd/motorola-cpcap.txt b/Documentation/devicetree/bindings/mfd/motorola-cpcap.txt
-index b52e7a33f0f9..190230216de8 100644
---- a/Documentation/devicetree/bindings/mfd/motorola-cpcap.txt
-+++ b/Documentation/devicetree/bindings/mfd/motorola-cpcap.txt
-@@ -16,8 +16,8 @@ Optional subnodes:
- The sub-functions of CPCAP get their own node with their own compatible values,
- which are described in the following files:
+diff --git a/Documentation/devicetree/bindings/leds/leds-bcm6328.txt b/Documentation/devicetree/bindings/leds/leds-bcm6328.txt
+index ccebce597f37..c9e4077734f9 100644
+--- a/Documentation/devicetree/bindings/leds/leds-bcm6328.txt
++++ b/Documentation/devicetree/bindings/leds/leds-bcm6328.txt
+@@ -4,7 +4,8 @@ This controller is present on BCM6318, BCM6328, BCM6362 and BCM63268.
+ In these SoCs it's possible to control LEDs both as GPIOs or by hardware.
+ However, on some devices there are Serial LEDs (LEDs connected to a 74x164
+ controller), which can either be controlled by software (exporting the 74x164
+-as spi-gpio. See Documentation/devicetree/bindings/gpio/gpio-74x164.txt), or
++as spi-gpio; see
++Documentation/devicetree/bindings/gpio/fairchild,74hc595.yaml), or
+ by hardware using this driver.
+ Some of these Serial LEDs are hardware controlled (e.g. ethernet LEDs) and
+ exporting the 74x164 as spi-gpio prevents those LEDs to be hardware
+diff --git a/Documentation/devicetree/bindings/leds/leds-bcm6358.txt b/Documentation/devicetree/bindings/leds/leds-bcm6358.txt
+index da5708e7b43b..183258ceb8bc 100644
+--- a/Documentation/devicetree/bindings/leds/leds-bcm6358.txt
++++ b/Documentation/devicetree/bindings/leds/leds-bcm6358.txt
+@@ -2,8 +2,8 @@ LEDs connected to Broadcom BCM6358 controller
  
--- Documentation/devicetree/bindings/power/supply/cpcap-battery.txt
--- Documentation/devicetree/bindings/power/supply/cpcap-charger.txt
-+- Documentation/devicetree/bindings/power/supply/cpcap-battery.yaml
-+- Documentation/devicetree/bindings/power/supply/cpcap-charger.yaml
- - Documentation/devicetree/bindings/regulator/cpcap-regulator.txt
- - Documentation/devicetree/bindings/phy/phy-cpcap-usb.txt
- - Documentation/devicetree/bindings/input/cpcap-pwrbutton.txt
+ This controller is present on BCM6358 and BCM6368.
+ In these SoCs there are Serial LEDs (LEDs connected to a 74x164 controller),
+-which can either be controlled by software (exporting the 74x164 as spi-gpio.
+-See Documentation/devicetree/bindings/gpio/gpio-74x164.txt), or
++which can either be controlled by software (exporting the 74x164 as spi-gpio;
++see Documentation/devicetree/bindings/gpio/fairchild,74hc595.yaml), or
+ by hardware using this driver.
+ 
+ Required properties:
 -- 
 2.31.1
 
