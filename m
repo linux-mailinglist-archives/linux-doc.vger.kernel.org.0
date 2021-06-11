@@ -2,104 +2,81 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id EF8C93A3A0D
-	for <lists+linux-doc@lfdr.de>; Fri, 11 Jun 2021 05:01:28 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 140DB3A3A1B
+	for <lists+linux-doc@lfdr.de>; Fri, 11 Jun 2021 05:07:55 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S230500AbhFKDDY (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 10 Jun 2021 23:03:24 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:42572 "EHLO
+        id S230382AbhFKDJv (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 10 Jun 2021 23:09:51 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:44002 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S231180AbhFKDDY (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Thu, 10 Jun 2021 23:03:24 -0400
-Received: from mail-pl1-x62a.google.com (mail-pl1-x62a.google.com [IPv6:2607:f8b0:4864:20::62a])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 1AF16C0617AE
-        for <linux-doc@vger.kernel.org>; Thu, 10 Jun 2021 20:01:11 -0700 (PDT)
-Received: by mail-pl1-x62a.google.com with SMTP id 11so2083383plk.12
-        for <linux-doc@vger.kernel.org>; Thu, 10 Jun 2021 20:01:11 -0700 (PDT)
+        with ESMTP id S231309AbhFKDJu (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Thu, 10 Jun 2021 23:09:50 -0400
+Received: from mail-pg1-x536.google.com (mail-pg1-x536.google.com [IPv6:2607:f8b0:4864:20::536])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 67F63C0617AD;
+        Thu, 10 Jun 2021 20:07:43 -0700 (PDT)
+Received: by mail-pg1-x536.google.com with SMTP id n12so1290272pgs.13;
+        Thu, 10 Jun 2021 20:07:43 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=from:to:cc:subject:date:message-id:in-reply-to:references
-         :mime-version:content-transfer-encoding;
-        bh=x1eS59fE1UIuaVsG7ADEI9qj+tPY7EsVLy/zdUS33TA=;
-        b=LL8u6+aGTc8hE7aNAmp+N8uStij8ycLllztHv+iZNaF1Y6wJi0KvmekR9KK/pDA8Pl
-         uURS+pBjYEE+eg/dZdSNBOezlsoh780BgUu1QGldIQjBMgYNRnIm5KnbC6Lr5sZkAtvv
-         m0KCZ/08nk1B0bv6qKZoesz+YQn1H93MiQ3y8/jxcCghS4XA8mBJbSNqK+U8aNo/Vl+C
-         zGLwqzVFT0taHgcxaGO9UlQm+xL9Gzb6N0begyrIgDLqHcS4HrYnU15eogjPczsTuLsu
-         lNAvmgV/Mxw0RXJng5jjL3O3PkPHLvqVTKFFjC0DhJ1luildWrLrNWdc6dujqN0LJwLo
-         lLwg==
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=cww4YAD4W8e5YtVsLar88kpQ76E3chRpXf1PGNQpk6o=;
+        b=CKh9czTQUO98TR4VM0uad4kJNDB2x3J1rSXbP6I44BFYVmJ6GmxdfInEAcbD4BpPOX
+         582qg9ZY1jJ6wjehaPMUgl2e5RXTiBwg2Q9oREu6xzi16d9WJTGJZaeZCIa38rsWU4w4
+         utJEeCOEX2O0+Kd4iRyO7/vy9auXrQOxKSOnGF5+kyMiaGxe48DS+zAk0pmZbdXavPfN
+         Fi2k0UlNBT8HqJu8T0/JoVrY4HPiWp42Wz/qtUZ/N6bcauusj5gYb0YuhVxUhGf9VCDX
+         IrZljKbEq/gay+39QXhstMBVlPNIVpKBpZGgTYin/BMHz2m3JPd3iagprl1p831bC3yc
+         U8wA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-         :references:mime-version:content-transfer-encoding;
-        bh=x1eS59fE1UIuaVsG7ADEI9qj+tPY7EsVLy/zdUS33TA=;
-        b=Ty80Hbd7fLbksFiuRllJH189Y7PXTC04ENXh4uWu7tlPE2RCV1fU2zG5SiAFDfI89D
-         Ln2/yGoNoU8Q1iarK4nRuTpwJiPckJINadw8oEow0jAS0SX+a+4tIAuLFr/qRCXDHuHf
-         EfPO/riWoLXxKwdz6oq5sZLKzGccX0hMf6PXkPgtVEe0g2qbtI/VN3O3Ry34o6jzirNq
-         T9j5jmDGrp3bjM3zXNxk6ziryOiZHqngOFIYPRVgoY0DaMswFUQas2EHgDNMwYDUesK/
-         F4n7D/Z64FCj6dtqnEOcI/ljvOa58mP99+3YG0PuS567UMjBDJYf97eZH3QdCrGJ428f
-         13vQ==
-X-Gm-Message-State: AOAM532lA+qH3e9ISf8AauGuNpfFDbvCtvSZrAGRnDrJ4r5PrUGJ7vM/
-        ttU8VoEWWYCaLzkqIsLw0d8txiOYpKImEg==
-X-Google-Smtp-Source: ABdhPJzfWbQj3s7TdTq3WBf7dxl2XCIjFp6FBPBcU233IFD6KdtlFNt5qM3vWO7blMx6a+9pXzE3lw==
-X-Received: by 2002:a17:90a:8581:: with SMTP id m1mr2081341pjn.47.1623380470324;
-        Thu, 10 Jun 2021 20:01:10 -0700 (PDT)
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=cww4YAD4W8e5YtVsLar88kpQ76E3chRpXf1PGNQpk6o=;
+        b=LOQSJkuVU0FPzuRMVG/MFVGIVyhpcSxtmjrQxH14ZvR2rSdQ17Qlmj2u1CtXlQOLUu
+         5CHYd12Ob6Ct5BtbU0+BFdUXd/9kb0DlB+86a0wIJLGRMmCdk7Qwz8605CqsXzFBLehF
+         8Op/wPv5fmoOnaeVCbprVqw9Vdyn8gHMoqD0jY5jVrAW0wUmUCAn/HHB1psLWq+N1399
+         eTAE5jZyPSQAa8w12XLpidqs8mkIm8x7zp6xT3/ikK1BpPPUXc9ryW5wrVeu7xJv6ssL
+         f/fRqCmAq3cq31LEtc5uKAbjTMMgxhVa2WCUNp+nzNZQQhEprs4AfKoolyQcPBje5DFp
+         SyYA==
+X-Gm-Message-State: AOAM533Gd39nURlP8NdNZh0AOwj937GsNQ7CbKIUoxrwyhQ6tXJLDghZ
+        JjXruWxwGQ3xPIi0T+7Yyl/S6Mudqj+LDw==
+X-Google-Smtp-Source: ABdhPJy9/Pdgs6aaraNzkW4nMF2MydCn+C/5NccebOlL6iiLq7UONo5Baog4APKzANDauh7vAcjfkw==
+X-Received: by 2002:a63:f13:: with SMTP id e19mr1444328pgl.112.1623380861398;
+        Thu, 10 Jun 2021 20:07:41 -0700 (PDT)
 Received: from kir-rhat.redhat.com (c-76-104-243-248.hsd1.wa.comcast.net. [76.104.243.248])
-        by smtp.gmail.com with ESMTPSA id ev11sm8856748pjb.36.2021.06.10.20.01.09
+        by smtp.gmail.com with ESMTPSA id q2sm3774319pje.50.2021.06.10.20.07.40
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 10 Jun 2021 20:01:09 -0700 (PDT)
+        Thu, 10 Jun 2021 20:07:40 -0700 (PDT)
 From:   Kir Kolyshkin <kolyshkin@gmail.com>
 To:     linux-doc@vger.kernel.org
-Cc:     Jonathan Corbet <corbet@lwn.net>,
-        Kir Kolyshkin <kolyshkin@gmail.com>,
-        Igor Matheus Andrade Torrente <igormtorrente@gmail.com>
-Subject: [PATCH 3/3] docs: fix a cross-ref
-Date:   Thu, 10 Jun 2021 20:00:44 -0700
-Message-Id: <20210611030044.1982911-4-kolyshkin@gmail.com>
+Cc:     Jonathan Corbet <corbet@lwn.net>, tj@kernel.org, axboe@kernel.dk,
+        paolo.valente@linaro.org, cgroups@vger.kernel.org,
+        Kir Kolyshkin <kolyshkin@gmail.com>
+Subject: [PATCH 0/3] add/update/fix BFQ docs
+Date:   Thu, 10 Jun 2021 20:07:34 -0700
+Message-Id: <20210611030737.1984343-1-kolyshkin@gmail.com>
 X-Mailer: git-send-email 2.31.1
-In-Reply-To: <20210611030044.1982911-1-kolyshkin@gmail.com>
-References: <20210611030044.1982911-1-kolyshkin@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Commit acda97acb2e98c9 changes dax.txt to dax.rst.
-Fix the references accordingly.
+Improve BFQ docs: fix formatting, adding a missing piece.
 
-Cc: Igor Matheus Andrade Torrente <igormtorrente@gmail.com>
-Signed-off-by: Kir Kolyshkin <kolyshkin@gmail.com>
----
- Documentation/admin-guide/ext4.rst | 2 +-
- Documentation/filesystems/ext2.rst | 2 +-
- 2 files changed, 2 insertions(+), 2 deletions(-)
+Fix cgroup v1 blkio docs which are not updated for CFQ -> BFQ.
 
-diff --git a/Documentation/admin-guide/ext4.rst b/Documentation/admin-guide/ext4.rst
-index d2795ca6821e..4c559e08d11e 100644
---- a/Documentation/admin-guide/ext4.rst
-+++ b/Documentation/admin-guide/ext4.rst
-@@ -392,7 +392,7 @@ When mounting an ext4 filesystem, the following option are accepted:
- 
-   dax
-         Use direct access (no page cache).  See
--        Documentation/filesystems/dax.txt.  Note that this option is
-+        Documentation/filesystems/dax.rst.  Note that this option is
-         incompatible with data=journal.
- 
-   inlinecrypt
-diff --git a/Documentation/filesystems/ext2.rst b/Documentation/filesystems/ext2.rst
-index c2fce22cfd03..154101cf0e4f 100644
---- a/Documentation/filesystems/ext2.rst
-+++ b/Documentation/filesystems/ext2.rst
-@@ -25,7 +25,7 @@ check=none, nocheck	(*)	Don't do extra checking of bitmaps on mount
- 				(check=normal and check=strict options removed)
- 
- dax				Use direct access (no page cache).  See
--				Documentation/filesystems/dax.txt.
-+				Documentation/filesystems/dax.rst.
- 
- debug				Extra debugging information is sent to the
- 				kernel syslog.  Useful for developers.
+Patches are on top of the latest docs-next (commit acda97acb2e98c97895).
+
+Kir Kolyshkin (3):
+  docs: block/bfq: describe per-device weight
+  docs/cgroup-v1/blkio: stop abusing itemized list
+  docs/cgroup-v1/blkio: update for 5.x kernels
+
+ .../cgroup-v1/blkio-controller.rst            | 155 +++++++++---------
+ Documentation/block/bfq-iosched.rst           |  38 +++--
+ 2 files changed, 107 insertions(+), 86 deletions(-)
+
 -- 
 2.31.1
 
