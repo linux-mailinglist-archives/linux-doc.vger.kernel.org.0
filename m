@@ -2,79 +2,99 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 89C363A3A0C
-	for <lists+linux-doc@lfdr.de>; Fri, 11 Jun 2021 05:01:23 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 269353A3A12
+	for <lists+linux-doc@lfdr.de>; Fri, 11 Jun 2021 05:02:23 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S231301AbhFKDDT (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 10 Jun 2021 23:03:19 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:42562 "EHLO
-        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S231180AbhFKDDS (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Thu, 10 Jun 2021 23:03:18 -0400
-Received: from mail-pj1-x102f.google.com (mail-pj1-x102f.google.com [IPv6:2607:f8b0:4864:20::102f])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 750C7C061574
-        for <linux-doc@vger.kernel.org>; Thu, 10 Jun 2021 20:01:08 -0700 (PDT)
-Received: by mail-pj1-x102f.google.com with SMTP id md2-20020a17090b23c2b029016de4440381so5132471pjb.1
-        for <linux-doc@vger.kernel.org>; Thu, 10 Jun 2021 20:01:08 -0700 (PDT)
+        id S230407AbhFKDET (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 10 Jun 2021 23:04:19 -0400
+Received: from mail-pj1-f46.google.com ([209.85.216.46]:52083 "EHLO
+        mail-pj1-f46.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S230205AbhFKDER (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Thu, 10 Jun 2021 23:04:17 -0400
+Received: by mail-pj1-f46.google.com with SMTP id k5so4867310pjj.1
+        for <linux-doc@vger.kernel.org>; Thu, 10 Jun 2021 20:02:08 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=BZ91VNGOSJqMZPNEl48tOROCWwmbbHmZsVMWctYLe00=;
-        b=Fg0v/qPsij/hgSydGRl8ubx38mAvFhIwUx/yt5IRCphzDfgy7AVPETw1k0yoRA9RxE
-         m6LqBOJB/JVoZ6jy5XAXfWwyBB/Ijvsd2MEIVePm7hDc7YDP/OSiPTHXYdKqJ35K8ad8
-         hcDzuOVTwWEtwXhPN78XiRZnHrNrnzPFefBlah2D2HgukatTR2oJN5cUTO2FcTwfFPxI
-         AFerUli8aEY7Gsj7ECfxWSxNP4K72wSsozAFpYJylKFjaW99B5srqslRmc+ckVbheQB7
-         31fCnfUhn9INbWTgfHmNVz/I9XYajcnQrOdJlfWLIOWT1y8n0fnXsiuDs6SB0FHSF37E
-         eYAA==
+        h=from:to:cc:subject:date:message-id:in-reply-to:references
+         :mime-version:content-transfer-encoding;
+        bh=tE83joOLGGHG+6LYIjaFeBXyGSvmADIRz7I0QGk9qxY=;
+        b=Fx6vtB1EnbC275SmndXkPiI6PwIyM6SUKGThGZ+la4Lbcq7ZMUJWyA1BCMIT/Ckl5y
+         8Vdaqnmv0A9pneOD/qw38xz03J+oDGYYRkjOJfpwoDmGix05NAa199Gcrl/xKlW8+RuJ
+         2biejSjK5GL/mN3JJs7cKFxmf0gSPBFO3k/CiYIvXtcH66ponyvK+gOZEM6C4im7WRn1
+         VGQYE7jSfyN6qAKnep2xHxwXhalEYdPJ7tOoYWibMNlrQmoXJAGcsXNjQETMGWdSYJDt
+         IHLOKtuNu/UuY73FUpqeDYl7j23WjKcX0Grh3Oyhu22GUoOELsOdhk7phV+vi3Z2kJsE
+         98ng==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=BZ91VNGOSJqMZPNEl48tOROCWwmbbHmZsVMWctYLe00=;
-        b=Li9Vu2SgAIOuTI1n3RzruopQ2sT8nGofCjfKfjFssCRcS9dU5sUd6gMXLAdttwK/lU
-         rHtyZEM2/THPilOYXCQjI/1dThxWraxP8ierUVdgaRiAqB6semBFCGI1VttB0p39RKkz
-         5DSBGkL6zq3Z7Otud0GhIjGT36nGF80c8fKcYS4F/2x6Svt7zWy7IF4TjwLTvWnkAzme
-         KYrCdMZTq3v7DEMueA/w3KKs/c42kEPSAcoOouNiJkzFZcOX20oECu5E/rkSCohtFp/c
-         pBGwuyZRPiPtUSuscdLO3irkpBq8WDXgP5/jz8FU3gC2xteWNirYmVo2zm9mo+GFyqFI
-         ePwg==
-X-Gm-Message-State: AOAM533Cf30YYDLvJCQGxH18y8s11pLrQmKua/xYNBcE0dSULVJKczsZ
-        CWfBEUOSyM4VH7xF6hF7id7Lw23rFmw=
-X-Google-Smtp-Source: ABdhPJyVQny9m3WQxUyJX+K4qzl8wd1jMcWocJ/xV6PsZ3hcAv9bRaKDZun2RRep24EAJGMIajZEsg==
-X-Received: by 2002:a17:902:ee82:b029:114:8409:1b78 with SMTP id a2-20020a170902ee82b029011484091b78mr1788523pld.59.1623380467555;
-        Thu, 10 Jun 2021 20:01:07 -0700 (PDT)
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+         :references:mime-version:content-transfer-encoding;
+        bh=tE83joOLGGHG+6LYIjaFeBXyGSvmADIRz7I0QGk9qxY=;
+        b=L0RfVtOkUn9DZhjKNDKnjcSBzi2CjE+ps6fekwJ0BU+wMGinkMbI76sOOGCDWehjfI
+         BNf6yHP1WWowoQSyhPXBzq3GPYcnCM4qeMdGeizBqE38R6EttXL9dh0mNevwQLXeOHSk
+         Sbvgi9LVQ4s9/1+i1ET1+4RVSUE5xWDLosAIIoLaatp8LPYGFo//W+cinLk2Vb9hPqpV
+         w80gi8PklAdIL3htMghWeO20IFFmQDdXewUDCs37NHHuEs2hMG9Z9rWp4nJg6mAKqgll
+         /CWJKOiQyEwv7QQecCVzfCLqSXZdEw3agk3BGGTIWmCQyxbwwq+ZrtnFiUMq7/O9arfp
+         F92Q==
+X-Gm-Message-State: AOAM532f7DHYymJulYAdEJCG/GDy/Tdwge2x87PY1CH5UCDXtdBD4VN2
+        hK7r9DMTjR7q9Q15fqWQa2EFUBZBIBI=
+X-Google-Smtp-Source: ABdhPJyBw647fEmvrrvXKp07HroSBH2Eh6eWtqRg1iF0vdg9xKEz5UW6lJrNcAppbwJTWD4XycJZlQ==
+X-Received: by 2002:a17:903:228e:b029:101:af04:4e24 with SMTP id b14-20020a170903228eb0290101af044e24mr1844825plh.3.1623380468533;
+        Thu, 10 Jun 2021 20:01:08 -0700 (PDT)
 Received: from kir-rhat.redhat.com (c-76-104-243-248.hsd1.wa.comcast.net. [76.104.243.248])
-        by smtp.gmail.com with ESMTPSA id ev11sm8856748pjb.36.2021.06.10.20.01.06
+        by smtp.gmail.com with ESMTPSA id ev11sm8856748pjb.36.2021.06.10.20.01.07
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 10 Jun 2021 20:01:07 -0700 (PDT)
+        Thu, 10 Jun 2021 20:01:08 -0700 (PDT)
 From:   Kir Kolyshkin <kolyshkin@gmail.com>
 To:     linux-doc@vger.kernel.org
 Cc:     Jonathan Corbet <corbet@lwn.net>,
-        Kir Kolyshkin <kolyshkin@gmail.com>
-Subject: [PATCH 0/3] docs: fix cross references
-Date:   Thu, 10 Jun 2021 20:00:41 -0700
-Message-Id: <20210611030044.1982911-1-kolyshkin@gmail.com>
+        Kir Kolyshkin <kolyshkin@gmail.com>,
+        Sebastian Reichel <sebastian.reichel@collabora.com>
+Subject: [PATCH 1/3] docs: fix bad cross-links in motorola-cpcap
+Date:   Thu, 10 Jun 2021 20:00:42 -0700
+Message-Id: <20210611030044.1982911-2-kolyshkin@gmail.com>
 X-Mailer: git-send-email 2.31.1
+In-Reply-To: <20210611030044.1982911-1-kolyshkin@gmail.com>
+References: <20210611030044.1982911-1-kolyshkin@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-A few trivial issues found while building docs.
+Commits 3c5be0454 and ce49e4282 renamed the files being referenced,
+but forgot to modify the document that references them.
 
-Kir Kolyshkin (3):
-  docs: fix bad cross-links in motorola-cpcap
-  docs/devicetree: fix a cross-ref
-  docs: fix a cross-ref
+This fixes the following warnings:
 
- Documentation/admin-guide/ext4.rst                       | 2 +-
- Documentation/devicetree/bindings/leds/leds-bcm6328.txt  | 3 ++-
- Documentation/devicetree/bindings/leds/leds-bcm6358.txt  | 4 ++--
+> Warning: Documentation/devicetree/bindings/mfd/motorola-cpcap.txt
+> references a file that doesn't exist:
+> Documentation/devicetree/bindings/power/supply/cpcap-battery.txt
+
+> Warning: Documentation/devicetree/bindings/mfd/motorola-cpcap.txt
+> references a file that doesn't exist:
+> Documentation/devicetree/bindings/power/supply/cpcap-charger.txt
+
+Cc: Sebastian Reichel <sebastian.reichel@collabora.com>
+Signed-off-by: Kir Kolyshkin <kolyshkin@gmail.com>
+---
  Documentation/devicetree/bindings/mfd/motorola-cpcap.txt | 4 ++--
- Documentation/filesystems/ext2.rst                       | 2 +-
- 5 files changed, 8 insertions(+), 7 deletions(-)
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
+diff --git a/Documentation/devicetree/bindings/mfd/motorola-cpcap.txt b/Documentation/devicetree/bindings/mfd/motorola-cpcap.txt
+index b52e7a33f0f9..190230216de8 100644
+--- a/Documentation/devicetree/bindings/mfd/motorola-cpcap.txt
++++ b/Documentation/devicetree/bindings/mfd/motorola-cpcap.txt
+@@ -16,8 +16,8 @@ Optional subnodes:
+ The sub-functions of CPCAP get their own node with their own compatible values,
+ which are described in the following files:
+ 
+-- Documentation/devicetree/bindings/power/supply/cpcap-battery.txt
+-- Documentation/devicetree/bindings/power/supply/cpcap-charger.txt
++- Documentation/devicetree/bindings/power/supply/cpcap-battery.yaml
++- Documentation/devicetree/bindings/power/supply/cpcap-charger.yaml
+ - Documentation/devicetree/bindings/regulator/cpcap-regulator.txt
+ - Documentation/devicetree/bindings/phy/phy-cpcap-usb.txt
+ - Documentation/devicetree/bindings/input/cpcap-pwrbutton.txt
 -- 
 2.31.1
 
