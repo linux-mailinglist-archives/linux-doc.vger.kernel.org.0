@@ -2,48 +2,51 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id A90303A4E0E
-	for <lists+linux-doc@lfdr.de>; Sat, 12 Jun 2021 11:47:33 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 0DEBC3A4DF5
+	for <lists+linux-doc@lfdr.de>; Sat, 12 Jun 2021 11:46:23 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S230012AbhFLJtO (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Sat, 12 Jun 2021 05:49:14 -0400
-Received: from mail-pj1-f50.google.com ([209.85.216.50]:33468 "EHLO
-        mail-pj1-f50.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S231350AbhFLJtM (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Sat, 12 Jun 2021 05:49:12 -0400
-Received: by mail-pj1-f50.google.com with SMTP id k22-20020a17090aef16b0290163512accedso8424448pjz.0
-        for <linux-doc@vger.kernel.org>; Sat, 12 Jun 2021 02:47:12 -0700 (PDT)
+        id S231187AbhFLJsT (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Sat, 12 Jun 2021 05:48:19 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:51930 "EHLO
+        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S231179AbhFLJsS (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Sat, 12 Jun 2021 05:48:18 -0400
+Received: from mail-pf1-x435.google.com (mail-pf1-x435.google.com [IPv6:2607:f8b0:4864:20::435])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 8ABB1C061767
+        for <linux-doc@vger.kernel.org>; Sat, 12 Jun 2021 02:46:18 -0700 (PDT)
+Received: by mail-pf1-x435.google.com with SMTP id d16so6453345pfn.12
+        for <linux-doc@vger.kernel.org>; Sat, 12 Jun 2021 02:46:18 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=bytedance-com.20150623.gappssmtp.com; s=20150623;
         h=from:to:cc:subject:date:message-id:in-reply-to:references
          :mime-version:content-transfer-encoding;
-        bh=Un9OGrfbYYOOduOdmv+QQ9zUCVXg5KgaTJKOHZY1pLE=;
-        b=Ls4kGmR2Uqf3cWDx+KcF3sAqPEOin+nodqRpP0W0qywtkFaJ+/iCI7rCUBz1oVXoa+
-         k6Ur39cqmLQvNvotcH4+Q7CGbKeZ+fGooAf4P7JSC/NMksAlJ44wlK3kagAqMi95wSJk
-         Hu/ayp693r6Gp0ky7La01r22hRLIUGUPINVUFO6zz8loXVgKCTCZzZK0G9c3hpmP+czp
-         JVHxf5F0hFQAg6Vf/udr8/gXlekpbJ0igO54vgBB4fopx0PKuu1AhwXSxhsZsFQNxmbw
-         izDI/Y/lWcAtbhcU09w60XfKZcEw0Nmi+zPe2tNifSiFV2fsDioW5/QMCwdzAKdK/qt2
-         exaQ==
+        bh=KC0On2yvIRGYR5Tx6Aoa1thZ3mR+Ze9SCIXSxV9QNMo=;
+        b=BWT9fI1X89JDvUQS4XFMLpK1ki292I3lniywkAZFQ387QiFhmPa1rsKIzcyACeeuYn
+         LDCgxz9yhxYBTAg5P+XeDLuJ2xn3Sv17zYC6gcORNRyX0sqGpgcw7tdU33VQqWIcHBJL
+         IWnJLmA9+HiXJd2L6rMQ3QOocJMh2hqMrpcAie+09tUMz9yDxa08HfcBN3jyP3R7OQw2
+         /g9yIZ+pG2Pdc5vDYqdWQtioRIYGTZ/NHiWjEnJYMGnQeJiARvYB7xBynkuNY7agse0y
+         qmHbGwXgfo7KMImfKVa+7bB2HUF3M4kBxW5W9rl8oevftB/PSX2jKgRpf1fMzy1GxZkk
+         tLhA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
          :references:mime-version:content-transfer-encoding;
-        bh=Un9OGrfbYYOOduOdmv+QQ9zUCVXg5KgaTJKOHZY1pLE=;
-        b=DBmtLrsJUPCPXpKU+ArZCmr5SI65sVsHHNZTzAgrv1HENgGDHwktZKdtJBJ86fJzVw
-         KX5N9Rrx846ncqgbH2W6aBPD9uUxjRontqiJH34xEtCTP9B7z+6iaj3SHFVQJ8Sh9Ho/
-         kBn4uF0a+29EQGwYZM07szbKIpMk8vt1OGusCfkHWxfgCM4efH1dNNwsp0DuYBsNGoBc
-         7GEK90+/spEZVsPKHUY/Jdde4mW9pFrxDRw7e/kP+AvvnHRI84hDC/5oIYqZ0kTTJMpZ
-         rxK/5QKXe13JEhicKQJ00GpncJXT2D5zybI1/qc1OrlmigS5nRiPJ7L4xkonLiINmC0d
-         nf/A==
-X-Gm-Message-State: AOAM5306Cq9519UonZoaGOREIWTSiBkfkUzZtVUE4pVRlQNGNrzS/32l
-        Z+mdLAXUv6b+o3uqHVFTeit/Ow==
-X-Google-Smtp-Source: ABdhPJz5QQVgV01ntip77zgYCTfnUIdmUJT8IdqfSP3wRqf4wN12CDMhe/0lFlsj4YKjHMtwfOHrfQ==
-X-Received: by 2002:a17:902:7085:b029:114:eb3f:fe29 with SMTP id z5-20020a1709027085b0290114eb3ffe29mr7937121plk.40.1623491172734;
-        Sat, 12 Jun 2021 02:46:12 -0700 (PDT)
+        bh=KC0On2yvIRGYR5Tx6Aoa1thZ3mR+Ze9SCIXSxV9QNMo=;
+        b=ezXnWipcnRZyiYLgfniq1K22i6GIQ42+Xl8+nw/MsxzzESHikiMF2iioTNNcVUeT/S
+         XRMRiDKSsedo3MdETrYrZDLKAryiNnzh1VYvDbmdeEM7Avmhl6R/7vkVl5sN5Y2BHKa+
+         enxxL7WqlleDpuoT+mud5JdmDuHtAnsk6h01/wccrbILy3sNJqlV7+iH+vYmNGLUY0+o
+         qJpSA99SJerYus/u5iB6Z4EWgEZE4CYtIqlzmep9X6Yxz7kyD++zOwQJUmF+9t/dwzII
+         nfGd92hYNTRGn8X3+4T61Hndl8Tgd9mdd4Q12Lrussn5f+w7vObs5FA1irEjOXVwnNYe
+         2VCw==
+X-Gm-Message-State: AOAM530LDrHikROHD9waXlX836iFBnRUbic8zAjidOatNFpdd6k0Xt8v
+        +ofZRPYQM00/Wkz2me0HjVIoGQ==
+X-Google-Smtp-Source: ABdhPJzlV+X34s+XadDAq8IRfThE+1QP5f7WXqSFWivVZkY7TsjDfOf4yVK+yTR8eXMcg7x/42wckA==
+X-Received: by 2002:a62:7d4e:0:b029:2e9:ac1c:2769 with SMTP id y75-20020a627d4e0000b02902e9ac1c2769mr12173274pfc.57.1623491178468;
+        Sat, 12 Jun 2021 02:46:18 -0700 (PDT)
 Received: from localhost.tiktokd.org ([139.177.225.246])
-        by smtp.gmail.com with ESMTPSA id t39sm6929557pfg.147.2021.06.12.02.46.07
+        by smtp.gmail.com with ESMTPSA id t39sm6929557pfg.147.2021.06.12.02.46.13
         (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
-        Sat, 12 Jun 2021 02:46:12 -0700 (PDT)
+        Sat, 12 Jun 2021 02:46:18 -0700 (PDT)
 From:   Muchun Song <songmuchun@bytedance.com>
 To:     mike.kravetz@oracle.com, akpm@linux-foundation.org,
         osalvador@suse.de, mhocko@suse.com, song.bao.hua@hisilicon.com,
@@ -52,9 +55,9 @@ To:     mike.kravetz@oracle.com, akpm@linux-foundation.org,
 Cc:     duanxiongchun@bytedance.com, fam.zheng@bytedance.com,
         linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
         linux-mm@kvack.org, Muchun Song <songmuchun@bytedance.com>
-Subject: [PATCH v2 1/3] mm: sparsemem: split the huge PMD mapping of vmemmap pages
-Date:   Sat, 12 Jun 2021 17:45:53 +0800
-Message-Id: <20210612094555.71344-2-songmuchun@bytedance.com>
+Subject: [PATCH v2 2/3] mm: sparsemem: use huge PMD mapping for vmemmap pages
+Date:   Sat, 12 Jun 2021 17:45:54 +0800
+Message-Id: <20210612094555.71344-3-songmuchun@bytedance.com>
 X-Mailer: git-send-email 2.21.0 (Apple Git-122)
 In-Reply-To: <20210612094555.71344-1-songmuchun@bytedance.com>
 References: <20210612094555.71344-1-songmuchun@bytedance.com>
@@ -64,339 +67,134 @@ Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Currently, we disable huge PMD mapping of vmemmap pages when that feature
-of "Free some vmemmap pages of HugeTLB pages" is enabled. If the vmemmap
-is huge PMD mapped when we walk the vmemmap page tables, we split the
-huge PMD firstly and then we move to PTE mappings. When HugeTLB pages are
-freed from the pool we do not attempt coalasce and move back to a PMD
-mapping because it is much more complex.
+The preparation of splitting huge PMD mapping of vmemmap pages is ready,
+so switch the mapping from PTE to PMD.
 
 Signed-off-by: Muchun Song <songmuchun@bytedance.com>
+Reviewed-by: Mike Kravetz <mike.kravetz@oracle.com>
 ---
- include/linux/mm.h   |   4 +-
- mm/hugetlb_vmemmap.c |   5 +-
- mm/sparse-vmemmap.c  | 157 ++++++++++++++++++++++++++++++++++++++-------------
- 3 files changed, 123 insertions(+), 43 deletions(-)
+ Documentation/admin-guide/kernel-parameters.txt |  7 -------
+ arch/x86/mm/init_64.c                           |  8 ++------
+ include/linux/hugetlb.h                         | 25 ++++++-------------------
+ mm/memory_hotplug.c                             |  2 +-
+ 4 files changed, 9 insertions(+), 33 deletions(-)
 
-diff --git a/include/linux/mm.h b/include/linux/mm.h
-index cadc8cc2c715..8284e8ed30c9 100644
---- a/include/linux/mm.h
-+++ b/include/linux/mm.h
-@@ -3055,8 +3055,8 @@ static inline void print_vma_addr(char *prefix, unsigned long rip)
+diff --git a/Documentation/admin-guide/kernel-parameters.txt b/Documentation/admin-guide/kernel-parameters.txt
+index db1ef6739613..a01aadafee38 100644
+--- a/Documentation/admin-guide/kernel-parameters.txt
++++ b/Documentation/admin-guide/kernel-parameters.txt
+@@ -1599,13 +1599,6 @@
+ 			enabled.
+ 			Allows heavy hugetlb users to free up some more
+ 			memory (6 * PAGE_SIZE for each 2MB hugetlb page).
+-			This feauture is not free though. Large page
+-			tables are not used to back vmemmap pages which
+-			can lead to a performance degradation for some
+-			workloads. Also there will be memory allocation
+-			required when hugetlb pages are freed from the
+-			pool which can lead to corner cases under heavy
+-			memory pressure.
+ 			Format: { on | off (default) }
+ 
+ 			on:  enable the feature
+diff --git a/arch/x86/mm/init_64.c b/arch/x86/mm/init_64.c
+index 9d9d18d0c2a1..65ea58527176 100644
+--- a/arch/x86/mm/init_64.c
++++ b/arch/x86/mm/init_64.c
+@@ -34,7 +34,6 @@
+ #include <linux/gfp.h>
+ #include <linux/kcore.h>
+ #include <linux/bootmem_info.h>
+-#include <linux/hugetlb.h>
+ 
+ #include <asm/processor.h>
+ #include <asm/bios_ebda.h>
+@@ -1610,8 +1609,7 @@ int __meminit vmemmap_populate(unsigned long start, unsigned long end, int node,
+ 	VM_BUG_ON(!IS_ALIGNED(start, PAGE_SIZE));
+ 	VM_BUG_ON(!IS_ALIGNED(end, PAGE_SIZE));
+ 
+-	if ((is_hugetlb_free_vmemmap_enabled()  && !altmap) ||
+-	    end - start < PAGES_PER_SECTION * sizeof(struct page))
++	if (end - start < PAGES_PER_SECTION * sizeof(struct page))
+ 		err = vmemmap_populate_basepages(start, end, node, NULL);
+ 	else if (boot_cpu_has(X86_FEATURE_PSE))
+ 		err = vmemmap_populate_hugepages(start, end, node, altmap);
+@@ -1639,8 +1637,6 @@ void register_page_bootmem_memmap(unsigned long section_nr,
+ 	pmd_t *pmd;
+ 	unsigned int nr_pmd_pages;
+ 	struct page *page;
+-	bool base_mapping = !boot_cpu_has(X86_FEATURE_PSE) ||
+-			    is_hugetlb_free_vmemmap_enabled();
+ 
+ 	for (; addr < end; addr = next) {
+ 		pte_t *pte = NULL;
+@@ -1666,7 +1662,7 @@ void register_page_bootmem_memmap(unsigned long section_nr,
+ 		}
+ 		get_page_bootmem(section_nr, pud_page(*pud), MIX_SECTION_INFO);
+ 
+-		if (base_mapping) {
++		if (!boot_cpu_has(X86_FEATURE_PSE)) {
+ 			next = (addr + PAGE_SIZE) & PAGE_MASK;
+ 			pmd = pmd_offset(pud, addr);
+ 			if (pmd_none(*pmd))
+diff --git a/include/linux/hugetlb.h b/include/linux/hugetlb.h
+index 03ca83db0a3e..d43565dd5fb9 100644
+--- a/include/linux/hugetlb.h
++++ b/include/linux/hugetlb.h
+@@ -904,20 +904,6 @@ static inline void huge_ptep_modify_prot_commit(struct vm_area_struct *vma,
  }
  #endif
  
--void vmemmap_remap_free(unsigned long start, unsigned long end,
--			unsigned long reuse);
-+int vmemmap_remap_free(unsigned long start, unsigned long end,
-+		       unsigned long reuse);
- int vmemmap_remap_alloc(unsigned long start, unsigned long end,
- 			unsigned long reuse, gfp_t gfp_mask);
- 
-diff --git a/mm/hugetlb_vmemmap.c b/mm/hugetlb_vmemmap.c
-index f9f9bb212319..06802056f296 100644
---- a/mm/hugetlb_vmemmap.c
-+++ b/mm/hugetlb_vmemmap.c
-@@ -258,9 +258,8 @@ void free_huge_page_vmemmap(struct hstate *h, struct page *head)
- 	 * to the page which @vmemmap_reuse is mapped to, then free the pages
- 	 * which the range [@vmemmap_addr, @vmemmap_end] is mapped to.
- 	 */
--	vmemmap_remap_free(vmemmap_addr, vmemmap_end, vmemmap_reuse);
+-#ifdef CONFIG_HUGETLB_PAGE_FREE_VMEMMAP
+-extern bool hugetlb_free_vmemmap_enabled;
 -
--	SetHPageVmemmapOptimized(head);
-+	if (!vmemmap_remap_free(vmemmap_addr, vmemmap_end, vmemmap_reuse))
-+		SetHPageVmemmapOptimized(head);
- }
- 
- void __init hugetlb_vmemmap_init(struct hstate *h)
-diff --git a/mm/sparse-vmemmap.c b/mm/sparse-vmemmap.c
-index 693de0aec7a8..7f73c37f742d 100644
---- a/mm/sparse-vmemmap.c
-+++ b/mm/sparse-vmemmap.c
-@@ -38,6 +38,7 @@
-  * vmemmap_remap_walk - walk vmemmap page table
-  *
-  * @remap_pte:		called for each lowest-level entry (PTE).
-+ * @walked_pte:		the number of walked pte.
-  * @reuse_page:		the page which is reused for the tail vmemmap pages.
-  * @reuse_addr:		the virtual address of the @reuse_page page.
-  * @vmemmap_pages:	the list head of the vmemmap pages that can be freed
-@@ -46,11 +47,44 @@
- struct vmemmap_remap_walk {
- 	void (*remap_pte)(pte_t *pte, unsigned long addr,
- 			  struct vmemmap_remap_walk *walk);
-+	unsigned long walked_pte;
- 	struct page *reuse_page;
- 	unsigned long reuse_addr;
- 	struct list_head *vmemmap_pages;
- };
- 
-+static int split_vmemmap_huge_pmd(pmd_t *pmd, unsigned long start,
-+				  struct vmemmap_remap_walk *walk)
-+{
-+	pmd_t __pmd;
-+	int i;
-+	unsigned long addr = start;
-+	struct page *page = pmd_page(*pmd);
-+	pte_t *pgtable = pte_alloc_one_kernel(&init_mm);
-+
-+	if (!pgtable)
-+		return -ENOMEM;
-+
-+	pmd_populate_kernel(&init_mm, &__pmd, pgtable);
-+
-+	for (i = 0; i < PMD_SIZE / PAGE_SIZE; i++, addr += PAGE_SIZE) {
-+		pte_t entry, *pte;
-+		pgprot_t pgprot = PAGE_KERNEL;
-+
-+		entry = mk_pte(page + i, pgprot);
-+		pte = pte_offset_kernel(&__pmd, addr);
-+		set_pte_at(&init_mm, addr, pte, entry);
-+	}
-+
-+	/* Make pte visible before pmd. See comment in __pte_alloc(). */
-+	smp_wmb();
-+	pmd_populate_kernel(&init_mm, pmd, pgtable);
-+
-+	flush_tlb_kernel_range(start, start + PMD_SIZE);
-+
-+	return 0;
-+}
-+
- static void vmemmap_pte_range(pmd_t *pmd, unsigned long addr,
- 			      unsigned long end,
- 			      struct vmemmap_remap_walk *walk)
-@@ -68,59 +102,81 @@ static void vmemmap_pte_range(pmd_t *pmd, unsigned long addr,
- 		 * walking, skip the reuse address range.
- 		 */
- 		addr += PAGE_SIZE;
-+		walk->walked_pte++;
- 		pte++;
- 	}
- 
--	for (; addr != end; addr += PAGE_SIZE, pte++)
-+	for (; addr != end; addr += PAGE_SIZE, pte++) {
- 		walk->remap_pte(pte, addr, walk);
-+		walk->walked_pte++;
-+	}
- }
- 
--static void vmemmap_pmd_range(pud_t *pud, unsigned long addr,
--			      unsigned long end,
--			      struct vmemmap_remap_walk *walk)
-+static int vmemmap_pmd_range(pud_t *pud, unsigned long addr,
-+			     unsigned long end,
-+			     struct vmemmap_remap_walk *walk)
- {
- 	pmd_t *pmd;
- 	unsigned long next;
- 
- 	pmd = pmd_offset(pud, addr);
- 	do {
--		BUG_ON(pmd_leaf(*pmd));
-+		if (pmd_leaf(*pmd)) {
-+			int ret;
- 
-+			ret = split_vmemmap_huge_pmd(pmd, addr & PMD_MASK, walk);
-+			if (ret)
-+				return ret;
-+		}
- 		next = pmd_addr_end(addr, end);
- 		vmemmap_pte_range(pmd, addr, next, walk);
- 	} while (pmd++, addr = next, addr != end);
-+
-+	return 0;
- }
- 
--static void vmemmap_pud_range(p4d_t *p4d, unsigned long addr,
--			      unsigned long end,
--			      struct vmemmap_remap_walk *walk)
-+static int vmemmap_pud_range(p4d_t *p4d, unsigned long addr,
-+			     unsigned long end,
-+			     struct vmemmap_remap_walk *walk)
- {
- 	pud_t *pud;
- 	unsigned long next;
- 
- 	pud = pud_offset(p4d, addr);
- 	do {
-+		int ret;
-+
- 		next = pud_addr_end(addr, end);
--		vmemmap_pmd_range(pud, addr, next, walk);
-+		ret = vmemmap_pmd_range(pud, addr, next, walk);
-+		if (ret)
-+			return ret;
- 	} while (pud++, addr = next, addr != end);
-+
-+	return 0;
- }
- 
--static void vmemmap_p4d_range(pgd_t *pgd, unsigned long addr,
--			      unsigned long end,
--			      struct vmemmap_remap_walk *walk)
-+static int vmemmap_p4d_range(pgd_t *pgd, unsigned long addr,
-+			     unsigned long end,
-+			     struct vmemmap_remap_walk *walk)
- {
- 	p4d_t *p4d;
- 	unsigned long next;
- 
- 	p4d = p4d_offset(pgd, addr);
- 	do {
-+		int ret;
-+
- 		next = p4d_addr_end(addr, end);
--		vmemmap_pud_range(p4d, addr, next, walk);
-+		ret = vmemmap_pud_range(p4d, addr, next, walk);
-+		if (ret)
-+			return ret;
- 	} while (p4d++, addr = next, addr != end);
-+
-+	return 0;
- }
- 
--static void vmemmap_remap_range(unsigned long start, unsigned long end,
--				struct vmemmap_remap_walk *walk)
-+static int vmemmap_remap_range(unsigned long start, unsigned long end,
-+			       struct vmemmap_remap_walk *walk)
- {
- 	unsigned long addr = start;
- 	unsigned long next;
-@@ -131,8 +187,12 @@ static void vmemmap_remap_range(unsigned long start, unsigned long end,
- 
- 	pgd = pgd_offset_k(addr);
- 	do {
-+		int ret;
-+
- 		next = pgd_addr_end(addr, end);
--		vmemmap_p4d_range(pgd, addr, next, walk);
-+		ret = vmemmap_p4d_range(pgd, addr, next, walk);
-+		if (ret)
-+			return ret;
- 	} while (pgd++, addr = next, addr != end);
- 
- 	/*
-@@ -141,6 +201,8 @@ static void vmemmap_remap_range(unsigned long start, unsigned long end,
- 	 * belongs to the range.
- 	 */
- 	flush_tlb_kernel_range(start + PAGE_SIZE, end);
-+
-+	return 0;
- }
- 
- /*
-@@ -179,10 +241,27 @@ static void vmemmap_remap_pte(pte_t *pte, unsigned long addr,
- 	pte_t entry = mk_pte(walk->reuse_page, pgprot);
- 	struct page *page = pte_page(*pte);
- 
--	list_add(&page->lru, walk->vmemmap_pages);
-+	list_add_tail(&page->lru, walk->vmemmap_pages);
- 	set_pte_at(&init_mm, addr, pte, entry);
- }
- 
-+static void vmemmap_restore_pte(pte_t *pte, unsigned long addr,
-+				struct vmemmap_remap_walk *walk)
-+{
-+	pgprot_t pgprot = PAGE_KERNEL;
-+	struct page *page;
-+	void *to;
-+
-+	BUG_ON(pte_page(*pte) != walk->reuse_page);
-+
-+	page = list_first_entry(walk->vmemmap_pages, struct page, lru);
-+	list_del(&page->lru);
-+	to = page_to_virt(page);
-+	copy_page(to, (void *)walk->reuse_addr);
-+
-+	set_pte_at(&init_mm, addr, pte, mk_pte(page, pgprot));
-+}
-+
- /**
-  * vmemmap_remap_free - remap the vmemmap virtual address range [@start, @end)
-  *			to the page which @reuse is mapped to, then free vmemmap
-@@ -193,12 +272,12 @@ static void vmemmap_remap_pte(pte_t *pte, unsigned long addr,
-  *		remap.
-  * @reuse:	reuse address.
-  *
-- * Note: This function depends on vmemmap being base page mapped. Please make
-- * sure that we disable PMD mapping of vmemmap pages when calling this function.
-+ * Return: %0 on success, negative error code otherwise.
-  */
--void vmemmap_remap_free(unsigned long start, unsigned long end,
--			unsigned long reuse)
-+int vmemmap_remap_free(unsigned long start, unsigned long end,
-+		       unsigned long reuse)
- {
-+	int ret;
- 	LIST_HEAD(vmemmap_pages);
- 	struct vmemmap_remap_walk walk = {
- 		.remap_pte	= vmemmap_remap_pte,
-@@ -221,25 +300,25 @@ void vmemmap_remap_free(unsigned long start, unsigned long end,
- 	 */
- 	BUG_ON(start - reuse != PAGE_SIZE);
- 
--	vmemmap_remap_range(reuse, end, &walk);
--	free_vmemmap_page_list(&vmemmap_pages);
--}
-+	mmap_write_lock(&init_mm);
-+	ret = vmemmap_remap_range(reuse, end, &walk);
-+	mmap_write_downgrade(&init_mm);
- 
--static void vmemmap_restore_pte(pte_t *pte, unsigned long addr,
--				struct vmemmap_remap_walk *walk)
+-static inline bool is_hugetlb_free_vmemmap_enabled(void)
 -{
--	pgprot_t pgprot = PAGE_KERNEL;
--	struct page *page;
--	void *to;
-+	if (ret && walk.walked_pte) {
-+		end = reuse + walk.walked_pte * PAGE_SIZE;
-+		walk = (struct vmemmap_remap_walk) {
-+			.remap_pte	= vmemmap_restore_pte,
-+			.reuse_addr	= reuse,
-+			.vmemmap_pages	= &vmemmap_pages,
-+		};
- 
--	BUG_ON(pte_page(*pte) != walk->reuse_page);
-+		vmemmap_remap_range(reuse, end, &walk);
-+	}
-+	mmap_read_unlock(&init_mm);
- 
--	page = list_first_entry(walk->vmemmap_pages, struct page, lru);
--	list_del(&page->lru);
--	to = page_to_virt(page);
--	copy_page(to, (void *)walk->reuse_addr);
-+	free_vmemmap_page_list(&vmemmap_pages);
- 
--	set_pte_at(&init_mm, addr, pte, mk_pte(page, pgprot));
-+	return ret;
- }
- 
- static int alloc_vmemmap_page_list(unsigned long start, unsigned long end,
-@@ -273,6 +352,8 @@ static int alloc_vmemmap_page_list(unsigned long start, unsigned long end,
-  *		remap.
-  * @reuse:	reuse address.
-  * @gpf_mask:	GFP flag for allocating vmemmap pages.
-+ *
-+ * Return: %0 on success, negative error code otherwise.
-  */
- int vmemmap_remap_alloc(unsigned long start, unsigned long end,
- 			unsigned long reuse, gfp_t gfp_mask)
-@@ -287,12 +368,12 @@ int vmemmap_remap_alloc(unsigned long start, unsigned long end,
- 	/* See the comment in the vmemmap_remap_free(). */
- 	BUG_ON(start - reuse != PAGE_SIZE);
- 
--	might_sleep_if(gfpflags_allow_blocking(gfp_mask));
+-	return hugetlb_free_vmemmap_enabled;
+-}
+-#else
+-static inline bool is_hugetlb_free_vmemmap_enabled(void)
+-{
+-	return false;
+-}
+-#endif
 -
- 	if (alloc_vmemmap_page_list(start, end, gfp_mask, &vmemmap_pages))
- 		return -ENOMEM;
+ #else	/* CONFIG_HUGETLB_PAGE */
+ struct hstate {};
  
-+	mmap_read_lock(&init_mm);
- 	vmemmap_remap_range(reuse, end, &walk);
-+	mmap_read_unlock(&init_mm);
- 
- 	return 0;
+@@ -1077,13 +1063,14 @@ static inline void set_huge_swap_pte_at(struct mm_struct *mm, unsigned long addr
+ 					pte_t *ptep, pte_t pte, unsigned long sz)
+ {
  }
+-
+-static inline bool is_hugetlb_free_vmemmap_enabled(void)
+-{
+-	return false;
+-}
+ #endif	/* CONFIG_HUGETLB_PAGE */
+ 
++#ifdef CONFIG_HUGETLB_PAGE_FREE_VMEMMAP
++extern bool hugetlb_free_vmemmap_enabled;
++#else
++#define hugetlb_free_vmemmap_enabled	false
++#endif
++
+ static inline spinlock_t *huge_pte_lock(struct hstate *h,
+ 					struct mm_struct *mm, pte_t *pte)
+ {
+diff --git a/mm/memory_hotplug.c b/mm/memory_hotplug.c
+index d96a3c7551c8..9d8a551c08d5 100644
+--- a/mm/memory_hotplug.c
++++ b/mm/memory_hotplug.c
+@@ -1056,7 +1056,7 @@ bool mhp_supports_memmap_on_memory(unsigned long size)
+ 	 *       populate a single PMD.
+ 	 */
+ 	return memmap_on_memory &&
+-	       !is_hugetlb_free_vmemmap_enabled() &&
++	       !hugetlb_free_vmemmap_enabled &&
+ 	       IS_ENABLED(CONFIG_MHP_MEMMAP_ON_MEMORY) &&
+ 	       size == memory_block_size_bytes() &&
+ 	       IS_ALIGNED(vmemmap_size, PMD_SIZE) &&
 -- 
 2.11.0
 
