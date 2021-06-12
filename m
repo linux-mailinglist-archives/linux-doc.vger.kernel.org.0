@@ -2,218 +2,96 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id C06303A4DEB
-	for <lists+linux-doc@lfdr.de>; Sat, 12 Jun 2021 11:41:49 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id F20EC3A4E0F
+	for <lists+linux-doc@lfdr.de>; Sat, 12 Jun 2021 11:47:33 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S230012AbhFLJnq (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Sat, 12 Jun 2021 05:43:46 -0400
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124]:45351 "EHLO
-        us-smtp-delivery-124.mimecast.com" rhost-flags-OK-OK-OK-OK)
-        by vger.kernel.org with ESMTP id S229819AbhFLJnp (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Sat, 12 Jun 2021 05:43:45 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-        s=mimecast20190719; t=1623490905;
-        h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-         to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-         content-transfer-encoding:content-transfer-encoding:
-         in-reply-to:in-reply-to:references:references;
-        bh=pPOTnBlb5gG14HcFtr8VUBr+dq0of1GZHHpn43YJCFs=;
-        b=U9VRWb/QFPO0z59L/GSoQMcKdhrVdS+91AnsvoRowtfSEm7v7162GHcQSx3sCZ2uZvmHvW
-        OFRnWlz4E2a1lG5yoIu8qbVlDb72SPCcqSCxPwBkYoD+xPtjrSKXukS2Z+8rxbxVNyZsdt
-        iAEsPPz+U29JMnSXEN6LfNwcLTtGzEA=
-Received: from mail-ej1-f69.google.com (mail-ej1-f69.google.com
- [209.85.218.69]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-422-niWn08LDMIev_a64XOggxg-1; Sat, 12 Jun 2021 05:41:44 -0400
-X-MC-Unique: niWn08LDMIev_a64XOggxg-1
-Received: by mail-ej1-f69.google.com with SMTP id n19-20020a1709067253b029043b446e4a03so1671650ejk.23
-        for <linux-doc@vger.kernel.org>; Sat, 12 Jun 2021 02:41:44 -0700 (PDT)
+        id S231350AbhFLJtU (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Sat, 12 Jun 2021 05:49:20 -0400
+Received: from mail-pg1-f169.google.com ([209.85.215.169]:40732 "EHLO
+        mail-pg1-f169.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S231361AbhFLJtT (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Sat, 12 Jun 2021 05:49:19 -0400
+Received: by mail-pg1-f169.google.com with SMTP id j12so4501755pgh.7
+        for <linux-doc@vger.kernel.org>; Sat, 12 Jun 2021 02:47:07 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=bytedance-com.20150623.gappssmtp.com; s=20150623;
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=gA36+Qu/57nkq0Sk66RXctcjgNPtwynB7KTlt4954g0=;
+        b=He2HYcJkeO+Y2a0BEPzP7w6zmV4ZaW0+JrvY3JJX2HgWx6kChAzLNMY3dPehnfmXmi
+         wuK9Hs2J7MAu2n4MQEOOi9t4EO00T+l67LHxPjSpkLuvgpvnhB9H0k/ybFYXr2/ZuhJ0
+         83nIrjv2Unnb920e0w9MkaK+FawhFDCgK8T5mTbfuIB1v6dpatuqaAMH7+dsMq/oomet
+         8LaeK0tLyBRvM20bDRtg2h+Ks4QdsvpoCrHBG5uWJJxzjdAWf02bTvgXcaJdSTmHHymi
+         OwoIwtAylFcX2ENm/UY07Op+QISCsf/y2k/FvKNQKWuNL7YU5lY/K+5bqIRGx6fxWdJN
+         89bg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:subject:to:cc:references:from:message-id:date
-         :user-agent:mime-version:in-reply-to:content-language
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=pPOTnBlb5gG14HcFtr8VUBr+dq0of1GZHHpn43YJCFs=;
-        b=l0+WPNsVX+bsRPxzQ6uYwcOSs4lx/uRpVAv0S7oMpaZ3hSgdCG21m2P9U4vpWn4pk4
-         oTqBazlfrfsoByHZ4lXTMLgYeJRkyRlVR9Se1yjgkX7CbOZhbkJu1mhuFKLMhIGLnvEn
-         F027AM2nL5mlRsN2Gnhhv/psjxqrE/0ZD0Y7bALx5Rw3tVI7Hs85Br1Cpm2kI2suvxY4
-         y0eLGs6viY8qyBfhDW4rL3oIAD/11BVbZ+IOrYEusdOIR9PqR2R6ckjkMgJKlPRBXfQQ
-         iCvlBLfj5A5Z7jagB5LR+bKBqhERAecyjNM2J4QcnBb3SBCUE6ugiBGNsh5B2voYkJoU
-         0s+A==
-X-Gm-Message-State: AOAM532Pn7R1IEQAJngAWqHbYe/pBvNsVNq8VKjakyQKkuqVgaKotNoG
-        EFtk/3wn4i2XfkgBbTH2S3I22hG7hmsY59yvRjgu1iZB4tZWUb3KOjBR5vRHJTzThF8qIx3kjP+
-        ihyZtBti0FIZJ/QxTPMdDIB47urK309CloV7DxUCtgY3wfeKrlUS1FAvdt8S48iNHquXbWzY=
-X-Received: by 2002:a05:6402:40cc:: with SMTP id z12mr7765836edb.202.1623490903297;
-        Sat, 12 Jun 2021 02:41:43 -0700 (PDT)
-X-Google-Smtp-Source: ABdhPJwjkRPqvVX2DYHQMsKZKDTTc+kPdXuszH9U3Wlwp10935qst42YhGcUNHLhN676CBUWW0ayrw==
-X-Received: by 2002:a05:6402:40cc:: with SMTP id z12mr7765815edb.202.1623490903063;
-        Sat, 12 Jun 2021 02:41:43 -0700 (PDT)
-Received: from x1.bristot.me (host-79-23-205-114.retail.telecomitalia.it. [79.23.205.114])
-        by smtp.gmail.com with ESMTPSA id u17sm3529584edx.16.2021.06.12.02.41.42
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Sat, 12 Jun 2021 02:41:42 -0700 (PDT)
-Subject: Re: [PATCH V3 9/9] tracing: Add timerlat tracer
-To:     Steven Rostedt <rostedt@goodmis.org>
-Cc:     linux-kernel@vger.kernel.org, Phil Auld <pauld@redhat.com>,
-        Sebastian Andrzej Siewior <bigeasy@linutronix.de>,
-        Kate Carcia <kcarcia@redhat.com>,
-        Jonathan Corbet <corbet@lwn.net>,
-        Ingo Molnar <mingo@redhat.com>,
-        Peter Zijlstra <peterz@infradead.org>,
-        Thomas Gleixner <tglx@linutronix.de>,
-        Alexandre Chartre <alexandre.chartre@oracle.com>,
-        Clark Willaims <williams@redhat.com>,
-        John Kacur <jkacur@redhat.com>,
-        Juri Lelli <juri.lelli@redhat.com>, linux-doc@vger.kernel.org
-References: <cover.1621024265.git.bristot@redhat.com>
- <b650672b9973887ef1420bc1e76b97940b6522d6.1621024265.git.bristot@redhat.com>
- <20210607213639.68aad064@gandalf.local.home>
- <fd2bdb45-e68a-995e-271e-ec181f04ecbc@redhat.com>
- <20210611160340.6970e10c@gandalf.local.home>
-From:   Daniel Bristot de Oliveira <bristot@redhat.com>
-Message-ID: <6808245d-208c-c6d2-1c6e-7410df158992@redhat.com>
-Date:   Sat, 12 Jun 2021 11:41:41 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
- Thunderbird/78.11.0
+        bh=gA36+Qu/57nkq0Sk66RXctcjgNPtwynB7KTlt4954g0=;
+        b=SUL0mvT7IgCu0e0NMcpt3WF4qaZ45PgpTD2wOF+GtBaOV+n9Z90vwM/bHM4Pfv/ff7
+         1e2Gny1iM7LQpStkCemReKUGiASX2v5yrpG9rIrv82KeGGmaNTrHPP5cCabRihdvIs7M
+         Q82eBUrGTCOjkH597O44o6kigIqFvREWFDNM3TUDuVXMmFqILXq4VlshRpXRCXpL7ISx
+         XlR4baOpUnhUvPdWIu7qZf7WY80WMbjm8VtPtRYb0kMjhE8A1AL9Grks5Dbzn8D/ukBs
+         MNJo4MB1V8keCcd36Ac7JV1OZC0opz4f5Xy/VARoxCKT2yj1MLUDlIWoEMoNdK7YIp96
+         J8kw==
+X-Gm-Message-State: AOAM531Wxziv3sBsZknhq7d8FdudjfphUSUZOP4nvOp5ABHPo+HemBfI
+        3YVwTTWOPELxNzSBll2YPqnfdA==
+X-Google-Smtp-Source: ABdhPJzjvMIBpki2+QrmEYfAaapi7sVu+lRKjPmHd6xRamGe7Rxsj/7f5BJl9/x5reeW6ODPXTSFbQ==
+X-Received: by 2002:a63:d08:: with SMTP id c8mr7964471pgl.248.1623491167246;
+        Sat, 12 Jun 2021 02:46:07 -0700 (PDT)
+Received: from localhost.tiktokd.org ([139.177.225.246])
+        by smtp.gmail.com with ESMTPSA id t39sm6929557pfg.147.2021.06.12.02.46.02
+        (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
+        Sat, 12 Jun 2021 02:46:06 -0700 (PDT)
+From:   Muchun Song <songmuchun@bytedance.com>
+To:     mike.kravetz@oracle.com, akpm@linux-foundation.org,
+        osalvador@suse.de, mhocko@suse.com, song.bao.hua@hisilicon.com,
+        david@redhat.com, chenhuang5@huawei.com, bodeddub@amazon.com,
+        corbet@lwn.net
+Cc:     duanxiongchun@bytedance.com, fam.zheng@bytedance.com,
+        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
+        linux-mm@kvack.org, Muchun Song <songmuchun@bytedance.com>
+Subject: [PATCH v2 0/3] Split huge PMD mapping of vmemmap pages
+Date:   Sat, 12 Jun 2021 17:45:52 +0800
+Message-Id: <20210612094555.71344-1-songmuchun@bytedance.com>
+X-Mailer: git-send-email 2.21.0 (Apple Git-122)
 MIME-Version: 1.0
-In-Reply-To: <20210611160340.6970e10c@gandalf.local.home>
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On 6/11/21 10:03 PM, Steven Rostedt wrote:
-> On Fri, 11 Jun 2021 14:59:13 +0200
-> Daniel Bristot de Oliveira <bristot@redhat.com> wrote:
-> 
->> ------------------ %< -----------------------------
->> It is worth mentioning that the *duration* values reported
->> by the osnoise: events are *net* values. For example, the
->> thread_noise does not include the duration of the overhead caused
->> by the IRQ execution (which indeed accounted for 12736 ns). But
->> the values reported by the timerlat tracer (timerlat_latency)
->> are *gross* values.
->>
->> The art below illustrates a CPU timeline and how the timerlat tracer
->> observes it at the top and the osnoise: events at the bottom. Each "-"
->> in the timelines means 1 us, and the time moves ==>:
->>
->>      External          context irq                  context thread
->>       clock           timer_latency                 timer_latency
->>       event              18 us                          48 us 
->>         |                  ^                             ^
->>         v                  |                             |
->>         |------------------|                             |       <-- timerlat irq timeline
->>         |------------------+-----------------------------|       <-- timerlat thread timeline
->>                            ^                             ^
->>  ===================== CPU timeline ======================================
->>                    [timerlat/ irq]  [ dev irq ]                          
->>  [another thread...^             v..^         v........][timerlat/ thread]  
->>  ===================== CPU timeline ======================================
->>                    |-------------|  |---------|                  <-- irq_noise timeline
->>                                  |--^         v--------|         <-- thread_noise timeline
->>                                  |            |        |
->>                                  |            |        + thread_noise: 10 us
->>                                  |            +-> irq_noise: 9 us
->>                                  +-> irq_noise: 13 us
->>
->>  --------------- >% --------------------------------  
-> 
-> That's really busy, and honestly, I can't tell what is what.
-> 
-> The "context irq timer_latency" is a confusing name. Could we just have
-> that be "timer irq latency"? And "context thread timer_latency" just be
-> "thread latency". Adding too much text to the name actually makes it harder
-> to understand. We want to simplify it, not make people have to think harder
-> to see it.
-> 
-> I think we can get rid of the "<-- .* timeline" to the right.  I don't
-> think they are necessary. Again, the more you add to the diagram, the
-> busier it looks, and the harder it is to read.
-> 
-> Could we switch "[timerlat/ irq]" to just "[timer irq]" and explain how
-> that "context irq timer_latency"/"timer irq latency" is related?
-> 
-> Should probably state that the "dev irq" is an unrelated device interrupt
-> that happened.
-> 
-> What's with the two CPU timeline lines? Now there I think it would be
-> better to have the arrow text by itself.
-> 
-> And finally, not sure if you plan on doing this, but have a output of the
-> trace that would show the above.
-> 
-> Thus, here's what I would expect to see:
-> 
->       External         
->        clock         timer irq latency             e    thread latency
->        event              18 us                          48 us 
->          |                  ^                             ^
->          v                  |                             |
->          |------------------|                             |
->          |------------------+-----------------------------|       
->                             ^                             ^
->   =========================================================================
->                     [timerlat/ irq]  [ dev irq ]                             
->   [another thread...^             v..^         v........][timerlat/ thread]  <-- CPU task timeline
->   =========================================================================
->                     |-------------|  |---------|
->                                   |--^         v--------|
->                                   |            |        |
->                                   |            |        + thread_noise: 10 us
->                                   |            +-> irq_noise: 9 us
->                                   +-> irq_noise: 13 us
+In order to reduce the difficulty of code review in series[1]. We disable
+huge PMD mapping of vmemmap pages when that feature is enabled. In this
+series, we do not disable huge PMD mapping of vmemmap pages anymore. We
+will split huge PMD mapping when needed. When HugeTLB pages are freed from
+the pool we do not attempt coalasce and move back to a PMD mapping because
+it is much more complex.
 
-It looks good to me!
+[1] https://lore.kernel.org/linux-doc/20210510030027.56044-1-songmuchun@bytedance.com/
 
->  The "[ dev irq ]" above is an interrupt from some device on the system that
->  causes extra noise to the timerlat task.
-> 
-> I think the above may be easier to understand, especially if the trace
-> output that represents it is below.
+Changelog in v2:
+  1. Collect Review-by from Mike.
+  2. Remove helpers used to preallocate/free page tables for HugeTLB pages.
 
-ok, I can try to capture a trace sample and represent it into the ASCII art
-format above.
+  Thanks Mike's suggestions. It really eliminate a lot of code.
 
-> Also, I have to ask, shouldn't the "thread noise" really start at the
-> "External clock event"?
+Muchun Song (3):
+  mm: sparsemem: split the huge PMD mapping of vmemmap pages
+  mm: sparsemem: use huge PMD mapping for vmemmap pages
+  mm: hugetlb: introduce CONFIG_HUGETLB_PAGE_FREE_VMEMMAP_DEFAULT_ON
 
-To go in that direction, we need to track things that delayed the IRQ execution.
-We are already tracking other IRQs' execution, but we will have to keep a
-history of past executions and "playback" them. This will add some overhead
-linear to the past event... and/or some pessimism.
+ Documentation/admin-guide/kernel-parameters.txt |  10 +-
+ arch/x86/mm/init_64.c                           |   8 +-
+ fs/Kconfig                                      |  10 ++
+ include/linux/hugetlb.h                         |  25 +---
+ include/linux/mm.h                              |   4 +-
+ mm/hugetlb_vmemmap.c                            |  11 +-
+ mm/memory_hotplug.c                             |   2 +-
+ mm/sparse-vmemmap.c                             | 157 ++++++++++++++++++------
+ 8 files changed, 149 insertions(+), 78 deletions(-)
 
-We will also have to track IRQ disabled sections. The problem of tracking IRQ
-disabled is that it depends on tracing infra-structure that is not enabled by
-default of distros... And there are IRQ delay causes that are not related to the
-thread... like idle states... (and all these things create more and more states
-to track these things)...
-
-So, I added the timer irq latency to figure out when the problem is related to
-things that delay the IRQ, and the stack trace will help us figure out where the
-problem is in the thread context. After the IRQ execution, the thread noise is
-helpful - even without all the thread noise before the IRQ.
-
-Furthermore, if we start trying to abstract the causes of delay, we will find
-the rtsl :-). The rtls events and abstractions give us the worst-case scheduling
-latency without adding unneeded pessimism (sound analysis). It covers all the
-possible cases, for all any schedulers, even without the need of a measuring
-thread like here (or with cyclictest) - and this is a good thing because it does
-not change the target system's workload.
-
-The problem is that... rtsl depends on tracing infra-structure that are not
-enabled by default on distros, like preempt_ and irq_ disabled events.
-
-So, I see timerlat as a tool for on-the-fly usage, like debugging on customers
-(as we do at red hat). It can be enabled by default on distros because it only
-depends on existing and already enabled events and causes no overhead when
-disabled. rtsl targets more specific cases, like safety-critical systems, where
-the overhead is acceptable because of the sound analysis of the scheduling bound
-(which is rooted in a formal specification & analysis of the system).
-
--- Daniel
-
-> -- Steve
-> 
+-- 
+2.11.0
 
