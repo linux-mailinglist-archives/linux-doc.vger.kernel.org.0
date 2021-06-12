@@ -2,144 +2,154 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 428D83A4DFF
-	for <lists+linux-doc@lfdr.de>; Sat, 12 Jun 2021 11:46:39 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id BFB303A4FD5
+	for <lists+linux-doc@lfdr.de>; Sat, 12 Jun 2021 18:59:49 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S231253AbhFLJsh (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Sat, 12 Jun 2021 05:48:37 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:51954 "EHLO
+        id S231478AbhFLRBr (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Sat, 12 Jun 2021 13:01:47 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:32904 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S231193AbhFLJsh (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Sat, 12 Jun 2021 05:48:37 -0400
-Received: from mail-pl1-x631.google.com (mail-pl1-x631.google.com [IPv6:2607:f8b0:4864:20::631])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id A93EFC061574
-        for <linux-doc@vger.kernel.org>; Sat, 12 Jun 2021 02:46:24 -0700 (PDT)
-Received: by mail-pl1-x631.google.com with SMTP id 11so4041128plk.12
-        for <linux-doc@vger.kernel.org>; Sat, 12 Jun 2021 02:46:24 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=bytedance-com.20150623.gappssmtp.com; s=20150623;
-        h=from:to:cc:subject:date:message-id:in-reply-to:references
-         :mime-version:content-transfer-encoding;
-        bh=cStPclh9XG3RxOFyVxsu9zTH21TiQql+7187dLUWbK8=;
-        b=eUO6qTRKBADJwUvuErZZeJR8S4O44jHtqy+r5h1kUNyB7U5lcux3/vJZGSz4EC02lO
-         7caZ1sMLwKh29iHmshLFiGfBTWgBDKKEjZjL3O5ByeTACbVC8GH2GUgoeg67eDlDasSR
-         N0FiROzzDYmjEZB+5zshhVw9hSa+qmCcD233m++NOqgB+idXbQVGZwjP6bMNUaEkpb2W
-         XRg1Nby+1RCfoKMTpIigJGUcKHGMaWhMd1hYUjUJaFdxBNuznmYHQ3/+Cqav/8LnsyOj
-         DILszkKbXV/29+eg5CZ27W9r79KzqlhDBmcwEgL3FhTrZPAeNxW7QzuxWimHV8kAOXCe
-         cRPA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-         :references:mime-version:content-transfer-encoding;
-        bh=cStPclh9XG3RxOFyVxsu9zTH21TiQql+7187dLUWbK8=;
-        b=AQ3nOY8cRIXgC25++Nu8UIbUgokuqu5FKJeIqbTeOojw6BEBbPgFP4eCM+SFx5v6q3
-         PmRpqRLlLCYvEbdFGg9276cnwhjP0s29e3Vhfps17SZecFG9qDlHf15tpbKjPz3GUROy
-         8DJCr6oclEz40Y71+yADfvh6mL8QC5L838bXVk6mGZxH+bmbLwoKMiR4vgmfm6tYMkqZ
-         sLNM0GgArfrWRS0yhrhMzaGFbXXRqXlApEYSG2fio6vpdFswRefrS6V2qI9AtHiOz7Oo
-         dAaGI53n0dBi7GTWOcWCUJnKUzK4WpzU+qVY6T2k3awlwkB9ko0CgQBC5QkaGvMGFNx2
-         nx0A==
-X-Gm-Message-State: AOAM530QF3Xfw1elz62YI28cXc3SXtwCpEKGYH81EYztpTXdxa+d12sN
-        D0+9GUNInfic2AbW4w9cM5l8Fw==
-X-Google-Smtp-Source: ABdhPJxri4vZdp0HhrlywijdZcCZtQiBBCNKpg4WIBbifMFNu/V4m/2DPd2uuq3Hp+FCgOe5CZEYOw==
-X-Received: by 2002:a17:903:3112:b029:103:6340:3195 with SMTP id w18-20020a1709033112b029010363403195mr7899387plc.29.1623491184271;
-        Sat, 12 Jun 2021 02:46:24 -0700 (PDT)
-Received: from localhost.tiktokd.org ([139.177.225.246])
-        by smtp.gmail.com with ESMTPSA id t39sm6929557pfg.147.2021.06.12.02.46.18
-        (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
-        Sat, 12 Jun 2021 02:46:23 -0700 (PDT)
-From:   Muchun Song <songmuchun@bytedance.com>
-To:     mike.kravetz@oracle.com, akpm@linux-foundation.org,
-        osalvador@suse.de, mhocko@suse.com, song.bao.hua@hisilicon.com,
-        david@redhat.com, chenhuang5@huawei.com, bodeddub@amazon.com,
-        corbet@lwn.net
-Cc:     duanxiongchun@bytedance.com, fam.zheng@bytedance.com,
+        with ESMTP id S231309AbhFLRBr (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Sat, 12 Jun 2021 13:01:47 -0400
+Received: from desiato.infradead.org (desiato.infradead.org [IPv6:2001:8b0:10b:1:d65d:64ff:fe57:4e05])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 5ACB6C061574;
+        Sat, 12 Jun 2021 09:59:47 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+        d=infradead.org; s=desiato.20200630; h=In-Reply-To:Content-Type:MIME-Version:
+        References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
+        Content-Transfer-Encoding:Content-ID:Content-Description;
+        bh=Ddh5oJmHNUDvPnkjDyvBawyeYIqU7P8eLWt5TLZPuMU=; b=GzSY1ygh72Wp3u4leV2JypR5PX
+        QXCDPX2Q9aSjNMuK1rbZ/QmYeFjIol4pKEND0ZbOjKFeczgxXDdOZ3UHAhNrhhsHoKBdzqJx2NARb
+        +D2FUbFIbYd673okD6bmi3oJGRrIsflLnvfnylO5SvMVHnaBOSuhmFwZvgy7buNE8RGYNqCy4xtci
+        gt14sUxQ054KqX/qyfhKpZod/I6XKjWY5YdINf9HVp/sLbOUYKRXtY5m6izvW2qf7Ppxo2w1WfMrV
+        tDZjuqfPts3Hnj+zjBSpWnBcBAwwnPhMpHdonNafkndOTnmIih6tWxzqC6FDSOhYKR/Yd8vGbRP4E
+        uzCrd43A==;
+Received: from j217100.upc-j.chello.nl ([24.132.217.100] helo=noisy.programming.kicks-ass.net)
+        by desiato.infradead.org with esmtpsa (Exim 4.94.2 #2 (Red Hat Linux))
+        id 1ls6yo-006GWf-RV; Sat, 12 Jun 2021 16:59:37 +0000
+Received: from hirez.programming.kicks-ass.net (hirez.programming.kicks-ass.net [192.168.1.225])
+        (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+         key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+        (Client did not present a certificate)
+        by noisy.programming.kicks-ass.net (Postfix) with ESMTPS id C480A30020C;
+        Sat, 12 Jun 2021 18:59:35 +0200 (CEST)
+Received: by hirez.programming.kicks-ass.net (Postfix, from userid 1000)
+        id AD4BD2C23AAFF; Sat, 12 Jun 2021 18:59:35 +0200 (CEST)
+Date:   Sat, 12 Jun 2021 18:59:35 +0200
+From:   Peter Zijlstra <peterz@infradead.org>
+To:     Bill Wendling <morbo@google.com>
+Cc:     Kees Cook <keescook@google.com>, Jonathan Corbet <corbet@lwn.net>,
+        Masahiro Yamada <masahiroy@kernel.org>,
         linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
-        linux-mm@kvack.org, Muchun Song <songmuchun@bytedance.com>
-Subject: [PATCH v2 3/3] mm: hugetlb: introduce CONFIG_HUGETLB_PAGE_FREE_VMEMMAP_DEFAULT_ON
-Date:   Sat, 12 Jun 2021 17:45:55 +0800
-Message-Id: <20210612094555.71344-4-songmuchun@bytedance.com>
-X-Mailer: git-send-email 2.21.0 (Apple Git-122)
-In-Reply-To: <20210612094555.71344-1-songmuchun@bytedance.com>
-References: <20210612094555.71344-1-songmuchun@bytedance.com>
+        linux-kbuild@vger.kernel.org, clang-built-linux@googlegroups.com,
+        Andrew Morton <akpm@linux-foundation.org>,
+        Nathan Chancellor <natechancellor@gmail.com>,
+        Nick Desaulniers <ndesaulniers@google.com>,
+        Sami Tolvanen <samitolvanen@google.com>,
+        Fangrui Song <maskray@google.com>, x86@kernel.org
+Subject: Re: [PATCH v9] pgo: add clang's Profile Guided Optimization
+ infrastructure
+Message-ID: <YMTn9yjuemKFLbws@hirez.programming.kicks-ass.net>
+References: <20210111081821.3041587-1-morbo@google.com>
+ <20210407211704.367039-1-morbo@google.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20210407211704.367039-1-morbo@google.com>
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-When using HUGETLB_PAGE_FREE_VMEMMAP, the freeing unused vmemmap pages
-associated with each HugeTLB page is default off. Now the vmemmap is PMD
-mapped. So there is no side effect when this feature is enabled with no
-HugeTLB pages in the system. Someone may want to enable this feature in
-the compiler time instead of using boot command line. So add a config to
-make it default on when someone do not want to enable it via command line.
+On Wed, Apr 07, 2021 at 02:17:04PM -0700, Bill Wendling wrote:
+> From: Sami Tolvanen <samitolvanen@google.com>
+> 
+> Enable the use of clang's Profile-Guided Optimization[1]. To generate a
+> profile, the kernel is instrumented with PGO counters, a representative
+> workload is run, and the raw profile data is collected from
+> /sys/kernel/debug/pgo/profraw.
+> 
+> The raw profile data must be processed by clang's "llvm-profdata" tool
+> before it can be used during recompilation:
+> 
+>   $ cp /sys/kernel/debug/pgo/profraw vmlinux.profraw
+>   $ llvm-profdata merge --output=vmlinux.profdata vmlinux.profraw
+> 
+> Multiple raw profiles may be merged during this step.
+> 
+> The data can now be used by the compiler:
+> 
+>   $ make LLVM=1 KCFLAGS=-fprofile-use=vmlinux.profdata ...
+> 
+> This initial submission is restricted to x86, as that's the platform we
+> know works. This restriction can be lifted once other platforms have
+> been verified to work with PGO.
 
-Signed-off-by: Muchun Song <songmuchun@bytedance.com>
----
- Documentation/admin-guide/kernel-parameters.txt |  3 +++
- fs/Kconfig                                      | 10 ++++++++++
- mm/hugetlb_vmemmap.c                            |  6 ++++--
- 3 files changed, 17 insertions(+), 2 deletions(-)
+*sigh*, and not a single x86 person on Cc, how nice :-/
 
-diff --git a/Documentation/admin-guide/kernel-parameters.txt b/Documentation/admin-guide/kernel-parameters.txt
-index a01aadafee38..8eee439d943c 100644
---- a/Documentation/admin-guide/kernel-parameters.txt
-+++ b/Documentation/admin-guide/kernel-parameters.txt
-@@ -1604,6 +1604,9 @@
- 			on:  enable the feature
- 			off: disable the feature
- 
-+			Built with CONFIG_HUGETLB_PAGE_FREE_VMEMMAP_DEFAULT_ON=y,
-+			the default is on.
-+
- 			This is not compatible with memory_hotplug.memmap_on_memory.
- 			If both parameters are enabled, hugetlb_free_vmemmap takes
- 			precedence over memory_hotplug.memmap_on_memory.
-diff --git a/fs/Kconfig b/fs/Kconfig
-index f40b5b98f7ba..e78bc5daf7b0 100644
---- a/fs/Kconfig
-+++ b/fs/Kconfig
-@@ -245,6 +245,16 @@ config HUGETLB_PAGE_FREE_VMEMMAP
- 	depends on X86_64
- 	depends on SPARSEMEM_VMEMMAP
- 
-+config HUGETLB_PAGE_FREE_VMEMMAP_DEFAULT_ON
-+	bool "Default freeing vmemmap pages of HugeTLB to on"
-+	default n
-+	depends on HUGETLB_PAGE_FREE_VMEMMAP
-+	help
-+	  When using HUGETLB_PAGE_FREE_VMEMMAP, the freeing unused vmemmap
-+	  pages associated with each HugeTLB page is default off. Say Y here
-+	  to enable freeing vmemmap pages of HugeTLB by default. It can then
-+	  be disabled on the command line via hugetlb_free_vmemmap=off.
-+
- config MEMFD_CREATE
- 	def_bool TMPFS || HUGETLBFS
- 
-diff --git a/mm/hugetlb_vmemmap.c b/mm/hugetlb_vmemmap.c
-index 06802056f296..c540c21e26f5 100644
---- a/mm/hugetlb_vmemmap.c
-+++ b/mm/hugetlb_vmemmap.c
-@@ -182,7 +182,7 @@
- #define RESERVE_VMEMMAP_NR		2U
- #define RESERVE_VMEMMAP_SIZE		(RESERVE_VMEMMAP_NR << PAGE_SHIFT)
- 
--bool hugetlb_free_vmemmap_enabled;
-+bool hugetlb_free_vmemmap_enabled = IS_ENABLED(CONFIG_HUGETLB_PAGE_FREE_VMEMMAP_DEFAULT_ON);
- 
- static int __init early_hugetlb_free_vmemmap_param(char *buf)
- {
-@@ -197,7 +197,9 @@ static int __init early_hugetlb_free_vmemmap_param(char *buf)
- 
- 	if (!strcmp(buf, "on"))
- 		hugetlb_free_vmemmap_enabled = true;
--	else if (strcmp(buf, "off"))
-+	else if (!strcmp(buf, "off"))
-+		hugetlb_free_vmemmap_enabled = false;
-+	else
- 		return -EINVAL;
- 
- 	return 0;
--- 
-2.11.0
+> Note that this method of profiling the kernel is clang-native, unlike
+> the clang support in kernel/gcov.
+> 
+> [1] https://clang.llvm.org/docs/UsersManual.html#profile-guided-optimization
 
+Also, and I don't see this answered *anywhere*, why are you not using
+perf for this? Your link even mentions Sampling Profilers (and I happen
+to know there's been significant effort to make perf output work as
+input for the PGO passes of the various compilers).
+
+> Signed-off-by: Sami Tolvanen <samitolvanen@google.com>
+> Co-developed-by: Bill Wendling <morbo@google.com>
+> Signed-off-by: Bill Wendling <morbo@google.com>
+> Tested-by: Nick Desaulniers <ndesaulniers@google.com>
+> Reviewed-by: Nick Desaulniers <ndesaulniers@google.com>
+> Reviewed-by: Fangrui Song <maskray@google.com>
+> ---
+>  Documentation/dev-tools/index.rst     |   1 +
+>  Documentation/dev-tools/pgo.rst       | 127 +++++++++
+>  MAINTAINERS                           |   9 +
+>  Makefile                              |   3 +
+>  arch/Kconfig                          |   1 +
+>  arch/x86/Kconfig                      |   1 +
+>  arch/x86/boot/Makefile                |   1 +
+>  arch/x86/boot/compressed/Makefile     |   1 +
+>  arch/x86/crypto/Makefile              |   4 +
+>  arch/x86/entry/vdso/Makefile          |   1 +
+>  arch/x86/kernel/vmlinux.lds.S         |   2 +
+>  arch/x86/platform/efi/Makefile        |   1 +
+>  arch/x86/purgatory/Makefile           |   1 +
+>  arch/x86/realmode/rm/Makefile         |   1 +
+>  arch/x86/um/vdso/Makefile             |   1 +
+>  drivers/firmware/efi/libstub/Makefile |   1 +
+>  include/asm-generic/vmlinux.lds.h     |  34 +++
+>  kernel/Makefile                       |   1 +
+>  kernel/pgo/Kconfig                    |  35 +++
+>  kernel/pgo/Makefile                   |   5 +
+>  kernel/pgo/fs.c                       | 389 ++++++++++++++++++++++++++
+>  kernel/pgo/instrument.c               | 189 +++++++++++++
+>  kernel/pgo/pgo.h                      | 203 ++++++++++++++
+>  scripts/Makefile.lib                  |  10 +
+>  24 files changed, 1022 insertions(+)
+>  create mode 100644 Documentation/dev-tools/pgo.rst
+>  create mode 100644 kernel/pgo/Kconfig
+>  create mode 100644 kernel/pgo/Makefile
+>  create mode 100644 kernel/pgo/fs.c
+>  create mode 100644 kernel/pgo/instrument.c
+>  create mode 100644 kernel/pgo/pgo.h
+
+> --- a/Makefile
+> +++ b/Makefile
+> @@ -660,6 +660,9 @@ endif # KBUILD_EXTMOD
+>  # Defaults to vmlinux, but the arch makefile usually adds further targets
+>  all: vmlinux
+>  
+> +CFLAGS_PGO_CLANG := -fprofile-generate
+> +export CFLAGS_PGO_CLANG
+> +
+>  CFLAGS_GCOV	:= -fprofile-arcs -ftest-coverage \
+>  	$(call cc-option,-fno-tree-loop-im) \
+>  	$(call cc-disable-warning,maybe-uninitialized,)
+
+And which of the many flags in noinstr disables this?
+
+Basically I would like to NAK this whole thing until someone can
+adequately explain the interaction with noinstr and why we need those
+many lines of kernel code and can't simply use perf for this.
