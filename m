@@ -2,235 +2,101 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 469203A7013
-	for <lists+linux-doc@lfdr.de>; Mon, 14 Jun 2021 22:17:48 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id A1F743A70AC
+	for <lists+linux-doc@lfdr.de>; Mon, 14 Jun 2021 22:44:41 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S235542AbhFNUTj (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 14 Jun 2021 16:19:39 -0400
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124]:30074 "EHLO
-        us-smtp-delivery-124.mimecast.com" rhost-flags-OK-OK-OK-OK)
-        by vger.kernel.org with ESMTP id S234935AbhFNUTg (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Mon, 14 Jun 2021 16:19:36 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-        s=mimecast20190719; t=1623701853;
-        h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-         to:to:cc:cc:mime-version:mime-version:
-         content-transfer-encoding:content-transfer-encoding:
-         in-reply-to:in-reply-to:references:references;
-        bh=48bjdR1NLAI+LnEF7dKeko2J72GoFENKIfUW9/6F9Ro=;
-        b=bUfdAMThepvNsl09F6Crkj1e+dNyhcVGg7P8RfQJF+S+n3sRZyYUi6AqIBnbZMnoeX5/jl
-        sPsUpeQkZ6DgbnqgCucxP3QwFPZkn3zXkI8zlkKYe8UEDW/QYmA3cvXIS8IIJZ3UqLtvSB
-        eMQKRjayOtu/MVnA+nNi81kCSkKI22g=
-Received: from mail-ot1-f70.google.com (mail-ot1-f70.google.com
- [209.85.210.70]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-152-cUcD1-K6MWmdOfE8lpXAMQ-1; Mon, 14 Jun 2021 16:17:32 -0400
-X-MC-Unique: cUcD1-K6MWmdOfE8lpXAMQ-1
-Received: by mail-ot1-f70.google.com with SMTP id e28-20020a9d491c0000b02903daf90867beso7963060otf.11
-        for <linux-doc@vger.kernel.org>; Mon, 14 Jun 2021 13:17:32 -0700 (PDT)
+        id S235496AbhFNUqn (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 14 Jun 2021 16:46:43 -0400
+Received: from mail-qv1-f49.google.com ([209.85.219.49]:44787 "EHLO
+        mail-qv1-f49.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S235172AbhFNUqn (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Mon, 14 Jun 2021 16:46:43 -0400
+Received: by mail-qv1-f49.google.com with SMTP id w4so13748298qvr.11;
+        Mon, 14 Jun 2021 13:44:30 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=sender:date:from:to:cc:subject:message-id:references:mime-version
+         :content-disposition:in-reply-to;
+        bh=212ymYp7XEu+lKWxduC+83kiaUY3pqkgv+9qi3641iU=;
+        b=ixpntEdyk4n4XpQDDgnK92G2u3+1O1Oz3Fhqal4MiqoQVAoZmarGQIzc1x7iSob77H
+         vNzXG5bd7M3JsZPRBHsXNtIVpqpYxAYq+61TxPuyQ2oIhCrqzlXqISfPCgYra4nCNfqe
+         3ZOn/WS3+/CArQyHi0AV2aVcy9uk70efLQEPWgAhEPlRauDD66xs/Y6hQMIJHKL/WPub
+         zDUT31VW3Eg+meHPP+2TiyzfeRmRBuu7np35feeIqu4XIlmy8etcfa3bgsE6fdmv2EjM
+         i/k4a2r3HqU8po5AySg1+/Ss7DP0P4H6lFmsNslpuivserxT92ZaxeqvB0U+0s1x8iJv
+         qtBw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-         :references:mime-version:content-transfer-encoding;
-        bh=48bjdR1NLAI+LnEF7dKeko2J72GoFENKIfUW9/6F9Ro=;
-        b=gLm7tslpo7tbYS0BrzRl0KPHdAN0OlAx6iFuVMcNwInuJNlAio4z9YpHMWJMUqfCO4
-         sM/A1jlTgzI76/gSz3QW0xi33UPunbpymuNJ2+DP4WmRVslTkqUyb56J8kNHv8xaui6a
-         7LlZwWl8tUuIxtEI7nkCCqTGc7zyPGVkGR6377m1rJ8ZSbEU6gJnt1CzHe/hidyqqvpQ
-         JZNytT9AS66I/w9j4Gn/CfDRMTVTxW6DH3wM+jUmT7zR5kTGaQL+5Ktv285Lpy5TP+wB
-         p3aBg9P16hTDfk+whxxL7Qihjjswz0HGR4YyZ8ZfnvY3Ba5RTNVB5latTCSmUZBfbrfw
-         89Mg==
-X-Gm-Message-State: AOAM531P9d9LW+7Y99kGfO1iz7JYqBUACrUQnQoQwtk4viOqvvk2Jx2d
-        HjjjmKukIg1DsCKbbVMb0T/ruB8OyugcET6aL2i9l8OAs2xn/tBZJ8l6QOM3dtPgFZGtGMIg66+
-        tq2RN9ved7dgbuIkP/e5f
-X-Received: by 2002:a05:6830:2476:: with SMTP id x54mr14958026otr.293.1623701849598;
-        Mon, 14 Jun 2021 13:17:29 -0700 (PDT)
-X-Google-Smtp-Source: ABdhPJx0XFjy3LT1wiB4YYU/Lhzpn8Z5S2BIhQmLh52HqgpzLeC6Pr2Erm4I2ORjMhxDIxuNaaqUXQ==
-X-Received: by 2002:a05:6830:2476:: with SMTP id x54mr14958004otr.293.1623701849345;
-        Mon, 14 Jun 2021 13:17:29 -0700 (PDT)
-Received: from localhost.localdomain.com (075-142-250-213.res.spectrum.com. [75.142.250.213])
-        by smtp.gmail.com with ESMTPSA id b198sm408535oii.19.2021.06.14.13.17.27
+        h=x-gm-message-state:sender:date:from:to:cc:subject:message-id
+         :references:mime-version:content-disposition:in-reply-to;
+        bh=212ymYp7XEu+lKWxduC+83kiaUY3pqkgv+9qi3641iU=;
+        b=LBOjIf6grfMI7R/vmi3ZqJZ4ZPMfmHVDPLX1PN+Wjt0xtN+ekHNRkV8rBY3SlsWiBu
+         yww4d3DdBPoAEeyrpUqYGgvGYGj88yWvn8pyyzXv/FZs/6C2qKrK7P0DG+yEZ2Sh+Vv/
+         SDJvy9LO1UiwE6+lUDkTozL9uzVdD68k8msFF5fdsQpy3Sv93dFZ1tklDboVeLeMDnYk
+         G0ZYUWWdYgktn776IJJg3Z29+PvfPRaRcMOuz5BCcVW3HxyW5TV5/2X7m0JOZXsYdT4y
+         F6v8VaT3k57A+Sp6mU+6llHn8usoozTyr15wB+3t/oz0uF1JqUOggYokWvxWvLJFTQIS
+         Gjsg==
+X-Gm-Message-State: AOAM533S+khh9UmAQiLB4f1JK0nIBEomqkykKO+otecCsTZItXBMASvs
+        1dmjmg9r5yVyACKQL706ugk=
+X-Google-Smtp-Source: ABdhPJyZiBT2UFA22fxY80PwV97uk8Cilfx14IlToy0lDB7LgmWsIjbP5LulDlyiivN3X3IgnTCUKA==
+X-Received: by 2002:a05:6214:1909:: with SMTP id er9mr1028714qvb.13.1623703410350;
+        Mon, 14 Jun 2021 13:43:30 -0700 (PDT)
+Received: from localhost ([199.192.137.73])
+        by smtp.gmail.com with ESMTPSA id d16sm10271682qtj.69.2021.06.14.13.43.29
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 14 Jun 2021 13:17:29 -0700 (PDT)
-From:   trix@redhat.com
-To:     hao.wu@intel.com, mdf@kernel.org, corbet@lwn.net,
-        michal.simek@xilinx.com, gregkh@linuxfoundation.org,
-        krzysztof.kozlowski@canonical.com, nava.manne@xilinx.com,
-        yilun.xu@intel.com, davidgow@google.com, fpacheco@redhat.com,
-        richard.gong@intel.com, luca@lucaceresoli.net
-Cc:     linux-fpga@vger.kernel.org, linux-doc@vger.kernel.org,
-        linux-kernel@vger.kernel.org, linux-arm-kernel@lists.infradead.org,
-        Tom Rix <trix@redhat.com>
-Subject: [PATCH v4 4/4] fpga: lattice: reorganize to subdir layout
-Date:   Mon, 14 Jun 2021 13:16:48 -0700
-Message-Id: <20210614201648.3358206-6-trix@redhat.com>
-X-Mailer: git-send-email 2.26.3
-In-Reply-To: <20210614201648.3358206-1-trix@redhat.com>
-References: <20210614201648.3358206-1-trix@redhat.com>
+        Mon, 14 Jun 2021 13:43:29 -0700 (PDT)
+Sender: Tejun Heo <htejun@gmail.com>
+Date:   Mon, 14 Jun 2021 16:43:28 -0400
+From:   Tejun Heo <tj@kernel.org>
+To:     Waiman Long <longman@redhat.com>
+Cc:     Zefan Li <lizefan.x@bytedance.com>,
+        Johannes Weiner <hannes@cmpxchg.org>,
+        Jonathan Corbet <corbet@lwn.net>,
+        Thomas Gleixner <tglx@linutronix.de>,
+        Ingo Molnar <mingo@redhat.com>, Borislav Petkov <bp@alien8.de>,
+        "H. Peter Anvin <hpa@zytor.com>, Greg Kroah-Hartman
+        <gregkh@linuxfoundation.org>, Rafael J. Wysocki " <rafael@kernel.org>,
+        Luis Chamberlain <mcgrof@kernel.org>,
+        Kees Cook <keescook@chromium.org>,
+        Iurii Zaikin <yzaikin@google.com>, x86@kernel.org,
+        cgroups@vger.kernel.org, linux-kernel@vger.kernel.org,
+        linux-doc@vger.kernel.org, linux-fsdevel@vger.kernel.org
+Subject: Re: [PATCH 0/4] cgroup/cpuset: Allow cpuset to bound displayed cpu
+ info
+Message-ID: <YMe/cGV4JPbzFRk0@slm.duckdns.org>
+References: <20210614152306.25668-1-longman@redhat.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20210614152306.25668-1-longman@redhat.com>
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-From: Tom Rix <trix@redhat.com>
+Hello,
 
-Follow drivers/net/ethernet/ which has control configs
-NET_VENDOR_BLA that map to drivers/net/ethernet/bla
-Since fpgas do not have many vendors, drop the 'VENDOR' and use
-FPGA_BLA.
+On Mon, Jun 14, 2021 at 11:23:02AM -0400, Waiman Long wrote:
+> The current container management system is able to create the illusion
+> that applications running within a container have limited resources and
+> devices available for their use. However, one thing that is hard to hide
+> is the number of CPUs available in the system. In fact, the container
+> developers are asking for the kernel to provide such capability.
+> 
+> There are two places where cpu information are available for the
+> applications to see - /proc/cpuinfo and /sys/devices/system/cpu sysfs
+> directory.
+> 
+> This patchset introduces a new sysctl parameter cpuset_bound_cpuinfo
+> which, when set, will limit the amount of information disclosed by
+> /proc/cpuinfo and /sys/devices/system/cpu.
 
-There are several new subdirs
-altera/
-dfl/
-lattice/
-xilinx/
+The goal of cgroup has never been masquerading system information so that
+applications can pretend that they own the whole system and the proposed
+solution requires application changes anyway. The information being provided
+is useful but please do so within the usual cgroup interface - e.g.
+cpuset.stat. The applications (or libraries) that want to determine its
+confined CPU availability can locate the file through /proc/self/cgroup.
 
-Each subdir has a Kconfig that has a new/reused
+Thanks.
 
-if FPGA_BLA
-  ... existing configs ...
-endif FPGA_BLA
-
-Which is sourced into the main fpga/Kconfig
-
-Each subdir has a Makefile whose transversal is controlled in the
-fpga/Makefile by
-
-obj-$(CONFIG_FPGA_BLA) += bla/
-
-This is the lattice/ subdir part.
-
-Create a lattice/ subdir
-Move ice40* and machxo2* files to it.
-Add a Kconfig and Makefile
-
-Signed-off-by: Tom Rix <trix@redhat.com>
----
- drivers/fpga/Kconfig                     | 14 +-----------
- drivers/fpga/Makefile                    | 13 ++++-------
- drivers/fpga/lattice/Kconfig             | 29 ++++++++++++++++++++++++
- drivers/fpga/lattice/Makefile            |  4 ++++
- drivers/fpga/{ => lattice}/ice40-spi.c   |  0
- drivers/fpga/{ => lattice}/machxo2-spi.c |  0
- 6 files changed, 39 insertions(+), 21 deletions(-)
- create mode 100644 drivers/fpga/lattice/Kconfig
- create mode 100644 drivers/fpga/lattice/Makefile
- rename drivers/fpga/{ => lattice}/ice40-spi.c (100%)
- rename drivers/fpga/{ => lattice}/machxo2-spi.c (100%)
-
-diff --git a/drivers/fpga/Kconfig b/drivers/fpga/Kconfig
-index 2c829b1105925..955b155da3575 100644
---- a/drivers/fpga/Kconfig
-+++ b/drivers/fpga/Kconfig
-@@ -12,19 +12,6 @@ menuconfig FPGA
- 
- if FPGA
- 
--config FPGA_MGR_ICE40_SPI
--	tristate "Lattice iCE40 SPI"
--	depends on OF && SPI
--	help
--	  FPGA manager driver support for Lattice iCE40 FPGAs over SPI.
--
--config FPGA_MGR_MACHXO2_SPI
--	tristate "Lattice MachXO2 SPI"
--	depends on SPI
--	help
--	  FPGA manager driver support for Lattice MachXO2 configuration
--	  over slave SPI interface.
--
- config FPGA_BRIDGE
- 	tristate "FPGA Bridge Framework"
- 	help
-@@ -48,6 +35,7 @@ config OF_FPGA_REGION
- 
- source "drivers/fpga/altera/Kconfig"
- source "drivers/fpga/dfl/Kconfig"
-+source "drivers/fpga/lattice/Kconfig"
- source "drivers/fpga/xilinx/Kconfig"
- 
- endif # FPGA
-diff --git a/drivers/fpga/Makefile b/drivers/fpga/Makefile
-index db83aeb997f24..9197698201e3a 100644
---- a/drivers/fpga/Makefile
-+++ b/drivers/fpga/Makefile
-@@ -4,19 +4,16 @@
- #
- 
- # Core FPGA Manager Framework
--obj-$(CONFIG_FPGA)			+= fpga-mgr.o
--
--# FPGA Manager Drivers
--obj-$(CONFIG_FPGA_MGR_ICE40_SPI)	+= ice40-spi.o
--obj-$(CONFIG_FPGA_MGR_MACHXO2_SPI)	+= machxo2-spi.o
-+obj-$(CONFIG_FPGA) += fpga-mgr.o
- 
- # FPGA Bridge Drivers
--obj-$(CONFIG_FPGA_BRIDGE)		+= fpga-bridge.o
-+obj-$(CONFIG_FPGA_BRIDGE) += fpga-bridge.o
- 
- # High Level Interfaces
--obj-$(CONFIG_FPGA_REGION)		+= fpga-region.o
--obj-$(CONFIG_OF_FPGA_REGION)		+= of-fpga-region.o
-+obj-$(CONFIG_FPGA_REGION) += fpga-region.o
-+obj-$(CONFIG_OF_FPGA_REGION) += of-fpga-region.o
- 
- obj-$(CONFIG_FPGA_ALTERA) += altera/
- obj-$(CONFIG_FPGA_DFL) += dfl/
-+obj-$(CONFIG_FPGA_LATTICE) += lattice/
- obj-$(CONFIG_FPGA_XILINX) += xilinx/
-diff --git a/drivers/fpga/lattice/Kconfig b/drivers/fpga/lattice/Kconfig
-new file mode 100644
-index 0000000000000..6c2f1ae17e4f6
---- /dev/null
-+++ b/drivers/fpga/lattice/Kconfig
-@@ -0,0 +1,29 @@
-+# SPDX-License-Identifier: GPL-2.0-only
-+
-+config FPGA_LATTICE
-+	bool "Lattice FPGAs"
-+	default y
-+	help
-+	  If you have a lattice fpga, say Y.
-+
-+	  Note that the answer to this question doesn't directly affect the
-+	  kernel: saying N will just cause the configurator to skip all
-+	  the questions about lattice fpgas. If you say Y, you will be asked
-+	  for your specific device in the following questions.
-+
-+if FPGA_LATTICE
-+
-+config FPGA_MGR_ICE40_SPI
-+	tristate "Lattice iCE40 SPI"
-+	depends on OF && SPI
-+	help
-+	  FPGA manager driver support for Lattice iCE40 FPGAs over SPI.
-+
-+config FPGA_MGR_MACHXO2_SPI
-+	tristate "Lattice MachXO2 SPI"
-+	depends on SPI
-+	help
-+	  FPGA manager driver support for Lattice MachXO2 configuration
-+	  over slave SPI interface.
-+
-+endif #FPGA_LATTICE
-diff --git a/drivers/fpga/lattice/Makefile b/drivers/fpga/lattice/Makefile
-new file mode 100644
-index 0000000000000..f542c96a73d40
---- /dev/null
-+++ b/drivers/fpga/lattice/Makefile
-@@ -0,0 +1,4 @@
-+# SPDX-License-Identifier: GPL-2.0-only
-+
-+obj-$(CONFIG_FPGA_MGR_ICE40_SPI) += ice40-spi.o
-+obj-$(CONFIG_FPGA_MGR_MACHXO2_SPI) += machxo2-spi.o
-diff --git a/drivers/fpga/ice40-spi.c b/drivers/fpga/lattice/ice40-spi.c
-similarity index 100%
-rename from drivers/fpga/ice40-spi.c
-rename to drivers/fpga/lattice/ice40-spi.c
-diff --git a/drivers/fpga/machxo2-spi.c b/drivers/fpga/lattice/machxo2-spi.c
-similarity index 100%
-rename from drivers/fpga/machxo2-spi.c
-rename to drivers/fpga/lattice/machxo2-spi.c
 -- 
-2.26.3
-
+tejun
