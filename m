@@ -2,155 +2,248 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 715333A77C7
-	for <lists+linux-doc@lfdr.de>; Tue, 15 Jun 2021 09:15:28 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 8D1A13A77D4
+	for <lists+linux-doc@lfdr.de>; Tue, 15 Jun 2021 09:18:22 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S229797AbhFOHRb (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 15 Jun 2021 03:17:31 -0400
-Received: from mail-0201.mail-europe.com ([51.77.79.158]:39378 "EHLO
-        mail-02.mail-europe.com" rhost-flags-OK-OK-OK-FAIL) by vger.kernel.org
-        with ESMTP id S229613AbhFOHRb (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 15 Jun 2021 03:17:31 -0400
-Date:   Tue, 15 Jun 2021 07:15:18 +0000
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=emersion.fr;
-        s=protonmail3; t=1623741323;
-        bh=zAvKKg8XYRllgucKJPAAx6Hwc3GHyOslF2EqoYChAU4=;
-        h=Date:To:From:Cc:Reply-To:Subject:In-Reply-To:References:From;
-        b=qIC2eamU+xceUl39cfpo+Bhho6rVi/vXhoahbkzyuqB4fwHA2HzLwevsTcI1Db9xs
-         BX32j+PX6lz6SBs/Z67DzyFA9lkF3Wh3OHUQGgQNgk+mzda5QgFPNcUuTQjRSND5Gr
-         sXDpgIxNmOBgIy/iVvqIj+v3zRbkZgrkTr2l0JD3RbdUyopl20Cth6IXBcs3KRuH9y
-         g1In7HEdKt3KPgWaHMeBwZgfR2i8pbnuJTjS+ZibNwYCjg+lTFntI5RMy2tp0P3cCg
-         Ap52jKaW2WLFk99bqh0CyuNUmVhgNtQ3aZjuK5RtApLs7ZfWBNTJ+9wCl4DRfCPg+D
-         k/TImS8zk8pMA==
-To:     Pekka Paalanen <ppaalanen@gmail.com>
-From:   Simon Ser <contact@emersion.fr>
-Cc:     Laurent Pinchart <laurent.pinchart@ideasonboard.com>,
-        Liviu Dudau <liviu.dudau@arm.com>,
-        Haneen Mohammed <hamohammed.sa@gmail.com>,
-        Alexandre Belloni <alexandre.belloni@bootlin.com>,
-        Linux Doc Mailing List <linux-doc@vger.kernel.org>,
-        Xinliang Liu <xinliang.liu@linaro.org>,
-        Daniel Vetter <daniel.vetter@ffwll.ch>,
-        Edmund Dea <edmund.j.dea@intel.com>,
-        Alexandre Torgue <alexandre.torgue@foss.st.com>,
-        dri-devel <dri-devel@lists.freedesktop.org>,
-        Russell King <linux@armlinux.org.uk>,
-        Melissa Wen <melissa.srw@gmail.com>,
-        Tomi Valkeinen <tomba@kernel.org>,
-        Thierry Reding <thierry.reding@gmail.com>,
-        Benjamin Gaignard <benjamin.gaignard@linaro.org>,
-        Anitha Chrisanthus <anitha.chrisanthus@intel.com>,
-        Daniel Vetter <daniel.vetter@intel.com>,
-        Steven Price <steven.price@arm.com>,
-        Sam Ravnborg <sam@ravnborg.org>,
-        Jyri Sarha <jyri.sarha@iki.fi>,
-        Jerome Brunet <jbrunet@baylibre.com>,
-        Marek Vasut <marex@denx.de>,
-        Joonyoung Shim <jy0922.shim@samsung.com>,
-        Qiang Yu <yuq825@gmail.com>,
-        Krzysztof Kozlowski <krzysztof.kozlowski@canonical.com>,
-        Kevin Hilman <khilman@baylibre.com>,
-        Neil Armstrong <narmstrong@baylibre.com>,
-        Alyssa Rosenzweig <alyssa.rosenzweig@collabora.com>,
-        Xinwei Kong <kong.kongxinwei@hisilicon.com>,
-        Jonathan Hunter <jonathanh@nvidia.com>,
-        David Airlie <airlied@linux.ie>,
-        Ludovic Desroches <ludovic.desroches@microchip.com>,
-        Kieran Bingham <kieran.bingham+renesas@ideasonboard.com>,
-        VMware Graphics <linux-graphics-maintainer@vmware.com>,
-        NXP Linux Team <linux-imx@nxp.com>,
-        Ben Skeggs <bskeggs@redhat.com>,
-        Chun-Kuang Hu <chunkuang.hu@kernel.org>,
-        Maxime Coquelin <mcoquelin.stm32@gmail.com>,
-        Jonas Karlman <jonas@kwiboo.se>,
-        Martin Blumenstingl <martin.blumenstingl@googlemail.com>,
-        Chen Feng <puck.chen@hisilicon.com>,
-        Sascha Hauer <s.hauer@pengutronix.de>,
-        Alison Wang <alison.wang@nxp.com>,
-        Roland Scheidegger <sroland@vmware.com>,
-        Andrzej Hajda <a.hajda@samsung.com>,
-        Hans de Goede <hdegoede@redhat.com>,
-        Maxime Ripard <maxime@cerno.tech>,
-        Rodrigo Vivi <rodrigo.vivi@intel.com>,
-        Matthias Brugger <matthias.bgg@gmail.com>,
-        Nicolas Ferre <nicolas.ferre@microchip.com>,
-        Chen-Yu Tsai <wens@csie.org>, Sean Paul <sean@poorly.run>,
-        Thomas Zimmermann <tzimmermann@suse.de>,
-        Paul Cercueil <paul@crapouillou.net>,
-        Jernej Skrabec <jernej.skrabec@siol.net>,
-        Rodrigo Siqueira <rodrigosiqueiramelo@gmail.com>,
-        Hyun Kwon <hyun.kwon@xilinx.com>,
-        Boris Brezillon <bbrezillon@kernel.org>,
-        Andrew Jeffery <andrew@aj.id.au>,
-        Huang Rui <ray.huang@amd.com>,
-        Yannick Fertr e <yannick.fertre@foss.st.com>,
+        id S230012AbhFOHUZ (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 15 Jun 2021 03:20:25 -0400
+Received: from mail-eopbgr10059.outbound.protection.outlook.com ([40.107.1.59]:13579
+        "EHLO EUR02-HE1-obe.outbound.protection.outlook.com"
+        rhost-flags-OK-OK-OK-FAIL) by vger.kernel.org with ESMTP
+        id S230190AbhFOHUY (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Tue, 15 Jun 2021 03:20:24 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=armh.onmicrosoft.com;
+ s=selector2-armh-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=cMNmTvJnHlQJ2SOOBsg9JbwhK7HJmgKyr0uUhFcbOik=;
+ b=7SSGBobFwzuuk5dvGYurS5PcyGi0k/aKoQofAS+QtxmamoImwbw0YOKyp1nX5Hvz2ayFpNNNlnMp10nghKLYsOicIJPZzRnLHQSBChla9rC2zKMAlq2xkhPPfIVVLlphMR006eM6DdfdA2DOEQSnDTM9OKhk8gJGkepIMNyIM6A=
+Received: from AM5PR0402CA0001.eurprd04.prod.outlook.com
+ (2603:10a6:203:90::11) by AM6PR08MB3445.eurprd08.prod.outlook.com
+ (2603:10a6:20b:43::21) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4219.23; Tue, 15 Jun
+ 2021 07:18:11 +0000
+Received: from VE1EUR03FT063.eop-EUR03.prod.protection.outlook.com
+ (2603:10a6:203:90:cafe::df) by AM5PR0402CA0001.outlook.office365.com
+ (2603:10a6:203:90::11) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4219.21 via Frontend
+ Transport; Tue, 15 Jun 2021 07:18:10 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 63.35.35.123)
+ smtp.mailfrom=arm.com; vger.kernel.org; dkim=pass (signature was verified)
+ header.d=armh.onmicrosoft.com;vger.kernel.org; dmarc=pass action=none
+ header.from=arm.com;
+Received-SPF: Pass (protection.outlook.com: domain of arm.com designates
+ 63.35.35.123 as permitted sender) receiver=protection.outlook.com;
+ client-ip=63.35.35.123; helo=64aa7808-outbound-1.mta.getcheckrecipient.com;
+Received: from 64aa7808-outbound-1.mta.getcheckrecipient.com (63.35.35.123) by
+ VE1EUR03FT063.mail.protection.outlook.com (10.152.18.236) with Microsoft SMTP
+ Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.4219.21 via Frontend Transport; Tue, 15 Jun 2021 07:18:10 +0000
+Received: ("Tessian outbound 596959d6512a:v93"); Tue, 15 Jun 2021 07:18:10 +0000
+X-CR-MTA-TID: 64aa7808
+Received: from a37d1324010f.1
+        by 64aa7808-outbound-1.mta.getcheckrecipient.com id 53A6B74E-C9AE-4B37-97FF-9270815046D6.1;
+        Tue, 15 Jun 2021 07:18:03 +0000
+Received: from EUR04-DB3-obe.outbound.protection.outlook.com
+    by 64aa7808-outbound-1.mta.getcheckrecipient.com with ESMTPS id a37d1324010f.1
+    (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384);
+    Tue, 15 Jun 2021 07:18:03 +0000
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=lcp6L4qdqD80XzyGdhT6IAdh8T9gugzyrGkekZSvBWYJHWfM/NZg+lVEgRvQsswM8cb686zlbGCjH0rkM0ZZNAJkgSJozfZ9M9eOQhzx2AeSl3f7xqii3BxuCNFyEQLy/CGIgfQJ1k5577fjY7c7bIs70u1UVZYQuvrD0x7KMPorRQUpBe2JJgPSVQYoPvJAh8/Khc9/4rLwVMnE1OD1T1i8uTqq7bSE2DtvMg/axSXlZvYvTx1mTmHns345xMHZg4NzRJfTkExS2FxXJgV/SPbOdIohscITUI+B3CzfTht9DDwi81KTHyeClRbPnS96HaLfiyRbLbzU56GxUJdRcQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=cMNmTvJnHlQJ2SOOBsg9JbwhK7HJmgKyr0uUhFcbOik=;
+ b=GC2ZtDPnA0zM6NjarsvdtgZ43YbDdxPg+9EZm0RPRimQqeasbwuGg3jj9RkXW2gCgdsWbX5iL4Ihm9JMaAVo771MS+24+7pZx8qbtACIhrf+pH9Y6uYIv+j/VzIAV8X2WFDevp8wSE5j6IkVwk4kb3hL8Gr68I6wuCeozRppybeDEEN9LcMpwAZpGnX1ep/buJ89fqqdvWLZxoZCIAXTN7tYpM5rDXdUnQt4V32QvsUQ55i1pMJ/SaoVwRT0rjVEYBPpi/kHvnB96QEMm/dCHZ2tY7CoCUoeSt2Io8+gvvy0rWwLWNqyCH6Mv9hLfIF+1Mk6XpsTzREvVWR5uPMEYg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=arm.com; dmarc=pass action=none header.from=arm.com; dkim=pass
+ header.d=arm.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=armh.onmicrosoft.com;
+ s=selector2-armh-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=cMNmTvJnHlQJ2SOOBsg9JbwhK7HJmgKyr0uUhFcbOik=;
+ b=7SSGBobFwzuuk5dvGYurS5PcyGi0k/aKoQofAS+QtxmamoImwbw0YOKyp1nX5Hvz2ayFpNNNlnMp10nghKLYsOicIJPZzRnLHQSBChla9rC2zKMAlq2xkhPPfIVVLlphMR006eM6DdfdA2DOEQSnDTM9OKhk8gJGkepIMNyIM6A=
+Received: from AM6PR08MB4376.eurprd08.prod.outlook.com (2603:10a6:20b:bb::21)
+ by AS8PR08MB6856.eurprd08.prod.outlook.com (2603:10a6:20b:351::5) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4219.21; Tue, 15 Jun
+ 2021 07:18:02 +0000
+Received: from AM6PR08MB4376.eurprd08.prod.outlook.com
+ ([fe80::3452:c711:d09a:d8a1]) by AM6PR08MB4376.eurprd08.prod.outlook.com
+ ([fe80::3452:c711:d09a:d8a1%5]) with mapi id 15.20.4219.025; Tue, 15 Jun 2021
+ 07:18:02 +0000
+From:   Justin He <Justin.He@arm.com>
+To:     Rasmus Villemoes <linux@rasmusvillemoes.dk>,
+        Petr Mladek <pmladek@suse.com>
+CC:     Steven Rostedt <rostedt@goodmis.org>,
+        Sergey Senozhatsky <senozhatsky@chromium.org>,
+        Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
         Jonathan Corbet <corbet@lwn.net>,
-        Seung-Woo Kim <sw0312.kim@samsung.com>,
-        Sandy Huang <hjc@rock-chips.com>,
-        Robert Foss <robert.foss@linaro.org>,
-        Joel Stanley <joel@jms.id.au>,
-        Tomeu Vizoso <tomeu.vizoso@collabora.com>,
-        Kyungmin Park <kyungmin.park@samsung.com>,
-        =?utf-8?Q?Noralf_Tr=C3=B8nnes?= <noralf@tronnes.org>,
-        Philippe Cornu <philippe.cornu@foss.st.com>,
-        Pengutronix Kernel Team <kernel@pengutronix.de>,
-        Alex Deucher <alexander.deucher@amd.com>,
-        Tian Tao <tiantao6@hisilicon.com>,
-        Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>,
-        Shawn Guo <shawnguo@kernel.org>,
-        =?utf-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>,
-        Gerd Hoffmann <kraxel@redhat.com>
-Reply-To: Simon Ser <contact@emersion.fr>
-Subject: Re: [PATCH v3] Documentation: gpu: Mention the requirements for new properties
-Message-ID: <ouNaZaqkV1d_wPRESVBQHxvMhmJ53xIrgtPfDs8mB88AN3FEWt7cq031k8ZqCva1Ob0TCNTnsWqNDS0l5NXfejXIL7YUky3XGdjmh1_hefk=@emersion.fr>
-In-Reply-To: <20210615100335.0b8f96d5@eldfell>
-References: <20210610174731.1209188-1-maxime@cerno.tech> <CAKMK7uG_Wkko0L6sv0U1bXWdYk4fg3OTcp5=+qfRV0CP9V44=A@mail.gmail.com> <KNFHfqvJUVq9oy9BSdznj1S6xhDoZUAx1_DwfSNvUv8u1d-TroKBTq2hxtv7u1aJnxnpI5CxUXSMTn73YsVhZjnRW78gv-QLsK6AkJ5m3Fw=@emersion.fr> <20210611120309.2b5eb4htupv5ss32@e110455-lin.cambridge.arm.com> <20210614174912.15a49336@eldfell> <20210614152413.nguqia3s4tlowio4@e110455-lin.cambridge.arm.com> <YMeE63G+9DSLPB3N@pendragon.ideasonboard.com> <20210615100335.0b8f96d5@eldfell>
-MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
+        Alexander Viro <viro@zeniv.linux.org.uk>,
+        Linus Torvalds <torvalds@linux-foundation.org>,
+        "Peter Zijlstra (Intel)" <peterz@infradead.org>,
+        Eric Biggers <ebiggers@google.com>,
+        "Ahmed S. Darwish" <a.darwish@linutronix.de>,
+        "linux-doc@vger.kernel.org" <linux-doc@vger.kernel.org>,
+        "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
+        "linux-fsdevel@vger.kernel.org" <linux-fsdevel@vger.kernel.org>
+Subject: RE: [PATCH RFCv3 2/3] lib/vsprintf.c: make %pD print full path for
+ file
+Thread-Topic: [PATCH RFCv3 2/3] lib/vsprintf.c: make %pD print full path for
+ file
+Thread-Index: AQHXXtruU5AIb64vzESDK9b2+VqurKsTqaKAgAD8LoCAAAitgIAAAHTA
+Date:   Tue, 15 Jun 2021 07:18:01 +0000
+Message-ID: <AM6PR08MB43764C1A1EE67D0683EEF11CF7309@AM6PR08MB4376.eurprd08.prod.outlook.com>
+References: <20210611155953.3010-1-justin.he@arm.com>
+ <20210611155953.3010-3-justin.he@arm.com> <YMd4ixry8ztzlG/e@alley>
+ <AM6PR08MB4376D26EFD5886B7CF21EFCFF7309@AM6PR08MB4376.eurprd08.prod.outlook.com>
+ <113d9380-8493-1bde-9c76-992f4ce675d9@rasmusvillemoes.dk>
+In-Reply-To: <113d9380-8493-1bde-9c76-992f4ce675d9@rasmusvillemoes.dk>
+Accept-Language: en-US, zh-CN
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-ts-tracking-id: DB7F0547DC83C44CB4FA7C6CA0937ED6.0
+x-checkrecipientchecked: true
+Authentication-Results-Original: rasmusvillemoes.dk; dkim=none (message not
+ signed) header.d=none;rasmusvillemoes.dk; dmarc=none action=none
+ header.from=arm.com;
+x-originating-ip: [203.126.0.111]
+x-ms-publictraffictype: Email
+X-MS-Office365-Filtering-Correlation-Id: 582dc9d0-102c-4e47-1dfa-08d92fcdbb65
+x-ms-traffictypediagnostic: AS8PR08MB6856:|AM6PR08MB3445:
+X-Microsoft-Antispam-PRVS: <AM6PR08MB3445CB21DF194C9F383F32B4F7309@AM6PR08MB3445.eurprd08.prod.outlook.com>
+x-checkrecipientrouted: true
+nodisclaimer: true
+x-ms-oob-tlc-oobclassifiers: OLM:9508;OLM:10000;
+X-MS-Exchange-SenderADCheck: 1
+X-Microsoft-Antispam-Untrusted: BCL:0;
+X-Microsoft-Antispam-Message-Info-Original: bwjs6vpJyV8jMF7qdQ/R2LZniFo0wC9S9AMG7YnPcIRe+FGJ2SHl9HybloyfTucbzzF8dPxwZI3j+4exSc3ItSCjfZpHrnaAyL4dd4t4xilVJUYkzHfV0hZR1HGhoQTMgdxmR3v0IDDm7DNuWwMcVWfQvvJO1K36n4CzGZj9i0EZOipx9YOrltwbOnC7ptNwwt9yAdwTXsmfiV7yXbW2veZRp1Az98WC5eTi31vJ+bB2HEpTdSOl6hreq0MM0ZsV0L8o65wJ1Ghzcqn3N/QB59etWAkApQBgpjHHK3p9vsT6u/FRQ8tUjVyi+PKC4BRNedEuryG+GQaxtbHC7zDovmUis7u771dAzFjQLYvsbxJHULKmOZLQdXVCUF555GrWDGad1j/Qvs6cepMK08ANIlCO1Wy8XL1sUaYDzWk68LmRvaAiJx9KgcvWpP6zk0cRG5zggGQ9HAdZS/xpXysldFHcnzcMWx9Tdr5IiHUEGPv7xoj0g6BPSBWf7yxuMqFKCp9uElZ5LfTx/C3a6VP/R72VHvxMB43tF9P3QYJM3SZ9wLLQh67mGE0D+mEnh7B3VaMiucLQH9gI0d+Nc5WKiCOUQl7EF+oeWeLl+FV9RUI=
+X-Forefront-Antispam-Report-Untrusted: CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:AM6PR08MB4376.eurprd08.prod.outlook.com;PTR:;CAT:NONE;SFS:(4636009)(136003)(376002)(366004)(346002)(39850400004)(396003)(55016002)(86362001)(6506007)(83380400001)(64756008)(8936002)(33656002)(52536014)(4326008)(53546011)(54906003)(66476007)(66946007)(7696005)(316002)(66446008)(7416002)(122000001)(76116006)(5660300002)(186003)(8676002)(26005)(9686003)(2906002)(38100700002)(478600001)(71200400001)(110136005)(66556008);DIR:OUT;SFP:1101;
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0: =?iso-8859-1?Q?Wp0OEjytLsNgxedqURC+0Hg01W+Yl7wSG/kynWGxnSQZM/du8nkk4vDufq?=
+ =?iso-8859-1?Q?SgpL5bvCm4Wh+U0PjjAuDH04NFKBN0+NSnPF9g+f0+wO6U+jbezgVHcqDW?=
+ =?iso-8859-1?Q?0tp4h0ke7XwUjSjlOvheAsM72Yen+XGHouZ4YMp2ErqAVhBXo5b0N+ymu3?=
+ =?iso-8859-1?Q?RnqotC9lNODyafRsZN/6k+Kefv5O7ZFzpO+ws4I3eKJcb+ahwYFOOehKqw?=
+ =?iso-8859-1?Q?9g6jKtsX5ihguw/blRGEgwf0F7W7cNQjeHETwLTLI0nA8uYGT2ZJ+E+yXP?=
+ =?iso-8859-1?Q?fHpGZbEKXgcQClCGqHC5EsxBofy9ahKFVvmWEZTCQWl0gl3Rh6utPHlXuk?=
+ =?iso-8859-1?Q?LLpZWINvzoE9hc9FtrLGHsxuy8BG9blrZeg7H/vIhohFs8sumNt16EpsXl?=
+ =?iso-8859-1?Q?WmyNZx/MA2DosKl+lT5VBOAkA+jvBEBOAvdEDEnMhHxbH0PdQAPHS4rbg0?=
+ =?iso-8859-1?Q?WTOJnJxs7btLJVqsY7ScMmt6dUTrgZm6vrUbG0tpLYOu06VUZjUb3V2azP?=
+ =?iso-8859-1?Q?Go1dEjRA3DIPi+qZUBKBS+wgz8w/UVfLD0ptZRgj7FnKOU9w/0kB4VZiIX?=
+ =?iso-8859-1?Q?DeSyhHKEnCVPT2nGCGOlGLQGn+JGhsLxMwYdZbV6q4r2xwEhwmKtg+GpZt?=
+ =?iso-8859-1?Q?hwttrwpPxHyHU8tZznQd4f7xWsQi/ntuDlWKVJCLF8Tqruqid0ZezkvpeO?=
+ =?iso-8859-1?Q?FQHAp+6LgTctv9EjlXFv4r7e2l6PGgHJ1dt7ZCX8gG+V2YIj8iRkFsqx8D?=
+ =?iso-8859-1?Q?xOudPfJWzGgkqwKaY1TnzEiscJiKnrYwsICfgmfaofirFUt4xzZtouLGO5?=
+ =?iso-8859-1?Q?lTg3iMDKqaXq/emDFM4sgi4prKFASP/x26IHv+dON2m/W/RWwuj5ZHe044?=
+ =?iso-8859-1?Q?9y1k5ZQvHf6ceFhmTUuSogagRrKPVp0G+0C7ozX3xqLXnA9Fkg3KPHqin8?=
+ =?iso-8859-1?Q?uFxFpBaOzwH16LIX9KEqMz7b5zkY5fl/3B5Wv2Fb5GCi7ejGzOyqsqylxv?=
+ =?iso-8859-1?Q?4lE0r1pWmi+anxtPbxoViXuu7q17gdXc+Vk9vsJ4fX4h3wYssVdR6olx/C?=
+ =?iso-8859-1?Q?MlEahV9L1mRe3ZxL5Z2YabuxMMQP3tQc8aI+ra7pIy9G8hPBudglSQmvc1?=
+ =?iso-8859-1?Q?luqdhvFwnPGBr0hMwRD83uacvPTq4K4VFW2etCf/pHOAPQXGTDQoVhsRZq?=
+ =?iso-8859-1?Q?2zvqgr+CSXJjup0Auyn8/KlaZQs9u/+hNWnd4D7ggSpafKgmNYSMyuJPxe?=
+ =?iso-8859-1?Q?rlypInzYSt2mfYb2zmEfn9Q9JU4MunlzFLA8M81E4I0+f83+zcAjf66VyV?=
+ =?iso-8859-1?Q?faUDZKbNi42jhoZQdZA/dSrhWC0bPczwUhlI/XKQ61foz4sDSYEWInjk5Z?=
+ =?iso-8859-1?Q?mk1JzawUmO?=
+x-ms-exchange-transport-forked: True
+Content-Type: text/plain; charset="iso-8859-1"
 Content-Transfer-Encoding: quoted-printable
-X-Spam-Status: No, score=-1.2 required=10.0 tests=ALL_TRUSTED,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF shortcircuit=no
-        autolearn=disabled version=3.4.4
-X-Spam-Checker-Version: SpamAssassin 3.4.4 (2020-01-24) on
-        mailout.protonmail.ch
+MIME-Version: 1.0
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS8PR08MB6856
+Original-Authentication-Results: rasmusvillemoes.dk; dkim=none (message not signed)
+ header.d=none;rasmusvillemoes.dk; dmarc=none action=none header.from=arm.com;
+X-EOPAttributedMessage: 0
+X-MS-Exchange-Transport-CrossTenantHeadersStripped: VE1EUR03FT063.eop-EUR03.prod.protection.outlook.com
+X-MS-Office365-Filtering-Correlation-Id-Prvs: 95cf67aa-0268-4f48-1816-08d92fcdb663
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: LY/dFDPpTRGKBzJguJQe2EUxrlcZ+X/gwQaVpybOWcEGW2EdihVKYSTlUZkup17JT0jFoUGqMsMg/AjijMz3DtjoFPmCpfFrYgpvw1M+PoZyPGJA062rqkCPy4z4VTjpP5S/mIN33C0BfBYY525PVCzeqpWMg+agO7XHVJouDPP3nPMiG9y25jDviVMr2yiRWw0lH4MfMrM4pVckNRTa/3u4fYvLfMVQ6cYl202tjbmq/eSwOnQuNbqQchjPpyhMzBP6hWbFklk7sDO9KfJ41nFj1205B1RBZLLblMa7nVoU+AZStctuNNu9+eYHG9X3CNf5aSomD/doEsrJykygx5Co2ylKvzcTjjAHK84RgU6HyZsyR7lNoBlvYypN9gsVED8ZVInU8wPuq13MsggC/sbDS9Dvjz/3gv2XOFOdMJ1OAcCrRXXp9gqQoNCv38OlKLDneMAr9rSUhEkrrC8lyw3PQiViPB4M7aCriWoOKmEFu9MKv2ib06ncp9t8A6Uz2kY0Wd7yM38Tw5RML08djF1Oi5KfMgUM6dcCAJdGKcBJzPC+kQTm/en8AkLUYAECXKuir5bOE9Nou26rN9hM4Q32vJFslLNgoO/RS1S1SAFJwo6hxIaokd1lDXtY0b7J/1dMj1HlgnMlX/a/ppL2cTYDk7CLspMt7Jyqzp5uQYQ=
+X-Forefront-Antispam-Report: CIP:63.35.35.123;CTRY:IE;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:64aa7808-outbound-1.mta.getcheckrecipient.com;PTR:ec2-63-35-35-123.eu-west-1.compute.amazonaws.com;CAT:NONE;SFS:(4636009)(39860400002)(376002)(396003)(136003)(346002)(36840700001)(46966006)(110136005)(7696005)(2906002)(9686003)(33656002)(54906003)(450100002)(336012)(26005)(82310400003)(186003)(356005)(316002)(52536014)(83380400001)(478600001)(86362001)(4326008)(53546011)(5660300002)(70586007)(81166007)(6506007)(8676002)(55016002)(82740400003)(36860700001)(70206006)(8936002)(47076005);DIR:OUT;SFP:1101;
+X-OriginatorOrg: arm.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 15 Jun 2021 07:18:10.6414
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 582dc9d0-102c-4e47-1dfa-08d92fcdbb65
+X-MS-Exchange-CrossTenant-Id: f34e5979-57d9-4aaa-ad4d-b122a662184d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=f34e5979-57d9-4aaa-ad4d-b122a662184d;Ip=[63.35.35.123];Helo=[64aa7808-outbound-1.mta.getcheckrecipient.com]
+X-MS-Exchange-CrossTenant-AuthSource: VE1EUR03FT063.eop-EUR03.prod.protection.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM6PR08MB3445
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Tuesday, June 15th, 2021 at 09:03, Pekka Paalanen <ppaalanen@gmail.com> =
-wrote:
 
-> indeed it will, but what else could one do to test userspace KMS
-> clients in generic CI where all you can have is virtual hardware? Maybe
-> in the long run VKMS needs to loop back to a userspace daemon that
-> implements all the complex processing and returns the writeback result
-> via VKMS again? That daemon would then need a single upstream, like the
-> kernel, where it is maintained and correctness verified.
 
-The complex processing must be implemented even without write-back, because
-user-space can ask for CRCs of the CRTC.
+> -----Original Message-----
+> From: Rasmus Villemoes <linux@rasmusvillemoes.dk>
+> Sent: Tuesday, June 15, 2021 3:15 PM
+> To: Justin He <Justin.He@arm.com>; Petr Mladek <pmladek@suse.com>
+> Cc: Steven Rostedt <rostedt@goodmis.org>; Sergey Senozhatsky
+> <senozhatsky@chromium.org>; Andy Shevchenko
+> <andriy.shevchenko@linux.intel.com>; Rasmus Villemoes
+> <linux@rasmusvillemoes.dk>; Jonathan Corbet <corbet@lwn.net>; Alexander
+> Viro <viro@zeniv.linux.org.uk>; Linus Torvalds <torvalds@linux-
+> foundation.org>; Peter Zijlstra (Intel) <peterz@infradead.org>; Eric
+> Biggers <ebiggers@google.com>; Ahmed S. Darwish <a.darwish@linutronix.de>=
+;
+> linux-doc@vger.kernel.org; linux-kernel@vger.kernel.org; linux-
+> fsdevel@vger.kernel.org
+> Subject: Re: [PATCH RFCv3 2/3] lib/vsprintf.c: make %pD print full path f=
+or
+> file
+>
+> On 15/06/2021 08.48, Justin He wrote:
+> > Hi Petr
+> >
+>
+> >>> +   /* no filling space at all */
+> >>> +   if (buf >=3D end || !buf)
+> >>> +           return buf + reserved_size;
+> >>> +
+> >>> +   /* small space for long name */
+> >>> +   if (buf < end && prepend_len < 0)
+> >>> +           return string_truncate(buf, end, p, dpath_len, spec);
+> >>
+> >> We need this only because we allowed to write the path behind
+> >> spec.field_width. Do I get it right?
+> >
+> > Both of field_width and precision:
+> > "%.14pD" or "%8.14pD"
+>
+> Precision is never gonna be used with %p (or any of its kernel
+> extensions) because gcc would tell you
+>
+> foo.c:5:13: warning: precision used with =EF=BF=BD%p=EF=BF=BD gnu_printf =
+format [-
+> Wformat=3D]
+>     5 |  printf("%.5p\n", foo);
+>
+> and there's no way -Wformat is going to be turned off to allow that usage=
+.
+>
+> IOW, there's no need to add complexity to make "%.3pD" of something that
+> would normally print "/foo/bar" merely print "/fo", similar to what a
+> precision with %s would mean.
+>
+Aha, this answer my question in last email.
+Thank you
 
-> Or an LD_PRELOAD that hijacks all KMS ioctls and implements virtual
-> stuff in userspace? Didn't someone already have something like that?
-> It would need to be lifted to be a required part of kernel UAPI
-> submissions, I suppose like IGT is nowadays.
 
-FWIW, I have a mock libdrm [1] for libliftoff. This is nowhere near a full
-software implementation with write-back connectors, but allows to expose
-virtual planes and check atomic commits in CI.
+--
+Cheers,
+Justin (Jia He)
 
-[1]: https://github.com/emersion/libliftoff/blob/master/test/libdrm_mock.c
 
-> For compositor developers like me knowing the exact formulas would be a h=
-uge
-> benefit as it would allow me to use KMS to off-load precision-sensitive
-> operations (e.g.  professional color management). Otherwise, compositors
-> probably need a switch: "high quality color management? Then do not use K=
-MS
-> features."
-
-I think for alpha blending there are already rounding issues depending on t=
-he
-hardware. I wouldn't keep my hopes up for any guarantee that all hw uses th=
-e
-exact same formulae for color management stuff.
+> As for field width, I don't know if it's worth honouring, but IIRC the
+> original %pd and %pD did that (that's where we have widen_string etc. fro=
+m).
+>
+> Other %p extensions put the field with to some other use (e.g. the
+> bitmap and hex string printing), so they obviously cannot simultaneously
+> use it in the traditional sense.
+>
+> Rasmus
+IMPORTANT NOTICE: The contents of this email and any attachments are confid=
+ential and may also be privileged. If you are not the intended recipient, p=
+lease notify the sender immediately and do not disclose the contents to any=
+ other person, use it for any purpose, or store or copy the information in =
+any medium. Thank you.
