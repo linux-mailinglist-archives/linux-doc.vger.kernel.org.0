@@ -2,306 +2,240 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 358BB3A7D92
-	for <lists+linux-doc@lfdr.de>; Tue, 15 Jun 2021 13:50:58 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id DE05E3A7DF1
+	for <lists+linux-doc@lfdr.de>; Tue, 15 Jun 2021 14:14:01 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S230197AbhFOLxB (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 15 Jun 2021 07:53:01 -0400
-Received: from [43.250.32.171] ([43.250.32.171]:4883 "EHLO email.cn"
-        rhost-flags-FAIL-FAIL-OK-FAIL) by vger.kernel.org with ESMTP
-        id S229979AbhFOLxA (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Tue, 15 Jun 2021 07:53:00 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=email.cn;
-        s=dkim; h=Date:From:To; bh=WFel7ENygnqeSKydWw9jYPVitONiMig3zvYxS
-        WxQijY=; b=cAci6xFsZ7SU5F15A+VDbzMnOZif4umyJc3i7ixEStXiKaT7nFS25
-        p85QN7Tb37d4MP4I/iVv+lrPkKFcKeigaVhROovk6grZCeTZHe/j3wlen21Y9e4p
-        LFvEMrgnq3jWELGYYExWSTurLbIV720TBQuCgyq27Z4AoqRd75TQmI=
-Received: from bobwxc.top (unknown [110.64.86.229])
-        by v_coremail2-frontend-1 (Coremail) with SMTP id LCKnCgCHIzcYlMhgUZ0RAA--.36484S2;
-        Tue, 15 Jun 2021 19:50:49 +0800 (CST)
-Date:   Tue, 15 Jun 2021 19:50:47 +0800
-From:   "Wu X.C." <bobwxc@email.cn>
-To:     Yanteng Si <siyanteng@loongson.cn>
-Cc:     corbet@lwn.net, alexs@kernel.org, seakeel@gmail.com,
-        chenhuacai@kernel.org, jiaxun.yang@flygoat.com,
-        linux-doc@vger.kernel.org, realpuyuwang@gmail.com,
-        siyanteng01@gmail.com
-Subject: Re: [PATCH v2 1/2] docs/core-api: Modify document layout
-Message-ID: <20210615115047.GA21347@bobwxc.top>
-References: <cover.1623740113.git.siyanteng@loongson.cn>
- <63ccd488a142fedbf3fa7fe38875046e2b21c41a.1623740114.git.siyanteng@loongson.cn>
+        id S229601AbhFOMQE (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 15 Jun 2021 08:16:04 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:36186 "EHLO
+        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S229557AbhFOMQD (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 15 Jun 2021 08:16:03 -0400
+Received: from mail-ej1-x642.google.com (mail-ej1-x642.google.com [IPv6:2a00:1450:4864:20::642])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 83CA5C061574
+        for <linux-doc@vger.kernel.org>; Tue, 15 Jun 2021 05:13:58 -0700 (PDT)
+Received: by mail-ej1-x642.google.com with SMTP id g20so22300587ejt.0
+        for <linux-doc@vger.kernel.org>; Tue, 15 Jun 2021 05:13:58 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=date:from:to:cc:subject:message-id:in-reply-to:references
+         :mime-version;
+        bh=1xUcdoU0rgH6jjTSj2XB1E78P9DWja+pl0vW8u+yUME=;
+        b=loh2Rs1j+aBMTB7nwR1wvQdD871fGH12MVpbxkvb/HGtKVG5YUTUDbVx7OK9O23RHD
+         CO0miiJiQwtvZ2Fizq52zvuPBeSfpHO2XkfnKUvu6P8nboa9/9qGPqVH7ov6QX0XBct5
+         whgtfm1JxRtHiIcp4i9uB6ShT8tZkLSkFrmEvTn7kMbWQYapbcyOxKJ/rQlHwTQr941z
+         v1aYcwND+61o78Dfd5AfNUjMVbz+6ucdAuQUdtrk+ANUquE8zOT1BUq9+v4zJt/lJKNF
+         Imo1V3MbWn+DhBr3Xi1SDR30eAO2bqjLM0s928uFaSMDjyRHcvEiWJg932IIK9v8JBRM
+         KPUw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:date:from:to:cc:subject:message-id:in-reply-to
+         :references:mime-version;
+        bh=1xUcdoU0rgH6jjTSj2XB1E78P9DWja+pl0vW8u+yUME=;
+        b=hq68biqReicqWlHpt7eZ0IDB9eQifAeGXl0Wz0IZAP0kDF2xPCUQoQiKUKPTlFWz9D
+         GaA+L0rDZGH8GXDHbKoEIkj0taQLAcRs1RxXeYbd5S7IbSoBOdlUctPkMPjSs3kja1XZ
+         k3xfQ5XNu8R1ePamUL6qR3OuWT84ss7mi5B5Vj0gsIraUgNmCsJdMumFFJjPOY2REl0W
+         0CpzyxxNzrpM/2EKdn3PNgcUlj1lmq5fHHFx8ZYxE1iCDUtgPhcrxTVXpTksJt2B89qz
+         om1fYZcr/Lw1PLc/d+vkIGnXFM9x6SjdSz0242zrYt8ylsbNnOJKnSLWqWo/zSPYLIS2
+         SQDw==
+X-Gm-Message-State: AOAM533nLdwFFQod4XWk4XF7wgHg7I3GUeo8awDupio1mFf1fpior/Ra
+        lO3z1XyKCuChtluia11zu0I=
+X-Google-Smtp-Source: ABdhPJyVl/Us4ycZpKhFtZUdcJ/KKU637NmPeEn55W0oyLi7vLmz4aF3vWo84Ws3DTmeFHKHVmceuA==
+X-Received: by 2002:a19:7d82:: with SMTP id y124mr15068746lfc.76.1623752229076;
+        Tue, 15 Jun 2021 03:17:09 -0700 (PDT)
+Received: from eldfell ([194.136.85.206])
+        by smtp.gmail.com with ESMTPSA id z20sm2118351ljk.50.2021.06.15.03.17.06
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 15 Jun 2021 03:17:08 -0700 (PDT)
+Date:   Tue, 15 Jun 2021 13:16:56 +0300
+From:   Pekka Paalanen <ppaalanen@gmail.com>
+To:     Laurent Pinchart <laurent.pinchart@ideasonboard.com>
+Cc:     Simon Ser <contact@emersion.fr>, Liviu Dudau <liviu.dudau@arm.com>,
+        Haneen Mohammed <hamohammed.sa@gmail.com>,
+        Alexandre Belloni <alexandre.belloni@bootlin.com>,
+        Linux Doc Mailing List <linux-doc@vger.kernel.org>,
+        Xinliang Liu <xinliang.liu@linaro.org>,
+        Daniel Vetter <daniel.vetter@ffwll.ch>,
+        Edmund Dea <edmund.j.dea@intel.com>,
+        Alexandre Torgue <alexandre.torgue@foss.st.com>,
+        dri-devel <dri-devel@lists.freedesktop.org>,
+        Russell King <linux@armlinux.org.uk>,
+        Melissa Wen <melissa.srw@gmail.com>,
+        Tomi Valkeinen <tomba@kernel.org>,
+        Thierry Reding <thierry.reding@gmail.com>,
+        Benjamin Gaignard <benjamin.gaignard@linaro.org>,
+        Anitha Chrisanthus <anitha.chrisanthus@intel.com>,
+        Daniel Vetter <daniel.vetter@intel.com>,
+        Steven Price <steven.price@arm.com>,
+        Sam Ravnborg <sam@ravnborg.org>,
+        Jyri Sarha <jyri.sarha@iki.fi>,
+        Jerome Brunet <jbrunet@baylibre.com>,
+        Marek Vasut <marex@denx.de>,
+        Joonyoung Shim <jy0922.shim@samsung.com>,
+        Qiang Yu <yuq825@gmail.com>,
+        Krzysztof Kozlowski <krzysztof.kozlowski@canonical.com>,
+        Kevin Hilman <khilman@baylibre.com>,
+        Neil Armstrong <narmstrong@baylibre.com>,
+        Alyssa Rosenzweig <alyssa.rosenzweig@collabora.com>,
+        Xinwei Kong <kong.kongxinwei@hisilicon.com>,
+        Jonathan Hunter <jonathanh@nvidia.com>,
+        David Airlie <airlied@linux.ie>,
+        Ludovic Desroches <ludovic.desroches@microchip.com>,
+        Kieran Bingham <kieran.bingham+renesas@ideasonboard.com>,
+        VMware Graphics <linux-graphics-maintainer@vmware.com>,
+        NXP Linux Team <linux-imx@nxp.com>,
+        Ben Skeggs <bskeggs@redhat.com>,
+        Chun-Kuang Hu <chunkuang.hu@kernel.org>,
+        Maxime Coquelin <mcoquelin.stm32@gmail.com>,
+        Jonas Karlman <jonas@kwiboo.se>,
+        Martin Blumenstingl <martin.blumenstingl@googlemail.com>,
+        Chen Feng <puck.chen@hisilicon.com>,
+        Sascha Hauer <s.hauer@pengutronix.de>,
+        Alison Wang <alison.wang@nxp.com>,
+        Roland Scheidegger <sroland@vmware.com>,
+        Andrzej Hajda <a.hajda@samsung.com>,
+        Hans de Goede <hdegoede@redhat.com>,
+        Maxime Ripard <maxime@cerno.tech>,
+        Rodrigo Vivi <rodrigo.vivi@intel.com>,
+        Matthias Brugger <matthias.bgg@gmail.com>,
+        Nicolas Ferre <nicolas.ferre@microchip.com>,
+        Chen-Yu Tsai <wens@csie.org>, Sean Paul <sean@poorly.run>,
+        Thomas Zimmermann <tzimmermann@suse.de>,
+        Paul Cercueil <paul@crapouillou.net>,
+        Jernej Skrabec <jernej.skrabec@siol.net>,
+        Rodrigo Siqueira <rodrigosiqueiramelo@gmail.com>,
+        Hyun Kwon <hyun.kwon@xilinx.com>,
+        Boris Brezillon <bbrezillon@kernel.org>,
+        Andrew Jeffery <andrew@aj.id.au>,
+        Huang Rui <ray.huang@amd.com>,
+        Yannick Fertr e <yannick.fertre@foss.st.com>,
+        Jonathan Corbet <corbet@lwn.net>,
+        Seung-Woo Kim <sw0312.kim@samsung.com>,
+        Sandy Huang <hjc@rock-chips.com>,
+        Robert Foss <robert.foss@linaro.org>,
+        Joel Stanley <joel@jms.id.au>,
+        Tomeu Vizoso <tomeu.vizoso@collabora.com>,
+        Kyungmin Park <kyungmin.park@samsung.com>,
+        Noralf =?UTF-8?B?VHLDuG5uZXM=?= <noralf@tronnes.org>,
+        Philippe Cornu <philippe.cornu@foss.st.com>,
+        Pengutronix Kernel Team <kernel@pengutronix.de>,
+        Alex Deucher <alexander.deucher@amd.com>,
+        Tian Tao <tiantao6@hisilicon.com>,
+        Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>,
+        Shawn Guo <shawnguo@kernel.org>,
+        Christian =?UTF-8?B?S8O2bmln?= <christian.koenig@amd.com>,
+        Gerd Hoffmann <kraxel@redhat.com>
+Subject: Re: [PATCH v3] Documentation: gpu: Mention the requirements for new
+ properties
+Message-ID: <20210615131656.2ecefdc4@eldfell>
+In-Reply-To: <YMh21WBrADbZDcbp@pendragon.ideasonboard.com>
+References: <20210610174731.1209188-1-maxime@cerno.tech>
+        <CAKMK7uG_Wkko0L6sv0U1bXWdYk4fg3OTcp5=+qfRV0CP9V44=A@mail.gmail.com>
+        <KNFHfqvJUVq9oy9BSdznj1S6xhDoZUAx1_DwfSNvUv8u1d-TroKBTq2hxtv7u1aJnxnpI5CxUXSMTn73YsVhZjnRW78gv-QLsK6AkJ5m3Fw=@emersion.fr>
+        <20210611120309.2b5eb4htupv5ss32@e110455-lin.cambridge.arm.com>
+        <20210614174912.15a49336@eldfell>
+        <20210614152413.nguqia3s4tlowio4@e110455-lin.cambridge.arm.com>
+        <YMeE63G+9DSLPB3N@pendragon.ideasonboard.com>
+        <20210615100335.0b8f96d5@eldfell>
+        <ouNaZaqkV1d_wPRESVBQHxvMhmJ53xIrgtPfDs8mB88AN3FEWt7cq031k8ZqCva1Ob0TCNTnsWqNDS0l5NXfejXIL7YUky3XGdjmh1_hefk=@emersion.fr>
+        <YMh21WBrADbZDcbp@pendragon.ideasonboard.com>
+X-Mailer: Claws Mail 3.17.3 (GTK+ 2.24.32; x86_64-pc-linux-gnu)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
-        protocol="application/pgp-signature"; boundary="mYCpIKhGyMATD0i+"
-Content-Disposition: inline
-In-Reply-To: <63ccd488a142fedbf3fa7fe38875046e2b21c41a.1623740114.git.siyanteng@loongson.cn>
-User-Agent: Mutt/1.10.1 (2018-07-13)
-X-CM-TRANSID: LCKnCgCHIzcYlMhgUZ0RAA--.36484S2
-X-Coremail-Antispam: 1UD129KBjvJXoW3Ar1DGFykKFyxGFyfGF17KFg_yoWxKrW5pF
-        nxAFWSgr1vyryUCay29r48Grn5urs5A3yfArykGr4IyF15CryUCFsxtFyrAFW8GrWkCFyj
-        v340vr1ru3yUAFJanT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
-        9KBjDU0xBIdaVrnRJUUUgSb7Iv0xC_Kw4lb4IE77IF4wAFc2x0x2IEx4CE42xK8VAvwI8I
-        cIk0rVWrJVCq3wA2ocxC64kIII0Yj41l84x0c7CEw4AK67xGY2AK021l84ACjcxK6xIIjx
-        v20xvE14v26r4j6ryUM28EF7xvwVC0I7IYx2IY6xkF7I0E14v26r4j6F4UM28EF7xvwVC2
-        z280aVAFwI0_GcCE3s1l84ACjcxK6I8E87Iv6xkF7I0E14v26r4UJVWxJr1le2I262IYc4
-        CY6c8Ij28IcVAaY2xG8wASzI0EjI02j7AqF2xKxwAqx4xG64xvF2IEw4CE5I8CrVC2j2Wl
-        Yx0E74AGY7Cv6cx26F4UJr1UMcvjeVCFs4IE7xkEbVWUJVW8JwACjcxG0xvEwIxGrwCF04
-        k20xvY0x0EwIxGrwCF04k20xvE74AGY7Cv6cx26F4UJr1UMxC20s026xCaFVCjc4AY6r1j
-        6r4UMI8I3I0E5I8CrVAFwI0_Jr0_Jr4lx2IqxVCjr7xvwVAFwI0_JrI_JrWlx4CE17CEb7
-        AF67AKxVWUtVW8ZwCIc40Y0x0EwIxGrwCI42IY6xIIjxv20xvE14v26r1j6r1xMIIF0xvE
-        2Ix0cI8IcVCY1x0267AKxVW8JVWxJwCI42IY6xAIw20EY4v20xvaj40_Jr0_JF4lIxAIcV
-        C2z280aVAFwI0_Jr0_Gr1lIxAIcVC2z280aVCY1x0267AKxVW8JVW8JrUvcSsGvfC2Kfnx
-        nUUI43ZEXa7IUnLSdPUUUUU==
-X-Originating-IP: [110.64.86.229]
-X-CM-SenderInfo: pere453f6hztlloou0/
+Content-Type: multipart/signed; micalg=pgp-sha256;
+ boundary="Sig_/aSclia/U0zdUZzWMZ0xn.Ur"; protocol="application/pgp-signature"
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-
---mYCpIKhGyMATD0i+
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
+--Sig_/aSclia/U0zdUZzWMZ0xn.Ur
+Content-Type: text/plain; charset=US-ASCII
 Content-Transfer-Encoding: quoted-printable
 
-On Tue, Jun 15, 2021 at 03:03:49PM +0800, Yanteng Si wrote:
-> Modify the layout of the document and remove unnecessary symbols.
->=20
-> Fix a typo.
->=20
-> Signed-off-by: Yanteng Si <siyanteng@loongson.cn>
+On Tue, 15 Jun 2021 12:45:57 +0300
+Laurent Pinchart <laurent.pinchart@ideasonboard.com> wrote:
 
-Reviewed-by: Wu XiangCheng <bobwxc@email.cn>
+> On Tue, Jun 15, 2021 at 07:15:18AM +0000, Simon Ser wrote:
+> > On Tuesday, June 15th, 2021 at 09:03, Pekka Paalanen <ppaalanen@gmail.c=
+om> wrote:
+> >  =20
+> > > indeed it will, but what else could one do to test userspace KMS
+> > > clients in generic CI where all you can have is virtual hardware? May=
+be
+> > > in the long run VKMS needs to loop back to a userspace daemon that
+> > > implements all the complex processing and returns the writeback result
+> > > via VKMS again? That daemon would then need a single upstream, like t=
+he
+> > > kernel, where it is maintained and correctness verified. =20
+> >=20
+> > The complex processing must be implemented even without write-back, bec=
+ause
+> > user-space can ask for CRCs of the CRTC.
+> >  =20
+> > > Or an LD_PRELOAD that hijacks all KMS ioctls and implements virtual
+> > > stuff in userspace? Didn't someone already have something like that?
+> > > It would need to be lifted to be a required part of kernel UAPI
+> > > submissions, I suppose like IGT is nowadays. =20
+> >=20
+> > FWIW, I have a mock libdrm [1] for libliftoff. This is nowhere near a f=
+ull
+> > software implementation with write-back connectors, but allows to expose
+> > virtual planes and check atomic commits in CI.
+> >=20
+> > [1]: https://github.com/emersion/libliftoff/blob/master/test/libdrm_moc=
+k.c
+> >  =20
+> > > For compositor developers like me knowing the exact formulas would be=
+ a huge
+> > > benefit as it would allow me to use KMS to off-load precision-sensiti=
+ve
+> > > operations (e.g.  professional color management). Otherwise, composit=
+ors
+> > > probably need a switch: "high quality color management? Then do not u=
+se KMS
+> > > features." =20
+> >=20
+> > I think for alpha blending there are already rounding issues depending =
+on the
+> > hardware. I wouldn't keep my hopes up for any guarantee that all hw use=
+s the
+> > exact same formulae for color management stuff. =20
+>=20
+> Good, because otherwise you would be very quickly disappointed :-)
+>=20
+> For scaling we would also need to replicate the exact same filter taps,
+> which are often not documented.
+
+That is where the documented tolerances come into play.
+
+Userspace projects need screenshot-based testing, and we need to know
+how much tolerance we should allow or expect.
+
+Good reminder about CRCs. CRCs have zero tolerance, so they are not
+useful for testing properties that have any leeway, are they?
+
 
 Thanks,
-	Wu X.C.
+pq
 
-> ---
->  Documentation/core-api/cpu_hotplug.rst | 38 ++++++++++++++++----------
->  1 file changed, 24 insertions(+), 14 deletions(-)
->=20
-> diff --git a/Documentation/core-api/cpu_hotplug.rst b/Documentation/core-=
-api/cpu_hotplug.rst
-> index a2c96bec5ee8..0c872cbea7d5 100644
-> --- a/Documentation/core-api/cpu_hotplug.rst
-> +++ b/Documentation/core-api/cpu_hotplug.rst
-> @@ -91,9 +91,10 @@ Never use anything other than ``cpumask_t`` to represe=
-nt bitmap of CPUs.
-> =20
->  Using CPU hotplug
->  =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-> +
->  The kernel option *CONFIG_HOTPLUG_CPU* needs to be enabled. It is curren=
-tly
->  available on multiple architectures including ARM, MIPS, PowerPC and X86=
-=2E The
-> -configuration is done via the sysfs interface: ::
-> +configuration is done via the sysfs interface::
-> =20
->   $ ls -lh /sys/devices/system/cpu
->   total 0
-> @@ -113,14 +114,14 @@ configuration is done via the sysfs interface: ::
-> =20
->  The files *offline*, *online*, *possible*, *present* represent the CPU m=
-asks.
->  Each CPU folder contains an *online* file which controls the logical on =
-(1) and
-> -off (0) state. To logically shutdown CPU4: ::
-> +off (0) state. To logically shutdown CPU4::
-> =20
->   $ echo 0 > /sys/devices/system/cpu/cpu4/online
->    smpboot: CPU 4 is now offline
-> =20
->  Once the CPU is shutdown, it will be removed from */proc/interrupts*,
->  */proc/cpuinfo* and should also not be shown visible by the *top* comman=
-d. To
-> -bring CPU4 back online: ::
-> +bring CPU4 back online::
-> =20
->   $ echo 1 > /sys/devices/system/cpu/cpu4/online
->   smpboot: Booting Node 0 Processor 4 APIC 0x1
-> @@ -142,6 +143,7 @@ The CPU hotplug coordination
-> =20
->  The offline case
->  ----------------
-> +
->  Once a CPU has been logically shutdown the teardown callbacks of registe=
-red
->  hotplug states will be invoked, starting with ``CPUHP_ONLINE`` and termi=
-nating
->  at state ``CPUHP_OFFLINE``. This includes:
-> @@ -158,9 +160,10 @@ at state ``CPUHP_OFFLINE``. This includes:
-> =20
->  Using the hotplug API
->  ---------------------
-> +
->  It is possible to receive notifications once a CPU is offline or onlined=
-=2E This
->  might be important to certain drivers which need to perform some kind of=
- setup
-> -or clean up functions based on the number of available CPUs: ::
-> +or clean up functions based on the number of available CPUs::
-> =20
->    #include <linux/cpuhotplug.h>
-> =20
-> @@ -186,9 +189,10 @@ During the removal of a hotplug state the teardown c=
-allback will be invoked.
-> =20
->  Multiple instances
->  ~~~~~~~~~~~~~~~~~~
-> +
->  If a driver has multiple instances and each instance needs to perform the
->  callback independently then it is likely that a ''multi-state'' should b=
-e used.
-> -First a multi-state state needs to be registered: ::
-> +First a multi-state state needs to be registered::
-> =20
->    ret =3D cpuhp_setup_state_multi(CPUHP_AP_ONLINE_DYN, "X/Y:online,
->                                  Y_online, Y_prepare_down);
-> @@ -197,7 +201,7 @@ First a multi-state state needs to be registered: ::
->  The ``cpuhp_setup_state_multi()`` behaves similar to ``cpuhp_setup_state=
-()``
->  except it prepares the callbacks for a multi state and does not invoke
->  the callbacks. This is a one time setup.
-> -Once a new instance is allocated, you need to register this new instance=
-: ::
-> +Once a new instance is allocated, you need to register this new instance=
-::
-> =20
->    ret =3D cpuhp_state_add_instance(Y_hp_online, &d->node);
-> =20
-> @@ -206,7 +210,8 @@ This function will add this instance to your previous=
-ly allocated
->  (*Y_online*) on all online CPUs. The *node* element is a ``struct
->  hlist_node`` member of your per-instance data structure.
-> =20
-> -On removal of the instance: ::
-> +On removal of the instance::
-> +
->    cpuhp_state_remove_instance(Y_hp_online, &d->node)
-> =20
->  should be invoked which will invoke the teardown callback on all online
-> @@ -214,6 +219,7 @@ CPUs.
-> =20
->  Manual setup
->  ~~~~~~~~~~~~
-> +
->  Usually it is handy to invoke setup and teardown callbacks on registrati=
-on or
->  removal of a state because usually the operation needs to performed once=
- a CPU
->  goes online (offline) and during initial setup (shutdown) of the driver.=
- However
-> @@ -226,6 +232,7 @@ hotplug operations.
-> =20
->  The ordering of the events
->  --------------------------
-> +
->  The hotplug states are defined in ``include/linux/cpuhotplug.h``:
-> =20
->  * The states *CPUHP_OFFLINE* =E2=80=A6 *CPUHP_AP_OFFLINE* are invoked be=
-fore the
-> @@ -248,13 +255,14 @@ another hotplug event.
-> =20
->  Testing of hotplug states
->  =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D
-> +
->  One way to verify whether a custom state is working as expected or not i=
-s to
->  shutdown a CPU and then put it online again. It is also possible to put =
-the CPU
->  to certain state (for instance *CPUHP_AP_ONLINE*) and then go back to
->  *CPUHP_ONLINE*. This would simulate an error one state after *CPUHP_AP_O=
-NLINE*
->  which would lead to rollback to the online state.
-> =20
-> -All registered states are enumerated in ``/sys/devices/system/cpu/hotplu=
-g/states``: ::
-> +All registered states are enumerated in ``/sys/devices/system/cpu/hotplu=
-g/states`` ::
-> =20
->   $ tail /sys/devices/system/cpu/hotplug/states
->   138: mm/vmscan:online
-> @@ -268,7 +276,7 @@ All registered states are enumerated in ``/sys/device=
-s/system/cpu/hotplug/states
->   168: sched:active
->   169: online
-> =20
-> -To rollback CPU4 to ``lib/percpu_cnt:online`` and back online just issue=
-: ::
-> +To rollback CPU4 to ``lib/percpu_cnt:online`` and back online just issue=
-::
-> =20
->    $ cat /sys/devices/system/cpu/cpu4/hotplug/state
->    169
-> @@ -276,14 +284,14 @@ To rollback CPU4 to ``lib/percpu_cnt:online`` and b=
-ack online just issue: ::
->    $ cat /sys/devices/system/cpu/cpu4/hotplug/state
->    140
-> =20
-> -It is important to note that the teardown callbac of state 140 have been
-> -invoked. And now get back online: ::
-> +It is important to note that the teardown callback of state 140 have been
-> +invoked. And now get back online::
-> =20
->    $ echo 169 > /sys/devices/system/cpu/cpu4/hotplug/target
->    $ cat /sys/devices/system/cpu/cpu4/hotplug/state
->    169
-> =20
-> -With trace events enabled, the individual steps are visible, too: ::
-> +With trace events enabled, the individual steps are visible, too::
-> =20
->    #  TASK-PID   CPU#    TIMESTAMP  FUNCTION
->    #     | |       |        |         |
-> @@ -318,6 +326,7 @@ trace.
-> =20
->  Architecture's requirements
->  =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D
-> +
->  The following functions and configurations are required:
-> =20
->  ``CONFIG_HOTPLUG_CPU``
-> @@ -339,11 +348,12 @@ The following functions and configurations are requ=
-ired:
-> =20
->  User Space Notification
->  =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-> -After CPU successfully onlined or offline udev events are sent. A udev r=
-ule like: ::
-> +
-> +After CPU successfully onlined or offline udev events are sent. A udev r=
-ule like::
-> =20
->    SUBSYSTEM=3D=3D"cpu", DRIVERS=3D=3D"processor", DEVPATH=3D=3D"/devices=
-/system/cpu/*", RUN+=3D"the_hotplug_receiver.sh"
-> =20
-> -will receive all events. A script like: ::
-> +will receive all events. A script like::
-> =20
->    #!/bin/sh
-> =20
-> --=20
-> 2.27.0
-
---mYCpIKhGyMATD0i+
-Content-Type: application/pgp-signature; name="signature.asc"
+--Sig_/aSclia/U0zdUZzWMZ0xn.Ur
+Content-Type: application/pgp-signature
+Content-Description: OpenPGP digital signature
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEERbo3U5kJpaCtFl1PtlsoEiKCsIUFAmDIlBcACgkQtlsoEiKC
-sIWPtAv9GldrIa+KFG1B6yATRzfclE1A6OFNgISgnBvJLYeUYwy3WNv0m1n320Rw
-jugR/INfiKxL0Jahp4m4qrWsQBbDLkO0Np+iqoHeIc79GZNp6meEJsIZPcatyXwg
-UGIZIZ2soZXxqzYkmZIB8tqxrjQFFODhCfTqFjLVRpMYY2qTw5iS1egl6ktaRErq
-3D4PTfHcZDlhie2pGBiLysLfyx2ozUHRYIjH+4wBhKIk9ZHFJpTZbUBza1a1/FAd
-lTvQ7ud4kBhKlI58Y76/mcpSIlCYYjnGP+uGUXaVRToX5rdOwQz+UiB6q0u/D5uy
-Cf2lw0xVBkEbngaToKCWvzJ3AEyQa7szh98FWOyqKVvaX8w47Rrw0gtcvtFblDaV
-2hlkJ4gCsKdVCngH2oPm3761IMHIRuZj8W2ts6fMMRoGH+OqZv7WRMld9mX8nfPV
-SzqeFu0D3h+0QHSr03j6sMTsiFtR/MuTFuotTJBMcFZDA+HTLp0OrGJTTJpFhfwY
-vozR8pf7
-=lR94
+iQIzBAEBCAAdFiEEJQjwWQChkWOYOIONI1/ltBGqqqcFAmDIfhgACgkQI1/ltBGq
+qqf9uw//Z7wP5lb4lQfPWOw5s+nFR9pu8B8zVwQzEuz2RTx5Vc/XXfa2Fc0rukCj
+Y380sIPdp2+avUNDyitBKW8E7rU3mab7UmBdn6CmLnvZVM+BQ3vdtDvZ2WfezT7j
+AkEzJYm9QhiYyqezwzCa1Jo2ugUJwSxT6TKQbVsT64vCCajdZIQJvDizCPy0HNvY
+/dncTRXyWta650vMnzYle6YlWrYL+kJst8J/zU5+H3nffgJef6zpxz+o37Libz/w
+WYZWYSJ7swv54xNCddkuJrSf60vs7KlwiXZuBEt5dSu2ro81unrU6FVpEazF8x1e
+3jigPFgMppxYTIVOGtrjbQku7hJB1f9u+DNGjKTeH8HMc0QkAfcb+V7nrmaetZs6
+02GvihbFh67ewL7hcIXVpNETdsfQD3pVCDz1Xz6w5A6bixa0HuH31C3ATBhUuKhH
+tJNv99eZvmfBIaeuFNkCgPbxP2vdFmStT1x/bq06g+2RCG71+EzkKF6hX0JD+kRf
+CqRqBDvwNy4sXgDkwz+ftpHrn+OvO7LrR4X5NtZUeo24VaXlrJTqqX5lSHr6OgZg
+oREPacO/pUjTluJY+sb+qUBkxTcu9hP5MC5LnHvtiQ2yxWel2Wp+MOF42Sl2B98w
+jTfx9rHSqauMN7hs33K2UBnAcpf2sswYagwmg0clpgF/ipcJ96k=
+=4xXK
 -----END PGP SIGNATURE-----
 
---mYCpIKhGyMATD0i+--
-
+--Sig_/aSclia/U0zdUZzWMZ0xn.Ur--
