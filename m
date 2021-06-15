@@ -2,153 +2,92 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id A877C3A8A6E
-	for <lists+linux-doc@lfdr.de>; Tue, 15 Jun 2021 22:48:34 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 0D7E73A8AFB
+	for <lists+linux-doc@lfdr.de>; Tue, 15 Jun 2021 23:21:34 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S229965AbhFOUui (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 15 Jun 2021 16:50:38 -0400
-Received: from us-smtp-delivery-124.mimecast.com ([216.205.24.124]:49686 "EHLO
-        us-smtp-delivery-124.mimecast.com" rhost-flags-OK-OK-OK-OK)
-        by vger.kernel.org with ESMTP id S229931AbhFOUui (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 15 Jun 2021 16:50:38 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-        s=mimecast20190719; t=1623790112;
-        h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-         to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-         content-transfer-encoding:content-transfer-encoding:
-         in-reply-to:in-reply-to:references:references;
-        bh=KQ07UnerLYYg5xbQ2D5ZXpRlZkXdV15KKy3dzWwHbIQ=;
-        b=attKP6X/C6O43WgAOZ246NJ0T+bY9nH4n1CNdnqRCLxDf8+YI9FUF/JveNLK4/cWXIrLc4
-        Lfad0dT1Mha1Sd3S37FvuYND59adziY0DLkEGQ77abFcyzesjA+vMdSW7ELAiHCqPQUC7D
-        mxM6p3JVkzhiy4uA7RmT6aqJE3RDqjY=
-Received: from mail-oi1-f199.google.com (mail-oi1-f199.google.com
- [209.85.167.199]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-543-NFa8URkWNG6JgbwGyOPOHw-1; Tue, 15 Jun 2021 16:48:31 -0400
-X-MC-Unique: NFa8URkWNG6JgbwGyOPOHw-1
-Received: by mail-oi1-f199.google.com with SMTP id 19-20020aca12130000b02901f43fbf2170so8378655ois.5
-        for <linux-doc@vger.kernel.org>; Tue, 15 Jun 2021 13:48:30 -0700 (PDT)
+        id S231439AbhFOVXe (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 15 Jun 2021 17:23:34 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:48384 "EHLO
+        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S230346AbhFOVXa (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 15 Jun 2021 17:23:30 -0400
+Received: from mail-pj1-x1036.google.com (mail-pj1-x1036.google.com [IPv6:2607:f8b0:4864:20::1036])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 7D28DC061280
+        for <linux-doc@vger.kernel.org>; Tue, 15 Jun 2021 14:21:25 -0700 (PDT)
+Received: by mail-pj1-x1036.google.com with SMTP id z3-20020a17090a3983b029016bc232e40bso457075pjb.4
+        for <linux-doc@vger.kernel.org>; Tue, 15 Jun 2021 14:21:25 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=chromium.org; s=google;
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=PfwRUU7eVNZsvc9b0Pp6xofj5lHce4If1zuLClVqHds=;
+        b=k41872DXg9wkp86KhOxBvcu0Ci6VIoYHAyuQo8qqIykaP05jTvRdRw2iM4HROlZWB9
+         v/xBFRgNloNRzQQcKx3HdBPMzLzERLP/q43nxD2Z3VGshkG8KI6qgVYIawdS4aeRCUUN
+         QY+xm4+6E8MDYk5JQid0hjit2pFbHdVbRZWXI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:subject:to:cc:references:from:message-id:date
-         :user-agent:mime-version:in-reply-to:content-transfer-encoding
-         :content-language;
-        bh=KQ07UnerLYYg5xbQ2D5ZXpRlZkXdV15KKy3dzWwHbIQ=;
-        b=H2S2iOFzieQOe+rqsMOQ7MGUwH4Is+fNUD/NWT/+O5JzV41p0N2bfkd8yGzoFxv+9a
-         hpjUBs1kybyj//SX5oiGoctmkIMIBwv2PsRuoWuVO20BOEkriocKnJDdoEZjhaqNRNaI
-         lDtsB7jFpDPuO3OC0FmOEUVQ+NeIWz16TNgM7HLlbwmXrFdI9P21Cyj+dpirnNbvzgn7
-         Rj3gdBxjrCvumwvtusnwaWa0yJBAzWdQpYsoSzKLltUeqbUlkSoMGT4dwNR4yHawSifO
-         +HH53ZUCb6e9ynLdnmKj3nxrgW6s3a7amk1t0CWjekBEYSWg23k/rUGrGvZHSJmFU7af
-         5JXw==
-X-Gm-Message-State: AOAM532VXMr0dE46OBuZpyG6ZknSsdJNHu0avnYOmYzm7kCKRwxa5BmH
-        h1sM1eYW/sQZIG+npEqOfyquYvT9kfR3zKTPp+apxa8iErEk9UcihSUEfTI1OQmo24SV0Yr5zOJ
-        0gaBZwrywpKdgC9spLcf8
-X-Received: by 2002:a05:6830:1f05:: with SMTP id u5mr876279otg.322.1623790110352;
-        Tue, 15 Jun 2021 13:48:30 -0700 (PDT)
-X-Google-Smtp-Source: ABdhPJzvrGdxE+mzotrdFHuMpTK34RUPz5I1mTgC8N7HwfPe918vRPs0JpOJGFEIPWIQK4ioxDj+rg==
-X-Received: by 2002:a05:6830:1f05:: with SMTP id u5mr876264otg.322.1623790110110;
-        Tue, 15 Jun 2021 13:48:30 -0700 (PDT)
-Received: from localhost.localdomain (075-142-250-213.res.spectrum.com. [75.142.250.213])
-        by smtp.gmail.com with ESMTPSA id i26sm1364oig.13.2021.06.15.13.48.27
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Tue, 15 Jun 2021 13:48:29 -0700 (PDT)
-Subject: Re: [PATCH v4 1/4] fpga: dfl: reorganize to subdir layout
-To:     "Wu, Hao" <hao.wu@intel.com>, "mdf@kernel.org" <mdf@kernel.org>,
-        "corbet@lwn.net" <corbet@lwn.net>,
-        "michal.simek@xilinx.com" <michal.simek@xilinx.com>,
-        "gregkh@linuxfoundation.org" <gregkh@linuxfoundation.org>,
-        "krzysztof.kozlowski@canonical.com" 
-        <krzysztof.kozlowski@canonical.com>,
-        "nava.manne@xilinx.com" <nava.manne@xilinx.com>,
-        "Xu, Yilun" <yilun.xu@intel.com>,
-        "davidgow@google.com" <davidgow@google.com>,
-        "fpacheco@redhat.com" <fpacheco@redhat.com>,
-        "Gong, Richard" <richard.gong@intel.com>,
-        "luca@lucaceresoli.net" <luca@lucaceresoli.net>
-Cc:     "linux-fpga@vger.kernel.org" <linux-fpga@vger.kernel.org>,
-        "linux-doc@vger.kernel.org" <linux-doc@vger.kernel.org>,
-        "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
-        "linux-arm-kernel@lists.infradead.org" 
-        <linux-arm-kernel@lists.infradead.org>
-References: <20210614201648.3358206-1-trix@redhat.com>
- <20210614201648.3358206-3-trix@redhat.com>
- <DM6PR11MB381964374223D0D2958AFA6985309@DM6PR11MB3819.namprd11.prod.outlook.com>
-From:   Tom Rix <trix@redhat.com>
-Message-ID: <d64b0fb8-5f83-2995-7ee9-b4ed2932ef60@redhat.com>
-Date:   Tue, 15 Jun 2021 13:48:26 -0700
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
- Thunderbird/78.8.1
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=PfwRUU7eVNZsvc9b0Pp6xofj5lHce4If1zuLClVqHds=;
+        b=Gd0VlFnkZcu+3ynUbcBaNtcysmCeW/anaznBeUA4V6L2AkiJrdeQRzw/EQEDcZm/Kc
+         jwAwudRGEsWtsm+7GLClAaCBaEZKmjM4iTbpYsA2L9I69Ie1r8yVAZa6kFwkLlyfF/JK
+         vxMdLFYJAV9/jtzT8Ylp0JogSAbyChsH8F+D3ap5v0sCQ9xaVuc20wdZVgNAfD9f+DsO
+         Jsyv+LtTRYvUA7B6F69tmkAgTQ8+2sIJbfcbn+a7sXyb5XXTM21HwOesxZYa+SkkzBnu
+         9wLjA9JEhhPI8ue9IDx2svuNc8JxlckVPwp56/6UnXZjIoFXUQyZ2KEhM7po1zXbDzSs
+         u5iA==
+X-Gm-Message-State: AOAM533DjK9ACr/edAmtH5dQdAIN3zDlnnwCuKqfbgP6PipN+pUmkCHb
+        8/nfmmzuWtei61LHfnGLYSWHtg==
+X-Google-Smtp-Source: ABdhPJxpvHbLjArJ3owM3JpRLH76Noir2n39FVfDmLx1tALshgWOs9Zy3GRdpG3sW+GGql2IjG+4vA==
+X-Received: by 2002:a17:902:7c05:b029:11c:1e7d:c633 with SMTP id x5-20020a1709027c05b029011c1e7dc633mr4646731pll.48.1623792085105;
+        Tue, 15 Jun 2021 14:21:25 -0700 (PDT)
+Received: from www.outflux.net (smtp.outflux.net. [198.145.64.163])
+        by smtp.gmail.com with ESMTPSA id v9sm96686pfn.22.2021.06.15.14.21.24
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 15 Jun 2021 14:21:24 -0700 (PDT)
+From:   Kees Cook <keescook@chromium.org>
+To:     linux-kernel@vger.kernel.org
+Cc:     Kees Cook <keescook@chromium.org>, Christoph Hellwig <hch@lst.de>,
+        Al Viro <viro@zeniv.linux.org.uk>, gmpy.liaowx@gmail.com,
+        Anton Vorontsov <anton@enomsg.org>,
+        Colin Cross <ccross@android.com>,
+        Tony Luck <tony.luck@intel.com>,
+        Jonathan Corbet <corbet@lwn.net>,
+        Miquel Raynal <miquel.raynal@bootlin.com>,
+        Richard Weinberger <richard@nod.at>,
+        Vignesh Raghavendra <vigneshr@ti.com>,
+        linux-doc@vger.kernel.org, linux-mtd@lists.infradead.org,
+        linux-block@vger.kernel.org, linux-fsdevel@vger.kernel.org
+Subject: [PATCH v2 0/4] Include zone in pstore_device_info
+Date:   Tue, 15 Jun 2021 14:21:17 -0700
+Message-Id: <20210615212121.1200820-1-keescook@chromium.org>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-In-Reply-To: <DM6PR11MB381964374223D0D2958AFA6985309@DM6PR11MB3819.namprd11.prod.outlook.com>
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Content-Language: en-US
+Content-Transfer-Encoding: 8bit
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
+Hi,
 
-On 6/15/21 1:08 AM, Wu, Hao wrote:
->> Subject: [PATCH v4 1/4] fpga: dfl: reorganize to subdir layout
->>
->> From: Tom Rix <trix@redhat.com>
->>
->> Follow drivers/net/ethernet/ which has control configs
->> NET_VENDOR_BLA that map to drivers/net/ethernet/bla
->> Since fpgas do not have many vendors, drop the 'VENDOR' and use
->> FPGA_BLA.
-> Hi Tom,
->
-> Thanks for this patch. : )
->
-> DFL is not a vendor, but something can be shared/reused. It's possible that
-> other vendors reuse the same concepts and the drivers of DFL. If vendor
-> drivers need to be moved inside sub folders, then maybe it's better to
-> leave DFL in the parent folder?
+This fixes up pstore/blk to avoid touching block internals, and includes
+additional fixes.
 
-xrt is also not a vendor, more a subdevice framework like dfl.
+-Kees
 
-I am not sure what you mean by other dfl vendors can you give an example ?
+v1: https://lore.kernel.org/lkml/20210614200421.2702002-1-keescook@chromium.org
 
->> There are several new subdirs
->> altera/
->> dfl/
->> lattice/
->> xilinx/
->>
->> Each subdir has a Kconfig that has a new/reused
->>
->> if FPGA_BLA
->>    ... existing configs ...
->> endif FPGA_BLA
->>
->> Which is sourced into the main fpga/Kconfig
->>
->> Each subdir has a Makefile whose transversal is controlled in the
->> fpga/Makefile by
->>
->> obj-$(CONFIG_FPGA_BLA) += bla/
->>
->> This is the dfl/ subdir part.
->>
->> Create a dfl/ subdir
->> Move dfl-* files to it.
->> Add a Kconfig and Makefile
->>
->> Because FPGA_DFL is now used in dfl/Kconfig in a if/endif
->> block, all the other configs in dfl/Kconfig implicitly depend
->> on FPGA_DFL.  So the explicit dependence can be removed.  Also
->> since FPGA_DFL depends on HAS_IOMEM, it can be removed from the
->> other configs.
-> Hm.. sounds like this change (remove HAS_IOMEM) is better to be split
-> into another patch. How do you think?
+Kees Cook (4):
+  pstore/blk: Improve failure reporting
+  pstore/blk: Use the normal block device I/O path
+  pstore/blk: Include zone in pstore_device_info
+  pstore/blk: Fix kerndoc and redundancy on blkdev param
 
-I'll drop this from the patchset so this so patchset does the one thing 
-of moving stuff around and do the HAS_IOMEM change after stuff settles.
+ Documentation/admin-guide/pstore-blk.rst |  14 +-
+ drivers/mtd/mtdpstore.c                  |  10 +-
+ fs/pstore/blk.c                          | 371 ++++++++---------------
+ include/linux/pstore_blk.h               |  27 +-
+ 4 files changed, 141 insertions(+), 281 deletions(-)
 
-Tom
-
->
-> Thanks
-> Hao
->
+-- 
+2.25.1
 
