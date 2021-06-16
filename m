@@ -2,74 +2,80 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id DF44E3AA202
-	for <lists+linux-doc@lfdr.de>; Wed, 16 Jun 2021 19:03:38 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id B2DF63AA26B
+	for <lists+linux-doc@lfdr.de>; Wed, 16 Jun 2021 19:32:59 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S230490AbhFPRFn (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 16 Jun 2021 13:05:43 -0400
-Received: from mga06.intel.com ([134.134.136.31]:61468 "EHLO mga06.intel.com"
-        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S230167AbhFPRFl (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Wed, 16 Jun 2021 13:05:41 -0400
-IronPort-SDR: WOjpzz011ZUgdnVaglVipYfrqcpYllI1OhzwsoOGBZq/DATe1ZNENHKhAq+JGW0vzBrSWTU82u
- jFrSUK3zmdJQ==
-X-IronPort-AV: E=McAfee;i="6200,9189,10016"; a="267367479"
-X-IronPort-AV: E=Sophos;i="5.83,278,1616482800"; 
-   d="scan'208";a="267367479"
-Received: from fmsmga002.fm.intel.com ([10.253.24.26])
-  by orsmga104.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 16 Jun 2021 10:03:32 -0700
-IronPort-SDR: XPa3QheejKa7cc5DroKsDdKOQzb6e5GcdrWa/7Nw1E7w3oneN5/z3JzuFUTT5/e4kl+sQz/oRI
- qMxsoU1n7yLw==
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.83,278,1616482800"; 
-   d="scan'208";a="488260773"
-Received: from black.fi.intel.com ([10.237.72.28])
-  by fmsmga002.fm.intel.com with ESMTP; 16 Jun 2021 10:03:30 -0700
-Received: by black.fi.intel.com (Postfix, from userid 1003)
-        id 622365B5; Wed, 16 Jun 2021 20:03:54 +0300 (EEST)
-From:   Andy Shevchenko <andriy.shevchenko@linux.intel.com>
-To:     Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
-        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
-        linux-acpi@vger.kernel.org
-Cc:     Jonathan Corbet <corbet@lwn.net>,
-        "Rafael J. Wysocki" <rjw@rjwysocki.net>,
-        Len Brown <lenb@kernel.org>
-Subject: [PATCH v1 7/7] ACPI: sysfs: Sort headers alphabetically
-Date:   Wed, 16 Jun 2021 20:03:38 +0300
-Message-Id: <20210616170338.23057-7-andriy.shevchenko@linux.intel.com>
-X-Mailer: git-send-email 2.30.2
-In-Reply-To: <20210616170338.23057-1-andriy.shevchenko@linux.intel.com>
-References: <20210616170338.23057-1-andriy.shevchenko@linux.intel.com>
+        id S230393AbhFPRfE (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 16 Jun 2021 13:35:04 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:38374 "EHLO
+        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S229741AbhFPRfC (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Wed, 16 Jun 2021 13:35:02 -0400
+Received: from mail-ot1-x32a.google.com (mail-ot1-x32a.google.com [IPv6:2607:f8b0:4864:20::32a])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id D82E5C061574
+        for <linux-doc@vger.kernel.org>; Wed, 16 Jun 2021 10:32:50 -0700 (PDT)
+Received: by mail-ot1-x32a.google.com with SMTP id 102-20020a9d0eef0000b02903fccc5b733fso3293316otj.4
+        for <linux-doc@vger.kernel.org>; Wed, 16 Jun 2021 10:32:50 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=kernel-dk.20150623.gappssmtp.com; s=20150623;
+        h=subject:to:cc:references:from:message-id:date:user-agent
+         :mime-version:in-reply-to:content-language:content-transfer-encoding;
+        bh=q4gumIsyYAtBcDgBeiPSNtfPvFXvXc8mQGPj94mk7tU=;
+        b=0/gByeCCO+jtXT10f358SOv5CX5VuTpPTBsWh15TdpdH0EE81yE6LKrzfDHqsQ31F8
+         8Ob01KNdVt+lfSVo4nxcsYFLS6pUMbxntpBCXeA8bpdkhIp5cLJUD/RMwbCGAQxF0S4r
+         PJMlL6XrLaBSt42KfMHRD/GEctTRbB7jhZPXRvqDB/uiyVRuLjyGP7ZTfzAl+/WwhPlr
+         6x4K6G3tLrXQitckLUrzCMz3DyDi969BG2OHS0T0228CY3yEYX+s8cJWd85mbH7ZFA24
+         wwtRvg0KMv4U8qg1mtfBjpEb7WryqWrVQJiRWk6BwOEO0i8rwY8VOaqnrBar84A7Kano
+         /Rqw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:subject:to:cc:references:from:message-id:date
+         :user-agent:mime-version:in-reply-to:content-language
+         :content-transfer-encoding;
+        bh=q4gumIsyYAtBcDgBeiPSNtfPvFXvXc8mQGPj94mk7tU=;
+        b=VtbzM9iVT7lBgkMTffztwlQSDZOfgzjh1Qei6V3GlF9hpwLs+2kiYvCwR8cvUQvXM/
+         5alE+IBpz/jRrRhA9/qbdicsbdvIVPB6icKgwj3GrWHjn9XcNf1sctuaV69nxYaIwgoC
+         94+j+SG5yozYuTUu/a4h1Kj9RUh5a5l+gdNlI7F4E5YNErhNozkiXoZG4XBLY6R3VCf/
+         3inOXdLwynhb9rGQZOACJjOAFs0Lw6zxIi/COHYu36Vm0ybsRDMW9P1x3lxggU+0sQ1N
+         6lDkWIRhRpo2AHG3sJHCj2A42t66NkONsvMMO8yqXVky5eGAujEZkRvIZ+sc8eawHUSD
+         xi9w==
+X-Gm-Message-State: AOAM5335RusBvnCrAiuaVDWgpADJe1jILGHkcdbTTqIFWV+Pg98EPdhf
+        5EyreM3HjPdXaqZDENR2w0rnfQ==
+X-Google-Smtp-Source: ABdhPJwT3egGMHgPimidPdpu6xRLpuEcZUz6jCESt+aYA71rNUIpwBGV1tEHoan34PYS0dkH4sEB4g==
+X-Received: by 2002:a9d:7acc:: with SMTP id m12mr911229otn.27.1623864770076;
+        Wed, 16 Jun 2021 10:32:50 -0700 (PDT)
+Received: from [192.168.1.30] ([207.135.233.147])
+        by smtp.gmail.com with ESMTPSA id 26sm627828ooy.46.2021.06.16.10.32.49
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Wed, 16 Jun 2021 10:32:49 -0700 (PDT)
+Subject: Re: [PATCH 0/3] add/update/fix BFQ docs
+To:     Kir Kolyshkin <kolyshkin@gmail.com>, linux-doc@vger.kernel.org
+Cc:     Jonathan Corbet <corbet@lwn.net>, tj@kernel.org,
+        paolo.valente@linaro.org, cgroups@vger.kernel.org
+References: <20210611030737.1984343-1-kolyshkin@gmail.com>
+From:   Jens Axboe <axboe@kernel.dk>
+Message-ID: <40174fe2-ef72-99bd-2c75-5f00641f064b@kernel.dk>
+Date:   Wed, 16 Jun 2021 11:32:49 -0600
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.10.0
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+In-Reply-To: <20210611030737.1984343-1-kolyshkin@gmail.com>
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
+Content-Transfer-Encoding: 7bit
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-For the sake of better maintenance, sort included headers alphabetically.
+On 6/10/21 9:07 PM, Kir Kolyshkin wrote:
+> Improve BFQ docs: fix formatting, adding a missing piece.
+> 
+> Fix cgroup v1 blkio docs which are not updated for CFQ -> BFQ.
+> 
+> Patches are on top of the latest docs-next (commit acda97acb2e98c97895).
 
-Signed-off-by: Andy Shevchenko <andriy.shevchenko@linux.intel.com>
----
- drivers/acpi/sysfs.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+Applied, thanks.
 
-diff --git a/drivers/acpi/sysfs.c b/drivers/acpi/sysfs.c
-index 5474563d72b8..00c0ebaab29f 100644
---- a/drivers/acpi/sysfs.c
-+++ b/drivers/acpi/sysfs.c
-@@ -5,11 +5,11 @@
- 
- #define pr_fmt(fmt) "ACPI: " fmt
- 
-+#include <linux/acpi.h>
- #include <linux/bitmap.h>
- #include <linux/init.h>
- #include <linux/kernel.h>
- #include <linux/moduleparam.h>
--#include <linux/acpi.h>
- 
- #include "internal.h"
- 
 -- 
-2.30.2
+Jens Axboe
 
