@@ -2,104 +2,98 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 45ABD3AA0CE
-	for <lists+linux-doc@lfdr.de>; Wed, 16 Jun 2021 18:06:03 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 72B743AA195
+	for <lists+linux-doc@lfdr.de>; Wed, 16 Jun 2021 18:41:13 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S230318AbhFPQII (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 16 Jun 2021 12:08:08 -0400
-Received: from mail-io1-f42.google.com ([209.85.166.42]:40601 "EHLO
-        mail-io1-f42.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S229503AbhFPQII (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Wed, 16 Jun 2021 12:08:08 -0400
-Received: by mail-io1-f42.google.com with SMTP id l64so3587745ioa.7;
-        Wed, 16 Jun 2021 09:06:01 -0700 (PDT)
+        id S230436AbhFPQm5 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 16 Jun 2021 12:42:57 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:55076 "EHLO
+        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S230351AbhFPQmz (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Wed, 16 Jun 2021 12:42:55 -0400
+Received: from mail-pf1-x42d.google.com (mail-pf1-x42d.google.com [IPv6:2607:f8b0:4864:20::42d])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id B9FECC061768
+        for <linux-doc@vger.kernel.org>; Wed, 16 Jun 2021 09:40:47 -0700 (PDT)
+Received: by mail-pf1-x42d.google.com with SMTP id x73so2639057pfc.8
+        for <linux-doc@vger.kernel.org>; Wed, 16 Jun 2021 09:40:47 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=chromium.org; s=google;
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=epXDcsa+iB2IdU4Gd981bdI+VgdMiEH3uS5c66pfdMk=;
+        b=GkLCmFh/vzfPIF7v1q7mJc1wazpBYwrpHlrK8VamLK/tdnFXUDt3Jqpo/4zhnIgkB8
+         w2Pa4tHYHF/iTjxBxw7knQzMcGPxxObyF5+9fqOM24ruxemJU2JYyJ4aKfJ6/wO0ElHe
+         T6vfoZDbGX45mQjwQTttWWusehKNnlTA3+E6Y=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:date:from:to:cc:subject:message-id:references
-         :mime-version:content-disposition:in-reply-to;
-        bh=xRaK/HqldpKsuXqXX/IP9Ew0ihcv+zDkFzYH6GPtjCU=;
-        b=npXk7Y3QF0ZWMgAz6F1k1XWeKzNMsgmE3/ENFgTIxidv9UM0Gi10GcZxnGhlzlcMs4
-         51RallnMhr4i/PO8qPfpqN6A95Fk2dPr48GaI1mYSPnvOTkIvG4xkej4M0iINcvZSe6q
-         1SPs6cQR0JjcLLbql5XkXMPtu992WJ5mER+D5kyt7d7QYc5f9I7drnWCNkaJUKMXkJIj
-         VI3O38FsXzgGAhl+vYODAhBcihFfxpg+/mkRSGpj6n1e/AsvwqcKvi/gbSDopk2MtREL
-         VvV5hRU7nBihWv7VKfFtGppNWSiIJ7B8W2+LGyz3WZsUHgBTE6wY5FkHK3VkYHadu6hV
-         DyzQ==
-X-Gm-Message-State: AOAM533Pvi2S2bmOvshk2URNDB63EjS6jFUWfh44kD4LM++HiyV6RAG8
-        O3Okb4CPCm6njj0u5yJ8YHvBVwzyeQ==
-X-Google-Smtp-Source: ABdhPJywaPLOJlF56TRwmhGsnmf2dAL99dx9Y5w5diskFgOsh3SbgIZFVCBnoL+OuvJBkl9bKGTcoQ==
-X-Received: by 2002:a02:a41a:: with SMTP id c26mr134176jal.87.1623859560712;
-        Wed, 16 Jun 2021 09:06:00 -0700 (PDT)
-Received: from robh.at.kernel.org ([64.188.179.248])
-        by smtp.gmail.com with ESMTPSA id v15sm1388366ioq.39.2021.06.16.09.05.58
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=epXDcsa+iB2IdU4Gd981bdI+VgdMiEH3uS5c66pfdMk=;
+        b=j0XBl2xidiZzekeShkh6oSYe75BRl7mkTRPt/8r/28YBr7foyosHY5eR5NdKO/rQ+F
+         dq6exBMecHsQoOGOeZRn1p9ygFrr2vzTSzwv8TQgHMVkHur3IzA4927M0/WtRDw0tfMC
+         Ec65zIm8xy+Gn8Gb0hFrZCtx9sTQ6ZkHWsPLc4hRSndiknav6AG1GjvidxzVmaiXMDP1
+         5mSqXudhE//7uVk7DQY04RcSd/oKKe6MdXxnrDgoD4lFtMP0eKxtcUTF6n5udOti77+6
+         Sc9jGut4bH/FfThnurO5ceQ1qP7TktR/G/sO7ZZtwK5AnxSoRoAfbWdcoMKtKZ49fEFl
+         8nxw==
+X-Gm-Message-State: AOAM533gKhmMe3QJPIdGFIbhlB364gEZffLP/bjtuSOISYtpM7yxwbA+
+        XQt3KbTQwxFJn2gZDX/8M7zKkw==
+X-Google-Smtp-Source: ABdhPJwSppm5irPLhD/8UhbktXBLwwAA5AGV8driRal8NYsxUQyf0Pz+CGSw19WrD/+6GFIZo7Qt8Q==
+X-Received: by 2002:a63:5c04:: with SMTP id q4mr453285pgb.127.1623861647276;
+        Wed, 16 Jun 2021 09:40:47 -0700 (PDT)
+Received: from www.outflux.net (smtp.outflux.net. [198.145.64.163])
+        by smtp.gmail.com with ESMTPSA id c5sm2840547pfn.144.2021.06.16.09.40.45
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 16 Jun 2021 09:06:00 -0700 (PDT)
-Received: (nullmailer pid 3474948 invoked by uid 1000);
-        Wed, 16 Jun 2021 16:05:57 -0000
-Date:   Wed, 16 Jun 2021 10:05:57 -0600
-From:   Rob Herring <robh@kernel.org>
-To:     Jens Wiklander <jens.wiklander@linaro.org>
-Cc:     linux-kernel@vger.kernel.org, linux-arm-kernel@lists.infradead.org,
-        op-tee@lists.trustedfirmware.org, devicetree@vger.kernel.org,
-        linux-doc@vger.kernel.org, Jerome Forissier <jerome@forissier.org>,
-        Etienne Carriere <etienne.carriere@linaro.org>,
-        Sumit Garg <sumit.garg@linaro.org>,
-        Vincent Guittot <vincent.guittot@linaro.org>,
+        Wed, 16 Jun 2021 09:40:46 -0700 (PDT)
+From:   Kees Cook <keescook@chromium.org>
+To:     linux-kernel@vger.kernel.org
+Cc:     Kees Cook <keescook@chromium.org>, Christoph Hellwig <hch@lst.de>,
+        Al Viro <viro@zeniv.linux.org.uk>, gmpy.liaowx@gmail.com,
+        Anton Vorontsov <anton@enomsg.org>,
+        Colin Cross <ccross@android.com>,
+        Tony Luck <tony.luck@intel.com>,
         Jonathan Corbet <corbet@lwn.net>,
-        Ard Biesheuvel <ardb@kernel.org>, Marc Zyngier <maz@kernel.org>
-Subject: Re: [PATCH v2 3/7] dt-bindings: arm: optee: add interrupt property
-Message-ID: <20210616160557.GB3472903@robh.at.kernel.org>
-References: <20210616103649.2662395-1-jens.wiklander@linaro.org>
- <20210616103649.2662395-4-jens.wiklander@linaro.org>
+        Miquel Raynal <miquel.raynal@bootlin.com>,
+        Richard Weinberger <richard@nod.at>,
+        Vignesh Raghavendra <vigneshr@ti.com>,
+        linux-doc@vger.kernel.org, linux-mtd@lists.infradead.org,
+        linux-block@vger.kernel.org, linux-fsdevel@vger.kernel.org
+Subject: [PATCH v3 0/5] Use the normal block device I/O path
+Date:   Wed, 16 Jun 2021 09:40:38 -0700
+Message-Id: <20210616164043.1221861-1-keescook@chromium.org>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20210616103649.2662395-4-jens.wiklander@linaro.org>
+Content-Transfer-Encoding: 8bit
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Wed, Jun 16, 2021 at 12:36:45PM +0200, Jens Wiklander wrote:
-> Adds an optional interrupt property to the optee binding.
-> 
-> Signed-off-by: Jens Wiklander <jens.wiklander@linaro.org>
-> ---
->  .../devicetree/bindings/arm/firmware/linaro,optee-tz.yaml | 8 ++++++++
->  1 file changed, 8 insertions(+)
-> 
-> diff --git a/Documentation/devicetree/bindings/arm/firmware/linaro,optee-tz.yaml b/Documentation/devicetree/bindings/arm/firmware/linaro,optee-tz.yaml
-> index c931b030057f..3efbe11b637d 100644
-> --- a/Documentation/devicetree/bindings/arm/firmware/linaro,optee-tz.yaml
-> +++ b/Documentation/devicetree/bindings/arm/firmware/linaro,optee-tz.yaml
-> @@ -24,6 +24,9 @@ properties:
->              for the reference implementation maintained by Linaro.
->            const: linaro,optee-tz
->  
-> +  interrupts:
-> +    maxItems: 1
-> +
->    method:
->      description: The method of calling the OP-TEE Trusted OS.
->      $ref: /schemas/types.yaml#/definitions/string-array
-> @@ -37,6 +40,10 @@ properties:
->            in drivers/tee/optee/optee_smc.h
->          const: hvc
->  
-> +required:
-> +  - compatible
-> +  - method
-> +
+Hi,
 
-This should go in the first patch.
+This fixes up pstore/blk to avoid touching block internals, and includes
+additional fixes and clean-ups.
 
->  additionalProperties: false
->  
->  examples:
-> @@ -45,5 +52,6 @@ examples:
->        optee {
->          compatible = "linaro,optee-tz";
->          method = "smc";
-> +        interrupts = <0 187 4>;
->        };
->      };
-> -- 
-> 2.31.1
+-Kees
+
+v3:
+- split verify_size move into a separate patch
+- several changes suggested by hch from the v2 thread
+- add reviewed-bys
+v2: https://lore.kernel.org/lkml/20210615212121.1200820-1-keescook@chromium.org
+v1: https://lore.kernel.org/lkml/20210614200421.2702002-1-keescook@chromium.org
+
+Kees Cook (5):
+  pstore/blk: Improve failure reporting
+  pstore/blk: Move verify_size() macro out of function
+  pstore/blk: Use the normal block device I/O path
+  pstore/blk: Fix kerndoc and redundancy on blkdev param
+  pstore/blk: Include zone in pstore_device_info
+
+ Documentation/admin-guide/pstore-blk.rst |  14 +-
+ drivers/mtd/mtdpstore.c                  |  10 +-
+ fs/pstore/blk.c                          | 403 +++++++++--------------
+ include/linux/pstore_blk.h               |  27 +-
+ 4 files changed, 171 insertions(+), 283 deletions(-)
+
+-- 
+2.25.1
+
