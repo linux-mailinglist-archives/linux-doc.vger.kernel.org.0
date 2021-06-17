@@ -2,59 +2,127 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 339323AAE64
-	for <lists+linux-doc@lfdr.de>; Thu, 17 Jun 2021 10:03:44 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 0C2E43AAE6E
+	for <lists+linux-doc@lfdr.de>; Thu, 17 Jun 2021 10:06:54 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S229716AbhFQIFu convert rfc822-to-8bit (ORCPT
-        <rfc822;lists+linux-doc@lfdr.de>); Thu, 17 Jun 2021 04:05:50 -0400
-Received: from 6-200-5-45.rpnnetprovedor.com.br ([45.5.200.6]:48984 "EHLO
-        srv01.rpnnetprovedor.com.br" rhost-flags-OK-FAIL-OK-FAIL)
-        by vger.kernel.org with ESMTP id S230197AbhFQIFu (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Thu, 17 Jun 2021 04:05:50 -0400
-X-Greylist: delayed 8049 seconds by postgrey-1.27 at vger.kernel.org; Thu, 17 Jun 2021 04:05:49 EDT
-Received: from [84.38.130.143] (helo=IP-130-143.dataclub.eu)
-        by srv01.rpnnetprovedor.com.br with esmtpa (Exim 4.92.2)
-        (envelope-from <robertnellsona@citromail.hu>)
-        id 1ltkuC-0000uk-7z
-        for linux-doc@vger.kernel.org; Thu, 17 Jun 2021 02:49:32 -0300
-Content-Type: text/plain; charset="iso-8859-1"
+        id S229901AbhFQII7 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 17 Jun 2021 04:08:59 -0400
+Received: from frasgout.his.huawei.com ([185.176.79.56]:3260 "EHLO
+        frasgout.his.huawei.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S229666AbhFQII7 (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Thu, 17 Jun 2021 04:08:59 -0400
+Received: from fraeml709-chm.china.huawei.com (unknown [172.18.147.200])
+        by frasgout.his.huawei.com (SkyGuard) with ESMTP id 4G5Dnw3xwBz6K6Hr;
+        Thu, 17 Jun 2021 15:53:40 +0800 (CST)
+Received: from lhreml724-chm.china.huawei.com (10.201.108.75) by
+ fraeml709-chm.china.huawei.com (10.206.15.37) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2176.2; Thu, 17 Jun 2021 10:06:50 +0200
+Received: from [10.47.95.81] (10.47.95.81) by lhreml724-chm.china.huawei.com
+ (10.201.108.75) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2176.2; Thu, 17 Jun
+ 2021 09:06:49 +0100
+Subject: Re: [PATCH v13 4/6] iommu/vt-d: Add support for IOMMU default DMA
+ mode build options
+To:     Lu Baolu <baolu.lu@linux.intel.com>, <joro@8bytes.org>,
+        <will@kernel.org>, <dwmw2@infradead.org>, <robin.murphy@arm.com>,
+        <corbet@lwn.net>
+CC:     <linux-kernel@vger.kernel.org>, <iommu@lists.linux-foundation.org>,
+        <linuxarm@huawei.com>, <thunder.leizhen@huawei.com>,
+        <chenxiang66@hisilicon.com>, <linux-doc@vger.kernel.org>
+References: <1623841437-211832-1-git-send-email-john.garry@huawei.com>
+ <1623841437-211832-5-git-send-email-john.garry@huawei.com>
+ <46dbce5c-1c2b-60d4-df56-d2b95a959425@linux.intel.com>
+From:   John Garry <john.garry@huawei.com>
+Message-ID: <f3fe6c4b-f360-ab7b-7ad2-ced63269499d@huawei.com>
+Date:   Thu, 17 Jun 2021 09:00:37 +0100
+User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64; rv:68.0) Gecko/20100101
+ Thunderbird/68.1.2
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8BIT
-Content-Description: Mail message body
-Subject: CAN YOU INVEST WITH ME?...6
-To:     linux-doc@vger.kernel.org
-From:   "Mr.  Robert" <robertnellsona@citromail.hu>
-Date:   Thu, 17 Jun 2021 08:49:24 +0300
-Reply-To: robertnellsona@citromail.hu
-Message-Id: <E1ltkuC-0000uk-7z@srv01.rpnnetprovedor.com.br>
+In-Reply-To: <46dbce5c-1c2b-60d4-df56-d2b95a959425@linux.intel.com>
+Content-Type: text/plain; charset="utf-8"; format=flowed
+Content-Language: en-US
+Content-Transfer-Encoding: 8bit
+X-Originating-IP: [10.47.95.81]
+X-ClientProxiedBy: lhreml743-chm.china.huawei.com (10.201.108.193) To
+ lhreml724-chm.china.huawei.com (10.201.108.75)
+X-CFilter-Loop: Reflected
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
+On 17/06/2021 08:32, Lu Baolu wrote:
+> On 6/16/21 7:03 PM, John Garry wrote:
+>> @@ -4382,9 +4380,9 @@ int __init intel_iommu_init(void)
+>>            * is likely to be much lower than the overhead of 
+>> synchronizing
+>>            * the virtual and physical IOMMU page-tables.
+>>            */
+>> -        if (!intel_iommu_strict && cap_caching_mode(iommu->cap)) {
+>> -            pr_warn("IOMMU batching is disabled due to virtualization");
+>> -            intel_iommu_strict = 1;
+>> +        if (cap_caching_mode(iommu->cap)) {
+>> +            pr_warn("IOMMU batching disallowed due to 
+>> virtualization\n");
+>> +            iommu_set_dma_strict(true);
+> 
+> With this change, VM guest will always show this warning.
 
-ATTENTION; linux-doc@vger.kernel.org,
+Would they have got it before also normally?
 
-IMPORTANT INVESTMENT INFORMATION
+I mean, default is intel_iommu_strict=0, so if 
+cap_caching_mode(iommu->cap) is true and intel_iommu_strict not set to 1 
+elsewhere previously, then we would get this print.
 
-We have a good investment program going on now.
-We have $95m USD for Investment in your Country.
-We use this opportunity to invest you to join the investment program and you will never regret it.
-Please kindly invest with us and you will be receiving monthly income/return/profit every month.
-We can also give you Loan, 
+> How about
+> removing this message? Users could get the same information through the
+> kernel message added by "[PATCH v13 2/6] iommu: Print strict or lazy
+> mode at init time".
 
-We have: 
+I think that the print from 2/6 should occur before this print.
 
-1. Short Term Loan, 
+Regardless I would think that you would still like to be notified of 
+this change in policy, right?
 
-2. Medium Term Loan 
+However I now realize that the print is in a loop per iommu, so we would 
+get it per iommu:
 
-3. and Long Term Loan, 
+for_each_active_iommu(iommu, drhd) {
+	/*
+	 * The flush queue implementation does not perform
+	 * page-selective invalidations that are required for efficient
+	 * TLB flushes in virtual environments.  The benefit of batching
+	 * is likely to be much lower than the overhead of synchronizing
+	 * the virtual and physical IOMMU page-tables.
+	 */
+	if (!intel_iommu_strict && cap_caching_mode(iommu->cap)) {
+		pr_warn("IOMMU batching is disabled due to virtualization");
+		intel_iommu_strict = 1;
+	}
+	...
+}
 
-There is no need of collateral security. We will use our company to sign agreement and guarantee on your behalf and our Lawyer will sign on your behalf.
+I need to change that. How about this:
 
-Reply for more detail.
+bool print_warning = false;
 
-Thank you Sir.
+for_each_active_iommu(iommu, drhd) {
+	/*
+	 * The flush queue implementation does not perform
+	 * page-selective invalidations that are required for efficient
+	 * TLB flushes in virtual environments.  The benefit of batching
+	 * is likely to be much lower than the overhead of synchronizing
+	 * the virtual and physical IOMMU page-tables.
+	 */
+	if (!print_warning && cap_caching_mode(iommu->cap)) {
+		pr_warn("IOMMU batching disallowed due to virtualization\n");
+		iommu_set_dma_strict(true);
+		print_warning = true;
+	}
+	...
+}
 
-Robert Nellson.
-INVESTMENT MANAGER.
+or use pr_warn_once().
+
+Thanks,
+John
