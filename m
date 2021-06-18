@@ -2,125 +2,157 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 93EE43ACFE0
-	for <lists+linux-doc@lfdr.de>; Fri, 18 Jun 2021 18:07:25 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 5A95A3AD0A6
+	for <lists+linux-doc@lfdr.de>; Fri, 18 Jun 2021 18:45:11 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S231756AbhFRQJd (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Fri, 18 Jun 2021 12:09:33 -0400
-Received: from mx0a-00069f02.pphosted.com ([205.220.165.32]:52776 "EHLO
-        mx0a-00069f02.pphosted.com" rhost-flags-OK-OK-OK-OK)
-        by vger.kernel.org with ESMTP id S231834AbhFRQJc (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Fri, 18 Jun 2021 12:09:32 -0400
-Received: from pps.filterd (m0246629.ppops.net [127.0.0.1])
-        by mx0b-00069f02.pphosted.com (8.16.0.43/8.16.0.43) with SMTP id 15IG26av010929;
-        Fri, 18 Jun 2021 16:07:00 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=oracle.com; h=from : to : cc :
- subject : date : message-id : in-reply-to : references; s=corp-2020-01-29;
- bh=2j4DFmaqTg7mJII5mjXL3wo0zAK/9f6Mm+ri23jZ0dk=;
- b=Uz9Z6JJQ8ROB/Vco+gOwLn4gXHx/W6iZAg2KPPYebakmWrLiFNrgYj2mnFHC/4/6tYgi
- FyrvMEgO1WqPdJcL8+MkT7PLmw1jwAiWLhEKSHOOD7uaKIolhayMPd5n8vyuKnH60Q/l
- xkp2PsjOLjcVxMenCA1pllqKzZ8KyEP3kqCSXcynRnXdjBjNgxFKKPPUg3J5PMEFALD3
- g6tSa/tTZnJDPdA7IlBO6H6E/9iTqu84Yz7RkahXri9mYiz7sTOx7z7ZVf1TDE6HohDZ
- mBTgqC+Zk3yj6LMaHYNs5k2lBjLwfLUAzsuEuQIslZ5dQ9GI7ylsq/jnajA1hXxlmK/3 gw== 
-Received: from aserp3030.oracle.com (aserp3030.oracle.com [141.146.126.71])
-        by mx0b-00069f02.pphosted.com with ESMTP id 398xmp00cv-1
-        (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
-        Fri, 18 Jun 2021 16:06:59 +0000
-Received: from pps.filterd (aserp3030.oracle.com [127.0.0.1])
-        by aserp3030.oracle.com (8.16.0.42/8.16.0.42) with SMTP id 15IG1Pvn108711;
-        Fri, 18 Jun 2021 16:06:58 GMT
-Received: from pps.reinject (localhost [127.0.0.1])
-        by aserp3030.oracle.com with ESMTP id 396wawv2rm-1
-        (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
-        Fri, 18 Jun 2021 16:06:58 +0000
-Received: from aserp3030.oracle.com (aserp3030.oracle.com [127.0.0.1])
-        by pps.reinject (8.16.0.36/8.16.0.36) with SMTP id 15IG3fFt114314;
-        Fri, 18 Jun 2021 16:06:58 GMT
-Received: from userv0121.oracle.com (userv0121.oracle.com [156.151.31.72])
-        by aserp3030.oracle.com with ESMTP id 396wawv2q4-1
-        (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
-        Fri, 18 Jun 2021 16:06:58 +0000
-Received: from abhmp0001.oracle.com (abhmp0001.oracle.com [141.146.116.7])
-        by userv0121.oracle.com (8.14.4/8.13.8) with ESMTP id 15IG6tHa021864;
-        Fri, 18 Jun 2021 16:06:55 GMT
-Received: from lateralus.us.oracle.com (/10.149.232.101)
-        by default (Oracle Beehive Gateway v4.0)
-        with ESMTP ; Fri, 18 Jun 2021 16:06:55 +0000
-From:   Ross Philipson <ross.philipson@oracle.com>
-To:     linux-kernel@vger.kernel.org, x86@kernel.org,
-        iommu@lists.linux-foundation.org, linux-integrity@vger.kernel.org,
-        linux-doc@vger.kernel.org
-Cc:     ross.philipson@oracle.com, dpsmith@apertussolutions.com,
-        tglx@linutronix.de, mingo@redhat.com, bp@alien8.de, hpa@zytor.com,
-        luto@amacapital.net, trenchboot-devel@googlegroups.com
-Subject: [PATCH v2 12/12] iommu: Do not allow IOMMU passthrough with Secure Launch
-Date:   Fri, 18 Jun 2021 12:12:57 -0400
-Message-Id: <1624032777-7013-13-git-send-email-ross.philipson@oracle.com>
-X-Mailer: git-send-email 1.8.3.1
-In-Reply-To: <1624032777-7013-1-git-send-email-ross.philipson@oracle.com>
-References: <1624032777-7013-1-git-send-email-ross.philipson@oracle.com>
-X-Proofpoint-ORIG-GUID: 2dcc9vhgXW8othlKgr_oTBs9RkM_O--n
-X-Proofpoint-GUID: 2dcc9vhgXW8othlKgr_oTBs9RkM_O--n
+        id S233058AbhFRQrT (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Fri, 18 Jun 2021 12:47:19 -0400
+Received: from mail.kernel.org ([198.145.29.99]:49834 "EHLO mail.kernel.org"
+        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
+        id S231977AbhFRQrR (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Fri, 18 Jun 2021 12:47:17 -0400
+Received: from oasis.local.home (cpe-66-24-58-225.stny.res.rr.com [66.24.58.225])
+        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+        (No client certificate requested)
+        by mail.kernel.org (Postfix) with ESMTPSA id 2A9ED610C7;
+        Fri, 18 Jun 2021 16:45:06 +0000 (UTC)
+Date:   Fri, 18 Jun 2021 12:45:03 -0400
+From:   Steven Rostedt <rostedt@goodmis.org>
+To:     Daniel Bristot de Oliveira <bristot@redhat.com>
+Cc:     Phil Auld <pauld@redhat.com>,
+        Sebastian Andrzej Siewior <bigeasy@linutronix.de>,
+        Kate Carcia <kcarcia@redhat.com>,
+        Jonathan Corbet <corbet@lwn.net>,
+        Ingo Molnar <mingo@redhat.com>,
+        Peter Zijlstra <peterz@infradead.org>,
+        Thomas Gleixner <tglx@linutronix.de>,
+        Alexandre Chartre <alexandre.chartre@oracle.com>,
+        Clark Willaims <williams@redhat.com>,
+        John Kacur <jkacur@redhat.com>,
+        Juri Lelli <juri.lelli@redhat.com>,
+        Borislav Petkov <bp@alien8.de>,
+        "H. Peter Anvin" <hpa@zytor.com>, x86@kernel.org,
+        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org
+Subject: Re: [PATCH V4 05/12] trace/hwlat: Support hotplug operations
+Message-ID: <20210618124503.388fe4d4@oasis.local.home>
+In-Reply-To: <8899f8a8bec38bc600f7a2c61bc6ca664aa7beeb.1623746916.git.bristot@redhat.com>
+References: <cover.1623746916.git.bristot@redhat.com>
+        <8899f8a8bec38bc600f7a2c61bc6ca664aa7beeb.1623746916.git.bristot@redhat.com>
+X-Mailer: Claws Mail 3.17.3 (GTK+ 2.24.33; x86_64-pc-linux-gnu)
+MIME-Version: 1.0
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 7bit
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-The IOMMU should always be set to default translated type after
-the PMRs are disabled to protect the MLE from DMA.
+On Tue, 15 Jun 2021 11:28:44 +0200
+Daniel Bristot de Oliveira <bristot@redhat.com> wrote:
 
-Signed-off-by: Ross Philipson <ross.philipson@oracle.com>
----
- drivers/iommu/intel/iommu.c | 5 +++++
- drivers/iommu/iommu.c       | 6 +++++-
- 2 files changed, 10 insertions(+), 1 deletion(-)
+> Enable and disable hwlat thread during cpu hotplug online
+> and offline operations, respectivelly.
+> 
+> Cc: Jonathan Corbet <corbet@lwn.net>
+> Cc: Steven Rostedt <rostedt@goodmis.org>
+> Cc: Ingo Molnar <mingo@redhat.com>
+> Cc: Peter Zijlstra <peterz@infradead.org>
+> Cc: Thomas Gleixner <tglx@linutronix.de>
+> Cc: Alexandre Chartre <alexandre.chartre@oracle.com>
+> Cc: Clark Willaims <williams@redhat.com>
+> Cc: John Kacur <jkacur@redhat.com>
+> Cc: Juri Lelli <juri.lelli@redhat.com>
+> Cc: Borislav Petkov <bp@alien8.de>
+> Cc: "H. Peter Anvin" <hpa@zytor.com>
+> Cc: x86@kernel.org
+> Cc: linux-doc@vger.kernel.org
+> Cc: linux-kernel@vger.kernel.org
+> Signed-off-by: Daniel Bristot de Oliveira <bristot@redhat.com>
+> ---
+>  kernel/trace/trace.c       |  6 ++++++
+>  kernel/trace/trace_hwlat.c | 34 ++++++++++++++++++++++++++++++++++
+>  2 files changed, 40 insertions(+)
+> 
+> diff --git a/kernel/trace/trace.c b/kernel/trace/trace.c
+> index 9299057feb56..c094865e2f71 100644
+> --- a/kernel/trace/trace.c
+> +++ b/kernel/trace/trace.c
+> @@ -5064,7 +5064,13 @@ int tracing_set_cpumask(struct trace_array *tr,
+>  	arch_spin_unlock(&tr->max_lock);
+>  	local_irq_enable();
+>  
+> +	/*
+> +	 * tracing_cpumask is read by tracers that support CPU
+> +	 * hotplug.
+> +	 */
+> +	get_online_cpus();
+>  	cpumask_copy(tr->tracing_cpumask, tracing_cpumask_new);
+> +	put_online_cpus();
+>  
+>  	return 0;
+>  }
+> diff --git a/kernel/trace/trace_hwlat.c b/kernel/trace/trace_hwlat.c
+> index 6c6918e86087..9fcfd588c4f6 100644
+> --- a/kernel/trace/trace_hwlat.c
+> +++ b/kernel/trace/trace_hwlat.c
+> @@ -490,6 +490,35 @@ static int start_cpu_kthread(unsigned int cpu)
+>  	return 0;
+>  }
+>  
+> +/*
+> + * hwlat_cpu_init - CPU hotplug online callback function
+> + */
+> +static int hwlat_cpu_init(unsigned int cpu)
+> +{
+> +	struct trace_array *tr = hwlat_trace;
+> +
 
-diff --git a/drivers/iommu/intel/iommu.c b/drivers/iommu/intel/iommu.c
-index be35284..4f0256d 100644
---- a/drivers/iommu/intel/iommu.c
-+++ b/drivers/iommu/intel/iommu.c
-@@ -41,6 +41,7 @@
- #include <linux/dma-direct.h>
- #include <linux/crash_dump.h>
- #include <linux/numa.h>
-+#include <linux/slaunch.h>
- #include <asm/irq_remapping.h>
- #include <asm/cacheflush.h>
- #include <asm/iommu.h>
-@@ -2877,6 +2878,10 @@ static bool device_is_rmrr_locked(struct device *dev)
-  */
- static int device_def_domain_type(struct device *dev)
- {
-+	/* Do not allow identity domain when Secure Launch is configured */
-+	if (slaunch_get_flags() & SL_FLAG_ACTIVE)
-+		return IOMMU_DOMAIN_DMA;
-+
- 	if (dev_is_pci(dev)) {
- 		struct pci_dev *pdev = to_pci_dev(dev);
- 
-diff --git a/drivers/iommu/iommu.c b/drivers/iommu/iommu.c
-index 808ab70d..d49b7dd 100644
---- a/drivers/iommu/iommu.c
-+++ b/drivers/iommu/iommu.c
-@@ -23,6 +23,7 @@
- #include <linux/property.h>
- #include <linux/fsl/mc.h>
- #include <linux/module.h>
-+#include <linux/slaunch.h>
- #include <trace/events/iommu.h>
- 
- static struct kset *iommu_group_kset;
-@@ -2761,7 +2762,10 @@ void iommu_set_default_passthrough(bool cmd_line)
- {
- 	if (cmd_line)
- 		iommu_cmd_line |= IOMMU_CMD_LINE_DMA_API;
--	iommu_def_domain_type = IOMMU_DOMAIN_IDENTITY;
-+
-+	/* Do not allow identity domain when Secure Launch is configured */
-+	if (!(slaunch_get_flags() & SL_FLAG_ACTIVE))
-+		iommu_def_domain_type = IOMMU_DOMAIN_IDENTITY;
- }
- 
- void iommu_set_default_translated(bool cmd_line)
--- 
-1.8.3.1
+You need to take the trace_types_lock here, between testing the
+hwlat_busy and starting the threads. Otherwise, between the two, the
+hwlat tracer could be turned off while a CPU is coming on line, and
+then you just started a per cpu thread, while the hwlat tracer is not
+enabled.
+
+> +	if (!hwlat_busy)
+> +		return 0;
+> +
+> +	if (!cpumask_test_cpu(cpu, tr->tracing_cpumask))
+> +		return 0;
+> +
+> +	return start_cpu_kthread(cpu);
+> +}
+> +
+> +/*
+> + * hwlat_cpu_die - CPU hotplug offline callback function
+> + */
+> +static int hwlat_cpu_die(unsigned int cpu)
+> +{
+
+Same here.
+
+-- Steve
+
+
+> +	if (!hwlat_busy)
+> +		return 0;
+> +
+> +	stop_cpu_kthread(cpu);
+> +
+> +	return 0;
+> +}
+> +
+>  /*
+>   * start_per_cpu_kthreads - Kick off the hardware latency sampling/detector kthreads
+>   *
+> @@ -903,6 +932,11 @@ __init static int init_hwlat_tracer(void)
+>  	if (ret)
+>  		return ret;
+>  
+> +	ret = cpuhp_setup_state(CPUHP_AP_ONLINE_DYN, "trace/hwlat:online",
+> +				hwlat_cpu_init, hwlat_cpu_die);
+> +	if (ret < 0)
+> +		pr_warn(BANNER "Error to init cpu hotplug support\n");
+> +
+>  	init_tracefs();
+>  
+>  	return 0;
 
