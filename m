@@ -2,136 +2,42 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 9C0463ACA11
-	for <lists+linux-doc@lfdr.de>; Fri, 18 Jun 2021 13:39:21 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id E20943ACA31
+	for <lists+linux-doc@lfdr.de>; Fri, 18 Jun 2021 13:44:12 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S234121AbhFRLl2 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Fri, 18 Jun 2021 07:41:28 -0400
-Received: from frasgout.his.huawei.com ([185.176.79.56]:3275 "EHLO
-        frasgout.his.huawei.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S234139AbhFRLl0 (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Fri, 18 Jun 2021 07:41:26 -0400
-Received: from fraeml707-chm.china.huawei.com (unknown [172.18.147.207])
-        by frasgout.his.huawei.com (SkyGuard) with ESMTP id 4G5xSV3myTz6G9nt;
-        Fri, 18 Jun 2021 19:26:02 +0800 (CST)
-Received: from lhreml724-chm.china.huawei.com (10.201.108.75) by
- fraeml707-chm.china.huawei.com (10.206.15.35) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2176.2; Fri, 18 Jun 2021 13:39:15 +0200
-Received: from localhost.localdomain (10.69.192.58) by
- lhreml724-chm.china.huawei.com (10.201.108.75) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2176.2; Fri, 18 Jun 2021 12:39:11 +0100
-From:   John Garry <john.garry@huawei.com>
-To:     <joro@8bytes.org>, <will@kernel.org>, <dwmw2@infradead.org>,
-        <baolu.lu@linux.intel.com>, <robin.murphy@arm.com>,
-        <corbet@lwn.net>
-CC:     <linux-kernel@vger.kernel.org>, <iommu@lists.linux-foundation.org>,
-        <linuxarm@huawei.com>, <thunder.leizhen@huawei.com>,
-        <chenxiang66@hisilicon.com>, <linux-doc@vger.kernel.org>,
-        John Garry <john.garry@huawei.com>
-Subject: [PATCH v14 6/6] iommu: Remove mode argument from iommu_set_dma_strict()
-Date:   Fri, 18 Jun 2021 19:34:18 +0800
-Message-ID: <1624016058-189713-7-git-send-email-john.garry@huawei.com>
-X-Mailer: git-send-email 2.8.1
-In-Reply-To: <1624016058-189713-1-git-send-email-john.garry@huawei.com>
-References: <1624016058-189713-1-git-send-email-john.garry@huawei.com>
+        id S233845AbhFRLqT convert rfc822-to-8bit (ORCPT
+        <rfc822;lists+linux-doc@lfdr.de>); Fri, 18 Jun 2021 07:46:19 -0400
+Received: from [210.180.118.67] ([210.180.118.67]:34784 "EHLO blank.cafe24.com"
+        rhost-flags-FAIL-FAIL-OK-FAIL) by vger.kernel.org with ESMTP
+        id S233927AbhFRLqS (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Fri, 18 Jun 2021 07:46:18 -0400
+X-Greylist: delayed 108571 seconds by postgrey-1.27 at vger.kernel.org; Fri, 18 Jun 2021 07:46:18 EDT
+Received: from IP-130-143.dataclub.eu (ip-130-143.dataclub.info [84.38.130.143] (may be forged))
+        (authenticated bits=0)
+        by blank.cafe24.com (8.14.7/8.14.7) with ESMTP id 15IBhVeK011103
+        for <linux-doc@vger.kernel.org>; Fri, 18 Jun 2021 20:44:06 +0900
+Message-Id: <202106181144.15IBhVeK011103@blank.cafe24.com>
+Content-Type: text/plain; charset="iso-8859-1"
 MIME-Version: 1.0
-Content-Type: text/plain
-X-Originating-IP: [10.69.192.58]
-X-ClientProxiedBy: dggems702-chm.china.huawei.com (10.3.19.179) To
- lhreml724-chm.china.huawei.com (10.201.108.75)
-X-CFilter-Loop: Reflected
+Content-Transfer-Encoding: 8BIT
+Content-Description: Mail message body
+Subject: BUSINESS LOAN/PROJECT FUNDING...67
+To:     linux-doc@vger.kernel.org
+From:   "Smith Green" <ssbinvestmentsllc@citromail.hu>
+Date:   Fri, 18 Jun 2021 14:44:44 +0300
+Reply-To: ssbinvestmentsllc@citromail.hu
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-We only ever now set strict mode enabled in iommu_set_dma_strict(), so
-just remove the argument.
+Dear Sir/Madam,
 
-Signed-off-by: John Garry <john.garry@huawei.com>
-Reviewed-by: Robin Murphy <robin.murphy@arm.com>
----
- drivers/iommu/amd/init.c    | 2 +-
- drivers/iommu/intel/iommu.c | 6 +++---
- drivers/iommu/iommu.c       | 5 ++---
- include/linux/iommu.h       | 2 +-
- 4 files changed, 7 insertions(+), 8 deletions(-)
+Our Investors are based in the middle east with a profound track record. We invite you to take advantage of our investment loan program to fund your existing or intending projects. We offer a straight or convertible loan investment program for projects with high-returns and payback prospects without the usual rigid procedures of conventional lenders.
+ 
+Kindly forward a copy of your Executive business summary for our review: info@ssbinvestmentsllc.us
 
-diff --git a/drivers/iommu/amd/init.c b/drivers/iommu/amd/init.c
-index 1e641cb6dddc..6e12a615117b 100644
---- a/drivers/iommu/amd/init.c
-+++ b/drivers/iommu/amd/init.c
-@@ -3099,7 +3099,7 @@ static int __init parse_amd_iommu_options(char *str)
- 	for (; *str; ++str) {
- 		if (strncmp(str, "fullflush", 9) == 0) {
- 			pr_warn("amd_iommu=fullflush deprecated; use iommu.strict=1 instead\n");
--			iommu_set_dma_strict(true);
-+			iommu_set_dma_strict();
- 		}
- 		if (strncmp(str, "force_enable", 12) == 0)
- 			amd_iommu_force_enable = true;
-diff --git a/drivers/iommu/intel/iommu.c b/drivers/iommu/intel/iommu.c
-index 06666f9d8116..77d0834fb0df 100644
---- a/drivers/iommu/intel/iommu.c
-+++ b/drivers/iommu/intel/iommu.c
-@@ -454,7 +454,7 @@ static int __init intel_iommu_setup(char *str)
- 			iommu_dma_forcedac = true;
- 		} else if (!strncmp(str, "strict", 6)) {
- 			pr_warn("intel_iommu=strict deprecated; use iommu.strict=1 instead\n");
--			iommu_set_dma_strict(true);
-+			iommu_set_dma_strict();
- 		} else if (!strncmp(str, "sp_off", 6)) {
- 			pr_info("Disable supported super page\n");
- 			intel_iommu_superpage = 0;
-@@ -4382,7 +4382,7 @@ int __init intel_iommu_init(void)
- 		 */
- 		if (cap_caching_mode(iommu->cap)) {
- 			pr_info_once("IOMMU batching disallowed due to virtualization\n");
--			iommu_set_dma_strict(true);
-+			iommu_set_dma_strict();
- 		}
- 		iommu_device_sysfs_add(&iommu->iommu, NULL,
- 				       intel_iommu_groups,
-@@ -5699,7 +5699,7 @@ static void quirk_calpella_no_shadow_gtt(struct pci_dev *dev)
- 	} else if (dmar_map_gfx) {
- 		/* we have to ensure the gfx device is idle before we flush */
- 		pci_info(dev, "Disabling batched IOTLB flush on Ironlake\n");
--		iommu_set_dma_strict(true);
-+		iommu_set_dma_strict();
- 	}
- }
- DECLARE_PCI_FIXUP_HEADER(PCI_VENDOR_ID_INTEL, 0x0040, quirk_calpella_no_shadow_gtt);
-diff --git a/drivers/iommu/iommu.c b/drivers/iommu/iommu.c
-index 60b1ec42e73b..ff221d3ddcbc 100644
---- a/drivers/iommu/iommu.c
-+++ b/drivers/iommu/iommu.c
-@@ -349,10 +349,9 @@ static int __init iommu_dma_setup(char *str)
- }
- early_param("iommu.strict", iommu_dma_setup);
  
--void iommu_set_dma_strict(bool strict)
-+void iommu_set_dma_strict(void)
- {
--	if (strict || !(iommu_cmd_line & IOMMU_CMD_LINE_STRICT))
--		iommu_dma_strict = strict;
-+	iommu_dma_strict = true;
- }
- 
- bool iommu_get_dma_strict(struct iommu_domain *domain)
-diff --git a/include/linux/iommu.h b/include/linux/iommu.h
-index 32d448050bf7..754f67d6dd90 100644
---- a/include/linux/iommu.h
-+++ b/include/linux/iommu.h
-@@ -476,7 +476,7 @@ int iommu_enable_nesting(struct iommu_domain *domain);
- int iommu_set_pgtable_quirks(struct iommu_domain *domain,
- 		unsigned long quirks);
- 
--void iommu_set_dma_strict(bool val);
-+void iommu_set_dma_strict(void);
- bool iommu_get_dma_strict(struct iommu_domain *domain);
- 
- extern int report_iommu_fault(struct iommu_domain *domain, struct device *dev,
--- 
-2.26.2
-
+Best Regards.
+Smith Green
+E:info@ssbinvestmentsllc.us
+International investment broker
