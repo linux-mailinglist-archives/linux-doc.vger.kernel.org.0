@@ -2,56 +2,56 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id BA1F73AE8CA
-	for <lists+linux-doc@lfdr.de>; Mon, 21 Jun 2021 14:09:50 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id CE2523AE8E8
+	for <lists+linux-doc@lfdr.de>; Mon, 21 Jun 2021 14:18:28 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S230028AbhFUMMD (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 21 Jun 2021 08:12:03 -0400
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124]:56299 "EHLO
+        id S229623AbhFUMUh (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 21 Jun 2021 08:20:37 -0400
+Received: from us-smtp-delivery-124.mimecast.com ([216.205.24.124]:42264 "EHLO
         us-smtp-delivery-124.mimecast.com" rhost-flags-OK-OK-OK-OK)
-        by vger.kernel.org with ESMTP id S230006AbhFUMMC (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Mon, 21 Jun 2021 08:12:02 -0400
+        by vger.kernel.org with ESMTP id S229610AbhFUMUf (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Mon, 21 Jun 2021 08:20:35 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-        s=mimecast20190719; t=1624277388;
+        s=mimecast20190719; t=1624277901;
         h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
          to:to:cc:cc:mime-version:mime-version:content-type:content-type:
          content-transfer-encoding:content-transfer-encoding:
          in-reply-to:in-reply-to:references:references;
-        bh=odphSy0p+GRx3OHzvhvSgNkTSdj9er6W6DDABZU80qU=;
-        b=hPAfpL7h+VgZlRcjb32hF1TsP4PeEKj8DkowfEiHm8OSlNWPpYekexcy+1ZTXYRyV3QHaX
-        OJF7xxhhAaCTuDhP2c++wZqcKnLIOR9i6djGE10lB9LEkQWqd6rvUeySdETY0RsXHvrFTA
-        as76OzmviRqKAyhEOf2bololWWxbr6o=
-Received: from mail-ed1-f70.google.com (mail-ed1-f70.google.com
- [209.85.208.70]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-604-mllvGSXYOKaLYEjR9G9dfw-1; Mon, 21 Jun 2021 08:09:46 -0400
-X-MC-Unique: mllvGSXYOKaLYEjR9G9dfw-1
-Received: by mail-ed1-f70.google.com with SMTP id c9-20020a05640227c9b0290394ac48c2e4so2073141ede.11
-        for <linux-doc@vger.kernel.org>; Mon, 21 Jun 2021 05:09:46 -0700 (PDT)
+        bh=LOHrwparAJCAIZUIkqOpUo21CBd0n6J6FZ/QQzdYkEs=;
+        b=bzHLLmeFiHMejmgSQF1Rdap92WTSStrfUDNBBdHiwvlGm3ITtU5eaH1SHK5vC/KSBuXvMs
+        5dsQvlaLaxWY4UAf7BKTZ+I9WD0+pZGywsxhbmhs4rMOaAM+KbWPD8k9+BTTmYJLzcMeUf
+        OH9c+CNiwXVvx96YiwZUCYqkE6Q94Fs=
+Received: from mail-ed1-f72.google.com (mail-ed1-f72.google.com
+ [209.85.208.72]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-493-IqvQaHpFM1y0plllTNcV9A-1; Mon, 21 Jun 2021 08:18:19 -0400
+X-MC-Unique: IqvQaHpFM1y0plllTNcV9A-1
+Received: by mail-ed1-f72.google.com with SMTP id dy23-20020a05640231f7b0290394996f1452so3519472edb.18
+        for <linux-doc@vger.kernel.org>; Mon, 21 Jun 2021 05:18:19 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:subject:to:cc:references:from:message-id:date
          :user-agent:mime-version:in-reply-to:content-language
          :content-transfer-encoding;
-        bh=odphSy0p+GRx3OHzvhvSgNkTSdj9er6W6DDABZU80qU=;
-        b=YxbjX7/uN2aar7NGLE6ONarJv0/jFPXq7mDSx7saC76Zsq6GLhdFAlLLQQO1gLrg+h
-         6voeUbOS0jrarBtueUEGtWHmedzCx2IUX3pQLuPJpELC1auKcKe+Nlihi/p7qL83w/UL
-         S/xfzO8FGwmuT8C0a3i9cBqd20k2Yex4bRD7/zPozIFR4dERDto1OA5PZE67OVw7y6Vp
-         w88yEuRLskiqs2dgXCKG2uQyWPWJa/mpzf6BZHArbE9iHnKZZyy2PNiJk4kXnmkvnuIP
-         Q8lC6SYgxStmX5zEjH6FqtSADwlV3aFwGRHxfVkwGR0CW3Z1V7nYErkk0E+RBwoCUwrW
-         TO1Q==
-X-Gm-Message-State: AOAM533Xr4X43yCiE0P+qqqoXjbj+0BYTXVNAUUoOycI/89jjsBeUAE/
-        s7IY3foTFTRpCx0i/tkqNme8eaBjDgdo6AX9yQmNfaIitxV0ogQYFpJNEyX2MZ8wpgPUFz8ly9r
-        Qt8u8WWv7Qdyxfvs94tae
-X-Received: by 2002:a17:906:1487:: with SMTP id x7mr22754823ejc.456.1624277385870;
-        Mon, 21 Jun 2021 05:09:45 -0700 (PDT)
-X-Google-Smtp-Source: ABdhPJw497cJ4hZMB2JNVH8lV+bmBWqkptMOxhZ6fbzZyTil9mgqah02sCMqjoAG7L1rzXxjMM0lEA==
-X-Received: by 2002:a17:906:1487:: with SMTP id x7mr22754796ejc.456.1624277385704;
-        Mon, 21 Jun 2021 05:09:45 -0700 (PDT)
+        bh=LOHrwparAJCAIZUIkqOpUo21CBd0n6J6FZ/QQzdYkEs=;
+        b=SGPE+2UF4+vDfQtSZUJcQCB+NCvQp1xsvhpnudsAefeUilFbmmVVHpjcvcjwaKGfwg
+         BiY9JQ/Hfgonariy7T1UyGfZUdzSf+GqaERia1+7cUIuGVpo1sSZtI9GgG1G65dEmHGt
+         Hgk6K2puEZvx2gOzj1GM17hic8dbd6APhWS2pxEoNfzaYKDLOwsHL7dq/rrjvOAC7Hl/
+         C1BiuMPRlduI8+E0ZQ+7SYoLEm2S4RBU4uKkvdRLgWl9Bsvvc3Fwa5DZw6rXkMRYYbR3
+         Mt61/yMfKHwJygnmszVmxeGqXr7/3qWOza4gpjmm8SiVunUbnsQCe/VAUQK7O+djtta9
+         ZlnQ==
+X-Gm-Message-State: AOAM531Q8RvOyGsL9pw2EdOjwfU07xb6DJFFkJK2tpwmQvidKWRy0/gc
+        ZJCY1nQ2Wwj9TTlwAl3026ipfTlnqbgLNVws3ezIymEBMciJElQFwj21jfYvM9iUV0x94dRLS2p
+        9xXM7kTB2XeVLHnL0vcXK
+X-Received: by 2002:a05:6402:487:: with SMTP id k7mr20975260edv.315.1624277898756;
+        Mon, 21 Jun 2021 05:18:18 -0700 (PDT)
+X-Google-Smtp-Source: ABdhPJxUv4vvw9d6Yul3omjBbTUaqRtiBy0ogEQ+QnNK2A8N+u+/0obe40MWIrep5YZYlO7nWngxbw==
+X-Received: by 2002:a05:6402:487:: with SMTP id k7mr20975238edv.315.1624277898646;
+        Mon, 21 Jun 2021 05:18:18 -0700 (PDT)
 Received: from x1.bristot.me (host-79-23-205-114.retail.telecomitalia.it. [79.23.205.114])
-        by smtp.gmail.com with ESMTPSA id hy18sm1659635ejc.111.2021.06.21.05.09.44
+        by smtp.gmail.com with ESMTPSA id e28sm8368582edc.24.2021.06.21.05.18.17
         (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Mon, 21 Jun 2021 05:09:45 -0700 (PDT)
-Subject: Re: [PATCH V4 10/12] trace: Add osnoise tracer
+        Mon, 21 Jun 2021 05:18:18 -0700 (PDT)
+Subject: Re: [PATCH V4 12/12] trace/osnoise: Support hotplug operations
 To:     Steven Rostedt <rostedt@goodmis.org>
 Cc:     Phil Auld <pauld@redhat.com>,
         Sebastian Andrzej Siewior <bigeasy@linutronix.de>,
@@ -68,15 +68,15 @@ Cc:     Phil Auld <pauld@redhat.com>,
         "H. Peter Anvin" <hpa@zytor.com>, x86@kernel.org,
         linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org
 References: <cover.1623746916.git.bristot@redhat.com>
- <c555b92d6cfef5b3d05c426696d98553c1a46c8d.1623746916.git.bristot@redhat.com>
- <20210618142702.7c75f0c9@oasis.local.home>
+ <ee28d6e8b028a66a1d624895cf0aa04ddd17cb37.1623746916.git.bristot@redhat.com>
+ <20210618150443.44a49826@oasis.local.home>
 From:   Daniel Bristot de Oliveira <bristot@redhat.com>
-Message-ID: <69466a02-0096-e17d-823d-a9f9bfe71152@redhat.com>
-Date:   Mon, 21 Jun 2021 14:09:44 +0200
+Message-ID: <10eca4c6-999f-5d48-3fb3-4f8ab7d8b8b3@redhat.com>
+Date:   Mon, 21 Jun 2021 14:18:17 +0200
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
  Thunderbird/78.11.0
 MIME-Version: 1.0
-In-Reply-To: <20210618142702.7c75f0c9@oasis.local.home>
+In-Reply-To: <20210618150443.44a49826@oasis.local.home>
 Content-Type: text/plain; charset=utf-8
 Content-Language: en-US
 Content-Transfer-Encoding: 7bit
@@ -84,32 +84,38 @@ Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On 6/18/21 8:27 PM, Steven Rostedt wrote:
-> On Tue, 15 Jun 2021 11:28:49 +0200
+On 6/18/21 9:04 PM, Steven Rostedt wrote:
+> On Tue, 15 Jun 2021 11:28:51 +0200
 > Daniel Bristot de Oliveira <bristot@redhat.com> wrote:
 > 
->> diff --git a/kernel/trace/trace_osnoise.h b/kernel/trace/trace_osnoise.h
->> new file mode 100644
->> index 000000000000..34c7b80f9e12
->> --- /dev/null
->> +++ b/kernel/trace/trace_osnoise.h
->> @@ -0,0 +1,9 @@
->> +int __weak osnoise_arch_register(void)
->> +{
->> +	return 0;
->> +}
->> +
->> +void __weak osnoise_arch_unregister(void)
->> +{
->> +	return;
->> +}
-> No reason to put the above in a header file. In fact, as it is code, it
-> should not be in a header file. Keep it in the trace_osnoise.c.
+>> @@ -1566,7 +1627,14 @@ osnoise_cpus_write(struct file *filp, const char __user *ubuf, size_t count,
+>>  		osnoise_tracer_stop(tr);
+>>  
+>>  	mutex_lock(&interface_lock);
+>> +	/*
+>> +	 * osnoise_cpumask is ready by CPU hotplug operations.
+> 
+> I don't understand the usage of "ready" above. Lost in translation?
+> 
+> 	 * osnoise_cpumask is updated by CPU hotplug operations.
 
-Ack!
+I think I meant "read"... I will use your comment.
+
+Thanks
 
 -- Daniel
-
+> ?
+> 
 > -- Steve
+> 
+> 
+>> +	 */
+>> +	get_online_cpus();
+>> +
+>>  	cpumask_copy(&osnoise_cpumask, osnoise_cpumask_new);
+>> +
+>> +	put_online_cpus();
+>>  	mutex_unlock(&interface_lock);
+>>  
 > 
 
