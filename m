@@ -2,180 +2,121 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 36B543AE8DC
-	for <lists+linux-doc@lfdr.de>; Mon, 21 Jun 2021 14:15:20 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 05BD83AE8C7
+	for <lists+linux-doc@lfdr.de>; Mon, 21 Jun 2021 14:09:35 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S229623AbhFUMRd (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 21 Jun 2021 08:17:33 -0400
-Received: from frasgout.his.huawei.com ([185.176.79.56]:3294 "EHLO
-        frasgout.his.huawei.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S229610AbhFUMRc (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Mon, 21 Jun 2021 08:17:32 -0400
-Received: from fraeml741-chm.china.huawei.com (unknown [172.18.147.200])
-        by frasgout.his.huawei.com (SkyGuard) with ESMTP id 4G7pFW27Qbz6FBVY;
-        Mon, 21 Jun 2021 20:07:59 +0800 (CST)
-Received: from lhreml724-chm.china.huawei.com (10.201.108.75) by
- fraeml741-chm.china.huawei.com (10.206.15.222) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2176.2; Mon, 21 Jun 2021 14:15:17 +0200
-Received: from [10.47.93.67] (10.47.93.67) by lhreml724-chm.china.huawei.com
- (10.201.108.75) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2176.2; Mon, 21 Jun
- 2021 13:15:16 +0100
-Subject: Re: [PATCH v14 6/6] iommu: Remove mode argument from
- iommu_set_dma_strict()
-To:     Robin Murphy <robin.murphy@arm.com>,
-        Lu Baolu <baolu.lu@linux.intel.com>,
-        "joro@8bytes.org" <joro@8bytes.org>,
-        "will@kernel.org" <will@kernel.org>,
-        "dwmw2@infradead.org" <dwmw2@infradead.org>,
-        "corbet@lwn.net" <corbet@lwn.net>
-CC:     "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
-        "iommu@lists.linux-foundation.org" <iommu@lists.linux-foundation.org>,
-        Linuxarm <linuxarm@huawei.com>,
-        "Leizhen (ThunderTown)" <thunder.leizhen@huawei.com>,
-        "chenxiang (M)" <chenxiang66@hisilicon.com>,
-        "linux-doc@vger.kernel.org" <linux-doc@vger.kernel.org>,
-        <nadav.amit@gmail.com>
-References: <1624016058-189713-1-git-send-email-john.garry@huawei.com>
- <1624016058-189713-7-git-send-email-john.garry@huawei.com>
- <c062ef9e-c106-4218-ba2a-c94fdcb6d955@linux.intel.com>
- <60bdd7c3-d73e-c005-ddf7-069bc5065bce@huawei.com>
- <855dd109-1449-7bc6-3d25-7ffeeeffa82a@linux.intel.com>
- <fc52069d-46c5-5ca5-1b44-2fa7cf287d5a@huawei.com>
- <2330bb52-1768-5122-9378-7923034c82bd@arm.com>
-From:   John Garry <john.garry@huawei.com>
-Message-ID: <aaec67ab-0bb9-3c15-de81-97b92918c5c5@huawei.com>
-Date:   Mon, 21 Jun 2021 13:08:51 +0100
-User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64; rv:68.0) Gecko/20100101
- Thunderbird/68.1.2
+        id S229876AbhFUMLp (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 21 Jun 2021 08:11:45 -0400
+Received: from us-smtp-delivery-124.mimecast.com ([216.205.24.124]:33008 "EHLO
+        us-smtp-delivery-124.mimecast.com" rhost-flags-OK-OK-OK-OK)
+        by vger.kernel.org with ESMTP id S229888AbhFUMLn (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Mon, 21 Jun 2021 08:11:43 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+        s=mimecast20190719; t=1624277369;
+        h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+         to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+         content-transfer-encoding:content-transfer-encoding:
+         in-reply-to:in-reply-to:references:references;
+        bh=YWLGzFFw3zyjOh0fj+lFDA+n9XXDAV90g9yN8bnLdyI=;
+        b=ikto6qzl9Hep0fCP66ysqJS/HDQZ8uzDfqDB4pfgL8N3DQHnGsPBh6LNwfQFNfQnqmqUoS
+        VTRmSDI8qWxqQE4pMcZDpXczRrE0pLH/1Hx/SmGrO8yc5rMsSBnEdvpum9nmnax1ff0mhJ
+        ZxugXKP/nPow/aB2hiscSI7LIez5kXU=
+Received: from mail-ed1-f72.google.com (mail-ed1-f72.google.com
+ [209.85.208.72]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-403-LxT607tsM7eG03CpfZIxMw-1; Mon, 21 Jun 2021 08:09:24 -0400
+X-MC-Unique: LxT607tsM7eG03CpfZIxMw-1
+Received: by mail-ed1-f72.google.com with SMTP id v8-20020a0564023488b0290393873961f6so7651771edc.17
+        for <linux-doc@vger.kernel.org>; Mon, 21 Jun 2021 05:09:24 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:subject:to:cc:references:from:message-id:date
+         :user-agent:mime-version:in-reply-to:content-language
+         :content-transfer-encoding;
+        bh=YWLGzFFw3zyjOh0fj+lFDA+n9XXDAV90g9yN8bnLdyI=;
+        b=JCayQEE5rnS98uHnpaw9czEzaWs5PHkgJcQSogwIIgq8KzYq5/CMjE6yL7S33PuYH4
+         qyq/5tWtos1amY8gDeT++GwVmOKKlNWnaIi9u4y+S8I4hnehxNeOMo3/H90hQ6WAqkQr
+         QUx6AoZNnXwgBFy6tFYeKcswAVfefmE6ZBGQcmM7U5FmHFlPXiirg/Z8mBtIUZTB7sj9
+         8vQUEvdLp641ZLpt/uWT17ygZzyq5cxNxDImw0vfGziKYk9OOqOuVGM0h+XgSYJ4/wlj
+         +AeFnyIbpCctG6q7UbnyKgja9diw1ZBiuD0FseMwX396h0pRkjPyZcBBUV3MmMZpjHwj
+         EnMw==
+X-Gm-Message-State: AOAM533a52EYojTaOQfi2BUtfeswPA1ch3GLS7iYSLUqxAWbYLJTnjpq
+        5TtYZFmzrpKufuKNpdx/SZDbbEBeUKt3NGXb9vhd9gO4gC+JjjPNclGfs4JJCUkCKkol4VM0YEG
+        LBYieC6IZHel41HV4V5ts
+X-Received: by 2002:a05:6402:31a5:: with SMTP id dj5mr21198987edb.229.1624277363350;
+        Mon, 21 Jun 2021 05:09:23 -0700 (PDT)
+X-Google-Smtp-Source: ABdhPJy0gJw5fntEnkU/VjY+oEu9BhzRKxRNOQ+MKjfluFQ5VrQWJjZ0zmJjRVcZThY6xoT66d4pQg==
+X-Received: by 2002:a05:6402:31a5:: with SMTP id dj5mr21198966edb.229.1624277363254;
+        Mon, 21 Jun 2021 05:09:23 -0700 (PDT)
+Received: from x1.bristot.me (host-79-23-205-114.retail.telecomitalia.it. [79.23.205.114])
+        by smtp.gmail.com with ESMTPSA id e22sm10689259edu.35.2021.06.21.05.09.21
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Mon, 21 Jun 2021 05:09:22 -0700 (PDT)
+Subject: Re: [PATCH V4 10/12] trace: Add osnoise tracer
+To:     Steven Rostedt <rostedt@goodmis.org>
+Cc:     Phil Auld <pauld@redhat.com>,
+        Sebastian Andrzej Siewior <bigeasy@linutronix.de>,
+        Kate Carcia <kcarcia@redhat.com>,
+        Jonathan Corbet <corbet@lwn.net>,
+        Ingo Molnar <mingo@redhat.com>,
+        Peter Zijlstra <peterz@infradead.org>,
+        Thomas Gleixner <tglx@linutronix.de>,
+        Alexandre Chartre <alexandre.chartre@oracle.com>,
+        Clark Willaims <williams@redhat.com>,
+        John Kacur <jkacur@redhat.com>,
+        Juri Lelli <juri.lelli@redhat.com>,
+        Borislav Petkov <bp@alien8.de>,
+        "H. Peter Anvin" <hpa@zytor.com>, x86@kernel.org,
+        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org
+References: <cover.1623746916.git.bristot@redhat.com>
+ <c555b92d6cfef5b3d05c426696d98553c1a46c8d.1623746916.git.bristot@redhat.com>
+ <20210618135511.7c06a635@oasis.local.home>
+From:   Daniel Bristot de Oliveira <bristot@redhat.com>
+Message-ID: <1b7876e9-909e-8f69-986e-11110890afbc@redhat.com>
+Date:   Mon, 21 Jun 2021 14:09:21 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
+ Thunderbird/78.11.0
 MIME-Version: 1.0
-In-Reply-To: <2330bb52-1768-5122-9378-7923034c82bd@arm.com>
-Content-Type: text/plain; charset="utf-8"; format=flowed
+In-Reply-To: <20210618135511.7c06a635@oasis.local.home>
+Content-Type: text/plain; charset=utf-8
 Content-Language: en-US
-Content-Transfer-Encoding: 8bit
-X-Originating-IP: [10.47.93.67]
-X-ClientProxiedBy: lhreml747-chm.china.huawei.com (10.201.108.197) To
- lhreml724-chm.china.huawei.com (10.201.108.75)
-X-CFilter-Loop: Reflected
+Content-Transfer-Encoding: 7bit
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On 21/06/2021 12:59, Robin Murphy wrote:
-
-+ Nadav
-
->> On a personal level I would be happy with that approach, but I think
->> it's better to not start changing things right away in a follow-up series.
->>
->> So how about we add this patch (which replaces 6/6 "iommu: Remove mode
->> argument from iommu_set_dma_strict()")?
->>
->> Robin, any opinion?
-> For me it boils down to whether there are any realistic workloads where
-> non-strict mode*would*  still perform better under virtualisation. The
-> only reason for the user to explicitly pass "iommu.strict=0" is because
-> they expect it to increase unmap performance; if it's only ever going to
-> lead to an unexpected performance loss, I don't see any value in
-> overriding the kernel's decision purely for the sake of subservience.
+On 6/18/21 7:55 PM, Steven Rostedt wrote:
+> On Tue, 15 Jun 2021 11:28:49 +0200
+> Daniel Bristot de Oliveira <bristot@redhat.com> wrote:
 > 
-> If there*are*  certain valid cases for allowing it for people who really
-> know what they're doing, then we should arguably also log a counterpart
-> message to say "we're honouring your override but beware it may have the
-> opposite effect to what you expect" for the benefit of other users who
-> assume it's a generic go-faster knob. At that point it starts getting
-> non-trivial enough that I'd want to know for sure it's worthwhile.
-> 
-> The other reason this might be better to revisit later is that an AMD
-> equivalent is still in flight[1], and there might be more that can
-> eventually be factored out. I think both series are pretty much good to
-> merge for 5.14, but time's already tight to sort out the conflicts which
-> exist as-is, without making them any worse.
+>> diff --git a/arch/x86/kernel/trace.c b/arch/x86/kernel/trace.c
+>> new file mode 100644
+>> index 000000000000..e67d63657628
+>> --- /dev/null
+>> +++ b/arch/x86/kernel/trace.c
+>> @@ -0,0 +1,238 @@
+>> +#include <asm/trace/irq_vectors.h>
+>> +
+>> +#ifdef CONFIG_OSNOISE_TRACER
+>> +extern void osnoise_trace_irq_entry(int id);
+>> +extern void osnoise_trace_irq_exit(int id, const char *desc);
+> Any reason to have the above outside the LOCAL_APIC def?
 
-ok, fine. Can revisit.
+no...
 
-As for getting these merged, I'll dry-run merging both of those series 
-to see the conflicts. It doesn't look too problematic from a glance.
+It's not used.
+> In fact, this could just be turned into:
+> 
+> #if defined(CONFIG_OSNOISE_TRAECR) && defined(CONFIG_X86_LOCAL_APIC)
 
-Cheers,
-John
+I will do that!
 
+-- Daniel
+
+> -- Steve
 > 
-> Robin.
 > 
-> [1]
-> https://lore.kernel.org/linux-iommu/20210616100500.174507-3-namit@vmware.com/
+>> +
+>> +#ifdef CONFIG_X86_LOCAL_APIC
+> [..]
 > 
->> ------->8---------
->>
->> [PATCH] iommu/vt-d: Make "iommu.strict" override batching due to
->>    virtualization
->>
->> As a change in policy, make iommu.strict cmdline argument override
->> whether we disable batching due to virtualization.
->>
->> The API of iommu_set_dma_strict() is changed to accept a "force"
->> argument, which means that we always set iommu_dma_strict true,
->> regardless of whether we already set via cmdline. Also return a boolean,
->> to tell whether iommu_dma_strict was set or not.
->>
->> Note that in all pre-existing callsites of iommu_set_dma_strict(),
->> argument strict was true, so this argument is dropped.
->>
->> Signed-off-by: John Garry<john.garry@huawei.com>
->>
->> diff --git a/drivers/iommu/intel/iommu.c b/drivers/iommu/intel/iommu.c
->> index 06666f9d8116..e8d65239b359 100644
->> --- a/drivers/iommu/intel/iommu.c
->> +++ b/drivers/iommu/intel/iommu.c
->> @@ -4380,10 +4380,8 @@ int __init intel_iommu_init(void)
->>             * is likely to be much lower than the overhead of synchronizing
->>             * the virtual and physical IOMMU page-tables.
->>             */
->> -        if (cap_caching_mode(iommu->cap)) {
->> +        if (cap_caching_mode(iommu->cap) && iommu_set_dma_strict(false))
->>                pr_info_once("IOMMU batching disallowed due to
->> virtualization\n");
->> -            iommu_set_dma_strict(true);
->> -        }
->>            iommu_device_sysfs_add(&iommu->iommu, NULL,
->>                           intel_iommu_groups,
->>                           "%s", iommu->name);
->> diff --git a/drivers/iommu/iommu.c b/drivers/iommu/iommu.c
->> index 60b1ec42e73b..1434bee64af3 100644
->> --- a/drivers/iommu/iommu.c
->> +++ b/drivers/iommu/iommu.c
->> @@ -349,10 +349,14 @@ static int __init iommu_dma_setup(char *str)
->>    }
->>    early_param("iommu.strict", iommu_dma_setup);
->>
->> -void iommu_set_dma_strict(bool strict)
->> +/* Return true if we set iommu_dma_strict */
->> +bool iommu_set_dma_strict(bool force)
->>    {
->> -    if (strict || !(iommu_cmd_line & IOMMU_CMD_LINE_STRICT))
->> -        iommu_dma_strict = strict;
->> +    if (force || !(iommu_cmd_line & IOMMU_CMD_LINE_STRICT)) {
->> +        iommu_dma_strict = true;
->> +        return true;
->> +    }
->> +    return false;
->>    }
->>
->>    bool iommu_get_dma_strict(struct iommu_domain *domain)
->> diff --git a/include/linux/iommu.h b/include/linux/iommu.h
->> index 32d448050bf7..f17b20234296 100644
->> --- a/include/linux/iommu.h
->> +++ b/include/linux/iommu.h
->> @@ -476,7 +476,7 @@ int iommu_enable_nesting(struct iommu_domain *domain);
->>    int iommu_set_pgtable_quirks(struct iommu_domain *domain,
->>            unsigned long quirks);
->>
->> -void iommu_set_dma_strict(bool val);
->> +bool iommu_set_dma_strict(bool force);
->>    bool iommu_get_dma_strict(struct iommu_domain *domain);
->>
->>    extern int report_iommu_fault(struct iommu_domain *domain, struct
->> device *dev,
 
