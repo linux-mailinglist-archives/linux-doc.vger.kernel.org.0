@@ -2,66 +2,76 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id B14813B1DF0
-	for <lists+linux-doc@lfdr.de>; Wed, 23 Jun 2021 17:54:17 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 3690C3B1F4F
+	for <lists+linux-doc@lfdr.de>; Wed, 23 Jun 2021 19:20:00 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S231451AbhFWP4a convert rfc822-to-8bit (ORCPT
-        <rfc822;lists+linux-doc@lfdr.de>); Wed, 23 Jun 2021 11:56:30 -0400
-Received: from [183.90.58.236] ([183.90.58.236]:51594 "EHLO ns1.zackeruz.tk"
-        rhost-flags-FAIL-FAIL-OK-FAIL) by vger.kernel.org with ESMTP
-        id S231430AbhFWP43 (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Wed, 23 Jun 2021 11:56:29 -0400
-Received: from johnlewis.com (unknown [192.168.20.1])
-        by ns1.zackeruz.tk (Postfix) with ESMTPSA id 47EEC8462EC
-        for <linux-doc@vger.kernel.org>; Wed, 23 Jun 2021 23:54:10 +0800 (+08)
-Reply-To: robert_turner@johnlewis-trading.com,
-          pippawicks.sales@johnlewis-trading.com
-From:   John Lewis & Partnersip <robert.turner107@johnlewis.com>
-To:     linux-doc@vger.kernel.org
-Subject: 6/23/2021 Product Inquiry 
-Date:   23 Jun 2021 15:54:09 +0000
-Message-ID: <20210623094114.CA261DF0193E1164@johnlewis.com>
+        id S229759AbhFWRWM (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 23 Jun 2021 13:22:12 -0400
+Received: from mail.kernel.org ([198.145.29.99]:55248 "EHLO mail.kernel.org"
+        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
+        id S229726AbhFWRWM (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Wed, 23 Jun 2021 13:22:12 -0400
+Received: by mail.kernel.org (Postfix) with ESMTPSA id 4B18E611AC;
+        Wed, 23 Jun 2021 17:19:53 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=linuxfoundation.org;
+        s=korg; t=1624468794;
+        bh=jKyYAR836m83Pum8UbxthFZqnbIkz8NbuPp5frmUkn0=;
+        h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+        b=T45psABiJrEhVhCqb/ImjGcszfmX9w0eT/d7Q3FDPdnROLpNDzU1UkMmmWaRZy9zt
+         Dnt1TbJrrblELZToRz0uD/hQsrJ6BE3gMWzEjIMzVqiCuwWTuWdh7R6COLdC/O/NGo
+         7hITBfKI54HEKuPawPDHOOxH4fmzoLRX8I94aQLU=
+Date:   Wed, 23 Jun 2021 19:19:51 +0200
+From:   Greg KH <gregkh@linuxfoundation.org>
+To:     Rocco Yue <rocco.yue@mediatek.com>
+Cc:     "David S . Miller" <davem@davemloft.net>,
+        Jakub Kicinski <kuba@kernel.org>,
+        Jonathan Corbet <corbet@lwn.net>,
+        Hideaki YOSHIFUJI <yoshfuji@linux-ipv6.org>,
+        David Ahern <dsahern@kernel.org>,
+        Matthias Brugger <matthias.bgg@gmail.com>,
+        Felix Fietkau <nbd@nbd.name>, John Crispin <john@phrozen.org>,
+        Sean Wang <sean.wang@mediatek.com>,
+        Mark Lee <Mark-MC.Lee@mediatek.com>, netdev@vger.kernel.org,
+        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
+        linux-arm-kernel@lists.infradead.org,
+        linux-mediatek@lists.infradead.org, bpf@vger.kernel.org,
+        wsd_upstream@mediatek.com, chao.song@mediatek.com,
+        zhuoliang.zhang@mediatek.com, kuohong.wang@mediatek.com
+Subject: Re: [PATCH 1/4] net: if_arp: add ARPHRD_PUREIP type
+Message-ID: <YNNtN3cdDL71SiNt@kroah.com>
+References: <20210623113452.5671-1-rocco.yue@mediatek.com>
 MIME-Version: 1.0
-Content-Type: text/plain;
-        charset="utf-8"
-Content-Transfer-Encoding: 8BIT
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20210623113452.5671-1-rocco.yue@mediatek.com>
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Dear linux-doc
+On Wed, Jun 23, 2021 at 07:34:49PM +0800, Rocco Yue wrote:
+> This patch add the definition of ARPHRD_PUREIP which can for
+> example be used by mobile ccmni device as device type.
+> ARPHRD_PUREIP means that this device doesn't need kernel to
+> generate ipv6 link-local address in any addr_gen_mode.
+> 
+> Signed-off-by: Rocco Yue <rocco.yue@mediatek.com>
+> ---
+>  include/uapi/linux/if_arp.h | 1 +
+>  1 file changed, 1 insertion(+)
+> 
+> diff --git a/include/uapi/linux/if_arp.h b/include/uapi/linux/if_arp.h
+> index c3cc5a9e5eaf..4463c9e9e8b4 100644
+> --- a/include/uapi/linux/if_arp.h
+> +++ b/include/uapi/linux/if_arp.h
+> @@ -61,6 +61,7 @@
+>  #define ARPHRD_DDCMP    517		/* Digital's DDCMP protocol     */
+>  #define ARPHRD_RAWHDLC	518		/* Raw HDLC			*/
+>  #define ARPHRD_RAWIP    519		/* Raw IP                       */
+> +#define ARPHRD_PUREIP	520		/* Pure IP			*/
 
-The famous brand John Lewis Partnership, is UK's largest multi-
-channel retailer with over 126 shops and multiple expansion in 
-Africa furnished by European/Asian/American products. We are 
-sourcing new products to attract new customers and also retain 
-our existing ones, create new partnerships with companies dealing 
-with different kinds of goods globally.
+In looking at the patches, what differs "PUREIP" from "RAWIP"?  It seems
+to be the same to me.  If they are different, where is that documented?
 
-Your company's products are of interest to our market as we have 
-an amazing market for your products.
+thanks,
 
-Provide us your current catalog through email to review more. We 
-hope to be able to order with you and start a long-term friendly,
-respectable and solid business partnership. Please we would 
-appreciate it if you could send us your stock availability via 
-email if any.
-
-Our payment terms are 15 days net in Europe, 30 days Net in UK 
-and 30 days net in Asia/USA as we operate with over 5297 
-suppliers around the globe for the past 50 years now. For 
-immediate response Send your reply to robert_turner@johnlewis-
-trading.com for us to be able to 
-treat with care and urgency.
-
-
-Best Regards
-
-Rob Turner
-Head Of Procurement Operations
-John Lewis & Partners.
-robert_turner@johnlewis-trading.com
-Tel: +44-7451-274090
-WhatsApp: +447497483925
-www.johnlewis.com
-REGISTERED OFFICE: 171 VICTORIA STREET, LONDON SW1E 5NN 
+greg k-h
