@@ -2,118 +2,62 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 2E9053B3431
-	for <lists+linux-doc@lfdr.de>; Thu, 24 Jun 2021 18:51:44 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 833CF3B3458
+	for <lists+linux-doc@lfdr.de>; Thu, 24 Jun 2021 19:09:29 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S231895AbhFXQyC (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 24 Jun 2021 12:54:02 -0400
-Received: from mail.kernel.org ([198.145.29.99]:52152 "EHLO mail.kernel.org"
-        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S229881AbhFXQyB (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Thu, 24 Jun 2021 12:54:01 -0400
-Received: by mail.kernel.org (Postfix) with ESMTPSA id C31D96140A;
-        Thu, 24 Jun 2021 16:51:41 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=linuxfoundation.org;
-        s=korg; t=1624553502;
-        bh=8VJ9gHpfNusEy0hnsToOzf7TUZAq4xvU5hO1AlbgRro=;
-        h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-        b=Pq5SVqGhwbOimMrJsmsORyiGbAYYOTTL6ujg1C56oBKp9zZJhsWzg/zNRpvAVCL1t
-         W4iw9z/Znfp6VjndwmcbTgWTviXGQA7kExYTPH2HiU0L1F8rrW9y0rnTUy5BrHlqM5
-         FZL8G89I7CwqGIIunZk2ANNGuue/yUF6qRZvGEro=
-Date:   Thu, 24 Jun 2021 18:51:39 +0200
-From:   Greg KH <gregkh@linuxfoundation.org>
-To:     Rocco Yue <rocco.yue@mediatek.com>
-Cc:     "David S . Miller" <davem@davemloft.net>,
-        Jakub Kicinski <kuba@kernel.org>,
-        Jonathan Corbet <corbet@lwn.net>,
-        Hideaki YOSHIFUJI <yoshfuji@linux-ipv6.org>,
-        David Ahern <dsahern@kernel.org>,
-        Matthias Brugger <matthias.bgg@gmail.com>,
-        Felix Fietkau <nbd@nbd.name>, John Crispin <john@phrozen.org>,
-        Sean Wang <sean.wang@mediatek.com>,
-        Mark Lee <Mark-MC.Lee@mediatek.com>, netdev@vger.kernel.org,
-        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
-        linux-arm-kernel@lists.infradead.org,
-        linux-mediatek@lists.infradead.org, bpf@vger.kernel.org,
-        wsd_upstream@mediatek.com, chao.song@mediatek.com,
-        kuohong.wang@mediatek.com
-Subject: Re: [PATCH 4/4] drivers: net: mediatek: initial implementation of
- ccmni
-Message-ID: <YNS4GzYHpxMWIH+1@kroah.com>
-References: <YNR5QuYqknaZS9+j@kroah.com>
- <20210624155501.10024-1-rocco.yue@mediatek.com>
+        id S229721AbhFXRLq (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 24 Jun 2021 13:11:46 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:52702 "EHLO
+        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S232156AbhFXRLm (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Thu, 24 Jun 2021 13:11:42 -0400
+Received: from mail-il1-x12c.google.com (mail-il1-x12c.google.com [IPv6:2607:f8b0:4864:20::12c])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 7EC6FC061574
+        for <linux-doc@vger.kernel.org>; Thu, 24 Jun 2021 10:09:22 -0700 (PDT)
+Received: by mail-il1-x12c.google.com with SMTP id q18so7043624ile.10
+        for <linux-doc@vger.kernel.org>; Thu, 24 Jun 2021 10:09:22 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=mime-version:reply-to:in-reply-to:references:from:date:message-id
+         :subject:to;
+        bh=ANhbTggsY3NFhRZExKMwUmb3VzJqye8XLvWVXSvNBkQ=;
+        b=p95plxgcKdT8+TUJCmcKdAyJL6L8C+j3muAeTI6tbvEOMwKUFZvBH22Z3GEGxdnUZH
+         d9XkDasjcz/bUj2n1PkWxPPQL/Sxtf1a7ckN43IkWwU4a9v6DYeOi9Tg8DPYHl700hH/
+         xlmv54Ir2NUVB8zwaX1UsxTzP5GUW3mdywmszCeflzWKbXzDgkMNhx+qVsi3FklHnD5x
+         fSDWvxz3POXOJ/0yZM+F2G99rPMTFJK+bPA5TWYu0VJpvpEjmQwRSgXLB6dx+kXpC0Uz
+         JX+JhI0lSB7VkwJTdkbApCrUx6TGzp99N5mAm/d0lil4hmexz93RFAPSpMzmwkjNchKB
+         rXTQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:mime-version:reply-to:in-reply-to:references
+         :from:date:message-id:subject:to;
+        bh=ANhbTggsY3NFhRZExKMwUmb3VzJqye8XLvWVXSvNBkQ=;
+        b=tfT9bsqGQobPB276GTaiCyhtuSPxzyU8myjE7IYvO1/RxQAARsmM4fFEDbUhHUlKNs
+         dxOr1HEZuup47zRkXdhuJWqtYJekofnujblL1Wv091dG/sF2JDqh1hv+LZ/Ly5fa68rq
+         r2xUVbsEShqsPup/Jn1IxLZjEGvDEYzR2pe1nF7j85Y2xC4Ywfdd5MW5wNvH8nOfTf2m
+         KtNBSbXXErQmD5br9gmnH6+WvXTYEM03vBArY6lfvP5ure2x55qWcJipeOFv/yumqEy9
+         ptBnj3+BNXUWyqS9GZwBNwz2GwJd+sedKZ0j8/r9DD/Ue8/OleVZ3PUSnSKlPh/5KjPJ
+         nYZg==
+X-Gm-Message-State: AOAM531yCQpQNEnHEmRyieBLyOu3kBGPFlqC5emEg8k3gKbZFEGKu5gU
+        BjO3aaexIO58b4eOvOohgZQtuJc+oHnvHE2k3eM=
+X-Google-Smtp-Source: ABdhPJzkYUuO368jts0QgMQyJe9SHzg0U698qd8KdfojEfYsXnHtwMfPGxVHmw7fwQ64+IhHRhAEJH5nusdeW4BWzcA=
+X-Received: by 2002:a05:6e02:524:: with SMTP id h4mr4098121ils.255.1624554560853;
+ Thu, 24 Jun 2021 10:09:20 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20210624155501.10024-1-rocco.yue@mediatek.com>
+Received: by 2002:a05:6638:3aa:0:0:0:0 with HTTP; Thu, 24 Jun 2021 10:09:20
+ -0700 (PDT)
+Reply-To: tutywoolgar021@gmail.com
+In-Reply-To: <CADB47+4Wa3T59Vq_==GTXEfHrX5x-2vQFxaTBO0dTdyAweCVpw@mail.gmail.com>
+References: <CADB47+4Wa3T59Vq_==GTXEfHrX5x-2vQFxaTBO0dTdyAweCVpw@mail.gmail.com>
+From:   tuty woolgar <faridaamadoubas@gmail.com>
+Date:   Thu, 24 Jun 2021 17:09:20 +0000
+Message-ID: <CADB47+607zNBfYFb4bj0nUhuuYgAdwT=G_wJ9-EeV0ESHe56Jg@mail.gmail.com>
+Subject: greetings,
+To:     undisclosed-recipients:;
+Content-Type: text/plain; charset="UTF-8"
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Thu, Jun 24, 2021 at 11:55:02PM +0800, Rocco Yue wrote:
-> On Thu, 2021-06-24 at 14:23 +0200, Greg KH wrote:
-> On Thu, Jun 24, 2021 at 07:53:49PM +0800, Rocco Yue wrote:
-> >> 
-> >> without MTK ap ccci driver (modem driver), ccmni_rx_push() and
-> >> ccmni_hif_hook() are not be used.
-> >> 
-> >> Both of them are exported as symbols because MTK ap ccci driver
-> >> will be compiled to the ccci.ko file.
-> > 
-> > But I do not see any code in this series that use these symbols.  We can
-> 
-> will delete these symbols.
-> 
-> > not have exports that no one uses.  Please add the driver to this patch
-> > series when you resend it.
-> > 
-> 
-> I've just took a look at what the Linux staging tree is. It looks like
-> a good choice for the current ccmni driver.
-> 
-> honstly, If I simply upload the relevant driver code B that calls
-> A (e.g. ccmni_rx_push), there is still a lack of code to call B.
-> This seems to be a continuty problem, unless all drivers codes are
-> uploaded (e.g. power on modem, get hardware status, complete tx/rx flow).
-
-Great, send it all!  Why is it different modules, it's only for one
-chunk of hardware, no need to split it up into tiny pieces.  That way
-only causes it to be more code overall.
-
-> >> In addition, the code of MTK's modem driver is a bit complicated,
-> >> because this part has more than 30,000 lines of code and contains
-> >> more than 10 modules. We are completeing the upload of this huge
-> >> code step by step. Our original intention was to upload the ccmni
-> >> driver that directly interacts with the kernel first, and then
-> >> complete the code from ccmni to the bottom layer one by one from
-> >> top to bottom. We expect the completion period to be about 1 year.
-> > 
-> > Again, we can not add code to the kernel that is not used, sorry.  That
-> > would not make any sense, would you want to maintain such a thing?
-> > 
-> > And 30k of code seems a bit excesive for a modem driver.   Vendors find
-> > that when they submit code for inclusion in the kernel tree, in the end,
-> > they end up 1/3 the original size, so 10k is reasonable.
-> > 
-> > I can also take any drivers today into the drivers/staging/ tree, and
-> > you can do the cleanups there as well as getting help from others.
-> > 
-> > 1 year seems like a long time to do "cleanup", good luck!
-> > 
-> 
-> Thanks~
-> 
-> Can I resend patch set as follows:
-> (1) supplement the details of pureip for patch 1/4;
-> (2) the document of ccmni.rst still live in the Documentation/...
-> (3) modify ccmni and move it into the drivers/staging/...
-
-for drivers/staging/ the code needs to be "self contained" in that it
-does not require adding anything outside of the directory for it.
-
-If you still require this core networking change, that needs to be
-accepted first by the networking developers and maintainers.
-
-thanks,
-
-greg k-h
+My greetings to you my friend i hope you are fine and good please respond
+back to me thanks,
