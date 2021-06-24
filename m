@@ -2,73 +2,53 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 7FDC43B71F4
-	for <lists+linux-doc@lfdr.de>; Tue, 29 Jun 2021 14:18:56 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 01B7F3B728A
+	for <lists+linux-doc@lfdr.de>; Tue, 29 Jun 2021 14:52:54 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S233631AbhF2MVT (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 29 Jun 2021 08:21:19 -0400
-Received: from mail.kernel.org ([198.145.29.99]:38618 "EHLO mail.kernel.org"
-        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S233610AbhF2MVS (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Tue, 29 Jun 2021 08:21:18 -0400
-Received: by mail.kernel.org (Postfix) with ESMTPSA id B791761D86;
-        Tue, 29 Jun 2021 12:18:49 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=linuxfoundation.org;
-        s=korg; t=1624969130;
-        bh=872Gg2Zmdh+gmSqjKfRbCr6B39qxF+MacSlFiVQN7QM=;
-        h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-        b=mvZ3PKvTp3ZR39pA3R9bsxYXDyZQDIdyCdoYveKxHv+8EyGtOU58Y7LFaH9R+IE/e
-         OCOVrYHB9FEAvP5nupqEcNnzH/NujBMrObXyNNditVBpvBHGqeJbEIwsWPS4MjW3Gp
-         qCtKGjDkf08JCvP8ngyowvxL/GE3abgJ4fgrwQ/4=
-Date:   Tue, 29 Jun 2021 14:18:48 +0200
-From:   Greg Kroah-Hartman <gregkh@linuxfoundation.org>
-To:     "Enrico Weigelt, metux IT consult" <lkml@metux.net>
-Cc:     longli@linuxonhyperv.com, linux-kernel@vger.kernel.org,
-        linux-hyperv@vger.kernel.org, Long Li <longli@microsoft.com>,
-        Jonathan Corbet <corbet@lwn.net>,
-        "K. Y. Srinivasan" <kys@microsoft.com>,
-        Haiyang Zhang <haiyangz@microsoft.com>,
-        Stephen Hemminger <sthemmin@microsoft.com>,
-        Wei Liu <wei.liu@kernel.org>, Dexuan Cui <decui@microsoft.com>,
-        Bjorn Andersson <bjorn.andersson@linaro.org>,
-        Hans de Goede <hdegoede@redhat.com>,
-        Dan Williams <dan.j.williams@intel.com>,
-        Maximilian Luz <luzmaximilian@gmail.com>,
-        Mike Rapoport <rppt@kernel.org>,
-        Ben Widawsky <ben.widawsky@intel.com>,
-        Jiri Slaby <jirislaby@kernel.org>,
-        Andra Paraschiv <andraprs@amazon.com>,
-        Siddharth Gupta <sidgup@codeaurora.org>,
-        Hannes Reinecke <hare@suse.de>, linux-doc@vger.kernel.org
-Subject: Re: [Patch v2 2/3] Drivers: hv: add Azure Blob driver
-Message-ID: <YNsPqJNb1lAafi7U@kroah.com>
-References: <1624689020-9589-1-git-send-email-longli@linuxonhyperv.com>
- <1624689020-9589-3-git-send-email-longli@linuxonhyperv.com>
- <YNq8p1320VkH2T/c@kroah.com>
- <0391b223-5f8e-42c0-35f2-a7ec337c55ac@metux.net>
+        id S233104AbhF2MzR convert rfc822-to-8bit (ORCPT
+        <rfc822;lists+linux-doc@lfdr.de>); Tue, 29 Jun 2021 08:55:17 -0400
+Received: from [218.75.92.58] ([218.75.92.58]:65299 "EHLO WIN-VTPUBHNS72V"
+        rhost-flags-FAIL-FAIL-OK-FAIL) by vger.kernel.org with ESMTP
+        id S233255AbhF2MzI (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Tue, 29 Jun 2021 08:55:08 -0400
+Received: from [192.168.43.47] (Unknown [197.210.85.75])
+        by WIN-VTPUBHNS72V with ESMTPA
+        ; Thu, 24 Jun 2021 20:46:44 +0800
+Message-ID: <4F38CD55-6403-42D1-8A6A-ECB56C674AE1@WIN-VTPUBHNS72V>
+Content-Type: text/plain; charset="iso-8859-1"
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <0391b223-5f8e-42c0-35f2-a7ec337c55ac@metux.net>
+Content-Transfer-Encoding: 8BIT
+Content-Description: Mail message body
+Subject: URGENT ATTENTION
+To:     Recipients <wjjt@wjjt.cn>
+From:   "Andres Auchincloss" <wjjt@wjjt.cn>
+Date:   Thu, 24 Jun 2021 14:46:16 +0200
+Reply-To: andresauchincloss926@gmail.com
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Tue, Jun 29, 2021 at 12:41:49PM +0200, Enrico Weigelt, metux IT consult wrote:
-> On 29.06.21 08:24, Greg Kroah-Hartman wrote:
-> 
-> Hi folks,
-> 
-> > Again, no.
-> > 
-> > Just use dev_dbg(), dev_warn(), and dev_err() and there is no need for
-> > anything "special".  This is just one tiny driver, do not rewrite logic
-> > like this for no reason.
-> 
-> Maybe worth mentioning that we have the pr_fmt macro that can be
-> defined if some wants to do things like adding some prefix.
+Hi,
 
-No, no driver should mess with that, just use dev_*() calls instead
-please.
+I will like to use this opportunity to wish you a productive time in 2021 and also confide in you to finalize this transaction of mutual benefits. It may seem strange to you, but it is real. This is a transaction that has no risk at all, due process shall be followed and it shall be carried out under the ambit of the financial laws. Being the Chief Financial Officer, BP Plc. I want to trust and put in your care Eighteen Million British Pounds Sterling, The funds were acquired from an over-invoiced payment from a past contract executed in one of my departments.
 
-greg k-h
+I can't successfully achieve this transaction without presenting you as foreign contractor who will provide a bank account to receive the funds.
+
+Documentation for the claim of the funds will be legally processed and documented, so I will need your full cooperation on this matter for our mutual benefits. We will discuss details if you are interested to work with me to secure this funds. I will appreciate your prompt response in every bit of our communication. Stay Blessed and Stay Safe.
+
+
+
+Best Regards
+
+
+
+
+Tel: +1 (587) 770-0485
+Andres .B. Auchincloss
+Chief financial officerBP Petroleum p.l.c.
+
+
+
+
+                                  Copyright ©? 1996-2021
+
