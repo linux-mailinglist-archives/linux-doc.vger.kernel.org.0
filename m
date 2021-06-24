@@ -2,267 +2,504 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 2FBF23B273E
-	for <lists+linux-doc@lfdr.de>; Thu, 24 Jun 2021 08:13:57 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id EBB563B2793
+	for <lists+linux-doc@lfdr.de>; Thu, 24 Jun 2021 08:45:17 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S231239AbhFXGQK (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 24 Jun 2021 02:16:10 -0400
-Received: from mail-eopbgr30072.outbound.protection.outlook.com ([40.107.3.72]:57571
-        "EHLO EUR03-AM5-obe.outbound.protection.outlook.com"
+        id S231283AbhFXGrf (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 24 Jun 2021 02:47:35 -0400
+Received: from mail.loongson.cn ([114.242.206.163]:54160 "EHLO loongson.cn"
         rhost-flags-OK-OK-OK-FAIL) by vger.kernel.org with ESMTP
-        id S231240AbhFXGQI (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Thu, 24 Jun 2021 02:16:08 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=armh.onmicrosoft.com;
- s=selector2-armh-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=6rhfg8nFaWD1pByveQM90S1/gfoCkN0bHoibKa6mm3Q=;
- b=6MJiW+JF8zTkseVuxC6DI9UQi88ZF9EYJj8UxHD+TEh5LWXVsvwpS5k3omrlDKYKd1KlFuxu3Z4freHqb4KMNssxToXN7p33D+K9ct2DYywPMnA+x8ZrbwQWyA8/v1v34zC7zVKvzMWkxKesgetrULC6P7RUDfg4DYwGim7ZPv4=
-Received: from AM6PR0502CA0038.eurprd05.prod.outlook.com
- (2603:10a6:20b:56::15) by PAXPR08MB7090.eurprd08.prod.outlook.com
- (2603:10a6:102:202::13) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4242.18; Thu, 24 Jun
- 2021 06:13:34 +0000
-Received: from AM5EUR03FT003.eop-EUR03.prod.protection.outlook.com
- (2603:10a6:20b:56:cafe::36) by AM6PR0502CA0038.outlook.office365.com
- (2603:10a6:20b:56::15) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4264.18 via Frontend
- Transport; Thu, 24 Jun 2021 06:13:34 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 63.35.35.123)
- smtp.mailfrom=arm.com; vger.kernel.org; dkim=pass (signature was verified)
- header.d=armh.onmicrosoft.com;vger.kernel.org; dmarc=pass action=none
- header.from=arm.com;
-Received-SPF: Pass (protection.outlook.com: domain of arm.com designates
- 63.35.35.123 as permitted sender) receiver=protection.outlook.com;
- client-ip=63.35.35.123; helo=64aa7808-outbound-1.mta.getcheckrecipient.com;
-Received: from 64aa7808-outbound-1.mta.getcheckrecipient.com (63.35.35.123) by
- AM5EUR03FT003.mail.protection.outlook.com (10.152.16.149) with Microsoft SMTP
- Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.4264.18 via Frontend Transport; Thu, 24 Jun 2021 06:13:34 +0000
-Received: ("Tessian outbound 92494750bf3c:v96"); Thu, 24 Jun 2021 06:13:34 +0000
-X-CR-MTA-TID: 64aa7808
-Received: from 62a85a395ae2.1
-        by 64aa7808-outbound-1.mta.getcheckrecipient.com id D7B5C1E6-FBCF-4372-B151-0DB9F518A52B.1;
-        Thu, 24 Jun 2021 06:13:28 +0000
-Received: from EUR03-VE1-obe.outbound.protection.outlook.com
-    by 64aa7808-outbound-1.mta.getcheckrecipient.com with ESMTPS id 62a85a395ae2.1
-    (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384);
-    Thu, 24 Jun 2021 06:13:28 +0000
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=K+0uZPm4JGrJMCN0wWWJ3kHfiUKUiJIPlx/7GWvZcVVh6Sp7oV9lAlFpD1Yuli7CYNw5wq2JQlOZb/ByxgJ7WTgHjV3jN+Fq1Vdd0Te+9u/diiI1vbZ3zPokLrSxKfCQ3fATYFgmWTsgkzRsA06x8AX47EGipfIFXDO92UgP7mXfWsdtPgfeTstZrcfoyu2+8pUmiNEPRJNcE6nDN1+5/GMZxLsA9rvs82adTpLyL5PCFLfKHv+SOaRtw8Cdqtoo6E5767/I0mXeHtjHVZfS768hN3ACeSomnzQayxtPG97/FCNvZnjjUYGOo6WjW0JMgPf+cjpGqH7o+dOmD68jiw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=6rhfg8nFaWD1pByveQM90S1/gfoCkN0bHoibKa6mm3Q=;
- b=GybbNrm7iN/WpbsWu8jtv9M5CPpwpYl4BTNOa7MJJ9j/qphwF0bBfFNumE+XB20gpsP58x4nFp6WvRdQSh01DD9C+PSag6mi8iLGSE2/gjgPNVbsRI6kWpTJnK/uZ38500o3LGMOyMzVM3LpUb0xsV0fLGYiJM920tnSybsrNpbfLeK5IYMRd3a4n7VJhtsAmmk2RKmuL3EaejM0Y6VI/dv48+u2nWUDBzHLzH1JISw7Lrcx/+9eYUNMdy8C1KmiXMBckoehPZxIRDz9fOxVFOavJ1sAcH955jYeGxfLIK2d5G3Vuk2hrA80ex9tzq9CcEuflzN7QFYKIUCl79BqqA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=arm.com; dmarc=pass action=none header.from=arm.com; dkim=pass
- header.d=arm.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=armh.onmicrosoft.com;
- s=selector2-armh-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=6rhfg8nFaWD1pByveQM90S1/gfoCkN0bHoibKa6mm3Q=;
- b=6MJiW+JF8zTkseVuxC6DI9UQi88ZF9EYJj8UxHD+TEh5LWXVsvwpS5k3omrlDKYKd1KlFuxu3Z4freHqb4KMNssxToXN7p33D+K9ct2DYywPMnA+x8ZrbwQWyA8/v1v34zC7zVKvzMWkxKesgetrULC6P7RUDfg4DYwGim7ZPv4=
-Received: from AM6PR08MB4376.eurprd08.prod.outlook.com (2603:10a6:20b:bb::21)
- by AM6PR08MB3592.eurprd08.prod.outlook.com (2603:10a6:20b:4b::33) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4242.21; Thu, 24 Jun
- 2021 06:13:24 +0000
-Received: from AM6PR08MB4376.eurprd08.prod.outlook.com
- ([fe80::3452:c711:d09a:d8a1]) by AM6PR08MB4376.eurprd08.prod.outlook.com
- ([fe80::3452:c711:d09a:d8a1%5]) with mapi id 15.20.4242.023; Thu, 24 Jun 2021
- 06:13:24 +0000
-From:   Justin He <Justin.He@arm.com>
-To:     Al Viro <viro@zeniv.linux.org.uk>,
-        Linus Torvalds <torvalds@linux-foundation.org>
-CC:     Petr Mladek <pmladek@suse.com>,
-        Steven Rostedt <rostedt@goodmis.org>,
-        Sergey Senozhatsky <senozhatsky@chromium.org>,
-        Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
-        Rasmus Villemoes <linux@rasmusvillemoes.dk>,
-        Jonathan Corbet <corbet@lwn.net>,
-        Heiko Carstens <hca@linux.ibm.com>,
-        Vasily Gorbik <gor@linux.ibm.com>,
-        Christian Borntraeger <borntraeger@de.ibm.com>,
-        "Eric W . Biederman" <ebiederm@xmission.com>,
-        "Darrick J. Wong" <darrick.wong@oracle.com>,
-        "Peter Zijlstra (Intel)" <peterz@infradead.org>,
-        Ira Weiny <ira.weiny@intel.com>,
-        Eric Biggers <ebiggers@google.com>,
-        "Ahmed S. Darwish" <a.darwish@linutronix.de>,
-        "open list:DOCUMENTATION" <linux-doc@vger.kernel.org>,
-        Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
-        linux-s390 <linux-s390@vger.kernel.org>,
-        linux-fsdevel <linux-fsdevel@vger.kernel.org>
-Subject: RE: [PATCH 06/14] d_path: don't bother with return value of prepend()
-Thread-Topic: [PATCH 06/14] d_path: don't bother with return value of
- prepend()
-Thread-Index: AQHXTEjKsW2D5e6JU0KYzk7aniZHlKsi51pA
-Date:   Thu, 24 Jun 2021 06:13:24 +0000
-Message-ID: <AM6PR08MB43766761214CB7E42982F58EF7079@AM6PR08MB4376.eurprd08.prod.outlook.com>
-References: <YKRfI29BBnC255Vp@zeniv-ca.linux.org.uk>
- <20210519004901.3829541-1-viro@zeniv.linux.org.uk>
- <20210519004901.3829541-6-viro@zeniv.linux.org.uk>
-In-Reply-To: <20210519004901.3829541-6-viro@zeniv.linux.org.uk>
-Accept-Language: en-US, zh-CN
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-ts-tracking-id: EBE5201A6D9F8F46B83EA28EAF34AB68.0
-x-checkrecipientchecked: true
-Authentication-Results-Original: zeniv.linux.org.uk; dkim=none (message not
- signed) header.d=none;zeniv.linux.org.uk; dmarc=none action=none
- header.from=arm.com;
-x-originating-ip: [203.126.0.112]
-x-ms-publictraffictype: Email
-X-MS-Office365-Filtering-Correlation-Id: a1e9c6be-1e7b-4a6a-96ee-08d936d732ad
-x-ms-traffictypediagnostic: AM6PR08MB3592:|PAXPR08MB7090:
-X-Microsoft-Antispam-PRVS: <PAXPR08MB7090D617E76FC0BD5426CE6FF7079@PAXPR08MB7090.eurprd08.prod.outlook.com>
-x-checkrecipientrouted: true
-nodisclaimer: true
-x-ms-oob-tlc-oobclassifiers: OLM:1247;OLM:8882;
-X-MS-Exchange-SenderADCheck: 1
-X-Microsoft-Antispam-Untrusted: BCL:0;
-X-Microsoft-Antispam-Message-Info-Original: Rfp3XRhFGayyUfQSNj0Uz1nF4yYC12rSEdKZiTV166rM2B8fSi2p27FvT23qePfxblFFbwt4r4p3JD/lV9qb+E4wogiYwbwWE+LcY5zrla+vhuZMpVm/dTgOauuo+AkvTTLq8ujk2cCIX280JF15Hc08Pkj2rRfpeK4F5sNrHcax+9nEaUGClbyCHB8hTZNEe39oAnhcQ7ZEuwIs0rJmL9NkfWgUdiik2ylRJCLtHas361qiUmG0o/wT2VjEu3ANmsxiX+UtqgKSw7c1mzoLCDis0g2C5c2pz53B9i+it+DX9WAoOxJVBKpjQDlLFYhUWNmOGDTuh4ybWAFzcrOW3Tu7ml1w/4MsaqJLf6WgXFB4EFRyp5/0jD2V1Bns19ec5V/Qe10sSrSggWh9eecb8hKrP1tqn5JFiS5WGd3LlhRiMxJsc3pMeZfW4/qUHiXpEgX2gOXsD1zwn0FwBh443Wb6J76atjRiOB7bd0LkRu07ip/jMMEuxXB3/Upf0D6RQE6/cwkfJ38naEFVogSKqFPf5QwU4KU5Z1n1Q/WdqJrevqjGFn6ddQQKk8899689INV4df4eV/Sru7CVd+fv9uvPRGknOT46RLi4qZiLrS0=
-X-Forefront-Antispam-Report-Untrusted: CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:AM6PR08MB4376.eurprd08.prod.outlook.com;PTR:;CAT:NONE;SFS:(4636009)(39860400002)(136003)(346002)(396003)(366004)(376002)(8676002)(33656002)(478600001)(4326008)(71200400001)(83380400001)(7696005)(8936002)(55016002)(186003)(2906002)(7416002)(26005)(9686003)(110136005)(316002)(6506007)(53546011)(86362001)(66556008)(54906003)(66446008)(66476007)(76116006)(66946007)(5660300002)(38100700002)(52536014)(122000001)(64756008);DIR:OUT;SFP:1101;
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0: =?us-ascii?Q?ycJirM9Hv/3cLb3Xdt3Teye340Qzu2prNx22GFMeoHgPnvPasINY7m9zuP+p?=
- =?us-ascii?Q?gNIvk72oMxIhpHGZqhbO2mfJL4TkL2X1CGSn4ZLNTX08FQizm8gKBHIPfdv+?=
- =?us-ascii?Q?Zrs3YNOV2er944iOgNAnamCg60NOk18LslAupguAcmtiJ6hS7FIIbcLCfbty?=
- =?us-ascii?Q?eWRmeym84hxcAz1UDJry2EeMC73JNd47ZbmtTRRtJgetQ4+9voWQJXuc8ZCg?=
- =?us-ascii?Q?Cnaj+n0aPQxAfIyuwC26hBIfVEN/cDT+3YhEX1u+tRP3eB93SlGt1TO7+Plo?=
- =?us-ascii?Q?zxKzYKAPg6M/laGTJAamK6DYJ8BGc0V1s0A08Zu58AkKZ0hZAK6pTxmBk4ga?=
- =?us-ascii?Q?ZQa2Y+KwHZdgHOJPCVr7xRrfZqbX5vMmlc3hekF6eUMf5CosoCPBrWhyHCAt?=
- =?us-ascii?Q?zyH0uFoizvt1dtHwu3c+WjbY4JZjOAGLsrOGiKrXj0rM+lvSzl2rx3EWsoSs?=
- =?us-ascii?Q?PzH+iJYKhfi2+aC3LX3fWnaUnULEhruaF3oGTaP2j3paO78foSjdhUO9KRkN?=
- =?us-ascii?Q?g3g3++mp8C66fBPjewzi5ub767/G15if146T7jYzIhgdJHrrTRk/D4cfs7hI?=
- =?us-ascii?Q?TFBxTdUmfL/VvK79l3uMShYhh+YILYfEEJqSIqzucKK6QYrwvinziQQi72DA?=
- =?us-ascii?Q?4aKZkN/Hys8mPcGJOlfRBVpuJQWKgl9sLLpuGKIye8MSgN7c/bS3m0FdzNge?=
- =?us-ascii?Q?k3Z+1Hg3amvMMB71wP9wVS3Th02bRtixznIyoIO48KJF5JG/FOlo8XVzR9Ng?=
- =?us-ascii?Q?55OV1XVLV1n8ATtOhYbPBLi1qHQchvkJ8rdDVac9ouN54j28lp9h7CMzMBTQ?=
- =?us-ascii?Q?cBNVtXkJYVb9kuUxW0cOvHwuKpbpWqYGITEy5p6Zi5FoCz838qDC4P9Lq/PZ?=
- =?us-ascii?Q?KWOj17HE/wUvZgIaw3i47NkVcMO2nNCHAkkSLjFzul/Y/6yo8zwwdq52VTSG?=
- =?us-ascii?Q?8LKwNrTagNpugvwLdMtgybf9hM4/QEJ0Bt+m2iqBKzB2T7MhaEK4iU9e5/Hc?=
- =?us-ascii?Q?tLRCgRfWXOAXkxC606Fey4d/ynlImg03TMcdMLMNB6sO1tJrIhYeRw8MQRvs?=
- =?us-ascii?Q?3Qj4rZ2CB45gSpVYleBFDwDFIbOioLIrU2Kw10GQGlvH3PpfB/v0qC+LtCbS?=
- =?us-ascii?Q?hjElZWaOHFbVDw+KUIHofIw2eh1elCYQuE7y4FjT5Eu6eXVUduFwvuQhHHrP?=
- =?us-ascii?Q?R6/q6hjhN7XPfFMGlxNIYbIIORNJqKYzfn6kdu1RWsZ3tT11ukdJVmRz3nJt?=
- =?us-ascii?Q?qV1c51zKhSOgABy6drxDO9uuqGrEiQ322aOWuwxtGiMa9261z4xNyGyEOozr?=
- =?us-ascii?Q?eOzjNwQ9Zto44rpiBfGcCaAs?=
-x-ms-exchange-transport-forked: True
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+        id S231132AbhFXGre (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Thu, 24 Jun 2021 02:47:34 -0400
+Received: from localhost.localdomain (unknown [112.20.109.145])
+        by mail.loongson.cn (Coremail) with SMTP id AQAAf9BxgOL0KdRg3u8WAA--.5315S2;
+        Thu, 24 Jun 2021 14:45:09 +0800 (CST)
+From:   Yanteng Si <siyanteng@loongson.cn>
+To:     corbet@lwn.net, alexs@kernel.org, bobwxc@email.cn,
+        seakeel@gmail.com
+Cc:     chenhuacai@kernel.org, jiaxun.yang@flygoat.com,
+        linux-doc@vger.kernel.org, realpuyuwang@gmail.com,
+        siyanteng01@gmail.com, Yanteng Si <siyanteng@loongson.cn>
+Subject: [PATCH v3] docs/zh_CN: add core api genericirq translation
+Date:   Thu, 24 Jun 2021 14:46:11 +0800
+Message-Id: <20210624064611.725781-1-siyanteng@loongson.cn>
+X-Mailer: git-send-email 2.27.0
 MIME-Version: 1.0
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM6PR08MB3592
-Original-Authentication-Results: zeniv.linux.org.uk; dkim=none (message not signed)
- header.d=none;zeniv.linux.org.uk; dmarc=none action=none header.from=arm.com;
-X-EOPAttributedMessage: 0
-X-MS-Exchange-Transport-CrossTenantHeadersStripped: AM5EUR03FT003.eop-EUR03.prod.protection.outlook.com
-X-MS-Office365-Filtering-Correlation-Id-Prvs: 32abaaf2-a15e-4391-671e-08d936d72c9d
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: LY37fK7nmOraeJvwsumCIYyG9BogQWXWVLS4mTAO7mTXP76RJHN/hhSUZjlQLhDry6WQ3Q69r+3gHC86qaa1U2qoazR67g6ZAI0v7aEXyTmx7df7AROzoikxXNTI2fN3Vq+MbO1SBdZvIufbieP3xga2Ca6d68qvEaUkKPOWeYBi+kSsGMhCJdOr2MNmC73S0jXiPE+JRnZOHNlz83UyvM/bHggVc9XTdGn3hkjjMcYF4YUME8CIs538/8uyCLaBeBT7pl6LRWIQ+gNI4xUVPQKcBmCmdtKF6O72hmLVeP8IQXmOqojgsvaBmkBod4x5IYWNX3hYpf/1vxLYGX9oklJPFtxQomG5hKCK/MXYGIPMiUN/QSwxnt2RoRAH1eu02ZFf0LOP/LLW62D1mVlmUo1RqwsvD/kfGpJjBiFE4LoZxE4pbCelZGsJxXNrX/7gwcjoNSqWSZgOcOBFi7aKeavC1eGrGPqGC7m8N8EXvHXz9no+0XgEn3Crf71DxYaMtnzTv1mOuzIKOKbncpa2+XFbII0ad0kg2WrDZbHYZvc13ME7DAldtnUIIEQb0N5tOwVK0kdmOo8P2Az0h/xjM2K/+frQs44+nvEZsRdAi8Knqleh/SuLYnpd3gEpvZm5CnWZ0Y0btR5o+abycsp86ApUbMG30wcuPG66M0a/xJQ=
-X-Forefront-Antispam-Report: CIP:63.35.35.123;CTRY:IE;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:64aa7808-outbound-1.mta.getcheckrecipient.com;PTR:ec2-63-35-35-123.eu-west-1.compute.amazonaws.com;CAT:NONE;SFS:(4636009)(39860400002)(346002)(376002)(396003)(136003)(46966006)(36840700001)(7696005)(82310400003)(4326008)(55016002)(336012)(70586007)(47076005)(52536014)(8676002)(82740400003)(316002)(26005)(33656002)(36860700001)(2906002)(86362001)(81166007)(356005)(8936002)(450100002)(70206006)(54906003)(186003)(83380400001)(110136005)(9686003)(478600001)(5660300002)(6506007)(53546011);DIR:OUT;SFP:1101;
-X-OriginatorOrg: arm.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 24 Jun 2021 06:13:34.4542
- (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: a1e9c6be-1e7b-4a6a-96ee-08d936d732ad
-X-MS-Exchange-CrossTenant-Id: f34e5979-57d9-4aaa-ad4d-b122a662184d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=f34e5979-57d9-4aaa-ad4d-b122a662184d;Ip=[63.35.35.123];Helo=[64aa7808-outbound-1.mta.getcheckrecipient.com]
-X-MS-Exchange-CrossTenant-AuthSource: AM5EUR03FT003.eop-EUR03.prod.protection.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PAXPR08MB7090
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+X-CM-TRANSID: AQAAf9BxgOL0KdRg3u8WAA--.5315S2
+X-Coremail-Antispam: 1UD129KBjvAXoW3Zr43Kw4rCFWxuF1rKF48WFg_yoW8Xry5Zo
+        WFyr1Ykr48CF4rJ34IqFsrWr15Ar4fCr4kG3Z3Kr12k3s8uay5Xw1DXr45u343Zw45ua43
+        tw13X3yfuF1UZF4Dn29KB7ZKAUJUUUUU529EdanIXcx71UUUUU7v73VFW2AGmfu7bjvjm3
+        AaLaJ3UjIYCTnIWjp_UUUYh7AC8VAFwI0_Gr0_Xr1l1xkIjI8I6I8E6xAIw20EY4v20xva
+        j40_Wr0E3s1l1IIY67AEw4v_Jr0_Jr4l8cAvFVAK0II2c7xJM28CjxkF64kEwVA0rcxSw2
+        x7M28EF7xvwVC0I7IYx2IY67AKxVW7JVWDJwA2z4x0Y4vE2Ix0cI8IcVCY1x0267AKxVWx
+        JVW8Jr1l84ACjcxK6I8E87Iv67AKxVWxJr0_GcWl84ACjcxK6I8E87Iv6xkF7I0E14v26r
+        xl6s0DM2AIxVAIcxkEcVAq07x20xvEncxIr21l5I8CrVACY4xI64kE6c02F40Ex7xfMcIj
+        6xIIjxv20xvE14v26r1j6r18McIj6I8E87Iv67AKxVWUJVW8JwAm72CE4IkC6x0Yz7v_Jr
+        0_Gr1lF7xvr2IYc2Ij64vIr41lF7I21c0EjII2zVCS5cI20VAGYxC7M4IIrI8v6xkF7I0E
+        8cxan2IY04v7MxkIecxEwVAFwVW8AwCF04k20xvY0x0EwIxGrwCFx2IqxVCFs4IE7xkEbV
+        WUJVW8JwC20s026c02F40E14v26r1j6r18MI8I3I0E7480Y4vE14v26r106r1rMI8E67AF
+        67kF1VAFwI0_Jw0_GFylIxkGc2Ij64vIr41lIxAIcVC0I7IYx2IY67AKxVWUJVWUCwCI42
+        IY6xIIjxv20xvEc7CjxVAFwI0_Jr0_Gr1lIxAIcVCF04k26cxKx2IYs7xG6rW3Jr0E3s1l
+        IxAIcVC2z280aVAFwI0_Jr0_Gr1lIxAIcVC2z280aVCY1x0267AKxVWUJVW8JbIYCTnIWI
+        evJa73UjIFyTuYvjfUndb1UUUUU
+X-CM-SenderInfo: pvl1t0pwhqwqxorr0wxvrqhubq/
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
+translate Documentation/core-api/genericirq.rst into Chinese.
 
+Signed-off-by: Yanteng Si <siyanteng@loongson.cn>
+Reviewed-by: Wu XiangCheng <bobwxc@email.cn>
+---
+v3:
+* pick Xiangcheng's Reviewed-by tag.
 
-> -----Original Message-----
-> From: Al Viro <viro@ftp.linux.org.uk> On Behalf Of Al Viro
-> Sent: Wednesday, May 19, 2021 8:49 AM
-> To: Linus Torvalds <torvalds@linux-foundation.org>
-> Cc: Justin He <Justin.He@arm.com>; Petr Mladek <pmladek@suse.com>; Steven
-> Rostedt <rostedt@goodmis.org>; Sergey Senozhatsky
-> <senozhatsky@chromium.org>; Andy Shevchenko
-> <andriy.shevchenko@linux.intel.com>; Rasmus Villemoes
-> <linux@rasmusvillemoes.dk>; Jonathan Corbet <corbet@lwn.net>; Heiko
-> Carstens <hca@linux.ibm.com>; Vasily Gorbik <gor@linux.ibm.com>; Christia=
-n
-> Borntraeger <borntraeger@de.ibm.com>; Eric W . Biederman
-> <ebiederm@xmission.com>; Darrick J. Wong <darrick.wong@oracle.com>; Peter
-> Zijlstra (Intel) <peterz@infradead.org>; Ira Weiny <ira.weiny@intel.com>;
-> Eric Biggers <ebiggers@google.com>; Ahmed S. Darwish
-> <a.darwish@linutronix.de>; open list:DOCUMENTATION <linux-
-> doc@vger.kernel.org>; Linux Kernel Mailing List <linux-
-> kernel@vger.kernel.org>; linux-s390 <linux-s390@vger.kernel.org>; linux-
-> fsdevel <linux-fsdevel@vger.kernel.org>
-> Subject: [PATCH 06/14] d_path: don't bother with return value of prepend(=
-)
->
-> Only simple_dname() checks it, and there we can simply do those
-> calls and check for overflow (by looking of negative buflen)
-> in the end.
->
-> Signed-off-by: Al Viro <viro@zeniv.linux.org.uk>
+v2:
+* Modified some words under Xiangcheng's advices;
+* add 校译者(proofreading) sign.If you don't want me to do this, please let me know.
 
-Reviewed-by: Jia He <justin.he@arm.com>
+ .../zh_CN/core-api/genericirq.rst             | 409 ++++++++++++++++++
+ .../translations/zh_CN/core-api/index.rst     |   2 +-
+ 2 files changed, 410 insertions(+), 1 deletion(-)
+ create mode 100644 Documentation/translations/zh_CN/core-api/genericirq.rst
 
---
-Cheers,
-Justin (Jia He)
-> ---
->  fs/d_path.c | 20 +++++++++-----------
->  1 file changed, 9 insertions(+), 11 deletions(-)
->
-> diff --git a/fs/d_path.c b/fs/d_path.c
-> index 311d43287572..72b8087aaf9c 100644
-> --- a/fs/d_path.c
-> +++ b/fs/d_path.c
-> @@ -8,14 +8,13 @@
->  #include <linux/prefetch.h>
->  #include "mount.h"
->
-> -static int prepend(char **buffer, int *buflen, const char *str, int
-> namelen)
-> +static void prepend(char **buffer, int *buflen, const char *str, int
-> namelen)
->  {
->       *buflen -=3D namelen;
-> -     if (*buflen < 0)
-> -             return -ENAMETOOLONG;
-> -     *buffer -=3D namelen;
-> -     memcpy(*buffer, str, namelen);
-> -     return 0;
-> +     if (likely(*buflen >=3D 0)) {
-> +             *buffer -=3D namelen;
-> +             memcpy(*buffer, str, namelen);
-> +     }
->  }
->
->  /**
-> @@ -298,11 +297,10 @@ char *simple_dname(struct dentry *dentry, char
-> *buffer, int buflen)
->  {
->       char *end =3D buffer + buflen;
->       /* these dentries are never renamed, so d_lock is not needed */
-> -     if (prepend(&end, &buflen, " (deleted)", 11) ||
-> -         prepend(&end, &buflen, dentry->d_name.name, dentry->d_name.len)
-> ||
-> -         prepend(&end, &buflen, "/", 1))
-> -             end =3D ERR_PTR(-ENAMETOOLONG);
-> -     return end;
-> +     prepend(&end, &buflen, " (deleted)", 11);
-> +     prepend(&end, &buflen, dentry->d_name.name, dentry->d_name.len);
-> +     prepend(&end, &buflen, "/", 1);
-> +     return buflen >=3D 0 ? end : ERR_PTR(-ENAMETOOLONG);
->  }
->
->  /*
-> --
-> 2.11.0
+diff --git a/Documentation/translations/zh_CN/core-api/genericirq.rst b/Documentation/translations/zh_CN/core-api/genericirq.rst
+new file mode 100644
+index 000000000000..05ccb954c18d
+--- /dev/null
++++ b/Documentation/translations/zh_CN/core-api/genericirq.rst
+@@ -0,0 +1,409 @@
++.. include:: ../disclaimer-zh_CN.rst
++
++:Original: Documentation/core-api/genericirq.rst
++
++:翻译:
++
++ 司延腾 Yanteng Si <siyanteng@loongson.cn>
++
++:校译:
++
++ 吴想成 Wu XiangCheng <bobwxc@email.cn>
++
++.. include:: <isonum.txt>
++
++.. _cn_core-api_genericirq:
++
++================
++Linux通用IRQ处理
++================
++
++:版权: |copy| 2005-2010: Thomas Gleixner
++:版权: |copy| 2005-2006:  Ingo Molnar
++
++简介
++====
++
++通用中断处理层是为了给设备驱动程序提供一个完整的中断处理抽象（层）。它能够处
++理所有不同类型的中断控制器硬件。设备驱动程序使用通用API函数来请求、启用、禁
++用和释放中断。驱动程序不需要知道任何关于硬件处理中断的细节，所以它们可以在不同的
++平台上使用而不需要修改代码。
++
++本文档提供给那些希望在通用IRQ处理层的帮助下实现基于其架构的中断子系统的开发
++者。
++
++理论依据
++========
++
++Linux中中断处理的原始实现使用__do_IRQ()超级处理程序，它能够处理每种类型的
++中断逻辑。
++
++最初，Russell King确定了不同类型的处理程序，以便为Linux 2.5/2.6中的ARM中
++断处理程序实现建立一个相当通用的集合。他区分了以下几种类型:
++
++-  电平触发型
++
++-  边沿触发型
++
++-  简单型
++
++在实现过程中，我们发现了另一种类型:
++
++-  响应EOI（end of interrupt）型
++
++在SMP的__do_IRQ()超级处理程序中，还需定义一种类型：
++
++-  每cpu型（针对CPU SMP）
++
++这种高层IRQ处理程序的拆分实现使我们能够为每个特定的中断类型优化中断处理的流
++程。这减少了该特定代码路径的复杂性，并允许对特定类型进行优化处理。
++
++最初的通用IRQ实现使用hw_interrupt_type结构体及其 ``->ack`` ``->end`` 等回
++调来区分超级处理程序中的流控制。这导致了流逻辑和低级硬件逻辑的混合，也导致了
++不必要的代码重复：例如i386中的 ``ioapic_level_irq`` 和 ``ioapic_edge_irq`` ，
++这两个IRQ类型共享许多低级的细节，但有不同的流处理。
++
++一个更自然的抽象是“irq流”和“芯片细节”的干净分离。
++
++分析一些架构的IRQ子系统的实现可以发现，他们中的大多数可以使用一套通用的“irq
++流”方法，只需要添加芯片级的特定代码。这种分离对于那些需要IRQ流本身而不需要芯
++片细节的特定（子）架构也很有价值——以提供了一个更透明的IRQ子系统设计。
++
++每个中断描述符都被分配给它自己的高层流程处理程序，这通常是一个通用的实现。(这
++种高层次的流程处理程序的实现也使得提供解复用处理程序变得简单，这可以在各种架
++构的嵌入式平台上找到。)
++
++这种分离使得通用中断处理层更加灵活和可扩展。例如，一个（子）架构可以使用通用
++的IRQ流实现“电平触发型”中断，并添加一个（子）架构特定的“边沿型”实现。
++
++为了使向新模型的过渡更容易，并防止破坏现有实现，__do_IRQ()超级处理程序仍然
++可用。这导致了一种暂时的双重性。随着时间的推移，新的模型应该在越来越多的架构中
++被使用，因为它能使IRQ子系统更小更干净。它已经被废弃三年了，即将被删除。
++
++已知的缺陷和假设
++================
++
++没有（但愿如此）。
++
++抽象层
++======
++
++中断代码中主要有三个抽象层次:
++
++1. 高级别的驱动API
++
++2. 高级别的IRQ流处理器
++
++3. 芯片级的硬件封装
++
++中断控制流
++----------
++
++每个中断都由一个中断描述符结构体irq_desc来描述。中断是由一个“无符号整型”的数值来
++引用的，它在描述符结构体数组中选择相应的中断描述符结构体。描述符结构体包含状态
++信息和指向中断流方法和中断芯片结构的指针，这些都是分配给这个中断的。
++
++每当中断触发时，低级架构代码通过调用desc->handle_irq()调用到通用中断代码中。
++这个高层IRQ处理函数只使用由分配的芯片描述符结构体引用的desc->irq_data.chip
++基元。
++
++高级驱动程序API
++---------------
++
++高层驱动API由以下函数组成:
++
++-  request_irq()
++
++-  request_threaded_irq()
++
++-  free_irq()
++
++-  disable_irq()
++
++-  enable_irq()
++
++-  disable_irq_nosync() (SMP only)
++
++-  synchronize_irq() (SMP only)
++
++-  irq_set_irq_type()
++
++-  irq_set_irq_wake()
++
++-  irq_set_handler_data()
++
++-  irq_set_chip()
++
++-  irq_set_chip_data()
++
++详见自动生成的函数文档。
++
++.. note::
++
++    由于文档构建流程所限，中文文档中并没有引入自动生成的函数文档，所以请读者直接
++    阅读源码注释。
++
++电平触发型IRQ流处理程序
++-----------------------
++
++通用层提供了一套预定义的irq-flow方法:
++
++-  handle_level_irq()
++
++-  handle_edge_irq()
++
++-  handle_fasteoi_irq()
++
++-  handle_simple_irq()
++
++-  handle_percpu_irq()
++
++-  handle_edge_eoi_irq()
++
++-  handle_bad_irq()
++
++中断流处理程序（无论是预定义的还是架构特定的）由架构在启动期间或设备初始化期间分配给
++特定中断。
++
++默认流实现
++~~~~~~~~~~
++
++辅助函数
++^^^^^^^^
++
++辅助函数调用芯片基元，并被默认流实现所使用。以下是实现的辅助函数（简化摘录）::
++
++    default_enable(struct irq_data *data)
++    {
++        desc->irq_data.chip->irq_unmask(data);
++    }
++
++    default_disable(struct irq_data *data)
++    {
++        if (!delay_disable(data))
++            desc->irq_data.chip->irq_mask(data);
++    }
++
++    default_ack(struct irq_data *data)
++    {
++        chip->irq_ack(data);
++    }
++
++    default_mask_ack(struct irq_data *data)
++    {
++        if (chip->irq_mask_ack) {
++            chip->irq_mask_ack(data);
++        } else {
++            chip->irq_mask(data);
++            chip->irq_ack(data);
++        }
++    }
++
++    noop(struct irq_data *data))
++    {
++    }
++
++
++
++默认流处理程序的实现
++~~~~~~~~~~~~~~~~~~~~
++
++电平触发型IRQ流处理器
++^^^^^^^^^^^^^^^^^^^^^
++
++handle_level_irq为电平触发型的中断提供了一个通用实现。
++
++实现的控制流如下（简化摘录）::
++
++    desc->irq_data.chip->irq_mask_ack();
++    handle_irq_event(desc->action);
++    desc->irq_data.chip->irq_unmask();
++
++
++默认的需回应IRQ流处理器
++^^^^^^^^^^^^^^^^^^^^^^^
++
++handle_fasteoi_irq为中断提供了一个通用的实现，它只需要在处理程序的末端有一个EOI。
++
++实现的控制流如下（简化摘录）::
++
++    handle_irq_event(desc->action);
++    desc->irq_data.chip->irq_eoi();
++
++
++默认的边沿触发型IRQ流处理器
++^^^^^^^^^^^^^^^^^^^^^^^^^^^
++
++handle_edge_irq为边沿触发型的中断提供了一个通用的实现。
++
++实现的控制流如下（简化摘录）::
++
++    if (desc->status & running) {
++        desc->irq_data.chip->irq_mask_ack();
++        desc->status |= pending | masked;
++        return;
++    }
++    desc->irq_data.chip->irq_ack();
++    desc->status |= running;
++    do {
++        if (desc->status & masked)
++            desc->irq_data.chip->irq_unmask();
++        desc->status &= ~pending;
++        handle_irq_event(desc->action);
++    } while (status & pending);
++    desc->status &= ~running;
++
++
++默认的简单型IRQ流处理器
++^^^^^^^^^^^^^^^^^^^^^^^
++
++handle_simple_irq提供了一个简单型中断的通用实现。
++
++.. note::
++
++   简单型的流处理程序不调用任何处理程序/芯片基元。
++
++实现的控制流程如下（简化摘录）::
++
++    handle_irq_event(desc->action);
++
++
++默认的每CPU型流处理程序
++^^^^^^^^^^^^^^^^^^^^^^^
++
++handle_percpu_irq为每CPU型中断提供一个通用的实现。
++
++每个CPU中断只在SMP上可用，该处理程序提供了一个没有锁的简化版本。
++
++以下是控制流的实现（简化摘录）::
++
++    if (desc->irq_data.chip->irq_ack)
++        desc->irq_data.chip->irq_ack();
++    handle_irq_event(desc->action);
++    if (desc->irq_data.chip->irq_eoi)
++        desc->irq_data.chip->irq_eoi();
++
++
++EOI边沿型IRQ流处理器
++^^^^^^^^^^^^^^^^^^^^
++
++handle_edge_eoi_irq提供了一个异常的边沿触发型处理程序，它只用于拯救powerpc/cell
++上的一个严重失控的irq控制器。
++
++坏的IRQ流处理器
++^^^^^^^^^^^^^^^
++
++handle_bad_irq用于处理没有真正分配处理程序的假中断。
++
++特殊性和优化
++~~~~~~~~~~~~
++
++通用函数是为“干净”的架构和芯片设计的，它们没有平台特定的IRQ处理特殊性。如果一
++个架构需要在“流”的层面上实现特殊性，那么它可以通过覆盖高层的IRQ-流处理程序来实
++现。
++
++延迟中断禁用
++~~~~~~~~~~~~
++
++每个中断可选择的功能是由Russell King在ARM中断实现中引入的，当调用disable_irq()
++时，不会在硬件层面上屏蔽中断。中断保持启用状态，而在中断事件发生时在流处理器中被
++屏蔽。这可以防止在硬件上丢失边沿中断，因为硬件上不存储边沿中断事件，而中断在硬件
++级被禁用。当一个中断在IRQ_DISABLED标志被设置时到达，那么该中断在硬件层面被屏蔽，
++IRQ_PENDING位被设置。当中断被enable_irq()重新启用时，将检查挂起位，如果它被设置，
++中断将通过硬件或软件重发机制重新发送。(当你想使用延迟中断禁用功能，而你的硬件又不
++能重新触发中断时，有必要启用CONFIG_HARDIRQS_SW_RESEND。) 延迟中断禁止功能是不可
++配置的。
++
++芯片级硬件封装
++--------------
++
++芯片级硬件描述符结构体 :c:type:`irq_chip` 包含了所有与芯片直接相关的功能，这些功
++能可以被irq流实现所利用。
++
++-  ``irq_ack``
++
++-  ``irq_mask_ack`` - 可选的，建议使用的性能
++
++-  ``irq_mask``
++
++-  ``irq_unmask``
++
++-  ``irq_eoi`` - 可选的，EOI流处理程序需要
++
++-  ``irq_retrigger`` - 可选的
++
++-  ``irq_set_type`` - 可选的
++
++-  ``irq_set_wake`` - 可选的
++
++这些基元的意思是严格意义上的：ack是指ACK，masking是指对IRQ线的屏蔽，等等。这取决
++于流处理器如何使用这些基本的低级功能单元。
++
++__do_IRQ入口点
++==============
++
++最初的实现__do_IRQ()是所有类型中断的替代入口点。它已经不存在了。
++
++这个处理程序被证明不适合所有的中断硬件，因此被重新实现了边沿/级别/简单/超高速中断
++的拆分功能。这不仅是一个功能优化。它也缩短了中断的代码路径。
++
++在SMP上的锁
++===========
++
++芯片寄存器的锁定是由定义芯片基元的架构决定的。每个寄存器的结构通过desc->lock，由
++通用层保护。
++
++通用中断芯片
++============
++
++为了避免复制相同的IRQ芯片实现，核心提供了一个可配置的通用中断芯片实现。开发者在自
++己实现相同的功能之前，应该仔细检查通用芯片是否符合他们的需求，并以稍微不同的方式实
++现相同的功能。
++
++该API在以下内核代码中:
++
++kernel/irq/generic-chip.c
++
++结构体
++======
++
++本章包含自动生成的结构体文档，这些结构体在通用IRQ层中使用。
++
++该API在以下内核代码中:
++
++include/linux/irq.h
++
++include/linux/interrupt.h
++
++提供的通用函数
++==============
++
++这一章包含了自动生成的内核API函数的文档，这些函数被导出。
++
++该API在以下内核代码中:
++
++kernel/irq/manage.c
++
++kernel/irq/chip.c
++
++提供的内部函数
++==============
++
++本章包含自动生成的内部函数的文档。
++
++该API在以下内核代码中:
++
++kernel/irq/irqdesc.c
++
++kernel/irq/handle.c
++
++kernel/irq/chip.c
++
++鸣谢
++====
++
++感谢以下人士对本文档作出的贡献：
++
++1. Thomas Gleixner tglx@linutronix.de
++
++2. Ingo Molnar mingo@elte.hu
+diff --git a/Documentation/translations/zh_CN/core-api/index.rst b/Documentation/translations/zh_CN/core-api/index.rst
+index b4bde9396339..71a212a2a9db 100644
+--- a/Documentation/translations/zh_CN/core-api/index.rst
++++ b/Documentation/translations/zh_CN/core-api/index.rst
+@@ -80,13 +80,13 @@ Todolist:
+    :maxdepth: 1
+ 
+    cachetlb
++   genericirq
+ 
+ Todolist:
+ 
+ 
+    cpu_hotplug
+    memory-hotplug
+-   genericirq
+    protection-keys
+ 
+ 
+-- 
+2.27.0
 
-IMPORTANT NOTICE: The contents of this email and any attachments are confid=
-ential and may also be privileged. If you are not the intended recipient, p=
-lease notify the sender immediately and do not disclose the contents to any=
- other person, use it for any purpose, or store or copy the information in =
-any medium. Thank you.
