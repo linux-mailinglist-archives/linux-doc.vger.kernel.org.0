@@ -2,160 +2,96 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 36A343B493D
-	for <lists+linux-doc@lfdr.de>; Fri, 25 Jun 2021 21:27:26 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id E16F03B4945
+	for <lists+linux-doc@lfdr.de>; Fri, 25 Jun 2021 21:38:42 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S229796AbhFYT3o (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Fri, 25 Jun 2021 15:29:44 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:39482 "EHLO
+        id S229796AbhFYTlD (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Fri, 25 Jun 2021 15:41:03 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:41948 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S229531AbhFYT3o (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Fri, 25 Jun 2021 15:29:44 -0400
-Received: from mail-wm1-x32f.google.com (mail-wm1-x32f.google.com [IPv6:2a00:1450:4864:20::32f])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id B0FA0C061574
-        for <linux-doc@vger.kernel.org>; Fri, 25 Jun 2021 12:27:22 -0700 (PDT)
-Received: by mail-wm1-x32f.google.com with SMTP id o22so5984518wms.0
-        for <linux-doc@vger.kernel.org>; Fri, 25 Jun 2021 12:27:22 -0700 (PDT)
+        with ESMTP id S229712AbhFYTlC (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Fri, 25 Jun 2021 15:41:02 -0400
+Received: from mail-yb1-xb43.google.com (mail-yb1-xb43.google.com [IPv6:2607:f8b0:4864:20::b43])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 45C91C061768
+        for <linux-doc@vger.kernel.org>; Fri, 25 Jun 2021 12:38:41 -0700 (PDT)
+Received: by mail-yb1-xb43.google.com with SMTP id p133so6293948yba.11
+        for <linux-doc@vger.kernel.org>; Fri, 25 Jun 2021 12:38:41 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc;
-        bh=H/oK0jQ+nVsuIPUgqjRK3RcXtuf8pq3P6VppZA/DQBw=;
-        b=VqNjh531wCKGPAl5s6XZxUqHtmXV5UmxMAs4/YdF8gdDDB+VuSb+emB79imNcvnU/U
-         1mIQciLAquL6p5WhuU5ix5H1P35IvDlShVdp5qhzIhGg28jmpChu35Iz2AwkaL+tcI68
-         OGWP0oO7wsKcqz8OaIBrz6eQZHaoLEX6MA0izS5yvIr/BzfTd9CkzPUXUU/6AzuuEJn1
-         C+4euc9Q76k5SVQr8ZfxZh5jhLMFxG/2YixWMwhKc+zRGiXoc7uDWrF8We3tPUhPNYGf
-         p4I0xxnwoRGNVN+59j6TQD/uokKelJjKsqfYnjXlL8w8y0SKimsdipqdCU+aWlFh4QtE
-         IzxQ==
+        h=mime-version:reply-to:from:date:message-id:subject:to
+         :content-transfer-encoding;
+        bh=2HpyCQpwgrc/aHBUoC6zr6QEL1NXeYoH0TAbwDDPVvg=;
+        b=rCKUqWmA8BR+GD7NPd5osBBesTgg+evmAfXhrRF8zb4z8ZMK0qCgFyAA7LUe27T8P7
+         TSf3Uv+f+ECGua1fdB5rglTVz1nwjNSe93+OrA+QThSAmYR/Eal2ozgqx63auaRIgxld
+         4FadkGkwTeG85tJBJTsFk+X6KKa3QprzdpV0+zfxK4YAXtZfp4eh0y6ZjawnEmcdo21T
+         UMxvvC66okxP3/PJIpsOq8yo885nyGi/ZeWNuZP2OL/Fd2G8VaPQLrJhp60UgR+Xo8Al
+         Qm4e5ErJkggRj1Qyt9e7JrajXErvsvXf5P6c6fDGfa42tuUouTgoz0oXgZDC+wc619wd
+         1cuw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc;
-        bh=H/oK0jQ+nVsuIPUgqjRK3RcXtuf8pq3P6VppZA/DQBw=;
-        b=L6Ex8fonwDuSTD/hwabQPV8BEmxv7pm+FknlF/H0Tv5agHedMdEJf+3paZ/6fjJ2Da
-         8MYgopgiZgMGGROZUg/5S5mHzgo/ZXpYeiEGzXnIBwABZdZiKE1oJ2X+KjYlRFacuUs8
-         sw2f/10A/0vc58Q7iGygSaKE9YKbvFxooVM4yd2vFe4uTTW+Kjfz7QHdF4KlBGZ39UjL
-         Czvp3fDliO0h5FcSVRfeNtr4ASHFCO4aeTwm7mrvu3vhisxhBiOzYQAEOrSBatdE3Bkl
-         X1qsE4FlFPP+OEKyU55JQXy6EyDdgi/oYHJOqJwf/Afio+j8lbJ8Z9/RnFnBWd55e9tw
-         qYfg==
-X-Gm-Message-State: AOAM531MDJ/0fScTsl1/Pmx6fSh6NFb13qozKYEdoHfXhWBuWp4k5RWE
-        7yHRogfRLc4pJ47KGub/6aZ+ZMVHinDtkS7h/ho=
-X-Google-Smtp-Source: ABdhPJwOVnoGxAFANTW/yzbr3iO8FLtZF/BAXXMIYRzGTVvabdpwuQJYaPfYIPpObqmgEzyAun+Op6ZaSD4Xo5Osm9w=
-X-Received: by 2002:a05:600c:4417:: with SMTP id u23mr12520669wmn.26.1624649241220;
- Fri, 25 Jun 2021 12:27:21 -0700 (PDT)
+        h=x-gm-message-state:mime-version:reply-to:from:date:message-id
+         :subject:to:content-transfer-encoding;
+        bh=2HpyCQpwgrc/aHBUoC6zr6QEL1NXeYoH0TAbwDDPVvg=;
+        b=Hi2CR9EiRnVvp30sFS7znfZQ4raRojlISbElyCcqrQ0X4kAhCoXHlj507zJ7ZNC6/b
+         57pmsCBVbM/yLH9FbSEX3gKhCcPDlv8obqjqYvUEbpRyBO6aWzSSE8qBmNGbzaKrcHnK
+         hXHns4OTeqclt6knmF9AelaNSAp61rwkNfenxnlIKRas95fJxyDkn2DUc8RO2hlkA8WT
+         WiQhnionKlI30Yp2qEDg3SEFQN02q8yuTdtbZE3FENt/zt7lvdWL8s/lZZPXg6O6m1rn
+         a5ocGWsmGkmzMtq7wud8CWI6v+aBbLIBhDe3bDYxIc2V4A3dSu2wFkD6/GIykt2MdGuF
+         vnyw==
+X-Gm-Message-State: AOAM530pvo2XPrGtQ9qyYyOmrk275COqliFLH4lu1UuClsez/SiQI5r1
+        Ob/bK/Ic1QpCTYn2jnINGGjqWtrqulsbslY4Lh4=
+X-Google-Smtp-Source: ABdhPJwWrQNuNZxJVRgZ6OyCpXU7UMd7juCG0/SNLsqNYboCpkG5Ko4xGq2mmulw/dsxHVnF0g6HKsb6XujKmniOeCw=
+X-Received: by 2002:a25:ace1:: with SMTP id x33mr12941360ybd.28.1624649920336;
+ Fri, 25 Jun 2021 12:38:40 -0700 (PDT)
 MIME-Version: 1.0
-References: <CAE7jHC_r86KNb_+beU10Vq3DU9wGA3X=sHpDjH-QQNrDGU5taw@mail.gmail.com>
- <YJP6bH/RXxcd/0Xf@mit.edu>
-In-Reply-To: <YJP6bH/RXxcd/0Xf@mit.edu>
-From:   Constantine Shulyupin <constantine.shulyupin@gmail.com>
-Date:   Fri, 25 Jun 2021 22:27:09 +0300
-Message-ID: <CAE7jHC-mPi285C4ydzQ3ZEydNEJGewEjxoLFEwozyD-_XB2RmQ@mail.gmail.com>
-Subject: Re: Wikibook Linux kernel
-To:     "Theodore Ts'o" <tytso@mit.edu>
-Cc:     linux-doc@vger.kernel.org,
-        kernelnewbies <kernelnewbies@kernelnewbies.org>, aaptel@suse.com,
-        aisheng.dong@nxp.com, alexandru.elisei@arm.com,
-        alex.williamson@redhat.com, andreyknvl@google.com,
-        anshuman.khandual@arm.com, aquini@redhat.com,
-        Arnd Bergmann <arnd@arndb.de>, ast@kernel.org, axboe@kernel.dk,
-        bernard@vivo.com, bobwxc@email.cn, bp@alien8.de,
-        brijesh.singh@amd.com, broonie@kernel.org, catalin.marinas@arm.com,
-        chris.packham@alliedtelesis.co.nz,
-        Jonathan Corbet <corbet@lwn.net>, cw00.choi@samsung.com,
-        daniel@iogearbox.net, davem@davemloft.net,
-        David Gow <davidgow@google.com>, dhowells@redhat.com,
-        dikshita@codeaurora.org, Daniel Latypov <dlatypov@google.com>,
-        eesposit@redhat.com, eric.auger@redhat.com,
-        Erik Flodin <erik@flodin.me>, erik.rosen@metormote.com,
-        federico.vaga@vaga.pv.it, festevam@gmail.com,
-        georgi.djakov@linaro.org, gi-oh.kim@cloud.ionos.com,
-        gi-oh.kim@ionos.com, gregkh@linuxfoundation.org,
-        Gustavo.Pimentel@synopsys.com, haren@linux.ibm.com,
-        hca@linux.ibm.com, hch@lst.de, hdegoede@redhat.com,
-        heikki.krogerus@linux.intel.com, hengqi.chen@gmail.com,
-        hverkuil-cisco@xs4all.nl, i@zenithal.me, jaegeuk@kernel.org,
-        James.Bottomley@hansenpartnership.com,
-        jamorris@linux.microsoft.com, jarkko@kernel.org, jgg@nvidia.com,
-        jianyong.wu@arm.com, jonas@protocubo.io,
-        Jonathan.Cameron@huawei.com, kabel@kernel.org,
-        Kees Cook <keescook@chromium.org>, kuba@kernel.org,
-        kubernat@cesnet.cz, Linus Walleij <linus.walleij@linaro.org>,
-        linux@leemhuis.info, Rasmus Villemoes <linux@rasmusvillemoes.dk>,
-        Guenter Roeck <linux@roeck-us.net>, luzmaximilian@gmail.com,
-        macro@orcam.me.uk, marcan@marcan.st, masahiroy@kernel.org,
-        Mathieu Poirier <mathieu.poirier@linaro.org>, maz@kernel.org,
-        mchehab+huawei@kernel.org, mic@linux.microsoft.com,
-        mkl@pengutronix.de, mpe@ellerman.id.au, mszeredi@redhat.com,
-        natet@google.com, Nicolas Dichtel <nicolas.dichtel@6wind.com>,
-        niklas.soderlund+renesas@ragnatech.se, npiggin@gmail.com,
-        ogabbay@kernel.org, parav@nvidia.com, pbonzini@redhat.com,
-        Peter Collingbourne <pcc@google.com>, peterz@infradead.org,
-        pmladek@suse.com, rafael.j.wysocki@intel.com, rppt@linux.ibm.com,
-        saeedm@nvidia.com, sakari.ailus@linux.intel.com,
-        sbhat@linux.ibm.com, schnelle@linux.ibm.com,
-        sean.j.christopherson@intel.com, sebastian.reichel@collabora.com,
-        shy828301@gmail.com, siyanteng@loongson.cn,
-        skhan@linuxfoundation.org, sozeri@habana.ai,
-        Steve Rutherford <srutherford@google.com>,
-        Stanimir Varbanov <stanimir.varbanov@linaro.org>,
-        stephane.blondon@gmail.com, stern@rowland.harvard.edu,
-        stfrench@microsoft.com, sumit.garg@linaro.org,
-        tamar.mashiah@intel.com, tglx@linutronix.de,
-        tom.zanussi@linux.intel.com, torvalds@linux-foundation.org,
-        unixbhaskar@gmail.com, vbabka@suse.cz, vincenzo.frascino@arm.com,
-        vkoul@kernel.org, vladyslavt@nvidia.com,
-        wilken.gottwalt@posteo.net, willy@infradead.org, yangbo.lu@nxp.com,
-        yangtiezhu@loongson.cn, yuchao0@huawei.com, yuzenghui@huawei.com
+Received: by 2002:a05:7010:7420:b029:be:3f87:f344 with HTTP; Fri, 25 Jun 2021
+ 12:38:40 -0700 (PDT)
+Reply-To: lukaszjanuszjanuszewski@gmail.com
+From:   =?UTF-8?Q?=C5=81ukasz_Janusz_Januszewski?= 
+        <prof.charles087@gmail.com>
+Date:   Fri, 25 Jun 2021 12:38:40 -0700
+Message-ID: <CAAQ5Uk6DvT6ebxiTn8WnZ0JaNYSmcj7Xii0NpWT-gzVeTR7+CQ@mail.gmail.com>
+Subject: Business Offer!!!
+To:     undisclosed-recipients:;
 Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Thank you, Ted, for pointing to https://wiki.kernel.org/.
-Out of 29 wikis 8 are outdated. Here is a summary:
-https://en.wikibooks.org/wiki/The_Linux_Kernel/wikis
+--=20
+Dear Friend,
 
-Regards
+My sincere apologies for sending you this unsolicited e-mail, but
+based on strong instincts and deep conviction that you are a matured,
+trustworthy and reliable person, I am compelled to write you and seek
+your hand/co-operation in an investment/business scheme that will be
+mutually beneficial.
 
+My name is =C5=81ukasz Janusz Januszewski, Markets & Investment Banking,
+Raiffeisen Bank International AG, Vienna, Austria. I by virtue of my
+position have some good substantial sums of money in a private coded
+bank account and I am seeking someone like you who will help me to
+receive and have it invested in a profitable business venture in your
+country.
 
-On Thu, 6 May 2021 at 17:18, Theodore Ts'o <tytso@mit.edu> wrote:
->
-> On Thu, May 06, 2021 at 01:58:35PM +0300, Constantine Shulyupin wrote:
-> > Dear Linux kernel documentation writers and readers:
-> >
-> > Writing Linux documentation is a huge complex collaborative process.
-> > To make it better I invite you to contribute to
-> > https://en.wikibooks.org/wiki/The_Linux_Kernel
->
-> There are some wiki's that are available at *.wiki.kernel.org.  For
-> example, ext4.wiki.kernel.org.  We've largely abandoned it, in favor
-> of using Documentation in the kernel sources, because if you leave it
-> "updated by anyone", unless you have people constantly watching for
-> spam or trash updates which have to be reverted, it quickly becomes a
-> mess.  Or you can keep tight control over who you give accounts to,
-> but then it doesn't get updated all that often.
->
-> Keeping the documentation in sync with the kernel sources means it's
-> much more likely for the documentation to be updated when the kernel
-> is updated, and so for example we've migrated:
->
-> https://ext4.wiki.kernel.org/index.php/Ext4_Disk_Layout
->
-> to:
->
-> https://www.kernel.org/doc/html/latest/filesystems/ext4/index.html
->
-> with the sources available at:
->
-> https://git.kernel.org/pub/scm/linux/kernel/git/tytso/ext4.git/tree/Documentation/filesystems/ext4
->
-> ... and been much happier with the result.
->
-> Cheers,
->
->                                         - Ted
+Meanwhile, be rest assured that this offer is RISK-FREE but due to my
+status in the society, you are required to keep this offer strictly
+confidential and top secret. Kindly oblige me your full names, private
+e-mail address, your age, contact phone number, your profession and
+nationality.
 
+Upon receipt of your positive response, I will oblige you fuller
+details in my next e-mail correspondence, as it is said, "the taste of
+the pudding is in the eating" so join hands with me to make this
+once-in-a-life-opportunity a resounding success. Please have total
+faith on this offer and TRUST me on this too!
 
+Thank you very much.
 
--- 
-Constantine Shulyupin
+Sincerely,
+
+=C5=81ukasz Janusz Januszewski,
+Markets & Investment Banking,
+Raiffeisen Bank International AG,
+Vienna, Austria.
