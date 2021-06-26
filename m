@@ -2,125 +2,147 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 9D26D3B4B4E
-	for <lists+linux-doc@lfdr.de>; Sat, 26 Jun 2021 01:48:48 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 688AC3B4BFE
+	for <lists+linux-doc@lfdr.de>; Sat, 26 Jun 2021 04:32:38 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S230299AbhFYXvD (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Fri, 25 Jun 2021 19:51:03 -0400
-Received: from mail-mw2nam08on2070.outbound.protection.outlook.com ([40.107.101.70]:21600
-        "EHLO NAM04-MW2-obe.outbound.protection.outlook.com"
-        rhost-flags-OK-OK-OK-FAIL) by vger.kernel.org with ESMTP
-        id S230137AbhFYXum (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Fri, 25 Jun 2021 19:50:42 -0400
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=cqHReTvPOfyqJ3NO3JdGRmrVsHpLGHKJ6ujujDK2fNoaNmT9zDBnnMwcGMrDAhq2yoRZ8ifLyyFoNP0UEYjAisenukM6xcSqu+H6ntakDNnQPeCDFkPnAU/wfW9mJdZjYmkZNWlCx1j8lX4ZYkLknD44mT6O5hPKaYKYAJGUWl6LoArDmDOLv8mk0/jtf+OCtxO4C6H8vRnW0b8pmhQ3pKt7HSk86ehfMUsBiyM/E1QIdNgM/BJHBippIEWPp/20uqowVAk2ialjuFo3d9kP9URrKwJM0ECbZGjGB7/wYPNT5I7WCkzIRzX3CgO/BO2dqoLFr/jrF4qpfhgmliNZDg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=V8FTLM7KteR//C/rKZXf2MJCR/ZihWfFQMwp9poEZRM=;
- b=hEhMFhzoKzzwC+vaL4N+t2CQ91U6Hb62TUdEhm+aM5kG4DAr93TdGEj9Qi9Yk0mLbk44qplG8LBEi3cx/tuXOQ/szW44Deij3Sf3kJ36kMstXI8SERarg6UQ5oMACjEGI6tMGIXGeLMyVghYg7HrG1UhMlNPHRyAROlhqgnoJZO9NeUkl2qBUkOoi09jH7R1PmXV9bj6ahCrbpbQxjLMGKKfKLYuAB0zuALEJ/sX63cY4Ng7xwLuXpxHT/Geaen7q3yDPvA2n5K9ihfkCrjBzXEOZSutnYjvsL7pNBTBPw4Wz/fpytxRYkZf+iMziqDfw8nMYgpUWhcP3UijO1V3pg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 216.228.112.36) smtp.rcpttodomain=gmail.com smtp.mailfrom=nvidia.com;
- dmarc=pass (p=none sp=none pct=100) action=none header.from=nvidia.com;
- dkim=none (message not signed); arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
- s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=V8FTLM7KteR//C/rKZXf2MJCR/ZihWfFQMwp9poEZRM=;
- b=Kyy7aVOPnn21H+qkXPAvewMZcZhO1wQ3G9mHKei5IqQLuTQJYsFnRw4WiitqXwxvqIhcTFABDMwF1W9OZmOrPBO2AJ6m5WAbQ9C5dsTrtEzbuk2PGLK/qwxNd6uykKoK5ReOH548adoIH4Tn2mc08KV+9xCE+Gomgow0nYDImW7u+cNgpG/zEk2ck8TzmyhD6ubQarbjDec2JfSFXhrStqtiy41jVUqF4s0kkeKzhdN70hfHXdK5hFy0i16GlcELEl3vG/g3gSbbz2CU0KUpA7bdOQQCqxDypyZAZ84m3zn/JTJAe1nGQPTPjiW3tMxGk9j0vbArYEPGew3ulCmqSA==
-Received: from DM6PR04CA0014.namprd04.prod.outlook.com (2603:10b6:5:334::19)
- by MN2PR12MB4013.namprd12.prod.outlook.com (2603:10b6:208:163::27) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4264.19; Fri, 25 Jun
- 2021 23:48:18 +0000
-Received: from DM6NAM11FT062.eop-nam11.prod.protection.outlook.com
- (2603:10b6:5:334:cafe::8) by DM6PR04CA0014.outlook.office365.com
- (2603:10b6:5:334::19) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4264.19 via Frontend
- Transport; Fri, 25 Jun 2021 23:48:18 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 216.228.112.36)
- smtp.mailfrom=nvidia.com; gmail.com; dkim=none (message not signed)
- header.d=none;gmail.com; dmarc=pass action=none header.from=nvidia.com;
-Received-SPF: Pass (protection.outlook.com: domain of nvidia.com designates
- 216.228.112.36 as permitted sender) receiver=protection.outlook.com;
- client-ip=216.228.112.36; helo=mail.nvidia.com;
-Received: from mail.nvidia.com (216.228.112.36) by
- DM6NAM11FT062.mail.protection.outlook.com (10.13.173.40) with Microsoft SMTP
- Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384) id
- 15.20.4264.18 via Frontend Transport; Fri, 25 Jun 2021 23:48:18 +0000
-Received: from HQMAIL101.nvidia.com (172.20.187.10) by HQMAIL101.nvidia.com
- (172.20.187.10) with Microsoft SMTP Server (TLS) id 15.0.1497.2; Fri, 25 Jun
- 2021 23:48:16 +0000
-Received: from dipenp.nvidia.com (172.20.187.6) by mail.nvidia.com
- (172.20.187.10) with Microsoft SMTP Server id 15.0.1497.2 via Frontend
- Transport; Fri, 25 Jun 2021 23:48:16 +0000
-From:   Dipen Patel <dipenp@nvidia.com>
-To:     <thierry.reding@gmail.com>, <jonathanh@nvidia.com>,
-        <linux-kernel@vger.kernel.org>, <linux-tegra@vger.kernel.org>,
-        <linux-gpio@vger.kernel.org>, <linus.walleij@linaro.org>,
-        <bgolaszewski@baylibre.com>, <warthog618@gmail.com>,
-        <devicetree@vger.kernel.org>, <linux-doc@vger.kernel.org>,
-        <dipenp@nvidia.com>, <robh+dt@kernel.org>
-Subject: [RFC 11/11] MAINTAINERS: Added HTE Subsystem
-Date:   Fri, 25 Jun 2021 16:55:32 -0700
-Message-ID: <20210625235532.19575-12-dipenp@nvidia.com>
-X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20210625235532.19575-1-dipenp@nvidia.com>
-References: <20210625235532.19575-1-dipenp@nvidia.com>
-X-NVConfidentiality: public
+        id S229878AbhFZCe5 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Fri, 25 Jun 2021 22:34:57 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:47848 "EHLO
+        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S229782AbhFZCe5 (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Fri, 25 Jun 2021 22:34:57 -0400
+Received: from mail-pl1-x634.google.com (mail-pl1-x634.google.com [IPv6:2607:f8b0:4864:20::634])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 71EADC061574;
+        Fri, 25 Jun 2021 19:32:33 -0700 (PDT)
+Received: by mail-pl1-x634.google.com with SMTP id f10so5684099plg.0;
+        Fri, 25 Jun 2021 19:32:33 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=subject:to:cc:references:from:message-id:date:user-agent
+         :mime-version:in-reply-to:content-language:content-transfer-encoding;
+        bh=ZguJBm7Ta8v5rmyq9vcmT0p9z/70jaqs5v+8tFBCC0w=;
+        b=RMkDBj7HJ7fRxNyucm2kOo9eHGixwr1iziXt6EBDgrmXVmdEtXr5iaZAoJsdJHG8+c
+         4XUcs7t+WIhHBegyAwCG89rm0NM2FeZthckQ4qZ6V3ACbxFU/4KU1DEq0ZjVWJAdtNCh
+         IbFMOyZNH2VBsAhgPTdDQolZuPeLRfhkNdlX4Hh4TmRe49BARRoDK66B9wjCc6mcbt+/
+         lawRyqAZdRey/ogRl7Qz6HhlvJ41f+LLziZEd7Sd26650LTz5ydxGa4vfoNWi9WBbEEe
+         yaWvHf6wkWtEXXP8Ukk98olwtv4kAhkNHd2bw7SlZDoeW/vT6Tg5Fl0kou/aIwZwFIYK
+         plkQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:subject:to:cc:references:from:message-id:date
+         :user-agent:mime-version:in-reply-to:content-language
+         :content-transfer-encoding;
+        bh=ZguJBm7Ta8v5rmyq9vcmT0p9z/70jaqs5v+8tFBCC0w=;
+        b=bc3+LGko9epKmj84mOdq8bvLjdt4vLshsxbgpzqNayHZNwWn64Mq9Ou4x3X0AtX4/L
+         1lGagi46YV8Ap5Gq+iqpxRWT002n1Nm/yQ1TJ/bqspe+sejeXEgoeiz1CCG5m0vVsmAr
+         dUg5yikpS0f6Skn3QUQyzUIK94jj6IzdWVl3aanQhi+cocM/CYhYXV7Evhfztdh2+6NX
+         BM0chSvA0uDEKqS7P3L7s2TcxfvY/wxVa4DjoVHrgqjiqHfz+FOtANfrHW0E+vXExveC
+         TbCN1i2QFx21rKkeHZrk+aUzPiJEi9IYbbm6Js8gKxU6KakesDK/u/emds4n6KiBD5yZ
+         DBtQ==
+X-Gm-Message-State: AOAM530fpZ4xd4+dcp7OM63Ae+JdgqAXnZd1zwCrUTLWSMzd6Q9biJcX
+        RkbTHpLGC3vHNzzLXm4u4CM=
+X-Google-Smtp-Source: ABdhPJyvO4oOozSsX2gbNhMQN+t5UfASsRZAzIqt3v74HVCIYkpUjls8fbYJkPEDwnBcv/4Yn1Kaeg==
+X-Received: by 2002:a17:902:6b42:b029:11d:a147:bb7b with SMTP id g2-20020a1709026b42b029011da147bb7bmr11997765plt.9.1624674752896;
+        Fri, 25 Jun 2021 19:32:32 -0700 (PDT)
+Received: from [192.168.11.2] (KD106167171201.ppp-bb.dion.ne.jp. [106.167.171.201])
+        by smtp.gmail.com with ESMTPSA id a25sm6773878pff.54.2021.06.25.19.32.30
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Fri, 25 Jun 2021 19:32:32 -0700 (PDT)
+Subject: Re: [RFC PATCH 0/3] docs: pdfdocs: Improve alignment of CJK ascii-art
+To:     Mauro Carvalho Chehab <mchehab@kernel.org>
+Cc:     "Wu X.C." <bobwxc@email.cn>, Jonathan Corbet <corbet@lwn.net>,
+        SeongJae Park <sj38.park@gmail.com>, linux-doc@vger.kernel.org,
+        linux-kernel@vger.kernel.org, Akira Yokosawa <akiyks@gmail.com>
+References: <386938dc-6290-239c-4b4f-c6153f3d98c5@gmail.com>
+ <20210625065524.GA11219@bobwxc.top> <20210625095059.7f97fd62@coco.lan>
+ <ae0a7623-7ec4-937b-4b93-8435f2e94eb9@gmail.com>
+ <20210625122423.4435c5e9@coco.lan>
+ <b6ea891e-b6f3-318a-1b40-268f436c6860@gmail.com>
+ <20210625201113.337b3ecd@coco.lan>
+From:   Akira Yokosawa <akiyks@gmail.com>
+Message-ID: <0cfd8dfb-b304-4073-973c-930a93d19a17@gmail.com>
+Date:   Sat, 26 Jun 2021 11:32:29 +0900
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
+ Thunderbird/78.11.0
 MIME-Version: 1.0
-Content-Type: text/plain
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: 342f9a54-6565-4873-a90d-08d93833b536
-X-MS-TrafficTypeDiagnostic: MN2PR12MB4013:
-X-Microsoft-Antispam-PRVS: <MN2PR12MB4013432E0BAA8DC5DE6BFE80AE069@MN2PR12MB4013.namprd12.prod.outlook.com>
-X-MS-Oob-TLC-OOBClassifiers: OLM:1728;
-X-MS-Exchange-SenderADCheck: 1
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: Y5geudkZv/njWc6HaJo/XUjZMTuHcr6c/JdwOpVVxGo2HWaS5CzY+mE6jozm6tXu0qyayzYlsWhy+rq7Brxn6OjpGKGfduzeZ5g6I/xO/x8btYotAP9Tnux+aHsX0NSV+mIxCCKr1v1igLv1xNDtHpJ4dRKyoNxVHuz3f8Ex0X3j8+mwBJkyyhJlip+opSK8RgxKsW1KhHbAt+1SXO/EARs5Kv8Xo2gEkH7YPCnBEdmIOcgmv15IpIXk9bC6ocSlOlmG6YRhoykXxDoU8ghaPuTTQdU5XApvSEN+KZyarv09DrBJ1aiwgi6+m2kV5FVNhahZNPuLJ+5ga8DfgRZ6SESlu+EVQtAb/pSlUu512KphuxdmphZ8XOPKWo0/dnwjI3A3b06LVOAqjEjg11B5XRLFZ+iFP7cwA6to5Q4tffDDuJ7uX4VkAgV7+9R/EOI1MZphQ6e/zrUmhTklX5zUh/8Ybkxj9p1XeMu39WuCTV5JD1YsJUSLj++9+dcwvpk+G/rI4YquCjTPwo46B9v2tTUoadPU6ewnbAnuWvl4J2Dnf3zqAF1Y5yuAwtrjF2KVGuqgdns4AdgDpzC2Y5ybODkNXIzGZJ3tkNGCgT8zcsBuTqV4AR3HQhGKjWI0eNcllj8TgYSpAoyg+/VGt6/ocoZW8pSNu8CzwN3pnKDaAhfLVzzI2tEqUSbTHSTXFRKVT/qkI0M2zOZWVOovDpHK6AvNPFNO5MqBipZOF8+e7/vtKQ3cECJm14JEPKFxD+pT6Zd+t2i6fG/BjUXRxCxMsw==
-X-Forefront-Antispam-Report: CIP:216.228.112.36;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:mail.nvidia.com;PTR:schybrid05.nvidia.com;CAT:NONE;SFS:(4636009)(346002)(376002)(396003)(39860400002)(136003)(36840700001)(46966006)(4744005)(7416002)(356005)(86362001)(7636003)(316002)(110136005)(1076003)(478600001)(2906002)(5660300002)(2616005)(921005)(36756003)(70206006)(7696005)(8936002)(336012)(8676002)(70586007)(82740400003)(6666004)(186003)(26005)(426003)(36860700001)(82310400003)(47076005)(83996005)(2101003);DIR:OUT;SFP:1101;
-X-OriginatorOrg: Nvidia.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 25 Jun 2021 23:48:18.2452
- (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 342f9a54-6565-4873-a90d-08d93833b536
-X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=43083d15-7273-40c1-b7db-39efd9ccc17a;Ip=[216.228.112.36];Helo=[mail.nvidia.com]
-X-MS-Exchange-CrossTenant-AuthSource: DM6NAM11FT062.eop-nam11.prod.protection.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: MN2PR12MB4013
+In-Reply-To: <20210625201113.337b3ecd@coco.lan>
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
+Content-Transfer-Encoding: 7bit
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Added myself as a maintainer for this new Hardware Timestamping Engine
-(HTE) subsystem.
+On Fri, 25 Jun 2021 20:11:13 +0200, Mauro Carvalho Chehab wrote:
+> Em Fri, 25 Jun 2021 20:32:47 +0900
+> Akira Yokosawa <akiyks@gmail.com> escreveu:
+> 
+>> On Fri, 25 Jun 2021 12:24:23 +0200, Mauro Carvalho Chehab wrote:
+>>> Em Fri, 25 Jun 2021 18:22:26 +0900
+>>> Akira Yokosawa <akiyks@gmail.com> escreveu:
+>>>   
+>>>> On Fri, 25 Jun 2021 09:50:59 +0200, Mauro Carvalho Chehab wrote:  
+>> [...]
+>>>>
+>>>> One minor problem might be that the Sarasa font needs manual
+>>>> download (and install).
+>>>>
+>>>>         Thanks, Akira  
+>>>
+>>> If this is not yet packaged as part of texlive packages
+>>> on distros, this won't be a minor issue, as we'll need
+>>> to find procedures and test it for all distros supported
+>>> by the script.  
+>>
+>> Existence of "Sarasa Mono SC" can be checked by the command:
+>>
+>>     fc-list | grep "Sarasa Mono SC," | grep "style=Regular" | wc -l
+>>
+>> If the result is *not* "0", you have the font somewhere in your
+>> fontconfig path.
+>>
+>> I think this is portable across distros.
+>> Wouldn't this suffice for sphinx-pre-install?
+> 
+> No. The sphinx-pre-install tool generate a list of commands
+> needed to install the pre-reqs on a given distro.
+> 
+> For instance, if you run on opensuse without texlive, it would
+> print:
+> 
+> 
+> 	# ./scripts/sphinx-pre-install 
+> 	Detected OS: openSUSE Tumbleweed 20210515.
+> 	Sphinx version: 3.5.4
+> 
+> 	Warning: better to also install "latexmk".
+> ...
+> 	Warning: better to also install "xelatex".
+> 	You should run:
+> 
+> 	sudo zypper install --no-recommends texlive-latexmk-bin texlive-amscls texlive-amsfonts texlive-amsmath texlive-anyfontsize texlive-babel-english texlive-capt-of texlive-caption texlive-cmap texlive-colortbl texlive-courier texlive-dvips texlive-ec texlive-eqparbox texlive-euenc texlive-fancybox texlive-fancyvrb texlive-float texlive-fncychap texlive-framed texlive-helvetic texlive-luatex85 texlive-makeindex texlive-mdwtools texlive-metafont texlive-metapost texlive-multirow texlive-needspace texlive-oberdiek texlive-palatino texlive-parskip texlive-polyglossia texlive-preview texlive-psnfss texlive-tabulary texlive-threeparttable texlive-times texlive-titlesec texlive-tools texlive-ucs texlive-upquote texlive-wrapfig texlive-zapfchan texlive-zapfding texlive-xetex-bin
+> 
+> The same command, when executed on a different distro will
+> print a different set of packages and commands.
 
-Signed-off-by: Dipen Patel <dipenp@nvidia.com>
----
- MAINTAINERS | 8 ++++++++
- 1 file changed, 8 insertions(+)
+I see...
 
-diff --git a/MAINTAINERS b/MAINTAINERS
-index ba0cc0a67b32..29e79e7f5a50 100644
---- a/MAINTAINERS
-+++ b/MAINTAINERS
-@@ -8390,6 +8390,14 @@ L:	linux-input@vger.kernel.org
- S:	Maintained
- F:	drivers/input/touchscreen/htcpen.c
- 
-+HTE SUBSYSTEM
-+M:	dipenp@nvidia.com
-+S:	Maintained
-+F:	drivers/hte/*
-+F:	include/linux/hte.h
-+F:	Documentation/hte/*
-+F:	Documentation/devicetree/bindings/hte/*
-+
- HTS221 TEMPERATURE-HUMIDITY IIO DRIVER
- M:	Lorenzo Bianconi <lorenzo.bianconi83@gmail.com>
- L:	linux-iio@vger.kernel.org
--- 
-2.17.1
+So let's forget Unifont and "Sarasa Mono" for the time being.
 
+By adding some custom configuration of fontconfig, "Noto Sans Mono
+CJK SC" can be made an alias of "Sarasa Mono", "Unifont", or whatever
+alternative font one wants to try.
+
+An alternative *true* monospace font is just a nice-to-have for
+those who concern PDF of Korean translation, and as I have said
+earlier, it has another major issue of white spaces being ignored
+by xeCJK.
+
+I'll do a v2 along this line.
+
+        Thanks, Akira
+
+> 
+> Thanks,
+> Mauro
+> 
