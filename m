@@ -2,110 +2,108 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 30D8F3B5F0B
-	for <lists+linux-doc@lfdr.de>; Mon, 28 Jun 2021 15:35:05 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id E79863B5F2F
+	for <lists+linux-doc@lfdr.de>; Mon, 28 Jun 2021 15:38:09 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S232251AbhF1Nh3 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 28 Jun 2021 09:37:29 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:52064 "EHLO
+        id S232004AbhF1Nkd (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 28 Jun 2021 09:40:33 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:52908 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S232057AbhF1NhS (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Mon, 28 Jun 2021 09:37:18 -0400
-Received: from mail-qv1-xf2a.google.com (mail-qv1-xf2a.google.com [IPv6:2607:f8b0:4864:20::f2a])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 7CE76C061224;
-        Mon, 28 Jun 2021 06:34:36 -0700 (PDT)
-Received: by mail-qv1-xf2a.google.com with SMTP id c2so9281440qvs.6;
-        Mon, 28 Jun 2021 06:34:36 -0700 (PDT)
+        with ESMTP id S230291AbhF1Nkb (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Mon, 28 Jun 2021 09:40:31 -0400
+Received: from mail-ot1-x335.google.com (mail-ot1-x335.google.com [IPv6:2607:f8b0:4864:20::335])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 79BABC061760;
+        Mon, 28 Jun 2021 06:38:05 -0700 (PDT)
+Received: by mail-ot1-x335.google.com with SMTP id m6-20020a9d1d060000b029044e2d8e855eso16818683otm.8;
+        Mon, 28 Jun 2021 06:38:05 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=from:to:cc:subject:date:message-id:in-reply-to:references;
-        bh=yiVjH7drAo/hpKZvWdxkrEPiw/X+9TJ0YlSENuQlC2o=;
-        b=PZ8R8HiwJE5/ejSU+9j/rybwkmoJkBTRG3WUwXzzaorX5eOdJKTzxH0NP4jfVTwrij
-         G4K2RkyjGFJ3FYzseDQ3FbuQu1wiceMEP4V7GKDwO/VypzJHDNbv2JEXXToxD0IorWwN
-         E9jquJKQyGd1g2Up+lUKY41YT20tzJbCnFo8FZaQ/7c7VtW9rUbcA5BkhZxooYeWPI9h
-         +WID2KnyTbQQqkD075eKVXT0deLY8b/fpRuxCsQ8MKrDHPuIYeO1h/UH/F2p1CJRTJ/F
-         f+OPpGCLjDcP2OQMi5DVZoBusX8xeXqOKgA7QYugyvOqu5Nl6cb6b8aaLHzQjH0yWw2W
-         31Hw==
+        h=sender:subject:from:to:cc:references:message-id:date:user-agent
+         :mime-version:in-reply-to:content-language:content-transfer-encoding;
+        bh=F30OYgj4+7iLgE99N29gEH1Jv/S/6a8BaZUKqUSALnI=;
+        b=r40PAfHYALp0nwUfk8aAp58hHepkPrHFBMJe0DxnkAEB5XQEfCA1327gh8CRcHabQv
+         Jg7c7OAmbEQEyiUKwacKiDPL8mg3XIhJD//d9yHzdEuVLXkEa3ilr+Xclg1ny15QwRMg
+         3wlKTfWza0Iwj6762/I8WS84vpCPl9At79qop0UXgnuC45S8S6Z5WbTbZhv+5DObQaMF
+         CSpw5BGy41WD6GLKgUqQuTQKLdgDfTtN8n1glE8czUx1wQ3jqkmc18Pl5cj6MnGjcgoT
+         5zO5S+MG/QD8mEtSUWd8OKoI1pmuYmY/Lcf6QKbJ+hYZHZK2nsIsmt5WND5H4Q8xgUqU
+         kJog==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-         :references;
-        bh=yiVjH7drAo/hpKZvWdxkrEPiw/X+9TJ0YlSENuQlC2o=;
-        b=H/Drgq28D03z/tlOOCr/VKDZpqmlKhvofj3CHbrrSTryX1zYEAcXjWqGocq0QTF45y
-         a+UNWEzlRMx4vmaetd6DojKgvcY3atq6Ma0jQ8HhfUNxEn1sxSIpXXeVdj+/L8b+DpIK
-         EZeu08l77iQbFYuaCp1ObvDVonjvcOguDtQF+ymUjZFIDYMMq0pivhjBBN6ymDFJkWE5
-         k3bDKivGJ61xovfXP1egXxv5F1cee+/aFUFayC4laPIo0qwMOZT2RB61YGfYOg5IXo0D
-         2PHfFZnCQCL10vAanH9yaiGyWGcX0sb6H08WQ0PxwP0WBWH3ubtMBqX5SY5IUyRSPmQm
-         mKQw==
-X-Gm-Message-State: AOAM532mg+vzt8BlrWcnQcgIn74+iP4grsaTLU4QLKAKD4p5dNYOor+I
-        K/IAARxGWtmpZKmAAUzIwig=
-X-Google-Smtp-Source: ABdhPJyDAQoPlKb5jhvHQW08KCTtJ1TqfaVv2T52ChEMhE1BZDdoIW9wm7CZ86bn2A1PxualmJpMCQ==
-X-Received: by 2002:a0c:eed3:: with SMTP id h19mr468325qvs.39.1624887275681;
-        Mon, 28 Jun 2021 06:34:35 -0700 (PDT)
-Received: from localhost.localdomain (ec2-35-169-212-159.compute-1.amazonaws.com. [35.169.212.159])
-        by smtp.gmail.com with ESMTPSA id h1sm2276030qkm.50.2021.06.28.06.34.34
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 28 Jun 2021 06:34:35 -0700 (PDT)
-From:   SeongJae Park <sj38.park@gmail.com>
-To:     akpm@linux-foundation.org
-Cc:     SeongJae Park <sjpark@amazon.de>, Jonathan.Cameron@Huawei.com,
-        acme@kernel.org, alexander.shishkin@linux.intel.com,
-        amit@kernel.org, benh@kernel.crashing.org,
-        brendanhiggins@google.com, corbet@lwn.net, david@redhat.com,
-        dwmw@amazon.com, elver@google.com, fan.du@intel.com,
-        foersleo@amazon.de, greg@kroah.com, gthelen@google.com,
-        guoju.fgj@alibaba-inc.com, jgowans@amazon.com, mgorman@suse.de,
-        mheyne@amazon.de, minchan@kernel.org, mingo@redhat.com,
-        namhyung@kernel.org, peterz@infradead.org, riel@surriel.com,
-        rientjes@google.com, rostedt@goodmis.org, rppt@kernel.org,
-        shakeelb@google.com, shuah@kernel.org, sieberf@amazon.com,
-        sj38.park@gmail.com, snu@zelle79.org, vbabka@suse.cz,
-        vdavydov.dev@gmail.com, zgf574564920@gmail.com,
-        linux-damon@amazon.com, linux-mm@kvack.org,
-        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org
-Subject: [PATCH v32 13/13] MAINTAINERS: Update for DAMON
-Date:   Mon, 28 Jun 2021 13:33:55 +0000
-Message-Id: <20210628133355.18576-14-sj38.park@gmail.com>
-X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20210628133355.18576-1-sj38.park@gmail.com>
-References: <20210628133355.18576-1-sj38.park@gmail.com>
+        h=x-gm-message-state:sender:subject:from:to:cc:references:message-id
+         :date:user-agent:mime-version:in-reply-to:content-language
+         :content-transfer-encoding;
+        bh=F30OYgj4+7iLgE99N29gEH1Jv/S/6a8BaZUKqUSALnI=;
+        b=rJB1gVCayDn6IvSgUcJw+ZSQ1zTjEIHC9MAtk3zpXoAjDg3cFp0Uytnaf7WYJRpxOZ
+         JpHa/6VjBqRUsdvvEUDj+AOD/fShaTWcIWky8MwCWu8VXg0co7bG4Pzl7GV8RJNuzJe4
+         Hndv03ByN8IshRDFqyt9sksHumCABnklkDsfJn/sBc+d2yffFTCq8rnlyUM9/PoHExQ7
+         1RlPYb5oTUuUzuEnDJJp57AjQPO9aZueH/Hj+qjRGqO2HIUKCc3oxIt8bLdUQ17u3QfU
+         L0AQVrG1e+uZ+5FRtwmqsKAlfIynUORHPg2vnFrlEwqgxRZSNGCusdC+WlD/kwvVb9Ne
+         0zbA==
+X-Gm-Message-State: AOAM533nYSCc6hM0+LiLYsQzcngSHzUmcAsAuIJ15t3/U5/jmTPBmDPJ
+        WLPzFkbnkjuxXZEkSsoJ3hlbCRj15Cc=
+X-Google-Smtp-Source: ABdhPJyXkYegyDC3cV8IirzPMSKGmD6w6CysQu36wb5uVoj7c9C8NxSaXbpjh3P9W2de3c9lUd/TtA==
+X-Received: by 2002:a05:6830:244c:: with SMTP id x12mr16421143otr.24.1624887484884;
+        Mon, 28 Jun 2021 06:38:04 -0700 (PDT)
+Received: from server.roeck-us.net ([2600:1700:e321:62f0:329c:23ff:fee3:9d7c])
+        by smtp.gmail.com with ESMTPSA id s12sm3091507otd.73.2021.06.28.06.38.03
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Mon, 28 Jun 2021 06:38:04 -0700 (PDT)
+Sender: Guenter Roeck <groeck7@gmail.com>
+Subject: Re: [PATCH v5] hwmon: (pmbus) Add support for MPS MP2949A
+From:   Guenter Roeck <linux@roeck-us.net>
+To:     ainux.wang@gmail.com
+Cc:     jdelvare@suse.com, corbet@lwn.net, linux-hwmon@vger.kernel.org,
+        linux-doc@vger.kernel.org, sterlingteng@gmail.com,
+        chenhuacai@kernel.org, chenhuacai@loongson.cn
+References: <20210623005426.15731-1-ainux.wang@gmail.com>
+ <20210624131752.GA2788536@roeck-us.net>
+Message-ID: <08c6376e-2825-52db-9033-6e590fcb9b1a@roeck-us.net>
+Date:   Mon, 28 Jun 2021 06:38:02 -0700
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
+ Thunderbird/78.8.1
+MIME-Version: 1.0
+In-Reply-To: <20210624131752.GA2788536@roeck-us.net>
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Language: en-US
+Content-Transfer-Encoding: 7bit
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-From: SeongJae Park <sjpark@amazon.de>
+On 6/24/21 6:17 AM, Guenter Roeck wrote:
+> On Wed, Jun 23, 2021 at 08:54:26AM +0800, ainux.wang@gmail.com wrote:
+>> From: "Ainux.Wang" <ainux.wang@gmail.com>
+>>
+>> Add support for MP2949A device from Monolithic Power Systems, Inc. (MPS).
+>> This is a triple-loop, digital, multi-phase controller.
+>> This device:
+>> - Supports up to three power rail.
+>> - Provides 6 pulse-width modulations (PWMs), and can be configured up
+>>    to 6-phase operation for Rail A , up to 2-phase operation for Rail B
+>>    and up to 1-phase operation for Rail C.
+>> - The PMBus registers are distributed into three pages: Page 0, Page 1,
+>>    Page 2. Page 0 contains the registers for Rail A and most of the common
+>>    settings for all of the rails. Page 1 contains register information for
+>>    Rail B. Page 2 contains register information for Rail C.
+>> - The MP2949A supports both 5mV VID step and 10mv VID step for IMVP8 and
+>>    IMVP9.
+>>
+>> Signed-off-by: Ainux.Wang <ainux.wang@gmail.com>
+>> ---
+>> v5:
+>> - Moved change log to right here.
+>> v4:
+>> - Removed mp2949a_read_byte_data().
+> 
+> Your other question left me confused. I had previously asked to provide
+> a rationale for filtering out the PMBUS_VOUT_MODE command, and I had
+> stated that "the chip does not support it" is not a valid reason. However,
+> "the chip does not support it but does not report an error when reading
+> it" _is_ a valid reason. So what happens when the PMBus core reads
+> PMBUS_VOUT_MODE ? Does the chip return an error, or some random data ?
+> 
 
-This commit updates MAINTAINERS file for DAMON related files.
+Still waiting for a reply.
 
-Signed-off-by: SeongJae Park <sjpark@amazon.de>
-Reviewed-by: Markus Boehme <markubo@amazon.de>
----
- MAINTAINERS | 12 ++++++++++++
- 1 file changed, 12 insertions(+)
-
-diff --git a/MAINTAINERS b/MAINTAINERS
-index 3d657e1fe359..fd440d494469 100644
---- a/MAINTAINERS
-+++ b/MAINTAINERS
-@@ -5110,6 +5110,18 @@ F:	net/ax25/ax25_out.c
- F:	net/ax25/ax25_timer.c
- F:	net/ax25/sysctl_net_ax25.c
- 
-+DATA ACCESS MONITOR
-+M:	SeongJae Park <sjpark@amazon.de>
-+L:	linux-mm@kvack.org
-+S:	Maintained
-+F:	Documentation/admin-guide/mm/damon/*
-+F:	Documentation/vm/damon/*
-+F:	include/linux/damon.h
-+F:	include/trace/events/damon.h
-+F:	mm/damon/*
-+F:	tools/damon/*
-+F:	tools/testing/selftests/damon/*
-+
- DAVICOM FAST ETHERNET (DMFE) NETWORK DRIVER
- L:	netdev@vger.kernel.org
- S:	Orphan
--- 
-2.17.1
+Guenter
 
