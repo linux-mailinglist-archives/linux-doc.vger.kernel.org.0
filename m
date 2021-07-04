@@ -2,66 +2,104 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 84F1C3BACFF
-	for <lists+linux-doc@lfdr.de>; Sun,  4 Jul 2021 14:10:48 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 3A7493BAD37
+	for <lists+linux-doc@lfdr.de>; Sun,  4 Jul 2021 15:53:12 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S229492AbhGDMNV (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Sun, 4 Jul 2021 08:13:21 -0400
-Received: from mail.slpost.lk ([203.94.75.238]:47760 "EHLO slpost.lk"
-        rhost-flags-OK-OK-OK-FAIL) by vger.kernel.org with ESMTP
-        id S229530AbhGDMNU (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Sun, 4 Jul 2021 08:13:20 -0400
-X-Greylist: delayed 28158 seconds by postgrey-1.27 at vger.kernel.org; Sun, 04 Jul 2021 08:13:12 EDT
-Received: from localhost (localhost.localdomain [127.0.0.1])
-        by slpost.lk (Postfix) with ESMTP id AF636EA8E39;
-        Sat,  3 Jul 2021 21:01:00 +0530 (IST)
-X-Virus-Scanned: amavisd-new at slpost.lk
-Received: from slpost.lk ([127.0.0.1])
-        by localhost (slpost.lk [127.0.0.1]) (amavisd-new, port 10024)
-        with ESMTP id rKepYC78W5ey; Sat,  3 Jul 2021 21:01:00 +0530 (IST)
-Received: from slpost.lk (slpost.lk [192.168.1.246])
-        by slpost.lk (Postfix) with ESMTP id 5AEEFEA8E26;
-        Sat,  3 Jul 2021 21:00:57 +0530 (IST)
-Date:   Sat, 03 Jul 2021 21:00:57 +0530 (IST)
-From:   ANTONY BLINKEN <ds.gqn@slpost.lk>
-Reply-To: ANTONY BLINKEN <info@ablinken.us>
-Subject: =?utf-8?B?7LC46rOgIDog64u57Iug7J2AIOuvuOq1rSDrs7Xqtozsl5Ag7ISg7KCV65CY7JeI7Iq164uI64ukLg==?=
-Message-ID: <5ec98c18-4829-49ac-b5dc-522d85cf0c79@slpost.lk>
-In-Reply-To: <5be7c833-5047-49bd-950a-efaed02221eb@slpost.lk>
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: base64
+        id S229530AbhGDNzq (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Sun, 4 Jul 2021 09:55:46 -0400
+Received: from mx.kolabnow.com ([95.128.36.40]:64198 "EHLO mx.kolabnow.com"
+        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
+        id S229502AbhGDNzp (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Sun, 4 Jul 2021 09:55:45 -0400
+Received: from localhost (unknown [127.0.0.1])
+        by ext-mx-out003.mykolab.com (Postfix) with ESMTP id CCC5B403CB;
+        Sun,  4 Jul 2021 15:53:06 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kolabnow.com; h=
+        message-id:references:in-reply-to:subject:subject:from:from:date
+        :date:content-transfer-encoding:content-type:content-type
+        :mime-version:received:received:received; s=dkim20160331; t=
+        1625406786; x=1627221187; bh=8uVUSMPNAeWl5eb58VReYcTTAmLLAbd7tmA
+        CfUIIQmo=; b=UOQWxpjrGTFlVsjja0+x3lb0nQnhgSZQbXR2ke9xvMdqO5H1VQY
+        qF6/uLh9On/d/Xa2JLLFRRSQ+WMXxkH7IFdoaM+ojuFwM7Yk8X2D61dBZVNyZQTm
+        fk00rIJqxBl7lSLo7S/2HO4UCKcKfc2OePUcQ+OAtjpA4TxUX8sAq/RvtZSzh/F+
+        ea3xAaonxRtD6Bt+dMylSbtY8GTtYFMNNlN8g2oB39mi3uOScjJ392iLcXtd8C9v
+        8QrvOsiipHmmtXraB5KB54aFjsbTe/zSEiSp9beBiYmcC1iSWRa2Ke4MIXFlU5Mi
+        3WBdNr/AdahqmOEnYBGhl7EMWbPxLYxIxyVZxPjm2je1oigPfVuXN40Nzfobt/eV
+        hS9iaEi+G+nw2BTR/EoDPiJX9G8BNnenKkmNhSJx72LoN4YDXIEFgg33jOnfkta5
+        XJ/4W/4aLqVZAiZEjZps4w0M1LymfgmTD8rPhaZIJceu4ZKDxYzsgEaserAtQx53
+        X6fgUjNSIo3O4d3XOY8Ap8+y98OMKK3O44Hn/KaaqOXnGFzGFoExufKOVa339Aa9
+        PNQTfc2F4Mk10BGwvpMYiap5oByYi0aTnRQALRPF8u+ozu6IOdZgOAXJgjgyTI7J
+        8h6bK3ikp5qvQKYjZq0Z3i50bTWwWs9Lq/JQrbo3SPaNNu5TRvmW3Huc=
+X-Virus-Scanned: amavisd-new at mykolab.com
+X-Spam-Flag: NO
+X-Spam-Score: -1.9
+X-Spam-Level: 
+X-Spam-Status: No, score=-1.9 tagged_above=-10 required=5
+        tests=[BAYES_00=-1.9] autolearn=ham autolearn_force=no
+Received: from mx.kolabnow.com ([127.0.0.1])
+        by localhost (ext-mx-out003.mykolab.com [127.0.0.1]) (amavisd-new, port 10024)
+        with ESMTP id amjP_pqs2F4a; Sun,  4 Jul 2021 15:53:06 +0200 (CEST)
+Received: from int-mx002.mykolab.com (unknown [10.9.13.2])
+        by ext-mx-out003.mykolab.com (Postfix) with ESMTPS id 040CD41869;
+        Sun,  4 Jul 2021 15:52:52 +0200 (CEST)
+Received: from int-subm001.mykolab.com (unknown [10.9.37.1])
+        by int-mx002.mykolab.com (Postfix) with ESMTPS id 736454BEB;
+        Sun,  4 Jul 2021 15:52:43 +0200 (CEST)
 MIME-Version: 1.0
-X-Originating-IP: [192.168.1.253]
-X-Mailer: Zimbra 7.1.2_GA_3268 (ZimbraWebClient - FF3.0 (Win)/7.1.2_GA_3268)
-To:     undisclosed-recipients:;
+Content-Type: text/plain; charset=US-ASCII;
+ format=flowed
+Content-Transfer-Encoding: 7bit
+Date:   Sun, 04 Jul 2021 15:52:41 +0200
+From:   Federico Vaga <federico.vaga@vaga.pv.it>
+To:     Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
+Cc:     Jonathan Corbet <corbet@lwn.net>,
+        Peter Zijlstra <peterz@infradead.org>,
+        Linux Doc Mailing List <linux-doc@vger.kernel.org>,
+        "Guilherme G. Piccoli" <gpiccoli@canonical.com>,
+        Andrew Morton <akpm@linux-foundation.org>,
+        Daniel Borkmann <daniel@iogearbox.net>,
+        Kees Cook <keescook@chromium.org>,
+        Lepton Wu <ytht.net@gmail.com>, Mel Gorman <mgorman@suse.de>,
+        Qais Yousef <qais.yousef@arm.com>,
+        Randy Dunlap <rdunlap@infradead.org>,
+        Rasmus Villemoes <linux@rasmusvillemoes.dk>,
+        Stephen Kitt <steve@sk2.org>, Wang Qing <wangqing@vivo.com>,
+        linux-kernel@vger.kernel.org
+Subject: Re: [PATCH 07/12] docs: accounting: update delay-accounting.rst
+ reference
+In-Reply-To: <20210603095632.35ab9fee@coco.lan>
+References: <cover.1622648507.git.mchehab+huawei@kernel.org>
+ <629b0bd21d02c8faef9a6d17d9eee8ff612715e0.1622648507.git.mchehab+huawei@kernel.org>
+ <YLe0BQcrnfRgH1dV@hirez.programming.kicks-ass.net>
+ <20210602200121.64a828a1@coco.lan> <871r9k6rmy.fsf@meer.lwn.net>
+ <20210602221940.7e0a6135@coco.lan> <20210603095632.35ab9fee@coco.lan>
+Message-ID: <2566fa8cfbfc89aed22d7a8d20e303a4@vaga.pv.it>
+X-Sender: federico.vaga@vaga.pv.it
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-7LaV7ZWY7ZWp64uI64ukIQogCuuvuOq1rSDrs7Xqtowg7ZSE66Gc6re4656o7JeQ7IScIOy0nSAk
-IDUsMDAwLDAwMC4wMOydhOuwm+ydhCDsiJgg7J6I64+E66GdIOq3gO2VmOydmCDsnbTrqZTsnbwg
-7KO87IaM66W8IO2Gte2VtCDqt4DtlZjqsIAg7ISg7KCV65CY7JeI7J2M7J2EIOyVjOugpCDrk5zr
-pqzqsozrkJjslrQg6riw7IGY6rKMIOyDneqwge2VqeuLiOuLpC4g7LC47KGwIOuyiO2YuOuKlCAo
-VS5TLUxPVFRPLTU1Nzk1KeyeheuLiOuLpC4KCuuqqOuToCDsiJjtmJzsnpDripQg7J247YSw64S3
-7J2EIO2Gte2VtCA1IOyynOunjCDqsJzsnZgg7J2066mU7J28IOyjvOyGjOuhnCDsnpHshLHrkJwg
-6riA66Gc67KMIOustOyekeychCDthrXtlakg7Iuc7Iqk7YWc7J2EIO2Gte2VtCDshKDsoJXrkJjs
-l4jsnLzrqbAsIO2WieyatOydmCDri7nssqjsnpDripQg7Yuw7LyT7J2EIOq1rOunpO2VmOqxsOuC
-mOydtCDrs7Xqtowg7ZSE66Gc6re4656o7JeQ7IScIOuLueyyqOydhCDsi6Dssq3tlaAg7ZWE7JqU
-6rCAIOyXhuyKteuLiOuLpC4g6reA7ZWY7J2YIOydtOumhOqzvCDqsJnsnYAg7KCE7LK0IOyEuOu2
-gCDsoJXrs7Trpbwg7KCE64us7ZWY7Iut7Iuc7JikIDog7KCE7ZmUIOuyiO2YuCA6IOuCmOydtCA6
-IOyEseuzhCA6IOyjvOyGjCDrsI8g6reA7ZWY7J2YIO2MjOydvCDssLjsobAsIOuLueyyqOq4iCDs
-p4Drtogg7LKY66asIOuwjyDsp4DrtoguCgrshLjrtoAg7KCV67O066W8IOuLpOydjCDso7zshozr
-oZwg67O064K07KO87Iut7Iuc7JikLgrri7Tri7nsnpAgOiBXYWxseSBBZGV5ZW1vIOyUqC4KPT09
-IOyerOustOu2gCDssKjqtIAgPT09CuydtOuplOydvCA6IGluZm9AZHN0d2FsbHkudXMK7KCE7ZmU
-IDogKzEgKDQwNSkgNjg5LTc3MjYKCuq3gO2VmOydmCDsnbTrqZTsnbzsnbQg7J6t7Yyf7J2EIO2a
-jeuTne2WiOyKteuLiOuLpC4g64uk7IucIO2VnCDrsogg7LaV7ZWY65Oc66a964uI64ukLgogCuq3
-gO2VmOydmCDshJzruYTsiqQsCkFudG9ueSBCbGlua2VuICjrr7jqta0g6rWt66y0IOyepeq0gCkK
-66+46rWtIOuzteq2jCDstInsp4TsnpAuIMKpIDIwMjEuCioqKioqKioqKioqKioqKioqKioqKioq
-KioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioq
-KioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioq
-KioqKioqKgrssLjqs6AgOiDqt4DtlZjsnZgg7J247YSw64S3IOyEnOu5hOyKpCDsoJzqs7Ug7JeF
-7LK06rCAIOq1rO2YhCDtlZwg7KCc7ZWcIOyCrO2VreycvOuhnCDsnbjtlbQg7Iqk7Yy4IC8g64yA
-65+JIO2PtOuNlOyXkOydtCDrqZTsi5zsp4Drpbwg7IiY7IugIO2VnCDqsr3smrAsIOuLueyCrCAo
-67O16raMIO2MgCnripQg6reA7ZWY6rCAIOynhOygleycvOuhnCDsspjrpqwg7ZWgIOqyg+ydhCDs
-tInqtaztlanri4jri6QuIOuvuOq1rSDrs7Xqtowg7LaU7LKo7JeQIOuNlCDrp47snbQg7LC47Jes
-7ZWY66Ck66m0IHd3dy5sb3R0ZXJ5dXNhLmNvbeydhCDrsKnrrLjtlZjsi63si5zsmKQu
+Hi Mauro,
+
+and sorry for the late reply
+
+On 2021-06-03 09:56, Mauro Carvalho Chehab wrote:
+> Some manual work is needed, as a couple of replacements occurred inside
+> tables. I also need to check if automarkup.py got everything, including
+> the ones inside tables.
+> 
+> I'm in doubt with regards to translations. There, the tag is used
+> to point to the original translation, like on
+> Documentation/translations/it_IT/core-api/symbol-namespaces.rst:
+> 
+> 	:Original: :doc:`../../../core-api/symbol-namespaces`
+> 	:Translator: Federico Vaga <federico.vaga@vaga.pv.it>
+> 
+> My personal preference would be to keep using it for translations.
+
+Why is this your preference? I would prefer to have a consistent style 
+everywhere.
+If ":doc:" is now discouraged, then do not use it. What am I missing?
+
+-- 
+Federico Vaga
