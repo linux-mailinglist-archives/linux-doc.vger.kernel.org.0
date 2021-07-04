@@ -2,42 +2,43 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 052683BB0B7
-	for <lists+linux-doc@lfdr.de>; Mon,  5 Jul 2021 01:09:12 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 91EFA3BB142
+	for <lists+linux-doc@lfdr.de>; Mon,  5 Jul 2021 01:10:18 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S231263AbhGDXJU (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Sun, 4 Jul 2021 19:09:20 -0400
-Received: from mail.kernel.org ([198.145.29.99]:46062 "EHLO mail.kernel.org"
+        id S232297AbhGDXLO (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Sun, 4 Jul 2021 19:11:14 -0400
+Received: from mail.kernel.org ([198.145.29.99]:47610 "EHLO mail.kernel.org"
         rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S231519AbhGDXIy (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Sun, 4 Jul 2021 19:08:54 -0400
-Received: by mail.kernel.org (Postfix) with ESMTPSA id EFC9E6193E;
-        Sun,  4 Jul 2021 23:06:13 +0000 (UTC)
+        id S232391AbhGDXKO (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Sun, 4 Jul 2021 19:10:14 -0400
+Received: by mail.kernel.org (Postfix) with ESMTPSA id 530BD61283;
+        Sun,  4 Jul 2021 23:07:36 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-        s=k20201202; t=1625439974;
-        bh=Vpgq6X5cPfItKhrQdkf+YbXlVg8r9CqVZm+PqciBKyI=;
+        s=k20201202; t=1625440057;
+        bh=VuBZkuYORyCKJqQ3ug2x8UyRbKpNijoZunM6p8muHn4=;
         h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-        b=gHVuM86aw0nY2XBLfliHAE6+vHWQuRS1VhQtfYNxCk8R4wrVMNxTmo/F+xflIL1Lo
-         52TlSC7LgqbFOB0AmVmH7oRITFP7adLZDs8IzJHbD3lxklrTabiPBHviAuNjh7efZe
-         l6EP50TUgkNu2nX/zMhtNtZ269RHAdHqTywPl+nja02QB/Q+Bp2iLvmTEXgYH+VPZa
-         uney6/NnwLmDddk4KwrNaDFhfeTH4vYLLuU42k3JM9kX0+67STHGxvNkKdq4o3ypdh
-         epZGwyjXQbvk6deddhbBWXY/uFQ3yPS6ZeOI3OvFV8bN0nqD4hWYxpTBFU/sqWNd1/
-         zE41IdEzOTcIQ==
+        b=SdWL3FTGhB7PsiPOCgTS1GVbzdLCQcI3Ci77Ql6v6g+osfFDeM/xnKGc/Y9zjlWNL
+         SOdtYUjt0+UOnqufeARy0aw7HMiygCIFfs4yU5DtungBszTBsZWFWGq3WmSw3rz+PF
+         S7uexF1wTaYINXOjMh7KUMHVGtko6UHm31k8Qr2gr9DdYj6bTjhYkV3FCclgq7GLEz
+         k9WoSZV807QSd4gjeLjnWmUbdy2ipNDr+88CUlBTz9wX2bTe+TFDeaeyUGc4DX9+e5
+         Fqc+nQLv78I8Fd9C9C8Xxb4Hk8HjZuGtO6C7SyUO+WeyUC7ZpBfMVesorGyBzwuzLB
+         WvfteTU4pD6BQ==
 From:   Sasha Levin <sashal@kernel.org>
 To:     linux-kernel@vger.kernel.org, stable@vger.kernel.org
-Cc:     Rodrigo Campos <rodrigo@kinvolk.io>,
-        Sargun Dhillon <sargun@sargun.me>,
-        Tycho Andersen <tycho@tycho.pizza>,
-        Christian Brauner <christian.brauner@ubuntu.com>,
-        Kees Cook <keescook@chromium.org>,
-        Sasha Levin <sashal@kernel.org>, linux-doc@vger.kernel.org
-Subject: [PATCH AUTOSEL 5.13 85/85] seccomp: Support atomic "addfd + send reply"
-Date:   Sun,  4 Jul 2021 19:04:20 -0400
-Message-Id: <20210704230420.1488358-85-sashal@kernel.org>
+Cc:     Guenter Roeck <linux@roeck-us.net>,
+        =?UTF-8?q?Jan=20Kundr=C3=A1t?= <jan.kundrat@cesnet.cz>,
+        =?UTF-8?q?V=C3=A1clav=20Kubern=C3=A1t?= <kubernat@cesnet.cz>,
+        =?UTF-8?q?V=C3=A1clav=20Kubern=C3=A1t?= <kubernat@ceesnet.cz>,
+        Sasha Levin <sashal@kernel.org>, linux-hwmon@vger.kernel.org,
+        linux-doc@vger.kernel.org
+Subject: [PATCH AUTOSEL 5.12 60/80] hwmon: (max31790) Report correct current pwm duty cycles
+Date:   Sun,  4 Jul 2021 19:05:56 -0400
+Message-Id: <20210704230616.1489200-60-sashal@kernel.org>
 X-Mailer: git-send-email 2.30.2
-In-Reply-To: <20210704230420.1488358-1-sashal@kernel.org>
-References: <20210704230420.1488358-1-sashal@kernel.org>
+In-Reply-To: <20210704230616.1489200-1-sashal@kernel.org>
+References: <20210704230616.1489200-1-sashal@kernel.org>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 X-stable: review
 X-Patchwork-Hint: Ignore
 Content-Transfer-Encoding: 8bit
@@ -45,205 +46,71 @@ Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-From: Rodrigo Campos <rodrigo@kinvolk.io>
+From: Guenter Roeck <linux@roeck-us.net>
 
-[ Upstream commit 0ae71c7720e3ae3aabd2e8a072d27f7bd173d25c ]
+[ Upstream commit 897f6339893b741a5d68ae8e2475df65946041c2 ]
 
-Alban Crequy reported a race condition userspace faces when we want to
-add some fds and make the syscall return them[1] using seccomp notify.
+The MAX31790 has two sets of registers for pwm duty cycles, one to request
+a duty cycle and one to read the actual current duty cycle. Both do not
+have to be the same.
 
-The problem is that currently two different ioctl() calls are needed by
-the process handling the syscalls (agent) for another userspace process
-(target): SECCOMP_IOCTL_NOTIF_ADDFD to allocate the fd and
-SECCOMP_IOCTL_NOTIF_SEND to return that value. Therefore, it is possible
-for the agent to do the first ioctl to add a file descriptor but the
-target is interrupted (EINTR) before the agent does the second ioctl()
-call.
+When reporting the pwm duty cycle to the user, the actual pwm duty cycle
+from pwm duty cycle registers needs to be reported. When setting it, the
+pwm target duty cycle needs to be written. Since we don't know the actual
+pwm duty cycle after a target pwm duty cycle has been written, set the
+valid flag to false to indicate that actual pwm duty cycle should be read
+from the chip instead of using cached values.
 
-This patch adds a flag to the ADDFD ioctl() so it adds the fd and
-returns that value atomically to the target program, as suggested by
-Kees Cook[2]. This is done by simply allowing
-seccomp_do_user_notification() to add the fd and return it in this case.
-Therefore, in this case the target wakes up from the wait in
-seccomp_do_user_notification() either to interrupt the syscall or to add
-the fd and return it.
-
-This "allocate an fd and return" functionality is useful for syscalls
-that return a file descriptor only, like connect(2). Other syscalls that
-return a file descriptor but not as return value (or return more than
-one fd), like socketpair(), pipe(), recvmsg with SCM_RIGHTs, will not
-work with this flag.
-
-This effectively combines SECCOMP_IOCTL_NOTIF_ADDFD and
-SECCOMP_IOCTL_NOTIF_SEND into an atomic opteration. The notification's
-return value, nor error can be set by the user. Upon successful invocation
-of the SECCOMP_IOCTL_NOTIF_ADDFD ioctl with the SECCOMP_ADDFD_FLAG_SEND
-flag, the notifying process's errno will be 0, and the return value will
-be the file descriptor number that was installed.
-
-[1]: https://lore.kernel.org/lkml/CADZs7q4sw71iNHmV8EOOXhUKJMORPzF7thraxZYddTZsxta-KQ@mail.gmail.com/
-[2]: https://lore.kernel.org/lkml/202012011322.26DCBC64F2@keescook/
-
-Signed-off-by: Rodrigo Campos <rodrigo@kinvolk.io>
-Signed-off-by: Sargun Dhillon <sargun@sargun.me>
-Acked-by: Tycho Andersen <tycho@tycho.pizza>
-Acked-by: Christian Brauner <christian.brauner@ubuntu.com>
-Signed-off-by: Kees Cook <keescook@chromium.org>
-Link: https://lore.kernel.org/r/20210517193908.3113-4-sargun@sargun.me
+Cc: Jan Kundrát <jan.kundrat@cesnet.cz>
+Cc: Václav Kubernát <kubernat@cesnet.cz>
+Signed-off-by: Guenter Roeck <linux@roeck-us.net>
+Tested-by: Václav Kubernát <kubernat@ceesnet.cz>
+Reviewed-by: Jan Kundrát <jan.kundrat@cesnet.cz>
+Link: https://lore.kernel.org/r/20210526154022.3223012-3-linux@roeck-us.net
 Signed-off-by: Sasha Levin <sashal@kernel.org>
 ---
- .../userspace-api/seccomp_filter.rst          | 12 +++++
- include/uapi/linux/seccomp.h                  |  1 +
- kernel/seccomp.c                              | 51 ++++++++++++++++---
- 3 files changed, 58 insertions(+), 6 deletions(-)
+ Documentation/hwmon/max31790.rst | 3 ++-
+ drivers/hwmon/max31790.c         | 6 +++---
+ 2 files changed, 5 insertions(+), 4 deletions(-)
 
-diff --git a/Documentation/userspace-api/seccomp_filter.rst b/Documentation/userspace-api/seccomp_filter.rst
-index 6efb41cc8072..d61219889e49 100644
---- a/Documentation/userspace-api/seccomp_filter.rst
-+++ b/Documentation/userspace-api/seccomp_filter.rst
-@@ -259,6 +259,18 @@ and ``ioctl(SECCOMP_IOCTL_NOTIF_SEND)`` a response, indicating what should be
- returned to userspace. The ``id`` member of ``struct seccomp_notif_resp`` should
- be the same ``id`` as in ``struct seccomp_notif``.
- 
-+Userspace can also add file descriptors to the notifying process via
-+``ioctl(SECCOMP_IOCTL_NOTIF_ADDFD)``. The ``id`` member of
-+``struct seccomp_notif_addfd`` should be the same ``id`` as in
-+``struct seccomp_notif``. The ``newfd_flags`` flag may be used to set flags
-+like O_EXEC on the file descriptor in the notifying process. If the supervisor
-+wants to inject the file descriptor with a specific number, the
-+``SECCOMP_ADDFD_FLAG_SETFD`` flag can be used, and set the ``newfd`` member to
-+the specific number to use. If that file descriptor is already open in the
-+notifying process it will be replaced. The supervisor can also add an FD, and
-+respond atomically by using the ``SECCOMP_ADDFD_FLAG_SEND`` flag and the return
-+value will be the injected file descriptor number.
-+
- It is worth noting that ``struct seccomp_data`` contains the values of register
- arguments to the syscall, but does not contain pointers to memory. The task's
- memory is accessible to suitably privileged traces via ``ptrace()`` or
-diff --git a/include/uapi/linux/seccomp.h b/include/uapi/linux/seccomp.h
-index 6ba18b82a02e..78074254ab98 100644
---- a/include/uapi/linux/seccomp.h
-+++ b/include/uapi/linux/seccomp.h
-@@ -115,6 +115,7 @@ struct seccomp_notif_resp {
- 
- /* valid flags for seccomp_notif_addfd */
- #define SECCOMP_ADDFD_FLAG_SETFD	(1UL << 0) /* Specify remote fd */
-+#define SECCOMP_ADDFD_FLAG_SEND		(1UL << 1) /* Addfd and return it, atomically */
- 
- /**
-  * struct seccomp_notif_addfd
-diff --git a/kernel/seccomp.c b/kernel/seccomp.c
-index 9f58049ac16d..057e17f3215d 100644
---- a/kernel/seccomp.c
-+++ b/kernel/seccomp.c
-@@ -107,6 +107,7 @@ struct seccomp_knotif {
-  *      installing process should allocate the fd as normal.
-  * @flags: The flags for the new file descriptor. At the moment, only O_CLOEXEC
-  *         is allowed.
-+ * @ioctl_flags: The flags used for the seccomp_addfd ioctl.
-  * @ret: The return value of the installing process. It is set to the fd num
-  *       upon success (>= 0).
-  * @completion: Indicates that the installing process has completed fd
-@@ -118,6 +119,7 @@ struct seccomp_kaddfd {
- 	struct file *file;
- 	int fd;
- 	unsigned int flags;
-+	__u32 ioctl_flags;
- 
- 	union {
- 		bool setfd;
-@@ -1065,18 +1067,37 @@ static u64 seccomp_next_notify_id(struct seccomp_filter *filter)
- 	return filter->notif->next_id++;
- }
- 
--static void seccomp_handle_addfd(struct seccomp_kaddfd *addfd)
-+static void seccomp_handle_addfd(struct seccomp_kaddfd *addfd, struct seccomp_knotif *n)
- {
-+	int fd;
-+
- 	/*
- 	 * Remove the notification, and reset the list pointers, indicating
- 	 * that it has been handled.
- 	 */
- 	list_del_init(&addfd->list);
- 	if (!addfd->setfd)
--		addfd->ret = receive_fd(addfd->file, addfd->flags);
-+		fd = receive_fd(addfd->file, addfd->flags);
- 	else
--		addfd->ret = receive_fd_replace(addfd->fd, addfd->file,
--						addfd->flags);
-+		fd = receive_fd_replace(addfd->fd, addfd->file, addfd->flags);
-+	addfd->ret = fd;
-+
-+	if (addfd->ioctl_flags & SECCOMP_ADDFD_FLAG_SEND) {
-+		/* If we fail reset and return an error to the notifier */
-+		if (fd < 0) {
-+			n->state = SECCOMP_NOTIFY_SENT;
-+		} else {
-+			/* Return the FD we just added */
-+			n->flags = 0;
-+			n->error = 0;
-+			n->val = fd;
-+		}
-+	}
-+
-+	/*
-+	 * Mark the notification as completed. From this point, addfd mem
-+	 * might be invalidated and we can't safely read it anymore.
-+	 */
- 	complete(&addfd->completion);
- }
- 
-@@ -1120,7 +1141,7 @@ static int seccomp_do_user_notification(int this_syscall,
- 						 struct seccomp_kaddfd, list);
- 		/* Check if we were woken up by a addfd message */
- 		if (addfd)
--			seccomp_handle_addfd(addfd);
-+			seccomp_handle_addfd(addfd, &n);
- 
- 	}  while (n.state != SECCOMP_NOTIFY_REPLIED);
- 
-@@ -1581,7 +1602,7 @@ static long seccomp_notify_addfd(struct seccomp_filter *filter,
- 	if (addfd.newfd_flags & ~O_CLOEXEC)
- 		return -EINVAL;
- 
--	if (addfd.flags & ~SECCOMP_ADDFD_FLAG_SETFD)
-+	if (addfd.flags & ~(SECCOMP_ADDFD_FLAG_SETFD | SECCOMP_ADDFD_FLAG_SEND))
- 		return -EINVAL;
- 
- 	if (addfd.newfd && !(addfd.flags & SECCOMP_ADDFD_FLAG_SETFD))
-@@ -1591,6 +1612,7 @@ static long seccomp_notify_addfd(struct seccomp_filter *filter,
- 	if (!kaddfd.file)
- 		return -EBADF;
- 
-+	kaddfd.ioctl_flags = addfd.flags;
- 	kaddfd.flags = addfd.newfd_flags;
- 	kaddfd.setfd = addfd.flags & SECCOMP_ADDFD_FLAG_SETFD;
- 	kaddfd.fd = addfd.newfd;
-@@ -1616,6 +1638,23 @@ static long seccomp_notify_addfd(struct seccomp_filter *filter,
- 		goto out_unlock;
- 	}
- 
-+	if (addfd.flags & SECCOMP_ADDFD_FLAG_SEND) {
-+		/*
-+		 * Disallow queuing an atomic addfd + send reply while there are
-+		 * some addfd requests still to process.
-+		 *
-+		 * There is no clear reason to support it and allows us to keep
-+		 * the loop on the other side straight-forward.
-+		 */
-+		if (!list_empty(&knotif->addfd)) {
-+			ret = -EBUSY;
-+			goto out_unlock;
-+		}
-+
-+		/* Allow exactly only one reply */
-+		knotif->state = SECCOMP_NOTIFY_REPLIED;
-+	}
-+
- 	list_add(&kaddfd.list, &knotif->addfd);
- 	complete(&knotif->ready);
- 	mutex_unlock(&filter->notify_lock);
+diff --git a/Documentation/hwmon/max31790.rst b/Documentation/hwmon/max31790.rst
+index f301385d8cef..54ff0f49e28f 100644
+--- a/Documentation/hwmon/max31790.rst
++++ b/Documentation/hwmon/max31790.rst
+@@ -39,5 +39,6 @@ fan[1-12]_input    RO  fan tachometer speed in RPM
+ fan[1-12]_fault    RO  fan experienced fault
+ fan[1-6]_target    RW  desired fan speed in RPM
+ pwm[1-6]_enable    RW  regulator mode, 0=disabled, 1=manual mode, 2=rpm mode
+-pwm[1-6]           RW  fan target duty cycle (0-255)
++pwm[1-6]           RW  read: current pwm duty cycle,
++                       write: target pwm duty cycle (0-255)
+ ================== === =======================================================
+diff --git a/drivers/hwmon/max31790.c b/drivers/hwmon/max31790.c
+index 86e6c71db685..8ad7a45bfe68 100644
+--- a/drivers/hwmon/max31790.c
++++ b/drivers/hwmon/max31790.c
+@@ -104,7 +104,7 @@ static struct max31790_data *max31790_update_device(struct device *dev)
+ 				data->tach[NR_CHANNEL + i] = rv;
+ 			} else {
+ 				rv = i2c_smbus_read_word_swapped(client,
+-						MAX31790_REG_PWMOUT(i));
++						MAX31790_REG_PWM_DUTY_CYCLE(i));
+ 				if (rv < 0)
+ 					goto abort;
+ 				data->pwm[i] = rv;
+@@ -299,10 +299,10 @@ static int max31790_write_pwm(struct device *dev, u32 attr, int channel,
+ 			err = -EINVAL;
+ 			break;
+ 		}
+-		data->pwm[channel] = val << 8;
++		data->valid = false;
+ 		err = i2c_smbus_write_word_swapped(client,
+ 						   MAX31790_REG_PWMOUT(channel),
+-						   data->pwm[channel]);
++						   val << 8);
+ 		break;
+ 	case hwmon_pwm_enable:
+ 		fan_config = data->fan_config[channel];
 -- 
 2.30.2
 
