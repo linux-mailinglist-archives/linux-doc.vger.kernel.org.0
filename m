@@ -2,174 +2,105 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 007E83BD8B9
-	for <lists+linux-doc@lfdr.de>; Tue,  6 Jul 2021 16:43:56 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id AFB153BD931
+	for <lists+linux-doc@lfdr.de>; Tue,  6 Jul 2021 16:56:50 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S233053AbhGFOqR (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 6 Jul 2021 10:46:17 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:34198 "EHLO
-        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S233014AbhGFOqF (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 6 Jul 2021 10:46:05 -0400
-Received: from mail-pf1-x42e.google.com (mail-pf1-x42e.google.com [IPv6:2607:f8b0:4864:20::42e])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 621FBC05BD14;
-        Tue,  6 Jul 2021 07:34:56 -0700 (PDT)
-Received: by mail-pf1-x42e.google.com with SMTP id f20so11743189pfa.1;
-        Tue, 06 Jul 2021 07:34:56 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=from:to:subject:date:message-id:in-reply-to:references:mime-version
-         :content-transfer-encoding;
-        bh=WYmJLY9bc2BaxeUu/qUZgzgqMbq0sZhiO+uLD5KZhTI=;
-        b=ZNkrNEr4KGmj/2fbW0eQVTlsGzbWi+ILb/P7fMlYTTx3z8cJ4p3qPVCAK5AtpSjjkG
-         qmFt8s4FqTZquMymHNcfGjyBL39NROLfYMUK6QayOInSZxdscwD8o4f+srDi7tonnvDk
-         bdX0W38B6Rm0Y4UxV/T774m12JqoN/OC5O5ZpBZflMzHywoiIgKG4z2alTqAPqKGfmyG
-         lZtuy+PahUk7bVkk7A1Q7UdFqt1NU8jlGa25x5hB9beiJLpkKdVCaJav4eGlxl84H5R7
-         BDdhxWcTv4wuO5vUiZFs8gJ5bIhrpL2AbLKKNUoPc9pJc8StWdgnzeGQo3hV0S8Ewznq
-         Dw4w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
-         :references:mime-version:content-transfer-encoding;
-        bh=WYmJLY9bc2BaxeUu/qUZgzgqMbq0sZhiO+uLD5KZhTI=;
-        b=icWV8e4VPtKle9fieclclzzZbOj1v1UReprMNA0xb3ENjtheNQ4yIvD9fPntvjwHwI
-         WnBCI4rCW9ja+krr66NtOFeETB1Era6yTWUvXtHd7wFySZCWOqU/4I5J+V83k9Xa9yZi
-         XZX24e7v/akdIpM15Pi5y4wDZAQuP8hiyuj1foxHCgMAa6YFz2XRUpbwrzoB+ZFFIxNS
-         g5iv21WQ5biFjGzcMmqFCoWlMTrYmhk73+wwsZp5q8dgbleVIr2Z0iGaZf88+VBbUX6F
-         ijLhPmTQACffHaWnWKuXxyXtnpAyISzDlAN8OlZIb3jbHRsnSrUo9MZLKE22hc8iGWqI
-         aLvA==
-X-Gm-Message-State: AOAM533VpiDT3Iohl01fNffjio5kIkIzPHe74rWHFfE1BWZgXqQ1LEsU
-        8JaKRIDGeZlORW9RvdNQMR3aZDNjIbCSwSM8q4s=
-X-Google-Smtp-Source: ABdhPJxEIhdcXf+hrUDe0sA7qtmyBbbwvJXcsFj8Gz6ye56LODeb0rpJ8lI5n8p4reZ8UtNRbgYlHQ==
-X-Received: by 2002:a62:37c2:0:b029:2ff:f7dd:1620 with SMTP id e185-20020a6237c20000b02902fff7dd1620mr20773671pfa.33.1625582095926;
-        Tue, 06 Jul 2021 07:34:55 -0700 (PDT)
-Received: from localhost.lan ([2400:4070:175b:7500::7a7])
-        by smtp.gmail.com with ESMTPSA id e2sm19785718pgh.5.2021.07.06.07.34.54
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 06 Jul 2021 07:34:54 -0700 (PDT)
-Received: from x2.lan (localhost [127.0.0.1])
-        by localhost.lan (Postfix) with ESMTPSA id 89D18902A2B;
-        Tue,  6 Jul 2021 14:34:52 +0000 (GMT)
-From:   Vincent Pelletier <plr.vincent@gmail.com>
-To:     Jean Delvare <jdelvare@suse.com>,
-        Guenter Roeck <linux@roeck-us.net>,
-        Jonathan Corbet <corbet@lwn.net>,
-        Support Opensource <support.opensource@diasemi.com>,
-        Lee Jones <lee.jones@linaro.org>, linux-hwmon@vger.kernel.org,
-        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
-        "Opensource [Steve Twiss]" <stwiss.opensource@diasemi.com>
-Subject: [PATCH 3/3] Documentation: hwmon: New information for DA9063
-Date:   Tue,  6 Jul 2021 14:34:49 +0000
-Message-Id: <089cba74f35e1f7cb07064fa336518d853c8d569.1625581991.git.plr.vincent@gmail.com>
-X-Mailer: git-send-email 2.32.0
-In-Reply-To: <850a353432cd676f96889cede291232abf58918d.1625581991.git.plr.vincent@gmail.com>
-References: <850a353432cd676f96889cede291232abf58918d.1625581991.git.plr.vincent@gmail.com>
+        id S231400AbhGFO71 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 6 Jul 2021 10:59:27 -0400
+Received: from mga04.intel.com ([192.55.52.120]:62069 "EHLO mga04.intel.com"
+        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
+        id S232793AbhGFO7W (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Tue, 6 Jul 2021 10:59:22 -0400
+X-IronPort-AV: E=McAfee;i="6200,9189,10037"; a="207303281"
+X-IronPort-AV: E=Sophos;i="5.83,328,1616482800"; 
+   d="scan'208";a="207303281"
+Received: from fmsmga003.fm.intel.com ([10.253.24.29])
+  by fmsmga104.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 06 Jul 2021 07:56:43 -0700
+X-IronPort-AV: E=Sophos;i="5.83,328,1616482800"; 
+   d="scan'208";a="486295873"
+Received: from thaovo-mobl1.amr.corp.intel.com (HELO [10.209.81.14]) ([10.209.81.14])
+  by fmsmga003-auth.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 06 Jul 2021 07:56:42 -0700
+Subject: Re: [PATCH 1/4] x86/sgx: Add sgx_nr_all_pages to the debugfs
+To:     Jarkko Sakkinen <jarkko@kernel.org>, Shuah Khan <shuah@kernel.org>
+Cc:     linux-kselftest@vger.kernel.org, linux-sgx@vger.kernel.org,
+        Reinette Chatre <reinette.chatre@intel.com>,
+        Borislav Petkov <bp@alien8.de>,
+        Dave Hansen <dave.hansen@linux.intel.com>,
+        Thomas Gleixner <tglx@linutronix.de>,
+        Ingo Molnar <mingo@redhat.com>, x86@kernel.org,
+        "H. Peter Anvin" <hpa@zytor.com>, Jonathan Corbet <corbet@lwn.net>,
+        linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org
+References: <20210705143652.116125-1-jarkko@kernel.org>
+ <20210705143652.116125-2-jarkko@kernel.org>
+From:   Dave Hansen <dave.hansen@intel.com>
+Autocrypt: addr=dave.hansen@intel.com; keydata=
+ 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
+ z5cecg==
+Message-ID: <b8a31e6e-90e8-f93f-e6b2-e72801fb31e4@intel.com>
+Date:   Tue, 6 Jul 2021 07:56:40 -0700
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.10.0
 MIME-Version: 1.0
+In-Reply-To: <20210705143652.116125-2-jarkko@kernel.org>
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
 Content-Transfer-Encoding: 8bit
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-From: "Opensource [Steve Twiss]" <stwiss.opensource@diasemi.com>
+On 7/5/21 7:36 AM, Jarkko Sakkinen wrote:
+> Create /sys/kernel/debug/x86/sgx_nr_all_pages, which reports total
+> number of EPC pages available in the system.
+Could we flesh this out a bit, please?
 
-Addition of HWMON documentation for the DA9063 driver.
+What's the value here when userspace could just re-enumerate the EPC
+size from CPUID?
 
-Signed-off-by: Opensource [Steve Twiss] <stwiss.opensource@diasemi.com>
+I'd really appreciate if we could draw parallels between these additions
+to the "SGX VM" and their analogs in the "core VM".  In this case, I
+think the closest analog is probably "MemTotal" in /proc/meminfo.
 
-Updated temperature formula, as of datasheet rev 2.3.
-Converted to ReStructuredText.
+Second, how is this going to be used?
 
-Signed-off-by: Vincent Pelletier <plr.vincent@gmail.com>
----
-Changes in v2:
-- ReST-ified
-
-Originally submitted by Steve Twiss in 2014:
-  https://marc.info/?l=linux-kernel&m=139560868209856&w=2
-
- Documentation/hwmon/da9063.rst | 73 ++++++++++++++++++++++++++++++++++
- 1 file changed, 73 insertions(+)
- create mode 100644 Documentation/hwmon/da9063.rst
-
-diff --git a/Documentation/hwmon/da9063.rst b/Documentation/hwmon/da9063.rst
-new file mode 100644
-index 000000000000..aae69c58a5d6
---- /dev/null
-+++ b/Documentation/hwmon/da9063.rst
-@@ -0,0 +1,73 @@
-+Kernel driver da9063-hwmon
-+==========================
-+
-+Supported chips:
-+
-+  * Dialog Semiconductor DA9063 PMIC
-+
-+    Prefix: 'da9063'
-+
-+    Datasheet: Publicly available at the Dialog Semiconductor website:
-+
-+	http://www.dialog-semiconductor.com/products/power-management/DA9063
-+
-+Authors:
-+	- S Twiss <stwiss.opensource@diasemi.com>
-+	- Vincent Pelletier <plr.vincent@gmail.com>
-+
-+Description
-+-----------
-+
-+The DA9063 PMIC provides a general purpose ADC with 10 bits of resolution.
-+It uses track and hold circuitry with an analogue input multiplexer which
-+allows the conversion of up to 9 different inputs:
-+
-+- Channel  0: VSYS_RES	measurement of the system VDD (2.5 - 5.5V)
-+- Channel  1: ADCIN1_RES	high impedance input (0 - 2.5V)
-+- Channel  2: ADCIN2_RES	high impedance input (0 - 2.5V)
-+- Channel  3: ADCIN3_RES	high impedance input (0 - 2.5V)
-+- Channel  4: Tjunc	measurement of internal temperature sensor
-+- Channel  5: VBBAT	measurement of the backup battery voltage (0 - 5.0V)
-+- Channel  6: N/A	Reserved
-+- Channel  7: N/A	Reserved
-+- Channel  8: MON1_RES	group 1 internal regulators voltage (0 - 5.0V)
-+- Channel  9: MON2_RES	group 2 internal regulators voltage (0 - 5.0V)
-+- Channel 10: MON3_RES	group 3 internal regulators voltage (0 - 5.0V)
-+
-+The MUX selects from and isolates the 9 inputs and presents the channel to
-+be measured to the ADC input. When selected, an input amplifier on the VSYS
-+channel subtracts the VDDCORE reference voltage and scales the signal to the
-+correct value for the ADC.
-+
-+The analog ADC includes current sources at ADC_IN1, ADC_IN2 and ADC_IN3 to
-+support resistive measurements.
-+
-+Channels 1, 2 and 3 current source capability can be set through the ADC
-+thresholds ADC_CFG register and values for ADCIN1_CUR, ADCIN2_CUR and
-+ADCIN3_CUR. Settings for ADCIN1_CUR and ADCIN2_CUR are 1.0, 2.0, 10 and
-+40 micro Amps. The setting for ADCIN3_CUR is 10 micro Amps.
-+
-+Voltage Monitoring
-+------------------
-+
-+The manual measurement allows monitoring of the system voltage VSYS, the
-+auxiliary channels ADCIN1, ADCIN2 and ADCIN3, and a VBBAT measurement of
-+the backup battery voltage (0 - 5.0V). The manual measurements store 10
-+bits of ADC resolution.
-+
-+The manual ADC measurements attributes described above are supported by
-+the driver.
-+
-+The automatic ADC measurement is not supported by the driver.
-+
-+Temperature Monitoring
-+----------------------
-+
-+Temperatures are sampled by a 10 bit ADC.  Junction temperatures
-+are monitored by the ADC channels.
-+
-+The junction temperature is calculated:
-+
-+	Degrees celsius = -0.398 * (ADC_RES - T_OFFSET) + 330;
-+
-+The junction temperature attribute is supported by the driver.
--- 
-2.32.0
-
+Third, is this going to be the ABI forever?
