@@ -2,106 +2,70 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 1FBA83C15D7
-	for <lists+linux-doc@lfdr.de>; Thu,  8 Jul 2021 17:21:22 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 2AAB63C1C34
+	for <lists+linux-doc@lfdr.de>; Fri,  9 Jul 2021 01:40:35 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S231932AbhGHPYC (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 8 Jul 2021 11:24:02 -0400
-Received: from mail-lf1-f51.google.com ([209.85.167.51]:45844 "EHLO
-        mail-lf1-f51.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S231815AbhGHPYB (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Thu, 8 Jul 2021 11:24:01 -0400
-Received: by mail-lf1-f51.google.com with SMTP id p1so16720906lfr.12;
-        Thu, 08 Jul 2021 08:21:18 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=vSXN7Kh9x6gUYLLQwWC/sSb0E4UPI2sT9SAOdpYbkPg=;
-        b=QX0vL98es+y/BQNXMBqfb3IPiTURZw0irJ8w/w7nqNPD5fYIgonVsa/GbWWE/U5Bvl
-         nFMn4xCEK0uyBZY/W794KPr97788o3DJTa//bish6ThatEK2/yoKoA6Kbq8oM0iO4TDG
-         jbBtxieyTxhQwdJN/GY2hkORe5xEY9odwyDsI6uqelxeD6pJ0zdbo+QT1//keHtKdorF
-         8tnhuY7/y3wquik8tZL9X8ZWsiz1ALW9Uo9pheA/n9o5jcpzMuPtAJpJRCfJnCU9yH1d
-         DZogYz8gVjFWtco4DJosD7JYMmmQrJLANJKF58b9dlLGGAhDKHIzgRiNLZOe1Q71hpWG
-         Kqxw==
-X-Gm-Message-State: AOAM533BRX0API8RvZ3+DTUN81PkgWEexK12HPtcL+AB0B7XK87vdyp9
-        IPahKKxwTeAgmJUL3iCmQQ0=
-X-Google-Smtp-Source: ABdhPJxWrzepObN6CSW8WNRQ+3zqT4UTWNkQxd6YGC/oJWxo3WQDcjnbsKvh+kb42dRvV9UjSjqS4Q==
-X-Received: by 2002:a05:6512:224e:: with SMTP id i14mr20966868lfu.195.1625757677635;
-        Thu, 08 Jul 2021 08:21:17 -0700 (PDT)
-Received: from localhost (88-112-11-80.elisa-laajakaista.fi. [88.112.11.80])
-        by smtp.gmail.com with ESMTPSA id a24sm221525lfg.231.2021.07.08.08.21.16
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 08 Jul 2021 08:21:17 -0700 (PDT)
-From:   Hannu Hartikainen <hannu@hrtk.in>
-To:     Linus Walleij <linus.walleij@linaro.org>,
-        Bartosz Golaszewski <bgolaszewski@baylibre.com>,
-        linux-gpio@vger.kernel.org
-Cc:     Jonathan Corbet <corbet@lwn.net>, linux-doc@vger.kernel.org,
-        linux-kernel@vger.kernel.org, Hannu Hartikainen <hannu@hrtk.in>
-Subject: [PATCH] docs: gpio: explain GPIOD_OUT_* values and toggling active low
-Date:   Thu,  8 Jul 2021 18:20:54 +0300
-Message-Id: <20210708152054.361704-1-hannu@hrtk.in>
-X-Mailer: git-send-email 2.32.0
+        id S229497AbhGHXnQ (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 8 Jul 2021 19:43:16 -0400
+Received: from rere.qmqm.pl ([91.227.64.183]:32351 "EHLO rere.qmqm.pl"
+        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
+        id S229491AbhGHXnQ (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Thu, 8 Jul 2021 19:43:16 -0400
+X-Greylist: delayed 412 seconds by postgrey-1.27 at vger.kernel.org; Thu, 08 Jul 2021 19:43:15 EDT
+Received: from remote.user (localhost [127.0.0.1])
+        by rere.qmqm.pl (Postfix) with ESMTPSA id 4GLXfq4rKlzMT;
+        Fri,  9 Jul 2021 01:33:39 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=rere.qmqm.pl; s=1;
+        t=1625787220; bh=qGNg7hSbfzBvr5magCDMkvgViKrImUwppARwb6jC+qA=;
+        h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+        b=FBlLRDt3tje8tO2OFphoFwEHC3eQ8/MU1ItlKZ7Hwfw+Y9sCzFfsvS36Aiqt0iK6G
+         KCZnWjpD6vWkn/MNP48ZnZ9wzh6xwE8miH73lnGN3SiWaFO1UXOApuBNNSccS+qw7Z
+         kXdgF0sFTMuakQlEC/IpdJNVaJQ3iU0O/Rlxm8D3sozTrsUe/0+QH6jgE2C0TR02TF
+         PsuSyzvmqN3WvjxbKE0VgQDxldX1N5fXtVDQps5xbE7XtzPGidg2qJuZMEKcMoSzYE
+         oIIOj5P/S3Dgw6B9pslzLHvZlEY4whdIVTAMsKRHCiu4U6hRc4KY7safXtsNr2DijO
+         M2fmG/hHVVN+Q==
+X-Virus-Status: Clean
+X-Virus-Scanned: clamav-milter 0.103.2 at mail
+Date:   Fri, 9 Jul 2021 01:33:35 +0200
+From:   =?iso-8859-2?Q?Micha=B3_Miros=B3aw?= <mirq-linux@rere.qmqm.pl>
+To:     Dipen Patel <dipenp@nvidia.com>
+Cc:     thierry.reding@gmail.com, jonathanh@nvidia.com,
+        linux-kernel@vger.kernel.org, linux-tegra@vger.kernel.org,
+        linux-gpio@vger.kernel.org, linus.walleij@linaro.org,
+        bgolaszewski@baylibre.com, warthog618@gmail.com,
+        devicetree@vger.kernel.org, linux-doc@vger.kernel.org,
+        robh+dt@kernel.org
+Subject: Re: [RFC 03/11] hte: Add tegra194 HTE kernel provider
+Message-ID: <YOeLT4T5stjsAUMr@qmqm.qmqm.pl>
+References: <20210625235532.19575-1-dipenp@nvidia.com>
+ <20210625235532.19575-4-dipenp@nvidia.com>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=iso-8859-2
+Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
+In-Reply-To: <20210625235532.19575-4-dipenp@nvidia.com>
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-I was confused about the gpiod_flags values and thought that
-GPIOD_OUT_LOW and GPIOD_OUT_HIGH set the line to be active low / active
-high. This is not true, but I got the misconception because the flags
-GPIOD_OUT_*_OPEN_DRAIN do change line configuration and there's a
-subchapter about *active low* and *open drain* semantics.
+On Fri, Jun 25, 2021 at 04:55:24PM -0700, Dipen Patel wrote:
+> Tegra194 device has multiple HTE instances also known as GTE
+> (Generic hardware Timestamping Engine) which can timestamp subset of
+> SoC lines/signals. This provider driver focuses on IRQ and GPIO lines
+> and exposes timestamping ability on those lines to the consumers
+> through HTE subsystem.
+[...]
+> +	ret = of_property_read_u32(dev->of_node, "slices", &slices);
+> +	if (ret != 0) {
+> +		dev_err(dev, "Could not read slices\n");
+> +		return -EINVAL;
+> +	}
+> +
+> +	hte_dev->sl = devm_kzalloc(dev, sizeof(struct hte_slices) * slices,
+> +				   GFP_KERNEL);
 
-Add an explicit mention that the initial value is a logical value (and
-not the line configuration or physical line level). Also add a mention
-of the function gpiod_toggle_active_low which was previously missing
-from this document.
+Nit: There is devm_kcalloc() that will check for overflow in the
+multiply in case @slices from DT is broken.
 
-Signed-off-by: Hannu Hartikainen <hannu@hrtk.in>
----
- Documentation/driver-api/gpio/consumer.rst | 10 +++++++++-
- 1 file changed, 9 insertions(+), 1 deletion(-)
-
-diff --git a/Documentation/driver-api/gpio/consumer.rst b/Documentation/driver-api/gpio/consumer.rst
-index 3366a991b4aa..47869ca8ccf0 100644
---- a/Documentation/driver-api/gpio/consumer.rst
-+++ b/Documentation/driver-api/gpio/consumer.rst
-@@ -72,6 +72,10 @@ for the GPIO. Values can be:
- * GPIOD_OUT_HIGH_OPEN_DRAIN same as GPIOD_OUT_HIGH but also enforce the line
-   to be electrically used with open drain.
- 
-+Note that the initial value is *logical* and the physical line level depends on
-+whether the line is configured active high or active low (see
-+:ref:`active_low_semantics`).
-+
- The two last flags are used for use cases where open drain is mandatory, such
- as I2C: if the line is not already configured as open drain in the mappings
- (see board.txt), then open drain will be enforced anyway and a warning will be
-@@ -252,6 +256,8 @@ that can't be accessed from hardIRQ handlers, these calls act the same as the
- spinlock-safe calls.
- 
- 
-+.. _active_low_semantics:
-+
- The active low and open drain semantics
- ---------------------------------------
- As a consumer should not have to care about the physical line level, all of the
-@@ -309,9 +315,11 @@ work on the raw line value::
- 	void gpiod_set_raw_value_cansleep(struct gpio_desc *desc, int value)
- 	int gpiod_direction_output_raw(struct gpio_desc *desc, int value)
- 
--The active low state of a GPIO can also be queried using the following call::
-+The active low state of a GPIO can also be queried and toggled using the
-+following calls::
- 
- 	int gpiod_is_active_low(const struct gpio_desc *desc)
-+	void gpiod_toggle_active_low(struct gpio_desc *desc)
- 
- Note that these functions should only be used with great moderation; a driver
- should not have to care about the physical line level or open drain semantics.
--- 
-2.32.0
-
+Best Regards
+Micha³ Miros³aw
