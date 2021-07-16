@@ -2,109 +2,105 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 5BE5E3CB3FC
-	for <lists+linux-doc@lfdr.de>; Fri, 16 Jul 2021 10:17:52 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 4F3743CB63C
+	for <lists+linux-doc@lfdr.de>; Fri, 16 Jul 2021 12:44:36 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S237812AbhGPITb (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Fri, 16 Jul 2021 04:19:31 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:41478 "EHLO
-        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S237842AbhGPITR (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Fri, 16 Jul 2021 04:19:17 -0400
-Received: from mail-qv1-xf2d.google.com (mail-qv1-xf2d.google.com [IPv6:2607:f8b0:4864:20::f2d])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 73436C06175F;
-        Fri, 16 Jul 2021 01:16:22 -0700 (PDT)
-Received: by mail-qv1-xf2d.google.com with SMTP id f3so4201898qvm.2;
-        Fri, 16 Jul 2021 01:16:22 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=from:to:cc:subject:date:message-id:in-reply-to:references;
-        bh=qbSJbIvM1lhLdYl80cU8AkcrpzgH72pjsMMspcUkgh4=;
-        b=IBIn4MocQdA0CPzs7cDHhrrLs0Q9nO2THVyfE/GvqFEpDloqN7GmlFTwtxMSNVgsxe
-         cuSg5XZU321jSwADS7Pmplzjo0IiQb7I12hWBRw9E+eYpfSeNHqMSVSZaldlShniznr0
-         zAU+b5IiOR8jSM6g7SHr0nJ5s9iTSPhqjeYmAttbiIMKZrKfuiw8sDedXBDe0lGJRncC
-         zJHR5J5PWKY5CpcwI7z6qcDM/I8YASYcexuJpbYyH1ToZjKm24/pylKupcybMQPcXHFM
-         yPgFRL5LvmzIzNGbgy0FD6G0Uf9cQFLJ5J9YEn/gEoiI33MEJr1qd/R+AUQPcY+1mWPM
-         oPYQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-         :references;
-        bh=qbSJbIvM1lhLdYl80cU8AkcrpzgH72pjsMMspcUkgh4=;
-        b=XP941nU5iBNLPRzzLLC0z+M27wgpR42fTxFGdhWY6d0Nngm5i0b9UhrVw1yHD1mbuU
-         WHc9eIBk2HHApJV7Kf1VaIlEbV4R+FPRS/BxHvgpqJMacPHRQlZ+/xtsnAj1lq7JxAU3
-         Q4InqQkbcL7Y374zH4nbOoZSWsYKi/sXpSzoFmsGGR59r+ntf0yMSchE7/Sllc22pKbv
-         h1pMv/nKfKfd0MgrGLWMSGeobkNKhQrf9ofaQLQmxQSA3qEhUyf+eJcf+E5n68nLI9iJ
-         u5bXYPYvXQUgoS2/ikScJZK2qAweCJ2GOP0BavWtB0T3jOiIiYLaTOzAxIzBNPOCjHLr
-         tOlA==
-X-Gm-Message-State: AOAM532c116YQKchN3fh/VUWxWqVI4aE3GLBpvw2zWkmrhMp3054/NZn
-        S2Kd+q67kAMyh03i9964Q5k=
-X-Google-Smtp-Source: ABdhPJzpnq8z1jyu4kbXU5811aidzjeyH0UJ6NNhMQ3X4EP5mw2cbDqaPZJPRhQyHzp3RsTzgaf1FQ==
-X-Received: by 2002:ad4:4e73:: with SMTP id ec19mr8924069qvb.16.1626423381674;
-        Fri, 16 Jul 2021 01:16:21 -0700 (PDT)
-Received: from localhost.localdomain (ec2-35-169-212-159.compute-1.amazonaws.com. [35.169.212.159])
-        by smtp.gmail.com with ESMTPSA id c22sm2868464qtd.42.2021.07.16.01.16.20
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 16 Jul 2021 01:16:21 -0700 (PDT)
-From:   SeongJae Park <sj38.park@gmail.com>
-To:     akpm@linux-foundation.org
-Cc:     SeongJae Park <sjpark@amazon.de>, Jonathan.Cameron@Huawei.com,
-        acme@kernel.org, alexander.shishkin@linux.intel.com,
-        amit@kernel.org, benh@kernel.crashing.org,
-        brendanhiggins@google.com, corbet@lwn.net, david@redhat.com,
-        dwmw@amazon.com, elver@google.com, fan.du@intel.com,
-        foersleo@amazon.de, greg@kroah.com, gthelen@google.com,
-        guoju.fgj@alibaba-inc.com, jgowans@amazon.com, joe@perches.com,
-        mgorman@suse.de, mheyne@amazon.de, minchan@kernel.org,
-        mingo@redhat.com, namhyung@kernel.org, peterz@infradead.org,
-        riel@surriel.com, rientjes@google.com, rostedt@goodmis.org,
-        rppt@kernel.org, shakeelb@google.com, shuah@kernel.org,
-        sieberf@amazon.com, sj38.park@gmail.com, snu@zelle79.org,
-        vbabka@suse.cz, vdavydov.dev@gmail.com, zgf574564920@gmail.com,
-        linux-damon@amazon.com, linux-mm@kvack.org,
-        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org
-Subject: [PATCH v34 13/13] MAINTAINERS: Update for DAMON
-Date:   Fri, 16 Jul 2021 08:14:49 +0000
-Message-Id: <20210716081449.22187-14-sj38.park@gmail.com>
-X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20210716081449.22187-1-sj38.park@gmail.com>
-References: <20210716081449.22187-1-sj38.park@gmail.com>
+        id S239386AbhGPKr1 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Fri, 16 Jul 2021 06:47:27 -0400
+Received: from so254-9.mailgun.net ([198.61.254.9]:18066 "EHLO
+        so254-9.mailgun.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S238809AbhGPKrY (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Fri, 16 Jul 2021 06:47:24 -0400
+DKIM-Signature: a=rsa-sha256; v=1; c=relaxed/relaxed; d=mg.codeaurora.org; q=dns/txt;
+ s=smtp; t=1626432270; h=Content-Transfer-Encoding: Content-Type:
+ In-Reply-To: MIME-Version: Date: Message-ID: From: References: Cc: To:
+ Subject: Sender; bh=fRfzqitEiF6pl1t4p+k88/o5RHLLygqMeNZ3f4gZTbw=; b=gCnlyxbgee29vYMVW50cE6prK1Siql+xHgXb9Ebv45iiFwTaIWSVDmf63ZxuRTNf8F3m251/
+ yspSSMY/bLuxZjObTlojRKA2KbD1i4x0pjWitweZ28wgDfsL/qBc1fDSA9nmyJKd79u3QZx3
+ 5egUBsqZZ+fcsEGtxL2bWVajbZI=
+X-Mailgun-Sending-Ip: 198.61.254.9
+X-Mailgun-Sid: WyIzNjUxMiIsICJsaW51eC1kb2NAdmdlci5rZXJuZWwub3JnIiwgImJlOWU0YSJd
+Received: from smtp.codeaurora.org
+ (ec2-35-166-182-171.us-west-2.compute.amazonaws.com [35.166.182.171]) by
+ smtp-out-n03.prod.us-east-1.postgun.com with SMTP id
+ 60f162fc4815712f3ac18cf9 (version=TLS1.2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256); Fri, 16 Jul 2021 10:44:12
+ GMT
+Sender: charante=codeaurora.org@mg.codeaurora.org
+Received: by smtp.codeaurora.org (Postfix, from userid 1001)
+        id CBDEBC4323A; Fri, 16 Jul 2021 10:44:11 +0000 (UTC)
+X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
+        aws-us-west-2-caf-mail-1.web.codeaurora.org
+X-Spam-Level: 
+X-Spam-Status: No, score=-2.9 required=2.0 tests=ALL_TRUSTED,BAYES_00,
+        NICE_REPLY_A,SPF_FAIL,URIBL_BLOCKED autolearn=no autolearn_force=no
+        version=3.4.0
+Received: from [192.168.29.110] (unknown [49.37.159.253])
+        (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+        (No client certificate requested)
+        (Authenticated sender: charante)
+        by smtp.codeaurora.org (Postfix) with ESMTPSA id D607FC433D3;
+        Fri, 16 Jul 2021 10:44:03 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 smtp.codeaurora.org D607FC433D3
+Authentication-Results: aws-us-west-2-caf-mail-1.web.codeaurora.org; dmarc=none (p=none dis=none) header.from=codeaurora.org
+Authentication-Results: aws-us-west-2-caf-mail-1.web.codeaurora.org; spf=fail smtp.mailfrom=charante@codeaurora.org
+Subject: Re: [PATCH V4,0/3] mm: compaction: proactive compaction trigger by
+ user
+To:     Andrew Morton <akpm@linux-foundation.org>
+Cc:     vbabka@suse.cz, corbet@lwn.net, mcgrof@kernel.org,
+        keescook@chromium.org, yzaikin@google.com, osalvador@suse.de,
+        rientjes@google.com, mchehab+huawei@kernel.org,
+        lokeshgidra@google.com, andrew.a.klychkov@gmail.com,
+        xi.fengfei@h3c.com, nigupta@nvidia.com,
+        dave.hansen@linux.intel.com, famzheng@amazon.com,
+        mateusznosek0@gmail.com, oleksandr@redhat.com, sh_def@163.com,
+        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
+        linux-mm@kvack.org, linux-fsdevel@vger.kernel.org,
+        "vinmenon@codeaurora.org" <vinmenon@codeaurora.org>
+References: <cover.1624028025.git.charante@codeaurora.org>
+ <c0150787-5f85-29ac-9666-05fabedabb1e@codeaurora.org>
+ <20210715212744.1a43012c21711bafd25e5b68@linux-foundation.org>
+From:   Charan Teja Kalla <charante@codeaurora.org>
+Message-ID: <f24af677-1005-b14c-4bbe-f41feefe172b@codeaurora.org>
+Date:   Fri, 16 Jul 2021 16:14:01 +0530
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:78.0) Gecko/20100101
+ Thunderbird/78.11.0
+MIME-Version: 1.0
+In-Reply-To: <20210715212744.1a43012c21711bafd25e5b68@linux-foundation.org>
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
+Content-Transfer-Encoding: 7bit
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-From: SeongJae Park <sjpark@amazon.de>
+Thanks Andrew for the reply!!
 
-This commit updates MAINTAINERS file for DAMON related files.
+On 7/16/2021 9:57 AM, Andrew Morton wrote:
+> On Sat, 3 Jul 2021 15:52:10 +0530 Charan Teja Kalla <charante@codeaurora.org> wrote:
+> 
+>> A gentle ping to have your valuable comments.
+> 
+> Can we please have a resend?
+> 
+> The series has two fixes against the current code.  Please separate
+> that work out from the new feature.  So a 2-patch series to fix the bugs
+> followed by a single patch to add your new feature.
 
-Signed-off-by: SeongJae Park <sjpark@amazon.de>
-Reviewed-by: Markus Boehme <markubo@amazon.de>
----
- MAINTAINERS | 11 +++++++++++
- 1 file changed, 11 insertions(+)
+https://lore.kernel.org/patchwork/patch/1448789/ -- Can go as a separate
+bug fix.
 
-diff --git a/MAINTAINERS b/MAINTAINERS
-index 13ec37ac23c7..1e56c3fe1bd3 100644
---- a/MAINTAINERS
-+++ b/MAINTAINERS
-@@ -5128,6 +5128,17 @@ F:	net/ax25/ax25_out.c
- F:	net/ax25/ax25_timer.c
- F:	net/ax25/sysctl_net_ax25.c
- 
-+DATA ACCESS MONITOR
-+M:	SeongJae Park <sjpark@amazon.de>
-+L:	linux-mm@kvack.org
-+S:	Maintained
-+F:	Documentation/admin-guide/mm/damon/
-+F:	Documentation/vm/damon/
-+F:	include/linux/damon.h
-+F:	include/trace/events/damon.h
-+F:	mm/damon/
-+F:	tools/testing/selftests/damon/
-+
- DAVICOM FAST ETHERNET (DMFE) NETWORK DRIVER
- L:	netdev@vger.kernel.org
- S:	Orphan
+https://lore.kernel.org/patchwork/patch/1448793/ -- is the second bug
+fix which is tightly coupled with the feature of explicitly waking of
+kcompactd on the event of change in compaction proactiveness, when it is
+sleeping with MAX_SCHEDULE_TIMEOUT.
+
+So, will make the changes with 1 patch bug fix and 2nd patch feature
+where the second bug fix also clubbed.
+
+I hope this is fine.
+> 
+> 
+
 -- 
-2.17.1
-
+The Qualcomm Innovation Center, Inc. is a member of the Code Aurora
+Forum, a Linux Foundation Collaborative Project
