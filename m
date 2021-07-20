@@ -2,321 +2,135 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 8D6833D026B
-	for <lists+linux-doc@lfdr.de>; Tue, 20 Jul 2021 21:58:47 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 2C95A3D0371
+	for <lists+linux-doc@lfdr.de>; Tue, 20 Jul 2021 22:57:42 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S229556AbhGTTR6 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 20 Jul 2021 15:17:58 -0400
-Received: from mail-co1nam11on2101.outbound.protection.outlook.com ([40.107.220.101]:63328
-        "EHLO NAM11-CO1-obe.outbound.protection.outlook.com"
-        rhost-flags-OK-OK-OK-FAIL) by vger.kernel.org with ESMTP
-        id S232651AbhGTTRV (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Tue, 20 Jul 2021 15:17:21 -0400
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=IKn+0HvNxEdIjd+enMN7rsk+1vzGxczKNHaUeTpxpoUcW1g3dHgbkjwTqHGwMJLVolaNQsGA0WdNGmU3LSHMVxYcfTTCbO+LRZ4RsfhmCUdpCS3sreqsiAN4IrlW9PldCn9FfGx9bEr828uMiTw1Ac42Oz09b2eEJSvpwPKneBJrxPEGMlTTdHB+F5cAkAdLX3CNGc4/zVFInJZJZ1PnnzoQnGA/PXaCS4ZPol+66y5ELO8NKotTdLqKI1z6XgooErhU+O+FcqtUPPzeFQt/LKCpeNiNIgOS4uelhcYdY0zxlJi4juAW9v+FAfPQ8xRQX6DsTRWVqvuxncYibODwRg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=Uep3EcUdTb9ly/X40p8qPcAK85TnOT7TC57JmNA4EhE=;
- b=i85bs8lOiN0aIcfpV9Y8H+FqZeRWRI8FCIaaw4K/dLCXJJi/7EZ7YqoGzrX1tsO4j4CP9OVN1yVLeerihwi0LyLIqVKLBoAkzezSVno/j2/BJep253xWnYHCdjYyv68hBIESquV7x/DrBdUp99nbiXJF+/I4qqBqQrXWn8wOh/mnQufJ7I3bPukOI2d7tl14M9nokGQQbAqAKVdVmcrpyrVNbML74mS5Xy7WCrh4y8idGSZXOe2/m7q0H7m3dukLCUPzjjskDJfvXPPepvSDeWOZDs4AWknOSM12nfINbi98s6ddCy7CMu3U1CJzQLSmgEvFO65LrTRPFnjEK3LGjw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=microsoft.com; dmarc=pass action=none
- header.from=microsoft.com; dkim=pass header.d=microsoft.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=Uep3EcUdTb9ly/X40p8qPcAK85TnOT7TC57JmNA4EhE=;
- b=WVFrFXgrNNAWP4mt9K03OEw898eRqwVz+LN5LGRBpWHY5/QjU05kjDifEN3QTaAzJ9IwcuMXAo76oYygCl99Y7Kec2ueMN1Lymo/mp4Ik2KBNWboY9j2uc5lfjwFX+QKGagTccZIwCM1nnx01L7WOrSU8c/AlzD2v4w8gx/Q/ao=
-Received: from BY5PR21MB1506.namprd21.prod.outlook.com (2603:10b6:a03:23d::12)
- by BYAPR21MB1144.namprd21.prod.outlook.com (2603:10b6:a03:102::13) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4373.5; Tue, 20 Jul
- 2021 19:57:56 +0000
-Received: from BY5PR21MB1506.namprd21.prod.outlook.com
- ([fe80::d97f:36c9:1b1:5d07]) by BY5PR21MB1506.namprd21.prod.outlook.com
- ([fe80::d97f:36c9:1b1:5d07%8]) with mapi id 15.20.4373.006; Tue, 20 Jul 2021
- 19:57:56 +0000
-From:   Long Li <longli@microsoft.com>
-To:     Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
-        "longli@linuxonhyperv.com" <longli@linuxonhyperv.com>
-CC:     "linux-fs@vger.kernel.org" <linux-fs@vger.kernel.org>,
-        "linux-block@vger.kernel.org" <linux-block@vger.kernel.org>,
-        "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
-        "linux-hyperv@vger.kernel.org" <linux-hyperv@vger.kernel.org>,
+        id S234991AbhGTUJR (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 20 Jul 2021 16:09:17 -0400
+Received: from mx0a-001b2d01.pphosted.com ([148.163.156.1]:55974 "EHLO
+        mx0a-001b2d01.pphosted.com" rhost-flags-OK-OK-OK-OK)
+        by vger.kernel.org with ESMTP id S236896AbhGTTpQ (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 20 Jul 2021 15:45:16 -0400
+Received: from pps.filterd (m0098393.ppops.net [127.0.0.1])
+        by mx0a-001b2d01.pphosted.com (8.16.0.43/8.16.0.43) with SMTP id 16KK4bK2023434;
+        Tue, 20 Jul 2021 16:24:59 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ibm.com; h=message-id : subject :
+ from : to : cc : date : in-reply-to : references : content-type :
+ mime-version : content-transfer-encoding; s=pp1;
+ bh=6d0AvtuBA/mdM+Xm+jajpNkrlEgOYj7D9PlUbi2xZB4=;
+ b=V4zOHp+W0kVwdjd25UFD8InNd5+irwbyCnzI9y3RmjFPUQ12T41Kpwozn5isTwnh7pQq
+ +ra/ibOqCusdT8/wYLkkUMjdk1cAOuBfLcuD6F+q7iS/Mwpr9alu4WiMU7QmFVH5Cjpx
+ V8Vc9lCAQ/gkzrB3regmEONyJjMZVbeAMpyAK7jBq1hCbWWEpdjesgO9C2KqZRHx2uik
+ oacNlYSIedCv5ldJqIqOIE3C72zhbuCy/hfm4/Zn0nEowT+iKHg6d4XPWcW/duPwUQcz
+ 3Bbt1pHc/Cvo4bJIBsnxHu0udqNeYNW/tdB3o3X7JvAD2JjrquSAoKWJ3Yc6994l+mRT 0Q== 
+Received: from pps.reinject (localhost [127.0.0.1])
+        by mx0a-001b2d01.pphosted.com with ESMTP id 39wy71wjmh-1
+        (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+        Tue, 20 Jul 2021 16:24:59 -0400
+Received: from m0098393.ppops.net (m0098393.ppops.net [127.0.0.1])
+        by pps.reinject (8.16.0.43/8.16.0.43) with SMTP id 16KK6Adj032512;
+        Tue, 20 Jul 2021 16:24:58 -0400
+Received: from ppma06ams.nl.ibm.com (66.31.33a9.ip4.static.sl-reverse.com [169.51.49.102])
+        by mx0a-001b2d01.pphosted.com with ESMTP id 39wy71wjkw-1
+        (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+        Tue, 20 Jul 2021 16:24:58 -0400
+Received: from pps.filterd (ppma06ams.nl.ibm.com [127.0.0.1])
+        by ppma06ams.nl.ibm.com (8.16.1.2/8.16.1.2) with SMTP id 16KKCqSp012806;
+        Tue, 20 Jul 2021 20:24:56 GMT
+Received: from b06cxnps4075.portsmouth.uk.ibm.com (d06relay12.portsmouth.uk.ibm.com [9.149.109.197])
+        by ppma06ams.nl.ibm.com with ESMTP id 39vng714qm-1
+        (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+        Tue, 20 Jul 2021 20:24:55 +0000
+Received: from d06av24.portsmouth.uk.ibm.com (mk.ibm.com [9.149.105.60])
+        by b06cxnps4075.portsmouth.uk.ibm.com (8.14.9/8.14.9/NCO v10.0) with ESMTP id 16KKOrF527066780
+        (version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+        Tue, 20 Jul 2021 20:24:53 GMT
+Received: from d06av24.portsmouth.uk.ibm.com (unknown [127.0.0.1])
+        by IMSVA (Postfix) with ESMTP id F24BA42047;
+        Tue, 20 Jul 2021 20:24:52 +0000 (GMT)
+Received: from d06av24.portsmouth.uk.ibm.com (unknown [127.0.0.1])
+        by IMSVA (Postfix) with ESMTP id A1E5D42042;
+        Tue, 20 Jul 2021 20:24:47 +0000 (GMT)
+Received: from li-f45666cc-3089-11b2-a85c-c57d1a57929f.ibm.com (unknown [9.160.68.252])
+        by d06av24.portsmouth.uk.ibm.com (Postfix) with ESMTP;
+        Tue, 20 Jul 2021 20:24:47 +0000 (GMT)
+Message-ID: <40e167cca7b59fc4e11f45ba807486e11eade419.camel@linux.ibm.com>
+Subject: Re: [PATCH v2 6/6] KEYS: trusted: Introduce support for NXP
+ CAAM-based trusted keys
+From:   Mimi Zohar <zohar@linux.ibm.com>
+To:     Richard Weinberger <richard.weinberger@gmail.com>,
+        Ahmad Fatoum <a.fatoum@pengutronix.de>,
+        James Bottomley <James.Bottomley@HansenPartnership.com>
+Cc:     Richard Weinberger <richard@nod.at>,
         Jonathan Corbet <corbet@lwn.net>,
-        KY Srinivasan <kys@microsoft.com>,
-        Haiyang Zhang <haiyangz@microsoft.com>,
-        Stephen Hemminger <sthemmin@microsoft.com>,
-        Wei Liu <wei.liu@kernel.org>, Dexuan Cui <decui@microsoft.com>,
-        Bjorn Andersson <bjorn.andersson@linaro.org>,
-        Hans de Goede <hdegoede@redhat.com>,
-        "Williams, Dan J" <dan.j.williams@intel.com>,
-        Maximilian Luz <luzmaximilian@gmail.com>,
-        Mike Rapoport <rppt@kernel.org>,
-        Ben Widawsky <ben.widawsky@intel.com>,
-        Jiri Slaby <jirislaby@kernel.org>,
-        Andra Paraschiv <andraprs@amazon.com>,
-        Siddharth Gupta <sidgup@codeaurora.org>,
-        Hannes Reinecke <hare@suse.de>,
-        "linux-doc@vger.kernel.org" <linux-doc@vger.kernel.org>
-Subject: RE: [Patch v4 2/3] Drivers: hv: add Azure Blob driver
-Thread-Topic: [Patch v4 2/3] Drivers: hv: add Azure Blob driver
-Thread-Index: AQHXfRfGpWx8JX5XBkGm4J8f9X8COatLeSmAgADAw3A=
-Date:   Tue, 20 Jul 2021 19:57:56 +0000
-Message-ID: <BY5PR21MB1506A52AD22240E22A0D6DE5CEE29@BY5PR21MB1506.namprd21.prod.outlook.com>
-References: <1626751866-15765-1-git-send-email-longli@linuxonhyperv.com>
- <1626751866-15765-3-git-send-email-longli@linuxonhyperv.com>
- <YPZ8hX7sx1RFL0c5@kroah.com>
-In-Reply-To: <YPZ8hX7sx1RFL0c5@kroah.com>
-Accept-Language: en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-msip_labels: MSIP_Label_f42aa342-8706-4288-bd11-ebb85995028c_ActionId=71fcdba0-7845-415a-8462-058cb3c8de43;MSIP_Label_f42aa342-8706-4288-bd11-ebb85995028c_ContentBits=0;MSIP_Label_f42aa342-8706-4288-bd11-ebb85995028c_Enabled=true;MSIP_Label_f42aa342-8706-4288-bd11-ebb85995028c_Method=Standard;MSIP_Label_f42aa342-8706-4288-bd11-ebb85995028c_Name=Internal;MSIP_Label_f42aa342-8706-4288-bd11-ebb85995028c_SetDate=2021-07-20T19:04:24Z;MSIP_Label_f42aa342-8706-4288-bd11-ebb85995028c_SiteId=72f988bf-86f1-41af-91ab-2d7cd011db47;
-authentication-results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=microsoft.com;
-x-ms-publictraffictype: Email
-x-ms-office365-filtering-correlation-id: f85d8175-570c-4c45-1382-08d94bb8ab44
-x-ms-traffictypediagnostic: BYAPR21MB1144:
-x-ms-exchange-transport-forked: True
-x-ld-processed: 72f988bf-86f1-41af-91ab-2d7cd011db47,ExtAddr
-x-microsoft-antispam-prvs: <BYAPR21MB1144951860F7B3C03B5FBF3ACEE29@BYAPR21MB1144.namprd21.prod.outlook.com>
-x-ms-oob-tlc-oobclassifiers: OLM:10000;
-x-ms-exchange-senderadcheck: 1
-x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam: BCL:0;
-x-microsoft-antispam-message-info: NRjYULmYVGM8Z2rMHlXpxEdcg+4lIiI8OI9S4PCXV61Dj4GOTzJr532TSkDHV/nZdOf7x7s6DTQlc22bPX5ito/+p49aYYCUOTR5rlcrRxB/9abOVyEakWLS9jnk7J19lVgS+3PS/hhgELwNjZeMHHY8A+A89BECn44uHfFz0MSkqEBBER/vrhTydbi70PnpOK4RR02dvQio3jUMM6p/uhDfcimHp4NATIv5jewNBziQrjqUJ1Efbf1zgIyZDRSpm+iKixvUTFvj9D1W22jzQFc9J1BC90tEttOjI7ujK8vwelaLgcXUD2iiojSYtqXDxwk0v9wVTizRWv+SY2VYyGVjE/yOkC1TBUt/28jGXLY9PB0mM6juB38NM/DNzTRfU1BGs9jLYPWbZkKz4Q/QQ96AnUkzBwWXFCpylq8G9yHXHjq+Eu0KG+VBiNyI4K8yLXIgb8KYUWN3zNE9zmcATmdaHN0v5SJYwkkNZDOCmv/b9jT0O4kWmD84A9KgYZnC3YrDi0cMvjGlg3XSbfHkWI1o4+imYZaCcGa7p+4cjB72OZi1T4C6l2e7ctJyvkvQSiVY0eP+P1CsUwIRL5KfTB6J+zKRrww02/gAqpZtc8otId3hnvTm4ndthkvrzDZnn1mghy+02EjundxPx9bab1HAkBhgzZBM40+VPqqgIqIZiyj3PhjyMCjoB5WdCEg7eIBtlrr2DkkFiiUHxhQPUQ==
-x-forefront-antispam-report: CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BY5PR21MB1506.namprd21.prod.outlook.com;PTR:;CAT:NONE;SFS:(4636009)(366004)(55016002)(86362001)(8990500004)(76116006)(508600001)(7696005)(8676002)(83380400001)(26005)(186003)(82960400001)(8936002)(82950400001)(52536014)(66556008)(7416002)(9686003)(4326008)(66476007)(316002)(66446008)(54906003)(64756008)(38100700002)(122000001)(110136005)(66946007)(5660300002)(10290500003)(6506007)(71200400001)(2906002)(33656002)(38070700004);DIR:OUT;SFP:1102;
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0: =?us-ascii?Q?G5V9MlLUf5ojADCUsKwWIjJ4yeFbrqE6+t8HTzoj7Er5cjSIPeKZSSV3Clw2?=
- =?us-ascii?Q?tbiEW/bJUk4aLHLZvx1xXfWwPNI8L7NC8XZdkok0Z+1U9ihQmqGXg/FZ7h0o?=
- =?us-ascii?Q?7gG6tVAuioZDiiKu+M5zWVwCjR73zWD+1C4+quoP8EpvXEv+6wEvQnTiddKM?=
- =?us-ascii?Q?NqIGKMRIKMsmxodoq5GnDao3eGj+4H1hqElfkLiK678TlSNSJkzZqWbrBhCQ?=
- =?us-ascii?Q?kfJk8alvN1aV77/MIXpXPoPwyX4WXZk2eUwFWG+oNckfdVHBaRbAbuf4Y/nV?=
- =?us-ascii?Q?WfV9lq9Lnwqg02CcNHXN22/O3WP342xVQeuL0/y8tq/br8KlSVjDV6jGI4eY?=
- =?us-ascii?Q?/LwoFrFdOnQfdNOmxg/hyHURsURNchd7vPG+cvzPEzz2oYPUvusKF8OOy3rF?=
- =?us-ascii?Q?4OQIfrPRKuiFPoDRWF6AvkjJUlVQ+snLfcTn2bE3YWZHXsn8vOJFABe/F8ZJ?=
- =?us-ascii?Q?j2uAp9c8BSJh8qvM9RV59DOIH1ZPrzCYk1HGYFJn/SsqXvu2Xf2nVXHwb0TE?=
- =?us-ascii?Q?YFGjFF9YysOt+G6CZyK76vIlZBC7ghvFW0u2iuypf8UqpcWAr7AiEB8WY+e7?=
- =?us-ascii?Q?Rh4NK4PPK71Tj0u76Cmqj2TZ8yqTQvIY36ocdgsqn+HIQeBArFbffHWcZc2B?=
- =?us-ascii?Q?xnXrJQWI15Lelyxo3RTJ7GbpdWRb2HBybQ1eLz3r6HdyNgrNoYKB2VlEi/AP?=
- =?us-ascii?Q?uXcL4IfhJ4K/kEk5ibMRgRna+3JGZ0Iaf0FrJNz4OpmJ2drqtnDgImKfmWkt?=
- =?us-ascii?Q?8QHJnTw/tRAMBjtsilXiSCTF+iW5Dnwy6MF/7QLiVluPiQTx00t6S6QG4bMH?=
- =?us-ascii?Q?P0po3yifPftsDiad6tkEgfWvymLTm8G2bqgE0MhR6XzaHyA62xyQ9k4sbzGK?=
- =?us-ascii?Q?TooQT/JYDdaEj1pyQhBqcBfT2QAg2DYF/2gQxyVxaDnqoSrIGfqT7aveiV0l?=
- =?us-ascii?Q?SCQIFkVVmusHnCrBNLLbpNOG8DSQdwfdNTy3ZtxjtEhZQp1H/Oxy2Rlan0kh?=
- =?us-ascii?Q?jyLSmIM7TU0TnHFG1ePer5HAL8VZ4DqZlf+JxiWlobYCpEZ6Bdk5E+Gj1w0t?=
- =?us-ascii?Q?K4c+B7IjPtTVnVruPX1RQ8VRrEXs3doH8hIy8kogiR/6KIOXcRt8w4LiH/F1?=
- =?us-ascii?Q?ES282h//atM99xUwHdIYFB33lK3PkKcbcosI+oLfnqPue3E1qn8xiTB6C/4P?=
- =?us-ascii?Q?LeMF8/O1x/IJUUWhj5coLSOX6vv6WzHm/KWd8Er5yswjrUH3n47a1Hagbdm/?=
- =?us-ascii?Q?/ZDg7EdoePCUhSx9xIS1CkIxHJEV/uiitpsDZr2LaZTduUCpOTuhB4y2YJTP?=
- =?us-ascii?Q?nQs=3D?=
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
-MIME-Version: 1.0
-X-OriginatorOrg: microsoft.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: BY5PR21MB1506.namprd21.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: f85d8175-570c-4c45-1382-08d94bb8ab44
-X-MS-Exchange-CrossTenant-originalarrivaltime: 20 Jul 2021 19:57:56.7553
- (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: 72f988bf-86f1-41af-91ab-2d7cd011db47
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: OvuMpQ6Jhq+plSadNfFBWJFfLEOhcoPqJ1FIe2crE+KO19sJdbuNGj+hnVh4jUfmj6vusc1t2NMgOKFS+Qb4xw==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: BYAPR21MB1144
+        David Howells <dhowells@redhat.com>,
+        Jarkko Sakkinen <jarkko@kernel.org>,
+        James Bottomley <jejb@linux.ibm.com>,
+        kernel <kernel@pengutronix.de>, James Morris <jmorris@namei.org>,
+        "Serge E. Hallyn" <serge@hallyn.com>,
+        horia geanta <horia.geanta@nxp.com>,
+        aymen sghaier <aymen.sghaier@nxp.com>,
+        Herbert Xu <herbert@gondor.apana.org.au>,
+        davem <davem@davemloft.net>, Udit Agarwal <udit.agarwal@nxp.com>,
+        Eric Biggers <ebiggers@kernel.org>,
+        Jan Luebbe <j.luebbe@pengutronix.de>,
+        david <david@sigma-star.at>,
+        Franck Lenormand <franck.lenormand@nxp.com>,
+        Sumit Garg <sumit.garg@linaro.org>,
+        "open list, ASYMMETRIC KEYS" <keyrings@vger.kernel.org>,
+        Linux Crypto Mailing List <linux-crypto@vger.kernel.org>,
+        Linux Doc Mailing List <linux-doc@vger.kernel.org>,
+        linux-integrity <linux-integrity@vger.kernel.org>,
+        linux-kernel <linux-kernel@vger.kernel.org>,
+        LSM <linux-security-module@vger.kernel.org>
+Date:   Tue, 20 Jul 2021 16:24:46 -0400
+In-Reply-To: <CAFLxGvxr94apP2jaT0tB6JRDtv_ivrguXK2Ykd3zer_4xtJ+2w@mail.gmail.com>
+References: <cover.1dfbb73645d917b3c76d01290804a3410bd9932e.1624364386.git-series.a.fatoum@pengutronix.de>
+         <39e6d65ca5d2a0a35fb71d6c1f85add8ee489a19.1624364386.git-series.a.fatoum@pengutronix.de>
+         <1850833581.13438.1625172175436.JavaMail.zimbra@nod.at>
+         <2f608e5a-5a12-6db1-b9bd-a2cd9e3e3671@pengutronix.de>
+         <783613027.15909.1625223222889.JavaMail.zimbra@nod.at>
+         <ac8ef66f-4d57-ead0-d1b3-e97220463241@pengutronix.de>
+         <CAFLxGvxr94apP2jaT0tB6JRDtv_ivrguXK2Ykd3zer_4xtJ+2w@mail.gmail.com>
+Content-Type: text/plain; charset="ISO-8859-15"
+X-Mailer: Evolution 3.28.5 (3.28.5-16.el8) 
+Mime-Version: 1.0
+Content-Transfer-Encoding: 7bit
+X-TM-AS-GCONF: 00
+X-Proofpoint-GUID: IEFJRJOHfvwOngpKt1XIsPonFtReajLI
+X-Proofpoint-ORIG-GUID: wkYED_fW-_xDkCD6flgnu-e43ZxxTkI5
+X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.391,18.0.790
+ definitions=2021-07-20_13:2021-07-19,2021-07-20 signatures=0
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 priorityscore=1501
+ lowpriorityscore=0 clxscore=1011 suspectscore=0 mlxlogscore=999
+ spamscore=0 mlxscore=0 malwarescore=0 adultscore=0 phishscore=0
+ impostorscore=0 bulkscore=0 classifier=spam adjust=0 reason=mlx
+ scancount=1 engine=8.12.0-2104190000 definitions=main-2107200128
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-> Subject: Re: [Patch v4 2/3] Drivers: hv: add Azure Blob driver
->=20
-> On Mon, Jul 19, 2021 at 08:31:05PM -0700, longli@linuxonhyperv.com wrote:
-> > +struct az_blob_device {
-> > +	struct hv_device *device;
-> > +
-> > +	/* Opened files maintained by this device */
-> > +	struct list_head file_list;
-> > +	/* Lock for protecting file_list */
-> > +	spinlock_t file_lock;
-> > +
-> > +	/* The refcount for this device */
-> > +	refcount_t count;
->=20
-> Just use a kref please if you really need this.  Are you sure you do?
-> You already have 2 other reference counted objects being used here, why m=
-ake
-> it 3?
+HI -
 
-The "count" is to keep track how many user-mode instances and vmbus instanc=
-e
-are opened on this device. Being a VMBUS device, this device can be removed=
-=20
-at any time (host servicing etc). We must remove the device when this happe=
-ns
-even if the device is still opened by some user-mode program. The "count" w=
-ill
-guarantee the lifecycle of the device object after all user-mode has releas=
-ed the device.
+On Tue, 2021-07-20 at 21:19 +0200, Richard Weinberger wrote:
+> On Fri, Jul 2, 2021 at 2:37 PM Ahmad Fatoum <a.fatoum@pengutronix.de> wrote:
+> > > Both is possible. If the string starts with "0x" it needs to be decoded to a
+> > > 128 bit key. Otherwise it has to be a up to 16 byte string.
+> >
+> > Fine by me. Looking forward to your patches. :-)
+> 
+> I'm not sure how to proceed.  Should I base my changes on this series
+> or do you plan to send an updated
+> version soon?
+> Maybe it makes also sense to base my DCP patch set on yours.
+> 
+> Trusted Keys maintainers, what do you prefer?
 
-I looked at using "file_list" (it's used for tracking opened files by user-=
-mode) for this purpose,=20
-but I found out I still need to manage the device count at the vmbus side.=
-=20
+Jarkko sent an email saying he is on vacation for 2 weeks.   James was
+on vacation as well.   If there is something that needs immediate
+attention, please let me know.
 
->=20
-> > +	/* Pending requests to VSP */
-> > +	atomic_t pending;
->=20
-> Why does this need to be atomic?
+thanks,
 
-"pending' is per-device maintained that could change when multiple-user acc=
-ess
-the device at the same time.
+Mimi
 
->=20
->=20
-> > +	wait_queue_head_t waiting_to_drain;
-> > +
-> > +	bool removing;
->=20
-> Are you sure this actually works properly?  Why is it needed vs. any othe=
-r misc
-> device?
-
-When removing this device from vmbus, we need to guarantee there is no poss=
-ible packets to
-vmbus. This is a requirement before calling vmbus_close(). Other drivers of=
- vmbus follows
-the same procedure.
-
-The reason why this driver needs this is that the device removal can happen=
- in the middle of
-az_blob_ioctl_user_request(), which can send packet over vmbus.
-
->=20
->=20
-> > +/* VSC->VSP request */
-> > +struct az_blob_vsp_request {
-> > +	u32 version;
-> > +	u32 timeout_ms;
-> > +	u32 data_buffer_offset;
-> > +	u32 data_buffer_length;
-> > +	u32 data_buffer_valid;
-> > +	u32 operation_type;
-> > +	u32 request_buffer_offset;
-> > +	u32 request_buffer_length;
-> > +	u32 response_buffer_offset;
-> > +	u32 response_buffer_length;
-> > +	guid_t transaction_id;
-> > +} __packed;
->=20
-> Why packed?  If this is going across the wire somewhere, you need to spec=
-ify
-> the endian-ness of these values, right?  If this is not going across the =
-wire, no
-> need for it to be packed.
-
-Those data go through the wire.
-
-All data structures specified in the Hyper-V and guest VM use Little Endian=
- byte
-ordering.  All HV core drivers have a dependence on X86, that guarantees th=
-is
-ordering.
-
->=20
-> > +
-> > +/* VSP->VSC response */
-> > +struct az_blob_vsp_response {
-> > +	u32 length;
-> > +	u32 error;
-> > +	u32 response_len;
-> > +} __packed;
->=20
-> Same here.
->=20
-> > +
-> > +struct az_blob_vsp_request_ctx {
-> > +	struct list_head list;
-> > +	struct completion wait_vsp;
-> > +	struct az_blob_request_sync *request; };
-> > +
-> > +struct az_blob_file_ctx {
-> > +	struct list_head list;
-> > +
-> > +	/* List of pending requests to VSP */
-> > +	struct list_head vsp_pending_requests;
-> > +	/* Lock for protecting vsp_pending_requests */
-> > +	spinlock_t vsp_pending_lock;
-> > +	wait_queue_head_t wait_vsp_pending;
-> > +
-> > +	pid_t pid;
->=20
-> Why do you need a pid?  What namespace is this pid in?
-
-It's a request from user library team for production troubleshooting
-purposes. It's exposed as informal in debugfs.
-
->=20
-> > +static int az_blob_probe(struct hv_device *device,
-> > +			 const struct hv_vmbus_device_id *dev_id) {
-> > +	int ret;
-> > +	struct az_blob_device *dev;
-> > +
-> > +	dev =3D kzalloc(sizeof(*dev), GFP_KERNEL);
-> > +	if (!dev)
-> > +		return -ENOMEM;
-> > +
-> > +	spin_lock_init(&dev->file_lock);
-> > +	INIT_LIST_HEAD(&dev->file_list);
-> > +	atomic_set(&dev->pending, 0);
-> > +	init_waitqueue_head(&dev->waiting_to_drain);
-> > +
-> > +	ret =3D az_blob_connect_to_vsp(device, dev, AZ_BLOB_RING_SIZE);
-> > +	if (ret)
-> > +		goto fail;
-> > +
-> > +	refcount_set(&dev->count, 1);
-> > +	az_blob_dev =3D dev;
-> > +
-> > +	// create user-mode client library facing device
-> > +	ret =3D az_blob_create_device(dev);
-> > +	if (ret) {
-> > +		dev_err(AZ_DEV, "failed to create device ret=3D%d\n", ret);
-> > +		az_blob_remove_vmbus(device);
-> > +		goto fail;
-> > +	}
-> > +
-> > +	dev_info(AZ_DEV, "successfully probed device\n");
->=20
-> When drivers are working properly, they should be quiet.
-
-The reason is that in production environment when dealing with custom suppo=
-rt
-cases, there is no good way to check if the channel is opened on the device=
-. Having
-this message will greatly clear confusions on possible mis-configurations.
-
->=20
-> And what is with the AZ_DEV macro mess?
-
-It's not required, it's just for saving code length. I can put "&az_blob_de=
-v->device->device"
-in every dev_err(), but it makes the code look a lot longer.
-
->=20
-> And can you handle more than one device in the system at one time?  I thi=
-nk
-> your debugfs logic will get really confused.
-
-There can be one device object active in the system at any given time. The =
-debugfs grabs
-the current active device object. If the device is being removed, removed o=
-r added,=20
-the current active device object is updated accordingly.
-
->=20
-> thanks,
->=20
-> greg k-h
