@@ -2,104 +2,234 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id CB9B53D0361
-	for <lists+linux-doc@lfdr.de>; Tue, 20 Jul 2021 22:50:35 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id DABA43D0430
+	for <lists+linux-doc@lfdr.de>; Wed, 21 Jul 2021 00:02:14 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S234859AbhGTUJh (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 20 Jul 2021 16:09:37 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:41324 "EHLO
-        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S237970AbhGTT5d (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 20 Jul 2021 15:57:33 -0400
-Received: from mail-qt1-x82b.google.com (mail-qt1-x82b.google.com [IPv6:2607:f8b0:4864:20::82b])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id B608CC061574;
-        Tue, 20 Jul 2021 13:38:09 -0700 (PDT)
-Received: by mail-qt1-x82b.google.com with SMTP id w26so469531qto.9;
-        Tue, 20 Jul 2021 13:38:09 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc;
-        bh=uhJDEodH1yw/K8SgUN/yQPj6QfswnQRoLXT9NJLX4jQ=;
-        b=sRFWu2X/37KyrIRC/Ee0whTh60sAZvseALcf/YWuo+qRJbIthIIrxIXqGT8/Cg/ZPf
-         Fdw1KpIYtcigTQbIeHtX3E4CZ5OEUhgAL115aD6/u7h+aPe8V5p9UHEbGP4rs2kDFEd4
-         mRocR57sdxdxUmYfo6sCpFbtrgezBweI4aXMEN5cb4xZk4sQuanotjRMJeZvbTLvhw0m
-         gL3qYm3ArSrHC9/JWsF904LfdMaJdMIe3VzDDNvNfs+i70jQ9vVbcnZQwcwehn+zyAZw
-         QCRljqBwgDSyDS856mlCE9N52P37ao2PIAEd7st+zclyVQ6zz+KfQ3H55fxKEGvO129M
-         U0Ww==
+        id S231153AbhGTVVb (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 20 Jul 2021 17:21:31 -0400
+Received: from us-smtp-delivery-124.mimecast.com ([216.205.24.124]:23345 "EHLO
+        us-smtp-delivery-124.mimecast.com" rhost-flags-OK-OK-OK-OK)
+        by vger.kernel.org with ESMTP id S231416AbhGTVVP (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 20 Jul 2021 17:21:15 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+        s=mimecast20190719; t=1626818493;
+        h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+         to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+         content-transfer-encoding:content-transfer-encoding:
+         in-reply-to:in-reply-to:references:references;
+        bh=DGxLxC73Q30FLZh4kHloeV2LTAZ2CJRDqzZBDuBEMfM=;
+        b=Ty6BN3NVh1tbncLXYO5K+ZGbp3ho5S8x+Hry/Nlf+J2EDkFSAFfLt4jbi3QTpiBM9zALCR
+        owCtdHz5w6tODcx7oUteVm1faC9NtzB0HQyDwr4LgKQCDL2gBPIeVy6gY+06lqzLZx3HB3
+        r3azSQQqPJPHLyYTHwl31Vj7CZvtG9E=
+Received: from mail-oi1-f199.google.com (mail-oi1-f199.google.com
+ [209.85.167.199]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-563-z3mqFM19OnuTWRrr2y6zew-1; Tue, 20 Jul 2021 18:01:32 -0400
+X-MC-Unique: z3mqFM19OnuTWRrr2y6zew-1
+Received: by mail-oi1-f199.google.com with SMTP id t11-20020a0568080b2bb029025af6d05d99so430800oij.10
+        for <linux-doc@vger.kernel.org>; Tue, 20 Jul 2021 15:01:32 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc;
-        bh=uhJDEodH1yw/K8SgUN/yQPj6QfswnQRoLXT9NJLX4jQ=;
-        b=DJcYDemQgTRbOiLvhKqbQWw6sGyxLsw6qLmWXnmh6PVbTrlOanrLPLcUfsDgtxLBeo
-         1Uqgii54RvQ+weldo1FXkaCbkvkgwX6ka6IChmjrwJNRW4AmY1Gepgi+jLTvfBCB1Bbt
-         aI0gqPAG8rcpoNo+UYsq7IlCx/QZoBjqk80/He8YeJi8Zmvfu1qq3kJ5+SQxEKfma1hx
-         lEYss5rZCRkx9OuOxgj9D+tI+Hadkza2P3aBpSuTfzgPTFIkCxnwJltBEK7WZ2TZvgJi
-         Vx9tHL6Kxpr76ZqW5oh+XGhFJ0pr4LUXI8NqcllBoOJ+5XCb/vOzSH6Z6dBed61m7lo7
-         Q3Qw==
-X-Gm-Message-State: AOAM530aYt9F773KuV6XjA6xVZ7AC0Us4BdGXEr9VW2Qr1ic+BY9D7RD
-        hpYs2vBPH6TPD1F5VkymUK34BXD4wIpxGbkjcr0=
-X-Google-Smtp-Source: ABdhPJzKbzRuSFMwsIcAKjxgt66Cj/VfmkGl8d6QZc7DgNNxohAaGjry2ZWWegKWeNBoHA+LaSsjHwDAOBK07Fm95Fc=
-X-Received: by 2002:a05:622a:138d:: with SMTP id o13mr28072669qtk.245.1626813488854;
- Tue, 20 Jul 2021 13:38:08 -0700 (PDT)
-MIME-Version: 1.0
-References: <cover.1dfbb73645d917b3c76d01290804a3410bd9932e.1624364386.git-series.a.fatoum@pengutronix.de>
- <39e6d65ca5d2a0a35fb71d6c1f85add8ee489a19.1624364386.git-series.a.fatoum@pengutronix.de>
- <1850833581.13438.1625172175436.JavaMail.zimbra@nod.at> <2f608e5a-5a12-6db1-b9bd-a2cd9e3e3671@pengutronix.de>
- <783613027.15909.1625223222889.JavaMail.zimbra@nod.at> <ac8ef66f-4d57-ead0-d1b3-e97220463241@pengutronix.de>
- <CAFLxGvxr94apP2jaT0tB6JRDtv_ivrguXK2Ykd3zer_4xtJ+2w@mail.gmail.com> <40e167cca7b59fc4e11f45ba807486e11eade419.camel@linux.ibm.com>
-In-Reply-To: <40e167cca7b59fc4e11f45ba807486e11eade419.camel@linux.ibm.com>
-From:   Richard Weinberger <richard.weinberger@gmail.com>
-Date:   Tue, 20 Jul 2021 22:37:57 +0200
-Message-ID: <CAFLxGvyiWLwH30XnD5GxqYX2WduxLC-kK7Non5O5N=up6RswGg@mail.gmail.com>
-Subject: Re: [PATCH v2 6/6] KEYS: trusted: Introduce support for NXP
- CAAM-based trusted keys
-To:     Mimi Zohar <zohar@linux.ibm.com>
-Cc:     Ahmad Fatoum <a.fatoum@pengutronix.de>,
-        James Bottomley <James.Bottomley@hansenpartnership.com>,
-        Richard Weinberger <richard@nod.at>,
+        h=x-gm-message-state:date:from:to:cc:subject:message-id:in-reply-to
+         :references:mime-version:content-transfer-encoding;
+        bh=DGxLxC73Q30FLZh4kHloeV2LTAZ2CJRDqzZBDuBEMfM=;
+        b=eBIKy7BViglR1FwtY8UIRsCjJsb9LIkmdDnqdW98qPFBV0KYCvJzol17A58rJlHQSq
+         XuhPc4LnNhHX3ojLfCJFGupPreH3waKkzQhNzl9gnKbPfG2C0cK51brRqbXJXM/zulGb
+         XNSnF3tQyXZOW+XafwNM0z1nrZ+fIrqOPlzeC350JptkkPENBR6/PESfRYbn4oYYFjA0
+         Nl8quKMPe3DF2Tv6ZXZzZWcuJchsHtLxgqkYPZVq1ypG7O65pFQzkQhYCe2a6OEnTssY
+         bi4OLBIuM3pasgxR8KTFQXhWyk/Jp8PXndT6ziF/u/9MMMmpHwnNVW4NEl4FZUPtSP0C
+         7M8Q==
+X-Gm-Message-State: AOAM531/KipJtJ+k1N5x3D7UM0qllx9EszTLXDt9Kx/DkHJeSmqGaMWt
+        694p+VFol+As5NSc9Jsq2sh1L2t93iPVdRMJHSKlolLTNnw4c50AANnZc9Sq+Ihe2kQFlHaXGGP
+        7EEbN9xvJXMGOXUbgJVI3
+X-Received: by 2002:a05:6808:aa3:: with SMTP id r3mr18166272oij.133.1626818491781;
+        Tue, 20 Jul 2021 15:01:31 -0700 (PDT)
+X-Google-Smtp-Source: ABdhPJwuyDIfTXjm5YKo9TBgR+HrFk2cZEkVnlsdeNA/JOY8RcUjz3Wmb8/jGMHDDitpmXWLkurNEg==
+X-Received: by 2002:a05:6808:aa3:: with SMTP id r3mr18166225oij.133.1626818491525;
+        Tue, 20 Jul 2021 15:01:31 -0700 (PDT)
+Received: from redhat.com ([198.99.80.109])
+        by smtp.gmail.com with ESMTPSA id q187sm259680oif.2.2021.07.20.15.01.29
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 20 Jul 2021 15:01:30 -0700 (PDT)
+Date:   Tue, 20 Jul 2021 16:01:27 -0600
+From:   Alex Williamson <alex.williamson@redhat.com>
+To:     Jason Gunthorpe <jgg@nvidia.com>
+Cc:     David Airlie <airlied@linux.ie>,
+        Tony Krowiak <akrowiak@linux.ibm.com>,
+        Christian Borntraeger <borntraeger@de.ibm.com>,
+        Cornelia Huck <cohuck@redhat.com>,
         Jonathan Corbet <corbet@lwn.net>,
-        David Howells <dhowells@redhat.com>,
-        Jarkko Sakkinen <jarkko@kernel.org>,
-        James Bottomley <jejb@linux.ibm.com>,
-        kernel <kernel@pengutronix.de>, James Morris <jmorris@namei.org>,
-        "Serge E. Hallyn" <serge@hallyn.com>,
-        horia geanta <horia.geanta@nxp.com>,
-        aymen sghaier <aymen.sghaier@nxp.com>,
-        Herbert Xu <herbert@gondor.apana.org.au>,
-        davem <davem@davemloft.net>, Udit Agarwal <udit.agarwal@nxp.com>,
-        Eric Biggers <ebiggers@kernel.org>,
-        Jan Luebbe <j.luebbe@pengutronix.de>,
-        david <david@sigma-star.at>,
-        Franck Lenormand <franck.lenormand@nxp.com>,
-        Sumit Garg <sumit.garg@linaro.org>,
-        "open list, ASYMMETRIC KEYS" <keyrings@vger.kernel.org>,
-        Linux Crypto Mailing List <linux-crypto@vger.kernel.org>,
-        Linux Doc Mailing List <linux-doc@vger.kernel.org>,
-        linux-integrity <linux-integrity@vger.kernel.org>,
-        linux-kernel <linux-kernel@vger.kernel.org>,
-        LSM <linux-security-module@vger.kernel.org>
-Content-Type: text/plain; charset="UTF-8"
+        Daniel Vetter <daniel@ffwll.ch>,
+        Diana Craciun <diana.craciun@oss.nxp.com>,
+        dri-devel@lists.freedesktop.org,
+        Eric Auger <eric.auger@redhat.com>,
+        Eric Farman <farman@linux.ibm.com>,
+        Harald Freudenberger <freude@linux.ibm.com>,
+        Vasily Gorbik <gor@linux.ibm.com>,
+        Heiko Carstens <hca@linux.ibm.com>,
+        intel-gfx@lists.freedesktop.org,
+        intel-gvt-dev@lists.freedesktop.org,
+        Jani Nikula <jani.nikula@linux.intel.com>,
+        Jason Herne <jjherne@linux.ibm.com>,
+        Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
+        kvm@vger.kernel.org, Kirti Wankhede <kwankhede@nvidia.com>,
+        linux-doc@vger.kernel.org, linux-s390@vger.kernel.org,
+        Matthew Rosato <mjrosato@linux.ibm.com>,
+        Peter Oberparleiter <oberpar@linux.ibm.com>,
+        Halil Pasic <pasic@linux.ibm.com>,
+        Rodrigo Vivi <rodrigo.vivi@intel.com>,
+        Vineeth Vijayan <vneethv@linux.ibm.com>,
+        Zhi Wang <zhi.a.wang@intel.com>,
+        "Raj, Ashok" <ashok.raj@intel.com>, Christoph Hellwig <hch@lst.de>,
+        Leon Romanovsky <leonro@nvidia.com>,
+        Max Gurtovoy <mgurtovoy@nvidia.com>,
+        Yishai Hadas <yishaih@nvidia.com>,
+        Zhenyu Wang <zhenyuw@linux.intel.com>
+Subject: Re: [PATCH v2 02/14] vfio/mbochs: Fix missing error unwind in
+ mbochs_probe()
+Message-ID: <20210720160127.17bf3c19.alex.williamson@redhat.com>
+In-Reply-To: <2-v2-b6a5582525c9+ff96-vfio_reflck_jgg@nvidia.com>
+References: <0-v2-b6a5582525c9+ff96-vfio_reflck_jgg@nvidia.com>
+        <2-v2-b6a5582525c9+ff96-vfio_reflck_jgg@nvidia.com>
+X-Mailer: Claws Mail 3.17.8 (GTK+ 2.24.33; x86_64-redhat-linux-gnu)
+MIME-Version: 1.0
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 7bit
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Tue, Jul 20, 2021 at 10:24 PM Mimi Zohar <zohar@linux.ibm.com> wrote:
-> > I'm not sure how to proceed.  Should I base my changes on this series
-> > or do you plan to send an updated
-> > version soon?
-> > Maybe it makes also sense to base my DCP patch set on yours.
-> >
-> > Trusted Keys maintainers, what do you prefer?
->
-> Jarkko sent an email saying he is on vacation for 2 weeks.   James was
-> on vacation as well.   If there is something that needs immediate
-> attention, please let me know.
+On Tue, 20 Jul 2021 14:42:48 -0300
+Jason Gunthorpe <jgg@nvidia.com> wrote:
 
-Oh, let them enjoy their well deserved vacation.
-There no need to hurry. :-)
+> Compared to mbochs_remove() two cases are missing from the
+> vfio_register_group_dev() unwind. Add them in.
+> 
+> Fixes: 681c1615f891 ("vfio/mbochs: Convert to use vfio_register_group_dev()")
+> Reported-by: Cornelia Huck <cohuck@redhat.com>
+> Signed-off-by: Jason Gunthorpe <jgg@nvidia.com>
+> ---
+>  samples/vfio-mdev/mbochs.c | 7 +++++--
+>  1 file changed, 5 insertions(+), 2 deletions(-)
+> 
+> diff --git a/samples/vfio-mdev/mbochs.c b/samples/vfio-mdev/mbochs.c
+> index e81b875b4d87b4..501845b08c0974 100644
+> --- a/samples/vfio-mdev/mbochs.c
+> +++ b/samples/vfio-mdev/mbochs.c
+> @@ -553,11 +553,14 @@ static int mbochs_probe(struct mdev_device *mdev)
+>  
+>  	ret = vfio_register_group_dev(&mdev_state->vdev);
+>  	if (ret)
+> -		goto err_mem;
+> +		goto err_bytes;
+>  	dev_set_drvdata(&mdev->dev, mdev_state);
+>  	return 0;
+>  
+> +err_bytes:
+> +	mbochs_used_mbytes -= mdev_state->type->mbytes;
+>  err_mem:
+> +	kfree(mdev_state->pages);
+>  	kfree(mdev_state->vconfig);
+>  	kfree(mdev_state);
+>  	return ret;
+> @@ -567,8 +570,8 @@ static void mbochs_remove(struct mdev_device *mdev)
+>  {
+>  	struct mdev_state *mdev_state = dev_get_drvdata(&mdev->dev);
+>  
+> -	mbochs_used_mbytes -= mdev_state->type->mbytes;
+>  	vfio_unregister_group_dev(&mdev_state->vdev);
+> +	mbochs_used_mbytes -= mdev_state->type->mbytes;
+>  	kfree(mdev_state->pages);
+>  	kfree(mdev_state->vconfig);
+>  	kfree(mdev_state);
 
--- 
-Thanks,
-//richard
+Hmm, doesn't this suggest we need another atomic conversion?  (untested)
+
+diff --git a/samples/vfio-mdev/mbochs.c b/samples/vfio-mdev/mbochs.c
+index e81b875b4d87..842819e29c6b 100644
+--- a/samples/vfio-mdev/mbochs.c
++++ b/samples/vfio-mdev/mbochs.c
+@@ -129,7 +129,7 @@ static dev_t		mbochs_devt;
+ static struct class	*mbochs_class;
+ static struct cdev	mbochs_cdev;
+ static struct device	mbochs_dev;
+-static int		mbochs_used_mbytes;
++static atomic_t		mbochs_avail_mbytes;
+ static const struct vfio_device_ops mbochs_dev_ops;
+ 
+ struct vfio_region_info_ext {
+@@ -511,14 +511,19 @@ static int mbochs_probe(struct mdev_device *mdev)
+ 		&mbochs_types[mdev_get_type_group_id(mdev)];
+ 	struct device *dev = mdev_dev(mdev);
+ 	struct mdev_state *mdev_state;
++	int avail_mbytes = atomic_read(&mbochs_avail_mbytes);
+ 	int ret = -ENOMEM;
+ 
+-	if (type->mbytes + mbochs_used_mbytes > max_mbytes)
+-		return -ENOMEM;
++	do {
++		if (avail_mbytes < type->mbytes)
++			return ret;
++	} while (!atomic_try_cmpxchg(&mbochs_avail_mbytes, &avail_mbytes,
++				     avail_mbytes - type->mbytes));
+ 
+ 	mdev_state = kzalloc(sizeof(struct mdev_state), GFP_KERNEL);
+ 	if (mdev_state == NULL)
+-		return -ENOMEM;
++		goto err_resv;
++
+ 	vfio_init_group_dev(&mdev_state->vdev, &mdev->dev, &mbochs_dev_ops);
+ 
+ 	mdev_state->vconfig = kzalloc(MBOCHS_CONFIG_SPACE_SIZE, GFP_KERNEL);
+@@ -549,8 +554,6 @@ static int mbochs_probe(struct mdev_device *mdev)
+ 	mbochs_create_config_space(mdev_state);
+ 	mbochs_reset(mdev_state);
+ 
+-	mbochs_used_mbytes += type->mbytes;
+-
+ 	ret = vfio_register_group_dev(&mdev_state->vdev);
+ 	if (ret)
+ 		goto err_mem;
+@@ -558,8 +561,11 @@ static int mbochs_probe(struct mdev_device *mdev)
+ 	return 0;
+ 
+ err_mem:
++	kfree(mdev_state->pages);
+ 	kfree(mdev_state->vconfig);
+ 	kfree(mdev_state);
++err_resv:
++	atomic_add(mdev_state->type->mbytes, &mbochs_avail_mbytes);
+ 	return ret;
+ }
+ 
+@@ -567,11 +573,11 @@ static void mbochs_remove(struct mdev_device *mdev)
+ {
+ 	struct mdev_state *mdev_state = dev_get_drvdata(&mdev->dev);
+ 
+-	mbochs_used_mbytes -= mdev_state->type->mbytes;
+ 	vfio_unregister_group_dev(&mdev_state->vdev);
+ 	kfree(mdev_state->pages);
+ 	kfree(mdev_state->vconfig);
+ 	kfree(mdev_state);
++	atomic_add(mdev_state->type->mbytes, &mbochs_avail_mbytes);
+ }
+ 
+ static ssize_t mbochs_read(struct vfio_device *vdev, char __user *buf,
+@@ -1351,7 +1357,7 @@ static ssize_t available_instances_show(struct mdev_type *mtype,
+ {
+ 	const struct mbochs_type *type =
+ 		&mbochs_types[mtype_get_type_group_id(mtype)];
+-	int count = (max_mbytes - mbochs_used_mbytes) / type->mbytes;
++	int count = atomic_read(&mbochs_avail_mbytes) / type->mbytes;
+ 
+ 	return sprintf(buf, "%d\n", count);
+ }
+@@ -1460,6 +1466,8 @@ static int __init mbochs_dev_init(void)
+ 	if (ret)
+ 		goto err_class;
+ 
++	atomic_set(&mbochs_avail_mbytes, max_mbytes);
++
+ 	ret = mdev_register_device(&mbochs_dev, &mdev_fops);
+ 	if (ret)
+ 		goto err_device;
+
