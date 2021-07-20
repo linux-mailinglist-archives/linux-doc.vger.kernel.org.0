@@ -2,282 +2,100 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 8E7263D00A1
-	for <lists+linux-doc@lfdr.de>; Tue, 20 Jul 2021 19:43:44 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 10BB93D021D
+	for <lists+linux-doc@lfdr.de>; Tue, 20 Jul 2021 21:21:28 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S232267AbhGTRCq (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 20 Jul 2021 13:02:46 -0400
-Received: from mail-mw2nam10on2068.outbound.protection.outlook.com ([40.107.94.68]:52928
-        "EHLO NAM10-MW2-obe.outbound.protection.outlook.com"
-        rhost-flags-OK-OK-OK-FAIL) by vger.kernel.org with ESMTP
-        id S229650AbhGTRCb (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Tue, 20 Jul 2021 13:02:31 -0400
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=RqzL8x0UO/SmddpwBNvlFZB4dClbcImqAXHh86Y6ntJWNQtJJQIpPbQtHwshkSpshA/q20Ada1JbqeZWuXo2tIYPic8loP8MKWrXwwlfjX/RIxkg/U83H2W3mLENe24ncz/vagn9LzSQ+nkCp9+AYbIdgecTN6LSO0Ve22raE4rAv31EJHFkEi6jhdcJaGfJlHgtPcwFOjO82V1Bky2kP/qF27t0GtIiaWkEKVpi+HFHe99zyAorEXbx3Oa4Knlz4InHa2dgnKS8J5M8H9eDJYi6U4glRX4Cy1HSG/gMWTzSkf7x4EEiCD7/FuPR+JyeWjZELsyCuQZVvzYcZxtNKA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=eJA9j/OugUqagLXMaaKxFUld5m4KW50elCDaxK70ehs=;
- b=gyeaCnvKpz12QdrWcOHY48aYnM/ure9+Q8SLRMXMV/bzj2TMWEKCqDmLVd4qlBYMlCLvMCPgjyFAmBYZ7+leLQ+XM39wv+8qer/PWEFhDNQpPAI5sk28XLnZNBUBF0f++RXdeSCW9xMu6omVgW3VFamBw2LbSV+j+MGjfe6tWTvfUBx7Y9bsJOJe/+KKo1dmCvA79FA185Fk4S8kYSbENrQLZ4m+c9HALzgKaBXOGYDBt5UVFmKf9eXPzubFYRwqeFfuM3z+LVxY/mdPmHUTajZKccDEDwhC+zNenVzRs1xRKegghuSwj2ogJdmRdf5iSbrYUXomaworRtbiAea0cg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=nvidia.com; dmarc=pass action=none header.from=nvidia.com;
- dkim=pass header.d=nvidia.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
- s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=eJA9j/OugUqagLXMaaKxFUld5m4KW50elCDaxK70ehs=;
- b=AnwDS1ACvRDErN+oW/PzVI5Ef/ibK22ooahQ6bKXnBg3lrO6qpLtEykKXGzIL1FnzxOyXRUQ7NwX8ZyI4mIXZyZHksIK7IkNigC20bLri/K+Tqi4adcKmT+QBTb+DTta/GsB/E+lGdiG0AK6ta04uPAs4c1TVWeo6VsknFCBssa9VE0PClWDo8VdTn8njpD5BXaG9tn64ezY5z+9zZ+Ncgf4EEUbRNouupf88CMe/9hf3cWBYXlUfkocu4dOWMtEfn+e5pJGzEuZAewuzm79e5Qw+luv985LumogbjuQ8fCV8yvhAK8yCWpLYjD+RDPU/DhYkMvORjGLLGqh1vgspQ==
-Authentication-Results: linux.ie; dkim=none (message not signed)
- header.d=none;linux.ie; dmarc=none action=none header.from=nvidia.com;
-Received: from BL0PR12MB5506.namprd12.prod.outlook.com (2603:10b6:208:1cb::22)
- by BL1PR12MB5288.namprd12.prod.outlook.com (2603:10b6:208:314::23) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4331.21; Tue, 20 Jul
- 2021 17:43:04 +0000
-Received: from BL0PR12MB5506.namprd12.prod.outlook.com
- ([fe80::d017:af2f:7049:5482]) by BL0PR12MB5506.namprd12.prod.outlook.com
- ([fe80::d017:af2f:7049:5482%5]) with mapi id 15.20.4331.034; Tue, 20 Jul 2021
- 17:43:04 +0000
-From:   Jason Gunthorpe <jgg@nvidia.com>
-To:     David Airlie <airlied@linux.ie>,
-        Tony Krowiak <akrowiak@linux.ibm.com>,
-        Alex Williamson <alex.williamson@redhat.com>,
-        Christian Borntraeger <borntraeger@de.ibm.com>,
-        Cornelia Huck <cohuck@redhat.com>,
-        Jonathan Corbet <corbet@lwn.net>,
-        Daniel Vetter <daniel@ffwll.ch>,
-        Diana Craciun <diana.craciun@oss.nxp.com>,
-        dri-devel@lists.freedesktop.org,
-        Eric Auger <eric.auger@redhat.com>,
-        Eric Farman <farman@linux.ibm.com>,
-        Harald Freudenberger <freude@linux.ibm.com>,
-        Vasily Gorbik <gor@linux.ibm.com>,
-        Heiko Carstens <hca@linux.ibm.com>,
-        intel-gfx@lists.freedesktop.org,
-        intel-gvt-dev@lists.freedesktop.org,
-        Jani Nikula <jani.nikula@linux.intel.com>,
-        Jason Herne <jjherne@linux.ibm.com>,
-        Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
-        kvm@vger.kernel.org, Kirti Wankhede <kwankhede@nvidia.com>,
-        linux-doc@vger.kernel.org, linux-s390@vger.kernel.org,
-        Matthew Rosato <mjrosato@linux.ibm.com>,
-        Peter Oberparleiter <oberpar@linux.ibm.com>,
-        Halil Pasic <pasic@linux.ibm.com>,
-        Rodrigo Vivi <rodrigo.vivi@intel.com>,
-        Vineeth Vijayan <vneethv@linux.ibm.com>,
-        Zhi Wang <zhi.a.wang@intel.com>
-Cc:     "Raj, Ashok" <ashok.raj@intel.com>, Christoph Hellwig <hch@lst.de>,
-        Leon Romanovsky <leonro@nvidia.com>,
-        Max Gurtovoy <mgurtovoy@nvidia.com>,
-        Yishai Hadas <yishaih@nvidia.com>,
-        Zhenyu Wang <zhenyuw@linux.intel.com>
-Subject: [PATCH v2 14/14] vfio: Remove struct vfio_device_ops open/release
-Date:   Tue, 20 Jul 2021 14:43:00 -0300
-Message-Id: <14-v2-b6a5582525c9+ff96-vfio_reflck_jgg@nvidia.com>
-In-Reply-To: <0-v2-b6a5582525c9+ff96-vfio_reflck_jgg@nvidia.com>
-References: 
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-ClientProxiedBy: BL0PR05CA0020.namprd05.prod.outlook.com
- (2603:10b6:208:91::30) To BL0PR12MB5506.namprd12.prod.outlook.com
- (2603:10b6:208:1cb::22)
+        id S233590AbhGTSkW (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 20 Jul 2021 14:40:22 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:52326 "EHLO
+        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S232735AbhGTSjg (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 20 Jul 2021 14:39:36 -0400
+Received: from mail-qt1-x82b.google.com (mail-qt1-x82b.google.com [IPv6:2607:f8b0:4864:20::82b])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 9F374C061574;
+        Tue, 20 Jul 2021 12:20:08 -0700 (PDT)
+Received: by mail-qt1-x82b.google.com with SMTP id d15so293672qte.13;
+        Tue, 20 Jul 2021 12:20:08 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc;
+        bh=zFuzNBIJ3SOuNszQPtdyxiTi9yoIw9/CFgzpID1S2XU=;
+        b=gp7M1QghoO41WNBVmXuuTneI1Vq3cIRZrRygM7/0rnzOtNhjGFBpPckaBnDsYpz2/J
+         uQOZ9shSUn/+MPbMg3ZzbO2VD77Pt1tcALFBRn12Uwh7wHtAD3sWOhaQYgAUkhDzb2W7
+         kV8KK10Wz9W/YsAXeAShXJlQVRowN33Tyd03Nfz2ud3LllXPJ4zFmFhduNExqhAz2UY3
+         u6yLQnJWJDZbUsOt+NbQP/V+hM/YYvVt1ycnQJB1oGKnFSLCu4U1MYawVnfCjTl8yQfZ
+         g3ixrsadSGTvcu8Wk9XVHeLXMPf9llKChDxC7aW0Zy3pVty51zt6w/HY0j1t12BQGUbs
+         b5Jw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=zFuzNBIJ3SOuNszQPtdyxiTi9yoIw9/CFgzpID1S2XU=;
+        b=BMygT8rqHUeqRWOmwYncvq7du60Vxu8O2yC9xV4Q2jWs9qZNWZUs9YKaFp3YXI8eZK
+         MARrgB3XO8nI9grGoRPqUWNLU5E668QUSZy9n0H5gz6pjMbklI9dO2WgKo050wAVKEms
+         EyyV0J3YTkSorfvu0GyQ7I/GOijK2CR8Rx8RjVwjNAihCMsbnYv2Xmzc9D3vNXlTZCT6
+         RGI/KqhDenBYxrbZ86mJJK/EnwKIdJoJMv0di27S7PvDRWL2dNpu+Mif5QwXQSMeGBRQ
+         B3uqoVBltaI3XFnENr0wYhSfSYkTxLb5vsNtYlg+7A1iURCPUnYuGttDQQCjA4g7jCRo
+         QXaQ==
+X-Gm-Message-State: AOAM532TJ+WFy5yTcu3BsbYnZ9AuULpZnVJZqKqqZSW8fq+NYYD5JrDf
+        /1cFA1ZSISJLZJOojq7mXhKaT7X7VMUznuHNn6aigh166l8=
+X-Google-Smtp-Source: ABdhPJyjmHyDnctsEMKBkZr9phS/9jJZ60CBbfNFwXeQRHc/Wl9jbZ6ktVF6XY6s6JAzaTOSk28akcrADfNwmOUSenM=
+X-Received: by 2002:a05:622a:138d:: with SMTP id o13mr27796695qtk.245.1626808807804;
+ Tue, 20 Jul 2021 12:20:07 -0700 (PDT)
 MIME-Version: 1.0
-X-MS-Exchange-MessageSentRepresentingType: 1
-Received: from mlx.ziepe.ca (142.162.113.129) by BL0PR05CA0020.namprd05.prod.outlook.com (2603:10b6:208:91::30) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4352.13 via Frontend Transport; Tue, 20 Jul 2021 17:43:02 +0000
-Received: from jgg by mlx with local (Exim 4.94)        (envelope-from <jgg@nvidia.com>)        id 1m5tll-0051FP-TU; Tue, 20 Jul 2021 14:43:01 -0300
-X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: 4842e168-0cc4-4db2-8f73-08d94ba5d2cc
-X-MS-TrafficTypeDiagnostic: BL1PR12MB5288:
-X-MS-Exchange-Transport-Forked: True
-X-Microsoft-Antispam-PRVS: <BL1PR12MB52885B84B9D0048E81AD32F5C2E29@BL1PR12MB5288.namprd12.prod.outlook.com>
-X-MS-Oob-TLC-OOBClassifiers: OLM:6790;
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: pEtrm5ZlK/1uDeaYOjQYJN022DCvi1VSlKCYKAYHPQaHXJIkrKyY0X/ffFHb6N7ohyKMprydIfwGdONBDytKrmEZ+ySRHWL0Y2i7d7xV4nHfeYVcQO10F+uGCP9Rp3GIQ0+vvlBg0eT5UKHGd9j43/WYzKm2aQk/+PbKkEkrHINlI6ineU/L3Llxwc8BC+vhrfeoxZvLLQU+jNH45b0nt+4VDe/A7+G5KVsuiY93JnXhhcHSB+HOpuLUEzyzq1sjt7iQ8/am8efRdP9MUeGkykr/BrDoeFzaJWWpg0+fcThi0yKVLipkRby5H5nnLDkyaur43ucl1v7mbT3pu7idxg2Ey8YO5iA38eOvXAim52tEcmVY47pq/UgjCQDZOex5yXOEf+OBhy9LU4gEal2qOTNbLDMUK/NeLg01GgoKKiCE7AAdiYMWXvgcTkSRMOr2kT5/olfWPbi83E03edPp3ajF2m0lgnEqQr281KxyfQRDAHqFfXaAKG0wMutNG3vF7u5sEB7+FgBmKr3VCrknBOJ7kPcF5oH0nWzG94Jckl0LAsncb0UplONuGkQ7GWhyQB6Pe7GQoTqn/rsLgXhTHr0PdFIPuAcQsJDUMEvEZyrQWebFLhGSIFL3Vgkd8xyDBAfKWx+8OPYW7/b7vInEQQ3V17Rd6QyiCM+mv8mF06JBcMKmUDJNrfMEVWBNCUhe
-X-Forefront-Antispam-Report: CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BL0PR12MB5506.namprd12.prod.outlook.com;PTR:;CAT:NONE;SFS:(4636009)(396003)(136003)(376002)(366004)(39860400002)(346002)(66946007)(7416002)(7406005)(86362001)(2906002)(66476007)(54906003)(38100700002)(83380400001)(8936002)(316002)(110136005)(478600001)(36756003)(66556008)(186003)(26005)(5660300002)(8676002)(921005)(9786002)(9746002)(4326008)(426003)(2616005);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?SPWhJwl+SG9TIhUuO3Y7abLy+0BRFwCudQ7LUOZbARpIdu+9UyM7VjzMA9hb?=
- =?us-ascii?Q?GJqHEUBbWs4iUeTf1HxW+/e2gsjWcl77v/v6QxMX49PdVNW7UA2vlHhjTJnV?=
- =?us-ascii?Q?/aoLhNYqsnEW3Lw+wSdFQsKUIq1eh5bIMrfdfEL4QS7EMqoU/s/zrMkvdBYv?=
- =?us-ascii?Q?64xkYMHcnfK3sQKh9Z2qgGLnZtWTai5giA1GKewosYYM6vJNgsgfnazc2fCk?=
- =?us-ascii?Q?6zmyYmTOCmdkPR8eN+sRUgv+pVRa8rPH54AmFnqD3YFAKoRI1eZqTMBo8Lq+?=
- =?us-ascii?Q?5Lqu3qnrpyDTTe9jiQgMSAWbogFB46qeu8F7H6vDEnkLnluYFJKuq5CpyC22?=
- =?us-ascii?Q?dGnH2lFgr0Z8L+v5soFJClGQddf3a7FxvutyjA1nwuZ8lF4W90qYtrhkR6l0?=
- =?us-ascii?Q?6Mg1Z5c2p9vvGWR7htHrsqt7mwULGhRldvG71Jr1nvisLtKESXXddyjZU5+i?=
- =?us-ascii?Q?IqS90JCLJr+WEAx5h0bd5dOwug1jnduDSFYF9HERKxwwimhIAdqBeR9VoF/y?=
- =?us-ascii?Q?ILWmvhuN4BHGhkmX+HZaT0XId07P3bBLoLtpVjDkbz5GcK/o7ahJ4SDs68jw?=
- =?us-ascii?Q?7nHsxhAW/q6ZMtrrlvVSSekQoN3vAxEma4tUNtfEgvJM5zvO1YmIhKj27iQ3?=
- =?us-ascii?Q?DkxYwDO1KVh3PrzrQCW3/D3LsQIgvmjakV7HPR32jzxlBkMKmvMg3DOCJVoX?=
- =?us-ascii?Q?Pod2CFB33qspb0I+ppEOs8LuhUSrOgP8XX7M+r5vNbt2hpCsaHytS1JZ6MIy?=
- =?us-ascii?Q?QGIg3Q5CIiRpkPHJnSk5z6LbkpYvL6qS82IVXfKMG/WDOEl+f6Sl/PAxXlKg?=
- =?us-ascii?Q?qJAx5xTQgJyCm91HuHicTYoWGVJAGtOUAvbAAYt0PYVz8t85l4K7cDJUtpRL?=
- =?us-ascii?Q?Bn9QOtM1qJVYitagWVRFWoli9mayeAlQQDy7Jxmk09RrDfk9VUKtKUQd13ZN?=
- =?us-ascii?Q?fxFdzzbZurmZ48aB+uEg7UHB42rAFvMPMFI4bfbCONGcIHWMFaRX56hy6Fe5?=
- =?us-ascii?Q?2oAeFNoX/XaR7EJakkXUGQuG0xGbyvVB5sjW7veNIEymGTsrmoHQnxOIEcZ/?=
- =?us-ascii?Q?BC6fOBBE0oD7kLFklbe2OQazwohHrIXwOXHx1348FEpcKByi058YFHSoRLSy?=
- =?us-ascii?Q?ktqsSmO/NEObsfYmtb+OF3N/J6GuJ3/M2+csPYx6lobN14ErcEXLBnF1Nrh4?=
- =?us-ascii?Q?rhWLtG/FHl6bgLY/Yc1MSuwmRFklkNUP2UOTMcrgr408nOZCuEVkXNUAFgWY?=
- =?us-ascii?Q?NGOuWl74WYzMkzcTb2RXm5DACIZ75SWYPZtSrnM/0qkn7n2rKcqQkUoWkUVH?=
- =?us-ascii?Q?ZzKMTHU33ul9AR6rZ4ZglFYT?=
-X-OriginatorOrg: Nvidia.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 4842e168-0cc4-4db2-8f73-08d94ba5d2cc
-X-MS-Exchange-CrossTenant-AuthSource: BL0PR12MB5506.namprd12.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 20 Jul 2021 17:43:03.0254
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: 22pEo8/Y/WIs9Ap1P9GySkOW4gPGsyy4RblxVqQhDbHoA1WYnWj04Y/KOEeTw3lp
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: BL1PR12MB5288
+References: <cover.1dfbb73645d917b3c76d01290804a3410bd9932e.1624364386.git-series.a.fatoum@pengutronix.de>
+ <39e6d65ca5d2a0a35fb71d6c1f85add8ee489a19.1624364386.git-series.a.fatoum@pengutronix.de>
+ <1850833581.13438.1625172175436.JavaMail.zimbra@nod.at> <2f608e5a-5a12-6db1-b9bd-a2cd9e3e3671@pengutronix.de>
+ <783613027.15909.1625223222889.JavaMail.zimbra@nod.at> <ac8ef66f-4d57-ead0-d1b3-e97220463241@pengutronix.de>
+In-Reply-To: <ac8ef66f-4d57-ead0-d1b3-e97220463241@pengutronix.de>
+From:   Richard Weinberger <richard.weinberger@gmail.com>
+Date:   Tue, 20 Jul 2021 21:19:56 +0200
+Message-ID: <CAFLxGvxr94apP2jaT0tB6JRDtv_ivrguXK2Ykd3zer_4xtJ+2w@mail.gmail.com>
+Subject: Re: [PATCH v2 6/6] KEYS: trusted: Introduce support for NXP
+ CAAM-based trusted keys
+To:     Ahmad Fatoum <a.fatoum@pengutronix.de>
+Cc:     Richard Weinberger <richard@nod.at>,
+        Jonathan Corbet <corbet@lwn.net>,
+        David Howells <dhowells@redhat.com>,
+        Jarkko Sakkinen <jarkko@kernel.org>,
+        James Bottomley <jejb@linux.ibm.com>,
+        Mimi Zohar <zohar@linux.ibm.com>,
+        kernel <kernel@pengutronix.de>, James Morris <jmorris@namei.org>,
+        "Serge E. Hallyn" <serge@hallyn.com>,
+        horia geanta <horia.geanta@nxp.com>,
+        aymen sghaier <aymen.sghaier@nxp.com>,
+        Herbert Xu <herbert@gondor.apana.org.au>,
+        davem <davem@davemloft.net>, Udit Agarwal <udit.agarwal@nxp.com>,
+        Eric Biggers <ebiggers@kernel.org>,
+        Jan Luebbe <j.luebbe@pengutronix.de>,
+        david <david@sigma-star.at>,
+        Franck Lenormand <franck.lenormand@nxp.com>,
+        Sumit Garg <sumit.garg@linaro.org>,
+        "open list, ASYMMETRIC KEYS" <keyrings@vger.kernel.org>,
+        Linux Crypto Mailing List <linux-crypto@vger.kernel.org>,
+        Linux Doc Mailing List <linux-doc@vger.kernel.org>,
+        linux-integrity <linux-integrity@vger.kernel.org>,
+        linux-kernel <linux-kernel@vger.kernel.org>,
+        LSM <linux-security-module@vger.kernel.org>
+Content-Type: text/plain; charset="UTF-8"
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Nothing uses this anymore, delete it.
+On Fri, Jul 2, 2021 at 2:37 PM Ahmad Fatoum <a.fatoum@pengutronix.de> wrote:
+> > Both is possible. If the string starts with "0x" it needs to be decoded to a
+> > 128 bit key. Otherwise it has to be a up to 16 byte string.
+>
+> Fine by me. Looking forward to your patches. :-)
 
-Signed-off-by: Yishai Hadas <yishaih@nvidia.com>
-Signed-off-by: Jason Gunthorpe <jgg@nvidia.com>
----
- drivers/vfio/mdev/vfio_mdev.c | 22 ----------------------
- drivers/vfio/vfio.c           | 14 +-------------
- include/linux/mdev.h          |  7 -------
- include/linux/vfio.h          |  4 ----
- 4 files changed, 1 insertion(+), 46 deletions(-)
+I'm not sure how to proceed.  Should I base my changes on this series
+or do you plan to send an updated
+version soon?
+Maybe it makes also sense to base my DCP patch set on yours.
 
-diff --git a/drivers/vfio/mdev/vfio_mdev.c b/drivers/vfio/mdev/vfio_mdev.c
-index 725cd2fe675190..5174974e5fb5f9 100644
---- a/drivers/vfio/mdev/vfio_mdev.c
-+++ b/drivers/vfio/mdev/vfio_mdev.c
-@@ -37,26 +37,6 @@ static void vfio_mdev_close_device(struct vfio_device *core_vdev)
- 		parent->ops->close_device(mdev);
- }
- 
--static int vfio_mdev_open(struct vfio_device *core_vdev)
--{
--	struct mdev_device *mdev = to_mdev_device(core_vdev->dev);
--	struct mdev_parent *parent = mdev->type->parent;
--
--	if (unlikely(!parent->ops->open))
--		return -EINVAL;
--
--	return parent->ops->open(mdev);
--}
--
--static void vfio_mdev_release(struct vfio_device *core_vdev)
--{
--	struct mdev_device *mdev = to_mdev_device(core_vdev->dev);
--	struct mdev_parent *parent = mdev->type->parent;
--
--	if (likely(parent->ops->release))
--		parent->ops->release(mdev);
--}
--
- static long vfio_mdev_unlocked_ioctl(struct vfio_device *core_vdev,
- 				     unsigned int cmd, unsigned long arg)
- {
-@@ -122,8 +102,6 @@ static const struct vfio_device_ops vfio_mdev_dev_ops = {
- 	.name		= "vfio-mdev",
- 	.open_device	= vfio_mdev_open_device,
- 	.close_device	= vfio_mdev_close_device,
--	.open		= vfio_mdev_open,
--	.release	= vfio_mdev_release,
- 	.ioctl		= vfio_mdev_unlocked_ioctl,
- 	.read		= vfio_mdev_read,
- 	.write		= vfio_mdev_write,
-diff --git a/drivers/vfio/vfio.c b/drivers/vfio/vfio.c
-index 7e352d68b1b01d..bf06ab2d536997 100644
---- a/drivers/vfio/vfio.c
-+++ b/drivers/vfio/vfio.c
-@@ -1477,19 +1477,13 @@ static int vfio_group_get_device_fd(struct vfio_group *group, char *buf)
- 	}
- 	mutex_unlock(&device->dev_set->lock);
- 
--	if (device->ops->open) {
--		ret = device->ops->open(device);
--		if (ret)
--			goto err_close_device;
--	}
--
- 	/*
- 	 * We can't use anon_inode_getfd() because we need to modify
- 	 * the f_mode flags directly to allow more than just ioctls
- 	 */
- 	fdno = ret = get_unused_fd_flags(O_CLOEXEC);
- 	if (ret < 0)
--		goto err_release;
-+		goto err_close_device;
- 
- 	filep = anon_inode_getfile("[vfio-device]", &vfio_device_fops,
- 				   device, O_RDWR);
-@@ -1516,9 +1510,6 @@ static int vfio_group_get_device_fd(struct vfio_group *group, char *buf)
- 
- err_fd:
- 	put_unused_fd(fdno);
--err_release:
--	if (device->ops->release)
--		device->ops->release(device);
- err_close_device:
- 	mutex_lock(&device->dev_set->lock);
- 	if (device->open_count == 1 && device->ops->close_device)
-@@ -1666,9 +1657,6 @@ static int vfio_device_fops_release(struct inode *inode, struct file *filep)
- {
- 	struct vfio_device *device = filep->private_data;
- 
--	if (device->ops->release)
--		device->ops->release(device);
--
- 	mutex_lock(&device->dev_set->lock);
- 	if (!--device->open_count && device->ops->close_device)
- 		device->ops->close_device(device);
-diff --git a/include/linux/mdev.h b/include/linux/mdev.h
-index cb5b7ed1d7c30d..68427e8fadebd6 100644
---- a/include/linux/mdev.h
-+++ b/include/linux/mdev.h
-@@ -72,11 +72,6 @@ struct device *mtype_get_parent_dev(struct mdev_type *mtype);
-  *			@mdev: mdev_device device structure which is being
-  *			       destroyed
-  *			Returns integer: success (0) or error (< 0)
-- * @open:		Open mediated device.
-- *			@mdev: mediated device.
-- *			Returns integer: success (0) or error (< 0)
-- * @release:		release mediated device
-- *			@mdev: mediated device.
-  * @read:		Read emulation callback
-  *			@mdev: mediated device structure
-  *			@buf: read buffer
-@@ -113,8 +108,6 @@ struct mdev_parent_ops {
- 	int     (*remove)(struct mdev_device *mdev);
- 	int     (*open_device)(struct mdev_device *mdev);
- 	void    (*close_device)(struct mdev_device *mdev);
--	int     (*open)(struct mdev_device *mdev);
--	void    (*release)(struct mdev_device *mdev);
- 	ssize_t (*read)(struct mdev_device *mdev, char __user *buf,
- 			size_t count, loff_t *ppos);
- 	ssize_t (*write)(struct mdev_device *mdev, const char __user *buf,
-diff --git a/include/linux/vfio.h b/include/linux/vfio.h
-index f0e6a72875e471..b53a9557884ada 100644
---- a/include/linux/vfio.h
-+++ b/include/linux/vfio.h
-@@ -46,8 +46,6 @@ struct vfio_device {
-  *
-  * @open_device: Called when the first file descriptor is opened for this device
-  * @close_device: Opposite of open_device
-- * @open: Called when userspace creates new file descriptor for device
-- * @release: Called when userspace releases file descriptor for device
-  * @read: Perform read(2) on device file descriptor
-  * @write: Perform write(2) on device file descriptor
-  * @ioctl: Perform ioctl(2) on device file descriptor, supporting VFIO_DEVICE_*
-@@ -62,8 +60,6 @@ struct vfio_device_ops {
- 	char	*name;
- 	int	(*open_device)(struct vfio_device *vdev);
- 	void	(*close_device)(struct vfio_device *vdev);
--	int	(*open)(struct vfio_device *vdev);
--	void	(*release)(struct vfio_device *vdev);
- 	ssize_t	(*read)(struct vfio_device *vdev, char __user *buf,
- 			size_t count, loff_t *ppos);
- 	ssize_t	(*write)(struct vfio_device *vdev, const char __user *buf,
+Trusted Keys maintainers, what do you prefer?
+
 -- 
-2.32.0
-
+Thanks,
+//richard
