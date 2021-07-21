@@ -2,133 +2,104 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 9E9303D0E82
-	for <lists+linux-doc@lfdr.de>; Wed, 21 Jul 2021 14:07:03 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id B681E3D0F5B
+	for <lists+linux-doc@lfdr.de>; Wed, 21 Jul 2021 15:18:28 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S237060AbhGULXT (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 21 Jul 2021 07:23:19 -0400
-Received: from smtp-out2.suse.de ([195.135.220.29]:52264 "EHLO
-        smtp-out2.suse.de" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S237876AbhGULMn (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Wed, 21 Jul 2021 07:12:43 -0400
-Received: from relay2.suse.de (relay2.suse.de [149.44.160.134])
-        by smtp-out2.suse.de (Postfix) with ESMTP id 81FB020325;
-        Wed, 21 Jul 2021 11:52:01 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
-        t=1626868321; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-         mime-version:mime-version:
-         content-transfer-encoding:content-transfer-encoding:
-         in-reply-to:in-reply-to:references:references;
-        bh=dFD7virWkj+bIVXu9a1QPj6qakD/vsP6mRzRDs9A1AY=;
-        b=a5HZ8/QLeWyM64jEfdtNKJ9EnAbeg3A/5zk1MkdzsBY5Iezqwj3LwOjM2prto1Hg2xcZOp
-        h0HGz2xKcMPGOmjErD7CgBfSscDb4rskTSrdssGOAb3sLb6JGngQusKBfF+Ydnh0lt6Q8z
-        q0W5TtBXayyk4rCbgb2QecDnS//OUz0=
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
-        s=susede2_ed25519; t=1626868321;
-        h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-         mime-version:mime-version:
-         content-transfer-encoding:content-transfer-encoding:
-         in-reply-to:in-reply-to:references:references;
-        bh=dFD7virWkj+bIVXu9a1QPj6qakD/vsP6mRzRDs9A1AY=;
-        b=SVmw4pl8sC1sIjlRrnaWmV2Qt7sH70WpF00eprsF65WvK/dVvBJG7DfEu9ONjqIbR63K3T
-        oHzSGtL4OBsYnhDw==
-Received: from echidna.suse.de (unknown [10.163.26.142])
-        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
-        (No client certificate requested)
-        by relay2.suse.de (Postfix) with ESMTPS id 528C1A3B90;
-        Wed, 21 Jul 2021 11:52:01 +0000 (UTC)
-From:   David Disseldorp <ddiss@suse.de>
-To:     linux-fsdevel@vger.kernel.org, linux-doc@vger.kernel.org
-Cc:     Matthew Wilcox <willy@infradead.org>,
-        Al Viro <viro@zeniv.linux.org.uk>,
-        David Disseldorp <ddiss@suse.de>
-Subject: [PATCH v2 3/3] docs: remove mention of "crc" cpio format support
-Date:   Wed, 21 Jul 2021 13:51:53 +0200
-Message-Id: <20210721115153.28620-3-ddiss@suse.de>
-X-Mailer: git-send-email 2.26.2
-In-Reply-To: <20210721115153.28620-1-ddiss@suse.de>
-References: <20210721115153.28620-1-ddiss@suse.de>
+        id S237398AbhGUMhu (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 21 Jul 2021 08:37:50 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:39230 "EHLO
+        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S231680AbhGUMht (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Wed, 21 Jul 2021 08:37:49 -0400
+Received: from mail-yb1-xb32.google.com (mail-yb1-xb32.google.com [IPv6:2607:f8b0:4864:20::b32])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 6CDD1C061574
+        for <linux-doc@vger.kernel.org>; Wed, 21 Jul 2021 06:18:25 -0700 (PDT)
+Received: by mail-yb1-xb32.google.com with SMTP id r132so3239928yba.5
+        for <linux-doc@vger.kernel.org>; Wed, 21 Jul 2021 06:18:25 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=baylibre-com.20150623.gappssmtp.com; s=20150623;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc;
+        bh=c1rRa3phHTJWmbuCa9Ba7yDi4LWrl8+YODk9pdiOglY=;
+        b=Gyv0aaXDH/IFhULwdSv6HQFnFAX7svUaaxi00pmF2amALPQgQwO9WU013kLXFcuo2I
+         5aTlq9gfRsCp6WVrjQ4GA63N1E++ar7bG6zH0tLeVS2ke2DDJrMLzXMnGmKrzyjnK9kt
+         /cwTndRguTHL3dwJGuFJhPi4yFmxhH3Tp2N8IRx8TUtOsaMtdztuejeNL0ZtCarhsfyG
+         HEKzGM4CXveSYgwwmV9NB6qXYqHJuOm49bhR9Yuhpewkc0C/ibBpoRsH4baSssyPWByr
+         kqkj5DCLmTZyMCiblmCi9JSbvjt56yBgQF8FDQNSMagccXnjj67E6uOb6xrpiwHJ9URU
+         iE1g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=c1rRa3phHTJWmbuCa9Ba7yDi4LWrl8+YODk9pdiOglY=;
+        b=WtY8vjMxKlSZ7fD77D8UcWG8tS4XE0AxBkylFPUPAhv3r3G8/QFojaF381fgO477R7
+         H3rUArbN95lULmZnepvaT2+dfXRgdvJQaZybMddSBYXfdeomVmqEQ3GeBtJ3d/TQrDlF
+         PD46mlKTUgKp+O4xzF+dR0F+5g8NhLxQyv8DrvM+BKOyiyj0SnSAFL/D8sXcX9uG44Ca
+         gz/9k7jsBwCeGEQVM6poLHrQL5+Km4ZzL6eYQGxg+LIf9qoPKoZBqJ5JAzQ6oqPJuZ+x
+         7n30gXmmfpIBvkpUSX65s6dqkMLcn87mHeTkj9plPI5AO/YlV8N+UG/mRKdKz+vmHyIJ
+         iVdw==
+X-Gm-Message-State: AOAM533sUEzPMu4+ihHkpD2azPdvLc0flh2V5zSjvB+dGZnds4HyByRk
+        vcha5tV24zZYvTVu80F7TTUTXeGg3TMJ8PcW/np0hA==
+X-Google-Smtp-Source: ABdhPJy1PounyikHq+KqbdeJm1FzIvQPgLEgmuaTn6HxAFMpGA8GZziNxOCNjkSgQAKm72hRdIAmqPpEZ7k606KEI6I=
+X-Received: by 2002:a25:ca54:: with SMTP id a81mr26076620ybg.157.1626873504672;
+ Wed, 21 Jul 2021 06:18:24 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <5d1823c503629694de74ccd2d823188507c54706.1625445811.git.plr.vincent@gmail.com>
+In-Reply-To: <5d1823c503629694de74ccd2d823188507c54706.1625445811.git.plr.vincent@gmail.com>
+From:   Bartosz Golaszewski <bgolaszewski@baylibre.com>
+Date:   Wed, 21 Jul 2021 15:18:14 +0200
+Message-ID: <CAMpxmJVSSsRM1W957E-urQqbY1PB+wQ6sRCRnCaHVKg6ge13ZA@mail.gmail.com>
+Subject: Re: [PATCH] Documentation: gpio: driver.rst: Remove
+ gpiochip_irqchip_add mention
+To:     Vincent Pelletier <plr.vincent@gmail.com>
+Cc:     Linus Walleij <linus.walleij@linaro.org>,
+        Jonathan Corbet <corbet@lwn.net>,
+        linux-gpio <linux-gpio@vger.kernel.org>,
+        linux-doc <linux-doc@vger.kernel.org>,
+        LKML <linux-kernel@vger.kernel.org>
+Content-Type: text/plain; charset="UTF-8"
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-init/initramfs.c only supports extraction of cpio archives carrying the
-"newc" header magic ("070701"). Remove statements indicating support for
-the "crc" cpio format.
+On Mon, Jul 5, 2021 at 2:44 AM Vincent Pelletier <plr.vincent@gmail.com> wrote:
+>
+> This function was removed in commit f1f37abbe6fc ("gpio: Retire the
+> explicit gpio irqchip code") but this mention was left behind.
+> Also, mention that .set_type() only has to set a line handler if the chip
+> is cascaded, as opposed to hierarchical.
+>
+> Signed-off-by: Vincent Pelletier <plr.vincent@gmail.com>
+> ---
+>  Documentation/driver-api/gpio/driver.rst | 11 ++++-------
+>  1 file changed, 4 insertions(+), 7 deletions(-)
+>
+> diff --git a/Documentation/driver-api/gpio/driver.rst b/Documentation/driver-api/gpio/driver.rst
+> index d6b0d779859b..bbc53920d4dd 100644
+> --- a/Documentation/driver-api/gpio/driver.rst
+> +++ b/Documentation/driver-api/gpio/driver.rst
+> @@ -547,13 +547,10 @@ To use the helpers please keep the following in mind:
+>    the irqchip can initialize. E.g. .dev and .can_sleep shall be set up
+>    properly.
+>
+> -- Nominally set all handlers to handle_bad_irq() in the setup call and pass
+> -  handle_bad_irq() as flow handler parameter in gpiochip_irqchip_add() if it is
+> -  expected for GPIO driver that irqchip .set_type() callback will be called
+> -  before using/enabling each GPIO IRQ. Then set the handler to
+> -  handle_level_irq() and/or handle_edge_irq() in the irqchip .set_type()
+> -  callback depending on what your controller supports and what is requested
+> -  by the consumer.
+> +- Nominally set gpio_irq_chip.handler to handle_bad_irq. Then, if your irqchip
+> +  is cascaded, set the handler to handle_level_irq() and/or handle_edge_irq()
+> +  in the irqchip .set_type() callback depending on what your controller
+> +  supports and what is requested by the consumer.
+>
+>
+>  Locking IRQ usage
+> --
+> 2.32.0
+>
 
-Signed-off-by: David Disseldorp <ddiss@suse.de>
----
- .../early-userspace/buffer-format.rst         | 24 +++++++------------
- 1 file changed, 8 insertions(+), 16 deletions(-)
+Patch applied, thanks!
 
-Version 2:
-- reword initramfs padding description, as suggested by Matthew Wilcox
-
-diff --git a/Documentation/driver-api/early-userspace/buffer-format.rst b/Documentation/driver-api/early-userspace/buffer-format.rst
-index 7f74e301fdf3..0df76bca444c 100644
---- a/Documentation/driver-api/early-userspace/buffer-format.rst
-+++ b/Documentation/driver-api/early-userspace/buffer-format.rst
-@@ -14,10 +14,10 @@ is different.  The initramfs buffer contains an archive which is
- expanded into a ramfs filesystem; this document details the format of
- the initramfs buffer format.
- 
--The initramfs buffer format is based around the "newc" or "crc" CPIO
--formats, and can be created with the cpio(1) utility.  The cpio
--archive can be compressed using gzip(1).  One valid version of an
--initramfs buffer is thus a single .cpio.gz file.
-+The initramfs buffer format is based around the "newc" CPIO format, and
-+can be created with the cpio(1) utility.  The cpio archive can be
-+compressed using gzip(1).  One valid version of an initramfs buffer is
-+thus a single .cpio.gz file.
- 
- The full format of the initramfs buffer is defined by the following
- grammar, where::
-@@ -40,9 +40,8 @@ grammar, where::
- 
- 
- In human terms, the initramfs buffer contains a collection of
--compressed and/or uncompressed cpio archives (in the "newc" or "crc"
--formats); arbitrary amounts zero bytes (for padding) can be added
--between members.
-+compressed and/or uncompressed cpio archives (in the "newc" format),
-+with arbitrary amount of zero-byte padding between members.
- 
- The cpio "TRAILER!!!" entry (cpio end-of-archive) is optional, but is
- not ignored; see "handling of hard links" below.
-@@ -55,7 +54,7 @@ by the ASCII string "000012ac"):
- ============= ================== ==============================================
- Field name    Field size	 Meaning
- ============= ================== ==============================================
--c_magic	      6 bytes		 The string "070701" or "070702"
-+c_magic	      6 bytes		 The string "070701"
- c_ino	      8 bytes		 File inode number
- c_mode	      8 bytes		 File mode and permissions
- c_uid	      8 bytes		 File uid
-@@ -68,8 +67,7 @@ c_min	      8 bytes		 Minor part of file device number
- c_rmaj	      8 bytes		 Major part of device node reference
- c_rmin	      8 bytes		 Minor part of device node reference
- c_namesize    8 bytes		 Length of filename, including final \0
--c_chksum      8 bytes		 Checksum of data field if c_magic is 070702;
--				 otherwise zero
-+c_chksum      8 bytes		 Ignored; reserved for unsupported "crc" format
- ============= ================== ==============================================
- 
- The c_mode field matches the contents of st_mode returned by stat(2)
-@@ -78,12 +76,6 @@ on Linux, and encodes the file type and file permissions.
- The c_filesize should be zero for any file which is not a regular file
- or symlink.
- 
--The c_chksum field contains a simple 32-bit unsigned sum of all the
--bytes in the data field.  cpio(1) refers to this as "crc", which is
--clearly incorrect (a cyclic redundancy check is a different and
--significantly stronger integrity check), however, this is the
--algorithm used.
--
- If the filename is "TRAILER!!!" this is actually an end-of-archive
- marker; the c_filesize for an end-of-archive marker must be zero.
- 
--- 
-2.26.2
-
+Bartosz
