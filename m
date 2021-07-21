@@ -2,108 +2,84 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id B19C43D0DFC
-	for <lists+linux-doc@lfdr.de>; Wed, 21 Jul 2021 13:43:18 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 8985D3D0E84
+	for <lists+linux-doc@lfdr.de>; Wed, 21 Jul 2021 14:07:04 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S233244AbhGULAU (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 21 Jul 2021 07:00:20 -0400
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124]:43705 "EHLO
-        us-smtp-delivery-124.mimecast.com" rhost-flags-OK-OK-OK-OK)
-        by vger.kernel.org with ESMTP id S233136AbhGUKxM (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Wed, 21 Jul 2021 06:53:12 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-        s=mimecast20190719; t=1626867226;
-        h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-         to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-         in-reply-to:in-reply-to:references:references;
-        bh=00OcMiF0F2gS1ZNqukAXzYGpVfpA2IKDuUHwrSni+LI=;
-        b=LuYbVsr18XYq3zhJ5T/KZqynq3SZNMdiD3UVSd6Thpbfpn86a5CZaIxWiusYcQEx+rTV49
-        9/ba2LnRTUCvHAd8nXVzocH6WMFNLl4Xiej0tr7N2a1OcOT2QFAmOM8lDoU0zIk+T8PNLD
-        KUkUokz9sg6w16k1XIPU5SdKYjiYF00=
-Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
- [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-364-zkp5VfsMM6-lurNQyTFRCA-1; Wed, 21 Jul 2021 07:33:43 -0400
-X-MC-Unique: zkp5VfsMM6-lurNQyTFRCA-1
-Received: from smtp.corp.redhat.com (int-mx03.intmail.prod.int.phx2.redhat.com [10.5.11.13])
-        (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+        id S233614AbhGULXV (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 21 Jul 2021 07:23:21 -0400
+Received: from smtp-out2.suse.de ([195.135.220.29]:52252 "EHLO
+        smtp-out2.suse.de" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S237848AbhGULMn (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Wed, 21 Jul 2021 07:12:43 -0400
+Received: from relay2.suse.de (relay2.suse.de [149.44.160.134])
+        by smtp-out2.suse.de (Postfix) with ESMTP id 1709120322;
+        Wed, 21 Jul 2021 11:52:01 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
+        t=1626868321; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+         mime-version:mime-version:  content-transfer-encoding:content-transfer-encoding;
+        bh=oheTBrlOPmKCC8KCnUKF7tUM9F2teFLgWY0LPZQFvyQ=;
+        b=JG2CNnzRKzqNaPCAB1wlKP5URh163B744KaUL/U0/JPyqqRy8NEqkzU+OEy963L6NrpQGa
+        rZPNmVOYnBxSP15watS9bVDehn2kmUQrO4mVrwvDUhN8tSX3s8ZjQxBU7EZCuCl7dHYfMC
+        s8PwR4gcrATfjdTOWifcQ9xW0Gx1sv8=
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
+        s=susede2_ed25519; t=1626868321;
+        h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+         mime-version:mime-version:  content-transfer-encoding:content-transfer-encoding;
+        bh=oheTBrlOPmKCC8KCnUKF7tUM9F2teFLgWY0LPZQFvyQ=;
+        b=kmatwo2zbfQ7hPJBs+r5BZgdiw6b46V0ihR4xKRW/vVm+2cRlzt5jfp9bU52JbDTRTJ9NA
+        bmheqP//0XTMWmBg==
+Received: from echidna.suse.de (unknown [10.163.26.142])
+        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
         (No client certificate requested)
-        by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 8D34510086C4;
-        Wed, 21 Jul 2021 11:33:39 +0000 (UTC)
-Received: from localhost (ovpn-112-135.ams2.redhat.com [10.36.112.135])
-        by smtp.corp.redhat.com (Postfix) with ESMTPS id E28BB60854;
-        Wed, 21 Jul 2021 11:33:30 +0000 (UTC)
-From:   Cornelia Huck <cohuck@redhat.com>
-To:     Jason Gunthorpe <jgg@nvidia.com>, David Airlie <airlied@linux.ie>,
-        Tony Krowiak <akrowiak@linux.ibm.com>,
-        Alex Williamson <alex.williamson@redhat.com>,
-        Christian Borntraeger <borntraeger@de.ibm.com>,
-        Jonathan Corbet <corbet@lwn.net>,
-        Daniel Vetter <daniel@ffwll.ch>,
-        Diana Craciun <diana.craciun@oss.nxp.com>,
-        dri-devel@lists.freedesktop.org,
-        Eric Auger <eric.auger@redhat.com>,
-        Eric Farman <farman@linux.ibm.com>,
-        Harald Freudenberger <freude@linux.ibm.com>,
-        Vasily Gorbik <gor@linux.ibm.com>,
-        Heiko Carstens <hca@linux.ibm.com>,
-        intel-gfx@lists.freedesktop.org,
-        intel-gvt-dev@lists.freedesktop.org,
-        Jani Nikula <jani.nikula@linux.intel.com>,
-        Jason Herne <jjherne@linux.ibm.com>,
-        Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
-        kvm@vger.kernel.org, Kirti Wankhede <kwankhede@nvidia.com>,
-        linux-doc@vger.kernel.org, linux-s390@vger.kernel.org,
-        Matthew Rosato <mjrosato@linux.ibm.com>,
-        Peter Oberparleiter <oberpar@linux.ibm.com>,
-        Halil Pasic <pasic@linux.ibm.com>,
-        Rodrigo Vivi <rodrigo.vivi@intel.com>,
-        Vineeth Vijayan <vneethv@linux.ibm.com>,
-        Zhi Wang <zhi.a.wang@intel.com>
-Cc:     "Raj, Ashok" <ashok.raj@intel.com>, Christoph Hellwig <hch@lst.de>,
-        Leon Romanovsky <leonro@nvidia.com>,
-        Max Gurtovoy <mgurtovoy@nvidia.com>,
-        Yishai Hadas <yishaih@nvidia.com>,
-        Zhenyu Wang <zhenyuw@linux.intel.com>
-Subject: Re: [PATCH v2 03/14] vfio: Introduce a vfio_uninit_group_dev() API
- call
-In-Reply-To: <3-v2-b6a5582525c9+ff96-vfio_reflck_jgg@nvidia.com>
-Organization: Red Hat GmbH
-References: <3-v2-b6a5582525c9+ff96-vfio_reflck_jgg@nvidia.com>
-User-Agent: Notmuch/0.32.1 (https://notmuchmail.org)
-Date:   Wed, 21 Jul 2021 13:33:29 +0200
-Message-ID: <877dhj9a0m.fsf@redhat.com>
+        by relay2.suse.de (Postfix) with ESMTPS id C6D19A3B88;
+        Wed, 21 Jul 2021 11:52:00 +0000 (UTC)
+From:   David Disseldorp <ddiss@suse.de>
+To:     linux-fsdevel@vger.kernel.org, linux-doc@vger.kernel.org
+Cc:     Matthew Wilcox <willy@infradead.org>,
+        Al Viro <viro@zeniv.linux.org.uk>,
+        David Disseldorp <ddiss@suse.de>
+Subject: [PATCH RESEND 1/3] initramfs: move unnecessary memcmp from hot path
+Date:   Wed, 21 Jul 2021 13:51:51 +0200
+Message-Id: <20210721115153.28620-1-ddiss@suse.de>
+X-Mailer: git-send-email 2.26.2
 MIME-Version: 1.0
-Content-Type: text/plain
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.13
+Content-Transfer-Encoding: 8bit
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Tue, Jul 20 2021, Jason Gunthorpe <jgg@nvidia.com> wrote:
+do_header() is called for each cpio entry and first checks for "newc"
+magic before parsing further. The magic check includes a special case
+error message if POSIX.1 ASCII (cpio -H odc) magic is detected. This
+special case POSIX.1 check needn't be done in the hot path, so move it
+under the non-newc-magic error path.
 
-> From: Max Gurtovoy <mgurtovoy@nvidia.com>
->
-> This pairs with vfio_init_group_dev() and allows undoing any state that is
-> stored in the vfio_device unrelated to registration. Add appropriately
-> placed calls to all the drivers.
->
-> The following patch will use this to add pre-registration state for the
-> device set.
->
-> Signed-off-by: Max Gurtovoy <mgurtovoy@nvidia.com>
-> Signed-off-by: Jason Gunthorpe <jgg@nvidia.com>
-> ---
->  Documentation/driver-api/vfio.rst            |  4 ++-
->  drivers/vfio/fsl-mc/vfio_fsl_mc.c            |  7 ++---
->  drivers/vfio/mdev/vfio_mdev.c                | 13 +++++++---
->  drivers/vfio/pci/vfio_pci.c                  |  6 +++--
->  drivers/vfio/platform/vfio_platform_common.c |  7 +++--
->  drivers/vfio/vfio.c                          |  5 ++++
->  include/linux/vfio.h                         |  1 +
->  samples/vfio-mdev/mbochs.c                   |  2 ++
->  samples/vfio-mdev/mdpy.c                     | 25 ++++++++++--------
->  samples/vfio-mdev/mtty.c                     | 27 ++++++++++++--------
->  10 files changed, 64 insertions(+), 33 deletions(-)
+Signed-off-by: David Disseldorp <ddiss@suse.de>
+---
+ init/initramfs.c | 9 ++++-----
+ 1 file changed, 4 insertions(+), 5 deletions(-)
 
-Reviewed-by: Cornelia Huck <cohuck@redhat.com>
+diff --git a/init/initramfs.c b/init/initramfs.c
+index af27abc59643..f01590cefa2d 100644
+--- a/init/initramfs.c
++++ b/init/initramfs.c
+@@ -256,12 +256,11 @@ static int __init do_collect(void)
+ 
+ static int __init do_header(void)
+ {
+-	if (memcmp(collected, "070707", 6)==0) {
+-		error("incorrect cpio method used: use -H newc option");
+-		return 1;
+-	}
+ 	if (memcmp(collected, "070701", 6)) {
+-		error("no cpio magic");
++		if (memcmp(collected, "070707", 6) == 0)
++			error("incorrect cpio method used: use -H newc option");
++		else
++			error("no cpio magic");
+ 		return 1;
+ 	}
+ 	parse_header(collected);
+-- 
+2.26.2
 
