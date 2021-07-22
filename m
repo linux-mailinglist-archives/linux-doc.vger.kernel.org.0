@@ -2,51 +2,51 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id EB1893D21AB
-	for <lists+linux-doc@lfdr.de>; Thu, 22 Jul 2021 12:04:56 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 310D13D21A4
+	for <lists+linux-doc@lfdr.de>; Thu, 22 Jul 2021 12:04:54 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S231695AbhGVJYE (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 22 Jul 2021 05:24:04 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:41270 "EHLO
+        id S231789AbhGVJYB (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 22 Jul 2021 05:24:01 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:41272 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S231877AbhGVJXy (ORCPT
+        with ESMTP id S231876AbhGVJXy (ORCPT
         <rfc822;linux-doc@vger.kernel.org>); Thu, 22 Jul 2021 05:23:54 -0400
-Received: from mail-ej1-x633.google.com (mail-ej1-x633.google.com [IPv6:2a00:1450:4864:20::633])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 16DEEC0613CF
-        for <linux-doc@vger.kernel.org>; Thu, 22 Jul 2021 03:03:58 -0700 (PDT)
-Received: by mail-ej1-x633.google.com with SMTP id dp20so7541214ejc.7
-        for <linux-doc@vger.kernel.org>; Thu, 22 Jul 2021 03:03:58 -0700 (PDT)
+Received: from mail-ej1-x62c.google.com (mail-ej1-x62c.google.com [IPv6:2a00:1450:4864:20::62c])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 7BA1CC0617BD
+        for <linux-doc@vger.kernel.org>; Thu, 22 Jul 2021 03:03:59 -0700 (PDT)
+Received: by mail-ej1-x62c.google.com with SMTP id bu12so7636235ejb.0
+        for <linux-doc@vger.kernel.org>; Thu, 22 Jul 2021 03:03:59 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:cc:subject:date:message-id:in-reply-to:references
          :mime-version:content-transfer-encoding;
-        bh=MAR/197ZIT3kSyhNe4tx+U85YGZIc/Ll5NNFXKz7ZUU=;
-        b=X8ULWz4CU8IS6hhbZmy8mzvOimrO+0c9hJEnhNtsGFvsOP2GxrEK/XwHtA8yCd7a/G
-         Hc5kn/orLmyj4EeWwZazTjK/FfGI6TIKRC0KbCu3JQgZ6CqrcoQxEgIzmjkYlRuOjv/v
-         Yx/FBxHsam+FEyDYMI0bAy15Re0Knwx+l8YTKqcjx5XO7Atl/+7retCohCvUvE9T+3oA
-         rml1hzR3p2HvplRDybFbu72tHhCGzWy3WYLCZdHXU13qUyuncaUIGORZtRqPP+OQTbQ5
-         NiAIJCKMOfSn0q00Yhu4hOjFSzurY6/MOS1xMpTJATeQCzAVWqbhlkaIWnlpgA73T8Xv
-         TOEg==
+        bh=yi0leTUVd76WD8j3lOwXyZzKhNV7sNslJSh+czRsAu8=;
+        b=I3NaDGeto3DbbrwKQ/tiY61EuIWdV2+gJN3wDQGafDf4iWFLp51BA72lRg3UQJfTEY
+         9Byp1/NE4KqTlJgNklPh49GXaoBXJhY0RID6/3Cclm4QlyCBwvGTKJjd/RZmLotQLbyw
+         BV6R24sWPKR9zaBkQ23hCvQXX6MHUD9ai5YyBG7aipXjfTlL+i+sTsKSl6c7oZd7wxMf
+         O4/iLKQNKfV2FZf4sNc2bNbtOvZrqU9TKL6DtkSfpBz0ZfAm0LHav/wcj4Rhw2i1QWp+
+         PP43gxxzn1Q+1d+dkYb9Ng0lKymXqt2yfrWm/lQN6xvWRfKEeuM4Ea5wuZY2Uvditlyo
+         0kfA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
          :references:mime-version:content-transfer-encoding;
-        bh=MAR/197ZIT3kSyhNe4tx+U85YGZIc/Ll5NNFXKz7ZUU=;
-        b=CxRqQBOwc5w2nqNoOmcL3Nk+Gtk66Pa2/3ZfJ6DSUPOem0N+FgH/s44aiSdiG63MVQ
-         nb7WHddYRGyNC95GJTROvGSQD02s9h7alV3jWuNhEh3HknyqysTiMIzahmHWKSWv1Jqc
-         P0WFgJq5jUNVeQqnbg9kYD0hb4Irmd7NePC/Rdg74GIEesa9WflynH6W1bXURaAhoQou
-         xaPtst/9WjmOXLHI7GynPqQ78C3wqTXjqe5EnVJacPpIiw+UE0RN9lmnB2kNk3/KHgHD
-         B2NA+3BtulsSJSOdXsGYcgS3ObNEp9Mczws/44Qbr14W/XODEJxHSrPhM5VY1QZUKKA+
-         w5Ew==
-X-Gm-Message-State: AOAM5334+bv6/BjIxpNzz6EbVeWcYpX3gN+3R4HBC3/4q7QVI0EdyWWN
-        VnYRmB1Fr/2kBSBQDOdbyts=
-X-Google-Smtp-Source: ABdhPJwpa2wE3M4ARKzmvkvIk/uT1kAjGY18+IJYtrboDtF+6QkTJutI1PqRvMZrdbe1N0u43C+hyw==
-X-Received: by 2002:a17:906:4dcf:: with SMTP id f15mr42215690ejw.400.1626948236659;
-        Thu, 22 Jul 2021 03:03:56 -0700 (PDT)
+        bh=yi0leTUVd76WD8j3lOwXyZzKhNV7sNslJSh+czRsAu8=;
+        b=eRz3n2Ff5C+8k/9PsE/48Q6CioLxXlNMVrDSL9GKlVbqwDiPAZZ54bZrANcxwdDxtf
+         o2xID2y7o6FoiyXlPanUwUNCcZPidTa7p7nPhK5Hc+nCz6oi2bkL8+LBrVV1FsuKcMcg
+         bFB89Knx4lWpIZoy65TX78cukHsVfKhmNEiffavxFWHX/np3/4eFH9nchUOoN/xveyPL
+         Uo5FwozazDiEx2ZnwTwvJQRDbwTBZTu5Jp8Pvb+yHUOsVIL8Zxxd4wLw6ZWPw8Fp0ely
+         mw4MUdTC+Dw6MBP4rtPWm2usn2cBByQfWo9lpVmEU4p2SMmcmTpbR8kjYkS8ugWrjICL
+         AreA==
+X-Gm-Message-State: AOAM533Kg/K5rAIT8XXIqt3zUH+KhLOsN7ajT0XRoOsfygVO7ItMWVe4
+        Gpo1riKeYiDP6hXzUEPHmSQ=
+X-Google-Smtp-Source: ABdhPJzO80v//7oGao0bWBtIdDN8HCdvtHGM1LS68aLBYcTU7sJwduZDbeR9Rg6ZSRO7EtweNC7ycw==
+X-Received: by 2002:a17:906:7302:: with SMTP id di2mr42210329ejc.409.1626948237711;
+        Thu, 22 Jul 2021 03:03:57 -0700 (PDT)
 Received: from yoga-910.localhost ([82.76.66.29])
-        by smtp.gmail.com with ESMTPSA id cb4sm9341749ejb.72.2021.07.22.03.03.55
+        by smtp.gmail.com with ESMTPSA id cb4sm9341749ejb.72.2021.07.22.03.03.56
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 22 Jul 2021 03:03:56 -0700 (PDT)
+        Thu, 22 Jul 2021 03:03:57 -0700 (PDT)
 From:   Ioana Ciornei <ciorneiioana@gmail.com>
 To:     Jonathan Corbet <corbet@lwn.net>, Petr Mladek <pmladek@suse.com>,
         Steven Rostedt <rostedt@goodmis.org>
@@ -54,9 +54,9 @@ Cc:     linux-doc@vger.kernel.org, Stephen Boyd <swboyd@chromium.org>,
         Maxim Levitsky <mlevitsk@redhat.com>,
         Jing Zhang <jingzhangos@google.com>,
         Ioana Ciornei <ioana.ciornei@nxp.com>
-Subject: [PATCH 1/4] docs: printk-formats: fix build warning
-Date:   Thu, 22 Jul 2021 13:03:53 +0300
-Message-Id: <20210722100356.635078-2-ciorneiioana@gmail.com>
+Subject: [PATCH 2/4] docs: kvm: fix build warnings
+Date:   Thu, 22 Jul 2021 13:03:54 +0300
+Message-Id: <20210722100356.635078-3-ciorneiioana@gmail.com>
 X-Mailer: git-send-email 2.31.1
 In-Reply-To: <20210722100356.635078-1-ciorneiioana@gmail.com>
 References: <20210722100356.635078-1-ciorneiioana@gmail.com>
@@ -68,32 +68,77 @@ X-Mailing-List: linux-doc@vger.kernel.org
 
 From: Ioana Ciornei <ioana.ciornei@nxp.com>
 
-Add an empty line after the '::' starting the code block so that the
-following lines are properly interpreted.
+Fix some small build warnings. The title underline was too short in some
+cases and a code block was not indented.
 
-Without this, the following build warnings are visible.
+Documentation/virt/kvm/api.rst:7216: WARNING: Title underline too short.
 
-Documentation/core-api/printk-formats.rst:136: WARNING: Unexpected indentation.
-Documentation/core-api/printk-formats.rst:137: WARNING: Block quote ends without a blank line; unexpected unindent.
-
-Fixes: 9294523e3768 ("module: add printk formats to add module build ID to stacktraces")
+Fixes: 6dba94035203 ("KVM: x86: Introduce KVM_GET_SREGS2 / KVM_SET_SREGS2")
 Signed-off-by: Ioana Ciornei <ioana.ciornei@nxp.com>
 ---
- Documentation/core-api/printk-formats.rst | 1 +
- 1 file changed, 1 insertion(+)
+ Documentation/virt/kvm/api.rst | 28 ++++++++++++++--------------
+ 1 file changed, 14 insertions(+), 14 deletions(-)
 
-diff --git a/Documentation/core-api/printk-formats.rst b/Documentation/core-api/printk-formats.rst
-index d941717a191b..e08bbe9b0cbf 100644
---- a/Documentation/core-api/printk-formats.rst
-+++ b/Documentation/core-api/printk-formats.rst
-@@ -130,6 +130,7 @@ printed after the symbol name with an extra ``b`` appended to the end of the
- specifier.
+diff --git a/Documentation/virt/kvm/api.rst b/Documentation/virt/kvm/api.rst
+index c7b165ca70b6..535ac0efd1b0 100644
+--- a/Documentation/virt/kvm/api.rst
++++ b/Documentation/virt/kvm/api.rst
+@@ -5077,7 +5077,7 @@ of bytes successfully copied is returned. If the call completes successfully
+ then ``length`` is returned.
+ 
+ 4.131 KVM_GET_SREGS2
+-------------------
++--------------------
+ 
+ :Capability: KVM_CAP_SREGS2
+ :Architectures: x86
+@@ -5090,17 +5090,17 @@ This ioctl (when supported) replaces the KVM_GET_SREGS.
  
  ::
-+
- 	%pS	versatile_init+0x0/0x110 [module_name]
- 	%pSb	versatile_init+0x0/0x110 [module_name ed5019fdf5e53be37cb1ba7899292d7e143b259e]
- 	%pSRb	versatile_init+0x9/0x110 [module_name ed5019fdf5e53be37cb1ba7899292d7e143b259e]
+ 
+-struct kvm_sregs2 {
+-	/* out (KVM_GET_SREGS2) / in (KVM_SET_SREGS2) */
+-	struct kvm_segment cs, ds, es, fs, gs, ss;
+-	struct kvm_segment tr, ldt;
+-	struct kvm_dtable gdt, idt;
+-	__u64 cr0, cr2, cr3, cr4, cr8;
+-	__u64 efer;
+-	__u64 apic_base;
+-	__u64 flags;
+-	__u64 pdptrs[4];
+-};
++        struct kvm_sregs2 {
++                /* out (KVM_GET_SREGS2) / in (KVM_SET_SREGS2) */
++                struct kvm_segment cs, ds, es, fs, gs, ss;
++                struct kvm_segment tr, ldt;
++                struct kvm_dtable gdt, idt;
++                __u64 cr0, cr2, cr3, cr4, cr8;
++                __u64 efer;
++                __u64 apic_base;
++                __u64 flags;
++                __u64 pdptrs[4];
++        };
+ 
+ flags values for ``kvm_sregs2``:
+ 
+@@ -5110,7 +5110,7 @@ flags values for ``kvm_sregs2``:
+ 
+ 
+ 4.132 KVM_SET_SREGS2
+-------------------
++--------------------
+ 
+ :Capability: KVM_CAP_SREGS2
+ :Architectures: x86
+@@ -7213,7 +7213,7 @@ supported in the host. A VMM can check whether the service is
+ available to the guest on migration.
+ 
+ 8.33 KVM_CAP_HYPERV_ENFORCE_CPUID
+------------------------------
++---------------------------------
+ 
+ Architectures: x86
+ 
 -- 
 2.31.1
 
