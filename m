@@ -2,41 +2,40 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 80F5B3D2179
-	for <lists+linux-doc@lfdr.de>; Thu, 22 Jul 2021 12:00:24 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 59FBD3D2185
+	for <lists+linux-doc@lfdr.de>; Thu, 22 Jul 2021 12:00:45 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S231590AbhGVJTr (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 22 Jul 2021 05:19:47 -0400
-Received: from mail.kernel.org ([198.145.29.99]:49300 "EHLO mail.kernel.org"
+        id S231608AbhGVJTw (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 22 Jul 2021 05:19:52 -0400
+Received: from mail.kernel.org ([198.145.29.99]:49358 "EHLO mail.kernel.org"
         rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S231470AbhGVJTp (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Thu, 22 Jul 2021 05:19:45 -0400
-Received: by mail.kernel.org (Postfix) with ESMTPSA id 9501561241;
-        Thu, 22 Jul 2021 10:00:20 +0000 (UTC)
+        id S231569AbhGVJTq (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Thu, 22 Jul 2021 05:19:46 -0400
+Received: by mail.kernel.org (Postfix) with ESMTPSA id D80376127C;
+        Thu, 22 Jul 2021 10:00:21 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-        s=k20201202; t=1626948020;
-        bh=mPBxCZz6/+NbyEmN9tmtfQYN6qT8N1p7uWgERM3SRkg=;
+        s=k20201202; t=1626948021;
+        bh=u0WPNC8wo05c/mR6al+UtB2v1oU8vNnHVxOUiCzMQTs=;
         h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-        b=rXgarqj1hkjFnq3lJiMI4u1RV74hJkjsbKXxOGy/0w+8SGgPoouyG5TqfIgZ083jp
-         tSCN/53p+hxxXMiO/LH9LKWzxSapW4ez6UUFaixCK5WEZ17Xx0Yp1ejnyK5gcJ2qOK
-         mkYy5U+x/5wTIsAyMoVR35Sbocby77RSkgvKqBnQUKgc4Dp/Ud2VJzC2G4kkvR1j4D
-         bILiU+c+Vy+Ls/3uGHKoLaNh3EMdEL5Gq+3alVER1ygaKh4HK/ApFwM646te1lEwkc
-         gYYVJRgYTD7JAC0M1Ew6wybTj9LT/GCI+Fy3hFQI1i9zE3tpkk727N0xdjsiA/gnyR
-         G3d5bkY19MEAg==
+        b=ehl+WoGvWhtdC1VmESqxGw5eQ2xdD+PS0j0QuCK8gSF4NtQwZJCu8CxwQKSMNqAP7
+         o+zwO6pb0WBtzgL2OTccXKkX7+TcQUONGiZ7AkgPhwGuCc9WDjnUZYlS+5+VLaX3m4
+         BbvP1msM4P2EGmQHgPlXu4Tuy8KjbJZmyhsUFzT8gTkKT2084R3ybjRHjVKtBW/km5
+         HGgSk3jiX56bdXidLVj7YZ/jUcAvnoRe3oADRc9PHDQrZAfdnJ9LuN0CMhg6NlcBvl
+         kLYgdF4KkPxt9G6Y29rzT84vT7xpet6ZjiaDKHuz2IhMb1ZDdChgWprdM9HN/lPpjt
+         BwkkscYSUqiEQ==
 Received: by mail.kernel.org with local (Exim 4.94.2)
         (envelope-from <mchehab@kernel.org>)
-        id 1m6VUz-008mHX-J5; Thu, 22 Jul 2021 12:00:13 +0200
+        id 1m6VUz-008mHa-LM; Thu, 22 Jul 2021 12:00:13 +0200
 From:   Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 To:     Linux Doc Mailing List <linux-doc@vger.kernel.org>
 Cc:     Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
-        "David S. Miller" <davem@davemloft.net>,
         "Jonathan Corbet" <corbet@lwn.net>,
-        Jakub Kicinski <kuba@kernel.org>,
-        Vladimir Oltean <vladimir.oltean@nxp.com>,
-        linux-kernel@vger.kernel.org, netdev@vger.kernel.org
-Subject: [PATCH 03/15] dt-bindings: net: dsa: sja1105: update nxp,sja1105.yaml reference
-Date:   Thu, 22 Jul 2021 12:00:00 +0200
-Message-Id: <3e5fc7ad4f47887666868d6727f88f58613ea508.1626947923.git.mchehab+huawei@kernel.org>
+        Linus Walleij <linus.walleij@linaro.org>,
+        Miquel Raynal <miquel.raynal@bootlin.com>,
+        Rob Herring <robh@kernel.org>, linux-kernel@vger.kernel.org
+Subject: [PATCH 04/15] MAINTAINERS: update mtd-physmap.yaml reference
+Date:   Thu, 22 Jul 2021 12:00:01 +0200
+Message-Id: <24957d89f650521bfe27c64722110d6fb0d26921.1626947923.git.mchehab+huawei@kernel.org>
 X-Mailer: git-send-email 2.31.1
 In-Reply-To: <cover.1626947923.git.mchehab+huawei@kernel.org>
 References: <cover.1626947923.git.mchehab+huawei@kernel.org>
@@ -47,31 +46,31 @@ Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Changeset 62568bdbe6f6 ("dt-bindings: net: dsa: sja1105: convert to YAML schema")
-renamed: Documentation/devicetree/bindings/net/dsa/sja1105.txt
-to: Documentation/devicetree/bindings/net/dsa/nxp,sja1105.yaml.
+Changeset 63f8e9e0ac65 ("dt-bindings: mtd: Convert mtd-physmap to DT schema")
+renamed: Documentation/devicetree/bindings/mtd/arm-versatile.txt
+to: Documentation/devicetree/bindings/mtd/mtd-physmap.yaml.
 
 Update its cross-reference accordingly.
 
-Fixes: 62568bdbe6f6 ("dt-bindings: net: dsa: sja1105: convert to YAML schema")
+Fixes: 63f8e9e0ac65 ("dt-bindings: mtd: Convert mtd-physmap to DT schema")
 Signed-off-by: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 ---
- Documentation/networking/dsa/sja1105.rst | 2 +-
+ MAINTAINERS | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/Documentation/networking/dsa/sja1105.rst b/Documentation/networking/dsa/sja1105.rst
-index da4057ba37f1..4fd6441dab5d 100644
---- a/Documentation/networking/dsa/sja1105.rst
-+++ b/Documentation/networking/dsa/sja1105.rst
-@@ -512,7 +512,7 @@ not available.
- Device Tree bindings and board design
- =====================================
- 
--This section references ``Documentation/devicetree/bindings/net/dsa/sja1105.txt``
-+This section references ``Documentation/devicetree/bindings/net/dsa/nxp,sja1105.yaml``
- and aims to showcase some potential switch caveats.
- 
- RMII PHY role and out-of-band signaling
+diff --git a/MAINTAINERS b/MAINTAINERS
+index d69b2d4646be..76acb9fe0622 100644
+--- a/MAINTAINERS
++++ b/MAINTAINERS
+@@ -1386,7 +1386,7 @@ F:	Documentation/devicetree/bindings/auxdisplay/arm-charlcd.txt
+ F:	Documentation/devicetree/bindings/clock/arm,syscon-icst.yaml
+ F:	Documentation/devicetree/bindings/i2c/i2c-versatile.txt
+ F:	Documentation/devicetree/bindings/interrupt-controller/arm,versatile-fpga-irq.txt
+-F:	Documentation/devicetree/bindings/mtd/arm-versatile.txt
++F:	Documentation/devicetree/bindings/mtd/mtd-physmap.yaml
+ F:	arch/arm/boot/dts/arm-realview-*
+ F:	arch/arm/boot/dts/integrator*
+ F:	arch/arm/boot/dts/versatile*
 -- 
 2.31.1
 
