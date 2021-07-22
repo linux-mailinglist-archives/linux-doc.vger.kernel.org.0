@@ -2,51 +2,51 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 6F8E53D21A7
-	for <lists+linux-doc@lfdr.de>; Thu, 22 Jul 2021 12:04:55 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id EB1893D21AB
+	for <lists+linux-doc@lfdr.de>; Thu, 22 Jul 2021 12:04:56 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S231818AbhGVJYC (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 22 Jul 2021 05:24:02 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:40920 "EHLO
+        id S231695AbhGVJYE (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 22 Jul 2021 05:24:04 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:41270 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S231874AbhGVJXy (ORCPT
+        with ESMTP id S231877AbhGVJXy (ORCPT
         <rfc822;linux-doc@vger.kernel.org>); Thu, 22 Jul 2021 05:23:54 -0400
-Received: from mail-ed1-x532.google.com (mail-ed1-x532.google.com [IPv6:2a00:1450:4864:20::532])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id CEBC9C0613C1
-        for <linux-doc@vger.kernel.org>; Thu, 22 Jul 2021 03:03:56 -0700 (PDT)
-Received: by mail-ed1-x532.google.com with SMTP id ec55so6092620edb.1
-        for <linux-doc@vger.kernel.org>; Thu, 22 Jul 2021 03:03:56 -0700 (PDT)
+Received: from mail-ej1-x633.google.com (mail-ej1-x633.google.com [IPv6:2a00:1450:4864:20::633])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 16DEEC0613CF
+        for <linux-doc@vger.kernel.org>; Thu, 22 Jul 2021 03:03:58 -0700 (PDT)
+Received: by mail-ej1-x633.google.com with SMTP id dp20so7541214ejc.7
+        for <linux-doc@vger.kernel.org>; Thu, 22 Jul 2021 03:03:58 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=uNGWBLvKXB/+TAbUSGjomhaMNFFHNEb+9nWG9b67XRs=;
-        b=X5tqliXw3hgO2LiEq/kZ8jLJ/jsHu3roAtTxI/m941MNVT9I1h/KCDKCnhnkEjdaIp
-         RCKhtmIfeaJZsKnnRv4/eEZp2SGv6xXxc+RbtJD5uHH/PaP6ntPkfSYuEJKvR4lCGNz/
-         W7FVuOtLLb4Mvk0ORzuUBj9uPeXBEsXZFA72d1fmfAVvBNnTlrdtYndjdxM2zoAVLL/8
-         SJErjTXdoaDaOnuiwZ5PJYurmqOx+ia2eFKM9NDWpEvV95xKU0mv1wWu/idsZVrMNst2
-         NQgODoHqiLBsjzJ7394U+fZRCBUGuNyJK0HWEBqHOZ7+xJWFBez0CtdItNjWT+44FG/R
-         OB+A==
+        h=from:to:cc:subject:date:message-id:in-reply-to:references
+         :mime-version:content-transfer-encoding;
+        bh=MAR/197ZIT3kSyhNe4tx+U85YGZIc/Ll5NNFXKz7ZUU=;
+        b=X8ULWz4CU8IS6hhbZmy8mzvOimrO+0c9hJEnhNtsGFvsOP2GxrEK/XwHtA8yCd7a/G
+         Hc5kn/orLmyj4EeWwZazTjK/FfGI6TIKRC0KbCu3JQgZ6CqrcoQxEgIzmjkYlRuOjv/v
+         Yx/FBxHsam+FEyDYMI0bAy15Re0Knwx+l8YTKqcjx5XO7Atl/+7retCohCvUvE9T+3oA
+         rml1hzR3p2HvplRDybFbu72tHhCGzWy3WYLCZdHXU13qUyuncaUIGORZtRqPP+OQTbQ5
+         NiAIJCKMOfSn0q00Yhu4hOjFSzurY6/MOS1xMpTJATeQCzAVWqbhlkaIWnlpgA73T8Xv
+         TOEg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=uNGWBLvKXB/+TAbUSGjomhaMNFFHNEb+9nWG9b67XRs=;
-        b=VhQba2EpvEcxLLMkAbFZ9stjgFRebjb6iSv40TiNH6JWvk7FjdzwLEdopz/cj27DMG
-         PMYOWnYS99TzGwnIezJiM9e7QFP4jlDxBQno5XeUkD1jBiu96hoADp2GblE3LSTDiM06
-         CbKWjNJ1FqJpkm65CXhaFj00ur0hUEYdKqHSc+LPkvSpo4A4cD1gWVbgRBuXsmBUJZYC
-         Bb5ea5fPzON62D1RIZZeHepAbeqVeg2/OzlN/yZen+V1iL776DEIuR4gO2uYKakWYiTj
-         GJW/wUq6C7n0VHPU5V0UWlLk4HA/4R/O50FhmuuIQsnqiMZpgWTAi2d5vZHGMm2vFskP
-         bM/g==
-X-Gm-Message-State: AOAM531iasN+wM7OILZbplp55sk2p83FaA8EwPfkCB4ljK7Jqt9qUcQ2
-        1/O9s+z9Xp5DzXiEidpyoAg=
-X-Google-Smtp-Source: ABdhPJwYgzBZiF0RtOBsXgZ4N4U29ZIdncudharPwvaaS+kfWvOT/32L58zKDC8bXAz4Rfga5A0kOA==
-X-Received: by 2002:a50:9554:: with SMTP id v20mr52499577eda.179.1626948235361;
-        Thu, 22 Jul 2021 03:03:55 -0700 (PDT)
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+         :references:mime-version:content-transfer-encoding;
+        bh=MAR/197ZIT3kSyhNe4tx+U85YGZIc/Ll5NNFXKz7ZUU=;
+        b=CxRqQBOwc5w2nqNoOmcL3Nk+Gtk66Pa2/3ZfJ6DSUPOem0N+FgH/s44aiSdiG63MVQ
+         nb7WHddYRGyNC95GJTROvGSQD02s9h7alV3jWuNhEh3HknyqysTiMIzahmHWKSWv1Jqc
+         P0WFgJq5jUNVeQqnbg9kYD0hb4Irmd7NePC/Rdg74GIEesa9WflynH6W1bXURaAhoQou
+         xaPtst/9WjmOXLHI7GynPqQ78C3wqTXjqe5EnVJacPpIiw+UE0RN9lmnB2kNk3/KHgHD
+         B2NA+3BtulsSJSOdXsGYcgS3ObNEp9Mczws/44Qbr14W/XODEJxHSrPhM5VY1QZUKKA+
+         w5Ew==
+X-Gm-Message-State: AOAM5334+bv6/BjIxpNzz6EbVeWcYpX3gN+3R4HBC3/4q7QVI0EdyWWN
+        VnYRmB1Fr/2kBSBQDOdbyts=
+X-Google-Smtp-Source: ABdhPJwpa2wE3M4ARKzmvkvIk/uT1kAjGY18+IJYtrboDtF+6QkTJutI1PqRvMZrdbe1N0u43C+hyw==
+X-Received: by 2002:a17:906:4dcf:: with SMTP id f15mr42215690ejw.400.1626948236659;
+        Thu, 22 Jul 2021 03:03:56 -0700 (PDT)
 Received: from yoga-910.localhost ([82.76.66.29])
-        by smtp.gmail.com with ESMTPSA id cb4sm9341749ejb.72.2021.07.22.03.03.54
+        by smtp.gmail.com with ESMTPSA id cb4sm9341749ejb.72.2021.07.22.03.03.55
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 22 Jul 2021 03:03:54 -0700 (PDT)
+        Thu, 22 Jul 2021 03:03:56 -0700 (PDT)
 From:   Ioana Ciornei <ciorneiioana@gmail.com>
 To:     Jonathan Corbet <corbet@lwn.net>, Petr Mladek <pmladek@suse.com>,
         Steven Rostedt <rostedt@goodmis.org>
@@ -54,10 +54,12 @@ Cc:     linux-doc@vger.kernel.org, Stephen Boyd <swboyd@chromium.org>,
         Maxim Levitsky <mlevitsk@redhat.com>,
         Jing Zhang <jingzhangos@google.com>,
         Ioana Ciornei <ioana.ciornei@nxp.com>
-Subject: [PATCH 0/4] docs: small fixes
-Date:   Thu, 22 Jul 2021 13:03:52 +0300
-Message-Id: <20210722100356.635078-1-ciorneiioana@gmail.com>
+Subject: [PATCH 1/4] docs: printk-formats: fix build warning
+Date:   Thu, 22 Jul 2021 13:03:53 +0300
+Message-Id: <20210722100356.635078-2-ciorneiioana@gmail.com>
 X-Mailer: git-send-email 2.31.1
+In-Reply-To: <20210722100356.635078-1-ciorneiioana@gmail.com>
+References: <20210722100356.635078-1-ciorneiioana@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Precedence: bulk
@@ -66,21 +68,32 @@ X-Mailing-List: linux-doc@vger.kernel.org
 
 From: Ioana Ciornei <ioana.ciornei@nxp.com>
 
-This patch set is just a bundle of small fixes for problems and build
-warnings that I stumbled upon when trying to add a new section of
-documentation.
+Add an empty line after the '::' starting the code block so that the
+following lines are properly interpreted.
 
-Ioana Ciornei (4):
-  docs: printk-formats: fix build warning
-  docs: kvm: fix build warnings
-  docs: kvm: properly format code blocks and lists
-  docs: networking: dpaa2: fix chapter title format
+Without this, the following build warnings are visible.
 
- Documentation/core-api/printk-formats.rst     |  1 +
- .../ethernet/freescale/dpaa2/dpio-driver.rst  |  1 +
- Documentation/virt/kvm/api.rst                | 32 +++++++++++--------
- 3 files changed, 20 insertions(+), 14 deletions(-)
+Documentation/core-api/printk-formats.rst:136: WARNING: Unexpected indentation.
+Documentation/core-api/printk-formats.rst:137: WARNING: Block quote ends without a blank line; unexpected unindent.
 
+Fixes: 9294523e3768 ("module: add printk formats to add module build ID to stacktraces")
+Signed-off-by: Ioana Ciornei <ioana.ciornei@nxp.com>
+---
+ Documentation/core-api/printk-formats.rst | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/Documentation/core-api/printk-formats.rst b/Documentation/core-api/printk-formats.rst
+index d941717a191b..e08bbe9b0cbf 100644
+--- a/Documentation/core-api/printk-formats.rst
++++ b/Documentation/core-api/printk-formats.rst
+@@ -130,6 +130,7 @@ printed after the symbol name with an extra ``b`` appended to the end of the
+ specifier.
+ 
+ ::
++
+ 	%pS	versatile_init+0x0/0x110 [module_name]
+ 	%pSb	versatile_init+0x0/0x110 [module_name ed5019fdf5e53be37cb1ba7899292d7e143b259e]
+ 	%pSRb	versatile_init+0x9/0x110 [module_name ed5019fdf5e53be37cb1ba7899292d7e143b259e]
 -- 
 2.31.1
 
