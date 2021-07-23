@@ -2,221 +2,241 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id CC0453D3B15
-	for <lists+linux-doc@lfdr.de>; Fri, 23 Jul 2021 15:28:38 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 5DEA63D3B2E
+	for <lists+linux-doc@lfdr.de>; Fri, 23 Jul 2021 15:30:16 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S234988AbhGWMsD (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Fri, 23 Jul 2021 08:48:03 -0400
-Received: from mx07-00178001.pphosted.com ([185.132.182.106]:58012 "EHLO
-        mx07-00178001.pphosted.com" rhost-flags-OK-OK-OK-OK)
-        by vger.kernel.org with ESMTP id S233230AbhGWMsC (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Fri, 23 Jul 2021 08:48:02 -0400
-Received: from pps.filterd (m0241204.ppops.net [127.0.0.1])
-        by mx07-00178001.pphosted.com (8.16.0.43/8.16.0.43) with SMTP id 16NDBbPi018862;
-        Fri, 23 Jul 2021 15:28:18 +0200
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=from : to : cc :
- subject : date : message-id : in-reply-to : references : mime-version :
- content-type; s=selector1;
- bh=BsQ+xBUP2/QnHH1w0xmCSCVKFsAhAEpEBr3x9WWVBHw=;
- b=mEbwOV0v3n+0zl2RrRtQS8d9GlC5ELajSQdI5TW4KxbFEODIWJQjd1EoVjHfGile+exI
- FUjBHphht3CwFPTzwlmvCCTQPebm4Ro79GdikpoSbU6kc5wx1hEmbx5muMkf8xnP1yCp
- DU5p05IhbVoe/3PYIFsw43PBT9azyegieN7VGES7J0uM54/bPlTa3XkdWLHYdXINQg9V
- qANfyTaVdipQOMFfLrHB/YRxXWHxrpwK2jKofkg8+on8qLnyRxd9KW+Yp+8UtDtUETl0
- BJgN5N4pbPam9uwK4nb+BYGJuc9SBzHApEM8N004V8gNvZMYd0bC7wnEWvAvXdaDAjz/ Rw== 
-Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
-        by mx07-00178001.pphosted.com with ESMTP id 39ygng4592-1
-        (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
-        Fri, 23 Jul 2021 15:28:17 +0200
-Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
-        by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 758C8100034;
-        Fri, 23 Jul 2021 15:28:17 +0200 (CEST)
-Received: from Webmail-eu.st.com (sfhdag2node3.st.com [10.75.127.6])
-        by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 65C0F221783;
-        Fri, 23 Jul 2021 15:28:17 +0200 (CEST)
-Received: from localhost (10.75.127.45) by SFHDAG2NODE3.st.com (10.75.127.6)
- with Microsoft SMTP Server (TLS) id 15.0.1497.2; Fri, 23 Jul 2021 15:28:17
- +0200
-From:   Alexandre Torgue <alexandre.torgue@foss.st.com>
-To:     Linus Walleij <linus.walleij@linaro.org>, <arnd@arndb.de>,
-        Olof Johansson <olof@lixom.net>, <robh+dt@kernel.org>,
-        Russell King <linux@armlinux.org.uk>,
-        Jonathan Corbet <corbet@lwn.net>
-CC:     <linux-gpio@vger.kernel.org>,
-        <linux-stm32@st-md-mailman.stormreply.com>,
-        <linux-arm-kernel@lists.infradead.org>,
-        <devicetree@vger.kernel.org>, <linux-doc@vger.kernel.org>,
-        Maxime Coquelin <mcoquelin.stm32@gmail.com>,
-        Alexandre Torgue <alexandre.torgue@foss.st.com>
-Subject: [PATCH 7/7] ARM: dts: stm32: add initial support of stm32mp135f-dk board
-Date:   Fri, 23 Jul 2021 15:28:10 +0200
-Message-ID: <20210723132810.25728-8-alexandre.torgue@foss.st.com>
-X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20210723132810.25728-1-alexandre.torgue@foss.st.com>
-References: <20210723132810.25728-1-alexandre.torgue@foss.st.com>
+        id S235072AbhGWMtj (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Fri, 23 Jul 2021 08:49:39 -0400
+Received: from mail-dm6nam12on2050.outbound.protection.outlook.com ([40.107.243.50]:50528
+        "EHLO NAM12-DM6-obe.outbound.protection.outlook.com"
+        rhost-flags-OK-OK-OK-FAIL) by vger.kernel.org with ESMTP
+        id S233037AbhGWMtj (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Fri, 23 Jul 2021 08:49:39 -0400
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=JwqPC/lih+N90JdThmnlvhEKrJTHqTpVgzdw3HyU8CIkDC7ND+dwa2bgPxYvSJTqB8OMe8rPUWN2pEPdiTKHnwMFIpDHB9/YlVre83o3ZxVXLb84E8k2GFHJwUwgm82NFWTBaT+LoX8qU3o/b7qIBeraRErkc3ImhAp7Yh7IvxuaRnfO9S4wYLRdEZXU3qaiqUi/6kJkXe8dzL7fiae0wblNzT/iMjZ1es97SaUY5IzuryR06n8gF+PHW4WhlIsJbYmVmj0b/f4rNVCfUFrj62Rkgr5YAhI/YR91CII3qfCZq2T1GUjxCQIhTF0XLBm+dWm+gXYeTnBfMKPxtBAMTg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=ixm/3PGHpM+2T8JfnMsnOGYOFBJxJnwguIemqmMbpxI=;
+ b=Q4n7ADc4A92pyX9HnX+c2QALFQ93NXmA3TJs/5EkBcD0PvqEhOfRLrG8rm38RpmvxR+dF35QZiJ8ef5eNRmSIP50UrOdhNyGvVIwoRF8XaokQNrjXZv1bzmds8v9wid4mOVKYztN9UBEr4l8xZ971hylk3I0oOKrZoDRBhbNzXpVy/BbxoldpK6sz5Y6OoEk0cMioY4ibTdHNkFKFL1JRB219zzTtbKopwZ9xMpr1DvcBBNH1EjkpmBX/CsNoHZEPtJEot3GNwfderXI+Fpv5SJjFmXPuVwQ9pmLQ67AFYSImj/aRVrK17T3XLhqgZTXRkPJTitM2F33tn4pqdkBPw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=nvidia.com; dmarc=pass action=none header.from=nvidia.com;
+ dkim=pass header.d=nvidia.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
+ s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=ixm/3PGHpM+2T8JfnMsnOGYOFBJxJnwguIemqmMbpxI=;
+ b=Fy7lKh/2dkRvlnXRLZvIikry5NzMnbK4zFqJwZ1YAVXXWzcUNlihtOyOoBG5nSf1cigNT/qU14389geoUecZ1v3A1VFt+LiEdCEveJuVSx08ObI7x4QBB3rT8WXy8EahgHHHqHcb7ZD2PUU41cAMy/psF/9jh7nXIkEPar3jra3vdDOysHid7Lzzavi3X5gN17pAEXJ7CE1qjPKK+wbiJkeCqs+SW8KSWpkprEw1Bnamv8/DZm/Zp58/Ep74qa7HcYhGGu0ra0jF7Yo86/UaT1yYrKs3QJkoglfNE/XPmqta34w/clTA1ChuZxefZ+zkmNvM/wbT6Wk9DpEoZ1LXHA==
+Authentication-Results: lst.de; dkim=none (message not signed)
+ header.d=none;lst.de; dmarc=none action=none header.from=nvidia.com;
+Received: from BL0PR12MB5506.namprd12.prod.outlook.com (2603:10b6:208:1cb::22)
+ by BL0PR12MB5523.namprd12.prod.outlook.com (2603:10b6:208:1ce::18) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4352.26; Fri, 23 Jul
+ 2021 13:30:10 +0000
+Received: from BL0PR12MB5506.namprd12.prod.outlook.com
+ ([fe80::d017:af2f:7049:5482]) by BL0PR12MB5506.namprd12.prod.outlook.com
+ ([fe80::d017:af2f:7049:5482%4]) with mapi id 15.20.4352.029; Fri, 23 Jul 2021
+ 13:30:10 +0000
+Date:   Fri, 23 Jul 2021 10:30:08 -0300
+From:   Jason Gunthorpe <jgg@nvidia.com>
+To:     Christoph Hellwig <hch@lst.de>
+Cc:     David Airlie <airlied@linux.ie>,
+        Tony Krowiak <akrowiak@linux.ibm.com>,
+        Alex Williamson <alex.williamson@redhat.com>,
+        Christian Borntraeger <borntraeger@de.ibm.com>,
+        Cornelia Huck <cohuck@redhat.com>,
+        Jonathan Corbet <corbet@lwn.net>,
+        Daniel Vetter <daniel@ffwll.ch>,
+        Diana Craciun <diana.craciun@oss.nxp.com>,
+        dri-devel@lists.freedesktop.org,
+        Eric Auger <eric.auger@redhat.com>,
+        Eric Farman <farman@linux.ibm.com>,
+        Harald Freudenberger <freude@linux.ibm.com>,
+        Vasily Gorbik <gor@linux.ibm.com>,
+        Heiko Carstens <hca@linux.ibm.com>,
+        intel-gfx@lists.freedesktop.org,
+        intel-gvt-dev@lists.freedesktop.org,
+        Jani Nikula <jani.nikula@linux.intel.com>,
+        Jason Herne <jjherne@linux.ibm.com>,
+        Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
+        kvm@vger.kernel.org, Kirti Wankhede <kwankhede@nvidia.com>,
+        linux-doc@vger.kernel.org, linux-s390@vger.kernel.org,
+        Matthew Rosato <mjrosato@linux.ibm.com>,
+        Peter Oberparleiter <oberpar@linux.ibm.com>,
+        Halil Pasic <pasic@linux.ibm.com>,
+        Rodrigo Vivi <rodrigo.vivi@intel.com>,
+        Vineeth Vijayan <vneethv@linux.ibm.com>,
+        Zhi Wang <zhi.a.wang@intel.com>,
+        "Raj, Ashok" <ashok.raj@intel.com>,
+        Leon Romanovsky <leonro@nvidia.com>,
+        Max Gurtovoy <mgurtovoy@nvidia.com>,
+        Yishai Hadas <yishaih@nvidia.com>,
+        Zhenyu Wang <zhenyuw@linux.intel.com>
+Subject: Re: [PATCH v2 09/14] vfio/pci: Change vfio_pci_try_bus_reset() to
+ use the dev_set
+Message-ID: <20210723133008.GV1117491@nvidia.com>
+References: <0-v2-b6a5582525c9+ff96-vfio_reflck_jgg@nvidia.com>
+ <9-v2-b6a5582525c9+ff96-vfio_reflck_jgg@nvidia.com>
+ <20210723080543.GD2795@lst.de>
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20210723080543.GD2795@lst.de>
+X-ClientProxiedBy: BL1PR13CA0329.namprd13.prod.outlook.com
+ (2603:10b6:208:2c1::34) To BL0PR12MB5506.namprd12.prod.outlook.com
+ (2603:10b6:208:1cb::22)
 MIME-Version: 1.0
-Content-Type: text/plain
-X-Originating-IP: [10.75.127.45]
-X-ClientProxiedBy: SFHDAG1NODE3.st.com (10.75.127.3) To SFHDAG2NODE3.st.com
- (10.75.127.6)
-X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.391,18.0.790
- definitions=2021-07-23_05:2021-07-23,2021-07-23 signatures=0
+X-MS-Exchange-MessageSentRepresentingType: 1
+Received: from mlx.ziepe.ca (142.162.113.129) by BL1PR13CA0329.namprd13.prod.outlook.com (2603:10b6:208:2c1::34) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4373.7 via Frontend Transport; Fri, 23 Jul 2021 13:30:09 +0000
+Received: from jgg by mlx with local (Exim 4.94)        (envelope-from <jgg@nvidia.com>)        id 1m6vFg-0070KD-3p; Fri, 23 Jul 2021 10:30:08 -0300
+X-MS-PublicTrafficType: Email
+X-MS-Office365-Filtering-Correlation-Id: 96f76225-97b5-4fc8-db5d-08d94dddfe19
+X-MS-TrafficTypeDiagnostic: BL0PR12MB5523:
+X-MS-Exchange-Transport-Forked: True
+X-Microsoft-Antispam-PRVS: <BL0PR12MB5523380775658FF19292E301C2E59@BL0PR12MB5523.namprd12.prod.outlook.com>
+X-MS-Oob-TLC-OOBClassifiers: OLM:8882;
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: sWvfK6eSD52ZtfoNNj2xCCq9lHrINi3vxEX19fgJvV59e+lU1bOe7GFwrkw5mdYaTx5HGP14yAL0DIFXcI4g8EIl5NSjpCj2dNrUPfH4QXr5zht4cd/8LbVPnoI/P3uQK1oF5p6jiqAyEtImL+ai/KjW8oVIl5uTIn7IvaPeypu4fOJgFtJ13Hj2jSiNTxB56DIB/BZEHhbxYbjqRhyk95dIV1lHOG0MhbKEPAcxCSFZCsW8wEo/GDJgq5TZQy8s8xISVZ62k0F5wN1u8EtMs04aG/PGofaBmvoDQF2nKbhOPkYG5cyf53Y1o9uBn4kxrm+FAE6oFLpWDWVuhYNBwUVoyHHChpvJ/3v8N6dQAJ4qljTSvwidrKpfGyzMuG+jadiXm9hCGRLQVFQiF7V1nhj/+c6XMAeCAJKlrsSeg9D2pQL3ScQkv9Q3cGN0q/rC3fVWRwjp6jz0OyeEDnMjuQT1p4qbShIE3e3CpBI5ciS9kJQVgjOZop0wih1DobLapDVbhzToPMyIiUBnXUw7Bicpvb1LO+s6Bh47yCzgq+SC/IO+oaHPOvc4jxgAf2Npe5JcCSA7kqSOBwIzVpN5GYYOPB1LrAXuFix+Q6oD2UEPABjNq6L/cPj2oAMTMetfYHqV08ge81vXOekL/uICeg==
+X-Forefront-Antispam-Report: CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BL0PR12MB5506.namprd12.prod.outlook.com;PTR:;CAT:NONE;SFS:(4636009)(346002)(376002)(39860400002)(366004)(136003)(396003)(8936002)(6916009)(9786002)(9746002)(4326008)(426003)(2616005)(316002)(54906003)(5660300002)(186003)(33656002)(7406005)(1076003)(7416002)(66556008)(66476007)(66946007)(26005)(8676002)(478600001)(83380400001)(36756003)(86362001)(38100700002)(2906002);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?OBtWxs68TVjjMrt+DBsPyFtqSuBO1yvIaAG5HZ8VWLD98I7LEzWvZRqVcPT7?=
+ =?us-ascii?Q?Mo7s8py67aMY6qVW9gpu7PERhEtbUdFB7yV/hpkFcN8lRZ3lHfgRLJb0h7Wq?=
+ =?us-ascii?Q?6onhiC++6pj59alLyCpMk/zVrMT/xZYj/rn8F8CjSBvuTkc7rgqqfGZoViRF?=
+ =?us-ascii?Q?g8+xsKHBPsPPJqeEYuH/r9yaoN7WKHCr5i8K+UqCW1+Quruvt49vThpkNm0t?=
+ =?us-ascii?Q?iaPtu3Yo4YAhlSTTsGXrQ12rEyoRXE7thNSRm9uBKOMPG9wE/NU0zASm0KP0?=
+ =?us-ascii?Q?1lshSZibhkXtRFPspvs9I8m/z+pNPSVx4YtlSO/cY515kzjsdT3aMBqWq6nM?=
+ =?us-ascii?Q?ZVHhnOt4NzNj3cULpifjvYKD361yLXvOeKuq2I8SKIzrUXR+iNmhIUij9Tji?=
+ =?us-ascii?Q?TwHhMWIiI6AvH6XqdLCcKezAgqIZinJsJ461n36ZWdEywmn/sSy/KMHvpa7+?=
+ =?us-ascii?Q?kUJNJehkCZ/xPgtXg5Pyafc4ADDtSDfOI6ws9K9gx4MJ15lRQX0YaQlgIjrU?=
+ =?us-ascii?Q?SsS8tuc5Yr0Et6JFsiAT+YAe5kQ9VSl9fGQ1JcPosXuzZz5VYvH46nlO41Gy?=
+ =?us-ascii?Q?FLwYqB1AgdoOe5jwmeYkril9C45wYXuoMMVmX4eHvWbhQYFUwZHShg7yBua3?=
+ =?us-ascii?Q?Et8zQSzviHDRGvwhu6upvS+02uZF2or1+/JUMMb6WoZhEcEe2EmDton2PyrQ?=
+ =?us-ascii?Q?EepUwP7U2mn76imD3Ry0eZflR97JTyHsb2q/jSG+cx9aOaSI7hqrBVmPC2jx?=
+ =?us-ascii?Q?kmkZlwWl+L8FcnzEWLuh5Qt6gy4SkgcQhf1dqVyCPljKlXa0ELOczCoM+hz5?=
+ =?us-ascii?Q?GHUaDp2/tXgybYDuYx6tfykAxkEICHTwUSNJZGTsmsd/q4J1lFGJ5qBtAmet?=
+ =?us-ascii?Q?rUtlDpc8zX7nzmdtxSE8L/wS2Z8QeDxnW4FGZUJzxb393dRe+D8qNsRZTatK?=
+ =?us-ascii?Q?N3WISlIFJSn/8ptutGdHLv10yTn18EoMiSc8mO4N46rpYcL+qJUbVaLBHINp?=
+ =?us-ascii?Q?805weWuw7AUsx/8benfxcbFFaLbkE7x7ryWA4kTK1EL3oJ0uiNhcGGrBbi0i?=
+ =?us-ascii?Q?1uiBG1hLfmcHll+NiQa64utU9xEkUlHm/EB2mJHummTZGPiJAH1lFoqQILxB?=
+ =?us-ascii?Q?cnmyM4558omUlTfOsWhG7TbNIaT2IBUi1BoA6ZPo7Sj2pPTGSVsR3zLu6A9A?=
+ =?us-ascii?Q?WicNOJ1uT4+671xx2Qc75nQBYtMePiL8Pkq26jdtrWCRv1Si6PbnNUD3u8tj?=
+ =?us-ascii?Q?fvFKgMPz3tFiBrdZiDi5dQCnXZKEdK7tOXLHk9UYCLDgzR++Vok3vdl5OIeN?=
+ =?us-ascii?Q?MMghmC73B7zx6YoewZulo8oQ?=
+X-OriginatorOrg: Nvidia.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 96f76225-97b5-4fc8-db5d-08d94dddfe19
+X-MS-Exchange-CrossTenant-AuthSource: BL0PR12MB5506.namprd12.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 23 Jul 2021 13:30:09.9856
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: BAAEpD5AQ4dAqSjzcRtExVDfk0gnQNhM4E0WO6U276kvv5AaoK+o9Cdpcw5CGAaH
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: BL0PR12MB5523
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Add support of stm32mp135f discovery board (part number: STM32MP135F-DK).
-It embeds a STM32MP135f SOC with 512 MB of DDR3.
-Several connections are available on this board:
-    4*USB2.0, 1*USB2.0 typeC DRD, SDcard, 2*RJ45, HDMI, Combo Wifi/BT, ...
+On Fri, Jul 23, 2021 at 10:05:43AM +0200, Christoph Hellwig wrote:
+> On Tue, Jul 20, 2021 at 02:42:55PM -0300, Jason Gunthorpe wrote:
+> > Keep track of all the vfio_devices that have been added to the device set
+> > and use this list in vfio_pci_try_bus_reset() instead of trying to work
+> > backwards from the pci_device.
+> > 
+> > The dev_set->lock directly prevents devices from joining/leaving the set,
+> > which further implies the pci_device cannot change drivers or that the
+> > vfio_device be freed, eliminating the need for get/put's.
+> > 
+> > Completeness of the device set can be directly measured by checking if
+> > every PCI device in the reset group is also in the device set - which
+> > proves that VFIO drivers are attached to everything.
+> > 
+> > This restructuring corrects a call to pci_dev_driver() without holding the
+> > device_lock() and removes a hard wiring to &vfio_pci_driver.
+> > 
+> > Signed-off-by: Jason Gunthorpe <jgg@nvidia.com>
+> 
+> I think the addition of the list to the dev_set should be a different
+> patch.  Or maybe even go into the one adding the dev_set concept.
 
-Only SD card, uart4 (console) and watchdog IPs are enabled in this commit.
+OK
 
-Signed-off-by: Alexandre Torgue <alexandre.torgue@foss.st.com>
+> > +static int vfio_pci_check_all_devices_bound(struct pci_dev *pdev, void *data)
+> >  {
+> > +	struct vfio_device_set *dev_set = data;
+> > +	struct vfio_device *cur;
+> >  
+> > +	lockdep_assert_held(&dev_set->lock);
+> >  
+> > +	list_for_each_entry(cur, &dev_set->device_list, dev_set_list)
+> > +		if (cur->dev == &pdev->dev)
+> > +			return 0;
+> > +	return -EBUSY;
+> 
+> I don't understand this logic.  If there is any device in the set that
+> does now have the same struct device we're in trouble?  Please clearly
+> document what this is trying to do.  If the bound in the name makes sense
+> you probably want to check the driver instead.
 
-diff --git a/arch/arm/boot/dts/Makefile b/arch/arm/boot/dts/Makefile
-index 863347b6b65e..e4e04e57fba0 100644
---- a/arch/arm/boot/dts/Makefile
-+++ b/arch/arm/boot/dts/Makefile
-@@ -1087,6 +1087,7 @@ dtb-$(CONFIG_ARCH_STM32) += \
- 	stm32h743i-eval.dtb \
- 	stm32h743i-disco.dtb \
- 	stm32h750i-art-pi.dtb \
-+	stm32mp135f-dk.dtb \
- 	stm32mp153c-dhcom-drc02.dtb \
- 	stm32mp157a-avenger96.dtb \
- 	stm32mp157a-dhcor-avenger96.dtb \
-diff --git a/arch/arm/boot/dts/stm32mp13-pinctrl.dtsi b/arch/arm/boot/dts/stm32mp13-pinctrl.dtsi
-new file mode 100644
-index 000000000000..069f95f2b628
---- /dev/null
-+++ b/arch/arm/boot/dts/stm32mp13-pinctrl.dtsi
-@@ -0,0 +1,64 @@
-+// SPDX-License-Identifier: (GPL-2.0+ OR BSD-3-Clause)
-+/*
-+ * Copyright (C) STMicroelectronics 2021 - All Rights Reserved
-+ * Author: Alexandre Torgue <alexandre.torgue@foss.st.com>
-+ */
-+#include <dt-bindings/pinctrl/stm32-pinfunc.h>
-+
-+&pinctrl {
-+	sdmmc1_b4_pins_a: sdmmc1-b4-0 {
-+		pins1 {
-+			pinmux = <STM32_PINMUX('C', 8, AF12)>, /* SDMMC1_D0 */
-+				 <STM32_PINMUX('C', 9, AF12)>, /* SDMMC1_D1 */
-+				 <STM32_PINMUX('C', 10, AF12)>, /* SDMMC1_D2 */
-+				 <STM32_PINMUX('C', 11, AF12)>, /* SDMMC1_D3 */
-+				 <STM32_PINMUX('D', 2, AF12)>; /* SDMMC1_CMD */
-+			slew-rate = <1>;
-+			drive-push-pull;
-+			bias-disable;
-+		};
-+		pins2 {
-+			pinmux = <STM32_PINMUX('C', 12, AF12)>; /* SDMMC1_CK */
-+			slew-rate = <2>;
-+			drive-push-pull;
-+			bias-disable;
-+		};
-+	};
-+
-+	sdmmc1_b4_od_pins_a: sdmmc1-b4-od-0 {
-+		pins1 {
-+			pinmux = <STM32_PINMUX('C', 8, AF12)>, /* SDMMC1_D0 */
-+				 <STM32_PINMUX('C', 9, AF12)>, /* SDMMC1_D1 */
-+				 <STM32_PINMUX('C', 10, AF12)>, /* SDMMC1_D2 */
-+				 <STM32_PINMUX('C', 11, AF12)>; /* SDMMC1_D3 */
-+			slew-rate = <1>;
-+			drive-push-pull;
-+			bias-disable;
-+		};
-+		pins2 {
-+			pinmux = <STM32_PINMUX('C', 12, AF12)>; /* SDMMC1_CK */
-+			slew-rate = <2>;
-+			drive-push-pull;
-+			bias-disable;
-+		};
-+		pins3 {
-+			pinmux = <STM32_PINMUX('D', 2, AF12)>; /* SDMMC1_CMD */
-+			slew-rate = <1>;
-+			drive-open-drain;
-+			bias-disable;
-+		};
-+	};
-+
-+	uart4_pins_a: uart4-0 {
-+		pins1 {
-+			pinmux = <STM32_PINMUX('D', 6, AF8)>; /* UART4_TX */
-+			bias-disable;
-+			drive-push-pull;
-+			slew-rate = <0>;
-+		};
-+		pins2 {
-+			pinmux = <STM32_PINMUX('D', 8, AF8)>; /* UART4_RX */
-+			bias-disable;
-+		};
-+	};
-+};
-diff --git a/arch/arm/boot/dts/stm32mp135f-dk.dts b/arch/arm/boot/dts/stm32mp135f-dk.dts
-new file mode 100644
-index 000000000000..7e96d9e36217
---- /dev/null
-+++ b/arch/arm/boot/dts/stm32mp135f-dk.dts
-@@ -0,0 +1,56 @@
-+// SPDX-License-Identifier: (GPL-2.0+ OR BSD-3-Clause)
-+/*
-+ * Copyright (C) STMicroelectronics 2021 - All Rights Reserved
-+ * Author: Alexandre Torgue <alexandre.torgue@foss.st.com> for STMicroelectronics.
-+ */
-+
-+/dts-v1/;
-+
-+#include "stm32mp135.dtsi"
-+#include "stm32mp13xf.dtsi"
-+#include "stm32mp13-pinctrl.dtsi"
-+
-+/ {
-+	model = "STMicroelectronics STM32MP135F-DK Discovery Board";
-+	compatible = "st,stm32mp135f-dk", "st,stm32mp135";
-+
-+	aliases {
-+		serial0 = &uart4;
-+	};
-+
-+	memory@c0000000 {
-+		device_type = "memory";
-+		reg = <0xc0000000 0x20000000>;
-+	};
-+
-+	vdd_sd: vdd-sd {
-+		compatible = "regulator-fixed";
-+		regulator-name = "vdd_sd";
-+		regulator-min-microvolt = <2900000>;
-+		regulator-max-microvolt = <2900000>;
-+		regulator-always-on;
-+	};
-+};
-+
-+&iwdg2 {
-+	timeout-sec = <32>;
-+	status = "okay";
-+};
-+
-+&sdmmc1 {
-+	pinctrl-names = "default", "opendrain";
-+	pinctrl-0 = <&sdmmc1_b4_pins_a>;
-+	pinctrl-1 = <&sdmmc1_b4_od_pins_a>;
-+	broken-cd;
-+	disable-wp;
-+	st,neg-edge;
-+	bus-width = <4>;
-+	vmmc-supply = <&vdd_sd>;
-+	status = "okay";
-+};
-+
-+&uart4 {
-+	pinctrl-names = "default";
-+	pinctrl-0 = <&uart4_pins_a>;
-+	status = "okay";
-+};
--- 
-2.17.1
+The PCI reset this code is tring to do effects a set of PCI devices,
+due to how the HW works.
 
+Along with the vfio_pci_for_each_slot_or_bus() this is computing a set
+wise 'is superset' between the list of pci_dev's the reset will affect
+(the reset group) and the list of vfio_devices that we have locking
+control over to sequence the reset (the dev_set).
+
+If every PCI device we will reset is under the dev_set then we
+directly know it is safe to trigger the reset. If any PCI device is
+not in this dev_set then we cannot use the reset as we can't know what
+will happen to the device that we don't control.
+
+Let's use a different word than bound? vfio_pci_check_device_in_set()?
+
+> >  static void vfio_pci_try_bus_reset(struct vfio_pci_device *vdev)
+> >  {
+> > +	/* All VFIO devices have a closed FD */
+> > +	list_for_each_entry(cur, &dev_set->device_list, vdev.dev_set_list)
+> > +		if (cur->vdev.open_count)
+> > +			return;
+> > +
+> > +	/* All devices in the group to be reset need VFIO devices */
+> > +	if (vfio_pci_for_each_slot_or_bus(
+> > +		    vdev->pdev, vfio_pci_check_all_devices_bound, dev_set,
+> > +		    !pci_probe_reset_slot(vdev->pdev->slot)))
+> > +		return;
+> >  
+> >  	/* Does at least one need a reset? */
+> 
+> These checks look a little strange, and the comments don't make much
+> sense.  What about an incremental patch like this?
+
+Sure, it can go in a function
+
+> diff --git a/drivers/vfio/pci/vfio_pci.c b/drivers/vfio/pci/vfio_pci.c
+> index fbc20f6d2dd412..d8375a5e77e07c 100644
+> +++ b/drivers/vfio/pci/vfio_pci.c
+> @@ -2188,10 +2188,34 @@ static int vfio_pci_try_zap_and_vma_lock_cb(struct pci_dev *pdev, void *data)
+>  	return 0;
+>  }
+>  
+> +static struct pci_dev *vfio_pci_reset_target(struct vfio_pci_device *vdev)
+> +{
+> +	struct vfio_device_set *dev_set = vdev->vdev.dev_set;
+> +	struct vfio_pci_device *cur;
+> +
+> +	/* none of the device is allowed to be currently open: */
+> +	list_for_each_entry(cur, &dev_set->device_list, vdev.dev_set_list)
+> +		if (cur->vdev.open_count)
+> +			return NULL;
+> +
+> +	/* all devices in the group to be reset need to be VFIO devices: */
+
+It is not "need to be VFIO devices" it is "need to be in our
+dev_set". Have the PCI dev bound to, say, a mdev VFIO device isn't
+good enough.
+
+Thanks,
+Jason
