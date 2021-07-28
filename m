@@ -2,72 +2,143 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 12F063D9288
-	for <lists+linux-doc@lfdr.de>; Wed, 28 Jul 2021 17:59:29 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id AD2883D92CF
+	for <lists+linux-doc@lfdr.de>; Wed, 28 Jul 2021 18:10:48 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S237391AbhG1P71 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 28 Jul 2021 11:59:27 -0400
-Received: from [43.250.32.171] ([43.250.32.171]:10547 "EHLO email.cn"
-        rhost-flags-FAIL-FAIL-OK-FAIL) by vger.kernel.org with ESMTP
-        id S237358AbhG1P7Z (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Wed, 28 Jul 2021 11:59:25 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=email.cn;
-        s=dkim; h=From:To:Date; bh=+0wI7mv8XUU8mTLbxor4A/f7cmasr0sNeQo/+
-        h10VfE=; b=Lzl9S29cJ09P3Nnj9lH4xUNIMgRrLqjq79yqXJQcdL+ahOnSRRf21
-        ca1Gpju7Ix7thIicLtYFZLFqbTytF2wJMK8Jlzqy/uT325oOk2rbXnARMyMcQMFw
-        RYFC7RxBYIa70mmAtkCZJOhVm5eYV5nDUg8Or3fFOyxaBa4xFMeh2g=
-Received: from localhost.localdomain (unknown [113.251.14.68])
-        by v_coremail2-frontend-1 (Coremail) with SMTP id LCKnCgDn9QTQfgFhsjoLAA--.39671S2;
-        Wed, 28 Jul 2021 23:59:13 +0800 (CST)
-From:   Hu Haowen <src.res@email.cn>
-To:     davem@davemloft.net, kuba@kernel.org, corbet@lwn.net
-Cc:     netdev@vger.kernel.org, linux-doc@vger.kernel.org,
-        linux-kernel@vger.kernel.org
-Subject: [PATCH] Documentation: networking: add ioam6-sysctl into index
-Date:   Wed, 28 Jul 2021 23:59:12 +0800
-Message-Id: <20210728155912.9293-1-src.res@email.cn>
-X-Mailer: git-send-email 2.25.1
+        id S237461AbhG1QKh (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 28 Jul 2021 12:10:37 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:34122 "EHLO
+        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S237142AbhG1QJJ (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Wed, 28 Jul 2021 12:09:09 -0400
+Received: from mail-pl1-x635.google.com (mail-pl1-x635.google.com [IPv6:2607:f8b0:4864:20::635])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id A2B86C0613C1
+        for <linux-doc@vger.kernel.org>; Wed, 28 Jul 2021 09:09:07 -0700 (PDT)
+Received: by mail-pl1-x635.google.com with SMTP id f13so3284511plj.2
+        for <linux-doc@vger.kernel.org>; Wed, 28 Jul 2021 09:09:07 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=intel-com.20150623.gappssmtp.com; s=20150623;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc;
+        bh=dCQLDiGzGaw5khKMcicFqIWA7WbxBFG59Mi4mmTKjP0=;
+        b=Zh7MdYG5QgOP64vqrb7lbYeY93i3cwWAvTTjVgdU6ZiR5NgBFW3bdALx6J7uPOQoRb
+         6B23hH/qIey5KgUh98nt4YGqo+DWrvTNM+ZaDIEddtjOUPjuJSw2CTBiXfvfiFGFp9i5
+         mg7Kcb8eH5gsWTYezGJgQIh5losNkyz74gS7NSLLqEkItB7FaKz+dpKyLfeqwVFWtvds
+         GGFjQzbJ9vfYvbLEyiYfwWqVkI86pfpezrWtplwONff5jp66jw9DY2yrdvpLhGwoV6zj
+         VHjeU2lt95i22FfdytELXe06fUp59d1EpQgfecz6Z6GEWwwV8xAgqklIozocVIxfS2sm
+         4sZg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=dCQLDiGzGaw5khKMcicFqIWA7WbxBFG59Mi4mmTKjP0=;
+        b=All6gUKZ6pX0Tg92OD9OIOp1MdpUZmYOv69Jghzq0USKPlO/8+bzFGWJADwHBrix2L
+         G4I0Va7WKqCfKe84dr6qsh9CZjvnKLwOKCSfaMbYAkTFEsWZMolQJIIyk9lqlIA8GwzQ
+         cKVQW+c9atM2ctn/pnJQygjakITEMPJmu8M0tddG5YWCZ38zVXREZZ5b9vFO7rmwCcuk
+         rGvM568g0pALzSQhUhOhNdhItJqmsIFFKdWpoZKN9/Uaqlusx3SRnwRLB9US2M3djUh3
+         RJ86Wpm3D5nde5nqWrBTzNjyRDPyyXi0WhXStolNKsGygIwrH9szXQs/ls7unA4TmRhn
+         CoEQ==
+X-Gm-Message-State: AOAM530qFGveD3vMweTvpv+0cd0uekIuL82LCL1bqRxK/hk997p0ssp2
+        Tw3G9HSpHmfvVAsKVAzl7XhAFnCODBaMAX4lCuBsKg==
+X-Google-Smtp-Source: ABdhPJwhvTdmZ49xWIqwGIKOae57+qV07eOtZyDgQmpn/2iflEi2gfPYAwXeBWCiOl/KnWL8UWSxbu19S+E3ldWNuf8=
+X-Received: by 2002:a17:902:ab91:b029:12b:8dae:b1ff with SMTP id
+ f17-20020a170902ab91b029012b8daeb1ffmr407924plr.52.1627488547209; Wed, 28 Jul
+ 2021 09:09:07 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-CM-TRANSID: LCKnCgDn9QTQfgFhsjoLAA--.39671S2
-X-Coremail-Antispam: 1UD129KBjDUn29KB7ZKAUJUUUUU529EdanIXcx71UUUUU7v73
-        VFW2AGmfu7bjvjm3AaLaJ3UjIYCTnIWjp_UUU5-7k0a2IF6w4kM7kC6x804xWl1xkIjI8I
-        6I8E6xAIw20EY4v20xvaj40_Wr0E3s1l8cAvFVAK0II2c7xJM28CjxkF64kEwVA0rcxSw2
-        x7M28EF7xvwVC0I7IYx2IY67AKxVWUCVW8JwA2z4x0Y4vE2Ix0cI8IcVCY1x0267AKxVWU
-        JVW8JwA2z4x0Y4vEx4A2jsIE14v26rxl6s0DM28EF7xvwVC2z280aVCY1x0267AKxVWxJr
-        0_GcWle2I262IYc4CY6c8Ij28IcVAaY2xG8wAqx4xG64xvF2IEw4CE5I8CrVC2j2WlYx0E
-        74AGY7Cv6cx26F4UJr1UMcvjeVCFs4IE7xkEbVWUJVW8JwACjcxG0xvY0x0EwIxGrwCF04
-        k20xvY0x0EwIxGrwCF04k20xvE74AGY7Cv6cx26F4UJr1UMxC20s026xCaFVCjc4AY6r1j
-        6r4UMI8I3I0E5I8CrVAFwI0_Jr0_Jr4lx2IqxVCjr7xvwVAFwI0_JrI_JrWlx4CE17CEb7
-        AF67AKxVWUAVWUtwCIc40Y0x0EwIxGrwCI42IY6xIIjxv20xvE14v26r1j6r1xMIIF0xvE
-        2Ix0cI8IcVCY1x0267AKxVWUJVW8JwCI42IY6xAIw20EY4v20xvaj40_Jr0_JF4lIxAIcV
-        C2z280aVAFwI0_Jr0_Gr1lIxAIcVC2z280aVCY1x0267AKxVW8JVW8JrUvcSsGvfC2Kfnx
-        nUUI43ZEXa7IUnLSdPUUUUU==
-X-Originating-IP: [113.251.14.68]
-X-CM-SenderInfo: hvufh21hv6vzxdlohubq/
+References: <20210714193542.21857-1-joao.m.martins@oracle.com>
+ <20210714193542.21857-10-joao.m.martins@oracle.com> <CAPcyv4gDndA612+1BKZcR518K_Rt3Q1gWpqK24KOqvoFp_PNGg@mail.gmail.com>
+ <dd8f9a7a-1036-bda9-73a0-a2c6bcad5a56@oracle.com>
+In-Reply-To: <dd8f9a7a-1036-bda9-73a0-a2c6bcad5a56@oracle.com>
+From:   Dan Williams <dan.j.williams@intel.com>
+Date:   Wed, 28 Jul 2021 09:08:56 -0700
+Message-ID: <CAPcyv4iROoeKcVTKpVyUr+hrmKJxj7QnCS5pGPAnhLDvChHXJw@mail.gmail.com>
+Subject: Re: [PATCH v3 09/14] mm/page_alloc: reuse tail struct pages for
+ compound pagemaps
+To:     Joao Martins <joao.m.martins@oracle.com>
+Cc:     Linux MM <linux-mm@kvack.org>,
+        Vishal Verma <vishal.l.verma@intel.com>,
+        Dave Jiang <dave.jiang@intel.com>,
+        Naoya Horiguchi <naoya.horiguchi@nec.com>,
+        Matthew Wilcox <willy@infradead.org>,
+        Jason Gunthorpe <jgg@ziepe.ca>,
+        John Hubbard <jhubbard@nvidia.com>,
+        Jane Chu <jane.chu@oracle.com>,
+        Muchun Song <songmuchun@bytedance.com>,
+        Mike Kravetz <mike.kravetz@oracle.com>,
+        Andrew Morton <akpm@linux-foundation.org>,
+        Jonathan Corbet <corbet@lwn.net>,
+        Linux NVDIMM <nvdimm@lists.linux.dev>,
+        Linux Doc Mailing List <linux-doc@vger.kernel.org>
+Content-Type: text/plain; charset="UTF-8"
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Append ioam6-sysctl to toctree in order to get rid of building warnings.
+On Wed, Jul 28, 2021 at 8:56 AM Joao Martins <joao.m.martins@oracle.com> wrote:
+>
+> On 7/28/21 8:28 AM, Dan Williams wrote:
+> > On Wed, Jul 14, 2021 at 12:36 PM Joao Martins <joao.m.martins@oracle.com> wrote:
+> >>
+> >> +       /*
+> >> +        * With compound page geometry and when struct pages are stored in ram
+> >> +        * (!altmap) most tail pages are reused. Consequently, the amount of
+> >> +        * unique struct pages to initialize is a lot smaller that the total
+> >> +        * amount of struct pages being mapped.
+> >> +        * See vmemmap_populate_compound_pages().
+> >> +        */
+> >> +       if (!altmap)
+> >> +               nr_pages = min_t(unsigned long, nr_pages,
+> >
+> > What's the scenario where nr_pages is < 128? Shouldn't alignment
+> > already be guaranteed?
+> >
+> Oh yeah, that's right.
+>
+> >> +                                2 * (PAGE_SIZE/sizeof(struct page)));
+> >
+> >
+> >> +
+> >>         __SetPageHead(page);
+> >>
+> >>         for (i = 1; i < nr_pages; i++) {
+> >> @@ -6657,7 +6669,7 @@ void __ref memmap_init_zone_device(struct zone *zone,
+> >>                         continue;
+> >>
+> >>                 memmap_init_compound(page, pfn, zone_idx, nid, pgmap,
+> >> -                                    pfns_per_compound);
+> >> +                                    altmap, pfns_per_compound);
+> >
+> > This feels odd, memmap_init_compound() doesn't really care about
+> > altmap, what do you think about explicitly calculating the parameters
+> > that memmap_init_compound() needs and passing them in?
+> >
+> > Not a strong requirement to change, but take another look at let me know.
+> >
+>
+> Yeah, memmap_init_compound() indeed doesn't care about @altmap itself -- but a previous
+> comment was to abstract this away in memmap_init_compound() given the mix of complexity in
+> memmap_init_zone_device() PAGE_SIZE geometry case and the compound case:
+>
+> https://lore.kernel.org/linux-mm/CAPcyv4gtSqfmuAaX9cs63OvLkf-h4B_5fPiEnM9p9cqLZztXpg@mail.gmail.com/
+>
+> Before this was called @ntails above and I hide that calculation in memmap_init_compound().
+>
+> But I can move this back to the caller:
+>
+> memmap_init_compound(page, pfn, zone_idx, nid, pgmap,
+>         (!altmap ? 2 * (PAGE_SIZE/sizeof(struct page))) : pfns_per_compound);
+>
+> Or with another helper like:
+>
+> #define compound_nr_pages(__altmap, __nr_pages) \
+>                 (!__altmap ? 2 * (PAGE_SIZE/sizeof(struct page))) : __nr_pages);
+>
+> memmap_init_compound(page, pfn, zone_idx, nid, pgmap,
+>                      compound_nr_pages(altmap, pfns_per_compound));
 
-Signed-off-by: Hu Haowen <src.res@email.cn>
----
- Documentation/networking/index.rst | 1 +
- 1 file changed, 1 insertion(+)
-
-diff --git a/Documentation/networking/index.rst b/Documentation/networking/index.rst
-index e9ce55992aa9..a91a2739f8ed 100644
---- a/Documentation/networking/index.rst
-+++ b/Documentation/networking/index.rst
-@@ -57,6 +57,7 @@ Contents:
-    gen_stats
-    gtp
-    ila
-+   ioam6-sysctl
-    ipddp
-    ip_dynaddr
-    ipsec
--- 
-2.25.1
-
+I like the helper, but I'd go further to make it a function with a
+comment that it is a paired / mild layering violation with explicit
+knowledge of how the sparse_vmemmap() internals handle compound pages
+in the presence of an altmap. I.e. if someone later goes to add altmap
+support, leave them a breadcrumb that they need to update both
+locations.
