@@ -2,18 +2,18 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 999B53DCB95
-	for <lists+linux-doc@lfdr.de>; Sun,  1 Aug 2021 14:25:30 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id A4A5E3DCB99
+	for <lists+linux-doc@lfdr.de>; Sun,  1 Aug 2021 14:25:31 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S231786AbhHAMZg (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Sun, 1 Aug 2021 08:25:36 -0400
-Received: from mail.loongson.cn ([114.242.206.163]:53396 "EHLO loongson.cn"
+        id S231722AbhHAMZi (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Sun, 1 Aug 2021 08:25:38 -0400
+Received: from mail.loongson.cn ([114.242.206.163]:53398 "EHLO loongson.cn"
         rhost-flags-OK-OK-OK-FAIL) by vger.kernel.org with ESMTP
-        id S231527AbhHAMZg (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        id S231577AbhHAMZg (ORCPT <rfc822;linux-doc@vger.kernel.org>);
         Sun, 1 Aug 2021 08:25:36 -0400
 Received: from localhost.localdomain (unknown [223.106.24.69])
-        by mail.loongson.cn (Coremail) with SMTP id AQAAf9DxL+OrkgZhQeonAA--.4804S4;
-        Sun, 01 Aug 2021 20:25:18 +0800 (CST)
+        by mail.loongson.cn (Coremail) with SMTP id AQAAf9DxL+OrkgZhQeonAA--.4804S5;
+        Sun, 01 Aug 2021 20:25:19 +0800 (CST)
 From:   Yanteng Si <siyanteng@loongson.cn>
 To:     corbet@lwn.net, alexs@kernel.org, bobwxc@email.cn,
         seakeel@gmail.com
@@ -21,57 +21,72 @@ Cc:     Yanteng Si <siyanteng@loongson.cn>, chenhuacai@kernel.org,
         jiaxun.yang@flygoat.com, linux-doc@vger.kernel.org,
         realpuyuwang@gmail.com, chenweiguang82@126.com,
         siyanteng01@gmail.com
-Subject: [PATCH v2 2/8] docs/zh_CN: add infiniband core_locking translation
-Date:   Sun,  1 Aug 2021 20:25:32 +0800
-Message-Id: <c7b4cc2c6aba739f777cef80dd527ae523c3d9e5.1627820210.git.siyanteng@loongson.cn>
+Subject: [PATCH v2 3/8] docs/zh_CN: add infiniband ipoib translation
+Date:   Sun,  1 Aug 2021 20:25:33 +0800
+Message-Id: <32ce0e1ab5e4ef37330ac255445ef43c092acde5.1627820210.git.siyanteng@loongson.cn>
 X-Mailer: git-send-email 2.27.0
 In-Reply-To: <cover.1627820210.git.siyanteng@loongson.cn>
 References: <cover.1627820210.git.siyanteng@loongson.cn>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-CM-TRANSID: AQAAf9DxL+OrkgZhQeonAA--.4804S4
-X-Coremail-Antispam: 1UD129KBjvJXoWxuFyDZFyftF1UXr4UJr1kZrb_yoW7Cw4rpF
-        9rK34fG3ZrZF9FvFWDur4UJF17Ga40kayUurZ7G347Xr1kXas8trnIyFy3JFZxWryIyrWY
-        qF4a9FWxCrWrAw7anT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
-        9KBjDU0xBIdaVrnRJUUUP014x267AKxVWrJVCq3wAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
-        rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2048vs2IY020E87I2jVAFwI0_Jryl82xGYIkIc2
+X-CM-TRANSID: AQAAf9DxL+OrkgZhQeonAA--.4804S5
+X-Coremail-Antispam: 1UD129KBjvJXoW3WFyUurWUtw4UJF4xKw1kuFg_yoW7KFWUpr
+        n7uF97Kw17GFyay397Cr4UX347Jas7Cw15Cr1vgas8JFn5JayfJrn0k345CFs2gFy8urWU
+        XF4fuF17Cw4SkwUanT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+        9KBjDU0xBIdaVrnRJUUUPY14x267AKxVWrJVCq3wAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
+        rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2048vs2IY020E87I2jVAFwI0_JrWl82xGYIkIc2
         x26xkF7I0E14v26ryj6s0DM28lY4IEw2IIxxk0rwA2F7IY1VAKz4vEj48ve4kI8wA2z4x0
-        Y4vE2Ix0cI8IcVAFwI0_Jr0_JF4l84ACjcxK6xIIjxv20xvEc7CjxVAFwI0_Gr0_Cr1l84
-        ACjcxK6I8E87Iv67AKxVW8Jr0_Cr1UM28EF7xvwVC2z280aVCY1x0267AKxVW8Jr0_Cr1U
-        M2AIxVAIcxkEcVAq07x20xvEncxIr21l5I8CrVACY4xI64kE6c02F40Ex7xfMcIj6xIIjx
-        v20xvE14v26r1j6r18McIj6I8E87Iv67AKxVWUJVW8JwAm72CE4IkC6x0Yz7v_Jr0_Gr1l
-        F7xvr2IYc2Ij64vIr41lF7I21c0EjII2zVCS5cI20VAGYxC7M4IIrI8v6xkF7I0E8cxan2
-        IY04v7MxAIw28IcxkI7VAKI48JMxC20s026xCaFVCjc4AY6r1j6r4UMI8I3I0E5I8CrVAF
-        wI0_Jr0_Jr4lx2IqxVCjr7xvwVAFwI0_JrI_JrWlx4CE17CEb7AF67AKxVWUtVW8ZwCIc4
-        0Y0x0EwIxGrwCI42IY6xIIjxv20xvE14v26r1j6r1xMIIF0xvE2Ix0cI8IcVCY1x0267AK
-        xVW8JVWxJwCI42IY6xAIw20EY4v20xvaj40_Jr0_JF4lIxAIcVC2z280aVAFwI0_Jr0_Gr
-        1lIxAIcVC2z280aVCY1x0267AKxVW8JVW8JrUvcSsGvfC2KfnxnUUI43ZEXa7VUbdOz7UU
-        UUU==
+        Y4vE2Ix0cI8IcVAFwI0_JFI_Gr1l84ACjcxK6xIIjxv20xvEc7CjxVAFwI0_Cr0_Gr1UM2
+        8EF7xvwVC2z280aVAFwI0_Gr1j6F4UJwA2z4x0Y4vEx4A2jsIEc7CjxVAFwI0_Gr1j6F4U
+        JwAS0I0E0xvYzxvE52x082IY62kv0487Mc02F40EFcxC0VAKzVAqx4xG6I80ewAv7VC0I7
+        IYx2IY67AKxVWUJVWUGwAv7VC2z280aVAFwI0_Jr0_Gr1lOx8S6xCaFVCjc4AY6r1j6r4U
+        M4x0Y48IcxkI7VAKI48JM4x0x7Aq67IIx4CEVc8vx2IErcIFxwACI402YVCY1x02628vn2
+        kIc2xKxwCF04k20xvY0x0EwIxGrwCFx2IqxVCFs4IE7xkEbVWUJVW8JwC20s026c02F40E
+        14v26r1j6r18MI8I3I0E7480Y4vE14v26r106r1rMI8E67AF67kF1VAFwI0_Jw0_GFylIx
+        kGc2Ij64vIr41lIxAIcVC0I7IYx2IY67AKxVWUJVWUCwCI42IY6xIIjxv20xvEc7CjxVAF
+        wI0_Gr0_Cr1lIxAIcVCF04k26cxKx2IYs7xG6r1j6r1xMIIF0xvEx4A2jsIE14v26r1j6r
+        4UMIIF0xvEx4A2jsIEc7CjxVAFwI0_Gr0_Gr1UYxBIdaVFxhVjvjDU0xZFpf9x0JUd8n5U
+        UUUU=
 X-CM-SenderInfo: pvl1t0pwhqwqxorr0wxvrqhubq/
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Translate Documentation/infiniband/core_locking.rst into Chinese.
+Translate Documentation/infiniband/ipoib.rst into Chinese.
 
 Signed-off-by: Yanteng Si <siyanteng@loongson.cn>
 ---
- .../zh_CN/infiniband/core_locking.rst         | 115 ++++++++++++++++++
- .../translations/zh_CN/infiniband/index.rst   |   3 +-
- 2 files changed, 117 insertions(+), 1 deletion(-)
- create mode 100644 Documentation/translations/zh_CN/infiniband/core_locking.rst
+ .../translations/zh_CN/infiniband/index.rst   |   2 +-
+ .../translations/zh_CN/infiniband/ipoib.rst   | 111 ++++++++++++++++++
+ 2 files changed, 112 insertions(+), 1 deletion(-)
+ create mode 100644 Documentation/translations/zh_CN/infiniband/ipoib.rst
 
-diff --git a/Documentation/translations/zh_CN/infiniband/core_locking.rst b/Documentation/translations/zh_CN/infiniband/core_locking.rst
+diff --git a/Documentation/translations/zh_CN/infiniband/index.rst b/Documentation/translations/zh_CN/infiniband/index.rst
+index cc00f31c77d0..da5e2821f767 100644
+--- a/Documentation/translations/zh_CN/infiniband/index.rst
++++ b/Documentation/translations/zh_CN/infiniband/index.rst
+@@ -23,10 +23,10 @@ infiniband
+    :maxdepth: 1
+ 
+    core_locking
++   ipoib
+ 
+ TODOLIST:
+ 
+-   ipoib
+    opa_vnic
+    sysfs
+    tag_matching
+diff --git a/Documentation/translations/zh_CN/infiniband/ipoib.rst b/Documentation/translations/zh_CN/infiniband/ipoib.rst
 new file mode 100644
-index 000000000000..42f08038d44b
+index 000000000000..56517ea5fe9d
 --- /dev/null
-+++ b/Documentation/translations/zh_CN/infiniband/core_locking.rst
-@@ -0,0 +1,115 @@
-+
++++ b/Documentation/translations/zh_CN/infiniband/ipoib.rst
+@@ -0,0 +1,111 @@
 +.. include:: ../disclaimer-zh_CN.rst
 +
-+:Original: Documentation/infiniband/core_locking.rst
++:Original: Documentation/infiniband/ipoib.rst
 +
 +:翻译:
 +
@@ -82,123 +97,104 @@ index 000000000000..42f08038d44b
 + 王普宇 Puyu Wang <realpuyuwang@gmail.com>
 + 时奎亮 Alex Shi <alexs@kernel.org>
 +
-+.. _cn_infiniband_core_locking:
++.. _cn_infiniband_ipoib:
 +
-+==================
-+infiniband中间层锁
-+==================
++=========================
++infiniband上的IP（IPoIB）
++=========================
 +
-+  本指南试图明确infiniband中间层的锁假设。它描述了对位于中间层以下的低
-+  级驱动程序和使用中间层的上层协议的要求。
++  ib_ipoib驱动是IETF ipoib工作组发布的RFC 4391和4392所规定的
++  infiniband上IP协议的一个实现。它是一个“本地”实现，即把接口类型设置为
++  ARPHRD_INFINIBAND，硬件地址长度为20（早期的专有实现向内核伪装为以太网
++  接口）。
 +
-+睡眠和中断环境
-+==============
++分区和P_Keys
++============
 +
-+  除了以下异常情况，ib_device结构体中所有方法的低级驱动实现都可以睡眠。
-+  这些异常情况是列表中的任意的方法:
++  当IPoIB驱动被加载时，它会使用索引为0的P_Key给每个端口创建一个接口。要用
++  不同的P_Key创建一个接口，将所需的P_Key写入主接口的
++  /sys/class/net/<intf name>/create_child文件里面。比如说::
 +
-+    - create_ah
-+    - modify_ah
-+    - query_ah
-+    - destroy_ah
-+    - post_send
-+    - post_recv
-+    - poll_cq
-+    - req_notify_cq
++    echo 0x8001 > /sys/class/net/ib0/create_child
 +
-+    他们可能不可以睡眠，而且必须可以从任何上下文中调用。
++  这将用P_Key 0x8001创建一个名为ib0.8001的接口。要删除一个子接口，使用
++  ``delete_child`` 文件::
 +
-+    向上层协议使用者输出的相应函数:
++    echo 0x8001 > /sys/class/net/ib0/delete_child
 +
-+    - rdma_create_ah
-+    - rdma_modify_ah
-+    - rdma_query_ah
-+    - rdma_destroy_ah
-+    - ib_post_send
-+    - ib_post_recv
-+    - ib_req_notify_cq
++  任何接口的P_Key都由“pkey”文件给出，而子接口的主接口在“parent”中。
 +
-+    因此，在任何情况下都可以安全调用（它们）。
++  子接口的创建/删除也可以使用IPoIB的rtnl_link_ops来完成，使用两种
++  方式创建的子接口的行为是一样的。
 +
-+  此外，该函数
++数据报与连接模式
++================
 +
-+    - ib_dispatch_event
++  IPoIB驱动支持两种操作模式：数据报和连接。模式是通过接口的
++  /sys/class/net/<intf name>/mode文件设置和读取的。
 +
-+  被底层驱动用来通过中间层调度异步事件的“A”，也可以从任何上下文中安全调
-+  用。
++  在数据报模式下，使用IB UD（不可靠数据报）传输，因此接口MTU等于IB L2 MTU
++  减去IPoIB封装头（4字节）。例如，在一个典型的具有2K MTU的IB结构中，IPoIB
++  MTU将是2048 - 4 = 2044字节。
 +
-+可重入性
-+--------
++  在连接模式下，使用IB RC（可靠的连接）传输。连接模式利用IB传输的连接特性，
++  允许MTU达到最大的IP包大小64K，这减少了处理大型UDP数据包、TCP段等所需的
++  IP包数量，提高了大型信息的性能。
 +
-+  由低级驱动程序导出的ib_device结构体中的所有方法必须是完全可重入的。
-+  即使使用同一对象的多个函数调用被同时运行，低级驱动程序也需要执行所有
-+  必要的同步以保持一致性。
++  在连接模式下，接口的UD QP仍被用于组播和与不支持连接模式的对等体的通信。
++  在这种情况下，ICMP PMTU数据包的RX仿真被用来使网络堆栈对这些邻居使用较
++  小的UD MTU。
 +
-+  IB中间层不执行任何函数调用的序列化。
++无状态卸载
++==========
 +
-+  因为低级驱动程序是可重入的，所以不要求上层协议使用者任何顺序执行。然
-+  而，为了得到合理的结果，可能需要一些顺序。例如，一个使用者可以在多个
-+  CPU上同时安全地调用ib_poll_cq()。然而，不同的ib_poll_cq()调用之间
-+  的工作完成信息的顺序没有被定义。
++  如果IB HW支持IPoIB无状态卸载，IPoIB会向网络堆栈广播TCP/IP校验和/或大量
++  传送（LSO）负载转移能力。
 +
-+回调
-+----
++  大量传送（LSO）负载转移也已实现，可以使用ethtool调用打开/关闭。目前，LRO
++  只支持具有校验和卸载能力的设备。
 +
-+  低级驱动程序不得直接从与ib_device方法调用相同的调用链中执行回调。例
-+  如，低级驱动程序不允许从post_send方法直接调用使用者的完成事件处理程
-+  序。相反，低级驱动程序应该推迟这个回调，例如，调度一个tasklet来执行
-+  这个回调。
++  无状态卸载只在数据报模式下支持。
 +
-+  低层驱动负责确保同一CQ的多个完成事件处理程序不被同时调用。驱动程序必
-+  须保证一个给定的CQ的事件处理程序在同一时间只有一个在运行。换句话说，
-+  以下情况是不允许的::
++中断管理
++========
 +
-+          CPU1                                    CPU2
++  如果底层IB设备支持CQ事件管理，可以使用ethtool来设置中断缓解参数，从而减少
++  处理中断产生的开销。IPoIB的主要代码路径不使用TX完成信号的事件，所以只支持
++  RX管理。
 +
-+    low-level driver ->
-+      consumer CQ event callback:
-+        /* ... */
-+        ib_req_notify_cq(cq, ...);
-+                                          low-level driver ->
-+        /* ... */                           consumer CQ event callback:
-+                                              /* ... */
-+        return from CQ event handler
++调试信息
++========
 +
-+  完成事件和异步事件回调的运行环境没有被定义。 根据低级别的驱动程序，它可能是
-+  进程上下文、softirq上下文或中断上下文。上层协议使用者可能不会在回调中睡眠。
++  通过将CONFIG_INFINIBAND_IPOIB_DEBUG设置为“y”来编译IPoIB驱动，跟踪信
++  息被编译到驱动中。通过将模块参数debug_level和mcast_debug_level设置为1来
++  打开它们。这些参数可以在运行时通过/sys/module/ib_ipoib/的文件来控制。
 +
-+热插拔
-+------
++  CONFIG_INFINIBAND_IPOIB_DEBUG也启用debugfs虚拟文件系统中的文件。通过挂
++  载这个文件系统，例如用::
 +
-+  当一个低级驱动程序调用ib_register_device()时，它宣布一个设备已经
-+  准备好供使用者使用，所有的初始化必须在这个调用之前完成。设备必须保
-+  持可用，直到驱动对ib_unregister_device()的调用返回。
++    mount -t debugfs none /sys/kernel/debug
 +
-+  低级驱动程序必须从进程上下文调用ib_register_device()和
-+  ib_unregister_device()。如果使用者在这些调用中回调到驱动程序，它
-+  不能持有任何可能导致死锁的semaphores。
++  可以从/sys/kernel/debug/ipoib/ib0_mcg等文件中获得关于多播组的统计数据。
 +
-+  一旦其结构体ib_client的add方法被调用，上层协议使用者就可以开始使用
-+  一个IB设备。使用者必须在从移除方法返回之前完成所有的清理工作并释放
-+  与设备相关的所有资源。
++  这个选项对性能的影响可以忽略不计，所以在正常运行时，在debug_level设置为
++  0的情况下启用这个选项是安全的。
 +
-+  使用者被允许在其添加和删除方法中睡眠。
-diff --git a/Documentation/translations/zh_CN/infiniband/index.rst b/Documentation/translations/zh_CN/infiniband/index.rst
-index ebb1e20b7df4..cc00f31c77d0 100644
---- a/Documentation/translations/zh_CN/infiniband/index.rst
-+++ b/Documentation/translations/zh_CN/infiniband/index.rst
-@@ -22,9 +22,10 @@ infiniband
- .. toctree::
-    :maxdepth: 1
- 
-+   core_locking
++  CONFIG_INFINIBAND_IPOIB_DEBUG_DATA当data_debug_level设置为1时，可以
++  在数据路径中启用更多的调试输出。 然而，即使禁用输出，启用这个配置选项也
++  会影响性能，因为它在快速路径中增加了测试。
 +
- TODOLIST:
- 
--   core_locking
-    ipoib
-    opa_vnic
-    sysfs
++引用
++====
++
++  在InfiniBand上传输IP（IPoIB）（RFC 4391）。
++    http://ietf.org/rfc/rfc4391.txt
++
++  infiniband上的IP:上的IP架构（RFC 4392）。
++    http://ietf.org/rfc/rfc4392.txt
++
++  infiniband上的IP: 连接模式 (RFC 4755)
++    http://ietf.org/rfc/rfc4755.txt
 -- 
 2.27.0
 
