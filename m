@@ -2,17 +2,17 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 4A5BD3DCBDD
-	for <lists+linux-doc@lfdr.de>; Sun,  1 Aug 2021 15:32:30 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id EF7243DCBE0
+	for <lists+linux-doc@lfdr.de>; Sun,  1 Aug 2021 15:32:31 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S232003AbhHANch (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Sun, 1 Aug 2021 09:32:37 -0400
-Received: from mail.loongson.cn ([114.242.206.163]:60988 "EHLO loongson.cn"
+        id S231984AbhHANci (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Sun, 1 Aug 2021 09:32:38 -0400
+Received: from mail.loongson.cn ([114.242.206.163]:60984 "EHLO loongson.cn"
         rhost-flags-OK-OK-OK-FAIL) by vger.kernel.org with ESMTP
-        id S231972AbhHANce (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        id S231967AbhHANce (ORCPT <rfc822;linux-doc@vger.kernel.org>);
         Sun, 1 Aug 2021 09:32:34 -0400
 Received: from localhost.localdomain (unknown [223.106.24.69])
-        by mail.loongson.cn (Coremail) with SMTP id AQAAf9DxX0NYogZhYe8nAA--.27721S3;
+        by mail.loongson.cn (Coremail) with SMTP id AQAAf9DxX0NYogZhYe8nAA--.27721S4;
         Sun, 01 Aug 2021 21:32:11 +0800 (CST)
 From:   Yanteng Si <siyanteng@loongson.cn>
 To:     corbet@lwn.net, alexs@kernel.org, bobwxc@email.cn,
@@ -21,22 +21,22 @@ Cc:     Yanteng Si <siyanteng@loongson.cn>, chenhuacai@kernel.org,
         jiaxun.yang@flygoat.com, linux-doc@vger.kernel.org,
         realpuyuwang@gmail.com, chenfeiyang@loongson.cn,
         chris.chenfeiyang@gmail.com, siyanteng01@gmail.com
-Subject: [PATCH v3 1/8] docs/zh_CN: add virt index translation
-Date:   Sun,  1 Aug 2021 21:32:25 +0800
-Message-Id: <8a268c1f4f578c5f612490b5f04a03d3f012cfbc.1627823347.git.siyanteng@loongson.cn>
+Subject: [PATCH v3 2/8] docs/zh_CN: add virt paravirt_ops translation
+Date:   Sun,  1 Aug 2021 21:32:26 +0800
+Message-Id: <56b196333c3070657da3e85841fb43592dd81ca0.1627823347.git.siyanteng@loongson.cn>
 X-Mailer: git-send-email 2.27.0
 In-Reply-To: <cover.1627823347.git.siyanteng@loongson.cn>
 References: <cover.1627823347.git.siyanteng@loongson.cn>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-CM-TRANSID: AQAAf9DxX0NYogZhYe8nAA--.27721S3
-X-Coremail-Antispam: 1UD129KBjvJXoW7ZrWkuw1ftr4kGF45CF1xXwb_yoW8AFWxpF
-        yvkryfK3W8Z347C3yfCF1UWFy8G3Z7Ga15Ga13WwnYqF1DJ3WFvr4DtrZ0kF9rKrWrAFyr
-        XF4rKr4jgryjy3DanT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
-        9KBjDU0xBIdaVrnRJUUUPY14x267AKxVW5JVWrJwAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
-        rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2048vs2IY020E87I2jVAFwI0_Jr4l82xGYIkIc2
-        x26xkF7I0E14v26r4j6ryUM28lY4IEw2IIxxk0rwA2F7IY1VAKz4vEj48ve4kI8wA2z4x0
+X-CM-TRANSID: AQAAf9DxX0NYogZhYe8nAA--.27721S4
+X-Coremail-Antispam: 1UD129KBjvJXoWxXrWxArykWr4rZryrWrW7Arb_yoW5Zry8pr
+        yDKryfG3W8Aa4UZa1S9ay3Wr1xG3Z7GFnxGayxZwnavF1qq3yYyr4UtF90yF93Gry8ZFW0
+        gF1vkrZ8Ca4jv3DanT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+        9KBjDU0xBIdaVrnRJUUUPY14x267AKxVWrJVCq3wAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
+        rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2048vs2IY020E87I2jVAFwI0_Jryl82xGYIkIc2
+        x26xkF7I0E14v26ryj6s0DM28lY4IEw2IIxxk0rwA2F7IY1VAKz4vEj48ve4kI8wA2z4x0
         Y4vE2Ix0cI8IcVAFwI0_Jr0_JF4l84ACjcxK6xIIjxv20xvEc7CjxVAFwI0_Gr0_Cr1l84
         ACjcxK6I8E87Iv67AKxVW8Jr0_Cr1UM28EF7xvwVC2z280aVCY1x0267AKxVW8Jr0_Cr1U
         M2AIxVAIcxkEcVAq07x20xvEncxIr21l5I8CrVACY4xI64kE6c02F40Ex7xfMcIj6xIIjx
@@ -46,53 +46,51 @@ X-Coremail-Antispam: 1UD129KBjvJXoW7ZrWkuw1ftr4kGF45CF1xXwb_yoW8AFWxpF
         wI0_Jr0_Jr4lx2IqxVCjr7xvwVAFwI0_JrI_JrWlx4CE17CEb7AF67AKxVWUtVW8ZwCIc4
         0Y0x0EwIxGrwCI42IY6xIIjxv20xvE14v26r1j6r1xMIIF0xvE2Ix0cI8IcVCY1x0267AK
         xVW8JVWxJwCI42IY6xAIw20EY4v20xvaj40_Jr0_JF4lIxAIcVC2z280aVAFwI0_Gr0_Cr
-        1lIxAIcVC2z280aVCY1x0267AKxVW8Jr0_Cr1UYxBIdaVFxhVjvjDU0xZFpf9x0JU2_M3U
+        1lIxAIcVC2z280aVCY1x0267AKxVW8Jr0_Cr1UYxBIdaVFxhVjvjDU0xZFpf9x0JUHbyAU
         UUUU=
 X-CM-SenderInfo: pvl1t0pwhqwqxorr0wxvrqhubq/
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Add virt to .../zh_CN/index and translate it into Chinese.
+Translate Documentation/virt/paravirt_ops.rst into Chinese.
 
 Signed-off-by: Yanteng Si <siyanteng@loongson.cn>
 Reviewed-by: Alex Shi <alexs@kernel.org>
 ---
- Documentation/translations/zh_CN/index.rst    |  2 +-
- .../translations/zh_CN/virt/index.rst         | 37 +++++++++++++++++++
- 2 files changed, 38 insertions(+), 1 deletion(-)
- create mode 100644 Documentation/translations/zh_CN/virt/index.rst
+ .../translations/zh_CN/virt/index.rst         |  3 +-
+ .../translations/zh_CN/virt/paravirt_ops.rst  | 41 +++++++++++++++++++
+ 2 files changed, 43 insertions(+), 1 deletion(-)
+ create mode 100644 Documentation/translations/zh_CN/virt/paravirt_ops.rst
 
-diff --git a/Documentation/translations/zh_CN/index.rst b/Documentation/translations/zh_CN/index.rst
-index e0d51a167032..c311c8741e6f 100644
---- a/Documentation/translations/zh_CN/index.rst
-+++ b/Documentation/translations/zh_CN/index.rst
-@@ -102,6 +102,7 @@ TODOList:
-    iio/index
-    sound/index
-    filesystems/index
-+   virt/index
- 
- TODOList:
- 
-@@ -127,7 +128,6 @@ TODOList:
- * spi/index
- * w1/index
- * watchdog/index
--* virt/index
- * input/index
- * hwmon/index
- * gpu/index
 diff --git a/Documentation/translations/zh_CN/virt/index.rst b/Documentation/translations/zh_CN/virt/index.rst
-new file mode 100644
-index 000000000000..9e5df5b5de15
---- /dev/null
+index 9e5df5b5de15..b9b23bb88ffa 100644
+--- a/Documentation/translations/zh_CN/virt/index.rst
 +++ b/Documentation/translations/zh_CN/virt/index.rst
-@@ -0,0 +1,37 @@
+@@ -20,11 +20,12 @@ Linux虚拟化支持
+ .. toctree::
+    :maxdepth: 2
+ 
++   paravirt_ops
++
+ TODOLIST:
+ 
+    kvm/index
+    uml/user_mode_linux_howto_v2
+-   paravirt_ops
+    guest-halt-polling
+    ne_overview
+    acrn/index
+diff --git a/Documentation/translations/zh_CN/virt/paravirt_ops.rst b/Documentation/translations/zh_CN/virt/paravirt_ops.rst
+new file mode 100644
+index 000000000000..e9e0708a1d63
+--- /dev/null
++++ b/Documentation/translations/zh_CN/virt/paravirt_ops.rst
+@@ -0,0 +1,41 @@
 +.. SPDX-License-Identifier: GPL-2.0
 +.. include:: ../disclaimer-zh_CN.rst
 +
-+:Original: Documentation/virt/index.rst
++:Original: Documentation/virt/paravirt_ops.rst
 +
 +:翻译:
 +
@@ -100,32 +98,36 @@ index 000000000000..9e5df5b5de15
 +
 +:校译:
 +
++ 陈飞杨 Feiyang Chen <chenfeiyang@loongson.cn>
 + 时奎亮 Alex Shi <alexs@kernel.org>
 +
-+.. _cn_virt_index:
++.. _cn_virt_paravirt_ops:
 +
-+===============
-+Linux虚拟化支持
-+===============
++============
++Paravirt_ops
++============
 +
-+.. toctree::
-+   :maxdepth: 2
++Linux提供了对不同管理程序虚拟化技术的支持。历史上，为了支持不同的虚拟机超级管理器
++（hypervisor，下文简称超级管理器），需要不同的二进制内核，这个限制已经被pv_ops移
++除了。Linux pv_ops是一个虚拟化API，它能够支持不同的管理程序。它允许每个管理程序
++优先于关键操作，并允许单一的内核二进制文件在所有支持的执行环境中运行，包括本机——没
++有任何管理程序。
 +
-+TODOLIST:
++pv_ops提供了一组函数指针，代表了与低级关键指令和各领域高级功能相对应的操作。
++pv-ops允许在运行时进行优化，在启动时对低级关键操作进行二进制修补。
 +
-+   kvm/index
-+   uml/user_mode_linux_howto_v2
-+   paravirt_ops
-+   guest-halt-polling
-+   ne_overview
-+   acrn/index
++pv_ops操作被分为三类:
 +
-+.. only:: html and subproject
++- 简单的间接调用
++   这些操作对应于高水平的函数，众所周知，间接调用的开销并不十分重要。
 +
-+   Indices
-+   =======
++- 间接调用，允许用二进制补丁进行优化
++   通常情况下，这些操作对应于低级别的关键指令。它们被频繁地调用，并且是对性能关
++   键。开销是非常重要的。
 +
-+   * :ref:`genindex`
++- 一套用于手写汇编代码的宏程序
++   手写的汇编代码（.S文件）也需要准虚拟化，因为它们包括敏感指令或其中的一些代
++   码路径对性能非常关键。
 -- 
 2.27.0
 
