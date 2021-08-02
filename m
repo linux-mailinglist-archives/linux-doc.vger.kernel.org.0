@@ -2,118 +2,102 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 7391C3DDAD3
-	for <lists+linux-doc@lfdr.de>; Mon,  2 Aug 2021 16:22:15 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 94A393DDA5A
+	for <lists+linux-doc@lfdr.de>; Mon,  2 Aug 2021 16:13:32 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S234455AbhHBOWX (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 2 Aug 2021 10:22:23 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:44994 "EHLO
-        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S234284AbhHBOWQ (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Mon, 2 Aug 2021 10:22:16 -0400
-Received: from mail-pl1-x62c.google.com (mail-pl1-x62c.google.com [IPv6:2607:f8b0:4864:20::62c])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id AAF17C06AB59
-        for <linux-doc@vger.kernel.org>; Mon,  2 Aug 2021 07:06:32 -0700 (PDT)
-Received: by mail-pl1-x62c.google.com with SMTP id z3so18409688plg.8
-        for <linux-doc@vger.kernel.org>; Mon, 02 Aug 2021 07:06:32 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=intel-com.20150623.gappssmtp.com; s=20150623;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc;
-        bh=S30D7JnOgPGqBVRgaO8L0r6DfESVg4Q0tFc852vuoQg=;
-        b=o7zchrRzGSGJvS1YaJA1zPgb9ncAEmQmS7wdtDRLvzTCTV0KV5fs6bh0F0NjLGNQdA
-         hAsch3Th8KrrnTB3oABOyV9xGiM0mqxvjwcQkfhvu6p+CzBkBfEJS62qGuplsCP//3yg
-         Y/7Pd6ryCB0f1VkCo8aXIsC1y4zhgDxhhN+SRDfojcY9OlwszZt73S0OMdSAGrrt/lEF
-         DAL3uoym+fNdBMYLmsgLkKHhyp31BFULI/YtTh4pTa9xWKYuYTipXMvvP+ON9z6AxU2Y
-         Ley1Tyza1FWHdyq3dJxbBTwJofGKtCqvbKWZgl3yHMFRcxOB/Pt8dJtPdR+vN52DMLVv
-         44lw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc;
-        bh=S30D7JnOgPGqBVRgaO8L0r6DfESVg4Q0tFc852vuoQg=;
-        b=Ljl5U9cm0VVf/iRQu3yfk30poKMJH6fLFC7A+voRQZPT6kWN1EDwXRgDuhN84rzyiw
-         WaH/stro3ll2wBP8GaXgpp2W3fXn7xT2sY17jZfgsrMFYcKHSnLmrh1HwJDKHTbqnqKc
-         FRSoxTUyJ+pnkrM/++bR/ONTX0hqW6iifOvmHZg3V6GU/NyzkQKR6YXHPU4cjBhr7YbP
-         9AIa7+gx3qhf6EGBH1wCkO29zhw9mnhKJHHNQKhSrpCH6QnjnZyqqQxFZyddWXp1L14m
-         W4C8PagI9TMEPvJTtMAdP00NiZHHTRaC/+irQIbFZeb5Q9X264WYChdigF/wMNo6jz54
-         ig1A==
-X-Gm-Message-State: AOAM533yvOA7rPyZEFGrp/xpoKvpcjCttMSgkmbmciCq7G/BQaBOtkpw
-        iGl9v9Olfs0R2xFHrtU3ohteZNLPNhGniFVxRYqnmw==
-X-Google-Smtp-Source: ABdhPJyVKOnhVt0Wdh9gR5klKUeMY8LJl9xOy+rXAR1aL3gh/RyX3d+gIGycEUJ0HTA94nfjLHThyGCadYvcoTFdMUM=
-X-Received: by 2002:a65:6248:: with SMTP id q8mr1176705pgv.279.1627913192152;
- Mon, 02 Aug 2021 07:06:32 -0700 (PDT)
+        id S234340AbhHBONh (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 2 Aug 2021 10:13:37 -0400
+Received: from m32-153.88.com ([43.250.32.153]:15169 "EHLO email.cn"
+        rhost-flags-OK-OK-OK-FAIL) by vger.kernel.org with ESMTP
+        id S238227AbhHBOLJ (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Mon, 2 Aug 2021 10:11:09 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=email.cn;
+        s=dkim; h=To:From:Date; bh=zQWRDMlxuYvEy8QnJiiJAjAsoNI8QnuO+SUDC
+        +yR8Ps=; b=GtE0fjNKzS3uUlP2Jee8Wv2tbMe6vfyWehh/ALOw7jEVtqjDH5dzC
+        I0BXm7MfadlYHo0GhPviYRaKzBEFGBsUse7ZFHgLpl74tVv9EPXJyaDTzBMmDszh
+        vmNDwOEwf9T9KZRdYAa1BCOp+wYOFaVCCH0G8pSpk7bpiqX0YUhlq0=
+Received: from [0.0.0.0] (unknown [113.251.11.248])
+        by v_coremail2-frontend-2 (Coremail) with SMTP id GiKnCgCXFqft_AdhsMYXAA--.3575S3;
+        Mon, 02 Aug 2021 22:10:53 +0800 (CST)
+Subject: Re: [PATCH v3 9/9] docs: pdfdocs: Enable language-specific font
+ choice of zh_TW translations
+To:     Akira Yokosawa <akiyks@gmail.com>, Jonathan Corbet <corbet@lwn.net>
+Cc:     Mauro Carvalho Chehab <mchehab@kernel.org>,
+        "Wu X.C." <bobwxc@email.cn>, SeongJae Park <sj38.park@gmail.com>,
+        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org
+References: <eb8184ab-cfab-680b-f180-1157a7f709b3@gmail.com>
+ <48810e08-595f-fb87-603f-fa642823b84c@gmail.com>
+From:   Hu Haowen <src.res@email.cn>
+Message-ID: <e9130727-ad59-f147-f41a-9b3acc96d47e@email.cn>
+Date:   Mon, 2 Aug 2021 22:10:52 +0800
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
+ Thunderbird/78.11.0
 MIME-Version: 1.0
-References: <20210714193542.21857-1-joao.m.martins@oracle.com>
- <20210714144830.29f9584878b04903079ef7eb@linux-foundation.org>
- <YPjW7tu1NU0iRaH9@casper.infradead.org> <5642c8c3-cf13-33dc-c617-9d1becfba1b1@oracle.com>
- <CAPcyv4ho7idBPU8F4qE8XWhRttkdfzQRATaTAw2C3AfY+Z2BdQ@mail.gmail.com> <fbb77d0f-f1e9-3ef9-fd12-b412b845b7fc@oracle.com>
-In-Reply-To: <fbb77d0f-f1e9-3ef9-fd12-b412b845b7fc@oracle.com>
-From:   Dan Williams <dan.j.williams@intel.com>
-Date:   Mon, 2 Aug 2021 07:06:21 -0700
-Message-ID: <CAPcyv4gXrNnTQfHXGy-psWRq59UdrfqJ_1xDvxb2Db_rQGGxug@mail.gmail.com>
-Subject: Re: [PATCH v3 00/14] mm, sparse-vmemmap: Introduce compound pagemaps
-To:     Joao Martins <joao.m.martins@oracle.com>
-Cc:     Matthew Wilcox <willy@infradead.org>,
-        Andrew Morton <akpm@linux-foundation.org>,
-        Linux MM <linux-mm@kvack.org>,
-        Vishal Verma <vishal.l.verma@intel.com>,
-        Dave Jiang <dave.jiang@intel.com>,
-        Naoya Horiguchi <naoya.horiguchi@nec.com>,
-        Jason Gunthorpe <jgg@ziepe.ca>,
-        John Hubbard <jhubbard@nvidia.com>,
-        Jane Chu <jane.chu@oracle.com>,
-        Muchun Song <songmuchun@bytedance.com>,
-        Mike Kravetz <mike.kravetz@oracle.com>,
-        Jonathan Corbet <corbet@lwn.net>,
-        Linux NVDIMM <nvdimm@lists.linux.dev>,
-        Linux Doc Mailing List <linux-doc@vger.kernel.org>
-Content-Type: text/plain; charset="UTF-8"
+In-Reply-To: <48810e08-595f-fb87-603f-fa642823b84c@gmail.com>
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: 8bit
+Content-Language: en-US
+X-CM-TRANSID: GiKnCgCXFqft_AdhsMYXAA--.3575S3
+X-Coremail-Antispam: 1UD129KBjvdXoWruw4kJr4Uury5tFW7WF15Arb_yoWDJFbEya
+        1kXF4vv3W7Ar1IgFWrJr1kXF1FvF4rGr10yr15trZ5Za13Aws7Ar1DW3s5Za45WFsrurs8
+        C3Z5Xw18ZrnxXjkaLaAFLSUrUUUUUb8apTn2vfkv8UJUUUU8Yxn0WfASr-VFAUDa7-sFnT
+        9fnUUIcSsGvfJTRUUUboAFc2x0x2IEx4CE42xK8VAvwI8IcIk0rVWrJVCq3wA2ocxC64kI
+        II0Yj41l84x0c7CEw4AK67xGY2AK021l84ACjcxK6xIIjxv20xvE14v26r1I6r4UM28EF7
+        xvwVC0I7IYx2IY6xkF7I0E14v26r4j6F4UM28EF7xvwVC2z280aVAFwI0_GcCE3s1l84AC
+        jcxK6I8E87Iv6xkF7I0E14v26F4UJVW0owAS0I0E0xvYzxvE52x082IY62kv0487Mc02F4
+        0EFcxC0VAKzVAqx4xG6I80ewAv7VCjz48v1sIEY20_Cr1UJr1lOx8S6xCaFVCjc4AY6r1j
+        6r4UM4x0Y48IcVAKI48JM4x0x7Aq67IIx4CEVc8vx2IErcIFxwCYjI0SjxkI62AI1cAE67
+        vIY487MxAIw28IcxkI7VAKI48JMxAIw28IcVCjz48v1sIEY20_Cr1UJr1l4I8I3I0E4IkC
+        6x0Yz7v_Jr0_Gr1lx2IqxVAqx4xG67AKxVWUJVWUGwC20s026x8GjcxK67AKxVWUGVWUWw
+        C2zVAF1VAY17CE14v26r126r1DMIIYrxkI7VAKI48JMIIF0xvE2Ix0cI8IcVAFwI0_Jr0_
+        JF4lIxAIcVC0I7IYx2IY6xkF7I0E14v26r1j6r4UMIIF0xvE42xK8VAvwI8IcIk0rVWUJV
+        WUCwCI42IY6I8E87Iv67AKxVWUJVW8JwCI42IY6I8E87Iv6xkF7I0E14v26r1j6r4UYxBI
+        daVFxhVjvjDU0xZFpf9x0Jj-VyxUUUUU=
+X-Originating-IP: [113.251.11.248]
+X-CM-SenderInfo: hvufh21hv6vzxdlohubq/
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Mon, Aug 2, 2021 at 3:41 AM Joao Martins <joao.m.martins@oracle.com> wrote:
->
->
->
-> On 7/28/21 12:23 AM, Dan Williams wrote:
-> > On Thu, Jul 22, 2021 at 3:54 AM Joao Martins <joao.m.martins@oracle.com> wrote:
-> > [..]
-> >>> The folio work really touches the page
-> >>> cache for now, and this seems mostly to touch the devmap paths.
-> >>>
-> >> /me nods -- it really is about devmap infra for usage in device-dax for persistent memory.
-> >>
-> >> Perhaps I should do s/pagemaps/devmap/ throughout the series to avoid confusion.
-> >
-> > I also like "devmap" as a more accurate name. It matches the PFN_DEV
-> > and PFN_MAP flags that decorate DAX capable pfn_t instances. It also
-> > happens to match a recommendation I gave to Ira for his support for
-> > supervisor protection keys with devmap pfns.
-> >
-> /me nods
->
-> Additionally, I think I'll be reordering the patches for more clear/easier
-> bisection i.e. first introducing compound pages for devmap, fixing associated
-> issues wrt to the slow pinning and then introduce vmemmap deduplication for
-> devmap.
->
-> It should look like below after the reordering from first patch to last.
-> Let me know if you disagree.
->
-> memory-failure: fetch compound_head after pgmap_pfn_valid()
-> mm/page_alloc: split prep_compound_page into head and tail subparts
-> mm/page_alloc: refactor memmap_init_zone_device() page init
-> mm/memremap: add ZONE_DEVICE support for compound pages
-> device-dax: use ALIGN() for determining pgoff
-> device-dax: compound devmap support
-> mm/gup: grab head page refcount once for group of subpages
-> mm/sparse-vmemmap: add a pgmap argument to section activation
-> mm/sparse-vmemmap: refactor core of vmemmap_populate_basepages() to helper
-> mm/hugetlb_vmemmap: move comment block to Documentation/vm
-> mm/sparse-vmemmap: populate compound devmaps
-> mm/page_alloc: reuse tail struct pages for compound devmaps
-> mm/sparse-vmemmap: improve memory savings for compound pud geometry
 
-LGTM.
+在 2021/8/2 下午6:00, Akira Yokosawa 写道:
+> The "TC" variant is supposed to be the choice for traditional
+> Chinese documents.
+>
+> Signed-off-by: Akira Yokosawa <akiyks@gmail.com>
+> Cc: Hu Haowen <src.res@email.cn>
+
+
+Well done!
+
+Reviewed-by: Hu Haowen <src.res@email.cn>
+Tested-by: Hu Haowen <src.res@email.cn>
+
+Cheers,
+Hu Haowen
+
+
+> ---
+>  Documentation/translations/zh_TW/index.rst | 4 ++++
+>  1 file changed, 4 insertions(+)
+>
+> diff --git a/Documentation/translations/zh_TW/index.rst b/Documentation/translations/zh_TW/index.rst
+> index 76981b2111f6..c02c4b5281e6 100644
+> --- a/Documentation/translations/zh_TW/index.rst
+> +++ b/Documentation/translations/zh_TW/index.rst
+> @@ -5,6 +5,7 @@
+>  	\renewcommand\thesection*
+>  	\renewcommand\thesubsection*
+>  	\kerneldocCJKon
+> +	\kerneldocBeginTC
+>  
+>  .. _linux_doc_zh_tw:
+>  
+> @@ -162,3 +163,6 @@ TODOList:
+>  
+>  * :ref:`genindex`
+>  
+> +.. raw:: latex
+> +
+> +	\kerneldocEndTC
+
