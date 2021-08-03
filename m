@@ -2,135 +2,124 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 9EFA53DF343
-	for <lists+linux-doc@lfdr.de>; Tue,  3 Aug 2021 18:52:35 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id D3C503DF350
+	for <lists+linux-doc@lfdr.de>; Tue,  3 Aug 2021 18:53:15 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S237493AbhHCQwc (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 3 Aug 2021 12:52:32 -0400
-Received: from mga04.intel.com ([192.55.52.120]:6624 "EHLO mga04.intel.com"
-        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S237457AbhHCQw3 (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Tue, 3 Aug 2021 12:52:29 -0400
-X-IronPort-AV: E=McAfee;i="6200,9189,10065"; a="211868126"
-X-IronPort-AV: E=Sophos;i="5.84,292,1620716400"; 
-   d="scan'208";a="211868126"
-Received: from fmsmga001.fm.intel.com ([10.253.24.23])
-  by fmsmga104.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 03 Aug 2021 09:52:17 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.84,292,1620716400"; 
-   d="scan'208";a="585041756"
-Received: from irvmail001.ir.intel.com ([10.43.11.63])
-  by fmsmga001.fm.intel.com with ESMTP; 03 Aug 2021 09:52:07 -0700
-Received: from alobakin-mobl.ger.corp.intel.com (mszymcza-mobl.ger.corp.intel.com [10.213.25.231])
-        by irvmail001.ir.intel.com (8.14.3/8.13.6/MailSET/Hub) with ESMTP id 173Gpg7B004325;
-        Tue, 3 Aug 2021 17:52:02 +0100
-From:   Alexander Lobakin <alexandr.lobakin@intel.com>
-To:     Michal Kubecek <mkubecek@suse.cz>
-Cc:     "David S. Miller" <davem@davemloft.net>,
-        Jakub Kicinski <kuba@kernel.org>,
-        Alexander Lobakin <alexandr.lobakin@intel.com>,
-        Jesse Brandeburg <jesse.brandeburg@intel.com>,
-        Lukasz Czapnik <lukasz.czapnik@intel.com>,
-        Marcin Kubiak <marcin.kubiak@intel.com>,
-        Michal Kubiak <michal.kubiak@intel.com>,
-        Michal Swiatkowski <michal.swiatkowski@intel.com>,
+        id S237487AbhHCQwt (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 3 Aug 2021 12:52:49 -0400
+Received: from us-smtp-delivery-124.mimecast.com ([216.205.24.124]:29372 "EHLO
+        us-smtp-delivery-124.mimecast.com" rhost-flags-OK-OK-OK-OK)
+        by vger.kernel.org with ESMTP id S237476AbhHCQwl (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 3 Aug 2021 12:52:41 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+        s=mimecast20190719; t=1628009550;
+        h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+         to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+         content-transfer-encoding:content-transfer-encoding:
+         in-reply-to:in-reply-to:references:references;
+        bh=sKtEVRvHNGT42iZNHToUtsFsYwSj6OAOl6LkhSWUXzQ=;
+        b=HLV1Uxh/gQiv/X+OpQ5B69XeaYIxGDambTtmAWr5ZJH2dj7N4Z4L/z7Yj1gnzZXn3i9R2B
+        lG9R4VggXRkMLPa9N8Q+o0v1TrFDrBkrrRBzYDyC9aUjDb8L1xpFEdVO8QbrLGotDuWGEm
+        O4cGC8S+awZQszOe82cNu04N+KI6Jbw=
+Received: from mail-ot1-f70.google.com (mail-ot1-f70.google.com
+ [209.85.210.70]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-251-x-nef_2dP4SFiFmxDdBOiQ-1; Tue, 03 Aug 2021 12:52:28 -0400
+X-MC-Unique: x-nef_2dP4SFiFmxDdBOiQ-1
+Received: by mail-ot1-f70.google.com with SMTP id h38-20020a9d14290000b02904ceed859e6eso10033698oth.21
+        for <linux-doc@vger.kernel.org>; Tue, 03 Aug 2021 09:52:28 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:date:from:to:cc:subject:message-id:in-reply-to
+         :references:mime-version:content-transfer-encoding;
+        bh=sKtEVRvHNGT42iZNHToUtsFsYwSj6OAOl6LkhSWUXzQ=;
+        b=i3DYcVejFd0i7M4xFyljxd5wnYxHLVjRrwM9AUkDKtx8pz2HsU59W23DgI4NwGT3yi
+         QPVk2Xh+IuWOkXFEYaUoOTFWVflkef133x7aEXPcy/XFvj5jsE/Kton5hcp7lkPZbjas
+         HUd8mkc+IyAqOcbrPV33BHGMtEWqbKBHOMwwC6UhwW1Gtq/WC1tn0rMVl7193DXWBH6b
+         dabZJdyAjrO4PZjUu2Wgm3PWP17Ug9NVR7xlUCgNsUYd7hcZGGnVig8KnJ6fzHdLuGvB
+         Rjz57VfyEI9z4yblrWk02BhOq32dZcn0jrP1mZ/Hc6hQU0xT3pVyUmTqTMVnBqjh3qfZ
+         BPIw==
+X-Gm-Message-State: AOAM5329dpD1oB1N+5Kxccpp5/89akDkUhYBZ0RJEgUTYQ/B1q6apQhs
+        7m+mkkIE4VzX5jtydiiySAZvobUDOnoVXDteciav4InpN60XO7WDDyBFU6Zf8q/TXqbx1SdJoM/
+        ucbkMrNW0eXJQxvA7ilYe
+X-Received: by 2002:a9d:62d4:: with SMTP id z20mr16205607otk.305.1628009548259;
+        Tue, 03 Aug 2021 09:52:28 -0700 (PDT)
+X-Google-Smtp-Source: ABdhPJwvKOEKD8L0w37wO357XcF+/U3bT3CXb+wzZAe9sXlApc1eVkv2cU2JtkoR7Kvj984JI4QXhg==
+X-Received: by 2002:a9d:62d4:: with SMTP id z20mr16205581otk.305.1628009548040;
+        Tue, 03 Aug 2021 09:52:28 -0700 (PDT)
+Received: from redhat.com ([198.99.80.109])
+        by smtp.gmail.com with ESMTPSA id bd20sm2365330oib.1.2021.08.03.09.52.26
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 03 Aug 2021 09:52:27 -0700 (PDT)
+Date:   Tue, 3 Aug 2021 10:52:25 -0600
+From:   Alex Williamson <alex.williamson@redhat.com>
+To:     Jason Gunthorpe <jgg@nvidia.com>
+Cc:     David Airlie <airlied@linux.ie>,
+        Tony Krowiak <akrowiak@linux.ibm.com>,
+        Christian Borntraeger <borntraeger@de.ibm.com>,
+        Cornelia Huck <cohuck@redhat.com>,
         Jonathan Corbet <corbet@lwn.net>,
-        Netanel Belgazal <netanel@amazon.com>,
-        Arthur Kiyanovski <akiyano@amazon.com>,
-        Guy Tzalik <gtzalik@amazon.com>,
-        Saeed Bishara <saeedb@amazon.com>,
-        Ioana Ciornei <ioana.ciornei@nxp.com>,
-        Claudiu Manoil <claudiu.manoil@nxp.com>,
-        Thomas Petazzoni <thomas.petazzoni@bootlin.com>,
-        Marcin Wojtas <mw@semihalf.com>,
-        Russell King <linux@armlinux.org.uk>,
-        Edward Cree <ecree.xilinx@gmail.com>,
-        Martin Habets <habetsm.xilinx@gmail.com>,
-        "Michael S. Tsirkin" <mst@redhat.com>,
-        Jason Wang <jasowang@redhat.com>,
-        Alexei Starovoitov <ast@kernel.org>,
-        Daniel Borkmann <daniel@iogearbox.net>,
-        Jesper Dangaard Brouer <hawk@kernel.org>,
-        John Fastabend <john.fastabend@gmail.com>,
-        Andrii Nakryiko <andrii@kernel.org>,
-        Martin KaFai Lau <kafai@fb.com>,
-        Song Liu <songliubraving@fb.com>, Yonghong Song <yhs@fb.com>,
-        KP Singh <kpsingh@kernel.org>,
-        Shay Agroskin <shayagr@amazon.com>,
-        Sameeh Jubran <sameehj@amazon.com>,
-        Alexander Duyck <alexanderduyck@fb.com>,
-        Danielle Ratson <danieller@nvidia.com>,
-        Ido Schimmel <idosch@nvidia.com>, Andrew Lunn <andrew@lunn.ch>,
-        Vladyslav Tarasiuk <vladyslavt@nvidia.com>,
-        Arnd Bergmann <arnd@arndb.de>,
-        Andrew Morton <akpm@linux-foundation.org>,
-        Jian Shen <shenjian15@huawei.com>,
-        Petr Vorel <petr.vorel@gmail.com>, Dan Murphy <dmurphy@ti.com>,
-        Yangbo Lu <yangbo.lu@nxp.com>,
-        Zheng Yongjun <zhengyongjun3@huawei.com>,
-        Heiner Kallweit <hkallweit1@gmail.com>,
-        YueHaibing <yuehaibing@huawei.com>,
-        Johannes Berg <johannes@sipsolutions.net>,
-        netdev@vger.kernel.org, linux-doc@vger.kernel.org,
-        linux-kernel@vger.kernel.org,
-        virtualization@lists.linux-foundation.org, bpf@vger.kernel.org
-Subject: [PATCH ethtool-next 5/5] man: mention XDP standard statistics in help and man page
-Date:   Tue,  3 Aug 2021 18:51:40 +0200
-Message-Id: <20210803165140.172-6-alexandr.lobakin@intel.com>
-X-Mailer: git-send-email 2.31.1
-In-Reply-To: <20210803165140.172-1-alexandr.lobakin@intel.com>
-References: <20210803165140.172-1-alexandr.lobakin@intel.com>
+        Daniel Vetter <daniel@ffwll.ch>,
+        Diana Craciun <diana.craciun@oss.nxp.com>,
+        dri-devel@lists.freedesktop.org,
+        Eric Auger <eric.auger@redhat.com>,
+        Eric Farman <farman@linux.ibm.com>,
+        Harald Freudenberger <freude@linux.ibm.com>,
+        Vasily Gorbik <gor@linux.ibm.com>,
+        Heiko Carstens <hca@linux.ibm.com>,
+        intel-gfx@lists.freedesktop.org,
+        intel-gvt-dev@lists.freedesktop.org,
+        Jani Nikula <jani.nikula@linux.intel.com>,
+        Jason Herne <jjherne@linux.ibm.com>,
+        Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
+        kvm@vger.kernel.org, Kirti Wankhede <kwankhede@nvidia.com>,
+        linux-doc@vger.kernel.org, linux-s390@vger.kernel.org,
+        Matthew Rosato <mjrosato@linux.ibm.com>,
+        Peter Oberparleiter <oberpar@linux.ibm.com>,
+        Halil Pasic <pasic@linux.ibm.com>,
+        Rodrigo Vivi <rodrigo.vivi@intel.com>,
+        Vineeth Vijayan <vneethv@linux.ibm.com>,
+        Zhi Wang <zhi.a.wang@intel.com>,
+        "Raj, Ashok" <ashok.raj@intel.com>, Christoph Hellwig <hch@lst.de>,
+        Leon Romanovsky <leonro@nvidia.com>,
+        Max Gurtovoy <mgurtovoy@nvidia.com>,
+        Yishai Hadas <yishaih@nvidia.com>,
+        Zhenyu Wang <zhenyuw@linux.intel.com>
+Subject: Re: [PATCH v3 09/14] vfio/pci: Change vfio_pci_try_bus_reset() to
+ use the dev_set
+Message-ID: <20210803105225.2ee7dac2.alex.williamson@redhat.com>
+In-Reply-To: <20210803164152.GC1721383@nvidia.com>
+References: <0-v3-6c9e19cc7d44+15613-vfio_reflck_jgg@nvidia.com>
+        <9-v3-6c9e19cc7d44+15613-vfio_reflck_jgg@nvidia.com>
+        <20210803103406.5e1be269.alex.williamson@redhat.com>
+        <20210803164152.GC1721383@nvidia.com>
+X-Mailer: Claws Mail 3.18.0 (GTK+ 2.24.33; x86_64-redhat-linux-gnu)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 7bit
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-"xdp" is a new type of standard statistics landed in with Linux
-commit a9428aaed122 ("ethtool, stats: introduce standard XDP statistics").
-Mention it in the help text and the man page source.
+On Tue, 3 Aug 2021 13:41:52 -0300
+Jason Gunthorpe <jgg@nvidia.com> wrote:
+> On Tue, Aug 03, 2021 at 10:34:06AM -0600, Alex Williamson wrote:
+> > I think the vfio_pci_find_reset_target() function needs to be re-worked
+> > to just tell us true/false that it's ok to reset the provided device,
+> > not to anoint an arbitrary target device.  Thanks,  
+> 
+> Yes, though this logic is confusing, why do we need to check if any
+> device needs a reset at this point? If we are being asked to reset
+> vdev shouldn't vdev needs_reset?
+> 
+> Or is the function more of a 'synchronize pending reset' kind of
+> thing?
 
-Signed-off-by: Alexander Lobakin <alexandr.lobakin@intel.com>
-Reviewed-by: Jesse Brandeburg <jesse.brandeburg@intel.com>
----
- ethtool.8.in | 3 ++-
- ethtool.c    | 2 +-
- 2 files changed, 3 insertions(+), 2 deletions(-)
+Yes, the latter.  For instance think about a multi-function PCI device
+such as a GPU.  The functions have dramatically different capabilities,
+some might have function level reset abilities and others not.  We want
+to be able to trigger a bus reset as the last device of the set is
+released, no matter the order they're released and no matter the
+capabilities of the device we're currently processing.  Thanks,
 
-diff --git a/ethtool.8.in b/ethtool.8.in
-index 6b7761849fca..7db0adebbdcf 100644
---- a/ethtool.8.in
-+++ b/ethtool.8.in
-@@ -245,6 +245,7 @@ ethtool \- query or control network driver and hardware settings
- .RB [\fBeth\-mac\fP]
- .RB [\fBeth\-ctrl\fP]
- .RB [\fBrmon\fP]
-+.RB [\fBxdp\fP]
- .RB ]
- .HP
- .B ethtool \-\-phy\-statistics
-@@ -673,7 +674,7 @@ naming of NIC- and driver-specific statistics across vendors.
- .B \fB\-\-all\-groups
- .E
- .TP
--.B \fB\-\-groups [\fBeth\-phy\fP] [\fBeth\-mac\fP] [\fBeth\-ctrl\fP] [\fBrmon\fP]
-+.B \fB\-\-groups [\fBeth\-phy\fP] [\fBeth\-mac\fP] [\fBeth\-ctrl\fP] [\fBrmon\fP] [\fBxdp\fP]
- Request groups of standard device statistics.
- .RE
- .TP
-diff --git a/ethtool.c b/ethtool.c
-index 33a0a492cb15..c1f1279bd9f0 100644
---- a/ethtool.c
-+++ b/ethtool.c
-@@ -5776,7 +5776,7 @@ static const struct option args[] = {
- 		.nlchk	= nl_gstats_chk,
- 		.nlfunc	= nl_gstats,
- 		.help	= "Show adapter statistics",
--		.xhelp	= "               [ --all-groups | --groups [eth-phy] [eth-mac] [eth-ctrl] [rmon] ]\n"
-+		.xhelp	= "               [ --all-groups | --groups [eth-phy] [eth-mac] [eth-ctrl] [rmon] [xdp] ]\n"
- 	},
- 	{
- 		.opts	= "--phy-statistics",
--- 
-2.31.1
+Alex
 
