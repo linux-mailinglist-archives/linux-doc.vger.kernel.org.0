@@ -2,190 +2,121 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 54D563DF734
-	for <lists+linux-doc@lfdr.de>; Wed,  4 Aug 2021 00:04:26 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 97F003DF805
+	for <lists+linux-doc@lfdr.de>; Wed,  4 Aug 2021 00:38:49 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S231837AbhHCWEg (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 3 Aug 2021 18:04:36 -0400
-Received: from mail-wm1-f43.google.com ([209.85.128.43]:36515 "EHLO
-        mail-wm1-f43.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S231668AbhHCWEf (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 3 Aug 2021 18:04:35 -0400
-Received: by mail-wm1-f43.google.com with SMTP id o7-20020a05600c5107b0290257f956e02dso2661730wms.1;
-        Tue, 03 Aug 2021 15:04:23 -0700 (PDT)
+        id S229841AbhHCWix (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 3 Aug 2021 18:38:53 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:37038 "EHLO
+        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S233459AbhHCWi0 (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 3 Aug 2021 18:38:26 -0400
+Received: from mail-pl1-x634.google.com (mail-pl1-x634.google.com [IPv6:2607:f8b0:4864:20::634])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id BAE3EC061757;
+        Tue,  3 Aug 2021 15:38:13 -0700 (PDT)
+Received: by mail-pl1-x634.google.com with SMTP id d1so864341pll.1;
+        Tue, 03 Aug 2021 15:38:13 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=date:from:to:cc:subject:message-id:references:mime-version
+         :content-disposition:in-reply-to;
+        bh=mtMk8/id55tqF/zH96Hx9KDINyNpzaA5iOGXRjHT2Ag=;
+        b=jleiWgAB+ErOvppHrQTI6/6LNUqK5nTuAAsk807AE73YrDfBinh5rbszK868ED/peS
+         GLy2HCBng6nFc7zfdRHugPswGeAdXhun3S6JJqmf8qI1QGz4CvMw4PEcKg1mn8vaj5kQ
+         +p7ALCHjNLtOB9bbpVLBolZ1qao1nuiGmPFQFk6JOYFM9HXLw+Uu8/MsGSsyH7PWaset
+         b3n5c/rqQEc2uvhUHqAZXUqx0kIfOiWqJjm4rYNuybq8eYOjkxdX8THxlssEuf7Azu/u
+         M8n2wSq3LFvMRVWltVD34WmwsI/nWrD5UAFhP2UdnuUBlpM1ruMnkAQNssWnWsm0KcMl
+         FORA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:date:from:to:cc:subject:message-id:references
          :mime-version:content-disposition:in-reply-to;
-        bh=TnTtsqdysP7j6xWlrzTSrClyF+8RVyZ5meC0MIgorOc=;
-        b=VHXiH/uybxgoBRzVI0AHzPbvkzQLxX/Cv5Fn0gbcSIWvxtNUkrwmC8ifjVH/McrKCM
-         H5CcIaznbtbzmizU+z9m7Vsw1ZpenJ3VtlUKiSkmEsIeafidaSZ/NiD+SUBH8X0t9Ixz
-         hA58nFlAUd+s1zkVmTd2sybncDg3h6kRPxWT7rNmllewp51MAECj5E/aVQFzUm8kc/+6
-         fblFi/zMx82VGsVtHkgGb2p7t7pEKP5zFFdbQEmyEJAJOQFwfu/F475IqAxMUmDrbI+T
-         E+mA7BA7UFl8E7qNF0d8EM5mL+IkPzHOd3G88tgPfc/ya/EvtDJUWu2xBneR6Hc1dyo+
-         Vggw==
-X-Gm-Message-State: AOAM530g93bTQ3mT09UxfZbYdBT8sA+v7sWe5dZp6mPu/MbpctOZ3ymq
-        P+CzGCC1R7bIW3X78ixXLC8=
-X-Google-Smtp-Source: ABdhPJxaqBnrWnWTRd4oknQAV9RFFw18JtAxfIQLhJcR0OreP+lEfQT6PYjdmbpgSo/q0mkSEgwguQ==
-X-Received: by 2002:a1c:a94f:: with SMTP id s76mr6092879wme.17.1628028262413;
-        Tue, 03 Aug 2021 15:04:22 -0700 (PDT)
-Received: from liuwe-devbox-debian-v2 ([51.145.34.42])
-        by smtp.gmail.com with ESMTPSA id 9sm211847wmf.34.2021.08.03.15.04.21
+        bh=mtMk8/id55tqF/zH96Hx9KDINyNpzaA5iOGXRjHT2Ag=;
+        b=flySSOElmr0oCgyNJAuYrYgpFRc81+8rgTWsKlbGOeS7MwIi6as2z0TLejCdXt5saI
+         nvxcFoLXda5V77OaAfKxbn8KzQree8jwx1y/nE5Iv0qCtbipzPGGXYaE8v7esas5m3iS
+         gPw808noc6+GRqqE63h+dEuBHXx1ExsBfUJ5Vuo7YZZuIlEoOnLzu/GdSEeLqZ+DW4RI
+         v4992rwnTKPX90561p6tiXAcmVVtgZyFiDLCjODlk3Bz4CHWIbrl31b/H/WbtSkDyo+M
+         aK7noYoZJosVKvQjCkKtwGJIktJrAarVD+WIWJJH+nuWHKnGcfDRe6S8dO6/oHSpDdJQ
+         LuEA==
+X-Gm-Message-State: AOAM533PmZ3OkaJGcCTU9aM6kYIajJiCEepMa22jKtrXmZExZKk/TCQH
+        z9ushqLg+4b97CyqyE5nrec=
+X-Google-Smtp-Source: ABdhPJz/24XejeMFwYlrbJbo/3K6SkKR/MpUdvnaGZ5Cz9m67paQR1r/TT1DZIYvou03g8MiNpktjg==
+X-Received: by 2002:a17:90a:3489:: with SMTP id p9mr6676048pjb.197.1628030293220;
+        Tue, 03 Aug 2021 15:38:13 -0700 (PDT)
+Received: from sol (106-69-177-173.dyn.iinet.net.au. [106.69.177.173])
+        by smtp.gmail.com with ESMTPSA id mr18sm207607pjb.39.2021.08.03.15.38.07
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 03 Aug 2021 15:04:21 -0700 (PDT)
-Date:   Tue, 3 Aug 2021 22:04:20 +0000
-From:   Wei Liu <wei.liu@kernel.org>
-To:     Praveen Kumar <kumarpraveen@linux.microsoft.com>
-Cc:     Wei Liu <wei.liu@kernel.org>,
-        Linux on Hyper-V List <linux-hyperv@vger.kernel.org>,
-        virtualization@lists.linux-foundation.org,
-        Linux Kernel List <linux-kernel@vger.kernel.org>,
-        Michael Kelley <mikelley@microsoft.com>,
-        Vineeth Pillai <viremana@linux.microsoft.com>,
-        Sunil Muthuswamy <sunilmut@microsoft.com>,
-        Nuno Das Neves <nunodasneves@linux.microsoft.com>,
-        pasha.tatashin@soleen.com, Jonathan Corbet <corbet@lwn.net>,
-        "K. Y. Srinivasan" <kys@microsoft.com>,
-        Haiyang Zhang <haiyangz@microsoft.com>,
-        Stephen Hemminger <sthemmin@microsoft.com>,
-        Dexuan Cui <decui@microsoft.com>,
-        Lillian Grassin-Drake <ligrassi@microsoft.com>,
-        Muminul Islam <muislam@microsoft.com>,
-        "open list:DOCUMENTATION" <linux-doc@vger.kernel.org>
-Subject: Re: [RFC v1 7/8] mshv: implement in-kernel device framework
-Message-ID: <20210803220420.am5oqulaahiahyrd@liuwe-devbox-debian-v2>
-References: <20210709114339.3467637-1-wei.liu@kernel.org>
- <20210709114339.3467637-8-wei.liu@kernel.org>
- <4c851046-35f8-28aa-03dd-859f2ade3446@linux.microsoft.com>
+        Tue, 03 Aug 2021 15:38:12 -0700 (PDT)
+Date:   Wed, 4 Aug 2021 06:38:05 +0800
+From:   Kent Gibson <warthog618@gmail.com>
+To:     Dipen Patel <dipenp@nvidia.com>
+Cc:     thierry.reding@gmail.com, jonathanh@nvidia.com,
+        linux-kernel@vger.kernel.org, linux-tegra@vger.kernel.org,
+        linux-gpio@vger.kernel.org, linus.walleij@linaro.org,
+        bgolaszewski@baylibre.com, devicetree@vger.kernel.org,
+        linux-doc@vger.kernel.org, robh+dt@kernel.org,
+        andriy.shevchenko@linux.intel.com
+Subject: Re: [RFC 08/11] gpiolib: cdev: Add hardware timestamp clock type
+Message-ID: <20210803223805.GA5020@sol>
+References: <20210625235532.19575-1-dipenp@nvidia.com>
+ <20210625235532.19575-9-dipenp@nvidia.com>
+ <20210701142433.GC34285@sol>
+ <ba32de51-0639-36e2-3575-1f7915542a19@nvidia.com>
+ <20210731060556.GA11043@sol>
+ <1102e1b2-9d53-fc93-b7c5-bfeb9eb2e18d@nvidia.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <4c851046-35f8-28aa-03dd-859f2ade3446@linux.microsoft.com>
+In-Reply-To: <1102e1b2-9d53-fc93-b7c5-bfeb9eb2e18d@nvidia.com>
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Wed, Aug 04, 2021 at 12:42:22AM +0530, Praveen Kumar wrote:
-> On 09-07-2021 17:13, Wei Liu wrote:
-[...]
-> > +static long mshv_device_ioctl(struct file *filp, unsigned int ioctl,
-> > +			      unsigned long arg)
-> > +{
-> > +	struct mshv_device *dev = filp->private_data;
-> > +
-> > +	switch (ioctl) {
-> > +	case MSHV_SET_DEVICE_ATTR:
-> > +		return mshv_device_ioctl_attr(dev, dev->ops->set_attr, arg);
-> > +	case MSHV_GET_DEVICE_ATTR:
-> > +		return mshv_device_ioctl_attr(dev, dev->ops->get_attr, arg);
-> > +	case MSHV_HAS_DEVICE_ATTR:
-> > +		return mshv_device_ioctl_attr(dev, dev->ops->has_attr, arg);
-> > +	default:
-> > +		if (dev->ops->ioctl)
-> > +			return dev->ops->ioctl(dev, ioctl, arg);
-> > +
-> > +		return -ENOTTY;
-> > +	}
+On Tue, Aug 03, 2021 at 03:41:56PM -0700, Dipen Patel wrote:
 > 
-> Have seen some static analyzer tool cribbing here of not returning any error.
-> If you feel OK, please move the 'return -ENOTTY' down after switch block. Thanks.
-> 
+> On 7/30/21 11:05 PM, Kent Gibson wrote:
+> > On Thu, Jul 29, 2021 at 08:07:15PM -0700, Dipen Patel wrote:
+> >> On 7/1/21 7:24 AM, Kent Gibson wrote:
+> > <snip>
+> >>>>  			ret = gpiod_direction_output(desc, val);
+> >>>>  			if (ret)
+> >>>>  				return ret;
+> >>>> @@ -1152,6 +1186,13 @@ static long linereq_set_config_unlocked(struct linereq *lr,
+> >>>>  					polarity_change);
+> >>>>  			if (ret)
+> >>>>  				return ret;
+> >>>> +
+> >>>> +			/* Check if new config sets hardware assisted clock */
+> >>>> +			if (flags & GPIO_V2_LINE_FLAG_EVENT_CLOCK_HARDWARE) {
+> >>>> +				ret = gpiod_hw_timestamp_control(desc, true);
+> >>>> +				if (ret)
+> >>>> +					return ret;
+> >>>> +			}
+> >>>>  		}
+> >>>>  
+> >>> The error code here can come from the pinctrl timestamp_control(), so it
+> >>> should be sanitised before being returned to userspace.
+> >> I do not understand what do you mean by sanitise. I just followed what
+> >>
+> >> gpiod_direction_output did just above which also returns ret from gpio
+> >>
+> >> driver code similar to timestamp_control API.
+> >>
+> > In this context, sanitise means convert any kernel internal error codes
+> > to their userspace equivalent before returning them to userspace.
+> >
+> > Fair enough with the gpiod_direction_output() comparison.  I was thinking
+> > of a patch Andy recently submitted[1] to sanitise gpiod_request(), which
+> > can sometimes return EPROBE_DEFER.  But I guess we can wait until we find
+> > a case of a driver returning an internal error code and add a sanitiser
+> > then.
+> Make sense, I will add sanity check
+> >
 
-Fair point. I will make the change.
+But I said don't bother yet.  And you need to know what errors to sanitise
+before you sanitise them - unless you want to run through all the
+possibilities that can be returned to userspace.
 
-> > +}
-> > +
-[...]
-> > +static long
-> > +mshv_partition_ioctl_create_device(struct mshv_partition *partition,
-> > +	void __user *user_args)
-> > +{
-> > +	long r;
-> > +	struct mshv_create_device tmp, *cd;
-> > +	struct mshv_device *dev;
-> > +	const struct mshv_device_ops *ops;
-> > +	int type;
-> > +
-> > +	if (copy_from_user(&tmp, user_args, sizeof(tmp))) {
-> > +		r = -EFAULT;
-> > +		goto out;
-> > +	}
-> > +
-> > +	cd = &tmp;
-> > +
-> > +	if (cd->type >= ARRAY_SIZE(mshv_device_ops_table)) {
-> > +		r = -ENODEV;
-> > +		goto out;
-> > +	}
-> > +
-> > +	type = array_index_nospec(cd->type, ARRAY_SIZE(mshv_device_ops_table));
-> > +	ops = mshv_device_ops_table[type];
-> > +	if (ops == NULL) {
-> > +		r = -ENODEV;
-> > +		goto out;
-> > +	}
-> > +
-> > +	if (cd->flags & MSHV_CREATE_DEVICE_TEST) {
-> > +		r = 0;
-> > +		goto out;
-> > +	}
-> > +
-> > +	dev = kzalloc(sizeof(*dev), GFP_KERNEL_ACCOUNT);
-> > +	if (!dev) {
-> > +		r = -ENOMEM;
-> > +		goto out;
-> > +	}
-> > +
-> > +	dev->ops = ops;
-> > +	dev->partition = partition;
-> > +
-> > +	r = ops->create(dev, type);
-> > +	if (r < 0) {
-> > +		kfree(dev);
-> > +		goto out;
-> > +	}
-> > +
-> > +	list_add(&dev->partition_node, &partition->devices);
-> > +
-> > +	if (ops->init)
-> > +		ops->init(dev);
-> > +
-> > +	mshv_partition_get(partition);
-> > +	r = anon_inode_getfd(ops->name, &mshv_device_fops, dev, O_RDWR | O_CLOEXEC);
-> > +	if (r < 0) {
-> > +		mshv_partition_put_no_destroy(partition);
-> > +		list_del(&dev->partition_node);
-> > +		ops->destroy(dev);
-> 
-> I hope ops->destroy will free dev as well ?
+Cheers,
+Kent.
 
-Yes. It is clearly written in the preceding comment of that hook. I hope
-that's prominent enough.
-
-> 
-> > +		goto out;
-> > +	}
-> > +
-> > +	cd->fd = r;
-> > +	r = 0;
-> > +
-> > +	if (copy_to_user(user_args, &tmp, sizeof(tmp))) {
-> > +		r = -EFAULT;
-> 
-> I don't think we will be cleaning up anything ? Or do we need to?
-
-No need. Whatever residuals left will be cleaned up once the VM is
-destroyed.
-
-Wei.
-
-> > +		goto out;
-> > +	}
-> > +out:
-> > +	return r;
-> > +}
-> > +
-> 
-> Regards,
-> 
-> ~Praveen.
