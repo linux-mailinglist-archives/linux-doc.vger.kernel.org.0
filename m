@@ -2,131 +2,103 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 8B68D3E21CA
-	for <lists+linux-doc@lfdr.de>; Fri,  6 Aug 2021 04:45:36 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 5E6803E21F2
+	for <lists+linux-doc@lfdr.de>; Fri,  6 Aug 2021 04:58:56 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S237147AbhHFCpr (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 5 Aug 2021 22:45:47 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:40302 "EHLO
-        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S240058AbhHFCpr (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Thu, 5 Aug 2021 22:45:47 -0400
-Received: from mail-oi1-x232.google.com (mail-oi1-x232.google.com [IPv6:2607:f8b0:4864:20::232])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 04A64C061798
-        for <linux-doc@vger.kernel.org>; Thu,  5 Aug 2021 19:45:32 -0700 (PDT)
-Received: by mail-oi1-x232.google.com with SMTP id o185so10102743oih.13
-        for <linux-doc@vger.kernel.org>; Thu, 05 Aug 2021 19:45:31 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc:content-transfer-encoding;
-        bh=NokwJkE7jNaBhW23q0GhxfceUGY7WfqUP7e8Nn9AHJo=;
-        b=iA2vcwFtabs0sGw8VOHvIZdwVKKyjUhq9ucEmOSfuYmsLYA9bFOzr0Y/uKN1kcgqBd
-         XzdQJPt+H5L+kVbmP45x3ks5el5kKZrMrSFNMG3WWquFpBn8RTBj9oHhkDrLuqkiTIxS
-         vPFVtp6doYyKVsGbsJ0tletDFdJwjifsDrH4GPC0ByvYG7S5JXyarUhPSOPpW3bjk644
-         p6j6m6DVUeS3aV7skMIuUEg4vJ2hYsJO0giw43uL02tFELQ4ETdcsaCkBI4A0OXvvPJv
-         IpMEKG5Az/u2KNzg0BaGCQB/tpF7SUbdpdLNce641NHvPkL2F7E8hosWjc34bOfUhkt5
-         LKOw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc:content-transfer-encoding;
-        bh=NokwJkE7jNaBhW23q0GhxfceUGY7WfqUP7e8Nn9AHJo=;
-        b=OO23e6DsaODo1B+eFp/SdYUjCwH1PaX/HvIrgQ3FbMSf+D2+v51NxKzi7Rloa/iIZc
-         0GgtaIP1CrVlxCuD6DHmZ3Lap0jr/N0Qx7i5l/qedmSWx5ZJwrAMCIvo2gyGFq5COrku
-         AMbNwz4gLaKPNstrKmNf4XWkqXvQFAuxE9E6s4ss3YM0kOmWpI32RN0aTwuvzSjjbZka
-         sLLynqfAhjOZuG/+IA0nb0gRFK/opt4SnVzGOIL0BeygKnmYynq5tDkbwDqp/LeClGMD
-         yItM1N42NHMTZfTNQQ6i8vDvzMUhT3Q7WlL0LU+vsw5E7vjLiNh3MeAx+KKEayR1UYap
-         JjDg==
-X-Gm-Message-State: AOAM5307w3PHdqn2fVpPBOOxpZsSzVaUwkOU8qzKBbQjaCk+XXcMf9wn
-        jiSmaAqRYdv+hSovLMV70wRNT8SSt32nP/B4mrU=
-X-Google-Smtp-Source: ABdhPJy/TATqv30WGnryhmTtzT9WaZO6FWxrBlRwhteAdreEjW+9z3Gn1iqtIaTPuizsigqbyOTULNB/OvZ6Ux7rEz8=
-X-Received: by 2002:a05:6808:209d:: with SMTP id s29mr5715197oiw.103.1628217931279;
- Thu, 05 Aug 2021 19:45:31 -0700 (PDT)
+        id S234217AbhHFC7K (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 5 Aug 2021 22:59:10 -0400
+Received: from mail.loongson.cn ([114.242.206.163]:44304 "EHLO loongson.cn"
+        rhost-flags-OK-OK-OK-FAIL) by vger.kernel.org with ESMTP
+        id S232832AbhHFC7K (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Thu, 5 Aug 2021 22:59:10 -0400
+Received: from localhost.localdomain (unknown [223.106.24.69])
+        by mail.loongson.cn (Coremail) with SMTP id AQAAf9BxwOJfpQxh198rAA--.1497S2;
+        Fri, 06 Aug 2021 10:58:42 +0800 (CST)
+From:   Yanteng Si <siyanteng@loongson.cn>
+To:     corbet@lwn.net, alexs@kernel.org, bobwxc@email.cn,
+        seakeel@gmail.com
+Cc:     Yanteng Si <siyanteng@loongson.cn>, chenhuacai@kernel.org,
+        jiaxun.yang@flygoat.com, linux-doc@vger.kernel.org,
+        realpuyuwang@gmail.com, chenfeiyang@loongson.cn,
+        chris.chenfeiyang@gmail.com, siyanteng01@gmail.com,
+        chenweiguang82@126.com
+Subject: [PATCH v4 0/8] docs/zh_CN: add infiniband translation
+Date:   Fri,  6 Aug 2021 10:58:47 +0800
+Message-Id: <cover.1628218477.git.siyanteng@loongson.cn>
+X-Mailer: git-send-email 2.27.0
 MIME-Version: 1.0
-References: <cover.1627820210.git.siyanteng@loongson.cn> <b25147d5c53daf4d4faaa0a33c068dbd6013459a.1627820210.git.siyanteng@loongson.cn>
- <CADQR0QgROPTwPMsGcYv9S3hCPD5V7Ym-jZE_SW7gcVSn8bbNjg@mail.gmail.com>
-In-Reply-To: <CADQR0QgROPTwPMsGcYv9S3hCPD5V7Ym-jZE_SW7gcVSn8bbNjg@mail.gmail.com>
-From:   yanteng si <siyanteng01@gmail.com>
-Date:   Fri, 6 Aug 2021 10:45:21 +0800
-Message-ID: <CAEensMyuqRouk3CTWEEBmfgfaDgBeVncaTrHpEnOtxD4ouRgjw@mail.gmail.com>
-Subject: Re: [PATCH v2 8/8] docs/zh_CN: add infiniband user_verbs translation
-To:     Puyu Wang <realpuyuwang@gmail.com>
-Cc:     Yanteng Si <siyanteng@loongson.cn>,
-        Jonathan Corbet <corbet@lwn.net>, Alex Shi <alexs@kernel.org>,
-        "Wu X.C." <bobwxc@email.cn>, Alex Shi <seakeel@gmail.com>,
-        Huacai Chen <chenhuacai@kernel.org>,
-        Jiaxun Yang <jiaxun.yang@flygoat.com>,
-        linux-doc@vger.kernel.org, chenweiguang82@126.com
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+X-CM-TRANSID: AQAAf9BxwOJfpQxh198rAA--.1497S2
+X-Coremail-Antispam: 1UD129KBjvJXoW7KFy5KrWkXry8Jw4xAF17Awb_yoW8ur43pF
+        n7KryfK3WUAF1akw4fGrW7JF4fJ3Z7G398Gr9Fqwn5tFn5Xa1Fqr90k34jgayfJr18Xa15
+        Xr4F9r1DWrWxCrJanT9S1TB71UUUUU7qnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+        9KBjDU0xBIdaVrnRJUUU9S14x267AKxVW8JVW5JwAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
+        rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2ocxC64kIII0Yj41l84x0c7CEw4AK67xGY2AK02
+        1l84ACjcxK6xIIjxv20xvE14v26F1j6w1UM28EF7xvwVC0I7IYx2IY6xkF7I0E14v26r4U
+        JVWxJr1l84ACjcxK6I8E87Iv67AKxVWxJr0_GcWl84ACjcxK6I8E87Iv6xkF7I0E14v26r
+        xl6s0DM2AIxVAIcxkEcVAq07x20xvEncxIr21l5I8CrVACY4xI64kE6c02F40Ex7xfMcIj
+        6xIIjxv20xvE14v26r1j6r18McIj6I8E87Iv67AKxVWUJVW8JwAm72CE4IkC6x0Yz7v_Jr
+        0_Gr1lF7xvr2IYc2Ij64vIr41lF7I21c0EjII2zVCS5cI20VAGYxC7M4IIrI8v6xkF7I0E
+        8cxan2IY04v7MxkF7I0En4kS14v26r1q6r43MxAIw28IcxkI7VAKI48JMxC20s026xCaFV
+        Cjc4AY6r1j6r4UMI8I3I0E5I8CrVAFwI0_Jr0_Jr4lx2IqxVCjr7xvwVAFwI0_JrI_JrWl
+        x4CE17CEb7AF67AKxVWUtVW8ZwCIc40Y0x0EwIxGrwCI42IY6xIIjxv20xvE14v26r1j6r
+        1xMIIF0xvE2Ix0cI8IcVCY1x0267AKxVW8JVWxJwCI42IY6xAIw20EY4v20xvaj40_Wr1j
+        6rW3Jr1lIxAIcVC2z280aVAFwI0_Gr0_Cr1lIxAIcVC2z280aVCY1x0267AKxVW8Jr0_Cr
+        1UYxBIdaVFxhVjvjDU0xZFpf9x0JUd-B_UUUUU=
+X-CM-SenderInfo: pvl1t0pwhqwqxorr0wxvrqhubq/
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-UHV5dSBXYW5nIDxyZWFscHV5dXdhbmdAZ21haWwuY29tPiDkuo4yMDIx5bm0OOaciDbml6Xlkajk
-upQg5LiK5Y2IMTA6MjnlhpnpgZPvvJoNCj4NCj4gT24gU3VuLCBBdWcgMSwgMjAyMSBhdCAxMjoy
-NSBQTSBZYW50ZW5nIFNpIDxzaXlhbnRlbmdAbG9vbmdzb24uY24+IHdyb3RlOg0KPiA+DQo+ID4g
-VHJhbnNsYXRlIERvY3VtZW50YXRpb24vaW5maW5pYmFuZC91c2VyX3ZlcmJzLnJzdCBpbnRvIENo
-aW5lc2UuDQo+ID4NCj4gPiBTaWduZWQtb2ZmLWJ5OiBZYW50ZW5nIFNpIDxzaXlhbnRlbmdAbG9v
-bmdzb24uY24+DQo+IFJldmlld2VkLWJ5OiBQdXl1IFdhbmcgPHJlYWxwdXl1d2FuZ0BnbWFpbC5j
-b20+DQo+ID4gLS0tDQo+ID4gIC4uLi90cmFuc2xhdGlvbnMvemhfQ04vaW5maW5pYmFuZC9pbmRl
-eC5yc3QgICB8ICAzICstDQo+ID4gIC4uLi96aF9DTi9pbmZpbmliYW5kL3VzZXJfdmVyYnMucnN0
-ICAgICAgICAgICB8IDcyICsrKysrKysrKysrKysrKysrKysNCj4gPiAgMiBmaWxlcyBjaGFuZ2Vk
-LCA3MyBpbnNlcnRpb25zKCspLCAyIGRlbGV0aW9ucygtKQ0KPiA+ICBjcmVhdGUgbW9kZSAxMDA2
-NDQgRG9jdW1lbnRhdGlvbi90cmFuc2xhdGlvbnMvemhfQ04vaW5maW5pYmFuZC91c2VyX3ZlcmJz
-LnJzdA0KPiA+DQo+ID4gZGlmZiAtLWdpdCBhL0RvY3VtZW50YXRpb24vdHJhbnNsYXRpb25zL3po
-X0NOL2luZmluaWJhbmQvaW5kZXgucnN0IGIvRG9jdW1lbnRhdGlvbi90cmFuc2xhdGlvbnMvemhf
-Q04vaW5maW5pYmFuZC9pbmRleC5yc3QNCj4gPiBpbmRleCA1NTY0NTE3MWE2NzUuLjU2MzRjYzQ4
-Mzc5ZiAxMDA2NDQNCj4gPiAtLS0gYS9Eb2N1bWVudGF0aW9uL3RyYW5zbGF0aW9ucy96aF9DTi9p
-bmZpbmliYW5kL2luZGV4LnJzdA0KPiA+ICsrKyBiL0RvY3VtZW50YXRpb24vdHJhbnNsYXRpb25z
-L3poX0NOL2luZmluaWJhbmQvaW5kZXgucnN0DQo+ID4gQEAgLTI4LDEwICsyOCw5IEBAIGluZmlu
-aWJhbmQNCj4gPiAgICAgc3lzZnMNCj4gPiAgICAgdGFnX21hdGNoaW5nDQo+ID4gICAgIHVzZXJf
-bWFkDQo+ID4gKyAgIHVzZXJfdmVyYnMNCj4gPg0KPiA+IC1UT0RPTElTVDoNCj4gPg0KPiA+IC0g
-ICB1c2VyX3ZlcmJzDQo+ID4NCj4gPiAgLi4gb25seTo6ICBzdWJwcm9qZWN0IGFuZCBodG1sDQo+
-ID4NCj4gPiBkaWZmIC0tZ2l0IGEvRG9jdW1lbnRhdGlvbi90cmFuc2xhdGlvbnMvemhfQ04vaW5m
-aW5pYmFuZC91c2VyX3ZlcmJzLnJzdCBiL0RvY3VtZW50YXRpb24vdHJhbnNsYXRpb25zL3poX0NO
-L2luZmluaWJhbmQvdXNlcl92ZXJicy5yc3QNCj4gPiBuZXcgZmlsZSBtb2RlIDEwMDY0NA0KPiA+
-IGluZGV4IDAwMDAwMDAwMDAwMC4uYmE1ZGI4NWFlNzIyDQo+ID4gLS0tIC9kZXYvbnVsbA0KPiA+
-ICsrKyBiL0RvY3VtZW50YXRpb24vdHJhbnNsYXRpb25zL3poX0NOL2luZmluaWJhbmQvdXNlcl92
-ZXJicy5yc3QNCj4gPiBAQCAtMCwwICsxLDcyIEBADQo+ID4gKy4uIGluY2x1ZGU6OiAuLi9kaXNj
-bGFpbWVyLXpoX0NOLnJzdA0KPiA+ICsNCj4gPiArOk9yaWdpbmFsOiBEb2N1bWVudGF0aW9uL2lu
-ZmluaWJhbmQvdXNlcl92ZXJicy5yc3QNCj4gPiArDQo+ID4gKzrnv7vor5E6DQo+ID4gKw0KPiA+
-ICsg5Y+45bu26IW+IFlhbnRlbmcgU2kgPHNpeWFudGVuZ0Bsb29uZ3Nvbi5jbj4NCj4gPiArDQo+
-ID4gKzrmoKHor5E6DQo+ID4gKw0KPiA+ICsg546L5pmu5a6HIFB1eXUgV2FuZyA8cmVhbHB1eXV3
-YW5nQGdtYWlsLmNvbT4NCj4gPiArIOaXtuWljuS6riBBbGV4IFNoaSA8YWxleHNAa2VybmVsLm9y
-Zz4NCj4gPiArDQo+ID4gKy4uIF9jbl9pbmZpbmliYW5kX3VzZXJfdmVyYnM6DQo+ID4gKw0KPiA+
-ICs9PT09PT09PT09PT09PT09PQ0KPiA+ICvnlKjmiLfnqbrpl7R2ZXJic+iuv+mXrg0KPiA+ICs9
-PT09PT09PT09PT09PT09PQ0KPiA+ICsNCj4gPiArICBpYl91dmVyYnPmqKHlnZfvvIzpgJrov4fl
-kK/nlKhDT05GSUdfSU5GSU5JQkFORF9VU0VSX1ZFUkJT5p6E5bu677yM5L2/55So5oi356m66Ze0
-DQo+ID4gKyAg6YCa6L+H4oCcdmVyYnPigJ3nm7TmjqXorr/pl65JQuehrOS7tu+8jOWmgkluZmlu
-aUJhbmTmnrbmnoTop4TojIPnrKwxMeeroOaJgOi/sOOAgg0KPiA+ICsNCj4gPiArICDopoHkvb/n
-lKh2ZXJic++8jOmcgOimgWxpYmlidmVyYnPlupPvvIzlj6/ku45odHRwczovL2dpdGh1Yi5jb20v
-bGludXgtcmRtYS9yZG1hLWNvcmXjgIINCj4gPiArICBsaWJpYnZlcmJz5YyF5ZCr5LiA5Liq54us
-56uL5LqO6K6+5aSH55qEQVBJ77yM55So5LqO5L2/55SoaWJfdXZlcmJz5o6l5Y+j44CCbGliaWJ2
-ZXJicw0KPiA+ICsgIOi/mOmcgOimgeS4uuS9oOeahEluZmluaUJhbmTnoazku7bmj5DkvpvpgILl
-vZPnmoTni6znq4vkuo7orr7lpIfnmoTlhoXmoLjlkoznlKjmiLfnqbrpl7TpqbHliqjjgILkvovl
-poLvvIwNCj4gPiArICDopoHkvb/nlKhNZWxsYW5veCBIQ0HvvIzkvaDpnIDopoHlronoo4VpYl9t
-dGhjYeWGheaguOaooeWdl+WSjGxpYm10aGNh55So5oi356m66Ze06amx5Yqo44CCDQo+ID4gKw0K
-PiA+ICvnlKjmiLct5YaF5qC46YCa5L+hDQo+ID4gKz09PT09PT09PT09PT0NCj4gPiArDQo+ID4g
-KyAg55So5oi356m66Ze06YCa6L+HL2Rldi9pbmZpbmliYW5kL3V2ZXJic07lrZfnrKborr7lpIfk
-uI7lhoXmoLjov5vooYzmhaLpgJ/ot6/lvoTjgIHotYTmupDnrqHnkIYNCj4gPiArICDmk43kvZzn
-moTpgJrkv6HjgILlv6vpgJ/ot6/lvoTmk43kvZzpgJrluLjmmK/pgJrov4fnm7TmjqXlhpnlhaXn
-oazku7blr4TlrZjlmahtbWFwKCnliLDnlKjmiLfnqbrpl7TmnaXlrozmiJANCj4gPiArICDnmoTv
-vIzmsqHmnInns7vnu5/osIPnlKjmiJbkuIrkuIvmlofliIfmjaLliLDlhoXmoLjjgIINCj4gPiAr
-DQo+ID4gKyAg5ZG95Luk5piv6YCa6L+H5Zyo6L+Z5Lqb6K6+5aSH5paH5Lu25LiK55qEd3JpdGUo
-KXPlj5HpgIHnu5nlhoXmoLjnmoTjgIJBQknlnKgNCj4gPiArICBkcml2ZXJzL2luZmluaWJhbmQv
-aW5jbHVkZS9pYl91c2VyX3ZlcmJzLmjkuK3lrprkuYnjgILpnIDopoHlhoXmoLjlk43lupTnmoTl
-kb3ku6TnmoTnu5MNCj4gPiArICDmnoTljIXlkKvkuIDkuKo2NOS9jeWtl+aute+8jOeUqOadpeS8
-oOmAkuS4gOS4quaMh+WQkei+k+WHuue8k+WGsuWMuueahOaMh+mSiOOAgueKtuaAgeS9nOS4undy
-aXRlKCnns7vnu5/osIMNCj4gPiArICDnlKjnmoTov5Tlm57lgLzooqvov5Tlm57liLDnlKjmiLfn
-qbrpl7TjgIINCj4gPiArDQo+ID4gK+i1hOa6kOeuoeeQhg0KPiA+ICs9PT09PT09PQ0KPiA+ICsN
-Cj4gPiArICDnlLHkuo7miYDmnIlJQui1hOa6kOeahOWIm+W7uuWSjOmUgOavgemDveaYr+mAmui/
-h+aWh+S7tuaPj+i/sOespuS8oOmAkueahOWRveS7pOWujOaIkOeahO+8jOaJgOS7peWGheaguOWP
-r+S7pei3nw0KPiA+ICsgIOi4quWTquS6m+i1hOa6kOiiq+mZhOWKoOWIsOS4gOS4que7meWumuea
-hOeUqOaIt+epuumXtOS4iuS4i+aWh+OAgmliX3V2ZXJic+aooeWdl+e7tOaKpOedgGlkcuihqO+8
-jOeUqOadpeWcqA0KPiBJIHRoaW5rIGl0IHNob3VsZCBiZSAn6Lef6Liq6YKj5Lqb6KKr6ZmE5Yqg
-5Yiw57uZ5a6a55So5oi356m66Ze05LiK5LiL5paH55qE6LWE5rqQJywgaW5zdGVhZCBvZg0KPiDi
-gJjot5/ouKrlk6rkupvotYTmupDooqvpmYTliqDliLDkuIDkuKrnu5nlrprnmoTnlKjmiLfnqbrp
-l7TkuIrkuIvmlofigJkuDQpva++8jEkgd2lsbCBtb2RpZnkgaXQgaW4gbmV4dCBwYXRjaCB2ZXJz
-aW9uLiA+XzwNCg0KVGhhbmtzLA0KDQpZYW50ZW5nDQo=
+v4:
+
+Modified a word under Puyu advices; [PATCH 8/8]
+
+v3:
+
+* Modified some words under Alex's advices;
+
+* pick Review-by tags.
+
+v2:
+
+* Modified some words under Alex's and Puyu advices; Thanks for their review!
+
+* add 校译者(proofreading) sign.If you don't want me to do this, please let me know.
+
+*--CC chenweiguang82@126.com
+
+
+Yanteng Si (8):
+  docs/zh_CN: add infiniband index translation
+  docs/zh_CN: add infiniband core_locking translation
+  docs/zh_CN: add infiniband ipoib translation
+  docs/zh_CN: add infiniband opa_vnic translation
+  docs/zh_CN: add infiniband sysfs translation
+  docs/zh_CN: add infiniband tag_matching translation
+  docs/zh_CN: add infiniband user_mad translation
+  docs/zh_CN: add infiniband user_verbs translation
+
+ Documentation/translations/zh_CN/index.rst    |   2 +-
+ .../zh_CN/infiniband/core_locking.rst         | 115 ++++++++++++
+ .../translations/zh_CN/infiniband/index.rst   |  40 +++++
+ .../translations/zh_CN/infiniband/ipoib.rst   | 111 ++++++++++++
+ .../zh_CN/infiniband/opa_vnic.rst             | 156 +++++++++++++++++
+ .../translations/zh_CN/infiniband/sysfs.rst   |  21 +++
+ .../zh_CN/infiniband/tag_matching.rst         |  63 +++++++
+ .../zh_CN/infiniband/user_mad.rst             | 164 ++++++++++++++++++
+ .../zh_CN/infiniband/user_verbs.rst           |  72 ++++++++
+ 9 files changed, 743 insertions(+), 1 deletion(-)
+ create mode 100644 Documentation/translations/zh_CN/infiniband/core_locking.rst
+ create mode 100644 Documentation/translations/zh_CN/infiniband/index.rst
+ create mode 100644 Documentation/translations/zh_CN/infiniband/ipoib.rst
+ create mode 100644 Documentation/translations/zh_CN/infiniband/opa_vnic.rst
+ create mode 100644 Documentation/translations/zh_CN/infiniband/sysfs.rst
+ create mode 100644 Documentation/translations/zh_CN/infiniband/tag_matching.rst
+ create mode 100644 Documentation/translations/zh_CN/infiniband/user_mad.rst
+ create mode 100644 Documentation/translations/zh_CN/infiniband/user_verbs.rst
+
+-- 
+2.27.0
+
