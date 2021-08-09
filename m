@@ -2,136 +2,59 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 8F49A3E42AF
-	for <lists+linux-doc@lfdr.de>; Mon,  9 Aug 2021 11:31:38 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 040F53E431A
+	for <lists+linux-doc@lfdr.de>; Mon,  9 Aug 2021 11:47:49 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S234501AbhHIJb5 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 9 Aug 2021 05:31:57 -0400
-Received: from mail.kernel.org ([198.145.29.99]:42596 "EHLO mail.kernel.org"
-        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S234368AbhHIJb5 (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Mon, 9 Aug 2021 05:31:57 -0400
-Received: by mail.kernel.org (Postfix) with ESMTPSA id B27946101D;
-        Mon,  9 Aug 2021 09:31:36 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-        s=k20201202; t=1628501497;
-        bh=mWQKQI8yAbXJt5cw/cLvAtRqYeiZGxdgd577VLR7NkU=;
-        h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-        b=KpSEOer/OkpU7r6DV1KoKKhSCqIU4pMP+/lGcx8JhRMC3E1esRD9uB6ECI77bygeZ
-         H3x/10Dui32Fwd3ruyysS1gE3T/pA52msj7Id2xDBFoDuJGAecxcw36/wnS1EHa+JN
-         hvLgPnAoqUtHDfKYF66HyIEydCU76nAs60EtXMgEIBeD1TdlmeBWl0nBJAA/p6O9jN
-         NbcsdHoddzZmMUiQtT1f2BWRXoptyPDaxycbCNtAsqmludHan3Ru9p8GosS0ivrIYM
-         GGtI/2xs5a4W0Anw8Wllz5iNwPR13fr9+teVuWbA1DZ/sy9Mf6rw/2orU0F73+GJel
-         IyQ/BVDolaBSQ==
-From:   Jarkko Sakkinen <jarkko@kernel.org>
-To:     Shuah Khan <shuah@kernel.org>
-Cc:     linux-kselftest@vger.kernel.org, linux-sgx@vger.kernel.org,
-        Reinette Chatre <reinette.chatre@intel.com>,
-        Borislav Petkov <bp@alien8.de>,
-        Jarkko Sakkinen <jarkko@kernel.org>,
-        Dave Hansen <dave.hansen@linux.intel.com>,
-        Thomas Gleixner <tglx@linutronix.de>,
-        Ingo Molnar <mingo@redhat.com>, x86@kernel.org,
-        "H. Peter Anvin" <hpa@zytor.com>, Jonathan Corbet <corbet@lwn.net>,
-        linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org
-Subject: [PATCH v4 1/8] x86/sgx: Add /sys/kernel/debug/x86/sgx_total_mem
-Date:   Mon,  9 Aug 2021 12:31:20 +0300
-Message-Id: <20210809093127.76264-2-jarkko@kernel.org>
-X-Mailer: git-send-email 2.32.0
-In-Reply-To: <20210809093127.76264-1-jarkko@kernel.org>
-References: <20210809093127.76264-1-jarkko@kernel.org>
+        id S234365AbhHIJsI (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 9 Aug 2021 05:48:08 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:36980 "EHLO
+        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S234726AbhHIJsH (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Mon, 9 Aug 2021 05:48:07 -0400
+Received: from mail-lf1-x135.google.com (mail-lf1-x135.google.com [IPv6:2a00:1450:4864:20::135])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id C9090C0613D3
+        for <linux-doc@vger.kernel.org>; Mon,  9 Aug 2021 02:47:46 -0700 (PDT)
+Received: by mail-lf1-x135.google.com with SMTP id c24so5865639lfi.11
+        for <linux-doc@vger.kernel.org>; Mon, 09 Aug 2021 02:47:46 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=mime-version:reply-to:from:date:message-id:subject:to;
+        bh=/M6YqzPL3zjiXUIerqSshoxuIOZoLJI6Zkm2TxA2qxQ=;
+        b=twoNMvxqf7EaaKHHSPNGGPgXDiPWciqYh9d8TNqqMjVTCYUTZ+aAYh3A8SCVCZDGX3
+         LtjtKvndgddjLPfepnPH2KaM2eaf1vhTlHXbjaJC+DvuPs3nPOat032NZ8pS/eRdQ2iX
+         LFeUaVImupoCX58l3U45pQtjCfm7lDZC0HlhOZPbO9xvzoo582CqmV9Cj3lzNoZFBgeW
+         2oSWlKIIXgI4uj9B7Llzy4YEPgIZtUvCb6/7vrJjK0vHhio6OKkkJC2u6TLx3uMOgIue
+         yr/Hx5/CNwmoRpXoeTYFSSzjmsT+DXckvwojGGh9xiCxd+QAXdB+rPKUSj9b5L8gUTRn
+         cRdg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:mime-version:reply-to:from:date:message-id
+         :subject:to;
+        bh=/M6YqzPL3zjiXUIerqSshoxuIOZoLJI6Zkm2TxA2qxQ=;
+        b=ZPT9ao6A9LwAXmpUs9UdO1Kh31+0Y8s3QROrpJ3wKHLGSGzBN9quuWwNWE+nOpMtT2
+         T3nTbPOg0hk7uo124RzzAjTCQpH98xd1TQ0LGoUq6ZNHm5a2HmqsDgaODdhrTgS40iUD
+         sFBEsqvfp2K9npgpN7O60XmHjztfbOzntELXjsFy4ouqTbwPhlHPFEwpjHrBiJ/+Uo4+
+         wcAV680bTzcwi1Kh/29Zb7Fmy/8w/rNxmCO39zW/ATVxQh20PJQfgMeM+QdUUB+48sSP
+         pjsOnQDtdzLX/mpJnuQ2c+Wt+QpRGuwchjA/rNZ4LfnPCnLXxXtWfFYUpfM4MVQE3IAC
+         wMqA==
+X-Gm-Message-State: AOAM532yJ4tONOozU9mRx5LS9vQmd5rDapSYGrfeMKRRykPS2yRoPiY+
+        As/nkM5CTXMVaWh5XxyEWo99F414BQN4gSQrHk4=
+X-Google-Smtp-Source: ABdhPJzIh8D6reurMnmRWsggm/4FDcYNGKxCatPytC002EECEYrndG8HOIIb9uUt6FZ4dIlc8dzKsKDkPWt1bc/4TKA=
+X-Received: by 2002:a19:6742:: with SMTP id e2mr17235785lfj.507.1628502465117;
+ Mon, 09 Aug 2021 02:47:45 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Received: by 2002:a05:651c:93:0:0:0:0 with HTTP; Mon, 9 Aug 2021 02:47:44
+ -0700 (PDT)
+Reply-To: lynchjennifer09@gmail.com
+From:   Jennifer Lynch <chibitovictor@gmail.com>
+Date:   Mon, 9 Aug 2021 11:47:44 +0200
+Message-ID: <CABi+Mwmtb3fD3Mrx0RHi8PhUJBDALCacwnL4GMOYu+kbWzNsDg@mail.gmail.com>
+Subject: 
+To:     undisclosed-recipients:;
+Content-Type: text/plain; charset="UTF-8"
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Just like normal memory, SGX memory can be overcommitted.  SGX has its
-own reclaim mechanism which kicks in when physical SGX memory (Enclave
-Page Cache / EPC) is exhausted.  That reclaim mechanism is relatively
-rarely exercised and needs selftests to poke at it.
-
-The amount of EPC on the system is determined by the BIOS and it varies
-wildly between systems.  It can be dozens of MB on desktops, or many GB
-on servers.
-
-To run in a reasonable amount of time, the selftest needs to know how
-much EPC there is in the system.
-
-Introduce a new debugfs file to export that information.
-
-Acked-by: Dave Hansen <dave.hansen@linux.intel.com>
-Signed-off-by: Jarkko Sakkinen <jarkko@kernel.org>
----
-
-v3:
-* Describe the units of sgx_total_mem in Dcumentation/x86/sgx.rst.
-* Rewrite of the commit message (suggested by Dave):
-  https://lore.kernel.org/linux-sgx/5d3614af-2393-6744-9d85-7001241ca76e@intel.com/
-
-v2:
-* sgx_nr_all_pages -> sgx_total_mem
-
- Documentation/x86/sgx.rst      |  6 ++++++
- arch/x86/kernel/cpu/sgx/main.c | 10 +++++++++-
- 2 files changed, 15 insertions(+), 1 deletion(-)
-
-diff --git a/Documentation/x86/sgx.rst b/Documentation/x86/sgx.rst
-index dd0ac96ff9ef..f11bfb331b93 100644
---- a/Documentation/x86/sgx.rst
-+++ b/Documentation/x86/sgx.rst
-@@ -250,3 +250,9 @@ user wants to deploy SGX applications both on the host and in guests
- on the same machine, the user should reserve enough EPC (by taking out
- total virtual EPC size of all SGX VMs from the physical EPC size) for
- host SGX applications so they can run with acceptable performance.
-+
-+Debugging
-+=========
-+
-+*/sys/kernel/debug/x86/sgx_total_mem* contains an integer describing
-+the total SGX reserved memory in bytes, available in the system.
-diff --git a/arch/x86/kernel/cpu/sgx/main.c b/arch/x86/kernel/cpu/sgx/main.c
-index 63d3de02bbcc..b65da19a53ee 100644
---- a/arch/x86/kernel/cpu/sgx/main.c
-+++ b/arch/x86/kernel/cpu/sgx/main.c
-@@ -1,6 +1,7 @@
- // SPDX-License-Identifier: GPL-2.0
- /*  Copyright(c) 2016-20 Intel Corporation. */
- 
-+#include <linux/debugfs.h>
- #include <linux/file.h>
- #include <linux/freezer.h>
- #include <linux/highmem.h>
-@@ -28,7 +29,10 @@ static DECLARE_WAIT_QUEUE_HEAD(ksgxd_waitq);
- static LIST_HEAD(sgx_active_page_list);
- static DEFINE_SPINLOCK(sgx_reclaimer_lock);
- 
--/* The free page list lock protected variables prepend the lock. */
-+/* Total EPC memory available in bytes. */
-+static unsigned long sgx_total_mem;
-+
-+/* The number of free EPC pages in all nodes. */
- static unsigned long sgx_nr_free_pages;
- 
- /* Nodes with one or more EPC sections. */
-@@ -656,6 +660,8 @@ static bool __init sgx_setup_epc_section(u64 phys_addr, u64 size,
- 		list_add_tail(&section->pages[i].list, &sgx_dirty_page_list);
- 	}
- 
-+	sgx_total_mem += nr_pages * PAGE_SIZE;
-+
- 	return true;
- }
- 
-@@ -823,6 +829,8 @@ static int __init sgx_init(void)
- 	if (sgx_vepc_init() && ret)
- 		goto err_provision;
- 
-+	debugfs_create_ulong("sgx_total_mem", 0444, arch_debugfs_dir, &sgx_total_mem);
-+
- 	return 0;
- 
- err_provision:
--- 
-2.32.0
-
+Greetings my dear I sent you an email a few days ago. Did you receive
+my message? urgent response please
