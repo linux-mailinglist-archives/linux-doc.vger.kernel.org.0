@@ -2,65 +2,113 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id B0B083E551D
-	for <lists+linux-doc@lfdr.de>; Tue, 10 Aug 2021 10:26:59 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 74B273E568C
+	for <lists+linux-doc@lfdr.de>; Tue, 10 Aug 2021 11:16:49 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S238072AbhHJI1S (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 10 Aug 2021 04:27:18 -0400
-Received: from verein.lst.de ([213.95.11.211]:35145 "EHLO verein.lst.de"
-        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S232772AbhHJI1R (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Tue, 10 Aug 2021 04:27:17 -0400
-Received: by verein.lst.de (Postfix, from userid 2407)
-        id 2F59F67373; Tue, 10 Aug 2021 10:26:48 +0200 (CEST)
-Date:   Tue, 10 Aug 2021 10:26:47 +0200
-From:   Christoph Hellwig <hch@lst.de>
-To:     Jason Gunthorpe <jgg@nvidia.com>
-Cc:     David Airlie <airlied@linux.ie>,
-        Tony Krowiak <akrowiak@linux.ibm.com>,
-        Alex Williamson <alex.williamson@redhat.com>,
-        Christian Borntraeger <borntraeger@de.ibm.com>,
-        Cornelia Huck <cohuck@redhat.com>,
-        Jonathan Corbet <corbet@lwn.net>,
-        Daniel Vetter <daniel@ffwll.ch>,
-        Diana Craciun <diana.craciun@oss.nxp.com>,
-        dri-devel@lists.freedesktop.org,
-        Eric Auger <eric.auger@redhat.com>,
-        Eric Farman <farman@linux.ibm.com>,
-        Harald Freudenberger <freude@linux.ibm.com>,
-        Vasily Gorbik <gor@linux.ibm.com>,
-        Heiko Carstens <hca@linux.ibm.com>,
-        intel-gfx@lists.freedesktop.org,
-        intel-gvt-dev@lists.freedesktop.org,
-        Jani Nikula <jani.nikula@linux.intel.com>,
-        Jason Herne <jjherne@linux.ibm.com>,
-        Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
-        kvm@vger.kernel.org, Kirti Wankhede <kwankhede@nvidia.com>,
-        linux-doc@vger.kernel.org, linux-s390@vger.kernel.org,
-        Matthew Rosato <mjrosato@linux.ibm.com>,
-        Peter Oberparleiter <oberpar@linux.ibm.com>,
-        Halil Pasic <pasic@linux.ibm.com>,
-        Rodrigo Vivi <rodrigo.vivi@intel.com>,
-        Vineeth Vijayan <vneethv@linux.ibm.com>,
-        Zhi Wang <zhi.a.wang@intel.com>,
-        "Raj, Ashok" <ashok.raj@intel.com>, Christoph Hellwig <hch@lst.de>,
-        Leon Romanovsky <leonro@nvidia.com>,
-        Max Gurtovoy <mgurtovoy@nvidia.com>,
-        Yishai Hadas <yishaih@nvidia.com>,
-        Zhenyu Wang <zhenyuw@linux.intel.com>
-Subject: Re: [PATCH v4 09/14] vfio/pci: Change vfio_pci_try_bus_reset() to
- use the dev_set
-Message-ID: <20210810082647.GA21036@lst.de>
-References: <0-v4-9ea22c5e6afb+1adf-vfio_reflck_jgg@nvidia.com> <9-v4-9ea22c5e6afb+1adf-vfio_reflck_jgg@nvidia.com>
+        id S238749AbhHJJRF (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 10 Aug 2021 05:17:05 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:46842 "EHLO
+        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S238745AbhHJJRE (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 10 Aug 2021 05:17:04 -0400
+Received: from mail-pj1-x1032.google.com (mail-pj1-x1032.google.com [IPv6:2607:f8b0:4864:20::1032])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id A15D3C06179C;
+        Tue, 10 Aug 2021 02:16:36 -0700 (PDT)
+Received: by mail-pj1-x1032.google.com with SMTP id pj14-20020a17090b4f4eb029017786cf98f9so4358759pjb.2;
+        Tue, 10 Aug 2021 02:16:36 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=subject:to:cc:references:from:message-id:date:user-agent
+         :mime-version:in-reply-to:content-language:content-transfer-encoding;
+        bh=1eMLWbyBU/sRONtQIPvGPa9Xul5GM1ibC93IbV30gmk=;
+        b=uRHNZ/XSXpSd2EekLcyPlKNakWbcXrgdNHhu4LPh24wCi09/V4P/V4//poEFhQT9Kl
+         pJnwCjtsahSbrHXcUEEZSDvW4mau1uhNU0laOY0m+keJqPyLiHiAWpUbjM6x+rvEvP8E
+         9G+rYO9vvvb9qaf/oUS18om/kibXtTWxdFOqUpwP2Jpn4OtbY/ZUcrlf1j4WzCKfaVJI
+         6KIbbnv59I9a1r1X/AUarC2XIyyh+2wQZ78CwrpkYP26shn5C6oMV5AMd+qGL5SHMeZ3
+         XzMC+4/vaQTdQpqk6BdJIRE7Zx0VWFqxlyCFDECrChxBr5ra+M3u8qhCKGjD8Fn1F8v+
+         23MA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:subject:to:cc:references:from:message-id:date
+         :user-agent:mime-version:in-reply-to:content-language
+         :content-transfer-encoding;
+        bh=1eMLWbyBU/sRONtQIPvGPa9Xul5GM1ibC93IbV30gmk=;
+        b=AY8sXAqpvkW0Zh9jVvSSN5gok1b5sCQWwpJWxXWVQnt5hrkrubbj+6ILjDQzpPzto7
+         W8s5xmnnHifd1J1q4zW9vquxY9ZixylTzhEH0J/fk0ia+2HuFdlqv1UvvCwDR1xumbqD
+         rxxYngxPdWVGmde+LtBNz20xq0X9NEtPboaly8p31dI4OAZLsK+wu7GQg2Vbb1kKyhLi
+         I1Qb96RIjXNoTWeQCmJswyqnh9Sko7Ynb7Kn4riOeFjy/SeMspdVtiJXrEsUhGbu1jka
+         9lsAVLoEjyqcwUhgvYW1fvw5Qe1kmHXzVv95am1ET/1zoVsBn8HXJeYXouzed3CcRraZ
+         R6rA==
+X-Gm-Message-State: AOAM530xgmas4CzQejhtMoxZ7/vvUKOha+ejLwaoy2JlFuTn10a9AAqZ
+        RpykGqqEJXhV2IyouyowkNo=
+X-Google-Smtp-Source: ABdhPJwo3IHlpSusugq84VzN8wuuLt/+jy01P9rYCZOEZCnx35yOgUFBFnfRqrRDwfFvwfVKiRGV9Q==
+X-Received: by 2002:a63:5fd4:: with SMTP id t203mr46726pgb.141.1628586996243;
+        Tue, 10 Aug 2021 02:16:36 -0700 (PDT)
+Received: from [192.168.11.2] (KD106167171201.ppp-bb.dion.ne.jp. [106.167.171.201])
+        by smtp.gmail.com with ESMTPSA id x2sm2281054pjq.35.2021.08.10.02.16.34
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Tue, 10 Aug 2021 02:16:35 -0700 (PDT)
+Subject: [PATCH v2] docs: sphinx-requirements: Move sphinx_rtd_theme to top
+To:     Jonathan Corbet <corbet@lwn.net>
+Cc:     Mauro Carvalho Chehab <mchehab@kernel.org>,
+        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
+        Akira Yokosawa <akiyks@gmail.com>
+References: <974babfe-540f-40e4-38b3-ab294ba70ccc@gmail.com>
+From:   Akira Yokosawa <akiyks@gmail.com>
+Message-ID: <75f14c88-6091-1072-41cb-16b886aee5a0@gmail.com>
+Date:   Tue, 10 Aug 2021 18:16:32 +0900
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
+ Thunderbird/78.11.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <9-v4-9ea22c5e6afb+1adf-vfio_reflck_jgg@nvidia.com>
-User-Agent: Mutt/1.5.17 (2007-11-01)
+In-Reply-To: <974babfe-540f-40e4-38b3-ab294ba70ccc@gmail.com>
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
+Content-Transfer-Encoding: 7bit
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Looks good,
+sphinx_rtd_theme 0.5.2 has "docutils<0.17" in its requirements.
+docutils 0.17 released this April caused regression in
+sphinx_rtd_theme 0.5.1 [1].
 
-Reviewed-by: Christoph Hellwig <hch@lst.de>
+By removing docutils and moving sphinx_rtd_theme before Sphinx in
+requirements.txt, the requirement of "docutils<0.17" can be met
+naturally.
+
+[1]: https://github.com/readthedocs/sphinx_rtd_theme/issues/1112
+
+Signed-off-by: Akira Yokosawa <akiyks@gmail.com>
+Cc: Mauro Carvalho Chehab <mchehab@kernel.org>
+---
+Hi,
+
+It is better to keep requirements as minimal as possible.
+Let's leave the dependency to the sphinx_rtd_theme package.
+
+Changes in v1 [2] -> v2:
+
+    o Remove docutils entry.
+    o Move sphinx_rtd_theme to top.
+    o Adjust patch title.
+
+[2]: https://lore.kernel.org/linux-doc/974babfe-540f-40e4-38b3-ab294ba70ccc@gmail.com/
+
+        Thanks, Akira
+--
+ Documentation/sphinx/requirements.txt | 3 +--
+ 1 file changed, 1 insertion(+), 2 deletions(-)
+
+diff --git a/Documentation/sphinx/requirements.txt b/Documentation/sphinx/requirements.txt
+index 489f6626de67..9a35f50798a6 100644
+--- a/Documentation/sphinx/requirements.txt
++++ b/Documentation/sphinx/requirements.txt
+@@ -1,3 +1,2 @@
+-docutils
+-Sphinx==2.4.4
+ sphinx_rtd_theme
++Sphinx==2.4.4
+-- 
+2.17.1
+
+
