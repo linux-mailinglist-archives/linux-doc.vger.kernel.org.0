@@ -2,85 +2,69 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 9B8703E7DC9
-	for <lists+linux-doc@lfdr.de>; Tue, 10 Aug 2021 18:50:29 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id A53633E7F91
+	for <lists+linux-doc@lfdr.de>; Tue, 10 Aug 2021 19:41:43 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S229564AbhHJQuv (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 10 Aug 2021 12:50:51 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:40982 "EHLO
+        id S234481AbhHJRlD (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 10 Aug 2021 13:41:03 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:51916 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S229474AbhHJQuu (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 10 Aug 2021 12:50:50 -0400
-Received: from mail.skyhub.de (mail.skyhub.de [IPv6:2a01:4f8:190:11c2::b:1457])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 3EE94C0613C1;
-        Tue, 10 Aug 2021 09:50:27 -0700 (PDT)
-Received: from zn.tnic (p200300ec2f0d6500329c23fffea6a903.dip0.t-ipconnect.de [IPv6:2003:ec:2f0d:6500:329c:23ff:fea6:a903])
-        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
-        (No client certificate requested)
-        by mail.skyhub.de (SuperMail on ZX Spectrum 128k) with ESMTPSA id AD16D1EC01DF;
-        Tue, 10 Aug 2021 18:50:21 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=alien8.de; s=dkim;
-        t=1628614221;
-        h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-         to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-         content-transfer-encoding:in-reply-to:in-reply-to:  references:references;
-        bh=dJ3McOp6GAWMX9lMvbCNin2G349VMHYC/ZPMdsNmIDQ=;
-        b=THHqHQdG5NOH8KE4zUN+hcNyc5eR3ZuFzp719QN2wydoaiNqnG8umE976PGxExzUhR4Xbc
-        UnFkaKVlGrHG0odgq4JOy6nA2RSqrk6Jj67JB93xbQf1dqL9mfQDq+YG94nqS1ODNHhZg5
-        5DFJRS451oOD5VfRfqSwv6YKn/2Gdrg=
-Date:   Tue, 10 Aug 2021 18:51:06 +0200
-From:   Borislav Petkov <bp@alien8.de>
-To:     "Yu, Yu-cheng" <yu-cheng.yu@intel.com>
-Cc:     x86@kernel.org, "H. Peter Anvin" <hpa@zytor.com>,
-        Thomas Gleixner <tglx@linutronix.de>,
-        Ingo Molnar <mingo@redhat.com>, linux-kernel@vger.kernel.org,
-        linux-doc@vger.kernel.org, linux-mm@kvack.org,
-        linux-arch@vger.kernel.org, linux-api@vger.kernel.org,
-        Arnd Bergmann <arnd@arndb.de>,
-        Andy Lutomirski <luto@kernel.org>,
-        Balbir Singh <bsingharora@gmail.com>,
-        Cyrill Gorcunov <gorcunov@gmail.com>,
-        Dave Hansen <dave.hansen@linux.intel.com>,
-        Eugene Syromiatnikov <esyr@redhat.com>,
-        Florian Weimer <fweimer@redhat.com>,
-        "H.J. Lu" <hjl.tools@gmail.com>, Jann Horn <jannh@google.com>,
-        Jonathan Corbet <corbet@lwn.net>,
-        Kees Cook <keescook@chromium.org>,
-        Mike Kravetz <mike.kravetz@oracle.com>,
-        Nadav Amit <nadav.amit@gmail.com>,
-        Oleg Nesterov <oleg@redhat.com>, Pavel Machek <pavel@ucw.cz>,
-        Peter Zijlstra <peterz@infradead.org>,
-        Randy Dunlap <rdunlap@infradead.org>,
-        "Ravi V. Shankar" <ravi.v.shankar@intel.com>,
-        Dave Martin <Dave.Martin@arm.com>,
-        Weijiang Yang <weijiang.yang@intel.com>,
-        Pengfei Xu <pengfei.xu@intel.com>,
-        Haitao Huang <haitao.huang@intel.com>,
-        Rick P Edgecombe <rick.p.edgecombe@intel.com>
-Subject: Re: [PATCH v28 04/32] x86/cpufeatures: Introduce CPU setup and
- option parsing for CET
-Message-ID: <YRKueiV82YmvT8a3@zn.tnic>
-References: <20210722205219.7934-1-yu-cheng.yu@intel.com>
- <20210722205219.7934-5-yu-cheng.yu@intel.com>
- <YRFSg45dDMfeiGbt@zn.tnic>
- <c7867ec7-f03e-8928-3cce-88eaafd1efa1@intel.com>
+        with ESMTP id S234949AbhHJRig (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 10 Aug 2021 13:38:36 -0400
+Received: from mail-lf1-x142.google.com (mail-lf1-x142.google.com [IPv6:2a00:1450:4864:20::142])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id A9470C0619F1
+        for <linux-doc@vger.kernel.org>; Tue, 10 Aug 2021 10:33:47 -0700 (PDT)
+Received: by mail-lf1-x142.google.com with SMTP id z2so26316736lft.1
+        for <linux-doc@vger.kernel.org>; Tue, 10 Aug 2021 10:33:47 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=mime-version:reply-to:from:date:message-id:subject:to;
+        bh=y3BZ+wT7TMDVjM2/WQcyPOhYkG/NWjvDbJIsMqFI2RA=;
+        b=BggyEzSIpVznrhWTl8MIRAYEe15KlTxcMGseAQSFa7RDeDzVHxU4eSoETbmExnaLIE
+         zuq8OYsbcAC4TRTZpDVHuqOpZQ9IWzoDnFG9KE9Hgoh5GHNRpLrX7GaTa2Rlpi17Sa+7
+         wynv7o5vGtXcABH0YLjEMHBgYbVN4gwCCmMbmqM96vylTsH+XuSJQxB2T0aZ0px1WpyQ
+         RfAqEbEJWHwau3sZBSpHTPqcKq0lEWF+TZfP6Hoo/gEZtnmpQsbvRYpoOVsYPdrPzr7x
+         t3j+1ErMjanfyKX6UgQnU/AAqtfTm/Qksyzzn7HfgMwEBK6s4oZtKRsuVtciK72GKLQ3
+         6YUg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:mime-version:reply-to:from:date:message-id
+         :subject:to;
+        bh=y3BZ+wT7TMDVjM2/WQcyPOhYkG/NWjvDbJIsMqFI2RA=;
+        b=gQdndAmz8c1CqADGn8hGC/ApM5GhU8CW52905Xp7SuQK3ldU1demF+8jttmd9rvXKA
+         ltlAw+uGxvZpJ066Nhy6pr/1jRNl6EXR69yOY/duRS5jZW9ZyA4FfoLyxaL+pcvdokef
+         Ge2vdLha2Dhd1x8lmdDqEN8DaaNqQjU6GPVjsJNwkxeHHgk5bqccOXh9oaMsrlclgVSF
+         StQ5bVE3yOkLqJkidIMhnGqAZi3hu5Pw7sT9XLE+kyFUF14SNvnHQRLWFus80Tn+PRIU
+         rbNsGqY8sGhMWDT3ANVFKMk3HaSvLpwPyCwqvboK51DJmWI9OvZ8XjadO+bN3pEAyKcV
+         Kg7Q==
+X-Gm-Message-State: AOAM530DjAMU33BtrU78ai+1esm17YkaMYzl+D1IK4Ze/dLDawzSt+0z
+        Wcs6SAGmmlVcW4tN5cy/upifu3tgQFVF/s2FNTZZ7jRPt0s=
+X-Google-Smtp-Source: ABdhPJxJzT1Kb5atT5yD66iaERNxaunOV6XJPdXL1z2OXUo9BKjwXZsRFKaZJQfJZWzQJ7vPYlv2A2MhcLNWOaJIEsQ=
+X-Received: by 2002:a2e:b61c:: with SMTP id r28mr13615658ljn.274.1628616814996;
+ Tue, 10 Aug 2021 10:33:34 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-In-Reply-To: <c7867ec7-f03e-8928-3cce-88eaafd1efa1@intel.com>
+Received: by 2002:ac2:5d2e:0:0:0:0:0 with HTTP; Tue, 10 Aug 2021 10:33:33
+ -0700 (PDT)
+Reply-To: majidmuzaffar8@gmail.com
+From:   Majid Muzaffar <ing.abdullabin.rishid.me@gmail.com>
+Date:   Tue, 10 Aug 2021 20:33:33 +0300
+Message-ID: <CAFsu49W_3bbJbgEKV5RQo3TBRgLduTA-4EwS7hHkwcfSHSRrcg@mail.gmail.com>
+Subject: Proposal
+To:     undisclosed-recipients:;
+Content-Type: text/plain; charset="UTF-8"
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Tue, Aug 10, 2021 at 08:39:00AM -0700, Yu, Yu-cheng wrote:
-> We have X86_FEATURE_IBT dependent on X86_FEATURE_SHSTK (patch #3).
+Salam alaikum,
 
-Ah, do_clear_cpu_cap() will handle the deps, missed that.
+I am the investment officer of UAE based investment company who are
+ready to fund projects outside UAE, in the form of debt finance. We
+grant loan to both Corporate and private entities at a low interest
+rate of 3% ROI per annum. The terms are very flexible and interesting.
+Kindly revert back if you have projects that needs funding for further
+discussion and negotiation.
 
-Thx.
+Thanks
 
--- 
-Regards/Gruss,
-    Boris.
-
-https://people.kernel.org/tglx/notes-about-netiquette
+investment officer
