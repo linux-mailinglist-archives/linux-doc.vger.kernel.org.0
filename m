@@ -2,112 +2,67 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 65EDF3E95FB
-	for <lists+linux-doc@lfdr.de>; Wed, 11 Aug 2021 18:32:15 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 25D153E964A
+	for <lists+linux-doc@lfdr.de>; Wed, 11 Aug 2021 18:45:01 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S229484AbhHKQcL (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 11 Aug 2021 12:32:11 -0400
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124]:31597 "EHLO
-        us-smtp-delivery-124.mimecast.com" rhost-flags-OK-OK-OK-OK)
-        by vger.kernel.org with ESMTP id S229781AbhHKQcH (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Wed, 11 Aug 2021 12:32:07 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-        s=mimecast20190719; t=1628699457;
-        h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-         to:to:cc:cc; bh=LxSuW5nHsETbJXIQDCaep1MG1Cjx73IJH53bJ9bhEiQ=;
-        b=SiwxhHFj21aPWUsXlARo1rkxBsCCLPM/LapfiMOUQQkk8Chat2GQEUcjdJoBt9xSZ0D9xp
-        N7r7qed7pq1NuTd2VcLXx81wGiTLOOZo7kkB/sIHJidTHN/2oFaR3KGzaTuj/9/b6sxb8h
-        5LV/xKPMdIHbicmkBQc09HlgiLLtn3w=
-Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
- [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-282-jbn8yFRxPoufwBXFTwl61A-1; Wed, 11 Aug 2021 12:30:56 -0400
-X-MC-Unique: jbn8yFRxPoufwBXFTwl61A-1
-Received: from smtp.corp.redhat.com (int-mx08.intmail.prod.int.phx2.redhat.com [10.5.11.23])
-        (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
-        (No client certificate requested)
-        by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 01A921008060;
-        Wed, 11 Aug 2021 16:30:55 +0000 (UTC)
-Received: from llong.com (unknown [10.22.18.115])
-        by smtp.corp.redhat.com (Postfix) with ESMTP id 14F601970E;
-        Wed, 11 Aug 2021 16:30:49 +0000 (UTC)
-From:   Waiman Long <longman@redhat.com>
-To:     Tejun Heo <tj@kernel.org>, Zefan Li <lizefan.x@bytedance.com>,
-        Johannes Weiner <hannes@cmpxchg.org>,
-        Jonathan Corbet <corbet@lwn.net>
-Cc:     cgroups@vger.kernel.org, linux-kernel@vger.kernel.org,
-        linux-doc@vger.kernel.org, Waiman Long <longman@redhat.com>
-Subject: [PATCH] cgroup/cpuset: Enable memory migration for cpuset v2
-Date:   Wed, 11 Aug 2021 12:30:35 -0400
-Message-Id: <20210811163035.1977-1-longman@redhat.com>
-X-Scanned-By: MIMEDefang 2.84 on 10.5.11.23
+        id S229963AbhHKQpX (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 11 Aug 2021 12:45:23 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:33518 "EHLO
+        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S229535AbhHKQpX (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Wed, 11 Aug 2021 12:45:23 -0400
+Received: from mail-wm1-x341.google.com (mail-wm1-x341.google.com [IPv6:2a00:1450:4864:20::341])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 13278C061765;
+        Wed, 11 Aug 2021 09:44:59 -0700 (PDT)
+Received: by mail-wm1-x341.google.com with SMTP id u1so2430556wmm.0;
+        Wed, 11 Aug 2021 09:44:59 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=message-id:from:mime-version:content-transfer-encoding
+         :content-description:subject:to:date:reply-to;
+        bh=5NTJSky9UX3JbuB9riY3wCYfXDpCwy2c7hzO0kF4AHA=;
+        b=tniG1q4hqNNNXPhp5YZiKgT9VblFc7Im1E3lZdfrOmIBIMYRGaeyfzkf7aDq7OX+iO
+         pb40rtADHPEMwzFTVla2tX5mBS7kUGDqeLy2XGYIlbo23Di0vtlCejWUXPidwhDXeoOk
+         x0I5upnDQF2Rm6cNckCI3TThaa3IrjdK5X4iJJFkI7K+LjxsoiPA7sMUAePqQ/ZfDxzz
+         3YmvK9ZxFpTGobPM3F4/oeL1jexB13SZ0ePeadlLnSJl+uNuYBtn1rsV7XFbDJOySr9q
+         QRfVDStXWIos0D/n2Iqt8o4bXwwuoLRl7NJ/qxkHbhrpmq2ikz2kMZ1tRtGtmtr4RZfp
+         PPog==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:message-id:from:mime-version
+         :content-transfer-encoding:content-description:subject:to:date
+         :reply-to;
+        bh=5NTJSky9UX3JbuB9riY3wCYfXDpCwy2c7hzO0kF4AHA=;
+        b=XO6GWONwR1eGBkiAhlwHFk3kt/sYwW+y6mC1OUcRUWipx4lfe35KoI3WEcr9k1fOgz
+         ZmagSRev5w5bIvWTpp+/4b1t69vogti+kXHZ6X2g4pjgVrpc0E/G7XzU1AFQoW16zuSj
+         sBoqr6vg6vXhmbdR4qks4BCIJsiCs5Yv0MIUENbmwTc7hoUM3sJPFcO/bTWar4RbYmSF
+         p8kXPO4IeRSQ0z+N5jtFlc2ZsTAASOQAaIR0cIqnHcRY3QxCd3PU9BO1jJb7uWRMjD10
+         tQ62Zc7Uyk311P3pWBKB7dCiTmeHDKFYVrLiEwVWAffIW/ooPvtSS41SW7gTkIzCkeY7
+         VDKA==
+X-Gm-Message-State: AOAM530gVaasXKjB0ShiuXUr6x6u6BpVA6dEk4OYgt3VPHNCOoQzku3G
+        tGSqlGd2HUiH4fM3UClc3vU=
+X-Google-Smtp-Source: ABdhPJztC14TE6ocZd0bfaBPls3362/Qdhcofy2UClhXk3EmFtJjnen5+NtMdJCVxKbnAW1TovXtEQ==
+X-Received: by 2002:a1c:e90a:: with SMTP id q10mr11196145wmc.39.1628700297737;
+        Wed, 11 Aug 2021 09:44:57 -0700 (PDT)
+Received: from [192.168.1.70] ([102.64.209.185])
+        by smtp.gmail.com with ESMTPSA id s1sm2699637wmh.46.2021.08.11.09.44.52
+        (version=TLS1 cipher=AES128-SHA bits=128/128);
+        Wed, 11 Aug 2021 09:44:57 -0700 (PDT)
+Message-ID: <6113fe89.1c69fb81.ff4c7.b81f@mx.google.com>
+From:   Vanina curth <curtisvani0040@gmail.com>
+X-Google-Original-From: Vanina  curth
+Content-Type: text/plain; charset="iso-8859-1"
+MIME-Version: 1.0
+Content-Transfer-Encoding: quoted-printable
+Content-Description: Mail message body
+Subject: Dear
+To:     Recipients <Vanina@vger.kernel.org>
+Date:   Wed, 11 Aug 2021 16:44:39 +0000
+Reply-To: curtisvani9008@gmail.com
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-When a user changes cpuset.cpus, each task in a v2 cpuset will be moved
-to one of the new cpus if it is not there already. For memory, however,
-they won't be migrated to the new nodes when cpuset.mems changes. This is
-an inconsistency in behavior.
-
-In cpuset v1, there is a memory_migrate control file to enable such
-behavior by setting the CS_MEMORY_MIGRATE flag. Make it the default
-for cpuset v2 so that we have a consistent set of behavior for both
-cpus and memory.
-
-There is certainly a cost to make memory migration the default, but it
-is a one time cost that shouldn't really matter as long as cpuset.mems
-isn't changed frequenty.  Update the cgroup-v2.rst file to document the
-new behavior and recommend against changing cpuset.mems frequently.
-
-Since there won't be any concurrent access to the newly allocated cpuset
-structure in cpuset_css_alloc(), we can use the cheaper non-atomic
-__set_bit() instead of the more expensive atomic set_bit().
-
-Signed-off-by: Waiman Long <longman@redhat.com>
----
- Documentation/admin-guide/cgroup-v2.rst | 6 ++++++
- kernel/cgroup/cpuset.c                  | 6 +++++-
- 2 files changed, 11 insertions(+), 1 deletion(-)
-
-diff --git a/Documentation/admin-guide/cgroup-v2.rst b/Documentation/admin-guide/cgroup-v2.rst
-index 5c7377b5bd3e..47c832ad1322 100644
---- a/Documentation/admin-guide/cgroup-v2.rst
-+++ b/Documentation/admin-guide/cgroup-v2.rst
-@@ -2056,6 +2056,12 @@ Cpuset Interface Files
- 	The value of "cpuset.mems" stays constant until the next update
- 	and won't be affected by any memory nodes hotplug events.
- 
-+	Setting a non-empty value to "cpuset.mems" causes memory of
-+	tasks within the cgroup to be migrated to the designated nodes if
-+	they are currently using memory outside of the designated nodes.
-+	There is a cost for this migration.  So "cpuset.mems" shouldn't
-+	be changed frequently.
-+
-   cpuset.mems.effective
- 	A read-only multiple values file which exists on all
- 	cpuset-enabled cgroups.
-diff --git a/kernel/cgroup/cpuset.c b/kernel/cgroup/cpuset.c
-index adb5190c4429..d151e1de93d4 100644
---- a/kernel/cgroup/cpuset.c
-+++ b/kernel/cgroup/cpuset.c
-@@ -2737,12 +2737,16 @@ cpuset_css_alloc(struct cgroup_subsys_state *parent_css)
- 		return ERR_PTR(-ENOMEM);
- 	}
- 
--	set_bit(CS_SCHED_LOAD_BALANCE, &cs->flags);
-+	__set_bit(CS_SCHED_LOAD_BALANCE, &cs->flags);
- 	nodes_clear(cs->mems_allowed);
- 	nodes_clear(cs->effective_mems);
- 	fmeter_init(&cs->fmeter);
- 	cs->relax_domain_level = -1;
- 
-+	/* Set CS_MEMORY_MIGRATE for default hierarchy */
-+	if (cgroup_subsys_on_dfl(cpuset_cgrp_subsys))
-+		__set_bit(CS_MEMORY_MIGRATE, &cs->flags);
-+
- 	return &cs->css;
- }
- 
--- 
-2.18.1
-
+How are you? I'm Vanina. I'm interested to know you and I would like to kno=
+w more about you and establish relationship with you. i will wait for your =
+response. thank you.
