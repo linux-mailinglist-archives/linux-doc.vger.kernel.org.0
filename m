@@ -2,80 +2,253 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 407813E93BB
-	for <lists+linux-doc@lfdr.de>; Wed, 11 Aug 2021 16:32:06 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 6E0A93E9482
+	for <lists+linux-doc@lfdr.de>; Wed, 11 Aug 2021 17:26:18 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S232298AbhHKOc2 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 11 Aug 2021 10:32:28 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:59050 "EHLO
-        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S232448AbhHKOcY (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Wed, 11 Aug 2021 10:32:24 -0400
-Received: from mail-pl1-x632.google.com (mail-pl1-x632.google.com [IPv6:2607:f8b0:4864:20::632])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 0EF7BC0613D5
-        for <linux-doc@vger.kernel.org>; Wed, 11 Aug 2021 07:32:01 -0700 (PDT)
-Received: by mail-pl1-x632.google.com with SMTP id a5so2958600plh.5
-        for <linux-doc@vger.kernel.org>; Wed, 11 Aug 2021 07:32:01 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=mime-version:reply-to:from:date:message-id:subject:to;
-        bh=52VhOdpUPCkIGipSAKU8GX1LzW28RNip+D/ZtWMA0N0=;
-        b=stzXDcibo2Y29Hq9o8TbNVzoMlaF2zT/P1MMCyNw9dihEUWMRH2iGdTP4zagoeNRu6
-         PKsleGZaNqMKQi+3jlJYJoqH2NMOXv9oQ6msaDm5+kFhaP6DjOuy5hE7fBYCAH7FuRxk
-         MxBw5cAiEasd5WNIfuUjDPjkhkuHQ2okxsBEtGe3RtlDx3QRd4KDowCYJChCT3x7YtWT
-         b5TFSFM3K+M/ZFG9sZtRILEAtyvIoFIKhsZFZF4ox4nEsx68OjOgpwQCu4yYuejIG7sW
-         zBJZM6cgsmb11haXslteG2P9B3VW4xvctJdFlxI46hKzK2hvrcEd+J+Ydw6dWmLdAY9w
-         pueQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:reply-to:from:date:message-id
-         :subject:to;
-        bh=52VhOdpUPCkIGipSAKU8GX1LzW28RNip+D/ZtWMA0N0=;
-        b=BvwDY/rDPrBXXdqUSnPQU6+BJEQpYO1hCPqrkOhgyO144yMxdX7Mik2rmfxkCxJRM8
-         69IfBx00xoeCsLd8k3a9MC6scOV9LydUesagbwRQ48S0zF7fzk9S+Hu73wnamIqpq+iL
-         1+xTgHnJOAAfQiaa6IdBkFrAt5svd6se0TPxbUPue/wxTCbEhoqSouvi7SmGiVG+GcY6
-         XwulMgW2iw6nNexDqSYj7/7Pix3IuPwd7MbCUfsmPxEI7n59/L1/gB3wjqz5mdR7kTJz
-         roE+lN68HFIRd1s8MJuABw0HHKqgZ7LH0jWxX9uknugSbV0K8yxvy+rHus4RuFLY+C4l
-         1qug==
-X-Gm-Message-State: AOAM532yjFxLMhdzFDkfiwosx+D/N5z7rqX0r/QveD/HL14mZrtUJvho
-        GvwbtK4aPsAXi4CtnnDXpb3EKBKp4vqy7tK2yTc=
-X-Google-Smtp-Source: ABdhPJwHtcA+cE6arAN0HtGAHSgZMgn+SGuCKH8wyRQ802ii0IfNQuWUKzvUWoSr3dao0YPzptLRjBH30olx3mOEkwg=
-X-Received: by 2002:a63:fe52:: with SMTP id x18mr227980pgj.84.1628692320532;
- Wed, 11 Aug 2021 07:32:00 -0700 (PDT)
+        id S233121AbhHKP0k convert rfc822-to-8bit (ORCPT
+        <rfc822;lists+linux-doc@lfdr.de>); Wed, 11 Aug 2021 11:26:40 -0400
+Received: from mga14.intel.com ([192.55.52.115]:51055 "EHLO mga14.intel.com"
+        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
+        id S232791AbhHKP0f (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Wed, 11 Aug 2021 11:26:35 -0400
+X-IronPort-AV: E=McAfee;i="6200,9189,10072"; a="214874237"
+X-IronPort-AV: E=Sophos;i="5.84,313,1620716400"; 
+   d="scan'208";a="214874237"
+Received: from fmsmga003.fm.intel.com ([10.253.24.29])
+  by fmsmga103.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 11 Aug 2021 08:26:11 -0700
+X-IronPort-AV: E=Sophos;i="5.84,313,1620716400"; 
+   d="scan'208";a="516837152"
+Received: from fbrausse-mobl.ger.corp.intel.com (HELO localhost) ([10.251.209.112])
+  by fmsmga003-auth.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 11 Aug 2021 08:26:09 -0700
+From:   Jani Nikula <jani.nikula@linux.intel.com>
+To:     Matthew Wilcox <willy@infradead.org>, linux-doc@vger.kernel.org
+Subject: Re: Hawkmoth & kernel-doc
+In-Reply-To: <YPnD1vkOTDhktnei@casper.infradead.org>
+Organization: Intel Finland Oy - BIC 0357606-4 - Westendinkatu 7, 02160 Espoo
+References: <YPnD1vkOTDhktnei@casper.infradead.org>
+Date:   Wed, 11 Aug 2021 18:26:06 +0300
+Message-ID: <87h7fwm29d.fsf@intel.com>
 MIME-Version: 1.0
-Received: by 2002:a05:7300:4341:b029:32:728d:a7bf with HTTP; Wed, 11 Aug 2021
- 07:31:57 -0700 (PDT)
-Reply-To: joel_baba@hotmail.com
-From:   Joel babam <joehbaba@gmail.com>
-Date:   Wed, 11 Aug 2021 14:31:57 +0000
-Message-ID: <CAFKzY_qZnHscxYKj9J2oQvEVdvG7ezk_qm4Wpnengy1GYksWCw@mail.gmail.com>
-Subject: God bless you.
-To:     undisclosed-recipients:;
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: 8BIT
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
- I want to use this opportunity to solicit your co-operation in
-proposing an urgent transaction with mutual benefit that required
-maximum confidence that involve abandoned fund in bank here in
-Burkina-Faso, in an account that belongs to one of our foreign client
-who died along with his entire family.
+On Thu, 22 Jul 2021, Matthew Wilcox <willy@infradead.org> wrote:
+> I really dislike the javadoc style, so at Jani's urging I gave Hawkmoth
+> a try.  It's a little fiddly and a little buggy, but I think it
+> encourages better-written documentation.
 
-With the above explanation, i want to move this money from Burkina
-Faso to your country in your name, but note that this deal is between
-both of us and should not be related to any other person until the
-deal is over for security reasons.
+Hi, sorry about the long delay, been off the grid a bit.
 
-Please know it that you should not entertain any atom of fear, as all
-required arrangements have been made for the transfer and i will not
-fail to bring to your notice that this transaction is hitch free, so i
-want to know your stand in this proposal so that i can send the
-details of the business to you immediately.
+I doubt I would have urged you to try Hawkmoth for kernel documentation
+specifically, but rather more, uh, regular C projects, but I'll take
+your word for it if you say so. ;D
 
-If you are interested, reply back to me as soon as possible and i will
-be awaiting for your immediate response as you receive this email.
+Bug reports are always welcome at
+https://github.com/jnikula/hawkmoth/issues
 
-Yours Sincerely,
+> I chose mm_inline.h as my victim.  It isn't currently included in the
+> documentation, and it only has three kernel-doc comments in it to
+> convert.
+>
+> I'm approximating what firefox displays here ...
+>
+> int page_is_file_lru(struct page *page)
+>
+>   Should the page be on a file LRU or anon LRU?
+>
+>     Parameters:  * page – The page to test.
+>
+>     We would like to get this info without a page flag, but the state
+>     needs to survive until the page is last deleted from the LRU, which
+>     could be as far down as __page_cache_release.
+>
+>     Returns:
+>
+>              An integer (not a boolean!) used to sort a page onto the right
+>              LRU list and to account folios correctly.
+>
+>              * 1 if @page is a regular filesystem backed page cache page or a lazily freed anonymous page (e.g. via MADV_FREE).
+>              * 0 if @page is a normal anonymous page, a tmpfs page or otherwise ram or swap backed page.
+>
+> That's not _bad_.
 
-Joel Baba.
+The main difference between kernel-doc and Hawkmoth is that the latter
+does not try to parse the documentation comment at all, apart from
+removing the comment markers. It's expected to be pure rst, and it's fed
+to Sphinx as-is. What I'm saying is that what the output ends up being
+is not in the control of Hawkmoth, it's between the rst and Sphinx.
+
+> 1. 'Parameters' is indented further than kernel-doc does (2 levels of
+>    indent, rather than 0)
+
+With Hawkmoth, it's whatever Sphinx and doctools generate from pure rst
+field lists.
+
+> 2. Output:
+> <dd><p>Should the page be on a file LRU or anon LRU?</p>
+> <dl class="field-list simple">
+> <dt class="field-odd">Parameters</dt>
+> <dd class="field-odd"><ul class="simple">
+> <li><p><strong>page</strong> – The page to test.</p></li>
+> </ul>
+> </dd>
+> </dl>
+> having gone to the trouble of using a <dl>, I feel that each parameter
+> should be a <dt> and its definition a <dd>.  That seems to be what
+> kernel-doc is doing.
+
+Ditto. kernel-doc does not use field lists.
+
+> 3. kernel-doc includes the type of the parameter in the definition,
+>    while hawkmoth drops it.  I'm ambivalent about which is better.
+
+kernel-doc generates that information, while Hawkmoth sticks to pure
+rst.
+
+> 4. It seems that the indentation of the 'Returns:' paragraph is a bit
+>    too deep, but it did get the list correct.
+
+Hmm, I think it should be similar to the parameters. See e.g.
+https://hawkmoth.readthedocs.io/en/latest/examples.html#function
+
+> 5. The second and third functions documented by hawkmoth lose their
+>    parameter in the initial heading:
+>
+>
+> int __clear_page_lru_flags()
+>
+>     Clear page lru flags before releasing a page.
+>
+>     Parameters  * page – The page that was on lru and now has a zero reference
+>
+> That first line really should have a 'struct page *page' in it.
+
+That's indeed a bit odd.
+
+> 6. There's also a warning from the build:
+>
+> /home/willy/kernel/linux/Documentation/core-api/mm-api.rst:101: WARNING: /home/willy/kernel/linux/include/linux/mm_inline.h:5: 'linux/huge_mm.h' file not found
+>
+> Looks like I can probably pass arbitrary flags to clang to get it to
+> find that file, but I'm not sure whether I should.
+>
+> Here's the diff against current Linus tree that I'm working with:
+>
+> diff --git a/Documentation/conf.py b/Documentation/conf.py
+> index 7d92ec3e5b6e..13fcce3ec18d 100644
+> --- a/Documentation/conf.py
+> +++ b/Documentation/conf.py
+> @@ -39,7 +39,7 @@ needs_sphinx = '1.7'
+>  extensions = ['kerneldoc', 'rstFlatTable', 'kernel_include',
+>                'kfigure', 'sphinx.ext.ifconfig', 'automarkup',
+>                'maintainers_include', 'sphinx.ext.autosectionlabel',
+> -              'kernel_abi', 'kernel_feat']
+> +              'kernel_abi', 'kernel_feat', 'hawkmoth']
+>  
+>  if major >= 3:
+>      if (major > 3) or (minor > 0 or patch >= 2):
+> @@ -104,6 +104,7 @@ if major >= 3:
+>  else:
+>      extensions.append('cdomain')
+>  
+> +cautodoc_root = os.path.abspath('..')
+>  # Ensure that autosectionlabel will produce unique names
+>  autosectionlabel_prefix_document = True
+>  autosectionlabel_maxdepth = 2
+> diff --git a/Documentation/core-api/mm-api.rst b/Documentation/core-api/mm-api.rst
+> index adabb5c5798a..b724e29772b0 100644
+> --- a/Documentation/core-api/mm-api.rst
+> +++ b/Documentation/core-api/mm-api.rst
+> @@ -98,4 +98,5 @@ More Memory Management Functions
+>     :internal:
+>  .. kernel-doc:: include/linux/mm.h
+>     :internal:
+> +.. c:autodoc:: include/linux/mm_inline.h
+>  .. kernel-doc:: include/linux/mmzone.h
+> diff --git a/include/linux/mm_inline.h b/include/linux/mm_inline.h
+> index 355ea1ee32bd..7db1193a0d94 100644
+> --- a/include/linux/mm_inline.h
+> +++ b/include/linux/mm_inline.h
+> @@ -6,18 +6,21 @@
+>  #include <linux/swap.h>
+>  
+>  /**
+> - * page_is_file_lru - should the page be on a file LRU or anon LRU?
+> - * @page: the page to test
+> + * Should the page be on a file LRU or anon LRU?
+>   *
+> - * Returns 1 if @page is a regular filesystem backed page cache page or a lazily
+> - * freed anonymous page (e.g. via MADV_FREE).  Returns 0 if @page is a normal
+> - * anonymous page, a tmpfs page or otherwise ram or swap backed page.  Used by
+> - * functions that manipulate the LRU lists, to sort a page onto the right LRU
+> - * list.
+> + * :param page: The page to test.
+>   *
+>   * We would like to get this info without a page flag, but the state
+>   * needs to survive until the page is last deleted from the LRU, which
+>   * could be as far down as __page_cache_release.
+> + *
+> + * :return: An integer (not a boolean!) used to sort a page onto the right
+> + *   LRU list and to account folios correctly.
+> + *
+> + *   - 1 if @page is a regular filesystem backed page cache page or a lazily
+> + *     freed anonymous page (e.g. via MADV_FREE).
+> + *   - 0 if @page is a normal anonymous page, a tmpfs page or otherwise ram or
+> + *     swap backed page.
+
+An alternative to using a bulleted list for different return values is
+to use a separate :return: field list item for each.
+
+For example,
+
+ * :return: 1 if @page is a regular filesystem backed page cache page or a lazily
+ *   freed anonymous page (e.g. via MADV_FREE).
+ * :return: 0 if @page is a normal anonymous page, a tmpfs page or otherwise ram or
+ *   swap backed page.
+
+Obviously in this case you'd need to figure out where to put the first,
+common sentence, so might not be so nice here.
+
+BR,
+Jani.
+
+
+>   */
+>  static inline int page_is_file_lru(struct page *page)
+>  {
+> @@ -39,8 +42,9 @@ static __always_inline void update_lru_size(struct lruvec *lruvec,
+>  }
+>  
+>  /**
+> - * __clear_page_lru_flags - clear page lru flags before releasing a page
+> - * @page: the page that was on lru and now has a zero reference
+> + * Clear page lru flags before releasing a page.
+> + *
+> + * :param page: The page that was on lru and now has a zero reference
+>   */
+>  static __always_inline void __clear_page_lru_flags(struct page *page)
+>  {
+> @@ -57,11 +61,12 @@ static __always_inline void __clear_page_lru_flags(struct page *page)
+>  }
+>  
+>  /**
+> - * page_lru - which LRU list should a page be on?
+> - * @page: the page to test
+> + * Which LRU list should a page be on?
+> + *
+> + * :param page: The page to test
+>   *
+> - * Returns the LRU list a page should be on, as an index
+> - * into the array of LRU lists.
+> + * :return: The LRU list a page should be on, as an index into the array
+> + *          of LRU lists.
+>   */
+>  static __always_inline enum lru_list page_lru(struct page *page)
+>  {
+>
+
+-- 
+Jani Nikula, Intel Open Source Graphics Center
