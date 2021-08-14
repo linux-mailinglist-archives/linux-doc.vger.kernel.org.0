@@ -2,850 +2,249 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id AE8B23EC53C
-	for <lists+linux-doc@lfdr.de>; Sat, 14 Aug 2021 22:58:58 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 8C8643EC5F4
+	for <lists+linux-doc@lfdr.de>; Sun, 15 Aug 2021 01:27:45 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S234094AbhHNU7Z (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Sat, 14 Aug 2021 16:59:25 -0400
-Received: from us-smtp-delivery-124.mimecast.com ([216.205.24.124]:59917 "EHLO
-        us-smtp-delivery-124.mimecast.com" rhost-flags-OK-OK-OK-OK)
-        by vger.kernel.org with ESMTP id S233665AbhHNU7C (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Sat, 14 Aug 2021 16:59:02 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-        s=mimecast20190719; t=1628974712;
-        h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-         to:to:cc:cc:in-reply-to:in-reply-to:references:references;
-        bh=D3k05NA2y+DPUHEmXlCb8Qv3jFKXjxbnoR42JrtW8yg=;
-        b=GJiIbzL0sp9KX3CAFobqHjwi33TellwAL/JDp7S8JcUKF/zNZlB1mdaRSypb6mX6Fkw/BK
-        NNUHuQOoUBRisENkCkq1BPqoYvqjZYqlZ6qtbd9BUYZNAk5rnLMeJ3lGUSZgxqWiP0TKsa
-        3CXlnH6woYWeRvzlIkEeso2duQEeFQg=
-Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
- [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-549-CaQh-Wb_NYCJ765zLocC_g-1; Sat, 14 Aug 2021 16:58:28 -0400
-X-MC-Unique: CaQh-Wb_NYCJ765zLocC_g-1
-Received: from smtp.corp.redhat.com (int-mx01.intmail.prod.int.phx2.redhat.com [10.5.11.11])
-        (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
-        (No client certificate requested)
-        by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 6064C87146F;
-        Sat, 14 Aug 2021 20:58:26 +0000 (UTC)
-Received: from llong.com (unknown [10.22.8.26])
-        by smtp.corp.redhat.com (Postfix) with ESMTP id 4321A69CB8;
-        Sat, 14 Aug 2021 20:58:24 +0000 (UTC)
-From:   Waiman Long <longman@redhat.com>
-To:     Tejun Heo <tj@kernel.org>, Zefan Li <lizefan.x@bytedance.com>,
-        Johannes Weiner <hannes@cmpxchg.org>,
-        Jonathan Corbet <corbet@lwn.net>, Shuah Khan <shuah@kernel.org>
-Cc:     cgroups@vger.kernel.org, linux-kernel@vger.kernel.org,
-        linux-doc@vger.kernel.org, linux-kselftest@vger.kernel.org,
-        Andrew Morton <akpm@linux-foundation.org>,
-        Roman Gushchin <guro@fb.com>, Phil Auld <pauld@redhat.com>,
-        Peter Zijlstra <peterz@infradead.org>,
-        Juri Lelli <juri.lelli@redhat.com>,
-        Frederic Weisbecker <frederic@kernel.org>,
-        Marcelo Tosatti <mtosatti@redhat.com>,
-        =?UTF-8?q?Michal=20Koutn=C3=BD?= <mkoutny@suse.com>,
-        Waiman Long <longman@redhat.com>
-Subject: [PATCH v6 6/6] kselftest/cgroup: Add cpuset v2 partition root state test
-Date:   Sat, 14 Aug 2021 16:57:43 -0400
-Message-Id: <20210814205743.3039-7-longman@redhat.com>
-In-Reply-To: <20210814205743.3039-1-longman@redhat.com>
-References: <20210814205743.3039-1-longman@redhat.com>
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.11
+        id S234313AbhHNX2I (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Sat, 14 Aug 2021 19:28:08 -0400
+Received: from mail-bn7nam10on2081.outbound.protection.outlook.com ([40.107.92.81]:27617
+        "EHLO NAM10-BN7-obe.outbound.protection.outlook.com"
+        rhost-flags-OK-OK-OK-FAIL) by vger.kernel.org with ESMTP
+        id S234160AbhHNX2F (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Sat, 14 Aug 2021 19:28:05 -0400
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=XEFQH+FfI50uKjrRecpfeNXwsxyg04oxObTpTOsBu015mgJ4jXHcEb5Rs++QaeBjOdliLat6MBY1LvKhi16jJdOFmEgRfvqGt+MMcP6bYrqEU8EPVMdb+OucxXDmy0xClKnFK5A5eVDF1HOVWuEvbjN3V5vdkveCR0FANuMoj3foIWbX0CK4xFy0WrP1RJ8HQ03EFiibTZHAWsWby4AXLcLv6Q2JU/NATKzWbOs/nsmWx9mf5HQqv9OtPsllMOONmh9xq0ZTnOJA9LSkGxWeFEZ1mEpZHjKX0sNOYLr8Z/zk9kchHJsd7eW1lYlEK77As/sscndNnAXM3OOJfGYMHQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=TBoorolAEW5JBvLK54aD8iujCPTduM22kbVhSEM8JFU=;
+ b=FwwFQGAu1QJK3JrDW0kYAI2gROx8f2QvfoGwTu5nJBiFiZLZ3vgYZyXq0xUmUJuSDHqoHUZnCNqz3KBCaW7EEaTqSXigoCyzGtcw8wGW3Nyvcs5NB/p9e4kTArJsdxMA2PI2SPhaTjfAjW3kqWZynsWlzIh4qGU3MGSnKnHuVJAjyykOv4EBciGNc+ZRE1vWSM0eeo/9jX/BQlmvX3usbgwZjMJy0iw+pzBPsEAzha+dmBm7LJqC7dp42icJp2Tv2WeS9AA/eKptBCTBbvQExyEinj9l7OtUNPcT/JZVtoIhytDkXGBILCk6XrLmHkBD+bqQXmKjZEOHtQJF8vx1EA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 216.228.112.34) smtp.rcpttodomain=redhat.com smtp.mailfrom=nvidia.com;
+ dmarc=pass (p=quarantine sp=none pct=100) action=none header.from=nvidia.com;
+ dkim=none (message not signed); arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
+ s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=TBoorolAEW5JBvLK54aD8iujCPTduM22kbVhSEM8JFU=;
+ b=SGJv7i0wIsQilbdq70yHpnlqEOuinA1uB4HgFVW7W45ed2yy5l1h1Y/YSdjMOfIgYCBsTadi5GrqvO7Z3qYqanMknlXOxGCNiztoKFmFVNa/cxcGqon46adWIi5COzgJ+IXjwGOONch0GtouHubbUOgxvXB1HEKLEDha7EvyrcKllsNWM3OuxQTDG8DB2JZPQQN4v2rXKN1PD/tMB8V6f0fScjczSnJxyImATbZJNEdgTX4XcPWKiuWb90BgciZaPdygrJM40cT4WBqayQTePHZ9fU8H5bSasFUtSKh3hyQw9YD7nnd5rX9kFL9taXoT26iOndnknRMAQwo5HoQ2IQ==
+Received: from BN6PR20CA0060.namprd20.prod.outlook.com (2603:10b6:404:151::22)
+ by MWHPR12MB1245.namprd12.prod.outlook.com (2603:10b6:300:13::8) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4415.22; Sat, 14 Aug
+ 2021 23:27:33 +0000
+Received: from BN8NAM11FT009.eop-nam11.prod.protection.outlook.com
+ (2603:10b6:404:151:cafe::91) by BN6PR20CA0060.outlook.office365.com
+ (2603:10b6:404:151::22) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4415.13 via Frontend
+ Transport; Sat, 14 Aug 2021 23:27:32 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 216.228.112.34)
+ smtp.mailfrom=nvidia.com; redhat.com; dkim=none (message not signed)
+ header.d=none;redhat.com; dmarc=pass action=none header.from=nvidia.com;
+Received-SPF: Pass (protection.outlook.com: domain of nvidia.com designates
+ 216.228.112.34 as permitted sender) receiver=protection.outlook.com;
+ client-ip=216.228.112.34; helo=mail.nvidia.com;
+Received: from mail.nvidia.com (216.228.112.34) by
+ BN8NAM11FT009.mail.protection.outlook.com (10.13.176.65) with Microsoft SMTP
+ Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384) id
+ 15.20.4415.14 via Frontend Transport; Sat, 14 Aug 2021 23:27:32 +0000
+Received: from [172.27.0.128] (172.20.187.5) by HQMAIL107.nvidia.com
+ (172.20.187.13) with Microsoft SMTP Server (TLS) id 15.0.1497.2; Sat, 14 Aug
+ 2021 23:27:27 +0000
+Subject: Re: [PATCH 09/12] PCI: Add a PCI_ID_F_VFIO_DRIVER_OVERRIDE flag to
+ struct pci_device_id
+To:     Bjorn Helgaas <helgaas@kernel.org>
+CC:     Jason Gunthorpe <jgg@nvidia.com>,
+        Yishai Hadas <yishaih@nvidia.com>, <bhelgaas@google.com>,
+        <corbet@lwn.net>, <alex.williamson@redhat.com>,
+        <diana.craciun@oss.nxp.com>, <kwankhede@nvidia.com>,
+        <eric.auger@redhat.com>, <masahiroy@kernel.org>,
+        <michal.lkml@markovi.net>, <linux-pci@vger.kernel.org>,
+        <linux-doc@vger.kernel.org>, <kvm@vger.kernel.org>,
+        <linux-s390@vger.kernel.org>, <linux-kbuild@vger.kernel.org>,
+        <maorg@nvidia.com>, <leonro@nvidia.com>
+References: <20210813174459.GA2594783@bjorn-Precision-5520>
+From:   Max Gurtovoy <mgurtovoy@nvidia.com>
+Message-ID: <2ee30d21-5305-5e58-6fa2-da74b2c8ff5a@nvidia.com>
+Date:   Sun, 15 Aug 2021 02:27:13 +0300
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:78.0) Gecko/20100101
+ Thunderbird/78.12.0
+MIME-Version: 1.0
+In-Reply-To: <20210813174459.GA2594783@bjorn-Precision-5520>
+Content-Type: text/plain; charset="utf-8"; format=flowed
+Content-Transfer-Encoding: 8bit
+Content-Language: en-US
+X-Originating-IP: [172.20.187.5]
+X-ClientProxiedBy: HQMAIL101.nvidia.com (172.20.187.10) To
+ HQMAIL107.nvidia.com (172.20.187.13)
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-Office365-Filtering-Correlation-Id: e8ec640c-3734-4e43-0c80-08d95f7b1724
+X-MS-TrafficTypeDiagnostic: MWHPR12MB1245:
+X-Microsoft-Antispam-PRVS: <MWHPR12MB124583CFF386448A706FA59EDEFB9@MWHPR12MB1245.namprd12.prod.outlook.com>
+X-MS-Oob-TLC-OOBClassifiers: OLM:9508;
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: v8xVIQaYLO6JNGmU2CGbuUybI5uPVS6FHfIJjlxlkwLRl62P98hilcF80Wvj/u+cbbMpJzxs2zJwhy5LCgbrN7Fpp3/Uoi48jIiMLlClgs1gd1KwjOoz/vNxFGvcxYbY1HOhy93zb5T5++SYLY/2eBsWiauiRNcOrtaM6BYw8ILeGtu8tfAdn9vdvuXrBMIFIy7WgKXoSxBFgBo4LItUpSp6dt/SJbpUwrXdKiIBJXewRqQsKSJCYxBt/omjffsNcyorS6dnE2wcH+3eqrm2C5iuabGu5XDpy1Kif/Qqs0rcvaGH/XMWKeSH4FJUwmjF8kRFkrwWWC7g6O/HlEDdJPWc2Hkh57SeMvswHH8hPFt8iCqFgeLoGpibjlAGsPrXHiwpJPvOh3Et5pioJV8q9QefS2G+vuKa7boI4Kp2ctqNXohE08iWHpoXb2UHOZUaK29T2GTtTmTI7TKL9aQZjCRf2EuMAVwCIsBadO/zOmm6LOkzor5nLnQmktpmTDe3JddJMLy76a6KhOgPGnRAq3iyToaMuiN6i/YO+wl3A93fXcvXfwg2wkaU0Mp5J9ZndCfsju/VqlnxN/7LUEu/PWo193NOihT2MLFYr9PXSa0pea1FwE/rALfRxZmWA7mDLDQ/g6JZO5Fd8Qb1MY5AdYzsxgR7a2pLG73tflwMR2e3bCFEypOkEMPrZhoRfbLbqXBlG/G5JXvtkcR+DIEqhEvEhH3xe993n6Q+MF6idjM=
+X-Forefront-Antispam-Report: CIP:216.228.112.34;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:mail.nvidia.com;PTR:schybrid03.nvidia.com;CAT:NONE;SFS:(4636009)(39860400002)(376002)(136003)(396003)(346002)(46966006)(36840700001)(2616005)(31696002)(86362001)(186003)(16526019)(53546011)(26005)(426003)(5660300002)(7416002)(6666004)(336012)(70206006)(70586007)(31686004)(36756003)(356005)(316002)(8936002)(83380400001)(47076005)(8676002)(36860700001)(7636003)(54906003)(82310400003)(4326008)(107886003)(16576012)(82740400003)(478600001)(6916009)(2906002)(43740500002);DIR:OUT;SFP:1101;
+X-OriginatorOrg: Nvidia.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 14 Aug 2021 23:27:32.1831
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: e8ec640c-3734-4e43-0c80-08d95f7b1724
+X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=43083d15-7273-40c1-b7db-39efd9ccc17a;Ip=[216.228.112.34];Helo=[mail.nvidia.com]
+X-MS-Exchange-CrossTenant-AuthSource: BN8NAM11FT009.eop-nam11.prod.protection.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: MWHPR12MB1245
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Add a test script test_cpuset_prs.sh with a helper program wait_inotify
-for exercising the cpuset v2 partition root state code.
 
-Signed-off-by: Waiman Long <longman@redhat.com>
----
- tools/testing/selftests/cgroup/Makefile       |   5 +-
- .../selftests/cgroup/test_cpuset_prs.sh       | 663 ++++++++++++++++++
- tools/testing/selftests/cgroup/wait_inotify.c |  86 +++
- 3 files changed, 752 insertions(+), 2 deletions(-)
- create mode 100755 tools/testing/selftests/cgroup/test_cpuset_prs.sh
- create mode 100644 tools/testing/selftests/cgroup/wait_inotify.c
+On 8/13/2021 8:44 PM, Bjorn Helgaas wrote:
+> On Fri, Aug 13, 2021 at 02:21:41AM +0300, Max Gurtovoy wrote:
+>> On 8/12/2021 11:26 PM, Bjorn Helgaas wrote:
+>>> On Thu, Aug 12, 2021 at 04:51:26PM -0300, Jason Gunthorpe wrote:
+>>>> On Thu, Aug 12, 2021 at 10:57:07AM -0500, Bjorn Helgaas wrote:
+>>>>> On Thu, Aug 12, 2021 at 10:27:28AM -0300, Jason Gunthorpe wrote:
+>>>>>> On Wed, Aug 11, 2021 at 02:07:37PM -0500, Bjorn Helgaas wrote:
+>>>>>>> On Thu, Aug 05, 2021 at 09:23:57PM -0300, Jason Gunthorpe wrote:
+>>>>>>> Do the other bus types have a flag analogous to
+>>>>>>> PCI_ID_F_VFIO_DRIVER_OVERRIDE?  If we're doing something similar to
+>>>>>>> other bus types, it'd be nice if the approach were similar.
+>>>>>> They could, this series doesn't attempt it. I expect the approach to
+>>>>>> be similar as driver_override was copied from PCI to other
+>>>>>> busses. When this is completed I hope to take a look at it.
+>>>>> I think this would make more sense as two patches:
+>>>>>
+>>>>>     - Add a "PCI_ID_DRIVER_OVERRIDE" flag.  This is not VFIO-specific,
+>>>>>       since nothing in PCI depends on the VFIO-ness of drivers that use
+>>>>>       the flag.  The only point here is that driver id_table entries
+>>>>>       with this flag only match when driver_override matches the driver.
+>>>> This would require using two flags, one to indicate the above to the
+>>>> PCI code and another to indicate the vfio_pci string to
+>>>> file2alias. This doesn't seem justified at this point, IMHO.
+>>> I don't think it requires two flags.  do_pci_entry() has:
+>>>
+>>>     if (flags & PCI_ID_F_VFIO_DRIVER_OVERRIDE)
+>>>       strcpy(alias, "vfio_pci:");
+>>>
+>>> I'm just proposing a rename:
+>>>
+>>> s/PCI_ID_F_VFIO_DRIVER_OVERRIDE/PCI_ID_DRIVER_OVERRIDE/
+>>>
+>>>>>     - Update file2alias.c to export the flags and the "vfio_pci:" alias.
+>>>>>       This seems to be the only place where VFIO comes into play, and
+>>>>>       putting it in a separate patch will make it much smaller and it
+>>>>>       will be clear how it could be extended for other buses.
+>>>> Well, I don't want to see a flag called PCI_ID_DRIVER_OVERRIDE mapped
+>>>> to the string "vfio_pci", that is just really confusing.
+>>> Hahaha, I see, that's fair :)  It confused me for a long time why you
+>>> wanted "VFIO" in the flag name because from the kernel's point of
+>>> view, the flag is not related to any VFIO-ness.  It's only related to
+>>> a special variety of driver_override, and VFIO happens to be one user
+>>> of it.
+>> In my original patch I used
+>>
+>> #define PCI_ID_DRIVER_OVERRIDE PCI_ID_F_VFIO_DRIVER_OVERRIDE
+>>
+>> and in the pci core code I used PCI_ID_DRIVER_OVERRIDE in the "if" clause.
+>>
+>> So we can maybe do that and leave the option to future update of the define
+>> without changing the core code.
+>>
+>> In the future we can have something like:
+>>
+>> #define PCI_ID_DRIVER_OVERRIDE (PCI_ID_F_VFIO_DRIVER_OVERRIDE |
+>> PCI_ID_F_MY_BUS_DRIVER_OVERRIDE)
+>>
+>> The file2alias.c still have to use the exact PCI_ID_F_VFIO_DRIVER_OVERRIDE
+>> flag to add "vfio_" prefix.
+>>
+>> Is that better ?
+> I don't think it's worth having two separate #defines.  If we need
+> more in the future, we can add them when we need them.
 
-diff --git a/tools/testing/selftests/cgroup/Makefile b/tools/testing/selftests/cgroup/Makefile
-index 59e222460581..3f1fd3f93f41 100644
---- a/tools/testing/selftests/cgroup/Makefile
-+++ b/tools/testing/selftests/cgroup/Makefile
-@@ -1,10 +1,11 @@
- # SPDX-License-Identifier: GPL-2.0
- CFLAGS += -Wall -pthread
- 
--all:
-+all: ${HELPER_PROGS}
- 
- TEST_FILES     := with_stress.sh
--TEST_PROGS     := test_stress.sh
-+TEST_PROGS     := test_stress.sh test_cpuset_prs.sh
-+TEST_GEN_FILES := wait_inotify
- TEST_GEN_PROGS = test_memcontrol
- TEST_GEN_PROGS += test_kmem
- TEST_GEN_PROGS += test_core
-diff --git a/tools/testing/selftests/cgroup/test_cpuset_prs.sh b/tools/testing/selftests/cgroup/test_cpuset_prs.sh
-new file mode 100755
-index 000000000000..5a8fba05cbfb
---- /dev/null
-+++ b/tools/testing/selftests/cgroup/test_cpuset_prs.sh
-@@ -0,0 +1,663 @@
-+#!/bin/bash
-+# SPDX-License-Identifier: GPL-2.0
-+#
-+# Test for cpuset v2 partition root state (PRS)
-+#
-+# The sched verbose flag is set, if available, so that the console log
-+# can be examined for the correct setting of scheduling domain.
-+#
-+
-+skip_test() {
-+	echo "$1"
-+	echo "Test SKIPPED"
-+	exit 0
-+}
-+
-+[[ $(id -u) -eq 0 ]] || skip_test "Test must be run as root!"
-+
-+# Set sched verbose flag, if available
-+[[ -d /sys/kernel/debug/sched ]] && echo Y > /sys/kernel/debug/sched/verbose
-+
-+# Get wait_inotify location
-+WAIT_INOTIFY=$(cd $(dirname $0); pwd)/wait_inotify
-+
-+# Find cgroup v2 mount point
-+CGROUP2=$(mount -t cgroup2 | head -1 | awk -e '{print $3}')
-+[[ -n "$CGROUP2" ]] || skip_test "Cgroup v2 mount point not found!"
-+
-+CPUS=$(lscpu | grep "^CPU(s)" | sed -e "s/.*:[[:space:]]*//")
-+[[ $CPUS -lt 8 ]] && skip_test "Test needs at least 8 cpus available!"
-+
-+# Set verbose flag and delay factor
-+PROG=$1
-+VERBOSE=
-+DELAY_FACTOR=1
-+while [[ "$1" = -* ]]
-+do
-+	case "$1" in
-+		-v) VERBOSE=1
-+		    break
-+		    ;;
-+		-d) DELAY_FACTOR=$2
-+		    shift
-+		    break
-+		    ;;
-+		*)  echo "Usage: $PROG [-v] [-d <delay-factor>"
-+		    exit
-+		    ;;
-+	esac
-+	shift
-+done
-+
-+cd $CGROUP2
-+echo +cpuset > cgroup.subtree_control
-+[[ -d test ]] || mkdir test
-+cd test
-+
-+# Pause in ms
-+pause()
-+{
-+	DELAY=$1
-+	LOOP=0
-+	while [[ $LOOP -lt $DELAY_FACTOR ]]
-+	do
-+		sleep $DELAY
-+		((LOOP++))
-+	done
-+	return 0
-+}
-+
-+console_msg()
-+{
-+	MSG=$1
-+	echo "$MSG"
-+	echo "" > /dev/console
-+	echo "$MSG" > /dev/console
-+	pause 0.01
-+}
-+
-+test_partition()
-+{
-+	EXPECTED_VAL=$1
-+	echo $EXPECTED_VAL > cpuset.cpus.partition
-+	[[ $? -eq 0 ]] || exit 1
-+	ACTUAL_VAL=$(cat cpuset.cpus.partition)
-+	[[ $ACTUAL_VAL != $EXPECTED_VAL ]] && {
-+		echo "cpuset.cpus.partition: expect $EXPECTED_VAL, found $EXPECTED_VAL"
-+		echo "Test FAILED"
-+		exit 1
-+	}
-+}
-+
-+test_effective_cpus()
-+{
-+	EXPECTED_VAL=$1
-+	ACTUAL_VAL=$(cat cpuset.cpus.effective)
-+	[[ "$ACTUAL_VAL" != "$EXPECTED_VAL" ]] && {
-+		echo "cpuset.cpus.effective: expect '$EXPECTED_VAL', found '$EXPECTED_VAL'"
-+		echo "Test FAILED"
-+		exit 1
-+	}
-+}
-+
-+# Adding current process to cgroup.procs as a test
-+test_add_proc()
-+{
-+	OUTSTR="$1"
-+	ERRMSG=$((echo $$ > cgroup.procs) |& cat)
-+	echo $ERRMSG | grep -q "$OUTSTR"
-+	[[ $? -ne 0 ]] && {
-+		echo "cgroup.procs: expect '$OUTSTR', got '$ERRMSG'"
-+		echo "Test FAILED"
-+		exit 1
-+	}
-+	echo $$ > $CGROUP2/cgroup.procs	# Move out the task
-+}
-+
-+#
-+# Testing the new "isolated" partition root type
-+#
-+test_isolated()
-+{
-+	echo 2-3 > cpuset.cpus
-+	TYPE=$(cat cpuset.cpus.partition)
-+	[[ $TYPE = member ]] || echo member > cpuset.cpus.partition
-+
-+	console_msg "Change from member to root"
-+	test_partition root
-+
-+	console_msg "Change from root to isolated"
-+	test_partition isolated
-+
-+	console_msg "Change from isolated to member"
-+	test_partition member
-+
-+	console_msg "Change from member to isolated"
-+	test_partition isolated
-+
-+	console_msg "Change from isolated to root"
-+	test_partition root
-+
-+	console_msg "Change from root to member"
-+	test_partition member
-+
-+	#
-+	# Testing partition root with no cpu
-+	#
-+	console_msg "Distribute all cpus to child partition"
-+	echo +cpuset > cgroup.subtree_control
-+	test_partition root
-+
-+	mkdir A1
-+	cd A1
-+	echo 2-3 > cpuset.cpus
-+	test_partition root
-+	test_effective_cpus 2-3
-+	cd ..
-+	test_effective_cpus ""
-+
-+	console_msg "Moving task to partition test"
-+	test_add_proc "No space left"
-+	cd A1
-+	test_add_proc ""
-+	cd ..
-+
-+	console_msg "Shrink and expand child partition"
-+	cd A1
-+	echo 2 > cpuset.cpus
-+	cd ..
-+	test_effective_cpus 3
-+	cd A1
-+	echo 2-3 > cpuset.cpus
-+	cd ..
-+	test_effective_cpus ""
-+
-+	# Cleaning up
-+	console_msg "Cleaning up"
-+	echo $$ > $CGROUP2/cgroup.procs
-+	[[ -d A1 ]] && rmdir A1
-+}
-+
-+#
-+# Cpuset controller state transition test matrix.
-+#
-+# Cgroup test hierarchy
-+#
-+# test -- A1 -- A2 -- A3
-+#      \- B1
-+#
-+#  P<v> = set cpus.partition (0:member, 1:root, 2:isolated, -1:root invalid)
-+#  C<l> = add cpu-list
-+#  S<p> = use prefix in subtree_control
-+#  T    = put a task into cgroup
-+#  O<c>-<v> = Write <v> to CPU online file of <c>
-+#
-+SETUP_A123_PARTITIONS="C1-3:P1:S+ C2-3:P1:S+ C3:P1"
-+TEST_MATRIX=(
-+	# test  old-A1 old-A2 old-A3 old-B1 new-A1 new-A2 new-A3 new-B1 fail ECPUs Pstate
-+	# ----  ------ ------ ------ ------ ------ ------ ------ ------ ---- ----- ------
-+	"  S+    C0-1     .      .    C2-3    S+    C4-5     .      .     0 A2:0-1"
-+	"  S+    C0-1     .      .    C2-3    P1      .      .      .     0 "
-+	"  S+    C0-1     .      .    C2-3   P1:S+ C0-1:P1   .      .     0 "
-+	"  S+    C0-1     .      .    C2-3   P1:S+  C1:P1    .      .     0 "
-+	"  S+   C0-1:S+   .      .    C2-3     .      .      .     P1     0 "
-+	"  S+   C0-1:P1   .      .    C2-3    S+     C1      .      .     0 "
-+	"  S+   C0-1:P1   .      .    C2-3    S+    C1:P1    .      .     0 "
-+	"  S+   C0-1:P1   .      .    C2-3    S+    C1:P1    .     P1     0 "
-+	"  S+   C0-1:P1   .      .    C2-3   C4-5     .      .      .     0 A1:4-5"
-+	"  S+   C0-1:P1   .      .    C2-3  S+:C4-5   .      .      .     0 A1:4-5"
-+	"  S+    C0-1     .      .   C2-3:P1   .      .      .     C2     0 "
-+	"  S+    C0-1     .      .   C2-3:P1   .      .      .    C4-5    0 B1:4-5"
-+	"  S+ C0-3:P1:S+ C2-3:P1 .      .      .      .      .      .     0 A1:0-1,A2:2-3"
-+	"  S+ C0-3:P1:S+ C2-3:P1 .      .     C1-3    .      .      .     0 A1:1,A2:2-3"
-+	"  S+ C2-3:P1:S+  C3:P1  .      .     C3      .      .      .     0 A1:,A2:3 A1:P1,A2:P1"
-+	"  S+ C2-3:P1:S+  C3:P1  .      .     C3      P0     .      .     0 A1:3,A2:3 A1:P1,A2:P0"
-+	"  S+ C2-3:P1:S+  C2:P1  .      .     C2-4    .      .      .     0 A1:3-4,A2:2"
-+	"  S+ C2-3:P1:S+  C3:P1  .      .     C3      .      .     C0-2   0 A1:,B1:0-2 A1:P1,A2:P1"
-+	"  S+ $SETUP_A123_PARTITIONS    .     C2-3    .      .      .     0 A1:,A2:2,A3:3 A1:P1,A2:P1,A3:P1"
-+
-+	# CPU offlining cases:
-+	"  S+    C0-1     .      .    C2-3    S+    C4-5     .     O2-0   0 A1:0-1,B1:3"
-+	"  S+ C0-3:P1:S+ C2-3:P1 .      .     O2-0    .      .      .     0 A1:0-1,A2:3"
-+	"  S+ C0-3:P1:S+ C2-3:P1 .      .     O2-0   O2-1    .      .     0 A1:0-1,A2:2-3"
-+	"  S+ C0-3:P1:S+ C2-3:P1 .      .     O1-0    .      .      .     0 A1:0,A2:2-3"
-+	"  S+ C0-3:P1:S+ C2-3:P1 .      .     O1-0   O1-1    .      .     0 A1:0-1,A2:2-3"
-+	"  S+ C2-3:P1:S+  C3:P1  .      .     O3-0   O3-1    .      .     0 A1:2,A2:3 A1:P1,A2:P1"
-+	"  S+ C2-3:P1:S+  C3:P2  .      .     O3-0   O3-1    .      .     0 A1:2,A2:3 A1:P1,A2:P2"
-+	"  S+ C2-3:P1:S+  C3:P1  .      .     O2-0   O2-1    .      .     0 A1:2,A2:3 A1:P1,A2:P1"
-+	"  S+ C2-3:P1:S+  C3:P2  .      .     O2-0   O2-1    .      .     0 A1:2,A2:3 A1:P1,A2:P2"
-+	"  S+ C2-3:P1:S+  C3:P1  .      .     O2-0    .      .      .     0 A1:,A2:3 A1:P1,A2:P1"
-+	"  S+ C2-3:P1:S+  C3:P1  .      .     O3-0    .      .      .     0 A1:2,A2:2 A1:P1,A2:P-1"
-+	"  S+ C2-3:P1:S+  C3:P1  .      .    T:O2-0   .      .      .     0 A1:3,A2:3 A1:P1,A2:P-1"
-+	"  S+ $SETUP_A123_PARTITIONS    .     O1-0    .      .      .     0 A1:,A2:2,A3:3 A1:P1,A2:P1,A3:P1"
-+	"  S+ $SETUP_A123_PARTITIONS    .     O2-0    .      .      .     0 A1:1,A2:,A3:3 A1:P1,A2:P1,A3:P1"
-+	"  S+ $SETUP_A123_PARTITIONS    .     O3-0    .      .      .     0 A1:1,A2:2,A3:2 A1:P1,A2:P1,A3:P-1"
-+	"  S+ $SETUP_A123_PARTITIONS    .    T:O1-0   .      .      .     0 A1:2-3,A2:2-3,A3:3 A1:P1,A2:P-1,A3:P-1"
-+	"  S+ $SETUP_A123_PARTITIONS    .      .    T:O2-0   .      .     0 A1:1,A2:3,A3:3 A1:P1,A2:P1,A3:P-1"
-+	"  S+ $SETUP_A123_PARTITIONS    .      .      .    T:O3-0   .     0 A1:1,A2:2,A3:2 A1:P1,A2:P1,A3:P-1"
-+	"  S+ $SETUP_A123_PARTITIONS    .    T:O1-0  O1-1    .      .     0 A1:1,A2:2,A3:3 A1:P1,A2:P1,A3:P1"
-+	"  S+ $SETUP_A123_PARTITIONS    .      .    T:O2-0  O2-1    .     0 A1:1,A2:2,A3:3 A1:P1,A2:P1,A3:P1"
-+	"  S+ $SETUP_A123_PARTITIONS    .      .      .    T:O3-0  O3-1   0 A1:1,A2:2,A3:3 A1:P1,A2:P1,A3:P1"
-+	"  S+ $SETUP_A123_PARTITIONS    .    T:O1-0  O2-0   O1-1    .     0 A1:1,A2:,A3:3 A1:P1,A2:P1,A3:P1"
-+	"  S+ $SETUP_A123_PARTITIONS    .    T:O1-0  O2-0   O2-1    .     0 A1:2-3,A2:2-3,A3:3 A1:P1,A2:P-1,A3:P-1"
-+
-+	# test  old-A1 old-A2 old-A3 old-B1 new-A1 new-A2 new-A3 new-B1 fail ECPUs Pstate
-+	# ----  ------ ------ ------ ------ ------ ------ ------ ------ ---- ----- ------
-+	#
-+	# Incorrect change to cpuset.cpus invalidates partition root
-+	#
-+	# Adding CPUs to partition root that are not in parent's
-+	# cpuset.cpus.effective makes it invalid.
-+	"  S+ C2-3:P1:S+ C3:P1   .      .      .     C2-4    .      .     0 A1:2-3,A2:2-3 A1:P1,A2:P-1"
-+
-+	# Taking away all CPUs from parent or itself if there are tasks
-+	# will make the partition invalid.
-+	"  S+ C2-3:P1:S+  C3:P1  .      .      T     C2-3    .      .     0 A1:2-3,A2:2-3 A1:P1,A2:P-1"
-+	"  S+ $SETUP_A123_PARTITIONS    .    T:C2-3   .      .      .     0 A1:2-3,A2:2-3,A3:3 A1:P1,A2:P-1,A3:P-1"
-+	"  S+ $SETUP_A123_PARTITIONS    . T:C2-3:C1-3 .      .      .     0 A1:1,A2:2,A3:3 A1:P1,A2:P1,A3:P1"
-+
-+	# Changing a partition root member invalidates child partitions
-+	"  S+ C2-3:P1:S+  C3:P1  .      .      P0     .      .      .     0 A1:2-3,A2:3 A1:P0,A2:P-1"
-+	"  S+ $SETUP_A123_PARTITIONS    .     C2-3    P0     .      .     0 A1:2-3,A2:2-3,A3:3 A1:P1,A2:P0,A3:P-1"
-+
-+	# test  old-A1 old-A2 old-A3 old-B1 new-A1 new-A2 new-A3 new-B1 fail ECPUs Pstate
-+	# ----  ------ ------ ------ ------ ------ ------ ------ ------ ---- ----- ------
-+	# Failure cases:
-+
-+	# To become a partition root, cpuset.cpus must be a subset of
-+	# parent's cpuset.cpus.effective.
-+	"  S+    C0-1     .      .    C2-3    S+   C4-5:P1   .      .     1 "
-+
-+	# A cpuset cannot become a partition root if it has child cpusets
-+	# with non-empty cpuset.cpus.
-+	"  S+   C0-1:S+   C1     .    C2-3    P1      .      .      .     1 "
-+
-+	# Any change to cpuset.cpus of a partition root must be exclusive.
-+	"  S+   C0-1:P1   .      .    C2-3   C0-2     .      .      .     1 "
-+	"  S+    C0-1     .      .   C2-3:P1   .      .      .     C1     1 "
-+	"  S+ C2-3:P1:S+  C2:P1  .     C1    C1-3     .      .      .     1 "
-+
-+	# Deletion of CPUs distributed to child partition root is not allowed.
-+	"  S+ C0-1:P1:S+ C1      .    C2-3   C4-5     .      .      .     1 "
-+	"  S+ C0-3:P1:S+ C2-3:P1 .      .    C0-2     .      .      .     1 "
-+
-+	# A task cannot be added to a non-terminal partition with no cpu
-+	"  S+ C2-3:P1:S+  C3:P1  .      .    O2-0:T   .      .      .     1 A1:,A2:3 A1:P1,A2:P1"
-+)
-+
-+#
-+# Write to the cpu online file
-+#  $1 - <c>-<v> where <c> = cpu number, <v> value to be written
-+#
-+write_cpu_online()
-+{
-+	CPU=${1%-*}
-+	VAL=${1#*-}
-+	CPUFILE=//sys/devices/system/cpu/cpu${CPU}/online
-+	if [[ $VAL -eq 0 ]]
-+	then
-+		OFFLINE_CPUS="$OFFLINE_CPUS $CPU"
-+	else
-+		[[ -n "$OFFLINE_CPUS" ]] && {
-+			OFFLINE_CPUS=$(echo $CPU $CPU $OFFLINE_CPUS | fmt -1 |\
-+					sort | uniq -u)
-+		}
-+	fi
-+	echo $VAL > $CPUFILE
-+	pause 0.01
-+}
-+
-+#
-+# Set controller state
-+#  $1 - cgroup directory
-+#  $2 - state
-+#  $3 - showerr
-+#
-+# The presence of ":" in state means transition from one to the next.
-+#
-+set_ctrl_state()
-+{
-+	TMPMSG=/tmp/.msg_$$
-+	CGRP=$1
-+	STATE=$2
-+	SHOWERR=${3}${VERBOSE}
-+	CTRL=${CTRL:=$CONTROLLER}
-+	HASERR=0
-+	REDIRECT="2> $TMPMSG"
-+	[[ -z "$STATE" || "$STATE" = '.' ]] && return 0
-+
-+	rm -f $TMPMSG
-+	for CMD in $(echo $STATE | sed -e "s/:/ /g")
-+	do
-+		TFILE=$CGRP/cgroup.procs
-+		SFILE=$CGRP/cgroup.subtree_control
-+		PFILE=$CGRP/cpuset.cpus.partition
-+		CFILE=$CGRP/cpuset.cpus
-+		S=$(expr substr $CMD 1 1)
-+		if [[ $S = S ]]
-+		then
-+			PREFIX=${CMD#?}
-+			COMM="echo ${PREFIX}${CTRL} > $SFILE"
-+			eval $COMM $REDIRECT
-+		elif [[ $S = C ]]
-+		then
-+			CPUS=${CMD#?}
-+			COMM="echo $CPUS > $CFILE"
-+			eval $COMM $REDIRECT
-+		elif [[ $S = P ]]
-+		then
-+			VAL=${CMD#?}
-+			case $VAL in
-+			0)  VAL=member
-+			    ;;
-+			1)  VAL=root
-+			    ;;
-+			2)  VAL=isolated
-+			    ;;
-+			*)
-+			    echo "Invalid partiton state - $VAL"
-+			    exit 1
-+			    ;;
-+			esac
-+			COMM="echo $VAL > $PFILE"
-+			eval $COMM $REDIRECT
-+		elif [[ $S = O ]]
-+		then
-+			VAL=${CMD#?}
-+			write_cpu_online $VAL
-+		elif [[ $S = T ]]
-+		then
-+			COMM="echo 0 > $TFILE"
-+			eval $COMM $REDIRECT
-+		fi
-+		RET=$?
-+		[[ $RET -ne 0 ]] && {
-+			[[ -n "$SHOWERR" ]] && {
-+				echo "$COMM"
-+				cat $TMPMSG
-+			}
-+			HASERR=1
-+		}
-+		pause 0.01
-+		rm -f $TMPMSG
-+	done
-+	return $HASERR
-+}
-+
-+set_ctrl_state_noerr()
-+{
-+	CGRP=$1
-+	STATE=$2
-+	[[ -d $CGRP ]] || mkdir $CGRP
-+	set_ctrl_state $CGRP $STATE 1
-+	[[ $? -ne 0 ]] && {
-+		echo "ERROR: Failed to set $2 to cgroup $1!"
-+		exit 1
-+	}
-+}
-+
-+online_cpus()
-+{
-+	[[ -n "OFFLINE_CPUS" ]] && {
-+		for C in $OFFLINE_CPUS
-+		do
-+			write_cpu_online ${C}-1
-+		done
-+	}
-+}
-+
-+#
-+# Return 1 if the list of effective cpus isn't the same as the initial list.
-+#
-+reset_cgroup_states()
-+{
-+	echo 0 > $CGROUP2/cgroup.procs
-+	online_cpus
-+	rmdir A1/A2/A3 A1/A2 A1 B1 > /dev/null 2>&1
-+	set_ctrl_state . S-
-+	pause 0.01
-+}
-+
-+dump_states()
-+{
-+	for DIR in A1 A1/A2 A1/A2/A3 B1
-+	do
-+		ECPUS=$DIR/cpuset.cpus.effective
-+		PRS=$DIR/cpuset.cpus.partition
-+		[[ -e $ECPUS ]] && echo "$ECPUS: $(cat $ECPUS)"
-+		[[ -e $PRS   ]] && echo "$PRS: $(cat $PRS)"
-+	done
-+}
-+
-+#
-+# Check effective cpus
-+# $1 - check string, format: <cgroup>:<cpu-list>[,<cgroup>:<cpu-list>]*
-+#
-+check_effective_cpus()
-+{
-+	CHK_STR=$1
-+	for CHK in $(echo $CHK_STR | sed -e "s/,/ /g")
-+	do
-+		set -- $(echo $CHK | sed -e "s/:/ /g")
-+		CGRP=$1
-+		CPUS=$2
-+		[[ $CGRP = A2 ]] && CGRP=A1/A2
-+		[[ $CGRP = A3 ]] && CGRP=A1/A2/A3
-+		FILE=$CGRP/cpuset.cpus.effective
-+		[[ -e $FILE ]] || return 1
-+		[[ $CPUS = $(cat $FILE) ]] || return 1
-+	done
-+}
-+
-+#
-+# Check cgroup states
-+#  $1 - check string, format: <cgroup>:<state>[,<cgroup>:<state>]*
-+#
-+check_cgroup_states()
-+{
-+	CHK_STR=$1
-+	for CHK in $(echo $CHK_STR | sed -e "s/,/ /g")
-+	do
-+		set -- $(echo $CHK | sed -e "s/:/ /g")
-+		CGRP=$1
-+		STATE=$2
-+		FILE=
-+		EVAL=$(expr substr $STATE 2 2)
-+		[[ $CGRP = A2 ]] && CGRP=A1/A2
-+		[[ $CGRP = A3 ]] && CGRP=A1/A2/A3
-+
-+		case $STATE in
-+			P*) FILE=$CGRP/cpuset.cpus.partition
-+			    ;;
-+			*)  echo "Unknown state: $STATE!"
-+			    exit 1
-+			    ;;
-+		esac
-+		VAL=$(cat $FILE)
-+
-+		case "$VAL" in
-+			member) VAL=0
-+				;;
-+			root)	VAL=1
-+				;;
-+			isolated)
-+				VAL=2
-+				;;
-+			"root invalid"*)
-+				VAL=-1
-+				;;
-+		esac
-+		[[ $EVAL != $VAL ]] && return 1
-+	done
-+	return 0
-+}
-+
-+#
-+# Run cpuset state transition test
-+#  $1 - test matrix name
-+#
-+# This test is somewhat fragile as delays (sleep x) are added in various
-+# places to make sure state changes are fully propagated before the next
-+# action. These delays may need to be adjusted if running in a slower machine.
-+#
-+run_state_test()
-+{
-+	TEST=$1
-+	CONTROLLER=cpuset
-+	CPULIST=0-6
-+	I=0
-+	eval CNT="\${#$TEST[@]}"
-+
-+	reset_cgroup_states
-+	echo $CPULIST > cpuset.cpus
-+	echo root > cpuset.cpus.partition
-+	console_msg "Running state transition test ..."
-+
-+	while [[ $I -lt $CNT ]]
-+	do
-+		echo "Running test $I ..." > /dev/console
-+		eval set -- "\${$TEST[$I]}"
-+		ROOT=$1
-+		OLD_A1=$2
-+		OLD_A2=$3
-+		OLD_A3=$4
-+		OLD_B1=$5
-+		NEW_A1=$6
-+		NEW_A2=$7
-+		NEW_A3=$8
-+		NEW_B1=$9
-+		RESULT=${10}
-+		ECPUS=${11}
-+		STATES=${12}
-+
-+		set_ctrl_state_noerr .        $ROOT
-+		set_ctrl_state_noerr A1       $OLD_A1
-+		set_ctrl_state_noerr A1/A2    $OLD_A2
-+		set_ctrl_state_noerr A1/A2/A3 $OLD_A3
-+		set_ctrl_state_noerr B1       $OLD_B1
-+		RETVAL=0
-+		set_ctrl_state A1       $NEW_A1; ((RETVAL += $?))
-+		set_ctrl_state A1/A2    $NEW_A2; ((RETVAL += $?))
-+		set_ctrl_state A1/A2/A3 $NEW_A3; ((RETVAL += $?))
-+		set_ctrl_state B1       $NEW_B1; ((RETVAL += $?))
-+
-+		[[ $RETVAL -ne $RESULT ]] && {
-+			echo "Test $TEST[$I] failed result check!"
-+			eval echo \"\${$TEST[$I]}\"
-+			dump_states
-+			online_cpus
-+			exit 1
-+		}
-+
-+		[[ -n "$ECPUS" && "$ECPUS" != . ]] && {
-+			check_effective_cpus $ECPUS
-+			[[ $? -ne 0 ]] && {
-+				echo "Test $TEST[$I] failed effective CPU check!"
-+				eval echo \"\${$TEST[$I]}\"
-+				echo
-+				dump_states
-+				online_cpus
-+				exit 1
-+			}
-+		}
-+
-+		[[ -n "$STATES" ]] && {
-+			check_cgroup_states $STATES
-+			[[ $? -ne 0 ]] && {
-+				echo "FAILED: Test $TEST[$I] failed states check!"
-+				eval echo \"\${$TEST[$I]}\"
-+				echo
-+				dump_states
-+				online_cpus
-+				exit 1
-+			}
-+		}
-+
-+		reset_cgroup_states
-+		#
-+		# Check to see if effective cpu list changes
-+		#
-+		pause 0.05
-+		NEWLIST=$(cat cpuset.cpus.effective)
-+		[[ $NEWLIST != $CPULIST ]] && {
-+			echo "Effective cpus changed to $NEWLIST after test $I!"
-+			exit 1
-+		}
-+		[[ -n "$VERBOSE" ]] && echo "Test $I done."
-+		((I++))
-+	done
-+	echo "All $I tests of $TEST PASSED."
-+
-+	echo member > cpuset.cpus.partition
-+}
-+
-+#
-+# Wait for inotify event for the given file and read it
-+# $1: cgroup file to wait for
-+# $2: file to store the read result
-+#
-+wait_inotify()
-+{
-+	CGROUP_FILE=$1
-+	OUTPUT_FILE=$2
-+
-+	$WAIT_INOTIFY $CGROUP_FILE
-+	cat $CGROUP_FILE > $OUTPUT_FILE
-+}
-+
-+#
-+# Test if inotify events are properly generated when going into and out of
-+# invalid partition state.
-+#
-+test_inotify()
-+{
-+	ERR=0
-+	PRS=/tmp/.prs_$$
-+	[[ -f $WAIT_INOTIFY ]] || {
-+		echo "wait_inotify not found, inotify test SKIPPED."
-+		return
-+	}
-+
-+	pause 0.01
-+	echo 1 > cpuset.cpus
-+	echo 0 > cgroup.procs
-+	echo root > cpuset.cpus.partition
-+	pause 0.01
-+	rm -f $PRS
-+	wait_inotify $PWD/cpuset.cpus.partition $PRS &
-+	pause 0.01
-+	set_ctrl_state . "O1-0"
-+	pause 0.01
-+	check_cgroup_states ".:P-1"
-+	if [[ $? -ne 0 ]]
-+	then
-+		echo "FAILED: Inotify test - partition not invalid"
-+		ERR=1
-+	elif [[ ! -f $PRS ]]
-+	then
-+		echo "FAILED: Inotify test - event not generated"
-+		ERR=1
-+		kill %1
-+	elif [[ $(cat $PRS) != "root invalid"* ]]
-+	then
-+		echo "FAILED: Inotify test - incorrect state"
-+		cat $PRS
-+		ERR=1
-+	fi
-+	online_cpus
-+	echo member > cpuset.cpus.partition
-+	echo 0 > ../cgroup.procs
-+	if [[ $ERR -ne 0 ]]
-+	then
-+		exit 1
-+	else
-+		echo "Inotify test PASSED"
-+	fi
-+}
-+
-+run_state_test TEST_MATRIX
-+test_isolated
-+test_inotify
-+echo "All tests PASSED."
-+cd ..
-+rmdir test
-diff --git a/tools/testing/selftests/cgroup/wait_inotify.c b/tools/testing/selftests/cgroup/wait_inotify.c
-new file mode 100644
-index 000000000000..d0758881f6bb
---- /dev/null
-+++ b/tools/testing/selftests/cgroup/wait_inotify.c
-@@ -0,0 +1,86 @@
-+/* SPDX-License-Identifier: GPL-2.0 */
-+/*
-+ * Wait until an inotify event on the given cgroup file.
-+ */
-+#include <linux/limits.h>
-+#include <sys/inotify.h>
-+#include <sys/mman.h>
-+#include <sys/ptrace.h>
-+#include <sys/stat.h>
-+#include <sys/types.h>
-+#include <errno.h>
-+#include <fcntl.h>
-+#include <poll.h>
-+#include <stdio.h>
-+#include <stdlib.h>
-+#include <string.h>
-+#include <unistd.h>
-+
-+const char usage[] = "Usage: %s [-v] <cgroup_file>\n";
-+static char *file;
-+static int verbose;
-+
-+static inline void fail_message(char *msg)
-+{
-+	fprintf(stderr, msg, file);
-+	exit(1);
-+}
-+
-+int main(int argc, char *argv[])
-+{
-+	char *cmd = argv[0];
-+	int c, fd;
-+	struct pollfd fds = { .events = POLLIN, };
-+
-+	while ((c = getopt(argc, argv, "v")) != -1) {
-+		switch (c) {
-+		case 'v':
-+			verbose++;
-+			break;
-+		}
-+		argv++, argc--;
-+	}
-+
-+	if (argc != 2) {
-+		fprintf(stderr, usage, cmd);
-+		return -1;
-+	}
-+	file = argv[1];
-+	fd = open(file, O_RDONLY);
-+	if (fd < 0)
-+		fail_message("Cgroup file %s not found!\n");
-+	close(fd);
-+
-+	fd = inotify_init();
-+	if (fd < 0)
-+		fail_message("inotify_init() fails on %s!\n");
-+	if (inotify_add_watch(fd, file, IN_MODIFY) < 0)
-+		fail_message("inotify_add_watch() fails on %s!\n");
-+	fds.fd = fd;
-+
-+	/*
-+	 * poll waiting loop
-+	 */
-+	for (;;) {
-+		int ret = poll(&fds, 1, 10000);
-+		if (ret < 0) {
-+			if (errno == EINTR)
-+				continue;
-+			perror("poll");
-+			exit(1);
-+		}
-+		if ((ret > 0) && (fds.revents & POLLIN))
-+			break;
-+	}
-+	if (verbose) {
-+		struct inotify_event events[10];
-+		long len;
-+
-+		usleep(1000);
-+		len = read(fd, events, sizeof(events));
-+		printf("Number of events read = %ld\n",
-+			len/sizeof(struct inotify_event));
-+	}
-+	close(fd);
-+	return 0;
-+}
--- 
-2.18.1
+I meant 1 #define and 1 enum:
 
+enum {
+     PCI_ID_F_VFIO_DRIVER_OVERRIDE    = 1 << 0,
+};
+
+#define PCI_ID_DRIVER_OVERRIDE PCI_ID_F_VFIO_DRIVER_OVERRIDE
+
+>
+> What if we renamed "flags" to be specifically for this override case,
+> e.g., "override_only"?  Then the flag could be
+> PCI_ID_F_VFIO_DRIVER_OVERRIDE, which would trigger a "vfio_" prefix in
+> file2alias.c, but pci_match_device() could just check for it being
+> non-zero, without caring whether the reason is VFIO or something else,
+> e.g.,
+>
+>    pci_match_device(...)
+>    {
+>      ...
+>      if (found_id->override_only) {
+>        if (dev->driver_override)
+>          return found_id;
+>        ...
+
+Jason suggested something like this:
+
+
+static const struct pci_device_id *pci_match_device(struct pci_driver *drv,
+                             struct pci_dev *dev)
+{
+     struct pci_dynid *dynid;
+     const struct pci_device_id *found_id = NULL, *ids;
+
+     /* When driver_override is set, only bind to the matching driver */
+     if (dev->driver_override && strcmp(dev->driver_override, drv->name))
+         return NULL;
+
+     /* Look at the dynamic ids first, before the static ones */
+     spin_lock(&drv->dynids.lock);
+     list_for_each_entry(dynid, &drv->dynids.list, node) {
+         if (pci_match_one_device(&dynid->id, dev)) {
+             found_id = &dynid->id;
+             break;
+         }
+     }
+     spin_unlock(&drv->dynids.lock);
+
+     if (found_id)
+         return found_id;
+
+     for (ids = drv->id_table; (found_id = pci_match_id(ids, dev));
+          ids = found_id + 1) {
+         /*
+          * The match table is split based on driver_override. Check the
+          * flags as well so that any matching
+          * PCI_ID_F_VFIO_DRIVER_OVERRIDE entry is returned.
+          */
+         if (!(found_id->flags & PCI_ID_F_VFIO_DRIVER_OVERRIDE) ||
+             dev->driver_override)
+             return found_id;
+     }
+
+     /*
+      * if no static match, driver_override will always match, send a dummy
+      * id.
+      */
+     if (dev->driver_override)
+         return &pci_device_id_any;
+     return NULL;
+}
+
+
+It looks good to me as well.
+
+I prefer the "flags" naming since its more generic and easy to extend.
+
+can we continue with the above suggestion for V2 ?
+
+It's really a matter of taste..
+
+> Bjorn
