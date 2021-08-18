@@ -2,117 +2,82 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 591B53F07A3
-	for <lists+linux-doc@lfdr.de>; Wed, 18 Aug 2021 17:14:03 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 9925A3F079D
+	for <lists+linux-doc@lfdr.de>; Wed, 18 Aug 2021 17:13:52 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S239812AbhHRPOa (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 18 Aug 2021 11:14:30 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:60956 "EHLO
+        id S239854AbhHRPO0 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 18 Aug 2021 11:14:26 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:60926 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S239811AbhHRPO3 (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Wed, 18 Aug 2021 11:14:29 -0400
-Received: from mail-qt1-x82f.google.com (mail-qt1-x82f.google.com [IPv6:2607:f8b0:4864:20::82f])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 48075C0617AD;
-        Wed, 18 Aug 2021 08:13:54 -0700 (PDT)
-Received: by mail-qt1-x82f.google.com with SMTP id l24so1811273qtj.4;
-        Wed, 18 Aug 2021 08:13:54 -0700 (PDT)
+        with ESMTP id S239832AbhHRPOY (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Wed, 18 Aug 2021 11:14:24 -0400
+Received: from mail-wr1-x429.google.com (mail-wr1-x429.google.com [IPv6:2a00:1450:4864:20::429])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 8F321C0613CF
+        for <linux-doc@vger.kernel.org>; Wed, 18 Aug 2021 08:13:49 -0700 (PDT)
+Received: by mail-wr1-x429.google.com with SMTP id l11so4114766wrx.4
+        for <linux-doc@vger.kernel.org>; Wed, 18 Aug 2021 08:13:49 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
+        d=linaro.org; s=google;
         h=from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=PVCKykayEvXKVpNVfN4++L+SwCZYLayULNX7RQmbrok=;
-        b=oFN+Xg1BFqxHLaDXI3RvACmAAxzJAWNUJUkVNGUIDUmWy14DvyzCtds/hhqC+jda65
-         2MueVwL4IHg0PXBYigkmQeCoNSsf6dUAKz6SMpI34QIaeBx1qZ6lv33HkYM50f1fwrFd
-         UcfkVwkiLopgPONHy9CR+FlWTDtctU9HM6b03V1vGtcqcEsXLO7NlDgA+r2kjtQjLTY6
-         2i+yfbdllkzoBfNDBZuKn1Zb7Pi3JQ5WETID8qnVBr0ijo5KQIjSvocmqhhJNQ6+uluP
-         9mfpO45OF7WrDpxakuQdTfH3FNJUoNmzFnP9OS/KFoJ4FcgzpEWbGgl89pY0mCt4A1Ko
-         OgjA==
+        bh=qoZ5/2UWBHWiefaepOTj74QF+R/T3B3ep4P+G4GpmBk=;
+        b=ysQzummWZFRxjHAe7mXB3AHPWLwPUtmjc0LuCo4tsGWjD8BK3nI23I0aPbHxcfWwrR
+         p/QhgIb0gnva9hU7RUPeBtLSw8BlPKv2r0yUh7sB08OHEZCl0v718i5EuaPnYfy4oQPB
+         u9lcoG3GGKvEecvMu8wDx76Zb95XHqILqOUF8uGxfgGvIlcFnyyKN0QbzliUXqklpVnI
+         xaP2Cbu5UFhZwD0tfcZD7UmwUOonanb8Zu60T1x1ILMj8yg6ykHXaWPHWTwgR5RkPE3H
+         6w+nAOk9d13UVxTtnG6DwFw0p4NOb47S0JtGo1r90p63X0cObJ8Il1aMIpVaSoGrlVmI
+         ZaXQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=PVCKykayEvXKVpNVfN4++L+SwCZYLayULNX7RQmbrok=;
-        b=F2ImFBd65ngwtGnydXZbGOFiWG93oRbD3hNp2eEeKSo/IDMthtKH5YIPung+lmNLJM
-         /ECDH9NwBEZAywVaby5/Iplhpv6vkRQg7uT9s7NNnYQdjsvhFU9+VSw5gpLhYmqbbokC
-         ItHqbWXdY+xtAUggy+l/cT/ug4f558UWNMz0ks8nm9eXQRoq2SCnJniwlu55KlaJc8Zj
-         qtqQ8SUaFOBOsz51G6svgGUR5w1dh6DNdb0uHSSwB18BbtwoL55xmwfFCLq8ePunj/rL
-         TQx6guem45/UPaH4iuwLUuMOJetQbafx5FoQCOotViFug0X6ED761s5aVSEpzCG0wkEY
-         tdwg==
-X-Gm-Message-State: AOAM532FRiTCciM5CQDGLKze3csb0o9VqFzstRB+Y8/15S9nGcORCZkK
-        g8KZKU3ee8fBDPb6x2Se8q8=
-X-Google-Smtp-Source: ABdhPJyUdBH95XtiwZdV00IvNbeDrREQM77UQzy9t2JMppv6Pw/P7HvQn2y6HP/KedPEVWLuTgVjiA==
-X-Received: by 2002:ac8:53d6:: with SMTP id c22mr1287772qtq.38.1629299633413;
-        Wed, 18 Aug 2021 08:13:53 -0700 (PDT)
-Received: from localhost.localdomain (cpe-104-162-105-43.nyc.res.rr.com. [104.162.105.43])
-        by smtp.gmail.com with ESMTPSA id g12sm111556qtq.92.2021.08.18.08.13.51
+        bh=qoZ5/2UWBHWiefaepOTj74QF+R/T3B3ep4P+G4GpmBk=;
+        b=ZOerFir/nutCf9LZRW2GgBFaf3iPhlmr8390XW6LXjqYJSEexeryP6f32zz1+rAAZY
+         QbYzbyRVSGszbvLS2HxGj4oqs4W6r5wdgD/BWWgKL3uOQjUKh4/4Ad1KdcT0JY+ZqYm9
+         SSMV3Kzn0jU2ZzcKqdXx2DLiT9NcNYcjkwGzJIumF4/zCSa0bz6j+6WFszJ69JuxKJ/r
+         D45DN+/xIeAeUIYJe0dbDS2ftum90GCPyzgcyE7ezbIFjyxvv5u+PaPHRfhJo9BTMqcu
+         JPMNQK/M6w84ZgUS5EHn9wpdVxp2dwBDj3RFMSumToAOUspTxJ3K8M1Qwt+wbeS+XYOd
+         XdTg==
+X-Gm-Message-State: AOAM530G1Ux/45egMxZFUnu2BFb3ttnFrOMHRph53iwKd2KG4cgDMOgc
+        tm6i9AdwQgsiWYc0NCMFNP5YRg==
+X-Google-Smtp-Source: ABdhPJyhbAySDzbEYd9YP+taXFk34acrm5nzmziQoBK+X7ZLqDuRGhC7C//Qyf5SMo+wHxmRvOkcMA==
+X-Received: by 2002:adf:f20d:: with SMTP id p13mr11240480wro.95.1629299628146;
+        Wed, 18 Aug 2021 08:13:48 -0700 (PDT)
+Received: from maple.lan (cpc141216-aztw34-2-0-cust174.18-1.cable.virginm.net. [80.7.220.175])
+        by smtp.gmail.com with ESMTPSA id l21sm101829wmh.31.2021.08.18.08.13.46
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 18 Aug 2021 08:13:52 -0700 (PDT)
-From:   grantseltzer <grantseltzer@gmail.com>
-To:     andrii@kernel.org
-Cc:     bpf@vger.kernel.org, corbet@lwn.net, linux-doc@vger.kernel.org,
-        grantseltzer@gmail.com
-Subject: [PATCH] Rename libbpf documentation index file
-Date:   Wed, 18 Aug 2021 11:13:13 -0400
-Message-Id: <20210818151313.49992-1-grantseltzer@gmail.com>
-X-Mailer: git-send-email 2.31.1
+        Wed, 18 Aug 2021 08:13:47 -0700 (PDT)
+From:   Daniel Thompson <daniel.thompson@linaro.org>
+To:     Vinod Koul <vkoul@kernel.org>, Jonathan Corbet <corbet@lwn.net>
+Cc:     Daniel Thompson <daniel.thompson@linaro.org>,
+        dmaengine@vger.kernel.org, linux-doc@vger.kernel.org,
+        linux-kernel@vger.kernel.org, patches@linaro.org
+Subject: [PATCH 0/2] Documentation: dmaengine: Tweak dmatest docs
+Date:   Wed, 18 Aug 2021 16:13:13 +0100
+Message-Id: <20210818151315.9505-1-daniel.thompson@linaro.org>
+X-Mailer: git-send-email 2.30.2
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-From: Grant Seltzer <grantseltzer@gmail.com>
+A couple of small improvements to the dmatest documentation.
 
-This patch renames a documentation libbpf.rst to index.rst. In order
-for readthedocs to pick this file up and properly build the
-documentation site.
+The first provides a description of what the test actually does.  The
+second corrects the description of how the test behaves if the channel
+parameter is not configured.
 
-It also changes the title type of the ABI subsection in the
-naming convention doc. This is so that readthedocs doesn't treat this
-section as a seperate document.
+Daniel Thompson (2):
+  Documentation: dmaengine: Add a description of what dmatest does
+  Documentation: dmaengine: Correctly describe dmatest with channel
+    unset
 
-Signed-off-by: Grant Seltzer <grantseltzer@gmail.com>
----
- Documentation/bpf/libbpf/{libbpf.rst => index.rst}    | 8 ++++++++
- Documentation/bpf/libbpf/libbpf_naming_convention.rst | 2 +-
- 2 files changed, 9 insertions(+), 1 deletion(-)
- rename Documentation/bpf/libbpf/{libbpf.rst => index.rst} (75%)
+ Documentation/driver-api/dmaengine/dmatest.rst | 17 ++++++++++++++---
+ 1 file changed, 14 insertions(+), 3 deletions(-)
 
-diff --git a/Documentation/bpf/libbpf/libbpf.rst b/Documentation/bpf/libbpf/index.rst
-similarity index 75%
-rename from Documentation/bpf/libbpf/libbpf.rst
-rename to Documentation/bpf/libbpf/index.rst
-index 1b1e61d5ead1..4f8adfc3ab83 100644
---- a/Documentation/bpf/libbpf/libbpf.rst
-+++ b/Documentation/bpf/libbpf/index.rst
-@@ -3,6 +3,14 @@
- libbpf
- ======
- 
-+For API documentation see the `versioned API documentation site <https://libbpf.readthedocs.io/en/latest/api.html>`_.
-+
-+.. toctree::
-+   :maxdepth: 1
-+
-+   libbpf_naming_convention
-+   libbpf_build
-+
- This is documentation for libbpf, a userspace library for loading and
- interacting with bpf programs.
- 
-diff --git a/Documentation/bpf/libbpf/libbpf_naming_convention.rst b/Documentation/bpf/libbpf/libbpf_naming_convention.rst
-index 6bf9c5ac7576..9c68d5014ff1 100644
---- a/Documentation/bpf/libbpf/libbpf_naming_convention.rst
-+++ b/Documentation/bpf/libbpf/libbpf_naming_convention.rst
-@@ -69,7 +69,7 @@ functions. These can be mixed and matched. Note that these functions
- are not reentrant for performance reasons.
- 
- ABI
--==========
-+---
- 
- libbpf can be both linked statically or used as DSO. To avoid possible
- conflicts with other libraries an application is linked with, all
--- 
-2.31.1
+
+base-commit: 7c60610d476766e128cc4284bb6349732cbd6606
+--
+2.30.2
 
