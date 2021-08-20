@@ -2,94 +2,119 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id D8D963F32E4
-	for <lists+linux-doc@lfdr.de>; Fri, 20 Aug 2021 20:15:53 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 474C13F337C
+	for <lists+linux-doc@lfdr.de>; Fri, 20 Aug 2021 20:23:43 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S236023AbhHTSQ1 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Fri, 20 Aug 2021 14:16:27 -0400
-Received: from mail.kernel.org ([198.145.29.99]:47104 "EHLO mail.kernel.org"
+        id S236139AbhHTSYT (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Fri, 20 Aug 2021 14:24:19 -0400
+Received: from mga18.intel.com ([134.134.136.126]:48048 "EHLO mga18.intel.com"
         rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S235950AbhHTSQZ (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Fri, 20 Aug 2021 14:16:25 -0400
-Received: by mail.kernel.org (Postfix) with ESMTPSA id E56A461056;
-        Fri, 20 Aug 2021 18:15:45 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-        s=k20201202; t=1629483347;
-        bh=lEauG8US0wWV105yX+m78yPpsHVn1SxEBoQkVuK3wLQ=;
-        h=Subject:From:To:Cc:Date:In-Reply-To:References:From;
-        b=iZ8eL9VRJ2N0qnU/+VFbVX5aGbw4kSBmXpVBDdGtuWN2mZZshQv3Sb6XkSinqPdSC
-         R5RyHVBJpS81J3HejjC36ETWbCFSCGZ0D5WUK6YDB8XgpgWPo63s8BlbXeGRbCRKnt
-         GV70SMKuQrvX1zNhZMdl9qhyq1Q+3jFAVMH49sDZrL3YMWU1Q1IxIWMrV1YzPOmaMu
-         JB6HA0VU2hf0RC2+nKj9N4D7MveLwtqVI1BcAPje48v763gchaevYK9wjV2GBFR1+G
-         gZtxMTvv1RC6qzlHrVFmgvJGAekzzmMg1Kz3BfKshjEKmIWIV9wrDLBOwoXfdzT/Sg
-         6GTkKruOhJ+QQ==
-Message-ID: <30fdfda30b42b8b836a199b3cbe65d1673f5100f.camel@kernel.org>
-Subject: Re: [PATCH v3 0/2] fs: remove support for mandatory locking
-From:   Jeff Layton <jlayton@kernel.org>
-To:     torvalds@linux-foundation.org, linux-fsdevel@vger.kernel.org,
-        linux-kernel@vger.kernel.org
-Cc:     ebiederm@xmission.com, david@redhat.com, willy@infradead.org,
-        linux-nfs@vger.kernel.org, viro@zeniv.linux.org.uk,
-        linux-doc@vger.kernel.org, v9fs-developer@lists.sourceforge.net,
-        linux-afs@lists.infradead.org, cluster-devel@redhat.com,
-        ocfs2-devel@oss.oracle.com, linux-mm@kvack.org,
-        akpm@linux-foundation.org, luto@kernel.org, bfields@fieldses.org,
-        rostedt@goodmis.org
-Date:   Fri, 20 Aug 2021 14:15:44 -0400
-In-Reply-To: <20210820163919.435135-1-jlayton@kernel.org>
-References: <20210820163919.435135-1-jlayton@kernel.org>
-Content-Type: text/plain; charset="ISO-8859-15"
-User-Agent: Evolution 3.40.4 (3.40.4-1.fc34) 
+        id S236946AbhHTSXz (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Fri, 20 Aug 2021 14:23:55 -0400
+X-IronPort-AV: E=McAfee;i="6200,9189,10082"; a="203964937"
+X-IronPort-AV: E=Sophos;i="5.84,338,1620716400"; 
+   d="scan'208";a="203964937"
+Received: from fmsmga003.fm.intel.com ([10.253.24.29])
+  by orsmga106.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 20 Aug 2021 11:23:07 -0700
+X-IronPort-AV: E=Sophos;i="5.84,338,1620716400"; 
+   d="scan'208";a="523799150"
+Received: from yyu32-desk.sc.intel.com ([143.183.136.146])
+  by fmsmga003-auth.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 20 Aug 2021 11:23:07 -0700
+From:   Yu-cheng Yu <yu-cheng.yu@intel.com>
+To:     x86@kernel.org, "H. Peter Anvin" <hpa@zytor.com>,
+        Thomas Gleixner <tglx@linutronix.de>,
+        Ingo Molnar <mingo@redhat.com>, linux-kernel@vger.kernel.org,
+        linux-doc@vger.kernel.org, linux-mm@kvack.org,
+        linux-arch@vger.kernel.org, linux-api@vger.kernel.org,
+        Arnd Bergmann <arnd@arndb.de>,
+        Andy Lutomirski <luto@kernel.org>,
+        Balbir Singh <bsingharora@gmail.com>,
+        Borislav Petkov <bp@alien8.de>,
+        Cyrill Gorcunov <gorcunov@gmail.com>,
+        Dave Hansen <dave.hansen@linux.intel.com>,
+        Eugene Syromiatnikov <esyr@redhat.com>,
+        Florian Weimer <fweimer@redhat.com>,
+        "H.J. Lu" <hjl.tools@gmail.com>, Jann Horn <jannh@google.com>,
+        Jonathan Corbet <corbet@lwn.net>,
+        Kees Cook <keescook@chromium.org>,
+        Mike Kravetz <mike.kravetz@oracle.com>,
+        Nadav Amit <nadav.amit@gmail.com>,
+        Oleg Nesterov <oleg@redhat.com>, Pavel Machek <pavel@ucw.cz>,
+        Peter Zijlstra <peterz@infradead.org>,
+        Randy Dunlap <rdunlap@infradead.org>,
+        "Ravi V. Shankar" <ravi.v.shankar@intel.com>,
+        Dave Martin <Dave.Martin@arm.com>,
+        Weijiang Yang <weijiang.yang@intel.com>,
+        Pengfei Xu <pengfei.xu@intel.com>,
+        Haitao Huang <haitao.huang@intel.com>,
+        Rick P Edgecombe <rick.p.edgecombe@intel.com>
+Cc:     Yu-cheng Yu <yu-cheng.yu@intel.com>
+Subject: [PATCH v29 00/10] Control-flow Enforcement: Indirect Branch Tracking
+Date:   Fri, 20 Aug 2021 11:22:35 -0700
+Message-Id: <20210820182245.1188-1-yu-cheng.yu@intel.com>
+X-Mailer: git-send-email 2.21.0
 MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Fri, 2021-08-20 at 12:39 -0400, Jeff Layton wrote:
-> v3: slight revision to verbiage, and use pr_warn_once
-> 
-> The first patch in this series adds a new warning that should pop on
-> kernels that have mandatory locking enabled when someone mounts a
-> filesystem with -o mand. The second patch removes support for mandatory
-> locking altogether.
-> 
-> What I think we probably want to do is apply the first to v5.14 before
-> it ships and allow the new warning to trickle out into stable kernels.
-> Then we can merge the second patch in v5.15 to go ahead and remove it.
-> 
-> Sound like a plan?
-> 
-> Jeff Layton (2):
->   fs: warn about impending deprecation of mandatory locks
->   fs: remove mandatory file locking support
-> 
->  .../filesystems/mandatory-locking.rst         | 188 ------------------
->  fs/9p/vfs_file.c                              |  12 --
->  fs/Kconfig                                    |  10 -
->  fs/afs/flock.c                                |   4 -
->  fs/ceph/locks.c                               |   3 -
->  fs/gfs2/file.c                                |   3 -
->  fs/locks.c                                    | 116 +----------
->  fs/namei.c                                    |   4 +-
->  fs/namespace.c                                |  25 +--
->  fs/nfs/file.c                                 |   4 -
->  fs/nfsd/nfs4state.c                           |  13 --
->  fs/nfsd/vfs.c                                 |  15 --
->  fs/ocfs2/locks.c                              |   4 -
->  fs/open.c                                     |   8 +-
->  fs/read_write.c                               |   7 -
->  fs/remap_range.c                              |  10 -
->  include/linux/fs.h                            |  84 --------
->  mm/mmap.c                                     |   6 -
->  mm/nommu.c                                    |   3 -
->  19 files changed, 14 insertions(+), 505 deletions(-)
->  delete mode 100644 Documentation/filesystems/mandatory-locking.rst
-> 
+Control-flow Enforcement (CET) is a new Intel processor feature that blocks
+return/jump-oriented programming attacks.  Details are in "Intel 64 and
+IA-32 Architectures Software Developer's Manual" [1].
 
-I went ahead and pushed this version into the locks-next branch, so we
-can give it some soak time before merging.
+This is the second part of CET and enables Indirect Branch Tracking (IBT).
+It is built on top of the shadow stack series.
+
+Changes in v29:
+- Rebase to Linus tree v5.14-rc6.
+
+Changes in v28:
+- Patch #10: Update change log and comments.
+- Rebase to Linus tree v5.14-rc2.
+
+Changes in v27:
+- Use a ucontext flag to save/restore IBT status.
+- Disable IBT support for IA32.
+- Rebase to Linus tree v5.13-rc2.
+
+[1] Intel 64 and IA-32 Architectures Software Developer's Manual:
+
+    https://software.intel.com/en-us/download/intel-64-and-ia-32-
+    architectures-sdm-combined-volumes-1-2a-2b-2c-2d-3a-3b-3c-3d-and-4
+
+H.J. Lu (3):
+  x86/cet/ibt: Update arch_prctl functions for Indirect Branch Tracking
+  x86/vdso: Insert endbr32/endbr64 to vDSO
+  x86/vdso/32: Add ENDBR to __kernel_vsyscall entry point
+
+Yu-cheng Yu (7):
+  x86/cet/ibt: Add Kconfig option for Indirect Branch Tracking
+  x86/cet/ibt: Add user-mode Indirect Branch Tracking support
+  x86/cet/ibt: Handle signals for Indirect Branch Tracking
+  x86/cet/ibt: Disable IBT for ia32
+  x86/cet/ibt: Update ELF header parsing for Indirect Branch Tracking
+  x86/vdso: Introduce ENDBR macro
+  x86/vdso: Add ENDBR to __vdso_sgx_enter_enclave
+
+ arch/x86/Kconfig                         | 19 +++++
+ arch/x86/entry/vdso/Makefile             |  4 +
+ arch/x86/entry/vdso/vdso32/system_call.S |  2 +
+ arch/x86/entry/vdso/vsgx.S               |  4 +
+ arch/x86/ia32/ia32_signal.c              | 22 +++++-
+ arch/x86/include/asm/cet.h               | 13 ++++
+ arch/x86/include/asm/disabled-features.h |  8 +-
+ arch/x86/include/asm/elf.h               | 13 +++-
+ arch/x86/include/asm/vdso.h              | 20 ++++-
+ arch/x86/include/uapi/asm/ucontext.h     |  5 ++
+ arch/x86/kernel/Makefile                 |  1 +
+ arch/x86/kernel/cet_prctl.c              |  5 ++
+ arch/x86/kernel/ibt.c                    | 99 ++++++++++++++++++++++++
+ arch/x86/kernel/process_64.c             |  6 ++
+ arch/x86/kernel/signal.c                 |  6 ++
+ 15 files changed, 221 insertions(+), 6 deletions(-)
+ create mode 100644 arch/x86/kernel/ibt.c
 
 -- 
-Jeff Layton <jlayton@kernel.org>
+2.21.0
 
