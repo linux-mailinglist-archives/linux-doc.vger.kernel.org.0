@@ -2,98 +2,72 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 6EC463F6F11
-	for <lists+linux-doc@lfdr.de>; Wed, 25 Aug 2021 07:54:52 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id F1E233F6F4F
+	for <lists+linux-doc@lfdr.de>; Wed, 25 Aug 2021 08:18:16 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S237229AbhHYFza (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 25 Aug 2021 01:55:30 -0400
-Received: from mail.kernel.org ([198.145.29.99]:38086 "EHLO mail.kernel.org"
-        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S232265AbhHYFza (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Wed, 25 Aug 2021 01:55:30 -0400
-Received: by mail.kernel.org (Postfix) with ESMTPSA id 25EF361357;
-        Wed, 25 Aug 2021 05:54:39 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-        s=k20201202; t=1629870885;
-        bh=17R6CFi26OkMcA1IXVU7URfswjpzF+gER56JrIECCKs=;
-        h=References:From:To:Cc:Subject:Date:In-reply-to:From;
-        b=Vyye6PRqPFZKLwvl098lwC1bVyHGVa4+z8YaY5eXZRfCs71xud+UnySH/MSkCH8Wi
-         GwQxAENGWpdE0CpijJH5Ry1Zn1zk8Fv5rYeUVnDPNE9WH2Yfy2M3IAxJ8RRHwcY40z
-         NvrLjnrl0kQhs0zQAOY69+Ev6AbrvnXVIAD9MTapUKJQl8rVc5JhMsmpQVev/yhJ9J
-         iNHV1TkW0DNdgMfz9tfdR+D8d75Vgreh9gS/cgs9jVviLIim1QFvOMdJcsOEX5pNGL
-         IwbQrMuGejfEE3OSXbB5uTAoJndnqbTSnss12WtzTw6QcbVkjA/6Od9DkirZPkZ2BC
-         W2YppeGxTTJWQ==
-References: <20210824201433.11385-1-ftoth@exalondelft.nl>
- <20210824201433.11385-3-ftoth@exalondelft.nl>
-User-agent: mu4e 1.6.4; emacs 27.2
-From:   Felipe Balbi <balbi@kernel.org>
-To:     Ferry Toth <ftoth@exalondelft.nl>
-Cc:     Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
-        Jerome Brunet <jbrunet@baylibre.com>,
-        Ruslan Bilovol <ruslan.bilovol@gmail.com>,
-        Oded Gabbay <oded.gabbay@gmail.com>,
-        Cezary Rojewski <cezary.rojewski@intel.com>,
-        Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
-        Pawel Laszczak <pawell@cadence.com>,
-        Jack Pham <jackp@codeaurora.org>, linux-kernel@vger.kernel.org,
-        linux-usb@vger.kernel.org, linux-doc@vger.kernel.org,
-        Jonathan Corbet <corbet@lwn.net>,
-        Lorenzo Colitti <lorenzo@google.com>,
-        Wesley Cheng <wcheng@codeaurora.org>, robh+dt@kernel.org,
-        agross@kernel.org, bjorn.andersson@linaro.org,
-        frowand.list@gmail.com, devicetree@vger.kernel.org,
-        linux-arm-msm@vger.kernel.org, heikki.krogerus@linux.intel.com,
-        Thinh Nguyen <Thinh.Nguyen@synopsys.com>,
-        Andy Shevchenko <andy.shevchenko@gmail.com>,
-        Pavel Hofman <pavel.hofman@ivitera.com>,
-        Ferry Toth <fntoth@gmail.com>
-Subject: Re: [PATCH v1 3/3] Revert "usb: gadget: f_uac2/u_audio: add
- feedback endpoint support"
-Date:   Wed, 25 Aug 2021 08:54:28 +0300
-In-reply-to: <20210824201433.11385-3-ftoth@exalondelft.nl>
-Message-ID: <87mtp65ash.fsf@kernel.org>
+        id S237913AbhHYGTA (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 25 Aug 2021 02:19:00 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:39388 "EHLO
+        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S238912AbhHYGS7 (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Wed, 25 Aug 2021 02:18:59 -0400
+Received: from mail-pl1-x632.google.com (mail-pl1-x632.google.com [IPv6:2607:f8b0:4864:20::632])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 797FFC06179A
+        for <linux-doc@vger.kernel.org>; Tue, 24 Aug 2021 23:18:14 -0700 (PDT)
+Received: by mail-pl1-x632.google.com with SMTP id d17so13673450plr.12
+        for <linux-doc@vger.kernel.org>; Tue, 24 Aug 2021 23:18:14 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=mime-version:reply-to:sender:from:date:message-id:subject:to;
+        bh=Aauu7gYvMaBruI9Zt1CgTlkxSZ8evQwPBhKOMH6jf8s=;
+        b=qvm8u+1ZPgYp3er00SJ1H/N47wIERZ9ZoahbreDaDkQLNQPOlZLNOwnIOmxIjPyPvL
+         jpbWKkbAqpPv+2Nue+f22JSiMYjRutq/UyzJtF+pe2ooH1Ug3++6QcHin4NOKDg2NLMm
+         SNw6W2CZTTEiX2y7v9uFOSZqJeNumyEPQr/jlabzM5Y98ZUf/YEFZdbZMFcRm3OLlLsq
+         bYtgixcA1CBuQkCCg6kHqdeuKZ2uBrortznSy/T7NSgcar6xr90BTMdpW1zqNKIhssYk
+         z2t75a4T5/5cX4SecbBfKBH2AKxHnQ00HEn3RQnjDGFHA3Y1kllzAzryKue+OzFqwf+3
+         3niQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:mime-version:reply-to:sender:from:date
+         :message-id:subject:to;
+        bh=Aauu7gYvMaBruI9Zt1CgTlkxSZ8evQwPBhKOMH6jf8s=;
+        b=czgtCadjafzd4J76I0/PSt3Rz2eAO3hllalME9qVUhaWp2cxDCt7vaVQYRjM0VG02U
+         MF56P7ii7QgsSFJt1PU2uAgYRP+8jbAd2U/EdyZ2n6MGxHzJ9kIeRnJA9SVrPKfVLp+d
+         K6yrFFU324oxXjE+0eZTjmlUldBWjSdlPHGISAsHZvnXh/JDRLA6INzTVvWTaDhCpCcT
+         qvEN9y5Xc/AkiRU66Dxg2RlQoiUgl6gk80uKs2Jivp50gA/yHihqr6+gz18fnLLD5CgM
+         73W270265rHHlmRHJtgg8A9m1bs3bbqjgO//fXiNhX8d8TAzfwRLfWqLmcVxqWNiaP/F
+         kinw==
+X-Gm-Message-State: AOAM530Yfk5SAo4SpSV4jE3YYOEIrmT0rPSwr9igYm6dhYchPkFlDEQu
+        KtL3/E9xPcNyE0VWjp5fsBFz9US7rOo1nlSkUQc=
+X-Google-Smtp-Source: ABdhPJy5ur9JDPGNzSi6XqBseEHSzZiEocsq7vk/hbZQAkdEgjrB2HQPUYBM1jDYm9qY52w9z7LjB+6U3/SNuWtPxRY=
+X-Received: by 2002:a17:902:b20e:b029:12b:fd6f:44c3 with SMTP id
+ t14-20020a170902b20eb029012bfd6f44c3mr36477752plr.36.1629872293847; Tue, 24
+ Aug 2021 23:18:13 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain
+Reply-To: godwinppter@gmail.com
+Sender: dr.nikitarehan@gmail.com
+Received: by 2002:a05:6a10:f491:0:0:0:0 with HTTP; Tue, 24 Aug 2021 23:18:13
+ -0700 (PDT)
+From:   Godwin Pete <godwinnpeter@gmail.com>
+Date:   Wed, 25 Aug 2021 08:18:13 +0200
+X-Google-Sender-Auth: gew227SNXERudqQnJEnJ6yGgOs8
+Message-ID: <CALd83H0vrxNspzMYCWVjF8On6V_KsJeNt7RLWdOmOOkpYU=YUw@mail.gmail.com>
+Subject: Important message to you
+To:     undisclosed-recipients:;
+Content-Type: text/plain; charset="UTF-8"
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
+My good friend,
 
-Ferry Toth <ftoth@exalondelft.nl> writes:
+I just want to know if you, can help me to transfer the amount of
+($6Million). After the transfer we have to share it, 50% for me, and
+50% for you. Please let me know if you can help me for more
+information in regards with the transfer. I hope you can work with me
+honestly?
 
-> This reverts commit 24f779dac8f3efb9629adc0e486914d93dc45517.
->
-> The commit is part of a series with commit
-> 24f779dac8f3efb9629adc0e486914d93dc45517 causing a BUG on dwc3
-> hardware, at least on Intel Merrifield platform when configured
-> through configfs:
-> BUG: kernel NULL pointer dereference, address: 0000000000000008
-> ...
-> RIP: 0010:dwc3_gadget_del_and_unmap_request+0x19/0xe0
-> ...
-> Call Trace:
->  dwc3_remove_requests.constprop.0+0x12f/0x170
->  __dwc3_gadget_ep_disable+0x7a/0x160
->  dwc3_gadget_ep_disable+0x3d/0xd0
->  usb_ep_disable+0x1c/0x70
->  u_audio_stop_capture+0x79/0x120 [u_audio]
->  afunc_set_alt+0x73/0x80 [usb_f_uac2]
->  composite_setup+0x224/0x1b90 [libcomposite]
->
-> Pavel's suggestion to add
-> `echo "adaptive" > functions/uac2.usb0/c_sync` to the configfs script
-> resolves the issue.
-> Thinh suggests "the crash is probably because of f_uac2 prematurely
-> freeing feedback request before its completion. usb_ep_dequeue() is
-> asynchronous. dwc2() may treat it as a synchronous call so you didn't
-> get a crash."
->
-> Revert as this is a regression and the kernel shouldn't crash depending
-> on configuration parameters.
->
-> Reported-by: Ferry Toth <fntoth@gmail.com>
 
-Signed-off-by?
+Thanks.
 
--- 
-balbi
+Godwin Peter,
