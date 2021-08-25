@@ -2,72 +2,128 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id F1E233F6F4F
-	for <lists+linux-doc@lfdr.de>; Wed, 25 Aug 2021 08:18:16 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 6E7203F7034
+	for <lists+linux-doc@lfdr.de>; Wed, 25 Aug 2021 09:16:53 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S237913AbhHYGTA (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 25 Aug 2021 02:19:00 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:39388 "EHLO
+        id S239181AbhHYHRg (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 25 Aug 2021 03:17:36 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:53270 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S238912AbhHYGS7 (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Wed, 25 Aug 2021 02:18:59 -0400
-Received: from mail-pl1-x632.google.com (mail-pl1-x632.google.com [IPv6:2607:f8b0:4864:20::632])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 797FFC06179A
-        for <linux-doc@vger.kernel.org>; Tue, 24 Aug 2021 23:18:14 -0700 (PDT)
-Received: by mail-pl1-x632.google.com with SMTP id d17so13673450plr.12
-        for <linux-doc@vger.kernel.org>; Tue, 24 Aug 2021 23:18:14 -0700 (PDT)
+        with ESMTP id S238606AbhHYHRf (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Wed, 25 Aug 2021 03:17:35 -0400
+Received: from mail-ej1-x633.google.com (mail-ej1-x633.google.com [IPv6:2a00:1450:4864:20::633])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 4EEFDC061757;
+        Wed, 25 Aug 2021 00:16:50 -0700 (PDT)
+Received: by mail-ej1-x633.google.com with SMTP id e21so33580851ejz.12;
+        Wed, 25 Aug 2021 00:16:50 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=mime-version:reply-to:sender:from:date:message-id:subject:to;
-        bh=Aauu7gYvMaBruI9Zt1CgTlkxSZ8evQwPBhKOMH6jf8s=;
-        b=qvm8u+1ZPgYp3er00SJ1H/N47wIERZ9ZoahbreDaDkQLNQPOlZLNOwnIOmxIjPyPvL
-         jpbWKkbAqpPv+2Nue+f22JSiMYjRutq/UyzJtF+pe2ooH1Ug3++6QcHin4NOKDg2NLMm
-         SNw6W2CZTTEiX2y7v9uFOSZqJeNumyEPQr/jlabzM5Y98ZUf/YEFZdbZMFcRm3OLlLsq
-         bYtgixcA1CBuQkCCg6kHqdeuKZ2uBrortznSy/T7NSgcar6xr90BTMdpW1zqNKIhssYk
-         z2t75a4T5/5cX4SecbBfKBH2AKxHnQ00HEn3RQnjDGFHA3Y1kllzAzryKue+OzFqwf+3
-         3niQ==
+        h=subject:to:cc:references:from:message-id:date:user-agent
+         :mime-version:in-reply-to:content-language:content-transfer-encoding;
+        bh=lKMjc7E78IAkyfL3fZ1SzFFun5yiSkSzpm9G4CZp2i4=;
+        b=tsUYQ1MJ3OHa8GPKWJqG4csvl7OhVgn7JQgX7/AtcJYu/71+oNbXYKTqnFpnKvpnvT
+         KbXqnMecrQM95coLn77ICurJTAB9C5U9MF5lsJim2h8Cbx6OpIDRPF5W7e3CRrZlw3ed
+         2yDsfgNZCf/DIy+BrInImDouJBl/lFVLcF3xQKLRTSmoYgmsqJ2ZpJnpKmZATysZmutF
+         tAQ8bBQ4ig5c9mMQenVaajWYEAdlTCC1Gw8/uKLVPUTtxwN1lXDeolTJ4mhE1K2X7HXe
+         AbhcoHT2u0Oxq1ZW3OX4g4DArRzKZgMvoIjCtZAZmPnNJqi8ZzNBmmNFcf/GCiYICape
+         fOEA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:reply-to:sender:from:date
-         :message-id:subject:to;
-        bh=Aauu7gYvMaBruI9Zt1CgTlkxSZ8evQwPBhKOMH6jf8s=;
-        b=czgtCadjafzd4J76I0/PSt3Rz2eAO3hllalME9qVUhaWp2cxDCt7vaVQYRjM0VG02U
-         MF56P7ii7QgsSFJt1PU2uAgYRP+8jbAd2U/EdyZ2n6MGxHzJ9kIeRnJA9SVrPKfVLp+d
-         K6yrFFU324oxXjE+0eZTjmlUldBWjSdlPHGISAsHZvnXh/JDRLA6INzTVvWTaDhCpCcT
-         qvEN9y5Xc/AkiRU66Dxg2RlQoiUgl6gk80uKs2Jivp50gA/yHihqr6+gz18fnLLD5CgM
-         73W270265rHHlmRHJtgg8A9m1bs3bbqjgO//fXiNhX8d8TAzfwRLfWqLmcVxqWNiaP/F
-         kinw==
-X-Gm-Message-State: AOAM530Yfk5SAo4SpSV4jE3YYOEIrmT0rPSwr9igYm6dhYchPkFlDEQu
-        KtL3/E9xPcNyE0VWjp5fsBFz9US7rOo1nlSkUQc=
-X-Google-Smtp-Source: ABdhPJy5ur9JDPGNzSi6XqBseEHSzZiEocsq7vk/hbZQAkdEgjrB2HQPUYBM1jDYm9qY52w9z7LjB+6U3/SNuWtPxRY=
-X-Received: by 2002:a17:902:b20e:b029:12b:fd6f:44c3 with SMTP id
- t14-20020a170902b20eb029012bfd6f44c3mr36477752plr.36.1629872293847; Tue, 24
- Aug 2021 23:18:13 -0700 (PDT)
+        h=x-gm-message-state:subject:to:cc:references:from:message-id:date
+         :user-agent:mime-version:in-reply-to:content-language
+         :content-transfer-encoding;
+        bh=lKMjc7E78IAkyfL3fZ1SzFFun5yiSkSzpm9G4CZp2i4=;
+        b=j4dsTglAUSN6+wl4c1hNyXvdcHWzRv1JI6vq/Wz9G1bHIgwHUlTR4EGupPJba6k3E9
+         GwzLOzwk2hYA1KbzTNFCee9YwqT3sNc918UnnnSVrGVHip7ONgF/h749aFKTYpcXlKM+
+         Sr3MiU8mVSv6Nf+pxr+YciFxsiiCzj1E7qGEG/JkERsYLj9vIyArBXFxXGNaqjUOhTwE
+         FsPjM1NlSVjkR4Cx+rDbIww9uKq82Da+OKNwYMMeLFfrKgoQi7QWPrZ/9CNahXzORWUF
+         HsLYMyTAYVaQQYQ0W8h6rNzl1ecokNcfU4RLkG1PsViLZRxzsG2lqmqy9I+zrHNOpUla
+         NEaQ==
+X-Gm-Message-State: AOAM531+j6anwkIJEIc3SLMW339RRoLRyCaQTlJVHlJxhfc0C5oDL1VY
+        +whgrt+Kgz7f+QQmceQ5P5U=
+X-Google-Smtp-Source: ABdhPJyYYegy/t9WzmeIlTQF2cHB70Xg1WUlnBzFZ5ciMJk8kzVXPXF7ARETWir+tHKpBRbRSOOOKQ==
+X-Received: by 2002:a17:906:3bc3:: with SMTP id v3mr44854819ejf.482.1629875808907;
+        Wed, 25 Aug 2021 00:16:48 -0700 (PDT)
+Received: from ?IPv6:2001:981:6fec:1:b36a:4b43:c293:3ba2? ([2001:981:6fec:1:b36a:4b43:c293:3ba2])
+        by smtp.gmail.com with ESMTPSA id q5sm13205341edt.50.2021.08.25.00.16.47
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Wed, 25 Aug 2021 00:16:48 -0700 (PDT)
+Subject: Re: [PATCH v1 1/3] Revert "usb: gadget: u_audio: add real feedback
+ implementation"
+To:     Felipe Balbi <balbi@kernel.org>, Ferry Toth <ftoth@exalondelft.nl>
+Cc:     Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+        Jerome Brunet <jbrunet@baylibre.com>,
+        Ruslan Bilovol <ruslan.bilovol@gmail.com>,
+        Oded Gabbay <oded.gabbay@gmail.com>,
+        Cezary Rojewski <cezary.rojewski@intel.com>,
+        Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
+        Pawel Laszczak <pawell@cadence.com>,
+        Jack Pham <jackp@codeaurora.org>, linux-kernel@vger.kernel.org,
+        linux-usb@vger.kernel.org, linux-doc@vger.kernel.org,
+        Jonathan Corbet <corbet@lwn.net>,
+        Lorenzo Colitti <lorenzo@google.com>,
+        Wesley Cheng <wcheng@codeaurora.org>, robh+dt@kernel.org,
+        agross@kernel.org, bjorn.andersson@linaro.org,
+        frowand.list@gmail.com, devicetree@vger.kernel.org,
+        linux-arm-msm@vger.kernel.org, heikki.krogerus@linux.intel.com,
+        Thinh Nguyen <Thinh.Nguyen@synopsys.com>,
+        Andy Shevchenko <andy.shevchenko@gmail.com>,
+        Pavel Hofman <pavel.hofman@ivitera.com>
+References: <20210824201433.11385-1-ftoth@exalondelft.nl>
+ <87v93u5au9.fsf@kernel.org>
+From:   Ferry Toth <fntoth@gmail.com>
+Message-ID: <51212e46-a7c0-7d32-a711-0a865e816d33@gmail.com>
+Date:   Wed, 25 Aug 2021 09:16:46 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
+ Thunderbird/78.11.0
 MIME-Version: 1.0
-Reply-To: godwinppter@gmail.com
-Sender: dr.nikitarehan@gmail.com
-Received: by 2002:a05:6a10:f491:0:0:0:0 with HTTP; Tue, 24 Aug 2021 23:18:13
- -0700 (PDT)
-From:   Godwin Pete <godwinnpeter@gmail.com>
-Date:   Wed, 25 Aug 2021 08:18:13 +0200
-X-Google-Sender-Auth: gew227SNXERudqQnJEnJ6yGgOs8
-Message-ID: <CALd83H0vrxNspzMYCWVjF8On6V_KsJeNt7RLWdOmOOkpYU=YUw@mail.gmail.com>
-Subject: Important message to you
-To:     undisclosed-recipients:;
-Content-Type: text/plain; charset="UTF-8"
+In-Reply-To: <87v93u5au9.fsf@kernel.org>
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Language: en-US
+Content-Transfer-Encoding: 7bit
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-My good friend,
+Hi,
+Op 25-08-2021 om 07:53 schreef Felipe Balbi:
+> 
+> Ferry Toth <ftoth@exalondelft.nl> writes:
+> 
+>> This reverts commit e89bb4288378b85c82212b60dc98ecda6b3d3a70.
+>>
+>> The commit is part of a series with commit
+>> 24f779dac8f3efb9629adc0e486914d93dc45517 causing a BUG on dwc3
+>> hardware, at least on Intel Merrifield platform when configured
+>> through configfs:
+>> BUG: kernel NULL pointer dereference, address: 0000000000000008
+>> ...
+>> RIP: 0010:dwc3_gadget_del_and_unmap_request+0x19/0xe0
+>> ...
+>> Call Trace:
+>>   dwc3_remove_requests.constprop.0+0x12f/0x170
+>>   __dwc3_gadget_ep_disable+0x7a/0x160
+>>   dwc3_gadget_ep_disable+0x3d/0xd0
+>>   usb_ep_disable+0x1c/0x70
+>>   u_audio_stop_capture+0x79/0x120 [u_audio]
+>>   afunc_set_alt+0x73/0x80 [usb_f_uac2]
+>>   composite_setup+0x224/0x1b90 [libcomposite]
+>>
+>> Pavel's suggestion to add
+>> `echo "adaptive" > functions/uac2.usb0/c_sync` to the configfs script
+>> resolves the issue.
+>> Thinh suggests "the crash is probably because of f_uac2 prematurely
+>> freeing feedback request before its completion. usb_ep_dequeue() is
+>> asynchronous. dwc2() may treat it as a synchronous call so you didn't
+>> get a crash."
+>>
+>> Revert as this is a regression and the kernel shouldn't crash depending
+>> on configuration parameters.
+>>
+>> Reported-by: Ferry Toth <fntoth@gmail.com>
+> 
+> this should be Signed-off-by ;-)
+> 
+Indeed. It probably was until I re-worded the commit text.
 
-I just want to know if you, can help me to transfer the amount of
-($6Million). After the transfer we have to share it, 50% for me, and
-50% for you. Please let me know if you can help me for more
-information in regards with the transfer. I hope you can work with me
-honestly?
-
-
-Thanks.
-
-Godwin Peter,
+Will resend tonight v2.
