@@ -2,147 +2,86 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id BAC243F8E0D
-	for <lists+linux-doc@lfdr.de>; Thu, 26 Aug 2021 20:43:35 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 4FD243F8E88
+	for <lists+linux-doc@lfdr.de>; Thu, 26 Aug 2021 21:14:19 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S243373AbhHZSoB (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 26 Aug 2021 14:44:01 -0400
-Received: from smtprelay0174.hostedemail.com ([216.40.44.174]:38202 "EHLO
-        smtprelay.hostedemail.com" rhost-flags-OK-OK-OK-FAIL)
-        by vger.kernel.org with ESMTP id S243288AbhHZSoB (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Thu, 26 Aug 2021 14:44:01 -0400
-Received: from omf02.hostedemail.com (clb03-v110.bra.tucows.net [216.40.38.60])
-        by smtprelay01.hostedemail.com (Postfix) with ESMTP id DC885100E894C;
-        Thu, 26 Aug 2021 18:43:12 +0000 (UTC)
-Received: from [HIDDEN] (Authenticated sender: joe@perches.com) by omf02.hostedemail.com (Postfix) with ESMTPA id A1BD71D42F8;
-        Thu, 26 Aug 2021 18:43:11 +0000 (UTC)
-From:   Joe Perches <joe@perches.com>
-To:     Petr Mladek <pmladek@suse.com>,
-        Steven Rostedt <rostedt@goodmis.org>,
-        Sergey Senozhatsky <senozhatsky@chromium.org>,
-        Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
-        Rasmus Villemoes <linux@rasmusvillemoes.dk>
-Cc:     Jonathan Corbet <corbet@lwn.net>, linux-doc@vger.kernel.org,
-        linux-kernel@vger.kernel.org
-Subject: [PATCH 1/5] vsprintf/Documentation: Add X to %*ph extension to output upper case hex
-Date:   Thu, 26 Aug 2021 11:43:01 -0700
-Message-Id: <bc33e306a9064dfbf1180a35f9bfa587c6502eca.1630003183.git.joe@perches.com>
-X-Mailer: git-send-email 2.30.0
-In-Reply-To: <cover.1630003183.git.joe@perches.com>
-References: <cover.1630003183.git.joe@perches.com>
+        id S237981AbhHZTPF (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 26 Aug 2021 15:15:05 -0400
+Received: from mailfilter04-out40.webhostingserver.nl ([195.211.73.157]:61568
+        "EHLO mailfilter04-out40.webhostingserver.nl" rhost-flags-OK-OK-OK-OK)
+        by vger.kernel.org with ESMTP id S243391AbhHZTPE (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Thu, 26 Aug 2021 15:15:04 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=exalondelft.nl; s=whs1;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc:to:from:
+         from;
+        bh=67cnWy3rW/WRnFpQePp6vVIJLxw7FP6uaLsSK01XjKk=;
+        b=LkpAVlIBxEC0Tl02Rax81B/yHLLCoLYqsROgvkNUu1r75o3tmc1N0/SOg0G4ZwtdARAFQ7ES0Lvpf
+         rYiwxxXvztzsmoeDTA4dV9vBDUoWZbdWnGJKYadL+aZGlZLVtTa4kBVGuk9Eo//1+mqpVdzqkCjdpw
+         xZfqeGX3yQ7/H/KEtrDVKdg0jdQkhacaLxonW/0ktY/+snjRRKBkFm3f7mrzScexeoISLsJyIBhncS
+         tbW4yqKOqZRJALibjYS90HNnqhMx1UI44OShRAI5Pi0KXo3tsq7LSiHQmWRgkGa35EJbEifMlKjVxG
+         nY1ylJoJqSdiENSsubR7W7ln9vMx2mA==
+X-Halon-ID: 8ac6b3ea-069f-11ec-8938-001a4a4cb95f
+Received: from s198.webhostingserver.nl (s198.webhostingserver.nl [141.138.168.154])
+        by mailfilter04.webhostingserver.nl (Halon) with ESMTPSA
+        id 8ac6b3ea-069f-11ec-8938-001a4a4cb95f;
+        Thu, 26 Aug 2021 20:58:04 +0200 (CEST)
+Received: from [2001:981:6fec:1:f9ad:97f3:2f9b:d8ba] (helo=localhost.localdomain)
+        by s198.webhostingserver.nl with esmtpa (Exim 4.94.2)
+        (envelope-from <ftoth@exalondelft.nl>)
+        id 1mJKZh-009E4p-KA; Thu, 26 Aug 2021 20:58:03 +0200
+From:   Ferry Toth <ftoth@exalondelft.nl>
+To:     Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+        Ferry Toth <ftoth@exalondelft.nl>,
+        Ruslan Bilovol <ruslan.bilovol@gmail.com>,
+        Jerome Brunet <jbrunet@baylibre.com>,
+        Jonathan Corbet <corbet@lwn.net>,
+        Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
+        Pawel Laszczak <pawell@cadence.com>,
+        Felipe Balbi <balbi@kernel.org>,
+        Jack Pham <jackp@codeaurora.org>, linux-kernel@vger.kernel.org,
+        linux-usb@vger.kernel.org, linux-doc@vger.kernel.org
+Cc:     Lorenzo Colitti <lorenzo@google.com>,
+        Wesley Cheng <wcheng@codeaurora.org>, robh+dt@kernel.org,
+        agross@kernel.org, bjorn.andersson@linaro.org,
+        frowand.list@gmail.com, devicetree@vger.kernel.org,
+        linux-arm-msm@vger.kernel.org, heikki.krogerus@linux.intel.com,
+        Thinh Nguyen <Thinh.Nguyen@synopsys.com>,
+        Andy Shevchenko <andy.shevchenko@gmail.com>,
+        Pavel Hofman <pavel.hofman@ivitera.com>
+Subject: [PATCH v2 0/3] Revert "usb: gadget: u_audio: add real feedback implementation"
+Date:   Thu, 26 Aug 2021 20:57:36 +0200
+Message-Id: <20210826185739.3868-1-ftoth@exalondelft.nl>
+X-Mailer: git-send-email 2.30.2
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Spam-Status: No, score=5.10
-X-Stat-Signature: xma4geogintafk4fq5999pib9fb915sa
-X-Rspamd-Server: rspamout05
-X-Rspamd-Queue-Id: A1BD71D42F8
-X-Session-Marker: 6A6F6540706572636865732E636F6D
-X-Session-ID: U2FsdGVkX1+We4XWtKcgRIaH66WbuAlHEKemFDnH12Y=
-X-HE-Tag: 1630003391-142208
+X-Antivirus-Scanner: Clean mail though you should still use an Antivirus
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-A few sysfs output uses of hex arrays are uppercase and are nominally ABI.
+Although there is a patch resolving this issue (see 
+https://lore.kernel.org/linux-usb/1jilzsy8g7.fsf@starbuckisacylon.baylibre.com/T/#u)
+it needs a little work and will not be ready for v5.14.0 release. Until then
+revert the series.
 
-Add a mechanism to the existing vsprintf %*ph hex output extension to
-support upper case hex output.
+v2:
+- Added SoB (Balbi)
 
-Signed-off-by: Joe Perches <joe@perches.com>
----
- Documentation/core-api/printk-formats.rst |  6 ++++
- lib/vsprintf.c                            | 42 ++++++++++++++---------
- 2 files changed, 31 insertions(+), 17 deletions(-)
 
-diff --git a/Documentation/core-api/printk-formats.rst b/Documentation/core-api/printk-formats.rst
-index e08bbe9b0cbf3..ca750274992e6 100644
---- a/Documentation/core-api/printk-formats.rst
-+++ b/Documentation/core-api/printk-formats.rst
-@@ -284,10 +284,16 @@ Raw buffer as a hex string
- 
- ::
- 
-+	The preferred output is lowercase
- 	%*ph	00 01 02  ...  3f
- 	%*phC	00:01:02: ... :3f
- 	%*phD	00-01-02- ... -3f
- 	%*phN	000102 ... 3f
-+	Formats with X are uppercase, used for backwards compatibility
-+	%*phX	00 01 02  ...  3F
-+	%*phCX	00:01:02: ... :3F
-+	%*phDX	00-01-02- ... -3F
-+	%*phNX	000102 ... 3F
- 
- For printing small buffers (up to 64 bytes long) as a hex string with a
- certain separator. For larger buffers consider using
-diff --git a/lib/vsprintf.c b/lib/vsprintf.c
-index 134216c45980e..5c22a07bbe3a7 100644
---- a/lib/vsprintf.c
-+++ b/lib/vsprintf.c
-@@ -1147,7 +1147,10 @@ char *hex_string(char *buf, char *end, u8 *addr, struct printf_spec spec,
- {
- 	int i, len = 1;		/* if we pass '%ph[CDN]', field width remains
- 				   negative value, fallback to the default */
--	char separator;
-+	char separator = ' ';
-+	int count = 1;
-+	bool found = true;
-+	char locase = 0x20;	/* ASCII OR'd for lower case see: number() */
- 
- 	if (spec.field_width == 0)
- 		/* nothing to print */
-@@ -1156,30 +1159,35 @@ char *hex_string(char *buf, char *end, u8 *addr, struct printf_spec spec,
- 	if (check_pointer(&buf, end, addr, spec))
- 		return buf;
- 
--	switch (fmt[1]) {
--	case 'C':
--		separator = ':';
--		break;
--	case 'D':
--		separator = '-';
--		break;
--	case 'N':
--		separator = 0;
--		break;
--	default:
--		separator = ' ';
--		break;
--	}
-+	do {
-+		switch (fmt[count++]) {
-+		case 'C':
-+			separator = ':';
-+			break;
-+		case 'D':
-+			separator = '-';
-+			break;
-+		case 'N':
-+			separator = 0;
-+			break;
-+		case 'X':
-+			locase = 0;
-+			break;
-+		default:
-+			found = false;
-+			break;
-+		}
-+	} while (found);
- 
- 	if (spec.field_width > 0)
- 		len = min_t(int, spec.field_width, 64);
- 
- 	for (i = 0; i < len; ++i) {
- 		if (buf < end)
--			*buf = hex_asc_hi(addr[i]);
-+			*buf = hex_asc_upper_hi(addr[i]) | locase;
- 		++buf;
- 		if (buf < end)
--			*buf = hex_asc_lo(addr[i]);
-+			*buf = hex_asc_upper_lo(addr[i]) | locase;
- 		++buf;
- 
- 		if (separator && i != len - 1) {
+Ferry Toth (3):
+  Revert "usb: gadget: u_audio: add real feedback implementation"
+  Revert "usb: gadget: f_uac2: add adaptive sync support for capture"
+  Revert "usb: gadget: f_uac2/u_audio: add feedback endpoint support"
+
+ .../ABI/testing/configfs-usb-gadget-uac2      |   2 -
+ Documentation/usb/gadget-testing.rst          |   2 -
+ drivers/usb/gadget/function/f_uac2.c          | 144 +----------
+ drivers/usb/gadget/function/u_audio.c         | 225 +-----------------
+ drivers/usb/gadget/function/u_audio.h         |  12 -
+ drivers/usb/gadget/function/u_uac2.h          |   4 -
+ 6 files changed, 6 insertions(+), 383 deletions(-)
+
 -- 
-2.30.0
+2.30.2
 
