@@ -2,172 +2,118 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 3066A3FF0C3
-	for <lists+linux-doc@lfdr.de>; Thu,  2 Sep 2021 18:09:26 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 2B4753FF1E5
+	for <lists+linux-doc@lfdr.de>; Thu,  2 Sep 2021 18:56:56 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1345998AbhIBQKX (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 2 Sep 2021 12:10:23 -0400
-Received: from mail-ot1-f43.google.com ([209.85.210.43]:36532 "EHLO
-        mail-ot1-f43.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S234426AbhIBQKW (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Thu, 2 Sep 2021 12:10:22 -0400
-Received: by mail-ot1-f43.google.com with SMTP id a20-20020a0568300b9400b0051b8ca82dfcso3159745otv.3;
-        Thu, 02 Sep 2021 09:09:24 -0700 (PDT)
+        id S234548AbhIBQ5x (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 2 Sep 2021 12:57:53 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:54776 "EHLO
+        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1346480AbhIBQ5w (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Thu, 2 Sep 2021 12:57:52 -0400
+Received: from mail-pj1-x102e.google.com (mail-pj1-x102e.google.com [IPv6:2607:f8b0:4864:20::102e])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 16DDAC061575
+        for <linux-doc@vger.kernel.org>; Thu,  2 Sep 2021 09:56:54 -0700 (PDT)
+Received: by mail-pj1-x102e.google.com with SMTP id l3so1765869pji.5
+        for <linux-doc@vger.kernel.org>; Thu, 02 Sep 2021 09:56:54 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=google.com; s=20161025;
+        h=date:from:to:cc:subject:message-id:references:mime-version
+         :content-disposition:in-reply-to;
+        bh=+Qgo5364SnUWK2dNQ5Zfdn6/xMGj0/q4OzZE+MW9D64=;
+        b=Evzzbucq1EgSUqQiruSqadL7VBZWvcldiKDimfrvXEg2S2TIo8Qi7uQJNX4b6v0/10
+         amVv7sNRRqnhTCHLFKdhLz4k2XZdMlH5DoUJtSQuUFXB8cyLL3Gfh1JDVUtpwmRcAW8n
+         erExgzMPh+2aOt1IQneL1CT0RB5brkkoCorwcFsSEtSBRh8J31DpoWmB5zCZbsCkPMYJ
+         PiTP1GUacJKMTHmMt3RgZdaj1U+nm29ZX8mnsDEXSX0v15aqK9zJjo+wWokpp1taEA67
+         6bJ4VywXke3JWSDCw3ZJh9mEixqfMlBrvKB8mNPKm+yJ6beIMIcDjnHqz8jN8Sam+ve8
+         0eJw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc;
-        bh=H9s/CeztrdJ5mW7eXs2FCAq69cl4eT4riWgVkym3DBI=;
-        b=CLMjo0A8UQjvOhhCbMdg4QjTOlwTDqGrsf2xypGTJK0VNn2s3N4dn9x6zzp9FxEP3V
-         1CQBsZeGe12gz0RRBwmof/tkzpNF7vTy2Ebj+FGfaaFnfPm1Ri7EA+U2zvmIHPF7R4Re
-         OrMkut2lUZ2HoDS46x976cD28MDICcluhZdQ0sOLxT+up9OtdjFF/tJ2dH/iWfxBZ1bZ
-         nyuSY4HMoxtpf0Las6lzKEijU0XDJkwq9iwvc7X2y+7Uzu/w/Mlve3PGtV0bXTXWL3LS
-         iORz5Kr9+fc4T2SOvNE1GbR9+uwal0+NQE/sGA3vuYbzcS7mw5kwPAETrHpYyOsZhr8G
-         TKFA==
-X-Gm-Message-State: AOAM531GWSLFx5kFZfeFSdeqJRO2HR6crpHxAKXBK9tqQEdXXG5RR+hq
-        fO7/DuDLVOX+q73bg8YP82cRVSMdtg6ivXpzqu4=
-X-Google-Smtp-Source: ABdhPJzKMX1gorKDZvQ6+EZ0VUUlgn8z9GTqZRYd0mvVKwMjustuLbXhmjMBcAd0OgAzQuoTkwzcuKC+jiZkpimjCfU=
-X-Received: by 2002:a9d:7115:: with SMTP id n21mr3323619otj.321.1630598963788;
- Thu, 02 Sep 2021 09:09:23 -0700 (PDT)
-MIME-Version: 1.0
-References: <20210829132243.82281-1-andriy.shevchenko@linux.intel.com>
-In-Reply-To: <20210829132243.82281-1-andriy.shevchenko@linux.intel.com>
-From:   "Rafael J. Wysocki" <rafael@kernel.org>
-Date:   Thu, 2 Sep 2021 18:09:12 +0200
-Message-ID: <CAJZ5v0iXyW3EnsjXsRCGzwkP45jjOHmErMyGhm6HvTOVCawTZA@mail.gmail.com>
-Subject: Re: [PATCH v1 1/1] Documentation: ACPI: Align the SSDT overlays file
- with the code
-To:     Andy Shevchenko <andriy.shevchenko@linux.intel.com>
-Cc:     "open list:DOCUMENTATION" <linux-doc@vger.kernel.org>,
-        Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
-        ACPI Devel Maling List <linux-acpi@vger.kernel.org>,
+        h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+         :mime-version:content-disposition:in-reply-to;
+        bh=+Qgo5364SnUWK2dNQ5Zfdn6/xMGj0/q4OzZE+MW9D64=;
+        b=jkG0j/Xfn1HebwuchdafQva7xEk/jewwCisf8qSQTJmQyngrLHQboJMLxejywNuaf4
+         5bYJFkJ1ySytL0e3gf4S2LxYwfF2RCIcDIp43aZeN2TTIvEZf6O+4o79Egzw6lclaIje
+         MBYKOxw1lzMZeIWdfABO/RlLKG2zHZ/1GwuqQzw9VpmMoP9shH4puoedMoegOCk6qLEh
+         6ScUTPboSrbO3aEg7lRSpVNeWxTVYCP8+66/BvcOlbToWBK6O+UnXiv7iEkQIeBllF5X
+         auxUbrogB2lCFxCwwcFv7o4hg5pA6lqtkmyftRE5glQDiU9j4A780bs97GjNVDtgM5/H
+         9nnA==
+X-Gm-Message-State: AOAM533jE9hdyaEmcMcUrqO6Biqvl/qzhMd13Z2znZyG83eX+KpMSE7S
+        EbxMugMaHZxDhtCj5LR/V6Ic8Q==
+X-Google-Smtp-Source: ABdhPJz7WaOCKKUUXKC5QJrEjYscQ8+A1ETyUmwukoerUYpRIYH60c0efD2qdHXWwPpJG40jHiDkyQ==
+X-Received: by 2002:a17:90a:588f:: with SMTP id j15mr5059145pji.177.1630601813323;
+        Thu, 02 Sep 2021 09:56:53 -0700 (PDT)
+Received: from google.com (157.214.185.35.bc.googleusercontent.com. [35.185.214.157])
+        by smtp.gmail.com with ESMTPSA id v190sm2968216pfv.166.2021.09.02.09.56.52
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 02 Sep 2021 09:56:52 -0700 (PDT)
+Date:   Thu, 2 Sep 2021 16:56:49 +0000
+From:   Sean Christopherson <seanjc@google.com>
+To:     Maxim Levitsky <mlevitsk@redhat.com>
+Cc:     kvm@vger.kernel.org, Kieran Bingham <kbingham@kernel.org>,
+        Jan Kiszka <jan.kiszka@siemens.com>,
+        Andrew Jones <drjones@redhat.com>,
         Jonathan Corbet <corbet@lwn.net>,
-        "Rafael J. Wysocki" <rjw@rjwysocki.net>
-Content-Type: text/plain; charset="UTF-8"
+        Vitaly Kuznetsov <vkuznets@redhat.com>,
+        Ingo Molnar <mingo@redhat.com>,
+        Thomas Gleixner <tglx@linutronix.de>,
+        "maintainer:X86 ARCHITECTURE (32-BIT AND 64-BIT)" <x86@kernel.org>,
+        Johannes Berg <johannes.berg@intel.com>,
+        Wanpeng Li <wanpengli@tencent.com>,
+        "H. Peter Anvin" <hpa@zytor.com>, Jessica Yu <jeyu@kernel.org>,
+        Jim Mattson <jmattson@google.com>,
+        Paolo Bonzini <pbonzini@redhat.com>,
+        Joerg Roedel <joro@8bytes.org>,
+        Yang Weijiang <weijiang.yang@intel.com>,
+        linux-kernel@vger.kernel.org, Borislav Petkov <bp@alien8.de>,
+        "open list:KERNEL SELFTEST FRAMEWORK" 
+        <linux-kselftest@vger.kernel.org>,
+        "open list:DOCUMENTATION" <linux-doc@vger.kernel.org>,
+        Shuah Khan <shuah@kernel.org>,
+        Andrew Morton <akpm@linux-foundation.org>,
+        Borislav Petkov <bp@suse.de>
+Subject: Re: [PATCH v3 2/6] KVM: x86: add force_intercept_exceptions_mask
+Message-ID: <YTECUaPa9kySQxRX@google.com>
+References: <20210811122927.900604-1-mlevitsk@redhat.com>
+ <20210811122927.900604-3-mlevitsk@redhat.com>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20210811122927.900604-3-mlevitsk@redhat.com>
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Sun, Aug 29, 2021 at 3:22 PM Andy Shevchenko
-<andriy.shevchenko@linux.intel.com> wrote:
->
-> This updates the following:
->
-> 1) The ASL code to follow latest ACPI requirements, i.e.
->    - static buffer to be defined outside of the method
->    - The _ADR and _HID shouldn't be together for the same device
->
-> 2) EFI section relies on the additional kernel configuration option,
->    i.e. CONFIG_EFI_CUSTOM_SSDT_OVERLAYS
->
-> 3) Refer to ACPI machine language as AML (capitalized)
->
-> 4) Miscellaneous amendments
->
-> Signed-off-by: Andy Shevchenko <andriy.shevchenko@linux.intel.com>
+Assuming this hasn't been abandoned...
 
-Applied, thanks!
-
+On Wed, Aug 11, 2021, Maxim Levitsky wrote:
+> This parameter will be used by VMX and SVM code to force
+> interception of a set of exceptions, given by a bitmask
+> for guest debug and/or kvm debug.
+> 
+> This is based on an idea first shown here:
+> https://patchwork.kernel.org/project/kvm/patch/20160301192822.GD22677@pd.tnic/
+> 
+> CC: Borislav Petkov <bp@suse.de>
+> Signed-off-by: Maxim Levitsky <mlevitsk@redhat.com>
 > ---
->  .../admin-guide/acpi/ssdt-overlays.rst        | 49 ++++++++++---------
->  1 file changed, 25 insertions(+), 24 deletions(-)
->
-> diff --git a/Documentation/admin-guide/acpi/ssdt-overlays.rst b/Documentation/admin-guide/acpi/ssdt-overlays.rst
-> index 5d7e25988085..b5fbf54dca19 100644
-> --- a/Documentation/admin-guide/acpi/ssdt-overlays.rst
-> +++ b/Documentation/admin-guide/acpi/ssdt-overlays.rst
-> @@ -30,22 +30,21 @@ following ASL code can be used::
->          {
->              Device (STAC)
->              {
-> -                Name (_ADR, Zero)
->                  Name (_HID, "BMA222E")
-> +                Name (RBUF, ResourceTemplate ()
-> +                {
-> +                    I2cSerialBus (0x0018, ControllerInitiated, 0x00061A80,
-> +                                AddressingMode7Bit, "\\_SB.I2C6", 0x00,
-> +                                ResourceConsumer, ,)
-> +                    GpioInt (Edge, ActiveHigh, Exclusive, PullDown, 0x0000,
-> +                            "\\_SB.GPO2", 0x00, ResourceConsumer, , )
-> +                    { // Pin list
-> +                        0
-> +                    }
-> +                })
->
->                  Method (_CRS, 0, Serialized)
->                  {
-> -                    Name (RBUF, ResourceTemplate ()
-> -                    {
-> -                        I2cSerialBus (0x0018, ControllerInitiated, 0x00061A80,
-> -                                    AddressingMode7Bit, "\\_SB.I2C6", 0x00,
-> -                                    ResourceConsumer, ,)
-> -                        GpioInt (Edge, ActiveHigh, Exclusive, PullDown, 0x0000,
-> -                                "\\_SB.GPO2", 0x00, ResourceConsumer, , )
-> -                        { // Pin list
-> -                            0
-> -                        }
-> -                    })
->                      Return (RBUF)
->                  }
->              }
-> @@ -75,7 +74,7 @@ This option allows loading of user defined SSDTs from initrd and it is useful
->  when the system does not support EFI or when there is not enough EFI storage.
->
->  It works in a similar way with initrd based ACPI tables override/upgrade: SSDT
-> -aml code must be placed in the first, uncompressed, initrd under the
-> +AML code must be placed in the first, uncompressed, initrd under the
->  "kernel/firmware/acpi" path. Multiple files can be used and this will translate
->  in loading multiple tables. Only SSDT and OEM tables are allowed. See
->  initrd_table_override.txt for more details.
-> @@ -103,12 +102,14 @@ This is the preferred method, when EFI is supported on the platform, because it
->  allows a persistent, OS independent way of storing the user defined SSDTs. There
->  is also work underway to implement EFI support for loading user defined SSDTs
->  and using this method will make it easier to convert to the EFI loading
-> -mechanism when that will arrive.
-> +mechanism when that will arrive. To enable it, the
-> +CONFIG_EFI_CUSTOM_SSDT_OVERLAYS shoyld be chosen to y.
->
-> -In order to load SSDTs from an EFI variable the efivar_ssdt kernel command line
-> -parameter can be used. The argument for the option is the variable name to
-> -use. If there are multiple variables with the same name but with different
-> -vendor GUIDs, all of them will be loaded.
-> +In order to load SSDTs from an EFI variable the ``"efivar_ssdt=..."`` kernel
-> +command line parameter can be used (the name has a limitation of 16 characters).
-> +The argument for the option is the variable name to use. If there are multiple
-> +variables with the same name but with different vendor GUIDs, all of them will
-> +be loaded.
->
->  In order to store the AML code in an EFI variable the efivarfs filesystem can be
->  used. It is enabled and mounted by default in /sys/firmware/efi/efivars in all
-> @@ -127,7 +128,7 @@ variable with the content from a given file::
->
->      #!/bin/sh -e
->
-> -    while ! [ -z "$1" ]; do
-> +    while [ -n "$1" ]; do
->              case "$1" in
->              "-f") filename="$2"; shift;;
->              "-g") guid="$2"; shift;;
-> @@ -167,14 +168,14 @@ variable with the content from a given file::
->  Loading ACPI SSDTs from configfs
->  ================================
->
-> -This option allows loading of user defined SSDTs from userspace via the configfs
-> +This option allows loading of user defined SSDTs from user space via the configfs
->  interface. The CONFIG_ACPI_CONFIGFS option must be select and configfs must be
->  mounted. In the following examples, we assume that configfs has been mounted in
-> -/config.
-> +/sys/kernel/config.
->
-> -New tables can be loading by creating new directories in /config/acpi/table/ and
-> -writing the SSDT aml code in the aml attribute::
-> +New tables can be loading by creating new directories in /sys/kernel/config/acpi/table
-> +and writing the SSDT AML code in the aml attribute::
->
-> -    cd /config/acpi/table
-> +    cd /sys/kernel/config/acpi/table
->      mkdir my_ssdt
->      cat ~/ssdt.aml > my_ssdt/aml
-> --
-> 2.33.0
->
+>  arch/x86/kvm/x86.c | 3 +++
+>  arch/x86/kvm/x86.h | 2 ++
+>  2 files changed, 5 insertions(+)
+> 
+> diff --git a/arch/x86/kvm/x86.c b/arch/x86/kvm/x86.c
+> index fdc0c18339fb..092e2fad3c0d 100644
+> --- a/arch/x86/kvm/x86.c
+> +++ b/arch/x86/kvm/x86.c
+> @@ -184,6 +184,9 @@ module_param(force_emulation_prefix, bool, S_IRUGO);
+>  int __read_mostly pi_inject_timer = -1;
+>  module_param(pi_inject_timer, bint, S_IRUGO | S_IWUSR);
+>  
+> +uint force_intercept_exceptions_mask;
+> +module_param(force_intercept_exceptions_mask, uint, S_IRUGO | S_IWUSR);
+
+Use octal permissions.  This also can't be a simple writable param, at least not
+without a well-documented disclaimer, as there's no guarantee a vCPU will update
+its exception bitmap in a timely fashion.  An alternative to a module param would
+be to extend/add a per-VM ioctl(), e.g. maybe KVM_SET_GUEST_DEBUG?  The downside
+of an ioctl() is that it would require userspace enabling :-/
