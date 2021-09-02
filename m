@@ -2,135 +2,81 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 744A33FE9B2
-	for <lists+linux-doc@lfdr.de>; Thu,  2 Sep 2021 09:05:16 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id BBE433FEB1B
+	for <lists+linux-doc@lfdr.de>; Thu,  2 Sep 2021 11:20:47 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S242697AbhIBHGC (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 2 Sep 2021 03:06:02 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:59304 "EHLO
+        id S244932AbhIBJTr (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 2 Sep 2021 05:19:47 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:33244 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S242126AbhIBHGB (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Thu, 2 Sep 2021 03:06:01 -0400
-Received: from mail-pj1-x102d.google.com (mail-pj1-x102d.google.com [IPv6:2607:f8b0:4864:20::102d])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 5A807C061575
-        for <linux-doc@vger.kernel.org>; Thu,  2 Sep 2021 00:05:03 -0700 (PDT)
-Received: by mail-pj1-x102d.google.com with SMTP id f11-20020a17090aa78b00b0018e98a7cddaso769963pjq.4
-        for <linux-doc@vger.kernel.org>; Thu, 02 Sep 2021 00:05:03 -0700 (PDT)
+        with ESMTP id S244800AbhIBJTq (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Thu, 2 Sep 2021 05:19:46 -0400
+Received: from mail-vs1-xe41.google.com (mail-vs1-xe41.google.com [IPv6:2607:f8b0:4864:20::e41])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 2ED3DC061575
+        for <linux-doc@vger.kernel.org>; Thu,  2 Sep 2021 02:18:48 -0700 (PDT)
+Received: by mail-vs1-xe41.google.com with SMTP id n63so863576vsc.11
+        for <linux-doc@vger.kernel.org>; Thu, 02 Sep 2021 02:18:48 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=bytedance-com.20150623.gappssmtp.com; s=20150623;
-        h=subject:to:cc:references:from:message-id:date:user-agent
-         :mime-version:in-reply-to:content-transfer-encoding;
-        bh=HBaL61QBYMUZzotrZtJQEFy+kr+3Pv8VSTjmOd/YXyc=;
-        b=gpq0+vByj5ZSakSAjmhB412QEKXYdbHQRt6Wrovgsdv2THWPRdvv7VmHPJny18IvW+
-         UL1jW2O4X/utRsV9mUkdSIDkSjQSAanBZ1D2yv9r8aWO1lk5a4v1/IUhviaTUCXodQEH
-         M0VoNSQ/S9BxwE7HaYDjf/fxqmYskFlTkyRwXEaLM4hrpTgIXVpavUM7mVUEvdoFgDt9
-         XN1AO6niSrcOKJo2Xcp8ituadZv38hO1gg7ZUbIMVvGQC2alXEORX5t2puTz2wmEkFIQ
-         UxmW3iWRbxPxbHbSome9N7OF+K4bSIQ8zqa144SZUhifjaFwwIg8+f4GeA2BmK7clJ84
-         2bDA==
+        d=gmail.com; s=20210112;
+        h=mime-version:sender:from:date:message-id:subject:to;
+        bh=TC+nhXxBdJK3obpDs1iN9EZ0mNXi/cecL/OuO0w5uI4=;
+        b=cMp1wKkPswa+J4xt3ZAaC+GxlJAHP2Wm4oGXo4IxjGCqrRvQcweHc3d6ESTwN5nRsL
+         SK4JQpSyKYCoEKyZQNMz758Uf1BG7kU3DgO0GVsndtp9QmBSZkW9fKwhYryPO7Z3YtZM
+         v0tdqsx5N/kQsSIhswgnau+OUWB3huHsi7AYWO6/dtcz1RRbXf8EpmBb9hFfUru0qZ1o
+         SnI8UcVZna62XgqQSWFoTx3ABBADv4JgQ2YjiY5JF85ausRuT6nk1+NfIPThRnrQR/CA
+         FhfehSB502I7tUgEDfeEo0QbdbKgHDlmRKOu3rmZvfzQtIuT4xwR7hV9UPwWXNZW74ar
+         J2yg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:subject:to:cc:references:from:message-id:date
-         :user-agent:mime-version:in-reply-to:content-transfer-encoding;
-        bh=HBaL61QBYMUZzotrZtJQEFy+kr+3Pv8VSTjmOd/YXyc=;
-        b=Q8U2ymTlC4rZgRTB1UVQMJCQSOhsRRCBU/S7mcKAs39BYZceWnQVPgHCZ5RPST7rhV
-         8YflsMvFb3hHhSvpzQfPFQbr72eOj9hRCpJE0auKu8mSNVkLPUcJ2OGrZ/ekZ0S5Vp0E
-         hksHQbc31fgwYZqEtZCstwWwf2b2gnycTl+1qeE9eotZcRHWzTJjBIR9CssKxfp9CKcC
-         o5rGlhEr6KxJuWdWg706FIwgYSVSzz574+3hc4jLHrCKDtwPtjorQmtRoBz7nAu/XQvM
-         gxkOoKURzVXxxjDF4tWYlPEAB2WDXejx747rAUIOGY48QuZRihLcGqVngS7rvPjvo7ZH
-         pPXw==
-X-Gm-Message-State: AOAM531yaqme5bZAn+Wakg3DI7GPm8OMVrsilV28O69eafj45+i7ovtY
-        o/JOOS8U3xCWbLsyN4Po126XUg==
-X-Google-Smtp-Source: ABdhPJwpJqPKt9Y7iE8kwSXxa86EER+DXHn4/hF1fRP/w8Fj/bNnbhwN4Ru5ZqkqVVCTzkNLo39/kw==
-X-Received: by 2002:a17:90a:d990:: with SMTP id d16mr2305089pjv.2.1630566302822;
-        Thu, 02 Sep 2021 00:05:02 -0700 (PDT)
-Received: from [10.254.207.253] ([139.177.225.243])
-        by smtp.gmail.com with ESMTPSA id ev12sm984854pjb.57.2021.09.02.00.04.56
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Thu, 02 Sep 2021 00:05:02 -0700 (PDT)
-Subject: Re: [PATCH v2 6/9] mm: free user PTE page table pages
-To:     Jason Gunthorpe <jgg@nvidia.com>,
-        David Hildenbrand <david@redhat.com>
-Cc:     akpm@linux-foundation.org, tglx@linutronix.de, hannes@cmpxchg.org,
-        mhocko@kernel.org, vdavydov.dev@gmail.com,
-        kirill.shutemov@linux.intel.com, mika.penttila@nextfour.com,
-        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
-        linux-mm@kvack.org, songmuchun@bytedance.com
-References: <20210819031858.98043-1-zhengqi.arch@bytedance.com>
- <20210819031858.98043-7-zhengqi.arch@bytedance.com>
- <20210901135314.GA1859446@nvidia.com>
- <0c9766c9-6e8b-5445-83dc-9f2b71a76b4f@redhat.com>
- <20210901153247.GJ1721383@nvidia.com>
- <7789261d-6a64-c47b-be6c-c9be680e5d33@redhat.com>
- <20210901161613.GN1721383@nvidia.com>
- <e8ebb0bb-b268-c43b-6fc1-e5240dc085c9@redhat.com>
- <20210901171039.GO1721383@nvidia.com>
- <ef7a722d-0bc0-1c68-b11b-9ede073516e0@redhat.com>
- <20210901175547.GP1721383@nvidia.com>
-From:   Qi Zheng <zhengqi.arch@bytedance.com>
-Message-ID: <b013b637-a3d6-9caf-32d4-9c04fac29c64@bytedance.com>
-Date:   Thu, 2 Sep 2021 15:04:53 +0800
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:78.0)
- Gecko/20100101 Thunderbird/78.13.0
+        h=x-gm-message-state:mime-version:sender:from:date:message-id:subject
+         :to;
+        bh=TC+nhXxBdJK3obpDs1iN9EZ0mNXi/cecL/OuO0w5uI4=;
+        b=OhaA2N561j5fMCOUQOkJTQSMBqEmWIqV2xRY+VLxDbtV65VshgeOEz3B0dxajSx4tS
+         QgQrsYuhNupVtfO5whcCLRjMuOX33e83PbtMb4+JX5ihwnP8DMVF/v3mh5KRuH7JieMW
+         uqYCDYNiUAu8WNa+gpJ9J2lpCBImASM3BdpxQbgV1Ywz+EKJqW+eB0i8iSvVakEeRs21
+         TUdEjFV1XZkJEBYxIWoPG8++cSvyp3VxEGaT/tj9XI6csfPAO6JnyOOjn8rD24rDVh0d
+         kGXD7I8wwOyz2z02nCoIa95tIZZ3q69m8RkH5kZTo+MSeYGwxgYbLW2HaoNQp0vIhNrH
+         oIUA==
+X-Gm-Message-State: AOAM531wLh5Mmv9miHemPhf9J44dgg6i+QO27fHCIpf6WYSuKvLX5Ov4
+        qU0S1Q6t9hbHvUWPDddevfKuNxffN/i92NM3/AY=
+X-Google-Smtp-Source: ABdhPJwnspwaAWxsJJkIYTFB0XjTyf9Yyy/sVY65cJOHElWCSwlMk8s1fdFWGJG1qcQsRDoLkx940BRuI/F818U5JAI=
+X-Received: by 2002:a67:fb8b:: with SMTP id n11mr1229348vsr.27.1630574327130;
+ Thu, 02 Sep 2021 02:18:47 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <20210901175547.GP1721383@nvidia.com>
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Sender: dayx209@gmail.com
+Received: by 2002:ab0:6504:0:0:0:0:0 with HTTP; Thu, 2 Sep 2021 02:18:46 -0700 (PDT)
+From:   "Mrs. Shahinaz Zuthimalin" <mrsshahinazzuthimalin9@gmail.com>
+Date:   Thu, 2 Sep 2021 09:18:46 +0000
+X-Google-Sender-Auth: 7UalJK_3iZLPZ7I_u_4F67JnXjE
+Message-ID: <CACia2o4mkASZB9v8ogOC57BRstzdOoVrFWhawX8kAy0NmOxhSg@mail.gmail.com>
+Subject: HELLO!!!!
+To:     undisclosed-recipients:;
+Content-Type: text/plain; charset="UTF-8"
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
+Hello,
 
-
-On 2021/9/2 AM1:55, Jason Gunthorpe wrote:
-> On Wed, Sep 01, 2021 at 07:49:23PM +0200, David Hildenbrand wrote:
->> On 01.09.21 19:10, Jason Gunthorpe wrote:
->>> On Wed, Sep 01, 2021 at 06:19:03PM +0200, David Hildenbrand wrote:
->>>
->>>>> I wouldn't think it works everywhere, bit it works in a lot of places,
->>>>> and it is a heck of a lot better than what is proposed here. I'd
->>>>> rather see the places that can use it be moved, and the few places
->>>>> that can't be opencoded.
->>>>
->>>> Well, I used ptep_get_map_lock() and friends. But hacking directly into
->>>> ptep_map_lock() and friends wasn't possible due to all the corner cases.
->>>
->>> Sure, I'm not surprised you can't get every single case, but that just
->>> suggest we need two API families, today's to support the special cases
->>> and a different one for the other regular simple cases.
->>>
->>> A new function family pte_try_map/_locked() and paired unmap that can
->>> internally do the recounting and THP trickery and convert the easy
->>> callsites.
->>>
->>> Very rough counting suggest at least half of the pte_offset_map_lock()
->>> call sites can trivially use the simpler API.
->>>
->>> The other cases can stay as is and get open coded refcounts, or maybe
->>> someone will have a better idea once they are more clearly identified.
->>>
->>> But I don't think we should take a performance hit of additional
->>> atomics in cases like GUP where this is trivially delt with by using a
->>> better API.
->>
->> Right, but as I said in the cover letter, we can happily optimize once we
->> have the basic infrastructure in place and properly reviewed. Getting rid of
->> some unnecessary atomics by introducing additional fancy helpers falls under
->> that category.
-> 
-> I'm not sure I agree given how big and wide this patch series is. It
-> would be easier to review if it was touching less places. The helpers
-> are not fancy, it is a logical re-arrangement of existing code that
-> shrinks the LOC of this series and makes it more reviewable.
-> 
-> Or stated another way, a niche feature like this try much harder not
-> to add more complexity everywhere.
-
-Totally agree, I will rework this patch series based on you and David's
-suggestions.
-
-Thank you very much,
-Qi
-
-> 
-> Jason
-> 
+It's my pleasure to have contact with you, based on the critical
+condition I find mine self, though, it's not financial problem, but my
+health, you might have know that cancer is not what to talk home
+about,
+I am married to Mr. Shine Zuthimalin   who worked with Tunisia embassy
+in Burkina Faso for nine years before he died in the year 2008.We were
+married for eleven years without a child. He died after a brief
+illness that lasted for five days.
+Since his death I decided not to remarry, When my late husband was
+alive he deposited the sum of US$ 10 .2m (ten  million two hundred
+thousand dollars) in a bank in Burkina Faso, Presently this money is
+still in bank. And My Doctor told me that I don't have much time to
+live because of the cancer problem,
+Having known my condition I decided to hand you over this fond to take
+care of the less-privileged people, you will utilize this money the
+way I am going to instruct herein. I want you to take 30 Percent of
+the total money for your personal use While 70% of the money will go
+to charity" people and helping the orphanage.
+I don't want my husband's efforts to be used by the Government. I grew
+up as an Orphan and I don't have anybody as my family member,
+I am expecting your respond
+Mrs. Shahinaz Zuthimalin
