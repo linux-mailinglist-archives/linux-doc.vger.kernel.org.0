@@ -2,109 +2,111 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 4CF2E400A49
-	for <lists+linux-doc@lfdr.de>; Sat,  4 Sep 2021 09:43:14 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 9AF5D400A4E
+	for <lists+linux-doc@lfdr.de>; Sat,  4 Sep 2021 09:50:41 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S233648AbhIDHn0 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Sat, 4 Sep 2021 03:43:26 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:44598 "EHLO
-        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S233631AbhIDHn0 (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Sat, 4 Sep 2021 03:43:26 -0400
-Received: from mail-pg1-x535.google.com (mail-pg1-x535.google.com [IPv6:2607:f8b0:4864:20::535])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 0D987C061575;
-        Sat,  4 Sep 2021 00:42:25 -0700 (PDT)
-Received: by mail-pg1-x535.google.com with SMTP id r2so1286487pgl.10;
-        Sat, 04 Sep 2021 00:42:25 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=CFW88EsdFTG/uHl515vVt1AHdJMDeY6+hJs8Jtyin+k=;
-        b=h0rAajVHXZVfMraBKEkp7jd5xK2sm5axB9cC8kfhDEkUfObXKC3hIOCXD8wErwnLxu
-         IRDd86yhnyGB8tjsqYouJBa/FkknDCDyFy8qXgJ9ywRrZj038tsxbJcnrLosRppiQpw7
-         4sz4r/ev6GCS2s9M6Ul3GPh9FM5YkbIUD4kJixuR2bu0klWGwp0fIxRAIor04z1yE5Xh
-         mH2UFdUcjSjXiexj9ihoGDIeyqZnNxfEmUPIPnItDQuzgfdRZxeJL2jZhY6H+5ypy9gc
-         084yBTPpEKjdpAgA5RihyX6t0aFChOY4XDpJEWHhNeiww1GMWZc/hVUg0qXl5euTisXZ
-         MQjA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=CFW88EsdFTG/uHl515vVt1AHdJMDeY6+hJs8Jtyin+k=;
-        b=nbMhBLk9CNPRvWmT9/6DKQ2mPsCW3VrfviaXb+rMjeFg3EzvYKsaOk7tI5Ew6RSL5u
-         wUAYIub3y42/NNyynTuBSesfVGN+ePlp2SpuCKZNQ4p9ofoIazhRHPICJa81b8Ygm5aB
-         egYBzZTDvpdb/bkQu7W+c2FP2pe4CtVvYiNKMxvvQO7zEL0V7z2i3i/GIuvvLd9ibFJ3
-         stus+cLE4XLsg5rHyVa/avhWCI7cm7lVWCgLpuuVwnXYTZJSZjtl41N6e1Nar4PaHlzK
-         XU8HHb71i5drRlKLpJ4rGNnO7Pj6aY2vq5JLQwJloj5HHEqnJKZ4wbjOzr8J/r2k3NFi
-         ZPug==
-X-Gm-Message-State: AOAM533MA7PhbOPTU2VvHkXk18JgUrwGEbKCbp3gTc2hRXeBANNLpALo
-        iU6wcRCBcBlp3Tok194vCZcu1s3F6LDR7xBO
-X-Google-Smtp-Source: ABdhPJxE0le/McowG26nZDxVfwSuDbelctC3UxDqotMp9K08qYiMV9gW7u6PTqZK2kFUC3p6q9CMsA==
-X-Received: by 2002:a62:7d84:0:b029:3b8:49bb:4c3f with SMTP id y126-20020a627d840000b02903b849bb4c3fmr6861178pfc.49.1630741344353;
-        Sat, 04 Sep 2021 00:42:24 -0700 (PDT)
-Received: from localhost.localdomain ([2405:201:6006:a148:82a8:3271:93dc:763c])
-        by smtp.googlemail.com with ESMTPSA id x19sm1477046pfa.104.2021.09.04.00.42.21
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 04 Sep 2021 00:42:24 -0700 (PDT)
-From:   Utkarsh Verma <utkarshverma294@gmail.com>
-To:     Dwaipayan Ray <dwaipayanray1@gmail.com>
-Cc:     Lukas Bulwahn <lukas.bulwahn@gmail.com>,
-        Joe Perches <joe@perches.com>,
-        Jonathan Corbet <corbet@lwn.net>, linux-doc@vger.kernel.org,
-        linux-kernel@vger.kernel.org,
-        Utkarsh Verma <utkarshverma294@gmail.com>
-Subject: [PATCH] Documentation: checkpatch: Add TRAILING_SEMICOLON message
-Date:   Sat,  4 Sep 2021 13:12:01 +0530
-Message-Id: <20210904074201.13532-1-utkarshverma294@gmail.com>
-X-Mailer: git-send-email 2.25.1
+        id S233340AbhIDHvb (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Sat, 4 Sep 2021 03:51:31 -0400
+Received: from smtp3-1.goneo.de ([85.220.129.38]:46960 "EHLO smtp3-1.goneo.de"
+        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
+        id S233068AbhIDHvb (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Sat, 4 Sep 2021 03:51:31 -0400
+X-Greylist: delayed 309 seconds by postgrey-1.27 at vger.kernel.org; Sat, 04 Sep 2021 03:51:30 EDT
+Received: from [192.168.1.107] (dyndsl-085-016-043-081.ewe-ip-backbone.de [85.16.43.81])
+        by smtp3.goneo.de (Postfix) with ESMTPSA id 4A8E82040DA4;
+        Sat,  4 Sep 2021 09:45:18 +0200 (CEST)
+Subject: Re: [PATCH 1/2] ext4: docs: switch away from list-table
+To:     Akira Yokosawa <akiyks@gmail.com>, Jonathan Corbet <corbet@lwn.net>
+Cc:     jack@suse.cz, linux-doc@vger.kernel.org,
+        linux-ext4@vger.kernel.org, tytso@mit.edu,
+        Mauro Carvalho Chehab <mchehab@kernel.org>
+References: <20210902220854.198850-2-corbet@lwn.net>
+ <b1909f4c-9e07-abd7-89ee-c2e551f9dc5b@gmail.com>
+ <871r65zobl.fsf@meer.lwn.net>
+ <a93af4a2-9b9f-6430-bc3a-dfb2dbf7e56b@gmail.com>
+From:   Markus Heiser <markus.heiser@darmarit.de>
+Message-ID: <68ae637d-dc8d-cedc-b058-8f4ebb146137@darmarit.de>
+Date:   Sat, 4 Sep 2021 09:45:17 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
+ Thunderbird/78.11.0
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+In-Reply-To: <a93af4a2-9b9f-6430-bc3a-dfb2dbf7e56b@gmail.com>
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Language: en-US
+Content-Transfer-Encoding: 7bit
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Add a new message type TRAILING_SEMICOLON for the macro definitions
-that conclude with a semicolon.
+Am 04.09.21 um 03:23 schrieb Akira Yokosawa:
+> On Fri, 03 Sep 2021 09:11:26 -0600, Jonathan Corbet wrote:
+>> Akira Yokosawa <akiyks@gmail.com> writes:
+>>
+>> [Adding Mauro]
+>>
+>>> On Thu,  2 Sep 2021 16:08:53 -0600, Jonathan Corbet wrote:
+>>>
+>>>> Commit 3a6541e97c03 (Add documentation about the orphan file feature) added
+>>>> a new document on orphan files, which is great.  But the use of
+>>>> "list-table" results in documents that are absolutely unreadable in their
+>>>> plain-text form.  Switch this file to the regular RST table format instead;
+>>>> the rendered (HTML) output is identical.
+>>>
+>>> In the "list tables" section of doc-guide/sphinx.rst, the first paragraph
+>>> starts with the sentence:
+>>>
+>>>      We recommend the use of list table formats.
+>>>
+>>> Yes, the disadvantage of list tables is mentioned later in the paragraph:
+>>>
+>>>      Compared to the ASCII-art they might not be as comfortable for readers
+>>>      of the text files.
+>>>
+>>> , but I still see list-table is meant as the preferred format.
+>>
+>> Interesting...that is not at all my memory of the discussions we had at
+>> that time.  There was a lot of pushback against anything that makes the
+>> RST files less readable - still is, if certain people join the
+>> conversation.  Tables were one of the early flash points.
+>>
+>> Mauro, you added that text; do you remember things differently?  Do you
+>> feel we should retain that recommendation?
+> 
+> No, the text was first added by Markus Heiser [added to CC] in commit
+> 0249a7644857 ("doc-rst: flat-table directive - initial implementation")
+> and have not updated ever since.
+> 
+> He might remember the circumstances, but 2016 was a long time ago,
+> I guess.
 
-Suggested-by: Lukas Bulwahn <lukas.bulwahn@gmail.com>
-Signed-off-by: Utkarsh Verma <utkarshverma294@gmail.com>
----
- Documentation/dev-tools/checkpatch.rst | 21 +++++++++++++++++++++
- 1 file changed, 21 insertions(+)
+We prefer list tables ...
 
-diff --git a/Documentation/dev-tools/checkpatch.rst b/Documentation/dev-tools/checkpatch.rst
-index f0956e9ea2d8..30eda8f4a8bd 100644
---- a/Documentation/dev-tools/checkpatch.rst
-+++ b/Documentation/dev-tools/checkpatch.rst
-@@ -845,6 +845,27 @@ Macros, Attributes and Symbols
-     Use the `fallthrough;` pseudo keyword instead of
-     `/* fallthrough */` like comments.
- 
-+  **TRAILING_SEMICOLON**
-+    Macro definition should not end with a semicolon. The macro
-+    invocation style should be consistent with function calls.
-+    This can prevent any unexpected code paths::
-+
-+      #define MAC do_something;
-+
-+    If this macro is used within a if else statement, like::
-+
-+      if (some_condition)
-+              MAC;
-+
-+      else
-+              do_something;
-+
-+    Then there would be a compilation error, because when the macro is
-+    expanded there are two trailing semicolons, so the else branch gets
-+    orphaned.
-+
-+    See: https://lore.kernel.org/lkml/1399671106.2912.21.camel@joe-AO725/
-+
-   **WEAK_DECLARATION**
-     Using weak declarations like __attribute__((weak)) or __weak
-     can have unintended link defects.  Avoid using them.
--- 
-2.25.1
+"""Their advantage is that they are easy to create or modify and that the
+diff of a modification is much more meaningful, because it is limited to
+the modified content."""
 
+By example: We have some very large tables with tons of rows and cols.
+If you need to extend one column just by one character you have to edit
+the whole table and the diff is not readable.
+
+It is not limited to big tables, e.g. if you patch a simple typo,
+you might need touch content not related to your fix.
+
+At the end it is a trade of, what weights more, readability of the
+plain text or readability of the patch / most often I would vote
+for the latter.
+
+  -- Markus --
+
+
+> 
+> Or did the discussions take place after the list table support had been
+> added?
+> 
+>          Thanks, Akira (a newcomer to kerneldoc)
+> 
+>>
+>> Thanks,
+>>
+>> jon
+>>
