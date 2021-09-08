@@ -2,25 +2,25 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 61095403A7D
-	for <lists+linux-doc@lfdr.de>; Wed,  8 Sep 2021 15:20:44 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 7D702403A8F
+	for <lists+linux-doc@lfdr.de>; Wed,  8 Sep 2021 15:25:40 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1347852AbhIHNVv (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 8 Sep 2021 09:21:51 -0400
-Received: from 59-120-53-16.hinet-ip.hinet.net ([59.120.53.16]:54618 "EHLO
+        id S1348991AbhIHN0q (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 8 Sep 2021 09:26:46 -0400
+Received: from 59-120-53-16.hinet-ip.hinet.net ([59.120.53.16]:54886 "EHLO
         atcsqa06.andestech.com" rhost-flags-OK-OK-OK-FAIL) by vger.kernel.org
-        with ESMTP id S238360AbhIHNVu (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Wed, 8 Sep 2021 09:21:50 -0400
-X-Greylist: delayed 375 seconds by postgrey-1.27 at vger.kernel.org; Wed, 08 Sep 2021 09:21:50 EDT
+        with ESMTP id S235294AbhIHN0q (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Wed, 8 Sep 2021 09:26:46 -0400
 Received: by atcsqa06.andestech.com (Postfix, from userid 5427)
-        id B78FAC014F; Wed,  8 Sep 2021 21:14:26 +0800 (CST)
+        id 3043CC389C; Wed,  8 Sep 2021 21:17:53 +0800 (CST)
 From:   Leo Yu-Chi Liang <ycliang@andestech.com>
 To:     corbet@lwn.net, src.res@email.cn,
         linux-doc-tw-discuss@lists.sourceforge.net
-Cc:     linux-doc@vger.kernel.org, Leo Yu-Chi Liang <ycliang@andestech.com>
+Cc:     linux-doc@vger.kernel.org, ycliang@cs.nctu.edu.tw,
+        Leo Yu-Chi Liang <ycliang@andestech.com>
 Subject: [PATCH 1/1] docs/zh_TW: Add translation for riscv/patch-acceptance
-Date:   Wed,  8 Sep 2021 21:14:25 +0800
-Message-Id: <20210908131425.31710-1-ycliang@andestech.com>
+Date:   Wed,  8 Sep 2021 21:17:50 +0800
+Message-Id: <20210908131750.1104-1-ycliang@andestech.com>
 X-Mailer: git-send-email 2.17.0
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
