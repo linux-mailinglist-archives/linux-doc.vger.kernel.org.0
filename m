@@ -2,133 +2,67 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 1F1BD40C232
-	for <lists+linux-doc@lfdr.de>; Wed, 15 Sep 2021 10:58:29 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id A45A240C3F3
+	for <lists+linux-doc@lfdr.de>; Wed, 15 Sep 2021 12:49:33 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S237117AbhIOI7a (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 15 Sep 2021 04:59:30 -0400
-Received: from mga06.intel.com ([134.134.136.31]:4552 "EHLO mga06.intel.com"
-        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S237098AbhIOI72 (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Wed, 15 Sep 2021 04:59:28 -0400
-X-IronPort-AV: E=McAfee;i="6200,9189,10107"; a="283261630"
-X-IronPort-AV: E=Sophos;i="5.85,294,1624345200"; 
-   d="scan'208";a="283261630"
-Received: from fmsmga002.fm.intel.com ([10.253.24.26])
-  by orsmga104.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 15 Sep 2021 01:58:09 -0700
-X-IronPort-AV: E=Sophos;i="5.85,294,1624345200"; 
-   d="scan'208";a="552999867"
-Received: from chenyu-desktop.sh.intel.com (HELO chenyu-desktop) ([10.239.158.176])
-  by fmsmga002-auth.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 15 Sep 2021 01:58:04 -0700
-Date:   Wed, 15 Sep 2021 17:03:57 +0800
-From:   Chen Yu <yu.c.chen@intel.com>
-To:     Greg Kroah-Hartman <gregkh@linuxfoundation.org>
-Cc:     linux-acpi@vger.kernel.org, linux-kernel@vger.kernel.org,
-        "Rafael J. Wysocki" <rafael@kernel.org>,
-        Len Brown <len.brown@intel.com>,
-        Dan Williams <dan.j.williams@intel.com>,
-        Andy Shevchenko <andriy.shevchenko@intel.com>,
-        Aubrey Li <aubrey.li@intel.com>,
-        Ashok Raj <ashok.raj@intel.com>,
-        Mike Rapoport <rppt@kernel.org>,
-        Ard Biesheuvel <ardb@kernel.org>,
-        Jonathan Corbet <corbet@lwn.net>,
-        Hans de Goede <hdegoede@redhat.com>,
-        Maximilian Luz <luzmaximilian@gmail.com>,
-        Alexander Graf <graf@amazon.com>,
-        Jarkko Sakkinen <jarkko@kernel.org>,
-        Hannes Reinecke <hare@suse.de>,
-        Ioana Ciornei <ioana.ciornei@nxp.com>,
-        Jiri Slaby <jirislaby@kernel.org>,
-        Andra Paraschiv <andraprs@amazon.com>,
-        Randy Dunlap <rdunlap@infradead.org>,
-        Ben Widawsky <ben.widawsky@intel.com>,
-        linux-doc@vger.kernel.org
-Subject: Re: [PATCH v2 3/5] drivers/acpi: Introduce Platform Firmware Runtime
- Update device driver
-Message-ID: <20210915090357.GA282742@chenyu-desktop>
-References: <cover.1631600169.git.yu.c.chen@intel.com>
- <7a739633b30f6fb5c258f21c443ed0c17b12896f.1631600169.git.yu.c.chen@intel.com>
- <YUBZM1vnZ3LjfUKc@kroah.com>
+        id S232313AbhIOKuv (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 15 Sep 2021 06:50:51 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:37054 "EHLO
+        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S232290AbhIOKuu (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Wed, 15 Sep 2021 06:50:50 -0400
+Received: from mail-lj1-x22a.google.com (mail-lj1-x22a.google.com [IPv6:2a00:1450:4864:20::22a])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id AAF02C061574
+        for <linux-doc@vger.kernel.org>; Wed, 15 Sep 2021 03:49:31 -0700 (PDT)
+Received: by mail-lj1-x22a.google.com with SMTP id c33so174265ljr.8
+        for <linux-doc@vger.kernel.org>; Wed, 15 Sep 2021 03:49:31 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112;
+        h=mime-version:reply-to:from:date:message-id:subject:to;
+        bh=UEhor0bEiwcb0mMupeT9cAKdLl3Yl0clay+f12oB4FI=;
+        b=EDrjo+dfQfTvZwKKKB1FkrzrDMr+J0c7FE9saQ0WWGf1mhTezZ9nDBp0fCBoqGygYp
+         4ThNgmlBffB9kSAj7w9dWuGTrOwztsUpGmr+evFdbgFyh9CIPysd8ESmsx/fI+z4ho6r
+         Xoa3tiOMh6HbcsnjdLFLMDAFHWcvPyfYFVL9L9FRN+aoJrwrN+0RZ03tpAU5CcOXzV4u
+         04TdRp6CIcj3A5CFLPRoI4Pvav0k/pWjgzkymlUNm1kDl6w4MRI2m+2IbdkHmM4HG+9w
+         gLCvlTCnUvGd4bJeZfU7NLZs88niiVMR1xtwv7I56nknTIvc2ytQiq77mjctjqgZE4JM
+         HMRQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:mime-version:reply-to:from:date:message-id
+         :subject:to;
+        bh=UEhor0bEiwcb0mMupeT9cAKdLl3Yl0clay+f12oB4FI=;
+        b=O7XkXrg1Ip9ut8EKMxc12MrJVdQrDkfTc3+TtDUF4WqRH47C/BslRDGxIlkS6sZKxv
+         SenuU7U/vqPs9+du68NP6FYCpv0y+HM4cJoAV/+FVcdzWs0024KwoV/+mOk3TIJgrfRn
+         uN2YGvfJBiNJMpLpjUPf0S7kujyLMKHFIgGuZ6esZ0kbvGUMQU+ZtGoPLZsN3bvuqOHg
+         q2yv1yHHYyGpvkno7E+gIHmimwW6ikCxZ40ZMFBKIxNoYJoSo4WIzTXpCVbJwCZCYOeb
+         drKrGm3p8Swu1db+fMO07p9rL38bc8l2vM70a8msmDjxHtd+ccF0EuMqq4pkLTAyHhAC
+         kVtw==
+X-Gm-Message-State: AOAM531kPS3gLJGYDEMMOtCmXuIs96BWjf9/fKn79Thpu4a/ndGN6ZtT
+        axDNa42wYI40nE9c9jJUG+MeVHJf/hICvAKCfLM=
+X-Google-Smtp-Source: ABdhPJywFgzNOhD2QWaLEafnAeAn5KApTj+jWgTVRjcXwt/MD4hazrO6PafwxS6AozvOt0wF/W+wxSvfevZA8WHeCPU=
+X-Received: by 2002:a2e:5c03:: with SMTP id q3mr19170839ljb.212.1631702969837;
+ Wed, 15 Sep 2021 03:49:29 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <YUBZM1vnZ3LjfUKc@kroah.com>
+Received: by 2002:a05:6520:2517:b0:13e:8641:15e9 with HTTP; Wed, 15 Sep 2021
+ 03:49:29 -0700 (PDT)
+Reply-To: dwilliamssdavid16@gmail.com
+From:   "Mr.David Williams" <anthonyyjurgen@gmail.com>
+Date:   Wed, 15 Sep 2021 03:49:29 -0700
+Message-ID: <CA+XgSxeYagqP6OJWc2F=hwhyv1VTO16YAM4p5x-ofyo9TFcbPg@mail.gmail.com>
+Subject: Get back to me for clarifications
+To:     undisclosed-recipients:;
+Content-Type: text/plain; charset="UTF-8"
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Hi Greg,
-thank you very much for your comments,
-On Tue, Sep 14, 2021 at 10:11:31AM +0200, Greg Kroah-Hartman wrote:
-> On Tue, Sep 14, 2021 at 03:58:41PM +0800, Chen Yu wrote:
-> > +enum start_action {
-> > +	START_STAGE,
-> > +	START_ACTIVATE,
-> > +	START_STAGE_ACTIVATE,
-> > +};
-> > +
-> > +enum dsm_status {
-> > +	DSM_SUCCEED,
-> > +	DSM_FUNC_NOT_SUPPORT,
-> > +	DSM_INVAL_INPUT,
-> > +	DSM_HARDWARE_ERR,
-> > +	DSM_RETRY_SUGGESTED,
-> > +	DSM_UNKNOWN,
-> > +	DSM_FUNC_SPEC_ERR,
-> > +};
-> > +
-> > +struct update_cap_info {
-> > +	enum dsm_status status;
-> > +	int update_cap;
-> > +
-> > +	uuid_t code_type;
-> > +	int fw_version;
-> > +	int code_rt_version;
-> > +
-> > +	uuid_t drv_type;
-> > +	int drv_rt_version;
-> > +	int drv_svn;
-> > +
-> > +	uuid_t platform_id;
-> > +	uuid_t oem_id;
-> > +
-> > +	char oem_info[];
-> 
-> Please use valid types for structures that cross the user/kernel
-> boundry.
-> 
-Okay, I'll switch them into __u prefixed one.
-> > +};
-> > +
-> > +struct com_buf_info {
-> > +	enum dsm_status status;
-> > +	enum dsm_status ext_status;
-> > +	unsigned long addr_lo;
-> > +	unsigned long addr_hi;
-> > +	int buf_size;
-> > +};
-> 
-> Same here.
-> 
-Okay, I'll fix them.
-> > +
-> > +struct updated_result {
-> > +	enum dsm_status status;
-> > +	enum dsm_status ext_status;
-> > +	unsigned long low_auth_time;
-> > +	unsigned long high_auth_time;
-> > +	unsigned long low_exec_time;
-> > +	unsigned long high_exec_time;
-> 
-> And same here.
-> 
-> And these are very odd structure names that you are adding to the
-> "global" namespace.  Please make them have a prefix for your driver so
-> that people know what they belong to.  "updated_result" is way too
-> generic.
-> 
-Okay, added the driver name prefix in next version.
+Hello Sir.
 
-thanks,
-Chenyu
+Did you authorize Mr. Liu Kong Nam of Kemuning Ray Street
+NO.8,Tomang.Jakarta, Indonesia to pay the pending wire transfer
+activation charges and claim your WORLD BANK / IMF compensation funds
+of Four million two hundred thousand US dollars???
+
+Get back to me for clarifications
+
+Mr. David Williams
