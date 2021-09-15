@@ -2,230 +2,156 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id C8E7640CA4A
-	for <lists+linux-doc@lfdr.de>; Wed, 15 Sep 2021 18:34:34 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 35F8A40CB60
+	for <lists+linux-doc@lfdr.de>; Wed, 15 Sep 2021 19:04:58 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S230490AbhIOQfj (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 15 Sep 2021 12:35:39 -0400
-Received: from frasgout.his.huawei.com ([185.176.79.56]:3832 "EHLO
-        frasgout.his.huawei.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S230226AbhIOQfd (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Wed, 15 Sep 2021 12:35:33 -0400
-Received: from fraeml714-chm.china.huawei.com (unknown [172.18.147.226])
-        by frasgout.his.huawei.com (SkyGuard) with ESMTP id 4H8m2B67JVz67vP9;
-        Thu, 16 Sep 2021 00:31:46 +0800 (CST)
-Received: from roberto-ThinkStation-P620.huawei.com (10.204.63.22) by
- fraeml714-chm.china.huawei.com (10.206.15.33) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2308.8; Wed, 15 Sep 2021 18:34:10 +0200
-From:   Roberto Sassu <roberto.sassu@huawei.com>
-To:     <zohar@linux.ibm.com>, <gregkh@linuxfoundation.org>,
-        <mchehab+huawei@kernel.org>
-CC:     <linux-integrity@vger.kernel.org>,
-        <linux-security-module@vger.kernel.org>,
-        <linux-doc@vger.kernel.org>, <linux-kselftest@vger.kernel.org>,
-        <linux-kernel@vger.kernel.org>,
-        Roberto Sassu <roberto.sassu@huawei.com>
-Subject: [RFC][PATCH 9/9] diglim: Admin guide
-Date:   Wed, 15 Sep 2021 18:31:45 +0200
-Message-ID: <20210915163145.1046505-10-roberto.sassu@huawei.com>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20210915163145.1046505-1-roberto.sassu@huawei.com>
-References: <20210915163145.1046505-1-roberto.sassu@huawei.com>
+        id S229652AbhIORGP (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 15 Sep 2021 13:06:15 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:40050 "EHLO
+        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S229573AbhIORGP (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Wed, 15 Sep 2021 13:06:15 -0400
+Received: from mail-lf1-x131.google.com (mail-lf1-x131.google.com [IPv6:2a00:1450:4864:20::131])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 1BABAC061764
+        for <linux-doc@vger.kernel.org>; Wed, 15 Sep 2021 10:04:56 -0700 (PDT)
+Received: by mail-lf1-x131.google.com with SMTP id b18so6186468lfb.1
+        for <linux-doc@vger.kernel.org>; Wed, 15 Sep 2021 10:04:55 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=google.com; s=20210112;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc;
+        bh=QiL7YfwCSR7LokE5J56usk6i2TFHnfpVhu2pbczR/rY=;
+        b=YjgBRMW6BxNZ9RQ3OrB64PcgAbpzCvURuVzS2ChPGQ9FOfcjAuiJ7nOYupy9eB316J
+         1NZt9Ps0lkvdwH0tDss0B+Lg5rtk1l4NTDZwUiJsDF4T3zxmRk1zqgBcgsBqAFfdu7/5
+         6l9Ztk6P9WF+a8hA1jgJj9VOxjhHhOx9y4kPo54MY7fqix74AHRoTUQ1EDWkE0j4G377
+         2uJ8qxBYEA1cW8jAd8iVorR13sx3cItzUFzoj07UXEzzHRNn6hyAlkBex7PDCLU8gQSA
+         vhVIZn+mQpAee7wuK8C4+KrKqs7KOrVZN55UAlWSX2/Z/zzfWt1i78uNilaLmN6eLC4B
+         yUrw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=QiL7YfwCSR7LokE5J56usk6i2TFHnfpVhu2pbczR/rY=;
+        b=FtdyiNTaRzoBv9j/GMBu1O0kqftM+XnubEHnrK+BZQiunTY480jIqkqzX1sr+hmRfT
+         n1u31KzLsUA9cNiwCI9XYIZqw1k3RjDXhFR1rsap+vCm16Q8PzpN87gnfwxw3ACHlc2M
+         A3TKagIMpYBJN/j/cvhCfJwyJd29B7spWHW4vLLg5J3HRnqZHp/Y2hmJacqVUbbH2ZXM
+         bHHr4XiJHEteY3QtAToHpI+jgud09SmfHaVeJr0Vy1izMAHqLrLiFwEBatE4/i4hCssO
+         PJMlsGXieajC6w7iOb2mXLqM2cwENoCUMInsDBIjVoDJj0HohT0gYbLc1UguuapsP5rZ
+         oOKA==
+X-Gm-Message-State: AOAM533zJUre9Gbgc8shlix6+kMXBMQcyENyYOQDWuy/5aKnnNwF4tFJ
+        OpaV7ZFY05EYBk4kBKYq4u8FkAT0+eF0YO8YfQKSWw==
+X-Google-Smtp-Source: ABdhPJyPOjV0ZpbMt3W6lj6EoQRoL7MRqeIFJLX3H5JfFbprdhI8dXfa7UQ0YFUHuvKQmtzNEFB6m5Zf2bMrT45EqbM=
+X-Received: by 2002:ac2:5fb2:: with SMTP id s18mr730787lfe.580.1631725493981;
+ Wed, 15 Sep 2021 10:04:53 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 7BIT
-Content-Type:   text/plain; charset=US-ASCII
-X-Originating-IP: [10.204.63.22]
-X-ClientProxiedBy: lhreml753-chm.china.huawei.com (10.201.108.203) To
- fraeml714-chm.china.huawei.com (10.206.15.33)
-X-CFilter-Loop: Reflected
+References: <3834f917d50a6f19402e179e917ef6a9dde5f64a.1631671936.git.brookxu@tencent.com>
+In-Reply-To: <3834f917d50a6f19402e179e917ef6a9dde5f64a.1631671936.git.brookxu@tencent.com>
+From:   Vipin Sharma <vipinsh@google.com>
+Date:   Wed, 15 Sep 2021 10:04:18 -0700
+Message-ID: <CAHVum0d657HeoSyXS9RGW8YHkwJFmvLQ6ebwYy_wVnR0gM8uPQ@mail.gmail.com>
+Subject: Re: [PATCH v3 1/3] misc_cgroup: introduce misc.events to count failures
+To:     brookxu <brookxu.cn@gmail.com>
+Cc:     tj@kernel.org, lizefan.x@bytedance.com, hannes@cmpxchg.org,
+        mkoutny@suse.com, corbet@lwn.net, linux-kernel@vger.kernel.org,
+        cgroups@vger.kernel.org, linux-doc@vger.kernel.org
+Content-Type: text/plain; charset="UTF-8"
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Introduce a DIGLIM administration guide. Its main purpose is to help users
-to configure a system to load to the kernel all the digests of executable
-and firmware from the RPM DB, and kernel modules of a custom kernel and a
-temporary file mapped as executable as custom digest lists.
+On Tue, Sep 14, 2021 at 7:18 PM brookxu <brookxu.cn@gmail.com> wrote:
+>
+> From: Chunguang Xu <brookxu@tencent.com>
+>
+> Introduce misc.events to make it easier for us to understand
+> the pressure of resources. Currently only the 'max' event is
+> implemented, which indicates the times the resource is about
+> to exceeds the max limit.
+>
+> Signed-off-by: Chunguang Xu <brookxu@tencent.com>
+> ---
+>
+> v3: remove misc.events.local.
+> v2: remove cgroup v1 files.
+>
+>  include/linux/misc_cgroup.h |  5 +++++
+>  kernel/cgroup/misc.c        | 24 ++++++++++++++++++++++++
+>  2 files changed, 29 insertions(+)
+>
+> diff --git a/include/linux/misc_cgroup.h b/include/linux/misc_cgroup.h
+> index da2367e..091f2d2 100644
+> --- a/include/linux/misc_cgroup.h
+> +++ b/include/linux/misc_cgroup.h
+> @@ -36,6 +36,7 @@ enum misc_res_type {
+>  struct misc_res {
+>         unsigned long max;
+>         atomic_long_t usage;
+> +       atomic_long_t events;
+>         bool failed;
+>  };
+>
+> @@ -46,6 +47,10 @@ struct misc_res {
+>   */
+>  struct misc_cg {
+>         struct cgroup_subsys_state css;
+> +
+> +       /* misc.events */
+> +       struct cgroup_file events_file;
+> +
+>         struct misc_res res[MISC_CG_RES_TYPES];
+>  };
+>
+> diff --git a/kernel/cgroup/misc.c b/kernel/cgroup/misc.c
+> index ec02d96..4b2b492 100644
+> --- a/kernel/cgroup/misc.c
+> +++ b/kernel/cgroup/misc.c
+> @@ -171,6 +171,11 @@ int misc_cg_try_charge(enum misc_res_type type, struct misc_cg *cg,
+>         return 0;
+>
+>  err_charge:
+> +       for (j = i; j; j = parent_misc(j)) {
+> +               atomic_long_inc(&j->res[type].events);
+> +               cgroup_file_notify(&j->events_file);
+> +       }
+> +
+>         for (j = cg; j != i; j = parent_misc(j))
+>                 misc_cg_cancel_charge(type, j, amount);
+>         misc_cg_cancel_charge(type, i, amount);
+> @@ -335,6 +340,19 @@ static int misc_cg_capacity_show(struct seq_file *sf, void *v)
+>         return 0;
+>  }
+>
+> +static int misc_events_show(struct seq_file *sf, void *v)
+> +{
+> +       struct misc_cg *cg = css_misc(seq_css(sf));
+> +       unsigned long events, i;
+> +
+> +       for (i = 0; i < MISC_CG_RES_TYPES; i++) {
+> +               events = atomic_long_read(&cg->res[i].events);
+> +               if (READ_ONCE(misc_res_capacity[i]) || events)
+> +                       seq_printf(sf, "%s.max %lu\n", misc_res_name[i], events);
+> +       }
+> +       return 0;
+> +}
+> +
+>  /* Misc cgroup interface files */
+>  static struct cftype misc_cg_files[] = {
+>         {
+> @@ -353,6 +371,12 @@ static int misc_cg_capacity_show(struct seq_file *sf, void *v)
+>                 .seq_show = misc_cg_capacity_show,
+>                 .flags = CFTYPE_ONLY_ON_ROOT,
+>         },
+> +       {
+> +               .name = "events",
+> +               .flags = CFTYPE_NOT_ON_ROOT,
+> +               .file_offset = offsetof(struct misc_cg, events_file),
+> +               .seq_show = misc_events_show,
+> +       },
+>         {}
+>  };
+>
+> --
+> 1.8.3.1
+>
 
-With further patch sets, it will be possible to load an execution policy in
-IMA and create a measurement list only with digest lists and unknown files,
-and to perform secure boot at application level.
-
-Signed-off-by: Roberto Sassu <roberto.sassu@huawei.com>
----
- Documentation/admin-guide/diglim.rst | 136 +++++++++++++++++++++++++++
- Documentation/admin-guide/index.rst  |   1 +
- MAINTAINERS                          |   1 +
- 3 files changed, 138 insertions(+)
- create mode 100644 Documentation/admin-guide/diglim.rst
-
-diff --git a/Documentation/admin-guide/diglim.rst b/Documentation/admin-guide/diglim.rst
-new file mode 100644
-index 000000000000..886100cf5a62
---- /dev/null
-+++ b/Documentation/admin-guide/diglim.rst
-@@ -0,0 +1,136 @@
-+.. SPDX-License-Identifier: GPL-2.0
-+
-+======
-+DIGLIM
-+======
-+
-+Digest Lists Integrity Module (DIGLIM) is an integrity extension aiming to
-+facilitate the deployment of remote attestation and secure boot solutions
-+based on Integrity Measurement Architecture (IMA).
-+
-+DIGLIM documentation can be retrieved at ``Documentation/security/diglim``.
-+
-+Kernel Configuration Options
-+============================
-+
-+DIGLIM can be enabled by setting ``CONFIG_DIGLIM=y`` in the kernel
-+configuration. Optionally, it is possible to set
-+``CONFIG_DIGLIM_DIGEST_LISTS_DIR`` with the directory digest lists are
-+taken from by a kernel loader executed at kernel initialization time.
-+Finally, with ``CONFIG_DIGLIM_UPLOADER_PATH`` it is possible to specify the
-+path of the digest list uploader, which will execute user space parsers to
-+process the digest lists in ``CONFIG_DIGLIM_DIGEST_LISTS_DIR`` that are not
-+in the format recognized by the kernel.
-+
-+
-+LSM
-+===
-+
-+DIGLIM includes an LSM to protect user space parsers from other processes,
-+when the parsers convert a digest list and uploads it to the kernel. As for
-+other LSMs, ``diglim`` should be added to the list of enabled LSMs,
-+provided with the ``lsm=`` kernel option. If DIGLIM LSM is not enabled,
-+digest lists uploaded by the parser will not be marked as processed by IMA
-+and will not be suitable for use.
-+
-+
-+Setup
-+=====
-+
-+Digest lists must be loaded as soon as possible, before files are accessed,
-+so that IMA finds the digest of those files with a query. More details on
-+the benefits of DIGLIM for IMA can be found in
-+``Documentation/security/diglim/introduction.rst``.
-+
-+
-+Digest List Generation
-+----------------------
-+
-+Digest lists can be generated with the tools provided in ``tools/diglim``
-+in the kernel sources. In order to compile the tools, it is necessary to
-+install the ``glibc-static`` and ``rpm-devel`` packages.
-+
-+``compact_gen`` can be used to generate digest lists in the compact format,
-+which can be directly uploaded to the kernel.
-+
-+In order to upload digests from the RPM database, it is necessary to
-+generate three digest lists: one for ``upload_digest_lists``, which is
-+responsible to execute the parsers for digest lists not in the compact
-+format; two for ``rpm_parser``, which actually loads the RPM digest lists.
-+
-+``rpm_parser`` requires two digest lists, one for identification by DIGLIM
-+LSM, and the other for measurement and appraisal with IMA. The commands
-+are::
-+
-+ # tools/diglim/compact_gen -d /etc/digest_lists -i /usr/libexec/diglim/rpm_parser -t parser
-+ # tools/diglim/compact_gen -d /etc/digest_lists -i /usr/libexec/diglim/rpm_parser -t file
-+ # tools/diglim/compact_gen -d /etc/digest_lists -i /usr/libexec/diglim/upload_digest_lists -t file
-+
-+Optionally, an appended signature can be added to the generated digest
-+lists, with the sign-file tool included in the kernel sources::
-+
-+ # scripts/sign-file sha256 certs/signing_key.pem certs/signing_key.pem /etc/digest_lists/0-parser_list-compact-rpm_parser
-+ # scripts/sign-file sha256 certs/signing_key.pem certs/signing_key.pem /etc/digest_lists/0-file_list-compact-rpm_parser
-+ # scripts/sign-file sha256 certs/signing_key.pem certs/signing_key.pem /etc/digest_lists/0-file_list-compact-upload_digest_lists
-+
-+With an appropriate policy, appended signatures can be seen in the
-+measurement, by selecting the ``ima-modsig`` template.
-+
-+Afterwards, digest lists can be generated from the RPM database with the
-+command::
-+
-+ # tools/diglim/rpm_gen -d /etc/digest_lists
-+
-+If a custom kernel is used, an additional digest list should be generated
-+for kernel modules::
-+
-+ # tools/diglim/compact_gen -d /etc/digest_lists -i /lib/modules/`uname -r` -t file
-+ # scripts/sign-file sha256 certs/signing_key.pem certs/signing_key.pem /etc/digest_lists/0-file_list-compact-`uname -r`
-+
-+Finally, in Fedora there is an mmap with execution permission on a file
-+with 4K of zeros. A digest list can be generated by executing::
-+
-+ # dd if=/dev/zero of=/tmp/mmap bs=4096 count=1
-+ # tools/diglim/compact_gen -d /etc/digest_lists -i /tmp/mmap -f
-+ # scripts/sign-file sha256 certs/signing_key.pem certs/signing_key.pem /etc/digest_lists/0-file_list-compact-mmap
-+
-+
-+Initial Ram Disk
-+----------------
-+
-+Generated digest lists should be copied to the initial ram disk in the
-+``CONFIG_DIGLIM_DIGEST_LISTS_DIR`` directory. This can be accomplished,
-+with dracut, by adding in /etc/dracut.conf::
-+
-+ install_optional_items+=" /etc/digest_lists/* "
-+
-+if ``CONFIG_DIGLIM_DIGEST_LISTS_DIR=/etc/digest_lists``.
-+
-+``upload_digest_lists`` and ``rpm_parser`` can be also copied to the
-+initial ram disk by adding the following lines in /etc/dracut.conf::
-+
-+ install_optional_items+=" /usr/libexec/diglim/upload_digest_lists "
-+ install_optional_items+=" /usr/libexec/diglim/rpm_parser "
-+
-+assuming that the binaries are installed in /usr/libexec/diglim.
-+
-+Another important option is::
-+
-+ do_strip="no"
-+
-+This prevents dracut from stripping the symbols from binaries. If binaries
-+are altered, their digest will be different from the reference value and
-+will not be found in the DIGLIM hash table.
-+
-+
-+Boot and Digest List Upload
-+---------------------------
-+
-+After generating the initial ram disk and rebooting, digest lists should
-+have been added to the DIGLIM hash table. This can be checked by executing::
-+
-+ # cat /sys/kernel/security/integrity/diglim/digests_count
-+ Parser digests: 1
-+ File digests: 104273
-+ Metadata digests: 0
-+ Digest list digests: 2430
-diff --git a/Documentation/admin-guide/index.rst b/Documentation/admin-guide/index.rst
-index dc00afcabb95..1cc7d3b3e79c 100644
---- a/Documentation/admin-guide/index.rst
-+++ b/Documentation/admin-guide/index.rst
-@@ -79,6 +79,7 @@ configure specific aspects of kernel behavior to your liking.
-    cputopology
-    dell_rbu
-    device-mapper/index
-+   diglim
-    edid
-    efi-stub
-    ext4
-diff --git a/MAINTAINERS b/MAINTAINERS
-index 1efc1724376e..953c86915c49 100644
---- a/MAINTAINERS
-+++ b/MAINTAINERS
-@@ -5507,6 +5507,7 @@ M:	Roberto Sassu <roberto.sassu@huawei.com>
- L:	linux-integrity@vger.kernel.org
- S:	Supported
- T:	git://git.kernel.org/pub/scm/linux/kernel/git/zohar/linux-integrity.git
-+F:	Documentation/admin-guide/diglim.rst
- F:	Documentation/security/diglim/architecture.rst
- F:	Documentation/security/diglim/implementation.rst
- F:	Documentation/security/diglim/index.rst
--- 
-2.25.1
-
+Reviewed-by: Vipin Sharma <vipinsh@google.com>
