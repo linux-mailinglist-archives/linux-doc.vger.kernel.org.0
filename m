@@ -2,67 +2,162 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id A45A240C3F3
-	for <lists+linux-doc@lfdr.de>; Wed, 15 Sep 2021 12:49:33 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id CEF7A40C5F7
+	for <lists+linux-doc@lfdr.de>; Wed, 15 Sep 2021 15:11:31 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S232313AbhIOKuv (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 15 Sep 2021 06:50:51 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:37054 "EHLO
+        id S229670AbhIONMt (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 15 Sep 2021 09:12:49 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:41480 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S232290AbhIOKuu (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Wed, 15 Sep 2021 06:50:50 -0400
-Received: from mail-lj1-x22a.google.com (mail-lj1-x22a.google.com [IPv6:2a00:1450:4864:20::22a])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id AAF02C061574
-        for <linux-doc@vger.kernel.org>; Wed, 15 Sep 2021 03:49:31 -0700 (PDT)
-Received: by mail-lj1-x22a.google.com with SMTP id c33so174265ljr.8
-        for <linux-doc@vger.kernel.org>; Wed, 15 Sep 2021 03:49:31 -0700 (PDT)
+        with ESMTP id S233325AbhIONMs (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Wed, 15 Sep 2021 09:12:48 -0400
+Received: from mail-yb1-xb33.google.com (mail-yb1-xb33.google.com [IPv6:2607:f8b0:4864:20::b33])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 037AFC061574;
+        Wed, 15 Sep 2021 06:11:30 -0700 (PDT)
+Received: by mail-yb1-xb33.google.com with SMTP id z5so5701178ybj.2;
+        Wed, 15 Sep 2021 06:11:29 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
-        h=mime-version:reply-to:from:date:message-id:subject:to;
-        bh=UEhor0bEiwcb0mMupeT9cAKdLl3Yl0clay+f12oB4FI=;
-        b=EDrjo+dfQfTvZwKKKB1FkrzrDMr+J0c7FE9saQ0WWGf1mhTezZ9nDBp0fCBoqGygYp
-         4ThNgmlBffB9kSAj7w9dWuGTrOwztsUpGmr+evFdbgFyh9CIPysd8ESmsx/fI+z4ho6r
-         Xoa3tiOMh6HbcsnjdLFLMDAFHWcvPyfYFVL9L9FRN+aoJrwrN+0RZ03tpAU5CcOXzV4u
-         04TdRp6CIcj3A5CFLPRoI4Pvav0k/pWjgzkymlUNm1kDl6w4MRI2m+2IbdkHmM4HG+9w
-         gLCvlTCnUvGd4bJeZfU7NLZs88niiVMR1xtwv7I56nknTIvc2ytQiq77mjctjqgZE4JM
-         HMRQ==
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc:content-transfer-encoding;
+        bh=ED99zdvhstpRwne3A80pR035C5tjOiYeGYSORJ4vyUI=;
+        b=mRApUvE7DCV++1EHNPSejp0a8tIpDWVQyTQSaND0kFtCoc3Il7ld7oNoRb6KEhENtS
+         A3Tn2QgUKG9V+tc0gVthsKJg5W+Hh9X0spx7d1SF4Y7ROkmGWIgtLy1Y28+ROoCqHpYF
+         +pybtnFOOpkCZrQwqQGG/eRkRSgxrgDd9eC5eHKF7NYZamPYNM+Ts1ajOuQmWnpc3sBg
+         ocmt5prfqE93rt5stU/aARYzd30pgt3tXVQAisv4u+WJZE8d5EC+ytWJF4k1Yexcp8OK
+         RlJLcUFkKiwlOdgU04t0eUKRWvSLHF0yByB0waEcj8svBd6DjIflAF55DsVLCIMw0m/o
+         /sPQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=x-gm-message-state:mime-version:reply-to:from:date:message-id
-         :subject:to;
-        bh=UEhor0bEiwcb0mMupeT9cAKdLl3Yl0clay+f12oB4FI=;
-        b=O7XkXrg1Ip9ut8EKMxc12MrJVdQrDkfTc3+TtDUF4WqRH47C/BslRDGxIlkS6sZKxv
-         SenuU7U/vqPs9+du68NP6FYCpv0y+HM4cJoAV/+FVcdzWs0024KwoV/+mOk3TIJgrfRn
-         uN2YGvfJBiNJMpLpjUPf0S7kujyLMKHFIgGuZ6esZ0kbvGUMQU+ZtGoPLZsN3bvuqOHg
-         q2yv1yHHYyGpvkno7E+gIHmimwW6ikCxZ40ZMFBKIxNoYJoSo4WIzTXpCVbJwCZCYOeb
-         drKrGm3p8Swu1db+fMO07p9rL38bc8l2vM70a8msmDjxHtd+ccF0EuMqq4pkLTAyHhAC
-         kVtw==
-X-Gm-Message-State: AOAM531kPS3gLJGYDEMMOtCmXuIs96BWjf9/fKn79Thpu4a/ndGN6ZtT
-        axDNa42wYI40nE9c9jJUG+MeVHJf/hICvAKCfLM=
-X-Google-Smtp-Source: ABdhPJywFgzNOhD2QWaLEafnAeAn5KApTj+jWgTVRjcXwt/MD4hazrO6PafwxS6AozvOt0wF/W+wxSvfevZA8WHeCPU=
-X-Received: by 2002:a2e:5c03:: with SMTP id q3mr19170839ljb.212.1631702969837;
- Wed, 15 Sep 2021 03:49:29 -0700 (PDT)
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc:content-transfer-encoding;
+        bh=ED99zdvhstpRwne3A80pR035C5tjOiYeGYSORJ4vyUI=;
+        b=0CiqLKZeT1xxqLj5woN4sg9xdCu95dweZNBs4apKIV+zvT6z8SBLtZf4eQaQUH/ojs
+         32PkVgWw+g1g1TGCybuPjswn6K5r1fEhEH7IKgTeHr8p1bYpsfOig7vP+ZjPKtfxgCaw
+         TbTK+jeBNISC0PaQZ7WdUBrA+ke6RLPDphEEOCM+GQn3I8HIr+MXzV/LpqPnz7srdi+2
+         8kWVJyVzKLoW+IkgrWHIVYsLb36eXQJ9dhF3JD0EBNIKmRqmMaRsol3hZimv4khBHdRK
+         F65MJkbuPiIWkNWGfwoqnyb3AsbhtYpTLxhTdNmoD0yHTmIb6Rrag2chzmSLMm7cj9Iz
+         Qb7w==
+X-Gm-Message-State: AOAM53046XA7d5Rd1JouDscNAVZ3gYlTZ16sshcQ2WG51KpSOXCaTpuO
+        bVUgaBPpTM+zFCLWeyB9omq3NddfbG4V9JzvfF8=
+X-Google-Smtp-Source: ABdhPJyxDnkgfri42t9pLIdq//afItaRTyEbocdXWj3uaAT0K+adBcfzVFKBOm6slfbiHx+FjL9MadGg5Z3COebWstc=
+X-Received: by 2002:a25:d9c8:: with SMTP id q191mr6344715ybg.61.1631711489262;
+ Wed, 15 Sep 2021 06:11:29 -0700 (PDT)
 MIME-Version: 1.0
-Received: by 2002:a05:6520:2517:b0:13e:8641:15e9 with HTTP; Wed, 15 Sep 2021
- 03:49:29 -0700 (PDT)
-Reply-To: dwilliamssdavid16@gmail.com
-From:   "Mr.David Williams" <anthonyyjurgen@gmail.com>
-Date:   Wed, 15 Sep 2021 03:49:29 -0700
-Message-ID: <CA+XgSxeYagqP6OJWc2F=hwhyv1VTO16YAM4p5x-ofyo9TFcbPg@mail.gmail.com>
-Subject: Get back to me for clarifications
-To:     undisclosed-recipients:;
+References: <20210909141655.87821-1-yaozhenguo1@gmail.com> <20210914205001.7ccc7ef3dd76a9ec551b370e@linux-foundation.org>
+In-Reply-To: <20210914205001.7ccc7ef3dd76a9ec551b370e@linux-foundation.org>
+From:   zhenguo yao <yaozhenguo1@gmail.com>
+Date:   Wed, 15 Sep 2021 21:11:18 +0800
+Message-ID: <CA+WzARmsPT46ck17-96cJVWE-=QEK8QobRFnCnEcNxsd42zNTw@mail.gmail.com>
+Subject: Re: [PATCH v4] hugetlbfs: Extend the definition of hugepages
+ parameter to support node allocation
+To:     Andrew Morton <akpm@linux-foundation.org>,
+        Mike Kravetz <mike.kravetz@oracle.com>
+Cc:     corbet@lwn.net, yaozhenguo@jd.com,
+        Matthew Wilcox <willy@infradead.org>,
+        linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org,
+        Linux Memory Management List <linux-mm@kvack.org>
 Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Hello Sir.
-
-Did you authorize Mr. Liu Kong Nam of Kemuning Ray Street
-NO.8,Tomang.Jakarta, Indonesia to pay the pending wire transfer
-activation charges and claim your WORLD BANK / IMF compensation funds
-of Four million two hundred thousand US dollars???
-
-Get back to me for clarifications
-
-Mr. David Williams
+Andrew Morton <akpm@linux-foundation.org> =E4=BA=8E2021=E5=B9=B49=E6=9C=881=
+5=E6=97=A5=E5=91=A8=E4=B8=89 =E4=B8=8A=E5=8D=8811:50=E5=86=99=E9=81=93=EF=
+=BC=9A
+>
+> On Thu,  9 Sep 2021 22:16:55 +0800 yaozhenguo <yaozhenguo1@gmail.com> wro=
+te:
+>
+> > We can specify the number of hugepages to allocate at boot. But the
+> > hugepages is balanced in all nodes at present. In some scenarios,
+> > we only need hugepages in one node. For example: DPDK needs hugepages
+> > which are in the same node as NIC. if DPDK needs four hugepages of 1G
+> > size in node1 and system has 16 numa nodes. We must reserve 64 hugepage=
+s
+> > in kernel cmdline. But, only four hugepages are used. The others should
+> > be free after boot. If the system memory is low(for example: 64G), it w=
+ill
+> > be an impossible task. So, Extending hugepages parameter to support
+> > specifying hugepages at a specific node.
+> > For example add following parameter:
+> >
+> > hugepagesz=3D1G hugepages=3D0:1,1:3
+> >
+> > It will allocate 1 hugepage in node0 and 3 hugepages in node1.
+> >
+> > ...
+> >
+> > @@ -2842,10 +2843,75 @@ static void __init gather_bootmem_prealloc(void=
+)
+> >       }
+> >  }
+> >
+> > +static void __init hugetlb_hstate_alloc_pages_onenode(struct hstate *h=
+, int nid)
+> > +{
+> > +     unsigned long i;
+> > +     char buf[32];
+> > +
+> > +     for (i =3D 0; i < h->max_huge_pages_node[nid]; ++i) {
+> > +             if (hstate_is_gigantic(h)) {
+> > +                     struct huge_bootmem_page *m;
+> > +                     void *addr;
+> > +
+> > +                     addr =3D memblock_alloc_try_nid_raw(
+> > +                                     huge_page_size(h), huge_page_size=
+(h),
+> > +                                     0, MEMBLOCK_ALLOC_ACCESSIBLE, nid=
+);
+> > +                     if (!addr)
+> > +                             break;
+> > +                     m =3D addr;
+> > +                     BUG_ON(!IS_ALIGNED(virt_to_phys(m), huge_page_siz=
+e(h)));
+>
+> We try very hard to avoid adding BUG calls.  Is there any way in which
+> this code can emit a WARNing then permit the kernel to keep operating?
+>
+Maybe we can rewrite it as below:
+                        if (WARN(!IS_ALIGNED(virt_to_phys(m),
+huge_page_size(h)),
+                                "HugeTLB: page addr:%p is not aligned\n", m=
+))
+                                break;
+@Mike,  Do you think it's OK?
+> > +                     /*
+> > +                      * Put them into a private list first because mem=
+_map
+> > +                      * is not up yet
+> > +                      */
+> > +                     INIT_LIST_HEAD(&m->list);
+> > +                     list_add(&m->list, &huge_boot_pages);
+> > +                     m->hstate =3D h;
+> > +             } else {
+> > +                     struct page *page;
+> > +
+> > +                     gfp_t gfp_mask =3D htlb_alloc_mask(h) | __GFP_THI=
+SNODE;
+> > +
+> > +                     page =3D alloc_fresh_huge_page(h, gfp_mask, nid,
+> > +                                     &node_states[N_MEMORY], NULL);
+> > +                     if (!page)
+> > +                             break;
+> > +                     put_page(page); /* free it into the hugepage allo=
+cator */
+> > +             }
+> > +             cond_resched();
+> > +     }
+> > +     if (i =3D=3D h->max_huge_pages_node[nid])
+> > +             return;
+> > +
+> > +     string_get_size(huge_page_size(h), 1, STRING_UNITS_2, buf, 32);
+> > +     pr_warn("HugeTLB: allocating %u of page size %s failed node%d.  O=
+nly allocated %lu hugepages.\n",
+> > +             h->max_huge_pages_node[nid], buf, nid, i);
+> > +     h->max_huge_pages_node[nid] =3D i;
+> > +     h->max_huge_pages -=3D (h->max_huge_pages_node[nid] - i);
+> > +}
+> > +
+>
