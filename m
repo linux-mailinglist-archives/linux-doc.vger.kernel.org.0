@@ -2,83 +2,150 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 0023E40E8D7
-	for <lists+linux-doc@lfdr.de>; Thu, 16 Sep 2021 20:01:04 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 526D240E33D
+	for <lists+linux-doc@lfdr.de>; Thu, 16 Sep 2021 19:20:01 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S242362AbhIPRpT (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 16 Sep 2021 13:45:19 -0400
-Received: from mail.kernel.org ([198.145.29.99]:57066 "EHLO mail.kernel.org"
+        id S1343746AbhIPQqV (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 16 Sep 2021 12:46:21 -0400
+Received: from mga14.intel.com ([192.55.52.115]:11538 "EHLO mga14.intel.com"
         rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S1355811AbhIPRmJ (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Thu, 16 Sep 2021 13:42:09 -0400
-Received: by mail.kernel.org (Postfix) with ESMTPSA id 507A763273;
-        Thu, 16 Sep 2021 16:54:23 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=linuxfoundation.org;
-        s=korg; t=1631811263;
-        bh=bF0wIcTJ91ImgJF0Qm7WlA+Rccqg9DNB53j+Xh5Pnrw=;
-        h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-        b=xSNKa9W6loaUShNUlfbYhP7BtiP8ciVX64eG1vYaJCP6cCyUk9ZBuMedIasqw3Gr1
-         1V32pypgkddBCB8Cj/Oj2q8rGWp3gSWEdSox9dQWSr1J09+EymvvLIR/VSmYCln9kI
-         nlR3RYjN4zAdS+xo0We1MuBGS0X+eiMNlVequcGY=
-Date:   Thu, 16 Sep 2021 18:06:19 +0200
-From:   Greg Kroah-Hartman <gregkh@linuxfoundation.org>
-To:     Jarkko Sakkinen <jarkko@kernel.org>
-Cc:     Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
+        id S244356AbhIPQmq (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Thu, 16 Sep 2021 12:42:46 -0400
+X-IronPort-AV: E=McAfee;i="6200,9189,10109"; a="222263863"
+X-IronPort-AV: E=Sophos;i="5.85,298,1624345200"; 
+   d="scan'208";a="222263863"
+Received: from fmsmga002.fm.intel.com ([10.253.24.26])
+  by fmsmga103.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 16 Sep 2021 09:36:36 -0700
+X-IronPort-AV: E=Sophos;i="5.85,298,1624345200"; 
+   d="scan'208";a="554156676"
+Received: from xuanguan-mobl.amr.corp.intel.com (HELO [10.213.180.84]) ([10.213.180.84])
+  by fmsmga002-auth.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 16 Sep 2021 09:36:35 -0700
+Subject: Re: [PATCH v3 16/30] ABI: sysfs-bus-soundwire-slave: use wildcards on
+ What definitions
+To:     Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
         Linux Doc Mailing List <linux-doc@vger.kernel.org>,
-        Jonathan Corbet <corbet@lwn.net>,
-        James Bottomley <James.Bottomley@hansenpartnership.com>,
-        Tom Rix <trix@redhat.com>, linux-kernel@vger.kernel.org
-Subject: Re: [PATCH v3 05/30] ABI: sysfs-class-tpm: use wildcards for pcr-*
- nodes
-Message-ID: <YUNrez8qiAUZ2oOO@kroah.com>
+        Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+Cc:     Jonathan Corbet <corbet@lwn.net>, Vinod Koul <vkoul@kernel.org>,
+        linux-kernel@vger.kernel.org
 References: <cover.1631782432.git.mchehab+huawei@kernel.org>
- <4ab3fce91ea2bd7c36a07e6c646bf7bd6f4f8634.1631782432.git.mchehab+huawei@kernel.org>
- <26ba3d661d0c8a9e4a44be908dfc7cd2d89a2d43.camel@kernel.org>
- <82ae04ed8546e301553d9985367c771a23d4623e.camel@kernel.org>
+ <416f4a746c116147abb08fb0155a6a4ed065dfd7.1631782432.git.mchehab+huawei@kernel.org>
+From:   Pierre-Louis Bossart <pierre-louis.bossart@linux.intel.com>
+Message-ID: <9a379f0a-e076-844c-fb5d-130359e36754@linux.intel.com>
+Date:   Thu, 16 Sep 2021 11:36:33 -0500
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
+ Firefox/78.0 Thunderbird/78.13.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <82ae04ed8546e301553d9985367c771a23d4623e.camel@kernel.org>
+In-Reply-To: <416f4a746c116147abb08fb0155a6a4ed065dfd7.1631782432.git.mchehab+huawei@kernel.org>
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
+Content-Transfer-Encoding: 7bit
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Thu, Sep 16, 2021 at 07:00:51PM +0300, Jarkko Sakkinen wrote:
-> On Thu, 2021-09-16 at 18:59 +0300, Jarkko Sakkinen wrote:
-> > On Thu, 2021-09-16 at 10:59 +0200, Mauro Carvalho Chehab wrote:
-> > > Change how this expression is defined:
-> > > 
-> > > 	/sys/class/tpm/tpmX/pcr-H/N
-> > > 
-> > > in order to allow get_abi.pl to convert it into this regex:
-> > > 
-> > > 	/sys/class/tpm/tpmX/pcr-.*/.*
-> > > 
-> > > Signed-off-by: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
-> > > ---
-> > >  Documentation/ABI/stable/sysfs-class-tpm | 2 +-
-> > >  1 file changed, 1 insertion(+), 1 deletion(-)
-> > > 
-> > > diff --git a/Documentation/ABI/stable/sysfs-class-tpm b/Documentation/ABI/stable/sysfs-class-tpm
-> > > index d897ecb9615f..411d5895bed4 100644
-> > > --- a/Documentation/ABI/stable/sysfs-class-tpm
-> > > +++ b/Documentation/ABI/stable/sysfs-class-tpm
-> > > @@ -195,7 +195,7 @@ Description:	The "tpm_version_major" property shows the TCG spec major version
-> > >  
-> > >  		  2
-> > >  
-> > > -What:		/sys/class/tpm/tpmX/pcr-H/N
-> > > +What:		/sys/class/tpm/tpmX/pcr-<H>/<N>
-> > >  Date:		March 2021
-> > >  KernelVersion:	5.12
-> > >  Contact:	linux-integrity@vger.kernel.org
-> > 
-> > Reviewed-by: Jarkko Sakkinen <jarkko@kernel.org>
-> 
-> I guess I don't have to pick this tho? Just checking.
-> 
-> Presuming that the whole series is applied by someone...
 
-I'll be taking these, thanks!
 
-greg k-h
+On 9/16/21 3:59 AM, Mauro Carvalho Chehab wrote:
+> An "N" upper letter is not a wildcard, nor can easily be identified
+> by script, specially since the USB sysfs define things like.
+> bNumInterfaces. Use, instead, <N>, in order to let script/get_abi.pl
+> to convert it into a Regex.
+> 
+> Signed-off-by: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
+
+Reviewed-by: Pierre-Louis Bossart <pierre-louis.bossart@linux.intel.com>
+
+I also realized that we have a similar with the 'master' case
+
+more sysfs-bus-soundwire-master
+What:		/sys/bus/soundwire/devices/sdw-master-N/revision
+		/sys/bus/soundwire/devices/sdw-master-N/clk_stop_modes
+		/sys/bus/soundwire/devices/sdw-master-N/clk_freq
+		/sys/bus/soundwire/devices/sdw-master-N/clk_gears
+		/sys/bus/soundwire/devices/sdw-master-N/default_col
+		/sys/bus/soundwire/devices/sdw-master-N/default_frame_rate
+		/sys/bus/soundwire/devices/sdw-master-N/default_row
+		/sys/bus/soundwire/devices/sdw-master-N/dynamic_shape
+		/sys/bus/soundwire/devices/sdw-master-N/err_threshold
+		/sys/bus/soundwire/devices/sdw-master-N/max_clk_freq
+
+If there is an update we should modify this as well for consistency with
+sdw-master-<N>?
+
+> ---
+>  .../ABI/testing/sysfs-bus-soundwire-slave     | 60 +++++++++----------
+>  1 file changed, 30 insertions(+), 30 deletions(-)
+> 
+> diff --git a/Documentation/ABI/testing/sysfs-bus-soundwire-slave b/Documentation/ABI/testing/sysfs-bus-soundwire-slave
+> index d324aa0b678f..fbf55834dfee 100644
+> --- a/Documentation/ABI/testing/sysfs-bus-soundwire-slave
+> +++ b/Documentation/ABI/testing/sysfs-bus-soundwire-slave
+> @@ -64,37 +64,37 @@ Description:	SoundWire Slave Data Port-0 DisCo properties.
+>  		Data port 0 are used by the bus to configure the Data Port 0.
+>  
+>  
+> -What:		/sys/bus/soundwire/devices/sdw:.../dpN_src/max_word
+> -		/sys/bus/soundwire/devices/sdw:.../dpN_src/min_word
+> -		/sys/bus/soundwire/devices/sdw:.../dpN_src/words
+> -		/sys/bus/soundwire/devices/sdw:.../dpN_src/type
+> -		/sys/bus/soundwire/devices/sdw:.../dpN_src/max_grouping
+> -		/sys/bus/soundwire/devices/sdw:.../dpN_src/simple_ch_prep_sm
+> -		/sys/bus/soundwire/devices/sdw:.../dpN_src/ch_prep_timeout
+> -		/sys/bus/soundwire/devices/sdw:.../dpN_src/imp_def_interrupts
+> -		/sys/bus/soundwire/devices/sdw:.../dpN_src/min_ch
+> -		/sys/bus/soundwire/devices/sdw:.../dpN_src/max_ch
+> -		/sys/bus/soundwire/devices/sdw:.../dpN_src/channels
+> -		/sys/bus/soundwire/devices/sdw:.../dpN_src/ch_combinations
+> -		/sys/bus/soundwire/devices/sdw:.../dpN_src/max_async_buffer
+> -		/sys/bus/soundwire/devices/sdw:.../dpN_src/block_pack_mode
+> -		/sys/bus/soundwire/devices/sdw:.../dpN_src/port_encoding
+> +What:		/sys/bus/soundwire/devices/sdw:.../dp<N>_src/max_word
+> +		/sys/bus/soundwire/devices/sdw:.../dp<N>_src/min_word
+> +		/sys/bus/soundwire/devices/sdw:.../dp<N>_src/words
+> +		/sys/bus/soundwire/devices/sdw:.../dp<N>_src/type
+> +		/sys/bus/soundwire/devices/sdw:.../dp<N>_src/max_grouping
+> +		/sys/bus/soundwire/devices/sdw:.../dp<N>_src/simple_ch_prep_sm
+> +		/sys/bus/soundwire/devices/sdw:.../dp<N>_src/ch_prep_timeout
+> +		/sys/bus/soundwire/devices/sdw:.../dp<N>_src/imp_def_interrupts
+> +		/sys/bus/soundwire/devices/sdw:.../dp<N>_src/min_ch
+> +		/sys/bus/soundwire/devices/sdw:.../dp<N>_src/max_ch
+> +		/sys/bus/soundwire/devices/sdw:.../dp<N>_src/channels
+> +		/sys/bus/soundwire/devices/sdw:.../dp<N>_src/ch_combinations
+> +		/sys/bus/soundwire/devices/sdw:.../dp<N>_src/max_async_buffer
+> +		/sys/bus/soundwire/devices/sdw:.../dp<N>_src/block_pack_mode
+> +		/sys/bus/soundwire/devices/sdw:.../dp<N>_src/port_encoding
+>  
+> -		/sys/bus/soundwire/devices/sdw:.../dpN_sink/max_word
+> -		/sys/bus/soundwire/devices/sdw:.../dpN_sink/min_word
+> -		/sys/bus/soundwire/devices/sdw:.../dpN_sink/words
+> -		/sys/bus/soundwire/devices/sdw:.../dpN_sink/type
+> -		/sys/bus/soundwire/devices/sdw:.../dpN_sink/max_grouping
+> -		/sys/bus/soundwire/devices/sdw:.../dpN_sink/simple_ch_prep_sm
+> -		/sys/bus/soundwire/devices/sdw:.../dpN_sink/ch_prep_timeout
+> -		/sys/bus/soundwire/devices/sdw:.../dpN_sink/imp_def_interrupts
+> -		/sys/bus/soundwire/devices/sdw:.../dpN_sink/min_ch
+> -		/sys/bus/soundwire/devices/sdw:.../dpN_sink/max_ch
+> -		/sys/bus/soundwire/devices/sdw:.../dpN_sink/channels
+> -		/sys/bus/soundwire/devices/sdw:.../dpN_sink/ch_combinations
+> -		/sys/bus/soundwire/devices/sdw:.../dpN_sink/max_async_buffer
+> -		/sys/bus/soundwire/devices/sdw:.../dpN_sink/block_pack_mode
+> -		/sys/bus/soundwire/devices/sdw:.../dpN_sink/port_encoding
+> +		/sys/bus/soundwire/devices/sdw:.../dp<N>_sink/max_word
+> +		/sys/bus/soundwire/devices/sdw:.../dp<N>_sink/min_word
+> +		/sys/bus/soundwire/devices/sdw:.../dp<N>_sink/words
+> +		/sys/bus/soundwire/devices/sdw:.../dp<N>_sink/type
+> +		/sys/bus/soundwire/devices/sdw:.../dp<N>_sink/max_grouping
+> +		/sys/bus/soundwire/devices/sdw:.../dp<N>_sink/simple_ch_prep_sm
+> +		/sys/bus/soundwire/devices/sdw:.../dp<N>_sink/ch_prep_timeout
+> +		/sys/bus/soundwire/devices/sdw:.../dp<N>_sink/imp_def_interrupts
+> +		/sys/bus/soundwire/devices/sdw:.../dp<N>_sink/min_ch
+> +		/sys/bus/soundwire/devices/sdw:.../dp<N>_sink/max_ch
+> +		/sys/bus/soundwire/devices/sdw:.../dp<N>_sink/channels
+> +		/sys/bus/soundwire/devices/sdw:.../dp<N>_sink/ch_combinations
+> +		/sys/bus/soundwire/devices/sdw:.../dp<N>_sink/max_async_buffer
+> +		/sys/bus/soundwire/devices/sdw:.../dp<N>_sink/block_pack_mode
+> +		/sys/bus/soundwire/devices/sdw:.../dp<N>_sink/port_encoding
+>  
+>  Date:		May 2020
+>  
+> 
