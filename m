@@ -2,122 +2,126 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 66F4440D6A3
-	for <lists+linux-doc@lfdr.de>; Thu, 16 Sep 2021 11:55:00 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 198D340D6D8
+	for <lists+linux-doc@lfdr.de>; Thu, 16 Sep 2021 11:56:26 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S235476AbhIPJ4S (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 16 Sep 2021 05:56:18 -0400
-Received: from smtp-out1.suse.de ([195.135.220.28]:33002 "EHLO
-        smtp-out1.suse.de" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S235287AbhIPJ4S (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Thu, 16 Sep 2021 05:56:18 -0400
-Received: from relay2.suse.de (relay2.suse.de [149.44.160.134])
-        by smtp-out1.suse.de (Postfix) with ESMTP id 72FB122376;
-        Thu, 16 Sep 2021 09:54:57 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.cz; s=susede2_rsa;
-        t=1631786097; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-         mime-version:mime-version:content-type:content-type:
-         in-reply-to:in-reply-to:references:references;
-        bh=7Hr/2iIZwIEgCfldPaWyF8ZFWOFNeO1vGU+ls4G7YRI=;
-        b=mWETj69L9GUgeYnhoAaHEVHJ+GR89fRjzab/9tY2mcpPQ6CY5VzXTWoOcYirKRPtTAP/4u
-        R+LOTCIU2oUSOGMVUqBWoiF0qhT5tiNFl//rzYCvYtBWi+zbp/JzD9LD+Eq1TqDCcn/fOD
-        oVkycPzqVARLnHaOlqX2mwX7UJzPrdY=
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.cz;
-        s=susede2_ed25519; t=1631786097;
-        h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-         mime-version:mime-version:content-type:content-type:
-         in-reply-to:in-reply-to:references:references;
-        bh=7Hr/2iIZwIEgCfldPaWyF8ZFWOFNeO1vGU+ls4G7YRI=;
-        b=vdd/mdK8Kd1wgwBLy4fKohEi+Mcqx1OYk7NF9U+Q+XEN2LvGN69Q3oZuY3B+/jtKMQrkvp
-        0sNiClqPglIuTHCQ==
-Received: from quack2.suse.cz (unknown [10.100.224.230])
-        by relay2.suse.de (Postfix) with ESMTP id A5A38A3B90;
-        Thu, 16 Sep 2021 09:54:52 +0000 (UTC)
-Received: by quack2.suse.cz (Postfix, from userid 1000)
-        id A82661E0C04; Thu, 16 Sep 2021 11:54:55 +0200 (CEST)
-Date:   Thu, 16 Sep 2021 11:54:55 +0200
-From:   Jan Kara <jack@suse.cz>
-To:     Jonathan Corbet <corbet@lwn.net>
-Cc:     Theodore Ts'o <tytso@mit.edu>, Jan Kara <jack@suse.cz>,
-        linux-ext4@vger.kernel.org, linux-doc@vger.kernel.org
-Subject: Re: [PATCH 1/2] ext4: docs: switch away from list-table
-Message-ID: <20210916095455.GE10610@quack2.suse.cz>
-References: <20210902220854.198850-1-corbet@lwn.net>
- <20210902220854.198850-2-corbet@lwn.net>
+        id S237451AbhIPJ5n (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 16 Sep 2021 05:57:43 -0400
+Received: from mail.kernel.org ([198.145.29.99]:58044 "EHLO mail.kernel.org"
+        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
+        id S236073AbhIPJ4s (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Thu, 16 Sep 2021 05:56:48 -0400
+Received: by mail.kernel.org (Postfix) with ESMTPSA id 2D6596120F;
+        Thu, 16 Sep 2021 09:55:26 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+        s=k20201202; t=1631786126;
+        bh=75WrKbSFBKg3yzGt07IbXwPNTFQ0wIIFH/Or+OVz1tk=;
+        h=From:To:Cc:Subject:Date:From;
+        b=uF5yJPv/qiKbXXEFvin6OmfsjMRrph3HNOgVM4VP8l98VyCCn6ZiDH4Vz9ThIa3nO
+         /R3BLqZrexnLqAhaLqqje35cJvGT4N3rzjw+tJcda+Ho3iJSy3WwY5wVLASpoPMaG0
+         BdVfOxuhSoKonDNgYiYNAV5b+jhnTDG3G0iRsZjuDNsSqouJPu1+uSll78aJKox5Ns
+         KwHB376rUBOCM9pslwyGU8l8WVSDWBaAmSdRQHZs7Vn9W0IUzd/0QWauFDPCMtQEHo
+         PeyD1wssHY2MBiz2gKKjgNgw/LEq0+KlatdR8BlJsvdBjXO7hPlAu8a1uYbkmb9sPv
+         1LdRPeVp9uZAg==
+Received: by mail.kernel.org with local (Exim 4.94.2)
+        (envelope-from <mchehab@kernel.org>)
+        id 1mQo72-001vTH-32; Thu, 16 Sep 2021 11:55:24 +0200
+From:   Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
+To:     Linux Doc Mailing List <linux-doc@vger.kernel.org>,
+        Jonathan Corbet <corbet@lwn.net>
+Cc:     Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
+        linux-kernel@vger.kernel.org, Daniel Vetter <daniel@ffwll.ch>,
+        David Airlie <airlied@linux.ie>,
+        Evgeniy Polyakov <zbr@ioremap.net>,
+        Jakub Kicinski <kuba@kernel.org>,
+        John Fastabend <john.fastabend@gmail.com>,
+        KP Singh <kpsingh@kernel.org>, Martin KaFai Lau <kafai@fb.com>,
+        Matthias Brugger <matthias.bgg@gmail.com>,
+        Rob Herring <robh+dt@kernel.org>,
+        Shuah Khan <shuah@kernel.org>,
+        Song Liu <songliubraving@fb.com>, Yonghong Song <yhs@fb.com>,
+        bpf@vger.kernel.org, devicetree@vger.kernel.org,
+        dri-devel@lists.freedesktop.org,
+        linux-arm-kernel@lists.infradead.org,
+        linux-kselftest@vger.kernel.org,
+        linux-mediatek@lists.infradead.org, linux-mmc@vger.kernel.org,
+        linux-omap@vger.kernel.org, netdev@vger.kernel.org,
+        sparmaintainer@unisys.com
+Subject: [PATCH v2 00/23] Fix some issues at documentation
+Date:   Thu, 16 Sep 2021 11:54:59 +0200
+Message-Id: <cover.1631785820.git.mchehab+huawei@kernel.org>
+X-Mailer: git-send-email 2.31.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20210902220854.198850-2-corbet@lwn.net>
-User-Agent: Mutt/1.10.1 (2018-07-13)
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+Sender: Mauro Carvalho Chehab <mchehab@kernel.org>
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Thu 02-09-21 16:08:53, Jonathan Corbet wrote:
-> Commit 3a6541e97c03 (Add documentation about the orphan file feature) added
-> a new document on orphan files, which is great.  But the use of
-> "list-table" results in documents that are absolutely unreadable in their
-> plain-text form.  Switch this file to the regular RST table format instead;
-> the rendered (HTML) output is identical.
-> 
-> Signed-off-by: Jonathan Corbet <corbet@lwn.net>
+Hi John,
 
-Thanks! Definitely looks more readable :). You can add:
+Please ignore the previous series I sent today [1].  I forgot that I had
+already submitted a first version of this series.
 
-Reviewed-by: Jan Kara <jack@suse.cz>
+[1]  https://lore.kernel.org/all/cover.1631783482.git.mchehab+huawei@kernel.org/
 
-								Honza
 
-> ---
->  Documentation/filesystems/ext4/orphan.rst | 32 ++++++++---------------
->  1 file changed, 11 insertions(+), 21 deletions(-)
-> 
-> diff --git a/Documentation/filesystems/ext4/orphan.rst b/Documentation/filesystems/ext4/orphan.rst
-> index bb19ecd1b626..d096fe0ba19e 100644
-> --- a/Documentation/filesystems/ext4/orphan.rst
-> +++ b/Documentation/filesystems/ext4/orphan.rst
-> @@ -21,27 +21,17 @@ in heavy creation of orphan inodes. When orphan file feature
->  (referenced from the superblock through s\_orphan_file_inum) with several
->  blocks. Each of these blocks has a structure:
->  
-> -.. list-table::
-> -   :widths: 8 8 24 40
-> -   :header-rows: 1
-> -
-> -   * - Offset
-> -     - Type
-> -     - Name
-> -     - Description
-> -   * - 0x0
-> -     - Array of \_\_le32 entries
-> -     - Orphan inode entries
-> -     - Each \_\_le32 entry is either empty (0) or it contains inode number of
-> -       an orphan inode.
-> -   * - blocksize - 8
-> -     - \_\_le32
-> -     - ob\_magic
-> -     - Magic value stored in orphan block tail (0x0b10ca04)
-> -   * - blocksize - 4
-> -     - \_\_le32
-> -     - ob\_checksum
-> -     - Checksum of the orphan block.
-> +============= ================ =============== ===============================
-> +Offset        Type             Name            Description
-> +============= ================ =============== ===============================
-> +0x0           Array of         Orphan inode    Each \_\_le32 entry is either
-> +              \_\_le32 entries entries         empty (0) or it contains
-> +	                                       inode number of an orphan
-> +					       inode.
-> +blocksize-8   \_\_le32         ob\_magic       Magic value stored in orphan
-> +                                               block tail (0x0b10ca04)
-> +blocksize-4   \_\_le32         ob\_checksum    Checksum of the orphan block.
-> +============= ================ =============== ===============================
->  
->  When a filesystem with orphan file feature is writeably mounted, we set
->  RO\_COMPAT\_ORPHAN\_PRESENT feature in the superblock to indicate there may
-> -- 
-> 2.31.1
-> 
+The first patch in this series fix a bad character used instead of
+a "(c)" UTF-8 symbol.
+
+The remaining ones fix several broken references to files
+under Documentation/, several due to DT schema conversions
+from .txt to .yaml.
+
+---
+
+v2:
+   - Added a couple of extra fixes;
+   - merged two patches touching mtd-physmap.yaml;
+   - added missing tags (acked-by/reviewed-by) received after v1.
+v1: https://lore.kernel.org/all/cover.1626947923.git.mchehab+huawei@kernel.org/
+
+
+
+Mauro Carvalho Chehab (23):
+  visorbus: fix a copyright symbol that was bad encoded
+  dt-bindings: net: dsa: sja1105: update nxp,sja1105.yaml reference
+  dt-bindings: arm: mediatek: mmsys: update mediatek,mmsys.yaml
+    reference
+  dt-bindings: w1: update w1-gpio.yaml reference
+  dt-bindings: mmc: update mmc-card.yaml reference
+  libbpf: update index.rst reference
+  docs: accounting: update delay-accounting.rst reference
+  tools: bpftool: update bpftool-prog.rst reference
+  tools: bpftool: update bpftool-map.rst reference
+  bpftool: update bpftool-cgroup.rst reference
+  MAINTAINERS: update arm,vic.yaml reference
+  MAINTAINERS: update aspeed,i2c.yaml reference
+  MAINTAINERS: update faraday,ftrtc010.yaml reference
+  MAINTAINERS: update fsl,fec.yaml reference
+  MAINTAINERS: update ti,sci.yaml reference
+  MAINTAINERS: update intel,ixp46x-rng.yaml reference
+  MAINTAINERS: update nxp,imx8-jpeg.yaml reference
+  MAINTAINERS: update gemini.yaml reference
+  MAINTAINERS: update brcm,unimac-mdio.yaml reference
+  MAINTAINERS: update chipone,icn8318.yaml reference
+  MAINTAINERS: update silergy,sy8106a.yaml reference
+  MAINTAINERS: update mtd-physmap.yaml reference
+  MAINTAINERS: update ti,am654-hbmc.yaml reference
+
+ Documentation/admin-guide/sysctl/kernel.rst   |  2 +-
+ Documentation/bpf/index.rst                   |  2 +-
+ .../display/mediatek/mediatek,disp.txt        |  2 +-
+ Documentation/networking/dsa/sja1105.rst      |  2 +-
+ Documentation/w1/masters/w1-gpio.rst          |  2 +-
+ MAINTAINERS                                   | 28 +++++++++----------
+ drivers/mmc/host/omap_hsmmc.c                 |  2 +-
+ drivers/visorbus/visorbus_main.c              |  2 +-
+ .../selftests/bpf/test_bpftool_synctypes.py   |  6 ++--
+ 9 files changed, 24 insertions(+), 24 deletions(-)
+
 -- 
-Jan Kara <jack@suse.com>
-SUSE Labs, CR
+2.31.1
+
+
