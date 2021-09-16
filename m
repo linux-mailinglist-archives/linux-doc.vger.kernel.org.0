@@ -2,88 +2,105 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 67A2540E986
-	for <lists+linux-doc@lfdr.de>; Thu, 16 Sep 2021 20:02:31 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id CF72940EA5D
+	for <lists+linux-doc@lfdr.de>; Thu, 16 Sep 2021 20:56:13 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S240777AbhIPSBF (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 16 Sep 2021 14:01:05 -0400
-Received: from smtp-out2.suse.de ([195.135.220.29]:41494 "EHLO
-        smtp-out2.suse.de" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S245747AbhIPR6f (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Thu, 16 Sep 2021 13:58:35 -0400
-Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
-        (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-         key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
-        (No client certificate requested)
-        by smtp-out2.suse.de (Postfix) with ESMTPS id EDD021FF07;
-        Thu, 16 Sep 2021 17:57:12 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-        t=1631815032; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-         mime-version:mime-version:content-type:content-type:
-         content-transfer-encoding:content-transfer-encoding:
-         in-reply-to:in-reply-to:references:references;
-        bh=fbJGgwQpdImuKGYvZ0hVx47RK9ar0QLFewfGibiPGXE=;
-        b=IUjJu8eXSDOvstCBzNqJfVDXURIGXW++ljRJE7t4Ed/NWRYOrUX0uf0TeY0spExSVB/OIJ
-        K5+Iokl4j6nB+4uI34smI8VlI2T28kH8QyaG7RJnoTkoSGejLv/EPnIKYJRMmMZgaHxE+K
-        Iyiy/HI5tEorxpOyFkuznNjT9XPUGW0=
-Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
-        (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-         key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
-        (No client certificate requested)
-        by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id CD48013D5A;
-        Thu, 16 Sep 2021 17:57:12 +0000 (UTC)
-Received: from dovecot-director2.suse.de ([192.168.254.65])
-        by imap2.suse-dmz.suse.de with ESMTPSA
-        id yfQTMXiFQ2HWcQAAMHmgww
-        (envelope-from <mkoutny@suse.com>); Thu, 16 Sep 2021 17:57:12 +0000
-Date:   Thu, 16 Sep 2021 19:57:11 +0200
-From:   Michal =?iso-8859-1?Q?Koutn=FD?= <mkoutny@suse.com>
-To:     brookxu <brookxu.cn@gmail.com>
-Cc:     tj@kernel.org, lizefan.x@bytedance.com, hannes@cmpxchg.org,
-        vipinsh@google.com, corbet@lwn.net, linux-kernel@vger.kernel.org,
-        cgroups@vger.kernel.org, linux-doc@vger.kernel.org
-Subject: Re: [PATCH v3 2/3] misc_cgroup: remove error log to avoid log flood
-Message-ID: <20210916175711.GA12643@blackbody.suse.cz>
-References: <3834f917d50a6f19402e179e917ef6a9dde5f64a.1631671936.git.brookxu@tencent.com>
- <a960cd793f649bd944127fe5e5e3f4d8bb9040a4.1631671936.git.brookxu@tencent.com>
+        id S245692AbhIPS5a (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 16 Sep 2021 14:57:30 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:52160 "EHLO
+        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S245360AbhIPS5Z (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Thu, 16 Sep 2021 14:57:25 -0400
+Received: from mail-qk1-x730.google.com (mail-qk1-x730.google.com [IPv6:2607:f8b0:4864:20::730])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id A878BC04A147;
+        Thu, 16 Sep 2021 11:15:13 -0700 (PDT)
+Received: by mail-qk1-x730.google.com with SMTP id t190so9228025qke.7;
+        Thu, 16 Sep 2021 11:15:13 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc;
+        bh=EAjkFUEsfXQq9m+NH377nLxFioGs0vqlQsNCCnQGszM=;
+        b=Fmi/z6191sBg6d5GFTA+l4arFm1+p7Be0zRoZBL3weKZHgObfQG6Ae1q11vAUXfPbA
+         vEaBXeXkXtuSwM3gB2Q6uxS9/mqqSRXEz9S0sNM2TFWNp5mkUb5g/BRr6wUZWOyfZ9t8
+         p2OG64u70MQCs8SEUaQ58ntR0m3Gd/cevZF67FyckQiz0hDkWl2vITY6j2tnO2BJTBoc
+         pGQo4TZZeLy1MNwGtHDjBhUrofp5clKEtENe+nmWs9w8nUyn8+o6sfncn3nBEyXZXiUN
+         xfDklhjjmZ68GmjfBaxw24xbTFny+BMXMJWzrMAFmWs5yRW9tEeRfhi95362pn3/iwkY
+         tMEA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=EAjkFUEsfXQq9m+NH377nLxFioGs0vqlQsNCCnQGszM=;
+        b=5DG0TAAydyy3SJxqoDajDpsszdidcJRst+cZkWot4W/k30u3GZZSNYI9KQ8Vpsxyt6
+         RKd8KmN/Gny+F53WaHyie6WhJcH8Gskp7hvAKm2IGILW89dt2iW/OhZWX2cQmkM2X36H
+         F8Fy6ksuQiSxLXseATMkuYhO+G1ZIEKgmXLeaYEFm+diaYi6nUBYGcU/xM/BYfs3OQr+
+         jQTesAZW4b9O+ypdSD0MWnQcOSf57iTP3jqs/yo8nmxEA6jWUUSJkuPNClI2f31lmuZi
+         SqUf5GoBFmbXGX25lvRYZJK1Z2vO9oU662nzj5kksYxoelYGmGmxqiT766+1QVR56xco
+         4Bhw==
+X-Gm-Message-State: AOAM530ielA8EPuuNArdm62+EIhgwwaw85AGrZNIyr5jyVnHwbf3VzSm
+        Rf6SOmbn8s1x5gsioMpEcUXe+q0GaM98jb55FucpeGv0t20=
+X-Google-Smtp-Source: ABdhPJwOTcoAREbB2hHzNgSIMj+VkJOgxTM+fwcIrAxa4Ds3cu+y2BPOWsdG+4whEAoSUXKA716SGF1HDyRbfiK/1Mc=
+X-Received: by 2002:a5b:408:: with SMTP id m8mr8687138ybp.2.1631816112770;
+ Thu, 16 Sep 2021 11:15:12 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <a960cd793f649bd944127fe5e5e3f4d8bb9040a4.1631671936.git.brookxu@tencent.com>
-User-Agent: Mutt/1.10.1 (2018-07-13)
+References: <cover.1631785820.git.mchehab+huawei@kernel.org> <854e410df660c62e4e4c8f22c4ae9c6f6594f4a1.1631785820.git.mchehab+huawei@kernel.org>
+In-Reply-To: <854e410df660c62e4e4c8f22c4ae9c6f6594f4a1.1631785820.git.mchehab+huawei@kernel.org>
+From:   Andrii Nakryiko <andrii.nakryiko@gmail.com>
+Date:   Thu, 16 Sep 2021 11:15:01 -0700
+Message-ID: <CAEf4BzYqW0Gc_tCtnykYiTVy3Z7-_WXsEfpVGaGPqaPR4aseLA@mail.gmail.com>
+Subject: Re: [PATCH v2 06/23] libbpf: update index.rst reference
+To:     Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
+Cc:     Linux Doc Mailing List <linux-doc@vger.kernel.org>,
+        Jonathan Corbet <corbet@lwn.net>,
+        Alexei Starovoitov <ast@kernel.org>,
+        Andrii Nakryiko <andrii@kernel.org>,
+        Daniel Borkmann <daniel@iogearbox.net>,
+        Grant Seltzer <grantseltzer@gmail.com>,
+        John Fastabend <john.fastabend@gmail.com>,
+        KP Singh <kpsingh@kernel.org>, Martin KaFai Lau <kafai@fb.com>,
+        Song Liu <songliubraving@fb.com>, Yonghong Song <yhs@fb.com>,
+        bpf <bpf@vger.kernel.org>,
+        open list <linux-kernel@vger.kernel.org>,
+        Networking <netdev@vger.kernel.org>
+Content-Type: text/plain; charset="UTF-8"
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Wed, Sep 15, 2021 at 10:18:50AM +0800, brookxu <brookxu.cn@gmail.com> wrote:
-> In scenarios where containers are frequently created and deleted,
-> a large number of error logs maybe generated. This log provides
-> less information, we can get more detailed info from misc.events.
+On Thu, Sep 16, 2021 at 2:55 AM Mauro Carvalho Chehab
+<mchehab+huawei@kernel.org> wrote:
+>
+> Changeset d20b41115ad5 ("libbpf: Rename libbpf documentation index file")
+> renamed: Documentation/bpf/libbpf/libbpf.rst
+> to: Documentation/bpf/libbpf/index.rst.
+>
+> Update its cross-reference accordingly.
+>
+> Fixes: d20b41115ad5 ("libbpf: Rename libbpf documentation index file")
+> Signed-off-by: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
+> ---
 
-IIUC, the log provides equal information (with persistence), no?
+Thanks!
 
-> diff --git a/kernel/cgroup/misc.c b/kernel/cgroup/misc.c
-> index 4b2b492..fe3e8a0 100644
-> --- a/kernel/cgroup/misc.c
-> +++ b/kernel/cgroup/misc.c
-> @@ -157,13 +157,6 @@ int misc_cg_try_charge(enum misc_res_type type, struct misc_cg *cg,
->  		new_usage = atomic_long_add_return(amount, &res->usage);
->  		if (new_usage > READ_ONCE(res->max) ||
->  		    new_usage > READ_ONCE(misc_res_capacity[type])) {
-> -			if (!res->failed) {
-> -				pr_info("cgroup: charge rejected by the misc controller for %s resource in ",
-> -					misc_res_name[type]);
-> -				pr_cont_cgroup_path(i->css.cgroup);
-> -				pr_cont("\n");
-> -				res->failed = true;
-> -			}
+Acked-by: Andrii Nakryiko <andrii@kernel.org>
 
-As I argued previously, reporting this as "in" `i` cgroup instead
-of `cg` is not that useful and equivalent to the misc.events:*.max now,
-so the drop is appropriate.
-
-The change/patch is OK,
-Reviewed-by: Michal Koutný <mkoutny@suse.com>
-
-The commit message might be fixed (if you agree with remark).
+>  Documentation/bpf/index.rst | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+>
+> diff --git a/Documentation/bpf/index.rst b/Documentation/bpf/index.rst
+> index 1ceb5d704a97..817a201a1282 100644
+> --- a/Documentation/bpf/index.rst
+> +++ b/Documentation/bpf/index.rst
+> @@ -15,7 +15,7 @@ that goes into great technical depth about the BPF Architecture.
+>  libbpf
+>  ======
+>
+> -Documentation/bpf/libbpf/libbpf.rst is a userspace library for loading and interacting with bpf programs.
+> +Documentation/bpf/libbpf/index.rst is a userspace library for loading and interacting with bpf programs.
+>
+>  BPF Type Format (BTF)
+>  =====================
+> --
+> 2.31.1
+>
