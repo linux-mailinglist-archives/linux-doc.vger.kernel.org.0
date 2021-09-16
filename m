@@ -2,84 +2,111 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id BF36040D543
-	for <lists+linux-doc@lfdr.de>; Thu, 16 Sep 2021 11:00:16 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 5DBF740D5B3
+	for <lists+linux-doc@lfdr.de>; Thu, 16 Sep 2021 11:14:51 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S235804AbhIPJB3 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 16 Sep 2021 05:01:29 -0400
-Received: from mail.kernel.org ([198.145.29.99]:36284 "EHLO mail.kernel.org"
+        id S235972AbhIPJPt (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 16 Sep 2021 05:15:49 -0400
+Received: from mail.kernel.org ([198.145.29.99]:40926 "EHLO mail.kernel.org"
         rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S235549AbhIPJBY (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Thu, 16 Sep 2021 05:01:24 -0400
-Received: by mail.kernel.org (Postfix) with ESMTPSA id 236696121F;
-        Thu, 16 Sep 2021 09:00:04 +0000 (UTC)
+        id S235418AbhIPJPm (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Thu, 16 Sep 2021 05:15:42 -0400
+Received: by mail.kernel.org (Postfix) with ESMTPSA id 4E1A0611CA;
+        Thu, 16 Sep 2021 09:14:21 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-        s=k20201202; t=1631782804;
-        bh=5XeDG3kV6RmqRaQjGcuq1o3m7hwiaBG5N6FHY8Endq4=;
-        h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-        b=bXs1bbxZGLSVOiEehuC2OlwWf9/hzPejbBnoHBkjuqKZ0ApYC0NKs+sMzT5aVclnl
-         2XRzOs2d9bgy5hOCDbMvVo0V+Fo43PhnXXDD/c1dCgY4b60S06PNUFPoBV1qHlCeaa
-         2Bx8tGyMAkO568SS5rdE/7l0zRrobNzxuMOnN3zWB0uTW4Di2Z55YE8DBwhNSt9e0F
-         EbXNgD4IoTH+OGpRryocLyDaYTO3WR4eqt6obl6D4nN2DW2i9JOg1AKa3kXrPQ6rwL
-         k5jA73UUavriNMjMtJuSop0KDbjt2XnWnDmDcojNgWwg86NxroAnQP4DM5NLaV6zcg
-         4xxQufCGm1zHA==
+        s=k20201202; t=1631783661;
+        bh=HpXVplz89oKyc+hivBPzxb/s0fvvid7dqIkLDoV0E8s=;
+        h=From:To:Cc:Subject:Date:From;
+        b=lRyC+Gl6hpA65PTmNoIvzIyVlFwS1vvgpOXA4IShHvXBxni2jYB5SiQUoU+fAPpe7
+         MhnOfSEDpi0f8ZqYssR8CnOyMA/WbCzxSWt1mOakOCY8TqwNRCL3kQrQCKrB2zWRIB
+         5G0n7Tz6Uoky9NsNn5NDTtSzpSpYgyGclzrBZA3Gs8NpLY4HEgX3PjaPn8FmThtKR2
+         aBhvThsya5NVQoLmW1gxaxwHQwFF6ykyqS6fssrJvf8d7OLU9EwLMDYNfhy/Dw6CY7
+         InDJMP3HNKwr3VvEbl2g/5QXYa9v7CBmkpGyauf133KiKGoSP98tRVlSt1Mjgaucod
+         b9jsm+2PWf6gQ==
 Received: by mail.kernel.org with local (Exim 4.94.2)
         (envelope-from <mchehab@kernel.org>)
-        id 1mQnFR-001qlX-MO; Thu, 16 Sep 2021 11:00:01 +0200
+        id 1mQnTH-001sKa-8R; Thu, 16 Sep 2021 11:14:19 +0200
 From:   Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 To:     Linux Doc Mailing List <linux-doc@vger.kernel.org>,
-        Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+        Jonathan Corbet <corbet@lwn.net>
 Cc:     Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
-        "Jonathan Corbet" <corbet@lwn.net>,
-        Jonathan Cameron <Jonathan.Cameron@huawei.com>,
-        Oded Gabbay <oded.gabbay@gmail.com>,
-        Suzuki K Poulose <suzuki.poulose@arm.com>,
-        linux-kernel@vger.kernel.org
-Subject: [PATCH v3 30/30] ABI: sysfs-class-rapidio: use wildcards on What definitions
-Date:   Thu, 16 Sep 2021 10:59:57 +0200
-Message-Id: <aa073b85ab04b5b201d40f747ccdb6806f38eb66.1631782432.git.mchehab+huawei@kernel.org>
+        linux-kernel@vger.kernel.org, Daniel Vetter <daniel@ffwll.ch>,
+        David Airlie <airlied@linux.ie>,
+        Evgeniy Polyakov <zbr@ioremap.net>,
+        Jakub Kicinski <kuba@kernel.org>,
+        John Fastabend <john.fastabend@gmail.com>,
+        KP Singh <kpsingh@kernel.org>, Martin KaFai Lau <kafai@fb.com>,
+        Matthias Brugger <matthias.bgg@gmail.com>,
+        Rob Herring <robh+dt@kernel.org>,
+        Shuah Khan <shuah@kernel.org>,
+        Song Liu <songliubraving@fb.com>, Yonghong Song <yhs@fb.com>,
+        bpf@vger.kernel.org, devicetree@vger.kernel.org,
+        dri-devel@lists.freedesktop.org,
+        linux-arm-kernel@lists.infradead.org,
+        linux-kselftest@vger.kernel.org,
+        linux-mediatek@lists.infradead.org, linux-mmc@vger.kernel.org,
+        linux-omap@vger.kernel.org, netdev@vger.kernel.org,
+        sparmaintainer@unisys.com
+Subject: [PATCH 00/24] Fix some issues at documentation
+Date:   Thu, 16 Sep 2021 11:13:53 +0200
+Message-Id: <cover.1631783482.git.mchehab+huawei@kernel.org>
 X-Mailer: git-send-email 2.31.1
-In-Reply-To: <cover.1631782432.git.mchehab+huawei@kernel.org>
-References: <cover.1631782432.git.mchehab+huawei@kernel.org>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 Sender: Mauro Carvalho Chehab <mchehab@kernel.org>
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-An "N" upper letter is not a wildcard, nor can easily be identified
-by script, specially since the USB sysfs define things like.
-bNumInterfaces. Use, instead, <N>, in order to let script/get_abi.pl
-to convert it into a Regex.
+Hi John,
 
-Signed-off-by: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
----
- Documentation/ABI/testing/sysfs-class-rapidio | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+The first patch in this series fix a bad character used instead of
+a "(c)" UTF-8 symbol.
 
-diff --git a/Documentation/ABI/testing/sysfs-class-rapidio b/Documentation/ABI/testing/sysfs-class-rapidio
-index 19aefb21b639..81e09145525a 100644
---- a/Documentation/ABI/testing/sysfs-class-rapidio
-+++ b/Documentation/ABI/testing/sysfs-class-rapidio
-@@ -10,7 +10,7 @@ Description:
- 		NOTE: An mport ID is not a RapidIO destination ID assigned to a
- 		given local mport device.
- 
--What:		/sys/class/rapidio_port/rapidioN/sys_size
-+What:		/sys/class/rapidio_port/rapidio<N>/sys_size
- Date:		Apr, 2014
- KernelVersion:	v3.15
- Contact:	Matt Porter <mporter@kernel.crashing.org>,
-@@ -22,7 +22,7 @@ Description:
- 
- 		1 = large (16-bit destination ID, max. 65536 devices).
- 
--What:		/sys/class/rapidio_port/rapidioN/port_destid
-+What:		/sys/class/rapidio_port/rapidio<N>/port_destid
- Date:		Apr, 2014
- KernelVersion:	v3.15
- Contact:	Matt Porter <mporter@kernel.crashing.org>,
+The remaining ones fix several broken references to files
+under Documentation/, several due to DT schema conversions
+from .txt to .yaml.
+
+Mauro Carvalho Chehab (24):
+  visorbus: fix a copyright symbol that was bad encoded
+  dt-bindings: net: dsa: sja1105: update nxp,sja1105.yaml reference
+  dt-bindings: arm: mediatek: mmsys: update mediatek,mmsys.yaml
+    reference
+  dt-bindings: w1: update w1-gpio.yaml reference
+  dt-bindings: mmc: update mmc-card.yaml reference
+  libbpf: update index.rst reference
+  docs: accounting: update delay-accounting.rst reference
+  tools: bpftool: update bpftool-prog.rst reference
+  tools: bpftool: update bpftool-map.rst reference
+  bpftool: update bpftool-cgroup.rst reference
+  MAINTAINERS: update mtd-physmap.yaml reference
+  MAINTAINERS: update arm,vic.yaml reference
+  MAINTAINERS: update aspeed,i2c.yaml reference
+  MAINTAINERS: update faraday,ftrtc010.yaml reference
+  MAINTAINERS: update fsl,fec.yaml reference
+  MAINTAINERS: update mtd-physmap.yaml reference
+  MAINTAINERS: update ti,am654-hbmc.yaml reference
+  MAINTAINERS: update ti,sci.yaml reference
+  MAINTAINERS: update intel,ixp46x-rng.yaml reference
+  MAINTAINERS: update nxp,imx8-jpeg.yaml reference
+  MAINTAINERS: update gemini.yaml reference
+  MAINTAINERS: update brcm,unimac-mdio.yaml reference
+  MAINTAINERS: update chipone,icn8318.yaml reference
+  MAINTAINERS: update silergy,sy8106a.yaml reference
+
+ Documentation/admin-guide/sysctl/kernel.rst   |  2 +-
+ Documentation/bpf/index.rst                   |  2 +-
+ .../display/mediatek/mediatek,disp.txt        |  2 +-
+ Documentation/networking/dsa/sja1105.rst      |  2 +-
+ Documentation/w1/masters/w1-gpio.rst          |  2 +-
+ MAINTAINERS                                   | 28 +++++++++----------
+ drivers/mmc/host/omap_hsmmc.c                 |  2 +-
+ drivers/visorbus/visorbus_main.c              |  2 +-
+ .../selftests/bpf/test_bpftool_synctypes.py   |  6 ++--
+ 9 files changed, 24 insertions(+), 24 deletions(-)
+
 -- 
 2.31.1
+
 
