@@ -2,73 +2,117 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id A399940EEEE
-	for <lists+linux-doc@lfdr.de>; Fri, 17 Sep 2021 03:52:53 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 7CFCB40EEFC
+	for <lists+linux-doc@lfdr.de>; Fri, 17 Sep 2021 03:57:26 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S242400AbhIQByN (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 16 Sep 2021 21:54:13 -0400
-Received: from mail-il1-f169.google.com ([209.85.166.169]:37390 "EHLO
-        mail-il1-f169.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S230135AbhIQByM (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Thu, 16 Sep 2021 21:54:12 -0400
-Received: by mail-il1-f169.google.com with SMTP id i13so8633909ilm.4;
-        Thu, 16 Sep 2021 18:52:51 -0700 (PDT)
+        id S241723AbhIQB6n (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 16 Sep 2021 21:58:43 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:34760 "EHLO
+        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S232479AbhIQB6l (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Thu, 16 Sep 2021 21:58:41 -0400
+Received: from mail-pf1-x433.google.com (mail-pf1-x433.google.com [IPv6:2607:f8b0:4864:20::433])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 91A12C061574;
+        Thu, 16 Sep 2021 18:57:19 -0700 (PDT)
+Received: by mail-pf1-x433.google.com with SMTP id g14so7746155pfm.1;
+        Thu, 16 Sep 2021 18:57:19 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112;
+        h=subject:to:cc:references:from:message-id:date:user-agent
+         :mime-version:in-reply-to:content-language:content-transfer-encoding;
+        bh=zdlBFrQubRXdUqdsVIqT/f0kDrO2skTyaf0KO7tBrEA=;
+        b=Mm2mXvEmWnkptp65WTD/gcjpkxrVxksIJDvdZDvgHI6cEi5LGPVpNOLCxvzKWLk4NN
+         mnF+nfWG/Xv/QVKeWwa7t1wa5NNH8xeUCdyTmKUrSooxGFE8oz89B+Q0BX8lONlE9LeW
+         0sI9um0vnWjkWx7NfuRjc9xI3nBce0M16bpA7u1uI7ZQeiw229KqTvZKZcwFyLrLVW5I
+         XlwYYmYV9Tkk5jBUlLrGTDbmGX5oseINzQ7WnQHiQl7RfIeyExo08fir0L66wd6uMOl3
+         MVkmq+c5fY75mYTjwFd46+jTsA9ZqLp/W+vw959b4hSftgcER7wWk03a5gvMTgfVUUFJ
+         kNLA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=x-gm-message-state:date:from:to:cc:subject:message-id:references
-         :mime-version:content-disposition:in-reply-to;
-        bh=q4KnpOzY42vEtYkIMK54mzHMAcXP97zORxIlI/GXoig=;
-        b=c94ufg/1vnTZWxLQRHOczsl2CzRVntT0PR6RcmyY8G8waTwoVaAxZgohss0WZLZ6Hc
-         xTwrnUka1ajCs1Vg6U++IGSSBaLarZE+Q4WTUJWIIAgz1tMJTKBXVjE6HaY63bKrMCiF
-         Bt8euqye7/TZSh5wswysXk8jJj6w0B+MsdE4W1jpy20yT6G5XSa67eobX86X4VThyQPf
-         2rpwT0D7rfuNhvJ/k52trnAUAIT5JiAC/KYwQ/krXjmhJSi1w7h8fab7Gyf264qEqfdI
-         fRJNniy1DkpX6Bq57yQDWvAIksnJWDT+c2kVKZZNmrzqEa7Ub+kOSHf13t5WOQ7reWoz
-         IZyA==
-X-Gm-Message-State: AOAM533fsSMZ/pPTcfI3ABnRUWnb+x03wQyaTH3jU5SXdJ+X9XXfE1hO
-        aRSi3hoaA8GHfYCKb0HtV4R+9M2P3w==
-X-Google-Smtp-Source: ABdhPJzfj0/r9qZ4uVyrAf1j2qwI9RX6IlADIpwKGmsqv00X42lchpVkYRCfoLYGkD32/G0fiDrabw==
-X-Received: by 2002:a05:6e02:d05:: with SMTP id g5mr6320404ilj.34.1631843571132;
-        Thu, 16 Sep 2021 18:52:51 -0700 (PDT)
-Received: from robh.at.kernel.org (96-84-70-89-static.hfc.comcastbusiness.net. [96.84.70.89])
-        by smtp.gmail.com with ESMTPSA id b16sm2628875ila.1.2021.09.16.18.52.49
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 16 Sep 2021 18:52:50 -0700 (PDT)
-Received: (nullmailer pid 1600391 invoked by uid 1000);
-        Fri, 17 Sep 2021 01:52:49 -0000
-Date:   Thu, 16 Sep 2021 20:52:49 -0500
-From:   Rob Herring <robh@kernel.org>
-To:     Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
-Cc:     linux-omap@vger.kernel.org, linux-kernel@vger.kernel.org,
-        Yang Li <abaci-bugfix@linux.alibaba.com>,
-        Ulf Hansson <ulf.hansson@linaro.org>,
-        Maxime Ripard <maxime@cerno.tech>,
-        Jonathan Corbet <corbet@lwn.net>,
-        Linux Doc Mailing List <linux-doc@vger.kernel.org>,
-        Cai Huoqing <caihuoqing@baidu.com>, linux-mmc@vger.kernel.org
-Subject: Re: [PATCH v2 05/23] dt-bindings: mmc: update mmc-card.yaml reference
-Message-ID: <YUP08Zw/Bgi+zoBK@robh.at.kernel.org>
-References: <cover.1631785820.git.mchehab+huawei@kernel.org>
- <820bb7a1d7e0e51cbea72c9bee6bce806427d1f3.1631785820.git.mchehab+huawei@kernel.org>
+        h=x-gm-message-state:subject:to:cc:references:from:message-id:date
+         :user-agent:mime-version:in-reply-to:content-language
+         :content-transfer-encoding;
+        bh=zdlBFrQubRXdUqdsVIqT/f0kDrO2skTyaf0KO7tBrEA=;
+        b=pjCAczheeE2eUuInjw5w98fKvOPz5i6Q2OBESMH+JkLlCIiYP/B/9RGmpopw2vsmny
+         nq7uW2FtMYOBAt/1xyMcGg5+SqZOCJllB3cxKBVQJi8YwUGl6jG9fQNdvh0DJc20V6tz
+         ybkOKvUb30x8gN1yULfP8QYDzkDnx5LcFx6NpnR5hMVILUMMI+G9IO57ZcR2QzoQ7dqK
+         B8ccWGoIVq5Vj1YcR1ls/KHnC8imWXmduCnx/GI03OUJ3BJ9xxfgaStGvg9tYZ0Yku8X
+         VkgPGbvtxzofqZITVaieRsUs/fRPBNq/ssq8hP2vZ/l9ezGTkE9P7RYOYbnItTQtQlOS
+         6yWQ==
+X-Gm-Message-State: AOAM532v3c2OW4DZHNiLtc4A+xK5YbB6O5iXVGoEnTH8uJj2fEwsYSO8
+        1XsE+k9XDZSGHP246neGEmq9RXDF9z0=
+X-Google-Smtp-Source: ABdhPJzfbENTuBRjqv55PN+BgHOkd3mvK106kXS6TpfZpzi302Gp+NlZ64tDh7Ol7MCMPK1nbqpkHA==
+X-Received: by 2002:a63:385e:: with SMTP id h30mr7600655pgn.187.1631843838356;
+        Thu, 16 Sep 2021 18:57:18 -0700 (PDT)
+Received: from [192.168.255.10] ([203.205.141.115])
+        by smtp.gmail.com with ESMTPSA id f27sm4292097pfq.78.2021.09.16.18.57.15
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Thu, 16 Sep 2021 18:57:17 -0700 (PDT)
+Subject: Re: [PATCH v3 2/3] misc_cgroup: remove error log to avoid log flood
+To:     =?UTF-8?Q?Michal_Koutn=c3=bd?= <mkoutny@suse.com>
+Cc:     tj@kernel.org, lizefan.x@bytedance.com, hannes@cmpxchg.org,
+        vipinsh@google.com, corbet@lwn.net, linux-kernel@vger.kernel.org,
+        cgroups@vger.kernel.org, linux-doc@vger.kernel.org
+References: <3834f917d50a6f19402e179e917ef6a9dde5f64a.1631671936.git.brookxu@tencent.com>
+ <a960cd793f649bd944127fe5e5e3f4d8bb9040a4.1631671936.git.brookxu@tencent.com>
+ <20210916175711.GA12643@blackbody.suse.cz>
+From:   brookxu <brookxu.cn@gmail.com>
+Message-ID: <eece1309-4c1e-909a-22ea-3db31ad7a1da@gmail.com>
+Date:   Fri, 17 Sep 2021 09:56:26 +0800
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:78.0)
+ Gecko/20100101 Thunderbird/78.13.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <820bb7a1d7e0e51cbea72c9bee6bce806427d1f3.1631785820.git.mchehab+huawei@kernel.org>
+In-Reply-To: <20210916175711.GA12643@blackbody.suse.cz>
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
+Content-Transfer-Encoding: 8bit
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Thu, 16 Sep 2021 11:55:04 +0200, Mauro Carvalho Chehab wrote:
-> Changeset 922eefdafc80 ("dt-bindings: mmc: Convert MMC Card binding to a schema")
-> renamed: Documentation/devicetree/bindings/mmc/mmc-card.txt
-> to: Documentation/devicetree/bindings/mmc/mmc-card.yaml.
-> 
-> Update its cross-reference accordingly.
-> 
-> Fixes: 922eefdafc80 ("dt-bindings: mmc: Convert MMC Card binding to a schema")
-> Signed-off-by: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
-> ---
->  drivers/mmc/host/omap_hsmmc.c | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
-> 
+Thanks for your time.
 
-Applied, thanks!
+Michal Koutný wrote on 2021/9/17 1:57 上午:
+> On Wed, Sep 15, 2021 at 10:18:50AM +0800, brookxu <brookxu.cn@gmail.com> wrote:
+>> In scenarios where containers are frequently created and deleted,
+>> a large number of error logs maybe generated. This log provides
+>> less information, we can get more detailed info from misc.events.
+> 
+> IIUC, the log provides equal information (with persistence), no?
+> 
+>> diff --git a/kernel/cgroup/misc.c b/kernel/cgroup/misc.c
+>> index 4b2b492..fe3e8a0 100644
+>> --- a/kernel/cgroup/misc.c
+>> +++ b/kernel/cgroup/misc.c
+>> @@ -157,13 +157,6 @@ int misc_cg_try_charge(enum misc_res_type type, struct misc_cg *cg,
+>>  		new_usage = atomic_long_add_return(amount, &res->usage);
+>>  		if (new_usage > READ_ONCE(res->max) ||
+>>  		    new_usage > READ_ONCE(misc_res_capacity[type])) {
+>> -			if (!res->failed) {
+>> -				pr_info("cgroup: charge rejected by the misc controller for %s resource in ",
+>> -					misc_res_name[type]);
+>> -				pr_cont_cgroup_path(i->css.cgroup);
+>> -				pr_cont("\n");
+>> -				res->failed = true;
+>> -			}
+> 
+> As I argued previously, reporting this as "in" `i` cgroup instead
+> of `cg` is not that useful and equivalent to the misc.events:*.max now,
+> so the drop is appropriate.
+> 
+> The change/patch is OK,
+> Reviewed-by: Michal Koutný <mkoutny@suse.com>
+> 
+> The commit message might be fixed (if you agree with remark).
+
+Yeah, maybe we should make it more clearly, What do you think of
+the commit below:
+
+In scenarios where containers are frequently created and deleted,
+a large number of error logs maybe generated. The logs only show
+which node is about to go over the max limit, not the node which
+resource request failed. As misc.event has provided relevant
+information, maybe we can remove this log.
+
+
+> 
