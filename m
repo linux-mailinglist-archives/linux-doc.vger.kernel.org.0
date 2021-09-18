@@ -2,107 +2,151 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id B5101410593
-	for <lists+linux-doc@lfdr.de>; Sat, 18 Sep 2021 11:42:56 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id DE6864105B4
+	for <lists+linux-doc@lfdr.de>; Sat, 18 Sep 2021 11:52:35 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S242725AbhIRJoQ (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Sat, 18 Sep 2021 05:44:16 -0400
-Received: from wnew3-smtp.messagingengine.com ([64.147.123.17]:33631 "EHLO
-        wnew3-smtp.messagingengine.com" rhost-flags-OK-OK-OK-OK)
-        by vger.kernel.org with ESMTP id S242443AbhIRJoM (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Sat, 18 Sep 2021 05:44:12 -0400
-Received: from compute5.internal (compute5.nyi.internal [10.202.2.45])
-        by mailnew.west.internal (Postfix) with ESMTP id 3B3CE2B011CB;
-        Sat, 18 Sep 2021 05:42:47 -0400 (EDT)
-Received: from mailfrontend2 ([10.202.2.163])
-  by compute5.internal (MEProxy); Sat, 18 Sep 2021 05:42:47 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=u92.eu; h=date
-        :from:to:cc:subject:message-id:references:mime-version
-        :content-type:in-reply-to; s=fm3; bh=iQMJviYlb4ZEn676riwj+ykMcaY
-        gM3Bpxtt9O2JGErE=; b=WDwHHQXezEJe3XzQX3Em61caD1JOywMykQAjQo9+FvS
-        BAUw0ysziTYQHd2JcCD0Bk8z0AXCgaxpNkpKZQLKoYJ1OqQBcoFQ33Qgu5/ta31z
-        DyByahRv0mE53Ony+dsf9vdzav7TkXvnoNMK9J+5jBpTqlb9TTjAdddlmlrRrTqr
-        Yf6gJ7BLyxE0uyTPoJtiPyFjieupdONy4OEcmHP6qj5k/GfsUOqHapmuJhhnj03u
-        aNQMVgCiAY4CTWJmetOTs/5AqGukMpQkXerlp7nEGlI0rsksg0Xiyj8h6lzqpt5F
-        kGOaxLJK9jw+z2uqeAdy7jRYyyLk3cfoC3lOSyJK4ZQ==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
-        messagingengine.com; h=cc:content-type:date:from:in-reply-to
-        :message-id:mime-version:references:subject:to:x-me-proxy
-        :x-me-proxy:x-me-sender:x-me-sender:x-sasl-enc; s=fm3; bh=iQMJvi
-        Ylb4ZEn676riwj+ykMcaYgM3Bpxtt9O2JGErE=; b=NQPv4xozCXDNOuWW95l8r0
-        wqgyyHyXfB+TEZFR29p5hrSTv1MyvPh8hK33MLJE8IkeC7FBi0cuYZiJYqFoOouk
-        N1SMt7gdmUOFX7+6dS0zB2EDvB6PtfJ+RXPRE6Xm8Yv6zbnwvVa6/DoxXhlvqsiV
-        DiPPdP8iqD22W7bL33bjydi/YElws4Ckpr/ugaxvRzvclMAOlkEEUlIc955FTNr+
-        MRHnTWDFICCu6KCQ4D+EyAmzhwMruzmoz98VLdiUyE9IpnmcGdvH0hhH/n8X3vhI
-        fEDavwtqAGgk1//zVUmRJDSgl5exPhNz4+P4Pt8zN7dvnYLXClZYKlaWnCVGwsuA
-        ==
-X-ME-Sender: <xms:lrRFYfbjRE-L4f3Nfyw9rN67HO9pJVZbRLl_BAWGbVpLMk1TuqfX0g>
-    <xme:lrRFYeYv4mcID7VMTZfIPCn8tDGxqPm2ySOv1G-A0NKEFUBuK3A-ve84o5-867vr0
-    mX6PcSXDWBC1Grk_A>
-X-ME-Received: <xmr:lrRFYR9hvwXVM79X0a8T4DolehjhDAUODuSF4_ucBL_MRX00TWXEJTRAqvy--tKCLhHOxX8g>
-X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvtddrudehkedgudejucetufdoteggodetrfdotf
-    fvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdfqfgfvpdfurfetoffkrfgpnffqhgen
-    uceurghilhhouhhtmecufedttdenucesvcftvggtihhpihgvnhhtshculddquddttddmne
-    cujfgurhepfffhvffukfhfgggtuggjsehttdertddttdejnecuhfhrohhmpefhvghrnhgr
-    nhguohcutfgrmhhoshcuoehgrhgvvghnfhhoohesuhelvddrvghuqeenucggtffrrghtth
-    gvrhhnpedvjeeifeelhfetiefhhfdthfefkefhhfeutdetvdfgvefgveefheffgfekjeef
-    heenucevlhhushhtvghrufhiiigvpedtnecurfgrrhgrmhepmhgrihhlfhhrohhmpehgrh
-    gvvghnfhhoohesuhelvddrvghu
-X-ME-Proxy: <xmx:lrRFYVqgNRMK_pamLceVRt2VyFRqwtZ2Qcb5LGQOAC_FeeRGMnNf5g>
-    <xmx:lrRFYarmIXc0_KRWqyzkrnne4mGC_Rk6K5ND2K3AeQUIKytJ04dpkA>
-    <xmx:lrRFYbSOSsDAnV7UWjB8L5nXiW3YpBe6JQMbwEeiJuzXn7eXbd_4lg>
-    <xmx:lrRFYZ2Lu9EzyIqd7DyRxbU3UzqW3Goj4jk6MyoI0oEwokzv5BiUmX82bJc>
-Received: by mail.messagingengine.com (Postfix) with ESMTPA; Sat,
- 18 Sep 2021 05:42:43 -0400 (EDT)
-Date:   Sat, 18 Sep 2021 11:42:40 +0200
-From:   Fernando Ramos <greenfoo@u92.eu>
-To:     Sean Paul <sean@poorly.run>
-Cc:     dri-devel@lists.freedesktop.org, linux-kernel@vger.kernel.org,
-        linux-doc@vger.kernel.org, amd-gfx@lists.freedesktop.org,
-        intel-gfx@lists.freedesktop.org, linux-arm-msm@vger.kernel.org,
-        freedreno@lists.freedesktop.org, nouveau@lists.freedesktop.org,
-        linux-renesas-soc@vger.kernel.org, linux-tegra@vger.kernel.org
-Subject: Re: [PATCH 14/15] drm/amd: cleanup: drm_modeset_lock_all() -->
- DRM_MODESET_LOCK_ALL_BEGIN()
-Message-ID: <YUW0kJr1XoqCENhl@zacax395.localdomain>
-References: <20210916211552.33490-1-greenfoo@u92.eu>
- <20210916211552.33490-15-greenfoo@u92.eu>
- <20210917155548.GO2515@art_vandelay>
- <YUUh7X+Ft7vKHlcT@zacax395.localdomain>
+        id S244137AbhIRJxs (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Sat, 18 Sep 2021 05:53:48 -0400
+Received: from mail.kernel.org ([198.145.29.99]:54628 "EHLO mail.kernel.org"
+        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
+        id S243499AbhIRJxq (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Sat, 18 Sep 2021 05:53:46 -0400
+Received: by mail.kernel.org (Postfix) with ESMTPSA id 8B3F36127C;
+        Sat, 18 Sep 2021 09:52:22 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+        s=k20201202; t=1631958742;
+        bh=chE0EwEyFLVgeK91ZaRsMFr0q3GXSbTjQji/CWReA4o=;
+        h=From:To:Cc:Subject:Date:From;
+        b=F7LsHblk8kibVjke9F4qRsRbuXdKGZhsooGevq7y51p9Dd89TQIU6DVX99TH4ODWS
+         EADfQA9+wiUv22xq472rz/3A0hKodUSVPaheglwLjxUu+YhLXck1WhlOGW/iLYlXoX
+         BZpB+we+smu1ddXVArP0DkOXMOpskmSpFD/4TxhxSJ99BNU6NaKEsTbTuUe3Jbpkc3
+         hX+ir9h6F8WbEucTkj4R1vtRrO+lEQfoEzQYJDMu4jOJDIZDuCSlmcg5sm7qdjEuco
+         U0IA2dfb69JX+H4CpegbS4cjnKMoA9SJC616s5MKd7OrwUoVKyfQPsStX1qJa3gifE
+         F7Tzz5XawncBA==
+Received: by mail.kernel.org with local (Exim 4.94.2)
+        (envelope-from <mchehab@kernel.org>)
+        id 1mRX1A-003b0n-FQ; Sat, 18 Sep 2021 11:52:20 +0200
+From:   Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
+To:     Linux Doc Mailing List <linux-doc@vger.kernel.org>,
+        Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+Cc:     Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
+        linux-kernel@vger.kernel.org, Jonathan Corbet <corbet@lwn.net>,
+        Anton Vorontsov <anton@enomsg.org>,
+        Colin Cross <ccross@android.com>,
+        John Fastabend <john.fastabend@gmail.com>,
+        KP Singh <kpsingh@kernel.org>,
+        Kees Cook <keescook@chromium.org>,
+        Martin KaFai Lau <kafai@fb.com>,
+        Song Liu <songliubraving@fb.com>,
+        Tony Luck <tony.luck@intel.com>, Yonghong Song <yhs@fb.com>,
+        bpf@vger.kernel.org, netdev@vger.kernel.org
+Subject: [PATCH v3 0/7] get_abi.pl: Check for missing symbols at the ABI  specs
+Date:   Sat, 18 Sep 2021 11:52:10 +0200
+Message-Id: <cover.1631957565.git.mchehab+huawei@kernel.org>
+X-Mailer: git-send-email 2.31.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-In-Reply-To: <YUUh7X+Ft7vKHlcT@zacax395.localdomain>
+Content-Transfer-Encoding: 8bit
+Sender: Mauro Carvalho Chehab <mchehab@kernel.org>
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On 21/09/18 01:17AM, Fernando Ramos wrote:
+Hi Greg,
 
-> > > +#include <drm/drm_drv.h>
-> > 
-> > Top-level headers generally come above the driver headers. Also, now that I think
-> > about this a bit more, all of the new includes in this set should probably be
-> > for 'drm_modeset_lock.h' instead of 'drm_drv.h'.
-> 
-> Ok. Let me try that.
+Add a new feature at get_abi.pl to optionally check for existing symbols
+under /sys that won't match a "What:" inside Documentation/ABI.
 
-Turns out that the DRM_MODESET_LOCK_ALL_*() macros expansion includes a call
-to drm_drv_uses_atomic_modeset() which is defined in "drm_drv.h".
+Such feature is very useful to detect missing documentation for ABI.
 
-Thus, #include'ing <drm/drm_drv.h> cannot be avoided.
+This series brings a major speedup, plus it fixes a few border cases when
+matching regexes that end with a ".*" or \d+.
 
-This makes me wonder...
+patch 1 changes get_abi.pl logic to handle multiple What: lines, in
+order to make the script more robust;
 
-  1. "drm_drv.h" includes "drm_device.h", which includes "drm_mode_config.h",
-     which includes "drm_modeset_lock.h"
+patch 2 adds the basic logic. It runs really quicky (up to 2
+seconds), but it doesn't use sysfs softlinks.
 
-  2. "drm_modeset_lock.h" defines DRM_MODESET_LOCK_ALL_*() which expands into
-     drm_drv_uses_atomic_modeset()
+Patch 3 adds support for parsing softlinks. It makes the script a
+lot slower, making it take a couple of minutes to process the entire
+sysfs files. It could be optimized in the future by using a graph,
+but, for now, let's keep it simple.
 
-  3. drm_drv_uses_atomic_modeset() is declared in "drm_drv.h"
+Patch 4 adds an optional parameter to allow filtering the results
+using a regex given by the user. When this parameter is used
+(which should be the normal usecase), it will only try to find softlinks
+if the sysfs node matches a regex.
 
-There seems to be a circular dependency here.
+Patch 5 improves the report by avoiding it to ignore What: that
+ends with a wildcard.
 
-We can try to fix this, but I suggest to do it in a different patch series.
+Patch 6 is a minor speedup.  On a Dell Precision 5820, after patch 6, 
+results are:
+
+	$ time ./scripts/get_abi.pl undefined |sort >undefined && cat undefined| perl -ne 'print "$1\n" if (m#.*/(\S+) not found#)'|sort|uniq -c|sort -nr >undefined_symbols; wc -l undefined; wc -l undefined_symbols
+
+	real	2m35.563s
+	user	2m34.346s
+	sys	0m1.220s
+	7595 undefined
+	896 undefined_symbols
+
+Patch 7 makes a *huge* speedup: it basically switches a linear O(n^3)
+search for links by a logic which handle symlinks using BFS. It
+also addresses a border case that was making 'msi-irqs/\d+' regex to
+be misparsed. 
+
+After patch 7, it is 11 times faster:
+
+	$ time ./scripts/get_abi.pl undefined |sort >undefined && cat undefined| perl -ne 'print "$1\n" if (m#.*/(\S+) not found#)'|sort|uniq -c|sort -nr >undefined_symbols; wc -l undefined; wc -l undefined_symbols
+
+	real	0m14.137s
+	user	0m12.795s
+	sys	0m1.348s
+	7030 undefined
+	794 undefined_symbols
+
+(the difference on the number of undefined symbols are due to the fix for
+it to properly handle 'msi-irqs/\d+' regex)
+
+-
+
+While this series is independent from Documentation/ABI changes, it
+works best when applied from this tree, which also contain ABI fixes
+and a couple of additions of frequent missed symbols on my machine:
+
+    https://git.kernel.org/pub/scm/linux/kernel/git/mchehab/devel.git/log/?h=get_undefined_abi_v3
+
+-
+
+v3:
+  - Fixed parse issues with 'msi-irqs/\d+' regex;
+  - Added a BFS graph logic to solve symlinks at sysfs;
+
+v2:
+  - multiple What: for the same description are now properly handled;
+  - some special cases are now better handled;
+  - some bugs got fixed.
+
+The full series, with the ABI changes and some ABI improvements can be found
+at:
+	https://git.kernel.org/pub/scm/linux/kernel/git/mchehab/devel.git/commit/?h=get_undefined&id=1838d8fb149170f6c19feda0645d6c3157f46f4f
+
+
+
+Mauro Carvalho Chehab (7):
+  scripts: get_abi.pl: Better handle multiple What parameters
+  scripts: get_abi.pl: Check for missing symbols at the ABI specs
+  scripts: get_abi.pl: detect softlinks
+  scripts: get_abi.pl: add an option to filter undefined results
+  scripts: get_abi.pl: don't skip what that ends with wildcards
+  scripts: get_abi.pl: Ignore fs/cgroup sysfs nodes earlier
+  scripts: get_abi.pl: add a graph to speedup the undefined algorithm
+
+ scripts/get_abi.pl | 327 ++++++++++++++++++++++++++++++++++++++++++++-
+ 1 file changed, 320 insertions(+), 7 deletions(-)
+
+-- 
+2.31.1
+
 
