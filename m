@@ -2,119 +2,114 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 7EEE7412D46
-	for <lists+linux-doc@lfdr.de>; Tue, 21 Sep 2021 05:17:31 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 3B5D0412AF2
+	for <lists+linux-doc@lfdr.de>; Tue, 21 Sep 2021 04:02:49 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S231713AbhIUDS6 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 20 Sep 2021 23:18:58 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:41996 "EHLO
+        id S229985AbhIUCEN (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 20 Sep 2021 22:04:13 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:60536 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1350402AbhIUC2a (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Mon, 20 Sep 2021 22:28:30 -0400
-Received: from mail-pj1-x102d.google.com (mail-pj1-x102d.google.com [IPv6:2607:f8b0:4864:20::102d])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id D58A0C0F3447;
-        Mon, 20 Sep 2021 12:22:38 -0700 (PDT)
-Received: by mail-pj1-x102d.google.com with SMTP id n13-20020a17090a4e0d00b0017946980d8dso185553pjh.5;
-        Mon, 20 Sep 2021 12:22:38 -0700 (PDT)
+        with ESMTP id S234662AbhIUBpM (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Mon, 20 Sep 2021 21:45:12 -0400
+Received: from mail-pf1-x436.google.com (mail-pf1-x436.google.com [IPv6:2607:f8b0:4864:20::436])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 21645C05937A;
+        Mon, 20 Sep 2021 14:14:14 -0700 (PDT)
+Received: by mail-pf1-x436.google.com with SMTP id m26so17470304pff.3;
+        Mon, 20 Sep 2021 14:14:14 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
-        h=sender:date:from:to:cc:subject:message-id:references:mime-version
-         :content-disposition:in-reply-to;
-        bh=JRnq/4c87bKbiNxvafGN4wtXqF6Tb113NW1CCy3N52o=;
-        b=dP4iFexr0a+J311K54uCPdaewF9LzVRZkY/aDH2dPD9xGtZMHeZBij8v6wTihEifkg
-         bIk6GbffogctONMlgfddQ0fGCNpmpMWipeajx9Kyn00jXWS5Lh89zABYQjixzMBZ+eaL
-         Z57MjvIXj5H4kS2oNAwGRXtw/nv8xi3stLkDBC0ZBQ8vdA44wM0qv9TgId7KYVrQFIIj
-         r9NHcIiUB87XojT59VuOwo9LjdF4v5XE5loPh5rx3Uuhui2pBXa+MAb9l6U3Wrz/18ZN
-         8IPl4GNh1/xWGwqjOGo2nh7ySRJNyY6KBJST84Cnz0eSywHu1cHrx+2hzcPKYFzGH1NN
-         eH2g==
+        h=sender:subject:to:cc:references:from:message-id:date:user-agent
+         :mime-version:in-reply-to:content-language:content-transfer-encoding;
+        bh=wJbe26PbHhpGOrBm34WfP3EQpBDDdiCtuFeJHFErXao=;
+        b=XsOg/+RTS1dlQNb9LQapBJTEFbCTAMTz0fxmiMQT2IuwKXO/HGmAf4Tv+771pP9njY
+         nMxicCI6TJ7kfiCsL1P9Iq9ia/ZdNxasSfvohF+q+MAN/DS82gHpFxtGPjZ2VVFzOSMB
+         qFKTjVaN6yM9ZYqWlNSs8iqKIhrcc902zTIgS3z/24bT9yGe6DQpfxbfjfW/sH7chB8w
+         hwgxBaJWDPs//QlPZB/rbFStytxNc8xWs+xR8cuUN2HsumNl5VkD7mI713EsofTW81i7
+         q8WkCNTCpbd5NXvqfelOHpsKEV6NKhzoLcqcVsiXPz52vQCKD9vOQ3xesM06Sh4fahOQ
+         vN2w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=x-gm-message-state:sender:date:from:to:cc:subject:message-id
-         :references:mime-version:content-disposition:in-reply-to;
-        bh=JRnq/4c87bKbiNxvafGN4wtXqF6Tb113NW1CCy3N52o=;
-        b=3khiVuJWR+X38WAjkjDZnEngn962KSBLcBfmTMMWQ8sCZYLRvEw+4wdLQEGHLsiUZ0
-         UiUC2twcSzfUk5fCviZ22BEZk+drnYitOgKnJKpKdO3RxgEE1Qw0zoeI2iIRTKscbsN3
-         ul1di0HiE16Dd4mMfRCH8Isrzul91CkBFeU1viY9DIlVX9GpWSuN+CVKhjSF5IL7FRTw
-         gUpmK2UvsgM5oeGWfYGQcytlW9PjocRezBZcyvCo4EJPERdkMnX+NSMZboQpuudo7fXZ
-         /cVYuQuwQQg3H/on74ivxj3Iu+kfdL/GqNbcc8t0CMQRJRFGMNIMq5JwEsyD1+pG3BiO
-         tpQg==
-X-Gm-Message-State: AOAM530Cn/ufB9mOgQ3jDPr0Csg7BD3yMyO/Kb/mc/bcry0GnZC2Pfvn
-        lzXIgcdIJbLKVCGqCJM2aRM=
-X-Google-Smtp-Source: ABdhPJx7yMc6cu+sDCU/f0AwOhQkBHekSPHI+esLDq4+Bgpc7/NHJVGEMkfUVFWiJyicLFaEpDz9wg==
-X-Received: by 2002:a17:902:6b8a:b029:12d:3f99:9e5e with SMTP id p10-20020a1709026b8ab029012d3f999e5emr24030103plk.66.1632165758222;
-        Mon, 20 Sep 2021 12:22:38 -0700 (PDT)
-Received: from localhost ([2620:10d:c090:400::5:9d4d])
-        by smtp.gmail.com with ESMTPSA id c23sm16287436pgb.74.2021.09.20.12.22.37
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 20 Sep 2021 12:22:37 -0700 (PDT)
-Sender: Tejun Heo <htejun@gmail.com>
-Date:   Mon, 20 Sep 2021 09:22:32 -1000
-From:   Tejun Heo <tj@kernel.org>
-To:     Luis Chamberlain <mcgrof@kernel.org>
-Cc:     gregkh@linuxfoundation.org, akpm@linux-foundation.org,
-        minchan@kernel.org, jeyu@kernel.org, shuah@kernel.org,
-        rdunlap@infradead.org, rafael@kernel.org, masahiroy@kernel.org,
-        ndesaulniers@google.com, yzaikin@google.com, nathan@kernel.org,
-        ojeda@kernel.org, penguin-kernel@i-love.sakura.ne.jp,
-        vitor@massaru.org, elver@google.com, jarkko@kernel.org,
-        glider@google.com, rf@opensource.cirrus.com,
-        stephen@networkplumber.org, David.Laight@aculab.com,
-        bvanassche@acm.org, jolsa@kernel.org,
-        andriy.shevchenko@linux.intel.com, trishalfonso@google.com,
-        andreyknvl@gmail.com, jikos@kernel.org, mbenes@suse.com,
-        ngupta@vflare.org, sergey.senozhatsky.work@gmail.com,
-        reinette.chatre@intel.com, fenghua.yu@intel.com, bp@alien8.de,
-        x86@kernel.org, hpa@zytor.com, lizefan.x@bytedance.com,
-        hannes@cmpxchg.org, daniel.vetter@ffwll.ch, bhelgaas@google.com,
-        kw@linux.com, dan.j.williams@intel.com, senozhatsky@chromium.org,
-        hch@lst.de, joe@perches.com, hkallweit1@gmail.com, axboe@kernel.dk,
-        jpoimboe@redhat.com, tglx@linutronix.de, keescook@chromium.org,
-        rostedt@goodmis.org, peterz@infradead.org,
-        linux-spdx@vger.kernel.org, linux-doc@vger.kernel.org,
-        linux-block@vger.kernel.org, linux-fsdevel@vger.kernel.org,
-        linux-kselftest@vger.kernel.org, cgroups@vger.kernel.org,
-        linux-kernel@vger.kernel.org, copyleft-next@lists.fedorahosted.org
-Subject: Re: [PATCH v7 09/12] sysfs: fix deadlock race with module removal
-Message-ID: <YUjfeGuSVVq84iHc@mtj.duckdns.org>
-References: <20210918050430.3671227-1-mcgrof@kernel.org>
- <20210918050430.3671227-10-mcgrof@kernel.org>
- <YUjKjLzqpcxjRyit@slm.duckdns.org>
- <YUjdytEDkCughtSz@bombadil.infradead.org>
+        h=x-gm-message-state:sender:subject:to:cc:references:from:message-id
+         :date:user-agent:mime-version:in-reply-to:content-language
+         :content-transfer-encoding;
+        bh=wJbe26PbHhpGOrBm34WfP3EQpBDDdiCtuFeJHFErXao=;
+        b=pAB9PV995tNH42WiD5igGo40ltmnpk9Xv91Q3pAF63CML4jxpOugaNr5qWKywhGRvA
+         VDKu0I1V6LIKWqiT3kVJZv5YCtbJZ39nIQXIRD3NzhRIiUedu4KK4YpHZb3WnF+T+7xJ
+         by1KLMFNzRO8GcVO3/lmXK5UPhb7Giw416PwcLGYmk8y9r+VXjsUJBXMPJMwqSZiJGAl
+         6BcX0zoCA8G1ExPpySukgItKqMy+y7QwUORUyqMhywJJEAPsk0fN1UyO3yjzsgo9i54M
+         UNqvjgwRBEjOAxqQZVZ3pwy5aWruqgpkAzb8vSWNBeW0yNSdbBrcLZGtrc9N9bQliU45
+         wqIQ==
+X-Gm-Message-State: AOAM5301iSS+dii+GIlmAo3nNVUDSOEVboQCHrY3kfo3/aoRHLiV7as/
+        6rokvisuVeFjGwoMlqM82jU=
+X-Google-Smtp-Source: ABdhPJxT+Kq7mMohFE4vU+4/4A3kHTJgOAReFUeXiGCwjRSGFhNml42MoQBZbYpHGt5HUM9KI8UGng==
+X-Received: by 2002:a05:6a00:c3:b0:43d:e6be:b2a6 with SMTP id e3-20020a056a0000c300b0043de6beb2a6mr27203762pfj.34.1632172453197;
+        Mon, 20 Sep 2021 14:14:13 -0700 (PDT)
+Received: from [192.168.1.11] ([71.212.134.125])
+        by smtp.googlemail.com with ESMTPSA id p24sm14925238pfh.136.2021.09.20.14.14.12
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Mon, 20 Sep 2021 14:14:12 -0700 (PDT)
+Sender: Richard Henderson <rth7680@gmail.com>
+Subject: Re: [PATCH V3 14/22] LoongArch: Add signal handling support
+To:     Huacai Chen <chenhuacai@gmail.com>, Arnd Bergmann <arnd@arndb.de>
+Cc:     "Eric W. Biederman" <ebiederm@xmission.com>,
+        Huacai Chen <chenhuacai@loongson.cn>,
+        Andy Lutomirski <luto@kernel.org>,
+        Thomas Gleixner <tglx@linutronix.de>,
+        Peter Zijlstra <peterz@infradead.org>,
+        Andrew Morton <akpm@linux-foundation.org>,
+        David Airlie <airlied@linux.ie>,
+        Jonathan Corbet <corbet@lwn.net>,
+        Linus Torvalds <torvalds@linux-foundation.org>,
+        linux-arch <linux-arch@vger.kernel.org>,
+        "open list:DOCUMENTATION" <linux-doc@vger.kernel.org>,
+        LKML <linux-kernel@vger.kernel.org>,
+        Xuefeng Li <lixuefeng@loongson.cn>,
+        Yanteng Si <siyanteng@loongson.cn>,
+        Jiaxun Yang <jiaxun.yang@flygoat.com>
+References: <20210917035736.3934017-1-chenhuacai@loongson.cn>
+ <20210917035736.3934017-15-chenhuacai@loongson.cn> <87tuii52o2.fsf@disp2133>
+ <CAAhV-H5MZ9uYyEnVoHXBXkrux1HdcPsKQ66zvB2oeMfq_AP7_A@mail.gmail.com>
+ <CAK8P3a0xghZKNBWbZ-qUWQVKyus4xqJMhSV_baQO7zKDoTtGQg@mail.gmail.com>
+ <CAAhV-H7A=C3Tujt2YNv1np9pEP_Hxc-chGnOdmDCzx5tUt7F5g@mail.gmail.com>
+From:   Richard Henderson <rth@twiddle.net>
+Message-ID: <a0fb870d-3b79-ca77-305f-6178974729e4@twiddle.net>
+Date:   Mon, 20 Sep 2021 14:14:10 -0700
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
+ Thunderbird/78.13.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <YUjdytEDkCughtSz@bombadil.infradead.org>
+In-Reply-To: <CAAhV-H7A=C3Tujt2YNv1np9pEP_Hxc-chGnOdmDCzx5tUt7F5g@mail.gmail.com>
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Language: en-US
+Content-Transfer-Encoding: 7bit
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Hello,
-
-On Mon, Sep 20, 2021 at 12:15:22PM -0700, Luis Chamberlain wrote:
-> > I find this explanation odd because there's no real equivalent to locking
-> > the module (as opposed to try locking) 
+On 9/19/21 7:36 PM, Huacai Chen wrote:
+> Hi, Arnd,
 > 
-> Actually there is, __module_get() but I suspect some of these users are
-> probably incorrect and should be be moved to try. The documentation
+> On Sun, Sep 19, 2021 at 5:59 PM Arnd Bergmann <arnd@arndb.de> wrote:
+>>
+>> On Sat, Sep 18, 2021 at 9:12 AM Huacai Chen <chenhuacai@gmail.com> wrote:
+>>> On Sat, Sep 18, 2021 at 5:10 AM Eric W. Biederman <ebiederm@xmission.com> wrote:
+>>>> For example does LoongArch have a version without built in floating
+>>>> point support?
+>>>
+>>> Some of these structures seems need rethinking, But we really have
+>>> LoongArch-based MCUs now (no FP, no SMP, and even no MMU).
+>>
+>> NOMMU Linux is kind-of on the way out as interest is fading, so I hope you
+>> don't plan on supporting this in the future.
+>>
+>> Do you expect to see future products with MMU but no FP or no SMP?
+> OK, we will not care no-MMU hardware in Linux, but no-FP and no-SMP
+> hardware will be supported.
 
-__module_get() is just getting an extra ref when the caller already
-has one (or more). It can't be used to freshly acquire a new
-reference. There is no equivalence between the relationship between
-try_module_get() and __module_get() and the one between spin_trylock()
-and spin_lock().
+Please consider requiring the FP registers to be present even on no-FP hardware.
 
-> Right, the reason I mention the alternative is that we technically don't
-> need to use try in this case since during a kernfs op it is implied the
-> module will be pinned, but we have further motivations to use a try
+With this plus the FP data movement instructions (FMOV, MOVGR2FR, MOVFR2GR, FLD, FST), it 
+is possible to implement soft-float without requiring a separate soft-float ABI.  This can 
+vastly simplify compatibility and deployment.
 
-I'm confused. If the module is already pinned, why are we getting an
-extra reference? Also, I don't understand how this has that much to do
-with preventing ddoses. I mean, it does cut down the duration of one
-operation but the eventual gating is through whoever acquiring the
-initial reference through try_module_get(), which again is the *only*
-way to acquire a fresh reference.
 
-Thanks.
-
--- 
-tejun
+r~
