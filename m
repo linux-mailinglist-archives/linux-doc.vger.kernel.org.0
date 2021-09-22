@@ -2,116 +2,71 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 097B0415022
-	for <lists+linux-doc@lfdr.de>; Wed, 22 Sep 2021 20:48:51 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id CAB644151C3
+	for <lists+linux-doc@lfdr.de>; Wed, 22 Sep 2021 22:55:00 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S237093AbhIVSuT (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 22 Sep 2021 14:50:19 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:33108 "EHLO
+        id S237800AbhIVU43 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 22 Sep 2021 16:56:29 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:33908 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S229459AbhIVSuT (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Wed, 22 Sep 2021 14:50:19 -0400
-X-Greylist: delayed 2656 seconds by postgrey-1.37 at lindbergh.monkeyblade.net; Wed, 22 Sep 2021 11:48:49 PDT
-Received: from mx0b-00190b01.pphosted.com (mx0b-00190b01.pphosted.com [IPv6:2620:100:9005:57f::1])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 59290C061574
-        for <linux-doc@vger.kernel.org>; Wed, 22 Sep 2021 11:48:49 -0700 (PDT)
-Received: from pps.filterd (m0050102.ppops.net [127.0.0.1])
-        by m0050102.ppops.net-00190b01. (8.16.1.2/8.16.1.2) with SMTP id 18MHgXEP014239;
-        Wed, 22 Sep 2021 19:04:28 +0100
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=akamai.com; h=subject : to : cc :
- references : from : message-id : date : mime-version : in-reply-to :
- content-type : content-transfer-encoding; s=jan2016.eng;
- bh=jcdEcrP+5y+ElOaxqBnq6pN8hD6WVH7XmRChoU2VlVU=;
- b=HRWx11JjxPV90qrB/kBcGW2YSm3mztt4FQgDoZhsNpWelR6sPVyPt4vq9fdVCgGRXCIl
- IbszExub1Z397ocXLRqWBe7QBeWZdorwBVqdPgiBaGuQ3/PRYvVAOo/RpmJPMUGMNrLd
- dNQ6DAs9rJHy+xm2PCGjzEc3AiSxXJ4aZv2cpfrW8FeGcMpy3JbavxH8rYJRfllJ6KMq
- 2oQVtsCQJGCXi7rcFpy/berVAA20CwHg5oGha4U1pNdXb/oB+d0yUPbECUxEo5dy6VoU
- qo/3+0rLmpqywLCmwEdirhXuly6Q/gzePkEM5q8ADiBvxgmrZcrgcTBcKGl7bS94PhOf BA== 
-Received: from prod-mail-ppoint5 (prod-mail-ppoint5.akamai.com [184.51.33.60] (may be forged))
-        by m0050102.ppops.net-00190b01. with ESMTP id 3b7xa8p10x-1
-        (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
-        Wed, 22 Sep 2021 19:04:27 +0100
-Received: from pps.filterd (prod-mail-ppoint5.akamai.com [127.0.0.1])
-        by prod-mail-ppoint5.akamai.com (8.16.1.2/8.16.1.2) with SMTP id 18MHoZbk025387;
-        Wed, 22 Sep 2021 11:04:26 -0700
-Received: from prod-mail-relay11.akamai.com ([172.27.118.250])
-        by prod-mail-ppoint5.akamai.com with ESMTP id 3b7q801daw-1;
-        Wed, 22 Sep 2021 11:04:26 -0700
-Received: from [0.0.0.0] (prod-ssh-gw01.bos01.corp.akamai.com [172.27.119.138])
-        by prod-mail-relay11.akamai.com (Postfix) with ESMTP id C2A45275EE;
-        Wed, 22 Sep 2021 18:04:25 +0000 (GMT)
-Subject: Re: [PATCH v3 0/3] Trivial dynamic debug fixups
-To:     Andrew Halaney <ahalaney@redhat.com>,
-        Jonathan Corbet <corbet@lwn.net>,
-        Jim Cromie <jim.cromie@gmail.com>
-Cc:     linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org
-References: <20210920205444.20068-1-ahalaney@redhat.com>
-From:   Jason Baron <jbaron@akamai.com>
-Message-ID: <6acfb61d-4aca-ac59-7fc6-d18b4c623765@akamai.com>
-Date:   Wed, 22 Sep 2021 14:04:25 -0400
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
- Thunderbird/78.11.0
+        with ESMTP id S237810AbhIVU42 (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Wed, 22 Sep 2021 16:56:28 -0400
+Received: from mail-lf1-x12e.google.com (mail-lf1-x12e.google.com [IPv6:2a00:1450:4864:20::12e])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 1316DC0613DE
+        for <linux-doc@vger.kernel.org>; Wed, 22 Sep 2021 13:54:57 -0700 (PDT)
+Received: by mail-lf1-x12e.google.com with SMTP id e15so17112705lfr.10
+        for <linux-doc@vger.kernel.org>; Wed, 22 Sep 2021 13:54:56 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112;
+        h=mime-version:sender:from:date:message-id:subject:to;
+        bh=ijKrByR1/KtEp2Ut8Wj0vMi00kBZm/A/r1gPwOEYZIg=;
+        b=fr8lNb1tzuroNDnbJJtYWeXOCGZbssrkZvaRy8HVdYCeSSxS96vSwd3R2+r1vg3M6/
+         ex66FoD7Oi9BZ+eroN2ctcLno3UxJhL89X1t6yEsFayGc2q4Pz0zZQBaUGqcHr3s/S1+
+         lgIwwHuJ4O8SDnA5oR3zC/CFwa9fWO84703n6I2aQyNKP1VzeqgyNRTdZaVTG81gy6Vx
+         t6u58+esbUQxWBZY5IFD1w784RDrV2U7d72/V+RQAoF8LyHU+KHsqwJTuZK+RI9xoYHQ
+         hU/k+XKo5P60J+yjbN5r0LQMnBzU5qvJitpMdoh7dt6f9DChJ/lZbweVN/xESakomSrI
+         Tc/A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:mime-version:sender:from:date:message-id:subject
+         :to;
+        bh=ijKrByR1/KtEp2Ut8Wj0vMi00kBZm/A/r1gPwOEYZIg=;
+        b=vbH5998ZzV4H1KdKZ+gA9jBD2Mnh7JIJcQ5calegQBYdSdfIVtt8+bRc3wAlAqshSS
+         2ThmePEY1sH624ZsNKKEASEvYSNbJKBbG/G7IB8rxVnVtZ6tw8UxE8aUcAy/dvNwTRsD
+         cU0uS6QEhLrWVPnvDNWMni3OWTtWJO7CANCtarl9wWW0la/NrxAnmNf8UScmWamPGopw
+         JntoLEMV3BW+E6Id/y0qS4E5mtszDWYKTr4zyHAZ8VQKeTPC62Rso87nC+ROc9vCbB58
+         ex4iNK2XpkUi8BXE+YSS5mSoBJ65ZQ25EZ/dppvEJLmwNDqaM0fBYiKFbERxIOoj55A7
+         lNJA==
+X-Gm-Message-State: AOAM531QqRABl8Po2ehh7c9Dta/6llGQcjxYUahSsdb722nN4ABhSfDK
+        f7BCnQ8MnrPS6uFMRrbfniKz1QosdBX20RuNddo=
+X-Google-Smtp-Source: ABdhPJwYYn7ZwazUxB30/XTxKCOf4dlZaC6TfP1ljKsU4ZNb40cpLRsdAvw7sAb51nYQkeG7S6W5vU7Cgq+lC3FYxgE=
+X-Received: by 2002:a05:651c:1546:: with SMTP id y6mr1383813ljp.53.1632344095088;
+ Wed, 22 Sep 2021 13:54:55 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <20210920205444.20068-1-ahalaney@redhat.com>
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
-X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.391,18.0.790
- definitions=2021-09-22_06:2021-09-22,2021-09-22 signatures=0
-X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 spamscore=0 malwarescore=0 phishscore=0
- suspectscore=0 adultscore=0 mlxscore=0 bulkscore=0 mlxlogscore=999
- classifier=spam adjust=0 reason=mlx scancount=1 engine=8.12.0-2109200000
- definitions=main-2109220117
-X-Proofpoint-GUID: 4Q997L-8KqJIZt0owHfhWYmM7aFjxdxS
-X-Proofpoint-ORIG-GUID: 4Q997L-8KqJIZt0owHfhWYmM7aFjxdxS
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.182.1,Aquarius:18.0.790,Hydra:6.0.391,FMLib:17.0.607.475
- definitions=2021-09-22_06,2021-09-22_01,2020-04-07_01
-X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 clxscore=1015 priorityscore=1501
- adultscore=0 spamscore=0 malwarescore=0 bulkscore=0 impostorscore=0
- lowpriorityscore=0 phishscore=0 suspectscore=0 mlxscore=0 mlxlogscore=999
- classifier=spam adjust=0 reason=mlx scancount=1 engine=8.12.0-2109200000
- definitions=main-2109220118
-X-Agari-Authentication-Results: mx.akamai.com; spf=${SPFResult} (sender IP is 184.51.33.60)
- smtp.mailfrom=jbaron@akamai.com smtp.helo=prod-mail-ppoint5
+Sender: ratcliffijames58@gmail.com
+Received: by 2002:a05:6504:5067:0:0:0:0 with HTTP; Wed, 22 Sep 2021 13:54:54
+ -0700 (PDT)
+From:   Aisha Al-Qaddafi <aisha.gdaffi24@gmail.com>
+Date:   Wed, 22 Sep 2021 21:54:54 +0100
+X-Google-Sender-Auth: B3PIuwFz7UcaHNCffYC8akvbLEk
+Message-ID: <CAKVTYWSPSMf085dB7FkhkLr9XtoZHkjbvunoMard5qsSPn4ZOg@mail.gmail.com>
+Subject: My Dear Friend
+To:     undisclosed-recipients:;
+Content-Type: text/plain; charset="UTF-8"
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Hi Andrew,
-
-Series looks good to me.
-
-Acked-by: Jason Baron <jbaron@akamai.com>
-
-Thanks,
-
--Jason
-
-On 9/20/21 4:54 PM, Andrew Halaney wrote:
-> Hi,
-> 
-> Here is round 3 of some trivial dynamic debug improvements.
-> 
-> v2 -> v3:
->  * Use a more clear example in the cli param examples
-> 
-> v1 -> v2:
->  * Use different example when showing misleading error message
->  * Justify dynamic debug scanning the whole command line
->  * Add patch removing ddebug_query
->  * Add patch improving cli param examples for dyndbg/$module.dyndbg
-> 
-> v2: https://urldefense.com/v3/__https://lore.kernel.org/all/20210913222440.731329-1-ahalaney@redhat.com/__;!!GjvTz_vk!E6HzrtWvnWiM_KOORWtK46YQNqqO5npPrKi9LrU8F1CdWgS2w6dxfzi_clWo1Q$ 
-> v1: https://urldefense.com/v3/__https://lore.kernel.org/all/20210909161755.61743-1-ahalaney@redhat.com/__;!!GjvTz_vk!E6HzrtWvnWiM_KOORWtK46YQNqqO5npPrKi9LrU8F1CdWgS2w6dxfzhcL6__NA$ 
-> 
-> Andrew Halaney (3):
->   dyndbg: make dyndbg a known cli param
->   dyndbg: Remove support for ddebug_query param
->   Documentation: dyndbg: Improve cli param examples
-> 
->  .../admin-guide/dynamic-debug-howto.rst       | 13 ++++-----
->  .../admin-guide/kernel-parameters.txt         |  5 ----
->  lib/dynamic_debug.c                           | 27 +++++--------------
->  3 files changed, 14 insertions(+), 31 deletions(-)
-> 
+Assalamu alaikum,
+I came across your e-mail contact prior to a private search while in
+need of your assistance. I am Aisha Al-Qaddafi, the only biological,
+Daughter of Former President of Libya Col. Muammar Al-Qaddafi. Am a
+single Mother and a Widow with three Children. I have investment funds
+worth Twenty Seven Million Five Hundred Thousand United State Dollar
+($27.500.000.00 ) and i need a trusted  investment Manager/Partner
+because of my current refugee status, however, I am interested in you
+for investment project assistance in your country. If you are willing
+to handle this project on my behalf kindly reply urgently to enable me
+to provide you more information about the investment
+funds.
+Best Regards
