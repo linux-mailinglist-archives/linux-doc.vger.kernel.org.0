@@ -2,85 +2,147 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 138E5414474
-	for <lists+linux-doc@lfdr.de>; Wed, 22 Sep 2021 11:04:19 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 26DB441447B
+	for <lists+linux-doc@lfdr.de>; Wed, 22 Sep 2021 11:04:59 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S234170AbhIVJFo (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 22 Sep 2021 05:05:44 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:36622 "EHLO
-        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S234182AbhIVJFl (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Wed, 22 Sep 2021 05:05:41 -0400
-Received: from mail-pg1-x532.google.com (mail-pg1-x532.google.com [IPv6:2607:f8b0:4864:20::532])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id E926BC0613C1
-        for <linux-doc@vger.kernel.org>; Wed, 22 Sep 2021 02:04:11 -0700 (PDT)
-Received: by mail-pg1-x532.google.com with SMTP id e7so2005329pgk.2
-        for <linux-doc@vger.kernel.org>; Wed, 22 Sep 2021 02:04:11 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=mime-version:from:date:message-id:subject:to;
-        bh=iTGoqFM8qijEpuvk9WwIalanNU02ORS6d7bs4+cIQLs=;
-        b=TJnA2xZSNDmQVyDaUM5cetFg6piHlBIrzLYbLVA/L+yuikwexToDQQOXDpUqjS5BJS
-         ev7wC9FyVgBp+VojUE2hwZt6QDK94hIW9AkUhEfQrr2hUB2TZJd9m7WYBEDERBU0xf7V
-         HLEZKQ8imbD00ECabdcntHNdsmrEVi+ksDWbU5dQUHdjsrnCC5QGeTJtvQW8Dcb6/Gig
-         QJRmam67JS2cURfi0OZZ7UCHS5xrofx7U94cae+w1tvDEISkHYK4ePwn8jA8i6+Hn04x
-         V91ffa8741JrEfnPeR8hzfEW9746pm38IxXqRqxyeSUIbPBHKepHNewauGgvtvdlq0bs
-         n2Vw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
-        bh=iTGoqFM8qijEpuvk9WwIalanNU02ORS6d7bs4+cIQLs=;
-        b=m61Cu5bM4DZJY8COqcgBEKz9wGx0gQD8ho6eAbWKTZmoIHRR6CsYn5FoGMeMTrdQ9v
-         oVdPSoKa/xsJ1A4WXOc9y7JgB4zHbLgKL6vVamRzY63uBye2RaJwc0AS7uF/VfD9XZra
-         9yqPczlXbNSvNwUVvaFZtr0Qc8RE3QP2ASAoXZGiu0lBPKKuCIZ/z+F1kZiJoQ7tynne
-         YwaM6SjFpglES75vZBOrCrrRoulX+lqnXBVsSYX5krpVz0zaslIryWQlMwp6aMU3M+E+
-         TCTzWxgx9ca4WRYJXEe4ga0tYnVSan1wgc0BChDroogwAIdG9GxNgDn7u91wZ0Hm2zQG
-         M1aA==
-X-Gm-Message-State: AOAM533k2il57UhOPTQ35AZwbCHXle1BIwI/3p/+KPYoQ0cwvYi29vP1
-        VUoUgmd0ixpeEnhpwtq3sSX/PHnKOUCp8tgBgps=
-X-Google-Smtp-Source: ABdhPJzSBG9U99LUNHcK5yvniZ2TvGsF3RlQLQvBorUg0W0/5QJ3J1WzEmA6R19USIFGxQwjeUn1wqeOl+7hIVPqJUM=
-X-Received: by 2002:a05:6a00:234f:b0:3eb:3ffd:6da2 with SMTP id
- j15-20020a056a00234f00b003eb3ffd6da2mr34198606pfj.15.1632301451198; Wed, 22
- Sep 2021 02:04:11 -0700 (PDT)
+        id S234107AbhIVJG0 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 22 Sep 2021 05:06:26 -0400
+Received: from mga06.intel.com ([134.134.136.31]:35756 "EHLO mga06.intel.com"
+        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
+        id S234071AbhIVJG0 (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Wed, 22 Sep 2021 05:06:26 -0400
+X-IronPort-AV: E=McAfee;i="6200,9189,10114"; a="284563479"
+X-IronPort-AV: E=Sophos;i="5.85,313,1624345200"; 
+   d="scan'208";a="284563479"
+Received: from fmsmga003.fm.intel.com ([10.253.24.29])
+  by orsmga104.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 22 Sep 2021 02:04:52 -0700
+X-IronPort-AV: E=Sophos;i="5.85,313,1624345200"; 
+   d="scan'208";a="550173400"
+Received: from liaol-mobl.ccr.corp.intel.com (HELO chenyu5-mobl1) ([10.249.173.146])
+  by fmsmga003-auth.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 22 Sep 2021 02:04:46 -0700
+Date:   Wed, 22 Sep 2021 17:04:42 +0800
+From:   Chen Yu <yu.c.chen@intel.com>
+To:     Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+Cc:     linux-acpi@vger.kernel.org, linux-kernel@vger.kernel.org,
+        "Rafael J. Wysocki" <rafael@kernel.org>,
+        Len Brown <len.brown@intel.com>,
+        Dan Williams <dan.j.williams@intel.com>,
+        Andy Shevchenko <andriy.shevchenko@intel.com>,
+        Aubrey Li <aubrey.li@intel.com>,
+        Ashok Raj <ashok.raj@intel.com>,
+        Mike Rapoport <rppt@kernel.org>,
+        Ard Biesheuvel <ardb@kernel.org>,
+        Jonathan Corbet <corbet@lwn.net>,
+        Hans de Goede <hdegoede@redhat.com>,
+        Ben Widawsky <ben.widawsky@intel.com>,
+        linux-doc@vger.kernel.org
+Subject: Re: [PATCH v3 3/5] drivers/acpi: Introduce Platform Firmware Runtime
+ Update device driver
+Message-ID: <20210922090442.GA16963@chenyu5-mobl1>
+References: <cover.1631802162.git.yu.c.chen@intel.com>
+ <90d270c031401430445cb2c4ba1b9b0c265cf9d4.1631802163.git.yu.c.chen@intel.com>
+ <YUoBSRrAyaHOCNHb@kroah.com>
 MIME-Version: 1.0
-Received: by 2002:a05:6a10:f393:0:0:0:0 with HTTP; Wed, 22 Sep 2021 02:04:10
- -0700 (PDT)
-From:   susan wong <susanwong096@gmail.com>
-Date:   Wed, 22 Sep 2021 02:04:10 -0700
-Message-ID: <CAB_2jog_+wbY0uTEKJXzerAEjzsC2-Y6bHmQ=DR2HGCmzwQDOQ@mail.gmail.com>
-Subject: Dear Beloved,
-To:     undisclosed-recipients:;
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <YUoBSRrAyaHOCNHb@kroah.com>
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Dear Beloved,
+Hi Greg,
+On Tue, Sep 21, 2021 at 05:59:05PM +0200, Greg Kroah-Hartman wrote:
+> On Fri, Sep 17, 2021 at 12:02:18AM +0800, Chen Yu wrote:
+> > Introduce the pfru_update driver which can be used for Platform Firmware
+> > Runtime code injection and driver update. The user is expected to provide
+> > the update firmware in the form of capsule file, and pass it to the driver
+> > via ioctl. Then the driver would hand this capsule file to the Platform
+> > Firmware Runtime Update via the ACPI device _DSM method. At last the low
+> > level Management Mode would do the firmware update.
+> > 
+> > Signed-off-by: Chen Yu <yu.c.chen@intel.com>
+> 
+> Where is the userspace code that uses this ioctl and has tested it out
+> to verify it works properly?  A link to that in the changelog would be
+> great to have.
+> 
+The patch [5/5] is a self testing tool to test the whole feature. I'll send a
+new version and Cc you too.
+> > +static void dump_update_result(struct pfru_updated_result *result)
+> > +{
+> > +	pr_debug("Update result:\n");
+> > +	pr_debug("Status:%d\n", result->status);
+> > +	pr_debug("Extended Status:%d\n", result->ext_status);
+> > +	pr_debug("Authentication Time Low:%lld\n", result->low_auth_time);
+> > +	pr_debug("Authentication Time High:%lld\n", result->high_auth_time);
+> > +	pr_debug("Execution Time Low:%lld\n", result->low_exec_time);
+> > +	pr_debug("Execution Time High:%lld\n", result->high_exec_time);
+> 
+> Why not dev_dbg()?  Same for all pr_* calls in this "driver".
+> 
+>
+Ok, I'll switch to dev_dbg() in next version. 
+> > +static long pfru_ioctl(struct file *file, unsigned int cmd, unsigned long arg)
+> > +{
+> > +	void __user *p;
+> > +	int ret = 0, rev;
+> > +
+> > +	p = (void __user *)arg;
+> > +
+> > +	switch (cmd) {
+> > +	case PFRU_IOC_SET_REV:
+> > +		if (copy_from_user(&rev, p, sizeof(unsigned int)))
+> > +			return -EFAULT;
+> > +		if (!pfru_valid_revid(rev))
+> > +			return -EFAULT;
+> > +		pfru_dev->rev_id = rev;
+> > +		break;
+> > +	case PFRU_IOC_STAGE:
+> > +		ret = start_acpi_update(START_STAGE);
+> > +		break;
+> > +	case PFRU_IOC_ACTIVATE:
+> > +		ret = start_acpi_update(START_ACTIVATE);
+> > +		break;
+> > +	case PFRU_IOC_STAGE_ACTIVATE:
+> > +		ret = start_acpi_update(START_STAGE_ACTIVATE);
+> > +		break;
+> > +	default:
+> > +		ret = -ENOIOCTLCMD;
+> 
+> Wrong value :(
+Previously I thought that ENOIOCTLCMD stands for 'invalid ioctl command'.
+After checking the lkml discussion, it seems that ENOIOCTLCMD should not
+be returned to user space. ENOTTY might be more suitible if I understand
+correctly.
+http://lkml.iu.edu/hypermail/linux/kernel/0105.1/0734.html
+> > +		break;
+> > +	}
+> > +
+> > +	return ret;
+> > +}
+> > +
+> > +#ifdef CONFIG_COMPAT
+> > +static long compat_pfru_ioctl(struct file *filep, unsigned int cmd,
+> > +			      unsigned long arg)
+> > +{
+> > +	return pfru_ioctl(filep, cmd, arg);
+> > +}
+> > +#endif
+> 
+> Why is this compat ioctl needed at all?
+> 
+We can not control if the user space tool would be compiled as 32bit.
+But I realize that a compat_ptr() was missing. Will fix it in next version.
+> > +static struct miscdevice pfru_misc_dev = {
+> > +	.minor = MISC_DYNAMIC_MINOR,
+> > +	.name = "pfru_update",
+> > +	.nodename = "pfru/update",
+> 
+> Why is this in a subdirectory?  What requires this?  Why not just
+> "pfru"?
+> 
+The pfru directory might be reused for pfru_telemetry device, whose driver
+is in 4/5 patch, I'll Cc you with the whole patch set in next version.
 
-I am writing this mail to you with heavy tears in my eyes and great
-sorrow in my heart. I am Mrs. Susan Wong. A widow to late Mr. Hamson
-Wong; I am 63 years old, suffering from long time Cancer of the
-breast.
-
-From all indications my condition is really deteriorating and it's
-quite obvious that I won't live more than 2 months according to my
-doctors. I have some funds I inherited from my late loving husband Mr.
-Hamson, the sum of (4,500,000.00 Million Dollars) which he deposited
-in a bank here and I need honest, truthful and God fearing person that
-can use these funds for Charity work, helping the less privileges, and
-30% of this money will be for your time and effort, while 70% goes to
-charities.
-
-1) For the sick, less-privileged
-2) For the Widows and the motherless babies
-3) Orphanages or Charity Home.
-
-I look forward to your prompt reply from you for more details.
-
-I will like you to write me on my Email address;
-sosanwong123@gmail.com , to enable us discuss in details. I hope
-hearing from you soonest. Thanks for your understanding.
-
-Yours sincerely
-
-Mrs. Susan Wong
+Thanks,
+Chenyu
