@@ -2,200 +2,140 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 766E8415F18
-	for <lists+linux-doc@lfdr.de>; Thu, 23 Sep 2021 15:01:32 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 90B92415FCA
+	for <lists+linux-doc@lfdr.de>; Thu, 23 Sep 2021 15:30:18 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S241141AbhIWNDC (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 23 Sep 2021 09:03:02 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:55162 "EHLO
-        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S241137AbhIWNDC (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Thu, 23 Sep 2021 09:03:02 -0400
-Received: from mail-qv1-xf4a.google.com (mail-qv1-xf4a.google.com [IPv6:2607:f8b0:4864:20::f4a])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id A9841C061757
-        for <linux-doc@vger.kernel.org>; Thu, 23 Sep 2021 06:01:30 -0700 (PDT)
-Received: by mail-qv1-xf4a.google.com with SMTP id h18-20020ad446f2000000b0037a7b48ba05so19167334qvw.19
-        for <linux-doc@vger.kernel.org>; Thu, 23 Sep 2021 06:01:30 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=google.com; s=20210112;
-        h=date:in-reply-to:message-id:mime-version:references:subject:from:to
-         :cc;
-        bh=pxyBWuKYUEov5soFeTBimqgoL558mN/tf852xqM/Zqo=;
-        b=r8WLR+56J08ce48W5i1Ta72091Yy7+G3KDkggHmFEeLudlz6X9TIPKPl7zLt5b8YP6
-         xqVpNHomVs02rJJFY4oqMvc6ch8CcEktMyaGkcsQm5pU9PdRYKnau89KONnDQRHH1n2a
-         hOcQRdjxDu9NOes9AvipCOqt/gE4rIl9MPX4mVZGjklP/e04fRSKwck/F9VPq9QPadFK
-         6qSZaaUqlfn9sfcBpVoVZSmgxGPcTeeGyfMeE1HH4iuehWy6epf0XLggiSjToaa6EQxI
-         7jgkDev499nBQw9+0e/QNDaJuO46T4nz+BLhUOBr/LAuJrOCWXP9BkdY0ek5ROEj2ePj
-         21og==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=x-gm-message-state:date:in-reply-to:message-id:mime-version
-         :references:subject:from:to:cc;
-        bh=pxyBWuKYUEov5soFeTBimqgoL558mN/tf852xqM/Zqo=;
-        b=SUtDEKXth6JFiuoVv22ZzDPYv0qcaKSWS34OptBqgn8D4QouO9vor+IrKUzRvUw5q5
-         WSASp7Ak1ClOgiLGywdVKm29SWeC1Kc/uteZPyGpSKmJXYv5BJa7SFSRRE3V4GhtLJZU
-         ptkRos0qm59O/01xRyaBqKypxbdOvXNOlXi2icYkbCk/1a0lWgelm1QLif/6XtFuPkpQ
-         uJnZcFzaiPkmvq7uyvvBdK47+Mghbb0MZc2dOI8yuCh0rUMpWS7UKEMNSaPF+tLd62yW
-         /CdB6naf9Hf1XFaGPM9o/81Ur0Zw3MEQqjFF6qJhKGpWccmhmxPevmB0e6adGm8acMG5
-         MvmQ==
-X-Gm-Message-State: AOAM5327SKYVDlzXiisvDi7hS9oWgXyzgjsd6r5xcbChArdM2ogsYCr0
-        lLhMXHN/TlEOmCkof6Lsg8yPIJRAytVr
-X-Google-Smtp-Source: ABdhPJw7oMApFbF6oIkMNDIAUTQH8qglqsd9JNK8qnUs+c892g99qRkOefc5ePGTLKqpXxQzW+d0ObUY9qE1
-X-Received: from bg.sfo.corp.google.com ([2620:15c:11a:202:f538:540c:f838:6293])
- (user=bgeffon job=sendgmr) by 2002:a05:6214:11f0:: with SMTP id
- e16mr4275880qvu.30.1632402088768; Thu, 23 Sep 2021 06:01:28 -0700 (PDT)
-Date:   Thu, 23 Sep 2021 06:01:15 -0700
-In-Reply-To: <20210917210640.214211-1-bgeffon@google.com>
-Message-Id: <20210923130115.1344361-1-bgeffon@google.com>
-Mime-Version: 1.0
-References: <20210917210640.214211-1-bgeffon@google.com>
-X-Mailer: git-send-email 2.33.0.464.g1972c5931b-goog
-Subject: [PATCH v4] zram: Introduce an aged idle interface
-From:   Brian Geffon <bgeffon@google.com>
-To:     Andrew Morton <akpm@linux-foundation.org>
-Cc:     Minchan Kim <minchan@kernel.org>, Nitin Gupta <ngupta@vflare.org>,
-        Sergey Senozhatsky <senozhatsky@chromium.org>,
-        Jonathan Corbet <corbet@lwn.net>, linux-kernel@vger.kernel.org,
-        linux-doc@vger.kernel.org, linux-block@vger.kernel.org,
-        Suleiman Souhlal <suleiman@google.com>,
-        Jesse Barnes <jsbarnes@google.com>,
-        Brian Geffon <bgeffon@google.com>
-Content-Type: text/plain; charset="UTF-8"
+        id S241336AbhIWNbr (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 23 Sep 2021 09:31:47 -0400
+Received: from mail.kernel.org ([198.145.29.99]:43986 "EHLO mail.kernel.org"
+        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
+        id S231974AbhIWNbq (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Thu, 23 Sep 2021 09:31:46 -0400
+Received: by mail.kernel.org (Postfix) with ESMTPSA id AAC8B61164;
+        Thu, 23 Sep 2021 13:30:14 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+        s=k20201202; t=1632403814;
+        bh=3hgRBay+GDZAkBnCzYWJ3psWTN3A28hgXY6M7EBS+vc=;
+        h=From:To:Cc:Subject:Date:From;
+        b=r1Tuli7EuAb9+mP4qApjAk8+ld3C9TDOEpc1BzTyLj4dOizTbhFjdiUkfR85O2kFA
+         NNST9quGmmgmXu7LOLEyicPaWrXVbUAm9XewSLcbVncJIXijs/v35kKK5wnSrLlW4R
+         CrctqxvU2TFt1401HFRtUMknWNxSmwMwsvmsyATUCtuGkbjeRJTfeJGzmUM86qjmLx
+         64sLI7uirj3e0/simdP/0JuVdedMPSkDDkrY2s6MVM7EmkKqcvK5ZuqX1TH2Udky0l
+         wJxlaTUCBQ8skeYJBiLjTVgltqRU0dv0SwKlgvRwAM2LXptU/Ol4XJAVP5qjFVkiyO
+         lKBKeK//jo9EQ==
+Received: by mail.kernel.org with local (Exim 4.94.2)
+        (envelope-from <mchehab@kernel.org>)
+        id 1mTOnk-000ndj-Ln; Thu, 23 Sep 2021 15:30:12 +0200
+From:   Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
+To:     Linux Doc Mailing List <linux-doc@vger.kernel.org>,
+        Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+Cc:     Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
+        linux-kernel@vger.kernel.org, Jonathan Corbet <corbet@lwn.net>,
+        Anton Vorontsov <anton@enomsg.org>,
+        Colin Cross <ccross@android.com>,
+        John Fastabend <john.fastabend@gmail.com>,
+        KP Singh <kpsingh@kernel.org>,
+        Kees Cook <keescook@chromium.org>,
+        Martin KaFai Lau <kafai@fb.com>,
+        Song Liu <songliubraving@fb.com>,
+        Tony Luck <tony.luck@intel.com>, Yonghong Song <yhs@fb.com>,
+        bpf@vger.kernel.org, netdev@vger.kernel.org
+Subject: [PATCH 00/13] get_abi.pl undefined: improve precision and performance
+Date:   Thu, 23 Sep 2021 15:29:58 +0200
+Message-Id: <cover.1632402570.git.mchehab+huawei@kernel.org>
+X-Mailer: git-send-email 2.31.1
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+Sender: Mauro Carvalho Chehab <mchehab@kernel.org>
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-This change introduces an aged idle interface to the existing
-idle sysfs file for zram.
+Hi Greg,
 
-When CONFIG_ZRAM_MEMORY_TRACKING is enabled the idle file
-now also accepts an integer argument. This integer is the
-age (in seconds) of pages to mark as idle. The idle file
-still supports 'all' as it always has. This new approach
-allows for much more control over which pages get marked
-as idle.
+It follows a series of improvements for get_abi.pl. it is on the top of next-20210923.
 
-  v3 -> v4:
-        - Remove base10 restriction.
+With such changes, on my development tree, the script is taking 6 seconds to run 
+on my desktop:
 
-  v2 -> v3:
-	- Correct unused variable warning when
-	  CONFIG_ZRAM_MEMORY_TRACKING is not enabled.
-  v1 -> v2:
-	- Switch to using existing idle file.
-	- Dont compare ktime directly.
+	$ !1076
+	$ time ./scripts/get_abi.pl undefined |sort >undefined_after && cat undefined_after| perl -ne 'print "$1\n" if (m#.*/(\S+) not found#)'|sort|uniq -c|sort -nr >undefined_symbols; wc -l undefined_after undefined_symbols
 
-Signed-off-by: Brian Geffon <bgeffon@google.com>
+	real	0m6,292s
+	user	0m5,640s
+	sys	0m0,634s
+	  6838 undefined_after
+	   808 undefined_symbols
+	  7646 total
+
+And 7 seconds on a Dell Precision 5820:
+
+	$ time ./scripts/get_abi.pl undefined |sort >undefined && cat undefined| perl -ne 'print "$1\n" if (m#.*/(\S+) not found#)'|sort|uniq -c|sort -nr >undefined_symbols; wc -l undefined; wc -l undefined_symbols
+
+	real	0m7.162s
+	user	0m5.836s
+	sys	0m1.329s
+	6548 undefined
+	772 undefined_symbols
+
+Both tests were done against this tree (based on today's linux-next):
+
+	$ https://git.kernel.org/pub/scm/linux/kernel/git/mchehab/devel.git/log/?h=get_abi_undefined-latest
+
+It should be noticed that, as my tree has several ABI fixes,  the time to run the
+script is likely less than if you run on your tree, as there will be less symbols to
+be reported, and the algorithm is optimized to reduce the number of regexes
+when a symbol is found.
+
+Besides optimizing and improving the seek logic, this series also change the
+debug logic. It how receives a bitmap, where "8" means to print the regexes
+that will be used by "undefined" command:
+
+	$ time ./scripts/get_abi.pl undefined --debug 8 >foo
+	real	0m17,189s
+	user	0m13,940s
+	sys	0m2,404s
+
+	$wc -l foo
+	18421939 foo
+
+	$ cat foo
+	...
+	/sys/kernel/kexec_crash_loaded =~ /^(?^:^/sys/.*/iio\:device.*/in_voltage.*_scale_available$)$/
+	/sys/kernel/kexec_crash_loaded =~ /^(?^:^/sys/.*/iio\:device.*/out_voltage.*_scale_available$)$/
+	/sys/kernel/kexec_crash_loaded =~ /^(?^:^/sys/.*/iio\:device.*/out_altvoltage.*_scale_available$)$/
+	/sys/kernel/kexec_crash_loaded =~ /^(?^:^/sys/.*/iio\:device.*/in_pressure.*_scale_available$)$/
+	...
+
+On other words, on my desktop, the /sys match is performing >18M regular 
+expression searches, which takes 6,2 seconds (or 17,2 seconds, if debug is 
+enabled and sent to an area on my nvme storage).
+
+Regards,
+Mauro
+
 ---
- Documentation/admin-guide/blockdev/zram.rst |  8 +++
- drivers/block/zram/zram_drv.c               | 60 +++++++++++++++------
- 2 files changed, 52 insertions(+), 16 deletions(-)
 
-diff --git a/Documentation/admin-guide/blockdev/zram.rst b/Documentation/admin-guide/blockdev/zram.rst
-index 700329d25f57..3e11926a4df9 100644
---- a/Documentation/admin-guide/blockdev/zram.rst
-+++ b/Documentation/admin-guide/blockdev/zram.rst
-@@ -328,6 +328,14 @@ as idle::
- From now on, any pages on zram are idle pages. The idle mark
- will be removed until someone requests access of the block.
- IOW, unless there is access request, those pages are still idle pages.
-+Additionally, when CONFIG_ZRAM_MEMORY_TRACKING is enabled pages can be
-+marked as idle based on how long (in seconds) it's been since they were
-+last accessed::
-+
-+        echo 86400 > /sys/block/zramX/idle
-+
-+In this example all pages which haven't been accessed in more than 86400
-+seconds (one day) will be marked idle.
- 
- Admin can request writeback of those idle pages at right timing via::
- 
-diff --git a/drivers/block/zram/zram_drv.c b/drivers/block/zram/zram_drv.c
-index fcaf2750f68f..ca15d60262fa 100644
---- a/drivers/block/zram/zram_drv.c
-+++ b/drivers/block/zram/zram_drv.c
-@@ -291,22 +291,16 @@ static ssize_t mem_used_max_store(struct device *dev,
- 	return len;
- }
- 
--static ssize_t idle_store(struct device *dev,
--		struct device_attribute *attr, const char *buf, size_t len)
-+/*
-+ * Mark all pages which are older than or equal to cutoff as IDLE.
-+ * Callers should hold the zram init lock in read mode
-+ **/
-+static void mark_idle(struct zram *zram, ktime_t cutoff)
- {
--	struct zram *zram = dev_to_zram(dev);
-+	int is_idle = 1;
- 	unsigned long nr_pages = zram->disksize >> PAGE_SHIFT;
- 	int index;
- 
--	if (!sysfs_streq(buf, "all"))
--		return -EINVAL;
--
--	down_read(&zram->init_lock);
--	if (!init_done(zram)) {
--		up_read(&zram->init_lock);
--		return -EINVAL;
--	}
--
- 	for (index = 0; index < nr_pages; index++) {
- 		/*
- 		 * Do not mark ZRAM_UNDER_WB slot as ZRAM_IDLE to close race.
-@@ -314,14 +308,48 @@ static ssize_t idle_store(struct device *dev,
- 		 */
- 		zram_slot_lock(zram, index);
- 		if (zram_allocated(zram, index) &&
--				!zram_test_flag(zram, index, ZRAM_UNDER_WB))
--			zram_set_flag(zram, index, ZRAM_IDLE);
-+				!zram_test_flag(zram, index, ZRAM_UNDER_WB)) {
-+#ifdef CONFIG_ZRAM_MEMORY_TRACKING
-+			is_idle = (!cutoff || ktime_after(cutoff, zram->table[index].ac_time));
-+#endif
-+			if (is_idle)
-+				zram_set_flag(zram, index, ZRAM_IDLE);
-+		}
- 		zram_slot_unlock(zram, index);
- 	}
-+}
- 
--	up_read(&zram->init_lock);
-+static ssize_t idle_store(struct device *dev,
-+		struct device_attribute *attr, const char *buf, size_t len)
-+{
-+	struct zram *zram = dev_to_zram(dev);
-+	ktime_t cutoff_time = 0;
-+	ssize_t rv = -EINVAL;
- 
--	return len;
-+	if (!sysfs_streq(buf, "all")) {
-+#ifdef CONFIG_ZRAM_MEMORY_TRACKING
-+		u64 age_sec;
-+		/* If it did not parse as 'all' try to treat it as an integer */
-+		if (!kstrtoull(buf, 0, &age_sec))
-+			cutoff_time = ktime_sub(ktime_get_boottime(),
-+					ns_to_ktime(age_sec * NSEC_PER_SEC));
-+		else
-+#endif
-+			goto out;
-+	}
-+
-+	down_read(&zram->init_lock);
-+	if (!init_done(zram))
-+		goto out_unlock;
-+
-+	/* A age_sec of 0 marks everything as idle, this is the "all" behavior */
-+	mark_idle(zram, cutoff_time);
-+	rv = len;
-+
-+out_unlock:
-+	up_read(&zram->init_lock);
-+out:
-+	return rv;
- }
- 
- #ifdef CONFIG_ZRAM_WRITEBACK
+Mauro Carvalho Chehab (13):
+  scripts: get_abi.pl: Better handle multiple What parameters
+  scripts: get_abi.pl: Check for missing symbols at the ABI specs
+  scripts: get_abi.pl: detect softlinks
+  scripts: get_abi.pl: add an option to filter undefined results
+  scripts: get_abi.pl: don't skip what that ends with wildcards
+  scripts: get_abi.pl: Ignore fs/cgroup sysfs nodes earlier
+  scripts: get_abi.pl: add a graph to speedup the undefined algorithm
+  scripts: get_abi.pl: improve debug logic
+  scripts: get_abi.pl: Better handle leaves with wildcards
+  scripts: get_abi.pl: ignore some sysfs nodes earlier
+  scripts: get_abi.pl: stop check loop earlier when regex is found
+  scripts: get_abi.pl: precompile what match regexes
+  scripts: get_abi.pl: ensure that "others" regex will be parsed
+
+ scripts/get_abi.pl | 388 +++++++++++++++++++++++++++++++++++++++++++--
+ 1 file changed, 372 insertions(+), 16 deletions(-)
+
 -- 
-2.33.0.464.g1972c5931b-goog
+2.31.1
+
 
