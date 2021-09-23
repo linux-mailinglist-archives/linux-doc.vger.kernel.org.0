@@ -2,101 +2,74 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 622F2416704
-	for <lists+linux-doc@lfdr.de>; Thu, 23 Sep 2021 22:59:32 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id B3753416736
+	for <lists+linux-doc@lfdr.de>; Thu, 23 Sep 2021 23:12:54 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S235628AbhIWVBD (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 23 Sep 2021 17:01:03 -0400
-Received: from jabberwock.ucw.cz ([46.255.230.98]:34040 "EHLO
-        jabberwock.ucw.cz" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S229609AbhIWVBD (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Thu, 23 Sep 2021 17:01:03 -0400
-Received: by jabberwock.ucw.cz (Postfix, from userid 1017)
-        id CD9BC1C0BA5; Thu, 23 Sep 2021 22:59:29 +0200 (CEST)
-Date:   Thu, 23 Sep 2021 22:59:29 +0200
-From:   Pavel Machek <pavel@ucw.cz>
-To:     Huacai Chen <chenhuacai@loongson.cn>
-Cc:     Arnd Bergmann <arnd@arndb.de>, Andy Lutomirski <luto@kernel.org>,
-        Thomas Gleixner <tglx@linutronix.de>,
-        Peter Zijlstra <peterz@infradead.org>,
-        Andrew Morton <akpm@linux-foundation.org>,
-        David Airlie <airlied@linux.ie>,
-        Jonathan Corbet <corbet@lwn.net>,
-        Linus Torvalds <torvalds@linux-foundation.org>,
-        linux-arch@vger.kernel.org, linux-doc@vger.kernel.org,
-        linux-kernel@vger.kernel.org, Xuefeng Li <lixuefeng@loongson.cn>,
-        Yanteng Si <siyanteng@loongson.cn>,
-        Huacai Chen <chenhuacai@gmail.com>,
-        Jiaxun Yang <jiaxun.yang@flygoat.com>
-Subject: Re: [PATCH V3 01/22] Documentation: LoongArch: Add basic
- documentations
-Message-ID: <20210923205929.GA23210@duo.ucw.cz>
-References: <20210917035736.3934017-1-chenhuacai@loongson.cn>
- <20210917035736.3934017-2-chenhuacai@loongson.cn>
+        id S243244AbhIWVOZ (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 23 Sep 2021 17:14:25 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:57108 "EHLO
+        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S243255AbhIWVOY (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Thu, 23 Sep 2021 17:14:24 -0400
+Received: from mail-ed1-x530.google.com (mail-ed1-x530.google.com [IPv6:2a00:1450:4864:20::530])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id C423CC061760
+        for <linux-doc@vger.kernel.org>; Thu, 23 Sep 2021 14:12:52 -0700 (PDT)
+Received: by mail-ed1-x530.google.com with SMTP id eg28so28175312edb.1
+        for <linux-doc@vger.kernel.org>; Thu, 23 Sep 2021 14:12:52 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112;
+        h=mime-version:reply-to:from:date:message-id:subject:to;
+        bh=XOycsyS8WRs8WZM/52QyGEA5jLYLxAJ/W6Zuel7qkRA=;
+        b=muZpujszPDkFXRG85QDSV3ySSXad1YPGm+biwmLWRdWYy1K8OPzm+jJKxcwIG/RdQs
+         LbeET20bzJS2apS1OOaA8wvEDC4DAhkA+JE4O9V02FVoCzonB59Haq4Szn1ugkcTIwa7
+         sGMaexSwg7EECXDST3vjF9iQC/CXj0AZIs2xGdvDAbMPPvqpxmThtXRGsbDY+t8bAN9A
+         utf850oFH3tWqhOJiWkej0mwNBATkds4CgMiF+KZ0HYTCsq9cw6WCv8V2qjwfTV+inQl
+         +X/Q8xlxc5hdG2OYW78TGd/sbXw2Wpbx572PlonSxryofpwma2satV5DsGwvodoS/gQ0
+         AnLw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:mime-version:reply-to:from:date:message-id
+         :subject:to;
+        bh=XOycsyS8WRs8WZM/52QyGEA5jLYLxAJ/W6Zuel7qkRA=;
+        b=1YJ+adrsIFlqrCYv2PlXRQIEJtXqVdYLSw+CQuSykehbxssPXwZrumRFYnBDLQ9667
+         R1M+vo4jNeZlWP6oKGlPiiK72yxdbkWX1xOZyEzaCPDbgoCgBYRreNwjNCxdwRQhb+N5
+         QRgJUoEaXAVYzxA/s3k9tulGQCUPBERBbOFT/f3WDxpL1h+NJQGzoPmsAWkdcg7wPtar
+         PbGWsmI8GLPsPASXcwQI3CrH1int9SXs/j9aMdcPa/Gwf+5+wLEHELxNVagoaoqpXwJg
+         4xW05JXOvBxnclvJ4ogJKdi117xRj/vzMwvePbjFE/Jm/1PPHht1Mu83VOykkT9Z5dmk
+         iGdQ==
+X-Gm-Message-State: AOAM532zS+v2Ovp23XHWlOyPi9mF6VM1UDFcHr41tulcztpofTm//kZ3
+        ftmdPG63IqDVwVQHNdOJgCGBlvKdVaedc8saLrs=
+X-Google-Smtp-Source: ABdhPJzE0c93PnaydlQtpi2VQottssizE8X1vZLSgTbdSVafvy+LX5TRY+mdS+9l3x+e72rFDAdaUespMV81JBMogVc=
+X-Received: by 2002:aa7:d5c3:: with SMTP id d3mr1123391eds.151.1632431571060;
+ Thu, 23 Sep 2021 14:12:51 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha1;
-        protocol="application/pgp-signature"; boundary="5vNYLRcllDrimb99"
-Content-Disposition: inline
-In-Reply-To: <20210917035736.3934017-2-chenhuacai@loongson.cn>
-User-Agent: Mutt/1.10.1 (2018-07-13)
+Received: by 2002:a17:906:43c7:0:0:0:0 with HTTP; Thu, 23 Sep 2021 14:12:50
+ -0700 (PDT)
+Reply-To: ayishagddafio@mail.ru
+From:   "Aisha.Gaddafi" <fasoburkina03@gmail.com>
+Date:   Thu, 23 Sep 2021 14:12:50 -0700
+Message-ID: <CALcAMQ+i2miMkH+22i+UG0OoxXjr318o8KWUK09K54Q9siP3Ew@mail.gmail.com>
+Subject: Dearest Friend,?
+To:     undisclosed-recipients:;
+Content-Type: text/plain; charset="UTF-8"
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
+Dearest Friend,
 
---5vNYLRcllDrimb99
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+In the name of God, Most Gracious, Most Merciful.
 
-Hi!
+Peace be upon you and mercy be upon you and blessings be upon you.
+I have the sum of $27.5 million USD for investment, I am interested in
+you for investment project assistance in your country. My name is
+Aisha  Gaddafi and presently living in Oman, I am a Widow and single
+Mother with three Children, the only biological Daughter of late
+Libyan President (Late Colonel Muammar Gaddafi) and presently I am
+under political asylum protection by the Omani Government.
 
-> Add some basic documentations for LoongArch. LoongArch is a new RISC
-> ISA, which is a bit like MIPS or RISC-V. LoongArch includes a reduced
-> 32-bit version (LA32R), a standard 32-bit version (LA32S) and a 64-bit
-> version (LA64).
->=20
-> Signed-off-by: Huacai Chen <chenhuacai@loongson.cn>
+Kindly reply urgently for more details.
 
-> +Relationship of Loongson and LoongArch
-> +=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-> +
-> +LoongArch is a RISC ISA which is different from any other existing ones,=
- while
-> +Loongson is a family of processors. Loongson includes 3 series: Loongson=
--1 is
-> +32-bit processors, Loongson-2 is low-end 64-bit processors, and Loongson=
--3 is
-> +high-end 64-bit processors. Old Loongson is based on MIPS, and New
-> Loongson is
-
-s/processors/processor/ , I guess.
-
-> +Official web site of Loongson and LoongArch (Loongson Technology Corp. L=
-td.):
-> +
-> +  http://www.loongson.cn/index.html
-
-It would be better to point to english version of page.
-
-> +Developer web site of Loongson and LoongArch (Software and Documentation=
-s):
-
-Documentation.
-
-BR,								Pavel
---=20
-http://www.livejournal.com/~pavelmachek
-
---5vNYLRcllDrimb99
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iF0EABECAB0WIQRPfPO7r0eAhk010v0w5/Bqldv68gUCYUzqsQAKCRAw5/Bqldv6
-8vGmAJ9JXgVOqzCePPliXgVLLk/zRabUfQCeKP9TE9OX76UJSpSYHk3YkyKt/tc=
-=vT6P
------END PGP SIGNATURE-----
-
---5vNYLRcllDrimb99--
+my email address below: ayishagddafio@mail.ru
+Thanks
+Yours Truly Aisha
