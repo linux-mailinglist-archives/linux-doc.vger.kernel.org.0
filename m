@@ -2,104 +2,61 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 5C644415FD7
-	for <lists+linux-doc@lfdr.de>; Thu, 23 Sep 2021 15:30:30 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 4995D41606D
+	for <lists+linux-doc@lfdr.de>; Thu, 23 Sep 2021 15:58:37 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S241440AbhIWNbz (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 23 Sep 2021 09:31:55 -0400
-Received: from mail.kernel.org ([198.145.29.99]:44108 "EHLO mail.kernel.org"
+        id S241467AbhIWOAH (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 23 Sep 2021 10:00:07 -0400
+Received: from mail.kernel.org ([198.145.29.99]:59616 "EHLO mail.kernel.org"
         rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S241244AbhIWNbq (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Thu, 23 Sep 2021 09:31:46 -0400
-Received: by mail.kernel.org (Postfix) with ESMTPSA id D5F5C6128B;
-        Thu, 23 Sep 2021 13:30:14 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-        s=k20201202; t=1632403814;
-        bh=hs9wTebXbUtpLtghXzenefspd1+uQbrHJz31wpQPqxQ=;
-        h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-        b=E8GthFpdk9q0rCP/99lM0cJOaBiu40Df+54pfjnrTmvBLmacK9wYo5fTI+vRtwoSX
-         JVmgpbJWXnK36ErAsZWFMGrIZYVaQ/j/8RUiBMSxWjkTk7I85t7w/9dIrmXOyAOk/h
-         vh/hF9JsMivy5m+zA6bdNcD1VnFTDj5IQXasdimSxk8RBD/e9RGmqJB68vOVEzzyun
-         cTe8DBZEpjVmRzegBR6Z1A7yAc3BICRbRnbALTcIlWTIQZ+a4LGztGFU7lnNqlezJ9
-         1nrbVramlcZg604bfeTs7gws8m0Sd7V6CxE0FsF9byiGgURNFx6dfhSVodGQzXpm/d
-         teb6Utp0kba3Q==
-Received: by mail.kernel.org with local (Exim 4.94.2)
-        (envelope-from <mchehab@kernel.org>)
-        id 1mTOnl-000nec-58; Thu, 23 Sep 2021 15:30:13 +0200
-From:   Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
-To:     Linux Doc Mailing List <linux-doc@vger.kernel.org>,
-        Greg Kroah-Hartman <gregkh@linuxfoundation.org>
-Cc:     Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
-        "Jonathan Corbet" <corbet@lwn.net>, linux-kernel@vger.kernel.org
-Subject: [PATCH 13/13] scripts: get_abi.pl: ensure that "others" regex will be parsed
-Date:   Thu, 23 Sep 2021 15:30:11 +0200
-Message-Id: <3b61e86b5b2b9cd8d4b6a118f34e007f6aa64406.1632402570.git.mchehab+huawei@kernel.org>
-X-Mailer: git-send-email 2.31.1
-In-Reply-To: <cover.1632402570.git.mchehab+huawei@kernel.org>
+        id S241440AbhIWOAH (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Thu, 23 Sep 2021 10:00:07 -0400
+Received: by mail.kernel.org (Postfix) with ESMTPSA id AA6A860F44;
+        Thu, 23 Sep 2021 13:58:34 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=linuxfoundation.org;
+        s=korg; t=1632405515;
+        bh=u9b5QwJMwGCIEbtmqwFKNbTeb+cSMOEzVd1q1mym8LU=;
+        h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+        b=oZkAYRjidPAcuZLcGUO8AQwIxXrXCarYQJ+WSe30Zd9A7In0cf+nK9Le/Lpd1t6eF
+         YxY9S/u8MZJ+MCUDkcxPA/u+hPhiJFFEDUBlqEV8inx7HLdhmL7b6ypW604HBSk0R6
+         YS4FFfrWyfajKXIH3otAAE1bjtbKzVZ3xluD5d0M=
+Date:   Thu, 23 Sep 2021 15:58:32 +0200
+From:   Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+To:     Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
+Cc:     Linux Doc Mailing List <linux-doc@vger.kernel.org>,
+        linux-kernel@vger.kernel.org, Jonathan Corbet <corbet@lwn.net>,
+        Anton Vorontsov <anton@enomsg.org>,
+        Colin Cross <ccross@android.com>,
+        John Fastabend <john.fastabend@gmail.com>,
+        KP Singh <kpsingh@kernel.org>,
+        Kees Cook <keescook@chromium.org>,
+        Martin KaFai Lau <kafai@fb.com>,
+        Song Liu <songliubraving@fb.com>,
+        Tony Luck <tony.luck@intel.com>, Yonghong Song <yhs@fb.com>,
+        bpf@vger.kernel.org, netdev@vger.kernel.org
+Subject: Re: [PATCH 00/13] get_abi.pl undefined: improve precision and
+ performance
+Message-ID: <YUyICHTRdfL8Ul7X@kroah.com>
 References: <cover.1632402570.git.mchehab+huawei@kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-Sender: Mauro Carvalho Chehab <mchehab@kernel.org>
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <cover.1632402570.git.mchehab+huawei@kernel.org>
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-The way the search algorithm works is that reduces the number of regex
-expressions that will be checked for a given file entry at sysfs. It
-does that by looking at the devnode name. For instance, when it checks for
-this file:
+On Thu, Sep 23, 2021 at 03:29:58PM +0200, Mauro Carvalho Chehab wrote:
+> Hi Greg,
+> 
+> It follows a series of improvements for get_abi.pl. it is on the top of next-20210923.
 
-	/sys/bus/pci/drivers/iosf_mbi_pci/bind
+Hm, looks like I hadn't pushed my -testing tree out so that it will show
+up in linux-next yet, so we got a bunch of conflicts here.
 
-The logic will seek only the "What:" expressions that end with "bind".
-Currently, there are just a couple of What expressions that matches
-it:
+I've done so now, can you rebase against my tree and resend?  I think
+only 4 patches are new here.
 
-	What: /sys/bus/fsl\-mc/drivers/.*/bind
-	What: /sys/bus/pci/drivers/.*/bind
+thanks,
 
-It will then run an O(n²) algorithm to seek, which runs quickly
-when there are few regexs to seek. There are, however, some What:
-expressions that end with a wildcard. Those are harder to process.
-Right now, they're all grouped together at the "others" group.
-
-As those don't depend on the basename of the node, add an extra
-loop to ensure that those will be processed at the end, if
-not done yet.
-
-Signed-off-by: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
----
- scripts/get_abi.pl | 16 ++++++++++++++++
- 1 file changed, 16 insertions(+)
-
-diff --git a/scripts/get_abi.pl b/scripts/get_abi.pl
-index f2b5efef9c30..f25c98b1971e 100755
---- a/scripts/get_abi.pl
-+++ b/scripts/get_abi.pl
-@@ -723,6 +723,22 @@ sub check_undefined_symbols {
- 		}
- 		next if ($exact);
- 
-+		if ($leave ne "others") {
-+			my @expr = @{$leaf{$leave}->{expr}};
-+			for (my $i = 0; $i < @names; $i++) {
-+				foreach my $re (@expr) {
-+					print "$names[$i] =~ /^$re\$/\n" if ($debug && $dbg_undefined);
-+					if ($names[$i] =~ $re) {
-+						$exact = 1;
-+						last;
-+					}
-+				}
-+				last if ($exact);
-+			}
-+			last if ($exact);
-+		}
-+		next if ($exact);
-+
- 		if ($hint && (!$search_string || $found_string)) {
- 			my $what = $leaf{$leave}->{what};
- 			$what =~ s/\xac/\n\t/g;
--- 
-2.31.1
-
+greg k-h
