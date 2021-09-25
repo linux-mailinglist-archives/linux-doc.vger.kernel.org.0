@@ -2,131 +2,74 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id BEEB3417FF8
-	for <lists+linux-doc@lfdr.de>; Sat, 25 Sep 2021 08:27:35 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 37DF34180B7
+	for <lists+linux-doc@lfdr.de>; Sat, 25 Sep 2021 11:06:33 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S231919AbhIYG3F (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Sat, 25 Sep 2021 02:29:05 -0400
-Received: from mail.kernel.org ([198.145.29.99]:38030 "EHLO mail.kernel.org"
-        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S1345279AbhIYG27 (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Sat, 25 Sep 2021 02:28:59 -0400
-Received: by mail.kernel.org (Postfix) with ESMTPSA id B4437610EA;
-        Sat, 25 Sep 2021 06:27:20 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=linuxfoundation.org;
-        s=korg; t=1632551241;
-        bh=w/RmY89HXVNcF3MIRfDsLE3A3/k+cgoLYf1wKuMYh6U=;
-        h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-        b=envukjmadSqGDHOgmKb4kmDliNEB+0CbjGBRY8z0KTgHbCK8HlvfBIoILMoviWgrT
-         Yj66dY9cSnNlf7vopUZlldWQRHJrWN1cBCUh/XHcldi2i5q2gYBd3FvZ+RzwuUqzIe
-         FOzJRwx9Wbrpmx8OoX9CderpGqhUOvdUp03WKQBA=
-Date:   Sat, 25 Sep 2021 08:27:08 +0200
-From:   Greg KH <gregkh@linuxfoundation.org>
-To:     "David E. Box" <david.e.box@linux.intel.com>
-Cc:     hdegoede@redhat.com, mgross@linux.intel.com,
-        andriy.shevchenko@linux.intel.com, srinivas.pandruvada@intel.com,
-        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
-        platform-driver-x86@vger.kernel.org
-Subject: Re: [PATCH 2/2] platform/x86: Add Intel Software Defined Silicon
- driver
-Message-ID: <YU7BPIH123HUZKhw@kroah.com>
-References: <20210924213157.3584061-1-david.e.box@linux.intel.com>
- <20210924213157.3584061-2-david.e.box@linux.intel.com>
+        id S237935AbhIYJIG (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Sat, 25 Sep 2021 05:08:06 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:60484 "EHLO
+        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S237010AbhIYJID (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Sat, 25 Sep 2021 05:08:03 -0400
+Received: from mail-ed1-x533.google.com (mail-ed1-x533.google.com [IPv6:2a00:1450:4864:20::533])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 8F773C061570
+        for <linux-doc@vger.kernel.org>; Sat, 25 Sep 2021 02:06:28 -0700 (PDT)
+Received: by mail-ed1-x533.google.com with SMTP id y12so9688977edo.9
+        for <linux-doc@vger.kernel.org>; Sat, 25 Sep 2021 02:06:28 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112;
+        h=mime-version:sender:from:date:message-id:subject:to;
+        bh=2CaMT67JGvjj6NGe2S2VjY6oPmovcyKsp2PXXZFQz1M=;
+        b=fWMbBIROLrV8+0l34qk/EIq42mnvNn6x8tJ4jmxfup6+tKWE7qGS8eJ49Ebf7uDpmi
+         itSY/A3BujM33IPkI+0pnu60pJgTaSxV3nCEX9lJl+cljTsnhJvzNRK6pCxB9lEN/I1H
+         ndEEjcH0/X5RHKfwdTPSz7hA1y4La3GxaHA9mlCtuGuOpeaFqL+du/S0w4fwHFQZF212
+         dWNJX0NIr2AJm6SQiTj56sXfVp9/Uojk5Pd6v7HD7ztZ4kD/7DKzff+6qIKjPQpJbL0N
+         Xg2OUNWa+2sRND0vi6XyfTgVFYhyaQaK0OpKIG2gcMAbUw1HA1u/kbWtnZZeabWouELm
+         tLVQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:mime-version:sender:from:date:message-id:subject
+         :to;
+        bh=2CaMT67JGvjj6NGe2S2VjY6oPmovcyKsp2PXXZFQz1M=;
+        b=FPXSoO3qxbct34rz5nRlqvAzOEPmkIrjAQNBmNwjY5JEZLvjAWyyIx3thTODGjpFvh
+         dRKZA6RZnD6knNXhtM1HqnxIMUt+0akpEp22FmPLeQ00+99zmyqt5gXqA/oNq5B3vp54
+         JF9hmBIWBmCnT4l/qPhNTXr/e17yqXowYqwSqg1LucaBmfpkD7lAhuTx0SMWKpKWAxkJ
+         UgdvDbQEDNhik4PkOuI5h5zFYEHaRy8hR3+meRq0NN7JGeGu6cVaeQCc7AwTUMWU1lHV
+         AoiHe5MnWq+xJIKueDsHjxvDvAk4YJPctGfB5Ve+puUKpMkzf5kn1G99uZ7ea44D4nxy
+         0WpA==
+X-Gm-Message-State: AOAM530+voPz1hybOy5BvYajRpZNnUBDdBFIwVP+lWU+kLKJZfnQl7PH
+        6HR1Vn1DBCjwZuhXeDa8LA4jgmCKWNLisaBsOuk=
+X-Google-Smtp-Source: ABdhPJxTt+LzU6a7s39EjHiZpzT/J6sGyHOCy23G0BDDkFNM5lEg+FzSVL7pAUBslQ35uAQebNAlp93T/tTg3f9i/ZY=
+X-Received: by 2002:a17:907:9602:: with SMTP id gb2mr15319919ejc.354.1632560787140;
+ Sat, 25 Sep 2021 02:06:27 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20210924213157.3584061-2-david.e.box@linux.intel.com>
+Sender: bankform3@gmail.com
+Received: by 2002:a50:3585:0:0:0:0:0 with HTTP; Sat, 25 Sep 2021 02:06:26
+ -0700 (PDT)
+From:   Mrs Aisha Al-Qaddafi <mrsaishag6555@gmail.com>
+Date:   Sat, 25 Sep 2021 02:06:26 -0700
+X-Google-Sender-Auth: 2UimrWr4mNZXK_bVn7Xp8VPSEk8
+Message-ID: <CAO=+CVQsf7wtPgpLfZRN=dRfn8ypCma8A_uDTn1G95H3vN1VHA@mail.gmail.com>
+Subject: hello dear friend please can i trust you
+To:     undisclosed-recipients:;
+Content-Type: text/plain; charset="UTF-8"
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Fri, Sep 24, 2021 at 02:31:57PM -0700, David E. Box wrote:
-
-Quick review:
-
-> +static int sdsi_probe(struct platform_device *pdev)
-> +{
-> +	void __iomem *disc_addr;
-> +	struct sdsi_priv *priv;
-> +	int ret;
-> +
-> +	disc_addr = devm_platform_ioremap_resource(pdev, 0);
-> +	if (IS_ERR(disc_addr))
-> +		return PTR_ERR(disc_addr);
-> +
-> +	priv = kzalloc(sizeof(*priv), GFP_KERNEL);
-> +	if (!priv)
-> +		return -ENOMEM;
-> +
-> +	kref_init(&priv->kref);
-> +
-> +	platform_set_drvdata(pdev, priv);
-> +	priv->pdev = pdev;
-> +	mutex_init(&priv->mb_lock);
-> +	mutex_init(&priv->akc_lock);
-> +
-> +	memcpy_fromio(&priv->disc_table, disc_addr, DISC_TABLE_SIZE);
-> +
-> +	ret = sdsi_map_sdsi_registers(pdev);
-> +	if (ret)
-> +		goto put_kref;
-> +
-> +	ret = sdsi_create_misc_device(pdev);
-> +	if (ret)
-> +		goto put_kref;
-> +
-> +	ret = sdsi_add_bin_attrs(pdev);
-
-You just raced with userspace and lost.  Please attach your attributes
-to the misc device before registering it.
-
-Also, you need a Documentation/ABI/ entry for your new sysfs file(s).
-
-> +	if (ret)
-> +		goto deregister_misc;
-> +
-> +	priv->dev_present = true;
-> +
-> +	return 0;
-> +
-> +deregister_misc:
-> +	misc_deregister(&priv->miscdev);
-> +put_kref:
-> +	kref_put(&priv->kref, sdsi_priv_release);
-> +
-> +	return ret;
-> +}
-> +
-> +static int sdsi_remove(struct platform_device *pdev)
-> +{
-> +	struct sdsi_priv *priv = platform_get_drvdata(pdev);
-> +
-> +	priv->dev_present = false;
-> +	sysfs_remove_bin_file(&priv->pdev->dev.kobj, &priv->registers_bin_attr);
-> +	misc_deregister(&priv->miscdev);
-> +	kref_put(&priv->kref, sdsi_priv_release);
-
-Why do you need a kref for a structure that already can be controlled by
-a different lifetime rule?
-
-> +
-> +	return 0;
-> +}
-> +
-> +static struct platform_driver sdsi_driver = {
-> +	.driver = {
-> +		.name		= SDSI_DEV_NAME,
-> +		.dev_groups	= sdsi_groups,
-> +	},
-> +	.probe  = sdsi_probe,
-> +	.remove = sdsi_remove,
-> +};
-> +module_platform_driver(sdsi_driver);
-
-What causes the platform to know to register, and enable, this platform
-driver?  Shouldn't there be some hardware involved that is discoverable
-to enable it to load dynamically?
-
-thanks,
-
-greg k-h
+Dear Friend,
+I came across your e-mail contact prior a private search while in need
+of your assistance. I am Aisha Al-Qaddafi, the only biological
+Daughter of Former President of Libya Col. Muammar Al-Qaddafi. Am a
+single Mother and a Widow with three Children.
+I have investment funds worth Twenty Seven Million Five Hundred
+Thousand United State Dollar ($27.500.000.00 ) and i need a trusted
+investment Manager/Partner because of my current refugee status,
+however, I am interested in you for investment project assistance in
+your country, may be from there, we can build business relationship in
+the nearest future.
+If you are willing to handle this project on my behalf kindly reply
+urgent to enable me provide you more information about the investment
+funds.
+Your Urgent Reply Will Be Appreciated
+Mrs Aisha Al-Qaddafi
