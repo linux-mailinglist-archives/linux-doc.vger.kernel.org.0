@@ -2,74 +2,88 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 8FA46419D33
-	for <lists+linux-doc@lfdr.de>; Mon, 27 Sep 2021 19:44:37 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id CCD04419CFB
+	for <lists+linux-doc@lfdr.de>; Mon, 27 Sep 2021 19:35:05 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S238050AbhI0RqO (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 27 Sep 2021 13:46:14 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:45786 "EHLO
-        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S236683AbhI0RqL (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Mon, 27 Sep 2021 13:46:11 -0400
-Received: from ms.lwn.net (ms.lwn.net [IPv6:2600:3c01:e000:3a1::42])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 75363C019DAA
-        for <linux-doc@vger.kernel.org>; Mon, 27 Sep 2021 10:27:05 -0700 (PDT)
-Received: from localhost (unknown [IPv6:2601:281:8300:104d::5f6])
-        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
-        (No client certificate requested)
-        by ms.lwn.net (Postfix) with ESMTPSA id 32146774;
-        Mon, 27 Sep 2021 17:27:05 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 ms.lwn.net 32146774
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=lwn.net; s=20201203;
-        t=1632763625; bh=8lARwWvNd+Rpe8LpmPOUbYRoXMJKrbKy7znc8I8h8ZE=;
-        h=From:To:Cc:Subject:In-Reply-To:References:Date:From;
-        b=h29aBzzrvQ1MMJSrudfBVvb+iVtxoZvc4S9GiYFgO5QIZjPzSdRdoP74vLAbnSfcz
-         PAGiO6R5KCD7qVLwIFcj7NveSYabIDl5Zxx2/2rkgCBLCk2mcwvmhyG0p3Obh9ufpd
-         DXhYtAnthEIHNZcX9y6hqnXTmkn5OwFv+noi2RToJpjFeXznFmagzXNJ4cHVt2rX6g
-         kvCIZ98n/e0eTtfgh8IeyKfbSqWw2KUKxB4o6B3E793iUB22SOcrSzBhw43lu4YGmc
-         g8uZ/VswYspps0Og7/LGMqIz/qWoJSYl2o7WGh1YowV4x/6aLYmnHTISDuP5tEA4Yy
-         SCZ18b2zq6oug==
-From:   Jonathan Corbet <corbet@lwn.net>
-To:     Yanteng Si <siyanteng01@gmail.com>, alexs@kernel.org,
-        bobwxc@email.cn, seakeel@gmail.com
-Cc:     Yanteng Si <siyanteng@loongson.cn>, chenhuacai@kernel.org,
-        jiaxun.yang@flygoat.com, linux-doc@vger.kernel.org,
-        realpuyuwang@gmail.com, siyanteng01@gmail.com
-Subject: Re: [PATCH v2 0/3] docs/zh_CN: improve process translation
-In-Reply-To: <cover.1632389476.git.siyanteng@loongson.cn>
-References: <cover.1632389476.git.siyanteng@loongson.cn>
-Date:   Mon, 27 Sep 2021 11:27:04 -0600
-Message-ID: <87sfxqhqtz.fsf@meer.lwn.net>
+        id S238101AbhI0Rge (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 27 Sep 2021 13:36:34 -0400
+Received: from mga07.intel.com ([134.134.136.100]:46134 "EHLO mga07.intel.com"
+        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
+        id S239261AbhI0RfL (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Mon, 27 Sep 2021 13:35:11 -0400
+X-IronPort-AV: E=McAfee;i="6200,9189,10120"; a="288185019"
+X-IronPort-AV: E=Sophos;i="5.85,327,1624345200"; 
+   d="scan'208";a="288185019"
+Received: from fmsmga001.fm.intel.com ([10.253.24.23])
+  by orsmga105.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 27 Sep 2021 10:27:29 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.85,327,1624345200"; 
+   d="scan'208";a="615905152"
+Received: from linux.intel.com ([10.54.29.200])
+  by fmsmga001.fm.intel.com with ESMTP; 27 Sep 2021 10:27:28 -0700
+Received: from debox1-desk1.jf.intel.com (debox1-desk1.jf.intel.com [10.54.75.53])
+        by linux.intel.com (Postfix) with ESMTP id 939735802BD;
+        Mon, 27 Sep 2021 10:27:28 -0700 (PDT)
+Message-ID: <7295cafaf6da34e31390fe621198205d18eac525.camel@linux.intel.com>
+Subject: Re: [PATCH 2/2] platform/x86: Add Intel Software Defined Silicon
+ driver
+From:   "David E. Box" <david.e.box@linux.intel.com>
+Reply-To: david.e.box@linux.intel.com
+To:     Greg KH <gregkh@linuxfoundation.org>
+Cc:     lee.jones@linaro.org, hdegoede@redhat.com, mgross@linux.intel.com,
+        andriy.shevchenko@linux.intel.com, srinivas.pandruvada@intel.com,
+        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
+        platform-driver-x86@vger.kernel.org
+Date:   Mon, 27 Sep 2021 10:27:28 -0700
+In-Reply-To: <YVFC0U+wOqbTgDhy@kroah.com>
+References: <20210924213157.3584061-1-david.e.box@linux.intel.com>
+         <20210924213157.3584061-2-david.e.box@linux.intel.com>
+         <YU7BPIH123HUZKhw@kroah.com>
+         <3392aea6b112926b063bbe46b1decaad4c9f9e6e.camel@linux.intel.com>
+         <YVFC0U+wOqbTgDhy@kroah.com>
+Organization: David E. Box
+Content-Type: text/plain; charset="UTF-8"
+User-Agent: Evolution 3.38.4 (3.38.4-1.fc33) 
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Yanteng Si <siyanteng01@gmail.com> writes:
+On Mon, 2021-09-27 at 06:04 +0200, Greg KH wrote:
+> On Sun, Sep 26, 2021 at 06:15:16PM -0700, David E. Box wrote:
+> > > > +static struct platform_driver sdsi_driver = {
+> > > > +       .driver = {
+> > > > +               .name           = SDSI_DEV_NAME,
+> > > > +               .dev_groups     = sdsi_groups,
+> > > > +       },
+> > > > +       .probe  = sdsi_probe,
+> > > > +       .remove = sdsi_remove,
+> > > > +};
+> > > > +module_platform_driver(sdsi_driver);
+> > > 
+> > > What causes the platform to know to register, and enable, this platform
+> > > driver?  Shouldn't there be some hardware involved that is discoverable
+> > > to enable it to load dynamically?
+> > 
+> > Ah. The patch that adds the SDSi platform device string was added to a series for the intel_pmt
+> > MFD
+> > driver and it's still waiting review. I see that complicates things. I can combine the two series
+> > together.
+> 
+> Do you have a pointer to the lore.kernel.org location of that series?
 
-> v2:
-> *Replace =E5=8F=91=E9=80=81 with =E5=AF=84=E9=80=81.
->
-> v1:
-> * Modify some content that may mislead the reader, we should describe the=
- patch in English.
-> * improve howto.rst and 5.Posting.rst.
-> * typo fix.
->
-> Yanteng Si (3):
->   docs/zh_CN: Improve zh_CN/process/howto.rst
->   docs/zh_CN: typo fix and improve translation
->   docs/zh_CN: modify some words
->
->  Documentation/translations/zh_CN/process/5.Posting.rst |  8 ++++----
->  Documentation/translations/zh_CN/process/howto.rst     | 10 +++++-----
->  .../translations/zh_CN/process/submitting-patches.rst  |  4 ++--
->  3 files changed, 11 insertions(+), 11 deletions(-)
->
-> --=20
-> 2.27.0
-Applied, thanks.
+https://lore.kernel.org/all/20210922213007.2738388-1-david.e.box@linux.intel.com/
 
-jon
+> 
+> Your code right here will bind to any system that it is loaded on, a
+> very dangerous thing...
+
+It won't. It uses module alias to load against the SDSi specific MFD cell.
+
+> 
+> thanks,
+> 
+> greg k-h
+
+
