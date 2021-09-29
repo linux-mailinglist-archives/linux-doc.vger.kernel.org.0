@@ -2,33 +2,54 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id D675041CCE0
-	for <lists+linux-doc@lfdr.de>; Wed, 29 Sep 2021 21:49:26 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 0835241CD2F
+	for <lists+linux-doc@lfdr.de>; Wed, 29 Sep 2021 22:07:18 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1345142AbhI2TvH (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 29 Sep 2021 15:51:07 -0400
-Received: from mail.kernel.org ([198.145.29.99]:37696 "EHLO mail.kernel.org"
-        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S1345056AbhI2TvG (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Wed, 29 Sep 2021 15:51:06 -0400
-Received: by mail.kernel.org (Postfix) with ESMTPSA id B2D32613DA;
-        Wed, 29 Sep 2021 19:49:24 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-        s=k20201202; t=1632944964;
-        bh=RCKQpg6aiz4Y9fPYcSghXnoRac3MFMpvYTPY8Mo6PQg=;
-        h=Date:From:To:Cc:Subject:Reply-To:References:In-Reply-To:From;
-        b=qMRZEt6iSy2H7y+pvJRvlJW+JjzXzQNPxL6gVS71pais8DGDEILD6LmrDGMxrL8f0
-         ZbrWnvez97yhBGwmmAWpSxZkQzAveqPKNirHZjoJOiBrS1gPo7hTKS9eEC3ZNBnqGj
-         SUCZONbIx9PVl1YveGfKCurZ5IuRTELe4zXuUW8F0Umy9xPjD5TPQlhF4stNJhD22d
-         Nzw9IJb71BImaaZL42CuuJRKVqyePwHhgXm3L81iN7ih4Onsm82BlZZxrh29lWoA9d
-         tEpNokDFUKxgWjrat20JzW5Es9aZikeWXsnDD43mqTo3URGnqp2ZFOf3hvRzEkpmD9
-         cRJa0HFNj8vSA==
-Received: by paulmck-ThinkPad-P17-Gen-1.home (Postfix, from userid 1000)
-        id 7B84A5C1309; Wed, 29 Sep 2021 12:49:24 -0700 (PDT)
-Date:   Wed, 29 Sep 2021 12:49:24 -0700
-From:   "Paul E. McKenney" <paulmck@kernel.org>
-To:     Alexander Popov <alex.popov@linux.com>
-Cc:     Jonathan Corbet <corbet@lwn.net>,
+        id S1346450AbhI2UI4 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 29 Sep 2021 16:08:56 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:37434 "EHLO
+        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1346507AbhI2UIn (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Wed, 29 Sep 2021 16:08:43 -0400
+Received: from mail-pf1-x435.google.com (mail-pf1-x435.google.com [IPv6:2607:f8b0:4864:20::435])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 768B5C06176C
+        for <linux-doc@vger.kernel.org>; Wed, 29 Sep 2021 13:07:01 -0700 (PDT)
+Received: by mail-pf1-x435.google.com with SMTP id k26so2916088pfi.5
+        for <linux-doc@vger.kernel.org>; Wed, 29 Sep 2021 13:07:01 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=chromium.org; s=google;
+        h=date:from:to:cc:subject:message-id:references:mime-version
+         :content-disposition:in-reply-to;
+        bh=Qh2eW8LeGi3ecsaiI+luhmjw9dtB3ilPhgER4eDq8qA=;
+        b=em8dv1OxQ3CY+GjWZuXKn0XD1KUyGIXo6JnSL4zsriDxpYcBDGVUun35YA90hQEmqi
+         nwnf+rGGPeAbcI0LGWcU/iRdas6o494V9gL/n1Kj9aPw+qTvvWnajAqipmtpl+24cqYw
+         Xugl3+HDyMIjT8JAMNMYddsZljPijTLJsX6bc=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+         :mime-version:content-disposition:in-reply-to;
+        bh=Qh2eW8LeGi3ecsaiI+luhmjw9dtB3ilPhgER4eDq8qA=;
+        b=3XZ+uOJGEWR38EOdEwJeHRz/XfudlRZPrtJx9WgkaMsX93IYvwfSAXqY7D43J0qn+B
+         Usb8nKlIxT/YEaFRMkd5oMpKwbFrDZqBAJ5Xmw06XcaRkCo3nqkpSkf+YhJSDdr331KV
+         PnB8uLhMqj8ye78yLFj303fKEPyGrJ7GxmA8dH5vCzLplHVMeFnU3E5FOfN2ssFCTyAJ
+         O6naeLY1/0qDF8agXVm1n1Uajxxaw9hh2QydxaoHrwnBzPyx2TPtQNwrEXL6naECtfpP
+         2TrhJZm0BEU7Zxc+z/mg47PaNtZ3YQPTDM0vFTw5+VI+97ZGWhRMab/mSzHrFTzcDMc3
+         AHKQ==
+X-Gm-Message-State: AOAM530noMAOv/w6Vz43OzX6Ifz3ejBxszGyMAcL/SDydTAlBfdPX8f8
+        /3MMCfQBqYdWh5DGQQoEa0K/gAW/Zk6fog==
+X-Google-Smtp-Source: ABdhPJyASVjN67AZaOARzgD7jg3cw0R30U1AYnQObbDGl6D1dtp9jLVD4UO+Mz+5SVl0hn/odNL7Lw==
+X-Received: by 2002:aa7:9846:0:b0:444:5517:fa17 with SMTP id n6-20020aa79846000000b004445517fa17mr494981pfq.85.1632946020896;
+        Wed, 29 Sep 2021 13:07:00 -0700 (PDT)
+Received: from www.outflux.net (smtp.outflux.net. [198.145.64.163])
+        by smtp.gmail.com with ESMTPSA id r23sm2773788pjo.3.2021.09.29.13.06.59
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 29 Sep 2021 13:07:00 -0700 (PDT)
+Date:   Wed, 29 Sep 2021 13:06:59 -0700
+From:   Kees Cook <keescook@chromium.org>
+To:     Dave Hansen <dave.hansen@intel.com>
+Cc:     Alexander Popov <alex.popov@linux.com>,
+        Jonathan Corbet <corbet@lwn.net>,
+        Paul McKenney <paulmck@kernel.org>,
         Andrew Morton <akpm@linux-foundation.org>,
         Thomas Gleixner <tglx@linutronix.de>,
         Peter Zijlstra <peterz@infradead.org>,
@@ -40,7 +61,6 @@ Cc:     Jonathan Corbet <corbet@lwn.net>,
         Randy Dunlap <rdunlap@infradead.org>,
         Lu Baolu <baolu.lu@linux.intel.com>,
         Petr Mladek <pmladek@suse.com>,
-        Kees Cook <keescook@chromium.org>,
         Luis Chamberlain <mcgrof@kernel.org>, Wei Liu <wl@xen.org>,
         John Ogness <john.ogness@linutronix.de>,
         Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
@@ -62,85 +82,19 @@ Cc:     Jonathan Corbet <corbet@lwn.net>,
         linux-hardening@vger.kernel.org, linux-doc@vger.kernel.org,
         linux-kernel@vger.kernel.org, notify@kernel.org
 Subject: Re: [PATCH] Introduce the pkill_on_warn boot parameter
-Message-ID: <20210929194924.GA880162@paulmck-ThinkPad-P17-Gen-1>
-Reply-To: paulmck@kernel.org
+Message-ID: <202109291229.C64A1D9D@keescook>
 References: <20210929185823.499268-1-alex.popov@linux.com>
- <d290202d-a72d-0821-9edf-efbecf6f6cef@linux.com>
+ <323d0784-249d-7fef-6c60-e8426d35b083@intel.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <d290202d-a72d-0821-9edf-efbecf6f6cef@linux.com>
+In-Reply-To: <323d0784-249d-7fef-6c60-e8426d35b083@intel.com>
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Wed, Sep 29, 2021 at 10:01:33PM +0300, Alexander Popov wrote:
-> On 29.09.2021 21:58, Alexander Popov wrote:
-> > Currently, the Linux kernel provides two types of reaction to kernel
-> > warnings:
-> >  1. Do nothing (by default),
-> >  2. Call panic() if panic_on_warn is set. That's a very strong reaction,
-> >     so panic_on_warn is usually disabled on production systems.
-> > 
-> > From a safety point of view, the Linux kernel misses a middle way of
-> > handling kernel warnings:
-> >  - The kernel should stop the activity that provokes a warning,
-> >  - But the kernel should avoid complete denial of service.
-> > 
-> > From a security point of view, kernel warning messages provide a lot of
-> > useful information for attackers. Many GNU/Linux distributions allow
-> > unprivileged users to read the kernel log, so attackers use kernel
-> > warning infoleak in vulnerability exploits. See the examples:
-> >   https://a13xp0p0v.github.io/2020/02/15/CVE-2019-18683.html
-> >   https://a13xp0p0v.github.io/2021/02/09/CVE-2021-26708.html
-> > 
-> > Let's introduce the pkill_on_warn boot parameter.
-> > If this parameter is set, the kernel kills all threads in a process
-> > that provoked a kernel warning. This behavior is reasonable from a safety
-> > point of view described above. It is also useful for kernel security
-> > hardening because the system kills an exploit process that hits a
-> > kernel warning.
-> > 
-> > Signed-off-by: Alexander Popov <alex.popov@linux.com>
-> 
-> This patch was tested using CONFIG_LKDTM.
-> The kernel kills a process that performs this:
->   echo WARNING > /sys/kernel/debug/provoke-crash/DIRECT
-> 
-> If you are fine with this approach, I will prepare a patch adding the
-> pkill_on_warn sysctl.
-
-I suspect that you need a list of kthreads for which you are better
-off just invoking panic().  RCU's various kthreads, for but one set
-of examples.
-
-							Thanx, Paul
-
-> Best regards,
-> Alexander
-> 
-> > ---
-> >  Documentation/admin-guide/kernel-parameters.txt | 4 ++++
-> >  kernel/panic.c                                  | 5 +++++
-> >  2 files changed, 9 insertions(+)
-> > 
-> > diff --git a/Documentation/admin-guide/kernel-parameters.txt b/Documentation/admin-guide/kernel-parameters.txt
-> > index 91ba391f9b32..86c748907666 100644
-> > --- a/Documentation/admin-guide/kernel-parameters.txt
-> > +++ b/Documentation/admin-guide/kernel-parameters.txt
-> > @@ -4112,6 +4112,10 @@
-> >  	pirq=		[SMP,APIC] Manual mp-table setup
-> >  			See Documentation/x86/i386/IO-APIC.rst.
-> >  
-> > +	pkill_on_warn=	Kill all threads in a process that provoked a
-> > +			kernel warning.
-> > +			Format: { "0" | "1" }
-> > +
-> >  	plip=		[PPT,NET] Parallel port network link
-> >  			Format: { parport<nr> | timid | 0 }
-> >  			See also Documentation/admin-guide/parport.rst.
-> > diff --git a/kernel/panic.c b/kernel/panic.c
-> > index cefd7d82366f..47b728bfb1d3 100644
+On Wed, Sep 29, 2021 at 12:03:36PM -0700, Dave Hansen wrote:
+> On 9/29/21 11:58 AM, Alexander Popov wrote:
 > > --- a/kernel/panic.c
 > > +++ b/kernel/panic.c
 > > @@ -53,6 +53,7 @@ static int pause_on_oops_flag;
@@ -148,6 +102,11 @@ of examples.
 > >  bool crash_kexec_post_notifiers;
 > >  int panic_on_warn __read_mostly;
 > > +int pkill_on_warn __read_mostly;
+
+I like this idea. I can't tell if Linus would tolerate it, though. But I
+really have wanted a middle ground like BUG(). Having only WARN() and
+panic() is not very friendly. :(
+
 > >  unsigned long panic_on_taint;
 > >  bool panic_on_taint_nousertaint = false;
 > >  
@@ -161,13 +120,15 @@ of examples.
 > >  	/* Just a warning, don't kill lockdep. */
 > >  	add_taint(taint, LOCKDEP_STILL_OK);
 > >  }
-> > @@ -694,6 +698,7 @@ core_param(panic, panic_timeout, int, 0644);
-> >  core_param(panic_print, panic_print, ulong, 0644);
-> >  core_param(pause_on_oops, pause_on_oops, int, 0644);
-> >  core_param(panic_on_warn, panic_on_warn, int, 0644);
-> > +core_param(pkill_on_warn, pkill_on_warn, int, 0644);
-> >  core_param(crash_kexec_post_notifiers, crash_kexec_post_notifiers, bool, 0644);
-> >  
-> >  static int __init oops_setup(char *s)
-> > 
 > 
+> Doesn't this tie into the warning *printing* code?  That's better than
+> nothing, for sure.  But, if we're doing this for hardening, I think we
+> would want to kill anyone provoking a warning, not just the first one
+> that triggered *printing* the warning.
+
+Right, this needs to be moved into the callers of __warn() (i.e.
+report_bug(), and warn_slowpath_fmt()), likely with some small
+refactoring in report_bug().
+
+-- 
+Kees Cook
