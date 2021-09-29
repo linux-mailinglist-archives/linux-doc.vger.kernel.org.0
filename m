@@ -2,80 +2,108 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 78CFD41C0B7
-	for <lists+linux-doc@lfdr.de>; Wed, 29 Sep 2021 10:34:55 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 1532641C19B
+	for <lists+linux-doc@lfdr.de>; Wed, 29 Sep 2021 11:28:44 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S244786AbhI2Igc (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 29 Sep 2021 04:36:32 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:46092 "EHLO
+        id S245061AbhI2JaX (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 29 Sep 2021 05:30:23 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:58486 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S244789AbhI2Igb (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Wed, 29 Sep 2021 04:36:31 -0400
-Received: from casper.infradead.org (casper.infradead.org [IPv6:2001:8b0:10b:1236::1])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 5256BC06174E;
-        Wed, 29 Sep 2021 01:34:51 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-        d=infradead.org; s=casper.20170209; h=In-Reply-To:Content-Type:MIME-Version:
-        References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
-        Content-Transfer-Encoding:Content-ID:Content-Description;
-        bh=SV4z02fQHJKU53d8jxad0OxnLv9XTsMO9xV7N7zdQ6Y=; b=rSe8TuC8imwfT6E1X6+WboQJLW
-        7k7fqZpa/U1uGtZoCJbcblrFT0JFyr7cTZW0Nch1KpeE0R432yshLdinJP7FGEW3dozL0/zimcP4V
-        PX58V37T6BdAwrcgCZTdKoOcpO4ZCw4CoUHOSwg3CH+zmkL9aLFwFe8yBQuBVXvCe+hei0usuo3wQ
-        P7QAsfy/Mg4H+o/6pDYa+Dz9uPy6qa4P7KnCQFid498eo1cODfprebhnqCKGiXw6arj4ekjmVjfU4
-        rB0ni5307qLFuCJKvxZFoG4+nkyJcSi9nC/RddFPl7QO8z3moJT26grUDEfqPwnCPwGm1+Hzl6Nk0
-        dX4aT1oA==;
-Received: from j217100.upc-j.chello.nl ([24.132.217.100] helo=noisy.programming.kicks-ass.net)
-        by casper.infradead.org with esmtpsa (Exim 4.94.2 #2 (Red Hat Linux))
-        id 1mVV1h-00BeBj-Of; Wed, 29 Sep 2021 08:33:31 +0000
-Received: from hirez.programming.kicks-ass.net (hirez.programming.kicks-ass.net [192.168.1.225])
-        (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-         key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
-        (Client did not present a certificate)
-        by noisy.programming.kicks-ass.net (Postfix) with ESMTPS id 9B38B30029A;
-        Wed, 29 Sep 2021 10:33:16 +0200 (CEST)
-Received: by hirez.programming.kicks-ass.net (Postfix, from userid 1000)
-        id 82F9729AD1D57; Wed, 29 Sep 2021 10:33:16 +0200 (CEST)
-Date:   Wed, 29 Sep 2021 10:33:16 +0200
-From:   Peter Zijlstra <peterz@infradead.org>
-To:     Alexander Lochmann <info@alexander-lochmann.de>
-Cc:     Dmitry Vyukov <dvyukov@google.com>,
-        Andrey Konovalov <andreyknvl@gmail.com>,
-        Jonathan Corbet <corbet@lwn.net>,
-        Andrew Klychkov <andrew.a.klychkov@gmail.com>,
-        Miguel Ojeda <ojeda@kernel.org>,
-        Randy Dunlap <rdunlap@infradead.org>,
-        Johannes Berg <johannes@sipsolutions.net>,
-        Ingo Molnar <mingo@kernel.org>,
-        Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
-        Sebastian Andrzej Siewior <bigeasy@linutronix.de>,
-        Jakub Kicinski <kuba@kernel.org>,
-        Aleksandr Nogikh <nogikh@google.com>,
-        kasan-dev@googlegroups.com, linux-doc@vger.kernel.org,
-        linux-kernel@vger.kernel.org
-Subject: Re: [PATCHv2] Introduced new tracing mode KCOV_MODE_UNIQUE.
-Message-ID: <YVQkzCryS9dkvRGB@hirez.programming.kicks-ass.net>
-References: <20210927173348.265501-1-info@alexander-lochmann.de>
+        with ESMTP id S229487AbhI2JaX (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Wed, 29 Sep 2021 05:30:23 -0400
+Received: from mail-yb1-xb33.google.com (mail-yb1-xb33.google.com [IPv6:2607:f8b0:4864:20::b33])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 897D8C06174E
+        for <linux-doc@vger.kernel.org>; Wed, 29 Sep 2021 02:28:42 -0700 (PDT)
+Received: by mail-yb1-xb33.google.com with SMTP id b82so3933029ybg.1
+        for <linux-doc@vger.kernel.org>; Wed, 29 Sep 2021 02:28:42 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112;
+        h=mime-version:reply-to:sender:from:date:message-id:subject:to
+         :content-transfer-encoding;
+        bh=wbWF8rf3rn9R0ilazHzY3vTBm7wx4Jb+gtgK/DOM4Zk=;
+        b=BgqzRudSpVWtmYJpf51X9pAtTjXiHQgEdq807t2bZ5lOOVs+Dbg9fhiGq2LtALSCL0
+         7fZjQ/Y4Ro3FZ0w6jNJMkLb48byMuK4bi1cUrRbQRk1HTiYW312bkMa5h/4yZvE4piVh
+         qwaHTlb5ixdLFpVNV+mg/tPKd5PFkff+3Qeuez6uczRsq7qC+74RuIkkR70S1UV0CzPY
+         t8T2hGQGte7MD9HEIf4WqX/gjoFt5DzO6iNpvIbVqKHln9m4G69DICR/v/FlORHgVzbm
+         MRpizGT1AnE1cfaEMt+D0tx1TrbyQwmeQSzj36KqlJVWKXhy6NlQlUj7xS+27zcy1PGj
+         3WBQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:mime-version:reply-to:sender:from:date
+         :message-id:subject:to:content-transfer-encoding;
+        bh=wbWF8rf3rn9R0ilazHzY3vTBm7wx4Jb+gtgK/DOM4Zk=;
+        b=mvSxuqACsu+uBN+R9rWaiZmn0+cCa1MeRhbfwA6y06Vb7rHVB2/9ymjMMT8Tc5wgqG
+         mzzk4XH8A2xxsw8Iu1jXZ4bEHOUT2bj89r02w6RRv1y+QLaclgcYovzqWmnDUBZovIew
+         TEN05QSc+MfroE+/p4HzN0Ck6vrhFR/Bvhdd1dRJz1g8lBWfKeiK8fkusjrwDair5Czq
+         yJyGjRaawkxkA3737yHv8PbquYPTbKNZIvpHPooGN2pd9pOs0t7KUvT0BeeJTP7ddLbk
+         9+2dD/xhUQxvI7I7qtXgEnRYuIO5XUle4u4BPAoPEVyBwACwDDBs/vBiy3RnDb1OXlc3
+         3xQg==
+X-Gm-Message-State: AOAM530Q5Zo6HFmHlMKm4REPQC7arm8R9x3QfYnRw+qOhHxwkLDXUT9L
+        ERZ7hDaFGSonEF4Ktai2adxxg0FoaoQUJwoF0uQ=
+X-Google-Smtp-Source: ABdhPJzjhsPYQ4CwTedK6GT1JxKogSCh+Tc3PTlEPAXczRGwJQJ1PnzCCnUVqmRWTx5viFiZLfHpNBb2+DFF56k0CAw=
+X-Received: by 2002:a05:6902:56a:: with SMTP id a10mr1733901ybt.94.1632907721610;
+ Wed, 29 Sep 2021 02:28:41 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20210927173348.265501-1-info@alexander-lochmann.de>
+Reply-To: oliviaingra343@gmail.com
+Sender: ouadragojoyclear@gmail.com
+Received: by 2002:a05:7000:9b86:0:0:0:0 with HTTP; Wed, 29 Sep 2021 02:28:41
+ -0700 (PDT)
+From:   Ingram Olivia <oliviaingra@gmail.com>
+Date:   Wed, 29 Sep 2021 03:28:41 -0600
+X-Google-Sender-Auth: xX_KFzMOkHMDsfFoCSV-0W3ptQ8
+Message-ID: <CAESOkeubZyCULQ-VeHBfxUPDtw28tCvJ53z0wbdAqj0bR1v+EA@mail.gmail.com>
+Subject: If you are touched to carry my good intentions please reply
+To:     undisclosed-recipients:;
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Mon, Sep 27, 2021 at 07:33:40PM +0200, Alexander Lochmann wrote:
-> The existing trace mode stores PCs in execution order. This could lead
-> to a buffer overflow if sufficient amonut of kernel code is executed.
-> Thus, a user might not see all executed PCs. KCOV_MODE_UNIQUE favors
-> completeness over execution order. While ignoring the execution order,
-> it marks a PC as exectued by setting a bit representing that PC. Each
-> bit in the shared buffer represents every fourth byte of the text
-> segment.  Since a call instruction on every supported architecture is
-> at least four bytes, it is safe to just store every fourth byte of the
-> text segment.
+Hello Dear,
 
-I'm still trying to wake up, but why are call instruction more important
-than other instructions? Specifically, I'd think any branch instruction
-matters for coverage.
+I am Mrs. Ingram Olivia, I have decided to donate what I have to
+Motherless babies/ Less privileged/ Widows' because I am dying and
+diagnosed for cancer for about 10 years ago. I have been touched by
+God Almighty to donate from what I have inherited from my late husband
+to you for good work of God Almighty. I have asked Almighty God to
+forgive me and believe he has, because he is a Merciful God, I'm
+presently suffering from Leukemia.
 
-More specifically, x86 can do a tail call with just 2 bytes.
+My health condition has gotten worse and just two weeks ago my doctor
+informed me that my condition has reach a critical stage, that I have
+just 5 months left. This confirmation from my doctor was and still is
+devastating news; it is hard to know that you have just a little time
+left to live here.
+
+After the doctor=E2=80=99s medical pronunciation that I have just few month=
+s
+to live, I decided to divide my wealth to contribute to your country.
+I want to assist you with the funds to do great charity works in your
+country, this is my last wish. I selected you after searching few
+websites; I prayed and was led to you. I am willing to donate the sum
+of ($8.1million ) to the less privileged through you.
+
+Please I want to transfer this money to you, If you can handle this
+fund and very sure to do charity works on my behalf then I will
+include your name in my WILL  and from there I will travel to meet a
+specialist as I want to be buried alongside my late husband when I
+passed on.
+
+Note that this fund is in the financial institution and upon my
+instruction; I will file in an application for the transfer of the
+money into your account for the said purpose.
+
+Lastly, I honestly pray that this money when transferred will be used
+for the said purpose even though I might be late then. I have come to
+find out that wealth is vanity and I made a promise to God that my
+wealth will be used to support the poor and the assist the sick. Do
+let me know
+
+if you will be able to handle this fund and use it for the said
+purpose so that I will inform my bank on my decision, If you are
+interested in carrying out this task, get back to me for more details
+on this noble project of mine.
+
+God bless you
+Mrs.Ingram Olivia
