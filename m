@@ -2,135 +2,108 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id D9FDB41CCAD
-	for <lists+linux-doc@lfdr.de>; Wed, 29 Sep 2021 21:34:13 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id E84C341CCEE
+	for <lists+linux-doc@lfdr.de>; Wed, 29 Sep 2021 21:53:26 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S244498AbhI2Tfw (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 29 Sep 2021 15:35:52 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:58146 "EHLO
+        id S236565AbhI2TzH (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 29 Sep 2021 15:55:07 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:34282 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S229561AbhI2Tfu (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Wed, 29 Sep 2021 15:35:50 -0400
-Received: from mail-qt1-x82c.google.com (mail-qt1-x82c.google.com [IPv6:2607:f8b0:4864:20::82c])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id D49DDC06161C
-        for <linux-doc@vger.kernel.org>; Wed, 29 Sep 2021 12:34:08 -0700 (PDT)
-Received: by mail-qt1-x82c.google.com with SMTP id d8so3415490qtd.5
-        for <linux-doc@vger.kernel.org>; Wed, 29 Sep 2021 12:34:08 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=ziepe.ca; s=google;
-        h=date:from:to:cc:subject:message-id:references:mime-version
-         :content-disposition:in-reply-to;
-        bh=YeRhNJ7jlY3oUozrJZP1T+QUmec+ncw55w2AGtphODI=;
-        b=WIEYwcinYNjedpVCgwyiHFNyRVj+yNiqCmyujbt4xu70fiFBFXhRiD8KkC3Y/hAxHt
-         xt60J6WG9Heyt1nf27SZQMkUfJv5+WCN9YXZEaJL39AFEx5mG/hCCWHP2sVtLfoib6/Q
-         120c3B1DmhrMPsjsZ1ajQi8p897EWxNx8yjIWx5ySpTIg2Y9e5yLxQOalgCa/JlbQL9p
-         DQH2bBAStB0pSRRjqynDg256re8kYFZenv9riLJNWRXM/v+HanWiuwIpa1GSSQxzDHq8
-         zWULe76apd9GV/P9SlupYhzzWIE25AS0N0h63yYulIoiuxeRdVmueYjdDVlNKwNl6vu2
-         +23Q==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=x-gm-message-state:date:from:to:cc:subject:message-id:references
-         :mime-version:content-disposition:in-reply-to;
-        bh=YeRhNJ7jlY3oUozrJZP1T+QUmec+ncw55w2AGtphODI=;
-        b=QI+/VOyAodi29pZiprYgSF1R5p6j8Y9iH92eQlTzEZ+9/eHneP8eZBXMRFRUwi3MXL
-         9jg7S/+Q50NpD8ur/jnCyr/fdw6tdoQ2Vlt3PUGDESQkgyVUt42ERqYGUrV+DzFSRBnE
-         rgHlu1zgAq+ymLsh4TMxc1HZpPkJSuzhs+WUgpljIdB8Aq+HTCtjhf8WBc1mdip0mSGZ
-         iELE1oAsRqFvUcdw5Wh53sGrBBJ4CR+AdyOtyznqEhGl3Hw24ary1X06FdYzHc6AdZAE
-         LA2gZCfaCqleZtto1Dcps5rOiNRQRhwsROyeuQkPePKbR9L8RkERO52XEXQ74bTWsrwB
-         EUEw==
-X-Gm-Message-State: AOAM531Q0ZyXWc5UwzY6mlx+vULIIOjOC8+TATzsxJp46MQw/B4FvhvT
-        ljpkV9HX9V82Ebu6hLQFoU2kUQ==
-X-Google-Smtp-Source: ABdhPJyPLnPnrW8O/Y248rZfGn927UBJEmhsFQuMX5UkUptbaNnvSEd9XSlEGuo3ZaVbqSWxhCJTBg==
-X-Received: by 2002:a05:622a:1a86:: with SMTP id s6mr1957356qtc.43.1632944046995;
-        Wed, 29 Sep 2021 12:34:06 -0700 (PDT)
-Received: from ziepe.ca (hlfxns017vw-142-162-113-129.dhcp-dynamic.fibreop.ns.bellaliant.net. [142.162.113.129])
-        by smtp.gmail.com with ESMTPSA id 188sm402364qkm.21.2021.09.29.12.34.06
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 29 Sep 2021 12:34:06 -0700 (PDT)
-Received: from jgg by mlx with local (Exim 4.94)
-        (envelope-from <jgg@ziepe.ca>)
-        id 1mVfLB-007fLb-Ml; Wed, 29 Sep 2021 16:34:05 -0300
-Date:   Wed, 29 Sep 2021 16:34:05 -0300
-From:   Jason Gunthorpe <jgg@ziepe.ca>
-To:     Joao Martins <joao.m.martins@oracle.com>,
-        Dan Williams <dan.j.williams@intel.com>,
-        Alistair Popple <apopple@nvidia.com>,
-        Felix Kuehling <Felix.Kuehling@amd.com>
-Cc:     linux-mm@kvack.org, Vishal Verma <vishal.l.verma@intel.com>,
-        Dave Jiang <dave.jiang@intel.com>,
-        Naoya Horiguchi <naoya.horiguchi@nec.com>,
-        Matthew Wilcox <willy@infradead.org>,
-        John Hubbard <jhubbard@nvidia.com>,
-        Jane Chu <jane.chu@oracle.com>,
-        Muchun Song <songmuchun@bytedance.com>,
-        Mike Kravetz <mike.kravetz@oracle.com>,
-        Andrew Morton <akpm@linux-foundation.org>,
+        with ESMTP id S235491AbhI2TzG (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Wed, 29 Sep 2021 15:55:06 -0400
+Received: from casper.infradead.org (casper.infradead.org [IPv6:2001:8b0:10b:1236::1])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 458E7C06161C;
+        Wed, 29 Sep 2021 12:53:25 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+        d=infradead.org; s=casper.20170209; h=In-Reply-To:Content-Type:MIME-Version:
+        References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
+        Content-Transfer-Encoding:Content-ID:Content-Description;
+        bh=hFOGKPuhhfj9xW2jOvQT+nHKqB9j9dqpkjZzQyMzNZA=; b=K2nrTG3EL0nN/zraOAxNEfggL3
+        ZYhqUqepv1ta3h4uZsqjlg/0fZuacEQEUAbxOtGaBpOctsemaHQhZCJVR/Q4wUMsopgTQe5k2Ao/r
+        NSAelQStPA5CrdRxuiBXZC5yhCRvrNBE6DBpy2Rfp6cq4oTcLt6BYZprH+qoaR5LVDPU26EKQxOFv
+        694jxJgFnaNkRm25H57+eZVm5bysToxe7o/S9ScyfFMQZAc+uGUyxuKLYNqSRY7lbGzAESYupmfpy
+        hI8Z+4BJXToUIq3yJQB6d4aJ62cwqm7GAwumMYoxEL6czAG0GJSR8PzxSYEL4umpUjsLvlG4fCljD
+        uvbQWjHg==;
+Received: from j217100.upc-j.chello.nl ([24.132.217.100] helo=worktop.programming.kicks-ass.net)
+        by casper.infradead.org with esmtpsa (Exim 4.94.2 #2 (Red Hat Linux))
+        id 1mVfYF-00CB0j-R0; Wed, 29 Sep 2021 19:47:44 +0000
+Received: by worktop.programming.kicks-ass.net (Postfix, from userid 1000)
+        id 54524981431; Wed, 29 Sep 2021 21:47:35 +0200 (CEST)
+Date:   Wed, 29 Sep 2021 21:47:35 +0200
+From:   Peter Zijlstra <peterz@infradead.org>
+To:     Dave Hansen <dave.hansen@intel.com>
+Cc:     Alexander Popov <alex.popov@linux.com>,
         Jonathan Corbet <corbet@lwn.net>,
-        Christoph Hellwig <hch@lst.de>, nvdimm@lists.linux.dev,
-        linux-doc@vger.kernel.org
-Subject: Re: [PATCH v4 08/14] mm/gup: grab head page refcount once for group
- of subpages
-Message-ID: <20210929193405.GZ3544071@ziepe.ca>
-References: <20210827145819.16471-1-joao.m.martins@oracle.com>
- <20210827145819.16471-9-joao.m.martins@oracle.com>
- <20210827162552.GK1200268@ziepe.ca>
- <da90638d-d97f-bacb-f0fa-01f5fd9f2504@oracle.com>
- <20210830130741.GO1200268@ziepe.ca>
- <cda6d8fb-bd48-a3de-9d4e-96e4a43ebe58@oracle.com>
- <20210831170526.GP1200268@ziepe.ca>
- <8c23586a-eb3b-11a6-e72a-dcc3faad4e96@oracle.com>
- <20210928180150.GI3544071@ziepe.ca>
- <3f35cc33-7012-5230-a771-432275e6a21e@oracle.com>
+        Paul McKenney <paulmck@kernel.org>,
+        Andrew Morton <akpm@linux-foundation.org>,
+        Thomas Gleixner <tglx@linutronix.de>,
+        Joerg Roedel <jroedel@suse.de>,
+        Maciej Rozycki <macro@orcam.me.uk>,
+        Muchun Song <songmuchun@bytedance.com>,
+        Viresh Kumar <viresh.kumar@linaro.org>,
+        Robin Murphy <robin.murphy@arm.com>,
+        Randy Dunlap <rdunlap@infradead.org>,
+        Lu Baolu <baolu.lu@linux.intel.com>,
+        Petr Mladek <pmladek@suse.com>,
+        Kees Cook <keescook@chromium.org>,
+        Luis Chamberlain <mcgrof@kernel.org>, Wei Liu <wl@xen.org>,
+        John Ogness <john.ogness@linutronix.de>,
+        Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
+        Alexey Kardashevskiy <aik@ozlabs.ru>,
+        Christophe Leroy <christophe.leroy@csgroup.eu>,
+        Jann Horn <jannh@google.com>,
+        Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+        Mark Rutland <mark.rutland@arm.com>,
+        Andy Lutomirski <luto@kernel.org>,
+        Dave Hansen <dave.hansen@linux.intel.com>,
+        Steven Rostedt <rostedt@goodmis.org>,
+        Thomas Garnier <thgarnie@google.com>,
+        Will Deacon <will.deacon@arm.com>,
+        Ard Biesheuvel <ard.biesheuvel@linaro.org>,
+        Laura Abbott <labbott@redhat.com>,
+        David S Miller <davem@davemloft.net>,
+        Borislav Petkov <bp@alien8.de>,
+        kernel-hardening@lists.openwall.com,
+        linux-hardening@vger.kernel.org, linux-doc@vger.kernel.org,
+        linux-kernel@vger.kernel.org, notify@kernel.org
+Subject: Re: [PATCH] Introduce the pkill_on_warn boot parameter
+Message-ID: <20210929194735.GB4323@worktop.programming.kicks-ass.net>
+References: <20210929185823.499268-1-alex.popov@linux.com>
+ <323d0784-249d-7fef-6c60-e8426d35b083@intel.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <3f35cc33-7012-5230-a771-432275e6a21e@oracle.com>
+In-Reply-To: <323d0784-249d-7fef-6c60-e8426d35b083@intel.com>
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Wed, Sep 29, 2021 at 12:50:15PM +0100, Joao Martins wrote:
-
-> > If the get_dev_pagemap has to remain then it just means we have to
-> > flush before changing pagemap pointers
-> Right -- I don't think we should need it as that discussion on the other
-> thread goes.
+On Wed, Sep 29, 2021 at 12:03:36PM -0700, Dave Hansen wrote:
+> On 9/29/21 11:58 AM, Alexander Popov wrote:
+> > --- a/kernel/panic.c
+> > +++ b/kernel/panic.c
+> > @@ -53,6 +53,7 @@ static int pause_on_oops_flag;
+> >  static DEFINE_SPINLOCK(pause_on_oops_lock);
+> >  bool crash_kexec_post_notifiers;
+> >  int panic_on_warn __read_mostly;
+> > +int pkill_on_warn __read_mostly;
+> >  unsigned long panic_on_taint;
+> >  bool panic_on_taint_nousertaint = false;
+> >  
+> > @@ -610,6 +611,9 @@ void __warn(const char *file, int line, void *caller, unsigned taint,
+> >  
+> >  	print_oops_end_marker();
+> >  
+> > +	if (pkill_on_warn && system_state >= SYSTEM_RUNNING)
+> > +		do_group_exit(SIGKILL);
+> > +
+> >  	/* Just a warning, don't kill lockdep. */
+> >  	add_taint(taint, LOCKDEP_STILL_OK);
+> >  }
 > 
-> OTOH, using @pgmap might be useful to unblock gup-fast FOLL_LONGTERM
-> for certain devmap types[0] (like MEMORY_DEVICE_GENERIC [device-dax]
-> can support it but not MEMORY_DEVICE_FSDAX [fsdax]).
+> Doesn't this tie into the warning *printing* code?  That's better than
+> nothing, for sure.  But, if we're doing this for hardening, I think we
+> would want to kill anyone provoking a warning, not just the first one
+> that triggered *printing* the warning.
 
-When looking at Logan's patches I think it is pretty clear to me that
-page->pgmap must never be a dangling pointer if the caller has a
-legitimate refcount on the page.
-
-For instance the migrate and stuff all blindly calls
-is_device_private_page() on the struct page expecting a valid
-page->pgmap.
-
-This also looks like it is happening, ie
-
-void __put_page(struct page *page)
-{
-	if (is_zone_device_page(page)) {
-		put_dev_pagemap(page->pgmap);
-
-Is indeed putting the pgmap ref back when the page becomes ungettable.
-
-This properly happens when the page refcount goes to zero and so it
-should fully interlock with __page_cache_add_speculative():
-
-	if (unlikely(!page_ref_add_unless(page, count, 0))) {
-
-Thus, in gup.c, if we succeed at try_grab_compound_head() then
-page->pgmap is a stable pointer with a valid refcount.
-
-So, all the external pgmap stuff in gup.c is completely pointless.
-try_grab_compound_head() provides us with an equivalent protection at
-lower cost. Remember gup.c doesn't deref the pgmap at all.
-
-Dan/Alistair/Felix do you see any hole in that argument??
-
-So lets just delete it!
-
-Jason
+Right, that would be lib/bug.c:report_bug(), for most archs I suppose.
