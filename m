@@ -2,108 +2,246 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 1532641C19B
-	for <lists+linux-doc@lfdr.de>; Wed, 29 Sep 2021 11:28:44 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 9630B41C3C5
+	for <lists+linux-doc@lfdr.de>; Wed, 29 Sep 2021 13:51:04 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S245061AbhI2JaX (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 29 Sep 2021 05:30:23 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:58486 "EHLO
-        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S229487AbhI2JaX (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Wed, 29 Sep 2021 05:30:23 -0400
-Received: from mail-yb1-xb33.google.com (mail-yb1-xb33.google.com [IPv6:2607:f8b0:4864:20::b33])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 897D8C06174E
-        for <linux-doc@vger.kernel.org>; Wed, 29 Sep 2021 02:28:42 -0700 (PDT)
-Received: by mail-yb1-xb33.google.com with SMTP id b82so3933029ybg.1
-        for <linux-doc@vger.kernel.org>; Wed, 29 Sep 2021 02:28:42 -0700 (PDT)
+        id S244387AbhI2Lwo (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 29 Sep 2021 07:52:44 -0400
+Received: from mx0b-00069f02.pphosted.com ([205.220.177.32]:28642 "EHLO
+        mx0b-00069f02.pphosted.com" rhost-flags-OK-OK-OK-OK)
+        by vger.kernel.org with ESMTP id S240310AbhI2Lwn (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Wed, 29 Sep 2021 07:52:43 -0400
+Received: from pps.filterd (m0246632.ppops.net [127.0.0.1])
+        by mx0b-00069f02.pphosted.com (8.16.1.2/8.16.1.2) with SMTP id 18TAT0OL007736;
+        Wed, 29 Sep 2021 11:50:28 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=oracle.com; h=message-id : date :
+ subject : to : cc : references : from : in-reply-to : content-type :
+ content-transfer-encoding : mime-version; s=corp-2021-07-09;
+ bh=UaAYKb5IxZkbBXjrtM7ebsiebY989QySwkecMKUkb50=;
+ b=pNLCuGhufdb0WxUVQf9dMyozFvcXjFQv6axkhSJIab+uKqBZMYaxANJf8fPSNFvSJG+D
+ mrPWsVzEiXkdoCyr+z3RLQfcHUD5n29rZ7ZyK7KPb6kIH4qBnRzyePepXoKw7Sl9hkS0
+ VV+GtJz/NOmjgs2t/q6SoSPEMX+v8PRz+RTlnXf+28Ek9OJTyaFPvgIj86lAgsCo5N1H
+ uUphwT/P3fqlKcojsZnSOcr0Y6mgZ/baRQ0QhdQSh3jN2wToUoWHKS7x//l+/fZ9Be/a
+ QA1afzA+IhE5g8/uzcd90yu+/AjqLQpuOoyaJDe3StvpymuUpqEsIwiL0QiMJ7G5GmPk 8Q== 
+Received: from aserp3030.oracle.com (aserp3030.oracle.com [141.146.126.71])
+        by mx0b-00069f02.pphosted.com with ESMTP id 3bcdcvu47r-1
+        (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+        Wed, 29 Sep 2021 11:50:28 +0000
+Received: from pps.filterd (aserp3030.oracle.com [127.0.0.1])
+        by aserp3030.oracle.com (8.16.0.42/8.16.0.42) with SMTP id 18TBj2oG040324;
+        Wed, 29 Sep 2021 11:50:27 GMT
+Received: from nam02-bn1-obe.outbound.protection.outlook.com (mail-bn1nam07lp2045.outbound.protection.outlook.com [104.47.51.45])
+        by aserp3030.oracle.com with ESMTP id 3bc4k952qd-1
+        (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+        Wed, 29 Sep 2021 11:50:27 +0000
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=I23O1WYXDt+KE9r7acuglBuMrI+eGrybEhHSWD4mVf34WHQB/P+53aeQPqCptDwaFf208tKg3i4sb5n6KcLaeHwgqC2HFHxd7ET8Y7W6qVJ+S32EF3KWO/pucIguElyL5gegCpJNdUc/vwtXSPhfrwgnmRv/HbVhpdNn4Lrr4GSGf+7h0sHpt17sodo/hMxNI9OC1hugpFXwV2pNFaCelOCp0DqpIJ9zJzbtirclioOOgoLwAUaAAmHQriX3SSxi8bRClL+N6qTGmHJSHknLAYwl98SFtH1TT3xYTVxDiaOHV2KQjXW/MSROV4uxU1sp9NnmBtcP4+Zn22BQsKUfyw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901; h=From:Date:Subject:Message-ID:Content-Type:MIME-Version;
+ bh=UaAYKb5IxZkbBXjrtM7ebsiebY989QySwkecMKUkb50=;
+ b=NW7OzVT4c74lUweDAg2osen/xBY2VA7/64nZl3zJx6Lq4BbAdiYwO//z4ZOiVoYZG/ybV8nbZ/kpcHTT6TiJzHw8/sQbtZirAs0mAurB4yZwq5r1ltB3QLYRzFDI7+dbvvr9nRWi6p6/Een60NFbalLjAYccHBoNsqT/yx7nWElkaV4KnoXXAzcPiJwHuAqmWsRFgz8b2Au1YgOMJkK4Hng78u6fl8REa4lUk+29TEA0HExPatcVymVhdHr3ajJBTnvJTnAKfqtC2x3tfWIXF8Yu+NdnrQ9xRRXSJ2/SKWiVxpMTvn2eOAELJIGuVjKGANGrx6ad4RUNnH9I63XEog==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=oracle.com; dmarc=pass action=none header.from=oracle.com;
+ dkim=pass header.d=oracle.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=mime-version:reply-to:sender:from:date:message-id:subject:to
-         :content-transfer-encoding;
-        bh=wbWF8rf3rn9R0ilazHzY3vTBm7wx4Jb+gtgK/DOM4Zk=;
-        b=BgqzRudSpVWtmYJpf51X9pAtTjXiHQgEdq807t2bZ5lOOVs+Dbg9fhiGq2LtALSCL0
-         7fZjQ/Y4Ro3FZ0w6jNJMkLb48byMuK4bi1cUrRbQRk1HTiYW312bkMa5h/4yZvE4piVh
-         qwaHTlb5ixdLFpVNV+mg/tPKd5PFkff+3Qeuez6uczRsq7qC+74RuIkkR70S1UV0CzPY
-         t8T2hGQGte7MD9HEIf4WqX/gjoFt5DzO6iNpvIbVqKHln9m4G69DICR/v/FlORHgVzbm
-         MRpizGT1AnE1cfaEMt+D0tx1TrbyQwmeQSzj36KqlJVWKXhy6NlQlUj7xS+27zcy1PGj
-         3WBQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=x-gm-message-state:mime-version:reply-to:sender:from:date
-         :message-id:subject:to:content-transfer-encoding;
-        bh=wbWF8rf3rn9R0ilazHzY3vTBm7wx4Jb+gtgK/DOM4Zk=;
-        b=mvSxuqACsu+uBN+R9rWaiZmn0+cCa1MeRhbfwA6y06Vb7rHVB2/9ymjMMT8Tc5wgqG
-         mzzk4XH8A2xxsw8Iu1jXZ4bEHOUT2bj89r02w6RRv1y+QLaclgcYovzqWmnDUBZovIew
-         TEN05QSc+MfroE+/p4HzN0Ck6vrhFR/Bvhdd1dRJz1g8lBWfKeiK8fkusjrwDair5Czq
-         yJyGjRaawkxkA3737yHv8PbquYPTbKNZIvpHPooGN2pd9pOs0t7KUvT0BeeJTP7ddLbk
-         9+2dD/xhUQxvI7I7qtXgEnRYuIO5XUle4u4BPAoPEVyBwACwDDBs/vBiy3RnDb1OXlc3
-         3xQg==
-X-Gm-Message-State: AOAM530Q5Zo6HFmHlMKm4REPQC7arm8R9x3QfYnRw+qOhHxwkLDXUT9L
-        ERZ7hDaFGSonEF4Ktai2adxxg0FoaoQUJwoF0uQ=
-X-Google-Smtp-Source: ABdhPJzjhsPYQ4CwTedK6GT1JxKogSCh+Tc3PTlEPAXczRGwJQJ1PnzCCnUVqmRWTx5viFiZLfHpNBb2+DFF56k0CAw=
-X-Received: by 2002:a05:6902:56a:: with SMTP id a10mr1733901ybt.94.1632907721610;
- Wed, 29 Sep 2021 02:28:41 -0700 (PDT)
+ d=oracle.onmicrosoft.com; s=selector2-oracle-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=UaAYKb5IxZkbBXjrtM7ebsiebY989QySwkecMKUkb50=;
+ b=gC/liGZg0nR+0tBs8fuNhInzJvf30nwpxAOXfQAmrN29oU/z83LFamaGe8md2sGnKHKECfVDuAfn8yZdXZUcfOYBXctYSkqtRag33LVhySl+OhXY6EyonPJmq2s8PEBu/ecjZH7pyHOfYbRbOK7vReEn/W72RWnG8pD1Amgu6M4=
+Authentication-Results: ziepe.ca; dkim=none (message not signed)
+ header.d=none;ziepe.ca; dmarc=none action=none header.from=oracle.com;
+Received: from DS7PR10MB4846.namprd10.prod.outlook.com (2603:10b6:5:38c::24)
+ by DM6PR10MB2891.namprd10.prod.outlook.com (2603:10b6:5:61::28) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4544.22; Wed, 29 Sep
+ 2021 11:50:25 +0000
+Received: from DS7PR10MB4846.namprd10.prod.outlook.com
+ ([fe80::6026:4ded:66a9:cbd6]) by DS7PR10MB4846.namprd10.prod.outlook.com
+ ([fe80::6026:4ded:66a9:cbd6%7]) with mapi id 15.20.4566.014; Wed, 29 Sep 2021
+ 11:50:25 +0000
+Message-ID: <3f35cc33-7012-5230-a771-432275e6a21e@oracle.com>
+Date:   Wed, 29 Sep 2021 12:50:15 +0100
+Subject: Re: [PATCH v4 08/14] mm/gup: grab head page refcount once for group
+ of subpages
+Content-Language: en-US
+To:     Jason Gunthorpe <jgg@ziepe.ca>
+Cc:     Dan Williams <dan.j.williams@intel.com>, linux-mm@kvack.org,
+        Vishal Verma <vishal.l.verma@intel.com>,
+        Dave Jiang <dave.jiang@intel.com>,
+        Naoya Horiguchi <naoya.horiguchi@nec.com>,
+        Matthew Wilcox <willy@infradead.org>,
+        John Hubbard <jhubbard@nvidia.com>,
+        Jane Chu <jane.chu@oracle.com>,
+        Muchun Song <songmuchun@bytedance.com>,
+        Mike Kravetz <mike.kravetz@oracle.com>,
+        Andrew Morton <akpm@linux-foundation.org>,
+        Jonathan Corbet <corbet@lwn.net>,
+        Christoph Hellwig <hch@lst.de>, nvdimm@lists.linux.dev,
+        linux-doc@vger.kernel.org
+References: <20210827145819.16471-1-joao.m.martins@oracle.com>
+ <20210827145819.16471-9-joao.m.martins@oracle.com>
+ <20210827162552.GK1200268@ziepe.ca>
+ <da90638d-d97f-bacb-f0fa-01f5fd9f2504@oracle.com>
+ <20210830130741.GO1200268@ziepe.ca>
+ <cda6d8fb-bd48-a3de-9d4e-96e4a43ebe58@oracle.com>
+ <20210831170526.GP1200268@ziepe.ca>
+ <8c23586a-eb3b-11a6-e72a-dcc3faad4e96@oracle.com>
+ <20210928180150.GI3544071@ziepe.ca>
+From:   Joao Martins <joao.m.martins@oracle.com>
+In-Reply-To: <20210928180150.GI3544071@ziepe.ca>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: LO2P265CA0061.GBRP265.PROD.OUTLOOK.COM
+ (2603:10a6:600:60::25) To DS7PR10MB4846.namprd10.prod.outlook.com
+ (2603:10b6:5:38c::24)
 MIME-Version: 1.0
-Reply-To: oliviaingra343@gmail.com
-Sender: ouadragojoyclear@gmail.com
-Received: by 2002:a05:7000:9b86:0:0:0:0 with HTTP; Wed, 29 Sep 2021 02:28:41
- -0700 (PDT)
-From:   Ingram Olivia <oliviaingra@gmail.com>
-Date:   Wed, 29 Sep 2021 03:28:41 -0600
-X-Google-Sender-Auth: xX_KFzMOkHMDsfFoCSV-0W3ptQ8
-Message-ID: <CAESOkeubZyCULQ-VeHBfxUPDtw28tCvJ53z0wbdAqj0bR1v+EA@mail.gmail.com>
-Subject: If you are touched to carry my good intentions please reply
-To:     undisclosed-recipients:;
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Received: from [10.175.165.148] (138.3.204.20) by LO2P265CA0061.GBRP265.PROD.OUTLOOK.COM (2603:10a6:600:60::25) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4566.14 via Frontend Transport; Wed, 29 Sep 2021 11:50:21 +0000
+X-MS-PublicTrafficType: Email
+X-MS-Office365-Filtering-Correlation-Id: 7c7df32b-5590-4b91-9ab0-08d9833f52d7
+X-MS-TrafficTypeDiagnostic: DM6PR10MB2891:
+X-MS-Exchange-Transport-Forked: True
+X-Microsoft-Antispam-PRVS: <DM6PR10MB289179741EC47AEE7A2D0C34BBA99@DM6PR10MB2891.namprd10.prod.outlook.com>
+X-MS-Oob-TLC-OOBClassifiers: OLM:10000;
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: SFaEjuly0Qy+bTpuBl9I8kDOuyL3bFnWs2UG7Zw9dYAAi/7V0ncjVK+RjUwLJFHjM9a4j4tFAOK1h8l7pKr41gAndfyx+pL4azXah0lsd9sGPg9TmXNQsSCRveoD59/WExyKCkmlSqcW0UT/9ooEys9Ibo2bzqFr9p3G83mPp3nBljOhBhyNfToiziroEFbwpHv5ZdnXJ9V4jR/6VbuWVHqv2wPvYqkFItVdk8jNEUOYfVAy46ZRdd93Sfdzw96wV0PFlyBvaEAufY+yxSy41Z/u5Zn26qlCr25T4yD2n1/Zv/BGtnTPGlGsEe2Q9afhKQr4JnUtSDEcf0i6z/FHow5b9B65E4C7uWsi6x8cNNg+WpQoyd6180HkV3d0LLgLwtVsNpVEsRBOYes4TCHdIFzXQPYuP6eHqXCcobX0EJ9V+/4r9wOZujyuqO1y8ZG7AIehlrHbCemVEK5+I06ljMkkJ+2KelTYewh64cWcUiqq5nZg8LFkY1S2Irw3CK27AzL7My/dnSbTeAprLtulVW+SI/fjOK66MjKr7C4xjosl4FDN/Q1OeW6/A/WySU4UhmM+Wk80IjmKpoRt4OQ3mNStEz6o7AaOuKa/F+1kozWQ0H9BL/BkVyQCqt2p0puaCnJxdArC4ReXMGt6gKYlVnuJGmbcvFVWqM3fUqRwNQIErzWuicqWUfeCKYphY2qsgsA7u2ykOBs6iPra1E1zlj1juGY69s454ia0Vtdhaf1QH+x1k+bMyigDA8ld1HHNvuzSHQUUiu+bNOpf2GwFsph+M6ekrHORFqa526uoesI=
+X-Forefront-Antispam-Report: CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DS7PR10MB4846.namprd10.prod.outlook.com;PTR:;CAT:NONE;SFS:(366004)(508600001)(7416002)(966005)(31696002)(86362001)(6486002)(31686004)(36756003)(6666004)(4326008)(2906002)(26005)(66476007)(5660300002)(66556008)(316002)(54906003)(8676002)(83380400001)(38100700002)(66946007)(2616005)(6916009)(956004)(8936002)(186003)(16576012)(53546011)(45980500001);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?d2dIVUhtUXFrOFZCcUVuMElXNW12MEdPVlBQZHF3bWJpTmx0TkJxR3pBZkY4?=
+ =?utf-8?B?YlBXVnNvVHRSSjI0VENTSi9TNWlWenlNUU1wd0F1c1NRK1BFcUdKaFlNNWk0?=
+ =?utf-8?B?L1lSWXlKZ25PZHlFUE5QYjJZSDVsUmRUU2c3cmpUVkRnOHBSS3E4a0VrOHFt?=
+ =?utf-8?B?dVpteUE2L3kvVnY2OWZ0UEhZSlhrSHcyeURlR2REdS9rYzZPVEljVzd4dUJt?=
+ =?utf-8?B?NDJpQXNuVzZUQUdLbmd2TXRkOVJ5cUx1TDlDaUVFV0JUQzV1RzNIaW8yM3Jz?=
+ =?utf-8?B?dThKdWYxMmw4M2JqMXBHWHN1YlBjSlhRQmNZYUN2b0o1b0Z5QUxhQWJuVzVE?=
+ =?utf-8?B?NEs5L0d3aGM4SkdmcEdxUW5od2hDUmFoUFo5MTRTRHU3Y25RZWxpOS85NVh0?=
+ =?utf-8?B?bGduMGM2TkhZemtlUG4rTG82YXh2cE5qVWI5NEtNSjJwYnV1UkM2bE5aSkFV?=
+ =?utf-8?B?WmdJcTZJSC9GU0VCY0NlTkswQTdyei8rWTA4YTJpRkpGM0VLaVk5cE1Xand1?=
+ =?utf-8?B?aEw2b3ArR3NtU0NuaFZaeTA0R1Bxc1BQRnJzbjF2SytFR09Zc1JuYkpuVUg3?=
+ =?utf-8?B?bmJMa29PeDhXVDl3RjdrSHM4RkZ6c3NYWTduYnA2SUF0WjREbTE5Wm1Nb0xh?=
+ =?utf-8?B?YkduYUFCd1NZd0k1SkFYUjVFVzVuODA0Q2JWYmFrWmt5Qm9CWEpuT0E2bDJi?=
+ =?utf-8?B?bmI0WlJrUFhpL25WSU9YTG1mWEhVeUxiSUhSOEE3L0F5QWkyTmtTUUxIL2lj?=
+ =?utf-8?B?V1djanJ1MVV4MFdoSFB1ZHFwekpJUVZxSnMrNG9rcWVmNG5OZG1uSWZ4ZjAv?=
+ =?utf-8?B?TnNZWS9LamZLTTlFZ1dOeDlRY1FGenp6N0FXWmlwaVlpRDQ2L0E2aXI2VDVH?=
+ =?utf-8?B?RkgvcnNmNStKVU45ckRJMlBjV1ZEUTJzU3B3aXE4R283L0liVXB5Zm00RnRK?=
+ =?utf-8?B?Y0l1QkpBODVWQndNczJmaS94YmpLeS9TMG1wdlFBZ3d6NlVXY0pIeUR4SFU4?=
+ =?utf-8?B?dmYrc3d3TWd0QTlOS1gzMlh4RVdTWEtHekZhSGNkdWhkS2dRS3pwd0VaNGpy?=
+ =?utf-8?B?cGZ3QmNuM0gzYnc5M0cwei81clRXellOYWhDdkZkWEJxWW1aZm9aYU5uU3Qw?=
+ =?utf-8?B?UGpNRlpKMXgzbnQ5ekROazdSemZ2WVRLaTFVTWFBTk1DMTM5RDhZN2gzYWdG?=
+ =?utf-8?B?MXB6MnBWaFQyTFpNU2MyaXZtRFJYdWZkOWRORDZBWnBHRnJoT0pHdVRaOExt?=
+ =?utf-8?B?TU5yUjZpNFR2TkJuazc3MXJyS01JcVZnRk5BdFZGWDBFSUN3amZJc2srOEJa?=
+ =?utf-8?B?ZC84U2NtQStGeER6NDNOalpvbW9zdGNMeE1SWGtLeFo2MzZWcm9GUURKZ2hB?=
+ =?utf-8?B?T2hwTDhtZzNVSHlXbnhKOTNKOG56ZjhFbkZKSTVzUXJTUnFTUDlWYzZqeEc2?=
+ =?utf-8?B?Z2JTOGdYMmZ6S2VmZGxZRHpmcmhDVjNJMVpRUFV0SU5iaWhpTURFZDBMUUUx?=
+ =?utf-8?B?d0hIcTJSK3V3VkxGUUNDNmhoUmh4c1RUMWQ0bGsxV1pZclZGTVA3NWpNVWhm?=
+ =?utf-8?B?TjgxaDN1dm9zOXN3YkJnR1IzVjF5eTI4QXRpSUNCUzV6Q0g1SzhjdVNJNzBL?=
+ =?utf-8?B?Und4ZUQyT05PSnpLR0tUcGFqamFQSkpvWE1NRmZobnpoWkVKVXo2aG1IYVA4?=
+ =?utf-8?B?RUY5RUpZS3hWMVBWNHZ0MkZlakplQXRDWjlXZ3g3cDhEUGJEUDYzM0MxMVJK?=
+ =?utf-8?Q?KCvO6V1QiGA3RSaXksFCHeNG8oS8WS0PO6hfgBJ?=
+X-OriginatorOrg: oracle.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 7c7df32b-5590-4b91-9ab0-08d9833f52d7
+X-MS-Exchange-CrossTenant-AuthSource: DS7PR10MB4846.namprd10.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 29 Sep 2021 11:50:25.0882
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 4e2c6054-71cb-48f1-bd6c-3a9705aca71b
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: VZHfcXbup+RRBxPJhASIhuY92nv03jO/1/hb8hJKuLM6muGZIrPl5Y+ECQaH1CrXNr9elF2ng4/yz1tvHC05URrxPFikzzfvTht1B4c5Lfg=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM6PR10MB2891
+X-Proofpoint-Virus-Version: vendor=nai engine=6300 definitions=10121 signatures=668683
+X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 adultscore=0 phishscore=0 mlxscore=0
+ mlxlogscore=999 malwarescore=0 spamscore=0 bulkscore=0 suspectscore=0
+ classifier=spam adjust=0 reason=mlx scancount=1 engine=8.12.0-2109230001
+ definitions=main-2109290072
+X-Proofpoint-GUID: 8n4dNnBT-Cv681cr8crqFi55Hhon0Rb4
+X-Proofpoint-ORIG-GUID: 8n4dNnBT-Cv681cr8crqFi55Hhon0Rb4
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Hello Dear,
+On 9/28/21 19:01, Jason Gunthorpe wrote:
+> On Thu, Sep 23, 2021 at 05:51:04PM +0100, Joao Martins wrote:
+>> So ... if pgmap accounting was removed from gup-fast then this patch
+>> would be a lot simpler and we could perhaps just fallback to the regular
+>> hugepage case (THP, HugeTLB) like your suggestion at the top. See at the
+>> end below scissors mark as the ballpark of changes.
+>>
+>> So far my options seem to be: 1) this patch which leverages the existing
+>> iteration logic or 2) switching to for_each_compound_range() -- see my previous
+>> reply 3) waiting for Dan to remove @pgmap accounting in gup-fast and use
+>> something similar to below scissors mark.
+>>
+>> What do you think would be the best course of action?
+> 
+> I still think the basic algorithm should be to accumulate physicaly
+> contiguous addresses when walking the page table and then flush them
+> back to struct pages once we can't accumulate any more.
+> 
+> That works for both the walkers and all the page types?
+> 
 
-I am Mrs. Ingram Olivia, I have decided to donate what I have to
-Motherless babies/ Less privileged/ Widows' because I am dying and
-diagnosed for cancer for about 10 years ago. I have been touched by
-God Almighty to donate from what I have inherited from my late husband
-to you for good work of God Almighty. I have asked Almighty God to
-forgive me and believe he has, because he is a Merciful God, I'm
-presently suffering from Leukemia.
+The logic already handles all page types -- I was trying to avoid the extra
+complexity in regular hugetlb/THP path by not merging the handling of the
+oddball case that is devmap (or fundamentally devmap
+non-compound case in the future).
 
-My health condition has gotten worse and just two weeks ago my doctor
-informed me that my condition has reach a critical stage, that I have
-just 5 months left. This confirmation from my doctor was and still is
-devastating news; it is hard to know that you have just a little time
-left to live here.
+In the context of this patch I am think your suggestion that you  wrote
+above to ... instead of changing __gup_device_huge() we uplevel/merge it
+all in gup_huge_{pud,pmd}() to cover the devmap?
 
-After the doctor=E2=80=99s medical pronunciation that I have just few month=
-s
-to live, I decided to divide my wealth to contribute to your country.
-I want to assist you with the funds to do great charity works in your
-country, this is my last wish. I selected you after searching few
-websites; I prayed and was led to you. I am willing to donate the sum
-of ($8.1million ) to the less privileged through you.
+static int __gup_huge_range(orig_head, ...)
+{
+	...
+	page = orig_head + ((addr & ~mask) >> PAGE_SHIFT);
+	refs = record_subpages(page, addr, end, pages + *nr);
 
-Please I want to transfer this money to you, If you can handle this
-fund and very sure to do charity works on my behalf then I will
-include your name in my WILL  and from there I will travel to meet a
-specialist as I want to be buried alongside my late husband when I
-passed on.
+	head = try_grab_compound_head(orig_head, refs, flags);
+	if (!head)
+		return 0;
 
-Note that this fund is in the financial institution and upon my
-instruction; I will file in an application for the transfer of the
-money into your account for the said purpose.
+	if (unlikely(pud_val(orig) != pud_val(*pudp))) {
+		put_compound_head(head, refs, flags);
+		return 0;
+	}
 
-Lastly, I honestly pray that this money when transferred will be used
-for the said purpose even though I might be late then. I have come to
-find out that wealth is vanity and I made a promise to God that my
-wealth will be used to support the poor and the assist the sick. Do
-let me know
+	SetPageReferenced(head);
+	return 1;
+}
 
-if you will be able to handle this fund and use it for the said
-purpose so that I will inform my bank on my decision, If you are
-interested in carrying out this task, get back to me for more details
-on this noble project of mine.
+static int gup_huge_pmd(...)
+{
+	...
+	for_each_compound_range(index, page, npages, head, refs) {
+		if (pud_devmap(orig))
+			pgmap = get_dev_pagemap(pmd_pfn(orig), pgmap);
+	
+	
+		if (!__gup_huge_page_range(pmd_page(orig), refs)) {
+			undo_dev_pagemap(...);	
+			return 0;
+		}
+	}
 
-God bless you
-Mrs.Ingram Olivia
+	put_dev_pagemap(pgmap);
+}
+
+But all this gup_huge_{pmd,pud}() rework is all just for the trouble of
+trying to merge the basepage-on-PMD/PUD case of devmap. It feels more
+complex (and affecting other page types) compared to leave the devmap
+odity siloed like option 1. If the pgmap refcount wasn't there and
+there was no users of basepages-on-PMD/PUD but just compound pages
+on PMDs/PUDs ... then we would be talking about code removal rather
+than added complexity. But I don't know how realistic that is for
+other devmap users (beside device-dax).
+
+> If the get_dev_pagemap has to remain then it just means we have to
+> flush before changing pagemap pointers
+Right -- I don't think we should need it as that discussion on the other
+thread goes.
+
+OTOH, using @pgmap might be useful to unblock gup-fast FOLL_LONGTERM
+for certain devmap types[0] (like MEMORY_DEVICE_GENERIC [device-dax]
+can support it but not MEMORY_DEVICE_FSDAX [fsdax]).
+
+[0] https://lore.kernel.org/linux-mm/6a18179e-65f7-367d-89a9-d5162f10fef0@oracle.com/
