@@ -2,214 +2,143 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id D959C41D6A5
-	for <lists+linux-doc@lfdr.de>; Thu, 30 Sep 2021 11:45:10 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id E062441D815
+	for <lists+linux-doc@lfdr.de>; Thu, 30 Sep 2021 12:50:45 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1349553AbhI3Jqs (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 30 Sep 2021 05:46:48 -0400
-Received: from mail.kernel.org ([198.145.29.99]:46566 "EHLO mail.kernel.org"
-        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S1349519AbhI3Jqo (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Thu, 30 Sep 2021 05:46:44 -0400
-Received: by mail.kernel.org (Postfix) with ESMTPSA id B418C6197A;
-        Thu, 30 Sep 2021 09:45:01 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-        s=k20201202; t=1632995101;
-        bh=FzacY9NXvSC18ci2MXEiMFfDtcQdnIfbuhcv0SGmGRk=;
-        h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-        b=EH6vgTUlsmmYYWkUQNdYo7uQgiyKoQRLp2p7E75dAgAG8cAhxOFSY1lmkMS//ev0q
-         HPwMlqKgnlqMmT8EfU52I9QxzeptzBmGIzRMtiPWmJ4KCZzk+Merv7Ss4eTOprWOQk
-         4fxiDiPIdfcPrh8dtl9UUzyx6rAk0ewz28fB3qNstQaMgv7zmqfm5GxKq/S1xkGe//
-         SmfruSfguYtoyfTaSqQTF89YagMKzQlGoFAWCSZkFuKznDcGILo/ioSiwVfrSu2RLi
-         zirfTgpLf7F3Ma1l4dy9GXqEImjfPzXtjrS43T3wbjaLgB5vyqB2I+G0Gs7sobfJUU
-         kjGV/VN6j141A==
-Received: by mail.kernel.org with local (Exim 4.94.2)
-        (envelope-from <mchehab@kernel.org>)
-        id 1mVscd-002ATU-RN; Thu, 30 Sep 2021 11:44:59 +0200
-From:   Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
-To:     Linux Doc Mailing List <linux-doc@vger.kernel.org>,
-        Greg Kroah-Hartman <gregkh@linuxfoundation.org>
-Cc:     Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
-        "Jonathan Corbet" <corbet@lwn.net>,
-        Anatoly Pugachev <matorola@gmail.com>,
-        Carlos Bilbao <bilbao@vt.edu>,
-        Catalin Marinas <catalin.marinas@arm.com>,
-        Ionela Voinescu <ionela.voinescu@arm.com>,
-        Peter Collingbourne <pcc@google.com>,
-        Will Deacon <will@kernel.org>, linux-kernel@vger.kernel.org
-Subject: [PATCH v2 7/7] ABI: sysfs-devices-system-cpu: use cpuX instead of cpu#
-Date:   Thu, 30 Sep 2021 11:44:54 +0200
-Message-Id: <60b1a79189d1a9d9f1c9c9c299770e69b18972fd.1632994837.git.mchehab+huawei@kernel.org>
-X-Mailer: git-send-email 2.31.1
-In-Reply-To: <cover.1632994837.git.mchehab+huawei@kernel.org>
-References: <cover.1632994837.git.mchehab+huawei@kernel.org>
+        id S1350127AbhI3Kw1 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 30 Sep 2021 06:52:27 -0400
+Received: from mail-bn8nam08on2067.outbound.protection.outlook.com ([40.107.100.67]:42337
+        "EHLO NAM04-BN8-obe.outbound.protection.outlook.com"
+        rhost-flags-OK-OK-OK-FAIL) by vger.kernel.org with ESMTP
+        id S1350157AbhI3Kw0 (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Thu, 30 Sep 2021 06:52:26 -0400
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=b25JIX3bPazqwae7P1w98hSwHEYGxIAEpHUM8IACX2MX1oRAYgsQrcKLI73I2HI2o85Th9i+urgT0AyR0iheWeo2NGq7gEaphBTqNX4k6cvJOCEGyIb2ia3tCEbrpEUIz9fjM1FurEAUiIol23seemxvU81OYKvOAMp4Xw4pcMy2zfbRqytATJbdYChB4KW1ONGTLj8JLxrjCysOvO3JrRKT54m5418rCJJvSB3zHgqFMb0Q61FDGrxA0BvvgKXRQQxGptpJgKaSMcTwnfALxBBcBYkQDou2cW45m7FxnzczfxLwoDU0gAWMtwYWeyddkGjizP9JrQE9m/GSe74N3w==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901; h=From:Date:Subject:Message-ID:Content-Type:MIME-Version;
+ bh=GK+QUfWvw0cYqYwmuqg+yPPv3B0AewQdmXMj9bblINA=;
+ b=OiU/bSK7HFE5DY6DXw5t+3MvKN9N2nUjuUBA8keoBAdULru5MXNcJwlaJNgSIdZm/uNTNVF1hSbMJZygimSMFWFMuJGgTE2HvMBLllI9oQqILmN8wYbWsVsO9Je1/cQPt4ArjT9rPVdWd8+VCAGU9p4yWQQPRQFW21vuW4c8tiCfs7SzLquHZ9Jb9hQB42AtKVHhlgYdd1YYO/sOOMG0Pe3cU9/3hKIgyTkQ26XgAT/FwWUIcI8/JU87CRLQF2BiqDTtUcpjXLCIFJBJYIzC2QaoIW9fJffXoE+ed/AZnsbm9ryWu4f89oBR3V8HO0rbcL8XliNZCk7uRIaIX5wE6g==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=synaptics.com; dmarc=pass action=none
+ header.from=synaptics.com; dkim=pass header.d=synaptics.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=Synaptics.onmicrosoft.com; s=selector2-Synaptics-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=GK+QUfWvw0cYqYwmuqg+yPPv3B0AewQdmXMj9bblINA=;
+ b=FN2dwSTqe0QUEFxSeJ02F0Fvb1IjFIkfvbBsgoWg4gClgAJ7W1ykMj9pQhvnv1UwA1IW3hCrj7AQsLBSb1uGUxZA3wuHi72nBYq0d4v/VT5JqioQqBnEQT3sVsL06KKkdlkNV5ubHAvsgf3NrwvBdo5C/pzvF/iMu5Hr7Oa20FQ=
+Authentication-Results: arm.com; dkim=none (message not signed)
+ header.d=none;arm.com; dmarc=none action=none header.from=synaptics.com;
+Received: from BN9PR03MB6058.namprd03.prod.outlook.com (2603:10b6:408:137::15)
+ by BN8PR03MB4788.namprd03.prod.outlook.com (2603:10b6:408:98::27) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4566.15; Thu, 30 Sep
+ 2021 10:50:41 +0000
+Received: from BN9PR03MB6058.namprd03.prod.outlook.com
+ ([fe80::19a1:1a10:ff3b:be65]) by BN9PR03MB6058.namprd03.prod.outlook.com
+ ([fe80::19a1:1a10:ff3b:be65%7]) with mapi id 15.20.4544.021; Thu, 30 Sep 2021
+ 10:50:40 +0000
+Date:   Thu, 30 Sep 2021 18:50:26 +0800
+From:   Jisheng Zhang <Jisheng.Zhang@synaptics.com>
+To:     Catalin Marinas <catalin.marinas@arm.com>,
+        Will Deacon <will@kernel.org>, Jonathan Corbet <corbet@lwn.net>
+Cc:     linux-arm-kernel@lists.infradead.org, linux-doc@vger.kernel.org,
+        linux-kernel@vger.kernel.org
+Subject: [PATCH] Documentation/arm64: add memory layout with 4KB pages +
+ VA39-bit
+Message-ID: <20210930185026.1609f12e@xhacker.debian>
+X-Mailer: Claws Mail 3.18.0 (GTK+ 2.24.33; x86_64-pc-linux-gnu)
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: BY5PR04CA0019.namprd04.prod.outlook.com
+ (2603:10b6:a03:1d0::29) To BN9PR03MB6058.namprd03.prod.outlook.com
+ (2603:10b6:408:137::15)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Sender: Mauro Carvalho Chehab <mchehab@kernel.org>
+Received: from xhacker.debian (192.147.44.204) by BY5PR04CA0019.namprd04.prod.outlook.com (2603:10b6:a03:1d0::29) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4566.15 via Frontend Transport; Thu, 30 Sep 2021 10:50:38 +0000
+X-MS-PublicTrafficType: Email
+X-MS-Office365-Filtering-Correlation-Id: 1ee76cf0-d1b8-4dab-1d16-08d9840024e2
+X-MS-TrafficTypeDiagnostic: BN8PR03MB4788:
+X-Microsoft-Antispam-PRVS: <BN8PR03MB47882C5724CC0D2F20BE52FBEDAA9@BN8PR03MB4788.namprd03.prod.outlook.com>
+X-MS-Oob-TLC-OOBClassifiers: OLM:4941;
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: b+Q/OCx9QYjlvzI8Glxac5ZIRkOe9M5PCGPVtvMVYlls4wudS/egYld7YEQ5c6RO8nCYIxA3538KZFeORzFrXrqgrK1x1FqnZh4GrytdL+jRz2vRhJhxYLkaMJYo2rQTUR/Vfths5X9DuYKGzIwvfLndPibpzIbBLgz+NFjsEiE7VuWdqI/qpY0RAKyaB0eL4UevsRbUvu/e+VFEaxttQ6jJsqKbvlur6Qzdw7jwIoe/4OAfb8kZfALLA95IdrWPIEhbLnXMFNYhtmWAjkgz0vZuiypphi6r+thfa3b5rgai9cKV8WDLLZYIyyPg4l9/TCFd/mqZzrphwon3oQbp2JpUYeegcxmKn4CaJZs6k0dN3mWJpMlyxCu6BSMEqkCMlXVCGbAXIOUFhHtHovjJ36Vfl6jYPQ2FYeQkcSpBGRmkMMTTdNScofKFdYnqR7bUO3h/yns8y+E21S7F5lkZMvMwX5nPhKWdvVfbI+HuV1ZbnEiGV1qD2+uwx3XBvETw3tY7bcK4wqNS98oPofZ0LqZT3Onu5O69hfF1IzrbgtfvP30FuYTYLoxgq1aACRuHh7l3/IQS7+PqxD3AluLWYL8rwN/bnWDgCb2H37cHf5DV+Mkc3pBJVSBqcFEhaeW/fHi+ipOjBFC3jv9QCZGq7yi2w2fM1bIMqi+jIxCVWMSMMqHp0M3o9ahi0gxuLfBa0Y1vBIlT+g5+wyZDaS/Jqg==
+X-Forefront-Antispam-Report: CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BN9PR03MB6058.namprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(366004)(316002)(956004)(2906002)(55016002)(9686003)(38350700002)(38100700002)(6666004)(86362001)(186003)(5660300002)(52116002)(1076003)(6506007)(508600001)(110136005)(26005)(4326008)(7696005)(66476007)(66946007)(8676002)(66556008)(8936002);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?vnSUaT1kto3nIbJplDExXEpOSAyOGeopDqAEi0QvJDwjqzLTglQ3nqUybQ/T?=
+ =?us-ascii?Q?6JUW+d7S6BZz4Ku11MzS8OP1iISZBgPmIrquemEmJ/1TMBSAv/W5vR5Cq1g7?=
+ =?us-ascii?Q?96Gdab+Zc4/WcFscG79huo4IR7S1g3AVYuU+Ct8vapAujRAsDPAFEeaqZgcv?=
+ =?us-ascii?Q?NVnbmA0lKVkIRGd14f0WRjIfTsTsqd+65lJu++f5BKPFmHCDeMLWuvRt4P+G?=
+ =?us-ascii?Q?PRHUojgzKtEtJeVZ92ncc1yKi7Zlesl5FOMq2mfaMza5oUnj1+zHMsqSquMN?=
+ =?us-ascii?Q?FqAWtR+q1zYdfB5ccqWHPdeXwmDKCQ/+xjaAOVL0mkk9Y/qB5ewAEqF0JQaO?=
+ =?us-ascii?Q?EeiZQseimEvAPwzGvoLFvUhDbUAoAKVrV6W9LGKAJ+bQuq1K5sQ4pFtx7AAZ?=
+ =?us-ascii?Q?S/KPJmgOgoIw4u+Y8Sbmm23GGPuqPubc1bUXLXO1WpqwlPTiauYjFpGEZfGl?=
+ =?us-ascii?Q?2DlWsLT0HiQxOVQRgn53SbyfWkJKZAbidLMdvlxHmKJL2hP0vTyjToqQ+s99?=
+ =?us-ascii?Q?NnarXHAgwrNDx/4+2bdYWLi3PLvLIAOBjCn1qeZMhdGO6wL0xDqYGf45OhJb?=
+ =?us-ascii?Q?6LA8vMWJw22iOqel9a49Bjf60xCW4bpOfhfmUTTDGNqRB4omH+JbPM74isaQ?=
+ =?us-ascii?Q?sQnw+e3CwvYiY1ZKEiKSW1c/EUitnUPJJFWlKCODDJjKUaFNI0De3AF7vhcJ?=
+ =?us-ascii?Q?0WT1SRnWNp7qAXu8q7wYRaXtBhWr08IHE5IhZVLRZ7lVDpHzwN2yg/NbpGdi?=
+ =?us-ascii?Q?c+Kiz7ZAYdv/chuccmMyHl82zBMDACjP5WisMnLzHLBXU5aIuZ6M5Gu0VKrl?=
+ =?us-ascii?Q?b7YesJkma2Eu4SxqxuEocmCUHk/01OaBhR9H4udHMX/CtsGFrau3K5rbS2y7?=
+ =?us-ascii?Q?5U6gwZ432/QTsvvZK9iLDSN0APprDs2Ci9W/CjVjUJcWHDv9TrXh0CygMIcF?=
+ =?us-ascii?Q?b2uuU59GwZuk2ATkXvqhc6hfoV6re3T0K2kPx9f1qrTf3SijCDn5BdMpqsVI?=
+ =?us-ascii?Q?/g19loROoxXZTyn+T9fH3FCOyy/Gz/NzISYFomwuPipS6R3Z57G3qQ2jPFke?=
+ =?us-ascii?Q?n9wpVIGAYqRt1V7AoPfA4b/PRYz0UoodsvGRCPWLYmdnqCi7oK8fdtl+iM83?=
+ =?us-ascii?Q?t1tPZcx/y3j1ooFVqOIAgEkGD2MmLUXEBQAHPiTctZjU7+hPZzTt7578nbGA?=
+ =?us-ascii?Q?uDLK3hPbHoLltdJLkubJ/PZq6OkxJnq/wEQ1Jr41RysNfUQPjY1rqG5OZ7S3?=
+ =?us-ascii?Q?DUVSU7kxHfK5kGfnQH0GthwcRidDgpZqUZS+izqZyR16jz6nwQx4XK5/4Y2c?=
+ =?us-ascii?Q?BsJ9ue7aW5ilNrN2WqNqEUCE?=
+X-OriginatorOrg: synaptics.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 1ee76cf0-d1b8-4dab-1d16-08d9840024e2
+X-MS-Exchange-CrossTenant-AuthSource: BN9PR03MB6058.namprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 30 Sep 2021 10:50:40.5003
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 335d1fbc-2124-4173-9863-17e7051a2a0e
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: HMtgVtP/M2falngc3lZxIKcsDwdQl6SwNeO8wPBrrzW8JhlfqTlXGGJaxIOGlZzOgixw39P7xNB2rXvUnRFNPQ==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: BN8PR03MB4788
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Some What entries here use cpu# as a wildcard, while others
-use, instead, cpuX.
+The 4KB pages + 3 levels (39-bit) combination is also widely used in
+arm64 world, add the memory layout description for this combination.
 
-As scripts/get_abi.pl doesn't consider "#" as a wildcard,
-replace:
-
-	cpu# -> cpuX
-
-inside the file.
-
-Signed-off-by: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
+Signed-off-by: Jisheng Zhang <Jisheng.Zhang@synaptics.com>
 ---
+ Documentation/arm64/memory.rst | 17 +++++++++++++++++
+ 1 file changed, 17 insertions(+)
 
-See [PATCH v2 0/7] at: https://lore.kernel.org/all/cover.1632994837.git.mchehab+huawei@kernel.org/
-
- .../ABI/testing/sysfs-devices-system-cpu      | 52 +++++++++----------
- 1 file changed, 26 insertions(+), 26 deletions(-)
-
-diff --git a/Documentation/ABI/testing/sysfs-devices-system-cpu b/Documentation/ABI/testing/sysfs-devices-system-cpu
-index 4ffc7e6ef403..69c65da16dff 100644
---- a/Documentation/ABI/testing/sysfs-devices-system-cpu
-+++ b/Documentation/ABI/testing/sysfs-devices-system-cpu
-@@ -7,7 +7,7 @@ Description:
- 		Individual CPU attributes are contained in subdirectories
- 		named by the kernel's logical CPU number, e.g.:
- 
--		/sys/devices/system/cpu/cpu#/
-+		/sys/devices/system/cpu/cpuX/
- 
- What:		/sys/devices/system/cpu/kernel_max
- 		/sys/devices/system/cpu/offline
-@@ -53,7 +53,7 @@ Description:	Dynamic addition and removal of CPU's.  This is not hotplug
- 		the system.  Information written to the file to remove CPU's
- 		is architecture specific.
- 
--What:		/sys/devices/system/cpu/cpu#/node
-+What:		/sys/devices/system/cpu/cpuX/node
- Date:		October 2009
- Contact:	Linux memory management mailing list <linux-mm@kvack.org>
- Description:	Discover NUMA node a CPU belongs to
-@@ -67,41 +67,41 @@ Description:	Discover NUMA node a CPU belongs to
- 		/sys/devices/system/cpu/cpu42/node2 -> ../../node/node2
+diff --git a/Documentation/arm64/memory.rst b/Documentation/arm64/memory.rst
+index 901cd094f4ec..d1745b570f0c 100644
+--- a/Documentation/arm64/memory.rst
++++ b/Documentation/arm64/memory.rst
+@@ -26,6 +26,23 @@ The swapper_pg_dir address is written to TTBR1 and never written to
+ TTBR0.
  
  
--What:		/sys/devices/system/cpu/cpu#/topology/core_id
--		/sys/devices/system/cpu/cpu#/topology/core_siblings
--		/sys/devices/system/cpu/cpu#/topology/core_siblings_list
--		/sys/devices/system/cpu/cpu#/topology/physical_package_id
--		/sys/devices/system/cpu/cpu#/topology/thread_siblings
--		/sys/devices/system/cpu/cpu#/topology/thread_siblings_list
-+What:		/sys/devices/system/cpu/cpuX/topology/core_id
-+		/sys/devices/system/cpu/cpuX/topology/core_siblings
-+		/sys/devices/system/cpu/cpuX/topology/core_siblings_list
-+		/sys/devices/system/cpu/cpuX/topology/physical_package_id
-+		/sys/devices/system/cpu/cpuX/topology/thread_siblings
-+		/sys/devices/system/cpu/cpuX/topology/thread_siblings_list
- Date:		December 2008
- Contact:	Linux kernel mailing list <linux-kernel@vger.kernel.org>
- Description:	CPU topology files that describe a logical CPU's relationship
- 		to other cores and threads in the same physical package.
++AArch64 Linux memory layout with 4KB pages + 3 levels (39-bit)::
++  Start			End			Size		Use
++  -----------------------------------------------------------------------
++  0000000000000000	0000007fffffffff	 512GB		user
++  ffffff8000000000	ffffffbfffffffff	 256GB		kernel logical memory map
++ [ffffffb000000000	ffffffbfffffffff]	  64GB		[kasan shadow region]
++  ffffffc000000000	ffffffc007ffffff	 128MB		bpf jit region
++  ffffffc008000000	ffffffc00fffffff	 128MB		modules
++  ffffffc010000000	fffffffdefffffff      253440MB		vmalloc
++  fffffffdf0000000	fffffffdfdffffff	 224MB		fixed mappings (top down)
++  fffffffdfe000000	fffffffdfe7fffff	   8MB		[guard region]
++  fffffffdfe800000	fffffffdff7fffff	  16MB		PCI I/O space
++  fffffffdff800000	fffffffdffffffff	   8MB		[guard region]
++  fffffffe00000000	ffffffffefffffff	   4GB		vmemmap
++  ffffffff00000000	ffffffffffffffff	   4GB		[guard region]
++
++
+ AArch64 Linux memory layout with 4KB pages + 4 levels (48-bit)::
  
--		One cpu# directory is created per logical CPU in the system,
-+		One cpuX directory is created per logical CPU in the system,
- 		e.g. /sys/devices/system/cpu/cpu42/.
- 
- 		Briefly, the files above are:
- 
--		core_id: the CPU core ID of cpu#. Typically it is the
-+		core_id: the CPU core ID of cpuX. Typically it is the
- 		hardware platform's identifier (rather than the kernel's).
- 		The actual value is architecture and platform dependent.
- 
--		core_siblings: internal kernel map of cpu#'s hardware threads
-+		core_siblings: internal kernel map of cpuX's hardware threads
- 		within the same physical_package_id.
- 
- 		core_siblings_list: human-readable list of the logical CPU
--		numbers within the same physical_package_id as cpu#.
-+		numbers within the same physical_package_id as cpuX.
- 
--		physical_package_id: physical package id of cpu#. Typically
-+		physical_package_id: physical package id of cpuX. Typically
- 		corresponds to a physical socket number, but the actual value
- 		is architecture and platform dependent.
- 
--		thread_siblings: internal kernel map of cpu#'s hardware
--		threads within the same core as cpu#
-+		thread_siblings: internal kernel map of cpuX's hardware
-+		threads within the same core as cpuX
- 
--		thread_siblings_list: human-readable list of cpu#'s hardware
--		threads within the same core as cpu#
-+		thread_siblings_list: human-readable list of cpuX's hardware
-+		threads within the same core as cpuX
- 
- 		See Documentation/admin-guide/cputopology.rst for more information.
- 
-@@ -237,7 +237,7 @@ Description:
- 		Total number of times this state has been requested by the CPU
- 		while entering suspend-to-idle.
- 
--What:		/sys/devices/system/cpu/cpu#/cpufreq/*
-+What:		/sys/devices/system/cpu/cpuX/cpufreq/*
- Date:		pre-git history
- Contact:	linux-pm@vger.kernel.org
- Description:	Discover and change clock speed of CPUs
-@@ -252,7 +252,7 @@ Description:	Discover and change clock speed of CPUs
- 		See files in Documentation/cpu-freq/ for more information.
- 
- 
--What:		/sys/devices/system/cpu/cpu#/cpufreq/freqdomain_cpus
-+What:		/sys/devices/system/cpu/cpuX/cpufreq/freqdomain_cpus
- Date:		June 2013
- Contact:	linux-pm@vger.kernel.org
- Description:	Discover CPUs in the same CPU frequency coordination domain
-@@ -301,16 +301,16 @@ Description:	Processor frequency boosting control
- 		Documentation/admin-guide/pm/cpufreq.rst
- 
- 
--What:		/sys/devices/system/cpu/cpu#/crash_notes
--		/sys/devices/system/cpu/cpu#/crash_notes_size
-+What:		/sys/devices/system/cpu/cpuX/crash_notes
-+		/sys/devices/system/cpu/cpuX/crash_notes_size
- Date:		April 2013
- Contact:	kexec@lists.infradead.org
- Description:	address and size of the percpu note.
- 
- 		crash_notes: the physical address of the memory that holds the
--		note of cpu#.
-+		note of cpuX.
- 
--		crash_notes_size: size of the note of cpu#.
-+		crash_notes_size: size of the note of cpuX.
- 
- 
- What:		/sys/devices/system/cpu/intel_pstate/max_perf_pct
-@@ -503,12 +503,12 @@ Description:	Identifies the subset of CPUs in the system that can execute
- 		If absent, then all or none of the CPUs can execute AArch32
- 		applications and execve() will behave accordingly.
- 
--What:		/sys/devices/system/cpu/cpu#/cpu_capacity
-+What:		/sys/devices/system/cpu/cpuX/cpu_capacity
- Date:		December 2016
- Contact:	Linux kernel mailing list <linux-kernel@vger.kernel.org>
- Description:	information about CPUs heterogeneity.
- 
--		cpu_capacity: capacity of cpu#.
-+		cpu_capacity: capacity of cpuX.
- 
- What:		/sys/devices/system/cpu/vulnerabilities
- 		/sys/devices/system/cpu/vulnerabilities/meltdown
-@@ -560,7 +560,7 @@ Description:	Control Symmetric Multi Threading (SMT)
- 			 If control status is "forceoff" or "notsupported" writes
- 			 are rejected.
- 
--What:		/sys/devices/system/cpu/cpu#/power/energy_perf_bias
-+What:		/sys/devices/system/cpu/cpuX/power/energy_perf_bias
- Date:		March 2019
- Contact:	linux-pm@vger.kernel.org
- Description:	Intel Energy and Performance Bias Hint (EPB)
+   Start			End			Size		Use
 -- 
-2.31.1
+2.33.0
 
