@@ -2,41 +2,55 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 96FDC41D680
-	for <lists+linux-doc@lfdr.de>; Thu, 30 Sep 2021 11:40:07 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 354E441D6A1
+	for <lists+linux-doc@lfdr.de>; Thu, 30 Sep 2021 11:45:09 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1349467AbhI3Jls (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 30 Sep 2021 05:41:48 -0400
-Received: from mail.kernel.org ([198.145.29.99]:41016 "EHLO mail.kernel.org"
+        id S1349537AbhI3Jqq (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 30 Sep 2021 05:46:46 -0400
+Received: from mail.kernel.org ([198.145.29.99]:46484 "EHLO mail.kernel.org"
         rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S1349419AbhI3Jls (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Thu, 30 Sep 2021 05:41:48 -0400
-Received: by mail.kernel.org (Postfix) with ESMTPSA id BA41961278;
-        Thu, 30 Sep 2021 09:40:05 +0000 (UTC)
+        id S1349464AbhI3Jqo (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Thu, 30 Sep 2021 05:46:44 -0400
+Received: by mail.kernel.org (Postfix) with ESMTPSA id 96C3E615E2;
+        Thu, 30 Sep 2021 09:45:01 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-        s=k20201202; t=1632994805;
-        bh=1Vw8fcSkpK0woRsf4e90wZNiyBVuq6lfsSSLZttvsxU=;
-        h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-        b=DODIksv/T6GvyDDqFGESqqh1R7Ir0hr+FKy3+OskLFDV8rhKYKaR8sEoA2uxFML+1
-         QvccjfbuIGfEQplIhDhD5H+hsIO3Slj7Zz+ClF12vvhDHOSAJv+hKHwutkjAdmbDND
-         8kmJJpGQlfKNushXrWc1NX2vA3GUBJ7Py1b4/QyvKzvlpxOgmEPpGNC3EUVKcGV7h2
-         VGNmWVhsEXBkO71y6nf0iKyhAfOuQAY50vJCcW147NnuousmFJsxr9e/EG39baMQBB
-         t3bddTBd5yiR0EoSCOiGNiRhvLmDphniSjRRWgMbp1IHDZtXxglr7E2fAG7chyA+U9
-         yLhGeKTRAV/9g==
+        s=k20201202; t=1632995101;
+        bh=6uyUfnKfZKksnyKfEttmmzOHPPjEBQZsOjCQp7fyIO4=;
+        h=From:To:Cc:Subject:Date:From;
+        b=DtCbzDSToSyq5ei+OpNZqPMVRsGIMcwUTxlPHpGXjJCZUsylJsx0oQsDiFgJL6Z3L
+         j2VSzGq87EXEGR7qHc1zTXUBKo+Z8dCnM2y67faMqkirhp5Rd0aEmkjDZK1mYhNcjL
+         Iyl5AwHZwBwOuZBM2jf/CakNbKTK4e4PpJrdR1QGCW5IsZMe/fXuszlLMZts6+cHm9
+         0nahN/Bh7a82fXlfqAST3NfjmaUsnhMAZD41r32gwWQrOMpNp2lnvAfb1yU4IiseD4
+         95JDg04R7UrD9H/miRE2e5SSJIh709R5GWREqkJUFRp7Aab8TIlD+VWxDGyZyyCCs+
+         CicLWfui4uMNQ==
 Received: by mail.kernel.org with local (Exim 4.94.2)
         (envelope-from <mchehab@kernel.org>)
-        id 1mVsXr-002AEz-MK; Thu, 30 Sep 2021 11:40:03 +0200
+        id 1mVscd-002AT1-IQ; Thu, 30 Sep 2021 11:44:59 +0200
 From:   Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
-To:     Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
-        Linux Doc Mailing List <linux-doc@vger.kernel.org>
+To:     Linux Doc Mailing List <linux-doc@vger.kernel.org>,
+        Greg Kroah-Hartman <gregkh@linuxfoundation.org>
 Cc:     Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
-        "Jonathan Corbet" <corbet@lwn.net>, linux-kernel@vger.kernel.org
-Subject: [PATCH 2/2] scripts: get_abi.pl: better generate regex from what fields
-Date:   Thu, 30 Sep 2021 11:40:00 +0200
-Message-Id: <c69c01c12b1b30466177dcb17e45f833fb47713d.1632994565.git.mchehab+huawei@kernel.org>
+        linux-kernel@vger.kernel.org, Jonathan Corbet <corbet@lwn.net>,
+        "H. Peter Anvin" <hpa@zytor.com>, Amit Kucheria <amitk@kernel.org>,
+        Anatoly Pugachev <matorola@gmail.com>,
+        Borislav Petkov <bp@alien8.de>, Carlos Bilbao <bilbao@vt.edu>,
+        Catalin Marinas <catalin.marinas@arm.com>,
+        Daniel Lezcano <daniel.lezcano@linaro.org>,
+        Guenter Roeck <linux@roeck-us.net>,
+        Ingo Molnar <mingo@redhat.com>,
+        Ionela Voinescu <ionela.voinescu@arm.com>,
+        Jean Delvare <jdelvare@suse.com>,
+        Oded Gabbay <oded.gabbay@gmail.com>,
+        Peter Collingbourne <pcc@google.com>,
+        Thomas Gleixner <tglx@linutronix.de>,
+        Tom Rix <trix@redhat.com>, Tony Luck <tony.luck@intel.com>,
+        Will Deacon <will@kernel.org>, Zhang Rui <rui.zhang@intel.com>,
+        linux-edac@vger.kernel.org, linux-hwmon@vger.kernel.org,
+        linux-pm@vger.kernel.org, x86@kernel.org
+Subject: [PATCH v2 0/7] ABI: add additional sysfs docs and update some other ABI files
+Date:   Thu, 30 Sep 2021 11:44:47 +0200
+Message-Id: <cover.1632994837.git.mchehab+huawei@kernel.org>
 X-Mailer: git-send-email 2.31.1
-In-Reply-To: <cover.1632994565.git.mchehab+huawei@kernel.org>
-References: <cover.1632994565.git.mchehab+huawei@kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Sender: Mauro Carvalho Chehab <mchehab@kernel.org>
@@ -44,60 +58,47 @@ Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Using repeating sequencies of .* seem to slow down the
-processing speed on some cases. Also, currently, a "."
-character is not properly handled as such.
+Hi Greg,
 
-Change the way regexes are created, in order to produce
-better search expressions.
+This series contain:
 
-Signed-off-by: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
----
+patch 1: Convert sys/class/thermal to Documentation/ABI;
+patch 2: Convert sys/class/hwmon to Documentation/ABI;
+patch 3: add a new sysfs element on hwmon that weren't documented yet;
+patch 4: Convert MCE sysfs documentation into Documentation/ABI;
+patch 5: Add 3 missing elements to MCE sysfs documentation;
+patches 6 and 7: fix wildcards at sysfs-class-extcon and sysfs-devices-system-cpu.
 
-To mailbombing on a large number of people, only mailing lists were C/C on the cover.
-See [PATCH 0/2] at: https://lore.kernel.org/all/cover.1632994565.git.mchehab+huawei@kernel.org/
+Those help to reduce the gap of undocumented ABI detected by:
 
- scripts/get_abi.pl | 13 +++++++++++--
- 1 file changed, 11 insertions(+), 2 deletions(-)
+	./scripts/get_abi.pl undefined
 
-diff --git a/scripts/get_abi.pl b/scripts/get_abi.pl
-index 2f3674bb3c9e..6212f58b69c6 100755
---- a/scripts/get_abi.pl
-+++ b/scripts/get_abi.pl
-@@ -842,8 +842,8 @@ sub undefined_symbols {
- 
- 			# Convert what into regular expressions
- 
--			$what =~ s,/\.\.\./,/*/,g;
--			$what =~ s,\*,.*,g;
-+			# Escape dot characters
-+			$what =~ s/\./\xf6/g;
- 
- 			# Temporarily change [0-9]+ type of patterns
- 			$what =~ s/\[0\-9\]\+/\xff/g;
-@@ -859,6 +859,8 @@ sub undefined_symbols {
- 			$what =~ s/[\{\<\[]([\w_]+)(?:[,|]+([\w_]+)){1,}[\}\>\]]/($1|$2)/g;
- 
- 			# Handle wildcards
-+			$what =~ s,\*,.*,g;
-+			$what =~ s,/\xf6..,/.*,g;
- 			$what =~ s/\<[^\>]+\>/.*/g;
- 			$what =~ s/\{[^\}]+\}/.*/g;
- 			$what =~ s/\[[^\]]+\]/.*/g;
-@@ -891,6 +893,13 @@ sub undefined_symbols {
- 			# Special case: IIO ABI which a parenthesis.
- 			$what =~ s/sqrt(.*)/sqrt\(.*\)/;
- 
-+			# Simplify regexes with multiple .*
-+			$what =~ s#(?:\.\*){2,}##g;
-+#			$what =~ s#\.\*/\.\*#.*#g;
-+
-+			# Recover dot characters
-+			$what =~ s/\xf6/\./g;
-+
- 			my $leave = get_leave($what);
- 
- 			my $added = 0;
+On an ARM and on an AMD x86_64 server.
+
+Mauro Carvalho Chehab (7):
+  ABI: sysfs-class-thermal: create a file with thermal_zone ABI
+  ABI: sysfs-class-hwmon: add ABI documentation for it
+  ABI: sysfs-class-hwmon: add a description for tempY_crit_alarm
+  ABI: sysfs-mce: add a new ABI file
+  ABI: sysfs-mce: add 3 missing files
+  ABI: sysfs-class-extcon: use uppercase X for wildcards
+  ABI: u: use cpuX instead of cpu#
+
+ Documentation/ABI/testing/sysfs-class-extcon  |  12 +-
+ Documentation/ABI/testing/sysfs-class-hwmon   | 932 ++++++++++++++++++
+ Documentation/ABI/testing/sysfs-class-thermal | 259 +++++
+ .../ABI/testing/sysfs-devices-system-cpu      |  52 +-
+ Documentation/ABI/testing/sysfs-mce           | 129 +++
+ .../driver-api/thermal/sysfs-api.rst          | 225 +----
+ Documentation/hwmon/sysfs-interface.rst       | 596 +----------
+ Documentation/x86/x86_64/machinecheck.rst     |  56 +-
+ MAINTAINERS                                   |   5 +
+ 9 files changed, 1404 insertions(+), 862 deletions(-)
+ create mode 100644 Documentation/ABI/testing/sysfs-class-hwmon
+ create mode 100644 Documentation/ABI/testing/sysfs-class-thermal
+ create mode 100644 Documentation/ABI/testing/sysfs-mce
+
 -- 
 2.31.1
+
 
