@@ -2,234 +2,182 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 34FF741DC95
-	for <lists+linux-doc@lfdr.de>; Thu, 30 Sep 2021 16:42:20 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id EBED541DCFB
+	for <lists+linux-doc@lfdr.de>; Thu, 30 Sep 2021 17:08:52 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1351115AbhI3Onv (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 30 Sep 2021 10:43:51 -0400
-Received: from us-smtp-delivery-124.mimecast.com ([216.205.24.124]:21554 "EHLO
-        us-smtp-delivery-124.mimecast.com" rhost-flags-OK-OK-OK-OK)
-        by vger.kernel.org with ESMTP id S1351102AbhI3Onu (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Thu, 30 Sep 2021 10:43:50 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-        s=mimecast20190719; t=1633012927;
-        h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-         to:to:cc:cc:mime-version:mime-version:
-         content-transfer-encoding:content-transfer-encoding:
-         in-reply-to:in-reply-to:references:references;
-        bh=nzXD5cjKF7FslAepTN5/nLeuBpN4bisQvTOXO6EZOBE=;
-        b=dT9tXUHUXOJgh7eYFmOdze7G0h/3SC/4Mj8uW4Yzqn5t7oaoIsU3l6Hn9AvQ0SicNWybak
-        coqfJnT6xSlnE6YdAZWcv2oLec1FcdEkxUxEONuNvWRbGTxU5k65MCJq/Ps1mYFJSThLTU
-        yVHU6DMdVES/qR/2z4C32nZewifCbEo=
-Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
- [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-211-Xcvgvp03MRmls9rkUeYCOg-1; Thu, 30 Sep 2021 10:42:04 -0400
-X-MC-Unique: Xcvgvp03MRmls9rkUeYCOg-1
-Received: from smtp.corp.redhat.com (int-mx05.intmail.prod.int.phx2.redhat.com [10.5.11.15])
-        (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
-        (No client certificate requested)
-        by mimecast-mx01.redhat.com (Postfix) with ESMTPS id AA8C9101F024;
-        Thu, 30 Sep 2021 14:42:02 +0000 (UTC)
-Received: from t480s.redhat.com (unknown [10.39.194.155])
-        by smtp.corp.redhat.com (Postfix) with ESMTP id B29E55F4E0;
-        Thu, 30 Sep 2021 14:41:41 +0000 (UTC)
-From:   David Hildenbrand <david@redhat.com>
-To:     linux-kernel@vger.kernel.org
-Cc:     David Hildenbrand <david@redhat.com>,
+        id S235547AbhI3PKe (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 30 Sep 2021 11:10:34 -0400
+Received: from mail-ed1-f49.google.com ([209.85.208.49]:40656 "EHLO
+        mail-ed1-f49.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S239919AbhI3PKY (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Thu, 30 Sep 2021 11:10:24 -0400
+Received: by mail-ed1-f49.google.com with SMTP id g8so23567170edt.7;
+        Thu, 30 Sep 2021 08:08:41 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:reply-to:subject:to:cc:references:from
+         :message-id:date:user-agent:mime-version:in-reply-to
+         :content-language:content-transfer-encoding;
+        bh=afuuRoWEct2MfL+JBgtz3aEAzNrXRi3zezmIOBkaE24=;
+        b=cjkHe6Z9RmQhXpASuDZVgqkAhu5NNqeN2F9KqpQIbdKFEW9uF/dAycbLqvzd3EhjcH
+         n+EHwCpPXMJuwopjuP5hvostD4oODPap0CFDubgmIw+3xu3rKCv6wk7YkjKHyLPSmNXB
+         umekLb3wjbOGqLHlRFBBdyS9cHD0cLFvgsPbXM3EEFbRNW1l/WMkxUB5NlviSORz0EV3
+         sTY+I6ZwD/mAgskbL/xXBQTywGJWT7g5bn1e8FU49ueBPF4NtTu60L9eH9HMswS652FR
+         ibBL3cD8X1z2EJsLyVcKot77EtGUDvoRLEkgp19yHrz/j9OOQRSDNPIoR6bvW9SH0UdS
+         pkGg==
+X-Gm-Message-State: AOAM530FmcQECKLjJO2JBtMpNpLYQLB5ucGvXQrnft50SE2CGExuFIoC
+        SV5pB0p5DCmVqE9eM2LtTLw=
+X-Google-Smtp-Source: ABdhPJzW5nYkwTBSU2KYkXIp9u2zCRW4OTzrnUusNVdJl5Z261PeSkrf26+tyN6r+fm0cRL41Z0nvw==
+X-Received: by 2002:a17:906:f6cf:: with SMTP id jo15mr7441915ejb.244.1633014360379;
+        Thu, 30 Sep 2021 08:06:00 -0700 (PDT)
+Received: from [10.9.0.26] ([46.166.133.199])
+        by smtp.gmail.com with ESMTPSA id v22sm992164eds.20.2021.09.30.08.05.56
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Thu, 30 Sep 2021 08:05:59 -0700 (PDT)
+Reply-To: alex.popov@linux.com
+Subject: Re: [PATCH] Introduce the pkill_on_warn boot parameter
+To:     Petr Mladek <pmladek@suse.com>,
+        "Paul E. McKenney" <paulmck@kernel.org>
+Cc:     Jonathan Corbet <corbet@lwn.net>,
         Andrew Morton <akpm@linux-foundation.org>,
-        Jonathan Corbet <corbet@lwn.net>,
-        Michal Hocko <mhocko@suse.com>,
-        Oscar Salvador <osalvador@suse.de>,
-        Mike Rapoport <rppt@kernel.org>, linux-doc@vger.kernel.org,
-        linux-mm@kvack.org
-Subject: [PATCH v1 3/3] memory-hotplug.rst: document the "auto-movable" online policy
-Date:   Thu, 30 Sep 2021 16:41:17 +0200
-Message-Id: <20210930144117.23641-4-david@redhat.com>
-In-Reply-To: <20210930144117.23641-1-david@redhat.com>
-References: <20210930144117.23641-1-david@redhat.com>
+        Thomas Gleixner <tglx@linutronix.de>,
+        Peter Zijlstra <peterz@infradead.org>,
+        Joerg Roedel <jroedel@suse.de>,
+        Maciej Rozycki <macro@orcam.me.uk>,
+        Muchun Song <songmuchun@bytedance.com>,
+        Viresh Kumar <viresh.kumar@linaro.org>,
+        Robin Murphy <robin.murphy@arm.com>,
+        Randy Dunlap <rdunlap@infradead.org>,
+        Lu Baolu <baolu.lu@linux.intel.com>,
+        Kees Cook <keescook@chromium.org>,
+        Luis Chamberlain <mcgrof@kernel.org>, Wei Liu <wl@xen.org>,
+        John Ogness <john.ogness@linutronix.de>,
+        Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
+        Alexey Kardashevskiy <aik@ozlabs.ru>,
+        Christophe Leroy <christophe.leroy@csgroup.eu>,
+        Jann Horn <jannh@google.com>,
+        Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+        Mark Rutland <mark.rutland@arm.com>,
+        Andy Lutomirski <luto@kernel.org>,
+        Dave Hansen <dave.hansen@linux.intel.com>,
+        Steven Rostedt <rostedt@goodmis.org>,
+        Will Deacon <will.deacon@arm.com>,
+        David S Miller <davem@davemloft.net>,
+        Borislav Petkov <bp@alien8.de>,
+        kernel-hardening@lists.openwall.com,
+        linux-hardening@vger.kernel.org, linux-doc@vger.kernel.org,
+        linux-kernel@vger.kernel.org, notify@kernel.org,
+        Linus Torvalds <torvalds@linux-foundation.org>,
+        Dmitry Vyukov <dvyukov@google.com>
+References: <20210929185823.499268-1-alex.popov@linux.com>
+ <d290202d-a72d-0821-9edf-efbecf6f6cef@linux.com>
+ <20210929194924.GA880162@paulmck-ThinkPad-P17-Gen-1> <YVWAPXSzFNbHz6+U@alley>
+From:   Alexander Popov <alex.popov@linux.com>
+Message-ID: <a09c1d4d-1d5b-9092-ae3a-61bc22689dd2@linux.com>
+Date:   Thu, 30 Sep 2021 18:05:54 +0300
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
+ Thunderbird/78.11.0
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.15
+In-Reply-To: <YVWAPXSzFNbHz6+U@alley>
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
+Content-Transfer-Encoding: 7bit
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-In commit e83a437faa62 ("mm/memory_hotplug: introduce "auto-movable" online
-policy") we introduced a new memory online policy to automatically
-select a zone for memory blocks to be onlined. We added a way to
-set the active online policy and tunables for the auto-movable online
-policy. In follow-up commits we tweaked the "auto-movable" policy to also
-consider memory device details when selecting zones for memory blocks to
-be onlined.
+On 30.09.2021 12:15, Petr Mladek wrote:
+> On Wed 2021-09-29 12:49:24, Paul E. McKenney wrote:
+>> On Wed, Sep 29, 2021 at 10:01:33PM +0300, Alexander Popov wrote:
+>>> On 29.09.2021 21:58, Alexander Popov wrote:
+>>>> Currently, the Linux kernel provides two types of reaction to kernel
+>>>> warnings:
+>>>>  1. Do nothing (by default),
+>>>>  2. Call panic() if panic_on_warn is set. That's a very strong reaction,
+>>>>     so panic_on_warn is usually disabled on production systems.
+> 
+> Honestly, I am not sure if panic_on_warn() or the new pkill_on_warn()
+> work as expected. I wonder who uses it in practice and what is
+> the experience.
+> 
+> The problem is that many developers do not know about this behavior.
+> They use WARN() when they are lazy to write more useful message or when
+> they want to see all the provided details: task, registry, backtrace.
+> 
+> Also it is inconsistent with pr_warn() behavior. Why a single line
+> warning would be innocent and full info WARN() cause panic/pkill?
+> 
+> What about pr_err(), pr_crit(), pr_alert(), pr_emerg()? They inform
+> about even more serious problems. Why a warning should cause panic/pkill
+> while an alert message is just printed?
 
-Let's document the new toggles and how the two online policies we have
-work.
+That's a good question.
 
-Signed-off-by: David Hildenbrand <david@redhat.com>
----
- .../admin-guide/mm/memory-hotplug.rst         | 128 +++++++++++++++---
- 1 file changed, 108 insertions(+), 20 deletions(-)
+I guess various kernel continuous integration (CI) systems have panic_on_warn
+enabled.
 
-diff --git a/Documentation/admin-guide/mm/memory-hotplug.rst b/Documentation/admin-guide/mm/memory-hotplug.rst
-index ee00b70dedde..c20a2c0031cf 100644
---- a/Documentation/admin-guide/mm/memory-hotplug.rst
-+++ b/Documentation/admin-guide/mm/memory-hotplug.rst
-@@ -165,9 +165,8 @@ Or alternatively::
- 
- 	% echo 1 > /sys/devices/system/memory/memoryXXX/online
- 
--The kernel will select the target zone automatically, usually defaulting to
--``ZONE_NORMAL`` unless ``movable_node`` has been specified on the kernel
--command line or if the memory block would intersect the ZONE_MOVABLE already.
-+The kernel will select the target zone automatically, depending on the
-+configured ``online_policy``.
- 
- One can explicitly request to associate an offline memory block with
- ZONE_MOVABLE by::
-@@ -198,6 +197,9 @@ Auto-onlining can be enabled by writing ``online``, ``online_kernel`` or
- 
- 	% echo online > /sys/devices/system/memory/auto_online_blocks
- 
-+Similarly to manual onlining, with ``online`` the kernel will select the
-+target zone automatically, depending on the configured ``online_policy``.
-+
- Modifying the auto-online behavior will only affect all subsequently added
- memory blocks only.
- 
-@@ -393,9 +395,11 @@ command line parameters are relevant:
- ======================== =======================================================
- ``memhp_default_state``	 configure auto-onlining by essentially setting
-                          ``/sys/devices/system/memory/auto_online_blocks``.
--``movable_node``	 configure automatic zone selection in the kernel. When
--			 set, the kernel will default to ZONE_MOVABLE, unless
--			 other zones can be kept contiguous.
-+``movable_node``	 configure automatic zone selection in the kernel when
-+			 using the ``contig-zones`` online policy. When
-+			 set, the kernel will default to ZONE_MOVABLE when
-+			 onlining a memory block, unless other zones can be kept
-+			 contiguous.
- ======================== =======================================================
- 
- Module Parameters
-@@ -414,20 +418,104 @@ and they can be observed (and some even modified at runtime) via::
- 
- The following module parameters are currently defined:
- 
--======================== =======================================================
--``memmap_on_memory``	 read-write: Allocate memory for the memmap from the
--			 added memory block itself. Even if enabled, actual
--			 support depends on various other system properties and
--			 should only be regarded as a hint whether the behavior
--			 would be desired.
--
--			 While allocating the memmap from the memory block
--			 itself makes memory hotplug less likely to fail and
--			 keeps the memmap on the same NUMA node in any case, it
--			 can fragment physical memory in a way that huge pages
--			 in bigger granularity cannot be formed on hotplugged
--			 memory.
--======================== =======================================================
-+================================ ===============================================
-+``memmap_on_memory``		 read-write: Allocate memory for the memmap from
-+				 the added memory block itself. Even if enabled,
-+				 actual support depends on various other system
-+				 properties and should only be regarded as a
-+				 hint whether the behavior would be desired.
-+
-+				 While allocating the memmap from the memory
-+				 block itself makes memory hotplug less likely
-+				 to fail and keeps the memmap on the same NUMA
-+				 node in any case, it can fragment physical
-+				 memory in a way that huge pages in bigger
-+				 granularity cannot be formed on hotplugged
-+				 memory.
-+``online_policy``		 read-write: Set the basic policy used for
-+				 automatic zone selection when onlining memory
-+				 blocks without specifying a target zone.
-+				 ``contig-zones`` has been the kernel default
-+				 before this parameter was added. After an
-+				 online policy was configured and memory was
-+				 online, the policy should not be changed
-+				 anymore.
-+
-+				 When set to ``contig-zones``, the kernel will
-+				 try keeping zones contiguous. If a memory block
-+				 intersects multiple zones or no zone, the
-+				 behavior depends on the ``movable_node`` kernel
-+				 command line parameter: default to ZONE_MOVABLE
-+				 if set, default to the applicable kernel zone
-+				 (usually ZONE_NORMAL) if not set.
-+
-+				 When set to ``auto-movable``, the kernel will
-+				 try onlining memory blocks to ZONE_MOVABLE if
-+				 possible according to the configuration and
-+				 memory device details. With this policy, one
-+				 can avoid zone imbalances when eventually
-+				 hotplugging a lot of memory later and still
-+				 wanting to be able to hotunplug as much as
-+				 possible reliably, very desirable in
-+				 virtualized environments. As one example, a
-+				 hotplugged DIMM will be onlined either
-+				 completely to ZONE_MOVABLE or completely to
-+				 ZONE_NORMAL, not a mixture.
-+				 As another example, as many memory blocks
-+				 belonging to a virtio-mem device will be
-+				 onlined to ZONE_MOVABLE as possible,
-+				 special-casing units of memory blocks that can
-+				 only get hotunplugged together. *This policy
-+				 does not protect from setups that are
-+				 problematic with ZONE_MOVABLE and does not
-+				 change the zone of memory blocks dynamically
-+				 after they were onlined.*
-+``auto_movable_ratio``		 read-write: Set the maximum MOVABLE:KERNEL
-+				 memory ratio in % for the ``auto-movable``
-+				 online policy. Whether the ratio applies only
-+				 for the system across all NUMA nodes or also
-+				 per NUMA nodes depends on the
-+				 ``auto_movable_numa_aware`` configuration.
-+
-+				 All accounting is based on present memory pages
-+				 in the zones combined with accounting per
-+				 memory device. Memory dedicated to the CMA
-+				 allocator is accounted as MOVABLE, although
-+				 residing on one of the kernel zones. The
-+				 possible ratio depends on the actual workload.
-+				 The kernel default is "301" %, for example,
-+				 allowing for hotplugging 24 GiB to a 8 GiB VM
-+				 and automatically onlining all hotplugged
-+				 memory to ZONE_MOVABLE in many setups. The
-+				 additional 1% deals with some pages being not
-+				 present, for example, because of some firmware
-+				 allocations.
-+
-+				 Note that ZONE_NORMAL memory provided by one
-+				 memory device does not allow for more
-+				 ZONE_MOVABLE memory for a different memory
-+				 device. As one example, onlining memory of a
-+				 hotplugged DIMM to ZONE_NORMAL will not allow
-+				 for another hotplugged DIMM to get onlined to
-+				 ZONE_MOVABLE automatically. In contrast, memory
-+				 hotplugged by a virtio-mem device that got
-+				 onlined to ZONE_NORMAL will allow for more
-+				 ZONE_MOVABLE memory within *the same*
-+				 virtio-mem device.
-+``auto_movable_numa_aware``	 read-write: Configure whether the
-+				 ``auto_movable_ratio`` in the ``auto-movable``
-+				 online policy also applies per NUMA
-+				 node in addition to the whole system across all
-+				 NUMA nodes. The kernel default is "Y".
-+
-+				 Disabling NUMA awareness can be helpful when
-+				 dealing with NUMA nodes that should be
-+				 completely hotunpluggable, onlining the memory
-+				 completely to ZONE_MOVABLE automatically if
-+				 possible.
-+
-+				 Parameter availability depends on CONFIG_NUMA.
-+================================ ===============================================
- 
- ZONE_MOVABLE
- ============
--- 
-2.31.1
+[Adding Dmitry Vyukov to this discussion]
 
+If we look at the syzbot dashboard [1] with the results of Linux kernel fuzzing,
+we see the issues that appear as various kernel crashes and warnings.
+We don't see anything from pr_err(), pr_crit(), pr_alert(), pr_emerg(). Maybe
+these situations are not considered as kernel bugs that require fixing.
+
+Anyway, from a security point of view, a kernel warning output is interesting
+for attackers as an infoleak. The messages printed by pr_err(), pr_crit(),
+pr_alert(), pr_emerg() provide less information.
+
+[1]: https://syzkaller.appspot.com/upstream
+
+> It somehow reminds me the saga with %pK. We were not able to teach
+> developers to use it correctly for years and ended with hashed
+> pointers.
+> 
+> Well, this might be different. Developers might learn this the hard
+> way from bug reports. But there will be bug reports only when
+> anyone really enables this behavior. They will enable it only
+> when it works the right way most of the time.
+> 
+> 
+>>>> From a safety point of view, the Linux kernel misses a middle way of
+>>>> handling kernel warnings:
+>>>>  - The kernel should stop the activity that provokes a warning,
+>>>>  - But the kernel should avoid complete denial of service.
+>>>>
+>>>> From a security point of view, kernel warning messages provide a lot of
+>>>> useful information for attackers. Many GNU/Linux distributions allow
+>>>> unprivileged users to read the kernel log, so attackers use kernel
+>>>> warning infoleak in vulnerability exploits. See the examples:
+>>>>   https://a13xp0p0v.github.io/2020/02/15/CVE-2019-18683.html
+>>>>   https://a13xp0p0v.github.io/2021/02/09/CVE-2021-26708.html
+>>>>
+>>>> Let's introduce the pkill_on_warn boot parameter.
+>>>> If this parameter is set, the kernel kills all threads in a process
+>>>> that provoked a kernel warning. This behavior is reasonable from a safety
+>>>> point of view described above. It is also useful for kernel security
+>>>> hardening because the system kills an exploit process that hits a
+>>>> kernel warning.
+>>>>
+>>>> Signed-off-by: Alexander Popov <alex.popov@linux.com>
+>>>
+>>> This patch was tested using CONFIG_LKDTM.
+>>> The kernel kills a process that performs this:
+>>>   echo WARNING > /sys/kernel/debug/provoke-crash/DIRECT
+>>>
+>>> If you are fine with this approach, I will prepare a patch adding the
+>>> pkill_on_warn sysctl.
+>>
+>> I suspect that you need a list of kthreads for which you are better
+>> off just invoking panic().  RCU's various kthreads, for but one set
+>> of examples.
+> 
+> I wonder if kernel could survive killing of any kthread. I have never
+> seen a code that would check whether a kthread was killed and
+> restart it.
+
+The do_group_exit() function calls do_exit() from kernel/exit.c, which is also
+called during a kernel oops. This function cares about a lot of special cases
+depending on the current task_struct. Is it fine?
+
+Best regards,
+Alexander
