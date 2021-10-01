@@ -2,107 +2,71 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id D1F1241EBE9
-	for <lists+linux-doc@lfdr.de>; Fri,  1 Oct 2021 13:29:47 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 0B38741EC29
+	for <lists+linux-doc@lfdr.de>; Fri,  1 Oct 2021 13:35:07 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1353870AbhJALba (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Fri, 1 Oct 2021 07:31:30 -0400
-Received: from mail.kernel.org ([198.145.29.99]:33990 "EHLO mail.kernel.org"
-        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S1353865AbhJALba (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Fri, 1 Oct 2021 07:31:30 -0400
-Received: by mail.kernel.org (Postfix) with ESMTPSA id 20BE360EBD;
-        Fri,  1 Oct 2021 11:29:45 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=linuxfoundation.org;
-        s=korg; t=1633087785;
-        bh=AOesFciQFfqDQGdIEvwsqkxbyxwJeoyuNHwKVFmlXTw=;
-        h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-        b=CEFUt//w51BGtH8mXtgvC3OzuQ1ev0Lx2QYUAumKwZPK8Gc8Bj44+kbreBUoKmM96
-         6GAXqe/0X9FQx+gZwzCSCAW4839Om4mmzyHBzGPmjEgkysUb/cT4Gv9ikI+/l4AlRA
-         HIaztO5U58IOPrUn5s8DY4qnvwZ6bTdCLhc9orOw=
-Date:   Fri, 1 Oct 2021 13:29:42 +0200
-From:   Greg KH <gregkh@linuxfoundation.org>
-To:     "David E. Box" <david.e.box@linux.intel.com>
-Cc:     lee.jones@linaro.org, hdegoede@redhat.com, mgross@linux.intel.com,
-        bhelgaas@google.com, andriy.shevchenko@linux.intel.com,
-        srinivas.pandruvada@intel.com, linux-kernel@vger.kernel.org,
-        linux-doc@vger.kernel.org, platform-driver-x86@vger.kernel.org,
-        linux-pci@vger.kernel.org
-Subject: Re: [PATCH 5/5] platform/x86: Add Intel Software Defined Silicon
- driver
-Message-ID: <YVbxJjjn4I97nnmv@kroah.com>
-References: <20211001012815.1999501-1-david.e.box@linux.intel.com>
- <20211001012815.1999501-6-david.e.box@linux.intel.com>
- <YVa1aiTqS6Ik5cO1@kroah.com>
- <d988a4b8698b20a151680cc98a6b7434efbaea55.camel@linux.intel.com>
+        id S1353996AbhJALgt (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Fri, 1 Oct 2021 07:36:49 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:41242 "EHLO
+        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1354001AbhJALgr (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Fri, 1 Oct 2021 07:36:47 -0400
+Received: from mail-ed1-x52d.google.com (mail-ed1-x52d.google.com [IPv6:2a00:1450:4864:20::52d])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id E5783C0613E6
+        for <linux-doc@vger.kernel.org>; Fri,  1 Oct 2021 04:35:02 -0700 (PDT)
+Received: by mail-ed1-x52d.google.com with SMTP id dj4so34626769edb.5
+        for <linux-doc@vger.kernel.org>; Fri, 01 Oct 2021 04:35:02 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112;
+        h=mime-version:reply-to:from:date:message-id:subject:to;
+        bh=5L/E4eErsLvrvRSyjenHMn1XgR3BfAibYkaUBTxnmho=;
+        b=kb6MbLUy++O6PNHhKSFPx9v4fFtwpvxJeNblR4kji6+6qq2Lucl0Bos7Wr8pcLX+hO
+         tRyb9xiWVR8p706SNC+HizJNgSL5UH7etOYT4KJNUPAxZsx19kSXdlPSkzuaY1jTWaLY
+         4tzz18G2my1E8FkqDzcvEfU/fmLr7epbivZsMIbMD2QsJgHn219yKjZHacudF+1Otelk
+         Ps1x6eI3Y+KniUoXNyOSthjl8bPizc7o0PNNLM7mCUJWrsXs698IFJfmckZW2ZuwAS6o
+         Sx6QKffvmRb5RhKFnE364qOhRDY4B39bqiG8gRsgkqiSO/SRZOJpzUOpTrf/l9gFCHVc
+         XGiQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:mime-version:reply-to:from:date:message-id
+         :subject:to;
+        bh=5L/E4eErsLvrvRSyjenHMn1XgR3BfAibYkaUBTxnmho=;
+        b=SWTT/ycBptd91zkFHXuAL6GVfUKnhX8cOhiM28dIzRl82KpIuzNSzhxkPfuPVCIImu
+         ZqB8kOl3n1FKk+2J+3WrbLG35wAJy9EZQxHp9mO3ztAgnwVmo1cgvsy31sxdV8qnTBDf
+         Fp1eH/KaeB9gd7Nn9N9jH9cMUouQKNMvNHwCClhbgqEzQ8npdqEroe13xehvtL4WA+lH
+         DZGl6tKNVSlL0c1s5P5j6l+/ZePxbSUpR6DL8AnJ54NwN36wNS8lAcEPoXTpFbPgatv0
+         +FtguPHaI1u/EPGtXICQpSK6VeVcWY7OTKUVDkUAMUWbR17FG3HKpXhkWur6w/PIduuQ
+         l2ZQ==
+X-Gm-Message-State: AOAM53165TjG8NT94K2qe16+ba4Jcgy7q867OFgqpNR3wIU+VEe7mJDX
+        M0Ibz0VXaIIe/vZwWtKwN5JLUiEuk5M7YnuiYS4=
+X-Google-Smtp-Source: ABdhPJxO5JZDMou4ZeNj31LReXKwuJbss5Bcqb0SVbR3DI9xevoj0I1eyLAyk/Sg0BjFpvAB7vI/ZitZ52WunSuQcUw=
+X-Received: by 2002:a17:906:3882:: with SMTP id q2mr5834865ejd.396.1633088100599;
+ Fri, 01 Oct 2021 04:35:00 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <d988a4b8698b20a151680cc98a6b7434efbaea55.camel@linux.intel.com>
+Received: by 2002:a17:906:724a:0:0:0:0 with HTTP; Fri, 1 Oct 2021 04:34:58
+ -0700 (PDT)
+Reply-To: joymat52@gmail.com
+From:   Joyce Thomas <tjoyc1234@gmail.com>
+Date:   Fri, 1 Oct 2021 04:34:58 -0700
+Message-ID: <CAF-RpUjEy3ZrsPpj7r5ZFKjGM=JQyOMzOcWwONVKJZrBckwU0Q@mail.gmail.com>
+Subject: ATTN:
+To:     undisclosed-recipients:;
+Content-Type: text/plain; charset="UTF-8"
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Fri, Oct 01, 2021 at 03:38:23AM -0700, David E. Box wrote:
-> On Fri, 2021-10-01 at 09:14 +0200, Greg KH wrote:
-> > On Thu, Sep 30, 2021 at 06:28:15PM -0700, David E. Box wrote:
-> > > +static int sdsi_device_open(struct inode *inode, struct file *file)
-> > > +{
-> > > +       struct miscdevice *miscdev = file->private_data;
-> > > +
-> > > +       get_device(miscdev->this_device);
-> > 
-> > Why do you think this is needed?  Shouldn't the misc core handle all of
-> > this for you already?
-> > 
-> > > +
-> > > +       return 0;
-> > > +}
-> > > +
-> > > +static int sdsi_device_release(struct inode *inode, struct file *file)
-> > > +{
-> > > +
-> > > +       struct miscdevice *miscdev = file->private_data;
-> > > +       struct sdsi_priv *priv = to_sdsi_priv(miscdev);
-> > > +
-> > > +       if (priv->akc_owner == file)
-> > > +               priv->akc_owner = NULL;
-> > 
-> > Why is this needed?
-> > 
-> > > +
-> > > +       put_device(miscdev->this_device);
-> > 
-> > I see this matches the open call, but if you do not have this in the
-> > open call, is it needed here as well?
-> > 
-> > > +       ret = devm_add_action_or_reset(priv->miscdev.this_device, sdsi_miscdev_remove, priv);
-> > > +       if (ret)
-> > > +               goto deregister_misc;
-> > 
-> > I think this is all you need to clean up your device memory, not the
-> > get/put device in open/release, right?
-> 
-> It does clean up the memory, but it does so immediately after the device has been unregistered, even
-> if a file is open. The get/put ensures that if files are open, the memory isn't cleaned up until the
-> files are closed.
-> 
-> I can show that this happens without the get/put,
-> 
-> 	open()
-> 	unbind device -> devm action called -> kfree(priv)
-> 	ioctl() -> priv accessed
-> 
-> but it doesn't blow up. I guess because the former location of priv is accessible by container_of on
-> the miscdev. But that memory was freed right?
-
-You are dealing with two different structures with two different
-lifecycles and reference counts.  Yes, you can kind of try to tie them
-together here, but really, that way lies madness.  Why not just drop the
-misc device entirely and only use the struct device that the kernel
-created for you?  That would make everything much simpler.
-
-thanks,
-
-greg k-h
+Hello Dear
+My Name is Mr. Joyce Thomas. Contact me for more information on the
+transfer of ($7.9 million dollars) left by my late client from your
+Country. I want to present you as a business partner and next of kin
+of the fund. I will give you the details of this transaction, as soon
+as I hear from you. I need the information below:
+Full Name:
+Address:
+Occupation:
+Age:
+Personal Email:
+Personal Telephone:
+Best Regards,
+Mr.Joyce  Thomas
