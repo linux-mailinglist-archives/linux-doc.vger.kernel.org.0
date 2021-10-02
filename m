@@ -2,21 +2,22 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id A2C5F41FDAB
-	for <lists+linux-doc@lfdr.de>; Sat,  2 Oct 2021 20:22:11 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id EED5541FDB9
+	for <lists+linux-doc@lfdr.de>; Sat,  2 Oct 2021 20:31:40 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S233832AbhJBSX4 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Sat, 2 Oct 2021 14:23:56 -0400
-Received: from zeniv-ca.linux.org.uk ([142.44.231.140]:35624 "EHLO
-        zeniv-ca.linux.org.uk" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S233829AbhJBSXz (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Sat, 2 Oct 2021 14:23:55 -0400
-Received: from viro by zeniv-ca.linux.org.uk with local (Exim 4.94.2 #2 (Red Hat Linux))
-        id 1mWjMo-009FYI-Tn; Sat, 02 Oct 2021 18:04:11 +0000
-Date:   Sat, 2 Oct 2021 18:04:10 +0000
-From:   Al Viro <viro@zeniv.linux.org.uk>
-To:     Alexander Popov <alex.popov@linux.com>
-Cc:     Jonathan Corbet <corbet@lwn.net>,
+        id S233851AbhJBSdY (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Sat, 2 Oct 2021 14:33:24 -0400
+Received: from mail.kernel.org ([198.145.29.99]:34112 "EHLO mail.kernel.org"
+        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
+        id S233845AbhJBSdY (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Sat, 2 Oct 2021 14:33:24 -0400
+Received: by mail.kernel.org (Postfix) with ESMTPSA id DB9B36008E;
+        Sat,  2 Oct 2021 18:31:34 +0000 (UTC)
+Date:   Sat, 2 Oct 2021 14:31:32 -0400
+From:   Steven Rostedt <rostedt@goodmis.org>
+To:     Al Viro <viro@zeniv.linux.org.uk>
+Cc:     Alexander Popov <alex.popov@linux.com>,
+        Jonathan Corbet <corbet@lwn.net>,
         Paul McKenney <paulmck@kernel.org>,
         Andrew Morton <akpm@linux-foundation.org>,
         Thomas Gleixner <tglx@linutronix.de>,
@@ -40,7 +41,6 @@ Cc:     Jonathan Corbet <corbet@lwn.net>,
         Mark Rutland <mark.rutland@arm.com>,
         Andy Lutomirski <luto@kernel.org>,
         Dave Hansen <dave.hansen@linux.intel.com>,
-        Steven Rostedt <rostedt@goodmis.org>,
         Thomas Garnier <thgarnie@google.com>,
         Will Deacon <will.deacon@arm.com>,
         Ard Biesheuvel <ard.biesheuvel@linaro.org>,
@@ -51,37 +51,34 @@ Cc:     Jonathan Corbet <corbet@lwn.net>,
         linux-hardening@vger.kernel.org, linux-doc@vger.kernel.org,
         linux-kernel@vger.kernel.org, notify@kernel.org
 Subject: Re: [PATCH] Introduce the pkill_on_warn boot parameter
-Message-ID: <YVifGtn3LctrWOwg@zeniv-ca.linux.org.uk>
+Message-ID: <20211002143132.3a51a8e0@oasis.local.home>
+In-Reply-To: <YVifGtn3LctrWOwg@zeniv-ca.linux.org.uk>
 References: <20210929185823.499268-1-alex.popov@linux.com>
+        <YVifGtn3LctrWOwg@zeniv-ca.linux.org.uk>
+X-Mailer: Claws Mail 3.18.0 (GTK+ 2.24.33; x86_64-pc-linux-gnu)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20210929185823.499268-1-alex.popov@linux.com>
-Sender: Al Viro <viro@ftp.linux.org.uk>
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 7bit
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Wed, Sep 29, 2021 at 09:58:23PM +0300, Alexander Popov wrote:
+On Sat, 2 Oct 2021 18:04:10 +0000
+Al Viro <viro@zeniv.linux.org.uk> wrote:
 
-> --- a/kernel/panic.c
-> +++ b/kernel/panic.c
-> @@ -53,6 +53,7 @@ static int pause_on_oops_flag;
->  static DEFINE_SPINLOCK(pause_on_oops_lock);
->  bool crash_kexec_post_notifiers;
->  int panic_on_warn __read_mostly;
-> +int pkill_on_warn __read_mostly;
->  unsigned long panic_on_taint;
->  bool panic_on_taint_nousertaint = false;
->  
-> @@ -610,6 +611,9 @@ void __warn(const char *file, int line, void *caller, unsigned taint,
->  
->  	print_oops_end_marker();
->  
-> +	if (pkill_on_warn && system_state >= SYSTEM_RUNNING)
-> +		do_group_exit(SIGKILL);
-> +
+> > @@ -610,6 +611,9 @@ void __warn(const char *file, int line, void *caller, unsigned taint,
+> >  
+> >  	print_oops_end_marker();
+> >  
+> > +	if (pkill_on_warn && system_state >= SYSTEM_RUNNING)
+> > +		do_group_exit(SIGKILL);
+> > +  
+> 
+> Wait a sec...  do_group_exit() is very much not locking-neutral.
+> Aren't you introducing a bunch of potential deadlocks by adding
+> that?
 
-Wait a sec...  do_group_exit() is very much not locking-neutral.
-Aren't you introducing a bunch of potential deadlocks by adding
-that?
+Perhaps add an irq_work() here to trigger the do_group_exit() from a
+"safe" interrupt context?
+
+-- Steve
