@@ -2,143 +2,125 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 08F77422BBB
-	for <lists+linux-doc@lfdr.de>; Tue,  5 Oct 2021 17:01:55 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 23BE7422C13
+	for <lists+linux-doc@lfdr.de>; Tue,  5 Oct 2021 17:13:46 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S235545AbhJEPDo (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 5 Oct 2021 11:03:44 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:53022 "EHLO
+        id S235703AbhJEPPf (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 5 Oct 2021 11:15:35 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:55918 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S235496AbhJEPDn (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 5 Oct 2021 11:03:43 -0400
-Received: from mail-ed1-x529.google.com (mail-ed1-x529.google.com [IPv6:2a00:1450:4864:20::529])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 13825C061749
-        for <linux-doc@vger.kernel.org>; Tue,  5 Oct 2021 08:01:53 -0700 (PDT)
-Received: by mail-ed1-x529.google.com with SMTP id l7so9319edq.3
-        for <linux-doc@vger.kernel.org>; Tue, 05 Oct 2021 08:01:53 -0700 (PDT)
+        with ESMTP id S235090AbhJEPPe (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 5 Oct 2021 11:15:34 -0400
+Received: from mail-wr1-x433.google.com (mail-wr1-x433.google.com [IPv6:2a00:1450:4864:20::433])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id C4827C061749
+        for <linux-doc@vger.kernel.org>; Tue,  5 Oct 2021 08:13:43 -0700 (PDT)
+Received: by mail-wr1-x433.google.com with SMTP id u18so38010293wrg.5
+        for <linux-doc@vger.kernel.org>; Tue, 05 Oct 2021 08:13:43 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=google.com; s=20210112;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc;
-        bh=MCRBn6b3qoryRYKrN4/1JLdhAV/hIrIuL5Vq/GngAlY=;
-        b=mYs57AFKIU7i2tGt83F0nC59rmMH39ZE/i0lP71h3TsKRyHDKezP9q7FrxkmATPtlf
-         dGa0kEDJIDfss8qfgAnlRnyfYvQ2i7mQoH2I3P1abTTtt+OeEy/LCUGj8P5NvKjX05mN
-         xnmD4sdB0mtma37jmJXKGdTP/xu9ChYuEBX9+txpvXX0uXxrdPpbd23pNmiG+/8J8FIv
-         Ae0Vl22NZITYbOHKF0lnHOpEIpJ0l4aR7hdvwJ6AzlazgpMmFAmyJC6QJ70tekXfKEq7
-         91eoo0kkirf4et2kRi+3OckOh4yzKDKhGcpSeA27bU8c5sO570Oz5HcDbIJrP6QLAezc
-         V27w==
+        h=date:from:to:cc:subject:message-id:references:mime-version
+         :content-disposition:in-reply-to:user-agent;
+        bh=PWCYDGGbLpSMPRQR7ZAmGiH0fGx9oqlU5WKkX0Mb0qU=;
+        b=C1yvQF0yUncj5rEDsqvtLNOh+x9A7zVvyBPM9/XAkJfELhfc8AMhISJj64NOPiegea
+         6JaYRoh2a4a8Ncik3T0v2Z6LPHWswvBeUX8M6NZ4jCkN4IEr3RdBho3Kd9rLpWJpM0V7
+         nAz428jBaLXsB3HI0R0UXCgzALnskQ+gT1Wuytyc91NjoM4QkNs6yNoNLLP+H7Kf3aF7
+         4mPFuU3GM98fENzdmGwNxmmAh6ePRObn3Xcmc0CdJfqyOPb1S20AuzfRXoOXfq0YejFs
+         5rUMpTiUdv/XOm8Bnfc39Y8QxXGwt9qYF2AbGEI/cO9MnsFx/isXdnG/CQge/XznLXKO
+         qP7w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc;
-        bh=MCRBn6b3qoryRYKrN4/1JLdhAV/hIrIuL5Vq/GngAlY=;
-        b=y28ubz3KlSnoK/Hi+qKC8PFVNSdTlbh4ZBE2lcB8EdqKXaxRV5Wn7nOtEevfFP71+I
-         14hIa4FoZ7MX2QX2oVi+r02wKHuf0WUo569waNDz+MfLAKDFr6mhDt913FR+B5jqvO9Q
-         ZpurTGZH+pci5acqK7HMjNUet4nKcePLYEhFOKdoYVjlpGP0FHlZJz3cDGJtfLtRIcUZ
-         4YX3mrEi/IzxCh5dW0+5JDcG8OL/GO20S1SsympLTuwNy5N4i5oh7iRMeCxzD7CPcJdK
-         uR9kkzCL9RCxqNCLm/nkQUY6XYigakhkM2yUNgoso75ynnR9SxBKepEUOprT75ypd72H
-         F4eg==
-X-Gm-Message-State: AOAM5304FrEk/M5LqdtwOc814QZiKS0ifu0JvUXn9JiOIvt3cJNPbvlK
-        lfbFvuZ32GVt/nATzsUozDyYUfdpfyYoyK1eMSdBCQ==
-X-Google-Smtp-Source: ABdhPJxAQ/4UsSMxvuXIEURMPvaas9ykcgFi/q1H4N/drfI2wcYk/4KQHSLGIJlx20Qi7odiErbbeE2ik8768PcSvV4=
-X-Received: by 2002:a05:6402:450:: with SMTP id p16mr26584475edw.162.1633446111422;
- Tue, 05 Oct 2021 08:01:51 -0700 (PDT)
+        h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+         :mime-version:content-disposition:in-reply-to:user-agent;
+        bh=PWCYDGGbLpSMPRQR7ZAmGiH0fGx9oqlU5WKkX0Mb0qU=;
+        b=VxeWCI0/uZ/lgMRLEbG/Ma9DrhvrxdveqyXEAWeuwoObx778PJZz+Aej0/V/91bd1c
+         it9iCMT97eH1E17xADG86q77F0WPZ+vS0Icia2Oerao3RdUlS4sf1aIZoLImeOtt7P9Q
+         OvHxJXoYfh42tEbWvILns0bI2DFcaIzXxEbLa1k8SoU8rKg2ZKYuEBwXqXXGvDap/Jga
+         GyB7oL1q34udyHLYbGltUxBaTAy2nFhrLbvdamgPGUn4P8e5LSdr3jnQn6gYm+/zi2A4
+         XLu4BF/ZhruqiUENytvE+T0ARe18R09jEqfoKaMPNZBlItOet/Brifhv90IxrR6SqEa3
+         QHmg==
+X-Gm-Message-State: AOAM532ySq3nTpRHCSSKEpIwOljufLhLUA0m+C7urCK9SdiG4A/ZvR1v
+        wCCISBtK+Bh0FhEob/148+rySw==
+X-Google-Smtp-Source: ABdhPJyHHQBSLIiixiOSj+09iVqstHSdw/JX82YLQyteKWj/W+BkVDOWUO25EZpQcPNg2mg9qLt/bg==
+X-Received: by 2002:adf:e6d0:: with SMTP id y16mr22269412wrm.181.1633446822192;
+        Tue, 05 Oct 2021 08:13:42 -0700 (PDT)
+Received: from elver.google.com ([2a00:79e0:15:13:e44f:5054:55f8:fcb8])
+        by smtp.gmail.com with ESMTPSA id a2sm4377335wru.82.2021.10.05.08.13.41
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 05 Oct 2021 08:13:41 -0700 (PDT)
+Date:   Tue, 5 Oct 2021 17:13:35 +0200
+From:   Marco Elver <elver@google.com>
+To:     Peter Zijlstra <peterz@infradead.org>
+Cc:     "Paul E . McKenney" <paulmck@kernel.org>,
+        Alexander Potapenko <glider@google.com>,
+        Boqun Feng <boqun.feng@gmail.com>,
+        Borislav Petkov <bp@alien8.de>,
+        Dmitry Vyukov <dvyukov@google.com>,
+        Ingo Molnar <mingo@kernel.org>,
+        Josh Poimboeuf <jpoimboe@redhat.com>,
+        Mark Rutland <mark.rutland@arm.com>,
+        Thomas Gleixner <tglx@linutronix.de>,
+        Waiman Long <longman@redhat.com>,
+        Will Deacon <will@kernel.org>, kasan-dev@googlegroups.com,
+        linux-arch@vger.kernel.org, linux-doc@vger.kernel.org,
+        linux-kbuild@vger.kernel.org, linux-kernel@vger.kernel.org,
+        linux-mm@kvack.org, x86@kernel.org
+Subject: Re: [PATCH -rcu/kcsan 23/23] objtool, kcsan: Remove memory barrier
+ instrumentation from noinstr
+Message-ID: <YVxrn2658Xdf0Asf@elver.google.com>
+References: <20211005105905.1994700-1-elver@google.com>
+ <20211005105905.1994700-24-elver@google.com>
+ <YVxjH2AtjvB8BDMD@hirez.programming.kicks-ass.net>
 MIME-Version: 1.0
-References: <20211001181627.394921-1-bgeffon@google.com> <YVtH60zyzq9AhUv2@google.com>
- <CADyq12xk-2Fhnf_rJQ70oC1_98OEBJqwxOt6z=PpJa5V=X3dFQ@mail.gmail.com> <YVtqHv+p3uYkbu5E@google.com>
-In-Reply-To: <YVtqHv+p3uYkbu5E@google.com>
-From:   Brian Geffon <bgeffon@google.com>
-Date:   Tue, 5 Oct 2021 11:01:15 -0400
-Message-ID: <CADyq12w2sHdeBhAKVP+5GghHMqNZN+h36ydV7gi8QxOcHZ7f7A@mail.gmail.com>
-Subject: Re: [PATCH] zram: Allow backing device to be assigned after init
-To:     Minchan Kim <minchan@kernel.org>
-Cc:     Andrew Morton <akpm@linux-foundation.org>,
-        Nitin Gupta <ngupta@vflare.org>,
-        Sergey Senozhatsky <senozhatsky@chromium.org>,
-        Jonathan Corbet <corbet@lwn.net>,
-        LKML <linux-kernel@vger.kernel.org>, linux-doc@vger.kernel.org,
-        linux-block@vger.kernel.org,
-        Suleiman Souhlal <suleiman@google.com>,
-        Jesse Barnes <jsbarnes@google.com>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <YVxjH2AtjvB8BDMD@hirez.programming.kicks-ass.net>
+User-Agent: Mutt/2.0.5 (2021-01-21)
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Hi Minchan,
-Thank you for expanding on that. The only situation where there will
-be lock contention that is problematic is when we're storing the
-backing device the first time, all other times the lock will be held
-as a read. Once the backing device has been set it cannot be set again
-(it would return -EEXIST). I think no matter what if we're doing
-writeback, even with the optimization you're describing, you'd have to
-hold the zram->init_lock as read to validate that you have a writeback
-device. Does that make sense?
+On Tue, Oct 05, 2021 at 04:37PM +0200, Peter Zijlstra wrote:
+> On Tue, Oct 05, 2021 at 12:59:05PM +0200, Marco Elver wrote:
+> > Teach objtool to turn instrumentation required for memory barrier
+> > modeling into nops in noinstr text.
+> > 
+> > The __tsan_func_entry/exit calls are still emitted by compilers even
+> > with the __no_sanitize_thread attribute. The memory barrier
+> > instrumentation will be inserted explicitly (without compiler help), and
+> > thus needs to also explicitly be removed.
+> 
+> How is arm64 and others using kernel/entry + noinstr going to fix this?
+> 
+> ISTR they fully rely on the compilers not emitting instrumentation,
+> since they don't have objtool to fix up stray issues like this.
 
-Brian
+So this is where I'd like to hear if the approach of:
 
-On Mon, Oct 4, 2021 at 4:55 PM Minchan Kim <minchan@kernel.org> wrote:
->
-> On Mon, Oct 04, 2021 at 02:40:52PM -0400, Brian Geffon wrote:
-> > On Mon, Oct 4, 2021 at 2:29 PM Minchan Kim <minchan@kernel.org> wrote:
-> > >
-> > > On Fri, Oct 01, 2021 at 11:16:27AM -0700, Brian Geffon wrote:
-> > > > There does not appear to be a technical reason to not
-> > > > allow the zram backing device to be assigned after the
-> > > > zram device is initialized.
-> > > >
-> > > > This change will allow for the backing device to be assigned
-> > > > as long as no backing device is already assigned. In that
-> > > > event backing_dev would return -EEXIST.
-> > > >
-> > > > Signed-off-by: Brian Geffon <bgeffon@google.com>
-> > > > ---
-> > > >  drivers/block/zram/zram_drv.c | 6 +++---
-> > > >  1 file changed, 3 insertions(+), 3 deletions(-)
-> > > >
-> > > > diff --git a/drivers/block/zram/zram_drv.c b/drivers/block/zram/zram_drv.c
-> > > > index fcaf2750f68f..12b4555ee079 100644
-> > > > --- a/drivers/block/zram/zram_drv.c
-> > > > +++ b/drivers/block/zram/zram_drv.c
-> > > > @@ -462,9 +462,9 @@ static ssize_t backing_dev_store(struct device *dev,
-> > > >               return -ENOMEM;
-> > > >
-> > > >       down_write(&zram->init_lock);
-> > > > -     if (init_done(zram)) {
-> > > > -             pr_info("Can't setup backing device for initialized device\n");
-> > > > -             err = -EBUSY;
-> > > > +     if (zram->backing_dev) {
-> > > > +             pr_info("Backing device is already assigned\n");
-> > > > +             err = -EEXIST;
-> > > >               goto out;
-> > >
-> > > Hi Brian,
-> > >
-> >
-> > Hi Minchan,
-> >
-> > > I am worry about the inconsistency with other interface of current zram
-> > > set up. They were supposed to set it up before zram disksize setting
-> > > because it makes code more simple/maintainalbe in that we don't need
-> > > to check some feature on the fly.
-> > >
-> > > Let's think about when zram extends the writeback of incompressible
-> > > page on demand. The write path will need the backing_dev under
-> > > down_read(&zarm->init_lock) or other conditional variable to check
-> > > whether the feature is enabled or not on the fly.
-> >
-> > I don't follow what you mean by that, writeback_store already holds
-> > down_read(&zarm->init_lock).
->
-> I should have explained a bit more. Sorry about that.
-> I am thinking about a feature to deal with incompressible page.
-> Let's have an example to handle incompressible page for that.
->
-> zram_bvec_rw
->   zram_bvec_write
->     if (comp_len >= huge_class)
->         zs_page_writeback
->             down_read(&zram->init_lock) or some other way
->
-> It's just idea for incompressible page but we might intorduce
-> the way for other compresible pages, too at some condition.
+ | #if !defined(CONFIG_ARCH_WANTS_NO_INSTR) || defined(CONFIG_STACK_VALIDATION)
+ | ...
+ | #else
+ | #define kcsan_noinstr noinstr
+ | static __always_inline bool within_noinstr(unsigned long ip)
+ | {
+ | 	return (unsigned long)__noinstr_text_start <= ip &&
+ | 	       ip < (unsigned long)__noinstr_text_end;
+ | }
+ | #endif
+
+and then (using the !STACK_VALIDATION definitions)
+
+ | kcsan_noinstr void instrumentation_may_appear_in_noinstr(void)
+ | {
+ | 	if (within_noinstr(_RET_IP_))
+ | 		return;
+
+works for the non-x86 arches that select ARCH_WANTS_NO_INSTR.
+
+If it doesn't I can easily just remove kcsan_noinstr/within_noinstr, and
+add a "depends on !ARCH_WANTS_NO_INSTR || STACK_VALIDATION" to the
+KCSAN_WEAK_MEMORY option.
+
+Looking at a previous discussion [1], however, I was under the
+impression that this would work.
+
+[1] https://lkml.kernel.org/r/CANpmjNMAZiW-Er=2QDgGP+_3hg1LOvPYcbfGSPMv=aR6MVTB-g@mail.gmail.com
