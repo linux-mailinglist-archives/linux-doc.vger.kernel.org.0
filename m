@@ -2,100 +2,144 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 902184221F3
-	for <lists+linux-doc@lfdr.de>; Tue,  5 Oct 2021 11:16:09 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 8C642422235
+	for <lists+linux-doc@lfdr.de>; Tue,  5 Oct 2021 11:24:12 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S233454AbhJEJR6 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 5 Oct 2021 05:17:58 -0400
-Received: from smtp-out1.suse.de ([195.135.220.28]:32864 "EHLO
-        smtp-out1.suse.de" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S232920AbhJEJR5 (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 5 Oct 2021 05:17:57 -0400
-Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
-        (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-         key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
-        (No client certificate requested)
-        by smtp-out1.suse.de (Postfix) with ESMTPS id D14BF222E2;
-        Tue,  5 Oct 2021 09:16:05 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.cz; s=susede2_rsa;
-        t=1633425365; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-         mime-version:mime-version:content-type:content-type:
-         content-transfer-encoding:content-transfer-encoding:
-         in-reply-to:in-reply-to:references:references;
-        bh=/ThOmbiGRYKn2nnNwyvJcqEVvTNtr1GRMmAy+3vp6S8=;
-        b=N+YuAsS0RWIkK8xSiaVHWPrcFj6Vkw5RjrUbcXkNWatj1zS9tp7bJ2LIFCYBeBqvSsEYUH
-        /iTUxFMrteXb9ipCsAvKDk9+1W+Nqo6ARm5jzX8teZhaVWsLbm81JkgtrPB5gyjIPCacgj
-        iPyurgn4Fdd7QHkVFLiT5BYKQSa7fCc=
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.cz;
-        s=susede2_ed25519; t=1633425365;
-        h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-         mime-version:mime-version:content-type:content-type:
-         content-transfer-encoding:content-transfer-encoding:
-         in-reply-to:in-reply-to:references:references;
-        bh=/ThOmbiGRYKn2nnNwyvJcqEVvTNtr1GRMmAy+3vp6S8=;
-        b=df+BMW9OkAfq6YBbymxZbcDCld7xAbE3FMddRc4PnOqTXLGNmbzwPjAM4RDqkYJhHIdqra
-        4wCAPW6bQiQkJ6AQ==
-Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
-        (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-         key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
-        (No client certificate requested)
-        by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id 8C631133A7;
-        Tue,  5 Oct 2021 09:16:05 +0000 (UTC)
-Received: from dovecot-director2.suse.de ([192.168.254.65])
-        by imap2.suse-dmz.suse.de with ESMTPSA
-        id rLeKIdUXXGGuegAAMHmgww
-        (envelope-from <vbabka@suse.cz>); Tue, 05 Oct 2021 09:16:05 +0000
-Message-ID: <60ffc506-236c-faf7-ba64-5d853d3a67e7@suse.cz>
-Date:   Tue, 5 Oct 2021 11:16:05 +0200
+        id S233071AbhJEJ0B (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 5 Oct 2021 05:26:01 -0400
+Received: from forward500o.mail.yandex.net ([37.140.190.195]:59362 "EHLO
+        forward500o.mail.yandex.net" rhost-flags-OK-OK-OK-OK)
+        by vger.kernel.org with ESMTP id S232871AbhJEJ0B (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 5 Oct 2021 05:26:01 -0400
+X-Greylist: delayed 377 seconds by postgrey-1.27 at vger.kernel.org; Tue, 05 Oct 2021 05:25:59 EDT
+Received: from myt5-6c0659e8c6cb.qloud-c.yandex.net (myt5-6c0659e8c6cb.qloud-c.yandex.net [IPv6:2a02:6b8:c12:271e:0:640:6c06:59e8])
+        by forward500o.mail.yandex.net (Yandex) with ESMTP id A206F941E36;
+        Tue,  5 Oct 2021 12:17:48 +0300 (MSK)
+Received: from myt5-ca5ec8faf378.qloud-c.yandex.net (2a02:6b8:c12:2514:0:640:ca5e:c8fa [2a02:6b8:c12:2514:0:640:ca5e:c8fa])
+        by myt5-6c0659e8c6cb.qloud-c.yandex.net (mxback/Yandex) with ESMTP id IyV6tEzelD-HkDqMhNI;
+        Tue, 05 Oct 2021 12:17:48 +0300
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=maquefel.me; s=mail; t=1633425468;
+        bh=CrnGMerQ4LBYjjGbgeqFgGHVtZrQ+QTtn5a0VX0cO1Y=;
+        h=In-Reply-To:Message-ID:Subject:To:From:References:Date:Cc;
+        b=dehZ7uZt+fO6YaaLE03MQykhBGAWbnTmJAz787q5v+kP+tnjCX9x7H9RnogO2XnQp
+         o2LRZpnAlGHdRWJteqIyL14dh5xgLy2vRi3CnyXYsauaUBuFMzC+aXli5//Spgpk63
+         AQfi00eYfDiMTtzwMWrmEkxl0sCLVfek9C7+wa9k=
+Authentication-Results: myt5-6c0659e8c6cb.qloud-c.yandex.net; dkim=pass header.i=@maquefel.me
+Received: by myt5-ca5ec8faf378.qloud-c.yandex.net (smtp/Yandex) with ESMTPS id 43frcM9OPL-HjPCRD6R;
+        Tue, 05 Oct 2021 12:17:46 +0300
+        (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+        (Client certificate not present)
+Date:   Tue, 5 Oct 2021 12:17:44 +0300
+From:   Nikita Shubin <nikita.shubin@maquefel.me>
+To:     Atish Patra <atish.patra@wdc.com>
+Cc:     linux-kernel@vger.kernel.org,
+        Alexander Shishkin <alexander.shishkin@linux.intel.com>,
+        Anup Patel <anup.patel@wdc.com>,
+        Ard Biesheuvel <ardb@kernel.org>,
+        "Darrick J. Wong" <djwong@kernel.org>, devicetree@vger.kernel.org,
+        Guo Ren <guoren@linux.alibaba.com>,
+        Heinrich Schuchardt <xypron.glpk@gmx.de>,
+        Jiri Olsa <jolsa@redhat.com>,
+        John Garry <john.garry@huawei.com>,
+        Jonathan Corbet <corbet@lwn.net>, linux-doc@vger.kernel.org,
+        linux-perf-users@vger.kernel.org, linux-riscv@lists.infradead.org,
+        Nick Kossifidis <mick@ics.forth.gr>,
+        Palmer Dabbelt <palmer@dabbelt.com>,
+        Paul Walmsley <paul.walmsley@sifive.com>,
+        Rob Herring <robh+dt@kernel.org>,
+        Vincent Chen <vincent.chen@sifive.com>
+Subject: Re: [v3 00/10] Improve RISC-V Perf support using SBI PMU and
+ sscofpmf extension
+Message-ID: <20211005121744.728385be@redslave.neermore.group>
+In-Reply-To: <20210910192757.2309100-1-atish.patra@wdc.com>
+References: <20210910192757.2309100-1-atish.patra@wdc.com>
+X-Mailer: Claws Mail 3.17.7 (GTK+ 2.24.33; x86_64-pc-linux-gnu)
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.1.2
-Content-Language: en-US
-To:     Mel Gorman <mgorman@suse.de>, NeilBrown <neilb@suse.de>
-Cc:     Andrew Morton <akpm@linux-foundation.org>,
-        Theodore Ts'o <tytso@mit.edu>,
-        Andreas Dilger <adilger.kernel@dilger.ca>,
-        "Darrick J. Wong" <djwong@kernel.org>,
-        Matthew Wilcox <willy@infradead.org>,
-        Michal Hocko <mhocko@suse.com>,
-        Jesper Dangaard Brouer <jbrouer@redhat.com>,
-        ". Dave Chinner" <david@fromorbit.com>,
-        Jonathan Corbet <corbet@lwn.net>, linux-xfs@vger.kernel.org,
-        linux-ext4@vger.kernel.org, linux-fsdevel@vger.kernel.org,
-        linux-nfs@vger.kernel.org, linux-mm@kvack.org,
-        linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org
-References: <163184698512.29351.4735492251524335974.stgit@noble.brown>
- <163184741776.29351.3565418361661850328.stgit@noble.brown>
- <20210917144233.GD3891@suse.de>
-From:   Vlastimil Babka <vbabka@suse.cz>
-Subject: Re: [PATCH 1/6] MM: Support __GFP_NOFAIL in alloc_pages_bulk_*() and
- improve doco
-In-Reply-To: <20210917144233.GD3891@suse.de>
-Content-Type: text/plain; charset=UTF-8
+Content-Type: text/plain; charset=US-ASCII
 Content-Transfer-Encoding: 7bit
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On 9/17/21 16:42, Mel Gorman wrote:
-> I'm top-posting to cc Jesper with full context of the patch. I don't
-> have a problem with this patch other than the Fixes: being a bit
-> marginal, I should have acked as Mel Gorman <mgorman@suse.de> and the
-> @gfp in the comment should have been @gfp_mask.
-> 
-> However, an assumption the API design made was that it should fail fast
-> if memory is not quickly available but have at least one page in the
-> array. I don't think the network use case cares about the situation where
-> the array is already populated but I'd like Jesper to have the opportunity
-> to think about it.  It's possible he would prefer it's explicit and the
-> check becomes
-> (!nr_populated || ((gfp_mask & __GFP_NOFAIL) && !nr_account)) to
+On Fri, 10 Sep 2021 12:27:47 -0700
+Atish Patra <atish.patra@wdc.com> wrote:
 
-Note that AFAICS nr_populated is an incomplete piece of information, as we
-initially only count pages in the page_array as nr_populated up to the first
-NULL pointer. So even before Neil's patch we could decide to allocate even
-if there are pre-existing pages, but placed later in the array. Which could
-be rather common if the array consumer starts from index 0? So with Neil's
-patch this at least becomes consistent, while the check suggested by Mel
-leaves there the weird dependency on where pre-existing pages appear in the
-page_array.
+Hello Atish,
+
+> Perf stat:
+> =========
+> 
+> [root@fedora-riscv riscv]# perf stat -e r8000000000000005 -e
+> r8000000000000007 -e r8000000000000006 -e r0000000000020002 -e
+> r0000000000020004 -e branch-misses -e cache-misses -e
+> dTLB-load-misses -e dTLB-store-misses -e iTLB-load-misses -e cycles
+> -e instructions ./hackbench -pipe 15 process Running with 15*40 (==
+> 600) tasks. Time: 6.578
+> 
+>  Performance counter stats for './hackbench -pipe 15 process':
+> 
+>              6,491      r8000000000000005      (52.59%) -->
+> SBI_PMU_FW_SET_TIMER 20,433      r8000000000000007      (60.74%) -->
+> SBI_PMU_FW_IPI_RECVD 21,271      r8000000000000006      (68.71%) -->
+> SBI_PMU_FW_IPI_SENT 0      r0000000000020002      (76.55%)
+>      <not counted>      r0000000000020004      (0.00%)
+>      <not counted>      branch-misses          (0.00%)
+>      <not counted>      cache-misses           (0.00%)
+>         57,537,853      dTLB-load-misses       (9.49%)
+>          2,821,147      dTLB-store-misses      (18.64%)
+>         52,928,130      iTLB-load-misses       (27.53%)
+>     89,521,791,110      cycles                 (36.08%)
+>     90,678,132,464      instructions #    1.01  insn per cycle
+> (44.44%)
+> 
+>        6.975908032 seconds time elapsed
+> 
+>        3.130950000 seconds user
+>       24.353310000 seconds sys
+> 
+
+Tested your patch series with qemu and got results as expected:
+
+perf stat -e r8000000000000005 -e r8000000000000007 \
+-e r8000000000000006 -e r0000000000020002 -e r0000000000020004 -e
+branch-misses \ -e cache-misses -e dTLB-load-misses -e
+dTLB-store-misses -e iTLB-load-misses \ -e cycles -e instructions
+./hackbench -pipe 15 process
+
+Running with 15*40 (== 600) tasks.nch -pipe 15 process
+Time: 20.027
+
+ Performance counter stats for './hackbench -pipe 15 process':
+
+              4896      r8000000000000005
+                            (53.34%) 0      r8000000000000007
+                                                (61.20%) 0
+              r8000000000000006
+                  (68.88%) 0      r0000000000020002
+                                      (76.53%) <not counted>
+              r0000000000020004
+                  (0.00%) <not counted>      branch-misses
+                                                 (0.00%) <not counted>
+                  cache-misses
+                      (0.00%) 48414917      dTLB-load-misses
+                                                (9.87%) 2427413
+              dTLB-store-misses
+                  (19.43%) 46958092      iTLB-load-misses
+                                             (28.58%) 69245163600
+              cycles
+                  (37.09%) 70334279943      instructions              #
+                 1.02  insn per cycle           (45.24%)
+
+      20.895871900 seconds time elapsed
+
+       2.724942000 seconds user
+      18.126277000 seconds sys
+
+perf top/record also works.
+
+Tested-by: Nikita Shubin <n.shubin@yadro.com>
+
+Yours,
+Nikita Shubin
+
+
