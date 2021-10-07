@@ -2,128 +2,171 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 6AB3E425020
-	for <lists+linux-doc@lfdr.de>; Thu,  7 Oct 2021 11:31:25 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 810754250B0
+	for <lists+linux-doc@lfdr.de>; Thu,  7 Oct 2021 12:07:47 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S240743AbhJGJdQ (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 7 Oct 2021 05:33:16 -0400
-Received: from mga09.intel.com ([134.134.136.24]:60352 "EHLO mga09.intel.com"
-        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S240712AbhJGJdN (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Thu, 7 Oct 2021 05:33:13 -0400
-X-IronPort-AV: E=McAfee;i="6200,9189,10129"; a="226106498"
-X-IronPort-AV: E=Sophos;i="5.85,354,1624345200"; 
-   d="scan'208";a="226106498"
-Received: from orsmga008.jf.intel.com ([10.7.209.65])
-  by orsmga102.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 07 Oct 2021 02:31:19 -0700
-X-IronPort-AV: E=Sophos;i="5.85,354,1624345200"; 
-   d="scan'208";a="488899530"
-Received: from roliveir-mobl1.ger.corp.intel.com (HELO localhost) ([10.249.41.10])
-  by orsmga008-auth.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 07 Oct 2021 02:31:16 -0700
-From:   Jani Nikula <jani.nikula@linux.intel.com>
-To:     Thorsten Leemhuis <linux@leemhuis.info>,
-        Jonathan Corbet <corbet@lwn.net>
-Cc:     Randy Dunlap <rdunlap@infradead.org>,
-        Konstantin Ryabitsev <konstantin@linuxfoundation.org>,
-        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
-        Daniel Vetter <daniel.vetter@ffwll.ch>
-Subject: Re: [PATCH v1 2/2] docs: submitting-patches: make section about the Link: tag more explicit
-In-Reply-To: <d97daa2791a7598a6ee4e853d3c6b536919191d5.1633593385.git.linux@leemhuis.info>
-Organization: Intel Finland Oy - BIC 0357606-4 - Westendinkatu 7, 02160 Espoo
-References: <cover.1633593385.git.linux@leemhuis.info> <d97daa2791a7598a6ee4e853d3c6b536919191d5.1633593385.git.linux@leemhuis.info>
-Date:   Thu, 07 Oct 2021 12:31:12 +0300
-Message-ID: <87pmshyye7.fsf@intel.com>
+        id S240557AbhJGKJj (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 7 Oct 2021 06:09:39 -0400
+Received: from smtp-out1.suse.de ([195.135.220.28]:34754 "EHLO
+        smtp-out1.suse.de" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S240540AbhJGKJi (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Thu, 7 Oct 2021 06:09:38 -0400
+Received: from relay2.suse.de (relay2.suse.de [149.44.160.134])
+        by smtp-out1.suse.de (Postfix) with ESMTP id A9C7722526;
+        Thu,  7 Oct 2021 10:07:43 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
+        t=1633601263; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+         mime-version:mime-version:content-type:content-type:
+         in-reply-to:in-reply-to:references:references;
+        bh=H4Ul2HxwLohvq2LxFkQLFFYYgikdgrah0DTLC7cFiY0=;
+        b=quSKVcFrsqj8pOlL7N/kApBS4N4Hnnreq8O3OeVVlo2YqiBeMCubqiCrN23pnvEkGkRujC
+        EbSln1J9I0kGz4w/KXsTVaUpaYrZ9GM4yb5q+leWfbR7h/2lWIE/KwUJw6YVdC1YBVkZ/q
+        lkL9wAvpj+T7f2AX9jcpxm/i65rYKhY=
+Received: from suse.cz (unknown [10.100.201.86])
+        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+        (No client certificate requested)
+        by relay2.suse.de (Postfix) with ESMTPS id 5B313A3B81;
+        Thu,  7 Oct 2021 10:07:43 +0000 (UTC)
+Date:   Thu, 7 Oct 2021 12:07:42 +0200
+From:   Michal Hocko <mhocko@suse.com>
+To:     Dave Chinner <david@fromorbit.com>
+Cc:     Vlastimil Babka <vbabka@suse.cz>, NeilBrown <neilb@suse.de>,
+        Andrew Morton <akpm@linux-foundation.org>,
+        Theodore Ts'o <tytso@mit.edu>,
+        Andreas Dilger <adilger.kernel@dilger.ca>,
+        "Darrick J. Wong" <djwong@kernel.org>,
+        Matthew Wilcox <willy@infradead.org>,
+        Mel Gorman <mgorman@suse.de>, Jonathan Corbet <corbet@lwn.net>,
+        linux-xfs@vger.kernel.org, linux-ext4@vger.kernel.org,
+        linux-fsdevel@vger.kernel.org, linux-nfs@vger.kernel.org,
+        linux-mm@kvack.org, linux-kernel@vger.kernel.org,
+        linux-doc@vger.kernel.org
+Subject: Re: [PATCH 2/6] MM: improve documentation for __GFP_NOFAIL
+Message-ID: <YV7G7gyfZkmw7/Ae@dhcp22.suse.cz>
+References: <163184698512.29351.4735492251524335974.stgit@noble.brown>
+ <163184741778.29351.16920832234899124642.stgit@noble.brown>
+ <b680fb87-439b-0ba4-cf9f-33d729f27941@suse.cz>
+ <YVwyhDnE/HEnoLAi@dhcp22.suse.cz>
+ <eba04a07-99da-771a-ab6b-36de41f9f120@suse.cz>
+ <20211006231452.GF54211@dread.disaster.area>
 MIME-Version: 1.0
-Content-Type: text/plain
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20211006231452.GF54211@dread.disaster.area>
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Thu, 07 Oct 2021, Thorsten Leemhuis <linux@leemhuis.info> wrote:
-> Mention the 'Link' tag in the section about adding URLs to the commit
-> msg, which makes it easier to find its meaning with a text search. For
-> the same reason and to also improve comprehensibility provide an
-> example.
->
-> Slightly improve the text at the same time to make it more obvious
-> developers are meant to add links to issue reports in mailing list
-> archives, as those allow regression tracking efforts to automatically
-> check which bugs got resolved.
->
-> Move the section also downwards slightly, to reduce jumping back and
-> forth between aspects relevant for the top and the bottom part of the
-> commit msg.
+On Thu 07-10-21 10:14:52, Dave Chinner wrote:
+> On Tue, Oct 05, 2021 at 02:27:45PM +0200, Vlastimil Babka wrote:
+> > On 10/5/21 13:09, Michal Hocko wrote:
+> > > On Tue 05-10-21 11:20:51, Vlastimil Babka wrote:
+> > > [...]
+> > >> > --- a/include/linux/gfp.h
+> > >> > +++ b/include/linux/gfp.h
+> > >> > @@ -209,7 +209,11 @@ struct vm_area_struct;
+> > >> >   * used only when there is no reasonable failure policy) but it is
+> > >> >   * definitely preferable to use the flag rather than opencode endless
+> > >> >   * loop around allocator.
+> > >> > - * Using this flag for costly allocations is _highly_ discouraged.
+> > >> > + * Use of this flag may lead to deadlocks if locks are held which would
+> > >> > + * be needed for memory reclaim, write-back, or the timely exit of a
+> > >> > + * process killed by the OOM-killer.  Dropping any locks not absolutely
+> > >> > + * needed is advisable before requesting a %__GFP_NOFAIL allocate.
+> > >> > + * Using this flag for costly allocations (order>1) is _highly_ discouraged.
+> > >> 
+> > >> We define costly as 3, not 1. But sure it's best to avoid even order>0 for
+> > >> __GFP_NOFAIL. Advising order>1 seems arbitrary though?
+> > > 
+> > > This is not completely arbitrary. We have a warning for any higher order
+> > > allocation.
+> > > rmqueue:
+> > > 	WARN_ON_ONCE((gfp_flags & __GFP_NOFAIL) && (order > 1));
+> > 
+> > Oh, I missed that.
+> > 
+> > > I do agree that "Using this flag for higher order allocations is
+> > > _highly_ discouraged.
+> > 
+> > Well, with the warning in place this is effectively forbidden, not just
+> > discouraged.
+> 
+> Yup, especially as it doesn't obey __GFP_NOWARN.
+> 
+> See commit de2860f46362 ("mm: Add kvrealloc()") as a direct result
+> of unwittingly tripping over this warning when adding __GFP_NOFAIL
+> annotations to replace open coded high-order kmalloc loops that have
+> been in place for a couple of decades without issues.
+> 
+> Personally I think that the way __GFP_NOFAIL is first of all
+> recommended over open coded loops and then only later found to be
+> effectively forbidden and needing to be replaced with open coded
+> loops to be a complete mess.
 
-FWIW, we've been using the Link: tag in the drm-misc and drm-intel trees
-to reference the patch (that became the commit) in the freedesktop.org
-patchwork instance by message-id. This is almost exclusively the only
-way we use the Link: tag, and we've been doing this for about 5 years
-now. It gets automatically added by the tooling we use while applying
-patches. You get to the discussion, patch series, and Intel CI test
-results via the link.
+Well, there are two things. Opencoding something that _can_ be replaced
+by __GFP_NOFAIL and those that cannot because the respective allocator
+doesn't really support that semantic. kvmalloc is explicit about that
+IIRC. If you have a better way to consolidate the documentation then I
+am all for it.
 
-For ages, References: tag has been used the way described in this patch.
+> Not to mention on the impossibility of using __GFP_NOFAIL with
+> kvmalloc() calls. Just what do we expect kmalloc_node(__GFP_NORETRY
+> | __GFP_NOFAIL) to do, exactly?
 
-BR,
-Jani.
+This combination doesn't make any sense. Like others. Do you want us to
+list all combinations that make sense?
 
->
-> CC: Konstantin Ryabitsev <konstantin@linuxfoundation.org>
-> Signed-off-by: Thorsten Leemhuis <linux@leemhuis.info>
-> ---
->  Documentation/process/submitting-patches.rst | 32 +++++++++++++-------
->  1 file changed, 21 insertions(+), 11 deletions(-)
->
-> diff --git a/Documentation/process/submitting-patches.rst b/Documentation/process/submitting-patches.rst
-> index b0f31aa82fcd..8ba69332322f 100644
-> --- a/Documentation/process/submitting-patches.rst
-> +++ b/Documentation/process/submitting-patches.rst
-> @@ -96,17 +96,6 @@ instead of "[This patch] makes xyzzy do frotz" or "[I] changed xyzzy
->  to do frotz", as if you are giving orders to the codebase to change
->  its behaviour.
->  
-> -If the patch fixes a logged bug entry, refer to that bug entry by
-> -number and URL.  If the patch follows from a mailing list discussion,
-> -give a URL to the mailing list archive; use the https://lore.kernel.org/
-> -redirector with a ``Message-Id``, to ensure that the links cannot become
-> -stale.
-> -
-> -However, try to make your explanation understandable without external
-> -resources.  In addition to giving a URL to a mailing list archive or
-> -bug, summarize the relevant points of the discussion that led to the
-> -patch as submitted.
-> -
->  If you want to refer to a specific commit, don't just refer to the
->  SHA-1 ID of the commit. Please also include the oneline summary of
->  the commit, to make it easier for reviewers to know what it is about.
-> @@ -123,6 +112,27 @@ collisions with shorter IDs a real possibility.  Bear in mind that, even if
->  there is no collision with your six-character ID now, that condition may
->  change five years from now.
->  
-> +Add 'Link:' tags with URLs pointing to related discussions and rationale
-> +behind the change whenever that makes sense. If your patch for example
-> +fixes a bug, add a tag with a URL referencing the report in the mailing
-> +list archives or a bug tracker; if the patch was discussed on a mailing
-> +list or originated in some discussion, point to it.
-> +
-> +When linking to mailing list archives, preferably use the lore.kernel.org
-> +message archiver service. To create the link URL, use the contents of the
-> +``Message-Id`` header of the message without the surrounding angle brackets.
-> +For example::
-> +
-> +    Link: https://lore.kernel.org/r/git-send-email.555-1234@example.org
-> +
-> +Please check the link to make sure that it is actually working and points
-> +to the relevant message.
-> +
-> +However, try to make your explanation understandable without external
-> +resources.  In addition to giving a URL to a mailing list archive or
-> +bug, summarize the relevant points of the discussion that led to the
-> +patch as submitted.
-> +
->  If your patch fixes a bug in a specific commit, e.g. you found an issue using
->  ``git bisect``, please use the 'Fixes:' tag with the first 12 characters of
->  the SHA-1 ID, and the one line summary.  Do not split the tag across multiple
+> So, effectively, we have to open-code around kvmalloc() in
+> situations where failure is not an option. Even if we pass
+> __GFP_NOFAIL to __vmalloc(), it isn't guaranteed to succeed because
+> of the "we won't honor gfp flags passed to __vmalloc" semantics it
+> has.
 
+yes vmalloc doesn't support nofail semantic and it is not really trivial
+to craft it there.
+
+> Even the API constaints of kvmalloc() w.r.t. only doing the vmalloc
+> fallback if the gfp context is GFP_KERNEL - we already do GFP_NOFS
+> kvmalloc via memalloc_nofs_save/restore(), so this behavioural
+> restriction w.r.t. gfp flags just makes no sense at all.
+
+GFP_NOFS (without using the scope API) has the same problem as NOFAIL in
+the vmalloc. Hence it is not supported. If you use the scope API then
+you can GFP_KERNEL for kvmalloc. This is clumsy but I am not sure how to
+define these conditions in a more sensible way. Special case NOFS if the
+scope api is in use? Why do you want an explicit NOFS then?
+
+> That leads to us having to go back to writing extremely custom open
+> coded loops to avoid awful high-order kmalloc direct reclaim
+> behaviour and still fall back to vmalloc and to still handle NOFAIL
+> semantics we need:
+> 
+> https://lore.kernel.org/linux-xfs/20210902095927.911100-8-david@fromorbit.com/
+
+It would be more productive to get to MM people rather than rant on a
+xfs specific patchse. Anyway, I can see a kvmalloc mode where the
+kmalloc allocation would be really a very optimistic one - like your
+effectively GFP_NOWAIT. Nobody has requested such a mode until now and I
+am not sure how we would sensibly describe that by a gfp mask.
+
+Btw. your GFP_NOWAIT | __GFP_NORETRY combination doesn't make any sense
+in the allocator context as the later is a reclaim mofifier which
+doesn't get applied when the reclaim is disabled (in your case by flags
+&= ~__GFP_DIRECT_RECLAIM).
+
+GFP flags are not that easy to build a coherent and usable apis.
+Something we carry as a baggage for a long time.
+
+> So, really, the problems are much deeper here than just badly
+> documented, catch-22 rules for __GFP_NOFAIL - we can't even use
+> __GFP_NOFAIL consistently across the allocation APIs because it
+> changes allocation behaviours in unusable, self-defeating ways....
+
+GFP_NOFAIL sucks. Not all allocator can follow it for practical
+reasons. You are welcome to help document those awkward corner cases or
+fix them up if you have a good idea how.
+
+Thanks!
 -- 
-Jani Nikula, Intel Open Source Graphics Center
+Michal Hocko
+SUSE Labs
