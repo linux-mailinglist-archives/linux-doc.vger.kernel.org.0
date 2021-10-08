@@ -2,165 +2,66 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 7E33F426E6B
-	for <lists+linux-doc@lfdr.de>; Fri,  8 Oct 2021 18:10:28 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id CE3B8426E71
+	for <lists+linux-doc@lfdr.de>; Fri,  8 Oct 2021 18:12:23 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S229681AbhJHQMW (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Fri, 8 Oct 2021 12:12:22 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:42550 "EHLO
+        id S229756AbhJHQOS (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Fri, 8 Oct 2021 12:14:18 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:42986 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S229525AbhJHQMW (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Fri, 8 Oct 2021 12:12:22 -0400
-Received: from mail-yb1-xb31.google.com (mail-yb1-xb31.google.com [IPv6:2607:f8b0:4864:20::b31])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id BD059C061762
-        for <linux-doc@vger.kernel.org>; Fri,  8 Oct 2021 09:10:26 -0700 (PDT)
-Received: by mail-yb1-xb31.google.com with SMTP id q189so22261702ybq.1
-        for <linux-doc@vger.kernel.org>; Fri, 08 Oct 2021 09:10:26 -0700 (PDT)
+        with ESMTP id S229681AbhJHQOS (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Fri, 8 Oct 2021 12:14:18 -0400
+Received: from mail-ed1-x531.google.com (mail-ed1-x531.google.com [IPv6:2a00:1450:4864:20::531])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 7C9E9C061762
+        for <linux-doc@vger.kernel.org>; Fri,  8 Oct 2021 09:12:22 -0700 (PDT)
+Received: by mail-ed1-x531.google.com with SMTP id d3so10839858edp.3
+        for <linux-doc@vger.kernel.org>; Fri, 08 Oct 2021 09:12:22 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=google.com; s=20210112;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc;
-        bh=G33pHw0ueNt5fMw+IeGu7bQcs55JybN6lDQyIbd7GiQ=;
-        b=Bv7ZpFLyYPApZxpHNAgAUvso133HjrOBFL6hqMdB+IrVyL/rHGAOU/y+005qkEd0nu
-         ZA5PlXGDWJ2Oy1ZLhPo2KEUzS+ThRbdjQdMeRAA9WpFraOCBVrlry8zMBToM1RUBboE3
-         oFia/EYFHpnczvwhehgCq2Sry06QgR/xMNSmDGcjYnj6SRqQjyqqIrHj+cKXq871uvd1
-         GbC91qH7oND33Xt1APC2G4qAdHiZb1fgN7SnJgNXjtbZMyZTbybzZtPoc/PK13IDvWmZ
-         FkAucL5pN+akLtMwvcAkApQv0AUabZqXSsvJl2QYJeLcTOSME8Ak4XCwwK7RUdavPe+E
-         a8Pw==
+        d=gmail.com; s=20210112;
+        h=mime-version:reply-to:from:date:message-id:subject:to
+         :content-transfer-encoding;
+        bh=G+Iq7iy1GRMddIdrCBUu2NHbxR3JoNjA4F7Y0VPhz5I=;
+        b=Rxp/3bhbiNUTejgkKDntUMq2d7gLr5NCyB+q3q94lkhSOPYx9soacaIlVt4MjkboyW
+         JjDGLwjvnkV4RM2Z78eUhKDL6geZtwo+XkT3uG4zMztiljAqn1urYLztVM501i0jf7JY
+         KM3qWzKbaIi2BSS+Sza4BIKYWFYcJ+BzkNiMf6brn19YFTQwQSJyULHNi1XfeEy7Muau
+         xkzVOoIIuRkvujvnwp7zYqFeadTRf5jIaWTP0Ot/9OqcuaWy4fc3AASVBT9Xpoz3AK9c
+         +Lr7/vGjaOp22FMM/OCdb0iTBBg8FeRF6cVvhzua5fZzDQzIzmav4SEgVWw3kXedou+M
+         CHmQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc;
-        bh=G33pHw0ueNt5fMw+IeGu7bQcs55JybN6lDQyIbd7GiQ=;
-        b=At+fd/h1bUFVoKvrfBOALve5arkgOANfL2xvtQjGqhDB5cFZghNIwAbfwjiR+GTsN5
-         0pQEXL3/DaKeWEF8Y45T1Hy6DsiTJdQL4g94zHd7R6Wh+VCYJID3UADcGpeakisWhFFI
-         Xv7xsqWVpmPoB61jmrS4LlSOSNXSSz6zZBczTNz3nlWKwaJ1331RaWeRspPHwiV0PTHs
-         J8aPreLrlsQgG/xcymmQb96VAe3MD9rV9aRoI/fr4gjpqMC2vRezAHR+Biq/yHXzsS8C
-         4vHKMDTC/FpPPkp1U+U22HRyMfS0ZgHKDEguinMYdS+qwIMr/XTw3fJbs82jjjky9a1I
-         CRhA==
-X-Gm-Message-State: AOAM532eg+TYavGXnZJVzekMGevJZ6LYsKPbxGqgOV0mt3C9GM2EgUVM
-        IdcbvfOZ1q2GL7Wv17GIPTKiWS+VwCz9zBvut212BQ==
-X-Google-Smtp-Source: ABdhPJxCL/oJpeRH39HJsnbtpduvh2CejVR6+QmWEnNfuUXcZUpgiTakWbEdOxd31P0xMuAIf32tWZVuGngf1ObyV/M=
-X-Received: by 2002:a05:6902:120e:: with SMTP id s14mr4989108ybu.161.1633709425599;
- Fri, 08 Oct 2021 09:10:25 -0700 (PDT)
+        h=x-gm-message-state:mime-version:reply-to:from:date:message-id
+         :subject:to:content-transfer-encoding;
+        bh=G+Iq7iy1GRMddIdrCBUu2NHbxR3JoNjA4F7Y0VPhz5I=;
+        b=vedoW6IIh7DSqenSl81SR+htM4CpsxLc7TNTFjuH3kOOS2YsgajdA1nqkYteJOeeu7
+         4wVxgFY2viEF15ecCyYgZBjbFF4iohgwJtmjt0KFJ2B14jqUrHT8MF5Zaf16I6D8+oXD
+         OCFRyttjwhc3jxlW503fEQlTbC0ppBkyvb3k0QZ13h72r9Z2lXg7l1uuEFsSU9tN1+5U
+         OjYZMUvPngemfG+SRi350xOrnI9dtDEWA9t0wBQEQ4/uyDNhLmv+jDyMXd0om6a4OnYb
+         Ie7DRFog6iJnTJeJ0PI6TPZeP6+sabFN0K/Yy3bD4mZ38bNEJ33mJ4q2CDwRLTyKd1PB
+         bCjQ==
+X-Gm-Message-State: AOAM533ewavMkWouTW7YA7DAs99S5mk+Z93Bkh+mkRofOHXTGClpNhPg
+        mJYqgDezgwypItMGmHufcr1GMEbK/ze0D2DALyQ=
+X-Google-Smtp-Source: ABdhPJy36WpZ1PF2SsG4OxaJyYITBB8K13W901io7H+01Z2PKQ7dJvO45LSOZoYKb1l1QCgAQusDF3Gl6YRrdC4abyg=
+X-Received: by 2002:a05:6402:19ba:: with SMTP id o26mr16270263edz.1.1633709540752;
+ Fri, 08 Oct 2021 09:12:20 -0700 (PDT)
 MIME-Version: 1.0
-References: <92cbfe3b-f3d1-a8e1-7eb9-bab735e782f6@rasmusvillemoes.dk>
- <20211007101527.GA26288@duo.ucw.cz> <CAJuCfpGp0D9p3KhOWhcxMO1wEbo-J_b2Anc-oNwdycx4NTRqoA@mail.gmail.com>
- <YV8jB+kwU95hLqTq@dhcp22.suse.cz> <CAJuCfpG-Nza3YnpzvHaS_i1mHds3nJ+PV22xTAfgwvj+42WQNA@mail.gmail.com>
- <YV8u4B8Y9AP9xZIJ@dhcp22.suse.cz> <CAJuCfpHAG_C5vE-Xkkrm2kynTFF-Jd06tQoCWehHATL0W2mY_g@mail.gmail.com>
- <202110071111.DF87B4EE3@keescook> <YV/mhyWH1ZwWazdE@dhcp22.suse.cz>
- <4a1dd04f-eda3-5c71-4772-726fd6fa2a38@intel.com> <YWBcXPZh9pYr0AHm@dhcp22.suse.cz>
-In-Reply-To: <YWBcXPZh9pYr0AHm@dhcp22.suse.cz>
-From:   Suren Baghdasaryan <surenb@google.com>
-Date:   Fri, 8 Oct 2021 09:10:14 -0700
-Message-ID: <CAJuCfpFdZeirEERAvM6X26qcoC5runpWQhmPrQ97RYk-HawwJg@mail.gmail.com>
-Subject: Re: [PATCH v10 3/3] mm: add anonymous vma name refcounting
-To:     Michal Hocko <mhocko@suse.com>
-Cc:     Dave Hansen <dave.hansen@intel.com>,
-        Kees Cook <keescook@chromium.org>, Pavel Machek <pavel@ucw.cz>,
-        Rasmus Villemoes <linux@rasmusvillemoes.dk>,
-        David Hildenbrand <david@redhat.com>,
-        John Hubbard <jhubbard@nvidia.com>,
-        Andrew Morton <akpm@linux-foundation.org>,
-        Colin Cross <ccross@google.com>,
-        Sumit Semwal <sumit.semwal@linaro.org>,
-        Matthew Wilcox <willy@infradead.org>,
-        "Kirill A . Shutemov" <kirill.shutemov@linux.intel.com>,
-        Vlastimil Babka <vbabka@suse.cz>,
-        Johannes Weiner <hannes@cmpxchg.org>,
-        Jonathan Corbet <corbet@lwn.net>,
-        Al Viro <viro@zeniv.linux.org.uk>,
-        Randy Dunlap <rdunlap@infradead.org>,
-        Kalesh Singh <kaleshsingh@google.com>,
-        Peter Xu <peterx@redhat.com>, rppt@kernel.org,
-        Peter Zijlstra <peterz@infradead.org>,
-        Catalin Marinas <catalin.marinas@arm.com>,
-        vincenzo.frascino@arm.com,
-        =?UTF-8?B?Q2hpbndlbiBDaGFuZyAo5by16Yym5paHKQ==?= 
-        <chinwen.chang@mediatek.com>,
-        Axel Rasmussen <axelrasmussen@google.com>,
-        Andrea Arcangeli <aarcange@redhat.com>,
-        Jann Horn <jannh@google.com>, apopple@nvidia.com,
-        Yu Zhao <yuzhao@google.com>, Will Deacon <will@kernel.org>,
-        fenghua.yu@intel.com, thunder.leizhen@huawei.com,
-        Hugh Dickins <hughd@google.com>, feng.tang@intel.com,
-        Jason Gunthorpe <jgg@ziepe.ca>, Roman Gushchin <guro@fb.com>,
-        Thomas Gleixner <tglx@linutronix.de>, krisman@collabora.com,
-        Chris Hyser <chris.hyser@oracle.com>,
-        Peter Collingbourne <pcc@google.com>,
-        "Eric W. Biederman" <ebiederm@xmission.com>,
-        Jens Axboe <axboe@kernel.dk>, legion@kernel.org,
-        Rolf Eike Beer <eb@emlix.com>,
-        Cyrill Gorcunov <gorcunov@gmail.com>,
-        Muchun Song <songmuchun@bytedance.com>,
-        Viresh Kumar <viresh.kumar@linaro.org>,
-        Thomas Cedeno <thomascedeno@google.com>, sashal@kernel.org,
-        cxfcosmos@gmail.com, LKML <linux-kernel@vger.kernel.org>,
-        linux-fsdevel@vger.kernel.org, linux-doc@vger.kernel.org,
-        linux-mm <linux-mm@kvack.org>,
-        kernel-team <kernel-team@android.com>, timmurray@google.com
+Received: by 2002:a17:906:7809:0:0:0:0 with HTTP; Fri, 8 Oct 2021 09:12:20
+ -0700 (PDT)
+Reply-To: alimaanwari48@gmail.com
+From:   Alima Anwari <franmerii42@gmail.com>
+Date:   Fri, 8 Oct 2021 17:12:20 +0100
+Message-ID: <CAOoRhhHRCecQgLPVWoW83C2bLCs1sT4z5n7zDwyjiMrfu844Qg@mail.gmail.com>
+Subject: =?UTF-8?B?QnVlbiBkw61h?=
+To:     undisclosed-recipients:;
 Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Fri, Oct 8, 2021 at 7:57 AM Michal Hocko <mhocko@suse.com> wrote:
->
-> On Fri 08-10-21 07:14:58, Dave Hansen wrote:
-> > On 10/7/21 11:34 PM, Michal Hocko wrote:
-> > >> Yes, please. It really seems like the folks that are interested in this
-> > >> feature want strings. (I certainly do.)
-> > > I am sorry but there were no strong arguments mentioned for strings so
-> > > far.
-> >
-> > The folks who want this have maintained an out-of-tree patch using
-> > strings.  They've maintained it for the better part of a decade.  I
-> > don't know how widely this shipped in the Android ecosystem, but I
-> > suspect we're talking about billions of devices.  Right?
-
-Correct.
-
-> >
-> > This is a feature that, if accepted into mainline, will get enabled and
-> > used on billions of devices.  If we dumb this down to integers, it's not
-> > 100% clear that it _will_ get used.
-
-Not as is and not with some major changes in the userspace, which
-relied on a simple interface: set a name to a vma, observe that name
-in the /proc/$pid/maps.
-
-> >
-> > That's a pretty strong argument in my book, even if the contributors
-> > have difficulty articulating exactly why they want strings.
->
-> I would agree that if integers would make this unusable then this would
-> be a strong argument. But I haven't really heard any arguments like that
-> so far. I have heard about IPC overhead and other speculations that do
-> not seem really convincing. We shouldn't hand wave concerns regarding
-> the implementation complexity and resource handling just by "somebody
-> has been using this for decates", right?
->
-> Do not get me wrong. This is going to become a user interface and we
-> will have to maintain it for ever. As such an extra scrutiny has to be
-> applied.
-
-I don't know how to better articulate this. IPC transactions on
-Android cannot be scheduled efficiently. We're going to have to stall
-after mmap, make binder transaction, schedule a new process, get the
-ID, make binder reply, schedule back to the original thread, resume.
-Doing this potentially for every mmap is a non-starter. Deferring this
-job is possible but we still have to do all this work, so it still
-requires cpu cycles and power, not mentioning the additional
-complexity in the userspace. I'm adding a rep from the performance
-team, maybe Tim can explain this better.
-
-There were a couple suggestions on using filesystem/memfd for naming
-purposes which I need to explore but if that works the approach will
-likely not involve any IDs. We want human-readable names in the maps
-file, not a number.
-
-Thanks for all the feedback and ideas!
-
-> --
-> Michal Hocko
-> SUSE Labs
+--=20
+Hola querido amigo, soy Alima Anwari de Afganist=C3=A1n, por favor responde
+De vuelta a m=C3=AD, tengo un problema urgente que compartir contigo. voy a
+estar esperando
+para su respuesta.
+Gracias.
+Alima.
