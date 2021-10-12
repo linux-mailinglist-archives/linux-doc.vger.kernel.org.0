@@ -2,188 +2,200 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 959D142ABE7
-	for <lists+linux-doc@lfdr.de>; Tue, 12 Oct 2021 20:26:54 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id BD73942AC47
+	for <lists+linux-doc@lfdr.de>; Tue, 12 Oct 2021 20:52:02 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S233554AbhJLS2t (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 12 Oct 2021 14:28:49 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:58432 "EHLO
-        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S232387AbhJLS2s (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 12 Oct 2021 14:28:48 -0400
-Received: from mail-qk1-x731.google.com (mail-qk1-x731.google.com [IPv6:2607:f8b0:4864:20::731])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id D667AC061745
-        for <linux-doc@vger.kernel.org>; Tue, 12 Oct 2021 11:26:46 -0700 (PDT)
-Received: by mail-qk1-x731.google.com with SMTP id ay35so11489824qkb.10
-        for <linux-doc@vger.kernel.org>; Tue, 12 Oct 2021 11:26:46 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=cmpxchg-org.20210112.gappssmtp.com; s=20210112;
-        h=date:from:to:cc:subject:message-id:references:mime-version
-         :content-disposition:in-reply-to;
-        bh=UTuSq4pUiA+lEbguKdAALIojpT52sPH6If+YjkHNeQk=;
-        b=0VGUhp8rfAYh5i2ID6ejSb31wvZKXwBP2ikdcYiyNZDLb52wiJKT8E8mZ7D6P2T2aO
-         T8YT3281DZm0X7na/m1UZbkOy8LfbYQJrgo6GjyLk7r1unw/EwelmR89447vwuH+PcV6
-         GWeavNsaJ0KokPwmAqJpZN6iXbTM7YvKyEYMQ9xdSLic6ENDAhIbilbAlUhcZkOhXWPM
-         EPsBasZbFrlPaLp0UiKdCtM1ULi6hGSvN/BbZaNBbGoayHRrZsCVtXJBz9Fb0evZfcYZ
-         MOiTknGB2T05zFSD0EPWC/e1AQYKxrCITmCoRLSV9z+s2+R+7en/O5gvFz7UEac7GEfW
-         cPkQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=x-gm-message-state:date:from:to:cc:subject:message-id:references
-         :mime-version:content-disposition:in-reply-to;
-        bh=UTuSq4pUiA+lEbguKdAALIojpT52sPH6If+YjkHNeQk=;
-        b=3jt3+2uC2r5uRwWPquWnpGNnXLMkNr7/VQ6ussP/IvfbFD8UHDDVnClZRlc6ugBrJa
-         Itwzdm/22qMeA3yBr8Z6uEJ8Ga9d4CZDIcAofbg9hm7pRnnuI/wO+FofHRkIKUI7uDCL
-         cnaYdlZCLsier/hJ3+pmK897aMYEoNTJkM5jTylg9RSiTiXKNg0Mm4voLd/4HhDgUzfs
-         mXFNd+Q/15ittuDeGCcoV7cXTz3rGQoCtR1MJkqkApYIP8zZjr2z9SHuaunVUEwhU4oF
-         3nKkXz1V0hFjTsjyFcFBQiSMxa5uTVq6AA6WH3hR517gkaEsd6IHspt6UAOTOrGIXmga
-         uBRA==
-X-Gm-Message-State: AOAM533YMYFZ4KLBOQs1BO75Mfd+GyuEd6HMJuEETFPOSm4LElgem62Z
-        j8eb6ROayf0UXuFTe1oZpyuE5Q==
-X-Google-Smtp-Source: ABdhPJyIGKWkZNgBeo4x1xYLqMnW+mHsUQ4qQbb22DOfdPjwgy6Sbpkn6u/PRV2Qrzzp5A7pP2Ve4A==
-X-Received: by 2002:a05:620a:1a12:: with SMTP id bk18mr11319299qkb.266.1634063206025;
-        Tue, 12 Oct 2021 11:26:46 -0700 (PDT)
-Received: from localhost (cpe-98-15-154-102.hvc.res.rr.com. [98.15.154.102])
-        by smtp.gmail.com with ESMTPSA id b20sm6579357qtt.2.2021.10.12.11.26.45
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 12 Oct 2021 11:26:45 -0700 (PDT)
-Date:   Tue, 12 Oct 2021 14:26:44 -0400
-From:   Johannes Weiner <hannes@cmpxchg.org>
-To:     Suren Baghdasaryan <surenb@google.com>
-Cc:     Michal Hocko <mhocko@suse.com>, Kees Cook <keescook@chromium.org>,
-        Pavel Machek <pavel@ucw.cz>,
-        Rasmus Villemoes <linux@rasmusvillemoes.dk>,
-        David Hildenbrand <david@redhat.com>,
-        John Hubbard <jhubbard@nvidia.com>,
-        Andrew Morton <akpm@linux-foundation.org>,
-        Colin Cross <ccross@google.com>,
-        Sumit Semwal <sumit.semwal@linaro.org>,
-        Dave Hansen <dave.hansen@intel.com>,
-        Matthew Wilcox <willy@infradead.org>,
-        "Kirill A . Shutemov" <kirill.shutemov@linux.intel.com>,
-        Vlastimil Babka <vbabka@suse.cz>,
-        Jonathan Corbet <corbet@lwn.net>,
-        Al Viro <viro@zeniv.linux.org.uk>,
-        Randy Dunlap <rdunlap@infradead.org>,
-        Kalesh Singh <kaleshsingh@google.com>,
-        Peter Xu <peterx@redhat.com>, rppt@kernel.org,
-        Peter Zijlstra <peterz@infradead.org>,
-        Catalin Marinas <catalin.marinas@arm.com>,
-        vincenzo.frascino@arm.com,
-        Chinwen Chang =?utf-8?B?KOW8temMpuaWhyk=?= 
-        <chinwen.chang@mediatek.com>,
-        Axel Rasmussen <axelrasmussen@google.com>,
-        Andrea Arcangeli <aarcange@redhat.com>,
-        Jann Horn <jannh@google.com>, apopple@nvidia.com,
-        Yu Zhao <yuzhao@google.com>, Will Deacon <will@kernel.org>,
-        fenghua.yu@intel.com, thunder.leizhen@huawei.com,
-        Hugh Dickins <hughd@google.com>, feng.tang@intel.com,
-        Jason Gunthorpe <jgg@ziepe.ca>, Roman Gushchin <guro@fb.com>,
-        Thomas Gleixner <tglx@linutronix.de>, krisman@collabora.com,
-        Chris Hyser <chris.hyser@oracle.com>,
-        Peter Collingbourne <pcc@google.com>,
-        "Eric W. Biederman" <ebiederm@xmission.com>,
-        Jens Axboe <axboe@kernel.dk>, legion@kernel.org,
-        Rolf Eike Beer <eb@emlix.com>,
-        Cyrill Gorcunov <gorcunov@gmail.com>,
-        Muchun Song <songmuchun@bytedance.com>,
-        Viresh Kumar <viresh.kumar@linaro.org>,
-        Thomas Cedeno <thomascedeno@google.com>, sashal@kernel.org,
-        cxfcosmos@gmail.com, LKML <linux-kernel@vger.kernel.org>,
-        linux-fsdevel@vger.kernel.org, linux-doc@vger.kernel.org,
-        linux-mm <linux-mm@kvack.org>,
-        kernel-team <kernel-team@android.com>,
-        Tim Murray <timmurray@google.com>
-Subject: Re: [PATCH v10 3/3] mm: add anonymous vma name refcounting
-Message-ID: <YWXTZOXQ/NpoDJFI@cmpxchg.org>
-References: <YV8u4B8Y9AP9xZIJ@dhcp22.suse.cz>
- <CAJuCfpHAG_C5vE-Xkkrm2kynTFF-Jd06tQoCWehHATL0W2mY_g@mail.gmail.com>
- <202110071111.DF87B4EE3@keescook>
- <YV/mhyWH1ZwWazdE@dhcp22.suse.cz>
- <202110081344.FE6A7A82@keescook>
- <YWP3c/bozz5npQ8O@dhcp22.suse.cz>
- <CAJuCfpHQVMM4+6Lm_EnFk06+KrOjSjGA19K2cv9GmP3k9LW5vg@mail.gmail.com>
- <CAJuCfpHaF1e0V=wAoNO36nRL2A5EaNnuQrvZ2K3wh6PL6FrwZQ@mail.gmail.com>
- <YWT6Ptp/Uo4QGeP4@cmpxchg.org>
- <CAJuCfpERX-nqHkYzx8FAi_DuOU1vkoV5ppCAhLHziOm7o7wj6g@mail.gmail.com>
+        id S235060AbhJLSoj (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 12 Oct 2021 14:44:39 -0400
+Received: from mga12.intel.com ([192.55.52.136]:25600 "EHLO mga12.intel.com"
+        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
+        id S235100AbhJLSoi (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Tue, 12 Oct 2021 14:44:38 -0400
+X-IronPort-AV: E=McAfee;i="6200,9189,10135"; a="207352546"
+X-IronPort-AV: E=Sophos;i="5.85,368,1624345200"; 
+   d="scan'208";a="207352546"
+Received: from fmsmga003.fm.intel.com ([10.253.24.29])
+  by fmsmga106.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 12 Oct 2021 11:35:07 -0700
+X-IronPort-AV: E=Sophos;i="5.85,368,1624345200"; 
+   d="scan'208";a="562780166"
+Received: from akleen-mobl1.amr.corp.intel.com (HELO [10.209.115.208]) ([10.209.115.208])
+  by fmsmga003-auth.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 12 Oct 2021 11:35:05 -0700
+Message-ID: <9302f1c2-b3f8-2c9e-52c5-d5a4a2987409@linux.intel.com>
+Date:   Tue, 12 Oct 2021 11:35:04 -0700
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <CAJuCfpERX-nqHkYzx8FAi_DuOU1vkoV5ppCAhLHziOm7o7wj6g@mail.gmail.com>
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:91.0) Gecko/20100101
+ Thunderbird/91.2.0
+Subject: Re: [PATCH v5 12/16] PCI: Add pci_iomap_host_shared(),
+ pci_iomap_host_shared_range()
+Content-Language: en-US
+To:     Dan Williams <dan.j.williams@intel.com>
+Cc:     "Michael S. Tsirkin" <mst@redhat.com>,
+        Kuppuswamy Sathyanarayanan 
+        <sathyanarayanan.kuppuswamy@linux.intel.com>,
+        Thomas Gleixner <tglx@linutronix.de>,
+        Ingo Molnar <mingo@redhat.com>, Borislav Petkov <bp@alien8.de>,
+        Peter Zijlstra <peterz@infradead.org>,
+        Andy Lutomirski <luto@kernel.org>,
+        Bjorn Helgaas <bhelgaas@google.com>,
+        Richard Henderson <rth@twiddle.net>,
+        Thomas Bogendoerfer <tsbogend@alpha.franken.de>,
+        James E J Bottomley <James.Bottomley@hansenpartnership.com>,
+        Helge Deller <deller@gmx.de>,
+        "David S . Miller" <davem@davemloft.net>,
+        Arnd Bergmann <arnd@arndb.de>,
+        Jonathan Corbet <corbet@lwn.net>,
+        Paolo Bonzini <pbonzini@redhat.com>,
+        David Hildenbrand <david@redhat.com>,
+        Andrea Arcangeli <aarcange@redhat.com>,
+        Josh Poimboeuf <jpoimboe@redhat.com>,
+        Peter H Anvin <hpa@zytor.com>,
+        Dave Hansen <dave.hansen@intel.com>,
+        Tony Luck <tony.luck@intel.com>,
+        Kirill Shutemov <kirill.shutemov@linux.intel.com>,
+        Sean Christopherson <seanjc@google.com>,
+        Kuppuswamy Sathyanarayanan <knsathya@kernel.org>,
+        X86 ML <x86@kernel.org>,
+        Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
+        Linux PCI <linux-pci@vger.kernel.org>,
+        linux-alpha@vger.kernel.org, linux-mips@vger.kernel.org,
+        linux-parisc@vger.kernel.org, sparclinux@vger.kernel.org,
+        linux-arch <linux-arch@vger.kernel.org>,
+        Linux Doc Mailing List <linux-doc@vger.kernel.org>,
+        virtualization@lists.linux-foundation.org,
+        "Reshetova, Elena" <elena.reshetova@intel.com>
+References: <20211009003711.1390019-1-sathyanarayanan.kuppuswamy@linux.intel.com>
+ <20211009003711.1390019-13-sathyanarayanan.kuppuswamy@linux.intel.com>
+ <20211009053103-mutt-send-email-mst@kernel.org>
+ <CAPcyv4hDhjRXYCX_aiOboLF0eaTo6VySbZDa5NQu2ed9Ty2Ekw@mail.gmail.com>
+ <0e6664ac-cbb2-96ff-0106-9301735c0836@linux.intel.com>
+ <CAPcyv4g0v0YHZ-okxf4wwVCYxHotxdKwsJpZGkoT+fhvvAJEFg@mail.gmail.com>
+From:   Andi Kleen <ak@linux.intel.com>
+In-Reply-To: <CAPcyv4g0v0YHZ-okxf4wwVCYxHotxdKwsJpZGkoT+fhvvAJEFg@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Mon, Oct 11, 2021 at 10:36:24PM -0700, Suren Baghdasaryan wrote:
-> On Mon, Oct 11, 2021 at 8:00 PM Johannes Weiner <hannes@cmpxchg.org> wrote:
-> >
-> > On Mon, Oct 11, 2021 at 06:20:25PM -0700, Suren Baghdasaryan wrote:
-> > > On Mon, Oct 11, 2021 at 6:18 PM Suren Baghdasaryan <surenb@google.com> wrote:
-> > > >
-> > > > On Mon, Oct 11, 2021 at 1:36 AM Michal Hocko <mhocko@suse.com> wrote:
-> > > > >
-> > > > > On Fri 08-10-21 13:58:01, Kees Cook wrote:
-> > > > > > - Strings for "anon" specifically have no required format (this is good)
-> > > > > >   it's informational like the task_struct::comm and can (roughly)
-> > > > > >   anything. There's no naming convention for memfds, AF_UNIX, etc. Why
-> > > > > >   is one needed here? That seems like a completely unreasonable
-> > > > > >   requirement.
-> > > > >
-> > > > > I might be misreading the justification for the feature. Patch 2 is
-> > > > > talking about tools that need to understand memeory usage to make
-> > > > > further actions. Also Suren was suggesting "numbering convetion" as an
-> > > > > argument against.
-> > > > >
-> > > > > So can we get a clear example how is this being used actually? If this
-> > > > > is just to be used to debug by humans than I can see an argument for
-> > > > > human readable form. If this is, however, meant to be used by tools to
-> > > > > make some actions then the argument for strings is much weaker.
-> > > >
-> > > > The simplest usecase is when we notice that a process consumes more
-> > > > memory than usual and we do "cat /proc/$(pidof my_process)/maps" to
-> > > > check which area is contributing to this growth. The names we assign
-> > > > to anonymous areas are descriptive enough for a developer to get an
-> > > > idea where the increased consumption is coming from and how to proceed
-> > > > with their investigation.
-> > > > There are of course cases when tools are involved, but the end-user is
-> > > > always a human and the final report should contain easily
-> > > > understandable data.
-> > > >
-> > > > IIUC, the main argument here is whether the userspace can provide
-> > > > tools to perform the translations between ids and names, with the
-> > > > kernel accepting and reporting ids instead of strings. Technically
-> > > > it's possible, but to be practical that conversion should be fast
-> > > > because we will need to make name->id conversion potentially for each
-> > > > mmap. On the consumer side the performance is not as critical, but the
-> > > > fact that instead of dumping /proc/$pid/maps we will have to parse the
-> > > > file, do id->name conversion and replace all [anon:id] with
-> > > > [anon:name] would be an issue when we do that in bulk, for example
-> > > > when collecting system-wide data for a bugreport.
-> >
-> > Is that something you need to do client-side? Or could the bug tool
-> > upload the userspace-maintained name:ids database alongside the
-> > /proc/pid/maps dump for external processing?
-> 
-> You can generate a bugreport and analyze it locally or submit it as an
-> attachment to a bug for further analyzes.
-> Sure, we can attach the id->name conversion table to the bugreport but
-> either way, some tool would have to post-process it to resolve the
-> ids. If we are not analyzing the results immediately then that step
-> can be postponed and I think that's what you mean? If so, then yes,
-> that is correct.
 
-Right, somebody needs to do it at some point, but I suppose it's less
-of a problem if a developer machine does it than a mobile device.
+> The "better safe-than-sorry" argument is hard to build consensus
+> around. The spectre mitigations ran into similar problems where the
+> community rightly wanted to see the details and instrument the
+> problematic paths rather than blanket sprinkle lfence "just to be
+> safe".
 
-One advantage of an ID over a string - besides not having to maintain
-a deduplicating arbitrary string storage in the kernel - is that we
-may be able to auto-assign unique IDs to VMAs in the kernel, in a way
-that we could not with strings. You'd still have to do IPC calls to
-write new name mappings into your db, but you wouldn't have to do the
-prctl() to assign stuff in the kernel at all.
+But that was due to performance problems in hot paths. Nothing of this 
+applies here.
 
-(We'd have to think of a solution of how IDs work with vma merging and
-splitting, but I think to a certain degree that's policy and we should
-be able to find something workable - a MAP_ID flag, using anon_vma as
-identity, assigning IDs at mmap time and do merges only for protection
-changes etc. etc.)
+> In this case the rules about when a driver is suitably
+> "hardened" are vague and the overlapping policy engines are confusing.
+
+What is confusing exactly?
+
+For me it both seems very straight forward and simple (but then I'm biased)
+
+The policy is:
+
+- Have an allow list at driver registration.
+
+- Have an additional opt-in for MMIO mappings (and potentially config 
+space, but that's not currently there) to cover init calls completely.
+
+>
+> I'd rather see more concerted efforts focused/limited core changes
+> rather than leaf driver changes until there is a clearer definition of
+> hardened.
+
+A hardened driver is a driver that
+
+- Had similar security (not API) oriented review of its IO operations 
+(mainly MMIO access, but also PCI config space) as a non privileged user 
+interface (like a ioctl). That review should be focused on memory safety.
+
+- Had some fuzzing on these IO interfaces using to be released tools.
+
+Right now it's only three virtio drivers (console, net, block)
+
+Really it's no different than what we do for every new unprivileged user 
+interface.
+
+
+> I.e. instead of jumping to the assertion that fixing up
+> these init-path vulnerabilities are too big to fix, dig to the next
+> level to provide more evidence that per-driver opt-in is the only
+> viable option.
+>
+> For example, how many of these problematic paths are built-in to the
+> average kernel config?
+
+I don't think arguments from "the average kernel config" (if such a 
+thing even exists) are useful. That's would be just hand waving.
+
+
+> A strawman might be to add a sprinkling error
+> exits in the module_init() of the problematic drivers, and only fail
+> if the module is built-in, and let modprobe policy handle the rest.
+
+
+That would be already hundreds of changes. I have no idea how such a 
+thing could be maintained or sustained either.
+
+Really I don't even see how these alternatives can be considered. Tree 
+sweeps should always be last resort. They're a pain for everyone. But 
+here they're casually thrown around as alternatives to straight forward 
+one or two line changes.
+
+
+
+
+>
+>> Default policy in user space just seems to be a bad idea here. Who
+>> should know if a driver is hardened other than the kernel? Maintaining
+>> the list somewhere else just doesn't make sense to me.
+> I do not understand the maintenance burden correlation of where the
+> policy is driven vs where the list is maintained?
+
+All the hardening and auditing happens in the kernel tree. So it seems 
+the natural place to store the result is in the kernel tree.
+
+But there's no single package for initrd, so you would need custom 
+configurations for all the supported distros.
+
+Also we're really arguing about a list that currently has three entries.
+
+
+>   Even if I agreed
+> with the contention that out-of-tree userspace would have a hard time
+> tracking the "hardened" driver list there is still an in-tree
+> userspace path to explore. E.g. perf maintains lists of things tightly
+> coupled to the kernel, this authorized device list seems to be in the
+> same category of data.
+
+You mean the event list? perf is in the kernel tree, so it's maintained 
+together with the kernel.
+
+But we don't have a kernel initrd.
+
+
+
+>
+>> Also there is the more practical problem that some devices are needed
+>> for booting. For example in TDX we can't print something to the console
+>> with this mechanism, so you would never get any output before the
+>> initrd. Just seems like a nightmare for debugging anything. There really
+>> needs to be an authorization mechanism that works reasonably early.
+>>
+>> I can see a point of having user space overrides though, but we need to
+>> have a sane kernel default that works early.
+> Right, as I suggested [1], just enough early authorization to
+> bootstrap/debug initramfs and then that can authorize the remainder.
+
+But how do you debug the kernel then? Making early undebuggable seems 
+just bad policy to me.
+
+And if you fix if for the console why not add the two more entries for 
+virtio net and block too?
+
+
+-Andi
+
