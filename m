@@ -2,798 +2,514 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 1E4C242B8E8
-	for <lists+linux-doc@lfdr.de>; Wed, 13 Oct 2021 09:21:36 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id CA24142B8AF
+	for <lists+linux-doc@lfdr.de>; Wed, 13 Oct 2021 09:15:23 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S231338AbhJMHXS (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 13 Oct 2021 03:23:18 -0400
-Received: from mail.kernel.org ([198.145.29.99]:40954 "EHLO mail.kernel.org"
-        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S238487AbhJMHVi (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Wed, 13 Oct 2021 03:21:38 -0400
-Received: by mail.kernel.org (Postfix) with ESMTPSA id 57AAA60EDF;
-        Wed, 13 Oct 2021 07:19:27 +0000 (UTC)
-From:   Huacai Chen <chenhuacai@loongson.cn>
-To:     Arnd Bergmann <arnd@arndb.de>, Andy Lutomirski <luto@kernel.org>,
-        Thomas Gleixner <tglx@linutronix.de>,
-        Peter Zijlstra <peterz@infradead.org>,
-        Andrew Morton <akpm@linux-foundation.org>,
-        David Airlie <airlied@linux.ie>,
-        Jonathan Corbet <corbet@lwn.net>,
-        Linus Torvalds <torvalds@linux-foundation.org>
-Cc:     linux-arch@vger.kernel.org, linux-doc@vger.kernel.org,
-        linux-kernel@vger.kernel.org, Xuefeng Li <lixuefeng@loongson.cn>,
-        Yanteng Si <siyanteng@loongson.cn>,
-        Huacai Chen <chenhuacai@gmail.com>,
-        Jiaxun Yang <jiaxun.yang@flygoat.com>,
-        Huacai Chen <chenhuacai@loongson.cn>
-Subject: [PATCH V5 22/22] LoongArch: Add Loongson-3 default config file
-Date:   Wed, 13 Oct 2021 15:11:17 +0800
-Message-Id: <20211013071117.3097969-9-chenhuacai@loongson.cn>
-X-Mailer: git-send-email 2.27.0
-In-Reply-To: <20211013071117.3097969-1-chenhuacai@loongson.cn>
-References: <20211013063656.3084555-1-chenhuacai@loongson.cn>
- <20211013071117.3097969-1-chenhuacai@loongson.cn>
+        id S238138AbhJMHRZ (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 13 Oct 2021 03:17:25 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:33722 "EHLO
+        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S238325AbhJMHRY (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Wed, 13 Oct 2021 03:17:24 -0400
+Received: from mail-lf1-x12b.google.com (mail-lf1-x12b.google.com [IPv6:2a00:1450:4864:20::12b])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id E1EA0C061753
+        for <linux-doc@vger.kernel.org>; Wed, 13 Oct 2021 00:15:21 -0700 (PDT)
+Received: by mail-lf1-x12b.google.com with SMTP id j21so7763405lfe.0
+        for <linux-doc@vger.kernel.org>; Wed, 13 Oct 2021 00:15:21 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=linaro.org; s=google;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc;
+        bh=1mRu3r6Qc3uUoeu3SdPEjmroiMDsLF1jPWRmtXaNPAA=;
+        b=al1Hrn9n9NyPydAhRSyu6i9JjnSJvw2qYFkFfkq60Y6RdpdaMBeE4eTxkEOh5B5C4Q
+         9CafVsugwLBpHn2ZmG1M8lEbMNoXUt0a3k2/ITrS1GvPM8X8+zN40jzSywmamGo3yZij
+         cKXnJ5mysfsocsiXFwZCrhrjQUI6LhiRHhTbXqu1isilviPXv9liKuSCBNhe8YlMF3cv
+         E5oxDVrtc3aD1Qc0p4jEmI8tJBKQEm0yL850kxsyMlVfqYQUxl+uDUXoRK/I5xsbbYUV
+         vzlMLgNe6SU96GdvxIanh3FTDOiJckpcnhHD9d6zOitAt+K7gcxT5T1pBAm6djfGyJ7g
+         b4Gg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=1mRu3r6Qc3uUoeu3SdPEjmroiMDsLF1jPWRmtXaNPAA=;
+        b=J+CI5chV5MOecKPgTGLodyTi23SDDuwyA1tfDWb8oJvESQK/JiGWdjvBMD+7OMmLbi
+         jTFvGM16LdTaffIWO2e6CVekFLf9jDZHVRo+JwNKZg052HL6KgneiRUX8lridd+IvfBV
+         vOm6LBNqu9Fme9mshx3KZxtlXJSGyO3NgwLW3TSuu2ndupidJJID4wP6dWOeEJPiD5YI
+         NNQ1hAkafhdPNFbJtGJRmABcDr1rKXb0YCwDOqmS+QHAdgOFrMuYVCA5IMCciM3oX/53
+         a14VQs02Vb6suIhVq9BwD6uOiR616pzWNAmR+lY6lS5p2EmU3qFsjPq7vMLAvT7LiDv9
+         w5JQ==
+X-Gm-Message-State: AOAM532mv+KRqWHumT6yo1uCVvmhXmTcKMYNV6A9RXP/jjv0+qImaBZ9
+        MEody1oe+0nn8cQbULjboFiLYWty6/aWpAWSb00obw==
+X-Google-Smtp-Source: ABdhPJyb8WUCpaMMu5Yv2FN9p2LzQERvURaBz9kbHlydnIFUCkQJy5f8G3OaGBJC8ZKPaQcaWNS7MrkQbWn2LlZnPIs=
+X-Received: by 2002:a05:651c:1304:: with SMTP id u4mr33573336lja.136.1634109320000;
+ Wed, 13 Oct 2021 00:15:20 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20211006071546.2540920-1-jens.wiklander@linaro.org> <20211006071546.2540920-6-jens.wiklander@linaro.org>
+In-Reply-To: <20211006071546.2540920-6-jens.wiklander@linaro.org>
+From:   Sumit Garg <sumit.garg@linaro.org>
+Date:   Wed, 13 Oct 2021 12:45:08 +0530
+Message-ID: <CAFA6WYNdebJKoWZdQRPc=OdmaA=_jiguz12gfyHsdozbdx45vQ@mail.gmail.com>
+Subject: Re: [PATCH v6 5/6] optee: separate notification functions
+To:     Jens Wiklander <jens.wiklander@linaro.org>
+Cc:     Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
+        linux-arm-kernel <linux-arm-kernel@lists.infradead.org>,
+        OP-TEE TrustedFirmware <op-tee@lists.trustedfirmware.org>,
+        Devicetree List <devicetree@vger.kernel.org>,
+        Linux Doc Mailing List <linux-doc@vger.kernel.org>,
+        Jerome Forissier <jerome@forissier.org>,
+        Etienne Carriere <etienne.carriere@linaro.org>,
+        Vincent Guittot <vincent.guittot@linaro.org>,
+        Rob Herring <robh+dt@kernel.org>,
+        Jonathan Corbet <corbet@lwn.net>,
+        Ard Biesheuvel <ardb@kernel.org>, Marc Zyngier <maz@kernel.org>
+Content-Type: text/plain; charset="UTF-8"
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-This patch adds a default config file for LoongArch-based Loongson-3
-platform.
+On Wed, 6 Oct 2021 at 12:46, Jens Wiklander <jens.wiklander@linaro.org> wrote:
+>
+> Renames struct optee_wait_queue to struct optee_notif and all related
+> functions to optee_notif_*().
+>
+> The implementation is changed to allow sending a notification from an
+> atomic state, that is from the top half of an interrupt handler.
+>
+> Waiting for keys is currently only used when secure world is waiting for
+> a mutex or condition variable. The old implementation could handle any
+> 32-bit key while this new implementation is restricted to only 8 bits or
+> the maximum value 255. A upper value is needed since a bitmap is
+> allocated to allow an interrupt handler to only set a bit in case the
+> waiter hasn't had the time yet to allocate and register a completion.
+>
+> The keys are currently only representing secure world threads which
+> number usually are never even close to 255 so it should be safe for now.
+> In future ABI updates the maximum value of the key will be communicated
+> while the driver is initializing.
+>
+> Signed-off-by: Jens Wiklander <jens.wiklander@linaro.org>
+> ---
+>  drivers/tee/optee/Makefile        |   1 +
+>  drivers/tee/optee/core.c          |  12 ++-
+>  drivers/tee/optee/notif.c         | 125 ++++++++++++++++++++++++++++++
+>  drivers/tee/optee/optee_private.h |  19 +++--
+>  drivers/tee/optee/optee_rpc_cmd.h |  31 ++++----
+>  drivers/tee/optee/rpc.c           |  73 ++---------------
+>  6 files changed, 170 insertions(+), 91 deletions(-)
+>  create mode 100644 drivers/tee/optee/notif.c
+>
 
-Signed-off-by: Huacai Chen <chenhuacai@loongson.cn>
----
- arch/loongarch/Makefile                    |   2 +
- arch/loongarch/configs/loongson3_defconfig | 725 +++++++++++++++++++++
- 2 files changed, 727 insertions(+)
- create mode 100644 arch/loongarch/configs/loongson3_defconfig
+Apart from minor nit below:
 
-diff --git a/arch/loongarch/Makefile b/arch/loongarch/Makefile
-index ddc31d4def20..565382ed15a0 100644
---- a/arch/loongarch/Makefile
-+++ b/arch/loongarch/Makefile
-@@ -3,6 +3,8 @@
- # Author: Huacai Chen <chenhuacai@loongson.cn>
- # Copyright (C) 2020-2021 Loongson Technology Corporation Limited
- 
-+KBUILD_DEFCONFIG := loongson3_defconfig
-+
- #
- # Select the object file format to substitute into the linker script.
- #
-diff --git a/arch/loongarch/configs/loongson3_defconfig b/arch/loongarch/configs/loongson3_defconfig
-new file mode 100644
-index 000000000000..3cb95a2e379c
---- /dev/null
-+++ b/arch/loongarch/configs/loongson3_defconfig
-@@ -0,0 +1,725 @@
-+# CONFIG_LOCALVERSION_AUTO is not set
-+CONFIG_SYSVIPC=y
-+CONFIG_POSIX_MQUEUE=y
-+CONFIG_NO_HZ=y
-+CONFIG_HIGH_RES_TIMERS=y
-+CONFIG_BPF_SYSCALL=y
-+CONFIG_PREEMPT=y
-+CONFIG_BSD_PROCESS_ACCT=y
-+CONFIG_BSD_PROCESS_ACCT_V3=y
-+CONFIG_TASKSTATS=y
-+CONFIG_TASK_DELAY_ACCT=y
-+CONFIG_TASK_XACCT=y
-+CONFIG_TASK_IO_ACCOUNTING=y
-+CONFIG_LOG_BUF_SHIFT=18
-+CONFIG_NUMA_BALANCING=y
-+CONFIG_MEMCG=y
-+CONFIG_BLK_CGROUP=y
-+CONFIG_CFS_BANDWIDTH=y
-+CONFIG_RT_GROUP_SCHED=y
-+CONFIG_CGROUP_PIDS=y
-+CONFIG_CGROUP_FREEZER=y
-+CONFIG_CGROUP_HUGETLB=y
-+CONFIG_CPUSETS=y
-+CONFIG_CGROUP_DEVICE=y
-+CONFIG_CGROUP_CPUACCT=y
-+CONFIG_CGROUP_PERF=y
-+CONFIG_CGROUP_BPF=y
-+CONFIG_NAMESPACES=y
-+CONFIG_USER_NS=y
-+CONFIG_CHECKPOINT_RESTORE=y
-+CONFIG_SCHED_AUTOGROUP=y
-+CONFIG_SYSFS_DEPRECATED=y
-+CONFIG_RELAY=y
-+CONFIG_BLK_DEV_INITRD=y
-+CONFIG_EXPERT=y
-+CONFIG_USERFAULTFD=y
-+CONFIG_PERF_EVENTS=y
-+# CONFIG_COMPAT_BRK is not set
-+CONFIG_LOONGARCH=y
-+CONFIG_64BIT=y
-+CONFIG_MACH_LOONGSON64=y
-+CONFIG_DMI=y
-+CONFIG_EFI=y
-+CONFIG_SMP=y
-+CONFIG_NR_CPUS=64
-+CONFIG_NUMA=y
-+CONFIG_PAGE_SIZE_16KB=y
-+CONFIG_HZ_250=y
-+CONFIG_ACPI=y
-+CONFIG_ACPI_SPCR_TABLE=y
-+CONFIG_ACPI_HOTPLUG_CPU=y
-+CONFIG_ACPI_HOTPLUG_MEMORY=y
-+CONFIG_EFI_CAPSULE_LOADER=m
-+CONFIG_EFI_TEST=m
-+CONFIG_MODULES=y
-+CONFIG_MODULE_FORCE_LOAD=y
-+CONFIG_MODULE_UNLOAD=y
-+CONFIG_MODULE_FORCE_UNLOAD=y
-+CONFIG_MODVERSIONS=y
-+CONFIG_BLK_DEV_THROTTLING=y
-+CONFIG_PARTITION_ADVANCED=y
-+CONFIG_IOSCHED_BFQ=y
-+CONFIG_BFQ_GROUP_IOSCHED=y
-+CONFIG_BINFMT_MISC=m
-+CONFIG_MEMORY_HOTPLUG=y
-+CONFIG_MEMORY_HOTPLUG_DEFAULT_ONLINE=y
-+CONFIG_MEMORY_HOTREMOVE=y
-+CONFIG_KSM=y
-+CONFIG_TRANSPARENT_HUGEPAGE=y
-+CONFIG_NET=y
-+CONFIG_PACKET=y
-+CONFIG_UNIX=y
-+CONFIG_XFRM_USER=y
-+CONFIG_NET_KEY=y
-+CONFIG_INET=y
-+CONFIG_IP_MULTICAST=y
-+CONFIG_IP_ADVANCED_ROUTER=y
-+CONFIG_IP_MULTIPLE_TABLES=y
-+CONFIG_IP_ROUTE_MULTIPATH=y
-+CONFIG_IP_ROUTE_VERBOSE=y
-+CONFIG_IP_PNP=y
-+CONFIG_IP_PNP_DHCP=y
-+CONFIG_IP_PNP_BOOTP=y
-+CONFIG_IP_PNP_RARP=y
-+CONFIG_INET_ESP=m
-+CONFIG_INET_UDP_DIAG=y
-+CONFIG_TCP_CONG_ADVANCED=y
-+CONFIG_TCP_CONG_BBR=m
-+CONFIG_NETWORK_PHY_TIMESTAMPING=y
-+CONFIG_NETFILTER=y
-+CONFIG_NETFILTER_NETLINK_LOG=m
-+CONFIG_NF_CONNTRACK=m
-+CONFIG_NF_LOG_NETDEV=m
-+CONFIG_NF_CONNTRACK_AMANDA=m
-+CONFIG_NF_CONNTRACK_FTP=m
-+CONFIG_NF_CONNTRACK_NETBIOS_NS=m
-+CONFIG_NF_CONNTRACK_TFTP=m
-+CONFIG_NF_CT_NETLINK=m
-+CONFIG_NF_TABLES=m
-+CONFIG_NFT_COUNTER=m
-+CONFIG_NFT_CONNLIMIT=m
-+CONFIG_NFT_LOG=m
-+CONFIG_NFT_LIMIT=m
-+CONFIG_NFT_MASQ=m
-+CONFIG_NFT_REDIR=m
-+CONFIG_NFT_NAT=m
-+CONFIG_NFT_TUNNEL=m
-+CONFIG_NFT_OBJREF=m
-+CONFIG_NFT_QUEUE=m
-+CONFIG_NFT_QUOTA=m
-+CONFIG_NFT_REJECT=m
-+CONFIG_NFT_COMPAT=m
-+CONFIG_NFT_HASH=m
-+CONFIG_NFT_SOCKET=m
-+CONFIG_NFT_OSF=m
-+CONFIG_NFT_TPROXY=m
-+CONFIG_NETFILTER_XT_SET=m
-+CONFIG_NETFILTER_XT_TARGET_AUDIT=m
-+CONFIG_NETFILTER_XT_TARGET_CHECKSUM=m
-+CONFIG_NETFILTER_XT_TARGET_CLASSIFY=m
-+CONFIG_NETFILTER_XT_TARGET_CONNMARK=m
-+CONFIG_NETFILTER_XT_TARGET_CT=m
-+CONFIG_NETFILTER_XT_TARGET_DSCP=m
-+CONFIG_NETFILTER_XT_TARGET_HMARK=m
-+CONFIG_NETFILTER_XT_TARGET_IDLETIMER=m
-+CONFIG_NETFILTER_XT_TARGET_LED=m
-+CONFIG_NETFILTER_XT_TARGET_LOG=m
-+CONFIG_NETFILTER_XT_TARGET_MARK=m
-+CONFIG_NETFILTER_XT_TARGET_NFQUEUE=m
-+CONFIG_NETFILTER_XT_TARGET_TRACE=m
-+CONFIG_NETFILTER_XT_TARGET_SECMARK=m
-+CONFIG_NETFILTER_XT_TARGET_TCPMSS=m
-+CONFIG_NETFILTER_XT_TARGET_TCPOPTSTRIP=m
-+CONFIG_NETFILTER_XT_MATCH_ADDRTYPE=m
-+CONFIG_NETFILTER_XT_MATCH_BPF=m
-+CONFIG_NETFILTER_XT_MATCH_CGROUP=m
-+CONFIG_NETFILTER_XT_MATCH_CLUSTER=m
-+CONFIG_NETFILTER_XT_MATCH_COMMENT=m
-+CONFIG_NETFILTER_XT_MATCH_CONNBYTES=m
-+CONFIG_NETFILTER_XT_MATCH_CONNLABEL=m
-+CONFIG_NETFILTER_XT_MATCH_CONNLIMIT=m
-+CONFIG_NETFILTER_XT_MATCH_CONNMARK=m
-+CONFIG_NETFILTER_XT_MATCH_CONNTRACK=m
-+CONFIG_NETFILTER_XT_MATCH_CPU=m
-+CONFIG_NETFILTER_XT_MATCH_DCCP=m
-+CONFIG_NETFILTER_XT_MATCH_DEVGROUP=m
-+CONFIG_NETFILTER_XT_MATCH_DSCP=m
-+CONFIG_NETFILTER_XT_MATCH_ESP=m
-+CONFIG_NETFILTER_XT_MATCH_HASHLIMIT=m
-+CONFIG_NETFILTER_XT_MATCH_HELPER=m
-+CONFIG_NETFILTER_XT_MATCH_IPCOMP=m
-+CONFIG_NETFILTER_XT_MATCH_IPRANGE=m
-+CONFIG_NETFILTER_XT_MATCH_IPVS=m
-+CONFIG_NETFILTER_XT_MATCH_LENGTH=m
-+CONFIG_NETFILTER_XT_MATCH_LIMIT=m
-+CONFIG_NETFILTER_XT_MATCH_MAC=m
-+CONFIG_NETFILTER_XT_MATCH_MARK=m
-+CONFIG_NETFILTER_XT_MATCH_MULTIPORT=m
-+CONFIG_NETFILTER_XT_MATCH_NFACCT=m
-+CONFIG_NETFILTER_XT_MATCH_OSF=m
-+CONFIG_NETFILTER_XT_MATCH_OWNER=m
-+CONFIG_NETFILTER_XT_MATCH_POLICY=m
-+CONFIG_NETFILTER_XT_MATCH_PKTTYPE=m
-+CONFIG_NETFILTER_XT_MATCH_QUOTA=m
-+CONFIG_NETFILTER_XT_MATCH_RATEEST=m
-+CONFIG_NETFILTER_XT_MATCH_REALM=m
-+CONFIG_NETFILTER_XT_MATCH_SOCKET=m
-+CONFIG_NETFILTER_XT_MATCH_STATE=m
-+CONFIG_NETFILTER_XT_MATCH_STATISTIC=m
-+CONFIG_NETFILTER_XT_MATCH_STRING=m
-+CONFIG_NETFILTER_XT_MATCH_TCPMSS=m
-+CONFIG_NETFILTER_XT_MATCH_TIME=m
-+CONFIG_NETFILTER_XT_MATCH_U32=m
-+CONFIG_IP_SET=m
-+CONFIG_IP_VS=m
-+CONFIG_IP_VS_PROTO_TCP=y
-+CONFIG_IP_VS_PROTO_UDP=y
-+CONFIG_IP_VS_RR=m
-+CONFIG_IP_VS_NFCT=y
-+CONFIG_NF_TABLES_IPV4=y
-+CONFIG_NFT_DUP_IPV4=m
-+CONFIG_NFT_FIB_IPV4=m
-+CONFIG_NF_TABLES_ARP=y
-+CONFIG_NF_LOG_ARP=m
-+CONFIG_IP_NF_IPTABLES=m
-+CONFIG_IP_NF_MATCH_AH=m
-+CONFIG_IP_NF_MATCH_ECN=m
-+CONFIG_IP_NF_MATCH_RPFILTER=m
-+CONFIG_IP_NF_MATCH_TTL=m
-+CONFIG_IP_NF_FILTER=m
-+CONFIG_IP_NF_TARGET_REJECT=m
-+CONFIG_IP_NF_TARGET_SYNPROXY=m
-+CONFIG_IP_NF_NAT=m
-+CONFIG_IP_NF_TARGET_MASQUERADE=m
-+CONFIG_IP_NF_TARGET_NETMAP=m
-+CONFIG_IP_NF_TARGET_REDIRECT=m
-+CONFIG_IP_NF_MANGLE=m
-+CONFIG_IP_NF_TARGET_CLUSTERIP=m
-+CONFIG_IP_NF_TARGET_ECN=m
-+CONFIG_IP_NF_TARGET_TTL=m
-+CONFIG_IP_NF_RAW=m
-+CONFIG_IP_NF_SECURITY=m
-+CONFIG_IP_NF_ARPTABLES=m
-+CONFIG_IP_NF_ARPFILTER=m
-+CONFIG_IP_NF_ARP_MANGLE=m
-+CONFIG_NF_TABLES_IPV6=y
-+CONFIG_IP6_NF_IPTABLES=y
-+CONFIG_IP6_NF_MATCH_AH=m
-+CONFIG_IP6_NF_MATCH_EUI64=m
-+CONFIG_IP6_NF_MATCH_FRAG=m
-+CONFIG_IP6_NF_MATCH_OPTS=m
-+CONFIG_IP6_NF_MATCH_IPV6HEADER=m
-+CONFIG_IP6_NF_MATCH_MH=m
-+CONFIG_IP6_NF_MATCH_RPFILTER=m
-+CONFIG_IP6_NF_MATCH_RT=m
-+CONFIG_IP6_NF_MATCH_SRH=m
-+CONFIG_IP6_NF_FILTER=y
-+CONFIG_IP6_NF_TARGET_REJECT=m
-+CONFIG_IP6_NF_TARGET_SYNPROXY=m
-+CONFIG_IP6_NF_MANGLE=m
-+CONFIG_IP6_NF_RAW=m
-+CONFIG_IP6_NF_SECURITY=m
-+CONFIG_IP6_NF_NAT=m
-+CONFIG_IP6_NF_TARGET_MASQUERADE=m
-+CONFIG_IP6_NF_TARGET_NPT=m
-+CONFIG_NF_TABLES_BRIDGE=m
-+CONFIG_BRIDGE_NF_EBTABLES=m
-+CONFIG_BRIDGE_EBT_BROUTE=m
-+CONFIG_BRIDGE_EBT_T_FILTER=m
-+CONFIG_BRIDGE_EBT_T_NAT=m
-+CONFIG_IP_SCTP=m
-+CONFIG_RDS=y
-+CONFIG_L2TP=m
-+CONFIG_BRIDGE=m
-+CONFIG_VLAN_8021Q=m
-+CONFIG_VLAN_8021Q_GVRP=y
-+CONFIG_VLAN_8021Q_MVRP=y
-+CONFIG_NET_SCHED=y
-+CONFIG_NET_SCH_PRIO=m
-+CONFIG_NET_SCH_TBF=m
-+CONFIG_NET_SCH_INGRESS=m
-+CONFIG_NET_CLS_BASIC=m
-+CONFIG_NET_CLS_U32=m
-+CONFIG_NET_CLS_CGROUP=m
-+CONFIG_NET_CLS_ACT=y
-+CONFIG_NET_ACT_POLICE=m
-+CONFIG_NET_ACT_GACT=m
-+CONFIG_NET_ACT_MIRRED=m
-+CONFIG_OPENVSWITCH=m
-+CONFIG_NETLINK_DIAG=y
-+CONFIG_CGROUP_NET_PRIO=y
-+CONFIG_BT=m
-+CONFIG_BT_HCIBTUSB=m
-+# CONFIG_BT_HCIBTUSB_BCM is not set
-+# CONFIG_BT_HCIBTUSB_RTL is not set
-+CONFIG_CFG80211=m
-+CONFIG_CFG80211_WEXT=y
-+CONFIG_MAC80211=m
-+CONFIG_RFKILL=m
-+CONFIG_RFKILL_INPUT=y
-+CONFIG_NET_9P=y
-+CONFIG_CEPH_LIB=m
-+CONFIG_PCIEPORTBUS=y
-+CONFIG_HOTPLUG_PCI_PCIE=y
-+CONFIG_PCIEAER=y
-+# CONFIG_PCIEASPM is not set
-+CONFIG_PCI_IOV=y
-+CONFIG_HOTPLUG_PCI=y
-+CONFIG_HOTPLUG_PCI_SHPC=y
-+CONFIG_PCCARD=m
-+CONFIG_YENTA=m
-+CONFIG_RAPIDIO=y
-+CONFIG_RAPIDIO_TSI721=y
-+CONFIG_RAPIDIO_ENABLE_RX_TX_PORTS=y
-+CONFIG_RAPIDIO_ENUM_BASIC=m
-+CONFIG_RAPIDIO_CHMAN=m
-+CONFIG_RAPIDIO_MPORT_CDEV=m
-+CONFIG_UEVENT_HELPER=y
-+CONFIG_DEVTMPFS=y
-+CONFIG_DEVTMPFS_MOUNT=y
-+CONFIG_MTD=m
-+CONFIG_MTD_BLOCK=m
-+CONFIG_MTD_CFI=m
-+CONFIG_MTD_JEDECPROBE=m
-+CONFIG_MTD_CFI_INTELEXT=m
-+CONFIG_MTD_CFI_AMDSTD=m
-+CONFIG_MTD_CFI_STAA=m
-+CONFIG_MTD_RAM=m
-+CONFIG_MTD_ROM=m
-+CONFIG_PARPORT=y
-+CONFIG_PARPORT_PC=y
-+CONFIG_PARPORT_SERIAL=y
-+CONFIG_PARPORT_PC_FIFO=y
-+CONFIG_BLK_DEV_LOOP=y
-+CONFIG_BLK_DEV_CRYPTOLOOP=y
-+CONFIG_BLK_DEV_RAM=y
-+CONFIG_BLK_DEV_RAM_SIZE=8192
-+CONFIG_BLK_DEV_RBD=m
-+CONFIG_BLK_DEV_NVME=y
-+CONFIG_EEPROM_AT24=m
-+CONFIG_BLK_DEV_SD=y
-+CONFIG_BLK_DEV_SR=y
-+CONFIG_CHR_DEV_SG=y
-+CONFIG_CHR_DEV_SCH=m
-+CONFIG_SCSI_CONSTANTS=y
-+CONFIG_SCSI_LOGGING=y
-+CONFIG_SCSI_SPI_ATTRS=m
-+CONFIG_SCSI_FC_ATTRS=m
-+CONFIG_SCSI_SAS_ATA=y
-+CONFIG_ISCSI_TCP=m
-+CONFIG_SCSI_MVSAS=y
-+# CONFIG_SCSI_MVSAS_DEBUG is not set
-+CONFIG_SCSI_MVSAS_TASKLET=y
-+CONFIG_SCSI_MVUMI=y
-+CONFIG_MEGARAID_NEWGEN=y
-+CONFIG_MEGARAID_MM=y
-+CONFIG_MEGARAID_MAILBOX=y
-+CONFIG_MEGARAID_LEGACY=y
-+CONFIG_MEGARAID_SAS=y
-+CONFIG_SCSI_MPT2SAS=y
-+CONFIG_LIBFC=m
-+CONFIG_LIBFCOE=m
-+CONFIG_FCOE=m
-+CONFIG_SCSI_QLOGIC_1280=m
-+CONFIG_SCSI_QLA_FC=m
-+CONFIG_TCM_QLA2XXX=m
-+CONFIG_SCSI_QLA_ISCSI=m
-+CONFIG_SCSI_LPFC=m
-+CONFIG_ATA=y
-+CONFIG_SATA_AHCI=y
-+CONFIG_SATA_AHCI_PLATFORM=y
-+CONFIG_PATA_ATIIXP=y
-+CONFIG_PATA_PCMCIA=m
-+CONFIG_MD=y
-+CONFIG_BLK_DEV_MD=m
-+CONFIG_MD_LINEAR=m
-+CONFIG_MD_RAID0=m
-+CONFIG_MD_RAID1=m
-+CONFIG_MD_RAID10=m
-+CONFIG_MD_RAID456=m
-+CONFIG_MD_MULTIPATH=m
-+CONFIG_BCACHE=m
-+CONFIG_BLK_DEV_DM=y
-+CONFIG_DM_CRYPT=m
-+CONFIG_DM_SNAPSHOT=m
-+CONFIG_DM_THIN_PROVISIONING=m
-+CONFIG_DM_MIRROR=m
-+CONFIG_DM_ZERO=m
-+CONFIG_DM_MULTIPATH=m
-+CONFIG_DM_MULTIPATH_QL=m
-+CONFIG_DM_MULTIPATH_ST=m
-+CONFIG_TARGET_CORE=m
-+CONFIG_TCM_IBLOCK=m
-+CONFIG_TCM_FILEIO=m
-+CONFIG_TCM_PSCSI=m
-+CONFIG_TCM_USER2=m
-+CONFIG_LOOPBACK_TARGET=m
-+CONFIG_ISCSI_TARGET=m
-+CONFIG_NETDEVICES=y
-+CONFIG_BONDING=m
-+CONFIG_DUMMY=y
-+CONFIG_MACVLAN=m
-+CONFIG_MACVTAP=m
-+CONFIG_IPVLAN=m
-+CONFIG_VXLAN=y
-+CONFIG_RIONET=m
-+CONFIG_TUN=m
-+CONFIG_VETH=m
-+# CONFIG_NET_VENDOR_3COM is not set
-+# CONFIG_NET_VENDOR_ADAPTEC is not set
-+# CONFIG_NET_VENDOR_AGERE is not set
-+# CONFIG_NET_VENDOR_ALACRITECH is not set
-+# CONFIG_NET_VENDOR_ALTEON is not set
-+# CONFIG_NET_VENDOR_AMAZON is not set
-+# CONFIG_NET_VENDOR_AMD is not set
-+# CONFIG_NET_VENDOR_AQUANTIA is not set
-+# CONFIG_NET_VENDOR_ARC is not set
-+# CONFIG_NET_VENDOR_ATHEROS is not set
-+CONFIG_BNX2=y
-+# CONFIG_NET_VENDOR_BROCADE is not set
-+# CONFIG_NET_VENDOR_CAVIUM is not set
-+CONFIG_CHELSIO_T1=m
-+CONFIG_CHELSIO_T1_1G=y
-+CONFIG_CHELSIO_T3=m
-+CONFIG_CHELSIO_T4=m
-+# CONFIG_NET_VENDOR_CIRRUS is not set
-+# CONFIG_NET_VENDOR_CISCO is not set
-+# CONFIG_NET_VENDOR_DEC is not set
-+# CONFIG_NET_VENDOR_DLINK is not set
-+# CONFIG_NET_VENDOR_EMULEX is not set
-+# CONFIG_NET_VENDOR_EZCHIP is not set
-+# CONFIG_NET_VENDOR_I825XX is not set
-+CONFIG_E1000=y
-+CONFIG_E1000E=y
-+CONFIG_IGB=y
-+CONFIG_IXGB=y
-+CONFIG_IXGBE=y
-+# CONFIG_NET_VENDOR_MARVELL is not set
-+# CONFIG_NET_VENDOR_MELLANOX is not set
-+# CONFIG_NET_VENDOR_MICREL is not set
-+# CONFIG_NET_VENDOR_MYRI is not set
-+# CONFIG_NET_VENDOR_NATSEMI is not set
-+# CONFIG_NET_VENDOR_NETRONOME is not set
-+# CONFIG_NET_VENDOR_NVIDIA is not set
-+# CONFIG_NET_VENDOR_OKI is not set
-+# CONFIG_NET_VENDOR_QLOGIC is not set
-+# CONFIG_NET_VENDOR_QUALCOMM is not set
-+# CONFIG_NET_VENDOR_RDC is not set
-+CONFIG_8139CP=m
-+CONFIG_8139TOO=m
-+CONFIG_R8169=y
-+# CONFIG_NET_VENDOR_RENESAS is not set
-+# CONFIG_NET_VENDOR_ROCKER is not set
-+# CONFIG_NET_VENDOR_SAMSUNG is not set
-+# CONFIG_NET_VENDOR_SEEQ is not set
-+# CONFIG_NET_VENDOR_SOLARFLARE is not set
-+# CONFIG_NET_VENDOR_SILAN is not set
-+# CONFIG_NET_VENDOR_SIS is not set
-+# CONFIG_NET_VENDOR_SMSC is not set
-+CONFIG_STMMAC_ETH=y
-+# CONFIG_NET_VENDOR_SUN is not set
-+# CONFIG_NET_VENDOR_TEHUTI is not set
-+# CONFIG_NET_VENDOR_TI is not set
-+# CONFIG_NET_VENDOR_VIA is not set
-+# CONFIG_NET_VENDOR_WIZNET is not set
-+# CONFIG_NET_VENDOR_XILINX is not set
-+CONFIG_PPP=m
-+CONFIG_PPP_BSDCOMP=m
-+CONFIG_PPP_DEFLATE=m
-+CONFIG_PPP_FILTER=y
-+CONFIG_PPP_MPPE=m
-+CONFIG_PPP_MULTILINK=y
-+CONFIG_PPPOE=m
-+CONFIG_PPPOL2TP=m
-+CONFIG_PPP_ASYNC=m
-+CONFIG_PPP_SYNC_TTY=m
-+# CONFIG_USB_NET_AX8817X is not set
-+# CONFIG_USB_NET_AX88179_178A is not set
-+CONFIG_USB_NET_CDC_EEM=m
-+CONFIG_USB_NET_HUAWEI_CDC_NCM=m
-+CONFIG_USB_NET_CDC_MBIM=m
-+# CONFIG_USB_NET_NET1080 is not set
-+# CONFIG_USB_BELKIN is not set
-+# CONFIG_USB_ARMLINUX is not set
-+# CONFIG_USB_NET_ZAURUS is not set
-+CONFIG_ATH9K=m
-+CONFIG_ATH9K_HTC=m
-+CONFIG_IWLWIFI=m
-+CONFIG_IWLDVM=m
-+CONFIG_IWLMVM=m
-+CONFIG_IWLWIFI_BCAST_FILTERING=y
-+CONFIG_HOSTAP=m
-+CONFIG_MT7601U=m
-+CONFIG_RT2X00=m
-+CONFIG_RT2800USB=m
-+CONFIG_RTL8192CE=m
-+CONFIG_RTL8192SE=m
-+CONFIG_RTL8192DE=m
-+CONFIG_RTL8723AE=m
-+CONFIG_RTL8723BE=m
-+CONFIG_RTL8188EE=m
-+CONFIG_RTL8192EE=m
-+CONFIG_RTL8821AE=m
-+CONFIG_RTL8192CU=m
-+# CONFIG_RTLWIFI_DEBUG is not set
-+CONFIG_RTL8XXXU=m
-+CONFIG_ZD1211RW=m
-+CONFIG_USB_NET_RNDIS_WLAN=m
-+CONFIG_INPUT_POLLDEV=m
-+CONFIG_INPUT_MOUSEDEV=y
-+CONFIG_INPUT_MOUSEDEV_PSAUX=y
-+CONFIG_KEYBOARD_XTKBD=m
-+CONFIG_MOUSE_PS2_ELANTECH=y
-+CONFIG_MOUSE_PS2_SENTELIC=y
-+CONFIG_MOUSE_SERIAL=m
-+CONFIG_INPUT_MISC=y
-+CONFIG_INPUT_UINPUT=m
-+CONFIG_SERIO_SERPORT=m
-+CONFIG_SERIO_RAW=m
-+CONFIG_LEGACY_PTY_COUNT=16
-+CONFIG_SERIAL_8250=y
-+CONFIG_SERIAL_8250_CONSOLE=y
-+CONFIG_SERIAL_8250_NR_UARTS=16
-+CONFIG_SERIAL_8250_RUNTIME_UARTS=16
-+CONFIG_SERIAL_8250_EXTENDED=y
-+CONFIG_SERIAL_8250_MANY_PORTS=y
-+CONFIG_SERIAL_8250_SHARE_IRQ=y
-+CONFIG_SERIAL_8250_RSA=y
-+CONFIG_SERIAL_NONSTANDARD=y
-+CONFIG_PRINTER=m
-+CONFIG_IPMI_HANDLER=m
-+CONFIG_IPMI_DEVICE_INTERFACE=m
-+CONFIG_IPMI_SI=m
-+CONFIG_HW_RANDOM=y
-+CONFIG_I2C_CHARDEV=y
-+CONFIG_I2C_PIIX4=y
-+CONFIG_I2C_GPIO=y
-+CONFIG_SPI=y
-+CONFIG_GPIO_SYSFS=y
-+CONFIG_GPIO_LOONGSON=y
-+CONFIG_SENSORS_LM75=m
-+CONFIG_SENSORS_LM93=m
-+CONFIG_SENSORS_W83795=m
-+CONFIG_SENSORS_W83627HF=m
-+CONFIG_RC_CORE=m
-+CONFIG_LIRC=y
-+CONFIG_RC_DECODERS=y
-+CONFIG_IR_NEC_DECODER=m
-+CONFIG_IR_RC5_DECODER=m
-+CONFIG_IR_RC6_DECODER=m
-+CONFIG_IR_JVC_DECODER=m
-+CONFIG_IR_SONY_DECODER=m
-+CONFIG_IR_SANYO_DECODER=m
-+CONFIG_IR_SHARP_DECODER=m
-+CONFIG_IR_MCE_KBD_DECODER=m
-+CONFIG_IR_XMP_DECODER=m
-+CONFIG_IR_IMON_DECODER=m
-+CONFIG_MEDIA_SUPPORT=m
-+CONFIG_MEDIA_USB_SUPPORT=y
-+CONFIG_USB_VIDEO_CLASS=m
-+CONFIG_MEDIA_PCI_SUPPORT=y
-+CONFIG_VIDEO_BT848=m
-+CONFIG_DVB_BT8XX=m
-+CONFIG_DRM=y
-+CONFIG_DRM_RADEON=m
-+CONFIG_DRM_RADEON_USERPTR=y
-+CONFIG_DRM_AMDGPU=m
-+CONFIG_DRM_AMDGPU_SI=y
-+CONFIG_DRM_AMDGPU_CIK=y
-+CONFIG_DRM_AMDGPU_USERPTR=y
-+CONFIG_DRM_AST=y
-+CONFIG_FB=y
-+CONFIG_FB_EFI=y
-+CONFIG_FB_RADEON=y
-+CONFIG_LCD_PLATFORM=m
-+# CONFIG_VGA_CONSOLE is not set
-+CONFIG_FRAMEBUFFER_CONSOLE=y
-+CONFIG_FRAMEBUFFER_CONSOLE_ROTATION=y
-+CONFIG_LOGO=y
-+CONFIG_SOUND=y
-+CONFIG_SND=y
-+CONFIG_SND_SEQUENCER=m
-+CONFIG_SND_SEQ_DUMMY=m
-+# CONFIG_SND_ISA is not set
-+CONFIG_SND_BT87X=m
-+CONFIG_SND_BT87X_OVERCLOCK=y
-+CONFIG_SND_HDA_INTEL=y
-+CONFIG_SND_HDA_HWDEP=y
-+CONFIG_SND_HDA_INPUT_BEEP=y
-+CONFIG_SND_HDA_PATCH_LOADER=y
-+CONFIG_SND_HDA_CODEC_REALTEK=y
-+CONFIG_SND_HDA_CODEC_SIGMATEL=y
-+CONFIG_SND_HDA_CODEC_HDMI=y
-+CONFIG_SND_HDA_CODEC_CONEXANT=y
-+CONFIG_SND_USB_AUDIO=m
-+CONFIG_HIDRAW=y
-+CONFIG_UHID=m
-+CONFIG_HID_A4TECH=m
-+CONFIG_HID_CHERRY=m
-+CONFIG_HID_LOGITECH=m
-+CONFIG_HID_LOGITECH_DJ=m
-+CONFIG_LOGITECH_FF=y
-+CONFIG_LOGIRUMBLEPAD2_FF=y
-+CONFIG_LOGIG940_FF=y
-+CONFIG_HID_MICROSOFT=m
-+CONFIG_HID_MULTITOUCH=m
-+CONFIG_HID_SUNPLUS=m
-+CONFIG_USB_HIDDEV=y
-+CONFIG_USB=y
-+CONFIG_USB_OTG=y
-+CONFIG_USB_MON=y
-+CONFIG_USB_XHCI_HCD=y
-+CONFIG_USB_EHCI_HCD=y
-+CONFIG_USB_EHCI_ROOT_HUB_TT=y
-+CONFIG_USB_EHCI_HCD_PLATFORM=y
-+CONFIG_USB_OHCI_HCD=y
-+CONFIG_USB_OHCI_HCD_PLATFORM=y
-+CONFIG_USB_UHCI_HCD=m
-+CONFIG_USB_ACM=m
-+CONFIG_USB_PRINTER=m
-+CONFIG_USB_STORAGE=m
-+CONFIG_USB_STORAGE_REALTEK=m
-+CONFIG_USB_UAS=m
-+CONFIG_USB_DWC2=y
-+CONFIG_USB_DWC2_HOST=y
-+CONFIG_USB_SERIAL=m
-+CONFIG_USB_SERIAL_CH341=m
-+CONFIG_USB_SERIAL_CP210X=m
-+CONFIG_USB_SERIAL_FTDI_SIO=m
-+CONFIG_USB_SERIAL_PL2303=m
-+CONFIG_USB_SERIAL_OPTION=m
-+CONFIG_USB_GADGET=y
-+CONFIG_INFINIBAND=m
-+CONFIG_RTC_CLASS=y
-+CONFIG_RTC_DRV_EFI=y
-+CONFIG_UIO=m
-+CONFIG_UIO_PDRV_GENIRQ=m
-+CONFIG_UIO_DMEM_GENIRQ=m
-+CONFIG_UIO_PCI_GENERIC=m
-+# CONFIG_VIRTIO_MENU is not set
-+CONFIG_COMEDI=m
-+CONFIG_COMEDI_PCI_DRIVERS=m
-+CONFIG_COMEDI_8255_PCI=m
-+CONFIG_COMEDI_ADL_PCI6208=m
-+CONFIG_COMEDI_ADL_PCI7X3X=m
-+CONFIG_COMEDI_ADL_PCI8164=m
-+CONFIG_COMEDI_ADL_PCI9111=m
-+CONFIG_COMEDI_ADL_PCI9118=m
-+CONFIG_COMEDI_ADV_PCI1710=m
-+CONFIG_COMEDI_ADV_PCI1720=m
-+CONFIG_COMEDI_ADV_PCI1723=m
-+CONFIG_COMEDI_ADV_PCI1724=m
-+CONFIG_COMEDI_ADV_PCI1760=m
-+CONFIG_COMEDI_ADV_PCI_DIO=m
-+CONFIG_COMEDI_NI_LABPC_PCI=m
-+CONFIG_COMEDI_NI_PCIDIO=m
-+CONFIG_COMEDI_NI_PCIMIO=m
-+CONFIG_STAGING=y
-+CONFIG_R8188EU=m
-+# CONFIG_88EU_AP_MODE is not set
-+CONFIG_PM_DEVFREQ=y
-+CONFIG_DEVFREQ_GOV_SIMPLE_ONDEMAND=y
-+CONFIG_DEVFREQ_GOV_PERFORMANCE=y
-+CONFIG_DEVFREQ_GOV_POWERSAVE=y
-+CONFIG_DEVFREQ_GOV_USERSPACE=y
-+CONFIG_PWM=y
-+CONFIG_EXT2_FS=y
-+CONFIG_EXT2_FS_XATTR=y
-+CONFIG_EXT2_FS_POSIX_ACL=y
-+CONFIG_EXT2_FS_SECURITY=y
-+CONFIG_EXT3_FS=y
-+CONFIG_EXT3_FS_POSIX_ACL=y
-+CONFIG_EXT3_FS_SECURITY=y
-+CONFIG_XFS_FS=y
-+CONFIG_XFS_QUOTA=y
-+CONFIG_XFS_POSIX_ACL=y
-+CONFIG_BTRFS_FS=y
-+CONFIG_FANOTIFY=y
-+CONFIG_FANOTIFY_ACCESS_PERMISSIONS=y
-+CONFIG_QUOTA=y
-+# CONFIG_PRINT_QUOTA_WARNING is not set
-+CONFIG_QFMT_V1=m
-+CONFIG_QFMT_V2=m
-+CONFIG_AUTOFS4_FS=y
-+CONFIG_FUSE_FS=m
-+CONFIG_OVERLAY_FS=y
-+CONFIG_OVERLAY_FS_INDEX=y
-+CONFIG_OVERLAY_FS_XINO_AUTO=y
-+CONFIG_OVERLAY_FS_METACOPY=y
-+CONFIG_FSCACHE=y
-+CONFIG_ISO9660_FS=y
-+CONFIG_JOLIET=y
-+CONFIG_UDF_FS=y
-+CONFIG_MSDOS_FS=m
-+CONFIG_VFAT_FS=m
-+CONFIG_FAT_DEFAULT_CODEPAGE=936
-+CONFIG_FAT_DEFAULT_IOCHARSET="gb2312"
-+CONFIG_PROC_KCORE=y
-+CONFIG_TMPFS=y
-+CONFIG_TMPFS_POSIX_ACL=y
-+CONFIG_HUGETLBFS=y
-+CONFIG_CONFIGFS_FS=y
-+# CONFIG_EFIVAR_FS is not set
-+CONFIG_CRAMFS=m
-+CONFIG_SQUASHFS=y
-+CONFIG_SQUASHFS_XATTR=y
-+CONFIG_SQUASHFS_LZ4=y
-+CONFIG_SQUASHFS_LZO=y
-+CONFIG_SQUASHFS_XZ=y
-+CONFIG_NFS_FS=y
-+CONFIG_NFS_V3_ACL=y
-+CONFIG_NFS_V4=y
-+CONFIG_NFS_V4_1=y
-+CONFIG_NFS_V4_2=y
-+CONFIG_ROOT_NFS=y
-+CONFIG_NFSD=y
-+CONFIG_NFSD_V3_ACL=y
-+CONFIG_NFSD_V4=y
-+CONFIG_NFSD_BLOCKLAYOUT=y
-+CONFIG_CIFS=m
-+# CONFIG_CIFS_DEBUG is not set
-+CONFIG_9P_FS=y
-+CONFIG_NLS_CODEPAGE_437=y
-+CONFIG_NLS_CODEPAGE_936=y
-+CONFIG_NLS_ASCII=y
-+CONFIG_NLS_UTF8=y
-+CONFIG_KEY_DH_OPERATIONS=y
-+CONFIG_SECURITY=y
-+CONFIG_SECURITY_SELINUX=y
-+CONFIG_SECURITY_SELINUX_BOOTPARAM=y
-+CONFIG_SECURITY_SELINUX_DISABLE=y
-+CONFIG_SECURITY_APPARMOR=y
-+CONFIG_SECURITY_YAMA=y
-+CONFIG_DEFAULT_SECURITY_DAC=y
-+CONFIG_CRYPTO_USER=m
-+# CONFIG_CRYPTO_MANAGER_DISABLE_TESTS is not set
-+CONFIG_CRYPTO_PCRYPT=m
-+CONFIG_CRYPTO_CRYPTD=m
-+CONFIG_CRYPTO_CHACHA20POLY1305=m
-+CONFIG_CRYPTO_HMAC=y
-+CONFIG_CRYPTO_VMAC=m
-+CONFIG_CRYPTO_TGR192=m
-+CONFIG_CRYPTO_WP512=m
-+CONFIG_CRYPTO_ANUBIS=m
-+CONFIG_CRYPTO_BLOWFISH=m
-+CONFIG_CRYPTO_CAST5=m
-+CONFIG_CRYPTO_CAST6=m
-+CONFIG_CRYPTO_KHAZAD=m
-+CONFIG_CRYPTO_SALSA20=m
-+CONFIG_CRYPTO_SEED=m
-+CONFIG_CRYPTO_SERPENT=m
-+CONFIG_CRYPTO_TEA=m
-+CONFIG_CRYPTO_TWOFISH=m
-+CONFIG_CRYPTO_DEFLATE=m
-+CONFIG_CRYPTO_USER_API_HASH=m
-+CONFIG_CRYPTO_USER_API_SKCIPHER=m
-+CONFIG_CRYPTO_USER_API_RNG=m
-+CONFIG_CRYPTO_USER_API_AEAD=m
-+CONFIG_PRINTK_TIME=y
-+CONFIG_STRIP_ASM_SYMS=y
-+CONFIG_MAGIC_SYSRQ=y
-+# CONFIG_SCHED_DEBUG is not set
-+CONFIG_SCHEDSTATS=y
-+# CONFIG_DEBUG_PREEMPT is not set
-+# CONFIG_FTRACE is not set
--- 
-2.27.0
+Reviewed-by: Sumit Garg <sumit.garg@linaro.org>
 
+> diff --git a/drivers/tee/optee/Makefile b/drivers/tee/optee/Makefile
+> index 3aa33ea9e6a6..df55e4ad5370 100644
+> --- a/drivers/tee/optee/Makefile
+> +++ b/drivers/tee/optee/Makefile
+> @@ -2,6 +2,7 @@
+>  obj-$(CONFIG_OPTEE) += optee.o
+>  optee-objs += core.o
+>  optee-objs += call.o
+> +optee-objs += notif.o
+>  optee-objs += rpc.o
+>  optee-objs += supp.o
+>  optee-objs += shm_pool.o
+> diff --git a/drivers/tee/optee/core.c b/drivers/tee/optee/core.c
+> index 5ce13b099d7d..8531184f98f4 100644
+> --- a/drivers/tee/optee/core.c
+> +++ b/drivers/tee/optee/core.c
+> @@ -592,6 +592,7 @@ static int optee_remove(struct platform_device *pdev)
+>          */
+>         optee_disable_shm_cache(optee);
+>
+> +       optee_notif_uninit(optee);
+>         /*
+>          * The two devices have to be unregistered before we can free the
+>          * other resources.
+> @@ -602,7 +603,6 @@ static int optee_remove(struct platform_device *pdev)
+>         tee_shm_pool_free(optee->pool);
+>         if (optee->memremaped_shm)
+>                 memunmap(optee->memremaped_shm);
+> -       optee_wait_queue_exit(&optee->wait_queue);
+>         optee_supp_uninit(&optee->supp);
+>         mutex_destroy(&optee->call_queue.mutex);
+>
+> @@ -712,11 +712,17 @@ static int optee_probe(struct platform_device *pdev)
+>
+>         mutex_init(&optee->call_queue.mutex);
+>         INIT_LIST_HEAD(&optee->call_queue.waiters);
+> -       optee_wait_queue_init(&optee->wait_queue);
+>         optee_supp_init(&optee->supp);
+>         optee->memremaped_shm = memremaped_shm;
+>         optee->pool = pool;
+>
+> +       platform_set_drvdata(pdev, optee);
+> +       rc = optee_notif_init(optee, 255);
+
+nit: Can you use a macro here instead of a constant with a proper
+comment similar to the one in commit description?
+
+-Sumit
+
+> +       if (rc) {
+> +               optee_remove(pdev);
+> +               return rc;
+> +       }
+> +
+>         /*
+>          * Ensure that there are no pre-existing shm objects before enabling
+>          * the shm cache so that there's no chance of receiving an invalid
+> @@ -731,8 +737,6 @@ static int optee_probe(struct platform_device *pdev)
+>         if (optee->sec_caps & OPTEE_SMC_SEC_CAP_DYNAMIC_SHM)
+>                 pr_info("dynamic shared memory is enabled\n");
+>
+> -       platform_set_drvdata(pdev, optee);
+> -
+>         rc = optee_enumerate_devices(PTA_CMD_GET_DEVICES);
+>         if (rc) {
+>                 optee_remove(pdev);
+> diff --git a/drivers/tee/optee/notif.c b/drivers/tee/optee/notif.c
+> new file mode 100644
+> index 000000000000..a28fa03dcd0e
+> --- /dev/null
+> +++ b/drivers/tee/optee/notif.c
+> @@ -0,0 +1,125 @@
+> +// SPDX-License-Identifier: GPL-2.0-only
+> +/*
+> + * Copyright (c) 2015-2021, Linaro Limited
+> + */
+> +
+> +#define pr_fmt(fmt) KBUILD_MODNAME ": " fmt
+> +
+> +#include <linux/arm-smccc.h>
+> +#include <linux/errno.h>
+> +#include <linux/slab.h>
+> +#include <linux/spinlock.h>
+> +#include <linux/tee_drv.h>
+> +#include "optee_private.h"
+> +
+> +struct notif_entry {
+> +       struct list_head link;
+> +       struct completion c;
+> +       u_int key;
+> +};
+> +
+> +static bool have_key(struct optee *optee, u_int key)
+> +{
+> +       struct notif_entry *entry;
+> +
+> +       list_for_each_entry(entry, &optee->notif.db, link)
+> +               if (entry->key == key)
+> +                       return true;
+> +
+> +       return false;
+> +}
+> +
+> +int optee_notif_wait(struct optee *optee, u_int key)
+> +{
+> +       unsigned long flags;
+> +       struct notif_entry *entry;
+> +       int rc = 0;
+> +
+> +       if (key > optee->notif.max_key)
+> +               return -EINVAL;
+> +
+> +       entry = kmalloc(sizeof(*entry), GFP_KERNEL);
+> +       if (!entry)
+> +               return -ENOMEM;
+> +       init_completion(&entry->c);
+> +       entry->key = key;
+> +
+> +       spin_lock_irqsave(&optee->notif.lock, flags);
+> +
+> +       /*
+> +        * If the bit is already set it means that the key has already
+> +        * been posted and we must not wait.
+> +        */
+> +       if (test_bit(key, optee->notif.bitmap)) {
+> +               clear_bit(key, optee->notif.bitmap);
+> +               goto out;
+> +       }
+> +
+> +       /*
+> +        * Check if someone is already waiting for this key. If there is
+> +        * it's a programming error.
+> +        */
+> +       if (have_key(optee, key)) {
+> +               rc = -EBUSY;
+> +               goto out;
+> +       }
+> +
+> +       list_add_tail(&entry->link, &optee->notif.db);
+> +
+> +       /*
+> +        * Unlock temporarily and wait for completion.
+> +        */
+> +       spin_unlock_irqrestore(&optee->notif.lock, flags);
+> +       wait_for_completion(&entry->c);
+> +       spin_lock_irqsave(&optee->notif.lock, flags);
+> +
+> +       list_del(&entry->link);
+> +out:
+> +       spin_unlock_irqrestore(&optee->notif.lock, flags);
+> +
+> +       kfree(entry);
+> +
+> +       return rc;
+> +}
+> +
+> +int optee_notif_send(struct optee *optee, u_int key)
+> +{
+> +       unsigned long flags;
+> +       struct notif_entry *entry;
+> +
+> +       if (key > optee->notif.max_key)
+> +               return -EINVAL;
+> +
+> +       spin_lock_irqsave(&optee->notif.lock, flags);
+> +
+> +       list_for_each_entry(entry, &optee->notif.db, link)
+> +               if (entry->key == key) {
+> +                       complete(&entry->c);
+> +                       goto out;
+> +               }
+> +
+> +       /* Only set the bit in case there where nobody waiting */
+> +       set_bit(key, optee->notif.bitmap);
+> +out:
+> +       spin_unlock_irqrestore(&optee->notif.lock, flags);
+> +
+> +       return 0;
+> +}
+> +
+> +int optee_notif_init(struct optee *optee, u_int max_key)
+> +{
+> +       spin_lock_init(&optee->notif.lock);
+> +       INIT_LIST_HEAD(&optee->notif.db);
+> +       optee->notif.bitmap = bitmap_zalloc(max_key, GFP_KERNEL);
+> +       if (!optee->notif.bitmap)
+> +               return -ENOMEM;
+> +
+> +       optee->notif.max_key = max_key;
+> +
+> +       return 0;
+> +}
+> +
+> +void optee_notif_uninit(struct optee *optee)
+> +{
+> +       kfree(optee->notif.bitmap);
+> +}
+> diff --git a/drivers/tee/optee/optee_private.h b/drivers/tee/optee/optee_private.h
+> index dbdd367be156..76a16d9b6cf4 100644
+> --- a/drivers/tee/optee/optee_private.h
+> +++ b/drivers/tee/optee/optee_private.h
+> @@ -35,10 +35,12 @@ struct optee_call_queue {
+>         struct list_head waiters;
+>  };
+>
+> -struct optee_wait_queue {
+> -       /* Serializes access to this struct */
+> -       struct mutex mu;
+> +struct optee_notif {
+> +       u_int max_key;
+> +       /* Serializes access to the elements below in this struct */
+> +       spinlock_t lock;
+>         struct list_head db;
+> +       u_long *bitmap;
+>  };
+>
+>  /**
+> @@ -72,8 +74,7 @@ struct optee_supp {
+>   * @teedev:            client device
+>   * @invoke_fn:         function to issue smc or hvc
+>   * @call_queue:                queue of threads waiting to call @invoke_fn
+> - * @wait_queue:                queue of threads from secure world waiting for a
+> - *                     secure world sync object
+> + * @notif:             notification synchronization struct
+>   * @supp:              supplicant synchronization struct for RPC to supplicant
+>   * @pool:              shared memory pool
+>   * @memremaped_shm     virtual address of memory in shared memory pool
+> @@ -88,7 +89,7 @@ struct optee {
+>         struct tee_device *teedev;
+>         optee_invoke_fn *invoke_fn;
+>         struct optee_call_queue call_queue;
+> -       struct optee_wait_queue wait_queue;
+> +       struct optee_notif notif;
+>         struct optee_supp supp;
+>         struct tee_shm_pool *pool;
+>         void *memremaped_shm;
+> @@ -131,8 +132,10 @@ void optee_handle_rpc(struct tee_context *ctx, struct optee_rpc_param *param,
+>                       struct optee_call_ctx *call_ctx);
+>  void optee_rpc_finalize_call(struct optee_call_ctx *call_ctx);
+>
+> -void optee_wait_queue_init(struct optee_wait_queue *wq);
+> -void optee_wait_queue_exit(struct optee_wait_queue *wq);
+> +int optee_notif_init(struct optee *optee, u_int max_key);
+> +void optee_notif_uninit(struct optee *optee);
+> +int optee_notif_wait(struct optee *optee, u_int key);
+> +int optee_notif_send(struct optee *optee, u_int key);
+>
+>  u32 optee_supp_thrd_req(struct tee_context *ctx, u32 func, size_t num_params,
+>                         struct tee_param *param);
+> diff --git a/drivers/tee/optee/optee_rpc_cmd.h b/drivers/tee/optee/optee_rpc_cmd.h
+> index b8275140cef8..f3f06e0994a7 100644
+> --- a/drivers/tee/optee/optee_rpc_cmd.h
+> +++ b/drivers/tee/optee/optee_rpc_cmd.h
+> @@ -28,24 +28,27 @@
+>  #define OPTEE_RPC_CMD_GET_TIME         3
+>
+>  /*
+> - * Wait queue primitive, helper for secure world to implement a wait queue.
+> + * Notification from/to secure world.
+>   *
+> - * If secure world needs to wait for a secure world mutex it issues a sleep
+> - * request instead of spinning in secure world. Conversely is a wakeup
+> - * request issued when a secure world mutex with a thread waiting thread is
+> - * unlocked.
+> + * If secure world needs to wait for something, for instance a mutex, it
+> + * does a notification wait request instead of spinning in secure world.
+> + * Conversely can a synchronous notification can be sent when a secure
+> + * world mutex with a thread waiting thread is unlocked.
+>   *
+> - * Waiting on a key
+> - * [in]    value[0].a      OPTEE_RPC_WAIT_QUEUE_SLEEP
+> - * [in]    value[0].b      Wait key
+> + * This interface can also be used to wait for a asynchronous notification
+> + * which instead is sent via a non-secure interrupt.
+>   *
+> - * Waking up a key
+> - * [in]    value[0].a      OPTEE_RPC_WAIT_QUEUE_WAKEUP
+> - * [in]    value[0].b      Wakeup key
+> + * Waiting on notification
+> + * [in]    value[0].a      OPTEE_RPC_NOTIFICATION_WAIT
+> + * [in]    value[0].b      notification value
+> + *
+> + * Sending a synchronous notification
+> + * [in]    value[0].a      OPTEE_RPC_NOTIFICATION_SEND
+> + * [in]    value[0].b      notification value
+>   */
+> -#define OPTEE_RPC_CMD_WAIT_QUEUE       4
+> -#define OPTEE_RPC_WAIT_QUEUE_SLEEP     0
+> -#define OPTEE_RPC_WAIT_QUEUE_WAKEUP    1
+> +#define OPTEE_RPC_CMD_NOTIFICATION     4
+> +#define OPTEE_RPC_NOTIFICATION_WAIT    0
+> +#define OPTEE_RPC_NOTIFICATION_SEND    1
+>
+>  /*
+>   * Suspend execution
+> diff --git a/drivers/tee/optee/rpc.c b/drivers/tee/optee/rpc.c
+> index efbaff7ad7e5..fa492655843a 100644
+> --- a/drivers/tee/optee/rpc.c
+> +++ b/drivers/tee/optee/rpc.c
+> @@ -1,6 +1,6 @@
+>  // SPDX-License-Identifier: GPL-2.0-only
+>  /*
+> - * Copyright (c) 2015-2016, Linaro Limited
+> + * Copyright (c) 2015-2021, Linaro Limited
+>   */
+>
+>  #define pr_fmt(fmt) KBUILD_MODNAME ": " fmt
+> @@ -14,23 +14,6 @@
+>  #include "optee_smc.h"
+>  #include "optee_rpc_cmd.h"
+>
+> -struct wq_entry {
+> -       struct list_head link;
+> -       struct completion c;
+> -       u32 key;
+> -};
+> -
+> -void optee_wait_queue_init(struct optee_wait_queue *priv)
+> -{
+> -       mutex_init(&priv->mu);
+> -       INIT_LIST_HEAD(&priv->db);
+> -}
+> -
+> -void optee_wait_queue_exit(struct optee_wait_queue *priv)
+> -{
+> -       mutex_destroy(&priv->mu);
+> -}
+> -
+>  static void handle_rpc_func_cmd_get_time(struct optee_msg_arg *arg)
+>  {
+>         struct timespec64 ts;
+> @@ -143,48 +126,6 @@ static void handle_rpc_func_cmd_i2c_transfer(struct tee_context *ctx,
+>  }
+>  #endif
+>
+> -static struct wq_entry *wq_entry_get(struct optee_wait_queue *wq, u32 key)
+> -{
+> -       struct wq_entry *w;
+> -
+> -       mutex_lock(&wq->mu);
+> -
+> -       list_for_each_entry(w, &wq->db, link)
+> -               if (w->key == key)
+> -                       goto out;
+> -
+> -       w = kmalloc(sizeof(*w), GFP_KERNEL);
+> -       if (w) {
+> -               init_completion(&w->c);
+> -               w->key = key;
+> -               list_add_tail(&w->link, &wq->db);
+> -       }
+> -out:
+> -       mutex_unlock(&wq->mu);
+> -       return w;
+> -}
+> -
+> -static void wq_sleep(struct optee_wait_queue *wq, u32 key)
+> -{
+> -       struct wq_entry *w = wq_entry_get(wq, key);
+> -
+> -       if (w) {
+> -               wait_for_completion(&w->c);
+> -               mutex_lock(&wq->mu);
+> -               list_del(&w->link);
+> -               mutex_unlock(&wq->mu);
+> -               kfree(w);
+> -       }
+> -}
+> -
+> -static void wq_wakeup(struct optee_wait_queue *wq, u32 key)
+> -{
+> -       struct wq_entry *w = wq_entry_get(wq, key);
+> -
+> -       if (w)
+> -               complete(&w->c);
+> -}
+> -
+>  static void handle_rpc_func_cmd_wq(struct optee *optee,
+>                                    struct optee_msg_arg *arg)
+>  {
+> @@ -196,11 +137,13 @@ static void handle_rpc_func_cmd_wq(struct optee *optee,
+>                 goto bad;
+>
+>         switch (arg->params[0].u.value.a) {
+> -       case OPTEE_RPC_WAIT_QUEUE_SLEEP:
+> -               wq_sleep(&optee->wait_queue, arg->params[0].u.value.b);
+> +       case OPTEE_RPC_NOTIFICATION_WAIT:
+> +               if (optee_notif_wait(optee, arg->params[0].u.value.b))
+> +                       goto bad;
+>                 break;
+> -       case OPTEE_RPC_WAIT_QUEUE_WAKEUP:
+> -               wq_wakeup(&optee->wait_queue, arg->params[0].u.value.b);
+> +       case OPTEE_RPC_NOTIFICATION_SEND:
+> +               if (optee_notif_send(optee, arg->params[0].u.value.b))
+> +                       goto bad;
+>                 break;
+>         default:
+>                 goto bad;
+> @@ -463,7 +406,7 @@ static void handle_rpc_func_cmd(struct tee_context *ctx, struct optee *optee,
+>         case OPTEE_RPC_CMD_GET_TIME:
+>                 handle_rpc_func_cmd_get_time(arg);
+>                 break;
+> -       case OPTEE_RPC_CMD_WAIT_QUEUE:
+> +       case OPTEE_RPC_CMD_NOTIFICATION:
+>                 handle_rpc_func_cmd_wq(optee, arg);
+>                 break;
+>         case OPTEE_RPC_CMD_SUSPEND:
+> --
+> 2.31.1
+>
