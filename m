@@ -2,97 +2,73 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 2CFAF42F638
-	for <lists+linux-doc@lfdr.de>; Fri, 15 Oct 2021 16:49:57 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 3E12C42F69D
+	for <lists+linux-doc@lfdr.de>; Fri, 15 Oct 2021 17:08:21 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S231824AbhJOOwB (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Fri, 15 Oct 2021 10:52:01 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:60490 "EHLO
-        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S230471AbhJOOwB (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Fri, 15 Oct 2021 10:52:01 -0400
-Received: from mail-io1-xd30.google.com (mail-io1-xd30.google.com [IPv6:2607:f8b0:4864:20::d30])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 04B12C061570;
-        Fri, 15 Oct 2021 07:49:55 -0700 (PDT)
-Received: by mail-io1-xd30.google.com with SMTP id h196so8052968iof.2;
-        Fri, 15 Oct 2021 07:49:54 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc;
-        bh=fL8+mgMcadnALrTayBWbaujkXyGx/ICo6dyKKnlu570=;
-        b=Vl8/fHUgsoGAEvaEAPPyassn27Us3O1tIYbImm/prxO5yCZC7Icl8aG7VOwmxcDXxk
-         pIiXPKAb6VdRPBu8ICOZ054AbNpP8vQVyYWkiWS63mnQ+1zTSFx65j92wBC7EusXKHQR
-         KzXMoLIEbh2r7s/5g2MIC4CxPF6/FtVDYu+QvKKTj/jesPsphm7VHalstx/JA18qp97B
-         YfLi5P9z5u6+9o++qcj+a3dkZlFeHOmfDimSz01cmn/OzMbdCKaiq/lyj/rZMX9XTgAz
-         IOg7hzJzbdCseQ71hCYXn0yZFmzeA9A535kXisUy9WjgMNPHf+7Z9BcQ3b9YU1ORrhol
-         6wIg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc;
-        bh=fL8+mgMcadnALrTayBWbaujkXyGx/ICo6dyKKnlu570=;
-        b=dR+psE8Rcihya6tAU6X+CZHPLoLvUDzF4iO6sejSmPm258yUWKStcKE1f3PgwrFsyw
-         APIZFog8YXG/HlvoZEgb2l/VSXWoCx5M+c1AXEHFO/3gBX+EbByEbr7Y1A8cygZqL2+E
-         +mLloNsEX/MB6mhNOz81JTZA42ySJccWbJMlD1WDdsSFgyDUfjrEcUwy/qpM+IXVrBqJ
-         VA8MIEZhrsFqDInOGVdBBkf8nYSg7tQ+Ktwf8H2xJT8JajpEQNq3kkXllbx0kWWoc/oI
-         o3CLbc5HJq1oILk+vq41uWd7upWTA5KkiE4ZFy/GoEw3ypQ8Kr9S1WwTXkAAq1XGiOFh
-         24Eg==
-X-Gm-Message-State: AOAM532FyuFmjkNEinZlIJbpmQn2TtmqoXUBUa7aAAosA6oNgRj4DZIl
-        ePSGsSeQiKFzKdArVg5ZPIUAp6pgOeZtMgctNLs=
-X-Google-Smtp-Source: ABdhPJzzB8N6SPYWHddFZ13/1bfKjIU1iQmR5XsMBgpen4Gi9hWheknEqQ3rEy04MABdE0cHk/A9MCQIbva0TNP2/ho=
-X-Received: by 2002:a05:6602:1504:: with SMTP id g4mr4004341iow.133.1634309394425;
- Fri, 15 Oct 2021 07:49:54 -0700 (PDT)
+        id S240453AbhJOPK0 convert rfc822-to-8bit (ORCPT
+        <rfc822;lists+linux-doc@lfdr.de>); Fri, 15 Oct 2021 11:10:26 -0400
+Received: from us-smtp-delivery-44.mimecast.com ([207.211.30.44]:41302 "EHLO
+        us-smtp-delivery-44.mimecast.com" rhost-flags-OK-OK-OK-OK)
+        by vger.kernel.org with ESMTP id S240727AbhJOPKS (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Fri, 15 Oct 2021 11:10:18 -0400
+Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
+ [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-399-71Xn5vDvOb-d7BmYsdFUgA-1; Fri, 15 Oct 2021 11:08:04 -0400
+X-MC-Unique: 71Xn5vDvOb-d7BmYsdFUgA-1
+Received: from smtp.corp.redhat.com (int-mx05.intmail.prod.int.phx2.redhat.com [10.5.11.15])
+        (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+        (No client certificate requested)
+        by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 00CCE80365C;
+        Fri, 15 Oct 2021 15:08:03 +0000 (UTC)
+Received: from x1.com (unknown [10.22.9.103])
+        by smtp.corp.redhat.com (Postfix) with ESMTP id 18CCE5D740;
+        Fri, 15 Oct 2021 15:07:57 +0000 (UTC)
+From:   Daniel Bristot de Oliveira <bristot@kernel.org>
+To:     Steven Rostedt <rostedt@goodmis.org>
+Cc:     Daniel Bristot de Oliveira <bristot@kernel.org>,
+        Jonathan Corbet <corbet@lwn.net>,
+        Thomas Gleixner <tglx@linutronix.de>,
+        Ingo Molnar <mingo@redhat.com>, Borislav Petkov <bp@alien8.de>,
+        "H. Peter Anvin" <hpa@zytor.com>,
+        Sebastian Andrzej Siewior <bigeasy@linutronix.de>,
+        x86@kernel.org, linux-doc@vger.kernel.org,
+        linux-kernel@vger.kernel.org
+Subject: [PATCH 0/4] trace: osnoise and timerlat fixes
+Date:   Fri, 15 Oct 2021 17:07:47 +0200
+Message-Id: <cover.1634308385.git.bristot@kernel.org>
 MIME-Version: 1.0
-References: <20211015055808.327453-1-pauk.denis@gmail.com> <20211015055808.327453-2-pauk.denis@gmail.com>
- <CAHp75VfUYgYT_RSNXCc+_3rkBbywL8ZDcAFPwr=WbPzcD8MF0w@mail.gmail.com>
- <CAB95QAQMP58-H427+nASKBvHOHZtLQqgRBSPa+MqGU7_D42M2Q@mail.gmail.com> <CAHp75VfJzaSKzw4E3P=GdtMU1vpi3DvW-VLGNbuaGaykEydhFQ@mail.gmail.com>
-In-Reply-To: <CAHp75VfJzaSKzw4E3P=GdtMU1vpi3DvW-VLGNbuaGaykEydhFQ@mail.gmail.com>
-From:   Eugene Shalygin <eugene.shalygin@gmail.com>
-Date:   Fri, 15 Oct 2021 16:49:43 +0200
-Message-ID: <CAB95QATQNaPiqJf7DuhWcJiU1Yq3_RXX7r+f3FAdw9aO0hvr0g@mail.gmail.com>
-Subject: Re: [PATCH v7 1/2] hwmon: (asus_wmi_ec_sensors) Support B550 Asus WMI.
-To:     Andy Shevchenko <andy.shevchenko@gmail.com>
-Cc:     Denis Pauk <pauk.denis@gmail.com>,
-        Platform Driver <platform-driver-x86@vger.kernel.org>,
-        thomas@weissschuh.net, Tor Vic <torvic9@mailbox.org>,
-        Oleksandr Natalenko <oleksandr@natalenko.name>,
-        kernel test robot <lkp@intel.com>,
-        Jean Delvare <jdelvare@suse.com>,
-        Guenter Roeck <linux@roeck-us.net>,
-        Jonathan Corbet <corbet@lwn.net>, linux-hwmon@vger.kernel.org,
-        Linux Documentation List <linux-doc@vger.kernel.org>,
-        Linux Kernel Mailing List <linux-kernel@vger.kernel.org>
-Content-Type: text/plain; charset="UTF-8"
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.15
+Authentication-Results: relay.mimecast.com;
+        auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=bristot@kernel.org
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: kernel.org
+Content-Transfer-Encoding: 8BIT
+Content-Type: text/plain; charset=WINDOWS-1252
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Hi, Andy,
+Hi Steven,
 
-On Fri, 15 Oct 2021 at 16:37, Andy Shevchenko <andy.shevchenko@gmail.com> wrote:
-> I didn't get it. If there is a strong endianess expected the parameter
-> should be __le16 or __be16, moreover it seems it missed the const
-> qualifier. Any preparatory stuff should be done in the
-> asus_wmi_ec_make_block_read_query() which prepares the input buffer,
-> doesn't it?
+This is a series of minor fixes to the timerlat and osnoise tracers.
 
-We need to produce and parse a, roughly speaking, hex-BSTR to pass it
-to the WMI function (save for its size parameter of 16 bits instead of
-32 for the BSTR). bin/hex conversion functions accept/output UTF-8
-strings and thus require an intermediate buffer and additional utf-8
-<-> utf-16 conversion. Do you insist that a loop with a stride of 4 is
-a homegrown library already?
+It includes a review of the timerlat tracer documentation, the addition of
+the migrate disabled field to the timerlat and osnoise headers, and a
+fix of a typo in the ifdef config comment in arch/x86/kernel/trace.c.
 
-> > > What's the point of calling acpi_os_free(obj) when you already know it's NULL?
-> >
-> > The case when obj->type != ACPI_TYPE_BUFFER
->
-> Read my comment again, please.
+No functional changes.
 
-I did it twice already and still can't understand. The WMI method can
-return a string, for example, which is an error for our code, but the
-buffer needs to be freed.
+Daniel Bristot de Oliveira (4):
+  trace/osnoise: Fix an ifdef comment
+  tracing/doc: Fix typos on the timerlat tracer documentation
+  trace/osnoise: Add migrate-disabled field to the osnoise header
+  trace/timerlat: Add migrate-disabled field to the timerlat header
 
-Regards,
-Eugene
+ Documentation/trace/timerlat-tracer.rst | 24 ++++++++++++------------
+ arch/x86/kernel/trace.c                 |  2 +-
+ kernel/trace/trace_osnoise.c            | 25 +++++++++++++------------
+ 3 files changed, 26 insertions(+), 25 deletions(-)
+
+-- 
+2.31.1
+
