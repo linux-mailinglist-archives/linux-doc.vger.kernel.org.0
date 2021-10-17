@@ -2,71 +2,145 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 5A0AC430B4F
-	for <lists+linux-doc@lfdr.de>; Sun, 17 Oct 2021 19:53:48 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 97DAA430C68
+	for <lists+linux-doc@lfdr.de>; Sun, 17 Oct 2021 23:49:53 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S238037AbhJQRz5 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Sun, 17 Oct 2021 13:55:57 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:55624 "EHLO
+        id S238326AbhJQVwC (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Sun, 17 Oct 2021 17:52:02 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:50354 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S232165AbhJQRz4 (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Sun, 17 Oct 2021 13:55:56 -0400
-Received: from mail-qk1-x734.google.com (mail-qk1-x734.google.com [IPv6:2607:f8b0:4864:20::734])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id E6BF9C06161C
-        for <linux-doc@vger.kernel.org>; Sun, 17 Oct 2021 10:53:46 -0700 (PDT)
-Received: by mail-qk1-x734.google.com with SMTP id bl14so13379795qkb.4
-        for <linux-doc@vger.kernel.org>; Sun, 17 Oct 2021 10:53:46 -0700 (PDT)
+        with ESMTP id S235532AbhJQVwC (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Sun, 17 Oct 2021 17:52:02 -0400
+Received: from mail-wm1-x331.google.com (mail-wm1-x331.google.com [IPv6:2a00:1450:4864:20::331])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id D1DB7C06161C;
+        Sun, 17 Oct 2021 14:49:51 -0700 (PDT)
+Received: by mail-wm1-x331.google.com with SMTP id n40-20020a05600c3ba800b0030da2439b21so8524320wms.0;
+        Sun, 17 Oct 2021 14:49:51 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
-        h=mime-version:reply-to:from:date:message-id:subject:to;
-        bh=fWbRtmwSvpw1bfC84j16Ls4FeCWDLyhXIFPNaloLQIk=;
-        b=Xg4B6OmLjSlQEg6NcRNZlWH20DlOOKx6JihSJ1qJj8dlCVGCA5H9rUkGWn4f1Ds7Pz
-         c663Y8NkZumHkC9pee4GSaaJ7BH13UyDMPEO+dMUPxGZ5ZA7vSteEmOk0wQvoCJrHyGx
-         KETPJDbGaHV40sIg//1v4GXHvi3Mp9tCcYDSfm9eKRwb0WERXGmEf5nK21CX4Nq+kGww
-         I72ahlIOM1mAdARjbVtSUCjFZajicSmFYHHKBykD2po8NXW8bUEuossQ4D8S55T/4CNf
-         e+omQUwozYW7C5BK9pl+dpJ8GAzsqltB+qfjls2S9+7Rrs76wBMyNVul8aI2Cl6kBI2H
-         kd+Q==
+        h=date:from:to:subject:message-id:mime-version:content-disposition;
+        bh=Rp36An9Whu1Q5tp2hHHWfj8eeqEEPzX3I1EdK1KS93Q=;
+        b=KdRiRJeSS5BCaItuDsrEu4ldLY05y+fpsv0f2NOQDUqkNf6pyn9f1hjL8k6Y1aRQ6V
+         eJrEj/T5oEqRe+UTnF4H5tQgxds1r8+FJd73f8CqnTB3Sk2quVYZ9WmR1gib6cWS+4HE
+         VU35MsCtaqbMEq9C6DWJlp7b42nTaYmTtq8QsCMC1l0yGIlzH5+yfVapqRhUNLx2dunt
+         d9DrmP9dkLG7A9ykJttUKM6nkPuG1cC+POWygmt/VRE1V/NNfqPhwSY5C0sQqrSVNHo8
+         yrkpqmwMl4ya3ceFnB4BTpC+UUiFrttbA7fcwkiBrBUInmFcZoBmuKIA+8V5rNwTMo96
+         t/nQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=x-gm-message-state:mime-version:reply-to:from:date:message-id
-         :subject:to;
-        bh=fWbRtmwSvpw1bfC84j16Ls4FeCWDLyhXIFPNaloLQIk=;
-        b=yxJkHZ3x82I2JflJ1POoUv3/XIzRtmYPhCOlCt1m89OdB4nlqaRZoySB2FTwRQka3y
-         mwbEsNnd3u0V5wlp2Sas9yfd+NPDB1OEhjUBHcOxvkn6KJq+2Q1aileKnPI1HzeiSbBX
-         3QPz5ilfjBlVj5bp8J4UOwan6xKIEDFmyzuq63Eyee4kvA7q6WZsRUwdJ88bG80jl1EO
-         k+Mfy3MW5aROkehBf3BPcExKTPOMY+0iVh+AKh/TtdLtKONlAY8nBn7cDNM6U8j/lFhu
-         CeRrAlmCFv7TgZlEVYiKdr2piKZCIxz4aBe4703XALAGShIDMChbFI7agXaMJdUt9lk1
-         U07g==
-X-Gm-Message-State: AOAM531olr1FFgTABi5A1BwKWXKrsb9EL0TMxsuTgc8ig2KcaKkhUdGM
-        JqCNYxiy1EZAd9J9EyZamPoUZJvCdyPchu+tty8=
-X-Google-Smtp-Source: ABdhPJzHXLyJhVZSvpBhAesFHMD4XP/bNMDBO2B5FuZTaRJuSifsnbifmprH/g9irf7TlzjnBR9OexrgTWXseMG4N8o=
-X-Received: by 2002:a37:9781:: with SMTP id z123mr19073106qkd.140.1634493225664;
- Sun, 17 Oct 2021 10:53:45 -0700 (PDT)
+        h=x-gm-message-state:date:from:to:subject:message-id:mime-version
+         :content-disposition;
+        bh=Rp36An9Whu1Q5tp2hHHWfj8eeqEEPzX3I1EdK1KS93Q=;
+        b=ZHM5L8z63ecviwK9Cw1pCRFve0+UzcCCWEoRkHPU3N5WFBMqIGIxxizSnE0X4u58Ab
+         NzJVfMj7kmow0jEdwiqfoxUZeIz5Fp3eI7b/uscE0G0RHkMM+2T2v6DyTouEduKlDGNf
+         6ZHHYzakJqisf9+RvV/wJ+92vTssi7tiW2IgiHlTVX80aWHhrEBzASvFfMGKe9zEsbhL
+         orZxMTMNz8S/VAnAcpiDjXAu0LWS4865hn/Ggxs2Vw7YyprPBUao7+dGJXlml/vMCRPn
+         qKxOq68xChutG5AiK63IgXcPDshCrde1DM3OeTk5HKTPyZWd3fjmULgVmM0otZlzXZnt
+         mg2A==
+X-Gm-Message-State: AOAM531cxrZVjzBqMcq0CnSMgZUFMY/38DtnMuEHTDEcSnByPY3xObrC
+        nNSW+YeC2lH0lUc07jNvyP9Twymas0I=
+X-Google-Smtp-Source: ABdhPJwDOCGD4ssD71NTxVoMy3pNyDLxXhfk75GEvgvWaIpbXuU5cMeEyQL/DY9bnydIi8KgbnM+XA==
+X-Received: by 2002:a05:600c:1c8c:: with SMTP id k12mr26755884wms.74.1634507390401;
+        Sun, 17 Oct 2021 14:49:50 -0700 (PDT)
+Received: from matrix-ESPRIMO-P710 (p200300c78f4e06087995111441372b59.dip0.t-ipconnect.de. [2003:c7:8f4e:608:7995:1114:4137:2b59])
+        by smtp.gmail.com with ESMTPSA id n1sm16208809wmi.30.2021.10.17.14.49.49
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Sun, 17 Oct 2021 14:49:50 -0700 (PDT)
+Date:   Sun, 17 Oct 2021 23:49:48 +0200
+From:   Philipp Hortmann <philipp.g.hortmann@gmail.com>
+To:     Jonathan Corbet <corbet@lwn.net>, linux-doc@vger.kernel.org,
+        linux-kernel@vger.kernel.org
+Subject: [PATCH] Docs: usb: update struct usb_driver, __init and __exit
+Message-ID: <20211017214948.GA9901@matrix-ESPRIMO-P710>
 MIME-Version: 1.0
-Received: by 2002:a0c:ef82:0:0:0:0:0 with HTTP; Sun, 17 Oct 2021 10:53:45
- -0700 (PDT)
-Reply-To: mariehamidou0@gmail.com
-From:   MARIE Hamidou <koumbousilatifa@gmail.com>
-Date:   Sun, 17 Oct 2021 19:53:45 +0200
-Message-ID: <CAMp7NG0cWFrkVX2sgzLX4jNwsfm7K6OyD3zqHQa6nshPg-aTdg@mail.gmail.com>
-Subject: Urgent,
-To:     undisclosed-recipients:;
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Urgent,
+update struct usb_driver from usb-skeleton.c.
+update __init and __exit functions that are moved from
+usb-skeleton.c to common used multi-stage macros.
 
-I need your assistance to validate your name in our Bank System to
-enable the Bank transfer the sum of $ 3.5 million Dollars, into your
-nominated bank account to your account for onward investment,
+Signed-off-by: Philipp Hortmann <philipp.g.hortmann@gmail.com>
+---
+ .../driver-api/usb/writing_usb_driver.rst     | 51 +++++++------------
+ 1 file changed, 19 insertions(+), 32 deletions(-)
 
-or any profitable business in your country and you will take 50% of
-the total  fund , for your assistance.To commence this transaction,  I
-require you to immediately indicate your interest by a return mail for
-more details,
+diff --git a/Documentation/driver-api/usb/writing_usb_driver.rst b/Documentation/driver-api/usb/writing_usb_driver.rst
+index 2176297e5765..1064adf79ccb 100644
+--- a/Documentation/driver-api/usb/writing_usb_driver.rst
++++ b/Documentation/driver-api/usb/writing_usb_driver.rst
+@@ -54,12 +54,15 @@ information is passed to the USB subsystem in the :c:type:`usb_driver`
+ structure. The skeleton driver declares a :c:type:`usb_driver` as::
+ 
+     static struct usb_driver skel_driver = {
+-	    .name        = "skeleton",
+-	    .probe       = skel_probe,
+-	    .disconnect  = skel_disconnect,
+-	    .fops        = &skel_fops,
+-	    .minor       = USB_SKEL_MINOR_BASE,
+-	    .id_table    = skel_table,
++           .name        = "skeleton",
++           .probe       = skel_probe,
++           .disconnect  = skel_disconnect,
++           .suspend     = skel_suspend,
++           .resume      = skel_resume,
++           .pre_reset   = skel_pre_reset,
++           .post_reset  = skel_post_reset,
++           .id_table    = skel_table,
++           .supports_autosuspend = 1,
+     };
+ 
+ 
+@@ -81,36 +84,20 @@ this user-space interaction. The skeleton driver needs this kind of
+ interface, so it provides a minor starting number and a pointer to its
+ :c:type:`file_operations` functions.
+ 
+-The USB driver is then registered with a call to :c:func:`usb_register`,
+-usually in the driver's init function, as shown here::
+-
+-    static int __init usb_skel_init(void)
+-    {
+-	    int result;
+-
+-	    /* register this driver with the USB subsystem */
+-	    result = usb_register(&skel_driver);
+-	    if (result < 0) {
+-		    err("usb_register failed for the "__FILE__ "driver."
+-			"Error number %d", result);
+-		    return -1;
+-	    }
+-
+-	    return 0;
+-    }
+-    module_init(usb_skel_init);
+-
++The USB driver is then registered with a call to :c:func:`usb_register`
++which is usually in the driver's init function. Since this functionality
++is usable with many USB drivers, it is hidden behind multi-stage macros.
++While the first macros are USB specific the later macros are used in different
++subsystems. This removes a lot of boilerplate code.
+ 
+ When the driver is unloaded from the system, it needs to deregister
+ itself with the USB subsystem. This is done with the :c:func:`usb_deregister`
+-function::
++which is also hidden behind multi-stage macros.
+ 
+-    static void __exit usb_skel_exit(void)
+-    {
+-	    /* deregister this driver with the USB subsystem */
+-	    usb_deregister(&skel_driver);
+-    }
+-    module_exit(usb_skel_exit);
++The init and exit functions are included in the macro :
++module_usb_driver(skel_driver);
++which is in the first stage replaced by:
++module_driver(__usb_driver, usb_register, usb_deregister)
+ 
+ 
+ To enable the linux-hotplug system to load the driver automatically when
+-- 
+2.25.1
 
-Thanks for your anticipated co-operation.
-Best regards.
-Ms.MARIE Hamidou
