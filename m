@@ -2,115 +2,69 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 495284332C6
-	for <lists+linux-doc@lfdr.de>; Tue, 19 Oct 2021 11:46:44 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id DAF6143331A
+	for <lists+linux-doc@lfdr.de>; Tue, 19 Oct 2021 12:04:32 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S234808AbhJSJsz (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 19 Oct 2021 05:48:55 -0400
-Received: from ixit.cz ([94.230.151.217]:50542 "EHLO ixit.cz"
-        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S234764AbhJSJsy (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Tue, 19 Oct 2021 05:48:54 -0400
-Received: from [10.30.101.69] (unknown [213.151.89.154])
-        (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-         key-exchange ECDHE (P-256) server-signature RSA-PSS (2048 bits) server-digest SHA256)
-        (No client certificate requested)
-        by ixit.cz (Postfix) with ESMTPSA id E7BC120064;
-        Tue, 19 Oct 2021 11:46:38 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ixit.cz; s=dkim;
-        t=1634636799;
-        h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-         to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-         in-reply-to:in-reply-to:references:references;
-        bh=dyqa41bKY0fVZZuGka4A1rVzoocTJ2PWZP1VFWd09wo=;
-        b=U1deCH0nMNIpv9q/xPxT+EZ+KnZxGnIiR/cBRd6+7aXD66ndQyMludawYSgbQUyZBBmMti
-        9tTZWVxNu2r6offw5iF3R1d5wUtC6eGyM89V2LGBdCFc/KaQUGabJxqtoFmGypYcK5gLMp
-        rdIBpgxIGF8wDEK6XwKpVqOg/2wV6Vs=
-Date:   Tue, 19 Oct 2021 11:45:05 +0200
-From:   David Heidelberg <david@ixit.cz>
-Subject: Re: [PATCH v3 23/23] dt-bindings: reserved-memory: ramoops: update
- ramoops.yaml references
-To:     Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
-Cc:     Linux Doc Mailing List <linux-doc@vger.kernel.org>,
+        id S235177AbhJSKGn (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 19 Oct 2021 06:06:43 -0400
+Received: from out30-131.freemail.mail.aliyun.com ([115.124.30.131]:57571 "EHLO
+        out30-131.freemail.mail.aliyun.com" rhost-flags-OK-OK-OK-OK)
+        by vger.kernel.org with ESMTP id S231652AbhJSKGk (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 19 Oct 2021 06:06:40 -0400
+X-Alimail-AntiSpam: AC=PASS;BC=-1|-1;BR=01201311R251e4;CH=green;DM=||false|;DS=||;FP=0|-1|-1|-1|0|-1|-1|-1;HT=e01e04394;MF=tianjia.zhang@linux.alibaba.com;NM=1;PH=DS;RN=19;SR=0;TI=SMTPD_---0UsuI4X._1634637863;
+Received: from localhost(mailfrom:tianjia.zhang@linux.alibaba.com fp:SMTPD_---0UsuI4X._1634637863)
+          by smtp.aliyun-inc.com(127.0.0.1);
+          Tue, 19 Oct 2021 18:04:24 +0800
+From:   Tianjia Zhang <tianjia.zhang@linux.alibaba.com>
+To:     James Bottomley <jejb@linux.ibm.com>,
+        Jarkko Sakkinen <jarkko@kernel.org>,
+        Mimi Zohar <zohar@linux.ibm.com>,
         Jonathan Corbet <corbet@lwn.net>,
-        Anton Vorontsov <anton@enomsg.org>,
-        Colin Cross <ccross@android.com>,
-        Kees Cook <keescook@chromium.org>,
-        Rob Herring <robh@kernel.org>, Tony Luck <tony.luck@intel.com>,
-        linux-kernel@vger.kernel.org
-Message-Id: <5RX71R.7VC8VUYI0TBC1@ixit.cz>
-In-Reply-To: <bccd9c181b68a1ebbaefd5dcce63e1b8a4b1596c.1634630486.git.mchehab+huawei@kernel.org>
-References: <cover.1634630485.git.mchehab+huawei@kernel.org>
-        <bccd9c181b68a1ebbaefd5dcce63e1b8a4b1596c.1634630486.git.mchehab+huawei@kernel.org>
-X-Mailer: geary/40.0
+        Herbert Xu <herbert@gondor.apana.org.au>,
+        "David S. Miller" <davem@davemloft.net>,
+        Peter Huewe <peterhuewe@gmx.de>,
+        Jason Gunthorpe <jgg@ziepe.ca>,
+        David Howells <dhowells@redhat.com>,
+        James Morris <jmorris@namei.org>,
+        "Serge E. Hallyn" <serge@hallyn.com>,
+        Jerry Snitselaar <jsnitsel@redhat.com>,
+        linux-integrity@vger.kernel.org, keyrings@vger.kernel.org,
+        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
+        linux-crypto@vger.kernel.org, linux-security-module@vger.kernel.org
+Cc:     Tianjia Zhang <tianjia.zhang@linux.alibaba.com>
+Subject: [PATCH v2 0/2] use SM3 instead of SM3_256
+Date:   Tue, 19 Oct 2021 18:04:21 +0800
+Message-Id: <20211019100423.43615-1-tianjia.zhang@linux.alibaba.com>
+X-Mailer: git-send-email 2.19.1.3.ge56e4f7
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii; format=flowed
+Content-Transfer-Encoding: 8bit
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Than you for catching this.
+According to https://tools.ietf.org/id/draft-oscca-cfrg-sm3-01.html,
+SM3 always produces a 256-bit hash value and there are no plans for
+other length development, so there is no ambiguity in the name of sm3.
 
-Reviewed-by: David Heidelberg <david@ixit.cz>
+---
+v2 changes:
+ - an additional macro with the same value is defined for uapi instead
+   of renaming directly
 
+Tianjia Zhang (2):
+  crypto: use SM3 instead of SM3_256
+  tpm: use SM3 instead of SM3_256
 
-Best regards
-David Heidelberg
+ Documentation/security/keys/trusted-encrypted.rst | 2 +-
+ crypto/hash_info.c                                | 4 ++--
+ drivers/char/tpm/tpm-sysfs.c                      | 4 ++--
+ drivers/char/tpm/tpm2-cmd.c                       | 2 +-
+ include/crypto/hash_info.h                        | 2 +-
+ include/linux/tpm.h                               | 2 +-
+ include/uapi/linux/hash_info.h                    | 3 ++-
+ security/keys/trusted-keys/trusted_tpm2.c         | 2 +-
+ 8 files changed, 11 insertions(+), 10 deletions(-)
 
-On Tue, Oct 19 2021 at 09:04:22 +0100, Mauro Carvalho Chehab 
-<mchehab+huawei@kernel.org> wrote:
-> Changeset 89a5bf0f22fd ("dt-bindings: reserved-memory: ramoops: 
-> Convert txt bindings to yaml")
-> renamed: Documentation/devicetree/bindings/reserved-memory/ramoops.txt
-> to: Documentation/devicetree/bindings/reserved-memory/ramoops.yaml.
-> 
-> Update the cross-references accordingly.
-> 
-> Fixes: 89a5bf0f22fd ("dt-bindings: reserved-memory: ramoops: Convert 
-> txt bindings to yaml")
-> Signed-off-by: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
-> ---
-> 
-> To mailbombing on a large number of people, only mailing lists were 
-> C/C on the cover.
-> See [PATCH v3 00/23] at: 
-> https://lore.kernel.org/all/cover.1634630485.git.mchehab+huawei@kernel.org/
-> 
->  Documentation/admin-guide/ramoops.rst | 2 +-
->  MAINTAINERS                           | 2 +-
->  2 files changed, 2 insertions(+), 2 deletions(-)
-> 
-> diff --git a/Documentation/admin-guide/ramoops.rst 
-> b/Documentation/admin-guide/ramoops.rst
-> index 8f107d8c9261..e9f85142182d 100644
-> --- a/Documentation/admin-guide/ramoops.rst
-> +++ b/Documentation/admin-guide/ramoops.rst
-> @@ -69,7 +69,7 @@ Setting the ramoops parameters can be done in 
-> several different manners:
->  	mem=128M ramoops.mem_address=0x8000000 ramoops.ecc=1
-> 
->   B. Use Device Tree bindings, as described in
-> - ``Documentation/devicetree/bindings/reserved-memory/ramoops.txt``.
-> + ``Documentation/devicetree/bindings/reserved-memory/ramoops.yaml``.
->   For example::
-> 
->  	reserved-memory {
-> diff --git a/MAINTAINERS b/MAINTAINERS
-> index d74b08c4fb1f..1dc758a0db58 100644
-> --- a/MAINTAINERS
-> +++ b/MAINTAINERS
-> @@ -15336,7 +15336,7 @@ S:	Maintained
->  T:	git git://git.kernel.org/pub/scm/linux/kernel/git/kees/linux.git 
-> for-next/pstore
->  F:	Documentation/admin-guide/ramoops.rst
->  F:	Documentation/admin-guide/pstore-blk.rst
-> -F:	Documentation/devicetree/bindings/reserved-memory/ramoops.txt
-> +F:	Documentation/devicetree/bindings/reserved-memory/ramoops.yaml
->  F:	drivers/acpi/apei/erst.c
->  F:	drivers/firmware/efi/efi-pstore.c
->  F:	fs/pstore/
-> --
-> 2.31.1
-> 
-
+-- 
+2.19.1.3.ge56e4f7
 
