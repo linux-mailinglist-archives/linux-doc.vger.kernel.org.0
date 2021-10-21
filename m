@@ -2,64 +2,138 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id ABAE74363C7
-	for <lists+linux-doc@lfdr.de>; Thu, 21 Oct 2021 16:09:15 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id A3D3043646C
+	for <lists+linux-doc@lfdr.de>; Thu, 21 Oct 2021 16:36:41 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S230329AbhJUOLa (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 21 Oct 2021 10:11:30 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:34648 "EHLO
-        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S230283AbhJUOLa (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Thu, 21 Oct 2021 10:11:30 -0400
-Received: from mail-il1-x129.google.com (mail-il1-x129.google.com [IPv6:2607:f8b0:4864:20::129])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id E4112C0613B9
-        for <linux-doc@vger.kernel.org>; Thu, 21 Oct 2021 07:09:11 -0700 (PDT)
-Received: by mail-il1-x129.google.com with SMTP id k3so776403ilu.2
-        for <linux-doc@vger.kernel.org>; Thu, 21 Oct 2021 07:09:11 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=mime-version:sender:from:date:message-id:subject:to;
-        bh=stAK7Nro7dzzp7MJf7WuAFn59lX8CgXQA4c48AzwWx8=;
-        b=TdVfY/XuN41HMKK+bGooL+Al+/wYFVKk3nBYQl47/fLRVcDVLz99k/4bKPoIz4c85R
-         8MweSscAMFwcmdRsbseB7/587MuE0vIXQXkRb56NEMIjyG9Fgz3WkF9egaeX3Be7rsKN
-         9U8V3MUGqluIy4c8dzGbxUNVWaD/8PEYhfdsuFQlB1cXH7s7zIZzAvcoQu/QMRYcw+Pu
-         YT/3rqX6W2nAov9Hm0RYmxTXB1GM0+6q1rbhWk/SJQ7bb4UyrZyJGtySfKzerNAHt13s
-         xqftIIU8fT+KV8zy61vCLr3TUlWTHxexvjA1DXq0li9+7s7w/Nu/9mxAHTUL+HKCJeVO
-         RqPg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=x-gm-message-state:mime-version:sender:from:date:message-id:subject
-         :to;
-        bh=stAK7Nro7dzzp7MJf7WuAFn59lX8CgXQA4c48AzwWx8=;
-        b=hnT/0U6tW5w+3Kwvy/r68bl0n8tfrEtgQJE5Ha3v9zM3FxNfCuvE1v2wqTIcLa3zMc
-         dH5tsLsw0A6TYLMl0onPLD2CApsbxHckUep2G/Rx9sPQV7N+0eETD5Z/ugsywePeN4Ic
-         ctavzHfOmFC51NX8OTTo3GmDXM2szHfVkS/Q63RWN+gmQYAV5owJD+mZqzJGBhoOyt/w
-         Qj3g+U9Bv67W7rYNvCtwOknkUOS1MbKOPb+ZuldfTt4x9+CPNWNA0gOYcHETnpllozvo
-         7OvSBaKEcRsiL+cznKY1SH9YS5wXD/u6qh7bEdoFcsSDCRTwB2gEDB34UJ3c25RxpPaQ
-         GKcQ==
-X-Gm-Message-State: AOAM531SUK1wnM1X1sV42XVVkX7cU8O/AZ74nLp3mck74GogzFSwxzDb
-        PTA06h0ABFg0L+N1140T8C1cBqQjOT3fXloC2eM=
-X-Google-Smtp-Source: ABdhPJy+LklxnRhIoSHwutAvJxJVE9KGg58b0DP2B+f5L/kgcDT2kSGlbKueF/EuvhU3CdnQhWB9cH6cjLYfbIJN8Hs=
-X-Received: by 2002:a05:6e02:1c89:: with SMTP id w9mr3705630ill.237.1634825351367;
- Thu, 21 Oct 2021 07:09:11 -0700 (PDT)
-MIME-Version: 1.0
-Sender: malindaandrew04@gmail.com
-Received: by 2002:a6b:193:0:0:0:0:0 with HTTP; Thu, 21 Oct 2021 07:09:10 -0700 (PDT)
-From:   Treasure Asumta <mytreasunta@gmail.com>
-Date:   Thu, 21 Oct 2021 07:09:10 -0700
-X-Google-Sender-Auth: 2JsKPPIwjVRmageWpv_i9ssBvLg
-Message-ID: <CAL7GHSHyuazo3VbT9Y5czkJ2zYsXqfSSmQtX2JzZnaQ8frNW8w@mail.gmail.com>
-Subject: JOB OFFER.
-To:     undisclosed-recipients:;
+        id S231431AbhJUOiz (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 21 Oct 2021 10:38:55 -0400
+Received: from mx0a-001b2d01.pphosted.com ([148.163.156.1]:53074 "EHLO
+        mx0a-001b2d01.pphosted.com" rhost-flags-OK-OK-OK-OK)
+        by vger.kernel.org with ESMTP id S230072AbhJUOiz (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Thu, 21 Oct 2021 10:38:55 -0400
+Received: from pps.filterd (m0098399.ppops.net [127.0.0.1])
+        by mx0a-001b2d01.pphosted.com (8.16.1.2/8.16.1.2) with SMTP id 19LEC1vd009721;
+        Thu, 21 Oct 2021 10:35:28 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ibm.com; h=message-id : subject :
+ from : to : cc : date : in-reply-to : references : content-type :
+ mime-version : content-transfer-encoding; s=pp1;
+ bh=FBw0vSRO0XUub1pEzFoJmCyGnK71BvE2AT1py786li0=;
+ b=csmas6O3QyCfQMgImh6U4A65h9S+rwU8uhKvB7Q1ApOvKaTmKqDIfU8PMm/1lweIxDeH
+ SB9ia6teNfvGSH6Uj1Hlx/SzmfLOz1haB6hR0WfNVnlSbtQHuG3XusODqKP7m6P70dEG
+ zLXAHVlHXMUbVU6LIgEjeRSuD8fifUvHYQacIayWeGyOKHYjm2tPYyhs3uLhpmydZAcM
+ Fb18SKMPPNoTiBC6io2mN1YmowSO5qcrg1ZaRv4nRORzPf77VSpo/dVbkzMygdBIZR5k
+ 6dAmtfsDT8Dfa0GgtvFlVthznQl1dyKk8jz9qPSvcThAcXajpHEi4Opu8kAX8FMKAWlL NQ== 
+Received: from pps.reinject (localhost [127.0.0.1])
+        by mx0a-001b2d01.pphosted.com with ESMTP id 3bu8h8aq62-1
+        (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+        Thu, 21 Oct 2021 10:35:27 -0400
+Received: from m0098399.ppops.net (m0098399.ppops.net [127.0.0.1])
+        by pps.reinject (8.16.0.43/8.16.0.43) with SMTP id 19LECvkQ014640;
+        Thu, 21 Oct 2021 10:35:27 -0400
+Received: from ppma04dal.us.ibm.com (7a.29.35a9.ip4.static.sl-reverse.com [169.53.41.122])
+        by mx0a-001b2d01.pphosted.com with ESMTP id 3bu8h8aq5h-1
+        (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+        Thu, 21 Oct 2021 10:35:27 -0400
+Received: from pps.filterd (ppma04dal.us.ibm.com [127.0.0.1])
+        by ppma04dal.us.ibm.com (8.16.1.2/8.16.1.2) with SMTP id 19LEJewu016580;
+        Thu, 21 Oct 2021 14:35:25 GMT
+Received: from b03cxnp08027.gho.boulder.ibm.com (b03cxnp08027.gho.boulder.ibm.com [9.17.130.19])
+        by ppma04dal.us.ibm.com with ESMTP id 3bqpcdq5js-1
+        (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+        Thu, 21 Oct 2021 14:35:25 +0000
+Received: from b03ledav002.gho.boulder.ibm.com (b03ledav002.gho.boulder.ibm.com [9.17.130.233])
+        by b03cxnp08027.gho.boulder.ibm.com (8.14.9/8.14.9/NCO v10.0) with ESMTP id 19LEZOrO18875014
+        (version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+        Thu, 21 Oct 2021 14:35:24 GMT
+Received: from b03ledav002.gho.boulder.ibm.com (unknown [127.0.0.1])
+        by IMSVA (Postfix) with ESMTP id 36E47136053;
+        Thu, 21 Oct 2021 14:35:24 +0000 (GMT)
+Received: from b03ledav002.gho.boulder.ibm.com (unknown [127.0.0.1])
+        by IMSVA (Postfix) with ESMTP id B688D136061;
+        Thu, 21 Oct 2021 14:35:21 +0000 (GMT)
+Received: from farman-thinkpad-t470p (unknown [9.163.26.166])
+        by b03ledav002.gho.boulder.ibm.com (Postfix) with ESMTP;
+        Thu, 21 Oct 2021 14:35:21 +0000 (GMT)
+Message-ID: <11390ab81441c8d9cd06802dbcbf7c473a51bd29.camel@linux.ibm.com>
+Subject: Re: [PATCH v3 01/10] vfio/ccw: Remove unneeded GFP_DMA
+From:   Eric Farman <farman@linux.ibm.com>
+To:     Jason Gunthorpe <jgg@nvidia.com>, David Airlie <airlied@linux.ie>,
+        Tony Krowiak <akrowiak@linux.ibm.com>,
+        Alex Williamson <alex.williamson@redhat.com>,
+        Christian Borntraeger <borntraeger@de.ibm.com>,
+        Cornelia Huck <cohuck@redhat.com>,
+        Jonathan Corbet <corbet@lwn.net>,
+        Daniel Vetter <daniel@ffwll.ch>,
+        dri-devel@lists.freedesktop.org,
+        Harald Freudenberger <freude@linux.ibm.com>,
+        Vasily Gorbik <gor@linux.ibm.com>,
+        Heiko Carstens <hca@linux.ibm.com>,
+        intel-gfx@lists.freedesktop.org,
+        intel-gvt-dev@lists.freedesktop.org,
+        Jani Nikula <jani.nikula@linux.intel.com>,
+        Jason Herne <jjherne@linux.ibm.com>,
+        Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
+        kvm@vger.kernel.org, Kirti Wankhede <kwankhede@nvidia.com>,
+        linux-doc@vger.kernel.org, linux-s390@vger.kernel.org,
+        Matthew Rosato <mjrosato@linux.ibm.com>,
+        Peter Oberparleiter <oberpar@linux.ibm.com>,
+        Halil Pasic <pasic@linux.ibm.com>,
+        Rodrigo Vivi <rodrigo.vivi@intel.com>,
+        Vineeth Vijayan <vneethv@linux.ibm.com>,
+        Zhenyu Wang <zhenyuw@linux.intel.com>,
+        Zhi Wang <zhi.a.wang@intel.com>
+Cc:     Christoph Hellwig <hch@infradead.org>,
+        Christoph Hellwig <hch@lst.de>
+Date:   Thu, 21 Oct 2021 10:35:19 -0400
+In-Reply-To: <1-v3-57c1502c62fd+2190-ccw_mdev_jgg@nvidia.com>
+References: <1-v3-57c1502c62fd+2190-ccw_mdev_jgg@nvidia.com>
 Content-Type: text/plain; charset="UTF-8"
+X-Mailer: Evolution 3.28.5 (3.28.5-16.el8) 
+Mime-Version: 1.0
+Content-Transfer-Encoding: 7bit
+X-TM-AS-GCONF: 00
+X-Proofpoint-GUID: dEwQA06S1dTrkYbcDcVFTeYyJeG3-T5W
+X-Proofpoint-ORIG-GUID: uKnpOaemnUNFZPnMnUkjxu1hxCUaNZbj
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.182.1,Aquarius:18.0.790,Hydra:6.0.425,FMLib:17.0.607.475
+ definitions=2021-10-21_04,2021-10-21_02,2020-04-07_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 mlxscore=0 impostorscore=0
+ adultscore=0 malwarescore=0 suspectscore=0 bulkscore=0 clxscore=1015
+ priorityscore=1501 lowpriorityscore=0 phishscore=0 mlxlogscore=999
+ spamscore=0 classifier=spam adjust=0 reason=mlx scancount=1
+ engine=8.12.0-2109230001 definitions=main-2110210077
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Hello greetings to you? Please accept my apology for sending this
-message to you through this medium, You and I know it is the best and
-secured means of communication between the sender and receiver, my
-name is Mrs. Treasure Asumta and I want to know if your email is still
-Valid because I have been expecting your response to my previous mail
-to you concerning a Busniess Transaction that i want to discuss with
-you but to no avail.
+On Fri, 2021-10-01 at 14:52 -0300, Jason Gunthorpe wrote:
+> Since the ccw_io_region was split out of the private the allocation
+> no
+> longer needs the GFP_DMA. Remove it.
+> 
+> Reported-by: Christoph Hellwig <hch@infradead.org>
+> Fixes: c98e16b2fa12 ("s390/cio: Convert ccw_io_region to pointer")
+> Signed-off-by: Jason Gunthorpe <jgg@nvidia.com>
+
+Reviewed-by: Eric Farman <farman@linux.ibm.com>
+
+> ---
+>  drivers/s390/cio/vfio_ccw_drv.c | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+> 
+> diff --git a/drivers/s390/cio/vfio_ccw_drv.c
+> b/drivers/s390/cio/vfio_ccw_drv.c
+> index 76099bcb765b45..371558ec92045d 100644
+> --- a/drivers/s390/cio/vfio_ccw_drv.c
+> +++ b/drivers/s390/cio/vfio_ccw_drv.c
+> @@ -161,7 +161,7 @@ static int vfio_ccw_sch_probe(struct subchannel
+> *sch)
+>  		return -ENODEV;
+>  	}
+>  
+> -	private = kzalloc(sizeof(*private), GFP_KERNEL | GFP_DMA);
+> +	private = kzalloc(sizeof(*private), GFP_KERNEL);
+>  	if (!private)
+>  		return -ENOMEM;
+>  
+
