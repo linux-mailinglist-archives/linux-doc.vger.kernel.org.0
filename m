@@ -2,118 +2,64 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 3526443636C
-	for <lists+linux-doc@lfdr.de>; Thu, 21 Oct 2021 15:51:09 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id ABAE74363C7
+	for <lists+linux-doc@lfdr.de>; Thu, 21 Oct 2021 16:09:15 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S231207AbhJUNxX (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 21 Oct 2021 09:53:23 -0400
-Received: from mx0a-001b2d01.pphosted.com ([148.163.156.1]:31318 "EHLO
-        mx0a-001b2d01.pphosted.com" rhost-flags-OK-OK-OK-OK)
-        by vger.kernel.org with ESMTP id S231203AbhJUNxW (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Thu, 21 Oct 2021 09:53:22 -0400
-Received: from pps.filterd (m0098396.ppops.net [127.0.0.1])
-        by mx0a-001b2d01.pphosted.com (8.16.1.2/8.16.1.2) with SMTP id 19LBmFYm000410;
-        Thu, 21 Oct 2021 09:50:55 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ibm.com; h=subject : to : cc :
- references : from : message-id : date : mime-version : in-reply-to :
- content-type : content-transfer-encoding; s=pp1;
- bh=d14w0g8tRnMjwP/1zNSn1u/1Y8YLZR36+3iNTDkZh8I=;
- b=Lg/nCcRThY7W9THtk9v1eTDRaJuTzuTgzNrwThBoZ35cAkzZ15UqSYVKIAX+jbnG05u1
- +RmUUAEIJ3OulA0gJ/GHGSI4ayGGmhk9ZDJ0p0p2I5DdoKDS3F8yvzBf0NFEL37TLNgV
- EWWf0ejp+1k0kBiMlom4W8JB2wD0Bhc9OLmaK11sekmrxE7zr9nj5Z1HyubV6MFnAISK
- KG9MxVBCInAvylwllgQJhYN1ldl7PsnNAFeryJq3E9RUkhj+h+ZJtFg+jI/fne3RBdKr
- zmH7/ZL4U5XowaUyLcn7bq9nxW/+n5Z9CWMKl9edGkWYagtfXC+8cVAeKpdjzyAa/Abf IA== 
-Received: from pps.reinject (localhost [127.0.0.1])
-        by mx0a-001b2d01.pphosted.com with ESMTP id 3bu7neawmr-1
-        (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
-        Thu, 21 Oct 2021 09:50:54 -0400
-Received: from m0098396.ppops.net (m0098396.ppops.net [127.0.0.1])
-        by pps.reinject (8.16.0.43/8.16.0.43) with SMTP id 19LCnquk017418;
-        Thu, 21 Oct 2021 09:50:54 -0400
-Received: from ppma04wdc.us.ibm.com (1a.90.2fa9.ip4.static.sl-reverse.com [169.47.144.26])
-        by mx0a-001b2d01.pphosted.com with ESMTP id 3bu7neawm7-1
-        (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
-        Thu, 21 Oct 2021 09:50:54 -0400
-Received: from pps.filterd (ppma04wdc.us.ibm.com [127.0.0.1])
-        by ppma04wdc.us.ibm.com (8.16.1.2/8.16.1.2) with SMTP id 19LDhURC005979;
-        Thu, 21 Oct 2021 13:50:52 GMT
-Received: from b01cxnp23034.gho.pok.ibm.com (b01cxnp23034.gho.pok.ibm.com [9.57.198.29])
-        by ppma04wdc.us.ibm.com with ESMTP id 3bqpccdhtw-1
-        (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
-        Thu, 21 Oct 2021 13:50:52 +0000
-Received: from b01ledav006.gho.pok.ibm.com (b01ledav006.gho.pok.ibm.com [9.57.199.111])
-        by b01cxnp23034.gho.pok.ibm.com (8.14.9/8.14.9/NCO v10.0) with ESMTP id 19LDopjk38273510
-        (version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
-        Thu, 21 Oct 2021 13:50:51 GMT
-Received: from b01ledav006.gho.pok.ibm.com (unknown [127.0.0.1])
-        by IMSVA (Postfix) with ESMTP id 64589AC05F;
-        Thu, 21 Oct 2021 13:50:51 +0000 (GMT)
-Received: from b01ledav006.gho.pok.ibm.com (unknown [127.0.0.1])
-        by IMSVA (Postfix) with ESMTP id DDC04AC059;
-        Thu, 21 Oct 2021 13:50:45 +0000 (GMT)
-Received: from li-c92d2ccc-254b-11b2-a85c-a700b5bfb098.ibm.com (unknown [9.211.103.136])
-        by b01ledav006.gho.pok.ibm.com (Postfix) with ESMTP;
-        Thu, 21 Oct 2021 13:50:45 +0000 (GMT)
-Subject: Re: [PATCH v3 02/10] vfio/ccw: Use functions for alloc/free of the
- vfio_ccw_private
-To:     Jason Gunthorpe <jgg@nvidia.com>, David Airlie <airlied@linux.ie>,
-        Tony Krowiak <akrowiak@linux.ibm.com>,
-        Alex Williamson <alex.williamson@redhat.com>,
-        Christian Borntraeger <borntraeger@de.ibm.com>,
-        Cornelia Huck <cohuck@redhat.com>,
-        Jonathan Corbet <corbet@lwn.net>,
-        Daniel Vetter <daniel@ffwll.ch>,
-        dri-devel@lists.freedesktop.org,
-        Eric Farman <farman@linux.ibm.com>,
-        Harald Freudenberger <freude@linux.ibm.com>,
-        Vasily Gorbik <gor@linux.ibm.com>,
-        Heiko Carstens <hca@linux.ibm.com>,
-        intel-gfx@lists.freedesktop.org,
-        intel-gvt-dev@lists.freedesktop.org,
-        Jani Nikula <jani.nikula@linux.intel.com>,
-        Jason Herne <jjherne@linux.ibm.com>,
-        Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
-        kvm@vger.kernel.org, Kirti Wankhede <kwankhede@nvidia.com>,
-        linux-doc@vger.kernel.org, linux-s390@vger.kernel.org,
-        Peter Oberparleiter <oberpar@linux.ibm.com>,
-        Halil Pasic <pasic@linux.ibm.com>,
-        Rodrigo Vivi <rodrigo.vivi@intel.com>,
-        Vineeth Vijayan <vneethv@linux.ibm.com>,
-        Zhenyu Wang <zhenyuw@linux.intel.com>,
-        Zhi Wang <zhi.a.wang@intel.com>
-Cc:     Christoph Hellwig <hch@infradead.org>,
-        Christoph Hellwig <hch@lst.de>
-References: <2-v3-57c1502c62fd+2190-ccw_mdev_jgg@nvidia.com>
-From:   Matthew Rosato <mjrosato@linux.ibm.com>
-Message-ID: <c8001366-c315-da65-0df3-7adfd714c7bd@linux.ibm.com>
-Date:   Thu, 21 Oct 2021 09:50:44 -0400
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
- Thunderbird/78.14.0
+        id S230329AbhJUOLa (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 21 Oct 2021 10:11:30 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:34648 "EHLO
+        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S230283AbhJUOLa (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Thu, 21 Oct 2021 10:11:30 -0400
+Received: from mail-il1-x129.google.com (mail-il1-x129.google.com [IPv6:2607:f8b0:4864:20::129])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id E4112C0613B9
+        for <linux-doc@vger.kernel.org>; Thu, 21 Oct 2021 07:09:11 -0700 (PDT)
+Received: by mail-il1-x129.google.com with SMTP id k3so776403ilu.2
+        for <linux-doc@vger.kernel.org>; Thu, 21 Oct 2021 07:09:11 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112;
+        h=mime-version:sender:from:date:message-id:subject:to;
+        bh=stAK7Nro7dzzp7MJf7WuAFn59lX8CgXQA4c48AzwWx8=;
+        b=TdVfY/XuN41HMKK+bGooL+Al+/wYFVKk3nBYQl47/fLRVcDVLz99k/4bKPoIz4c85R
+         8MweSscAMFwcmdRsbseB7/587MuE0vIXQXkRb56NEMIjyG9Fgz3WkF9egaeX3Be7rsKN
+         9U8V3MUGqluIy4c8dzGbxUNVWaD/8PEYhfdsuFQlB1cXH7s7zIZzAvcoQu/QMRYcw+Pu
+         YT/3rqX6W2nAov9Hm0RYmxTXB1GM0+6q1rbhWk/SJQ7bb4UyrZyJGtySfKzerNAHt13s
+         xqftIIU8fT+KV8zy61vCLr3TUlWTHxexvjA1DXq0li9+7s7w/Nu/9mxAHTUL+HKCJeVO
+         RqPg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:mime-version:sender:from:date:message-id:subject
+         :to;
+        bh=stAK7Nro7dzzp7MJf7WuAFn59lX8CgXQA4c48AzwWx8=;
+        b=hnT/0U6tW5w+3Kwvy/r68bl0n8tfrEtgQJE5Ha3v9zM3FxNfCuvE1v2wqTIcLa3zMc
+         dH5tsLsw0A6TYLMl0onPLD2CApsbxHckUep2G/Rx9sPQV7N+0eETD5Z/ugsywePeN4Ic
+         ctavzHfOmFC51NX8OTTo3GmDXM2szHfVkS/Q63RWN+gmQYAV5owJD+mZqzJGBhoOyt/w
+         Qj3g+U9Bv67W7rYNvCtwOknkUOS1MbKOPb+ZuldfTt4x9+CPNWNA0gOYcHETnpllozvo
+         7OvSBaKEcRsiL+cznKY1SH9YS5wXD/u6qh7bEdoFcsSDCRTwB2gEDB34UJ3c25RxpPaQ
+         GKcQ==
+X-Gm-Message-State: AOAM531SUK1wnM1X1sV42XVVkX7cU8O/AZ74nLp3mck74GogzFSwxzDb
+        PTA06h0ABFg0L+N1140T8C1cBqQjOT3fXloC2eM=
+X-Google-Smtp-Source: ABdhPJy+LklxnRhIoSHwutAvJxJVE9KGg58b0DP2B+f5L/kgcDT2kSGlbKueF/EuvhU3CdnQhWB9cH6cjLYfbIJN8Hs=
+X-Received: by 2002:a05:6e02:1c89:: with SMTP id w9mr3705630ill.237.1634825351367;
+ Thu, 21 Oct 2021 07:09:11 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <2-v3-57c1502c62fd+2190-ccw_mdev_jgg@nvidia.com>
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
-X-TM-AS-GCONF: 00
-X-Proofpoint-ORIG-GUID: OMk12XytGYsZSzM7d5PGpXAUx36OhJuG
-X-Proofpoint-GUID: eErX0QzMpAEo3M3GdgZUorSNXEG2-ggA
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.182.1,Aquarius:18.0.790,Hydra:6.0.425,FMLib:17.0.607.475
- definitions=2021-10-21_04,2021-10-21_02,2020-04-07_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 lowpriorityscore=0
- suspectscore=0 bulkscore=0 spamscore=0 mlxlogscore=982 mlxscore=0
- clxscore=1015 priorityscore=1501 impostorscore=0 malwarescore=0
- phishscore=0 adultscore=0 classifier=spam adjust=0 reason=mlx scancount=1
- engine=8.12.0-2109230001 definitions=main-2110210072
+Sender: malindaandrew04@gmail.com
+Received: by 2002:a6b:193:0:0:0:0:0 with HTTP; Thu, 21 Oct 2021 07:09:10 -0700 (PDT)
+From:   Treasure Asumta <mytreasunta@gmail.com>
+Date:   Thu, 21 Oct 2021 07:09:10 -0700
+X-Google-Sender-Auth: 2JsKPPIwjVRmageWpv_i9ssBvLg
+Message-ID: <CAL7GHSHyuazo3VbT9Y5czkJ2zYsXqfSSmQtX2JzZnaQ8frNW8w@mail.gmail.com>
+Subject: JOB OFFER.
+To:     undisclosed-recipients:;
+Content-Type: text/plain; charset="UTF-8"
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On 10/1/21 1:52 PM, Jason Gunthorpe wrote:
-> Makes the code easier to understand what is memory lifecycle and what is
-> other stuff.
-> 
-> Reviewed-by: Eric Farman <farman@linux.ibm.com>
-> Signed-off-by: Jason Gunthorpe <jgg@nvidia.com>
-
-Reviewed-by: Matthew Rosato <mjrosato@linux.ibm.com>
+Hello greetings to you? Please accept my apology for sending this
+message to you through this medium, You and I know it is the best and
+secured means of communication between the sender and receiver, my
+name is Mrs. Treasure Asumta and I want to know if your email is still
+Valid because I have been expecting your response to my previous mail
+to you concerning a Busniess Transaction that i want to discuss with
+you but to no avail.
