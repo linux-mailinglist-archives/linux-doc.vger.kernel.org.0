@@ -2,120 +2,65 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 7A3C943611D
-	for <lists+linux-doc@lfdr.de>; Thu, 21 Oct 2021 14:12:30 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 5EB50436161
+	for <lists+linux-doc@lfdr.de>; Thu, 21 Oct 2021 14:19:36 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S231309AbhJUMOp (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 21 Oct 2021 08:14:45 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:35104 "EHLO
+        id S231764AbhJUMVu (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 21 Oct 2021 08:21:50 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:36816 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S230360AbhJUMOo (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Thu, 21 Oct 2021 08:14:44 -0400
-Received: from mail-wr1-x434.google.com (mail-wr1-x434.google.com [IPv6:2a00:1450:4864:20::434])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 787F2C06161C
-        for <linux-doc@vger.kernel.org>; Thu, 21 Oct 2021 05:12:28 -0700 (PDT)
-Received: by mail-wr1-x434.google.com with SMTP id r7so696806wrc.10
-        for <linux-doc@vger.kernel.org>; Thu, 21 Oct 2021 05:12:28 -0700 (PDT)
+        with ESMTP id S231723AbhJUMV0 (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Thu, 21 Oct 2021 08:21:26 -0400
+Received: from mail-io1-xd29.google.com (mail-io1-xd29.google.com [IPv6:2607:f8b0:4864:20::d29])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 09644C06176A
+        for <linux-doc@vger.kernel.org>; Thu, 21 Oct 2021 05:18:58 -0700 (PDT)
+Received: by mail-io1-xd29.google.com with SMTP id h196so659389iof.2
+        for <linux-doc@vger.kernel.org>; Thu, 21 Oct 2021 05:18:57 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google;
-        h=date:from:to:cc:subject:message-id:references:mime-version
-         :content-disposition:content-transfer-encoding:in-reply-to;
-        bh=0vIQqYKkVJx23x9coP48EXe0l28e0ZIhnZSwiowHwyg=;
-        b=fjDYojDfUIX7vpR8IADwpgpzztO0mBpWvU65QUoNAhI5h5l4jvmUm9miufICBJ5fu+
-         FxiTVlKpiDwYP9RvWlJVzgmCn3rKhVbPBFdp3eV8AhF2NEhLLUTgdfsXR6jOaKfV95yA
-         yKh8F+J7jnDhCPp43d4HMm/IFi5aPJNRVnbPhadYav0+2DUOEOyshcveJJlYbHUBBW89
-         Gsnd+/3PE0Y4U0MHiH5O9sI0rqUhz35zhF46IeFgbtyqZUXESpSdaHnQMpFL1oUoZCPz
-         VcOuC9wOfHlEiiYm1/30+n9HZsc9I3fqsfVUg3Hb9vpiPeZPD4gkJpKPjASc40Nw/YQx
-         Tr/Q==
+        d=gmail.com; s=20210112;
+        h=mime-version:reply-to:from:date:message-id:subject:to;
+        bh=G2Jq8ABcZaKAiy06d3oRm5z7XXaT0OFvg3EWPt/6AmM=;
+        b=ffKmYx2fMIYl+OvJQQopnpiCeJRTG9P9KFv8M/82NWd2iRdr6FH2GSUfX4dihVwp/4
+         j3BBt8gtfGRwriH7QaI70cXqaYxp9ZB8IdW+AAJ3XWxbhn/W/4z89PrBZ3/2rnhl+5p4
+         slIUeI/d0se+fbKVCqySusiscs7YTggdFIx/lIQo0jD9OBm3/E6HIs73TdR5+EDc4Ahn
+         Mx3oX/4Jht8hJFRtk5Rk/ZtBUnWHcvUlGjzuHFD2c3qgVHCXo5sQXMFhDt//I4s8bxor
+         0lHgZbVQWxyw1uqR2LKA3z5mNeOQjztcOBRK2nMHBotT/Ptq5yh5oJc65RUVpYj9vAKX
+         E+1w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=x-gm-message-state:date:from:to:cc:subject:message-id:references
-         :mime-version:content-disposition:content-transfer-encoding
-         :in-reply-to;
-        bh=0vIQqYKkVJx23x9coP48EXe0l28e0ZIhnZSwiowHwyg=;
-        b=GzBavtXPwy2FIFr7jNhGY/RVFV5YCI3hyLjQ1Q0y4JeC4vH/XlEMbLxb495gQ6R4vV
-         Qd7nr122f5RTIth6qi8eADQT80MgabQlq1vgZmvmMEFc2rLbb2T5vfFRLqGuznZ5JpcV
-         nuL4YLonX21exKuLvWql6I7ygUrTj80yWmsF+KD+i4Tba4a6Lkc6bOIRvkERRoR9byVY
-         OexSOkM2RAx81A1KkaP5l3tAsWEoONQ8Kd1Jw2XeOsQ8jGZC+2s7FiDrooUAP/GWsgSR
-         F1lDqcbExm7TfMqZScj9iccqTNw28h8mjME/YO/n2RBNZyAaeVVt9re87gAhgo8kSe1S
-         ZeDA==
-X-Gm-Message-State: AOAM530db6fBwe8FQ4C0esuCCi4CjN0k085624Q0u98wTZKDXf+W+UWv
-        etOo37oYbvcTw/kaVbpyllo/ag==
-X-Google-Smtp-Source: ABdhPJzQay9dVlMqf3DY2Soi8sHXotsMVqIdyaXQBVCXgXq5JubAhzo8DeCcf5lcsyavZ1roeJjN1g==
-X-Received: by 2002:a05:6000:1683:: with SMTP id y3mr6576853wrd.314.1634818346988;
-        Thu, 21 Oct 2021 05:12:26 -0700 (PDT)
-Received: from google.com ([95.148.6.207])
-        by smtp.gmail.com with ESMTPSA id a2sm5200597wrq.9.2021.10.21.05.12.26
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 21 Oct 2021 05:12:26 -0700 (PDT)
-Date:   Thu, 21 Oct 2021 13:12:24 +0100
-From:   Lee Jones <lee.jones@linaro.org>
-To:     Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
-Cc:     Linux Doc Mailing List <linux-doc@vger.kernel.org>,
-        Jonathan Corbet <corbet@lwn.net>,
-        Bartosz Golaszewski <brgl@bgdev.pl>,
-        Chen-Yu Tsai <wens@csie.org>,
-        Linus Walleij <linus.walleij@linaro.org>,
-        Maxime Ripard <maxime@cerno.tech>,
-        Rob Herring <robh+dt@kernel.org>, devicetree@vger.kernel.org,
-        linux-gpio@vger.kernel.org, linux-kernel@vger.kernel.org
-Subject: Re: [PATCH v3 20/23] dt-bindings: mfd: update x-powers,axp152.yaml
- reference
-Message-ID: <YXFZKGfFTbjAVCb5@google.com>
-References: <cover.1634630485.git.mchehab+huawei@kernel.org>
- <aedef820f4dc9af5d3a3fcce2ad733d75e1ad4f0.1634630486.git.mchehab+huawei@kernel.org>
+        h=x-gm-message-state:mime-version:reply-to:from:date:message-id
+         :subject:to;
+        bh=G2Jq8ABcZaKAiy06d3oRm5z7XXaT0OFvg3EWPt/6AmM=;
+        b=ZdSACH3VEr17JuuCi7+QrzIGKXdoLLq2llLqkcpKZuJkln/GXlfd8H+yWadjq05Wvy
+         MrF4WTsAbxsIx2lNXwYBFF4OBDswbVmlbAgh2I9x6IdNGgPognbhkRf1R4uhHIBPn+s0
+         8ldST5SN+z8v9VVK0UuavIJdlnGws55BpsX1W0cdstxR9ouxewT8rZ/qohEP5eJCxL/O
+         rYcKR9hDpsyvLMDHts88Ndk3UKW79YGf+CGVMLyXF84qLqdETpBbgST0bMcE/efsK8g0
+         NFVqyONHJbsWGDYnp/1Pp2Zmmt5oVsNHD9nHn90KllEZ1fsgjV+rbVjVVFiR1OyXwpCx
+         GSeA==
+X-Gm-Message-State: AOAM532gmZ5GU3EDEP0Pfs6ODrfp9Z6ihhy4tUBlEbPnbFnBGsHNnwYO
+        yfUpvPazaOIWKiDuj1xy+IqhLMrHHj8TEbnSMhc=
+X-Google-Smtp-Source: ABdhPJy/O5GAp34/8OGCgwxgN16t4zAtUhD1QqHkZqC4kznm6N81zl7Wcf3jBmF+fUfqmk/Z+gQhgoaiTdlocMxWQvk=
+X-Received: by 2002:a05:6602:2e81:: with SMTP id m1mr3773434iow.23.1634818737372;
+ Thu, 21 Oct 2021 05:18:57 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <aedef820f4dc9af5d3a3fcce2ad733d75e1ad4f0.1634630486.git.mchehab+huawei@kernel.org>
+Received: by 2002:a05:6638:1924:0:0:0:0 with HTTP; Thu, 21 Oct 2021 05:18:57
+ -0700 (PDT)
+Reply-To: ooisangkuang63@gmail.com
+From:   Mr Ooi Sang Kuang <mrsshirleyperezfosgate7@gmail.com>
+Date:   Thu, 21 Oct 2021 05:18:57 -0700
+Message-ID: <CA+ynneC82om4XGpeSLLyaZ9uiZCuHkofPAtHcga0--5BW77aFA@mail.gmail.com>
+Subject: Hello
+To:     undisclosed-recipients:;
+Content-Type: text/plain; charset="UTF-8"
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Tue, 19 Oct 2021, Mauro Carvalho Chehab wrote:
-
-> Changeset f38d3e404326 ("dt-bindings: mfd: Convert X-Powers AXP binding to a schema")
-> renamed: Documentation/devicetree/bindings/mfd/axp20x.txt
-> to: Documentation/devicetree/bindings/mfd/x-powers,axp152.yaml.
-> 
-> Update its cross-reference accordingly.
-> 
-> Fixes: f38d3e404326 ("dt-bindings: mfd: Convert X-Powers AXP binding to a schema")
-> Signed-off-by: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
-> ---
-> 
-> To mailbombing on a large number of people, only mailing lists were C/C on the cover.
-> See [PATCH v3 00/23] at: https://lore.kernel.org/all/cover.1634630485.git.mchehab+huawei@kernel.org/
-> 
->  Documentation/devicetree/bindings/gpio/gpio-axp209.txt | 2 +-
-
-This file no longer exists.
-
-If it's still relevant, please rebase onto Linux -next and resubmit.
-
-See this commit for details:
-
-  dt-bindings: gpio: Convert X-Powers AXP209 GPIO binding to a schema
-
->  1 file changed, 1 insertion(+), 1 deletion(-)
-> 
-> diff --git a/Documentation/devicetree/bindings/gpio/gpio-axp209.txt b/Documentation/devicetree/bindings/gpio/gpio-axp209.txt
-> index fc42b2caa06d..538f04e60ff9 100644
-> --- a/Documentation/devicetree/bindings/gpio/gpio-axp209.txt
-> +++ b/Documentation/devicetree/bindings/gpio/gpio-axp209.txt
-> @@ -17,7 +17,7 @@ Required properties:
->  - gpio-controller: Marks the device node as a GPIO controller.
->  
->  This node must be a subnode of the axp20x PMIC, documented in
-> -Documentation/devicetree/bindings/mfd/axp20x.txt
-> +Documentation/devicetree/bindings/mfd/x-powers,axp152.yaml
->  
->  Example:
->  
-
 -- 
-Lee Jones [李琼斯]
-Senior Technical Lead - Developer Services
-Linaro.org │ Open source software for Arm SoCs
-Follow Linaro: Facebook | Twitter | Blog
+Hello,
+
+I want to discuss an important project issue with you.
+Please, let me know if this email is valid. Reply me at ooisangkuang63@gmail.com
+
+Thank you,
+Mr Ooi Sang Kuang
