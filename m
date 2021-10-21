@@ -2,58 +2,79 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 2E781436B36
-	for <lists+linux-doc@lfdr.de>; Thu, 21 Oct 2021 21:18:15 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id D87C0436DC0
+	for <lists+linux-doc@lfdr.de>; Fri, 22 Oct 2021 00:51:26 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S231651AbhJUTUa (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 21 Oct 2021 15:20:30 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:50530 "EHLO
-        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S231430AbhJUTUa (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Thu, 21 Oct 2021 15:20:30 -0400
-Received: from mail-pl1-x644.google.com (mail-pl1-x644.google.com [IPv6:2607:f8b0:4864:20::644])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 012E1C0613B9
-        for <linux-doc@vger.kernel.org>; Thu, 21 Oct 2021 12:18:14 -0700 (PDT)
-Received: by mail-pl1-x644.google.com with SMTP id y1so1085763plk.10
-        for <linux-doc@vger.kernel.org>; Thu, 21 Oct 2021 12:18:13 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=mime-version:reply-to:from:date:message-id:subject:to;
-        bh=E57tubdi4Kb+HoICFHf4HKGD0EgGpurJT1qek7rMtUQ=;
-        b=DXGRzomXOdikTVCNnKEJJ3OJHe75w0IIOKsB6ZyMU58xBk4QJVYEruVfizK8p0Uv/d
-         X9T2YWICKu66XGkkRkBmlrJQjdIEaTrjmUE6LR5iJPjiZCyZ0aQRBwWiOCTuJcZfnN8V
-         67e2ySPf4pjufkH7U8TW+QfeZxb56DQCAyw2mNUwTNRMBFCNdncbDLMkvkCTYsY/juzk
-         q5g9noK5/P8Q1E00n1b+U9fgqQNr0p+EgULr8WHfT21PUtMy0mLeZfjvI9+Hcp1tbP4i
-         pvZAM6FSqi0/iAQNewkBELk5YBNDW300Iz+sXUzLfj/210IgSrGkPMNw8aGwepd/0J6t
-         VNnQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=x-gm-message-state:mime-version:reply-to:from:date:message-id
-         :subject:to;
-        bh=E57tubdi4Kb+HoICFHf4HKGD0EgGpurJT1qek7rMtUQ=;
-        b=hgpfddUH0IMCX+mZivCsQdYL5D831Mqrayrsxbvs/vpbJSqeGZXy5HD0xNDDm6RH7j
-         lZzRmqKzJIiVGeoL7hjw2NMkHMe4Leu5nUHxgMQFemgGwNg/1fa8ofFQvepEy0phBeO+
-         djpJzJovemZsWNrd8fWc+hGLH/K15KCWcgg6EHSWUlT/LSjG6iLmYwadrkdmWyfgl/b1
-         lwxeE+5BczjSJh8XC4RI0+fAT5EFBBhDAbDmCniSw/xn/4fruoRU9jaC2xvWQeyR9UdT
-         Aq0md8WLigwriW4q4vSvt7JKmhwqL4Hwbb9VXjNsHlOnP8T/E6NVQ29ymFh1CbbqbPkI
-         EIUw==
-X-Gm-Message-State: AOAM530dVieII55XMdMuiKb3pC30gnN3GojbAJ+w2f09oj7ytmh6/j9+
-        8dU/cfC4qfVundaIkRULRPIvwOA53jwKmYF346A=
-X-Google-Smtp-Source: ABdhPJwksKDD3bG8z8bHyX6ftUej8OrACtmn5qq2wdrb+vNcOk1QNjLM3Mc5CJu7kgUaHlyMCCoQkVrkyzuUebRXblw=
-X-Received: by 2002:a17:90b:3141:: with SMTP id ip1mr8767991pjb.41.1634843893560;
- Thu, 21 Oct 2021 12:18:13 -0700 (PDT)
+        id S231542AbhJUWxm (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 21 Oct 2021 18:53:42 -0400
+Received: from rere.qmqm.pl ([91.227.64.183]:57374 "EHLO rere.qmqm.pl"
+        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
+        id S229567AbhJUWxl (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Thu, 21 Oct 2021 18:53:41 -0400
+Received: from remote.user (localhost [127.0.0.1])
+        by rere.qmqm.pl (Postfix) with ESMTPSA id 4Hb2lb3tbrz5Y;
+        Fri, 22 Oct 2021 00:51:23 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=rere.qmqm.pl; s=1;
+        t=1634856684; bh=lHHnRAA8YLV9uPJ7CrD5WKHXnh3ph4RCyZ2dlYvGX+0=;
+        h=Date:From:Subject:To:Cc:From;
+        b=m7le8OCLrkH6rybhlZq/HqAvBjFNaosEB2GQ6A4ljIgcX2emA0CUoBa+cIPaz/rMf
+         AhPUyHbxvPW1bZUGg4UK3JjtRZtcc0iwanowHISBp9kFUHk5cjPqGdRldzc+JAIeqM
+         Uqm91y41Xj6nu0kehiHKz09q26LWCYrVvIO2/lWZrDWIR84DX4J5yk968HrZI6Eka5
+         3grcJEib0cbEi7Tcccfs0shUFktMCT5B2Q+RKrtoLt0PqaGEpJ2ePdaNffq0Z9AuIH
+         lLR5Bs25g7JhFs4kEEaS/jg4838r47CnFRoggiIJopvR2DBOf5pVVgRKryqq5YkDUG
+         X9aplhRG3AjFQ==
+X-Virus-Status: Clean
+X-Virus-Scanned: clamav-milter 0.103.3 at mail
+Date:   Fri, 22 Oct 2021 00:51:23 +0200
+Message-Id: <8a6b11c6ada5d55bdb2b1f8319e47bbf5192654b.1634856658.git.mirq-linux@rere.qmqm.pl>
+From:   =?UTF-8?q?Micha=C5=82=20Miros=C5=82aw?= <mirq-linux@rere.qmqm.pl>
+Subject: [PATCH 1/2] block: parse cmdline partitions first
 MIME-Version: 1.0
-Received: by 2002:a05:6a10:e90a:0:0:0:0 with HTTP; Thu, 21 Oct 2021 12:18:13
- -0700 (PDT)
-Reply-To: kaylamanthey022@gmail.com
-From:   Kayla Manthey <sherrigallagher265@gmail.com>
-Date:   Thu, 21 Oct 2021 19:18:13 +0000
-Message-ID: <CAOhzDqqFq+=mzgh21BOdr4e8ktnA53wP=pxHhF94fnAXuWfn3w@mail.gmail.com>
-Subject: Hello
-To:     undisclosed-recipients:;
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+To:     Jens Axboe <axboe@kernel.dk>, Jonathan Corbet <corbet@lwn.net>
+Cc:     linux-block@vger.kernel.org, linux-doc@vger.kernel.org,
+        linux-kernel@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Greetings, My name is Kayla Manthey, please reply me back?
+Make sure cmdline-provided partitions can override anything that's
+on a storage device.
+
+Signed-off-by: Michał Mirosław <mirq-linux@rere.qmqm.pl>
+---
+ block/partitions/core.c | 10 +++++++---
+ 1 file changed, 7 insertions(+), 3 deletions(-)
+
+diff --git a/block/partitions/core.c b/block/partitions/core.c
+index 66ef9bc6d6a1..b4dac3077dce 100644
+--- a/block/partitions/core.c
++++ b/block/partitions/core.c
+@@ -15,6 +15,13 @@
+ #include "check.h"
+ 
+ static int (*check_part[])(struct parsed_partitions *) = {
++	/*
++	 * Let cmdline override whatever there is on disk.
++	 */
++#ifdef CONFIG_CMDLINE_PARTITION
++	cmdline_partition,
++#endif
++
+ 	/*
+ 	 * Probe partition formats with tables at disk address 0
+ 	 * that also have an ADFS boot block at 0xdc0.
+@@ -42,9 +49,6 @@ static int (*check_part[])(struct parsed_partitions *) = {
+ 	adfspart_check_ADFS,
+ #endif
+ 
+-#ifdef CONFIG_CMDLINE_PARTITION
+-	cmdline_partition,
+-#endif
+ #ifdef CONFIG_EFI_PARTITION
+ 	efi_partition,		/* this must come before msdos */
+ #endif
+-- 
+2.30.2
+
