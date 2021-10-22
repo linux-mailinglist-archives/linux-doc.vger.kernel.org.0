@@ -2,176 +2,89 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id D67B3437444
-	for <lists+linux-doc@lfdr.de>; Fri, 22 Oct 2021 11:03:33 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 23A5E4376D7
+	for <lists+linux-doc@lfdr.de>; Fri, 22 Oct 2021 14:21:59 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S232531AbhJVJFl (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Fri, 22 Oct 2021 05:05:41 -0400
-Received: from mail.kernel.org ([198.145.29.99]:37204 "EHLO mail.kernel.org"
-        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S232547AbhJVJFk (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Fri, 22 Oct 2021 05:05:40 -0400
-Received: by mail.kernel.org (Postfix) with ESMTPSA id B2E5E611CB;
-        Fri, 22 Oct 2021 09:03:22 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-        s=k20201202; t=1634893403;
-        bh=o2rX01+ZUM8v0v0greyBGNE1DypzwZSAOJDUMHdaR9I=;
-        h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-        b=PikmEw5O9n/9NAmxCZiLlNkGV6RCd4XSU1m/fL5uWP7HQNhd2kw0+t+2tdSITSLGY
-         2xROdyWrASKgeHi94rnKJLMBnHKQmHbid1Pz8mtnBAXMswVK++0zHPqICAOlHNoiEL
-         LCLTIpApVY6DNiU44nX6mAGQuCiyDc719shhRWV48DhkzbtodUKxOMmEPQHH9trWEO
-         m/A/zjxF00gEWyL45NEGKtwvbycxEVAmHsLKUSgTHhdf1fiCGY7Xc6LNFx4pXOKrSG
-         KKclpoWD1OZrhT70Q1gmc+Nc6qc5z0KrKDSMYqgYfmtI3z9RTafGSDaFf8kketmBO2
-         RgXd0YO4zCe8w==
-From:   SeongJae Park <sj@kernel.org>
-To:     akpm@linux-foundation.org, corbet@lwn.net
-Cc:     peterx@redhat.com, linux-mm@kvack.org, linux-doc@vger.kernel.org,
-        linux-kernel@vger.kernel.org, SeongJae Park <sj@kernel.org>
-Subject: [PATCH 4/4] Docs/admin-guide/mm/pagemap: Wordsmith page flags descriptions
-Date:   Fri, 22 Oct 2021 09:03:11 +0000
-Message-Id: <20211022090311.3856-5-sj@kernel.org>
-X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20211022090311.3856-1-sj@kernel.org>
-References: <20211022090311.3856-1-sj@kernel.org>
+        id S231863AbhJVMYM (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Fri, 22 Oct 2021 08:24:12 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:53614 "EHLO
+        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S232008AbhJVMYK (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Fri, 22 Oct 2021 08:24:10 -0400
+Received: from mail-ed1-x52c.google.com (mail-ed1-x52c.google.com [IPv6:2a00:1450:4864:20::52c])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 7282AC06122B
+        for <linux-doc@vger.kernel.org>; Fri, 22 Oct 2021 05:21:52 -0700 (PDT)
+Received: by mail-ed1-x52c.google.com with SMTP id 5so1701283edw.7
+        for <linux-doc@vger.kernel.org>; Fri, 22 Oct 2021 05:21:52 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112;
+        h=mime-version:reply-to:from:date:message-id:subject:to;
+        bh=EabbjzyBCsHP1Pqryzjhoy0dM3xlyxLmmpO8ACgMTo8=;
+        b=opUIgqVWyZcHOIldu+LgQVfQLu2JLSm4eq0yRYoR8X3EkJ0jJdtgK1LJrEC4fAYG/u
+         x5QndCavFk6KrgrLKL2M04eWhmo9Ht5gsCUOTzm6BFmYlOhPKCnfQmAWRcGWJ3Kgd+Po
+         dxnzE1GzD0Fe/zdoRYGanqsnNZ7HZwcDd5jvb2P53Z7ySB2eUUW5eKcCwJjvHcLwQW3D
+         hmZMQ0WQ67mADARNZlQPTMDFACAa1pT2f55C5E+z5xU/0SGGI05AA1ys/nk/8Z7QRecx
+         rbFLK51ODld/urTp+hjZ3tCNNEiv03NL8R5n8H4ZVv1sIR3Pcfr4FSd/aUugOrtvCJBK
+         4QUQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:mime-version:reply-to:from:date:message-id
+         :subject:to;
+        bh=EabbjzyBCsHP1Pqryzjhoy0dM3xlyxLmmpO8ACgMTo8=;
+        b=SPirmbNSh6n8Cl5dEntwLEyaA9ipJzVL/+QjcH0JWX3b68VEQFVwE0lBl67l/ZtU13
+         lCKrwj4e1sp4ntw1FaLE54FCCLvm/Zyc3jaAXtO4sd6/H43LWn6pIJ9lKn5Gq0sdYmw/
+         rEBq2xzyy/6uCg3x0d5BxsK/Jd0fjgQnKOaCRDxYXXvSg/tU40ZvKctsXQraPLJpgvwK
+         iB4sH3DqDkHSyThSzrrMIQQQQRywVTgi6vbELJIm8GR7qdUcqNGiY1qDMppBh2G2w9jq
+         PlSRdRFGsSrAJmhdh3A98xqTsvebvqj0joMh7oy7svwGj7Qd9xyC0iWVN/fMxbHfRSyx
+         zKNg==
+X-Gm-Message-State: AOAM532qUo989MkbXez2KKKOuuCOrSy1mvq03x64BbP14krOe1cCgNEC
+        hnpT91eCaNGsD+k1XrCacRXQxKvB2FDEGNHKz4Q=
+X-Google-Smtp-Source: ABdhPJy2Z+mCK6UsBedDHfuHLqHjOelryE6bx9xZ/OavTEghlxY+bPID2uQBe/oD5nVNF4jHf9BZTkpf3h9vpVXzB08=
+X-Received: by 2002:a17:907:1b0a:: with SMTP id mp10mr15488909ejc.29.1634905309828;
+ Fri, 22 Oct 2021 05:21:49 -0700 (PDT)
+MIME-Version: 1.0
+Received: by 2002:a17:907:7fa7:0:0:0:0 with HTTP; Fri, 22 Oct 2021 05:21:48
+ -0700 (PDT)
+Reply-To: bahadur.rayanby@gmail.com
+From:   Ryan Bahadur <dr.philposman7@gmail.com>
+Date:   Fri, 22 Oct 2021 05:21:48 -0700
+Message-ID: <CAMOT=VQ19xGMh1Soq8rNHNKaBCqZh03d0u+Nrf_Ou9bAtd-seQ@mail.gmail.com>
+Subject: CAN I TRUST YOU
+To:     undisclosed-recipients:;
+Content-Type: text/plain; charset="UTF-8"
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Some descriptions of page flags in 'pagemap.rst' are written in
-assumption of none-rst, which respects every new line, as below:
-
-    7 - SLAB
-       page is managed by the SLAB/SLOB/SLUB/SLQB kernel memory allocator
-       When compound page is used, SLUB/SLQB will only set this flag on the head
-
-Because rst ignores the new line between the first sentence and second
-sentence, resulting html looks a little bit weird, as below.
-
-    7 - SLAB
-    page is managed by the SLAB/SLOB/SLUB/SLQB kernel memory allocator When
-                                                                       ^
-    compound page is used, SLUB/SLQB will only set this flag on the head
-    page; SLOB will not flag it at all.
-
-This commit makes it more natural and consistent with other parts in the
-rendered version.
-
-Signed-off-by: SeongJae Park <sj@kernel.org>
----
- Documentation/admin-guide/mm/pagemap.rst | 53 ++++++++++++------------
- 1 file changed, 27 insertions(+), 26 deletions(-)
-
-diff --git a/Documentation/admin-guide/mm/pagemap.rst b/Documentation/admin-guide/mm/pagemap.rst
-index fdc19fbc1083..242d84315066 100644
---- a/Documentation/admin-guide/mm/pagemap.rst
-+++ b/Documentation/admin-guide/mm/pagemap.rst
-@@ -90,13 +90,14 @@ Short descriptions to the page flags
- ====================================
- 
- 0 - LOCKED
--   page is being locked for exclusive access, e.g. by undergoing read/write IO
-+   The page is being locked for exclusive access, e.g. by undergoing read/write
-+   IO.
- 7 - SLAB
--   page is managed by the SLAB/SLOB/SLUB/SLQB kernel memory allocator
-+   The page is managed by the SLAB/SLOB/SLUB/SLQB kernel memory allocator.
-    When compound page is used, SLUB/SLQB will only set this flag on the head
-    page; SLOB will not flag it at all.
- 10 - BUDDY
--    a free memory block managed by the buddy system allocator
-+    A free memory block managed by the buddy system allocator.
-     The buddy system organizes free memory in blocks of various orders.
-     An order N block has 2^N physically contiguous pages, with the BUDDY flag
-     set for and _only_ for the first page.
-@@ -112,65 +113,65 @@ Short descriptions to the page flags
- 16 - COMPOUND_TAIL
-     A compound page tail (see description above).
- 17 - HUGE
--    this is an integral part of a HugeTLB page
-+    This is an integral part of a HugeTLB page.
- 19 - HWPOISON
--    hardware detected memory corruption on this page: don't touch the data!
-+    Hardware detected memory corruption on this page: don't touch the data!
- 20 - NOPAGE
--    no page frame exists at the requested address
-+    No page frame exists at the requested address.
- 21 - KSM
--    identical memory pages dynamically shared between one or more processes
-+    Identical memory pages dynamically shared between one or more processes.
- 22 - THP
--    contiguous pages which construct transparent hugepages
-+    Contiguous pages which construct transparent hugepages.
- 23 - OFFLINE
--    page is logically offline
-+    The page is logically offline.
- 24 - ZERO_PAGE
--    zero page for pfn_zero or huge_zero page
-+    Zero page for pfn_zero or huge_zero page.
- 25 - IDLE
--    page has not been accessed since it was marked idle (see
-+    The page has not been accessed since it was marked idle (see
-     :ref:`Documentation/admin-guide/mm/idle_page_tracking.rst <idle_page_tracking>`).
-     Note that this flag may be stale in case the page was accessed via
-     a PTE. To make sure the flag is up-to-date one has to read
-     ``/sys/kernel/mm/page_idle/bitmap`` first.
- 26 - PGTABLE
--    page is in use as a page table
-+    The page is in use as a page table.
- 
- IO related page flags
- ---------------------
- 
- 1 - ERROR
--   IO error occurred
-+   IO error occurred.
- 3 - UPTODATE
--   page has up-to-date data
-+   The page has up-to-date data.
-    ie. for file backed page: (in-memory data revision >= on-disk one)
- 4 - DIRTY
--   page has been written to, hence contains new data
-+   The page has been written to, hence contains new data.
-    i.e. for file backed page: (in-memory data revision >  on-disk one)
- 8 - WRITEBACK
--   page is being synced to disk
-+   The page is being synced to disk.
- 
- LRU related page flags
- ----------------------
- 
- 5 - LRU
--   page is in one of the LRU lists
-+   The page is in one of the LRU lists.
- 6 - ACTIVE
--   page is in the active LRU list
-+   The page is in the active LRU list.
- 18 - UNEVICTABLE
--   page is in the unevictable (non-)LRU list It is somehow pinned and
-+   The page is in the unevictable (non-)LRU list It is somehow pinned and
-    not a candidate for LRU page reclaims, e.g. ramfs pages,
--   shmctl(SHM_LOCK) and mlock() memory segments
-+   shmctl(SHM_LOCK) and mlock() memory segments.
- 2 - REFERENCED
--   page has been referenced since last LRU list enqueue/requeue
-+   The page has been referenced since last LRU list enqueue/requeue.
- 9 - RECLAIM
--   page will be reclaimed soon after its pageout IO completed
-+   The page will be reclaimed soon after its pageout IO completed.
- 11 - MMAP
--   a memory mapped page
-+   A memory mapped page.
- 12 - ANON
--   a memory mapped page that is not part of a file
-+   A memory mapped page that is not part of a file.
- 13 - SWAPCACHE
--   page is mapped to swap space, i.e. has an associated swap entry
-+   The page is mapped to swap space, i.e. has an associated swap entry.
- 14 - SWAPBACKED
--   page is backed by swap/RAM
-+   The page is backed by swap/RAM.
- 
- The page-types tool in the tools/vm directory can be used to query the
- above flags.
 -- 
-2.17.1
+Greetings,
 
+Firstly, I apologize for encroaching into your privacy in this manner
+as it may seem unethical though it is a matter of great importance.
+
+I am Mr.Ryan Bahadur, I work with Cayman National Bank (Cayman Islands).
+
+I am contacting you because my status would not permit me to do this
+alone as it is concerning our customer and an investment placed under
+our bank's management over 5 years ago.
+
+I have a proposal I would love to discuss with you which will be very
+beneficial to both of us. It's regarding my late client who has a huge
+deposit with my bank.
+
+He is from your country and shares the same last name with you.
+
+I want to seek your consent to present you as the next of kin to my
+late client who died and left a huge deposit with my bank.
+
+I would respectfully request that you keep the contents of this mail
+confidential and respect the integrity of the information you come by
+as a result of this mail.
+
+Please kindly get back to me for more details if I can TRUST YOU.{
+bahadur.rayanby@gmail.com}
+
+Regards
+Mr.Ryan Bahadur
+Treasury and Deposit Management,
+Cayman National Bank Cayman Islands.
