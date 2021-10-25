@@ -2,93 +2,118 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 8A7F7439545
-	for <lists+linux-doc@lfdr.de>; Mon, 25 Oct 2021 13:52:27 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 05892439573
+	for <lists+linux-doc@lfdr.de>; Mon, 25 Oct 2021 13:59:26 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S230240AbhJYLyr (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 25 Oct 2021 07:54:47 -0400
-Received: from mail.kernel.org ([198.145.29.99]:41512 "EHLO mail.kernel.org"
-        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S229704AbhJYLyr (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Mon, 25 Oct 2021 07:54:47 -0400
-Received: by mail.kernel.org (Postfix) with ESMTPSA id E59D660F46;
-        Mon, 25 Oct 2021 11:52:24 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-        s=k20201202; t=1635162744;
-        bh=erij8O9V4iK0XPCjra19lOi8jI0hAW7huw4GIocOO80=;
-        h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-        b=mmrkYYdbW1Jow2nv08jTazOX7hxL1Q2oXGeKM3c9xoRJTYO9hiiJwb8bUpGhCJwOG
-         GSqKfm7AGpABcRHGuVzYDWopnnyMSBhI3cZSkpK/UT3GiuCOMpIPZdUADXyBaq5yuo
-         GPrgnGa7i8gAYzg57GzB7QRogeaYb1W/FO7xdKy7OTk0m9Tf66VCdZHndreHnz7u9H
-         z8gOSwEqQ3brNmeW23uKEgi2VJmXMkg+yReaPMfX+519eLgVB31Gwok2WexGyvV+AK
-         byayhiqpSO9LtO+SaEkistLM5qtp6Q+EYqh6OZJsW9R0ESsomlkWmOGkCmUzHxCifO
-         NYUylBkfR1lYA==
-Received: from johan by xi.lan with local (Exim 4.94.2)
-        (envelope-from <johan@kernel.org>)
-        id 1meyWN-0001Io-Rh; Mon, 25 Oct 2021 13:52:07 +0200
-From:   Johan Hovold <johan@kernel.org>
-To:     Greg Kroah-Hartman <gregkh@linuxfoundation.org>
-Cc:     Jonathan Corbet <corbet@lwn.net>, linux-doc@vger.kernel.org,
-        linux-usb@vger.kernel.org, linux-kernel@vger.kernel.org,
-        Johan Hovold <johan@kernel.org>, stable@vger.kernel.org
-Subject: [PATCH 2/2] USB: iowarrior: fix control-message timeouts
-Date:   Mon, 25 Oct 2021 13:51:59 +0200
-Message-Id: <20211025115159.4954-3-johan@kernel.org>
-X-Mailer: git-send-email 2.32.0
-In-Reply-To: <20211025115159.4954-1-johan@kernel.org>
-References: <20211025115159.4954-1-johan@kernel.org>
+        id S230261AbhJYMBp (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 25 Oct 2021 08:01:45 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:33514 "EHLO
+        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S231166AbhJYMBn (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Mon, 25 Oct 2021 08:01:43 -0400
+Received: from mail-pj1-x102e.google.com (mail-pj1-x102e.google.com [IPv6:2607:f8b0:4864:20::102e])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 98AB7C061745;
+        Mon, 25 Oct 2021 04:59:21 -0700 (PDT)
+Received: by mail-pj1-x102e.google.com with SMTP id oa12-20020a17090b1bcc00b0019f715462a8so8232516pjb.3;
+        Mon, 25 Oct 2021 04:59:21 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112;
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=7EfxP+NNNDqzXZbApTvLoWyoKYpAMnYA8qlrdpBRI48=;
+        b=bq2XHOiAgE0+68ggQGvbgW1f1CCDuX617uhA+20w+r2E0eyNvNPw2swqehGCk1jBSC
+         tefyDUWchsfEWkG63Z9PUujW/0WnPSjBhFr72XXmB9CTkufKPMuVPpIYfZIn467bnEeV
+         lMlcSejWxGs7Uw2mw9y/WaQGCKyJOcu3+G7mWYbB8fabHScCu/Ubjj0Vo402K9rIaM2v
+         wIlEEky2LrMyAPqxumyoxJ3bfZBjbgicYtB+6IiMeE1o5FhV3wdFsV4lZ7aAeZP9Hroz
+         AzoMjgqF8c7V3VyZkG/Ju3g19rSA3NlMRCMqqPAdbxKZo3kN+PnMtofZh6WbpKwLVWPW
+         EpLA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=7EfxP+NNNDqzXZbApTvLoWyoKYpAMnYA8qlrdpBRI48=;
+        b=YfLaqjsnK5r4T+CyIQm7PJD+kEaqWbe2D/W8WZ2n9zR0+paNvUEREibCG/2BfxQuK9
+         Oof8gzOOtPf150e0YAHrTT2kHGAKqGCj3m03pjM1YrP60a5n3+W2/rFmKoVOa3Eg+s98
+         IvXsCl/ON6wWy2n6opNylQfvsRkiCsxFNj/wDQ59+Cufv2hFi5rFS5+isCodWrdKa9uD
+         l2muEH0luI49qvHh95141ykUqsLu4IxnNlE0B/Zv2Uz1EktaQPSQqQz/j+RHw40XYStT
+         3IRHo2ElQ0X8tRpmUjb+RFMSr7qCI+Xt1toDIl2Ymu87XU5nYbcMi01h097KCgH1QLfT
+         EvPw==
+X-Gm-Message-State: AOAM530K+iwLJvWMdAAt8Gk4pb8AbgUB9gndlNg0l8MVv2OtQobQrRFI
+        WPh9N2V3h2BotmmDumE2AHU=
+X-Google-Smtp-Source: ABdhPJxMuslf8J3sqJtUWlL/rKPGmGcdRJ/N091CQE0aJ7TVEq1RNpzWbjvkZxIGz3vc7qlrsVZXgg==
+X-Received: by 2002:a17:90a:bd0f:: with SMTP id y15mr12070038pjr.186.1635163161172;
+        Mon, 25 Oct 2021 04:59:21 -0700 (PDT)
+Received: from ubuntu-hirsute.. ([154.86.159.246])
+        by smtp.gmail.com with ESMTPSA id u4sm19362300pfh.147.2021.10.25.04.59.15
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 25 Oct 2021 04:59:20 -0700 (PDT)
+From:   yangxingwu <xingwu.yang@gmail.com>
+To:     horms@verge.net.au
+Cc:     ja@ssi.bg, pablo@netfilter.org, kadlec@netfilter.org, fw@strlen.de,
+        davem@davemloft.net, kuba@kernel.org, netdev@vger.kernel.org,
+        lvs-devel@vger.kernel.org, netfilter-devel@vger.kernel.org,
+        coreteam@netfilter.org, linux-kernel@vger.kernel.org,
+        linux-doc@vger.kernel.org, corbet@lwn.net, xingwu.yang@gmail.com
+Subject: [PATCH] ipvs: Fix reuse connection if RS weight is 0
+Date:   Mon, 25 Oct 2021 19:59:10 +0800
+Message-Id: <20211025115910.2595-1-xingwu.yang@gmail.com>
+X-Mailer: git-send-email 2.30.2
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-USB control-message timeouts are specified in milliseconds and should
-specifically not vary with CONFIG_HZ.
+Since commit dc7b3eb900aa ("ipvs: Fix reuse connection if real server is
+dead"), new connections to dead servers are redistributed immediately to
+new servers.
 
-Use the common control-message timeout define for the five-second
-timeout and drop the driver-specific one.
+Then commit d752c3645717 ("ipvs: allow rescheduling of new connections when
+port reuse is detected") disable expire_nodest_conn if conn_reuse_mode is
+0. And new connection may be distributed to a real server with weight 0.
 
-Fixes: 946b960d13c1 ("USB: add driver for iowarrior devices.")
-Cc: stable@vger.kernel.org      # 2.6.21
-Signed-off-by: Johan Hovold <johan@kernel.org>
+Signed-off-by: yangxingwu <xingwu.yang@gmail.com>
 ---
- drivers/usb/misc/iowarrior.c | 8 ++------
- 1 file changed, 2 insertions(+), 6 deletions(-)
+ Documentation/networking/ipvs-sysctl.rst | 3 +--
+ net/netfilter/ipvs/ip_vs_core.c          | 5 +++--
+ 2 files changed, 4 insertions(+), 4 deletions(-)
 
-diff --git a/drivers/usb/misc/iowarrior.c b/drivers/usb/misc/iowarrior.c
-index efbd317f2f25..988a8c02e7e2 100644
---- a/drivers/usb/misc/iowarrior.c
-+++ b/drivers/usb/misc/iowarrior.c
-@@ -99,10 +99,6 @@ struct iowarrior {
- /*    globals   */
- /*--------------*/
+diff --git a/Documentation/networking/ipvs-sysctl.rst b/Documentation/networking/ipvs-sysctl.rst
+index 2afccc63856e..1cfbf1add2fc 100644
+--- a/Documentation/networking/ipvs-sysctl.rst
++++ b/Documentation/networking/ipvs-sysctl.rst
+@@ -37,8 +37,7 @@ conn_reuse_mode - INTEGER
  
--/*
-- *  USB spec identifies 5 second timeouts.
-- */
--#define GET_TIMEOUT 5
- #define USB_REQ_GET_REPORT  0x01
- //#if 0
- static int usb_get_report(struct usb_device *dev,
-@@ -114,7 +110,7 @@ static int usb_get_report(struct usb_device *dev,
- 			       USB_DIR_IN | USB_TYPE_CLASS |
- 			       USB_RECIP_INTERFACE, (type << 8) + id,
- 			       inter->desc.bInterfaceNumber, buf, size,
--			       GET_TIMEOUT*HZ);
-+			       USB_CTRL_GET_TIMEOUT);
- }
- //#endif
+ 	0: disable any special handling on port reuse. The new
+ 	connection will be delivered to the same real server that was
+-	servicing the previous connection. This will effectively
+-	disable expire_nodest_conn.
++	servicing the previous connection.
  
-@@ -129,7 +125,7 @@ static int usb_set_report(struct usb_interface *intf, unsigned char type,
- 			       USB_TYPE_CLASS | USB_RECIP_INTERFACE,
- 			       (type << 8) + id,
- 			       intf->cur_altsetting->desc.bInterfaceNumber, buf,
--			       size, HZ);
-+			       size, 1000);
- }
+ 	bit 1: enable rescheduling of new connections when it is safe.
+ 	That is, whenever expire_nodest_conn and for TCP sockets, when
+diff --git a/net/netfilter/ipvs/ip_vs_core.c b/net/netfilter/ipvs/ip_vs_core.c
+index 128690c512df..9279aed69e23 100644
+--- a/net/netfilter/ipvs/ip_vs_core.c
++++ b/net/netfilter/ipvs/ip_vs_core.c
+@@ -2042,14 +2042,15 @@ ip_vs_in(struct netns_ipvs *ipvs, unsigned int hooknum, struct sk_buff *skb, int
+ 			     ipvs, af, skb, &iph);
  
- /*---------------------*/
+ 	conn_reuse_mode = sysctl_conn_reuse_mode(ipvs);
+-	if (conn_reuse_mode && !iph.fragoffs && is_new_conn(skb, &iph) && cp) {
++	if (!iph.fragoffs && is_new_conn(skb, &iph) && cp) {
+ 		bool old_ct = false, resched = false;
+ 
+ 		if (unlikely(sysctl_expire_nodest_conn(ipvs)) && cp->dest &&
+ 		    unlikely(!atomic_read(&cp->dest->weight))) {
+ 			resched = true;
+ 			old_ct = ip_vs_conn_uses_old_conntrack(cp, skb);
+-		} else if (is_new_conn_expected(cp, conn_reuse_mode)) {
++		} else if (conn_reuse_mode &&
++			   is_new_conn_expected(cp, conn_reuse_mode)) {
+ 			old_ct = ip_vs_conn_uses_old_conntrack(cp, skb);
+ 			if (!atomic_read(&cp->n_control)) {
+ 				resched = true;
 -- 
-2.32.0
+2.30.2
 
