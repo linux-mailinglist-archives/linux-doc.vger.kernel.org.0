@@ -2,110 +2,111 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 0F23E43A3E2
-	for <lists+linux-doc@lfdr.de>; Mon, 25 Oct 2021 22:04:55 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 7199B43A3D7
+	for <lists+linux-doc@lfdr.de>; Mon, 25 Oct 2021 22:03:12 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S237843AbhJYUHO (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 25 Oct 2021 16:07:14 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:60320 "EHLO
-        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S238807AbhJYUFc (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Mon, 25 Oct 2021 16:05:32 -0400
-Received: from mail-qv1-xf49.google.com (mail-qv1-xf49.google.com [IPv6:2607:f8b0:4864:20::f49])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 294F5C036D6E
-        for <linux-doc@vger.kernel.org>; Mon, 25 Oct 2021 12:26:04 -0700 (PDT)
-Received: by mail-qv1-xf49.google.com with SMTP id o15-20020a0cc38f000000b0038455e36f89so11676020qvi.6
-        for <linux-doc@vger.kernel.org>; Mon, 25 Oct 2021 12:26:04 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=google.com; s=20210112;
-        h=date:in-reply-to:message-id:mime-version:references:subject:from:cc;
-        bh=kE3Nv1lKwT793xJwq+iC3RoCHqpYdQS3Tip3semgyOw=;
-        b=gbn9eg9008NdXKZ1/pxplWbq1W+HOEpi3W3HkUpPW4ebJu/REMlQr1QF8rl6mQIeob
-         euAGzvS+dOzo0OLG8Dvw/ls/OC6sl5N7rY/bFIaEZ6MMC/DFS3XjRDLrySKoPcl0Onwf
-         TR3XD9K2yr65MzjufGS4Maq/H7ORSIxQQeGN/v+vTFrEH7F7Uo1xD6t4IqUj10V2a6GA
-         RwWq00Ic7WNkanKG1SVkDRvdAP398xy1awfqdfjX+8zrnFqsgafTBYlGR+ZD+rxq8olq
-         Qlsg3CtIduhiPG9cLfEDQ56Rujasnsz4EppRxtlTl7M8mxnvBNOn73lnj4mIxM1QQ5/s
-         TgbA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=x-gm-message-state:date:in-reply-to:message-id:mime-version
-         :references:subject:from:cc;
-        bh=kE3Nv1lKwT793xJwq+iC3RoCHqpYdQS3Tip3semgyOw=;
-        b=1nbbaAn8Qp7ogypa61V6IUIoLe3rvLe6/gql9yiDiQUm6btN5iO4UU4vlmqr0NNChn
-         6CuvswiJEY6/4aV6PtLVirUb5mcxvt2jGn7/BdrN0VaWXSPDSNes97KKvbl3fz7aSDGF
-         UJUXLkOYkMF1GzYMolUsQDNeoKA+lrxdxmZd/I32NQovE+06M1A/RxPkXTryrDm5gQwV
-         wClGLPwIw9wiOf3WlDHhTXhUfRgJzgojRtn6m4FUtaMxymhhGexk11KPG3scyaw1Z36J
-         L/QuWzEUZtkbs+6ti9c3thC8U5DtkvclxdKOk4ud26YrBoMFog+VS6beqx53RJyjUn1Z
-         ZNhQ==
-X-Gm-Message-State: AOAM530cLvklsLizxNPqetcgNSO1QdI/1EScYq9IUjzkVf1AD7wbPeMf
-        B/D25guIlYWeKotIBZfdgRnXvJm8FGFUEKNbTw==
-X-Google-Smtp-Source: ABdhPJz0CM9pT2MDiX5onT9xQHkFssm++CsGBJiIKiL0pdTsJ/7A8JCL2uHFhTnN92yeJZ01BIcWoG5+gyc3y2cP1Q==
-X-Received: from kaleshsingh.mtv.corp.google.com ([2620:15c:211:200:b783:5702:523e:d435])
- (user=kaleshsingh job=sendgmr) by 2002:a05:622a:1a0b:: with SMTP id
- f11mr19780649qtb.133.1635189963298; Mon, 25 Oct 2021 12:26:03 -0700 (PDT)
-Date:   Mon, 25 Oct 2021 12:23:19 -0700
-In-Reply-To: <20211025192330.2992076-1-kaleshsingh@google.com>
-Message-Id: <20211025192330.2992076-9-kaleshsingh@google.com>
-Mime-Version: 1.0
-References: <20211025192330.2992076-1-kaleshsingh@google.com>
-X-Mailer: git-send-email 2.33.0.1079.g6e70778dc9-goog
-Subject: [PATCH v3 8/8] tracing/histogram: Document expression arithmetic and constants
-From:   Kalesh Singh <kaleshsingh@google.com>
-Cc:     surenb@google.com, hridya@google.com, namhyung@kernel.org,
-        kernel-team@android.com, Kalesh Singh <kaleshsingh@google.com>,
-        Jonathan Corbet <corbet@lwn.net>,
-        Steven Rostedt <rostedt@goodmis.org>,
-        Ingo Molnar <mingo@redhat.com>, Shuah Khan <shuah@kernel.org>,
-        Masami Hiramatsu <mhiramat@kernel.org>,
-        Tom Zanussi <zanussi@kernel.org>, linux-doc@vger.kernel.org,
-        linux-kernel@vger.kernel.org, linux-kselftest@vger.kernel.org
-Content-Type: text/plain; charset="UTF-8"
-To:     unlisted-recipients:; (no To-header on input)
+        id S238450AbhJYUFY (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 25 Oct 2021 16:05:24 -0400
+Received: from mga12.intel.com ([192.55.52.136]:60200 "EHLO mga12.intel.com"
+        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
+        id S240517AbhJYUDU (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Mon, 25 Oct 2021 16:03:20 -0400
+X-IronPort-AV: E=McAfee;i="6200,9189,10148"; a="209833218"
+X-IronPort-AV: E=Sophos;i="5.87,181,1631602800"; 
+   d="scan'208";a="209833218"
+Received: from orsmga003.jf.intel.com ([10.7.209.27])
+  by fmsmga106.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 25 Oct 2021 12:49:27 -0700
+X-IronPort-AV: E=Sophos;i="5.87,181,1631602800"; 
+   d="scan'208";a="446776866"
+Received: from smile.fi.intel.com ([10.237.72.184])
+  by orsmga003-auth.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 25 Oct 2021 12:49:23 -0700
+Received: from andy by smile.fi.intel.com with local (Exim 4.95)
+        (envelope-from <andy.shevchenko@gmail.com>)
+        id 1mf5xu-000xNZ-JJ;
+        Mon, 25 Oct 2021 22:49:02 +0300
+Date:   Mon, 25 Oct 2021 22:49:02 +0300
+From:   Andy Shevchenko <andy.shevchenko@gmail.com>
+To:     Denis Pauk <pauk.denis@gmail.com>
+Cc:     eugene.shalygin@gmail.com, platform-driver-x86@vger.kernel.org,
+        thomas@weissschuh.net, Tor Vic <torvic9@mailbox.org>,
+        Oleksandr Natalenko <oleksandr@natalenko.name>,
+        Jean Delvare <jdelvare@suse.com>,
+        Guenter Roeck <linux@roeck-us.net>,
+        Jonathan Corbet <corbet@lwn.net>, linux-hwmon@vger.kernel.org,
+        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org
+Subject: Re: [PATCH v8 1/3] hwmon: (asus_wmi_ec_sensors) Support B550 Asus
+ WMI.
+Message-ID: <YXcKLvRu3gRm3zUF@smile.fi.intel.com>
+References: <20211022200032.23267-1-pauk.denis@gmail.com>
+ <20211022200032.23267-2-pauk.denis@gmail.com>
+ <YXcDcXrUo4a/KAsT@smile.fi.intel.com>
+ <YXcHYvleoOr6sqMK@smile.fi.intel.com>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <YXcHYvleoOr6sqMK@smile.fi.intel.com>
+Organization: Intel Finland Oy - BIC 0357606-4 - Westendinkatu 7, 02160 Espoo
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Histogram expressions now support division, and multiplication in
-addition to the already supported subtraction and addition operators.
+On Mon, Oct 25, 2021 at 10:37:06PM +0300, Andy Shevchenko wrote:
+> On Mon, Oct 25, 2021 at 10:20:17PM +0300, Andy Shevchenko wrote:
+> > On Fri, Oct 22, 2021 at 11:00:29PM +0300, Denis Pauk wrote:
 
-Numeric constants can also be used in a hist trigger expressions
-or assigned to a variable and used by refernce in an expression.
+...
 
-Signed-off-by: Kalesh Singh <kaleshsingh@google.com>
-Reviewed-by: Namhyung Kim <namhyung@kernel.org>
----
+> > Below is a follow up, I have not compiled it.
+> > Feel free to take fully or partially.
 
-Changes in v2:
-  - Add Namhyung's Reviewed-by
+Okay, here a few additional fixes (make them symmetrical and hope that
+it will compile now):
 
- Documentation/trace/histogram.rst | 14 ++++++++++++++
- 1 file changed, 14 insertions(+)
-
-diff --git a/Documentation/trace/histogram.rst b/Documentation/trace/histogram.rst
-index 533415644c54..e12699abaee8 100644
---- a/Documentation/trace/histogram.rst
-+++ b/Documentation/trace/histogram.rst
-@@ -1763,6 +1763,20 @@ using the same key and variable from yet another event::
+diff --git a/drivers/hwmon/asus_wmi_ec_sensors.c b/drivers/hwmon/asus_wmi_ec_sensors.c
+index 870de5a7f20d..d39271b5e50c 100644
+--- a/drivers/hwmon/asus_wmi_ec_sensors.c
++++ b/drivers/hwmon/asus_wmi_ec_sensors.c
+@@ -261,10 +261,7 @@ static int asus_wmi_ec_fill_board_sensors(struct asus_wmi_ec_info *ec,
+ static int asus_wmi_ec_decode_reply_buffer(const u8 *in, u32 length, u8 *out)
+ {
+ 	char buffer[ASUSWMI_MAX_BUF_LEN * 2];
+-	u32 len;
+-
+-	/* Minimum of size of response and size of ACPI result (in bytes) */
+-	len = min_t(u32, in[0], length - 2);
++	u32 len = min_t(u32, get_unaligned_le16(in), length - 2);
  
-   # echo 'hist:key=pid:wakeupswitch_lat=$wakeup_lat+$switchtime_lat ...' >> event3/trigger
+ 	utf16s_to_utf8s((wchar_t *)(in + 2), len / 2, UTF16_LITTLE_ENDIAN, buffer, sizeof(buffer));
  
-+Expressions support the use of addition, subtraction, multiplication and
-+division operators (+-*/).
-+
-+Note that division by zero always returns -1.
-+
-+Numeric constants can also be used directly in an expression::
-+
-+  # echo 'hist:keys=next_pid:timestamp_secs=common_timestamp/1000000 ...' >> event/trigger
-+
-+or assigned to a variable and referenced in a subsequent expression::
-+
-+  # echo 'hist:keys=next_pid:us_per_sec=1000000 ...' >> event/trigger
-+  # echo 'hist:keys=next_pid:timestamp_secs=common_timestamp/$us_per_sec ...' >> event/trigger
-+
- 2.2.2 Synthetic Events
- ----------------------
+@@ -274,13 +271,13 @@ static int asus_wmi_ec_decode_reply_buffer(const u8 *in, u32 length, u8 *out)
+ static void asus_wmi_ec_encode_registers(const u8 *in, u32 length, char *out)
+ {
+ 	char buffer[ASUSWMI_MAX_BUF_LEN * 2];
+-	u16 len = nr_registers * 2;
+-
+-	put_unaligned_le16(len * 2, out);
++	u32 len = length;
  
+ 	bin2hex(buffer, in, len);
+ 
+ 	utf8s_to_utf16s(buffer, len * 2, UTF16_LITTLE_ENDIAN, (wchar_t *)(out + 2), len);
++
++	put_unaligned_le16(len * 2, out);
+ }
+ 
+ static void asus_wmi_ec_make_block_read_query(struct asus_wmi_ec_info *ec)
+@@ -298,7 +295,7 @@ static void asus_wmi_ec_make_block_read_query(struct asus_wmi_ec_info *ec)
+ 		}
+ 	}
+ 
+-	asus_wmi_ec_encode_registers(registers, ec->nr_registers, ec->read_arg);
++	asus_wmi_ec_encode_registers(registers, offset, ec->read_arg);
+ }
+ 
+ static int asus_wmi_ec_block_read(u32 method_id, char *query, u8 *out)
+
 -- 
-2.33.0.1079.g6e70778dc9-goog
+With Best Regards,
+Andy Shevchenko
+
 
