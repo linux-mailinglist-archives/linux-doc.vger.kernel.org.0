@@ -2,84 +2,86 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 7411C438D99
-	for <lists+linux-doc@lfdr.de>; Mon, 25 Oct 2021 04:58:21 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 1D13E438DA5
+	for <lists+linux-doc@lfdr.de>; Mon, 25 Oct 2021 05:04:14 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S232314AbhJYDAl (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Sun, 24 Oct 2021 23:00:41 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:52442 "EHLO
-        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S232308AbhJYDAk (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Sun, 24 Oct 2021 23:00:40 -0400
-Received: from mail-pf1-x42c.google.com (mail-pf1-x42c.google.com [IPv6:2607:f8b0:4864:20::42c])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 5A383C061767
-        for <linux-doc@vger.kernel.org>; Sun, 24 Oct 2021 19:58:19 -0700 (PDT)
-Received: by mail-pf1-x42c.google.com with SMTP id m26so9357203pff.3
-        for <linux-doc@vger.kernel.org>; Sun, 24 Oct 2021 19:58:19 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=nathanrossi.com; s=google;
-        h=date:message-id:from:to:cc:subject:content-transfer-encoding
-         :mime-version;
-        bh=H/kXO5wOonCyGZmApPOrBkhxaaPKvU/ttbJczsp4UII=;
-        b=MVQWdEfUaHIiFX9NrP+ZgS3e0PcMCIeiT1N2ayAHUXKezmpo0Z/MlXosil4D9Nr5V4
-         P9aNkxbilgpXTnrg31zSJeeZCCDx4lWRuXvOhR0GZu36JcDvGl3WMmtEt8+syTknpya8
-         8usRVjAB/cm5l2A2yh5m/AvT4Hb1YOcUkdK8pYaBFd5qFpXaaw6d63XpAjtXGDxUHBG8
-         VaD0Rvvg1p+sD/xrCgr/R/DIVdpHW0CincY9BnO3yMcmgad7Y8KVCcAeib7YTRJCvHRf
-         kpNKypNSVIDzWAtQ/HU1syVeGFlbDpU3kcHMKMdV8y1Z/vjSktTVGU8PRzp85qmZZu05
-         Jj+A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=x-gm-message-state:date:message-id:from:to:cc:subject
-         :content-transfer-encoding:mime-version;
-        bh=H/kXO5wOonCyGZmApPOrBkhxaaPKvU/ttbJczsp4UII=;
-        b=79JJi/2IEk6P59V/mLkvRfc3UoBgEDHJ1oroK5TAzGeS7Qc8vzWUQW78Bbo4IlKPnY
-         GwLPJjsS5HVFby4ygcZuLXTmYtIA/0N+6r7wOadtGsCrOSVpZUYxdlRJ7INiVWfq0SPy
-         5oz6/+tLS97i4SO8Slm0UVrkN9YlHisK5SqgjRTPpBb5sk2Iend0dVxo256LF7uB620y
-         hHjjB2Q5X6LL9TpcWZ5L7wer7VawwNjs9s0a9Tvk4mlo2uaRJ5Cqh8tCvIJ6xevQQUhm
-         yV3CLw2H0D3swWc5UtX5/alxTkE+p6Mn/uX990eWtbxy8z+fOsjCdDBpvTwkfJ6u84MF
-         trcQ==
-X-Gm-Message-State: AOAM530u9v868PpqDbD2jhs3dK/0RPMMsqJpU5sElv2sJnO2rvf3nd/v
-        egvsPWHIcWsEn+pc/glw09K79Q==
-X-Google-Smtp-Source: ABdhPJyhxAAh1BADJWLpfqRq3DeJhm6+jocSmJc62E5uJDhOa/fgXXMqSxtKYD7ft6zaIQjm/PuETw==
-X-Received: by 2002:a05:6a00:14cc:b0:44d:ebab:2e16 with SMTP id w12-20020a056a0014cc00b0044debab2e16mr15269662pfu.23.1635130698866;
-        Sun, 24 Oct 2021 19:58:18 -0700 (PDT)
-Received: from [127.0.1.1] (117-20-69-24.751445.bne.nbn.aussiebb.net. [117.20.69.24])
-        by smtp.gmail.com with UTF8SMTPSA id rm14sm19989676pjb.4.2021.10.24.19.58.15
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 24 Oct 2021 19:58:18 -0700 (PDT)
-Date:   Mon, 25 Oct 2021 02:58:05 +0000
-Message-Id: <20211025025805.618566-0-nathan@nathanrossi.com>
-From:   Nathan Rossi <nathan@nathanrossi.com>
-To:     linux-hwmon@vger.kernel.org, devicetree@vger.kernel.org,
-        linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org
-Cc:     Nathan Rossi <nathan@nathanrossi.com>,
-        Nathan Rossi <nathan.rossi@digi.com>,
-        Guenter Roeck <linux@roeck-us.net>,
-        Jean Delvare <jdelvare@suse.com>,
-        Rob Herring <robh+dt@kernel.org>,
-        Jonathan Corbet <corbet@lwn.net>
-Subject: [PATCH 0/2] Driver for TI INA238 I2C Power Monitor
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 8bit
+        id S231610AbhJYDGc (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Sun, 24 Oct 2021 23:06:32 -0400
+Received: from out30-43.freemail.mail.aliyun.com ([115.124.30.43]:55363 "EHLO
+        out30-43.freemail.mail.aliyun.com" rhost-flags-OK-OK-OK-OK)
+        by vger.kernel.org with ESMTP id S230040AbhJYDGc (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Sun, 24 Oct 2021 23:06:32 -0400
+X-Alimail-AntiSpam: AC=PASS;BC=-1|-1;BR=01201311R111e4;CH=green;DM=||false|;DS=||;FP=0|-1|-1|-1|0|-1|-1|-1;HT=e01e04394;MF=tianjia.zhang@linux.alibaba.com;NM=1;PH=DS;RN=18;SR=0;TI=SMTPD_---0UtUyMKi_1635131045;
+Received: from 30.240.102.8(mailfrom:tianjia.zhang@linux.alibaba.com fp:SMTPD_---0UtUyMKi_1635131045)
+          by smtp.aliyun-inc.com(127.0.0.1);
+          Mon, 25 Oct 2021 11:04:06 +0800
+Message-ID: <0997d70b-9f28-ba0a-853f-2160922dc722@linux.alibaba.com>
+Date:   Mon, 25 Oct 2021 11:04:02 +0800
 MIME-Version: 1.0
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:91.0)
+ Gecko/20100101 Thunderbird/91.2.0
+Subject: Re: [PATCH v2 1/2] crypto: use SM3 instead of SM3_256
+Content-Language: en-US
+To:     Jarkko Sakkinen <jarkko@kernel.org>,
+        James Bottomley <jejb@linux.ibm.com>,
+        Mimi Zohar <zohar@linux.ibm.com>,
+        Jonathan Corbet <corbet@lwn.net>,
+        Herbert Xu <herbert@gondor.apana.org.au>,
+        "David S. Miller" <davem@davemloft.net>,
+        Peter Huewe <peterhuewe@gmx.de>,
+        Jason Gunthorpe <jgg@ziepe.ca>,
+        David Howells <dhowells@redhat.com>,
+        James Morris <jmorris@namei.org>,
+        "Serge E. Hallyn" <serge@hallyn.com>,
+        Jerry Snitselaar <jsnitsel@redhat.com>,
+        linux-integrity@vger.kernel.org, keyrings@vger.kernel.org,
+        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
+        linux-crypto@vger.kernel.org, linux-security-module@vger.kernel.org
+References: <20211019100423.43615-1-tianjia.zhang@linux.alibaba.com>
+ <20211019100423.43615-2-tianjia.zhang@linux.alibaba.com>
+ <f5c87a233027c8026ae8574f3e25c9162da3bfff.camel@kernel.org>
+From:   Tianjia Zhang <tianjia.zhang@linux.alibaba.com>
+In-Reply-To: <f5c87a233027c8026ae8574f3e25c9162da3bfff.camel@kernel.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-From: Nathan Rossi <nathan.rossi@digi.com>
+Hi Jarkko,
 
+On 10/23/21 8:48 AM, Jarkko Sakkinen wrote:
+> On Tue, 2021-10-19 at 18:04 +0800, Tianjia Zhang wrote:
+>> According to https://tools.ietf.org/id/draft-oscca-cfrg-sm3-01.html,
+>> SM3 always produces a 256-bit hash value and there are no plans for
+>> other length development, so there is no ambiguity in the name of sm3.
+>>
+>> Suggested-by: James Bottomley <jejb@linux.ibm.com>
+>> Signed-off-by: Tianjia Zhang <tianjia.zhang@linux.alibaba.com>
+>> ---
+>>   Documentation/security/keys/trusted-encrypted.rst | 2 +-
+>>   crypto/hash_info.c                                | 4 ++--
+>>   drivers/char/tpm/tpm2-cmd.c                       | 2 +-
+>>   include/crypto/hash_info.h                        | 2 +-
+>>   include/uapi/linux/hash_info.h                    | 3 ++-
+>>   security/keys/trusted-keys/trusted_tpm2.c         | 2 +-
+>>   6 files changed, 8 insertions(+), 7 deletions(-)
+>>
+>> diff --git a/Documentation/security/keys/trusted-encrypted.rst b/Documentation/security/keys/trusted-encrypted.rst
+>> index 80d5a5af62a1..3292461517f6 100644
+>> --- a/Documentation/security/keys/trusted-encrypted.rst
+>> +++ b/Documentation/security/keys/trusted-encrypted.rst
+>> @@ -162,7 +162,7 @@ Usage::
+>>                        default 1 (resealing allowed)
+>>          hash=         hash algorithm name as a string. For TPM 1.x the only
+>>                        allowed value is sha1. For TPM 2.x the allowed values
+>> -                     are sha1, sha256, sha384, sha512 and sm3-256.
+>> +                     are sha1, sha256, sha384, sha512 and sm3.
+> 
+> You cannot remove sm3-256 from uapi.
+> 
 
-Nathan Rossi (2):
-  dt-bindings: hwmon: ti,ina2xx: Document ti,ina238 compatible string
-  hwmon: Driver for Texas Instruments INA238
+Thanks for pointing it out, Maybe this fix is more appropriate in patch 2.
 
- .../devicetree/bindings/hwmon/ti,ina2xx.yaml  |   1 +
- Documentation/hwmon/ina238.rst                |  57 +++
- drivers/hwmon/Kconfig                         |  12 +
- drivers/hwmon/Makefile                        |   1 +
- drivers/hwmon/ina238.c                        | 453 ++++++++++++++++++
- 5 files changed, 524 insertions(+)
- create mode 100644 Documentation/hwmon/ina238.rst
- create mode 100644 drivers/hwmon/ina238.c
----
-2.33.0
+Best regards,
+Tianjia
