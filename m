@@ -2,65 +2,30 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 6921643B597
-	for <lists+linux-doc@lfdr.de>; Tue, 26 Oct 2021 17:29:11 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 39E5243B5B5
+	for <lists+linux-doc@lfdr.de>; Tue, 26 Oct 2021 17:37:39 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S230523AbhJZPbd (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 26 Oct 2021 11:31:33 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:41376 "EHLO
-        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S230342AbhJZPbc (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 26 Oct 2021 11:31:32 -0400
-Received: from mail-io1-xd30.google.com (mail-io1-xd30.google.com [IPv6:2607:f8b0:4864:20::d30])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 0DCCAC061745;
-        Tue, 26 Oct 2021 08:29:09 -0700 (PDT)
-Received: by mail-io1-xd30.google.com with SMTP id r194so722507iod.7;
-        Tue, 26 Oct 2021 08:29:09 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc;
-        bh=KJolHZAJ+NHUzTXzRjY88iP/wLMrBD51AxY6Lzd7Fu0=;
-        b=iQqj7HS27USEcuVJAO2uQWLah4eVJ0LMNq6R3/nx8Hceh9EqMC5O7NG4dKUyRlmMKs
-         lX0JNHieIN4cqAzyiG/TSF6G7iH2cwk51t31MYAki7jqkbu1k56nRC+LLlUzii1vsj19
-         9H85WDG+2lOj8W6UiCjhICCBhGn79l6oHA1paI5urGWf1da49QgO7B9XTTXZ6Eu72+3Y
-         YJjlZBqDMvbhXFCyUxIjWIhI3dSaifhOr+eWEccUXjyOpjEGCGSW6BJ2xuwA3nTFqjsN
-         fwQChTpLZZYDS6YB38FN5x+nYUrgcBWsYxkKJnPTEbpwFJLetCF0PzDuSgs/6jVlpyfp
-         mFEg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc;
-        bh=KJolHZAJ+NHUzTXzRjY88iP/wLMrBD51AxY6Lzd7Fu0=;
-        b=l2K8Tu+sYcZfNkZBQ+IgUAx37giloyXD8tCudOiQzMurcA3hOzsPjINsCbs2t3oE39
-         /tNMzgVcxr0s7IPanVKAXr5AXk+OK/qfW31b0ZmuIFh7dq0gov/LV8tI4CiAemINHIuz
-         tk06r4gRWSbODHCQdNAU0NR/7DPhxJPzNUWTdYXskwGWPtbUS2+wHdnLC8TYCRorjrlh
-         +QK9y3YjvYzC5+4VWXpmxcq5S+U7l+b9mpuP+fgXo+onqum3d/OC1+H9ELgVNrRXq8hX
-         TQyJ/qBe1BqeO8s35614e5T0W5R1plbvOJhSDQb2OwvFHnjeIz6xnqufbOWveU/wKm/N
-         q64Q==
-X-Gm-Message-State: AOAM5324Ep8PIp+xetH3O2XsaSU4FoNHHIZ7L8/lvtp8BkC12lrCXap2
-        U8KwxYfsiPBbn0+ir8+gev/bTUce2rL246tkt74=
-X-Google-Smtp-Source: ABdhPJxahCG/EjlpsVlkUL4UB7ZYvXFOKMLyPnWHyZ5reTJl6PT6O9cdmV7V504GM+tmBiDhbrbTevRP53JuUMPzBHA=
-X-Received: by 2002:a5d:8903:: with SMTP id b3mr16216589ion.44.1635262148559;
- Tue, 26 Oct 2021 08:29:08 -0700 (PDT)
-MIME-Version: 1.0
-References: <20210423184012.39300-1-twoerner@gmail.com> <CANiq72mUBh+76iy5uCAGHpKHDnTGRVyQduMngEWDMCF6kRySJA@mail.gmail.com>
- <CAHUNapQfFBcqrX7MvUvq8qbPgk2bPu-h3+9NxAUFpRtpOGFODw@mail.gmail.com>
- <CANiq72=iDhHiFKBzud6sj6reCS=pEYxFn5x4b=VfNLMxva-RuA@mail.gmail.com>
- <20211026144452.GA40651@localhost> <CANiq72kf0QZUeO+=U67NLs=WXc=sEtasdv_yaZ5sZedNmzzJBw@mail.gmail.com>
- <fe86efbd-4e03-76c8-55cf-dabd33e85823@infradead.org>
-In-Reply-To: <fe86efbd-4e03-76c8-55cf-dabd33e85823@infradead.org>
-From:   Miguel Ojeda <miguel.ojeda.sandonis@gmail.com>
-Date:   Tue, 26 Oct 2021 17:28:57 +0200
-Message-ID: <CANiq72kVXwnP=BWkv-e_TcGBLj38hwKs4oWCtUxJPfvVr1Bd_Q@mail.gmail.com>
-Subject: Re: [PATCH] coding-style.rst: trivial: fix location of driver model macros
-To:     Randy Dunlap <rdunlap@infradead.org>
-Cc:     Trevor Woerner <twoerner@gmail.com>,
-        Jonathan Corbet <corbet@lwn.net>,
+        id S234841AbhJZPkB (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 26 Oct 2021 11:40:01 -0400
+Received: from smtprelay0207.hostedemail.com ([216.40.44.207]:42672 "EHLO
+        smtprelay.hostedemail.com" rhost-flags-OK-OK-OK-FAIL)
+        by vger.kernel.org with ESMTP id S236963AbhJZPkA (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 26 Oct 2021 11:40:00 -0400
+Received: from omf06.hostedemail.com (clb03-v110.bra.tucows.net [216.40.38.60])
+        by smtprelay04.hostedemail.com (Postfix) with ESMTP id 1CC1218128067;
+        Tue, 26 Oct 2021 15:37:33 +0000 (UTC)
+Received: from [HIDDEN] (Authenticated sender: joe@perches.com) by omf06.hostedemail.com (Postfix) with ESMTPA id 971472448B9;
+        Tue, 26 Oct 2021 15:37:30 +0000 (UTC)
+Message-ID: <52c1cd5fa698216734ffda706299d77a102fcb2f.camel@perches.com>
+Subject: Re: [PATCH] coding-style.rst: trivial: fix location of driver model
+ macros
+From:   Joe Perches <joe@perches.com>
+To:     Trevor Woerner <twoerner@gmail.com>,
+        Miguel Ojeda <miguel.ojeda.sandonis@gmail.com>
+Cc:     Jonathan Corbet <corbet@lwn.net>,
         Andrew Morton <akpm@linux-foundation.org>,
         linux-kernel <linux-kernel@vger.kernel.org>,
         Jiri Kosina <trivial@kernel.org>,
-        Joe Perches <joe@perches.com>,
         Shuah Khan <skhan@linuxfoundation.org>,
         Matthias Brugger <matthias.bgg@gmail.com>,
         Miguel Ojeda <ojeda@kernel.org>,
@@ -69,17 +34,43 @@ Cc:     Trevor Woerner <twoerner@gmail.com>,
         Yorick de Wid <yorickdewid@users.noreply.github.com>,
         Dan Williams <dan.j.williams@intel.com>,
         "open list:DOCUMENTATION" <linux-doc@vger.kernel.org>
-Content-Type: text/plain; charset="UTF-8"
+Date:   Tue, 26 Oct 2021 08:37:29 -0700
+In-Reply-To: <20211026144452.GA40651@localhost>
+References: <20210423184012.39300-1-twoerner@gmail.com>
+         <CANiq72mUBh+76iy5uCAGHpKHDnTGRVyQduMngEWDMCF6kRySJA@mail.gmail.com>
+         <CAHUNapQfFBcqrX7MvUvq8qbPgk2bPu-h3+9NxAUFpRtpOGFODw@mail.gmail.com>
+         <CANiq72=iDhHiFKBzud6sj6reCS=pEYxFn5x4b=VfNLMxva-RuA@mail.gmail.com>
+         <20211026144452.GA40651@localhost>
+Content-Type: text/plain; charset="ISO-8859-1"
+User-Agent: Evolution 3.40.4-1 
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+X-Rspamd-Server: rspamout03
+X-Rspamd-Queue-Id: 971472448B9
+X-Spam-Status: No, score=-1.36
+X-Stat-Signature: f5wh9ftqskmbjsgudt7zcqyycmeceps3
+X-Session-Marker: 6A6F6540706572636865732E636F6D
+X-Session-ID: U2FsdGVkX19BGWKjLVK8sFLYXduqBtSM80M23Qj+zGQ=
+X-HE-Tag: 1635262650-355530
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Tue, Oct 26, 2021 at 5:18 PM Randy Dunlap <rdunlap@infradead.org> wrote:
->
-> I think that we decided to stop using trivial@kernel.org for new patches
-> a few months ago...
+On Tue, 2021-10-26 at 10:44 -0400, Trevor Woerner wrote:
+> On Tue 2021-10-26 @ 02:47:12 PM, Miguel Ojeda wrote:
+> > On Mon, Oct 25, 2021 at 11:40 PM Trevor Woerner <twoerner@gmail.com> wrote:
+> > > ping?
+[]
+> > Note that you should put whoever should take it in the To field (I
+> > just noticed your original email did not) -- use
+> > `scripts/get_maintainer.pl` for getting the relevant people for a
+> > patch or path.
+> 
+> Ah, good point. I have a "cccmd" line in my ~/.gitconfig for adding people to
+> the CC when I "git send-email", maybe I should switch that to a "tocmd"?
 
-Ah, good to know, thanks! Then we should update submitting-patches.rst at least.
+I use scripts for both.
 
-Cheers,
-Miguel
+https://lore.kernel.org/all/1473862411.32273.25.camel@perches.com/
+
+
