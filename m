@@ -2,90 +2,167 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 0F88643A9EE
-	for <lists+linux-doc@lfdr.de>; Tue, 26 Oct 2021 03:51:58 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 9521D43AA87
+	for <lists+linux-doc@lfdr.de>; Tue, 26 Oct 2021 04:54:54 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S233569AbhJZByT (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 25 Oct 2021 21:54:19 -0400
-Received: from mail.loongson.cn ([114.242.206.163]:43198 "EHLO loongson.cn"
-        rhost-flags-OK-OK-OK-FAIL) by vger.kernel.org with ESMTP
-        id S232670AbhJZByO (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Mon, 25 Oct 2021 21:54:14 -0400
-Received: from linux.localdomain (unknown [113.200.148.30])
-        by mail.loongson.cn (Coremail) with SMTP id AQAAf9Dxj2okX3dh6gIgAA--.33960S6;
-        Tue, 26 Oct 2021 09:51:39 +0800 (CST)
-From:   Tiezhu Yang <yangtiezhu@loongson.cn>
-To:     naveen.n.rao@linux.ibm.com, anil.s.keshavamurthy@intel.com,
-        davem@davemloft.net, mhiramat@kernel.org, rostedt@goodmis.org,
-        mingo@redhat.com, corbet@lwn.net
-Cc:     akpm@linux-foundation.org, linux-doc@vger.kernel.org,
-        linux-kernel@vger.kernel.org
-Subject: [PATCH v2 4/4] MAINTAINERS: Update KPROBES and TRACING entries
-Date:   Tue, 26 Oct 2021 09:51:31 +0800
-Message-Id: <1635213091-24387-5-git-send-email-yangtiezhu@loongson.cn>
-X-Mailer: git-send-email 2.1.0
-In-Reply-To: <1635213091-24387-1-git-send-email-yangtiezhu@loongson.cn>
-References: <1635213091-24387-1-git-send-email-yangtiezhu@loongson.cn>
-X-CM-TRANSID: AQAAf9Dxj2okX3dh6gIgAA--.33960S6
-X-Coremail-Antispam: 1UD129KBjvJXoW7WF1xCFyDCFy3XF4fZr1UJrb_yoW8Gw17pF
-        4kGrn3Zr4rJr1rJw4qg3WSka4xZwn5ArsxuFn7K3sYyF1qvr1jqrs29rsFvFs2vrZ0qrWa
-        yr1xZryj9ayxZaDanT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
-        9KBjDU0xBIdaVrnRJUUUPCb7Iv0xC_Zr1lb4IE77IF4wAFF20E14v26rWj6s0DM7CY07I2
-        0VC2zVCF04k26cxKx2IYs7xG6rWj6s0DM7CIcVAFz4kK6r1j6r18M28IrcIa0xkI8VA2jI
-        8067AKxVWUAVCq3wA2048vs2IY020Ec7CjxVAFwI0_Xr0E3s1l8cAvFVAK0II2c7xJM28C
-        jxkF64kEwVA0rcxSw2x7M28EF7xvwVC0I7IYx2IY67AKxVW5JVW7JwA2z4x0Y4vE2Ix0cI
-        8IcVCY1x0267AKxVW8Jr0_Cr1UM28EF7xvwVC2z280aVAFwI0_Gr1j6F4UJwA2z4x0Y4vE
-        x4A2jsIEc7CjxVAFwI0_Gr1j6F4UJwAS0I0E0xvYzxvE52x082IY62kv0487Mc02F40EFc
-        xC0VAKzVAqx4xG6I80ewAv7VC0I7IYx2IY67AKxVWUJVWUGwAv7VC2z280aVAFwI0_Jr0_
-        Gr1lOx8S6xCaFVCjc4AY6r1j6r4UM4x0Y48IcxkI7VAKI48JM4IIrI8v6xkF7I0E8cxan2
-        IY04v7MxkIecxEwVAFwVWkMxAIw28IcxkI7VAKI48JMxC20s026xCaFVCjc4AY6r1j6r4U
-        MI8I3I0E5I8CrVAFwI0_Jr0_Jr4lx2IqxVCjr7xvwVAFwI0_JrI_JrWlx4CE17CEb7AF67
-        AKxVWUtVW8ZwCIc40Y0x0EwIxGrwCI42IY6xIIjxv20xvE14v26r1j6r1xMIIF0xvE2Ix0
-        cI8IcVCY1x0267AKxVW8JVWxJwCI42IY6xAIw20EY4v20xvaj40_Jr0_JF4lIxAIcVC2z2
-        80aVAFwI0_Jr0_Gr1lIxAIcVC2z280aVCY1x0267AKxVW8JVW8JrUvcSsGvfC2KfnxnUUI
-        43ZEXa7IU8g6pDUUUUU==
-X-CM-SenderInfo: p1dqw3xlh2x3gn0dqz5rrqw2lrqou0/
+        id S233033AbhJZC5Q (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 25 Oct 2021 22:57:16 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:40418 "EHLO
+        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S232402AbhJZC5P (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Mon, 25 Oct 2021 22:57:15 -0400
+Received: from mail-qt1-x82e.google.com (mail-qt1-x82e.google.com [IPv6:2607:f8b0:4864:20::82e])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id CBB81C061745;
+        Mon, 25 Oct 2021 19:54:52 -0700 (PDT)
+Received: by mail-qt1-x82e.google.com with SMTP id r17so12191159qtx.10;
+        Mon, 25 Oct 2021 19:54:52 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc;
+        bh=tkzNHgBhfoN1mN/bXgW3MkB27AZfqmaYrRvjImCn3wA=;
+        b=fjCVH2KPY/mOAid4lHIsGk80qGZe30oFxUXZMY6H8BI1NPpfz1H7r97F4+u6+k31yg
+         XryUZ5iJTS0menFBaz8G/X0/x71oUEWhb2XKfy4L63t5PRcBboHIJSYDpcsU/calqj7w
+         /xamMaezkiK9JyR9DavPcNl1V/T6S0i3uPsr07Vc/6M1q04LocQutxVNe10VkkPJc0fU
+         +cLN6Y30I76ymGcpkbmxFXY+PlLj9sjm7aMHlmdQHDviQT+0dSomZY80Q+qXs4yq1rWN
+         wA2A2SqcD8V3Hwhdk++g7kX8XRcecg2LszFyi5wdkY7YecZYkA07iJ95uGxBh3t3RK8H
+         ul2w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=tkzNHgBhfoN1mN/bXgW3MkB27AZfqmaYrRvjImCn3wA=;
+        b=lQJxcN5ckFoqLNhCwsqrWzdnH3dsYvDVsSEjFyp00tCoFLkFJ1OnzzfEBBe6Ann7CI
+         VsRa2Xln8oDQrLLhqbGVzW+DVYq0czor7sR0yw/1e9jUlgBpR7+jPOynWMd1pE5NUb4h
+         RrUM+a7Y/ront96r57imSiQjopEq+XmvQ9VWydOGh0T99eAdyzbqcznjT7aDIOGH9JTp
+         uuKKhqfs9o1erwMGCr6cNVCnUd0FQf4r9CFzkQlFa3ZUdNDWUMkHk5572Dcbswk25zip
+         66xrRVsguiM4EsHvIB6jpMMiALqwdYNdIjcIxyQTQoixeBSb98m5PctIbmVFLdPRs7gU
+         9blw==
+X-Gm-Message-State: AOAM531ZsbyeYKhTBKJ5KYd0BNuj5tD4l/ZUIsLsrXZJIZSUxuYs1ay5
+        Nnves9Qjxk3VXiKGEQgKv71l3Nx8/aLH19Q8b1jmFse7iTziqw==
+X-Google-Smtp-Source: ABdhPJw3JwJbWZw56oelucSpMM5M8gmCdguOUx+CVabxorwtsOFgtyp4lRdNV3fGm7s/OcBmgax57e8YWA+HUsA5OIs=
+X-Received: by 2002:ac8:7d47:: with SMTP id h7mr21574977qtb.92.1635216891902;
+ Mon, 25 Oct 2021 19:54:51 -0700 (PDT)
+MIME-Version: 1.0
+References: <20211025115910.2595-1-xingwu.yang@gmail.com> <707b5fb3-6b61-c53-e983-bc1373aa2bf@ssi.bg>
+In-Reply-To: <707b5fb3-6b61-c53-e983-bc1373aa2bf@ssi.bg>
+From:   yangxingwu <xingwu.yang@gmail.com>
+Date:   Tue, 26 Oct 2021 10:54:40 +0800
+Message-ID: <CA+7U5JsSuwqP7eHj1tMHfsb+EemwrhZEJ2b944LFWTroxAnQRQ@mail.gmail.com>
+Subject: Re: [PATCH] ipvs: Fix reuse connection if RS weight is 0
+To:     Julian Anastasov <ja@ssi.bg>
+Cc:     Simon Horman <horms@verge.net.au>,
+        Pablo Neira Ayuso <pablo@netfilter.org>,
+        kadlec@netfilter.org, fw@strlen.de,
+        "David S. Miller" <davem@davemloft.net>, kuba@kernel.org,
+        netdev@vger.kernel.org, lvs-devel@vger.kernel.org,
+        netfilter-devel@vger.kernel.org, coreteam@netfilter.org,
+        linux-kernel <linux-kernel@vger.kernel.org>,
+        linux-doc@vger.kernel.org, corbet@lwn.net
+Content-Type: text/plain; charset="UTF-8"
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-There is no git tree for KPROBES in MAINTAINERS, it is not convinent to
-rebase, lib/test_kprobes.c and samples/kprobes belong to kprobe, so add
-git tree and missing files for KPROBES, and also use linux-trace.git for
-TRACING to avoid confusing.
+thanks julian
 
-Signed-off-by: Tiezhu Yang <yangtiezhu@loongson.cn>
----
- MAINTAINERS | 5 ++++-
- 1 file changed, 4 insertions(+), 1 deletion(-)
+What happens in this situation is that if we set the wait of the
+realserver to 0 and do NOT remove the weight zero realserver with
+sysctl settings (conn_reuse_mode == 0 && expire_nodest_conn == 1), and
+the client reuses its source ports, the kernel will constantly
+reuse connections and send the traffic to the weight 0 realserver.
 
-diff --git a/MAINTAINERS b/MAINTAINERS
-index 5b33791..8d26693 100644
---- a/MAINTAINERS
-+++ b/MAINTAINERS
-@@ -10437,10 +10437,13 @@ M:	Anil S Keshavamurthy <anil.s.keshavamurthy@intel.com>
- M:	"David S. Miller" <davem@davemloft.net>
- M:	Masami Hiramatsu <mhiramat@kernel.org>
- S:	Maintained
-+T:	git git://git.kernel.org/pub/scm/linux/kernel/git/rostedt/linux-trace.git
- F:	Documentation/trace/kprobes.rst
- F:	include/asm-generic/kprobes.h
- F:	include/linux/kprobes.h
- F:	kernel/kprobes.c
-+F:	lib/test_kprobes.c
-+F:	samples/kprobes
- 
- KS0108 LCD CONTROLLER DRIVER
- M:	Miguel Ojeda <ojeda@kernel.org>
-@@ -18967,7 +18970,7 @@ TRACING
- M:	Steven Rostedt <rostedt@goodmis.org>
- M:	Ingo Molnar <mingo@redhat.com>
- S:	Maintained
--T:	git git://git.kernel.org/pub/scm/linux/kernel/git/tip/tip.git perf/core
-+T:	git git://git.kernel.org/pub/scm/linux/kernel/git/rostedt/linux-trace.git
- F:	Documentation/trace/ftrace.rst
- F:	arch/*/*/*/ftrace.h
- F:	arch/*/kernel/ftrace.c
--- 
-2.1.0
+you may check the details from
+https://github.com/kubernetes/kubernetes/issues/81775
 
+On Tue, Oct 26, 2021 at 2:12 AM Julian Anastasov <ja@ssi.bg> wrote:
+>
+>
+>         Hello,
+>
+> On Mon, 25 Oct 2021, yangxingwu wrote:
+>
+> > Since commit dc7b3eb900aa ("ipvs: Fix reuse connection if real server is
+> > dead"), new connections to dead servers are redistributed immediately to
+> > new servers.
+> >
+> > Then commit d752c3645717 ("ipvs: allow rescheduling of new connections when
+> > port reuse is detected") disable expire_nodest_conn if conn_reuse_mode is
+> > 0. And new connection may be distributed to a real server with weight 0.
+>
+>         Your change does not look correct to me. At the time
+> expire_nodest_conn was created, it was not checked when
+> weight is 0. At different places different terms are used
+> but in short, we have two independent states for real server:
+>
+> - inhibited: weight=0 and no new connections should be served,
+>         packets for existing connections can be routed to server
+>         if it is still available and packets are not dropped
+>         by expire_nodest_conn.
+>         The new feature is that port reuse detection can
+>         redirect the new TCP connection into a new IPVS conn and
+>         to expire the existing cp/ct.
+>
+> - unavailable (!IP_VS_DEST_F_AVAILABLE): server is removed,
+>         can be temporary, drop traffic for existing connections
+>         but on expire_nodest_conn we can select different server
+>
+>         The new conn_reuse_mode flag allows port reuse to
+> be detected. Only then expire_nodest_conn has the
+> opportunity with commit dc7b3eb900aa to check weight=0
+> and to consider the old traffic as finished. If a new
+> server is selected, any retrans from previous connection
+> would be considered as part from the new connection. It
+> is a rapid way to switch server without checking with
+> is_new_conn_expected() because we can not have many
+> conns/conntracks to different servers.
+>
+> > Signed-off-by: yangxingwu <xingwu.yang@gmail.com>
+> > ---
+> >  Documentation/networking/ipvs-sysctl.rst | 3 +--
+> >  net/netfilter/ipvs/ip_vs_core.c          | 5 +++--
+> >  2 files changed, 4 insertions(+), 4 deletions(-)
+> >
+> > diff --git a/Documentation/networking/ipvs-sysctl.rst b/Documentation/networking/ipvs-sysctl.rst
+> > index 2afccc63856e..1cfbf1add2fc 100644
+> > --- a/Documentation/networking/ipvs-sysctl.rst
+> > +++ b/Documentation/networking/ipvs-sysctl.rst
+> > @@ -37,8 +37,7 @@ conn_reuse_mode - INTEGER
+> >
+> >       0: disable any special handling on port reuse. The new
+> >       connection will be delivered to the same real server that was
+> > -     servicing the previous connection. This will effectively
+> > -     disable expire_nodest_conn.
+> > +     servicing the previous connection.
+> >
+> >       bit 1: enable rescheduling of new connections when it is safe.
+> >       That is, whenever expire_nodest_conn and for TCP sockets, when
+> > diff --git a/net/netfilter/ipvs/ip_vs_core.c b/net/netfilter/ipvs/ip_vs_core.c
+> > index 128690c512df..9279aed69e23 100644
+> > --- a/net/netfilter/ipvs/ip_vs_core.c
+> > +++ b/net/netfilter/ipvs/ip_vs_core.c
+> > @@ -2042,14 +2042,15 @@ ip_vs_in(struct netns_ipvs *ipvs, unsigned int hooknum, struct sk_buff *skb, int
+> >                            ipvs, af, skb, &iph);
+> >
+> >       conn_reuse_mode = sysctl_conn_reuse_mode(ipvs);
+> > -     if (conn_reuse_mode && !iph.fragoffs && is_new_conn(skb, &iph) && cp) {
+> > +     if (!iph.fragoffs && is_new_conn(skb, &iph) && cp) {
+> >               bool old_ct = false, resched = false;
+> >
+> >               if (unlikely(sysctl_expire_nodest_conn(ipvs)) && cp->dest &&
+> >                   unlikely(!atomic_read(&cp->dest->weight))) {
+> >                       resched = true;
+> >                       old_ct = ip_vs_conn_uses_old_conntrack(cp, skb);
+> > -             } else if (is_new_conn_expected(cp, conn_reuse_mode)) {
+> > +             } else if (conn_reuse_mode &&
+> > +                        is_new_conn_expected(cp, conn_reuse_mode)) {
+> >                       old_ct = ip_vs_conn_uses_old_conntrack(cp, skb);
+> >                       if (!atomic_read(&cp->n_control)) {
+> >                               resched = true;
+> > --
+> > 2.30.2
+>
+> Regards
+>
+> --
+> Julian Anastasov <ja@ssi.bg>
