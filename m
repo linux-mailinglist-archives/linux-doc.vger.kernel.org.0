@@ -2,68 +2,72 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 2887C43B5B4
-	for <lists+linux-doc@lfdr.de>; Tue, 26 Oct 2021 17:37:38 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id E5A9143B5E0
+	for <lists+linux-doc@lfdr.de>; Tue, 26 Oct 2021 17:41:30 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S230494AbhJZPkA (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 26 Oct 2021 11:40:00 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:43248 "EHLO
+        id S237061AbhJZPnu (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 26 Oct 2021 11:43:50 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:44146 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S236969AbhJZPj7 (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 26 Oct 2021 11:39:59 -0400
+        with ESMTP id S237075AbhJZPnj (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 26 Oct 2021 11:43:39 -0400
 Received: from ms.lwn.net (ms.lwn.net [IPv6:2600:3c01:e000:3a1::42])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 205CEC061745
-        for <linux-doc@vger.kernel.org>; Tue, 26 Oct 2021 08:37:34 -0700 (PDT)
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id A96DBC061767;
+        Tue, 26 Oct 2021 08:41:11 -0700 (PDT)
 Received: from localhost (unknown [IPv6:2601:281:8300:104d::5f6])
         (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
         (No client certificate requested)
-        by ms.lwn.net (Postfix) with ESMTPSA id C48A0844;
-        Tue, 26 Oct 2021 15:37:33 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 ms.lwn.net C48A0844
+        by ms.lwn.net (Postfix) with ESMTPSA id 4A5C84B9E;
+        Tue, 26 Oct 2021 15:41:11 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 ms.lwn.net 4A5C84B9E
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=lwn.net; s=20201203;
-        t=1635262653; bh=BO0FH4NpsoKzz5ysD7mAWzUqzUOG5vEv7ZV5CUFRW8M=;
+        t=1635262871; bh=Qar+8vytJwRSlS0fY7aczsWVXmL+IR0XlsMwiepimE0=;
         h=From:To:Cc:Subject:In-Reply-To:References:Date:From;
-        b=Xu05Dp33O+L+ESv8Lyr5fVBdlaEHL41KZPGiVMpDabg5wLbRNa59cDhn3DOrOpmmT
-         ir4nHpsJeA/K+dc3EINXSs+Xf2TwZD+mQTDeX5kj/7lSFx0s/J28LNEWYBPxle5m6D
-         4HRT7/57sg37DAfsXDgULCUaf01alh/nn+42iQpdOPwReQEb75ljkFWZqgFkz5WrhK
-         AhWO53JBRaRSkka5MkVLlLYzGCsrqBD6Yry37DwHDTOYhrsxVUguxEMjn+N2+d0OiI
-         XqO4PHTAqS63t3qgUcBjqP+1fZ7DBt7s0wpqmkQcYeroBxkNwBwI4eCbY7Y9jiuYCM
-         2d6xEuewK+D9w==
+        b=SawY5ut8Xw9PFarayg8ueip1N2VUP+dEm1IUFBnXVVaoR+06dRIP8OiilAZPdGDj9
+         3LUEcJWexap2PY0THx+xyjqs2VkODs8y1OcyLcqvcCSSI6GxKmlVFYRfusH+6tyWjz
+         WPZHQFiv9m7X6icSEAPSUPD1CkomRqCTZaJZyLhOAulCpPuqJMHxNXFHc4KbYqGWV7
+         cYf6eYLoaf0pPrvtLtNWHmwOb3Wp2yP8I3DH6vZ8XqlSzok6lzOxgOzOys8M9N8cZ0
+         krUgMq4Fbn+zAcLf0Ii3aWocMrCRpnHBWx7wQpInDb+AyLs7ikSWSuMs614703LaZg
+         mtmIBqXRjk9QQ==
 From:   Jonathan Corbet <corbet@lwn.net>
-To:     Fengnan Chang <changfengnan@vivo.com>, jaegeuk@kernel.org,
-        chao@kernel.org
-Cc:     linux-f2fs-devel@lists.sourceforge.net, linux-doc@vger.kernel.org,
-        Fengnan Chang <changfengnan@vivo.com>
-Subject: Re: [PATCH] f2fs: fix f2fs.rst build warning
-In-Reply-To: <20211023025833.216030-1-changfengnan@vivo.com>
-References: <20211023025833.216030-1-changfengnan@vivo.com>
-Date:   Tue, 26 Oct 2021 09:37:33 -0600
-Message-ID: <87ee87g5ky.fsf@meer.lwn.net>
+To:     Trevor Woerner <twoerner@gmail.com>,
+        Miguel Ojeda <miguel.ojeda.sandonis@gmail.com>
+Cc:     linux-kernel <linux-kernel@vger.kernel.org>,
+        Jiri Kosina <trivial@kernel.org>,
+        Joe Perches <joe@perches.com>,
+        Shuah Khan <skhan@linuxfoundation.org>,
+        Matthias Brugger <matthias.bgg@gmail.com>,
+        Miguel Ojeda <ojeda@kernel.org>,
+        Geert Uytterhoeven <geert@linux-m68k.org>,
+        "Alexander A. Klimov" <grandmaster@al2klimov.de>,
+        Dan Williams <dan.j.williams@intel.com>,
+        "open list:DOCUMENTATION" <linux-doc@vger.kernel.org>
+Subject: Re: [PATCH] coding-style.rst: trivial: fix location of driver model
+ macros
+In-Reply-To: <CAHUNapQfFBcqrX7MvUvq8qbPgk2bPu-h3+9NxAUFpRtpOGFODw@mail.gmail.com>
+References: <20210423184012.39300-1-twoerner@gmail.com>
+ <CANiq72mUBh+76iy5uCAGHpKHDnTGRVyQduMngEWDMCF6kRySJA@mail.gmail.com>
+ <CAHUNapQfFBcqrX7MvUvq8qbPgk2bPu-h3+9NxAUFpRtpOGFODw@mail.gmail.com>
+Date:   Tue, 26 Oct 2021 09:41:10 -0600
+Message-ID: <87a6ivg5ex.fsf@meer.lwn.net>
 MIME-Version: 1.0
 Content-Type: text/plain
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Fengnan Chang <changfengnan@vivo.com> writes:
+Trevor Woerner <twoerner@gmail.com> writes:
 
-> fix f2fs.rst build warning.
+> ping?
 >
-> Fixes: 151b1982be5d (f2fs: compress: add nocompress extensions support)
-> Signed-off-by: Fengnan Chang <changfengnan@vivo.com>
-> ---
->  Documentation/filesystems/f2fs.rst | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
+> It doesn't look like this was picked up by trivial? Although, it doesn't
+> look like git://git.kernel.org/pub/scm/linux/kernel/git/jikos/trivial.git
+> has been used in a while. Is there an alternate (preferred) path for
+> trivial patches?
 
-"Fix a warning" is almost never a good changelog message; you are fixing
-a problem that provoked a warning.  I rewrote the changelog to:
+Hmm...no idea why I missed it the first time around.  Applied now,
+apologies for the delay.
 
-  The docs build was generating this warning:
-
-    Documentation/filesystems/f2fs.rst:306: WARNING: Block quote ends without a blank line; unexpected unindent.
-
-  Remove the extra white space that was confusing sphinx.
-
-Applied, thanks.
+Thanks,
 
 jon
