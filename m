@@ -2,169 +2,72 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id CDBD143AD98
-	for <lists+linux-doc@lfdr.de>; Tue, 26 Oct 2021 09:54:53 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 3C05843ADA9
+	for <lists+linux-doc@lfdr.de>; Tue, 26 Oct 2021 09:56:35 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S232956AbhJZH5P (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 26 Oct 2021 03:57:15 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:50068 "EHLO
-        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S231860AbhJZH5O (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 26 Oct 2021 03:57:14 -0400
-Received: from mail-ua1-x92f.google.com (mail-ua1-x92f.google.com [IPv6:2607:f8b0:4864:20::92f])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 69D1FC061745
-        for <linux-doc@vger.kernel.org>; Tue, 26 Oct 2021 00:54:51 -0700 (PDT)
-Received: by mail-ua1-x92f.google.com with SMTP id s4so3205763uaq.0
-        for <linux-doc@vger.kernel.org>; Tue, 26 Oct 2021 00:54:51 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=nathanrossi.com; s=google;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc;
-        bh=7KThsVsJ0ORwtbbILrkIHcQVvOXxtniaD63wKOd53qk=;
-        b=HnvJ4vvoBGWPejDQnm/ceHOouktHbMPYb2NVqm8X890uLYuhTntSkXmPPrfeXPUxFf
-         JaV8TxThiaayueFvWeFtc7E5kZRxffOdqIDgYnawrTS77/V2nCdJXJQLIW3UjwIUd5PK
-         PoezPScg2qx0ovlwPBRS3QbxEwCQ3qQEE0n7miqUGqf+QRuID0gmWS+YmqKyowfwxUqa
-         TEw0jBSG6oL3BH7IsdFPy1p7oHtarhL+e4cERUZMn/2Yb3w+zyUslD1AQ65WMu5jf422
-         sE1v6m683vV+buas/UyPtz8IEzH08wLrjA8XA0dX7DhXBLdMQl+RRmD3Mn7hKV3p6+JW
-         XxFQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc;
-        bh=7KThsVsJ0ORwtbbILrkIHcQVvOXxtniaD63wKOd53qk=;
-        b=qxDdZMRFTOVxkkaYhw4bsYKkR/AuOL1KVXk4yx4WywebiiH4Wwr7BdsxP3ULqlEpak
-         fuN2xKksqjnfqGtK4hmj70jYgyHOz5Cr/AuPMUxdiSv2OTx7+x1fQoe4JvVd7yAWgyYk
-         M2oaSaowLCQqw6MEugiZCMK/K/W81vd47GvBBcFqxfgV7rzx33EVajrtSicnNZ0eBvY7
-         pxvnJiX3kFr+zI4o9P+U+XWQFgR3z7N19E1SvpuptBMXALl4lJFNln9kXxenYYbMHxI2
-         AkUXTRfS+m2UOHc9rkDqIqXMWE7jZ7u6YSPlTcJNFsjTZTVHSHtPkBFTLm8gpdzrNd5e
-         5QZw==
-X-Gm-Message-State: AOAM530Tf6MdN5rdPoXyXfe3PJMgZz5YClPaMY63M3Hfn0f/Cybk2hn9
-        14vRxH1UhBKPH7ZMyWMGaJxdyoZlpS5IiIpoTTj/wA==
-X-Google-Smtp-Source: ABdhPJwA8HUnvfBBeHEMaTCPWBYGAi9sB4Mm+usDOw4yuTD8raJr2E0KRF4gRS78GU5/ltQS8MgS2XLSeiXqnOeISEE=
-X-Received: by 2002:a67:f1ca:: with SMTP id v10mr18800145vsm.55.1635234890581;
- Tue, 26 Oct 2021 00:54:50 -0700 (PDT)
+        id S233673AbhJZH6z (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 26 Oct 2021 03:58:55 -0400
+Received: from out30-45.freemail.mail.aliyun.com ([115.124.30.45]:45046 "EHLO
+        out30-45.freemail.mail.aliyun.com" rhost-flags-OK-OK-OK-OK)
+        by vger.kernel.org with ESMTP id S232840AbhJZH6y (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 26 Oct 2021 03:58:54 -0400
+X-Alimail-AntiSpam: AC=PASS;BC=-1|-1;BR=01201311R651e4;CH=green;DM=||false|;DS=||;FP=0|-1|-1|-1|0|-1|-1|-1;HT=e01e04395;MF=tianjia.zhang@linux.alibaba.com;NM=1;PH=DS;RN=19;SR=0;TI=SMTPD_---0UtlJeVX_1635234986;
+Received: from localhost(mailfrom:tianjia.zhang@linux.alibaba.com fp:SMTPD_---0UtlJeVX_1635234986)
+          by smtp.aliyun-inc.com(127.0.0.1);
+          Tue, 26 Oct 2021 15:56:26 +0800
+From:   Tianjia Zhang <tianjia.zhang@linux.alibaba.com>
+To:     James Bottomley <jejb@linux.ibm.com>,
+        Jarkko Sakkinen <jarkko@kernel.org>,
+        Mimi Zohar <zohar@linux.ibm.com>,
+        Jonathan Corbet <corbet@lwn.net>,
+        Herbert Xu <herbert@gondor.apana.org.au>,
+        "David S. Miller" <davem@davemloft.net>,
+        Peter Huewe <peterhuewe@gmx.de>,
+        Jason Gunthorpe <jgg@ziepe.ca>,
+        David Howells <dhowells@redhat.com>,
+        James Morris <jmorris@namei.org>,
+        "Serge E. Hallyn" <serge@hallyn.com>,
+        Jerry Snitselaar <jsnitsel@redhat.com>,
+        linux-integrity@vger.kernel.org, keyrings@vger.kernel.org,
+        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
+        linux-crypto@vger.kernel.org, linux-security-module@vger.kernel.org
+Cc:     Tianjia Zhang <tianjia.zhang@linux.alibaba.com>
+Subject: [PATCH v3 0/2] use SM3 instead of SM3_256
+Date:   Tue, 26 Oct 2021 15:56:24 +0800
+Message-Id: <20211026075626.61975-1-tianjia.zhang@linux.alibaba.com>
+X-Mailer: git-send-email 2.19.1.3.ge56e4f7
 MIME-Version: 1.0
-References: <20211025025805.618566-0-nathan@nathanrossi.com>
- <20211025025805.618566-2-nathan@nathanrossi.com> <7297bf4c-2f8e-f217-0153-c2224a1c56b3@roeck-us.net>
- <CA+aJhH0yPZ=3LEPDm0GkWx9bLtHJ+QRbRo33HiCXM5FH6nzPFA@mail.gmail.com> <2f5aecd2-55a1-9382-46eb-f4ff48663b30@roeck-us.net>
-In-Reply-To: <2f5aecd2-55a1-9382-46eb-f4ff48663b30@roeck-us.net>
-From:   Nathan Rossi <nathan@nathanrossi.com>
-Date:   Tue, 26 Oct 2021 17:54:39 +1000
-Message-ID: <CA+aJhH0RDXPE4m2yEa2ROEW2L3fnq20XTgPrxhO5k2gSa5_XdA@mail.gmail.com>
-Subject: Re: [PATCH 2/2] hwmon: Driver for Texas Instruments INA238
-To:     Guenter Roeck <linux@roeck-us.net>
-Cc:     linux-hwmon@vger.kernel.org, linux-doc@vger.kernel.org,
-        linux-kernel@vger.kernel.org, Nathan Rossi <nathan.rossi@digi.com>,
-        Jean Delvare <jdelvare@suse.com>,
-        Jonathan Corbet <corbet@lwn.net>
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Tue, 26 Oct 2021 at 01:45, Guenter Roeck <linux@roeck-us.net> wrote:
->
-> On 10/24/21 11:27 PM, Nathan Rossi wrote:
-> [ ... ]
-> >> Is there reason to believe that the shunt register value needs to be visible
-> >> and writeable with sysfs attributes ? This is quite unusual nowadays.
-> >> If so, please provide a use case.
-> >
-> > I do not have a specific use case for being able to change the shunt
-> > resistor at run time. The only reason this behaviour is here is to
-> > mirror the api that is provided by the ina2xx driver. Since as you
-> > mention its unusual should I remove the write and leave the read?
-> > Being able to determine the resistor value is useful if manually using
-> > the shunt voltage. Though the shunt information could be obtained from
-> > the device tree node?
-> >
->
-> Please drop the attribute. There is already probe noise displaying it,
-> and it is contained in the devicetree data. If there is a use case,
-> the attribute can always be added later.
->
-> [ ... ]
->
-> >> Those preinitializations make me wonder if there should be devicetree
-> >> properties for at least some of the data.
-> >
-> > Yes, I did consider adding configuration for the conversion time and
-> > sampling average as device tree properties. The existing ina2xx driver
-> > handles configuring sampling average via the "update_interval" sysfs
-> > attribute. Our use case does not require changing these at runtime so
-> > did not implement the update_interval and was unsure if changes to
-> > device tree bindings would make sense. Should these be device tree
-> > properties? If yes, should the other ina drivers be updated to support
-> > the properties?
-> >
->
-> I wasn't specifically thinking about conversion time or sampling average,
-> but I do think it would be desirable to be able to configure all those
-> values via devicetree. The datasheet says "... allows for robust operation
-> in a variety of noisy environments", and that is definitely a system property.
-> ADCRANGE should also be configurable via devicetree. The same applies to MODE,
+According to https://tools.ietf.org/id/draft-oscca-cfrg-sm3-01.html,
+SM3 always produces a 256-bit hash value and there are no plans for
+other length development, so there is no ambiguity in the name of sm3.
 
-I will add a property "ti,shunt-gain". Since the ina209, ina219,
-ina220 use the PGA term which is the actual function being provided,
-where ADCRANGE=0 is a /4 PGA for ina238 and the other devices have /1,
-/2, /4, /8.
+---
+v3 changes:
+ - The fix of document trusted-encrypted.rst is put in patch 2
 
-> but that would add some complexity so I am not sure if you'd want to get
-> into that (it would require per-channel entries in devicetree to be able
-> to enable/disable each channel). FWIW, you _could_ also do that with
-> standard sysfs attributes if you want to ({in,curr,temp}X_enable, or
-> hwmon_{temp,in,curr}_enable in the with_info API). That can also be added
-> later if needed, so there is no need to do it now if it is not required
-> for your use case.
->
-> As for other ina drivers - that is a different question. I would not touch
-> those unless you have a use case (and a means to test the code). I'd also
-> consider it more important to convert those drivers to use the _with_info
-> API before implementing any other changes. There is also the added
-> complexity that we already have two drivers for those other chips (see
-> drivers/iio/adc/ina2xx-adc.c), and I'd rather have a better API
-> between IIO and HWMON and drop drivers/hwmon/ina2xx.c entirely than
-> making changes to it.
->
-> Can you possibly send me a register dump for the INA238 ? That would
-> enable me to write a module test for the driver.
+v2 changes:
+ - an additional macro with the same value is defined for uapi instead
+   of renaming directly
 
-Dump of registers below. Other notes, upper two bits are ignored so
-the address space wraps at 0x40, etc. The undocumented/unused
-registers between 0x11 and 0x3e are 0xffff.
+Tianjia Zhang (2):
+  crypto: use SM3 instead of SM3_256
+  tpm: use SM3 instead of SM3_256
 
-power on, before probe:
-0x00: 0x0000
-0x01: 0xfb68
-0x02: 0x1000
-0x03: 0xffff
-0x04: 0x087c
-0x05: 0x0e77
-0x06: 0x0f10
-0x07: 0x087c
-0x08: 0x01eac3
-0x09: 0xffff
-0x10: 0x7ff0
-0x11: 0xffff
-0x3e: 0x5449
-0x3f: 0x2381
+ Documentation/security/keys/trusted-encrypted.rst | 2 +-
+ crypto/hash_info.c                                | 4 ++--
+ drivers/char/tpm/tpm-sysfs.c                      | 4 ++--
+ drivers/char/tpm/tpm2-cmd.c                       | 2 +-
+ include/crypto/hash_info.h                        | 2 +-
+ include/linux/tpm.h                               | 2 +-
+ include/uapi/linux/hash_info.h                    | 3 ++-
+ security/keys/trusted-keys/trusted_tpm2.c         | 2 +-
+ 8 files changed, 11 insertions(+), 10 deletions(-)
 
-after probe, actual state of device ~10mV shunt voltage, 20 mOhm
-shunt, ~12V bus, ~6W power, ~30C temperature
-0x00: 0x0000
-0x01: 0xfb6a
-0x02: 0x4000
-0x03: 0xffff
-0x04: 0x087c
-0x05: 0x0e77
-0x06: 0x0f10
-0x07: 0x087c
-0x08: 0x01eac3
-0x09: 0xffff
-0x10: 0x7ff0
-0x11: 0xffff
-0x3e: 0x5449
-0x3f: 0x2381
+-- 
+2.19.1.3.ge56e4f7
 
-Thanks,
-Nathan
