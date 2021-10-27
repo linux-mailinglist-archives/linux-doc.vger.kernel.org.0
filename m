@@ -2,92 +2,42 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 93DE8440580
-	for <lists+linux-doc@lfdr.de>; Sat, 30 Oct 2021 00:31:53 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 6F4144406E9
+	for <lists+linux-doc@lfdr.de>; Sat, 30 Oct 2021 04:25:02 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S231394AbhJ2WeV (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Fri, 29 Oct 2021 18:34:21 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:42404 "EHLO
-        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S229441AbhJ2WeV (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Fri, 29 Oct 2021 18:34:21 -0400
-Received: from mail-pf1-x432.google.com (mail-pf1-x432.google.com [IPv6:2607:f8b0:4864:20::432])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 50670C061570
-        for <linux-doc@vger.kernel.org>; Fri, 29 Oct 2021 15:31:52 -0700 (PDT)
-Received: by mail-pf1-x432.google.com with SMTP id l203so10473655pfd.2
-        for <linux-doc@vger.kernel.org>; Fri, 29 Oct 2021 15:31:52 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=google.com; s=20210112;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc;
-        bh=Qp6+zjDSd4OOLDe8/BIO29FCy7h5ITgGaqmhvNYsKr8=;
-        b=Mv2KXcJNajDF1a5vJiq3Uxo93jSk5UbONlTJlUsFvFkeV3GHwlpi6nzXdgiw8k1L7Q
-         Zu+iQ27x4FVnK6Fv5/UuCT7td78f5pK1rdcxZvrMWM1Ft4YQprljfaCJxnyARaijLNry
-         ZHH/IOhPaZLk/FAGM8bpNyTZC77eObvLOmHW3QgMJe4OzWEdcefxVaRLckV6qI/jg6mk
-         mQLpuor4gB8wvoKBenRn46kuhRE2RC0sLvJND3p41Qoihcp/MVwBfUly64thvbr83lZR
-         /nHORyWnTMwMbMNXUUomU26GJyneswDebjRc8nJwtU64yvDvhb0a9KdtwfFSkVltLfSU
-         E1yQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc;
-        bh=Qp6+zjDSd4OOLDe8/BIO29FCy7h5ITgGaqmhvNYsKr8=;
-        b=X4VZ1Wl+tWFnT96M4M9xEoyaumtfWoTZs4xrnNHcFKLtxXguD5SiildztAAzruFXxd
-         4axfCmG3FpacvTlp/g+nU9tSH+l1qDZhPJx7KCyC5nF66Zk78T12//OO/QIEAotSlYqm
-         aVeF2mcc/N/88PtIvF0zEeureFVvXFrKAvfCAGvfmeAxkpOlt6gAGHpWnf9a1Lat9gHr
-         JELO4YSIZ73Zh2gQACVKWs4zVLDdcSYUokneZ2xRz2fW7zJxwTHAozlfJbVfaB0iQdsf
-         XjN0m5XGOixp0rq+vO2cdjWbJkSL5sXUNmRakQW8ZfwGEEObxZz1O25DH9/nAtZiZye8
-         YEFg==
-X-Gm-Message-State: AOAM5332tzIf60Ki2yZhRUqW4v2SKcPrmjHuwLAlGjcLV8uW81B/ZEvp
-        xaLeTXKcDt+msH2L1ahtB+avN48FLsNDEi6i9nRnXg==
-X-Google-Smtp-Source: ABdhPJwVJl6dXdrnjKqah8Re2vFUHtSVD8OCuKxa6TJxFQVkBKSdRQWe3/98ZbQ/w5Bx/AgA+O1LxzcEyqWt7sAUShs=
-X-Received: by 2002:a62:7858:0:b0:47c:1cf3:d95 with SMTP id
- t85-20020a627858000000b0047c1cf30d95mr13882255pfc.60.1635546711320; Fri, 29
- Oct 2021 15:31:51 -0700 (PDT)
+        id S231513AbhJ3C1a convert rfc822-to-8bit (ORCPT
+        <rfc822;lists+linux-doc@lfdr.de>); Fri, 29 Oct 2021 22:27:30 -0400
+Received: from 219-87-183-172.static.tfn.net.tw ([219.87.183.172]:44143 "EHLO
+        ms4.kntech.com.tw" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S231468AbhJ3C13 (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Fri, 29 Oct 2021 22:27:29 -0400
+Received: from [103.27.239.15] ([103.27.239.15])
+        (authenticated bits=0)
+        by ms4.kntech.com.tw (8.13.8/8.13.8) with ESMTP id 19RF5o6d023348
+        for <linux-doc@vger.kernel.org>; Wed, 27 Oct 2021 23:06:05 +0800
+Message-Id: <202110271506.19RF5o6d023348@ms4.kntech.com.tw>
+Content-Type: text/plain; charset="iso-8859-1"
 MIME-Version: 1.0
-References: <20211029183339.3216491-1-kaleshsingh@google.com>
- <20211029183339.3216491-2-kaleshsingh@google.com> <20211029144524.367d6789@gandalf.local.home>
- <CAC_TJve9OsL5taBN0ckgjG4=HxvmWfP6ULwwqnVsDyRxuQuRkg@mail.gmail.com> <20211029162549.2c22f2dd@gandalf.local.home>
-In-Reply-To: <20211029162549.2c22f2dd@gandalf.local.home>
-From:   Kalesh Singh <kaleshsingh@google.com>
-Date:   Fri, 29 Oct 2021 15:31:40 -0700
-Message-ID: <CAC_TJvfazjdZ=4Y_1YX=R+drsWKRu+faztcFjKEkkD_3Qk6_Xg@mail.gmail.com>
-Subject: Re: [PATCH v2 1/4] tracing/histogram: Optimize division by constants
-To:     Steven Rostedt <rostedt@goodmis.org>
-Cc:     surenb@google.com, hridya@google.com, namhyung@kernel.org,
-        kernel-team@android.com, mhiramat@kernel.org,
-        Jonathan Corbet <corbet@lwn.net>,
-        Ingo Molnar <mingo@redhat.com>, Shuah Khan <shuah@kernel.org>,
-        Tom Zanussi <zanussi@kernel.org>, linux-doc@vger.kernel.org,
-        linux-kernel@vger.kernel.org, linux-kselftest@vger.kernel.org
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8BIT
+Content-Description: Mail message body
+Subject: Dear Friend,
+To:     linux-doc@vger.kernel.org
+From:   "Wahid Majrooh" <wnf@sendayan.com.my>
+Date:   Wed, 27 Oct 2021 22:06:22 +0700
+Reply-To: wfnngaf@gmail.com
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Fri, Oct 29, 2021 at 1:25 PM Steven Rostedt <rostedt@goodmis.org> wrote:
->
-> On Fri, 29 Oct 2021 11:53:16 -0700
-> Kalesh Singh <kaleshsingh@google.com> wrote:
->
-> > > If these functions are only called when val2 is constant, can't we make it
-> > > such that we get val2 from the hist_field directly? That is:
-> > >
-> > >         u64 val2 = operand2->constant;
-> >
-> > operand2 might be a var ref to a constant, so we would need to resolve
-> > that with hist_field_var_ref().
->
-> So can a var_ref change? If not, then we should convert that to a constant
-> for this operation.
+Dear Friend,
 
-A var ref to a constant won't change. I think we can just copy the
-constant value to the var ref's hist field and then we'll be able to
-get it from there instead of calling the fn() function. I'll post
-another version with this.
+I am writing to you to make a proposal regarding Investing in your
+country. I am proposing to you a business development Investment in
+housing and health sector or any other sector you can recommend. My name
+is Wahid Majrooh. Former  acting Minister of Public Health of
+Afghanistan.
 
-Thanks,
-Kalesh
 
->
-> -- Steve
+Sincerely
+
+Wahid
