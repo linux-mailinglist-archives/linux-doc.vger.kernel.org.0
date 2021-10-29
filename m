@@ -2,117 +2,64 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 3217843F90A
-	for <lists+linux-doc@lfdr.de>; Fri, 29 Oct 2021 10:38:01 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 262AA43FA25
+	for <lists+linux-doc@lfdr.de>; Fri, 29 Oct 2021 11:43:35 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S232478AbhJ2Ik1 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Fri, 29 Oct 2021 04:40:27 -0400
-Received: from smtp-out1.suse.de ([195.135.220.28]:44990 "EHLO
-        smtp-out1.suse.de" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S232313AbhJ2Ik0 (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Fri, 29 Oct 2021 04:40:26 -0400
-Received: from relay2.suse.de (relay2.suse.de [149.44.160.134])
-        by smtp-out1.suse.de (Postfix) with ESMTP id 8DF1621979;
-        Fri, 29 Oct 2021 08:37:57 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
-        t=1635496677; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-         mime-version:mime-version:content-type:content-type:
-         in-reply-to:in-reply-to:references:references;
-        bh=qZJtw3MieBAJxz2bywPNILccd9LrIRNQXFA0JlaFMeY=;
-        b=t6GZqZ2ZrA/zWvBOmb2gYMX4wpzmCFE/5vROmmF10stABpPd4Vix4z1Av+pYE9LvhJqnJg
-        XSGg1+c6+utFRvFbwllDCEwAkiejlzTQqeHcgSDCiefdpUUc91ZU6EbZCCgVxeEnvEfmLU
-        +8yKiddofh2oiONcJ5SAK3Vch4rgK/E=
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
-        s=susede2_ed25519; t=1635496677;
-        h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-         mime-version:mime-version:content-type:content-type:
-         in-reply-to:in-reply-to:references:references;
-        bh=qZJtw3MieBAJxz2bywPNILccd9LrIRNQXFA0JlaFMeY=;
-        b=6v5ygUCQdTegipKV02UYgWAHs+kPuWGntkmtDP/e3QhMktilEhvPCS/5fzjCEcqJGMyixs
-        Y/gQKRaBvasxCQAA==
-Received: from suse.de (mgorman.udp.ovpn2.nue.suse.de [10.163.43.106])
-        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
-        (No client certificate requested)
-        by relay2.suse.de (Postfix) with ESMTPS id CED32A3B83;
-        Fri, 29 Oct 2021 08:37:55 +0000 (UTC)
-Date:   Fri, 29 Oct 2021 09:37:51 +0100
-From:   Mel Gorman <mgorman@suse.de>
-To:     Gang Li <ligang.bdlg@bytedance.com>
-Cc:     Jonathan Corbet <corbet@lwn.net>, Ingo Molnar <mingo@redhat.com>,
-        Peter Zijlstra <peterz@infradead.org>,
-        Juri Lelli <juri.lelli@redhat.com>,
-        Vincent Guittot <vincent.guittot@linaro.org>,
-        Dietmar Eggemann <dietmar.eggemann@arm.com>,
-        Steven Rostedt <rostedt@goodmis.org>,
-        Ben Segall <bsegall@google.com>,
-        Daniel Bristot de Oliveira <bristot@redhat.com>,
-        linux-api@vger.kernel.org, linux-kernel@vger.kernel.org,
-        linux-fsdevel@vger.kernel.org, linux-doc@vger.kernel.org
-Subject: Re: Re: [PATCH v1] sched/numa: add per-process numa_balancing
-Message-ID: <20211029083751.GR3891@suse.de>
-References: <20211027132633.86653-1-ligang.bdlg@bytedance.com>
- <20211028153028.GP3891@suse.de>
- <b884ad7d-48d3-fcc8-d199-9e7643552a9a@bytedance.com>
+        id S231523AbhJ2JqA convert rfc822-to-8bit (ORCPT
+        <rfc822;lists+linux-doc@lfdr.de>); Fri, 29 Oct 2021 05:46:00 -0400
+Received: from mx2.hcg.gr ([84.205.254.49]:43496 "EHLO mx2.hcg.gr"
+        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
+        id S231504AbhJ2Jp7 (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Fri, 29 Oct 2021 05:45:59 -0400
+X-AuditID: ac138d0e-8d6d670000000931-36-617bc240b0a9
+Received: from newmail.hcg.gr (Unknown_Domain [172.18.2.10])
+        (using TLS with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+        (Client did not present a certificate)
+        by mx2.hcg.gr (Symantec Messaging Gateway) with SMTP id 8A.F0.02353.042CB716; Fri, 29 Oct 2021 12:43:28 +0300 (EEST)
+Received: from localhost (localhost [127.0.0.1])
+        by newmail.hcg.gr (Postfix) with ESMTP id 983CA38052A6E6;
+        Fri, 29 Oct 2021 12:43:28 +0300 (EEST)
+Received: from newmail.hcg.gr ([127.0.0.1])
+        by localhost (newmail.hcg.gr [127.0.0.1]) (amavisd-new, port 10032)
+        with ESMTP id yfdHvknj_sRr; Fri, 29 Oct 2021 12:43:28 +0300 (EEST)
+Received: from localhost (localhost [127.0.0.1])
+        by newmail.hcg.gr (Postfix) with ESMTP id A518B38052A8E6;
+        Fri, 29 Oct 2021 12:43:27 +0300 (EEST)
+X-Virus-Scanned: amavisd-new at newmail.hcg.gr
+Received: from newmail.hcg.gr ([127.0.0.1])
+        by localhost (newmail.hcg.gr [127.0.0.1]) (amavisd-new, port 10026)
+        with ESMTP id vVh4xHSXUTOJ; Fri, 29 Oct 2021 12:43:27 +0300 (EEST)
+Received: from [192.168.43.217] (unknown [197.211.61.16])
+        by newmail.hcg.gr (Postfix) with ESMTPSA id 3C20D38052A91F;
+        Fri, 29 Oct 2021 12:43:20 +0300 (EEST)
+Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
-Content-Type: text/plain; charset=iso-8859-15
-Content-Disposition: inline
-In-Reply-To: <b884ad7d-48d3-fcc8-d199-9e7643552a9a@bytedance.com>
-User-Agent: Mutt/1.10.1 (2018-07-13)
+Content-Transfer-Encoding: 8BIT
+Content-Description: Mail message body
+Subject: Illuminati-Beamter
+To:     Recipients <Illuminati@newmail.hcg.gr>
+From:   Illuminati@newmail.hcg.gr
+Date:   Fri, 29 Oct 2021 17:43:12 +0800
+Reply-To: illuminatiofficial466@gmail.com
+Message-Id: <20211029094321.3C20D38052A91F@newmail.hcg.gr>
+X-Brightmail-Tracker: H4sIAAAAAAAAA02RaUwTURSFfTOv7bQGHYaqD3CDKFHUIij6QtwSFeefxpC4R4sdWSyLA5gq
+        RosIwlCkkSK1SlrcqTSlxAjIojYqYNyigmgAMRYXREVQXEO01O3fuefce74flyKZNuhHxSWm
+        cnyiUh0olsFyhpDNWuJMV87u/zAXFxm1BO5/ayRwZkYvxEbtYRJ3lJ0AuC2rTYJPWgsgdl5v
+        EOOMDDPEfY9tANs+35HgQls+gUuzT0FcbBMInPOyB+KeghoRftEtQFyuC8C6t0YSW9qtoiVy
+        Nr/klYR9WlsmYQtdDoJteuTNvusRROxQjlXMlj8IYOvvDUG2xtQhYU/cvQ5Zs8MuYu/nlojY
+        mx8PidmByols460MyOrbnoNV9HrZAhWnjtvJ8SGLtshiLxgaYPJtqHnSGaQFvaQApBSi56LT
+        145AAcgohi4lkLEhE3iGIoAMmfrfyUWABl92kX+T8odDwHOvQLXOkuGu4a388ykebQHoqjFI
+        ABRF0tOR/VKI2/aivVHzURd0a5Kegc6UviE9K0Hok5Dqtn1of2RtLQZuW04Ho/25Grctpieh
+        vC+mYSikpyLrd8vwJfOr/EbdUk95BBqovSrWA8b0D2v6D2v6D2v6h7UAaAWyBE2YInZrjCKG
+        rwTu5/vkj6oG3b2fFE5AUMAJEEUGyr16DelKxkul3LWb45M282lqLsUJ/CkYOM7LEqzZwtAx
+        ylRuO8clc/yflKCkflqiWKrbZi9wJVTUCfGKDnvowXiReTy4vfrdhYBzkS2GZef00sTEpKP7
+        1sdGPfM+olj8IaprTv1xzjFzGezLOducvbV6hPrAa/sOrqopy2C2fUsLP1Dv38WY7Zsm8Mv3
+        TO6aAvYas2vH7oseJwML0l239suPT5xU0+6o8L22YeHK0FVZSWTMlcOiAX3rq0KX7tGhrxJD
+        Xl70aO0pa/TGy1XRD6Vh3Y22vmMT+sPJwZCwgXlo0Luu74djlGp+UfzyzPMf5fInnaqm4hZB
+        NlJPrK1y+EY0TvO7c1YfPishiFdFaNqjhPrc95FparrZrLo0tLLTd2rIinVxY2qSmTJd2Bom
+        EKbEKkODST5F+RNY05HMawMAAA==
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Fri, Oct 29, 2021 at 02:12:28PM +0800, Gang Li wrote:
-> On 10/28/21 11:30 PM, Mel Gorman wrote:
-> > 
-> > That aside though, the configuration space could be better. It's possible
-> > to selectively disable NUMA balance but not selectively enable because
-> > prctl is disabled if global NUMA balancing is disabled. That could be
-> > somewhat achieved by having a default value for mm->numa_balancing based on
-> > whether the global numa balancing is disabled via command line or sysctl
-> > and enabling the static branch if prctl is used with an informational
-> > message. This is not the only potential solution but as it stands,
-> > there are odd semantic corner cases. For example, explicit enabling
-> > of NUMA balancing by prctl gets silently revoked if numa balancing is
-> > disabled via sysctl and prctl(PR_NUMA_BALANCING, PR_SET_NUMA_BALANCING,
-> > 1) means nothing.
-> > 
-> static void task_tick_fair(struct rq *rq, struct task_struct *curr, int
-> queued)
-> {
-> 	...
-> 	if (static_branch_unlikely(&sched_numa_balancing))
-> 		task_tick_numa(rq, curr);
-> 	...
-> }
-> 
-> static void task_tick_numa(struct rq *rq, struct task_struct *curr)
-> {
-> 	...
-> 	if (!READ_ONCE(curr->mm->numa_balancing))
-> 		return;
-> 	...
-> }
-> 
-> When global numa_balancing is disabled, mm->numa_balancing is useless.
-
-I'm aware that this is the behaviour of the patch as-is.
-
-> So I
-> think prctl(PR_NUMA_BALANCING, PR_SET_NUMA_BALANCING,0/1) should return
-> error instead of modify mm->numa_balancing.
-> 
-> Is it reasonable that prctl(PR_NUMA_BALANCING,PR_SET_NUMA_BALANCING,0/1)
-> can still change the value of mm->numa_balancing when global numa_balancing
-> is disabled?
-> 
-
-My point is that as it stands,
-prctl(PR_NUMA_BALANCING,PR_SET_NUMA_BALANCING,1) either does nothing or
-fails. If per-process numa balancing is to be introduced, it should have
-meaning with the global tuning affecting default behaviour and the prctl
-affecting specific behaviour.
-
--- 
-Mel Gorman
-SUSE Labs
+Hallo!!! Willst du ein Mitglied der großen Illuminaten sein und anfangen, monatlich 50.000.000 € zu erhalten und unter anderen beliebt zu sein und Reichtümer und Ruhm zu haben, ist dies die einzige Chance, zu den Illuminaten zu gehören 52 Mitglieder in die Illuminati zu bringen, ich habe 32 bekommen, also suchen wir 20, also versuche, unter den zwanzig Leuten zu sein, die reich und berühmt sind, WhatsApp Via; +4917629575254, oder Email Via: illuminatiofficial466@gmail.com  , damit wir mit dem Beitrittsprozess beginnen können!!!
