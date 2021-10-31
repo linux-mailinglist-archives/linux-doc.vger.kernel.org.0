@@ -2,57 +2,94 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id E7A2B44102B
-	for <lists+linux-doc@lfdr.de>; Sun, 31 Oct 2021 19:16:13 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 15FEF4410A9
+	for <lists+linux-doc@lfdr.de>; Sun, 31 Oct 2021 21:00:10 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S231211AbhJaSSm (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Sun, 31 Oct 2021 14:18:42 -0400
-Received: from mailgate.kemenperin.go.id ([202.47.80.142]:52822 "EHLO
-        mailgate.kemenperin.go.id" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S229993AbhJaSSj (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Sun, 31 Oct 2021 14:18:39 -0400
-X-Greylist: delayed 2153 seconds by postgrey-1.27 at vger.kernel.org; Sun, 31 Oct 2021 14:18:37 EDT
-Received: from localhost (localhost [127.0.0.1])
-        by mailgate.kemenperin.go.id (Postfix) with ESMTP id 558DD828470;
-        Mon,  1 Nov 2021 00:32:39 +0700 (WIB)
-Received: from mailgate.kemenperin.go.id ([127.0.0.1])
-        by localhost (mailgate.kemenperin.go.id [127.0.0.1]) (amavisd-new, port 10032)
-        with ESMTP id XzjBPaadpt-i; Mon,  1 Nov 2021 00:32:24 +0700 (WIB)
-Received: from localhost (localhost [127.0.0.1])
-        by mailgate.kemenperin.go.id (Postfix) with ESMTP id EB0A282846B;
-        Mon,  1 Nov 2021 00:31:51 +0700 (WIB)
-DKIM-Filter: OpenDKIM Filter v2.10.3 mailgate.kemenperin.go.id EB0A282846B
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kemenperin.go.id;
-        s=3298A942-BBC6-11E3-B333-483736368EC2; t=1635701512;
-        bh=+tje3x5yIAM91gcZZJ8xoRjx6IuR+B3ePoXPCKu2mgI=;
-        h=Date:From:Message-ID:MIME-Version;
-        b=oM4VFDV3gKRCQpkh6Hocg4moNhAAaqVNKdOYL0ManlobXW4cgqJxDfkVs+em1UKRu
-         0g5OudQzwZmQZxNRX4MXEaxHMPP91bntbf9gnaJaGR5Qh20I+x+TPZUUHqgp6Pngni
-         bUip5OmMrJ59ri8oC4b2AoHr5QQHBrUibZ/KiBVg=
-X-Virus-Scanned: amavisd-new at kemenperin.go.id
-Received: from mailgate.kemenperin.go.id ([127.0.0.1])
-        by localhost (mailgate.kemenperin.go.id [127.0.0.1]) (amavisd-new, port 10026)
-        with ESMTP id hKsf3jRnoU9Z; Mon,  1 Nov 2021 00:31:51 +0700 (WIB)
-Received: from mailgate.kemenperin.go.id (mailgate.kemenperin.go.id [10.1.0.89])
-        by mailgate.kemenperin.go.id (Postfix) with ESMTP id 1B7638283F4;
-        Mon,  1 Nov 2021 00:31:30 +0700 (WIB)
-Date:   Mon, 1 Nov 2021 00:31:30 +0700 (WIB)
-From:   Manuel Franco <silitonga@kemenperin.go.id>
-Reply-To: Manuel Franco <manuelfrancospende1@gmail.com>
-Message-ID: <1167271633.325610.1635701490000.JavaMail.zimbra@kemenperin.go.id>
-Subject: 2,000,000.00 Euro
+        id S229982AbhJaUCj (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Sun, 31 Oct 2021 16:02:39 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:37494 "EHLO
+        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S229936AbhJaUCj (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Sun, 31 Oct 2021 16:02:39 -0400
+Received: from mail-wr1-x432.google.com (mail-wr1-x432.google.com [IPv6:2a00:1450:4864:20::432])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 1AC2EC061570;
+        Sun, 31 Oct 2021 13:00:07 -0700 (PDT)
+Received: by mail-wr1-x432.google.com with SMTP id k7so25170860wrd.13;
+        Sun, 31 Oct 2021 13:00:07 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112;
+        h=date:from:to:cc:subject:message-id:in-reply-to:references
+         :mime-version:content-transfer-encoding;
+        bh=SpNxCIMxVQjiaNSaue5Hm6sDwGlTxu2qu8st3i8XD8U=;
+        b=dZl8R3/s/TLmzkj1xajyLiAgS/Lfywl3PuNCNFTrWL5+626RLhYZXRA2imaeCWzfrh
+         RW52Pz8p7UfhVeQixHUo1Wotedm86s/iNIMIHcSf8iR6symoFoeN+fLgqKvl4cxlBHB5
+         MqtHkBEbw2aBRlesoaJCI/ZFMrR+jelgR6AKzFDjPHVEdZ1CajOSq6/Qkplfgan7eGrl
+         EXgKWD+YP8RsPQfvbRBIYb2k4GR3e4ZB06vFmRCHeUZlfPlZgNkzmo1e3w2BvIDu8mqi
+         E7KkxLzDreRUYvlyMZPUw5QY8zvBfYA5vLwjyI3zBkoVbuo0BFz9BBt7dW+NgWqPw/+/
+         JhxQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:date:from:to:cc:subject:message-id:in-reply-to
+         :references:mime-version:content-transfer-encoding;
+        bh=SpNxCIMxVQjiaNSaue5Hm6sDwGlTxu2qu8st3i8XD8U=;
+        b=7Jm71j+IBfLUe222pNLEEaPzcLpmHWE5wl56SB4oEhulXF/etNPRv0vY7w91765v1b
+         evR3Xs5nGDvRBwcXg/Uhap807nl/awkEsOMmHzwP/r0WiFNrkdtfBzSHmUibf7IAn40X
+         R9tSAiVUJjQh91FbNLJadkPB4JKwkgNBpz6FEQ3kMlbob8l5lc/PiTQjWUurf1CkAvY1
+         EkVd11Ua8+UdBYIpCeYgCc7zesLmYEWvpX4Sl/M0j+DDjtNiW0ByooTt86PiRaBJ61nT
+         qJ3t6MuGz6js4/CZR6hw6/2AqeqBMtxbla2ov14rjqIZcqwpjmv+6sMmeBmXjzaGzHIY
+         cYoQ==
+X-Gm-Message-State: AOAM533nFzqm7jkpzyr+x/OXTtUaVJXXaS2x5IIQn35ZuzFof/+fNszN
+        fBBIXsB2heDTlfGfx/SeEio=
+X-Google-Smtp-Source: ABdhPJzG3HcAqMcAnxuq03WjObeieaffNLOpo8ZNGAPQAShrMmPp+jytEm+DBbgxZjkXCutTmyFl2g==
+X-Received: by 2002:a5d:64a6:: with SMTP id m6mr32782014wrp.100.1635710405617;
+        Sun, 31 Oct 2021 13:00:05 -0700 (PDT)
+Received: from penguin.lxd ([94.179.15.8])
+        by smtp.gmail.com with ESMTPSA id p3sm11582127wrs.10.2021.10.31.13.00.03
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Sun, 31 Oct 2021 13:00:05 -0700 (PDT)
+Date:   Sun, 31 Oct 2021 21:59:54 +0200
+From:   Denis Pauk <pauk.denis@gmail.com>
+To:     Guenter Roeck <linux@roeck-us.net>
+Cc:     eugene.shalygin@gmail.com, andy.shevchenko@gmail.com,
+        platform-driver-x86@vger.kernel.org, thomas@weissschuh.net,
+        Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
+        Tor Vic <torvic9@mailbox.org>,
+        Oleksandr Natalenko <oleksandr@natalenko.name>,
+        Jean Delvare <jdelvare@suse.com>,
+        Jonathan Corbet <corbet@lwn.net>, linux-hwmon@vger.kernel.org,
+        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org
+Subject: Re: [PATCH v9 1/2] hwmon: (asus_wmi_ec_sensors) Support B550 Asus
+ WMI.
+Message-ID: <20211031215954.7be1aaa5@penguin.lxd>
+In-Reply-To: <20211030153424.GA3972535@roeck-us.net>
+References: <20211030153424.GA3972535@roeck-us.net>
+X-Mailer: Claws Mail 3.18.0 (GTK+ 2.24.33; aarch64-unknown-linux-gnu)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
+Content-Type: text/plain; charset=US-ASCII
 Content-Transfer-Encoding: 7bit
-X-Originating-IP: [10.1.0.89]
-Thread-Index: sRkQHd6eEiZjh28zv6U9gDdHc1qz8g==
-Thread-Topic: 2,000,000.00 Euro
-To:     unlisted-recipients:; (no To-header on input)
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
+Hi Guenter,
 
+On Sat, 30 Oct 2021 08:34:24 -0700
+Guenter Roeck <linux@roeck-us.net> wrote:
 
--- 
-You have a donation of 2,000,000.00 Euro.Get back to me now so we can proceed.
+> On Sat, Oct 30, 2021 at 12:17:04PM +0300, Denis Pauk wrote:
+> ...
+> > a/drivers/hwmon/asus_wmi_ec_sensors.c
+> > b/drivers/hwmon/asus_wmi_ec_sensors.c new file mode 100644 index
+> > 000000000000..9d02023e0c61 --- /dev/null
+> > +++ b/drivers/hwmon/asus_wmi_ec_sensors.c
+> > @@ -0,0 +1,612 @@
+> > +// SPDX-License-Identifier: GPL-2.0-or-later
+> ...
+> > +#include <linux/nls.h>  
+> 
+> Why is this include needed ?
+> 
+Its required for usage of utf8s_to_utf16s.
+
+Best regards,
+            Denis.
