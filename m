@@ -2,119 +2,172 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id B8FEB44125B
-	for <lists+linux-doc@lfdr.de>; Mon,  1 Nov 2021 04:22:51 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id BD4DD441275
+	for <lists+linux-doc@lfdr.de>; Mon,  1 Nov 2021 04:44:11 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S231185AbhKADZW (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Sun, 31 Oct 2021 23:25:22 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:48362 "EHLO
-        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S231310AbhKADZN (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Sun, 31 Oct 2021 23:25:13 -0400
-Received: from mail-pf1-x42f.google.com (mail-pf1-x42f.google.com [IPv6:2607:f8b0:4864:20::42f])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id E5E70C061766
-        for <linux-doc@vger.kernel.org>; Sun, 31 Oct 2021 20:22:40 -0700 (PDT)
-Received: by mail-pf1-x42f.google.com with SMTP id g11so3706488pfv.7
-        for <linux-doc@vger.kernel.org>; Sun, 31 Oct 2021 20:22:40 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=bytedance-com.20210112.gappssmtp.com; s=20210112;
-        h=from:to:cc:subject:date:message-id:in-reply-to:references
-         :mime-version:content-transfer-encoding;
-        bh=2UoWjZzOHViEmzMC0Qv5p6Aol3nKS7az97fC7P92qe4=;
-        b=mKP0ohFbfVQvapDd1cxSSUQoOhILeQQNi04r/0XIuYy1v7A0lxlwD8CJhLGlYGDL+S
-         GEwrDudJKGSatRGKbpSPvwuO7/uK/brOWGDHxw8QH4w8v4O6lRhWgzHlaJX0KHouSdXu
-         u0u7n3nu9tzbLrbcfNOvYIlsXGBjzfbEjI0dcoW2RSktQMUfiFAecvgel+yiR4Eqo2Ih
-         vQPvdA8EygpJ/SIYaQh53HxuObxRie7bqsspLrdsPsTCKPGrz6K5Mb1T3nAYB1Y7gRla
-         z2cqsQzcfnRBPevYTo3Uwu6XH1ez9MDwMwA64GF7nlWljkoay9o9g20tENUSudsXTJ89
-         wQRw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-         :references:mime-version:content-transfer-encoding;
-        bh=2UoWjZzOHViEmzMC0Qv5p6Aol3nKS7az97fC7P92qe4=;
-        b=QNwR+3hdqDtHyThMNllSS6ka+U6bTET1YXRjXvBV5l9jwZVI2eE7ZLBAcT1AC9C87d
-         icj6xkPzv85KJKLST4qHw/RvKplbnho0Tqg4ef3jcX7GUJhL+fN8pgeKpfcqrJE0tldc
-         g9itmd6tLVXPYbkr7HoE8PkMU3tNMDq5jQOGQkfr8gmo4bx7yxC/bCIsTDH4w2JcehAK
-         fTeyoFQySmnmRwDi26zxmD/8VKKgUgHosMD4Sira4IePw3iNGgzJsHLonKnv2s+bFT47
-         uz0QlDGX2WBHTPVLzSVswMQa6oULv8IsRLDALIRnNTM5ooHbqZDzz36hvCXa/+Z1pyEC
-         pBnA==
-X-Gm-Message-State: AOAM5315WTKIOlORFAGDrR6MKuQ2dpkPuwqT9ZP7mbIRhusO02uKDRg1
-        btdCw0hK2lI7JFgzg3xgn6WoGg==
-X-Google-Smtp-Source: ABdhPJx2a87GRNdgfXSLRJ0wr6CnW8L0BkmTvheFr9coFV82vt+FtcwdaXTOQpqDZtlezPC7KbtRNg==
-X-Received: by 2002:aa7:8019:0:b0:44d:d761:6f79 with SMTP id j25-20020aa78019000000b0044dd7616f79mr26229514pfi.3.1635736960495;
-        Sun, 31 Oct 2021 20:22:40 -0700 (PDT)
-Received: from localhost.localdomain ([139.177.225.242])
-        by smtp.gmail.com with ESMTPSA id f8sm11860963pjq.29.2021.10.31.20.22.33
-        (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
-        Sun, 31 Oct 2021 20:22:40 -0700 (PDT)
-From:   Muchun Song <songmuchun@bytedance.com>
-To:     mike.kravetz@oracle.com, akpm@linux-foundation.org,
-        osalvador@suse.de, mhocko@suse.com, song.bao.hua@hisilicon.com,
-        david@redhat.com, chenhuang5@huawei.com, bodeddub@amazon.com,
-        corbet@lwn.net, willy@infradead.org, 21cnbao@gmail.com
-Cc:     duanxiongchun@bytedance.com, fam.zheng@bytedance.com,
-        smuchun@gmail.com, zhengqi.arch@bytedance.com,
-        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
-        linux-mm@kvack.org, Muchun Song <songmuchun@bytedance.com>
-Subject: [PATCH v7 5/5] mm: sparsemem: move vmemmap related to HugeTLB to CONFIG_HUGETLB_PAGE_FREE_VMEMMAP
-Date:   Mon,  1 Nov 2021 11:16:51 +0800
-Message-Id: <20211101031651.75851-6-songmuchun@bytedance.com>
-X-Mailer: git-send-email 2.21.0 (Apple Git-122)
-In-Reply-To: <20211101031651.75851-1-songmuchun@bytedance.com>
-References: <20211101031651.75851-1-songmuchun@bytedance.com>
+        id S230326AbhKADqn (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Sun, 31 Oct 2021 23:46:43 -0400
+Received: from mga14.intel.com ([192.55.52.115]:42537 "EHLO mga14.intel.com"
+        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
+        id S230233AbhKADqm (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Sun, 31 Oct 2021 23:46:42 -0400
+X-IronPort-AV: E=McAfee;i="6200,9189,10154"; a="231203934"
+X-IronPort-AV: E=Sophos;i="5.87,198,1631602800"; 
+   d="scan'208";a="231203934"
+Received: from orsmga003.jf.intel.com ([10.7.209.27])
+  by fmsmga103.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 31 Oct 2021 20:44:09 -0700
+X-IronPort-AV: E=Sophos;i="5.87,198,1631602800"; 
+   d="scan'208";a="449123239"
+Received: from yeqin-desk1.ccr.corp.intel.com (HELO [10.167.226.45]) ([10.255.28.179])
+  by orsmga003-auth.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 31 Oct 2021 20:44:04 -0700
+Subject: Re: [LKP] Re: [tracing/selftests] cfece71411:
+ kernel-selftests.ftrace.event_trigger_-_test_inter-event_histogram_trigger_onchange_action.fail
+To:     Masami Hiramatsu <mhiramat@kernel.org>,
+        "Sang, Oliver" <oliver.sang@intel.com>
+Cc:     Kalesh Singh <kaleshsingh@google.com>,
+        "lkp@lists.01.org" <lkp@lists.01.org>, lkp <lkp@intel.com>,
+        "surenb@google.com" <surenb@google.com>,
+        "hridya@google.com" <hridya@google.com>,
+        "namhyung@kernel.org" <namhyung@kernel.org>,
+        "kernel-team@android.com" <kernel-team@android.com>,
+        Jonathan Corbet <corbet@lwn.net>,
+        Steven Rostedt <rostedt@goodmis.org>,
+        Ingo Molnar <mingo@redhat.com>, Shuah Khan <shuah@kernel.org>,
+        Tom Zanussi <zanussi@kernel.org>,
+        "linux-doc@vger.kernel.org" <linux-doc@vger.kernel.org>,
+        "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
+        "linux-kselftest@vger.kernel.org" <linux-kselftest@vger.kernel.org>
+References: <20211025200852.3002369-8-kaleshsingh@google.com>
+ <20211029064818.GG737@xsang-OptiPlex-9020>
+ <20211029210056.6cd7796aea59cec3e9c1d7da@kernel.org>
+From:   Li Zhijian <zhijianx.li@intel.com>
+Message-ID: <4194a7d6-db5c-5efe-debc-3c3121d1ebff@intel.com>
+Date:   Mon, 1 Nov 2021 11:43:58 +0800
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
+ Thunderbird/78.13.0
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+In-Reply-To: <20211029210056.6cd7796aea59cec3e9c1d7da@kernel.org>
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Transfer-Encoding: 7bit
+Content-Language: en-US
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-The vmemmap_remap_free/alloc are relevant to HugeTLB, so move those
-functiongs to the scope of CONFIG_HUGETLB_PAGE_FREE_VMEMMAP.
 
-Signed-off-by: Muchun Song <songmuchun@bytedance.com>
-Reviewed-by: Barry Song <song.bao.hua@hisilicon.com>
----
- include/linux/mm.h  | 2 ++
- mm/sparse-vmemmap.c | 2 ++
- 2 files changed, 4 insertions(+)
 
-diff --git a/include/linux/mm.h b/include/linux/mm.h
-index a7e4a9e7d807..8c85863a067c 100644
---- a/include/linux/mm.h
-+++ b/include/linux/mm.h
-@@ -3184,10 +3184,12 @@ static inline void print_vma_addr(char *prefix, unsigned long rip)
- }
- #endif
- 
-+#ifdef CONFIG_HUGETLB_PAGE_FREE_VMEMMAP
- int vmemmap_remap_free(unsigned long start, unsigned long end,
- 		       unsigned long reuse);
- int vmemmap_remap_alloc(unsigned long start, unsigned long end,
- 			unsigned long reuse, gfp_t gfp_mask);
-+#endif
- 
- void *sparse_buffer_alloc(unsigned long size);
- struct page * __populate_section_memmap(unsigned long pfn,
-diff --git a/mm/sparse-vmemmap.c b/mm/sparse-vmemmap.c
-index c64d1aa3c4b5..8aecd6b3896c 100644
---- a/mm/sparse-vmemmap.c
-+++ b/mm/sparse-vmemmap.c
-@@ -34,6 +34,7 @@
- #include <asm/pgalloc.h>
- #include <asm/tlbflush.h>
- 
-+#ifdef CONFIG_HUGETLB_PAGE_FREE_VMEMMAP
- /**
-  * struct vmemmap_remap_walk - walk vmemmap page table
-  *
-@@ -419,6 +420,7 @@ int vmemmap_remap_alloc(unsigned long start, unsigned long end,
- 
- 	return 0;
- }
-+#endif /* CONFIG_HUGETLB_PAGE_FREE_VMEMMAP */
- 
- /*
-  * Allocate a block of memory to be used to back the virtual memory map
--- 
-2.11.0
+On 29/10/2021 20:00, Masami Hiramatsu wrote:
+>
+>>
+>> TAP version 13
+>> 1..1
+>> # selftests: ftrace: ftracetest
+>> # === Ftrace unit tests ===
+>> # [1] Basic trace file check	[PASS]
+>> ...
+>> <<< [1] - [67] have same results as parent, i.e. both PASS or both FAIL >>>
+> At first, I guess the robot just checks the "[number]" instead
+> of the test description, but the ftracetest doesn't fix the "[number]"
+> for each test, Thus, it can be different when updated it.
+
+Hi Masami
+
+Good catch, thanks for these information, we will improve the robot.
+
+Thanks
+Zhjian
+
+
+> So if you compare the result, please check the descriptions too.
+>
+>> ...
+>> # [67] event trigger - test multiple actions on hist trigger	[PASS]
+>>
+>>>>> [68] - [72] can PASS on parent
+>> # [68] event trigger - test inter-event histogram trigger onchange action	[FAIL]
+>> # [69] event trigger - test inter-event histogram trigger onmatch action	[FAIL]
+>> # [70] event trigger - test inter-event histogram trigger onmatch-onmax action	[FAIL]
+>> # [71] event trigger - test inter-event histogram trigger onmax action	[FAIL]
+>> # [72] event trigger - test inter-event histogram trigger snapshot action	[FAIL]
+>>
+>>>>> [73] fail on parent, too
+>> # [73] event trigger - test inter-event histogram trigger eprobe on synthetic event	[FAIL]
+>>
+>>>>> [74] - [92] can PASS on parent
+>> # [74] event trigger - test synthetic event create remove	[FAIL]
+>> # [75] event trigger - test inter-event histogram trigger trace action with dynamic string param	[FAIL]
+>> # [76] event trigger - test synthetic_events syntax parser	[FAIL]
+>> # [77] event trigger - test synthetic_events syntax parser errors	[FAIL]
+>> # [78] event trigger - test inter-event histogram trigger trace action	[FAIL]
+>> # [79] event trigger - test event enable/disable trigger	[FAIL]
+>> # [80] event trigger - test trigger filter	[FAIL]
+>> # [81] event trigger - test histogram expression parsing	[FAIL]
+>> # [82] event trigger - test histogram modifiers	[FAIL]
+>> # [83] event trigger - test histogram parser errors	[FAIL]
+>> # [84] event trigger - test histogram trigger	[FAIL]
+>> # [85] event trigger - test multiple histogram triggers	[FAIL]
+>> # [86] event trigger - test snapshot-trigger	[FAIL]
+>> # [87] event trigger - test stacktrace-trigger	[FAIL]
+>> # [88] trace_marker trigger - test histogram trigger	[FAIL]
+>> # [89] trace_marker trigger - test snapshot trigger	[FAIL]
+>> # [90] trace_marker trigger - test histogram with synthetic event against kernel event	[FAIL]
+>> # [91] trace_marker trigger - test histogram with synthetic event	[FAIL]
+>> # [92] event trigger - test traceon/off trigger	[FAIL]
+>> # [93] (instance)  Basic test for tracers	[PASS]
+>> ...
+>> <<< [93] - [112] have same results as parent, all PASS >>>
+>> ...
+>> # [112] (instance)  trace_marker trigger - test histogram trigger	[PASS]
+>>
+>>>>> parent has no [113]
+>> # [113] (instance)  trace_marker trigger - test snapshot trigger	[PASS]
+> And next, some patch series may *ADD* new testcases if the series add
+> a new feature, so if you find the difference which is not in the
+> parent commit but it is passed, please ignore that.
+>
+>> # tac: failed to create temporary file in '/tmp/ftracetest-dir.o54lNh': No such file or directory
+>> # tac: failed to create temporary file in '/tmp/ftracetest-dir.o54lNh': No such file or directory
+>> # tac: failed to create temporary file in '/tmp/ftracetest-dir.o54lNh': No such file or directory
+>> # tac: failed to create temporary file in '/tmp/ftracetest-dir.o54lNh': No such file or directory
+> And if you find this kind of new error message like above, please report it.
+> This is more important for us.
+>
+>> #
+>> #
+>> # # of passed:  85
+>> # # of failed:  26
+>> # # of unresolved:  1
+>> # # of untested:  0
+>> # # of unsupported:  0
+>> # # of xfailed:  1
+>> # # of undefined(test bug):  0
+>> not ok 1 selftests: ftrace: ftracetest # exit=1
+> Also, please configure your running environment correctly so that all
+> ftracetest passes. If you unsure how to do, please ask me.
+>
+> Thank you,
+>
+>>
+>>
+>> To reproduce:
+>>
+>>          git clone https://github.com/intel/lkp-tests.git
+>>          cd lkp-tests
+>>          sudo bin/lkp install job.yaml           # job file is attached in this email
+>>          bin/lkp split-job --compatible job.yaml # generate the yaml file for lkp run
+>>          sudo bin/lkp run generated-yaml-file
+>>
+>>          # if come across any failure that blocks the test,
+>>          # please remove ~/.lkp and /lkp dir to run from a clean state.
+>>
+>>
+>>
+>> ---
+>> 0DAY/LKP+ Test Infrastructure                   Open Source Technology Center
+>> https://lists.01.org/hyperkitty/list/lkp@lists.01.org       Intel Corporation
+>>
+>> Thanks,
+>> Oliver Sang
+>>
+>
 
