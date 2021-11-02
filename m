@@ -2,132 +2,118 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id EFB3A4432DE
-	for <lists+linux-doc@lfdr.de>; Tue,  2 Nov 2021 17:36:30 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 789AE4435F1
+	for <lists+linux-doc@lfdr.de>; Tue,  2 Nov 2021 19:45:27 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S234976AbhKBQjB (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 2 Nov 2021 12:39:01 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:41660 "EHLO
+        id S235260AbhKBSsA (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 2 Nov 2021 14:48:00 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:45898 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S234881AbhKBQir (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 2 Nov 2021 12:38:47 -0400
-Received: from bombadil.infradead.org (bombadil.infradead.org [IPv6:2607:7c80:54:e::133])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id E670CC0797BA;
-        Tue,  2 Nov 2021 09:26:05 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-        d=infradead.org; s=bombadil.20210309; h=Sender:In-Reply-To:Content-Type:
-        MIME-Version:References:Message-ID:Subject:Cc:To:From:Date:Reply-To:
-        Content-Transfer-Encoding:Content-ID:Content-Description;
-        bh=ZpP/HZLv604vtvae1cO/0WFon0sSJn671oAr7ZIWFxw=; b=UCimNJ3QWb++sHLFKw51gCkQKn
-        WWEC2X/M7um3LJKy9tXa7f8JPMslxJ5A40mI4Vct+q0Sv3gcUEgGzPrTFydyq7LDj4xgM8jIgE+YV
-        X3uJS07PEiYfQYOrNERQyGwoz4X0qZhFpi7WHnrxKGXUXB6VAT6jwbyJRPrTKcwzCTgUhlBeArX0X
-        zO89RZAmitmlNeBzM3i1PuQboNrclSbxS3a89BcNAExHk3J5/aTm3inLRkEvgG8Qe8rIDc2Dp0p5R
-        RjMjMh0QsXI8sIp4RfVofx0u3LD67AbwsVH9w4I/TlAdY/7UhPA3WEEHPuDBki1Eo1czIcKWZnbaH
-        DvYH7+8w==;
-Received: from mcgrof by bombadil.infradead.org with local (Exim 4.94.2 #2 (Red Hat Linux))
-        id 1mhwbY-002IBJ-2M; Tue, 02 Nov 2021 16:25:44 +0000
-Date:   Tue, 2 Nov 2021 09:25:44 -0700
-From:   Luis Chamberlain <mcgrof@kernel.org>
-To:     Petr Mladek <pmladek@suse.com>
-Cc:     Miroslav Benes <mbenes@suse.cz>, Ming Lei <ming.lei@redhat.com>,
-        Julia Lawall <julia.lawall@inria.fr>,
-        Benjamin Herrenschmidt <benh@kernel.crashing.org>,
-        Paul Mackerras <paulus@samba.org>, tj@kernel.org,
-        gregkh@linuxfoundation.org, akpm@linux-foundation.org,
-        minchan@kernel.org, jeyu@kernel.org, shuah@kernel.org,
-        bvanassche@acm.org, dan.j.williams@intel.com, joe@perches.com,
-        tglx@linutronix.de, keescook@chromium.org, rostedt@goodmis.org,
-        linux-spdx@vger.kernel.org, linux-doc@vger.kernel.org,
-        linux-block@vger.kernel.org, linux-fsdevel@vger.kernel.org,
-        linux-kselftest@vger.kernel.org, linux-kernel@vger.kernel.org,
-        live-patching@vger.kernel.org
-Subject: Re: [PATCH v8 11/12] zram: fix crashes with cpu hotplug multistate
-Message-ID: <YYFmiAAYIA2X7Uv5@bombadil.infradead.org>
-References: <YW6OptglA6UykZg/@T590>
- <alpine.LSU.2.21.2110200835490.26817@pobox.suse.cz>
- <YW/KEsfWJMIPnz76@T590>
- <alpine.LSU.2.21.2110201014400.26817@pobox.suse.cz>
- <YW/q70dLyF+YudyF@T590>
- <YXfA0jfazCPDTEBw@alley>
- <YXgguuAY5iEUIV0u@T590>
- <YXg0dFZ+6qHw7d0g@bombadil.infradead.org>
- <alpine.LSU.2.21.2110271343290.3655@pobox.suse.cz>
- <YYFYFrnhwPiyOtst@alley>
+        with ESMTP id S230230AbhKBSsA (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 2 Nov 2021 14:48:00 -0400
+Received: from mail-pl1-x632.google.com (mail-pl1-x632.google.com [IPv6:2607:f8b0:4864:20::632])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id EDA95C061203
+        for <linux-doc@vger.kernel.org>; Tue,  2 Nov 2021 11:45:24 -0700 (PDT)
+Received: by mail-pl1-x632.google.com with SMTP id u17so193558plg.9
+        for <linux-doc@vger.kernel.org>; Tue, 02 Nov 2021 11:45:24 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=google.com; s=20210112;
+        h=date:from:to:cc:subject:message-id:references:mime-version
+         :content-disposition:in-reply-to;
+        bh=uyakuliA4UmCrR9fWLbnfsteDHRzQoVyMYaYZCZPqcE=;
+        b=QSvnvvTT239D4LtMPyZZ2dGqU4aTXmfJdH/jOQDnUdbwyhUHiqjgLzUASd7YARPN5d
+         PiPVaDSagyizNqCM9XYRyOlDwI2M0HKXCMaAapevrPynFPkZvaTpHYdzqo+rWPJ44Y+I
+         2y6ft7C56wEnX2Yzqk7MTxWJIGTBG25ryLEpYMveBSCtJL0x7877mhZhVDe1W7Yf7vnX
+         8sObXnSfkVhQLU4lnMb2I4JIwZPWEBz4aiI7KgViG5kE0EmwE6VrhD0ohArJRD96ShyH
+         wk5BEi6hRi8pBukU3inc+FAW7kURXuzOQFTIDq+ijLfpK0wtFnX4wg+FZ9PKRsrTJieF
+         nUWg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+         :mime-version:content-disposition:in-reply-to;
+        bh=uyakuliA4UmCrR9fWLbnfsteDHRzQoVyMYaYZCZPqcE=;
+        b=C1f6wUJFLlU6CV1cfcd8lIENs4f80TP8ShM89KU+c45JYAxpqa7zZclkKLGlaasGII
+         KKhrZ9qxbgZf2XJ/p0puAjsjR91a7HouQOD6J5Eraddvz3DAH4S6OANuIFhfnd7ucvv0
+         EdJsDrBvSzmdtV+OCUeRyVOR9LnfsXX6MJMcei7tWFYUomnR1oHWXwsaFyYy4YLL3Uzv
+         Z7d7G5OGgFc9HYg59yyQpvqDrCimZcLmQNQ3mCqQ3kJ+1GZha91fCKO/tnYHD2NW9UoL
+         BSfBul229SDNONdRTRXBR31erdvKlrr58/MPda6+MPSi6nehxooW1W6PJgN5ZGxu+FNA
+         ZPxA==
+X-Gm-Message-State: AOAM530MD0fgUT02BRECXGAUSdeKkhWiEf5vCyHIs/rmB3lqmVaatWLy
+        rP/bb6TL0doWkD2d442ekezy2w==
+X-Google-Smtp-Source: ABdhPJzCg5XbTMBI/qYK59iig0i/B/ZoMAl/naQ660AkVcrQ73W0GGTo3KkOkNDq9jFtVZ4hn/R2LA==
+X-Received: by 2002:a17:90a:191a:: with SMTP id 26mr8974786pjg.118.1635878724218;
+        Tue, 02 Nov 2021 11:45:24 -0700 (PDT)
+Received: from google.com (157.214.185.35.bc.googleusercontent.com. [35.185.214.157])
+        by smtp.gmail.com with ESMTPSA id m4sm3167803pjl.11.2021.11.02.11.45.23
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 02 Nov 2021 11:45:23 -0700 (PDT)
+Date:   Tue, 2 Nov 2021 18:45:19 +0000
+From:   Sean Christopherson <seanjc@google.com>
+To:     Vitaly Kuznetsov <vkuznets@redhat.com>
+Cc:     Maxim Levitsky <mlevitsk@redhat.com>,
+        Paolo Bonzini <pbonzini@redhat.com>, kvm@vger.kernel.org,
+        Kieran Bingham <kbingham@kernel.org>,
+        Jan Kiszka <jan.kiszka@siemens.com>,
+        Andrew Jones <drjones@redhat.com>,
+        Jonathan Corbet <corbet@lwn.net>,
+        Ingo Molnar <mingo@redhat.com>,
+        Thomas Gleixner <tglx@linutronix.de>,
+        "maintainer:X86 ARCHITECTURE (32-BIT AND 64-BIT)" <x86@kernel.org>,
+        Johannes Berg <johannes.berg@intel.com>,
+        Wanpeng Li <wanpengli@tencent.com>,
+        "H. Peter Anvin" <hpa@zytor.com>, Jessica Yu <jeyu@kernel.org>,
+        Jim Mattson <jmattson@google.com>,
+        Joerg Roedel <joro@8bytes.org>,
+        Yang Weijiang <weijiang.yang@intel.com>,
+        linux-kernel@vger.kernel.org, Borislav Petkov <bp@alien8.de>,
+        "open list:KERNEL SELFTEST FRAMEWORK" 
+        <linux-kselftest@vger.kernel.org>,
+        "open list:DOCUMENTATION" <linux-doc@vger.kernel.org>,
+        Shuah Khan <shuah@kernel.org>,
+        Andrew Morton <akpm@linux-foundation.org>
+Subject: Re: [PATCH v3 6/6] KVM: selftests: test KVM_GUESTDBG_BLOCKIRQ
+Message-ID: <YYGHPyhFRHHQsX6a@google.com>
+References: <20210811122927.900604-1-mlevitsk@redhat.com>
+ <20210811122927.900604-7-mlevitsk@redhat.com>
+ <137f2dcc-75d2-9d71-e259-dd66d43ad377@redhat.com>
+ <87sfwfkhk5.fsf@vitty.brq.redhat.com>
+ <b48210a35b3bc6d63beeb33c19b609b3014191dd.camel@redhat.com>
+ <YYB2l9bzFhKzobZB@google.com>
+ <87k0hqkf6p.fsf@vitty.brq.redhat.com>
+ <YYFe4LKXiuV+DyZh@google.com>
+ <87fsseo7iu.fsf@vitty.brq.redhat.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <YYFYFrnhwPiyOtst@alley>
-Sender: Luis Chamberlain <mcgrof@infradead.org>
+In-Reply-To: <87fsseo7iu.fsf@vitty.brq.redhat.com>
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Tue, Nov 02, 2021 at 04:24:06PM +0100, Petr Mladek wrote:
-> On Wed 2021-10-27 13:57:40, Miroslav Benes wrote:
-> > >From my perspective, it is quite easy to get it wrong due to either a lack 
-> > of generic support, or missing rules/documentation. So if this thread 
-> > leads to "do not share locks between a module removal and a sysfs 
-> > operation" strict rule, it would be at least something. In the same 
-> > manner as Luis proposed to document try_module_get() expectations.
+On Tue, Nov 02, 2021, Vitaly Kuznetsov wrote:
+> Sean Christopherson <seanjc@google.com> writes:
+> > But that mess is a red herring, the test fails with the same signature with APICv=1
+> > if the STI is replaced by PUSHF+BTS+POPFD (to avoid the STI shadow).  We all missed
+> > this key detail from Vitaly's report:
+> >
+> > SINGLE_STEP[1]: exit 8 exception 1 rip 0x402a25 (should be 0x402a27) dr6 0xffff4ff0 (should be 0xffff4ff0)
+> >                 ^^^^^^
+> >
+> > Exit '8' is KVM_EXIT_SHUTDOWN, i.e. the arrival of the IRQ hosed the guest because
+> > the test doesn't invoke vm_init_descriptor_tables() to install event handlers.
+> > The "exception 1" shows up because the run page isn't sanitized by the test, i.e.
+> > it's stale data that happens to match.
+> >
+> > So I would fully expect this test to fail with AVIC=1.  The problem is that
+> > KVM_GUESTDBG_BLOCKIRQ does absolutely nothing to handle APICv interrupts.  And
+> > even if KVM does something to fudge that behavior in the emulated local APIC, the
+> > test will then fail miserably virtual IPIs (currently AVIC only).
 > 
-> The rule "do not share locks between a module removal and a sysfs
-> operation" is not clear to me.
+> FWIW, the test doesn't seem to fail on my AMD EPYC system even with "avic=1" ...
 
-That's exactly it. It *is* not. The test_sysfs selftest will hopefully
-help with this. But I'll wait to take a final position on whether or not
-a generic fix should be merged until the Coccinelle patch which looks
-for all uses cases completes.
-
-So I think that once that Coccinelle hunt is done for the deadlock, we
-should also remind folks of the potential deadlock and some of the rules
-you mentioned below so that if we take a position that we don't support
-this, we at least inform developers why and what to avoid. If Coccinelle
-finds quite a bit of cases, then perhaps evaluating the generic fix
-might be worth evaluating.
-
-> IMHO, there are the following rules:
-> 
-> 1. rule: kobject_del() or kobject_put() must not be called under a lock that
-> 	 is used by store()/show() callbacks.
-> 
->    reason: kobject_del() waits until the sysfs interface is destroyed.
-> 	 It has to wait until all store()/show() callbacks are finished.
-
-Right, this is what actually started this entire conversation.
-
-Note that as Ming pointed out, the generic kernfs fix I proposed would
-only cover the case when kobject_del() ends up being called on module
-exit, so it would not cover the cases where perhaps kobject_del() might
-be called outside of module exit, and so the cope of the possible
-deadlock then increases in scope.
-
-Likewise, the Coccinelle hunt I'm trying would only cover the module
-exit case. I'm a bit of afraid of the complexity of a generic hunt
-as expresed in rule 1.
-
-> 
-> 2. rule: kobject_del()/kobject_put() must not be called from the
-> 	related store() callbacks.
-> 
->    reason: same as in 1st rule.
-
-Sensible corollary.
-
-Given tha the exact kobjet_del() / kobject_put() which must not be
-called from the respective sysfs ops depends on which kobject is
-underneath the device for which the sysfs ops is being created,
-it would make this hunt in Coccinelle a bit tricky. My current iteration
-of a coccinelle hunt cheats and looks at any sysfs looking op and
-ensures a module exit exists.
-
-> 3. rule: module_exit() must wait until all release() callbacks are called
-> 	 when kobject are static.
-> 
->    reason: kobject_put() must be called to clean up internal
-> 	dependencies. The clean up might be done asynchronously
-> 	and need access to the kobject structure.
-
-This might be an easier rule to implement a respective Coccinelle rule
-for.
-
-  Luis
+Huh.  Assuming the IRQ is pending in the vIRR and KVM didn't screw up elsewhere,
+that seems like a CPU AVIC bug.  #DBs have priority over IRQs, but single-step
+#DBs are trap-like and KVM (hopefully) isn't injecting a #DB, so a pending IRQ
+should be taken on the current instruction in the guest when executing VMRUN with
+guest.EFLAGS.IF=1,TF=1 since there will be a one-instruction delay before the
+single-step #DB kicks in.
