@@ -2,110 +2,142 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 1E3A74430B1
-	for <lists+linux-doc@lfdr.de>; Tue,  2 Nov 2021 15:43:30 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 3836D4430D3
+	for <lists+linux-doc@lfdr.de>; Tue,  2 Nov 2021 15:51:45 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S230257AbhKBOqC (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 2 Nov 2021 10:46:02 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:45152 "EHLO
-        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S230336AbhKBOqC (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 2 Nov 2021 10:46:02 -0400
-Received: from mail-lf1-x136.google.com (mail-lf1-x136.google.com [IPv6:2a00:1450:4864:20::136])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 09BE8C061767
-        for <linux-doc@vger.kernel.org>; Tue,  2 Nov 2021 07:43:27 -0700 (PDT)
-Received: by mail-lf1-x136.google.com with SMTP id f3so35251072lfu.12
-        for <linux-doc@vger.kernel.org>; Tue, 02 Nov 2021 07:43:26 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=mime-version:reply-to:sender:from:date:message-id:subject:to;
-        bh=4X4RhSneoidKGhykRwCITv5Sky7bOf6yK41I9DNzjPU=;
-        b=EQ76RxfnSAucd/nsoa3Z040m5b1TQO8xK8JLlszFuKqmTNbMrazOOMyEmchzmgyuB+
-         vD15xB7nqDVpatjZwQS44TMeaMDEbzNd2wrhIvmIrsvztyqvTssS9RuXERE0j6b4RXNl
-         d54j9aX1VZMarnpmGQhM/jAhcfJBhGNzhTPqU5y/TiEF7JvjHRoUt1pMX7YkFHDIcrW5
-         UkKBVoEsZaZZu0xSvJzkrxkVUAvgY6MJ1fJ7g42yMEXyzhlwQPQIQ59OMfsLJDBwspiZ
-         7N9KlxuPszozIXI21Zn4Ku+ozEn5Fxv8SFeYSEYC5kV323UlZn5EIZEm6G+GsiN37zjQ
-         +Zlw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=x-gm-message-state:mime-version:reply-to:sender:from:date
-         :message-id:subject:to;
-        bh=4X4RhSneoidKGhykRwCITv5Sky7bOf6yK41I9DNzjPU=;
-        b=dBhKM369KVWfZru7SXVUJeSbnKmwnIVB8MsMP687ixqthmx5RhboDubzaTY1lCs1zs
-         Xk45kgrbF6EJmBvnCB/rcNCXc3+bbO010GBSfTIekt3i21xzVfEkxhQOZefv9x7XNx30
-         9KMUGVyfMVttcXLe807HmPE+otOy3r+dRt5y4adCw6ErMUcc7MaY51OthWgyycfQrJOZ
-         htkCRmy+AIOn6DBlgWYCmvIRrxIGLDkFCJDghGQixc5XweBOlXWCeICnsjGE9w0Sq53V
-         gPUlXm1Img7yW1J6cZOEdqYv3gdaciVz+BuI/wZ00E9HJV0ITbxlUkAkZp/+T/+9SSqL
-         6NsA==
-X-Gm-Message-State: AOAM5321c4ywJsu0c+J/6fOJHh7rZx8eO7z5pTCfwhrtm6yspioBEMAe
-        vzh4JIMSiDxQU5sEmwVy6xUHwIt1jI6ASFIV1yo=
-X-Google-Smtp-Source: ABdhPJxc3WrI0zE5gXvCxdTloBL3fKFWO3Ygu8H7pexmuK8nL1gizVTRqkR63uaNLKUP0tqRrML86lWsFHXyFW8OxPI=
-X-Received: by 2002:a05:6512:b1f:: with SMTP id w31mr34650840lfu.164.1635864204866;
- Tue, 02 Nov 2021 07:43:24 -0700 (PDT)
+        id S233683AbhKBOyR (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 2 Nov 2021 10:54:17 -0400
+Received: from smtp-out1.suse.de ([195.135.220.28]:54500 "EHLO
+        smtp-out1.suse.de" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S233657AbhKBOyM (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 2 Nov 2021 10:54:12 -0400
+Received: from relay2.suse.de (relay2.suse.de [149.44.160.134])
+        by smtp-out1.suse.de (Postfix) with ESMTP id C6FDC218DF;
+        Tue,  2 Nov 2021 14:51:35 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
+        t=1635864695; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+         mime-version:mime-version:content-type:content-type:
+         in-reply-to:in-reply-to:references:references;
+        bh=UFNoUWc0AZc9WUSca1S+eN9tmYLlYuOWyX2traTgthA=;
+        b=REnrQBUIZHLPwnPamGCk1suZ2rJ/dU4SDyZTSsXR9/abMy14g0KAbcxRcodPwYgf3CCebu
+        LZhw3EhN8IRUyla4yH4fr7xb0yFWGsQYo30lZZW7uL/XywOIfPaoMdhqTyuZVFVnGvDeDE
+        yaa2kF8VchFwSkTFJf3yoOD+VKyZKJ4=
+Received: from suse.cz (unknown [10.100.216.66])
+        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+        (No client certificate requested)
+        by relay2.suse.de (Postfix) with ESMTPS id 519D4A3B85;
+        Tue,  2 Nov 2021 14:51:35 +0000 (UTC)
+Date:   Tue, 2 Nov 2021 15:51:33 +0100
+From:   Petr Mladek <pmladek@suse.com>
+To:     Ming Lei <ming.lei@redhat.com>
+Cc:     Miroslav Benes <mbenes@suse.cz>,
+        Luis Chamberlain <mcgrof@kernel.org>,
+        Benjamin Herrenschmidt <benh@kernel.crashing.org>,
+        Paul Mackerras <paulus@samba.org>, tj@kernel.org,
+        gregkh@linuxfoundation.org, akpm@linux-foundation.org,
+        minchan@kernel.org, jeyu@kernel.org, shuah@kernel.org,
+        bvanassche@acm.org, dan.j.williams@intel.com, joe@perches.com,
+        tglx@linutronix.de, keescook@chromium.org, rostedt@goodmis.org,
+        linux-spdx@vger.kernel.org, linux-doc@vger.kernel.org,
+        linux-block@vger.kernel.org, linux-fsdevel@vger.kernel.org,
+        linux-kselftest@vger.kernel.org, linux-kernel@vger.kernel.org,
+        live-patching@vger.kernel.org
+Subject: Re: [PATCH v8 11/12] zram: fix crashes with cpu hotplug multistate
+Message-ID: <YYFQdWvpXOV4foyS@alley>
+References: <YW4uwep3BCe9Vxq8@T590>
+ <alpine.LSU.2.21.2110190820590.15009@pobox.suse.cz>
+ <YW6OptglA6UykZg/@T590>
+ <alpine.LSU.2.21.2110200835490.26817@pobox.suse.cz>
+ <YW/KEsfWJMIPnz76@T590>
+ <alpine.LSU.2.21.2110201014400.26817@pobox.suse.cz>
+ <YW/q70dLyF+YudyF@T590>
+ <YXfA0jfazCPDTEBw@alley>
+ <YXgguuAY5iEUIV0u@T590>
+ <YYFH85CmVOYIMdYh@alley>
 MIME-Version: 1.0
-Reply-To: drabidibelloemailid@gmail.com
-Sender: drabidibellophdid@gmail.com
-Received: by 2002:a05:6504:a08:0:0:0:0 with HTTP; Tue, 2 Nov 2021 07:43:23
- -0700 (PDT)
-From:   "Dr. Abidi Bello" <drabidibelloemailid1@gmail.com>
-Date:   Tue, 2 Nov 2021 14:43:23 +0000
-X-Google-Sender-Auth: EAyRjZMyuv3drHeiFEh_nQ9c2Es
-Message-ID: <CABg9VyB9EtOZxwgdo7M2z0++bxjW1WgefiLs1Ywic9vDHr-G6g@mail.gmail.com>
-Subject: Urgent!
-To:     undisclosed-recipients:;
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <YYFH85CmVOYIMdYh@alley>
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
--- 
-Urgent!
+On Tue 2021-11-02 15:15:19, Petr Mladek wrote:
+> On Tue 2021-10-26 23:37:30, Ming Lei wrote:
+> > On Tue, Oct 26, 2021 at 10:48:18AM +0200, Petr Mladek wrote:
+> > > Below are more details about the livepatch code. I hope that it will
+> > > help you to see if zram has similar problems or not.
+> > > 
+> > > We have kobject in three structures: klp_func, klp_object, and
+> > > klp_patch, see include/linux/livepatch.h.
+> > > 
+> > > These structures have to be statically defined in the module sources
+> > > because they define what is livepatched, see
+> > > samples/livepatch/livepatch-sample.c
+> > > 
+> > > The kobject is used there to show information about the patch, patched
+> > > objects, and patched functions, in sysfs. And most importantly,
+> > > the sysfs interface can be used to disable the livepatch.
+> > > 
+> > > The problem with static structures is that the module must stay
+> > > in the memory as long as the sysfs interface exists. It can be
+> > > solved in module_exit() callback. It could wait until the sysfs
+> > > interface is destroyed.
+> > > 
+> > > kobject API does not support this scenario. The relase() callbacks
+> > 
+> > kobject_delete() is for supporting this scenario, that is why we don't
+> > need to grab module refcnt before calling show()/store() of the
+> > kobject's attributes.
+> > 
+> > kobject_delete() can be called in module_exit(), then any show()/store()
+> > will be done after kobject_delete() returns.
+> 
+> I am a bit confused. I do not see kobject_delete() anywhere in kernel
+> sources.
+> 
+> I see only kobject_del() and kobject_put(). AFAIK, they do _not_
+> guarantee that either the sysfs interface was destroyed or
+> the release callbacks were called. For example, see
+> schedule_delayed_work(&kobj->release, delay) in kobject_release().
 
-I am Dr. Abidi Bello, the director in charge of auditing and accounting
-section of Eco-bank, Ouagadougou Burkina Faso West Africa. With due respect
-and regard, I have decided to contact you on a business transaction that
-will be very beneficial to both of us at the end of the transaction.
+Grr, I always get confused by the code. kobject_del() actually waits
+until the sysfs interface gets destroyed. This is why there is
+the deadlock.
 
-During our investigation and auditing in this bank, my department came
-across a very huge sum of money belonging to a deceased person who died on
-31rst Junly 2000 in a plane crash and the fund has been dormant in his
-account with this Bank without any claim of the fund in our custody either
-from his family or relation before our discovery to this development. The
-said amount was (EIGHTEEN MILLION UNITED STATE DOLLARS.
-($18,000,000.00)Meanwhile all the whole arrangement to put the claim over
-this fund as the bonafide next of kin to the deceased, get the required
-approval and transfer this money to a foreign account has been put in place
-and directives and needed information will be relayed to you as soon as you
-indicate your interest and willingness to assist me and also benefit
-yourself to this great business opportunity.
+But kobject_put() is _not_ synchronous. And the comment above
+kobject_add() repeat 3 times that kobject_put() must be called
+on success:
 
-Infact I could have done this deal alone but because of my position in this
-country as a civil servant (A Banker) we are not allowed to operate a
-foreign account and would eventually raise an eye brow on my side during
-the time of transfer because I work in this bank. This is the reason why it
-will require a second party or fellow who will forward claims as the next
-of kin to the bank and also present a foreign account where he will need
-the money to be retransferred into on his request as it may be after due
-verification and clarification by the correspondent branch of the bank
-where the money will be remitted from to your own designation bank account.
+ * Return: If this function returns an error, kobject_put() must be
+ *         called to properly clean up the memory associated with the
+ *         object.  Under no instance should the kobject that is passed
+ *         to this function be directly freed with a call to kfree(),
+ *         that can leak memory.
+ *
+ *         If this function returns success, kobject_put() must also be called
+ *         in order to properly clean up the memory associated with the object.
+ *
+ *         In short, once this function is called, kobject_put() MUST be called
+ *         when the use of the object is finished in order to properly free
+ *         everything.
 
-I will not fail to inform you that this transaction is 100% risk free. On
-smooth conclusion of this transaction, you will be entitled to 40% of the
-total sum as gratification, while 60% will be for me. Please, you have been
-advised to keep top secret as I am still in service and intend to retire
-from service after I conclude this deal with you.
+and similar text in Documentation/core-api/kobject.rst
 
-I will be monitoring the whole situation here in this bank until you
-confirm the money in your account and ask me to come down to your country
-for subsequent sharing of the fund according to percentages previously
-indicated and further investment, either in your country or any country you
-advice us to invest.
+  After a kobject has been registered with the kobject core successfully, it
+  must be cleaned up when the code is finished with it.  To do that, call
+  kobject_put().
 
-All other necessary vital information will be sent to you when I hear from
-you.
 
-I look forward to receive your email and please also send your direct
-mobile telephone number in your reply for easy communication.
+If I read the code correctly then kobject_put() calls kref_put()
+that might call kobject_delayed_cleanup(). This function does a lot
+of things and need to access struct kobject.
 
-Yours faithfully,
-Dr. Abidi Bello
+> IMHO, kobject API does not support static structures and module
+> removal.
+
+If kobject_put() has to be called also for static structures then
+module_exit() must explicitly wait until the clean up is finished.
+
+Best Regards,
+Petr
