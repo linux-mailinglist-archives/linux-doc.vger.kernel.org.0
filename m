@@ -2,79 +2,112 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 1A3FB4453E4
-	for <lists+linux-doc@lfdr.de>; Thu,  4 Nov 2021 14:32:03 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id A0ACC445473
+	for <lists+linux-doc@lfdr.de>; Thu,  4 Nov 2021 15:04:10 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S231270AbhKDNek (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 4 Nov 2021 09:34:40 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:58610 "EHLO
-        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S230401AbhKDNeh (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Thu, 4 Nov 2021 09:34:37 -0400
-Received: from mail-ua1-x934.google.com (mail-ua1-x934.google.com [IPv6:2607:f8b0:4864:20::934])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 12850C061714
-        for <linux-doc@vger.kernel.org>; Thu,  4 Nov 2021 06:31:59 -0700 (PDT)
-Received: by mail-ua1-x934.google.com with SMTP id q13so10836553uaq.2
-        for <linux-doc@vger.kernel.org>; Thu, 04 Nov 2021 06:31:59 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=mime-version:reply-to:from:date:message-id:subject:to;
-        bh=vckQpSJQurswtg+FMKN7n5mxI42l1UN13f4t9l1+9N0=;
-        b=SMFOTpOxJRyFTx63MqIw+zlh+X4GZcr2CWd5fyY+vRhaVUaAXgZp3rLl339nLRPzrm
-         K4IbWZKc2Cb4MkB7tRhtphIqDk0gq/DzAC8dW5AZyxQbQt9sJOAGHe74xIY8ODaJnNPQ
-         ULQ9ZzNpS/3rPuyLYKv2nfnle9i0DT+2XvaxZWQ9VDM2Fdk7tI6lXDUcX9keOye7fjnA
-         KHQLV0lytkfQxnjc9bdcJC7WjhJYtrq8hDlLFYwRStMhMMMB8WePjQjNl9yDewQPqx2J
-         xBmzh5WAhBZlXpxBH5SxTpulg6lgSCtvbFJEmC6En8LBFElJru2AXH54deAQgwqYqKc4
-         9iKg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=x-gm-message-state:mime-version:reply-to:from:date:message-id
-         :subject:to;
-        bh=vckQpSJQurswtg+FMKN7n5mxI42l1UN13f4t9l1+9N0=;
-        b=SmdBRmkon/fawbTxsGcvQNcxWVpISB/f9tgTaII43f2X0zkqPh3MiV0mi+BDpgmMEg
-         EwoPt4bslLumS+d9WpGb9H6GswlT/vtI51io5+g11Q0fG0VC9s9fj2IsjhivdhGM/xZo
-         MLEOIy+UP1NoCzpjyip47O7isubqiCCJgXqR7Ftesh0nsZfuTkJ4izERrdeHkMHlYqOk
-         nX1pWEwWaedCOLb65sO1TMkr//x/XPKApQRVzAyCRRGymW0RF45ggJlSpUi88D1c9RLn
-         xycJZTmvGLGYyl5KIgYiEkwcAW3NkpAPp1en1hJcp+R0WWomHDalPKOY8jvkZqWHJDCG
-         oyig==
-X-Gm-Message-State: AOAM531CjERG2aBNmjc1zel4GyBMdu7lDepkl80TQ26G1IHSdik6MskX
-        PxW9//6VKVE50Ag6J70QWhErj0KPOeiv4gXRG78=
-X-Google-Smtp-Source: ABdhPJxTPLj/7UfLcNOWopJHYY25XPGzFYKqkRwcjozz6NouTmsVSD18pBHQS1hVMNPfJyBILjKASmAh0CJ7ZoFR87Q=
-X-Received: by 2002:ab0:7784:: with SMTP id x4mr7514732uar.143.1636032717068;
- Thu, 04 Nov 2021 06:31:57 -0700 (PDT)
+        id S231152AbhKDOGr (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 4 Nov 2021 10:06:47 -0400
+Received: from kirsty.vergenet.net ([202.4.237.240]:36828 "EHLO
+        kirsty.vergenet.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S230420AbhKDOGq (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Thu, 4 Nov 2021 10:06:46 -0400
+Received: from madeliefje.horms.nl (ip-80-113-23-202.ip.prioritytelecom.net [80.113.23.202])
+        by kirsty.vergenet.net (Postfix) with ESMTPA id CFB4925AE8A;
+        Fri,  5 Nov 2021 01:04:06 +1100 (AEDT)
+Received: by madeliefje.horms.nl (Postfix, from userid 7100)
+        id 3FF8327B5; Thu,  4 Nov 2021 15:04:04 +0100 (CET)
+Date:   Thu, 4 Nov 2021 15:04:04 +0100
+From:   Simon Horman <horms@verge.net.au>
+To:     yangxingwu <xingwu.yang@gmail.com>, pablo@netfilter.org
+Cc:     ja@ssi.bg, kadlec@netfilter.org, fw@strlen.de, davem@davemloft.net,
+        kuba@kernel.org, netdev@vger.kernel.org, lvs-devel@vger.kernel.org,
+        netfilter-devel@vger.kernel.org, coreteam@netfilter.org,
+        linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org,
+        corbet@lwn.net, Chuanqi Liu <legend050709@qq.com>
+Subject: Re: [PATCH nf-next v6] netfilter: ipvs: Fix reuse connection if RS
+ weight is 0
+Message-ID: <20211104140401.GA16560@vergenet.net>
+References: <20211104031029.157366-1-xingwu.yang@gmail.com>
 MIME-Version: 1.0
-Received: by 2002:a59:c20b:0:b0:23d:911f:4ff4 with HTTP; Thu, 4 Nov 2021
- 06:31:56 -0700 (PDT)
-Reply-To: pd0874586@gmail.com
-From:   Inspector Peter Douglas <anthonychrist12345@gmail.com>
-Date:   Thu, 4 Nov 2021 06:31:56 -0700
-Message-ID: <CAGKYHfzc5uN35c531i63e9xFGxpH9Wvaoc__NVryortHnmGWuw@mail.gmail.com>
-Subject: Hello, Respond ASAP
-To:     undisclosed-recipients:;
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20211104031029.157366-1-xingwu.yang@gmail.com>
+Organisation: Horms Solutions BV
+User-Agent: Mutt/1.10.1 (2018-07-13)
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Hello, Respond ASAP
+On Thu, Nov 04, 2021 at 11:10:29AM +0800, yangxingwu wrote:
+> We are changing expire_nodest_conn to work even for reused connections when
+> conn_reuse_mode=0, just as what was done with commit dc7b3eb900aa ("ipvs:
+> Fix reuse connection if real server is dead").
+> 
+> For controlled and persistent connections, the new connection will get the
+> needed real server depending on the rules in ip_vs_check_template().
+> 
+> Fixes: d752c3645717 ("ipvs: allow rescheduling of new connections when port reuse is detected")
+> Co-developed-by: Chuanqi Liu <legend050709@qq.com>
+> Signed-off-by: Chuanqi Liu <legend050709@qq.com>
+> Signed-off-by: yangxingwu <xingwu.yang@gmail.com>
 
-I am a united nation inspection agent with a mandate from U.N Security
-council to investigate money laundering, terrorism financing & all
-related acts currently stationed at Hartsfield Jackson Atlanta
-International Airport GA conducting audition of all abandoned
-consignment in United state Airports, upon a closer investigation, I
-discovered an abandoned luggage in your name which was transferred to
-our facility and When scanned it was revealed that it contains
-legitimate cash with a rough estimation of about six million USD
-($6.000,0000)
+Acked-by: Simon Horman <horms@verge.net.au>
 
-I am contacting you because I want us to transact this business and
-share the money since the shipper have abandoned it. Upon your
-response indicating your interest, more detailed information shall be
-released to you. contact me with this email address
-(pd0874586@gmail.com).
+(v5 was acked by Julian, probably that can be propagated here)
 
-Thank's
-Inspector Peter Douglas
-MY PROPOSAL.
-Email: pd0874586@gmail.com
+Pablo, please consider this for nf-next at your convenience.
+
+> ---
+>  Documentation/networking/ipvs-sysctl.rst | 3 +--
+>  net/netfilter/ipvs/ip_vs_core.c          | 8 ++++----
+>  2 files changed, 5 insertions(+), 6 deletions(-)
+> 
+> diff --git a/Documentation/networking/ipvs-sysctl.rst b/Documentation/networking/ipvs-sysctl.rst
+> index 2afccc63856e..1cfbf1add2fc 100644
+> --- a/Documentation/networking/ipvs-sysctl.rst
+> +++ b/Documentation/networking/ipvs-sysctl.rst
+> @@ -37,8 +37,7 @@ conn_reuse_mode - INTEGER
+>  
+>  	0: disable any special handling on port reuse. The new
+>  	connection will be delivered to the same real server that was
+> -	servicing the previous connection. This will effectively
+> -	disable expire_nodest_conn.
+> +	servicing the previous connection.
+>  
+>  	bit 1: enable rescheduling of new connections when it is safe.
+>  	That is, whenever expire_nodest_conn and for TCP sockets, when
+> diff --git a/net/netfilter/ipvs/ip_vs_core.c b/net/netfilter/ipvs/ip_vs_core.c
+> index 128690c512df..393058a43aa7 100644
+> --- a/net/netfilter/ipvs/ip_vs_core.c
+> +++ b/net/netfilter/ipvs/ip_vs_core.c
+> @@ -1964,7 +1964,6 @@ ip_vs_in(struct netns_ipvs *ipvs, unsigned int hooknum, struct sk_buff *skb, int
+>  	struct ip_vs_proto_data *pd;
+>  	struct ip_vs_conn *cp;
+>  	int ret, pkts;
+> -	int conn_reuse_mode;
+>  	struct sock *sk;
+>  
+>  	/* Already marked as IPVS request or reply? */
+> @@ -2041,15 +2040,16 @@ ip_vs_in(struct netns_ipvs *ipvs, unsigned int hooknum, struct sk_buff *skb, int
+>  	cp = INDIRECT_CALL_1(pp->conn_in_get, ip_vs_conn_in_get_proto,
+>  			     ipvs, af, skb, &iph);
+>  
+> -	conn_reuse_mode = sysctl_conn_reuse_mode(ipvs);
+> -	if (conn_reuse_mode && !iph.fragoffs && is_new_conn(skb, &iph) && cp) {
+> +	if (!iph.fragoffs && is_new_conn(skb, &iph) && cp) {
+> +		int conn_reuse_mode = sysctl_conn_reuse_mode(ipvs);
+>  		bool old_ct = false, resched = false;
+>  
+>  		if (unlikely(sysctl_expire_nodest_conn(ipvs)) && cp->dest &&
+>  		    unlikely(!atomic_read(&cp->dest->weight))) {
+>  			resched = true;
+>  			old_ct = ip_vs_conn_uses_old_conntrack(cp, skb);
+> -		} else if (is_new_conn_expected(cp, conn_reuse_mode)) {
+> +		} else if (conn_reuse_mode &&
+> +			   is_new_conn_expected(cp, conn_reuse_mode)) {
+>  			old_ct = ip_vs_conn_uses_old_conntrack(cp, skb);
+>  			if (!atomic_read(&cp->n_control)) {
+>  				resched = true;
+> -- 
+> 2.30.2
+> 
