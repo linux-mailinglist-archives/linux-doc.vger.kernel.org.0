@@ -2,128 +2,112 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id C9BA1445814
-	for <lists+linux-doc@lfdr.de>; Thu,  4 Nov 2021 18:12:16 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 103A6445AF8
+	for <lists+linux-doc@lfdr.de>; Thu,  4 Nov 2021 21:11:08 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S232609AbhKDROv (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 4 Nov 2021 13:14:51 -0400
-Received: from linux.microsoft.com ([13.77.154.182]:55138 "EHLO
-        linux.microsoft.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S232614AbhKDROt (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Thu, 4 Nov 2021 13:14:49 -0400
-Received: from [10.137.106.139] (unknown [131.107.159.11])
-        by linux.microsoft.com (Postfix) with ESMTPSA id 5ED1720ABA94;
-        Thu,  4 Nov 2021 10:12:10 -0700 (PDT)
-DKIM-Filter: OpenDKIM Filter v2.11.0 linux.microsoft.com 5ED1720ABA94
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linux.microsoft.com;
-        s=default; t=1636045930;
-        bh=qEPw2InKnsvskNfMVAs79ETCgoEtkA0LqlU3T/wm4UU=;
-        h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
-        b=TOKjsjpHy/6jP6DASOEiio4+SFbY1bV2zRvkMssy96xZM0i5VxP1rkA4e/T9SCZ6P
-         4waObN9FPi2nFKpG56+iXnUxO+7Q+NmeIx/NfccfBZOI2tCSlSsiK5C+0559jeIH7u
-         f+DR+oor43nyIe7u/bOblKF60y+83HkhuOSbu32Q=
-Message-ID: <8d12dcf4-165d-9db6-5a42-591bc8b97c00@linux.microsoft.com>
-Date:   Thu, 4 Nov 2021 10:12:09 -0700
+        id S232088AbhKDUNp (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 4 Nov 2021 16:13:45 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:37420 "EHLO
+        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S231857AbhKDUNp (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Thu, 4 Nov 2021 16:13:45 -0400
+Received: from mail-yb1-xb29.google.com (mail-yb1-xb29.google.com [IPv6:2607:f8b0:4864:20::b29])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id D6D7EC061714
+        for <linux-doc@vger.kernel.org>; Thu,  4 Nov 2021 13:11:06 -0700 (PDT)
+Received: by mail-yb1-xb29.google.com with SMTP id e136so14045942ybc.4
+        for <linux-doc@vger.kernel.org>; Thu, 04 Nov 2021 13:11:06 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112;
+        h=mime-version:reply-to:from:date:message-id:subject:to
+         :content-transfer-encoding;
+        bh=WAsVh5pZbAZqek5T+7taximj1Dn+kEKbM1q/0qRGXmo=;
+        b=KQqEP8pGuGBbuk/Wl/vBuFUw0kVaX2oM/Wa5nl0xzARokO88WLBvvpTjamRwpIJdlK
+         Rxxrv5G0G1AVBLFmwQpP1c0TcZOcuSfcafI7qb7LPpj60E79fw1Dv3N1HjK5ZVFrlZML
+         Md5WhkHX0rSBo85FZ51VgOoPp0+pEYYi+0yF0746yGnWhkqfqI+GOy2rANB4xtYcGkHE
+         PTGgiBi0gb1PsiOtk854ACnWPfBqr+v2Daf86CGyXXVTsBR/jC8Qgj6+pIwfbnlkz/w1
+         9HXq5ZG0DnksKmvUFpIOFsSllGjVUjwBqw0nYb6q1+q+i4VmmzVH3sUQJDW9VWHtYg90
+         KVqw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:mime-version:reply-to:from:date:message-id
+         :subject:to:content-transfer-encoding;
+        bh=WAsVh5pZbAZqek5T+7taximj1Dn+kEKbM1q/0qRGXmo=;
+        b=URZMf6mbC0fiUVyhbUVhtfbdR2zaYFP4mVXavnALAyOnaA+Xid089SkC2fDW8wTzZb
+         GjPcc5pI/fQf95SO/xndVof7OO0INLoFMkEb/JssIy96uhKS7r1P+7v1wOxOb2kyqh7P
+         3iUw3OBfYg/YxZcnlnX/cx5ejF4M97Mhn5m7128a5d+PapYLZQ9Bp5F4JCFtmNHStQBe
+         DfMFewBm11/bbk73XhXD2rwcdex2Ptuc35p1PX5gPY7VrumNc9ftztE8tKnIfz5pp7sv
+         PR1R7z3Fkv4+04ZMPCuHk+M/3XrHKBXwaN39IveZFnHHUweAPMRiZDkmmwo4dadt8sgL
+         APEA==
+X-Gm-Message-State: AOAM532jT2/ZQXGM3nxeKBl+0KFFzIcudTyiLqH3G1TwtpotpNk8i2Zp
+        y23nPvyZFc8sg2xWPH7RDmqgLqR1aGjib21zFyk=
+X-Google-Smtp-Source: ABdhPJyv1HwwbTPjO/dhv6x/y8U05e7dEMiUf+z6k4JCHS12/2CKZEhQQREp0HbRg6NZaAseYpq0IzESc4hgHLorifg=
+X-Received: by 2002:a25:83c6:: with SMTP id v6mr31008332ybm.264.1636056666092;
+ Thu, 04 Nov 2021 13:11:06 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:91.0) Gecko/20100101
- Thunderbird/91.2.1
-Subject: Re: [RFC PATCH v7 12/16] fsverity|security: add security hooks to
- fsverity digest and signature
-Content-Language: en-US
-To:     Roberto Sassu <roberto.sassu@huawei.com>,
-        Eric Biggers <ebiggers@kernel.org>
-Cc:     "corbet@lwn.net" <corbet@lwn.net>,
-        "axboe@kernel.dk" <axboe@kernel.dk>,
-        "agk@redhat.com" <agk@redhat.com>,
-        "snitzer@redhat.com" <snitzer@redhat.com>,
-        "tytso@mit.edu" <tytso@mit.edu>,
-        "paul@paul-moore.com" <paul@paul-moore.com>,
-        "eparis@redhat.com" <eparis@redhat.com>,
-        "jmorris@namei.org" <jmorris@namei.org>,
-        "serge@hallyn.com" <serge@hallyn.com>,
-        "jannh@google.com" <jannh@google.com>,
-        "dm-devel@redhat.com" <dm-devel@redhat.com>,
-        "linux-doc@vger.kernel.org" <linux-doc@vger.kernel.org>,
-        "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
-        "linux-block@vger.kernel.org" <linux-block@vger.kernel.org>,
-        "linux-fscrypt@vger.kernel.org" <linux-fscrypt@vger.kernel.org>,
-        "linux-audit@redhat.com" <linux-audit@redhat.com>,
-        "linux-security-module@vger.kernel.org" 
-        <linux-security-module@vger.kernel.org>,
-        "linux-integrity@vger.kernel.org" <linux-integrity@vger.kernel.org>
-References: <1634151995-16266-1-git-send-email-deven.desai@linux.microsoft.com>
- <1634151995-16266-13-git-send-email-deven.desai@linux.microsoft.com>
- <YWcyYBuNppjrVOe2@gmail.com>
- <9089bdb0-b28a-9fa0-c510-00fa275af621@linux.microsoft.com>
- <0b4c9a91afb441b085ec914118617ee7@huawei.com>
-From:   Deven Bowers <deven.desai@linux.microsoft.com>
-In-Reply-To: <0b4c9a91afb441b085ec914118617ee7@huawei.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+Received: by 2002:a05:7000:5ad0:0:0:0:0 with HTTP; Thu, 4 Nov 2021 13:11:05
+ -0700 (PDT)
+Reply-To: martiniparker4@gmail.com
+From:   Hakim Al-Rashid <jamesfelix225@gmail.com>
+Date:   Thu, 4 Nov 2021 23:11:05 +0300
+Message-ID: <CAEUsHwMbbuN6A+wtLK9kALpXYXwbeNrOxko8gMwctRcOpZnE9A@mail.gmail.com>
+Subject: =?UTF-8?B?U3ZlaWtpLCBzYcWGxJNtxJNqcw==?=
+To:     undisclosed-recipients:;
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
+Labdien, sa=C5=86=C4=93m=C4=93j
 
-On 11/3/2021 5:28 AM, Roberto Sassu wrote:
->> From: Deven Bowers [mailto:deven.desai@linux.microsoft.com]
->> Sent: Friday, October 15, 2021 9:26 PM
->> On 10/13/2021 12:24 PM, Eric Biggers wrote:
->>> On Wed, Oct 13, 2021 at 12:06:31PM -0700,
->> deven.desai@linux.microsoft.com wrote:
->>>> From: Fan Wu <wufan@linux.microsoft.com>
->>>>
->>>> Add security_inode_setsecurity to fsverity signature verification.
->>>> This can let LSMs save the signature data and digest hashes provided
->>>> by fsverity.
->>> Can you elaborate on why LSMs need this information?
->> The proposed LSM (IPE) of this series will be the only one to need
->> this information at the  moment. IPE’s goal is to have provide
->> trust-based access control. Trust and Integrity are tied together,
->> as you cannot prove trust without proving integrity.
-> I wanted to go back on this question.
->
-> It seems, at least for fsverity, that you could obtain the
-> root digest at run-time, without storing it in a security blob.
->
-> I thought I should use fsverity_get_info() but the fsverity_info
-> structure is not exported (it is defined in fs/verity/fsverity_private.h).
->
-> Then, I defined a new function, fsverity_get_file_digest() to copy
-> the file_digest member of fsverity_info to a buffer and to pass
-> the associated hash algorithm.
->
-> With that, the code of evaluate() for DIGLIM becomes:
->
->          info = fsverity_get_info(file_inode(ctx->file));
->          if (info)
->                  ret = fsverity_get_file_digest(info, buffer, sizeof(buffer), &algo);
->
->          if (!strcmp(expect->data, "diglim") && ret > 0) {
->                  ret = diglim_digest_get_info(buffer, algo, COMPACT_FILE, &modifiers, &actions);
->                  if (!ret)
->                          return true;
->          }
-This would work with the digest with a bit more code in fs-verity. It
-also has benefits if there are other callers who want this information.
+  Es esmu Hamids Abbass, Turcijas Vaqif Bank darbinieks. Es sazin=C4=81jos
+ar jums ar ieteikumu, un tiks nov=C4=93rt=C4=93ta j=C5=ABsu liel=C4=81k=C4=
+=81 interese. Tas
+attiecas uz miru=C5=A1u klientu, kur=C5=A1 2003. gad=C4=81 cieta autoav=C4=
+=81rij=C4=81 uz
+Stambulas =C5=A1osejas. Vi=C5=86=C5=A1 man bija uzticams klients. Pirms vi=
+=C5=86a n=C4=81ves
+manu klientu (36 000 000,00 USD) tur=C4=93ja apcietin=C4=81jum=C4=81 mana f=
+inan=C5=A1u
+iest=C4=81de =C5=A1eit, Turcij=C4=81, dokumenti, kas attiecas uz =C5=A1iem =
+dar=C4=ABjumiem,
+liecina, ka pras=C4=ABbas var iesniegt tikai vi=C5=86a tie=C5=A1ais =C4=A3i=
+menes loceklis.
+Diem=C5=BE=C4=93l vi=C5=86a n=C4=81ves br=C4=ABd=C4=AB vi=C5=86am nebija te=
+stamenta.
+    Visi centieni neatkl=C4=81ja nek=C4=81du saist=C4=ABbu ar k=C4=81du no =
+vi=C5=86a =C4=A3imenes
+locek=C4=BCiem. Ta=C4=8Du jaunais ES likums par
+mantojumiem/aizdevumiem/l=C4=ABdzek=C4=BCiem paredz termi=C5=86u, kur=C4=81=
+ =C5=A1=C4=81dus kred=C4=ABtus
+var pie=C5=86emt. Finan=C5=A1u iest=C4=81de man lika par=C4=81d=C4=ABt tuv=
+=C4=81ko radinieku, kur=C5=A1
+piepras=C4=ABs l=C4=ABdzek=C4=BCus un uz aug=C5=A1u. Ja j=C5=ABs atsak=C4=
+=81ties atbild=C4=93t uz =C5=A1o
+ultim=C4=81tu, finansi=C4=81l=C4=81 situ=C4=81cija juridiski =C4=BCaus iest=
+=C4=81dei zi=C5=86ot par =C5=A1iem
+l=C4=ABdzek=C4=BCiem ES Centr=C4=81lajai bankai k=C4=81 nepiepras=C4=ABtiem=
+ l=C4=ABdzek=C4=BCiem.
+    Es un mans kol=C4=93=C4=A3is esam rad=C4=ABju=C5=A1i visus nepiecie=C5=
+=A1amos nosac=C4=ABjumus
+=C5=A1o l=C4=ABdzek=C4=BCu atbr=C4=ABvo=C5=A1anai, un es pl=C4=81noju iepaz=
+=C4=ABstin=C4=81t j=C5=ABs ar =C5=A1o iesp=C4=93ju
+k=C4=81 finans=C4=93juma sa=C5=86=C4=93m=C4=93ju. L=C5=ABdzu, =C5=86emiet v=
+=C4=93r=C4=81, ka man ir likum=C4=ABgi
+sniegta visa nepiecie=C5=A1am=C4=81 inform=C4=81cija/dokumenti =C5=A1im fon=
+dam. L=C5=ABdzu,
+sniedziet man savas atsauksmes, nos=C5=ABtot atbildi uz =C5=A1o e-pasta adr=
+esi:
+mortgagealtegra@gmail.com
 
-I was planning on grouping the digest and signature into 
-apublic_key_signature
-structure in v8 to pass the digest, digest algorithm,digest size, signature
-and signature size (as opposed to defining a new structfor this purpose),
-reducing the number of LSM hook calls down to one functionin fsverity.
 
-I think both approaches have merit. fsverity_get_file_digest is more useful
-if there are callers outside of LSMs that want this information. The LSM 
-hook
-is cleaner if only LSMs want this information.
+Sveicieni.
+Hamids Abass
 
-At least, at the moment, it seems like it's only IPE who wants this 
-information,
-and it's not like it won't be able to change later if the need arises, 
-as this
-is all implementation details that wouldn't effect the end-user.
 
-I'll defer to Eric - his opinion holds the most weight, as fsverity would be
-the main code affected in either case.
 
+
+L=C5=ABdzu, =C5=86emiet v=C4=93r=C4=81: uz atsauksm=C4=93m tiks atbild=C4=
+=93ts darba laik=C4=81, un j=C5=ABs
+esat r=C5=ABp=C4=ABgi izv=C4=93l=C4=93ts, lai izmantotu =C5=A1o privil=C4=
+=93=C4=A3iju/iesp=C4=93ju
