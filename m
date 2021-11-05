@@ -2,112 +2,248 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 103A6445AF8
-	for <lists+linux-doc@lfdr.de>; Thu,  4 Nov 2021 21:11:08 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id ADDA0445D09
+	for <lists+linux-doc@lfdr.de>; Fri,  5 Nov 2021 01:31:59 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S232088AbhKDUNp (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 4 Nov 2021 16:13:45 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:37420 "EHLO
+        id S230044AbhKEAeh (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 4 Nov 2021 20:34:37 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:38618 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S231857AbhKDUNp (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Thu, 4 Nov 2021 16:13:45 -0400
-Received: from mail-yb1-xb29.google.com (mail-yb1-xb29.google.com [IPv6:2607:f8b0:4864:20::b29])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id D6D7EC061714
-        for <linux-doc@vger.kernel.org>; Thu,  4 Nov 2021 13:11:06 -0700 (PDT)
-Received: by mail-yb1-xb29.google.com with SMTP id e136so14045942ybc.4
-        for <linux-doc@vger.kernel.org>; Thu, 04 Nov 2021 13:11:06 -0700 (PDT)
+        with ESMTP id S229587AbhKEAeg (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Thu, 4 Nov 2021 20:34:36 -0400
+Received: from mail-pj1-x102c.google.com (mail-pj1-x102c.google.com [IPv6:2607:f8b0:4864:20::102c])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 1EE54C061714
+        for <linux-doc@vger.kernel.org>; Thu,  4 Nov 2021 17:31:58 -0700 (PDT)
+Received: by mail-pj1-x102c.google.com with SMTP id v23so17731pjr.5
+        for <linux-doc@vger.kernel.org>; Thu, 04 Nov 2021 17:31:58 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=mime-version:reply-to:from:date:message-id:subject:to
-         :content-transfer-encoding;
-        bh=WAsVh5pZbAZqek5T+7taximj1Dn+kEKbM1q/0qRGXmo=;
-        b=KQqEP8pGuGBbuk/Wl/vBuFUw0kVaX2oM/Wa5nl0xzARokO88WLBvvpTjamRwpIJdlK
-         Rxxrv5G0G1AVBLFmwQpP1c0TcZOcuSfcafI7qb7LPpj60E79fw1Dv3N1HjK5ZVFrlZML
-         Md5WhkHX0rSBo85FZ51VgOoPp0+pEYYi+0yF0746yGnWhkqfqI+GOy2rANB4xtYcGkHE
-         PTGgiBi0gb1PsiOtk854ACnWPfBqr+v2Daf86CGyXXVTsBR/jC8Qgj6+pIwfbnlkz/w1
-         9HXq5ZG0DnksKmvUFpIOFsSllGjVUjwBqw0nYb6q1+q+i4VmmzVH3sUQJDW9VWHtYg90
-         KVqw==
+        d=intel-com.20210112.gappssmtp.com; s=20210112;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc;
+        bh=BsG61L7IKjHxv8q9I3AHXY4seKqtKLeUDkmnvn0KnP8=;
+        b=f2aFR1Fm8LSmJU324PxSLHMJ0vM2TsbHB+Jt0aFhdwrv4uFbXTc8tL0tTLJFkljgMX
+         aepjsXWXDRTwLoWLppme8/smx82NczNW+0yIrVuHrAUNhwQhHrIS9FQTLX68f4YGvrAd
+         6oX+HvJV4dZZWm0hRaMq5XoNwGnEMZXMmRgrt4Q0ozb1JALvsSkr3gAyuEQIbP0zFau+
+         vfCKgkpBihG+RZdymSvrJzqnk5J5LzVBWBkGB5hniGExdwxUmzKqqK2r8L9VaRIyO7Wv
+         ySEGxxIsK76syxRbpoYaOkOAp5FcoTHjG/c+z53jEET0JwjZ28ZVw7Xm3eTg1UYW0kTy
+         8cCg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=x-gm-message-state:mime-version:reply-to:from:date:message-id
-         :subject:to:content-transfer-encoding;
-        bh=WAsVh5pZbAZqek5T+7taximj1Dn+kEKbM1q/0qRGXmo=;
-        b=URZMf6mbC0fiUVyhbUVhtfbdR2zaYFP4mVXavnALAyOnaA+Xid089SkC2fDW8wTzZb
-         GjPcc5pI/fQf95SO/xndVof7OO0INLoFMkEb/JssIy96uhKS7r1P+7v1wOxOb2kyqh7P
-         3iUw3OBfYg/YxZcnlnX/cx5ejF4M97Mhn5m7128a5d+PapYLZQ9Bp5F4JCFtmNHStQBe
-         DfMFewBm11/bbk73XhXD2rwcdex2Ptuc35p1PX5gPY7VrumNc9ftztE8tKnIfz5pp7sv
-         PR1R7z3Fkv4+04ZMPCuHk+M/3XrHKBXwaN39IveZFnHHUweAPMRiZDkmmwo4dadt8sgL
-         APEA==
-X-Gm-Message-State: AOAM532jT2/ZQXGM3nxeKBl+0KFFzIcudTyiLqH3G1TwtpotpNk8i2Zp
-        y23nPvyZFc8sg2xWPH7RDmqgLqR1aGjib21zFyk=
-X-Google-Smtp-Source: ABdhPJyv1HwwbTPjO/dhv6x/y8U05e7dEMiUf+z6k4JCHS12/2CKZEhQQREp0HbRg6NZaAseYpq0IzESc4hgHLorifg=
-X-Received: by 2002:a25:83c6:: with SMTP id v6mr31008332ybm.264.1636056666092;
- Thu, 04 Nov 2021 13:11:06 -0700 (PDT)
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=BsG61L7IKjHxv8q9I3AHXY4seKqtKLeUDkmnvn0KnP8=;
+        b=cfolDMhhoR7ZONUHGMjICQyjcbJcHaFNV2Vy8/cp2HofGJ3+ScP277IWBqrS6aD6jr
+         bLCJagV183iPJu5FxLkdVYVc7MV4m6DbC4Z+Os0QDn6gD+OTeDW4Sda6n6mAKVzlQfUT
+         hZRH4EPOTsam6oN8FrYdfwrOuKQHVCeaxlAVdc4yWkL8kNE0wU50Tg+jt+FXPrSCtSw0
+         T/CbvhzLtQiTqStHafDGBdGhwe9GHIdgVv9X1oTHmeyfItnxzoYpynxSQVHrex6S9EdQ
+         L3afdl8RLn0QLcMldEWp+GDhQ7Ouo0QErNLOZgBTgdXpQbxUeL0G8XQZsYvCUPQ4YzhZ
+         cJGg==
+X-Gm-Message-State: AOAM530fhIEL3kUTfAwD812bzR72FtbpXaXaxhYk5UFLXxMRoUk1JcYm
+        AIVl2KcidowFJyJXZlm65tAjcoTrm3oMTEqXc1kNwQ==
+X-Google-Smtp-Source: ABdhPJzdNJs/yaP7/e0Ok6RA1nQ7eSYjB01hdhGvhZElvzf3xImzKee5uyaUgzfX2cFNO/XPNkKFDEdlcXooM37lnlQ=
+X-Received: by 2002:a17:90b:1e07:: with SMTP id pg7mr5702299pjb.93.1636072317543;
+ Thu, 04 Nov 2021 17:31:57 -0700 (PDT)
 MIME-Version: 1.0
-Received: by 2002:a05:7000:5ad0:0:0:0:0 with HTTP; Thu, 4 Nov 2021 13:11:05
- -0700 (PDT)
-Reply-To: martiniparker4@gmail.com
-From:   Hakim Al-Rashid <jamesfelix225@gmail.com>
-Date:   Thu, 4 Nov 2021 23:11:05 +0300
-Message-ID: <CAEUsHwMbbuN6A+wtLK9kALpXYXwbeNrOxko8gMwctRcOpZnE9A@mail.gmail.com>
-Subject: =?UTF-8?B?U3ZlaWtpLCBzYcWGxJNtxJNqcw==?=
-To:     undisclosed-recipients:;
+References: <20210827145819.16471-1-joao.m.martins@oracle.com> <20210827145819.16471-7-joao.m.martins@oracle.com>
+In-Reply-To: <20210827145819.16471-7-joao.m.martins@oracle.com>
+From:   Dan Williams <dan.j.williams@intel.com>
+Date:   Thu, 4 Nov 2021 17:31:47 -0700
+Message-ID: <CAPcyv4hPV9Vur1uvga7S4krQAmKZK5jrBrdOuK1AFHVE8Zk1DA@mail.gmail.com>
+Subject: Re: [PATCH v4 06/14] device-dax: ensure dev_dax->pgmap is valid for
+ dynamic devices
+To:     Joao Martins <joao.m.martins@oracle.com>
+Cc:     Linux MM <linux-mm@kvack.org>,
+        Vishal Verma <vishal.l.verma@intel.com>,
+        Dave Jiang <dave.jiang@intel.com>,
+        Naoya Horiguchi <naoya.horiguchi@nec.com>,
+        Matthew Wilcox <willy@infradead.org>,
+        Jason Gunthorpe <jgg@ziepe.ca>,
+        John Hubbard <jhubbard@nvidia.com>,
+        Jane Chu <jane.chu@oracle.com>,
+        Muchun Song <songmuchun@bytedance.com>,
+        Mike Kravetz <mike.kravetz@oracle.com>,
+        Andrew Morton <akpm@linux-foundation.org>,
+        Jonathan Corbet <corbet@lwn.net>,
+        Christoph Hellwig <hch@lst.de>,
+        Linux NVDIMM <nvdimm@lists.linux.dev>,
+        Linux Doc Mailing List <linux-doc@vger.kernel.org>
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Labdien, sa=C5=86=C4=93m=C4=93j
+On Fri, Aug 27, 2021 at 7:59 AM Joao Martins <joao.m.martins@oracle.com> wrote:
+>
+> Right now, only static dax regions have a valid @pgmap pointer in its
+> struct dev_dax. Dynamic dax case however, do not.
+>
+> In preparation for device-dax compound devmap support, make sure that
+> dev_dax pgmap field is set after it has been allocated and initialized.
+>
+> dynamic dax device have the @pgmap is allocated at probe() and it's
+> managed by devm (contrast to static dax region which a pgmap is provided
+> and dax core kfrees it). So in addition to ensure a valid @pgmap, clear
+> the pgmap when the dynamic dax device is released to avoid the same
+> pgmap ranges to be re-requested across multiple region device reconfigs.
+>
+> Suggested-by: Dan Williams <dan.j.williams@intel.com>
+> Signed-off-by: Joao Martins <joao.m.martins@oracle.com>
+> ---
+>  drivers/dax/bus.c    | 8 ++++++++
+>  drivers/dax/device.c | 2 ++
+>  2 files changed, 10 insertions(+)
+>
+> diff --git a/drivers/dax/bus.c b/drivers/dax/bus.c
+> index 6cc4da4c713d..49dbff9ba609 100644
+> --- a/drivers/dax/bus.c
+> +++ b/drivers/dax/bus.c
+> @@ -363,6 +363,14 @@ void kill_dev_dax(struct dev_dax *dev_dax)
+>
+>         kill_dax(dax_dev);
+>         unmap_mapping_range(inode->i_mapping, 0, 0, 1);
+> +
+> +       /*
+> +        * Dynamic dax region have the pgmap allocated via dev_kzalloc()
+> +        * and thus freed by devm. Clear the pgmap to not have stale pgmap
+> +        * ranges on probe() from previous reconfigurations of region devices.
+> +        */
+> +       if (!is_static(dev_dax->region))
+> +               dev_dax->pgmap = NULL;
+>  }
+>  EXPORT_SYMBOL_GPL(kill_dev_dax);
+>
+> diff --git a/drivers/dax/device.c b/drivers/dax/device.c
+> index 0b82159b3564..6e348b5f9d45 100644
+> --- a/drivers/dax/device.c
+> +++ b/drivers/dax/device.c
+> @@ -426,6 +426,8 @@ int dev_dax_probe(struct dev_dax *dev_dax)
+>         }
+>
+>         pgmap->type = MEMORY_DEVICE_GENERIC;
+> +       dev_dax->pgmap = pgmap;
 
-  Es esmu Hamids Abbass, Turcijas Vaqif Bank darbinieks. Es sazin=C4=81jos
-ar jums ar ieteikumu, un tiks nov=C4=93rt=C4=93ta j=C5=ABsu liel=C4=81k=C4=
-=81 interese. Tas
-attiecas uz miru=C5=A1u klientu, kur=C5=A1 2003. gad=C4=81 cieta autoav=C4=
-=81rij=C4=81 uz
-Stambulas =C5=A1osejas. Vi=C5=86=C5=A1 man bija uzticams klients. Pirms vi=
-=C5=86a n=C4=81ves
-manu klientu (36 000 000,00 USD) tur=C4=93ja apcietin=C4=81jum=C4=81 mana f=
-inan=C5=A1u
-iest=C4=81de =C5=A1eit, Turcij=C4=81, dokumenti, kas attiecas uz =C5=A1iem =
-dar=C4=ABjumiem,
-liecina, ka pras=C4=ABbas var iesniegt tikai vi=C5=86a tie=C5=A1ais =C4=A3i=
-menes loceklis.
-Diem=C5=BE=C4=93l vi=C5=86a n=C4=81ves br=C4=ABd=C4=AB vi=C5=86am nebija te=
-stamenta.
-    Visi centieni neatkl=C4=81ja nek=C4=81du saist=C4=ABbu ar k=C4=81du no =
-vi=C5=86a =C4=A3imenes
-locek=C4=BCiem. Ta=C4=8Du jaunais ES likums par
-mantojumiem/aizdevumiem/l=C4=ABdzek=C4=BCiem paredz termi=C5=86u, kur=C4=81=
- =C5=A1=C4=81dus kred=C4=ABtus
-var pie=C5=86emt. Finan=C5=A1u iest=C4=81de man lika par=C4=81d=C4=ABt tuv=
-=C4=81ko radinieku, kur=C5=A1
-piepras=C4=ABs l=C4=ABdzek=C4=BCus un uz aug=C5=A1u. Ja j=C5=ABs atsak=C4=
-=81ties atbild=C4=93t uz =C5=A1o
-ultim=C4=81tu, finansi=C4=81l=C4=81 situ=C4=81cija juridiski =C4=BCaus iest=
-=C4=81dei zi=C5=86ot par =C5=A1iem
-l=C4=ABdzek=C4=BCiem ES Centr=C4=81lajai bankai k=C4=81 nepiepras=C4=ABtiem=
- l=C4=ABdzek=C4=BCiem.
-    Es un mans kol=C4=93=C4=A3is esam rad=C4=ABju=C5=A1i visus nepiecie=C5=
-=A1amos nosac=C4=ABjumus
-=C5=A1o l=C4=ABdzek=C4=BCu atbr=C4=ABvo=C5=A1anai, un es pl=C4=81noju iepaz=
-=C4=ABstin=C4=81t j=C5=ABs ar =C5=A1o iesp=C4=93ju
-k=C4=81 finans=C4=93juma sa=C5=86=C4=93m=C4=93ju. L=C5=ABdzu, =C5=86emiet v=
-=C4=93r=C4=81, ka man ir likum=C4=ABgi
-sniegta visa nepiecie=C5=A1am=C4=81 inform=C4=81cija/dokumenti =C5=A1im fon=
-dam. L=C5=ABdzu,
-sniedziet man savas atsauksmes, nos=C5=ABtot atbildi uz =C5=A1o e-pasta adr=
-esi:
-mortgagealtegra@gmail.com
+So I think I'd rather see a bigger patch that replaces some of the
+implicit dev_dax->pgmap == NULL checks with explicit is_static()
+checks. Something like the following only compile and boot tested...
+Note the struct_size() change probably wants to be its own cleanup,
+and the EXPORT_SYMBOL_NS_GPL(..., DAX) probably wants to be its own
+patch converting over the entirety of drivers/dax/. Thoughts?
 
 
-Sveicieni.
-Hamids Abass
+diff --git a/drivers/dax/bus.c b/drivers/dax/bus.c
+index 6cc4da4c713d..67ab7e05b340 100644
+--- a/drivers/dax/bus.c
++++ b/drivers/dax/bus.c
+@@ -134,6 +134,12 @@ static bool is_static(struct dax_region *dax_region)
+        return (dax_region->res.flags & IORESOURCE_DAX_STATIC) != 0;
+ }
+
++bool static_dev_dax(struct dev_dax *dev_dax)
++{
++       return is_static(dev_dax->region);
++}
++EXPORT_SYMBOL_NS_GPL(static_dev_dax, DAX);
++
+ static u64 dev_dax_size(struct dev_dax *dev_dax)
+ {
+        u64 size = 0;
+@@ -363,6 +369,8 @@ void kill_dev_dax(struct dev_dax *dev_dax)
+
+        kill_dax(dax_dev);
+        unmap_mapping_range(inode->i_mapping, 0, 0, 1);
++       if (static_dev_dax(dev_dax))
++               dev_dax->pgmap = NULL;
+ }
+ EXPORT_SYMBOL_GPL(kill_dev_dax);
+
+diff --git a/drivers/dax/bus.h b/drivers/dax/bus.h
+index 1e946ad7780a..4acdfee7dd59 100644
+--- a/drivers/dax/bus.h
++++ b/drivers/dax/bus.h
+@@ -48,6 +48,7 @@ int __dax_driver_register(struct dax_device_driver *dax_drv,
+        __dax_driver_register(driver, THIS_MODULE, KBUILD_MODNAME)
+ void dax_driver_unregister(struct dax_device_driver *dax_drv);
+ void kill_dev_dax(struct dev_dax *dev_dax);
++bool static_dev_dax(struct dev_dax *dev_dax);
+
+ #if IS_ENABLED(CONFIG_DEV_DAX_PMEM_COMPAT)
+ int dev_dax_probe(struct dev_dax *dev_dax);
+diff --git a/drivers/dax/device.c b/drivers/dax/device.c
+index dd8222a42808..87507aff2b10 100644
+--- a/drivers/dax/device.c
++++ b/drivers/dax/device.c
+@@ -398,31 +398,43 @@ int dev_dax_probe(struct dev_dax *dev_dax)
+        void *addr;
+        int rc, i;
+
+-       pgmap = dev_dax->pgmap;
+-       if (dev_WARN_ONCE(dev, pgmap && dev_dax->nr_range > 1,
+-                       "static pgmap / multi-range device conflict\n"))
++       if (static_dev_dax(dev_dax) && dev_dax->nr_range > 1) {
++               dev_warn(dev, "static pgmap / multi-range device conflict\n");
+                return -EINVAL;
++       }
+
+-       if (!pgmap) {
+-               pgmap = devm_kzalloc(dev, sizeof(*pgmap) + sizeof(struct range)
+-                               * (dev_dax->nr_range - 1), GFP_KERNEL);
++       if (static_dev_dax(dev_dax)) {
++               pgmap = dev_dax->pgmap;
++       } else {
++               if (dev_dax->pgmap) {
++                       dev_warn(dev,
++                                "dynamic-dax with pre-populated page map!?\n");
++                       return -EINVAL;
++               }
++               pgmap = devm_kzalloc(
++                       dev, struct_size(pgmap, ranges, dev_dax->nr_range - 1),
++                       GFP_KERNEL);
+                if (!pgmap)
+                        return -ENOMEM;
+                pgmap->nr_range = dev_dax->nr_range;
++               dev_dax->pgmap = pgmap;
++               for (i = 0; i < dev_dax->nr_range; i++) {
++                       struct range *range = &dev_dax->ranges[i].range;
++
++                       pgmap->ranges[i] = *range;
++               }
+        }
+
+        for (i = 0; i < dev_dax->nr_range; i++) {
+                struct range *range = &dev_dax->ranges[i].range;
+
+-               if (!devm_request_mem_region(dev, range->start,
+-                                       range_len(range), dev_name(dev))) {
+-                       dev_warn(dev, "mapping%d: %#llx-%#llx could
+not reserve range\n",
+-                                       i, range->start, range->end);
+-                       return -EBUSY;
+-               }
+-               /* don't update the range for static pgmap */
+-               if (!dev_dax->pgmap)
+-                       pgmap->ranges[i] = *range;
++               if (devm_request_mem_region(dev, range->start, range_len(range),
++                                           dev_name(dev)))
++                       continue;
++               dev_warn(dev,
++                        "mapping%d: %#llx-%#llx could not reserve range\n", i,
++                        range->start, range->end);
++               return -EBUSY;
+        }
+
+        pgmap->type = MEMORY_DEVICE_GENERIC;
+@@ -473,3 +485,4 @@ MODULE_LICENSE("GPL v2");
+ module_init(dax_init);
+ module_exit(dax_exit);
+ MODULE_ALIAS_DAX_DEVICE(0);
++MODULE_IMPORT_NS(DAX);
 
 
 
-
-L=C5=ABdzu, =C5=86emiet v=C4=93r=C4=81: uz atsauksm=C4=93m tiks atbild=C4=
-=93ts darba laik=C4=81, un j=C5=ABs
-esat r=C5=ABp=C4=ABgi izv=C4=93l=C4=93ts, lai izmantotu =C5=A1o privil=C4=
-=93=C4=A3iju/iesp=C4=93ju
+> +
+>         addr = devm_memremap_pages(dev, pgmap);
+>         if (IS_ERR(addr))
+>                 return PTR_ERR(addr);
+> --
+> 2.17.1
+>
