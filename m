@@ -2,87 +2,53 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 7201B447BAC
-	for <lists+linux-doc@lfdr.de>; Mon,  8 Nov 2021 09:17:30 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 129DF447C34
+	for <lists+linux-doc@lfdr.de>; Mon,  8 Nov 2021 09:46:19 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S237857AbhKHIUN (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 8 Nov 2021 03:20:13 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:40606 "EHLO
-        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S234561AbhKHIUM (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Mon, 8 Nov 2021 03:20:12 -0500
-Received: from mail-yb1-xb32.google.com (mail-yb1-xb32.google.com [IPv6:2607:f8b0:4864:20::b32])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id D6EA3C061570
-        for <linux-doc@vger.kernel.org>; Mon,  8 Nov 2021 00:17:28 -0800 (PST)
-Received: by mail-yb1-xb32.google.com with SMTP id v64so41345330ybi.5
-        for <linux-doc@vger.kernel.org>; Mon, 08 Nov 2021 00:17:28 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=bytedance-com.20210112.gappssmtp.com; s=20210112;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc;
-        bh=e5oR4Pjfl2f9V3U4NznnV9nmWC35FYhUexm9JqQPUc8=;
-        b=1l41nRhnO7I1eGxP/c68wJ5DBQ0XGJ8lN5DMwqlVc/7TN/zU+ltPwjk8SMVijZZr43
-         eAte3DcmoUJbVu6tTD67QKQxITk86RNdt1g3Iu9FVzXm1igJcyVg1zFefew5YtEvohju
-         DRw9pjf6fuoYB6rSQ8M9J1F9y0fyTeFEz2ORBG/PWuvC0w/4zGUxJhEHmbrSGpllYJrZ
-         GCa7cRNQl3xJL+Wissy/mStNpQzol9QX+pnfBbfBQFW7P64oOvBsmAMWOw7sNgFIt9lI
-         Ht+HHwOot42mQ0ttkylEG/2dYgeGM8ch28daWUmtADUH/XOC+9ngAAySIn3u9tAGZOms
-         lH0w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc;
-        bh=e5oR4Pjfl2f9V3U4NznnV9nmWC35FYhUexm9JqQPUc8=;
-        b=fGZcBM86/p7GR904wi8t5MwFfINi8mCvKrrHswe2B4f5foc0EGGjPCQvHS0lD7dx/s
-         OOcbvLrSD2hdwaOwYo8Zp6lMxmQSjYi9GY9OK3hcZ0tE4w5+sp9NjcZ/qSoB7g4E1B7r
-         kYOCn9gKdCkcbG/Ii1MgqLTPlGezIWhaUi5umvHiNqruSG30qJE6AwUn8+qVP5zPr3DQ
-         aca1wsMy6csYbhup1LhIqkavLx1hvdFP4Wm1qP50t3h7aXzp2N8yaeoHDn8Mbqghn1gh
-         eP4elE0h/Rx8c8Cgg1KzDmjnTmwPVhSrDUfL3hpSW4acSL7M38TUgBnwQJAsXOm0HmMZ
-         lQIg==
-X-Gm-Message-State: AOAM531DfnTHqdGALyQrJJbEuqD/SWguiCFw3eZUpSafh/uoXYUyxz0R
-        n+MWymZCEhs4k67wK3o4OTx43jvYbp87h4fTy8zdIQ==
-X-Google-Smtp-Source: ABdhPJwmhfFlfIbBhUPOG+fkwXvAiAmkbEzb2MCS5TsfMgmxfcPioM+5zjlOaUdX46bcUTxs4a1OEJUOaxjqDID9e70=
-X-Received: by 2002:a05:6902:1342:: with SMTP id g2mr74674633ybu.419.1636359448098;
- Mon, 08 Nov 2021 00:17:28 -0800 (PST)
+        id S229568AbhKHItB (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 8 Nov 2021 03:49:01 -0500
+Received: from mail.widealism.pl ([54.37.225.213]:42850 "EHLO
+        mail.widealism.pl" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S231976AbhKHItB (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Mon, 8 Nov 2021 03:49:01 -0500
+X-Greylist: delayed 301 seconds by postgrey-1.27 at vger.kernel.org; Mon, 08 Nov 2021 03:49:00 EST
+Received: by mail.widealism.pl (Postfix, from userid 1002)
+        id EAC98A1FC2; Mon,  8 Nov 2021 08:41:11 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=widealism.pl; s=mail;
+        t=1636360873; bh=bqoy2af4nNqJWeTGDKLL/P5JaMXiWzeLCDaV12Cv6Qs=;
+        h=Date:From:To:Subject:From;
+        b=ooJFLeIOAxMS36ebf3V/k9nSXmJMPqzo7jsd6Xql0pIAP7U/+gp7LgytSZoZr4MpV
+         trH0JVoj0byALiwOlzP/bOczsN5JJLIAwrnq5DCzNlhA3EusPzyfC0w4XIxZM5Y9Jd
+         53ldx8uGF+gBmUsvAbdohVJeHZJD1M9zdlMf1PVnxFOa0qm8OPWiYRWgQ7v9QmIBLE
+         bxuyHDnil0eelBh/JU4BGmk8RtbAQQdZ01g5e82EElMG5255Bu0ju62zjQ93aLKoPA
+         swIG24OBsITHbYsnFcAEbUSGRB63q6yJTGxANFOcGIWCOrtXRvIi7rnojnYO2E+I38
+         sKRuE/YX9wzrQ==
+Received: by mail.widealism.pl for <linux-doc@vger.kernel.org>; Mon,  8 Nov 2021 08:41:09 GMT
+Message-ID: <20211108074500-0.1.2r.2nl9.0.mts9icw070@widealism.pl>
+Date:   Mon,  8 Nov 2021 08:41:09 GMT
+From:   =?UTF-8?Q? "Miko=C5=82aj_Lewandowski" ?= 
+        <mikolaj.lewandowski@widealism.pl>
+To:     <linux-doc@vger.kernel.org>
+Subject: Nowe stawki dla Fotowoltaiki
+X-Mailer: mail.widealism.pl
 MIME-Version: 1.0
-References: <20211101031651.75851-1-songmuchun@bytedance.com>
-In-Reply-To: <20211101031651.75851-1-songmuchun@bytedance.com>
-From:   Muchun Song <songmuchun@bytedance.com>
-Date:   Mon, 8 Nov 2021 16:16:50 +0800
-Message-ID: <CAMZfGtUeL45=WG3ceaZ_tALMGZTLtuD9jbfKEzeQv270OnaLYQ@mail.gmail.com>
-Subject: Re: [PATCH v7 0/5] Free the 2nd vmemmap page associated with each
- HugeTLB page
-To:     Mike Kravetz <mike.kravetz@oracle.com>,
-        Andrew Morton <akpm@linux-foundation.org>,
-        Oscar Salvador <osalvador@suse.de>,
-        Michal Hocko <mhocko@suse.com>,
-        David Hildenbrand <david@redhat.com>,
-        Jonathan Corbet <corbet@lwn.net>,
-        Matthew Wilcox <willy@infradead.org>
-Cc:     Xiongchun duan <duanxiongchun@bytedance.com>,
-        fam.zheng@bytedance.com, Muchun Song <smuchun@gmail.com>,
-        Qi Zheng <zhengqi.arch@bytedance.com>,
-        linux-doc@vger.kernel.org, LKML <linux-kernel@vger.kernel.org>,
-        Linux Memory Management List <linux-mm@kvack.org>,
-        "Song Bao Hua (Barry Song)" <song.bao.hua@hisilicon.com>,
-        Barry Song <21cnbao@gmail.com>,
-        Chen Huang <chenhuang5@huawei.com>,
-        "Bodeddula, Balasubramaniam" <bodeddub@amazon.com>
 Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Mon, Nov 1, 2021 at 11:22 AM Muchun Song <songmuchun@bytedance.com> wrote:
->
-> This series can minimize the overhead of struct page for 2MB HugeTLB pages
-> significantly. It further reduces the overhead of struct page by 12.5% for
-> a 2MB HugeTLB compared to the previous approach, which means 2GB per 1TB
-> HugeTLB. It is a nice gain. Comments and reviews are welcome. Thanks.
->
+Dzie=C5=84 dobry,
 
-Hi,
+w zwi=C4=85zku z podniesieniem ceny zakupu energii, kt=C3=B3ra b=C4=99dzi=
+e zdecydowanie wy=C5=BCsza ni=C5=BC cena sprzeda=C5=BCy nadwy=C5=BCek pr=C4=
+=85du, warto rozwa=C5=BCy=C4=87 instalacj=C4=99 fotowoltaiki jeszcze prze=
+d ko=C5=84cem tego roku - to jedyny spos=C3=B3b na zachowanie mo=C5=BCliw=
+o=C5=9Bci korzystania ze starych zasad.
 
-Ping guys. Does anyone have any comments or suggestions
-on this series?
+Czy chcieliby Pa=C5=84stwo zapozna=C4=87 si=C4=99 z mo=C5=BCliwo=C5=9Bcia=
+mi inwestycji w PV dopasowanymi do Pa=C5=84stwa obiektu?
 
-Thanks.
+
+Pozdrawiam,
+Miko=C5=82aj Lewandowski
