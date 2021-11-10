@@ -2,78 +2,98 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id A7DA044C1AD
-	for <lists+linux-doc@lfdr.de>; Wed, 10 Nov 2021 13:56:32 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 10B9E44C1B8
+	for <lists+linux-doc@lfdr.de>; Wed, 10 Nov 2021 13:58:44 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S231791AbhKJM7S (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 10 Nov 2021 07:59:18 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:49174 "EHLO
+        id S231613AbhKJNBa (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 10 Nov 2021 08:01:30 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:49714 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S231806AbhKJM7S (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Wed, 10 Nov 2021 07:59:18 -0500
-Received: from mail-pj1-x1034.google.com (mail-pj1-x1034.google.com [IPv6:2607:f8b0:4864:20::1034])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id B32DFC061205
-        for <linux-doc@vger.kernel.org>; Wed, 10 Nov 2021 04:56:30 -0800 (PST)
-Received: by mail-pj1-x1034.google.com with SMTP id o6-20020a17090a0a0600b001a64b9a11aeso1621293pjo.3
-        for <linux-doc@vger.kernel.org>; Wed, 10 Nov 2021 04:56:30 -0800 (PST)
+        with ESMTP id S231503AbhKJNB3 (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Wed, 10 Nov 2021 08:01:29 -0500
+Received: from mail-pf1-x42e.google.com (mail-pf1-x42e.google.com [IPv6:2607:f8b0:4864:20::42e])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 7B262C061766
+        for <linux-doc@vger.kernel.org>; Wed, 10 Nov 2021 04:58:42 -0800 (PST)
+Received: by mail-pf1-x42e.google.com with SMTP id m14so2574463pfc.9
+        for <linux-doc@vger.kernel.org>; Wed, 10 Nov 2021 04:58:42 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=mime-version:reply-to:from:date:message-id:subject:to
-         :content-transfer-encoding;
-        bh=5JMhK9pOqseAjHRtHcU/HG4i5NuvupLcjaClPwT4ItM=;
-        b=Pum5JsOTnOfGNV+xgAhN80rpC2j3EvUsw3mErOlL9JWnYPSqZQUv473JCV2A/AY+ss
-         iHnBDCaPI0TiY2OGmmI2Ealk9WITDFX8ZMGRX9uoBndYSpg6w7U+BeG2iRN5Ek3Z/rDf
-         Xbfo4opNZF38AbtEp8kuTeKNf1ticFbqXgxv2JOsLZggeO1UeYvsT0dI4BAz6XWSk7zQ
-         uhmOgvinoeZQBKe2ZqfBSEsLN0XFlqNuGFwuDp+2mC2/SLOoaqPlZid3XqJLQuR7AeEc
-         /wKPq2IpfpMc5XrF0wxDwlNn3fNyU8EztFDpg7vfyn+iTg54OLf/BQjWu8hjDl1AsK0T
-         mIwQ==
+        d=bytedance-com.20210112.gappssmtp.com; s=20210112;
+        h=message-id:date:mime-version:user-agent:subject:to:cc:references
+         :from:in-reply-to:content-transfer-encoding;
+        bh=bYJCDmXhbZdwQcqQV6p0qfHrLLCZuMTTGmF8KIZ2ebg=;
+        b=0Qj3WziVPa6/9jW1dnkM0js30+i48RZdsL8Xr/KA/YP6GLcSd+4iDZ8d/hdjQ+QcSU
+         M8tFdlfYx5DT9eFjBgBgX7wvdySyiUT9yMOii2gUfVN7Vv786Jo8n1ZQKGoQfLnrfzJn
+         kMgCMuI8xZSKKQlHTzYYmwz4+QugGvdqrpEtRr5n8XEjx8U8wfFrwqOfsoMyKoTGZEPV
+         XRghj6fVtEnWuGAMGy4rAqXylpKvDJsxJFvTlcRDQX/x3u17FhglF+aADpjYSkShkleA
+         n8FYpYmuiyTdm9uJcgJVQIbN9ugR1fXEb0+HnKgzmL8CrG3jk/y35V85ws19b9PJfZTg
+         V8lg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=x-gm-message-state:mime-version:reply-to:from:date:message-id
-         :subject:to:content-transfer-encoding;
-        bh=5JMhK9pOqseAjHRtHcU/HG4i5NuvupLcjaClPwT4ItM=;
-        b=XG2f/vjMpWY7qfiVR+GLr5EdejktjPtKZN6LrNloh+YEXpjFwPOzv1PPjFM1zr/EWm
-         3O19BPm3Q1pKQz0nEB6QrrjLCSfqKq6YVGRaVG785g+wRDospnHiXLl6MnXHJ3jvJ6an
-         24i/MKh5KmsEWPAs5OuCvtiVE11ObO2dJUi7JSy6YJ1+nb6L2FEGaG0k4EmlNcOzYxxB
-         V5Pc5RmE1U00OEp5SUzlPi1yP2SFvUC6sVOAHyONdGNSwiB/D0zFusgX6nL/31AVE7bt
-         QdtZfS07SZzCwTBeb6xTWyTRmq+p6BvOxTzqu2kr6UGzza9u4sUs9w+XeHHdQEqxhaOt
-         K6LA==
-X-Gm-Message-State: AOAM532jcSt9tny63CGFsEy/xnrIjUdDhdDsBaKZSzjvirMODFvrCVW3
-        FcAvp1cbsNDsnP0b0IooyyLPS6FnXWv+nNI4ZYY=
-X-Google-Smtp-Source: ABdhPJyfMeJ8TbZWyUWooM7VSgMpT6AI9TJ1fw5zNCdI6ykY7qi0/puTRbtJCPnrzz70rKEqF4MsHMhQ13Pi/dbjGHw=
-X-Received: by 2002:a17:90a:9bc1:: with SMTP id b1mr16632290pjw.49.1636548989889;
- Wed, 10 Nov 2021 04:56:29 -0800 (PST)
+        h=x-gm-message-state:message-id:date:mime-version:user-agent:subject
+         :to:cc:references:from:in-reply-to:content-transfer-encoding;
+        bh=bYJCDmXhbZdwQcqQV6p0qfHrLLCZuMTTGmF8KIZ2ebg=;
+        b=qC0dVQ2kp/ax0+kEbgAG82gbO4KfM4uInnu4PQzLlKf36CB877WcJKhDpmRFp2tMBw
+         dynV38ZH7wIXP1765RRru9EXB7h3tbaDdvhUDmbGuFAfNSC8cFPsyXyrO96LpPULCgyf
+         YPgd1m1E96qPZnfqhB0wPHhRz+xf6+GlgcGEzl5CGun2CnWS+CwAC0SKonIeu/Uh+HJy
+         4UgB0x6GQl6JabHENejgstlgCYfXgPcSjroixqxvfpe50843WkHwRe98XSYVh6Dche3u
+         LfbhEQwbTGXJbjyu8hI8XWGbrrCDAKy/Ut6PpmHNyDBIoOI0ycMu03rpBbLEFNNB850Z
+         2PoA==
+X-Gm-Message-State: AOAM532Wgcv+Vuh5nHh+Qpv+w0R3LdoxQHMIPFDEAr3Ta4boC7LpOZyG
+        TQ/OK0ZgFzX/6PuCiIyeCQYbOA==
+X-Google-Smtp-Source: ABdhPJwbusrzbHVv2OyW13KKKsVbVhQcdBFFWjiyo9LwLOH9xHto26AgH0kSAvdXoNk3nAGUeFZf9A==
+X-Received: by 2002:a05:6a00:844:b0:49f:dbe4:b911 with SMTP id q4-20020a056a00084400b0049fdbe4b911mr16603220pfk.6.1636549122022;
+        Wed, 10 Nov 2021 04:58:42 -0800 (PST)
+Received: from [10.254.189.129] ([139.177.225.251])
+        by smtp.gmail.com with ESMTPSA id t4sm23081243pfj.166.2021.11.10.04.58.37
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Wed, 10 Nov 2021 04:58:41 -0800 (PST)
+Message-ID: <18fa08bf-847b-1c47-10ee-01c92caeb0cc@bytedance.com>
+Date:   Wed, 10 Nov 2021 20:58:35 +0800
 MIME-Version: 1.0
-Received: by 2002:a05:6a10:ce97:0:0:0:0 with HTTP; Wed, 10 Nov 2021 04:56:28
- -0800 (PST)
-Reply-To: ayishagddafio@mail.ru
-From:   AISHA GADDAFI <aishagddafi6800@gmail.com>
-Date:   Wed, 10 Nov 2021 04:56:28 -0800
-Message-ID: <CAFdvC6PbM-N8SmusirQ-s_mrUrn4bXPDof4J9VwnUq2dqYsd+Q@mail.gmail.com>
-Subject: Liebster Freund,?
-To:     undisclosed-recipients:;
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:91.0)
+ Gecko/20100101 Thunderbird/91.3.0
+Subject: Re: [PATCH v3 02/15] mm: introduce is_huge_pmd() helper
+To:     Jason Gunthorpe <jgg@nvidia.com>
+Cc:     akpm@linux-foundation.org, tglx@linutronix.de,
+        kirill.shutemov@linux.intel.com, mika.penttila@nextfour.com,
+        david@redhat.com, linux-doc@vger.kernel.org,
+        linux-kernel@vger.kernel.org, linux-mm@kvack.org,
+        songmuchun@bytedance.com, zhouchengming@bytedance.com
+References: <20211110084057.27676-1-zhengqi.arch@bytedance.com>
+ <20211110084057.27676-3-zhengqi.arch@bytedance.com>
+ <20211110122945.GO1740502@nvidia.com>
+From:   Qi Zheng <zhengqi.arch@bytedance.com>
+In-Reply-To: <20211110122945.GO1740502@nvidia.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
---=20
-Liebster Freund,
 
-Im Namen Gottes, des gn=C3=A4digsten, barmherzigsten.
+On 11/10/21 8:29 PM, Jason Gunthorpe wrote:
+> On Wed, Nov 10, 2021 at 04:40:44PM +0800, Qi Zheng wrote:
+>> Currently we have some times the following judgments repeated in the
+>> code:
+>>
+>> 	is_swap_pmd(*pmd) || pmd_trans_huge(*pmd) || pmd_devmap(*pmd)
+>>
+>> which is to determine whether the *pmd is a huge pmd, so introduce
+>> is_huge_pmd() helper to deduplicate them.
+> 
+> Isn't this pmd_leaf() ?
 
-Friede sei mit dir und Barmherzigkeit sei mit dir und Segen sei mit dir.
-Ich habe die Summe von 27,5 Millionen USD f=C3=BCr Investitionen, ich
-interessiere mich f=C3=BCr Sie f=C3=BCr die Unterst=C3=BCtzung von
-Investitionsprojekten in Ihrem Land. Mein Name ist Aisha Gaddafi und
-lebe derzeit im Oman, ich bin eine Witwe und alleinerziehende Mutter
-mit drei Kindern, die einzige leibliche Tochter des verstorbenen
-libyschen Pr=C3=A4sidenten (dem verstorbenen Oberst Muammar Gaddafi) und
-stehe derzeit unter politischem Asylschutz der omanischen Regierung.
+Currently, the implementation of pmd_leaf() does not include
+pmd_devmap() checks. But considering the semantics of pmd_leaf(),
+the "devmap" pmd should also belong to "leaf" pmd. Maybe we should
+modify pmd_leaf() to make it more semantically consistent?
 
-Bitte antworten Sie dringend f=C3=BCr weitere Details.
+By the way, something went wrong when sending this patchset, and
+I have re-sent the complete patchset, please comment over there.
 
-meine E-Mail-Adresse unten: ayishagddafio@mail.ru
-Vielen Dank
-Mit freundlichen Gr=C3=BC=C3=9Fen Aisha
+Thanks,
+Qi
+
+> 
+> Jason
+> 
