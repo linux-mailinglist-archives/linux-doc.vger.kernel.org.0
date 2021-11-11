@@ -2,59 +2,114 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 0E9B044D135
-	for <lists+linux-doc@lfdr.de>; Thu, 11 Nov 2021 06:07:09 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id F05D344D1B7
+	for <lists+linux-doc@lfdr.de>; Thu, 11 Nov 2021 06:40:21 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S231479AbhKKFJy convert rfc822-to-8bit (ORCPT
-        <rfc822;lists+linux-doc@lfdr.de>); Thu, 11 Nov 2021 00:09:54 -0500
-Received: from host-200-90-157-143.netpc.ec ([200.90.157.143]:53116 "EHLO
-        mail.gruponetpc.com" rhost-flags-OK-FAIL-OK-OK) by vger.kernel.org
-        with ESMTP id S230339AbhKKFJx (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Thu, 11 Nov 2021 00:09:53 -0500
-Received: from localhost (localhost [127.0.0.1])
-        by mail.gruponetpc.com (Postfix) with ESMTP id D1863E10103;
-        Wed, 10 Nov 2021 08:37:32 -0500 (-05)
-Received: from mail.gruponetpc.com ([127.0.0.1])
-        by localhost (mail.gruponetpc.com [127.0.0.1]) (amavisd-new, port 10032)
-        with ESMTP id WjNEITAaZKIO; Wed, 10 Nov 2021 08:37:32 -0500 (-05)
-Received: from localhost (localhost [127.0.0.1])
-        by mail.gruponetpc.com (Postfix) with ESMTP id 3B1377EC341;
-        Tue,  9 Nov 2021 22:21:57 -0500 (-05)
-X-Virus-Scanned: amavisd-new at gruponetpc.com
-Received: from mail.gruponetpc.com ([127.0.0.1])
-        by localhost (mail.gruponetpc.com [127.0.0.1]) (amavisd-new, port 10026)
-        with ESMTP id KuaR5x8DaMpo; Tue,  9 Nov 2021 22:21:56 -0500 (-05)
-Received: from [192.168.0.108] (unknown [93.182.105.113])
-        by mail.gruponetpc.com (Postfix) with ESMTPSA id EE63E8667B7;
-        Tue,  9 Nov 2021 15:25:14 -0500 (-05)
-Content-Type: text/plain; charset="utf-8"
+        id S229629AbhKKFnJ (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 11 Nov 2021 00:43:09 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:50376 "EHLO
+        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S229533AbhKKFnI (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Thu, 11 Nov 2021 00:43:08 -0500
+Received: from mail-pl1-x633.google.com (mail-pl1-x633.google.com [IPv6:2607:f8b0:4864:20::633])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 43586C061766
+        for <linux-doc@vger.kernel.org>; Wed, 10 Nov 2021 21:40:20 -0800 (PST)
+Received: by mail-pl1-x633.google.com with SMTP id y7so5009212plp.0
+        for <linux-doc@vger.kernel.org>; Wed, 10 Nov 2021 21:40:20 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=bytedance-com.20210112.gappssmtp.com; s=20210112;
+        h=message-id:date:mime-version:user-agent:subject:to:cc:references
+         :from:in-reply-to:content-transfer-encoding;
+        bh=meyjLeNOTUfo/ee3VzQRg1KbYxNfJ6VkJ/+ojTjTB4k=;
+        b=0q6iXr1gWfsI3+U1OwmmNzhJdspbuGX62qVda9lzJFerbSiIIpXwFWpmdDVHCbKTxz
+         xfa45O984MSggxxd1HewlseOG6eX2t3ilVMOzK0UdMf5F9IDPoRZZx/+LuMI1GwlXn19
+         2CLZZMKWfCONJ5ELn/9A7i3YcsPBpMwSy/MiR37wyV/lLOKWIhHRNAa0F8BAeQkQ3E2w
+         1VFXUl0Nb2jTQp8RijvBVe4fKfvsTA57xHh6fc7WDOnUi34iBT0B87jpgVDULzYqf6/a
+         SQVD6wS+Stvq7I1Ce1X97Y/DCnXBRjeVKczrhIV73oZCGWf1rPOh7x9yDIakERBXVf/y
+         xHaA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:message-id:date:mime-version:user-agent:subject
+         :to:cc:references:from:in-reply-to:content-transfer-encoding;
+        bh=meyjLeNOTUfo/ee3VzQRg1KbYxNfJ6VkJ/+ojTjTB4k=;
+        b=s80HQLTnh8iS9/g8tJlv49Oi6dO+SfOoBJEUMjEd7Lr1vMO/a+kff4q7JyG04y4hdd
+         yw8OZ8vED6f3BFa2enMGl/e1O2s03KstJ7G63Kd8eZYhCztMZeGvGLzW5SD0QDF9Of4g
+         1Ez3g4kloX791dvzlPRVuCdwct5+0LJV7r3nruk0c/JoE2Rm3ja4xwW1/TWNmqBhGV15
+         EsSDGXuMq5+dXfE140iGSi8a0QbELIT8OxRBv2+3DJ2Bt+o+B3GXlvbUuxqHmHxpjVQH
+         PbLBxypH5NRZFXaoQ0wYQPYF6pdFe0cIDhWtk8ws8vh3nxQMtIJkNjJRZd75Q6puOb+F
+         xQ1Q==
+X-Gm-Message-State: AOAM532YJM5/lf9Dc6aOYjjIth/IKwzGRqn3O4xox8dW123xvMMAX8zk
+        yg+0E9+Lof14NgpgyqrlFVoj8w==
+X-Google-Smtp-Source: ABdhPJwgrx/NnYB9a213ApL25hip5UQURu1AsnZb8zCu64ngyBsg/8QSfliZKaJvOKT2rhze5DC6Wg==
+X-Received: by 2002:a17:902:c943:b0:142:1758:8ee7 with SMTP id i3-20020a170902c94300b0014217588ee7mr4920255pla.58.1636609219858;
+        Wed, 10 Nov 2021 21:40:19 -0800 (PST)
+Received: from [10.254.173.217] ([139.177.225.248])
+        by smtp.gmail.com with ESMTPSA id bt2sm7134464pjb.33.2021.11.10.21.40.14
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Wed, 10 Nov 2021 21:40:19 -0800 (PST)
+Message-ID: <9e630c7a-8c29-3a05-5056-a045e11c7949@bytedance.com>
+Date:   Thu, 11 Nov 2021 13:40:11 +0800
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8BIT
-Content-Description: Mail message body
-Subject: donation
-To:     Recipients <ecouso@mail.gruponetpc.com>
-From:   ecouso@mail.gruponetpc.com
-Date:   Tue, 09 Nov 2021 20:24:41 +0000
-Reply-To: stefanopessina35@gmail.com
-Message-Id: <20211109202514.EE63E8667B7@mail.gruponetpc.com>
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:91.0)
+ Gecko/20100101 Thunderbird/91.3.0
+Subject: Re: [PATCH v3 14/15] Documentation: add document for pte_ref
+To:     Jonathan Corbet <corbet@lwn.net>, akpm@linux-foundation.org,
+        tglx@linutronix.de, kirill.shutemov@linux.intel.com,
+        mika.penttila@nextfour.com, david@redhat.com, jgg@nvidia.com
+Cc:     linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
+        linux-mm@kvack.org, songmuchun@bytedance.com,
+        zhouchengming@bytedance.com
+References: <20211110105428.32458-1-zhengqi.arch@bytedance.com>
+ <20211110105428.32458-15-zhengqi.arch@bytedance.com>
+ <875yt0krcj.fsf@meer.lwn.net>
+From:   Qi Zheng <zhengqi.arch@bytedance.com>
+In-Reply-To: <875yt0krcj.fsf@meer.lwn.net>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
 
 
-Hallo,
+On 11/10/21 10:39 PM, Jonathan Corbet wrote:
+> Qi Zheng <zhengqi.arch@bytedance.com> writes:
+> 
+>> This commit adds document for pte_ref under `Documentation/vm/`.
+> 
+> Thanks for documenting this work!
+> 
+>> Signed-off-by: Qi Zheng <zhengqi.arch@bytedance.com>
+>> ---
+>>   Documentation/vm/pte_ref.rst | 212 +++++++++++++++++++++++++++++++++++++++++++
+>>   1 file changed, 212 insertions(+)
+>>   create mode 100644 Documentation/vm/pte_ref.rst
+> 
+> When you add a new RST file, you also need to add it to the associated
+> index.rst file or it won't be included in the docs build.  Instead,
+> you'll get the "not included in any toctree" warning that you surely saw
+> when you tested the docs build with this file :)
 
-Ich bin STEFANO PESSINA. Ich bin ein italienisch-monegassischer Milliardär und stellvertretender Vorsitzender, Chief Executive Officer (CEO) und größter Einzelaktionär der Walgreens Boots Alliance. Au   fgrund dieser aktuellen Situation (Corona-Virus), die sich auf der ganzen Welt ausbreitet, spenden ich selbst und andere 19 italienische Milliardäre mehr als 45 Millionen US-Dollar, um das Coronavirus in Italien zu bekämpfen. Ich habe auch zugesagt, 1.500.000,00 € an Einzelpersonen, Kirchen und Waisenhäuser usw. zu spenden. Ich habe mich entschieden, Ihnen 1.500.000,00 € zu spenden, da Ihre E-Mail-Adresse zu den glücklichen Gewinnern gehört. Wenn Sie an meiner Spende interessiert sind, kontaktieren Sie mich für weitere Informationen. Du kannst auch über den untenstehenden Link mehr über mich lesen
+OK, I will add it to the associated index.rst in the next version.
 
-https://en.wikipedia.org/wiki/Stefano_Pessina
+> 
+>> diff --git a/Documentation/vm/pte_ref.rst b/Documentation/vm/pte_ref.rst
+>> new file mode 100644
+>> index 000000000000..c5323a263464
+>> --- /dev/null
+>> +++ b/Documentation/vm/pte_ref.rst
+>> @@ -0,0 +1,212 @@
+>> +.. _pte_ref:
+> 
+> Do you need this label anywhere?  If not, I'd leave it out.
 
-Herzlicher Gruss
-Stellvertretender Vorsitzender und Geschäftsführer,
-Walgreens Boots-Allianz.
-Stefano Pessina
+I will remove this label in the next version.
 
-E-Mail: stefanopessina35@gmail.com
+Thanks,
+Qi
 
-
-
+> 
+> Thanks,
+> 
+> jon
+> 
