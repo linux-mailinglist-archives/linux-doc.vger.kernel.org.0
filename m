@@ -2,25 +2,25 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id C868F45186E
-	for <lists+linux-doc@lfdr.de>; Mon, 15 Nov 2021 23:57:18 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 1877B45163A
+	for <lists+linux-doc@lfdr.de>; Mon, 15 Nov 2021 22:14:59 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S242506AbhKOXAB (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 15 Nov 2021 18:00:01 -0500
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124]:29607 "EHLO
+        id S1345398AbhKOVRo (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 15 Nov 2021 16:17:44 -0500
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124]:52413 "EHLO
         us-smtp-delivery-124.mimecast.com" rhost-flags-OK-OK-OK-OK)
-        by vger.kernel.org with ESMTP id S1345357AbhKOW6A (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Mon, 15 Nov 2021 17:58:00 -0500
+        by vger.kernel.org with ESMTP id S1348955AbhKOVNe (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Mon, 15 Nov 2021 16:13:34 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-        s=mimecast20190719; t=1637016903;
+        s=mimecast20190719; t=1637010636;
         h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
          to:to:cc:cc:mime-version:mime-version:content-type:content-type:
          content-transfer-encoding:content-transfer-encoding:
          in-reply-to:in-reply-to:references:references;
         bh=s8/d0X/G9wWHnrD6ZbbOML+JYstcWxNRHEvKNsKGlKA=;
-        b=jP++f2tPKsEiqPC6eJoWZjMCzYSaeh9pucjpj/n4X4z8y/7qxvjVyAPI+Y+o4vLLUst8JE
-        KR+2i2B0/qJ40wlC55chZXx12mYGaG1u0CwJnWVIW6CcTny3Nj5he76wV8pbsSIy2yQ+bT
-        MyqItU90gJP+8Z2KHn6ndvixh+zEKF0=
+        b=GjbwTX5pMsOC0fnDiBRKsz/EX+izITjQW86nryb9xnMVaTrU0WH9WlQTxglPuUZEakhDBn
+        GlgUMLdg7bzzexiF8RgSEtDUczOkE/tvfPce2sqkiYsHgMHNhiQa3e+/+oOYr3FoTRfXvr
+        +Bhl0kAL4Qeq0QOKRl2XAHipknSFCK8=
 Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
  [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
  us-mta-23-dtnOO5I1Mm2H_BZ8ZHwZyA-1; Mon, 15 Nov 2021 16:10:35 -0500
