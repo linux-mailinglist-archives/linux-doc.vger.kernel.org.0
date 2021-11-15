@@ -2,119 +2,260 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 76098451DC7
-	for <lists+linux-doc@lfdr.de>; Tue, 16 Nov 2021 01:31:36 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 47557451D5E
+	for <lists+linux-doc@lfdr.de>; Tue, 16 Nov 2021 01:26:28 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S232582AbhKPAeH (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 15 Nov 2021 19:34:07 -0500
-Received: from mail.kernel.org ([198.145.29.99]:45402 "EHLO mail.kernel.org"
-        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S1344826AbhKOTZe (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Mon, 15 Nov 2021 14:25:34 -0500
-Received: by mail.kernel.org (Postfix) with ESMTPSA id 1D4FF636D2;
-        Mon, 15 Nov 2021 19:05:02 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-        s=k20201202; t=1637003102;
-        bh=OxbA2Dy+guUtV/oxu3huaKUI54o5bkpBbR72qWRaAfQ=;
-        h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-        b=FxEl08qu4dUEMgEsJFpcX25p/KAprHCVG4O2xUjklk6MvshRaaVwAbSWxfPyA3ba3
-         G5+kXBoJGUkezo7WNhBgi7qQVqg29NVjmQ/iemHcndYQvpHT/o2OusJ6ufzGCTt+X3
-         COwh9q9xxmf2+gdOCzIjNRJdYEmTDEEmGYON1C6E7fpxnhNw1Y4p/lUjcPsdYh267J
-         C3X3PW3x+ePAkJZQrUJ7enxU3FrOy4YKGrdwtzow9e996b4sFxvokIygVh8H3+jh5G
-         +nw98sTQbGfTlWDj+RTeADtMTm/qxJwgZO1jIRN9zBcTRtzn63a8XeyX6Ju7SZR0oI
-         WB07kdDfXRzhA==
-Date:   Mon, 15 Nov 2021 11:05:00 -0800
-From:   Eric Biggers <ebiggers@kernel.org>
-To:     Roberto Sassu <roberto.sassu@huawei.com>
-Cc:     "tytso@mit.edu" <tytso@mit.edu>, "corbet@lwn.net" <corbet@lwn.net>,
-        "viro@zeniv.linux.org.uk" <viro@zeniv.linux.org.uk>,
-        "hughd@google.com" <hughd@google.com>,
-        "akpm@linux-foundation.org" <akpm@linux-foundation.org>,
-        "linux-fscrypt@vger.kernel.org" <linux-fscrypt@vger.kernel.org>,
-        "linux-doc@vger.kernel.org" <linux-doc@vger.kernel.org>,
-        "linux-fsdevel@vger.kernel.org" <linux-fsdevel@vger.kernel.org>,
-        "linux-mm@kvack.org" <linux-mm@kvack.org>,
-        "linux-integrity@vger.kernel.org" <linux-integrity@vger.kernel.org>,
-        "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>
-Subject: Re: [RFC][PATCH 5/5] shmem: Add fsverity support
-Message-ID: <YZKvXK+vX/we4GCD@gmail.com>
-References: <20211112124411.1948809-1-roberto.sassu@huawei.com>
- <20211112124411.1948809-6-roberto.sassu@huawei.com>
- <YY68iXKPWN8+rd+0@gmail.com>
- <6adb6da30b734213942f976745c456f6@huawei.com>
+        id S244119AbhKPA3U (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 15 Nov 2021 19:29:20 -0500
+Received: from smtp-out1.suse.de ([195.135.220.28]:46814 "EHLO
+        smtp-out1.suse.de" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1346560AbhKOTee (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Mon, 15 Nov 2021 14:34:34 -0500
+Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
+        (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+         key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
+        (No client certificate requested)
+        by smtp-out1.suse.de (Postfix) with ESMTPS id 1243E218D6;
+        Mon, 15 Nov 2021 19:31:24 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
+        t=1637004684; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+         mime-version:mime-version:content-type:content-type:
+         content-transfer-encoding:content-transfer-encoding:
+         in-reply-to:in-reply-to:references:references;
+        bh=b4ZiiwEnz5XGSlWeT8O+jkCefoPIbeg8p3rHgDHkvM8=;
+        b=hfo7k3ahAq+4WiayhhOAps8Zu5wAe5DwJIiHDlPpeCzNbkiWPbAOOnNXVL2YcbwxT3z+aT
+        8eO9nE9fZ/TfsPOuBb0fxmigq974glS7V22iBaPiyrHPEh5gmiV+m2TBjRM/BtzH8uwgqZ
+        IkmYD5pRuYyF6FOldCIXVATt7yLJuiM=
+Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
+        (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+         key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
+        (No client certificate requested)
+        by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id C18F613A90;
+        Mon, 15 Nov 2021 19:31:23 +0000 (UTC)
+Received: from dovecot-director2.suse.de ([192.168.254.65])
+        by imap2.suse-dmz.suse.de with ESMTPSA
+        id nwj7LYu1kmF3dwAAMHmgww
+        (envelope-from <mkoutny@suse.com>); Mon, 15 Nov 2021 19:31:23 +0000
+Date:   Mon, 15 Nov 2021 20:31:22 +0100
+From:   Michal =?iso-8859-1?Q?Koutn=FD?= <mkoutny@suse.com>
+To:     Waiman Long <longman@redhat.com>
+Cc:     Tejun Heo <tj@kernel.org>, Zefan Li <lizefan.x@bytedance.com>,
+        Johannes Weiner <hannes@cmpxchg.org>,
+        Jonathan Corbet <corbet@lwn.net>,
+        Shuah Khan <shuah@kernel.org>, cgroups@vger.kernel.org,
+        linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org,
+        linux-kselftest@vger.kernel.org,
+        Andrew Morton <akpm@linux-foundation.org>,
+        Roman Gushchin <guro@fb.com>, Phil Auld <pauld@redhat.com>,
+        Peter Zijlstra <peterz@infradead.org>,
+        Juri Lelli <juri.lelli@redhat.com>,
+        Frederic Weisbecker <frederic@kernel.org>,
+        Marcelo Tosatti <mtosatti@redhat.com>
+Subject: Re: [PATCH v8 5/6] cgroup/cpuset: Update description of
+ cpuset.cpus.partition in cgroup-v2.rst
+Message-ID: <20211115193122.GA16798@blackbody.suse.cz>
+References: <20211018143619.205065-1-longman@redhat.com>
+ <20211018143619.205065-6-longman@redhat.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
+Content-Type: text/plain; charset=utf-8
 Content-Disposition: inline
-In-Reply-To: <6adb6da30b734213942f976745c456f6@huawei.com>
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <20211018143619.205065-6-longman@redhat.com>
+User-Agent: Mutt/1.10.1 (2018-07-13)
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Mon, Nov 15, 2021 at 08:49:41AM +0000, Roberto Sassu wrote:
-> > From: Eric Biggers [mailto:ebiggers@kernel.org]
-> > Sent: Friday, November 12, 2021 8:12 PM
-> > On Fri, Nov 12, 2021 at 01:44:11PM +0100, Roberto Sassu wrote:
-> > > Make the necessary modifications to support fsverity in tmpfs.
-> > >
-> > > First, implement the fsverity operations (in a similar way of f2fs). These
-> > > operations make use of shmem_read_mapping_page() instead of
-> > > read_mapping_page() to handle the case where the page has been swapped
-> > out.
-> > > The fsverity descriptor is placed at the end of the file and its location
-> > > is stored in an xattr.
-> > >
-> > > Second, implement the ioctl operations to enable, measure and read fsverity
-> > > metadata.
-> > >
-> > > Lastly, add calls to fsverity functions, to ensure that fsverity-relevant
-> > > operations are checked and handled by fsverity (file open, attr set, inode
-> > > evict).
-> > >
-> > > Fsverity support can be enabled through the kernel configuration and
-> > > remains enabled by default for every tmpfs filesystem instantiated (there
-> > > should be no overhead, unless fsverity is enabled for a file).
-> > >
-> > > Signed-off-by: Roberto Sassu <roberto.sassu@huawei.com>
-> > 
-> > I don't see how this makes sense at all.  The point of fs-verity is to avoid
-> > having to hash the whole file when verifying it.  However, obviously the whole
-> > file still has to be hashed to build the Merkle tree in the first place.  That
-> > makes sense for a persistent filesystem where a file can be written once and
-> > verified many times.  I don't see how it makes sense for tmpfs, where files have
-> > to be re-created on every boot.  You might as well just hash the whole file.
-> 
-> The point of adding fsverity support for tmpfs was to being able to do
-> integrity enforcement with just one mechanism, given that I was
-> planning to do integrity verification with reference values loaded
-> to the kernel with DIGLIM [1].
-> 
-> With an LSM such as IPE [2], integrity verification would consist in
-> querying the fsverity digest with DIGLIM and allowing the operation
-> if the digest was found. With fsverity support in tmpfs, this can be
-> done from the very beginning of the boot process.
-> 
-> Using regular file digests would be also possible but this requires
-> loading with DIGLIM both fsverity and non-fsverity reference values.
-> It would also require two separate mechanisms for calculating
-> the file digest depending on the filesystem. It could be done, but
-> I thought it was easier to add support for fsverity in tmpfs.
-> 
-> > Also, you didn't implement actually verifying the data (by calling
-> > fsverity_verify_page()), so this patch doesn't really do anything anyway.
-> 
-> Yes, at the end I didn't add it. Probably the only place where
-> calling fsverity_verify_page() would make sense is when a page
-> is swapped in (assuming that the swap device is untrusted).
-> 
-> I tried to add a call in shmem_swapin_page() but fsverity complained
-> due to the fact that the page was already up to date, and also
-> rejected the page. I will check it better.
-> 
 
-It sounds like you really only care about calculating fs-verity file digests.
-That's just an algorithm for hashing a file, so it could just be implemented in
-generic code that operates on any file on any filesystem, like how IMA
-implemennts full file hashing for any file.  There isn't a need for any special
-filesystem support to do this.
+Hello.
 
-- Eric
+On Mon, Oct 18, 2021 at 10:36:18AM -0400, Waiman Long <longman@redhat.com> wrote:
+> +	When set to "isolated", the CPUs in that partition root will
+> +	be in an isolated state without any load balancing from the
+> +	scheduler.  Tasks in such a partition must be explicitly bound
+> +	to each individual CPU.
+
+This sounds reasonable but it seems to have some usability issues as was
+raised in another thread [1]. (I could only think of the workaround of
+single-cpu cgroup leaves + CLONE_INTO_CGROUP.)
+
+TL;DR Do whatever you find suitable but (re)consider sticking to the
+delegation principle (making hotplug and ancestor changes equal).
+
+Now to the constraints and partition setups. I think it's useful to have
+a model with which the implementation can be compared with.
+I tried to condense some "simple rules" from the descriptions you posted
+in v8 plus your response to my remarks in v7 [2]. These should only be
+the "validity conditions", not "transition conditions".
+
+## Validity conditions
+
+For simplification, there's a condition called 'degraded' that tells
+whether a cpuset can host tasks (with the given config) that expands to
+two predicates:
+
+	degraded := cpus.internal_effective == ø && has_tasks
+	valid_root := !degraded && cpus_exclusive && parent.valid_root
+	(valid_member := !degraded)
+
+with a helping predicate
+	cpus_exclusive := cpus not shared by a sibling
+
+The effective CPUs basically combine configured+available CPUs
+
+	cpus.internal_effective := (cpus ∩ parent.cpus ∩ online_cpus) - passed
+
+where
+	passed := union of children cpus whose partition is not member
+
+Finally, to handle the degraded cpusets gracefully, we define
+
+	if (!degraded)
+		cpus.effective := cpus.internal_effective 
+	else
+		cpus.effective := parent.cpus.effective
+
+(In cases when there's no parent, we replace its cpus with online_cpus.)
+
+---
+
+I'll try applying these conditions to your description.
+
+> +
+> +	"cpuset.cpus" must always be set up first before enabling
+> +	partition.
+
+This is just a transition condition.
+
+>       Unlike "member" whose "cpuset.cpus.effective" can
+> +	contain CPUs not in "cpuset.cpus", this can never happen with a
+> +	valid partition root. In other words, "cpuset.cpus.effective"
+> +	is always a subset of "cpuset.cpus" for a valid partition root.
+
+IIUC this refers to the cgroup that is 'degraded'. (The consequences for
+a valid partition root follow from valid_root definition above.)
+
+> +
+> +	When a parent partition root cannot exclusively grant any of
+> +	the CPUs specified in "cpuset.cpus", "cpuset.cpus.effective"
+> +	becomes empty.
+
+This sounds too strict to me, perhaps you meant 'cannot grant _all_ of
+the CPUs'?
+
+>       If there are tasks in the partition root, the
+> +	partition root becomes invalid and "cpuset.cpus.effective"
+> +	is reset to that of the nearest non-empty ancestor.
+
+This is captured in the definition of 'degraded'.
+
+> +
+> +        Note that a task cannot be moved to a croup with empty
+> +        "cpuset.cpus.effective".
+
+A transition condition. (Makes sense.)
+
+[With the validity conditions above, it's possible to have 'valid_root'
+with empty cpus (hence also empty cpus.internal_effective) if there are
+no tasks in there. The transition conditions so far prevented this
+corner case.]
+
+> +	There are additional constraints on where a partition root can
+> +	be enabled ("root" or "isolated").  It can only be enabled in
+> +	a cgroup if all the following conditions are met.
+
+I think the enablement (aka rewriting cpuset.cpus.partition) could be
+always possible but it'd result in "root invalid (...)" if the resulting
+config doesn't meet the validity condition.
+
+> +
+> +	1) The "cpuset.cpus" is non-empty and exclusive, i.e. they are
+> +	   not shared by any of its siblings.
+
+The emptiness here is a judgement call (in my formulation of the
+conditions it seemed simpler to allow empty cpus.internal_effective with
+no tasks).
+
+> +	2) The parent cgroup is a valid partition root.
+
+Captured in the valid_root definition.
+
+> +	3) The "cpuset.cpus" is a subset of parent's "cpuset.cpus".
+
+This is unnecessary strictness. Allow such config,
+cpus.internal_effective still can't be more than parent's cpuset.cpus.
+(Or do you have a reason to discard such configs?)
+
+> +	4) There is no child cgroups with cpuset enabled.  This avoids
+> +	   cpu migrations of multiple cgroups simultaneously which can
+> +	   be problematic.
+
+A transition condition (i.e. not relevant to validity conditions).
+
+> +	Once becoming a partition root, changes to "cpuset.cpus"
+> +	is generally allowed as long as the cpu list is exclusive,
+> +	non-empty and is a superset of children's cpu lists.
+
+Any changes should be allowed otherwise it denies the delegation
+principle of v2 (IOW a parent should be able to preempt CPUs given to
+chilren previously and not be denied because of them).
+
+(If the change results in failed validity condition the cgroup of course
+cannot be be a valid_root anymore.)
+
+> +        The constraints of a valid partition root are as follows:
+> +
+> +        1) The parent cgroup is a valid partition root.
+> +        2) "cpuset.cpus.effective" is a subset of "cpuset.cpus"
+> +        3) "cpuset.cpus.effective" is non-empty when there are tasks
+> +           in the partition.
+
+(This seem to miss the sibling exclusivity condition.)
+Here I'd simply paste the "Validity conditions" specified above instead.
+
+> +        Changing a partition root to "member" is always allowed.
+> +        If there are child partition roots underneath it, however,
+> +        they will be forced to be switched back to "member" too and
+> +        lose their partitions. So care must be taken to double check
+> +        for this condition before disabling a partition root.
+
+(Or is this how delegation is intended?) However, AFAICS, parent still
+can't remove cpuset.cpus even when the child is a "member". Otherwise,
+I agree with the back-switch.
+
+
+> +	Setting a cgroup to a valid partition root will take the CPUs
+> +	away from the effective CPUs of the parent partition.
+
+Captured in the definition of cpus.internal_effective.
+
+> +	A valid parent partition may distribute out all its CPUs to
+> +	its child partitions as long as it is not the root cgroup as
+> +	we need some house-keeping CPUs in the root cgroup.
+
+This actually applies to any root partition that's supposed to host
+tasks. (IOW, 'valid_root' cannot be 'degraded'.)
+
+> +	An invalid partition is not a real partition even though some
+> +	internal states may still be kept.
+
+Tautology? (Or new definition of "real".)
+
+> +
+> +	An invalid partition root can be reverted back to a real
+> +	partition root if none of the constraints of a valid partition
+> +        root are violated.
+
+Yes. (Also tautological.)
+
+Anyway, as I said above, I just tried to formulate the model for clearer
+understanding and the implementation may introduce transition
+constraints but it'd be good to always have the simple rules to tell
+what's a valid root in the tree and what's not.
+
+Regards,
+Michal
+
+[1] https://lore.kernel.org/r/AM9PR10MB4869C14EAE01B87C0037BF6A89939@AM9PR10MB4869.EURPRD10.PROD.OUTLOOK.COM/
+[2] https://lore.kernel.org/lkml/5eacfdcc-148b-b599-3111-4f2971e7ddc0@redhat.com/
+
