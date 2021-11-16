@@ -2,27 +2,57 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id D419A452979
-	for <lists+linux-doc@lfdr.de>; Tue, 16 Nov 2021 06:19:44 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 8EBAF452A5F
+	for <lists+linux-doc@lfdr.de>; Tue, 16 Nov 2021 07:10:37 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S233428AbhKPFWd (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 16 Nov 2021 00:22:33 -0500
-Received: from mail.kernel.org ([198.145.29.99]:42120 "EHLO mail.kernel.org"
-        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S233403AbhKPFWF (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Tue, 16 Nov 2021 00:22:05 -0500
-Received: by mail.kernel.org (Postfix) with ESMTPSA id E471E60F6E;
-        Tue, 16 Nov 2021 05:19:06 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=linux-foundation.org;
-        s=korg; t=1637039948;
-        bh=0+h5I2fETKUh6GKu9bzTHSm7jqJYMvkVoBdFhY2URtE=;
-        h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
-        b=jg2HkZELTf65WPyR611JRctoeh08n8+NPdKweeTf7PMvxNchHTMDvWsc/5jZuQ/5i
-         ZSHaM85TcRKSIWfX3oRQ5tTjfXwlBiVW017CXWo1I5M5IFi8nFXpWqtUBuoxXzgx65
-         HJ94E1llTJD5T6zTl3FoH9Z3y20PLI77DAK7rqnM=
-Date:   Mon, 15 Nov 2021 21:19:05 -0800
-From:   Andrew Morton <akpm@linux-foundation.org>
-To:     Suren Baghdasaryan <surenb@google.com>
+        id S233023AbhKPGNc (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 16 Nov 2021 01:13:32 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:38422 "EHLO
+        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S232503AbhKPGNb (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 16 Nov 2021 01:13:31 -0500
+Received: from mail-yb1-xb36.google.com (mail-yb1-xb36.google.com [IPv6:2607:f8b0:4864:20::b36])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 03AF2C061714
+        for <linux-doc@vger.kernel.org>; Mon, 15 Nov 2021 22:10:35 -0800 (PST)
+Received: by mail-yb1-xb36.google.com with SMTP id v138so54259327ybb.8
+        for <linux-doc@vger.kernel.org>; Mon, 15 Nov 2021 22:10:34 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=google.com; s=20210112;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc;
+        bh=cKbvFtZ+QRZeI3FNBGdfQQxAtlb2rMZX444bX3hzMG8=;
+        b=iLSyO1Wzty/HxSbjlG8/79WYkC7ybAYGe6n21M/rCnfX7DgCvNzRR8pL0wvcqd+M78
+         Fatg0iIfjQwREHvF9nC6hqGp7GpSW/H73mCOKvjYVN47BFVo3vqfIQpVw1gpCOu25k2x
+         7AtUlVKKX+hlqy+gj6NO/lXRjWaj0VWYqIVAX4k599LcgTXloavYAaaCPI4oLBPiD3So
+         nqjSDZQ8+76XYR/zkmnWp2MrTk4mBVEhWeI2L+TTwvapiHtv2NLW2hN4az2OrcABC7+n
+         uaQvDriLzyFQBjPMI+l/ANBhZEWViDhXMQqEwy2JjJDlAR5DYRkm270zUhZIlxz11DqF
+         AvsQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=cKbvFtZ+QRZeI3FNBGdfQQxAtlb2rMZX444bX3hzMG8=;
+        b=ppuOtrObuZugEYCBe4vHUQVh3KWHzlAyz0ypxvid45NK6fzfo4t2eTX1Tx3oHDSe1t
+         0+U4NdqPA4KHIP64DpPGC1ERlK/sabJJursC9X0ktwDGQM+5+9k6O8p4WOA1llSESWu0
+         S5lROP/DnVrB9+NbZzhje83SuZxkZ72b3g6vlUfg0SCq2Vmz2Nx6Zgkv3xuJWlNiLyrH
+         +F7fTowyOBydlZZpnnxcoyYWV0ACIFQg9jVK7cVgpMErZyM1Gt5JCDFjnT94nfJCEMVN
+         aXOc5DPMgWAaD9Mb84/1SWS5XjePo5LWQtj31LTvAvWBs+AtqxA4H5JpD6L4rB0RF/jS
+         ctrA==
+X-Gm-Message-State: AOAM5325OGPsmBCf/doNfTi4Ofc7eRlH742i0eXcU/G26coBkJQkF6wA
+        rck1V92CyYbOnV3Qg8sdwfm/PUJHOKIp72jjsMIEEg==
+X-Google-Smtp-Source: ABdhPJzN3pVN1nOnOBZej16gfngM79uRdjBdoa7a33PlJmhY0MQPFgpI2ys9scPvhjJczlcxmh/zFAf822pKoifh5E4=
+X-Received: by 2002:a05:6902:110e:: with SMTP id o14mr5715852ybu.161.1637043033954;
+ Mon, 15 Nov 2021 22:10:33 -0800 (PST)
+MIME-Version: 1.0
+References: <20211019215511.3771969-1-surenb@google.com> <20211019215511.3771969-2-surenb@google.com>
+ <CAJuCfpGG-j00eDL8p3vNDh4ye2Ja4untoA20UdTkTubm3AfMEQ@mail.gmail.com> <20211115211905.faef6f9db3ce4a6fb9ed66a2@linux-foundation.org>
+In-Reply-To: <20211115211905.faef6f9db3ce4a6fb9ed66a2@linux-foundation.org>
+From:   Suren Baghdasaryan <surenb@google.com>
+Date:   Mon, 15 Nov 2021 22:10:21 -0800
+Message-ID: <CAJuCfpEqO8C7eRO1Mr+MULnuKxjjh1zq2j1yoGZhocghpr7V9w@mail.gmail.com>
+Subject: Re: [PATCH v11 2/3] mm: add a field to store names for private
+ anonymous memory
+To:     Andrew Morton <akpm@linux-foundation.org>
 Cc:     Colin Cross <ccross@google.com>,
         Sumit Semwal <sumit.semwal@linaro.org>,
         Michal Hocko <mhocko@suse.com>,
@@ -40,8 +70,7 @@ Cc:     Colin Cross <ccross@google.com>,
         Peter Zijlstra <peterz@infradead.org>,
         Catalin Marinas <catalin.marinas@arm.com>,
         vincenzo.frascino@arm.com,
-        Chinwen Chang (=?UTF-8?Q?=E5=BC=B5=E9=8C=A6?= =?UTF-8?Q?=E6=96=87?=) 
-        <chinwen.chang@mediatek.com>,
+        Chinwen Chang <chinwen.chang@mediatek.com>,
         Axel Rasmussen <axelrasmussen@google.com>,
         Andrea Arcangeli <aarcange@redhat.com>,
         Jann Horn <jannh@google.com>, apopple@nvidia.com,
@@ -66,46 +95,43 @@ Cc:     Colin Cross <ccross@google.com>,
         linux-fsdevel@vger.kernel.org, linux-doc@vger.kernel.org,
         linux-mm <linux-mm@kvack.org>,
         kernel-team <kernel-team@android.com>
-Subject: Re: [PATCH v11 2/3] mm: add a field to store names for private
- anonymous memory
-Message-Id: <20211115211905.faef6f9db3ce4a6fb9ed66a2@linux-foundation.org>
-In-Reply-To: <CAJuCfpGG-j00eDL8p3vNDh4ye2Ja4untoA20UdTkTubm3AfMEQ@mail.gmail.com>
-References: <20211019215511.3771969-1-surenb@google.com>
-        <20211019215511.3771969-2-surenb@google.com>
-        <CAJuCfpGG-j00eDL8p3vNDh4ye2Ja4untoA20UdTkTubm3AfMEQ@mail.gmail.com>
-X-Mailer: Sylpheed 3.5.1 (GTK+ 2.24.31; x86_64-pc-linux-gnu)
-Mime-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="UTF-8"
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Tue, 19 Oct 2021 14:58:36 -0700 Suren Baghdasaryan <surenb@google.com> wrote:
+On Mon, Nov 15, 2021 at 9:19 PM Andrew Morton <akpm@linux-foundation.org> wrote:
+>
+> On Tue, 19 Oct 2021 14:58:36 -0700 Suren Baghdasaryan <surenb@google.com> wrote:
+>
+> > As Andrew suggested, I checked the image sizes with allnoconfig builds:
+> >
+> > unpatched Linus' ToT
+> >    text    data     bss     dec     hex filename
+> > 1324759      32   73928 1398719 1557bf vmlinux
+> >
+> > After the first patch is applied (madvise refactoring)
+> >    text    data     bss     dec     hex filename
+> > 1322346      32   73928 1396306 154e52 vmlinux
+> > >>> 2413 bytes decrease vs ToT <<<
+> >
+> > After all patches applied with CONFIG_ANON_VMA_NAME=n
+> >    text    data     bss     dec     hex filename
+> > 1322337      32   73928 1396297 154e49 vmlinux
+> > >>> 2422 bytes decrease vs ToT <<<
+> >
+> > After all patches applied with CONFIG_ANON_VMA_NAME=y
+> >    text    data     bss     dec     hex filename
+> > 1325228      32   73928 1399188 155994 vmlinux
+> > >>> 469 bytes increase vs ToT <<<
+>
+> Nice.  Presumably there are memory savings from no longer duplicating
+> the vma names?
 
-> As Andrew suggested, I checked the image sizes with allnoconfig builds:
-> 
-> unpatched Linus' ToT
->    text    data     bss     dec     hex filename
-> 1324759      32   73928 1398719 1557bf vmlinux
-> 
-> After the first patch is applied (madvise refactoring)
->    text    data     bss     dec     hex filename
-> 1322346      32   73928 1396306 154e52 vmlinux
-> >>> 2413 bytes decrease vs ToT <<<
-> 
-> After all patches applied with CONFIG_ANON_VMA_NAME=n
->    text    data     bss     dec     hex filename
-> 1322337      32   73928 1396297 154e49 vmlinux
-> >>> 2422 bytes decrease vs ToT <<<
-> 
-> After all patches applied with CONFIG_ANON_VMA_NAME=y
->    text    data     bss     dec     hex filename
-> 1325228      32   73928 1399188 155994 vmlinux
-> >>> 469 bytes increase vs ToT <<<
+The third patch does have this effect.
 
-Nice.  Presumably there are memory savings from no longer duplicating
-the vma names?
+>
+> I fudged up a [0/n] changelog (please don't forget this) and merged it
+> all for testing.
 
-I fudged up a [0/n] changelog (please don't forget this) and merged it
-all for testing.
+Thanks!
