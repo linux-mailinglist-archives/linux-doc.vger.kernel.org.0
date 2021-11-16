@@ -2,89 +2,67 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 6CAF24531DC
-	for <lists+linux-doc@lfdr.de>; Tue, 16 Nov 2021 13:12:04 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id D8B534531F5
+	for <lists+linux-doc@lfdr.de>; Tue, 16 Nov 2021 13:16:28 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S235882AbhKPMO3 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 16 Nov 2021 07:14:29 -0500
-Received: from mail.kernel.org ([198.145.29.99]:50822 "EHLO mail.kernel.org"
+        id S234630AbhKPMTY (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 16 Nov 2021 07:19:24 -0500
+Received: from mail.kernel.org ([198.145.29.99]:52576 "EHLO mail.kernel.org"
         rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S235896AbhKPMOX (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Tue, 16 Nov 2021 07:14:23 -0500
-Received: by mail.kernel.org (Postfix) with ESMTPSA id C1B8E61B3D;
-        Tue, 16 Nov 2021 12:11:26 +0000 (UTC)
+        id S233068AbhKPMTY (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Tue, 16 Nov 2021 07:19:24 -0500
+Received: by mail.kernel.org (Postfix) with ESMTPSA id 49EA461B44;
+        Tue, 16 Nov 2021 12:16:27 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-        s=k20201202; t=1637064686;
-        bh=3+EhTIUfEc1VH5uixDDqkGJAXlgO8/E7oFMAmXUNQ6A=;
-        h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-        b=DmnXcSw9GafJu8rPcR4xfJLerj1gz+Rba+SEKfcRsQzFDSmst402cDzZrmRUEGzKu
-         g0HKln+6+jyGF8TUs762ev+JMnwLVIb/fncr7kcZg3NS/BMFCjuC4MbI3g/wrNCSLG
-         rbS7yQhmYvDiU3KuXHyJm0i9DWJd7DYjYGK2UBLZ3UpmlFmvYtlIJOG6/EFO3/vlgl
-         q7UvoKl1TrF8njc18EmjAD2QhU4s1n3xlRIs0Ll99ifsffp8c56e0ceCkUuYYmGQYu
-         4xkwm0DYrLeGgT528VRMa9Az2WCpg9RzM6V1n88ojwBNm2+G9Y+QRsBuNMnPJGYIyg
-         wWFua4dJFgYwA==
+        s=k20201202; t=1637064987;
+        bh=Zb7Sns/nkl+cmZXiJb1Jl1QoMKldzzzAeh2SCbE4G2U=;
+        h=From:To:Cc:Subject:Date:From;
+        b=aZ+OwftS6YPHEAHvamTaWYtsFfHjKgMrAKGXhFiJK1Vzm7CtGGcCBMIyd1aiR5794
+         1Cwtz/RBGxGuHK4BO0R4Gjb+7j3uw/6DX1jBuBITKCwQM2PUgMswHOzsPhXIg3fJxI
+         /EEaHS9dwfBgdGZ1ZXw181bhedBKiBKO+FDD4Sbr9loSElD9LW3hQJIxkceIpdHqb8
+         40iCJG1o0apgX5QNebfXJ29wzFfATflxvlTMu32C1ByGiMXeoUwkc2L9YuFcAJUc3E
+         suAiR7XN+k9uQtziIACFVnyHYX0saWKw+iUZgf1UQjLdW8O+gMP+B7/6XwlzH1zdf4
+         Wtxb1v1WBloGQ==
 Received: by mail.kernel.org with local (Exim 4.94.2)
         (envelope-from <mchehab@kernel.org>)
-        id 1mmxJ6-00A9La-Cv; Tue, 16 Nov 2021 12:11:24 +0000
+        id 1mmxNw-00A9Pr-Ox; Tue, 16 Nov 2021 12:16:24 +0000
 From:   Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 To:     Linux Doc Mailing List <linux-doc@vger.kernel.org>,
-        Jonathan Corbet <corbet@lwn.net>
+        Andrew Morton <akpm@linux-foundation.org>
 Cc:     Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
-        Borislav Petkov <bp@alien8.de>,
-        Hannu Hartikainen <hannu@hrtk.in>,
-        Jakub Kicinski <kuba@kernel.org>,
-        Konstantin Ryabitsev <konstantin@linuxfoundation.org>,
-        Lee Jones <lee.jones@linaro.org>,
-        Thomas Gleixner <tglx@linutronix.de>,
-        Thorsten Leemhuis <linux@leemhuis.info>,
-        linux-kernel@vger.kernel.org
-Subject: [PATCH 4/4] Documentation/process: fix a cross reference
-Date:   Tue, 16 Nov 2021 12:11:23 +0000
-Message-Id: <f03c43389f024751e1056c54e240bef64ac4b2ed.1637064577.git.mchehab+huawei@kernel.org>
+        linux-kernel@vger.kernel.org, Jonathan Corbet <corbet@lwn.net>,
+        sparmaintainer@unisys.com
+Subject: [PATCH v3 RESEND 0/1] Fix a badly encoded copyright symbol
+Date:   Tue, 16 Nov 2021 12:16:22 +0000
+Message-Id: <cover.1637064818.git.mchehab+huawei@kernel.org>
 X-Mailer: git-send-email 2.33.1
-In-Reply-To: <cover.1637064577.git.mchehab+huawei@kernel.org>
-References: <cover.1637064577.git.mchehab+huawei@kernel.org>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 Sender: Mauro Carvalho Chehab <mchehab@kernel.org>
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-The cross-reference for the handbooks section works. However, it is
-meant to describe the path inside the Kernel's doc where the section
-is, but there's an space instead of a dash, plus it lacks the .rst at
-the end, which makes:
+Hi Andrew,
 
-	./scripts/documentation-file-ref-check
+I sent already this patch a couple of times to the maintainer, but got no
+answer. So, maybe the maintainer just become unresponsible.
 
-to complain.
+As this is really a trivial patch, if you won't mind could, maybe the best would
+be to have this merged via your tree.
 
-Fixes: 604370e106cc ("Documentation/process: Add maintainer handbooks section")
-Signed-off-by: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
----
+Thanks!
+Mauro
 
-To mailbombing on a large number of people, only mailing lists were C/C on the cover.
-See [PATCH 0/4] at: https://lore.kernel.org/all/cover.1637064577.git.mchehab+huawei@kernel.org/
 
- Documentation/process/submitting-patches.rst | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+Mauro Carvalho Chehab (1):
+  visorbus: fix a copyright symbol that was bad encoded
 
-diff --git a/Documentation/process/submitting-patches.rst b/Documentation/process/submitting-patches.rst
-index a0cc96923ea7..da085d63af9b 100644
---- a/Documentation/process/submitting-patches.rst
-+++ b/Documentation/process/submitting-patches.rst
-@@ -22,8 +22,8 @@ use it, it will make your life as a kernel developer and in general much
- easier.
- 
- Some subsystems and maintainer trees have additional information about
--their workflow and expectations, see :ref:`Documentation/process/maintainer
--handbooks <maintainer_handbooks_main>`.
-+their workflow and expectations, see
-+:ref:`Documentation/process/maintainer-handbooks.rst <maintainer_handbooks_main>`.
- 
- Obtain a current source tree
- ----------------------------
+ drivers/visorbus/visorbus_main.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
 -- 
 2.33.1
+
 
