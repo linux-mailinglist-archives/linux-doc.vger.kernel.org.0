@@ -2,55 +2,55 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 64F7A4556BB
-	for <lists+linux-doc@lfdr.de>; Thu, 18 Nov 2021 09:15:04 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id BC8574556C6
+	for <lists+linux-doc@lfdr.de>; Thu, 18 Nov 2021 09:15:40 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S244358AbhKRIRz (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 18 Nov 2021 03:17:55 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:42434 "EHLO
+        id S244406AbhKRISh (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 18 Nov 2021 03:18:37 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:42468 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S244345AbhKRIRQ (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Thu, 18 Nov 2021 03:17:16 -0500
-Received: from mail-wr1-x449.google.com (mail-wr1-x449.google.com [IPv6:2a00:1450:4864:20::449])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 4F002C061208
-        for <linux-doc@vger.kernel.org>; Thu, 18 Nov 2021 00:11:48 -0800 (PST)
-Received: by mail-wr1-x449.google.com with SMTP id v17-20020adfedd1000000b0017c5e737b02so869753wro.18
-        for <linux-doc@vger.kernel.org>; Thu, 18 Nov 2021 00:11:48 -0800 (PST)
+        with ESMTP id S244418AbhKRIRp (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Thu, 18 Nov 2021 03:17:45 -0500
+Received: from mail-wm1-x34a.google.com (mail-wm1-x34a.google.com [IPv6:2a00:1450:4864:20::34a])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id B0EFDC079791
+        for <linux-doc@vger.kernel.org>; Thu, 18 Nov 2021 00:11:50 -0800 (PST)
+Received: by mail-wm1-x34a.google.com with SMTP id m14-20020a05600c3b0e00b0033308dcc933so2713055wms.7
+        for <linux-doc@vger.kernel.org>; Thu, 18 Nov 2021 00:11:50 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=google.com; s=20210112;
         h=date:in-reply-to:message-id:mime-version:references:subject:from:to
          :cc;
-        bh=rzdCErYR7QVJMqQ7C8iOEn+pKBOJL+BpLP2uqDT2sRI=;
-        b=lywc3NBHZZG/l/NByd9QMLrak/0JWSxz9fkaHSvQpFiu6THhd/Nji8+4etKEu/FWb1
-         DUr7dTzctJFdTqeiReLlmlOSBqRVuxOd5rYx5nJHm3aM+ZmXYgZ3vl4Ce8tFrt0Av3T1
-         bf9NeFQD3uLC7xCUpZwxhl9alcSmSnW523ahX1+J5WE1eN8IqUpB8WLaFMwKtqyVR2H5
-         VBmh+uW9lUYfpnV9Dv/+zhxWz2y1F+L14D0bQuciTgOc/C7axKYJxr+/2pkCLLBSQ4sB
-         E1t7FIYUwhm4GLpE9UPOpx8Eww9R6mgkFTE33GQnZrk37IxG6T6TO6OsAK9RCGF/iBpM
-         yZDA==
+        bh=SnYVQxLC6YSHg0QBspCa3KEICf+BvvptqJyS2cHTmDQ=;
+        b=q8lE9LF6eLo1vbVpYF4n1ICfJW3NoJ/hLMQz3VMTmpM/aEhlGa4qJ6VUiOnKyvLK8Q
+         Oi8I7HXmebdHANR+j99BGIGfFBKv5r18aWiXgSYXRVP+oCwHVORXPU/n08+bF4aC070o
+         4Ddh/74+9xIYByQdLDGSqWdmcWUMiKT/dn+E4fzNssfR267fHQ5ri4ABmCuCPmZeXHeD
+         EQjo7hnV0pCiRiNZv8eV91KK/GgzYotgsm8DHEB9YlvAUqfjBr4xHiWPvUOGJ3uOlx7E
+         GIIMcoADGq6ms0hdPAyC6mEshUnBV6rKSFIlvCkQp+UWhxWcwb1dZnrw8PR2VDwbIjW2
+         E28w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=x-gm-message-state:date:in-reply-to:message-id:mime-version
          :references:subject:from:to:cc;
-        bh=rzdCErYR7QVJMqQ7C8iOEn+pKBOJL+BpLP2uqDT2sRI=;
-        b=dOckqaqKeO+7LLILjyDh3CCnHSwm/iq1vqG0bnpd6Bi8sYBkUgSz+ROzrJSKmCcFlV
-         9bUyRMCgS4OrMuoXlSHwDP4plh5Zh/EcCpJB9RbnHBHZUlkxycSMPKs+m+ucf7UORWa5
-         WCf4SxxAlJ1Owv8A1rvLWGD293z/BZC0XGg2DHTuKcAJsUXcqzGeEh2LwnjwFpD6M4T1
-         N7gh8yY7jUB5bA6SDfq4EVHw2A423fjFPcAbp0MKET8k0Fut+bhejYTtSZ5kV1Sz1PZp
-         rB0j0iU7FsN8AKlbdhEymFR0sODNpkqmJvTX/HjlxYZmo9Qtnp2oSevm0zTBz+IbqDIX
-         6CTg==
-X-Gm-Message-State: AOAM53283TR3tCEwpFLOD3IbBTb/Y7MWpoDksR8EoHfiBYLguSsc4YWO
-        NcZBZ3McijHPbpVleJ+X7Ncf/MmBsw==
-X-Google-Smtp-Source: ABdhPJxAWh/BZwpokjufV74uSy9dmYvaQlEFQf441y59AQVEiD0veafOsEsU+5qgKzAWHYtjU5201SdIww==
+        bh=SnYVQxLC6YSHg0QBspCa3KEICf+BvvptqJyS2cHTmDQ=;
+        b=FPAcjPhI+0YPCOAcP+O0s9lDEILtKjOE4d62gOF18iQHpMEa+EdqazpcJFypkmtlam
+         UM8qiJOj2sKwiNbCF3kNqEtNMl1ba9xNII/8hj1WhT73zIqyxerPgZPmtpZefFLUTQ7w
+         C2Gr8mQMr5IjS4lWXoFN2hQSTIG+7E75C4qcjam6+c84BpNBrd0MgGqu7HaRcaRjfsQB
+         PAhfqVTZx274RM9sS6GnfNDlsFbCgbr52pqFD7/mdO/jFBxvmGRqD2n+lwrusrJvRC0Y
+         FPfRNPV7xo1K6F2fobg93c7ZJulJZv/LEVQxw08S3wvriL/DSclA8kIEFhujSlafLeAm
+         JVrw==
+X-Gm-Message-State: AOAM532I8dttA3Y/i0cF99LhQz84MJZT/enBawyTcGDz8edhzT8ZSYHg
+        8RqqIqHAR+KnsH3GlCwwT6GrvBtypQ==
+X-Google-Smtp-Source: ABdhPJztL2viLMNJ4W40F+xMcVTMDTh0cI7ELMsOn6MVEO+vm91uJrlBHQ/y6vYeh7i2nbNPusXRUVe71A==
 X-Received: from elver.muc.corp.google.com ([2a00:79e0:15:13:7155:1b7:fca5:3926])
- (user=elver job=sendgmr) by 2002:a5d:6043:: with SMTP id j3mr28104905wrt.375.1637223106899;
- Thu, 18 Nov 2021 00:11:46 -0800 (PST)
-Date:   Thu, 18 Nov 2021 09:10:24 +0100
+ (user=elver job=sendgmr) by 2002:a05:600c:1987:: with SMTP id
+ t7mr7663727wmq.24.1637223109239; Thu, 18 Nov 2021 00:11:49 -0800 (PST)
+Date:   Thu, 18 Nov 2021 09:10:25 +0100
 In-Reply-To: <20211118081027.3175699-1-elver@google.com>
-Message-Id: <20211118081027.3175699-21-elver@google.com>
+Message-Id: <20211118081027.3175699-22-elver@google.com>
 Mime-Version: 1.0
 References: <20211118081027.3175699-1-elver@google.com>
 X-Mailer: git-send-email 2.34.0.rc2.393.gf8c9666880-goog
-Subject: [PATCH v2 20/23] mm, kcsan: Enable barrier instrumentation
+Subject: [PATCH v2 21/23] sched, kcsan: Enable memory barrier instrumentation
 From:   Marco Elver <elver@google.com>
 To:     elver@google.com, "Paul E. McKenney" <paulmck@kernel.org>
 Cc:     Alexander Potapenko <glider@google.com>,
@@ -72,40 +72,40 @@ Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Some memory management calls imply memory barriers that are required to
-avoid false positives. For example, without the correct instrumentation,
-we could observe data races of the following variant:
+There's no fundamental reason to disable KCSAN for scheduler code,
+except for excessive noise and performance concerns (instrumenting
+scheduler code is usually a good way to stress test KCSAN itself).
 
-                   T0           |           T1
-        ------------------------+------------------------
-                                |
-         *a = 42;    ---+       |
-         kfree(a);      |       |
-                        |       | b = kmalloc(..); // b == a
-          <reordered> <-+       | *b = 42;         // not a data race!
-                                |
-
-Therefore, instrument memory barriers in all allocator code currently
-not being instrumented in a default build.
+However, several core sched functions imply memory barriers that are
+invisible to KCSAN without instrumentation, but are required to avoid
+false positives. Therefore, unconditionally enable instrumentation of
+memory barriers in scheduler code. Also update the comment to reflect
+this and be a bit more brief.
 
 Signed-off-by: Marco Elver <elver@google.com>
 ---
- mm/Makefile | 2 ++
- 1 file changed, 2 insertions(+)
+ kernel/sched/Makefile | 7 +++----
+ 1 file changed, 3 insertions(+), 4 deletions(-)
 
-diff --git a/mm/Makefile b/mm/Makefile
-index d6c0042e3aa0..7919cd7f13f2 100644
---- a/mm/Makefile
-+++ b/mm/Makefile
-@@ -15,6 +15,8 @@ KCSAN_SANITIZE_slab_common.o := n
- KCSAN_SANITIZE_slab.o := n
- KCSAN_SANITIZE_slub.o := n
- KCSAN_SANITIZE_page_alloc.o := n
-+# But enable explicit instrumentation for memory barriers.
+diff --git a/kernel/sched/Makefile b/kernel/sched/Makefile
+index c7421f2d05e1..c83b37af155b 100644
+--- a/kernel/sched/Makefile
++++ b/kernel/sched/Makefile
+@@ -11,11 +11,10 @@ ccflags-y += $(call cc-disable-warning, unused-but-set-variable)
+ # that is not a function of syscall inputs. E.g. involuntary context switches.
+ KCOV_INSTRUMENT := n
+ 
+-# There are numerous data races here, however, most of them are due to plain accesses.
+-# This would make it even harder for syzbot to find reproducers, because these
+-# bugs trigger without specific input. Disable by default, but should re-enable
+-# eventually.
++# Disable KCSAN to avoid excessive noise and performance degradation. To avoid
++# false positives ensure barriers implied by sched functions are instrumented.
+ KCSAN_SANITIZE := n
 +KCSAN_INSTRUMENT_BARRIERS := y
  
- # These files are disabled because they produce non-interesting and/or
- # flaky coverage that is not a function of syscall inputs. E.g. slab is out of
+ ifneq ($(CONFIG_SCHED_OMIT_FRAME_POINTER),y)
+ # According to Alan Modra <alan@linuxcare.com.au>, the -fno-omit-frame-pointer is
 -- 
 2.34.0.rc2.393.gf8c9666880-goog
 
