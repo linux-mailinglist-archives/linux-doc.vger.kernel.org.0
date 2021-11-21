@@ -2,68 +2,160 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 88BE0457DE1
-	for <lists+linux-doc@lfdr.de>; Sat, 20 Nov 2021 13:32:11 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id B09AC45825A
+	for <lists+linux-doc@lfdr.de>; Sun, 21 Nov 2021 07:29:38 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S237451AbhKTMfM (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Sat, 20 Nov 2021 07:35:12 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:42054 "EHLO
-        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S237470AbhKTMfM (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Sat, 20 Nov 2021 07:35:12 -0500
-Received: from mail-wr1-x42c.google.com (mail-wr1-x42c.google.com [IPv6:2a00:1450:4864:20::42c])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id C2448C06175A
-        for <linux-doc@vger.kernel.org>; Sat, 20 Nov 2021 04:32:08 -0800 (PST)
-Received: by mail-wr1-x42c.google.com with SMTP id d24so23131812wra.0
-        for <linux-doc@vger.kernel.org>; Sat, 20 Nov 2021 04:32:08 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=mime-version:reply-to:from:date:message-id:subject:to;
-        bh=w2dLnl5hsLVKZTBAdcVFnDnMtM7+guW1LU+8LG4nir0=;
-        b=dp08c78RK/cKdkLcEe5oTWVItQbA/mSBZUvcdNjKjoEonsOgmj+I3GKva3iaWNyMkt
-         CCIs2ktfIKSlFzCn5+8Hr9rfVlkW2xAcoXH1NXzpdeplBMm6CMUWlUfjratbW5VZHZi+
-         F9u0WOzvv98/gWky6NQmlXJ00LlZSkTFxJTib1hT7PzOpvi2Uj3UQhxu519lTe29nn3R
-         FGtT3XYT43FZo3BFQHxyg+mAUYc7bFOWL4Kk4ANIfllPu/Hp+Feij1RVqcZIqoH0rhBk
-         /Yyd0Iw0yxFXZsMEB4UxgpAwAMU/pU7UOhZoAIzibYPkn+XBxkoaEtLGL8Ldp5BwmYSC
-         xjJw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=x-gm-message-state:mime-version:reply-to:from:date:message-id
-         :subject:to;
-        bh=w2dLnl5hsLVKZTBAdcVFnDnMtM7+guW1LU+8LG4nir0=;
-        b=Y2JqU9mtGa9hEORWCXLJ1x/x4AZvJ8T2mcsj3oIxgRA2HOIOFRE0VehsmCrsCnxJr6
-         7n2cjuWT3O3I/viUZXcsyU7y9uvhx1sipw/TaUtT/k96okZO2n2vvvj0ZnqXtDEmMz8G
-         yaA9nkG686RKNGlPwyDwG9+fkAYEmVEQmnsH0gdL5CtmrCBEJXPQWc3TnV/Tw+LXaYlu
-         e1ZXQ5i4bNIZ8lpvL58rGqr5O26URAM4LLnF79ywLvzy2Df5CQUQxM7Ps3xfEyyp1b8R
-         Ll7wCpx/YRSs5tXQVVMHmBlAsOFJ57J6udSlJAX4LkdLNYM7uKyEdiEdUiwoMr3uDMEa
-         bVJA==
-X-Gm-Message-State: AOAM532u+wK1im5DyhibOX15jtlOhZ25jSJycE5JOvn5zXNY0R9Hv/e1
-        GyOcljhcD3/l/iB4X/7BxzXfYr5xC3yOZVpZE7k=
-X-Google-Smtp-Source: ABdhPJzrwFa7TFTqFvwFs5k0Rdhif8Z7uuK1FAOvH+K0kUx2WcLdYM3cuBXUcAo32aObeRSjQ/+f3OHahwiwxApMIiU=
-X-Received: by 2002:adf:cd06:: with SMTP id w6mr16900697wrm.431.1637411526963;
- Sat, 20 Nov 2021 04:32:06 -0800 (PST)
+        id S231239AbhKUGcj (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Sun, 21 Nov 2021 01:32:39 -0500
+Received: from mail.kernel.org ([198.145.29.99]:57538 "EHLO mail.kernel.org"
+        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
+        id S229885AbhKUGc2 (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Sun, 21 Nov 2021 01:32:28 -0500
+Received: by mail.kernel.org (Postfix) with ESMTPSA id A73C260C4A;
+        Sun, 21 Nov 2021 06:29:17 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+        s=k20201202; t=1637476160;
+        bh=A2FbeRl3V1l2ksZ9wM0BVAX4t2bfqwjgHNSx9b4lWHE=;
+        h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+        b=RfJOlGe5boVfDciCEArB8lCo8yXqEnrsL/Qm0w1v0DAU2i00vL+jpIP+vvS5mJpOe
+         u01HUX1DEIbOZdZ8qG8PpGWdGANLMn0T05KPV2ot1Lsn3dS1B+eZCSpbAeqhRFQPHz
+         foYhfYvz/JTpBEuyc1x209Cwl2SgYmx3GSlWQotfg8GSySTnClhO42XP+F0uq97kFN
+         4jCFh2Qox/3dkoBEnxuVjSOCIkgn57zzwa81eytCWm6b45niDJNvN7F8qivxuTJRXB
+         BN0qtql4TBx8dokwWV4wUtZSBli55Fga+fQCjAtgRvDbQYcUB8JOo/0+3XQfSBaF7f
+         F6+h0TOTuDZMg==
+Date:   Sun, 21 Nov 2021 08:29:12 +0200
+From:   Mike Rapoport <rppt@kernel.org>
+To:     Finn Thain <fthain@linux-m68k.org>
+Cc:     Geert Uytterhoeven <geert@linux-m68k.org>,
+        Sam Creasey <sammy@sammy.net>,
+        Jonathan Corbet <corbet@lwn.net>, linux-doc@vger.kernel.org,
+        linux-kernel@vger.kernel.org, linux-m68k@lists.linux-m68k.org
+Subject: Re: [PATCH v3] m68k: Enable memtest functionality
+Message-ID: <YZnnOAoEIS1wmOyr@kernel.org>
+References: <8170fe1d1c62426d82275d36ba409ecc18754292.1637274578.git.fthain@linux-m68k.org>
 MIME-Version: 1.0
-Received: by 2002:adf:f989:0:0:0:0:0 with HTTP; Sat, 20 Nov 2021 04:32:05
- -0800 (PST)
-Reply-To: mitchellvivian01@gamil.com
-From:   Mitchell Vivian <duplanmartine36@gmail.com>
-Date:   Sat, 20 Nov 2021 12:32:05 +0000
-Message-ID: <CAO-XXH4jKctBjrghKocs7TkK4=OXKnJketarRZEG9rUSFpG4Ng@mail.gmail.com>
-Subject: Hello
-To:     undisclosed-recipients:;
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <8170fe1d1c62426d82275d36ba409ecc18754292.1637274578.git.fthain@linux-m68k.org>
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Hello
+On Fri, Nov 19, 2021 at 09:29:38AM +1100, Finn Thain wrote:
+> Enable the memtest functionality and rearrange some code to prevent it
+> from clobbering the initrd.
+> 
+> The code to implement CONFIG_BLK_DEV_INITRD was conditional on
+> !defined(CONFIG_SUN3). For simplicity, remove that test on the basis
+> that m68k_ramdisk.size == 0 on Sun 3. The SLIME source code at
+> http://sammy.net/sun3/ftp/pub/m68k/sun3/slime/slime-2.0.tar.gz
+> indicates that no BI_RAMDISK entry is ever passed to the kernel due
+> to #ifdef 0 around the relevant code.
+> 
+> Cc: Mike Rapoport <rppt@kernel.org>
+> Cc: Sam Creasey <sammy@sammy.net>
+> Cc: Jonathan Corbet <corbet@lwn.net>
+> Signed-off-by: Finn Thain <fthain@linux-m68k.org>
 
-My name is Miss Vivian Mitchell. I want to donate my fund $ 4.5
-million USD to you on a charity name to help the poor People.
+Acked-by: Mike Rapoport <rppt@linux.ibm.com>
 
-As soon as I read from you I will give you more details on how to
-achieve this goal and get this fund transferred into your bank
-account.
+> ---
+> Is SLIME the only Linux bootloader on Sun 3?
+> ---
+> Changed since v2:
+>  - Made conditional on MMU_MOTOROLA.
+> 
+> Changed since v1:
+>  - Updated documentation.
+> ---
+>  Documentation/admin-guide/kernel-parameters.txt |  2 +-
+>  arch/m68k/Kconfig                               |  1 +
+>  arch/m68k/kernel/setup_mm.c                     | 15 ++++++---------
+>  arch/m68k/mm/motorola.c                         |  2 ++
+>  4 files changed, 10 insertions(+), 10 deletions(-)
+> 
+> diff --git a/Documentation/admin-guide/kernel-parameters.txt b/Documentation/admin-guide/kernel-parameters.txt
+> index 43dc35fe5bc0..ac42b421a95c 100644
+> --- a/Documentation/admin-guide/kernel-parameters.txt
+> +++ b/Documentation/admin-guide/kernel-parameters.txt
+> @@ -2924,7 +2924,7 @@
+>  			both parameters are enabled, hugetlb_free_vmemmap takes
+>  			precedence over memory_hotplug.memmap_on_memory.
+>  
+> -	memtest=	[KNL,X86,ARM,PPC,RISCV] Enable memtest
+> +	memtest=	[KNL,X86,ARM,M68K,PPC,RISCV] Enable memtest
+>  			Format: <integer>
+>  			default : 0 <disable>
+>  			Specifies the number of memtest passes to be
+> diff --git a/arch/m68k/Kconfig b/arch/m68k/Kconfig
+> index 0b50da08a9c5..4cae3fbe7f97 100644
+> --- a/arch/m68k/Kconfig
+> +++ b/arch/m68k/Kconfig
+> @@ -9,6 +9,7 @@ config M68K
+>  	select ARCH_HAVE_NMI_SAFE_CMPXCHG if RMW_INSNS
+>  	select ARCH_MIGHT_HAVE_PC_PARPORT if ISA
+>  	select ARCH_NO_PREEMPT if !COLDFIRE
+> +	select ARCH_USE_MEMTEST if MMU_MOTOROLA
+>  	select ARCH_WANT_IPC_PARSE_VERSION
+>  	select BINFMT_FLAT_ARGVP_ENVP_ON_STACK
+>  	select DMA_DIRECT_REMAP if HAS_DMA && MMU && !COLDFIRE
+> diff --git a/arch/m68k/kernel/setup_mm.c b/arch/m68k/kernel/setup_mm.c
+> index 4b51bfd38e5f..49e573b94326 100644
+> --- a/arch/m68k/kernel/setup_mm.c
+> +++ b/arch/m68k/kernel/setup_mm.c
+> @@ -338,13 +338,6 @@ void __init setup_arch(char **cmdline_p)
+>  		panic("No configuration setup");
+>  	}
+>  
+> -	paging_init();
+> -
+> -#ifdef CONFIG_NATFEAT
+> -	nf_init();
+> -#endif
+> -
+> -#ifndef CONFIG_SUN3
+>  #ifdef CONFIG_BLK_DEV_INITRD
+>  	if (m68k_ramdisk.size) {
+>  		memblock_reserve(m68k_ramdisk.addr, m68k_ramdisk.size);
+> @@ -354,6 +347,12 @@ void __init setup_arch(char **cmdline_p)
+>  	}
+>  #endif
+>  
+> +	paging_init();
+> +
+> +#ifdef CONFIG_NATFEAT
+> +	nf_init();
+> +#endif
+> +
+>  #ifdef CONFIG_ATARI
+>  	if (MACH_IS_ATARI)
+>  		atari_stram_reserve_pages((void *)availmem);
+> @@ -364,8 +363,6 @@ void __init setup_arch(char **cmdline_p)
+>  	}
+>  #endif
+>  
+> -#endif /* !CONFIG_SUN3 */
+> -
+>  /* set ISA defs early as possible */
+>  #if defined(CONFIG_ISA) && defined(MULTI_ISA)
+>  	if (MACH_IS_Q40) {
+> diff --git a/arch/m68k/mm/motorola.c b/arch/m68k/mm/motorola.c
+> index 9f3f77785aa7..5b6575eb6d02 100644
+> --- a/arch/m68k/mm/motorola.c
+> +++ b/arch/m68k/mm/motorola.c
+> @@ -455,6 +455,8 @@ void __init paging_init(void)
+>  
+>  	flush_tlb_all();
+>  
+> +	early_memtest(min_addr, max_addr);
+> +
+>  	/*
+>  	 * initialize the bad page table and bad page to point
+>  	 * to a couple of allocated pages
+> -- 
+> 2.26.3
+> 
 
-Thanks have a nice day,
-Miss.vivian
+-- 
+Sincerely yours,
+Mike.
