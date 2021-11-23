@@ -2,69 +2,92 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 5EA1A45A775
-	for <lists+linux-doc@lfdr.de>; Tue, 23 Nov 2021 17:20:40 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 32D6745A791
+	for <lists+linux-doc@lfdr.de>; Tue, 23 Nov 2021 17:24:35 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S235991AbhKWQXr (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 23 Nov 2021 11:23:47 -0500
-Received: from mga12.intel.com ([192.55.52.136]:24423 "EHLO mga12.intel.com"
-        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S235988AbhKWQXr (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Tue, 23 Nov 2021 11:23:47 -0500
-X-IronPort-AV: E=McAfee;i="6200,9189,10176"; a="215081455"
-X-IronPort-AV: E=Sophos;i="5.87,258,1631602800"; 
-   d="scan'208";a="215081455"
-Received: from orsmga001.jf.intel.com ([10.7.209.18])
-  by fmsmga106.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 23 Nov 2021 08:20:38 -0800
-X-IronPort-AV: E=Sophos;i="5.87,258,1631602800"; 
-   d="scan'208";a="538304991"
-Received: from smile.fi.intel.com ([10.237.72.184])
-  by orsmga001-auth.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 23 Nov 2021 08:20:34 -0800
-Received: from andy by smile.fi.intel.com with local (Exim 4.95)
-        (envelope-from <andy.shevchenko@gmail.com>)
-        id 1mpYX0-009pkf-JQ;
-        Tue, 23 Nov 2021 18:20:30 +0200
-Date:   Tue, 23 Nov 2021 18:20:30 +0200
-From:   Andy Shevchenko <andy.shevchenko@gmail.com>
-To:     Guenter Roeck <linux@roeck-us.net>
-Cc:     Denis Pauk <pauk.denis@gmail.com>,
-        Eugene Shalygin <eugene.shalygin@gmail.com>,
-        Platform Driver <platform-driver-x86@vger.kernel.org>,
-        thomas@weissschuh.net, Ed Brindley <kernel@maidavale.org>,
-        Jean Delvare <jdelvare@suse.com>,
-        Jonathan Corbet <corbet@lwn.net>, linux-hwmon@vger.kernel.org,
-        Linux Documentation List <linux-doc@vger.kernel.org>,
-        Linux Kernel Mailing List <linux-kernel@vger.kernel.org>
-Subject: Re: [PATCH v12 0/2] Update ASUS WMI supported boards
-Message-ID: <YZ0UziuWdEnaUGrm@smile.fi.intel.com>
-References: <20211116205744.381790-1-pauk.denis@gmail.com>
- <f0bf01fa-ccd8-3a6a-8fd2-4c785fa212ef@roeck-us.net>
- <CAHp75Vfbh+O39C_k9zQqSqsoSro7_gv6QmsxgmdO=woA32Q0HQ@mail.gmail.com>
- <20211123155040.GA2184678@roeck-us.net>
+        id S230433AbhKWQ1m (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 23 Nov 2021 11:27:42 -0500
+Received: from wnew3-smtp.messagingengine.com ([64.147.123.17]:43449 "EHLO
+        wnew3-smtp.messagingengine.com" rhost-flags-OK-OK-OK-OK)
+        by vger.kernel.org with ESMTP id S231187AbhKWQ1h (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 23 Nov 2021 11:27:37 -0500
+Received: from compute5.internal (compute5.nyi.internal [10.202.2.45])
+        by mailnew.west.internal (Postfix) with ESMTP id 067E22B01478;
+        Tue, 23 Nov 2021 11:24:26 -0500 (EST)
+Received: from mailfrontend2 ([10.202.2.163])
+  by compute5.internal (MEProxy); Tue, 23 Nov 2021 11:24:27 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=dtucker.co.uk;
+         h=from:to:cc:subject:date:message-id:mime-version
+        :content-transfer-encoding; s=fm1; bh=4PpDbsLtMyT0tQ7B4AuoGIQTJF
+        IglmyFjTyXLB+zyIc=; b=o3DgD9/MMVnJkg0dklPbhmdrIq7h13Y5zXexsG9H2J
+        tcMgCpR7s9T0r+1RSNIE1ozyCycFSyhjyYvy8lbGom848Zwdq1jnn7VlCH5jWPaL
+        SDuFbtHDjUqlAXKQSp+Iru+f/5dEVHuZP8dSuOD9qR7gCWVEtAQAnQPcPK3FoxAV
+        L0gxE8EDwOAEXPdxtfDVbwqp40XMUwOD5drOc3qtWSCjRki9Zkhx2n2nGKVuEgUu
+        Z3HmbbA8Epk9a/S7hv3mkRvayAlmTkFZr3aWSuaLej6TW7uv2RtUblGHuBTW3OxO
+        aWSg52siqa/or2gnJ4fOj5WTBZrK5LYN22vjMk+ZERbA==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
+        messagingengine.com; h=cc:content-transfer-encoding:date:from
+        :message-id:mime-version:subject:to:x-me-proxy:x-me-proxy
+        :x-me-sender:x-me-sender:x-sasl-enc; s=fm1; bh=4PpDbsLtMyT0tQ7B4
+        AuoGIQTJFIglmyFjTyXLB+zyIc=; b=NgLCpRsfMeF59Z9mwcnxyfI/rRQu7++I+
+        miJ+slL5dc1loNPHm82Xk07tCgINJklOeGwCev2hCKv4eeWpDhe/+HmXwOIWweVI
+        LOsYYEeOg3Ryl9pyGs5ZsxRviRtFLLcwa4q5MylgvRK0cGluEZUh9NTJuObJV9M/
+        4CNEhk/2zpj/AGsdJWq6KjIg2nkxBnD97a5fwVwXKlCJUPbJ2BWeCBQyXGQjzL8n
+        btmZfCGJQL2v0+RNa47O3Vb+AnC7s17Nh1pvqDiIfU/RxsLR+MCBLNnxBoODB9uP
+        Ppq9V11z9kv3A/ixx7P1PFGCmxEfJ0kh8HQMPydZIPsH4NJ9TS69Q==
+X-ME-Sender: <xms:uhWdYWuECM0mqrer3gX13e2aj33BVlFdN9CjADc3c1dbJp-bGJ_UMA>
+    <xme:uhWdYbefMhiK0onGOKYmz16QhKt1RG-9OOdh8bvtdssI6z7wP6hFb8tYt9p7pB0k5
+    p2Tv8WgHK3HpsiUIg>
+X-ME-Received: <xmr:uhWdYRzDIK8PfM9J6FpM9xDebUTEWH7JDQdBTiNmrx86MR5USywJFwnA3yif_v6Q68OdMCp7CDIf>
+X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvuddrgeeigdekkecutefuodetggdotefrodftvf
+    curfhrohhfihhlvgemucfhrghsthforghilhdpqfgfvfdpuffrtefokffrpgfnqfghnecu
+    uegrihhlohhuthemuceftddtnecunecujfgurhephffvufffkffoggfgsedtkeertdertd
+    dtnecuhfhrohhmpeffrghvvgcuvfhutghkvghruceouggrvhgvseguthhutghkvghrrdgt
+    ohdruhhkqeenucggtffrrghtthgvrhhnpeefvddtueelfefhuedtgfevfefhgedvkeegud
+    etvdfgueekudehtefghefhkeduudenucevlhhushhtvghrufhiiigvpedtnecurfgrrhgr
+    mhepmhgrihhlfhhrohhmpegurghvvgesughtuhgtkhgvrhdrtghordhukh
+X-ME-Proxy: <xmx:uhWdYROn8WpxKwGhXHQVGIX-n0f6fWgKcgmvhhw3bnzdKkWtIIwnoQ>
+    <xmx:uhWdYW_5xmCy7gTrWYIJ9No8UEP8s25gpgECjSkV1HECJXfiLjDC-A>
+    <xmx:uhWdYZWKDK7t0oONs7J_Dx82BJJgMZhqEg5VZCcEq05mDG6pJKlgRg>
+    <xmx:uhWdYZayWvxM1ltYbBhGdXvQspN7eITPaescqs0i1W3AP6kbSzxrlXYhDR8>
+Received: by mail.messagingengine.com (Postfix) with ESMTPA; Tue,
+ 23 Nov 2021 11:24:25 -0500 (EST)
+From:   Dave Tucker <dave@dtucker.co.uk>
+To:     bpf@vger.kernel.org
+Cc:     corbet@lwn.net, ast@kernel.org, daniel@iogearbox.net,
+        andrii@kernel.org, kafai@fb.com, songliubraving@fb.com,
+        john.fastabend@gmail.com, kpsingh@kernel.org,
+        linux-doc@vger.kernel.org, Dave Tucker <dave@dtucker.co.uk>
+Subject: [PATCH v2 bpf-next 0/2] bpf, docs: Document BPF_MAP_TYPE_ARRAY
+Date:   Tue, 23 Nov 2021 16:24:19 +0000
+Message-Id: <cover.1637682120.git.dave@dtucker.co.uk>
+X-Mailer: git-send-email 2.33.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20211123155040.GA2184678@roeck-us.net>
-Organization: Intel Finland Oy - BIC 0357606-4 - Westendinkatu 7, 02160 Espoo
+Content-Transfer-Encoding: 8bit
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Tue, Nov 23, 2021 at 07:50:40AM -0800, Guenter Roeck wrote:
-> On Tue, Nov 23, 2021 at 12:22:46PM +0200, Andy Shevchenko wrote:
-> > >
-> > > Series applied to hwmon-next.
-> > 
-> > What is the repository it has been applied to? I don't see it in
-> > neither Linux Next nor [1]. It might be that I am missing the
-> > workflow.
-> 
-> I had not pushed the branch out. Done now.
+This series is the beginning of my attempt to improve the BPF map and
+program type documentation. It expands the template from
+map_cgroup_storage to include the kernel version it was introduced.
+I then used this template to document BPF_MAP_TYPE_ARRAY and
+BPF_MAP_TYPE_PERCPU_ARRAY
 
-I can see it now, thanks!
+v1->v2:
+- point to selftests for functional examples
+- update examples to follow kernel style
+- add docs for BPF_F_MMAPABLE
+
+Dave Tucker (2):
+  bpf, docs: add kernel version to map_cgroup_storage
+  bpf, docs: document BPF_MAP_TYPE_ARRAY
+
+ Documentation/bpf/map_array.rst          | 172 +++++++++++++++++++++++
+ Documentation/bpf/map_cgroup_storage.rst |   2 +
+ 2 files changed, 174 insertions(+)
+ create mode 100644 Documentation/bpf/map_array.rst
 
 -- 
-With Best Regards,
-Andy Shevchenko
-
+2.33.1
 
