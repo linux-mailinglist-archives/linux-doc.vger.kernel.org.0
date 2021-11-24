@@ -2,114 +2,173 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 6D99045CD5D
-	for <lists+linux-doc@lfdr.de>; Wed, 24 Nov 2021 20:36:13 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id E785A45CDB9
+	for <lists+linux-doc@lfdr.de>; Wed, 24 Nov 2021 21:14:21 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S243078AbhKXTjT (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 24 Nov 2021 14:39:19 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:34708 "EHLO
-        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S238116AbhKXTjR (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Wed, 24 Nov 2021 14:39:17 -0500
-Received: from mail-pf1-x449.google.com (mail-pf1-x449.google.com [IPv6:2607:f8b0:4864:20::449])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 18F0AC061574
-        for <linux-doc@vger.kernel.org>; Wed, 24 Nov 2021 11:36:08 -0800 (PST)
-Received: by mail-pf1-x449.google.com with SMTP id y124-20020a623282000000b0047a09271e49so2053576pfy.16
-        for <linux-doc@vger.kernel.org>; Wed, 24 Nov 2021 11:36:08 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=google.com; s=20210112;
-        h=date:message-id:mime-version:subject:from:to:cc;
-        bh=l9t6ClhMMo4edSjmJdir8QUj58OMyUYJRTb0MJXDOKU=;
-        b=i0/Ngz3cNacHmR60ZQrdeEnU5wK465ot7VF/quxdpABPcQ5rReQE4P1dvpSxwpUQ3m
-         WJ7qE/WsmjAnexVyI5rsHFc8xD8POs/0ISZbs4ZJkhR+CYum1Q3AFocYRIxWrBtGPYyd
-         kpGigPgr0Gy6viXOgyakF3EJmTn3zFz9OVVwTg9lIs9gTEHhaESQjUH4FFP+hPxZ3q3D
-         aPs6s2Nsd5VhVbRR2vRo55J4x+AdhEx7XRnb2UkZLKv2t2yG6O4cp3R60tecsUAshY60
-         boOQrsQpXPVxDlp5sBkCJxX+Cl7biSAKJg+KC20HTZUp3GnjLr+bKkhdo0e7k5hun9DX
-         hd2Q==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=x-gm-message-state:date:message-id:mime-version:subject:from:to:cc;
-        bh=l9t6ClhMMo4edSjmJdir8QUj58OMyUYJRTb0MJXDOKU=;
-        b=qVrKuGZ+QAoDq7sGTvZTE2Yqw+TyyrbWeEUCZ2KHkdwGd6oB9ojWA2nVcUlppsemNm
-         Ej3AjoaIbXJ3TWGgKfHOHTG2kaEHiWLzVVIbwVTzPj2NepI0z8YcIK7+rddNah28eZES
-         g0G0URsdg+W6F1EWQtCgRUptq1xscwpDRbC6E1dzP8QKStV+VGP1FrsFRw63r8iwQ0cp
-         hIn2ZRcOBVgKZ32SsJlEpLDRf0si3ySfdO7C0kzHbhAcUHJby3C9JA0cE/MwdU9r+5A8
-         8MrdKWK5fT1KfXeOQ5YpQBBJPsJsiE0KekY4oWZGe1DSGQjG3Qb3oj/8iNb0d3o5ixoU
-         3Gog==
-X-Gm-Message-State: AOAM533C9afZC6J8eV8zAfonWImeT4214hQxRX54yuT8t8l//e/2H/+7
-        XiT77VvE88gP0FzZPtHlLDF6dTGORts=
-X-Google-Smtp-Source: ABdhPJzIBX9oxqVPB6dAYbBGP63Ursk9otTuOWoAVdTYt8LpHs+DLkFQWjiFWGnpyjXSRzphENtqYSJ9moM=
-X-Received: from surenb-desktop.mtv.corp.google.com ([2620:15c:211:200:ecf7:86c0:3b4d:493])
- (user=surenb job=sendgmr) by 2002:a63:914c:: with SMTP id l73mr12197689pge.184.1637782567590;
- Wed, 24 Nov 2021 11:36:07 -0800 (PST)
-Date:   Wed, 24 Nov 2021 11:36:04 -0800
-Message-Id: <20211124193604.2758863-1-surenb@google.com>
-Mime-Version: 1.0
-X-Mailer: git-send-email 2.34.0.rc2.393.gf8c9666880-goog
-Subject: [PATCH 1/1] sysctl: change watermark_scale_factor max limit to 30%
-From:   Suren Baghdasaryan <surenb@google.com>
-To:     akpm@linux-foundation.org
-Cc:     mhocko@suse.com, hannes@cmpxchg.org, mcgrof@kernel.org,
-        keescook@chromium.org, yzaikin@google.com,
-        dave.hansen@linux.intel.com, vbabka@suse.cz,
-        mgorman@techsingularity.net, corbet@lwn.net, yi.zhang@huawei.com,
-        xi.fengfei@h3c.com, rppt@kernel.org, linux-doc@vger.kernel.org,
-        linux-kernel@vger.kernel.org, linux-fsdevel@vger.kernel.org,
-        kernel-team@android.com, surenb@google.com
-Content-Type: text/plain; charset="UTF-8"
+        id S245346AbhKXUR1 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 24 Nov 2021 15:17:27 -0500
+Received: from mga05.intel.com ([192.55.52.43]:13498 "EHLO mga05.intel.com"
+        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
+        id S244409AbhKXUR1 (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Wed, 24 Nov 2021 15:17:27 -0500
+X-IronPort-AV: E=McAfee;i="6200,9189,10178"; a="321601944"
+X-IronPort-AV: E=Sophos;i="5.87,261,1631602800"; 
+   d="scan'208";a="321601944"
+Received: from orsmga008.jf.intel.com ([10.7.209.65])
+  by fmsmga105.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 24 Nov 2021 12:14:17 -0800
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.87,261,1631602800"; 
+   d="scan'208";a="510015778"
+Received: from chang-linux-3.sc.intel.com ([172.25.66.175])
+  by orsmga008.jf.intel.com with ESMTP; 24 Nov 2021 12:14:16 -0800
+From:   "Chang S. Bae" <chang.seok.bae@intel.com>
+To:     tglx@linutronix.de, bp@suse.de, dave.hansen@linux.intel.com,
+        mingo@kernel.org, luto@kernel.org, x86@kernel.org,
+        herbert@gondor.apana.org.au
+Cc:     linux-kernel@vger.kernel.org, linux-crypto@vger.kernel.org,
+        dan.j.williams@intel.com, charishma1.gairuboyina@intel.com,
+        kumar.n.dwarakanath@intel.com, lalithambika.krishnakumar@intel.com,
+        ravi.v.shankar@intel.com, chang.seok.bae@intel.com,
+        linux-doc@vger.kernel.org
+Subject: [PATCH v3 01/15] Documentation/x86: Document Key Locker
+Date:   Wed, 24 Nov 2021 12:06:46 -0800
+Message-Id: <20211124200700.15888-2-chang.seok.bae@intel.com>
+X-Mailer: git-send-email 2.17.1
+In-Reply-To: <20211124200700.15888-1-chang.seok.bae@intel.com>
+References: <20211124200700.15888-1-chang.seok.bae@intel.com>
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-For embedded systems with low total memory, having to run applications
-with relatively large memory requirements, 10% max limitation for
-watermark_scale_factor poses an issue of triggering direct reclaim
-every time such application is started. This results in slow application
-startup times and bad end-user experience.
-By increasing watermark_scale_factor max limit we allow vendors more
-flexibility to choose the right level of kswapd aggressiveness for
-their device and workload requirements.
+Document the overview of the feature along with relevant consideration when
+provisioning dm-crypt volumes with AES-KL instead of AES-NI.
 
-Signed-off-by: Suren Baghdasaryan <surenb@google.com>
+Signed-off-by: Chang S. Bae <chang.seok.bae@intel.com>
+Reviewed-by: Dan Williams <dan.j.williams@intel.com>
+Cc: linux-doc@vger.kernel.org
+Cc: linux-kernel@vger.kernel.org
 ---
- Documentation/admin-guide/sysctl/vm.rst | 2 +-
- kernel/sysctl.c                         | 3 ++-
- 2 files changed, 3 insertions(+), 2 deletions(-)
+Changes from RFC v2:
+* Add as a new patch.
+---
+ Documentation/x86/index.rst     |  1 +
+ Documentation/x86/keylocker.rst | 98 +++++++++++++++++++++++++++++++++
+ 2 files changed, 99 insertions(+)
+ create mode 100644 Documentation/x86/keylocker.rst
 
-diff --git a/Documentation/admin-guide/sysctl/vm.rst b/Documentation/admin-guide/sysctl/vm.rst
-index 5e795202111f..f4804ce37c58 100644
---- a/Documentation/admin-guide/sysctl/vm.rst
-+++ b/Documentation/admin-guide/sysctl/vm.rst
-@@ -948,7 +948,7 @@ how much memory needs to be free before kswapd goes back to sleep.
- 
- The unit is in fractions of 10,000. The default value of 10 means the
- distances between watermarks are 0.1% of the available memory in the
--node/system. The maximum value is 1000, or 10% of memory.
-+node/system. The maximum value is 3000, or 30% of memory.
- 
- A high rate of threads entering direct reclaim (allocstall) or kswapd
- going to sleep prematurely (kswapd_low_wmark_hit_quickly) can indicate
-diff --git a/kernel/sysctl.c b/kernel/sysctl.c
-index 083be6af29d7..2ab4edb6e450 100644
---- a/kernel/sysctl.c
-+++ b/kernel/sysctl.c
-@@ -122,6 +122,7 @@ static unsigned long long_max = LONG_MAX;
- static int one_hundred = 100;
- static int two_hundred = 200;
- static int one_thousand = 1000;
-+static int three_thousand = 3000;
- #ifdef CONFIG_PRINTK
- static int ten_thousand = 10000;
- #endif
-@@ -2959,7 +2960,7 @@ static struct ctl_table vm_table[] = {
- 		.mode		= 0644,
- 		.proc_handler	= watermark_scale_factor_sysctl_handler,
- 		.extra1		= SYSCTL_ONE,
--		.extra2		= &one_thousand,
-+		.extra2		= &three_thousand,
- 	},
- 	{
- 		.procname	= "percpu_pagelist_high_fraction",
+diff --git a/Documentation/x86/index.rst b/Documentation/x86/index.rst
+index f498f1d36cd3..bbea47ea10f6 100644
+--- a/Documentation/x86/index.rst
++++ b/Documentation/x86/index.rst
+@@ -38,3 +38,4 @@ x86-specific Documentation
+    features
+    elf_auxvec
+    xstate
++   keylocker
+diff --git a/Documentation/x86/keylocker.rst b/Documentation/x86/keylocker.rst
+new file mode 100644
+index 000000000000..e65d936ef199
+--- /dev/null
++++ b/Documentation/x86/keylocker.rst
+@@ -0,0 +1,98 @@
++.. SPDX-License-Identifier: GPL-2.0
++
++==============
++x86 Key Locker
++==============
++
++Introduction
++============
++
++Key Locker is a CPU feature feature to reduce key exfiltration
++opportunities while maintaining a programming interface similar to AES-NI.
++It converts the AES key into an encoded form, called the 'key handle'. The
++key handle is a wrapped version of the clear-text key where the wrapping
++key has limited exposure. Once converted, all subsequent data encryption
++using new AES instructions (AES-KL) uses this key handle, reducing the
++exposure of private key material in memory.
++
++Internal Wrapping Key (IWKey)
++=============================
++
++The CPU-internal wrapping key is an entity in a software-invisible CPU
++state. On every system boot, a new key is loaded. So the key handle that
++was encoded by the old wrapping key is no longer usable on system shutdown
++or reboot.
++
++And the key may be lost on the following exceptional situation upon wakeup:
++
++IWKey Restore Failure
++---------------------
++
++The CPU state is volatile with the ACPI S3/4 sleep states. When the system
++supports those states, the key has to be backed up so that it is restored
++on wake up. The kernel saves the key in non-volatile media.
++
++The event of an IWKey restore failure upon resume from suspend, all
++established key handles become invalid. In flight dm-crypt operations
++receive error results from pending operations. In the likely scenario that
++dm-crypt is hosting the root filesystem the recovery is identical to if a
++storage controller failed to resume from suspend, reboot. If the volume
++impacted by an IWKey restore failure is a data-volume then it is possible
++that I/O errors on that volume do not bring down the rest of the system.
++However, a reboot is still required because the kernel will have
++soft-disabled Key Locker. Upon the failure, the crypto library code will
++return -ENODEV on every AES-KL function call. The Key Locker implementation
++only loads a new IWKey at initial boot, not any time after like resume from
++suspend.
++
++Use Case and Non-use Cases
++==========================
++
++Bare metal disk encryption is the only intended use case.
++
++Userspace usage is not supported because there is no ABI provided to
++communicate and coordinate wrapping-key restore failure to userspace. For
++now, key restore failures are only coordinated with kernel users. But the
++kernel can not prevent userspace from using the feature's AES instructions
++('AES-KL') when the feature has been enabled. So, the lack of userspace
++support is only documented, not actively enforced.
++
++Key Locker is not expected to be advertised to guest VMs and the kernel
++implementation ignores it even if the VMM enumerates the capability. The
++expectation is that a guest VM wants private IWKey state, but the
++architecture does not provide that. An emulation of that capability, by
++caching per VM IWKeys in memory, defeats the purpose of Key Locker. The
++backup / restore facility is also not performant enough to be suitable for
++guest VM context switches.
++
++AES Instruction Set
++===================
++
++The feature accompanies a new AES instruction set. This instruction set is
++analogous to AES-NI. A set of AES-NI instructions can be mapped to an
++AES-KL instruction. For example, AESENC128KL is responsible for ten rounds
++of transformation, which is equivalent to nine times AESENC and one
++AESENCLAST in AES-NI.
++
++But they have some notable differences:
++
++* AES-KL provides a secure data transformation using an encrypted key.
++
++* If an invalid key handle is provided, e.g. a corrupted one or a handle
++  restriction failure, the instruction fails with setting RFLAGS.ZF. The
++  crypto library implementation includes the flag check to return an error
++  code. Note that the flag is also set when the internal wrapping key is
++  changed because of missing backup.
++
++* AES-KL implements support for 128-bit and 256-bit keys, but there is no
++  AES-KL instruction to process an 192-bit key. But there is no AES-KL
++  instruction to process a 192-bit key. The AES-KL cipher implementation
++  logs a warning message with a 192-bit key and then falls back to AES-NI.
++  So, this 192-bit key-size limitation is only documented, not enforced. It
++  means the key will remain in clear-text in memory. This is to meet Linux
++  crypto-cipher expectation that each implementation must support all the
++  AES-compliant key sizes.
++
++* Some AES-KL hardware implementation may have noticeable performance
++  overhead when compared with AES-NI instructions.
++
 -- 
-2.34.0.rc2.393.gf8c9666880-goog
+2.17.1
 
