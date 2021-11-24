@@ -2,80 +2,103 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id BB54E45B0BF
-	for <lists+linux-doc@lfdr.de>; Wed, 24 Nov 2021 01:31:01 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 1741145B0C6
+	for <lists+linux-doc@lfdr.de>; Wed, 24 Nov 2021 01:35:49 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S239347AbhKXAeH (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 23 Nov 2021 19:34:07 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:60412 "EHLO
+        id S230285AbhKXAi4 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 23 Nov 2021 19:38:56 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:33414 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S233408AbhKXAdW (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 23 Nov 2021 19:33:22 -0500
-Received: from mail-lj1-x22c.google.com (mail-lj1-x22c.google.com [IPv6:2a00:1450:4864:20::22c])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id A0627C061574
-        for <linux-doc@vger.kernel.org>; Tue, 23 Nov 2021 16:30:13 -0800 (PST)
-Received: by mail-lj1-x22c.google.com with SMTP id l7so1654142lja.2
-        for <linux-doc@vger.kernel.org>; Tue, 23 Nov 2021 16:30:13 -0800 (PST)
+        with ESMTP id S230249AbhKXAiz (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 23 Nov 2021 19:38:55 -0500
+Received: from mail-oi1-x236.google.com (mail-oi1-x236.google.com [IPv6:2607:f8b0:4864:20::236])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id E1D70C061714
+        for <linux-doc@vger.kernel.org>; Tue, 23 Nov 2021 16:35:46 -0800 (PST)
+Received: by mail-oi1-x236.google.com with SMTP id 7so1589786oip.12
+        for <linux-doc@vger.kernel.org>; Tue, 23 Nov 2021 16:35:46 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=mime-version:reply-to:from:date:message-id:subject:to;
-        bh=zejIlZjGjvzTKDlE9IDzfKlgpBmC2NhrN3/klGVK4ZA=;
-        b=BOX3BoYl8kkZ5wFN2RxfUWqF4uAeNeD/+IzWEt54T3NegeDW3kvmC1tjePiuT9gEvS
-         MOLztt7Wjvy5eZulYcF6znumaO/KNjeiw9D//NS8sNb7wE/sdCw0VrUoWjat/wEjWn5j
-         qVu5Zavfqhu3ZQ00fuaf7FMDOy3fspjxfTSrl7MmgAJmTDs90ffoMJ6Ff2HJ5nSKwS7T
-         w0JO/+BI7gjN5U0yozjq9S7/9tkxMlMRGow2lE9FzHKkqzwN6fbnchKyGsR6+mgXQTck
-         pWLTdmyfEJAP0oRJiCXtZe62i2MRh00UILPLNclfrJWrOvA6s2ypTc5JDvfizNyL9NlL
-         74qQ==
+        d=linaro.org; s=google;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc;
+        bh=kNh0jt8tv4maN2YkF0cmeBfMTgSPYwcWwHTrIEj8PD4=;
+        b=RaJX8F1zRhXuDy80KZTcn+dQG5gDuyJcbR9Truhvisst9naZx2GPRqhKCfPSGA7bH9
+         S4ey/ByihGFenVcwBSdlZOoytstPoEDO3jcbQaHZtCFB659a4vMl6TDNasJnhob3sdPe
+         aZLjIOt8VGWOTaeoFiRoZCXBOiig0A60Z8z8jBpa8IniwasBhYcZKKI+c+m6Xp9SY+FU
+         AoTN/BHReBRXjpUdt562mH0OPwsBNAXATEEKi6HNKKQ77EmeolMy74FoUMlsP1NdVzLP
+         Y/Rxmk8nc15M3CDmwAJZ+vzWptXyXguBqsfmoilurxOTOpLua1Tw66SEDf0e4T27hoq7
+         sygw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=x-gm-message-state:mime-version:reply-to:from:date:message-id
-         :subject:to;
-        bh=zejIlZjGjvzTKDlE9IDzfKlgpBmC2NhrN3/klGVK4ZA=;
-        b=vzC93cI4j2iXjAJGlEUdix1JWcI98Fen6TlYuePGvphuest2DLXFts+AJh1T4b5c1X
-         e1w/eaSHvaRSP3H8jU+ExZhDrB5aFZJTNp2aRMQdYc5lwjhzm4mpD2WSVXBkqMq573ob
-         bRv+96e0KuajmHgaBmpUoMjXsCHZ0dDzY/kM0mKRdPzufoSRdNDKP+2lMK3cadnjaZf8
-         3v2qty9fsW9y+3nLEA6YLbmMTQk51Gs4sl2lPv/MdlmjB3CABEti1VikxnNm1cWlc20T
-         gY+s3PXJ5kvMhY+puCOXohfNFRvY0BGtV4+MMcCrh3Yd+kEkyVp6QcPVIrO8FhXKaKof
-         iYzQ==
-X-Gm-Message-State: AOAM532xNVe7JDoDtOZhAhY8bgqDL6G/eO57Aw0bc25YKr/q0OrMLBzq
-        tW7tnbWPZiWhxb3r6IzZn6inQq7JtYgIgrM0Rxw=
-X-Google-Smtp-Source: ABdhPJxLTUC6kGdE8pxRp4n8/ygKhHFI1AmEo6EpxKA59xLAFn4mtvai0Qp/t27WYBSjj3SeGNCyj8/7Xk1LvEzu/g0=
-X-Received: by 2002:a2e:a5c9:: with SMTP id n9mr10018243ljp.512.1637713811299;
- Tue, 23 Nov 2021 16:30:11 -0800 (PST)
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=kNh0jt8tv4maN2YkF0cmeBfMTgSPYwcWwHTrIEj8PD4=;
+        b=VXVqqVF886D5Z9wczUUiJfD5io9jaj0LcSfChT3XB3rKlSPd6WFdqeVcwXFG6Muzhn
+         bYvkB/4QauYjZpdS4TcBNgruJvZcuDtF+ngaajQfOEYn7wm2FjPy4NdgjvfqEcukSq9H
+         9vNZFiEy/pS9B9a58VFK1b9h/yJ5WdGsG2k+iQpB/++uaDW5gmCMuK9AA0Xca3RFJc0M
+         FueWXhaX/KxqOlYyn7m5CYVgU6glfGaOdbIQvVNoMF23DY0ZY3wjZIYgabcOiwKiKx54
+         T30vuWZo/8dYfHVJiJryztM7M6LAYmuj5S/Ud/1lRayk07ufc0tMnu4i5oQClNdOpIwf
+         LKuA==
+X-Gm-Message-State: AOAM532khfSy3gCNCqWM/BAXWV2f0WM23yRkh3nPxHh0o3WHJK44O5kV
+        wVwxhm/lxYT1Y676aURCMZxISufWidqPDyWBDt2eCQ==
+X-Google-Smtp-Source: ABdhPJyNEmGOeKXUl3TxFGzLSZSdD+IztDjr0BhBBI2kJMnGgmHs2eAnjCm1/YARFHCchP1O0uJLUFFPcXuqbc1B5T8=
+X-Received: by 2002:a05:6808:60e:: with SMTP id y14mr1453521oih.162.1637714146248;
+ Tue, 23 Nov 2021 16:35:46 -0800 (PST)
 MIME-Version: 1.0
-Received: by 2002:aa6:d981:0:b0:14f:34a7:74b2 with HTTP; Tue, 23 Nov 2021
- 16:30:10 -0800 (PST)
-Reply-To: rubenherbert789@gmail.com
-From:   Ruben Herbert <mamadouflorent8@gmail.com>
-Date:   Wed, 24 Nov 2021 01:30:10 +0100
-Message-ID: <CABYuY+XWdbFU0oCr_rDuVWoSdopU2vEES0YsaTyknFdVwNh=QA@mail.gmail.com>
-Subject: ABANDONED FUND
-To:     undisclosed-recipients:;
+References: <20211123164902.35370-1-wsa+renesas@sang-engineering.com> <20211123164902.35370-2-wsa+renesas@sang-engineering.com>
+In-Reply-To: <20211123164902.35370-2-wsa+renesas@sang-engineering.com>
+From:   Linus Walleij <linus.walleij@linaro.org>
+Date:   Wed, 24 Nov 2021 01:35:34 +0100
+Message-ID: <CACRpkdYJqP7WJuhS9G65abCZHK1_LX9hkXU6o+k10t2LXw100w@mail.gmail.com>
+Subject: Re: [PATCH v5 1/1] gpio: add sloppy logic analyzer using polling
+To:     Wolfram Sang <wsa+renesas@sang-engineering.com>
+Cc:     linux-gpio@vger.kernel.org, linux-renesas-soc@vger.kernel.org,
+        Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
+        linux-kernel@vger.kernel.org, Jonathan Corbet <corbet@lwn.net>,
+        Bartosz Golaszewski <brgl@bgdev.pl>, linux-doc@vger.kernel.org
 Content-Type: text/plain; charset="UTF-8"
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Dear Beneficiary,
+Hi Wolfram!
 
-How are you today? I need the following answers from you immediately:
+I like this patch.
 
-Did you abandon your funds of US$35,000,000.00?
+On Tue, Nov 23, 2021 at 5:49 PM Wolfram Sang
+<wsa+renesas@sang-engineering.com> wrote:
 
-Did you authorize a lawyer to claim the fund on your behalf and that
-the funds should be sent to the below account details?;
+> +Introduction
+> +============
+> +
+> +This document briefly describes how to run the GPIO based in-kernel sloppy
+> +logic analyzer running on an isolated CPU.
+> +
+> +Note that this is a last resort analyzer which can be affected by latencies,
+> +non-deterministic code paths and non-maskable interrupts. It is called 'sloppy'
+> +for a reason. However, for e.g. remote development, it may be useful to get a
+> +first view and aid further debugging.
 
-Canadian Imperial Bank of Commerce
-1120 Grant Ave Wpg Mb Canada R3M 2A6
-Usd Acct No: 01007-93-17899
-Swift Code: cibccatt
-Beneficiary Name: Fitzroy Joseph
+Maybe a small paragraph first saying what this is, the usecase (feel
+free to steal,
+rewrite etc):
 
-Kindly get back to me immediately to avoid paying the wrong person.
+The sloppy logic analyzer will utilize a few GPIO lines in input mode on a
+system to rapidly sample these digital lines, which will, if the
+Nyquist criteria
+is met, result in a time series log with approximate waveforms as they appeared
+on these lines.
 
-I await your urgent response.
+One way to use it is to analyze external traffic connected to these GPIO
+lines with wires (i.e. digital probes), acting as a common logic analyzer.
 
-Yours sincerely,,
-Dr. Ruben Herbert
-Head, Financial System Stability,
-Central Bank of Nigeria (CBN)
+Another thing it can do is to snoop on on-chip peripherals if the I/O cells of
+these peripherals can be used in GPIO input mode at the same time as they
+are being used as inputs or outputs for the peripheral, for example it would be
+possible to scale down the speed of a certain MMC controller and snoop
+the traffic between the MMC controller and the SD card by the sloppy
+logic analyzer. In the pin control subsystem such pin controllers are
+called "non-strict": a certain pin can be used with a certain peripheral and
+as a GPIO input line at the same time.
+
+Yours,
+Linus Walleij
