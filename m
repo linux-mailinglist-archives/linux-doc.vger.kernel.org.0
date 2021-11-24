@@ -2,119 +2,91 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id EC82A45CDC1
-	for <lists+linux-doc@lfdr.de>; Wed, 24 Nov 2021 21:14:34 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id E7A8645CDB1
+	for <lists+linux-doc@lfdr.de>; Wed, 24 Nov 2021 21:12:56 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1351568AbhKXURf (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 24 Nov 2021 15:17:35 -0500
-Received: from mga05.intel.com ([192.55.52.43]:13503 "EHLO mga05.intel.com"
+        id S244123AbhKXUQF (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 24 Nov 2021 15:16:05 -0500
+Received: from www.zeus03.de ([194.117.254.33]:41528 "EHLO mail.zeus03.de"
         rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S1351528AbhKXURd (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Wed, 24 Nov 2021 15:17:33 -0500
-X-IronPort-AV: E=McAfee;i="6200,9189,10178"; a="321601959"
-X-IronPort-AV: E=Sophos;i="5.87,261,1631602800"; 
-   d="scan'208";a="321601959"
-Received: from orsmga008.jf.intel.com ([10.7.209.65])
-  by fmsmga105.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 24 Nov 2021 12:14:20 -0800
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.87,261,1631602800"; 
-   d="scan'208";a="510015815"
-Received: from chang-linux-3.sc.intel.com ([172.25.66.175])
-  by orsmga008.jf.intel.com with ESMTP; 24 Nov 2021 12:14:20 -0800
-From:   "Chang S. Bae" <chang.seok.bae@intel.com>
-To:     tglx@linutronix.de, bp@suse.de, dave.hansen@linux.intel.com,
-        mingo@kernel.org, luto@kernel.org, x86@kernel.org,
-        herbert@gondor.apana.org.au
-Cc:     linux-kernel@vger.kernel.org, linux-crypto@vger.kernel.org,
-        dan.j.williams@intel.com, charishma1.gairuboyina@intel.com,
-        kumar.n.dwarakanath@intel.com, lalithambika.krishnakumar@intel.com,
-        ravi.v.shankar@intel.com, chang.seok.bae@intel.com,
-        linux-doc@vger.kernel.org
-Subject: [PATCH v3 09/15] x86/cpu: Add a configuration and command line option for Key Locker
-Date:   Wed, 24 Nov 2021 12:06:54 -0800
-Message-Id: <20211124200700.15888-10-chang.seok.bae@intel.com>
-X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20211124200700.15888-1-chang.seok.bae@intel.com>
-References: <20211124200700.15888-1-chang.seok.bae@intel.com>
+        id S244113AbhKXUQF (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Wed, 24 Nov 2021 15:16:05 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=simple; d=sang-engineering.com; h=
+        date:from:to:cc:subject:message-id:references:mime-version
+        :content-type:in-reply-to; s=k1; bh=5h+lbC2uEFO5eMdrljkXLD3H2lYi
+        /fQp5F0AEsOmHOg=; b=BO8O/XK6qe/sWBWEdu/Ot0fUjaT3xqTSwXtVku349r/b
+        zeDfMzbsKR/Jv33XFcElBmzoCSm8AycClDGmKce38oxcaqvbznjR6QDbrnmqu/Az
+        LsqSsI9udID3nbS0QLVGxXhTFarUk8vXk/CS3XL+fcB/aLjIdpEJBqTsNDqiSYo=
+Received: (qmail 1783178 invoked from network); 24 Nov 2021 21:12:53 +0100
+Received: by mail.zeus03.de with ESMTPSA (TLS_AES_256_GCM_SHA384 encrypted, authenticated); 24 Nov 2021 21:12:53 +0100
+X-UD-Smtp-Session: l3s3148p1@3q9Se47RMKogAwDPXwvgALdEH2HxEp75
+Date:   Wed, 24 Nov 2021 21:12:46 +0100
+From:   Wolfram Sang <wsa+renesas@sang-engineering.com>
+To:     Bartosz Golaszewski <brgl@bgdev.pl>
+Cc:     "open list:GPIO SUBSYSTEM" <linux-gpio@vger.kernel.org>,
+        Linux-Renesas <linux-renesas-soc@vger.kernel.org>,
+        Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
+        Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
+        Jonathan Corbet <corbet@lwn.net>,
+        Linus Walleij <linus.walleij@linaro.org>,
+        linux-doc <linux-doc@vger.kernel.org>
+Subject: Re: [PATCH v5 1/1] gpio: add sloppy logic analyzer using polling
+Message-ID: <YZ6cvkvdVM1Ui0Ck@ninjato>
+Mail-Followup-To: Wolfram Sang <wsa+renesas@sang-engineering.com>,
+        Bartosz Golaszewski <brgl@bgdev.pl>,
+        "open list:GPIO SUBSYSTEM" <linux-gpio@vger.kernel.org>,
+        Linux-Renesas <linux-renesas-soc@vger.kernel.org>,
+        Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
+        Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
+        Jonathan Corbet <corbet@lwn.net>,
+        Linus Walleij <linus.walleij@linaro.org>,
+        linux-doc <linux-doc@vger.kernel.org>
+References: <20211123164902.35370-1-wsa+renesas@sang-engineering.com>
+ <20211123164902.35370-2-wsa+renesas@sang-engineering.com>
+ <CAMRc=McG6fn_VX7+OPXUWjX1tYozQPg1eyEz-3fJMx35DiXimg@mail.gmail.com>
+MIME-Version: 1.0
+Content-Type: multipart/signed; micalg=pgp-sha512;
+        protocol="application/pgp-signature"; boundary="8kTIr+wg0g78RnTl"
+Content-Disposition: inline
+In-Reply-To: <CAMRc=McG6fn_VX7+OPXUWjX1tYozQPg1eyEz-3fJMx35DiXimg@mail.gmail.com>
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Add CONFIG_X86_KEYLOCKER to gate whether Key Locker is initialized at boot.
-The option is selected by the Key Locker cipher module CRYPTO_AES_KL (to be
-added in a later patch).
 
-Add a new command line option "nokeylocker" to optionally override the
-default CONFIG_X86_KEYLOCKER=y behavior.
+--8kTIr+wg0g78RnTl
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-Signed-off-by: Chang S. Bae <chang.seok.bae@intel.com>
-Reviewed-by: Dan Williams <dan.j.williams@intel.com>
-Cc: linux-doc@vger.kernel.org
-Cc: linux-kernel@vger.kernel.org
----
-Changes from RFC v2:
-* Make the option selected by CRYPTO_AES_KL. (Dan Williams)
-* Massage the changelog and the config option description.
----
- Documentation/admin-guide/kernel-parameters.txt |  2 ++
- arch/x86/Kconfig                                |  3 +++
- arch/x86/kernel/cpu/common.c                    | 16 ++++++++++++++++
- 3 files changed, 21 insertions(+)
 
-diff --git a/Documentation/admin-guide/kernel-parameters.txt b/Documentation/admin-guide/kernel-parameters.txt
-index 9725c546a0d4..336495722b12 100644
---- a/Documentation/admin-guide/kernel-parameters.txt
-+++ b/Documentation/admin-guide/kernel-parameters.txt
-@@ -3399,6 +3399,8 @@
- 
- 	nohugevmalloc	[PPC] Disable kernel huge vmalloc mappings.
- 
-+	nokeylocker	[X86] Disable Key Locker hardware feature.
-+
- 	nosmt		[KNL,S390] Disable symmetric multithreading (SMT).
- 			Equivalent to smt=1.
- 
-diff --git a/arch/x86/Kconfig b/arch/x86/Kconfig
-index b9281fab4e3e..b0050e8cf723 100644
---- a/arch/x86/Kconfig
-+++ b/arch/x86/Kconfig
-@@ -1864,6 +1864,9 @@ config X86_INTEL_MEMORY_PROTECTION_KEYS
- 
- 	  If unsure, say y.
- 
-+config X86_KEYLOCKER
-+	bool
-+
- choice
- 	prompt "TSX enable mode"
- 	depends on CPU_SUP_INTEL
-diff --git a/arch/x86/kernel/cpu/common.c b/arch/x86/kernel/cpu/common.c
-index 23b4aa437c1e..db1fc9ff0fe3 100644
---- a/arch/x86/kernel/cpu/common.c
-+++ b/arch/x86/kernel/cpu/common.c
-@@ -364,6 +364,22 @@ static __always_inline void setup_umip(struct cpuinfo_x86 *c)
- /* These bits should not change their value after CPU init is finished. */
- static const unsigned long cr4_pinned_mask =
- 	X86_CR4_SMEP | X86_CR4_SMAP | X86_CR4_UMIP | X86_CR4_FSGSBASE;
-+
-+static __init int x86_nokeylocker_setup(char *arg)
-+{
-+	/* Expect an exact match without trailing characters. */
-+	if (strlen(arg))
-+		return 0;
-+
-+	if (!cpu_feature_enabled(X86_FEATURE_KEYLOCKER))
-+		return 1;
-+
-+	setup_clear_cpu_cap(X86_FEATURE_KEYLOCKER);
-+	pr_info("x86/keylocker: Disabled by kernel command line.\n");
-+	return 1;
-+}
-+__setup("nokeylocker", x86_nokeylocker_setup);
-+
- static DEFINE_STATIC_KEY_FALSE_RO(cr_pinning);
- static unsigned long cr4_pinned_bits __ro_after_init;
- 
--- 
-2.17.1
+> I'd argue that debugfs isn't really the right interface for a useful
+> tool that is this LA.
 
+I have to disagree. This is a kind-of logic analyzer, it is sloppy. To
+emphasize it is for debugging only, I think debugfs is the proper place
+for it.
+
+But thanks for finding it useful :)
+
+
+--8kTIr+wg0g78RnTl
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAABCgAdFiEEOZGx6rniZ1Gk92RdFA3kzBSgKbYFAmGenLoACgkQFA3kzBSg
+KbZTHBAAl53joTubydDtvDudsOhnY1cCG3jItCrq6QwPsm4d/4gw3fsgCuZiWNKB
+tuismw4Fp8Heq5krH4D7n0lWw36VzIo8UrMZeocI1LW9SV8DL9os1ZjVh5wIMKen
+LEa8rjnFsOg29TKjxw5Yuo0K2td0zNQalvF51VwU21QoD++kfhYdcDJkIfT4/3GO
+uafwKgudSwBzw3X71fUi4LVjEYcTHHcv00dlazfrKxYWXdib79ZF+0i/mHJPjKcr
+icR26/rJ9fWa26zRyFjajq14oE+fgWGFfWkrfFfVmtX/NDR16NcbYrHItcRpi9p/
+pB2tqopqoweMA3B8YV1IWypKuiYSk9AhZcAad3dXPeee+pnpW+25SgnR2vtS5pHf
+eEOko+yzep/LongwLeE7qySt8k3+N7LadxRJ41o7QMbRQuTVrdZLaQTidzRpWd88
+UKGQd1fQZBLnwWYLr5PTcK60LLC/oZ6SGYQe2LBwQdp6c8h0cSK7i06nm0i1/GkZ
+toP5AbhvkLA6BW5Sv8ZB6ZOeDBVE/8AUkh8ZCP3Y7QVgT2cn0y218I/llOHZMdNW
+XJjdACTO9A40srGu4RePqiomv5G6KDJfRX5Dd5xgOvk/rbu7HvVSDYj7Hi5onePT
+WXE4ZigI3JuYx6yK50Mn8sxSOb3pn7ej61uvekUHkUgpOZxRZUw=
+=VLxN
+-----END PGP SIGNATURE-----
+
+--8kTIr+wg0g78RnTl--
