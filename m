@@ -2,515 +2,397 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id F2F9445CC4B
-	for <lists+linux-doc@lfdr.de>; Wed, 24 Nov 2021 19:40:28 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 02F8045CCD3
+	for <lists+linux-doc@lfdr.de>; Wed, 24 Nov 2021 20:13:00 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1350834AbhKXSng (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 24 Nov 2021 13:43:36 -0500
-Received: from mail-bn7nam10on2089.outbound.protection.outlook.com ([40.107.92.89]:53088
-        "EHLO NAM10-BN7-obe.outbound.protection.outlook.com"
-        rhost-flags-OK-OK-OK-FAIL) by vger.kernel.org with ESMTP
-        id S243850AbhKXSnd (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Wed, 24 Nov 2021 13:43:33 -0500
+        id S244335AbhKXTQI (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 24 Nov 2021 14:16:08 -0500
+Received: from mx0b-00069f02.pphosted.com ([205.220.177.32]:45462 "EHLO
+        mx0b-00069f02.pphosted.com" rhost-flags-OK-OK-OK-OK)
+        by vger.kernel.org with ESMTP id S244242AbhKXTQH (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Wed, 24 Nov 2021 14:16:07 -0500
+Received: from pps.filterd (m0246630.ppops.net [127.0.0.1])
+        by mx0b-00069f02.pphosted.com (8.16.1.2/8.16.1.2) with SMTP id 1AOIFX8F026943;
+        Wed, 24 Nov 2021 19:10:25 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=oracle.com; h=from : to : cc :
+ subject : date : message-id : content-type : mime-version;
+ s=corp-2021-07-09; bh=aYH/nCTL7nXVEqIFHAReCCmZNxJXpjTths1wgvDt5jY=;
+ b=0iZVKFsVj0EVi5vvaYk26Yba2+1+8aNllg4wOvYpCj6Hxg2nXrSfQW2y4j17v2lwEYda
+ 3gag+0FxkwiJWRCpD5ESXS4Z/jXihNCqAASFBCAXNZhhcgtVTREJ9aAQlwtf/yxlaIkZ
+ mD8XbEVWZgY+KXvnW94CC5y1Q12k7WbVSLn3BDgXFM1i6Eq6pyDuIc2HzcPWDXQ45j5U
+ ZC1TYKP7h3vKrIqa65XYeoCf0/Y4kY/uSUgMwdAw9PfXHmu9DUm/lkoc4ihUYWnc1M6h
+ Kh/j7XHDJINFLffnGTaNnhLP6LdyPmUJWsDVSMzvePejV5Wy45d2yU+g38+Sa7n9Icga JA== 
+Received: from aserp3030.oracle.com (aserp3030.oracle.com [141.146.126.71])
+        by mx0b-00069f02.pphosted.com with ESMTP id 3chk002yr0-1
+        (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+        Wed, 24 Nov 2021 19:10:24 +0000
+Received: from pps.filterd (aserp3030.oracle.com [127.0.0.1])
+        by aserp3030.oracle.com (8.16.1.2/8.16.1.2) with SMTP id 1AOJ14pi037342;
+        Wed, 24 Nov 2021 19:10:23 GMT
+Received: from nam02-bn1-obe.outbound.protection.outlook.com (mail-bn1nam07lp2044.outbound.protection.outlook.com [104.47.51.44])
+        by aserp3030.oracle.com with ESMTP id 3ceq2ghy9p-1
+        (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+        Wed, 24 Nov 2021 19:10:23 +0000
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=UkiysFjmXo7Mq67UF65IhqWReC7fP3SW+wtGUWjIwiJoGz4OKYNV3PaCieKhcIht78OIl8WFKGlH606xo0U0tqZ/ZJtZpkCa5c8/ZbTeyV2pyvcTXZmM0X93drsdcXqNKEkJVh/skxI66dVEoJhHCqPLqik1fBzD4ykgtpUZynD0eqVSH7AsKeQyOx7uMlaxGiPdqQqI7QYjbm61khVw9BopMtZkbNldH0x+gIMU8GFeJoI3fcW0Gc+KwG8FW/WlVjKP681cVpoF3j+HDYG00xXPsM4qqGt+IR1viAcBpCqnsBnU+nv2rQbHDRSksZ1M4cLZ/dtX2+fBGvs/2tn6Ug==
+ b=GowOi9cg2L7FoZ1dayM1hoRNkBhi/vl/1E5Yh3P+5tdUU0Vum9DefOd3yT5dlWPEjUVlShggG3f1XCJtGEBGiIl8nLfFCYVhtKP/4Ih1jkYpMcd9Iy0VrHCjA1YkaUEYA4/XGOFbutfXKTDDKb+8xfC9WRHjVnG49lYV50JlpoHqtBUv7p6korBvffO0H5K/jpTmwr3Fyiy19rVW1vhbhXSYamCKMKugEG1UcCrnAEx6soIcpfQzh98wM1F+qNLQqR1vqGaVMW+eCpjvt2uaSfT3fpXxEgVvpI5FvhjJWMLDNp0qmKh5z3WFRBpTPvpDuUOxQKeLNkue/UC7gNsjBw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=UeDb+olG5Mm8/Zhr8lpsQLCZWYxtIT0Pqh2S1m2NRhY=;
- b=GPAdsGn/an42guBxVlOvLnXc71A1G9Wjk2lhO1GETHWH/c6e7t5wFGvQzHs0qX8Ec2NZKJFAUWESyanUwzRRBFBAisxFnBVdwikpCYNjmV5uKganSehyn3/sr8N1SensHnpIszDX/kqHGLvsTtqyM3XsVS4bCoH5repcStl/bXrYguPNrae3v0m2MUrB5p7jQBDSh3GTeb+Z9hWPldzRPBESV9sfSNgtFh+reytOv4szIn48seUfzEVofgCURZjrji9MojWOG++qQwd54peq00PIaTycq0oVx1j75fq8+FZRix57Y8kX3mS99klqfSXVRDp5qRsMWlNgWU1WVqAvew==
+ bh=aYH/nCTL7nXVEqIFHAReCCmZNxJXpjTths1wgvDt5jY=;
+ b=hQWLdAONPU4DfKea5MecjCQgCmiudR5X9RODll6MtJ99pW6fVoVwCrwwIAj+xp4R2eiFftoIXkujOWtPgbXzd/nc3omxGYH+fL9rMDeAqebjmJW0uqtgySiFZ1AyU6yqehVhI6qVJByJF3XMINlaCngVoFlVK5jhP3FNilFhwP2Y9cD2GSxnq+dbm43mQrCunNhj9tcysBqOcWBAT5JCNYH1qaNqCL/qTfi4Ga26KlTdGguADWV13LcoXwvJnV6PS/Jvk3DSkmeYTkoDj+Yatsm91JefMyTJy7g+ZGnKaA2CES1x7fv3HDmknAR6ExPA0isbN8oQSLPTB497gt+U0A==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=nvidia.com; dmarc=pass action=none header.from=nvidia.com;
- dkim=pass header.d=nvidia.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
- s=selector2;
+ smtp.mailfrom=oracle.com; dmarc=pass action=none header.from=oracle.com;
+ dkim=pass header.d=oracle.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=oracle.onmicrosoft.com; s=selector2-oracle-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=UeDb+olG5Mm8/Zhr8lpsQLCZWYxtIT0Pqh2S1m2NRhY=;
- b=ClzFQbjeNRqEoEEqOyxdnl8EjZmaidtXNCL3J3HG9CkAgHrGvCkZ/AHeS8tGHEN+sAiJna/sJbU7KuLDEZKiWvUIpMXf6f+/MqTDHyrKlSUFOJUyz1oo5pIH2rl2jNUrK+HHdRqwm+QKF7baZXsvleW3IwA/sJLNKACQZVAj7YppAKAdWNvWp+dueZSjlOrBMN1hZ846G038coSxDHKfDJn5cj8It22F7b2Zl8PpfaXgafTiFta7N2zWgEHdCvcfW+xEDxeQmQwkwk/V8x76VXsLhj8T1vmjnIVnWCzHa9U8aG1T7+R2BU/wdN6rcXH5emlTkNetaOaXuP65Z8kBEA==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=nvidia.com;
-Received: from BL0PR12MB5506.namprd12.prod.outlook.com (2603:10b6:208:1cb::22)
- by BL0PR12MB5554.namprd12.prod.outlook.com (2603:10b6:208:1cd::9) with
+ bh=aYH/nCTL7nXVEqIFHAReCCmZNxJXpjTths1wgvDt5jY=;
+ b=lYti13ndY71KnoIERkSBEftHFT2bOIm8pHOp6cYHW/epc+bkVCi1CnBbJSbVcJ+bU+H6Z4M7Z8VwVmVns4ZQAXH3l+KSwhNvRc5JgT991GSgDGPU4xt91Sps/+gtJg/eym+FshmX2Vz2RRw/i5ii4Cy7X3TSPAyXLD0oEmfRH3U=
+Received: from BLAPR10MB4835.namprd10.prod.outlook.com (2603:10b6:208:331::11)
+ by BLAPR10MB5234.namprd10.prod.outlook.com (2603:10b6:208:30c::10) with
  Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4734.22; Wed, 24 Nov
- 2021 18:40:21 +0000
-Received: from BL0PR12MB5506.namprd12.prod.outlook.com
- ([fe80::5897:83b2:a704:7909]) by BL0PR12MB5506.namprd12.prod.outlook.com
- ([fe80::5897:83b2:a704:7909%8]) with mapi id 15.20.4734.022; Wed, 24 Nov 2021
- 18:40:21 +0000
-Date:   Wed, 24 Nov 2021 14:40:20 -0400
-From:   Jason Gunthorpe <jgg@nvidia.com>
-To:     Cornelia Huck <cohuck@redhat.com>
-Cc:     Alex Williamson <alex.williamson@redhat.com>,
-        Jonathan Corbet <corbet@lwn.net>, linux-doc@vger.kernel.org,
-        kvm@vger.kernel.org, Kirti Wankhede <kwankhede@nvidia.com>,
-        Max Gurtovoy <mgurtovoy@nvidia.com>,
-        Shameer Kolothum <shameerali.kolothum.thodi@huawei.com>,
-        Yishai Hadas <yishaih@nvidia.com>
-Subject: Re: [PATCH RFC] vfio: Documentation for the migration region
-Message-ID: <20211124184020.GM4670@nvidia.com>
-References: <0-v1-0ec87874bede+123-vfio_mig_doc_jgg@nvidia.com>
- <87zgpvj6lp.fsf@redhat.com>
- <20211123165352.GA4670@nvidia.com>
- <87fsrljxwq.fsf@redhat.com>
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <87fsrljxwq.fsf@redhat.com>
-X-ClientProxiedBy: BL1PR13CA0144.namprd13.prod.outlook.com
- (2603:10b6:208:2bb::29) To BL0PR12MB5506.namprd12.prod.outlook.com
- (2603:10b6:208:1cb::22)
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4734.20; Wed, 24 Nov
+ 2021 19:10:20 +0000
+Received: from BLAPR10MB4835.namprd10.prod.outlook.com
+ ([fe80::d809:9016:4511:2bc6]) by BLAPR10MB4835.namprd10.prod.outlook.com
+ ([fe80::d809:9016:4511:2bc6%7]) with mapi id 15.20.4734.021; Wed, 24 Nov 2021
+ 19:10:20 +0000
+From:   Joao Martins <joao.m.martins@oracle.com>
+To:     linux-mm@kvack.org
+Cc:     Dan Williams <dan.j.williams@intel.com>,
+        Vishal Verma <vishal.l.verma@intel.com>,
+        Dave Jiang <dave.jiang@intel.com>,
+        Naoya Horiguchi <naoya.horiguchi@nec.com>,
+        Matthew Wilcox <willy@infradead.org>,
+        Jason Gunthorpe <jgg@ziepe.ca>,
+        John Hubbard <jhubbard@nvidia.com>,
+        Jane Chu <jane.chu@oracle.com>,
+        Muchun Song <songmuchun@bytedance.com>,
+        Mike Kravetz <mike.kravetz@oracle.com>,
+        Andrew Morton <akpm@linux-foundation.org>,
+        Jonathan Corbet <corbet@lwn.net>,
+        Christoph Hellwig <hch@lst.de>, nvdimm@lists.linux.dev,
+        linux-doc@vger.kernel.org, Joao Martins <joao.m.martins@oracle.com>
+Subject: [PATCH v6 00/10] mm, device-dax: Introduce compound pages in devmap
+Date:   Wed, 24 Nov 2021 19:09:55 +0000
+Message-Id: <20211124191005.20783-1-joao.m.martins@oracle.com>
+X-Mailer: git-send-email 2.11.0
+Content-Type: text/plain
+X-ClientProxiedBy: AM0PR06CA0093.eurprd06.prod.outlook.com
+ (2603:10a6:208:fa::34) To BLAPR10MB4835.namprd10.prod.outlook.com
+ (2603:10b6:208:331::11)
 MIME-Version: 1.0
-Received: from mlx.ziepe.ca (142.162.113.129) by BL1PR13CA0144.namprd13.prod.outlook.com (2603:10b6:208:2bb::29) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4755.6 via Frontend Transport; Wed, 24 Nov 2021 18:40:21 +0000
-Received: from jgg by mlx with local (Exim 4.94)        (envelope-from <jgg@nvidia.com>)        id 1mpxBs-0016Vb-7D; Wed, 24 Nov 2021 14:40:20 -0400
+Received: from paddy.uk.oracle.com (138.3.204.47) by AM0PR06CA0093.eurprd06.prod.outlook.com (2603:10a6:208:fa::34) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256) id 15.20.4713.20 via Frontend Transport; Wed, 24 Nov 2021 19:10:17 +0000
 X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: 4d791e90-e35a-4d62-b3d2-08d9af79deaa
-X-MS-TrafficTypeDiagnostic: BL0PR12MB5554:
-X-Microsoft-Antispam-PRVS: <BL0PR12MB55549059E36EB3D5F3E5A17EC2619@BL0PR12MB5554.namprd12.prod.outlook.com>
-X-MS-Oob-TLC-OOBClassifiers: OLM:10000;
+X-MS-Office365-Filtering-Correlation-Id: a8d8bcf9-33c0-43e4-1fc2-08d9af7e0f08
+X-MS-TrafficTypeDiagnostic: BLAPR10MB5234:
+X-Microsoft-Antispam-PRVS: <BLAPR10MB523413352E9AB85DDFD10BC0BB619@BLAPR10MB5234.namprd10.prod.outlook.com>
+X-MS-Oob-TLC-OOBClassifiers: OLM:1091;
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: HbI77sy4IXkTNsgDYpMXfJi5MKh775mjM0I+mXm1HBSPtt5mQhZyyqKFJc9QTEk+WIgkCKSROmiVbQfsaqbvUVANK+THCNdLI9VdbjZUfx2uZ+HWPxbzoFPbzSjpJyTWNyTVm/WSc7DeKo/JTIt68JS6RWkpJxnwPL/uWAHcZUxlWWsTxanK3hIiXulHF1DW/bzzcSePLF9K38Ah/+pZt/nVX3441gzCGuQI1xuP65fxqYVfLcJmLYF9uW6WEwbdk5TiGboFUS8VS7KdphGoi0eKi01ATlv6TKz3j2Fr+CcywJgaKEtfxd8LwsxHqZjgpn76fhcj5GgWW3YsOemMW3O3VRzchO0/h0MEdG/vPiclBA4fP6NiZXYACYNtweDuna0gtMvNVgqT/Ze1XChnIt+sI9EW73CPWrgrVCwLkBCIeG/16g5kgOxWfpcZzuvJ8pQBtebKLgn6ehtykc0B/HlSab7zykP1SIbwjIpAVmxiOhe1Z+lvZFgRWjzxp70sSmaGvXwhTjHRFD8tH1HH4bX+YjTIY8FoFM+gdrtyPfAngS5uZ168yfkCn2dkMLL2fswcZYPmzlG36X0KJ802ITkbCVfosJ2LUiWli9F/geC2yjxjRbdaU+1a8rjd/gpsWSSa/4AEPxMD6x67y/s1Og==
-X-Forefront-Antispam-Report: CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BL0PR12MB5506.namprd12.prod.outlook.com;PTR:;CAT:NONE;SFS:(4636009)(366004)(107886003)(8936002)(186003)(33656002)(86362001)(5660300002)(66556008)(2616005)(38100700002)(30864003)(508600001)(316002)(4326008)(6916009)(36756003)(1076003)(8676002)(426003)(66946007)(54906003)(83380400001)(9786002)(9746002)(2906002)(26005)(66476007);DIR:OUT;SFP:1101;
+X-Microsoft-Antispam-Message-Info: 8QS4d644XV2BRnCWpZ9//W4H6supePlUuBFKavAGd77eig6PnB/kc4AuR4Pt13IybYSYIM5qGcyW3YwLCKbzqoNCFrUb5WsaBQ1DXSegfYSeKvtxIlfrW7/fC6w4jUqPxN8iZGKB+yN6jyFuhX6M8f5dHYq+SAZ/GfnOcKK9yAXVsfGNyYotg6pmUIzKG7YRClDykbzPv/Bq+ynOCoLDywaNJPIve0yXZNL8lNYWz9K+r7RbaWkhx5PjickHSqq9ela5PvoXKsFdYkle8SI31EeZpNOOc2eM0F1xvniwx/HAAY2UDfO3hmWP1UfH39Ockf7YAnMK7r875V07N1JO9ANuOT0X6cu2nh967xiV7zuFJwfdiwTYxty6vaOb5IsK1l3DyMS34vJO1X2KLpc4jtqvM8OT2i8P01brJRlwhmWoLywCYmsF8BIRdsyMFhzSwsmm1Z7xyl8FuU6SH5hs9llh89G8q9JJqxIfcIjXC0MZV3Ulv9MWVLxIyDDN3sAaiVkhozQK8Dizicj5mvjOTAXloWxE5OqY43VHzqeTgSnvwxZ9HG+FDvLUuHPGRc8LGkvVA9uUu+42hC4An7MLkaBTIq98OxDsYO0VhHwLvZfTWclW8IprH0laXlANaPyx+PIKGeqwlZZCHXEfdIwRAsAMmGDBkyYrpSGdFZ044AKGRIyyTT51Q7bcb9cx92NNgemIM/7aaQOUzPkDwB98TYU8R7fVW4ICsPV1Rg6Y/Ne3fKcrklYXfePCF+HtHMS7Eu1T9iIIj0lCHxy58vYqwJ6naThF6CQzciWsasKS1xMjqdxMPHaJJKqexaMe/oojL2yOLTBpyTCGqpJgQXOeEg==
+X-Forefront-Antispam-Report: CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BLAPR10MB4835.namprd10.prod.outlook.com;PTR:;CAT:NONE;SFS:(366004)(36756003)(1076003)(26005)(7696005)(83380400001)(186003)(6916009)(103116003)(316002)(52116002)(508600001)(5660300002)(38350700002)(38100700002)(966005)(107886003)(30864003)(7416002)(54906003)(4326008)(86362001)(2906002)(6486002)(66476007)(8936002)(8676002)(66946007)(2616005)(66556008)(956004)(6666004);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?TxExbav/gT26B+5frGpXlehcQV0n7ME6BdAm4ShkmbnFP1ExaFQU4pD0SJo8?=
- =?us-ascii?Q?yCkfgMSM5GIYxYnU5K6Oa6k19Dq5m5hFAqbJeOcjdzaHnbTkeshGDQ0AesQX?=
- =?us-ascii?Q?ulAj/uIip5f23yr062bTKoji9MWQcWjxrlU5b6pqtf+MhhYwF8t/uO1C+kTP?=
- =?us-ascii?Q?emIO5YVBK/jadcGgOnWTtQtwNbtUMo6Qnww5+8NwffdgfMTBfBBJ0DKBHH+D?=
- =?us-ascii?Q?fjLgwxCTOOZptg7FdxnXiyHZrKRFm21i0y1j/jZDqUtvQumWWb87R7L9gZJX?=
- =?us-ascii?Q?ICEvjAiB84/8VmeAZTeo45sjldl0FbJmFdbsJnZVEnLODnH+rfN01nNowltt?=
- =?us-ascii?Q?rGMrrcaJgzuWknlBjwOT2AGNb04ZGoQHFKjqNu+ulPxlOgQWtk/7Bcf6FDsm?=
- =?us-ascii?Q?ff7kJO1VjZ+IB1cvHgY9GpFx0yz7Z7NtadVo4E0yj3kigqegrftJSAvb3Osj?=
- =?us-ascii?Q?IP7xyGAwm8UMWXoZIaght9UxocZZ+JQL8IC8H4z9gVRFV/Lhu1WOWAd7TC6v?=
- =?us-ascii?Q?mFlS6U4fO5T29hGh9rcvd3Qef4CUJcDMA0gCbpfUfyB3lHq1K7MQkwANpCNe?=
- =?us-ascii?Q?YpZxOjO0qoZYZSQWXPiBhZnJBcGh4QHseMwCH/bIc4X/QST39tF7WT4ClASK?=
- =?us-ascii?Q?e+dOB3NS8uEawglli0tizuC08mLVD6NaQ/4nCLwI4ypXAKxaPVKT1epMAP8x?=
- =?us-ascii?Q?0Of4WAStYywKzKPctJZKYCLLEpebvlSgYLgjQcGd4KWrXShd3rlAQ/6q01gg?=
- =?us-ascii?Q?xvwhbO7qXwJMYByunslLAN1BdOTo8LX1/kfuZsxV25dIu55n9lCaMz7THWdG?=
- =?us-ascii?Q?Kg9Y/UlsRVgE94d6yVatlczaxYjX5k749ajdsZ49AxMZlmj/khZp5T12OuC+?=
- =?us-ascii?Q?guGbFo1nIPLFsKgGFySCvkPVCqqhU9jjkqhmAcAj9rkFDj1oyWEGsxLc5yWm?=
- =?us-ascii?Q?Rye4M3PawcP4KDj17CVgKUjBQtcOhE7Pl741DYtWNmWbbhIiyph1quMBDznr?=
- =?us-ascii?Q?pDRn9vaJil2FGcW+jYg88eptQq1UJ2iHlFvjcyx2Zva6Dd/q7cNbds7k54Gn?=
- =?us-ascii?Q?8AIWv0ceORtPk2TEIkmr+k5zdbImJJgL2DKSfvh1n6tovGEm5d/XFDWq2Rbd?=
- =?us-ascii?Q?CXVvPTzz0OsXMU1sHD12L/2K9ipUOjWyGy+XXo3df2IKARQwQuLFNbGWW56H?=
- =?us-ascii?Q?CowX9N2oUQe6tJMrRApIjeLy1BJvT7oodgQpJyVJVdFSC5nxxgHMzFi1Fi2x?=
- =?us-ascii?Q?NDS5KeEhoq3wYJqKe0OL1Syxsak1vcYwFbbPM7AxmPwacftJEoYNDVobLEdy?=
- =?us-ascii?Q?C24o6X2m5VCoy58JXBRhsY/crmnUZ+bJBS7YWiU0s04MViVHuP5aphUxbbaG?=
- =?us-ascii?Q?gRxeSrrU5tQBRqd1hME2KGAx2FuoyAXTPP87SM0yC8ApSZX0u/I1V6y32VEQ?=
- =?us-ascii?Q?vQwqA0gOzJwVvxZRszFGFR81Gk3c0+RI9mZO3sDspNLPLIs4PaX/WsoFHaGm?=
- =?us-ascii?Q?ocTAtrr37VUe6ofTq4GVwXgXsUkSC9ldD4Gwz+me3XZuJIAR7UKRTaLegShG?=
- =?us-ascii?Q?uUYp6ycg8Gqe2UDS1g0=3D?=
-X-OriginatorOrg: Nvidia.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 4d791e90-e35a-4d62-b3d2-08d9af79deaa
-X-MS-Exchange-CrossTenant-AuthSource: BL0PR12MB5506.namprd12.prod.outlook.com
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?LHBJFIHneIYf1/rLmft7eWMCvCLK7ACRTGWLYaR4Vq/86uyKK04ZBYHJ+X/f?=
+ =?us-ascii?Q?UJcZCGvCYDs+CF4ve+Z6ubbmhExer9xEugNaQHz6JP6WjC/kGrimSjxqk3Oa?=
+ =?us-ascii?Q?K80gTE/ZQbGP3ZMJZZxOgNticwy7NVPwOmy4BB4FwLNaSrOnBOM2EfS9bYS4?=
+ =?us-ascii?Q?naU7aYsMQQMm+hOKOffnHuEFQj79cTrHSakYvrsLihurKBv1TVgYkF5Oltew?=
+ =?us-ascii?Q?XTW4Sy34CgPTDWs9m8YbudsXvrgEXVgEiT40HFm89DtmWe4z3EhBxnM4OBeA?=
+ =?us-ascii?Q?/pqjujR1YIfy14BhSVK8ULrV/lcn6FgxtKkogKZf591c2AYiAsSyY2C1uZb0?=
+ =?us-ascii?Q?9IfwYcbACSa6VnKuLvcxMmEsqiuZp/icaNlBIwNgJo8AfMJCcRvNKmzTsyu8?=
+ =?us-ascii?Q?HaKImj/y/5p5nICnEgSZu2DQutxPHvzB8jBzv790Kf7d4JfQtIO9T1OWxh+h?=
+ =?us-ascii?Q?6tyTrkuuz7+5XlYs6VwKk58NFZ65CGIXQhLvons+aqo5l1ajtp6SeJhfWmsZ?=
+ =?us-ascii?Q?qWeeqOUpgA/t4yKge8b1w/9ap806+W+eYNQgy9c18/uMnVvk49KzrMDNyCQR?=
+ =?us-ascii?Q?OrjqS76m9/KRoPabtajdiS0iODQaYrKi2IiybrOU+yJqBSvD4YyJ/Qq5IdWV?=
+ =?us-ascii?Q?uyvQxb7Nw5lS/+Sp9b8Y6GmRyyr+wpqhm/c+PzIceh3TXqLTJypezUBwaCc2?=
+ =?us-ascii?Q?KOQepWPQep9Gx0s2koru6s2RXD5Ij9G1OP4ckyYhMEg8TcnqgKWXBEriDzql?=
+ =?us-ascii?Q?xUZfoqWiY4Le4f4yPuiwCBz/y1KNt1wkX+6azaYbsppjlWKLCbaFqzn0QPgQ?=
+ =?us-ascii?Q?L4bEPxuy4CiHFALzTk0oWNesR7sxPcb9vJIKsUVjpUjAy8QpVTxjtc6dUoEb?=
+ =?us-ascii?Q?0jy4yWV6Zdin/qC+QfUtC+k7mvL0c95iZxs9vNkmi0MtdgU4OyjA/CqS6HUr?=
+ =?us-ascii?Q?oAAjlwbnzQjTb2AY4Uc6kdgwQQIAsj+x5DH5kFQxzgAmkniNVNogETnOjned?=
+ =?us-ascii?Q?6MkcDde3m48e5cHZQLckF1/AgkuP/jH0rgBU/da+cPSGt2XdJ4kf6Jx6Gnjt?=
+ =?us-ascii?Q?eWXz066hdlDjNxsJD0qpOvoR7Xchh26uNuXneD2NvQrUr9MVGlw1+rgAb6+o?=
+ =?us-ascii?Q?QO0VQWs9MNvmT6iNf15ObKxnOkpx0G3jnV0Wng92lKt72fkABSHyFQf4oQbi?=
+ =?us-ascii?Q?kd41Zp6GrI+ifEJOPcfkcR7LhxDkSZWyHl6qbbPxS0VnlzMFsLySTrKucZfv?=
+ =?us-ascii?Q?NDl2QC3kBHLtxj0Ex8NYHJP0csqiPK5TKokhDdMEBLLF5ASlRnbzdY18BRxa?=
+ =?us-ascii?Q?GQtwk6zvqFhg4lh7Q0agYxYNQ2Au/JbiJLF/h+RfCBfZBmbvRbzjdKswLt9K?=
+ =?us-ascii?Q?FwMn1ORsHg8hyMy9d6ptc803lybFWzRwmzK7L5f2Z+lkeVpu1nxzJI/jG8iR?=
+ =?us-ascii?Q?NGIbPqv0B5kmjEJD0dVUfIuSClq1rGhwcAGGGaCFNVwJi4aVMHBdSj/8hXX3?=
+ =?us-ascii?Q?4KSAPWwRadPOooz++vWbviH859aoww/DHo7CXaitxwkzbhCYYt9DUX4EELkc?=
+ =?us-ascii?Q?rXpDr2pag3Wh6bwY77KEh+cTqBwv0fOGJ5N7rJI0fBUHLY/+HJa80/iN7dX8?=
+ =?us-ascii?Q?+N4wl+wtAUG7S8X3wlVM+KZ8nZ4KPDXdHC6uv+KTS53SPO5to5W8y+mLOoRN?=
+ =?us-ascii?Q?gksH6Q=3D=3D?=
+X-OriginatorOrg: oracle.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: a8d8bcf9-33c0-43e4-1fc2-08d9af7e0f08
+X-MS-Exchange-CrossTenant-AuthSource: BLAPR10MB4835.namprd10.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 24 Nov 2021 18:40:21.3050
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 24 Nov 2021 19:10:20.7206
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
+X-MS-Exchange-CrossTenant-Id: 4e2c6054-71cb-48f1-bd6c-3a9705aca71b
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: j/LzJnVLGSkeiBgswR5hKNy/R8Aklk0Pl/eslnuJ2vbJvURU/lMWSAsaZDTcVzrK
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: BL0PR12MB5554
+X-MS-Exchange-CrossTenant-UserPrincipalName: JyXjasg2oYnPpdmllZdHcPrwtH6c0xeK/QzIvVksi+SkobENXiRq6yVfNZgzYMuQmr1wLlAIv7U1DsGlsPaECmjn/6nr2wXsLkb7hJQPTQc=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: BLAPR10MB5234
+X-Proofpoint-Virus-Version: vendor=nai engine=6300 definitions=10178 signatures=668683
+X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 malwarescore=0 adultscore=0 spamscore=0
+ bulkscore=0 suspectscore=0 mlxscore=0 mlxlogscore=999 phishscore=0
+ classifier=spam adjust=0 reason=mlx scancount=1 engine=8.12.0-2110150000
+ definitions=main-2111240099
+X-Proofpoint-ORIG-GUID: pI-OO-yw0VY9M_TPTDi5qbFZs0ooHWTz
+X-Proofpoint-GUID: pI-OO-yw0VY9M_TPTDi5qbFZs0ooHWTz
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Wed, Nov 24, 2021 at 05:55:49PM +0100, Cornelia Huck wrote:
-
-> Yes, defining what we mean by "VCPU RUNNING" and "DIRTY TRACKING" first
-> makes the most sense.
-> 
-> (It also imposes some rules on userspace, doesn't it? Whatever it does,
-> the interaction with vfio needs to be at least somewhat similar to what
-> QEMU or another VMM would do. I wonder if we need to be more concrete
-> here; but let's talk about the basic interface first.)
-
-I don't think we need to have excessive precision here. The main
-thrust of this as a spec is to define behaviors which starts at the
-'Actions on Set/Clear' section.
-
-This part is informative so everyone has the same picture in their
-mind about what it is we are trying to accomplish. This can be a bit
-imprecise.
-
-> > I don't think I like this statement - why/where would the overall flow
-> > differ?
-> 
-> What I meant to say: If we give userspace the flexibility to operate
-> this, we also must give different device types some flexibility. While
-> subchannels will follow the general flow, they'll probably condense/omit
-> some steps, as I/O is quite different to PCI there.
-
-I would say no - migration is general, no device type should get to
-violate this spec.  Did you have something specific in mind? There is
-very little PCI specific here already
-
-> >> > +     Normal operating state
-> >> > +  RUNNING, DIRTY TRACKING, VCPU RUNNING
-> >> > +     Log DMAs
-> >> > +     Stream all memory
-> >> 
-> >> all memory accessed by the device?
-> >
-> > In this reference flow this is all VCPU memory. Ie you start global
-> > dirty tracking both in VFIO and in the VCPU and start copying all VM
-> > memory.
-> 
-> So, general migration, not just the vfio specific parts?
-
-Sure, as above precision isn't important here, the userspace doing
-migration should start streaming whatever state it has covered by
-dirty logging here.
-
-> "subtly complicated" captures this well :(
-
-Indeed. Frankly, my observation is the team here has invested a lot of
-person hours trying to make sense of this and our well-researched take
-'this is a FSM' was substantially different from Alex's version 'this
-is control bits'. For the 'control bit' model few seem to understand
-it at all, and the driver code is short but deceptively complicated.
-
-> For example, if I interpret your list correctly, the driver should
-> prioritize clearing RUNNING over setting SAVING | !RUNNING. What does
-> that mean? If RUNNING is cleared, first deal with whatever action that
-> triggers, then later check if it is actually a case of setting SAVING |
-> !RUNNING, and perform the required actions for that?
-
-Yes.
-
-Since this is not a FSM a change from any two valid device_state
-values is completely legal. Many of these involve multiple driver
-steps. So all drivers must do the actions in the same order to have a
-real ABI.
-
-> Also, does e.g. SAVING | RUNNING mean that both SAVING and RUNNING are
-> getting set, or only one of them, if the other was already set?
-
-It always refers to the requested migration_state
-
-> >   SAVING|0 -> SAVING|RUNNING
-> >   0|RUNNING -> SAVING|RUNNING
-> >   0 -> SAVING|RUNNING
-
-Are all described as userspace requesting a migration_state 
-of SAVING | RUNNING
-
-> > For clarity I didn't split things like that. All the continuous
-> > behaviors start when the given bits begins and stop when the bits
-> > end.
-> >
-> > Most of the actions talk about changes in the data window
-> 
-> This might need some better terminology, I did not understand the split
-> like that...
-> 
-> "action trigger" is basically that the driver sets certain bits and a
-> certain device action happens. "continuous" means that a certain device
-> action is done as long as certain bits are set. Sounds a bit like edge
-> triggered vs level triggered to me. What about:
-
-Yes
-
-> - event-triggered actions: bits get set/unset, an action needs to be
->   done
-
-"""Event-triggered actions happen when userspace requests a new
-migration_state that differs from the current migration_state. Actions
-happen on a bit group basis:"""
-
-> - condition-triggered actions: as long as bits are set/unset, an action
->   needs to be done
-
-"""Continuous actions are in effect so long as the below migration_state bit
-   group is active:"""
- 
-
-> >> What does that mean? That the operation setting NDMA in device_state
-> >> returns? 
-> >
-> > Yes, it must be a synchronous behavior.
-> 
-> To be extra clear: the _setting_ action (e.g. a write), not the
-> condition (NDMA set)? Sorry if that sounds nitpicky, but I think we
-> should eliminate possible points of confusion early on.
-
-""Whenever the kernel returns with a migration_state of NDMA there can be no
-   in progress DMAs.""
- 
-> I'm trying to understand this document without looking at the mlx5
-> implementation: Somebody using it as a guide needs to be able to
-> implement a driver without looking at another driver (unless they prefer
-> to work with examples.) Using the mlx5 driver as the basis for
-> _writing_ this document makes sense, but it needs to stand on its own.
-
-That may be an ideal that is too hard to reach :(
-
-Thanks,
-Jason
-
-Below is where I have things now:
-
-VFIO migration driver API
--------------------------------------------------------------------------------
-
-VFIO drivers that support migration implement a migration control register
-called device_state in the struct vfio_device_migration_info which is in its
-VFIO_REGION_TYPE_MIGRATION region.
-
-The device_state controls both device action and continuous behaviour.
-Setting/clearing bit groups triggers device action, and each bit controls a
-continuous device behaviour.
-
-Along with the device_state the migration driver provides a data window which
-allows streaming migration data into or out of the device.
-
-A lot of flexibility is provided to userspace in how it operates these
-bits. What follows is a reference flow for saving device state in a live
-migration, with all features, and an illustration how other external non-VFIO
-entities (VCPU_RUNNING and DIRTY_TRACKING) the VMM controls fit in.
-
-  RUNNING, VCPU_RUNNING
-     Normal operating state
-  RUNNING, DIRTY_TRACKING, VCPU_RUNNING
-     Log DMAs
-
-     Stream all memory
-  SAVING | RUNNING, DIRTY_TRACKING, VCPU_RUNNING
-     Log internal device changes (pre-copy)
-
-     Stream device state through the migration window
-
-     While in this state repeat as desired:
-
-	Atomic Read and Clear DMA Dirty log
-
-	Stream dirty memory
-  SAVING | NDMA | RUNNING, VCPU_RUNNING
-     vIOMMU grace state
-
-     Complete all in progress IO page faults, idle the vIOMMU
-  SAVING | NDMA | RUNNING
-     Peer to Peer DMA grace state
-
-     Final snapshot of DMA dirty log (atomic not required)
-  SAVING
-     Stream final device state through the migration window
-
-     Copy final dirty data
-  0
-     Device is halted
-
-and the reference flow for resuming:
-
-  RUNNING
-     Issue VFIO_DEVICE_RESET to clear the internal device state
-  0
-     Device is halted
-  RESUMING
-     Push in migration data. Data captured during pre-copy should be
-     prepended to data captured during SAVING.
-  NDMA | RUNNING
-     Peer to Peer DMA grace state
-  RUNNING, VCPU_RUNNING
-     Normal operating state
-
-If the VMM has multiple VFIO devices undergoing migration then the grace
-states act as cross device synchronization points. The VMM must bring all
-devices to the grace state before advancing past it.
-
-The above reference flows are built around specific requirements on the
-migration driver for its implementation of the migration_state input.
-
-Event triggered actions happen when userspace requests a new migration_state
-that differs from the current migration_state. Actions happen on a bit group
-basis:
-
- - SAVING | RUNNING
-   The device clears the data window and begins streaming 'pre copy' migration
-   data through the window. Devices that cannot log internal state changes
-   return a 0 length migration stream.
-
- - SAVING | !RUNNING
-   The device captures its internal state that is not covered by internal
-   logging, as well as any logged changes.
-
-   The device clears the data window and begins streaming the captured
-   migration data through the window. Devices that cannot log internal state
-   changes stream all of their device state here.
-
- - RESUMING
-   The data window is cleared, opened and can receive the migration data
-   stream.
-
- - !RESUMING
-   All the data transferred into the data window is loaded into the device's
-   internal state. The migration driver can rely on userspace issuing a
-   VFIO_DEVICE_RESET prior to starting RESUMING.
-
-   To abort a RESUMING issue a VFIO_DEVICE_RESET.
-
-   If the migration data is invalid then the ERROR state must be set.
-
-Continuous actions are in effect when migration_state bit groups are active:
-
- - RUNNING | NDMA
-   The device is not allowed to issue new DMA operations.
-
-   Whenever the kernel returns with a migration_state of NDMA there can be no
-   in progress DMAs.
-
- - !RUNNING
-   The device should not change its internal state. Further implies the NDMA
-   behavior above.
-
- - SAVING | !RUNNING
-   RESUMING | !RUNNING
-   The device may assume there are no incoming MMIO operations.
-
-   Internal state logging can stop.
-
- - RUNNING
-   The device can alter its internal state and must respond to incoming MMIO.
-
- - SAVING | RUNNING
-   The device is logging changes to the internal state.
-
- - ERROR
-   The behavior of the device is largely undefined. The device must be
-   recovered by issuing VFIO_DEVICE_RESET or closing the device file
-   descriptor.
-
-   However, devices supporting NDMA must behave as though NDMA is asserted
-   during ERROR to avoid corrupting other devices or a VM during a failed
-   migration.
-
-When multiple bits change in the migration_state they may describe multiple
-event triggered actions, and multiple changes to continuous actions.  The
-migration driver must process them in a priority order:
-
- - SAVING | RUNNING
- - NDMA
- - !RUNNING
- - SAVING | !RUNNING
- - RESUMING
- - !RESUMING
- - RUNNING
- - !NDMA
-
-In general, userspace can issue a VFIO_DEVICE_RESET ioctl and recover the
-device back to device_state RUNNING. When a migration driver executes this
-ioctl it should discard the data window and set migration_state to RUNNING as
-part of resetting the device to a clean state. This must happen even if the
-migration_state has errored. A freshly opened device FD should always be in
-the RUNNING state.
-
-The migration driver has limitations on what device state it can affect. Any
-device state controlled by general kernel subsystems must not be changed
-during RESUME, and SAVING must tolerate mutation of this state. Change to
-externally controlled device state can happen at any time, asynchronously, to
-the migration (ie interrupt rebalancing).
-
-Some examples of externally controlled state:
- - MSI-X interrupt page
- - MSI/legacy interrupt configuration
- - Large parts of the PCI configuration space, ie common control bits
- - PCI power management
- - Changes via VFIO_DEVICE_SET_IRQS
-
-During !RUNNING, especially during SAVING and RESUMING, the device may have
-limitations on what it can tolerate. An ideal device will discard/return all
-ones to all incoming MMIO/PIO operations (exclusive of the external state
-above) in !RUNNING. However, devices are free to have undefined behavior if
-they receive MMIOs. This includes corrupting/aborting the migration, dirtying
-pages, and segfaulting userspace.
-
-However, a device may not compromise system integrity if it is subjected to a
-MMIO. It can not trigger an error TLP, it can not trigger a Machine Check, and
-it can not compromise device isolation.
-
-There are several edge cases that userspace should keep in mind when
-implementing migration:
-
-- Device Peer to Peer DMA. In this case devices are able issue DMAs to each
-  other's MMIO regions. The VMM can permit this if it maps the MMIO memory into
-  the IOMMU.
-
-  As Peer to Peer DMA is a MMIO touch like any other, it is important that
-  userspace suspend these accesses before entering any device_state where MMIO
-  is not permitted, such as !RUNNING. This can be accomplished with the NDMA
-  state. Userspace may also choose to remove MMIO mappings from the IOMMU if the
-  device does not support NDMA, and rely on that to guarantee quiet MMIO.
-
-  The Peer to Peer Grace States exist so that all devices may reach RUNNING
-  before any device is subjected to a MMIO access.
-
-  Failure to guarentee quiet MMIO may allow a hostile VM to use P2P to violate
-  the no-MMIO restriction during SAVING or RESUMING and corrupt the migration on
-  devices that cannot protect themselves.
-
-- IOMMU Page faults handled in userspace can occur at any time. A migration
-  driver is not required to serialize in-progress page faults. It can assume
-  that all page faults are completed before entering SAVING | !RUNNING. Since
-  the guest VCPU is required to complete page faults the VMM can accomplish this
-  by asserting NDMA | VCPU_RUNNING and clearing all pending page faults before
-  clearing VCPU_RUNNING.
-
-  Device that do not support NDMA cannot be configured to generate page faults
-  that require the VCPU to complete.
-
-- pre-copy allows the device to implement a dirty log for its internal state.
-  During the SAVING | RUNNING state the data window should present the device
-  state being logged and during SAVING | !RUNNING the data window should present
-  the unlogged device state as well as the changes from the internal dirty log.
-
-  On RESUME these two data streams are concatenated together.
-
-  pre-copy is only concerned with internal device state. External DMAs are
-  covered by the seperate DIRTY_TRACKING function.
-
-- Atomic Read and Clear of the DMA log is a HW feature. If the tracker
-  cannot support this, then NDMA could be used to synthesize it less
-  efficiently.
-
-- NDMA is optional, if the device does not support this then the NDMA States
-  are pushed down to the next step in the sequence and various behaviors that
-  rely on NDMA cannot be used.
-
-- Migration control registers inside the same iommu_group as the VFIO device.
-  This immediately raises a security concern as userspace can use Peer to Peer
-  DMA to manipulate these migration control registers concurrently with
-  any kernel actions.
-
-  A device driver operating such a device must ensure that kernel integrity
-  can not be broken by hostile user space operating the migration MMIO
-  registers via peer to peer, at any point in the sequence. Notably the kernel
-  cannot use DMA to transfer any migration data.
-
-  However, as discussed above in the "Device Peer to Peer DMA" section, it can
-  assume quiet MMIO as a condition to have a successful and uncorrupted
-  migration.
-
-To elaborate details on the reference flows, they assume the following details
-about the external behaviors:
-
- - !VCPU_RUNNING
-   Userspace must not generate dirty pages or issue MMIO operations to devices.
-   For a VMM this would typically be a control toward KVM.
-
- - DIRTY_TRACKING
-   Clear the DMA log and start DMA logging
-
-   DMA logs should be readable with an "atomic test and clear" to allow
-   continuous non-disruptive sampling of the log.
-
-   This is controlled by VFIO_IOMMU_DIRTY_PAGES_FLAG_START on the container
-   fd.
-
- - !DIRTY_TRACKING
-   Freeze the DMA log, stop tracking and allow userspace to read it.
-
-   If userspace is going to have any use of the dirty log it must ensure ensure
-   that all DMA is suspended before clearing DIRTY_TRACKING, for instance by
-   using NDMA or !RUNNING on all VFIO devices.
-
+Changes since v5[9]:
+
+* Keep @dev on the previous line to improve readability on 
+patch 5 (Christoph Hellwig)
+* Document is_static() function to clarify what are static and
+dynamic dax regions in patch 7 (Christoph Hellwig)
+* Deduce @f_mapping and @pgmap from vmf->vma->vm_file to reduce
+the number of arguments of set_{page,compound}_mapping() in last
+patch (Christoph Hellwig)
+* Factor out @mapping initialization to a separate helper ([new] patch 8)
+and rename set_page_mapping() to dax_set_mapping() in the process.
+* Remove set_compound_mapping() and instead adjust dax_set_mapping()
+to handle @vmemmap_shift case on the last patch. This greatly
+simplifies the last patch, and addresses a similar comment by Christoph
+on having an earlier return. No functional change on the changes
+to dax_set_mapping compared to its earlier version so I retained
+Dan's Rb on last patch.
+* Initialize the mapping prior to inserting the PTE/PMD/PUD as opposed
+to after the fact. ([new] patch 9, Jason Gunthorpe)
+
+Patches 8 and 9 are new (small cleanups) in v6.
+Patches 6 - 9 are the ones missing Rb tags.
+
+---
+
+This series converts device-dax to use compound pages, and moves away from the
+'struct page per basepage on PMD/PUD' that is done today. Doing so, 1) unlocks
+a few noticeable improvements on unpin_user_pages() and makes device-dax+altmap
+case 4x times faster in pinning (numbers below and in last patch) 2) as
+mentioned in various other threads it's one important step towards cleaning up
+ZONE_DEVICE refcounting.
+
+I've split the compound pages on devmap part from the rest based on recent
+discussions on devmap pending and future work planned[5][6]. There is consensus
+that device-dax should be using compound pages to represent its PMD/PUDs just
+like HugeTLB and THP, and that leads to less specialization of the dax parts.
+I will pursue the rest of the work in parallel once this part is merged,
+particular the GUP-{slow,fast} improvements [7] and the tail struct page
+deduplication memory savings part[8].
+
+To summarize what the series does:
+
+Patch 1: Prepare hwpoisoning to work with dax compound pages.
+
+Patches 2-3: Split the current utility function of prep_compound_page()
+into head and tail and use those two helpers where appropriate to take
+advantage of caches being warm after __init_single_page(). This is used
+when initializing zone device when we bring up device-dax namespaces.
+
+Patches 4-10: Add devmap support for compound pages in device-dax.
+memmap_init_zone_device() initialize its metadata as compound pages, and it
+introduces a new devmap property known as vmemmap_shift which
+outlines how the vmemmap is structured (defaults to base pages as done today).
+The property describe the page order of the metadata essentially.
+While at it do a few cleanups in device-dax in patches 5-9.
+Finally enable device-dax usage of devmap @vmemmap_shift to a value
+based on its own @align property. @vmemmap_shift returns 0 by default (which
+is today's case of base pages in devmap, like fsdax or the others) and the
+usage of compound devmap is optional. Starting with device-dax (*not* fsdax) we
+enable it by default. There are a few pinning improvements particular on the
+unpinning case and altmap, as well as unpin_user_page_range_dirty_lock() being
+just as effective as THP/hugetlb[0] pages.
+
+    $ gup_test -f /dev/dax1.0 -m 16384 -r 10 -S -a -n 512 -w
+    (pin_user_pages_fast 2M pages) put:~71 ms -> put:~22 ms
+    [altmap]
+    (pin_user_pages_fast 2M pages) get:~524ms put:~525 ms -> get: ~127ms put:~71ms
+    
+     $ gup_test -f /dev/dax1.0 -m 129022 -r 10 -S -a -n 512 -w
+    (pin_user_pages_fast 2M pages) put:~513 ms -> put:~188 ms
+    [altmap with -m 127004]
+    (pin_user_pages_fast 2M pages) get:~4.1 secs put:~4.12 secs -> get:~1sec put:~563ms
+
+Tested on x86 with 1Tb+ of pmem (alongside registering it with RDMA with and
+without altmap), alongside gup_test selftests with dynamic dax regions and
+static dax regions. Coupled with ndctl unit tests for dynamic dax devices
+that exercise all of this. Note, for dynamic dax regions I had to revert
+commit 8aa83e6395 ("x86/setup: Call early_reserve_memory() earlier"), it
+is a known issue that this commit broke efi_fake_mem=.
+
+Patches apply on top of linux-next tag next-20211124 (commit 4b74e088fef6).
+
+Thanks for all the review so far.
+
+As always, Comments and suggestions very much appreciated!
+
+Older Changelog,
+
+v4[4] -> v5[9]:
+
+* Remove patches 8-14 as they will go in 2 separate (parallel) series;
+* Rename @geometry to @vmemmap_shift (Christoph Hellwig)
+* Make @vmemmap_shift an order rather than nr of pages (Christoph Hellwig)
+* Consequently remove helper pgmap_geometry_order() as it's no longer
+needed, in place of accessing directly the structure member [Patch 4 and 8]
+* Rename pgmap_geometry() to pgmap_vmemmap_nr() in patches 4 and 8;
+* Remove usage of pgmap_geometry() in favour for testing
+  @vmemmap_shift for non-zero directly directly in patch 8;
+* Patch 5 is new for using `struct_size()` (Dan Williams)
+* Add a 'static_dev_dax()' helper for testing pgmap == NULL handling
+for dynamic dax devices.
+* Expand patch 6 to be explicitly on those !pgmap cases, and replace
+those with static_dev_dax().
+* Add performance numbers on patch 8 on gup/pin_user_pages() numbers with
+this series.
+* Massage commit description to remove mentions of @geometry.
+* Add Dan's Reviewed-by on patch 8 (Dan Williams)
+
+v3[3] -> v4[4]:
+
+ * Collect Dan's Reviewed-by on patches 1-5,8,9,11
+ * Collect Muchun Reviewed-by on patch 1,2,11
+ * Reorder patches to first introduce compound pages in ZONE_DEVICE with
+ device-dax (for pmem) as first user (patches 1-8) followed by implementing
+ the sparse-vmemmap changes for minimize struct page overhead for devmap (patches 9-14)
+ * Eliminate remnant @align references to use @geometry (Dan)
+ * Convert mentions of 'compound pagemap' to 'compound devmap' throughout
+   the series to avoid confusions of this work conflicting/referring to
+   anything Folio or pagemap related.
+ * Delete pgmap_pfn_geometry() on patch 4
+   and rework other patches to use pgmap_geometry() instead (Dan)
+ * Convert @geometry to be a number of pages rather than page size in patch 4 (Dan)
+ * Make pgmap_geometry() more readable (Christoph)
+ * Simplify pgmap refcount pfn computation in memremap_pages() (Christoph)
+ * Rework memmap_init_compound() in patch 4 to use the same style as
+ memmap_init_zone_device i.e. iterating over PFNs, rather than struct pages (Dan)
+ * Add comment on devmap prep_compound_head callsite explaining why it needs
+ to be used after first+second tail pages have been initialized (Dan, Jane)
+ * Initialize tail page refcount to zero in patch 4
+ * Make sure pfn_next() iterate over compound pages (rather than base page) in
+ patch 4 to tackle the zone_device elevated page refcount.
+ [ Note these last two bullet points above are unneeded once this patch is merged:
+   https://lore.kernel.org/linux-mm/20210825034828.12927-3-alex.sierra@amd.com/ ]
+ * Remove usage of ternary operator when computing @end in gup_device_huge() in patch 8 (Dan)
+ * Remove pinned_head variable in patch 8
+ * Remove put_dev_pagemap() need for compound case as that is now fixed for the general case
+ in patch 8
+ * Switch to PageHead() instead of PageCompound() as we only work with either base pages
+ or head pages in patch 8 (Matthew)
+ * Fix kdoc of @altmap and improve kdoc for @pgmap in patch 9 (Dan)
+ * Fix up missing return in vmemmap_populate_address() in patch 10
+ * Change error handling style in all patches (Dan)
+ * Change title of vmemmap_dedup.rst to be more representative of the purpose in patch 12 (Dan)
+ * Move some of the section and subsection tail page reuse code into helpers
+ reuse_compound_section() and compound_section_tail_page() for readability in patch 12 (Dan)
+ * Commit description fixes for clearity in various patches (Dan)
+ * Add pgmap_geometry_order() helper and
+   drop unneeded geometry_size, order variables in patch 12
+ * Drop unneeded byte based computation to be PFN in patch 12
+ * Handle the dynamic dax region properly when ensuring a stable dev_dax->pgmap in patch 6.
+ * Add a compound_nr_pages() helper and use it in memmap_init_zone_device to calculate
+ the number of unique struct pages to initialize depending on @altmap existence in patch 13 (Dan)
+ * Add compound_section_tail_huge_page() for the tail page PMD reuse in patch 14 (Dan)
+ * Reword cover letter.
+
+v2 -> v3[3]:
+ * Collect Mike's Ack on patch 2 (Mike)
+ * Collect Naoya's Reviewed-by on patch 1 (Naoya)
+ * Rename compound_pagemaps.rst doc page (and its mentions) to vmemmap_dedup.rst (Mike, Muchun)
+ * Rebased to next-20210714
+
+v1[1] -> v2[2]:
+
+ (New patches 7, 10, 11)
+ * Remove occurences of 'we' in the commit descriptions (now for real) [Dan]
+ * Add comment on top of compound_head() for fsdax (Patch 1) [Dan]
+ * Massage commit descriptions of cleanup/refactor patches to reflect [Dan]
+ that it's in preparation for bigger infra in sparse-vmemmap. (Patch 2,3,5) [Dan]
+ * Greatly improve all commit messages in terms of grammar/wording and clearity. [Dan]
+ * Rename variable/helpers from dev_pagemap::align to @geometry, reflecting
+ tht it's not the same thing as dev_dax->align, Patch 4 [Dan]
+ * Move compound page init logic into separate memmap_init_compound() helper, Patch 4 [Dan]
+ * Simplify patch 9 as a result of having compound initialization differently [Dan]
+ * Rename @pfn_align variable in memmap_init_zone_device to @pfns_per_compound [Dan]
+ * Rename Subject of patch 6 [Dan]
+ * Move hugetlb_vmemmap.c comment block to Documentation/vm Patch 7 [Dan]
+ * Add some type-safety to @block and use 'struct page *' rather than
+ void, Patch 8 [Dan]
+ * Add some comments to less obvious parts on 1G compound page case, Patch 8 [Dan]
+ * Remove vmemmap lookup function in place of
+ pmd_off_k() + pte_offset_kernel() given some guarantees on section onlining
+ serialization, Patch 8
+ * Add a comment to get_page() mentioning where/how it is, Patch 8 freed [Dan]
+ * Add docs about device-dax usage of tail dedup technique in newly added
+ compound_pagemaps.rst doc entry.
+ * Add cleanup patch for device-dax for ensuring dev_dax::pgmap is always set [Dan]
+ * Add cleanup patch for device-dax for using ALIGN() [Dan]
+ * Store pinned head in separate @pinned_head variable and fix error case, patch 13 [Dan]
+ * Add comment on difference of @next value for PageCompound(), patch 13 [Dan]
+ * Move PUD compound page to be last patch [Dan]
+ * Add vmemmap layout for PUD compound geometry in compound_pagemaps.rst doc, patch 14 [Dan]
+ * Rebased to next-20210617 
+
+ RFC[0] -> v1:
+ (New patches 1-3, 5-8 but the diffstat isn't that different)
+ * Fix hwpoisoning of devmap pages reported by Jane (Patch 1 is new in v1)
+ * Fix/Massage commit messages to be more clear and remove the 'we' occurences (Dan, John, Matthew)
+ * Use pfn_align to be clear it's nr of pages for @align value (John, Dan)
+ * Add two helpers pgmap_align() and pgmap_pfn_align() as accessors of pgmap->align;
+ * Remove the gup_device_compound_huge special path and have the same code
+   work both ways while special casing when devmap page is compound (Jason, John)
+ * Avoid usage of vmemmap_populate_basepages() and introduce a first class
+   loop that doesn't care about passing an altmap for memmap reuse. (Dan)
+ * Completely rework the vmemmap_populate_compound() to avoid the sparse_add_section
+   hack into passing block across sparse_add_section calls. It's a lot easier to
+   follow and more explicit in what it does.
+ * Replace the vmemmap refactoring with adding a @pgmap argument and moving
+   parts of the vmemmap_populate_base_pages(). (Patch 5 and 6 are new as a result)
+ * Add PMD tail page vmemmap area reuse for 1GB pages. (Patch 8 is new)
+ * Improve memmap_init_zone_device() to initialize compound pages when
+   struct pages are cache warm. That lead to a even further speed up further
+   from RFC series from 190ms -> 80-120ms. Patches 2 and 3 are the new ones
+   as a result (Dan)
+ * Remove PGMAP_COMPOUND and use @align as the property to detect whether
+   or not to reuse vmemmap areas (Dan)
+
+[0] https://lore.kernel.org/linux-mm/20201208172901.17384-1-joao.m.martins@oracle.com/
+[1] https://lore.kernel.org/linux-mm/20210325230938.30752-1-joao.m.martins@oracle.com/
+[2] https://lore.kernel.org/linux-mm/20210617184507.3662-1-joao.m.martins@oracle.com/
+[3] https://lore.kernel.org/linux-mm/20210714193542.21857-1-joao.m.martins@oracle.com/
+[4] https://lore.kernel.org/linux-mm/20210827145819.16471-1-joao.m.martins@oracle.com/
+[5] https://lore.kernel.org/linux-mm/20211018182559.GC3686969@ziepe.ca/
+[6] https://lore.kernel.org/linux-mm/499043a0-b3d8-7a42-4aee-84b81f5b633f@oracle.com/
+[7] https://lore.kernel.org/linux-mm/20210827145819.16471-9-joao.m.martins@oracle.com/
+[8] https://lore.kernel.org/linux-mm/20210827145819.16471-13-joao.m.martins@oracle.com/
+[9] https://lore.kernel.org/linux-mm/20211112150824.11028-1-joao.m.martins@oracle.com/ 
+
+Joao Martins (10):
+  memory-failure: fetch compound_head after pgmap_pfn_valid()
+  mm/page_alloc: split prep_compound_page into head and tail subparts
+  mm/page_alloc: refactor memmap_init_zone_device() page init
+  mm/memremap: add ZONE_DEVICE support for compound pages
+  device-dax: use ALIGN() for determining pgoff
+  device-dax: use struct_size()
+  device-dax: ensure dev_dax->pgmap is valid for dynamic devices
+  device-dax: factor out page mapping initialization
+  device-dax: set mapping prior to vmf_insert_pfn{,_pmd,pud}()
+  device-dax: compound devmap support
+
+ drivers/dax/bus.c        |  32 +++++++++
+ drivers/dax/bus.h        |   1 +
+ drivers/dax/device.c     |  92 +++++++++++++++++---------
+ include/linux/memremap.h |  11 ++++
+ mm/memory-failure.c      |   6 ++
+ mm/memremap.c            |  12 ++--
+ mm/page_alloc.c          | 138 +++++++++++++++++++++++++++------------
+ 7 files changed, 212 insertions(+), 80 deletions(-)
+
+-- 
+2.17.2
 
