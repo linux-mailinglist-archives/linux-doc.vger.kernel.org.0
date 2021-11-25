@@ -2,145 +2,75 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id C36D345DFAC
-	for <lists+linux-doc@lfdr.de>; Thu, 25 Nov 2021 18:27:35 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 8554645E00E
+	for <lists+linux-doc@lfdr.de>; Thu, 25 Nov 2021 18:55:31 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S242351AbhKYRah (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 25 Nov 2021 12:30:37 -0500
-Received: from mga02.intel.com ([134.134.136.20]:37834 "EHLO mga02.intel.com"
-        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S242904AbhKYR2h (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Thu, 25 Nov 2021 12:28:37 -0500
-X-IronPort-AV: E=McAfee;i="6200,9189,10179"; a="222770518"
-X-IronPort-AV: E=Sophos;i="5.87,263,1631602800"; 
-   d="scan'208";a="222770518"
-Received: from fmsmga007.fm.intel.com ([10.253.24.52])
-  by orsmga101.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 25 Nov 2021 09:17:21 -0800
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.87,263,1631602800"; 
-   d="scan'208";a="509828399"
-Received: from irvmail001.ir.intel.com ([10.43.11.63])
-  by fmsmga007.fm.intel.com with ESMTP; 25 Nov 2021 09:17:12 -0800
-Received: from newjersey.igk.intel.com (newjersey.igk.intel.com [10.102.20.203])
-        by irvmail001.ir.intel.com (8.14.3/8.13.6/MailSET/Hub) with ESMTP id 1APHH9FD003210;
-        Thu, 25 Nov 2021 17:17:09 GMT
-From:   Alexander Lobakin <alexandr.lobakin@intel.com>
-To:     "Russell King (Oracle)" <linux@armlinux.org.uk>
-Cc:     Alexander Lobakin <alexandr.lobakin@intel.com>,
-        "David S. Miller" <davem@davemloft.net>,
-        Jakub Kicinski <kuba@kernel.org>,
-        Jesse Brandeburg <jesse.brandeburg@intel.com>,
-        Michal Swiatkowski <michal.swiatkowski@linux.intel.com>,
-        Maciej Fijalkowski <maciej.fijalkowski@intel.com>,
-        Jonathan Corbet <corbet@lwn.net>,
-        Shay Agroskin <shayagr@amazon.com>,
-        Arthur Kiyanovski <akiyano@amazon.com>,
-        David Arinzon <darinzon@amazon.com>,
-        Noam Dagan <ndagan@amazon.com>,
-        Saeed Bishara <saeedb@amazon.com>,
-        Ioana Ciornei <ioana.ciornei@nxp.com>,
-        Claudiu Manoil <claudiu.manoil@nxp.com>,
-        Tony Nguyen <anthony.l.nguyen@intel.com>,
-        Thomas Petazzoni <thomas.petazzoni@bootlin.com>,
-        Marcin Wojtas <mw@semihalf.com>,
-        Saeed Mahameed <saeedm@nvidia.com>,
-        Leon Romanovsky <leon@kernel.org>,
-        Alexei Starovoitov <ast@kernel.org>,
-        Daniel Borkmann <daniel@iogearbox.net>,
-        Jesper Dangaard Brouer <hawk@kernel.org>,
-        Toke =?iso-8859-1?Q?H=F8iland-J=F8rgensen?= <toke@redhat.com>,
-        John Fastabend <john.fastabend@gmail.com>,
-        Edward Cree <ecree.xilinx@gmail.com>,
-        Martin Habets <habetsm.xilinx@gmail.com>,
-        "Michael S. Tsirkin" <mst@redhat.com>,
-        Jason Wang <jasowang@redhat.com>,
-        Andrii Nakryiko <andrii@kernel.org>,
-        Martin KaFai Lau <kafai@fb.com>,
-        Song Liu <songliubraving@fb.com>, Yonghong Song <yhs@fb.com>,
-        KP Singh <kpsingh@kernel.org>,
-        Lorenzo Bianconi <lorenzo@kernel.org>,
-        Yajun Deng <yajun.deng@linux.dev>,
-        Sergey Ryazanov <ryazanov.s.a@gmail.com>,
-        David Ahern <dsahern@kernel.org>,
-        Andrei Vagin <avagin@gmail.com>,
-        Johannes Berg <johannes.berg@intel.com>,
-        Vladimir Oltean <vladimir.oltean@nxp.com>,
-        Cong Wang <cong.wang@bytedance.com>, netdev@vger.kernel.org,
-        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
-        linux-rdma@vger.kernel.org, bpf@vger.kernel.org,
-        virtualization@lists.linux-foundation.org
-Subject: Re: [PATCH v2 net-next 07/26] mvneta: add .ndo_get_xdp_stats() callback
-Date:   Thu, 25 Nov 2021 18:16:49 +0100
-Message-Id: <20211125171649.127647-1-alexandr.lobakin@intel.com>
-X-Mailer: git-send-email 2.33.1
-In-Reply-To: <YZ4kWXnqZQhSu+mw@shell.armlinux.org.uk>
-References: <20211123163955.154512-1-alexandr.lobakin@intel.com> <20211123163955.154512-8-alexandr.lobakin@intel.com> <YZ4kWXnqZQhSu+mw@shell.armlinux.org.uk>
+        id S1348388AbhKYR6l (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 25 Nov 2021 12:58:41 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:48342 "EHLO
+        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1349581AbhKYR4k (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Thu, 25 Nov 2021 12:56:40 -0500
+Received: from mail-ed1-x52c.google.com (mail-ed1-x52c.google.com [IPv6:2a00:1450:4864:20::52c])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id ABA62C0613FE
+        for <linux-doc@vger.kernel.org>; Thu, 25 Nov 2021 09:41:33 -0800 (PST)
+Received: by mail-ed1-x52c.google.com with SMTP id r25so28557895edq.7
+        for <linux-doc@vger.kernel.org>; Thu, 25 Nov 2021 09:41:33 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=linbit-com.20210112.gappssmtp.com; s=20210112;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc;
+        bh=Z2IJ7fkWzT4QzGDzEtLmaHZp2fcDNE6n441j4Jq1TTg=;
+        b=h4+g36WEj4z1gI3DDnKk+9MxmbcZ+WG7tK4K27UXXlGc6P83Nt5LvJl0rdPJ41d5+2
+         mElVmTmbsyxu+/YXa0m5BLD8hecORHVM0OGuVywAjPtizdkgo/VEYaGsYeQflUwG9z/6
+         2a7bFwQq+uAag+i9LUNfT9V0UwMYpb6H6bHjbcY1edN0onoRGksxlvqxikrqLXyDRTip
+         5vQ/uTtyej02LeLqTyS/hikgRiDMhAC5sr9KVPS6l13eUbzM/X42nleQAXbraY58C/FR
+         9NDnPrkkDp1yVvzXh1497MTnDhkTO9epFf9RMJo6QEWYc+t65IGJisVwk3wplf8L2pKn
+         LKpA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=Z2IJ7fkWzT4QzGDzEtLmaHZp2fcDNE6n441j4Jq1TTg=;
+        b=6qKVpkWzd17j2PazFDal2VwzPIxnR3o/UQVv/qFp9I+EryqeZajl9Mbh4VzV7Fb7S2
+         aFOZePoNG4WUjUSFyKjdOWjExs1DBDZaRJoQpXKSAnpGrVy+7o3ciLYx/PbeoajsJf3y
+         wKT8YAVivRlL70b94UJb6AFH448hdb5Bd9FluqmdNBwXx1Jow7YiqXV+wi1EQ5A1TDur
+         P8SFESADngRkRnilvBu6rgohQZDdvmbvVVMwXeRTWl9b14W2qamG6B7pu8OR802NgxlM
+         hWHlAqX8raZWJHnCVJunKwHACYm9+qKX38Lp2d2evl88iopMNJ6MvW11ZJjOlpj76LXl
+         nHtg==
+X-Gm-Message-State: AOAM532sz7MKCtlJUOQhswfIIHMzXbGcuWCiGuQCtoDujEQk9Q6BPjTY
+        bc1YiTpeLHbC8rkj18WwGOyU66zHEBudRa7ToWxnBw==
+X-Google-Smtp-Source: ABdhPJx2Xczq06usTJYBRLZW2NTpORn5lYS6y+znDW01RIXU6XSiwOXfkyj3NsclbujgsmMU3faOjVf3+64G3yBL76Y=
+X-Received: by 2002:a05:6402:147:: with SMTP id s7mr41127174edu.8.1637862092248;
+ Thu, 25 Nov 2021 09:41:32 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <3cbff170-582b-b6cf-0988-e0d0c9b47505@gmail.com> <3c0ffc75-0e0f-1701-267b-1bedb6481b79@gmail.com>
+In-Reply-To: <3c0ffc75-0e0f-1701-267b-1bedb6481b79@gmail.com>
+From:   Joel Colledge <joel.colledge@linbit.com>
+Date:   Thu, 25 Nov 2021 18:41:21 +0100
+Message-ID: <CAGNP_+VoB=_c5f6LO_NQBfWLrLa=APR2Ajk+kt0XGWqCMp9EXw@mail.gmail.com>
+Subject: Re: [Drbd-dev] [PATCH] docs: admin-guide/blockdev: Use subgraphs in node-states-8.dot
+To:     Akira Yokosawa <akiyks@gmail.com>
+Cc:     Jonathan Corbet <corbet@lwn.net>,
+        Lars Ellenberg <lars.ellenberg@linbit.com>,
+        drbd-dev@lists.linbit.com, linux-kernel@vger.kernel.org,
+        Philipp Reisner <philipp.reisner@linbit.com>,
+        linux-doc@vger.kernel.org
+Content-Type: text/plain; charset="UTF-8"
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-From: Russell King (Oracle) <linux@armlinux.org.uk>
-Date: Wed, 24 Nov 2021 11:39:05 +0000
+Thanks for catching this, Akira.
 
-> On Tue, Nov 23, 2021 at 05:39:36PM +0100, Alexander Lobakin wrote:
-> > +	for_each_possible_cpu(cpu) {
-> > +		const struct mvneta_pcpu_stats *stats;
-> > +		const struct mvneta_stats *ps;
-> > +		u64 xdp_xmit_err;
-> > +		u64 xdp_redirect;
-> > +		u64 xdp_tx_err;
-> > +		u64 xdp_pass;
-> > +		u64 xdp_drop;
-> > +		u64 xdp_xmit;
-> > +		u64 xdp_tx;
-> > +		u32 start;
-> > +
-> > +		stats = per_cpu_ptr(pp->stats, cpu);
-> > +		ps = &stats->es.ps;
-> > +
-> > +		do {
-> > +			start = u64_stats_fetch_begin_irq(&stats->syncp);
-> > +
-> > +			xdp_drop = ps->xdp_drop;
-> > +			xdp_pass = ps->xdp_pass;
-> > +			xdp_redirect = ps->xdp_redirect;
-> > +			xdp_tx = ps->xdp_tx;
-> > +			xdp_tx_err = ps->xdp_tx_err;
-> > +			xdp_xmit = ps->xdp_xmit;
-> > +			xdp_xmit_err = ps->xdp_xmit_err;
-> > +		} while (u64_stats_fetch_retry_irq(&stats->syncp, start));
-> > +
-> > +		xdp_stats->drop += xdp_drop;
-> > +		xdp_stats->pass += xdp_pass;
-> > +		xdp_stats->redirect += xdp_redirect;
-> > +		xdp_stats->tx += xdp_tx;
-> > +		xdp_stats->tx_errors += xdp_tx_err;
-> > +		xdp_stats->xmit_packets += xdp_xmit;
-> > +		xdp_stats->xmit_errors += xdp_xmit_err;
-> 
-> Same comment as for mvpp2 - this could share a lot of code from
-> mvneta_ethtool_update_pcpu_stats() (although it means we end up
-> calculating a little more for the alloc error and refill error
-> that this API doesn't need) but I think sharing that code would be
-> a good idea.
+Unfortunately, this fix causes the "node_states" and "peer_states"
+graphs to be mixed up. I guess this happens because the same IDs are
+used in each subgraph. The graphs should be separate.
 
-Ah, I didn't do that because in my first series I was removing
-Ethtool counters at all. In this one, I left them as-is due to
-some of folks hinted me that those counters (not specifically
-on mvpp2 or mvneta, let's say on virtio-net or so) could have
-already been used in some admin scripts somewhere in the world
-(but with a TODO to figure out which driver I could remove them
-in and do that).
-It would be great if you know and would hint me if I could remove
-those XDP-related Ethtool counters from Marvell drivers or not.
-If so, I'll wipe them, otherwise just factor out common parts to
-wipe out code duplication.
+On reflection, the digraph node_states can be removed entirely. It is
+too basic to contain any useful information. In addition it references
+"ioctl_set_state". The ioctl configuration interface for DRBD has long
+been removed. In fact, it was never in the upstream version of DRBD.
 
-> -- 
-> RMK's Patch system: https://www.armlinux.org.uk/developer/patches/
-> FTTP is here! 40Mbps down 10Mbps up. Decent connectivity at last!
-
-Thanks,
-Al
+Best regards,
+Joel
