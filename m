@@ -2,134 +2,94 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 02BCF460036
-	for <lists+linux-doc@lfdr.de>; Sat, 27 Nov 2021 17:34:31 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id DE9A846014B
+	for <lists+linux-doc@lfdr.de>; Sat, 27 Nov 2021 20:53:20 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S240191AbhK0Qhj (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Sat, 27 Nov 2021 11:37:39 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:35488 "EHLO
+        id S230416AbhK0T4e (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Sat, 27 Nov 2021 14:56:34 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:50368 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S233999AbhK0Qfi (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Sat, 27 Nov 2021 11:35:38 -0500
-Received: from galois.linutronix.de (Galois.linutronix.de [IPv6:2a0a:51c0:0:12e:550::1])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id D89C2C06173E;
-        Sat, 27 Nov 2021 08:32:23 -0800 (PST)
-From:   Sebastian Andrzej Siewior <bigeasy@linutronix.de>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linutronix.de;
-        s=2020; t=1638030741;
-        h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-         to:to:cc:cc:mime-version:mime-version:
-         content-transfer-encoding:content-transfer-encoding:
-         in-reply-to:in-reply-to:references:references;
-        bh=ZziicXtqyO0B1KjTH77YkvbnDEecY2obLG7HtYzb1SY=;
-        b=hQLvnZpMzyKSpFQ5LnjbT9f1Pki19gYjPW2dTBSuPW232ieENBmNInCWC69yth7cZQ5TH+
-        xEO5WtlpQlbEnEhRNGbfU/f0c3pGJH5jG1l8R+f1FzMrVBUXYA+vSXk53l3VDZKQ1hH+ZR
-        FHHkQn0NdbBoObW2Ef2IQpti1hI1O/oV79tT7ROGArPkUyP2sskHj0Q1bD8It5efb4yeK/
-        KyWxm1PsOjOZMNg9D9se4qNelILynGAqfJDPwLvfdJpCVXOpCfvRGne2RydiJll4z1yj0U
-        oqnQZiKpHch/g+KwvoUDkkUEVAWMQUhNKtN7f/WCNGUa+ecWI1zB4MA5Cme2EQ==
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=linutronix.de;
-        s=2020e; t=1638030741;
-        h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-         to:to:cc:cc:mime-version:mime-version:
-         content-transfer-encoding:content-transfer-encoding:
-         in-reply-to:in-reply-to:references:references;
-        bh=ZziicXtqyO0B1KjTH77YkvbnDEecY2obLG7HtYzb1SY=;
-        b=kVfiGYqOJTslUWrnjsePn8Edrd/RDdXZkr2q0Aei7HCG/0EFPS2Bo8atcEM3f7ZTtu7pZp
-        WUbs254BtCYoGhBg==
-To:     netdev@vger.kernel.org, bpf@vger.kernel.org,
-        linux-doc@vger.kernel.org
-Cc:     Peter Zijlstra <peterz@infradead.org>,
-        Jonathan Corbet <corbet@lwn.net>,
-        Alexei Starovoitov <ast@kernel.org>,
-        Daniel Borkmann <daniel@iogearbox.net>,
-        Andrii Nakryiko <andrii@kernel.org>,
-        Martin KaFai Lau <kafai@fb.com>,
-        Song Liu <songliubraving@fb.com>, Yonghong Song <yhs@fb.com>,
-        John Fastabend <john.fastabend@gmail.com>,
-        KP Singh <kpsingh@kernel.org>,
-        Thomas Gleixner <tglx@linutronix.de>,
-        Sebastian Andrzej Siewior <bigeasy@linutronix.de>
-Subject: [PATCH net 2/2] bpf: Make sure bpf_disable_instrumentation() is safe vs preemption.
-Date:   Sat, 27 Nov 2021 17:32:00 +0100
-Message-Id: <20211127163200.10466-3-bigeasy@linutronix.de>
-In-Reply-To: <20211127163200.10466-1-bigeasy@linutronix.de>
-References: <20211127163200.10466-1-bigeasy@linutronix.de>
+        with ESMTP id S244117AbhK0Tye (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Sat, 27 Nov 2021 14:54:34 -0500
+Received: from mail-ed1-x52b.google.com (mail-ed1-x52b.google.com [IPv6:2a00:1450:4864:20::52b])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 70014C0613DD
+        for <linux-doc@vger.kernel.org>; Sat, 27 Nov 2021 11:48:37 -0800 (PST)
+Received: by mail-ed1-x52b.google.com with SMTP id y13so53372562edd.13
+        for <linux-doc@vger.kernel.org>; Sat, 27 Nov 2021 11:48:37 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=soleen.com; s=google;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc;
+        bh=k+WD13DnrXMzqv5sT4ElYQPrredLdicNs7FcvpypMvw=;
+        b=ggD12LSgQGpOuKA978T0sePFYeQGzUd++Kya77nHEr8H2Y5U3s7Zev6jYWlM8g15zO
+         5Nx2G7t6c+rf7GGAFSCpQZHxkt5OsQEtBXocSqZLsTflKlP069Y6vTvdom+R8sqCaKUw
+         raWaWu426UTiqy4O9nfelPn8PFHOxakZIgTU2W7kcNGQpO0/++2YRvyDr2I3SrXmDQDu
+         1WXMLGMEZkRCaF0fcMj7B97yK/UvWka83ZyeYu2k+zh5GsHFtnmwVVhil+n7bNYTEFKF
+         X7uNLZtrn4UGiqMgjSrR41qUhKmTbXBfSPwcJban6ogspnPTMJr2I3EqiFsJEdHq0nAW
+         GO1w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=k+WD13DnrXMzqv5sT4ElYQPrredLdicNs7FcvpypMvw=;
+        b=T3mUQcBpYwjd7TXngX6pWXBKuszdLrpgkZgurWrgf0JPE4sKpJQR34drcdQeKlI5an
+         1LgUu4CaQ0DELJe3uwpt1b0oDc+ees0N3L2n4V/nLlI27FuIlH5OBoCeZqgWSNgjjW41
+         GFbeCVFUgp60vKZt+5zwOr49pZCXsD3WW/UF7LjuDQDGWOD4hlUnn9AEtI58L9pry6wI
+         Wy2Ftc1Er9AbyDbsNKGZRlWuoU4POPRV4kLRxzWDzpLSYFjFXLkbsGbKaOgrXz0WRzdQ
+         vsO7FE0nqEh7zFJ0yQtJnoxBjL+xmDgDdt19u1WjwomEeMM04nlqy5rxd84FrIh2+nZR
+         gq2A==
+X-Gm-Message-State: AOAM531ZqMvMelR7xVcMdwITKVkP9bpEpyfis/TgJt4jlcJuMOpt3inM
+        eberkfeL/ivK8YTOA9V+M6pYMUC++hc47/upw4q84A==
+X-Google-Smtp-Source: ABdhPJw0is2PzWlMWDR3TZyj9QAnUHxP4u+3yMhqpCEGNgRGps4GUpD1lk/8f8bPRqTYXYiiKhXliWlL2FAx25XiMY4=
+X-Received: by 2002:a17:906:58ce:: with SMTP id e14mr46457043ejs.525.1638042515857;
+ Sat, 27 Nov 2021 11:48:35 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
+References: <20211123214814.3756047-1-pasha.tatashin@soleen.com>
+ <20211123214814.3756047-3-pasha.tatashin@soleen.com> <6d82e674-76dc-f3b0-2e53-a92eeb249eff@gmail.com>
+In-Reply-To: <6d82e674-76dc-f3b0-2e53-a92eeb249eff@gmail.com>
+From:   Pasha Tatashin <pasha.tatashin@soleen.com>
+Date:   Sat, 27 Nov 2021 14:48:00 -0500
+Message-ID: <CA+CK2bAX2XmMrt9RBGiUV7LG_sbpB7ov6bxMVjr5FSBVirE1CA@mail.gmail.com>
+Subject: Re: [PATCH 2/3] mm: page table check
+To:     Fusion Future <qydwhotmail@gmail.com>
+Cc:     LKML <linux-kernel@vger.kernel.org>, linux-mm <linux-mm@kvack.org>,
+        Linux Doc Mailing List <linux-doc@vger.kernel.org>,
+        Andrew Morton <akpm@linux-foundation.org>,
+        David Rientjes <rientjes@google.com>,
+        Paul Turner <pjt@google.com>, weixugc@google.com,
+        Greg Thelen <gthelen@google.com>,
+        Ingo Molnar <mingo@redhat.com>,
+        Jonathan Corbet <corbet@lwn.net>,
+        Will Deacon <will@kernel.org>, Mike Rapoport <rppt@kernel.org>,
+        Kees Cook <keescook@chromium.org>,
+        Thomas Gleixner <tglx@linutronix.de>,
+        Peter Zijlstra <peterz@infradead.org>, masahiroy@kernel.org,
+        Sami Tolvanen <samitolvanen@google.com>,
+        Dave Hansen <dave.hansen@linux.intel.com>,
+        "maintainer:X86 ARCHITECTURE (32-BIT AND 64-BIT)" <x86@kernel.org>,
+        frederic@kernel.org, "H. Peter Anvin" <hpa@zytor.com>,
+        "Aneesh Kumar K.V" <aneesh.kumar@linux.ibm.com>
+Content-Type: text/plain; charset="UTF-8"
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-The initial implementation of migrate_disable() for mainline was a
-wrapper around preempt_disable(). RT kernels substituted this with
-a real migrate disable implementation.
+On Sat, Nov 27, 2021 at 3:41 AM Fusion Future <qydwhotmail@gmail.com> wrote:
+>
+> It seems after updating to linux-next-20211125, my system is crashing
+> frequently due to "kernel BUG at mm/page_table_check.c:101".
 
-Later on mainline gained true migrate disable support, but neither
-documentation nor affected code were updated.
+Thank you for reporting this issue:
 
-Remove stale comments claiming that migrate_disable() is PREEMPT_RT
-only.
-Don't use __this_cpu_inc() in the !PREEMPT_RT path because preemption is
-not disabled and the RMW operation can be preempted.
+ 99                 if (anon) {
+100                         BUG_ON(atomic_read(&ptc->file_map_count));
+101                         BUG_ON(atomic_dec_return(&ptc->anon_map_count) < 0);
 
-Fixes: 74d862b682f51 ("sched: Make migrate_disable/enable() independent of =
-RT")
-Signed-off-by: Sebastian Andrzej Siewior <bigeasy@linutronix.de>
----
- include/linux/bpf.h    | 16 ++--------------
- include/linux/filter.h |  3 ---
- 2 files changed, 2 insertions(+), 17 deletions(-)
+This BUG_ON checks that during unmap anon map counter (cleared in
+ptep_clear_flush()) does not become negative. If it becomes negative
+it means that we missed accounting for this anon mapping during
+set_pte(). Is there a config and environment that I could use to repro
+this problem?
 
-diff --git a/include/linux/bpf.h b/include/linux/bpf.h
-index e7a163a3146b6..327a2bec06ca0 100644
---- a/include/linux/bpf.h
-+++ b/include/linux/bpf.h
-@@ -1352,28 +1352,16 @@ extern struct mutex bpf_stats_enabled_mutex;
-  * kprobes, tracepoints) to prevent deadlocks on map operations as any of
-  * these events can happen inside a region which holds a map bucket lock
-  * and can deadlock on it.
-- *
-- * Use the preemption safe inc/dec variants on RT because migrate disable
-- * is preemptible on RT and preemption in the middle of the RMW operation
-- * might lead to inconsistent state. Use the raw variants for non RT
-- * kernels as migrate_disable() maps to preempt_disable() so the slightly
-- * more expensive save operation can be avoided.
-  */
- static inline void bpf_disable_instrumentation(void)
- {
- 	migrate_disable();
--	if (IS_ENABLED(CONFIG_PREEMPT_RT))
--		this_cpu_inc(bpf_prog_active);
--	else
--		__this_cpu_inc(bpf_prog_active);
-+	this_cpu_inc(bpf_prog_active);
- }
-=20
- static inline void bpf_enable_instrumentation(void)
- {
--	if (IS_ENABLED(CONFIG_PREEMPT_RT))
--		this_cpu_dec(bpf_prog_active);
--	else
--		__this_cpu_dec(bpf_prog_active);
-+	this_cpu_dec(bpf_prog_active);
- 	migrate_enable();
- }
-=20
-diff --git a/include/linux/filter.h b/include/linux/filter.h
-index 24b7ed2677afd..534f678ca50fa 100644
---- a/include/linux/filter.h
-+++ b/include/linux/filter.h
-@@ -640,9 +640,6 @@ static __always_inline u32 bpf_prog_run(const struct bp=
-f_prog *prog, const void
-  * This uses migrate_disable/enable() explicitly to document that the
-  * invocation of a BPF program does not require reentrancy protection
-  * against a BPF program which is invoked from a preempting task.
-- *
-- * For non RT enabled kernels migrate_disable/enable() maps to
-- * preempt_disable/enable(), i.e. it disables also preemption.
-  */
- static inline u32 bpf_prog_run_pin_on_cpu(const struct bpf_prog *prog,
- 					  const void *ctx)
---=20
-2.34.0
-
+Thank you,
+Pasha
