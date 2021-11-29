@@ -2,82 +2,78 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 263EA4626BD
-	for <lists+linux-doc@lfdr.de>; Mon, 29 Nov 2021 23:53:47 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 8B66F4624E1
+	for <lists+linux-doc@lfdr.de>; Mon, 29 Nov 2021 23:29:36 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S235138AbhK2W5C (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 29 Nov 2021 17:57:02 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:37710 "EHLO
+        id S231934AbhK2Wcw (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 29 Nov 2021 17:32:52 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:60774 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S235385AbhK2W4d (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Mon, 29 Nov 2021 17:56:33 -0500
+        with ESMTP id S231992AbhK2Wcn (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Mon, 29 Nov 2021 17:32:43 -0500
 Received: from ms.lwn.net (ms.lwn.net [IPv6:2600:3c01:e000:3a1::42])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 6C8F7C061D73
-        for <linux-doc@vger.kernel.org>; Mon, 29 Nov 2021 14:02:46 -0800 (PST)
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id B5C7FC08EAF8;
+        Mon, 29 Nov 2021 14:20:17 -0800 (PST)
 Received: from localhost (unknown [IPv6:2601:281:8300:104d::5f6])
         (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
         (No client certificate requested)
-        by ms.lwn.net (Postfix) with ESMTPSA id 07E152CD;
-        Mon, 29 Nov 2021 22:02:45 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 ms.lwn.net 07E152CD
+        by ms.lwn.net (Postfix) with ESMTPSA id 689EF221;
+        Mon, 29 Nov 2021 22:20:17 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 ms.lwn.net 689EF221
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=lwn.net; s=20201203;
-        t=1638223366; bh=r0M+Dh8Xj1aqpvWY3kYeso5oa3aMlBR0puKXdY4K+98=;
+        t=1638224417; bh=cWLrV3sN2L9a4mscHC8cxOkPTpNjGMnBB/U3F0GHUiU=;
         h=From:To:Cc:Subject:In-Reply-To:References:Date:From;
-        b=QiWWsczjvZ1ZYVMKzwN8uFqiYzb+kZDgE5eTYZAX9Ttd3sXJVjmZ/A9BulV35Wy/f
-         F/pZ4o9F35NmZ0/drNaOZrXN7R/CcadF1iru2r9KFWeg1PXWY6PUMtZRSPPnXU4IkT
-         ddWdqcMOkw8WW521qzaMqI8HpzCQSUu5bKpBUPiYvswyyjRNi9o02rOPXEQAjQYgqC
-         c+SdHia6UrgClpi3xncsjrnqHVwvisCo3ipcPFS+OjOvNtL4bIwI6jx/CqlLS4L8GM
-         hMKkrwD2lkCkLtT3BCbAK5+UEuC0fzYCLqWBWNq5w/tMkNXtj4YO7pmf9AS3fsCR2/
-         E7pORdOPwMhbw==
+        b=amLKGQw3djDEOU+47izoYgQzfXrLLH34050mH4vZTGowUk3dD499jGGSQqAZxHjfP
+         A/lacmoeR1uI2rAADXQDiuks3pAkl4qUwfjFSsNxqo0RNUMH5VnWz00Q3ADdoU4DU4
+         DGm5iQ/oP628IjteMr6Nn1hKpSlTypvkjzdawST30dQ4SzsYGGfn6rXEVPofllAAo/
+         N3YMha6D8WFjIxlGVavWNI1zJsb+uenrT0EbK7v1+xGYugVlmDP0OPaJeAJw2VjhOR
+         l0Nx3LWHur7+Q8RGQ63g9sRTuinhgHC25dQQw/rm7ZNmTWrFMRpNyPxnr7mnKyJVwS
+         Pj35NErOMidVg==
 From:   Jonathan Corbet <corbet@lwn.net>
-To:     Yanteng Si <siyanteng01@gmail.com>, alexs@kernel.org,
-        bobwxc@email.cn, seakeel@gmail.com, leoyang.li@nxp.com
-Cc:     Yanteng Si <siyanteng@loongson.cn>, chenhuacai@kernel.org,
-        jiaxun.yang@flygoat.com, linux-doc@vger.kernel.org,
-        realpuyuwang@gmail.com, siyanteng01@gmail.com, src.res@email.cn,
-        wanjiabing@vivo.com, bernard@vivo.com
-Subject: Re: [PATCH v3 0/2] docs/zh_CN: move and update sparse
-In-Reply-To: <cover.1636078637.git.siyanteng@loongson.cn>
-References: <cover.1636078637.git.siyanteng@loongson.cn>
-Date:   Mon, 29 Nov 2021 15:02:45 -0700
-Message-ID: <877dcqsjqy.fsf@meer.lwn.net>
+To:     Ahmed Zaki <anzaki@gmail.com>, linux-doc@vger.kernel.org
+Cc:     Ahmed Zaki <anzaki@gmail.com>, netdev@vger.kernel.org
+Subject: Re: [PATCH] Doc: networking: Fix the title's Sphinx overline in
+ rds.rst
+In-Reply-To: <20211128171719.3286255-1-anzaki@gmail.com>
+References: <20211128171719.3286255-1-anzaki@gmail.com>
+Date:   Mon, 29 Nov 2021 15:20:16 -0700
+Message-ID: <87y256r4db.fsf@meer.lwn.net>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Yanteng Si <siyanteng01@gmail.com> writes:
+Ahmed Zaki <anzaki@gmail.com> writes:
 
-> v3:
+> A missing "=" caused the title and sections to not show up properly in
+> the htmldocs.
 >
-> * Pick Alex's Reviewed-by tag.
-> * Replace *=E6=98=AF* with **=E6=98=AF** at the suggestion of Leo Li.
-> * Fix a build warning.
+> Signed-off-by: Ahmed Zaki <anzaki@gmail.com>
+> ---
+>  Documentation/networking/rds.rst | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
 >
-> v2:
->
-> At the suggestion of Leo Li:
->
-> * typo fix.
-> * recovert `` `` to =E2=80=9C =E2=80=9D.
->
-> v1:
->
-> The Chinese sparse documentation is too old, so let's update it to
-> the latest version and move it to ../zh_CN/dev-tools/.
->
-> Yanteng Si (2):
->   docs/zh_CN: move sparse into dev-tools
->   docs/zh_CN: update sparse translation
->
->  .../translations/zh_CN/dev-tools/index.rst    |  2 +-
->  .../{sparse.txt =3D> dev-tools/sparse.rst}      | 67 ++++++++++++-------
->  2 files changed, 43 insertions(+), 26 deletions(-)
->  rename Documentation/translations/zh_CN/{sparse.txt =3D> dev-tools/spars=
-e.rst} (58%)
+> diff --git a/Documentation/networking/rds.rst b/Documentation/networking/rds.rst
+> index 44936c27ab3a..498395f5fbcb 100644
+> --- a/Documentation/networking/rds.rst
+> +++ b/Documentation/networking/rds.rst
+> @@ -1,6 +1,6 @@
+>  .. SPDX-License-Identifier: GPL-2.0
+>  
+> -==
+> +===
+>  RDS
+>  ===
 
-Set applied, thanks.
+The networking folks normally like to handle documentation patches for
+their subsystem, so netdev@vger.kernel.org should have been in the CC.
+I believe scripts/get_maintainer.pl should have told you that.
+
+For something so small and obvious, though, I don't see any point in
+making you do it again, so I've just applied it; hopefully they'll
+forgive me :)
+
+Thanks,
 
 jon
