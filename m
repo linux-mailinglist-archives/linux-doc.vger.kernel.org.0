@@ -2,75 +2,69 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 5705D462384
-	for <lists+linux-doc@lfdr.de>; Mon, 29 Nov 2021 22:41:36 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 70CA5462421
+	for <lists+linux-doc@lfdr.de>; Mon, 29 Nov 2021 23:13:31 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S231164AbhK2Vow (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 29 Nov 2021 16:44:52 -0500
-Received: from ms.lwn.net ([45.79.88.28]:53550 "EHLO ms.lwn.net"
-        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S231929AbhK2Vmw (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Mon, 29 Nov 2021 16:42:52 -0500
+        id S231304AbhK2WQq (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 29 Nov 2021 17:16:46 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:56572 "EHLO
+        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S231442AbhK2WQd (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Mon, 29 Nov 2021 17:16:33 -0500
+Received: from ms.lwn.net (ms.lwn.net [IPv6:2600:3c01:e000:3a1::42])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 9160DC08EB2C;
+        Mon, 29 Nov 2021 13:42:41 -0800 (PST)
 Received: from localhost (unknown [IPv6:2601:281:8300:104d::5f6])
         (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
         (No client certificate requested)
-        by ms.lwn.net (Postfix) with ESMTPSA id 776D1221;
-        Mon, 29 Nov 2021 21:39:34 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 ms.lwn.net 776D1221
+        by ms.lwn.net (Postfix) with ESMTPSA id 15D6F2D3;
+        Mon, 29 Nov 2021 21:42:41 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 ms.lwn.net 15D6F2D3
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=lwn.net; s=20201203;
-        t=1638221974; bh=KUWR2wrj1GBdUBCsyEtNF7J8KqKNmk27V80VSJG77ks=;
+        t=1638222161; bh=dxVqXyJt+NWgZ8KiVRMsoxhFaqe07X8UZntns7f7gKQ=;
         h=From:To:Cc:Subject:In-Reply-To:References:Date:From;
-        b=Rp2HE8FFknHIUzRL8icxKz5Zt4SB0dYyXIEqH1losWDIOwOp4WRceSggyk92M4yEu
-         xw+Yln75m+92lkzuRgJF1E67MJz33DMSf6I605O86XE7Xo9HWdsWBojOsFrm2xPXh/
-         E1Y3KqVLz7GTqetSwuZgjM8e4XW2EssoklObCjWtHZa1BTFFUfl9PfxBe6Ydbiq7ej
-         FTz4YpxmfG1MD7amBMVlGB4P18guxrJyMnnWnZiEcGDxIDyvq26LV2hBohxvhzlgi/
-         TZAVsOfW7310igQkjy3NMcty1aJt0MpLtN05lZUuHd3ZsTD3YHqxgUWV/wjhBFrm1M
-         IXgwTatPjHRgw==
+        b=EA8Ro+5/aZe+MD7I/L/neRV6pUADrcqN0wTI9mdNnQFFtxll3BF5mry3LchTdNuYI
+         61iUnEvzODQooGQx07UYwLpMbd/fsA6qIwZFnQ0zqJEV/zcAyTHxrSa86YTBmf7C2o
+         epFHqXGnpMNzaQNQhgzCQuXjUvjPTK/CpK+h/IA828cowQ3U5ToEXqND6wb49f+CDW
+         7xaIMxqEbr5WT3uzVfQWw0R+7sCl2C0TlVHtijieqtlfVTafYQ3031RXZfPUt5OEtk
+         Ma6dx60u7jEwaiSxNFiyhqOOl/XKRCqHPMarkmEjzqmbdkeON90DzAIGWNYtgLiPf1
+         1vs/rhQvOPsYA==
 From:   Jonathan Corbet <corbet@lwn.net>
-To:     Akira Yokosawa <akiyks@gmail.com>,
-        Joel Colledge <joel.colledge@linbit.com>
-Cc:     Philipp Reisner <philipp.reisner@linbit.com>,
-        Lars Ellenberg <lars.ellenberg@linbit.com>,
-        drbd-dev@lists.linbit.com, linux-doc@vger.kernel.org,
+To:     Erik Ekman <erik@kryo.se>
+Cc:     Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
+        Erik Ekman <erik@kryo.se>, linux-doc@vger.kernel.org,
         linux-kernel@vger.kernel.org
-Subject: Re: [PATCH v2] docs: admin-guide/blockdev: Remove digraph of
- node-states
-In-Reply-To: <7df04f45-8746-e666-1a9d-a998f1ab1f91@gmail.com>
-References: <7df04f45-8746-e666-1a9d-a998f1ab1f91@gmail.com>
-Date:   Mon, 29 Nov 2021 14:39:33 -0700
-Message-ID: <87sfvesktm.fsf@meer.lwn.net>
+Subject: Re: [PATCH] Documentation/process: fix self reference
+In-Reply-To: <20211119200758.642474-1-erik@kryo.se>
+References: <20211119200758.642474-1-erik@kryo.se>
+Date:   Mon, 29 Nov 2021 14:42:40 -0700
+Message-ID: <87o862skof.fsf@meer.lwn.net>
 MIME-Version: 1.0
 Content-Type: text/plain
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Akira Yokosawa <akiyks@gmail.com> writes:
+Erik Ekman <erik@kryo.se> writes:
 
-> While node-states-8.dot has two digraphs, the dot(1) command can
-> not properly handle multiple graphs in a DOT file and the
-> kernel-doc page at
+> Instead link to the device tree document with the same name.
 >
->     https://www.kernel.org/doc/html/latest/admin-guide/blockdev/drbd/figures.html
+> Signed-off-by: Erik Ekman <erik@kryo.se>
+> ---
+>  Documentation/process/submitting-patches.rst | 3 ++-
+>  1 file changed, 2 insertions(+), 1 deletion(-)
 >
-> fails to render the graphs.
->
-> It turned out that the digraph of node_states can be removed.
->
-> Quote from Joel's reflection:
->
->     On reflection, the digraph node_states can be removed entirely.
->     It is too basic to contain any useful information. In addition
->     it references "ioctl_set_state". The ioctl configuration
->     interface for DRBD has long been removed. In fact, it was never
->     in the upstream version of DRBD.
->
-> Remove node_states and rename the DOT file peer_states-8.dot.
->
-> Suggested-by: Joel Colledge <joel.colledge@linbit.com>
-> Signed-off-by: Akira Yokosawa <akiyks@gmail.com>
-> Cc: Philipp Reisner <philipp.reisner@linbit.com>
-> Cc: Lars Ellenberg <lars.ellenberg@linbit.com>
+> diff --git a/Documentation/process/submitting-patches.rst b/Documentation/process/submitting-patches.rst
+> index da085d63af9b..6b3aaed66fba 100644
+> --- a/Documentation/process/submitting-patches.rst
+> +++ b/Documentation/process/submitting-patches.rst
+> @@ -14,7 +14,8 @@ works, see Documentation/process/development-process.rst. Also, read
+>  Documentation/process/submit-checklist.rst
+>  for a list of items to check before submitting code.  If you are submitting
+>  a driver, also read Documentation/process/submitting-drivers.rst; for device
+> -tree binding patches, read Documentation/process/submitting-patches.rst.
+> +tree binding patches, read
+> +Documentation/devicetree/bindings/submitting-patches.rst.
 
 Applied, thanks.
 
