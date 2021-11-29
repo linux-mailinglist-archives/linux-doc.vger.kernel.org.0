@@ -2,67 +2,86 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 86B4246120F
-	for <lists+linux-doc@lfdr.de>; Mon, 29 Nov 2021 11:22:44 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id E82504611DB
+	for <lists+linux-doc@lfdr.de>; Mon, 29 Nov 2021 11:09:34 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S231339AbhK2K0A (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 29 Nov 2021 05:26:00 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:40328 "EHLO
-        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S230354AbhK2KYA (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Mon, 29 Nov 2021 05:24:00 -0500
-Received: from mail-ua1-x929.google.com (mail-ua1-x929.google.com [IPv6:2607:f8b0:4864:20::929])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id C0675C0613B3
-        for <linux-doc@vger.kernel.org>; Mon, 29 Nov 2021 01:52:32 -0800 (PST)
-Received: by mail-ua1-x929.google.com with SMTP id ay21so32673651uab.12
-        for <linux-doc@vger.kernel.org>; Mon, 29 Nov 2021 01:52:32 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=mime-version:reply-to:from:date:message-id:subject:to
-         :content-transfer-encoding;
-        bh=Z1mmgGZREih8gBVIcFcE3P5bdv+4dsBN+AoQgoOUZrM=;
-        b=SLK3bhBaHp2EA9P/CcbzPMGyBRtEnS31W+OJoadfPppJGw8lOfMy9Sj/OlHK6zwTWe
-         afk9jogH/gspeueopMShatpkxTtavcI9hDzcPzmcI3qqgi7ryxhsoC/ES2D91m5WcBAc
-         M1cd/bEBkfzlQ4f3Y1YDngDwz5vKsMEvyfawx8qfDvWSOXhHCAPTudcdqSixBf8Lj6RS
-         jN96DwH8XVzXT2FUe0FcDex0HrqZLOoqXiAgycdLNEExdgVHDazmukrW3IYR4+b1kYI+
-         l40T7N0BmEHv8i/N9DkuOzvzPvnU4Ob9JpC9vQeOzcN1OqHLsRlxAFRTQY6Kg3Wp3Ac9
-         XSww==
+        id S233627AbhK2KMu (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 29 Nov 2021 05:12:50 -0500
+Received: from mail-vk1-f178.google.com ([209.85.221.178]:37424 "EHLO
+        mail-vk1-f178.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S235211AbhK2KKt (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Mon, 29 Nov 2021 05:10:49 -0500
+Received: by mail-vk1-f178.google.com with SMTP id e27so10644722vkd.4;
+        Mon, 29 Nov 2021 02:07:32 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=x-gm-message-state:mime-version:reply-to:from:date:message-id
-         :subject:to:content-transfer-encoding;
-        bh=Z1mmgGZREih8gBVIcFcE3P5bdv+4dsBN+AoQgoOUZrM=;
-        b=0sjdhSOeP8MYkNW6ImO7W0Zb0YrtZBUgnQ/ejhc7wFiHbvyEC3Rq1o5mts5SBYwFsn
-         ZBMGSYx1UmneJ7Ny+WoYYrzTuqs1HVPlN+F3W4ktYJ516hVTSlqzgsD5QxszdJIwIHeV
-         WAsT0T/p6D0N/PdNXCyANw9u1XfJil91neLt2xO2m/7O16YpiixPv1shZ2Qdzabj/2cv
-         lyDmsyvFkRmTEBTl3zWZRfb+Dt8O+hGgoKOBSbRcq8jYHDWCCvkFVeU/KTmgE+nw/KW/
-         O35vqx6U8VxkAYbdZWenVah3RtG3Rh8gFJlh1XslWOTaN3jXK+Uk6rfKBLpHlnDBuZBO
-         /49Q==
-X-Gm-Message-State: AOAM530qsZ2cZg7q9wBRtR3wHIaC3tMx+hNgV+Nj1V5lgXZEEv0pHn3D
-        R3owmsv+1zdUR+soiMV2ahqHZnkWFF/m6wpWX3w=
-X-Google-Smtp-Source: ABdhPJx62TO55LZnJd0veWWIZO4A1PpN8b15rvxq5TWJYuftKK1UjotJVPK9JgfQQLQw1/eU7rjdv+FOzjHqIJdArwo=
-X-Received: by 2002:ab0:3c9f:: with SMTP id a31mr49344865uax.134.1638179551897;
- Mon, 29 Nov 2021 01:52:31 -0800 (PST)
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=GVFNfQPdN79DFaiM4xA6K3MbJdiYsXlejmisa39lhE8=;
+        b=S6oiH7X98dVKi8s5kIpwqPdJbMCKmfVJxaQvMDfvLoVQd6FcIcPIvZyoiqSyCvuCiS
+         TOBK/SoRBJcvWmh8jSdS6fPTBy0hgwFw0xGMbxgiPFuxq6NCj/OXFJnIufv80kJmqYlV
+         I9l2BjIowWOO9zxH7oDtozdd3Yw33o2wm7RryHrgSc0cV7mGI5vGOU41PAoYIPsgbcAj
+         o4zqji2mnOIE+yZTcjsYT3ytxMO02yhj8WQGD8jJaGwQNcUbSZzpZ3vTfyot1Y8bO2UQ
+         kDyWCpxamMY2TxfvfzIczp+9o6DEgm3T4YwRpWm94IG7NSjuRXjz3XNpMxdbkZshuBgn
+         gBbw==
+X-Gm-Message-State: AOAM532f7ZyZvwWLqbswCtVQgNmMKc/C+gQrhcw/6dGfklKmkN6YKxiP
+        7ew4swyJqgBpQp2iM8mN2vPaHJMBUFyWCw==
+X-Google-Smtp-Source: ABdhPJyc5DbU0mwKU1p5d0R7kGhcirmBYnp9nMAjzrQM6zfmY01j3gQitKilFIaLWAxRHTeaP7+Z0g==
+X-Received: by 2002:a1f:9049:: with SMTP id s70mr34115371vkd.19.1638180451546;
+        Mon, 29 Nov 2021 02:07:31 -0800 (PST)
+Received: from mail-ua1-f53.google.com (mail-ua1-f53.google.com. [209.85.222.53])
+        by smtp.gmail.com with ESMTPSA id g28sm7629070vkl.16.2021.11.29.02.07.31
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Mon, 29 Nov 2021 02:07:31 -0800 (PST)
+Received: by mail-ua1-f53.google.com with SMTP id o1so32791915uap.4;
+        Mon, 29 Nov 2021 02:07:31 -0800 (PST)
+X-Received: by 2002:a67:c106:: with SMTP id d6mr31358268vsj.77.1638180450870;
+ Mon, 29 Nov 2021 02:07:30 -0800 (PST)
 MIME-Version: 1.0
-Received: by 2002:ab0:3c93:0:0:0:0:0 with HTTP; Mon, 29 Nov 2021 01:52:31
- -0800 (PST)
-Reply-To: c6715203@gmail.com
-From:   Maria Elisabeth Schaeffler <achiengsala@gmail.com>
-Date:   Mon, 29 Nov 2021 12:52:31 +0300
-Message-ID: <CACM5ifcVPE5TCLO_kh0w8g7nXMm+9CxUnoTXGTmc8EOgnrXKwg@mail.gmail.com>
-Subject: Spende
-To:     undisclosed-recipients:;
+References: <8170fe1d1c62426d82275d36ba409ecc18754292.1637274578.git.fthain@linux-m68k.org>
+In-Reply-To: <8170fe1d1c62426d82275d36ba409ecc18754292.1637274578.git.fthain@linux-m68k.org>
+From:   Geert Uytterhoeven <geert@linux-m68k.org>
+Date:   Mon, 29 Nov 2021 11:07:19 +0100
+X-Gmail-Original-Message-ID: <CAMuHMdUFZkFkDaxHx-hbXhZAk2B-J_sprtEz=S8AYf9wJgH1pg@mail.gmail.com>
+Message-ID: <CAMuHMdUFZkFkDaxHx-hbXhZAk2B-J_sprtEz=S8AYf9wJgH1pg@mail.gmail.com>
+Subject: Re: [PATCH v3] m68k: Enable memtest functionality
+To:     Finn Thain <fthain@linux-m68k.org>
+Cc:     Mike Rapoport <rppt@kernel.org>, Sam Creasey <sammy@sammy.net>,
+        Jonathan Corbet <corbet@lwn.net>,
+        "open list:DOCUMENTATION" <linux-doc@vger.kernel.org>,
+        Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
+        linux-m68k <linux-m68k@lists.linux-m68k.org>
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
---=20
-Hi,
-Ihre Spende in H=C3=B6he von 1.500.000,00 Euro von Maria-Frau Elisabeth
-Schaeffler steht Ihnen weiterhin zur Verf=C3=BCgung. kontaktieren Sie mich
-f=C3=BCr weitere Informationen.
+On Thu, Nov 18, 2021 at 11:32 PM Finn Thain <fthain@linux-m68k.org> wrote:
+> Enable the memtest functionality and rearrange some code to prevent it
+> from clobbering the initrd.
+>
+> The code to implement CONFIG_BLK_DEV_INITRD was conditional on
+> !defined(CONFIG_SUN3). For simplicity, remove that test on the basis
+> that m68k_ramdisk.size == 0 on Sun 3. The SLIME source code at
+> http://sammy.net/sun3/ftp/pub/m68k/sun3/slime/slime-2.0.tar.gz
+> indicates that no BI_RAMDISK entry is ever passed to the kernel due
+> to #ifdef 0 around the relevant code.
+>
+> Cc: Mike Rapoport <rppt@kernel.org>
+> Cc: Sam Creasey <sammy@sammy.net>
+> Cc: Jonathan Corbet <corbet@lwn.net>
+> Signed-off-by: Finn Thain <fthain@linux-m68k.org>
 
-Mit freundlichen Gr=C3=BC=C3=9Fen
-Frau Maria-Elisabeth Schaeffler
+Reviewed-by: Geert Uytterhoeven <geert@linux-m68k.org>
+i.e. will queue in the m68k for-v5.17 branch.
+
+Gr{oetje,eeting}s,
+
+                        Geert
+
+--
+Geert Uytterhoeven -- There's lots of Linux beyond ia32 -- geert@linux-m68k.org
+
+In personal conversations with technical people, I call myself a hacker. But
+when I'm talking to journalists I just say "programmer" or something like that.
+                                -- Linus Torvalds
