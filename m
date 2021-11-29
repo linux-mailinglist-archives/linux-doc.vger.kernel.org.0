@@ -2,221 +2,177 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 67EAF461447
-	for <lists+linux-doc@lfdr.de>; Mon, 29 Nov 2021 12:53:33 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 9DB714614A2
+	for <lists+linux-doc@lfdr.de>; Mon, 29 Nov 2021 13:08:20 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S239165AbhK2L4t (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 29 Nov 2021 06:56:49 -0500
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124]:56468 "EHLO
-        us-smtp-delivery-124.mimecast.com" rhost-flags-OK-OK-OK-OK)
-        by vger.kernel.org with ESMTP id S239346AbhK2Lys (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Mon, 29 Nov 2021 06:54:48 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-        s=mimecast20190719; t=1638186690;
-        h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-         to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-         content-transfer-encoding:content-transfer-encoding:
-         in-reply-to:in-reply-to:references:references;
-        bh=o1hbT83UZyzEpMcYnWEfjfHejJ/ev9mdgbjpKbK1VxE=;
-        b=jPSCvnH3AmIEJgnraLey8Z5aFFc8AIeOcFcsX+DzhdtTb0SAGz8twzNMycBFyTfseM1MSS
-        8w+KBStygLCLMuokWtNVxaJiSfRKO+isstyAF4hpUsR6KCkexSxNid9nv4QxiUG0bDtO4c
-        Kw91vHSrw0dewmGQCdIUe1mphja4ZQA=
-Received: from mail-ed1-f69.google.com (mail-ed1-f69.google.com
- [209.85.208.69]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- us-mta-556-_yJYyLmCMEm3z3kMBrYJpA-1; Mon, 29 Nov 2021 06:51:29 -0500
-X-MC-Unique: _yJYyLmCMEm3z3kMBrYJpA-1
-Received: by mail-ed1-f69.google.com with SMTP id v1-20020aa7cd41000000b003e80973378aso13442410edw.14
-        for <linux-doc@vger.kernel.org>; Mon, 29 Nov 2021 03:51:29 -0800 (PST)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=x-gm-message-state:from:to:cc:subject:in-reply-to:references:date
-         :message-id:mime-version:content-transfer-encoding;
-        bh=o1hbT83UZyzEpMcYnWEfjfHejJ/ev9mdgbjpKbK1VxE=;
-        b=Pf/TLHdJCAfXoK0U1THJydSMHOWxbMQe+fOumIlh3gkq7iwtE3UlgFrz3C0nj+V26a
-         UZ0dqolzHvWc4l3IUMg2u/pLdvSwo1FEHC5FmXMkP3ihX1TklE89hr0qZ6EPN57iQTZ6
-         xXDlf6nlseRkzsyajTLJZqdIQWYkTpMy5A2XUjIowguGoA1jeHVdHPy3kdh7oo3aMtsg
-         PJkQ5UoO5xO7jkVy6dxOnIip5qO8ES3yBHLRJPHzMSnFDsoiCaA6l3R59Rs2DQWkwDVj
-         kG5DE+NoxC7bX8/9MEgZR5r3bF5WID82XDc6KKjJWt5EYdYrJ0qG+37AbaFoibSUEI6B
-         hrTw==
-X-Gm-Message-State: AOAM532K0oUV23MEYtMVdX6wrOz65e4JnOXA/S+awyWonVvQP5H0K7zj
-        jiAiLssSndcMvAmpgKZoVO76eC0LjD7JOFgiCoc9V7fv8hPycukCnpSFnBJ/nXh6X7EOq2lg+Qe
-        MPZLNQ/XGzMWvLq7pm8qp
-X-Received: by 2002:a05:6402:90c:: with SMTP id g12mr72820108edz.36.1638186688015;
-        Mon, 29 Nov 2021 03:51:28 -0800 (PST)
-X-Google-Smtp-Source: ABdhPJy//h6DqzMZ3cIjns1ItOPHoyCEI8XwGnDfYQ/w255YG7ez18OJaBJc76mESug2RLwzmhwD5w==
-X-Received: by 2002:a05:6402:90c:: with SMTP id g12mr72820014edz.36.1638186687643;
-        Mon, 29 Nov 2021 03:51:27 -0800 (PST)
-Received: from alrua-x1.borgediget.toke.dk ([45.145.92.2])
-        by smtp.gmail.com with ESMTPSA id z1sm9056421edq.54.2021.11.29.03.51.26
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 29 Nov 2021 03:51:27 -0800 (PST)
-Received: by alrua-x1.borgediget.toke.dk (Postfix, from userid 1000)
-        id 6858F1802A0; Mon, 29 Nov 2021 12:51:26 +0100 (CET)
-From:   Toke =?utf-8?Q?H=C3=B8iland-J=C3=B8rgensen?= <toke@redhat.com>
-To:     Daniel Borkmann <daniel@iogearbox.net>,
-        Jakub Kicinski <kuba@kernel.org>
-Cc:     Alexander Lobakin <alexandr.lobakin@intel.com>,
-        "David S. Miller" <davem@davemloft.net>,
-        Jesse Brandeburg <jesse.brandeburg@intel.com>,
-        Michal Swiatkowski <michal.swiatkowski@linux.intel.com>,
-        Maciej Fijalkowski <maciej.fijalkowski@intel.com>,
-        Jonathan Corbet <corbet@lwn.net>,
-        Shay Agroskin <shayagr@amazon.com>,
-        Arthur Kiyanovski <akiyano@amazon.com>,
-        David Arinzon <darinzon@amazon.com>,
-        Noam Dagan <ndagan@amazon.com>,
-        Saeed Bishara <saeedb@amazon.com>,
-        Ioana Ciornei <ioana.ciornei@nxp.com>,
-        Claudiu Manoil <claudiu.manoil@nxp.com>,
-        Tony Nguyen <anthony.l.nguyen@intel.com>,
-        Thomas Petazzoni <thomas.petazzoni@bootlin.com>,
-        Marcin Wojtas <mw@semihalf.com>,
-        Russell King <linux@armlinux.org.uk>,
-        Saeed Mahameed <saeedm@nvidia.com>,
-        Leon Romanovsky <leon@kernel.org>,
-        Alexei Starovoitov <ast@kernel.org>,
-        Jesper Dangaard Brouer <hawk@kernel.org>,
-        John Fastabend <john.fastabend@gmail.com>,
-        Edward Cree <ecree.xilinx@gmail.com>,
-        Martin Habets <habetsm.xilinx@gmail.com>,
-        "Michael S. Tsirkin" <mst@redhat.com>,
-        Jason Wang <jasowang@redhat.com>,
-        Andrii Nakryiko <andrii@kernel.org>,
-        Martin KaFai Lau <kafai@fb.com>,
-        Song Liu <songliubraving@fb.com>, Yonghong Song <yhs@fb.com>,
-        KP Singh <kpsingh@kernel.org>,
-        Lorenzo Bianconi <lorenzo@kernel.org>,
-        Yajun Deng <yajun.deng@linux.dev>,
-        Sergey Ryazanov <ryazanov.s.a@gmail.com>,
-        David Ahern <dsahern@kernel.org>,
-        Andrei Vagin <avagin@gmail.com>,
-        Johannes Berg <johannes.berg@intel.com>,
-        Vladimir Oltean <vladimir.oltean@nxp.com>,
-        Cong Wang <cong.wang@bytedance.com>, netdev@vger.kernel.org,
-        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
-        linux-rdma@vger.kernel.org, bpf@vger.kernel.org,
-        virtualization@lists.linux-foundation.org
-Subject: Re: [PATCH v2 net-next 21/26] ice: add XDP and XSK generic
- per-channel statistics
-In-Reply-To: <871ae82a-3d5b-2693-2f77-7c86d725a056@iogearbox.net>
-References: <20211123163955.154512-1-alexandr.lobakin@intel.com>
- <20211123163955.154512-22-alexandr.lobakin@intel.com>
- <77407c26-4e32-232c-58e0-2d601d781f84@iogearbox.net>
- <87bl28bga6.fsf@toke.dk>
- <20211125170708.127323-1-alexandr.lobakin@intel.com>
- <20211125094440.6c402d63@kicinski-fedora-pc1c0hjn.dhcp.thefacebook.com>
- <20211125204007.133064-1-alexandr.lobakin@intel.com>
- <87sfvj9k13.fsf@toke.dk>
- <20211126100611.514df099@kicinski-fedora-pc1c0hjn.dhcp.thefacebook.com>
- <871ae82a-3d5b-2693-2f77-7c86d725a056@iogearbox.net>
-X-Clacks-Overhead: GNU Terry Pratchett
-Date:   Mon, 29 Nov 2021 12:51:26 +0100
-Message-ID: <878rx79o3l.fsf@toke.dk>
+        id S235996AbhK2MLg (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 29 Nov 2021 07:11:36 -0500
+Received: from mga07.intel.com ([134.134.136.100]:58595 "EHLO mga07.intel.com"
+        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
+        id S243074AbhK2MJf (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Mon, 29 Nov 2021 07:09:35 -0500
+X-IronPort-AV: E=McAfee;i="6200,9189,10182"; a="299346248"
+X-IronPort-AV: E=Sophos;i="5.87,273,1631602800"; 
+   d="scan'208";a="299346248"
+Received: from orsmga008.jf.intel.com ([10.7.209.65])
+  by orsmga105.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 29 Nov 2021 04:06:16 -0800
+X-IronPort-AV: E=Sophos;i="5.87,273,1631602800"; 
+   d="scan'208";a="511659335"
+Received: from mkabdel-mobl.ger.corp.intel.com (HELO localhost) ([10.252.11.182])
+  by orsmga008-auth.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 29 Nov 2021 04:06:11 -0800
+From:   Jani Nikula <jani.nikula@linux.intel.com>
+To:     Daniel Vetter <daniel@ffwll.ch>,
+        Rodrigo Siqueira <Rodrigo.Siqueira@amd.com>
+Cc:     Mark Yacoub <markyacoub@chromium.org>, bhawanpreet.lakha@amd.com,
+        nicholas.choi@amd.com, linux-doc@vger.kernel.org,
+        Michel =?utf-8?Q?D?= =?utf-8?Q?=C3=A4nzer?= 
+        <michel@daenzer.net>, roman.li@amd.com,
+        amd-gfx@lists.freedesktop.org,
+        Nicholas Kazlauskas <nicholas.kazlauskas@amd.com>,
+        Marek =?utf-8?B?T2w=?= =?utf-8?B?xaHDoWs=?= 
+        <marek.olsak@amd.com>, aurabindo.pillai@amd.com,
+        Sean Paul <seanpaul@chromium.org>,
+        dri-devel@lists.freedesktop.org,
+        Alex Deucher <alexander.deucher@amd.com>,
+        qingqing.zhuo@amd.com,
+        Christian =?utf-8?Q?K?= =?utf-8?Q?=C3=B6nig?= 
+        <christian.koenig@amd.com>, Roman Gilg <subdiff@gmail.com>
+Subject: Re: [PATCH 1/6] Documentation/gpu: Reorganize DC documentation
+In-Reply-To: <YaEAVV3Ka2lG/iOh@phenom.ffwll.local>
+Organization: Intel Finland Oy - BIC 0357606-4 - Westendinkatu 7, 02160 Espoo
+References: <20211125153830.1352994-1-Rodrigo.Siqueira@amd.com>
+ <20211125153830.1352994-2-Rodrigo.Siqueira@amd.com>
+ <YaEAVV3Ka2lG/iOh@phenom.ffwll.local>
+Date:   Mon, 29 Nov 2021 14:06:02 +0200
+Message-ID: <87k0grjhed.fsf@intel.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Daniel Borkmann <daniel@iogearbox.net> writes:
+On Fri, 26 Nov 2021, Daniel Vetter <daniel@ffwll.ch> wrote:
+> On Thu, Nov 25, 2021 at 10:38:25AM -0500, Rodrigo Siqueira wrote:
+>> Display core documentation is not well organized, and it is hard to find
+>> information due to the lack of sections. This commit reorganizes the
+>> documentation layout, and it is preparation work for future changes.
+>> 
+>> Signed-off-by: Rodrigo Siqueira <Rodrigo.Siqueira@amd.com>
+>> ---
+>>  Documentation/gpu/amdgpu-dc.rst               | 74 -------------------
+>>  .../gpu/amdgpu-dc/amdgpu-dc-debug.rst         |  4 +
+>>  Documentation/gpu/amdgpu-dc/amdgpu-dc.rst     | 29 ++++++++
+>>  Documentation/gpu/amdgpu-dc/amdgpu-dm.rst     | 42 +++++++++++
+>>  Documentation/gpu/drivers.rst                 |  2 +-
+>>  5 files changed, 76 insertions(+), 75 deletions(-)
+>>  delete mode 100644 Documentation/gpu/amdgpu-dc.rst
+>>  create mode 100644 Documentation/gpu/amdgpu-dc/amdgpu-dc-debug.rst
+>>  create mode 100644 Documentation/gpu/amdgpu-dc/amdgpu-dc.rst
+>>  create mode 100644 Documentation/gpu/amdgpu-dc/amdgpu-dm.rst
+>> 
+>> diff --git a/Documentation/gpu/amdgpu-dc.rst b/Documentation/gpu/amdgpu-dc.rst
+>> deleted file mode 100644
+>> index f7ff7e1309de..000000000000
+>> --- a/Documentation/gpu/amdgpu-dc.rst
+>> +++ /dev/null
+>> @@ -1,74 +0,0 @@
+>> -===================================
+>> -drm/amd/display - Display Core (DC)
+>> -===================================
+>> -
+>> -*placeholder - general description of supported platforms, what dc is, etc.*
+>> -
+>> -Because it is partially shared with other operating systems, the Display Core
+>> -Driver is divided in two pieces.
+>> -
+>> -1. **Display Core (DC)** contains the OS-agnostic components. Things like
+>> -   hardware programming and resource management are handled here.
+>> -2. **Display Manager (DM)** contains the OS-dependent components. Hooks to the
+>> -   amdgpu base driver and DRM are implemented here.
+>> -
+>> -It doesn't help that the entire package is frequently referred to as DC. But
+>> -with the context in mind, it should be clear.
+>> -
+>> -When CONFIG_DRM_AMD_DC is enabled, DC will be initialized by default for
+>> -supported ASICs. To force disable, set `amdgpu.dc=0` on kernel command line.
+>> -Likewise, to force enable on unsupported ASICs, set `amdgpu.dc=1`.
+>> -
+>> -To determine if DC is loaded, search dmesg for the following entry:
+>> -
+>> -``Display Core initialized with <version number here>``
+>> -
+>> -AMDgpu Display Manager
+>> -======================
+>> -
+>> -.. kernel-doc:: drivers/gpu/drm/amd/display/amdgpu_dm/amdgpu_dm.c
+>> -   :doc: overview
+>> -
+>> -.. kernel-doc:: drivers/gpu/drm/amd/display/amdgpu_dm/amdgpu_dm.h
+>> -   :internal:
+>> -
+>> -Lifecycle
+>> ----------
+>> -
+>> -.. kernel-doc:: drivers/gpu/drm/amd/display/amdgpu_dm/amdgpu_dm.c
+>> -   :doc: DM Lifecycle
+>> -
+>> -.. kernel-doc:: drivers/gpu/drm/amd/display/amdgpu_dm/amdgpu_dm.c
+>> -   :functions: dm_hw_init dm_hw_fini
+>> -
+>> -Interrupts
+>> -----------
+>> -
+>> -.. kernel-doc:: drivers/gpu/drm/amd/display/amdgpu_dm/amdgpu_dm_irq.c
+>> -   :doc: overview
+>> -
+>> -.. kernel-doc:: drivers/gpu/drm/amd/display/amdgpu_dm/amdgpu_dm_irq.c
+>> -   :internal:
+>> -
+>> -.. kernel-doc:: drivers/gpu/drm/amd/display/amdgpu_dm/amdgpu_dm.c
+>> -   :functions: register_hpd_handlers dm_crtc_high_irq dm_pflip_high_irq
+>> -
+>> -Atomic Implementation
+>> ----------------------
+>> -
+>> -.. kernel-doc:: drivers/gpu/drm/amd/display/amdgpu_dm/amdgpu_dm.c
+>> -   :doc: atomic
+>> -
+>> -.. kernel-doc:: drivers/gpu/drm/amd/display/amdgpu_dm/amdgpu_dm.c
+>> -   :functions: amdgpu_dm_atomic_check amdgpu_dm_atomic_commit_tail
+>> -
+>> -Display Core
+>> -============
+>> -
+>> -**WIP**
+>> -
+>> -FreeSync Video
+>> ---------------
+>> -
+>> -.. kernel-doc:: drivers/gpu/drm/amd/display/amdgpu_dm/amdgpu_dm.c
+>> -   :doc: FreeSync Video
+>> diff --git a/Documentation/gpu/amdgpu-dc/amdgpu-dc-debug.rst b/Documentation/gpu/amdgpu-dc/amdgpu-dc-debug.rst
+>> new file mode 100644
+>> index 000000000000..bbb8c3fc8eee
+>> --- /dev/null
+>> +++ b/Documentation/gpu/amdgpu-dc/amdgpu-dc-debug.rst
+>> @@ -0,0 +1,4 @@
+>> +Display Core Debug tools
+>> +========================
+>> +
+>> +TODO
+>> diff --git a/Documentation/gpu/amdgpu-dc/amdgpu-dc.rst b/Documentation/gpu/amdgpu-dc/amdgpu-dc.rst
+>> new file mode 100644
+>> index 000000000000..3685b3b1ad64
+>> --- /dev/null
+>> +++ b/Documentation/gpu/amdgpu-dc/amdgpu-dc.rst
+>
+> While we bikeshed names, I think it'd would make sense to call this
+> overview.rst or intro.rst or similar, since it's meant to contain the
+> overall toctree for everything amdgpu related (maybe there will be more in
+> the future).
 
-> On 11/26/21 7:06 PM, Jakub Kicinski wrote:
->> On Fri, 26 Nov 2021 13:30:16 +0100 Toke H=C3=B8iland-J=C3=B8rgensen wrot=
-e:
->>>>> TBH I wasn't following this thread too closely since I saw Daniel
->>>>> nacked it already. I do prefer rtnl xstats, I'd just report them
->>>>> in -s if they are non-zero. But doesn't sound like we have an agreeme=
-nt
->>>>> whether they should exist or not.
->>>>
->>>> Right, just -s is fine, if we drop the per-channel approach.
->>>
->>> I agree that adding them to -s is fine (and that resolves my "no one
->>> will find them" complain as well). If it crowds the output we could also
->>> default to only output'ing a subset, and have the more detailed
->>> statistics hidden behind a verbose switch (or even just in the JSON
->>> output)?
->>>
->>>>> Can we think of an approach which would make cloudflare and cilium
->>>>> happy? Feels like we're trying to make the slightly hypothetical
->>>>> admin happy while ignoring objections of very real users.
->>>>
->>>> The initial idea was to only uniform the drivers. But in general
->>>> you are right, 10 drivers having something doesn't mean it's
->>>> something good.
->>>
->>> I don't think it's accurate to call the admin use case "hypothetical".
->>> We're expending a significant effort explaining to people that XDP can
->>> "eat" your packets, and not having any standard statistics makes this
->>> way harder. We should absolutely cater to our "early adopters", but if
->>> we want XDP to see wider adoption, making it "less weird" is critical!
->>=20
->> Fair. In all honesty I said that hoping to push for a more flexible
->> approach hidden entirely in BPF, and not involving driver changes.
->> Assuming the XDP program has more fine grained stats we should be able
->> to extract those instead of double-counting. Hence my vague "let's work
->> with apps" comment.
->>=20
->> For example to a person familiar with the workload it'd be useful to
->> know if program returned XDP_DROP because of configured policy or
->> failure to parse a packet. I don't think that sort distinction is
->> achievable at the level of standard stats.
->
-> Agree on the additional context. How often have you looked at tc clsact
-> /dropped/ stats specifically when you debug a more complex BPF program
-> there?
->
->    # tc -s qdisc show clsact dev foo
->    qdisc clsact ffff: parent ffff:fff1
->     Sent 6800 bytes 120 pkt (dropped 0, overlimits 0 requeues 0)
->     backlog 0b 0p requeues 0
->
-> Similarly, XDP_PASS counters may be of limited use as well for same reason
-> (and I think we might not even have a tc counter equivalent for it).
->
->> The information required by the admin is higher level. As you say the
->> primary concern there is "how many packets did XDP eat".
->
-> Agree. Above said, for XDP_DROP I would see one use case where you compare
-> different drivers or bond vs no bond as we did in the past in [0] when
-> testing against a packet generator (although I don't see bond driver cove=
-red
-> in this series here yet where it aggregates the XDP stats from all bond s=
-lave
-> devs).
->
-> On a higher-level wrt "how many packets did XDP eat", it would make sense
-> to have the stats for successful XDP_{TX,REDIRECT} given these are out
-> of reach from a BPF prog PoV - we can only count there how many times we
-> returned with XDP_TX but not whether the pkt /successfully made it/.
->
-> In terms of error cases, could we just standardize all drivers on the beh=
-avior
-> of e.g. mlx5e_xdp_handle(), meaning, a failure from XDP_{TX,REDIRECT} will
-> hit the trace_xdp_exception() and then fallthrough to bump a drop counter
-> (same as we bump in XDP_DROP then). So the drop counter will account for
-> program drops but also driver-related drops.
->
-> At some later point the trace_xdp_exception() could be extended with an e=
-rror
-> code that the driver would propagate (given some of them look quite simil=
-ar
-> across drivers, fwiw), and then whoever wants to do further processing wi=
-th
-> them can do so via bpftrace or other tooling.
->
-> So overall wrt this series: from the lrstats we'd be /dropping/ the pass,
-> tx_errors, redirect_errors, invalid, aborted counters. And we'd be /keepi=
-ng/
-> bytes & packets counters that XDP sees, (driver-)successful tx & redirect
-> counters as well as drop counter. Also, XDP bytes & packets counters shou=
-ld
-> not be counted twice wrt ethtool stats.
+index.rst?
 
-This sounds reasonable to me, and I also like the error code to
-tracepoint idea :)
 
--Toke
-
+-- 
+Jani Nikula, Intel Open Source Graphics Center
