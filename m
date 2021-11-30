@@ -2,56 +2,55 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id D1AE4463343
-	for <lists+linux-doc@lfdr.de>; Tue, 30 Nov 2021 12:48:03 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id B8A4C46332D
+	for <lists+linux-doc@lfdr.de>; Tue, 30 Nov 2021 12:47:19 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S241149AbhK3LvF (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 30 Nov 2021 06:51:05 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:45018 "EHLO
+        id S237337AbhK3LuW (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 30 Nov 2021 06:50:22 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:45348 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S241175AbhK3Ltm (ORCPT
+        with ESMTP id S241265AbhK3Ltm (ORCPT
         <rfc822;linux-doc@vger.kernel.org>); Tue, 30 Nov 2021 06:49:42 -0500
-Received: from mail-wm1-x349.google.com (mail-wm1-x349.google.com [IPv6:2a00:1450:4864:20::349])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 0D6E9C061374
-        for <linux-doc@vger.kernel.org>; Tue, 30 Nov 2021 03:46:01 -0800 (PST)
-Received: by mail-wm1-x349.google.com with SMTP id a64-20020a1c7f43000000b003335e5dc26bso10283287wmd.8
-        for <linux-doc@vger.kernel.org>; Tue, 30 Nov 2021 03:46:00 -0800 (PST)
+Received: from mail-wm1-x34a.google.com (mail-wm1-x34a.google.com [IPv6:2a00:1450:4864:20::34a])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 06186C06137C
+        for <linux-doc@vger.kernel.org>; Tue, 30 Nov 2021 03:46:03 -0800 (PST)
+Received: by mail-wm1-x34a.google.com with SMTP id ay34-20020a05600c1e2200b00337fd217772so12697385wmb.4
+        for <linux-doc@vger.kernel.org>; Tue, 30 Nov 2021 03:46:02 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=google.com; s=20210112;
         h=date:in-reply-to:message-id:mime-version:references:subject:from:to
          :cc;
-        bh=1F+MofKXejp7ry8lfe8Rm0bUxzdx8s4N4hiT9E57RpU=;
-        b=AxG+zGUAuQz1+vXIOQ6DG6QRjOq3T51cJb6xki7f4JHpONQpFZJx8GE/b7CRWzPCsG
-         OLRaS1SxhNRItDJ+4oOUU5VmP/nYksafcZlT3TVFS1SWFBK3vno6Gg3Jm9z1cK6Zuest
-         ui1H7XkT5tngcQHFEK6CC8n6Ghp1ypFOZCz94aNFgLZvN+GCnNenOMRE9+mty4qRXv1N
-         2qGht/8T/o21I4oyxH8o4aKxIfvvRVeX0nUK1yVoam9e7llKFicSRQUZiaWijAt560uq
-         Dg7b5UU9ZIUcjYU29xL3ofX78AIwM6oIKYpH7LDX2euCle6y9eO4jBbsvtISE16oErOr
-         I/ag==
+        bh=hHpI+TkJP++fcdc46vUsOPoUrJOI1E0VxBDtAT4JUtM=;
+        b=ZydYBw/EQptiAQjTJgW8VFb6M+tj/jnOJSKAzEOo9ttb4/prBXxenHyAcxKFnhYPtG
+         yxkoZSjdkoQwGFG90n0H+8xMHAoecs8kp2mS+zTaZsYuo/VXrNHwT1dCCGqN+qd2xKqO
+         A4acfRlS2z6HmsLoxx1UolNjWfJ2+Ztsu6wU/VCsHuubkWa6zG7vvPdxEtYFrhi/J/x1
+         SgdPBckdgJ9qE7I2ZNNnAqkYt2+gpBZ+AartGApj/044P+zkOJcXZg2hjzRL7no/XtPz
+         MihwHIfIAQnWjB96wkXuEnhFMgqyeDJ1+RyraL9HQrgcKqeYe6aB+N/OeDIQjy/DWPFQ
+         OLpw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=x-gm-message-state:date:in-reply-to:message-id:mime-version
          :references:subject:from:to:cc;
-        bh=1F+MofKXejp7ry8lfe8Rm0bUxzdx8s4N4hiT9E57RpU=;
-        b=PIHtmnKQ1sJooR3al3f5KpIRIrPzaqouxyOYSdUrt1sSnBvNIRhEY9wP7zcH725+jH
-         Ak9VkWn0h1bH/M4uXVYpiHY/w3bw7UanMNTlDpKxVudXBH6xc6yHoVzc6WZWvTWApDNc
-         ji62e7GgpY7yGNFXsKPnk6eXpjnsXHWS/kEF+GJBHDOmrebPpbBXsFpfA+JJPkU8hfu0
-         e0Ab5XDTNeZMknqm52mqHoTU+L39zxDMUA8LNpZ/gnVHTa5vNYHGg+IY488zikgSaXpi
-         W6ON9LYaxi31FAoPPnbHqidJxtzge2t0oG//XTtzzW0VeIXdeN4Ttn6u0l5gpssNmaCT
-         JX5Q==
-X-Gm-Message-State: AOAM532vByKcnMWr8xkim2HZcn8kVQwGhFzUlFm9dQ06sWLZCexnkjlb
-        s9oHf1oxY10Af3Y/AawnT4s/3hyxmg==
-X-Google-Smtp-Source: ABdhPJyPWvl8zulDnZGqXZ4CGIOsIfQU/gfUk/ZE53ZBn+QfJqlzKFrFzo/IqOCXSYJaXQPpXS6SD3dG+A==
+        bh=hHpI+TkJP++fcdc46vUsOPoUrJOI1E0VxBDtAT4JUtM=;
+        b=raexuFP7XhSgJ4HiWRSlRK/eYWFkMH/lxqVP3m7my1CtUYY+pCG6699857HhxF8TWP
+         l1norgwNi5pDaTazAY5H8hkBTL7ZcYANJMw7dlu2KgBngZmKj7ru0xPOAIF+CpnJm7gw
+         RT2maST3BI1LMP1sHIPp0b7XvSNyL+1IdxtaZmi8460VTSxvb62v9V4BnF0FE9ezEC/j
+         OHbSvFKmJ7KV+d5GqWiUaZUDNDaE7kBp1+HRNHD8wc9K3ANJIIz5Ja6ukLpFgToHu/nC
+         frWoFKitz7irwRuiyVV1qsWxoHMFl6OxK6fQY5woYm/a/d1pYT7HFAjc5y1mJd1Mtj5I
+         D+hA==
+X-Gm-Message-State: AOAM532RVz4EMkFo0t1A1uODtm4m0oqFomQAdTOWM9n2atzxlZWQwTP/
+        L2x9kKY/jjyVNLlwKfVcntlfWsua7w==
+X-Google-Smtp-Source: ABdhPJxBEJ1Ij4N3anSHCQ6YBfqk8LJXNhrNf/MNCN7ZMLSlwxOUn6GdF8bZmMY3PAFHnunTgtGrJWD/kQ==
 X-Received: from elver.muc.corp.google.com ([2a00:79e0:15:13:86b7:11e9:7797:99f0])
- (user=elver job=sendgmr) by 2002:a05:600c:1d1b:: with SMTP id
- l27mr624656wms.1.1638272759191; Tue, 30 Nov 2021 03:45:59 -0800 (PST)
-Date:   Tue, 30 Nov 2021 12:44:31 +0100
+ (user=elver job=sendgmr) by 2002:a05:600c:4e07:: with SMTP id
+ b7mr4217301wmq.16.1638272761639; Tue, 30 Nov 2021 03:46:01 -0800 (PST)
+Date:   Tue, 30 Nov 2021 12:44:32 +0100
 In-Reply-To: <20211130114433.2580590-1-elver@google.com>
-Message-Id: <20211130114433.2580590-24-elver@google.com>
+Message-Id: <20211130114433.2580590-25-elver@google.com>
 Mime-Version: 1.0
 References: <20211130114433.2580590-1-elver@google.com>
 X-Mailer: git-send-email 2.34.0.rc2.393.gf8c9666880-goog
-Subject: [PATCH v3 23/25] objtool, kcsan: Remove memory barrier
- instrumentation from noinstr
+Subject: [PATCH v3 24/25] compiler_attributes.h: Add __disable_sanitizer_instrumentation
 From:   Marco Elver <elver@google.com>
 To:     elver@google.com, "Paul E. McKenney" <paulmck@kernel.org>
 Cc:     Alexander Potapenko <glider@google.com>,
@@ -66,113 +65,61 @@ Cc:     Alexander Potapenko <glider@google.com>,
         Will Deacon <will@kernel.org>, kasan-dev@googlegroups.com,
         linux-arch@vger.kernel.org, linux-doc@vger.kernel.org,
         linux-kbuild@vger.kernel.org, linux-kernel@vger.kernel.org,
-        linux-mm@kvack.org, llvm@lists.linux.dev, x86@kernel.org,
-        Josh Poimboeuf <jpoimboe@redhat.com>
+        linux-mm@kvack.org, llvm@lists.linux.dev, x86@kernel.org
 Content-Type: text/plain; charset="UTF-8"
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Teach objtool to turn instrumentation required for memory barrier
-modeling into nops in noinstr text.
+From: Alexander Potapenko <glider@google.com>
 
-The __tsan_func_entry/exit calls are still emitted by compilers even
-with the __no_sanitize_thread attribute. The memory barrier
-instrumentation will be inserted explicitly (without compiler help), and
-thus needs to also explicitly be removed.
+The new attribute maps to
+__attribute__((disable_sanitizer_instrumentation)), which will be
+supported by Clang >= 14.0. Future support in GCC is also possible.
 
+This attribute disables compiler instrumentation for kernel sanitizer
+tools, making it easier to implement noinstr. It is different from the
+existing __no_sanitize* attributes, which may still allow certain types
+of instrumentation to prevent false positives.
+
+Signed-off-by: Alexander Potapenko <glider@google.com>
 Signed-off-by: Marco Elver <elver@google.com>
-Acked-by: Josh Poimboeuf <jpoimboe@redhat.com>
 ---
 v3:
-* s/removable_instr/profiling_func/ (suggested by Josh Poimboeuf)
-* s/__kcsan_(mb|wmb|rmb|release)/__atomic_signal_fence/, because
-  Clang < 14.0 will still emit these in noinstr even with __no_kcsan.
-* Fix and add more comments.
-
-v2:
-* Rewrite after rebase to v5.16-rc1.
+* New patch.
 ---
- tools/objtool/check.c               | 37 ++++++++++++++++++++++++-----
- tools/objtool/include/objtool/elf.h |  2 +-
- 2 files changed, 32 insertions(+), 7 deletions(-)
+ include/linux/compiler_attributes.h | 18 ++++++++++++++++++
+ 1 file changed, 18 insertions(+)
 
-diff --git a/tools/objtool/check.c b/tools/objtool/check.c
-index 61dfb66b30b6..a9a1f7259d62 100644
---- a/tools/objtool/check.c
-+++ b/tools/objtool/check.c
-@@ -1072,11 +1072,11 @@ static void annotate_call_site(struct objtool_file *file,
- 	}
- 
- 	/*
--	 * Many compilers cannot disable KCOV with a function attribute
--	 * so they need a little help, NOP out any KCOV calls from noinstr
--	 * text.
-+	 * Many compilers cannot disable KCOV or sanitizer calls with a function
-+	 * attribute so they need a little help, NOP out any such calls from
-+	 * noinstr text.
- 	 */
--	if (insn->sec->noinstr && sym->kcov) {
-+	if (insn->sec->noinstr && sym->profiling_func) {
- 		if (reloc) {
- 			reloc->type = R_NONE;
- 			elf_write_reloc(file->elf, reloc);
-@@ -1991,6 +1991,31 @@ static int read_intra_function_calls(struct objtool_file *file)
- 	return 0;
- }
+diff --git a/include/linux/compiler_attributes.h b/include/linux/compiler_attributes.h
+index b9121afd8733..37e260020221 100644
+--- a/include/linux/compiler_attributes.h
++++ b/include/linux/compiler_attributes.h
+@@ -308,6 +308,24 @@
+ # define __compiletime_warning(msg)
+ #endif
  
 +/*
-+ * Return true if name matches an instrumentation function, where calls to that
-+ * function from noinstr code can safely be removed, but compilers won't do so.
++ * Optional: only supported since clang >= 14.0
++ *
++ * clang: https://clang.llvm.org/docs/AttributeReference.html#disable-sanitizer-instrumentation
++ *
++ * disable_sanitizer_instrumentation is not always similar to
++ * no_sanitize((<sanitizer-name>)): the latter may still let specific sanitizers
++ * insert code into functions to prevent false positives. Unlike that,
++ * disable_sanitizer_instrumentation prevents all kinds of instrumentation to
++ * functions with the attribute.
 + */
-+static bool is_profiling_func(const char *name)
-+{
-+	/*
-+	 * Many compilers cannot disable KCOV with a function attribute.
-+	 */
-+	if (!strncmp(name, "__sanitizer_cov_", 16))
-+		return true;
++#if __has_attribute(disable_sanitizer_instrumentation)
++# define __disable_sanitizer_instrumentation \
++	 __attribute__((disable_sanitizer_instrumentation))
++#else
++# define __disable_sanitizer_instrumentation
++#endif
 +
-+	/*
-+	 * Some compilers currently do not remove __tsan_func_entry/exit nor
-+	 * __tsan_atomic_signal_fence (used for barrier instrumentation) with
-+	 * the __no_sanitize_thread attribute, remove them. Once the kernel's
-+	 * minimum Clang version is 14.0, this can be removed.
-+	 */
-+	if (!strncmp(name, "__tsan_func_", 12) ||
-+	    !strcmp(name, "__tsan_atomic_signal_fence"))
-+		return true;
-+
-+	return false;
-+}
-+
- static int classify_symbols(struct objtool_file *file)
- {
- 	struct section *sec;
-@@ -2011,8 +2036,8 @@ static int classify_symbols(struct objtool_file *file)
- 			if (!strcmp(func->name, "__fentry__"))
- 				func->fentry = true;
- 
--			if (!strncmp(func->name, "__sanitizer_cov_", 16))
--				func->kcov = true;
-+			if (is_profiling_func(func->name))
-+				func->profiling_func = true;
- 		}
- 	}
- 
-diff --git a/tools/objtool/include/objtool/elf.h b/tools/objtool/include/objtool/elf.h
-index cdc739fa9a6f..d22336781401 100644
---- a/tools/objtool/include/objtool/elf.h
-+++ b/tools/objtool/include/objtool/elf.h
-@@ -58,7 +58,7 @@ struct symbol {
- 	u8 static_call_tramp : 1;
- 	u8 retpoline_thunk   : 1;
- 	u8 fentry            : 1;
--	u8 kcov              : 1;
-+	u8 profiling_func    : 1;
- 	struct list_head pv_target;
- };
- 
+ /*
+  *   gcc: https://gcc.gnu.org/onlinedocs/gcc/Common-Function-Attributes.html#index-weak-function-attribute
+  *   gcc: https://gcc.gnu.org/onlinedocs/gcc/Common-Variable-Attributes.html#index-weak-variable-attribute
 -- 
 2.34.0.rc2.393.gf8c9666880-goog
 
