@@ -2,108 +2,130 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 7EB06464A44
-	for <lists+linux-doc@lfdr.de>; Wed,  1 Dec 2021 10:00:28 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id B2E24464B0D
+	for <lists+linux-doc@lfdr.de>; Wed,  1 Dec 2021 10:54:33 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S242056AbhLAJDr (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 1 Dec 2021 04:03:47 -0500
-Received: from smtp-out1.suse.de ([195.135.220.28]:45492 "EHLO
-        smtp-out1.suse.de" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S236969AbhLAJDr (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Wed, 1 Dec 2021 04:03:47 -0500
-Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
-        (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-         key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
-        (No client certificate requested)
-        by smtp-out1.suse.de (Postfix) with ESMTPS id 664D0212B8;
-        Wed,  1 Dec 2021 09:00:25 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
-        t=1638349225; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-         mime-version:mime-version:content-type:content-type:
-         content-transfer-encoding:content-transfer-encoding:
-         in-reply-to:in-reply-to:references:references;
-        bh=DvU9WOqQxuHtnAuEXjV4GD1n4RLlFIXDYVXvgUC7354=;
-        b=1o3oGHPAOuUL4G7Vy+shm75HBgD+KsWoecUT6MIOS7ieR9j6A56puG7phFrfrBDvgX/WLZ
-        JhnZNALK4+qhJrhc0D0K6Mklv9LiKQ09QCJcmddxInIWN9exXlyoWPWxu67JliT/J670co
-        V+eT8R35rjCi+ulkfXc2haMYdMQRd4U=
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
-        s=susede2_ed25519; t=1638349225;
-        h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-         mime-version:mime-version:content-type:content-type:
-         content-transfer-encoding:content-transfer-encoding:
-         in-reply-to:in-reply-to:references:references;
-        bh=DvU9WOqQxuHtnAuEXjV4GD1n4RLlFIXDYVXvgUC7354=;
-        b=ytoiF+w1Q5Bqi7iRUcq2kUzl4qToaIU1QEUc15cRA5pTr7AUJ2meaXtOp9g59HmhHli7tu
-        yHI4az2CbJ6VxLAw==
-Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
-        (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-         key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
-        (No client certificate requested)
-        by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id 5819413BAA;
-        Wed,  1 Dec 2021 09:00:25 +0000 (UTC)
-Received: from dovecot-director2.suse.de ([192.168.254.65])
-        by imap2.suse-dmz.suse.de with ESMTPSA
-        id sv5AFak5p2EYOwAAMHmgww
-        (envelope-from <hare@suse.de>); Wed, 01 Dec 2021 09:00:25 +0000
-Subject: Re: [PATCH 0/7] docs: consolidate sysfs-block into Documentation/ABI/
-To:     Eric Biggers <ebiggers@kernel.org>, linux-block@vger.kernel.org,
-        Jens Axboe <axboe@kernel.dk>
-Cc:     linux-doc@vger.kernel.org,
-        Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
-        linux-kernel@vger.kernel.org
-References: <20211201084524.25660-1-ebiggers@kernel.org>
-From:   Hannes Reinecke <hare@suse.de>
-Message-ID: <91d14cdc-643c-58a8-37b7-af9d20747d2b@suse.de>
-Date:   Wed, 1 Dec 2021 10:00:25 +0100
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
- Thunderbird/78.12.0
-MIME-Version: 1.0
-In-Reply-To: <20211201084524.25660-1-ebiggers@kernel.org>
-Content-Type: text/plain; charset=utf-8
+        id S242400AbhLAJ5x convert rfc822-to-8bit (ORCPT
+        <rfc822;lists+linux-doc@lfdr.de>); Wed, 1 Dec 2021 04:57:53 -0500
+Received: from szxga03-in.huawei.com ([45.249.212.189]:28211 "EHLO
+        szxga03-in.huawei.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S232736AbhLAJ5w (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Wed, 1 Dec 2021 04:57:52 -0500
+Received: from dggemv711-chm.china.huawei.com (unknown [172.30.72.56])
+        by szxga03-in.huawei.com (SkyGuard) with ESMTP id 4J3vWz6sJ1z8vhN;
+        Wed,  1 Dec 2021 17:52:31 +0800 (CST)
+Received: from kwepemm600005.china.huawei.com (7.193.23.191) by
+ dggemv711-chm.china.huawei.com (10.1.198.66) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2308.20; Wed, 1 Dec 2021 17:54:30 +0800
+Received: from lhreml710-chm.china.huawei.com (10.201.108.61) by
+ kwepemm600005.china.huawei.com (7.193.23.191) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2308.20; Wed, 1 Dec 2021 17:54:29 +0800
+Received: from lhreml710-chm.china.huawei.com ([169.254.81.184]) by
+ lhreml710-chm.china.huawei.com ([169.254.81.184]) with mapi id
+ 15.01.2308.020; Wed, 1 Dec 2021 09:54:27 +0000
+From:   Shameerali Kolothum Thodi <shameerali.kolothum.thodi@huawei.com>
+To:     Jason Gunthorpe <jgg@nvidia.com>,
+        Alex Williamson <alex.williamson@redhat.com>
+CC:     Jonathan Corbet <corbet@lwn.net>,
+        "linux-doc@vger.kernel.org" <linux-doc@vger.kernel.org>,
+        Cornelia Huck <cohuck@redhat.com>,
+        "kvm@vger.kernel.org" <kvm@vger.kernel.org>,
+        Kirti Wankhede <kwankhede@nvidia.com>,
+        Max Gurtovoy <mgurtovoy@nvidia.com>,
+        Yishai Hadas <yishaih@nvidia.com>,
+        "Zengtao (B)" <prime.zeng@hisilicon.com>,
+        liulongfang <liulongfang@huawei.com>
+Subject: RE: [PATCH RFC v2] vfio: Documentation for the migration region
+Thread-Topic: [PATCH RFC v2] vfio: Documentation for the migration region
+Thread-Index: AQHX5S/pH80pYVu+o0az8lQb+t8Cn6wcVFyAgAAZ+wCAADx+gIAATcuAgABn8BA=
+Date:   Wed, 1 Dec 2021 09:54:27 +0000
+Message-ID: <90226a3c13a2404086dc555e4aced7cb@huawei.com>
+References: <0-v2-45a95932a4c6+37-vfio_mig_doc_jgg@nvidia.com>
+ <20211130102611.71394253.alex.williamson@redhat.com>
+ <20211130185910.GD4670@nvidia.com>
+ <20211130153541.131c9729.alex.williamson@redhat.com>
+ <20211201031407.GG4670@nvidia.com>
+In-Reply-To: <20211201031407.GG4670@nvidia.com>
+Accept-Language: en-GB, en-US
 Content-Language: en-US
-Content-Transfer-Encoding: 8bit
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [10.202.227.178]
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 8BIT
+MIME-Version: 1.0
+X-CFilter-Loop: Reflected
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On 12/1/21 9:45 AM, Eric Biggers wrote:
-> This series consolidates the documentation for /sys/block/<disk>/queue/
-> into Documentation/ABI/, where it is supposed to go (as per Greg KH:
-> https://lore.kernel.org/r/YaXXpEAwVGTLjp1e@kroah.com).
-> 
-> This series also updates MAINTAINERS to associate the block
-> documentation with the block layer.
-> 
-> This series applies to linux-block/for-next.
-> 
-> Eric Biggers (7):
->   docs: sysfs-block: sort alphabetically
->   docs: sysfs-block: add contact for nomerges
->   docs: sysfs-block: fill in missing documentation from queue-sysfs.rst
->   docs: sysfs-block: document stable_writes
->   docs: sysfs-block: document virt_boundary_mask
->   docs: block: remove queue-sysfs.rst
->   MAINTAINERS: add entries for block layer documentation
-> 
->  Documentation/ABI/testing/sysfs-block | 766 ++++++++++++++++++--------
->  Documentation/block/index.rst         |   1 -
->  Documentation/block/queue-sysfs.rst   | 321 -----------
->  MAINTAINERS                           |   2 +
->  4 files changed, 545 insertions(+), 545 deletions(-)
->  delete mode 100644 Documentation/block/queue-sysfs.rst
-> 
-> 
-> base-commit: c2626d30f312afc341158e07bf088f5a23b4eeeb
-> 
-Yay.
 
-Reviewed-by: Hannes Reinecke <hare@suse.de>
 
-Cheers,
+> -----Original Message-----
+> From: Jason Gunthorpe [mailto:jgg@nvidia.com]
+> Sent: 01 December 2021 03:14
+> To: Alex Williamson <alex.williamson@redhat.com>
+> Cc: Jonathan Corbet <corbet@lwn.net>; linux-doc@vger.kernel.org; Cornelia
+> Huck <cohuck@redhat.com>; kvm@vger.kernel.org; Kirti Wankhede
+> <kwankhede@nvidia.com>; Max Gurtovoy <mgurtovoy@nvidia.com>;
+> Shameerali Kolothum Thodi <shameerali.kolothum.thodi@huawei.com>; Yishai
+> Hadas <yishaih@nvidia.com>
+> Subject: Re: [PATCH RFC v2] vfio: Documentation for the migration region
+> 
+> On Tue, Nov 30, 2021 at 03:35:41PM -0700, Alex Williamson wrote:
+> 
+> > > From what HNS said the device driver would have to trap every MMIO to
+> > > implement NDMA as it must prevent touches to the physical HW MMIO to
+> > > maintain the NDMA state.
+> > >
+> > > The issue is that the HW migration registers can stop processing the
+> > > queue and thus enter NDMA but a MMIO touch can resume queue
+> > > processing, so NDMA cannot be sustained.
+> > >
+> > > Trapping every MMIO would have a huge negative performance impact.
+> So
+> > > it doesn't make sense to do so for a device that is not intended to be
+> > > used in any situation where NDMA is required.
+> >
+> > But migration is a cooperative activity with userspace.  If necessary
+> > we can impose a requirement that mmap access to regions (other than the
+> > migration region itself) are dropped when we're in the NDMA or !RUNNING
+> > device_state.
+> 
+> It is always NDMA|RUNNING, so we can't fully drop access to
+> MMIO. Userspace would have to transfer from direct MMIO to
+> trapping. With enough new kernel infrastructure and qemu support it
+> could be done.
 
-Hannes
--- 
-Dr. Hannes Reinecke		           Kernel Storage Architect
-hare@suse.de			                  +49 911 74053 688
-SUSE Software Solutions Germany GmbH, Maxfeldstr. 5, 90409 Nürnberg
-HRB 36809 (AG Nürnberg), GF: Felix Imendörffer
+As far as our devices are concerned we put the dev queue into a PAUSE state
+in the !RUNNUNG state. And since we don't have any P2P support, is it ok
+to put the onus on userspace here that it won't try to access the MMIO during
+!RUNNUNG state?
+
+So just to make it clear , if a device declares that it doesn't support NDMA
+and P2P, is the v1 version of the spec good enough or we still need to take
+care the case that a malicious user might try MMIO access in !RUNNING
+state and should have kernel infrastructure in place to safe guard that?
+
+> 
+> Even so, we can't trap accesses through the IOMMU so such a scheme
+> would still require removing IOMMU acess to the device. Given that the
+> basic qemu mitigation for no NDMA support is to eliminate P2P cases by
+> removing the IOMMU mappings this doesn't seem to advance anything and
+> only creates complexity.
+> 
+> At least I'm not going to insist that hns do all kinds of work like
+> this for a edge case they don't care about as a precondition to get a
+> migration driver.
+
+Yes. That's our concern too.
+
+(Just a note to clarify that these are not HNS devices per se. HNS actually
+stands for HiSilicon Network Subsystem and doesn't currently have live
+migration capability. The devices capable of live migration are HiSilicon
+Accelerator devices).
+
+Thanks,
+Shameer
