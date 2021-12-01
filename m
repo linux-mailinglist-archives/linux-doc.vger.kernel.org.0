@@ -2,97 +2,116 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 199F3465442
-	for <lists+linux-doc@lfdr.de>; Wed,  1 Dec 2021 18:49:33 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 9805B46548C
+	for <lists+linux-doc@lfdr.de>; Wed,  1 Dec 2021 18:59:38 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S243855AbhLARwv (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 1 Dec 2021 12:52:51 -0500
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124]:59381 "EHLO
-        us-smtp-delivery-124.mimecast.com" rhost-flags-OK-OK-OK-OK)
-        by vger.kernel.org with ESMTP id S231822AbhLARwt (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Wed, 1 Dec 2021 12:52:49 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-        s=mimecast20190719; t=1638380962;
-        h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-         to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-         content-transfer-encoding:content-transfer-encoding:
-         in-reply-to:in-reply-to:references:references;
-        bh=d3IYU06NP1ap6vKovk21hhbdlMoBPkQcBNAwBXt/XDY=;
-        b=bFApjoj/K7W539ift6CDWXSlKewwXsAf9RqciDSqG3BMvaZatXyv0VIPvjf1rNBo4PXUKi
-        gUKsCTjzvx+HYVe2UcKkwf+ac9oSO2QaGXB3qjB6zeZAJLuoJhZN0J8oDit2vlNKTMkx66
-        LzVgMU7hLiWEq+/QZ9Qm2yL9RByOn24=
-Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
- [209.132.183.4]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- us-mta-583-_2o-w0GJO-SM_8Zn7NCLfw-1; Wed, 01 Dec 2021 12:49:21 -0500
-X-MC-Unique: _2o-w0GJO-SM_8Zn7NCLfw-1
-Received: from smtp.corp.redhat.com (int-mx06.intmail.prod.int.phx2.redhat.com [10.5.11.16])
-        (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+        id S1352091AbhLASC5 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 1 Dec 2021 13:02:57 -0500
+Received: from ams.source.kernel.org ([145.40.68.75]:38476 "EHLO
+        ams.source.kernel.org" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S244500AbhLASCf (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Wed, 1 Dec 2021 13:02:35 -0500
+Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
+        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
         (No client certificate requested)
-        by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 07DEA8F51F;
-        Wed,  1 Dec 2021 17:49:19 +0000 (UTC)
-Received: from [10.22.10.179] (unknown [10.22.10.179])
-        by smtp.corp.redhat.com (Postfix) with ESMTP id 8B5C279459;
-        Wed,  1 Dec 2021 17:49:16 +0000 (UTC)
-Message-ID: <e16ccf4f-7302-8891-d9f6-081e0bc41c04@redhat.com>
-Date:   Wed, 1 Dec 2021 12:49:15 -0500
+        by ams.source.kernel.org (Postfix) with ESMTPS id DD6AFB8206B;
+        Wed,  1 Dec 2021 17:59:12 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 7F652C53FCF;
+        Wed,  1 Dec 2021 17:59:11 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+        s=k20201202; t=1638381551;
+        bh=pyTtgt77BWW0zJYMdiBNfZhN445Jrn3OiB1TvEnvV40=;
+        h=From:To:Cc:Subject:Date:From;
+        b=l5GxVJZo7T1TE0IiFejhV5bRzNDhGczB8I53VCoNcycFCviE+i/FkMwK7PLkSQ/MN
+         tTwUEVvsS2b67geCITyzJcl+p2PHZLOVvhrezeUrFXlQLv4jFp42ZHgqvJTm/cT0d6
+         HCTou5BvrBk1WXY8tmze8NuaRQRV878YP5JL1uiuVJ/sMY3zCgjpnLEQQKi4mfPXmj
+         jDLsmVmiN6S4nUXF4dUwyioteijrOqTCWt/mSFRQIC/PTbPA4FZcVyJ1Zt4BNQ9vM0
+         H+GIdFEQPPWltzJt70I8+EGoMH7FIg3yAXPYWFLTIPCEaWl3ulCKxjRhkG40xVictM
+         oYd/eAASLMCfA==
+Received: from mchehab by mail.kernel.org with local (Exim 4.94.2)
+        (envelope-from <mchehab@kernel.org>)
+        id 1msTsr-004I6f-B4; Wed, 01 Dec 2021 18:59:09 +0100
+From:   Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
+To:     Linux Doc Mailing List <linux-doc@vger.kernel.org>,
+        Jonathan Corbet <corbet@lwn.net>
+Cc:     Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
+        linux-kernel@vger.kernel.org,
+        Jani Nikula <jani.nikula@linux.intel.com>,
+        Randy Dunlap <rdunlap@infradead.org>,
+        Akira Yokosawa <akiyks@gmail.com>,
+        =?UTF-8?q?N=C3=ADcolas=20F=2E=20R=2E=20A=2E=20Prado?= 
+        <nfraprado@protonmail.com>, Alex Shi <alexs@kernel.org>,
+        Andrew Klychkov <andrew.a.klychkov@gmail.com>,
+        Miguel Ojeda <ojeda@kernel.org>
+Subject: [PATCH v3 0/4] docs: add better support for Sphinx themes and CSS
+Date:   Wed,  1 Dec 2021 18:59:04 +0100
+Message-Id: <cover.1638369365.git.mchehab+huawei@kernel.org>
+X-Mailer: git-send-email 2.33.1
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.3.0
-Subject: Re: [PATCH v8 5/6] cgroup/cpuset: Update description of
- cpuset.cpus.partition in cgroup-v2.rst
-Content-Language: en-US
-To:     Tejun Heo <tj@kernel.org>
-Cc:     =?UTF-8?Q?Michal_Koutn=c3=bd?= <mkoutny@suse.com>,
-        Zefan Li <lizefan.x@bytedance.com>,
-        Johannes Weiner <hannes@cmpxchg.org>,
-        Jonathan Corbet <corbet@lwn.net>,
-        Shuah Khan <shuah@kernel.org>, cgroups@vger.kernel.org,
-        linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org,
-        linux-kselftest@vger.kernel.org,
-        Andrew Morton <akpm@linux-foundation.org>,
-        Roman Gushchin <guro@fb.com>, Phil Auld <pauld@redhat.com>,
-        Peter Zijlstra <peterz@infradead.org>,
-        Juri Lelli <juri.lelli@redhat.com>,
-        Frederic Weisbecker <frederic@kernel.org>,
-        Marcelo Tosatti <mtosatti@redhat.com>
-References: <20211018143619.205065-1-longman@redhat.com>
- <20211018143619.205065-6-longman@redhat.com>
- <20211115193122.GA16798@blackbody.suse.cz>
- <8f68692b-bd8f-33fd-44ae-f6f83bf2dc00@redhat.com>
- <20211116175411.GA50019@blackbody.suse.cz>
- <293d7abf-aff6-fcd8-c999-b1dbda1cffb8@redhat.com>
- <YaZbXArNIMNvwJD/@slm.duckdns.org>
- <2347fe66-dc68-6d58-e63b-7ed2b8077b48@redhat.com>
- <20211201141350.GA54766@blackbody.suse.cz>
- <ec6e2b89-385a-fcc7-7cfa-7e9119fc34bc@redhat.com>
- <YaelRiqWOIzT5uRs@slm.duckdns.org>
-From:   Waiman Long <longman@redhat.com>
-In-Reply-To: <YaelRiqWOIzT5uRs@slm.duckdns.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.16
+Sender: Mauro Carvalho Chehab <mchehab@kernel.org>
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
+Hi Jon,
 
-On 12/1/21 11:39, Tejun Heo wrote:
-> On Wed, Dec 01, 2021 at 09:56:21AM -0500, Waiman Long wrote:
->> Right, I shouldn't say corner cases. Having task in an intermediate
->> partition is possible depending on event sequence. I am aware that there are
->> code in the cpuset code to prevent that, but it didn't block all cases.
->>>> A valid parent partition may distribute out all its CPUs to
->>>>    its child partitions as long as there is no task associated with it.
->>> Assuming there's always at least one kernel thread in the root cgroup
->>> that can't be migrated anyway.]
->> I am aware of that. That is why I said root cgroup must have at least one
->> cpu in its "cpuset.cpus.effective".
-> In that case, let's explicitly describe that condition.
+This series comes after my patch fixing Sphinx support for RTD 1.0.0:
 
-Yes, I will. Only non-root cgroup can distribute out all its CPUs. I 
-thought I said that in the documentation, maybe it is very clear.
+   https://lore.kernel.org/lkml/80009f0d17ea0840d81e7e16fff6e7677919fdfc.1638004294.git.mchehab+huawei@kernel.org/
 
-Cheers,
-Longman
+It provides, IMHO, a nice improvement on themes selection. This series
+is a v2 of the other theme-related patches I sent today.
+
+-
+
+Sphinx allows using different output templates for HTML (and e-pub).
+
+Right now, the Kernel was hardcoded to use the Read the Docs theme,
+falling back to whatever default is setup on a given Sphinx version.
+
+Well, themes and templates are actually an user preference.
+
+This patch set allows selecting different themes and even provide
+extra CSS override files.
+
+With that, one could, for instance, do things like:
+
+$ echo "body { color: darkgreen; } div.body { color: darkgreen; } " >my_css.css && make SPHINXDIRS=input CSS=my_css.css THEME=nature htmldocs
+
+In order to use the Sphinx nature theme with the normal font in green.
+
+patch 1 adds a theme selection make variable (THEME);
+patch 2 adds a css selection variable (CSS);
+patch 3 sets the classic theme to look a little better;
+patch 4 adds support for the RTD dark mode theme.
+
+It should be noticed that the RTD dark mode currently has some issues,
+as it is actually an override on the top of the original RTD theme.
+I suspect it needs to be updated to properly support Sphinx 4.3.0 and
+RTD 1.0.0 theme. Yet, it seems useful, as one can always switch to daylight
+mode in runtime, if something looks odd with it enabled.
+
+---
+
+v3:
+   - Fixed an issue at the logic which copies the extra CSS files on patch 2.
+
+Mauro Carvalho Chehab (4):
+  docs: allow selecting a Sphinx theme
+  docs: allow to pass extra CSS themes via make
+  docs: set format for the classic mode
+  docs: add support for RTD dark mode
+
+ Documentation/Makefile                        |  11 +-
+ Documentation/conf.py                         | 102 ++++++++++++++----
+ Documentation/doc-guide/sphinx.rst            |  11 ++
+ .../sphinx-static/theme_overrides.css         |  16 +--
+ .../sphinx-static/theme_rtd_colors.css        |  37 +++++++
+ 5 files changed, 140 insertions(+), 37 deletions(-)
+ create mode 100644 Documentation/sphinx-static/theme_rtd_colors.css
+
+-- 
+2.33.1
+
 
