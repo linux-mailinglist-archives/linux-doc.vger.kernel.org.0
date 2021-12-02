@@ -2,138 +2,182 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id C376C466613
-	for <lists+linux-doc@lfdr.de>; Thu,  2 Dec 2021 16:02:00 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id C17F046676F
+	for <lists+linux-doc@lfdr.de>; Thu,  2 Dec 2021 17:02:04 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1358080AbhLBPFW (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 2 Dec 2021 10:05:22 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:44236 "EHLO
-        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1358172AbhLBPFV (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Thu, 2 Dec 2021 10:05:21 -0500
-Received: from mail-ed1-x532.google.com (mail-ed1-x532.google.com [IPv6:2a00:1450:4864:20::532])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 568BFC061757
-        for <linux-doc@vger.kernel.org>; Thu,  2 Dec 2021 07:01:58 -0800 (PST)
-Received: by mail-ed1-x532.google.com with SMTP id t5so117347895edd.0
-        for <linux-doc@vger.kernel.org>; Thu, 02 Dec 2021 07:01:58 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=soleen.com; s=google;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc;
-        bh=FYZ7pWgwTOlBPwdzrVeymAp5SE5b/mIikVc6NSRBjCw=;
-        b=HRnTKCfbWner7J+VmRmLdy1476/grLkVshDTtXe7fezto/zYKSM+ddX/zHJHcLPMb7
-         BIzAPfa9pDaQydC7Bz2V+xcQ5SJ27hzrnhvB9LJ34I1jkanZhb3DE678CX+nw5gw+F7g
-         Ags3PFyEFvujKFZQzZYsqYlHgW+pJQbwMqZO+PlJJJXTrpgFQgZY998hw1E87G0ChqEh
-         0mIirNv2W2xWNZZzl+fDcAY1R4pEebH+DegaDYcd4upmMvqCMvIatEMadjkbayqdJD9K
-         DwQ6e3PB6BYmseF1ND0D5R7Wa3d1xiJD7qOYHTP336A7rX7tIBU6oH2ahziEumyAkLwd
-         qqvw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc;
-        bh=FYZ7pWgwTOlBPwdzrVeymAp5SE5b/mIikVc6NSRBjCw=;
-        b=Vwoq9Ksw9yVK02Ofm9y0MPWwnTPVlGcQ4hiZ6QtNeAteMLWI+GustY0I/tbM+VluAN
-         6xMcbBMeCjx2Ah68NpIUlFyhu8j4YE6+Z1metVeUaMgOffpi7oJ3+7IaNMG2ct+EyLRQ
-         BZmSklm+KEYGSka/3lBAw+Y0yAGb7tpeeRuaKytn2B+t+qg+B0u47vT/cwyH9cl7SVaQ
-         XXKuU5CVSpnylRfUGfeXYwiNWYO6exWPWH9Zd/8q9tTNGCnT3vq3ip6jF+6s/BeUOu9X
-         JQ7XoSoe1pUjJnUtro0/1FoOpY6dgxq+MbmpNCWROcsej3YFRjWck8xsvjeUPlN698t3
-         zx5g==
-X-Gm-Message-State: AOAM530RveFBFBLK/Pi0s3zRJ8kbh8miCeXEErSgA7fOL+C/Tmayezeh
-        bHnyhsPts7EikhfgkI/OqVc7tQ683xcmgEesQO6Lgw==
-X-Google-Smtp-Source: ABdhPJzISUJXAYYlwt7qgLHvDKRCxJBIRO2E6l4Dwkxhcg2vX2iO31Xme1Hbgi7zcirqWaPFG5JzLfERq/4QuJTctqE=
-X-Received: by 2002:a17:906:58ce:: with SMTP id e14mr15259368ejs.525.1638457306497;
- Thu, 02 Dec 2021 07:01:46 -0800 (PST)
+        id S234946AbhLBQF0 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 2 Dec 2021 11:05:26 -0500
+Received: from mail-mw2nam12on2050.outbound.protection.outlook.com ([40.107.244.50]:60056
+        "EHLO NAM12-MW2-obe.outbound.protection.outlook.com"
+        rhost-flags-OK-OK-OK-FAIL) by vger.kernel.org with ESMTP
+        id S229817AbhLBQFZ (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Thu, 2 Dec 2021 11:05:25 -0500
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=eUfqtl3307O4icVHh05vYcKdkjHzCfWyM0hyLgTE1daRADhswJNTDwW9DfDyf1XaAk8s2vItNom6Q7TNYcTgvRDkHJ4f+aJZkpMvvAQsoNvUoDkW5oriSGzZbL7tavc/wfcB7i8vBN5hMblaUqcNl+ZDOoLkic/mEbjsssTOHHH5AU2mdFQcSSAPKJKhWCMUDGRQJpb22eq5ntFDWcAaFIEd7WqBmtvMKrnQS49dIQEgiVFLXjEh3X+Xcds6SCE+IwFlgvJ1SfdeALNH4GtUGLQMAxw0N8xMFKJFLwVzxgVJAiH9fDTC2jtVdZSYp3SpfS4LM6xzHFwr+2lRlJXuxA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=rT9ROmAR99PLuiKB7Oxk5jxmrXpBeCpeFmz0Hb+kMFQ=;
+ b=aDKijc59HJwC3ic0UUWQFo7JVBxP8ZtC0FNTU44u6YGVr6RcREdDvytNcDYx1/pd7kxunscBsVhIm+kp3RjRRcYIFGzprqaRmtsmSTBxJ8W7swdNvF5N1D58nUF+vjmA8QmbaRzfMU+I19+GC9dHCIiGGmIZKg0MR44dkYi6yjXbpAO/JOWnh4TFf2aMjuG5MSBqHt3Hl9qb0bX5m/mB5RcEF+EjKEI/gfULQJNevwyn9kXsBoWuN9fMtyqbrVW64Vv7S372/7OThG8jVDaph4PWihtp0yVERL6uBFAqZE7IWDW9ejKc5IIX2XNKVrdNx2+p7qNhZGB4M0rW6/Kveg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=emersion.fr smtp.mailfrom=amd.com;
+ dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
+ header.from=amd.com; dkim=none (message not signed); arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=rT9ROmAR99PLuiKB7Oxk5jxmrXpBeCpeFmz0Hb+kMFQ=;
+ b=rN/c7Bnql8aaMQpo1WHF1b2PX4xzarCa9vvI6sr8JjYmKj3WeTMpwUpSqdwNEF7LCgn7J2+NJsRgcWHpZ6aP9qLsJ9AtqfeNpqPbY4dKylf6j0+Pkh09Vleza/WDiax/Al1rU0mbimv4Eh8IyGEtOBt4/cpseCFimQ9Zvclb7XM=
+Received: from BN9PR03CA0137.namprd03.prod.outlook.com (2603:10b6:408:fe::22)
+ by CO6PR12MB5428.namprd12.prod.outlook.com (2603:10b6:5:35c::19) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4734.23; Thu, 2 Dec
+ 2021 16:02:00 +0000
+Received: from BN8NAM11FT039.eop-nam11.prod.protection.outlook.com
+ (2603:10b6:408:fe:cafe::83) by BN9PR03CA0137.outlook.office365.com
+ (2603:10b6:408:fe::22) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4734.23 via Frontend
+ Transport; Thu, 2 Dec 2021 16:02:00 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
+ smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=SATLEXMB04.amd.com;
+Received: from SATLEXMB04.amd.com (165.204.84.17) by
+ BN8NAM11FT039.mail.protection.outlook.com (10.13.177.169) with Microsoft SMTP
+ Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.20.4755.13 via Frontend Transport; Thu, 2 Dec 2021 16:02:00 +0000
+Received: from atma2.hitronhub.home (10.180.168.240) by SATLEXMB04.amd.com
+ (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2375.17; Thu, 2 Dec
+ 2021 10:01:56 -0600
+From:   Rodrigo Siqueira <Rodrigo.Siqueira@amd.com>
+To:     Simon Ser <contact@emersion.fr>,
+        Michel Daenzer <michel@daenzer.net>,
+        "Bas Nieuwenhuizen" <bas@basnieuwenhuizen.nl>,
+        Marek Olsak <marek.olsak@amd.com>,
+        Roman Gilg <subdiff@gmail.com>,
+        Nicholas Kazlauskas <nicholas.kazlauskas@amd.com>,
+        Harry Wentland <Harry.Wentland@amd.com>,
+        "Mark Yacoub" <markyacoub@chromium.org>,
+        Sean Paul <seanpaul@chromium.org>,
+        "Pekka Paalanen" <ppaalanen@gmail.com>,
+        Yann Dirson <ydirson@free.fr>, Daniel Vetter <daniel@ffwll.ch>
+CC:     <linux-doc@vger.kernel.org>, <qingqing.zhuo@amd.com>,
+        <roman.li@amd.com>, <amd-gfx@lists.freedesktop.org>,
+        <aurabindo.pillai@amd.com>, <nicholas.choi@amd.com>,
+        <dri-devel@lists.freedesktop.org>,
+        Alex Deucher <alexander.deucher@amd.com>,
+        <bhawanpreet.lakha@amd.com>,
+        Christian Koenig <christian.koenig@amd.com>
+Subject: [PATCH v2 0/6] Expand display core documentation
+Date:   Thu, 2 Dec 2021 11:01:26 -0500
+Message-ID: <20211202160132.2263330-1-Rodrigo.Siqueira@amd.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-References: <20211123214814.3756047-1-pasha.tatashin@soleen.com>
- <20211123214814.3756047-4-pasha.tatashin@soleen.com> <f81a6434-9f38-947e-02a8-9a9191285e52@kernel.org>
- <cadf2582-3004-92b9-ab5a-cb39259fa36c@kernel.org> <CA+CK2bBfcrxDyxnV+xc680AP+sJGHSpong6a+b_vvWcRsB2CcA@mail.gmail.com>
- <a0968570-a25a-a7e3-3ee5-b7275286c9d1@kernel.org> <172f894c-01ab-cd9f-3292-1ba811f7222a@kernel.org>
-In-Reply-To: <172f894c-01ab-cd9f-3292-1ba811f7222a@kernel.org>
-From:   Pasha Tatashin <pasha.tatashin@soleen.com>
-Date:   Thu, 2 Dec 2021 10:01:10 -0500
-Message-ID: <CA+CK2bCGHBCO8+y_4E9LwV2C0bE_c0o3P4-9BXBASYFSYMpVrg@mail.gmail.com>
-Subject: Re: [PATCH 3/3] x86: mm: add x86_64 support for page table check
-To:     Jiri Slaby <jirislaby@kernel.org>
-Cc:     LKML <linux-kernel@vger.kernel.org>, linux-mm <linux-mm@kvack.org>,
-        Linux Doc Mailing List <linux-doc@vger.kernel.org>,
-        Andrew Morton <akpm@linux-foundation.org>,
-        David Rientjes <rientjes@google.com>,
-        Paul Turner <pjt@google.com>, weixugc@google.com,
-        Greg Thelen <gthelen@google.com>,
-        Ingo Molnar <mingo@redhat.com>,
-        Jonathan Corbet <corbet@lwn.net>,
-        Will Deacon <will@kernel.org>, Mike Rapoport <rppt@kernel.org>,
-        Kees Cook <keescook@chromium.org>,
-        Thomas Gleixner <tglx@linutronix.de>,
-        Peter Zijlstra <peterz@infradead.org>, masahiroy@kernel.org,
-        Sami Tolvanen <samitolvanen@google.com>,
-        Dave Hansen <dave.hansen@linux.intel.com>,
-        "maintainer:X86 ARCHITECTURE (32-BIT AND 64-BIT)" <x86@kernel.org>,
-        frederic@kernel.org, "H. Peter Anvin" <hpa@zytor.com>,
-        "Aneesh Kumar K.V" <aneesh.kumar@linux.ibm.com>
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Originating-IP: [10.180.168.240]
+X-ClientProxiedBy: SATLEXMB04.amd.com (10.181.40.145) To SATLEXMB04.amd.com
+ (10.181.40.145)
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-Office365-Filtering-Correlation-Id: 37133ba5-6d6b-462f-2283-08d9b5ad1343
+X-MS-TrafficTypeDiagnostic: CO6PR12MB5428:
+X-Microsoft-Antispam-PRVS: <CO6PR12MB542800CC1456BC62B6C23C5398699@CO6PR12MB5428.namprd12.prod.outlook.com>
+X-MS-Oob-TLC-OOBClassifiers: OLM:9508;
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: DhhZ9WkVAiz7BWPWhFPnbF4WrSSuAuR3xWoKm8Z/qM2TavGsy0ta4yECZVkkR9EkVi7iUEaqwoCXNoqz+zak8kMep8xGh/itEc0jPTmusoQaK3JtRhvX9UOaqlrLdAbFK3O7NMOgya83HLeHYLCe50hOFCeerHYP6NKMD8IhhikRoUdZSuAc855Fu7E0pdTmZGoYeCmmBMWvd2EnzeihMKjFj1531lvaDx6PDUierbY87mTBliWinu2u28owJB8MJrwFekVAjg3kwXYL/dMb5NX6fE+THbHsO9TJHU4TfFe8TI0dAnCew//V4OeznCJHm4zV2TuhqhAiKkNHWXgpsMk9mvxjMIYD9ER9418rpvSwJL8ZaAZ8fXIC+O5MNbaNEwd1DjmAimLVX9d2Sv+QSktOLLEnHoKirPeVLDTTMjgqZQ2u1f//JzbWlDgnrDD4m7PHAawolVSdFg29GysTbg5mU5gGWT3pNm3z79wpwAT1sSUpM9YL9tfyb1Tfro+988ceoh5Meu8HdAYUC8FDhpE8NVo3q5dZT6wrXsgf/zQ8ACspOVktV3Qu7M1HWv172uELaDbZ39Dx6aR9RxL/k2kcnByvz/H+vXm2boiTjBPu+S9SdyvnLV4xhniGpXxZkc7wXtm7VpXoKsqRlu5TrReiXHCnZk6gP6Dx67eSuIkCnr+TVM8aF9v+JJrw+7Wjwo+evkqKWwLR9PEngqmg/Btunl6a1B+LhDCrodjYwZpO777z/3MWgIPKROY8wgj3nxi9p80R3BcMksoSKk6ava7l1XN/iO3gXc/7px1BnlJyvqCrPEB3Ne9i59ioLvmr
+X-Forefront-Antispam-Report: CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB04.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(4636009)(46966006)(36840700001)(40470700001)(70206006)(1076003)(8936002)(186003)(7416002)(2906002)(336012)(508600001)(40460700001)(82310400004)(54906003)(70586007)(316002)(86362001)(8676002)(426003)(83380400001)(36860700001)(356005)(2616005)(921005)(81166007)(36756003)(6666004)(5660300002)(26005)(110136005)(4326008)(47076005)(16526019)(36900700001);DIR:OUT;SFP:1101;
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 02 Dec 2021 16:02:00.6303
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 37133ba5-6d6b-462f-2283-08d9b5ad1343
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[SATLEXMB04.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource: BN8NAM11FT039.eop-nam11.prod.protection.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: CO6PR12MB5428
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Thu, Dec 2, 2021 at 5:05 AM Jiri Slaby <jirislaby@kernel.org> wrote:
->
-> On 02. 12. 21, 10:59, Jiri Slaby wrote:
-> > On 01. 12. 21, 14:55, Pasha Tatashin wrote:
-> >> On Wed, Dec 1, 2021 at 3:44 AM Jiri Slaby <jirislaby@kernel.org> wrote:
-> >>>
-> >>> On 01. 12. 21, 9:00, Jiri Slaby wrote:
-> >>>> On 23. 11. 21, 22:48, Pasha Tatashin wrote:
-> >>>>> Add page table check hooks into routines that modify user page tables.
-> >>>>
-> >>>> Hi,
-> >>>>
-> >>>> I bisected to this as this causes crashes during modules load:
-> >>>
-> >>> And it's not enough to unset CONFIG_PAGE_TABLE_CHECK_ENFORCED. I had to
-> >>> unset CONFIG_PAGE_TABLE_CHECK completely to get rid of this.
-> >>
-> >> Hi,
-> >>
-> >> Thanks for reporting this. Seems like module load for some reasons
-> >> does not like the static branches. However, I was not able to repro
-> >> this. Could you please share your config and the module that you were
-> >> loading?
-> >
-> > It's the openSUSE's -next config:
-> > https://raw.githubusercontent.com/openSUSE/kernel-source/linux-next/config/x86_64/vanilla
-> >
-> >
-> > But with CONFIG_IWLMEI=n (as that fails to link).
-> >
-> > One has to load i915, other modules (71 on my system) are apparently fine.
-> >
-> > i915 tries to patch your `page_table_check_disabled' which is defined as
-> > `DEFINE_STATIC_KEY_TRUE_RO':
-> >  > jump_label_add_module: key=__tracepoint_mmap_lock_released
-> > (ffffffff93f36d88) mod=0000000000000000
-> >  > jump_label_add_module: key=hugetlb_free_vmemmap_enabled_key
-> > (ffffffff94873560) mod=0000000000000000
-> >  > jump_label_add_module: key=devmap_managed_key (ffffffff94902700)
-> > mod=0000000000000000
-> >  > jump_label_add_module: key=page_table_check_disabled
-> > (ffffffff939da760) mod=0000000000000000
-> >  > BUG: unable to handle page fault for address: ffffffff939da768
->
-> Provided you EXPORT page_table_check_disabled and it can be used from
-> modules, it can be barely marked as RO. So the below indeed fixes the
-> problem for me:
->
-> --- a/mm/page_table_check.c
-> +++ b/mm/page_table_check.c
-> @@ -18,7 +18,7 @@ struct page_table_check {
->   static bool __page_table_check_enabled __initdata =
->
-> IS_ENABLED(CONFIG_PAGE_TABLE_CHECK_ENFORCED);
->
-> -DEFINE_STATIC_KEY_TRUE_RO(page_table_check_disabled);
-> +DEFINE_STATIC_KEY_TRUE(page_table_check_disabled);
+Display Core (DC) is one of the components under amdgpu, and it has
+multiple features directly related to the KMS API. Unfortunately, we
+don't have enough documentation about DC in the upstream, which makes
+the life of some external contributors a little bit more challenging.
+For these reasons, this patchset reworks part of the DC documentation
+and introduces a new set of details on how the display core works on DCN
+IP. Another improvement that this documentation effort tries to bring is
+making explicit some of our hardware-specific details to guide
+user-space developers better.
 
-Makes sense, thanks! I will remove _RO in the next version.
+In my view, it is easier to review this series if you apply it in your
+local kernel and build the HTML version (make htmldocs). I'm suggesting
+this approach because I added a few SVG diagrams that will be easier to
+see in the HTML version. If you cannot build the documentation, try to
+open the SVG images while reviewing the content. In summary, in this
+series, you will find:
 
-Pasha
+1. Patch 1: Re-arrange of display core documentation. This is
+   preparation work for the other patches, but it is also a way to expand
+   this documentation.
+2. Patch 2 to 4: Document some common debug options related to display.
+3. Patch 5: This patch provides an overview of how our display core next
+   works and a brief explanation of each component.
+4. Patch 6: We use a lot of acronyms in our driver; for this reason, we
+   exposed a glossary with common terms used by display core.
+
+Please let us know what you think we can improve in this series and what
+kind of content you want to see for the next series.
+
+Changes since V1:
+ - Group amdgpu documentation together.
+ - Create index pages.
+ - Mirror display folder in the documentation.
+ - Divide glossary based on driver context.
+ - Make terms more consistent and update CPLIB
+ - Add new acronyms to the glossary
+
+Thanks
+Siqueira
+
+Rodrigo Siqueira (6):
+  Documentation/gpu: Reorganize DC documentation
+  Documentation/gpu: Document amdgpu_dm_visual_confirm debugfs entry
+  Documentation/gpu: Document pipe split visual confirmation
+  Documentation/gpu: How to collect DTN log
+  Documentation/gpu: Add basic overview of DC pipeline
+  Documentation/gpu: Add amdgpu and dc glossary
+
+ Documentation/gpu/amdgpu-dc.rst               |   74 --
+ Documentation/gpu/amdgpu/amdgpu-glossary.rst  |   47 +
+ .../gpu/amdgpu/display/config_example.svg     |  414 ++++++
+ Documentation/gpu/amdgpu/display/dc-debug.rst |   77 ++
+ .../gpu/amdgpu/display/dc-glossary.rst        |  243 ++++
+ .../amdgpu/display/dc_pipeline_overview.svg   | 1125 +++++++++++++++++
+ .../gpu/amdgpu/display/dcn-overview.rst       |  168 +++
+ .../gpu/amdgpu/display/display-manager.rst    |   42 +
+ .../gpu/amdgpu/display/global_sync_vblank.svg |  485 +++++++
+ Documentation/gpu/amdgpu/display/index.rst    |   29 +
+ .../gpu/{amdgpu.rst => amdgpu/index.rst}      |   25 +-
+ Documentation/gpu/drivers.rst                 |    3 +-
+ 12 files changed, 2653 insertions(+), 79 deletions(-)
+ delete mode 100644 Documentation/gpu/amdgpu-dc.rst
+ create mode 100644 Documentation/gpu/amdgpu/amdgpu-glossary.rst
+ create mode 100644 Documentation/gpu/amdgpu/display/config_example.svg
+ create mode 100644 Documentation/gpu/amdgpu/display/dc-debug.rst
+ create mode 100644 Documentation/gpu/amdgpu/display/dc-glossary.rst
+ create mode 100644 Documentation/gpu/amdgpu/display/dc_pipeline_overview.svg
+ create mode 100644 Documentation/gpu/amdgpu/display/dcn-overview.rst
+ create mode 100644 Documentation/gpu/amdgpu/display/display-manager.rst
+ create mode 100644 Documentation/gpu/amdgpu/display/global_sync_vblank.svg
+ create mode 100644 Documentation/gpu/amdgpu/display/index.rst
+ rename Documentation/gpu/{amdgpu.rst => amdgpu/index.rst} (95%)
+
+-- 
+2.25.1
+
