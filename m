@@ -2,59 +2,59 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 38B9F468B35
-	for <lists+linux-doc@lfdr.de>; Sun,  5 Dec 2021 14:45:51 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 51E9B468B37
+	for <lists+linux-doc@lfdr.de>; Sun,  5 Dec 2021 14:45:55 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S234261AbhLENtR (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Sun, 5 Dec 2021 08:49:17 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:54024 "EHLO
+        id S234211AbhLENtT (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Sun, 5 Dec 2021 08:49:19 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:54034 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S234262AbhLENtQ (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Sun, 5 Dec 2021 08:49:16 -0500
-Received: from mail-pg1-x536.google.com (mail-pg1-x536.google.com [IPv6:2607:f8b0:4864:20::536])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 564BEC061751
-        for <linux-doc@vger.kernel.org>; Sun,  5 Dec 2021 05:45:49 -0800 (PST)
-Received: by mail-pg1-x536.google.com with SMTP id m15so7864904pgu.11
-        for <linux-doc@vger.kernel.org>; Sun, 05 Dec 2021 05:45:49 -0800 (PST)
+        with ESMTP id S234262AbhLENtT (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Sun, 5 Dec 2021 08:49:19 -0500
+Received: from mail-pf1-x429.google.com (mail-pf1-x429.google.com [IPv6:2607:f8b0:4864:20::429])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 7CEFCC061714
+        for <linux-doc@vger.kernel.org>; Sun,  5 Dec 2021 05:45:52 -0800 (PST)
+Received: by mail-pf1-x429.google.com with SMTP id g19so7641780pfb.8
+        for <linux-doc@vger.kernel.org>; Sun, 05 Dec 2021 05:45:52 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
         h=from:to:cc:subject:date:message-id:in-reply-to:references
          :mime-version:content-transfer-encoding;
-        bh=RUj/ZXyHdmeYl1nvZB/1bmK1ByWw3AsgGNIWUtOKeA4=;
-        b=dLwuUCtDR4DVcR2ar7QLRDHF4ftMm0pY6mgHeYaXT3e7QZaq7CfzDU9TQS+g8FCjvV
-         MD4bjwzzoxc6Qf9Fy3AFvl4PnSEtPTq82poGM7QGzveWJYWwjBHk1WEq9fNOr2K1QDv3
-         uo53WcGi9cZGP+FQGBMxVWtP0EvY7fS+qr0fYYRN9PpvXFuA2qW3TEeBOA9CNQoE0jlQ
-         ElkS98oOdy4pervx6lUB+HKwwdFByNPAQgHwlhCEl7iJb/poQdZTY7u8KQIF8EHDp6Yq
-         BtHakK8fPPQBQHE9oSzRMc9dr0unlYudgw5uc3i3uknZ1YtTo3KlsElcU05lu2s+5Htb
-         KHlQ==
+        bh=AC4MWD95p+6TQoD/86M3jDD6aJB4zUkT1yHZQXt6y/0=;
+        b=Jo74MlI2vVobsAb7wb0rr1YxK8bS/X8oFsL+k9ugBiwu8HZhS3PUYSYsGPl94ox0bo
+         FNHSDTKAZI+iBnE73K4SvfCzmXW8jIBiCczNNW0nVouJyaXnXoTZ22QvT1qtY2GJCVFQ
+         deG6LenlIrTlJxjXa70mYcurpUeONbnZ377eDQKw9wtIitN1S0nI3vkR12njqzV1CBWW
+         Xa76uRDnLgPffSvICttClL8HIY5cFv38fZcAGQLQh6FTYRkJY/d1qwhinOUS+3LBArk6
+         XRyy3nLy6rc55wDqdMc9CZPjoVrKOPhLVa7PAyz9MVScF584ykuXNXKJwc3sJ+HWbS5d
+         PHiw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
          :references:mime-version:content-transfer-encoding;
-        bh=RUj/ZXyHdmeYl1nvZB/1bmK1ByWw3AsgGNIWUtOKeA4=;
-        b=YdVUcch5SGCYNfSMh+C3Vp5INSkEv8oSHvv05cban1nYuMnGaK8WdQDdNtd0BAsf55
-         M9fsp6pcpVYHMLGwsTUF7motovNzwbWIqxEjIYgDNoe8mbZLB6jBWXrD8B27IR+5NDgv
-         bIAbW6DbEz1E2dW/sfvAtxBTXOSP7CiSZ5yi8VN10VXSKOT8xnqY49wVzOfk5R8JA8JS
-         gsyMk456sHsUmwvkx3ycLHojZYyYcEjNmjPX7X1gb9IQs5ABWvLT4/Wb6XaFmrfDWiYq
-         Os/kHiF1wA0VDAeVEIEEVvyHQQ+fGsDTbUOBMvpDhfA5S3sNlDXefjUq7cyriYQcVkHM
-         gyjg==
-X-Gm-Message-State: AOAM530SdGTiCsdW54KU75uM6iBr+bo0xfLEBdq+isokln5ZcA6RIrq0
-        jO6ILhuSKsnmtSLxwHei6UI=
-X-Google-Smtp-Source: ABdhPJzF7aymWtTOtwEZPaEdqO2FS5BYiHMHKN64Mvt7OUl4Cou3F6+f0QaF0uw1rXc1edRL30WwaQ==
-X-Received: by 2002:a63:904a:: with SMTP id a71mr13771394pge.241.1638711948909;
-        Sun, 05 Dec 2021 05:45:48 -0800 (PST)
+        bh=AC4MWD95p+6TQoD/86M3jDD6aJB4zUkT1yHZQXt6y/0=;
+        b=0WGYnK0hKKxED9dt9Ey9by1mOMlRw8pQucJBK5yB1Fde7W616HVRKiKgnoV82LcGpD
+         bnXyN/jriDDxF/S448L3J686lRieYAMhy4zAsASU92xJB7Mt/E0W+B89tgdzff9yR4wE
+         nm/vBmHAb5v2KL3DnDg/jhX4Phis6Pay8vBAVHfG6RbOL2b6r7x1UZUlFcTwEdxgOw4u
+         PXcbS0/3HEjgglT4QP1x8RACntlUjqy4+SVGLrkWicIsU/f1Ct9SmcM8Nm1mqwwYo7ON
+         PGOGZt/T6INn8N8qj+Ii8bUXThzEyWz0HaHjKoKE3lhLMPXDRs022q/9aDu8Enj6SVXM
+         BS6w==
+X-Gm-Message-State: AOAM532dr/qsO93RiMDZRPjlpdtobpLwyYTWX7RWYQZT1gicfXxm4noJ
+        mFIerqN/KBWrw8JVI3ZaaBY=
+X-Google-Smtp-Source: ABdhPJyKRY3AG+DZy9NJSXf4ON4ZQfg0/9dhx99UPRcwjuf7X+NQ4+RNUKOG1YuccPbcCHq59uWh+A==
+X-Received: by 2002:a63:2b11:: with SMTP id r17mr13960873pgr.494.1638711952053;
+        Sun, 05 Dec 2021 05:45:52 -0800 (PST)
 Received: from localhost.localdomain ([8.26.182.175])
-        by smtp.gmail.com with ESMTPSA id g19sm4265114pfc.145.2021.12.05.05.45.46
+        by smtp.gmail.com with ESMTPSA id g19sm4265114pfc.145.2021.12.05.05.45.49
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 05 Dec 2021 05:45:48 -0800 (PST)
+        Sun, 05 Dec 2021 05:45:51 -0800 (PST)
 From:   Yanteng Si <siyanteng01@gmail.com>
 X-Google-Original-From: Yanteng Si <siyanteng@loongson.cn>
 To:     corbet@lwn.net
 Cc:     Yanteng Si <siyanteng@loongson.cn>, chenhuacai@kernel.org,
         linux-doc@vger.kernel.org, siyanteng01@gmail.com
-Subject: [PATCH 10/11] docs/trace: fix a label of boottime-trace
-Date:   Sun,  5 Dec 2021 21:43:59 +0800
-Message-Id: <b97a64d10f8d2b9c0ff550c6a7049a21a2ef9d1a.1638706875.git.siyanteng@loongson.cn>
+Subject: [PATCH 11/11] docs/admin-guide: add gpio-aggregator into index
+Date:   Sun,  5 Dec 2021 21:44:00 +0800
+Message-Id: <899056e61b5ac273be033f6ffa1746fe3128fc9f.1638706875.git.siyanteng@loongson.cn>
 X-Mailer: git-send-email 2.27.0
 In-Reply-To: <cover.1638706875.git.siyanteng@loongson.cn>
 References: <cover.1638706875.git.siyanteng@loongson.cn>
@@ -64,28 +64,25 @@ Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Fix warning as:
-
-Documentation/trace/boottime-trace.rst:136: WARNING: undefined label: histogram (if the link has no caption the label must precede a section header)
+Add gpio-aggregator into Documentation/admin-guide/gpio/index.rst
 
 Signed-off-by: Yanteng Si <siyanteng@loongson.cn>
 ---
- Documentation/trace/boottime-trace.rst | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ Documentation/admin-guide/gpio/index.rst | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/Documentation/trace/boottime-trace.rst b/Documentation/trace/boottime-trace.rst
-index 6dcfbc64014d..efb75ec5bf48 100644
---- a/Documentation/trace/boottime-trace.rst
-+++ b/Documentation/trace/boottime-trace.rst
-@@ -133,7 +133,7 @@ action option, there are tree-style options under per-event 'hist' subkey
- for the histogram actions. For the detail of the each parameter,
- please read the event histogram document [3]_.
+diff --git a/Documentation/admin-guide/gpio/index.rst b/Documentation/admin-guide/gpio/index.rst
+index 7db367572f30..f6861ca16ffe 100644
+--- a/Documentation/admin-guide/gpio/index.rst
++++ b/Documentation/admin-guide/gpio/index.rst
+@@ -10,6 +10,7 @@ gpio
+     gpio-aggregator
+     sysfs
+     gpio-mockup
++    gpio-sim
  
--.. [3] See :ref:`Documentation/trace/histogram.rst <histogram>`
-+.. [3] See :histogram: Documentation/trace/histogram.rst
+ .. only::  subproject and html
  
- ftrace.[instance.INSTANCE.]event.GROUP.EVENT.hist.[N.]keys = KEY1[, KEY2[...]]
-   Set histogram key parameters. (Mandatory)
 -- 
 2.27.0
 
