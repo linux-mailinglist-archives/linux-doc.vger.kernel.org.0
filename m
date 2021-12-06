@@ -2,140 +2,140 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 4385B469441
-	for <lists+linux-doc@lfdr.de>; Mon,  6 Dec 2021 11:50:08 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id E1BA046948F
+	for <lists+linux-doc@lfdr.de>; Mon,  6 Dec 2021 11:57:51 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S240765AbhLFKxf (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 6 Dec 2021 05:53:35 -0500
-Received: from relay3-d.mail.gandi.net ([217.70.183.195]:42209 "EHLO
-        relay3-d.mail.gandi.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S240455AbhLFKxe (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Mon, 6 Dec 2021 05:53:34 -0500
-Received: (Authenticated sender: alex@ghiti.fr)
-        by relay3-d.mail.gandi.net (Postfix) with ESMTPSA id B1A846000F;
-        Mon,  6 Dec 2021 10:49:55 +0000 (UTC)
-Message-ID: <3283761f-0506-464b-d351-af8ddecafa9b@ghiti.fr>
-Date:   Mon, 6 Dec 2021 11:49:55 +0100
-MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.3.1
-Subject: Re: [PATCH v2 00/10] Introduce sv48 support without relocatable
- kernel
+        id S241986AbhLFLBR convert rfc822-to-8bit (ORCPT
+        <rfc822;lists+linux-doc@lfdr.de>); Mon, 6 Dec 2021 06:01:17 -0500
+Received: from frasgout.his.huawei.com ([185.176.79.56]:4201 "EHLO
+        frasgout.his.huawei.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S241972AbhLFLBN (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Mon, 6 Dec 2021 06:01:13 -0500
+Received: from fraeml711-chm.china.huawei.com (unknown [172.18.147.200])
+        by frasgout.his.huawei.com (SkyGuard) with ESMTP id 4J70hy1Svhz67wK2;
+        Mon,  6 Dec 2021 18:56:02 +0800 (CST)
+Received: from fraeml714-chm.china.huawei.com (10.206.15.33) by
+ fraeml711-chm.china.huawei.com (10.206.15.60) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2308.20; Mon, 6 Dec 2021 11:57:41 +0100
+Received: from fraeml714-chm.china.huawei.com ([10.206.15.33]) by
+ fraeml714-chm.china.huawei.com ([10.206.15.33]) with mapi id 15.01.2308.020;
+ Mon, 6 Dec 2021 11:57:41 +0100
+From:   Roberto Sassu <roberto.sassu@huawei.com>
+To:     Roberto Sassu <roberto.sassu@huawei.com>,
+        Christoph Hellwig <hch@infradead.org>
+CC:     "deven.desai@linux.microsoft.com" <deven.desai@linux.microsoft.com>,
+        "corbet@lwn.net" <corbet@lwn.net>,
+        "axboe@kernel.dk" <axboe@kernel.dk>,
+        "agk@redhat.com" <agk@redhat.com>,
+        "snitzer@redhat.com" <snitzer@redhat.com>,
+        "ebiggers@kernel.org" <ebiggers@kernel.org>,
+        "tytso@mit.edu" <tytso@mit.edu>,
+        "paul@paul-moore.com" <paul@paul-moore.com>,
+        "eparis@redhat.com" <eparis@redhat.com>,
+        "jmorris@namei.org" <jmorris@namei.org>,
+        "serge@hallyn.com" <serge@hallyn.com>,
+        "jannh@google.com" <jannh@google.com>,
+        "dm-devel@redhat.com" <dm-devel@redhat.com>,
+        "linux-doc@vger.kernel.org" <linux-doc@vger.kernel.org>,
+        "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
+        "linux-block@vger.kernel.org" <linux-block@vger.kernel.org>,
+        "linux-fscrypt@vger.kernel.org" <linux-fscrypt@vger.kernel.org>,
+        "linux-audit@redhat.com" <linux-audit@redhat.com>,
+        "linux-security-module@vger.kernel.org" 
+        <linux-security-module@vger.kernel.org>,
+        "linux-integrity@vger.kernel.org" <linux-integrity@vger.kernel.org>,
+        "tusharsu@linux.microsoft.com" <tusharsu@linux.microsoft.com>
+Subject: RE: [RFC][PATCH] device mapper: Add builtin function dm_get_status()
+Thread-Topic: [RFC][PATCH] device mapper: Add builtin function dm_get_status()
+Thread-Index: AQHX5tHI6VSZDPA0J0GM0KIP7fuaeKweu+CAgAAaFvD///01gIAAEg9QgAFg9oCAAC4FMIAE3cYA
+Date:   Mon, 6 Dec 2021 10:57:41 +0000
+Message-ID: <e38392762299459890eee792a3a7cb09@huawei.com>
+References: <81d5e825-1ee2-8f6b-cd9d-07b0f8bd36d3@linux.microsoft.com>
+ <20211201163708.3578176-1-roberto.sassu@huawei.com>
+ <Yahz1SYRG1CQIh0z@infradead.org>
+ <e57d2d23ec7845febb79ca4476c73fcb@huawei.com>
+ <YaiHX+dWNUlmsNac@infradead.org>
+ <b4bf4a384b334cdab1522b3b082bd088@huawei.com>
+ <Yam+m9eiLxIamGXm@infradead.org>
+ <28208b7f142f4295ac5c857af5cffe07@huawei.com>
+In-Reply-To: <28208b7f142f4295ac5c857af5cffe07@huawei.com>
+Accept-Language: en-US
 Content-Language: en-US
-To:     =?UTF-8?Q?Heiko_St=c3=bcbner?= <heiko@sntech.de>,
-        Jonathan Corbet <corbet@lwn.net>,
-        Paul Walmsley <paul.walmsley@sifive.com>,
-        Palmer Dabbelt <palmer@dabbelt.com>,
-        Albert Ou <aou@eecs.berkeley.edu>,
-        Zong Li <zong.li@sifive.com>, Anup Patel <anup@brainfault.org>,
-        Atish Patra <Atish.Patra@wdc.com>,
-        Christoph Hellwig <hch@lst.de>,
-        Andrey Ryabinin <ryabinin.a.a@gmail.com>,
-        Alexander Potapenko <glider@google.com>,
-        Andrey Konovalov <andreyknvl@gmail.com>,
-        Dmitry Vyukov <dvyukov@google.com>,
-        Ard Biesheuvel <ardb@kernel.org>,
-        Arnd Bergmann <arnd@arndb.de>,
-        Kees Cook <keescook@chromium.org>,
-        Guo Ren <guoren@linux.alibaba.com>,
-        Heinrich Schuchardt <heinrich.schuchardt@canonical.com>,
-        Mayuresh Chitale <mchitale@ventanamicro.com>,
-        linux-doc@vger.kernel.org, linux-riscv@lists.infradead.org,
-        linux-kernel@vger.kernel.org, kasan-dev@googlegroups.com,
-        linux-efi@vger.kernel.org, linux-arch@vger.kernel.org,
-        Alexandre Ghiti <alexandre.ghiti@canonical.com>
-References: <20210929145113.1935778-1-alexandre.ghiti@canonical.com>
- <2700575.YIZvDWadBg@diego>
-From:   Alexandre ghiti <alex@ghiti.fr>
-In-Reply-To: <2700575.YIZvDWadBg@diego>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [10.204.63.33]
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 8BIT
+MIME-Version: 1.0
+X-CFilter-Loop: Reflected
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On 11/25/21 00:29, Heiko Stübner wrote:
-> Am Mittwoch, 29. September 2021, 16:51:03 CET schrieb Alexandre Ghiti:
->> This patchset allows to have a single kernel for sv39 and sv48 without
->> being relocatable.
->>                                                                                   
->> The idea comes from Arnd Bergmann who suggested to do the same as x86,
->> that is mapping the kernel to the end of the address space, which allows
->> the kernel to be linked at the same address for both sv39 and sv48 and
->> then does not require to be relocated at runtime.
->>                                                                                   
->> This implements sv48 support at runtime. The kernel will try to
->> boot with 4-level page table and will fallback to 3-level if the HW does not
->> support it. Folding the 4th level into a 3-level page table has almost no
->> cost at runtime.
->>                                                                                   
->> Tested on:
->>    - qemu rv64 sv39: OK
->>    - qemu rv64 sv48: OK
->>    - qemu rv64 sv39 + kasan: OK
->>    - qemu rv64 sv48 + kasan: OK
->>    - qemu rv32: OK
->>    - Unmatched: OK
-> On a beagleV (which supports only sv39) I've tested both the limit via
-> the mmu-type in the devicetree and also that the fallback works when
-> I disable the mmu-type in the dt, so
->
-> Tested-by: Heiko Stuebner <heiko@sntech.de>
->
+> From: Roberto Sassu [mailto:roberto.sassu@huawei.com]
+> Sent: Friday, December 3, 2021 11:20 AM
+> > From: Christoph Hellwig [mailto:hch@infradead.org]
+> > Sent: Friday, December 3, 2021 7:52 AM
+> > On Thu, Dec 02, 2021 at 09:29:52AM +0000, Roberto Sassu wrote:
+> > > The problem being solved is how to grant access to files
+> > > which satisfy a property defined in the policy.
+> >
+> > If you have want to enforce access to files in the block layer using
+> > a specific stacking block driver you don't just have one layering
+> > violation but a bunch of them.  Please go back to the drawing board.
+> 
+> Ok. I write my thoughts here, so that it is easier to align.
+> 
+> dm-verity provides block-level integrity, which means that
+> the block layer itself is responsible to not pass data to the
+> upper layer, the filesystem, if a block is found corrupted.
+> 
+> The dm-verity root digest represents the immutable state
+> of the block device. dm-verity is still responsible to enforce
+> accesses to the block device according to the root digest
+> passed at device setup time. Nothing changes, the block
+> layer still detects data corruption against the passed
+> reference value.
+> 
+> The task of the security layer is to decide whether or not
+> the root digest passed at device setup time is acceptable,
+> e.g. it represents a device containing genuine files coming
+> from a software vendor.
+> 
+> The mandatory policy can be enforced at different layers,
+> depending on whether the security controls are placed.
+> A possibility would be to deny mounting block devices that
+> don't satisfy the mandatory policy.
+> 
+> However, if the mandatory policy wants only to restrict
+> execution of approved files and allowing the rest, making
+> the decision at the block layer is too coarse and restrictive.
+> It would force the user to mount only approved block
+> devices. The security layer must operate on files to enforce
+> this policy.
+> 
+> Now probably there is the part where there is no agreement.
+> 
+> The integrity property of a block device applies also to the
+> files on the filesystem mounted from that device. User space
+> programs cannot access files in that filesystem coming from a
+> device with a different dm-verity root digest, or files stored
+> in a corrupted block device.
+> 
+> If what I wrote is correct, that the integrity property is preserved
+> across the layers, this would give enough flexibility to enforce
+> policies at a higher layer, although that property is guaranteed
+> by a lower layer.
 
-Thanks Heiko for testing this, unfortunately I could not add this tag to 
-the latest version as significant changes came up.
+Hi Christoph
 
-Thanks again for taking the time to test this,
+did I address your concerns? If yes, I could send the new patch
+set, including the patch that uses the new functionality.
 
-Alex
+Thanks
 
+Roberto
 
->>    
->>                                                                                   
->> Changes in v2:
->>    - Rebase onto for-next
->>    - Fix KASAN
->>    - Fix stack canary
->>    - Get completely rid of MAXPHYSMEM configs
->>    - Add documentation
->>
->> Alexandre Ghiti (10):
->>    riscv: Allow to dynamically define VA_BITS
->>    riscv: Get rid of MAXPHYSMEM configs
->>    asm-generic: Prepare for riscv use of pud_alloc_one and pud_free
->>    riscv: Implement sv48 support
->>    riscv: Use pgtable_l4_enabled to output mmu_type in cpuinfo
->>    riscv: Explicit comment about user virtual address space size
->>    riscv: Improve virtual kernel memory layout dump
->>    Documentation: riscv: Add sv48 description to VM layout
->>    riscv: Initialize thread pointer before calling C functions
->>    riscv: Allow user to downgrade to sv39 when hw supports sv48
->>
->>   Documentation/riscv/vm-layout.rst             |  36 ++
->>   arch/riscv/Kconfig                            |  35 +-
->>   arch/riscv/configs/nommu_k210_defconfig       |   1 -
->>   .../riscv/configs/nommu_k210_sdcard_defconfig |   1 -
->>   arch/riscv/configs/nommu_virt_defconfig       |   1 -
->>   arch/riscv/include/asm/csr.h                  |   3 +-
->>   arch/riscv/include/asm/fixmap.h               |   1 +
->>   arch/riscv/include/asm/kasan.h                |   2 +-
->>   arch/riscv/include/asm/page.h                 |  10 +
->>   arch/riscv/include/asm/pgalloc.h              |  40 +++
->>   arch/riscv/include/asm/pgtable-64.h           | 108 +++++-
->>   arch/riscv/include/asm/pgtable.h              |  30 +-
->>   arch/riscv/include/asm/sparsemem.h            |   6 +-
->>   arch/riscv/kernel/cpu.c                       |  23 +-
->>   arch/riscv/kernel/head.S                      |   4 +-
->>   arch/riscv/mm/context.c                       |   4 +-
->>   arch/riscv/mm/init.c                          | 323 +++++++++++++++---
->>   arch/riscv/mm/kasan_init.c                    |  91 +++--
->>   drivers/firmware/efi/libstub/efi-stub.c       |   2 +
->>   include/asm-generic/pgalloc.h                 |  24 +-
->>   include/linux/sizes.h                         |   1 +
->>   21 files changed, 615 insertions(+), 131 deletions(-)
->>
->>
->
->
->
+HUAWEI TECHNOLOGIES Duesseldorf GmbH, HRB 56063
+Managing Director: Li Peng, Zhong Ronghua
