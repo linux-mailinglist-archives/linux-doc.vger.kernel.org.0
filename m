@@ -2,191 +2,289 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 38F1746A0A6
-	for <lists+linux-doc@lfdr.de>; Mon,  6 Dec 2021 17:05:33 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 7476946A0EE
+	for <lists+linux-doc@lfdr.de>; Mon,  6 Dec 2021 17:14:13 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1388072AbhLFQIv (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 6 Dec 2021 11:08:51 -0500
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124]:26864 "EHLO
-        us-smtp-delivery-124.mimecast.com" rhost-flags-OK-OK-OK-OK)
-        by vger.kernel.org with ESMTP id S1356033AbhLFQGm (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Mon, 6 Dec 2021 11:06:42 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-        s=mimecast20190719; t=1638806592;
-        h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-         to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-         in-reply-to:in-reply-to:references:references;
-        bh=02KFbQkcvarDRNu3NjO4Zr3Tz4ybPNYjJAuDB4XSJ38=;
-        b=EeOMi5AQ9FEzXFkL8V5ELtMw2YNqXkOJ5lWlI6UfZMTlopXYJSDcWdjlOuoZuaJu9+iq/d
-        pEX9+RMdsOrvUZDaIeS5O20chveEHvFSDp0iEQsUSPTHZGDQKYxGiqykh5x5Kkh7Jo67Z4
-        oAXBYEIiifVfAkhO/AXuvBItIBNbrIU=
-Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
- [209.132.183.4]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- us-mta-459-yvQJioNhMX-1cSUx6IT8Bw-1; Mon, 06 Dec 2021 11:03:09 -0500
-X-MC-Unique: yvQJioNhMX-1cSUx6IT8Bw-1
-Received: from smtp.corp.redhat.com (int-mx02.intmail.prod.int.phx2.redhat.com [10.5.11.12])
-        (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
-        (No client certificate requested)
-        by mimecast-mx01.redhat.com (Postfix) with ESMTPS id EC40880292C;
-        Mon,  6 Dec 2021 16:03:02 +0000 (UTC)
-Received: from localhost (unknown [10.39.193.91])
-        by smtp.corp.redhat.com (Postfix) with ESMTPS id 107C260C13;
-        Mon,  6 Dec 2021 16:03:01 +0000 (UTC)
-From:   Cornelia Huck <cohuck@redhat.com>
-To:     Alex Williamson <alex.williamson@redhat.com>,
-        Jason Gunthorpe <jgg@nvidia.com>
-Cc:     Jonathan Corbet <corbet@lwn.net>, linux-doc@vger.kernel.org,
-        kvm@vger.kernel.org, Kirti Wankhede <kwankhede@nvidia.com>,
-        Max Gurtovoy <mgurtovoy@nvidia.com>,
-        Shameer Kolothum <shameerali.kolothum.thodi@huawei.com>,
-        Yishai Hadas <yishaih@nvidia.com>
-Subject: Re: [PATCH RFC v2] vfio: Documentation for the migration region
-In-Reply-To: <20211203110619.1835e584.alex.williamson@redhat.com>
-Organization: Red Hat GmbH
-References: <0-v2-45a95932a4c6+37-vfio_mig_doc_jgg@nvidia.com>
- <20211130102611.71394253.alex.williamson@redhat.com>
- <20211130185910.GD4670@nvidia.com>
- <20211130153541.131c9729.alex.williamson@redhat.com>
- <20211201031407.GG4670@nvidia.com> <20211201130314.69ed679c@omen>
- <20211201232502.GO4670@nvidia.com>
- <20211203110619.1835e584.alex.williamson@redhat.com>
-User-Agent: Notmuch/0.34 (https://notmuchmail.org)
-Date:   Mon, 06 Dec 2021 17:03:00 +0100
-Message-ID: <87zgpdu3ez.fsf@redhat.com>
+        id S1386204AbhLFQRk (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 6 Dec 2021 11:17:40 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:40956 "EHLO
+        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S236400AbhLFQRE (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Mon, 6 Dec 2021 11:17:04 -0500
+Received: from mail-wr1-x435.google.com (mail-wr1-x435.google.com [IPv6:2a00:1450:4864:20::435])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 11191C041280
+        for <linux-doc@vger.kernel.org>; Mon,  6 Dec 2021 08:04:28 -0800 (PST)
+Received: by mail-wr1-x435.google.com with SMTP id d24so23603706wra.0
+        for <linux-doc@vger.kernel.org>; Mon, 06 Dec 2021 08:04:27 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=google.com; s=20210112;
+        h=date:from:to:cc:subject:message-id:references:mime-version
+         :content-disposition:in-reply-to:user-agent;
+        bh=nMw+1lOhPz92ldC1eztxTws1Eot0vmOAhw9KFEmlatA=;
+        b=CXhtCLa0Jq4SL6nVdLuPURxfHR0k4qK1Rww+3X6KrpuMJjurBmpAffkEldJfeQ39yq
+         WZih5woy8XlEsxOHdJDUqODoADNOGf4LSfvGducTV0O91KRnxvQRXdz84uLb5EmqUZr1
+         9bixA2+IivaTlPw62TXacStZ3QRAeVoCdCNJqTCKKwZKYl4NMCZmmTyIhBJ7f0jWmr83
+         IgMBXuElFxUtuBns4W3bkLR6duw8u56rcVHDv7Do7hd6Bvyf9SjJ3eePrRSESt5M6/U7
+         Hjv19pO72SUYCehbREtrEPLcFqBLluLQswPdK7+kMmTt4iFO4pD/pQR2GMRCGZt1l8p5
+         9bbA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+         :mime-version:content-disposition:in-reply-to:user-agent;
+        bh=nMw+1lOhPz92ldC1eztxTws1Eot0vmOAhw9KFEmlatA=;
+        b=xfXy4fPE9xpLmO+5xArKRfWI9yz/6LE+yTp3WxAM907Vok9gmvxH4mzJE3l9SsNWjJ
+         APwRf+3kcTsYSH/vjLdiuDFs0a7bNOPRYFtGt+JHkH3xI2V4HE+NXBlnmKJMT4sp50NH
+         9yGjc8nho3fIUBHQiTMITCWesSmGO8jgdDTZ5UiU5BH5MwyfttS19AdqqYrt6HJfsJeM
+         AHgV3QeOfSN+vVpBtW5ensh0Mv4Oa1/l1r0K/vIehv7kml8z4oIyNLTU1Fe3zDjSPsbf
+         vLBGcZiIiWyM7jLsFr8oE2KPOYjQT5DuB2uEt4DzB11iXtCc4sxt6okrqBh0RuR2uleH
+         uldw==
+X-Gm-Message-State: AOAM530+8FFt8KIW7w+Dz4d8EcTemY/XSEIdnVWl+U84gSZRSHWWNyP7
+        MnmJ7slY70PQESxADSeF8YcrnQ==
+X-Google-Smtp-Source: ABdhPJz0YemwuDBQz7Ry7eX34+eYyc0zBI0JawB1/jHvbuzSW780auup+99/7WHLWV533VaaBi8uMg==
+X-Received: by 2002:adf:d1c2:: with SMTP id b2mr44013090wrd.114.1638806666388;
+        Mon, 06 Dec 2021 08:04:26 -0800 (PST)
+Received: from elver.google.com ([2a00:79e0:15:13:88f3:db53:e34:7bb0])
+        by smtp.gmail.com with ESMTPSA id o3sm14929749wms.10.2021.12.06.08.04.25
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 06 Dec 2021 08:04:25 -0800 (PST)
+Date:   Mon, 6 Dec 2021 17:04:20 +0100
+From:   Marco Elver <elver@google.com>
+To:     Boqun Feng <boqun.feng@gmail.com>
+Cc:     "Paul E. McKenney" <paulmck@kernel.org>,
+        Alexander Potapenko <glider@google.com>,
+        Borislav Petkov <bp@alien8.de>,
+        Dmitry Vyukov <dvyukov@google.com>,
+        Ingo Molnar <mingo@kernel.org>,
+        Mark Rutland <mark.rutland@arm.com>,
+        Peter Zijlstra <peterz@infradead.org>,
+        Thomas Gleixner <tglx@linutronix.de>,
+        Waiman Long <longman@redhat.com>,
+        Will Deacon <will@kernel.org>, kasan-dev@googlegroups.com,
+        linux-arch@vger.kernel.org, linux-doc@vger.kernel.org,
+        linux-kbuild@vger.kernel.org, linux-kernel@vger.kernel.org,
+        linux-mm@kvack.org, llvm@lists.linux.dev, x86@kernel.org
+Subject: Re: [PATCH v3 08/25] kcsan: Show location access was reordered to
+Message-ID: <Ya40hEQv5SEu7ZeL@elver.google.com>
+References: <20211130114433.2580590-1-elver@google.com>
+ <20211130114433.2580590-9-elver@google.com>
+ <Ya2Zpf8qpgDYiGqM@boqun-archlinux>
+ <CANpmjNMirKGSBW2m+bWRM9_FnjK3_HjnJC=dhyMktx50mwh1GQ@mail.gmail.com>
+ <Ya4evHE7uQ9eXpax@boqun-archlinux>
 MIME-Version: 1.0
-Content-Type: text/plain
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.12
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <Ya4evHE7uQ9eXpax@boqun-archlinux>
+User-Agent: Mutt/2.0.5 (2021-01-21)
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Fri, Dec 03 2021, Alex Williamson <alex.williamson@redhat.com> wrote:
+On Mon, Dec 06, 2021 at 10:31PM +0800, Boqun Feng wrote:
+[...]
+> Thanks for the explanation, I was missing the swap here. However...
+> 
+> > So in your above example you need to swap "reordered to" and the top
+> > frame of the stack trace.
+> > 
 
-> On Wed, 1 Dec 2021 19:25:02 -0400
-> Jason Gunthorpe <jgg@nvidia.com> wrote:
->
->> On Wed, Dec 01, 2021 at 01:03:14PM -0700, Alex Williamson wrote:
->> > On Tue, 30 Nov 2021 23:14:07 -0400
->> > Jason Gunthorpe <jgg@nvidia.com> wrote:
->> >   
->> > > On Tue, Nov 30, 2021 at 03:35:41PM -0700, Alex Williamson wrote:
+Apologies, I wasn't entirely precise ... what you say below is correct.
 
->> OTOH "supportable" qemu could certainly make the default choice to
->> require devices for simplicity.
->
-> I get a bit lost every time I try to sketch out how QEMU would
-> implement it.  Forgive the stream of consciousness and rhetorical
-> discussion below...
->
->  - Does it make sense that a device itself can opt-out of p2p mappings?
->    This is simply an MMIO access from another device rather than from
->    the CPU.  Vendors cannot preclude this use case on bare metal,
->    should they be able to in a VM?  We create heterogeneous p2p maps,
->    device A can access device B, but device B maybe can't access device
->    A.  Seems troublesome.
->
->  - If we can't have a per-device policy, then we'd need a per VM
->    policy, likely some way to opt-out of all p2p mappings for vfio
->    devices.  We need to support hotplug of devices though, so is it a
->    per VM policy or is it a per device policy which needs to be
->    consistent among all attached devices?  Perhaps a
->    "enable_p2p=on/off" option on the vfio-pci device, default [on] to
->    match current behavior.  For any case of this option being set to
->    non-default, all devices would need to set it to the same value,
->    non-compliant devices rejected.
->
->  - We could possibly allow migration=on,enable_p2p=on for a non-NDMA
->    device, but the rules change if additional devices are added, they
->    need to be rejected or migration support implicitly disappears.  That
->    seems hard to document, non-deterministic as far as a user is
->    concerned. So maybe for a non-NDMA device we'd require
->    enable_p2p=off in order to set migration=on.  That means we could
->    never enable migration on non-NDMA devices by default, which
->    probably means we also cannot enable it by default on NDMA devices
->    or we get user confusion/inconsistency.
->
->  - Can a user know which devices will require enable_p2p=off in order
->    to set migration=on?  "Read the error log" is a poor user experience
->    and difficult hurdle for libvirt.
->
-> So in order to create a predictable QEMU experience in the face of
-> optional NDMA per device, I think we preclude being able to enable
-> migration support for any vfio device by default and we have an
-> exercise to determine how a user or management tool could easily
-> determine NDMA compatibility :-\
+> IIUC, the report for my above example will be:
+> 
+>          | write (reordered) to 0xaaaa of ...:
+>          | foo+0x... // address of the write to A
+>          | ...
+>          |  |
+>          |  +-> reordered to: foo+0x... // address of the callsite to bar() in foo()
+> 
+> , right? Because in replace_stack_entry(), it's not the top frame where
+> the race occurred that gets swapped, it's the frame which belongs to the
+> same function as the original access that gets swapped. In other words,
+> when KCSAN finds the problem, top entries of the calling stack are:
+> 
+> 	[0] bar+0x.. // address of the write to B
+> 	[1] foo+0x.. // address of the callsite to bar() in foo()
+> 
+> after replace_stack_entry(), they changes to:
+> 
+> 	[0] bar+0x.. // address of the write to B
+> skip  ->[1] foo+0x.. // address of the write to A
+> 
+> , as a result the report won't mention bar() at all.
 
-Hm, maybe we can take a page out of the confidential guest support book
-and control this like we do for the virtio iommu flag?
+Correct.
 
-I'm not sure whether there is a pressing need to support p2p for
-non-NDMA devices?
+> And I think a better report will be:
+> 
+>          | write (reordered) to 0xaaaa of ...:
+>          | foo+0x... // address of the write to A
+>          | ...
+>          |  |
+>          |  +-> reordered to: bar+0x... // address of the write to B in bar()
+> 
+> because it tells users the exact place the accesses get reordered. That
+> means maybe we want something as below? Not completely tested, but I
+> play with scope checking a bit, seems it gives what I want. Thoughts?
 
-> There's a fine line between writing an inter-operable driver and
-> writing a driver for the current QEMU implementation.  Obviously we want
-> to support the current QEMU implementation, but we want an interface
-> that can accommodate how that implementation might evolve.  Once we
-> start telling driver authors to expect specific flows rather than
-> looking at the operation of each bit, then our implementations become
-> more fragile, less versatile relative to the user.
+This is problematic because it makes it much harder to actually figure
+out what's going on, given "reordered to" isn't a full stack trace. So
+if you're deep in some call hierarchy, seeing a random "reordered to"
+line is quite useless. What I want to see, at the very least, is the ip
+to the same function where the original access happened.
 
-What is actually on the table regarding the current QEMU implementation?
-The interface is still marked as experimental, so we have some room for
-changes, but we probably don't want to throw everything away.
+We could of course try and generate a full stack trace at "reordered
+to", but this would entail
 
->
->> > > > Userspace can attempt RESUMING -> RUNNING regardless of what we specify,
->> > > > so a driver needs to be prepared for such an attempted state change
->> > > > either way.  So what's the advantage to telling a driver author that
->> > > > they can expect a given behavior?    
->> > > 
->> > > The above didn't tell a driver author to expect a certain behavior, it
->> > > tells userspace what to do.  
->> > 
->> >   "The migration driver can rely on user-space issuing a
->> >    VFIO_DEVICE_RESET prior to starting RESUMING."  
->> 
->> I trimmed too much, the original text you quoted was
->> 
->> "To abort a RESUMING issue a VFIO_DEVICE_RESET."
->> 
->> Which I still think is fine.
->
-> If we're writing a specification, that's really a MAY statement,
-> userspace MAY issue a reset to abort the RESUMING process and return
-> the device to RUNNING.  They MAY also write the device_state directly,
-> which MAY return an error depending on various factors such as whether
-> data has been written to the migration state and whether that data is
-> complete.  If a failed transitions results in an ERROR device_state,
-> the user MUST issue a reset in order to return it to a RUNNING state
-> without closing the interface.
+	a) allocating 2x unsigned long[64] on the stack (or moving to
+	   static storage),
+	b) further increasing the report length,
+	c) an even larger number of possibly distinct reports for the
+	   same issue; this makes deduplication even harder.
 
-Are we actually writing a specification? If yes, we need to be more
-clear on what is mandatory (MUST), advised (SHOULD), or allowed
-(MAY). If I look at the current proposal, I'm not sure into which
-category some of the statements fall.
+The reason I couldn't justify all that is that when I looked through
+several dozen "reordered to" reports, I never found anything other than
+the ip in the function frame of the original access useful. That, and in
+most cases the "reordered to" location was in the same function or in an
+inlined function.
 
->
-> A recommendation to use reset to skip over potential error conditions
-> when the goal is simply a new, clean RUNNING state irrespective of data
-> written to the migration region, is fine.  But drivers shouldn't be
-> written with only that expectation, just like they shouldn't expect a
-> reset precondition to entering RESUMING.
->  
->> > Tracing that shows a reset preceding entering RESUMING doesn't suggest
->> > to me that QEMU is performing a reset for the specific purpose of
->> > entering RESUMING.  Correlation != causation.  
->> 
->> Kernel doesn't care why qemu did it - it was done. Intent doesn't
->> matter :)
->
-> This is exactly the sort of "designed for QEMU implementation"
-> inter-operability that I want to avoid.  It doesn't take much of a
-> crystal ball to guess that gratuitous and redundant device resets slow
-> VM instantiation and are a likely target for optimization.
+The below patch would do what you'd want I think.
 
-Which brings me back to my question above: Are we wedded to all details
-of the current QEMU implementation? Should we consider some of them more
-as a MAY? Can we change QEMU to do things differently, given the
-experimental nature of the support?
+My opinion is to err on the side of simplicity until there is evidence
+we need it. Of course, if you have a compelling reason that we need it
+from the beginning, happy to send it as a separate patch on top.
+
+What do you think?
+
+Thanks,
+-- Marco
+
+------ >8 ------
+
+From: Marco Elver <elver@google.com>
+Date: Mon, 6 Dec 2021 16:35:02 +0100
+Subject: [PATCH] kcsan: Show full stack trace of reordered-to accesses
+
+Change reports involving reordered accesses to show the full stack trace
+of "reordered to" accesses. For example:
+
+ | ==================================================================
+ | BUG: KCSAN: data-race in test_kernel_wrong_memorder / test_kernel_wrong_memorder
+ |
+ | read-write to 0xffffffffc02d01e8 of 8 bytes by task 2481 on cpu 2:
+ |  test_kernel_wrong_memorder+0x57/0x90
+ |  access_thread+0xb7/0x100
+ |  kthread+0x2ed/0x320
+ |  ret_from_fork+0x22/0x30
+ |
+ | read-write (reordered) to 0xffffffffc02d01e8 of 8 bytes by task 2480 on cpu 0:
+ |  test_kernel_wrong_memorder+0x57/0x90
+ |  access_thread+0xb7/0x100
+ |  kthread+0x2ed/0x320
+ |  ret_from_fork+0x22/0x30
+ |   |
+ |   +-> reordered to: test_delay+0x31/0x110
+ |                     test_kernel_wrong_memorder+0x80/0x90
+ |
+ | Reported by Kernel Concurrency Sanitizer on:
+ | CPU: 0 PID: 2480 Comm: access_thread Not tainted 5.16.0-rc1+ #2
+ | Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS 1.14.0-2 04/01/2014
+ | ==================================================================
+
+Signed-off-by: Marco Elver <elver@google.com>
+---
+ kernel/kcsan/report.c | 33 +++++++++++++++++++++++----------
+ 1 file changed, 23 insertions(+), 10 deletions(-)
+
+diff --git a/kernel/kcsan/report.c b/kernel/kcsan/report.c
+index 67794404042a..a8317d5f5123 100644
+--- a/kernel/kcsan/report.c
++++ b/kernel/kcsan/report.c
+@@ -317,22 +317,29 @@ replace_stack_entry(unsigned long stack_entries[], int num_entries, unsigned lon
+ {
+ 	unsigned long symbolsize, offset;
+ 	unsigned long target_func;
+-	int skip;
++	int skip, i;
+ 
+ 	if (kallsyms_lookup_size_offset(ip, &symbolsize, &offset))
+ 		target_func = ip - offset;
+ 	else
+ 		goto fallback;
+ 
+-	for (skip = 0; skip < num_entries; ++skip) {
++	skip = get_stack_skipnr(stack_entries, num_entries);
++	for (i = 0; skip < num_entries; ++skip, ++i) {
+ 		unsigned long func = stack_entries[skip];
+ 
+ 		if (!kallsyms_lookup_size_offset(func, &symbolsize, &offset))
+ 			goto fallback;
+ 		func -= offset;
+ 
++		replaced[i] = stack_entries[skip];
+ 		if (func == target_func) {
+-			*replaced = stack_entries[skip];
++			/*
++			 * There must be at least 1 entry left in the original
++			 * @stack_entries, so we know that we will never occupy
++			 * more than @num_entries - 1 of @replaced.
++			 */
++			replaced[i + 1] = 0;
+ 			stack_entries[skip] = ip;
+ 			return skip;
+ 		}
+@@ -341,6 +348,7 @@ replace_stack_entry(unsigned long stack_entries[], int num_entries, unsigned lon
+ fallback:
+ 	/* Should not happen; the resulting stack trace is likely misleading. */
+ 	WARN_ONCE(1, "Cannot find frame for %pS in stack trace", (void *)ip);
++	replaced[0] = 0;
+ 	return get_stack_skipnr(stack_entries, num_entries);
+ }
+ 
+@@ -365,11 +373,16 @@ static int sym_strcmp(void *addr1, void *addr2)
+ }
+ 
+ static void
+-print_stack_trace(unsigned long stack_entries[], int num_entries, unsigned long reordered_to)
++print_stack_trace(unsigned long stack_entries[], int num_entries, unsigned long *reordered_to)
+ {
+ 	stack_trace_print(stack_entries, num_entries, 0);
+-	if (reordered_to)
+-		pr_err("  |\n  +-> reordered to: %pS\n", (void *)reordered_to);
++	if (reordered_to[0]) {
++		int i;
++
++		pr_err("  |\n  +-> reordered to: %pS\n", (void *)reordered_to[0]);
++		for (i = 1; i < NUM_STACK_ENTRIES && reordered_to[i]; ++i)
++			pr_err("                    %pS\n", (void *)reordered_to[i]);
++	}
+ }
+ 
+ static void print_verbose_info(struct task_struct *task)
+@@ -390,12 +403,12 @@ static void print_report(enum kcsan_value_change value_change,
+ 			 struct other_info *other_info,
+ 			 u64 old, u64 new, u64 mask)
+ {
+-	unsigned long reordered_to = 0;
++	unsigned long reordered_to[NUM_STACK_ENTRIES] = { 0 };
+ 	unsigned long stack_entries[NUM_STACK_ENTRIES] = { 0 };
+ 	int num_stack_entries = stack_trace_save(stack_entries, NUM_STACK_ENTRIES, 1);
+-	int skipnr = sanitize_stack_entries(stack_entries, num_stack_entries, ai->ip, &reordered_to);
++	int skipnr = sanitize_stack_entries(stack_entries, num_stack_entries, ai->ip, reordered_to);
+ 	unsigned long this_frame = stack_entries[skipnr];
+-	unsigned long other_reordered_to = 0;
++	unsigned long other_reordered_to[NUM_STACK_ENTRIES] = { 0 };
+ 	unsigned long other_frame = 0;
+ 	int other_skipnr = 0; /* silence uninit warnings */
+ 
+@@ -408,7 +421,7 @@ static void print_report(enum kcsan_value_change value_change,
+ 	if (other_info) {
+ 		other_skipnr = sanitize_stack_entries(other_info->stack_entries,
+ 						      other_info->num_stack_entries,
+-						      other_info->ai.ip, &other_reordered_to);
++						      other_info->ai.ip, other_reordered_to);
+ 		other_frame = other_info->stack_entries[other_skipnr];
+ 
+ 		/* @value_change is only known for the other thread */
+-- 
+2.34.1.400.ga245620fadb-goog
 
