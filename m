@@ -2,133 +2,69 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 906CB46A8F8
-	for <lists+linux-doc@lfdr.de>; Mon,  6 Dec 2021 21:58:28 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 58F3346AAFA
+	for <lists+linux-doc@lfdr.de>; Mon,  6 Dec 2021 22:52:29 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S230394AbhLFVBz (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 6 Dec 2021 16:01:55 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:54840 "EHLO
+        id S1355947AbhLFVz5 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 6 Dec 2021 16:55:57 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:40294 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1350115AbhLFVBr (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Mon, 6 Dec 2021 16:01:47 -0500
-Received: from mail-wr1-x42b.google.com (mail-wr1-x42b.google.com [IPv6:2a00:1450:4864:20::42b])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 7B411C061D60;
-        Mon,  6 Dec 2021 12:58:18 -0800 (PST)
-Received: by mail-wr1-x42b.google.com with SMTP id i5so25092035wrb.2;
-        Mon, 06 Dec 2021 12:58:18 -0800 (PST)
+        with ESMTP id S231199AbhLFVz5 (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Mon, 6 Dec 2021 16:55:57 -0500
+Received: from mail-yb1-xb2a.google.com (mail-yb1-xb2a.google.com [IPv6:2607:f8b0:4864:20::b2a])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 09D2FC061746
+        for <linux-doc@vger.kernel.org>; Mon,  6 Dec 2021 13:52:28 -0800 (PST)
+Received: by mail-yb1-xb2a.google.com with SMTP id e136so35232647ybc.4
+        for <linux-doc@vger.kernel.org>; Mon, 06 Dec 2021 13:52:28 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
-        h=date:from:to:cc:subject:message-id:references:mime-version
-         :content-disposition:in-reply-to;
-        bh=DK4hAvvrL0g/m+zIiQELRMmxA9g3fGN68aSymQFpmw4=;
-        b=ns+q3Q5a/YFhnnV6OVF+Mt3rUmr9uxUqqFynmSsthxdw9baWp1zLvrtmq2p5CHftOV
-         M+7f1l6wrmMQyHblMftzJnSeGXh++0iiymEaqZ9TkqnGyxzpdhZGU7rEj1Zyp5H2FLDc
-         grQd1lN/zGijD2p+r8brP/JZaAB49ZhBkfWIiB+KcQphK2LpzrY9G8XFFQHD8tZqwXY+
-         hycl6tWZMSPLYXpqGHZWA0AJtaIShzSKUmQg917UdzCOe1aMKmUAxc2dhWvVthKSDIkK
-         5em8JyL+2RhW7hQHDVGp1JPG6WVvTXoOM1YqCEvD9GOtMQjEAreFdRs8vAWksKSoQcqu
-         Cmyg==
+        h=mime-version:reply-to:from:date:message-id:subject:to
+         :content-transfer-encoding;
+        bh=U+wvXPwvhucTVlxnfZp7fdTxV1dqI6RrlYLlpej7n+A=;
+        b=A1drCu8/2EbCOqmoAFbJDuTr6v9X1LmPHk/OZr8jE5hpKtRWwd08YftifjBdbkXJUg
+         dmrMD5WSKv18qutIqdGjNuPq33qR9tmxMr9qPeukt9J7LC69eKS2z+NZ4jJJz9Xtr7VM
+         jC33eODMlgpvkNPoFT/fkcQ5Ake3Jxog6ZGc+wYd8KVA/hwp9vT00V5vDhH8f8XpX511
+         CA37p7jeqg1wSNk8BIPAwxzAjlidFTEmA5f+i1k6RS9O1Y3GhbXkQcI2oJ0W64HiQtwM
+         GlnIl/ToQ7+vQb78XcGhn3MvkzRXguXM0naRpVrVrb/310ivxeU424UB6QtcXPlhpNhp
+         WgQw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=x-gm-message-state:date:from:to:cc:subject:message-id:references
-         :mime-version:content-disposition:in-reply-to;
-        bh=DK4hAvvrL0g/m+zIiQELRMmxA9g3fGN68aSymQFpmw4=;
-        b=KvDoR4ODh5Frgnx0+h0+6JSO1xNYp/1qz9U2HzZALkgJ48eGgS4KrBNoUwMFR8oPSF
-         UoK+/MRRwmwMiO2gyl5nW/mxyrWlvLoD8xxpgaLRpqYczjJ0+l3XWULGc7PDlybfApky
-         EFFElAojwFBSDSr/wmOk+4H93qAozaoQ0JOue/MENVaHnO3zvKiUCuVyyYJtJPfR3ZAC
-         Hwg/eGQWGLy+ZDNj66JJnVbx71Rm6IckenHDmgmNMsSgO9ss5q106lA4cSkj4rxFuS5U
-         K8crGVjE3GSB8cRXD5lZjseR4uxbJboSyzXAu3OFH1qfvW34d9odeRwJs/Jn5Ovw+7Ub
-         5GcQ==
-X-Gm-Message-State: AOAM533zOXXq8WepcHatAaaFOGpCVZyWfomh9/PFQ9a1JI8Y9h2T7h1y
-        G+wvgpfRUOxQ+we5AbtVofE=
-X-Google-Smtp-Source: ABdhPJwnO0TTqOoGSYCkB3lOmDvLnLodImOh+yQ3A1lfhP6Q0C/PqnUKVp5NE/Atd4UObejQZ5WWlA==
-X-Received: by 2002:adf:e747:: with SMTP id c7mr46458155wrn.38.1638824297093;
-        Mon, 06 Dec 2021 12:58:17 -0800 (PST)
-Received: from matrix-ESPRIMO-P710 (p200300c78f4e06972f325cc5fe1c0146.dip0.t-ipconnect.de. [2003:c7:8f4e:697:2f32:5cc5:fe1c:146])
-        by smtp.gmail.com with ESMTPSA id az15sm454600wmb.0.2021.12.06.12.58.16
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 06 Dec 2021 12:58:16 -0800 (PST)
-Date:   Mon, 6 Dec 2021 21:58:14 +0100
-From:   Philipp Hortmann <philipp.g.hortmann@gmail.com>
-To:     corbet@lwn.net, linux-doc@vger.kernel.org,
-        linux-kernel@vger.kernel.org
-Cc:     linux-usb@vger.kernel.org, gregkh@linuxfoundation.org
-Subject: [PATCH v3 5/5] Docs: usb: correct format of function names in the
- explanations
-Message-ID: <6ef296c812baabd973e5ae7b661b1620d5fd45be.1638771720.git.philipp.g.hortmann@gmail.com>
-References: <cover.1638771720.git.philipp.g.hortmann@gmail.com>
+        h=x-gm-message-state:mime-version:reply-to:from:date:message-id
+         :subject:to:content-transfer-encoding;
+        bh=U+wvXPwvhucTVlxnfZp7fdTxV1dqI6RrlYLlpej7n+A=;
+        b=tTQIXtEFy2FsHdIyszRuwbcuPPk/mlN0BR8TD82xKLYoUERls+VIPn/BH417iRINu6
+         +rcvlRSbRS50C4ZWMX3i8atalEtd9z8MHg203DmA5a8DKUdmWEQIUT7NnId+W03dOMdm
+         6v8cgzhXvmZavzuEFyB/JLvM7EhWMfXP2HzZZZ61BhFR/FGrRz0GelkhUlAuj9QSREs/
+         ZRioYY1dXnr3HSeKg4Hhu+5deuUPm7smJFXg2dap/PjU119rEU3SsH8VkWwUHq+NYpI+
+         6fEznRSMv3vWOtgSgIdRgl0i8pe3lhcyqve3h6t7s+/6lslkyhTgjD2r+vJX8hI/1MW8
+         CF4A==
+X-Gm-Message-State: AOAM531MTy3hHHYIyYH0X0/3uQhJRaHcZn5LlkzKyVmDuDJCdBfV2rRD
+        ORBBSNTwQSwLpI1QjbYeKRa6/9nx+8VCtdb1Bnk=
+X-Google-Smtp-Source: ABdhPJwGP4XOziDvK97TQZ20UXdtswrtdpCxtQSBPll8g3OW2CZQ6HzzHIFnus1Qmz6FEozwBECx4TP8w+380fssLDk=
+X-Received: by 2002:a25:ad06:: with SMTP id y6mr43839851ybi.278.1638827547324;
+ Mon, 06 Dec 2021 13:52:27 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <cover.1638771720.git.philipp.g.hortmann@gmail.com>
+Received: by 2002:a05:7110:91a4:b0:fe:6c12:9189 with HTTP; Mon, 6 Dec 2021
+ 13:52:26 -0800 (PST)
+Reply-To: mauhin13@gmail.com
+From:   Maureen Hinckley <bonfacemuchoki111@gmail.com>
+Date:   Tue, 7 Dec 2021 00:52:26 +0300
+Message-ID: <CAGdddHJh=8bNKeNqihaaKsrWmz89kWsSk7ZPf1twu3_Ru7LkMg@mail.gmail.com>
+Subject: 
+To:     undisclosed-recipients:;
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Correct format of function names like the following example:
-      "`usb_bulk_msg` function" to "usb_bulk_msg()"
+--=20
+Hello,
 
-Signed-off-by: Philipp Hortmann <philipp.g.hortmann@gmail.com>
----
- .../driver-api/usb/writing_usb_driver.rst     | 19 +++++++++----------
- 1 file changed, 9 insertions(+), 10 deletions(-)
+I am Maureen Hinckley and my foundation is donating ($2.2 Million.
+Dollars) to you. Contact us via my email at (mauhin13@gmail.com) for
+further details.
 
-diff --git a/Documentation/driver-api/usb/writing_usb_driver.rst b/Documentation/driver-api/usb/writing_usb_driver.rst
-index 1968cf5c55f6..9f4181cafc41 100644
---- a/Documentation/driver-api/usb/writing_usb_driver.rst
-+++ b/Documentation/driver-api/usb/writing_usb_driver.rst
-@@ -220,10 +220,10 @@ successfully or not and then returns.
- 
- This read function works a bit differently from the write function in
- that we do not use an urb to transfer data from the device to the
--driver. Instead we call the :c:func:`usb_bulk_msg` function, which can be used
-+driver. Instead we call usb_bulk_msg(), which can be used
- to send or receive data from a device without having to create urbs and
--handle urb completion callback functions. We call the :c:func:`usb_bulk_msg`
--function, giving it a buffer into which to place any data received from
-+handle urb completion callback functions. We call usb_bulk_msg(),
-+giving it a buffer into which to place any data received from
- the device and a timeout value. If the timeout period expires without
- receiving any data from the device, the function will fail and return an
- error message. This can be shown with the following code::
-@@ -244,13 +244,13 @@ error message. This can be shown with the following code::
-     }
- 
- 
--The :c:func:`usb_bulk_msg` function can be very useful for doing single reads
-+usb_bulk_msg() can be very useful for doing single reads
- or writes to a device; however, if you need to read or write constantly to
- a device, it is recommended to set up your own urbs and submit them to
- the USB subsystem. The template uses urbs for read and write.
- 
- When the user program releases the file handle that it has been using to
--talk to the device, the release function in the driver is called. In
-+talk to the device, skel_release() in the driver is called. In
- this function we decrement our private usage count and wait for possible
- pending writes::
- 
-@@ -262,9 +262,8 @@ One of the more difficult problems that USB drivers must be able to
- handle smoothly is the fact that the USB device may be removed from the
- system at any point in time, even if a program is currently talking to
- it. It needs to be able to shut down any current reads and writes and
--notify the user-space programs that the device is no longer there. The
--following code (function ``skel_delete``) is an example of how to do
--this::
-+notify the user-space programs that the device is no longer there.
-+skel_delete() is an example of how to do this::
- 
-     static void skel_delete(struct kref *kref)
-     {
-@@ -283,8 +282,8 @@ is initialized and set to false. For every read, write and other
- functions that expect a device to be present, the driver first checks
- this flag to see if the device is still present. If not, a ``-ENODEV``
- error is returned to the user-space program. When the device is
--disconnected, the ``skel_disconnect`` function is called. It sets
--``disconnected`` to true and cleans up.
-+disconnected, skel_disconnect() is called. It sets ``disconnected``
-+to true and cleans up.
- 
- Isochronous Data
- ================
--- 
-2.25.1
-
+Best Regards,
+Mrs. Maureen Hinckley,
+Copyright =C2=A92021 The Maureen Hinckley Foundation All Rights Reserved.
