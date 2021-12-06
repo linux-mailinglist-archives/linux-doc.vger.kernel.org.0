@@ -2,82 +2,83 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 449EB469F45
-	for <lists+linux-doc@lfdr.de>; Mon,  6 Dec 2021 16:43:50 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 1A19246A0D0
+	for <lists+linux-doc@lfdr.de>; Mon,  6 Dec 2021 17:11:28 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1356555AbhLFPqx (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 6 Dec 2021 10:46:53 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:32924 "EHLO
+        id S1377902AbhLFQOz (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 6 Dec 2021 11:14:55 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:40880 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1390069AbhLFPlv (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Mon, 6 Dec 2021 10:41:51 -0500
-Received: from casper.infradead.org (casper.infradead.org [IPv6:2001:8b0:10b:1236::1])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id B77A3C0698CB
-        for <linux-doc@vger.kernel.org>; Mon,  6 Dec 2021 07:25:35 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-        d=infradead.org; s=casper.20170209; h=In-Reply-To:Content-Type:MIME-Version:
-        References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
-        Content-Transfer-Encoding:Content-ID:Content-Description;
-        bh=9zaj0vvOAuaqeJVKcN9fLCO3atOJhN+jBhvKBL3Oadw=; b=C3AzfweDa/y0Nuk6n5G7NXTZSs
-        SEdzwVUvoKfEX/FyKuHovFA7pPrVuTXvBOyb69l67bprCli9x1DFRS5kWcRfu3sZaj7KSbSKhF6Lo
-        2UhiziWZ2nSHbvKXwE8MmSsOeJojkmSX6SVPc845jRZyPHga9SKVHjj/JMTeyHXnXZRhOrV9/WQyt
-        /pMCOsn0AsYrmL0pOdt71e0ChU8v+0K8IXEM5FR2bBEpL8/spXoTMKBBceLds4VlFSrGuhaYYyk+n
-        wmxxcjTYAKN/bT9wXHzyZ9trEh5WocTYMR857vdyJiR24E+2+1RgUHKN9Id0zJDBmCsfLznjRL2Hu
-        3+gF6Nrg==;
-Received: from willy by casper.infradead.org with local (Exim 4.94.2 #2 (Red Hat Linux))
-        id 1muFrx-00545o-Qz; Mon, 06 Dec 2021 15:25:33 +0000
-Date:   Mon, 6 Dec 2021 15:25:33 +0000
-From:   Matthew Wilcox <willy@infradead.org>
-To:     Akira Yokosawa <akiyks@gmail.com>
-Cc:     linux-doc@vger.kernel.org, Jonathan Corbet <corbet@lwn.net>
-Subject: Re: css missing
-Message-ID: <Ya4rbTf5fZm6xG7o@casper.infradead.org>
-References: <Ya4YvBcsxXLhjwRj@casper.infradead.org>
- <b4db5978-c6cd-edf0-fcd8-bb20aa0e2cbf@gmail.com>
+        with ESMTP id S1356113AbhLFQOc (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Mon, 6 Dec 2021 11:14:32 -0500
+Received: from mail-io1-xd34.google.com (mail-io1-xd34.google.com [IPv6:2607:f8b0:4864:20::d34])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 87BB0C21A26B;
+        Mon,  6 Dec 2021 07:56:43 -0800 (PST)
+Received: by mail-io1-xd34.google.com with SMTP id z18so13475036iof.5;
+        Mon, 06 Dec 2021 07:56:43 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc;
+        bh=/B+O/WLoYXrsrc0/uuALBJe9vwwa1HcCwSBxBiKBwRQ=;
+        b=XDjn7zFyOLX4YKe0pRtXSzcpVmHH8BCKubpnnYYNmRsD2NBxdkT89tHFqHwO213/zT
+         Eo8fj6G3xNtjlKq08VOWXbeT33MmvoUTnE0Q+jBPQO4fXsQRUePR4//SWzR1siZ4UyX9
+         Pc/+bj+BFy6DbKjLBu+d8tYKnGkcCZ6qibYFZ0pTVocuvyS0vdLFSkgUOabTTskqg2Lf
+         WX7rga7nY7pUFXUeWizyayVNgLjvYheZy1Wx+LYC0eQhtRz2cAFZpcUuaBKIjBaNoGHR
+         TaIOiJf7RJ86Wipd61Co+rPsMaMTjLk+Kt31Irq4l6dXcW8XJGnhPZDl4WhWQqxYYrp9
+         4JwA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=/B+O/WLoYXrsrc0/uuALBJe9vwwa1HcCwSBxBiKBwRQ=;
+        b=KeJ0ZwsJAPDZQEMmzopZikdd4Y4yc3Ts72eNthr86uUCzuV2I9MYWaosHgFWWYgiDU
+         9kcRwjo/3WBOPXCuiIWtTEthG3Eh4U/gvw0Q8/tiFdZvEpEYXkYYv1HUqm1UvEqKW120
+         CCvXePHdA5oRAkMd95nyf4b4CFwt0ql0wviQ2/84CR376yxLAiOXVM5Ps3/ZOUQU23DE
+         6Gmn+jujR79vqZBDY8wkXvlpx2kNHYVVHny8GVlTJ0x19GzViyyU67ky9CG80YWkaxw5
+         Rg+lLPJyIORDbnWVZQG/QR5ttlMMPKnhKcD8XGqvJUcELhjckytplureQ6fEVUjoi2NX
+         /R5w==
+X-Gm-Message-State: AOAM533T3Of5CAkGaGup6s6iA2gd9kyCEUcYy1O9VBObZqlTmA1YJCYy
+        MGWB+OMTdk7NH3rq7BJXxmbMns+5eSdFxdUR5nrlGrm6bng=
+X-Google-Smtp-Source: ABdhPJy5lnIolLJAuQyxllhbDHoEy96j9+0RJW+gR/oW2NKf7JcXvGjjMR8nTAB744p+sbWn5ftRhugnfmCByL5y9tE=
+X-Received: by 2002:a05:6602:1581:: with SMTP id e1mr34067837iow.64.1638806202927;
+ Mon, 06 Dec 2021 07:56:42 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <b4db5978-c6cd-edf0-fcd8-bb20aa0e2cbf@gmail.com>
+References: <20211206140313.5653-1-ojeda@kernel.org> <20211206140313.5653-12-ojeda@kernel.org>
+ <Ya4mAqoOa8zIeZGZ@kroah.com>
+In-Reply-To: <Ya4mAqoOa8zIeZGZ@kroah.com>
+From:   Miguel Ojeda <miguel.ojeda.sandonis@gmail.com>
+Date:   Mon, 6 Dec 2021 16:56:32 +0100
+Message-ID: <CANiq72kCmLgrv++mFygR6dt0xOhfv04o9j6jYLQ1N+zLNvqohQ@mail.gmail.com>
+Subject: Re: [PATCH 11/19] vsprintf: add new `%pA` format specifier
+To:     Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+Cc:     Miguel Ojeda <ojeda@kernel.org>,
+        Linus Torvalds <torvalds@linux-foundation.org>,
+        rust-for-linux <rust-for-linux@vger.kernel.org>,
+        Linux Kbuild mailing list <linux-kbuild@vger.kernel.org>,
+        Linux Doc Mailing List <linux-doc@vger.kernel.org>,
+        linux-kernel <linux-kernel@vger.kernel.org>,
+        Gary Guo <gary@garyguo.net>,
+        Alex Gaynor <alex.gaynor@gmail.com>,
+        Wedson Almeida Filho <wedsonaf@google.com>
+Content-Type: text/plain; charset="UTF-8"
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Tue, Dec 07, 2021 at 12:08:44AM +0900, Akira Yokosawa wrote:
-> Hi,
-> 
-> On Mon, 6 Dec 2021 14:05:48 +0000, Matthew Wilcox wrote:
-> > I don't know what changed to cause this (could be something in Debian,
-> > could be something in the kernel).
-> > 
-> > On August 16th, I generated a 'make htmldocs' that looks fine.
-> > Yesterday, I generated one and it's missing these two crucial lines
-> > (there are many other changes, but restoring these two lines to any
-> > given file makes it look fine):
-> > 
-> >    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
-> >    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-> > 
-> > I can't find any commits that look relevant.  I have sphinx 4.3.1-1
-> > installed.  I also tried with 4.2.0-5 with the same result.
-> 
-> I guess you have sphinx-rtd-theme 1.0.0 installed along the way.
+On Mon, Dec 6, 2021 at 4:46 PM Greg Kroah-Hartman
+<gregkh@linuxfoundation.org> wrote:
+>
+> That should be in a .h file somewhere.  Remember, don't put #ifdef in .c
+> files please.
 
-I do!
+Will do, thanks for reviewing!
 
-Package: python3-sphinx-rtd-theme
-Source: sphinx-rtd-theme
-Version: 1.0.0+dfsg-1
+> Same here, this should not be needed if you put it in a .h file
+> correctly.
 
-> It lost compatibility with Documentation/conf.py.
-> 
-> It has been fixed by commit d69dab7de208 ("docs: conf.py: fix support
-> for Readthedocs v 1.0.0") in docs-next branch of the -doc tree.
-> It is not merged upstream yet, though.
+This one is mimicking the `CONFIG_BLOCK` one (`case 'g'` a bit above)
+-- but we can change it, of course.
 
-Thanks!  Tried it and the css are indeed back:
-
-      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
-      <link rel="stylesheet" href="_static/theme_overrides.css" type="text/css" />
-
-Jon, do you want to hurry that patch into Linus' tree before 5.17?
+Cheers,
+Miguel
