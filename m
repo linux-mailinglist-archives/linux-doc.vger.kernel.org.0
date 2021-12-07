@@ -2,40 +2,40 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id C86E946BE3B
-	for <lists+linux-doc@lfdr.de>; Tue,  7 Dec 2021 15:54:22 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 9DD6846BE41
+	for <lists+linux-doc@lfdr.de>; Tue,  7 Dec 2021 15:54:27 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S238281AbhLGO5w (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 7 Dec 2021 09:57:52 -0500
-Received: from mail-bn8nam12on2045.outbound.protection.outlook.com ([40.107.237.45]:12385
-        "EHLO NAM12-BN8-obe.outbound.protection.outlook.com"
+        id S238282AbhLGO54 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 7 Dec 2021 09:57:56 -0500
+Received: from mail-co1nam11on2041.outbound.protection.outlook.com ([40.107.220.41]:3361
+        "EHLO NAM11-CO1-obe.outbound.protection.outlook.com"
         rhost-flags-OK-OK-OK-FAIL) by vger.kernel.org with ESMTP
-        id S230088AbhLGO5w (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Tue, 7 Dec 2021 09:57:52 -0500
+        id S238280AbhLGO54 (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Tue, 7 Dec 2021 09:57:56 -0500
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=XjbOe5TjJWGRtsqqIF2qJ2VpL92KglFGpcezzRsc1Qa1lZL70K21ErIXCuVL4pk3fszl4gcZUJTYWZuQuwl5EclKxJ/5RYB8VgRE7mK1Fl8I6Ck6iPU0Kn8x0YsAi3/AKPimAB1IHqmm6b9bX9pxcQhd/EOV49VPz0/fQycPACcv2/Rs6VCeMOx8nst7ta9sv6BbM/pofb/k/CAiThl0uMPsriEK010onz+czTEEkwMpVzF/3xkwidMJS/KSAt/CQJyEM3Ul8rlqeWPpHRHLfQWjaD2gPwYKF+Jxd+WC195hLQCLJBt5vlHTPCXz6kTrJqr7H7NzYUrl2LZGhgkL4w==
+ b=hJ12MVc1gkKsthOQDEsZGLT5qPgw6/3hTaHr4LE27QHdGkkIMV4oLUnhpaMqtObO4STN+vWr0kGrFULj2JWKScS7WShlFlQJm1FvWij1TcMwANf+scvTjULnawzf5smDUxeUMqa2TEgTJ0Re76sH5LRlRp4pBaIK5iDNgACg+DBp/T1qGZwGydWORqOuFxItGfU7uWo5mNqU6SytveocsdHZdAzoQbKOADzmJae1arEDHe8UOA7Tq1uBlKlfBgu58KYusAmbdxm7pyO5iH55UfktZGzjG06G39+BDvUGG4sz1Uqo6A6xwDzGb1p8mi1xrGknioGT5Gfk/Nl3MNG3Pg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=LXPkcDirSVzKYjWAnrUMru1Nl3TdMk9JwLK6zJZ6VfY=;
- b=Z3XpGD8cgTSLhvrYptJDDOI/SyERLVZQ5iAT51UY0K/GHBapr0pMweYMhbBpAy8A45YTk1/Q9rni3r3Fg1POGcLfu6LOp76/jgf7DQVhp9DW8AZCoxZ9pBrnf97JDhp+eQ9m143As+t3qNT9j21h9XbuuDLnOKQKQEu+auj7c3iKh9aHmtBRF24phIKod2+pJPfIiL+bU3710CwCUn56l4Jx5elpgj60YG40ruwKRJQTeQ6JOdkXUlW2tWAqLJcfqBfcxHVFjzsKWD8aeDi+bfU1QjIh+0MfDiK4Yr5r6b9BfPpoV/mhZL4T6f8tRA9PC/uuNZLSmm/x7HIbqkYrrA==
+ bh=d7qFq29uFmiCZ/7vZ+ZqzCVgNHbmyngG/bI5/kFd/MA=;
+ b=GmcZJ4qbGGoq8M8GiGbvaR4gHg90Xb7kLp5iev3i0VX4hwZwX9f0N+MRe7s/BB28rBAenZcaitTESkB5bsZKAHADP+sorEuNU3Fuo2srjmo8YR8H9ghNdvwx5UIJVqg5sbFMKrPlIRtSj516dyb+TdmzR7fRJbSwGSldvYpp22NCNZ2negZaDretyh5HVsKYM1g63et/GUgzL6ttavWh9907T7nRwL5XgpUTUxpsI81/hSGYtdooo2ZomdcXlV8ACE5qG6fnBckJf4m8kNYbna6ooSyx3nO325AdkEhBUr5yBd1lWEjSNtqVlUvKydZy9U2A/OxxlgF9KLnPDEesbg==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
  165.204.84.17) smtp.rcpttodomain=emersion.fr smtp.mailfrom=amd.com;
  dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
  header.from=amd.com; dkim=none (message not signed); arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=LXPkcDirSVzKYjWAnrUMru1Nl3TdMk9JwLK6zJZ6VfY=;
- b=spoocCuyar9ZosWs4/2NurV1pffkZcYtwEe+KksIseNvyYtcp5tVVl6Jt8QyEFfA6BwrwOHX5HR8zlv4HAhfMNuvsMa1/FVaQZwnVmgSMzdy9YsbnAE2/FVAn8sTxzlKCseSsV15zRptHeFyBSrT+GXKEXAYswRDPV3He/LridU=
-Received: from DM6PR13CA0021.namprd13.prod.outlook.com (2603:10b6:5:bc::34) by
- BN9PR12MB5337.namprd12.prod.outlook.com (2603:10b6:408:102::9) with Microsoft
+ bh=d7qFq29uFmiCZ/7vZ+ZqzCVgNHbmyngG/bI5/kFd/MA=;
+ b=jrXcQ0baSufcpw0TFoXMpfoK0fwMC8Hm1bjfQFX+eflbr9A3SH/jdq/rJtC6fBkSoeqYbwMxwxNfdqe8ckkvFkKTQV4QABiFWDDmggLfdeUGlJIfLhzQ50OBgZErXyCjumNINCzrmqxU0ist+scHi5JGD0UgerJgrZsoyAbqfwY=
+Received: from DM6PR13CA0010.namprd13.prod.outlook.com (2603:10b6:5:bc::23) by
+ DM6PR12MB3451.namprd12.prod.outlook.com (2603:10b6:5:11d::11) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.4755.11; Tue, 7 Dec 2021 14:54:20 +0000
+ 15.20.4755.21; Tue, 7 Dec 2021 14:54:23 +0000
 Received: from DM6NAM11FT025.eop-nam11.prod.protection.outlook.com
- (2603:10b6:5:bc:cafe::61) by DM6PR13CA0021.outlook.office365.com
- (2603:10b6:5:bc::34) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4778.5 via Frontend
- Transport; Tue, 7 Dec 2021 14:54:19 +0000
+ (2603:10b6:5:bc:cafe::6e) by DM6PR13CA0010.outlook.office365.com
+ (2603:10b6:5:bc::23) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4778.10 via Frontend
+ Transport; Tue, 7 Dec 2021 14:54:23 +0000
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
  smtp.mailfrom=amd.com; dkim=none (message not signed)
  header.d=none;dmarc=pass action=none header.from=amd.com;
@@ -45,11 +45,11 @@ Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
 Received: from SATLEXMB04.amd.com (165.204.84.17) by
  DM6NAM11FT025.mail.protection.outlook.com (10.13.172.197) with Microsoft SMTP
  Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.4755.13 via Frontend Transport; Tue, 7 Dec 2021 14:54:19 +0000
+ 15.20.4755.13 via Frontend Transport; Tue, 7 Dec 2021 14:54:22 +0000
 Received: from atma2.hitronhub.home (10.180.168.240) by SATLEXMB04.amd.com
  (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2375.17; Tue, 7 Dec
- 2021 08:54:14 -0600
+ 2021 08:54:18 -0600
 From:   Rodrigo Siqueira <Rodrigo.Siqueira@amd.com>
 To:     Simon Ser <contact@emersion.fr>,
         Michel Daenzer <michel@daenzer.net>,
@@ -69,9 +69,9 @@ CC:     <linux-doc@vger.kernel.org>, <qingqing.zhuo@amd.com>,
         Alex Deucher <alexander.deucher@amd.com>,
         <bhawanpreet.lakha@amd.com>,
         Christian Koenig <christian.koenig@amd.com>
-Subject: [PATCH v3 4/6] Documentation/gpu: How to collect DTN log
-Date:   Tue, 7 Dec 2021 09:53:48 -0500
-Message-ID: <20211207145350.286037-5-Rodrigo.Siqueira@amd.com>
+Subject: [PATCH v3 6/6] Documentation/gpu: Add amdgpu and dc glossary
+Date:   Tue, 7 Dec 2021 09:53:50 -0500
+Message-ID: <20211207145350.286037-7-Rodrigo.Siqueira@amd.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20211207145350.286037-1-Rodrigo.Siqueira@amd.com>
 References: <20211207145350.286037-1-Rodrigo.Siqueira@amd.com>
@@ -83,61 +83,381 @@ X-ClientProxiedBy: SATLEXMB03.amd.com (10.181.40.144) To SATLEXMB04.amd.com
  (10.181.40.145)
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: f0cdf20e-7fe6-4877-fbf5-08d9b99172d6
-X-MS-TrafficTypeDiagnostic: BN9PR12MB5337:EE_
-X-Microsoft-Antispam-PRVS: <BN9PR12MB5337D9503C4B455E4F616FD2986E9@BN9PR12MB5337.namprd12.prod.outlook.com>
-X-MS-Oob-TLC-OOBClassifiers: OLM:7691;
+X-MS-Office365-Filtering-Correlation-Id: 77d3dab2-f06d-44e3-7838-08d9b99174c4
+X-MS-TrafficTypeDiagnostic: DM6PR12MB3451:EE_
+X-Microsoft-Antispam-PRVS: <DM6PR12MB345173C109362262408705B3986E9@DM6PR12MB3451.namprd12.prod.outlook.com>
+X-MS-Oob-TLC-OOBClassifiers: OLM:2331;
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: zLupNK0DrNH5QBuI1VOWO2XtD1WEjX6v/8HPh4ZbrSEinoS7polmP9e7jcyVQdroIzPd6RAym0dgydXlrYZGP6XoPEM/hiZ6tTpCHzYbSAo+SP/2VhrqVlwbNEirc7C7InH47a0jQRirHrQm54Py6wwIeOL2fSpDZAyzOGeLeUVbUR2GvsBm/LOd6xuretU1yOnhjNMW86VPYDntvhUwgrSWDfqMm6rjZSZrGHCtHUGgDtMeSqRdOtanLFJjCoSA3FQXTqCpTyja6MzsufmA2SrJjeRi8uExIruhACFYFh9pAsCc+jQlIf9jvIiAtEcItHPDKLxYC+Id1g26Tw9gKay4MQZLGmMD/yvfzCvsAil5LTrGYPbBbS4veNdWU7+EaBuajzAyXGgu62n0m+sE0IRbETeWU2GpiqD5dtI9iqsVeeQVkWtfUjXoiUSFh/kc9iIkpbpWE4/1S+hH6je3QsO+Z13tzvMyVNmmb+uspcUTS+sVvfKQkh7kmqn9uXzoewDBwXTlZU6RPcW0mbNwkorydrPiwZydDtw/LQ9MVXZoh3tOwMV5DZZNqNcZrNHJ9HXqQEMDcm3+CBzZ5Z+wfwgB2AbcH4YDJS1M9G9F1MsekgJ20Dz+bn8PLXX9Y/GXMYQW/4QtJYY7S2+7FLyLiAWx8XS1SwYpaMTqbHRhnoCRDuGsu6q0718nzJhv4C1DlQesYa8PG1Uxe1oyxg7JOEbCR7gMd4M+d2wIXBwLyMobiKT4jMI7Zhmvjh+OH9v3XOpcXhwK3PjN92QTuonlbZELG0B5W7db65ThzKn+t7frfVd3ofeA2iFAff8a778Y
-X-Forefront-Antispam-Report: CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB04.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(4636009)(36840700001)(46966006)(40470700001)(110136005)(54906003)(26005)(8936002)(36756003)(40460700001)(82310400004)(2616005)(7416002)(316002)(921005)(426003)(2906002)(508600001)(1076003)(86362001)(5660300002)(36860700001)(4326008)(186003)(70586007)(8676002)(70206006)(16526019)(6666004)(47076005)(356005)(83380400001)(81166007)(336012)(36900700001);DIR:OUT;SFP:1101;
+X-Microsoft-Antispam-Message-Info: 4NACHdleTvkO/OVN6N9kg/dJaccTk0624f9xSCf/hKZajvpP522vPfEt4Dsz80ycDIkNVVH4JbPRo+uT8FrEH+q+lP371RtEHVdvQcdl0+rAALlAwbdSDbx8nv5N/Nm7xB9fiO/oh/NGFkX1dPIF0AsMCjaOF3fpZtmh5zjEO/XeWk3S2Eam8JdrmqXIJMGlL1enxrXOvV2jhINpqOJxAcRxrzi4TFetDQLkeTtU7juNrya0SlgfJoZxrPofwgne3LSjXrGzbmb0sdXPh1tixh5zHswuMf6sJk1P3IHaqsU8OuG1/dYQWC3vGr5qmUUsUW58mZxnsD/+qKQZve2cGdXYhRdCdr7Yug/aYiRgxweV3/r/d/Ze7S32rz8eijM4BlPPbzTbO7mLefu5UF6fOD/A7MyG0SuvnjgNyIDYuj/l5pciMFFyBKZ1FhYEZPEtmC3shJnlceBQogRHDZORJsMYJq9OOHgpkf9jeMqpVA8JndRJrFdLleYuC9SXO8GR+deISS+Qj8C4OCXdbSN81eFC/5dvYWj86V/o7PXE3FIPs9p7CWzWwD7LfqpSAZPS7/vu/opYq/s+qJp++T8KaJ3wBnWpYT+PNNRJuZL6gZ6GIgG0RVHm6sk7ZtA5UEjr080+7C8cIk3fQgCE/VQtCYaSNjaETdhdLBJQQivZYCPHLo6H48YHztWXORXYUe1NMao9rXLYPZPK91a+ss4WrE7DsB/2HatDtVgO4zL+TW4cQrtNO8eOolbtTAiQlyq4aDnB22mHe2L4tDppw/NuTGq85rL9uG4sxMKUP1inadfghyuzr1TCTGQEOpcNiz9g
+X-Forefront-Antispam-Report: CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB04.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(4636009)(46966006)(36840700001)(40470700001)(81166007)(2906002)(86362001)(921005)(83380400001)(316002)(1076003)(26005)(356005)(70586007)(8936002)(47076005)(110136005)(70206006)(54906003)(186003)(16526019)(4326008)(36860700001)(5660300002)(2616005)(6666004)(36756003)(508600001)(40460700001)(426003)(82310400004)(8676002)(336012)(7416002)(36900700001);DIR:OUT;SFP:1101;
 X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 07 Dec 2021 14:54:19.6942
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 07 Dec 2021 14:54:22.9127
  (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: f0cdf20e-7fe6-4877-fbf5-08d9b99172d6
+X-MS-Exchange-CrossTenant-Network-Message-Id: 77d3dab2-f06d-44e3-7838-08d9b99174c4
 X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[SATLEXMB04.amd.com]
 X-MS-Exchange-CrossTenant-AuthSource: DM6NAM11FT025.eop-nam11.prod.protection.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: BN9PR12MB5337
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM6PR12MB3451
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Introduce how to collect DTN log from debugfs.
+In the DC driver, we have multiple acronyms that are not obvious most of
+the time; the same idea is valid for amdgpu. This commit introduces a DC
+and amdgpu glossary in order to make it easier to navigate through our
+driver.
+
+Changes since V2:
+ - Add MMHUB
+
+Changes since V1:
+ - Yann: Divide glossary based on driver context.
+ - Alex: Make terms more consistent and update CPLIB
+ - Add new acronyms to the glossary
 
 Signed-off-by: Rodrigo Siqueira <Rodrigo.Siqueira@amd.com>
 ---
- Documentation/gpu/amdgpu/display/dc-debug.rst | 17 +++++++++++++++++
- 1 file changed, 17 insertions(+)
+ Documentation/gpu/amdgpu/amdgpu-glossary.rst  |  50 ++++
+ .../gpu/amdgpu/display/dc-glossary.rst        | 243 ++++++++++++++++++
+ Documentation/gpu/amdgpu/display/index.rst    |   1 +
+ Documentation/gpu/amdgpu/index.rst            |   7 +
+ 4 files changed, 301 insertions(+)
+ create mode 100644 Documentation/gpu/amdgpu/amdgpu-glossary.rst
+ create mode 100644 Documentation/gpu/amdgpu/display/dc-glossary.rst
 
-diff --git a/Documentation/gpu/amdgpu/display/dc-debug.rst b/Documentation/gpu/amdgpu/display/dc-debug.rst
-index 6dbd21f7f59e..40c55a618918 100644
---- a/Documentation/gpu/amdgpu/display/dc-debug.rst
-+++ b/Documentation/gpu/amdgpu/display/dc-debug.rst
-@@ -58,3 +58,20 @@ In this case, if you have a pipe split, you will see one small red bar at the
- bottom of the display covering the entire display width and another bar
- covering the second pipe. In other words, you will see a bit high bar in the
- second pipe.
+diff --git a/Documentation/gpu/amdgpu/amdgpu-glossary.rst b/Documentation/gpu/amdgpu/amdgpu-glossary.rst
+new file mode 100644
+index 000000000000..65803bfac776
+--- /dev/null
++++ b/Documentation/gpu/amdgpu/amdgpu-glossary.rst
+@@ -0,0 +1,50 @@
++===============
++AMDGPU Glossary
++===============
 +
-+DTN Debug
-+=========
++Here you can find some generic acronyms used in the amdgpu driver. Notice that
++we have a dedicated glossary for Display Core.
 +
-+DC (DCN) provides an extensive log that dumps multiple details from our
-+hardware configuration. Via debugfs, you can capture those status values by
-+using Display Test Next (DTN) log, which can be captured via debugfs by using::
++.. glossary::
 +
-+  cat /sys/kernel/debug/dri/0/amdgpu_dm_dtn_log
++    CPLIB
++      Content Protection Library
 +
-+Since this log is updated accordingly with DCN status, you can also follow the
-+change in real-time by using something like::
++    DFS
++      Digital Frequency Synthesizer
 +
-+  sudo watch -d cat /sys/kernel/debug/dri/0/amdgpu_dm_dtn_log
++    ECP
++      Enhanced Content Protection
 +
-+When reporting a bug related to DC, consider attaching this log before and
-+after you reproduce the bug.
++    EOP
++      End Of Pipe/Pipeline
++
++    HQD
++      Hardware Queue Descriptor
++
++    KCQ
++      Kernel Compute Queue
++
++    KGQ
++      Kernel Graphics Queue
++
++    KIQ
++      Kernel Interface Queue
++
++    MMHUB
++      Multi-Media HUB
++
++    MQD
++      Memory Queue Descriptor
++
++    PPLib
++      PowerPlay Library - PowerPlay is the power management component.
++
++    SMU
++      System Management Unit
++
++    VCE
++      Video Compression Engine
++
++    VCN
++      Video Codec Next
+diff --git a/Documentation/gpu/amdgpu/display/dc-glossary.rst b/Documentation/gpu/amdgpu/display/dc-glossary.rst
+new file mode 100644
+index 000000000000..547c0bfbb3e2
+--- /dev/null
++++ b/Documentation/gpu/amdgpu/display/dc-glossary.rst
+@@ -0,0 +1,243 @@
++===========
++DC Glossary
++===========
++
++On this page, we try to keep track of acronyms related to the display
++component. If you do not find what you are looking for, look at the amdgpu
++glossary; if you cannot find it anywhere, consider asking in the amdgfx and
++update this page.
++
++.. glossary::
++
++    ABM
++      Adaptive Backlight Modulation
++
++    APU
++      Accelerated Processing Unit
++
++    ASIC
++      Application-Specific Integrated Circuit
++
++    ASSR
++      Alternate Scrambler Seed Reset
++
++    AZ
++      Azalia (HD audio DMA engine)
++
++    BPC
++      Bits Per Colour/Component
++
++    BPP
++      Bits Per Pixel
++
++    Clocks
++      * PCLK: Pixel Clock
++      * SYMCLK: Symbol Clock
++      * SOCCLK: GPU Engine Clock
++      * DISPCLK: Display Clock
++      * DPPCLK: DPP Clock
++      * DCFCLK: Display Controller Fabric Clock
++      * REFCLK: Real Time Reference Clock
++      * PPLL: Pixel PLL
++      * FCLK: Fabric Clock
++      * MCLK: Memory Clock
++
++    CRC
++      Cyclic Redundancy Check
++
++    CRTC
++      Cathode Ray Tube Controller - commonly called "Controller" - Generates
++      raw stream of pixels, clocked at pixel clock
++
++    CVT
++      Coordinated Video Timings
++
++    DAL
++      Display Abstraction layer
++
++    DC (Software)
++      Display Core
++
++    DC (Hardware)
++      Display Controller
++
++    DCC
++      Delta Colour Compression
++
++    DCE
++      Display Controller Engine
++
++    DCHUB
++      Display Controller HUB
++
++    ARB
++      Arbiter
++
++    VTG
++      Vertical Timing Generator
++
++    DCN
++      Display Core Next
++
++    DCCG
++      Display Clock Generator block
++
++    DDC
++      Display Data Channel
++
++    DIO
++      Display IO
++
++    DPP
++      Display Pipes and Planes
++
++    DSC
++      Display Stream Compression (Reduce the amount of bits to represent pixel
++      count while at the same pixel clock)
++
++    dGPU
++      discrete GPU
++
++    DMIF
++      Display Memory Interface
++
++    DML
++      Display Mode Library
++
++    DMCU
++      Display Micro-Controller Unit
++
++    DMCUB
++      Display Micro-Controller Unit, version B
++
++    DPCD
++      DisplayPort Configuration Data
++
++    DPM(S)
++      Display Power Management (Signaling)
++
++    DRR
++      Dynamic Refresh Rate
++
++    DWB
++      Display Writeback
++
++    FB
++      Frame Buffer
++
++    FBC
++      Frame Buffer Compression
++
++    FEC
++      Forward Error Correction
++
++    FRL
++      Fixed Rate Link
++
++    GCO
++      Graphical Controller Object
++
++    GMC
++      Graphic Memory Controller
++
++    GSL
++      Global Swap Lock
++
++    iGPU
++      integrated GPU
++
++    IH
++      Interrupt Handler
++
++    ISR
++      Interrupt Service Request
++
++    ISV
++      Independent Software Vendor
++
++    KMD
++      Kernel Mode Driver
++
++    LB
++      Line Buffer
++
++    LFC
++      Low Framerate Compensation
++
++    LTTPR
++      Link Training Tunable Phy Repeater
++
++    LUT
++      Lookup Table
++
++    MALL
++      Memory Access at Last Level
++
++    MC
++      Memory Controller
++
++    MPC
++      Multiple pipes and plane combine
++
++    MPO
++      Multi Plane Overlay
++
++    MST
++      Multi Stream Transport
++
++    NBP State
++      Northbridge Power State
++
++    NBIO
++      North Bridge Input/Output
++
++    ODM
++      Output Data Mapping
++
++    OPM
++      Output Protection Manager
++
++    OPP
++      Output Plane Processor
++
++    OPTC
++      Output Pipe Timing Combiner
++
++    OTG
++      Output Timing Generator
++
++    PCON
++      Power Controller
++
++    PGFSM
++      Power Gate Finite State Machine
++
++    PSR
++      Panel Self Refresh
++
++    SCL
++      Scaler
++
++    SDP
++      Scalable Data Port
++
++    SLS
++      Single Large Surface
++
++    SST
++      Single Stream Transport
++
++    TMDS
++      Transition-Minimized Differential Signaling
++
++    TMZ
++      Trusted Memory Zone
++
++    TTU
++      Time to Underflow
++
++    VRR
++      Variable Refresh Rate
++
++    UVD
++      Unified Video Decoder
+diff --git a/Documentation/gpu/amdgpu/display/index.rst b/Documentation/gpu/amdgpu/display/index.rst
+index fe2ecad8df81..e23c752ee5f5 100644
+--- a/Documentation/gpu/amdgpu/display/index.rst
++++ b/Documentation/gpu/amdgpu/display/index.rst
+@@ -26,3 +26,4 @@ table of content:
+    display-manager.rst
+    dc-debug.rst
+    dcn-overview.rst
++   dc-glossary.rst
+diff --git a/Documentation/gpu/amdgpu/index.rst b/Documentation/gpu/amdgpu/index.rst
+index 5c8cbf514097..ff38c360b04e 100644
+--- a/Documentation/gpu/amdgpu/index.rst
++++ b/Documentation/gpu/amdgpu/index.rst
+@@ -334,3 +334,10 @@ smartshift_bias
+ 
+ .. kernel-doc:: drivers/gpu/drm/amd/pm/amdgpu_pm.c
+    :doc: smartshift_bias
++
++AMDGPU Glossary
++===============
++
++.. toctree::
++
++   amdgpu-glossary.rst
 -- 
 2.25.1
 
