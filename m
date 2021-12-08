@@ -2,194 +2,99 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 9E7E746C876
-	for <lists+linux-doc@lfdr.de>; Wed,  8 Dec 2021 01:05:48 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 0A23646C8C0
+	for <lists+linux-doc@lfdr.de>; Wed,  8 Dec 2021 01:36:21 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S242725AbhLHAJS (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 7 Dec 2021 19:09:18 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:41532 "EHLO
+        id S238565AbhLHAju (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 7 Dec 2021 19:39:50 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:48366 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S242675AbhLHAJR (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 7 Dec 2021 19:09:17 -0500
-Received: from mail-lj1-x230.google.com (mail-lj1-x230.google.com [IPv6:2a00:1450:4864:20::230])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id ACF1CC061746
-        for <linux-doc@vger.kernel.org>; Tue,  7 Dec 2021 16:05:46 -0800 (PST)
-Received: by mail-lj1-x230.google.com with SMTP id i63so1141525lji.3
-        for <linux-doc@vger.kernel.org>; Tue, 07 Dec 2021 16:05:46 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=google.com; s=20210112;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc;
-        bh=PkRp1/WhJVVA6i6xAX3mohuTTguHyeyteEeO36GWsMw=;
-        b=AV7GarWqfoyFb49GhbARcORLve3Kgr+ZEDWeWqVFHWQIDWPYTU+Y9UOyx5IPGrX7hq
-         qUq/z3hRSbC3SJUwOtSZa5/DsAEx6tPJCVyJgd0OWPXlEkxTi7fVVTTkKXYkUmm1YJSX
-         etLohbFzctKJkFb8ERUAHI/Jp2wDDuCx9/VEIDzyA8aEEpVdUdAS3gNZ+Wz19TPGYuJU
-         pZz0XYkZ0ryi92EfFgXHabFYi0eCQPIeMam1X8QOHCoq7cs6hqr6ZHCfatAFsTr1Oygn
-         BxwoHhcxB/qjlX/coqglFxEcLnhCepPglrdBia2YYBcijG5L92JLSgKeGloqW3q0ahLD
-         tHSw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc;
-        bh=PkRp1/WhJVVA6i6xAX3mohuTTguHyeyteEeO36GWsMw=;
-        b=yD5fv7qULwz7+a67rbVW+L8KjqmYEtX8370p1LuNoHfqONB1OXCeBhkwEYniSIQFtM
-         bKNrqSVeRnYOakKW2zWVHo5Vu3z0ju+A7AYD2/qq5JFdqfqmo5oc8iIEr8j0PXgszwlm
-         7PWGV323UZI7fpkOaB0Grmo/PFRK1dmOAJeX+HNJ3pLjMupsA7HaQ2WvEzsBn4Xhp0UC
-         KoZ8c+rmHltwlUeKLSkInSlqbfmX/vSCno6NYRLqUxjH5wQnrr1scv36OwrFEbCIE0DY
-         0kx8TRJj6I+yI19Fym3IS5N0lnuz2TGJ6cwFy8QUEPaAmCXt8vgIlRZADm5bytQZWHam
-         UQ9A==
-X-Gm-Message-State: AOAM5336oWbGIEH7R30+X/anWxjjutD8QfJQiQNotWOJ28HQ4s5m2oGQ
-        7tDtu6gqjmC9mrkoZrUtDXWJFDlCK4MOI8WwTuvdGw==
-X-Google-Smtp-Source: ABdhPJzPgJkU3kVjubRmB/GXIdL86/aIC8VR7QUJp2CfMcc/khiWum+fgoQxAe14XwQtmue20+CERJzWqrsrYrd72bw=
-X-Received: by 2002:a2e:90d0:: with SMTP id o16mr13593ljg.339.1638921944628;
- Tue, 07 Dec 2021 16:05:44 -0800 (PST)
-MIME-Version: 1.0
-References: <20211206140313.5653-1-ojeda@kernel.org> <20211206140313.5653-16-ojeda@kernel.org>
- <CAKwvOd=7QTUH69+ZbT7e8einvgcosTbDkyohmPaUBv6_y8RfrQ@mail.gmail.com>
- <CAKwvOdk9VNenJJN5HnPpGgsHT+OsRsgPGSesQgqMP2aLPWy0NQ@mail.gmail.com> <CAMKQLNJKumnucRHttHFN0cMK_g6kCJ7o0ev_3_RJsmPqbjo08g@mail.gmail.com>
-In-Reply-To: <CAMKQLNJKumnucRHttHFN0cMK_g6kCJ7o0ev_3_RJsmPqbjo08g@mail.gmail.com>
-From:   Nick Desaulniers <ndesaulniers@google.com>
-Date:   Tue, 7 Dec 2021 16:05:33 -0800
-Message-ID: <CAKwvOdk2Z2-GQZ3rxHzdYQGVw2G-w0BmbiwDb_PCDzQaw6MdXw@mail.gmail.com>
-Subject: Re: [PATCH 15/19] Kbuild: add Rust support
-To:     Wedson Almeida Filho <wedsonaf@google.com>
-Cc:     Miguel Ojeda <ojeda@kernel.org>,
-        Masahiro Yamada <masahiroy@kernel.org>,
-        linux-kbuild@vger.kernel.org,
-        Linus Torvalds <torvalds@linux-foundation.org>,
+        with ESMTP id S229503AbhLHAjt (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 7 Dec 2021 19:39:49 -0500
+Received: from sin.source.kernel.org (sin.source.kernel.org [IPv6:2604:1380:40e1:4800::1])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 7C905C061574;
+        Tue,  7 Dec 2021 16:36:18 -0800 (PST)
+Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
+        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+        (No client certificate requested)
+        by sin.source.kernel.org (Postfix) with ESMTPS id C6A11CE1D63;
+        Wed,  8 Dec 2021 00:36:16 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 95194C341C3;
+        Wed,  8 Dec 2021 00:36:14 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+        s=k20201202; t=1638923774;
+        bh=7SzqkW8JF55HGh0LF16R7xhuRyiyRTDHwS0M3iF277g=;
+        h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+        b=Ps+HYLd2q1aVVELfDF+wMAHNTcoP6JDd83AlbUrxoBy0D6IetmkzNQwfB/g8QtBn6
+         TFazPXtqUVsNYa6yyDRSOIvc5Rn5RInHU9Kfr3/Wig7ONTPBkDFpCSPwnQYgSkwBDm
+         b+LeE+7n2XdM9bqIW5+VehCqVdJkKucR3MSe4btsBQNzXISNttOnbqh3UO1dKspUL7
+         3CZHYUdvNEMu3AuT5Kd53Lz15L9MuhSdybhTwtqmCudwZLlDtHtvM8OdqXeMK5EPUU
+         pB96khOg4Io266M1EHxY0MOtEMFgqxrrWkvQzu1n4H2W98ZTmtYnACKnYLEKg7qCe1
+         47ZNOjfH6Gv/Q==
+Date:   Tue, 7 Dec 2021 16:36:13 -0800
+From:   Eric Biggers <ebiggers@kernel.org>
+To:     Bart Van Assche <bvanassche@acm.org>
+Cc:     linux-block@vger.kernel.org, Jens Axboe <axboe@kernel.dk>,
+        linux-doc@vger.kernel.org,
         Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
-        rust-for-linux@vger.kernel.org, linux-doc@vger.kernel.org,
-        linux-kernel@vger.kernel.org, Alex Gaynor <alex.gaynor@gmail.com>,
-        Finn Behrens <me@kloenk.de>,
-        Adam Bratschi-Kaye <ark.email@gmail.com>,
-        Michael Ellerman <mpe@ellerman.id.au>,
-        Sven Van Asbroeck <thesven73@gmail.com>,
-        Gary Guo <gary@garyguo.net>,
-        Boris-Chengbiao Zhou <bobo1239@web.de>,
-        Boqun Feng <boqun.feng@gmail.com>,
-        Douglas Su <d0u9.su@outlook.com>,
-        Dariusz Sosnowski <dsosnowski@dsosnowski.pl>,
-        Antonio Terceiro <antonio.terceiro@linaro.org>,
-        Daniel Xu <dxu@dxuuu.xyz>
-Content-Type: text/plain; charset="UTF-8"
+        linux-kernel@vger.kernel.org
+Subject: Re: [PATCH 0/7] docs: consolidate sysfs-block into Documentation/ABI/
+Message-ID: <Ya/9/RsStgLUnEyy@sol.localdomain>
+References: <20211201084524.25660-1-ebiggers@kernel.org>
+ <0bf11301-4085-f4a1-eeed-c65d0e5563b4@acm.org>
+ <Yak1I/xolvLIOtkf@sol.localdomain>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <Yak1I/xolvLIOtkf@sol.localdomain>
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Tue, Dec 7, 2021 at 3:25 PM Wedson Almeida Filho <wedsonaf@google.com> wrote:
->
-> On Tue, 7 Dec 2021 at 23:21, Nick Desaulniers <ndesaulniers@google.com> wrote:
-> >
-> > On Tue, Dec 7, 2021 at 2:45 PM Nick Desaulniers <ndesaulniers@google.com> wrote:
-> > >
-> > > On Mon, Dec 6, 2021 at 6:07 AM Miguel Ojeda <ojeda@kernel.org> wrote:
-> > > >
-> > >
-> > > ... snip ...
-> > >
-> > > Miguel and team,
-> > > I'm happy to see progress here! Just some quick notes after a first pass.
-> > >
-> > > Testing this series applied on mainline, I see:
-> > > $ make LLVM=1 -j72 defconfig
-> > > $ grep RUST .config
-> > > CONFIG_HAS_RUST=y
-> > > CONFIG_RUSTC_VERSION=14000
-> > > # CONFIG_RUST is not set
-> > > ...
-> > > $ make LLVM=1 -j72 menuconfig
-> > > # enable CONFIG_RUST
-> > > $ make LLVM=1
-> > > ...
-> > >   CALL    scripts/checksyscalls.sh
-> > > error: @path is unstable - use -Z unstable-options to enable its use
-> > >
-> > > error: @path is unstable - use -Z unstable-options to enable its use
-> > > $ rustc --version
-> > > rustc 1.40.0 (73528e339 2019-12-16)
-> > >
-> > > Can we update some Kconfig checks to fix that?
-> >
-> > After now reading though the Documentation/ patch:
-> >
-> > $ rustup update
-> > $ rustc --version
-> > rustc 1.57.0 (f1edd0429 2021-11-29)
-> > $ make LLVM=1 -j72
-> > ...
-> > make[1]: *** No rule to make target
-> > '/usr/local/google/home/ndesaulniers/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/lib.rs',
-> > needed by 'rust/core.o'.  Stop.
->
-> Can you run `rustup component add rust-src`?
->
-> When we change the compiler version, we need to install the source
-> code for `core` for the new version. (We'll update the documentation
-> to reflect that.)
+On Thu, Dec 02, 2021 at 01:05:39PM -0800, Eric Biggers wrote:
+> On Thu, Dec 02, 2021 at 11:32:45AM -0800, Bart Van Assche wrote:
+> > On 12/1/21 12:45 AM, Eric Biggers wrote:
+> > > This series consolidates the documentation for /sys/block/<disk>/queue/
+> > > into Documentation/ABI/, where it is supposed to go (as per Greg KH:
+> > > https://lore.kernel.org/r/YaXXpEAwVGTLjp1e@kroah.com).
+> > > 
+> > > This series also updates MAINTAINERS to associate the block
+> > > documentation with the block layer.
+> > > 
+> > > This series applies to linux-block/for-next.
+> > > 
+> > > Eric Biggers (7):
+> > >    docs: sysfs-block: sort alphabetically
+> > >    docs: sysfs-block: add contact for nomerges
+> > >    docs: sysfs-block: fill in missing documentation from queue-sysfs.rst
+> > >    docs: sysfs-block: document stable_writes
+> > >    docs: sysfs-block: document virt_boundary_mask
+> > >    docs: block: remove queue-sysfs.rst
+> > >    MAINTAINERS: add entries for block layer documentation
+> > > 
+> > >   Documentation/ABI/testing/sysfs-block | 766 ++++++++++++++++++--------
+> > >   Documentation/block/index.rst         |   1 -
+> > >   Documentation/block/queue-sysfs.rst   | 321 -----------
+> > >   MAINTAINERS                           |   2 +
+> > >   4 files changed, 545 insertions(+), 545 deletions(-)
+> > >   delete mode 100644 Documentation/block/queue-sysfs.rst
+> > 
+> > How about adding a patch that moves Documentation/ABI/testing/sysfs-block
+> > to Documentation/ABI/stable/sysfs-block? The block layer sysfs ABI is used
+> > widely by user space software and is considered stable.
+> > 
+> 
+> That would make sense.  I decided not to include it in this patch series since
+> some of the sysfs-block files were added recently, so may not be as "stable" as
+> ones that have been around for 18 years, and because about 90% of the sysfs
+> documentation is in the "testing" directory anyway so it is not unusual.  So I
+> felt it should be a separate change.
+> 
+> I think these patches should go in first, and then I can send a separate patch
+> that moves the file to the stable directory, if there is no objection to it.
+> 
 
-Cool, yeah please add that to the docs.  Kconfig checks should be
-added to make this idiot-proof; starting from everything uninstalled,
-I should be able to read the Kconfig dependencies in `make menuconfig`
-to understand what I'm missing. And if I'm missing anything, I
-shouldn't be able to select CONFIG_RUST.
+Since no one has objected and this series hasn't been applied yet, I guess I'll
+just go ahead and send out a new series which includes the renaming to stable.
 
-I get slightly further now.
-
-$ make LLVM=1 -j72
-...
-  BINDGEN rust/bindings_helpers_generated.rs
-thread 'main' panicked at 'called `Result::unwrap()` on an `Err`
-value: "could not run executable `/android0/llvm-project/clang`:
-Permission denied (os error 13)"',
-/usr/local/google/home/ndesaulniers/.cargo/registry/src/github.com-1ecc6299db9ec823/clang-sys-1.3.0/src/support.rs:196:58
-note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
-thread 'main' panicked at 'called `Result::unwrap()` on an `Err`
-value: "could not run executable `/android0/llvm-project/clang`:
-Permission denied (os error 13)"',
-/usr/local/google/home/ndesaulniers/.cargo/registry/src/github.com-1ecc6299db9ec823/clang-sys-1.3.0/src/support.rs:196:58
-note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
-make[1]: *** [rust/Makefile:261: rust/bindings_helpers_generated.rs] Error 1
-make[1]: *** Deleting file 'rust/bindings_helpers_generated.rs'
-make[1]: *** Waiting for unfinished jobs....
-make[1]: *** [rust/Makefile:248: rust/bindings_generated.rs] Error 1
-make[1]: *** Deleting file 'rust/bindings_generated.rs'
-make: *** [Makefile:1271: prepare0] Error 2
-
-It looks like bindgen found part of the path to llvm-project that I
-have checked out to disk for when I do development on LLVM for work.
-So this might only be an issue if folks have a copy of clang built
-from source in their $PATH?
-
-$ which clang
-/android0/llvm-project/llvm/build/bin/clang
-
-Looking at the output of `make LLVM=1 -j72 V=1`, I see two invocations
-of bindgen, and can repro if I just run the full command manually.
-
-I don't see my path to my source code checkout of llvm-project in the
-command line invocation of bindgen; this might be an issue itself with
-bindgen.
-
-Googling for "could not run executable" and bindgen, I find this
-thread with a similar failure string:
-https://bugzilla.mozilla.org/show_bug.cgi?id=1363655
-No hits in their issue tracker: https://github.com/rust-lang/rust-bindgen.
-
-$ bindgen --version
-bindgen 0.59.2
-$ cargo install --locked --version 0.56.0 bindgen
-$ bindgen --version
-bindgen 0.56.0
-$ make LLVM=1 -j72
-# produces the same error.
-
-I guess the error is coming not from bindgen, but a dependency of its;
-"clang-sys?"
-https://github.com/KyleMayes/clang-sys/blob/master/src/support.rs
-
-I've filed an issue in
-https://github.com/KyleMayes/clang-sys/issues/138; let's follow up
-there?
--- 
-Thanks,
-~Nick Desaulniers
+- Eric
