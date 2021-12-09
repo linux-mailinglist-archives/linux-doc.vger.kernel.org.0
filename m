@@ -2,107 +2,85 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id BE74146DEDB
-	for <lists+linux-doc@lfdr.de>; Thu,  9 Dec 2021 00:07:36 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 5C42D46DF88
+	for <lists+linux-doc@lfdr.de>; Thu,  9 Dec 2021 01:40:11 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S231137AbhLHXLI (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 8 Dec 2021 18:11:08 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:49082 "EHLO
-        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S229453AbhLHXLH (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Wed, 8 Dec 2021 18:11:07 -0500
-Received: from mail-io1-xd30.google.com (mail-io1-xd30.google.com [IPv6:2607:f8b0:4864:20::d30])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 1C7CEC061746;
-        Wed,  8 Dec 2021 15:07:35 -0800 (PST)
-Received: by mail-io1-xd30.google.com with SMTP id m9so4715230iop.0;
-        Wed, 08 Dec 2021 15:07:35 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc;
-        bh=GvxS1qroTD61QT/EFi3iPjXiqfPMtu/AfLzP0j5oWl8=;
-        b=A716lHua5S8Q0I6LxK8EbL72dqrwmaFOaGZWKh8i2V6ZCefvzwrlTpqmZbofBkji3o
-         eTcY11faHhDvzaWnlyJPjD7MAItParYA6jFITwEW1GmuBNmQpivoeP+lvJXzQFzoRt4o
-         KrRJYahvYIy5j7BOUkX/gYL9MMLme5cBDW81kzuBpbmOLzqNYjLQEj7lfLjINBTl62tu
-         6LKR4U7ia3Uft+usQCy2zYjuO84q0t57aRNsJGok6UcRGOFTAq8e022/6KwyGFU2QJ0w
-         XRDya9VZc8Wt9YttyS8IJyQLAL9LeHUiAnj73F7pRVE9OPVsxiUNFKczmtlJ85+QhuBd
-         +20g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc;
-        bh=GvxS1qroTD61QT/EFi3iPjXiqfPMtu/AfLzP0j5oWl8=;
-        b=0r/oyFZmwd46PgC/k+pk3QFzxDVuUmqv6gfWtQc4FbQ/LrCEKSpgHOIG7bPo21LoEI
-         Z+WybU/tv6ZCw9A8SgHf5IeXvjVITAFV1iyoZYltsCE4pwNHWjxF6VqKfyPizQQK7LzR
-         syeiSCGijbFObQSght9SFNX3CAvUPR38vChkaTzNAmflEfL+77eJXQpoBvF8yxqfKJlF
-         LzPmLVJtH750Dm9DiUcQFtnBVO59YlV2BqRV/MO+fIA9AJjBMU1ugIDqY6JzCYEiuhmn
-         lxMEEXMGbxWeGvD1BGGMIgOe8zie/5uVU0bhVoHbfNLx4KiEcQ6TXu4kwmOhEMw/vVDE
-         8Flw==
-X-Gm-Message-State: AOAM530W2QdisLTdEge3nn2PAYxMyJCT9/sblgcX6TIJBnXEgB+I7VWC
-        97dRcgLGiKRw1DmMNE6IFwzfYz1Tf2x+UOr2VD4=
-X-Google-Smtp-Source: ABdhPJy5PjPkLmDXdBa8v9cvnb0J8BYP4vtPofj3T3hO/HPtklP9pPvbbe0+0XmfCKfw0H5ANish9+gJVfHa7ILR6mI=
-X-Received: by 2002:a02:c78e:: with SMTP id n14mr3798423jao.40.1639004854486;
- Wed, 08 Dec 2021 15:07:34 -0800 (PST)
-MIME-Version: 1.0
-References: <20211206140313.5653-1-ojeda@kernel.org> <20211206140313.5653-15-ojeda@kernel.org>
- <CAKwvOdnA+XU9u+dJ6NfmVFDTxdkCH4v04nMVaieuzauWZtBUpw@mail.gmail.com>
-In-Reply-To: <CAKwvOdnA+XU9u+dJ6NfmVFDTxdkCH4v04nMVaieuzauWZtBUpw@mail.gmail.com>
-From:   Miguel Ojeda <miguel.ojeda.sandonis@gmail.com>
-Date:   Thu, 9 Dec 2021 00:07:24 +0100
-Message-ID: <CANiq72n1DehytS+n2_RbJf0uAROTD2c48voDWVGEWPaPr_V4qQ@mail.gmail.com>
-Subject: Re: [PATCH 14/19] docs: add Rust documentation
-To:     Nick Desaulniers <ndesaulniers@google.com>
-Cc:     Miguel Ojeda <ojeda@kernel.org>,
-        Linus Torvalds <torvalds@linux-foundation.org>,
+        id S241444AbhLIAnf (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 8 Dec 2021 19:43:35 -0500
+Received: from sin.source.kernel.org ([145.40.73.55]:49312 "EHLO
+        sin.source.kernel.org" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S229478AbhLIAne (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Wed, 8 Dec 2021 19:43:34 -0500
+Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
+        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+        (No client certificate requested)
+        by sin.source.kernel.org (Postfix) with ESMTPS id 2F009CE1CB6;
+        Thu,  9 Dec 2021 00:40:00 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 317F7C00446;
+        Thu,  9 Dec 2021 00:39:58 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+        s=k20201202; t=1639010398;
+        bh=Pt84C57Ykdxk1xyB0g68o/uBG/Zu9LdTIDqUUAv0eWo=;
+        h=From:To:Cc:Subject:Date:From;
+        b=EnYYeDmkqEjch3mmUTpK+1+j34LceVH0yiIe+yeueMHk7Z+3k8lXhlEOMRTUNkZXl
+         mskXYnCtiCGHZ8k2XiOdjGcWhfQhdFK4Sh0VETUwyypj6Pd6siqclmJImscJ4CzWPV
+         nP7a6ihR/vYaz03/Li6MmiBUe6cZQJAXCDYHtLKc7KxvrI5KIUUs86iR/uBeb0EyDm
+         T7iRcceA04cf1V/f1mbP5Ds5s5y6F2Z3WRWgb835UK1QT0MIv6nINOCZ2A8Slyicqc
+         x7Os2pgQSHXrWLIEQoGgiishYTwSSCR6iTozBBM5xtSo2jBsVdl20XsWwmj+PSXsDQ
+         2Vi+GX1e+lLUA==
+From:   Eric Biggers <ebiggers@kernel.org>
+To:     linux-block@vger.kernel.org, Jens Axboe <axboe@kernel.dk>
+Cc:     linux-doc@vger.kernel.org,
         Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
-        rust-for-linux <rust-for-linux@vger.kernel.org>,
-        Linux Kbuild mailing list <linux-kbuild@vger.kernel.org>,
-        Linux Doc Mailing List <linux-doc@vger.kernel.org>,
-        linux-kernel <linux-kernel@vger.kernel.org>,
-        Alex Gaynor <alex.gaynor@gmail.com>,
-        Finn Behrens <me@kloenk.de>,
-        Adam Bratschi-Kaye <ark.email@gmail.com>,
-        Wedson Almeida Filho <wedsonaf@google.com>,
-        Michael Ellerman <mpe@ellerman.id.au>,
-        Sven Van Asbroeck <thesven73@gmail.com>,
-        Wu XiangCheng <bobwxc@email.cn>, Gary Guo <gary@garyguo.net>,
-        Boris-Chengbiao Zhou <bobo1239@web.de>,
-        Yuki Okushi <jtitor@2k36.org>, Wei Liu <wei.liu@kernel.org>
-Content-Type: text/plain; charset="UTF-8"
+        linux-kernel@vger.kernel.org
+Subject: [PATCH v3 0/8] docs: consolidate sysfs-block into Documentation/ABI/
+Date:   Wed,  8 Dec 2021 16:38:25 -0800
+Message-Id: <20211209003833.6396-1-ebiggers@kernel.org>
+X-Mailer: git-send-email 2.34.1
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Wed, Dec 8, 2021 at 2:30 AM Nick Desaulniers <ndesaulniers@google.com> wrote:
->
-> I'm sure Documentation/rust/ will grow over time; there's certainly
-> more that can be added and core kernel devs will have more questions
+This series consolidates the documentation for /sys/block/<disk>/queue/
+into Documentation/ABI/, where it is supposed to go (as per Greg KH:
+https://lore.kernel.org/r/YaXXpEAwVGTLjp1e@kroah.com).
 
-Indeed -- the comment is only trying to emphasize (or explain) that
-this might be a difference with respect to C, i.e. that we should try
-to put as much of the documentation as possible closer to the code,
-rather than create "far" files in `Documentation/rust`. I will try to
-clarify the comment.
+This series also updates MAINTAINERS to associate the block
+documentation with the block layer.
 
-> But I read through all that was added here and didn't find anything
-> problematic IMO.  I didn't verify the png's are actually the logo...
+This series applies to linux-block/for-next.
 
-Thanks for reading through all of it!
+Changed v2 => v3:
+   - Improved documentation for stable_writes and virt_boundary_mask.
+   - Added more Reviewed-by tags.
 
-> I don't think `make htmldocs` produced any new warnings, though it's
-> not exactly warning free at the moment (pre-existing before this
-> series).
+Changed v1 => v2:
+   - Added patch which moves the documentation to the stable directory.
+   - Added Reviewed-by tags.
 
-Yeah, I also run `make htmldocs` before submitting the patch series
-rounds. And indeed, there are quite a few warnings (20+?), but none
-coming from `Documentation/rust` that I could see.
+Eric Biggers (8):
+  docs: sysfs-block: move to stable directory
+  docs: sysfs-block: sort alphabetically
+  docs: sysfs-block: add contact for nomerges
+  docs: sysfs-block: fill in missing documentation from queue-sysfs.rst
+  docs: sysfs-block: document stable_writes
+  docs: sysfs-block: document virt_boundary_mask
+  docs: block: remove queue-sysfs.rst
+  MAINTAINERS: add entries for block layer documentation
 
-> How is rust-logo.png being included in the docs? Is there something
-> with RST that isn't grep'able for rust-logo.png?
+ Documentation/ABI/stable/sysfs-block  | 676 ++++++++++++++++++++++++++
+ Documentation/ABI/testing/sysfs-block | 346 -------------
+ Documentation/block/index.rst         |   1 -
+ Documentation/block/queue-sysfs.rst   | 321 ------------
+ MAINTAINERS                           |   2 +
+ 5 files changed, 678 insertions(+), 668 deletions(-)
+ create mode 100644 Documentation/ABI/stable/sysfs-block
+ delete mode 100644 Documentation/ABI/testing/sysfs-block
+ delete mode 100644 Documentation/block/queue-sysfs.rst
 
-At the moment, the assets are simply copied to the output folder, in
-the `rust/Makefile`. (I should provide an SVG too or remove the
-reference to it, by the way).
+base-commit: 2a7f2f5e3f0a18344b1a5d4ffa9307ffc9cbeee2
+-- 
+2.34.1
 
-Cheers,
-Miguel
