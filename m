@@ -2,78 +2,100 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 6B95D46DF8F
-	for <lists+linux-doc@lfdr.de>; Thu,  9 Dec 2021 01:40:14 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 250C646E046
+	for <lists+linux-doc@lfdr.de>; Thu,  9 Dec 2021 02:34:28 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S241526AbhLIAnk (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 8 Dec 2021 19:43:40 -0500
-Received: from ams.source.kernel.org ([145.40.68.75]:53640 "EHLO
-        ams.source.kernel.org" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S241500AbhLIAnh (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Wed, 8 Dec 2021 19:43:37 -0500
-Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
-        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
-        (No client certificate requested)
-        by ams.source.kernel.org (Postfix) with ESMTPS id D74F6B82284;
-        Thu,  9 Dec 2021 00:40:02 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 56C23C341C6;
-        Thu,  9 Dec 2021 00:40:01 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-        s=k20201202; t=1639010401;
-        bh=UZR5o//IotWL4AvI7WNqFdHHhYJPi8ZNZjYRMgcahzs=;
-        h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-        b=Ku8xohOzI9YJ4GJ1V9Mtu8ypiJDL6bVV30SBzNt60yAOicLutbwVcY29koDLSSspY
-         p7+ddx71zagO0l63Nx/mF35AaR4NQ8r3wWel3xl70Ngc5kRw1/LRQoZjAGtECwzq2P
-         GB2g5Plz8zBynkHzC2lcBKHgIX6F3miijbm3N13shuRKEevV4xN9bHIkad7jCJ09i6
-         2+4PEZkj6Io9C0PfRx8LgsQm28wwPD+3U9I8Yc93xBJUrAqjOgs9ZoYVimcQm37hBS
-         NNC8P/tHjGR1HHiLHwyXf5vSOAYcPxF9IfCwR08OxmeT9YnC8cDaaIEPnVxwNvrrZO
-         tro1NdPzLG5Ug==
-From:   Eric Biggers <ebiggers@kernel.org>
-To:     linux-block@vger.kernel.org, Jens Axboe <axboe@kernel.dk>
-Cc:     linux-doc@vger.kernel.org,
-        Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
-        linux-kernel@vger.kernel.org, Hannes Reinecke <hare@suse.de>,
-        "Martin K. Petersen" <martin.petersen@oracle.com>,
-        Bart Van Assche <bvanassche@acm.org>
-Subject: [PATCH v3 8/8] MAINTAINERS: add entries for block layer documentation
-Date:   Wed,  8 Dec 2021 16:38:33 -0800
-Message-Id: <20211209003833.6396-9-ebiggers@kernel.org>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20211209003833.6396-1-ebiggers@kernel.org>
-References: <20211209003833.6396-1-ebiggers@kernel.org>
+        id S229680AbhLIBh7 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 8 Dec 2021 20:37:59 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:53762 "EHLO
+        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S229520AbhLIBh7 (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Wed, 8 Dec 2021 20:37:59 -0500
+Received: from mail-ot1-x329.google.com (mail-ot1-x329.google.com [IPv6:2607:f8b0:4864:20::329])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id A93B6C061746;
+        Wed,  8 Dec 2021 17:34:26 -0800 (PST)
+Received: by mail-ot1-x329.google.com with SMTP id 47-20020a9d0332000000b005798ac20d72so4637088otv.9;
+        Wed, 08 Dec 2021 17:34:26 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc:content-transfer-encoding;
+        bh=22Mvx3aSrXvm/szku+TvvA36vqtRCRUXnrutVlQnAkQ=;
+        b=ZtgNidVzo/7Q6MWazHWXL7dP5rcso3MRI7sGT9gqUV7I6Aw2yBnn/K1mxjYtW0cA0A
+         nz/fVRZFFKgwdzt5REvb/5yaVWSgtQT/Iev3grT9Ma5g80Jys1lAl+Vgr0a36NXhWDSP
+         r+5q1j8ba4xOV3JGN15j7XNq+ELjqHXOGtdW8/zWROBzl3E0QRQxwkwZXn4dcd8goknz
+         2xnUMU4JFnA5zCF6gs6stu55nfhOTG2g+iyHx5PeKOfsHJ9LBmO4qjqrXyBV5cIhGSw3
+         XDFczAzERARCB3qlATdDU6W/XMeuA0x1FmjGUMYJjv3oxkmaOA7T5qGulYzWqqnlF34M
+         CqEw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc:content-transfer-encoding;
+        bh=22Mvx3aSrXvm/szku+TvvA36vqtRCRUXnrutVlQnAkQ=;
+        b=6seEDWrYaO643D/3mphLBIy3d0VspdlsAY4iztxkCAeE92f7j1MAVd26B2jnAAWRHs
+         1iutrYPyj1+Pz1YpczwOxBsvw5axG2JSk9PYGgT6dTzMfomgms4XpDLEoPYTR/nDLEHy
+         YBZTDiwuK+NLqBQ14VDyT7B01VicdYQNzK3PDsADT+WxDjPY+RVI8WHX0GIB7mB9uzIL
+         WBElB+yCUvNr93g5KZme9wcvOQJF00IPOYKof59BXRsgH/F/jTDqhU0TzQOBMQ+HxmQv
+         8wMfKwEpFwgeK093WrrmoT1nEU0fJ15QJwpCDA4ZrzncV7l9inaZnVKO69RMHpND/7Z4
+         pzeg==
+X-Gm-Message-State: AOAM533kqya4iCTpDt/fVM1ng4fPODENRs14iPGGtAPer5UlSvzaMBxm
+        fMhdUatrmLSymAdsRq/2lXdrSy1O9h02LiL1PgvOFpyjGdKibQ==
+X-Google-Smtp-Source: ABdhPJy3fe9qAaB9qWWCKnju1XDgZFgcpoQpJ4FhM96X0V/Cpc9OtJU4sxohYy6wKiTkPp6t7ktXxeMj81daxTRai58=
+X-Received: by 2002:a05:6830:1605:: with SMTP id g5mr2970541otr.46.1639013666031;
+ Wed, 08 Dec 2021 17:34:26 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20211208114125.58472-1-alexs@kernel.org>
+In-Reply-To: <20211208114125.58472-1-alexs@kernel.org>
+From:   yanteng si <siyanteng01@gmail.com>
+Date:   Thu, 9 Dec 2021 09:34:14 +0800
+Message-ID: <CAEensMwzXgw0Y_Eq=6P1LQAhcYeJ+W4UtZz6i-n2xGzc8t204A@mail.gmail.com>
+Subject: Re: [PATCH] doc/zh_CN: add Chinese document coding style reminder
+To:     Alex Shi <alexs@kernel.org>
+Cc:     Tang Yizhou <tangyizhou@huawei.com>,
+        Jonathan Corbet <corbet@lwn.net>,
+        Linux Doc Mailing List <linux-doc@vger.kernel.org>,
+        linux-kernel@vger.kernel.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: base64
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-From: Eric Biggers <ebiggers@google.com>
-
-Include Documentation/block/ and Documentation/ABI/stable/sysfs-block in
-the "BLOCK LAYER" maintainers file entry.
-
-Reviewed-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
-Reviewed-by: Hannes Reinecke <hare@suse.de>
-Reviewed-by: Martin K. Petersen <martin.petersen@oracle.com>
-Reviewed-by: Bart Van Assche <bvanassche@acm.org>
-Signed-off-by: Eric Biggers <ebiggers@google.com>
----
- MAINTAINERS | 2 ++
- 1 file changed, 2 insertions(+)
-
-diff --git a/MAINTAINERS b/MAINTAINERS
-index 360e9aa0205d6..19db69dda15af 100644
---- a/MAINTAINERS
-+++ b/MAINTAINERS
-@@ -3380,6 +3380,8 @@ M:	Jens Axboe <axboe@kernel.dk>
- L:	linux-block@vger.kernel.org
- S:	Maintained
- T:	git git://git.kernel.org/pub/scm/linux/kernel/git/axboe/linux-block.git
-+F:	Documentation/ABI/stable/sysfs-block
-+F:	Documentation/block/
- F:	block/
- F:	drivers/block/
- F:	include/linux/blk*
--- 
-2.34.1
-
+PGFsZXhzQGtlcm5lbC5vcmc+IOS6jjIwMjHlubQxMuaciDjml6XlkajkuIkgMTk6NDHlhpnpgZPv
+vJoNCj4NCj4gRnJvbTogQWxleCBTaGkgPGFsZXhzQGtlcm5lbC5vcmc+DQo+DQo+IFRoZSBjb2Rp
+bmcgc3R5bGUgcmVxdWlyZW1lbnQgZm9yIENoaW5lc2UgZG9jdW1lbnQgaXMgZWFzeSB0byBiZSBv
+dmVybG9va2VkLg0KPiBBZGQgdGhlIHJlcXVlc3QgYXMgYSByZW1kaW5lci4NCj4NCj4gU2lnbmVk
+LW9mZi1ieTogQWxleCBTaGkgPGFsZXhzQGtlcm5lbC5vcmc+DQo+IENjOiBZYW50ZW5nIFNpIDxz
+aXlhbnRlbmcwMUBnbWFpbC5jb20+DQo+IENjOiBUYW5nIFlpemhvdSA8dGFuZ3lpemhvdUBodWF3
+ZWkuY29tPg0KPiBDYzogSm9uYXRoYW4gQ29yYmV0IDxjb3JiZXRAbHduLm5ldD4NCj4gQ2M6IGxp
+bnV4LWRvY0B2Z2VyLmtlcm5lbC5vcmcNCj4gQ2M6IGxpbnV4LWtlcm5lbEB2Z2VyLmtlcm5lbC5v
+cmcNCj4gLS0tDQo+ICBEb2N1bWVudGF0aW9uL3RyYW5zbGF0aW9ucy96aF9DTi9pbmRleC5yc3Qg
+fCA0ICsrKysNCj4gIDEgZmlsZSBjaGFuZ2VkLCA0IGluc2VydGlvbnMoKykNCj4NCj4gZGlmZiAt
+LWdpdCBhL0RvY3VtZW50YXRpb24vdHJhbnNsYXRpb25zL3poX0NOL2luZGV4LnJzdCBiL0RvY3Vt
+ZW50YXRpb24vdHJhbnNsYXRpb25zL3poX0NOL2luZGV4LnJzdA0KPiBpbmRleCBhMzRlNTg3MzNh
+YzguLjhjMjc4NmVkMDI3OSAxMDA2NDQNCj4gLS0tIGEvRG9jdW1lbnRhdGlvbi90cmFuc2xhdGlv
+bnMvemhfQ04vaW5kZXgucnN0DQo+ICsrKyBiL0RvY3VtZW50YXRpb24vdHJhbnNsYXRpb25zL3po
+X0NOL2luZGV4LnJzdA0KPiBAQCAtMjMsNiArMjMsMTAgQEANCj4gIOWPpuWklu+8jOmaj+aXtuas
+oui/juaCqOWvueWGheaguOaWh+aho+i/m+ihjOaUuei/m++8m+WmguaenOaCqOaDs+aPkOS+m+W4
+ruWKqe+8jOivt+WKoOWFpXZnZXIua2VybmVsLm9yZw0KPiAg5LiK55qEbGludXgtZG9j6YKu5Lu2
+5YiX6KGo44CCDQo+DQo+ICvpobrkvr/or7TkuIvvvIzkuK3mlofmlofmoaPkuZ/pnIDopoHpgbXl
+rojlhoXmoLjnvJbnoIHpo47moLzvvIzpo47moLzkuK3kuK3mloflkozoi7HmlofnmoTkuLvopoHk
+uI3lkIzlsLHmmK/kuK3mlocNCj4gK+eahOWtl+espuagh+eCueWNoOeUqOS4pOS4quiLseaWh+Wt
+l+espuWuveW6pu+8jCDmiYDku6XvvIzlvZPoi7HmlofopoHmsYLkuI3opoHotoXov4fmr4/ooYwx
+MDDkuKrlrZfnrKbml7bvvIwNCj4gK+S4reaWh+WwseS4jeimgei2hei/hzUw5Liq5a2X56ym44CC
+5Y+m5aSW77yM5Lmf6KaB5rOo5oSPJy0n77yMJz0nIOetieespuWPt+S4juebuOWFs+agh+mimOea
+hOWvuem9kOOAgg0KSG93IGFib3V0Og0K5Y+m5aSW77yMJy0n77yMJz0nIOetieespuWPt+mcgOim
+geS4juebuOWFs+agh+mimOWvuem9kCwg5Li65LqG54Wn6aG+5rKh5pyJ5Zu+5b2i55WM6Z2i5ZKM
+5Lmg5oOv55Sodmnmn6XpmIXmlofmoaMNCueahOW8gOWPkeiAhe+8jOS4reaWh+aWh+aho+eahOaW
+h+acrOWdl+OAgeauteiQveetieS5n+W6lOWDj+iLseaWh+aWh+aho+mCo+agt+aVtOaVtOm9kOm9
+kOOAgg0KDQrlnKjlsIbooaXkuIHmj5DkuqTliLDnpL7ljLrkuYvliY3vvIzkuIDlrpropoHov5vo
+oYzlv4XopoHnmoRjaGVja3BhdGNoLnBs5qOA5p+l5ZKM57yW6K+R5rWL6K+V77yM572R6aG154mI
+DQrmlofmoaPlnKjpg6jliIbmtY/op4jlmajkuK3mmoLml7blj6/og73kvJrlh7rnjrDlpJrkvZnn
+moTnqbrmoLzvvIznm67liY3lt7Lnn6VmaXJlZm945q2j5bi477yM5o2u5LqG6Kej77yM5rWPDQro
+p4jlmajop4TojIPojYnmoYjkuK3lt7LmnInor6Xpl67popjnmoTop6PlhrPmlrnmoYjvvIzlsIbm
+naXmnInluIzmnJvop6PlhrPjgIINCg0KLi4g5bCP5oqA5benOiDnv7vor5Hml7bot5/pmo/oi7Hm
+lofmlofmnKzlnZfmjaLooYzml6DpnIDlhbPlv4PkuK3mlofmr4/ooYzmmK/lkKbotoXlrZfmlbDv
+vIzkuZ/kuI3nlKjmi4Xlv4PmvI/mjonnqboNCiAgICAgICAgICAgICAgIOihjOWSjOe8qei/m+S7
+peWPiua8j+e/u+ivke+8jOWboOS4uuaIkeS7rOWPqumcgOWOn+WcsOi/m+ihjOS4reiLseaWh+Wt
+l+espuS4suabv+aNouWwseWPr+S7peS6huOAgg0KDQpUaGFua3MsDQpZYW50ZW5nDQo+ICsNCj4g
+IOiuuOWPr+ivgeaWh+ahow0KPiAgLS0tLS0tLS0tLQ0KPg0KPiAtLQ0KPiAyLjI3LjANCj4NCg==
