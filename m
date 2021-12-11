@@ -2,77 +2,100 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 7C5EC471034
-	for <lists+linux-doc@lfdr.de>; Sat, 11 Dec 2021 03:02:08 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id B7ADE471168
+	for <lists+linux-doc@lfdr.de>; Sat, 11 Dec 2021 05:24:49 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S240704AbhLKCFm (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Fri, 10 Dec 2021 21:05:42 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:48164 "EHLO
+        id S1345855AbhLKE2W (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Fri, 10 Dec 2021 23:28:22 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:51388 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1345641AbhLKCFl (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Fri, 10 Dec 2021 21:05:41 -0500
-Received: from mail-lj1-x243.google.com (mail-lj1-x243.google.com [IPv6:2a00:1450:4864:20::243])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 1B86FC061A32
-        for <linux-doc@vger.kernel.org>; Fri, 10 Dec 2021 18:02:05 -0800 (PST)
-Received: by mail-lj1-x243.google.com with SMTP id k2so16156703lji.4
-        for <linux-doc@vger.kernel.org>; Fri, 10 Dec 2021 18:02:05 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=mime-version:reply-to:from:date:message-id:subject:to;
-        bh=UB8HPXfiFrSS8lJHVD9imqT8IM8lXgQeVTQMVTTdoew=;
-        b=YLFlW2EU3wC14KpVTk+IM58oSghSYLjMmVu6zQ/IYCwgsR5Sf12xJCL/5+CVpbXsnt
-         22KfNqT06o98mhCtfoOfWNh/4tfFmj2AFDjLdssqJs8+fwuuzWeqstsrP9Eqc87OlMHn
-         TvZYh66KNDgDYMOMzV+7fqlsVNnsPbs5tbKal0uE5CTp2Rk7sipJ65nnPaJWW6urjiYG
-         yjhaQr0+DsLsyIMnaiNd6rjtUc7yQgIo65YEuBLpX5cuMOVjNiZW8dTCMF1ZcQmI8lLg
-         ts2zRNIssQ7WVu8YEQseHp9elEHPuA+qDafMGck3ipNTcw1LcoccQXJFJcltFVTtty4m
-         33gA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=x-gm-message-state:mime-version:reply-to:from:date:message-id
-         :subject:to;
-        bh=UB8HPXfiFrSS8lJHVD9imqT8IM8lXgQeVTQMVTTdoew=;
-        b=C3l6kB6ec7n3s9h73L6wMDyvFbypUSxyzWNFUew+I9VGIM9LyX4OhmQI2hE+GG3Xzl
-         Sg6FmjTZ/310Yyei+vpNpjMjV7fo0Ze6wouK2BVzHSxTmSpnhXmhEwrY+BaFgqEk7MFE
-         JuQeGF8dG1muLctsGx/LD8TjdUqfNGI1Cmg9NdhSBnftBhOkddPXXSQbv+Jk/vPnWDSx
-         Kwh/2QQYcALeLyV6c9Jfcj1qH3YE27G/jztjSumFio6AyPQDGaOtoLVV38ue2ALkJT8p
-         7JKNXC4RMJeNIXZgdkZkq4GIy1AgNVZXk9iG4biPVrkMqQRuVsgRe/tGv8vOo+PHYFeh
-         eq0g==
-X-Gm-Message-State: AOAM531YLaEtMrv0DM/6m5ndPWc3BbU4Q2oQzSBdwZHWKIeMP3lJk53S
-        V37Ttb7uuTxWQhIycGBZuw4b/uwbeV+qBBuX2tY=
-X-Google-Smtp-Source: ABdhPJxBVYZ26kuukI+qghu2oEbePULLlY8UzOvy8Thh2XI49DVZF++TlN5eyoWkvajWnohXM36KonRfGTJC1IRe82w=
-X-Received: by 2002:a2e:9d8f:: with SMTP id c15mr17452679ljj.477.1639188123220;
- Fri, 10 Dec 2021 18:02:03 -0800 (PST)
+        with ESMTP id S1345848AbhLKE2V (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Fri, 10 Dec 2021 23:28:21 -0500
+Received: from casper.infradead.org (casper.infradead.org [IPv6:2001:8b0:10b:1236::1])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id F105DC061714;
+        Fri, 10 Dec 2021 20:24:45 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+        d=infradead.org; s=casper.20170209; h=Content-Transfer-Encoding:Content-Type:
+        In-Reply-To:References:Cc:To:Subject:From:MIME-Version:Date:Message-ID:Sender
+        :Reply-To:Content-ID:Content-Description;
+        bh=EocwI5iB8uisBYdGHyN4tRaO4AYTxuJ0X6GFvjQpK9w=; b=mGLlIeH9Cp6Jbn3ov5XRsr6llg
+        Hxq8J6V0R5w4w54IJ646rmohi0LTAn8gYytEHMvGezM24p65JbgSndkExREl9dAs3p1H9hpylaPJZ
+        4auc2bAUsgU/OJvCVU43krf1zpCmJjaCucg14hCMmOKBjvnnvwDZ/c3oxiawg2CzY0GNKtQeGcNWI
+        ijZH0loIqKHJRJM8/1NclXEkh+QebOUHov2IfV/iN9A/zA2P8+K5g5x8P0uhBDnblDBend9X7Rnuu
+        nyPQIFs8NPjlN+STVOyqYxlOy9GQKfhe4ffz2hP7KYU30qiXFItNbY3eawm3iDQZv8WQUY5mavUT9
+        jgH5ka3w==;
+Received: from [2601:1c0:6280:3f0::aa0b]
+        by casper.infradead.org with esmtpsa (Exim 4.94.2 #2 (Red Hat Linux))
+        id 1mvtw4-00Awwp-Le; Sat, 11 Dec 2021 04:24:38 +0000
+Message-ID: <936d6140-72bb-fe49-9013-638cb087f1a2@infradead.org>
+Date:   Fri, 10 Dec 2021 20:24:33 -0800
 MIME-Version: 1.0
-Received: by 2002:a05:6512:12c7:0:0:0:0 with HTTP; Fri, 10 Dec 2021 18:02:02
- -0800 (PST)
-Reply-To: internationallmonetary695@gmail.com
-From:   International Monetary fund <abubakarsadiq1297@gmail.com>
-Date:   Fri, 10 Dec 2021 18:02:02 -0800
-Message-ID: <CAHXNoSg3Z7iK4ieUWhau28hUaL637ztb2vgqOT3oZCxEMRC3RQ@mail.gmail.com>
-Subject: Dear Beneficiary,
-To:     undisclosed-recipients:;
-Content-Type: text/plain; charset="UTF-8"
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
+ Thunderbird/91.3.2
+From:   Randy Dunlap <rdunlap@infradead.org>
+Subject: Re: [PATCH v4 1/4] docs: allow selecting a Sphinx theme
+To:     Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
+        Jonathan Corbet <corbet@lwn.net>,
+        Linux Doc Mailing List <linux-doc@vger.kernel.org>
+Cc:     Akira Yokosawa <akiyks@gmail.com>,
+        Jani Nikula <jani.nikula@linux.intel.com>,
+        =?UTF-8?B?TsOtY29sYXMgRi4gUi4gQS4gUHJhZG8=?= 
+        <nfraprado@protonmail.com>, Alex Shi <alexs@kernel.org>,
+        linux-kernel@vger.kernel.org
+References: <cover.1638870323.git.mchehab+huawei@kernel.org>
+ <bd20adabfd428fd3cd0e69c2cf146aa354932936.1638870323.git.mchehab+huawei@kernel.org>
+Content-Language: en-US
+In-Reply-To: <bd20adabfd428fd3cd0e69c2cf146aa354932936.1638870323.git.mchehab+huawei@kernel.org>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
+Hi,
+
+On 12/7/21 01:52, Mauro Carvalho Chehab wrote:
+> Instead of having RTD as an almost mandatory theme, allow the
+> user to select other themes via DOCS_THEME environment var.
+> 
+> There's a catch, though: as the current theme override logic is
+> dependent of the RTD theme, we need to move the code which
+> adds the CSS overrides to be inside the RTD theme logic.
+> 
+> Signed-off-by: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
+> ---
+> 
+> See [PATCH v4 0/4] at: https://lore.kernel.org/all/cover.1638870323.git.mchehab+huawei@kernel.org/
+> 
+>  Documentation/Makefile             |  3 ++
+>  Documentation/conf.py              | 52 +++++++++++++++++-------------
+>  Documentation/doc-guide/sphinx.rst |  8 +++++
+>  3 files changed, 41 insertions(+), 22 deletions(-)
+> 
+
+> diff --git a/Documentation/doc-guide/sphinx.rst b/Documentation/doc-guide/sphinx.rst
+> index e445cb146efe..bef276c58ebe 100644
+> --- a/Documentation/doc-guide/sphinx.rst
+> +++ b/Documentation/doc-guide/sphinx.rst
+> @@ -138,6 +138,14 @@ To pass extra options to Sphinx, you can use the ``SPHINXOPTS`` make
+>  variable. For example, use ``make SPHINXOPTS=-v htmldocs`` to get more verbose
+>  output.
+>  
+> +By default, the build will try to use the Read the Docs sphinx theme:
+> +
+> +    https://github.com/readthedocs/sphinx_rtd_theme
+> +
+> +If the theme is not available, it will fall-back to the classic one.
+> +
+> +The Sphinx theme can be overriden by using the ``DOCS_THEME`` make variable.
+
+                           overridden
+
+> +
+>  To remove the generated documentation, run ``make cleandocs``.
+>  
+>  Writing Documentation
+> 
+
 -- 
- I.M.F Head Office
-#1900 Pennsylvania Ave NW,
-Washington, DC 20431
-INTERNATIONAL MONETARY FUND.
-REF:-XVGNN82010
-internationallmonetary695@gmail.com
-Telephone : +12062785473
-
-This message is from International Monetary fund (IMF) I am Mr Bo Li
-deputy to  Kristalina Georgieva the current president of International
-  Monetary fund (IMF) We are aware of the stress you have been passing
-through and how you have lost your money trying to claim your fund ,
-you have to worry no more for the international monetary fund is fully
- in-charge of your fund now, contact  me for more info on how you will
-receive your fund( internationallmonetary695@gmail.com) or call me
-on-Telephone : +12062785473 for more info.
-
-Regards,
-Mr Bo Li
+~Randy
