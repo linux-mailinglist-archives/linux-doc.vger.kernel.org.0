@@ -2,44 +2,60 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id C828A471B16
-	for <lists+linux-doc@lfdr.de>; Sun, 12 Dec 2021 16:10:26 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 4F2C3471B61
+	for <lists+linux-doc@lfdr.de>; Sun, 12 Dec 2021 16:39:13 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S229622AbhLLPK0 convert rfc822-to-8bit (ORCPT
-        <rfc822;lists+linux-doc@lfdr.de>); Sun, 12 Dec 2021 10:10:26 -0500
-Received: from bln02.to.infn.it ([192.84.137.52]:53446 "EHLO bln02.to.infn.it"
-        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S231174AbhLLPKZ (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Sun, 12 Dec 2021 10:10:25 -0500
-X-Greylist: delayed 7659 seconds by postgrey-1.27 at vger.kernel.org; Sun, 12 Dec 2021 10:10:24 EST
-X-INFNTO-Scanned: by amavisd-new [2.10.1] at to.infn.it [Opossum: ON]
-Received: from [10.48.0.26] ([45.134.22.14])
-        (authenticated bits=0)
-        by bln02.to.infn.it (8.14.7/8.14.7/[Gnorri: ON]) with ESMTP id 1BCF7CNv008792
-        (version=TLSv1/SSLv3 cipher=AES256-SHA bits=256 verify=NO);
-        Sun, 12 Dec 2021 16:09:53 +0100
-Message-Id: <202112121509.1BCF7CNv008792@bln02.to.infn.it>
-Content-Type: text/plain; charset="iso-8859-1"
+        id S229468AbhLLPjJ (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Sun, 12 Dec 2021 10:39:09 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:57200 "EHLO
+        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S231308AbhLLPjH (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Sun, 12 Dec 2021 10:39:07 -0500
+Received: from mail-pj1-x1032.google.com (mail-pj1-x1032.google.com [IPv6:2607:f8b0:4864:20::1032])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 443ABC061372
+        for <linux-doc@vger.kernel.org>; Sun, 12 Dec 2021 07:39:07 -0800 (PST)
+Received: by mail-pj1-x1032.google.com with SMTP id n15-20020a17090a160f00b001a75089daa3so12924107pja.1
+        for <linux-doc@vger.kernel.org>; Sun, 12 Dec 2021 07:39:07 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112;
+        h=mime-version:reply-to:from:date:message-id:subject:to;
+        bh=CScZ3wgwAoNcP2hDnqXlix5UDGrDiarDd6PNIGLyspo=;
+        b=nW34jVsv56Ss5jLoooIeVciA93Clw83n+wCeADNfCEpcC+rdzdpKO/LYgFQaULd1OH
+         U8TXUuQSIh4yHtn8e56U2OR9tvVaBrIbZqVXXTO9qyu2ymRftWSklBAq1tsUV/ZwQyli
+         OQNIJmsnRTWXVSmhooYoNI3mrca0uQe4Qvw2po2hRHk49IphRRBl7/cc79IWCwq/knSD
+         jAnxigACSUDasTs+EUStoKgNQ9kt9Efz64Sltjg2RvPSjES1dEb3Rnabml57kHg8BYan
+         0xGZn+cZ+L22txoY5kcj47AS69tJiBQ/eAoB9E7bJT52uVrJV5T2gB+PKNcvh9Cn0hK0
+         5YnQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:mime-version:reply-to:from:date:message-id
+         :subject:to;
+        bh=CScZ3wgwAoNcP2hDnqXlix5UDGrDiarDd6PNIGLyspo=;
+        b=ZPt34Smn4t6tZfbHV7eKVVUP4Lkawy4jcdGfEZlMGUJnYu6aRXA0idrG4SEdgSeNdO
+         vV5jzHbHyX2S4ZgJzn4/sAII2cDCCrEz92HeS2Ch4SnwI1mrF5mbpeXg1yaPf5/9mt0f
+         rnkaObPPetnmbDESmq7OxoVyUQkClN7r+BlbSFVj+lG6Sb8jX+kx0KwsLrd21h9X4ka5
+         Ujt0PXLMBDvr7lEhcTatK/rxg++p8nT3iZhZ/Crpf8EikSuumTMcYijvk83DPZi6p7Th
+         xAYZ3Qzoaq90BYpwKaMfXm5fJCeUMZb2LWQvvwN/eGRlQqHB7OZKqwwMH5Ktn4ZykD+l
+         cK6A==
+X-Gm-Message-State: AOAM533yfYSE1G7uLzbXnZ9e/b2LsKjD2Z/it2LN43urwPNIsVoPQO/A
+        tvbaPUpelnfeLA0PUUIpDMmLWeT43TQ1V621KbU=
+X-Google-Smtp-Source: ABdhPJxsBJYooaMgLjqzimk0hrl//BEpZRFhZTgaDxYyJHLKhaJGvTFjIF0TvE7MIczQ9k5dw4plILBX5bRdp3Gs0bY=
+X-Received: by 2002:a17:90b:33d0:: with SMTP id lk16mr38626959pjb.7.1639323545943;
+ Sun, 12 Dec 2021 07:39:05 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8BIT
-Content-Description: Mail message body
-Subject: 
-To:     Recipients <sec4@mi.infn.it>
-From:   "Dave Ramsden" <sec4@mi.infn.it>
-Date:   Sun, 12 Dec 2021 15:09:42 +0000
-Reply-To: d.rsm85@aol.com
+Received: by 2002:a17:90b:4c51:0:0:0:0 with HTTP; Sun, 12 Dec 2021 07:39:05
+ -0800 (PST)
+Reply-To: mrsisabelladz@gmail.com
+From:   Mrs Isabella <zaidn8225@gmail.com>
+Date:   Sun, 12 Dec 2021 16:39:05 +0100
+Message-ID: <CAMU20GMeochfDfA+tFFMDmQu2qHHMSRkoPHpA3GKtw8UP0dvgw@mail.gmail.com>
+Subject: From Mrs. Isabella Dzsesszika
+To:     undisclosed-recipients:;
+Content-Type: text/plain; charset="UTF-8"
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-11. desember 2021.
-  
-Er du åpen for en forretningsoverture som er verdt et betydelig beløp? Når jeg har mottatt din bekreftelse på denne e-posten, skal jeg avsløre detaljer om intensjonen min i e-posten min på neste side.
-  
-Vis din interesse for engelsk, hvis mulig, for bedre kommunikasjon.
-  
-Med vennlig hilsen,
-Dave Ramsden
-E-post: d.rsm85@aol.com
-__________________________
-Sekretær: Janice Dylan
+GOOD MORNING DEAR. MY NAME IS Isabella Dzsesszika. I AM CONTACTING YOU
+FOR IMPORTANT ISSUE I WILL LIKE TO DISCUS WITH YOU. PLEASE GET BACK TO
+ME IF YOU READ THIS MAIL.  YOURS, Isabella Dzsesszika
