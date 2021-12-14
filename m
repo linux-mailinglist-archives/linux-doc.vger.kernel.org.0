@@ -2,112 +2,123 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 7E642473EA0
-	for <lists+linux-doc@lfdr.de>; Tue, 14 Dec 2021 09:48:20 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id E3FEF473ED1
+	for <lists+linux-doc@lfdr.de>; Tue, 14 Dec 2021 09:54:58 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S229991AbhLNIsT (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 14 Dec 2021 03:48:19 -0500
-Received: from szxga01-in.huawei.com ([45.249.212.187]:32916 "EHLO
-        szxga01-in.huawei.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S229577AbhLNIsT (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 14 Dec 2021 03:48:19 -0500
-Received: from dggpemm500020.china.huawei.com (unknown [172.30.72.57])
-        by szxga01-in.huawei.com (SkyGuard) with ESMTP id 4JCsTX0mNdzcbs5;
-        Tue, 14 Dec 2021 16:48:00 +0800 (CST)
-Received: from dggpemm500006.china.huawei.com (7.185.36.236) by
- dggpemm500020.china.huawei.com (7.185.36.49) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2308.20; Tue, 14 Dec 2021 16:48:16 +0800
-Received: from [10.174.178.55] (10.174.178.55) by
- dggpemm500006.china.huawei.com (7.185.36.236) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2308.20; Tue, 14 Dec 2021 16:48:15 +0800
-Subject: Re: [PATCH v17 02/10] x86: kdump: make the lower bound of crash
- kernel reservation consistent
-To:     Baoquan He <bhe@redhat.com>
-CC:     Thomas Gleixner <tglx@linutronix.de>,
+        id S232000AbhLNIy5 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 14 Dec 2021 03:54:57 -0500
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124]:55902 "EHLO
+        us-smtp-delivery-124.mimecast.com" rhost-flags-OK-OK-OK-OK)
+        by vger.kernel.org with ESMTP id S231998AbhLNIy5 (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 14 Dec 2021 03:54:57 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+        s=mimecast20190719; t=1639472096;
+        h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+         to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+         in-reply-to:in-reply-to:references:references;
+        bh=djy24XBHKtgMaXuU5FrgICK75KROric6ztP2werGRpM=;
+        b=HO+woAuEzgKBI2PqyAthMAR3lfyDBoRjNyGpUXUhj2U/pB++AxImACg3eiQHIoVYXDQoCS
+        TKCvvoqL2NkQTEfPP5c0GJW67S2H8873gApOVLNnMYma3NNqn94/zg4lT37pFO2TrRrWIA
+        TxU9GTv3sz1qc+PtyC7J2d7qgNlSJgQ=
+Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
+ [209.132.183.4]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ us-mta-584-z_VrsVuLO4K3u9gVdVOekA-1; Tue, 14 Dec 2021 03:54:53 -0500
+X-MC-Unique: z_VrsVuLO4K3u9gVdVOekA-1
+Received: from smtp.corp.redhat.com (int-mx08.intmail.prod.int.phx2.redhat.com [10.5.11.23])
+        (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+        (No client certificate requested)
+        by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 3BFB392503;
+        Tue, 14 Dec 2021 08:54:50 +0000 (UTC)
+Received: from localhost (ovpn-12-46.pek2.redhat.com [10.72.12.46])
+        by smtp.corp.redhat.com (Postfix) with ESMTPS id 645AE196F1;
+        Tue, 14 Dec 2021 08:54:43 +0000 (UTC)
+Date:   Tue, 14 Dec 2021 16:54:40 +0800
+From:   Baoquan He <bhe@redhat.com>
+To:     Zhen Lei <thunder.leizhen@huawei.com>
+Cc:     Thomas Gleixner <tglx@linutronix.de>,
         Ingo Molnar <mingo@redhat.com>, Borislav Petkov <bp@alien8.de>,
-        <x86@kernel.org>, "H . Peter Anvin" <hpa@zytor.com>,
-        <linux-kernel@vger.kernel.org>, Dave Young <dyoung@redhat.com>,
+        x86@kernel.org, "H . Peter Anvin" <hpa@zytor.com>,
+        linux-kernel@vger.kernel.org, Dave Young <dyoung@redhat.com>,
         Vivek Goyal <vgoyal@redhat.com>,
         Eric Biederman <ebiederm@xmission.com>,
-        <kexec@lists.infradead.org>,
+        kexec@lists.infradead.org,
         Catalin Marinas <catalin.marinas@arm.com>,
         Will Deacon <will@kernel.org>,
-        <linux-arm-kernel@lists.infradead.org>,
+        linux-arm-kernel@lists.infradead.org,
         Rob Herring <robh+dt@kernel.org>,
         Frank Rowand <frowand.list@gmail.com>,
-        <devicetree@vger.kernel.org>, "Jonathan Corbet" <corbet@lwn.net>,
-        <linux-doc@vger.kernel.org>, Randy Dunlap <rdunlap@infradead.org>,
+        devicetree@vger.kernel.org, Jonathan Corbet <corbet@lwn.net>,
+        linux-doc@vger.kernel.org, Randy Dunlap <rdunlap@infradead.org>,
         Feng Zhou <zhoufeng.zf@bytedance.com>,
         Kefeng Wang <wangkefeng.wang@huawei.com>,
         Chen Zhou <dingguo.cz@antgroup.com>
+Subject: Re: [PATCH v17 03/10] x86: kdump: use macro CRASH_ADDR_LOW_MAX in
+ functions reserve_crashkernel()
+Message-ID: <20211214085440.GA3023@MiWiFi-R3L-srv>
 References: <20211210065533.2023-1-thunder.leizhen@huawei.com>
- <20211210065533.2023-3-thunder.leizhen@huawei.com>
- <20211213133735.GB23510@MiWiFi-R3L-srv>
-From:   "Leizhen (ThunderTown)" <thunder.leizhen@huawei.com>
-Message-ID: <a6143bcb-e380-2270-7ccc-02309866ccab@huawei.com>
-Date:   Tue, 14 Dec 2021 16:48:15 +0800
-User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64; rv:60.0) Gecko/20100101
- Thunderbird/60.7.0
+ <20211210065533.2023-4-thunder.leizhen@huawei.com>
 MIME-Version: 1.0
-In-Reply-To: <20211213133735.GB23510@MiWiFi-R3L-srv>
-Content-Type: text/plain; charset="utf-8"
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
-X-Originating-IP: [10.174.178.55]
-X-ClientProxiedBy: dggems703-chm.china.huawei.com (10.3.19.180) To
- dggpemm500006.china.huawei.com (7.185.36.236)
-X-CFilter-Loop: Reflected
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20211210065533.2023-4-thunder.leizhen@huawei.com>
+User-Agent: Mutt/1.10.1 (2018-07-13)
+X-Scanned-By: MIMEDefang 2.84 on 10.5.11.23
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-
-
-On 2021/12/13 21:37, Baoquan He wrote:
-> On 12/10/21 at 02:55pm, Zhen Lei wrote:
->> From: Chen Zhou <chenzhou10@huawei.com>
->>
->> The lower bounds of crash kernel reservation and crash kernel low
->> reservation are different, use the consistent value CRASH_ALIGN.
->>
->> Suggested-by: Dave Young <dyoung@redhat.com>
->> Signed-off-by: Chen Zhou <chenzhou10@huawei.com>
->> Signed-off-by: Zhen Lei <thunder.leizhen@huawei.com>
+On 12/10/21 at 02:55pm, Zhen Lei wrote:
+> From: Chen Zhou <chenzhou10@huawei.com>
 > 
-> You may need add Co-developed-by to clarify who is author, and who is
-> co-author. Please check section "When to use Acked-by:, Cc:, and Co-developed-by:"
-> of Documentation/process/submitting-patches.rst. Otherwise, 
-
-Okay, thanks for the heads-up. I will modify it.
-
+> To make the functions reserve_crashkernel() as generic,
+> replace some hard-coded numbers with macro CRASH_ADDR_LOW_MAX.
 > 
+> Signed-off-by: Chen Zhou <chenzhou10@huawei.com>
+> Signed-off-by: Zhen Lei <thunder.leizhen@huawei.com>
+
+If you made change to this patch, please remove the old Acked-by. If you
+didn't contribute change, Signed-off-by should be taken off.
+
+Compared this with the version I acked, only see
+memblock_free() -> memblock_phys_free() update which should be done
+from the rebase.
+
+So ack this one again, and please also consider adding Co-developed-by.
+
+> Tested-by: John Donnelly <John.p.donnelly@oracle.com>
+> Tested-by: Dave Kleikamp <dave.kleikamp@oracle.com>
 > Acked-by: Baoquan He <bhe@redhat.com>
+> ---
+>  arch/x86/kernel/setup.c | 7 ++++---
+>  1 file changed, 4 insertions(+), 3 deletions(-)
 > 
->> Tested-by: John Donnelly <John.p.donnelly@oracle.com>
->> Tested-by: Dave Kleikamp <dave.kleikamp@oracle.com>
->> ---
->>  arch/x86/kernel/setup.c | 3 ++-
->>  1 file changed, 2 insertions(+), 1 deletion(-)
->>
->> diff --git a/arch/x86/kernel/setup.c b/arch/x86/kernel/setup.c
->> index 5cc60996eac56d6..6424ee4f23da2cf 100644
->> --- a/arch/x86/kernel/setup.c
->> +++ b/arch/x86/kernel/setup.c
->> @@ -441,7 +441,8 @@ static int __init reserve_crashkernel_low(void)
->>  			return 0;
->>  	}
->>  
->> -	low_base = memblock_phys_alloc_range(low_size, CRASH_ALIGN, 0, CRASH_ADDR_LOW_MAX);
->> +	low_base = memblock_phys_alloc_range(low_size, CRASH_ALIGN, CRASH_ALIGN,
->> +			CRASH_ADDR_LOW_MAX);
->>  	if (!low_base) {
->>  		pr_err("Cannot reserve %ldMB crashkernel low memory, please try smaller size.\n",
->>  		       (unsigned long)(low_size >> 20));
->> -- 
->> 2.25.1
->>
+> diff --git a/arch/x86/kernel/setup.c b/arch/x86/kernel/setup.c
+> index 6424ee4f23da2cf..bb2a0973b98059e 100644
+> --- a/arch/x86/kernel/setup.c
+> +++ b/arch/x86/kernel/setup.c
+> @@ -489,8 +489,9 @@ static void __init reserve_crashkernel(void)
+>  	if (!crash_base) {
+>  		/*
+>  		 * Set CRASH_ADDR_LOW_MAX upper bound for crash memory,
+> -		 * crashkernel=x,high reserves memory over 4G, also allocates
+> -		 * 256M extra low memory for DMA buffers and swiotlb.
+> +		 * crashkernel=x,high reserves memory over CRASH_ADDR_LOW_MAX,
+> +		 * also allocates 256M extra low memory for DMA buffers
+> +		 * and swiotlb.
+>  		 * But the extra memory is not required for all machines.
+>  		 * So try low memory first and fall back to high memory
+>  		 * unless "crashkernel=size[KMG],high" is specified.
+> @@ -518,7 +519,7 @@ static void __init reserve_crashkernel(void)
+>  		}
+>  	}
+>  
+> -	if (crash_base >= (1ULL << 32) && reserve_crashkernel_low()) {
+> +	if (crash_base >= CRASH_ADDR_LOW_MAX && reserve_crashkernel_low()) {
+>  		memblock_phys_free(crash_base, crash_size);
+>  		return;
+>  	}
+> -- 
+> 2.25.1
 > 
-> .
-> 
+
