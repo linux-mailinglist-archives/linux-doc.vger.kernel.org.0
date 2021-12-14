@@ -2,93 +2,61 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 22FB94743D4
-	for <lists+linux-doc@lfdr.de>; Tue, 14 Dec 2021 14:48:55 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 7A2BE47445C
+	for <lists+linux-doc@lfdr.de>; Tue, 14 Dec 2021 15:04:25 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S231756AbhLNNsx (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 14 Dec 2021 08:48:53 -0500
-Received: from smtpbguseast3.qq.com ([54.243.244.52]:56514 "EHLO
-        smtpbguseast3.qq.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S230387AbhLNNsw (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 14 Dec 2021 08:48:52 -0500
-X-QQ-mid: bizesmtp33t1639489698tnagib73
-Received: from Z2zz.localdomain (unknown [218.17.40.219])
-        by esmtp6.qq.com (ESMTP) with 
-        id ; Tue, 14 Dec 2021 21:48:06 +0800 (CST)
-X-QQ-SSF: 0140000000200060C000B00A0000000
-X-QQ-FEAT: G+mSt178IQpUPdNu2IpKPULMu9tF9iwvGSJ9M9XoXRRNG4f4o/4vqVXy5kPUd
-        x/DMOpX9QoywOXiabDy/MWYJZ8G71NWa42WxoNoJlxSzmp+Fzu9p17oxWKDWjx9LlCZZ4Ka
-        g/f/40IbFrG6W4ejBVT9NzX8h92tJg589gJ6nALaMY02mYSEHBhW2NBb4ep8WE7DDK9DRcQ
-        jPVCQs2c/xjIlLah0JLGbpa6qMD8Xk/4P5s/9vjfLpZmfDtKBFZpC8SSHZgjZDcDFpgLpCv
-        h5xoEZOmB5m1g+OwLE7aJmWNOlDcrd/1sOBXBLAJDjxEn0GvmGOPlzxkd3chrxc6hytqJZ4
-        z/o8XBhBK6ZrmY6u7VPVmA4qtTsK4lZ4dH3s1TZV5FkRqz6Aq4ddJJekRdvjw==
-X-QQ-GoodBg: 2
-From:   Shenghong Han <hanshenghong2019@email.szu.edu.cn>
-To:     corbet@lwn.net
-Cc:     akpm@linux-foundation.org, linux-doc@vger.kernel.org,
-        linux-kernel@vger.kernel.org, vbabka@suse.cz,
-        georgi.djakov@linaro.org, lmark@codeaurora.org,
-        tangbin@cmss.chinamobile.com, zhangshengju@cmss.chinamobile.com,
-        weizhenliang@huawei.com, nixiaoming@huawei.com,
-        Shenghong Han <hanshenghong2019@email.szu.edu.cn>
-Subject: [PATCH] Documentation/vm/page_owner.rst: Update the documentation
-Date:   Tue, 14 Dec 2021 21:47:36 +0800
-Message-Id: <20211214134736.2569-1-hanshenghong2019@email.szu.edu.cn>
-X-Mailer: git-send-email 2.30.1
+        id S229744AbhLNOEW (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 14 Dec 2021 09:04:22 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:54848 "EHLO
+        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S230117AbhLNOEW (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 14 Dec 2021 09:04:22 -0500
+Received: from casper.infradead.org (casper.infradead.org [IPv6:2001:8b0:10b:1236::1])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id C06EEC06173F;
+        Tue, 14 Dec 2021 06:04:21 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+        d=infradead.org; s=casper.20170209; h=Content-Transfer-Encoding:MIME-Version:
+        Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+        Content-Description:In-Reply-To:References;
+        bh=VqYovDH3Z3x9g3qdiHOsjCVSdJhRCUd9MY5YGW/ZIbQ=; b=U26mEnlM+tRg+YaeBhS88fUQVM
+        eN9rr2BRhEjQqHOtNZ0NFgc1ePKMsjNBrC7GGxknfxCS5xwul4xZAKcT2AxqJv1ZkhECWvV2VarDy
+        KDL9V7AybdNdheWYTPYwADeaacwfOhF2gXMAbwd0sAPvX+7XMe9kUHeVpOdS06ZkQT91cEVW4I8Mw
+        hWeG9XpaJpqUqtQ2o1f1TlpSb9iKu7vZjmdvVZW/kMEHrBqrfLdsVX3nEthiRfmx6f4/2QPfwF3PM
+        EcxcwmUxK19+/G8neagCiJAbZm2fE3xldp4ia8P3Wiu9/qf6veYNrv5qw9QsL+mIwlF537u3kd3bU
+        W2hxSZYA==;
+Received: from [2001:4bb8:180:a1c8:4ccb:3bf7:77a2:141f] (helo=localhost)
+        by casper.infradead.org with esmtpsa (Exim 4.94.2 #2 (Red Hat Linux))
+        id 1mx8PU-00DlVF-CQ; Tue, 14 Dec 2021 14:04:05 +0000
+From:   Christoph Hellwig <hch@lst.de>
+To:     Jonathan Corbet <corbet@lwn.net>,
+        Alexei Starovoitov <ast@kernel.org>,
+        Daniel Borkmann <daniel@iogearbox.net>,
+        Andrii Nakryiko <andrii@kernel.org>
+Cc:     Martin KaFai Lau <kafai@fb.com>, Song Liu <songliubraving@fb.com>,
+        Yonghong Song <yhs@fb.com>,
+        John Fastabend <john.fastabend@gmail.com>,
+        KP Singh <kpsingh@kernel.org>, linux-doc@vger.kernel.org,
+        netdev@vger.kernel.org, bpf@vger.kernel.org
+Subject: improve the eBPF documentation
+Date:   Tue, 14 Dec 2021 15:03:58 +0100
+Message-Id: <20211214140402.288101-1-hch@lst.de>
+X-Mailer: git-send-email 2.30.2
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-QQ-SENDSIZE: 520
-Feedback-ID: bizesmtp:email.szu.edu.cn:qybgforeign:qybgforeign5
-X-QQ-Bgrelay: 1
+X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by casper.infradead.org. See http://www.infradead.org/rpr.html
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Update the documentation of ``page_owner``.
+Hi all,
 
-Signed-off-by: Shenghong Han <hanshenghong2019@email.szu.edu.cn>
----
- Documentation/vm/page_owner.rst | 21 ++++++++++++++++++++-
- 1 file changed, 20 insertions(+), 1 deletion(-)
+this series first splits the eBPF introductions from the
+instruction set document to then drop the classic BPF
+documentation from this file to focus on eBPF and to
+cleanup the structure and rendering of this file a bit.
 
-diff --git a/Documentation/vm/page_owner.rst b/Documentation/vm/page_owner.rst
-index 9837fc8147dd..7a28e7b0d9c2 100644
---- a/Documentation/vm/page_owner.rst
-+++ b/Documentation/vm/page_owner.rst
-@@ -97,7 +97,7 @@ Usage
- 
-    The ``page_owner_sort`` tool ignores ``PFN`` rows, puts the remaining rows
-    in buf, uses regexp to extract the page order value, counts the times
--   and pages of buf, and finally sorts them according to the times.
-+   and pages of buf, and finally sorts them according to the parameter(s).
- 
-    See the result about who allocated each page
-    in the ``sorted_page_owner.txt``. General output:
-@@ -108,3 +108,22 @@ Usage
- 
-    By default, ``page_owner_sort`` is sorted according to the times of buf.
-    If you want to sort by the pages nums of buf, use the ``-m`` parameter.
-+   The detail parameters are shown as follows:
-+
-+   fundamental function:
-+
-+	Sort:
-+		-a		Sort by memory allocate time.
-+		-m		Sort by total memory.
-+		-p		Sort by pid.
-+		-r		Sort by memory release time.
-+		-s		Sort by the stack trace.
-+		-t		Sort by times (default).
-+
-+   additional function:
-+
-+	Cull:
-+		-c		Cull by comparing stacktrace instead of total block.
-+
-+	Filter:
-+		-f		Filter out the information of blocks whose memory has not been released.
--- 
-2.30.1
-
-
-
+Diffstat:
+ index.rst           |    1 
+ instruction-set.rst |  510 +++++++++++++++-------------------------------------
+ intro.rst           |  238 ++++++++++++++++++++++++
+ 3 files changed, 387 insertions(+), 362 deletions(-)
