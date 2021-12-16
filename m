@@ -2,59 +2,68 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id CA80647801B
-	for <lists+linux-doc@lfdr.de>; Thu, 16 Dec 2021 23:46:37 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id D2FC3478014
+	for <lists+linux-doc@lfdr.de>; Thu, 16 Dec 2021 23:45:34 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S235948AbhLPWqe (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 16 Dec 2021 17:46:34 -0500
-Received: from correo.menpet.gob.ve ([190.202.80.102]:34001 "EHLO
-        correo.menpet.gob.ve" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S230462AbhLPWqc (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Thu, 16 Dec 2021 17:46:32 -0500
-X-Greylist: delayed 540 seconds by postgrey-1.27 at vger.kernel.org; Thu, 16 Dec 2021 17:46:31 EST
-Received: from zsrvhyper01.menpet.gob.ve (zsrvmenpet005.menpet.gob.ve [172.20.10.90])
-        by correo.menpet.gob.ve (Postfix) with ESMTP id 68367517C;
-        Thu, 16 Dec 2021 18:37:26 -0400 (VET)
-Received: from correo.menpet.gob.ve (localhost [127.0.0.1])
-        by zsrvhyper01.menpet.gob.ve (Postfix) with ESMTP id 2554C1C2195;
-        Thu, 16 Dec 2021 18:40:58 -0400 (-04)
-Received: from 88.99.15.85
-        (SquirrelMail authenticated user jgonzalez)
-        by correo.menpet.gob.ve with HTTP;
-        Thu, 16 Dec 2021 18:40:58 -0400
-Message-ID: <d2bd6e5692bef09b9feb244f90f11fd4.squirrel@correo.menpet.gob.ve>
-Date:   Thu, 16 Dec 2021 18:40:58 -0400
-Subject: Affordable Loan Offer
-From:   "Paul Lewis" <gotekfunds01@menpet.gob.ve>
-Reply-To: gotekfunds01@gmail.com
-User-Agent: SquirrelMail/1.4.22-5.el6
+        id S232228AbhLPWpd (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 16 Dec 2021 17:45:33 -0500
+Received: from ms.lwn.net ([45.79.88.28]:50980 "EHLO ms.lwn.net"
+        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
+        id S230462AbhLPWpd (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Thu, 16 Dec 2021 17:45:33 -0500
+Received: from localhost (unknown [IPv6:2601:281:8300:104d::5f6])
+        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+        (No client certificate requested)
+        by ms.lwn.net (Postfix) with ESMTPSA id 9E1CC35F;
+        Thu, 16 Dec 2021 22:45:32 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 ms.lwn.net 9E1CC35F
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=lwn.net; s=20201203;
+        t=1639694732; bh=XY7ZgJNb2HIM6hjHEx7BEMsrnxXQvsBUlrBoqAdjCqQ=;
+        h=From:To:Cc:Subject:In-Reply-To:References:Date:From;
+        b=iTRhPf9HBIPZkQGjHQHZLgWFij98QTdAdXQNd/RM4kzIwZbHjPTbonaAE5RwpwLkL
+         9EzeXVj35vx5YnXQQ4LGhtLEiSCiZ7g186o4nPsvWSeCr910rne+X03xMtIU/PFxjg
+         5I+6tsN9GG9jZjprxtiemeAicpJ8enJxvlUPZPxBBK5flP9PvtHHBTdwyn4RCChCVR
+         UPM0cWZDNxEIyLL4McZsHRWMUgolOOesejtC2ceYBbpHy55UDAJ8RRh7ZSQmEETFoM
+         C9TVLjmbummgikIzR/p/LirSIwGOhD2qEV1T0lu4mGGv5Ptsg3bvVq7ZrAL0DHo8UG
+         mEPqqBWmsc75A==
+From:   Jonathan Corbet <corbet@lwn.net>
+To:     Miguel Ojeda <ojeda@kernel.org>
+Cc:     Joe Perches <joe@perches.com>,
+        Randy Dunlap <rdunlap@infradead.org>,
+        Jiri Kosina <jikos@kernel.org>,
+        Jiri Kosina <trivial@kernel.org>, linux-doc@vger.kernel.org,
+        linux-kernel@vger.kernel.org
+Subject: Re: [RFC PATCH] Remove mentions of the Trivial Patch Monkey
+In-Reply-To: <20211214191415.GA19070@kernel.org>
+References: <20211214191415.GA19070@kernel.org>
+Date:   Thu, 16 Dec 2021 15:45:32 -0700
+Message-ID: <87bl1gdv8z.fsf@meer.lwn.net>
 MIME-Version: 1.0
-Content-Type:   text/plain; charset=US-ASCII
-Content-Transfer-Encoding: 7BIT
-X-Priority: 3 (Normal)
-Importance: Normal
-To:     undisclosed-recipients:;
-X-MPPPM-MailScanner-ID: 68367517C.A5A84
-X-MPPPM-MailScanner: Found to be clean
-X-MPPPM-MailScanner-From: gotekfunds01@menpet.gob.ve
-X-Spam-Status: No
+Content-Type: text/plain
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
+Miguel Ojeda <ojeda@kernel.org> writes:
 
+> Apparently, it was decided that trivial@kernel.org
+> is no longer used.
+>
+> Link: https://lore.kernel.org/lkml/fe86efbd-4e03-76c8-55cf-dabd33e85823@infradead.org/
+> Co-developed-by: Joe Perches <joe@perches.com>
+> Signed-off-by: Joe Perches <joe@perches.com>
+> Signed-off-by: Miguel Ojeda <ojeda@kernel.org>
+> ---
+> Sending this before we forget about it...
+>
+> We may want to keep the definition of "trivial patch" somewhere else.
+>
+>  Documentation/process/submitting-patches.rst | 19 -------------------
+>  MAINTAINERS                                  |  6 ------
+>  2 files changed, 25 deletions(-)
 
+It looks like the last pull from the trivial tree was bbf625990371 in
+October 2020 so yes, this looks like a patch whose time has come.
+Applied, thanks.
 
-Are you in search of a legitimate loan? Tired of Seeking Loans and
-Mortgages? Have you been turned down by your banks ? Do you need a loan to
-clear your debts/bills and start up business? Then your financial trauma
-is over. We Offer Loans from $5,000.00 to $500,000,000.00 with low
-interest rate. We are certified and trust worthy. we can help you with
-financial assistance. If interested do get back to us via Email:
-
-
-
---
-"Independencia y Patria Socialista, Viviremos y Venceremos"
-
-
+jon
