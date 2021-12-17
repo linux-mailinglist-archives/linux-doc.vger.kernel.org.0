@@ -2,73 +2,71 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 90F8C479396
-	for <lists+linux-doc@lfdr.de>; Fri, 17 Dec 2021 19:11:24 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id DB745479485
+	for <lists+linux-doc@lfdr.de>; Fri, 17 Dec 2021 20:05:24 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S238929AbhLQSLW (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Fri, 17 Dec 2021 13:11:22 -0500
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124]:22963 "EHLO
-        us-smtp-delivery-124.mimecast.com" rhost-flags-OK-OK-OK-OK)
-        by vger.kernel.org with ESMTP id S236243AbhLQSLU (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Fri, 17 Dec 2021 13:11:20 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-        s=mimecast20190719; t=1639764679;
-        h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-         to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-         content-transfer-encoding:content-transfer-encoding:
-         in-reply-to:in-reply-to:references:references;
-        bh=hdfHxUnq6Oqm9XHwzWNrUsr9UOXdYQoaq+fiSudykl8=;
-        b=cMahuuQyeJoHgl+KgkCr/Uap0t59SoFqpFJHZ4VAUwILPIPQe7nqSwC9neBrdAC0Tn8hB6
-        BeG2k7JoaU2ygffFVZh+GkhvOIxMDLrDd/8d0NXGBUKyA6Fi0GgCJYF0T1rW8hX6ZvxojS
-        O3irI4SyrozSL0qvQwXD7Cx6yPBLBu4=
-Received: from mail-wr1-f69.google.com (mail-wr1-f69.google.com
- [209.85.221.69]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- us-mta-65-e-d2WqwpNzuWzMciVX9brQ-1; Fri, 17 Dec 2021 13:11:18 -0500
-X-MC-Unique: e-d2WqwpNzuWzMciVX9brQ-1
-Received: by mail-wr1-f69.google.com with SMTP id v18-20020a5d5912000000b001815910d2c0so877307wrd.1
-        for <linux-doc@vger.kernel.org>; Fri, 17 Dec 2021 10:11:18 -0800 (PST)
+        id S240549AbhLQTFR (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Fri, 17 Dec 2021 14:05:17 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:52170 "EHLO
+        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S234115AbhLQTFQ (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Fri, 17 Dec 2021 14:05:16 -0500
+Received: from mail-ed1-x52a.google.com (mail-ed1-x52a.google.com [IPv6:2a00:1450:4864:20::52a])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 49501C06173E
+        for <linux-doc@vger.kernel.org>; Fri, 17 Dec 2021 11:05:16 -0800 (PST)
+Received: by mail-ed1-x52a.google.com with SMTP id x15so11656029edv.1
+        for <linux-doc@vger.kernel.org>; Fri, 17 Dec 2021 11:05:16 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=linux-foundation.org; s=google;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc;
+        bh=7F2aHCSe8IzO12Nz4RyfBAXoLOfk6p6JbZVcFiKHrQg=;
+        b=ZjQ4/n3jpC4K+CjIh7Q22vd534RgwvYHtS9nR1P4Lv9P3PuipIG4Ky5i+x88FHfNU+
+         COO7Q+1L2Wl2VME7dDHc3akKiuLmeIvlviUDhdeTrCBSljMxVDX7hZf2YhkozKnphVFk
+         YaiCt3VRfbmQic5ajEaNqa5Otx58kYxFTYkgk=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=x-gm-message-state:message-id:date:mime-version:user-agent:subject
-         :content-language:to:cc:references:from:organization:in-reply-to
-         :content-transfer-encoding;
-        bh=hdfHxUnq6Oqm9XHwzWNrUsr9UOXdYQoaq+fiSudykl8=;
-        b=Dft+npp0K8SKI/r3GQYa+dcMCLYutaN0qHOcKUoF21sx1oQnesJFjZ34yvtTziEomq
-         E9r/QKsxU7VS06rrfPFazvIaHcMVkN/iDJHWJ3MrQHvwl7toZ7fma/QNVrcGY4+Vw5sK
-         PLsAlURA6gcuPy6dRouoaH3N672p9QPYIAvsnnZbJ5x3wFWdthLBhQzawU4bv/Aop4fK
-         3h06BWkw1UziwPzyKi5RevQxkwok8yb0MGpDBfffVlsD80u0CFiGhX/2La3P79U2vU8j
-         clhy7/L4LdPcN0IWqNkmw4SgqAe5ihfgkmcroImeYoFVybmWhXmxbYlvlfaX46zlJufQ
-         AYOw==
-X-Gm-Message-State: AOAM532y+FUMe4+exKyR+kR4hLkpCtd2ZA2SUS170M2ffRh2bfYSoWQ6
-        5s7JUqTYKLFlvqSyOszsFU7pka0PJst9dz1BeVjXP+Z4Df+sIqtMqzpAgH9+vRH9PiN9hgTi6p0
-        MWLFoa9NR1YEXQ1n0gUso
-X-Received: by 2002:a05:6000:178a:: with SMTP id e10mr3479606wrg.373.1639764677185;
-        Fri, 17 Dec 2021 10:11:17 -0800 (PST)
-X-Google-Smtp-Source: ABdhPJwLgy4aZOFKjfg55PAvd6AQPyzQU9oTMWCfs9cPWTUhUrmiyEGJg84XCeuZydB2K04JHLv4EA==
-X-Received: by 2002:a05:6000:178a:: with SMTP id e10mr3479574wrg.373.1639764676913;
-        Fri, 17 Dec 2021 10:11:16 -0800 (PST)
-Received: from [192.168.3.132] (p4ff234b8.dip0.t-ipconnect.de. [79.242.52.184])
-        by smtp.gmail.com with ESMTPSA id n1sm9827003wrc.54.2021.12.17.10.11.15
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=7F2aHCSe8IzO12Nz4RyfBAXoLOfk6p6JbZVcFiKHrQg=;
+        b=pSfRiTGtXFeu6T5FqJvK1YTmHihxF925Xh7CnXfMNYfjn1eP7Z8rH9zgpgjOW10tMT
+         JSOSfYIOCsUr7LivWl02Neymvj65tx1fAwN3tUdGmxvxcMsKjz+NgQw4VnOjrL5Rwarb
+         MmmuLsgSDci6fyLpDRZDNOl8KdxVcCRVQfGI+WUY0bdCrz3dEpYLdbd5DEIAflX3t4nO
+         wGaMOj9leBu6IhZTXN1gCZg3DKNP6RG77KqlomYa4mXdkRFHMuLGipHHbBnU6xadUgIl
+         EWFOXWdfXqs3IdQ/3MyF2mH2rgOlqvna7p/lXa8TUZ7mQOvVP3V22z6hB1u++0jZzGQa
+         dpGA==
+X-Gm-Message-State: AOAM530TrSWCKnW2ZGyQzabaVgq805nO82jQeDgzKMOoaq9IuoNX1Y02
+        y+v2SUtB4tQluZpJJ95c901fjDXIYCxBzOMVvAA=
+X-Google-Smtp-Source: ABdhPJyRB3JtgLgKdI/QwJmsqRBdvBHuG+R9sDHxxzJd3KbedZzBywcXv9PhuRepixJ15YRxobCaXA==
+X-Received: by 2002:a17:906:37d3:: with SMTP id o19mr3769553ejc.32.1639767914689;
+        Fri, 17 Dec 2021 11:05:14 -0800 (PST)
+Received: from mail-wm1-f43.google.com (mail-wm1-f43.google.com. [209.85.128.43])
+        by smtp.gmail.com with ESMTPSA id y19sm4108076edc.17.2021.12.17.11.05.14
+        for <linux-doc@vger.kernel.org>
         (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Fri, 17 Dec 2021 10:11:16 -0800 (PST)
-Message-ID: <7f35b4a3-8a31-d74c-fcc0-ecc87071d9a5@redhat.com>
-Date:   Fri, 17 Dec 2021 19:11:15 +0100
+        Fri, 17 Dec 2021 11:05:14 -0800 (PST)
+Received: by mail-wm1-f43.google.com with SMTP id o29so2271915wms.2
+        for <linux-doc@vger.kernel.org>; Fri, 17 Dec 2021 11:05:14 -0800 (PST)
+X-Received: by 2002:a05:600c:1e01:: with SMTP id ay1mr1762683wmb.152.1639767903770;
+ Fri, 17 Dec 2021 11:05:03 -0800 (PST)
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.2.0
-Subject: Re: [PATCH v1 03/11] mm: simplify hugetlb and file-THP handling in
- __page_mapcount()
-Content-Language: en-US
-To:     Mike Kravetz <mike.kravetz@oracle.com>,
-        linux-kernel@vger.kernel.org
-Cc:     Andrew Morton <akpm@linux-foundation.org>,
+References: <20211217113049.23850-1-david@redhat.com> <20211217113049.23850-7-david@redhat.com>
+In-Reply-To: <20211217113049.23850-7-david@redhat.com>
+From:   Linus Torvalds <torvalds@linux-foundation.org>
+Date:   Fri, 17 Dec 2021 11:04:47 -0800
+X-Gmail-Original-Message-ID: <CAHk-=wgL5u3XMgfUN6BOqVO0OvPx3-LEri1ju-1TW4dFhHQO4g@mail.gmail.com>
+Message-ID: <CAHk-=wgL5u3XMgfUN6BOqVO0OvPx3-LEri1ju-1TW4dFhHQO4g@mail.gmail.com>
+Subject: Re: [PATCH v1 06/11] mm: support GUP-triggered unsharing via
+ FAULT_FLAG_UNSHARE (!hugetlb)
+To:     David Hildenbrand <david@redhat.com>
+Cc:     Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
+        Andrew Morton <akpm@linux-foundation.org>,
         Hugh Dickins <hughd@google.com>,
-        Linus Torvalds <torvalds@linux-foundation.org>,
         David Rientjes <rientjes@google.com>,
         Shakeel Butt <shakeelb@google.com>,
         John Hubbard <jhubbard@nvidia.com>,
         Jason Gunthorpe <jgg@nvidia.com>,
+        Mike Kravetz <mike.kravetz@oracle.com>,
         Mike Rapoport <rppt@linux.ibm.com>,
         Yang Shi <shy828301@gmail.com>,
         "Kirill A . Shutemov" <kirill.shutemov@linux.intel.com>,
@@ -82,51 +80,39 @@ Cc:     Andrew Morton <akpm@linux-foundation.org>,
         Donald Dutile <ddutile@redhat.com>,
         Christoph Hellwig <hch@lst.de>,
         Oleg Nesterov <oleg@redhat.com>, Jan Kara <jack@suse.cz>,
-        linux-mm@kvack.org, linux-kselftest@vger.kernel.org,
-        linux-doc@vger.kernel.org
-References: <20211217113049.23850-1-david@redhat.com>
- <20211217113049.23850-4-david@redhat.com>
- <0b0007b3-bf6f-ccd7-96cf-3dd861abf224@oracle.com>
-From:   David Hildenbrand <david@redhat.com>
-Organization: Red Hat
-In-Reply-To: <0b0007b3-bf6f-ccd7-96cf-3dd861abf224@oracle.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+        Linux-MM <linux-mm@kvack.org>,
+        "open list:KERNEL SELFTEST FRAMEWORK" 
+        <linux-kselftest@vger.kernel.org>,
+        "open list:DOCUMENTATION" <linux-doc@vger.kernel.org>
+Content-Type: text/plain; charset="UTF-8"
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On 17.12.21 19:06, Mike Kravetz wrote:
-> On 12/17/21 03:30, David Hildenbrand wrote:
->> Let's return early for hugetlb, which really only relies on the compound
->> mapcount so far and does not support PageDoubleMap() yet. Use the chance
-> 
-> It is too early to say if hugetlb double mapping will use PageDoubleMap().
-> I do not think (hope) it will be necessary.  So, I think you can drop mention
-> of it here.
+On Fri, Dec 17, 2021 at 3:34 AM David Hildenbrand <david@redhat.com> wrote:
+>
+> + * If the child takes a read-only pin on such a page (i.e., FOLL_WRITE is not
+> + * set) and then unmaps the target page, we have:
+> + *
+> + * * page has mapcount == 1 and refcount > 1
 
-Desires have most certainly been expressed from a couple of parties --
-to PTE map huge pages :) Hopefully we'll find a way to avoid
-PageDoubleMap, I agree.
+All these games with mapcount makes me think this is still broken.
 
-Dropping the comment!
+mapcount has been a horribly broken thing in the past, and I'm not
+convinced it's not a broken thing now.
 
-> 
->> to cleanup the file-THP case to make it easier to grasp. While at it, use
->> head_compound_mapcount().
->>
->> This is a preparation for further changes.
->>
->> Reviewed-by: Peter Xu <peterx@redhat.com>
->> Signed-off-by: David Hildenbrand <david@redhat.com>
-> 
-> Acked-by: Mike Kravetz <mike.kravetz@oracle.com>
-> 
+> +       vmf->page = vm_normal_page(vmf->vma, vmf->address, vmf->orig_pte);
+> +       if (vmf->page && PageAnon(vmf->page) && !PageKsm(vmf->page) &&
+> +           page_mapcount(vmf->page) > 1) {
 
-Thanks!
+What keeps the mapcount stable in here?
 
--- 
-Thanks,
+And I still believe that the whole notion that "COW should use
+mapcount" is pure and utter garbage.
 
-David / dhildenb
+If we are doing a COW, we need an *exclusive* access to the page. That
+is not mapcount, that is the page ref.
 
+mapcount is insane, and I think this is making this worse again.
+
+                Linus
