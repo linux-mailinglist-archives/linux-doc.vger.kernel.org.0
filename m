@@ -2,105 +2,82 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 0D3D0479B66
-	for <lists+linux-doc@lfdr.de>; Sat, 18 Dec 2021 15:35:12 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id F3695479BAE
+	for <lists+linux-doc@lfdr.de>; Sat, 18 Dec 2021 17:11:16 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S232685AbhLROfL (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Sat, 18 Dec 2021 09:35:11 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:53630 "EHLO
+        id S233589AbhLRQLP (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Sat, 18 Dec 2021 11:11:15 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:46052 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S232712AbhLROfH (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Sat, 18 Dec 2021 09:35:07 -0500
-Received: from mail-lf1-x131.google.com (mail-lf1-x131.google.com [IPv6:2a00:1450:4864:20::131])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 67C1EC061574
-        for <linux-doc@vger.kernel.org>; Sat, 18 Dec 2021 06:35:07 -0800 (PST)
-Received: by mail-lf1-x131.google.com with SMTP id x21so2660921lfa.5
-        for <linux-doc@vger.kernel.org>; Sat, 18 Dec 2021 06:35:07 -0800 (PST)
+        with ESMTP id S233490AbhLRQLM (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Sat, 18 Dec 2021 11:11:12 -0500
+Received: from mail-ed1-x544.google.com (mail-ed1-x544.google.com [IPv6:2a00:1450:4864:20::544])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 59CD6C06173E
+        for <linux-doc@vger.kernel.org>; Sat, 18 Dec 2021 08:11:12 -0800 (PST)
+Received: by mail-ed1-x544.google.com with SMTP id z7so19813086edc.11
+        for <linux-doc@vger.kernel.org>; Sat, 18 Dec 2021 08:11:12 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=shutemov-name.20210112.gappssmtp.com; s=20210112;
-        h=date:from:to:cc:subject:message-id:references:mime-version
-         :content-disposition:in-reply-to;
-        bh=pYgC6UbioLpLUDdPygjohyGooIms1qIM+qPuyGqET70=;
-        b=rHhgE6Zlotk8HdSmidDY7wBJeHWSp00Vfo+Aqyou5BgyXPRyKu8LnPMUgXmkKkflzx
-         udb3hkJAw6YSaGTz2tvs0AUdbG9qxcputvPHcQJHMxINHngDuOsk5v1e2RDCfUnB1Ab8
-         Km2eL88kgKvUp1qHFQIF+u/2wiYm+aqXrJo5w5NWU3ewPCL+RZWQvfMM8aVSybzkQWv2
-         YznjW4G5pZEtM+9rqSNDOTSDoor1uxwRfciKnnPsd/l/oMeQiT+BBMLp7QmdgammQt4/
-         5yoUrYl7NRtmvNpp4QCxknwd6fmsh7MmHlYOIuMeHEPl2JNzg5WgzpB/pIaguDzdx6I4
-         IGyA==
+        d=gmail.com; s=20210112;
+        h=mime-version:reply-to:from:date:message-id:subject:to;
+        bh=xQrYULKok+hL+AIRGJuG9CojAZcnV9Xr+it7yxQJVlY=;
+        b=TAe/0gdZQyVnOwFeWOpAxZqQsqsiWgyNYN0Ekwf+JhTgUjuNjbzGswPltILXIZldnO
+         piW8OTWQs3QfEJBMpm5bqqAMZtVsNDgLorKPNTkVuvMymt1E7p20aywUIY+F/0APXfyK
+         65WI3eCPsKnU51ryMiwGYBxqJwE5O/hGkdIda29CowkNsTUjYXf7Ie2c8BdmfECIwsw/
+         dl7Cy2AL9tlH8BH806Y8bN8+F024f4PojnoaaukswqpfjTqXGIlVq3VX2lCxsXpSduay
+         bUSjqtuQsL1RruhnmLvFlE1PpC8QW9qF8Uqo8Yt0tJciltwjKkMKZhiceegluJp191l6
+         cBrw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=x-gm-message-state:date:from:to:cc:subject:message-id:references
-         :mime-version:content-disposition:in-reply-to;
-        bh=pYgC6UbioLpLUDdPygjohyGooIms1qIM+qPuyGqET70=;
-        b=X8NB3L4t0eBJRYGDTe/qnlN+wWNAgztkK/LJScFEoitny7MISXOlB1on9Jt5pW2G9d
-         MZcoOwAU1Bl8vz9ySkuTHkHVFxn9E6DwLNY1t9cXtlR3OtCXFMp6zIYtAj643AMx9zmC
-         eOSc/Sudf+J6RyUQ36YtQEjHgJXfXoWCNQ4FK1pLQHT2FJUQh148mcayXcEK7eDg4Qxr
-         F05t0Seyml60u6br/FhYCVa/qXtPPt5Saf0HIZdhO0h3eqwIq4EUXRZ7d7GS1IENIGUq
-         ylIP7ryAaDokye/C52W6gRZiSOGU/O+PPFQyef4ag5xVi1m0dpaS947AgRjkfy1olnpu
-         sCgQ==
-X-Gm-Message-State: AOAM533iXO50357QztUrarkp5cMD7mBXXknYo6M8qAx+DDuVA7MySRwb
-        Ye3etGv80b0ljI1lP+15Xbbfvg==
-X-Google-Smtp-Source: ABdhPJyJfweji7/uZmtDXAtvhhz48SwfdSecz//NO1/1kZj2ekmyONM2NijthLcvedNhQHMMoHkBbQ==
-X-Received: by 2002:a05:6512:ac9:: with SMTP id n9mr462354lfu.460.1639838105757;
-        Sat, 18 Dec 2021 06:35:05 -0800 (PST)
-Received: from box.localdomain ([86.57.175.117])
-        by smtp.gmail.com with ESMTPSA id s4sm1728641lfp.198.2021.12.18.06.35.04
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 18 Dec 2021 06:35:05 -0800 (PST)
-Received: by box.localdomain (Postfix, from userid 1000)
-        id 98E2D103A58; Sat, 18 Dec 2021 17:35:12 +0300 (+03)
-Date:   Sat, 18 Dec 2021 17:35:12 +0300
-From:   "Kirill A. Shutemov" <kirill@shutemov.name>
-To:     David Hildenbrand <david@redhat.com>
-Cc:     linux-kernel@vger.kernel.org,
-        Andrew Morton <akpm@linux-foundation.org>,
-        Hugh Dickins <hughd@google.com>,
-        Linus Torvalds <torvalds@linux-foundation.org>,
-        David Rientjes <rientjes@google.com>,
-        Shakeel Butt <shakeelb@google.com>,
-        John Hubbard <jhubbard@nvidia.com>,
-        Jason Gunthorpe <jgg@nvidia.com>,
-        Mike Kravetz <mike.kravetz@oracle.com>,
-        Mike Rapoport <rppt@linux.ibm.com>,
-        Yang Shi <shy828301@gmail.com>,
-        "Kirill A . Shutemov" <kirill.shutemov@linux.intel.com>,
-        Matthew Wilcox <willy@infradead.org>,
-        Vlastimil Babka <vbabka@suse.cz>, Jann Horn <jannh@google.com>,
-        Michal Hocko <mhocko@kernel.org>,
-        Nadav Amit <namit@vmware.com>, Rik van Riel <riel@surriel.com>,
-        Roman Gushchin <guro@fb.com>,
-        Andrea Arcangeli <aarcange@redhat.com>,
-        Peter Xu <peterx@redhat.com>,
-        Donald Dutile <ddutile@redhat.com>,
-        Christoph Hellwig <hch@lst.de>,
-        Oleg Nesterov <oleg@redhat.com>, Jan Kara <jack@suse.cz>,
-        linux-mm@kvack.org, linux-kselftest@vger.kernel.org,
-        linux-doc@vger.kernel.org
-Subject: Re: [PATCH v1 04/11] mm: thp: simlify total_mapcount()
-Message-ID: <20211218143512.luh7jnd4y7it2yun@box.shutemov.name>
-References: <20211217113049.23850-1-david@redhat.com>
- <20211217113049.23850-5-david@redhat.com>
+        h=x-gm-message-state:mime-version:reply-to:from:date:message-id
+         :subject:to;
+        bh=xQrYULKok+hL+AIRGJuG9CojAZcnV9Xr+it7yxQJVlY=;
+        b=kvzIy56yeWt9/34rn9xB3YvZBzXwA7ldcJY7VYSAPNwJgPghmTd8yWEHsg40QqD+L+
+         lHiURzpKLxxsdPOmGftsoaWeskN2DMJQ9fEJWCUuAttZgiu1eLhxF9Jq1GN8MabMakWI
+         ry/nXvXh59jyczhmVnApv+kcBU3kudQCQgou9uraGqZF7XOME1uEsaruuwAGD09rHrZa
+         6EDgSfwLpt5PSqNPRQqvBzPT9b5xCLfTcV1ueeKE0kYtK4TKN9w6+LH9fetXO1tuv6Ff
+         j9GgU98Z5459zv4Z9Mnax4kdDeoQQjfDCJ2PdQjEMor4uUw16aWp9HJyuHAJ9eumYVIz
+         F1jA==
+X-Gm-Message-State: AOAM5309x/KyDCmopUYkaH82MfnwBUhkjVZ/IbQxPqkgTwqI2FCOi5bw
+        nlax0PxD1BOZx6g/DqrPCj78k6SbzzEwed6ZRLY=
+X-Google-Smtp-Source: ABdhPJxUqJuBZZbxdyzHNJvBwj8+SBg+01IxRf+Ji5do+t2XMEQqrm4NMq8dSBwzkG9/jDNm+HEaZgaPUg7zrcSHrqY=
+X-Received: by 2002:a17:906:9402:: with SMTP id q2mr6597785ejx.106.1639843870775;
+ Sat, 18 Dec 2021 08:11:10 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20211217113049.23850-5-david@redhat.com>
+Received: by 2002:a17:906:c194:0:0:0:0 with HTTP; Sat, 18 Dec 2021 08:11:10
+ -0800 (PST)
+Reply-To: mrsaishag45@gmail.com
+From:   Mrs Aisha Al-Qaddafi <asiha7154@gmail.com>
+Date:   Sat, 18 Dec 2021 08:11:10 -0800
+Message-ID: <CAFsn1c6ExQQQCW0vsc_8P3+JkMKGQOk5h5kV47RF_=C51uX98w@mail.gmail.com>
+Subject: Dear Friend,
+To:     undisclosed-recipients:;
+Content-Type: text/plain; charset="UTF-8"
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Fri, Dec 17, 2021 at 12:30:42PM +0100, David Hildenbrand wrote:
-> Let's simplify a bit, returning for PageHuge() early and using
-> head_compound_page() as we are only getting called for HEAD pages.
-> 
-> Note the VM_BUG_ON_PAGE(PageTail(page), page) check at the beginning of
-> total_mapcount().
-> 
-> This is a preparation for further changes.
-> 
-> Reviewed-by: Peter Xu <peterx@redhat.com>
-> Signed-off-by: David Hildenbrand <david@redhat.com>
+Dear Friend,
 
-Acked-by: Kirill A. Shutemov <kirill.shutemov@linux.intel.com>
+I came across your e-mail contact prior to a private search while in
+need of your assistance. I am Aisha Al-Qaddafi, the only biological
+Daughter of Former President of Libya Col. Muammar Al-Qaddafi. Am a
+single Mother and a Widow with three Children.
 
--- 
- Kirill A. Shutemov
+I have investment funds worth Twenty Seven Million Five Hundred
+Thousand United State Dollar ($27.500.000.00 ) and i need a trusted
+investment Manager/Partner because of my current refugee status,
+however, I am interested in you for investment project assistance in
+your country, may be from there, we can build business relationship in
+the nearest future.
+
+I am willing to negotiate an investment/business profit sharing ratio
+with you based on the future investment earning profits.
+
+If you are willing to handle this project on my behalf kindly reply
+urgently to enable me to provide you more information about the
+investment funds.
+
+Your Urgent Reply Will Be Appreciated
+
+Best Regards
+Mrs Aisha Al-Qaddafi
