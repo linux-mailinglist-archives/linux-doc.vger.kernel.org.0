@@ -2,56 +2,57 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id A1A2A47AB10
-	for <lists+linux-doc@lfdr.de>; Mon, 20 Dec 2021 15:11:10 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 7032C47AB30
+	for <lists+linux-doc@lfdr.de>; Mon, 20 Dec 2021 15:19:19 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S233482AbhLTOLF (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 20 Dec 2021 09:11:05 -0500
-Received: from mga05.intel.com ([192.55.52.43]:46003 "EHLO mga05.intel.com"
+        id S233552AbhLTOTS (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 20 Dec 2021 09:19:18 -0500
+Received: from mga03.intel.com ([134.134.136.65]:24086 "EHLO mga03.intel.com"
         rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S233480AbhLTOLE (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Mon, 20 Dec 2021 09:11:04 -0500
+        id S233576AbhLTOTR (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Mon, 20 Dec 2021 09:19:17 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
   d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1640009464; x=1671545464;
+  t=1640009957; x=1671545957;
   h=date:from:to:cc:subject:message-id:references:
    mime-version:content-transfer-encoding:in-reply-to;
-  bh=0XcNLixrtr2QjXg1MaKB5fuQPBpmBxmMJ668nUAmjJs=;
-  b=IDW+upGxLOp9nQmhAQylU7OkSUOU+1YSNRW+miIH6YM1GLdjGt+IrtaK
-   RyAPF+eJdzg2ZNB6dlSuMhcXz5Ec0q0ilSJ3T3w+lgVo0hF/T178Z0WX8
-   9vME9kzx1QMGJTNEe/9Y+3B96bTl+qidUZMzKy9AD6bW/FWwiwXMCfNYo
-   mBr6d4gl5/QhM6ppWPtlaQeYUJVLmKoFx8LuL7C4JW4VSdi860whM1Bcr
-   WEvh7iTr4kc0zU13sp/RADTLBZkLWaFwpiM3JxGvwFkIK5bJcMP6XE5Fx
-   0pbtaAdEpTh15pdAuNoHW3eCVNpLkzR2R+Aqq/GmJyVqpHTshwhPX1LBN
-   w==;
-X-IronPort-AV: E=McAfee;i="6200,9189,10203"; a="326467964"
+  bh=SmmpPoWknX/04b0LTXOTnTFuxaObwEMDn3ClqW8vP7Y=;
+  b=bTBtBLJcYNLYDGPJQ3GRs+q1MonEdqFFX8Itmmz1hdewBo8M7HoDTKJG
+   eqpyi5cwXsHDInEwXOMd3089o9pqOuZ1dWRHy2raTVJZ5TVBiDQ3kwPTK
+   tMC0rJ3uaikE/qw5HcAMe6doSACz102mgntd+Fmx46bxMHaSXobIjS0l7
+   gZejk1nKmWv9hjt6mpux3kjQuSDLkrv4Mb10Tk1v+MKhP++sEGZclKYfQ
+   /rGHmrf67j0AN5TJ89B1LLcnGjKs+MkpX0IHG1TBmx/1k6Ug1NHLlwVz3
+   ycbwQEbBALtmgTwe3npBUEuVbmywqs9SHQK7v5vtXUYL5CCOn5xWzeqHf
+   Q==;
+X-IronPort-AV: E=McAfee;i="6200,9189,10203"; a="240126979"
 X-IronPort-AV: E=Sophos;i="5.88,220,1635231600"; 
-   d="scan'208";a="326467964"
-Received: from orsmga006.jf.intel.com ([10.7.209.51])
-  by fmsmga105.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 20 Dec 2021 06:08:25 -0800
+   d="scan'208";a="240126979"
+Received: from fmsmga003.fm.intel.com ([10.253.24.29])
+  by orsmga103.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 20 Dec 2021 06:19:16 -0800
 X-ExtLoop1: 1
 X-IronPort-AV: E=Sophos;i="5.88,220,1635231600"; 
-   d="scan'208";a="467398710"
+   d="scan'208";a="606727518"
 Received: from lkp-server02.sh.intel.com (HELO 9f38c0981d9f) ([10.239.97.151])
-  by orsmga006.jf.intel.com with ESMTP; 20 Dec 2021 06:08:20 -0800
+  by FMSMGA003.fm.intel.com with ESMTP; 20 Dec 2021 06:19:13 -0800
 Received: from kbuild by 9f38c0981d9f with local (Exim 4.92)
         (envelope-from <lkp@intel.com>)
-        id 1mzJKh-0007qE-RY; Mon, 20 Dec 2021 14:08:07 +0000
-Date:   Mon, 20 Dec 2021 22:07:49 +0800
+        id 1mzJVM-0007r2-6b; Mon, 20 Dec 2021 14:19:08 +0000
+Date:   Mon, 20 Dec 2021 22:18:18 +0800
 From:   kernel test robot <lkp@intel.com>
 To:     =?utf-8?B?UmFmYcWCIE1pxYJlY2tp?= <zajec5@gmail.com>,
         Srinivas Kandagatla <srinivas.kandagatla@linaro.org>,
         Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
         "Rafael J . Wysocki" <rafael@kernel.org>,
         Jonathan Corbet <corbet@lwn.net>
-Cc:     kbuild-all@lists.01.org, Daniel Vetter <daniel.vetter@ffwll.ch>,
+Cc:     llvm@lists.linux.dev, kbuild-all@lists.01.org,
+        Daniel Vetter <daniel.vetter@ffwll.ch>,
         Dan Williams <dan.j.williams@intel.com>,
         Bjorn Helgaas <helgaas@kernel.org>,
         Krzysztof =?utf-8?Q?Wilczy=C5=84ski?= <kw@linux.com>,
         Heiner Kallweit <hkallweit1@gmail.com>,
         linux-doc@vger.kernel.org
 Subject: Re: [PATCH 1/2] sysfs: add sysfs_add_bin_file_to_group()
-Message-ID: <202112202251.hdWPQftO-lkp@intel.com>
+Message-ID: <202112202254.l5IadaDs-lkp@intel.com>
 References: <20211220064730.28806-1-zajec5@gmail.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=utf-8
@@ -75,8 +76,8 @@ https://git-scm.com/docs/git-format-patch]
 
 url:    https://github.com/0day-ci/linux/commits/Rafa-Mi-ecki/sysfs-add-sysfs_add_bin_file_to_group/20211220-144856
 base:   https://git.kernel.org/pub/scm/linux/kernel/git/gregkh/driver-core.git aa483f3ce655ed9ee4f32d050d1822eec2d20ada
-config: nds32-allnoconfig (https://download.01.org/0day-ci/archive/20211220/202112202251.hdWPQftO-lkp@intel.com/config)
-compiler: nds32le-linux-gcc (GCC) 11.2.0
+config: x86_64-randconfig-r024-20211220 (https://download.01.org/0day-ci/archive/20211220/202112202254.l5IadaDs-lkp@intel.com/config)
+compiler: clang version 14.0.0 (https://github.com/llvm/llvm-project 555eacf75f21cd1dfc6363d73ad187b730349543)
 reproduce (this is a W=1 build):
         wget https://raw.githubusercontent.com/intel/lkp-tests/master/sbin/make.cross -O ~/bin/make.cross
         chmod +x ~/bin/make.cross
@@ -86,19 +87,21 @@ reproduce (this is a W=1 build):
         git checkout a9802080b6d35af5dfd7ae847a0978e47caafd59
         # save the config file to linux build tree
         mkdir build_dir
-        COMPILER_INSTALL_PATH=$HOME/0day COMPILER=gcc-11.2.0 make.cross O=build_dir ARCH=nds32 SHELL=/bin/bash fs/sysfs/
+        COMPILER_INSTALL_PATH=$HOME/0day COMPILER=clang make.cross W=1 O=build_dir ARCH=x86_64 SHELL=/bin/bash fs/sysfs/
 
 If you fix the issue, kindly add following tag as appropriate
 Reported-by: kernel test robot <lkp@intel.com>
 
 All warnings (new ones prefixed by >>):
 
->> fs/sysfs/file.c:379:5: warning: no previous prototype for '__sysfs_add_file_to_group' [-Wmissing-prototypes]
-     379 | int __sysfs_add_file_to_group(struct kobject *kobj,
-         |     ^~~~~~~~~~~~~~~~~~~~~~~~~
---
-   fs/sysfs/file.c:383: warning: Function parameter or member 'battr' not described in '__sysfs_add_file_to_group'
->> fs/sysfs/file.c:383: warning: expecting prototype for sysfs_add_file_to_group(). Prototype was for __sysfs_add_file_to_group() instead
+>> fs/sysfs/file.c:379:5: warning: no previous prototype for function '__sysfs_add_file_to_group' [-Wmissing-prototypes]
+   int __sysfs_add_file_to_group(struct kobject *kobj,
+       ^
+   fs/sysfs/file.c:379:1: note: declare 'static' if the function is not intended to be used outside of this translation unit
+   int __sysfs_add_file_to_group(struct kobject *kobj,
+   ^
+   static 
+   1 warning generated.
 
 
 vim +/__sysfs_add_file_to_group +379 fs/sysfs/file.c
@@ -114,7 +117,7 @@ vim +/__sysfs_add_file_to_group +379 fs/sysfs/file.c
    380				      const struct attribute *attr,
    381				      const struct bin_attribute *battr,
    382				      const char *group)
- > 383	{
+   383	{
    384		struct kernfs_node *parent;
    385		kuid_t uid;
    386		kgid_t gid;
