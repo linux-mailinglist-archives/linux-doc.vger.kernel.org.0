@@ -2,205 +2,79 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 7CB8E47C034
-	for <lists+linux-doc@lfdr.de>; Tue, 21 Dec 2021 13:57:08 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 6A20747C06A
+	for <lists+linux-doc@lfdr.de>; Tue, 21 Dec 2021 14:05:12 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S237958AbhLUM5E (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 21 Dec 2021 07:57:04 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:52534 "EHLO
+        id S229820AbhLUNFL (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 21 Dec 2021 08:05:11 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:54538 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S237950AbhLUM5D (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 21 Dec 2021 07:57:03 -0500
-Received: from ams.source.kernel.org (ams.source.kernel.org [IPv6:2604:1380:4601:e00::1])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 97A7DC061574;
-        Tue, 21 Dec 2021 04:57:03 -0800 (PST)
-Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
-        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
-        (No client certificate requested)
-        by ams.source.kernel.org (Postfix) with ESMTPS id 38119B8164C;
-        Tue, 21 Dec 2021 12:57:02 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 531B2C36AE2;
-        Tue, 21 Dec 2021 12:57:00 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=linuxfoundation.org;
-        s=korg; t=1640091420;
-        bh=BT3bXmsja7x7lLZneOXWG8NvM0Aa3dUmFitxurUw7d0=;
-        h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-        b=K3JTawwfSIq2nj2gTtgvK1vzxDKKkG9RfEopAWFFBieD5F4C+OGhgIdW+Sjv8IlP/
-         YEZtKKWL7f/QnZ4Yq0g4l+MHPd+9TqNQB2CATrgTQ2KisZrP/l138TPh2Ya0K0Vi3S
-         qwjx0khz9o3GYl/jE5dCiJgYJTWS6h5LPe4VBI9E=
-Date:   Tue, 21 Dec 2021 13:56:57 +0100
-From:   Greg Kroah-Hartman <gregkh@linuxfoundation.org>
-To:     =?utf-8?B?UmFmYcWCIE1pxYJlY2tp?= <zajec5@gmail.com>
-Cc:     Srinivas Kandagatla <srinivas.kandagatla@linaro.org>,
-        "Rafael J . Wysocki" <rafael@kernel.org>,
-        Jonathan Corbet <corbet@lwn.net>,
-        Daniel Vetter <daniel.vetter@ffwll.ch>,
-        Dan Williams <dan.j.williams@intel.com>,
-        Bjorn Helgaas <bhelgaas@google.com>,
-        Krzysztof =?utf-8?Q?Wilczy=C5=84ski?= <kw@linux.com>,
-        Heiner Kallweit <hkallweit1@gmail.com>,
-        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
-        =?utf-8?B?UmFmYcWCIE1pxYJlY2tp?= <rafal@milecki.pl>
-Subject: Re: [PATCH 2/2] nvmem: expose NVMEM cells in sysfs
-Message-ID: <YcHPGQ0FH0kTzpbq@kroah.com>
-References: <20211220064730.28806-1-zajec5@gmail.com>
- <20211220064730.28806-2-zajec5@gmail.com>
- <YcA4ArALDTjUedrb@kroah.com>
- <c49f2d6d-7974-5bc7-9bc1-ac265a23c2c0@gmail.com>
- <YcF1Kizcvgqa9ZT4@kroah.com>
- <d68ba301-7877-a8d8-8700-c601a4996818@gmail.com>
- <YcF4E82M89huIbSD@kroah.com>
- <3cb1d0a4-6e20-f751-6d66-c1487ef31f30@gmail.com>
- <YcF+g0ra5tttXOQF@kroah.com>
- <0527135c-35f5-bc63-edb3-81cb03eb03f6@gmail.com>
+        with ESMTP id S229732AbhLUNFL (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 21 Dec 2021 08:05:11 -0500
+Received: from mail-lj1-x233.google.com (mail-lj1-x233.google.com [IPv6:2a00:1450:4864:20::233])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id B246AC061574
+        for <linux-doc@vger.kernel.org>; Tue, 21 Dec 2021 05:05:10 -0800 (PST)
+Received: by mail-lj1-x233.google.com with SMTP id v15so21402528ljc.0
+        for <linux-doc@vger.kernel.org>; Tue, 21 Dec 2021 05:05:10 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112;
+        h=mime-version:reply-to:from:date:message-id:subject:to;
+        bh=z3761g/YcSpPAuiOYmSoWM6QQwJyO6T+cSVbmG3LsJ4=;
+        b=nwLum+ja8cfr2zB3lXhzud9lhG64QjT2fFRmpduVNV+iZy9EpdjXFHUR+HS+II1Gbi
+         dCGbcttoXRpeioAyxTRITJhX1+sm2+DfXO921U1CUeeH+6eyrGqAv2r/O8gkN0ktUhsi
+         KB3w/SOJKkE5DcQXCwWiDynzpHTs57//QCxPFgD3VgbHUZcI+vYqpIKO1gDNNjxiQY7B
+         OFrAdrD2a9ceKxRMbVhor9BG5DmmCnBgvHvhCGqEuVXeR7RO67I/OF2g/YBzFBvjmbln
+         ZH/Oj73vklc35iRk9Sai1/s/DvMn5yZ8a4Uqdozneb09NcMA2a9ipUmxbbzzmxhwNo+6
+         3oEA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:mime-version:reply-to:from:date:message-id
+         :subject:to;
+        bh=z3761g/YcSpPAuiOYmSoWM6QQwJyO6T+cSVbmG3LsJ4=;
+        b=qhj9lmNAjkOOL/mWPgiOxFegKZ61e3VpQ0BqvwWVnyvwehNd0bAFQPix0/E83KYrFl
+         XCdC+KZi6BZwUK8JQ1qxxT5R9IUOfuz4Wo5m3od2cUpwkYvmf1o/RBrB2YhC4b7RDmeD
+         7rWVLuuTis6exyAoITCEcEr3bFxEJmMutzr/KB89aOOH+xf3tRvcMSPJjmjgS2DalFjs
+         tEOyP5s/+iez4xbujRqU+3jgujEg7aX4f/i3AHI85pNvuBZt0or2/iC4SejH9jNid4ce
+         FH+/pkFCecbHpt1qUHTpl0BDeDGMbxk2ZTRRc7oOorTnTi7Fgv4/6Pr7dHqGf5k2LGXW
+         DVGw==
+X-Gm-Message-State: AOAM5317RL9lKuQIf4+zc0Kb90AYXQQ5msKCVMT8p0IRAdak28PbEudB
+        hEq4dvH5y6GTKlmNR2vs2G/v+WebOCXeofz3PSA=
+X-Google-Smtp-Source: ABdhPJyTV/oatnq8IPd2GLqUfrcOSynU+lfZFLkgdZZx7d0SxoRSwTcniXC89+KJEVDUaDto9kLNdLCQlYT5eTOZfRw=
+X-Received: by 2002:a2e:7319:: with SMTP id o25mr2468702ljc.320.1640091908973;
+ Tue, 21 Dec 2021 05:05:08 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <0527135c-35f5-bc63-edb3-81cb03eb03f6@gmail.com>
+Received: by 2002:a19:7b01:0:0:0:0:0 with HTTP; Tue, 21 Dec 2021 05:05:08
+ -0800 (PST)
+Reply-To: mduku5550@gmail.com
+From:   "mr.michael" <ouea2345@gmail.com>
+Date:   Tue, 21 Dec 2021 13:05:08 +0000
+Message-ID: <CABdqQxtuExn2ROxOSe05OZ=KpcyJN651fk9TDMmA3N6hKkHeGw@mail.gmail.com>
+Subject: Hello Dear
+To:     undisclosed-recipients:;
+Content-Type: text/plain; charset="UTF-8"
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Tue, Dec 21, 2021 at 01:24:00PM +0100, Rafał Miłecki wrote:
-> On 21.12.2021 08:13, Greg Kroah-Hartman wrote:
-> > On Tue, Dec 21, 2021 at 07:53:32AM +0100, Rafał Miłecki wrote:
-> > > On 21.12.2021 07:45, Greg Kroah-Hartman wrote:
-> > > > On Tue, Dec 21, 2021 at 07:39:24AM +0100, Rafał Miłecki wrote:
-> > > > > On 21.12.2021 07:33, Greg Kroah-Hartman wrote:
-> > > > > > On Mon, Dec 20, 2021 at 09:39:43PM +0100, Rafał Miłecki wrote:
-> > > > > > > Hi Greg,
-> > > > > > > 
-> > > > > > > On 20.12.2021 09:00, Greg Kroah-Hartman wrote:
-> > > > > > > > On Mon, Dec 20, 2021 at 07:47:30AM +0100, Rafał Miłecki wrote:
-> > > > > > > > >      static void nvmem_cell_entry_add(struct nvmem_cell_entry *cell)
-> > > > > > > > >      {
-> > > > > > > > > +	struct device *dev = &cell->nvmem->dev;
-> > > > > > > > > +	int err;
-> > > > > > > > > +
-> > > > > > > > >      	mutex_lock(&nvmem_mutex);
-> > > > > > > > >      	list_add_tail(&cell->node, &cell->nvmem->cells);
-> > > > > > > > >      	mutex_unlock(&nvmem_mutex);
-> > > > > > > > > +
-> > > > > > > > > +	sysfs_attr_init(&cell->battr.attr);
-> > > > > > > > > +	cell->battr.attr.name = cell->name;
-> > > > > > > > > +	cell->battr.attr.mode = 0400;
-> > > > > > > > > +	cell->battr.read = nvmem_cell_attr_read;
-> > > > > > > > > +	err = sysfs_add_bin_file_to_group(&dev->kobj, &cell->battr,
-> > > > > > > > > +					  nvmem_cells_group.name);
-> > > > > > > > 
-> > > > > > > > Why not just use the is_bin_visible attribute instead to determine if
-> > > > > > > > the attribute should be shown or not instead of having to add it
-> > > > > > > > after-the-fact which will race with userspace and loose?
-> > > > > > > 
-> > > > > > > I'm sorry I really don't see how you suggest to get it done.
-> > > > > > > 
-> > > > > > > I can use .is_bin_visible() callback indeed to respect nvmem->root_only.
-> > > > > > 
-> > > > > > Great.
-> > > > > > 
-> > > > > > > I don't understand addig-after-the-fact part. How is .is_bin_visible()
-> > > > > > > related to adding attributes for newly created cells?
-> > > > > > 
-> > > > > > You are adding a sysfs attribute to a device that is already registered
-> > > > > > in the driver core, and so the creation of that attribute is never seen
-> > > > > > by userspace.  The attribute needs to be attached to the device _BEFORE_
-> > > > > > it is registered.
-> > > > > > 
-> > > > > > Also, huge hint, if a driver has to call as sysfs_*() call, something is
-> > > > > > wrong.
-> > > > > > 
-> > > > > > > Do you mean I can
-> > > > > > > avoid calling sysfs_add_bin_file_to_group()?
-> > > > > > 
-> > > > > > Yes.
-> > > > > > 
-> > > > > > > Do you recall any existing example of such solution?
-> > > > > > 
-> > > > > > Loads.
-> > > > > > 
-> > > > > > Just add this attribute group to your driver as a default attribute
-> > > > > > group and the driver core will create it for you if needed.
-> > > > > > 
-> > > > > > Or if you always need it, no need to mess sith is_bin_visible() at all,
-> > > > > > I can't really understand what you are trying to do here at all.
-> > > > > 
-> > > > > Thanks a lot! In nvmem_register() first there is a call to the
-> > > > > device_register() and only later cells get added. I suppose I just have
-> > > > > to rework nvmem_register() order so that:
-> > > > > 1. Cells are collected earlier. For each cell I allocate group attribute
-> > > > 
-> > > > No, add all of the attributes to the device at the beginning before you
-> > > > register it, there's no need to allocate anything.
-> > > 
-> > > If you mean static structures I can't do that, because cells almost
-> > > never are static. They are not known in advance. nvmem allows cells to
-> > > be:
-> > > 1. Specified in OF
-> > > 2. Submitted as list while registering a NVMEM device
-> > > 
-> > > So every cells gets its own structure allocated dynamically. My plan is
-> > > to put bin_attribute in that struct and then create a group collecting
-> > > all those cells.
-> > 
-> > A device has a driver associated with it, and that driver has default
-> > groups associated with it.  Use that, I am not saying to use static
-> > structures, that is not how the driver model works at all.
-> 
-> I'm helpless on dealing with attributes.
-> 
-> I tried building a list of attributes dynamically but that of course
-> fails:
-> 
-> drivers/nvmem/core.c: In function ‘nvmem_register’:
-> drivers/nvmem/core.c:930:31: error: assignment of member ‘bin_attrs’ in read-only object
->   930 |   nvmem_cells_group.bin_attrs = nvmem->cells_bin_attrs;
->       |                               ^
-> 
-> 
-> What I'm trying to achieve is having
-> /sys/bus/nvmem/devices/*/cells/*
-> with each file being an attribute.
+Greetings,
 
-What is the full path here that you are looking to add these attributes
-to?  Where is the struct device in play?  What .c file should I look at?
+I know that this mail will come to you as a surprise as we have never
+met before, but need not to worry as I am contacting you independently
+of my investigation and no one is informed of this communication. I
+need your cooperation in transferring the sum of $11.3million to your
+private account. The money has been here in our Bank lying dormant for
+years without anybody coming for the claim.
 
-> Please kindly point me to a single example of "struct attribute_group"
-> that has a variable list of attributes with each attribute having
-> runtime set name.
+I want to release the money to you as the relative to our deceased
+customer (the account owner) who died a long with his supposed Next Of
+Kin in October 2005. The banking law and guideline here stipulates
+that if such money remains unclaimed after 17 years, the money will be
+transferred into the bank treasury as an unclaimed fund.
 
-Why would you ever want each attribute have a runtime-set name?  That's
-not what attributes are for.  Think of them as "key/value" pairs.  The
-"key" part is the name (i.e. filename), that is well known to everyone,
-unique to that struct device type, and documented in Documentation/ABI/.
-The "value" part is the value you read from the file (or write to it.)
+By indicating your interest I will send you the full details on how
+the business will be executed.
 
-That's it, it's not all that complex.
+Please respond urgently and delete if you are not interested.
 
-> Almost all cases in kernel look like:
-> static const struct attribute_group foo_attr_group = {
-> 	.attrs = foo_attrs,
-> };
-> with "foo_attrs" being a list of attributes with *predefined* names.
-
-Yes, because that is what you really want.
-
-Why do you feel this device is somehow unique to deserve attributes that
-are not predefined?  And if they are not predefined, how are you going
-to define them when you create them in the code and document them?   :)
-
-> Every example of dynamic attributes (runtime created) I see in a kernel
-> (e.g. drivers/base/node.c) uses sysfs_*().
-
-drivers/base/* is not the best place to look at for how to implement
-bus/driver logic, look at existing busses and drivers instead please.
-We have a few hundred to choose from :)
-
-So, let's break it down, what exactly are you wanting your device on
-your bus to look like?  What will be the attributes you want to expose,
-and what are the values of those attributes?  You have to start with
-that, as Documentation/ABI/ is going to require you to write them down.
-
-thanks,
-
-greg k-h
+Best regards,
+Mr. Michael Duku.
