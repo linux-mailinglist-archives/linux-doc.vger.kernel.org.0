@@ -2,142 +2,257 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id DAFDE47D2A9
-	for <lists+linux-doc@lfdr.de>; Wed, 22 Dec 2021 14:09:48 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 117A347D317
+	for <lists+linux-doc@lfdr.de>; Wed, 22 Dec 2021 14:38:58 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S240684AbhLVNJs (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 22 Dec 2021 08:09:48 -0500
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124]:53448 "EHLO
-        us-smtp-delivery-124.mimecast.com" rhost-flags-OK-OK-OK-OK)
-        by vger.kernel.org with ESMTP id S236878AbhLVNJr (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Wed, 22 Dec 2021 08:09:47 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-        s=mimecast20190719; t=1640178586;
-        h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-         to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-         content-transfer-encoding:content-transfer-encoding:
-         in-reply-to:in-reply-to:references:references;
-        bh=CfGQJ8VLCAkR3VAHE3KwEWNYdOWUKHoL0zlrbiTMV8w=;
-        b=FJemm4AOUblOddBgWRyFwBQuyCgvRUkv4CC8MMaoTf9S8uHyryTLdTG1faP1IjpKPaJz9D
-        kNvX9OrTEFkoPBqJEa4OfhAOX90Z/mhlhR1VEGSfi8mGoAAqYy2eoNxc+QaVvPMPvMus7+
-        5sm9nvWJO2WC8VsgHE6+y8jSK9Z7XSA=
-Received: from mail-wm1-f70.google.com (mail-wm1-f70.google.com
- [209.85.128.70]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- us-mta-390-0MoFAAkDPJ6L-ztyu70Ciw-1; Wed, 22 Dec 2021 08:09:45 -0500
-X-MC-Unique: 0MoFAAkDPJ6L-ztyu70Ciw-1
-Received: by mail-wm1-f70.google.com with SMTP id j207-20020a1c23d8000000b00345b181302eso2999625wmj.1
-        for <linux-doc@vger.kernel.org>; Wed, 22 Dec 2021 05:09:45 -0800 (PST)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=x-gm-message-state:message-id:date:mime-version:user-agent:subject
-         :content-language:to:cc:references:from:organization:in-reply-to
-         :content-transfer-encoding;
-        bh=CfGQJ8VLCAkR3VAHE3KwEWNYdOWUKHoL0zlrbiTMV8w=;
-        b=7WKjI28etzYmtrBQTjJlDjqDlvUwKqLnnDgP6Ka44XLRWIDstqGFSgkDXbzcbsX9er
-         xdgIwjIUTZInWmqWRl8ecHbkFi8fF8ifyVxDgE+BVOZJxsB4oM64ux0hiEFpx/4kA1AA
-         T78FkXJua7HM0J2MXjd6pecGwyhe1ow7Xgdb2Jkq8eLnrpYsZ1hQczpZGEPxox/9P1VI
-         KNj3EjTvU13D93QQnR7oK1i4NHzBfFNiBeWuCHLSYa/i0N0jcZ77r/dnPpKFb44U8V7Q
-         TrwsvVroVWnYgFIKkReZUeJu8sZ3abrLQN8UXZ7/xHAy6raYoN5QJFQ9G6h9mu02F+s9
-         v43Q==
-X-Gm-Message-State: AOAM531tr9J4sqwgh40ExpxgpGMPD8inCsh3BjoWcGvSTUiNd56o1uKB
-        YncuapU3rJ03ZSfyp1qjmQNttG1TWaXoL1dvXHJuMpfGrl0CvDxmCal9BgW8HeRUgmgib7Jo3u+
-        64hW0afSAsHuQxltSjXfV
-X-Received: by 2002:a1c:2606:: with SMTP id m6mr952066wmm.52.1640178584276;
-        Wed, 22 Dec 2021 05:09:44 -0800 (PST)
-X-Google-Smtp-Source: ABdhPJxVw0VkRoILxmXz6ntlhHpAsfmiaJOO/xnfDe7yGOHGMLtP0t1L14n//3hYvbXuKWfqxczqDw==
-X-Received: by 2002:a1c:2606:: with SMTP id m6mr952048wmm.52.1640178583964;
-        Wed, 22 Dec 2021 05:09:43 -0800 (PST)
-Received: from [192.168.3.132] (p5b0c646a.dip0.t-ipconnect.de. [91.12.100.106])
-        by smtp.gmail.com with ESMTPSA id bg12sm2178645wmb.5.2021.12.22.05.09.42
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Wed, 22 Dec 2021 05:09:43 -0800 (PST)
-Message-ID: <4a28e8a0-2efa-8b5e-10b5-38f1fc143a98@redhat.com>
-Date:   Wed, 22 Dec 2021 14:09:41 +0100
+        id S245362AbhLVNi4 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 22 Dec 2021 08:38:56 -0500
+Received: from szxga01-in.huawei.com ([45.249.212.187]:15965 "EHLO
+        szxga01-in.huawei.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S245437AbhLVNiy (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Wed, 22 Dec 2021 08:38:54 -0500
+Received: from dggpeml500026.china.huawei.com (unknown [172.30.72.54])
+        by szxga01-in.huawei.com (SkyGuard) with ESMTP id 4JJvTq0Y4dzZdX1;
+        Wed, 22 Dec 2021 21:35:43 +0800 (CST)
+Received: from dggpeml500006.china.huawei.com (7.185.36.76) by
+ dggpeml500026.china.huawei.com (7.185.36.106) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2308.20; Wed, 22 Dec 2021 21:38:52 +0800
+Received: from [10.174.177.232] (10.174.177.232) by
+ dggpeml500006.china.huawei.com (7.185.36.76) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2308.20; Wed, 22 Dec 2021 21:38:51 +0800
+Subject: Re: [PATCH] docs/zh_CN: Add sched-domains translation
+To:     yanteng si <siyanteng01@gmail.com>
+CC:     Yanteng Si <siyanteng@loongson.cn>, Alex Shi <alexs@kernel.org>,
+        Alex Shi <seakeel@gmail.com>,
+        Linux Doc Mailing List <linux-doc@vger.kernel.org>,
+        Jonathan Corbet <corbet@lwn.net>, <zhengbin13@huawei.com>,
+        Yeechou Tang <tangyeechou@gmail.com>
+References: <20211221023158.31845-1-tangyizhou@huawei.com>
+ <CAEensMz_EytaeBB1qhwTGuBd8SQnhQhjO05XcC8=LSrp7+BAZA@mail.gmail.com>
+ <6169f755-a17e-cdf6-8a08-e5da3c358daf@huawei.com>
+ <CAEensMzeEXeH5Y05J8uRuq=6R+oxtdzFzKi-WJe=f0VvrzsFYQ@mail.gmail.com>
+ <318184bb-3df5-d194-e929-0c95a0c2cb2f@huawei.com>
+ <CAEensMwB70cCvTLtSCKfBz-WjEmCmWMfvo=nn+YkR83nZLE34g@mail.gmail.com>
+From:   Tang Yizhou <tangyizhou@huawei.com>
+Message-ID: <effd42d1-8814-0301-6816-5070fde08ed0@huawei.com>
+Date:   Wed, 22 Dec 2021 21:38:51 +0800
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:78.0) Gecko/20100101
+ Thunderbird/78.1.1
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.4.0
-Subject: Re: [PATCH v1 06/11] mm: support GUP-triggered unsharing via
- FAULT_FLAG_UNSHARE (!hugetlb)
+In-Reply-To: <CAEensMwB70cCvTLtSCKfBz-WjEmCmWMfvo=nn+YkR83nZLE34g@mail.gmail.com>
+Content-Type: text/plain; charset="utf-8"
 Content-Language: en-US
-To:     Jan Kara <jack@suse.cz>
-Cc:     Jason Gunthorpe <jgg@nvidia.com>,
-        Linus Torvalds <torvalds@linux-foundation.org>,
-        Nadav Amit <namit@vmware.com>,
-        Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
-        Andrew Morton <akpm@linux-foundation.org>,
-        Hugh Dickins <hughd@google.com>,
-        David Rientjes <rientjes@google.com>,
-        Shakeel Butt <shakeelb@google.com>,
-        John Hubbard <jhubbard@nvidia.com>,
-        Mike Kravetz <mike.kravetz@oracle.com>,
-        Mike Rapoport <rppt@linux.ibm.com>,
-        Yang Shi <shy828301@gmail.com>,
-        "Kirill A . Shutemov" <kirill.shutemov@linux.intel.com>,
-        Matthew Wilcox <willy@infradead.org>,
-        Vlastimil Babka <vbabka@suse.cz>, Jann Horn <jannh@google.com>,
-        Michal Hocko <mhocko@kernel.org>,
-        Rik van Riel <riel@surriel.com>,
-        Roman Gushchin <guro@fb.com>,
-        Andrea Arcangeli <aarcange@redhat.com>,
-        Peter Xu <peterx@redhat.com>,
-        Donald Dutile <ddutile@redhat.com>,
-        Christoph Hellwig <hch@lst.de>,
-        Oleg Nesterov <oleg@redhat.com>, Linux-MM <linux-mm@kvack.org>,
-        "open list:KERNEL SELFTEST FRAMEWORK" 
-        <linux-kselftest@vger.kernel.org>,
-        "open list:DOCUMENTATION" <linux-doc@vger.kernel.org>
-References: <CAHk-=wgMuSkumYxeaaxbKFoAbw_gjYo1eRXXSFcBHzNG2xauTA@mail.gmail.com>
- <CAHk-=whYT0Q1F=bxG0yi=LN5gXY64zBwefsbkLoRiP5p598d5A@mail.gmail.com>
- <fca16906-8e7d-5d04-6990-dfa8392bad8b@redhat.com>
- <20211221010312.GC1432915@nvidia.com>
- <fd7e3195-4f36-3804-1793-d453d5bd3e9f@redhat.com>
- <CAHk-=wgQq3H6wfkW7+MmduVgBOqHeiXQN97yCMd+m1mM-1xCLQ@mail.gmail.com>
- <900b7d4a-a5dc-5c7b-a374-c4a8cc149232@redhat.com>
- <20211221190706.GG1432915@nvidia.com>
- <3e0868e6-c714-1bf8-163f-389989bf5189@redhat.com>
- <dfe1c8d5-6fac-9040-0272-6d77bafa6a16@redhat.com>
- <20211222124141.GA685@quack2.suse.cz>
-From:   David Hildenbrand <david@redhat.com>
-Organization: Red Hat
-In-Reply-To: <20211222124141.GA685@quack2.suse.cz>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
+X-Originating-IP: [10.174.177.232]
+X-ClientProxiedBy: dggems706-chm.china.huawei.com (10.3.19.183) To
+ dggpeml500006.china.huawei.com (7.185.36.76)
+X-CFilter-Loop: Reflected
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
->> IIUC, our COW logic makes sure that a shared anonymous page that might
->> still be used by a R/O FOLL_GET cannot be modified, because any attempt
->> to modify it would result in a copy.
+On 2021/12/22 10:36, yanteng si wrote:
+> Tang Yizhou <tangyizhou@huawei.com> 于2021年12月21日周二 22:13写道：
+>>
+>> On 2021/12/21 20:04, yanteng si wrote:
+>>> Tang Yizhou <tangyizhou@huawei.com> 于2021年12月21日周二 15:25写道：
+>>>>
+>>>> On 2021/12/21 14:54, yanteng si wrote:
+>>>>> Tang Yizhou <tangyizhou@huawei.com> 于2021年12月21日周二 10:04写道：
+>>>>>>
+>>>>>> Translate scheduler/sched-domains.rst into Chinese.
+>>>>>>
+>>>>>> Signed-off-by: Tang Yizhou <tangyizhou@huawei.com>
+>>>>>> ---
+>>>>>>  .../translations/zh_CN/scheduler/index.rst    |  2 +-
+>>>>>>  .../zh_CN/scheduler/sched-domains.rst         | 67 +++++++++++++++++++
+>>>>>>  2 files changed, 68 insertions(+), 1 deletion(-)
+>>>>>>  create mode 100644 Documentation/translations/zh_CN/scheduler/sched-domains.rst
+>>>>>>
+>>>>>> diff --git a/Documentation/translations/zh_CN/scheduler/index.rst b/Documentation/translations/zh_CN/scheduler/index.rst
+>>>>>> index 5327c61cb0ab..f8f8f35d53c7 100644
+>>>>>> --- a/Documentation/translations/zh_CN/scheduler/index.rst
+>>>>>> +++ b/Documentation/translations/zh_CN/scheduler/index.rst
+>>>>>> @@ -21,6 +21,7 @@ Linux调度器
+>>>>>>      sched-arch
+>>>>>>      sched-bwc
+>>>>>>      sched-design-CFS
+>>>>>> +    sched-domains
+>>>>>>      sched-capacity
+>>>>>>
+>>>>>>
+>>>>>> @@ -28,7 +29,6 @@ TODOList:
+>>>>>>
+>>>>>>      sched-bwc
+>>>>>>      sched-deadline
+>>>>>> -    sched-domains
+>>>>>>      sched-energy
+>>>>>>      sched-nice-design
+>>>>>>      sched-rt-group
+>>>>>> diff --git a/Documentation/translations/zh_CN/scheduler/sched-domains.rst b/Documentation/translations/zh_CN/scheduler/sched-domains.rst
+>>>>>> new file mode 100644
+>>>>>> index 000000000000..7aec24c03357
+>>>>>> --- /dev/null
+>>>>>> +++ b/Documentation/translations/zh_CN/scheduler/sched-domains.rst
+>>>>>> @@ -0,0 +1,67 @@
+>>>>>> +.. SPDX-License-Identifier: GPL-2.0
+>>>>>> +.. include:: ../disclaimer-zh_CN.rst
+>>>>>> +
+>>>>>> +:Original: Documentation/scheduler/sched-domains.rst
+>>>>>> +
+>>>>>> +:翻译:
+>>>>>> +
+>>>>>> +  唐艺舟 Tang Yizhou <tangyeechou@gmail.com>
+>>>>>> +
+>>>>>> +======
+>>>>>> +调度域
+>>>>>> +======
+>>>>>> +
+>>>>>> +每个CPU有一个“基”调度域（struct sched_domain）。调度域层次结构从基调度域构建而来，可
+>>>>>> +通过->parent指针自下而上遍历。->parent必须以NULL结尾，调度域数据结构必须是per-CPU的，
+>>>>
+>>>>> 数据结构 -> 结构体
+>>>> OK
+>>>>
+>>>>>> +因为它们无锁更新。
+>>>>>> +
+>>>>>> +每个调度域管辖数个CPU（存储在->span字段中）。一个调度域的span必须是它的子调度域span的
+>>>>
+>>>>> what stored in the -> field? This needs to be translated clearly.
+>>>> 这里是英文原文的直接翻译。span字段就是调度域管辖的那些CPU。我全文把动词的span翻译成“管辖”了。
+>>
+>>> cpu掩码/数量存储在……？
+>>
+>> 你得结合源码的结构体定义看。并不是掩码或者数量，是可变长数组表示的CPU列表。
+> OK,Thanks!
+>>
+>>>>
+>>>>>> +超集（如有需求出现，这个限制可以放宽）。CPU i的基调度域必须至少管辖CPU i。每个CPU的
+>>>>>> +顶层调度域通常将会管辖系统中的全部CPU，尽管严格来说这不是必须的，假如是这样，会导致某些
+>>>>>> +CPU出现永远不会被指定任务运行的情况，直到允许的CPU掩码被显式设定。调度域的span字段意味
+>>>>>> +着“在这些CPU中做进程负载均衡”。
+>>>>>> +
+>>>>>> +每个调度域必须具有一个或多个CPU调度组（struct sched_group），它们以单向循环链表的形式
+>>>>>> +组织，存储在->groups指针中。这些组的CPU掩码的并集必须和调度域span字段一致。->groups
+>>>>>> +指针指向的这些组包含的CPU，必须被调度域管辖。组包含的是只读数据，被创建之后，可能被多个
+>>>>>> +CPU共享。任意两个组的CPU掩码的交集不一定为空，如果是这种情况，对应调度域的SD_OVERLAP
+>>>>>> +标志位被设置，它管辖的调度组可能不能在多个CPU中共享。
+>>>>>> +
+>>>>>> +调度域中的负载均衡发生在调度组中。也就是说，每个组被视为一个实体。组的负载被定义为它
+>>>>>> +管辖的每个CPU的负载之和。仅当组的负载不均衡后，任务在组之间发生迁移。
+>>>>
+>>>>> 才在组之间发生迁移。
+>>>> OK
+>>>>
+>>>>>> +
+>>>>>> +在kernel/sched/core.c中，trigger_load_balance()在每个CPU上通过scheduler_tick()
+>>>>>> +周期执行。在当前运行队列下一个定期调度再平衡事件到达后，它引发一个软中断。负载均衡真正
+>>>>>> +的工作由run_rebalance_domains()->rebalance_domains()完成，在软中断上下文中执行
+>>>>>> +（SCHED_SOFTIRQ）。
+>>>>>> +
+>>>>>> +后一个函数有两个入参：当前CPU的运行队列、它在scheduler_tick()调用时是否空闲。函数会从
+>>>>>> +当前CPU所在的基调度域开始迭代执行，并沿着parent指针链向上进入更高层级的调度域。在迭代
+>>>>>> +过程中，函数会检查当前调度域是否已经耗尽了再平衡的时间间隔，如果是，它在该调度域运行
+>>>>>> +load_balance()。接下来它检查父调度域（如果存在），再后来父调度域的父调度域，以此类推。
+>>>>>> +
+>>>>>> +起初，load_balance()查找当前调度域中最繁忙的调度组。如果成功，在该调度组管辖的全部CPU
+>>>>>> +的运行队列中找出最繁忙的。如能找到，对当前的CPU运行队列和新找到的最繁忙运行队列均加锁，
+>>>>
+>>>>> 找出最繁忙的 **什么**？
+>>>> 我觉得英文原文不够精炼，这里还是保持原样吧：
+>>>> 在该调度组管辖的全部CPU的运行队列中找出最繁忙的运行队列。
+>>> OK!
+>>>>
+>>>>>> +并把任务从最繁忙队列中迁移到当前CPU上。被迁移的任务数量等于在先前迭代执行中计算出的该
+>>>>>> +调度域的调度组的不均衡值。
+>>>>>> +
+>>>>>> +实现调度域
+>>>>>> +==========
+>>>>>> +
+>>>>>> +基调度域会管辖CPU层次结构中的第一层。对于超线程（SMT）而言，基调度域将会管辖同一个物理
+>>>>>> +CPU的全部虚拟CPU，每个虚拟CPU对应一个调度组。
+>>>>>> +
+>>>>>> +在SMP中，基调度域的父调度域将会管辖同一个结点中的全部物理CPU。接下来，如果是NUMA系统，
+>>>>>> +SMP调度域的父调度域将管辖整个机器，一个结点的CPU掩码对应一个调度组。或者，你可以使用
+>>>>>> +多层次NUMA；或举例来说Opteron处理器，可能仅仅只有一个调度域来覆盖它的一个NUMA层级。
+>>>>
+>>>>> 或者，你可以做多级NUMA或Opteron，例如，可能只有一个域覆盖其一个NUMA级别。
+>>>> 这里的英文原文让我困惑，可以讨论一下。Opteron前的or，作者想表达什么？
+>>> 表示并列，你可以这么做，你也可以这么做。
+>>>
+>>> Based on my hours of research, the translation of this paragraph is a
+>>> bit off and you missed a sentence. [Each group being a single physical
+>>> CPU]
+>>
+>> Right. I'll add that.
+>>
+>>> I have a rough idea of what the original passage is talking about, but
+>>> I can't describe it. I need some time. :)
+>>
+>> Sorry, I'm not familiar with this AMD processor.
+>>
+>>>
+>>> Let's discuss these concepts first：
+>>>
+>>> 1）基调度域（它的父调度域是谁？）：
+>>
+>> 调度域的层次结构参见struct sched_domain_topology_level数组，通常来说是SMT-MC-DIE
+>> 三层。但是根据系统实际情况，也是可以不一样的，原文下文简单提到了。
+>>
+>> 内核文档太简单了，实际上调度域、调度组的细节蛮复杂的。忠于原文的翻译，基本是个
+>> 辅助作用吧。
+>>
+>>> 2）NUMA:
+>>
+>> from wikipedia: 非均匀内存访问 / 非统一内存访问 。此外还可以见到 非一致内存访问。
+>>
+>>> 3）Opteron:
+>>
+>> Name of an AMD processor, I'm not going to translate it.
+> OK，Thanks！
+> How about：
+> 在SMP中，基调度域的父调度域将管辖节点中的所有物理CPU。每个组都是一个物理CPU。然后在NUMA中，SMP域的父调度域将管辖整个机器，每个组都有一个节点的cpumask。要不然，你做多级NUMA或Opteron也可以，例如，可能只有一个域覆盖其一个NUMA级别。
+
+第1个or不按转折翻译，然后不翻译第2个or，看起来比较通顺，我会发送下一版。
+
+Thank,
+Tang
+
 > 
-> Well, we defined FOLL_PIN to mean the intent that the caller wants to access
-> not only page state (for which is enough FOLL_GET and there are some users
-> - mostly inside mm - who need this) but also page data. Eventually, we even
-> wanted to make FOLL_GET unavailable to broad areas of kernel (and keep it
-> internal to only MM for its dirty deeds ;)) to reduce the misuse of GUP.
+> FYI. :)
 > 
-> For file pages we need this data vs no-data access distinction so that
-> filesystems can detect when someone can be accessing page data although the
-> page is unmapped.  Practically, filesystems care most about when someone
-> can be *modifying* page data (we need to make sure data is stable e.g. when
-> writing back data to disk or doing data checksumming or other operations)
-> so using FOLL_GET when wanting to only read page data should be OK for
-> filesystems but honestly I would be reluctant to break the rule of "use
-> FOLL_PIN when wanting to access page data" to keep things simple and
-> reasonably easy to understand for parties such as filesystem developers or
-> driver developers who all need to interact with pinned pages...
-
-Right, from an API perspective we really want people to use FOLL_PIN.
-
-To optimize this case in particular it would help if we would have the
-FOLL flags on the unpin path. Then we could just decide internally
-"well, short-term R/O FOLL_PIN can be really lightweight, we can treat
-this like a FOLL_GET instead". And we would need that as well if we were
-to keep different counters for R/O vs. R/W pinned.
-
--- 
-Thanks,
-
-David / dhildenb
-
+> Thanks,
+> Yanteng
+>>
+>>>
+>>>
+>>> Thanks,
+>>> Yanteng
+>>>>
+>>>> Thanks,
+>>>> Tang
+>>>>
+>>>>>
+>>>>> Thank you for the translation！
+>>>>> The scheduling domain is quite interesting and I decided to take the
+>>>>> time to study it.
+>>>>>
+>>>>> Thanks,
+>>>>>
+>>>>> Yanteng
+>>>>>> +
+>>>>>> +实现者需要阅读include/linux/sched/sd_flags.h的注释：读SD_*来了解具体情况以及调度域的
+>>>>>> +SD标志位调节了哪些东西。
+>>>>>> +
+>>>>>> +体系结构可以把指定的拓扑层级的通用调度域构建器和默认的SD标志位覆盖掉，方法是创建一个
+>>>>>> +sched_domain_topology_level数组，并以该数组作为入参调用set_sched_topology()。
+>>>>>> +
+>>>>>> +调度域调试基础设施可以通过CONFIG_SCHED_DEBUG开启，并在开机启动命令行中增加
+>>>>>> +“sched_verbose”。如果你忘记调整开机启动命令行了，也可以打开
+>>>>>> +/sys/kernel/debug/sched/verbose开关。这将开启调度域错误检查的解析，它应该能捕获
+>>>>>> +绝大多数错误，同时以可视化格式打印调度域的结构。
+>>>>>> --
+>>>>>> 2.17.1
+>>>>>>
