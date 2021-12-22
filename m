@@ -2,149 +2,142 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id F091247D2D5
-	for <lists+linux-doc@lfdr.de>; Wed, 22 Dec 2021 14:12:56 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id DAFDE47D2A9
+	for <lists+linux-doc@lfdr.de>; Wed, 22 Dec 2021 14:09:48 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S240720AbhLVNMs (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 22 Dec 2021 08:12:48 -0500
-Received: from szxga08-in.huawei.com ([45.249.212.255]:30092 "EHLO
-        szxga08-in.huawei.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S245378AbhLVNMi (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Wed, 22 Dec 2021 08:12:38 -0500
-Received: from dggpemm500022.china.huawei.com (unknown [172.30.72.55])
-        by szxga08-in.huawei.com (SkyGuard) with ESMTP id 4JJtvW0nZQz1DKBK;
-        Wed, 22 Dec 2021 21:09:27 +0800 (CST)
-Received: from dggpemm500006.china.huawei.com (7.185.36.236) by
- dggpemm500022.china.huawei.com (7.185.36.162) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2308.20; Wed, 22 Dec 2021 21:12:36 +0800
-Received: from thunder-town.china.huawei.com (10.174.178.55) by
- dggpemm500006.china.huawei.com (7.185.36.236) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2308.20; Wed, 22 Dec 2021 21:12:34 +0800
-From:   Zhen Lei <thunder.leizhen@huawei.com>
-To:     Thomas Gleixner <tglx@linutronix.de>,
-        Ingo Molnar <mingo@redhat.com>, Borislav Petkov <bp@alien8.de>,
-        <x86@kernel.org>, "H . Peter Anvin" <hpa@zytor.com>,
-        <linux-kernel@vger.kernel.org>, Dave Young <dyoung@redhat.com>,
-        Baoquan He <bhe@redhat.com>, Vivek Goyal <vgoyal@redhat.com>,
-        Eric Biederman <ebiederm@xmission.com>,
-        <kexec@lists.infradead.org>,
-        Catalin Marinas <catalin.marinas@arm.com>,
-        "Will Deacon" <will@kernel.org>,
-        <linux-arm-kernel@lists.infradead.org>,
-        Rob Herring <robh+dt@kernel.org>,
-        Frank Rowand <frowand.list@gmail.com>,
-        <devicetree@vger.kernel.org>, Jonathan Corbet <corbet@lwn.net>,
-        <linux-doc@vger.kernel.org>
-CC:     Zhen Lei <thunder.leizhen@huawei.com>,
-        Randy Dunlap <rdunlap@infradead.org>,
-        Feng Zhou <zhoufeng.zf@bytedance.com>,
-        Kefeng Wang <wangkefeng.wang@huawei.com>,
-        Chen Zhou <dingguo.cz@antgroup.com>,
-        "John Donnelly" <John.p.donnelly@oracle.com>
-Subject: [PATCH v18 17/17] kdump: update Documentation about crashkernel
-Date:   Wed, 22 Dec 2021 21:08:20 +0800
-Message-ID: <20211222130820.1754-18-thunder.leizhen@huawei.com>
-X-Mailer: git-send-email 2.26.0.windows.1
-In-Reply-To: <20211222130820.1754-1-thunder.leizhen@huawei.com>
-References: <20211222130820.1754-1-thunder.leizhen@huawei.com>
+        id S240684AbhLVNJs (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 22 Dec 2021 08:09:48 -0500
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124]:53448 "EHLO
+        us-smtp-delivery-124.mimecast.com" rhost-flags-OK-OK-OK-OK)
+        by vger.kernel.org with ESMTP id S236878AbhLVNJr (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Wed, 22 Dec 2021 08:09:47 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+        s=mimecast20190719; t=1640178586;
+        h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+         to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+         content-transfer-encoding:content-transfer-encoding:
+         in-reply-to:in-reply-to:references:references;
+        bh=CfGQJ8VLCAkR3VAHE3KwEWNYdOWUKHoL0zlrbiTMV8w=;
+        b=FJemm4AOUblOddBgWRyFwBQuyCgvRUkv4CC8MMaoTf9S8uHyryTLdTG1faP1IjpKPaJz9D
+        kNvX9OrTEFkoPBqJEa4OfhAOX90Z/mhlhR1VEGSfi8mGoAAqYy2eoNxc+QaVvPMPvMus7+
+        5sm9nvWJO2WC8VsgHE6+y8jSK9Z7XSA=
+Received: from mail-wm1-f70.google.com (mail-wm1-f70.google.com
+ [209.85.128.70]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ us-mta-390-0MoFAAkDPJ6L-ztyu70Ciw-1; Wed, 22 Dec 2021 08:09:45 -0500
+X-MC-Unique: 0MoFAAkDPJ6L-ztyu70Ciw-1
+Received: by mail-wm1-f70.google.com with SMTP id j207-20020a1c23d8000000b00345b181302eso2999625wmj.1
+        for <linux-doc@vger.kernel.org>; Wed, 22 Dec 2021 05:09:45 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:message-id:date:mime-version:user-agent:subject
+         :content-language:to:cc:references:from:organization:in-reply-to
+         :content-transfer-encoding;
+        bh=CfGQJ8VLCAkR3VAHE3KwEWNYdOWUKHoL0zlrbiTMV8w=;
+        b=7WKjI28etzYmtrBQTjJlDjqDlvUwKqLnnDgP6Ka44XLRWIDstqGFSgkDXbzcbsX9er
+         xdgIwjIUTZInWmqWRl8ecHbkFi8fF8ifyVxDgE+BVOZJxsB4oM64ux0hiEFpx/4kA1AA
+         T78FkXJua7HM0J2MXjd6pecGwyhe1ow7Xgdb2Jkq8eLnrpYsZ1hQczpZGEPxox/9P1VI
+         KNj3EjTvU13D93QQnR7oK1i4NHzBfFNiBeWuCHLSYa/i0N0jcZ77r/dnPpKFb44U8V7Q
+         TrwsvVroVWnYgFIKkReZUeJu8sZ3abrLQN8UXZ7/xHAy6raYoN5QJFQ9G6h9mu02F+s9
+         v43Q==
+X-Gm-Message-State: AOAM531tr9J4sqwgh40ExpxgpGMPD8inCsh3BjoWcGvSTUiNd56o1uKB
+        YncuapU3rJ03ZSfyp1qjmQNttG1TWaXoL1dvXHJuMpfGrl0CvDxmCal9BgW8HeRUgmgib7Jo3u+
+        64hW0afSAsHuQxltSjXfV
+X-Received: by 2002:a1c:2606:: with SMTP id m6mr952066wmm.52.1640178584276;
+        Wed, 22 Dec 2021 05:09:44 -0800 (PST)
+X-Google-Smtp-Source: ABdhPJxVw0VkRoILxmXz6ntlhHpAsfmiaJOO/xnfDe7yGOHGMLtP0t1L14n//3hYvbXuKWfqxczqDw==
+X-Received: by 2002:a1c:2606:: with SMTP id m6mr952048wmm.52.1640178583964;
+        Wed, 22 Dec 2021 05:09:43 -0800 (PST)
+Received: from [192.168.3.132] (p5b0c646a.dip0.t-ipconnect.de. [91.12.100.106])
+        by smtp.gmail.com with ESMTPSA id bg12sm2178645wmb.5.2021.12.22.05.09.42
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Wed, 22 Dec 2021 05:09:43 -0800 (PST)
+Message-ID: <4a28e8a0-2efa-8b5e-10b5-38f1fc143a98@redhat.com>
+Date:   Wed, 22 Dec 2021 14:09:41 +0100
 MIME-Version: 1.0
-Content-Transfer-Encoding: 7BIT
-Content-Type:   text/plain; charset=US-ASCII
-X-Originating-IP: [10.174.178.55]
-X-ClientProxiedBy: dggems702-chm.china.huawei.com (10.3.19.179) To
- dggpemm500006.china.huawei.com (7.185.36.236)
-X-CFilter-Loop: Reflected
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
+ Thunderbird/91.4.0
+Subject: Re: [PATCH v1 06/11] mm: support GUP-triggered unsharing via
+ FAULT_FLAG_UNSHARE (!hugetlb)
+Content-Language: en-US
+To:     Jan Kara <jack@suse.cz>
+Cc:     Jason Gunthorpe <jgg@nvidia.com>,
+        Linus Torvalds <torvalds@linux-foundation.org>,
+        Nadav Amit <namit@vmware.com>,
+        Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
+        Andrew Morton <akpm@linux-foundation.org>,
+        Hugh Dickins <hughd@google.com>,
+        David Rientjes <rientjes@google.com>,
+        Shakeel Butt <shakeelb@google.com>,
+        John Hubbard <jhubbard@nvidia.com>,
+        Mike Kravetz <mike.kravetz@oracle.com>,
+        Mike Rapoport <rppt@linux.ibm.com>,
+        Yang Shi <shy828301@gmail.com>,
+        "Kirill A . Shutemov" <kirill.shutemov@linux.intel.com>,
+        Matthew Wilcox <willy@infradead.org>,
+        Vlastimil Babka <vbabka@suse.cz>, Jann Horn <jannh@google.com>,
+        Michal Hocko <mhocko@kernel.org>,
+        Rik van Riel <riel@surriel.com>,
+        Roman Gushchin <guro@fb.com>,
+        Andrea Arcangeli <aarcange@redhat.com>,
+        Peter Xu <peterx@redhat.com>,
+        Donald Dutile <ddutile@redhat.com>,
+        Christoph Hellwig <hch@lst.de>,
+        Oleg Nesterov <oleg@redhat.com>, Linux-MM <linux-mm@kvack.org>,
+        "open list:KERNEL SELFTEST FRAMEWORK" 
+        <linux-kselftest@vger.kernel.org>,
+        "open list:DOCUMENTATION" <linux-doc@vger.kernel.org>
+References: <CAHk-=wgMuSkumYxeaaxbKFoAbw_gjYo1eRXXSFcBHzNG2xauTA@mail.gmail.com>
+ <CAHk-=whYT0Q1F=bxG0yi=LN5gXY64zBwefsbkLoRiP5p598d5A@mail.gmail.com>
+ <fca16906-8e7d-5d04-6990-dfa8392bad8b@redhat.com>
+ <20211221010312.GC1432915@nvidia.com>
+ <fd7e3195-4f36-3804-1793-d453d5bd3e9f@redhat.com>
+ <CAHk-=wgQq3H6wfkW7+MmduVgBOqHeiXQN97yCMd+m1mM-1xCLQ@mail.gmail.com>
+ <900b7d4a-a5dc-5c7b-a374-c4a8cc149232@redhat.com>
+ <20211221190706.GG1432915@nvidia.com>
+ <3e0868e6-c714-1bf8-163f-389989bf5189@redhat.com>
+ <dfe1c8d5-6fac-9040-0272-6d77bafa6a16@redhat.com>
+ <20211222124141.GA685@quack2.suse.cz>
+From:   David Hildenbrand <david@redhat.com>
+Organization: Red Hat
+In-Reply-To: <20211222124141.GA685@quack2.suse.cz>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-From: Chen Zhou <chenzhou10@huawei.com>
+>> IIUC, our COW logic makes sure that a shared anonymous page that might
+>> still be used by a R/O FOLL_GET cannot be modified, because any attempt
+>> to modify it would result in a copy.
+> 
+> Well, we defined FOLL_PIN to mean the intent that the caller wants to access
+> not only page state (for which is enough FOLL_GET and there are some users
+> - mostly inside mm - who need this) but also page data. Eventually, we even
+> wanted to make FOLL_GET unavailable to broad areas of kernel (and keep it
+> internal to only MM for its dirty deeds ;)) to reduce the misuse of GUP.
+> 
+> For file pages we need this data vs no-data access distinction so that
+> filesystems can detect when someone can be accessing page data although the
+> page is unmapped.  Practically, filesystems care most about when someone
+> can be *modifying* page data (we need to make sure data is stable e.g. when
+> writing back data to disk or doing data checksumming or other operations)
+> so using FOLL_GET when wanting to only read page data should be OK for
+> filesystems but honestly I would be reluctant to break the rule of "use
+> FOLL_PIN when wanting to access page data" to keep things simple and
+> reasonably easy to understand for parties such as filesystem developers or
+> driver developers who all need to interact with pinned pages...
 
-For arm64, the behavior of crashkernel=X has been changed, which
-tries low allocation in DMA zone and fall back to high allocation
-if it fails.
+Right, from an API perspective we really want people to use FOLL_PIN.
 
-We can also use "crashkernel=X,high" to select a high region above
-DMA zone, which also tries to allocate at least 256M low memory in
-DMA zone automatically and "crashkernel=Y,low" can be used to allocate
-specified size low memory.
+To optimize this case in particular it would help if we would have the
+FOLL flags on the unpin path. Then we could just decide internally
+"well, short-term R/O FOLL_PIN can be really lightweight, we can treat
+this like a FOLL_GET instead". And we would need that as well if we were
+to keep different counters for R/O vs. R/W pinned.
 
-So update the Documentation.
-
-Signed-off-by: Chen Zhou <chenzhou10@huawei.com>
-Signed-off-by: Zhen Lei <thunder.leizhen@huawei.com>
----
- Documentation/admin-guide/kdump/kdump.rst       | 11 +++++++++--
- Documentation/admin-guide/kernel-parameters.txt | 13 ++++++++++---
- 2 files changed, 19 insertions(+), 5 deletions(-)
-
-diff --git a/Documentation/admin-guide/kdump/kdump.rst b/Documentation/admin-guide/kdump/kdump.rst
-index cb30ca3df27c9b2..d4c287044be0c70 100644
---- a/Documentation/admin-guide/kdump/kdump.rst
-+++ b/Documentation/admin-guide/kdump/kdump.rst
-@@ -361,8 +361,15 @@ Boot into System Kernel
-    kernel will automatically locate the crash kernel image within the
-    first 512MB of RAM if X is not given.
- 
--   On arm64, use "crashkernel=Y[@X]".  Note that the start address of
--   the kernel, X if explicitly specified, must be aligned to 2MiB (0x200000).
-+   On arm64, use "crashkernel=X" to try low allocation in DMA zone and
-+   fall back to high allocation if it fails.
-+   We can also use "crashkernel=X,high" to select a high region above
-+   DMA zone, which also tries to allocate at least 256M low memory in
-+   DMA zone automatically.
-+   "crashkernel=Y,low" can be used to allocate specified size low memory.
-+   Use "crashkernel=Y@X" if you really have to reserve memory from
-+   specified start address X. Note that the start address of the kernel,
-+   X if explicitly specified, must be aligned to 2MiB (0x200000).
- 
- Load the Dump-capture Kernel
- ============================
-diff --git a/Documentation/admin-guide/kernel-parameters.txt b/Documentation/admin-guide/kernel-parameters.txt
-index fc34332c8d9a6df..ff5f15008707cab 100644
---- a/Documentation/admin-guide/kernel-parameters.txt
-+++ b/Documentation/admin-guide/kernel-parameters.txt
-@@ -783,6 +783,9 @@
- 			[KNL, X86-64] Select a region under 4G first, and
- 			fall back to reserve region above 4G when '@offset'
- 			hasn't been specified.
-+			[KNL, ARM64] Try low allocation in DMA zone and fall back
-+			to high allocation if it fails when '@offset' hasn't been
-+			specified.
- 			See Documentation/admin-guide/kdump/kdump.rst for further details.
- 
- 	crashkernel=range1:size1[,range2:size2,...][@offset]
-@@ -798,7 +801,9 @@
- 			be above 4G if system have more than 4G ram installed.
- 			Otherwise memory region will be allocated below 4G, if
- 			available.
--			It will be ignored if crashkernel=X is specified.
-+			It will be ignored if crashkernel=X is correctly specified.
-+			[KNL, ARM64] range in high memory.
-+			Allow kernel to allocate physical memory region from top.
- 	crashkernel=size[KMG],low
- 			[KNL, X86-64] range under 4G. When crashkernel=X,high
- 			is passed, kernel could allocate physical memory region
-@@ -807,13 +812,15 @@
- 			requires at least 64M+32K low memory, also enough extra
- 			low memory is needed to make sure DMA buffers for 32-bit
- 			devices won't run out. Kernel would try to allocate at
--			at least 256M below 4G automatically.
-+			least 256M below 4G automatically.
- 			This one let user to specify own low range under 4G
- 			for second kernel instead.
- 			0: to disable low allocation.
- 			It will be ignored when crashkernel=X,high is not used
- 			or memory reserved is below 4G.
--
-+			[KNL, ARM64] range in low memory.
-+			This one let user to specify a low range in DMA zone for
-+			crash dump kernel.
- 	cryptomgr.notests
- 			[KNL] Disable crypto self-tests
- 
 -- 
-2.25.1
+Thanks,
+
+David / dhildenb
 
