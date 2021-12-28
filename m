@@ -2,106 +2,120 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id AB0EA4809D6
-	for <lists+linux-doc@lfdr.de>; Tue, 28 Dec 2021 15:10:03 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 6EDCC480AE1
+	for <lists+linux-doc@lfdr.de>; Tue, 28 Dec 2021 16:37:48 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S233312AbhL1OKC (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 28 Dec 2021 09:10:02 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:51858 "EHLO
-        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S233291AbhL1OKC (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 28 Dec 2021 09:10:02 -0500
-Received: from mail-ed1-x52c.google.com (mail-ed1-x52c.google.com [IPv6:2a00:1450:4864:20::52c])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id A1D9AC06173F
-        for <linux-doc@vger.kernel.org>; Tue, 28 Dec 2021 06:10:01 -0800 (PST)
-Received: by mail-ed1-x52c.google.com with SMTP id m21so75523499edc.0
-        for <linux-doc@vger.kernel.org>; Tue, 28 Dec 2021 06:10:01 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=mime-version:sender:from:date:message-id:subject:to
-         :content-transfer-encoding;
-        bh=zwa5SmF7AqJ7b8ziq0P2tazEHmZcmrR0jeKQIZMxvV0=;
-        b=nAYfxbW+UjtrRYnJ6qW+UZji2MJ1Ao2CSM5NC6/jJsJu6sET8TUvVCb4M0x0s3KXb/
-         28MPjNQRH63gN4MsoqVggE2E3Zs7IHSrCc/raUONXShOTiDw5/VgWwMZXNYegyx62Exn
-         PGWiMvrpwgR/uCZan8SF9YD4yKcDN5keXnJ8ldNYQswt9PcqaXRq07FaPW+QI6/J+zDT
-         j18UU6VfqawnVWze+jNuYDW7WL1m+TX0rj3fxTWiRuPIAmBH0Q9i1u8YMR4kScJlne/b
-         J/9ziTaSCf5/FxObvzIjYSn8qfahRN6cMq1E5aV/oo2FCXnMOjZMaf/oApfOF8QIvI5k
-         DVug==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=x-gm-message-state:mime-version:sender:from:date:message-id:subject
-         :to:content-transfer-encoding;
-        bh=zwa5SmF7AqJ7b8ziq0P2tazEHmZcmrR0jeKQIZMxvV0=;
-        b=p7goi6Swa3WEnSfA5DJ7dsBxCl/270V8sU757vcU8DDvUL4B7whDtNvIXLzAv855aG
-         mO43BlKQN93Cf+TXkhTzKKVffLPdiYpUgNv8dkDcRrvXxCWhsj5D2p3nr/OqWieThie/
-         OyuXddpan9CL3fse/crjFPrqPS04fOFIJ/bOkHA/X4hmfA7BjfixNEO8IaoGHb56oZlC
-         nVkJOGUTgQUopR8RjZeh7TsfyrxJ/x0C+ska/b+/7vepR5NaWI6SrZRekHiwdMBcyk12
-         yRHkvdO940CLu64lZM7kBPjCYoLfCx/0QfEY1gRW2fs+c2BEAlxV4Wkm7oB6gGgQRl0s
-         /saA==
-X-Gm-Message-State: AOAM53142NGObPnjFBt6gN7v4fneCLlqc7se9geXCDYgdBKX8CkHmHKZ
-        sH92SjG4pGSIqoQDxXXhZgM5Z2UNelA2G2bcYf4=
-X-Google-Smtp-Source: ABdhPJyAWB85JzxsfzcGZcym0/qN2kIPBYTkbMTqTOs41NHh44UIem4lSl9HEJMz6j8ho5lB/nudjGF6Ng2+d8KscqA=
-X-Received: by 2002:a05:6402:35c2:: with SMTP id z2mr20989808edc.136.1640700599850;
- Tue, 28 Dec 2021 06:09:59 -0800 (PST)
+        id S235219AbhL1Phq (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 28 Dec 2021 10:37:46 -0500
+Received: from mout.gmx.net ([212.227.17.20]:48187 "EHLO mout.gmx.net"
+        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
+        id S235184AbhL1Phq (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Tue, 28 Dec 2021 10:37:46 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=gmx.net;
+        s=badeba3b8450; t=1640705843;
+        bh=c91afZdekR7n/9J8hO61bQWbB88jCJyRcF24lRYg36g=;
+        h=X-UI-Sender-Class:From:To:Cc:Subject:Date;
+        b=LrtQSWfUHsH2DhJR0+CtP8RuiTvKnbcI1eWt5Z/ltQLdgoQVgR0OG1wc2ug1wg4kK
+         1LuTI8DaKPmPgFF7jZLvm4Vo3BglyF2RVAeWo4713UgItWnG3dYkpkEt3LMB5JggxB
+         4waQltqioA2x4/ek+u3AIM/p+RRVepmifoN+xF4M=
+X-UI-Sender-Class: 01bb95c1-4bf8-414a-932a-4f6e2808ef9c
+Received: from esprimo-mx.fritz.box ([91.137.126.34]) by mail.gmx.net
+ (mrgmx105 [212.227.17.168]) with ESMTPSA (Nemesis) id
+ 1MXXuB-1mvwcO0lNn-00Yzgc; Tue, 28 Dec 2021 16:37:23 +0100
+From:   Armin Wolf <W_Armin@gmx.de>
+To:     pali@kernel.org
+Cc:     jdelvare@suse.com, linux@roeck-us.net, corbet@lwn.net,
+        linux-doc@vger.kernel.org, linux-hwmon@vger.kernel.org,
+        linux-kernel@vger.kernel.org
+Subject: [PATCH 1/4] Documentation: admin-guide: Update i8k driver name
+Date:   Tue, 28 Dec 2021 16:37:06 +0100
+Message-Id: <20211228153709.18317-1-W_Armin@gmx.de>
+X-Mailer: git-send-email 2.30.2
 MIME-Version: 1.0
-Sender: mrsdanielsmarina2020@gmail.com
-Received: by 2002:a17:907:6da5:0:0:0:0 with HTTP; Tue, 28 Dec 2021 06:09:59
- -0800 (PST)
-From:   Jackie Fowler <jackiefowler597@gmail.com>
-Date:   Tue, 28 Dec 2021 14:09:59 +0000
-X-Google-Sender-Auth: Fq-GA9VKL47CG3jQ9qSLXlrhLYU
-Message-ID: <CAKV9mijpmwGhs43EBOozg5NrktjSUK87Xw_dXn4a+01s_noEJA@mail.gmail.com>
-Subject: Hello
-To:     undisclosed-recipients:;
-Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:R3wtB5k5QB/vaq/gRyG5oDuyqO61cUrzJV+LeYSfaGOguXdVrYf
+ eZF4Q+STyuyrBPQmwWT5vtkEWd6mTKW3Dgzu29nGS5pX97jUKPHIQ8wT5QgzBna5bPQy1WH
+ qGehtHnHCsDFXJP4lduxcpHrpKNhnrJQfz6XqRWlDiZoTkTN/q8bSj3uLhmlPb6ZoTbNIj1
+ RFkMNp7CwL/fBtTbWZrbw==
+X-Spam-Flag: NO
+X-UI-Out-Filterresults: notjunk:1;V03:K0:TwV7UsymRnk=:9sCgrwSn1LtprEkzrFaemo
+ h9kbE43KVK2xRMnEyb7epcxXTgmKYlb7tYk9m5LXLpikw9Sr5W/NnE4GDjJXWiBj5qMF6YSrI
+ wDrBTPXiS3DOI2zgW+FD5adodeYA43onUp2NOEE+OyZ+lAwxt/m0sJ0NAmIhXDJXjXgTwvzvt
+ L9ZFZzOL92bMAOpaQNCDxUG/eLchuoVxgbFVfMaui4cNNHoizjHhGRs2GrpoFuG/RAZ4szU0r
+ 0ITgX664dT0aOi0Ho6uerS+Mr2h4T+1aO2ZZTwR3HnQYCJCSht11sAKVvnDaTSa8l+DE8jrsK
+ deIuo/4OimlyVPNNFTuz/YN2qdR0tefEBUZdtIVKpSp1r6Rn21JW6XXnRqbtZQr5BOtkDVjGc
+ ZwCvjDDekGiUM8fB6m5RSGesv1AnO3wTxltF4w+zNN2zMVP8gAzkjb0e0fpQW4k+/kITAb5rT
+ eae7os+KB5kP0WZYfPsaCNTC1zK3nqtAvubv8hzmLTuzy4blrl2niAsXbVo2bDVoe1fKGmeZc
+ aBXMKKc1amecmi4ENOAqR+zCKFz6RwC+Mk7jCOrLpc4KvyWvdyuY25aAwMErwlHCTrEHJBvyV
+ UKiDNIkpQTgHaQdIdejsrPB0KjR+24YsAfo2mzvp3u4UrkTm6yytfIn+c4rujKoOCrF6gxVXI
+ ZiF4dNR4lHulvRcEMTE2yCy3mDLT0RWduL4V/ypb4qGVIocw98DmAP2o3xR65OnUNnjtRU9rU
+ 93m2Rw3WtMQ/dD7ga8rAnZ+0lqtWaxyMTc+HmzaBxJWMFlEleWmWeqmJigZAwSlwK9T4BbgwZ
+ dklDtCENdoFbbBlNT464aTa7oAUPzEPnnDf+e2eGkU2aLHPGj03+N3BpUn+aBTSq0BKEoRBRv
+ TgZpxMEpOlKs7ETKfmeCY15MATajiPYVdJNeYS4DcrOCIwfNxqAUfYAR96K2XN4b34xqRYMBi
+ NfA5mv+dPkwNiCqV0rgQlx+mjLFZ/2QHQrd2BLFdycFfz+zrkYo/x/wYB+6SHgZ5OuOGwoS1z
+ FKdUzbHPSBNQb72ZdR68o5eMH2g553egYr+2N/MHlUpawm/I0g6qTvHFRQtGnGmAq90c15XmF
+ 9Ad4NCG07qfyuU=
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Gooday my beloved,
+The driver should be called dell_smm_hwmon, i8k is only
+an alias now.
 
- I sent this mail praying it will get to you in a good condition of
-health, since I myself are in a very critical health condition in
-which I sleep every night without knowing if I may be alive to see the
-next day. I bring peace and love to you. It is by the grace of God, I
-had no choice than to do what is lawful and right in the sight of God
-for eternal life and in the sight of man, for witness of God=E2=80=99s merc=
-y
-and glory upon my life. I am Mrs.Fowler,Jackie,a widow and citizen of
-Canada. I am suffering from a long time brain tumor, It has defiled
-all forms of medical treatment, and right now I have about a few
-months to leave, according to medical experts.
+Signed-off-by: Armin Wolf <W_Armin@gmx.de>
+=2D--
+ .../admin-guide/kernel-parameters.txt         | 29 ++++++++++++-------
+ 1 file changed, 18 insertions(+), 11 deletions(-)
 
- The situation has gotten complicated recently with my inability to
-hear proper, am communicating with you with the help of the chief
-nurse herein the hospital, from all indication my conditions is really
-deteriorating and it is quite obvious that, according to my doctors
-they have advised me that I may not live too long, Because this
-illness has gotten to a very bad stage. I plead that you will not
-expose or betray this trust and confidence that I am about to repose
-on you for the mutual benefit of the orphans and the less privilege. I
-have some funds I inherited from my late husband, the sum of ($
-12,500,000.00 Dollars).Having known my condition, I decided to donate
-this fund to you believing that you will utilize it the way i am going
-to instruct herein.
- I need you to assist me and reclaim this money and use it for Charity
-works, for orphanages and gives justice and help to the poor, needy
-and widows says The Lord." Jeremiah 22:15-16.=E2=80=9C and also build schoo=
-ls
-for less privilege that will be named after my late husband if
-possible and to promote the word of God and the effort that the house
-of God is maintained. I do not want a situation where this money will
-be used in an ungodly manner. That's why I'm taking this decision. I'm
-not afraid of death, so I know where I'm going.
- I accept this decision because I do not have any child who will
-inherit this money after I die. Please I want your sincerely and
-urgent answer to know if you will be able to execute this project for
-the glory of God, and I will give you more information on how the fund
-will be transferred to your bank account. May the grace, peace, love
-and the truth in the Word of God be with you and all those that you
-love and care for.
-I'm waiting for your immediate reply.
-May God Bless you,
-Best Regards.
-Mrs.Jackie,Fowler.
+diff --git a/Documentation/admin-guide/kernel-parameters.txt b/Documentati=
+on/admin-guide/kernel-parameters.txt
+index 2fba82431efb..cb1331f85444 100644
+=2D-- a/Documentation/admin-guide/kernel-parameters.txt
++++ b/Documentation/admin-guide/kernel-parameters.txt
+@@ -935,6 +935,24 @@
+ 			dump out devices still on the deferred probe list after
+ 			retrying.
+
++	dell_smm_hwmon.ignore_dmi=3D
++			[HW] Continue probing hardware even if DMI data
++                        indicates that the driver is running on unsupport=
+ed
++                        hardware.
++
++        dell_smm_hwmon.force=3D
++			[HW] Activate driver even if SMM BIOS signature does
++			not match list of supported models and enable otherwise
++			blacklisted features.
++
++        dell_smm_hwmon.power_status=3D
++                        [HW] Report power status in /proc/i8k
++                        (disabled by default).
++
++        dell_smm_hwmon.restricted=3D
++			[HW] Allow controlling fans only if SYS_ADMIN
++                        capability is set.
++
+ 	dfltcc=3D		[HW,S390]
+ 			Format: { on | off | def_only | inf_only | always }
+ 			on:       s390 zlib hardware support for compression on
+@@ -1694,17 +1712,6 @@
+
+ 	i810=3D		[HW,DRM]
+
+-	i8k.ignore_dmi	[HW] Continue probing hardware even if DMI data
+-			indicates that the driver is running on unsupported
+-			hardware.
+-	i8k.force	[HW] Activate i8k driver even if SMM BIOS signature
+-			does not match list of supported models.
+-	i8k.power_status
+-			[HW] Report power status in /proc/i8k
+-			(disabled by default)
+-	i8k.restricted	[HW] Allow controlling fans only if SYS_ADMIN
+-			capability is set.
+-
+ 	i915.invert_brightness=3D
+ 			[DRM] Invert the sense of the variable that is used to
+ 			set the brightness of the panel backlight. Normally a
+=2D-
+2.30.2
+
