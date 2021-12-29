@@ -2,40 +2,41 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 37E89480ECD
+	by mail.lfdr.de (Postfix) with ESMTP id 840B1480ECE
 	for <lists+linux-doc@lfdr.de>; Wed, 29 Dec 2021 03:14:38 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S236890AbhL2COg (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 28 Dec 2021 21:14:36 -0500
-Received: from szxga02-in.huawei.com ([45.249.212.188]:17309 "EHLO
-        szxga02-in.huawei.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S230043AbhL2COg (ORCPT
+        id S230043AbhL2COh (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 28 Dec 2021 21:14:37 -0500
+Received: from szxga01-in.huawei.com ([45.249.212.187]:15988 "EHLO
+        szxga01-in.huawei.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S230397AbhL2COg (ORCPT
         <rfc822;linux-doc@vger.kernel.org>); Tue, 28 Dec 2021 21:14:36 -0500
-Received: from dggpeml500026.china.huawei.com (unknown [172.30.72.57])
-        by szxga02-in.huawei.com (SkyGuard) with ESMTP id 4JNw1Z3Rl1z9rws;
-        Wed, 29 Dec 2021 10:13:38 +0800 (CST)
+Received: from dggpeml500025.china.huawei.com (unknown [172.30.72.53])
+        by szxga01-in.huawei.com (SkyGuard) with ESMTP id 4JNvys220xzZdpp;
+        Wed, 29 Dec 2021 10:11:17 +0800 (CST)
 Received: from dggpeml500006.china.huawei.com (7.185.36.76) by
- dggpeml500026.china.huawei.com (7.185.36.106) with Microsoft SMTP Server
+ dggpeml500025.china.huawei.com (7.185.36.35) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
  15.1.2308.20; Wed, 29 Dec 2021 10:14:34 +0800
 Received: from huawei.com (10.175.100.227) by dggpeml500006.china.huawei.com
  (7.185.36.76) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2308.20; Wed, 29 Dec
- 2021 10:14:33 +0800
+ 2021 10:14:34 +0800
 From:   Tang Yizhou <tangyizhou@huawei.com>
 To:     <siyanteng@loongson.cn>, <siyanteng01@gmail.com>,
         <alexs@kernel.org>, <seakeel@gmail.com>
 CC:     <linux-doc@vger.kernel.org>, <corbet@lwn.net>,
         <zhengbin13@huawei.com>, <tangyeechou@gmail.com>,
         Tang Yizhou <tangyizhou@huawei.com>
-Subject: [PATCH v3 1/3] docs/zh_CN: Cleanup index.rst
-Date:   Wed, 29 Dec 2021 10:42:10 +0800
-Message-ID: <20211229024212.32752-2-tangyizhou@huawei.com>
+Subject: [PATCH v3 2/3] docs/zh_CN: Add power/index Chinese translation
+Date:   Wed, 29 Dec 2021 10:42:11 +0800
+Message-ID: <20211229024212.32752-3-tangyizhou@huawei.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20211229024212.32752-1-tangyizhou@huawei.com>
 References: <20211229024212.32752-1-tangyizhou@huawei.com>
 MIME-Version: 1.0
-Content-Type: text/plain
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
 X-Originating-IP: [10.175.100.227]
 X-ClientProxiedBy: dggems701-chm.china.huawei.com (10.3.19.178) To
  dggpeml500006.china.huawei.com (7.185.36.76)
@@ -44,36 +45,98 @@ Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Many */index in the Chinese index.rst are not in the same order as the
-English version. Put them to where they should be.
+Translate power/index.rst into Chinese.
 
 Signed-off-by: Tang Yizhou <tangyizhou@huawei.com>
+Reviewed-by: Alex Shi <alexs@kernel.org>
 Reviewed-by: Yanteng Si <siyanteng@loongson.cn>
 ---
- Documentation/translations/zh_CN/index.rst | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
+ Documentation/translations/zh_CN/index.rst    |  2 +-
+ .../translations/zh_CN/power/index.rst        | 55 +++++++++++++++++++
+ 2 files changed, 56 insertions(+), 1 deletion(-)
+ create mode 100644 Documentation/translations/zh_CN/power/index.rst
 
 diff --git a/Documentation/translations/zh_CN/index.rst b/Documentation/translations/zh_CN/index.rst
-index 46e14ec9963d..e7f5fa3e7502 100644
+index e7f5fa3e7502..08144252630c 100644
 --- a/Documentation/translations/zh_CN/index.rst
 +++ b/Documentation/translations/zh_CN/index.rst
-@@ -104,13 +104,13 @@ TODOList:
-    :maxdepth: 2
- 
-    core-api/index
-+   accounting/index
+@@ -108,6 +108,7 @@ TODOList:
     cpu-freq/index
     iio/index
-+   infiniband/index
-+   virt/index
+    infiniband/index
++   power/index
+    virt/index
     sound/index
     filesystems/index
--   virt/index
--   infiniband/index
--   accounting/index
-    scheduler/index
- 
- TODOList:
+@@ -129,7 +130,6 @@ TODOList:
+ * netlabel/index
+ * networking/index
+ * pcmcia/index
+-* power/index
+ * target/index
+ * timers/index
+ * spi/index
+diff --git a/Documentation/translations/zh_CN/power/index.rst b/Documentation/translations/zh_CN/power/index.rst
+new file mode 100644
+index 000000000000..fd379adfda8e
+--- /dev/null
++++ b/Documentation/translations/zh_CN/power/index.rst
+@@ -0,0 +1,55 @@
++.. SPDX-License-Identifier: GPL-2.0
++.. include:: ../disclaimer-zh_CN.rst
++
++:Original: Documentation/power/index.rst
++
++:翻译:
++
++  唐艺舟 Tang Yizhou <tangyeechou@gmail.com>
++
++========
++电源管理
++========
++
++.. toctree::
++    :maxdepth: 1
++
++TODOList:
++
++    * apm-acpi
++    * basic-pm-debugging
++    * charger-manager
++    * drivers-testing
++    * energy-model
++    * freezing-of-tasks
++    * opp
++    * pci
++    * pm_qos_interface
++    * power_supply_class
++    * runtime_pm
++    * s2ram
++    * suspend-and-cpuhotplug
++    * suspend-and-interrupts
++    * swsusp-and-swap-files
++    * swsusp-dmcrypt
++    * swsusp
++    * video
++    * tricks
++
++    * userland-swsusp
++
++    * powercap/powercap
++    * powercap/dtpm
++
++    * regulator/consumer
++    * regulator/design
++    * regulator/machine
++    * regulator/overview
++    * regulator/regulator
++
++.. only::  subproject and html
++
++   Indices
++   =======
++
++   * :ref:`genindex`
 -- 
 2.17.1
 
