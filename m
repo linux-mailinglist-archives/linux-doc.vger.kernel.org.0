@@ -2,427 +2,357 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id CD27F480ECF
-	for <lists+linux-doc@lfdr.de>; Wed, 29 Dec 2021 03:14:38 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 105DF480F09
+	for <lists+linux-doc@lfdr.de>; Wed, 29 Dec 2021 03:52:43 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S230397AbhL2COi (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 28 Dec 2021 21:14:38 -0500
-Received: from szxga03-in.huawei.com ([45.249.212.189]:30188 "EHLO
-        szxga03-in.huawei.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S229620AbhL2COh (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 28 Dec 2021 21:14:37 -0500
-Received: from dggpeml500020.china.huawei.com (unknown [172.30.72.54])
-        by szxga03-in.huawei.com (SkyGuard) with ESMTP id 4JNvzr0VB3z8vxp;
-        Wed, 29 Dec 2021 10:12:08 +0800 (CST)
-Received: from dggpeml500006.china.huawei.com (7.185.36.76) by
- dggpeml500020.china.huawei.com (7.185.36.88) with Microsoft SMTP Server
+        id S231933AbhL2Cwk (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 28 Dec 2021 21:52:40 -0500
+Received: from mga03.intel.com ([134.134.136.65]:47795 "EHLO mga03.intel.com"
+        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
+        id S231184AbhL2Cwk (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Tue, 28 Dec 2021 21:52:40 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1640746360; x=1672282360;
+  h=from:to:cc:subject:date:message-id:references:
+   in-reply-to:content-transfer-encoding:mime-version;
+  bh=/NQNOVQabTGO8rCUgeRkbF7flpLN8lqTEr4RaiJljzM=;
+  b=kcDDd+Y4pZ53tN0Uzi5qRTkvGf+qLp0zKU7SNASv6c1NGbAc0uvjRPsU
+   69/UG/tuxz7/wV2XVum13H9qdgq5MvHCa12qP3wvwlP55Fa5Cfg6DyJyG
+   pJ9Q7YHR1uPQTLj/0DGLXaJb23D3cdIr2WefZXaxUgD5GqV2/jyuJFF+q
+   7l0sxcB7A0C6FoJcuntK7lzxjRwKdZ3VKGEsq71MnKX7K7dSIBdsabuLO
+   y1gErltJEOoc4yWVBj0Me9vWwUMAhhBYj9f6NY3+tYPVo4/82anBsYEVJ
+   hM7BeDkry5xuvTMNl09KJzp2szxUCt4QIp7BwFljyDmom81TjtnCqA7az
+   g==;
+X-IronPort-AV: E=McAfee;i="6200,9189,10211"; a="241407931"
+X-IronPort-AV: E=Sophos;i="5.88,244,1635231600"; 
+   d="scan'208";a="241407931"
+Received: from fmsmga007.fm.intel.com ([10.253.24.52])
+  by orsmga103.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 28 Dec 2021 18:52:39 -0800
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.88,244,1635231600"; 
+   d="scan'208";a="524702315"
+Received: from orsmsx602.amr.corp.intel.com ([10.22.229.15])
+  by fmsmga007.fm.intel.com with ESMTP; 28 Dec 2021 18:52:39 -0800
+Received: from orsmsx608.amr.corp.intel.com (10.22.229.21) by
+ ORSMSX602.amr.corp.intel.com (10.22.229.15) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2308.20; Wed, 29 Dec 2021 10:14:35 +0800
-Received: from huawei.com (10.175.100.227) by dggpeml500006.china.huawei.com
- (7.185.36.76) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2308.20; Wed, 29 Dec
- 2021 10:14:34 +0800
-From:   Tang Yizhou <tangyizhou@huawei.com>
-To:     <siyanteng@loongson.cn>, <siyanteng01@gmail.com>,
-        <alexs@kernel.org>, <seakeel@gmail.com>
-CC:     <linux-doc@vger.kernel.org>, <corbet@lwn.net>,
-        <zhengbin13@huawei.com>, <tangyeechou@gmail.com>,
-        Tang Yizhou <tangyizhou@huawei.com>
-Subject: [PATCH v3 3/3] docs/zh_CN: Add opp Chinese translation
-Date:   Wed, 29 Dec 2021 10:42:12 +0800
-Message-ID: <20211229024212.32752-4-tangyizhou@huawei.com>
-X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20211229024212.32752-1-tangyizhou@huawei.com>
-References: <20211229024212.32752-1-tangyizhou@huawei.com>
+ 15.1.2308.20; Tue, 28 Dec 2021 18:52:38 -0800
+Received: from orsmsx602.amr.corp.intel.com (10.22.229.15) by
+ ORSMSX608.amr.corp.intel.com (10.22.229.21) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2308.20; Tue, 28 Dec 2021 18:52:38 -0800
+Received: from orsedg603.ED.cps.intel.com (10.7.248.4) by
+ orsmsx602.amr.corp.intel.com (10.22.229.15) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2308.20 via Frontend Transport; Tue, 28 Dec 2021 18:52:38 -0800
+Received: from NAM11-CO1-obe.outbound.protection.outlook.com (104.47.56.175)
+ by edgegateway.intel.com (134.134.137.100) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.1.2308.20; Tue, 28 Dec 2021 18:52:38 -0800
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=JTUOXcZpPHkr3nDN3/HrtDE1z664Nt5hMDazj+tdhqwsQq8FrxP/7NmG4KDkyuGY1fstR2JtbDEKTQYAmWhXVW7Cts8PCSSJQnzfGB2ObvF5KMrzyGz2gSrx6pE/O0pPmXGW9NXBS2GzTX2amBrd5sBv0uMCehbW+na3hiyJ677pIEvfKuHK1ghO4y5Ku1hGgot6NcryNpe9Tq8EUnx1VY2bJIybg323XqQAMWBRSv4mUciIxGEsstB61zh8S8XRzeglt/6KAoAdQRfZ/s8gcEbFPB/M41EyEUBjbLfP6V2yvIg5yiHN2j7KwJLiekaDLwURbcgDmgCupU1ZNIZhJg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=EGdqb+ds9GPfA4CLSMVE1jEUPehM36EY88vMRiitvJE=;
+ b=PPiIdM4oUCGXhpGAE4L3MMU4DR12pYGwrVPT6t6s8FLUQ+EtvQSKtddiRNNi5rV8Oss8XJejo6sccwnWClL5D90z2KaiLbFlsJrAvrvfpWBkcdXDHonHtbzVd2pN5G6KnWs1voGYcBgUxSqk5svWxi2PPRsdh6KVeI7H3KEYajKodVIRcCIG3rLhwd+74VYqtKyMFybbk9CoGM81soz6W3iyjsNEp5bDac0YjTqJHWvBvsjnBPDWGonhdHfHlZUcPBJMqwspHJOwvoV7x1wGhx8yVuFVNgGn/0QZB4hc5fMJzqnx6XJ5fCRgH9+MT/PvrzrZeE0zx2FbF+pnSbY7TA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=intel.com; dmarc=pass action=none header.from=intel.com;
+ dkim=pass header.d=intel.com; arc=none
+Received: from BN9PR11MB5276.namprd11.prod.outlook.com (2603:10b6:408:135::18)
+ by BN9PR11MB5369.namprd11.prod.outlook.com (2603:10b6:408:11a::14) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4823.19; Wed, 29 Dec
+ 2021 02:52:34 +0000
+Received: from BN9PR11MB5276.namprd11.prod.outlook.com
+ ([fe80::5c8a:9266:d416:3e04]) by BN9PR11MB5276.namprd11.prod.outlook.com
+ ([fe80::5c8a:9266:d416:3e04%2]) with mapi id 15.20.4844.014; Wed, 29 Dec 2021
+ 02:52:34 +0000
+From:   "Tian, Kevin" <kevin.tian@intel.com>
+To:     "Christopherson,, Sean" <seanjc@google.com>,
+        "Liu, Jing2" <jing2.liu@intel.com>
+CC:     "x86@kernel.org" <x86@kernel.org>,
+        "kvm@vger.kernel.org" <kvm@vger.kernel.org>,
+        "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
+        "linux-doc@vger.kernel.org" <linux-doc@vger.kernel.org>,
+        "linux-kselftest@vger.kernel.org" <linux-kselftest@vger.kernel.org>,
+        "tglx@linutronix.de" <tglx@linutronix.de>,
+        "mingo@redhat.com" <mingo@redhat.com>,
+        "bp@alien8.de" <bp@alien8.de>,
+        "dave.hansen@linux.intel.com" <dave.hansen@linux.intel.com>,
+        "pbonzini@redhat.com" <pbonzini@redhat.com>,
+        "corbet@lwn.net" <corbet@lwn.net>,
+        "shuah@kernel.org" <shuah@kernel.org>,
+        "Nakajima, Jun" <jun.nakajima@intel.com>,
+        "jing2.liu@linux.intel.com" <jing2.liu@linux.intel.com>,
+        "Zeng, Guang" <guang.zeng@intel.com>,
+        "Wang, Wei W" <wei.w.wang@intel.com>,
+        "Zhong, Yang" <yang.zhong@intel.com>
+Subject: RE: [PATCH v3 13/22] kvm: x86: Intercept #NM for saving IA32_XFD_ERR
+Thread-Topic: [PATCH v3 13/22] kvm: x86: Intercept #NM for saving IA32_XFD_ERR
+Thread-Index: AQHX9zE1lVRiv1UsgEq40a+CF3C7OqxIomKAgAAmHcA=
+Date:   Wed, 29 Dec 2021 02:52:34 +0000
+Message-ID: <BN9PR11MB52760E4417F27BF9CA4F97B08C449@BN9PR11MB5276.namprd11.prod.outlook.com>
+References: <20211222124052.644626-1-jing2.liu@intel.com>
+ <20211222124052.644626-14-jing2.liu@intel.com> <YcunSb52LlGKT7dC@google.com>
+In-Reply-To: <YcunSb52LlGKT7dC@google.com>
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+authentication-results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=intel.com;
+x-ms-publictraffictype: Email
+x-ms-office365-filtering-correlation-id: c796a08b-c24b-4477-47e9-08d9ca7643e7
+x-ms-traffictypediagnostic: BN9PR11MB5369:EE_
+x-ld-processed: 46c98d88-e344-4ed4-8496-4ed7712e255d,ExtAddr
+x-microsoft-antispam-prvs: <BN9PR11MB5369644A9500ACF61C4EA6EF8C449@BN9PR11MB5369.namprd11.prod.outlook.com>
+x-ms-oob-tlc-oobclassifiers: OLM:9508;
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
+x-microsoft-antispam: BCL:0;
+x-microsoft-antispam-message-info: wD+7cWENNJgztgX3YFtKho/SkBobB2XGc1nWV7enJz8+7PoYCkaOpJ+Nu+y6mzm4lqjG8EzePMAXEGRAjrtb8eHgCeN58WVVIJJOjMgvaiGX8McvJ3RO3iYpmgVZg4xS2rCBdGZxtgKDF2YMereIQuKyyFMwfROYt9sKC6Mg7gmAWWMxF0Osg+5GHN6GzhU6Pd70/WeKJWU/wHuheNm+ZyDl05SdSWL0iBOr8gYjZ/3XnJrJ0PqN8hU0sgEfuB0nKve/WlxbwUwNXcLFTjhOCtozFUdi8Cxl8KE+z3l4WltRW5W+GOU97+51JOQATshS7jRzHM22rqVhfjYcgWnRHfxBrB7YZ/vSGg7DBHQ7C1RGkgjGCf9tDjTfp9gJHV8kBxUdPnjCT4G7HsH4pHb5g4qaFuW3DNGz6L9BczbUortazhLKUUVhkbijC2Sn2opHYcS9b88zMBCEry0z16WIrzUMhMd5YrynmsyCC/dArKft6tVNfHNZgPGiTO7Gn0B4hnElE3dsVRzcHQm9pzOXMR7cm2T0Trcvse3YWeVFeD3c6knWBdcIDFunqSHwNZ/j5i/HLAXneRp57ctS2nkJVdMNw4SUIOb4r/C+hJCxNAJLNRyjlczNA135+k40W2bwZ02BpZobQZ+majALRyLqC5xdcjR06xSW9ks9OebYM+8s/N7jo7gCmBQCWd1XwcKhfiLa4oHRnabk+9J8TMKZUw==
+x-forefront-antispam-report: CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BN9PR11MB5276.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(366004)(76116006)(64756008)(66946007)(66556008)(66476007)(66446008)(508600001)(7696005)(9686003)(4326008)(5660300002)(6506007)(26005)(186003)(71200400001)(82960400001)(83380400001)(86362001)(33656002)(6636002)(54906003)(122000001)(110136005)(52536014)(316002)(38100700002)(2906002)(38070700005)(7416002)(8936002)(8676002)(55016003);DIR:OUT;SFP:1102;
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0: =?us-ascii?Q?vDp1zfkI+hf3HCnZLA56+x6ZCKB4ne4KmwDD1PHNVTDyd2x2aiibMPEV6um+?=
+ =?us-ascii?Q?KOk8O5S5y+Ijhzg2CPyIOhcAPiGyyZmh1MW83tQmMHiZyf16sQ3dIzm/2ljJ?=
+ =?us-ascii?Q?vwhnMiyPXtpKQrdyqJ+vP/BWsHTcrsQWLIptTrStVk1CbPG10NWIU8wgeQZC?=
+ =?us-ascii?Q?DLWSw7/j9How8n7W8Azff/8Y6hTWqzOnmLO4z+cS8eZCzTMFsLIldXI5Au6y?=
+ =?us-ascii?Q?V7f46HQgzZsc/0hTLEx0mJcUZKUeWinWEcahjxP4T3sLDHdKtyYD8FYVVPBw?=
+ =?us-ascii?Q?jErl27/Oi2MLukBuyLplA3kTi/XT7BYko4rZsT9SRMgfUN/wA7SIgHCrGfhl?=
+ =?us-ascii?Q?qVhs1Bh6FGsdtb6q62CLKFRb4xftFeTVJ0jaYw/3j7qrHTuwM35P2oQHFKUf?=
+ =?us-ascii?Q?11W/jqEBHv5Cb41UJ4hA1QKmtrShX+kZeCbhA+bSYFst35bpi0a+nELN5DOQ?=
+ =?us-ascii?Q?W6xicKWfor3Mc2wsia92/esD773HFgjvuKrspN8CFRmm8uLkTj21lvrGIs0u?=
+ =?us-ascii?Q?CY0JLVEL75esPS0Qu+shPAPPcq7lk5KnR6l3HuIMOXAUBwZaoaRGipyWnLRw?=
+ =?us-ascii?Q?bA5NCXGXyGLW0Zdmj4/7LhwF+ywkbQWgPWqxd138PJAt7i/K4lrpQr/0CNaK?=
+ =?us-ascii?Q?+eneBWxcVcFHa6QyhvecBCkn+m/Elzzk7M10T0rCfgO+fZAPQGato7wZFLDA?=
+ =?us-ascii?Q?Bw9UZF1DwPJFTs0A0xRaGkZuzRsW3Rv8w7DicxqD3g//ZqWPefgnj+a0GAh5?=
+ =?us-ascii?Q?d8qVZFQRIdobGEpGBud2WJ4Kz21T0iXCyV798d3rY1xrUIoi0BDAvNr6nJ2J?=
+ =?us-ascii?Q?JEcicurigcfhoGzW4VZN32rBr1GM75kQVnFK4Ve2zhTh7wZUza3hHyVWCLxn?=
+ =?us-ascii?Q?dDuXN6IAhB2Yt3Prlw27TMeLXr1ZXJ5vtstUBbO0qYIZqOT47OJ9blx133cx?=
+ =?us-ascii?Q?F15qLoEG7Yq/vMuCoPt3cNPZ3X4sP1h2lGiUKDhe67tbMI7hXT09l0C+3jGY?=
+ =?us-ascii?Q?gTD9gzaKV+OVe3KPAhTC8q1+TsYf+iDKrKCET5wIK4/iAL6z07gN16LhQYf0?=
+ =?us-ascii?Q?UeI+IBPjTWED8nE7a17VmmCdTYSghFVO4opugHwXZielWX1hpPEiNa9LMChZ?=
+ =?us-ascii?Q?nGliLObvuokydB+Z8tG3C9QS3FdmFt3gCes/P4lY1d7cQFXA/clcMYKBnKU7?=
+ =?us-ascii?Q?9TMUGRL8CUXcPabG/lRxXjOqtnPzI8y9l5yBsvYoMopGUU+xCd3XSF/P6lBU?=
+ =?us-ascii?Q?lu15y6ojSwjAQ/beeSQnr8mxeveX9eJxc677I/8Zs/rBXC9pch+BOwVi6jey?=
+ =?us-ascii?Q?2odZo9GM/iJQHP02kW31sB4Iup5Y0vV/AQB/Ae4FBEJVO/g4WtU/i6f/+8yx?=
+ =?us-ascii?Q?dFWx6JXKuQr7HhZL8NhEE1Rf8RFFe3pGWMoCdLGlEYBBrDW6QzsDn1fkD1dD?=
+ =?us-ascii?Q?PtMzXozQv2o96nPBkOzgkRuyatG9+0Oc2qTBE4vTmH+D56Vy/IIDLh3mpsKF?=
+ =?us-ascii?Q?s74m1H6x/DDU3jWd49OMysCo5RGfnVkaN+J8BK2VP3CsWuarhU/8aXJ6Bnpb?=
+ =?us-ascii?Q?sp0jCyKv9Tvc8qeuExmOa3QH9PCkw38qO3XpPKQKjQ2+J4VpS+lZm9vzDHIc?=
+ =?us-ascii?Q?8Z3raCZ8bfBKdxVe5+s9SBg=3D?=
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 MIME-Version: 1.0
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 8bit
-X-Originating-IP: [10.175.100.227]
-X-ClientProxiedBy: dggems701-chm.china.huawei.com (10.3.19.178) To
- dggpeml500006.china.huawei.com (7.185.36.76)
-X-CFilter-Loop: Reflected
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: BN9PR11MB5276.namprd11.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: c796a08b-c24b-4477-47e9-08d9ca7643e7
+X-MS-Exchange-CrossTenant-originalarrivaltime: 29 Dec 2021 02:52:34.1926
+ (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: 46c98d88-e344-4ed4-8496-4ed7712e255d
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: wvGG8kO68aVVainm7y/HHCaI1Xb02FjDPizOS3f61l+mjhBNk7/8KZwclYR+XnuOs9UfcT+SuGVSR+ByPDH3tA==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: BN9PR11MB5369
+X-OriginatorOrg: intel.com
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Translate power/opp.rst into Chinese.
+> From: Sean Christopherson <seanjc@google.com>
+> Sent: Wednesday, December 29, 2021 8:10 AM
+>=20
+> On Wed, Dec 22, 2021, Jing Liu wrote:
+> > Guest IA32_XFD_ERR is generally modified in two places:
+> >
+> >   - Set by CPU when #NM is triggered;
+> >   - Cleared by guest in its #NM handler;
+> >
+> > Intercept #NM for the first case, if guest writes XFD as nonzero for
+> > the first time which indicates guest is possible to use XFD generating
+> > the exception. #NM is rare if the guest doesn't use dynamic features.
+> > Otherwise, there is at most one exception per guest task given a
+> > dynamic feature.
+> >
+> > Save the current XFD_ERR value to the guest_fpu container in the #NM
+> > VM-exit handler. This must be done with interrupt/preemption disabled,
+>=20
+> Assuming my below understanding is correct, drop the "preemption" bit, it=
+'s
+> misleading.
 
-Signed-off-by: Tang Yizhou <tangyizhou@huawei.com>
-Reviewed-by: Alex Shi <alexs@kernel.org>
----
- .../translations/zh_CN/power/index.rst        |   3 +-
- .../translations/zh_CN/power/opp.rst          | 341 ++++++++++++++++++
- 2 files changed, 343 insertions(+), 1 deletion(-)
- create mode 100644 Documentation/translations/zh_CN/power/opp.rst
+code-wise yes. In concept we just want to highlight that this operation=20
+must be completed when both interrupt and preemption are disabled.
 
-diff --git a/Documentation/translations/zh_CN/power/index.rst b/Documentation/translations/zh_CN/power/index.rst
-index fd379adfda8e..ad80a9e80b7c 100644
---- a/Documentation/translations/zh_CN/power/index.rst
-+++ b/Documentation/translations/zh_CN/power/index.rst
-@@ -14,6 +14,8 @@
- .. toctree::
-     :maxdepth: 1
- 
-+    opp
-+
- TODOList:
- 
-     * apm-acpi
-@@ -22,7 +24,6 @@ TODOList:
-     * drivers-testing
-     * energy-model
-     * freezing-of-tasks
--    * opp
-     * pci
-     * pm_qos_interface
-     * power_supply_class
-diff --git a/Documentation/translations/zh_CN/power/opp.rst b/Documentation/translations/zh_CN/power/opp.rst
-new file mode 100644
-index 000000000000..8d6e3f6f6202
---- /dev/null
-+++ b/Documentation/translations/zh_CN/power/opp.rst
-@@ -0,0 +1,341 @@
-+.. SPDX-License-Identifier: GPL-2.0
-+.. include:: ../disclaimer-zh_CN.rst
-+
-+:Original: Documentation/power/opp.rst
-+
-+:翻译:
-+
-+  唐艺舟 Tang Yizhou <tangyeechou@gmail.com>
-+
-+======================
-+操作性能值（OPP）库
-+======================
-+
-+(C) 2009-2010 Nishanth Menon <nm@ti.com>, 德州仪器公司
-+
-+.. 目录
-+
-+  1. 简介
-+  2. OPP链表初始注册
-+  3. OPP搜索函数
-+  4. OPP可用性控制函数
-+  5. OPP数据检索函数
-+  6. 数据结构
-+
-+1. 简介
-+=======
-+
-+1.1 何为操作性能值（OPP）？
-+------------------------------
-+
-+当今复杂的单片系统（SoC）由多个子模块组成，这些子模块会联合工作。在一个执行不同用例
-+的操作系统中，并不是SoC中的所有模块都需要一直以最高频率工作。为了促成这一点，SoC中
-+的子模块被分组为不同域，允许一些域以较低的电压和频率运行，而其它域则以较高的“电压/
-+频率对”运行。
-+
-+设备按域支持的由频率电压对组成的离散的元组的集合，被称为操作性能值（组），或OPPs。
-+
-+举例来说：
-+
-+让我们考虑一个支持下述频率、电压值的内存保护单元（MPU）设备：
-+{300MHz，最低电压为1V}, {800MHz，最低电压为1.2V}, {1GHz，最低电压为1.3V}
-+
-+我们能将它们表示为3个OPP，如下述{Hz, uV}元组（译注：频率的单位是赫兹，电压的单位是
-+微伏）。
-+
-+- {300000000, 1000000}
-+- {800000000, 1200000}
-+- {1000000000, 1300000}
-+
-+1.2 操作性能值库
-+----------------
-+
-+OPP库提供了一组辅助函数来组织和查询OPP信息。该库位于drivers/opp/目录下，其头文件
-+位于include/linux/pm_opp.h中。OPP库可以通过开启CONFIG_PM_OPP来启用。某些SoC，
-+如德州仪器的OMAP框架允许在不需要cpufreq的情况下可选地在某一OPP下启动。
-+
-+OPP库的典型用法如下::
-+
-+ （用户）        -> 注册一个默认的OPP集合               -> （库）
-+ （SoC框架）     -> 在必要的情况下，对某些OPP进行修改     -> OPP layer
-+                -> 搜索/检索信息的查询                 ->
-+
-+OPP层期望每个域由一个唯一的设备指针来表示。SoC框架在OPP层为每个设备注册了一组初始
-+OPP。这个链表的长度被期望是一个最优化的小数字，通常每个设备大约5个。初始链表包含了
-+一个OPP集合，这个集合被期望能在系统中安全使能。
-+
-+关于OPP可用性的说明
-+^^^^^^^^^^^^^^^^^^^
-+
-+随着系统的运行，SoC框架可能会基于各种外部因素选择让某些OPP在每个设备上可用或不可用，
-+示例：温度管理或其它异常场景中，SoC框架可能会选择禁用一个较高频率的OPP以安全地继续
-+运行，直到该OPP被重新启用（如果可能）。
-+
-+OPP库在它的实现中达成了这个概念。以下操作函数只能对可用的OPP使用：
-+dev_pm_opp_find_freq_{ceil, floor}, dev_pm_opp_get_voltage,
-+dev_pm_opp_get_freq, dev_pm_opp_get_opp_count。
-+
-+dev_pm_opp_find_freq_exact是用来查找OPP指针的，该指针可被用在dev_pm_opp_enable/
-+disable函数，使一个OPP在被需要时变为可用。
-+
-+警告：如果对一个设备调用dev_pm_opp_enable/disable函数，OPP库的用户应该使用
-+dev_pm_opp_get_opp_count来刷新OPP的可用性计数。触发这些的具体机制，或者对有依赖的
-+子系统（比如cpufreq）的通知机制，都是由使用OPP库的SoC特定框架酌情处理的。在这些操作
-+中，同样需要注意刷新cpufreq表。
-+
-+2. OPP链表初始注册
-+==================
-+SoC的实现会迭代调用dev_pm_opp_add函数来增加每个设备的OPP。预期SoC框架将以最优的
-+方式注册OPP条目 - 典型的数字范围小于5。通过注册OPP生成的OPP链表，在整个设备运行过程
-+中由OPP库维护。SoC框架随后可以使用dev_pm_opp_enable / disable函数动态地
-+控制OPP的可用性。
-+
-+dev_pm_opp_add
-+	为设备指针所指向的特定域添加一个新的OPP。OPP是用频率和电压定义的。一旦完成
-+	添加，OPP被认为是可用的，可以用dev_pm_opp_enable/disable函数来控制其可用性。
-+	OPP库内部用dev_pm_opp结构体存储并管理这些信息。这个函数可以被SoC框架根据SoC
-+	的使用环境的需求来定义一个最优链表。
-+
-+	警告：
-+		不要在中断上下文使用这个函数。
-+
-+	示例::
-+
-+	 soc_pm_init()
-+	 {
-+		/* 做一些事情 */
-+		r = dev_pm_opp_add(mpu_dev, 1000000, 900000);
-+		if (!r) {
-+			pr_err("%s: unable to register mpu opp(%d)\n", r);
-+			goto no_cpufreq;
-+		}
-+		/* 做一些和cpufreq相关的事情 */
-+	 no_cpufreq:
-+		/* 做剩余的事情 */
-+	 }
-+
-+3. OPP搜索函数
-+==============
-+cpufreq等高层框架对频率进行操作，为了将频率映射到相应的OPP，OPP库提供了便利的函数
-+来搜索OPP库内部管理的OPP链表。这些搜索函数如果找到匹配的OPP，将返回指向该OPP的指针，
-+否则返回错误。这些错误预计由标准的错误检查，如IS_ERR()来处理，并由调用者采取适当的
-+行动。
-+
-+这些函数的调用者应在使用完OPP后调用dev_pm_opp_put()。否则，OPP的内存将永远不会
-+被释放，并导致内存泄露。
-+
-+dev_pm_opp_find_freq_exact
-+	根据 *精确的* 频率和可用性来搜索OPP。这个函数对默认不可用的OPP特别有用。
-+	例子：在SoC框架检测到更高频率可用的情况下，它可以使用这个函数在调用
-+	dev_pm_opp_enable之前找到OPP::
-+
-+	 opp = dev_pm_opp_find_freq_exact(dev, 1000000000, false);
-+	 dev_pm_opp_put(opp);
-+	 /* 不要操作指针.. 只是做有效性检查.. */
-+	 if (IS_ERR(opp)) {
-+		pr_err("frequency not disabled!\n");
-+		/* 触发合适的操作.. */
-+	 } else {
-+		dev_pm_opp_enable(dev,1000000000);
-+	 }
-+
-+	注意：
-+	  这是唯一一个可以搜索不可用OPP的函数。
-+
-+dev_pm_opp_find_freq_floor
-+	搜索一个 *最多* 提供指定频率的可用OPP。这个函数在搜索较小的匹配或按频率
-+	递减的顺序操作OPP信息时很有用。
-+	例子：要找的一个设备的最高OPP::
-+
-+	 freq = ULONG_MAX;
-+	 opp = dev_pm_opp_find_freq_floor(dev, &freq);
-+	 dev_pm_opp_put(opp);
-+
-+dev_pm_opp_find_freq_ceil
-+	搜索一个 *最少* 提供指定频率的可用OPP。这个函数在搜索较大的匹配或按频率
-+	递增的顺序操作OPP信息时很有用。
-+	例1：找到一个设备最小的OPP::
-+
-+	 freq = 0;
-+	 opp = dev_pm_opp_find_freq_ceil(dev, &freq);
-+	 dev_pm_opp_put(opp);
-+
-+	例: 一个SoC的cpufreq_driver->target的简易实现::
-+
-+	 soc_cpufreq_target(..)
-+	 {
-+		/* 做策略检查等操作 */
-+		/* 找到和请求最接近的频率 */
-+		opp = dev_pm_opp_find_freq_ceil(dev, &freq);
-+		dev_pm_opp_put(opp);
-+		if (!IS_ERR(opp))
-+			soc_switch_to_freq_voltage(freq);
-+		else
-+			/* 当不能满足请求时，要做的事 */
-+		/* 做其它事 */
-+	 }
-+
-+4. OPP可用性控制函数
-+====================
-+在OPP库中注册的默认OPP链表也许无法满足所有可能的场景。OPP库提供了一套函数来修改
-+OPP链表中的某个OPP的可用性。这使得SoC框架能够精细地动态控制哪一组OPP是可用于操作
-+的。设计这些函数的目的是在诸如考虑温度时 *暂时地* 删除某个OPP（例如，在温度下降
-+之前不要使用某OPP）。
-+
-+警告：
-+	不要在中断上下文使用这些函数。
-+
-+dev_pm_opp_enable
-+	使一个OPP可用于操作。
-+	例子：假设1GHz的OPP只有在SoC温度低于某个阈值时才可用。SoC框架的实现可能
-+	会选择做以下事情::
-+
-+	 if (cur_temp < temp_low_thresh) {
-+		/* 若1GHz未使能，则使能 */
-+		opp = dev_pm_opp_find_freq_exact(dev, 1000000000, false);
-+		dev_pm_opp_put(opp);
-+		/* 仅仅是错误检查 */
-+		if (!IS_ERR(opp))
-+			ret = dev_pm_opp_enable(dev, 1000000000);
-+		else
-+			goto try_something_else;
-+	 }
-+
-+dev_pm_opp_disable
-+	使一个OPP不可用于操作。
-+	例子：假设1GHz的OPP只有在SoC温度高于某个阈值时才可用。SoC框架的实现可能
-+	会选择做以下事情::
-+
-+	 if (cur_temp > temp_high_thresh) {
-+		/* 若1GHz已使能，则关闭 */
-+		opp = dev_pm_opp_find_freq_exact(dev, 1000000000, true);
-+		dev_pm_opp_put(opp);
-+		/* 仅仅是错误检查 */
-+		if (!IS_ERR(opp))
-+			ret = dev_pm_opp_disable(dev, 1000000000);
-+		else
-+			goto try_something_else;
-+	 }
-+
-+5. OPP数据检索函数
-+==================
-+由于OPP库对OPP信息进行了抽象化处理，因此需要一组函数来从dev_pm_opp结构体中提取
-+信息。一旦使用搜索函数检索到一个OPP指针，以下函数就可以被SoC框架用来检索OPP层
-+内部描述的信息。
-+
-+dev_pm_opp_get_voltage
-+	检索OPP指针描述的电压。
-+	例子: 当cpufreq切换到到不同频率时，SoC框架需要用稳压器框架将OPP描述
-+	的电压设置到提供电压的电源管理芯片中::
-+
-+	 soc_switch_to_freq_voltage(freq)
-+	 {
-+		/* 做一些事情 */
-+		opp = dev_pm_opp_find_freq_ceil(dev, &freq);
-+		v = dev_pm_opp_get_voltage(opp);
-+		dev_pm_opp_put(opp);
-+		if (v)
-+			regulator_set_voltage(.., v);
-+		/* 做其它事 */
-+	 }
-+
-+dev_pm_opp_get_freq
-+	检索OPP指针描述的频率。
-+	例子：比方说，SoC框架使用了几个辅助函数，通过这些函数，我们可以将OPP
-+	指针传入，而不是传入额外的参数，用来处理一系列数据参数::
-+
-+	 soc_cpufreq_target(..)
-+	 {
-+		/* 做一些事情.. */
-+		 max_freq = ULONG_MAX;
-+		 max_opp = dev_pm_opp_find_freq_floor(dev,&max_freq);
-+		 requested_opp = dev_pm_opp_find_freq_ceil(dev,&freq);
-+		 if (!IS_ERR(max_opp) && !IS_ERR(requested_opp))
-+			r = soc_test_validity(max_opp, requested_opp);
-+		 dev_pm_opp_put(max_opp);
-+		 dev_pm_opp_put(requested_opp);
-+		/* 做其它事 */
-+	 }
-+	 soc_test_validity(..)
-+	 {
-+		 if(dev_pm_opp_get_voltage(max_opp) < dev_pm_opp_get_voltage(requested_opp))
-+			 return -EINVAL;
-+		 if(dev_pm_opp_get_freq(max_opp) < dev_pm_opp_get_freq(requested_opp))
-+			 return -EINVAL;
-+		/* 做一些事情.. */
-+	 }
-+
-+dev_pm_opp_get_opp_count
-+	检索某个设备可用的OPP数量。
-+	例子：假设SoC中的一个协处理器需要知道某个表中的可用频率，主处理器可以
-+	按如下方式发出通知::
-+
-+	 soc_notify_coproc_available_frequencies()
-+	 {
-+		/* 做一些事情 */
-+		num_available = dev_pm_opp_get_opp_count(dev);
-+		speeds = kzalloc(sizeof(u32) * num_available, GFP_KERNEL);
-+		/* 按升序填充表 */
-+		freq = 0;
-+		while (!IS_ERR(opp = dev_pm_opp_find_freq_ceil(dev, &freq))) {
-+			speeds[i] = freq;
-+			freq++;
-+			i++;
-+			dev_pm_opp_put(opp);
-+		}
-+
-+		soc_notify_coproc(AVAILABLE_FREQs, speeds, num_available);
-+		/* 做其它事 */
-+	 }
-+
-+6. 数据结构
-+===========
-+通常，一个SoC包含多个可变电压域。每个域由一个设备指针描述。和OPP之间的关系可以
-+按以下方式描述::
-+
-+  SoC
-+   |- device 1
-+   |	|- opp 1 (availability, freq, voltage)
-+   |	|- opp 2 ..
-+   ...	...
-+   |	`- opp n ..
-+   |- device 2
-+   ...
-+   `- device m
-+
-+OPP库维护着一个内部链表，SoC框架使用上文描述的各个函数来填充和访问。然而，描述
-+真实OPP和域的结构体是OPP库自身的内部组成，以允许合适的抽象在不同系统中得到复用。
-+
-+struct dev_pm_opp
-+	OPP库的内部数据结构，用于表示一个OPP。除了频率、电压、可用性信息外，
-+	它还包含OPP库运行所需的内部统计信息。指向这个结构体的指针被提供给
-+	用户（比如SoC框架）使用，在与OPP层的交互中作为OPP的标识符。
-+
-+	警告：
-+	  结构体dev_pm_opp的指针不应该由用户解析或修改。一个实例的默认值由
-+	  dev_pm_opp_add填充，但OPP的可用性由dev_pm_opp_enable/disable函数
-+	  修改。
-+
-+struct device
-+	这用于向OPP层标识一个域。设备的性质和它的实现是由OPP库的用户决定的，
-+	如SoC框架。
-+
-+总体来说，以一个简化的视角看，对数据结构的操作可以描述为下面各图::
-+
-+  初始化 / 修改:
-+              +-----+        /- dev_pm_opp_enable
-+  dev_pm_opp_add --> | opp | <-------
-+    |         +-----+        \- dev_pm_opp_disable
-+    \-------> domain_info(device)
-+
-+  搜索函数:
-+               /-- dev_pm_opp_find_freq_ceil  ---\   +-----+
-+  domain_info<---- dev_pm_opp_find_freq_exact -----> | opp |
-+               \-- dev_pm_opp_find_freq_floor ---/   +-----+
-+
-+  检索函数:
-+  +-----+     /- dev_pm_opp_get_voltage
-+  | opp | <---
-+  +-----+     \- dev_pm_opp_get_freq
-+
-+  domain_info <- dev_pm_opp_get_opp_count
--- 
-2.17.1
+But we can also drop preemption if you prefer to, since preemption is
+certainly disabled  when interrupt is disabled.
 
+>=20
+> > otherwise the unsaved MSR value may be clobbered by host operations.
+> >
+> > Inject a virtual #NM to the guest after saving the MSR value.
+> >
+> > Restore the host value (always ZERO outside of the host #NM
+> > handler) before enabling preemption.
+>=20
+> AIUI, changelog is wrong, code is right.  This must be done before _IRQs_=
+ are
+> enabled, same as handling TIF_NEED_FPU_LOAD.
+
+yes
+
+>=20
+> > Restore the guest value from the guest_fpu container right before
+> > entering the guest (with preemption disabled).
+>=20
+> Same complaint about preemption.
+>=20
+> > Suggested-by: Thomas Gleixner <tglx@linutronix.de>
+> > Signed-off-by: Jing Liu <jing2.liu@intel.com>
+> > ---
+> >  arch/x86/include/asm/kvm_host.h |  1 +
+> >  arch/x86/kvm/vmx/vmcs.h         |  5 +++++
+> >  arch/x86/kvm/vmx/vmx.c          | 22 +++++++++++++++++++++-
+> >  arch/x86/kvm/x86.c              |  6 ++++++
+> >  4 files changed, 33 insertions(+), 1 deletion(-)
+> >
+> > diff --git a/arch/x86/include/asm/kvm_host.h
+> b/arch/x86/include/asm/kvm_host.h
+> > index 555f4de47ef2..f7a661f35d1a 100644
+> > --- a/arch/x86/include/asm/kvm_host.h
+> > +++ b/arch/x86/include/asm/kvm_host.h
+> > @@ -640,6 +640,7 @@ struct kvm_vcpu_arch {
+> >  	u64 smi_count;
+> >  	bool tpr_access_reporting;
+> >  	bool xsaves_enabled;
+> > +	bool trap_nm;
+> >  	u64 ia32_xss;
+> >  	u64 microcode_version;
+> >  	u64 arch_capabilities;
+>=20
+> ...
+>=20
+> > @@ -763,6 +764,9 @@ void vmx_update_exception_bitmap(struct
+> kvm_vcpu *vcpu)
+> >  		vmcs_write32(PAGE_FAULT_ERROR_CODE_MATCH, match);
+> >  	}
+> >
+> > +	if (vcpu->arch.trap_nm)
+> > +		eb |=3D (1u << NM_VECTOR);
+> > +
+> >  	vmcs_write32(EXCEPTION_BITMAP, eb);
+> >  }
+> >
+> > @@ -1960,6 +1964,13 @@ static int vmx_set_msr(struct kvm_vcpu *vcpu,
+> struct msr_data *msr_info)
+> >  	case MSR_KERNEL_GS_BASE:
+> >  		vmx_write_guest_kernel_gs_base(vmx, data);
+> >  		break;
+> > +	case MSR_IA32_XFD:
+> > +		ret =3D kvm_set_msr_common(vcpu, msr_info);
+> > +		if (!ret && data) {
+> > +			vcpu->arch.trap_nm =3D true;
+> > +			vmx_update_exception_bitmap(vcpu);
+>=20
+> This is wrong, it fails to clear vcpu->arch.trap_nm and update the bitmap=
+ if
+> the
+> MSR is cleared.
+
+In concept you are right if just looking at this patch. It's pointless to
+trap #NM if guest xfd is cleared.
+
+But here we need think about patch22 which disables write interception
+for xfd. With that in consideration we use the 1st non-zero write as the
+hint indicating that guest might enable xfd-related usages thus always
+trap #NM after this point.
+
+It's not a good ordering, but Paolo wants to put the optimization in the
+end of this series. But we do need to put a clear comment here explaining
+the always-trap policy.
+
+>=20
+> But why even bother with an extra flag?  Can't
+> vmx_update_exception_bitmap() get
+> the guest's MSR_IA32_XFD value and intercept #NM accordingly?  Then you
+
+Above is the reason for the extra flag
+
+> could
+> even handle this fully in kvm_set_msr_common(), e.g.
+>=20
+> diff --git a/arch/x86/kvm/x86.c b/arch/x86/kvm/x86.c
+> index 2c9606380bca..c6c936d2b298 100644
+> --- a/arch/x86/kvm/x86.c
+> +++ b/arch/x86/kvm/x86.c
+> @@ -3704,6 +3704,8 @@ int kvm_set_msr_common(struct kvm_vcpu *vcpu,
+> struct msr_data *msr_info)
+>                         return 1;
+>=20
+>                 fpu_update_guest_xfd(&vcpu->arch.guest_fpu, data);
+> +               /* Blah blah blah blah */
+> +               static_call(kvm_x86_update_exception_bitmap)(vcpu);
+>                 break;
+>         case MSR_IA32_XFD_ERR:
+>                 if (!msr_info->host_initiated &&
+>=20
+> > +		}
+> > +		break;
+> >  #endif
+> >  	case MSR_IA32_SYSENTER_CS:
+> >  		if (is_guest_mode(vcpu))
+> > @@ -4746,7 +4757,7 @@ static int handle_exception_nmi(struct kvm_vcpu
+> *vcpu)
+> >  	vect_info =3D vmx->idt_vectoring_info;
+> >  	intr_info =3D vmx_get_intr_info(vcpu);
+> >
+> > -	if (is_machine_check(intr_info) || is_nmi(intr_info))
+> > +	if (is_machine_check(intr_info) || is_nmi(intr_info) ||
+> is_nm(intr_info))
+> >  		return 1; /* handled by handle_exception_nmi_irqoff() */
+> >
+> >  	if (is_invalid_opcode(intr_info))
+> > @@ -6350,6 +6361,12 @@ static void handle_interrupt_nmi_irqoff(struct
+> kvm_vcpu *vcpu,
+> >  	kvm_after_interrupt(vcpu);
+> >  }
+> >
+> > +static void handle_exception_nm(struct kvm_vcpu *vcpu)
+>=20
+> This needs a different name, it's waaaay too close to the base
+> handle_exception_nmi(),
+> which runs with IRQs _on_.  And please add "_irqoff" at the end.  Maybe
+> handle_nm_fault_irqoff()?
+
+sounds good.
+
+>=20
+> > +{
+> > +	rdmsrl(MSR_IA32_XFD_ERR, vcpu->arch.guest_fpu.xfd_err);
+> > +	kvm_queue_exception(vcpu, NM_VECTOR);
+> > +}
+> > +
+> >  static void handle_exception_nmi_irqoff(struct vcpu_vmx *vmx)
+> >  {
+> >  	const unsigned long nmi_entry =3D (unsigned long)asm_exc_nmi_noist;
+> > @@ -6358,6 +6375,9 @@ static void handle_exception_nmi_irqoff(struct
+> vcpu_vmx *vmx)
+> >  	/* if exit due to PF check for async PF */
+> >  	if (is_page_fault(intr_info))
+> >  		vmx->vcpu.arch.apf.host_apf_flags =3D
+> kvm_read_and_reset_apf_flags();
+> > +	/* if exit due to NM, handle before preemptions are enabled */
+> > +	else if (is_nm(intr_info))
+>=20
+> Same naming complaint about this helper, it looks like an is_nmi() typo.
+> is_nm_fault()?
+
+will fix
+
+>=20
+> > +		handle_exception_nm(&vmx->vcpu);
+> >  	/* Handle machine checks before interrupts are enabled */
+> >  	else if (is_machine_check(intr_info))
+> >  		kvm_machine_check();
