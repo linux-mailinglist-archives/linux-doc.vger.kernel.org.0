@@ -2,89 +2,67 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 794AA481D68
-	for <lists+linux-doc@lfdr.de>; Thu, 30 Dec 2021 16:03:46 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 8CB03481E07
+	for <lists+linux-doc@lfdr.de>; Thu, 30 Dec 2021 17:19:24 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S240896AbhL3PDR (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 30 Dec 2021 10:03:17 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:46810 "EHLO
-        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S240513AbhL3PDP (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Thu, 30 Dec 2021 10:03:15 -0500
-Received: from metis.ext.pengutronix.de (metis.ext.pengutronix.de [IPv6:2001:67c:670:201:290:27ff:fe1d:cc33])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id CC4C8C06173E
-        for <linux-doc@vger.kernel.org>; Thu, 30 Dec 2021 07:03:14 -0800 (PST)
-Received: from drehscheibe.grey.stw.pengutronix.de ([2a0a:edc0:0:c01:1d::a2])
-        by metis.ext.pengutronix.de with esmtps (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256)
-        (Exim 4.92)
-        (envelope-from <ukl@pengutronix.de>)
-        id 1n2wxP-0000cY-8J; Thu, 30 Dec 2021 16:03:07 +0100
-Received: from [2a0a:edc0:0:900:1d::77] (helo=ptz.office.stw.pengutronix.de)
-        by drehscheibe.grey.stw.pengutronix.de with esmtps  (TLS1.3) tls TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384
-        (Exim 4.94.2)
-        (envelope-from <ukl@pengutronix.de>)
-        id 1n2wxP-007VL9-14; Thu, 30 Dec 2021 16:03:06 +0100
-Received: from ukl by ptz.office.stw.pengutronix.de with local (Exim 4.92)
-        (envelope-from <ukl@pengutronix.de>)
-        id 1n2wxN-0007ih-8t; Thu, 30 Dec 2021 16:03:05 +0100
-From:   =?UTF-8?q?Uwe=20Kleine-K=C3=B6nig?= 
-        <u.kleine-koenig@pengutronix.de>
-To:     Greg Kroah-Hartman <gregkh@linuxfoundation.org>
-Cc:     linux-iio@vger.kernel.org, linux-kernel@vger.kernel.org,
-        kernel@pengutronix.de,
-        Jonathan Cameron <Jonathan.Cameron@huawei.com>,
-        Jonathan Corbet <corbet@lwn.net>, linux-doc@vger.kernel.org,
-        William Breathitt Gray <vilhelm.gray@gmail.com>
-Subject: [PATCH v4 14/23] counter: Update documentation for new counter registration functions
-Date:   Thu, 30 Dec 2021 16:02:51 +0100
-Message-Id: <20211230150300.72196-15-u.kleine-koenig@pengutronix.de>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20211230150300.72196-1-u.kleine-koenig@pengutronix.de>
-References: <20211230150300.72196-1-u.kleine-koenig@pengutronix.de>
+        id S241234AbhL3QTX (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 30 Dec 2021 11:19:23 -0500
+Received: from ms.lwn.net ([45.79.88.28]:51044 "EHLO ms.lwn.net"
+        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
+        id S241226AbhL3QTX (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Thu, 30 Dec 2021 11:19:23 -0500
+Received: from localhost (unknown [IPv6:2601:281:8300:104d::5f6])
+        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+        (No client certificate requested)
+        by ms.lwn.net (Postfix) with ESMTPSA id 2650B4FA;
+        Thu, 30 Dec 2021 16:19:22 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 ms.lwn.net 2650B4FA
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=lwn.net; s=20201203;
+        t=1640881162; bh=5fkNZwcPwkX/k+UpJY6BR4GKe9HLM6dwHni88myZJHo=;
+        h=From:To:Cc:Subject:In-Reply-To:References:Date:From;
+        b=i0mlkRDfXE6554+exm8Xocq0w+7pAlXEnebo+MdEQMIYXfX9LkxYb5ycYwXy54p+X
+         PRqwARI+7MsVMvTWTsQhVTN1kmDCcT3cRzGHt4wLdPkzw7oiPT6docAATgxs1SANsh
+         Jk28fQgUb7PbMlQ4DrfD+JL9cLrxYsogtpLTg0+M+4hxFEwjgYRYUYjtfAyKHF69y+
+         tYh+DMPutsc9FuGafgS+GZTKLF6bQ476qNy9hFnwfZoaMEDmzsabebbSX9w3dPATSx
+         wUDdmclBvti1rRgRXdOPUVFV6qFwBRceWiqSz+Xo/03Af6F+GgX+fOnjIHkG/ZlYJf
+         4QQ2q8y9r3mRg==
+From:   Jonathan Corbet <corbet@lwn.net>
+To:     Lukas Bulwahn <lukas.bulwahn@gmail.com>,
+        "open list:DOCUMENTATION" <linux-doc@vger.kernel.org>,
+        Konstantin Ryabitsev <konstantin@linuxfoundation.org>
+Cc:     Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
+        "elana.copperman@mobileye.com" <elana.copperman@mobileye.com>
+Subject: Re: Removing the deprecated htmldocs for good?
+In-Reply-To: <CAKXUXMw-Tg7WcfVHaWZ-sK+WFnedL+S-jA_UnsdTR=HFwxAXSw@mail.gmail.com>
+References: <CAKXUXMw-Tg7WcfVHaWZ-sK+WFnedL+S-jA_UnsdTR=HFwxAXSw@mail.gmail.com>
+Date:   Thu, 30 Dec 2021 09:19:21 -0700
+Message-ID: <87wnjm9iba.fsf@meer.lwn.net>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1617; h=from:subject; bh=TASnXEH0lKlhSbBqFcgfSSsxVpWQVBj8v5aw8rDjyLo=; b=owEBbQGS/pANAwAKAcH8FHityuwJAcsmYgBhzcmYbsujyQnO74nW8GN1Q48yFonVn/gcNuRf6YZz YmlfROKJATMEAAEKAB0WIQR+cioWkBis/z50pAvB/BR4rcrsCQUCYc3JmAAKCRDB/BR4rcrsCfUWB/ 9Faomy7n8b/MYtxZZPQRuDcj0oxoBwjJRTOx3XGzwxRxvjLn0KPpzn+d3dCkndzZBpkHQYZGJEU8o1 dk+UBA39NgBVE9+8ypxCVRTPmWCC86tXBqEMyAhCfjSnHAN3f5MGR3WOqPRaBX3hvYCUlIjz1uDGbB 6i+fExlTeDn6rJz1csmtY54p3ljkuRrsOOwMYtX2Plu51ggtC5MmXheKaaYidH0DctO3ZHtYgYvMZp strt0aP7160xhFNXb5yQ1JLoPGe5xLvHCdQeJ+YWf5WIYZScR2l7WOcaatw6nJ0cy/iS4+9aRswdFv oof4ozAKHdi/GHXUK9nVYqHP7H5wlO
-X-Developer-Key: i=u.kleine-koenig@pengutronix.de; a=openpgp; fpr=0D2511F322BFAB1C1580266BE2DCDD9132669BD6
-Content-Transfer-Encoding: 8bit
-X-SA-Exim-Connect-IP: 2a0a:edc0:0:c01:1d::a2
-X-SA-Exim-Mail-From: ukl@pengutronix.de
-X-SA-Exim-Scanned: No (on metis.ext.pengutronix.de); SAEximRunCond expanded to false
-X-PTX-Original-Recipient: linux-doc@vger.kernel.org
+Content-Type: text/plain
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-In order to replace the counter registration API also update the
-documentation to the new way.
+Lukas Bulwahn <lukas.bulwahn@gmail.com> writes:
 
-Reviewed-by: Jonathan Cameron <Jonathan.Cameron@huawei.com>
-Acked-by: William Breathitt Gray <vilhelm.gray@gmail.com>
-Signed-off-by: Uwe Kleine-König <u.kleine-koenig@pengutronix.de>
----
- Documentation/driver-api/generic-counter.rst | 10 +++++-----
- 1 file changed, 5 insertions(+), 5 deletions(-)
+> Hi Jonathan, hi Konstantin,
+>
+> While scanning through the internet for kernel documentation, I
+> stumbled upon the old deprecated htmldocs under
+> https://www.kernel.org/doc/htmldocs/. I see that on
+> https://www.kernel.org/doc/, we already point out that 'htmldocs -
+> Kernel Documentation in docbook format (deprecated).' is deprecated.
+> If I am not mistaken, all the content from htmldocs has now been
+> transformed into .rst and has potentially evolved further and hence
+> all relevant information should also already be available somewhere in
+> https://www.kernel.org/doc/html/latest/.
+>
+> Is it now time to delete the content under
+> https://www.kernel.org/doc/htmldocs/ for good?
 
-diff --git a/Documentation/driver-api/generic-counter.rst b/Documentation/driver-api/generic-counter.rst
-index 1b487a331467..71ccc30e586b 100644
---- a/Documentation/driver-api/generic-counter.rst
-+++ b/Documentation/driver-api/generic-counter.rst
-@@ -262,11 +262,11 @@ order to communicate with the device: to read and write various Signals
- and Counts, and to set and get the "action mode" and "function mode" for
- various Synapses and Counts respectively.
- 
--A defined counter_device structure may be registered to the system by
--passing it to the counter_register function, and unregistered by passing
--it to the counter_unregister function. Similarly, the
--devm_counter_register function may be used if device memory-managed
--registration is desired.
-+A counter_device structure is allocated using counter_alloc() and then
-+registered to the system by passing it to the counter_add() function, and
-+unregistered by passing it to the counter_unregister function. There are
-+device managed variants of these functions: devm_counter_alloc() and
-+devm_counter_add().
- 
- The struct counter_comp structure is used to define counter extensions
- for Signals, Synapses, and Counts.
--- 
-2.34.1
+I think that time may have come, yes; perhaps just have it redirect to
+https://www.kernel.org/doc/html/latest/ instead?
 
+Thanks,
+
+jon
