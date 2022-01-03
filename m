@@ -2,81 +2,75 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id E4762482F32
-	for <lists+linux-doc@lfdr.de>; Mon,  3 Jan 2022 10:05:00 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id CBB47482F76
+	for <lists+linux-doc@lfdr.de>; Mon,  3 Jan 2022 10:30:04 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S232279AbiACJE7 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 3 Jan 2022 04:04:59 -0500
-Received: from mga04.intel.com ([192.55.52.120]:42695 "EHLO mga04.intel.com"
-        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S232278AbiACJE7 (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Mon, 3 Jan 2022 04:04:59 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1641200699; x=1672736699;
-  h=from:to:cc:subject:in-reply-to:references:date:
-   message-id:mime-version:content-transfer-encoding;
-  bh=7MtfJB0ux1ftlT1RGKEJ22bg25hObeMn+1zfkq2OVPg=;
-  b=DUSe0nbj0lsZ6VbuBIYCwtuwaai5+Vr1fnKSevkxgIWNiAVC1uY9WXvW
-   mPN8vrKtrcsL4bCjtsm3b2t1sLabxoDDChNtU84aMEPG8z6va6Z+15Ayp
-   J7FccV1p2zaPmNx5+kjOKa5TT4aNjwpbKN4oJvY1wY6clwTB+iru32kbc
-   48SWr/M+hbq8ZorIWzF5khJk9/Rrz5v9z74p4B4n1/ekwJ4hr7b4+mQ+F
-   YjXMZrOdsma2idTBhuzd1JzuTxLFUk7vO6w9unzDA6ng4GDKqJ8l/R5fO
-   6q9KN1o6nmi15g1iXSf6T1MyZV3i6kyZL0EVrfWZCZ3Raj79DYYtN37XE
-   Q==;
-X-IronPort-AV: E=McAfee;i="6200,9189,10215"; a="240856652"
-X-IronPort-AV: E=Sophos;i="5.88,257,1635231600"; 
-   d="scan'208";a="240856652"
-Received: from orsmga007.jf.intel.com ([10.7.209.58])
-  by fmsmga104.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 03 Jan 2022 01:04:58 -0800
-X-IronPort-AV: E=Sophos;i="5.88,257,1635231600"; 
-   d="scan'208";a="511971963"
-Received: from kmorriss-mobl2.ger.corp.intel.com (HELO localhost) ([10.252.24.237])
-  by orsmga007-auth.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 03 Jan 2022 01:04:56 -0800
-From:   Jani Nikula <jani.nikula@linux.intel.com>
-To:     Tomasz =?utf-8?B?V2FybmllxYLFgm8=?= <tomasz.warniello@gmail.com>,
-        Jonathan Corbet <corbet@lwn.net>
-Cc:     linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org
-Subject: Re: [PATCH] scripts: kernel-doc: transform documentation into POD
-In-Reply-To: <0796a780-f5ee-0b6c-e7ef-544ba5f6a429@gmail.com>
-Organization: Intel Finland Oy - BIC 0357606-4 - Westendinkatu 7, 02160 Espoo
-References: <20211209225549.69010-1-tomasz.warniello@gmail.com>
- <87h7b8cfg0.fsf@meer.lwn.net>
- <0796a780-f5ee-0b6c-e7ef-544ba5f6a429@gmail.com>
-Date:   Mon, 03 Jan 2022 11:04:53 +0200
-Message-ID: <87pmp9tcju.fsf@intel.com>
+        id S231210AbiACJaD (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 3 Jan 2022 04:30:03 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:57512 "EHLO
+        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S229516AbiACJaD (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Mon, 3 Jan 2022 04:30:03 -0500
+Received: from mail-yb1-xb2f.google.com (mail-yb1-xb2f.google.com [IPv6:2607:f8b0:4864:20::b2f])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id CFBCDC061761
+        for <linux-doc@vger.kernel.org>; Mon,  3 Jan 2022 01:30:02 -0800 (PST)
+Received: by mail-yb1-xb2f.google.com with SMTP id y130so73031564ybe.8
+        for <linux-doc@vger.kernel.org>; Mon, 03 Jan 2022 01:30:02 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112;
+        h=mime-version:reply-to:from:date:message-id:subject:to;
+        bh=lglPESHXFEUMioRQ0SSVS0gVzdngGpqAoNhvyi9lngg=;
+        b=Suj63lpW4nrMrDhpSMA+EFLwHAy+DIi0qa87Xgz+JUOqSdEN4UqDa5z3Q8Iwpw3M1J
+         ++r9VcIhczgi1YglqN6oF0vjjgZxmb6E0KJ00GRXtm+kjkfAGyZtE6eynOutLKsH+ZtK
+         /rACYJq/YtG8MItFZwpMMLFFlPzdMpjhAhScGd27Tx0QzDoglPAKBjY69RDnlse9pk63
+         Fnj3NjhbhTH5H5G065M9tA/9sCJX83gW++7fgsEc2EhlOSqQlpJS1gOkTZJvTBqAVe4w
+         6PM18m2bYphatFXn4WnObcmJ8jshySkY+PqUdu3COnt10TTarOf5z7voe5Y8ZkZzIyES
+         ktXw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:mime-version:reply-to:from:date:message-id
+         :subject:to;
+        bh=lglPESHXFEUMioRQ0SSVS0gVzdngGpqAoNhvyi9lngg=;
+        b=pnrlCvWDYJmc14/4wl2pX60LDkLv3eGzUTPuKcW+8298bPwjCSd2eMznlVVJ00qxUy
+         YSYjfoi3BsW0DZf/dhJ4U9I26A0Lh5GT+TfEFfNFQ2vLP+8FhGj8bAp9v0eNM1OO16og
+         Yu4/RJfL3PjiGo9TCC72ud1i1nDept4Iw6h+1pBrlQAGVSKP5OuqlhSIGRSlfT3KRA27
+         5u+fDV50CyTXUAogWnEsxJFJargmNAwyrtaksmXl1oLbS4SsF5MAdGbPrhdlrPxvJftH
+         /5DCT/Cfmx3kt3l62tb6nWcYSjdHX5NN/3XX/kpPP8btHkLDXhtWm9SHfrVD6ECQqaS8
+         Bw8g==
+X-Gm-Message-State: AOAM530pAqt6ipoiCDBSeBBAmGUOWVz8W+WOqUYDG5l5oMAOpu3O8GRg
+        yKyjZ97EhIY2KszIXgYOgs5SqYa2E1rSsr1OSVg=
+X-Google-Smtp-Source: ABdhPJxxw5ecVSGydWuxEQTq3lO/d5dncGuufTMC/KkBORDmE55G3HZsjlPMF9IvrlQ/ZBYqhbyeVh3ziBBqq6MMtOY=
+X-Received: by 2002:a25:e716:: with SMTP id e22mr39877648ybh.523.1641202202023;
+ Mon, 03 Jan 2022 01:30:02 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
+Received: by 2002:a05:7000:1e82:0:0:0:0 with HTTP; Mon, 3 Jan 2022 01:30:01
+ -0800 (PST)
+Reply-To: zannarobinson4@gmail.com
+From:   Zanna <zannalamine2016@gmail.com>
+Date:   Mon, 3 Jan 2022 09:30:01 +0000
+Message-ID: <CACCH-ZWxnp3F-F+QF7_AO-cwwDtvzVoGO-ssz0vs07rJLHA4ow@mail.gmail.com>
+Subject: READ AND GET BACK TO ME
+To:     undisclosed-recipients:;
+Content-Type: text/plain; charset="UTF-8"
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Mon, 03 Jan 2022, Tomasz Warnie=C5=82=C5=82o <tomasz.warniello@gmail.com=
-> wrote:
-> On 17/12/2021 00:12, Jonathan Corbet wrote:
->>>  my $kernelversion;
->>> @@ -468,7 +306,7 @@ while ($ARGV[0] =3D~ m/^--?(.*)/) {
->>>      } elsif ($cmd eq "Werror") {
->>>  	$Werror =3D 1;
->>>      } elsif (($cmd eq "h") || ($cmd eq "help")) {
->>> -	usage();
->>> +			pod2usage(-exitval =3D> 0, -verbose =3D> 2);
->>=20
->> Why the strange indentation here?  This file is far from pretty, but
->> that makes it worse.  (Other places too).
->
-> Sometimes beauty requires cooperation. You can help it in your pager.
-> If it's less, then try `-x 2`, `-x 4`, etc.
+My Dearest One ,
 
-In kernel, tabs are 8 characters.
+I am the above named person Zanna Robinson. I am married to the late
+Mr.Robinson  Lamine as a widow suffering from long term illness
+Cancer, the doctors have been trying their best but the truth is that
+I am not getting better. I want to make a donation of (3.5 MILLION US
+DOLLARS )THREE MILLION FIVE HUNDRED THOUSAND US DOLLARS,This fund is
+been kept in a consignment by my late husband and deposited under a
+private security company in EUROPE BRUSSEL( BELGIUM).I want to help
+Orphans and Widows and Charitable home in your Country and I assumed
+that you will be able to receive this Fund and use it to my wished to
+The needs in your country and i am seriously ill please always putting
+me in your daily prayers because i don't know when it will end with
+me. Reply back to me immediately for more
+details.
 
-See Documentation/process/coding-style.rst
-
-
-BR,
-Jani.
-
-
---=20
-Jani Nikula, Intel Open Source Graphics Center
+Thanks,
+Mrs Zanna Robinson.
