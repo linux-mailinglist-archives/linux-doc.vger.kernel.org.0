@@ -2,62 +2,59 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 0678A4873F0
-	for <lists+linux-doc@lfdr.de>; Fri,  7 Jan 2022 09:13:19 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id A26794873F4
+	for <lists+linux-doc@lfdr.de>; Fri,  7 Jan 2022 09:13:21 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S235551AbiAGINR (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Fri, 7 Jan 2022 03:13:17 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:43748 "EHLO
+        id S1345560AbiAGINU (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Fri, 7 Jan 2022 03:13:20 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:43766 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1345550AbiAGINR (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Fri, 7 Jan 2022 03:13:17 -0500
-Received: from mail-wr1-x42e.google.com (mail-wr1-x42e.google.com [IPv6:2a00:1450:4864:20::42e])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 23030C0611FF
-        for <linux-doc@vger.kernel.org>; Fri,  7 Jan 2022 00:13:16 -0800 (PST)
-Received: by mail-wr1-x42e.google.com with SMTP id t28so2783050wrb.4
-        for <linux-doc@vger.kernel.org>; Fri, 07 Jan 2022 00:13:16 -0800 (PST)
+        with ESMTP id S1345544AbiAGINS (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Fri, 7 Jan 2022 03:13:18 -0500
+Received: from mail-wm1-x335.google.com (mail-wm1-x335.google.com [IPv6:2a00:1450:4864:20::335])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 0DEEAC061245
+        for <linux-doc@vger.kernel.org>; Fri,  7 Jan 2022 00:13:18 -0800 (PST)
+Received: by mail-wm1-x335.google.com with SMTP id x18-20020a7bc212000000b00347cc83ec07so140431wmi.4
+        for <linux-doc@vger.kernel.org>; Fri, 07 Jan 2022 00:13:17 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=amarulasolutions.com; s=google;
         h=from:to:cc:subject:date:message-id:in-reply-to:references
          :mime-version:content-transfer-encoding;
-        bh=y5vv85VvwS9MS7JlafP+Njn1B1aPbUU7IaGWNQUgbis=;
-        b=iL8oFfe43QgftfpgHnQgjVBubyyuLqUpSLqUuyf72+AdnVY5pkBhR2O1qtoN8yBp2K
-         3A2ayZWo16ycvCobtZkcAr10oKUS3kiB3Syngs28BfMwZyba3NTBiaKqnrPZzd4sqmIV
-         AMuNWq3z2ioyIpUNGZOSvSTEV8BKw82l+Ucr4=
+        bh=aNFvFjfPzdhSbUOj3hcvdY5IUVIwY9ysmaaDPH4hqEw=;
+        b=HUJvC2rBCYnYMrPsMuDGh5OBNDPyw9iliDH6ctc4PaORQ0/4CSBi69707k3xI1vEOU
+         DO/gPV3PusSvyCYUT7bwBx20/VWRSsiJJdeKi36YIPRDn4Jbgjo5x8IAH38qndXNOK4M
+         kTUx/TVrhRIkhXWRQ/ZrVd7al9tAT1+PIpX/8=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
          :references:mime-version:content-transfer-encoding;
-        bh=y5vv85VvwS9MS7JlafP+Njn1B1aPbUU7IaGWNQUgbis=;
-        b=q93tiPHyrmd1jfhKPH7OVEvRgij/IrQzjtC2RjdfS7VNBdjAnAIIkNNFtfUchFTHLU
-         fnlegGez2zHzvf9QGmpYOol6bWu2N5a8yR5VjTynC7QA3bQLfFrvE6GQpUXZ87DooZcY
-         BrPdE9p573OSbVkn7GTYYs7npfB1gEhzsJZuAtFjMuei/uL7fO0IP6vwCaEocEahm5r4
-         20f0a8sFhmoziJWjRhT+d7bTGRJzFjXiA4nd0BHk6oA/U/FKs3PPCpXOlI3cp3jpwc9T
-         f4fAsnk/OmenShCAyx6OMb4+AqXAal/iAdA+IKDy+Ybb+7VOn6VcX+gHQWoktqTuZy//
-         WZtQ==
-X-Gm-Message-State: AOAM531LxFWUoS2Wzd4pneQqOSh4eVgVB4tPm0FDwOgCyNRBuXAP9aPq
-        nUusNLk2MHmCMxb5reubtUp8Jg==
-X-Google-Smtp-Source: ABdhPJyPwaMZa0yQeRjywazx6ncmfSazFg4h+xLedFtfm2vQlCvyJNrBejHstFH3Rpo0cAI3CmiyTA==
-X-Received: by 2002:a5d:4525:: with SMTP id j5mr9452235wra.519.1641543194804;
-        Fri, 07 Jan 2022 00:13:14 -0800 (PST)
+        bh=aNFvFjfPzdhSbUOj3hcvdY5IUVIwY9ysmaaDPH4hqEw=;
+        b=ybVy0J73ZKdpoV/3ehhWUiUfu7UNwWcgtWukHcHQp8e7YVHVxnPXyfqKZHTGkJ1BBr
+         CnrwMPzZtSTDk8HnPGWXUj3Kish2oEuubQB4vGkoBCCEtwSTPm+unLgMU9Y3VFUmg6mc
+         hFjeuwCQZzSxpqg7DefkiKrFGVCAQH1ZgWd4DMuX1HnOlUEiAySiZFuMWQandFvHN8TE
+         B9zFERC7r4bUE/xR2zhP4M/7K/IN7Ew8GP1VYOYDHBCqCf3Ib6xCsf3c/L+Aum0Y+kPA
+         BW8oFt8RNp/tOjAbkdnx4rgNu9OuO4TsMo48ZnB92BXpSCg/RLZDqvhC2vtdB+fWUT0J
+         OofQ==
+X-Gm-Message-State: AOAM532UngoviUW0igsuQ0de1cwQKLYwhkYx+hjyMFZVSk/Kxvvrk0RS
+        vGSTyBN8c1xia+j/0dq2pkLKyQy1VVwMCw==
+X-Google-Smtp-Source: ABdhPJwjkacrYJEH7D3L5LAfAOudyDPO3yGwNl/aaJB4R6tP6IVdM2JWpRn8ogz65SxvbkbCOD2rTA==
+X-Received: by 2002:a05:600c:a0a:: with SMTP id z10mr10025256wmp.126.1641543196271;
+        Fri, 07 Jan 2022 00:13:16 -0800 (PST)
 Received: from dario-ThinkPad-T14s-Gen-2i.amarulasolutions.com (mob-5-90-38-18.net.vodafone.it. [5.90.38.18])
-        by smtp.gmail.com with ESMTPSA id w17sm4280633wmc.14.2022.01.07.00.13.13
+        by smtp.gmail.com with ESMTPSA id w17sm4280633wmc.14.2022.01.07.00.13.15
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 07 Jan 2022 00:13:14 -0800 (PST)
+        Fri, 07 Jan 2022 00:13:15 -0800 (PST)
 From:   Dario Binacchi <dario.binacchi@amarulasolutions.com>
 To:     linux-kernel@vger.kernel.org
 Cc:     Marc Kleine-Budde <mkl@pengutronix.de>, linux-can@vger.kernel.org,
         Dario Binacchi <dario.binacchi@amarulasolutions.com>,
-        Coiby Xu <coiby.xu@gmail.com>,
         "David S. Miller" <davem@davemloft.net>,
-        Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
         Jakub Kicinski <kuba@kernel.org>,
-        Jonathan Corbet <corbet@lwn.net>,
-        M Chetan Kumar <m.chetan.kumar@intel.com>,
-        linux-doc@vger.kernel.org, netdev@vger.kernel.org
-Subject: [RFC PATCH 1/2] docs: networking: device drivers: add can sub-folder
-Date:   Fri,  7 Jan 2022 09:13:05 +0100
-Message-Id: <20220107081306.3681899-2-dario.binacchi@amarulasolutions.com>
+        Jonathan Corbet <corbet@lwn.net>, linux-doc@vger.kernel.org,
+        netdev@vger.kernel.org
+Subject: [RFC PATCH 2/2] docs: networking: device drivers: can: add flexcan
+Date:   Fri,  7 Jan 2022 09:13:06 +0100
+Message-Id: <20220107081306.3681899-3-dario.binacchi@amarulasolutions.com>
 X-Mailer: git-send-email 2.32.0
 In-Reply-To: <20220107081306.3681899-1-dario.binacchi@amarulasolutions.com>
 References: <20220107081306.3681899-1-dario.binacchi@amarulasolutions.com>
@@ -67,52 +64,61 @@ Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Add the container for CAN drivers documentation.
+Add initial documentation for Flexcan driver.
 
 Signed-off-by: Dario Binacchi <dario.binacchi@amarulasolutions.com>
+
 ---
 
- .../networking/device_drivers/can/index.rst    | 18 ++++++++++++++++++
- .../networking/device_drivers/index.rst        |  1 +
- 2 files changed, 19 insertions(+)
- create mode 100644 Documentation/networking/device_drivers/can/index.rst
+ .../device_drivers/can/freescale/flexcan.rst  | 25 +++++++++++++++++++
+ .../networking/device_drivers/can/index.rst   |  2 ++
+ 2 files changed, 27 insertions(+)
+ create mode 100644 Documentation/networking/device_drivers/can/freescale/flexcan.rst
 
-diff --git a/Documentation/networking/device_drivers/can/index.rst b/Documentation/networking/device_drivers/can/index.rst
+diff --git a/Documentation/networking/device_drivers/can/freescale/flexcan.rst b/Documentation/networking/device_drivers/can/freescale/flexcan.rst
 new file mode 100644
-index 000000000000..218276818968
+index 000000000000..1a5bb2ed08a3
 --- /dev/null
++++ b/Documentation/networking/device_drivers/can/freescale/flexcan.rst
+@@ -0,0 +1,25 @@
++.. SPDX-License-Identifier: GPL-2.0+
++
++=============================
++Flexcan CAN Controller driver
++=============================
++
++Authors: Marc Kleine-Budde <mkl@pengutronix.de>,
++Dario Binacchi <dario.binacchi@amarula.solutions.com>
++
++On/off RTR frames reception
++===========================
++
++ 1. interface down::
++
++      ethtool --set-priv-flags can0 rx-rtr {off|on}
++
++ 2. interface up::
++
++      ip link set dev can0 down
++      ethtool --set-priv-flags can0 rx-rtr {off|on}
++      ip link set dev can0 up
++
++Note. For the Flexcan on i.MX25, i.Mx28, i.MX35 and i.Mx53 SOCs, the reception
++of RTR frames is possible only if the controller is configured in RxFIFO mode.
++In this mode only 6 of the 64 message buffers are used for reception.
+diff --git a/Documentation/networking/device_drivers/can/index.rst b/Documentation/networking/device_drivers/can/index.rst
+index 218276818968..58b6e0ad3030 100644
+--- a/Documentation/networking/device_drivers/can/index.rst
 +++ b/Documentation/networking/device_drivers/can/index.rst
-@@ -0,0 +1,18 @@
-+.. SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause)
+@@ -10,6 +10,8 @@ Contents:
+ .. toctree::
+    :maxdepth: 2
+ 
++   freescale/flexcan
 +
-+Controller Area Network (CAN) Device Drivers
-+============================================
-+
-+Device drivers for CAN devices.
-+
-+Contents:
-+
-+.. toctree::
-+   :maxdepth: 2
-+
-+.. only::  subproject and html
-+
-+   Indices
-+   =======
-+
-+   * :ref:`genindex`
-diff --git a/Documentation/networking/device_drivers/index.rst b/Documentation/networking/device_drivers/index.rst
-index 3a5a1d46e77e..5f5cfdb2a300 100644
---- a/Documentation/networking/device_drivers/index.rst
-+++ b/Documentation/networking/device_drivers/index.rst
-@@ -11,6 +11,7 @@ Contents:
-    appletalk/index
-    atm/index
-    cable/index
-+   can/index
-    cellular/index
-    ethernet/index
-    fddi/index
+ .. only::  subproject and html
+ 
+    Indices
 -- 
 2.32.0
 
