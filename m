@@ -2,82 +2,111 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 537B748E07F
-	for <lists+linux-doc@lfdr.de>; Thu, 13 Jan 2022 23:41:58 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id ABEC348E0B7
+	for <lists+linux-doc@lfdr.de>; Fri, 14 Jan 2022 00:02:22 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S238058AbiAMWlz (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 13 Jan 2022 17:41:55 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:35084 "EHLO
+        id S238125AbiAMXCV (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 13 Jan 2022 18:02:21 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:39634 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S238053AbiAMWly (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Thu, 13 Jan 2022 17:41:54 -0500
-Received: from mail-pf1-x441.google.com (mail-pf1-x441.google.com [IPv6:2607:f8b0:4864:20::441])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 37CD7C061755
-        for <linux-doc@vger.kernel.org>; Thu, 13 Jan 2022 14:41:53 -0800 (PST)
-Received: by mail-pf1-x441.google.com with SMTP id s15so1150720pfw.1
-        for <linux-doc@vger.kernel.org>; Thu, 13 Jan 2022 14:41:53 -0800 (PST)
+        with ESMTP id S235389AbiAMXCU (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Thu, 13 Jan 2022 18:02:20 -0500
+Received: from mail-io1-xd2a.google.com (mail-io1-xd2a.google.com [IPv6:2607:f8b0:4864:20::d2a])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 9CA62C06161C
+        for <linux-doc@vger.kernel.org>; Thu, 13 Jan 2022 15:02:20 -0800 (PST)
+Received: by mail-io1-xd2a.google.com with SMTP id h23so10331152iol.11
+        for <linux-doc@vger.kernel.org>; Thu, 13 Jan 2022 15:02:20 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=mime-version:reply-to:from:date:message-id:subject:to;
-        bh=YbEI3Q/NEjCtDTVCV1jkA7nYNYBH/Wfa2wk3IkVyJko=;
-        b=OZP/QoKN8ru5XovrHZZEtRGAPOqy8yRZtZX0efEKVWs/Q7f6+2JX3Mloojh5SZ/AxH
-         cPAHMJhJrLRzzoPYh5n9fG2/pMOrYfS/PU2zx88sTYLTj0Dv1cVWivcA/TNU5IJgRtzI
-         yyO22l7H4XiZ577o8zD4nj2E5AestX9VYls3ntwqOHZNPl0OsU/EptDmXh66odxZFNCy
-         EIQC+hO6HyVDK/x5ziZcfqIxZJTlgvB+YGNZLq+4zSXQW5IZ9FoHkF7Eb5K19JwK6tqA
-         L1pbJiPTkM7B36B6kKA792uSFGR69D9KVeYMTQ95Fzk4WvuXfGt3UHBLmZ7aOqdAe8eh
-         8P+A==
+        d=google.com; s=20210112;
+        h=date:from:to:cc:subject:message-id:references:mime-version
+         :content-disposition:in-reply-to;
+        bh=5pDJzk1dQsu0Qk8opYITEZv6dz4zcJdUZeTWjVZhptE=;
+        b=i7ChxMb5M3oaC8H54OCxVrXkfUa7WLgJX+ltnKBKDBkjz66N9TQzyDZinEbP79ixk3
+         tjxIfvWEOm33MpTaaKvOx4EL+geVEPBg41GOv1jJcsOf82ZVYdqOCCMbuTEYc63fpvWM
+         Fa5uXRS0je7t11ma8khJr08jVW6zsrFZPFOlVJy2ygnz1T9ihu4jgB6FGN0sRF5G6yCi
+         fd2qj4c8tGnOxXO3bE7g56BWoJt0S9gFYxFLez/ONgOdsBCLZlZ4/yxZSx7FztJNAFH/
+         QMQJIUw/J5MakijV5N5CuCnnJiT803PyaWh1w/qzi76wpuAMLwvKkYffhOfO/RUxjjJB
+         1kOw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=x-gm-message-state:mime-version:reply-to:from:date:message-id
-         :subject:to;
-        bh=YbEI3Q/NEjCtDTVCV1jkA7nYNYBH/Wfa2wk3IkVyJko=;
-        b=donvKHqRrMWtFR0oKdkk4iP+rUkw6FJKhxDs1X5YBDZBy5uxHbyi0J/N6vObx1mNc+
-         UftKM0T/rIJfpUzbgOj8g/rk0RIxetPfYmrONpYg6XKl6A2DJfGZdi/85oRDv2waAPRJ
-         OTT1rUfhwez3zpTvajCVOfzYED3NSKCVzsWzYYpJnRdrhAIQ3nMCaau9YgQvAaHMwTXZ
-         arAUdqBsvnShcgFYAcxkRareXA1lBQY33NU6Rz5gTvMdeE1SlYdMZIYEp6AGO7mbaDEM
-         UQfY0zXzehbdye2cjuScQEcXAVPfliPXfIlVRijuwZCJHqRM9v/8OU6UPMSm/PaeDQFO
-         wiyw==
-X-Gm-Message-State: AOAM533ct4wJEZk095mI+PaxHMUwPxeatlLdVqs66JzO4Mr+i0Yb6ynt
-        Tpp/am7iglq/chc9KnokARQowLaZAdQk2ooT+LU=
-X-Google-Smtp-Source: ABdhPJwo/BFuE/MyrXvV4Wc2jiueqzTZxw+feN+I2rvhYn2V6MZ0AjtfVc00EmStBrmKGTDtifrnIaK8zXPI0L+vd18=
-X-Received: by 2002:a63:4507:: with SMTP id s7mr5556975pga.252.1642113712456;
- Thu, 13 Jan 2022 14:41:52 -0800 (PST)
+        h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+         :mime-version:content-disposition:in-reply-to;
+        bh=5pDJzk1dQsu0Qk8opYITEZv6dz4zcJdUZeTWjVZhptE=;
+        b=WtooW3n6mIPGVtOltpO7OqHwVXvvOtwlTk87nBFN9AaU0VqJ2WRox7MPw/Hf06iLvU
+         xbZ8o5sfEQ995teFiNSmRFNZokNkfsh2FIbJSWtGa2bWouG9gV0ZuElhgR4xkTdVw8gK
+         lnNlpXyFrv09/QBh0sFYpHcI93nnxLKcJF/DkTTeAwwqDcZwdJBrFssbPtnEAhhISFlV
+         kWnZDaxSI1a10BO/YYWzD4ddNFFyHJczLLP7HwXZ1z2n6bIlI9p0NVUxVAfvZfLIIHfF
+         IK7JfCfpV9qmXMzUjSUq/kNHgfjwdoLxSdtysQowy3CtIydGogzxZkJMACoVntAQVwGc
+         YZcg==
+X-Gm-Message-State: AOAM533YPvpb2Ckpi0x/9m45GOLLbH/MKWOINDvUW3AoM3G1fym5MG65
+        ZJbNbVAFYhhVPabNwK+C6S7SiQ==
+X-Google-Smtp-Source: ABdhPJzMMAQXbahgizkqdtfjZ2i9Fvd2grW2x1BACOTg5wkyiMKd17pDOdTjWFpfP/ndoI6nBLGJew==
+X-Received: by 2002:a02:a982:: with SMTP id q2mr3158600jam.220.1642114939372;
+        Thu, 13 Jan 2022 15:02:19 -0800 (PST)
+Received: from google.com ([2620:15c:183:200:2ee3:2c3c:a8c8:b1bf])
+        by smtp.gmail.com with ESMTPSA id i20sm3830279iov.43.2022.01.13.15.02.18
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 13 Jan 2022 15:02:18 -0800 (PST)
+Date:   Thu, 13 Jan 2022 16:02:15 -0700
+From:   Yu Zhao <yuzhao@google.com>
+To:     "Aneesh Kumar K.V" <aneesh.kumar@linux.ibm.com>
+Cc:     Andrew Morton <akpm@linux-foundation.org>,
+        Linus Torvalds <torvalds@linux-foundation.org>,
+        Andi Kleen <ak@linux.intel.com>,
+        Catalin Marinas <catalin.marinas@arm.com>,
+        Dave Hansen <dave.hansen@linux.intel.com>,
+        Hillf Danton <hdanton@sina.com>, Jens Axboe <axboe@kernel.dk>,
+        Jesse Barnes <jsbarnes@google.com>,
+        Johannes Weiner <hannes@cmpxchg.org>,
+        Jonathan Corbet <corbet@lwn.net>,
+        Matthew Wilcox <willy@infradead.org>,
+        Mel Gorman <mgorman@suse.de>,
+        Michael Larabel <Michael@michaellarabel.com>,
+        Michal Hocko <mhocko@kernel.org>,
+        Rik van Riel <riel@surriel.com>,
+        Vlastimil Babka <vbabka@suse.cz>,
+        Will Deacon <will@kernel.org>,
+        Ying Huang <ying.huang@intel.com>,
+        linux-arm-kernel@lists.infradead.org, linux-doc@vger.kernel.org,
+        linux-kernel@vger.kernel.org, linux-mm@kvack.org,
+        page-reclaim@google.com, x86@kernel.org,
+        Konstantin Kharlamov <Hi-Angel@yandex.ru>
+Subject: Re: [PATCH v6 8/9] mm: multigenerational lru: user interface
+Message-ID: <YeCvd4UBPy27SYGZ@google.com>
+References: <20220104202227.2903605-1-yuzhao@google.com>
+ <20220104202227.2903605-9-yuzhao@google.com>
+ <87a6g0nczg.fsf@linux.ibm.com>
 MIME-Version: 1.0
-Received: by 2002:a05:6a10:f38c:0:0:0:0 with HTTP; Thu, 13 Jan 2022 14:41:52
- -0800 (PST)
-Reply-To: mchristophdaniel@gmail.com
-From:   Marcus Galois <marcus.galois@gmail.com>
-Date:   Thu, 13 Jan 2022 23:41:52 +0100
-Message-ID: <CANqBaXVSfOGLj7J26QWPsx3dwN0Cxmg71Yc9hV9b7yv0f0E1qQ@mail.gmail.com>
-Subject: Good News Finally.
-To:     undisclosed-recipients:;
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <87a6g0nczg.fsf@linux.ibm.com>
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Hello friend.
+On Thu, Jan 13, 2022 at 04:01:31PM +0530, Aneesh Kumar K.V wrote:
+> Yu Zhao <yuzhao@google.com> writes:
+> 
+> > Add /sys/kernel/mm/lru_gen/enabled as a runtime kill switch.
+> 
+> 
+> Got the below lockdep warning while using the above kill/enable switch
+> 
+> 
+> [   84.252952] ======================================================
+> [   84.253012] WARNING: possible circular locking dependency detected
+> [   84.253074] 5.16.0-rc8-16204-g1cdcf1120b31 #511 Not tainted
+> [   84.253135] ------------------------------------------------------
+> [   84.253194] bash/2862 is trying to acquire lock:
+> [   84.253243] c0000000021ff740 (cgroup_mutex){+.+.}-{3:3}, at: store_enable+0x80/0x1510
+> [   84.253340]
+>                but task is already holding lock:
+> [   84.253410] c000000002221348 (mem_hotplug_lock){++++}-{0:0}, at: mem_hotplug_begin+0x30/0x50
+> [   84.253503]
+>                which lock already depends on the new lock.
+> 
+> [   84.255933] Chain exists of:
+>                  cgroup_mutex --> cpu_hotplug_lock --> mem_hotplug_lock
 
-You might find it so difficult to remember me, though it is indeed a
-very long time, I am much delighted to contact you again after a long
-period of time, I remember you despite circumstances that made things
-not worked out as we projected then. I want to inform you that the
-transaction we're doing together then finally worked out and I decided
-to contact you and to let you know because of your tremendous effort
-to make things work out then.
-
-Meanwhile I must inform you that I'm presently in Caribbean Island for
-numerous business negotiation with some partners. with my sincere
-heart i have decided to compensate you with USD$900,000 for your
-dedication then on our transaction, you tried so much that period and
-I appreciated your effort. I wrote a cheque/check on your name, as
-soon as you receive it, you let me know.
-
-Contact my secretary now on his email: mchristophdaniel@gmail.com
-Name: Mr. Christoph Daniel
-
-You are to forward to him your Name........ Address.......,Phone
-number......for shipment/dispatch of the cheque/Check to you
-
-Regards,
-Mr. Marcus Galois
+Thanks. Will reverse the order between mem_hotplug_lock and
+cgroup_mutex in the next spin.
