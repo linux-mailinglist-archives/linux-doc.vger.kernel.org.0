@@ -2,190 +2,227 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 4E55E49AAD5
-	for <lists+linux-doc@lfdr.de>; Tue, 25 Jan 2022 05:42:55 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id E3EF049AB75
+	for <lists+linux-doc@lfdr.de>; Tue, 25 Jan 2022 06:16:02 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S3415666AbiAYDqW (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 24 Jan 2022 22:46:22 -0500
-Received: from mga09.intel.com ([134.134.136.24]:16189 "EHLO mga09.intel.com"
-        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S3415309AbiAYBkN (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Mon, 24 Jan 2022 20:40:13 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1643074813; x=1674610813;
-  h=from:to:cc:subject:date:message-id:in-reply-to:
-   references:mime-version:content-transfer-encoding;
-  bh=o9Was9ki72grzMbUkZV5f169uo+CSki1buMNORj9WMM=;
-  b=Iosa+Kgzx0kFeJdFxfW8uK+QuingCN9G16mSMlvGKUnkajpDY+ZElQpS
-   GTLjyzf4S5hvYD4cSO61srK1b0FrNqu3BDAaUDMupzWlpuYoMHVEXbOia
-   nnlsgbCruCX2nJUzB7bm7Qasxv1DGZWmIX9YBlfbHfSon/K09AJzSwejS
-   ysFkjlUFDioS/zkmbfzDws7egrHObwjgmSNosgBTtLcC1VM2R+EySeihZ
-   86xsrGEVqNOrhtws6CHxSPOKdN8dxKe+/jdfYl62Yy3KoGD8KtcJaSctp
-   JMpgRlzhx81IeUnGsYgkzUqgJy2zVSqHG0jwV7+hHPzpUhQEeTAP4sdpH
-   A==;
-X-IronPort-AV: E=McAfee;i="6200,9189,10237"; a="245971866"
-X-IronPort-AV: E=Sophos;i="5.88,313,1635231600"; 
-   d="scan'208";a="245971866"
-Received: from orsmga005.jf.intel.com ([10.7.209.41])
-  by orsmga102.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 24 Jan 2022 17:17:58 -0800
-X-IronPort-AV: E=Sophos;i="5.88,313,1635231600"; 
-   d="scan'208";a="695635197"
-Received: from kerguder-mobl.ger.corp.intel.com (HELO localhost) ([10.249.158.133])
-  by orsmga005-auth.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 24 Jan 2022 17:17:44 -0800
-From:   Iwona Winiarska <iwona.winiarska@intel.com>
-To:     linux-kernel@vger.kernel.org, openbmc@lists.ozlabs.org,
-        Greg Kroah-Hartman <gregkh@linuxfoundation.org>
-Cc:     devicetree@vger.kernel.org, linux-aspeed@lists.ozlabs.org,
-        linux-arm-kernel@lists.infradead.org, linux-hwmon@vger.kernel.org,
-        linux-doc@vger.kernel.org, Rob Herring <robh+dt@kernel.org>,
-        Joel Stanley <joel@jms.id.au>,
-        Andrew Jeffery <andrew@aj.id.au>,
-        Jean Delvare <jdelvare@suse.com>,
-        Guenter Roeck <linux@roeck-us.net>,
-        Arnd Bergmann <arnd@arndb.de>, Olof Johansson <olof@lixom.net>,
-        Jonathan Corbet <corbet@lwn.net>,
-        Borislav Petkov <bp@alien8.de>,
-        Pierre-Louis Bossart <pierre-louis.bossart@linux.intel.com>,
-        Tony Luck <tony.luck@intel.com>,
-        Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
-        Dan Williams <dan.j.williams@intel.com>,
-        Randy Dunlap <rdunlap@infradead.org>,
-        Zev Weiss <zweiss@equinix.com>,
-        David Muller <d.mueller@elsoft.ch>,
-        Dave Hansen <dave.hansen@intel.com>,
-        Billy Tsai <billy_tsai@aspeedtech.com>,
-        Iwona Winiarska <iwona.winiarska@intel.com>
-Subject: [PATCH v6 13/13] docs: Add PECI documentation
-Date:   Tue, 25 Jan 2022 02:11:04 +0100
-Message-Id: <20220125011104.2480133-14-iwona.winiarska@intel.com>
-X-Mailer: git-send-email 2.31.1
-In-Reply-To: <20220125011104.2480133-1-iwona.winiarska@intel.com>
-References: <20220125011104.2480133-1-iwona.winiarska@intel.com>
+        id S1343882AbiAYE4k (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 24 Jan 2022 23:56:40 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:57680 "EHLO
+        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1387427AbiAYDxi (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Mon, 24 Jan 2022 22:53:38 -0500
+Received: from mail-pf1-x436.google.com (mail-pf1-x436.google.com [IPv6:2607:f8b0:4864:20::436])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id BC230C061A83
+        for <linux-doc@vger.kernel.org>; Mon, 24 Jan 2022 15:23:44 -0800 (PST)
+Received: by mail-pf1-x436.google.com with SMTP id i65so17579883pfc.9
+        for <linux-doc@vger.kernel.org>; Mon, 24 Jan 2022 15:23:44 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=chromium.org; s=google;
+        h=from:to:cc:subject:date:message-id:in-reply-to:references
+         :mime-version:content-transfer-encoding;
+        bh=BUy1cq/aLQFwACsA66qUZgeTjdc6W6p6YIU+kLy4RXI=;
+        b=HMmVLm5Gk4xktbBAU6t3jLyp2yP/6L4jJnClTexhgIce1axDLwVbmNb9kclYALf+x2
+         0eOP9jYiB5WoTm+5qhwtBJz55pfhYca49Ml8+KCXSU5yP+mC++U9lcHxQUOWDgskC1MN
+         2wN/3QGEDEHBI9JYcXZGv9+GYD1bA3s9SGxz8=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+         :references:mime-version:content-transfer-encoding;
+        bh=BUy1cq/aLQFwACsA66qUZgeTjdc6W6p6YIU+kLy4RXI=;
+        b=JAVUg/tnCgK9vmwnYj4M2Ch+NflDOrFE+o4Z7H0CVdSKDx6Z5ltFy1x/+pF9ZFAJ1b
+         aS7w7GQGyC1X2qXCwEigNlQCv3ymeWMD+9RvNPcdjkOLgCnSApK3Rq2/nNEs2EfsEfER
+         cEIesfIYHdaWcBaZq/o6au76ZtEWdqbuiC3YhnMUTDFE6qqG5f52yXI/K73NEk+SoGfX
+         GtUUY2O7QA1G5lH+/9kqLFgXf1eBQ6c6UexEzypPXxVqoBezQq0sQhQVUFK74GJcjFo7
+         CrHw9mYOECQvYZsTWYgdARUeKerB5+7XqDG7aKFGAp/oiqOsYvnjslEU8GPDzooOPcqP
+         Kvfw==
+X-Gm-Message-State: AOAM5316Gc012PBZ/pdwpwCuKXDNe4c2XbuTkxNdKH8R/BLZE/Bhub8I
+        pVGSwxEKnbe/9IWO+um3In2Kvw==
+X-Google-Smtp-Source: ABdhPJzJq/ZflgOy7noX+l1C7fkXGtfuvMQKoRWncNP/9c4/r0pI+i3lo/9e35lzQWKaf5+WOauong==
+X-Received: by 2002:a63:2b01:: with SMTP id r1mr6103116pgr.182.1643066624239;
+        Mon, 24 Jan 2022 15:23:44 -0800 (PST)
+Received: from www.outflux.net (smtp.outflux.net. [198.145.64.163])
+        by smtp.gmail.com with ESMTPSA id b4sm17120790pfl.106.2022.01.24.15.23.43
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 24 Jan 2022 15:23:44 -0800 (PST)
+From:   Kees Cook <keescook@chromium.org>
+To:     Rasmus Villemoes <linux@rasmusvillemoes.dk>
+Cc:     Kees Cook <keescook@chromium.org>,
+        Nick Desaulniers <ndesaulniers@google.com>,
+        "Gustavo A. R. Silva" <gustavoars@kernel.org>,
+        Nathan Chancellor <nathan@kernel.org>,
+        Jason Gunthorpe <jgg@ziepe.ca>,
+        Leon Romanovsky <leon@kernel.org>,
+        Keith Busch <kbusch@kernel.org>, Len Baker <len.baker@gmx.com>,
+        Jonathan Corbet <corbet@lwn.net>, linux-kernel@vger.kernel.org,
+        linux-doc@vger.kernel.org, linux-hardening@vger.kernel.org
+Subject: [PATCH v2 1/2] test_overflow: Regularize test reporting output
+Date:   Mon, 24 Jan 2022 15:23:41 -0800
+Message-Id: <20220124232342.3113350-2-keescook@chromium.org>
+X-Mailer: git-send-email 2.30.2
+In-Reply-To: <20220124232342.3113350-1-keescook@chromium.org>
+References: <20220124232342.3113350-1-keescook@chromium.org>
 MIME-Version: 1.0
+X-Developer-Signature: v=1; a=openpgp-sha256; l=5607; h=from:subject; bh=J3Wsxeg4JzBB1opD2cR25s34lPwyOQCvqPa3Egl9H+E=; b=owEBbQKS/ZANAwAKAYly9N/cbcAmAcsmYgBh7zT96q6+BfVriBVKq/ZNrGoNFi9S0asAOL9Kgk/1 VRdFiCeJAjMEAAEKAB0WIQSlw/aPIp3WD3I+bhOJcvTf3G3AJgUCYe80/QAKCRCJcvTf3G3AJrzNEA CaRpSkCzT5WizfZbk+asSaEUEu4QhmQO7+JkP1dJubjfRmx4SgGUcq3ibh0ZLFAS2PqF2O6kb5vWaS g+kPJWdYWXDGhicKtiDgIc6266pep3/W5XRYgtoaI8vdzstVWNF3LEmw9YtTq04g9PEJ4kHyqJ5xii 3vhCip9Be/SY4UgfDtu9mSFrWTav91Z6qoNOYqmp/RiVsq9xP5ymUteR8aUfzIe/KPO6QNO+zGPh7i BWZckReajeP1l2Ffc83s8Ao7rSdOXERPxjbXxGkE7EDChDPzA2D16pQFGY4acKFJ/STYwnoVs+e5oG LhTCJf+zODcSDrXRPtFY0PVEiWhI0IMKXhhE2uw9Tw2xidIMRxhSzQUWwIXdJ2dYqOgPUSwWx1Yfqe Ezfjl9nXwUgas7bhyy+9dX6orfJx0Y+YVo/f64TpEpWBBlk6Ly9HMhSMoqeXHjwwHS1CZQm6lk49Qc w9Vrms1Z8uyqa6PEeWN2i3qzKvmvG7UBtCf/ML8Sf2Ue+H4uPCMcr4mxmr+r92ZDuaGsSYceEOlSwq Nhle/GEVIXy7HIOBEkHL/67h6FT9dp0tiRSIAlfVAjeEKwNu+Zw3zCuGqVgd/0RBmwd/vQCKA5Tsrk 7pj0u3jxpaN2caO4M/xN65lxaAJs1xG3xJFDl3VY8NUTd5sR+ykFgk0iSN0w==
+X-Developer-Key: i=keescook@chromium.org; a=openpgp; fpr=A5C3F68F229DD60F723E6E138972F4DFDC6DC026
 Content-Transfer-Encoding: 8bit
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Add a brief overview of PECI and PECI wire interface.
-The documentation also contains kernel-doc for PECI subsystem internals
-and PECI CPU Driver API.
+Report test run summaries more regularly, so it's easier to understand
+the output:
+- Remove noisy "ok" reports for shift and allocator tests.
+- Reorganize per-type output to the end of each type's tests.
+- Replace redundant vmalloc tests with __vmalloc so that __GFP_NO_WARN
+  can be used to keep the expected failure warnings out of dmesg,
+  similar to commit 8e060c21ae2c ("lib/test_overflow.c: avoid tainting
+  the kernel and fix wrap size")
 
-Signed-off-by: Iwona Winiarska <iwona.winiarska@intel.com>
-Reviewed-by: Pierre-Louis Bossart <pierre-louis.bossart@linux.intel.com>
+Resulting output:
+
+  test_overflow: 18 u8 arithmetic tests finished
+  test_overflow: 19 s8 arithmetic tests finished
+  test_overflow: 17 u16 arithmetic tests finished
+  test_overflow: 17 s16 arithmetic tests finished
+  test_overflow: 17 u32 arithmetic tests finished
+  test_overflow: 17 s32 arithmetic tests finished
+  test_overflow: 17 u64 arithmetic tests finished
+  test_overflow: 21 s64 arithmetic tests finished
+  test_overflow: 113 shift tests finished
+  test_overflow: 17 overflow size helper tests finished
+  test_overflow: 11 allocation overflow tests finished
+  test_overflow: all tests passed
+
+Acked-by: Rasmus Villemoes <linux@rasmusvillemoes.dk>
+Link: https://lore.kernel.org/all/eb6d02ae-e2ed-e7bd-c700-8a6d004d84ce@rasmusvillemoes.dk/
+Reviewed-by: Nick Desaulniers <ndesaulniers@google.com>
+Link: https://lore.kernel.org/all/CAKwvOdnYYa+72VhtJ4ug=SJVFn7w+n7Th+hKYE87BRDt4hvqOg@mail.gmail.com/
+Signed-off-by: Kees Cook <keescook@chromium.org>
 ---
- Documentation/index.rst      |  1 +
- Documentation/peci/index.rst | 16 +++++++++++
- Documentation/peci/peci.rst  | 51 ++++++++++++++++++++++++++++++++++++
- MAINTAINERS                  |  1 +
- 4 files changed, 69 insertions(+)
- create mode 100644 Documentation/peci/index.rst
- create mode 100644 Documentation/peci/peci.rst
+ lib/test_overflow.c | 54 +++++++++++++++++++++++++--------------------
+ 1 file changed, 30 insertions(+), 24 deletions(-)
 
-diff --git a/Documentation/index.rst b/Documentation/index.rst
-index 2b4de3926858..deaa7f669fcd 100644
---- a/Documentation/index.rst
-+++ b/Documentation/index.rst
-@@ -138,6 +138,7 @@ needed).
-    scheduler/index
-    mhi/index
-    tty/index
-+   peci/index
+diff --git a/lib/test_overflow.c b/lib/test_overflow.c
+index 7a4b6f6c5473..cea37ae82615 100644
+--- a/lib/test_overflow.c
++++ b/lib/test_overflow.c
+@@ -252,10 +252,10 @@ static int __init test_ ## t ## _overflow(void) {			\
+ 	int err = 0;							\
+ 	unsigned i;							\
+ 									\
+-	pr_info("%-3s: %zu arithmetic tests\n", #t,			\
+-		ARRAY_SIZE(t ## _tests));				\
+ 	for (i = 0; i < ARRAY_SIZE(t ## _tests); ++i)			\
+ 		err |= do_test_ ## t(&t ## _tests[i]);			\
++	pr_info("%zu %s arithmetic tests finished\n",			\
++		ARRAY_SIZE(t ## _tests), #t);				\
+ 	return err;							\
+ }
  
- Architecture-agnostic documentation
- -----------------------------------
-diff --git a/Documentation/peci/index.rst b/Documentation/peci/index.rst
-new file mode 100644
-index 000000000000..989de10416e7
---- /dev/null
-+++ b/Documentation/peci/index.rst
-@@ -0,0 +1,16 @@
-+.. SPDX-License-Identifier: GPL-2.0-only
+@@ -291,6 +291,7 @@ static int __init test_overflow_calculation(void)
+ static int __init test_overflow_shift(void)
+ {
+ 	int err = 0;
++	int count = 0;
+ 
+ /* Args are: value, shift, type, expected result, overflow expected */
+ #define TEST_ONE_SHIFT(a, s, t, expect, of) ({				\
+@@ -313,9 +314,7 @@ static int __init test_overflow_shift(void)
+ 			pr_warn("got %llu\n", (u64)__d);		\
+ 		__failed = 1;						\
+ 	}								\
+-	if (!__failed)							\
+-		pr_info("ok: (%s)(%s << %s) == %s\n", #t, #a, #s,	\
+-			of ? "overflow" : #expect);			\
++	count++;							\
+ 	__failed;							\
+ })
+ 
+@@ -479,6 +478,10 @@ static int __init test_overflow_shift(void)
+ 	err |= TEST_ONE_SHIFT(0, 31, s32, 0, false);
+ 	err |= TEST_ONE_SHIFT(0, 63, s64, 0, false);
+ 
++	pr_info("%d shift tests finished\n", count);
 +
-+====================
-+Linux PECI Subsystem
-+====================
++#undef TEST_ONE_SHIFT
 +
-+.. toctree::
+ 	return err;
+ }
+ 
+@@ -530,7 +533,6 @@ static int __init test_ ## func (void *arg)				\
+ 		free ## want_arg (free_func, arg, ptr);			\
+ 		return 1;						\
+ 	}								\
+-	pr_info(#func " detected saturation\n");			\
+ 	return 0;							\
+ }
+ 
+@@ -544,10 +546,7 @@ DEFINE_TEST_ALLOC(kmalloc,	 kfree,	     0, 1, 0);
+ DEFINE_TEST_ALLOC(kmalloc_node,	 kfree,	     0, 1, 1);
+ DEFINE_TEST_ALLOC(kzalloc,	 kfree,	     0, 1, 0);
+ DEFINE_TEST_ALLOC(kzalloc_node,  kfree,	     0, 1, 1);
+-DEFINE_TEST_ALLOC(vmalloc,	 vfree,	     0, 0, 0);
+-DEFINE_TEST_ALLOC(vmalloc_node,  vfree,	     0, 0, 1);
+-DEFINE_TEST_ALLOC(vzalloc,	 vfree,	     0, 0, 0);
+-DEFINE_TEST_ALLOC(vzalloc_node,  vfree,	     0, 0, 1);
++DEFINE_TEST_ALLOC(__vmalloc,	 vfree,	     0, 1, 0);
+ DEFINE_TEST_ALLOC(kvmalloc,	 kvfree,     0, 1, 0);
+ DEFINE_TEST_ALLOC(kvmalloc_node, kvfree,     0, 1, 1);
+ DEFINE_TEST_ALLOC(kvzalloc,	 kvfree,     0, 1, 0);
+@@ -559,8 +558,14 @@ static int __init test_overflow_allocation(void)
+ {
+ 	const char device_name[] = "overflow-test";
+ 	struct device *dev;
++	int count = 0;
+ 	int err = 0;
+ 
++#define check_allocation_overflow(alloc)	({	\
++	count++;					\
++	test_ ## alloc(dev);				\
++})
 +
-+   peci
+ 	/* Create dummy device for devm_kmalloc()-family tests. */
+ 	dev = root_device_register(device_name);
+ 	if (IS_ERR(dev)) {
+@@ -568,23 +573,24 @@ static int __init test_overflow_allocation(void)
+ 		return 1;
+ 	}
+ 
+-	err |= test_kmalloc(NULL);
+-	err |= test_kmalloc_node(NULL);
+-	err |= test_kzalloc(NULL);
+-	err |= test_kzalloc_node(NULL);
+-	err |= test_kvmalloc(NULL);
+-	err |= test_kvmalloc_node(NULL);
+-	err |= test_kvzalloc(NULL);
+-	err |= test_kvzalloc_node(NULL);
+-	err |= test_vmalloc(NULL);
+-	err |= test_vmalloc_node(NULL);
+-	err |= test_vzalloc(NULL);
+-	err |= test_vzalloc_node(NULL);
+-	err |= test_devm_kmalloc(dev);
+-	err |= test_devm_kzalloc(dev);
++	err |= check_allocation_overflow(kmalloc);
++	err |= check_allocation_overflow(kmalloc_node);
++	err |= check_allocation_overflow(kzalloc);
++	err |= check_allocation_overflow(kzalloc_node);
++	err |= check_allocation_overflow(__vmalloc);
++	err |= check_allocation_overflow(kvmalloc);
++	err |= check_allocation_overflow(kvmalloc_node);
++	err |= check_allocation_overflow(kvzalloc);
++	err |= check_allocation_overflow(kvzalloc_node);
++	err |= check_allocation_overflow(devm_kmalloc);
++	err |= check_allocation_overflow(devm_kzalloc);
+ 
+ 	device_unregister(dev);
+ 
++	pr_info("%d allocation overflow tests finished\n", count);
 +
-+.. only::  subproject and html
++#undef check_allocation_overflow
 +
-+   Indices
-+   =======
-+
-+   * :ref:`genindex`
-diff --git a/Documentation/peci/peci.rst b/Documentation/peci/peci.rst
-new file mode 100644
-index 000000000000..331b1ec00e22
---- /dev/null
-+++ b/Documentation/peci/peci.rst
-@@ -0,0 +1,51 @@
-+.. SPDX-License-Identifier: GPL-2.0-only
-+
-+========
-+Overview
-+========
-+
-+The Platform Environment Control Interface (PECI) is a communication
-+interface between Intel processor and management controllers
-+(e.g. Baseboard Management Controller, BMC).
-+PECI provides services that allow the management controller to
-+configure, monitor and debug platform by accessing various registers.
-+It defines a dedicated command protocol, where the management
-+controller is acting as a PECI originator and the processor - as
-+a PECI responder.
-+PECI can be used in both single processor and multiple-processor based
-+systems.
-+
-+NOTE:
-+Intel PECI specification is not released as a dedicated document,
-+instead it is a part of External Design Specification (EDS) for given
-+Intel CPU. External Design Specifications are usually not publicly
-+available.
-+
-+PECI Wire
-+---------
-+
-+PECI Wire interface uses a single wire for self-clocking and data
-+transfer. It does not require any additional control lines - the
-+physical layer is a self-clocked one-wire bus signal that begins each
-+bit with a driven, rising edge from an idle near zero volts. The
-+duration of the signal driven high allows to determine whether the bit
-+value is logic '0' or logic '1'. PECI Wire also includes variable data
-+rate established with every message.
-+
-+For PECI Wire, each processor package will utilize unique, fixed
-+addresses within a defined range and that address should
-+have a fixed relationship with the processor socket ID - if one of the
-+processors is removed, it does not affect addresses of remaining
-+processors.
-+
-+PECI subsystem internals
-+------------------------
-+
-+.. kernel-doc:: include/linux/peci.h
-+.. kernel-doc:: drivers/peci/internal.h
-+.. kernel-doc:: drivers/peci/core.c
-+.. kernel-doc:: drivers/peci/request.c
-+
-+PECI CPU Driver API
-+-------------------
-+.. kernel-doc:: drivers/peci/cpu.c
-diff --git a/MAINTAINERS b/MAINTAINERS
-index d821aeaaa2d3..06449cc42a10 100644
---- a/MAINTAINERS
-+++ b/MAINTAINERS
-@@ -15112,6 +15112,7 @@ M:	Iwona Winiarska <iwona.winiarska@intel.com>
- L:	openbmc@lists.ozlabs.org (moderated for non-subscribers)
- S:	Supported
- F:	Documentation/devicetree/bindings/peci/
-+F:	Documentation/peci/
- F:	drivers/peci/
- F:	include/linux/peci-cpu.h
- F:	include/linux/peci.h
+ 	return err;
+ }
+ 
 -- 
-2.31.1
+2.30.2
 
