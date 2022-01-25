@@ -2,118 +2,87 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 02A0849B66D
-	for <lists+linux-doc@lfdr.de>; Tue, 25 Jan 2022 15:37:06 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 24B5849B6A2
+	for <lists+linux-doc@lfdr.de>; Tue, 25 Jan 2022 15:44:45 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1578763AbiAYOfy (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 25 Jan 2022 09:35:54 -0500
-Received: from foss.arm.com ([217.140.110.172]:46652 "EHLO foss.arm.com"
-        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S1579100AbiAYOXH (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Tue, 25 Jan 2022 09:23:07 -0500
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
-        by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id BFED613D5;
-        Tue, 25 Jan 2022 06:21:29 -0800 (PST)
-Received: from p8cg001049571a15.arm.com (unknown [10.163.42.158])
-        by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPA id B7FAA3F793;
-        Tue, 25 Jan 2022 06:21:25 -0800 (PST)
-From:   Anshuman Khandual <anshuman.khandual@arm.com>
-To:     linux-arm-kernel@lists.infradead.org
-Cc:     Anshuman Khandual <anshuman.khandual@arm.com>,
-        Catalin Marinas <catalin.marinas@arm.com>,
-        Will Deacon <will@kernel.org>,
-        Mathieu Poirier <mathieu.poirier@linaro.org>,
-        Suzuki Poulose <suzuki.poulose@arm.com>,
-        coresight@lists.linaro.org, linux-doc@vger.kernel.org,
-        linux-kernel@vger.kernel.org
-Subject: [PATCH V3 RESEND 7/7] coresight: trbe: Work around the trace data corruption
-Date:   Tue, 25 Jan 2022 19:50:37 +0530
-Message-Id: <1643120437-14352-8-git-send-email-anshuman.khandual@arm.com>
-X-Mailer: git-send-email 2.7.4
-In-Reply-To: <1643120437-14352-1-git-send-email-anshuman.khandual@arm.com>
-References: <1643120437-14352-1-git-send-email-anshuman.khandual@arm.com>
+        id S1580019AbiAYOll (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 25 Jan 2022 09:41:41 -0500
+Received: from frasgout.his.huawei.com ([185.176.79.56]:4512 "EHLO
+        frasgout.his.huawei.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S237434AbiAYOjf (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 25 Jan 2022 09:39:35 -0500
+Received: from fraeml709-chm.china.huawei.com (unknown [172.18.147.226])
+        by frasgout.his.huawei.com (SkyGuard) with ESMTP id 4JjqBh2kN6z689Mf;
+        Tue, 25 Jan 2022 22:35:08 +0800 (CST)
+Received: from lhreml724-chm.china.huawei.com (10.201.108.75) by
+ fraeml709-chm.china.huawei.com (10.206.15.37) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2308.21; Tue, 25 Jan 2022 15:39:24 +0100
+Received: from [10.47.95.36] (10.47.95.36) by lhreml724-chm.china.huawei.com
+ (10.201.108.75) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2308.21; Tue, 25 Jan
+ 2022 14:39:23 +0000
+Subject: Re: [PATCH 05/16] scsi: libsas: Add struct sas_tmf_task
+To:     Matthew Wilcox <willy@infradead.org>
+CC:     <jejb@linux.ibm.com>, <martin.petersen@oracle.com>,
+        <artur.paszkiewicz@intel.com>, <jinpu.wang@cloud.ionos.com>,
+        <chenxiang66@hisilicon.com>, <Ajish.Koshy@microchip.com>,
+        <yanaijie@huawei.com>, <linux-doc@vger.kernel.org>,
+        <linux-kernel@vger.kernel.org>, <linux-scsi@vger.kernel.org>,
+        <linuxarm@huawei.com>, <liuqi115@huawei.com>,
+        <Viswas.G@microchip.com>, <damien.lemoal@opensource.wdc.com>
+References: <1643110372-85470-1-git-send-email-john.garry@huawei.com>
+ <1643110372-85470-6-git-send-email-john.garry@huawei.com>
+ <Ye/9Fs+JrtlMC+Mb@casper.infradead.org>
+ <6b31b15c-98d9-ee07-0092-cbcc5f5c71fe@huawei.com>
+ <YfAF5nlRBtaA6IVK@casper.infradead.org>
+From:   John Garry <john.garry@huawei.com>
+Message-ID: <87dc535f-609f-040a-5c47-5b6bb5b17b59@huawei.com>
+Date:   Tue, 25 Jan 2022 14:38:51 +0000
+User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64; rv:68.0) Gecko/20100101
+ Thunderbird/68.12.1
+MIME-Version: 1.0
+In-Reply-To: <YfAF5nlRBtaA6IVK@casper.infradead.org>
+Content-Type: text/plain; charset="utf-8"; format=flowed
+Content-Language: en-US
+Content-Transfer-Encoding: 7bit
+X-Originating-IP: [10.47.95.36]
+X-ClientProxiedBy: lhreml744-chm.china.huawei.com (10.201.108.194) To
+ lhreml724-chm.china.huawei.com (10.201.108.75)
+X-CFilter-Loop: Reflected
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-TRBE implementations affected by Arm erratum #1902691 might corrupt trace
-data or deadlock, when it's being written into the memory. Workaround this
-problem in the driver, by preventing TRBE initialization on affected cpus.
-The firmware must have disabled the access to TRBE for the kernel on such
-implementations. This will cover the kernel for any firmware that doesn't
-do this already. This just updates the TRBE driver as required.
+On 25/01/2022 14:15, Matthew Wilcox wrote:
+>> Sure, but the pm8001 HW does has a 32b field, which is strange as the SAS
+>> spec defines a 16b field in the task management Function information unit
+>> "tag of task to be managed" field.
+> My point is that it's only safe because the pm8001 driver already limits
+> it to smaller than u16.
+>  Seeing language like "should be enough" made
+> me think you'd just assumed that it would be.
 
-Cc: Catalin Marinas <catalin.marinas@arm.com>
-Cc: Will Deacon <will@kernel.org>
-Cc: Mathieu Poirier <mathieu.poirier@linaro.org>
-Cc: Suzuki Poulose <suzuki.poulose@arm.com>
-Cc: coresight@lists.linaro.org
-Cc: linux-doc@vger.kernel.org
-Cc: linux-arm-kernel@lists.infradead.org
-Cc: linux-kernel@vger.kernel.org
-Reviewed-by: Suzuki K Poulose <suzuki.poulose@arm.com>
-Signed-off-by: Anshuman Khandual <anshuman.khandual@arm.com>
----
- arch/arm64/Kconfig                           |  2 +-
- drivers/hwtracing/coresight/coresight-trbe.c | 12 ++++++++++++
- 2 files changed, 13 insertions(+), 1 deletion(-)
+I can update that wording to be confident that u16 is enough.
 
-diff --git a/arch/arm64/Kconfig b/arch/arm64/Kconfig
-index f37c9d2d697d..ee0fe8a04b9b 100644
---- a/arch/arm64/Kconfig
-+++ b/arch/arm64/Kconfig
-@@ -821,7 +821,7 @@ config ARM64_ERRATUM_2038923
- 
- config ARM64_ERRATUM_1902691
- 	bool "Cortex-A510: 1902691: workaround TRBE trace corruption"
--	depends on COMPILE_TEST # Until the CoreSight TRBE driver changes are in
-+	depends on CORESIGHT_TRBE
- 	default y
- 	help
- 	  This option adds the workaround for ARM Cortex-A510 erratum 1902691.
-diff --git a/drivers/hwtracing/coresight/coresight-trbe.c b/drivers/hwtracing/coresight/coresight-trbe.c
-index 6254ba598df2..75b608bc400b 100644
---- a/drivers/hwtracing/coresight/coresight-trbe.c
-+++ b/drivers/hwtracing/coresight/coresight-trbe.c
-@@ -93,12 +93,14 @@ struct trbe_buf {
- #define TRBE_WORKAROUND_WRITE_OUT_OF_RANGE	1
- #define TRBE_NEEDS_DRAIN_AFTER_DISABLE		2
- #define TRBE_NEEDS_CTXT_SYNC_AFTER_ENABLE	3
-+#define TRBE_IS_BROKEN				4
- 
- static int trbe_errata_cpucaps[] = {
- 	[TRBE_WORKAROUND_OVERWRITE_FILL_MODE] = ARM64_WORKAROUND_TRBE_OVERWRITE_FILL_MODE,
- 	[TRBE_WORKAROUND_WRITE_OUT_OF_RANGE] = ARM64_WORKAROUND_TRBE_WRITE_OUT_OF_RANGE,
- 	[TRBE_NEEDS_DRAIN_AFTER_DISABLE] = ARM64_WORKAROUND_2064142,
- 	[TRBE_NEEDS_CTXT_SYNC_AFTER_ENABLE] = ARM64_WORKAROUND_2038923,
-+	[TRBE_IS_BROKEN] = ARM64_WORKAROUND_1902691,
- 	-1,		/* Sentinel, must be the last entry */
- };
- 
-@@ -192,6 +194,11 @@ static inline bool trbe_needs_ctxt_sync_after_enable(struct trbe_cpudata *cpudat
- 	return trbe_has_erratum(cpudata, TRBE_NEEDS_CTXT_SYNC_AFTER_ENABLE);
- }
- 
-+static inline bool trbe_is_broken(struct trbe_cpudata *cpudata)
-+{
-+	return trbe_has_erratum(cpudata, TRBE_IS_BROKEN);
-+}
-+
- static int trbe_alloc_node(struct perf_event *event)
- {
- 	if (event->cpu == -1)
-@@ -1288,6 +1295,11 @@ static void arm_trbe_probe_cpu(void *info)
- 	 */
- 	trbe_check_errata(cpudata);
- 
-+	if (trbe_is_broken(cpudata)) {
-+		pr_err("Disabling TRBE on cpu%d due to erratum\n", cpu);
-+		goto cpu_clear;
-+	}
-+
- 	/*
- 	 * If the TRBE is affected by erratum TRBE_WORKAROUND_OVERWRITE_FILL_MODE,
- 	 * we must always program the TBRPTR_EL1, 256bytes from a page
--- 
-2.25.1
+>  Seeing a line like:
+>          u32 tag = 0xdeadbeef, rc = 0, n_elem = 0;
+> made me think it might not be; perhaps 0xdeadbeef was being used as
+> a flag value somewhere in the driver.
+> 
+> For example ...
+> 
+> drivers/scsi/pm8001/pm8001_hwi.c:       int rc, tag = 0xdeadbeef;
+> drivers/scsi/pm8001/pm8001_sas.c:       u32 tag = 0xdeadbeef, rc = 0, n_elem = 0;
+> drivers/scsi/pm8001/pm8001_sas.c:       u32 tag = 0xdeadbeef;
+> drivers/scsi/pm8001/pm80xx_hwi.c:                       if (ibutton0 == 0xdeadbeef && ibutton1 == 0xdeadbeef) {
+> drivers/scsi/pm8001/pm80xx_hwi.c:       int rc, tag = 0xdeadbeef;
+> 
+> That doesn't seem to be the case though; as far as I can tell the
+> tag value is never checked against 0xdeadbeef.
+> .
 
+Right, 0xdeadbeef is initially assigned just as a safety measure.
+
+Thanks,
+John
