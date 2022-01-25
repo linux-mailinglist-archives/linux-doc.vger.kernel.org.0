@@ -2,72 +2,114 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id C5AB949B256
-	for <lists+linux-doc@lfdr.de>; Tue, 25 Jan 2022 11:54:21 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id BB1C849B329
+	for <lists+linux-doc@lfdr.de>; Tue, 25 Jan 2022 12:49:01 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1355798AbiAYKtj (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 25 Jan 2022 05:49:39 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:42646 "EHLO
-        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1356682AbiAYKq2 (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 25 Jan 2022 05:46:28 -0500
-Received: from mail-io1-xd41.google.com (mail-io1-xd41.google.com [IPv6:2607:f8b0:4864:20::d41])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id A3BBCC061755
-        for <linux-doc@vger.kernel.org>; Tue, 25 Jan 2022 02:46:27 -0800 (PST)
-Received: by mail-io1-xd41.google.com with SMTP id q204so8568388iod.8
-        for <linux-doc@vger.kernel.org>; Tue, 25 Jan 2022 02:46:27 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=mime-version:reply-to:sender:from:date:message-id:subject:to
-         :content-transfer-encoding;
-        bh=mTe6rsF1WlocKfWRCIawejpNJl6lRYSIlYxDz8jltlQ=;
-        b=eYhJs8s1w7PRv4FHGORd6YbSSzXV91AqUHQKjw8JrGd5VyoA+3DS7OWNo8i2EIq4MU
-         MfJve+B+1ax5Jt7+AAcVy97haXxTKkfn5pIvctXjiwC9M1injJmI5ne7g5H0X6iYmqHO
-         HLRI4XwGY+d2biahF1GVKyNrBqsryD4G6nrAaX3jb9FiAnk/LJ37xKboiErsrzByPS7l
-         t/G3XgpDEX/WloMEFItf6AXS5tkisVsx4sX5mWYMc0LWS+xKb63T1bpU2lfTXka/hI49
-         gVhzc156a/DszQQzuLRprZwFIiNdxqIoPx5GyJV+wFzhV7SupTJMbsmIpSzJYj+kZEn/
-         caQA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=x-gm-message-state:mime-version:reply-to:sender:from:date
-         :message-id:subject:to:content-transfer-encoding;
-        bh=mTe6rsF1WlocKfWRCIawejpNJl6lRYSIlYxDz8jltlQ=;
-        b=5GuuExE7FyazZY8W3fg2TDiUpjRiJGUBtOKRCEMNsNIJoo0ahKQ2u/s9VBv+36oVdR
-         hIC7BWqP5yHZOCnSg3huE15t9T6tdTaIz6898aSl84z126E7RY0Uv/f4yX5gAF809+H2
-         X/L9Y+7mrLkO2OekYvXXaxgEvLdzJ2w6epWjuuu7qJepRBlwNhP4u9gCgKFZBtHyYE9p
-         BmmE3osg40ZG2WtjZ8IDB+pVEROgkPhdS4hOeYIA/jF+4ALi4j8KY5VU7DCt8a14mNoc
-         hdKQD1AboJtdwDZhQhHSXdk3eunYszso0RZJDJxBV8lywSqedlAYu3Rsp80w0IczdbGF
-         RLWA==
-X-Gm-Message-State: AOAM533hsbNphx5VSMaFUkCDQjwJroSLu/ZTqjFNDbogOKgl56BRrp7g
-        06XykXSmkkxYlcZsRv1rW4cmFIXfPd3NSRi3Vw==
-X-Google-Smtp-Source: ABdhPJy6DEyO0yUOOrQuJQo5O13wBi7QYdowPp5hCqkkEA4h9fn243gRnDuKXRHZ0DkfFuIvVoXjTCKljxu/lDRVnuA=
-X-Received: by 2002:a05:6638:2612:: with SMTP id m18mr9006868jat.19.1643107586465;
- Tue, 25 Jan 2022 02:46:26 -0800 (PST)
+        id S1382008AbiAYLpd (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 25 Jan 2022 06:45:33 -0500
+Received: from frasgout.his.huawei.com ([185.176.79.56]:4492 "EHLO
+        frasgout.his.huawei.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1382059AbiAYLin (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 25 Jan 2022 06:38:43 -0500
+Received: from fraeml711-chm.china.huawei.com (unknown [172.18.147.206])
+        by frasgout.his.huawei.com (SkyGuard) with ESMTP id 4JjlGK2Rlqz67kws;
+        Tue, 25 Jan 2022 19:38:01 +0800 (CST)
+Received: from lhreml724-chm.china.huawei.com (10.201.108.75) by
+ fraeml711-chm.china.huawei.com (10.206.15.60) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2308.21; Tue, 25 Jan 2022 12:38:22 +0100
+Received: from localhost.localdomain (10.69.192.58) by
+ lhreml724-chm.china.huawei.com (10.201.108.75) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2308.21; Tue, 25 Jan 2022 11:38:18 +0000
+From:   John Garry <john.garry@huawei.com>
+To:     <jejb@linux.ibm.com>, <martin.petersen@oracle.com>,
+        <artur.paszkiewicz@intel.com>, <jinpu.wang@cloud.ionos.com>,
+        <chenxiang66@hisilicon.com>, <Ajish.Koshy@microchip.com>
+CC:     <yanaijie@huawei.com>, <linux-doc@vger.kernel.org>,
+        <linux-kernel@vger.kernel.org>, <linux-scsi@vger.kernel.org>,
+        <linuxarm@huawei.com>, <liuqi115@huawei.com>,
+        <Viswas.G@microchip.com>, <damien.lemoal@opensource.wdc.com>,
+        John Garry <john.garry@huawei.com>
+Subject: [PATCH 00/16] scsi: libsas and users: Factor out LLDD TMF code
+Date:   Tue, 25 Jan 2022 19:32:36 +0800
+Message-ID: <1643110372-85470-1-git-send-email-john.garry@huawei.com>
+X-Mailer: git-send-email 2.8.1
 MIME-Version: 1.0
-Reply-To: zahirikeen@gmail.com
-Sender: ali.wa1234ara@gmail.com
-Received: by 2002:a05:6638:4112:0:0:0:0 with HTTP; Tue, 25 Jan 2022 02:46:25
- -0800 (PST)
-From:   Zahiri Keen <zahirikeen2@gmail.com>
-Date:   Tue, 25 Jan 2022 11:46:25 +0100
-X-Google-Sender-Auth: e994NbP596L0usD7QbagcMEIgMo
-Message-ID: <CA+0F4TE7LgAu0Z6M=wTeL3Ty-Uyf2fAkERxvjdPhuJJCASdf_Q@mail.gmail.com>
-Subject: Greetings,
-To:     undisclosed-recipients:;
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain
+X-Originating-IP: [10.69.192.58]
+X-ClientProxiedBy: dggems701-chm.china.huawei.com (10.3.19.178) To
+ lhreml724-chm.china.huawei.com (10.201.108.75)
+X-CFilter-Loop: Reflected
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Good Day,
+The LLDD TMF code is almost identical between hisi_sas, pm8001, and mvsas
+drivers.
 
-I know this email might come to you as a surprise because is coming
-from someone you haven=E2=80=99t met with before.
+This series factors out that code into libsas, thus reducing much
+duplication and giving a net reduction of ~250 LoC.
 
-I am Mr. Zahiri Keen, the bank manager with BOA bank i contact you for
-a deal relating to the funds which are in my position I shall furnish
-you with more detail once your response.
+There are some subtle differences between the core TMF handler and each
+of the LLDDs old implementation, so any review and testing is appreciated.
 
-Regards,
-Mr.Zahiri
+Some other minor patches are thrown in:
+- Delete unused macro in hisi_sas driver
+- Delete unused libsas callback
+- Add enum for response frame datapres field
+
+I have another follow-up series to factor out the internal abort code,
+which is common to hisi_sas and pm8001 drivers.
+
+Based on v5.17-rc1
+
+John Garry (16):
+  scsi: libsas: Use enum for response frame DATAPRES field
+  scsi: libsas: Delete lldd_clear_aca callback
+  scsi: hisi_sas: Delete unused I_T_NEXUS_RESET_PHYUP_TIMEOUT
+  scsi: libsas: Move SMP task handlers to core
+  scsi: libsas: Add struct sas_tmf_task
+  scsi: libsas: Add sas_task.tmf
+  scsi: libsas: Add sas_execute_tmf()
+  scsi: libsas: Add sas_execute_ssp_tmf()
+  scsi: libsas: Add TMF handler exec complete callback
+  scsi: libsas: Add TMF handler aborted callback
+  scsi: libsas: Add sas_abort_task_set()
+  scsi: libsas: Add sas_clear_task_set()
+  scsi: libsas: Add sas_lu_reset()
+  scsi: libsas: Add sas_query_task()
+  scsi: libsas: Add sas_abort_task()
+  scsi: libsas: Add sas_execute_ata_cmd()
+
+ Documentation/scsi/libsas.rst          |   2 -
+ drivers/scsi/aic94xx/aic94xx.h         |   1 -
+ drivers/scsi/aic94xx/aic94xx_init.c    |   1 -
+ drivers/scsi/aic94xx/aic94xx_tmf.c     |   9 -
+ drivers/scsi/hisi_sas/hisi_sas.h       |   9 +-
+ drivers/scsi/hisi_sas/hisi_sas_main.c  | 235 ++++---------------------
+ drivers/scsi/hisi_sas/hisi_sas_v1_hw.c |   2 +-
+ drivers/scsi/hisi_sas/hisi_sas_v2_hw.c |   9 +-
+ drivers/scsi/hisi_sas/hisi_sas_v3_hw.c |   2 +-
+ drivers/scsi/isci/init.c               |   1 -
+ drivers/scsi/isci/task.c               |  18 --
+ drivers/scsi/isci/task.h               |   4 -
+ drivers/scsi/libsas/sas_ata.c          |   8 +
+ drivers/scsi/libsas/sas_expander.c     |  24 +--
+ drivers/scsi/libsas/sas_internal.h     |   6 +
+ drivers/scsi/libsas/sas_scsi_host.c    | 220 +++++++++++++++++++++++
+ drivers/scsi/libsas/sas_task.c         |  12 +-
+ drivers/scsi/mvsas/mv_defs.h           |   5 -
+ drivers/scsi/mvsas/mv_init.c           |   5 +-
+ drivers/scsi/mvsas/mv_sas.c            | 177 +------------------
+ drivers/scsi/mvsas/mv_sas.h            |   3 -
+ drivers/scsi/pm8001/pm8001_hwi.c       |   4 +-
+ drivers/scsi/pm8001/pm8001_init.c      |   4 +-
+ drivers/scsi/pm8001/pm8001_sas.c       | 180 +++----------------
+ drivers/scsi/pm8001/pm8001_sas.h       |  13 +-
+ include/scsi/libsas.h                  |  23 ++-
+ 26 files changed, 353 insertions(+), 624 deletions(-)
+
+-- 
+2.26.2
+
