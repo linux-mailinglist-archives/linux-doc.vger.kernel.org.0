@@ -2,76 +2,71 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 033DF49EA72
-	for <lists+linux-doc@lfdr.de>; Thu, 27 Jan 2022 19:40:44 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 8D76B49EA76
+	for <lists+linux-doc@lfdr.de>; Thu, 27 Jan 2022 19:43:11 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S239902AbiA0Skn (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 27 Jan 2022 13:40:43 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:52788 "EHLO
-        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S229379AbiA0Skm (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Thu, 27 Jan 2022 13:40:42 -0500
-Received: from ms.lwn.net (ms.lwn.net [IPv6:2600:3c01:e000:3a1::42])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 8D431C061714
-        for <linux-doc@vger.kernel.org>; Thu, 27 Jan 2022 10:40:42 -0800 (PST)
-Received: from localhost (unknown [IPv6:2601:281:8300:104d::5f6])
+        id S233610AbiA0SnK (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 27 Jan 2022 13:43:10 -0500
+Received: from sin.source.kernel.org ([145.40.73.55]:51306 "EHLO
+        sin.source.kernel.org" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S230432AbiA0SnJ (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Thu, 27 Jan 2022 13:43:09 -0500
+Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
         (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
         (No client certificate requested)
-        by ms.lwn.net (Postfix) with ESMTPSA id 190CF37C;
-        Thu, 27 Jan 2022 18:40:42 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 ms.lwn.net 190CF37C
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=lwn.net; s=20201203;
-        t=1643308842; bh=dmFlgRKtYhKhFgGD76wFQ5jOhgivU597bGjcsPzxvxA=;
-        h=From:To:Cc:Subject:In-Reply-To:References:Date:From;
-        b=A3IhKiVutSOVYUHRKtNQQo6sfmipLXAWaoVtpOcinUCs3VwacZNKSmrfUAEFRgKES
-         OjYQ3HXtzr1m0XjNXRq5X/5NBoD1ox1asMMZLBEOkT1v4viJqhFtyo5lG6dKFYkFXe
-         OLAjGuj0Y43s649DrOb+kyLtYshXollO6kGw67AU/J5fpuz4+4bRQFnOrulyk8b4mt
-         PEVioaRAs8X1GVn7Lo6y/T+7G9Fbj6Az2VGoawzmI/JWSrWL7m6l4evnW0Ujh8kMeK
-         VacXmk/u3P9cZ07YxagjosPEjWECi9NJYGNQrZoTIg/ckVIrZ0ldPMm59VEB2MttJo
-         QsstT6XF65FsQ==
-From:   Jonathan Corbet <corbet@lwn.net>
-To:     Yanteng Si <siyanteng01@gmail.com>, alexs@kernel.org,
-        seakeel@gmail.com
-Cc:     Yanteng Si <siyanteng@loongson.cn>, tangyizhou@huawei.com,
-        chenhuacai@kernel.org, jiaxun.yang@flygoat.com,
-        linux-doc@vger.kernel.org, siyanteng01@gmail.com
-Subject: Re: [PATCH v2 0/4] docs/zh_CN: add vm damon translation
-In-Reply-To: <cover.1642230669.git.siyanteng@loongson.cn>
-References: <cover.1642230669.git.siyanteng@loongson.cn>
-Date:   Thu, 27 Jan 2022 11:41:13 -0700
-Message-ID: <87tudpqawm.fsf@meer.lwn.net>
+        by sin.source.kernel.org (Postfix) with ESMTPS id 20E86CE2260;
+        Thu, 27 Jan 2022 18:43:08 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 35538C340E4;
+        Thu, 27 Jan 2022 18:43:06 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+        s=k20201202; t=1643308986;
+        bh=FY9zgRxYtEro/TgZiffTeXcSzhxSduXelVGXjXLsfCk=;
+        h=From:To:Cc:Subject:Date:From;
+        b=WOxwMiFM3EZGNpGvfOPL8Bfzgk/nXQ6FMDq9dBsZVABzUVN9QUoqAt8DVCxANVooa
+         nx3qE8mpf3dW0/m+I3UFjCvvFP2iuExSwJZ6CNjThBb4+xIImNNOY6dH+KKCiZaGEh
+         O9dkVXa51/ubLy8q14zH1gdD1A1+zAqVI3GsdgF0c/SQFK+Vy0kwSGgYzotFsxazLD
+         SKMa4+68HEZaiQ7OD84esTNaALorDOZ+Mt0D2XnxyikcgsXLo7mZFTNaWWH8a53krR
+         7mvUCE5UZwMJ2sRLIyemM708ULMnnR7GVaXFr3LMfu8TfLEz8csmHZiHW6eJgHxR6N
+         pUHIBYj/rTBrg==
+From:   Jakub Kicinski <kuba@kernel.org>
+To:     davem@davemloft.net
+Cc:     netdev@vger.kernel.org, linux-doc@vger.kernel.org,
+        chenhao288@hisilicon.com, huangguangbin2@huawei.com,
+        idosch@nvidia.com, corbet@lwn.net, Jakub Kicinski <kuba@kernel.org>
+Subject: [PATCH net-next 0/2] ethtool: add header/data split indication
+Date:   Thu, 27 Jan 2022 10:42:58 -0800
+Message-Id: <20220127184300.490747-1-kuba@kernel.org>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Yanteng Si <siyanteng01@gmail.com> writes:
+TCP ZC Rx requires data to be placed neatly into pages, separate
+from the networking headers. This is not supported by most devices
+so to make deployment easy this set adds a way for the driver to
+report support for this feature thru ethtool.
 
-> v2=EF=BC=9A
-> * Pick Alex's Reviewed-by tag.
->
-> v1=EF=BC=9B
-> * Translate .../vm/damon/* into Chinese.
->
-> Yanteng Si (4):
->   docs/zh_CN: add damon index tronslation
->   docs/zh_CN: add damon faq translation
->   docs/zh_CN: add damon design translation
->   docs/zh_CN: add damon api translation
->
->  .../translations/zh_CN/vm/damon/api.rst       |  32 ++++
->  .../translations/zh_CN/vm/damon/design.rst    | 139 ++++++++++++++++++
->  .../translations/zh_CN/vm/damon/faq.rst       |  48 ++++++
->  .../translations/zh_CN/vm/damon/index.rst     |  33 +++++
->  Documentation/translations/zh_CN/vm/index.rst |   2 +-
->  5 files changed, 253 insertions(+), 1 deletion(-)
->  create mode 100644 Documentation/translations/zh_CN/vm/damon/api.rst
->  create mode 100644 Documentation/translations/zh_CN/vm/damon/design.rst
->  create mode 100644 Documentation/translations/zh_CN/vm/damon/faq.rst
->  create mode 100644 Documentation/translations/zh_CN/vm/damon/index.rst
+The larger scope of configuring splitting headers and data, or DMA
+scatter seems dauntingly broad, so this set focuses specifically
+on the question "is this device usable with TCP ZC Rx?".
 
-Set applied, thanks.
+The aim is to avoid a litany of conditions on HW platforms, features,
+and firmware versions in orchestration systems when the drivers can
+easily tell their SG config.
 
-jon
+Jakub Kicinski (2):
+  ethtool: add header/data split indication
+  bnxt: report header-data split state
+
+ Documentation/networking/ethtool-netlink.rst      |  8 ++++++++
+ drivers/net/ethernet/broadcom/bnxt/bnxt_ethtool.c |  3 +++
+ include/linux/ethtool.h                           |  2 ++
+ include/uapi/linux/ethtool_netlink.h              |  7 +++++++
+ net/ethtool/rings.c                               | 15 ++++++++++-----
+ 5 files changed, 30 insertions(+), 5 deletions(-)
+
+-- 
+2.34.1
+
