@@ -2,235 +2,143 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 5DEE349EB1B
-	for <lists+linux-doc@lfdr.de>; Thu, 27 Jan 2022 20:33:20 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 0D41F49EC67
+	for <lists+linux-doc@lfdr.de>; Thu, 27 Jan 2022 21:22:25 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S245625AbiA0TdK (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 27 Jan 2022 14:33:10 -0500
-Received: from mga18.intel.com ([134.134.136.126]:40872 "EHLO mga18.intel.com"
-        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S245576AbiA0TdI (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Thu, 27 Jan 2022 14:33:08 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1643311988; x=1674847988;
-  h=from:to:cc:subject:date:message-id:in-reply-to:
-   references;
-  bh=xnRbqa6BTbe8guUhq0yIR4wviwt5NP1PbDC58oVK8CA=;
-  b=cPr6VT8tA0v/OUgCnPqcuWHS+ppv85kEljmLje9+7tV5K+p63pD3clXt
-   UepmducfWS4M2o+8+8Wdten/oiaUE2/HPQ4Zj0VpwCpmflRrXA9LSLrYv
-   TzjcFnzkBSTOwycYJsGUsBpQiMCudx7mZTvMgyX88tMFZY3beMBnFTUJQ
-   Kmv648Z24h3o3iFb4c2ZmpxVhVSidDU5v2Z3X9t9D4yYWzF66xA14T0cy
-   jsIJ/n3c5yTm2EBvYIVi17guNUjGHNCFH0XID1HGf/B/9gJqF7pKVQILY
-   3hPC0xkDKhw+MYZUJ1klGHHIdBQAcpN9ZuCUY90NvIwtR0OWNx4N00/ZQ
-   Q==;
-X-IronPort-AV: E=McAfee;i="6200,9189,10239"; a="230522679"
-X-IronPort-AV: E=Sophos;i="5.88,321,1635231600"; 
-   d="scan'208";a="230522679"
-Received: from orsmga002.jf.intel.com ([10.7.209.21])
-  by orsmga106.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 27 Jan 2022 11:33:07 -0800
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.88,321,1635231600"; 
-   d="scan'208";a="495844934"
-Received: from ranerica-svr.sc.intel.com ([172.25.110.23])
-  by orsmga002.jf.intel.com with ESMTP; 27 Jan 2022 11:33:06 -0800
-From:   Ricardo Neri <ricardo.neri-calderon@linux.intel.com>
-To:     "Rafael J. Wysocki" <rafael.j.wysocki@intel.com>,
-        Daniel Lezcano <daniel.lezcano@linaro.org>,
-        linux-pm@vger.kernel.org
-Cc:     x86@kernel.org, linux-doc@vger.kernel.org,
-        Len Brown <len.brown@intel.com>,
-        Srinivas Pandruvada <srinivas.pandruvada@linux.intel.com>,
-        Aubrey Li <aubrey.li@linux.intel.com>,
-        Amit Kucheria <amitk@kernel.org>,
-        Andi Kleen <ak@linux.intel.com>,
-        Tim Chen <tim.c.chen@linux.intel.com>,
-        Lukasz Luba <lukasz.luba@arm.com>,
-        "Ravi V. Shankar" <ravi.v.shankar@intel.com>,
-        Ricardo Neri <ricardo.neri@intel.com>,
+        id S1343996AbiA0UWY (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 27 Jan 2022 15:22:24 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:48262 "EHLO
+        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S234658AbiA0UWX (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Thu, 27 Jan 2022 15:22:23 -0500
+Received: from mail-pj1-x1032.google.com (mail-pj1-x1032.google.com [IPv6:2607:f8b0:4864:20::1032])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 98C85C061714
+        for <linux-doc@vger.kernel.org>; Thu, 27 Jan 2022 12:22:23 -0800 (PST)
+Received: by mail-pj1-x1032.google.com with SMTP id h20-20020a17090adb9400b001b518bf99ffso8737877pjv.1
+        for <linux-doc@vger.kernel.org>; Thu, 27 Jan 2022 12:22:23 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=linaro.org; s=google;
+        h=date:from:to:cc:subject:message-id:references:mime-version
+         :content-disposition:in-reply-to;
+        bh=iKuuVqdayh65BOs3QlcJ6pbf0rkmkRMe+Lp1oFkny8c=;
+        b=bbAvaOrBiYQC7RFxWBcx8VnN8m184zyOBkf16LekFtzpPyThJ4lx2gNpt/eZEV+wiy
+         Im4jCQzSINPD87Ptw0Do0AmiL01Gc8WgVMJUSQaaWnppa0Ql7QMmxWs7d/uj5aW2thZG
+         +gXMDt3UmgHUGpqJmeNIKGrHLTw1EEJ826Xy1IXiPYOMxipNOk6/HlYxa9GwVmZjU9oG
+         Ck8IOzu+lLqAc4quoZGHI2vN0a1tEdQmf/4LeWrTpB1CkPTnxMHI1uPW4KjH/Yk+CioC
+         QO062WshhfvjMHgzRibp9SknkZkQF0HqZCxk2ClfPL7gjAp+cr4k+r/6JJ7+K4LLVnXk
+         8jZQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+         :mime-version:content-disposition:in-reply-to;
+        bh=iKuuVqdayh65BOs3QlcJ6pbf0rkmkRMe+Lp1oFkny8c=;
+        b=3F0px3AglGven9PZ7UNXQIkVxFUsMyS6YK8UOSGUT75hvnggyx42POBK9/UUoHL6zI
+         halMRw8V6uzUL0W76vZ4dpdNOuyeOdl4abEZNvy9ml1esvepyGhaORzBH28EbWMuo1o4
+         EWJHzz1i+FQQ/pCHm2sVCBMRSYaqGStXUDeBsjo9lsi4R1kLyJs4TU/YH2i5b9Dm6aEB
+         7ZbBc3CMBdI9ptyYDSFVNJXDX/hkeLkmFeilxSBhcmOL66Si6atKNwPwGEMEircp3hG0
+         /G6CuQPXD9XeffhdQNEsEOx+lxKzbmdyl4vm2nHf3pVAZvNvNHPBzWbVxwAakHKZQSXa
+         7oQQ==
+X-Gm-Message-State: AOAM531eGV78863Av367hGmy00d1z9LpoY5SzzS7kwphnH/rzexQKEPH
+        ZiEVWJ5+GoLAeSNDyeUS00DOTVfof4yuxw==
+X-Google-Smtp-Source: ABdhPJzwkgUTEXFE1qykze0xRlKlyYYL2dHK+otqpecyQIADcjZz7ovAKDX79mubX2rWygZ5T4NSRQ==
+X-Received: by 2002:a17:902:ce84:: with SMTP id f4mr4634037plg.140.1643314943089;
+        Thu, 27 Jan 2022 12:22:23 -0800 (PST)
+Received: from p14s (S0106889e681aac74.cg.shawcable.net. [68.147.0.187])
+        by smtp.gmail.com with ESMTPSA id om6sm177678pjb.24.2022.01.27.12.22.21
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 27 Jan 2022 12:22:22 -0800 (PST)
+Date:   Thu, 27 Jan 2022 13:22:20 -0700
+From:   Mathieu Poirier <mathieu.poirier@linaro.org>
+To:     Anshuman Khandual <anshuman.khandual@arm.com>
+Cc:     linux-arm-kernel@lists.infradead.org,
+        Catalin Marinas <catalin.marinas@arm.com>,
+        Will Deacon <will@kernel.org>,
+        Suzuki Poulose <suzuki.poulose@arm.com>,
+        coresight@lists.linaro.org, linux-doc@vger.kernel.org,
         linux-kernel@vger.kernel.org
-Subject: [PATCH v5 7/7] thermal: intel: hfi: Notify user space for HFI events
-Date:   Thu, 27 Jan 2022 11:34:54 -0800
-Message-Id: <20220127193454.12814-8-ricardo.neri-calderon@linux.intel.com>
-X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20220127193454.12814-1-ricardo.neri-calderon@linux.intel.com>
-References: <20220127193454.12814-1-ricardo.neri-calderon@linux.intel.com>
+Subject: Re: [PATCH V3 RESEND 0/7] coresight: trbe: Workaround Cortex-A510
+ erratas
+Message-ID: <20220127202220.GA2191206@p14s>
+References: <1643120437-14352-1-git-send-email-anshuman.khandual@arm.com>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <1643120437-14352-1-git-send-email-anshuman.khandual@arm.com>
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-From: Srinivas Pandruvada <srinivas.pandruvada@linux.intel.com>
+On Tue, Jan 25, 2022 at 07:50:30PM +0530, Anshuman Khandual wrote:
+> 	This series adds three different workarounds in the TRBE driver for
+> Cortex-A510 specific erratas. But first, this adds Cortex-A510 specific cpu
+> part number definition in the platform. This series applies on 5.17-rc1.
+> 
+> Relevant errata documents can be found here.
+> 
+> https://developer.arm.com/documentation/SDEN2397239/900
+> https://developer.arm.com/documentation/SDEN2397589/900
+> 
+> Changes in V3:
+> 
+> https://lore.kernel.org/all/1641872346-3270-1-git-send-email-anshuman.khandual@arm.com/
+> 
+> - Moved the comment inside trbe_needs_drain_after_disable()
+> - Moved the comment inside trbe_needs_ctxt_sync_after_enable()
+> 
+> Changes in V2:
+> 
+> https://lore.kernel.org/all/1641517808-5735-1-git-send-email-anshuman.khandual@arm.com/
+> 
+> Accommodated most review comments from the previous version.
+> 
+> - Split all patches into CPU errata definition, detection and TRBE workarounds
+> - s/TRBE_WORKAROUND_SYSREG_WRITE_FAILURE/TRBE_NEEDS_DRAIN_AFTER_DISABLE
+> - s/TRBE_WORKAROUND_CORRUPTION_WITH_ENABLE/TRBE_NEEDS_CTXT_SYNC_AFTER_ENABLE
+> - s/trbe_may_fail_sysreg_write()/trbe_needs_drain_after_disable()
+> - s/trbe_may_corrupt_with_enable()/trbe_needs_ctxt_sync_after_enable()
+> - Updated Kconfig help message for config ARM64_ERRATUM_1902691
+> - Updated error message for trbe_is_broken() detection
+> - Added new trblimitr parameter to set_trbe_enabled(), improving performance
+> - Added COMPILE_TEST dependency in the errata, until TRBE part is available
+> 
+> Changes in V1:
+> 
+> https://lore.kernel.org/lkml/1641359159-22726-1-git-send-email-anshuman.khandual@arm.com/
+> 
+> Cc: Catalin Marinas <catalin.marinas@arm.com>
+> Cc: Will Deacon <will@kernel.org>
+> Cc: Mathieu Poirier <mathieu.poirier@linaro.org>
+> Cc: Suzuki Poulose <suzuki.poulose@arm.com>
+> Cc: coresight@lists.linaro.org
+> Cc: linux-doc@vger.kernel.org
+> Cc: linux-arm-kernel@lists.infradead.org
+> Cc: linux-kernel@vger.kernel.org
+> 
+> Anshuman Khandual (7):
+>   arm64: Add Cortex-A510 CPU part definition
+>   arm64: errata: Add detection for TRBE ignored system register writes
+>   arm64: errata: Add detection for TRBE invalid prohibited states
+>   arm64: errata: Add detection for TRBE trace data corruption
+>   coresight: trbe: Work around the ignored system register writes
+>   coresight: trbe: Work around the invalid prohibited states
+>   coresight: trbe: Work around the trace data corruption
+> 
+>  Documentation/arm64/silicon-errata.rst       |   6 +
+>  arch/arm64/Kconfig                           |  59 ++++++++++
+>  arch/arm64/include/asm/cputype.h             |   2 +
+>  arch/arm64/kernel/cpu_errata.c               |  27 +++++
+>  arch/arm64/tools/cpucaps                     |   3 +
+>  drivers/hwtracing/coresight/coresight-trbe.c | 114 ++++++++++++++-----
+>  drivers/hwtracing/coresight/coresight-trbe.h |   8 --
+>  7 files changed, 183 insertions(+), 36 deletions(-)
 
-When the hardware issues an HFI event, relay a notification to user space.
-This allows user space to respond by reading performance and efficiency of
-each CPU and take appropriate action.
+I have applied this set and sent a pull request to Catalin for the arm64
+portion.
 
-For example, when the performance and efficiency of a CPU is 0, user space
-can either offline the CPU or inject idle. Also, if user space notices a
-downward trend in performance, it may proactively adjust power limits to
-avoid future situations in which performance drops to 0.
+Thanks,
+Mathieu
 
-To avoid excessive notifications, the rate is limited by one HZ per event.
-To limit the netlink message size, send parameters for up to 16 CPUs in a
-single message. If there are more than 16 CPUs, issue as many messages as
-needed to notify the status of all CPUs.
-
-In the HFI specification, both performance and efficiency capabilities are
-defined in the [0, 255] range. The existing implementations of HFI hardware
-do not scale the maximum values to 255. Since userspace cares about
-capability values that are either 0 or show a downward/upward trend, this
-fact does not matter much. Relative changes in capabilities are enough. To
-comply with the thermal netlink ABI, scale both performance and efficiency
-capabilities to the [0, 1023] interval.
-
-Cc: Andi Kleen <ak@linux.intel.com>
-Cc: Aubrey Li <aubrey.li@linux.intel.com>
-Cc: Lukasz Luba <lukasz.luba@arm.com>
-Cc: Tim Chen <tim.c.chen@linux.intel.com>
-Cc: "Ravi V. Shankar" <ravi.v.shankar@intel.com>
-Reviewed-by: Len Brown <len.brown@intel.com>
-Signed-off-by: Srinivas Pandruvada <srinivas.pandruvada@linux.intel.com>
----
-Changes since v4:
-  * Reworked parsing of HFI capabilities into chunks of
-    HFI_MAX_THERM_NOTIFY_COUNT CPUs at a time to reduce the time
-    we spend with interrupts disabled. (Srinivas)
-  * Protected hfi_instance::cpus when iterating over them. (Rafael)
-
-Changes since v3:
-  * None
-
-Changes since v2:
-  * None
-
-Changes since v1:
-  * Made get_one_hfi_cap() return void. Removed unnecessary checks.
-    (Rafael)
-  * Replaced raw_spin_[un]lock_irq[restore|save]() with raw_spin_
-    [un]lock_irq() in get_one_hfi_cap(). This function is only called from
-    a workqueue and there is no need to save and restore irq flags.
-  * Scaled performance and energy efficiency values to a [0, 1023] interval
-    when reporting values to user space via thermal netlink notifications.
-    (Lucasz).
-  * Reworded commit message to comment on the scaling of HFI capabilities
-    to comply with the proposed thermal netlink ABI.
----
- drivers/thermal/intel/Kconfig     |  1 +
- drivers/thermal/intel/intel_hfi.c | 75 ++++++++++++++++++++++++++++++-
- 2 files changed, 75 insertions(+), 1 deletion(-)
-
-diff --git a/drivers/thermal/intel/Kconfig b/drivers/thermal/intel/Kconfig
-index e9d2925227d4..6cf3fe36a4ae 100644
---- a/drivers/thermal/intel/Kconfig
-+++ b/drivers/thermal/intel/Kconfig
-@@ -104,6 +104,7 @@ config INTEL_HFI_THERMAL
- 	bool "Intel Hardware Feedback Interface"
- 	depends on CPU_SUP_INTEL
- 	depends on X86_THERMAL_VECTOR
-+	select THERMAL_NETLINK
- 	help
- 	  Select this option to enable the Hardware Feedback Interface. If
- 	  selected, hardware provides guidance to the operating system on
-diff --git a/drivers/thermal/intel/intel_hfi.c b/drivers/thermal/intel/intel_hfi.c
-index 7a2b750eecc4..730fd121df6e 100644
---- a/drivers/thermal/intel/intel_hfi.c
-+++ b/drivers/thermal/intel/intel_hfi.c
-@@ -40,6 +40,7 @@
- 
- #include <asm/msr.h>
- 
-+#include "../thermal_core.h"
- #include "intel_hfi.h"
- 
- #define THERM_STATUS_CLEAR_PKG_MASK (BIT(1) | BIT(3) | BIT(5) | BIT(7) | \
-@@ -163,6 +164,78 @@ static DEFINE_MUTEX(hfi_instance_lock);
- 
- static struct workqueue_struct *hfi_updates_wq;
- #define HFI_UPDATE_INTERVAL		HZ
-+#define HFI_MAX_THERM_NOTIFY_COUNT	16
-+
-+static void get_hfi_caps(struct hfi_instance *hfi_instance,
-+			 struct thermal_genl_cpu_caps *cpu_caps)
-+{
-+	int cpu, i = 0;
-+
-+	raw_spin_lock_irq(&hfi_instance->table_lock);
-+	for_each_cpu(cpu, hfi_instance->cpus) {
-+		struct hfi_cpu_data *caps;
-+		s16 index;
-+
-+		index = per_cpu(hfi_cpu_info, cpu).index;
-+		caps = hfi_instance->data + index * hfi_features.cpu_stride;
-+		cpu_caps[i].cpu = cpu;
-+
-+		/*
-+		 * Scale performance and energy efficiency to
-+		 * the [0, 1023] interval that thermal netlink uses.
-+		 */
-+		cpu_caps[i].performance = caps->perf_cap << 2;
-+		cpu_caps[i].efficiency = caps->ee_cap << 2;
-+
-+		++i;
-+	}
-+	raw_spin_unlock_irq(&hfi_instance->table_lock);
-+}
-+
-+/*
-+ * Call update_capabilities() when there are changes in the HFI table.
-+ */
-+static void update_capabilities(struct hfi_instance *hfi_instance)
-+{
-+	struct thermal_genl_cpu_caps *cpu_caps;
-+	int i = 0, cpu_count;
-+
-+	/* CPUs may come online/offline while processing an HFI update. */
-+	mutex_lock(&hfi_instance_lock);
-+
-+	cpu_count = cpumask_weight(hfi_instance->cpus);
-+
-+	/* No CPUs to report in this hfi_instance. */
-+	if (!cpu_count)
-+		goto out;
-+
-+	cpu_caps = kcalloc(cpu_count, sizeof(*cpu_caps), GFP_KERNEL);
-+	if (!cpu_caps)
-+		goto out;
-+
-+	get_hfi_caps(hfi_instance, cpu_caps);
-+
-+	if (cpu_count < HFI_MAX_THERM_NOTIFY_COUNT)
-+		goto last_cmd;
-+
-+	/* Process complete chunks of HFI_MAX_THERM_NOTIFY_COUNT capabilities. */
-+	for (i = 0;
-+	     (i + HFI_MAX_THERM_NOTIFY_COUNT) <= cpu_count;
-+	     i += HFI_MAX_THERM_NOTIFY_COUNT)
-+		thermal_genl_cpu_capability_event(HFI_MAX_THERM_NOTIFY_COUNT,
-+						  &cpu_caps[i]);
-+
-+	cpu_count = cpu_count - i;
-+
-+last_cmd:
-+	/* Process the remaining capabilities if any. */
-+	if (cpu_count)
-+		thermal_genl_cpu_capability_event(cpu_count, &cpu_caps[i]);
-+
-+	kfree(cpu_caps);
-+out:
-+	mutex_unlock(&hfi_instance_lock);
-+}
- 
- static void hfi_update_work_fn(struct work_struct *work)
- {
-@@ -173,7 +246,7 @@ static void hfi_update_work_fn(struct work_struct *work)
- 	if (!hfi_instance)
- 		return;
- 
--	/* TODO: Consume update here. */
-+	update_capabilities(hfi_instance);
- }
- 
- void intel_hfi_process_event(__u64 pkg_therm_status_msr_val)
--- 
-2.17.1
-
+> 
+> -- 
+> 2.25.1
+> 
