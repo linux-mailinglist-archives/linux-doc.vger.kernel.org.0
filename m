@@ -2,56 +2,63 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id BA4DF49F849
-	for <lists+linux-doc@lfdr.de>; Fri, 28 Jan 2022 12:26:31 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 1BFE249F87C
+	for <lists+linux-doc@lfdr.de>; Fri, 28 Jan 2022 12:42:52 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S234868AbiA1L0a (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Fri, 28 Jan 2022 06:26:30 -0500
-Received: from foss.arm.com ([217.140.110.172]:37828 "EHLO foss.arm.com"
-        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S234386AbiA1L0a (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Fri, 28 Jan 2022 06:26:30 -0500
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
-        by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 94601113E;
-        Fri, 28 Jan 2022 03:26:29 -0800 (PST)
-Received: from [10.57.86.86] (unknown [10.57.86.86])
-        by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 138D73F766;
-        Fri, 28 Jan 2022 03:26:26 -0800 (PST)
-Message-ID: <e84cf689-10a5-c63f-b574-9da682da034e@arm.com>
-Date:   Fri, 28 Jan 2022 11:26:25 +0000
-MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:91.0)
- Gecko/20100101 Thunderbird/91.5.1
-Subject: Re: [PATCH v2 4/6] Documentation: coresight: Turn numbered
- subsections into real subsections
-To:     James Clark <james.clark@arm.com>, mathieu.poirier@linaro.org,
-        coresight@lists.linaro.org, leo.yan@linaro.com,
-        mike.leach@linaro.org
-Cc:     Leo Yan <leo.yan@linaro.org>, John Garry <john.garry@huawei.com>,
-        Will Deacon <will@kernel.org>,
-        Mark Rutland <mark.rutland@arm.com>,
-        Alexander Shishkin <alexander.shishkin@linux.intel.com>,
-        Jiri Olsa <jolsa@redhat.com>,
-        Namhyung Kim <namhyung@kernel.org>,
-        linux-arm-kernel@lists.infradead.org, linux-doc@vger.kernel.org,
-        linux-kernel@vger.kernel.org, linux-perf-users@vger.kernel.org
-References: <20220113091056.1297982-1-james.clark@arm.com>
- <20220113091056.1297982-5-james.clark@arm.com>
-From:   Suzuki K Poulose <suzuki.poulose@arm.com>
-In-Reply-To: <20220113091056.1297982-5-james.clark@arm.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+        id S1345647AbiA1Lmu (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Fri, 28 Jan 2022 06:42:50 -0500
+Received: from mail.loongson.cn ([114.242.206.163]:40648 "EHLO loongson.cn"
+        rhost-flags-OK-OK-OK-FAIL) by vger.kernel.org with ESMTP
+        id S237378AbiA1Lml (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Fri, 28 Jan 2022 06:42:41 -0500
+Received: from linux.localdomain (unknown [113.200.148.30])
+        by mail.loongson.cn (Coremail) with SMTP id AQAAf9Dxb+Kh1vNhREgFAA--.17556S2;
+        Fri, 28 Jan 2022 19:42:26 +0800 (CST)
+From:   Tiezhu Yang <yangtiezhu@loongson.cn>
+To:     Baoquan He <bhe@redhat.com>, Jonathan Corbet <corbet@lwn.net>,
+        Andrew Morton <akpm@linux-foundation.org>,
+        Peter Zijlstra <peterz@infradead.org>,
+        Marco Elver <elver@google.com>
+Cc:     kexec@lists.infradead.org, linux-doc@vger.kernel.org,
+        kasan-dev@googlegroups.com, linux-mm@kvack.org,
+        linux-kernel@vger.kernel.org
+Subject: [PATCH 0/5] Update doc and fix some issues about kdump
+Date:   Fri, 28 Jan 2022 19:42:20 +0800
+Message-Id: <1643370145-26831-1-git-send-email-yangtiezhu@loongson.cn>
+X-Mailer: git-send-email 2.1.0
+X-CM-TRANSID: AQAAf9Dxb+Kh1vNhREgFAA--.17556S2
+X-Coremail-Antispam: 1UD129KBjDUn29KB7ZKAUJUUUUU529EdanIXcx71UUUUU7v73
+        VFW2AGmfu7bjvjm3AaLaJ3UjIYCTnIWjp_UUUY37k0a2IF6F4UM7kC6x804xWl14x267AK
+        xVW8JVW5JwAFc2x0x2IEx4CE42xK8VAvwI8IcIk0rVWrJVCq3wAFIxvE14AKwVWUJVWUGw
+        A2ocxC64kIII0Yj41l84x0c7CEw4AK67xGY2AK021l84ACjcxK6xIIjxv20xvE14v26r1I
+        6r4UM28EF7xvwVC0I7IYx2IY6xkF7I0E14v26r4j6F4UM28EF7xvwVC2z280aVAFwI0_Gc
+        CE3s1l84ACjcxK6I8E87Iv6xkF7I0E14v26rxl6s0DM2AIxVAIcxkEcVAq07x20xvEncxI
+        r21l5I8CrVACY4xI64kE6c02F40Ex7xfMcIj6xIIjxv20xvE14v26r1j6r18McIj6I8E87
+        Iv67AKxVW8JVWxJwAm72CE4IkC6x0Yz7v_Jr0_Gr1lF7xvr2IYc2Ij64vIr41lFIxGxcIE
+        c7CjxVA2Y2ka0xkIwI1lc2xSY4AK67AK6r4kMxAIw28IcxkI7VAKI48JMxC20s026xCaFV
+        Cjc4AY6r1j6r4UMI8I3I0E5I8CrVAFwI0_Jr0_Jr4lx2IqxVCjr7xvwVAFwI0_JrI_JrWl
+        x4CE17CEb7AF67AKxVWUtVW8ZwCIc40Y0x0EwIxGrwCI42IY6xIIjxv20xvE14v26r1j6r
+        1xMIIF0xvE2Ix0cI8IcVCY1x0267AKxVWUJVW8JwCI42IY6xAIw20EY4v20xvaj40_WFyU
+        JVCq3wCI42IY6I8E87Iv67AKxVWUJVW8JwCI42IY6I8E87Iv6xkF7I0E14v26r4j6r4UJb
+        IYCTnIWIevJa73UjIFyTuYvjxU4g18DUUUU
+X-CM-SenderInfo: p1dqw3xlh2x3gn0dqz5rrqw2lrqou0/
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On 13/01/2022 09:10, James Clark wrote:
-> This is to allow them to be referenced in a later commit. There was
-> also a mistake where sysFS was introduced as section 2, but numbered
-> as section 1. And vice versa for 'Using perf framework'. This can't
-> happen with unnumbered sections.
-> 
-> Signed-off-by: James Clark <james.clark@arm.com>
+Tiezhu Yang (5):
+  docs: kdump: update description about sysfs file system support
+  docs: kdump: add scp sample to write out the dump file
+  kcsan: unset panic_on_warn before calling panic()
+  sched: unset panic_on_warn before calling panic()
+  kfence: unset panic_on_warn before calling panic()
 
-Looks good to me
+ Documentation/admin-guide/kdump/kdump.rst | 10 +++++++---
+ kernel/kcsan/report.c                     | 10 +++++++++-
+ kernel/sched/core.c                       | 11 ++++++++++-
+ mm/kfence/report.c                        | 10 +++++++++-
+ 4 files changed, 35 insertions(+), 6 deletions(-)
+
+-- 
+2.1.0
 
