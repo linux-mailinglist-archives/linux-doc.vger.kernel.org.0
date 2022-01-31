@@ -2,122 +2,90 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 2ECF24A514E
-	for <lists+linux-doc@lfdr.de>; Mon, 31 Jan 2022 22:19:41 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 1DD834A518A
+	for <lists+linux-doc@lfdr.de>; Mon, 31 Jan 2022 22:37:02 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1380125AbiAaVTk (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 31 Jan 2022 16:19:40 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:47246 "EHLO
+        id S1380249AbiAaVg7 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 31 Jan 2022 16:36:59 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:51216 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S241083AbiAaVTj (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Mon, 31 Jan 2022 16:19:39 -0500
-Received: from ams.source.kernel.org (ams.source.kernel.org [IPv6:2604:1380:4601:e00::1])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 98201C061714;
-        Mon, 31 Jan 2022 13:19:39 -0800 (PST)
-Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
-        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
-        (No client certificate requested)
-        by ams.source.kernel.org (Postfix) with ESMTPS id 54E37B82CA1;
-        Mon, 31 Jan 2022 21:19:38 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id EF0E4C340E8;
-        Mon, 31 Jan 2022 21:19:35 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-        s=k20201202; t=1643663977;
-        bh=bydv7gfSFyvaJwR+P/7cGzOvsDym3JsAo7rfZrr7r/w=;
-        h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-        b=t6Vk68zSyrlVBRQoLyQEefza0TDiislHx/Z7lsiaTafTymNdJ+L+Ga3ysGKXae/t2
-         7W60y03whPQ/BK4ZI7BNUVOSfjBWiELrkLhDxpjf5GB+gT0knZxcYgvelw/luAevQa
-         ztcsrr9ihLE04UKepEZUAPn1VWb8biP7WB8f98x2Nna8ghkt1s22BtPrsBSiCrOFzt
-         YU24oZWvkilw7M5xw3ZyEeSRSwMEj8dflJvYpoMp2jZFtPoBWZsdSPiyplwDLfS9KO
-         MgKBlhw/6VM38ikvQ+sBUIa1qXnNJ73ZIwC/32M21qs3A7gXh6br+hb1gVYciPX0SM
-         UEKuQ2rbXPQjQ==
-Date:   Mon, 31 Jan 2022 15:26:37 -0600
-From:   "Gustavo A. R. Silva" <gustavoars@kernel.org>
-To:     Kees Cook <keescook@chromium.org>
-Cc:     Jonathan Corbet <corbet@lwn.net>,
-        Linus Torvalds <torvalds@linux-foundation.org>,
-        Martin Uecker <Martin.Uecker@med.uni-goettingen.de>,
-        Ingo Molnar <mingo@kernel.org>,
-        Miguel Ojeda <miguel.ojeda.sandonis@gmail.com>,
-        Rikard Falkeborn <rikard.falkeborn@gmail.com>,
-        Arnd Bergmann <arnd@arndb.de>, linux-doc@vger.kernel.org,
-        Tetsuo Handa <penguin-kernel@I-love.SAKURA.ne.jp>,
-        Andrew Morton <akpm@linux-foundation.org>,
-        Andy Shevchenko <andy.shevchenko@gmail.com>,
-        Nick Desaulniers <ndesaulniers@google.com>,
-        linux-kernel@vger.kernel.org, linux-hardening@vger.kernel.org
-Subject: Re: [PATCH] linux/const.h: Explain how __is_constexpr() works
-Message-ID: <20220131212637.GA198787@embeddedor>
-References: <20220131204357.1133674-1-keescook@chromium.org>
+        with ESMTP id S1380041AbiAaVg5 (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Mon, 31 Jan 2022 16:36:57 -0500
+Received: from mail-oi1-x241.google.com (mail-oi1-x241.google.com [IPv6:2607:f8b0:4864:20::241])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id E0DC2C06173E
+        for <linux-doc@vger.kernel.org>; Mon, 31 Jan 2022 13:36:56 -0800 (PST)
+Received: by mail-oi1-x241.google.com with SMTP id u13so13189306oie.5
+        for <linux-doc@vger.kernel.org>; Mon, 31 Jan 2022 13:36:56 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112;
+        h=mime-version:reply-to:from:date:message-id:subject:to;
+        bh=RcCyF58LaRxi/j1nHAT0ApLeXmQ9s66f3iMVqhPacvY=;
+        b=h0/ZbeSbhpQI9P1vadFWIIwaFx6Wg7DqXMk6y/6+HmqNlUgv3SlNpJw4qpKTo06mte
+         9c8XYB94UqfO8qOJWjzFkjv5zc9WvJZZl3Js9F72ABObxzvVfflP7X59ytjFJOxjOG2l
+         LO3Y+aza5Rf6VWZX6T/nuKCfE48EtABITU6cGLgH5Lgy6DZ7btNOQ2K6FCDw4SVAmVb+
+         bozVeCVEuRNzl4R/3iiKyQWEN4FwtOoBFNE1mvxGgM+MeOAXwYWRhKwNuVBkTmZ3ljfc
+         /CIpJAIw2H+Xim8Oyn6ivr2wbXYsB8V9T2ZN0w8wKdgaTu/QkrQmZRS8vp1zfQE1kyl/
+         bECA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:mime-version:reply-to:from:date:message-id
+         :subject:to;
+        bh=RcCyF58LaRxi/j1nHAT0ApLeXmQ9s66f3iMVqhPacvY=;
+        b=xpIMCo2IT6Byng+L9QBGFaAxEln0ru4iMY+tVx9Y56pXeWsOCFHIk+x908+QlIJAE0
+         3gehapeo8W+FhEZ1b/WqA8RGXx0PVeZRc7LLUSF5H59vC+IVRYH2aFqpas4UQ4Ft5gtj
+         vIc/59TEZxznakMcw3Hdh2F2Bsw3/pIPTQ9dhYXDJFCx5wVJNK/ZxgHjhsVDvvqGlWdK
+         5xAd9F+c0KEFe8qq6+FpuHokUsBS7X+gZS/h5bhaY9y9lzKaGkEaJApJcqRj1hr9kTAL
+         XH0ZJ5fDSxdb8ZfPG3R0jm6a1E+4ZTXd3X12xGyxYEOb33NGU3D537xCwgZIzm1IWvPp
+         oKWQ==
+X-Gm-Message-State: AOAM530IRDOUfDfXx3jjWBIhEL60kkLKxqL0tJKlFtZeT0tzXKIzc56g
+        6zbpOqvyu6CgD+JY/xv40L/++iyx88shPihKWrg=
+X-Google-Smtp-Source: ABdhPJwOKKiu9r5CLPBfR9xT27fzBbARJMbuDEn6UccpYrL5eWNExCgl2kvk+baqoa5SwK6UrZG3WcDm232+Riit43k=
+X-Received: by 2002:a54:4490:: with SMTP id v16mr14816050oiv.157.1643665016077;
+ Mon, 31 Jan 2022 13:36:56 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20220131204357.1133674-1-keescook@chromium.org>
+Received: by 2002:a4a:c30d:0:0:0:0:0 with HTTP; Mon, 31 Jan 2022 13:36:55
+ -0800 (PST)
+Reply-To: westerunion909@gmail.com
+From:   "Antonia Lloyd." <anthonylloydatmxxx04@gmail.com>
+Date:   Mon, 31 Jan 2022 13:36:55 -0800
+Message-ID: <CAExPwBBtJH3GcqF-weqUuAur7b38Y2T1d6e9FzvuN_q1Nhi-zw@mail.gmail.com>
+Subject: Dear Email ID Owner.(USD$4000 IMF COMPENSATION FUND TO PICK UP TODAY).
+To:     undisclosed-recipients:;
+Content-Type: text/plain; charset="UTF-8"
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Mon, Jan 31, 2022 at 12:43:57PM -0800, Kees Cook wrote:
-> The __is_constexpr() macro is dark magic. Shed some light on it with
-> a comment to explain how and why it works.
-> 
-> Cc: Jonathan Corbet <corbet@lwn.net>
-> Cc: Linus Torvalds <torvalds@linux-foundation.org>
-> Cc: Martin Uecker <Martin.Uecker@med.uni-goettingen.de>
-> Cc: Ingo Molnar <mingo@kernel.org>
-> Cc: Miguel Ojeda <miguel.ojeda.sandonis@gmail.com>
-> Cc: Rikard Falkeborn <rikard.falkeborn@gmail.com>
-> Cc: Arnd Bergmann <arnd@arndb.de>
-> Cc: linux-doc@vger.kernel.org
-> Signed-off-by: Kees Cook <keescook@chromium.org>
+Dear Email ID Owner.
 
-Acked-by: Gustavo A. R. Silva <gustavoars@kernel.org>
+The IMF is compensating all the email address that was funds as one of
+the ward win Victims and your email address and your name is among the
+listed one of approved to pay the sum of $3.6 million U.S Dollars. We
+have concluded to effect your own payment through Western Union Money
+Transfer for easy pick-up of those funds in good condition,$4000 twice
+daily,till the $3.6 million is completely transferred to you.We now
+need your information where we will be sending the funds,such
+as;Receiver name(Your full Name)address and phone number.Contact
+Western Union agent with this Email: ( westerunion995@gmail.com  ) for
+your payment fund.
 
-Thanks
---
-Gustavo
+Ms.Maria Zatto
+E-mail:westerunion995@gmail.com
+Telephone: +229 682 97 169
 
-> ---
-> Jon, since this is pure comment, do you want to take it through the docs tree?
-> ---
->  include/linux/const.h | 24 ++++++++++++++++++++++++
->  1 file changed, 24 insertions(+)
-> 
-> diff --git a/include/linux/const.h b/include/linux/const.h
-> index 435ddd72d2c4..7122d6a1f8ce 100644
-> --- a/include/linux/const.h
-> +++ b/include/linux/const.h
-> @@ -7,6 +7,30 @@
->   * This returns a constant expression while determining if an argument is
->   * a constant expression, most importantly without evaluating the argument.
->   * Glory to Martin Uecker <Martin.Uecker@med.uni-goettingen.de>
-> + *
-> + * Details:
-> + * - sizeof() is an integer constant expression, and does not evaluate the
-> + *   value of its operand; it only examines the type of its operand.
-> + * - The results of comparing two integer constant expressions is also
-> + *   an integer constant expression.
-> + * - The use of literal "8" is to avoid warnings about unaligned pointers;
-> + *   these could otherwise just be "1"s.
-> + * - (long)(x) is used to avoid warnings about 64-bit types on 32-bit
-> + *   architectures.
-> + * - The C standard defines an "integer constant expression" as different
-> + *   from a "null pointer constant" (an integer constant 0 pointer).
-> + * - The conditional operator ("... ? ... : ...") returns the type of the
-> + *   operand that isn't a null pointer constant. This behavior is the
-> + *   central mechanism of the macro.
-> + * - If (x) is an integer constant expression, then the "* 0l" resolves it
-> + *   into a null pointer constant, which forces the conditional operator
-> + *   to return the type of the last operand: "(int *)".
-> + * - If (x) is not an integer constant expression, then the type of the
-> + *   conditional operator is from the first operand: "(void *)".
-> + * - sizeof(int) == 4 and sizeof(void) == 1.
-> + * - The ultimate comparison to "sizeof(int)" chooses between either:
-> + *     sizeof(*((int *) (8)) == sizeof(int)   (x was a constant expression)
-> + *     sizeof(*((void *)(8)) == sizeof(void)  (x was not a constant expression)
->   */
->  #define __is_constexpr(x) \
->  	(sizeof(int) == sizeof(*(8 ? ((void *)((long)(x) * 0l)) : (int *)8)))
-> -- 
-> 2.30.2
-> 
+Contact Ms.Maria,immediately you get this mail through western union
+email address above to enable her speed-up.your payment and release
+the $4000 dollars MTCN today for you to pick up the payment OK.
+
+You are expected to provide us with the details as prescribed below to
+enable safe and easy release of your funds today.
+
+(1)Your Full name:
+(2)Your Phone number:
+(3)Your Country:
+(4)Your Age:
+
+Thank you,
+Dr.Antonia Lloyd.
+Contact Dir.Western Union Money Transfer,
+Cotonou-Benin Republic.
