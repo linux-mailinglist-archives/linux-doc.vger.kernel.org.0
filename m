@@ -2,110 +2,151 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 3F5BD4A3A4E
-	for <lists+linux-doc@lfdr.de>; Sun, 30 Jan 2022 22:26:07 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 2291F4A3C4E
+	for <lists+linux-doc@lfdr.de>; Mon, 31 Jan 2022 01:36:41 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1356799AbiA3V0D (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Sun, 30 Jan 2022 16:26:03 -0500
-Received: from mga07.intel.com ([134.134.136.100]:9048 "EHLO mga07.intel.com"
-        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S1356821AbiA3VZc (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Sun, 30 Jan 2022 16:25:32 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1643577932; x=1675113932;
-  h=from:to:cc:subject:date:message-id:in-reply-to:
-   references;
-  bh=qjlVyEBxxP1l305ldO+H2m7erFyvzIp4PIJC/dne3Rw=;
-  b=lWfmWDe1uVtISUbhbJ8UqaWGN9/ekymjl6JmgibJFvJ/a0msOYClGzfB
-   jLgH997zdon7yto4gJxJJGCxnwnHLAsEKSmmFKtq75FGKssnSTi7AYNA6
-   IuD35YpPW1l/KNHb4/PTIMcRtSbQF9aL+4DXF0RWlkRkf5q4nNptlycr2
-   fYwjujHg0epPhYNzpHZXLKLWNJxhBENW++5k1I3eDI3OSZe/BzmGfir0w
-   9N00aTCjLubqv4ISsEKAslFThE4LENdtPN0jSKi1/bieM5hPsXm+/5qKj
-   Am/hMejzL2PUiHc2Huc9U2Dc1Tcko5dBjEH+t9OQzM/5NYXk0jwk9qNyy
-   Q==;
-X-IronPort-AV: E=McAfee;i="6200,9189,10243"; a="310685840"
-X-IronPort-AV: E=Sophos;i="5.88,329,1635231600"; 
-   d="scan'208";a="310685840"
-Received: from orsmga008.jf.intel.com ([10.7.209.65])
-  by orsmga105.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 30 Jan 2022 13:22:14 -0800
-X-IronPort-AV: E=Sophos;i="5.88,329,1635231600"; 
-   d="scan'208";a="536857038"
-Received: from avmallar-mobl1.amr.corp.intel.com (HELO rpedgeco-desk.amr.corp.intel.com) ([10.209.123.171])
-  by orsmga008-auth.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 30 Jan 2022 13:22:14 -0800
-From:   Rick Edgecombe <rick.p.edgecombe@intel.com>
-To:     x86@kernel.org, "H . Peter Anvin" <hpa@zytor.com>,
-        Thomas Gleixner <tglx@linutronix.de>,
-        Ingo Molnar <mingo@redhat.com>, linux-kernel@vger.kernel.org,
-        linux-doc@vger.kernel.org, linux-mm@kvack.org,
-        linux-arch@vger.kernel.org, linux-api@vger.kernel.org,
-        Arnd Bergmann <arnd@arndb.de>,
-        Andy Lutomirski <luto@kernel.org>,
-        Balbir Singh <bsingharora@gmail.com>,
-        Borislav Petkov <bp@alien8.de>,
-        Cyrill Gorcunov <gorcunov@gmail.com>,
-        Dave Hansen <dave.hansen@linux.intel.com>,
-        Eugene Syromiatnikov <esyr@redhat.com>,
-        Florian Weimer <fweimer@redhat.com>,
-        "H . J . Lu" <hjl.tools@gmail.com>, Jann Horn <jannh@google.com>,
-        Jonathan Corbet <corbet@lwn.net>,
-        Kees Cook <keescook@chromium.org>,
-        Mike Kravetz <mike.kravetz@oracle.com>,
-        Nadav Amit <nadav.amit@gmail.com>,
-        Oleg Nesterov <oleg@redhat.com>, Pavel Machek <pavel@ucw.cz>,
-        Peter Zijlstra <peterz@infradead.org>,
-        Randy Dunlap <rdunlap@infradead.org>,
-        "Ravi V . Shankar" <ravi.v.shankar@intel.com>,
-        Dave Martin <Dave.Martin@arm.com>,
-        Weijiang Yang <weijiang.yang@intel.com>,
-        "Kirill A . Shutemov" <kirill.shutemov@linux.intel.com>,
-        joao.moreira@intel.com, John Allen <john.allen@amd.com>,
-        kcc@google.com, eranian@google.com
-Cc:     rick.p.edgecombe@intel.com
-Subject: [PATCH 35/35] x86/cpufeatures: Limit shadow stack to Intel CPUs
-Date:   Sun, 30 Jan 2022 13:18:38 -0800
-Message-Id: <20220130211838.8382-36-rick.p.edgecombe@intel.com>
-X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20220130211838.8382-1-rick.p.edgecombe@intel.com>
-References: <20220130211838.8382-1-rick.p.edgecombe@intel.com>
+        id S1357181AbiAaAgj (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Sun, 30 Jan 2022 19:36:39 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:47182 "EHLO
+        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1357015AbiAaAgj (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Sun, 30 Jan 2022 19:36:39 -0500
+Received: from bombadil.infradead.org (bombadil.infradead.org [IPv6:2607:7c80:54:e::133])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 5CF7FC061714;
+        Sun, 30 Jan 2022 16:36:39 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+        d=infradead.org; s=bombadil.20210309; h=Content-Transfer-Encoding:
+        MIME-Version:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
+        Content-ID:Content-Description:In-Reply-To:References;
+        bh=RAr/avbZ9dvrmyFHTddz+fhHj1lJqbBwGsig25CiDDI=; b=Q5pgL7x9/+uPI4odK3PwxZmPOO
+        Aw4n1NJ8HdAvRhqj2TmO7BmuTY2cyrmdHpl4qm+nU1c12LL2f+MPmVmvTrnVsCjTB2QdltSYaLU+x
+        5a7HFjlT1PMJP+CuE3IZeC4V4mlJe9f5dV8hubhOjAteYaYwMHUZh//R5G1fCDwwzNhWjACw0OWR2
+        QFB6d5VlykzSOkRtGCxwkrn5KU99IDefWAH1BOLThEzHcWFZgkJwuUCBlUWlWMGzc+jlxzfBpKg3n
+        vNkO9sIPJQWN9GI4zqYTMPj6l+Wh16KntfRNtvV2A7xWBdXCZEcG8ZKrbQacDPmnKlWUpC/rhXG5Z
+        +HZRb7QA==;
+Received: from [2601:1c0:6280:3f0::aa0b] (helo=bombadil.infradead.org)
+        by bombadil.infradead.org with esmtpsa (Exim 4.94.2 #2 (Red Hat Linux))
+        id 1nEKgQ-007mQL-GL; Mon, 31 Jan 2022 00:36:38 +0000
+From:   Randy Dunlap <rdunlap@infradead.org>
+To:     linux-kernel@vger.kernel.org
+Cc:     Randy Dunlap <rdunlap@infradead.org>, Rae Moar <rmoar@google.com>,
+        David Gow <davidgow@google.com>,
+        Jonathan Corbet <corbet@lwn.net>, linux-doc@vger.kernel.org
+Subject: [PATCH] Docs: ktap: add code-block type
+Date:   Sun, 30 Jan 2022 16:36:37 -0800
+Message-Id: <20220131003637.14274-1-rdunlap@infradead.org>
+X-Mailer: git-send-email 2.31.1
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Shadow stack is supported on newer AMD processors, but the kernel
-implementation has not been tested on them. Prevent basic issues from
-showing up for normal users by disabling shadow stack on all CPUs except
-Intel until it has been tested. At which point the limitation should be
-removed.
+Fix multiple "code-block::" warnings by adding "none" as the type of
+code-block. Mends these warnings:
 
-Signed-off-by: Rick Edgecombe <rick.p.edgecombe@intel.com>
+Documentation/dev-tools/ktap.rst:71: WARNING: Error in "code-block" directive:
+1 argument(s) required, 0 supplied.
+Documentation/dev-tools/ktap.rst:120: WARNING: Error in "code-block" directive:
+1 argument(s) required, 0 supplied.
+Documentation/dev-tools/ktap.rst:126: WARNING: Error in "code-block" directive:
+1 argument(s) required, 0 supplied.
+Documentation/dev-tools/ktap.rst:132: WARNING: Error in "code-block" directive:
+1 argument(s) required, 0 supplied.
+Documentation/dev-tools/ktap.rst:139: WARNING: Error in "code-block" directive:
+1 argument(s) required, 0 supplied.
+Documentation/dev-tools/ktap.rst:145: WARNING: Error in "code-block" directive:
+1 argument(s) required, 0 supplied.
+Documentation/dev-tools/ktap.rst:195: WARNING: Error in "code-block" directive:
+1 argument(s) required, 0 supplied.
+Documentation/dev-tools/ktap.rst:208: WARNING: Error in "code-block" directive:
+1 argument(s) required, 0 supplied.
+Documentation/dev-tools/ktap.rst:238: WARNING: Error in "code-block" directive:
+1 argument(s) required, 0 supplied.
+
+Fixes: a32fa6b2e8b4 ("Documentation: dev-tools: Add KTAP specification")
+Signed-off-by: Randy Dunlap <rdunlap@infradead.org>
+Cc: Rae Moar <rmoar@google.com>
+Cc: David Gow <davidgow@google.com>
+Cc: Jonathan Corbet <corbet@lwn.net>
+Cc: linux-doc@vger.kernel.org
 ---
+ Documentation/dev-tools/ktap.rst |   18 +++++++++---------
+ 1 file changed, 9 insertions(+), 9 deletions(-)
 
-v1:
- - New patch.
-
- arch/x86/kernel/cpu/common.c | 8 ++++++++
- 1 file changed, 8 insertions(+)
-
-diff --git a/arch/x86/kernel/cpu/common.c b/arch/x86/kernel/cpu/common.c
-index 9ee339f5b8ca..7fbfe707a1db 100644
---- a/arch/x86/kernel/cpu/common.c
-+++ b/arch/x86/kernel/cpu/common.c
-@@ -517,6 +517,14 @@ __setup("nopku", setup_disable_pku);
+--- linux-next-20220128.orig/Documentation/dev-tools/ktap.rst
++++ linux-next-20220128/Documentation/dev-tools/ktap.rst
+@@ -68,7 +68,7 @@ Test case result lines
+ Test case result lines indicate the final status of a test.
+ They are required and must have the format:
  
- static __always_inline void setup_cet(struct cpuinfo_x86 *c)
- {
-+	/*
-+	 * Shadow stack is supported on AMD processors, but has not been
-+	 * tested. Only support it on Intel processors until this is done.
-+	 * At which point, this vendor check should be removed.
-+	 */
-+	if (c->x86_vendor != X86_VENDOR_INTEL)
-+		setup_clear_cpu_cap(X86_FEATURE_SHSTK);
-+
- 	if (!cpu_feature_enabled(X86_FEATURE_SHSTK))
- 		return;
+-.. code-block::
++.. code-block:: none
  
--- 
-2.17.1
-
+ 	<result> <number> [<description>][ # [<directive>] [<diagnostic data>]]
+ 
+@@ -117,32 +117,32 @@ separator.
+ 
+ Example result lines include:
+ 
+-.. code-block::
++.. code-block:: none
+ 
+ 	ok 1 test_case_name
+ 
+ The test "test_case_name" passed.
+ 
+-.. code-block::
++.. code-block:: none
+ 
+ 	not ok 1 test_case_name
+ 
+ The test "test_case_name" failed.
+ 
+-.. code-block::
++.. code-block:: none
+ 
+ 	ok 1 test # SKIP necessary dependency unavailable
+ 
+ The test "test" was SKIPPED with the diagnostic message "necessary dependency
+ unavailable".
+ 
+-.. code-block::
++.. code-block:: none
+ 
+ 	not ok 1 test # TIMEOUT 30 seconds
+ 
+ The test "test" timed out, with diagnostic data "30 seconds".
+ 
+-.. code-block::
++.. code-block:: none
+ 
+ 	ok 5 check return code # rcode=0
+ 
+@@ -192,7 +192,7 @@ line and should end before the parent te
+ 
+ An example of a test with two nested subtests:
+ 
+-.. code-block::
++.. code-block:: none
+ 
+ 	KTAP version 1
+ 	1..1
+@@ -205,7 +205,7 @@ An example of a test with two nested sub
+ 
+ An example format with multiple levels of nested testing:
+ 
+-.. code-block::
++.. code-block:: none
+ 
+ 	KTAP version 1
+ 	1..2
+@@ -235,7 +235,7 @@ nested version line, uses a line of the
+ 
+ Example KTAP output
+ --------------------
+-.. code-block::
++.. code-block:: none
+ 
+ 	KTAP version 1
+ 	1..1
