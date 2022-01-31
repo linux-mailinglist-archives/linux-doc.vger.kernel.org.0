@@ -2,79 +2,165 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id C50B14A4101
-	for <lists+linux-doc@lfdr.de>; Mon, 31 Jan 2022 12:01:46 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 1D2BA4A4938
+	for <lists+linux-doc@lfdr.de>; Mon, 31 Jan 2022 15:22:28 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1358819AbiAaLBl (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 31 Jan 2022 06:01:41 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:42870 "EHLO
+        id S233162AbiAaOW0 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 31 Jan 2022 09:22:26 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:35194 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1358491AbiAaLAg (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Mon, 31 Jan 2022 06:00:36 -0500
-Received: from mail-io1-xd43.google.com (mail-io1-xd43.google.com [IPv6:2607:f8b0:4864:20::d43])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id F0A89C0613F5
-        for <linux-doc@vger.kernel.org>; Mon, 31 Jan 2022 02:59:46 -0800 (PST)
-Received: by mail-io1-xd43.google.com with SMTP id y84so16423278iof.0
-        for <linux-doc@vger.kernel.org>; Mon, 31 Jan 2022 02:59:46 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=mime-version:reply-to:sender:from:date:message-id:subject:to
-         :content-transfer-encoding;
-        bh=FANIUiWvB3mdY3zLX2DODg2pUIL5eGT5wlydl6jYk40=;
-        b=OjUeAkMVzEddLMMo5PnTCjKyhCs1ageGmC5+cFdXpsSEtg6JbUDTvXCRmwfTUCSofJ
-         slj36zZmhn3J4uwPw0DJBjnv3hUS5m+nEauuYDUNcCWjc1f+d0I+yOjKIUc0Pgz+j5Ue
-         rRdRGfWkjcSXGfwT+M+UDneKFOQe0c6aLr+5TauC2FupNgb1qyGc5yiIkJ8k0NAmHZhf
-         anrjd59/OgrastnWs4ZkrvFaIDjw5pd3eh107tNZ/TuMjnW3micCxNZKM2MDkg13GKwm
-         O5Q6tfm8j18o2CLpoCl1kG865M+uxrSOQqgPJI+OJu79ECke4sTf94bEwDsB5fZLVwuG
-         tdrw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=x-gm-message-state:mime-version:reply-to:sender:from:date
-         :message-id:subject:to:content-transfer-encoding;
-        bh=FANIUiWvB3mdY3zLX2DODg2pUIL5eGT5wlydl6jYk40=;
-        b=TwNP0+unV0nJpmrL3UQ9vG8EIZSRcHGgzUQ11SYybor15RSC5Mr8KU77X+QBiblP0u
-         92rvwJonUIIqQJmBqGNgjhjKT+itOBndg8KyshWCozX//cPKHn3QAhZ36xKQ69q0MBW/
-         WPXWgMTevF9HinQjURBgzHli9OmnjvJdSjq/RQEydtGiN02VKeI6BdNsFRmkb+PVAioa
-         YT2AyWk3JwPjYdqNT7+jbpLOMQEcQorsgopd/TfnnXaiThXnSvk51uvUHdQoQmwcWaD5
-         sBlp6wtbm76E6Ch5hrTcQEAntqJzbJA2/SIyTUu/Zn4kGTFOZHnar1URNoZv5LWIQ29V
-         fvCQ==
-X-Gm-Message-State: AOAM532vn4UK6STXjlypDgB4ae4VwUDliq3GZHc3TS98mnxoLzIwDbjR
-        wKF+jUPbL8Zmy4ZWjp9UpL87rfeyxZ9O3L1eIhQ=
-X-Google-Smtp-Source: ABdhPJx07OLMUPeEc0ImjaiJBKF2Mcc3ZmsWTIoSvX2FNfz03c1HE0RFqesREnjvPqYHKyL/ALkhu5ugV57XI3T5t/k=
-X-Received: by 2002:a6b:441a:: with SMTP id r26mr10856124ioa.211.1643626786286;
- Mon, 31 Jan 2022 02:59:46 -0800 (PST)
+        with ESMTP id S233412AbiAaOW0 (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Mon, 31 Jan 2022 09:22:26 -0500
+Received: from wp530.webpack.hosteurope.de (wp530.webpack.hosteurope.de [IPv6:2a01:488:42:1000:50ed:8234::])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id EECD1C061714;
+        Mon, 31 Jan 2022 06:22:25 -0800 (PST)
+Received: from ip4d144895.dynamic.kabel-deutschland.de ([77.20.72.149] helo=[192.168.66.200]); authenticated
+        by wp530.webpack.hosteurope.de running ExIM with esmtpsa (TLS1.3:ECDHE_RSA_AES_128_GCM_SHA256:128)
+        id 1nEXZX-00074h-C5; Mon, 31 Jan 2022 15:22:23 +0100
+Message-ID: <00f73105-da64-f62b-866c-00828d8701ba@leemhuis.info>
+Date:   Mon, 31 Jan 2022 15:22:22 +0100
 MIME-Version: 1.0
-Reply-To: daniellakyle60@gmail.com
-Sender: drdanielmorris11111@gmail.com
-Received: by 2002:a05:6638:1248:0:0:0:0 with HTTP; Mon, 31 Jan 2022 02:59:45
- -0800 (PST)
-From:   Mrs daniell akyle <daniellakyle60@gmail.com>
-Date:   Mon, 31 Jan 2022 11:59:45 +0100
-X-Google-Sender-Auth: xE_x512-NJSetLeK1z_d90RC9Q0
-Message-ID: <CAKFcj-P8h0HeDMtZZnog7Sh8cFMKV7095BN2fQnUMpCGPgmhFg@mail.gmail.com>
-Subject: Ahoj
-To:     undisclosed-recipients:;
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
+ Thunderbird/91.5.0
+Content-Language: en-BS
+From:   Thorsten Leemhuis <linux@leemhuis.info>
+To:     Jonathan Corbet <corbet@lwn.net>, linux-doc@vger.kernel.org,
+        Linus Torvalds <torvalds@linux-foundation.org>
+Cc:     workflows@vger.kernel.org,
+        Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
+        Randy Dunlap <rdunlap@infradead.org>,
+        regressions@lists.linux.dev,
+        Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+        Lukas Bulwahn <lukas.bulwahn@gmail.com>
+References: <cover.1643110442.git.linux@leemhuis.info>
+ <f97738d6250050bc982bf2947587f1c73f37446f.1643110442.git.linux@leemhuis.info>
+ <87sftbwemg.fsf@meer.lwn.net>
+ <c8d7228a-2df5-df92-6d53-c3e940274dad@leemhuis.info>
+Subject: Re: [PATCH v3 1/2] docs: add a document about regression handling
+In-Reply-To: <c8d7228a-2df5-df92-6d53-c3e940274dad@leemhuis.info>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+X-bounce-key: webpack.hosteurope.de;linux@leemhuis.info;1643638946;ed0d6898;
+X-HE-SMSGID: 1nEXZX-00074h-C5
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Pozdravy
-Jmenuji se pan=C3=AD Daniella Kyleov=C3=A1, je mi 58 let
-Filip=C3=ADny. V sou=C4=8Dasn=C3=A9 dob=C4=9B jsem hospitalizov=C3=A1n na F=
-ilip=C3=ADn=C3=A1ch, kde jsem
-podstupuje l=C3=A9=C4=8Dbu akutn=C3=ADho karcinomu j=C3=ADcnu. jsem um=C3=
-=ADraj=C3=ADc=C3=AD,
-vdova, kter=C3=A1 se rozhodla darovat =C4=8D=C3=A1st sv=C3=A9ho majetku spo=
-lehliv=C3=A9 osob=C4=9B
-kter=C3=A1 tyto pen=C3=ADze pou=C5=BEije na pomoc chud=C3=BDm a m=C3=A9n=C4=
-=9B privilegovan=C3=BDm. Chci
-poskytnout dar ve v=C3=BD=C5=A1i 3 700 000 =C2=A3 na sirotky nebo charitati=
-vn=C3=AD organizace
-ve va=C5=A1=C3=AD oblasti. Zvl=C3=A1dne=C5=A1 to? Pokud jste ochotni tuto n=
-ab=C3=ADdku p=C5=99ijmout
-a ud=C4=9Blejte p=C5=99esn=C4=9B tak, jak v=C3=A1m =C5=99=C3=ADk=C3=A1m, pa=
-k se mi vra=C5=A5te pro dal=C5=A1=C3=AD vysv=C4=9Btlen=C3=AD.
-pozdravy
-Pan=C3=AD Daniella Kyleov=C3=A1
+On 26.01.22 15:10, Thorsten Leemhuis wrote:
+> 
+> On 26.01.22 00:59, Jonathan Corbet wrote:
+>> Thorsten Leemhuis <linux@leemhuis.info> writes:
+
+>>> +   Note: Only the content of this RST file as found in the Linux kernel sources
+>>> +   is available under CC-BY-4.0, as versions of this text that were processed
+>>> +   (for example by the kernel's build system) might contain content taken from
+>>> +   files which use a more restrictive license.
+>>
+>> I wonder if we could put this boilerplate at the bottom, with a single
+>> "see the bottom for redistribution information" line here?  Most readers
+>> won't care about this stuff and shouldn't have to slog through it to get
+>> to what they want to read.
+> 
+> Totally fine with me. When I touch reporting-issues.rst the next time
+> I'll move it downwards as well.
+
+V4 will do that, as I added a patch to point from reporting-issues.rst
+to one of the two new documents.
+
+>>> +The important bits for people affected by regressions
+>>> +=====================================================
+>>> +
+>>> +It's a regression if something running fine with one Linux kernel works worse or
+>>> +not at all with a newer version. Note, the newer kernel has to be compiled using
+>>> +a similar configuration -- for this and other fine print, check out below
+>>> +section "What is a 'regression' and what is the 'no regressions rule'?".
+>> Can we be consistent with either single or double quotes?  I'd suggest
+>> "double quotes" but won't make a fuss about that.
+> 
+> Changed to "double quotes" everywhere in the text. But just to make sure
+> I get things right: in this particular case this will result in
+> 
+> ...section "What is a "regression" and what is the "no regressions rule"?".
+> 
+> This looks a bit strange to me. Something in me really would like to
+> quote the section's header in single quotes, but I guess grammar rules
+> do not allow that, so whatever. :-D
+
+I changed something and now simply don't mentioned the section names to
+avoid this problem. After the split that's not strictly needed afaics.
+
+>>> +Report your regression as outlined in
+>>> +`Documentation/admin-guide/reporting-issues.rst`, it already covers all aspects
+>> No need to quote the file name.
+> Okay, I thought I had seen some commit or instructions that it's better
+> to use them in this case, but my brain must have imagined it.
+
+I noticed I quoted internal references in reporting-issues.rst quite
+often. IMHO it improves readability sometimes (it depends a lot on the
+title of the target document), as can be seen in this example:
+
+```
+If your kernel is tainted, study
+'Documentation/admin-guide/tainted-kernels.rst' to find out why.
+[...]
+To find the change there is a process called 'bisection' which the document
+'Documentation/admin-guide/bug-bisect.rst' describes in detail.
+```
+
+after processing to HTML looks like this:
+
+```
+If your kernel is tainted, study 'Tainted kernels' to find out why.
+[...]
+To find the change there is a process called ‘bisection’ which the
+document ‘Bisecting a bug’ describes in detail.
+```
+
+Sure, "Tainted kernels" and "Bisecting a bug" are links and hence
+displayed differently by the browser, but I think the quotes help. But YMMV.
+
+I sooner or later hope to improve and fix a few things in
+reporting-issues.rst anyway. Let me know if I should take the
+opportunity to remove the single quotes then.
+
+>>> +Who needs to find the commit causing a regression?
+>>> +~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+>>> +
+>>> +It's the reporter's duty to find the culprit, but developers of the affected
+>>> +subsystem should offer advice and reasonably help where they can.
+>>
+>> Is it really our policy that *reporters* need to find the offending
+>> commit?  That's certainly not my view of things, anyway?
+
+BTW, I noticed reporting-issues.rst covers it like this:
+
+Normally it's up to the reporter to track down the culprit, as
+maintainers often won't have the time or setup at hand to reproduce it
+themselves.
+
+> Well, do we have something on that written down somewhere or a few
+> quotes from Linus that might help to clarify things?
+> 
+> Anyway: I was not totally happy with it either, as I found the first
+> part of the sentence to strong, and the second to soft. But I had
+> trouble finding something better, maybe a native speaker could help out
+> here. Maybe something along these lines?
+
+I plan to go with this now:
+```
+Who needs to find the root cause of a regression?
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Developers of the affected code area should try to locate the culprit on
+their own. But for them that's often impossible to do with reasonable
+effort, as quite a lot of issues only occur in a particular environment
+outside the developer's reach -- for example, a specific hardware
+platform, firmware, Linux distro, system's configuration, or
+application. That's why in the end it's often up to the reporter to
+locate the culprit commit; sometimes users might even need to run
+additional tests afterwards to pinpoint the exact root cause. Developers
+should offer advice and reasonably help where they can, to make this
+process relatively easy and achievable for typical users.
+```
+
+Ciao, Thorsten
