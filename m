@@ -2,149 +2,129 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id AE7484A59F4
-	for <lists+linux-doc@lfdr.de>; Tue,  1 Feb 2022 11:26:51 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id ECD0B4A5BAF
+	for <lists+linux-doc@lfdr.de>; Tue,  1 Feb 2022 13:01:35 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S236209AbiBAK0o (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 1 Feb 2022 05:26:44 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:54350 "EHLO
-        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S235817AbiBAK0n (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 1 Feb 2022 05:26:43 -0500
-Received: from wp530.webpack.hosteurope.de (wp530.webpack.hosteurope.de [IPv6:2a01:488:42:1000:50ed:8234::])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 547F4C06173E;
-        Tue,  1 Feb 2022 02:26:43 -0800 (PST)
-Received: from ip4d144895.dynamic.kabel-deutschland.de ([77.20.72.149] helo=truhe.fritz.box); authenticated
-        by wp530.webpack.hosteurope.de running ExIM with esmtpsa (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256)
-        id 1nEqMz-0002pB-51; Tue, 01 Feb 2022 11:26:41 +0100
-From:   Thorsten Leemhuis <linux@leemhuis.info>
-To:     linux-doc@vger.kernel.org,
-        Linus Torvalds <torvalds@linux-foundation.org>
-Cc:     workflows@vger.kernel.org,
-        Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
-        Jonathan Corbet <corbet@lwn.net>,
-        Randy Dunlap <rdunlap@infradead.org>,
-        regressions@lists.linux.dev,
-        Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
-        Lukas Bulwahn <lukas.bulwahn@gmail.com>
-Subject: [PATCH v4 3/3] docs: reporting-issues.rst: link new document about regressions
-Date:   Tue,  1 Feb 2022 11:26:39 +0100
-Message-Id: <978ad91647e93b20b7fe12c3f237f6de8f9eaca1.1643710947.git.linux@leemhuis.info>
-X-Mailer: git-send-email 2.31.1
-In-Reply-To: <cover.1643710947.git.linux@leemhuis.info>
-References: <cover.1643710947.git.linux@leemhuis.info>
+        id S237412AbiBAMBe (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 1 Feb 2022 07:01:34 -0500
+Received: from mga09.intel.com ([134.134.136.24]:25834 "EHLO mga09.intel.com"
+        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
+        id S237302AbiBAMBe (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Tue, 1 Feb 2022 07:01:34 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1643716894; x=1675252894;
+  h=from:to:cc:subject:in-reply-to:references:date:
+   message-id:mime-version;
+  bh=xK2CPhJ2c7fDqeNTYNEdi9CV6bv+gk4dlygHqA4TWpQ=;
+  b=X5kHoSuj6Qpy4XZHj2DMOyq6w4z0kARlL+xHFenNpIDX3tj2aQMYbMdg
+   ntveatj1gXdxlGuMm1iS2RC7mheX8riX6QcCBpgI7I/1Orz4hSBuZKmBF
+   kMukqZHvqnKdivxWtj/bayuntZqoN9/STPYwecl43ih5rN+v/R1M7h9Lh
+   0H0Z2MrSM7WiIfbH7zj4aYmCxfI7LHfCSIjRMN0xDluFgzK1TyJ7qltKq
+   DpRtn+z5UWTe1vU3jOq0IwD9pAbqIs7/8I28y1pzH/5oQMqkohd0QEzsy
+   NHT8PI7ACU7Ka2aREGW/G+TZlx/7nY7X1hEdGieZfNz9mUZ9PeU4Cs202
+   A==;
+X-IronPort-AV: E=McAfee;i="6200,9189,10244"; a="247446257"
+X-IronPort-AV: E=Sophos;i="5.88,333,1635231600"; 
+   d="scan'208";a="247446257"
+Received: from orsmga007.jf.intel.com ([10.7.209.58])
+  by orsmga102.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 01 Feb 2022 04:01:32 -0800
+X-IronPort-AV: E=Sophos;i="5.88,333,1635231600"; 
+   d="scan'208";a="523030836"
+Received: from ehanosko-mobl.ger.corp.intel.com (HELO localhost) ([10.252.6.3])
+  by orsmga007-auth.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 01 Feb 2022 04:01:26 -0800
+From:   Jani Nikula <jani.nikula@linux.intel.com>
+To:     Kees Cook <keescook@chromium.org>, Jonathan Corbet <corbet@lwn.net>
+Cc:     Kees Cook <keescook@chromium.org>,
+        Linus Torvalds <torvalds@linux-foundation.org>,
+        Martin Uecker <Martin.Uecker@med.uni-goettingen.de>,
+        Ingo Molnar <mingo@kernel.org>,
+        Miguel Ojeda <miguel.ojeda.sandonis@gmail.com>,
+        Rikard Falkeborn <rikard.falkeborn@gmail.com>,
+        Arnd Bergmann <arnd@arndb.de>, linux-doc@vger.kernel.org,
+        Tetsuo Handa <penguin-kernel@I-love.SAKURA.ne.jp>,
+        Andrew Morton <akpm@linux-foundation.org>,
+        Andy Shevchenko <andy.shevchenko@gmail.com>,
+        Nick Desaulniers <ndesaulniers@google.com>,
+        "Gustavo A. R. Silva" <gustavoars@kernel.org>,
+        linux-kernel@vger.kernel.org, linux-hardening@vger.kernel.org
+Subject: Re: [PATCH] linux/const.h: Explain how __is_constexpr() works
+In-Reply-To: <20220131204357.1133674-1-keescook@chromium.org>
+Organization: Intel Finland Oy - BIC 0357606-4 - Westendinkatu 7, 02160 Espoo
+References: <20220131204357.1133674-1-keescook@chromium.org>
+Date:   Tue, 01 Feb 2022 14:01:24 +0200
+Message-ID: <871r0mvlrf.fsf@intel.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-bounce-key: webpack.hosteurope.de;linux@leemhuis.info;1643711203;661d3094;
-X-HE-SMSGID: 1nEqMz-0002pB-51
+Content-Type: text/plain
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Make Documentation/admin-guide/reporting-issues.rst point to the newly
-created document about regressions
-(Documentation/admin-guide/regressions-users.rst). This allows to
-shorten a few explanations the new document describes better and in more
-detail.
+On Mon, 31 Jan 2022, Kees Cook <keescook@chromium.org> wrote:
+> The __is_constexpr() macro is dark magic. Shed some light on it with
+> a comment to explain how and why it works.
+>
+> Cc: Jonathan Corbet <corbet@lwn.net>
+> Cc: Linus Torvalds <torvalds@linux-foundation.org>
+> Cc: Martin Uecker <Martin.Uecker@med.uni-goettingen.de>
+> Cc: Ingo Molnar <mingo@kernel.org>
+> Cc: Miguel Ojeda <miguel.ojeda.sandonis@gmail.com>
+> Cc: Rikard Falkeborn <rikard.falkeborn@gmail.com>
+> Cc: Arnd Bergmann <arnd@arndb.de>
+> Cc: linux-doc@vger.kernel.org
+> Signed-off-by: Kees Cook <keescook@chromium.org>
+> ---
+> Jon, since this is pure comment, do you want to take it through the docs tree?
+> ---
+>  include/linux/const.h | 24 ++++++++++++++++++++++++
+>  1 file changed, 24 insertions(+)
+>
+> diff --git a/include/linux/const.h b/include/linux/const.h
+> index 435ddd72d2c4..7122d6a1f8ce 100644
+> --- a/include/linux/const.h
+> +++ b/include/linux/const.h
+> @@ -7,6 +7,30 @@
+>   * This returns a constant expression while determining if an argument is
+>   * a constant expression, most importantly without evaluating the argument.
+>   * Glory to Martin Uecker <Martin.Uecker@med.uni-goettingen.de>
+> + *
+> + * Details:
+> + * - sizeof() is an integer constant expression, and does not evaluate the
+> + *   value of its operand; it only examines the type of its operand.
+> + * - The results of comparing two integer constant expressions is also
+> + *   an integer constant expression.
+> + * - The use of literal "8" is to avoid warnings about unaligned pointers;
+> + *   these could otherwise just be "1"s.
 
-While at it move the copyright hint to the end of the file, as suggested
-during review of the new documents about regressions.
+I thought the first literal 8 was just for looks, and it mattered only
+for the last literal 8.
 
-Signed-off-by: Thorsten Leemhuis <linux@leemhuis.info>
----
- .../admin-guide/reporting-issues.rst          | 60 +++++++++----------
- 1 file changed, 29 insertions(+), 31 deletions(-)
+It's been a while when I looked all of this up, but this pretty much
+matches what I remember. LGTM.
 
-diff --git a/Documentation/admin-guide/reporting-issues.rst b/Documentation/admin-guide/reporting-issues.rst
-index d7ac13f789cc..3122c5a2fb66 100644
---- a/Documentation/admin-guide/reporting-issues.rst
-+++ b/Documentation/admin-guide/reporting-issues.rst
-@@ -1,14 +1,5 @@
- .. SPDX-License-Identifier: (GPL-2.0+ OR CC-BY-4.0)
--..
--   If you want to distribute this text under CC-BY-4.0 only, please use 'The
--   Linux kernel developers' for author attribution and link this as source:
--   https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/plain/Documentation/admin-guide/reporting-issues.rst
--..
--   Note: Only the content of this RST file as found in the Linux kernel sources
--   is available under CC-BY-4.0, as versions of this text that were processed
--   (for example by the kernel's build system) might contain content taken from
--   files which use a more restrictive license.
--
-+.. See the bottom of this file for additional redistribution information.
- 
- Reporting issues
- ++++++++++++++++
-@@ -395,19 +386,13 @@ fixed as soon as possible, hence there are 'issues of high priority' that get
- handled slightly differently in the reporting process. Three type of cases
- qualify: regressions, security issues, and really severe problems.
- 
--You deal with a 'regression' if something that worked with an older version of
--the Linux kernel does not work with a newer one or somehow works worse with it.
--It thus is a regression when a WiFi driver that did a fine job with Linux 5.7
--somehow misbehaves with 5.8 or doesn't work at all. It's also a regression if
--an application shows erratic behavior with a newer kernel, which might happen
--due to incompatible changes in the interface between the kernel and the
--userland (like procfs and sysfs). Significantly reduced performance or
--increased power consumption also qualify as regression. But keep in mind: the
--new kernel needs to be built with a configuration that is similar to the one
--from the old kernel (see below how to achieve that). That's because the kernel
--developers sometimes can not avoid incompatibilities when implementing new
--features; but to avoid regressions such features have to be enabled explicitly
--during build time configuration.
-+You deal with a regression if some application or practical use case running
-+fine with one Linux kernel works worse or not at all with a newer version
-+compiled using a similar configuration. The document
-+'Documentation/admin-guide/regressions-users.rst' explains this in more detail.
-+It also provides a good deal of other information about regressions you might
-+want to be aware of; it for example explains how to add your issue to the list
-+of tracked regressions, to ensure it won't fall through the cracks.
- 
- What qualifies as security issue is left to your judgment. Consider reading
- 'Documentation/admin-guide/security-bugs.rst' before proceeding, as it
-@@ -1073,10 +1058,10 @@ When dealing with regressions make sure the issue you face is really caused by
- the kernel and not by something else, as outlined above already.
- 
- In the whole process keep in mind: an issue only qualifies as regression if the
--older and the newer kernel got built with a similar configuration. The best way
--to archive this: copy the configuration file (``.config``) from the old working
--kernel freshly to each newer kernel version you try. Afterwards run ``make
--olddefconfig`` to adjust it for the needs of the new version.
-+older and the newer kernel got built with a similar configuration. This can be
-+achieved by using ``make olddefconfig``, as explained in more detail by
-+Documentation/admin-guide/regressions-users.rst; that document also provides a
-+good deal of other information about regressions you might want to be aware of.
- 
- 
- Write and send the report
-@@ -1756,10 +1741,23 @@ art will lay some groundwork to improve the situation over time.
- 
- 
- ..
--   This text is maintained by Thorsten Leemhuis <linux@leemhuis.info>. If you
--   spot a typo or small mistake, feel free to let him know directly and he'll
--   fix it. You are free to do the same in a mostly informal way if you want
--   to contribute changes to the text, but for copyright reasons please CC
-+   end-of-content
-+..
-+   This document is maintained by Thorsten Leemhuis <linux@leemhuis.info>. If
-+   you spot a typo or small mistake, feel free to let him know directly and
-+   he'll fix it. You are free to do the same in a mostly informal way if you
-+   want to contribute changes to the text, but for copyright reasons please CC
-    linux-doc@vger.kernel.org and "sign-off" your contribution as
-    Documentation/process/submitting-patches.rst outlines in the section "Sign
-    your work - the Developer's Certificate of Origin".
-+..
-+   This text is available under GPL-2.0+ or CC-BY-4.0, as stated at the top
-+   of the file. If you want to distribute this text under CC-BY-4.0 only,
-+   please use "The Linux kernel developers" for author attribution and link
-+   this as source:
-+   https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/plain/Documentation/admin-guide/reporting-issues.rst
-+..
-+   Note: Only the content of this RST file as found in the Linux kernel sources
-+   is available under CC-BY-4.0, as versions of this text that were processed
-+   (for example by the kernel's build system) might contain content taken from
-+   files which use a more restrictive license.
+BR,
+Jani.
+
+
+> + * - (long)(x) is used to avoid warnings about 64-bit types on 32-bit
+> + *   architectures.
+> + * - The C standard defines an "integer constant expression" as different
+> + *   from a "null pointer constant" (an integer constant 0 pointer).
+> + * - The conditional operator ("... ? ... : ...") returns the type of the
+> + *   operand that isn't a null pointer constant. This behavior is the
+> + *   central mechanism of the macro.
+> + * - If (x) is an integer constant expression, then the "* 0l" resolves it
+> + *   into a null pointer constant, which forces the conditional operator
+> + *   to return the type of the last operand: "(int *)".
+> + * - If (x) is not an integer constant expression, then the type of the
+> + *   conditional operator is from the first operand: "(void *)".
+> + * - sizeof(int) == 4 and sizeof(void) == 1.
+> + * - The ultimate comparison to "sizeof(int)" chooses between either:
+> + *     sizeof(*((int *) (8)) == sizeof(int)   (x was a constant expression)
+> + *     sizeof(*((void *)(8)) == sizeof(void)  (x was not a constant expression)
+>   */
+>  #define __is_constexpr(x) \
+>  	(sizeof(int) == sizeof(*(8 ? ((void *)((long)(x) * 0l)) : (int *)8)))
+
 -- 
-2.31.1
-
+Jani Nikula, Intel Open Source Graphics Center
