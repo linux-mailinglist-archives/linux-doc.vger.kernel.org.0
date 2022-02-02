@@ -2,190 +2,90 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 59BB04A73EC
-	for <lists+linux-doc@lfdr.de>; Wed,  2 Feb 2022 15:56:55 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 194184A74D7
+	for <lists+linux-doc@lfdr.de>; Wed,  2 Feb 2022 16:43:08 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S236271AbiBBO4Q (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 2 Feb 2022 09:56:16 -0500
-Received: from mga11.intel.com ([192.55.52.93]:31889 "EHLO mga11.intel.com"
-        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S236109AbiBBO4P (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Wed, 2 Feb 2022 09:56:15 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1643813775; x=1675349775;
-  h=from:to:cc:subject:date:message-id:in-reply-to:
-   references:mime-version:content-transfer-encoding;
-  bh=QMYVyv1FTscgpmw+LGMru7OffCk/NusVJ0zbwclwbtY=;
-  b=mvO5RLyGnkqLP+YcSHi9g5NW5sePYGpX3m8HVHGjp+NseXTk8fvol/8Y
-   l76f4N0Di2P1kLX4lzrRvGEO5r5Ylrf1VOkiZfct69aKBke17u4apw4h8
-   KoEZQNVjvIfijrzffWxqTZA5tUZ0PSo80hVrceYnmL/h76YS6j0kwM73i
-   1lTdeM08r3roQ2DsH8/TKJAk4teVOhrFdfkednmAy5aD6f7opIejbo6Oa
-   VAHL1kdMI8XuDbNNnevCWnZOoRDHa9BOyEiqOoCtmMfnQL7+EK2+UT+cf
-   vfLNL4Y6zeyed8K0+0dgcj03lY5beJGYVCycdxgGKAJtkSEXxFF4IksDb
-   w==;
-X-IronPort-AV: E=McAfee;i="6200,9189,10245"; a="245524673"
-X-IronPort-AV: E=Sophos;i="5.88,337,1635231600"; 
-   d="scan'208";a="245524673"
-Received: from fmsmga001.fm.intel.com ([10.253.24.23])
-  by fmsmga102.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 02 Feb 2022 06:56:15 -0800
-X-IronPort-AV: E=Sophos;i="5.88,337,1635231600"; 
-   d="scan'208";a="676456570"
-Received: from mwnuczyn-mobl.ger.corp.intel.com (HELO localhost) ([10.249.137.160])
-  by fmsmga001-auth.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 02 Feb 2022 06:56:05 -0800
-From:   Iwona Winiarska <iwona.winiarska@intel.com>
-To:     linux-kernel@vger.kernel.org, openbmc@lists.ozlabs.org,
-        Greg Kroah-Hartman <gregkh@linuxfoundation.org>
-Cc:     devicetree@vger.kernel.org, linux-aspeed@lists.ozlabs.org,
-        linux-arm-kernel@lists.infradead.org, linux-hwmon@vger.kernel.org,
-        linux-doc@vger.kernel.org, Rob Herring <robh+dt@kernel.org>,
-        Joel Stanley <joel@jms.id.au>,
-        Andrew Jeffery <andrew@aj.id.au>,
-        Jean Delvare <jdelvare@suse.com>,
-        Guenter Roeck <linux@roeck-us.net>,
-        Arnd Bergmann <arnd@arndb.de>, Olof Johansson <olof@lixom.net>,
-        Jonathan Corbet <corbet@lwn.net>,
-        Borislav Petkov <bp@alien8.de>,
-        Pierre-Louis Bossart <pierre-louis.bossart@linux.intel.com>,
-        Tony Luck <tony.luck@intel.com>,
-        Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
-        Dan Williams <dan.j.williams@intel.com>,
-        Randy Dunlap <rdunlap@infradead.org>,
-        Zev Weiss <zweiss@equinix.com>,
-        David Muller <d.mueller@elsoft.ch>,
-        Dave Hansen <dave.hansen@intel.com>,
-        Billy Tsai <billy_tsai@aspeedtech.com>,
-        Iwona Winiarska <iwona.winiarska@intel.com>
-Subject: [PATCH v7 13/13] docs: Add PECI documentation
-Date:   Wed,  2 Feb 2022 15:48:38 +0100
-Message-Id: <20220202144838.163875-14-iwona.winiarska@intel.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20220202144838.163875-1-iwona.winiarska@intel.com>
-References: <20220202144838.163875-1-iwona.winiarska@intel.com>
+        id S1345545AbiBBPnG (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 2 Feb 2022 10:43:06 -0500
+Received: from mail1.med.uni-goettingen.de ([134.76.103.230]:35205 "EHLO
+        mail1.med.uni-goettingen.de" rhost-flags-OK-OK-OK-OK)
+        by vger.kernel.org with ESMTP id S230307AbiBBPnG (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Wed, 2 Feb 2022 10:43:06 -0500
+Received: from umg-exc-04.ads.local.med.uni-goettingen.de ([10.76.100.73]:64300)
+        by mail1.med.uni-goettingen.de with esmtps  (TLS1.2) tls TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256
+        (Exim 4.94.2)
+        (envelope-from <Martin.Uecker@med.uni-goettingen.de>)
+        id 1nFHmg-0007Re-1Y; Wed, 02 Feb 2022 16:43:02 +0100
+Received: from umg-exc-01.ads.local.med.uni-goettingen.de (10.76.100.74) by
+ umg-exc-04.ads.local.med.uni-goettingen.de (10.76.100.73) with Microsoft SMTP
+ Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2375.18; Wed, 2 Feb 2022 16:43:02 +0100
+Received: from umg-exc-01.ads.local.med.uni-goettingen.de
+ ([fe80::2886:b6b:10e3:deea]) by umg-exc-01.ads.local.med.uni-goettingen.de
+ ([fe80::2886:b6b:10e3:deea%13]) with mapi id 15.01.2375.018; Wed, 2 Feb 2022
+ 16:43:02 +0100
+From:   "Uecker, Martin" <Martin.Uecker@med.uni-goettingen.de>
+To:     "keescook@chromium.org" <keescook@chromium.org>,
+        "linux@rasmusvillemoes.dk" <linux@rasmusvillemoes.dk>,
+        "corbet@lwn.net" <corbet@lwn.net>,
+        "David.Laight@ACULAB.COM" <David.Laight@ACULAB.COM>
+CC:     "mingo@kernel.org" <mingo@kernel.org>,
+        "rikard.falkeborn@gmail.com" <rikard.falkeborn@gmail.com>,
+        "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
+        "linux-hardening@vger.kernel.org" <linux-hardening@vger.kernel.org>,
+        "torvalds@linux-foundation.org" <torvalds@linux-foundation.org>,
+        "miguel.ojeda.sandonis@gmail.com" <miguel.ojeda.sandonis@gmail.com>,
+        "gustavoars@kernel.org" <gustavoars@kernel.org>,
+        "penguin-kernel@I-love.SAKURA.ne.jp" 
+        <penguin-kernel@I-love.SAKURA.ne.jp>,
+        "andy.shevchenko@gmail.com" <andy.shevchenko@gmail.com>,
+        "akpm@linux-foundation.org" <akpm@linux-foundation.org>,
+        "arnd@arndb.de" <arnd@arndb.de>,
+        "linux-doc@vger.kernel.org" <linux-doc@vger.kernel.org>,
+        "ndesaulniers@google.com" <ndesaulniers@google.com>
+Subject: Re: [PATCH] linux/const.h: Explain how __is_constexpr() works
+Thread-Topic: [PATCH] linux/const.h: Explain how __is_constexpr() works
+Thread-Index: AQHYFuNImz1ckbOr7ECuQj6wapZL5Kx+mliAgAFKtoCAAHOGgA==
+Date:   Wed, 2 Feb 2022 15:43:02 +0000
+Message-ID: <4eb192f15c9078984c5e05a9fdc85ab6a9611717.camel@med.uni-goettingen.de>
+References: <20220131204357.1133674-1-keescook@chromium.org>
+         <dc86fdf7-3202-e836-6f71-af1e2458b105@rasmusvillemoes.dk>
+         <8e166131c01b4fbc83a1ca95b83bc362@AcuMS.aculab.com>
+In-Reply-To: <8e166131c01b4fbc83a1ca95b83bc362@AcuMS.aculab.com>
+Accept-Language: de-DE, en-US
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [10.76.100.66]
+Content-Type: text/plain; charset="utf-8"
+Content-ID: <AEC27EED84726842A6C3EB7E92C45392@med.uni-goettingen.de>
+Content-Transfer-Encoding: base64
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Add a brief overview of PECI and PECI wire interface.
-The documentation also contains kernel-doc for PECI subsystem internals
-and PECI CPU Driver API.
-
-Signed-off-by: Iwona Winiarska <iwona.winiarska@intel.com>
-Reviewed-by: Pierre-Louis Bossart <pierre-louis.bossart@linux.intel.com>
----
- Documentation/index.rst      |  1 +
- Documentation/peci/index.rst | 16 +++++++++++
- Documentation/peci/peci.rst  | 51 ++++++++++++++++++++++++++++++++++++
- MAINTAINERS                  |  1 +
- 4 files changed, 69 insertions(+)
- create mode 100644 Documentation/peci/index.rst
- create mode 100644 Documentation/peci/peci.rst
-
-diff --git a/Documentation/index.rst b/Documentation/index.rst
-index b58692d687f6..1988c19d9daf 100644
---- a/Documentation/index.rst
-+++ b/Documentation/index.rst
-@@ -138,6 +138,7 @@ needed).
-    scheduler/index
-    mhi/index
-    tty/index
-+   peci/index
- 
- Architecture-agnostic documentation
- -----------------------------------
-diff --git a/Documentation/peci/index.rst b/Documentation/peci/index.rst
-new file mode 100644
-index 000000000000..989de10416e7
---- /dev/null
-+++ b/Documentation/peci/index.rst
-@@ -0,0 +1,16 @@
-+.. SPDX-License-Identifier: GPL-2.0-only
-+
-+====================
-+Linux PECI Subsystem
-+====================
-+
-+.. toctree::
-+
-+   peci
-+
-+.. only::  subproject and html
-+
-+   Indices
-+   =======
-+
-+   * :ref:`genindex`
-diff --git a/Documentation/peci/peci.rst b/Documentation/peci/peci.rst
-new file mode 100644
-index 000000000000..331b1ec00e22
---- /dev/null
-+++ b/Documentation/peci/peci.rst
-@@ -0,0 +1,51 @@
-+.. SPDX-License-Identifier: GPL-2.0-only
-+
-+========
-+Overview
-+========
-+
-+The Platform Environment Control Interface (PECI) is a communication
-+interface between Intel processor and management controllers
-+(e.g. Baseboard Management Controller, BMC).
-+PECI provides services that allow the management controller to
-+configure, monitor and debug platform by accessing various registers.
-+It defines a dedicated command protocol, where the management
-+controller is acting as a PECI originator and the processor - as
-+a PECI responder.
-+PECI can be used in both single processor and multiple-processor based
-+systems.
-+
-+NOTE:
-+Intel PECI specification is not released as a dedicated document,
-+instead it is a part of External Design Specification (EDS) for given
-+Intel CPU. External Design Specifications are usually not publicly
-+available.
-+
-+PECI Wire
-+---------
-+
-+PECI Wire interface uses a single wire for self-clocking and data
-+transfer. It does not require any additional control lines - the
-+physical layer is a self-clocked one-wire bus signal that begins each
-+bit with a driven, rising edge from an idle near zero volts. The
-+duration of the signal driven high allows to determine whether the bit
-+value is logic '0' or logic '1'. PECI Wire also includes variable data
-+rate established with every message.
-+
-+For PECI Wire, each processor package will utilize unique, fixed
-+addresses within a defined range and that address should
-+have a fixed relationship with the processor socket ID - if one of the
-+processors is removed, it does not affect addresses of remaining
-+processors.
-+
-+PECI subsystem internals
-+------------------------
-+
-+.. kernel-doc:: include/linux/peci.h
-+.. kernel-doc:: drivers/peci/internal.h
-+.. kernel-doc:: drivers/peci/core.c
-+.. kernel-doc:: drivers/peci/request.c
-+
-+PECI CPU Driver API
-+-------------------
-+.. kernel-doc:: drivers/peci/cpu.c
-diff --git a/MAINTAINERS b/MAINTAINERS
-index b7992853a427..23fba6b2609f 100644
---- a/MAINTAINERS
-+++ b/MAINTAINERS
-@@ -15117,6 +15117,7 @@ M:	Iwona Winiarska <iwona.winiarska@intel.com>
- L:	openbmc@lists.ozlabs.org (moderated for non-subscribers)
- S:	Supported
- F:	Documentation/devicetree/bindings/peci/
-+F:	Documentation/peci/
- F:	drivers/peci/
- F:	include/linux/peci-cpu.h
- F:	include/linux/peci.h
--- 
-2.34.1
-
+QW0gTWl0dHdvY2gsIGRlbiAwMi4wMi4yMDIyLCAwODo0OSArMDAwMCBzY2hyaWViIERhdmlkIExh
+aWdodDoNCj4gRnJvbTogUmFzbXVzIFZpbGxlbW9lcw0KPiA+IFNlbnQ6IDAxIEZlYnJ1YXJ5IDIw
+MjIgMTM6MDYNCj4gLi4uDQo+ID4gPiArICogLSBUaGUgQyBzdGFuZGFyZCBkZWZpbmVzIGFuICJp
+bnRlZ2VyIGNvbnN0YW50IGV4cHJlc3Npb24iIGFzIGRpZmZlcmVudA0KPiA+ID4gKyAqICAgZnJv
+bSBhICJudWxsIHBvaW50ZXIgY29uc3RhbnQiIChhbiBpbnRlZ2VyIGNvbnN0YW50IDAgcG9pbnRl
+cikuDQo+ID4gDQo+ID4gSSBkb24ndCBzZWUgdGhlIHBvaW50IG9mIHRoaXMgYnVsbGV0LiBZZXMs
+IGFuIElDRSBpcyBhIGRpc3RpbmN0IGNvbmNlcHQNCj4gPiBmcm9tIGEgbnVsbCBwb2ludGVyIGNv
+bnN0YW50LCBvYnZpb3VzbHkuIE9uZSBpcyBkZWZpbmVkIGluIHRlcm1zIG9mIHRoZQ0KPiA+IG90
+aGVyIC0gYW5kIHlvdXIgcGFyZW50aGVzaXMgaXMgbm90IGFuIGFjY3VyYXRlIHBhcmFwaHJhc2Ug
+b2YgdGhlDQo+ID4gZGVmaW5pdGlvbiBvZiBhIG51bGwgcG9pbnRlciBjb25zdGFudC4NCj4gDQo+
+IEZyb20gd2hhdCBJIHJlbWVtYmVyIGEgIm51bGwgcG9pbnRlciBjb25zdGFudCIgaXMgaW4gImlu
+dGVnZXIgY29uc3RhbnQNCj4gZXhwcmVzc2lvbiB3aXRoIHZhbHVlIDAgY2FzdCB0byBhIHBvaW50
+ZXIgdHlwZSIuDQo+IFNvICh2b2lkICopKDEtMSkgaXMganVzdCBhcyB2YWxpZCBhcyAodm9pZCAq
+KTAuDQo+IA0KPiBOb3Qgc3VyZSBhbnkgb2YgaXQgaXMgcmVsZXZhbnQgaGVyZS4NCg0KVGhlIEMg
+c3RhbmRhcmQgKGF0IGxlYXN0IHB1YmxpYyBkcmFmdHMgZXNzZW50aWFsbHkNCmlkZW50aWNhbCB0
+byB0aGUgYWN0dWFsIHN0YW5kYXJkcykgY2FuIGJlIGZvdW5kIGhlcmU6DQoNCmh0dHA6Ly93d3cu
+b3Blbi1zdGQub3JnL2p0YzEvc2MyMi93ZzE0L3d3dy9wcm9qZWN0cyM5ODk5DQoNCiJBbiBpbnRl
+Z2VyIGNvbnN0YW50IGV4cHJlc3Npb24gd2l0aCB0aGUgdmFsdWUgMCwgb3Igc3VjaA0KYW4gZXhw
+cmVzc2lvbiBjYXN0IHRvIHR5cGUgdm9pZCAqLCBpcyBjYWxsZWQgYSBudWxsIHBvaW50ZXINCmNv
+bnN0YW50LiINCg0KQlRXOiBJIHRoaW5rIGl0IHdvdWxkIGJlIHZlcnkgdmFsdWFibGUgaWYgV0cx
+NCB3b3VsZCBnZXQNCnByb3Bvc2FscyBhbmQvb3IgY29tbWVudHMgZnJvbSB0aGUga2VybmVsIGNv
+bW11bml0eS4NCg0KTWFydGluDQoNCg0KDQo+IAlEYXZpZA0KPiANCj4gLQ0KPiBSZWdpc3RlcmVk
+IEFkZHJlc3MgTGFrZXNpZGUsIEJyYW1sZXkgUm9hZCwgTW91bnQgRmFybSwgTWlsdG9uIEtleW5l
+cywgTUsxIDFQVCwgVUsNCj4gUmVnaXN0cmF0aW9uIE5vOiAxMzk3Mzg2IChXYWxlcykNCj4gDQo=
