@@ -2,121 +2,107 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id BEEC74A8DE2
-	for <lists+linux-doc@lfdr.de>; Thu,  3 Feb 2022 21:34:12 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id A812A4A8DA9
+	for <lists+linux-doc@lfdr.de>; Thu,  3 Feb 2022 21:32:30 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1354898AbiBCUdq (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 3 Feb 2022 15:33:46 -0500
-Received: from dfw.source.kernel.org ([139.178.84.217]:38566 "EHLO
-        dfw.source.kernel.org" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1354190AbiBCUck (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Thu, 3 Feb 2022 15:32:40 -0500
-Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
-        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
-        (No client certificate requested)
-        by dfw.source.kernel.org (Postfix) with ESMTPS id D677E61A73;
-        Thu,  3 Feb 2022 20:32:39 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id EBC8CC340E8;
-        Thu,  3 Feb 2022 20:32:37 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-        s=k20201202; t=1643920359;
-        bh=St+wTmNgQ1QtlSDwVf5nx7/fOXNFZrqz9ag6wMv9RjQ=;
-        h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-        b=Cc4jMFGLNnI3kpqS9igBiIAGm6vlYJG09Xo7MkyDUy8Qut3XhfvJmDiB/XViel0tx
-         RCbcztsl/l4VEPbtRT69r1t/I6NFIiimsYCETmv8fGIC8Ttr334dGnzjaT8NWWGWFP
-         S6GdQwIZtEzU+nXflW8rd1zCrMgXxdlxlXsfK2VL/ALY7ncbqMc87ks3WTGWPOybEF
-         t289JD7ls+8oszz6eEZkhjMvVYnF3R2QiY2PHvCMfmDnYkSUSnwgeqSocNoPIuCWbR
-         Lm9jx8wAydBgG7aKWqO1jX1/kTfYHHphrZ83bI+1QIMPvv29OBw2Vgx96LxQk/i3tv
-         a6IIWbJOXcNrg==
-From:   Sasha Levin <sashal@kernel.org>
-To:     linux-kernel@vger.kernel.org, stable@vger.kernel.org
-Cc:     James Morse <james.morse@arm.com>,
-        Catalin Marinas <catalin.marinas@arm.com>,
-        Sasha Levin <sashal@kernel.org>, will@kernel.org,
-        corbet@lwn.net, maz@kernel.org, suzuki.poulose@arm.com,
-        mark.rutland@arm.com, joey.gouly@arm.com,
-        linux-arm-kernel@lists.infradead.org, linux-doc@vger.kernel.org
-Subject: [PATCH AUTOSEL 5.16 50/52] arm64: cpufeature: List early Cortex-A510 parts as having broken dbm
-Date:   Thu,  3 Feb 2022 15:29:44 -0500
-Message-Id: <20220203202947.2304-50-sashal@kernel.org>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20220203202947.2304-1-sashal@kernel.org>
-References: <20220203202947.2304-1-sashal@kernel.org>
+        id S1354619AbiBCUcW (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 3 Feb 2022 15:32:22 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:57796 "EHLO
+        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1354319AbiBCUbc (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Thu, 3 Feb 2022 15:31:32 -0500
+Received: from mail-ed1-x52a.google.com (mail-ed1-x52a.google.com [IPv6:2a00:1450:4864:20::52a])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 43608C061757;
+        Thu,  3 Feb 2022 12:31:10 -0800 (PST)
+Received: by mail-ed1-x52a.google.com with SMTP id p12so8509980edq.9;
+        Thu, 03 Feb 2022 12:31:10 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112;
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=9ulW6uLO42kV5kik2BobfHbP7xAW9OLDANUtAn1JYzs=;
+        b=SK8QsZBnLVkBomK7z0ApY6hGnsrAxtcidnIG7no8x2umrDfnKYiFfQ4+n2/ig1Cx5r
+         lbN4n/bkZQHhNDH1nQ2LiA3bK/3Ni8n7gm/AORFz4Cw13bgeRRe0BauCUGRQzaksFnKZ
+         CV/ZrKHSvx4vpnpU6+kQRXE5adTxyyYaOxXpngx8t0+P1I/Gav1ZsJx62HiV7CZHc6V0
+         EARbMWJTrFh+J+5s6dpS/WwOuoum35xsljhxM2JvT4IVGWh3e2WUoeUedYvCbd7CPOi0
+         I12WLTNJPyNJnTBellnOa3+n9S3VYGYttrZ+AKNhxuWOLlJ12kQ7hdo8X0yTybY1G3s9
+         s+Ug==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=9ulW6uLO42kV5kik2BobfHbP7xAW9OLDANUtAn1JYzs=;
+        b=Szf3qyaPqMnAzVlq3Yy/JJ7B4OPeHwGghd+EnHx6OUugh3cg3MwMbhOGCuRdj+4N60
+         sz+/50j+EUuVkqZK11VpBeCZWG8jVrYkpGM/vkF9X7Ima6SBU4cwwI+kWca7QE02W3oq
+         db0PxUAjFkwzvIF1picO+zWy2gcvKKHkowMMIjyw2CXTzyuijg49QTG4s5QWFbWMxQ7T
+         1pFzQHgoR+6elilp3WX1vfwBUDiF6QYksxkyms3UNBJ2/y3ZDvxV1MQ1T4SxS4eke3xq
+         r4yOflyZe/fwwlDahssbwXiH1jrPY5SyP+QIfPgKIltgpOM36rWRrgei6PVBoQKvlC6J
+         uOKg==
+X-Gm-Message-State: AOAM530zhh3UoWlhaSiEZ2LOI8R0QLWxcRZAC3pBJLfIRKtj51nBHonO
+        IBhPTeSZcwxcGjABUJJmsUrUAgQ3MStpsA==
+X-Google-Smtp-Source: ABdhPJzrbjk4HOawDZkNhXaqZyUHm7t5dUA814bTJ08+jO3HwbGoPPIqIn3o98goz+AoB1LsIK7tCA==
+X-Received: by 2002:a50:aadd:: with SMTP id r29mr36849028edc.236.1643920268669;
+        Thu, 03 Feb 2022 12:31:08 -0800 (PST)
+Received: from tiger.museclub.art (p200300cf9f235800e668694710673d4b.dip0.t-ipconnect.de. [2003:cf:9f23:5800:e668:6947:1067:3d4b])
+        by smtp.googlemail.com with ESMTPSA id i14sm4688462edr.100.2022.02.03.12.31.07
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 03 Feb 2022 12:31:08 -0800 (PST)
+From:   Eugene Shalygin <eugene.shalygin@gmail.com>
+To:     eugene.shalygin@gmail.com
+Cc:     Jean Delvare <jdelvare@suse.com>,
+        Guenter Roeck <linux@roeck-us.net>,
+        Jonathan Corbet <corbet@lwn.net>, linux-hwmon@vger.kernel.org,
+        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org
+Subject: hwmon: (asus-ec-sensors) Add Crosshair VIII Hero WiFi
+Date:   Thu,  3 Feb 2022 21:30:52 +0100
+Message-Id: <20220203203052.441712-1-eugene.shalygin@gmail.com>
+X-Mailer: git-send-email 2.35.1
 MIME-Version: 1.0
-X-stable: review
-X-Patchwork-Hint: Ignore
 Content-Transfer-Encoding: 8bit
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-From: James Morse <james.morse@arm.com>
+The Wi-Fi variant of Crosshair VIII Hero provides the same sensors,
+which was tested by a Libre Hardware Monitor user [1].
 
-[ Upstream commit 297ae1eb23b04c5a46111ab53c8d0f69af43f402 ]
+[1] https://github.com/LibreHardwareMonitor/LibreHardwareMonitor/pull/453#issuecomment-1028398487
 
-Versions of Cortex-A510 before r0p3 are affected by a hardware erratum
-where the hardware update of the dirty bit is not correctly ordered.
-
-Add these cpus to the cpu_has_broken_dbm list.
-
-Signed-off-by: James Morse <james.morse@arm.com>
-Link: https://lore.kernel.org/r/20220125154040.549272-3-james.morse@arm.com
-Signed-off-by: Catalin Marinas <catalin.marinas@arm.com>
-Signed-off-by: Sasha Levin <sashal@kernel.org>
+Signed-off-by: Eugene Shalygin <eugene.shalygin@gmail.com>
 ---
- Documentation/arm64/silicon-errata.rst |  2 ++
- arch/arm64/Kconfig                     | 10 ++++++++++
- arch/arm64/kernel/cpufeature.c         |  3 +++
- 3 files changed, 15 insertions(+)
+ Documentation/hwmon/asus_ec_sensors.rst | 1 +
+ drivers/hwmon/asus-ec-sensors.c         | 6 ++++++
+ 2 files changed, 7 insertions(+)
 
-diff --git a/Documentation/arm64/silicon-errata.rst b/Documentation/arm64/silicon-errata.rst
-index 1b0e53ececda9..0ec7b7f1524b1 100644
---- a/Documentation/arm64/silicon-errata.rst
-+++ b/Documentation/arm64/silicon-errata.rst
-@@ -98,6 +98,8 @@ stable kernels.
- +----------------+-----------------+-----------------+-----------------------------+
- | ARM            | Cortex-A77      | #1508412        | ARM64_ERRATUM_1508412       |
- +----------------+-----------------+-----------------+-----------------------------+
-+| ARM            | Cortex-A510     | #2051678        | ARM64_ERRATUM_2051678       |
-++----------------+-----------------+-----------------+-----------------------------+
- | ARM            | Cortex-A710     | #2119858        | ARM64_ERRATUM_2119858       |
- +----------------+-----------------+-----------------+-----------------------------+
- | ARM            | Cortex-A710     | #2054223        | ARM64_ERRATUM_2054223       |
-diff --git a/arch/arm64/Kconfig b/arch/arm64/Kconfig
-index 7d710589e1818..38e7f19df14d4 100644
---- a/arch/arm64/Kconfig
-+++ b/arch/arm64/Kconfig
-@@ -670,6 +670,16 @@ config ARM64_ERRATUM_1508412
- config ARM64_WORKAROUND_TRBE_OVERWRITE_FILL_MODE
- 	bool
- 
-+config ARM64_ERRATUM_2051678
-+	bool "Cortex-A510: 2051678: disable Hardware Update of the page table dirty bit"
-+	help
-+	  This options adds the workaround for ARM Cortex-A510 erratum ARM64_ERRATUM_2051678.
-+	  Affected Coretex-A510 might not respect the ordering rules for
-+	  hardware update of the page table's dirty bit. The workaround
-+	  is to not enable the feature on affected CPUs.
-+
-+	  If unsure, say Y.
-+
- config ARM64_ERRATUM_2119858
- 	bool "Cortex-A710/X2: 2119858: workaround TRBE overwriting trace data in FILL mode"
- 	default y
-diff --git a/arch/arm64/kernel/cpufeature.c b/arch/arm64/kernel/cpufeature.c
-index 6f3e677d88f15..d18b953c078db 100644
---- a/arch/arm64/kernel/cpufeature.c
-+++ b/arch/arm64/kernel/cpufeature.c
-@@ -1634,6 +1634,9 @@ static bool cpu_has_broken_dbm(void)
- 		MIDR_ALL_VERSIONS(MIDR_CORTEX_A55),
- 		/* Kryo4xx Silver (rdpe => r1p0) */
- 		MIDR_REV(MIDR_QCOM_KRYO_4XX_SILVER, 0xd, 0xe),
-+#endif
-+#ifdef CONFIG_ARM64_ERRATUM_2051678
-+		MIDR_REV_RANGE(MIDR_CORTEX_A510, 0, 0, 2),
- #endif
- 		{},
- 	};
+diff --git a/Documentation/hwmon/asus_ec_sensors.rst b/Documentation/hwmon/asus_ec_sensors.rst
+index b12ac7ebeb1a..22de1b037cfb 100644
+--- a/Documentation/hwmon/asus_ec_sensors.rst
++++ b/Documentation/hwmon/asus_ec_sensors.rst
+@@ -7,6 +7,7 @@ Supported boards:
+  * PRIME X570-PRO,
+  * Pro WS X570-ACE,
+  * ROG CROSSHAIR VIII DARK HERO,
++ * ROG CROSSHAIR VIII HERO (WI-FI)
+  * ROG CROSSHAIR VIII FORMULA,
+  * ROG CROSSHAIR VIII HERO,
+  * ROG CROSSHAIR VIII IMPACT,
+diff --git a/drivers/hwmon/asus-ec-sensors.c b/drivers/hwmon/asus-ec-sensors.c
+index 7285334c7d80..05244209c0c6 100644
+--- a/drivers/hwmon/asus-ec-sensors.c
++++ b/drivers/hwmon/asus-ec-sensors.c
+@@ -188,6 +188,12 @@ static const struct dmi_system_id asus_ec_dmi_table[] __initconst = {
+ 		SENSOR_TEMP_VRM | SENSOR_SET_TEMP_WATER |
+ 		SENSOR_FAN_CPU_OPT | SENSOR_FAN_CHIPSET |
+ 		SENSOR_FAN_WATER_FLOW | SENSOR_CURR_CPU),
++	DMI_EXACT_MATCH_BOARD(VENDOR_ASUS_UPPER_CASE,
++			      "ROG CROSSHAIR VIII HERO (WI-FI)",
++		SENSOR_SET_TEMP_CHIPSET_CPU_MB | SENSOR_TEMP_T_SENSOR |
++		SENSOR_TEMP_VRM | SENSOR_SET_TEMP_WATER |
++		SENSOR_FAN_CPU_OPT | SENSOR_FAN_CHIPSET |
++		SENSOR_FAN_WATER_FLOW | SENSOR_CURR_CPU),
+ 	DMI_EXACT_MATCH_BOARD(VENDOR_ASUS_UPPER_CASE,
+ 			      "ROG CROSSHAIR VIII IMPACT",
+ 		SENSOR_SET_TEMP_CHIPSET_CPU_MB | SENSOR_TEMP_T_SENSOR |
 -- 
-2.34.1
+2.35.1
 
