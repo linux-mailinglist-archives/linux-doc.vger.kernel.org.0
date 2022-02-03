@@ -2,45 +2,50 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id A231E4A8D79
-	for <lists+linux-doc@lfdr.de>; Thu,  3 Feb 2022 21:31:31 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 708DF4A8DE1
+	for <lists+linux-doc@lfdr.de>; Thu,  3 Feb 2022 21:34:12 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1354453AbiBCUb1 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 3 Feb 2022 15:31:27 -0500
-Received: from ams.source.kernel.org ([145.40.68.75]:33984 "EHLO
-        ams.source.kernel.org" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1354245AbiBCUa4 (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Thu, 3 Feb 2022 15:30:56 -0500
+        id S1354477AbiBCUdo (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 3 Feb 2022 15:33:44 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:58104 "EHLO
+        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1354475AbiBCUci (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Thu, 3 Feb 2022 15:32:38 -0500
+Received: from ams.source.kernel.org (ams.source.kernel.org [IPv6:2604:1380:4601:e00::1])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 4D960C0613E4;
+        Thu,  3 Feb 2022 12:32:25 -0800 (PST)
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
         (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
         (No client certificate requested)
-        by ams.source.kernel.org (Postfix) with ESMTPS id 042E7B835A1;
-        Thu,  3 Feb 2022 20:30:55 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 4B055C340E8;
-        Thu,  3 Feb 2022 20:30:52 +0000 (UTC)
+        by ams.source.kernel.org (Postfix) with ESMTPS id 16D32B835A3;
+        Thu,  3 Feb 2022 20:32:24 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 3B23AC340E8;
+        Thu,  3 Feb 2022 20:32:21 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-        s=k20201202; t=1643920253;
-        bh=j1g3Ine8G433kS6IRoLdXKc+ZFe8y8VI1aADr+jnjJo=;
+        s=k20201202; t=1643920342;
+        bh=CvrnKzfGiFqdvtJF/lFdhAZT7jrKvco/zQIMZOZYKAM=;
         h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-        b=TtRaKFg3nV4aFjc9qEzHHTQZl6UkY8FOvj+/g/wyYG5obORchDfuqkP6RnHW3qraK
-         QpDqcJFTgc6l7Ek+mcpX9Tglpcv3udHkH9FgVuvzVwClgIW7XFUDM1uuUfbuVTdC48
-         rg+DRAz/F9BD67foyKJbS5nFkul0ipsFucGftu2CtXD4sHlxm65bkyFff9Y3/PYORS
-         m/3wmn8ceSbTXtkIDa943OZXNhDAf/MS/xJWBnxZFN659jXtoPeI1LAgQk0kdYUhCY
-         Qo/agNL1dBk4WMjhDsqRDPqIlIkejrtJZXKYpzYfwT6XILFG5doCn4dYU2g+lMf8TE
-         acCSnYl2/vG8Q==
+        b=iY20OPbUH0RFCp3hxcdRMw34HSpvy8zYWRVITJAm/4Pqu44S692fXoPh1ACXXw8Ld
+         vItkjLk6GZRtjqsNqAryNfM1k4fLyzNSp39Fsnz8X0Sq/W3D5aHScQwQQSpF1sZzzw
+         M6V3mo+Qu/w94UhJDyEhS/gTicLutdWvq0epDN6/U9YrXGS0yYEmSLinYGbcm7dgd2
+         FNZMXVMrwaiEhcIrW2W2mB6/MJWoIZfumAVpjaztKklyn/ICacoJmgZjKEaThc4M+B
+         9MYFIEr0lTyc+gCtYqGqRX4i2cK+X554SlHrvGb/h3CzF0puG3sP0qyt+FulhiXuD+
+         B1coFepOv5umg==
 From:   Sasha Levin <sashal@kernel.org>
 To:     linux-kernel@vger.kernel.org, stable@vger.kernel.org
 Cc:     Anshuman Khandual <anshuman.khandual@arm.com>,
+        Catalin Marinas <catalin.marinas@arm.com>,
         Will Deacon <will@kernel.org>,
         Mathieu Poirier <mathieu.poirier@linaro.org>,
         Suzuki Poulose <suzuki.poulose@arm.com>,
-        coresight@lists.linaro.org, linux-arm-kernel@lists.infradead.org,
-        Catalin Marinas <catalin.marinas@arm.com>,
+        coresight@lists.linaro.org, linux-doc@vger.kernel.org,
+        linux-arm-kernel@lists.infradead.org,
         Sasha Levin <sashal@kernel.org>, corbet@lwn.net,
-        mark.rutland@arm.com, rwiley@nvidia.com, linux-doc@vger.kernel.org
-Subject: [PATCH AUTOSEL 5.16 25/52] arm64: errata: Update ARM64_ERRATUM_[2119858|2224489] with Cortex-X2 ranges
-Date:   Thu,  3 Feb 2022 15:29:19 -0500
-Message-Id: <20220203202947.2304-25-sashal@kernel.org>
+        mark.rutland@arm.com, rwiley@nvidia.com, maz@kernel.org,
+        vincenzo.frascino@arm.com, broonie@kernel.org
+Subject: [PATCH AUTOSEL 5.16 47/52] arm64: errata: Add detection for TRBE ignored system register writes
+Date:   Thu,  3 Feb 2022 15:29:41 -0500
+Message-Id: <20220203202947.2304-47-sashal@kernel.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20220203202947.2304-1-sashal@kernel.org>
 References: <20220203202947.2304-1-sashal@kernel.org>
@@ -54,104 +59,110 @@ X-Mailing-List: linux-doc@vger.kernel.org
 
 From: Anshuman Khandual <anshuman.khandual@arm.com>
 
-[ Upstream commit eb30d838a44c9e59a2a106884f536119859c7257 ]
+[ Upstream commit 607a9afaae09cde21ece458a8f10cb99d3f94f14 ]
 
-Errata ARM64_ERRATUM_[2119858|2224489] also affect some Cortex-X2 ranges as
-well. Lets update these errata definition and detection to accommodate all
-new Cortex-X2 based cpu MIDR ranges.
+TRBE implementations affected by Arm erratum #2064142 might fail to write
+into certain system registers after the TRBE has been disabled. Under some
+conditions after TRBE has been disabled, writes into certain TRBE registers
+TRBLIMITR_EL1, TRBPTR_EL1, TRBBASER_EL1, TRBSR_EL1 and TRBTRG_EL1 will be
+ignored and not be effected. This adds a new errata ARM64_ERRATUM_2064142
+in arm64 errata framework.
 
+Cc: Catalin Marinas <catalin.marinas@arm.com>
 Cc: Will Deacon <will@kernel.org>
 Cc: Mathieu Poirier <mathieu.poirier@linaro.org>
 Cc: Suzuki Poulose <suzuki.poulose@arm.com>
 Cc: coresight@lists.linaro.org
+Cc: linux-doc@vger.kernel.org
 Cc: linux-arm-kernel@lists.infradead.org
 Cc: linux-kernel@vger.kernel.org
-Signed-off-by: Anshuman Khandual <anshuman.khandual@arm.com>
 Reviewed-by: Suzuki K Poulose <suzuki.poulose@arm.com>
-Link: https://lore.kernel.org/r/1642994138-25887-3-git-send-email-anshuman.khandual@arm.com
-Signed-off-by: Catalin Marinas <catalin.marinas@arm.com>
+Acked-by: Catalin Marinas <catalin.marinas@arm.com>
+Signed-off-by: Anshuman Khandual <anshuman.khandual@arm.com>
+Link: https://lore.kernel.org/r/1643120437-14352-3-git-send-email-anshuman.khandual@arm.com
+Signed-off-by: Mathieu Poirier <mathieu.poirier@linaro.org>
 Signed-off-by: Sasha Levin <sashal@kernel.org>
 ---
- Documentation/arm64/silicon-errata.rst |  4 ++++
- arch/arm64/Kconfig                     | 12 ++++++------
- arch/arm64/kernel/cpu_errata.c         |  2 ++
- 3 files changed, 12 insertions(+), 6 deletions(-)
+ Documentation/arm64/silicon-errata.rst |  2 ++
+ arch/arm64/Kconfig                     | 18 ++++++++++++++++++
+ arch/arm64/kernel/cpu_errata.c         |  9 +++++++++
+ arch/arm64/tools/cpucaps               |  1 +
+ 4 files changed, 30 insertions(+)
 
 diff --git a/Documentation/arm64/silicon-errata.rst b/Documentation/arm64/silicon-errata.rst
-index 5342e895fb604..8789c79310bbd 100644
+index 8789c79310bbd..401a6e86c5084 100644
 --- a/Documentation/arm64/silicon-errata.rst
 +++ b/Documentation/arm64/silicon-errata.rst
-@@ -98,6 +98,10 @@ stable kernels.
+@@ -52,6 +52,8 @@ stable kernels.
+ | Allwinner      | A64/R18         | UNKNOWN1        | SUN50I_ERRATUM_UNKNOWN1     |
  +----------------+-----------------+-----------------+-----------------------------+
- | ARM            | Cortex-A710     | #2224489        | ARM64_ERRATUM_2224489       |
  +----------------+-----------------+-----------------+-----------------------------+
-+| ARM            | Cortex-X2       | #2119858        | ARM64_ERRATUM_2119858       |
++| ARM            | Cortex-A510     | #2064142        | ARM64_ERRATUM_2064142       |
 ++----------------+-----------------+-----------------+-----------------------------+
-+| ARM            | Cortex-X2       | #2224489        | ARM64_ERRATUM_2224489       |
-++----------------+-----------------+-----------------+-----------------------------+
- | ARM            | Neoverse-N1     | #1188873,1418040| ARM64_ERRATUM_1418040       |
+ | ARM            | Cortex-A53      | #826319         | ARM64_ERRATUM_826319        |
  +----------------+-----------------+-----------------+-----------------------------+
- | ARM            | Neoverse-N1     | #1349291        | N/A                         |
+ | ARM            | Cortex-A53      | #827319         | ARM64_ERRATUM_827319        |
 diff --git a/arch/arm64/Kconfig b/arch/arm64/Kconfig
-index c4207cf9bb17f..d8046c832225c 100644
+index d8046c832225c..30c07b0d6b5c9 100644
 --- a/arch/arm64/Kconfig
 +++ b/arch/arm64/Kconfig
-@@ -671,14 +671,14 @@ config ARM64_WORKAROUND_TRBE_OVERWRITE_FILL_MODE
- 	bool
+@@ -778,6 +778,24 @@ config ARM64_ERRATUM_2224489
  
- config ARM64_ERRATUM_2119858
--	bool "Cortex-A710: 2119858: workaround TRBE overwriting trace data in FILL mode"
-+	bool "Cortex-A710/X2: 2119858: workaround TRBE overwriting trace data in FILL mode"
- 	default y
- 	depends on CORESIGHT_TRBE
- 	select ARM64_WORKAROUND_TRBE_OVERWRITE_FILL_MODE
- 	help
--	  This option adds the workaround for ARM Cortex-A710 erratum 2119858.
-+	  This option adds the workaround for ARM Cortex-A710/X2 erratum 2119858.
- 
--	  Affected Cortex-A710 cores could overwrite up to 3 cache lines of trace
-+	  Affected Cortex-A710/X2 cores could overwrite up to 3 cache lines of trace
- 	  data at the base of the buffer (pointed to by TRBASER_EL1) in FILL mode in
- 	  the event of a WRAP event.
- 
-@@ -761,14 +761,14 @@ config ARM64_ERRATUM_2253138
  	  If unsure, say Y.
  
- config ARM64_ERRATUM_2224489
--	bool "Cortex-A710: 2224489: workaround TRBE writing to address out-of-range"
-+	bool "Cortex-A710/X2: 2224489: workaround TRBE writing to address out-of-range"
- 	depends on CORESIGHT_TRBE
++config ARM64_ERRATUM_2064142
++	bool "Cortex-A510: 2064142: workaround TRBE register writes while disabled"
++	depends on COMPILE_TEST # Until the CoreSight TRBE driver changes are in
++	default y
++	help
++	  This option adds the workaround for ARM Cortex-A510 erratum 2064142.
++
++	  Affected Cortex-A510 core might fail to write into system registers after the
++	  TRBE has been disabled. Under some conditions after the TRBE has been disabled
++	  writes into TRBE registers TRBLIMITR_EL1, TRBPTR_EL1, TRBBASER_EL1, TRBSR_EL1,
++	  and TRBTRG_EL1 will be ignored and will not be effected.
++
++	  Work around this in the driver by executing TSB CSYNC and DSB after collection
++	  is stopped and before performing a system register write to one of the affected
++	  registers.
++
++	  If unsure, say Y.
++
+ config CAVIUM_ERRATUM_22375
+ 	bool "Cavium erratum 22375, 24313"
  	default y
- 	select ARM64_WORKAROUND_TRBE_WRITE_OUT_OF_RANGE
- 	help
--	  This option adds the workaround for ARM Cortex-A710 erratum 2224489.
-+	  This option adds the workaround for ARM Cortex-A710/X2 erratum 2224489.
- 
--	  Affected Cortex-A710 cores might write to an out-of-range address, not reserved
-+	  Affected Cortex-A710/X2 cores might write to an out-of-range address, not reserved
- 	  for TRBE. Under some conditions, the TRBE might generate a write to the next
- 	  virtually addressed page following the last page of the TRBE address space
- 	  (i.e., the TRBLIMITR_EL1.LIMIT), instead of wrapping around to the base.
 diff --git a/arch/arm64/kernel/cpu_errata.c b/arch/arm64/kernel/cpu_errata.c
-index 9e1c1aef9ebd6..29cc062a4153c 100644
+index 29cc062a4153c..a5456dd9a33f5 100644
 --- a/arch/arm64/kernel/cpu_errata.c
 +++ b/arch/arm64/kernel/cpu_errata.c
-@@ -347,6 +347,7 @@ static const struct midr_range trbe_overwrite_fill_mode_cpus[] = {
+@@ -599,6 +599,15 @@ const struct arm64_cpu_capabilities arm64_errata[] = {
+ 		.type = ARM64_CPUCAP_WEAK_LOCAL_CPU_FEATURE,
+ 		CAP_MIDR_RANGE_LIST(trbe_write_out_of_range_cpus),
+ 	},
++#endif
++#ifdef CONFIG_ARM64_ERRATUM_2064142
++	{
++		.desc = "ARM erratum 2064142",
++		.capability = ARM64_WORKAROUND_2064142,
++
++		/* Cortex-A510 r0p0 - r0p2 */
++		ERRATA_MIDR_REV_RANGE(MIDR_CORTEX_A510, 0, 0, 2)
++	},
  #endif
- #ifdef CONFIG_ARM64_ERRATUM_2119858
- 	MIDR_ALL_VERSIONS(MIDR_CORTEX_A710),
-+	MIDR_RANGE(MIDR_CORTEX_X2, 0, 0, 2, 0),
- #endif
- 	{},
- };
-@@ -371,6 +372,7 @@ static struct midr_range trbe_write_out_of_range_cpus[] = {
- #endif
- #ifdef CONFIG_ARM64_ERRATUM_2224489
- 	MIDR_ALL_VERSIONS(MIDR_CORTEX_A710),
-+	MIDR_RANGE(MIDR_CORTEX_X2, 0, 0, 2, 0),
- #endif
- 	{},
- };
+ 	{
+ 	}
+diff --git a/arch/arm64/tools/cpucaps b/arch/arm64/tools/cpucaps
+index 870c39537dd09..fca3cb329e1db 100644
+--- a/arch/arm64/tools/cpucaps
++++ b/arch/arm64/tools/cpucaps
+@@ -55,6 +55,7 @@ WORKAROUND_1418040
+ WORKAROUND_1463225
+ WORKAROUND_1508412
+ WORKAROUND_1542419
++WORKAROUND_2064142
+ WORKAROUND_TRBE_OVERWRITE_FILL_MODE
+ WORKAROUND_TSB_FLUSH_FAILURE
+ WORKAROUND_TRBE_WRITE_OUT_OF_RANGE
 -- 
 2.34.1
 
