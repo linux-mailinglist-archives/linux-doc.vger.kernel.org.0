@@ -2,46 +2,45 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 78BB14AB347
-	for <lists+linux-doc@lfdr.de>; Mon,  7 Feb 2022 03:02:56 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id E04274AB42A
+	for <lists+linux-doc@lfdr.de>; Mon,  7 Feb 2022 07:12:57 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S243193AbiBGCCs (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Sun, 6 Feb 2022 21:02:48 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:40004 "EHLO
+        id S232853AbiBGGEl (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 7 Feb 2022 01:04:41 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:32778 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S231342AbiBGCCs (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Sun, 6 Feb 2022 21:02:48 -0500
-X-Greylist: delayed 609 seconds by postgrey-1.37 at lindbergh.monkeyblade.net; Sun, 06 Feb 2022 18:02:45 PST
-Received: from szxga02-in.huawei.com (szxga02-in.huawei.com [45.249.212.188])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 4E73CC061A73
-        for <linux-doc@vger.kernel.org>; Sun,  6 Feb 2022 18:02:45 -0800 (PST)
-Received: from dggpeml500023.china.huawei.com (unknown [172.30.72.57])
-        by szxga02-in.huawei.com (SkyGuard) with ESMTP id 4JsTrn0C4sz9s00;
-        Mon,  7 Feb 2022 10:01:13 +0800 (CST)
-Received: from dggpeml500006.china.huawei.com (7.185.36.76) by
- dggpeml500023.china.huawei.com (7.185.36.114) with Microsoft SMTP Server
+        with ESMTP id S239587AbiBGD33 (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Sun, 6 Feb 2022 22:29:29 -0500
+Received: from szxga01-in.huawei.com (szxga01-in.huawei.com [45.249.212.187])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 6B207C061A73;
+        Sun,  6 Feb 2022 19:29:27 -0800 (PST)
+Received: from kwepemi500011.china.huawei.com (unknown [172.30.72.55])
+        by szxga01-in.huawei.com (SkyGuard) with ESMTP id 4JsWjl51mXzZfM0;
+        Mon,  7 Feb 2022 11:25:15 +0800 (CST)
+Received: from kwepemm600017.china.huawei.com (7.193.23.234) by
+ kwepemi500011.china.huawei.com (7.221.188.124) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2308.21; Mon, 7 Feb 2022 10:02:42 +0800
-Received: from huawei.com (10.175.100.227) by dggpeml500006.china.huawei.com
- (7.185.36.76) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2308.21; Mon, 7 Feb
- 2022 10:02:42 +0800
-From:   Tang Yizhou <tangyizhou@huawei.com>
-To:     <siyanteng@loongson.cn>, <siyanteng01@gmail.com>,
-        <alexs@kernel.org>, <seakeel@gmail.com>
-CC:     <linux-doc@vger.kernel.org>, <corbet@lwn.net>,
-        <zhengbin13@huawei.com>, <tangyeechou@gmail.com>,
-        Tang Yizhou <tangyizhou@huawei.com>
-Subject: [PATCH] docs/zh_CN: Add energy-model Chinese translation
-Date:   Mon, 7 Feb 2022 10:35:23 +0800
-Message-ID: <20220207023523.18505-1-tangyizhou@huawei.com>
-X-Mailer: git-send-email 2.17.1
+ 15.1.2308.21; Mon, 7 Feb 2022 11:29:25 +0800
+Received: from localhost.localdomain (10.175.112.125) by
+ kwepemm600017.china.huawei.com (7.193.23.234) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2308.21; Mon, 7 Feb 2022 11:29:24 +0800
+From:   Peng Liu <liupeng256@huawei.com>
+To:     <glider@google.com>, <elver@google.com>, <dvyukov@google.com>,
+        <corbet@lwn.net>, <sumit.semwal@linaro.org>,
+        <christian.koenig@amd.com>, <akpm@linux-foundation.org>
+CC:     <kasan-dev@googlegroups.com>, <linux-doc@vger.kernel.org>,
+        <linux-kernel@vger.kernel.org>, <linaro-mm-sig@lists.linaro.org>,
+        <linux-mm@kvack.org>, <liupeng256@huawei.com>
+Subject: [PATCH v3] kfence: Make test case compatible with run time set sample interval
+Date:   Mon, 7 Feb 2022 03:44:32 +0000
+Message-ID: <20220207034432.185532-1-liupeng256@huawei.com>
+X-Mailer: git-send-email 2.18.0.huawei.25
 MIME-Version: 1.0
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 8bit
-X-Originating-IP: [10.175.100.227]
-X-ClientProxiedBy: dggems703-chm.china.huawei.com (10.3.19.180) To
- dggpeml500006.china.huawei.com (7.185.36.76)
+Content-Type: text/plain
+X-Originating-IP: [10.175.112.125]
+X-ClientProxiedBy: dggems701-chm.china.huawei.com (10.3.19.178) To
+ kwepemm600017.china.huawei.com (7.193.23.234)
 X-CFilter-Loop: Reflected
 X-Spam-Status: No, score=-4.2 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_MED,
         SPF_HELO_NONE,SPF_PASS,T_SCC_BODY_TEXT_LINE autolearn=ham
@@ -52,236 +51,90 @@ Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Translate power/energy-model.rst into Chinese.
+The parameter kfence_sample_interval can be set via boot parameter
+and late shell command, which is convenient for automated tests and
+KFENCE parameter optimization. However, KFENCE test case just uses
+compile-time CONFIG_KFENCE_SAMPLE_INTERVAL, which will make KFENCE
+test case not run as users desired. Export kfence_sample_interval,
+so that KFENCE test case can use run-time-set sample interval.
 
-Signed-off-by: Tang Yizhou <tangyizhou@huawei.com>
+Signed-off-by: Peng Liu <liupeng256@huawei.com>
 ---
- .../translations/zh_CN/power/energy-model.rst | 195 ++++++++++++++++++
- .../translations/zh_CN/power/index.rst        |   2 +-
- 2 files changed, 196 insertions(+), 1 deletion(-)
- create mode 100644 Documentation/translations/zh_CN/power/energy-model.rst
+v2->v3:
+- Revise change log description
+v1->v2:
+- Use EXPORT_SYMBOL_GPL replace EXPORT_SYMBOL
 
-diff --git a/Documentation/translations/zh_CN/power/energy-model.rst b/Documentation/translations/zh_CN/power/energy-model.rst
-new file mode 100644
-index 000000000000..33a852756632
---- /dev/null
-+++ b/Documentation/translations/zh_CN/power/energy-model.rst
-@@ -0,0 +1,195 @@
-+.. SPDX-License-Identifier: GPL-2.0
-+.. include:: ../disclaimer-zh_CN.rst
-+
-+:Original: Documentation/power/energy-model.rst
-+
-+:翻译:
-+
-+  唐艺舟 Tang Yizhou <tangyeechou@gmail.com>
-+
-+============
-+设备能量模型
-+============
-+
-+1. 概述
-+-------
-+
-+能量模型（EM）框架是一种驱动程序与内核子系统之间的接口。其中驱动程序了解不同
-+性能层级的设备所消耗的功率，而内核子系统愿意使用该信息做出能量感知决策。
-+
-+设备所消耗的功率的信息来源在不同的平台上可能有很大的不同。这些功率成本在某些
-+情况下可以使用设备树数据来估算。在其它情况下，固件会更清楚。或者，用户空间可能
-+是最清楚的。以此类推。为了避免每一个客户端子系统对每一种可能的信息源自己重新
-+实现支持，EM框架作为一个抽象层介入，它在内核中对功率成本表的格式进行标准化，
-+因此能够避免多余的工作。
-+
-+功率值可以用毫瓦或“抽象刻度”表示。多个子系统可能使用EM，由系统集成商来检查
-+功率值刻度类型的要求是否满足。可以在能量感知调度器的文档中找到一个例子
-+Documentation/scheduler/sched-energy.rst。对于一些子系统，比如热能或
-+powercap，用“抽象刻度”描述功率值可能会导致问题。这些子系统对过去使用的功率的
-+估算值更感兴趣，因此可能需要真实的毫瓦。这些要求的一个例子可以在智能功率分配
-+Documentation/driver-api/thermal/power_allocator.rst文档中找到。
-+
-+内核子系统可能（基于EM内部标志位）实现了对EM注册设备是否具有不一致刻度的自动
-+检查。要记住的重要事情是，当功率值以“抽象刻度”表示时，从中推导以毫焦耳为单位
-+的真实能量消耗是不可能的。
-+
-+下图描述了一个驱动的例子（这里是针对Arm的，但该方法适用于任何体系结构），它
-+向EM框架提供了功率成本，感兴趣的客户端可从中读取数据::
-+
-+       +---------------+  +-----------------+  +---------------+
-+       | Thermal (IPA) |  | Scheduler (EAS) |  |     Other     |
-+       +---------------+  +-----------------+  +---------------+
-+               |                   | em_cpu_energy()   |
-+               |                   | em_cpu_get()      |
-+               +---------+         |         +---------+
-+                         |         |         |
-+                         v         v         v
-+                        +---------------------+
-+                        |    Energy Model     |
-+                        |     Framework       |
-+                        +---------------------+
-+                           ^       ^       ^
-+                           |       |       | em_dev_register_perf_domain()
-+                +----------+       |       +---------+
-+                |                  |                 |
-+        +---------------+  +---------------+  +--------------+
-+        |  cpufreq-dt   |  |   arm_scmi    |  |    Other     |
-+        +---------------+  +---------------+  +--------------+
-+                ^                  ^                 ^
-+                |                  |                 |
-+        +--------------+   +---------------+  +--------------+
-+        | Device Tree  |   |   Firmware    |  |      ?       |
-+        +--------------+   +---------------+  +--------------+
-+
-+对于CPU设备，EM框架管理着系统中每个“性能域”的功率成本表。一个性能域是一组
-+性能一起伸缩的CPU。性能域通常与CPUFreq策略具有1对1映射。一个性能域中的
-+所有CPU要求具有相同的微架构。不同性能域中的CPU可以有不同的微架构。
-+
-+
-+2. 核心API
-+----------
-+
-+2.1 配置选项
-+^^^^^^^^^^^^
-+
-+必须使能CONFIG_ENERGY_MODEL才能使用EM框架。
-+
-+
-+2.2 性能域的注册
-+^^^^^^^^^^^^^^^^
-+
-+“高级”EM的注册
-+~~~~~~~~~~~~~~~~
-+
-+“高级”EM因它允许驱动提供更精确的功率模型而得名。它并不受限于框架中的一些已
-+实现的数学公式（就像“简单”EM那样）。它可以更好地反映每个性能状态的实际功率
-+测量。因此，在EM静态功率（泄露）是重要的情况下，应该首选这种注册方式。
-+
-+驱动程序应通过以下API将性能域注册到EM框架中::
-+
-+  int em_dev_register_perf_domain(struct device *dev, unsigned int nr_states,
-+		struct em_data_callback *cb, cpumask_t *cpus, bool milliwatts);
-+
-+驱动程序必须提供一个回调函数，为每个性能状态返回<频率,功率>元组。驱动程序
-+提供的回调函数可以自由地从任何相关位置（DT、固件......）以及以任何被认为是
-+必要的方式获取数据。只有对于CPU设备，驱动程序必须使用cpumask指定性能域的CPU。
-+对于CPU以外的其他设备，最后一个参数必须被设置为NULL。
-+
-+最后一个参数“milliwatts”（毫瓦）设置成正确的值是很重要的，使用EM的内核
-+子系统可能会依赖这个标志来检查所有的EM设备是否使用相同的刻度。如果有不同的
-+刻度，这些子系统可能决定：返回警告/错误，停止工作或恐慌（panic）。
-+
-+关于实现这个回调函数的驱动程序的例子，参见第3节。或者在第2.4节阅读这个API
-+的更多文档。
-+
-+
-+“简单”EM的注册
-+~~~~~~~~~~~~~~~~
-+
-+“简单”EM是用框架的辅助函数cpufreq_register_em_with_opp()注册的。它实现了
-+一个和以下数学公式紧密相关的功率模型::
-+
-+	Power = C * V^2 * f
-+
-+使用这种方法注册的EM可能无法正确反映真实设备的物理特性，例如当静态功率
-+（泄漏）很重要时。
-+
-+
-+2.3 访问性能域
-+^^^^^^^^^^^^^^
-+
-+有两个API函数提供对能量模型的访问。em_cpu_get()以CPU id为参数，em_pd_get()
-+以设备指针为参数。使用哪个接口取决于子系统，但对于CPU设备来说，这两个函数都返
-+回相同的性能域。
-+
-+对CPU的能量模型感兴趣的子系统可以通过em_cpu_get() API检索它。在创建性能域时
-+分配一次能量模型表，它保存在内存中不被修改。
-+
-+一个性能域所消耗的能量可以使用em_cpu_energy() API来估算。该估算假定CPU设备
-+使用的CPUfreq监管器是schedutil。当前该计算不能提供给其它类型的设备。
-+
-+关于上述API的更多细节可以在 ``<linux/energy_model.h>`` 或第2.4节中找到。
-+
-+
-+2.4 API的细节描述
-+^^^^^^^^^^^^^^^^^
-+.. kernel-doc:: include/linux/energy_model.h
-+   :internal:
-+
-+.. kernel-doc:: kernel/power/energy_model.c
-+   :export:
-+
-+
-+3. 驱动示例
-+-----------
-+
-+CPUFreq框架支持专用的回调函数，用于为指定的CPU（们）注册EM：
-+cpufreq_driver::register_em()。这个回调必须为每个特定的驱动程序正确实现，
-+因为框架会在设置过程中适时地调用它。本节提供了一个简单的例子，展示CPUFreq驱动
-+在能量模型框架中使用（假的）“foo”协议注册性能域。该驱动实现了一个est_power()
-+函数提供给EM框架::
-+
-+  -> drivers/cpufreq/foo_cpufreq.c
-+
-+  01	static int est_power(unsigned long *mW, unsigned long *KHz,
-+  02			struct device *dev)
-+  03	{
-+  04		long freq, power;
-+  05
-+  06		/* Use the 'foo' protocol to ceil the frequency */
-+  07		freq = foo_get_freq_ceil(dev, *KHz);
-+  08		if (freq < 0);
-+  09			return freq;
-+  10
-+  11		/* Estimate the power cost for the dev at the relevant freq. */
-+  12		power = foo_estimate_power(dev, freq);
-+  13		if (power < 0);
-+  14			return power;
-+  15
-+  16		/* Return the values to the EM framework */
-+  17		*mW = power;
-+  18		*KHz = freq;
-+  19
-+  20		return 0;
-+  21	}
-+  22
-+  23	static void foo_cpufreq_register_em(struct cpufreq_policy *policy)
-+  24	{
-+  25		struct em_data_callback em_cb = EM_DATA_CB(est_power);
-+  26		struct device *cpu_dev;
-+  27		int nr_opp;
-+  28
-+  29		cpu_dev = get_cpu_device(cpumask_first(policy->cpus));
-+  30
-+  31     	/* Find the number of OPPs for this policy */
-+  32     	nr_opp = foo_get_nr_opp(policy);
-+  33
-+  34     	/* And register the new performance domain */
-+  35     	em_dev_register_perf_domain(cpu_dev, nr_opp, &em_cb, policy->cpus,
-+  36					    true);
-+  37	}
-+  38
-+  39	static struct cpufreq_driver foo_cpufreq_driver = {
-+  40		.register_em = foo_cpufreq_register_em,
-+  41	};
-diff --git a/Documentation/translations/zh_CN/power/index.rst b/Documentation/translations/zh_CN/power/index.rst
-index ad80a9e80b7c..bc54983ba515 100644
---- a/Documentation/translations/zh_CN/power/index.rst
-+++ b/Documentation/translations/zh_CN/power/index.rst
-@@ -14,6 +14,7 @@
- .. toctree::
-     :maxdepth: 1
+ include/linux/kfence.h  | 2 ++
+ mm/kfence/core.c        | 3 ++-
+ mm/kfence/kfence_test.c | 8 ++++----
+ 3 files changed, 8 insertions(+), 5 deletions(-)
+
+diff --git a/include/linux/kfence.h b/include/linux/kfence.h
+index 4b5e3679a72c..f49e64222628 100644
+--- a/include/linux/kfence.h
++++ b/include/linux/kfence.h
+@@ -17,6 +17,8 @@
+ #include <linux/atomic.h>
+ #include <linux/static_key.h>
  
-+    energy-model
-     opp
++extern unsigned long kfence_sample_interval;
++
+ /*
+  * We allocate an even number of pages, as it simplifies calculations to map
+  * address to metadata indices; effectively, the very first page serves as an
+diff --git a/mm/kfence/core.c b/mm/kfence/core.c
+index 5ad40e3add45..13128fa13062 100644
+--- a/mm/kfence/core.c
++++ b/mm/kfence/core.c
+@@ -47,7 +47,8 @@
  
- TODOList:
-@@ -22,7 +23,6 @@ TODOList:
-     * basic-pm-debugging
-     * charger-manager
-     * drivers-testing
--    * energy-model
-     * freezing-of-tasks
-     * pci
-     * pm_qos_interface
+ static bool kfence_enabled __read_mostly;
+ 
+-static unsigned long kfence_sample_interval __read_mostly = CONFIG_KFENCE_SAMPLE_INTERVAL;
++unsigned long kfence_sample_interval __read_mostly = CONFIG_KFENCE_SAMPLE_INTERVAL;
++EXPORT_SYMBOL_GPL(kfence_sample_interval); /* Export for test modules. */
+ 
+ #ifdef MODULE_PARAM_PREFIX
+ #undef MODULE_PARAM_PREFIX
+diff --git a/mm/kfence/kfence_test.c b/mm/kfence/kfence_test.c
+index a22b1af85577..50dbb815a2a8 100644
+--- a/mm/kfence/kfence_test.c
++++ b/mm/kfence/kfence_test.c
+@@ -268,13 +268,13 @@ static void *test_alloc(struct kunit *test, size_t size, gfp_t gfp, enum allocat
+ 	 * 100x the sample interval should be more than enough to ensure we get
+ 	 * a KFENCE allocation eventually.
+ 	 */
+-	timeout = jiffies + msecs_to_jiffies(100 * CONFIG_KFENCE_SAMPLE_INTERVAL);
++	timeout = jiffies + msecs_to_jiffies(100 * kfence_sample_interval);
+ 	/*
+ 	 * Especially for non-preemption kernels, ensure the allocation-gate
+ 	 * timer can catch up: after @resched_after, every failed allocation
+ 	 * attempt yields, to ensure the allocation-gate timer is scheduled.
+ 	 */
+-	resched_after = jiffies + msecs_to_jiffies(CONFIG_KFENCE_SAMPLE_INTERVAL);
++	resched_after = jiffies + msecs_to_jiffies(kfence_sample_interval);
+ 	do {
+ 		if (test_cache)
+ 			alloc = kmem_cache_alloc(test_cache, gfp);
+@@ -608,7 +608,7 @@ static void test_gfpzero(struct kunit *test)
+ 	int i;
+ 
+ 	/* Skip if we think it'd take too long. */
+-	KFENCE_TEST_REQUIRES(test, CONFIG_KFENCE_SAMPLE_INTERVAL <= 100);
++	KFENCE_TEST_REQUIRES(test, kfence_sample_interval <= 100);
+ 
+ 	setup_test_cache(test, size, 0, NULL);
+ 	buf1 = test_alloc(test, size, GFP_KERNEL, ALLOCATE_ANY);
+@@ -739,7 +739,7 @@ static void test_memcache_alloc_bulk(struct kunit *test)
+ 	 * 100x the sample interval should be more than enough to ensure we get
+ 	 * a KFENCE allocation eventually.
+ 	 */
+-	timeout = jiffies + msecs_to_jiffies(100 * CONFIG_KFENCE_SAMPLE_INTERVAL);
++	timeout = jiffies + msecs_to_jiffies(100 * kfence_sample_interval);
+ 	do {
+ 		void *objects[100];
+ 		int i, num = kmem_cache_alloc_bulk(test_cache, GFP_ATOMIC, ARRAY_SIZE(objects),
 -- 
-2.17.1
+2.18.0.huawei.25
 
