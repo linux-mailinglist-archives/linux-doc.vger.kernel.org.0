@@ -2,119 +2,122 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id DEC264AC94D
-	for <lists+linux-doc@lfdr.de>; Mon,  7 Feb 2022 20:19:20 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 612D24AC98E
+	for <lists+linux-doc@lfdr.de>; Mon,  7 Feb 2022 20:30:52 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S230325AbiBGTQu (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 7 Feb 2022 14:16:50 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:46706 "EHLO
+        id S235908AbiBGT15 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 7 Feb 2022 14:27:57 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:50484 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S238818AbiBGTQJ (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Mon, 7 Feb 2022 14:16:09 -0500
-Received: from a2nlsmtp01-02.prod.iad2.secureserver.net (a2nlsmtp01-02.prod.iad2.secureserver.net [198.71.225.36])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id B5E40C0401DA
-        for <linux-doc@vger.kernel.org>; Mon,  7 Feb 2022 11:16:08 -0800 (PST)
-Received: from a2plcpnl0394.prod.iad2.secureserver.net ([198.71.228.70])
-        by : HOSTING RELAY : with ESMTP
-        id H9TfnGXABfq3hH9TfnYUVf; Mon, 07 Feb 2022 12:15:07 -0700
-X-CMAE-Analysis: v=2.4 cv=CMPv4TnD c=1 sm=1 tr=0 ts=62016fbb
- a=1StuNoa505miz0bl6oWT8A==:117 a=W/LxAOAmMZmt5zG/D6lBSA==:17
- a=9+rZDBEiDlHhcck0kWbJtElFXBc=:19 a=gQX1269ULFhLm4Thdby34LUHVW0=:19
- a=kj9zAlcOel0A:10 a=oGFeUVbbRNcA:10 a=VwQbUJbxAAAA:8 a=07d9gI8wAAAA:8
- a=Lwaw6U-gAAAA:8 a=NEAV23lmAAAA:8 a=B8Uq0VdtDiOBwz_KTowA:9 a=CjuIK1q_8ugA:10
- a=AtAeFeFvLGd9njqGQagc:22 a=AjGcO6oz07-iQ99wixmX:22 a=e2CUPOnPG4QKp8I52DXD:22
-X-SECURESERVER-ACCT: contact@ifohancroft.com
-Received: from [94.26.87.140] (port=43376 helo=battlestation)
-        by a2plcpnl0394.prod.iad2.secureserver.net with esmtpsa  (TLS1.2) tls TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384
-        (Exim 4.94.2)
-        (envelope-from <contact@ifohancroft.com>)
-        id 1nH9Te-00AAXm-LU; Mon, 07 Feb 2022 12:15:06 -0700
-Date:   Mon, 7 Feb 2022 21:15:04 +0200
-From:   IFo Hancroft <contact@ifohancroft.com>
-To:     Miguel Ojeda <ojeda@kernel.org>
-Cc:     Jonathan Corbet <corbet@lwn.net>,
-        Garrett LeSage <garrett@lesage.us>, linux-doc@vger.kernel.org,
-        linux-kernel@vger.kernel.org
-Subject: Re: [PATCH] docs: add SVG version of Linux logo
-Message-ID: <YgFvuIa0n3e6+cbq@battlestation>
-References: <20220207014418.GA28724@kernel.org>
+        with ESMTP id S240637AbiBGTYr (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Mon, 7 Feb 2022 14:24:47 -0500
+Received: from mx0a-001b2d01.pphosted.com (mx0a-001b2d01.pphosted.com [148.163.156.1])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 00831C0401E6;
+        Mon,  7 Feb 2022 11:24:45 -0800 (PST)
+Received: from pps.filterd (m0098404.ppops.net [127.0.0.1])
+        by mx0a-001b2d01.pphosted.com (8.16.1.2/8.16.1.2) with SMTP id 217IQ5Vb005295;
+        Mon, 7 Feb 2022 19:24:45 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ibm.com; h=date : from : to : cc :
+ subject : message-id : references : mime-version : content-type :
+ in-reply-to; s=pp1; bh=W+3RF4+TSI5ssviTeFqGmaNMt1m1811Eopoel3gqsX4=;
+ b=SNZKsTEHBqef7xnM2pHFHys/3UBNNaMj7qF2gqQPP5zJt5K4RLd144J5R7B1KMttbsq3
+ cAD3haVj6C3QJsuUz+OUvrIqU0OlzhgbX7ZizrOXYAp3wbu1EtQLO+1FhwdGZ5iE5VHS
+ /wRkW1EnG4sFRkYAJqQ9fkGdd3WRqloItYmRv3LRCQEYJt2JRPIf9taYlnHOey1yy3Sw
+ drbrW8sVs1qdgaSuNTzta4mh1N+OqZPkmGefpTcC3iG3hTkdf58S/ZlZIIoMEROMXd2h
+ lL/6PSltQn1+3sL3SC3Sv1VCgKLnW3ePuox8g3w/NMCDxiUDws+NrjJ/GNuyR/H5VDoj TQ== 
+Received: from pps.reinject (localhost [127.0.0.1])
+        by mx0a-001b2d01.pphosted.com with ESMTP id 3e355aexnm-1
+        (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+        Mon, 07 Feb 2022 19:24:45 +0000
+Received: from m0098404.ppops.net (m0098404.ppops.net [127.0.0.1])
+        by pps.reinject (8.16.0.43/8.16.0.43) with SMTP id 217IaYkk005641;
+        Mon, 7 Feb 2022 19:24:44 GMT
+Received: from ppma04ams.nl.ibm.com (63.31.33a9.ip4.static.sl-reverse.com [169.51.49.99])
+        by mx0a-001b2d01.pphosted.com with ESMTP id 3e355aexmt-1
+        (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+        Mon, 07 Feb 2022 19:24:44 +0000
+Received: from pps.filterd (ppma04ams.nl.ibm.com [127.0.0.1])
+        by ppma04ams.nl.ibm.com (8.16.1.2/8.16.1.2) with SMTP id 217J8Udo022771;
+        Mon, 7 Feb 2022 19:24:42 GMT
+Received: from b06cxnps4076.portsmouth.uk.ibm.com (d06relay13.portsmouth.uk.ibm.com [9.149.109.198])
+        by ppma04ams.nl.ibm.com with ESMTP id 3e1gv8yr3q-1
+        (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+        Mon, 07 Feb 2022 19:24:42 +0000
+Received: from d06av26.portsmouth.uk.ibm.com (d06av26.portsmouth.uk.ibm.com [9.149.105.62])
+        by b06cxnps4076.portsmouth.uk.ibm.com (8.14.9/8.14.9/NCO v10.0) with ESMTP id 217JOd5J34537880
+        (version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+        Mon, 7 Feb 2022 19:24:39 GMT
+Received: from d06av26.portsmouth.uk.ibm.com (unknown [127.0.0.1])
+        by IMSVA (Postfix) with ESMTP id 0E150AE057;
+        Mon,  7 Feb 2022 19:24:39 +0000 (GMT)
+Received: from d06av26.portsmouth.uk.ibm.com (unknown [127.0.0.1])
+        by IMSVA (Postfix) with ESMTP id 7DB58AE045;
+        Mon,  7 Feb 2022 19:24:38 +0000 (GMT)
+Received: from osiris (unknown [9.145.47.238])
+        by d06av26.portsmouth.uk.ibm.com (Postfix) with ESMTPS;
+        Mon,  7 Feb 2022 19:24:38 +0000 (GMT)
+Date:   Mon, 7 Feb 2022 20:24:37 +0100
+From:   Heiko Carstens <hca@linux.ibm.com>
+To:     Janis Schoetterl-Glausch <scgl@linux.ibm.com>
+Cc:     Christian Borntraeger <borntraeger@linux.ibm.com>,
+        Janosch Frank <frankja@linux.ibm.com>,
+        Alexander Gordeev <agordeev@linux.ibm.com>,
+        Claudio Imbrenda <imbrenda@linux.ibm.com>,
+        David Hildenbrand <david@redhat.com>,
+        Jonathan Corbet <corbet@lwn.net>, kvm@vger.kernel.org,
+        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
+        linux-s390@vger.kernel.org, Paolo Bonzini <pbonzini@redhat.com>,
+        Sven Schnelle <svens@linux.ibm.com>,
+        Vasily Gorbik <gor@linux.ibm.com>
+Subject: Re: [PATCH v2 01/11] s390/uaccess: Add copy_from/to_user_key
+ functions
+Message-ID: <YgFx9XIWvrPAeSNk@osiris>
+References: <20220207165930.1608621-1-scgl@linux.ibm.com>
+ <20220207165930.1608621-2-scgl@linux.ibm.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii; format=flowed
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20220207014418.GA28724@kernel.org>
-X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
-X-AntiAbuse: Primary Hostname - a2plcpnl0394.prod.iad2.secureserver.net
-X-AntiAbuse: Original Domain - vger.kernel.org
-X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
-X-AntiAbuse: Sender Address Domain - ifohancroft.com
-X-Get-Message-Sender-Via: a2plcpnl0394.prod.iad2.secureserver.net: authenticated_id: contact@ifohancroft.com
-X-Authenticated-Sender: a2plcpnl0394.prod.iad2.secureserver.net: contact@ifohancroft.com
-X-Source: 
-X-Source-Args: 
-X-Source-Dir: 
-X-CMAE-Envelope: MS4xfI8nEmH2NpQYps42yIG1GV7rz3CG+06VONEwJo3+SnpviQAaBW3AnW6V1ik32PsDRjm+ufo7a3P9g6UNBUJX8jwxYkDTWbyxFfKuyT27y3ochPV3pT1r
- YRjnqmEUM4V1u84Xh14DeHZ2naE078VPmOs6o4zQbbm9WxnLDIMo1LA720ZNWIrhSAbVvehNJi9lT0+Ly/kOcAbps00UAPYrgBfUKsrV2Yf1UGnTHcq0Vfvt
- jrQcvJnATvvgY5BzTubnVxoUtqHjI0M34pCdkMxLse0=
-X-Spam-Status: No, score=0.1 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_NONE,
-        RCVD_IN_MSPIKE_BL,RCVD_IN_MSPIKE_L3,SPF_HELO_NONE,SPF_PASS,
-        T_SCC_BODY_TEXT_LINE,URI_DOTEDU autolearn=no autolearn_force=no
-        version=3.4.6
+In-Reply-To: <20220207165930.1608621-2-scgl@linux.ibm.com>
+X-TM-AS-GCONF: 00
+X-Proofpoint-GUID: C83dn5awiSbA2ceuYPoP1K7OqbqzPL--
+X-Proofpoint-ORIG-GUID: VbxGmKnRkMsQ5OOssbczvlDYbwZrHcsQ
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.205,Aquarius:18.0.816,Hydra:6.0.425,FMLib:17.11.62.513
+ definitions=2022-02-07_06,2022-02-07_02,2021-12-02_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 mlxscore=0 adultscore=0
+ suspectscore=0 clxscore=1011 lowpriorityscore=0 bulkscore=0 malwarescore=0
+ priorityscore=1501 spamscore=0 mlxlogscore=805 phishscore=0
+ impostorscore=0 classifier=spam adjust=0 reason=mlx scancount=1
+ engine=8.12.0-2201110000 definitions=main-2202070115
+X-Spam-Status: No, score=-2.0 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+        DKIM_VALID,DKIM_VALID_EF,RCVD_IN_MSPIKE_H5,RCVD_IN_MSPIKE_WL,
+        SPF_HELO_NONE,SPF_PASS,T_SCC_BODY_TEXT_LINE autolearn=ham
+        autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Hi,
+On Mon, Feb 07, 2022 at 05:59:20PM +0100, Janis Schoetterl-Glausch wrote:
+> Add copy_from/to_user_key functions, which perform storage key checking.
+> These functions can be used by KVM for emulating instructions that need
+> to be key checked.
+> These functions differ from their non _key counterparts in
+> include/linux/uaccess.h only in the additional key argument and must be
+> kept in sync with those.
+> 
+> Since the existing uaccess implementation on s390 makes use of move
+> instructions that support having an additional access key supplied,
+> we can implement raw_copy_from/to_user_key by enhancing the
+> existing implementation.
+> 
+> Signed-off-by: Janis Schoetterl-Glausch <scgl@linux.ibm.com>
+> ---
+>  arch/s390/include/asm/uaccess.h | 22 +++++++++
+>  arch/s390/lib/uaccess.c         | 81 +++++++++++++++++++++++++--------
+>  2 files changed, 85 insertions(+), 18 deletions(-)
 
-You have my permission to use the vector version of Tux with the license given in the patch.
+Acked-by: Heiko Carstens <hca@linux.ibm.com>
 
-Best Regards,
-IFo Hancroft
-
-On Mon, Feb 07, 2022 at 02:44:18AM +0100, Miguel Ojeda wrote:
->In the Rust for Linux patch series, Jonathan Corbet requested that
->we avoid binary assets (logo and favicons for the generated
->documentation), possibly by recreating the logo in SVG format.
->
->However, it turns out there is no SVG version of the Linux logo
->in the kernel tree yet, only a GIF one from the pre-v2.0.0 days.
->Thus this commit fixes that, which then we can use in the Rust
->documentation in one way or another.
->
->This is a vector re-illustration by Garrett LeSage of the original
->logo by Larry Ewing (plus cleanups by IFo Hancroft). Garrett gave
->me (privately) his permission to use it for this purpose. The
->acknowledgement requirement has been made mandatory here to match
->the wording of the existing one.
->
->Link: https://lore.kernel.org/lkml/87fspk1xoc.fsf@meer.lwn.net/
->Signed-off-by: Miguel Ojeda <ojeda@kernel.org>
->---
->Garrett, it would be great if you could confirm here that you
->are OK with the note in `COPYING-logo`. In particular, in your
->repository, you license the logo as public domain, though here
->I followed the existing licence which requires giving credit.
->Please see below.
->
-> Documentation/COPYING-logo |    8 +
-> Documentation/logo.svg     | 2040 ++++++++++++++++++++++++++++++++++++
-> 2 files changed, 2048 insertions(+)
-> create mode 100644 Documentation/logo.svg
->
->diff --git a/Documentation/COPYING-logo b/Documentation/COPYING-logo
->index b21c7cf7d9f6..fd7c9451fc72 100644
->--- a/Documentation/COPYING-logo
->+++ b/Documentation/COPYING-logo
->@@ -11,3 +11,11 @@ Larry's web-page:
->
-> 	https://www.isc.tamu.edu/~lewing/linux/
->
->+The SVG version was re-illustrated in vector by Garrett LeSage and
->+refined and cleaned up by IFo Hancroft. It is also freely usable
->+as long as you acknowledge Larry, Garrett and IFo Hancroft as above.
->+
->+There are also black-and-white and inverted vector versions at
->+Garrett's repository:
->+
->+	https://github.com/garrett/Tux
+Christian, Janosch, I think this can go via the kvm tree.
