@@ -2,75 +2,68 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id BD3D74AC244
-	for <lists+linux-doc@lfdr.de>; Mon,  7 Feb 2022 16:01:11 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id DEFA34AC618
+	for <lists+linux-doc@lfdr.de>; Mon,  7 Feb 2022 17:40:47 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S231941AbiBGPAx (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 7 Feb 2022 10:00:53 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:47316 "EHLO
+        id S230521AbiBGQj7 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 7 Feb 2022 11:39:59 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:33858 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1344140AbiBGOjY (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Mon, 7 Feb 2022 09:39:24 -0500
-Received: from mail-pl1-x634.google.com (mail-pl1-x634.google.com [IPv6:2607:f8b0:4864:20::634])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 13691C0401C1;
-        Mon,  7 Feb 2022 06:39:24 -0800 (PST)
-Received: by mail-pl1-x634.google.com with SMTP id k17so11317692plk.0;
-        Mon, 07 Feb 2022 06:39:24 -0800 (PST)
+        with ESMTP id S244795AbiBGQ2Y (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Mon, 7 Feb 2022 11:28:24 -0500
+Received: from mail-qt1-x82a.google.com (mail-qt1-x82a.google.com [IPv6:2607:f8b0:4864:20::82a])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id C164BC0401DC;
+        Mon,  7 Feb 2022 08:28:22 -0800 (PST)
+Received: by mail-qt1-x82a.google.com with SMTP id o3so12290991qtm.12;
+        Mon, 07 Feb 2022 08:28:22 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
-        h=message-id:date:mime-version:user-agent:subject:content-language:to
-         :cc:references:from:in-reply-to:content-transfer-encoding;
-        bh=qOF7XuZ0URB/cEi6r2JFaqatdPkNWbtv8LDsccHb8v8=;
-        b=VIT9DU84F6wnBWTjPisje1T5tMIDg1MClePpER0NkNwLPu3h8vbHbOcJtkHn+nWX2I
-         glyqpg1/dX84E3xetCO1d+sbkvcKwRqteVWA6VO07q809WTkEDpwTiN2QWfhS39+Kxhh
-         RvLI0xe2YnxntxUG4pBeP7YjqOYRiACBUUxFQ3HPDYd3SrhFJz0ZTepbbKZLpkfu/Jks
-         lqkndJ3xfApZYH+BmHR8rfP7iYR/EpX0dvrSgAtOIIMw9P9dOf2lZ2D1zRlTffdjzD17
-         TVzy8Y89g9ZH8K6XFuLieClgaKuA5GMqx6gqVnLuYPSfc5zHiRjN+wmc265bEc1nCIns
-         Xniw==
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=xjuYbPqGlUU+uIXv13zUv8IJB7OPzzTg6ohYTp3I1lU=;
+        b=IU3HAqftGzdEiHLQ5P3E0wX8ENgnTWKRN+2SAH5KdWQHa5um85ch2zDilFcHkt6olY
+         uVg+a+2brsJewG6N0oIibftvqH13FjygO6/WXAQIwfdE+5hqV/FDwt3XSQUUUHhHDKgz
+         wGlyn9KJxmxaBfNtlVTbHNgyMwmljNL1iJ7CB6eOAPTh5XZoYKUk18i9Qt7N1Tv6hLQw
+         jt7mWG+YNV5CT7VLzkAxiIeAM14IHhaxOJd1hMZon2LpYLfoyLLTqRQQ2FBKA/faoPca
+         U/dGpcspb1MZGoGmxSYxeLuEonVuw4QI1i3aZMOrdxsKwq6YcLDPJY/UEGcmv71Nv+TF
+         aJkw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=x-gm-message-state:message-id:date:mime-version:user-agent:subject
-         :content-language:to:cc:references:from:in-reply-to
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=qOF7XuZ0URB/cEi6r2JFaqatdPkNWbtv8LDsccHb8v8=;
-        b=aX/mww2ojSwf8a9flurVBESbHfVAaDRAtW6XMiZ/uz7K0DL7UAlmKY6IMcRAP7Byzj
-         HwGbUsQkE6n9q3dnwhvYVzkyiq6r+CumOQ/rqaS5+w1qUubv+N3IzSuf4qtTvhsBFDeA
-         +KkryivWeAk/b/IJrbTeEBMN9baGZFbfPw7L9p4tbhOAtNKT4EuIc2i+yl49AS1fU9q5
-         anJ17Yx2mjL1MMhcQM7wruPINGgLOM5/cPsTcKo8eIDcFASvZcumukH3BlUYvO8qM/Wf
-         ufCyHy5UC5JSOU4Z41QF8qfaA4JzJ+fFoBqk1dMUGedzW2QYEX8SsD7s1udemOaSEE0P
-         BvNw==
-X-Gm-Message-State: AOAM530+dz+8ukE190xs9sQRAdzYkQ1fXQGAaGdaIyZuLmlHlrXBQmuw
-        wfyIXNXy5VWYF0dx3tSb2R8=
-X-Google-Smtp-Source: ABdhPJyyBVpQ9fCO/0O2Rjq1KPTtehboO+FF8NVRGQskfkI65e+VsAO2IUAKuGYnflIfHsSkl9Rydw==
-X-Received: by 2002:a17:902:e84a:: with SMTP id t10mr2430855plg.25.1644244763599;
-        Mon, 07 Feb 2022 06:39:23 -0800 (PST)
-Received: from [192.168.11.5] (KD106167171201.ppp-bb.dion.ne.jp. [106.167.171.201])
-        by smtp.gmail.com with ESMTPSA id md9sm3892703pjb.6.2022.02.07.06.39.21
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Mon, 07 Feb 2022 06:39:23 -0800 (PST)
-Message-ID: <3cfe6cb0-67c7-bd12-0a3c-a609f5341a32@gmail.com>
-Date:   Mon, 7 Feb 2022 23:39:18 +0900
+        bh=xjuYbPqGlUU+uIXv13zUv8IJB7OPzzTg6ohYTp3I1lU=;
+        b=c5T1TZ74NzY4koLR7ZYMSeDWh0MajACw4LjNNvBhwo9bEVvJJtzi3Xq0DzkkKfI4Lv
+         5va99ATQvtB3daefXxgARL4TD4qph9P55daebpl6yx7g8Wd2HslQR0Q0P5RvI6KahI79
+         hLGyLCnrwA9Vdi0zhh4Qc1T5s9M7ik8u7ONy8qbE8XsfswONIqi9ASoEuuXD/OWD+3/B
+         vPO0qaVwiWPPVOlPdqis1J2KA/l9jL+qnSeqTO8ESmkWIsQHYVX6PjU0qe2lBrFDGgw4
+         geYfEZBEXChypmVGK+S47F3jy6w/g7ik+KuVYibm6CP34M5VtGwBRxavfoVj2pbqPNYz
+         7F7w==
+X-Gm-Message-State: AOAM531n7EgF/wqWevPwNb4wDznNcVlUNNh89a5SzkLzxwhHF0raJbIV
+        MFF3Y9ORmGh6fopxVCPby2U=
+X-Google-Smtp-Source: ABdhPJwX1a1/fFvnULl6HaYsf119iOikOAO7Z7I1JhSJceT872zBsey2kuDqr/eSFqF5a3bgKRPLyA==
+X-Received: by 2002:ac8:7f48:: with SMTP id g8mr199849qtk.622.1644251301886;
+        Mon, 07 Feb 2022 08:28:21 -0800 (PST)
+Received: from localhost.localdomain (c-67-187-90-124.hsd1.ky.comcast.net. [67.187.90.124])
+        by smtp.gmail.com with ESMTPSA id w3sm6175253qta.13.2022.02.07.08.28.20
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 07 Feb 2022 08:28:21 -0800 (PST)
+From:   frowand.list@gmail.com
+To:     Jonathan Corbet <corbet@lwn.net>, David Gow <davidgow@google.com>,
+        Shuah Khan <skhan@linuxfoundation.org>,
+        Kees Cook <keescook@chromium.org>, Rae Moar <rmoar@google.com>,
+        Tim.Bird@sony.com, Brendan Higgins <brendanhiggins@google.com>
+Cc:     rmr167@gmail.com, guillaume.tucker@collabora.com,
+        dlatypov@google.com, kernelci@groups.io,
+        kunit-dev@googlegroups.com, linux-kselftest@vger.kernel.org,
+        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org
+Subject: [PATCH v2 1/1] Documentation: dev-tools: clarify KTAP specification wording
+Date:   Mon,  7 Feb 2022 10:28:13 -0600
+Message-Id: <20220207162813.3091899-1-frowand.list@gmail.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.5.0
-Subject: Re: [PATCH v2 0/4] docs: sphinx/kfigure.py: Improve conversion to PDF
-Content-Language: en-US
-To:     Jonathan Corbet <corbet@lwn.net>
-Cc:     Randy Dunlap <rdunlap@infradead.org>, linux-doc@vger.kernel.org,
-        linux-kernel@vger.kernel.org,
-        Mauro Carvalho Chehab <mchehab@kernel.org>,
-        Akira Yokosawa <akiyks@gmail.com>
-References: <e01fe9f9-f600-c2fc-c6b3-ef6395655ffe@gmail.com>
- <e545803a-8f09-f0e7-4ca0-16b673ef1796@gmail.com>
- <20220114094535.5bb9ba94@coco.lan>
- <e03de287-4eef-8a68-89f3-8614db66a74b@gmail.com>
- <87bl0c7l79.fsf@meer.lwn.net>
-From:   Akira Yokosawa <akiyks@gmail.com>
-In-Reply-To: <87bl0c7l79.fsf@meer.lwn.net>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 X-Spam-Status: No, score=-2.1 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_FROM,NICE_REPLY_A,
+        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_FROM,
         RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,SPF_PASS,T_SCC_BODY_TEXT_LINE
         autolearn=ham autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
@@ -79,26 +72,86 @@ Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Sat, 15 Jan 2022 14:17:30 -0700,
-Jonathan Corbet wrote:
-> Akira Yokosawa <akiyks@gmail.com> writes:
-> 
->> We are in the middle of the v5.17 merge window, and I think of this
->> series as a v5.18 material.
->> Which means it won't be merged into doc-next until v5.17-rc5 or -rc6
->> (mid March or so), unless Jon thinks otherwise.
-> 
-> I'd rather merge it rather sooner than that if possible; 5.18 stuff will
-> start going into docs-next shortly.
+From: Frank Rowand <frank.rowand@sony.com>
 
-Jon,
+Add the spec version to the title line.
 
-Hearing no objection since mid January, I think it is time for you to
-merge this series into docs-next.
+Explain likely source of "Unknown lines".
 
-        Thanks, Akira
+"Unknown lines" in nested tests are optionally indented.
 
-> 
-> Thanks,
-> 
-> jon
+Add "Unknown lines" items to differences between TAP & KTAP list
+
+Signed-off-by: Frank Rowand <frank.rowand@sony.com>
+---
+
+Changes since version 1
+  - Explain likely source of "Unknown lines"
+  - "Unknown line" in nested tests are optionally indented
+  - Add "Unknown lines" items to differences between TAP & KTAP list
+
+ Documentation/dev-tools/ktap.rst | 24 ++++++++++++++++++------
+ 1 file changed, 18 insertions(+), 6 deletions(-)
+
+diff --git a/Documentation/dev-tools/ktap.rst b/Documentation/dev-tools/ktap.rst
+index 878530cb9c27..9c40c94d3f12 100644
+--- a/Documentation/dev-tools/ktap.rst
++++ b/Documentation/dev-tools/ktap.rst
+@@ -1,8 +1,8 @@
+ .. SPDX-License-Identifier: GPL-2.0
+ 
+-========================================
+-The Kernel Test Anything Protocol (KTAP)
+-========================================
++===================================================
++The Kernel Test Anything Protocol (KTAP), version 1
++===================================================
+ 
+ TAP, or the Test Anything Protocol is a format for specifying test results used
+ by a number of projects. It's website and specification are found at this `link
+@@ -174,6 +174,13 @@ There may be lines within KTAP output that do not follow the format of one of
+ the four formats for lines described above. This is allowed, however, they will
+ not influence the status of the tests.
+ 
++This is an important difference from TAP.  Kernel tests may print messages
++to the system console or a log file.  Both of these destinations may contain
++messages either from unrelated kernel or userspace activity, or kernel
++messages from non-test code that is invoked by the test.  The kernel code
++invoked by the test likely is not aware that a test is in progress and
++thus can not print the message as a diagnostic message.
++
+ Nested tests
+ ------------
+ 
+@@ -186,10 +193,13 @@ starting with another KTAP version line and test plan, and end with the overall
+ result. If one of the subtests fail, for example, the parent test should also
+ fail.
+ 
+-Additionally, all result lines in a subtest should be indented. One level of
++Additionally, all lines in a subtest should be indented. One level of
+ indentation is two spaces: "  ". The indentation should begin at the version
+ line and should end before the parent test's result line.
+ 
++"Unknown lines" are not considered to be lines in a subtest and thus are
++allowed to be either indented or not indented.
++
+ An example of a test with two nested subtests:
+ 
+ .. code-block::
+@@ -225,9 +235,11 @@ Major differences between TAP and KTAP
+ --------------------------------------
+ 
+ Note the major differences between the TAP and KTAP specification:
+-- yaml and json are not recommended in diagnostic messages
+-- TODO directive not recognized
++- yaml and json are not recommended in KTAP diagnostic messages
++- TODO directive not recognized in KTAP
+ - KTAP allows for an arbitrary number of tests to be nested
++- TAP includes "Unknown lines" in the category of "Anything else"
++- TAP says "Unknown lines" are "incorrect; KTAP allows "Unknown lines"
+ 
+ The TAP14 specification does permit nested tests, but instead of using another
+ nested version line, uses a line of the form
+-- 
+Frank Rowand <frank.rowand@sony.com>
+
