@@ -2,78 +2,47 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id EDA5A4AB154
-	for <lists+linux-doc@lfdr.de>; Sun,  6 Feb 2022 19:42:32 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 04AC24AB34F
+	for <lists+linux-doc@lfdr.de>; Mon,  7 Feb 2022 03:11:07 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S237047AbiBFSmb (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Sun, 6 Feb 2022 13:42:31 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:56120 "EHLO
+        id S240941AbiBGCLG (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Sun, 6 Feb 2022 21:11:06 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:42232 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S229794AbiBFSma (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Sun, 6 Feb 2022 13:42:30 -0500
-Received: from ams.source.kernel.org (ams.source.kernel.org [IPv6:2604:1380:4601:e00::1])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 46652C06173B;
-        Sun,  6 Feb 2022 10:42:28 -0800 (PST)
-Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
-        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
-        (No client certificate requested)
-        by ams.source.kernel.org (Postfix) with ESMTPS id CB4E2B80CF1;
-        Sun,  6 Feb 2022 18:42:26 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 4C1ADC340E9;
-        Sun,  6 Feb 2022 18:42:09 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-        s=k20201202; t=1644172945;
-        bh=ZHwFuWPqq+nhkelKsI7f7GhTLv5eAfwuxjFpnOSGkUw=;
-        h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-        b=XFEMDVTrzxclH7giQVni2jRu6plPDcf3UJ/7EUbvDlh69SL0zAiDc2t6xE/cfO8OJ
-         9IEE3sHgg2DFFwWK5n841pn1ZSr+yMXfKaP19Ldc2Rrkg+zzv38ieiUClHOFWwfYmv
-         00/mIVIJ59EJoGHgpcu1XPtsomQWUKJw24xggL7rKjWvvp152RczW5T4UDEcxeWDbk
-         n+fd//WFpUVWKnzvRWQK440yQbyPORqxhohUou10VXJG3tWqbgVHZPmuChOXAR9mjT
-         L/faPpS/HJQ/0d0cEQ+ohEY/zOHkGF3AoBIhzZ/XMI72TbHeXyGzrnOhKR61cTWSxz
-         pv47Lht61R6dA==
-Date:   Sun, 6 Feb 2022 20:42:03 +0200
-From:   Mike Rapoport <rppt@kernel.org>
-To:     Rick Edgecombe <rick.p.edgecombe@intel.com>
-Cc:     x86@kernel.org, "H . Peter Anvin" <hpa@zytor.com>,
-        Thomas Gleixner <tglx@linutronix.de>,
-        Ingo Molnar <mingo@redhat.com>, linux-kernel@vger.kernel.org,
-        linux-doc@vger.kernel.org, linux-mm@kvack.org,
-        linux-arch@vger.kernel.org, linux-api@vger.kernel.org,
-        Arnd Bergmann <arnd@arndb.de>,
-        Andy Lutomirski <luto@kernel.org>,
-        Balbir Singh <bsingharora@gmail.com>,
-        Borislav Petkov <bp@alien8.de>,
-        Cyrill Gorcunov <gorcunov@gmail.com>,
-        Dave Hansen <dave.hansen@linux.intel.com>,
-        Eugene Syromiatnikov <esyr@redhat.com>,
-        Florian Weimer <fweimer@redhat.com>,
-        "H . J . Lu" <hjl.tools@gmail.com>, Jann Horn <jannh@google.com>,
-        Jonathan Corbet <corbet@lwn.net>,
-        Kees Cook <keescook@chromium.org>,
-        Mike Kravetz <mike.kravetz@oracle.com>,
-        Nadav Amit <nadav.amit@gmail.com>,
-        Oleg Nesterov <oleg@redhat.com>, Pavel Machek <pavel@ucw.cz>,
-        Peter Zijlstra <peterz@infradead.org>,
-        Randy Dunlap <rdunlap@infradead.org>,
-        "Ravi V . Shankar" <ravi.v.shankar@intel.com>,
-        Dave Martin <Dave.Martin@arm.com>,
-        Weijiang Yang <weijiang.yang@intel.com>,
-        "Kirill A . Shutemov" <kirill.shutemov@linux.intel.com>,
-        joao.moreira@intel.com, John Allen <john.allen@amd.com>,
-        kcc@google.com, eranian@google.com,
-        Andrei Vagin <avagin@gmail.com>,
-        Adrian Reber <adrian@lisas.de>,
-        Dmitry Safonov <0x7f454c46@gmail.com>
-Subject: Re: [PATCH 00/35] Shadow stacks for userspace
-Message-ID: <YgAWVSGQg8FPCeba@kernel.org>
-References: <20220130211838.8382-1-rick.p.edgecombe@intel.com>
+        with ESMTP id S231342AbiBGCLG (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Sun, 6 Feb 2022 21:11:06 -0500
+Received: from szxga01-in.huawei.com (szxga01-in.huawei.com [45.249.212.187])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 957DEC061A73
+        for <linux-doc@vger.kernel.org>; Sun,  6 Feb 2022 18:11:04 -0800 (PST)
+Received: from dggpeml500024.china.huawei.com (unknown [172.30.72.54])
+        by szxga01-in.huawei.com (SkyGuard) with ESMTP id 4JsTdg3n9rzccjN;
+        Mon,  7 Feb 2022 09:51:35 +0800 (CST)
+Received: from dggpeml500006.china.huawei.com (7.185.36.76) by
+ dggpeml500024.china.huawei.com (7.185.36.10) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2308.21; Mon, 7 Feb 2022 09:52:34 +0800
+Received: from huawei.com (10.175.100.227) by dggpeml500006.china.huawei.com
+ (7.185.36.76) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2308.21; Mon, 7 Feb
+ 2022 09:52:33 +0800
+From:   Tang Yizhou <tangyizhou@huawei.com>
+To:     <siyanteng@loongson.cn>, <siyanteng01@gmail.com>,
+        <alexs@kernel.org>, <seakeel@gmail.com>
+CC:     <linux-doc@vger.kernel.org>, <corbet@lwn.net>,
+        <zhengbin13@huawei.com>, <tangyeechou@gmail.com>,
+        Tang Yizhou <tangyizhou@huawei.com>
+Subject: [PATCH] docs/zh_CN: Add sched-energy Chinese translation
+Date:   Mon, 7 Feb 2022 10:25:21 +0800
+Message-ID: <20220207022521.27487-1-tangyizhou@huawei.com>
+X-Mailer: git-send-email 2.17.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
-In-Reply-To: <20220130211838.8382-1-rick.p.edgecombe@intel.com>
-X-Spam-Status: No, score=-7.1 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_HI,
+X-Originating-IP: [10.175.100.227]
+X-ClientProxiedBy: dggems703-chm.china.huawei.com (10.3.19.180) To
+ dggpeml500006.china.huawei.com (7.185.36.76)
+X-CFilter-Loop: Reflected
+X-Spam-Status: No, score=-4.2 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_MED,
         SPF_HELO_NONE,SPF_PASS,T_SCC_BODY_TEXT_LINE autolearn=ham
         autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
@@ -82,443 +51,399 @@ Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-(added more CRIU people)
+Translate scheduler/sched-energy.rst into Chinese.
 
-On Sun, Jan 30, 2022 at 01:18:03PM -0800, Rick Edgecombe wrote:
-> Hi,
-> 
-> This is a slight reboot of the userspace CET series. I will be taking over the 
-> series from Yu-cheng. Per some internal recommendations, I’ve reset the version
-> number and am calling it a new series. Hopefully, it doesn’t cause confusion.
-> 
-> The new plan is to upstream only userspace Shadow Stack support at this point. 
-> IBT can follow later, but for now I’ll focus solely on the most in-demand and
-> widely available (with the feature on AMD CPUs now) part of CET.
-> 
-> I thought as part of this reset, it might be useful to more fully write-up the 
-> design and summarize the history of the previous CET series. So this slightly
-> long cover letter does that. The "Updates" section has the changes, if anyone
-> doesn't want the history.
-> 
-> 
-> Why is Shadow Stack Wanted
-> ==========================
-> The main use case for userspace shadow stack is providing protection against 
-> return oriented programming attacks. Fedora and Ubuntu already have many/most 
-> packages enabled for shadow stack. The main missing piece is Linux kernel 
-> support and there seems to be a high amount of interest in the ecosystem for
-> getting this feature supported. Besides security, Google has also done some
-> work on using shadow stack to improve performance and reliability of tracing.
-> 
-> 
-> Userspace Shadow Stack Implementation
-> =====================================
-> Shadow stack works by maintaining a secondary (shadow) stack that cannot be 
-> directly modified by applications. When executing a CALL instruction, the 
-> processor pushes the return address to both the normal stack and to the special 
-> permissioned shadow stack. Upon ret, the processor pops the shadow stack copy 
-> and compares it to the normal stack copy. If the two differ, the processor 
-> raises a control protection fault. This implementation supports shadow stack on 
-> 64 bit kernels only, with support for 32 bit only via IA32 emulation.
-> 
-> 	Shadow Stack Memory
-> 	-------------------
-> 	The majority of this series deals with changes for handling the special 
-> 	shadow stack memory permissions. This memory is specified by the 
-> 	Dirty+RO PTE bits. A tricky aspect of this is that this combination was 
-> 	previously used to specify COW memory. So Linux needs to handle COW 
-> 	differently when shadow stack is in use. The solution is to use a 
-> 	software PTE bit to denote COW memory, and take care to clear the dirty
-> 	bit when setting the memory RO.
-> 
-> 	Setup and Upkeep of HW Registers
-> 	--------------------------------
-> 	Using userspace CET requires a CR4 bit set, and also the manipulation 
-> 	of two xsave managed MSRs. The kernel needs to modify these registers 
-> 	during various operations like clone and signal handling. These 
-> 	operations may happen when the registers are restored to the CPU, or 
-> 	saved in an xsave buffer. Since the recent AMX triggered FPU overhaul 
-> 	removed direct access to the xsave buffer, this series adds an 
-> 	interface to operate on the supervisor xstate.
-> 
-> 	New ABIs
-> 	--------
-> 	This series introduces some new ABIs. The primary one is the shadow 
-> 	stack itself. Since it is readable and the shadow stack pointer is 
-> 	exposed to user space, applications can easily read and process the 
-> 	shadow stack. And in fact the tracing usages plan to do exactly that.
-> 
-> 	Most of the shadow stack contents are written by HW, but some of the 
-> 	entries are added by the kernel. The main place for this is signals. As 
-> 	part of handling the signal the kernel does some manual adjustment of 
-> 	the shadow stack that userspace depends on.
-> 
-> 	In addition to the contents of the shadow stack there is also user 
-> 	visible behavior around when new shadow stacks are created and set in 
-> 	the shadow stack pointer (SSP) register. This is relatively 
-> 	straightforward – shadow stacks are created when new stacks are created 
-> 	(thread creation, fork, etc). It is more or less what is required to 
-> 	keep apps working.
-> 
-> 	For situations when userspace creates a new stack (i.e. makecontext(), 
-> 	fibers, etc), a new syscall is provided for creating shadow stack 
-> 	memory. To make the shadow stack usable, it needs to have a restore 
-> 	token written to the protected memory. So the syscall provides a way to 
-> 	specificity this should be done by the kernel.
-> 
-> 	When a shadow stack violation happens (when the return address of stack 
-> 	not matching return address in shadow stack), a segfault is generated 
-> 	with a new si_code specific to CET violations.
-> 
-> 	Lastly, a new arch_prctl interface is created for controlling the 
-> 	enablement of CET-like features. It is intended to also be used for 
-> 	LAM. It operates on the feature status per-thread, so for process wide 
-> 	enabling it is intended to be used early in things like dynamic 
-> 	linker/loaders. However, it can be used later for per-thread enablement 
-> 	of features like WRSS.
-> 
-> 	WRSS
-> 	----
-> 	WRSS is an instruction that can write to shadow stacks. The HW provides 
-> 	a way to enable this instruction for userspace use. Since shadow 
-> 	stack’s are created initially protected, enabling WRSS allows any apps 
-> 	that want to do unusual things with their stacks to have a way to 
-> 	weaken protection and make things more flexible. A new feature bit is 
-> 	defined to control enabling/disabling of WRSS.
-> 
-> 
-> History
-> =======
-> The branding “CET” really consists of two features: “Shadow Stack” and 
-> “Indirect Branch Tracking”. They both restrict previously allowed, but rarely 
-> valid behaviors and require userspace to change to avoid these behaviors before 
-> enabling the protection. These raw HW features need to be assembled into a 
-> software solution across userspace and kernel in order to add security value.
-> The kernel part of this solution has evolved iteratively starting with a lengthy
-> RFC period. 
-> 
-> Until now, the enabling effort was trying to support both Shadow Stack and IBT. 
-> This history will focus on a few areas of the shadow stack development history 
-> that I thought stood out.
-> 
-> 	Signals
-> 	-------
-> 	Originally signals placed the location of the shadow stack restore 
-> 	token inside the saved state on the stack. This was problematic from a 
-> 	past ABI promises perspective. So the restore location was instead just 
-> 	assumed from the shadow stack pointer. This works because in normal 
-> 	allowed cases of calling sigreturn, the shadow stack pointer should be 
-> 	right at the restore token at that time. There is no alternate shadow 
-> 	stack support. If an alt shadow stack is added later we would need to 
-> 	find a place to store the regular shadow stack token location. Options 
-> 	could be to push something on the alt shadow stack, or to keep 
-> 	something on the kernel side. So the current design keeps things simple 
-> 	while slightly kicking the can down the road if alt shadow stacks 
-> 	become a thing later. Siglongjmp is handled in glibc, using the incssp 
-> 	instruction to unwind the shadow stack over the token.
-> 
-> 	Shadow Stack Allocation
-> 	-----------------------
-> 	makecontext() implementations need a way to create new shadow stacks 
-> 	with restore token’s such that they can be pivoted to from userspace. 
-> 	The first interface to do this was an arch_prctl(). It created a shadow 
-> 	stack with a restore token pre-setup, since the kernel has an 
-> 	instruction that can write to user shadow stacks. However, this 
-> 	interface was abandoned for being strange.
-> 
-> 	The next version created PROT_SHADOW_STACK. This interface had two 
-> 	problems. One, it left no options but for userspace to create writable 
-> 	memory, write a restore token, then mproctect() it PROT_SHADOW_STACK. 
-> 	The writable window left the shadow stack exposed, weakening the 
-> 	security. Second, it caused problems with the guard pages. Since the 
-> 	memory was initially created writable it did not have a guard page, but 
-> 	then was mprotected later to a type of memory that should have one. 
-> 	This resulted in missing guard pages and confused rb_subtree_gap’s.
-> 
-> 	This version introduces a new syscall that behaves similarly to the 
-> 	initial arch_prctl() interface in that it has the kernel write the 
-> 	restore token.
-> 
-> 	Enabling Interface
-> 	------------------
-> 	For the entire history of the original CET series, the design was to 
-> 	enable shadow stack automatically if the feature bit was detected in 
-> 	the elf header. Then it was userspace’s responsibility to turn it off 
-> 	via an arch_prctl() if it was not desired, and this was handled by the 
-> 	glibc dynamic loader. Glibc’s standard behavior (when CET if configured 
-> 	is to leave shadow stack enabled if the executable and all linked 
-> 	libraries are marked with shadow stacks.
-> 
-> 	Many distros (Fedora and others) have binaries already marked with 
-> 	shadow stack, waiting for kernel support. Unfortunately their glibc 
-> 	binaries expect the original arch_prctl() interface for allocating 
-> 	shadow stacks, as those changes were pushed ahead of kernel support. 
-> 	The net result of it all is, when updating to a kernel with shadow 
-> 	stack these binaries would suddenly get shadow stack enabled and expect 
-> 	the arch_prctl() interface to be there. And so calls to makecontext() 
-> 	will fail, resulting in visible breakages. This series deals with this 
-> 	problem as described below in "Updates".
-> 
-> 
-> Updates
-> =======
-> These updates were mostly driven by public comments, but a lot of the design 
-> elements are new. I would like some extra scrutiny on the updates.
-> 
-> 	New syscall for Shadow Stack Allocation
-> 	---------------------------------------
-> 	A new syscall is added for allocating shadow stacks to replace 
-> 	PROT_SHADOW_STACK. Several options were considered, as described in the 
-> 	“x86/cet/shstk: Introduce map_shadow_stack syscall”.
-> 
-> 	Xsave Managed Supervisor State Modifications
-> 	--------------------------------------------
-> 	The shadow stack feature requires the kernel to modify xsaves managed 
-> 	state. On one of the last versions of Yu-cheng’s series Boris had 
-> 	commented on the pattern it was using to do this not necessarily being 
-> 	ideal. The pattern was to force a restore to the registers and always 
-> 	do the modification there. Then Thomas did an overhaul of the fpu code, 
-> 	part of which consisted of making raw access to the xsave buffer 
-> 	private to the fpu code. So this series tries to expose access again, 
-> 	and in a way that addresses Boris’ comments.
-> 
-> 	The method is to provide functions like wmsrl/rdmsrl, but that can 
-> 	direct the operation to the correct location (registers or buffer), 
-> 	while giving the proper notice to the fpu subsystem so things don’t get 
-> 	clobbered or corrupted.
-> 
-> 	In the past a solution like this was discussed as part of the PASID 
-> 	series, and Thomas was not in favor. In CET’s case there is a more 
-> 	logic around the CET MSR’s than in PASID's, and wrapping this logic 
-> 	minimizes near identical open coded logic needed to do this more 
-> 	efficiently. In addition it resolves the above described problem of 
-> 	having no access to the xsave buffer. So it is being put forward here 
-> 	under the supposition that CET’s usage may lead to a different 
-> 	conclusion, not to try to ignore past direction.
-> 
-> 	The user interrupt series has similar needs as CET, and will also use
-> 	this internal interface if it’s found acceptable.
-> 
-> 	Support for WRSS
-> 	----------------
-> 	Andy Lutomirski had asked if we change the shadow stack allocation API 
-> 	such that userspace cannot create arbitrary shadow stacks, then we look 
-> 	at exposing an interface to enable the WRSS instruction for userspace. 
-> 	This way app’s that want to do unexpected things with shadow stacks 
-> 	would still have the option to create shadow stacks with arbitrary 
-> 	data.
-> 
-> 	Switch Enabling Interface
-> 	-------------------------
-> 	As described above there is a problem with userspace binaries waiting 
-> 	to break as soon as the kernel supports CET. This needs to be prevented 
-> 	by changing the interface such that the old binaries will not enable 
-> 	shadow stack AND behave as if shadow stack is not enabled. They should 
-> 	run normally without shadow stack protection. Creating a new feature 
-> 	(SHSTK2) for shadow stack was explored. SHSTK would never be supported 
-> 	by the kernel, and all the userspace build tools would be updated to 
-> 	target SHSTK2 instead of SHSTK. So old SHSTK binaries would be cleanly
-> 	disabled.
-> 
-> 	But there are existing downsides to automatic elf header processing 
-> 	based enabling. The elf header feature spec is not defined by the 
-> 	kernel and there are proposals to expand it to describe additional 
-> 	logic. A simpler interface where the kernel is simply told what to 
-> 	enable, and leaves all the decision making to userspace, is more 
-> 	flexible for userspace and simpler for the kernel. There also already 
-> 	needs to be an ARCH_X86_FEATURE_ENABLE arch_prctl() for WRSS (and 
-> 	likely LAM will use it too), so it avoids there being two ways to turn 
-> 	on these types of features. The only tricky part for shadow stack, is 
-> 	that it has to be enabled very early. Wherever the shadow stack is 
-> 	enabled, the app cannot return from that point, otherwise there will be 
-> 	a shadow stack violation. It turns out glibc can enable shadow stack 
-> 	this early, so it works nicely. So not automatically enabling any 
-> 	features in the elf header will cleanly disable all old binaries, which 
-> 	expect the kernel to enable CET features automatically. Then after the 
-> 	kernel changes are upstream, glibc can be updated to use the new
-> 	interface. This is the solution implemented in this series.
-> 
-> 	Expand Commit Logs
-> 	------------------
-> 	As part of spinning up on this series, I found some of the commit logs 
-> 	did not describe the changes in enough detail for me understand their 
-> 	purpose. I tried to expand the logs and comments, where I had to go 
-> 	digging. Hopefully it’s useful.
-> 	
-> 	Limit to only Intel Processors
-> 	------------------------------
-> 	Shadow stack is supported on some AMD processors, but this revision 
-> 	(with expanded HW usage and xsaves changes) has only has been tested on 
-> 	Intel ones. So this series has a patch to limit shadow stack support to 
-> 	Intel processors. Ideally the patch would not even make it to mainline, 
-> 	and should be dropped as soon as this testing is done. It's included 
-> 	just in case.
-> 
-> 
-> Future Work
-> ===========
-> Even though this is now exclusively a shadow stack series, there is still some 
-> remaining shadow stack work to be done.
-> 
-> 	Ptrace
-> 	------
-> 	Early in the series, there was a patch to allow IA32_U_CET and
-> 	IA32_PL3_SSP to be set. This patch was dropped and planned as a follow
-> 	up to basic support, and it remains the plan. It will be needed for
-> 	in-progress gdb support.
-> 
-> 	CRIU Support
-> 	------------
-> 	In the past there was some speculation on the mailing list about 
-> 	whether CRIU would need to be taught about CET. It turns out, it does. 
-> 	The first issue hit is that CRIU calls sigreturn directly from its 
-> 	“parasite code” that it injects into the dumper process. This violates
-> 	this shadow stack implementation’s protection that intends to prevent
-> 	attackers from doing this.
-> 
-> 	With so many packages already enabled with shadow stack, there is 
-> 	probably desire to make it work seamlessly. But in the meantime if 
-> 	distros want to support shadow stack and CRIU, users could manually 
-> 	disabled shadow stack via “GLIBC_TUNABLES=glibc.cpu.x86_shstk=off” for 
-> 	a process they will wants to dump. It’s not ideal.
-> 
-> 	I’d like to hear what people think about having shadow stack in the 
-> 	kernel without this resolved. Nothing would change for any users until 
-> 	they enable shadow stack in the kernel and update to a glibc configured
-> 	with CET. Should CRIU userspace be solved before kernel support?
-> 
-> 	Selftests
-> 	---------
-> 	There are some CET selftests being worked on and they are not included
-> 	here.
-> 
-> Thanks,
-> 
-> Rick
-> 
-> Rick Edgecombe (7):
->   x86/mm: Prevent VM_WRITE shadow stacks
->   x86/fpu: Add helpers for modifying supervisor xstate
->   x86/fpu: Add unsafe xsave buffer helpers
->   x86/cet/shstk: Introduce map_shadow_stack syscall
->   selftests/x86: Add map_shadow_stack syscall test
->   x86/cet/shstk: Support wrss for userspace
->   x86/cpufeatures: Limit shadow stack to Intel CPUs
-> 
-> Yu-cheng Yu (28):
->   Documentation/x86: Add CET description
->   x86/cet/shstk: Add Kconfig option for Shadow Stack
->   x86/cpufeatures: Add CET CPU feature flags for Control-flow
->     Enforcement Technology (CET)
->   x86/cpufeatures: Introduce CPU setup and option parsing for CET
->   x86/fpu/xstate: Introduce CET MSR and XSAVES supervisor states
->   x86/cet: Add control-protection fault handler
->   x86/mm: Remove _PAGE_DIRTY from kernel RO pages
->   x86/mm: Move pmd_write(), pud_write() up in the file
->   x86/mm: Introduce _PAGE_COW
->   drm/i915/gvt: Change _PAGE_DIRTY to _PAGE_DIRTY_BITS
->   x86/mm: Update pte_modify for _PAGE_COW
->   x86/mm: Update ptep_set_wrprotect() and pmdp_set_wrprotect() for
->     transition from _PAGE_DIRTY to _PAGE_COW
->   mm: Move VM_UFFD_MINOR_BIT from 37 to 38
->   mm: Introduce VM_SHADOW_STACK for shadow stack memory
->   x86/mm: Check Shadow Stack page fault errors
->   x86/mm: Update maybe_mkwrite() for shadow stack
->   mm: Fixup places that call pte_mkwrite() directly
->   mm: Add guard pages around a shadow stack.
->   mm/mmap: Add shadow stack pages to memory accounting
->   mm: Update can_follow_write_pte() for shadow stack
->   mm/mprotect: Exclude shadow stack from preserve_write
->   mm: Re-introduce vm_flags to do_mmap()
->   x86/cet/shstk: Add user-mode shadow stack support
->   x86/process: Change copy_thread() argument 'arg' to 'stack_size'
->   x86/cet/shstk: Handle thread shadow stack
->   x86/cet/shstk: Introduce shadow stack token setup/verify routines
->   x86/cet/shstk: Handle signals for shadow stack
->   x86/cet/shstk: Add arch_prctl elf feature functions
-> 
->  .../admin-guide/kernel-parameters.txt         |   4 +
->  Documentation/filesystems/proc.rst            |   1 +
->  Documentation/x86/cet.rst                     | 145 ++++++
->  Documentation/x86/index.rst                   |   1 +
->  arch/arm/kernel/signal.c                      |   2 +-
->  arch/arm64/kernel/signal.c                    |   2 +-
->  arch/arm64/kernel/signal32.c                  |   2 +-
->  arch/sparc/kernel/signal32.c                  |   2 +-
->  arch/sparc/kernel/signal_64.c                 |   2 +-
->  arch/x86/Kconfig                              |  22 +
->  arch/x86/Kconfig.assembler                    |   5 +
->  arch/x86/entry/syscalls/syscall_32.tbl        |   1 +
->  arch/x86/entry/syscalls/syscall_64.tbl        |   1 +
->  arch/x86/ia32/ia32_signal.c                   |  25 +-
->  arch/x86/include/asm/cet.h                    |  54 +++
->  arch/x86/include/asm/cpufeatures.h            |   1 +
->  arch/x86/include/asm/disabled-features.h      |   8 +-
->  arch/x86/include/asm/fpu/api.h                |   8 +
->  arch/x86/include/asm/fpu/types.h              |  23 +-
->  arch/x86/include/asm/fpu/xstate.h             |   6 +-
->  arch/x86/include/asm/idtentry.h               |   4 +
->  arch/x86/include/asm/mman.h                   |  24 +
->  arch/x86/include/asm/mmu_context.h            |   2 +
->  arch/x86/include/asm/msr-index.h              |  20 +
->  arch/x86/include/asm/page_types.h             |   7 +
->  arch/x86/include/asm/pgtable.h                | 302 ++++++++++--
->  arch/x86/include/asm/pgtable_types.h          |  48 +-
->  arch/x86/include/asm/processor.h              |   6 +
->  arch/x86/include/asm/special_insns.h          |  30 ++
->  arch/x86/include/asm/trap_pf.h                |   2 +
->  arch/x86/include/uapi/asm/mman.h              |   8 +-
->  arch/x86/include/uapi/asm/prctl.h             |  10 +
->  arch/x86/include/uapi/asm/processor-flags.h   |   2 +
->  arch/x86/kernel/Makefile                      |   1 +
->  arch/x86/kernel/cpu/common.c                  |  20 +
->  arch/x86/kernel/cpu/cpuid-deps.c              |   1 +
->  arch/x86/kernel/elf_feature_prctl.c           |  72 +++
->  arch/x86/kernel/fpu/xstate.c                  | 167 ++++++-
->  arch/x86/kernel/idt.c                         |   4 +
->  arch/x86/kernel/process.c                     |  17 +-
->  arch/x86/kernel/process_64.c                  |   2 +
->  arch/x86/kernel/shstk.c                       | 446 ++++++++++++++++++
->  arch/x86/kernel/signal.c                      |  13 +
->  arch/x86/kernel/signal_compat.c               |   2 +-
->  arch/x86/kernel/traps.c                       |  62 +++
->  arch/x86/mm/fault.c                           |  19 +
->  arch/x86/mm/mmap.c                            |  48 ++
->  arch/x86/mm/pat/set_memory.c                  |   2 +-
->  arch/x86/mm/pgtable.c                         |  25 +
->  drivers/gpu/drm/i915/gvt/gtt.c                |   2 +-
->  fs/aio.c                                      |   2 +-
->  fs/proc/task_mmu.c                            |   3 +
->  include/linux/mm.h                            |  19 +-
->  include/linux/pgtable.h                       |   8 +
->  include/linux/syscalls.h                      |   1 +
->  include/uapi/asm-generic/siginfo.h            |   3 +-
->  include/uapi/asm-generic/unistd.h             |   2 +-
->  ipc/shm.c                                     |   2 +-
->  kernel/sys_ni.c                               |   1 +
->  mm/gup.c                                      |  16 +-
->  mm/huge_memory.c                              |  27 +-
->  mm/memory.c                                   |   5 +-
->  mm/migrate.c                                  |   3 +-
->  mm/mmap.c                                     |  15 +-
->  mm/mprotect.c                                 |   9 +-
->  mm/nommu.c                                    |   4 +-
->  mm/util.c                                     |   2 +-
->  tools/testing/selftests/x86/Makefile          |   9 +-
->  .../selftests/x86/test_map_shadow_stack.c     |  75 +++
->  69 files changed, 1797 insertions(+), 92 deletions(-)
->  create mode 100644 Documentation/x86/cet.rst
->  create mode 100644 arch/x86/include/asm/cet.h
->  create mode 100644 arch/x86/include/asm/mman.h
->  create mode 100644 arch/x86/kernel/elf_feature_prctl.c
->  create mode 100644 arch/x86/kernel/shstk.c
->  create mode 100644 tools/testing/selftests/x86/test_map_shadow_stack.c
-> 
-> 
-> base-commit: e783362eb54cd99b2cac8b3a9aeac942e6f6ac07
-> -- 
-> 2.17.1
+Signed-off-by: Tang Yizhou <tangyizhou@huawei.com>
+---
+ .../translations/zh_CN/scheduler/index.rst    |   4 +-
+ .../zh_CN/scheduler/sched-energy.rst          | 351 ++++++++++++++++++
+ 2 files changed, 353 insertions(+), 2 deletions(-)
+ create mode 100644 Documentation/translations/zh_CN/scheduler/sched-energy.rst
 
+diff --git a/Documentation/translations/zh_CN/scheduler/index.rst b/Documentation/translations/zh_CN/scheduler/index.rst
+index f8f8f35d53c7..ab7925980266 100644
+--- a/Documentation/translations/zh_CN/scheduler/index.rst
++++ b/Documentation/translations/zh_CN/scheduler/index.rst
+@@ -5,6 +5,7 @@
+ :翻译:
+ 
+  司延腾 Yanteng Si <siyanteng@loongson.cn>
++ 唐艺舟 Tang Yizhou <tangyeechou@gmail.com>
+ 
+ :校译:
+ 
+@@ -23,13 +24,12 @@ Linux调度器
+     sched-design-CFS
+     sched-domains
+     sched-capacity
++    sched-energy
+ 
+ 
+ TODOList:
+ 
+-    sched-bwc
+     sched-deadline
+-    sched-energy
+     sched-nice-design
+     sched-rt-group
+     sched-stats
+diff --git a/Documentation/translations/zh_CN/scheduler/sched-energy.rst b/Documentation/translations/zh_CN/scheduler/sched-energy.rst
+new file mode 100644
+index 000000000000..5ea3980b0ebd
+--- /dev/null
++++ b/Documentation/translations/zh_CN/scheduler/sched-energy.rst
+@@ -0,0 +1,351 @@
++.. SPDX-License-Identifier: GPL-2.0
++.. include:: ../disclaimer-zh_CN.rst
++
++:Original: Documentation/scheduler/sched-energy.rst
++
++:翻译:
++
++  唐艺舟 Tang Yizhou <tangyeechou@gmail.com>
++
++============
++能量感知调度
++============
++
++1. 简介
++-------
++
++能量感知调度（EAS）使调度器有能力预测其决策对CPU所消耗的能量的影响。EAS依靠
++一个能量模型（EM）来为每个任务选择一个节能的CPU，同时最小化对吞吐率的影响。
++本文档致力于介绍介绍EAS是如何工作的，它背后的主要设计决策是什么，以及使其运行
++所需的条件细节。
++
++在进一步阅读之前，请注意，在撰写本文时::
++
++   /!\ EAS不支持对称CPU拓扑的平台 /!\
++
++EAS只在异构CPU拓扑结构（如Arm大小核，big.LITTLE）上运行。因为在这种情况下，
++通过调度来节约能量的潜力是最大的。
++
++EAS实际使用的EM不是由调度器维护的，而是一个专门的框架。关于这个框架的细节和
++它提供的内容，请参考其文档（见Documentation/power/energy-model.rst）。
++
++
++2. 背景和术语
++-------------
++
++从一开始就说清楚定义:
++ - 能量 = [焦耳] （比如供电设备上的电池提供的资源）
++ - 功率 = 能量/时间 = [焦耳/秒] = [瓦特]
++
++ EAS的目标是最小化能量，同时仍能将工作完成。也就是说，我们要最大化::
++
++	性能 [指令数/秒]
++	----------------
++	   功率 [瓦特]
++
++它等效于最小化::
++
++	能量 [焦耳]
++	-----------
++	   指令数
++
++同时仍然获得“良好”的性能。当前调度器只考虑性能目标，因此该式子本质上是一个
++可选的优化目标，它同时考虑了两个目标：能量效率和性能。
++
++引入EM的想法是为了让调度器评估其决策的影响，而不是盲目地应用可能仅在部分
++平台有正面效果的节能技术。同时，EM必须尽可能的简单，以最小化调度器的时延
++影响。
++
++简而言之，EAS改变了CFS任务分配给CPU的方式。当调度器决定一个任务应该在哪里
++运行时（在唤醒期间），EM被用来在不损害系统吞吐率的情况下，从几个较好的候选
++CPU中挑选一个经预测能量消耗最优的CPU。EAS的预测依赖于对平台拓扑结构特定元素
++的了解，包括CPU的“算力”，以及它们各自的能量成本。
++
++
++3. 拓扑信息
++-----------
++
++EAS（以及调度器的剩余部分）使用“算力”的概念来区分不同计算吞吐率的CPU。一个
++CPU的“算力”代表了它在最高频率下运行时能完成的工作量，且这个值是相对系统中
++算力最大的CPU而言的。算力值被归一化为1024以内，并且可与由实体负载跟踪
++（PELT）机制算出的利用率信号做对比。由于有算力值和利用率值，EAS能够估计一个
++任务/CPU有多大/有多忙，并在评估性能与能量时将其考虑在内。CPU算力由特定体系
++结构实现的arch_scale_cpu_capacity()回调函数提供。
++
++EAS使用的其余平台信息是直接从能量模型（EM）框架中读取的。一个平台的EM是一张
++表，表中每项代表系统中一个“性能域”的功率成本。（若要了解更多关于性能域的细节，
++见文档/power/energy-model.rst）
++
++当调度域被建立或重新建立时，调度器管理对拓扑代码中EM对象的引用。对于每个根域
++（rd），调度器维护一个与当前rd->span相交的所有性能域的单向链表。链表中的每个
++节点都包含一个指向EM框架所提供的结构体em_perf_domain的指针。
++
++链表被附加在根域上，以应对独占的cpuset的配置。由于独占的cpuset的边界不一定与
++性能域的边界一致，不同根域的链表可能包含重复的元素。
++
++示例1
++    让我们考虑一个有12个CPU的平台，分成3个性能域，（pd0，pd4和pd8），按以下
++    方式组织::
++
++	          CPUs:   0 1 2 3 4 5 6 7 8 9 10 11
++	          PDs:   |--pd0--|--pd4--|---pd8---|
++	          RDs:   |----rd1----|-----rd2-----|
++
++    现在，考虑用户空间决定将系统分成两个独占的cpusets，因此创建了两个独立的根域，
++    每个根域包含6个CPU。这两个根域在上图中被表示为rd1和rd2。由于pd4与rd1和rd2
++    都有交集，它将同时出现于附加在这两个根域的“->pd”链表中:
++
++       * rd1->pd: pd0 -> pd4
++       * rd2->pd: pd4 -> pd8
++
++    请注意，调度器将为pd4创建两个重复的链表节点（每个链表中各一个）。然而这
++    两个节点持有指向同一个EM框架的共享数据结构的指针。
++
++由于对这些链表的访问可能与热插拔及其它事件并发发生，因此它们受RCU锁保护，就像
++被调度器操控的拓扑结构中剩下字段一样。
++
++EAS同样维护了一个静态键（sched_energy_present），当至少有一个根域满足EAS
++启动的所有条件时，这个键就会被启动。在第6节中总结了这些条件。
++
++
++4. 能量感知任务放置
++-------------------
++
++EAS覆盖了CFS的任务唤醒平衡代码。在唤醒平衡时，它使用平台的EM和PELT信号来选择节能
++的目标CPU。当EAS被启用时，select_task_rq_fair()调用find_energy_efficient_cpu()
++来做任务放置决定。这个函数寻找在每个性能域中寻找具有最高剩余算力（CPU算力 - CPU
++利用率）的CPU，因为它能让我们保持最低的频率。然后，该函数检查将任务放在新CPU相较
++依然放在之前活动的prev_cpu是否可以节省能量。
++
++find_energy_efficient_cpu()使用compute_energy()来估算如果唤醒的任务被迁移，
++系统将消耗多少能量。compute_energy()检查各CPU当前的利用率情况，并尝试调整来
++“模拟”任务迁移。EM框架提供了API em_pd_energy()计算每个性能域在给定的利用率条件
++下的预期能量消耗。
++
++下面详细介绍一个优化能量消耗的任务放置决策的例子。
++
++示例2
++    让我们考虑一个有两个独立性能域的（伪）平台，每个性能域含有2个CPU。CPU0和CPU1
++    是小核，CPU2和CPU3是大核。
++
++    调度器必须决定将任务P放在哪个CPU上，这个任务的util_avg = 200（平均利用率），
++    prev_cpu = 0（上一次运行在CPU0）。
++
++    目前CPU的利用率情况如下图所示。CPU 0-3的util_avg分别为400、100、600和500。
++    每个性能域有三个操作性能值（OPP）。与每个OPP相关的CPU算力和功率成本列在能量
++    模型表中。P的util_avg在图中显示为"PP"::
++
++     CPU util.
++      1024                 - - - - - - -              Energy Model
++                                               +-----------+-------------+
++                                               |  Little   |     Big     |
++       768                 =============       +-----+-----+------+------+
++                                               | Cap | Pwr | Cap  | Pwr  |
++                                               +-----+-----+------+------+
++       512  ===========    - ##- - - - -       | 170 | 50  | 512  | 400  |
++                             ##     ##         | 341 | 150 | 768  | 800  |
++       341  -PP - - - -      ##     ##         | 512 | 300 | 1024 | 1700 |
++             PP              ##     ##         +-----+-----+------+------+
++       170  -## - - - -      ##     ##
++             ##     ##       ##     ##
++           ------------    -------------
++            CPU0   CPU1     CPU2   CPU3
++
++      Current OPP: =====       Other OPP: - - -     util_avg (100 each): ##
++
++
++    find_energy_efficient_cpu()将首先在两个性能域中寻找具有最大剩余算力的CPU。
++    在这个例子中是CPU1和CPU3。然后，它将估算，当P被放在它们中的任意一个时，系统的
++    能耗，并检查这样做是否会比把P放在CPU0上节省一些能量。EAS假定OPPs遵循利用率
++    （这与CPUFreq监管器schedutil的行为一致。关于这个问题的更多细节，见第6节）。
++
++    **情况1. P被迁移到CPU1**::
++
++      1024                 - - - - - - -
++
++                                            Energy calculation:
++       768                 =============     * CPU0: 200 / 341 * 150 = 88
++                                             * CPU1: 300 / 341 * 150 = 131
++                                             * CPU2: 600 / 768 * 800 = 625
++       512  - - - - - -    - ##- - - - -     * CPU3: 500 / 768 * 800 = 520
++                             ##     ##          => total_energy = 1364
++       341  ===========      ##     ##
++                    PP       ##     ##
++       170  -## - - PP-      ##     ##
++             ##     ##       ##     ##
++           ------------    -------------
++            CPU0   CPU1     CPU2   CPU3
++
++
++    **情况2. P被迁移到CPU3**::
++
++      1024                 - - - - - - -
++
++                                            Energy calculation:
++       768                 =============     * CPU0: 200 / 341 * 150 = 88
++                                             * CPU1: 100 / 341 * 150 = 43
++                                    PP       * CPU2: 600 / 768 * 800 = 625
++       512  - - - - - -    - ##- - -PP -     * CPU3: 700 / 768 * 800 = 729
++                             ##     ##          => total_energy = 1485
++       341  ===========      ##     ##
++                             ##     ##
++       170  -## - - - -      ##     ##
++             ##     ##       ##     ##
++           ------------    -------------
++            CPU0   CPU1     CPU2   CPU3
++
++    **情况3. P依旧留在prev_cpu/CPU0**::
++
++      1024                 - - - - - - -
++
++                                            Energy calculation:
++       768                 =============     * CPU0: 400 / 512 * 300 = 234
++                                             * CPU1: 100 / 512 * 300 = 58
++                                             * CPU2: 600 / 768 * 800 = 625
++       512  ===========    - ##- - - - -     * CPU3: 500 / 768 * 800 = 520
++                             ##     ##          => total_energy = 1437
++       341  -PP - - - -      ##     ##
++             PP              ##     ##
++       170  -## - - - -      ##     ##
++             ##     ##       ##     ##
++           ------------    -------------
++            CPU0   CPU1     CPU2   CPU3
++
++    从这些计算结果来看，情况1的总能量最低。所以从节约能量的角度看，CPU1是最佳候选
++    者。
++
++大核通常比小核更耗电，因此主要在任务不适合在小核运行时使用。然而，小核并不总是比
++大核节能。举例来说，对于某些系统，小核的高OPP可能比大核的低OPP能量消耗更高。因此，
++如果小核在某一特定时间点刚好有足够的利用率，在此刻被唤醒的小任务放在大核执行可能
++会更节能，尽管它在小核上运行也是合适的。
++
++即使在大核所有OPP都不如小核OPP节能的情况下，在某些特定条件下，令小任务运行在大核
++上依然可能节能。事实上，将一个任务放在一个小核上可能导致整个性能域的OPP提高，这将
++增加已经在该性能域运行的任务的能量成本。如果唤醒的任务被放在一个大核上，它的执行
++成本可能比放在小核上更高，但这不会影响小核上的其它任务，这些任务将继续以较低的OPP
++运行。因此，当考虑CPU消耗的总能量时，在大核上运行一个任务的额外成本可能小于为所有
++其它运行在小核的任务提高OPP的成本。
++
++上面的例子几乎不可能以一种通用的方式得到正确的结果；同时，对于所有平台，在不知道
++系统所有CPU每个不同OPP的运行成本时，也无法得到正确的结果。得益于基于EM的设计，
++EAS应该能够正确处理这些问题而不会引发太多麻烦。然而，为了确保对高利用率场景的
++吞吐率造成的影响最小化，EAS同样实现了另外一种叫“过度利用率”的机制。
++
++
++5. 过度利用率
++-------------
++
++从一般的角度来看，EAS能提供最大帮助的是那些涉及低、中CPU利用率的使用场景。每当CPU
++密集型的长任务运行，它们将需要所有的可用CPU算力，调度器将没有什么办法来节省能量同时
++又不损害吞吐率。为了避免EAS损害性能，一旦CPU被使用的算力超过80%，它将被标记为“过度
++利用”。只要根域中没有CPU是过度利用状态，负载均衡被禁用，而EAS将覆盖唤醒平衡代码。
++EAS很可能将负载放置在系统中能量效率最高的CPU而不是其它CPU上，只要不损害吞吐率。
++因此，负载均衡器被禁用以防止它打破EAS发现的节能任务放置。当系统未处于过度利用状态时，
++这样做是安全的，因为低于80%的临界点意味着：
++
++    a. 所有的CPU都有一些空闲时间，所以EAS使用的利用率信号很可能准确地代表各种任务
++       的“大小”。
++    b. 所有任务，不管它们的nice值是多大，都应该被提供了足够多的CPU算力。
++    c. 既然有多余的算力，那么所有的任务都必须定期阻塞/休眠，在唤醒时进行平衡就足够
++       了。
++
++只要一个CPU利用率超过80%的临界点，上述三个假设中至少有一个是不正确的。在这种情况下，
++整个根域的“过度利用”标志被设置，EAS被禁用，负载均衡器被重新启用。通过这样做，调度器
++又回到了在CPU密集的条件下基于负载的算法做负载均衡。这更好地尊重了任务的nice值。
++
++由于过度利用率的概念在很大程度上依赖于检测系统中是否有一些空闲时间，所以必须考虑
++（比CFS）更高优先级的调度类（以及中断）“窃取”的CPU算力。像这样，对过度使用率的检测
++不仅要考虑CFS任务使用的算力，还需要考虑其它调度类和中断。
++
++
++6. EAS的依赖和要求
++------------------
++
++能量感知调度依赖系统的CPU具有特定的硬件属性，以及内核中的其它特性被启用。本节列出
++了这些依赖，并对如何满足这些依赖提供了提示。
++
++
++6.1 - 非对称CPU拓扑
++^^^^^^^^^^^^^^^^^^^
++
++
++如简介所提，目前只有非对称CPU拓扑结构的平台支持EAS。通过在运行时查询
++SD_ASYM_CPUCAPACITY_FULL标志位是否在创建调度域时已设置来检查这一要求是否满足。
++
++参阅Documentation/scheduler/sched-capacity.rst以了解在sched_domain层次结构
++中设置此标志位所需满足的要求。
++
++请注意，EAS并非从根本上与SMP不兼容，但在SMP平台上还没有观察到明显的节能。这一
++限制可以在将来进行修改，如果被证明不是这样的话。
++
++
++6.2 - 当前的能量模型
++^^^^^^^^^^^^^^^^^^^^
++
++EAS使用一个平台的EM来估算调度决策对能量的影响。因此，你的平台必须向EM框架提供
++能量成本表，以启动EAS。要做到这一点，请参阅文档
++Documentation/power/energy-model.rst中的独立EM框架部分。
++
++另请注意，调度域需要在EM注册后重建，以便启动EAS。
++
++EAS使用EM对能量使用率进行预测决策，因此它在检查任务放置的可能选项时更加注重
++差异。对于EAS来说，EM的功率值是以毫瓦还是以“抽象刻度”为单位表示并不重要。
++
++
++
++6.3 - 能量模型复杂度
++^^^^^^^^^^^^^^^^^^^^
++
++任务唤醒路径是时延敏感的。当一个平台的EM太复杂（太多CPU，太多性能域，太多状态
++等），在唤醒路径中使用它的成本就会升高到不可接受。能量感知唤醒算法的复杂度为：
++
++	C = Nd * (Nc + Ns)
++
++其中：Nd是性能域的数量；Nc是CPU的数量；Ns是OPP的总数（例如：对于两个性能域，
++每个域有4个OPP，则Ns = 8）。
++
++当调度域建立时，复杂性检查是在根域上进行的。如果一个根域的复杂度C恰好高于完全
++主观设定的EM_MAX_COMPLEXITY阈值（在本文写作时，是2048），则EAS不会在此根域
++启动。
++
++如果你的平台的能量模型的复杂度太高，EAS无法在这个根域上使用，但你真的想用，
++那么你就只剩下两个可能的选择：
++
++    1. 将你的系统拆分成分离的、较小的、使用独占cpuset的根域，并在每个根域局部
++       启用EAS。这个方案的好处是开箱即用，但缺点是无法在根域之间实现负载均衡，
++       这可能会导致总体系统负载不均衡。
++    2. 提交补丁以降低EAS唤醒算法的复杂度，从而使其能够在合理的时间内处理更大
++       的EM。
++
++
++6.4 - Schedutil监管器
++^^^^^^^^^^^^^^^^^^^^^
++
++EAS试图预测CPU在不久的将来会在哪个OPP下运行，以估算它们的能量消耗。为了做到
++这一点，它假定CPU的OPP跟随CPU利用率变化而变化。
++
++尽管在实践中很难对这一假设的准确性提供硬性保证（因为，举例来说硬件可能不会做
++它被要求做的事情），相对于其他CPUFreq监管器，schedutil至少_请求_使用利用率
++信号计算的频率。因此，与EAS一起使用的唯一合理的监管器是schedutil，因为它是
++唯一一个在频率请求和能量预测之间提供某种程度的一致性的监管器。
++
++不支持将EAS与schedutil之外的任何其它监管器一起使用。
++
++
++6.5 刻度不变性使用率信号
++^^^^^^^^^^^^^^^^^^^^^^^^
++
++为了对不同的CPU和所有的性能状态做出准确的预测，EAS需要频率不变的和CPU不变的
++PELT信号。这些信号可以通过每个体系结构定义的arch_scale{cpu,freq}_capacity()
++回调函数获取。
++
++不支持在没有实现这两个回调函数的平台上使用EAS。
++
++
++6.6 多线程（SMT）
++^^^^^^^^^^^^^^^^^
++
++当前实现的EAS是不感知SMT的，因此无法利用多线程硬件节约能量。EAS认为线程是独立的
++CPU，这实际上对性能和能量消耗都是不利的。
++
++不支持在SMT上使用EAS。
 -- 
-Sincerely yours,
-Mike.
+2.17.1
+
