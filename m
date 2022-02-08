@@ -2,286 +2,388 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 4589C4AD1E1
-	for <lists+linux-doc@lfdr.de>; Tue,  8 Feb 2022 08:03:23 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 6D9904AD2FA
+	for <lists+linux-doc@lfdr.de>; Tue,  8 Feb 2022 09:19:32 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1347854AbiBHHDV (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 8 Feb 2022 02:03:21 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:48198 "EHLO
+        id S1348202AbiBHITa (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 8 Feb 2022 03:19:30 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:52882 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1347832AbiBHHDT (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 8 Feb 2022 02:03:19 -0500
-Received: from szxga01-in.huawei.com (szxga01-in.huawei.com [45.249.212.187])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 37474C0401EF
-        for <linux-doc@vger.kernel.org>; Mon,  7 Feb 2022 23:03:18 -0800 (PST)
-Received: from dggpeml500026.china.huawei.com (unknown [172.30.72.54])
-        by szxga01-in.huawei.com (SkyGuard) with ESMTP id 4JtDTh3TZ9zccqC;
-        Tue,  8 Feb 2022 15:02:16 +0800 (CST)
-Received: from dggpeml500006.china.huawei.com (7.185.36.76) by
- dggpeml500026.china.huawei.com (7.185.36.106) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2308.21; Tue, 8 Feb 2022 15:03:16 +0800
-Received: from huawei.com (10.175.100.227) by dggpeml500006.china.huawei.com
- (7.185.36.76) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2308.21; Tue, 8 Feb
- 2022 15:03:15 +0800
-From:   Tang Yizhou <tangyizhou@huawei.com>
-To:     <siyanteng@loongson.cn>, <siyanteng01@gmail.com>,
-        <alexs@kernel.org>, <seakeel@gmail.com>
-CC:     <linux-doc@vger.kernel.org>, <corbet@lwn.net>,
-        <zhengbin13@huawei.com>, <tangyeechou@gmail.com>,
-        Tang Yizhou <tangyizhou@huawei.com>
-Subject: [PATCH v3] docs/zh_CN: Add energy-model Chinese translation
-Date:   Tue, 8 Feb 2022 15:36:00 +0800
-Message-ID: <20220208073600.10860-1-tangyizhou@huawei.com>
-X-Mailer: git-send-email 2.17.1
-MIME-Version: 1.0
+        with ESMTP id S232385AbiBHIT2 (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 8 Feb 2022 03:19:28 -0500
+Received: from mail-io1-xd4a.google.com (mail-io1-xd4a.google.com [IPv6:2607:f8b0:4864:20::d4a])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 8558FC03FEC0
+        for <linux-doc@vger.kernel.org>; Tue,  8 Feb 2022 00:19:27 -0800 (PST)
+Received: by mail-io1-xd4a.google.com with SMTP id a185-20020a6bcac2000000b00604c268546dso10882260iog.10
+        for <linux-doc@vger.kernel.org>; Tue, 08 Feb 2022 00:19:27 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=google.com; s=20210112;
+        h=date:message-id:mime-version:subject:from:to:cc;
+        bh=CtSEcwwHnFIi4ZeyTyvxpEAgxW/JhSRSL0Dk6q/C1m4=;
+        b=nHxc5M/BKlu2xNwc3dEj94/nTSmwuUbGMp2gKTTlBqdd5VKBwo+Ezpw0SZEr9PuwOY
+         3ADoj9qDMD2q+i32fRp55g3Rqg2bRQtXK80VOXAK6/+5k2QGu7NPYWIyXNAF0yJ0lF6L
+         hT/Sk8gxycUbomS0lOdgx/Eg+OoWva/E2nfQBqlghy658jbNu4/LqZfbsUo/3Rtn4vUu
+         n7bUsJmeQzIA72z19MnIhDegklwwYnpSMX7LTflS+ZnuEvKml1yXNeuxPv3PSs11cbd2
+         xAURk+W3F+5k1YrfU6merjtzHYhuel3uoTFSd9DPQhUVNprDpn7c1DdeQnUNG3T+2tFH
+         19yQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:date:message-id:mime-version:subject:from:to:cc;
+        bh=CtSEcwwHnFIi4ZeyTyvxpEAgxW/JhSRSL0Dk6q/C1m4=;
+        b=DJAaMYJ4amWWACMJuB3FGmbj2HEC7IklZO0XUO19KxRYnMDQ1+wW0LHyzcY20jHaXH
+         TDKDgP0aw2WK4GfigFtKQp6oJl/vQ8YLVukmkbSRkr1sj+3m7h+8/lmlK1gQvtgAv8UZ
+         RqtsIjaAj8fwGSLvWy1zOa4WvTnkBVsiTFlch5GKDBIL5AmskzefWWybGwON5wPQJJr8
+         u2bNhl8klxTdW583zGdrIjSQXDZzKVfxKduKFjhowVNVPqbedoyjdDzf3iPk5DxH04c1
+         rsAAnhODheDykeTyuImuihXLBwlozjbLJwoZz8K5AWyE69W6bNa/wirdGwSOXcgAh45K
+         qEuA==
+X-Gm-Message-State: AOAM5306x+YtWI3VsyKfb9vu3d3OcYDKJ/aemReynDb5tdT8KAdAXsno
+        gwxrUMuh+TX23Xku8lK5q7qH0lwwGlk=
+X-Google-Smtp-Source: ABdhPJxu+5NU4t2KarfhxBSYpIP9Abr9gYxZEgT9m4UKtdOuteaDKhwjFTcY0nZqkbr4/Q2LROD98odB/iA=
+X-Received: from yuzhao.bld.corp.google.com ([2620:15c:183:200:5f31:19c3:21f5:7300])
+ (user=yuzhao job=sendgmr) by 2002:a05:6e02:12e6:: with SMTP id
+ l6mr1692122iln.251.1644308366542; Tue, 08 Feb 2022 00:19:26 -0800 (PST)
+Date:   Tue,  8 Feb 2022 01:18:50 -0700
+Message-Id: <20220208081902.3550911-1-yuzhao@google.com>
+Mime-Version: 1.0
+X-Mailer: git-send-email 2.35.0.263.gb82422642f-goog
+Subject: [PATCH v7 00/12] Multigenerational LRU Framework
+From:   Yu Zhao <yuzhao@google.com>
+To:     Andrew Morton <akpm@linux-foundation.org>,
+        Johannes Weiner <hannes@cmpxchg.org>,
+        Mel Gorman <mgorman@suse.de>, Michal Hocko <mhocko@kernel.org>
+Cc:     Andi Kleen <ak@linux.intel.com>,
+        Aneesh Kumar <aneesh.kumar@linux.ibm.com>,
+        Barry Song <21cnbao@gmail.com>,
+        Catalin Marinas <catalin.marinas@arm.com>,
+        Dave Hansen <dave.hansen@linux.intel.com>,
+        Hillf Danton <hdanton@sina.com>, Jens Axboe <axboe@kernel.dk>,
+        Jesse Barnes <jsbarnes@google.com>,
+        Jonathan Corbet <corbet@lwn.net>,
+        Linus Torvalds <torvalds@linux-foundation.org>,
+        Matthew Wilcox <willy@infradead.org>,
+        Michael Larabel <Michael@michaellarabel.com>,
+        Mike Rapoport <rppt@kernel.org>,
+        Rik van Riel <riel@surriel.com>,
+        Vlastimil Babka <vbabka@suse.cz>,
+        Will Deacon <will@kernel.org>,
+        Ying Huang <ying.huang@intel.com>,
+        linux-arm-kernel@lists.infradead.org, linux-doc@vger.kernel.org,
+        linux-kernel@vger.kernel.org, linux-mm@kvack.org,
+        page-reclaim@google.com, x86@kernel.org,
+        Yu Zhao <yuzhao@google.com>
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 8bit
-X-Originating-IP: [10.175.100.227]
-X-ClientProxiedBy: dggems701-chm.china.huawei.com (10.3.19.178) To
- dggpeml500006.china.huawei.com (7.185.36.76)
-X-CFilter-Loop: Reflected
-X-Spam-Status: No, score=-4.2 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_MED,
-        SPF_HELO_NONE,SPF_PASS,T_SCC_BODY_TEXT_LINE autolearn=ham
-        autolearn_force=no version=3.4.6
+X-Spam-Status: No, score=-9.6 required=5.0 tests=BAYES_00,DKIMWL_WL_MED,
+        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_NONE,
+        SPF_HELO_NONE,SPF_PASS,T_SCC_BODY_TEXT_LINE,USER_IN_DEF_DKIM_WL
+        autolearn=ham autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Translate power/energy-model.rst into Chinese.
+What's new
+==========
+1) Addressed all the comments received on the mailing list and in the
+   meeting with the stakeholders (will note on individual patches).
+2) Measured the performance improvements for each patch between 5-8
+   (reported in the commit messages).
 
-Signed-off-by: Tang Yizhou <tangyizhou@huawei.com>
----
-v3:
-Don't include English kernel doc.
+TLDR
+====
+The current page reclaim is too expensive in terms of CPU usage and it
+often makes poor choices about what to evict. This patchset offers an
+alternative solution that is performant, versatile and straightforward.
 
-v2:
-Translate the comments in the example program.
+Patchset overview
+=================
+The design and implementation overview was moved to patch 12 so that
+people can finish reading this cover letter.
 
- .../translations/zh_CN/power/energy-model.rst | 190 ++++++++++++++++++
- .../translations/zh_CN/power/index.rst        |   2 +-
- 2 files changed, 191 insertions(+), 1 deletion(-)
- create mode 100644 Documentation/translations/zh_CN/power/energy-model.rst
+1. mm: x86, arm64: add arch_has_hw_pte_young()
+2. mm: x86: add CONFIG_ARCH_HAS_NONLEAF_PMD_YOUNG
+Using hardware optimizations when trying to clear the accessed bit in
+many PTEs.
 
-diff --git a/Documentation/translations/zh_CN/power/energy-model.rst b/Documentation/translations/zh_CN/power/energy-model.rst
-new file mode 100644
-index 000000000000..bcf29d624860
---- /dev/null
-+++ b/Documentation/translations/zh_CN/power/energy-model.rst
-@@ -0,0 +1,190 @@
-+.. SPDX-License-Identifier: GPL-2.0
-+.. include:: ../disclaimer-zh_CN.rst
-+
-+:Original: Documentation/power/energy-model.rst
-+
-+:翻译:
-+
-+  唐艺舟 Tang Yizhou <tangyeechou@gmail.com>
-+
-+============
-+设备能量模型
-+============
-+
-+1. 概述
-+-------
-+
-+能量模型（EM）框架是一种驱动程序与内核子系统之间的接口。其中驱动程序了解不同
-+性能层级的设备所消耗的功率，而内核子系统愿意使用该信息做出能量感知决策。
-+
-+设备所消耗的功率的信息来源在不同的平台上可能有很大的不同。这些功率成本在某些
-+情况下可以使用设备树数据来估算。在其它情况下，固件会更清楚。或者，用户空间可能
-+是最清楚的。以此类推。为了避免每一个客户端子系统对每一种可能的信息源自己重新
-+实现支持，EM框架作为一个抽象层介入，它在内核中对功率成本表的格式进行标准化，
-+因此能够避免多余的工作。
-+
-+功率值可以用毫瓦或“抽象刻度”表示。多个子系统可能使用EM，由系统集成商来检查
-+功率值刻度类型的要求是否满足。可以在能量感知调度器的文档中找到一个例子
-+Documentation/scheduler/sched-energy.rst。对于一些子系统，比如热能或
-+powercap，用“抽象刻度”描述功率值可能会导致问题。这些子系统对过去使用的功率的
-+估算值更感兴趣，因此可能需要真实的毫瓦。这些要求的一个例子可以在智能功率分配
-+Documentation/driver-api/thermal/power_allocator.rst文档中找到。
-+
-+内核子系统可能（基于EM内部标志位）实现了对EM注册设备是否具有不一致刻度的自动
-+检查。要记住的重要事情是，当功率值以“抽象刻度”表示时，从中推导以毫焦耳为单位
-+的真实能量消耗是不可能的。
-+
-+下图描述了一个驱动的例子（这里是针对Arm的，但该方法适用于任何体系结构），它
-+向EM框架提供了功率成本，感兴趣的客户端可从中读取数据::
-+
-+       +---------------+  +-----------------+  +---------------+
-+       | Thermal (IPA) |  | Scheduler (EAS) |  |     Other     |
-+       +---------------+  +-----------------+  +---------------+
-+               |                   | em_cpu_energy()   |
-+               |                   | em_cpu_get()      |
-+               +---------+         |         +---------+
-+                         |         |         |
-+                         v         v         v
-+                        +---------------------+
-+                        |    Energy Model     |
-+                        |     Framework       |
-+                        +---------------------+
-+                           ^       ^       ^
-+                           |       |       | em_dev_register_perf_domain()
-+                +----------+       |       +---------+
-+                |                  |                 |
-+        +---------------+  +---------------+  +--------------+
-+        |  cpufreq-dt   |  |   arm_scmi    |  |    Other     |
-+        +---------------+  +---------------+  +--------------+
-+                ^                  ^                 ^
-+                |                  |                 |
-+        +--------------+   +---------------+  +--------------+
-+        | Device Tree  |   |   Firmware    |  |      ?       |
-+        +--------------+   +---------------+  +--------------+
-+
-+对于CPU设备，EM框架管理着系统中每个“性能域”的功率成本表。一个性能域是一组
-+性能一起伸缩的CPU。性能域通常与CPUFreq策略具有1对1映射。一个性能域中的
-+所有CPU要求具有相同的微架构。不同性能域中的CPU可以有不同的微架构。
-+
-+
-+2. 核心API
-+----------
-+
-+2.1 配置选项
-+^^^^^^^^^^^^
-+
-+必须使能CONFIG_ENERGY_MODEL才能使用EM框架。
-+
-+
-+2.2 性能域的注册
-+^^^^^^^^^^^^^^^^
-+
-+“高级”EM的注册
-+~~~~~~~~~~~~~~~~
-+
-+“高级”EM因它允许驱动提供更精确的功率模型而得名。它并不受限于框架中的一些已
-+实现的数学公式（就像“简单”EM那样）。它可以更好地反映每个性能状态的实际功率
-+测量。因此，在EM静态功率（泄露）是重要的情况下，应该首选这种注册方式。
-+
-+驱动程序应通过以下API将性能域注册到EM框架中::
-+
-+  int em_dev_register_perf_domain(struct device *dev, unsigned int nr_states,
-+		struct em_data_callback *cb, cpumask_t *cpus, bool milliwatts);
-+
-+驱动程序必须提供一个回调函数，为每个性能状态返回<频率,功率>元组。驱动程序
-+提供的回调函数可以自由地从任何相关位置（DT、固件......）以及以任何被认为是
-+必要的方式获取数据。只有对于CPU设备，驱动程序必须使用cpumask指定性能域的CPU。
-+对于CPU以外的其他设备，最后一个参数必须被设置为NULL。
-+
-+最后一个参数“milliwatts”（毫瓦）设置成正确的值是很重要的，使用EM的内核
-+子系统可能会依赖这个标志来检查所有的EM设备是否使用相同的刻度。如果有不同的
-+刻度，这些子系统可能决定：返回警告/错误，停止工作或恐慌（panic）。
-+
-+关于实现这个回调函数的驱动程序的例子，参见第3节。或者在第2.4节阅读这个API
-+的更多文档。
-+
-+
-+“简单”EM的注册
-+~~~~~~~~~~~~~~~~
-+
-+“简单”EM是用框架的辅助函数cpufreq_register_em_with_opp()注册的。它实现了
-+一个和以下数学公式紧密相关的功率模型::
-+
-+	Power = C * V^2 * f
-+
-+使用这种方法注册的EM可能无法正确反映真实设备的物理特性，例如当静态功率
-+（泄漏）很重要时。
-+
-+
-+2.3 访问性能域
-+^^^^^^^^^^^^^^
-+
-+有两个API函数提供对能量模型的访问。em_cpu_get()以CPU id为参数，em_pd_get()
-+以设备指针为参数。使用哪个接口取决于子系统，但对于CPU设备来说，这两个函数都返
-+回相同的性能域。
-+
-+对CPU的能量模型感兴趣的子系统可以通过em_cpu_get() API检索它。在创建性能域时
-+分配一次能量模型表，它保存在内存中不被修改。
-+
-+一个性能域所消耗的能量可以使用em_cpu_energy() API来估算。该估算假定CPU设备
-+使用的CPUfreq监管器是schedutil。当前该计算不能提供给其它类型的设备。
-+
-+关于上述API的更多细节可以在 ``<linux/energy_model.h>`` 或第2.4节中找到。
-+
-+
-+2.4 API的细节描述
-+^^^^^^^^^^^^^^^^^
-+参见 include/linux/energy_model.h 和 kernel/power/energy_model.c 的kernel doc。
-+
-+3. 驱动示例
-+-----------
-+
-+CPUFreq框架支持专用的回调函数，用于为指定的CPU（们）注册EM：
-+cpufreq_driver::register_em()。这个回调必须为每个特定的驱动程序正确实现，
-+因为框架会在设置过程中适时地调用它。本节提供了一个简单的例子，展示CPUFreq驱动
-+在能量模型框架中使用（假的）“foo”协议注册性能域。该驱动实现了一个est_power()
-+函数提供给EM框架::
-+
-+  -> drivers/cpufreq/foo_cpufreq.c
-+
-+  01	static int est_power(unsigned long *mW, unsigned long *KHz,
-+  02			struct device *dev)
-+  03	{
-+  04		long freq, power;
-+  05
-+  06		/* 使用“foo”协议设置频率上限 */
-+  07		freq = foo_get_freq_ceil(dev, *KHz);
-+  08		if (freq < 0);
-+  09			return freq;
-+  10
-+  11		/* 估算相关频率下设备的功率成本 */
-+  12		power = foo_estimate_power(dev, freq);
-+  13		if (power < 0);
-+  14			return power;
-+  15
-+  16		/* 将这些值返回给EM框架 */
-+  17		*mW = power;
-+  18		*KHz = freq;
-+  19
-+  20		return 0;
-+  21	}
-+  22
-+  23	static void foo_cpufreq_register_em(struct cpufreq_policy *policy)
-+  24	{
-+  25		struct em_data_callback em_cb = EM_DATA_CB(est_power);
-+  26		struct device *cpu_dev;
-+  27		int nr_opp;
-+  28
-+  29		cpu_dev = get_cpu_device(cpumask_first(policy->cpus));
-+  30
-+  31     	/* 查找该策略支持的OPP数量 */
-+  32     	nr_opp = foo_get_nr_opp(policy);
-+  33
-+  34     	/* 并注册新的性能域 */
-+  35     	em_dev_register_perf_domain(cpu_dev, nr_opp, &em_cb, policy->cpus,
-+  36					    true);
-+  37	}
-+  38
-+  39	static struct cpufreq_driver foo_cpufreq_driver = {
-+  40		.register_em = foo_cpufreq_register_em,
-+  41	};
-diff --git a/Documentation/translations/zh_CN/power/index.rst b/Documentation/translations/zh_CN/power/index.rst
-index ad80a9e80b7c..bc54983ba515 100644
---- a/Documentation/translations/zh_CN/power/index.rst
-+++ b/Documentation/translations/zh_CN/power/index.rst
-@@ -14,6 +14,7 @@
- .. toctree::
-     :maxdepth: 1
- 
-+    energy-model
-     opp
- 
- TODOList:
-@@ -22,7 +23,6 @@ TODOList:
-     * basic-pm-debugging
-     * charger-manager
-     * drivers-testing
--    * energy-model
-     * freezing-of-tasks
-     * pci
-     * pm_qos_interface
+3. mm/vmscan.c: refactor shrink_node()
+A minor refactor.
+
+4. mm: multigenerational LRU: groundwork
+Adding the basic data structure and the functions that insert/remove
+pages to/from the multigenerational LRU (MGLRU) lists.
+
+5. mm: multigenerational LRU: minimal implementation
+A minimal (functional) implementation without any optimizations.
+
+6. mm: multigenerational LRU: exploit locality in rmap
+Improving the efficiency when using the rmap.
+
+7. mm: multigenerational LRU: support page table walks
+Adding the (optional) page table scanning.
+
+8. mm: multigenerational LRU: optimize multiple memcgs
+Optimizing the overall performance for multiple memcgs running mixed
+types of workloads.
+
+9. mm: multigenerational LRU: runtime switch
+Adding a runtime switch to enable or disable MGLRU.
+
+10. mm: multigenerational LRU: thrashing prevention
+11. mm: multigenerational LRU: debugfs interface
+Providing userspace with additional features like thrashing prevention,
+working set estimation and proactive reclaim.
+
+12. mm: multigenerational LRU: documentation
+Adding a design doc and an admin guide.
+
+Benchmark results
+=================
+Independent lab results
+-----------------------
+Based on the popularity of searches [01] and the memory usage in
+Google's public cloud, the most popular open-source memory-hungry
+applications, in alphabetical order, are:
+      Apache Cassandra      Memcached
+      Apache Hadoop         MongoDB
+      Apache Spark          PostgreSQL
+      MariaDB (MySQL)       Redis
+
+An independent lab evaluated MGLRU with the most widely used benchmark
+suites for the above applications. They posted 960 data points along
+with kernel metrics and perf profiles collected over more than 500
+hours of total benchmark time. Their final reports show that, with 95%
+confidence intervals (CIs), the above applications all performed
+significantly better for at least part of their benchmark matrices.
+
+On 5.14:
+1. Apache Spark [02] took 95% CIs [9.28, 11.19]% and [12.20, 14.93]%
+   less wall time to sort three billion random integers, respectively,
+   under the medium- and the high-concurrency conditions, when
+   overcommitting memory. There were no statistically significant
+   changes in wall time for the rest of the benchmark matrix.
+2. MariaDB [03] achieved 95% CIs [5.24, 10.71]% and [20.22, 25.97]%
+   more transactions per minute (TPM), respectively, under the medium-
+   and the high-concurrency conditions, when overcommitting memory.
+   There were no statistically significant changes in TPM for the rest
+   of the benchmark matrix.
+3. Memcached [04] achieved 95% CIs [23.54, 32.25]%, [20.76, 41.61]%
+   and [21.59, 30.02]% more operations per second (OPS), respectively,
+   for sequential access, random access and Gaussian (distribution)
+   access, when THP=always; 95% CIs [13.85, 15.97]% and
+   [23.94, 29.92]% more OPS, respectively, for random access and
+   Gaussian access, when THP=never. There were no statistically
+   significant changes in OPS for the rest of the benchmark matrix.
+4. MongoDB [05] achieved 95% CIs [2.23, 3.44]%, [6.97, 9.73]% and
+   [2.16, 3.55]% more operations per second (OPS), respectively, for
+   exponential (distribution) access, random access and Zipfian
+   (distribution) access, when underutilizing memory; 95% CIs
+   [8.83, 10.03]%, [21.12, 23.14]% and [5.53, 6.46]% more OPS,
+   respectively, for exponential access, random access and Zipfian
+   access, when overcommitting memory.
+
+On 5.15:
+5. Apache Cassandra [06] achieved 95% CIs [1.06, 4.10]%, [1.94, 5.43]%
+   and [4.11, 7.50]% more operations per second (OPS), respectively,
+   for exponential (distribution) access, random access and Zipfian
+   (distribution) access, when swap was off; 95% CIs [0.50, 2.60]%,
+   [6.51, 8.77]% and [3.29, 6.75]% more OPS, respectively, for
+   exponential access, random access and Zipfian access, when swap was
+   on.
+6. Apache Hadoop [07] took 95% CIs [5.31, 9.69]% and [2.02, 7.86]%
+   less average wall time to finish twelve parallel TeraSort jobs,
+   respectively, under the medium- and the high-concurrency
+   conditions, when swap was on. There were no statistically
+   significant changes in average wall time for the rest of the
+   benchmark matrix.
+7. PostgreSQL [08] achieved 95% CI [1.75, 6.42]% more transactions per
+   minute (TPM) under the high-concurrency condition, when swap was
+   off; 95% CIs [12.82, 18.69]% and [22.70, 46.86]% more TPM,
+   respectively, under the medium- and the high-concurrency
+   conditions, when swap was on. There were no statistically
+   significant changes in TPM for the rest of the benchmark matrix.
+8. Redis [09] achieved 95% CIs [0.58, 5.94]%, [6.55, 14.58]% and
+   [11.47, 19.36]% more total operations per second (OPS),
+   respectively, for sequential access, random access and Gaussian
+   (distribution) access, when THP=always; 95% CIs [1.27, 3.54]%,
+   [10.11, 14.81]% and [8.75, 13.64]% more total OPS, respectively,
+   for sequential access, random access and Gaussian access, when
+   THP=never.
+
+Our lab results
+---------------
+To supplement the above results, we ran the following benchmark suites
+on 5.16-rc7 and found no regressions [10]. (These synthetic benchmarks
+are popular among MM developers, but we prefer large-scale A/B
+experiments to validate improvements.)
+      fs_fio_bench_hdd_mq      pft
+      fs_lmbench               pgsql-hammerdb
+      fs_parallelio            redis
+      fs_postmark              stream
+      hackbench                sysbenchthread
+      kernbench                tpcc_spark
+      memcached                unixbench
+      multichase               vm-scalability
+      mutilate                 will-it-scale
+      nginx
+
+[01] https://trends.google.com
+[02] https://lore.kernel.org/lkml/20211102002002.92051-1-bot@edi.works/
+[03] https://lore.kernel.org/lkml/20211009054315.47073-1-bot@edi.works/
+[04] https://lore.kernel.org/lkml/20211021194103.65648-1-bot@edi.works/
+[05] https://lore.kernel.org/lkml/20211109021346.50266-1-bot@edi.works/
+[06] https://lore.kernel.org/lkml/20211202062806.80365-1-bot@edi.works/
+[07] https://lore.kernel.org/lkml/20211209072416.33606-1-bot@edi.works/
+[08] https://lore.kernel.org/lkml/20211218071041.24077-1-bot@edi.works/
+[09] https://lore.kernel.org/lkml/20211122053248.57311-1-bot@edi.works/
+[10] https://lore.kernel.org/lkml/20220104202247.2903702-1-yuzhao@google.com/
+
+Read-world applications
+=======================
+Third-party testimonials
+------------------------
+Konstantin wrote [11]:
+   I have Archlinux with 8G RAM + zswap + swap. While developing, I
+   have lots of apps opened such as multiple LSP-servers for different
+   langs, chats, two browsers, etc... Usually, my system gets quickly
+   to a point of SWAP-storms, where I have to kill LSP-servers,
+   restart browsers to free memory, etc, otherwise the system lags
+   heavily and is barely usable.
+   
+   1.5 day ago I migrated from 5.11.15 kernel to 5.12 + the LRU
+   patchset, and I started up by opening lots of apps to create memory
+   pressure, and worked for a day like this. Till now I had *not a
+   single SWAP-storm*, and mind you I got 3.4G in SWAP. I was never
+   getting to the point of 3G in SWAP before without a single
+   SWAP-storm.
+
+An anonymous user wrote [12]:
+   Using that v5 for some time and confirm that difference under heavy
+   load and memory pressure is significant.
+
+Shuang wrote [13]:
+   With the MGLRU, fio achieved 95% CIs [38.95, 40.26]%, [4.12, 6.64]%
+   and [9.26, 10.36]% higher throughput, respectively, for random
+   access, Zipfian (distribution) access and Gaussian (distribution)
+   access, when the average number of jobs per CPU is 1; 95% CIs
+   [42.32, 49.15]%, [9.44, 9.89]% and [20.99, 22.86]% higher throughput,
+   respectively, for random access, Zipfian access and Gaussian access,
+   when the average number of jobs per CPU is 2.
+
+Daniel wrote [14]:
+   With memcached allocating ~100GB of byte-addressable Optante,
+   performance improvement in terms of throughput (measured as queries
+   per second) was about 10% for a series of workloads.
+
+Large-scale deployments
+-----------------------
+The downstream kernels that have been using MGLRU include:
+1. Android ARCVM [15]
+2. Arch Linux Zen [16]
+3. Chrome OS [17]
+4. Liquorix [18]
+5. post-factum [19]
+6. XanMod [20]
+
+We've rolled out MGLRU to tens of millions of Chrome OS users and
+about a million Android users. Google's fleetwide profiling [21] shows
+an overall 40% decrease in kswapd CPU usage, in addition to
+improvements in other UX metrics, e.g., an 85% decrease in the number
+of low-memory kills at the 75th percentile and an 18% decrease in
+rendering latency at the 50th percentile.
+
+[11] https://lore.kernel.org/lkml/140226722f2032c86301fbd326d91baefe3d7d23.camel@yandex.ru/
+[12] https://phoronix.com/forums/forum/software/general-linux-open-source/1301258-mglru-is-a-very-enticing-enhancement-for-linux-in-2022?p=1301275#post1301275
+[13] https://lore.kernel.org/lkml/20220105024423.26409-1-szhai2@cs.rochester.edu/
+[14] https://lore.kernel.org/linux-mm/CA+4-3vksGvKd18FgRinxhqHetBS1hQekJE2gwco8Ja-bJWKtFw@mail.gmail.com/
+[15] https://chromium.googlesource.com/chromiumos/third_party/kernel
+[16] https://archlinux.org
+[17] https://chromium.org
+[18] https://liquorix.net
+[19] https://gitlab.com/post-factum/pf-kernel
+[20] https://xanmod.org
+[21] https://research.google/pubs/pub44271/
+
+Summery
+=======
+The facts are:
+1. The independent lab results and the real-world applications
+   indicate substantial improvements; there are no known regressions.
+2. Thrashing prevention, working set estimation and proactive reclaim
+   work out of the box; there are no equivalent solutions.
+3. There is a lot of new code; nobody has demonstrated smaller changes
+   with similar effects.
+
+Our options, accordingly, are:
+1. Given the amount of evidence, the reported improvements will likely
+   materialize for a wide range of workloads.
+2. Gauging the interest from the past discussions [22][23][24], the
+   new features will likely be put to use for both personal computers
+   and data centers.
+3. Based on Google's track record, the new code will likely be well
+   maintained in the long term. It'd be more difficult if not
+   impossible to achieve similar effects on top of the existing
+   design.
+
+[22] https://lore.kernel.org/lkml/20201005081313.732745-1-andrea.righi@canonical.com/
+[23] https://lore.kernel.org/lkml/20210716081449.22187-1-sj38.park@gmail.com/
+[24] https://lore.kernel.org/lkml/20211130201652.2218636d@mail.inbox.lv/
+
+Yu Zhao (12):
+  mm: x86, arm64: add arch_has_hw_pte_young()
+  mm: x86: add CONFIG_ARCH_HAS_NONLEAF_PMD_YOUNG
+  mm/vmscan.c: refactor shrink_node()
+  mm: multigenerational LRU: groundwork
+  mm: multigenerational LRU: minimal implementation
+  mm: multigenerational LRU: exploit locality in rmap
+  mm: multigenerational LRU: support page table walks
+  mm: multigenerational LRU: optimize multiple memcgs
+  mm: multigenerational LRU: runtime switch
+  mm: multigenerational LRU: thrashing prevention
+  mm: multigenerational LRU: debugfs interface
+  mm: multigenerational LRU: documentation
+
+ Documentation/admin-guide/mm/index.rst        |    1 +
+ Documentation/admin-guide/mm/multigen_lru.rst |  121 +
+ Documentation/vm/index.rst                    |    1 +
+ Documentation/vm/multigen_lru.rst             |  152 +
+ arch/Kconfig                                  |    9 +
+ arch/arm64/include/asm/pgtable.h              |   14 +-
+ arch/x86/Kconfig                              |    1 +
+ arch/x86/include/asm/pgtable.h                |    9 +-
+ arch/x86/mm/pgtable.c                         |    5 +-
+ fs/exec.c                                     |    2 +
+ fs/fuse/dev.c                                 |    3 +-
+ include/linux/cgroup.h                        |   15 +-
+ include/linux/memcontrol.h                    |   36 +
+ include/linux/mm.h                            |    8 +
+ include/linux/mm_inline.h                     |  214 ++
+ include/linux/mm_types.h                      |   78 +
+ include/linux/mmzone.h                        |  182 ++
+ include/linux/nodemask.h                      |    1 +
+ include/linux/page-flags-layout.h             |   19 +-
+ include/linux/page-flags.h                    |    4 +-
+ include/linux/pgtable.h                       |   17 +-
+ include/linux/sched.h                         |    4 +
+ include/linux/swap.h                          |    5 +
+ kernel/bounds.c                               |    3 +
+ kernel/cgroup/cgroup-internal.h               |    1 -
+ kernel/exit.c                                 |    1 +
+ kernel/fork.c                                 |    9 +
+ kernel/sched/core.c                           |    1 +
+ mm/Kconfig                                    |   50 +
+ mm/huge_memory.c                              |    3 +-
+ mm/memcontrol.c                               |   27 +
+ mm/memory.c                                   |   39 +-
+ mm/mm_init.c                                  |    6 +-
+ mm/page_alloc.c                               |    1 +
+ mm/rmap.c                                     |    7 +
+ mm/swap.c                                     |   55 +-
+ mm/vmscan.c                                   | 2831 ++++++++++++++++-
+ mm/workingset.c                               |  119 +-
+ 38 files changed, 3908 insertions(+), 146 deletions(-)
+ create mode 100644 Documentation/admin-guide/mm/multigen_lru.rst
+ create mode 100644 Documentation/vm/multigen_lru.rst
+
 -- 
-2.17.1
+2.35.0.263.gb82422642f-goog
 
