@@ -2,48 +2,76 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id E1CF14ACE4A
-	for <lists+linux-doc@lfdr.de>; Tue,  8 Feb 2022 02:49:48 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 6181C4ACF01
+	for <lists+linux-doc@lfdr.de>; Tue,  8 Feb 2022 03:40:35 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S240159AbiBHBsC (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 7 Feb 2022 20:48:02 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:60206 "EHLO
+        id S243778AbiBHCkc (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 7 Feb 2022 21:40:32 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:60510 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1343759AbiBHBcW (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Mon, 7 Feb 2022 20:32:22 -0500
-Received: from szxga08-in.huawei.com (szxga08-in.huawei.com [45.249.212.255])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id B3F74C061355
-        for <linux-doc@vger.kernel.org>; Mon,  7 Feb 2022 17:32:20 -0800 (PST)
-Received: from dggpeml500022.china.huawei.com (unknown [172.30.72.54])
-        by szxga08-in.huawei.com (SkyGuard) with ESMTP id 4Jt5481MRfz1FCsw;
-        Tue,  8 Feb 2022 09:28:08 +0800 (CST)
-Received: from dggpeml500006.china.huawei.com (7.185.36.76) by
- dggpeml500022.china.huawei.com (7.185.36.66) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2308.21; Tue, 8 Feb 2022 09:32:18 +0800
-Received: from huawei.com (10.175.100.227) by dggpeml500006.china.huawei.com
- (7.185.36.76) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2308.21; Tue, 8 Feb
- 2022 09:32:18 +0800
-From:   Tang Yizhou <tangyizhou@huawei.com>
-To:     <siyanteng@loongson.cn>, <siyanteng01@gmail.com>,
-        <alexs@kernel.org>, <seakeel@gmail.com>
-CC:     <linux-doc@vger.kernel.org>, <corbet@lwn.net>,
-        <zhengbin13@huawei.com>, <tangyeechou@gmail.com>,
-        Tang Yizhou <tangyizhou@huawei.com>
-Subject: [PATCH v2] docs/zh_CN: Add energy-model Chinese translation
-Date:   Tue, 8 Feb 2022 10:05:04 +0800
-Message-ID: <20220208020504.22847-1-tangyizhou@huawei.com>
-X-Mailer: git-send-email 2.17.1
+        with ESMTP id S245068AbiBHCeh (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Mon, 7 Feb 2022 21:34:37 -0500
+Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.133.124])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTP id C2FBDC06109E
+        for <linux-doc@vger.kernel.org>; Mon,  7 Feb 2022 18:34:34 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+        s=mimecast20190719; t=1644287673;
+        h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+         to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+         in-reply-to:in-reply-to:references:references;
+        bh=CFWGmsRhSBrRkVipArydVrEvw7EEHygWrGz+mu3Vvkg=;
+        b=A8Z+CKm5t7WipvxHuKTHwsMmWdNijsbJ6MMqwuUxuLRnDm3awezQPgZ+Qa63cN8zfynfKo
+        1nfU2cZwnB68CnoCDHIu9McN8Fnp5eKXo9uflk+NYsRDZw0I03jf+A5d6eUyMxHI79xZzP
+        bw730v8xzctk2phoJtFbvbd3lOBJm3Y=
+Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
+ [209.132.183.4]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ us-mta-122-vLJDyrrGN6CglPQqKZD2vQ-1; Mon, 07 Feb 2022 21:34:30 -0500
+X-MC-Unique: vLJDyrrGN6CglPQqKZD2vQ-1
+Received: from smtp.corp.redhat.com (int-mx08.intmail.prod.int.phx2.redhat.com [10.5.11.23])
+        (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+        (No client certificate requested)
+        by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 8CF511006AA4;
+        Tue,  8 Feb 2022 02:34:27 +0000 (UTC)
+Received: from localhost (ovpn-12-95.pek2.redhat.com [10.72.12.95])
+        by smtp.corp.redhat.com (Postfix) with ESMTPS id 9AD22E2C1;
+        Tue,  8 Feb 2022 02:34:16 +0000 (UTC)
+Date:   Tue, 8 Feb 2022 10:34:13 +0800
+From:   Baoquan He <bhe@redhat.com>
+To:     "Leizhen (ThunderTown)" <thunder.leizhen@huawei.com>
+Cc:     Thomas Gleixner <tglx@linutronix.de>,
+        Ingo Molnar <mingo@redhat.com>, Borislav Petkov <bp@alien8.de>,
+        x86@kernel.org, "H . Peter Anvin" <hpa@zytor.com>,
+        linux-kernel@vger.kernel.org, Dave Young <dyoung@redhat.com>,
+        Vivek Goyal <vgoyal@redhat.com>,
+        Eric Biederman <ebiederm@xmission.com>,
+        kexec@lists.infradead.org,
+        Catalin Marinas <catalin.marinas@arm.com>,
+        Will Deacon <will@kernel.org>,
+        linux-arm-kernel@lists.infradead.org,
+        Rob Herring <robh+dt@kernel.org>,
+        Frank Rowand <frowand.list@gmail.com>,
+        devicetree@vger.kernel.org, Jonathan Corbet <corbet@lwn.net>,
+        linux-doc@vger.kernel.org, Randy Dunlap <rdunlap@infradead.org>,
+        Feng Zhou <zhoufeng.zf@bytedance.com>,
+        Kefeng Wang <wangkefeng.wang@huawei.com>,
+        Chen Zhou <dingguo.cz@antgroup.com>,
+        John Donnelly <John.p.donnelly@oracle.com>,
+        Dave Kleikamp <dave.kleikamp@oracle.com>, prudo@redhat.com,
+        piliu@redhat.com
+Subject: Re: [PATCH v20 0/5] support reserving crashkernel above 4G on arm64
+ kdump
+Message-ID: <YgHWpazFQDerr7AC@MiWiFi-R3L-srv>
+References: <20220124084708.683-1-thunder.leizhen@huawei.com>
+ <d77f9f52-626d-e290-5fcb-578ac6b0c7ce@huawei.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 8bit
-X-Originating-IP: [10.175.100.227]
-X-ClientProxiedBy: dggems703-chm.china.huawei.com (10.3.19.180) To
- dggpeml500006.china.huawei.com (7.185.36.76)
-X-CFilter-Loop: Reflected
-X-Spam-Status: No, score=-4.2 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_MED,
-        SPF_HELO_NONE,SPF_PASS,T_SCC_BODY_TEXT_LINE autolearn=ham
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <d77f9f52-626d-e290-5fcb-578ac6b0c7ce@huawei.com>
+X-Scanned-By: MIMEDefang 2.84 on 10.5.11.23
+X-Spam-Status: No, score=-2.8 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_LOW,
+        SPF_HELO_NONE,SPF_NONE,T_SCC_BODY_TEXT_LINE autolearn=unavailable
         autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
@@ -51,239 +79,326 @@ Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Translate power/energy-model.rst into Chinese.
+On 02/07/22 at 12:04pm, Leizhen (ThunderTown) wrote:
+> Hi everybody:
+>   Can someone take a moment to review these patches? Maybe I should just try
+> making generic. This patch series seems to have gone back to square one,
+> discarding some of the valuable comments that were made in the middle. But the
+> only benefit of make generic is to avoid code duplication, a lot of adaptation
+> is needed. I think Borislav Petkov's suggestion is good, too.
 
-Signed-off-by: Tang Yizhou <tangyizhou@huawei.com>
----
-v2:
-Translate the comments in the example program.
+I am checking this version. I have got a arm64 machine, will give it a shot.
 
- .../translations/zh_CN/power/energy-model.rst | 195 ++++++++++++++++++
- .../translations/zh_CN/power/index.rst        |   2 +-
- 2 files changed, 196 insertions(+), 1 deletion(-)
- create mode 100644 Documentation/translations/zh_CN/power/energy-model.rst
+About deduplicating the copied code, it's good to have comparing with having an
+important feature in a certian ARCH.
 
-diff --git a/Documentation/translations/zh_CN/power/energy-model.rst b/Documentation/translations/zh_CN/power/energy-model.rst
-new file mode 100644
-index 000000000000..f33dd226767f
---- /dev/null
-+++ b/Documentation/translations/zh_CN/power/energy-model.rst
-@@ -0,0 +1,195 @@
-+.. SPDX-License-Identifier: GPL-2.0
-+.. include:: ../disclaimer-zh_CN.rst
-+
-+:Original: Documentation/power/energy-model.rst
-+
-+:翻译:
-+
-+  唐艺舟 Tang Yizhou <tangyeechou@gmail.com>
-+
-+============
-+设备能量模型
-+============
-+
-+1. 概述
-+-------
-+
-+能量模型（EM）框架是一种驱动程序与内核子系统之间的接口。其中驱动程序了解不同
-+性能层级的设备所消耗的功率，而内核子系统愿意使用该信息做出能量感知决策。
-+
-+设备所消耗的功率的信息来源在不同的平台上可能有很大的不同。这些功率成本在某些
-+情况下可以使用设备树数据来估算。在其它情况下，固件会更清楚。或者，用户空间可能
-+是最清楚的。以此类推。为了避免每一个客户端子系统对每一种可能的信息源自己重新
-+实现支持，EM框架作为一个抽象层介入，它在内核中对功率成本表的格式进行标准化，
-+因此能够避免多余的工作。
-+
-+功率值可以用毫瓦或“抽象刻度”表示。多个子系统可能使用EM，由系统集成商来检查
-+功率值刻度类型的要求是否满足。可以在能量感知调度器的文档中找到一个例子
-+Documentation/scheduler/sched-energy.rst。对于一些子系统，比如热能或
-+powercap，用“抽象刻度”描述功率值可能会导致问题。这些子系统对过去使用的功率的
-+估算值更感兴趣，因此可能需要真实的毫瓦。这些要求的一个例子可以在智能功率分配
-+Documentation/driver-api/thermal/power_allocator.rst文档中找到。
-+
-+内核子系统可能（基于EM内部标志位）实现了对EM注册设备是否具有不一致刻度的自动
-+检查。要记住的重要事情是，当功率值以“抽象刻度”表示时，从中推导以毫焦耳为单位
-+的真实能量消耗是不可能的。
-+
-+下图描述了一个驱动的例子（这里是针对Arm的，但该方法适用于任何体系结构），它
-+向EM框架提供了功率成本，感兴趣的客户端可从中读取数据::
-+
-+       +---------------+  +-----------------+  +---------------+
-+       | Thermal (IPA) |  | Scheduler (EAS) |  |     Other     |
-+       +---------------+  +-----------------+  +---------------+
-+               |                   | em_cpu_energy()   |
-+               |                   | em_cpu_get()      |
-+               +---------+         |         +---------+
-+                         |         |         |
-+                         v         v         v
-+                        +---------------------+
-+                        |    Energy Model     |
-+                        |     Framework       |
-+                        +---------------------+
-+                           ^       ^       ^
-+                           |       |       | em_dev_register_perf_domain()
-+                +----------+       |       +---------+
-+                |                  |                 |
-+        +---------------+  +---------------+  +--------------+
-+        |  cpufreq-dt   |  |   arm_scmi    |  |    Other     |
-+        +---------------+  +---------------+  +--------------+
-+                ^                  ^                 ^
-+                |                  |                 |
-+        +--------------+   +---------------+  +--------------+
-+        | Device Tree  |   |   Firmware    |  |      ?       |
-+        +--------------+   +---------------+  +--------------+
-+
-+对于CPU设备，EM框架管理着系统中每个“性能域”的功率成本表。一个性能域是一组
-+性能一起伸缩的CPU。性能域通常与CPUFreq策略具有1对1映射。一个性能域中的
-+所有CPU要求具有相同的微架构。不同性能域中的CPU可以有不同的微架构。
-+
-+
-+2. 核心API
-+----------
-+
-+2.1 配置选项
-+^^^^^^^^^^^^
-+
-+必须使能CONFIG_ENERGY_MODEL才能使用EM框架。
-+
-+
-+2.2 性能域的注册
-+^^^^^^^^^^^^^^^^
-+
-+“高级”EM的注册
-+~~~~~~~~~~~~~~~~
-+
-+“高级”EM因它允许驱动提供更精确的功率模型而得名。它并不受限于框架中的一些已
-+实现的数学公式（就像“简单”EM那样）。它可以更好地反映每个性能状态的实际功率
-+测量。因此，在EM静态功率（泄露）是重要的情况下，应该首选这种注册方式。
-+
-+驱动程序应通过以下API将性能域注册到EM框架中::
-+
-+  int em_dev_register_perf_domain(struct device *dev, unsigned int nr_states,
-+		struct em_data_callback *cb, cpumask_t *cpus, bool milliwatts);
-+
-+驱动程序必须提供一个回调函数，为每个性能状态返回<频率,功率>元组。驱动程序
-+提供的回调函数可以自由地从任何相关位置（DT、固件......）以及以任何被认为是
-+必要的方式获取数据。只有对于CPU设备，驱动程序必须使用cpumask指定性能域的CPU。
-+对于CPU以外的其他设备，最后一个参数必须被设置为NULL。
-+
-+最后一个参数“milliwatts”（毫瓦）设置成正确的值是很重要的，使用EM的内核
-+子系统可能会依赖这个标志来检查所有的EM设备是否使用相同的刻度。如果有不同的
-+刻度，这些子系统可能决定：返回警告/错误，停止工作或恐慌（panic）。
-+
-+关于实现这个回调函数的驱动程序的例子，参见第3节。或者在第2.4节阅读这个API
-+的更多文档。
-+
-+
-+“简单”EM的注册
-+~~~~~~~~~~~~~~~~
-+
-+“简单”EM是用框架的辅助函数cpufreq_register_em_with_opp()注册的。它实现了
-+一个和以下数学公式紧密相关的功率模型::
-+
-+	Power = C * V^2 * f
-+
-+使用这种方法注册的EM可能无法正确反映真实设备的物理特性，例如当静态功率
-+（泄漏）很重要时。
-+
-+
-+2.3 访问性能域
-+^^^^^^^^^^^^^^
-+
-+有两个API函数提供对能量模型的访问。em_cpu_get()以CPU id为参数，em_pd_get()
-+以设备指针为参数。使用哪个接口取决于子系统，但对于CPU设备来说，这两个函数都返
-+回相同的性能域。
-+
-+对CPU的能量模型感兴趣的子系统可以通过em_cpu_get() API检索它。在创建性能域时
-+分配一次能量模型表，它保存在内存中不被修改。
-+
-+一个性能域所消耗的能量可以使用em_cpu_energy() API来估算。该估算假定CPU设备
-+使用的CPUfreq监管器是schedutil。当前该计算不能提供给其它类型的设备。
-+
-+关于上述API的更多细节可以在 ``<linux/energy_model.h>`` 或第2.4节中找到。
-+
-+
-+2.4 API的细节描述
-+^^^^^^^^^^^^^^^^^
-+.. kernel-doc:: include/linux/energy_model.h
-+   :internal:
-+
-+.. kernel-doc:: kernel/power/energy_model.c
-+   :export:
-+
-+
-+3. 驱动示例
-+-----------
-+
-+CPUFreq框架支持专用的回调函数，用于为指定的CPU（们）注册EM：
-+cpufreq_driver::register_em()。这个回调必须为每个特定的驱动程序正确实现，
-+因为框架会在设置过程中适时地调用它。本节提供了一个简单的例子，展示CPUFreq驱动
-+在能量模型框架中使用（假的）“foo”协议注册性能域。该驱动实现了一个est_power()
-+函数提供给EM框架::
-+
-+  -> drivers/cpufreq/foo_cpufreq.c
-+
-+  01	static int est_power(unsigned long *mW, unsigned long *KHz,
-+  02			struct device *dev)
-+  03	{
-+  04		long freq, power;
-+  05
-+  06		/* 使用“foo”协议设置频率上限 */
-+  07		freq = foo_get_freq_ceil(dev, *KHz);
-+  08		if (freq < 0);
-+  09			return freq;
-+  10
-+  11		/* 估算相关频率下设备的功率成本 */
-+  12		power = foo_estimate_power(dev, freq);
-+  13		if (power < 0);
-+  14			return power;
-+  15
-+  16		/* 将这些值返回给EM框架 */
-+  17		*mW = power;
-+  18		*KHz = freq;
-+  19
-+  20		return 0;
-+  21	}
-+  22
-+  23	static void foo_cpufreq_register_em(struct cpufreq_policy *policy)
-+  24	{
-+  25		struct em_data_callback em_cb = EM_DATA_CB(est_power);
-+  26		struct device *cpu_dev;
-+  27		int nr_opp;
-+  28
-+  29		cpu_dev = get_cpu_device(cpumask_first(policy->cpus));
-+  30
-+  31     	/* 查找该策略支持的OPP数量 */
-+  32     	nr_opp = foo_get_nr_opp(policy);
-+  33
-+  34     	/* 并注册新的性能域 */
-+  35     	em_dev_register_perf_domain(cpu_dev, nr_opp, &em_cb, policy->cpus,
-+  36					    true);
-+  37	}
-+  38
-+  39	static struct cpufreq_driver foo_cpufreq_driver = {
-+  40		.register_em = foo_cpufreq_register_em,
-+  41	};
-diff --git a/Documentation/translations/zh_CN/power/index.rst b/Documentation/translations/zh_CN/power/index.rst
-index ad80a9e80b7c..bc54983ba515 100644
---- a/Documentation/translations/zh_CN/power/index.rst
-+++ b/Documentation/translations/zh_CN/power/index.rst
-@@ -14,6 +14,7 @@
- .. toctree::
-     :maxdepth: 1
- 
-+    energy-model
-     opp
- 
- TODOList:
-@@ -22,7 +23,6 @@ TODOList:
-     * basic-pm-debugging
-     * charger-manager
-     * drivers-testing
--    * energy-model
-     * freezing-of-tasks
-     * pci
-     * pm_qos_interface
--- 
-2.17.1
+Add Philipp to CC since he investigates the deduplicating.
+
+> 
+>   These patches are taking too long. Maybe no one wants to look through history
+> anymore. So I'm putting together some of the most central observations of
+> "make generic" as follows:
+>    Mike Rapoport:
+>      This very reminds what x86 does. Any chance some of the code can be reused
+>      rather than duplicated?
+>      https://lkml.org/lkml/2019/4/4/1225
+> 
+>      I think it would be better to have CONFIG_ARCH_WANT_RESERVE_CRASH_KERNEL
+>      in arch/Kconfig and select this by X86 and ARM64.
+>      https://lkml.org/lkml/2020/11/12/224
+> 
+>    Ingo Molnar:
+>      No objections for this to be merged via the ARM tree, as long as x86
+>      functionality is kept intact.
+>      https://lkml.org/lkml/2019/4/10/109
+> 
+>      I.e. Ack, but only if it doesn't break anything. :-)
+>      https://lkml.org/lkml/2019/4/12/66
+> 
+>    Dave Young:
+>      Other than the comments from James, can you move the function into
+>      kernel/crash_core.c, we already have some functions moved there for
+>      sharing.
+>      https://lkml.org/lkml/2019/6/12/248
+> 
+>    Catalin Marinas:
+>      Except for the threshold to keep zone ZONE_DMA memory,
+>      reserve_crashkernel() looks very close to the x86 version. Shall we try
+>      to make this generic as well?
+>      https://lkml.org/lkml/2020/9/2/917
+> 
+>    Borislav Petkov:
+>      Why insert_resource() is relevant only to x86?
+>      --> I think this means "Why does arm64 not use insert_resource()?"
+>      https://lkml.org/lkml/2021/12/23/480
+> 
+>      This is exactly why I say that making those functions generic and shared
+>      might not be such a good idea, after all, because then you'd have to
+>      sprinkle around arch-specific stuff.
+>      https://lkml.org/lkml/2021/12/23/480
+> 
+>      What I suggested and what would be real clean is if the arches would
+>      simply call a *single*
+> 	parse_crashkernel()
+>      function and when that one returns, *all* crashkernel= options would
+>      have been parsed properly, low, high, middle crashkernel, whatever...
+>      and the caller would know what crash kernel needs to be allocated.
+>      https://lkml.org/lkml/2021/12/28/305
+> 
+>    ------
+>    James Morse:
+>      We can then describe it via a different string in /proc/iomem, something
+>      like "Crash kernel (low)".
+>      https://lkml.org/lkml/2019/6/5/670
+>      --> The suggestion looks out of date. See Borislav Petkov's comments:
+>      --> 157752d84f5d ("kexec: use Crash kernel for Crash kernel low")
+>      --> https://lkml.org/lkml/2021/12/23/480
+> 
+> 
+> On 2022/1/24 16:47, Zhen Lei wrote:
+> > There are following issues in arm64 kdump:
+> > 1. We use crashkernel=X to reserve crashkernel below 4G, which
+> > will fail when there is no enough low memory.
+> > 2. If reserving crashkernel above 4G, in this case, crash dump
+> > kernel will boot failure because there is no low memory available
+> > for allocation.
+> > 
+> > To solve these issues, change the behavior of crashkernel=X.
+> > crashkernel=X tries low allocation in DMA zone and fall back to high
+> > allocation if it fails.
+> > 
+> > We can also use "crashkernel=X,high" to select a high region above
+> > DMA zone, which also tries to allocate at least 256M low memory in
+> > DMA zone automatically and "crashkernel=Y,low" can be used to allocate
+> > specified size low memory.
+> > 
+> > When reserving crashkernel in high memory, some low memory is reserved
+> > for crash dump kernel devices. So there may be two regions reserved for
+> > crash dump kernel.
+> > In order to distinct from the high region and make no effect to the use
+> > of existing kexec-tools, rename the low region as "Crash kernel (low)",
+> > and pass the low region by reusing DT property
+> > "linux,usable-memory-range". We made the low memory region as the last
+> > range of "linux,usable-memory-range" to keep compatibility with existing
+> > user-space and older kdump kernels.
+> > 
+> > Besides, we need to modify kexec-tools:
+> > arm64: support more than one crash kernel regions(see [1])
+> > 
+> > Another update is document about DT property 'linux,usable-memory-range':
+> > schemas: update 'linux,usable-memory-range' node schema(see [2])
+> > 
+> > 
+> > Changes since [v19]:
+> > 1. Temporarily stop making reserve_crashkernel[_low]() generic. There are a
+> >    lot of details need to be considered, which can take a long time. Because
+> >    "make generic" does not add new functions and does not improve performance,
+> >    maybe I should say it's just a cleanup. So by stripping it out and leaving
+> >    it for other patches later, we can aggregate the changes to the main functions.
+> > 2. Use insert_resource() to replace request_resource(), this not only simplifies
+> >    the code, but also reduces the differences between arm64 and x86 implementations.
+> > 3. As commit 157752d84f5d ("kexec: use Crash kernel for Crash kernel low") do for
+> >    x86, we can also extend kexec-tools for arm64, and it's currently applied. See:
+> >    https://www.spinics.net/lists/kexec/msg28284.html
+> > 
+> > Thank you very much, Borislav Petkov, for so many valuable comments.
+> > 
+> > 
+> > 
+> > Changes since [v17]: v17 --> v19
+> > 1. Patch 0001-0004
+> >    Introduce generic parse_crashkernel_high_low() to bring the parsing of
+> >    "crashkernel=X,high" and the parsing of "crashkernel=X,low" together,
+> >    then use it instead of the call to parse_crashkernel_{high|low}(). Two
+> >    confusing parameters of parse_crashkernel_{high|low}() are deleted.
+> > 
+> >    I previously sent these four patches separately:
+> >    [1] https://lkml.org/lkml/2021/12/25/40
+> > 2. Patch 0005-0009
+> >    Introduce generic reserve_crashkernel_mem[_low](), the implementation of
+> >    these two functions is based on function reserve_crashkernel[_low]() in
+> >    arch/x86/kernel/setup.c. There is no functional change for x86.
+> >    1) The check position of xen_pv_domain() does not change.
+> >    2) Still 1M alignment for crash kernel fixed region, when 'base' is specified.
+> > 
+> >    To avoid compilation problems on other architectures: patch 0004 moves
+> >    the definition of global variable crashk[_low]_res from kexec_core.c to
+> >    crash_core.c, and provide default definitions for all macros involved, a
+> >    particular platform can redefine these macros to override the default
+> >    values.
+> > 3. 0010, only one line of comment was changed.
+> > 4. 0011
+> >    1) crashk_low_res may also a valid reserved memory, should be checked
+> >       in crash_is_nosave(), see arch/arm64/kernel/machine_kexec.
+> >    2) Drop memblock_mark_nomap() for crashk_low_res, because of:
+> >       2687275a5843 arm64: Force NO_BLOCK_MAPPINGS if crashkernel reservation is required
+> >    3) Also call kmemleak_ignore_phys() for crashk_low_res, because of:
+> >       85f58eb18898 arm64: kdump: Skip kmemleak scan reserved memory for kdump
+> > 5. 0012, slightly rebased, because the following patch is applied in advance. 
+> >    https://git.kernel.org/pub/scm/linux/kernel/git/robh/linux.git/commit/?h=dt/linus&id=8347b41748c3019157312fbe7f8a6792ae396eb7
+> > 6. 0013, no change.
+> > 
+> > Others:
+> > 1. Discard add ARCH_WANT_RESERVE_CRASH_KERNEL
+> > 2. When allocating crash low memory, the start address still starts from 0.
+> >    low_base = memblock_phys_alloc_range(low_size, CRASH_ALIGN, 0, CRASH_ADDR_LOW_MAX);
+> > 3. Discard change (1ULL << 32) to CRASH_ADDR_LOW_MAX.
+> > 4. Ensure the check position of xen_pv_domain() have no change.
+> > 5. Except patch 0010 and 0012, all "Tested-by", "Reviewed-by", "Acked-by" are removed.
+> > 6. Update description.
+> > 
+> > 
+> > 
+> > Changes since [v16]
+> > - Because no functional changes in this version, so add
+> >   "Tested-by: Dave Kleikamp <dave.kleikamp@oracle.com>" for patch 1-9
+> > - Add "Reviewed-by: Rob Herring <robh@kernel.org>" for patch 8
+> > - Update patch 9 based on the review comments of Rob Herring
+> > - As Catalin Marinas's suggestion, merge the implementation of
+> >   ARCH_WANT_RESERVE_CRASH_KERNEL into patch 5. Ensure that the
+> >   contents of X86 and ARM64 do not overlap, and reduce unnecessary
+> >   temporary differences.
+> > 
+> > Changes since [v15]
+> > -  Aggregate the processing of "linux,usable-memory-range" into one function.
+> >    Only patch 9-10 have been updated.
+> > 
+> > Changes since [v14]
+> > - Recovering the requirement that the CrashKernel memory regions on X86
+> >   only requires 1 MiB alignment.
+> > - Combine patches 5 and 6 in v14 into one. The compilation warning fixed
+> >   by patch 6 was introduced by patch 5 in v14.
+> > - As with crashk_res, crashk_low_res is also processed by
+> >   crash_exclude_mem_range() in patch 7.
+> > - Due to commit b261dba2fdb2 ("arm64: kdump: Remove custom linux,usable-memory-range handling")
+> >   has removed the architecture-specific code, extend the property "linux,usable-memory-range"
+> >   in the platform-agnostic FDT core code. See patch 9.
+> > - Discard the x86 description update in the document, because the description
+> >   has been updated by commit b1f4c363666c ("Documentation: kdump: update kdump guide").
+> > - Change "arm64" to "ARM64" in Doc.
+> > 
+> > 
+> > Changes since [v13]
+> > - Rebased on top of 5.11-rc5.
+> > - Introduce config CONFIG_ARCH_WANT_RESERVE_CRASH_KERNEL.
+> > Since reserve_crashkernel[_low]() implementations are quite similar on
+> > other architectures, so have CONFIG_ARCH_WANT_RESERVE_CRASH_KERNEL in
+> > arch/Kconfig and select this by X86 and ARM64.
+> > - Some minor cleanup.
+> > 
+> > Changes since [v12]
+> > - Rebased on top of 5.10-rc1.
+> > - Keep CRASH_ALIGN as 16M suggested by Dave.
+> > - Drop patch "kdump: add threshold for the required memory".
+> > - Add Tested-by from John.
+> > 
+> > Changes since [v11]
+> > - Rebased on top of 5.9-rc4.
+> > - Make the function reserve_crashkernel() of x86 generic.
+> > Suggested by Catalin, make the function reserve_crashkernel() of x86 generic
+> > and arm64 use the generic version to reimplement crashkernel=X.
+> > 
+> > Changes since [v10]
+> > - Reimplement crashkernel=X suggested by Catalin, Many thanks to Catalin.
+> > 
+> > Changes since [v9]
+> > - Patch 1 add Acked-by from Dave.
+> > - Update patch 5 according to Dave's comments.
+> > - Update chosen schema.
+> > 
+> > Changes since [v8]
+> > - Reuse DT property "linux,usable-memory-range".
+> > Suggested by Rob, reuse DT property "linux,usable-memory-range" to pass the low
+> > memory region.
+> > - Fix kdump broken with ZONE_DMA reintroduced.
+> > - Update chosen schema.
+> > 
+> > Changes since [v7]
+> > - Move x86 CRASH_ALIGN to 2M
+> > Suggested by Dave and do some test, move x86 CRASH_ALIGN to 2M.
+> > - Update Documentation/devicetree/bindings/chosen.txt.
+> > Add corresponding documentation to Documentation/devicetree/bindings/chosen.txt
+> > suggested by Arnd.
+> > - Add Tested-by from Jhon and pk.
+> > 
+> > Changes since [v6]
+> > - Fix build errors reported by kbuild test robot.
+> > 
+> > Changes since [v5]
+> > - Move reserve_crashkernel_low() into kernel/crash_core.c.
+> > - Delete crashkernel=X,high.
+> > - Modify crashkernel=X,low.
+> > If crashkernel=X,low is specified simultaneously, reserve spcified size low
+> > memory for crash kdump kernel devices firstly and then reserve memory above 4G.
+> > In addition, rename crashk_low_res as "Crash kernel (low)" for arm64, and then
+> > pass to crash dump kernel by DT property "linux,low-memory-range".
+> > - Update Documentation/admin-guide/kdump/kdump.rst.
+> > 
+> > Changes since [v4]
+> > - Reimplement memblock_cap_memory_ranges for multiple ranges by Mike.
+> > 
+> > Changes since [v3]
+> > - Add memblock_cap_memory_ranges back for multiple ranges.
+> > - Fix some compiling warnings.
+> > 
+> > Changes since [v2]
+> > - Split patch "arm64: kdump: support reserving crashkernel above 4G" as
+> > two. Put "move reserve_crashkernel_low() into kexec_core.c" in a separate
+> > patch.
+> > 
+> > Changes since [v1]:
+> > - Move common reserve_crashkernel_low() code into kernel/kexec_core.c.
+> > - Remove memblock_cap_memory_ranges() i added in v1 and implement that
+> > in fdt_enforce_memory_region().
+> > There are at most two crash kernel regions, for two crash kernel regions
+> > case, we cap the memory range [min(regs[*].start), max(regs[*].end)]
+> > and then remove the memory range in the middle.
+> > 
+> > [1]: https://www.spinics.net/lists/kexec/msg28226.html
+> > [2]: https://github.com/robherring/dt-schema/pull/19 
+> > [v1]: https://lkml.org/lkml/2019/4/2/1174
+> > [v2]: https://lkml.org/lkml/2019/4/9/86
+> > [v3]: https://lkml.org/lkml/2019/4/9/306
+> > [v4]: https://lkml.org/lkml/2019/4/15/273
+> > [v5]: https://lkml.org/lkml/2019/5/6/1360
+> > [v6]: https://lkml.org/lkml/2019/8/30/142
+> > [v7]: https://lkml.org/lkml/2019/12/23/411
+> > [v8]: https://lkml.org/lkml/2020/5/21/213
+> > [v9]: https://lkml.org/lkml/2020/6/28/73
+> > [v10]: https://lkml.org/lkml/2020/7/2/1443
+> > [v11]: https://lkml.org/lkml/2020/8/1/150
+> > [v12]: https://lkml.org/lkml/2020/9/7/1037
+> > [v13]: https://lkml.org/lkml/2020/10/31/34
+> > [v14]: https://lkml.org/lkml/2021/1/30/53
+> > [v15]: https://lkml.org/lkml/2021/10/19/1405
+> > [v16]: https://lkml.org/lkml/2021/11/23/435
+> > [v17]: https://lkml.org/lkml/2021/12/10/38
+> > [v18]: https://lkml.org/lkml/2021/12/22/424
+> > [v19]: https://lkml.org/lkml/2021/12/28/203
+> > 
+> > 
+> > Chen Zhou (4):
+> >   arm64: kdump: introduce some macros for crash kernel reservation
+> >   arm64: kdump: reimplement crashkernel=X
+> >   of: fdt: Add memory for devices by DT property
+> >     "linux,usable-memory-range"
+> >   kdump: update Documentation about crashkernel
+> > 
+> > Zhen Lei (1):
+> >   arm64: Use insert_resource() to simplify code
+> > 
+> >  Documentation/admin-guide/kdump/kdump.rst     | 11 ++-
+> >  .../admin-guide/kernel-parameters.txt         | 11 ++-
+> >  arch/arm64/kernel/machine_kexec.c             |  9 ++-
+> >  arch/arm64/kernel/machine_kexec_file.c        | 12 ++-
+> >  arch/arm64/kernel/setup.c                     | 17 +---
+> >  arch/arm64/mm/init.c                          | 80 +++++++++++++++++--
+> >  drivers/of/fdt.c                              | 33 +++++---
+> >  7 files changed, 134 insertions(+), 39 deletions(-)
+> > 
+> 
+> -- 
+> Regards,
+>   Zhen Lei
+> 
 
