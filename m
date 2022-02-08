@@ -2,81 +2,63 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id C45E44AD6A0
-	for <lists+linux-doc@lfdr.de>; Tue,  8 Feb 2022 12:28:33 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 3DC544AD6A4
+	for <lists+linux-doc@lfdr.de>; Tue,  8 Feb 2022 12:28:35 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1356162AbiBHL1K (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 8 Feb 2022 06:27:10 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:56836 "EHLO
+        id S1357116AbiBHL1O (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 8 Feb 2022 06:27:14 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:36794 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1347690AbiBHKdW (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 8 Feb 2022 05:33:22 -0500
-Received: from ams.source.kernel.org (ams.source.kernel.org [145.40.68.75])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id B3241C03FEC0;
-        Tue,  8 Feb 2022 02:33:21 -0800 (PST)
+        with ESMTP id S1356822AbiBHLIK (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 8 Feb 2022 06:08:10 -0500
+Received: from dfw.source.kernel.org (dfw.source.kernel.org [IPv6:2604:1380:4641:c500::1])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 0B95BC03FEC0;
+        Tue,  8 Feb 2022 03:08:10 -0800 (PST)
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
         (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
         (No client certificate requested)
-        by ams.source.kernel.org (Postfix) with ESMTPS id 843B5B819D3;
-        Tue,  8 Feb 2022 10:33:20 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id ED721C004E1;
-        Tue,  8 Feb 2022 10:33:12 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-        s=k20201202; t=1644316399;
-        bh=NjZVvFDpCokRsNYFmGbL6uf2PEi0paLoaM6pmwUfwg4=;
+        by dfw.source.kernel.org (Postfix) with ESMTPS id A4D4561583;
+        Tue,  8 Feb 2022 11:08:09 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 556ACC004E1;
+        Tue,  8 Feb 2022 11:08:08 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=linuxfoundation.org;
+        s=korg; t=1644318489;
+        bh=qu25s2pI0bef9usPCks0SF20/3lcuZT4+ajSE0ondkM=;
         h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-        b=DoPDojkRCyKyurVc6+Z9NuA5N9T34Vwzlt3a6NyhBVNOn/kmJC2NSKmBQj2dGmO3n
-         dPC0czljcJMtg4zX9ygXDe8Y5qJXeR6eyvxdPgcMCqytu3n6SX2VNWWBuvMErhrSmr
-         OnZappvVotQnJAJkZ3/AvykVzgIiRF2//hY5rZT3aFuBRkX3mWaTxVhw3vxLjuV3Bk
-         AEh4ZSFrocpqOFVJDAA9CvNN7lcN79EAxrNuUQIcatkWVmh9sf6gZbiDflNGoG1PxN
-         I9kBQh7d0L9cRkQSPGtthSFuJrtwqo9UUJovWsIFsqx63gajuQCQjj9iK5aE42APlW
-         X/bm9Dd0uMDBg==
-Date:   Tue, 8 Feb 2022 10:33:09 +0000
-From:   Will Deacon <will@kernel.org>
-To:     Yu Zhao <yuzhao@google.com>
-Cc:     Andrew Morton <akpm@linux-foundation.org>,
-        Johannes Weiner <hannes@cmpxchg.org>,
-        Mel Gorman <mgorman@suse.de>, Michal Hocko <mhocko@kernel.org>,
-        Andi Kleen <ak@linux.intel.com>,
-        Aneesh Kumar <aneesh.kumar@linux.ibm.com>,
-        Barry Song <21cnbao@gmail.com>,
-        Catalin Marinas <catalin.marinas@arm.com>,
-        Dave Hansen <dave.hansen@linux.intel.com>,
-        Hillf Danton <hdanton@sina.com>, Jens Axboe <axboe@kernel.dk>,
-        Jesse Barnes <jsbarnes@google.com>,
+        b=arp1QXgJJRaO2ZgwEBCS04YXmhnkX1AoGwN+4Tef0YqIynclXCGBiDrpdd4BdIWaj
+         PbQLX9uUhQ4ue0sJOaRlbObuQi9wsuUf9ZHPoiyAR2anjm1+9fWCPYaLs9QChXea+a
+         qFd9pTBvdmy4LuNlg+WxYMkSefPhAXBTpmkDc8y0=
+Date:   Tue, 8 Feb 2022 12:08:06 +0100
+From:   Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+To:     Iwona Winiarska <iwona.winiarska@intel.com>
+Cc:     linux-kernel@vger.kernel.org, openbmc@lists.ozlabs.org,
+        devicetree@vger.kernel.org, linux-aspeed@lists.ozlabs.org,
+        linux-arm-kernel@lists.infradead.org, linux-hwmon@vger.kernel.org,
+        linux-doc@vger.kernel.org, Rob Herring <robh+dt@kernel.org>,
+        Joel Stanley <joel@jms.id.au>,
+        Andrew Jeffery <andrew@aj.id.au>,
+        Jean Delvare <jdelvare@suse.com>,
+        Guenter Roeck <linux@roeck-us.net>,
+        Arnd Bergmann <arnd@arndb.de>, Olof Johansson <olof@lixom.net>,
         Jonathan Corbet <corbet@lwn.net>,
-        Linus Torvalds <torvalds@linux-foundation.org>,
-        Matthew Wilcox <willy@infradead.org>,
-        Michael Larabel <Michael@michaellarabel.com>,
-        Mike Rapoport <rppt@kernel.org>,
-        Rik van Riel <riel@surriel.com>,
-        Vlastimil Babka <vbabka@suse.cz>,
-        Ying Huang <ying.huang@intel.com>,
-        linux-arm-kernel@lists.infradead.org, linux-doc@vger.kernel.org,
-        linux-kernel@vger.kernel.org, linux-mm@kvack.org,
-        page-reclaim@google.com, x86@kernel.org,
-        Brian Geffon <bgeffon@google.com>,
-        Jan Alexander Steffens <heftig@archlinux.org>,
-        Oleksandr Natalenko <oleksandr@natalenko.name>,
-        Steven Barrett <steven@liquorix.net>,
-        Suleiman Souhlal <suleiman@google.com>,
-        Daniel Byrne <djbyrne@mtu.edu>,
-        Donald Carr <d@chaos-reins.com>,
-        Holger =?iso-8859-1?Q?Hoffst=E4tte?= 
-        <holger@applied-asynchrony.com>,
-        Konstantin Kharlamov <Hi-Angel@yandex.ru>,
-        Shuang Zhai <szhai2@cs.rochester.edu>,
-        Sofia Trinh <sofia.trinh@edi.works>
-Subject: Re: [PATCH v7 01/12] mm: x86, arm64: add arch_has_hw_pte_young()
-Message-ID: <20220208103309.GB1002@willie-the-truck>
-References: <20220208081902.3550911-1-yuzhao@google.com>
- <20220208081902.3550911-2-yuzhao@google.com>
+        Borislav Petkov <bp@alien8.de>,
+        Pierre-Louis Bossart <pierre-louis.bossart@linux.intel.com>,
+        Tony Luck <tony.luck@intel.com>,
+        Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
+        Dan Williams <dan.j.williams@intel.com>,
+        Randy Dunlap <rdunlap@infradead.org>,
+        Zev Weiss <zweiss@equinix.com>,
+        David Muller <d.mueller@elsoft.ch>,
+        Dave Hansen <dave.hansen@intel.com>,
+        Billy Tsai <billy_tsai@aspeedtech.com>
+Subject: Re: [PATCH v7 07/13] peci: Add sysfs interface for PECI bus
+Message-ID: <YgJPFlr18AmWiTRY@kroah.com>
+References: <20220202144838.163875-1-iwona.winiarska@intel.com>
+ <20220202144838.163875-8-iwona.winiarska@intel.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=iso-8859-1
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <20220208081902.3550911-2-yuzhao@google.com>
-User-Agent: Mutt/1.10.1 (2018-07-13)
+In-Reply-To: <20220202144838.163875-8-iwona.winiarska@intel.com>
 X-Spam-Status: No, score=-7.1 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
         DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_HI,
         SPF_HELO_NONE,SPF_PASS,T_SCC_BODY_TEXT_LINE autolearn=ham
@@ -87,43 +69,50 @@ Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Tue, Feb 08, 2022 at 01:18:51AM -0700, Yu Zhao wrote:
-> Some architectures automatically set the accessed bit in PTEs, e.g.,
-> x86 and arm64 v8.2. On architectures that don't have this capability,
-> clearing the accessed bit in a PTE usually triggers a page fault
-> following the TLB miss of this PTE (to emulate the accessed bit).
+On Wed, Feb 02, 2022 at 03:48:32PM +0100, Iwona Winiarska wrote:
+> PECI devices may not be discoverable at the time when PECI controller is
+> being added (e.g. BMC can boot up when the Host system is still in S5).
+> Since we currently don't have the capabilities to figure out the Host
+> system state inside the PECI subsystem itself, we have to rely on
+> userspace to do it for us.
 > 
-> Being aware of this capability can help make better decisions, e.g.,
-> whether to spread the work out over a period of time to reduce bursty
-> page faults when trying to clear the accessed bit in many PTEs.
+> In the future, PECI subsystem may be expanded with mechanisms that allow
+> us to avoid depending on userspace interaction (e.g. CPU presence could
+> be detected using GPIO, and the information on whether it's discoverable
+> could be obtained over IPMI).
+> Unfortunately, those methods may ultimately not be available (support
+> will vary from platform to platform), which means that we still need
+> platform independent method triggered by userspace.
 > 
-> Note that theoretically this capability can be unreliable, e.g.,
-> hotplugged CPUs might be different from builtin ones. Therefore it
-> shouldn't be used in architecture-independent code that involves
-> correctness, e.g., to determine whether TLB flushes are required (in
-> combination with the accessed bit).
-> 
-> Signed-off-by: Yu Zhao <yuzhao@google.com>
-> Acked-by: Brian Geffon <bgeffon@google.com>
-> Acked-by: Jan Alexander Steffens (heftig) <heftig@archlinux.org>
-> Acked-by: Oleksandr Natalenko <oleksandr@natalenko.name>
-> Acked-by: Steven Barrett <steven@liquorix.net>
-> Acked-by: Suleiman Souhlal <suleiman@google.com>
-> Tested-by: Daniel Byrne <djbyrne@mtu.edu>
-> Tested-by: Donald Carr <d@chaos-reins.com>
-> Tested-by: Holger Hoffstätte <holger@applied-asynchrony.com>
-> Tested-by: Konstantin Kharlamov <Hi-Angel@yandex.ru>
-> Tested-by: Shuang Zhai <szhai2@cs.rochester.edu>
-> Tested-by: Sofia Trinh <sofia.trinh@edi.works>
+> Signed-off-by: Iwona Winiarska <iwona.winiarska@intel.com>
 > ---
->  arch/arm64/include/asm/pgtable.h | 14 ++------------
->  arch/x86/include/asm/pgtable.h   |  6 +++---
->  include/linux/pgtable.h          | 13 +++++++++++++
->  mm/memory.c                      | 14 +-------------
->  4 files changed, 19 insertions(+), 28 deletions(-)
+>  Documentation/ABI/testing/sysfs-bus-peci | 16 +++++
+>  drivers/peci/Makefile                    |  2 +-
+>  drivers/peci/core.c                      |  3 +-
+>  drivers/peci/device.c                    |  1 +
+>  drivers/peci/internal.h                  |  5 ++
+>  drivers/peci/sysfs.c                     | 82 ++++++++++++++++++++++++
+>  6 files changed, 107 insertions(+), 2 deletions(-)
+>  create mode 100644 Documentation/ABI/testing/sysfs-bus-peci
+>  create mode 100644 drivers/peci/sysfs.c
+> 
+> diff --git a/Documentation/ABI/testing/sysfs-bus-peci b/Documentation/ABI/testing/sysfs-bus-peci
+> new file mode 100644
+> index 000000000000..56c2b2216bbd
+> --- /dev/null
+> +++ b/Documentation/ABI/testing/sysfs-bus-peci
+> @@ -0,0 +1,16 @@
+> +What:		/sys/bus/peci/rescan
+> +Date:		July 2021
+> +KernelVersion:	5.15
 
-For the arm64 bit:
+5.15 was a long time ago :(
 
-Acked-by: Will Deacon <will@kernel.org>
 
-Will
+Other than this nit, these all look semi-sane to me.  What tree are you
+wanting these to go through, mine?  If so, can you fix this up (both
+places in this file) and resend?
+
+thanks,
+
+greg k-h
