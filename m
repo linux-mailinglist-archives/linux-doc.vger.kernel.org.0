@@ -2,100 +2,66 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id EAFA04AD901
-	for <lists+linux-doc@lfdr.de>; Tue,  8 Feb 2022 14:16:43 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 6454A4AD8EE
+	for <lists+linux-doc@lfdr.de>; Tue,  8 Feb 2022 14:16:24 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1350223AbiBHNQM (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 8 Feb 2022 08:16:12 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:56310 "EHLO
+        id S1349845AbiBHNQH (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 8 Feb 2022 08:16:07 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:58178 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1357117AbiBHMbl (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 8 Feb 2022 07:31:41 -0500
-Received: from mx0a-001b2d01.pphosted.com (mx0a-001b2d01.pphosted.com [148.163.156.1])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id F3918C03FEC0;
-        Tue,  8 Feb 2022 04:31:40 -0800 (PST)
-Received: from pps.filterd (m0098396.ppops.net [127.0.0.1])
-        by mx0a-001b2d01.pphosted.com (8.16.1.2/8.16.1.2) with SMTP id 218Ai6w9022675;
-        Tue, 8 Feb 2022 12:31:39 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ibm.com; h=message-id : date :
- mime-version : subject : to : cc : references : from : in-reply-to :
- content-type : content-transfer-encoding; s=pp1;
- bh=iHGDuqNrQb/kRbRUe0TWSWq6jEICOEqQwIoViDebqck=;
- b=f6IEJ/GTr0qEsGQGhbbWyaBxfRIEB0JL8UNe3Qg9FoXof9AFS7BybXiluGNOHYTNQdej
- IIJZgmhLDBSk/068VZDZqDsovuHFGQjWI7oCjiF9B91Xd4TMO/9suRQsLrpNJdn9ZZYq
- OBtjqRKMfrE8xviVQ+Nu0LhHX6XVw9p9JhufwxACor39KTQLLiYlCEeKtGyvmohlnzM9
- 7wdMv8aEo/m9T2r50Q2tJZe3B2fqEzrBbFx5c2EKzcSDUVACP9B4xccifYaX41/T1xdV
- fVnGx1HBGohMrCyKDhA+abfMdStvRZYH0MpDXc+vb8yqUTmPB4wq9OWr85I2u6xdIprR EA== 
-Received: from pps.reinject (localhost [127.0.0.1])
-        by mx0a-001b2d01.pphosted.com with ESMTP id 3e22stygx3-1
-        (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
-        Tue, 08 Feb 2022 12:31:39 +0000
-Received: from m0098396.ppops.net (m0098396.ppops.net [127.0.0.1])
-        by pps.reinject (8.16.0.43/8.16.0.43) with SMTP id 218CL7ra018851;
-        Tue, 8 Feb 2022 12:31:38 GMT
-Received: from ppma03fra.de.ibm.com (6b.4a.5195.ip4.static.sl-reverse.com [149.81.74.107])
-        by mx0a-001b2d01.pphosted.com with ESMTP id 3e22stygwe-1
-        (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
-        Tue, 08 Feb 2022 12:31:38 +0000
-Received: from pps.filterd (ppma03fra.de.ibm.com [127.0.0.1])
-        by ppma03fra.de.ibm.com (8.16.1.2/8.16.1.2) with SMTP id 218CORre001480;
-        Tue, 8 Feb 2022 12:31:36 GMT
-Received: from b06cxnps3074.portsmouth.uk.ibm.com (d06relay09.portsmouth.uk.ibm.com [9.149.109.194])
-        by ppma03fra.de.ibm.com with ESMTP id 3e1gv9cduv-1
-        (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
-        Tue, 08 Feb 2022 12:31:36 +0000
-Received: from b06wcsmtp001.portsmouth.uk.ibm.com (b06wcsmtp001.portsmouth.uk.ibm.com [9.149.105.160])
-        by b06cxnps3074.portsmouth.uk.ibm.com (8.14.9/8.14.9/NCO v10.0) with ESMTP id 218CVXFj35127628
-        (version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
-        Tue, 8 Feb 2022 12:31:33 GMT
-Received: from b06wcsmtp001.portsmouth.uk.ibm.com (unknown [127.0.0.1])
-        by IMSVA (Postfix) with ESMTP id 158ACA4060;
-        Tue,  8 Feb 2022 12:31:33 +0000 (GMT)
-Received: from b06wcsmtp001.portsmouth.uk.ibm.com (unknown [127.0.0.1])
-        by IMSVA (Postfix) with ESMTP id 5FFF9A405F;
-        Tue,  8 Feb 2022 12:31:32 +0000 (GMT)
-Received: from [9.171.40.184] (unknown [9.171.40.184])
-        by b06wcsmtp001.portsmouth.uk.ibm.com (Postfix) with ESMTP;
-        Tue,  8 Feb 2022 12:31:32 +0000 (GMT)
-Message-ID: <8c02d3c5-03a2-19a3-ff64-6646d09ae9ff@linux.ibm.com>
-Date:   Tue, 8 Feb 2022 13:31:32 +0100
+        with ESMTP id S1343526AbiBHMij (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 8 Feb 2022 07:38:39 -0500
+Received: from mail-io1-xd34.google.com (mail-io1-xd34.google.com [IPv6:2607:f8b0:4864:20::d34])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id AF9EFC03FECA
+        for <linux-doc@vger.kernel.org>; Tue,  8 Feb 2022 04:38:38 -0800 (PST)
+Received: by mail-io1-xd34.google.com with SMTP id e79so20807817iof.13
+        for <linux-doc@vger.kernel.org>; Tue, 08 Feb 2022 04:38:38 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc:content-transfer-encoding;
+        bh=YfGludljpXxudGOnivmrtfMXE/H0moEUKvi4HtBV+jA=;
+        b=GWxIlsgtWhDxF1l7DyywuHzPYruwZe+ttks9ml0WkOg40wcRIxi6d/98wuxVmr8hPo
+         RQ/OqcMLFqHsLrLwXu3Z5GRMqVz5CDGCOIxcFSimL+3S2V79+Po0IkGAyLw0/+gOH8/L
+         rFMNquoEUIUxhGImvkc5LjV8axa+MhjLN8q8Jsm4pxwDZBVroQ7+oIxbvpEKiuF1ndTc
+         Gfajyw1RhiQcAcVyd52+jkkToj+NJmJRVH+NG163DpdGsxINZ0Z9LlQvjAUUWYYbWdAz
+         9yJK+avsLkZNjqFnbYEXeW8qqlSFIADp4ZMm+fGOtz2wnEc0W4Dgd/EMMJNbMJHCXKJA
+         pjZw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc:content-transfer-encoding;
+        bh=YfGludljpXxudGOnivmrtfMXE/H0moEUKvi4HtBV+jA=;
+        b=RBx3ys9fppHGB2jU6XXAsBBh9Imf3CBZ1aXojF/6DA6gtodiCQ6bD1FskfkPquUvj3
+         sewaGrAzDlYQfxqjeYlEm/fxqnfzePgW5pdcVrS8wXyEJX4zNK/WZPmAnynMMdEltZ6f
+         CNnJ3GCQKaRvu0vhSi1aUmh8FA/eKKkbIb+YIaG4J6M/aKW1kW/ULEnRh1SSkliJdtmg
+         aPeZP7sr7djGD+0D8Ss6bX7fL0tsX5bG/oxFp59/PSPl2rWjEPjoypcFxB4lCp+Rhhtr
+         LoW3qXHwZvSjZY/L80kBj+KW8dDpq4aFE0Mn8mAMRHMOYw4WUpSiO2M+E3WWaK1TETte
+         LrRQ==
+X-Gm-Message-State: AOAM533V3xBa/pKILeHqcNXDQ/GGR3oWL2irvzh0eiL2pcV9DhvUmsjI
+        klXQtIgAaqNTuxv4RbckG5W0KfYLXNv0xLQ8FQo=
+X-Google-Smtp-Source: ABdhPJz1LrhEppPKoqblNTFDLhJ1UlMy7OuNUX3NcPo1XQfndQNq1nxg01wCBk4kH8LXljr+n6UFObuGbtzjeyZiyrM=
+X-Received: by 2002:a02:9606:: with SMTP id c6mr1845102jai.169.1644323917268;
+ Tue, 08 Feb 2022 04:38:37 -0800 (PST)
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.5.0
-Subject: Re: [PATCH v2 01/11] s390/uaccess: Add copy_from/to_user_key
- functions
-Content-Language: en-US
-To:     Janis Schoetterl-Glausch <scgl@linux.ibm.com>,
-        Heiko Carstens <hca@linux.ibm.com>,
-        Janosch Frank <frankja@linux.ibm.com>
-Cc:     Alexander Gordeev <agordeev@linux.ibm.com>,
-        Claudio Imbrenda <imbrenda@linux.ibm.com>,
-        David Hildenbrand <david@redhat.com>,
-        Jonathan Corbet <corbet@lwn.net>, kvm@vger.kernel.org,
-        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
-        linux-s390@vger.kernel.org, Paolo Bonzini <pbonzini@redhat.com>,
-        Sven Schnelle <svens@linux.ibm.com>,
-        Vasily Gorbik <gor@linux.ibm.com>
-References: <20220207165930.1608621-1-scgl@linux.ibm.com>
- <20220207165930.1608621-2-scgl@linux.ibm.com>
-From:   Christian Borntraeger <borntraeger@linux.ibm.com>
-In-Reply-To: <20220207165930.1608621-2-scgl@linux.ibm.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-TM-AS-GCONF: 00
-X-Proofpoint-GUID: QKAzx1T5hTdutKRWzUom9QQZhuYttAw0
-X-Proofpoint-ORIG-GUID: NdMYv_WSMw__yFM0N47MTROjQ7rQDNqj
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.205,Aquarius:18.0.816,Hydra:6.0.425,FMLib:17.11.62.513
- definitions=2022-02-08_03,2022-02-07_02,2021-12-02_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 impostorscore=0
- mlxlogscore=999 priorityscore=1501 malwarescore=0 phishscore=0
- suspectscore=0 adultscore=0 spamscore=0 bulkscore=0 lowpriorityscore=0
- mlxscore=0 clxscore=1011 classifier=spam adjust=0 reason=mlx scancount=1
- engine=8.12.0-2201110000 definitions=main-2202080073
-X-Spam-Status: No, score=-2.0 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_EF,NICE_REPLY_A,RCVD_IN_MSPIKE_H5,
-        RCVD_IN_MSPIKE_WL,SPF_HELO_NONE,SPF_PASS,T_SCC_BODY_TEXT_LINE
+References: <20220208073600.10860-1-tangyizhou@huawei.com> <CAEensMwEUHVaZevehMpr6tAxHzDhEQhihgseCJVpJG3=fQ0+Hw@mail.gmail.com>
+In-Reply-To: <CAEensMwEUHVaZevehMpr6tAxHzDhEQhihgseCJVpJG3=fQ0+Hw@mail.gmail.com>
+From:   Alex Shi <seakeel@gmail.com>
+Date:   Tue, 8 Feb 2022 20:38:01 +0800
+Message-ID: <CAJy-AmnF-3ou-mNiHESyH3FLU42ejwzCNFNA7_NgzgmQKPg1cg@mail.gmail.com>
+Subject: Re: [PATCH v3] docs/zh_CN: Add energy-model Chinese translation
+To:     yanteng si <siyanteng01@gmail.com>
+Cc:     Tang Yizhou <tangyizhou@huawei.com>,
+        Yanteng Si <siyanteng@loongson.cn>,
+        Alex Shi <alexs@kernel.org>,
+        Linux Doc Mailing List <linux-doc@vger.kernel.org>,
+        Jonathan Corbet <corbet@lwn.net>, zhengbin13@huawei.com,
+        Yeechou Tang <tangyeechou@gmail.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: base64
+X-Spam-Status: No, score=-2.1 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_FROM,
+        RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,SPF_PASS,T_SCC_BODY_TEXT_LINE
         autolearn=ham autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
@@ -103,237 +69,203 @@ Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Am 07.02.22 um 17:59 schrieb Janis Schoetterl-Glausch:
-> Add copy_from/to_user_key functions, which perform storage key checking.
-> These functions can be used by KVM for emulating instructions that need
-> to be key checked.
-> These functions differ from their non _key counterparts in
-> include/linux/uaccess.h only in the additional key argument and must be
-> kept in sync with those.
-> 
-> Since the existing uaccess implementation on s390 makes use of move
-> instructions that support having an additional access key supplied,
-> we can implement raw_copy_from/to_user_key by enhancing the
-> existing implementation.
-> 
-> Signed-off-by: Janis Schoetterl-Glausch <scgl@linux.ibm.com>
-
-Reviewed-by: Christian Borntraeger <borntraeger@de.ibm.com>
-
-> ---
->   arch/s390/include/asm/uaccess.h | 22 +++++++++
->   arch/s390/lib/uaccess.c         | 81 +++++++++++++++++++++++++--------
->   2 files changed, 85 insertions(+), 18 deletions(-)
-> 
-> diff --git a/arch/s390/include/asm/uaccess.h b/arch/s390/include/asm/uaccess.h
-> index d74e26b48604..ba1bcb91af95 100644
-> --- a/arch/s390/include/asm/uaccess.h
-> +++ b/arch/s390/include/asm/uaccess.h
-> @@ -44,6 +44,28 @@ raw_copy_to_user(void __user *to, const void *from, unsigned long n);
->   #define INLINE_COPY_TO_USER
->   #endif
->   
-> +unsigned long __must_check
-> +_copy_from_user_key(void *to, const void __user *from, unsigned long n, unsigned long key);
-> +
-> +static __always_inline unsigned long __must_check
-> +copy_from_user_key(void *to, const void __user *from, unsigned long n, unsigned long key)
-> +{
-> +	if (likely(check_copy_size(to, n, false)))
-> +		n = _copy_from_user_key(to, from, n, key);
-> +	return n;
-> +}
-> +
-> +unsigned long __must_check
-> +_copy_to_user_key(void __user *to, const void *from, unsigned long n, unsigned long key);
-> +
-> +static __always_inline unsigned long __must_check
-> +copy_to_user_key(void __user *to, const void *from, unsigned long n, unsigned long key)
-> +{
-> +	if (likely(check_copy_size(from, n, true)))
-> +		n = _copy_to_user_key(to, from, n, key);
-> +	return n;
-> +}
-> +
->   int __put_user_bad(void) __attribute__((noreturn));
->   int __get_user_bad(void) __attribute__((noreturn));
->   
-> diff --git a/arch/s390/lib/uaccess.c b/arch/s390/lib/uaccess.c
-> index 8a5d21461889..b709239feb5d 100644
-> --- a/arch/s390/lib/uaccess.c
-> +++ b/arch/s390/lib/uaccess.c
-> @@ -59,11 +59,13 @@ static inline int copy_with_mvcos(void)
->   #endif
->   
->   static inline unsigned long copy_from_user_mvcos(void *x, const void __user *ptr,
-> -						 unsigned long size)
-> +						 unsigned long size, unsigned long key)
->   {
->   	unsigned long tmp1, tmp2;
->   	union oac spec = {
-> +		.oac2.key = key,
->   		.oac2.as = PSW_BITS_AS_SECONDARY,
-> +		.oac2.k = 1,
->   		.oac2.a = 1,
->   	};
->   
-> @@ -94,19 +96,19 @@ static inline unsigned long copy_from_user_mvcos(void *x, const void __user *ptr
->   }
->   
->   static inline unsigned long copy_from_user_mvcp(void *x, const void __user *ptr,
-> -						unsigned long size)
-> +						unsigned long size, unsigned long key)
->   {
->   	unsigned long tmp1, tmp2;
->   
->   	tmp1 = -256UL;
->   	asm volatile(
->   		"   sacf  0\n"
-> -		"0: mvcp  0(%0,%2),0(%1),%3\n"
-> +		"0: mvcp  0(%0,%2),0(%1),%[key]\n"
->   		"7: jz    5f\n"
->   		"1: algr  %0,%3\n"
->   		"   la    %1,256(%1)\n"
->   		"   la    %2,256(%2)\n"
-> -		"2: mvcp  0(%0,%2),0(%1),%3\n"
-> +		"2: mvcp  0(%0,%2),0(%1),%[key]\n"
->   		"8: jnz   1b\n"
->   		"   j     5f\n"
->   		"3: la    %4,255(%1)\n"	/* %4 = ptr + 255 */
-> @@ -115,7 +117,7 @@ static inline unsigned long copy_from_user_mvcp(void *x, const void __user *ptr,
->   		"   slgr  %4,%1\n"
->   		"   clgr  %0,%4\n"	/* copy crosses next page boundary? */
->   		"   jnh   6f\n"
-> -		"4: mvcp  0(%4,%2),0(%1),%3\n"
-> +		"4: mvcp  0(%4,%2),0(%1),%[key]\n"
->   		"9: slgr  %0,%4\n"
->   		"   j     6f\n"
->   		"5: slgr  %0,%0\n"
-> @@ -123,24 +125,49 @@ static inline unsigned long copy_from_user_mvcp(void *x, const void __user *ptr,
->   		EX_TABLE(0b,3b) EX_TABLE(2b,3b) EX_TABLE(4b,6b)
->   		EX_TABLE(7b,3b) EX_TABLE(8b,3b) EX_TABLE(9b,6b)
->   		: "+a" (size), "+a" (ptr), "+a" (x), "+a" (tmp1), "=a" (tmp2)
-> -		: : "cc", "memory");
-> +		: [key] "d" (key << 4)
-> +		: "cc", "memory");
->   	return size;
->   }
->   
-> -unsigned long raw_copy_from_user(void *to, const void __user *from, unsigned long n)
-> +static unsigned long raw_copy_from_user_key(void *to, const void __user *from,
-> +					    unsigned long n, unsigned long key)
->   {
->   	if (copy_with_mvcos())
-> -		return copy_from_user_mvcos(to, from, n);
-> -	return copy_from_user_mvcp(to, from, n);
-> +		return copy_from_user_mvcos(to, from, n, key);
-> +	return copy_from_user_mvcp(to, from, n, key);
-> +}
-> +
-> +unsigned long raw_copy_from_user(void *to, const void __user *from, unsigned long n)
-> +{
-> +	return raw_copy_from_user_key(to, from, n, 0);
->   }
->   EXPORT_SYMBOL(raw_copy_from_user);
->   
-> +unsigned long _copy_from_user_key(void *to, const void __user *from,
-> +				  unsigned long n, unsigned long key)
-> +{
-> +	unsigned long res = n;
-> +
-> +	might_fault();
-> +	if (!should_fail_usercopy()) {
-> +		instrument_copy_from_user(to, from, n);
-> +		res = raw_copy_from_user_key(to, from, n, key);
-> +	}
-> +	if (unlikely(res))
-> +		memset(to + (n - res), 0, res);
-> +	return res;
-> +}
-> +EXPORT_SYMBOL(_copy_from_user_key);
-> +
->   static inline unsigned long copy_to_user_mvcos(void __user *ptr, const void *x,
-> -					       unsigned long size)
-> +					       unsigned long size, unsigned long key)
->   {
->   	unsigned long tmp1, tmp2;
->   	union oac spec = {
-> +		.oac1.key = key,
->   		.oac1.as = PSW_BITS_AS_SECONDARY,
-> +		.oac1.k = 1,
->   		.oac1.a = 1,
->   	};
->   
-> @@ -171,19 +198,19 @@ static inline unsigned long copy_to_user_mvcos(void __user *ptr, const void *x,
->   }
->   
->   static inline unsigned long copy_to_user_mvcs(void __user *ptr, const void *x,
-> -					      unsigned long size)
-> +					      unsigned long size, unsigned long key)
->   {
->   	unsigned long tmp1, tmp2;
->   
->   	tmp1 = -256UL;
->   	asm volatile(
->   		"   sacf  0\n"
-> -		"0: mvcs  0(%0,%1),0(%2),%3\n"
-> +		"0: mvcs  0(%0,%1),0(%2),%[key]\n"
->   		"7: jz    5f\n"
->   		"1: algr  %0,%3\n"
->   		"   la    %1,256(%1)\n"
->   		"   la    %2,256(%2)\n"
-> -		"2: mvcs  0(%0,%1),0(%2),%3\n"
-> +		"2: mvcs  0(%0,%1),0(%2),%[key]\n"
->   		"8: jnz   1b\n"
->   		"   j     5f\n"
->   		"3: la    %4,255(%1)\n" /* %4 = ptr + 255 */
-> @@ -192,7 +219,7 @@ static inline unsigned long copy_to_user_mvcs(void __user *ptr, const void *x,
->   		"   slgr  %4,%1\n"
->   		"   clgr  %0,%4\n"	/* copy crosses next page boundary? */
->   		"   jnh   6f\n"
-> -		"4: mvcs  0(%4,%1),0(%2),%3\n"
-> +		"4: mvcs  0(%4,%1),0(%2),%[key]\n"
->   		"9: slgr  %0,%4\n"
->   		"   j     6f\n"
->   		"5: slgr  %0,%0\n"
-> @@ -200,18 +227,36 @@ static inline unsigned long copy_to_user_mvcs(void __user *ptr, const void *x,
->   		EX_TABLE(0b,3b) EX_TABLE(2b,3b) EX_TABLE(4b,6b)
->   		EX_TABLE(7b,3b) EX_TABLE(8b,3b) EX_TABLE(9b,6b)
->   		: "+a" (size), "+a" (ptr), "+a" (x), "+a" (tmp1), "=a" (tmp2)
-> -		: : "cc", "memory");
-> +		: [key] "d" (key << 4)
-> +		: "cc", "memory");
->   	return size;
->   }
->   
-> -unsigned long raw_copy_to_user(void __user *to, const void *from, unsigned long n)
-> +static unsigned long raw_copy_to_user_key(void __user *to, const void *from,
-> +					  unsigned long n, unsigned long key)
->   {
->   	if (copy_with_mvcos())
-> -		return copy_to_user_mvcos(to, from, n);
-> -	return copy_to_user_mvcs(to, from, n);
-> +		return copy_to_user_mvcos(to, from, n, key);
-> +	return copy_to_user_mvcs(to, from, n, key);
-> +}
-> +
-> +unsigned long raw_copy_to_user(void __user *to, const void *from, unsigned long n)
-> +{
-> +	return raw_copy_to_user_key(to, from, n, 0);
->   }
->   EXPORT_SYMBOL(raw_copy_to_user);
->   
-> +unsigned long _copy_to_user_key(void __user *to, const void *from,
-> +				unsigned long n, unsigned long key)
-> +{
-> +	might_fault();
-> +	if (should_fail_usercopy())
-> +		return n;
-> +	instrument_copy_to_user(to, from, n);
-> +	return raw_copy_to_user_key(to, from, n, key);
-> +}
-> +EXPORT_SYMBOL(_copy_to_user_key);
-> +
->   static inline unsigned long clear_user_mvcos(void __user *to, unsigned long size)
->   {
->   	unsigned long tmp1, tmp2;
+T24gVHVlLCBGZWIgOCwgMjAyMiBhdCA1OjQ1IFBNIHlhbnRlbmcgc2kgPHNpeWFudGVuZzAxQGdt
+YWlsLmNvbT4gd3JvdGU6DQo+DQo+IFRhbmcgWWl6aG91IDx0YW5neWl6aG91QGh1YXdlaS5jb20+
+IOS6jjIwMjLlubQy5pyIOOaXpeWRqOS6jCAxNTowM+WGmemBk++8mg0KPiA+DQo+ID4gVHJhbnNs
+YXRlIHBvd2VyL2VuZXJneS1tb2RlbC5yc3QgaW50byBDaGluZXNlLg0KPiA+DQo+ID4gU2lnbmVk
+LW9mZi1ieTogVGFuZyBZaXpob3UgPHRhbmd5aXpob3VAaHVhd2VpLmNvbT4NCj4gUmV2aWV3ZWQt
+Ynk6IFlhbnRlbmcgU2kgPHNpeWFudGVuZ0Bsb29uZ3Nvbi5jbj4NCj4gPiAtLS0NCj4gPiB2MzoN
+Cj4gPiBEb24ndCBpbmNsdWRlIEVuZ2xpc2gga2VybmVsIGRvYy4NCj4gPg0KPiA+IHYyOg0KPiA+
+IFRyYW5zbGF0ZSB0aGUgY29tbWVudHMgaW4gdGhlIGV4YW1wbGUgcHJvZ3JhbS4NCj4gPg0KPiA+
+ICAuLi4vdHJhbnNsYXRpb25zL3poX0NOL3Bvd2VyL2VuZXJneS1tb2RlbC5yc3QgfCAxOTAgKysr
+KysrKysrKysrKysrKysrDQo+ID4gIC4uLi90cmFuc2xhdGlvbnMvemhfQ04vcG93ZXIvaW5kZXgu
+cnN0ICAgICAgICB8ICAgMiArLQ0KPiA+ICAyIGZpbGVzIGNoYW5nZWQsIDE5MSBpbnNlcnRpb25z
+KCspLCAxIGRlbGV0aW9uKC0pDQo+ID4gIGNyZWF0ZSBtb2RlIDEwMDY0NCBEb2N1bWVudGF0aW9u
+L3RyYW5zbGF0aW9ucy96aF9DTi9wb3dlci9lbmVyZ3ktbW9kZWwucnN0DQo+ID4NCj4gPiBkaWZm
+IC0tZ2l0IGEvRG9jdW1lbnRhdGlvbi90cmFuc2xhdGlvbnMvemhfQ04vcG93ZXIvZW5lcmd5LW1v
+ZGVsLnJzdCBiL0RvY3VtZW50YXRpb24vdHJhbnNsYXRpb25zL3poX0NOL3Bvd2VyL2VuZXJneS1t
+b2RlbC5yc3QNCj4gPiBuZXcgZmlsZSBtb2RlIDEwMDY0NA0KPiA+IGluZGV4IDAwMDAwMDAwMDAw
+MC4uYmNmMjlkNjI0ODYwDQo+ID4gLS0tIC9kZXYvbnVsbA0KPiA+ICsrKyBiL0RvY3VtZW50YXRp
+b24vdHJhbnNsYXRpb25zL3poX0NOL3Bvd2VyL2VuZXJneS1tb2RlbC5yc3QNCj4gPiBAQCAtMCww
+ICsxLDE5MCBAQA0KPiA+ICsuLiBTUERYLUxpY2Vuc2UtSWRlbnRpZmllcjogR1BMLTIuMA0KPiA+
+ICsuLiBpbmNsdWRlOjogLi4vZGlzY2xhaW1lci16aF9DTi5yc3QNCj4gPiArDQo+ID4gKzpPcmln
+aW5hbDogRG9jdW1lbnRhdGlvbi9wb3dlci9lbmVyZ3ktbW9kZWwucnN0DQo+ID4gKw0KPiA+ICs6
+57+76K+ROg0KPiA+ICsNCj4gPiArICDllJDoibroiJ8gVGFuZyBZaXpob3UgPHRhbmd5ZWVjaG91
+QGdtYWlsLmNvbT4NCj4gPiArDQo+ID4gKz09PT09PT09PT09PQ0KPiA+ICvorr7lpIfog73ph4/m
+qKHlnosNCj4gPiArPT09PT09PT09PT09DQo+ID4gKw0KPiA+ICsxLiDmpoLov7ANCj4gPiArLS0t
+LS0tLQ0KPiA+ICsNCj4gPiAr6IO96YeP5qih5Z6L77yIRU3vvInmoYbmnrbmmK/kuIDnp43pqbHl
+iqjnqIvluo/kuI7lhoXmoLjlrZDns7vnu5/kuYvpl7TnmoTmjqXlj6PjgILlhbbkuK3pqbHliqjn
+qIvluo/kuobop6PkuI3lkIwNCj4gPiAr5oCn6IO95bGC57qn55qE6K6+5aSH5omA5raI6ICX55qE
+5Yqf546H77yM6ICM5YaF5qC45a2Q57O757uf5oS/5oSP5L2/55So6K+l5L+h5oGv5YGa5Ye66IO9
+6YeP5oSf55+l5Yaz562W44CCDQo+ID4gKw0KPiA+ICvorr7lpIfmiYDmtojogJfnmoTlip/njofn
+moTkv6Hmga/mnaXmupDlnKjkuI3lkIznmoTlubPlj7DkuIrlj6/og73mnInlvojlpKfnmoTkuI3l
+kIzjgILov5nkupvlip/njofmiJDmnKzlnKjmn5DkupsNCj4gPiAr5oOF5Ya15LiL5Y+v5Lul5L2/
+55So6K6+5aSH5qCR5pWw5o2u5p2l5Lyw566X44CC5Zyo5YW25a6D5oOF5Ya15LiL77yM5Zu65Lu2
+5Lya5pu05riF5qWa44CC5oiW6ICF77yM55So5oi356m66Ze05Y+v6IO9DQo+ID4gK+aYr+acgOa4
+healmueahOOAguS7peatpOexu+aOqOOAguS4uuS6humBv+WFjeavj+S4gOS4quWuouaIt+err+Wt
+kOezu+e7n+Wvueavj+S4gOenjeWPr+iDveeahOS/oeaBr+a6kOiHquW3semHjeaWsA0KPiA+ICvl
+rp7njrDmlK/mjIHvvIxFTeahhuaetuS9nOS4uuS4gOS4quaKveixoeWxguS7i+WFpe+8jOWug+Wc
+qOWGheaguOS4reWvueWKn+eOh+aIkOacrOihqOeahOagvOW8j+i/m+ihjOagh+WHhuWMlu+8jA0K
+PiA+ICvlm6DmraTog73lpJ/pgb/lhY3lpJrkvZnnmoTlt6XkvZzjgIINCj4gPiArDQo+ID4gK+WK
+n+eOh+WAvOWPr+S7peeUqOavq+eTpuaIluKAnOaKveixoeWIu+W6puKAneihqOekuuOAguWkmuS4
+quWtkOezu+e7n+WPr+iDveS9v+eUqEVN77yM55Sx57O757uf6ZuG5oiQ5ZWG5p2l5qOA5p+lDQo+
+ID4gK+WKn+eOh+WAvOWIu+W6puexu+Wei+eahOimgeaxguaYr+WQpua7oei2s+OAguWPr+S7peWc
+qOiDvemHj+aEn+efpeiwg+W6puWZqOeahOaWh+aho+S4reaJvuWIsOS4gOS4quS+i+WtkA0KPiA+
+ICtEb2N1bWVudGF0aW9uL3NjaGVkdWxlci9zY2hlZC1lbmVyZ3kucnN044CC5a+55LqO5LiA5Lqb
+5a2Q57O757uf77yM5q+U5aaC54Ot6IO95oiWDQo+ID4gK3Bvd2VyY2Fw77yM55So4oCc5oq96LGh
+5Yi75bqm4oCd5o+P6L+w5Yqf546H5YC85Y+v6IO95Lya5a+86Ie06Zeu6aKY44CC6L+Z5Lqb5a2Q
+57O757uf5a+56L+H5Y675L2/55So55qE5Yqf546H55qEDQo+ID4gK+S8sOeul+WAvOabtOaEn+WF
+tOi2o++8jOWboOatpOWPr+iDvemcgOimgeecn+WunueahOavq+eTpuOAgui/meS6m+imgeaxguea
+hOS4gOS4quS+i+WtkOWPr+S7peWcqOaZuuiDveWKn+eOh+WIhumFjQ0KPiA+ICtEb2N1bWVudGF0
+aW9uL2RyaXZlci1hcGkvdGhlcm1hbC9wb3dlcl9hbGxvY2F0b3IucnN05paH5qGj5Lit5om+5Yiw
+44CCDQo+ID4gKw0KPiA+ICvlhoXmoLjlrZDns7vnu5/lj6/og73vvIjln7rkuo5FTeWGhemDqOag
+h+W/l+S9je+8ieWunueOsOS6huWvuUVN5rOo5YaM6K6+5aSH5piv5ZCm5YW35pyJ5LiN5LiA6Ie0
+5Yi75bqm55qE6Ieq5YqoDQo+ID4gK+ajgOafpeOAguimgeiusOS9j+eahOmHjeimgeS6i+aDheaY
+r++8jOW9k+WKn+eOh+WAvOS7peKAnOaKveixoeWIu+W6puKAneihqOekuuaXtu+8jOS7juS4reaO
+qOWvvOS7peavq+eEpuiAs+S4uuWNleS9jQ0KPiA+ICvnmoTnnJ/lrp7og73ph4/mtojogJfmmK/k
+uI3lj6/og73nmoTjgIINCj4gPiArDQo+ID4gK+S4i+WbvuaPj+i/sOS6huS4gOS4qumpseWKqOea
+hOS+i+WtkO+8iOi/memHjOaYr+mSiOWvuUFybeeahO+8jOS9huivpeaWueazlemAgueUqOS6juS7
+u+S9leS9k+ezu+e7k+aehO+8ie+8jOWugw0KPiA+ICvlkJFFTeahhuaetuaPkOS+m+S6huWKn+eO
+h+aIkOacrO+8jOaEn+WFtOi2o+eahOWuouaIt+err+WPr+S7juS4reivu+WPluaVsOaNrjo6DQo+
+ID4gKw0KPiA+ICsgICAgICAgKy0tLS0tLS0tLS0tLS0tLSsgICstLS0tLS0tLS0tLS0tLS0tLSsg
+ICstLS0tLS0tLS0tLS0tLS0rDQo+ID4gKyAgICAgICB8IFRoZXJtYWwgKElQQSkgfCAgfCBTY2hl
+ZHVsZXIgKEVBUykgfCAgfCAgICAgT3RoZXIgICAgIHwNCj4gPiArICAgICAgICstLS0tLS0tLS0t
+LS0tLS0rICArLS0tLS0tLS0tLS0tLS0tLS0rICArLS0tLS0tLS0tLS0tLS0tKw0KPiA+ICsgICAg
+ICAgICAgICAgICB8ICAgICAgICAgICAgICAgICAgIHwgZW1fY3B1X2VuZXJneSgpICAgfA0KPiA+
+ICsgICAgICAgICAgICAgICB8ICAgICAgICAgICAgICAgICAgIHwgZW1fY3B1X2dldCgpICAgICAg
+fA0KPiA+ICsgICAgICAgICAgICAgICArLS0tLS0tLS0tKyAgICAgICAgIHwgICAgICAgICArLS0t
+LS0tLS0tKw0KPiA+ICsgICAgICAgICAgICAgICAgICAgICAgICAgfCAgICAgICAgIHwgICAgICAg
+ICB8DQo+ID4gKyAgICAgICAgICAgICAgICAgICAgICAgICB2ICAgICAgICAgdiAgICAgICAgIHYN
+Cj4gPiArICAgICAgICAgICAgICAgICAgICAgICAgKy0tLS0tLS0tLS0tLS0tLS0tLS0tLSsNCj4g
+PiArICAgICAgICAgICAgICAgICAgICAgICAgfCAgICBFbmVyZ3kgTW9kZWwgICAgIHwNCj4gPiAr
+ICAgICAgICAgICAgICAgICAgICAgICAgfCAgICAgRnJhbWV3b3JrICAgICAgIHwNCj4gPiArICAg
+ICAgICAgICAgICAgICAgICAgICAgKy0tLS0tLS0tLS0tLS0tLS0tLS0tLSsNCj4gPiArICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgXiAgICAgICBeICAgICAgIF4NCj4gPiArICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgfCAgICAgICB8ICAgICAgIHwgZW1fZGV2X3JlZ2lzdGVyX3BlcmZfZG9t
+YWluKCkNCj4gPiArICAgICAgICAgICAgICAgICstLS0tLS0tLS0tKyAgICAgICB8ICAgICAgICst
+LS0tLS0tLS0rDQo+ID4gKyAgICAgICAgICAgICAgICB8ICAgICAgICAgICAgICAgICAgfCAgICAg
+ICAgICAgICAgICAgfA0KPiA+ICsgICAgICAgICstLS0tLS0tLS0tLS0tLS0rICArLS0tLS0tLS0t
+LS0tLS0tKyAgKy0tLS0tLS0tLS0tLS0tKw0KPiA+ICsgICAgICAgIHwgIGNwdWZyZXEtZHQgICB8
+ICB8ICAgYXJtX3NjbWkgICAgfCAgfCAgICBPdGhlciAgICAgfA0KPiA+ICsgICAgICAgICstLS0t
+LS0tLS0tLS0tLS0rICArLS0tLS0tLS0tLS0tLS0tKyAgKy0tLS0tLS0tLS0tLS0tKw0KPiA+ICsg
+ICAgICAgICAgICAgICAgXiAgICAgICAgICAgICAgICAgIF4gICAgICAgICAgICAgICAgIF4NCj4g
+PiArICAgICAgICAgICAgICAgIHwgICAgICAgICAgICAgICAgICB8ICAgICAgICAgICAgICAgICB8
+DQo+ID4gKyAgICAgICAgKy0tLS0tLS0tLS0tLS0tKyAgICstLS0tLS0tLS0tLS0tLS0rICArLS0t
+LS0tLS0tLS0tLS0rDQo+ID4gKyAgICAgICAgfCBEZXZpY2UgVHJlZSAgfCAgIHwgICBGaXJtd2Fy
+ZSAgICB8ICB8ICAgICAgPyAgICAgICB8DQo+ID4gKyAgICAgICAgKy0tLS0tLS0tLS0tLS0tKyAg
+ICstLS0tLS0tLS0tLS0tLS0rICArLS0tLS0tLS0tLS0tLS0rDQo+ID4gKw0KPiA+ICvlr7nkuo5D
+UFXorr7lpIfvvIxFTeahhuaetueuoeeQhuedgOezu+e7n+S4reavj+S4quKAnOaAp+iDveWfn+KA
+neeahOWKn+eOh+aIkOacrOihqOOAguS4gOS4quaAp+iDveWfn+aYr+S4gOe7hA0KPiA+ICvmgKfo
+g73kuIDotbfkvLjnvKnnmoRDUFXjgILmgKfog73ln5/pgJrluLjkuI5DUFVGcmVx562W55Wl5YW3
+5pyJMeWvuTHmmKDlsITjgILkuIDkuKrmgKfog73ln5/kuK3nmoQNCj4gPiAr5omA5pyJQ1BV6KaB
+5rGC5YW35pyJ55u45ZCM55qE5b6u5p625p6E44CC5LiN5ZCM5oCn6IO95Z+f5Lit55qEQ1BV5Y+v
+5Lul5pyJ5LiN5ZCM55qE5b6u5p625p6E44CCDQo+ID4gKw0KPiA+ICsNCj4gPiArMi4g5qC45b+D
+QVBJDQo+ID4gKy0tLS0tLS0tLS0NCj4gPiArDQo+ID4gKzIuMSDphY3nva7pgInpobkNCj4gPiAr
+Xl5eXl5eXl5eXl5eDQo+ID4gKw0KPiA+ICvlv4Xpobvkvb/og71DT05GSUdfRU5FUkdZX01PREVM
+5omN6IO95L2/55SoRU3moYbmnrbjgIINCj4gPiArDQo+ID4gKw0KPiA+ICsyLjIg5oCn6IO95Z+f
+55qE5rOo5YaMDQo+ID4gK15eXl5eXl5eXl5eXl5eXl4NCj4gPiArDQo+ID4gK+KAnOmrmOe6p+KA
+nUVN55qE5rOo5YaMDQo+ID4gK35+fn5+fn5+fn5+fn5+fn4NCj4gPiArDQo+ID4gK+KAnOmrmOe6
+p+KAnUVN5Zug5a6D5YWB6K646amx5Yqo5o+Q5L6b5pu057K+56Gu55qE5Yqf546H5qih5Z6L6ICM
+5b6X5ZCN44CC5a6D5bm25LiN5Y+X6ZmQ5LqO5qGG5p625Lit55qE5LiA5Lqb5beyDQo+ID4gK+Wu
+nueOsOeahOaVsOWtpuWFrOW8j++8iOWwseWDj+KAnOeugOWNleKAnUVN6YKj5qC377yJ44CC5a6D
+5Y+v5Lul5pu05aW95Zyw5Y+N5pig5q+P5Liq5oCn6IO954q25oCB55qE5a6e6ZmF5Yqf546HDQo+
+ID4gK+a1i+mHj+OAguWboOatpO+8jOWcqEVN6Z2Z5oCB5Yqf546H77yI5rOE6Zyy77yJ5piv6YeN
+6KaB55qE5oOF5Ya15LiL77yM5bqU6K+l6aaW6YCJ6L+Z56eN5rOo5YaM5pa55byP44CCDQo+ID4g
+Kw0KPiA+ICvpqbHliqjnqIvluo/lupTpgJrov4fku6XkuItBUEnlsIbmgKfog73ln5/ms6jlhozl
+iLBFTeahhuaetuS4rTo6DQo+ID4gKw0KPiA+ICsgIGludCBlbV9kZXZfcmVnaXN0ZXJfcGVyZl9k
+b21haW4oc3RydWN0IGRldmljZSAqZGV2LCB1bnNpZ25lZCBpbnQgbnJfc3RhdGVzLA0KPiA+ICsg
+ICAgICAgICAgICAgICBzdHJ1Y3QgZW1fZGF0YV9jYWxsYmFjayAqY2IsIGNwdW1hc2tfdCAqY3B1
+cywgYm9vbCBtaWxsaXdhdHRzKTsNCj4gPiArDQo+ID4gK+mpseWKqOeoi+W6j+W/hemhu+aPkOS+
+m+S4gOS4quWbnuiwg+WHveaVsO+8jOS4uuavj+S4quaAp+iDveeKtuaAgei/lOWbnjzpopHnjocs
+5Yqf546HPuWFg+e7hOOAgumpseWKqOeoi+W6jw0KPiA+ICvmj5DkvpvnmoTlm57osIPlh73mlbDl
+j6/ku6Xoh6rnlLHlnLDku47ku7vkvZXnm7jlhbPkvY3nva7vvIhEVOOAgeWbuuS7ti4uLi4uLu+8
+ieS7peWPiuS7peS7u+S9leiiq+iupOS4uuaYrw0KPiA+ICvlv4XopoHnmoTmlrnlvI/ojrflj5bm
+lbDmja7jgILlj6rmnInlr7nkuo5DUFXorr7lpIfvvIzpqbHliqjnqIvluo/lv4Xpobvkvb/nlKhj
+cHVtYXNr5oyH5a6a5oCn6IO95Z+f55qEQ1BV44CCDQo+ID4gK+WvueS6jkNQVeS7peWklueahOWF
+tuS7luiuvuWkh++8jOacgOWQjuS4gOS4quWPguaVsOW/hemhu+iiq+iuvue9ruS4uk5VTEzjgIIN
+Cj4gPiArDQo+ID4gK+acgOWQjuS4gOS4quWPguaVsOKAnG1pbGxpd2F0dHPigJ3vvIjmr6vnk6bv
+vInorr7nva7miJDmraPnoa7nmoTlgLzmmK/lvojph43opoHnmoTvvIzkvb/nlKhFTeeahOWGheag
+uA0KPiA+ICvlrZDns7vnu5/lj6/og73kvJrkvp3otZbov5nkuKrmoIflv5fmnaXmo4Dmn6XmiYDm
+nInnmoRFTeiuvuWkh+aYr+WQpuS9v+eUqOebuOWQjOeahOWIu+W6puOAguWmguaenOacieS4jeWQ
+jOeahA0KPiA+ICvliLvluqbvvIzov5nkupvlrZDns7vnu5/lj6/og73lhrPlrprvvJrov5Tlm57o
+rablkYov6ZSZ6K+v77yM5YGc5q2i5bel5L2c5oiW5oGQ5oWM77yIcGFuaWPvvInjgIINCg0KcGFu
+aWMg5piv5LiN5piv57+76K+R5oiQIOKAmeW0qea6g+KAmCDmm7Tlpb3vvJ8NCg0KPiA+ICsNCj4g
+PiAr5YWz5LqO5a6e546w6L+Z5Liq5Zue6LCD5Ye95pWw55qE6amx5Yqo56iL5bqP55qE5L6L5a2Q
+77yM5Y+C6KeB56ysM+iKguOAguaIluiAheWcqOesrDIuNOiKgumYheivu+i/meS4qkFQSQ0KPiA+
+ICvnmoTmm7TlpJrmlofmoaPjgIINCj4gPiArDQo+ID4gKw0KPiA+ICvigJznroDljZXigJ1FTeea
+hOazqOWGjA0KPiA+ICt+fn5+fn5+fn5+fn5+fn5+DQo+ID4gKw0KPiA+ICvigJznroDljZXigJ1F
+TeaYr+eUqOahhuaetueahOi+heWKqeWHveaVsGNwdWZyZXFfcmVnaXN0ZXJfZW1fd2l0aF9vcHAo
+KeazqOWGjOeahOOAguWug+WunueOsOS6hg0KPiA+ICvkuIDkuKrlkozku6XkuIvmlbDlrablhazl
+vI/ntKflr4bnm7jlhbPnmoTlip/njofmqKHlnos6Og0KPiA+ICsNCj4gPiArICAgICAgIFBvd2Vy
+ID0gQyAqIFZeMiAqIGYNCj4gPiArDQo+ID4gK+S9v+eUqOi/meenjeaWueazleazqOWGjOeahEVN
+5Y+v6IO95peg5rOV5q2j56Gu5Y+N5pig55yf5a6e6K6+5aSH55qE54mp55CG54m55oCn77yM5L6L
+5aaC5b2T6Z2Z5oCB5Yqf546HDQo+ID4gK++8iOazhOa8j++8ieW+iOmHjeimgeaXtuOAgg0KDQps
+ZWFrYWdlIOaYr+aMh+aZtuS9k+euoeeahCDigJjmvI/nlLXmtYEnIOOAgg0KDQpUaGFua3MNCkFs
+ZXgNCg0KPiA+ICsNCj4gPiArDQo+ID4gKzIuMyDorr/pl67mgKfog73ln58NCj4gPiArXl5eXl5e
+Xl5eXl5eXl4NCj4gPiArDQo+ID4gK+acieS4pOS4qkFQSeWHveaVsOaPkOS+m+WvueiDvemHj+ao
+oeWei+eahOiuv+mXruOAgmVtX2NwdV9nZXQoKeS7pUNQVSBpZOS4uuWPguaVsO+8jGVtX3BkX2dl
+dCgpDQo+ID4gK+S7peiuvuWkh+aMh+mSiOS4uuWPguaVsOOAguS9v+eUqOWTquS4quaOpeWPo+WP
+luWGs+S6juWtkOezu+e7n++8jOS9huWvueS6jkNQVeiuvuWkh+adpeivtO+8jOi/meS4pOS4quWH
+veaVsOmDvei/lA0KPiA+ICvlm57nm7jlkIznmoTmgKfog73ln5/jgIINCj4gPiArDQo+ID4gK+Wv
+uUNQVeeahOiDvemHj+aooeWei+aEn+WFtOi2o+eahOWtkOezu+e7n+WPr+S7pemAmui/h2VtX2Nw
+dV9nZXQoKSBBUEnmo4DntKLlroPjgILlnKjliJvlu7rmgKfog73ln5/ml7YNCj4gPiAr5YiG6YWN
+5LiA5qyh6IO96YeP5qih5Z6L6KGo77yM5a6D5L+d5a2Y5Zyo5YaF5a2Y5Lit5LiN6KKr5L+u5pS5
+44CCDQo+ID4gKw0KPiA+ICvkuIDkuKrmgKfog73ln5/miYDmtojogJfnmoTog73ph4/lj6/ku6Xk
+vb/nlKhlbV9jcHVfZW5lcmd5KCkgQVBJ5p2l5Lyw566X44CC6K+l5Lyw566X5YGH5a6aQ1BV6K6+
+5aSHDQo+ID4gK+S9v+eUqOeahENQVWZyZXHnm5HnrqHlmajmmK9zY2hlZHV0aWzjgILlvZPliY3o
+r6XorqHnrpfkuI3og73mj5Dkvpvnu5nlhbblroPnsbvlnovnmoTorr7lpIfjgIINCj4gPiArDQo+
+ID4gK+WFs+S6juS4iui/sEFQSeeahOabtOWkmue7huiKguWPr+S7peWcqCBgYDxsaW51eC9lbmVy
+Z3lfbW9kZWwuaD5gYCDmiJbnrKwyLjToioLkuK3mib7liLDjgIINCj4gPiArDQo+ID4gKw0KPiA+
+ICsyLjQgQVBJ55qE57uG6IqC5o+P6L+wDQo+ID4gK15eXl5eXl5eXl5eXl5eXl5eDQo+ID4gK+WP
+guingSBpbmNsdWRlL2xpbnV4L2VuZXJneV9tb2RlbC5oIOWSjCBrZXJuZWwvcG93ZXIvZW5lcmd5
+X21vZGVsLmMg55qEa2VybmVsIGRvY+OAgg0KPiA+ICsNCj4gPiArMy4g6amx5Yqo56S65L6LDQo+
+ID4gKy0tLS0tLS0tLS0tDQo+ID4gKw0KPiA+ICtDUFVGcmVx5qGG5p625pSv5oyB5LiT55So55qE
+5Zue6LCD5Ye95pWw77yM55So5LqO5Li65oyH5a6a55qEQ1BV77yI5Lus77yJ5rOo5YaMRU3vvJoN
+Cj4gPiArY3B1ZnJlcV9kcml2ZXI6OnJlZ2lzdGVyX2VtKCnjgILov5nkuKrlm57osIPlv4Xpobvk
+uLrmr4/kuKrnibnlrprnmoTpqbHliqjnqIvluo/mraPnoa7lrp7njrDvvIwNCj4gPiAr5Zug5Li6
+5qGG5p625Lya5Zyo6K6+572u6L+H56iL5Lit6YCC5pe25Zyw6LCD55So5a6D44CC5pys6IqC5o+Q
+5L6b5LqG5LiA5Liq566A5Y2V55qE5L6L5a2Q77yM5bGV56S6Q1BVRnJlcempseWKqA0KPiA+ICvl
+nKjog73ph4/mqKHlnovmoYbmnrbkuK3kvb/nlKjvvIjlgYfnmoTvvInigJxmb2/igJ3ljY/orq7m
+s6jlhozmgKfog73ln5/jgILor6XpqbHliqjlrp7njrDkuobkuIDkuKplc3RfcG93ZXIoKQ0KPiA+
+ICvlh73mlbDmj5Dkvpvnu5lFTeahhuaetjo6DQo+ID4gKw0KPiA+ICsgIC0+IGRyaXZlcnMvY3B1
+ZnJlcS9mb29fY3B1ZnJlcS5jDQo+ID4gKw0KPiA+ICsgIDAxICAgc3RhdGljIGludCBlc3RfcG93
+ZXIodW5zaWduZWQgbG9uZyAqbVcsIHVuc2lnbmVkIGxvbmcgKktIeiwNCj4gPiArICAwMiAgICAg
+ICAgICAgICAgICAgICBzdHJ1Y3QgZGV2aWNlICpkZXYpDQo+ID4gKyAgMDMgICB7DQo+ID4gKyAg
+MDQgICAgICAgICAgIGxvbmcgZnJlcSwgcG93ZXI7DQo+ID4gKyAgMDUNCj4gPiArICAwNiAgICAg
+ICAgICAgLyog5L2/55So4oCcZm9v4oCd5Y2P6K6u6K6+572u6aKR546H5LiK6ZmQICovDQo+ID4g
+KyAgMDcgICAgICAgICAgIGZyZXEgPSBmb29fZ2V0X2ZyZXFfY2VpbChkZXYsICpLSHopOw0KPiA+
+ICsgIDA4ICAgICAgICAgICBpZiAoZnJlcSA8IDApOw0KPiA+ICsgIDA5ICAgICAgICAgICAgICAg
+ICAgIHJldHVybiBmcmVxOw0KPiA+ICsgIDEwDQo+ID4gKyAgMTEgICAgICAgICAgIC8qIOS8sOeu
+l+ebuOWFs+mikeeOh+S4i+iuvuWkh+eahOWKn+eOh+aIkOacrCAqLw0KPiA+ICsgIDEyICAgICAg
+ICAgICBwb3dlciA9IGZvb19lc3RpbWF0ZV9wb3dlcihkZXYsIGZyZXEpOw0KPiA+ICsgIDEzICAg
+ICAgICAgICBpZiAocG93ZXIgPCAwKTsNCj4gPiArICAxNCAgICAgICAgICAgICAgICAgICByZXR1
+cm4gcG93ZXI7DQo+ID4gKyAgMTUNCj4gPiArICAxNiAgICAgICAgICAgLyog5bCG6L+Z5Lqb5YC8
+6L+U5Zue57uZRU3moYbmnrYgKi8NCj4gPiArICAxNyAgICAgICAgICAgKm1XID0gcG93ZXI7DQo+
+ID4gKyAgMTggICAgICAgICAgICpLSHogPSBmcmVxOw0KPiA+ICsgIDE5DQo+ID4gKyAgMjAgICAg
+ICAgICAgIHJldHVybiAwOw0KPiA+ICsgIDIxICAgfQ0KPiA+ICsgIDIyDQo+ID4gKyAgMjMgICBz
+dGF0aWMgdm9pZCBmb29fY3B1ZnJlcV9yZWdpc3Rlcl9lbShzdHJ1Y3QgY3B1ZnJlcV9wb2xpY3kg
+KnBvbGljeSkNCj4gPiArICAyNCAgIHsNCj4gPiArICAyNSAgICAgICAgICAgc3RydWN0IGVtX2Rh
+dGFfY2FsbGJhY2sgZW1fY2IgPSBFTV9EQVRBX0NCKGVzdF9wb3dlcik7DQo+ID4gKyAgMjYgICAg
+ICAgICAgIHN0cnVjdCBkZXZpY2UgKmNwdV9kZXY7DQo+ID4gKyAgMjcgICAgICAgICAgIGludCBu
+cl9vcHA7DQo+ID4gKyAgMjgNCj4gPiArICAyOSAgICAgICAgICAgY3B1X2RldiA9IGdldF9jcHVf
+ZGV2aWNlKGNwdW1hc2tfZmlyc3QocG9saWN5LT5jcHVzKSk7DQo+ID4gKyAgMzANCj4gPiArICAz
+MSAgICAgICAgICAgLyog5p+l5om+6K+l562W55Wl5pSv5oyB55qET1BQ5pWw6YePICovDQo+ID4g
+KyAgMzIgICAgICAgICAgIG5yX29wcCA9IGZvb19nZXRfbnJfb3BwKHBvbGljeSk7DQo+ID4gKyAg
+MzMNCj4gPiArICAzNCAgICAgICAgICAgLyog5bm25rOo5YaM5paw55qE5oCn6IO95Z+fICovDQo+
+ID4gKyAgMzUgICAgICAgICAgIGVtX2Rldl9yZWdpc3Rlcl9wZXJmX2RvbWFpbihjcHVfZGV2LCBu
+cl9vcHAsICZlbV9jYiwgcG9saWN5LT5jcHVzLA0KPiA+ICsgIDM2ICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgdHJ1ZSk7DQo+ID4gKyAgMzcgICB9DQo+ID4gKyAgMzgNCj4g
+PiArICAzOSAgIHN0YXRpYyBzdHJ1Y3QgY3B1ZnJlcV9kcml2ZXIgZm9vX2NwdWZyZXFfZHJpdmVy
+ID0gew0KPiA+ICsgIDQwICAgICAgICAgICAucmVnaXN0ZXJfZW0gPSBmb29fY3B1ZnJlcV9yZWdp
+c3Rlcl9lbSwNCj4gPiArICA0MSAgIH07DQo+ID4gZGlmZiAtLWdpdCBhL0RvY3VtZW50YXRpb24v
+dHJhbnNsYXRpb25zL3poX0NOL3Bvd2VyL2luZGV4LnJzdCBiL0RvY3VtZW50YXRpb24vdHJhbnNs
+YXRpb25zL3poX0NOL3Bvd2VyL2luZGV4LnJzdA0KPiA+IGluZGV4IGFkODBhOWU4MGI3Yy4uYmM1
+NDk4M2JhNTE1IDEwMDY0NA0KPiA+IC0tLSBhL0RvY3VtZW50YXRpb24vdHJhbnNsYXRpb25zL3po
+X0NOL3Bvd2VyL2luZGV4LnJzdA0KPiA+ICsrKyBiL0RvY3VtZW50YXRpb24vdHJhbnNsYXRpb25z
+L3poX0NOL3Bvd2VyL2luZGV4LnJzdA0KPiA+IEBAIC0xNCw2ICsxNCw3IEBADQo+ID4gIC4uIHRv
+Y3RyZWU6Og0KPiA+ICAgICAgOm1heGRlcHRoOiAxDQo+ID4NCj4gPiArICAgIGVuZXJneS1tb2Rl
+bA0KPiA+ICAgICAgb3BwDQo+ID4NCj4gPiAgVE9ET0xpc3Q6DQo+ID4gQEAgLTIyLDcgKzIzLDYg
+QEAgVE9ET0xpc3Q6DQo+ID4gICAgICAqIGJhc2ljLXBtLWRlYnVnZ2luZw0KPiA+ICAgICAgKiBj
+aGFyZ2VyLW1hbmFnZXINCj4gPiAgICAgICogZHJpdmVycy10ZXN0aW5nDQo+ID4gLSAgICAqIGVu
+ZXJneS1tb2RlbA0KPiA+ICAgICAgKiBmcmVlemluZy1vZi10YXNrcw0KPiA+ICAgICAgKiBwY2kN
+Cj4gPiAgICAgICogcG1fcW9zX2ludGVyZmFjZQ0KPiA+IC0tDQo+ID4gMi4xNy4xDQo+ID4NCg==
