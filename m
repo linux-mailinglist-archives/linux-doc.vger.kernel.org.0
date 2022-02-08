@@ -2,702 +2,268 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 37A144AD68F
-	for <lists+linux-doc@lfdr.de>; Tue,  8 Feb 2022 12:27:52 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 59A1D4AD691
+	for <lists+linux-doc@lfdr.de>; Tue,  8 Feb 2022 12:27:55 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1350010AbiBHL07 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 8 Feb 2022 06:26:59 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:47276 "EHLO
+        id S1357202AbiBHL1O (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 8 Feb 2022 06:27:14 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:46590 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1355720AbiBHJwq (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 8 Feb 2022 04:52:46 -0500
-X-Greylist: delayed 366 seconds by postgrey-1.37 at lindbergh.monkeyblade.net; Tue, 08 Feb 2022 01:52:44 PST
-Received: from codeconstruct.com.au (pi.codeconstruct.com.au [203.29.241.158])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 605F3C03FEC0;
-        Tue,  8 Feb 2022 01:52:44 -0800 (PST)
-Received: by codeconstruct.com.au (Postfix, from userid 10000)
-        id 1752920303; Tue,  8 Feb 2022 17:46:35 +0800 (AWST)
-From:   Jeremy Kerr <jk@codeconstruct.com.au>
-To:     netdev@vger.kernel.org
-Cc:     Matt Johnston <matt@codeconstruct.com.au>,
-        "David S. Miller" <davem@davemloft.net>,
-        Jakub Kicinski <kuba@kernel.org>,
-        Jonathan Corbet <corbet@lwn.net>,
-        Steven Rostedt <rostedt@goodmis.org>,
-        Ingo Molnar <mingo@redhat.com>, linux-doc@vger.kernel.org
-Subject: [PATCH net-next 5/5] mctp: Add SIOCMCTP{ALLOC,DROP}TAG ioctls for tag control
-Date:   Tue,  8 Feb 2022 17:46:17 +0800
-Message-Id: <20220208094617.3675511-6-jk@codeconstruct.com.au>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20220208094617.3675511-1-jk@codeconstruct.com.au>
-References: <20220208094617.3675511-1-jk@codeconstruct.com.au>
+        with ESMTP id S236991AbiBHJts (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 8 Feb 2022 04:49:48 -0500
+Received: from mx0a-001b2d01.pphosted.com (mx0a-001b2d01.pphosted.com [148.163.156.1])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 8685AC03FEC0;
+        Tue,  8 Feb 2022 01:49:47 -0800 (PST)
+Received: from pps.filterd (m0187473.ppops.net [127.0.0.1])
+        by mx0a-001b2d01.pphosted.com (8.16.1.2/8.16.1.2) with SMTP id 2188t2TA015903;
+        Tue, 8 Feb 2022 09:49:47 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ibm.com; h=message-id : date :
+ mime-version : subject : to : cc : references : from : in-reply-to :
+ content-type : content-transfer-encoding; s=pp1;
+ bh=cGqfdZdFG3v555YcIcqixPUI/qiCGICPivDNypU4S84=;
+ b=bZI/bnRRjlAtbjs/TvsnLrJQFHzuP52rt4wZNJya+AqQvUHpnu1JNCUQDx9MksypuOoq
+ XS/Ei5pizwF+KoSUwLkK6qboiSgq/46hWxzguBuWfot+3H115dRl/Nm6xCOn/qEXdU2w
+ 53HpwrS4nLAIgrg/rf4dVEHcDYZVVzjhBzY5KsLeYb0hGGgj+DU+kYCBitx1bjrfMkn0
+ vvjFy57KVI17xDV77i0KiZ1aYOAsWWAa0gw+Hz7RTo5aQAAb8B55rVN/qKTljWLrnwym
+ N0Dnf6jYhKif9oTqfB72TD1OOh3rR66o285NxjrT9DG+oFv5QXdbSD+B29AVhsNkDQ// lA== 
+Received: from pps.reinject (localhost [127.0.0.1])
+        by mx0a-001b2d01.pphosted.com with ESMTP id 3e3e1thn9f-1
+        (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+        Tue, 08 Feb 2022 09:49:46 +0000
+Received: from m0187473.ppops.net (m0187473.ppops.net [127.0.0.1])
+        by pps.reinject (8.16.0.43/8.16.0.43) with SMTP id 2188d7a0010584;
+        Tue, 8 Feb 2022 09:49:46 GMT
+Received: from ppma06fra.de.ibm.com (48.49.7a9f.ip4.static.sl-reverse.com [159.122.73.72])
+        by mx0a-001b2d01.pphosted.com with ESMTP id 3e3e1thn90-1
+        (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+        Tue, 08 Feb 2022 09:49:46 +0000
+Received: from pps.filterd (ppma06fra.de.ibm.com [127.0.0.1])
+        by ppma06fra.de.ibm.com (8.16.1.2/8.16.1.2) with SMTP id 2189j2a9019761;
+        Tue, 8 Feb 2022 09:49:44 GMT
+Received: from b06avi18878370.portsmouth.uk.ibm.com (b06avi18878370.portsmouth.uk.ibm.com [9.149.26.194])
+        by ppma06fra.de.ibm.com with ESMTP id 3e1ggj38df-1
+        (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+        Tue, 08 Feb 2022 09:49:43 +0000
+Received: from d06av24.portsmouth.uk.ibm.com (d06av24.portsmouth.uk.ibm.com [9.149.105.60])
+        by b06avi18878370.portsmouth.uk.ibm.com (8.14.9/8.14.9/NCO v10.0) with ESMTP id 2189neh246399924
+        (version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+        Tue, 8 Feb 2022 09:49:40 GMT
+Received: from d06av24.portsmouth.uk.ibm.com (unknown [127.0.0.1])
+        by IMSVA (Postfix) with ESMTP id B979A42041;
+        Tue,  8 Feb 2022 09:49:40 +0000 (GMT)
+Received: from d06av24.portsmouth.uk.ibm.com (unknown [127.0.0.1])
+        by IMSVA (Postfix) with ESMTP id 1B44642049;
+        Tue,  8 Feb 2022 09:49:40 +0000 (GMT)
+Received: from [9.145.150.231] (unknown [9.145.150.231])
+        by d06av24.portsmouth.uk.ibm.com (Postfix) with ESMTP;
+        Tue,  8 Feb 2022 09:49:39 +0000 (GMT)
+Message-ID: <547db2d5-c7ec-5ea5-4c47-d05f8e8205de@linux.ibm.com>
+Date:   Tue, 8 Feb 2022 10:49:39 +0100
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Spam-Status: No, score=-1.8 required=5.0 tests=BAYES_00,KHOP_HELO_FCRDNS,
-        SPF_HELO_NONE,SPF_NONE,T_SCC_BODY_TEXT_LINE autolearn=no
-        autolearn_force=no version=3.4.6
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
+ Thunderbird/91.5.0
+Subject: Re: [PATCH v2 11/11] KVM: s390: Update api documentation for memop
+ ioctl
+Content-Language: en-US
+To:     Janis Schoetterl-Glausch <scgl@linux.ibm.com>,
+        Christian Borntraeger <borntraeger@linux.ibm.com>,
+        Heiko Carstens <hca@linux.ibm.com>
+Cc:     Alexander Gordeev <agordeev@linux.ibm.com>,
+        Claudio Imbrenda <imbrenda@linux.ibm.com>,
+        David Hildenbrand <david@redhat.com>,
+        Jonathan Corbet <corbet@lwn.net>, kvm@vger.kernel.org,
+        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
+        linux-s390@vger.kernel.org, Paolo Bonzini <pbonzini@redhat.com>,
+        Sven Schnelle <svens@linux.ibm.com>,
+        Vasily Gorbik <gor@linux.ibm.com>
+References: <20220207165930.1608621-1-scgl@linux.ibm.com>
+ <20220207165930.1608621-12-scgl@linux.ibm.com>
+From:   Janosch Frank <frankja@linux.ibm.com>
+In-Reply-To: <20220207165930.1608621-12-scgl@linux.ibm.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-TM-AS-GCONF: 00
+X-Proofpoint-GUID: LbFei_4M4IDDOh2l2PqbYMWKTP1_I00W
+X-Proofpoint-ORIG-GUID: -xubOHISQIi-dq3nBlrUlhh5rd7NFz7r
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.205,Aquarius:18.0.816,Hydra:6.0.425,FMLib:17.11.62.513
+ definitions=2022-02-08_02,2022-02-07_02,2021-12-02_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 impostorscore=0
+ malwarescore=0 bulkscore=0 priorityscore=1501 suspectscore=0 mlxscore=0
+ phishscore=0 spamscore=0 mlxlogscore=831 lowpriorityscore=0 clxscore=1015
+ adultscore=0 classifier=spam adjust=0 reason=mlx scancount=1
+ engine=8.12.0-2201110000 definitions=main-2202080054
+X-Spam-Status: No, score=-2.0 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+        DKIM_VALID,DKIM_VALID_EF,NICE_REPLY_A,RCVD_IN_MSPIKE_H5,
+        RCVD_IN_MSPIKE_WL,SPF_HELO_NONE,SPF_PASS,T_SCC_BODY_TEXT_LINE
+        autolearn=ham autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-From: Matt Johnston <matt@codeconstruct.com.au>
+On 2/7/22 17:59, Janis Schoetterl-Glausch wrote:
+> Document all currently existing operations, flags and explain under
+> which circumstances they are available. Document the recently
+> introduced absolute operations and the storage key protection flag,
+> as well as the existing SIDA operations.
 
-This change adds a couple of new ioctls for mctp sockets:
-SIOCMCTPALLOCTAG and SIOCMCTPDROPTAG.  These ioctls provide facilities
-for explicit allocation / release of tags, overriding the automatic
-allocate-on-send/release-on-reply and timeout behaviours. This allows
-userspace more control over messages that may not fit a simple
-request/response model.
+We're missing the reference to KVM_CAP_S390_PROTECTED which also 
+indicates the SIDA ops.
 
-In order to indicate a pre-allocated tag to the sendmsg() syscall, we
-introduce a new flag to the struct sockaddr_mctp.smctp_tag value:
-MCTP_TAG_PREALLOC.
+Apart from that this looks good so feel free to send an updated version 
+of this patch in reply to this mail. No need for a full set of patches 
+as most of the other patches are already reviewed.
 
-Additional changes from Jeremy Kerr <jk@codeconstruct.com.au>.
-
-Signed-off-by: Matt Johnston <matt@codeconstruct.com.au>
-Signed-off-by: Jeremy Kerr <jk@codeconstruct.com.au>
----
- Documentation/networking/mctp.rst |  48 ++++++++
- include/net/mctp.h                |  11 +-
- include/trace/events/mctp.h       |   5 +-
- include/uapi/linux/mctp.h         |  18 +++
- net/mctp/af_mctp.c                | 185 +++++++++++++++++++++++++-----
- net/mctp/route.c                  | 114 +++++++++++++-----
- 6 files changed, 325 insertions(+), 56 deletions(-)
-
-diff --git a/Documentation/networking/mctp.rst b/Documentation/networking/mctp.rst
-index 46f74bffce0f..c628cb5406d2 100644
---- a/Documentation/networking/mctp.rst
-+++ b/Documentation/networking/mctp.rst
-@@ -212,6 +212,54 @@ remote address is already known, or the message does not require a reply.
- Like the send calls, sockets will only receive responses to requests they have
- sent (TO=1) and may only respond (TO=0) to requests they have received.
- 
-+``ioctl(SIOCMCTPALLOCTAG)`` and ``ioctl(SIOCMCTPDROPTAG)``
-+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-+
-+These tags give applications more control over MCTP message tags, by allocating
-+(and dropping) tag values explicitly, rather than the kernel automatically
-+allocating a per-message tag at ``sendmsg()`` time.
-+
-+In general, you will only need to use these ioctls if your MCTP protocol does
-+not fit the usual request/response model. For example, if you need to persist
-+tags across multiple requests, or a request may generate more than one response.
-+In these cases, the ioctls allow you to decouple the tag allocation (and
-+release) from individual message send and receive operations.
-+
-+Both ioctls are passed a pointer to a ``struct mctp_ioc_tag_ctl``:
-+
-+.. code-block:: C
-+
-+    struct mctp_ioc_tag_ctl {
-+        mctp_eid_t      peer_addr;
-+        __u8		tag;
-+        __u16   	flags;
-+    };
-+
-+``SIOCMCTPALLOCTAG`` allocates a tag for a specific peer, which an application
-+can use in future ``sendmsg()`` calls. The application populates the
-+``peer_addr`` member with the remote EID. Other fields must be zero.
-+
-+On return, the ``tag`` member will be populated with the allocated tag value.
-+The allocated tag will have the following tag bits set:
-+
-+ - ``MCTP_TAG_OWNER``: it only makes sense to allocate tags if you're the tag
-+   owner
-+
-+ - ``MCTP_TAG_PREALLOC``: to indicate to ``sendmsg()`` that this is a
-+   preallocated tag.
-+
-+ - ... and the actual tag value, within the least-significant three bits
-+   (``MCTP_TAG_MASK``). Note that zero is a valid tag value.
-+
-+The tag value should be used as-is for the ``smctp_tag`` member of ``struct
-+sockaddr_mctp``.
-+
-+``SIOCMCTPDROPTAG`` releases a tag that has been previously allocated by a
-+``SIOCMCTPALLOCTAG`` ioctl. The ``peer_addr`` must be the same as used for the
-+allocation, and the ``tag`` value must match exactly the tag returned from the
-+allocation (including the ``MCTP_TAG_OWNER`` and ``MCTP_TAG_PREALLOC`` bits).
-+The ``flags`` field must be zero.
-+
- Kernel internals
- ================
- 
-diff --git a/include/net/mctp.h b/include/net/mctp.h
-index 706d329dd8e8..e80a4baf8379 100644
---- a/include/net/mctp.h
-+++ b/include/net/mctp.h
-@@ -126,7 +126,7 @@ struct mctp_sock {
-  */
- struct mctp_sk_key {
- 	mctp_eid_t	peer_addr;
--	mctp_eid_t	local_addr;
-+	mctp_eid_t	local_addr; /* MCTP_ADDR_ANY for local owned tags */
- 	__u8		tag; /* incoming tag match; invert TO for local */
- 
- 	/* we hold a ref to sk when set */
-@@ -163,6 +163,12 @@ struct mctp_sk_key {
- 	 */
- 	unsigned long	dev_flow_state;
- 	struct mctp_dev	*dev;
-+
-+	/* a tag allocated with SIOCMCTPALLOCTAG ioctl will not expire
-+	 * automatically on timeout or response, instead SIOCMCTPDROPTAG
-+	 * is used.
-+	 */
-+	bool		manual_alloc;
- };
- 
- struct mctp_skb_cb {
-@@ -239,6 +245,9 @@ int mctp_local_output(struct sock *sk, struct mctp_route *rt,
- 		      struct sk_buff *skb, mctp_eid_t daddr, u8 req_tag);
- 
- void mctp_key_unref(struct mctp_sk_key *key);
-+struct mctp_sk_key *mctp_alloc_local_tag(struct mctp_sock *msk,
-+					 mctp_eid_t daddr, mctp_eid_t saddr,
-+					 bool manual, u8 *tagp);
- 
- /* routing <--> device interface */
- unsigned int mctp_default_net(struct net *net);
-diff --git a/include/trace/events/mctp.h b/include/trace/events/mctp.h
-index 175b057c507f..165cf25f77a7 100644
---- a/include/trace/events/mctp.h
-+++ b/include/trace/events/mctp.h
-@@ -15,6 +15,7 @@ enum {
- 	MCTP_TRACE_KEY_REPLIED,
- 	MCTP_TRACE_KEY_INVALIDATED,
- 	MCTP_TRACE_KEY_CLOSED,
-+	MCTP_TRACE_KEY_DROPPED,
- };
- #endif /* __TRACE_MCTP_ENUMS */
- 
-@@ -22,6 +23,7 @@ TRACE_DEFINE_ENUM(MCTP_TRACE_KEY_TIMEOUT);
- TRACE_DEFINE_ENUM(MCTP_TRACE_KEY_REPLIED);
- TRACE_DEFINE_ENUM(MCTP_TRACE_KEY_INVALIDATED);
- TRACE_DEFINE_ENUM(MCTP_TRACE_KEY_CLOSED);
-+TRACE_DEFINE_ENUM(MCTP_TRACE_KEY_DROPPED);
- 
- TRACE_EVENT(mctp_key_acquire,
- 	TP_PROTO(const struct mctp_sk_key *key),
-@@ -66,7 +68,8 @@ TRACE_EVENT(mctp_key_release,
- 				 { MCTP_TRACE_KEY_TIMEOUT, "timeout" },
- 				 { MCTP_TRACE_KEY_REPLIED, "replied" },
- 				 { MCTP_TRACE_KEY_INVALIDATED, "invalidated" },
--				 { MCTP_TRACE_KEY_CLOSED, "closed" })
-+				 { MCTP_TRACE_KEY_CLOSED, "closed" },
-+				 { MCTP_TRACE_KEY_DROPPED, "dropped" })
- 	)
- );
- 
-diff --git a/include/uapi/linux/mctp.h b/include/uapi/linux/mctp.h
-index 07b0318716fc..154ab56651f1 100644
---- a/include/uapi/linux/mctp.h
-+++ b/include/uapi/linux/mctp.h
-@@ -44,7 +44,25 @@ struct sockaddr_mctp_ext {
- 
- #define MCTP_TAG_MASK		0x07
- #define MCTP_TAG_OWNER		0x08
-+#define MCTP_TAG_PREALLOC	0x10
- 
- #define MCTP_OPT_ADDR_EXT	1
- 
-+#define SIOCMCTPALLOCTAG	(SIOCPROTOPRIVATE + 0)
-+#define SIOCMCTPDROPTAG		(SIOCPROTOPRIVATE + 1)
-+
-+struct mctp_ioc_tag_ctl {
-+	mctp_eid_t	peer_addr;
-+
-+	/* For SIOCMCTPALLOCTAG: must be passed as zero, kernel will
-+	 * populate with the allocated tag value. Returned tag value will
-+	 * always have TO and PREALLOC set.
-+	 *
-+	 * For SIOCMCTPDROPTAG: userspace provides tag value to drop, from
-+	 * a prior SIOCMCTPALLOCTAG call (and so must have TO and PREALLOC set).
-+	 */
-+	__u8		tag;
-+	__u16		flags;
-+};
-+
- #endif /* __UAPI_MCTP_H */
-diff --git a/net/mctp/af_mctp.c b/net/mctp/af_mctp.c
-index c921de63b494..769fca872aa1 100644
---- a/net/mctp/af_mctp.c
-+++ b/net/mctp/af_mctp.c
-@@ -6,6 +6,7 @@
-  * Copyright (c) 2021 Google
-  */
- 
-+#include <linux/compat.h>
- #include <linux/if_arp.h>
- #include <linux/net.h>
- #include <linux/mctp.h>
-@@ -21,6 +22,8 @@
- 
- /* socket implementation */
- 
-+static void mctp_sk_expire_keys(struct timer_list *timer);
-+
- static int mctp_release(struct socket *sock)
- {
- 	struct sock *sk = sock->sk;
-@@ -99,13 +102,20 @@ static int mctp_sendmsg(struct socket *sock, struct msghdr *msg, size_t len)
- 	struct sk_buff *skb;
- 
- 	if (addr) {
-+		const u8 tagbits = MCTP_TAG_MASK | MCTP_TAG_OWNER |
-+			MCTP_TAG_PREALLOC;
-+
- 		if (addrlen < sizeof(struct sockaddr_mctp))
- 			return -EINVAL;
- 		if (addr->smctp_family != AF_MCTP)
- 			return -EINVAL;
- 		if (!mctp_sockaddr_is_ok(addr))
- 			return -EINVAL;
--		if (addr->smctp_tag & ~(MCTP_TAG_MASK | MCTP_TAG_OWNER))
-+		if (addr->smctp_tag & ~tagbits)
-+			return -EINVAL;
-+		/* can't preallocate a non-owned tag */
-+		if (addr->smctp_tag & MCTP_TAG_PREALLOC &&
-+		    !(addr->smctp_tag & MCTP_TAG_OWNER))
- 			return -EINVAL;
- 
- 	} else {
-@@ -248,6 +258,32 @@ static int mctp_recvmsg(struct socket *sock, struct msghdr *msg, size_t len,
- 	return rc;
- }
- 
-+/* We're done with the key; invalidate, stop reassembly, and remove from lists.
-+ */
-+static void __mctp_key_remove(struct mctp_sk_key *key, struct net *net,
-+			      unsigned long flags, unsigned long reason)
-+__releases(&key->lock)
-+__must_hold(&net->mctp.keys_lock)
-+{
-+	struct sk_buff *skb;
-+
-+	trace_mctp_key_release(key, reason);
-+	skb = key->reasm_head;
-+	key->reasm_head = NULL;
-+	key->reasm_dead = true;
-+	key->valid = false;
-+	mctp_dev_release_key(key->dev, key);
-+	spin_unlock_irqrestore(&key->lock, flags);
-+
-+	hlist_del(&key->hlist);
-+	hlist_del(&key->sklist);
-+
-+	/* unref for the lists */
-+	mctp_key_unref(key);
-+
-+	kfree_skb(skb);
-+}
-+
- static int mctp_setsockopt(struct socket *sock, int level, int optname,
- 			   sockptr_t optval, unsigned int optlen)
- {
-@@ -293,6 +329,114 @@ static int mctp_getsockopt(struct socket *sock, int level, int optname,
- 	return -EINVAL;
- }
- 
-+static int mctp_ioctl_alloctag(struct mctp_sock *msk, unsigned long arg)
-+{
-+	struct net *net = sock_net(&msk->sk);
-+	struct mctp_sk_key *key = NULL;
-+	struct mctp_ioc_tag_ctl ctl;
-+	unsigned long flags;
-+	u8 tag;
-+
-+	if (copy_from_user(&ctl, (void __user *)arg, sizeof(ctl)))
-+		return -EFAULT;
-+
-+	if (ctl.tag)
-+		return -EINVAL;
-+
-+	if (ctl.flags)
-+		return -EINVAL;
-+
-+	key = mctp_alloc_local_tag(msk, ctl.peer_addr, MCTP_ADDR_ANY,
-+				   true, &tag);
-+	if (IS_ERR(key))
-+		return PTR_ERR(key);
-+
-+	ctl.tag = tag | MCTP_TAG_OWNER | MCTP_TAG_PREALLOC;
-+	if (copy_to_user((void __user *)arg, &ctl, sizeof(ctl))) {
-+		spin_lock_irqsave(&key->lock, flags);
-+		__mctp_key_remove(key, net, flags, MCTP_TRACE_KEY_DROPPED);
-+		mctp_key_unref(key);
-+		return -EFAULT;
-+	}
-+
-+	mctp_key_unref(key);
-+	return 0;
-+}
-+
-+static int mctp_ioctl_droptag(struct mctp_sock *msk, unsigned long arg)
-+{
-+	struct net *net = sock_net(&msk->sk);
-+	struct mctp_ioc_tag_ctl ctl;
-+	unsigned long flags, fl2;
-+	struct mctp_sk_key *key;
-+	struct hlist_node *tmp;
-+	int rc;
-+	u8 tag;
-+
-+	if (copy_from_user(&ctl, (void __user *)arg, sizeof(ctl)))
-+		return -EFAULT;
-+
-+	if (ctl.flags)
-+		return -EINVAL;
-+
-+	/* Must be a local tag, TO set, preallocated */
-+	if ((ctl.tag & ~MCTP_TAG_MASK) != (MCTP_TAG_OWNER | MCTP_TAG_PREALLOC))
-+		return -EINVAL;
-+
-+	tag = ctl.tag & MCTP_TAG_MASK;
-+	rc = -EINVAL;
-+
-+	spin_lock_irqsave(&net->mctp.keys_lock, flags);
-+	hlist_for_each_entry_safe(key, tmp, &msk->keys, sklist) {
-+		/* we do an irqsave here, even though we know the irq state,
-+		 * so we have the flags to pass to __mctp_key_remove
-+		 */
-+		spin_lock_irqsave(&key->lock, fl2);
-+		if (key->manual_alloc &&
-+		    ctl.peer_addr == key->peer_addr &&
-+		    tag == key->tag) {
-+			__mctp_key_remove(key, net, fl2, MCTP_TRACE_KEY_DROPPED);
-+			rc = 0;
-+		} else {
-+			spin_unlock_irqrestore(&key->lock, fl2);
-+		}
-+	}
-+	spin_unlock_irqrestore(&net->mctp.keys_lock, flags);
-+
-+	return rc;
-+}
-+
-+static int mctp_ioctl(struct socket *sock, unsigned int cmd, unsigned long arg)
-+{
-+	struct mctp_sock *msk = container_of(sock->sk, struct mctp_sock, sk);
-+
-+	switch (cmd) {
-+	case SIOCMCTPALLOCTAG:
-+		return mctp_ioctl_alloctag(msk, arg);
-+	case SIOCMCTPDROPTAG:
-+		return mctp_ioctl_droptag(msk, arg);
-+	}
-+
-+	return -EINVAL;
-+}
-+
-+#ifdef CONFIG_COMPAT
-+static int mctp_compat_ioctl(struct socket *sock, unsigned int cmd,
-+			     unsigned long arg)
-+{
-+	void __user *argp = compat_ptr(arg);
-+
-+	switch (cmd) {
-+	/* These have compatible ptr layouts */
-+	case SIOCMCTPALLOCTAG:
-+	case SIOCMCTPDROPTAG:
-+		return mctp_ioctl(sock, cmd, (unsigned long)argp);
-+	}
-+
-+	return -ENOIOCTLCMD;
-+}
-+#endif
-+
- static const struct proto_ops mctp_dgram_ops = {
- 	.family		= PF_MCTP,
- 	.release	= mctp_release,
-@@ -302,7 +446,7 @@ static const struct proto_ops mctp_dgram_ops = {
- 	.accept		= sock_no_accept,
- 	.getname	= sock_no_getname,
- 	.poll		= datagram_poll,
--	.ioctl		= sock_no_ioctl,
-+	.ioctl		= mctp_ioctl,
- 	.gettstamp	= sock_gettstamp,
- 	.listen		= sock_no_listen,
- 	.shutdown	= sock_no_shutdown,
-@@ -312,6 +456,9 @@ static const struct proto_ops mctp_dgram_ops = {
- 	.recvmsg	= mctp_recvmsg,
- 	.mmap		= sock_no_mmap,
- 	.sendpage	= sock_no_sendpage,
-+#ifdef CONFIG_COMPAT
-+	.compat_ioctl	= mctp_compat_ioctl,
-+#endif
- };
- 
- static void mctp_sk_expire_keys(struct timer_list *timer)
-@@ -319,7 +466,7 @@ static void mctp_sk_expire_keys(struct timer_list *timer)
- 	struct mctp_sock *msk = container_of(timer, struct mctp_sock,
- 					     key_expiry);
- 	struct net *net = sock_net(&msk->sk);
--	unsigned long next_expiry, flags;
-+	unsigned long next_expiry, flags, fl2;
- 	struct mctp_sk_key *key;
- 	struct hlist_node *tmp;
- 	bool next_expiry_valid = false;
-@@ -327,15 +474,13 @@ static void mctp_sk_expire_keys(struct timer_list *timer)
- 	spin_lock_irqsave(&net->mctp.keys_lock, flags);
- 
- 	hlist_for_each_entry_safe(key, tmp, &msk->keys, sklist) {
--		spin_lock(&key->lock);
-+		/* don't expire. manual_alloc is immutable, no locking required */
-+		if (key->manual_alloc)
-+			continue;
- 
-+		spin_lock_irqsave(&key->lock, fl2);
- 		if (!time_after_eq(key->expiry, jiffies)) {
--			trace_mctp_key_release(key, MCTP_TRACE_KEY_TIMEOUT);
--			key->valid = false;
--			hlist_del_rcu(&key->hlist);
--			hlist_del_rcu(&key->sklist);
--			spin_unlock(&key->lock);
--			mctp_key_unref(key);
-+			__mctp_key_remove(key, net, fl2, MCTP_TRACE_KEY_TIMEOUT);
- 			continue;
- 		}
- 
-@@ -346,7 +491,7 @@ static void mctp_sk_expire_keys(struct timer_list *timer)
- 			next_expiry = key->expiry;
- 			next_expiry_valid = true;
- 		}
--		spin_unlock(&key->lock);
-+		spin_unlock_irqrestore(&key->lock, fl2);
- 	}
- 
- 	spin_unlock_irqrestore(&net->mctp.keys_lock, flags);
-@@ -387,9 +532,9 @@ static void mctp_sk_unhash(struct sock *sk)
- {
- 	struct mctp_sock *msk = container_of(sk, struct mctp_sock, sk);
- 	struct net *net = sock_net(sk);
-+	unsigned long flags, fl2;
- 	struct mctp_sk_key *key;
- 	struct hlist_node *tmp;
--	unsigned long flags;
- 
- 	/* remove from any type-based binds */
- 	mutex_lock(&net->mctp.bind_lock);
-@@ -399,20 +544,8 @@ static void mctp_sk_unhash(struct sock *sk)
- 	/* remove tag allocations */
- 	spin_lock_irqsave(&net->mctp.keys_lock, flags);
- 	hlist_for_each_entry_safe(key, tmp, &msk->keys, sklist) {
--		hlist_del(&key->sklist);
--		hlist_del(&key->hlist);
--
--		trace_mctp_key_release(key, MCTP_TRACE_KEY_CLOSED);
--
--		spin_lock(&key->lock);
--		kfree_skb(key->reasm_head);
--		key->reasm_head = NULL;
--		key->reasm_dead = true;
--		key->valid = false;
--		spin_unlock(&key->lock);
--
--		/* key is no longer on the lookup lists, unref */
--		mctp_key_unref(key);
-+		spin_lock_irqsave(&key->lock, fl2);
-+		__mctp_key_remove(key, net, fl2, MCTP_TRACE_KEY_CLOSED);
- 	}
- 	spin_unlock_irqrestore(&net->mctp.keys_lock, flags);
- }
-diff --git a/net/mctp/route.c b/net/mctp/route.c
-index 35f72e99e188..2e79d5227dc8 100644
---- a/net/mctp/route.c
-+++ b/net/mctp/route.c
-@@ -203,29 +203,38 @@ static int mctp_key_add(struct mctp_sk_key *key, struct mctp_sock *msk)
- 	return rc;
- }
- 
--/* We're done with the key; unset valid and remove from lists. There may still
-- * be outstanding refs on the key though...
-+/* Helper for mctp_route_input().
-+ * We're done with the key; unlock and unref the key.
-+ * For the usual case of automatic expiry we remove the key from lists.
-+ * In the case that manual allocation is set on a key we release the lock
-+ * and local ref, reset reassembly, but don't remove from lists.
-  */
--static void __mctp_key_unlock_drop(struct mctp_sk_key *key, struct net *net,
--				   unsigned long flags)
--	__releases(&key->lock)
-+static void __mctp_key_done_in(struct mctp_sk_key *key, struct net *net,
-+			       unsigned long flags, unsigned long reason)
-+__releases(&key->lock)
- {
- 	struct sk_buff *skb;
- 
-+	trace_mctp_key_release(key, reason);
- 	skb = key->reasm_head;
- 	key->reasm_head = NULL;
--	key->reasm_dead = true;
--	key->valid = false;
--	mctp_dev_release_key(key->dev, key);
-+
-+	if (!key->manual_alloc) {
-+		key->reasm_dead = true;
-+		key->valid = false;
-+		mctp_dev_release_key(key->dev, key);
-+	}
- 	spin_unlock_irqrestore(&key->lock, flags);
- 
--	spin_lock_irqsave(&net->mctp.keys_lock, flags);
--	hlist_del(&key->hlist);
--	hlist_del(&key->sklist);
--	spin_unlock_irqrestore(&net->mctp.keys_lock, flags);
-+	if (!key->manual_alloc) {
-+		spin_lock_irqsave(&net->mctp.keys_lock, flags);
-+		hlist_del(&key->hlist);
-+		hlist_del(&key->sklist);
-+		spin_unlock_irqrestore(&net->mctp.keys_lock, flags);
- 
--	/* one unref for the lists */
--	mctp_key_unref(key);
-+		/* unref for the lists */
-+		mctp_key_unref(key);
-+	}
- 
- 	/* and one for the local reference */
- 	mctp_key_unref(key);
-@@ -379,9 +388,8 @@ static int mctp_route_input(struct mctp_route *route, struct sk_buff *skb)
- 				/* we've hit a pending reassembly; not much we
- 				 * can do but drop it
- 				 */
--				trace_mctp_key_release(key,
--						       MCTP_TRACE_KEY_REPLIED);
--				__mctp_key_unlock_drop(key, net, f);
-+				__mctp_key_done_in(key, net, f,
-+						   MCTP_TRACE_KEY_REPLIED);
- 				key = NULL;
- 			}
- 			rc = 0;
-@@ -423,9 +431,8 @@ static int mctp_route_input(struct mctp_route *route, struct sk_buff *skb)
- 		} else {
- 			if (key->reasm_head || key->reasm_dead) {
- 				/* duplicate start? drop everything */
--				trace_mctp_key_release(key,
--						       MCTP_TRACE_KEY_INVALIDATED);
--				__mctp_key_unlock_drop(key, net, f);
-+				__mctp_key_done_in(key, net, f,
-+						   MCTP_TRACE_KEY_INVALIDATED);
- 				rc = -EEXIST;
- 				key = NULL;
- 			} else {
-@@ -448,10 +455,10 @@ static int mctp_route_input(struct mctp_route *route, struct sk_buff *skb)
- 		 * the reassembly/response key
- 		 */
- 		if (!rc && flags & MCTP_HDR_FLAG_EOM) {
-+			msk = container_of(key->sk, struct mctp_sock, sk);
- 			sock_queue_rcv_skb(key->sk, key->reasm_head);
- 			key->reasm_head = NULL;
--			trace_mctp_key_release(key, MCTP_TRACE_KEY_REPLIED);
--			__mctp_key_unlock_drop(key, net, f);
-+			__mctp_key_done_in(key, net, f, MCTP_TRACE_KEY_REPLIED);
- 			key = NULL;
- 		}
- 
-@@ -579,9 +586,9 @@ static void mctp_reserve_tag(struct net *net, struct mctp_sk_key *key,
- /* Allocate a locally-owned tag value for (saddr, daddr), and reserve
-  * it for the socket msk
-  */
--static struct mctp_sk_key *mctp_alloc_local_tag(struct mctp_sock *msk,
--						mctp_eid_t saddr,
--						mctp_eid_t daddr, u8 *tagp)
-+struct mctp_sk_key *mctp_alloc_local_tag(struct mctp_sock *msk,
-+					 mctp_eid_t daddr, mctp_eid_t saddr,
-+					 bool manual, u8 *tagp)
- {
- 	struct net *net = sock_net(&msk->sk);
- 	struct netns_mctp *mns = &net->mctp;
-@@ -636,6 +643,7 @@ static struct mctp_sk_key *mctp_alloc_local_tag(struct mctp_sock *msk,
- 		mctp_reserve_tag(net, key, msk);
- 		trace_mctp_key_acquire(key);
- 
-+		key->manual_alloc = manual;
- 		*tagp = key->tag;
- 	}
- 
-@@ -649,6 +657,50 @@ static struct mctp_sk_key *mctp_alloc_local_tag(struct mctp_sock *msk,
- 	return key;
- }
- 
-+struct mctp_sk_key *mctp_lookup_prealloc_tag(struct mctp_sock *msk,
-+					     mctp_eid_t daddr, u8 req_tag,
-+					     u8 *tagp)
-+{
-+	struct net *net = sock_net(&msk->sk);
-+	struct netns_mctp *mns = &net->mctp;
-+	struct mctp_sk_key *key, *tmp;
-+	unsigned long flags;
-+
-+	req_tag &= ~(MCTP_TAG_PREALLOC | MCTP_TAG_OWNER);
-+	key = NULL;
-+
-+	spin_lock_irqsave(&mns->keys_lock, flags);
-+
-+	hlist_for_each_entry(tmp, &mns->keys, hlist) {
-+		if (tmp->tag != req_tag)
-+			continue;
-+
-+		if (!(tmp->peer_addr == daddr || tmp->peer_addr == MCTP_ADDR_ANY))
-+			continue;
-+
-+		if (!tmp->manual_alloc)
-+			continue;
-+
-+		spin_lock(&tmp->lock);
-+		if (tmp->valid) {
-+			key = tmp;
-+			refcount_inc(&key->refs);
-+			spin_unlock(&tmp->lock);
-+			break;
-+		}
-+		spin_unlock(&tmp->lock);
-+	}
-+	spin_unlock_irqrestore(&mns->keys_lock, flags);
-+
-+	if (!key)
-+		return ERR_PTR(-ENOENT);
-+
-+	if (tagp)
-+		*tagp = key->tag;
-+
-+	return key;
-+}
-+
- /* routing lookups */
- static bool mctp_rt_match_eid(struct mctp_route *rt,
- 			      unsigned int net, mctp_eid_t eid)
-@@ -843,8 +895,14 @@ int mctp_local_output(struct sock *sk, struct mctp_route *rt,
- 	if (rc)
- 		goto out_release;
- 
--	if (req_tag & MCTP_HDR_FLAG_TO) {
--		key = mctp_alloc_local_tag(msk, saddr, daddr, &tag);
-+	if (req_tag & MCTP_TAG_OWNER) {
-+		if (req_tag & MCTP_TAG_PREALLOC)
-+			key = mctp_lookup_prealloc_tag(msk, daddr,
-+						       req_tag, &tag);
-+		else
-+			key = mctp_alloc_local_tag(msk, daddr, saddr,
-+						   false, &tag);
-+
- 		if (IS_ERR(key)) {
- 			rc = PTR_ERR(key);
- 			goto out_release;
-@@ -855,7 +913,7 @@ int mctp_local_output(struct sock *sk, struct mctp_route *rt,
- 		tag |= MCTP_HDR_FLAG_TO;
- 	} else {
- 		key = NULL;
--		tag = req_tag;
-+		tag = req_tag & MCTP_TAG_MASK;
- 	}
- 
- 	skb->protocol = htons(ETH_P_MCTP);
--- 
-2.34.1
+> 
+> Signed-off-by: Janis Schoetterl-Glausch <scgl@linux.ibm.com>
+> ---
+>   Documentation/virt/kvm/api.rst | 112 ++++++++++++++++++++++++++-------
+>   1 file changed, 90 insertions(+), 22 deletions(-)
+> 
+> diff --git a/Documentation/virt/kvm/api.rst b/Documentation/virt/kvm/api.rst
+> index a4267104db50..7b28657fe9de 100644
+> --- a/Documentation/virt/kvm/api.rst
+> +++ b/Documentation/virt/kvm/api.rst
+> @@ -3683,15 +3683,17 @@ The fields in each entry are defined as follows:
+>   4.89 KVM_S390_MEM_OP
+>   --------------------
+>   
+> -:Capability: KVM_CAP_S390_MEM_OP
+> +:Capability: KVM_CAP_S390_MEM_OP, KVM_CAP_S390_MEM_OP_EXTENSION
+>   :Architectures: s390
+> -:Type: vcpu ioctl
+> +:Type: vm ioctl, vcpu ioctl
+>   :Parameters: struct kvm_s390_mem_op (in)
+>   :Returns: = 0 on success,
+>             < 0 on generic error (e.g. -EFAULT or -ENOMEM),
+>             > 0 if an exception occurred while walking the page tables
+>   
+> -Read or write data from/to the logical (virtual) memory of a VCPU.
+> +Read or write data from/to the VM's memory.
+> +The KVM_CAP_S390_MEM_OP_EXTENSION capability specifies what functionality is
+> +supported.
+>   
+>   Parameters are specified via the following structure::
+>   
+> @@ -3701,33 +3703,99 @@ Parameters are specified via the following structure::
+>   	__u32 size;		/* amount of bytes */
+>   	__u32 op;		/* type of operation */
+>   	__u64 buf;		/* buffer in userspace */
+> -	__u8 ar;		/* the access register number */
+> -	__u8 reserved[31];	/* should be set to 0 */
+> +	union {
+> +		struct {
+> +			__u8 ar;	/* the access register number */
+> +			__u8 key;	/* access key to use for storage key protection */
+> +		};
+> +		__u32 sida_offset; /* offset into the sida */
+> +		__u8 reserved[32]; /* must be set to 0 */
+> +	};
+>     };
+>   
+> -The type of operation is specified in the "op" field. It is either
+> -KVM_S390_MEMOP_LOGICAL_READ for reading from logical memory space or
+> -KVM_S390_MEMOP_LOGICAL_WRITE for writing to logical memory space. The
+> -KVM_S390_MEMOP_F_CHECK_ONLY flag can be set in the "flags" field to check
+> -whether the corresponding memory access would create an access exception
+> -(without touching the data in the memory at the destination). In case an
+> -access exception occurred while walking the MMU tables of the guest, the
+> -ioctl returns a positive error number to indicate the type of exception.
+> -This exception is also raised directly at the corresponding VCPU if the
+> -flag KVM_S390_MEMOP_F_INJECT_EXCEPTION is set in the "flags" field.
+> -
+>   The start address of the memory region has to be specified in the "gaddr"
+>   field, and the length of the region in the "size" field (which must not
+>   be 0). The maximum value for "size" can be obtained by checking the
+>   KVM_CAP_S390_MEM_OP capability. "buf" is the buffer supplied by the
+>   userspace application where the read data should be written to for
+> -KVM_S390_MEMOP_LOGICAL_READ, or where the data that should be written is
+> -stored for a KVM_S390_MEMOP_LOGICAL_WRITE. When KVM_S390_MEMOP_F_CHECK_ONLY
+> -is specified, "buf" is unused and can be NULL. "ar" designates the access
+> -register number to be used; the valid range is 0..15.
+> +a read access, or where the data that should be written is stored for
+> +a write access.  The "reserved" field is meant for future extensions.
+> +Reserved and unused bytes must be set to 0. If any of the following are used,
+> +this is enforced and -EINVAL will be returned:
+> +``KVM_S390_MEMOP_ABSOLUTE_READ/WRITE``, ``KVM_S390_MEMOP_F_SKEY_PROTECTION``.
+> +
+> +The type of operation is specified in the "op" field. Flags modifying
+> +their behavior can be set in the "flags" field. Undefined flag bits must
+> +be set to 0.
+> +
+> +Possible operations are:
+> +  * ``KVM_S390_MEMOP_LOGICAL_READ``
+> +  * ``KVM_S390_MEMOP_LOGICAL_WRITE``
+> +  * ``KVM_S390_MEMOP_ABSOLUTE_READ``
+> +  * ``KVM_S390_MEMOP_ABSOLUTE_WRITE``
+> +  * ``KVM_S390_MEMOP_SIDA_READ``
+> +  * ``KVM_S390_MEMOP_SIDA_WRITE``
+> +
+> +Logical read/write:
+> +^^^^^^^^^^^^^^^^^^^
+> +
+> +Access logical memory, i.e. translate the given guest address to an absolute
+> +address given the state of the VCPU and use the absolute address as target of
+> +the access. "ar" designates the access register number to be used; the valid
+> +range is 0..15.
+> +Logical accesses are permitted for the VCPU ioctl only.
+> +Logical accesses are permitted for non secure guests only.
+> +
+> +Supported flags:
+> +  * ``KVM_S390_MEMOP_F_CHECK_ONLY``
+> +  * ``KVM_S390_MEMOP_F_INJECT_EXCEPTION``
+> +  * ``KVM_S390_MEMOP_F_SKEY_PROTECTION``
+> +
+> +The KVM_S390_MEMOP_F_CHECK_ONLY flag can be set to check whether the
+> +corresponding memory access would cause an access exception, without touching
+> +the data in memory at the destination.
+> +In this case, "buf" is unused and can be NULL.
+> +
+> +In case an access exception occurred during the access (or would occur
+> +in case of KVM_S390_MEMOP_F_CHECK_ONLY), the ioctl returns a positive
+> +error number indicating the type of exception. This exception is also
+> +raised directly at the corresponding VCPU if the flag
+> +KVM_S390_MEMOP_F_INJECT_EXCEPTION is set.
+> +
+> +If the KVM_S390_MEMOP_F_SKEY_PROTECTION flag is set, storage key
+> +protection is also in effect and may cause exceptions if accesses are
+> +prohibited given the access key passed in "key".
+> +KVM_S390_MEMOP_F_SKEY_PROTECTION is available if KVM_CAP_S390_MEM_OP_EXTENSION
+> +is > 0.
+> +
+> +Absolute read/write:
+> +^^^^^^^^^^^^^^^^^^^^
+> +
+> +Access absolute memory. This operation is intended to be used with the
+> +KVM_S390_MEMOP_F_SKEY_PROTECTION flag, to allow accessing memory and performing
+> +the checks required for storage key protection as one operation (as opposed to
+> +user space getting the storage keys, performing the checks, and accessing
+> +memory thereafter, which could lead to a delay between check and access).
+> +Absolute accesses are permitted for the VM ioctl if KVM_CAP_S390_MEM_OP_EXTENSION
+> +is > 0.
+> +Currently absolute accesses are not permitted for VCPU ioctls.
+> +Absolute accesses are permitted for non secure guests only.
+> +
+> +Supported flags:
+> +  * ``KVM_S390_MEMOP_F_CHECK_ONLY``
+> +  * ``KVM_S390_MEMOP_F_SKEY_PROTECTION``
+> +
+> +The semantics of the flags are as for logical accesses.
+> +
+> +SIDA read/write:
+> +^^^^^^^^^^^^^^^^
+> +
+> +Access the secure instruction data area which contains memory operands necessary
+> +for instruction emulation for secure guests.
+> +SIDA accesses are permitted for the VCPU ioctl only.
+> +SIDA accesses are permitted for secure guests only.
+>   
+> -The "reserved" field is meant for future extensions. It is not used by
+> -KVM with the currently defined set of flags.
+> +No flags are supported.
+>   
+>   4.90 KVM_S390_GET_SKEYS
+>   -----------------------
 
