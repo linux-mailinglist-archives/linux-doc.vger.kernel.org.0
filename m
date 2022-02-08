@@ -2,44 +2,44 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 407454AD8F5
-	for <lists+linux-doc@lfdr.de>; Tue,  8 Feb 2022 14:16:32 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 4A1FF4AD8E5
+	for <lists+linux-doc@lfdr.de>; Tue,  8 Feb 2022 14:16:16 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1349812AbiBHNQK (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 8 Feb 2022 08:16:10 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:34198 "EHLO
+        id S1349766AbiBHNQG (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 8 Feb 2022 08:16:06 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:36568 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S236411AbiBHMyh (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 8 Feb 2022 07:54:37 -0500
-Received: from szxga01-in.huawei.com (szxga01-in.huawei.com [45.249.212.187])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id D016AC03FEC0
-        for <linux-doc@vger.kernel.org>; Tue,  8 Feb 2022 04:54:35 -0800 (PST)
-Received: from dggpeml500022.china.huawei.com (unknown [172.30.72.57])
-        by szxga01-in.huawei.com (SkyGuard) with ESMTP id 4JtNCK2wymzZdX7;
-        Tue,  8 Feb 2022 20:50:21 +0800 (CST)
+        with ESMTP id S1376404AbiBHNEh (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 8 Feb 2022 08:04:37 -0500
+Received: from szxga08-in.huawei.com (szxga08-in.huawei.com [45.249.212.255])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 30B98C03FEC0
+        for <linux-doc@vger.kernel.org>; Tue,  8 Feb 2022 05:04:34 -0800 (PST)
+Received: from dggpeml500023.china.huawei.com (unknown [172.30.72.57])
+        by szxga08-in.huawei.com (SkyGuard) with ESMTP id 4JtNQr2NXmz1FCZR;
+        Tue,  8 Feb 2022 21:00:20 +0800 (CST)
 Received: from dggpeml500006.china.huawei.com (7.185.36.76) by
- dggpeml500022.china.huawei.com (7.185.36.66) with Microsoft SMTP Server
+ dggpeml500023.china.huawei.com (7.185.36.114) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2308.21; Tue, 8 Feb 2022 20:54:32 +0800
+ 15.1.2308.21; Tue, 8 Feb 2022 21:04:31 +0800
 Received: from huawei.com (10.175.100.227) by dggpeml500006.china.huawei.com
  (7.185.36.76) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2308.21; Tue, 8 Feb
- 2022 20:54:32 +0800
+ 2022 21:04:31 +0800
 From:   Tang Yizhou <tangyizhou@huawei.com>
 To:     <siyanteng@loongson.cn>, <siyanteng01@gmail.com>,
         <alexs@kernel.org>, <seakeel@gmail.com>
 CC:     <linux-doc@vger.kernel.org>, <corbet@lwn.net>,
         <zhengbin13@huawei.com>, <tangyeechou@gmail.com>,
         Tang Yizhou <tangyizhou@huawei.com>
-Subject: [PATCH v4] docs/zh_CN: Add energy-model Chinese translation
-Date:   Tue, 8 Feb 2022 21:27:18 +0800
-Message-ID: <20220208132718.3620-1-tangyizhou@huawei.com>
+Subject: [PATCH v5] docs/zh_CN: Add energy-model Chinese translation
+Date:   Tue, 8 Feb 2022 21:37:16 +0800
+Message-ID: <20220208133716.24070-1-tangyizhou@huawei.com>
 X-Mailer: git-send-email 2.17.1
 MIME-Version: 1.0
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
 X-Originating-IP: [10.175.100.227]
-X-ClientProxiedBy: dggems704-chm.china.huawei.com (10.3.19.181) To
+X-ClientProxiedBy: dggems705-chm.china.huawei.com (10.3.19.182) To
  dggpeml500006.china.huawei.com (7.185.36.76)
 X-CFilter-Loop: Reflected
 X-Spam-Status: No, score=-4.2 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_MED,
@@ -54,8 +54,10 @@ X-Mailing-List: linux-doc@vger.kernel.org
 Translate power/energy-model.rst into Chinese.
 
 Signed-off-by: Tang Yizhou <tangyizhou@huawei.com>
-Reviewed-by: Yanteng Si <siyanteng@loongson.cn>
 ---
+v5:
+Make some small changes.
+
 v4:
 Take Alex's advice on terms.
 
@@ -72,7 +74,7 @@ Translate the comments in the example program.
 
 diff --git a/Documentation/translations/zh_CN/power/energy-model.rst b/Documentation/translations/zh_CN/power/energy-model.rst
 new file mode 100644
-index 000000000000..bcf29d624860
+index 000000000000..c7da1b6aefee
 --- /dev/null
 +++ b/Documentation/translations/zh_CN/power/energy-model.rst
 @@ -0,0 +1,190 @@
@@ -162,7 +164,7 @@ index 000000000000..bcf29d624860
 +
 +“高级”EM因它允许驱动提供更精确的功率模型而得名。它并不受限于框架中的一些已
 +实现的数学公式（就像“简单”EM那样）。它可以更好地反映每个性能状态的实际功率
-+测量。因此，在EM静态功率（泄露）是重要的情况下，应该首选这种注册方式。
++测量。因此，在EM静态功率（漏电流功率）是重要的情况下，应该首选这种注册方式。
 +
 +驱动程序应通过以下API将性能域注册到EM框架中::
 +
@@ -176,7 +178,7 @@ index 000000000000..bcf29d624860
 +
 +最后一个参数“milliwatts”（毫瓦）设置成正确的值是很重要的，使用EM的内核
 +子系统可能会依赖这个标志来检查所有的EM设备是否使用相同的刻度。如果有不同的
-+刻度，这些子系统可能决定：返回警告/错误，停止工作或恐慌（panic）。
++刻度，这些子系统可能决定：返回警告/错误，停止工作或崩溃（panic）。
 +
 +关于实现这个回调函数的驱动程序的例子，参见第3节。或者在第2.4节阅读这个API
 +的更多文档。
@@ -191,7 +193,7 @@ index 000000000000..bcf29d624860
 +	Power = C * V^2 * f
 +
 +使用这种方法注册的EM可能无法正确反映真实设备的物理特性，例如当静态功率
-+（泄漏）很重要时。
++（漏电流功率）很重要时。
 +
 +
 +2.3 访问性能域
