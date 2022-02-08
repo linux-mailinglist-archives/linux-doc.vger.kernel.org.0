@@ -2,74 +2,198 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id E84DE4ACE1A
-	for <lists+linux-doc@lfdr.de>; Tue,  8 Feb 2022 02:48:01 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 724014ACE21
+	for <lists+linux-doc@lfdr.de>; Tue,  8 Feb 2022 02:48:04 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S235762AbiBHBr6 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 7 Feb 2022 20:47:58 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:35114 "EHLO
+        id S241844AbiBHBsC (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 7 Feb 2022 20:48:02 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:35838 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1345055AbiBHBnv (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Mon, 7 Feb 2022 20:43:51 -0500
-Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.129.124])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTP id A0BEFC061355
-        for <linux-doc@vger.kernel.org>; Mon,  7 Feb 2022 17:43:50 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-        s=mimecast20190719; t=1644284629;
-        h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-         to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-         in-reply-to:in-reply-to:references:references;
-        bh=gMDvDoEbO/rD1x32YWplF1Fz9lP4H196sTYmBtGIooA=;
-        b=RB9lCnEYL75LrCECThM7TJoGpW6mSLCEuAcidWNhGdiL/dvYyuYwgdYIz2eFhWkoLK8oxi
-        X1U2Dbkmf2LweWI1rqnzk1HRXwF8d/lLWt3ImFDTGJ6OTd7xsLwTNMT0zNh0TD0mOTe/zu
-        k4ZxisuPYZzK22RLJMY54qoGclQ0NMY=
-Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
- [209.132.183.4]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- us-mta-551-DRUqT-IqMT6jLWYXW_CfFg-1; Mon, 07 Feb 2022 20:43:44 -0500
-X-MC-Unique: DRUqT-IqMT6jLWYXW_CfFg-1
-Received: from smtp.corp.redhat.com (int-mx06.intmail.prod.int.phx2.redhat.com [10.5.11.16])
-        (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
-        (No client certificate requested)
-        by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 5587C64140;
-        Tue,  8 Feb 2022 01:43:40 +0000 (UTC)
-Received: from localhost (ovpn-12-95.pek2.redhat.com [10.72.12.95])
-        by smtp.corp.redhat.com (Postfix) with ESMTPS id 650F65F707;
-        Tue,  8 Feb 2022 01:43:10 +0000 (UTC)
-Date:   Tue, 8 Feb 2022 09:43:07 +0800
-From:   Baoquan He <bhe@redhat.com>
-To:     Zhen Lei <thunder.leizhen@huawei.com>
-Cc:     Thomas Gleixner <tglx@linutronix.de>,
-        Ingo Molnar <mingo@redhat.com>, Borislav Petkov <bp@alien8.de>,
-        x86@kernel.org, "H . Peter Anvin" <hpa@zytor.com>,
-        linux-kernel@vger.kernel.org, Dave Young <dyoung@redhat.com>,
-        Vivek Goyal <vgoyal@redhat.com>,
-        Eric Biederman <ebiederm@xmission.com>,
-        kexec@lists.infradead.org,
-        Catalin Marinas <catalin.marinas@arm.com>,
-        Will Deacon <will@kernel.org>,
-        linux-arm-kernel@lists.infradead.org,
-        Rob Herring <robh+dt@kernel.org>,
-        Frank Rowand <frowand.list@gmail.com>,
-        devicetree@vger.kernel.org, Jonathan Corbet <corbet@lwn.net>,
-        linux-doc@vger.kernel.org, Randy Dunlap <rdunlap@infradead.org>,
-        Feng Zhou <zhoufeng.zf@bytedance.com>,
-        Kefeng Wang <wangkefeng.wang@huawei.com>,
-        Chen Zhou <dingguo.cz@antgroup.com>,
-        John Donnelly <John.p.donnelly@oracle.com>,
-        Dave Kleikamp <dave.kleikamp@oracle.com>
-Subject: Re: [PATCH v20 1/5] arm64: Use insert_resource() to simplify code
-Message-ID: <YgHKq7o2Efb1JK7H@MiWiFi-R3L-srv>
-References: <20220124084708.683-1-thunder.leizhen@huawei.com>
- <20220124084708.683-2-thunder.leizhen@huawei.com>
+        with ESMTP id S1345132AbiBHBrA (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Mon, 7 Feb 2022 20:47:00 -0500
+Received: from mga03.intel.com (mga03.intel.com [134.134.136.65])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id E4EFAC061355;
+        Mon,  7 Feb 2022 17:46:58 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1644284819; x=1675820819;
+  h=from:to:cc:subject:date:message-id:references:
+   in-reply-to:content-id:content-transfer-encoding:
+   mime-version;
+  bh=4lM+AWjIKWUp12iTa/p4Ugx+rW9oiwVAyLCrH+LD+Rg=;
+  b=ail96WhQ5IvpKZeiYpMzU/Cz7jQl6IA43lWLR9bgLgqBO3uS4iPmpHEA
+   F2b8H6vOc8t1idBUvhPYRXyyjF9cU38yP7qAaCYkm6WUXDDSyM498GhGW
+   s/SaJmDu+1DloSwbRgvxv+5ajx2Pv/2C5kgmMFTqGMdiUbiNFczo6kNsY
+   snK+tK+KNfp3RLS7APHxi59QkJ7DFOZYPI6zcmh7i29445PfCZDJFSUfW
+   dqE8UPADWRmaF8X70JsswNhSzxg9fooITqrcvvHiH3uldFjMpIy2aPuhQ
+   0ahDnx7y7BZ/dvEH53z014VBxaHBSzKk9ggT6WD47rqC8n5KgwNSqSVc1
+   Q==;
+X-IronPort-AV: E=McAfee;i="6200,9189,10251"; a="248797732"
+X-IronPort-AV: E=Sophos;i="5.88,351,1635231600"; 
+   d="scan'208";a="248797732"
+Received: from orsmga005.jf.intel.com ([10.7.209.41])
+  by orsmga103.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 07 Feb 2022 17:46:58 -0800
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.88,351,1635231600"; 
+   d="scan'208";a="700675858"
+Received: from fmsmsx604.amr.corp.intel.com ([10.18.126.84])
+  by orsmga005.jf.intel.com with ESMTP; 07 Feb 2022 17:46:57 -0800
+Received: from fmsmsx611.amr.corp.intel.com (10.18.126.91) by
+ fmsmsx604.amr.corp.intel.com (10.18.126.84) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2308.20; Mon, 7 Feb 2022 17:46:57 -0800
+Received: from fmsmsx602.amr.corp.intel.com (10.18.126.82) by
+ fmsmsx611.amr.corp.intel.com (10.18.126.91) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2308.20; Mon, 7 Feb 2022 17:46:56 -0800
+Received: from fmsedg602.ED.cps.intel.com (10.1.192.136) by
+ fmsmsx602.amr.corp.intel.com (10.18.126.82) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2308.20 via Frontend Transport; Mon, 7 Feb 2022 17:46:56 -0800
+Received: from NAM12-BN8-obe.outbound.protection.outlook.com (104.47.55.171)
+ by edgegateway.intel.com (192.55.55.71) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.1.2308.20; Mon, 7 Feb 2022 17:46:56 -0800
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=YIMfcWY1+8f+i2qV+Tz1/Qc4wO6AfBjm+V5IEyFDN3Ap0D9s03fjxm7Fbo/zC1miFI7dc09msIpKPC8rlXSUW820hyw4Y8KC/fgRy+5G52GsfWEvWcyEvekYCSpWnI+4lkVVNVt3exlqppbrOHRndypUm2JfaWmCPWwzJwEioh6K0ePLLz98V1BTQMDsHT7l67d6QgprQgtVAEYn8N/aX35i0KfANtToeXDMMU+rpdasyrylU/4IHRVDMrQCtqMZXAOyBCq9gvbE9uCjiIOiyNxcR7iyJY3gMCo5MDuih/y862ctQIbJRebAkMRUVu+2YBPb2Dmd0E3aDy5qPAHyQQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=4lM+AWjIKWUp12iTa/p4Ugx+rW9oiwVAyLCrH+LD+Rg=;
+ b=lXVTjorTvk6uOvUmByoIhm3js0PHh/w77QfmCsAqHU0gQyChn2ILnLgMhu9byhugmnpYUl1rPkf2EXrTQ0g0Srj2g2q+FxWldFRmO5IHYT29vbV4Z3gh8/toVP3cumbmlIAqEZbr3GCwB/rfW7OEn87NJvN9R3low/BgF2rvMGJnn+uavLJ4kobxqBfe7neApVmCIJTWJTX+nz/+eKOr6gGy6EApaftEYONA/2vaHzCrqgU8Lr4nQGSBcH6IwmlnpIJk3Tad19l0dZeSD7lN2Dm0ZApw0Qs3PksfLzqPCbzXIDhPhUliz+8uKYI+dwXqQAtDwr7DyxFJNtE/8YIl6Q==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=none; dmarc=none;
+ dkim=none; arc=none
+Received: from MWHPR11MB1392.namprd11.prod.outlook.com (2603:10b6:300:24::14)
+ by MWHPR11MB1453.namprd11.prod.outlook.com (2603:10b6:301:c::12) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4951.17; Tue, 8 Feb
+ 2022 01:46:51 +0000
+Received: from MWHPR11MB1392.namprd11.prod.outlook.com
+ ([fe80::250a:7e8f:1f3d:de15]) by MWHPR11MB1392.namprd11.prod.outlook.com
+ ([fe80::250a:7e8f:1f3d:de15%4]) with mapi id 15.20.4951.019; Tue, 8 Feb 2022
+ 01:46:50 +0000
+From:   "Edgecombe, Rick P" <rick.p.edgecombe@intel.com>
+To:     "hjl.tools@gmail.com" <hjl.tools@gmail.com>,
+        "David.Laight@ACULAB.COM" <David.Laight@ACULAB.COM>
+CC:     "bsingharora@gmail.com" <bsingharora@gmail.com>,
+        "hpa@zytor.com" <hpa@zytor.com>,
+        "Syromiatnikov, Eugene" <esyr@redhat.com>,
+        "peterz@infradead.org" <peterz@infradead.org>,
+        "rdunlap@infradead.org" <rdunlap@infradead.org>,
+        "keescook@chromium.org" <keescook@chromium.org>,
+        "Eranian, Stephane" <eranian@google.com>,
+        "kirill.shutemov@linux.intel.com" <kirill.shutemov@linux.intel.com>,
+        "dave.hansen@linux.intel.com" <dave.hansen@linux.intel.com>,
+        "linux-mm@kvack.org" <linux-mm@kvack.org>,
+        "fweimer@redhat.com" <fweimer@redhat.com>,
+        "nadav.amit@gmail.com" <nadav.amit@gmail.com>,
+        "jannh@google.com" <jannh@google.com>,
+        "kcc@google.com" <kcc@google.com>,
+        "linux-arch@vger.kernel.org" <linux-arch@vger.kernel.org>,
+        "pavel@ucw.cz" <pavel@ucw.cz>, "oleg@redhat.com" <oleg@redhat.com>,
+        "Yang, Weijiang" <weijiang.yang@intel.com>,
+        "Lutomirski, Andy" <luto@kernel.org>,
+        "bp@alien8.de" <bp@alien8.de>, "arnd@arndb.de" <arnd@arndb.de>,
+        "Moreira, Joao" <joao.moreira@intel.com>,
+        "tglx@linutronix.de" <tglx@linutronix.de>,
+        "x86@kernel.org" <x86@kernel.org>,
+        "mike.kravetz@oracle.com" <mike.kravetz@oracle.com>,
+        "linux-doc@vger.kernel.org" <linux-doc@vger.kernel.org>,
+        "john.allen@amd.com" <john.allen@amd.com>,
+        "Dave.Martin@arm.com" <Dave.Martin@arm.com>,
+        "mingo@redhat.com" <mingo@redhat.com>,
+        "Shankar, Ravi V" <ravi.v.shankar@intel.com>,
+        "corbet@lwn.net" <corbet@lwn.net>,
+        "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
+        "linux-api@vger.kernel.org" <linux-api@vger.kernel.org>,
+        "gorcunov@gmail.com" <gorcunov@gmail.com>
+Subject: Re: [PATCH 00/35] Shadow stacks for userspace
+Thread-Topic: [PATCH 00/35] Shadow stacks for userspace
+Thread-Index: AQHYFh9orVaVUe6rNECZu4edjJzhZqyCV/wAgABDLwCAAl19kIAABAWAgABxL4CAARiJ8IACaNWA
+Date:   Tue, 8 Feb 2022 01:46:50 +0000
+Message-ID: <68ee0ba10ee191f1d3925479d400c41a35c5ded3.camel@intel.com>
+References: <87fsozek0j.ffs@tglx>
+         <a7e59ae16e0e05579b087caf4045e42b174e2167.camel@intel.com>
+         <3421da7fc8474b6db0e265b20ffd28d0@AcuMS.aculab.com>
+         <CAMe9rOonepEiRyoAyTGkDMQQhuyuoP4iTZJJhKGxgnq9vv=dLQ@mail.gmail.com>
+         <9f948745435c4c9273131146d50fe6f328b91a78.camel@intel.com>
+         <782f27dbe6fc419a8946eeb426253e28@AcuMS.aculab.com>
+In-Reply-To: <782f27dbe6fc419a8946eeb426253e28@AcuMS.aculab.com>
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-mailer: Evolution 3.28.5-0ubuntu0.18.04.2 
+authentication-results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=intel.com;
+x-ms-publictraffictype: Email
+x-ms-office365-filtering-correlation-id: 589dda5d-10c0-4ecf-b296-08d9eaa4e065
+x-ms-traffictypediagnostic: MWHPR11MB1453:EE_
+x-ld-processed: 46c98d88-e344-4ed4-8496-4ed7712e255d,ExtAddr
+x-microsoft-antispam-prvs: <MWHPR11MB145387EFB6D9FF8D4A3ABBE5C92D9@MWHPR11MB1453.namprd11.prod.outlook.com>
+x-ms-oob-tlc-oobclassifiers: OLM:9508;
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
+x-microsoft-antispam: BCL:0;
+x-microsoft-antispam-message-info: Q2vtEuRyx1kiJJ+MccD4lRussCRGBqHoJTCR149Lx5IBnMhhvgiWGtizNgtRutFM1gDvB4k01i221D2mFB5PY8ovgzN7Hsr1J2e6I4bTeP4uYLoRuzTuM1US+bKX4L2THmopFhcSbKowwWh86NmrIxkVy6jQDghNsllwgV3e+OwJjPxWRzaoSppjKvbU4/5iv0h29TfGstTyElTty1lNaumW5pTFlHflOdBWWA2g9pFqeFeQBnAbNQkYbT5vM8yu+xL8I3E4gYK7YkgfIlolNpRN7/+Fa1fAXEpES010r0yHxCg+vdd9W8gij+guzW0LwJ7zQ4tCu77YF9YTdgwHIHn+t84IxOk+ElXLX3WoqALPWejYTGTQ5YeQ46gIGAR0zofAIMnKnTU6ZQbeRqRTAzhEvuaXQZpdZOFKzpv2bSZZLef0Dtso7uLAlloIZrvJ3wUmEa6kMCfAypihqCAvJLemgpZ49NmDd4wOEEDoNDooCRC5Dztp8tKgNbMB/FvKaTK2xWSqTFjE9Q84PUQ1mJZTnYde6rmZ8iZ+BdmxT+4MNzKiy6jm9th2Alw++K99F50uxOKoEyQGTo972H2ZzUTbr8QJdsd600XCIEDd5rl0KlfWAjReHtYIs+wQtHH/yeJ3iiLp3sYfuWQMs9E/7sNsWPzJR8ouRHSCjaQY14rNAcX8qGXKr1khbEdboddU7p9c+EeprDoZYZDaxnsyZg2s17gPmvG1mMFoH3jQrBA=
+x-forefront-antispam-report: CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:MWHPR11MB1392.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230001)(366004)(316002)(122000001)(82960400001)(2906002)(38070700005)(508600001)(86362001)(54906003)(110136005)(38100700002)(83380400001)(71200400001)(36756003)(6486002)(7406005)(7416002)(2616005)(186003)(26005)(5660300002)(4326008)(8936002)(8676002)(64756008)(66446008)(6506007)(6512007)(66476007)(66946007)(76116006)(66556008)(99106002);DIR:OUT;SFP:1102;
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0: =?utf-8?B?dHNoTkFvdE14MDE1U1NNSVAzTTZPMnRuMkZPMFdGdU9rOVg2c21LUUIwY2lC?=
+ =?utf-8?B?c21RdEVXWlBMd3l3U1lEOTRkQzB6b1ZOL0kyYlg3MTJlMTFSNEYzQktMSlo5?=
+ =?utf-8?B?YW5UMVhGNVc4b3hTaEVIdW9iNk45d0IyWmFTd3Z4VTBrMXROcVhEeHhWYjg0?=
+ =?utf-8?B?aGdVa3djTTNsd2ZTTyt5L1JFR1lYaXllWHVuVkJNRzZDVGdKWHUvVnROS3hW?=
+ =?utf-8?B?S3NWT1B5elNVOGd0THdzcURFMzVuN2pIQytxNWlEZzJNS3dDZitTTGh5MEhE?=
+ =?utf-8?B?V3NMaGIzSkwrSVFDU21lWkZVV2VtY0JiUmcreDZYK3JvZm1kMVNRT1dYbW0v?=
+ =?utf-8?B?cmxZdjVBaDZLRkNmem80QkdvbUJ2a3Z0QzMrME1HeWtKcjdvQWVCSk5CV0R6?=
+ =?utf-8?B?eWU1UGhaWHkwU2NxK1RvcEFGek9WNHN3aGZ4MkpiN3ZUYzU3NTJWTGp3OWNX?=
+ =?utf-8?B?N0pSa3gzSHpsWElRaXI1cVFvQnlCZUpvMEtkMjVHeDJjYmZjcEtDcUxqM1Jl?=
+ =?utf-8?B?aGRTMWNMWVhDS3pZRDFHY1oyUkpjeW9GaWdqa1dFd3ByODdid0VjeHQ0N0Y4?=
+ =?utf-8?B?UHRQdXcxUUNDTE1tZkppKy9CR1lyOG1ka2VEOVRxNWtqUmNxUWdBVG9DTFN5?=
+ =?utf-8?B?Mk9QRVpnVHhXYzZwTElHMmJGMVkvcTRBcVJFckJ4OHRLczZYN1dpRzM4R2JK?=
+ =?utf-8?B?T1hzOHFUM1lqN1M3a0VTMjVVTXlZU1F4V2xMMUJCakxFQy90dzFKL0dPUTR6?=
+ =?utf-8?B?dG56MFNkVzhnaGJBUWxIZ0xhMUV0M0thWkxIV1UxZXZoWENrd0JJZWJEY0R3?=
+ =?utf-8?B?eFFRY3pkTDNNeUdwY3AzUW91Qy9PRjBBWDhiZkF0Q0lhRVQ1c21GL0h0STlu?=
+ =?utf-8?B?V3hSaVJwQkpIU2xrMi8yK3lVSFU5L0JCM3Q3MnhYOW9menlycXRhblUrQ25n?=
+ =?utf-8?B?NStqUEY5QThDTEZINldaRjZvUTVBMEJuZHNUbzZsMHdtQ21kNDlyU2lUZFVn?=
+ =?utf-8?B?N1FqblJ4N1VNdHp6OW1JaWZyK2xrSFVPQ2ExUlBmOW9RbTJuaGJ1bVBWN1ho?=
+ =?utf-8?B?T1pQWDJLVmZ6bmlVVTdhQjVWSzhONzBucTJneGpHZGlsUVJxRGkwOVZWOW5H?=
+ =?utf-8?B?ajV4anBrUXAveHp5NW9ENWszSDJvTmhpbkllbCtlTnhqWXpES0NocWlXMlR3?=
+ =?utf-8?B?QVljT05aL2xxQjdjRWVIN2htZ2FEUTBTOERmMk0rektOTHRBTHprRFBLNmVT?=
+ =?utf-8?B?S3JYYnRTQXlMYm1UNjFFMzltcUxaOFhpOXNZLzNXRkFIYklUMUs3bytxZzRV?=
+ =?utf-8?B?NDNvWXBDRDdudHA4ZUhxbmtKUjBQNmZaZFgvQmpTbHl5NWlWTTJhcEpsMldQ?=
+ =?utf-8?B?V1VLTFBQNkx0aGV0QmpwdnBCYWhMQjl5OGszU0tVa1BEYUJkS25FbUZzUFg2?=
+ =?utf-8?B?U0t0cmdaYno4ZHpBU3FHa3NYU0hTdDVJTWJxNlFodjRPOHpGKytUNnc4cjla?=
+ =?utf-8?B?eW1EYkJURXNwWm5XanBqY29sWmloYUcxNmh5OElDQWc5bEwvU2U5bXJwYzA0?=
+ =?utf-8?B?eW53QTl3bHNIN1VYWEwxODRzOTRUVzZ3a3pyY1pDNHU3S0FQZEdHbUpsOFNq?=
+ =?utf-8?B?MUdDaWswbnhER1BUcVNheDdma1YvR2VKT3gyTXdieWFRQUoxUXBTSERjU2pI?=
+ =?utf-8?B?bDIxZXZJc1ZTZ0hwaTJPbHlidFVTamp3d2l5Rkgxa09qOU91RitDV3ptcnhz?=
+ =?utf-8?B?UitGcXgrQVlGcTRHKzdXSUZtV0wyOGMzcCtHdStPeGhXcFRxYWNlaTQ2VDdE?=
+ =?utf-8?B?SU1tamlTeTBVYXAwUXY1YlBKeWlLRFcra29lVDM3bGo4VE5YSC80VTJJM0xi?=
+ =?utf-8?B?MXVITlFOc3F5U1doUUVyaEFIeGFXOUFDVU0rQnM1dFFGZmg1Z2NWMWVaUnl3?=
+ =?utf-8?B?bWhjMzZBbThadDc2ZXNFTVFIRW5WQzRSajZ4NXorUjRkakRSWUFCM0FxelR1?=
+ =?utf-8?B?eE5UczdLbVNJQmhibm1iMGs0R3hhN3pGY2Jwa2JEclNQbDE1cWJXWWhJQkFn?=
+ =?utf-8?B?YWJEbStZa3h2a05DVVFsSmpKNzFlanhXSGdTY1V2WDNaR3RDUEttZW9FU3Zo?=
+ =?utf-8?B?OXFORzc5Mmc0TVg3NzBRck9KeDZLTGswQytMWFpQRTZBMnNOUmVJbzBhNHdk?=
+ =?utf-8?B?cGd5bERnbC9naHRzQVRCb0hLNnN1R25BNWlXeEp2TlZRbGhBRXZRY25RSS9X?=
+ =?utf-8?Q?ZzStRXZW+kcpb+zX1RGl6Ul5Cw2RO/23wFfl2T5u40=3D?=
+Content-Type: text/plain; charset="utf-8"
+Content-ID: <7AEA71D38DAEDF4AB24BF14EAB8246BA@namprd11.prod.outlook.com>
+Content-Transfer-Encoding: base64
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20220124084708.683-2-thunder.leizhen@huawei.com>
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.16
-X-Spam-Status: No, score=-2.8 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_LOW,
-        SPF_HELO_NONE,SPF_NONE,T_SCC_BODY_TEXT_LINE autolearn=unavailable
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: MWHPR11MB1392.namprd11.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 589dda5d-10c0-4ecf-b296-08d9eaa4e065
+X-MS-Exchange-CrossTenant-originalarrivaltime: 08 Feb 2022 01:46:50.7276
+ (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: 46c98d88-e344-4ed4-8496-4ed7712e255d
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: fybjNIMZlkThY92awuzTjeYFgSdZBRjJFiQtcFup1hJ113Lm1bq5f0QhzBSvp8kR4wDfQekwdfXWjU/fCl/Qt/Fe96EzaJqspcLgE2olu/A=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: MWHPR11MB1453
+X-OriginatorOrg: intel.com
+X-Spam-Status: No, score=-4.4 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_MED,
+        SPF_HELO_NONE,SPF_NONE,T_SCC_BODY_TEXT_LINE autolearn=ham
         autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
@@ -77,73 +201,22 @@ Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On 01/24/22 at 04:47pm, Zhen Lei wrote:
-> insert_resource() traverses the subtree layer by layer from the root node
-> until a proper location is found. Compared with request_resource(), the
-> parent node does not need to be determined in advance.
-> 
-> In addition, move the insertion of node 'crashk_res' into function
-> reserve_crashkernel() to make the associated code close together.
-
-This is nice cleanup.
-
-Acked-by: Baoquan He <bhe@redhat.com>
-
-> 
-> Signed-off-by: Zhen Lei <thunder.leizhen@huawei.com>
-> ---
->  arch/arm64/kernel/setup.c | 17 +++--------------
->  arch/arm64/mm/init.c      |  1 +
->  2 files changed, 4 insertions(+), 14 deletions(-)
-> 
-> diff --git a/arch/arm64/kernel/setup.c b/arch/arm64/kernel/setup.c
-> index f70573928f1bff0..a81efcc359e4e78 100644
-> --- a/arch/arm64/kernel/setup.c
-> +++ b/arch/arm64/kernel/setup.c
-> @@ -225,6 +225,8 @@ static void __init request_standard_resources(void)
->  	kernel_code.end     = __pa_symbol(__init_begin - 1);
->  	kernel_data.start   = __pa_symbol(_sdata);
->  	kernel_data.end     = __pa_symbol(_end - 1);
-> +	insert_resource(&iomem_resource, &kernel_code);
-> +	insert_resource(&iomem_resource, &kernel_data);
->  
->  	num_standard_resources = memblock.memory.cnt;
->  	res_size = num_standard_resources * sizeof(*standard_resources);
-> @@ -246,20 +248,7 @@ static void __init request_standard_resources(void)
->  			res->end = __pfn_to_phys(memblock_region_memory_end_pfn(region)) - 1;
->  		}
->  
-> -		request_resource(&iomem_resource, res);
-> -
-> -		if (kernel_code.start >= res->start &&
-> -		    kernel_code.end <= res->end)
-> -			request_resource(res, &kernel_code);
-> -		if (kernel_data.start >= res->start &&
-> -		    kernel_data.end <= res->end)
-> -			request_resource(res, &kernel_data);
-> -#ifdef CONFIG_KEXEC_CORE
-> -		/* Userspace will find "Crash kernel" region in /proc/iomem. */
-> -		if (crashk_res.end && crashk_res.start >= res->start &&
-> -		    crashk_res.end <= res->end)
-> -			request_resource(res, &crashk_res);
-> -#endif
-> +		insert_resource(&iomem_resource, res);
->  	}
->  }
->  
-> diff --git a/arch/arm64/mm/init.c b/arch/arm64/mm/init.c
-> index db63cc885771a52..90f276d46b93bc6 100644
-> --- a/arch/arm64/mm/init.c
-> +++ b/arch/arm64/mm/init.c
-> @@ -109,6 +109,7 @@ static void __init reserve_crashkernel(void)
->  	kmemleak_ignore_phys(crash_base);
->  	crashk_res.start = crash_base;
->  	crashk_res.end = crash_base + crash_size - 1;
-> +	insert_resource(&iomem_resource, &crashk_res);
->  }
->  #else
->  static void __init reserve_crashkernel(void)
-> -- 
-> 2.25.1
-> 
-
+T24gU3VuLCAyMDIyLTAyLTA2IGF0IDEzOjQyICswMDAwLCBEYXZpZCBMYWlnaHQgd3JvdGU6DQo+
+ID4gSSBkb24ndCB0aGluayB0aGlzIGlzIGFzIGRpZmZpY3VsdCB0byBhdm9pZCBiZWNhdXNlIHVz
+ZXJzcGFjZSBzc3ANCj4gPiBoYXMNCj4gPiBpdHMgb3duIHJlZ2lzdGVyIHRoYXQgc2hvdWxkIG5v
+dCBiZSBhY2Nlc3NlZCBhdCB0aGF0IHBvaW50LCBidXQgSQ0KPiA+IGhhdmUNCj4gPiBub3QgZ2l2
+ZW4gdGhpcyBhc3BlY3QgZW5vdWdoIGFuYWx5c2lzLiBUaGFua3MgZm9yIGJyaW5naW5nIGl0IHVw
+Lg0KPiANCj4gU28gdGhlIHVzZXIgc3NwIGlzbid0IHNhdmVkIChvciByZXN0b3JlZCkgYnkgdGhl
+IHRyYXAgZW50cnkvZXhpdC4NCj4gU28gaXQgbmVlZHMgdG8gYmUgc2F2ZWQgYnkgdGhlIGNvbnRl
+eHQgc3dpdGNoIGNvZGU/DQo+IE11Y2ggbGlrZSB0aGUgdXNlciBzZWdtZW50IHJlZ2lzdGVycz8N
+Cj4gU28geW91IGFyZSBsaWtlbHkgdG8gZ2V0IHRoZSBzYW1lIHByb2JsZW1zIGlmIHJlc3Rvcmlu
+ZyBpdCBjYW4gZmF1bHQNCj4gaW4ga2VybmVsIChlZyBmb3IgYSBub24tY2Fub25pY2FsIGFkZHJl
+c3MpLg0KDQpQTDNfU1NQIGlzIGxhemlseSBzYXZlZCBhbmQgcmVzdG9yZWQgYnkgdGhlIEZQVSBz
+dXBlcnZpc29yIHhzYXZlIGNvZGUsDQp3aGljaCBoYXMgaXRzIGJ1ZmZlciBpbiBrZXJuZWwgbWVt
+b3J5LiBGb3IgdGhlIG1vc3QgcGFydCBpdCBpcw0KdXNlcnNwYWNlIGluc3RydWN0aW9ucyB0aGF0
+IHVzZSB0aGlzIHJlZ2lzdGVyIGFuZCB0aGV5IGNhbiBvbmx5IG1vZGlmeQ0KaXQgaW4gbGltaXRl
+ZCB3YXlzLg0KDQpJdCBkb2VzIGxvb2sgbGlrZSBJUkVUIGNhbiBjYXVzZSBhICNDUCBpZiB0aGUg
+UEwzIFNTUCBpcyBub3QgYWxpZ25lZCwNCmJ1dCBvbmx5IGFmdGVyIFJJUCBhbmQgQ1BMIGFyZSBz
+ZXQgYmFjayB0byB1c2Vyc3BhY2UuIEknbSBub3QgY29uZmlkZW50DQplbm91Z2ggaW50ZXJwcmV0
+aW5nIHRoZSBzcGVjcyB0byBhc3NlcnQgdGhlIHNwZWNpZmljIGJlaGF2aW9yIGFuZCB3aWxsDQpm
+b2xsb3cgdXAgaW50ZXJuYWxseSB0byBjbGFyaWZ5Lg0KDQo=
