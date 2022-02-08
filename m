@@ -2,250 +2,200 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 375E04AD46C
-	for <lists+linux-doc@lfdr.de>; Tue,  8 Feb 2022 10:12:27 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 19FCB4AD484
+	for <lists+linux-doc@lfdr.de>; Tue,  8 Feb 2022 10:16:37 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1346487AbiBHJMK (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 8 Feb 2022 04:12:10 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:56008 "EHLO
+        id S234747AbiBHJQb (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 8 Feb 2022 04:16:31 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:58350 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S235905AbiBHJMJ (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 8 Feb 2022 04:12:09 -0500
-Received: from mail-wr1-x42b.google.com (mail-wr1-x42b.google.com [IPv6:2a00:1450:4864:20::42b])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 663FFC03FEC0
-        for <linux-doc@vger.kernel.org>; Tue,  8 Feb 2022 01:12:08 -0800 (PST)
-Received: by mail-wr1-x42b.google.com with SMTP id q7so1288107wrc.13
-        for <linux-doc@vger.kernel.org>; Tue, 08 Feb 2022 01:12:08 -0800 (PST)
+        with ESMTP id S1353379AbiBHJQb (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 8 Feb 2022 04:16:31 -0500
+Received: from mail-io1-xd2d.google.com (mail-io1-xd2d.google.com [IPv6:2607:f8b0:4864:20::d2d])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 6E23DC03FEC1
+        for <linux-doc@vger.kernel.org>; Tue,  8 Feb 2022 01:16:29 -0800 (PST)
+Received: by mail-io1-xd2d.google.com with SMTP id h7so20299508iof.3
+        for <linux-doc@vger.kernel.org>; Tue, 08 Feb 2022 01:16:29 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google;
+        d=google.com; s=20210112;
         h=date:from:to:cc:subject:message-id:references:mime-version
          :content-disposition:content-transfer-encoding:in-reply-to;
-        bh=PJbKv3ScWJ3/TAfgKO6PRsVz/IUNS0H9jBQYHa3CD78=;
-        b=MikKXHNC7i8rGs44Asf8Jltk2wDHP5beBwjhNrJRwru1xPj9434goPNBtOm01gMVIK
-         nRZtnKT7utsqD8aIkFYbhKrp4NQOyle38PSLs0r2HG3vo1RvzhCJFDIS7GazFXHq6b09
-         tnzf6yX8f5EhR0SR+laSdQcmjhJEu+6EsgrmNc0+24LBvmXTUseN45DA/GfPAy1tXq8N
-         4KLMlvbltpmOjIcLoy2IcZsWnOEVffib1NqGtaKIBhFI4feR1i+DwmMdBpMquWzL7iL6
-         fmmGVGG6R3dWzy3WVCoJl14kCKefoAfykRgUojxb/TfM7gbgoPvjs6Ah3qLYFmX9cyS0
-         t/Zg==
+        bh=O/lx//nLUVMx2EI4vj5HKtagrUsb3ZYCM82TQ4lEins=;
+        b=GNZIO6/kuk+ic9l6Cd+p/G1mclOH/q3G/vT9SOJqWStL42meaNn/c/wFxfOu3vH9z1
+         uOLAzQrhJq95IkE+TOApdAN1ebRCQvgTw7uDwp8aJjVbau9Q2hRunsd/UW0wOVvjYwd1
+         LcpnpZOyuC0DTMEJBpVE1aNfStAYiHEPBjeyFGgD6lSx1oXM4Le3EOGAoBFH3e2WoeDV
+         uIQBx1oy/xTb+3xXbPXk86a1+F/MI5UOjandFhzeQffQ3GTJisprjuAegNuPLc1FAiS7
+         JphN+alAke3aQBct32r7k9yuTI6pGb/AYKbCAvQdosBGvl25eO7UHSAH5rqstI1IASX8
+         bjWA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=x-gm-message-state:date:from:to:cc:subject:message-id:references
          :mime-version:content-disposition:content-transfer-encoding
          :in-reply-to;
-        bh=PJbKv3ScWJ3/TAfgKO6PRsVz/IUNS0H9jBQYHa3CD78=;
-        b=eD0BNH+pJtl8TFLrqVM26w9/KV9M8wCqalO8F/KcvQ61DhrzDhEoIFiC7r0Y+3LT/j
-         RgEggzI7ez8c4kMom2FbM4ieYguhFwBRGEG+xrtqyh4otgPKVWLgcQ3hSWtx3SUZ2qzN
-         2Ro//eX8Z94zk/H/58f3bI5K3QZC0lLt9QXk0UzVkPE2C8j0djoZyJUMMgNRIz7MOmNr
-         GXcXu2AGFK3dyhky/R2YxFNItD6PrNaW6OFeOBNhdxXmATphPyGZJQ2O+F/+AKUXe+wQ
-         xaPA4KAfjQy6SwWrzM60t33bUtoulcaA8QLfV/XAb+p2T4E2cjN9j/UcFFUfr81Ge+WF
-         AvJA==
-X-Gm-Message-State: AOAM532l/54gAltbY8FJABoPtGpOU9mh+s3be1Ib8RKwKFVlJtNy+qRI
-        nnbR/BKub2OacsFtjfiKf4Mlog==
-X-Google-Smtp-Source: ABdhPJxPp5FT1Ln9HKzS0CItdTmHplu9PkCnWQ1NkcWrbT8LwTxXwyvXSrHh1aLxTYM8Z/xM2BydOQ==
-X-Received: by 2002:a5d:598a:: with SMTP id n10mr2648769wri.136.1644311526908;
-        Tue, 08 Feb 2022 01:12:06 -0800 (PST)
-Received: from google.com (cpc155339-bagu17-2-0-cust87.1-3.cable.virginm.net. [86.27.177.88])
-        by smtp.gmail.com with ESMTPSA id 24sm1460362wmf.48.2022.02.08.01.12.05
+        bh=O/lx//nLUVMx2EI4vj5HKtagrUsb3ZYCM82TQ4lEins=;
+        b=0ojKj6FlB4DcQUG2OtO9CsODfcNQVK4F1xRpSZu1QtcKJR8QVcElrXQiwGNy0WOkQ2
+         RXpkHZIQkrAP3fXWtC8/svFFMjMJIeX1R+sMIGNRBlfPbkYY54HRrylTTYk5iHy36cOl
+         EM7cW1PVNfnZl2QSss+arMY1vYZsRe1KR7vz+1eqbQpa6PXuzLb7lb4SGehA1SMSCOac
+         uowG+L4XOOHyykmnPwxlWKm471ILHzx+kucosapU4DHzTp76tYZwR3k9+EZC1nEciS1X
+         bEXcMelNJbLU/ovsUaYKMlsPcQImRayDxMnjfjqy3fL+YND2amhbM+N4JvBFEw8LAioj
+         uUfQ==
+X-Gm-Message-State: AOAM533/dB3pLEtreM2vCsYckuxVhZXUUbnegaHfbcJNUPW4dmsHycqI
+        x3vDUzQ4pj90BwnKpX7l8G3r9A==
+X-Google-Smtp-Source: ABdhPJw5yaI9Ui9SJAQTv5l/nY/N9q1YxRO/3oThR7TlMGDQjGNGWfY/7ovjRm8eOUtzjrPfeX8IwA==
+X-Received: by 2002:a05:6638:1028:: with SMTP id n8mr1757754jan.318.1644311788671;
+        Tue, 08 Feb 2022 01:16:28 -0800 (PST)
+Received: from google.com ([2620:15c:183:200:5f31:19c3:21f5:7300])
+        by smtp.gmail.com with ESMTPSA id k11sm7556042iob.23.2022.02.08.01.16.27
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 08 Feb 2022 01:12:06 -0800 (PST)
-Date:   Tue, 8 Feb 2022 09:12:03 +0000
-From:   Lee Jones <lee.jones@linaro.org>
-To:     Quan Nguyen <quan@os.amperecomputing.com>
-Cc:     Joel Stanley <joel@jms.id.au>, Andrew Jeffery <andrew@aj.id.au>,
-        Jean Delvare <jdelvare@suse.com>,
-        Guenter Roeck <linux@roeck-us.net>,
-        Rob Herring <robh+dt@kernel.org>,
-        Jonathan Corbet <corbet@lwn.net>, linux-hwmon@vger.kernel.org,
-        devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
-        linux-doc@vger.kernel.org, linux-aspeed@lists.ozlabs.org,
-        openbmc@lists.ozlabs.org, Mark Brown <broonie@kernel.org>,
-        Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
-        "Rafael J . Wysocki" <rafael@kernel.org>,
-        Derek Kiernan <derek.kiernan@xilinx.com>,
-        Dragan Cvetic <dragan.cvetic@xilinx.com>,
-        Arnd Bergmann <arnd@arndb.de>,
-        Gustavo Pimentel <Gustavo.Pimentel@synopsys.com>,
-        Open Source Submission <patches@amperecomputing.com>,
-        Phong Vo <phong@os.amperecomputing.com>,
-        "Thang Q . Nguyen" <thang@os.amperecomputing.com>
-Subject: Re: [PATCH v6 2/9] mfd: smpro-mfd: Adds Ampere's Altra SMpro MFD
- driver
-Message-ID: <YgIz484pt8IJmP85@google.com>
-References: <20211224041352.29405-1-quan@os.amperecomputing.com>
- <20211224041352.29405-3-quan@os.amperecomputing.com>
+        Tue, 08 Feb 2022 01:16:27 -0800 (PST)
+Date:   Tue, 8 Feb 2022 02:16:24 -0700
+From:   Yu Zhao <yuzhao@google.com>
+To:     Barry Song <21cnbao@gmail.com>
+Cc:     Andrew Morton <akpm@linux-foundation.org>,
+        Linus Torvalds <torvalds@linux-foundation.org>,
+        Andi Kleen <ak@linux.intel.com>,
+        Catalin Marinas <catalin.marinas@arm.com>,
+        Dave Hansen <dave.hansen@linux.intel.com>,
+        Hillf Danton <hdanton@sina.com>, Jens Axboe <axboe@kernel.dk>,
+        Jesse Barnes <jsbarnes@google.com>,
+        Johannes Weiner <hannes@cmpxchg.org>,
+        Jonathan Corbet <corbet@lwn.net>,
+        Matthew Wilcox <willy@infradead.org>,
+        Mel Gorman <mgorman@suse.de>,
+        Michael Larabel <Michael@michaellarabel.com>,
+        Michal Hocko <mhocko@kernel.org>,
+        Rik van Riel <riel@surriel.com>,
+        Vlastimil Babka <vbabka@suse.cz>,
+        Will Deacon <will@kernel.org>,
+        Ying Huang <ying.huang@intel.com>,
+        LAK <linux-arm-kernel@lists.infradead.org>,
+        Linux Doc Mailing List <linux-doc@vger.kernel.org>,
+        LKML <linux-kernel@vger.kernel.org>,
+        Linux-MM <linux-mm@kvack.org>, page-reclaim@google.com,
+        x86 <x86@kernel.org>
+Subject: Re: [PATCH v6 0/9] Multigenerational LRU Framework
+Message-ID: <YgI06D8MbEpchooF@google.com>
+References: <20220104202227.2903605-1-yuzhao@google.com>
+ <CAGsJ_4zULJ5vPwn73Z5Bap3eRkAX+Yv24c-n41+zC7fN8xG60g@mail.gmail.com>
+ <Ye+dPmO17JN2bNLL@google.com>
+ <CAGsJ_4w5GM5r916XEz+gj=33A+b98kyJONLNpEnBMmX5XnPRmg@mail.gmail.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=utf-8
 Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
-In-Reply-To: <20211224041352.29405-3-quan@os.amperecomputing.com>
-X-Spam-Status: No, score=-2.1 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_NONE,
-        SPF_HELO_NONE,SPF_PASS,T_SCC_BODY_TEXT_LINE autolearn=unavailable
-        autolearn_force=no version=3.4.6
+In-Reply-To: <CAGsJ_4w5GM5r916XEz+gj=33A+b98kyJONLNpEnBMmX5XnPRmg@mail.gmail.com>
+X-Spam-Status: No, score=-17.6 required=5.0 tests=BAYES_00,DKIMWL_WL_MED,
+        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,
+        ENV_AND_HDR_SPF_MATCH,RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,SPF_PASS,
+        T_SCC_BODY_TEXT_LINE,USER_IN_DEF_DKIM_WL,USER_IN_DEF_SPF_WL
+        autolearn=ham autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Fri, 24 Dec 2021, Quan Nguyen wrote:
+On Fri, Jan 28, 2022 at 09:54:09PM +1300, Barry Song wrote:
+> On Tue, Jan 25, 2022 at 7:48 PM Yu Zhao <yuzhao@google.com> wrote:
+> >
+> > On Sun, Jan 23, 2022 at 06:43:06PM +1300, Barry Song wrote:
+> > > On Wed, Jan 5, 2022 at 7:17 PM Yu Zhao <yuzhao@google.com> wrote:
+> >
+> > <snipped>
+> >
+> > > > Large-scale deployments
+> > > > -----------------------
+> > > > We've rolled out MGLRU to tens of millions of Chrome OS users and
+> > > > about a million Android users. Google's fleetwide profiling [13] shows
+> > > > an overall 40% decrease in kswapd CPU usage, in addition to
+> > >
+> > > Hi Yu,
+> > >
+> > > Was the overall 40% decrease of kswap CPU usgae seen on x86 or arm64?
+> > > And I am curious how much we are taking advantage of NONLEAF_PMD_YOUNG.
+> > > Does it help a lot in decreasing the cpu usage?
+> >
+> > Hi Barry,
+> >
+> > The fleet-wide profiling data I shared was from x86. For arm64, I only
+> > have data from synthetic benchmarks at the moment, and it also shows
+> > similar improvements.
+> >
+> > For Chrome OS (individual users), walk_pte_range(), the function that
+> > would benefit from ARCH_HAS_NONLEAF_PMD_YOUNG, only uses a small
+> > portion (<4%) of kswapd CPU time. So ARCH_HAS_NONLEAF_PMD_YOUNG isn't
+> > that helpful.
+> 
+> Hi Yu,
+> Thanks!
+> 
+> In the current kernel, depending on reverse mapping, while memory is
+> under pressure,
+> the cpu usage of kswapd can be very very high especially while a lot of pages
+> have large mapcount, thus a huge reverse mapping cost.
 
-> Adds Multi-function devices driver for SMpro co-processor found on the
-> Mt.Jade hardware reference platform with Ampere's Altra processor family.
-> 
-> Signed-off-by: Quan Nguyen <quan@os.amperecomputing.com>
-> ---
-> Changes in v6:
->   + Update license part to reflect that this driver is clone from
->   simple-mfd-i2c driver [Quan]
-> 
-> Changes in v5:
->   + Dropped the use of simple-mfd-i2c driver [Quan]
->   + Introduced drivers/mfd/smpro-mfd.c driver to instantiate
->   sub-devices. This is to avoid DT nodes without resource issue [Quan]
->   + Revised commit message [Quan]
-> 
-> Changes in v4:
->   + Add "depends on I2C" to fix build issue found by kernel test
->   robot [Guenter]
-> 
-> Changes in v3:
->   + None
-> 
-> Changes in v2:
->   + Used 'struct of_device_id's .data attribute [Lee Jones]
-> 
->  drivers/mfd/Kconfig     | 12 +++++++
->  drivers/mfd/Makefile    |  1 +
->  drivers/mfd/smpro-mfd.c | 76 +++++++++++++++++++++++++++++++++++++++++
->  3 files changed, 89 insertions(+)
->  create mode 100644 drivers/mfd/smpro-mfd.c
-> 
-> diff --git a/drivers/mfd/Kconfig b/drivers/mfd/Kconfig
-> index a21cbdf89477..a886da5018b1 100644
-> --- a/drivers/mfd/Kconfig
-> +++ b/drivers/mfd/Kconfig
-> @@ -77,6 +77,18 @@ config MFD_AS3711
->  	help
->  	  Support for the AS3711 PMIC from AMS
->  
-> +config MFD_SMPRO
-> +	tristate "Ampere Computing MFD SMpro core driver"
-> +	depends on I2C
-> +	select MFD_CORE
-> +	select REGMAP_I2C
-> +	help
-> +	  Say yes here to enable SMpro driver support for Ampere's Altra
-> +	  processor family.
-> +
-> +	  Ampere's Altra SMpro exposes an I2C regmap interface that can
-> +	  be accessed by child devices.
-> +
->  config MFD_AS3722
->  	tristate "ams AS3722 Power Management IC"
->  	select MFD_CORE
-> diff --git a/drivers/mfd/Makefile b/drivers/mfd/Makefile
-> index 4d53e951a92d..fbcd09dce5ce 100644
-> --- a/drivers/mfd/Makefile
-> +++ b/drivers/mfd/Makefile
-> @@ -267,6 +267,7 @@ obj-$(CONFIG_MFD_QCOM_PM8008)	+= qcom-pm8008.o
->  
->  obj-$(CONFIG_SGI_MFD_IOC3)	+= ioc3.o
->  obj-$(CONFIG_MFD_SIMPLE_MFD_I2C)	+= simple-mfd-i2c.o
-> +obj-$(CONFIG_MFD_SMPRO)		+= smpro-mfd.o
->  obj-$(CONFIG_MFD_INTEL_M10_BMC)   += intel-m10-bmc.o
->  
->  obj-$(CONFIG_MFD_ATC260X)	+= atc260x-core.o
-> diff --git a/drivers/mfd/smpro-mfd.c b/drivers/mfd/smpro-mfd.c
-> new file mode 100644
-> index 000000000000..132d4e2dde12
-> --- /dev/null
-> +++ b/drivers/mfd/smpro-mfd.c
-> @@ -0,0 +1,76 @@
-> +// SPDX-License-Identifier: GPL-2.0-only
-> +/*
-> + * Ampere Altra Family SMPro MFD - I2C
-> + *
-> + * Copyright (c) 2021, Ampere Computing LLC
-> + * Author: Quan Nguyen <quan@os.amperecomputing..com>
-> + *
-> + * Based on simple-mfd-i2c.c:
+Agreed. I've posted v7 which includes kswapd profiles collected from an
+arm64 v8.2 laptop under memory pressure.
 
-Why aren't you just using this?
+> Regarding  <4%, I guess the figure came from machines with NONLEAF_PMD_YOUNG？
 
-> + * Copyright (c) by Michael Walle <michael@walle.cc>
-> + */
-> +
-> +#include <linux/i2c.h>
-> +#include <linux/kernel.h>
-> +#include <linux/module.h>
-> +#include <linux/of_platform.h>
-> +#include <linux/mfd/core.h>
-> +#include <linux/regmap.h>
-> +
-> +/* Identification Registers */
-> +#define MANUFACTURER_ID_REG     0x02
-> +#define AMPERE_MANUFACTURER_ID  0xCD3A
-> +
-> +static const struct regmap_config simple_word_regmap_config = {
-> +	.reg_bits = 8,
-> +	.val_bits = 16,
-> +};
-> +
-> +static const struct mfd_cell smpro_devs[] = {
-> +	MFD_CELL_NAME("smpro-hwmon"),
-> +};
+No, it's from Snapdragon 7c. Please see the kswapd profiles in v7.
 
-What are the other devices?
+> In this case, we can skip many PTE scans while PMD has no accessed bit
+> set. But for
+> a machine without NONLEAF, will the figure of cpu usage be much larger?
 
-> +static int smpro_mfd_probe(struct i2c_client *i2c)
-> +{
-> +	const struct regmap_config *config;
-> +	struct regmap *regmap;
-> +	unsigned int val;
-> +	int ret;
-> +
-> +	config = device_get_match_data(&i2c->dev);
-> +	if (!config)
-> +		config = &simple_word_regmap_config;
-> +
-> +	regmap = devm_regmap_init_i2c(i2c, config);
-> +	if (IS_ERR(regmap))
-> +		return PTR_ERR(regmap);
-> +
-> +	/* Check for valid ID */
-> +	ret = regmap_read(regmap, MANUFACTURER_ID_REG, &val);
-> +	if (ret)
-> +		return ret;
-> +
-> +	if (val != AMPERE_MANUFACTURER_ID)
-> +		return -ENODEV;
-> +
-> +	return devm_mfd_add_devices(&i2c->dev, PLATFORM_DEVID_AUTO,
-> +				    smpro_devs, ARRAY_SIZE(smpro_devs), NULL, 0, NULL);
-> +}
-> +
-> +static const struct of_device_id smpro_mfd_of_match[] = {
-> +	{ .compatible = "ampere,smpro", .data = &simple_word_regmap_config },
-> +	{}
-> +};
-> +MODULE_DEVICE_TABLE(of, smpro_mfd_of_match);
-> +
-> +static struct i2c_driver smpro_mfd_driver = {
-> +	.probe_new = smpro_mfd_probe,
-> +	.driver = {
-> +		.name = "smpro-mfd-i2c",
-> +		.of_match_table = smpro_mfd_of_match,
-> +	},
-> +};
-> +module_i2c_driver(smpro_mfd_driver);
-> +
-> +MODULE_AUTHOR("Quan Nguyen <quan@os.amperecomputing.com>");
-> +MODULE_DESCRIPTION("SMPRO MFD - I2C driver");
-> +MODULE_LICENSE("GPL v2");
+So NONLEAF_PMD_YOUNG at most can save 4% CPU usage from kswapd. But
+this definitely can vary, depending on the workloads.
 
--- 
-Lee Jones [李琼斯]
-Principal Technical Lead - Developer Services
-Linaro.org │ Open source software for Arm SoCs
-Follow Linaro: Facebook | Twitter | Blog
+> > > If so, this might be
+> > > a good proof that arm64 also needs this hardware feature?
+> > > In short, I am curious how much the improvement in this patchset depends
+> > > on the hardware ability of NONLEAF_PMD_YOUNG.
+> >
+> > For data centers, I do think ARCH_HAS_NONLEAF_PMD_YOUNG has some value.
+> > In addition to cold/hot memory scanning, there are other use cases like
+> > dirty tracking, which can benefit from the accessed bit on non-leaf
+> > entries. I know some proprietary software uses this capability on x86
+> > for different purposes than this patchset does. And AFAIK, x86 is the
+> > only arch that supports this capability, e.g., risc-v and ppc can only
+> > set the accessed bit in PTEs.
+> 
+> Yep. NONLEAF is a nice feature.
+> 
+> btw, page table should have a separate DIRTY bit, right?
+
+Yes.
+
+> wouldn't dirty page
+> tracking depend on the DIRTY bit rather than the accessed bit?
+
+It depends on the goal.
+
+> so x86 also has
+> NONLEAF dirty bit?
+
+No.
+
+> Or they are scanning accessed bit of PMD before
+> scanning DIRTY bits of PTEs?
+
+A mandatory sync to disk must use the dirty bit to ensure data
+integrity. But for a voluntary sync to disk, it can use the accessed
+bit to narrow the search of dirty pages.
+
+A mandatory sync is used to free specific dirty pages. A voluntary sync
+is used to keep the number of dirty pages low in general and it doesn't
+target any specific dirty pages.
+
+> > In fact, I've discussed this with one of the arm maintainers Will. So
+> > please check with him too if you are interested in moving forward with
+> > the idea. I might be able to provide with additional data if you need
+> > it to make a decision.
+> 
+> I am interested in running it and have some data without NONLEAF
+> especially while free memory is very limited and the system has memory
+> thrashing.
+
+The v7 has a switch to disable this feature on x86. If you can run your
+workloads on x86, then it might be able to help you measure the difference.
