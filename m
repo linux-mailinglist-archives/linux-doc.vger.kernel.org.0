@@ -2,211 +2,258 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 34A264AD68A
-	for <lists+linux-doc@lfdr.de>; Tue,  8 Feb 2022 12:27:07 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 1E2B14AD6A1
+	for <lists+linux-doc@lfdr.de>; Tue,  8 Feb 2022 12:28:34 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S241623AbiBHL0t (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 8 Feb 2022 06:26:49 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:45054 "EHLO
+        id S1356609AbiBHL1L (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 8 Feb 2022 06:27:11 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:45570 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S239854AbiBHJnS (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 8 Feb 2022 04:43:18 -0500
-Received: from mail-ej1-x633.google.com (mail-ej1-x633.google.com [IPv6:2a00:1450:4864:20::633])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 07927C03FEC0;
-        Tue,  8 Feb 2022 01:43:17 -0800 (PST)
-Received: by mail-ej1-x633.google.com with SMTP id j14so27115517ejy.6;
-        Tue, 08 Feb 2022 01:43:16 -0800 (PST)
+        with ESMTP id S1355533AbiBHJp3 (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 8 Feb 2022 04:45:29 -0500
+Received: from mail-yb1-xb2d.google.com (mail-yb1-xb2d.google.com [IPv6:2607:f8b0:4864:20::b2d])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id E75BAC03FEC0
+        for <linux-doc@vger.kernel.org>; Tue,  8 Feb 2022 01:45:27 -0800 (PST)
+Received: by mail-yb1-xb2d.google.com with SMTP id c6so48217003ybk.3
+        for <linux-doc@vger.kernel.org>; Tue, 08 Feb 2022 01:45:27 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
-        h=from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=Lq+dKx41RUjgzj8JvU9gnjviVgG4UdA+iyRcp+19UfA=;
-        b=kzTiv9B2U7Wc0fxzGKxQg8uhdYfgfO/xIoYNmhC/rgC3OhSFBPSSSVQO2K03kmbWfV
-         +UGcT+3CXBaxmU4wl8vygy23F0/n2OIZj2wwoZZ6M8tTxHSy5w2XasdRhToXb6F0ZJL/
-         5huGHAex9ROgFLbGyHXavnKHmZg06VqvEs+lU3tVrec1MwOb4gQ+YZnPEYUEScn8yWtG
-         WF55TzQTCmLzqEGG4Wwt1SN9T/qVgfgZxo3olqp4twStPc8Fvlq9EMbnn/OX0tq+yMTp
-         Nu1gS0AV+TRUTP19KVXQYe2RVt0OjPTJ8exsji8O9JmPiZQToxuJaegip/FXmkOFrhBJ
-         PJzw==
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc:content-transfer-encoding;
+        bh=ZfmLjGZPZd96rlj5ayTd64/DXLXI24oSyJdGY4rUkYI=;
+        b=iHNkTsqN/s/oBiRZlaoYb91A5qm0XTaspesWtbupA/kvLSDRiKFanzyUnAku6112Lx
+         +hOoM4wNlliV9IdXQcF5OG/9zJhEfaajEPIPXzhS25BWGvzaW6Vh7VTbkWNhA0ns1OGh
+         GsO0FIzLRz2eSsoHpLxhBYo3+Q0pvC+ESfQNlt+GvW26JFA9msDcBI/b8BGoSUkpccKR
+         jSIioxGqP1jNsq6OL0T1C2Q65DPnPRx+GPI04a4GiIx06knOzqA6NTtUo9/x3rtl6l2t
+         5sPaHT+T3x3KPxIAGu87GxYsbzSSnLorpZJiGuJBMqwsZE78pYQWFqodjfHY0/mQvItp
+         6Y7Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=Lq+dKx41RUjgzj8JvU9gnjviVgG4UdA+iyRcp+19UfA=;
-        b=q5js+0T8YuxD/PeJk01Wx/XllnlZgCF/Zj1js5uulnlweydHDse+Jmyzk6pi+Z178R
-         GY1xrd4G1PYw7fjh2Bt84dsMCdyqkP1AdpgokWUegGQId6/hDq0ZAiAzcI0+wpv3gatL
-         5alRv6j8uVKhZfgc9VJFPp4Aubskx17aSri7qKsN54e2cDLk+LvTFolwHnf0zNwkqTiM
-         0ZQiSQesn0mtB+ZwiQvliQ8NyMcJaYUI8uefN/+YDHe6aUOde1ju35IKWIuIehaB4p4x
-         GAnClsUMLqz0kdLXbFg7lpNVwOxaaOeVIjmoxPCKomJK24tK040U8fw7O24OXRFzL5xP
-         BZPg==
-X-Gm-Message-State: AOAM532l7rVUk+WT/IYG/IIZYuBNZeqHps3bPT6ovJITC+OkKdJ+P6TB
-        dK/MDRN0+s0LeSyWUhpp3ts=
-X-Google-Smtp-Source: ABdhPJwAZUEHLlmX1IkuCQdKZVNT6gCfYtB0CZnvNZIAtRmMvtzYnBBVouYUplHQTTxgvw/iOFbdAA==
-X-Received: by 2002:a17:907:1115:: with SMTP id qu21mr2996031ejb.192.1644313395453;
-        Tue, 08 Feb 2022 01:43:15 -0800 (PST)
-Received: from tiger.museclub.art (p200300cf9f235800e668694710673d4b.dip0.t-ipconnect.de. [2003:cf:9f23:5800:e668:6947:1067:3d4b])
-        by smtp.googlemail.com with ESMTPSA id v14sm585931edq.13.2022.02.08.01.43.13
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 08 Feb 2022 01:43:14 -0800 (PST)
-From:   Eugene Shalygin <eugene.shalygin@gmail.com>
-To:     eugene.shalygin@gmail.com
-Cc:     Oleksandr Natalenko <oleksandr@natalenko.name>,
-        Denis Pauk <pauk.denis@gmail.com>,
-        Jean Delvare <jdelvare@suse.com>,
-        Guenter Roeck <linux@roeck-us.net>,
-        Jonathan Corbet <corbet@lwn.net>, linux-hwmon@vger.kernel.org,
-        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org
-Subject: [PATCH] hwmon: (asus-ec-sensors) add CPU core voltage
-Date:   Tue,  8 Feb 2022 10:42:43 +0100
-Message-Id: <20220208094244.1106312-1-eugene.shalygin@gmail.com>
-X-Mailer: git-send-email 2.35.1
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc:content-transfer-encoding;
+        bh=ZfmLjGZPZd96rlj5ayTd64/DXLXI24oSyJdGY4rUkYI=;
+        b=PTm3dHSdpzaRhOvZGTHsGABUMvVxyOOgYJvnRJIjA1X0BWsgSMQIq/LaH6STimCUTE
+         WthBuQeTaqk0SSxBRL3IYfWfq1rnKtcuC4goXpXvFoZnugg4uyLRL7r6ZqJSwM+6uE/7
+         PMwAoN7cjiNuORWkQkV2OMA9Xx84fPqPBBTvZ5ULP+sgBHUPwFufHTfMAj8qhq+5t2tD
+         e9u3vjtl5B1VjAqmLE5xdjmIemY9WMzv1LWlCdCWXyfRkXqLQHX5cKjq/d3SN/3tWuCW
+         eFTXXvgXP69BJ4ki11GNR7yY+vq3mDQIQyDqSbloGrQCpYlC9xl/GWrxrsvZD6xRB1yr
+         MGyQ==
+X-Gm-Message-State: AOAM531e5gQGd5+6fnYBaLPFRY1lrNcz7SjS5pD/PNDua8hjcBaGdMG+
+        UHEUy9/hZHQ2k7y74TfCXN/rhpze+7b2XXLTZG5SLXIjcUDbdwHB
+X-Google-Smtp-Source: ABdhPJwedmj2QBqc9F9Nocq8VjjhmU5s88TphC7YwWkxk5AJNUVCDp5cb7zjTJ8zvNJ6kDckPbY/KCI+jCxxuoyVx/E=
+X-Received: by 2002:a5b:3cc:: with SMTP id t12mr3746466ybp.397.1644313526957;
+ Tue, 08 Feb 2022 01:45:26 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-Spam-Status: No, score=-2.1 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_FROM,
-        RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,SPF_PASS,T_SCC_BODY_TEXT_LINE,
-        UPPERCASE_50_75 autolearn=no autolearn_force=no version=3.4.6
+References: <20220208073600.10860-1-tangyizhou@huawei.com>
+In-Reply-To: <20220208073600.10860-1-tangyizhou@huawei.com>
+From:   yanteng si <siyanteng01@gmail.com>
+Date:   Tue, 8 Feb 2022 17:44:59 +0800
+Message-ID: <CAEensMwEUHVaZevehMpr6tAxHzDhEQhihgseCJVpJG3=fQ0+Hw@mail.gmail.com>
+Subject: Re: [PATCH v3] docs/zh_CN: Add energy-model Chinese translation
+To:     Tang Yizhou <tangyizhou@huawei.com>
+Cc:     Yanteng Si <siyanteng@loongson.cn>, Alex Shi <alexs@kernel.org>,
+        Alex Shi <seakeel@gmail.com>,
+        Linux Doc Mailing List <linux-doc@vger.kernel.org>,
+        Jonathan Corbet <corbet@lwn.net>, zhengbin13@huawei.com,
+        Yeechou Tang <tangyeechou@gmail.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: base64
+X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_ENVFROM_END_DIGIT,
+        FREEMAIL_FROM,RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,SPF_PASS,
+        T_SCC_BODY_TEXT_LINE autolearn=ham autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-A user discovered [1] the CPU Core voltage sensor, which spans 2
-registers and provides output in mV. Althroug the discovery was made
-with a X470 chipset, the sensor is present in X570 (tested with C8H).
-For now simply add it to each board with the CPU current sensor present.
-
-[1] https://github.com/zeule/asus-ec-sensors/issues/12
-
-Signed-off-by: Eugene Shalygin <eugene.shalygin@gmail.com>
----
- Documentation/hwmon/asus_ec_sensors.rst |  1 +
- drivers/hwmon/asus-ec-sensors.c         | 29 ++++++++++++++++---------
- 2 files changed, 20 insertions(+), 10 deletions(-)
-
-diff --git a/Documentation/hwmon/asus_ec_sensors.rst b/Documentation/hwmon/asus_ec_sensors.rst
-index 22de1b037cfb..e7e8f1640f45 100644
---- a/Documentation/hwmon/asus_ec_sensors.rst
-+++ b/Documentation/hwmon/asus_ec_sensors.rst
-@@ -39,6 +39,7 @@ The driver is aware of and reads the following sensors:
- 9. Readings from the "Water flow meter" header (RPM)
- 10. Readings from the "Water In" and "Water Out" temperature headers
- 11. CPU current
-+12. CPU core voltage
- 
- Sensor values are read from EC registers, and to avoid race with the board
- firmware the driver acquires ACPI mutex, the one used by the WMI when its
-diff --git a/drivers/hwmon/asus-ec-sensors.c b/drivers/hwmon/asus-ec-sensors.c
-index dd7b207d062f..bfac08a5dc57 100644
---- a/drivers/hwmon/asus-ec-sensors.c
-+++ b/drivers/hwmon/asus-ec-sensors.c
-@@ -18,6 +18,7 @@
-  * - VRM Heat Sink fan RPM
-  * - Water Flow fan RPM
-  * - CPU current
-+ * - CPU core voltage
-  */
- 
- #include <linux/acpi.h>
-@@ -100,6 +101,8 @@ enum ec_sensors {
- 	ec_sensor_temp_t_sensor,
- 	/* VRM temperature [℃] */
- 	ec_sensor_temp_vrm,
-+	/* CPU Core voltage [mV] */
-+	ec_sensor_in_cpu_core,
- 	/* CPU_Opt fan [RPM] */
- 	ec_sensor_fan_cpu_opt,
- 	/* VRM heat sink fan [RPM] */
-@@ -121,6 +124,7 @@ enum ec_sensors {
- #define SENSOR_TEMP_MB BIT(ec_sensor_temp_mb)
- #define SENSOR_TEMP_T_SENSOR BIT(ec_sensor_temp_t_sensor)
- #define SENSOR_TEMP_VRM BIT(ec_sensor_temp_vrm)
-+#define SENSOR_IN_CPU_CORE BIT(ec_sensor_in_cpu_core)
- #define SENSOR_FAN_CPU_OPT BIT(ec_sensor_fan_cpu_opt)
- #define SENSOR_FAN_VRM_HS BIT(ec_sensor_fan_vrm_hs)
- #define SENSOR_FAN_CHIPSET BIT(ec_sensor_fan_chipset)
-@@ -139,6 +143,8 @@ static const struct ec_sensor_info known_ec_sensors[] = {
- 	[ec_sensor_temp_t_sensor] =
- 		EC_SENSOR("T_Sensor", hwmon_temp, 1, 0x00, 0x3d),
- 	[ec_sensor_temp_vrm] = EC_SENSOR("VRM", hwmon_temp, 1, 0x00, 0x3e),
-+	[ec_sensor_in_cpu_core] =
-+		EC_SENSOR("CPU Core", hwmon_in, 2, 0x00, 0xa2),
- 	[ec_sensor_fan_cpu_opt] =
- 		EC_SENSOR("CPU_Opt", hwmon_fan, 2, 0x00, 0xb0),
- 	[ec_sensor_fan_vrm_hs] = EC_SENSOR("VRM HS", hwmon_fan, 2, 0x00, 0xb2),
-@@ -172,32 +178,34 @@ static const struct dmi_system_id asus_ec_dmi_table[] __initconst = {
- 		SENSOR_TEMP_T_SENSOR | SENSOR_FAN_CHIPSET),
- 	DMI_EXACT_MATCH_BOARD(VENDOR_ASUS_UPPER_CASE, "Pro WS X570-ACE",
- 		SENSOR_SET_TEMP_CHIPSET_CPU_MB | SENSOR_TEMP_VRM |
--		SENSOR_FAN_CHIPSET | SENSOR_CURR_CPU),
-+		SENSOR_FAN_CHIPSET | SENSOR_CURR_CPU | SENSOR_IN_CPU_CORE),
- 	DMI_EXACT_MATCH_BOARD(VENDOR_ASUS_UPPER_CASE,
- 			      "ROG CROSSHAIR VIII DARK HERO",
- 		SENSOR_SET_TEMP_CHIPSET_CPU_MB | SENSOR_TEMP_T_SENSOR |
- 		SENSOR_TEMP_VRM | SENSOR_SET_TEMP_WATER |
--		SENSOR_FAN_CPU_OPT | SENSOR_FAN_WATER_FLOW | SENSOR_CURR_CPU),
-+		SENSOR_FAN_CPU_OPT | SENSOR_FAN_WATER_FLOW |
-+		SENSOR_CURR_CPU | SENSOR_IN_CPU_CORE),
- 	DMI_EXACT_MATCH_BOARD(VENDOR_ASUS_UPPER_CASE,
- 			      "ROG CROSSHAIR VIII FORMULA",
- 		SENSOR_SET_TEMP_CHIPSET_CPU_MB | SENSOR_TEMP_T_SENSOR |
- 		SENSOR_TEMP_VRM | SENSOR_FAN_CPU_OPT | SENSOR_FAN_CHIPSET |
--		SENSOR_CURR_CPU),
-+		SENSOR_CURR_CPU | SENSOR_IN_CPU_CORE),
- 	DMI_EXACT_MATCH_BOARD(VENDOR_ASUS_UPPER_CASE, "ROG CROSSHAIR VIII HERO",
- 		SENSOR_SET_TEMP_CHIPSET_CPU_MB | SENSOR_TEMP_T_SENSOR |
- 		SENSOR_TEMP_VRM | SENSOR_SET_TEMP_WATER |
- 		SENSOR_FAN_CPU_OPT | SENSOR_FAN_CHIPSET |
--		SENSOR_FAN_WATER_FLOW | SENSOR_CURR_CPU),
-+		SENSOR_FAN_WATER_FLOW | SENSOR_CURR_CPU | SENSOR_IN_CPU_CORE),
- 	DMI_EXACT_MATCH_BOARD(VENDOR_ASUS_UPPER_CASE,
- 			      "ROG CROSSHAIR VIII HERO (WI-FI)",
- 		SENSOR_SET_TEMP_CHIPSET_CPU_MB | SENSOR_TEMP_T_SENSOR |
- 		SENSOR_TEMP_VRM | SENSOR_SET_TEMP_WATER |
- 		SENSOR_FAN_CPU_OPT | SENSOR_FAN_CHIPSET |
--		SENSOR_FAN_WATER_FLOW | SENSOR_CURR_CPU),
-+		SENSOR_FAN_WATER_FLOW | SENSOR_CURR_CPU | SENSOR_IN_CPU_CORE),
- 	DMI_EXACT_MATCH_BOARD(VENDOR_ASUS_UPPER_CASE,
- 			      "ROG CROSSHAIR VIII IMPACT",
- 		SENSOR_SET_TEMP_CHIPSET_CPU_MB | SENSOR_TEMP_T_SENSOR |
--		SENSOR_TEMP_VRM | SENSOR_FAN_CHIPSET | SENSOR_CURR_CPU),
-+		SENSOR_TEMP_VRM | SENSOR_FAN_CHIPSET |
-+		SENSOR_CURR_CPU | SENSOR_IN_CPU_CORE),
- 	DMI_EXACT_MATCH_BOARD(VENDOR_ASUS_UPPER_CASE, "ROG STRIX B550-E GAMING",
- 		SENSOR_SET_TEMP_CHIPSET_CPU_MB |
- 		SENSOR_TEMP_T_SENSOR |
-@@ -205,17 +213,19 @@ static const struct dmi_system_id asus_ec_dmi_table[] __initconst = {
- 	DMI_EXACT_MATCH_BOARD(VENDOR_ASUS_UPPER_CASE, "ROG STRIX B550-I GAMING",
- 		SENSOR_SET_TEMP_CHIPSET_CPU_MB |
- 		SENSOR_TEMP_T_SENSOR |
--		SENSOR_TEMP_VRM | SENSOR_FAN_VRM_HS | SENSOR_CURR_CPU),
-+		SENSOR_TEMP_VRM | SENSOR_FAN_VRM_HS |
-+		SENSOR_CURR_CPU | SENSOR_IN_CPU_CORE),
- 	DMI_EXACT_MATCH_BOARD(VENDOR_ASUS_UPPER_CASE, "ROG STRIX X570-E GAMING",
- 		SENSOR_SET_TEMP_CHIPSET_CPU_MB |
- 		SENSOR_TEMP_T_SENSOR |
--		SENSOR_TEMP_VRM | SENSOR_FAN_CHIPSET | SENSOR_CURR_CPU),
-+		SENSOR_TEMP_VRM | SENSOR_FAN_CHIPSET |
-+		SENSOR_CURR_CPU | SENSOR_IN_CPU_CORE),
- 	DMI_EXACT_MATCH_BOARD(VENDOR_ASUS_UPPER_CASE, "ROG STRIX X570-F GAMING",
- 		SENSOR_SET_TEMP_CHIPSET_CPU_MB |
- 		SENSOR_TEMP_T_SENSOR | SENSOR_FAN_CHIPSET),
- 	DMI_EXACT_MATCH_BOARD(VENDOR_ASUS_UPPER_CASE, "ROG STRIX X570-I GAMING",
- 		SENSOR_TEMP_T_SENSOR | SENSOR_FAN_VRM_HS |
--		SENSOR_FAN_CHIPSET | SENSOR_CURR_CPU),
-+		SENSOR_FAN_CHIPSET | SENSOR_CURR_CPU | SENSOR_IN_CPU_CORE),
- 	{}
- };
- 
-@@ -467,7 +477,6 @@ static long scale_sensor_value(s32 value, int data_type)
- 	switch (data_type) {
- 	case hwmon_curr:
- 	case hwmon_temp:
--	case hwmon_in:
- 		return value * MILLI;
- 	default:
- 		return value;
--- 
-2.35.1
-
+VGFuZyBZaXpob3UgPHRhbmd5aXpob3VAaHVhd2VpLmNvbT4g5LqOMjAyMuW5tDLmnIg45pel5ZGo
+5LqMIDE1OjAz5YaZ6YGT77yaDQo+DQo+IFRyYW5zbGF0ZSBwb3dlci9lbmVyZ3ktbW9kZWwucnN0
+IGludG8gQ2hpbmVzZS4NCj4NCj4gU2lnbmVkLW9mZi1ieTogVGFuZyBZaXpob3UgPHRhbmd5aXpo
+b3VAaHVhd2VpLmNvbT4NClJldmlld2VkLWJ5OiBZYW50ZW5nIFNpIDxzaXlhbnRlbmdAbG9vbmdz
+b24uY24+DQo+IC0tLQ0KPiB2MzoNCj4gRG9uJ3QgaW5jbHVkZSBFbmdsaXNoIGtlcm5lbCBkb2Mu
+DQo+DQo+IHYyOg0KPiBUcmFuc2xhdGUgdGhlIGNvbW1lbnRzIGluIHRoZSBleGFtcGxlIHByb2dy
+YW0uDQo+DQo+ICAuLi4vdHJhbnNsYXRpb25zL3poX0NOL3Bvd2VyL2VuZXJneS1tb2RlbC5yc3Qg
+fCAxOTAgKysrKysrKysrKysrKysrKysrDQo+ICAuLi4vdHJhbnNsYXRpb25zL3poX0NOL3Bvd2Vy
+L2luZGV4LnJzdCAgICAgICAgfCAgIDIgKy0NCj4gIDIgZmlsZXMgY2hhbmdlZCwgMTkxIGluc2Vy
+dGlvbnMoKyksIDEgZGVsZXRpb24oLSkNCj4gIGNyZWF0ZSBtb2RlIDEwMDY0NCBEb2N1bWVudGF0
+aW9uL3RyYW5zbGF0aW9ucy96aF9DTi9wb3dlci9lbmVyZ3ktbW9kZWwucnN0DQo+DQo+IGRpZmYg
+LS1naXQgYS9Eb2N1bWVudGF0aW9uL3RyYW5zbGF0aW9ucy96aF9DTi9wb3dlci9lbmVyZ3ktbW9k
+ZWwucnN0IGIvRG9jdW1lbnRhdGlvbi90cmFuc2xhdGlvbnMvemhfQ04vcG93ZXIvZW5lcmd5LW1v
+ZGVsLnJzdA0KPiBuZXcgZmlsZSBtb2RlIDEwMDY0NA0KPiBpbmRleCAwMDAwMDAwMDAwMDAuLmJj
+ZjI5ZDYyNDg2MA0KPiAtLS0gL2Rldi9udWxsDQo+ICsrKyBiL0RvY3VtZW50YXRpb24vdHJhbnNs
+YXRpb25zL3poX0NOL3Bvd2VyL2VuZXJneS1tb2RlbC5yc3QNCj4gQEAgLTAsMCArMSwxOTAgQEAN
+Cj4gKy4uIFNQRFgtTGljZW5zZS1JZGVudGlmaWVyOiBHUEwtMi4wDQo+ICsuLiBpbmNsdWRlOjog
+Li4vZGlzY2xhaW1lci16aF9DTi5yc3QNCj4gKw0KPiArOk9yaWdpbmFsOiBEb2N1bWVudGF0aW9u
+L3Bvd2VyL2VuZXJneS1tb2RlbC5yc3QNCj4gKw0KPiArOue/u+ivkToNCj4gKw0KPiArICDllJDo
+ibroiJ8gVGFuZyBZaXpob3UgPHRhbmd5ZWVjaG91QGdtYWlsLmNvbT4NCj4gKw0KPiArPT09PT09
+PT09PT09DQo+ICvorr7lpIfog73ph4/mqKHlnosNCj4gKz09PT09PT09PT09PQ0KPiArDQo+ICsx
+LiDmpoLov7ANCj4gKy0tLS0tLS0NCj4gKw0KPiAr6IO96YeP5qih5Z6L77yIRU3vvInmoYbmnrbm
+mK/kuIDnp43pqbHliqjnqIvluo/kuI7lhoXmoLjlrZDns7vnu5/kuYvpl7TnmoTmjqXlj6PjgILl
+hbbkuK3pqbHliqjnqIvluo/kuobop6PkuI3lkIwNCj4gK+aAp+iDveWxgue6p+eahOiuvuWkh+aJ
+gOa2iOiAl+eahOWKn+eOh++8jOiAjOWGheaguOWtkOezu+e7n+aEv+aEj+S9v+eUqOivpeS/oeaB
+r+WBmuWHuuiDvemHj+aEn+efpeWGs+etluOAgg0KPiArDQo+ICvorr7lpIfmiYDmtojogJfnmoTl
+ip/njofnmoTkv6Hmga/mnaXmupDlnKjkuI3lkIznmoTlubPlj7DkuIrlj6/og73mnInlvojlpKfn
+moTkuI3lkIzjgILov5nkupvlip/njofmiJDmnKzlnKjmn5DkupsNCj4gK+aDheWGteS4i+WPr+S7
+peS9v+eUqOiuvuWkh+agkeaVsOaNruadpeS8sOeul+OAguWcqOWFtuWug+aDheWGteS4i++8jOWb
+uuS7tuS8muabtOa4healmuOAguaIluiAhe+8jOeUqOaIt+epuumXtOWPr+iDvQ0KPiAr5piv5pyA
+5riF5qWa55qE44CC5Lul5q2k57G75o6o44CC5Li65LqG6YG/5YWN5q+P5LiA5Liq5a6i5oi356uv
+5a2Q57O757uf5a+55q+P5LiA56eN5Y+v6IO955qE5L+h5oGv5rqQ6Ieq5bex6YeN5pawDQo+ICvl
+rp7njrDmlK/mjIHvvIxFTeahhuaetuS9nOS4uuS4gOS4quaKveixoeWxguS7i+WFpe+8jOWug+Wc
+qOWGheaguOS4reWvueWKn+eOh+aIkOacrOihqOeahOagvOW8j+i/m+ihjOagh+WHhuWMlu+8jA0K
+PiAr5Zug5q2k6IO95aSf6YG/5YWN5aSa5L2Z55qE5bel5L2c44CCDQo+ICsNCj4gK+WKn+eOh+WA
+vOWPr+S7peeUqOavq+eTpuaIluKAnOaKveixoeWIu+W6puKAneihqOekuuOAguWkmuS4quWtkOez
+u+e7n+WPr+iDveS9v+eUqEVN77yM55Sx57O757uf6ZuG5oiQ5ZWG5p2l5qOA5p+lDQo+ICvlip/n
+joflgLzliLvluqbnsbvlnovnmoTopoHmsYLmmK/lkKbmu6HotrPjgILlj6/ku6XlnKjog73ph4/m
+hJ/nn6XosIPluqblmajnmoTmlofmoaPkuK3mib7liLDkuIDkuKrkvovlrZANCj4gK0RvY3VtZW50
+YXRpb24vc2NoZWR1bGVyL3NjaGVkLWVuZXJneS5yc3TjgILlr7nkuo7kuIDkupvlrZDns7vnu5/v
+vIzmr5TlpoLng63og73miJYNCj4gK3Bvd2VyY2Fw77yM55So4oCc5oq96LGh5Yi75bqm4oCd5o+P
+6L+w5Yqf546H5YC85Y+v6IO95Lya5a+86Ie06Zeu6aKY44CC6L+Z5Lqb5a2Q57O757uf5a+56L+H
+5Y675L2/55So55qE5Yqf546H55qEDQo+ICvkvLDnrpflgLzmm7TmhJ/lhbTotqPvvIzlm6DmraTl
+j6/og73pnIDopoHnnJ/lrp7nmoTmr6vnk6bjgILov5nkupvopoHmsYLnmoTkuIDkuKrkvovlrZDl
+j6/ku6XlnKjmmbrog73lip/njofliIbphY0NCj4gK0RvY3VtZW50YXRpb24vZHJpdmVyLWFwaS90
+aGVybWFsL3Bvd2VyX2FsbG9jYXRvci5yc3TmlofmoaPkuK3mib7liLDjgIINCj4gKw0KPiAr5YaF
+5qC45a2Q57O757uf5Y+v6IO977yI5Z+65LqORU3lhoXpg6jmoIflv5fkvY3vvInlrp7njrDkuobl
+r7lFTeazqOWGjOiuvuWkh+aYr+WQpuWFt+acieS4jeS4gOiHtOWIu+W6pueahOiHquWKqA0KPiAr
+5qOA5p+l44CC6KaB6K6w5L2P55qE6YeN6KaB5LqL5oOF5piv77yM5b2T5Yqf546H5YC85Lul4oCc
+5oq96LGh5Yi75bqm4oCd6KGo56S65pe277yM5LuO5Lit5o6o5a+85Lul5q+r54Sm6ICz5Li65Y2V
+5L2NDQo+ICvnmoTnnJ/lrp7og73ph4/mtojogJfmmK/kuI3lj6/og73nmoTjgIINCj4gKw0KPiAr
+5LiL5Zu+5o+P6L+w5LqG5LiA5Liq6amx5Yqo55qE5L6L5a2Q77yI6L+Z6YeM5piv6ZKI5a+5QXJt
+55qE77yM5L2G6K+l5pa55rOV6YCC55So5LqO5Lu75L2V5L2T57O757uT5p6E77yJ77yM5a6DDQo+
+ICvlkJFFTeahhuaetuaPkOS+m+S6huWKn+eOh+aIkOacrO+8jOaEn+WFtOi2o+eahOWuouaIt+er
+r+WPr+S7juS4reivu+WPluaVsOaNrjo6DQo+ICsNCj4gKyAgICAgICArLS0tLS0tLS0tLS0tLS0t
+KyAgKy0tLS0tLS0tLS0tLS0tLS0tKyAgKy0tLS0tLS0tLS0tLS0tLSsNCj4gKyAgICAgICB8IFRo
+ZXJtYWwgKElQQSkgfCAgfCBTY2hlZHVsZXIgKEVBUykgfCAgfCAgICAgT3RoZXIgICAgIHwNCj4g
+KyAgICAgICArLS0tLS0tLS0tLS0tLS0tKyAgKy0tLS0tLS0tLS0tLS0tLS0tKyAgKy0tLS0tLS0t
+LS0tLS0tLSsNCj4gKyAgICAgICAgICAgICAgIHwgICAgICAgICAgICAgICAgICAgfCBlbV9jcHVf
+ZW5lcmd5KCkgICB8DQo+ICsgICAgICAgICAgICAgICB8ICAgICAgICAgICAgICAgICAgIHwgZW1f
+Y3B1X2dldCgpICAgICAgfA0KPiArICAgICAgICAgICAgICAgKy0tLS0tLS0tLSsgICAgICAgICB8
+ICAgICAgICAgKy0tLS0tLS0tLSsNCj4gKyAgICAgICAgICAgICAgICAgICAgICAgICB8ICAgICAg
+ICAgfCAgICAgICAgIHwNCj4gKyAgICAgICAgICAgICAgICAgICAgICAgICB2ICAgICAgICAgdiAg
+ICAgICAgIHYNCj4gKyAgICAgICAgICAgICAgICAgICAgICAgICstLS0tLS0tLS0tLS0tLS0tLS0t
+LS0rDQo+ICsgICAgICAgICAgICAgICAgICAgICAgICB8ICAgIEVuZXJneSBNb2RlbCAgICAgfA0K
+PiArICAgICAgICAgICAgICAgICAgICAgICAgfCAgICAgRnJhbWV3b3JrICAgICAgIHwNCj4gKyAg
+ICAgICAgICAgICAgICAgICAgICAgICstLS0tLS0tLS0tLS0tLS0tLS0tLS0rDQo+ICsgICAgICAg
+ICAgICAgICAgICAgICAgICAgICBeICAgICAgIF4gICAgICAgXg0KPiArICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgfCAgICAgICB8ICAgICAgIHwgZW1fZGV2X3JlZ2lzdGVyX3BlcmZfZG9tYWlu
+KCkNCj4gKyAgICAgICAgICAgICAgICArLS0tLS0tLS0tLSsgICAgICAgfCAgICAgICArLS0tLS0t
+LS0tKw0KPiArICAgICAgICAgICAgICAgIHwgICAgICAgICAgICAgICAgICB8ICAgICAgICAgICAg
+ICAgICB8DQo+ICsgICAgICAgICstLS0tLS0tLS0tLS0tLS0rICArLS0tLS0tLS0tLS0tLS0tKyAg
+Ky0tLS0tLS0tLS0tLS0tKw0KPiArICAgICAgICB8ICBjcHVmcmVxLWR0ICAgfCAgfCAgIGFybV9z
+Y21pICAgIHwgIHwgICAgT3RoZXIgICAgIHwNCj4gKyAgICAgICAgKy0tLS0tLS0tLS0tLS0tLSsg
+ICstLS0tLS0tLS0tLS0tLS0rICArLS0tLS0tLS0tLS0tLS0rDQo+ICsgICAgICAgICAgICAgICAg
+XiAgICAgICAgICAgICAgICAgIF4gICAgICAgICAgICAgICAgIF4NCj4gKyAgICAgICAgICAgICAg
+ICB8ICAgICAgICAgICAgICAgICAgfCAgICAgICAgICAgICAgICAgfA0KPiArICAgICAgICArLS0t
+LS0tLS0tLS0tLS0rICAgKy0tLS0tLS0tLS0tLS0tLSsgICstLS0tLS0tLS0tLS0tLSsNCj4gKyAg
+ICAgICAgfCBEZXZpY2UgVHJlZSAgfCAgIHwgICBGaXJtd2FyZSAgICB8ICB8ICAgICAgPyAgICAg
+ICB8DQo+ICsgICAgICAgICstLS0tLS0tLS0tLS0tLSsgICArLS0tLS0tLS0tLS0tLS0tKyAgKy0t
+LS0tLS0tLS0tLS0tKw0KPiArDQo+ICvlr7nkuo5DUFXorr7lpIfvvIxFTeahhuaetueuoeeQhued
+gOezu+e7n+S4reavj+S4quKAnOaAp+iDveWfn+KAneeahOWKn+eOh+aIkOacrOihqOOAguS4gOS4
+quaAp+iDveWfn+aYr+S4gOe7hA0KPiAr5oCn6IO95LiA6LW35Ly457yp55qEQ1BV44CC5oCn6IO9
+5Z+f6YCa5bi45LiOQ1BVRnJlceetlueVpeWFt+aciTHlr7kx5pig5bCE44CC5LiA5Liq5oCn6IO9
+5Z+f5Lit55qEDQo+ICvmiYDmnIlDUFXopoHmsYLlhbfmnInnm7jlkIznmoTlvq7mnrbmnoTjgILk
+uI3lkIzmgKfog73ln5/kuK3nmoRDUFXlj6/ku6XmnInkuI3lkIznmoTlvq7mnrbmnoTjgIINCj4g
+Kw0KPiArDQo+ICsyLiDmoLjlv4NBUEkNCj4gKy0tLS0tLS0tLS0NCj4gKw0KPiArMi4xIOmFjee9
+rumAiemhuQ0KPiArXl5eXl5eXl5eXl5eDQo+ICsNCj4gK+W/hemhu+S9v+iDvUNPTkZJR19FTkVS
+R1lfTU9ERUzmiY3og73kvb/nlKhFTeahhuaetuOAgg0KPiArDQo+ICsNCj4gKzIuMiDmgKfog73l
+n5/nmoTms6jlhowNCj4gK15eXl5eXl5eXl5eXl5eXl4NCj4gKw0KPiAr4oCc6auY57qn4oCdRU3n
+moTms6jlhowNCj4gK35+fn5+fn5+fn5+fn5+fn4NCj4gKw0KPiAr4oCc6auY57qn4oCdRU3lm6Dl
+roPlhYHorrjpqbHliqjmj5Dkvpvmm7Tnsr7noa7nmoTlip/njofmqKHlnovogIzlvpflkI3jgILl
+roPlubbkuI3lj5fpmZDkuo7moYbmnrbkuK3nmoTkuIDkupvlt7INCj4gK+WunueOsOeahOaVsOWt
+puWFrOW8j++8iOWwseWDj+KAnOeugOWNleKAnUVN6YKj5qC377yJ44CC5a6D5Y+v5Lul5pu05aW9
+5Zyw5Y+N5pig5q+P5Liq5oCn6IO954q25oCB55qE5a6e6ZmF5Yqf546HDQo+ICvmtYvph4/jgILl
+m6DmraTvvIzlnKhFTemdmeaAgeWKn+eOh++8iOazhOmcsu+8ieaYr+mHjeimgeeahOaDheWGteS4
+i++8jOW6lOivpemmlumAiei/meenjeazqOWGjOaWueW8j+OAgg0KPiArDQo+ICvpqbHliqjnqIvl
+uo/lupTpgJrov4fku6XkuItBUEnlsIbmgKfog73ln5/ms6jlhozliLBFTeahhuaetuS4rTo6DQo+
+ICsNCj4gKyAgaW50IGVtX2Rldl9yZWdpc3Rlcl9wZXJmX2RvbWFpbihzdHJ1Y3QgZGV2aWNlICpk
+ZXYsIHVuc2lnbmVkIGludCBucl9zdGF0ZXMsDQo+ICsgICAgICAgICAgICAgICBzdHJ1Y3QgZW1f
+ZGF0YV9jYWxsYmFjayAqY2IsIGNwdW1hc2tfdCAqY3B1cywgYm9vbCBtaWxsaXdhdHRzKTsNCj4g
+Kw0KPiAr6amx5Yqo56iL5bqP5b+F6aG75o+Q5L6b5LiA5Liq5Zue6LCD5Ye95pWw77yM5Li65q+P
+5Liq5oCn6IO954q25oCB6L+U5ZuePOmikeeOhyzlip/njoc+5YWD57uE44CC6amx5Yqo56iL5bqP
+DQo+ICvmj5DkvpvnmoTlm57osIPlh73mlbDlj6/ku6Xoh6rnlLHlnLDku47ku7vkvZXnm7jlhbPk
+vY3nva7vvIhEVOOAgeWbuuS7ti4uLi4uLu+8ieS7peWPiuS7peS7u+S9leiiq+iupOS4uuaYrw0K
+PiAr5b+F6KaB55qE5pa55byP6I635Y+W5pWw5o2u44CC5Y+q5pyJ5a+55LqOQ1BV6K6+5aSH77yM
+6amx5Yqo56iL5bqP5b+F6aG75L2/55SoY3B1bWFza+aMh+WumuaAp+iDveWfn+eahENQVeOAgg0K
+PiAr5a+55LqOQ1BV5Lul5aSW55qE5YW25LuW6K6+5aSH77yM5pyA5ZCO5LiA5Liq5Y+C5pWw5b+F
+6aG76KKr6K6+572u5Li6TlVMTOOAgg0KPiArDQo+ICvmnIDlkI7kuIDkuKrlj4LmlbDigJxtaWxs
+aXdhdHRz4oCd77yI5q+r55Om77yJ6K6+572u5oiQ5q2j56Gu55qE5YC85piv5b6I6YeN6KaB55qE
+77yM5L2/55SoRU3nmoTlhoXmoLgNCj4gK+WtkOezu+e7n+WPr+iDveS8muS+nei1lui/meS4quag
+h+W/l+adpeajgOafpeaJgOacieeahEVN6K6+5aSH5piv5ZCm5L2/55So55u45ZCM55qE5Yi75bqm
+44CC5aaC5p6c5pyJ5LiN5ZCM55qEDQo+ICvliLvluqbvvIzov5nkupvlrZDns7vnu5/lj6/og73l
+hrPlrprvvJrov5Tlm57orablkYov6ZSZ6K+v77yM5YGc5q2i5bel5L2c5oiW5oGQ5oWM77yIcGFu
+aWPvvInjgIINCj4gKw0KPiAr5YWz5LqO5a6e546w6L+Z5Liq5Zue6LCD5Ye95pWw55qE6amx5Yqo
+56iL5bqP55qE5L6L5a2Q77yM5Y+C6KeB56ysM+iKguOAguaIluiAheWcqOesrDIuNOiKgumYheiv
+u+i/meS4qkFQSQ0KPiAr55qE5pu05aSa5paH5qGj44CCDQo+ICsNCj4gKw0KPiAr4oCc566A5Y2V
+4oCdRU3nmoTms6jlhowNCj4gK35+fn5+fn5+fn5+fn5+fn4NCj4gKw0KPiAr4oCc566A5Y2V4oCd
+RU3mmK/nlKjmoYbmnrbnmoTovoXliqnlh73mlbBjcHVmcmVxX3JlZ2lzdGVyX2VtX3dpdGhfb3Bw
+KCnms6jlhoznmoTjgILlroPlrp7njrDkuoYNCj4gK+S4gOS4quWSjOS7peS4i+aVsOWtpuWFrOW8
+j+e0p+WvhuebuOWFs+eahOWKn+eOh+aooeWeizo6DQo+ICsNCj4gKyAgICAgICBQb3dlciA9IEMg
+KiBWXjIgKiBmDQo+ICsNCj4gK+S9v+eUqOi/meenjeaWueazleazqOWGjOeahEVN5Y+v6IO95peg
+5rOV5q2j56Gu5Y+N5pig55yf5a6e6K6+5aSH55qE54mp55CG54m55oCn77yM5L6L5aaC5b2T6Z2Z
+5oCB5Yqf546HDQo+ICvvvIjms4TmvI/vvInlvojph43opoHml7bjgIINCj4gKw0KPiArDQo+ICsy
+LjMg6K6/6Zeu5oCn6IO95Z+fDQo+ICteXl5eXl5eXl5eXl5eXg0KPiArDQo+ICvmnInkuKTkuKpB
+UEnlh73mlbDmj5Dkvpvlr7nog73ph4/mqKHlnovnmoTorr/pl67jgIJlbV9jcHVfZ2V0KCnku6VD
+UFUgaWTkuLrlj4LmlbDvvIxlbV9wZF9nZXQoKQ0KPiAr5Lul6K6+5aSH5oyH6ZKI5Li65Y+C5pWw
+44CC5L2/55So5ZOq5Liq5o6l5Y+j5Y+W5Yaz5LqO5a2Q57O757uf77yM5L2G5a+55LqOQ1BV6K6+
+5aSH5p2l6K+077yM6L+Z5Lik5Liq5Ye95pWw6YO96L+UDQo+ICvlm57nm7jlkIznmoTmgKfog73l
+n5/jgIINCj4gKw0KPiAr5a+5Q1BV55qE6IO96YeP5qih5Z6L5oSf5YW06Laj55qE5a2Q57O757uf
+5Y+v5Lul6YCa6L+HZW1fY3B1X2dldCgpIEFQSeajgOe0ouWug+OAguWcqOWIm+W7uuaAp+iDveWf
+n+aXtg0KPiAr5YiG6YWN5LiA5qyh6IO96YeP5qih5Z6L6KGo77yM5a6D5L+d5a2Y5Zyo5YaF5a2Y
+5Lit5LiN6KKr5L+u5pS544CCDQo+ICsNCj4gK+S4gOS4quaAp+iDveWfn+aJgOa2iOiAl+eahOiD
+vemHj+WPr+S7peS9v+eUqGVtX2NwdV9lbmVyZ3koKSBBUEnmnaXkvLDnrpfjgILor6XkvLDnrpfl
+gYflrppDUFXorr7lpIcNCj4gK+S9v+eUqOeahENQVWZyZXHnm5HnrqHlmajmmK9zY2hlZHV0aWzj
+gILlvZPliY3or6XorqHnrpfkuI3og73mj5Dkvpvnu5nlhbblroPnsbvlnovnmoTorr7lpIfjgIIN
+Cj4gKw0KPiAr5YWz5LqO5LiK6L+wQVBJ55qE5pu05aSa57uG6IqC5Y+v5Lul5ZyoIGBgPGxpbnV4
+L2VuZXJneV9tb2RlbC5oPmBgIOaIluesrDIuNOiKguS4reaJvuWIsOOAgg0KPiArDQo+ICsNCj4g
+KzIuNCBBUEnnmoTnu4boioLmj4/ov7ANCj4gK15eXl5eXl5eXl5eXl5eXl5eDQo+ICvlj4Lop4Eg
+aW5jbHVkZS9saW51eC9lbmVyZ3lfbW9kZWwuaCDlkowga2VybmVsL3Bvd2VyL2VuZXJneV9tb2Rl
+bC5jIOeahGtlcm5lbCBkb2PjgIINCj4gKw0KPiArMy4g6amx5Yqo56S65L6LDQo+ICstLS0tLS0t
+LS0tLQ0KPiArDQo+ICtDUFVGcmVx5qGG5p625pSv5oyB5LiT55So55qE5Zue6LCD5Ye95pWw77yM
+55So5LqO5Li65oyH5a6a55qEQ1BV77yI5Lus77yJ5rOo5YaMRU3vvJoNCj4gK2NwdWZyZXFfZHJp
+dmVyOjpyZWdpc3Rlcl9lbSgp44CC6L+Z5Liq5Zue6LCD5b+F6aG75Li65q+P5Liq54m55a6a55qE
+6amx5Yqo56iL5bqP5q2j56Gu5a6e546w77yMDQo+ICvlm6DkuLrmoYbmnrbkvJrlnKjorr7nva7o
+v4fnqIvkuK3pgILml7blnLDosIPnlKjlroPjgILmnKzoioLmj5DkvpvkuobkuIDkuKrnroDljZXn
+moTkvovlrZDvvIzlsZXnpLpDUFVGcmVx6amx5YqoDQo+ICvlnKjog73ph4/mqKHlnovmoYbmnrbk
+uK3kvb/nlKjvvIjlgYfnmoTvvInigJxmb2/igJ3ljY/orq7ms6jlhozmgKfog73ln5/jgILor6Xp
+qbHliqjlrp7njrDkuobkuIDkuKplc3RfcG93ZXIoKQ0KPiAr5Ye95pWw5o+Q5L6b57uZRU3moYbm
+nrY6Og0KPiArDQo+ICsgIC0+IGRyaXZlcnMvY3B1ZnJlcS9mb29fY3B1ZnJlcS5jDQo+ICsNCj4g
+KyAgMDEgICBzdGF0aWMgaW50IGVzdF9wb3dlcih1bnNpZ25lZCBsb25nICptVywgdW5zaWduZWQg
+bG9uZyAqS0h6LA0KPiArICAwMiAgICAgICAgICAgICAgICAgICBzdHJ1Y3QgZGV2aWNlICpkZXYp
+DQo+ICsgIDAzICAgew0KPiArICAwNCAgICAgICAgICAgbG9uZyBmcmVxLCBwb3dlcjsNCj4gKyAg
+MDUNCj4gKyAgMDYgICAgICAgICAgIC8qIOS9v+eUqOKAnGZvb+KAneWNj+iuruiuvue9rumikeeO
+h+S4iumZkCAqLw0KPiArICAwNyAgICAgICAgICAgZnJlcSA9IGZvb19nZXRfZnJlcV9jZWlsKGRl
+diwgKktIeik7DQo+ICsgIDA4ICAgICAgICAgICBpZiAoZnJlcSA8IDApOw0KPiArICAwOSAgICAg
+ICAgICAgICAgICAgICByZXR1cm4gZnJlcTsNCj4gKyAgMTANCj4gKyAgMTEgICAgICAgICAgIC8q
+IOS8sOeul+ebuOWFs+mikeeOh+S4i+iuvuWkh+eahOWKn+eOh+aIkOacrCAqLw0KPiArICAxMiAg
+ICAgICAgICAgcG93ZXIgPSBmb29fZXN0aW1hdGVfcG93ZXIoZGV2LCBmcmVxKTsNCj4gKyAgMTMg
+ICAgICAgICAgIGlmIChwb3dlciA8IDApOw0KPiArICAxNCAgICAgICAgICAgICAgICAgICByZXR1
+cm4gcG93ZXI7DQo+ICsgIDE1DQo+ICsgIDE2ICAgICAgICAgICAvKiDlsIbov5nkupvlgLzov5Tl
+m57nu5lFTeahhuaetiAqLw0KPiArICAxNyAgICAgICAgICAgKm1XID0gcG93ZXI7DQo+ICsgIDE4
+ICAgICAgICAgICAqS0h6ID0gZnJlcTsNCj4gKyAgMTkNCj4gKyAgMjAgICAgICAgICAgIHJldHVy
+biAwOw0KPiArICAyMSAgIH0NCj4gKyAgMjINCj4gKyAgMjMgICBzdGF0aWMgdm9pZCBmb29fY3B1
+ZnJlcV9yZWdpc3Rlcl9lbShzdHJ1Y3QgY3B1ZnJlcV9wb2xpY3kgKnBvbGljeSkNCj4gKyAgMjQg
+ICB7DQo+ICsgIDI1ICAgICAgICAgICBzdHJ1Y3QgZW1fZGF0YV9jYWxsYmFjayBlbV9jYiA9IEVN
+X0RBVEFfQ0IoZXN0X3Bvd2VyKTsNCj4gKyAgMjYgICAgICAgICAgIHN0cnVjdCBkZXZpY2UgKmNw
+dV9kZXY7DQo+ICsgIDI3ICAgICAgICAgICBpbnQgbnJfb3BwOw0KPiArICAyOA0KPiArICAyOSAg
+ICAgICAgICAgY3B1X2RldiA9IGdldF9jcHVfZGV2aWNlKGNwdW1hc2tfZmlyc3QocG9saWN5LT5j
+cHVzKSk7DQo+ICsgIDMwDQo+ICsgIDMxICAgICAgICAgICAvKiDmn6Xmib7or6XnrZbnlaXmlK/m
+jIHnmoRPUFDmlbDph48gKi8NCj4gKyAgMzIgICAgICAgICAgIG5yX29wcCA9IGZvb19nZXRfbnJf
+b3BwKHBvbGljeSk7DQo+ICsgIDMzDQo+ICsgIDM0ICAgICAgICAgICAvKiDlubbms6jlhozmlrDn
+moTmgKfog73ln58gKi8NCj4gKyAgMzUgICAgICAgICAgIGVtX2Rldl9yZWdpc3Rlcl9wZXJmX2Rv
+bWFpbihjcHVfZGV2LCBucl9vcHAsICZlbV9jYiwgcG9saWN5LT5jcHVzLA0KPiArICAzNiAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHRydWUpOw0KPiArICAzNyAgIH0NCj4g
+KyAgMzgNCj4gKyAgMzkgICBzdGF0aWMgc3RydWN0IGNwdWZyZXFfZHJpdmVyIGZvb19jcHVmcmVx
+X2RyaXZlciA9IHsNCj4gKyAgNDAgICAgICAgICAgIC5yZWdpc3Rlcl9lbSA9IGZvb19jcHVmcmVx
+X3JlZ2lzdGVyX2VtLA0KPiArICA0MSAgIH07DQo+IGRpZmYgLS1naXQgYS9Eb2N1bWVudGF0aW9u
+L3RyYW5zbGF0aW9ucy96aF9DTi9wb3dlci9pbmRleC5yc3QgYi9Eb2N1bWVudGF0aW9uL3RyYW5z
+bGF0aW9ucy96aF9DTi9wb3dlci9pbmRleC5yc3QNCj4gaW5kZXggYWQ4MGE5ZTgwYjdjLi5iYzU0
+OTgzYmE1MTUgMTAwNjQ0DQo+IC0tLSBhL0RvY3VtZW50YXRpb24vdHJhbnNsYXRpb25zL3poX0NO
+L3Bvd2VyL2luZGV4LnJzdA0KPiArKysgYi9Eb2N1bWVudGF0aW9uL3RyYW5zbGF0aW9ucy96aF9D
+Ti9wb3dlci9pbmRleC5yc3QNCj4gQEAgLTE0LDYgKzE0LDcgQEANCj4gIC4uIHRvY3RyZWU6Og0K
+PiAgICAgIDptYXhkZXB0aDogMQ0KPg0KPiArICAgIGVuZXJneS1tb2RlbA0KPiAgICAgIG9wcA0K
+Pg0KPiAgVE9ET0xpc3Q6DQo+IEBAIC0yMiw3ICsyMyw2IEBAIFRPRE9MaXN0Og0KPiAgICAgICog
+YmFzaWMtcG0tZGVidWdnaW5nDQo+ICAgICAgKiBjaGFyZ2VyLW1hbmFnZXINCj4gICAgICAqIGRy
+aXZlcnMtdGVzdGluZw0KPiAtICAgICogZW5lcmd5LW1vZGVsDQo+ICAgICAgKiBmcmVlemluZy1v
+Zi10YXNrcw0KPiAgICAgICogcGNpDQo+ICAgICAgKiBwbV9xb3NfaW50ZXJmYWNlDQo+IC0tDQo+
+IDIuMTcuMQ0KPg0K
