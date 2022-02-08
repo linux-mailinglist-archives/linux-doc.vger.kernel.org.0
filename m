@@ -2,143 +2,403 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 5D1EA4AD69E
-	for <lists+linux-doc@lfdr.de>; Tue,  8 Feb 2022 12:28:32 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 854334AD684
+	for <lists+linux-doc@lfdr.de>; Tue,  8 Feb 2022 12:26:57 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1355684AbiBHL1I (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 8 Feb 2022 06:27:08 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:46766 "EHLO
+        id S1348398AbiBHL00 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 8 Feb 2022 06:26:26 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:54088 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S232734AbiBHJug (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 8 Feb 2022 04:50:36 -0500
-Received: from mx0a-001b2d01.pphosted.com (mx0a-001b2d01.pphosted.com [148.163.156.1])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id B518DC03FEC0;
-        Tue,  8 Feb 2022 01:50:34 -0800 (PST)
-Received: from pps.filterd (m0098399.ppops.net [127.0.0.1])
-        by mx0a-001b2d01.pphosted.com (8.16.1.2/8.16.1.2) with SMTP id 2187AnVY025367;
-        Tue, 8 Feb 2022 09:50:34 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ibm.com; h=message-id : date :
- mime-version : subject : to : cc : references : from : in-reply-to :
- content-type : content-transfer-encoding; s=pp1;
- bh=bvBPatwKzWC6UPWT0saj5Bx5S7Zm4GijtmNgr01Gu+w=;
- b=bOinkWdr0iRLCZNiy3P0TeP9KcXjnoCD5+sHS09GFwMNlVx49w/8QH4018RSEe5DzvDN
- bK1f6OuahwIM7s8tfS/1l5uDe56eNK9+4Wz2tsJAZhn86I4EBWcff3zY1HOREhbSyMsI
- wk/bawwQjghhpT2xIwPQnETBgEukD40c4MC+DhJw7QqtpGcT9uyLSP7mO7DUfxZfARNL
- tcrvbxbG0nXVPU1HFp34gMP3ZmoDEC5GI7D9uO6+1tgoeWEhqTQWAydG6VWrUfmfeYVG
- zi1Ug/YuDinYaoeT1azUbPfbXMH6/teXvPhmr4T3sOifn+N3FG2nTYBeKNJfAcQ3B1uK 7g== 
-Received: from pps.reinject (localhost [127.0.0.1])
-        by mx0a-001b2d01.pphosted.com with ESMTP id 3e22trd08e-1
-        (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
-        Tue, 08 Feb 2022 09:50:34 +0000
-Received: from m0098399.ppops.net (m0098399.ppops.net [127.0.0.1])
-        by pps.reinject (8.16.0.43/8.16.0.43) with SMTP id 2189i44p027111;
-        Tue, 8 Feb 2022 09:50:33 GMT
-Received: from ppma05fra.de.ibm.com (6c.4a.5195.ip4.static.sl-reverse.com [149.81.74.108])
-        by mx0a-001b2d01.pphosted.com with ESMTP id 3e22trd076-1
-        (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
-        Tue, 08 Feb 2022 09:50:33 +0000
-Received: from pps.filterd (ppma05fra.de.ibm.com [127.0.0.1])
-        by ppma05fra.de.ibm.com (8.16.1.2/8.16.1.2) with SMTP id 2189j9an003440;
-        Tue, 8 Feb 2022 09:50:28 GMT
-Received: from b06avi18626390.portsmouth.uk.ibm.com (b06avi18626390.portsmouth.uk.ibm.com [9.149.26.192])
-        by ppma05fra.de.ibm.com with ESMTP id 3e1gva36ks-1
-        (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
-        Tue, 08 Feb 2022 09:50:28 +0000
-Received: from d06av24.portsmouth.uk.ibm.com (d06av24.portsmouth.uk.ibm.com [9.149.105.60])
-        by b06avi18626390.portsmouth.uk.ibm.com (8.14.9/8.14.9/NCO v10.0) with ESMTP id 2189eK3g49873392
-        (version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
-        Tue, 8 Feb 2022 09:40:20 GMT
-Received: from d06av24.portsmouth.uk.ibm.com (unknown [127.0.0.1])
-        by IMSVA (Postfix) with ESMTP id ED06F42056;
-        Tue,  8 Feb 2022 09:50:24 +0000 (GMT)
-Received: from d06av24.portsmouth.uk.ibm.com (unknown [127.0.0.1])
-        by IMSVA (Postfix) with ESMTP id 57B8842049;
-        Tue,  8 Feb 2022 09:50:24 +0000 (GMT)
-Received: from [9.145.150.231] (unknown [9.145.150.231])
-        by d06av24.portsmouth.uk.ibm.com (Postfix) with ESMTP;
-        Tue,  8 Feb 2022 09:50:24 +0000 (GMT)
-Message-ID: <f61b1d7e-37bb-6072-a855-e7fc9ed72dfb@linux.ibm.com>
-Date:   Tue, 8 Feb 2022 10:50:23 +0100
+        with ESMTP id S243663AbiBHKVV (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 8 Feb 2022 05:21:21 -0500
+X-Greylist: delayed 611 seconds by postgrey-1.37 at lindbergh.monkeyblade.net; Tue, 08 Feb 2022 02:21:19 PST
+Received: from vulcan.natalenko.name (vulcan.natalenko.name [IPv6:2001:19f0:6c00:8846:5400:ff:fe0c:dfa0])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 6E826C03FEC1
+        for <linux-doc@vger.kernel.org>; Tue,  8 Feb 2022 02:21:19 -0800 (PST)
+Received: from spock.localnet (unknown [83.148.33.151])
+        (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+         key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+        (No client certificate requested)
+        by vulcan.natalenko.name (Postfix) with ESMTPSA id BA020DB8DE1;
+        Tue,  8 Feb 2022 11:11:03 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=natalenko.name;
+        s=dkim-20170712; t=1644315064;
+        h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+         to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+         content-transfer-encoding:content-transfer-encoding:
+         in-reply-to:in-reply-to:references:references;
+        bh=lUKq3aS/JCO34HXAzMjjQ0LeWrbNhk6ZHI+ox5ouTPA=;
+        b=kv2BPUKVvaAqoPxmRbZDjV1tniN1Z+GuhaqboeFUxuXlkLYuWmH32MdiIYQWNlu/whqMKM
+        ofZJjRLI5IKpPEx7p1ug0U2Q0dd4+Souq/FY5QoN7WeoiU4FHa7BXfMcnhJkBhNzMz+F7d
+        GDXIauPhUa4rOyCqaFwfr8sm61WFz/s=
+From:   Oleksandr Natalenko <oleksandr@natalenko.name>
+To:     Andrew Morton <akpm@linux-foundation.org>,
+        Johannes Weiner <hannes@cmpxchg.org>,
+        Mel Gorman <mgorman@suse.de>, Michal Hocko <mhocko@kernel.org>,
+        Yu Zhao <yuzhao@google.com>
+Cc:     Andi Kleen <ak@linux.intel.com>,
+        Aneesh Kumar <aneesh.kumar@linux.ibm.com>,
+        Barry Song <21cnbao@gmail.com>,
+        Catalin Marinas <catalin.marinas@arm.com>,
+        Dave Hansen <dave.hansen@linux.intel.com>,
+        Hillf Danton <hdanton@sina.com>, Jens Axboe <axboe@kernel.dk>,
+        Jesse Barnes <jsbarnes@google.com>,
+        Jonathan Corbet <corbet@lwn.net>,
+        Linus Torvalds <torvalds@linux-foundation.org>,
+        Matthew Wilcox <willy@infradead.org>,
+        Michael Larabel <Michael@michaellarabel.com>,
+        Mike Rapoport <rppt@kernel.org>,
+        Rik van Riel <riel@surriel.com>,
+        Vlastimil Babka <vbabka@suse.cz>,
+        Will Deacon <will@kernel.org>,
+        Ying Huang <ying.huang@intel.com>,
+        linux-arm-kernel@lists.infradead.org, linux-doc@vger.kernel.org,
+        linux-kernel@vger.kernel.org, linux-mm@kvack.org,
+        page-reclaim@google.com, x86@kernel.org,
+        Yu Zhao <yuzhao@google.com>
+Subject: Re: [PATCH v7 00/12] Multigenerational LRU Framework
+Date:   Tue, 08 Feb 2022 11:11:02 +0100
+Message-ID: <4714886.31r3eYUQgx@natalenko.name>
+In-Reply-To: <20220208081902.3550911-1-yuzhao@google.com>
+References: <20220208081902.3550911-1-yuzhao@google.com>
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.5.0
-Subject: Re: [PATCH v2 09/11] KVM: s390: Add capability for storage key
- extension of MEM_OP IOCTL
-Content-Language: en-US
-To:     Janis Schoetterl-Glausch <scgl@linux.ibm.com>,
-        Christian Borntraeger <borntraeger@linux.ibm.com>,
-        Heiko Carstens <hca@linux.ibm.com>
-Cc:     Alexander Gordeev <agordeev@linux.ibm.com>,
-        Claudio Imbrenda <imbrenda@linux.ibm.com>,
-        David Hildenbrand <david@redhat.com>,
-        Jonathan Corbet <corbet@lwn.net>, kvm@vger.kernel.org,
-        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
-        linux-s390@vger.kernel.org, Paolo Bonzini <pbonzini@redhat.com>,
-        Sven Schnelle <svens@linux.ibm.com>,
-        Vasily Gorbik <gor@linux.ibm.com>
-References: <20220207165930.1608621-1-scgl@linux.ibm.com>
- <20220207165930.1608621-10-scgl@linux.ibm.com>
-From:   Janosch Frank <frankja@linux.ibm.com>
-In-Reply-To: <20220207165930.1608621-10-scgl@linux.ibm.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-TM-AS-GCONF: 00
-X-Proofpoint-ORIG-GUID: 5nqXMOn9Czai8q5P-LBtZGn6ua4G3OoO
-X-Proofpoint-GUID: IhxVdyjuoACnrXZ5D1cEB6OGbHYWI6fy
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.205,Aquarius:18.0.816,Hydra:6.0.425,FMLib:17.11.62.513
- definitions=2022-02-08_02,2022-02-07_02,2021-12-02_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 adultscore=0 mlxlogscore=999
- impostorscore=0 phishscore=0 suspectscore=0 malwarescore=0 mlxscore=0
- spamscore=0 priorityscore=1501 clxscore=1015 bulkscore=0
- lowpriorityscore=0 classifier=spam adjust=0 reason=mlx scancount=1
- engine=8.12.0-2201110000 definitions=main-2202080054
-X-Spam-Status: No, score=-2.0 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_EF,NICE_REPLY_A,RCVD_IN_MSPIKE_H5,
-        RCVD_IN_MSPIKE_WL,SPF_HELO_NONE,SPF_PASS,T_SCC_BODY_TEXT_LINE
-        autolearn=ham autolearn_force=no version=3.4.6
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="iso-8859-1"
+X-Spam-Status: No, score=-4.4 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_MED,SPF_HELO_NONE,
+        SPF_PASS,T_SCC_BODY_TEXT_LINE autolearn=unavailable autolearn_force=no
+        version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On 2/7/22 17:59, Janis Schoetterl-Glausch wrote:
-> Availability of the KVM_CAP_S390_MEM_OP_EXTENSION capability signals that:
-> * The vcpu MEM_OP IOCTL supports storage key checking.
-> * The vm MEM_OP IOCTL exists.
+Hello.
 
-Reviewed-by: Janosch Frank <frankja@linux.ibm.com>
+On =FAter=FD 8. =FAnora 2022 9:18:50 CET Yu Zhao wrote:
+> What's new
+> =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+> 1) Addressed all the comments received on the mailing list and in the
+>    meeting with the stakeholders (will note on individual patches).
+> 2) Measured the performance improvements for each patch between 5-8
+>    (reported in the commit messages).
+>=20
+> TLDR
+> =3D=3D=3D=3D
+> The current page reclaim is too expensive in terms of CPU usage and it
+> often makes poor choices about what to evict. This patchset offers an
+> alternative solution that is performant, versatile and straightforward.
+>=20
+> Patchset overview
+> =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+> The design and implementation overview was moved to patch 12 so that
+> people can finish reading this cover letter.
+>=20
+> 1. mm: x86, arm64: add arch_has_hw_pte_young()
+> 2. mm: x86: add CONFIG_ARCH_HAS_NONLEAF_PMD_YOUNG
+> Using hardware optimizations when trying to clear the accessed bit in
+> many PTEs.
+>=20
+> 3. mm/vmscan.c: refactor shrink_node()
+> A minor refactor.
+>=20
+> 4. mm: multigenerational LRU: groundwork
+> Adding the basic data structure and the functions that insert/remove
+> pages to/from the multigenerational LRU (MGLRU) lists.
+>=20
+> 5. mm: multigenerational LRU: minimal implementation
+> A minimal (functional) implementation without any optimizations.
+>=20
+> 6. mm: multigenerational LRU: exploit locality in rmap
+> Improving the efficiency when using the rmap.
+>=20
+> 7. mm: multigenerational LRU: support page table walks
+> Adding the (optional) page table scanning.
+>=20
+> 8. mm: multigenerational LRU: optimize multiple memcgs
+> Optimizing the overall performance for multiple memcgs running mixed
+> types of workloads.
+>=20
+> 9. mm: multigenerational LRU: runtime switch
+> Adding a runtime switch to enable or disable MGLRU.
+>=20
+> 10. mm: multigenerational LRU: thrashing prevention
+> 11. mm: multigenerational LRU: debugfs interface
+> Providing userspace with additional features like thrashing prevention,
+> working set estimation and proactive reclaim.
+>=20
+> 12. mm: multigenerational LRU: documentation
+> Adding a design doc and an admin guide.
+>=20
+> Benchmark results
+> =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+> Independent lab results
+> -----------------------
+> Based on the popularity of searches [01] and the memory usage in
+> Google's public cloud, the most popular open-source memory-hungry
+> applications, in alphabetical order, are:
+>       Apache Cassandra      Memcached
+>       Apache Hadoop         MongoDB
+>       Apache Spark          PostgreSQL
+>       MariaDB (MySQL)       Redis
+>=20
+> An independent lab evaluated MGLRU with the most widely used benchmark
+> suites for the above applications. They posted 960 data points along
+> with kernel metrics and perf profiles collected over more than 500
+> hours of total benchmark time. Their final reports show that, with 95%
+> confidence intervals (CIs), the above applications all performed
+> significantly better for at least part of their benchmark matrices.
+>=20
+> On 5.14:
+> 1. Apache Spark [02] took 95% CIs [9.28, 11.19]% and [12.20, 14.93]%
+>    less wall time to sort three billion random integers, respectively,
+>    under the medium- and the high-concurrency conditions, when
+>    overcommitting memory. There were no statistically significant
+>    changes in wall time for the rest of the benchmark matrix.
+> 2. MariaDB [03] achieved 95% CIs [5.24, 10.71]% and [20.22, 25.97]%
+>    more transactions per minute (TPM), respectively, under the medium-
+>    and the high-concurrency conditions, when overcommitting memory.
+>    There were no statistically significant changes in TPM for the rest
+>    of the benchmark matrix.
+> 3. Memcached [04] achieved 95% CIs [23.54, 32.25]%, [20.76, 41.61]%
+>    and [21.59, 30.02]% more operations per second (OPS), respectively,
+>    for sequential access, random access and Gaussian (distribution)
+>    access, when THP=3Dalways; 95% CIs [13.85, 15.97]% and
+>    [23.94, 29.92]% more OPS, respectively, for random access and
+>    Gaussian access, when THP=3Dnever. There were no statistically
+>    significant changes in OPS for the rest of the benchmark matrix.
+> 4. MongoDB [05] achieved 95% CIs [2.23, 3.44]%, [6.97, 9.73]% and
+>    [2.16, 3.55]% more operations per second (OPS), respectively, for
+>    exponential (distribution) access, random access and Zipfian
+>    (distribution) access, when underutilizing memory; 95% CIs
+>    [8.83, 10.03]%, [21.12, 23.14]% and [5.53, 6.46]% more OPS,
+>    respectively, for exponential access, random access and Zipfian
+>    access, when overcommitting memory.
+>=20
+> On 5.15:
+> 5. Apache Cassandra [06] achieved 95% CIs [1.06, 4.10]%, [1.94, 5.43]%
+>    and [4.11, 7.50]% more operations per second (OPS), respectively,
+>    for exponential (distribution) access, random access and Zipfian
+>    (distribution) access, when swap was off; 95% CIs [0.50, 2.60]%,
+>    [6.51, 8.77]% and [3.29, 6.75]% more OPS, respectively, for
+>    exponential access, random access and Zipfian access, when swap was
+>    on.
+> 6. Apache Hadoop [07] took 95% CIs [5.31, 9.69]% and [2.02, 7.86]%
+>    less average wall time to finish twelve parallel TeraSort jobs,
+>    respectively, under the medium- and the high-concurrency
+>    conditions, when swap was on. There were no statistically
+>    significant changes in average wall time for the rest of the
+>    benchmark matrix.
+> 7. PostgreSQL [08] achieved 95% CI [1.75, 6.42]% more transactions per
+>    minute (TPM) under the high-concurrency condition, when swap was
+>    off; 95% CIs [12.82, 18.69]% and [22.70, 46.86]% more TPM,
+>    respectively, under the medium- and the high-concurrency
+>    conditions, when swap was on. There were no statistically
+>    significant changes in TPM for the rest of the benchmark matrix.
+> 8. Redis [09] achieved 95% CIs [0.58, 5.94]%, [6.55, 14.58]% and
+>    [11.47, 19.36]% more total operations per second (OPS),
+>    respectively, for sequential access, random access and Gaussian
+>    (distribution) access, when THP=3Dalways; 95% CIs [1.27, 3.54]%,
+>    [10.11, 14.81]% and [8.75, 13.64]% more total OPS, respectively,
+>    for sequential access, random access and Gaussian access, when
+>    THP=3Dnever.
+>=20
+> Our lab results
+> ---------------
+> To supplement the above results, we ran the following benchmark suites
+> on 5.16-rc7 and found no regressions [10]. (These synthetic benchmarks
+> are popular among MM developers, but we prefer large-scale A/B
+> experiments to validate improvements.)
+>       fs_fio_bench_hdd_mq      pft
+>       fs_lmbench               pgsql-hammerdb
+>       fs_parallelio            redis
+>       fs_postmark              stream
+>       hackbench                sysbenchthread
+>       kernbench                tpcc_spark
+>       memcached                unixbench
+>       multichase               vm-scalability
+>       mutilate                 will-it-scale
+>       nginx
+>=20
+> [01] https://trends.google.com
+> [02] https://lore.kernel.org/lkml/20211102002002.92051-1-bot@edi.works/
+> [03] https://lore.kernel.org/lkml/20211009054315.47073-1-bot@edi.works/
+> [04] https://lore.kernel.org/lkml/20211021194103.65648-1-bot@edi.works/
+> [05] https://lore.kernel.org/lkml/20211109021346.50266-1-bot@edi.works/
+> [06] https://lore.kernel.org/lkml/20211202062806.80365-1-bot@edi.works/
+> [07] https://lore.kernel.org/lkml/20211209072416.33606-1-bot@edi.works/
+> [08] https://lore.kernel.org/lkml/20211218071041.24077-1-bot@edi.works/
+> [09] https://lore.kernel.org/lkml/20211122053248.57311-1-bot@edi.works/
+> [10] https://lore.kernel.org/lkml/20220104202247.2903702-1-yuzhao@google.=
+com/
+>=20
+> Read-world applications
+> =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+> Third-party testimonials
+> ------------------------
+> Konstantin wrote [11]:
+>    I have Archlinux with 8G RAM + zswap + swap. While developing, I
+>    have lots of apps opened such as multiple LSP-servers for different
+>    langs, chats, two browsers, etc... Usually, my system gets quickly
+>    to a point of SWAP-storms, where I have to kill LSP-servers,
+>    restart browsers to free memory, etc, otherwise the system lags
+>    heavily and is barely usable.
+>   =20
+>    1.5 day ago I migrated from 5.11.15 kernel to 5.12 + the LRU
+>    patchset, and I started up by opening lots of apps to create memory
+>    pressure, and worked for a day like this. Till now I had *not a
+>    single SWAP-storm*, and mind you I got 3.4G in SWAP. I was never
+>    getting to the point of 3G in SWAP before without a single
+>    SWAP-storm.
+>=20
+> An anonymous user wrote [12]:
+>    Using that v5 for some time and confirm that difference under heavy
+>    load and memory pressure is significant.
+>=20
+> Shuang wrote [13]:
+>    With the MGLRU, fio achieved 95% CIs [38.95, 40.26]%, [4.12, 6.64]%
+>    and [9.26, 10.36]% higher throughput, respectively, for random
+>    access, Zipfian (distribution) access and Gaussian (distribution)
+>    access, when the average number of jobs per CPU is 1; 95% CIs
+>    [42.32, 49.15]%, [9.44, 9.89]% and [20.99, 22.86]% higher throughput,
+>    respectively, for random access, Zipfian access and Gaussian access,
+>    when the average number of jobs per CPU is 2.
+>=20
+> Daniel wrote [14]:
+>    With memcached allocating ~100GB of byte-addressable Optante,
+>    performance improvement in terms of throughput (measured as queries
+>    per second) was about 10% for a series of workloads.
+>=20
+> Large-scale deployments
+> -----------------------
+> The downstream kernels that have been using MGLRU include:
+> 1. Android ARCVM [15]
+> 2. Arch Linux Zen [16]
+> 3. Chrome OS [17]
+> 4. Liquorix [18]
+> 5. post-factum [19]
+> 6. XanMod [20]
+>=20
+> We've rolled out MGLRU to tens of millions of Chrome OS users and
+> about a million Android users. Google's fleetwide profiling [21] shows
+> an overall 40% decrease in kswapd CPU usage, in addition to
+> improvements in other UX metrics, e.g., an 85% decrease in the number
+> of low-memory kills at the 75th percentile and an 18% decrease in
+> rendering latency at the 50th percentile.
+>=20
+> [11] https://lore.kernel.org/lkml/140226722f2032c86301fbd326d91baefe3d7d2=
+3.camel@yandex.ru/
+> [12] https://phoronix.com/forums/forum/software/general-linux-open-source=
+/1301258-mglru-is-a-very-enticing-enhancement-for-linux-in-2022?p=3D1301275=
+#post1301275
+> [13] https://lore.kernel.org/lkml/20220105024423.26409-1-szhai2@cs.roches=
+ter.edu/
+> [14] https://lore.kernel.org/linux-mm/CA+4-3vksGvKd18FgRinxhqHetBS1hQekJE=
+2gwco8Ja-bJWKtFw@mail.gmail.com/
+> [15] https://chromium.googlesource.com/chromiumos/third_party/kernel
+> [16] https://archlinux.org
+> [17] https://chromium.org
+> [18] https://liquorix.net
+> [19] https://gitlab.com/post-factum/pf-kernel
+> [20] https://xanmod.org
+> [21] https://research.google/pubs/pub44271/
+>=20
+> Summery
+> =3D=3D=3D=3D=3D=3D=3D
+> The facts are:
+> 1. The independent lab results and the real-world applications
+>    indicate substantial improvements; there are no known regressions.
+> 2. Thrashing prevention, working set estimation and proactive reclaim
+>    work out of the box; there are no equivalent solutions.
+> 3. There is a lot of new code; nobody has demonstrated smaller changes
+>    with similar effects.
+>=20
+> Our options, accordingly, are:
+> 1. Given the amount of evidence, the reported improvements will likely
+>    materialize for a wide range of workloads.
+> 2. Gauging the interest from the past discussions [22][23][24], the
+>    new features will likely be put to use for both personal computers
+>    and data centers.
+> 3. Based on Google's track record, the new code will likely be well
+>    maintained in the long term. It'd be more difficult if not
+>    impossible to achieve similar effects on top of the existing
+>    design.
+>=20
+> [22] https://lore.kernel.org/lkml/20201005081313.732745-1-andrea.righi@ca=
+nonical.com/
+> [23] https://lore.kernel.org/lkml/20210716081449.22187-1-sj38.park@gmail.=
+com/
+> [24] https://lore.kernel.org/lkml/20211130201652.2218636d@mail.inbox.lv/
+>=20
+> Yu Zhao (12):
+>   mm: x86, arm64: add arch_has_hw_pte_young()
+>   mm: x86: add CONFIG_ARCH_HAS_NONLEAF_PMD_YOUNG
+>   mm/vmscan.c: refactor shrink_node()
+>   mm: multigenerational LRU: groundwork
+>   mm: multigenerational LRU: minimal implementation
+>   mm: multigenerational LRU: exploit locality in rmap
+>   mm: multigenerational LRU: support page table walks
+>   mm: multigenerational LRU: optimize multiple memcgs
+>   mm: multigenerational LRU: runtime switch
+>   mm: multigenerational LRU: thrashing prevention
+>   mm: multigenerational LRU: debugfs interface
+>   mm: multigenerational LRU: documentation
+>=20
+>  Documentation/admin-guide/mm/index.rst        |    1 +
+>  Documentation/admin-guide/mm/multigen_lru.rst |  121 +
+>  Documentation/vm/index.rst                    |    1 +
+>  Documentation/vm/multigen_lru.rst             |  152 +
+>  arch/Kconfig                                  |    9 +
+>  arch/arm64/include/asm/pgtable.h              |   14 +-
+>  arch/x86/Kconfig                              |    1 +
+>  arch/x86/include/asm/pgtable.h                |    9 +-
+>  arch/x86/mm/pgtable.c                         |    5 +-
+>  fs/exec.c                                     |    2 +
+>  fs/fuse/dev.c                                 |    3 +-
+>  include/linux/cgroup.h                        |   15 +-
+>  include/linux/memcontrol.h                    |   36 +
+>  include/linux/mm.h                            |    8 +
+>  include/linux/mm_inline.h                     |  214 ++
+>  include/linux/mm_types.h                      |   78 +
+>  include/linux/mmzone.h                        |  182 ++
+>  include/linux/nodemask.h                      |    1 +
+>  include/linux/page-flags-layout.h             |   19 +-
+>  include/linux/page-flags.h                    |    4 +-
+>  include/linux/pgtable.h                       |   17 +-
+>  include/linux/sched.h                         |    4 +
+>  include/linux/swap.h                          |    5 +
+>  kernel/bounds.c                               |    3 +
+>  kernel/cgroup/cgroup-internal.h               |    1 -
+>  kernel/exit.c                                 |    1 +
+>  kernel/fork.c                                 |    9 +
+>  kernel/sched/core.c                           |    1 +
+>  mm/Kconfig                                    |   50 +
+>  mm/huge_memory.c                              |    3 +-
+>  mm/memcontrol.c                               |   27 +
+>  mm/memory.c                                   |   39 +-
+>  mm/mm_init.c                                  |    6 +-
+>  mm/page_alloc.c                               |    1 +
+>  mm/rmap.c                                     |    7 +
+>  mm/swap.c                                     |   55 +-
+>  mm/vmscan.c                                   | 2831 ++++++++++++++++-
+>  mm/workingset.c                               |  119 +-
+>  38 files changed, 3908 insertions(+), 146 deletions(-)
+>  create mode 100644 Documentation/admin-guide/mm/multigen_lru.rst
+>  create mode 100644 Documentation/vm/multigen_lru.rst
 
-> 
-> Signed-off-by: Janis Schoetterl-Glausch <scgl@linux.ibm.com>
-> ---
->   arch/s390/kvm/kvm-s390.c | 1 +
->   include/uapi/linux/kvm.h | 1 +
->   2 files changed, 2 insertions(+)
-> 
-> diff --git a/arch/s390/kvm/kvm-s390.c b/arch/s390/kvm/kvm-s390.c
-> index befb30923c0e..4a502cac068c 100644
-> --- a/arch/s390/kvm/kvm-s390.c
-> +++ b/arch/s390/kvm/kvm-s390.c
-> @@ -565,6 +565,7 @@ int kvm_vm_ioctl_check_extension(struct kvm *kvm, long ext)
->   	case KVM_CAP_S390_VCPU_RESETS:
->   	case KVM_CAP_SET_GUEST_DEBUG:
->   	case KVM_CAP_S390_DIAG318:
-> +	case KVM_CAP_S390_MEM_OP_EXTENSION:
->   		r = 1;
->   		break;
->   	case KVM_CAP_SET_GUEST_DEBUG2:
-> diff --git a/include/uapi/linux/kvm.h b/include/uapi/linux/kvm.h
-> index ea81132a1cb1..50ce814267b3 100644
-> --- a/include/uapi/linux/kvm.h
-> +++ b/include/uapi/linux/kvm.h
-> @@ -1140,6 +1140,7 @@ struct kvm_ppc_resize_hpt {
->   #define KVM_CAP_VM_GPA_BITS 207
->   #define KVM_CAP_XSAVE2 208
->   #define KVM_CAP_SYS_ATTRIBUTES 209
-> +#define KVM_CAP_S390_MEM_OP_EXTENSION 210
->   
->   #ifdef KVM_CAP_IRQ_ROUTING
->   
+Thanks for the new spin.
+
+Is the patch submission broken for everyone, or for me only? I see raw emai=
+ls cluttered with some garbage like =3D2D, and hence I cannot apply those n=
+either from my email client nor from lore.
+
+Probably, you've got a git repo where things can be pulled from so that we =
+do not depend on mailing systems and/or tools breaking plaintext?
+
+Thanks.
+
+=2D-=20
+Oleksandr Natalenko (post-factum)
+
 
