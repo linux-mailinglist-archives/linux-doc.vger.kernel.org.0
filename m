@@ -2,53 +2,112 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 856384ADE10
-	for <lists+linux-doc@lfdr.de>; Tue,  8 Feb 2022 17:15:55 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 2B4C44ADE3C
+	for <lists+linux-doc@lfdr.de>; Tue,  8 Feb 2022 17:23:22 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S242680AbiBHQPy (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 8 Feb 2022 11:15:54 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:47106 "EHLO
+        id S1383053AbiBHQVx (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 8 Feb 2022 11:21:53 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:50878 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S239418AbiBHQPx (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 8 Feb 2022 11:15:53 -0500
-X-Greylist: delayed 17543 seconds by postgrey-1.37 at lindbergh.monkeyblade.net; Tue, 08 Feb 2022 08:15:50 PST
-Received: from vulcan.natalenko.name (vulcan.natalenko.name [104.207.131.136])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id D7EF0C061576;
-        Tue,  8 Feb 2022 08:15:50 -0800 (PST)
-Received: from spock.localnet (unknown [83.148.33.151])
-        (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-         key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+        with ESMTP id S1381331AbiBHQVs (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 8 Feb 2022 11:21:48 -0500
+Received: from ams.source.kernel.org (ams.source.kernel.org [IPv6:2604:1380:4601:e00::1])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id AD01EC061579;
+        Tue,  8 Feb 2022 08:21:47 -0800 (PST)
+Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
+        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
         (No client certificate requested)
-        by vulcan.natalenko.name (Postfix) with ESMTPSA id 0B749DB99D7;
-        Tue,  8 Feb 2022 17:15:48 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=natalenko.name;
-        s=dkim-20170712; t=1644336948;
-        h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-         to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-         content-transfer-encoding:content-transfer-encoding:
-         in-reply-to:in-reply-to:references:references;
-        bh=beiYUnGsDRVtxVBC1NGXGzh4TXiSTexf+TKx1Nk5pm8=;
-        b=r+ez8ddTKjhSE1z57mA3aHTc9FJYVvjZwZEJaHgBYDb28KQxUEnasb2Cddd3I4CwhsWPPe
-        FV2WEyMPISklKzo3NXP65EzQTgeJkJc+RxT+8OoAd7gMZWmvNILNWrq1/2+OagQoxZ8XtT
-        lThTd853wv3mS0YnshUusKiZrhiJgyQ=
-From:   Oleksandr Natalenko <oleksandr@natalenko.name>
-To:     Eugene Shalygin <eugene.shalygin@gmail.com>
-Cc:     Denis Pauk <pauk.denis@gmail.com>,
-        Jean Delvare <jdelvare@suse.com>,
-        Guenter Roeck <linux@roeck-us.net>,
-        Jonathan Corbet <corbet@lwn.net>, linux-hwmon@vger.kernel.org,
-        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org
-Subject: Re: [PATCH] hwmon: (asus-ec-sensors) add CPU core voltage
-Date:   Tue, 08 Feb 2022 17:15:46 +0100
-Message-ID: <11918951.O9o76ZdvQC@natalenko.name>
-In-Reply-To: <20220208094244.1106312-1-eugene.shalygin@gmail.com>
-References: <20220208094244.1106312-1-eugene.shalygin@gmail.com>
-MIME-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset="UTF-8"
-X-Spam-Status: No, score=-4.4 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_MED,SPF_HELO_NONE,
-        SPF_PASS,T_SCC_BODY_TEXT_LINE,UPPERCASE_50_75 autolearn=ham
+        by ams.source.kernel.org (Postfix) with ESMTPS id 6F0FCB81920;
+        Tue,  8 Feb 2022 16:21:46 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id E2A55C36AE3;
+        Tue,  8 Feb 2022 16:21:43 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+        s=k20201202; t=1644337305;
+        bh=cUXMYwV3FsUsTmiMnq+uhwE47soE1KcN2fh5D+proTA=;
+        h=In-Reply-To:References:Date:From:To:Cc:Subject:From;
+        b=SYdXu170xBHHUjtWDtgioa8Qvsdmh617pUIz2hpTg+v6xiUUBB9OVj4a8ioygzGSP
+         5md+IpahrD5rW14xK8o5ixxtIgMCX9w5yp3ahVR5Xkp0ecGeXEWikrYFsV3WYAdPFa
+         fWZpnU0b6YOjzCvjmMfapyOY1UFOnmLynludGChjdJwdDn/ueLf7pVoF0f3VJA+hb3
+         B04vO1/hRv36Sc0EGyp5VQyCrQXaMEbYHOk6eMIm0ewlX27cUByN14msoA5tJqGFcN
+         B3CWrkbNnSd4NCxzzPk6sd/ksgmuWlhv+BkH8LYcbuBfNY1FL9hJlYse+7Rpcsfbjh
+         GvHiWrTP8wwMA==
+Received: from compute5.internal (compute5.nyi.internal [10.202.2.45])
+        by mailauth.nyi.internal (Postfix) with ESMTP id 73F7B27C005A;
+        Tue,  8 Feb 2022 11:21:42 -0500 (EST)
+Received: from imap48 ([10.202.2.98])
+  by compute5.internal (MEProxy); Tue, 08 Feb 2022 11:21:42 -0500
+X-ME-Sender: <xms:lJgCYuxKfDWChEaal5BYkheUS1FMr5Zalegy-cHkFrKbX9myLqpgvg>
+    <xme:lJgCYqQKwnJmO8SJ6Tg6BxGcGM0X_j92vMPhWjkCJvXd3vJ1c1jf8zqrtzIatfbl0
+    wSwrozruZNxZ2_yjoU>
+X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvvddrheejgdekgecutefuodetggdotefrodftvf
+    curfhrohhfihhlvgemucfhrghsthforghilhdpqfgfvfdpuffrtefokffrpgfnqfghnecu
+    uegrihhlohhuthemuceftddtnecusecvtfgvtghiphhivghnthhsucdlqddutddtmdenuc
+    fjughrpefofgggkfgjfhffhffvufgtsehttdertderredtnecuhfhrohhmpedftehnugih
+    ucfnuhhtohhmihhrshhkihdfuceolhhuthhosehkvghrnhgvlhdrohhrgheqnecuggftrf
+    grthhtvghrnheptdfhheettddvtedvtedugfeuuefhtddugedvleevleefvdetleffgfef
+    vdekgeefnecuvehluhhsthgvrhfuihiivgeptdenucfrrghrrghmpehmrghilhhfrhhomh
+    eprghnugihodhmvghsmhhtphgruhhthhhpvghrshhonhgrlhhithihqdduudeiudekheei
+    fedvqddvieefudeiiedtkedqlhhuthhopeepkhgvrhhnvghlrdhorhhgsehlihhnuhigrd
+    hluhhtohdruhhs
+X-ME-Proxy: <xmx:lJgCYgU4vjA3ZAA_WNzaYnPPRn3GmXWb2rbCJKp5lA5YpH3NxN07HQ>
+    <xmx:lJgCYkjE0eZ1DeQ4F8MK696KnkhBc29Txd5euZvkV-rECWFeXYkQBw>
+    <xmx:lJgCYgAHTVwqjBqtEu2RiC6G1dsIUiS06sRPbyV9V7iOWKDZqB1L2w>
+    <xmx:lpgCYq1Dw6pfcBEJcespJI4yxf_B2SmD0TIFNqBZNzC-qjIxaolZWzGYIFo>
+Received: by mailuser.nyi.internal (Postfix, from userid 501)
+        id D580121E0073; Tue,  8 Feb 2022 11:21:40 -0500 (EST)
+X-Mailer: MessagingEngine.com Webmail Interface
+User-Agent: Cyrus-JMAP/3.5.0-alpha0-4748-g31a5b5f50e-fm-cal2020-20220204.001-g31a5b5f5
+Mime-Version: 1.0
+Message-Id: <357664de-b089-4617-99d1-de5098953c80@www.fastmail.com>
+In-Reply-To: <YgI37n+3JfLSNQCQ@grain>
+References: <20220130211838.8382-1-rick.p.edgecombe@intel.com>
+ <YgAWVSGQg8FPCeba@kernel.org> <YgDIIpCm3UITk896@lisas.de>
+ <8f96c2a6-9c03-f97a-df52-73ffc1d87957@intel.com>
+ <YgI1A0CtfmT7GMIp@kernel.org> <YgI37n+3JfLSNQCQ@grain>
+Date:   Tue, 08 Feb 2022 08:21:20 -0800
+From:   "Andy Lutomirski" <luto@kernel.org>
+To:     "Cyrill Gorcunov" <gorcunov@gmail.com>,
+        "Mike Rapoport" <rppt@kernel.org>
+Cc:     "Dave Hansen" <dave.hansen@intel.com>,
+        "Adrian Reber" <adrian@lisas.de>,
+        "Rick P Edgecombe" <rick.p.edgecombe@intel.com>,
+        "the arch/x86 maintainers" <x86@kernel.org>,
+        "H. Peter Anvin" <hpa@zytor.com>,
+        "Thomas Gleixner" <tglx@linutronix.de>,
+        "Ingo Molnar" <mingo@redhat.com>,
+        "Linux Kernel Mailing List" <linux-kernel@vger.kernel.org>,
+        linux-doc@vger.kernel.org, linux-mm@kvack.org,
+        linux-arch@vger.kernel.org,
+        "Linux API" <linux-api@vger.kernel.org>,
+        "Arnd Bergmann" <arnd@arndb.de>,
+        "Balbir Singh" <bsingharora@gmail.com>,
+        "Borislav Petkov" <bp@alien8.de>,
+        "Dave Hansen" <dave.hansen@linux.intel.com>,
+        "Eugene Syromiatnikov" <esyr@redhat.com>,
+        "Florian Weimer" <fweimer@redhat.com>,
+        "H.J. Lu" <hjl.tools@gmail.com>, "Jann Horn" <jannh@google.com>,
+        "Jonathan Corbet" <corbet@lwn.net>,
+        "Kees Cook" <keescook@chromium.org>,
+        "Mike Kravetz" <mike.kravetz@oracle.com>,
+        "Nadav Amit" <nadav.amit@gmail.com>,
+        "Oleg Nesterov" <oleg@redhat.com>, "Pavel Machek" <pavel@ucw.cz>,
+        "Peter Zijlstra (Intel)" <peterz@infradead.org>,
+        "Randy Dunlap" <rdunlap@infradead.org>,
+        "Shankar, Ravi V" <ravi.v.shankar@intel.com>,
+        "Dave Martin" <Dave.Martin@arm.com>,
+        "Weijiang Yang" <weijiang.yang@intel.com>,
+        "Kirill A. Shutemov" <kirill.shutemov@linux.intel.com>,
+        "Moreira, Joao" <joao.moreira@intel.com>,
+        "john.allen@amd.com" <john.allen@amd.com>,
+        "kcc@google.com" <kcc@google.com>,
+        "Eranian, Stephane" <eranian@google.com>,
+        "Andrei Vagin" <avagin@gmail.com>,
+        "Dmitry Safonov" <0x7f454c46@gmail.com>
+Subject: Re: [PATCH 00/35] Shadow stacks for userspace
+Content-Type: text/plain
+X-Spam-Status: No, score=-7.1 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_HI,
+        SPF_HELO_NONE,SPF_PASS,T_SCC_BODY_TEXT_LINE autolearn=unavailable
         autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
@@ -56,170 +115,27 @@ Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Hello.
-
-On =C3=BAter=C3=BD 8. =C3=BAnora 2022 10:42:43 CET Eugene Shalygin wrote:
-> A user discovered [1] the CPU Core voltage sensor, which spans 2
-> registers and provides output in mV. Althroug the discovery was made
-> with a X470 chipset, the sensor is present in X570 (tested with C8H).
-> For now simply add it to each board with the CPU current sensor present.
->=20
-> [1] https://github.com/zeule/asus-ec-sensors/issues/12
->=20
-> Signed-off-by: Eugene Shalygin <eugene.shalygin@gmail.com>
-> ---
->  Documentation/hwmon/asus_ec_sensors.rst |  1 +
->  drivers/hwmon/asus-ec-sensors.c         | 29 ++++++++++++++++---------
->  2 files changed, 20 insertions(+), 10 deletions(-)
->=20
-> diff --git a/Documentation/hwmon/asus_ec_sensors.rst b/Documentation/hwmo=
-n/asus_ec_sensors.rst
-> index 22de1b037cfb..e7e8f1640f45 100644
-> --- a/Documentation/hwmon/asus_ec_sensors.rst
-> +++ b/Documentation/hwmon/asus_ec_sensors.rst
-> @@ -39,6 +39,7 @@ The driver is aware of and reads the following sensors:
->  9. Readings from the "Water flow meter" header (RPM)
->  10. Readings from the "Water In" and "Water Out" temperature headers
->  11. CPU current
-> +12. CPU core voltage
-> =20
->  Sensor values are read from EC registers, and to avoid race with the boa=
-rd
->  firmware the driver acquires ACPI mutex, the one used by the WMI when its
-> diff --git a/drivers/hwmon/asus-ec-sensors.c b/drivers/hwmon/asus-ec-sens=
-ors.c
-> index dd7b207d062f..bfac08a5dc57 100644
-> --- a/drivers/hwmon/asus-ec-sensors.c
-> +++ b/drivers/hwmon/asus-ec-sensors.c
-> @@ -18,6 +18,7 @@
->   * - VRM Heat Sink fan RPM
->   * - Water Flow fan RPM
->   * - CPU current
-> + * - CPU core voltage
->   */
-> =20
->  #include <linux/acpi.h>
-> @@ -100,6 +101,8 @@ enum ec_sensors {
->  	ec_sensor_temp_t_sensor,
->  	/* VRM temperature [=E2=84=83] */
->  	ec_sensor_temp_vrm,
-> +	/* CPU Core voltage [mV] */
-> +	ec_sensor_in_cpu_core,
->  	/* CPU_Opt fan [RPM] */
->  	ec_sensor_fan_cpu_opt,
->  	/* VRM heat sink fan [RPM] */
-> @@ -121,6 +124,7 @@ enum ec_sensors {
->  #define SENSOR_TEMP_MB BIT(ec_sensor_temp_mb)
->  #define SENSOR_TEMP_T_SENSOR BIT(ec_sensor_temp_t_sensor)
->  #define SENSOR_TEMP_VRM BIT(ec_sensor_temp_vrm)
-> +#define SENSOR_IN_CPU_CORE BIT(ec_sensor_in_cpu_core)
->  #define SENSOR_FAN_CPU_OPT BIT(ec_sensor_fan_cpu_opt)
->  #define SENSOR_FAN_VRM_HS BIT(ec_sensor_fan_vrm_hs)
->  #define SENSOR_FAN_CHIPSET BIT(ec_sensor_fan_chipset)
-> @@ -139,6 +143,8 @@ static const struct ec_sensor_info known_ec_sensors[]=
- =3D {
->  	[ec_sensor_temp_t_sensor] =3D
->  		EC_SENSOR("T_Sensor", hwmon_temp, 1, 0x00, 0x3d),
->  	[ec_sensor_temp_vrm] =3D EC_SENSOR("VRM", hwmon_temp, 1, 0x00, 0x3e),
-> +	[ec_sensor_in_cpu_core] =3D
-> +		EC_SENSOR("CPU Core", hwmon_in, 2, 0x00, 0xa2),
->  	[ec_sensor_fan_cpu_opt] =3D
->  		EC_SENSOR("CPU_Opt", hwmon_fan, 2, 0x00, 0xb0),
->  	[ec_sensor_fan_vrm_hs] =3D EC_SENSOR("VRM HS", hwmon_fan, 2, 0x00, 0xb2=
-),
-> @@ -172,32 +178,34 @@ static const struct dmi_system_id asus_ec_dmi_table=
-[] __initconst =3D {
->  		SENSOR_TEMP_T_SENSOR | SENSOR_FAN_CHIPSET),
->  	DMI_EXACT_MATCH_BOARD(VENDOR_ASUS_UPPER_CASE, "Pro WS X570-ACE",
->  		SENSOR_SET_TEMP_CHIPSET_CPU_MB | SENSOR_TEMP_VRM |
-> -		SENSOR_FAN_CHIPSET | SENSOR_CURR_CPU),
-> +		SENSOR_FAN_CHIPSET | SENSOR_CURR_CPU | SENSOR_IN_CPU_CORE),
-
-Tested-by: Oleksandr Natalenko <oleksandr@natalenko.name>
-
-on Pro WS X570-ACE:
-
-```
-asusec-isa-0000
-Adapter: ISA adapter
-CPU Core:      1.47 V
-=E2=80=A6
-```
-
-Thanks.
-
->  	DMI_EXACT_MATCH_BOARD(VENDOR_ASUS_UPPER_CASE,
->  			      "ROG CROSSHAIR VIII DARK HERO",
->  		SENSOR_SET_TEMP_CHIPSET_CPU_MB | SENSOR_TEMP_T_SENSOR |
->  		SENSOR_TEMP_VRM | SENSOR_SET_TEMP_WATER |
-> -		SENSOR_FAN_CPU_OPT | SENSOR_FAN_WATER_FLOW | SENSOR_CURR_CPU),
-> +		SENSOR_FAN_CPU_OPT | SENSOR_FAN_WATER_FLOW |
-> +		SENSOR_CURR_CPU | SENSOR_IN_CPU_CORE),
->  	DMI_EXACT_MATCH_BOARD(VENDOR_ASUS_UPPER_CASE,
->  			      "ROG CROSSHAIR VIII FORMULA",
->  		SENSOR_SET_TEMP_CHIPSET_CPU_MB | SENSOR_TEMP_T_SENSOR |
->  		SENSOR_TEMP_VRM | SENSOR_FAN_CPU_OPT | SENSOR_FAN_CHIPSET |
-> -		SENSOR_CURR_CPU),
-> +		SENSOR_CURR_CPU | SENSOR_IN_CPU_CORE),
->  	DMI_EXACT_MATCH_BOARD(VENDOR_ASUS_UPPER_CASE, "ROG CROSSHAIR VIII HERO",
->  		SENSOR_SET_TEMP_CHIPSET_CPU_MB | SENSOR_TEMP_T_SENSOR |
->  		SENSOR_TEMP_VRM | SENSOR_SET_TEMP_WATER |
->  		SENSOR_FAN_CPU_OPT | SENSOR_FAN_CHIPSET |
-> -		SENSOR_FAN_WATER_FLOW | SENSOR_CURR_CPU),
-> +		SENSOR_FAN_WATER_FLOW | SENSOR_CURR_CPU | SENSOR_IN_CPU_CORE),
->  	DMI_EXACT_MATCH_BOARD(VENDOR_ASUS_UPPER_CASE,
->  			      "ROG CROSSHAIR VIII HERO (WI-FI)",
->  		SENSOR_SET_TEMP_CHIPSET_CPU_MB | SENSOR_TEMP_T_SENSOR |
->  		SENSOR_TEMP_VRM | SENSOR_SET_TEMP_WATER |
->  		SENSOR_FAN_CPU_OPT | SENSOR_FAN_CHIPSET |
-> -		SENSOR_FAN_WATER_FLOW | SENSOR_CURR_CPU),
-> +		SENSOR_FAN_WATER_FLOW | SENSOR_CURR_CPU | SENSOR_IN_CPU_CORE),
->  	DMI_EXACT_MATCH_BOARD(VENDOR_ASUS_UPPER_CASE,
->  			      "ROG CROSSHAIR VIII IMPACT",
->  		SENSOR_SET_TEMP_CHIPSET_CPU_MB | SENSOR_TEMP_T_SENSOR |
-> -		SENSOR_TEMP_VRM | SENSOR_FAN_CHIPSET | SENSOR_CURR_CPU),
-> +		SENSOR_TEMP_VRM | SENSOR_FAN_CHIPSET |
-> +		SENSOR_CURR_CPU | SENSOR_IN_CPU_CORE),
->  	DMI_EXACT_MATCH_BOARD(VENDOR_ASUS_UPPER_CASE, "ROG STRIX B550-E GAMING",
->  		SENSOR_SET_TEMP_CHIPSET_CPU_MB |
->  		SENSOR_TEMP_T_SENSOR |
-> @@ -205,17 +213,19 @@ static const struct dmi_system_id asus_ec_dmi_table=
-[] __initconst =3D {
->  	DMI_EXACT_MATCH_BOARD(VENDOR_ASUS_UPPER_CASE, "ROG STRIX B550-I GAMING",
->  		SENSOR_SET_TEMP_CHIPSET_CPU_MB |
->  		SENSOR_TEMP_T_SENSOR |
-> -		SENSOR_TEMP_VRM | SENSOR_FAN_VRM_HS | SENSOR_CURR_CPU),
-> +		SENSOR_TEMP_VRM | SENSOR_FAN_VRM_HS |
-> +		SENSOR_CURR_CPU | SENSOR_IN_CPU_CORE),
->  	DMI_EXACT_MATCH_BOARD(VENDOR_ASUS_UPPER_CASE, "ROG STRIX X570-E GAMING",
->  		SENSOR_SET_TEMP_CHIPSET_CPU_MB |
->  		SENSOR_TEMP_T_SENSOR |
-> -		SENSOR_TEMP_VRM | SENSOR_FAN_CHIPSET | SENSOR_CURR_CPU),
-> +		SENSOR_TEMP_VRM | SENSOR_FAN_CHIPSET |
-> +		SENSOR_CURR_CPU | SENSOR_IN_CPU_CORE),
->  	DMI_EXACT_MATCH_BOARD(VENDOR_ASUS_UPPER_CASE, "ROG STRIX X570-F GAMING",
->  		SENSOR_SET_TEMP_CHIPSET_CPU_MB |
->  		SENSOR_TEMP_T_SENSOR | SENSOR_FAN_CHIPSET),
->  	DMI_EXACT_MATCH_BOARD(VENDOR_ASUS_UPPER_CASE, "ROG STRIX X570-I GAMING",
->  		SENSOR_TEMP_T_SENSOR | SENSOR_FAN_VRM_HS |
-> -		SENSOR_FAN_CHIPSET | SENSOR_CURR_CPU),
-> +		SENSOR_FAN_CHIPSET | SENSOR_CURR_CPU | SENSOR_IN_CPU_CORE),
->  	{}
->  };
-> =20
-> @@ -467,7 +477,6 @@ static long scale_sensor_value(s32 value, int data_ty=
-pe)
->  	switch (data_type) {
->  	case hwmon_curr:
->  	case hwmon_temp:
-> -	case hwmon_in:
->  		return value * MILLI;
->  	default:
->  		return value;
->=20
 
 
-=2D-=20
-Oleksandr Natalenko (post-factum)
+On Tue, Feb 8, 2022, at 1:29 AM, Cyrill Gorcunov wrote:
+> On Tue, Feb 08, 2022 at 11:16:51AM +0200, Mike Rapoport wrote:
+>>  
+>> > Any thoughts on how you would _like_ to see this resolved?
+>> 
+>> Ideally, CRIU will need a knob that will tell the kernel/CET machinery
+>> where the next RET will jump, along the lines of
+>> restore_signal_shadow_stack() AFAIU.
+>> 
+>> But such a knob will immediately reduce the security value of the entire
+>> thing, and I don't have good ideas how to deal with it :(
+>
+> Probably a kind of latch in the task_struct which would trigger off once
+> returt to a different address happened, thus we would be able to jump inside
+> paratite code. Of course such trigger should be available under proper
+> capability only.
 
+I'm not fully in touch with how parasite, etc works.  Are we talking about save or restore?  If it's restore, what exactly does CRIU need to do?  Is it just that CRIU needs to return out from its resume code into the to-be-resumed program without tripping CET?  Would it be acceptable for CRIU to require that at least one shstk slot be free at save time?  Or do we need a mechanism to atomically switch to a completely full shadow stack at resume?
 
+Off the top of my head, a sigreturn (or sigreturn-like mechanism) that is intended for use for altshadowstack could safely verify a token on the altshdowstack, possibly compare to something in ucontext (or not -- this isn't clearly necessary) and switch back to the previous stack.  CRIU could use that too.  Obviously CRIU will need a way to populate the relevant stacks, but WRUSS can be used for that, and I think this is a fundamental requirement for CRIU -- CRIU restore absolutely needs a way to write the saved shadow stack data into the shadow stack.
+
+So I think the only special capability that CRIU really needs is WRUSS, and we need to wire that up anyway.
