@@ -2,208 +2,249 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id EFEF64AE3FF
-	for <lists+linux-doc@lfdr.de>; Tue,  8 Feb 2022 23:25:39 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 2C6DE4AE409
+	for <lists+linux-doc@lfdr.de>; Tue,  8 Feb 2022 23:25:44 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1387583AbiBHWZZ (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 8 Feb 2022 17:25:25 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:53946 "EHLO
+        id S1387589AbiBHWZb (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 8 Feb 2022 17:25:31 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:59852 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1386422AbiBHU3a (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 8 Feb 2022 15:29:30 -0500
-Received: from mga11.intel.com (mga11.intel.com [192.55.52.93])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 4DF29C0612C0;
-        Tue,  8 Feb 2022 12:29:30 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1644352170; x=1675888170;
-  h=from:to:cc:subject:date:message-id:references:
-   in-reply-to:content-id:content-transfer-encoding:
-   mime-version;
-  bh=mMAVA69mm3DeTHBdIbEyDQJPfom2/Fk+1xMQC/7/tQE=;
-  b=Q/xLFOk7D4JfOpTmI2jxirM+FXafnz/upLEj8apt37yOMPm+p4yRou/y
-   AsB0HN3s6sIcRltE6GYqEDCIaysyhZWUgR+whEP00LDgGuZmdO7GSmbbv
-   aodCnz1DMmVDlG9ezVUaKc/JmVz2nN1a/0e4pGIa6fhi/wwA6sPwtgqNr
-   23bjmYj+eWyNYWOYwwLnTh8TfA9VTMp0dWsWfIuev1GByJ4HUHDuk4fZu
-   4/OCHr7ut0StZ5jrJ3k/P2fv+cuP6WCOK9nmZwvW2CZNAfvvp0biNleB3
-   kThv1FzGEjlIfpTC5BHi2oAZwuYGmVss4eEslriYqyAWJAEJwpV4b8AQ5
-   g==;
-X-IronPort-AV: E=McAfee;i="6200,9189,10252"; a="246632068"
-X-IronPort-AV: E=Sophos;i="5.88,353,1635231600"; 
-   d="scan'208";a="246632068"
-Received: from fmsmga008.fm.intel.com ([10.253.24.58])
-  by fmsmga102.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 08 Feb 2022 12:29:30 -0800
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.88,353,1635231600"; 
-   d="scan'208";a="585319891"
-Received: from orsmsx606.amr.corp.intel.com ([10.22.229.19])
-  by fmsmga008.fm.intel.com with ESMTP; 08 Feb 2022 12:29:29 -0800
-Received: from orsmsx611.amr.corp.intel.com (10.22.229.24) by
- ORSMSX606.amr.corp.intel.com (10.22.229.19) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2308.20; Tue, 8 Feb 2022 12:29:28 -0800
-Received: from orsedg603.ED.cps.intel.com (10.7.248.4) by
- orsmsx611.amr.corp.intel.com (10.22.229.24) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2308.20 via Frontend Transport; Tue, 8 Feb 2022 12:29:28 -0800
-Received: from NAM12-DM6-obe.outbound.protection.outlook.com (104.47.59.168)
- by edgegateway.intel.com (134.134.137.100) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.1.2308.20; Tue, 8 Feb 2022 12:29:28 -0800
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=ez6d2ACQCO6nIe0zMUclrZXYLM3OEyYi8fw2QecnG2mRqDlU1V7/mMkFOXtlGiR4r66mCkecj7l8TfSO/24TbJZ+NTDZyzC8iH9aLX9aZvKdNEiq8BjJAp6UMBWAxCHGFSQDmgc64uXUWFM/c8mZbTNZlJpLpfxzNVFPq/jH8YLdSPYfr7TX5RFtA24bK879ZMefQjHHP0eGkILRLiRYVGjqDdErCfJO65onSeaYs1NXKBzY71YR7tcrpKFK2/nFFmZwmyddde6iFK5S+9o/YmBq58y+dMD8Bsx4bW0bQgCr8QfKElxdp4mOfFrOVoD6zoExX1K2klD2TS7WCWSyuw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=mMAVA69mm3DeTHBdIbEyDQJPfom2/Fk+1xMQC/7/tQE=;
- b=fEWCymhMPbmqpgH/9BopLcOy3uZsakiYZX8zFlY2hSBqu6jQQiGlzyWGYGa96coD8ODyygYVH44K1g08Iq4naCQ3ukBYUTG2UVSKYzE/STLn39EIiLMjDQDYuguQR10ofeLo0PjHsS08chtJXUmyV6ZGpr81Ocuj76zPPaEl5eSuJIsG9ORcT2flaatT/bd1icEsaGFdMywyEZjvZWjlrqNoL7/W4wajkx/PBgZrWqEXyXYfz81v4i9W+kVqri1Wb1Yqn9M4NnS3cLyQxsyOCbvy6tZPZOC+hp11D+iPfeRtTUsn1s0z9Ki6nJBS9UehEGIdBoSE3HySK0rrQpZNpg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=none; dmarc=none;
- dkim=none; arc=none
-Received: from MWHPR11MB1392.namprd11.prod.outlook.com (2603:10b6:300:24::14)
- by MWHPR11MB1774.namprd11.prod.outlook.com (2603:10b6:300:10a::19) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4975.11; Tue, 8 Feb
- 2022 20:29:26 +0000
-Received: from MWHPR11MB1392.namprd11.prod.outlook.com
- ([fe80::250a:7e8f:1f3d:de15]) by MWHPR11MB1392.namprd11.prod.outlook.com
- ([fe80::250a:7e8f:1f3d:de15%4]) with mapi id 15.20.4951.019; Tue, 8 Feb 2022
- 20:29:25 +0000
-From:   "Edgecombe, Rick P" <rick.p.edgecombe@intel.com>
-To:     "Shankar, Ravi V" <ravi.v.shankar@intel.com>,
-        "bsingharora@gmail.com" <bsingharora@gmail.com>,
-        "hpa@zytor.com" <hpa@zytor.com>,
-        "Syromiatnikov, Eugene" <esyr@redhat.com>,
-        "peterz@infradead.org" <peterz@infradead.org>,
-        "rdunlap@infradead.org" <rdunlap@infradead.org>,
-        "keescook@chromium.org" <keescook@chromium.org>,
-        "dave.hansen@linux.intel.com" <dave.hansen@linux.intel.com>,
-        "kirill.shutemov@linux.intel.com" <kirill.shutemov@linux.intel.com>,
-        "Eranian, Stephane" <eranian@google.com>,
-        "linux-mm@kvack.org" <linux-mm@kvack.org>,
-        "fweimer@redhat.com" <fweimer@redhat.com>,
-        "nadav.amit@gmail.com" <nadav.amit@gmail.com>,
-        "jannh@google.com" <jannh@google.com>,
-        "linux-arch@vger.kernel.org" <linux-arch@vger.kernel.org>,
-        "kcc@google.com" <kcc@google.com>, "bp@alien8.de" <bp@alien8.de>,
-        "oleg@redhat.com" <oleg@redhat.com>,
-        "hjl.tools@gmail.com" <hjl.tools@gmail.com>,
-        "Yang, Weijiang" <weijiang.yang@intel.com>,
-        "Lutomirski, Andy" <luto@kernel.org>,
-        "pavel@ucw.cz" <pavel@ucw.cz>, "arnd@arndb.de" <arnd@arndb.de>,
-        "Moreira, Joao" <joao.moreira@intel.com>,
-        "tglx@linutronix.de" <tglx@linutronix.de>,
-        "mike.kravetz@oracle.com" <mike.kravetz@oracle.com>,
-        "x86@kernel.org" <x86@kernel.org>,
-        "linux-doc@vger.kernel.org" <linux-doc@vger.kernel.org>,
-        "Dave.Martin@arm.com" <Dave.Martin@arm.com>,
-        "john.allen@amd.com" <john.allen@amd.com>,
-        "mingo@redhat.com" <mingo@redhat.com>,
-        "Hansen, Dave" <dave.hansen@intel.com>,
-        "corbet@lwn.net" <corbet@lwn.net>,
-        "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
-        "linux-api@vger.kernel.org" <linux-api@vger.kernel.org>,
-        "gorcunov@gmail.com" <gorcunov@gmail.com>
-CC:     "Yu, Yu-cheng" <yu-cheng.yu@intel.com>
-Subject: Re: [PATCH 04/35] x86/cpufeatures: Introduce CPU setup and option
- parsing for CET
-Thread-Topic: [PATCH 04/35] x86/cpufeatures: Introduce CPU setup and option
- parsing for CET
-Thread-Index: AQHYFh9okjytVKr1tU2DcWbGKpvDxayIvcGAgAFrHYA=
-Date:   Tue, 8 Feb 2022 20:29:25 +0000
-Message-ID: <62c16006934bd84f9394625a7a9440d927017d09.camel@intel.com>
-References: <20220130211838.8382-1-rick.p.edgecombe@intel.com>
-         <20220130211838.8382-5-rick.p.edgecombe@intel.com>
-         <d53abb4b-2459-e1f7-3b7f-a8017cdd3757@intel.com>
-In-Reply-To: <d53abb4b-2459-e1f7-3b7f-a8017cdd3757@intel.com>
-Accept-Language: en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-mailer: Evolution 3.28.5-0ubuntu0.18.04.2 
-authentication-results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=intel.com;
-x-ms-publictraffictype: Email
-x-ms-office365-filtering-correlation-id: b917cc7f-a31f-417a-c2b3-08d9eb41b31b
-x-ms-traffictypediagnostic: MWHPR11MB1774:EE_
-x-ld-processed: 46c98d88-e344-4ed4-8496-4ed7712e255d,ExtAddr
-x-microsoft-antispam-prvs: <MWHPR11MB17744ABDD559D00464C21D92C92D9@MWHPR11MB1774.namprd11.prod.outlook.com>
-x-ms-oob-tlc-oobclassifiers: OLM:9508;
-x-ms-exchange-senderadcheck: 1
-x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam: BCL:0;
-x-microsoft-antispam-message-info: 7LMhHoohE3thb+pwW/vsIXhDLrX5a4ddifXI7dSiLDbutZuVryBQwf4A6AxRerCd96GFnNDWuoY6HMgWRRNs1lXnq5pyUKCCe+0jX9sIZiSvrlFpH4u0t2A7pKjuGlAMW1j8qO8fvC1WEQdPBjyDlk9+H3/X6WNgD+HDAeNQi7wcOUxUNsDdEr3IYG0I2uLEMrv8xV70epG/SdNunCuO1OpjX4N00TPmBKlzTSLbbapTnIE0mEta0LjS/MBxX1eRymCrSzFY8sjxlwDpz1L6mBjrkZjXLyi0hJyJo26Eh2ft8Z3Yze5IKB7KIzC0vJTvmwo/od0hoV6k4WJRu4ZxDS2f7lc3y80sQnQRzUQDDKmHRp4q3IwVFRChTI1WoGIyuIFvGqZ4lSibtb3wIe2JwA88t7dG/Ne1+5Fl7ZRZNiez9CQO0L5x/tKYZDRGpsg/CZn+n74dpMZx4PTr+WZoCtB7nMgWsW3s783HyNM5QjO4zlaqCtnZVXV3NiuF1BACuhCfVZnCq+XeVwg6jqCyo2bLeTa/PlQaLmda47iOA39zAbgmppBFwGtUpNjptU/l+wW7jMPdjvr9agzmimgz387coCdd9CpLjn8AwJK9RgDS1A+t+qO0aYiqEUbso5ZlOyf90usugdyGuuyNdnN0ZyfE8ZvLC5gfG3xfa/jLEPX46T9qgDxCMKUQ+Z8cIconQrDfCPmsJNWEKCEd58Gh8AFf3J7WDzHKbfGJtDSNPg9ttVDE8iddpfCGZAl+5cH+iU6uQ3sp7fNT7jIgPk8MIt95F+G1PBPLD2FA8WxtMSUF+UyH5MSJQe8xrsrpFOhG8BBy3jma6EiwEEk1mpcpiw==
-x-forefront-antispam-report: CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:MWHPR11MB1392.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230001)(366004)(38070700005)(36756003)(316002)(110136005)(86362001)(71200400001)(2906002)(6512007)(6506007)(4744005)(66946007)(66476007)(66556008)(966005)(66446008)(64756008)(8676002)(4326008)(6486002)(8936002)(921005)(76116006)(122000001)(26005)(186003)(7416002)(508600001)(7406005)(5660300002)(2616005)(38100700002)(82960400001)(99106002);DIR:OUT;SFP:1102;
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0: =?utf-8?B?NjNjMkh0M1VFZDdzMGVoWGJtV2FMeVRhQ2F0c2Q0TW5Mb2NNTEY5V2JOUEdm?=
- =?utf-8?B?bXRUazAzaDg1TVZGY0R4ZHVJRDlMMWhYTUhaMGhHZ2U1NVZkbW1KeEk2ekEy?=
- =?utf-8?B?L0U2a0R5QkZLenpzaDdvL2o3SHBIb0Q1OFFtdGx3NjZkYnJGalFMU2ZXMTJa?=
- =?utf-8?B?WHpFLzMvVk1MWDhCSzhvVGR2QjBUSFZoSk1taktRNy9TL21BYy9GdXJkejdh?=
- =?utf-8?B?cXJweGJmYjNiUVlIU1RIWC9DVzYwNnNaZWQ2NE95QXYvT2NaalRtdmJiZnJQ?=
- =?utf-8?B?VkliYkhrdnF4SXdTSFhOVmdpY0g1WVF5ZXFYREc0YklSdWtSc1FlblMyTjVQ?=
- =?utf-8?B?aUcvbUJyTjZ2SXJ4K0Q5Tk5aeWNWbU51OWdSTHV3N2lMRnJibVQyeTdySHBL?=
- =?utf-8?B?c0sxQ3R6ZUdkbllPUGdlU0F4OHFZQTRiYTNyTWtNRThXNHhvTFZBYkZvcHRQ?=
- =?utf-8?B?OWtaTnlUQ1l1VDRJcWQ4bkpGbnVwT0pySDFzRGd1UnVlQnhUY3N6U3RqRXh3?=
- =?utf-8?B?d1huWFlBSjRQY0NpeEowNkowRzRiM2RnQllxbVBoYWRBT0duUS9tdXp0bENO?=
- =?utf-8?B?em5KZEZxUjRubWJLODlJRlNjZlh0S0RwNVdCRHdmaVlCUWN0NDJKZFM2Ukhs?=
- =?utf-8?B?THhiaGZmdUpOa091T3V4eFBGN2U4MVVmVGRVVU5oOFFVU3JHSExFdVNjNWl4?=
- =?utf-8?B?dEpCdUZjcUNXcFhvekk0aSt1UE8yUDE3bWxOazlsOEdGODdlNUc2M0FZNjU0?=
- =?utf-8?B?UWpFMC9xM0s3K2o1Y2wva0NkcUtQTk5CYVprYm5XQUdFVzhpam4yeGhsUFJu?=
- =?utf-8?B?cVhsZ1EzaDQ4aFFoVVg5K21RNW5WMzQ1eEVxV0tDZCtWOFpRaHpWK3JoOGRQ?=
- =?utf-8?B?bHd2Wm02cWVvZzRwM0UxcktCUlVNR21kUW80QVRXTUtWWmlOelJuWUROL1c3?=
- =?utf-8?B?eHgrRytyUFpXM1JWVkEvY2UwNUdRNGVXdERoem54TUZSdGpKTWdvZFJ6V0g3?=
- =?utf-8?B?YzkrQXZJMFZ5ZUlsZFNvMGt3dUFubUdPRU9CRDNtL2FUUFBWbkV4ZnRFa2dV?=
- =?utf-8?B?ZngwbE9rcTdEQzM5NHc3a29CdlhTODZicURibEZmQlBxeFJBY2t0Sk56ZHVI?=
- =?utf-8?B?SHpkUnRiVWtJUUhPRjIvSVRTa2s4ZHB3OEtyUE1KSmdDWndNMkhEUmtvSWdM?=
- =?utf-8?B?eTJuTDk2eFNFZGNtL3NxTVJPbXQ2Q1JOMDdHSzhLanhYRnVqZ2tSZDVXS0ZT?=
- =?utf-8?B?cUJkQ3FpQkdoTUVFV0ZlZmJxaXZYNGZZekNTY0liT0xZSXc2L0MxOVA4OEFT?=
- =?utf-8?B?aW5jSzNUVjJuM0txbFc2MG9CbllhbS9XZTE4Z0RhcWZMTU02dHNOMWNkTzlE?=
- =?utf-8?B?WjRiUU5IMTlaV2lwc0I0bGhzM0p6TEVYUFRYTTR4RHRZM0tYZms0emRobjdU?=
- =?utf-8?B?KzdYZUFUUktPWjZqWjRvMldadjhXOGVLVGE1Y3htS21vYnEzcnNJaWZLWGxH?=
- =?utf-8?B?UGloZmdYdWh2WkxBRFd2Nzc2cWpoc1B2ak4vOC9ZaUlwU0tkRk1PeFdMMVd0?=
- =?utf-8?B?Z08vajJtQmtUWUhobi90OXIxcHVWalgxTDlSd0l6MEJrcEREVHJNZGFUbjFh?=
- =?utf-8?B?RlczWVp5U0pickZtbFdkNGd3ZXBTeHRTOUQ5SzdISWlXem9lRUdGME02OHZ2?=
- =?utf-8?B?eHBtRnpxSElZVjVLV1VWZk03eStNRkxXMUpwMHlTekFLRE45OEdwSENqVm5h?=
- =?utf-8?B?MUNPNEdrTXNUNnRDclkvWW9pN3lLQlloSVc4bG1NV1BJc3diRXlyV3kxSU9q?=
- =?utf-8?B?R3U2T2VKSmEvbURjTFlPWSsxR2I0S2prQmE4YVR6di9zenZTcU5HVTVqYSs2?=
- =?utf-8?B?QlpRYlp5dGZKUUc2UWxvUGszYXBJT2NTUldtNThpR3VMV0NGdjFCRzdvd0lp?=
- =?utf-8?B?VTdvcStMN3oxV3FUSkZpMUdhUnFJdzZ2Z2UrZ1J3RjFZbjhzUnBmcFZSQytI?=
- =?utf-8?B?TUw2OVFGSWVxRHMreFZLWngyaGd6UHNoRkMyWkRaSG5oODViMmt2cHdkNmI4?=
- =?utf-8?B?dStwdmFOSTRYOThBTElLVlc1Z1V5ZWlwRmdKdUhKMDU0bE5Ec0xDWjdQQlBo?=
- =?utf-8?B?TWEyVlVYUTBsd0ZtRGI2dDJDaUQ5QzB6Y1hEZzRDZ1IvTjF5THlhRG5kR1Z1?=
- =?utf-8?B?eGZmTW83TzZ6V3RwUCtEWkJySEkzdXZWMFFiT2JxWjNheFgyV3ZkVXNpdHRS?=
- =?utf-8?Q?h9viRsPXzUJgP2c6UvKRTIayNzHFcbk8/CEOCL6Ooc=3D?=
-Content-Type: text/plain; charset="utf-8"
-Content-ID: <8CCD35E02AA4D543807CFCE172BBFD89@namprd11.prod.outlook.com>
-Content-Transfer-Encoding: base64
+        with ESMTP id S1386543AbiBHUyU (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 8 Feb 2022 15:54:20 -0500
+Received: from mail-ed1-x531.google.com (mail-ed1-x531.google.com [IPv6:2a00:1450:4864:20::531])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 43431C0612C3;
+        Tue,  8 Feb 2022 12:54:16 -0800 (PST)
+Received: by mail-ed1-x531.google.com with SMTP id s7so956653edd.3;
+        Tue, 08 Feb 2022 12:54:16 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112;
+        h=date:from:to:cc:subject:message-id:in-reply-to:references
+         :mime-version:content-transfer-encoding;
+        bh=PDhjQ85RPBAN8gdoe5LBgB+KXAQiKOAIVei1JjMNISU=;
+        b=KlypnIg2Q4TNPY7ywPtIVAaC6gRlZf6/GaS4h98jSWnLdWAidpxxul8Dh8RxnzInIB
+         FxFlGMNuADDHiTj1ewb1BRF9aaR5XLlHuz2/sVe6MErGo3JBZhwGf3/3pyC74jJUe/AU
+         ISjM5AFHdUg4pyXoFg9Qv4DHHrrXRF9/FGaSIcgOSflfHRjXYLzo55WHkUo3Yl7smqnF
+         vOJWuKEk7HTt+0s3/+vvS+NBxUN1vEh5xKLL2O4TeJCTdxLrZkt7q+2iaZjfvz6d2j6c
+         JVALpU/Xt00xdIc0NKJ0q7Z1+8bsP84m40fU9rIJfDFRB8BKYDyzClp0/Sh/iFL/IF4v
+         gkSw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:date:from:to:cc:subject:message-id:in-reply-to
+         :references:mime-version:content-transfer-encoding;
+        bh=PDhjQ85RPBAN8gdoe5LBgB+KXAQiKOAIVei1JjMNISU=;
+        b=h0j3UXdmolw3xPe1fJRItIbVqrmZ/BiOeZPPxRpXtZN9E3liDjbee+4KsDHlJhRzDd
+         GNJWvS6JV9FMHKOL5BU1OLpZSqtCWl6X7UeiCdKBELlC9jhJ++1NE2vk8t/+AGidc//k
+         AQsk6bGl9RmWiSjvMvDVZLLtVFjBGw2uqtVDG/2JLz2DX71GNjVFO29pgu8bLX9A8Onh
+         BW8YKHkhrRPD/hVmAZDOjcLJI9dYK+si+KYXaQEbpiNvYfGaTVV/lpDT8Wr2Schpcc82
+         Ms3w4R/LOClJHpN92LnuEmPcCXPLle9RdK/Ss2e7mqo7WvoGomlUDYM4B+eUKNwe87Ce
+         QY3A==
+X-Gm-Message-State: AOAM530vQF7dJrG4m9Ck5v2vVBP6XFZPjTW94OW1/bQ1F8vxcbSD8qmF
+        /zcjvXiJXvYXdy5Ovq1ZXOeiRe3PLQ/FMA==
+X-Google-Smtp-Source: ABdhPJzKxy1DftrC9Hdvyz71ZUjBbAQJvqevq1dibwVr5XOxE/w6Jr5uhIT+BNs11hMybA1XTWmzhw==
+X-Received: by 2002:aa7:dbc3:: with SMTP id v3mr6404848edt.32.1644353654531;
+        Tue, 08 Feb 2022 12:54:14 -0800 (PST)
+Received: from netbook-debian ([94.179.49.215])
+        by smtp.gmail.com with ESMTPSA id gj8sm2329107ejc.186.2022.02.08.12.54.13
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 08 Feb 2022 12:54:14 -0800 (PST)
+Date:   Tue, 8 Feb 2022 22:54:09 +0200
+From:   Denis Pauk <pauk.denis@gmail.com>
+To:     Oleksandr Natalenko <oleksandr@natalenko.name>
+Cc:     Eugene Shalygin <eugene.shalygin@gmail.com>,
+        Jean Delvare <jdelvare@suse.com>,
+        Guenter Roeck <linux@roeck-us.net>,
+        Jonathan Corbet <corbet@lwn.net>, linux-hwmon@vger.kernel.org,
+        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org
+Subject: Re: [PATCH] hwmon: (asus-ec-sensors) add CPU core voltage
+Message-ID: <20220208225409.5285adf9@netbook-debian>
+In-Reply-To: <11918951.O9o76ZdvQC@natalenko.name>
+References: <20220208094244.1106312-1-eugene.shalygin@gmail.com>
+        <11918951.O9o76ZdvQC@natalenko.name>
+X-Mailer: Claws Mail 3.18.0 (GTK+ 2.24.33; x86_64-pc-linux-gnu)
 MIME-Version: 1.0
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: MWHPR11MB1392.namprd11.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: b917cc7f-a31f-417a-c2b3-08d9eb41b31b
-X-MS-Exchange-CrossTenant-originalarrivaltime: 08 Feb 2022 20:29:25.8259
- (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: 46c98d88-e344-4ed4-8496-4ed7712e255d
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: CJL/T+T3NUDMX5fB+VGQyDbdocAbX8C4joNltaoHsKDr+44ywP/dGZzkb+F1eQk7pDktcP2hkcKR9UGwZLpYjW0FzCvH2oLLenpnRPHlK7M=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: MWHPR11MB1774
-X-OriginatorOrg: intel.com
-X-Spam-Status: No, score=-7.1 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_HI,
-        RCVD_IN_MSPIKE_H2,SPF_HELO_NONE,SPF_NONE,T_SCC_BODY_TEXT_LINE
-        autolearn=ham autolearn_force=no version=3.4.6
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
+X-Spam-Status: No, score=-2.1 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_FROM,
+        RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,SPF_PASS,T_SCC_BODY_TEXT_LINE,
+        UPPERCASE_50_75 autolearn=no autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-T24gTW9uLCAyMDIyLTAyLTA3IGF0IDE0OjQ5IC0wODAwLCBEYXZlIEhhbnNlbiB3cm90ZToNCj4g
-R2l2ZW4gdGhpczoNCj4gDQo+ICAgICAgICAgDQo+IGh0dHBzOi8vbG9yZS5rZXJuZWwub3JnL2Fs
-bC8yMDIyMDEyNzExNTYyNi4xNDE3OS0yLWJwQGFsaWVuOC5kZS8NCj4gDQo+IEknZCBwcm9iYWJs
-eSB5YW5rIHRoZSBjb21tYW5kLWxpbmUgb3B0aW9uIG91dCBvZiB0aGlzIHNlcmllcywgb3INCj4g
-c3RpY2sNCj4gaXQgaW4gYSBzZXBhcmF0ZSBwYXRjaCB0aGF0IHlvdSB0YWNrIG9uIHRvIHRoZSBl
-bmQuDQoNCk1ha2VzIHNlbnNlLiBJJ2xsIGNoYW5nZSB0aGUgZG9jcyB0byBwb2ludCBvdXQgZXhh
-Y3RseSBob3cgdG8gdXNlIHRoaXMNCm5ldyBwYXJhbWV0ZXIgZm9yIHNoYWRvdyBzdGFjay4gSXQg
-Y291bGQgY29tZSBpbiBoYW5keSBpZiBzb21lDQppbXBvcnRhbnQgc2VydmljZSBtaXNzIG1hcmtz
-IGl0c2VsZiBhcyBzaGFkb3cgc3RhY2sgY2FwYWJsZSBhbmQNCmNvbXBsaWNhdGVzIGJvb3QuDQoN
-ClRoYW5rcy4NCg==
+On Tue, 08 Feb 2022 17:15:46 +0100
+Oleksandr Natalenko <oleksandr@natalenko.name> wrote:
+
+> Hello.
+>=20
+> On =C3=BAter=C3=BD 8. =C3=BAnora 2022 10:42:43 CET Eugene Shalygin wrote:
+> > A user discovered [1] the CPU Core voltage sensor, which spans 2
+> > registers and provides output in mV. Althroug the discovery was made
+> > with a X470 chipset, the sensor is present in X570 (tested with
+> > C8H). For now simply add it to each board with the CPU current
+> > sensor present.
+> >=20
+> > [1] https://github.com/zeule/asus-ec-sensors/issues/12
+> >=20
+> > Signed-off-by: Eugene Shalygin <eugene.shalygin@gmail.com>
+> > ---
+> >  Documentation/hwmon/asus_ec_sensors.rst |  1 +
+> >  drivers/hwmon/asus-ec-sensors.c         | 29
+> > ++++++++++++++++--------- 2 files changed, 20 insertions(+), 10
+> > deletions(-)
+> >=20
+> > diff --git a/Documentation/hwmon/asus_ec_sensors.rst
+> > b/Documentation/hwmon/asus_ec_sensors.rst index
+> > 22de1b037cfb..e7e8f1640f45 100644 ---
+> > a/Documentation/hwmon/asus_ec_sensors.rst +++
+> > b/Documentation/hwmon/asus_ec_sensors.rst @@ -39,6 +39,7 @@ The
+> > driver is aware of and reads the following sensors: 9. Readings
+> > from the "Water flow meter" header (RPM) 10. Readings from the
+> > "Water In" and "Water Out" temperature headers 11. CPU current
+> > +12. CPU core voltage
+> > =20
+> >  Sensor values are read from EC registers, and to avoid race with
+> > the board firmware the driver acquires ACPI mutex, the one used by
+> > the WMI when its diff --git a/drivers/hwmon/asus-ec-sensors.c
+> > b/drivers/hwmon/asus-ec-sensors.c index dd7b207d062f..bfac08a5dc57
+> > 100644 --- a/drivers/hwmon/asus-ec-sensors.c
+> > +++ b/drivers/hwmon/asus-ec-sensors.c
+> > @@ -18,6 +18,7 @@
+> >   * - VRM Heat Sink fan RPM
+> >   * - Water Flow fan RPM
+> >   * - CPU current
+> > + * - CPU core voltage
+> >   */
+> > =20
+> >  #include <linux/acpi.h>
+> > @@ -100,6 +101,8 @@ enum ec_sensors {
+> >  	ec_sensor_temp_t_sensor,
+> >  	/* VRM temperature [=E2=84=83] */
+> >  	ec_sensor_temp_vrm,
+> > +	/* CPU Core voltage [mV] */
+> > +	ec_sensor_in_cpu_core,
+> >  	/* CPU_Opt fan [RPM] */
+> >  	ec_sensor_fan_cpu_opt,
+> >  	/* VRM heat sink fan [RPM] */
+> > @@ -121,6 +124,7 @@ enum ec_sensors {
+> >  #define SENSOR_TEMP_MB BIT(ec_sensor_temp_mb)
+> >  #define SENSOR_TEMP_T_SENSOR BIT(ec_sensor_temp_t_sensor)
+> >  #define SENSOR_TEMP_VRM BIT(ec_sensor_temp_vrm)
+> > +#define SENSOR_IN_CPU_CORE BIT(ec_sensor_in_cpu_core)
+> >  #define SENSOR_FAN_CPU_OPT BIT(ec_sensor_fan_cpu_opt)
+> >  #define SENSOR_FAN_VRM_HS BIT(ec_sensor_fan_vrm_hs)
+> >  #define SENSOR_FAN_CHIPSET BIT(ec_sensor_fan_chipset)
+> > @@ -139,6 +143,8 @@ static const struct ec_sensor_info
+> > known_ec_sensors[] =3D { [ec_sensor_temp_t_sensor] =3D
+> >  		EC_SENSOR("T_Sensor", hwmon_temp, 1, 0x00, 0x3d),
+> >  	[ec_sensor_temp_vrm] =3D EC_SENSOR("VRM", hwmon_temp, 1,
+> > 0x00, 0x3e),
+> > +	[ec_sensor_in_cpu_core] =3D
+> > +		EC_SENSOR("CPU Core", hwmon_in, 2, 0x00, 0xa2),
+> >  	[ec_sensor_fan_cpu_opt] =3D
+> >  		EC_SENSOR("CPU_Opt", hwmon_fan, 2, 0x00, 0xb0),
+> >  	[ec_sensor_fan_vrm_hs] =3D EC_SENSOR("VRM HS", hwmon_fan, 2,
+> > 0x00, 0xb2), @@ -172,32 +178,34 @@ static const struct
+> > dmi_system_id asus_ec_dmi_table[] __initconst =3D {
+> > SENSOR_TEMP_T_SENSOR | SENSOR_FAN_CHIPSET),
+> > DMI_EXACT_MATCH_BOARD(VENDOR_ASUS_UPPER_CASE, "Pro WS X570-ACE",
+> > SENSOR_SET_TEMP_CHIPSET_CPU_MB | SENSOR_TEMP_VRM |
+> > -		SENSOR_FAN_CHIPSET | SENSOR_CURR_CPU),
+> > +		SENSOR_FAN_CHIPSET | SENSOR_CURR_CPU |
+> > SENSOR_IN_CPU_CORE), =20
+>=20
+> Tested-by: Oleksandr Natalenko <oleksandr@natalenko.name>
+>=20
+> on Pro WS X570-ACE:
+>=20
+> ```
+> asusec-isa-0000
+> Adapter: ISA adapter
+> CPU Core:      1.47 V
+> =E2=80=A6
+> ```
+>=20
+> Thanks.
+>=20
+> >  	DMI_EXACT_MATCH_BOARD(VENDOR_ASUS_UPPER_CASE,
+> >  			      "ROG CROSSHAIR VIII DARK HERO",
+> >  		SENSOR_SET_TEMP_CHIPSET_CPU_MB |
+> > SENSOR_TEMP_T_SENSOR | SENSOR_TEMP_VRM | SENSOR_SET_TEMP_WATER |
+> > -		SENSOR_FAN_CPU_OPT | SENSOR_FAN_WATER_FLOW |
+> > SENSOR_CURR_CPU),
+> > +		SENSOR_FAN_CPU_OPT | SENSOR_FAN_WATER_FLOW |
+> > +		SENSOR_CURR_CPU | SENSOR_IN_CPU_CORE),
+> >  	DMI_EXACT_MATCH_BOARD(VENDOR_ASUS_UPPER_CASE,
+> >  			      "ROG CROSSHAIR VIII FORMULA",
+> >  		SENSOR_SET_TEMP_CHIPSET_CPU_MB |
+> > SENSOR_TEMP_T_SENSOR | SENSOR_TEMP_VRM | SENSOR_FAN_CPU_OPT |
+> > SENSOR_FAN_CHIPSET |
+> > -		SENSOR_CURR_CPU),
+> > +		SENSOR_CURR_CPU | SENSOR_IN_CPU_CORE),
+> >  	DMI_EXACT_MATCH_BOARD(VENDOR_ASUS_UPPER_CASE, "ROG
+> > CROSSHAIR VIII HERO", SENSOR_SET_TEMP_CHIPSET_CPU_MB |
+> > SENSOR_TEMP_T_SENSOR | SENSOR_TEMP_VRM | SENSOR_SET_TEMP_WATER |
+> >  		SENSOR_FAN_CPU_OPT | SENSOR_FAN_CHIPSET |
+> > -		SENSOR_FAN_WATER_FLOW | SENSOR_CURR_CPU),
+> > +		SENSOR_FAN_WATER_FLOW | SENSOR_CURR_CPU |
+> > SENSOR_IN_CPU_CORE), DMI_EXACT_MATCH_BOARD(VENDOR_ASUS_UPPER_CASE,
+> >  			      "ROG CROSSHAIR VIII HERO (WI-FI)",
+> >  		SENSOR_SET_TEMP_CHIPSET_CPU_MB |
+> > SENSOR_TEMP_T_SENSOR | SENSOR_TEMP_VRM | SENSOR_SET_TEMP_WATER |
+> >  		SENSOR_FAN_CPU_OPT | SENSOR_FAN_CHIPSET |
+> > -		SENSOR_FAN_WATER_FLOW | SENSOR_CURR_CPU),
+> > +		SENSOR_FAN_WATER_FLOW | SENSOR_CURR_CPU |
+> > SENSOR_IN_CPU_CORE), DMI_EXACT_MATCH_BOARD(VENDOR_ASUS_UPPER_CASE,
+> >  			      "ROG CROSSHAIR VIII IMPACT",
+> >  		SENSOR_SET_TEMP_CHIPSET_CPU_MB |
+> > SENSOR_TEMP_T_SENSOR |
+> > -		SENSOR_TEMP_VRM | SENSOR_FAN_CHIPSET |
+> > SENSOR_CURR_CPU),
+> > +		SENSOR_TEMP_VRM | SENSOR_FAN_CHIPSET |
+> > +		SENSOR_CURR_CPU | SENSOR_IN_CPU_CORE),
+> >  	DMI_EXACT_MATCH_BOARD(VENDOR_ASUS_UPPER_CASE, "ROG STRIX
+> > B550-E GAMING", SENSOR_SET_TEMP_CHIPSET_CPU_MB |
+> >  		SENSOR_TEMP_T_SENSOR |
+> > @@ -205,17 +213,19 @@ static const struct dmi_system_id
+> > asus_ec_dmi_table[] __initconst =3D {
+> > DMI_EXACT_MATCH_BOARD(VENDOR_ASUS_UPPER_CASE, "ROG STRIX B550-I
+> > GAMING", SENSOR_SET_TEMP_CHIPSET_CPU_MB | SENSOR_TEMP_T_SENSOR |
+> > -		SENSOR_TEMP_VRM | SENSOR_FAN_VRM_HS |
+> > SENSOR_CURR_CPU),
+> > +		SENSOR_TEMP_VRM | SENSOR_FAN_VRM_HS |
+> > +		SENSOR_CURR_CPU | SENSOR_IN_CPU_CORE),
+> >  	DMI_EXACT_MATCH_BOARD(VENDOR_ASUS_UPPER_CASE, "ROG STRIX
+> > X570-E GAMING", SENSOR_SET_TEMP_CHIPSET_CPU_MB |
+> >  		SENSOR_TEMP_T_SENSOR |
+> > -		SENSOR_TEMP_VRM | SENSOR_FAN_CHIPSET |
+> > SENSOR_CURR_CPU),
+> > +		SENSOR_TEMP_VRM | SENSOR_FAN_CHIPSET |
+> > +		SENSOR_CURR_CPU | SENSOR_IN_CPU_CORE),
+> >  	DMI_EXACT_MATCH_BOARD(VENDOR_ASUS_UPPER_CASE, "ROG STRIX
+> > X570-F GAMING", SENSOR_SET_TEMP_CHIPSET_CPU_MB |
+> >  		SENSOR_TEMP_T_SENSOR | SENSOR_FAN_CHIPSET),
+> >  	DMI_EXACT_MATCH_BOARD(VENDOR_ASUS_UPPER_CASE, "ROG STRIX
+> > X570-I GAMING", SENSOR_TEMP_T_SENSOR | SENSOR_FAN_VRM_HS |
+> > -		SENSOR_FAN_CHIPSET | SENSOR_CURR_CPU),
+> > +		SENSOR_FAN_CHIPSET | SENSOR_CURR_CPU |
+> > SENSOR_IN_CPU_CORE), {}
+> >  };
+> > =20
+> > @@ -467,7 +477,6 @@ static long scale_sensor_value(s32 value, int
+> > data_type) switch (data_type) {
+> >  	case hwmon_curr:
+> >  	case hwmon_temp:
+> > -	case hwmon_in:
+> >  		return value * MILLI;
+> >  	default:
+> >  		return value;
+> >  =20
+>=20
+>=20
+
+Tested-by: Denis Pauk <pauk.denis@gmail.com>
+
+Best regards,
+             Denis.
