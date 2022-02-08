@@ -2,54 +2,92 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 2E9CD4ACDF1
-	for <lists+linux-doc@lfdr.de>; Tue,  8 Feb 2022 02:24:07 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 49C834ACE1B
+	for <lists+linux-doc@lfdr.de>; Tue,  8 Feb 2022 02:48:02 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S229806AbiBHBXX (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 7 Feb 2022 20:23:23 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:56094 "EHLO
+        id S238497AbiBHBsB (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 7 Feb 2022 20:48:01 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:60088 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S243570AbiBHBWj (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Mon, 7 Feb 2022 20:22:39 -0500
-Received: from szxga02-in.huawei.com (szxga02-in.huawei.com [45.249.212.188])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id E2533C03C18A
-        for <linux-doc@vger.kernel.org>; Mon,  7 Feb 2022 17:18:45 -0800 (PST)
-Received: from dggpeml500024.china.huawei.com (unknown [172.30.72.57])
-        by szxga02-in.huawei.com (SkyGuard) with ESMTP id 4Jt4qY0XBhz9rwC;
-        Tue,  8 Feb 2022 09:17:13 +0800 (CST)
-Received: from dggpeml500006.china.huawei.com (7.185.36.76) by
- dggpeml500024.china.huawei.com (7.185.36.10) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2308.21; Tue, 8 Feb 2022 09:18:43 +0800
-Received: from [10.174.177.232] (10.174.177.232) by
- dggpeml500006.china.huawei.com (7.185.36.76) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2308.21; Tue, 8 Feb 2022 09:18:43 +0800
-Subject: Re: [PATCH] docs/zh_CN: Add energy-model Chinese translation
-To:     yanteng si <siyanteng01@gmail.com>
-CC:     Yanteng Si <siyanteng@loongson.cn>, Alex Shi <alexs@kernel.org>,
-        Alex Shi <seakeel@gmail.com>,
-        Linux Doc Mailing List <linux-doc@vger.kernel.org>,
-        Jonathan Corbet <corbet@lwn.net>, <zhengbin13@huawei.com>,
-        Yeechou Tang <tangyeechou@gmail.com>
-References: <20220207023523.18505-1-tangyizhou@huawei.com>
- <CAEensMzFXg7On9PNGpK0ABBK1c39b4_uUgkdMwwc4zU-nQwjOw@mail.gmail.com>
-From:   Tang Yizhou <tangyizhou@huawei.com>
-Message-ID: <e51bf9fb-e893-235f-fa8b-c8ec5ffaf9d8@huawei.com>
-Date:   Tue, 8 Feb 2022 09:18:31 +0800
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:78.0) Gecko/20100101
- Thunderbird/78.1.1
+        with ESMTP id S234818AbiBHBbu (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Mon, 7 Feb 2022 20:31:50 -0500
+Received: from dfw.source.kernel.org (dfw.source.kernel.org [IPv6:2604:1380:4641:c500::1])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 88041C061355;
+        Mon,  7 Feb 2022 17:31:49 -0800 (PST)
+Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
+        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+        (No client certificate requested)
+        by dfw.source.kernel.org (Postfix) with ESMTPS id 01D4661253;
+        Tue,  8 Feb 2022 01:31:49 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id EBBC3C004E1;
+        Tue,  8 Feb 2022 01:31:46 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+        s=k20201202; t=1644283908;
+        bh=FVFHKY6Lf5v9k+9f7XtvYdS9xaoSxDGnNdiLfTk98cU=;
+        h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+        b=ACca6sfW0QhhOG37xqghFUEPFAHu4/cLZldK6AHO0fxPfRvY3L4hh+OEOPczU4+qh
+         tcWFYCnMamYIhnLcfqrVMmk1kNOg/FfCASuXegdI8zfobB8vFXd4z9xhtiNfVVIt0U
+         1PVZBcrQkhAIXkJ2bGHilOJ9ZYhfsCDevYyYwYcz8Zx/Ze497rwvb0xgAsPWok5ZQU
+         0FYOGpRGw0tB5CEScLBU+nN+3FcE+gQuRbB3qXgnrcDhYNi2nKQdq8h+8oH68CXwuG
+         rezvbXBxOGpu+UU2lXOLKqYBownzcqmsEnhJObimWYidnnd5BJd2fk35E45dwoNQib
+         mmLcy1YKo5msA==
+Message-ID: <6ba06196-0756-37a4-d6c4-2e47e6601dcd@kernel.org>
+Date:   Mon, 7 Feb 2022 17:31:45 -0800
 MIME-Version: 1.0
-In-Reply-To: <CAEensMzFXg7On9PNGpK0ABBK1c39b4_uUgkdMwwc4zU-nQwjOw@mail.gmail.com>
-Content-Type: text/plain; charset="utf-8"
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
+ Thunderbird/91.5.0
+Subject: Re: [PATCH 00/35] Shadow stacks for userspace
 Content-Language: en-US
+To:     "Edgecombe, Rick P" <rick.p.edgecombe@intel.com>,
+        "hjl.tools@gmail.com" <hjl.tools@gmail.com>,
+        "David.Laight@aculab.com" <David.Laight@aculab.com>,
+        Adrian Reber <adrian@lisas.de>,
+        Cyrill Gorcunov <gorcunov@openvz.org>,
+        Eugene Syromiatnikov <esyr@redhat.com>,
+        Dmitry Safonov <0x7f454c46@gmail.com>
+Cc:     "bsingharora@gmail.com" <bsingharora@gmail.com>,
+        "hpa@zytor.com" <hpa@zytor.com>,
+        "Syromiatnikov, Eugene" <esyr@redhat.com>,
+        "peterz@infradead.org" <peterz@infradead.org>,
+        "rdunlap@infradead.org" <rdunlap@infradead.org>,
+        "keescook@chromium.org" <keescook@chromium.org>,
+        "Eranian, Stephane" <eranian@google.com>,
+        "kirill.shutemov@linux.intel.com" <kirill.shutemov@linux.intel.com>,
+        "dave.hansen@linux.intel.com" <dave.hansen@linux.intel.com>,
+        "linux-mm@kvack.org" <linux-mm@kvack.org>,
+        "fweimer@redhat.com" <fweimer@redhat.com>,
+        "nadav.amit@gmail.com" <nadav.amit@gmail.com>,
+        "jannh@google.com" <jannh@google.com>,
+        "kcc@google.com" <kcc@google.com>,
+        "linux-arch@vger.kernel.org" <linux-arch@vger.kernel.org>,
+        "pavel@ucw.cz" <pavel@ucw.cz>, "oleg@redhat.com" <oleg@redhat.com>,
+        "Yang, Weijiang" <weijiang.yang@intel.com>,
+        "bp@alien8.de" <bp@alien8.de>, "arnd@arndb.de" <arnd@arndb.de>,
+        "Moreira, Joao" <joao.moreira@intel.com>,
+        "tglx@linutronix.de" <tglx@linutronix.de>,
+        "mike.kravetz@oracle.com" <mike.kravetz@oracle.com>,
+        "x86@kernel.org" <x86@kernel.org>,
+        "linux-doc@vger.kernel.org" <linux-doc@vger.kernel.org>,
+        "Dave.Martin@arm.com" <Dave.Martin@arm.com>,
+        "john.allen@amd.com" <john.allen@amd.com>,
+        "mingo@redhat.com" <mingo@redhat.com>,
+        "Shankar, Ravi V" <ravi.v.shankar@intel.com>,
+        "corbet@lwn.net" <corbet@lwn.net>,
+        "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
+        "linux-api@vger.kernel.org" <linux-api@vger.kernel.org>,
+        "gorcunov@gmail.com" <gorcunov@gmail.com>
+References: <87fsozek0j.ffs@tglx>
+ <a7e59ae16e0e05579b087caf4045e42b174e2167.camel@intel.com>
+ <3421da7fc8474b6db0e265b20ffd28d0@AcuMS.aculab.com>
+ <CAMe9rOonepEiRyoAyTGkDMQQhuyuoP4iTZJJhKGxgnq9vv=dLQ@mail.gmail.com>
+ <9f948745435c4c9273131146d50fe6f328b91a78.camel@intel.com>
+From:   Andy Lutomirski <luto@kernel.org>
+In-Reply-To: <9f948745435c4c9273131146d50fe6f328b91a78.camel@intel.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-X-Originating-IP: [10.174.177.232]
-X-ClientProxiedBy: dggems704-chm.china.huawei.com (10.3.19.181) To
- dggpeml500006.china.huawei.com (7.185.36.76)
-X-CFilter-Loop: Reflected
-X-Spam-Status: No, score=-4.2 required=5.0 tests=BAYES_00,NICE_REPLY_A,
-        RCVD_IN_DNSWL_MED,SPF_HELO_NONE,SPF_PASS,T_SCC_BODY_TEXT_LINE
+X-Spam-Status: No, score=-7.1 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,NICE_REPLY_A,
+        RCVD_IN_DNSWL_HI,SPF_HELO_NONE,SPF_PASS,T_SCC_BODY_TEXT_LINE
         autolearn=ham autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
@@ -57,258 +95,201 @@ Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On 2022/2/7 15:26, yanteng si wrote:
-> Tang Yizhou <tangyizhou@huawei.com> 于2022年2月7日周一 10:02写道：
->>
->> Translate power/energy-model.rst into Chinese.
->>
->> Signed-off-by: Tang Yizhou <tangyizhou@huawei.com>
->> ---
->>  .../translations/zh_CN/power/energy-model.rst | 195 ++++++++++++++++++
->>  .../translations/zh_CN/power/index.rst        |   2 +-
->>  2 files changed, 196 insertions(+), 1 deletion(-)
->>  create mode 100644 Documentation/translations/zh_CN/power/energy-model.rst
->>
->> diff --git a/Documentation/translations/zh_CN/power/energy-model.rst b/Documentation/translations/zh_CN/power/energy-model.rst
->> new file mode 100644
->> index 000000000000..33a852756632
->> --- /dev/null
->> +++ b/Documentation/translations/zh_CN/power/energy-model.rst
->> @@ -0,0 +1,195 @@
->> +.. SPDX-License-Identifier: GPL-2.0
->> +.. include:: ../disclaimer-zh_CN.rst
->> +
->> +:Original: Documentation/power/energy-model.rst
->> +
->> +:翻译:
->> +
->> +  唐艺舟 Tang Yizhou <tangyeechou@gmail.com>
->> +
->> +============
->> +设备能量模型
->> +============
->> +
->> +1. 概述
->> +-------
->> +
->> +能量模型（EM）框架是一种驱动程序与内核子系统之间的接口。其中驱动程序了解不同
->> +性能层级的设备所消耗的功率，而内核子系统愿意使用该信息做出能量感知决策。
-
-> how about 内核子系统主动使用……？
-
-“愿意”就包含的主动的意思，看起来遵照原文更合适
-
->> +
->> +设备所消耗的功率的信息来源在不同的平台上可能有很大的不同。这些功率成本在某些
->> +情况下可以使用设备树数据来估算。在其它情况下，固件会更清楚。或者，用户空间可能
->> +是最清楚的。以此类推。为了避免每一个客户端子系统对每一种可能的信息源自己重新
->> +实现支持，EM框架作为一个抽象层介入，它在内核中对功率成本表的格式进行标准化，
->> +因此能够避免多余的工作。
->> +
->> +功率值可以用毫瓦或“抽象刻度”表示。多个子系统可能使用EM，由系统集成商来检查
->> +功率值刻度类型的要求是否满足。可以在能量感知调度器的文档中找到一个例子
->> +Documentation/scheduler/sched-energy.rst。对于一些子系统，比如热能或
->> +powercap，用“抽象刻度”描述功率值可能会导致问题。这些子系统对过去使用的功率的
->> +估算值更感兴趣，因此可能需要真实的毫瓦。这些要求的一个例子可以在智能功率分配
->> +Documentation/driver-api/thermal/power_allocator.rst文档中找到。
->> +
->> +内核子系统可能（基于EM内部标志位）实现了对EM注册设备是否具有不一致刻度的自动
->> +检查。要记住的重要事情是，当功率值以“抽象刻度”表示时，从中推导以毫焦耳为单位
->> +的真实能量消耗是不可能的。
->> +
->> +下图描述了一个驱动的例子（这里是针对Arm的，但该方法适用于任何体系结构），它
->> +向EM框架提供了功率成本，感兴趣的客户端可从中读取数据::
->> +
->> +       +---------------+  +-----------------+  +---------------+
->> +       | Thermal (IPA) |  | Scheduler (EAS) |  |     Other     |
->> +       +---------------+  +-----------------+  +---------------+
->> +               |                   | em_cpu_energy()   |
->> +               |                   | em_cpu_get()      |
->> +               +---------+         |         +---------+
->> +                         |         |         |
->> +                         v         v         v
->> +                        +---------------------+
->> +                        |    Energy Model     |
->> +                        |     Framework       |
->> +                        +---------------------+
->> +                           ^       ^       ^
->> +                           |       |       | em_dev_register_perf_domain()
->> +                +----------+       |       +---------+
->> +                |                  |                 |
->> +        +---------------+  +---------------+  +--------------+
->> +        |  cpufreq-dt   |  |   arm_scmi    |  |    Other     |
->> +        +---------------+  +---------------+  +--------------+
->> +                ^                  ^                 ^
->> +                |                  |                 |
->> +        +--------------+   +---------------+  +--------------+
->> +        | Device Tree  |   |   Firmware    |  |      ?       |
->> +        +--------------+   +---------------+  +--------------+
->> +
->> +对于CPU设备，EM框架管理着系统中每个“性能域”的功率成本表。一个性能域是一组
->> +性能一起伸缩的CPU。性能域通常与CPUFreq策略具有1对1映射。一个性能域中的
->> +所有CPU要求具有相同的微架构。不同性能域中的CPU可以有不同的微架构。
->> +
->> +
->> +2. 核心API
->> +----------
->> +
->> +2.1 配置选项
->> +^^^^^^^^^^^^
->> +
->> +必须使能CONFIG_ENERGY_MODEL才能使用EM框架。
->> +
->> +
->> +2.2 性能域的注册
->> +^^^^^^^^^^^^^^^^
->> +
->> +“高级”EM的注册
->> +~~~~~~~~~~~~~~~~
->> +
->> +“高级”EM因它允许驱动提供更精确的功率模型而得名。它并不受限于框架中的一些已
->> +实现的数学公式（就像“简单”EM那样）。它可以更好地反映每个性能状态的实际功率
->> +测量。因此，在EM静态功率（泄露）是重要的情况下，应该首选这种注册方式。
->> +
->> +驱动程序应通过以下API将性能域注册到EM框架中::
->> +
->> +  int em_dev_register_perf_domain(struct device *dev, unsigned int nr_states,
->> +               struct em_data_callback *cb, cpumask_t *cpus, bool milliwatts);
->> +
->> +驱动程序必须提供一个回调函数，为每个性能状态返回<频率,功率>元组。驱动程序
->> +提供的回调函数可以自由地从任何相关位置（DT、固件......）以及以任何被认为是
->> +必要的方式获取数据。只有对于CPU设备，驱动程序必须使用cpumask指定性能域的CPU。
->> +对于CPU以外的其他设备，最后一个参数必须被设置为NULL。
->> +
->> +最后一个参数“milliwatts”（毫瓦）设置成正确的值是很重要的，使用EM的内核
->> +子系统可能会依赖这个标志来检查所有的EM设备是否使用相同的刻度。如果有不同的
->> +刻度，这些子系统可能决定：返回警告/错误，停止工作或恐慌（panic）。
->> +
->> +关于实现这个回调函数的驱动程序的例子，参见第3节。或者在第2.4节阅读这个API
->> +的更多文档。
->> +
->> +
->> +“简单”EM的注册
->> +~~~~~~~~~~~~~~~~
->> +
->> +“简单”EM是用框架的辅助函数cpufreq_register_em_with_opp()注册的。它实现了
->> +一个和以下数学公式紧密相关的功率模型::
->> +
->> +       Power = C * V^2 * f
->> +
->> +使用这种方法注册的EM可能无法正确反映真实设备的物理特性，例如当静态功率
->> +（泄漏）很重要时。
->> +
->> +
->> +2.3 访问性能域
->> +^^^^^^^^^^^^^^
->> +
->> +有两个API函数提供对能量模型的访问。em_cpu_get()以CPU id为参数，em_pd_get()
->> +以设备指针为参数。使用哪个接口取决于子系统，但对于CPU设备来说，这两个函数都返
->> +回相同的性能域。
->> +
->> +对CPU的能量模型感兴趣的子系统可以通过em_cpu_get() API检索它。在创建性能域时
->> +分配一次能量模型表，它保存在内存中不被修改。
->> +
->> +一个性能域所消耗的能量可以使用em_cpu_energy() API来估算。该估算假定CPU设备
->> +使用的CPUfreq监管器是schedutil。当前该计算不能提供给其它类型的设备。
->> +
->> +关于上述API的更多细节可以在 ``<linux/energy_model.h>`` 或第2.4节中找到。
->> +
->> +
->> +2.4 API的细节描述
->> +^^^^^^^^^^^^^^^^^
->> +.. kernel-doc:: include/linux/energy_model.h
->> +   :internal:
->> +
->> +.. kernel-doc:: kernel/power/energy_model.c
->> +   :export:
-
-> Warnings will be introduced，
-
-I didn't see any warnings for this document.
-
-> see .../zh_CN/core-api/kernel-api.rst.
->> +
->> +
->> +3. 驱动示例
->> +-----------
->> +
->> +CPUFreq框架支持专用的回调函数，用于为指定的CPU（们）注册EM：
->> +cpufreq_driver::register_em()。这个回调必须为每个特定的驱动程序正确实现，
->> +因为框架会在设置过程中适时地调用它。本节提供了一个简单的例子，展示CPUFreq驱动
->> +在能量模型框架中使用（假的）“foo”协议注册性能域。该驱动实现了一个est_power()
->> +函数提供给EM框架::
->> +
->> +  -> drivers/cpufreq/foo_cpufreq.c
->> +
->> +  01   static int est_power(unsigned long *mW, unsigned long *KHz,
->> +  02                   struct device *dev)
->> +  03   {
->> +  04           long freq, power;
->> +  05
->> +  06           /* Use the 'foo' protocol to ceil the frequency */
-
-> Need to be translated.
-
-OK
-
->> +  07           freq = foo_get_freq_ceil(dev, *KHz);
->> +  08           if (freq < 0);
->> +  09                   return freq;
->> +  10
->> +  11           /* Estimate the power cost for the dev at the relevant freq. */
->> +  12           power = foo_estimate_power(dev, freq);
->> +  13           if (power < 0);
->> +  14                   return power;
->> +  15
->> +  16           /* Return the values to the EM framework */
->> +  17           *mW = power;
->> +  18           *KHz = freq;
->> +  19
->> +  20           return 0;
->> +  21   }
->> +  22
->> +  23   static void foo_cpufreq_register_em(struct cpufreq_policy *policy)
->> +  24   {
->> +  25           struct em_data_callback em_cb = EM_DATA_CB(est_power);
->> +  26           struct device *cpu_dev;
->> +  27           int nr_opp;
->> +  28
->> +  29           cpu_dev = get_cpu_device(cpumask_first(policy->cpus));
->> +  30
->> +  31           /* Find the number of OPPs for this policy */
->> +  32           nr_opp = foo_get_nr_opp(policy);
->> +  33
->> +  34           /* And register the new performance domain */
->> +  35           em_dev_register_perf_domain(cpu_dev, nr_opp, &em_cb, policy->cpus,
->> +  36                                       true);
->> +  37   }
->> +  38
->> +  39   static struct cpufreq_driver foo_cpufreq_driver = {
->> +  40           .register_em = foo_cpufreq_register_em,
->> +  41   };
->> diff --git a/Documentation/translations/zh_CN/power/index.rst b/Documentation/translations/zh_CN/power/index.rst
->> index ad80a9e80b7c..bc54983ba515 100644
->> --- a/Documentation/translations/zh_CN/power/index.rst
->> +++ b/Documentation/translations/zh_CN/power/index.rst
->> @@ -14,6 +14,7 @@
->>  .. toctree::
->>      :maxdepth: 1
->>
->> +    energy-model
->>      opp
->>
->>  TODOList:
->> @@ -22,7 +23,6 @@ TODOList:
->>      * basic-pm-debugging
->>      * charger-manager
->>      * drivers-testing
->> -    * energy-model
->>      * freezing-of-tasks
->>      * pci
->>      * pm_qos_interface
->> --
->> 2.17.1
->>
-> Thanks,
-> Yanteng
+On 2/5/22 12:15, Edgecombe, Rick P wrote:
+> On Sat, 2022-02-05 at 05:29 -0800, H.J. Lu wrote:
+>> On Sat, Feb 5, 2022 at 5:27 AM David Laight <David.Laight@aculab.com>
+>> wrote:
+>>>
+>>> From: Edgecombe, Rick P
+>>>> Sent: 04 February 2022 01:08
+>>>> Hi Thomas,
+>>>>
+>>>> Thanks for feedback on the plan.
+>>>>
+>>>> On Thu, 2022-02-03 at 22:07 +0100, Thomas Gleixner wrote:
+>>>>>> Until now, the enabling effort was trying to support both
+>>>>>> Shadow
+>>>>>> Stack and IBT.
+>>>>>> This history will focus on a few areas of the shadow stack
+>>>>>> development history
+>>>>>> that I thought stood out.
+>>>>>>
+>>>>>>         Signals
+>>>>>>         -------
+>>>>>>         Originally signals placed the location of the shadow
+>>>>>> stack
+>>>>>> restore
+>>>>>>         token inside the saved state on the stack. This was
+>>>>>> problematic from a
+>>>>>>         past ABI promises perspective. So the restore location
+>>>>>> was
+>>>>>> instead just
+>>>>>>         assumed from the shadow stack pointer. This works
+>>>>>> because in
+>>>>>> normal
+>>>>>>         allowed cases of calling sigreturn, the shadow stack
+>>>>>> pointer
+>>>>>> should be
+>>>>>>         right at the restore token at that time. There is no
+>>>>>> alternate shadow
+>>>>>>         stack support. If an alt shadow stack is added later
+>>>>>> we
+>>>>>> would
+>>>>>>         need to
+>>>>>
+>>>>> So how is that going to work? altstack is not an esoteric
+>>>>> corner
+>>>>> case.
+>>>>
+>>>> My understanding is that the main usages for the signal stack
+>>>> were
+>>>> handling stack overflows and corruption. Since the shadow stack
+>>>> only
+>>>> contains return addresses rather than large stack allocations,
+>>>> and is
+>>>> not generally writable or pivotable, I thought there was a good
+>>>> possibility an alt shadow stack would not end up being especially
+>>>> useful. Does it seem like reasonable guesswork?
+>>>
+>>> The other 'problem' is that it is valid to longjump out of a signal
+>>> handler.
+>>> These days you have to use siglongjmp() not longjmp() but it is
+>>> still used.
+>>>
+>>> It is probably also valid to use siglongjmp() to jump from a nested
+>>> signal handler into the outer handler.
+>>> Given both signal handlers can have their own stack, there can be
+>>> three
+>>> stacks involved.
 > 
+> So the scenario is?
+> 
+> 1. Handle signal 1
+> 2. sigsetjmp()
+> 3. signalstack()
+> 4. Handle signal 2 on alt stack
+> 5. siglongjmp()
+> 
+> I'll check that it is covered by the tests, but I think it should work
+> in this series that has no alt shadow stack. I have only done a high
+> level overview of how the shadow stack stuff, that doesn't involve the
+> kernel, works in glibc. Sounds like I'll need to do a deeper dive.
+> 
+>>>
+>>> I think the shadow stack pointer has to be in ucontext - which also
+>>> means the application can change it before returning from a signal.
+> 
+> Yes we might need to change it to support alt shadow stacks. Can you
+> elaborate why you think it has to be in ucontext? I was thinking of
+> looking at three options for storing the ssp:
+>   - Stored in the shadow stack like a token using WRUSS from the kernel.
+>   - Stored on the kernel side using a hashmap that maps ucontext or
+>     sigframe userspace address to ssp (this is of course similar to
+>     storing in ucontext, except that the user can’t change the ssp).
+>   - Stored writable in userspace in ucontext.
+> 
+> But in this version, without alt shadow stacks, the shadow stack
+> pointer is not stored in ucontext. This causes the limitation that
+> userspace can only call sigreturn when it has returned back to a point
+> where there is a restore token on the shadow stack (which was placed
+> there by the kernel).
+
+
+
+I'll reply here and maybe cover multiple things.
+
+
+User code already needs to rewind the regular stack to call sigreturn -- 
+sigreturn find the signal frame based on ESP/RSP.  So if you call it 
+from the wrong place, you go boom.  I think that the Linux SHSTK ABI 
+should have the property that no amount of tampering with just the 
+ucontext and associated structures can cause sigreturn to redirect to 
+the wrong IP -- there should be something on the shadow stack that also 
+gets verified in sigreturn.  IIRC the series does this, but it's been a 
+while.  The post-sigreturn SSP should be entirely implied by 
+pre-sigreturn SSP (or perhaps something on the shadow stack), so, in the 
+absence of an altshadowstack feature, no ucontext changes should be needed.
+
+We can also return from a signal or from more than one signal at once, 
+as above, using siglongjmp.  It seems like this should Just Work (tm), 
+at least in the absence of altshadowstack.
+
+So this leaves altshadowstack.  If we want to allow userspace to handle 
+a shstk overflow, I think we need altshadowstack.  And I can easily 
+imagine signal handling in a coroutine or user-threading evironment (Go? 
+UMCG or whatever it's called?) wanting this.  As noted, this obnoxious 
+Andy person didn't like putting any shstk-related extensions in the FPU 
+state.
+
+For better or for worse, altshadowstack is (I think) fundamentally a new 
+API.  No amount of ucontext magic is going to materialize an entire 
+shadow stack out of nowhere when someone calls sigaltstack().  So the 
+questions are: should we support altshadowstack from day one and, if so, 
+what should it look like?
+
+If we want to be clever, we could attempt to make altstadowstack 
+compatible with RSTORSSP.  Signal delivery pushes a restore token to the 
+old stack (hah!  what if the old stack is full?) and pushes the RSTORSSP 
+busy magic to the new stack, and sigreturn inverts it.  Code that wants 
+to return without sigreturn does it manually with RSTORSSP.  (Assuming 
+that I've understood the arcane RSTORSSP sequence right.  Intel wins 
+major points for documentation quality here.)  Or we could invent our 
+own scheme.  In either case, I don't immediately see any reason that the 
+ucontext needs to contain a shadow stack pointer.
+
+There's a delightful wart to consider, though.  siglongjmp, at least as 
+currently envisioned, can't return off an altshadowstack: the whole 
+point of the INCSSP distance restrictions to to avoid incrementing right 
+off the top of the current stack, but siglongjmp off an altshadowstack 
+fundamentally switches stacks.  So either siglongjmp off an 
+altshadowstack needs to be illegal or it needs to work differently.  (By 
+incssp-ing to the top of the altshadowstack, then switching, then 
+incssp-ing some more?  How does it even find the top of the current 
+altshadowstack?)  And the plot thickens if one tries to siglongjmp off 
+two nested altshadowstack-using signals in a single call.   Fortunately, 
+since altshadowstack is a new API, it's not entirely crazy to have 
+different rules.
+
+So I don't have a complete or even almost complete design in mind, but I 
+think we do need to make a conscious decision either to design this 
+right or to skip it for v1.
+
+As for CRIU, I don't think anyone really expects a new kernel, running 
+new userspace that takes advantage of features in the new kernel, to 
+work with old CRIU.  Upgrading to a SHSTK kernel should still allow 
+using CRIU with non-SHSTK userspace, but I don't see how it's possible 
+for CRIU to handle SHSTK without updates.  We should certainly do our 
+best to make CRIU's life easy, though.
+
+  This doesn’t mean it can’t switch to a different
+> shadow stack or handle a nested signal, but it limits the possibility
+> for calling sigreturn with a totally different sigframe (like CRIU and
+> SROP attacks do). It should hopefully be a helpful, protective
+> limitation for most apps and I'm hoping CRIU can be fixed without
+> removing it.
+> 
+> I am not aware of other limitations to signals (besides normal shadow
+> stack enforcement), but I could be missing it. And people's skepticism
+> is making me want to go back over it with more scrutiny.
+> 
+>>> In much the same way as all the segment registers can be changed
+>>> leading to all the nasty bugs when the final 'return to user' code
+>>> traps in kernel when loading invalid segment registers or executing
+>>> iret.
+> 
+> I don't think this is as difficult to avoid because userspace ssp has
+> its own register that should not be accessed at that point, but I have
+> not given this aspect enough analysis. Thanks for bringing it up.
+> 
+>>>
+>>> Hmmm... do shadow stacks mean that longjmp() has to be a system
+>>> call?
+>>
+>> No.  setjmp/longjmp save and restore shadow stack pointer.
+>>
+> 
+> It sounds like it would help to write up in a lot more detail exactly
+> how all the signal and specialer stack manipulation scenarios work in
+> glibc.
+> 
+
