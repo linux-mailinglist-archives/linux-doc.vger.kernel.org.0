@@ -2,340 +2,211 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 6D2994AD699
-	for <lists+linux-doc@lfdr.de>; Tue,  8 Feb 2022 12:28:29 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 34A264AD68A
+	for <lists+linux-doc@lfdr.de>; Tue,  8 Feb 2022 12:27:07 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S231963AbiBHL1F (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 8 Feb 2022 06:27:05 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:44668 "EHLO
+        id S241623AbiBHL0t (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 8 Feb 2022 06:26:49 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:45054 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1349291AbiBHJlp (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 8 Feb 2022 04:41:45 -0500
-Received: from mx0a-001b2d01.pphosted.com (mx0b-001b2d01.pphosted.com [148.163.158.5])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 61746C03FEC0;
-        Tue,  8 Feb 2022 01:41:44 -0800 (PST)
-Received: from pps.filterd (m0098414.ppops.net [127.0.0.1])
-        by mx0b-001b2d01.pphosted.com (8.16.1.2/8.16.1.2) with SMTP id 2186nISK021385;
-        Tue, 8 Feb 2022 09:41:42 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ibm.com; h=message-id : date :
- mime-version : subject : to : cc : references : from : in-reply-to :
- content-type : content-transfer-encoding; s=pp1;
- bh=cGAUHhHkpAzrJb5ixZgckyR9+lpUn48KaDM46WHxkUQ=;
- b=OABoHAQzqYlDjS0hBslU3+kz8w1sQ3HosjzYjHYSkiFYPkRD6NGQhbEeRDqHoEwWQ9RU
- 8Gyt0EThBI6BBOQfMD3nkLv385TmqUtEloSUlTAb1whOlOV3VHwanytxUij6Xn1f0DBf
- VfjFz0ZPdT58cHBwd3ZylU20VBt1PNhtLmEeG090Y+cdHcLqfdXuwkqUuguaKNn+Ab8W
- qQsxBcl4Q41WvoheyDUuV2exjOmVFJ7aG8MAB4HXpc+x3KsHdtMUuE0FKrLJ4uuFMJrW
- s7OCJjrunYxCBz3K6EOyjT4V/TRhDmzmwjEphwj5GRpG+u0K2Z/LKdOjJ1CaCkFLAOT7 Mw== 
-Received: from pps.reinject (localhost [127.0.0.1])
-        by mx0b-001b2d01.pphosted.com with ESMTP id 3e3fm4qds2-1
-        (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
-        Tue, 08 Feb 2022 09:41:42 +0000
-Received: from m0098414.ppops.net (m0098414.ppops.net [127.0.0.1])
-        by pps.reinject (8.16.0.43/8.16.0.43) with SMTP id 2189dgfU013180;
-        Tue, 8 Feb 2022 09:41:41 GMT
-Received: from ppma02fra.de.ibm.com (47.49.7a9f.ip4.static.sl-reverse.com [159.122.73.71])
-        by mx0b-001b2d01.pphosted.com with ESMTP id 3e3fm4qdrf-1
-        (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
-        Tue, 08 Feb 2022 09:41:41 +0000
-Received: from pps.filterd (ppma02fra.de.ibm.com [127.0.0.1])
-        by ppma02fra.de.ibm.com (8.16.1.2/8.16.1.2) with SMTP id 2189clVw018221;
-        Tue, 8 Feb 2022 09:41:39 GMT
-Received: from b06cxnps3075.portsmouth.uk.ibm.com (d06relay10.portsmouth.uk.ibm.com [9.149.109.195])
-        by ppma02fra.de.ibm.com with ESMTP id 3e1gv9b227-1
-        (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
-        Tue, 08 Feb 2022 09:41:39 +0000
-Received: from d06av24.portsmouth.uk.ibm.com (mk.ibm.com [9.149.105.60])
-        by b06cxnps3075.portsmouth.uk.ibm.com (8.14.9/8.14.9/NCO v10.0) with ESMTP id 2189fYwx35193340
-        (version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
-        Tue, 8 Feb 2022 09:41:34 GMT
-Received: from d06av24.portsmouth.uk.ibm.com (unknown [127.0.0.1])
-        by IMSVA (Postfix) with ESMTP id 30CA642056;
-        Tue,  8 Feb 2022 09:41:34 +0000 (GMT)
-Received: from d06av24.portsmouth.uk.ibm.com (unknown [127.0.0.1])
-        by IMSVA (Postfix) with ESMTP id 7700442052;
-        Tue,  8 Feb 2022 09:41:33 +0000 (GMT)
-Received: from [9.145.150.231] (unknown [9.145.150.231])
-        by d06av24.portsmouth.uk.ibm.com (Postfix) with ESMTP;
-        Tue,  8 Feb 2022 09:41:33 +0000 (GMT)
-Message-ID: <b80c9fee-3b6c-51cb-b399-c5f334c92fcf@linux.ibm.com>
-Date:   Tue, 8 Feb 2022 10:41:33 +0100
+        with ESMTP id S239854AbiBHJnS (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 8 Feb 2022 04:43:18 -0500
+Received: from mail-ej1-x633.google.com (mail-ej1-x633.google.com [IPv6:2a00:1450:4864:20::633])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 07927C03FEC0;
+        Tue,  8 Feb 2022 01:43:17 -0800 (PST)
+Received: by mail-ej1-x633.google.com with SMTP id j14so27115517ejy.6;
+        Tue, 08 Feb 2022 01:43:16 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112;
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=Lq+dKx41RUjgzj8JvU9gnjviVgG4UdA+iyRcp+19UfA=;
+        b=kzTiv9B2U7Wc0fxzGKxQg8uhdYfgfO/xIoYNmhC/rgC3OhSFBPSSSVQO2K03kmbWfV
+         +UGcT+3CXBaxmU4wl8vygy23F0/n2OIZj2wwoZZ6M8tTxHSy5w2XasdRhToXb6F0ZJL/
+         5huGHAex9ROgFLbGyHXavnKHmZg06VqvEs+lU3tVrec1MwOb4gQ+YZnPEYUEScn8yWtG
+         WF55TzQTCmLzqEGG4Wwt1SN9T/qVgfgZxo3olqp4twStPc8Fvlq9EMbnn/OX0tq+yMTp
+         Nu1gS0AV+TRUTP19KVXQYe2RVt0OjPTJ8exsji8O9JmPiZQToxuJaegip/FXmkOFrhBJ
+         PJzw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=Lq+dKx41RUjgzj8JvU9gnjviVgG4UdA+iyRcp+19UfA=;
+        b=q5js+0T8YuxD/PeJk01Wx/XllnlZgCF/Zj1js5uulnlweydHDse+Jmyzk6pi+Z178R
+         GY1xrd4G1PYw7fjh2Bt84dsMCdyqkP1AdpgokWUegGQId6/hDq0ZAiAzcI0+wpv3gatL
+         5alRv6j8uVKhZfgc9VJFPp4Aubskx17aSri7qKsN54e2cDLk+LvTFolwHnf0zNwkqTiM
+         0ZQiSQesn0mtB+ZwiQvliQ8NyMcJaYUI8uefN/+YDHe6aUOde1ju35IKWIuIehaB4p4x
+         GAnClsUMLqz0kdLXbFg7lpNVwOxaaOeVIjmoxPCKomJK24tK040U8fw7O24OXRFzL5xP
+         BZPg==
+X-Gm-Message-State: AOAM532l7rVUk+WT/IYG/IIZYuBNZeqHps3bPT6ovJITC+OkKdJ+P6TB
+        dK/MDRN0+s0LeSyWUhpp3ts=
+X-Google-Smtp-Source: ABdhPJwAZUEHLlmX1IkuCQdKZVNT6gCfYtB0CZnvNZIAtRmMvtzYnBBVouYUplHQTTxgvw/iOFbdAA==
+X-Received: by 2002:a17:907:1115:: with SMTP id qu21mr2996031ejb.192.1644313395453;
+        Tue, 08 Feb 2022 01:43:15 -0800 (PST)
+Received: from tiger.museclub.art (p200300cf9f235800e668694710673d4b.dip0.t-ipconnect.de. [2003:cf:9f23:5800:e668:6947:1067:3d4b])
+        by smtp.googlemail.com with ESMTPSA id v14sm585931edq.13.2022.02.08.01.43.13
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 08 Feb 2022 01:43:14 -0800 (PST)
+From:   Eugene Shalygin <eugene.shalygin@gmail.com>
+To:     eugene.shalygin@gmail.com
+Cc:     Oleksandr Natalenko <oleksandr@natalenko.name>,
+        Denis Pauk <pauk.denis@gmail.com>,
+        Jean Delvare <jdelvare@suse.com>,
+        Guenter Roeck <linux@roeck-us.net>,
+        Jonathan Corbet <corbet@lwn.net>, linux-hwmon@vger.kernel.org,
+        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org
+Subject: [PATCH] hwmon: (asus-ec-sensors) add CPU core voltage
+Date:   Tue,  8 Feb 2022 10:42:43 +0100
+Message-Id: <20220208094244.1106312-1-eugene.shalygin@gmail.com>
+X-Mailer: git-send-email 2.35.1
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.5.0
-Subject: Re: [PATCH v2 01/11] s390/uaccess: Add copy_from/to_user_key
- functions
-Content-Language: en-US
-To:     Janis Schoetterl-Glausch <scgl@linux.ibm.com>,
-        Christian Borntraeger <borntraeger@linux.ibm.com>,
-        Heiko Carstens <hca@linux.ibm.com>
-Cc:     Alexander Gordeev <agordeev@linux.ibm.com>,
-        Claudio Imbrenda <imbrenda@linux.ibm.com>,
-        David Hildenbrand <david@redhat.com>,
-        Jonathan Corbet <corbet@lwn.net>, kvm@vger.kernel.org,
-        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
-        linux-s390@vger.kernel.org, Paolo Bonzini <pbonzini@redhat.com>,
-        Sven Schnelle <svens@linux.ibm.com>,
-        Vasily Gorbik <gor@linux.ibm.com>
-References: <20220207165930.1608621-1-scgl@linux.ibm.com>
- <20220207165930.1608621-2-scgl@linux.ibm.com>
-From:   Janosch Frank <frankja@linux.ibm.com>
-In-Reply-To: <20220207165930.1608621-2-scgl@linux.ibm.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-TM-AS-GCONF: 00
-X-Proofpoint-ORIG-GUID: jzIv20Dpv3TK71FV7oDU1q5gkXGRdx2I
-X-Proofpoint-GUID: ClkEsWZKCa43gF0SkDozm-nPMc7pdPQ4
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.205,Aquarius:18.0.816,Hydra:6.0.425,FMLib:17.11.62.513
- definitions=2022-02-08_02,2022-02-07_02,2021-12-02_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 mlxscore=0 malwarescore=0
- spamscore=0 bulkscore=0 impostorscore=0 priorityscore=1501 phishscore=0
- mlxlogscore=999 clxscore=1011 adultscore=0 lowpriorityscore=0
- suspectscore=0 classifier=spam adjust=0 reason=mlx scancount=1
- engine=8.12.0-2201110000 definitions=main-2202080054
-X-Spam-Status: No, score=-2.0 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_EF,NICE_REPLY_A,RCVD_IN_MSPIKE_H5,
-        RCVD_IN_MSPIKE_WL,SPF_HELO_NONE,SPF_PASS,T_SCC_BODY_TEXT_LINE
-        autolearn=ham autolearn_force=no version=3.4.6
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+X-Spam-Status: No, score=-2.1 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_FROM,
+        RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,SPF_PASS,T_SCC_BODY_TEXT_LINE,
+        UPPERCASE_50_75 autolearn=no autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On 2/7/22 17:59, Janis Schoetterl-Glausch wrote:
-> Add copy_from/to_user_key functions, which perform storage key checking.
-> These functions can be used by KVM for emulating instructions that need
-> to be key checked.
-> These functions differ from their non _key counterparts in
-> include/linux/uaccess.h only in the additional key argument and must be
-> kept in sync with those.
-> 
-> Since the existing uaccess implementation on s390 makes use of move
-> instructions that support having an additional access key supplied,
-> we can implement raw_copy_from/to_user_key by enhancing the
-> existing implementation.
-> 
-> Signed-off-by: Janis Schoetterl-Glausch <scgl@linux.ibm.com>
+A user discovered [1] the CPU Core voltage sensor, which spans 2
+registers and provides output in mV. Althroug the discovery was made
+with a X470 chipset, the sensor is present in X570 (tested with C8H).
+For now simply add it to each board with the CPU current sensor present.
 
-Acked-by: Janosch Frank <frankja@linux.ibm.com>
+[1] https://github.com/zeule/asus-ec-sensors/issues/12
 
+Signed-off-by: Eugene Shalygin <eugene.shalygin@gmail.com>
+---
+ Documentation/hwmon/asus_ec_sensors.rst |  1 +
+ drivers/hwmon/asus-ec-sensors.c         | 29 ++++++++++++++++---------
+ 2 files changed, 20 insertions(+), 10 deletions(-)
 
-> ---
->   arch/s390/include/asm/uaccess.h | 22 +++++++++
->   arch/s390/lib/uaccess.c         | 81 +++++++++++++++++++++++++--------
->   2 files changed, 85 insertions(+), 18 deletions(-)
-> 
-> diff --git a/arch/s390/include/asm/uaccess.h b/arch/s390/include/asm/uaccess.h
-> index d74e26b48604..ba1bcb91af95 100644
-> --- a/arch/s390/include/asm/uaccess.h
-> +++ b/arch/s390/include/asm/uaccess.h
-> @@ -44,6 +44,28 @@ raw_copy_to_user(void __user *to, const void *from, unsigned long n);
->   #define INLINE_COPY_TO_USER
->   #endif
->   
-> +unsigned long __must_check
-> +_copy_from_user_key(void *to, const void __user *from, unsigned long n, unsigned long key);
-> +
-> +static __always_inline unsigned long __must_check
-> +copy_from_user_key(void *to, const void __user *from, unsigned long n, unsigned long key)
-> +{
-> +	if (likely(check_copy_size(to, n, false)))
-> +		n = _copy_from_user_key(to, from, n, key);
-> +	return n;
-> +}
-> +
-> +unsigned long __must_check
-> +_copy_to_user_key(void __user *to, const void *from, unsigned long n, unsigned long key);
-> +
-> +static __always_inline unsigned long __must_check
-> +copy_to_user_key(void __user *to, const void *from, unsigned long n, unsigned long key)
-> +{
-> +	if (likely(check_copy_size(from, n, true)))
-> +		n = _copy_to_user_key(to, from, n, key);
-> +	return n;
-> +}
-> +
->   int __put_user_bad(void) __attribute__((noreturn));
->   int __get_user_bad(void) __attribute__((noreturn));
->   
-> diff --git a/arch/s390/lib/uaccess.c b/arch/s390/lib/uaccess.c
-> index 8a5d21461889..b709239feb5d 100644
-> --- a/arch/s390/lib/uaccess.c
-> +++ b/arch/s390/lib/uaccess.c
-> @@ -59,11 +59,13 @@ static inline int copy_with_mvcos(void)
->   #endif
->   
->   static inline unsigned long copy_from_user_mvcos(void *x, const void __user *ptr,
-> -						 unsigned long size)
-> +						 unsigned long size, unsigned long key)
->   {
->   	unsigned long tmp1, tmp2;
->   	union oac spec = {
-> +		.oac2.key = key,
->   		.oac2.as = PSW_BITS_AS_SECONDARY,
-> +		.oac2.k = 1,
->   		.oac2.a = 1,
->   	};
->   
-> @@ -94,19 +96,19 @@ static inline unsigned long copy_from_user_mvcos(void *x, const void __user *ptr
->   }
->   
->   static inline unsigned long copy_from_user_mvcp(void *x, const void __user *ptr,
-> -						unsigned long size)
-> +						unsigned long size, unsigned long key)
->   {
->   	unsigned long tmp1, tmp2;
->   
->   	tmp1 = -256UL;
->   	asm volatile(
->   		"   sacf  0\n"
-> -		"0: mvcp  0(%0,%2),0(%1),%3\n"
-> +		"0: mvcp  0(%0,%2),0(%1),%[key]\n"
->   		"7: jz    5f\n"
->   		"1: algr  %0,%3\n"
->   		"   la    %1,256(%1)\n"
->   		"   la    %2,256(%2)\n"
-> -		"2: mvcp  0(%0,%2),0(%1),%3\n"
-> +		"2: mvcp  0(%0,%2),0(%1),%[key]\n"
->   		"8: jnz   1b\n"
->   		"   j     5f\n"
->   		"3: la    %4,255(%1)\n"	/* %4 = ptr + 255 */
-> @@ -115,7 +117,7 @@ static inline unsigned long copy_from_user_mvcp(void *x, const void __user *ptr,
->   		"   slgr  %4,%1\n"
->   		"   clgr  %0,%4\n"	/* copy crosses next page boundary? */
->   		"   jnh   6f\n"
-> -		"4: mvcp  0(%4,%2),0(%1),%3\n"
-> +		"4: mvcp  0(%4,%2),0(%1),%[key]\n"
->   		"9: slgr  %0,%4\n"
->   		"   j     6f\n"
->   		"5: slgr  %0,%0\n"
-> @@ -123,24 +125,49 @@ static inline unsigned long copy_from_user_mvcp(void *x, const void __user *ptr,
->   		EX_TABLE(0b,3b) EX_TABLE(2b,3b) EX_TABLE(4b,6b)
->   		EX_TABLE(7b,3b) EX_TABLE(8b,3b) EX_TABLE(9b,6b)
->   		: "+a" (size), "+a" (ptr), "+a" (x), "+a" (tmp1), "=a" (tmp2)
-> -		: : "cc", "memory");
-> +		: [key] "d" (key << 4)
-> +		: "cc", "memory");
->   	return size;
->   }
->   
-> -unsigned long raw_copy_from_user(void *to, const void __user *from, unsigned long n)
-> +static unsigned long raw_copy_from_user_key(void *to, const void __user *from,
-> +					    unsigned long n, unsigned long key)
->   {
->   	if (copy_with_mvcos())
-> -		return copy_from_user_mvcos(to, from, n);
-> -	return copy_from_user_mvcp(to, from, n);
-> +		return copy_from_user_mvcos(to, from, n, key);
-> +	return copy_from_user_mvcp(to, from, n, key);
-> +}
-> +
-> +unsigned long raw_copy_from_user(void *to, const void __user *from, unsigned long n)
-> +{
-> +	return raw_copy_from_user_key(to, from, n, 0);
->   }
->   EXPORT_SYMBOL(raw_copy_from_user);
->   
-> +unsigned long _copy_from_user_key(void *to, const void __user *from,
-> +				  unsigned long n, unsigned long key)
-> +{
-> +	unsigned long res = n;
-> +
-> +	might_fault();
-> +	if (!should_fail_usercopy()) {
-> +		instrument_copy_from_user(to, from, n);
-> +		res = raw_copy_from_user_key(to, from, n, key);
-> +	}
-> +	if (unlikely(res))
-> +		memset(to + (n - res), 0, res);
-> +	return res;
-> +}
-> +EXPORT_SYMBOL(_copy_from_user_key);
-> +
->   static inline unsigned long copy_to_user_mvcos(void __user *ptr, const void *x,
-> -					       unsigned long size)
-> +					       unsigned long size, unsigned long key)
->   {
->   	unsigned long tmp1, tmp2;
->   	union oac spec = {
-> +		.oac1.key = key,
->   		.oac1.as = PSW_BITS_AS_SECONDARY,
-> +		.oac1.k = 1,
->   		.oac1.a = 1,
->   	};
->   
-> @@ -171,19 +198,19 @@ static inline unsigned long copy_to_user_mvcos(void __user *ptr, const void *x,
->   }
->   
->   static inline unsigned long copy_to_user_mvcs(void __user *ptr, const void *x,
-> -					      unsigned long size)
-> +					      unsigned long size, unsigned long key)
->   {
->   	unsigned long tmp1, tmp2;
->   
->   	tmp1 = -256UL;
->   	asm volatile(
->   		"   sacf  0\n"
-> -		"0: mvcs  0(%0,%1),0(%2),%3\n"
-> +		"0: mvcs  0(%0,%1),0(%2),%[key]\n"
->   		"7: jz    5f\n"
->   		"1: algr  %0,%3\n"
->   		"   la    %1,256(%1)\n"
->   		"   la    %2,256(%2)\n"
-> -		"2: mvcs  0(%0,%1),0(%2),%3\n"
-> +		"2: mvcs  0(%0,%1),0(%2),%[key]\n"
->   		"8: jnz   1b\n"
->   		"   j     5f\n"
->   		"3: la    %4,255(%1)\n" /* %4 = ptr + 255 */
-> @@ -192,7 +219,7 @@ static inline unsigned long copy_to_user_mvcs(void __user *ptr, const void *x,
->   		"   slgr  %4,%1\n"
->   		"   clgr  %0,%4\n"	/* copy crosses next page boundary? */
->   		"   jnh   6f\n"
-> -		"4: mvcs  0(%4,%1),0(%2),%3\n"
-> +		"4: mvcs  0(%4,%1),0(%2),%[key]\n"
->   		"9: slgr  %0,%4\n"
->   		"   j     6f\n"
->   		"5: slgr  %0,%0\n"
-> @@ -200,18 +227,36 @@ static inline unsigned long copy_to_user_mvcs(void __user *ptr, const void *x,
->   		EX_TABLE(0b,3b) EX_TABLE(2b,3b) EX_TABLE(4b,6b)
->   		EX_TABLE(7b,3b) EX_TABLE(8b,3b) EX_TABLE(9b,6b)
->   		: "+a" (size), "+a" (ptr), "+a" (x), "+a" (tmp1), "=a" (tmp2)
-> -		: : "cc", "memory");
-> +		: [key] "d" (key << 4)
-> +		: "cc", "memory");
->   	return size;
->   }
->   
-> -unsigned long raw_copy_to_user(void __user *to, const void *from, unsigned long n)
-> +static unsigned long raw_copy_to_user_key(void __user *to, const void *from,
-> +					  unsigned long n, unsigned long key)
->   {
->   	if (copy_with_mvcos())
-> -		return copy_to_user_mvcos(to, from, n);
-> -	return copy_to_user_mvcs(to, from, n);
-> +		return copy_to_user_mvcos(to, from, n, key);
-> +	return copy_to_user_mvcs(to, from, n, key);
-> +}
-> +
-> +unsigned long raw_copy_to_user(void __user *to, const void *from, unsigned long n)
-> +{
-> +	return raw_copy_to_user_key(to, from, n, 0);
->   }
->   EXPORT_SYMBOL(raw_copy_to_user);
->   
-> +unsigned long _copy_to_user_key(void __user *to, const void *from,
-> +				unsigned long n, unsigned long key)
-> +{
-> +	might_fault();
-> +	if (should_fail_usercopy())
-> +		return n;
-> +	instrument_copy_to_user(to, from, n);
-> +	return raw_copy_to_user_key(to, from, n, key);
-> +}
-> +EXPORT_SYMBOL(_copy_to_user_key);
-> +
->   static inline unsigned long clear_user_mvcos(void __user *to, unsigned long size)
->   {
->   	unsigned long tmp1, tmp2;
+diff --git a/Documentation/hwmon/asus_ec_sensors.rst b/Documentation/hwmon/asus_ec_sensors.rst
+index 22de1b037cfb..e7e8f1640f45 100644
+--- a/Documentation/hwmon/asus_ec_sensors.rst
++++ b/Documentation/hwmon/asus_ec_sensors.rst
+@@ -39,6 +39,7 @@ The driver is aware of and reads the following sensors:
+ 9. Readings from the "Water flow meter" header (RPM)
+ 10. Readings from the "Water In" and "Water Out" temperature headers
+ 11. CPU current
++12. CPU core voltage
+ 
+ Sensor values are read from EC registers, and to avoid race with the board
+ firmware the driver acquires ACPI mutex, the one used by the WMI when its
+diff --git a/drivers/hwmon/asus-ec-sensors.c b/drivers/hwmon/asus-ec-sensors.c
+index dd7b207d062f..bfac08a5dc57 100644
+--- a/drivers/hwmon/asus-ec-sensors.c
++++ b/drivers/hwmon/asus-ec-sensors.c
+@@ -18,6 +18,7 @@
+  * - VRM Heat Sink fan RPM
+  * - Water Flow fan RPM
+  * - CPU current
++ * - CPU core voltage
+  */
+ 
+ #include <linux/acpi.h>
+@@ -100,6 +101,8 @@ enum ec_sensors {
+ 	ec_sensor_temp_t_sensor,
+ 	/* VRM temperature [℃] */
+ 	ec_sensor_temp_vrm,
++	/* CPU Core voltage [mV] */
++	ec_sensor_in_cpu_core,
+ 	/* CPU_Opt fan [RPM] */
+ 	ec_sensor_fan_cpu_opt,
+ 	/* VRM heat sink fan [RPM] */
+@@ -121,6 +124,7 @@ enum ec_sensors {
+ #define SENSOR_TEMP_MB BIT(ec_sensor_temp_mb)
+ #define SENSOR_TEMP_T_SENSOR BIT(ec_sensor_temp_t_sensor)
+ #define SENSOR_TEMP_VRM BIT(ec_sensor_temp_vrm)
++#define SENSOR_IN_CPU_CORE BIT(ec_sensor_in_cpu_core)
+ #define SENSOR_FAN_CPU_OPT BIT(ec_sensor_fan_cpu_opt)
+ #define SENSOR_FAN_VRM_HS BIT(ec_sensor_fan_vrm_hs)
+ #define SENSOR_FAN_CHIPSET BIT(ec_sensor_fan_chipset)
+@@ -139,6 +143,8 @@ static const struct ec_sensor_info known_ec_sensors[] = {
+ 	[ec_sensor_temp_t_sensor] =
+ 		EC_SENSOR("T_Sensor", hwmon_temp, 1, 0x00, 0x3d),
+ 	[ec_sensor_temp_vrm] = EC_SENSOR("VRM", hwmon_temp, 1, 0x00, 0x3e),
++	[ec_sensor_in_cpu_core] =
++		EC_SENSOR("CPU Core", hwmon_in, 2, 0x00, 0xa2),
+ 	[ec_sensor_fan_cpu_opt] =
+ 		EC_SENSOR("CPU_Opt", hwmon_fan, 2, 0x00, 0xb0),
+ 	[ec_sensor_fan_vrm_hs] = EC_SENSOR("VRM HS", hwmon_fan, 2, 0x00, 0xb2),
+@@ -172,32 +178,34 @@ static const struct dmi_system_id asus_ec_dmi_table[] __initconst = {
+ 		SENSOR_TEMP_T_SENSOR | SENSOR_FAN_CHIPSET),
+ 	DMI_EXACT_MATCH_BOARD(VENDOR_ASUS_UPPER_CASE, "Pro WS X570-ACE",
+ 		SENSOR_SET_TEMP_CHIPSET_CPU_MB | SENSOR_TEMP_VRM |
+-		SENSOR_FAN_CHIPSET | SENSOR_CURR_CPU),
++		SENSOR_FAN_CHIPSET | SENSOR_CURR_CPU | SENSOR_IN_CPU_CORE),
+ 	DMI_EXACT_MATCH_BOARD(VENDOR_ASUS_UPPER_CASE,
+ 			      "ROG CROSSHAIR VIII DARK HERO",
+ 		SENSOR_SET_TEMP_CHIPSET_CPU_MB | SENSOR_TEMP_T_SENSOR |
+ 		SENSOR_TEMP_VRM | SENSOR_SET_TEMP_WATER |
+-		SENSOR_FAN_CPU_OPT | SENSOR_FAN_WATER_FLOW | SENSOR_CURR_CPU),
++		SENSOR_FAN_CPU_OPT | SENSOR_FAN_WATER_FLOW |
++		SENSOR_CURR_CPU | SENSOR_IN_CPU_CORE),
+ 	DMI_EXACT_MATCH_BOARD(VENDOR_ASUS_UPPER_CASE,
+ 			      "ROG CROSSHAIR VIII FORMULA",
+ 		SENSOR_SET_TEMP_CHIPSET_CPU_MB | SENSOR_TEMP_T_SENSOR |
+ 		SENSOR_TEMP_VRM | SENSOR_FAN_CPU_OPT | SENSOR_FAN_CHIPSET |
+-		SENSOR_CURR_CPU),
++		SENSOR_CURR_CPU | SENSOR_IN_CPU_CORE),
+ 	DMI_EXACT_MATCH_BOARD(VENDOR_ASUS_UPPER_CASE, "ROG CROSSHAIR VIII HERO",
+ 		SENSOR_SET_TEMP_CHIPSET_CPU_MB | SENSOR_TEMP_T_SENSOR |
+ 		SENSOR_TEMP_VRM | SENSOR_SET_TEMP_WATER |
+ 		SENSOR_FAN_CPU_OPT | SENSOR_FAN_CHIPSET |
+-		SENSOR_FAN_WATER_FLOW | SENSOR_CURR_CPU),
++		SENSOR_FAN_WATER_FLOW | SENSOR_CURR_CPU | SENSOR_IN_CPU_CORE),
+ 	DMI_EXACT_MATCH_BOARD(VENDOR_ASUS_UPPER_CASE,
+ 			      "ROG CROSSHAIR VIII HERO (WI-FI)",
+ 		SENSOR_SET_TEMP_CHIPSET_CPU_MB | SENSOR_TEMP_T_SENSOR |
+ 		SENSOR_TEMP_VRM | SENSOR_SET_TEMP_WATER |
+ 		SENSOR_FAN_CPU_OPT | SENSOR_FAN_CHIPSET |
+-		SENSOR_FAN_WATER_FLOW | SENSOR_CURR_CPU),
++		SENSOR_FAN_WATER_FLOW | SENSOR_CURR_CPU | SENSOR_IN_CPU_CORE),
+ 	DMI_EXACT_MATCH_BOARD(VENDOR_ASUS_UPPER_CASE,
+ 			      "ROG CROSSHAIR VIII IMPACT",
+ 		SENSOR_SET_TEMP_CHIPSET_CPU_MB | SENSOR_TEMP_T_SENSOR |
+-		SENSOR_TEMP_VRM | SENSOR_FAN_CHIPSET | SENSOR_CURR_CPU),
++		SENSOR_TEMP_VRM | SENSOR_FAN_CHIPSET |
++		SENSOR_CURR_CPU | SENSOR_IN_CPU_CORE),
+ 	DMI_EXACT_MATCH_BOARD(VENDOR_ASUS_UPPER_CASE, "ROG STRIX B550-E GAMING",
+ 		SENSOR_SET_TEMP_CHIPSET_CPU_MB |
+ 		SENSOR_TEMP_T_SENSOR |
+@@ -205,17 +213,19 @@ static const struct dmi_system_id asus_ec_dmi_table[] __initconst = {
+ 	DMI_EXACT_MATCH_BOARD(VENDOR_ASUS_UPPER_CASE, "ROG STRIX B550-I GAMING",
+ 		SENSOR_SET_TEMP_CHIPSET_CPU_MB |
+ 		SENSOR_TEMP_T_SENSOR |
+-		SENSOR_TEMP_VRM | SENSOR_FAN_VRM_HS | SENSOR_CURR_CPU),
++		SENSOR_TEMP_VRM | SENSOR_FAN_VRM_HS |
++		SENSOR_CURR_CPU | SENSOR_IN_CPU_CORE),
+ 	DMI_EXACT_MATCH_BOARD(VENDOR_ASUS_UPPER_CASE, "ROG STRIX X570-E GAMING",
+ 		SENSOR_SET_TEMP_CHIPSET_CPU_MB |
+ 		SENSOR_TEMP_T_SENSOR |
+-		SENSOR_TEMP_VRM | SENSOR_FAN_CHIPSET | SENSOR_CURR_CPU),
++		SENSOR_TEMP_VRM | SENSOR_FAN_CHIPSET |
++		SENSOR_CURR_CPU | SENSOR_IN_CPU_CORE),
+ 	DMI_EXACT_MATCH_BOARD(VENDOR_ASUS_UPPER_CASE, "ROG STRIX X570-F GAMING",
+ 		SENSOR_SET_TEMP_CHIPSET_CPU_MB |
+ 		SENSOR_TEMP_T_SENSOR | SENSOR_FAN_CHIPSET),
+ 	DMI_EXACT_MATCH_BOARD(VENDOR_ASUS_UPPER_CASE, "ROG STRIX X570-I GAMING",
+ 		SENSOR_TEMP_T_SENSOR | SENSOR_FAN_VRM_HS |
+-		SENSOR_FAN_CHIPSET | SENSOR_CURR_CPU),
++		SENSOR_FAN_CHIPSET | SENSOR_CURR_CPU | SENSOR_IN_CPU_CORE),
+ 	{}
+ };
+ 
+@@ -467,7 +477,6 @@ static long scale_sensor_value(s32 value, int data_type)
+ 	switch (data_type) {
+ 	case hwmon_curr:
+ 	case hwmon_temp:
+-	case hwmon_in:
+ 		return value * MILLI;
+ 	default:
+ 		return value;
+-- 
+2.35.1
 
