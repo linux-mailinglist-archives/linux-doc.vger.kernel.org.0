@@ -2,121 +2,72 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 44B4C4AD944
-	for <lists+linux-doc@lfdr.de>; Tue,  8 Feb 2022 14:17:38 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 1B9CE4AD8F9
+	for <lists+linux-doc@lfdr.de>; Tue,  8 Feb 2022 14:16:36 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1349904AbiBHNQI (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 8 Feb 2022 08:16:08 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:60544 "EHLO
+        id S239085AbiBHNQL (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 8 Feb 2022 08:16:11 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:34832 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1349943AbiBHMqq (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 8 Feb 2022 07:46:46 -0500
-Received: from szxga01-in.huawei.com (szxga01-in.huawei.com [45.249.212.187])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 6A3BBC03FEC0
-        for <linux-doc@vger.kernel.org>; Tue,  8 Feb 2022 04:46:44 -0800 (PST)
-Received: from dggpeml500020.china.huawei.com (unknown [172.30.72.53])
-        by szxga01-in.huawei.com (SkyGuard) with ESMTP id 4JtN5y28jHzccjs;
-        Tue,  8 Feb 2022 20:45:42 +0800 (CST)
-Received: from dggpeml500006.china.huawei.com (7.185.36.76) by
- dggpeml500020.china.huawei.com (7.185.36.88) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2308.21; Tue, 8 Feb 2022 20:46:42 +0800
-Received: from [10.174.177.232] (10.174.177.232) by
- dggpeml500006.china.huawei.com (7.185.36.76) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2308.21; Tue, 8 Feb 2022 20:46:41 +0800
-Subject: Re: [PATCH v3] docs/zh_CN: Add energy-model Chinese translation
-To:     Alex Shi <seakeel@gmail.com>, yanteng si <siyanteng01@gmail.com>
-CC:     Yanteng Si <siyanteng@loongson.cn>, Alex Shi <alexs@kernel.org>,
-        "Linux Doc Mailing List" <linux-doc@vger.kernel.org>,
-        Jonathan Corbet <corbet@lwn.net>, <zhengbin13@huawei.com>,
-        Yeechou Tang <tangyeechou@gmail.com>
-References: <20220208073600.10860-1-tangyizhou@huawei.com>
- <CAEensMwEUHVaZevehMpr6tAxHzDhEQhihgseCJVpJG3=fQ0+Hw@mail.gmail.com>
- <CAJy-AmnF-3ou-mNiHESyH3FLU42ejwzCNFNA7_NgzgmQKPg1cg@mail.gmail.com>
-From:   Tang Yizhou <tangyizhou@huawei.com>
-Message-ID: <9c64e3ef-3eb5-4446-e9d1-dda896febed8@huawei.com>
-Date:   Tue, 8 Feb 2022 20:46:41 +0800
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:78.0) Gecko/20100101
- Thunderbird/78.1.1
-MIME-Version: 1.0
-In-Reply-To: <CAJy-AmnF-3ou-mNiHESyH3FLU42ejwzCNFNA7_NgzgmQKPg1cg@mail.gmail.com>
-Content-Type: text/plain; charset="utf-8"
-Content-Language: en-US
-Content-Transfer-Encoding: 8bit
-X-Originating-IP: [10.174.177.232]
-X-ClientProxiedBy: dggems703-chm.china.huawei.com (10.3.19.180) To
- dggpeml500006.china.huawei.com (7.185.36.76)
-X-CFilter-Loop: Reflected
-X-Spam-Status: No, score=-1.5 required=5.0 tests=BAYES_50,NICE_REPLY_A,
-        RCVD_IN_DNSWL_MED,SPF_HELO_NONE,SPF_PASS,T_SCC_BODY_TEXT_LINE
-        autolearn=ham autolearn_force=no version=3.4.6
+        with ESMTP id S1349815AbiBHM5X (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 8 Feb 2022 07:57:23 -0500
+X-Greylist: delayed 359 seconds by postgrey-1.37 at lindbergh.monkeyblade.net; Tue, 08 Feb 2022 04:57:19 PST
+Received: from loongson.cn (mail.loongson.cn [114.242.206.163])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTP id EAFB8C03FEC0;
+        Tue,  8 Feb 2022 04:57:19 -0800 (PST)
+Received: from linux.localdomain (unknown [113.200.148.30])
+        by mail.loongson.cn (Coremail) with SMTP id AQAAf9DxL+M6ZwJik0oIAA--.26524S2;
+        Tue, 08 Feb 2022 20:51:07 +0800 (CST)
+From:   Tiezhu Yang <yangtiezhu@loongson.cn>
+To:     Baoquan He <bhe@redhat.com>, Jonathan Corbet <corbet@lwn.net>,
+        Andrew Morton <akpm@linux-foundation.org>,
+        Marco Elver <elver@google.com>,
+        Andrey Ryabinin <ryabinin.a.a@gmail.com>
+Cc:     Xuefeng Li <lixuefeng@loongson.cn>, kexec@lists.infradead.org,
+        linux-doc@vger.kernel.org, kasan-dev@googlegroups.com,
+        linux-mm@kvack.org, linux-kernel@vger.kernel.org
+Subject: [PATCH v2 0/5] Update doc and fix some issues about kdump
+Date:   Tue,  8 Feb 2022 20:51:01 +0800
+Message-Id: <1644324666-15947-1-git-send-email-yangtiezhu@loongson.cn>
+X-Mailer: git-send-email 2.1.0
+X-CM-TRANSID: AQAAf9DxL+M6ZwJik0oIAA--.26524S2
+X-Coremail-Antispam: 1UD129KBjDUn29KB7ZKAUJUUUUU529EdanIXcx71UUUUU7v73
+        VFW2AGmfu7bjvjm3AaLaJ3UjIYCTnIWjp_UUUYS7AC8VAFwI0_Gr0_Xr1l1xkIjI8I6I8E
+        6xAIw20EY4v20xvaj40_Wr0E3s1l1IIY67AEw4v_Jr0_Jr4l8cAvFVAK0II2c7xJM28Cjx
+        kF64kEwVA0rcxSw2x7M28EF7xvwVC0I7IYx2IY67AKxVW5JVW7JwA2z4x0Y4vE2Ix0cI8I
+        cVCY1x0267AKxVW8JVWxJwA2z4x0Y4vEx4A2jsIE14v26rxl6s0DM28EF7xvwVC2z280aV
+        CY1x0267AKxVW0oVCq3wAS0I0E0xvYzxvE52x082IY62kv0487Mc02F40EFcxC0VAKzVAq
+        x4xG6I80ewAv7VC0I7IYx2IY67AKxVWUGVWUXwAv7VC2z280aVAFwI0_Gr0_Cr1lOx8S6x
+        CaFVCjc4AY6r1j6r4UM4x0Y48IcxkI7VAKI48JM4x0x7Aq67IIx4CEVc8vx2IErcIFxwAC
+        I402YVCY1x02628vn2kIc2xKxwCY02Avz4vE14v_Xr1l42xK82IYc2Ij64vIr41l4I8I3I
+        0E4IkC6x0Yz7v_Jr0_Gr1lx2IqxVAqx4xG67AKxVWUJVWUGwC20s026x8GjcxK67AKxVWU
+        GVWUWwC2zVAF1VAY17CE14v26r1q6r43MIIYrxkI7VAKI48JMIIF0xvE2Ix0cI8IcVAFwI
+        0_Jr0_JF4lIxAIcVC0I7IYx2IY6xkF7I0E14v26r4j6F4UMIIF0xvE42xK8VAvwI8IcIk0
+        rVWrZr1j6s0DMIIF0xvEx4A2jsIE14v26r1j6r4UMIIF0xvEx4A2jsIEc7CjxVAFwI0_Gr
+        0_Gr1UYxBIdaVFxhVjvjDU0xZFpf9x0JU6wZcUUUUU=
+X-CM-SenderInfo: p1dqw3xlh2x3gn0dqz5rrqw2lrqou0/
+X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00,SPF_HELO_PASS,
+        SPF_PASS,T_SCC_BODY_TEXT_LINE autolearn=ham autolearn_force=no
+        version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On 2022/2/8 20:38, Alex Shi wrote:
-> On Tue, Feb 8, 2022 at 5:45 PM yanteng si <siyanteng01@gmail.com> wrote:
->>
->> Tang Yizhou <tangyizhou@huawei.com> 于2022年2月8日周二 15:03写道：
->>>
->>> Translate power/energy-model.rst into Chinese.
->>>
->>> Signed-off-by: Tang Yizhou <tangyizhou@huawei.com>
->> Reviewed-by: Yanteng Si <siyanteng@loongson.cn>
->>> ---
->>> v3:
->>> Don't include English kernel doc.
->>>
->>> v2:
->>> Translate the comments in the example program.
->>>
->>>  .../translations/zh_CN/power/energy-model.rst | 190 ++++++++++++++++++
->>>  .../translations/zh_CN/power/index.rst        |   2 +-
->>>  2 files changed, 191 insertions(+), 1 deletion(-)
->>>  create mode 100644 Documentation/translations/zh_CN/power/energy-model.rst
->>>
->>> diff --git a/Documentation/translations/zh_CN/power/energy-model.rst b/Documentation/translations/zh_CN/power/energy-model.rst
->>> new file mode 100644
->>> index 000000000000..bcf29d624860
->>> --- /dev/null
->>> +++ b/Documentation/translations/zh_CN/power/energy-model.rst
+Tiezhu Yang (5):
+  docs: kdump: update description about sysfs file system support
+  docs: kdump: add scp example to write out the dump file
+  panic: unset panic_on_warn inside panic()
+  ubsan: no need to unset panic_on_warn in ubsan_epilogue()
+  kasan: no need to unset panic_on_warn in end_report()
 
->>> +
->>> +最后一个参数“milliwatts”（毫瓦）设置成正确的值是很重要的，使用EM的内核
->>> +子系统可能会依赖这个标志来检查所有的EM设备是否使用相同的刻度。如果有不同的
->>> +刻度，这些子系统可能决定：返回警告/错误，停止工作或恐慌（panic）。
->
- 
-> panic 是不是翻译成 ’崩溃‘ 更好？
+ Documentation/admin-guide/kdump/kdump.rst | 10 +++++++---
+ kernel/panic.c                            | 20 +++++++++++---------
+ lib/ubsan.c                               | 10 +---------
+ mm/kasan/report.c                         | 10 +---------
+ 4 files changed, 20 insertions(+), 30 deletions(-)
 
-OK
-
-> 
->>> +
->>> +关于实现这个回调函数的驱动程序的例子，参见第3节。或者在第2.4节阅读这个API
->>> +的更多文档。
->>> +
->>> +
->>> +“简单”EM的注册
->>> +~~~~~~~~~~~~~~~~
->>> +
->>> +“简单”EM是用框架的辅助函数cpufreq_register_em_with_opp()注册的。它实现了
->>> +一个和以下数学公式紧密相关的功率模型::
->>> +
->>> +       Power = C * V^2 * f
->>> +
->>> +使用这种方法注册的EM可能无法正确反映真实设备的物理特性，例如当静态功率
->>> +（泄漏）很重要时。
- 
-> leakage 是指晶体管的 ‘漏电流' 。
-
-Haha, you major in physics and are much familiar with this word :) Thanks. 
-
-> 
-> Thanks
-> Alex
-> 
+-- 
+2.1.0
 
