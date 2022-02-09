@@ -2,75 +2,90 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 18D834AE60A
-	for <lists+linux-doc@lfdr.de>; Wed,  9 Feb 2022 01:32:22 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 259784AE6BB
+	for <lists+linux-doc@lfdr.de>; Wed,  9 Feb 2022 03:41:00 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S239328AbiBIAcU (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 8 Feb 2022 19:32:20 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:38934 "EHLO
+        id S243555AbiBICkd (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 8 Feb 2022 21:40:33 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:50164 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S238991AbiBIAcU (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 8 Feb 2022 19:32:20 -0500
-Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.129.124])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTP id 853A7C06157B
-        for <linux-doc@vger.kernel.org>; Tue,  8 Feb 2022 16:32:19 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-        s=mimecast20190719; t=1644366737;
-        h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-         to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-         in-reply-to:in-reply-to:references:references;
-        bh=sB5IseLJBNqjNOsMz7OQ46XvJJFOFs9bsWn3jXjDKHA=;
-        b=eL9Gk0xhtVsIz0MGIRkxe61YAeCqtFdchRRbLOVPXP+nH1hwwcdPgF3WpEI8tPSz8EClNP
-        v8m/5TVu4Q18hxVPHjbZvwANYM4TTClVNTrfcAszvBHOELQJeR5wL2OKEiEok8caCk3K9n
-        QnteTcMMbNQmwZE9zK2A7Rt/EXK7TDo=
-Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
- [209.132.183.4]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- us-mta-613-SjNaxTdpPPeoX9hYgKnVJg-1; Tue, 08 Feb 2022 19:32:14 -0500
-X-MC-Unique: SjNaxTdpPPeoX9hYgKnVJg-1
-Received: from smtp.corp.redhat.com (int-mx01.intmail.prod.int.phx2.redhat.com [10.5.11.11])
-        (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
-        (No client certificate requested)
-        by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 6CC7E1006AA4;
-        Wed,  9 Feb 2022 00:32:11 +0000 (UTC)
-Received: from localhost (ovpn-12-114.pek2.redhat.com [10.72.12.114])
-        by smtp.corp.redhat.com (Postfix) with ESMTPS id 229E162D48;
-        Wed,  9 Feb 2022 00:31:53 +0000 (UTC)
-Date:   Wed, 9 Feb 2022 08:31:51 +0800
-From:   "bhe@redhat.com" <bhe@redhat.com>
-To:     "Guilherme G. Piccoli" <gpiccoli@igalia.com>
-Cc:     Petr Mladek <pmladek@suse.com>,
-        "dyoung@redhat.com" <dyoung@redhat.com>,
-        "vgoyal@redhat.com" <vgoyal@redhat.com>,
-        "d.hatayama@fujitsu.com" <d.hatayama@fujitsu.com>,
-        "kexec@lists.infradead.org" <kexec@lists.infradead.org>,
-        "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
-        "linux-doc@vger.kernel.org" <linux-doc@vger.kernel.org>,
-        "stern@rowland.harvard.edu" <stern@rowland.harvard.edu>,
-        "akpm@linux-foundation.org" <akpm@linux-foundation.org>,
-        "andriy.shevchenko@linux.intel.com" 
-        <andriy.shevchenko@linux.intel.com>,
-        "corbet@lwn.net" <corbet@lwn.net>,
-        "halves@canonical.com" <halves@canonical.com>,
-        "kernel@gpiccoli.net" <kernel@gpiccoli.net>, mhiramat@kernel.org,
-        d.hatayama@jp.fujitsu.com
-Subject: Re: [PATCH V4] notifier/panic: Introduce panic_notifier_filter
-Message-ID: <YgMLd+avxyBplfk2@MiWiFi-R3L-srv>
-References: <20220108153451.195121-1-gpiccoli@igalia.com>
- <TYAPR01MB6507D06BA6D32218F6E88198955F9@TYAPR01MB6507.jpnprd01.prod.outlook.com>
- <fda509a5-ea0d-4d1d-a1c1-ca5e80010fc0@igalia.com>
- <TYAPR01MB6507D9747647685B554B8F8F955F9@TYAPR01MB6507.jpnprd01.prod.outlook.com>
- <fb5e66b6-049a-22ab-5913-a04cc302b629@igalia.com>
- <YfPxvzSzDLjO5ldp@alley>
- <e2d39675-5df6-73fb-fa24-df906a97ee50@igalia.com>
+        with ESMTP id S242102AbiBIBKd (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 8 Feb 2022 20:10:33 -0500
+Received: from mail-pl1-x630.google.com (mail-pl1-x630.google.com [IPv6:2607:f8b0:4864:20::630])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 4D9FCC06173B
+        for <linux-doc@vger.kernel.org>; Tue,  8 Feb 2022 17:10:32 -0800 (PST)
+Received: by mail-pl1-x630.google.com with SMTP id j4so825905plj.8
+        for <linux-doc@vger.kernel.org>; Tue, 08 Feb 2022 17:10:32 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=chromium.org; s=google;
+        h=date:from:to:cc:subject:message-id:references:mime-version
+         :content-disposition:in-reply-to;
+        bh=krZ7XDngCuaQ/kaEDAhJETqO/lCcgabbGCGZ64ZW5mg=;
+        b=B01e8AvROu8wzAWvnNc18YbXO4k2zAp/FgRgRHBcFtqjYpKfCKhf7Kc6cTHWN3J1h+
+         Ckp20PmKRI8ExSgFiVFMDw1LR/I0GvkZyP8im4vYtSfL6Hyvf9Qg+MXw9i4rui+Giqwl
+         3JFxHmZuIKASMn6wPqEmWknLrINw4rKAFikTo=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+         :mime-version:content-disposition:in-reply-to;
+        bh=krZ7XDngCuaQ/kaEDAhJETqO/lCcgabbGCGZ64ZW5mg=;
+        b=Toj1oXG4GdggXBqwSni1bUbK2NY3XXo6vX4ehBEKjSkCS/Av6u9ed+qnJ6Exm3sKAo
+         xZFduwdlhcRzgqfogPAJODZr+TTbiiDYRhWfUPGlbiee5M5shxTgEAiH2ImDVDh95+CS
+         9ppzuwkoSw55DzlBarqXi6Kid30bjvCwIU9VoWgT0GyCsaDTe/zqVGCcfxrLoSl/88ix
+         qgY69Vlbid7n4hGLOqbSuXx/gjRWzggw68g+eJVSnjCvAL1r/joRlyuOInCtk/SpOiED
+         W8IYwLs9sEFMAaxSIo+nF0+9lP3ZG3mct3prl4o9jIvIA7J+Xl1u/rxQT56E4TsSZMd8
+         mvaA==
+X-Gm-Message-State: AOAM532C1apWrp6CGmhEbUL9xiFBnk8v5n+sSqVhg3X5ml3ykD4OHHlP
+        RvVY9JpVO4B/MhX5xzU07473lg==
+X-Google-Smtp-Source: ABdhPJzRY0y5DOmxHW5tLxcTUeq347A0tFTU13T02PtIPhjLsx9UZtCJcdBxPe9IpIDlMO7MS7TXZg==
+X-Received: by 2002:a17:903:41c6:: with SMTP id u6mr7045085ple.74.1644369031529;
+        Tue, 08 Feb 2022 17:10:31 -0800 (PST)
+Received: from www.outflux.net (smtp.outflux.net. [198.145.64.163])
+        by smtp.gmail.com with ESMTPSA id b4sm17437326pfl.106.2022.02.08.17.10.31
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 08 Feb 2022 17:10:31 -0800 (PST)
+Date:   Tue, 8 Feb 2022 17:10:30 -0800
+From:   Kees Cook <keescook@chromium.org>
+To:     Rick Edgecombe <rick.p.edgecombe@intel.com>
+Cc:     x86@kernel.org, "H . Peter Anvin" <hpa@zytor.com>,
+        Thomas Gleixner <tglx@linutronix.de>,
+        Ingo Molnar <mingo@redhat.com>, linux-kernel@vger.kernel.org,
+        linux-doc@vger.kernel.org, linux-mm@kvack.org,
+        linux-arch@vger.kernel.org, linux-api@vger.kernel.org,
+        Arnd Bergmann <arnd@arndb.de>,
+        Andy Lutomirski <luto@kernel.org>,
+        Balbir Singh <bsingharora@gmail.com>,
+        Borislav Petkov <bp@alien8.de>,
+        Cyrill Gorcunov <gorcunov@gmail.com>,
+        Dave Hansen <dave.hansen@linux.intel.com>,
+        Eugene Syromiatnikov <esyr@redhat.com>,
+        Florian Weimer <fweimer@redhat.com>,
+        "H . J . Lu" <hjl.tools@gmail.com>, Jann Horn <jannh@google.com>,
+        Jonathan Corbet <corbet@lwn.net>,
+        Mike Kravetz <mike.kravetz@oracle.com>,
+        Nadav Amit <nadav.amit@gmail.com>,
+        Oleg Nesterov <oleg@redhat.com>, Pavel Machek <pavel@ucw.cz>,
+        Peter Zijlstra <peterz@infradead.org>,
+        Randy Dunlap <rdunlap@infradead.org>,
+        "Ravi V . Shankar" <ravi.v.shankar@intel.com>,
+        Dave Martin <Dave.Martin@arm.com>,
+        Weijiang Yang <weijiang.yang@intel.com>,
+        "Kirill A . Shutemov" <kirill.shutemov@linux.intel.com>,
+        joao.moreira@intel.com, John Allen <john.allen@amd.com>,
+        kcc@google.com, eranian@google.com,
+        Yu-cheng Yu <yu-cheng.yu@intel.com>
+Subject: Re: [PATCH 03/35] x86/cpufeatures: Add CET CPU feature flags for
+ Control-flow Enforcement Technology (CET)
+Message-ID: <202202081709.96226C0B@keescook>
+References: <20220130211838.8382-1-rick.p.edgecombe@intel.com>
+ <20220130211838.8382-4-rick.p.edgecombe@intel.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <e2d39675-5df6-73fb-fa24-df906a97ee50@igalia.com>
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.11
-X-Spam-Status: No, score=-2.8 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_LOW,
-        SPF_HELO_NONE,SPF_NONE,T_SCC_BODY_TEXT_LINE autolearn=unavailable
+In-Reply-To: <20220130211838.8382-4-rick.p.edgecombe@intel.com>
+X-Spam-Status: No, score=-2.1 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_NONE,
+        SPF_HELO_NONE,SPF_PASS,T_SCC_BODY_TEXT_LINE autolearn=unavailable
         autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
@@ -78,143 +93,97 @@ Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On 02/08/22 at 03:51pm, Guilherme G. Piccoli wrote:
-> On 28/01/2022 10:38, Petr Mladek wrote:
-> > [...] On Thu 2022-01-27 14:16:20, Guilherme G. Piccoli wrote:
-> > First, I am sorry for the very long mail. But the problem is really
-> > complicated. I did my best to describe it a clean way.
-> > 
-> > I have discussed these problems with a colleague and he had some good
-> > points. And my view evolved even further.
+On Sun, Jan 30, 2022 at 01:18:06PM -0800, Rick Edgecombe wrote:
+> From: Yu-cheng Yu <yu-cheng.yu@intel.com>
 > 
-> Thanks Petr for the very comprehensive and detailed email - this helps a
-> lot in shaping the future of panic notifier(s)!
+> Add CPU feature flags for Control-flow Enforcement Technology (CET).
 > 
-> 
-> > [...] 
-> > I think about the following solution:
-> > 
-> >     + split the notifiers into three lists:
-> > 
-> > 	+ info: stop watchdogs, provide extra info
-> > 	+ hypervisor: poke hypervisor
-> > 	+ reboot: actions needed only when crash dump did not happen
-> > 
-> >     + allow to call hypervisor notifiers before or after kdump
-> > 
-> >     + stop CPUs before kdump when either hypervisor notifiers or
-> >       kmsg_dump is enabled
-> > 
-> > Note that it still allows to call kdump as the first action when
-> > hypervisor notifiers are called after kdump and no kmsg dumper
-> > is registered.
-> > 
-> > 
-> > void panic(void)
-> > {
-> > 	[...]
-> > 
-> > 	if (crash_kexec_post_hypervisor || panic_print || enabled_kmsg_dump()) {
-> > 		/*
-> > 		 * Stop CPUs when some extra action is required before
-> > 		 * crash dump. We will need architecture dependent extra
-> > 		 * works in addition to stopping other CPUs.
-> > 		 */
-> > 		 crash_smp_send_stop();
-> > 		 cpus_stopped = true;
-> > 	}
-> > 
-> > 	if (crash_kexec_post_hypervisor) {
-> > 		  /* Tell hypervisor about the panic */
-> > 		  atomic_notifier_call_chain(&panic_hypervisor_notifier_list, 0, buf);
-> > 	}
-> > 
-> > 	if (enabled_kmsg_dump) {
-> > 		  /*
-> > 		   * Print extra info by notifiers.
-> > 		   * Prevent rumors, for example, by stopping watchdogs.
-> > 		   */
-> > 		  atomic_notifier_call_chain(&panic_info_notifier_list, 0, buf);
-> > 	}
-> > 
-> > 	/* Optional extra info */
-> > 	panic_printk_sys_info();
-> > 
-> > 	/* No dumper by default */
-> > 	kmsg_dump();
-> > 
-> > 	/* Used only when crash kernel loaded */
-> > 	__crash_kexec(NULL);
-> > 
-> > 	if (!cpus_stopped) {
-> > 		/*
-> > 		 * Note smp_send_stop is the usual smp shutdown function, which
-> > 		 * unfortunately means it may not be hardened to work in a
-> > 		 * panic situation.
-> > 		 */
-> > 		smp_send_stop();
-> > 	}
-> > 
-> > 	if (!crash_kexec_post_hypervisor) {
-> > 		  /* Tell hypervisor about the panic */
-> > 		  atomic_notifier_call_chain(&panic_hypervisor_notifier_list, 0, buf);
-> > 	}
-> > 
-> > 	if (!enabled_kmsg_dump) {
-> > 		  /*
-> > 		   * Print extra info by notifiers.
-> > 		   * Prevent rumors, for example, by stopping watchdogs.
-> > 		   */
-> > 		  atomic_notifier_call_chain(&panic_info_notifier_list, 0, buf);
-> > 	}
-> > 
-> > 	/*
-> > 	 * Help to reboot a safe way.
-> > 	 */
-> > 	atomic_notifier_call_chain(&panic_reboot_notifier_list, 0, buf);
-> > 
-> > 	[...]
-> > }
-> > 
-> > Any opinion?
-> > Do the notifier list names make sense?
-> > 
-> 
-> This was exposed very clearly, thanks. I agree with you, it's a good
-> approach, and we can evolve that during the implementation phase, like
-> "function A is not good in the hypervisor list because of this and
-> that", so we move it to the reboot list. Also, name of the lists is not
-> so relevant, might evolve in the implementation phase - I personally
-> liked them, specially the "info" and "hypervisor" ones (reboot seems
-> good but not great heh).
-> 
-> So, what are the opinions from kdump maintainers about this idea?
-> Baoquan / Vivek / Dave, does it make sense to you? Do you have any
-> suggestions/concerns to add on top of Petr draft?
+> CPUID.(EAX=7,ECX=0):ECX[bit 7] Shadow stack
+> CPUID.(EAX=7,ECX=0):EDX[bit 20] Indirect Branch Tracking
 
-Yeah, it's reasonable. As I replied to Michael in another thread, I
-think splitting the current notifier list is a good idea. At least the
-code to archieve hyper-V's goal with panic_notifier is a little odd and
-should be taken out and execute w/o conditional before kdump, and maybe
-some others Petr has combed out.
+It looks like this only adds the SHSTK bit, maybe drop mention of IBT
+here.
 
-For those which will be switched on with the need of adding panic_notifier
-or panic_print into cmdline, the heavy users like HATAYAMA and Masa can
-help check.
+I wonder if we could land this (and the IBT part) without waiting for
+everything else in the respective series?
 
-For Petr's draft code, does it mean hyper-V need another knob to trigger
-the needed notifiers? Will you go with the draft direclty? Hyper-V now
-runs panic notifiers by default, just a reminder.
+-Kees
 
 > 
-> I prefer this refactor than the filter, certainly. If nobody else
-> working on that, I can try implementing that - it's very interesting.
-> The only thing I'd like to have first is an ACK from the kdump
-> maintainers about the general idea.
+> Signed-off-by: Yu-cheng Yu <yu-cheng.yu@intel.com>
+> Signed-off-by: Rick Edgecombe <rick.p.edgecombe@intel.com>
+> Cc: Kees Cook <keescook@chromium.org>
+> ---
 > 
-> Cheers,
+> v1:
+>  - Remove IBT, can be added in a follow on IBT series.
 > 
+> Yu-cheng v25:
+>  - Make X86_FEATURE_IBT depend on X86_FEATURE_SHSTK.
 > 
-> Guilherme
+> Yu-cheng v24:
+>  - Update for splitting CONFIG_X86_CET to CONFIG_X86_SHADOW_STACK and
+>    CONFIG_X86_IBT.
+>  - Move DISABLE_IBT definition to the IBT series.
+> 
+>  arch/x86/include/asm/cpufeatures.h       | 1 +
+>  arch/x86/include/asm/disabled-features.h | 8 +++++++-
+>  arch/x86/kernel/cpu/cpuid-deps.c         | 1 +
+>  3 files changed, 9 insertions(+), 1 deletion(-)
+> 
+> diff --git a/arch/x86/include/asm/cpufeatures.h b/arch/x86/include/asm/cpufeatures.h
+> index 6db4e2932b3d..c3eb94b13fef 100644
+> --- a/arch/x86/include/asm/cpufeatures.h
+> +++ b/arch/x86/include/asm/cpufeatures.h
+> @@ -355,6 +355,7 @@
+>  #define X86_FEATURE_OSPKE		(16*32+ 4) /* OS Protection Keys Enable */
+>  #define X86_FEATURE_WAITPKG		(16*32+ 5) /* UMONITOR/UMWAIT/TPAUSE Instructions */
+>  #define X86_FEATURE_AVX512_VBMI2	(16*32+ 6) /* Additional AVX512 Vector Bit Manipulation Instructions */
+> +#define X86_FEATURE_SHSTK		(16*32+ 7) /* Shadow Stack */
+>  #define X86_FEATURE_GFNI		(16*32+ 8) /* Galois Field New Instructions */
+>  #define X86_FEATURE_VAES		(16*32+ 9) /* Vector AES */
+>  #define X86_FEATURE_VPCLMULQDQ		(16*32+10) /* Carry-Less Multiplication Double Quadword */
+> diff --git a/arch/x86/include/asm/disabled-features.h b/arch/x86/include/asm/disabled-features.h
+> index 8f28fafa98b3..b7728f7afb2b 100644
+> --- a/arch/x86/include/asm/disabled-features.h
+> +++ b/arch/x86/include/asm/disabled-features.h
+> @@ -65,6 +65,12 @@
+>  # define DISABLE_SGX	(1 << (X86_FEATURE_SGX & 31))
+>  #endif
+>  
+> +#ifdef CONFIG_X86_SHADOW_STACK
+> +#define DISABLE_SHSTK	0
+> +#else
+> +#define DISABLE_SHSTK	(1 << (X86_FEATURE_SHSTK & 31))
+> +#endif
+> +
+>  /*
+>   * Make sure to add features to the correct mask
+>   */
+> @@ -85,7 +91,7 @@
+>  #define DISABLED_MASK14	0
+>  #define DISABLED_MASK15	0
+>  #define DISABLED_MASK16	(DISABLE_PKU|DISABLE_OSPKE|DISABLE_LA57|DISABLE_UMIP| \
+> -			 DISABLE_ENQCMD)
+> +			 DISABLE_ENQCMD|DISABLE_SHSTK)
+>  #define DISABLED_MASK17	0
+>  #define DISABLED_MASK18	0
+>  #define DISABLED_MASK19	0
+> diff --git a/arch/x86/kernel/cpu/cpuid-deps.c b/arch/x86/kernel/cpu/cpuid-deps.c
+> index c881bcafba7d..bf1b55a1ba21 100644
+> --- a/arch/x86/kernel/cpu/cpuid-deps.c
+> +++ b/arch/x86/kernel/cpu/cpuid-deps.c
+> @@ -78,6 +78,7 @@ static const struct cpuid_dep cpuid_deps[] = {
+>  	{ X86_FEATURE_XFD,			X86_FEATURE_XSAVES    },
+>  	{ X86_FEATURE_XFD,			X86_FEATURE_XGETBV1   },
+>  	{ X86_FEATURE_AMX_TILE,			X86_FEATURE_XFD       },
+> +	{ X86_FEATURE_SHSTK,			X86_FEATURE_XSAVES    },
+>  	{}
+>  };
+>  
+> -- 
+> 2.17.1
 > 
 
+-- 
+Kees Cook
