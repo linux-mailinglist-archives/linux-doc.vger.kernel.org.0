@@ -2,71 +2,95 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 7F00B4B036E
-	for <lists+linux-doc@lfdr.de>; Thu, 10 Feb 2022 03:35:46 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 687EC4B037E
+	for <lists+linux-doc@lfdr.de>; Thu, 10 Feb 2022 03:38:46 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S230518AbiBJCfa (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 9 Feb 2022 21:35:30 -0500
-Received: from mxb-00190b01.gslb.pphosted.com ([23.128.96.19]:47434 "EHLO
+        id S231518AbiBJCh5 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 9 Feb 2022 21:37:57 -0500
+Received: from mxb-00190b01.gslb.pphosted.com ([23.128.96.19]:50014 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S230357AbiBJCf2 (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Wed, 9 Feb 2022 21:35:28 -0500
-Received: from mail-qt1-x82a.google.com (mail-qt1-x82a.google.com [IPv6:2607:f8b0:4864:20::82a])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 45251237D2;
-        Wed,  9 Feb 2022 18:35:30 -0800 (PST)
-Received: by mail-qt1-x82a.google.com with SMTP id z1so3806377qto.3;
-        Wed, 09 Feb 2022 18:35:30 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=from:to:cc:subject:date:message-id:in-reply-to:references
-         :mime-version:content-transfer-encoding;
-        bh=oJUtVaUMZZQ3Wf3eYjXBC/gGfRZDVoAst5E9J28F8Fw=;
-        b=Mk9V3Uge8lU26SkqYaHpr1oS8I+T8nFRRG8J9Tr86RzwVjWAlYQhUqE+FIV4/6EOD2
-         ZqSHtbvRkDaoZxHBb9yVQJrnRTPzmbuTkHamCogMd8FB1IFg2QxlZL4w+476LwMlmjzO
-         Zjyyck1EmKMJFRU//TdVg1fn0NsgBuFIigMdxT+K9Pv2mG5Huig7dbIilITJK3GRmC+j
-         ryF5hNV160hFP+muelCNcwLiF6GtQvdHWDqsiZSujewBnhAcvxkxKjzezXPbCB5PJVSz
-         ENeITHkXJcmsjhWko8yKM+hJEvI3SbJwHMWbesCwbdU8MyI92Q1RvbJBgQjHxg4djXw1
-         Jy1A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-         :references:mime-version:content-transfer-encoding;
-        bh=oJUtVaUMZZQ3Wf3eYjXBC/gGfRZDVoAst5E9J28F8Fw=;
-        b=6AzYrhrerkXYj1dKKcZYVZUkM6sRJR4TXow+7XYwNzJGprs2bXANAHkZCQJWYrD3Qm
-         1mVXM8A1PenIczgx2NHm9ITaUdVbl1LkX/IJsc+DHbs3o53ax88Odnw3RK+d3aCs3WVh
-         lDQQAyy2kLV78bY6ypCPU8DG57MqUyFCIHGUqVHb2ZZ5Gdy1+aCSlAKbmFKM4O449/hW
-         iXu0aec49ILjErq7EbKPc0Sf0yhH85cZZQrqxx2mwTTk34oy6+uCVOSCdKOkoo/8Hvm6
-         dzXuHhNuZY+gXqLgEAzATNq6/CDfvEPbMcJ1qgA3yV+sxvOibMAW532LlI9wz8boxQAd
-         ig+g==
-X-Gm-Message-State: AOAM530Cown6M7BOFJ7U2RdAI3DjT1bB8FB9LmDJnEOJJUxk9ZGDPiuG
-        I13XKfPRXtedXI3vwZKcPIM=
-X-Google-Smtp-Source: ABdhPJy9P2O4RKwq83H+EoQrtNUcaisIFb9g4ub306K5gr2IRqBRMRVBztCnm4LMQY8Rgn0es2KDKQ==
-X-Received: by 2002:a05:622a:50a:: with SMTP id l10mr3496252qtx.679.1644460529457;
-        Wed, 09 Feb 2022 18:35:29 -0800 (PST)
-Received: from localhost.localdomain (c-67-187-90-124.hsd1.tn.comcast.net. [67.187.90.124])
-        by smtp.gmail.com with ESMTPSA id h11sm1333374qkp.89.2022.02.09.18.35.28
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 09 Feb 2022 18:35:29 -0800 (PST)
-From:   frowand.list@gmail.com
-To:     Jonathan Corbet <corbet@lwn.net>, David Gow <davidgow@google.com>,
-        Shuah Khan <skhan@linuxfoundation.org>,
-        Kees Cook <keescook@chromium.org>, Rae Moar <rmoar@google.com>,
-        Tim.Bird@sony.com, Brendan Higgins <brendanhiggins@google.com>
-Cc:     rmr167@gmail.com, guillaume.tucker@collabora.com,
-        dlatypov@google.com, kernelci@groups.io,
-        kunit-dev@googlegroups.com, linux-kselftest@vger.kernel.org,
-        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org
-Subject: [PATCH v4 2/2] Documentation: dev-tools: fix KTAP specification build warnings
-Date:   Wed,  9 Feb 2022 20:35:19 -0600
-Message-Id: <20220210023519.3221051-3-frowand.list@gmail.com>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20220210023519.3221051-1-frowand.list@gmail.com>
-References: <20220210023519.3221051-1-frowand.list@gmail.com>
+        with ESMTP id S231453AbiBJChz (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Wed, 9 Feb 2022 21:37:55 -0500
+Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id EB9C620F42;
+        Wed,  9 Feb 2022 18:37:57 -0800 (PST)
+Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
+        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+        (No client certificate requested)
+        by dfw.source.kernel.org (Postfix) with ESMTPS id C0E1761A04;
+        Thu, 10 Feb 2022 02:37:56 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id EF411C340E7;
+        Thu, 10 Feb 2022 02:37:53 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+        s=k20201202; t=1644460676;
+        bh=Hz8lGy4gshpW8UEDEsTd4W5QPRJ4DB6xlgp8dtJmJVs=;
+        h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+        b=qBoGpg3x7UdPi5W24ulRcPFLrg5AX4Vwf8vlXAVP8tXZooNbKLpjRx+HwugslUA1U
+         A1uiJqFP0r/cM7S3kT2Naj4yn+Bm+ufOmPXbGHyqhEJR8TowGrp1eJiIm/NyoDy5Cj
+         rBQIbHJPI8il1HrAUl7GVs7Hyvin8cPoUzuWvTmEFxhOFH/CQ3Dko7Itpwm5EzF2F2
+         EP2bGeCDzGMzDfPtAB21ITDZjhX5K+X6bAZCQ93e36CJn5oH7TtT8B68mkGE2zLqdE
+         3BChVLbpuin+iwBD5fdIeeZ0qdXKM6tjCHde41DmMo5Lg+fUwqRteJfktFGf3GTS/d
+         ilUECoKuBJnIQ==
+Message-ID: <9d664c91-2116-42cc-ef8d-e6d236de43d0@kernel.org>
+Date:   Wed, 9 Feb 2022 18:37:53 -0800
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Spam-Status: No, score=-2.1 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_FROM,
-        RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,SPF_PASS,T_SCC_BODY_TEXT_LINE
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
+ Thunderbird/91.5.0
+Subject: Re: [PATCH 00/35] Shadow stacks for userspace
+Content-Language: en-US
+To:     "Edgecombe, Rick P" <rick.p.edgecombe@intel.com>,
+        "gorcunov@gmail.com" <gorcunov@gmail.com>
+Cc:     "bsingharora@gmail.com" <bsingharora@gmail.com>,
+        "hpa@zytor.com" <hpa@zytor.com>,
+        "Syromiatnikov, Eugene" <esyr@redhat.com>,
+        "peterz@infradead.org" <peterz@infradead.org>,
+        "rdunlap@infradead.org" <rdunlap@infradead.org>,
+        "keescook@chromium.org" <keescook@chromium.org>,
+        "0x7f454c46@gmail.com" <0x7f454c46@gmail.com>,
+        "dave.hansen@linux.intel.com" <dave.hansen@linux.intel.com>,
+        "kirill.shutemov@linux.intel.com" <kirill.shutemov@linux.intel.com>,
+        "Eranian, Stephane" <eranian@google.com>,
+        "linux-mm@kvack.org" <linux-mm@kvack.org>,
+        "adrian@lisas.de" <adrian@lisas.de>,
+        "fweimer@redhat.com" <fweimer@redhat.com>,
+        "nadav.amit@gmail.com" <nadav.amit@gmail.com>,
+        "jannh@google.com" <jannh@google.com>,
+        "avagin@gmail.com" <avagin@gmail.com>,
+        "linux-arch@vger.kernel.org" <linux-arch@vger.kernel.org>,
+        "kcc@google.com" <kcc@google.com>, "bp@alien8.de" <bp@alien8.de>,
+        "oleg@redhat.com" <oleg@redhat.com>,
+        "hjl.tools@gmail.com" <hjl.tools@gmail.com>,
+        "pavel@ucw.cz" <pavel@ucw.cz>,
+        "linux-doc@vger.kernel.org" <linux-doc@vger.kernel.org>,
+        "arnd@arndb.de" <arnd@arndb.de>,
+        "Moreira, Joao" <joao.moreira@intel.com>,
+        "tglx@linutronix.de" <tglx@linutronix.de>,
+        "mike.kravetz@oracle.com" <mike.kravetz@oracle.com>,
+        "x86@kernel.org" <x86@kernel.org>,
+        "Yang, Weijiang" <weijiang.yang@intel.com>,
+        "rppt@kernel.org" <rppt@kernel.org>,
+        "Dave.Martin@arm.com" <Dave.Martin@arm.com>,
+        "john.allen@amd.com" <john.allen@amd.com>,
+        "mingo@redhat.com" <mingo@redhat.com>,
+        "Hansen, Dave" <dave.hansen@intel.com>,
+        "corbet@lwn.net" <corbet@lwn.net>,
+        "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
+        "linux-api@vger.kernel.org" <linux-api@vger.kernel.org>,
+        "Shankar, Ravi V" <ravi.v.shankar@intel.com>
+References: <20220130211838.8382-1-rick.p.edgecombe@intel.com>
+ <YgAWVSGQg8FPCeba@kernel.org> <YgDIIpCm3UITk896@lisas.de>
+ <8f96c2a6-9c03-f97a-df52-73ffc1d87957@intel.com>
+ <YgI1A0CtfmT7GMIp@kernel.org> <YgI37n+3JfLSNQCQ@grain>
+ <357664de-b089-4617-99d1-de5098953c80@www.fastmail.com>
+ <YgKiKEcsNt7mpMHN@grain>
+ <8e36f20723ca175db49ed3cc73e42e8aa28d2615.camel@intel.com>
+From:   Andy Lutomirski <luto@kernel.org>
+In-Reply-To: <8e36f20723ca175db49ed3cc73e42e8aa28d2615.camel@intel.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-Spam-Status: No, score=-7.1 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,NICE_REPLY_A,
+        RCVD_IN_DNSWL_HI,SPF_HELO_NONE,SPF_PASS,T_SCC_BODY_TEXT_LINE
         autolearn=ham autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
@@ -74,128 +98,80 @@ Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-From: Frank Rowand <frank.rowand@sony.com>
+On 2/8/22 18:18, Edgecombe, Rick P wrote:
+> On Tue, 2022-02-08 at 20:02 +0300, Cyrill Gorcunov wrote:
+>> On Tue, Feb 08, 2022 at 08:21:20AM -0800, Andy Lutomirski wrote:
+>>>>> But such a knob will immediately reduce the security value of
+>>>>> the entire
+>>>>> thing, and I don't have good ideas how to deal with it :(
+>>>>
+>>>> Probably a kind of latch in the task_struct which would trigger
+>>>> off once
+>>>> returt to a different address happened, thus we would be able to
+>>>> jump inside
+>>>> paratite code. Of course such trigger should be available under
+>>>> proper
+>>>> capability only.
+>>>
+>>> I'm not fully in touch with how parasite, etc works.  Are we
+>>> talking about save or restore?
+>>
+>> We use parasite code in question during checkpoint phase as far as I
+>> remember.
+>> push addr/lret trick is used to run "injected" code (code injection
+>> itself is
+>> done via ptrace) in compat mode at least. Dima, Andrei, I didn't look
+>> into this code
+>> for years already, do we still need to support compat mode at all?
+>>
+>>> If it's restore, what exactly does CRIU need to do?  Is it just
+>>> that CRIU needs to return
+>>> out from its resume code into the to-be-resumed program without
+>>> tripping CET?  Would it
+>>> be acceptable for CRIU to require that at least one shstk slot be
+>>> free at save time?
+>>> Or do we need a mechanism to atomically switch to a completely full
+>>> shadow stack at resume?
+>>>
+>>> Off the top of my head, a sigreturn (or sigreturn-like mechanism)
+>>> that is intended for
+>>> use for altshadowstack could safely verify a token on the
+>>> altshdowstack, possibly
+>>> compare to something in ucontext (or not -- this isn't clearly
+>>> necessary) and switch
+>>> back to the previous stack.  CRIU could use that too.  Obviously
+>>> CRIU will need a way
+>>> to populate the relevant stacks, but WRUSS can be used for that,
+>>> and I think this
+>>> is a fundamental requirement for CRIU -- CRIU restore absolutely
+>>> needs a way to write
+>>> the saved shadow stack data into the shadow stack.
+> 
+> Still wrapping my head around the CRIU save and restore steps, but
+> another general approach might be to give ptrace the ability to
+> temporarily pause/resume/set CET enablement and SSP for a stopped
+> thread. Then injected code doesn't need to jump through any hoops or
+> possibly run into road blocks. I'm not sure how much this opens things
+> up if the thread has to be stopped...
 
-Convert "Major differences between TAP and KTAP" from a bullet list
-to a table.  The bullet list was being formatted as a single
-paragraph.
+Hmm, that's maybe not insane.
 
-Add missing required argument in code-block directives.
+An alternative would be to add a bona fide ptrace call-a-function 
+mechanism.  I can think of two potentially usable variants:
 
----
+1. Straight call.  PTRACE_CALL_FUNCTION(addr) just emulates CALL addr, 
+shadow stack push and all.
 
-Table conversion suggested by Shuah.
+2. Signal-style.  PTRACE_CALL_FUNCTION_SIGFRAME injects an actual signal 
+frame just like a real signal is being delivered with the specified 
+handler.  There could be a variant to opt-in to also using a specified 
+altstack and altshadowstack.
 
-Patch 2/2 not previously reviewed, so Reviewed-by tags not provided.
+2 would be more expensive but would avoid the need for much in the way 
+of asm magic.  The injected code could be plain C (or Rust or Zig or 
+whatever).
 
-Changes since version 3
-  - Add this commit (patch 2/2) to the series
+All of this only really handles save, not restore.  I don't understand 
+restore enough to fully understand the issue.
 
-Signed-off-by: Frank Rowand <frank.rowand@sony.com>
----
- Documentation/dev-tools/ktap.rst | 33 +++++++++++++++++---------------
- 1 file changed, 18 insertions(+), 15 deletions(-)
-
-diff --git a/Documentation/dev-tools/ktap.rst b/Documentation/dev-tools/ktap.rst
-index dfb3f10a8b2d..5ee735c6687f 100644
---- a/Documentation/dev-tools/ktap.rst
-+++ b/Documentation/dev-tools/ktap.rst
-@@ -68,7 +68,7 @@ Test case result lines
- Test case result lines indicate the final status of a test.
- They are required and must have the format:
- 
--.. code-block::
-+.. code-block:: none
- 
- 	<result> <number> [<description>][ # [<directive>] [<diagnostic data>]]
- 
-@@ -117,32 +117,32 @@ separator.
- 
- Example result lines include:
- 
--.. code-block::
-+.. code-block:: none
- 
- 	ok 1 test_case_name
- 
- The test "test_case_name" passed.
- 
--.. code-block::
-+.. code-block:: none
- 
- 	not ok 1 test_case_name
- 
- The test "test_case_name" failed.
- 
--.. code-block::
-+.. code-block:: none
- 
- 	ok 1 test # SKIP necessary dependency unavailable
- 
- The test "test" was SKIPPED with the diagnostic message "necessary dependency
- unavailable".
- 
--.. code-block::
-+.. code-block:: none
- 
- 	not ok 1 test # TIMEOUT 30 seconds
- 
- The test "test" timed out, with diagnostic data "30 seconds".
- 
--.. code-block::
-+.. code-block:: none
- 
- 	ok 5 check return code # rcode=0
- 
-@@ -202,7 +202,7 @@ allowed to be either indented or not indented.
- 
- An example of a test with two nested subtests:
- 
--.. code-block::
-+.. code-block:: none
- 
- 	KTAP version 1
- 	1..1
-@@ -215,7 +215,7 @@ An example of a test with two nested subtests:
- 
- An example format with multiple levels of nested testing:
- 
--.. code-block::
-+.. code-block:: none
- 
- 	KTAP version 1
- 	1..2
-@@ -234,12 +234,15 @@ An example format with multiple levels of nested testing:
- Major differences between TAP and KTAP
- --------------------------------------
- 
--Note the major differences between the TAP and KTAP specification:
--- yaml and json are not recommended in KTAP diagnostic messages
--- TODO directive not recognized in KTAP
--- KTAP allows for an arbitrary number of tests to be nested
--- TAP includes "Unknown lines" in the category of "Anything else"
--- TAP says "Unknown lines" are "incorrect"; KTAP allows "Unknown lines"
-+==================================================   =========  ===============
-+Feature                                              TAP        KTAP
-+==================================================   =========  ===============
-+yaml and json in diagnosic message                   ok         not recommended
-+TODO directive                                       ok         not recognized
-+allows an arbitrary number of tests to be nested     no         yes
-+"Unknown lines" are in category of "Anything else"   yes        no
-+"Unknown lines" are                                  incorrect  allowed
-+==================================================   =========  ===============
- 
- The TAP14 specification does permit nested tests, but instead of using another
- nested version line, uses a line of the form
-@@ -247,7 +250,7 @@ nested version line, uses a line of the form
- 
- Example KTAP output
- --------------------
--.. code-block::
-+.. code-block:: none
- 
- 	KTAP version 1
- 	1..1
--- 
-Frank Rowand <frank.rowand@sony.com>
-
+--Andy
