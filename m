@@ -2,110 +2,88 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id B2E0B4B012E
-	for <lists+linux-doc@lfdr.de>; Thu, 10 Feb 2022 00:27:19 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id A6F0A4B0283
+	for <lists+linux-doc@lfdr.de>; Thu, 10 Feb 2022 02:57:52 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S229740AbiBIX1P (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 9 Feb 2022 18:27:15 -0500
-Received: from gmail-smtp-in.l.google.com ([23.128.96.19]:40960 "EHLO
+        id S233295AbiBJB4a (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 9 Feb 2022 20:56:30 -0500
+Received: from gmail-smtp-in.l.google.com ([23.128.96.19]:60094 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S229768AbiBIX1O (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Wed, 9 Feb 2022 18:27:14 -0500
-Received: from gandalf.ozlabs.org (mail.ozlabs.org [IPv6:2404:9400:2221:ea00::3])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 4B3DFE06C41A;
-        Wed,  9 Feb 2022 15:27:10 -0800 (PST)
-Received: from authenticated.ozlabs.org (localhost [127.0.0.1])
-        (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-         key-exchange ECDHE (P-256) server-signature RSA-PSS (4096 bits) server-digest SHA256)
+        with ESMTP id S233403AbiBJB4I (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Wed, 9 Feb 2022 20:56:08 -0500
+Received: from ms.lwn.net (ms.lwn.net [IPv6:2600:3c01:e000:3a1::42])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 38B4D2B6B4;
+        Wed,  9 Feb 2022 17:45:51 -0800 (PST)
+Received: from localhost (unknown [IPv6:2601:281:8300:104d::5f6])
+        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
         (No client certificate requested)
-        by mail.ozlabs.org (Postfix) with ESMTPSA id 4JvGGm6Mm6z4xcq;
-        Thu, 10 Feb 2022 10:26:24 +1100 (AEDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canb.auug.org.au;
-        s=201702; t=1644449186;
-        bh=B3OOE+3clEH8ZbTR1cvV2XvU/8PhpUu3S16wIF9m4Ho=;
-        h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
-        b=WtApO4zjM6W9Rmha9gS+coobGCR2F02AHJwCzOH1SNwPdLUS84TvTJ1Cn1lp3GzbE
-         2y8mPQ3H05DpaSRV8T5QYsCYJ45Y5LNyW3gy+VhhnIBv89n1YMv1AjfchgirE4zKKX
-         Fi8skESVaNyGcD7FjHnj1kr09AnLoLkt2tyoD6QoODc8qs6x/FshuwYu74TejwsOaD
-         z/aE56tnCJ+Ys8uDW0IMF0Ff0EZPXLVBQHsGx3QXM6Y1DunqCkKO9FOkb7cxw4tvux
-         sRjIjd5M2cQQYv7V95lRAFQlthQbfrPV4IewI5fjDPyokZ6jxCltYjHDEQ0FHL+knz
-         g6vw7L0aKUrzQ==
-Date:   Thu, 10 Feb 2022 10:26:21 +1100
-From:   Stephen Rothwell <sfr@canb.auug.org.au>
-To:     "Guilherme G. Piccoli" <gpiccoli@igalia.com>
-Cc:     akpm@linux-foundation.org, Petr Mladek <pmladek@suse.com>,
-        Dave Young <dyoung@redhat.com>, Baoquan He <bhe@redhat.com>,
-        linux-kernel@vger.kernel.org, linux-fsdevel@vger.kernel.org,
-        linux-doc@vger.kernel.org, mcgrof@kernel.org,
-        keescook@chromium.org, yzaikin@google.com, feng.tang@intel.com,
-        siglesias@igalia.com, kernel@gpiccoli.net
-Subject: Re: [PATCH 3/3] panic: Allow printing extra panic information on
- kdump
-Message-ID: <20220210102621.250d6741@canb.auug.org.au>
-In-Reply-To: <c4f0c53e-cfe4-b693-6af2-df827bc94fa8@igalia.com>
-References: <20211109202848.610874-1-gpiccoli@igalia.com>
-        <20211109202848.610874-4-gpiccoli@igalia.com>
-        <Yd/qmyz+qSuoUwbs@alley>
-        <7c516696-be5b-c280-7f4e-554834f5e472@igalia.com>
-        <c10fc4fc-58c9-0b3f-5f1e-6f44b0c190d2@igalia.com>
-        <20220209083951.50060e15@canb.auug.org.au>
-        <c4f0c53e-cfe4-b693-6af2-df827bc94fa8@igalia.com>
+        by ms.lwn.net (Postfix) with ESMTPSA id 82BA42C1;
+        Thu, 10 Feb 2022 00:29:55 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 ms.lwn.net 82BA42C1
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=lwn.net; s=20201203;
+        t=1644452995; bh=JeAPbfW2n6bSXcS12/5ZU0UMBn33nmdtlOjKnwSEXYI=;
+        h=From:To:Cc:Subject:In-Reply-To:References:Date:From;
+        b=rXNFe172Tnb8y40rzYS6eEF0rqWLAAs96fxoear4HGMmRX1ZnNk9UqCglGOg+3lZ+
+         8v16sbsGVmIHRmPvvH+hKOnaGVSrrrn5XxKfcqVjUZYiM6gL4qjZofPWQTshjY5A8P
+         Zkd513+59JDe3owTC8qSwSsZgC5xJ/wF7otnIT1Bn5yvQFRXV9Fo9K9+G6Z58ixzU9
+         i24IKei5rs7g5Vp/7o8g8UXWdydMVlesWkD76QLmX7LNuF2cG1h7CQD1i4ZY4ALUsj
+         djOxGFWQeD7JM3NQ48IZhaHxOcl9R6GNsgATL7HfqDGl0C0o6EAmp8Edr+J0Sc7Nmz
+         WildtHoiciIaw==
+From:   Jonathan Corbet <corbet@lwn.net>
+To:     Akira Yokosawa <akiyks@gmail.com>
+Cc:     Randy Dunlap <rdunlap@infradead.org>, linux-doc@vger.kernel.org,
+        linux-kernel@vger.kernel.org,
+        Mauro Carvalho Chehab <mchehab@kernel.org>,
+        Akira Yokosawa <akiyks@gmail.com>
+Subject: Re: [PATCH v2 0/4] docs: sphinx/kfigure.py: Improve conversion to PDF
+In-Reply-To: <3cfe6cb0-67c7-bd12-0a3c-a609f5341a32@gmail.com>
+References: <e01fe9f9-f600-c2fc-c6b3-ef6395655ffe@gmail.com>
+ <e545803a-8f09-f0e7-4ca0-16b673ef1796@gmail.com>
+ <20220114094535.5bb9ba94@coco.lan>
+ <e03de287-4eef-8a68-89f3-8614db66a74b@gmail.com>
+ <87bl0c7l79.fsf@meer.lwn.net>
+ <3cfe6cb0-67c7-bd12-0a3c-a609f5341a32@gmail.com>
+Date:   Wed, 09 Feb 2022 17:30:38 -0700
+Message-ID: <874k57ef69.fsf@meer.lwn.net>
 MIME-Version: 1.0
-Content-Type: multipart/signed; boundary="Sig_/g0P093p_nq_KNn68dYnAKHn";
- protocol="application/pgp-signature"; micalg=pgp-sha256
-X-Spam-Status: No, score=-2.0 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_AU,SPF_HELO_PASS,SPF_PASS,T_SCC_BODY_TEXT_LINE
-        autolearn=ham autolearn_force=no version=3.4.6
+Content-Type: text/plain
+X-Spam-Status: No, score=-2.1 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,SPF_HELO_NONE,SPF_PASS,
+        T_SCC_BODY_TEXT_LINE autolearn=ham autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
---Sig_/g0P093p_nq_KNn68dYnAKHn
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: quoted-printable
+Akira Yokosawa <akiyks@gmail.com> writes:
 
-Hi Guilherme,
-
-On Wed, 9 Feb 2022 12:06:03 -0300 "Guilherme G. Piccoli" <gpiccoli@igalia.c=
-om> wrote:
+> On Sat, 15 Jan 2022 14:17:30 -0700,
+> Jonathan Corbet wrote:
+>> Akira Yokosawa <akiyks@gmail.com> writes:
+>> 
+>>> We are in the middle of the v5.17 merge window, and I think of this
+>>> series as a v5.18 material.
+>>> Which means it won't be merged into doc-next until v5.17-rc5 or -rc6
+>>> (mid March or so), unless Jon thinks otherwise.
+>> 
+>> I'd rather merge it rather sooner than that if possible; 5.18 stuff will
+>> start going into docs-next shortly.
 >
-> On 08/02/2022 18:39, Stephen Rothwell wrote:
-> > Hi Guilherme,
-> > [...]=20
-> > Dropped from linux-next today.
-> >  =20
->=20
-> Hi Stephen, thanks! I'm still seeing this patch over there, though - I'm
-> not sure if takes a while to show up in the tree...
+> Jon,
+>
+> Hearing no objection since mid January, I think it is time for you to
+> merge this series into docs-next.
 
-Andrew did another mmotm release which put it back in.  I have removed
-it again for today.
+That has been done - thanks for your work on this!
 
-> Notice this request is only for patch 3/3 in this series - patches 1 and
-> 2 are fine, were reviewed and accepted =3D)
+Since you seem to have a reasonably good understanding of the
+PDF-generation side of things...I noted as I was testing this work that
+we are still getting the "restricted \write18 enabled" messages.  I
+asked about this years ago, and nobody seemed to have a clue of what was
+enabling it.  I'd *really* like to turn that off if possible; do you
+have any idea what's going on there?
 
-Understood.
+Thanks,
 
---=20
-Cheers,
-Stephen Rothwell
-
---Sig_/g0P093p_nq_KNn68dYnAKHn
-Content-Type: application/pgp-signature
-Content-Description: OpenPGP digital signature
-
------BEGIN PGP SIGNATURE-----
-
-iQEzBAEBCAAdFiEENIC96giZ81tWdLgKAVBC80lX0GwFAmIETZ0ACgkQAVBC80lX
-0GwR2Af/ULU1MyVDLgxV13ILryhuxlTd7bfH6hvQNAjleryvZvq8KFQVaMmv4SeF
-GXIOX0LlCJ82SC5mDCJfJ0GXr9efTZjOlJxyUJeWxMAAPNtYliB7qhHKXPWy+tAu
-Hp+H9OfDV8bGvGm5V9Nim0pN7jTG5JS64OKvgikGMG6M6snZ74QUSNtCIB66QMv4
-UVN31B2D8CKU4paPhU7Kez0TTN4wLmnGJDq014gg9B4Y08jMh1xvix8w7r3MhguI
-txFlYuTxn15vYTZt9k+WFisNKFKj5H240q2bXjdxliE3smc4KNHw0+Jk9+nvnLj5
-SKP/axBSRkxDCEuhcMFhNcUR1483zA==
-=maXw
------END PGP SIGNATURE-----
-
---Sig_/g0P093p_nq_KNn68dYnAKHn--
+jon
