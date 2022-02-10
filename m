@@ -2,99 +2,87 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id A74C14B1478
-	for <lists+linux-doc@lfdr.de>; Thu, 10 Feb 2022 18:43:36 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 3F1954B1497
+	for <lists+linux-doc@lfdr.de>; Thu, 10 Feb 2022 18:51:42 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S245269AbiBJRnX (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 10 Feb 2022 12:43:23 -0500
-Received: from mxb-00190b01.gslb.pphosted.com ([23.128.96.19]:49356 "EHLO
+        id S245349AbiBJRvM (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 10 Feb 2022 12:51:12 -0500
+Received: from mxb-00190b01.gslb.pphosted.com ([23.128.96.19]:53564 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S245285AbiBJRnU (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Thu, 10 Feb 2022 12:43:20 -0500
-Received: from mail-pj1-x1031.google.com (mail-pj1-x1031.google.com [IPv6:2607:f8b0:4864:20::1031])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 1917325ED
-        for <linux-doc@vger.kernel.org>; Thu, 10 Feb 2022 09:43:21 -0800 (PST)
-Received: by mail-pj1-x1031.google.com with SMTP id v13-20020a17090ac90d00b001b87bc106bdso9276456pjt.4
-        for <linux-doc@vger.kernel.org>; Thu, 10 Feb 2022 09:43:21 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=chromium.org; s=google;
-        h=date:from:to:cc:subject:message-id:references:mime-version
-         :content-disposition:in-reply-to;
-        bh=JWTciHa8tMED3FXA+Ogdt6wVZFyYQZwP+ShqeFRit+I=;
-        b=Ck3LZGNu0+N7P6xsV9DDei7cJLvODVs1BnOzvk0bszpoiLl6jJyJGZ2+30GWFFu9jz
-         5/O7MdvbVHxjTB0K8wZMEsvKndsWprLvwjfAeMdDhiGY/8VADLXqmH/vR5HlpstEvzMm
-         4oRjk2qpDWkgSUR+DXT4SyThiJjLHLqZFdUqY=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=x-gm-message-state:date:from:to:cc:subject:message-id:references
-         :mime-version:content-disposition:in-reply-to;
-        bh=JWTciHa8tMED3FXA+Ogdt6wVZFyYQZwP+ShqeFRit+I=;
-        b=3YSV2HK1ewyIaaECAuryF9GFh+dXryMtSm+sUhWngQzfM/eo3RSd/3nGUhaR19zID4
-         J/o05hxiA2RQlvK5ZKOBjLotbmi0SzBEKLeEX3twVaRZw3gajs0+wKFfK9tsHEE/7AbP
-         ulvT5A+GqUVgA9tPPlyBt6uNBi7OrVaawmnMfsb537bu9ymw0eiZz1BApGcBJbyEcIK1
-         zcaYOmczro/S4mM/Sqt28jA8aoWusG7d+BeZ6/ssd8zWyGw1VVbAVx4lldpxSkWXI+a3
-         ZAZkeAplr07rPchfqKiud8hncSaICZSawEmRa4DbEJosL8jJaikSC2F2vuHeIIhknD3I
-         sFTA==
-X-Gm-Message-State: AOAM533e1WtohvqJxWLNn0v6UumJLc7CCAE5oXQZtjoeZwAfFf24Mm3O
-        l0ThyR8/Ucmxirg2lwvEf+Whsg==
-X-Google-Smtp-Source: ABdhPJwfu2aJvaqWXY1aRdvOiBamWd2wXwn64hpgV8EqWsUme9kFg4luF0ZxCPobzkh3kcfPGwXuPw==
-X-Received: by 2002:a17:90b:4c52:: with SMTP id np18mr3975968pjb.49.1644515000573;
-        Thu, 10 Feb 2022 09:43:20 -0800 (PST)
-Received: from www.outflux.net (smtp.outflux.net. [198.145.64.163])
-        by smtp.gmail.com with ESMTPSA id q16sm24645520pfu.194.2022.02.10.09.43.19
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 10 Feb 2022 09:43:20 -0800 (PST)
-Date:   Thu, 10 Feb 2022 09:43:19 -0800
-From:   Kees Cook <keescook@chromium.org>
-To:     frowand.list@gmail.com
-Cc:     Jonathan Corbet <corbet@lwn.net>, David Gow <davidgow@google.com>,
-        Shuah Khan <skhan@linuxfoundation.org>,
-        Rae Moar <rmoar@google.com>, Tim.Bird@sony.com,
-        Brendan Higgins <brendanhiggins@google.com>, rmr167@gmail.com,
-        guillaume.tucker@collabora.com, dlatypov@google.com,
-        kernelci@groups.io, kunit-dev@googlegroups.com,
-        linux-kselftest@vger.kernel.org, linux-doc@vger.kernel.org,
-        linux-kernel@vger.kernel.org
-Subject: Re: [PATCH v4 2/2] Documentation: dev-tools: fix KTAP specification
- build warnings
-Message-ID: <202202100943.3E8C5B4B@keescook>
-References: <20220210023519.3221051-1-frowand.list@gmail.com>
- <20220210023519.3221051-3-frowand.list@gmail.com>
+        with ESMTP id S245319AbiBJRvL (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Thu, 10 Feb 2022 12:51:11 -0500
+Received: from fanzine2.igalia.com (fanzine2.igalia.com [213.97.179.56])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 3181B10EA;
+        Thu, 10 Feb 2022 09:51:12 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=igalia.com;
+        s=20170329; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:
+        References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
+        Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+        Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+        List-Subscribe:List-Post:List-Owner:List-Archive;
+        bh=QxL1pJKb53w2Gb5rIykQPgNfZM69s8I4TUvEwQwyuHE=; b=iL97dKlXtgf81M+2YQnKcpo3dO
+        th521AxOI80rVKxUx/K0dr/QG1cqkciuoT1WlSfDEInQX+H3QTIcNDf1teV6ONFTzIVVLadBkjBD2
+        icy4Ltc9yQoPY19bX7E/KxDfsT9dUBH26NFC89kVDHz32EHugdlpQg58YK83KL7e2vCKSdhfFZi6P
+        GyrV4+C5osCv5iZ5RNVo2tNdx1aoBdWdvCZ8AqOrVTrywUbFSSpEws5bAeRF4MzBMDQ6aj4qO+ifr
+        bXCjE9TVoaE+K3x9kC8Dh2P+U+81NIk+vhF7ZaDnY//pAgePqLbnlzIap5aiLehG6u2zLpixk/uu5
+        7yNd62zw==;
+Received: from 201-27-34-10.dsl.telesp.net.br ([201.27.34.10] helo=[192.168.1.60])
+        by fanzine2.igalia.com with esmtpsa 
+        (Cipher TLS1.3:ECDHE_X25519__RSA_PSS_RSAE_SHA256__AES_128_GCM:128) (Exim)
+        id 1nIDat-0005V2-Jh; Thu, 10 Feb 2022 18:51:00 +0100
+Message-ID: <f76afc7d-487e-f76c-2ad6-509398b25888@igalia.com>
+Date:   Thu, 10 Feb 2022 14:50:42 -0300
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20220210023519.3221051-3-frowand.list@gmail.com>
-X-Spam-Status: No, score=-2.1 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_NONE,
-        SPF_HELO_NONE,SPF_PASS,T_SCC_BODY_TEXT_LINE autolearn=unavailable
-        autolearn_force=no version=3.4.6
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
+ Thunderbird/91.5.0
+Subject: Re: [PATCH V4] notifier/panic: Introduce panic_notifier_filter
+Content-Language: en-US
+To:     "Michael Kelley (LINUX)" <mikelley@microsoft.com>,
+        "bhe@redhat.com" <bhe@redhat.com>
+Cc:     Petr Mladek <pmladek@suse.com>,
+        "dyoung@redhat.com" <dyoung@redhat.com>,
+        "vgoyal@redhat.com" <vgoyal@redhat.com>,
+        "d.hatayama@fujitsu.com" <d.hatayama@fujitsu.com>,
+        "kexec@lists.infradead.org" <kexec@lists.infradead.org>,
+        "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
+        "linux-doc@vger.kernel.org" <linux-doc@vger.kernel.org>,
+        "stern@rowland.harvard.edu" <stern@rowland.harvard.edu>,
+        "akpm@linux-foundation.org" <akpm@linux-foundation.org>,
+        "andriy.shevchenko@linux.intel.com" 
+        <andriy.shevchenko@linux.intel.com>,
+        "corbet@lwn.net" <corbet@lwn.net>,
+        "halves@canonical.com" <halves@canonical.com>,
+        "kernel@gpiccoli.net" <kernel@gpiccoli.net>,
+        "mhiramat@kernel.org" <mhiramat@kernel.org>,
+        "d.hatayama@jp.fujitsu.com" <d.hatayama@jp.fujitsu.com>
+References: <20220108153451.195121-1-gpiccoli@igalia.com>
+ <TYAPR01MB6507D06BA6D32218F6E88198955F9@TYAPR01MB6507.jpnprd01.prod.outlook.com>
+ <fda509a5-ea0d-4d1d-a1c1-ca5e80010fc0@igalia.com>
+ <TYAPR01MB6507D9747647685B554B8F8F955F9@TYAPR01MB6507.jpnprd01.prod.outlook.com>
+ <fb5e66b6-049a-22ab-5913-a04cc302b629@igalia.com> <YfPxvzSzDLjO5ldp@alley>
+ <e2d39675-5df6-73fb-fa24-df906a97ee50@igalia.com>
+ <YgMLd+avxyBplfk2@MiWiFi-R3L-srv>
+ <7b45bc2b-f74d-8604-bd8a-4930f7b8f926@igalia.com>
+ <MWHPR21MB1593C36268FFB3FD654074A5D72F9@MWHPR21MB1593.namprd21.prod.outlook.com>
+From:   "Guilherme G. Piccoli" <gpiccoli@igalia.com>
+In-Reply-To: <MWHPR21MB1593C36268FFB3FD654074A5D72F9@MWHPR21MB1593.namprd21.prod.outlook.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-Spam-Status: No, score=-2.1 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,NICE_REPLY_A,SPF_HELO_NONE,
+        SPF_PASS,T_SCC_BODY_TEXT_LINE autolearn=ham autolearn_force=no
+        version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Wed, Feb 09, 2022 at 08:35:19PM -0600, frowand.list@gmail.com wrote:
-> From: Frank Rowand <frank.rowand@sony.com>
+On 10/02/2022 14:26, Michael Kelley (LINUX) wrote:
+> From: Guilherme G. Piccoli <gpiccoli@igalia.com> Sent: Thursday, February 10, 2022 8:40 AM
+> [...]>> I'll need to study the Hyper-V code and how it's done today -
 > 
-> Convert "Major differences between TAP and KTAP" from a bullet list
-> to a table.  The bullet list was being formatted as a single
-> paragraph.
-> 
-> Add missing required argument in code-block directives.
-> 
-> ---
-> 
-> Table conversion suggested by Shuah.
-> 
-> Patch 2/2 not previously reviewed, so Reviewed-by tags not provided.
-> 
-> Changes since version 3
->   - Add this commit (patch 2/2) to the series
-> 
-> Signed-off-by: Frank Rowand <frank.rowand@sony.com>
-
-Reviewed-by: Kees Cook <keescook@chromium.org>
-
--- 
-Kees Cook
+> Let me know if you need any assistance or explanation as you look
+> at the Hyper-V code.
+>
+Perfect Michael, thanks a lot! Much appreciated =)
