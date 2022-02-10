@@ -2,69 +2,68 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id BBB014B02AF
-	for <lists+linux-doc@lfdr.de>; Thu, 10 Feb 2022 03:01:06 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id AF6EC4B036C
+	for <lists+linux-doc@lfdr.de>; Thu, 10 Feb 2022 03:35:45 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S234524AbiBJCA3 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 9 Feb 2022 21:00:29 -0500
-Received: from gmail-smtp-in.l.google.com ([23.128.96.19]:33092 "EHLO
+        id S229765AbiBJCf1 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 9 Feb 2022 21:35:27 -0500
+Received: from mxb-00190b01.gslb.pphosted.com ([23.128.96.19]:47416 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S234438AbiBJB7T (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Wed, 9 Feb 2022 20:59:19 -0500
-Received: from mail-pj1-x102c.google.com (mail-pj1-x102c.google.com [IPv6:2607:f8b0:4864:20::102c])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id C843E2B694;
-        Wed,  9 Feb 2022 17:43:38 -0800 (PST)
-Received: by mail-pj1-x102c.google.com with SMTP id a11-20020a17090a740b00b001b8b506c42fso7094303pjg.0;
-        Wed, 09 Feb 2022 17:43:38 -0800 (PST)
+        with ESMTP id S229513AbiBJCfZ (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Wed, 9 Feb 2022 21:35:25 -0500
+Received: from mail-qt1-x836.google.com (mail-qt1-x836.google.com [IPv6:2607:f8b0:4864:20::836])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 054A0237D2;
+        Wed,  9 Feb 2022 18:35:28 -0800 (PST)
+Received: by mail-qt1-x836.google.com with SMTP id e16so3788369qtq.6;
+        Wed, 09 Feb 2022 18:35:27 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
-        h=message-id:date:mime-version:user-agent:subject:content-language:to
-         :cc:references:from:in-reply-to:content-transfer-encoding;
-        bh=Cry3Wtr/RMzYLNnlssa/FegDG6Szz3AAHVIwYbF14p4=;
-        b=BuwyrIlQTSYfuDOGgaCnFkGWHitNYmF2EOoFcP4H6rNyqYyuL/I+De5T49WH51elcU
-         zcsrXoYrAGLEZbApNAumQoTQGxJu1EloQUA2W+AghURVpw1WsbpYmij+6PQOGpjy+aAb
-         4kvUr+U4RuOWtAriGCWY8CQr0TTTY5xkMaPOULbLjdK/sUJ7Cew+bh4IvdfkgbOItcYU
-         nq2WetauqN68Avk5DxTo60Qm15W3ujMuyxhPp2PqPf+uqdxH2XCpGXYDQCzTxZnYME0U
-         j52q9n913KdvXUVjsGWkzOtxVv20xkKc4raZ7AybC9i2YNQw30i3ytD2mgpsYfq3oKKY
-         WpBw==
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=bASadt8NPcaMyIfVbaEV3zmrrOqc23Hli0FVTIqLwpc=;
+        b=oJvVNeu1k9LLF+R+qFr1ICVHqCAgAzC3jSsE2jkw8RFSFq6rw9a7dFDrY3EbM+3EqZ
+         jQRZ7rt+kRoYgfN6i3fkETP78iqsxd9IG8yt9iOQUqCaackHmIdR1lfO5RfHdoXA/pJL
+         U0nUvBULNL7OMkRYV5pJrg88nfA9wSkZHHaRt38DRPpN9XHU5JPmM1p2BKtriHZIIVoF
+         Wlxrkf20uvj+gEt13UFYI2emwBQiUR9PqI+U5ZZ7utiBgEUncZ/5c+LOOYgvGKjVbUAN
+         VYQnfIDia+Js0HHs+zGu4uoCJ3OipLbsdW8DP2HLR18wPm1P4GA3USksqg2pGXRp9A4T
+         2C7g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=x-gm-message-state:message-id:date:mime-version:user-agent:subject
-         :content-language:to:cc:references:from:in-reply-to
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=Cry3Wtr/RMzYLNnlssa/FegDG6Szz3AAHVIwYbF14p4=;
-        b=NDF/8HpyrPjl4pYvLHOfciyDOVhIItl5BADcHtZoqhFntKqSn2Sw3BSRAyaI859fq8
-         DyARDscBfbAreMZe97MOZdatdkc4pX9o2xKOCQ+kxE9oFhy4jK04Vf8oQ4bC3a+KmHTH
-         vo5L/UzSm/uxjlJja6rtNr+01aCfVqROJwJIIuFYFxOVE8f/YUCc+TblYkDQtvqURs3P
-         Nh/d8M2tr5vNnYb1hhp7tqrWjFuDca/zBuFN+eK5A7WDkiB+z1cnFYAYmSsHvK75TQXr
-         JA81DMDRani/7Fjg5qht2PRkrp404Hj/eS/OlDDgqB1+qvbl5jrgv/h5QbOP+bb8HLBB
-         47OA==
-X-Gm-Message-State: AOAM533kdHrD756mAJWJFPaRfJstu+/MTLCUs2v1hQXY9asl6WVO6FHK
-        OyVgVUs0WMa0Y3cOdgBD/sk=
-X-Google-Smtp-Source: ABdhPJyit4iS9692syMqC3i5QWytBR9MtfPSX9pD4s8pKYuhVTzTVNq8ikdrOFgxPyNuPu6WCSEeEg==
-X-Received: by 2002:a17:90a:d343:: with SMTP id i3mr241380pjx.104.1644457418391;
-        Wed, 09 Feb 2022 17:43:38 -0800 (PST)
-Received: from [192.168.11.5] (KD106167171201.ppp-bb.dion.ne.jp. [106.167.171.201])
-        by smtp.gmail.com with ESMTPSA id a3sm61728pjq.43.2022.02.09.17.43.36
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Wed, 09 Feb 2022 17:43:38 -0800 (PST)
-Message-ID: <e7ce363c-c154-50b7-016f-0f98bf13a0b9@gmail.com>
-Date:   Thu, 10 Feb 2022 10:43:34 +0900
+        bh=bASadt8NPcaMyIfVbaEV3zmrrOqc23Hli0FVTIqLwpc=;
+        b=2ioTwgBG0dzCX3fO4TQHT6HbaeM3Z0x6vdMZoTG5gLj39Lel8ebi2ENETf1RE+I5HV
+         O5365topyGUVZSMI1XTRya3v3vKusHHLfL+zCzFe1e50Y5QxgZNndIDp9p8Atd/8kMGp
+         fjbLgnZCz16KED1LNPTreGtk+nAFlMX6RYjYbKnM0tuqYvbwl81fh2YsjlBbCb+gnf1Y
+         u1Fw0SbmHt2Qpz5r911uO1jqopvW1hM5lLk/FDoGM648QDudqd4RqN2VKHKkf5y46tfO
+         +tc37lF8D7Z4Ppi+UKjwws0iHO/j9kWy0GN1ZRntcHJXBQPq2XlbrzJr586fA+ymY5P5
+         atzg==
+X-Gm-Message-State: AOAM532LXaIKKFe5ClKc3tk7IxWZHH1QapPVi1fBfE6sRWpy5mOOgQkO
+        n8z/ovXKoIsIDceOxCTkcto=
+X-Google-Smtp-Source: ABdhPJx2JlsScS2bO3Ejpe6Zx1f1EETne7V+WEddNOe5JCmAalm8CPrqvbxKQgEyJxCNECGpfDjLzQ==
+X-Received: by 2002:a05:622a:5d3:: with SMTP id d19mr3578170qtb.8.1644460527091;
+        Wed, 09 Feb 2022 18:35:27 -0800 (PST)
+Received: from localhost.localdomain (c-67-187-90-124.hsd1.tn.comcast.net. [67.187.90.124])
+        by smtp.gmail.com with ESMTPSA id h11sm1333374qkp.89.2022.02.09.18.35.25
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 09 Feb 2022 18:35:26 -0800 (PST)
+From:   frowand.list@gmail.com
+To:     Jonathan Corbet <corbet@lwn.net>, David Gow <davidgow@google.com>,
+        Shuah Khan <skhan@linuxfoundation.org>,
+        Kees Cook <keescook@chromium.org>, Rae Moar <rmoar@google.com>,
+        Tim.Bird@sony.com, Brendan Higgins <brendanhiggins@google.com>
+Cc:     rmr167@gmail.com, guillaume.tucker@collabora.com,
+        dlatypov@google.com, kernelci@groups.io,
+        kunit-dev@googlegroups.com, linux-kselftest@vger.kernel.org,
+        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org
+Subject: [PATCH v4 0/2] Documentation: dev-tools: clarify KTAP specification wording
+Date:   Wed,  9 Feb 2022 20:35:17 -0600
+Message-Id: <20220210023519.3221051-1-frowand.list@gmail.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.5.0
-Subject: Re: [PATCH] docs: Makefile: Add -no-shell-escape option to LATEXOPTS
-Content-Language: en-US
-To:     Jonathan Corbet <corbet@lwn.net>
-Cc:     linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
-        Akira Yokosawa <akiyks@gmail.com>
-References: <519bd2d9-1bee-03e1-eeb4-d9883c18be0c@gmail.com>
-From:   Akira Yokosawa <akiyks@gmail.com>
-In-Reply-To: <519bd2d9-1bee-03e1-eeb4-d9883c18be0c@gmail.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 X-Spam-Status: No, score=-2.1 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_FROM,NICE_REPLY_A,
+        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_FROM,
         RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,SPF_PASS,T_SCC_BODY_TEXT_LINE
         autolearn=ham autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
@@ -73,26 +72,23 @@ Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Thu, 10 Feb 2022 10:26:53 +0900,
-Akira Yokosawa wrote:
-> By adding this option, message of "restricted \write18 enabled" from
-> LaTeX can be silenced.
-> 
-> As there is no use of \write18 in LaTeX sources from sphinx-build, it
-> is safe to add this option.
+From: Frank Rowand <frank.rowand@sony.com>
 
-Jon,
-JFYI, there is a ticket on the message at:
+Clarify ambiguous wording in KTAP specification version 1.
 
-    https://tex.stackexchange.com/questions/76105/what-does-restricted-write18-enabled-mean-and-why-does-texlive-keep-reporting
+Fix build warnings.
 
-I think David Carlisle's answer covers most of your concerns.
+Changes since version 3
+  - Add Reviewed-by: Shuah Khan
+  - Add patch 2/2 to fix build warnings
 
-        Thanks, Akira 
+Frank Rowand (2):
+  Documentation: dev-tools: clarify KTAP specification wording
+  Documentation: dev-tools: fix KTAP specification build warnings
 
-> 
-> Reported-by: Jonathan Corbet <corbet@lwn.net>
-> Signed-off-by: Akira Yokosawa <akiyks@gmail.com>
-> ---
-[...]
+ Documentation/dev-tools/ktap.rst | 49 +++++++++++++++++++++-----------
+ 1 file changed, 32 insertions(+), 17 deletions(-)
+
+-- 
+Frank Rowand <frank.rowand@sony.com>
 
