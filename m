@@ -2,66 +2,69 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 2C62D4B022D
-	for <lists+linux-doc@lfdr.de>; Thu, 10 Feb 2022 02:27:28 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id BBB014B02AF
+	for <lists+linux-doc@lfdr.de>; Thu, 10 Feb 2022 03:01:06 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S232153AbiBJB1E (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 9 Feb 2022 20:27:04 -0500
-Received: from gmail-smtp-in.l.google.com ([23.128.96.19]:53922 "EHLO
+        id S234524AbiBJCA3 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 9 Feb 2022 21:00:29 -0500
+Received: from gmail-smtp-in.l.google.com ([23.128.96.19]:33092 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S232166AbiBJB06 (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Wed, 9 Feb 2022 20:26:58 -0500
-Received: from mail-pf1-x436.google.com (mail-pf1-x436.google.com [IPv6:2607:f8b0:4864:20::436])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 0F89420188;
-        Wed,  9 Feb 2022 17:26:56 -0800 (PST)
-Received: by mail-pf1-x436.google.com with SMTP id i21so5996455pfd.13;
-        Wed, 09 Feb 2022 17:26:56 -0800 (PST)
+        with ESMTP id S234438AbiBJB7T (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Wed, 9 Feb 2022 20:59:19 -0500
+Received: from mail-pj1-x102c.google.com (mail-pj1-x102c.google.com [IPv6:2607:f8b0:4864:20::102c])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id C843E2B694;
+        Wed,  9 Feb 2022 17:43:38 -0800 (PST)
+Received: by mail-pj1-x102c.google.com with SMTP id a11-20020a17090a740b00b001b8b506c42fso7094303pjg.0;
+        Wed, 09 Feb 2022 17:43:38 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
-        h=message-id:date:mime-version:user-agent:content-language:to:cc:from
-         :subject:content-transfer-encoding;
-        bh=99kJAF1LYHwtSv0Yf3YOWEwdRAz6cOKJMAAN9vZQpPA=;
-        b=V208CxnCfJAW7fmWBawGNO4R+VshKsgngfQdMPxgDkMgP6Ulonm1Em6PIMBqJJbGKU
-         3BMFA9b+vjpeszMj3qdKdDh5kwJ2k/Z+7YPP7vwq3JUsdEw+uih0WJjn/ANjfmOPGeCc
-         duFAf6yoViCOT5T6JehENfcQ9N0Rwyp2NgNTIsC1y2CkAmBJDNQ2VOKzy2oSRB02trnH
-         p4f+FMnlX/E7PMdzfRJrlKkx6x4DfDGGTChKPheLQx0VaEEG+VbFgzlQMFRAz3cZSQUm
-         olxOqp9vVZfixIrFdFEeg8R3GjEarejrwz8ySgcr0g61zr3+1mvRyY20OJP1s+drGjdd
-         cPAA==
+        h=message-id:date:mime-version:user-agent:subject:content-language:to
+         :cc:references:from:in-reply-to:content-transfer-encoding;
+        bh=Cry3Wtr/RMzYLNnlssa/FegDG6Szz3AAHVIwYbF14p4=;
+        b=BuwyrIlQTSYfuDOGgaCnFkGWHitNYmF2EOoFcP4H6rNyqYyuL/I+De5T49WH51elcU
+         zcsrXoYrAGLEZbApNAumQoTQGxJu1EloQUA2W+AghURVpw1WsbpYmij+6PQOGpjy+aAb
+         4kvUr+U4RuOWtAriGCWY8CQr0TTTY5xkMaPOULbLjdK/sUJ7Cew+bh4IvdfkgbOItcYU
+         nq2WetauqN68Avk5DxTo60Qm15W3ujMuyxhPp2PqPf+uqdxH2XCpGXYDQCzTxZnYME0U
+         j52q9n913KdvXUVjsGWkzOtxVv20xkKc4raZ7AybC9i2YNQw30i3ytD2mgpsYfq3oKKY
+         WpBw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=x-gm-message-state:message-id:date:mime-version:user-agent
-         :content-language:to:cc:from:subject:content-transfer-encoding;
-        bh=99kJAF1LYHwtSv0Yf3YOWEwdRAz6cOKJMAAN9vZQpPA=;
-        b=DRpRnG9ywyWQuuSDdmnAlVuKZlaQCVpVRv36iQuR1kcUYfwvC7+pI8neB2+5/p/bp6
-         h+M0eb28whqjRmYE/ivK3gX8IsXJXe3DoZU9mHS0O0T6MsNIdoIn13FrWSfT+64umcNh
-         olVtup9S65O+bhTiI24+otuuYKQO9g+yGzSgIR69686MBM2hYU0UaNo7rRFGQwc/tX7y
-         1xP4+79aj+lr5giqUe+FKYqJ3nRwcoIlqk6LBJ6ncoew9NVeLibADBcKPW2YYJBCcDR0
-         GNJlumkAnVMPS5XbJghoLZmKxgk0t661ZP+FJ6qhJNb135/kMgP6EzfHqyCd42eRPT34
-         c0CA==
-X-Gm-Message-State: AOAM5333ep2CQWnTzuswmnidRTbH0w6RWpYg0zZYMmm+sc0yxlYVcTTf
-        XYl+OGD2h2tpCQgulqbsr6E=
-X-Google-Smtp-Source: ABdhPJx7mH2yZo4C4pJn/aE3cCDOtK+LkPC5Nk+B6bO3/Fqq03i1P/0o3tAvSQXdg21ttVWaEs1o8w==
-X-Received: by 2002:a65:4c87:: with SMTP id m7mr4145769pgt.509.1644456416531;
-        Wed, 09 Feb 2022 17:26:56 -0800 (PST)
+        h=x-gm-message-state:message-id:date:mime-version:user-agent:subject
+         :content-language:to:cc:references:from:in-reply-to
+         :content-transfer-encoding;
+        bh=Cry3Wtr/RMzYLNnlssa/FegDG6Szz3AAHVIwYbF14p4=;
+        b=NDF/8HpyrPjl4pYvLHOfciyDOVhIItl5BADcHtZoqhFntKqSn2Sw3BSRAyaI859fq8
+         DyARDscBfbAreMZe97MOZdatdkc4pX9o2xKOCQ+kxE9oFhy4jK04Vf8oQ4bC3a+KmHTH
+         vo5L/UzSm/uxjlJja6rtNr+01aCfVqROJwJIIuFYFxOVE8f/YUCc+TblYkDQtvqURs3P
+         Nh/d8M2tr5vNnYb1hhp7tqrWjFuDca/zBuFN+eK5A7WDkiB+z1cnFYAYmSsHvK75TQXr
+         JA81DMDRani/7Fjg5qht2PRkrp404Hj/eS/OlDDgqB1+qvbl5jrgv/h5QbOP+bb8HLBB
+         47OA==
+X-Gm-Message-State: AOAM533kdHrD756mAJWJFPaRfJstu+/MTLCUs2v1hQXY9asl6WVO6FHK
+        OyVgVUs0WMa0Y3cOdgBD/sk=
+X-Google-Smtp-Source: ABdhPJyit4iS9692syMqC3i5QWytBR9MtfPSX9pD4s8pKYuhVTzTVNq8ikdrOFgxPyNuPu6WCSEeEg==
+X-Received: by 2002:a17:90a:d343:: with SMTP id i3mr241380pjx.104.1644457418391;
+        Wed, 09 Feb 2022 17:43:38 -0800 (PST)
 Received: from [192.168.11.5] (KD106167171201.ppp-bb.dion.ne.jp. [106.167.171.201])
-        by smtp.gmail.com with ESMTPSA id 6sm15177035pgx.36.2022.02.09.17.26.54
+        by smtp.gmail.com with ESMTPSA id a3sm61728pjq.43.2022.02.09.17.43.36
         (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Wed, 09 Feb 2022 17:26:56 -0800 (PST)
-Message-ID: <519bd2d9-1bee-03e1-eeb4-d9883c18be0c@gmail.com>
-Date:   Thu, 10 Feb 2022 10:26:53 +0900
+        Wed, 09 Feb 2022 17:43:38 -0800 (PST)
+Message-ID: <e7ce363c-c154-50b7-016f-0f98bf13a0b9@gmail.com>
+Date:   Thu, 10 Feb 2022 10:43:34 +0900
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
  Thunderbird/91.5.0
+Subject: Re: [PATCH] docs: Makefile: Add -no-shell-escape option to LATEXOPTS
 Content-Language: en-US
 To:     Jonathan Corbet <corbet@lwn.net>
 Cc:     linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
         Akira Yokosawa <akiyks@gmail.com>
+References: <519bd2d9-1bee-03e1-eeb4-d9883c18be0c@gmail.com>
 From:   Akira Yokosawa <akiyks@gmail.com>
-Subject: [PATCH] docs: Makefile: Add -no-shell-escape option to LATEXOPTS
+In-Reply-To: <519bd2d9-1bee-03e1-eeb4-d9883c18be0c@gmail.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 X-Spam-Status: No, score=-2.1 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_FROM,
+        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_FROM,NICE_REPLY_A,
         RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,SPF_PASS,T_SCC_BODY_TEXT_LINE
         autolearn=ham autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
@@ -70,33 +73,26 @@ Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-By adding this option, message of "restricted \write18 enabled" from
-LaTeX can be silenced.
+On Thu, 10 Feb 2022 10:26:53 +0900,
+Akira Yokosawa wrote:
+> By adding this option, message of "restricted \write18 enabled" from
+> LaTeX can be silenced.
+> 
+> As there is no use of \write18 in LaTeX sources from sphinx-build, it
+> is safe to add this option.
 
-As there is no use of \write18 in LaTeX sources from sphinx-build, it
-is safe to add this option.
+Jon,
+JFYI, there is a ticket on the message at:
 
-Reported-by: Jonathan Corbet <corbet@lwn.net>
-Signed-off-by: Akira Yokosawa <akiyks@gmail.com>
----
- Documentation/Makefile | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+    https://tex.stackexchange.com/questions/76105/what-does-restricted-write18-enabled-mean-and-why-does-texlive-keep-reporting
 
-diff --git a/Documentation/Makefile b/Documentation/Makefile
-index 9f4bd42cef18..64d44c1ecad3 100644
---- a/Documentation/Makefile
-+++ b/Documentation/Makefile
-@@ -26,7 +26,7 @@ SPHINX_CONF   = conf.py
- PAPER         =
- BUILDDIR      = $(obj)/output
- PDFLATEX      = xelatex
--LATEXOPTS     = -interaction=batchmode
-+LATEXOPTS     = -interaction=batchmode -no-shell-escape
- 
- ifeq ($(KBUILD_VERBOSE),0)
- SPHINXOPTS    += "-q"
+I think David Carlisle's answer covers most of your concerns.
 
-base-commit: f647de4b02dcb1815fb3019f86a001a681daf0a1
--- 
-2.17.1
+        Thanks, Akira 
+
+> 
+> Reported-by: Jonathan Corbet <corbet@lwn.net>
+> Signed-off-by: Akira Yokosawa <akiyks@gmail.com>
+> ---
+[...]
 
