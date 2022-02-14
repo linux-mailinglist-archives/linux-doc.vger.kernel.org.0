@@ -2,357 +2,186 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 5B4434B5E8F
-	for <lists+linux-doc@lfdr.de>; Tue, 15 Feb 2022 01:01:17 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id CA4CE4B5E3B
+	for <lists+linux-doc@lfdr.de>; Tue, 15 Feb 2022 00:28:22 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S232396AbiBOAAs (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 14 Feb 2022 19:00:48 -0500
-Received: from mxb-00190b01.gslb.pphosted.com ([23.128.96.19]:40006 "EHLO
+        id S229557AbiBNX23 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 14 Feb 2022 18:28:29 -0500
+Received: from mxb-00190b01.gslb.pphosted.com ([23.128.96.19]:50518 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S232317AbiBOAAf (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Mon, 14 Feb 2022 19:00:35 -0500
-Received: from mx0a-001b2d01.pphosted.com (mx0a-001b2d01.pphosted.com [148.163.156.1])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 743A641984;
-        Mon, 14 Feb 2022 16:00:26 -0800 (PST)
-Received: from pps.filterd (m0098399.ppops.net [127.0.0.1])
-        by mx0a-001b2d01.pphosted.com (8.16.1.2/8.16.1.2) with SMTP id 21EN10KB007645;
-        Tue, 15 Feb 2022 00:00:26 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ibm.com; h=date : from : to : cc :
- subject : message-id : in-reply-to : references : mime-version :
- content-type : content-transfer-encoding; s=pp1;
- bh=C9lgz9nUygy/WNSTFeeSPkV509FapWhd0eHU3azbyjQ=;
- b=V6jz00dlAfuHvlIEDEDdZ47RlqbFWWqYXihuemO13+2W7TEhkZ0I3+EeovzPhCwu9eog
- +pi3UdbixsAHlawfet+t6L/F0dz9xLWvm7qUGVVHb66YGaOSkavJbdAfIm9qYWVNuxmh
- H0frEzi1AjBYfLYqDl0zVpq9D7OWeuaLsr0/Qul8IOusWtlcMyxmPIYr/xYLnloLM3Jj
- 5fwFA7q9iGDmskbnaTyMX5CUFrIYlFRfLkk0tl5dLGkswaoxlmQQmu+hCzqosxwvbaPz
- YX6Nb1uUPtkbAAHct0ppFXk9l0PPM3s+k7mmLw6My0dey5I3TVyOY7t3FdKVkHX/AiYq bA== 
-Received: from pps.reinject (localhost [127.0.0.1])
-        by mx0a-001b2d01.pphosted.com with ESMTP id 3e7dej3p5d-1
-        (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
-        Tue, 15 Feb 2022 00:00:26 +0000
-Received: from m0098399.ppops.net (m0098399.ppops.net [127.0.0.1])
-        by pps.reinject (8.16.0.43/8.16.0.43) with SMTP id 21ENSUJm025655;
-        Tue, 15 Feb 2022 00:00:25 GMT
-Received: from ppma06ams.nl.ibm.com (66.31.33a9.ip4.static.sl-reverse.com [169.51.49.102])
-        by mx0a-001b2d01.pphosted.com with ESMTP id 3e7dej3p4n-1
-        (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
-        Tue, 15 Feb 2022 00:00:25 +0000
-Received: from pps.filterd (ppma06ams.nl.ibm.com [127.0.0.1])
-        by ppma06ams.nl.ibm.com (8.16.1.2/8.16.1.2) with SMTP id 21ENwAlr005177;
-        Tue, 15 Feb 2022 00:00:23 GMT
-Received: from b06cxnps3075.portsmouth.uk.ibm.com (d06relay10.portsmouth.uk.ibm.com [9.149.109.195])
-        by ppma06ams.nl.ibm.com with ESMTP id 3e645jhxjc-1
-        (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
-        Tue, 15 Feb 2022 00:00:22 +0000
-Received: from d06av23.portsmouth.uk.ibm.com (d06av23.portsmouth.uk.ibm.com [9.149.105.59])
-        by b06cxnps3075.portsmouth.uk.ibm.com (8.14.9/8.14.9/NCO v10.0) with ESMTP id 21F00I5834537732
-        (version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
-        Tue, 15 Feb 2022 00:00:18 GMT
-Received: from d06av23.portsmouth.uk.ibm.com (unknown [127.0.0.1])
-        by IMSVA (Postfix) with ESMTP id 529DFA4059;
-        Tue, 15 Feb 2022 00:00:18 +0000 (GMT)
-Received: from d06av23.portsmouth.uk.ibm.com (unknown [127.0.0.1])
-        by IMSVA (Postfix) with ESMTP id A6342A404D;
-        Tue, 15 Feb 2022 00:00:17 +0000 (GMT)
-Received: from p-imbrenda (unknown [9.145.2.54])
-        by d06av23.portsmouth.uk.ibm.com (Postfix) with ESMTP;
-        Tue, 15 Feb 2022 00:00:17 +0000 (GMT)
-Date:   Mon, 14 Feb 2022 18:58:49 +0100
-From:   Claudio Imbrenda <imbrenda@linux.ibm.com>
-To:     Janis Schoetterl-Glausch <scgl@linux.ibm.com>
-Cc:     Christian Borntraeger <borntraeger@linux.ibm.com>,
-        Heiko Carstens <hca@linux.ibm.com>,
-        Janosch Frank <frankja@linux.ibm.com>,
-        Alexander Gordeev <agordeev@linux.ibm.com>,
-        David Hildenbrand <david@redhat.com>,
-        Jonathan Corbet <corbet@lwn.net>, kvm@vger.kernel.org,
-        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
-        linux-s390@vger.kernel.org, Paolo Bonzini <pbonzini@redhat.com>,
-        Sven Schnelle <svens@linux.ibm.com>,
-        Vasily Gorbik <gor@linux.ibm.com>
-Subject: Re: [PATCH v4 06/10] KVM: s390: Add vm IOCTL for key checked guest
- absolute memory access
-Message-ID: <20220214185849.04331079@p-imbrenda>
-In-Reply-To: <20220211182215.2730017-7-scgl@linux.ibm.com>
-References: <20220211182215.2730017-1-scgl@linux.ibm.com>
-        <20220211182215.2730017-7-scgl@linux.ibm.com>
-Organization: IBM
-X-Mailer: Claws Mail 3.18.0 (GTK+ 2.24.33; x86_64-redhat-linux-gnu)
+        with ESMTP id S229449AbiBNX22 (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Mon, 14 Feb 2022 18:28:28 -0500
+Received: from mga09.intel.com (mga09.intel.com [134.134.136.24])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id B9269FABC4;
+        Mon, 14 Feb 2022 15:28:19 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1644881299; x=1676417299;
+  h=from:to:cc:subject:date:message-id:references:
+   in-reply-to:content-transfer-encoding:mime-version;
+  bh=93NC8urXNxmx+jBkfS1e/YKVj41fJ3mJekQJ4cYiYDQ=;
+  b=SMs93lw+dKE21rjpWzezH3vGqxoxIK30DfNoJc4erC9Wi5/nxVvbyn/f
+   4n1fErI8Ly5tyxYhqb3nZo5wEARgyZsIKwoLMZcgr16q2lzfagiIqmmpN
+   Z8RuRDKBAmTUpJO2shrb7xWn/1fxaKYBo2+09VIQKoiSU3Fq7cgdcCxdA
+   gv18rNCpmbPEiiR64hpPpBWrc8+tgOTq7Y+zZDM+J+4d7ican/7+wwP3J
+   lBSrBOC1O6UOS3jG7Poohrk03NPMAepmRiWKKKVChzOqQ3TpMmR/X/N1b
+   QTs6hmzW4FWZ+oZ6T4pUXvbHTMwUaebTcrcJVr1T0cIGijPBFN2Ktd59g
+   Q==;
+X-IronPort-AV: E=McAfee;i="6200,9189,10258"; a="249955510"
+X-IronPort-AV: E=Sophos;i="5.88,368,1635231600"; 
+   d="scan'208";a="249955510"
+Received: from orsmga007.jf.intel.com ([10.7.209.58])
+  by orsmga102.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 14 Feb 2022 15:27:57 -0800
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.88,368,1635231600"; 
+   d="scan'208";a="528499988"
+Received: from orsmsx606.amr.corp.intel.com ([10.22.229.19])
+  by orsmga007.jf.intel.com with ESMTP; 14 Feb 2022 15:27:57 -0800
+Received: from orsmsx609.amr.corp.intel.com (10.22.229.22) by
+ ORSMSX606.amr.corp.intel.com (10.22.229.19) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2308.20; Mon, 14 Feb 2022 15:27:56 -0800
+Received: from ORSEDG602.ED.cps.intel.com (10.7.248.7) by
+ orsmsx609.amr.corp.intel.com (10.22.229.22) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2308.20 via Frontend Transport; Mon, 14 Feb 2022 15:27:56 -0800
+Received: from NAM10-DM6-obe.outbound.protection.outlook.com (104.47.58.100)
+ by edgegateway.intel.com (134.134.137.103) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.1.2308.20; Mon, 14 Feb 2022 15:27:56 -0800
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=n1Ezc7dtvnO4lt6yPMjzZrokAA4uZZ9bHqANDVIpn2EyAowj6YSkCG5XiqOldEsh0f0rte4AGnh39UKdE9dDQ3xnfvBrAY1L99W51Q8Lg6bJP9YQju4g2/D+Jt0rOt2TuEIPBBZ4MqyXaupgXJM5jFwilVFyzTxCcK7FXFRHh0Nd/0A0DPe1e8g73l6H5PraXckDE30+vdqLiDz7RQiJigO7RUmjoADmn0CNadvukfJkXIk3t/tRcqRwZUANOr4NDWgcmiqRFfHGqyhwqa78nAVFIefuJ+ThOitSehNwf5INgtRFN4JruLK0Z8dFzb4Aw06FqIAxXOE9NhmzID2cOQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=93NC8urXNxmx+jBkfS1e/YKVj41fJ3mJekQJ4cYiYDQ=;
+ b=IJEhw3IHmoA6wgb1c3PS8JEB6M8UBlJhlM2898Qidyz24fta6pdOMdekZAIWhuRk41zFwXHKexwj/8Hhs8NwdkrE0e/DQR9gDEcZI0G6AILsWmkJOsr9SZVc1gHcbIUnliK+U/Mr+uKIa0jScQHZL4l/pEap1sTSN2LGA5Pmwv6/gFhVLMQd65CrdWfsOyLBe21LUyW3dED9bTq1vjPkippEIW83alKcf4RQR1CN0yNmBAcu4MfvVrJ4/evjiMi8nyMF1J7gzBVI44tmYpBdcO/io+tcohN9Jy0M3yxxqZBOAzjb3ILIPgbjzyzLLOAlJHICs1rSGNo4PtFHQSEByA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=none; dmarc=none;
+ dkim=none; arc=none
+Received: from BN9PR11MB5483.namprd11.prod.outlook.com (2603:10b6:408:104::10)
+ by SN6PR11MB2704.namprd11.prod.outlook.com (2603:10b6:805:53::11) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4975.18; Mon, 14 Feb
+ 2022 23:27:52 +0000
+Received: from BN9PR11MB5483.namprd11.prod.outlook.com
+ ([fe80::c8ff:c95c:e601:eee3]) by BN9PR11MB5483.namprd11.prod.outlook.com
+ ([fe80::c8ff:c95c:e601:eee3%6]) with mapi id 15.20.4975.019; Mon, 14 Feb 2022
+ 23:27:52 +0000
+From:   "Zhang, Tianfei" <tianfei.zhang@intel.com>
+To:     Randy Dunlap <rdunlap@infradead.org>,
+        Akira Yokosawa <akiyks@gmail.com>
+CC:     "corbet@lwn.net" <corbet@lwn.net>, "Wu, Hao" <hao.wu@intel.com>,
+        "linux-doc@vger.kernel.org" <linux-doc@vger.kernel.org>,
+        "linux-fpga@vger.kernel.org" <linux-fpga@vger.kernel.org>,
+        "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
+        "mdf@kernel.org" <mdf@kernel.org>,
+        "trix@redhat.com" <trix@redhat.com>,
+        "Xu, Yilun" <yilun.xu@intel.com>
+Subject: RE: [PATCH v1 1/7] Documentation: fpga: dfl: add description of IOFS
+Thread-Topic: [PATCH v1 1/7] Documentation: fpga: dfl: add description of IOFS
+Thread-Index: AQHYIZYrI9khWBzXDEChcSjUIMBh1qyS9toAgABeawCAAFxVYA==
+Date:   Mon, 14 Feb 2022 23:27:52 +0000
+Message-ID: <BN9PR11MB548353C757E2B7247C0733E3E3339@BN9PR11MB5483.namprd11.prod.outlook.com>
+References: <20220214112619.219761-2-tianfei.zhang@intel.com>
+ <eb5506aa-815d-b373-2eff-a3b9df533141@gmail.com>
+ <be378318-2b68-15d3-df89-db5b10ccc8cb@infradead.org>
+In-Reply-To: <be378318-2b68-15d3-df89-db5b10ccc8cb@infradead.org>
+Accept-Language: zh-CN, en-US
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+dlp-product: dlpe-windows
+dlp-version: 11.6.200.16
+dlp-reaction: no-action
+authentication-results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=intel.com;
+x-ms-publictraffictype: Email
+x-ms-office365-filtering-correlation-id: 4ac1ee99-4f87-47c2-19e5-08d9f0119f51
+x-ms-traffictypediagnostic: SN6PR11MB2704:EE_
+x-ld-processed: 46c98d88-e344-4ed4-8496-4ed7712e255d,ExtAddr
+x-microsoft-antispam-prvs: <SN6PR11MB27049F784CDE5819EED5AF5CE3339@SN6PR11MB2704.namprd11.prod.outlook.com>
+x-ms-oob-tlc-oobclassifiers: OLM:2657;
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
+x-microsoft-antispam: BCL:0;
+x-microsoft-antispam-message-info: rFh9UVxHx/1yMSC09DHdoOJwK9ttQP4tVMlgGftkiLXRlcswAvJP7PPpp4UyDEYpknxaR97CS8+5JqSoU03UUdNy5aOGvTCnOV/t2aIRKH04QGvc4XCGjCt7AglPnRWozvtqYoMU2ZWq1CXMqfyvKgEBJFe8/aJ3wdv2KXmguJ+AZk6EiJ3Daotrt9JZLlM1MVo7eJbA1xIUmiRUPGlmZIJd/ywaNRQOhsLmk5Nitz0kPlHT+2BDhvl1F4JSBjrnWS2EPl16WswARpVV1XK2fr+jkgswNcoJleLX48pspFtK3n+rnUYYEMNjzB6hL07LVWuuDDM6VsBxLSfU29JRu6N76GcB7ckAGuKJAVzEMWsdeer5J6jsnlfdahiaC1R7Kp5OMGXHxqkUm9JjtCtg/1saFFhnCJGxtVlVw3pBv0sn8RzBGvHufleZitc/t7BLvjuJFt+JJmgfcjqM8YqJvF7/xH1vQVmB7JnNWFakCv5c5Mt/SoZM1UkLBaeJjKDr+PJaSyCh3jJnOODxg2PJHPDqbxHWvfKgYOXoeTDQMe3fcYMGmxuxqDd4KFnwKJxMQLuVjsasKJZUTTViXbZITI3dgiCkg3jrEg85nnWV+ZsRdGVkmRz5Vca1oLYBdkyMKet9254xlpesWrni/rXwY6krjmL3AAYQzqPDcq95yslLVmnn4Y1whVDhGKxt+Yu+nho3tNQE9S8HfsVrMFirBw==
+x-forefront-antispam-report: CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BN9PR11MB5483.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230001)(366004)(54906003)(7696005)(83380400001)(110136005)(316002)(71200400001)(508600001)(6506007)(9686003)(86362001)(5660300002)(38100700002)(186003)(2906002)(33656002)(55016003)(107886003)(8676002)(4326008)(53546011)(66446008)(66476007)(64756008)(66556008)(122000001)(66946007)(82960400001)(52536014)(76116006)(8936002)(4744005)(38070700005);DIR:OUT;SFP:1102;
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0: =?utf-8?B?eWhhWWMzZTZuczIyWXBVNGFOMURwN2RXcHY0dVhvc1lCVWxyMEF5a2lLcFlT?=
+ =?utf-8?B?eHo2dmszRitGamhjZG9jZDA5bFRaSENhY3ozYlBWUlVtbDFmM1pJZkxHWWZ0?=
+ =?utf-8?B?cFF3Sk5McjJMR0t0Y3FWdWY4NjZUejA3VnIxK2d3NXZhbUh5V0Q1Ympxbm96?=
+ =?utf-8?B?Z3NPSXB3SVhISmZpd25Ja25TWHV5d1YvOTk2ZVhHNWlwc3lXRi95Nll0Vjd1?=
+ =?utf-8?B?UVJRZXRUY1BIYndOc3NDdWg0alhocUJsbXVxT3ZwZmpaQ0UxdjhlTEVKMEs1?=
+ =?utf-8?B?TTNpQ0JZVEsvVm5hVHpVMmN4dUwyZGNQQm5YY3BKUUlyUUw4dk5nOTl0c0Ja?=
+ =?utf-8?B?TzNKS0RrYlB1djZmMzRvMGR6eEhWcnB3NEx3YUI4ZU1NdDRtK3J4WTZONnpv?=
+ =?utf-8?B?QkU3bTFLNVA1ZGpMMnJGeU4zTmNFSVIydGloVG1rc0I5UnVsbGxHYTdTeUlh?=
+ =?utf-8?B?d3hDelRtMGVzeU5ONWlZd1BONmwzVjBNS0lqeCtsMkcrTE5FNGIzMGR5QnJt?=
+ =?utf-8?B?bFlwc24xTlZaWG4xSjFKR0Z6QjVxQ1NqK1lWd2U1TnRBWUFUdUU3NnJ3NWIy?=
+ =?utf-8?B?ZWdYSFpoWHhiaThHTDlLTWtRSlFoa2ZLNGtQZ1dIQ0MxcWVaUjhHcmxJdkpF?=
+ =?utf-8?B?VFhNM2lnSmJnOEsrelRBNGZ5OXNtc0pDa254a3ZUeER3T3F4QlhHVGpnblNZ?=
+ =?utf-8?B?ZTlwQmYxdFRmY0QvdnRTTUZ5OFp3TEZpN3JSZ2F3a0tteWlGQTNLZmo4ZnI1?=
+ =?utf-8?B?RlRQdjZJN2gzaE5FSlVpMFh2MmE1ZlUrWXpCSVFKWmRQcnZUc2g5Sy9Hby9v?=
+ =?utf-8?B?VktKTklUVjBEMEdZcGFIMHhkK1k4QVVkU01QTWp4R3FPWFdBQmZMeTExbGpC?=
+ =?utf-8?B?ZXJHbHJhUFBqSVN2V0lOTmg1NFNGK2JacEYwZE1FMmc2b01MU0JYckdlOTh6?=
+ =?utf-8?B?QUVFeGdqQmZ5OHBFL0QxaWlSKzQreWVJaG5XU2xGb1N1WnFheU91UndzcVli?=
+ =?utf-8?B?RDVqMVJuTlFzMjdMS3VXbDNIcWFSREMvNHpIcEpYUEhzV2Z6eWhDSmdhMkV2?=
+ =?utf-8?B?dzZ1K3lrSExZK0hEWkZlSU9lb2JHOFVzWG5wQTNtanc5OE8wZk90a3ZtTGhi?=
+ =?utf-8?B?TTRsK3JuY253MDJnbktKczE4YitiZ0QzejJtbnBXb1lNV0J6aS9NeUNnWjZq?=
+ =?utf-8?B?bkNDRUJNL0Q1d2owcFFOcC83SjJIdkRWcWw5SWhrejh5RDhaZGw1NDl5OVRR?=
+ =?utf-8?B?VlhVNTF5NjdmeGpBeDVLOHYrQlpuams3M2JyOEpSWGx3K1VDUENMQTlGZnZK?=
+ =?utf-8?B?RE5YaDlWR0hMSGFMdkpPRXNqS2xLc0RtMFlhTVFpdHlMQ2dFMml5dHRROWJT?=
+ =?utf-8?B?cmRjVEFoMEVYRWQrNkhqbU1xdjJjY0dKbVdNY2JmTUJmWjBvcmpvc2xEK20v?=
+ =?utf-8?B?RDRDb0w0N0NYZ0w2Ri9WZTNKSkZ1ZFF3NGhRMUlWNThvUVNaR1RuNXQ2d1Fw?=
+ =?utf-8?B?dzVvek5kYWlUWDlhbXEvcXdYV1VmOG4vR2x6K0k1eDJOUGREZ05VODN2RStw?=
+ =?utf-8?B?Nm1ZTmdaOEExTXFiS05hZ3ZPdlFxQUswV2xPckJSYVcyYVJ1MWxieFcvYnli?=
+ =?utf-8?B?Wm9OOEJRRjc0NFpwNFdaNFlQS1plV3JGOUtCNDhoem0zcUh3QWR4Lytpa1ZL?=
+ =?utf-8?B?Qm9hc0tNZ1lmaE1ZVWlDeXVkdmJmUHJ0and5VGY3aHB0aEFNdmx6MVhxQnpN?=
+ =?utf-8?B?NVViWTlWT1lMaUVQZUlLUS9YWGNJZGV4YktkSTRCWnRJM2VLT0VmWG0yL1Q0?=
+ =?utf-8?B?cXRaekY0b3BtZWs4YTQwdmZ2U1JKcWhlVVpYcVltNlZWaUNpUWZZYWE1eVFD?=
+ =?utf-8?B?WTJqV3pqdlovQUgvL0xUUmR1ajJ3MXFYY3ZzT3k3U25KSVVIQjhvQThHeXQv?=
+ =?utf-8?B?SWpWYnJYbWlCbFRZdDIvVzcwZys5S1NUcXBvbFFrbncvaEk1ZU1BMk56VXZP?=
+ =?utf-8?B?aGJRSXlJNHFCRUczNVBwMXA2N2RsUGI3RGpuQkNodzVicGRmZVo1UzNEVUJ5?=
+ =?utf-8?B?eGhnMjI1TDRPVFRaMTB2Q2NuTlRHT3lvV2RINWo1TDRPWlRJbStRT0trZlVk?=
+ =?utf-8?B?dHIySHJPcUVBeUFyNy9ZSTFUL2dVRWVLQ0lMZnJsMzE5Y0hOMEVUcnY3cG16?=
+ =?utf-8?B?WGlQejZ3SWN2OXpjc01ZVDc1UGtYT1lBa0w3Mk1ZTFlyRXIxdExRUWRNWERm?=
+ =?utf-8?Q?itm+UqZJTvo0OXn9HG6tuDDKIpG7GDtFlfMhS/gVmE=3D?=
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: 7bit
-X-TM-AS-GCONF: 00
-X-Proofpoint-GUID: AJzA_gdQpFX90Dp5U0j_pYyepd_AzmFC
-X-Proofpoint-ORIG-GUID: toTycKR9roIP9nv0G3g-D8HnUz0prpH0
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.205,Aquarius:18.0.816,Hydra:6.0.425,FMLib:17.11.62.513
- definitions=2022-02-14_07,2022-02-14_03,2021-12-02_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 impostorscore=0 phishscore=0
- mlxscore=0 mlxlogscore=999 priorityscore=1501 adultscore=0 malwarescore=0
- spamscore=0 clxscore=1015 suspectscore=0 bulkscore=0 lowpriorityscore=0
- classifier=spam adjust=0 reason=mlx scancount=1 engine=8.12.0-2201110000
- definitions=main-2202140134
-X-Spam-Status: No, score=-0.5 required=5.0 tests=BAYES_00,DATE_IN_PAST_06_12,
-        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_EF,RCVD_IN_MSPIKE_H5,
-        RCVD_IN_MSPIKE_WL,SPF_HELO_NONE,SPF_PASS,T_SCC_BODY_TEXT_LINE
-        autolearn=no autolearn_force=no version=3.4.6
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: BN9PR11MB5483.namprd11.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 4ac1ee99-4f87-47c2-19e5-08d9f0119f51
+X-MS-Exchange-CrossTenant-originalarrivaltime: 14 Feb 2022 23:27:52.6389
+ (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: 46c98d88-e344-4ed4-8496-4ed7712e255d
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: QFfAUsy7PZPUxcTGtpJG8pw5CuxJeQvYO9po3MVcidLdEEwHvDT6zuIdsK+bKTy2o/LqlAce6TL8Zto0cS+sOg==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SN6PR11MB2704
+X-OriginatorOrg: intel.com
+X-Spam-Status: No, score=-4.5 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_MED,
+        RCVD_IN_MSPIKE_H3,RCVD_IN_MSPIKE_WL,SPF_HELO_NONE,SPF_NONE,
+        T_SCC_BODY_TEXT_LINE autolearn=ham autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Fri, 11 Feb 2022 19:22:11 +0100
-Janis Schoetterl-Glausch <scgl@linux.ibm.com> wrote:
-
-> Channel I/O honors storage keys and is performed on absolute memory.
-> For I/O emulation user space therefore needs to be able to do key
-> checked accesses.
-> The vm IOCTL supports read/write accesses, as well as checking
-> if an access would succeed.
-> Unlike relying on KVM_S390_GET_SKEYS for key checking would,
-> the vm IOCTL performs the check in lockstep with the read or write,
-> by, ultimately, mapping the access to move instructions that
-> support key protection checking with a supplied key.
-> Fetch and storage protection override are not applicable to absolute
-> accesses and so are not applied as they are when using the vcpu memop.
-> 
-> Signed-off-by: Janis Schoetterl-Glausch <scgl@linux.ibm.com>
-> Reviewed-by: Christian Borntraeger <borntraeger@linux.ibm.com>
-
-Reviewed-by: Claudio Imbrenda <imbrenda@linux.ibm.com>
-
-> ---
->  arch/s390/kvm/gaccess.c  | 72 +++++++++++++++++++++++++++++++++++
->  arch/s390/kvm/gaccess.h  |  6 +++
->  arch/s390/kvm/kvm-s390.c | 81 ++++++++++++++++++++++++++++++++++++++++
->  include/uapi/linux/kvm.h |  2 +
->  4 files changed, 161 insertions(+)
-> 
-> diff --git a/arch/s390/kvm/gaccess.c b/arch/s390/kvm/gaccess.c
-> index 37838f637707..d53a183c2005 100644
-> --- a/arch/s390/kvm/gaccess.c
-> +++ b/arch/s390/kvm/gaccess.c
-> @@ -795,6 +795,35 @@ static int low_address_protection_enabled(struct kvm_vcpu *vcpu,
->  	return 1;
->  }
->  
-> +static int vm_check_access_key(struct kvm *kvm, u8 access_key,
-> +			       enum gacc_mode mode, gpa_t gpa)
-> +{
-> +	u8 storage_key, access_control;
-> +	bool fetch_protected;
-> +	unsigned long hva;
-> +	int r;
-> +
-> +	if (access_key == 0)
-> +		return 0;
-> +
-> +	hva = gfn_to_hva(kvm, gpa_to_gfn(gpa));
-> +	if (kvm_is_error_hva(hva))
-> +		return PGM_ADDRESSING;
-> +
-> +	mmap_read_lock(current->mm);
-> +	r = get_guest_storage_key(current->mm, hva, &storage_key);
-> +	mmap_read_unlock(current->mm);
-> +	if (r)
-> +		return r;
-> +	access_control = FIELD_GET(_PAGE_ACC_BITS, storage_key);
-> +	if (access_control == access_key)
-> +		return 0;
-> +	fetch_protected = storage_key & _PAGE_FP_BIT;
-> +	if ((mode == GACC_FETCH || mode == GACC_IFETCH) && !fetch_protected)
-> +		return 0;
-> +	return PGM_PROTECTION;
-> +}
-> +
->  static bool fetch_prot_override_applicable(struct kvm_vcpu *vcpu, enum gacc_mode mode,
->  					   union asce asce)
->  {
-> @@ -994,6 +1023,26 @@ access_guest_page_with_key(struct kvm *kvm, enum gacc_mode mode, gpa_t gpa,
->  	return 0;
->  }
->  
-> +int access_guest_abs_with_key(struct kvm *kvm, gpa_t gpa, void *data,
-> +			      unsigned long len, enum gacc_mode mode, u8 access_key)
-> +{
-> +	int offset = offset_in_page(gpa);
-> +	int fragment_len;
-> +	int rc;
-> +
-> +	while (min(PAGE_SIZE - offset, len) > 0) {
-> +		fragment_len = min(PAGE_SIZE - offset, len);
-> +		rc = access_guest_page_with_key(kvm, mode, gpa, data, fragment_len, access_key);
-> +		if (rc)
-> +			return rc;
-> +		offset = 0;
-> +		len -= fragment_len;
-> +		data += fragment_len;
-> +		gpa += fragment_len;
-> +	}
-> +	return 0;
-> +}
-> +
->  int access_guest_with_key(struct kvm_vcpu *vcpu, unsigned long ga, u8 ar,
->  			  void *data, unsigned long len, enum gacc_mode mode,
->  			  u8 access_key)
-> @@ -1144,6 +1193,29 @@ int check_gva_range(struct kvm_vcpu *vcpu, unsigned long gva, u8 ar,
->  	return rc;
->  }
->  
-> +/**
-> + * check_gpa_range - test a range of guest physical addresses for accessibility
-> + * @kvm: virtual machine instance
-> + * @gpa: guest physical address
-> + * @length: length of test range
-> + * @mode: access mode to test, relevant for storage keys
-> + * @access_key: access key to mach the storage keys with
-> + */
-> +int check_gpa_range(struct kvm *kvm, unsigned long gpa, unsigned long length,
-> +		    enum gacc_mode mode, u8 access_key)
-> +{
-> +	unsigned int fragment_len;
-> +	int rc = 0;
-> +
-> +	while (length && !rc) {
-> +		fragment_len = min(PAGE_SIZE - offset_in_page(gpa), length);
-> +		rc = vm_check_access_key(kvm, access_key, mode, gpa);
-> +		length -= fragment_len;
-> +		gpa += fragment_len;
-> +	}
-> +	return rc;
-> +}
-> +
->  /**
->   * kvm_s390_check_low_addr_prot_real - check for low-address protection
->   * @vcpu: virtual cpu
-> diff --git a/arch/s390/kvm/gaccess.h b/arch/s390/kvm/gaccess.h
-> index c5f2e7311b17..1124ff282012 100644
-> --- a/arch/s390/kvm/gaccess.h
-> +++ b/arch/s390/kvm/gaccess.h
-> @@ -193,6 +193,12 @@ int guest_translate_address_with_key(struct kvm_vcpu *vcpu, unsigned long gva, u
->  int check_gva_range(struct kvm_vcpu *vcpu, unsigned long gva, u8 ar,
->  		    unsigned long length, enum gacc_mode mode, u8 access_key);
->  
-> +int check_gpa_range(struct kvm *kvm, unsigned long gpa, unsigned long length,
-> +		    enum gacc_mode mode, u8 access_key);
-> +
-> +int access_guest_abs_with_key(struct kvm *kvm, gpa_t gpa, void *data,
-> +			      unsigned long len, enum gacc_mode mode, u8 access_key);
-> +
->  int access_guest_with_key(struct kvm_vcpu *vcpu, unsigned long ga, u8 ar,
->  			  void *data, unsigned long len, enum gacc_mode mode,
->  			  u8 access_key);
-> diff --git a/arch/s390/kvm/kvm-s390.c b/arch/s390/kvm/kvm-s390.c
-> index c31b40abfa23..36bc73b5f5de 100644
-> --- a/arch/s390/kvm/kvm-s390.c
-> +++ b/arch/s390/kvm/kvm-s390.c
-> @@ -2364,6 +2364,78 @@ static bool access_key_invalid(u8 access_key)
->  	return access_key > 0xf;
->  }
->  
-> +static int kvm_s390_vm_mem_op(struct kvm *kvm, struct kvm_s390_mem_op *mop)
-> +{
-> +	void __user *uaddr = (void __user *)mop->buf;
-> +	u64 supported_flags;
-> +	void *tmpbuf = NULL;
-> +	int r, srcu_idx;
-> +
-> +	supported_flags = KVM_S390_MEMOP_F_SKEY_PROTECTION
-> +			  | KVM_S390_MEMOP_F_CHECK_ONLY;
-> +	if (mop->flags & ~supported_flags)
-> +		return -EINVAL;
-> +	if (mop->size > MEM_OP_MAX_SIZE)
-> +		return -E2BIG;
-> +	if (kvm_s390_pv_is_protected(kvm))
-> +		return -EINVAL;
-> +	if (mop->flags & KVM_S390_MEMOP_F_SKEY_PROTECTION) {
-> +		if (access_key_invalid(mop->key))
-> +			return -EINVAL;
-> +	} else {
-> +		mop->key = 0;
-> +	}
-> +	if (!(mop->flags & KVM_S390_MEMOP_F_CHECK_ONLY)) {
-> +		tmpbuf = vmalloc(mop->size);
-> +		if (!tmpbuf)
-> +			return -ENOMEM;
-> +	}
-> +
-> +	srcu_idx = srcu_read_lock(&kvm->srcu);
-> +
-> +	if (kvm_is_error_gpa(kvm, mop->gaddr)) {
-> +		r = PGM_ADDRESSING;
-> +		goto out_unlock;
-> +	}
-> +
-> +	switch (mop->op) {
-> +	case KVM_S390_MEMOP_ABSOLUTE_READ: {
-> +		if (mop->flags & KVM_S390_MEMOP_F_CHECK_ONLY) {
-> +			r = check_gpa_range(kvm, mop->gaddr, mop->size, GACC_FETCH, mop->key);
-> +		} else {
-> +			r = access_guest_abs_with_key(kvm, mop->gaddr, tmpbuf,
-> +						      mop->size, GACC_FETCH, mop->key);
-> +			if (r == 0) {
-> +				if (copy_to_user(uaddr, tmpbuf, mop->size))
-> +					r = -EFAULT;
-> +			}
-> +		}
-> +		break;
-> +	}
-> +	case KVM_S390_MEMOP_ABSOLUTE_WRITE: {
-> +		if (mop->flags & KVM_S390_MEMOP_F_CHECK_ONLY) {
-> +			r = check_gpa_range(kvm, mop->gaddr, mop->size, GACC_STORE, mop->key);
-> +		} else {
-> +			if (copy_from_user(tmpbuf, uaddr, mop->size)) {
-> +				r = -EFAULT;
-> +				break;
-> +			}
-> +			r = access_guest_abs_with_key(kvm, mop->gaddr, tmpbuf,
-> +						      mop->size, GACC_STORE, mop->key);
-> +		}
-> +		break;
-> +	}
-> +	default:
-> +		r = -EINVAL;
-> +	}
-> +
-> +out_unlock:
-> +	srcu_read_unlock(&kvm->srcu, srcu_idx);
-> +
-> +	vfree(tmpbuf);
-> +	return r;
-> +}
-> +
->  long kvm_arch_vm_ioctl(struct file *filp,
->  		       unsigned int ioctl, unsigned long arg)
->  {
-> @@ -2488,6 +2560,15 @@ long kvm_arch_vm_ioctl(struct file *filp,
->  		}
->  		break;
->  	}
-> +	case KVM_S390_MEM_OP: {
-> +		struct kvm_s390_mem_op mem_op;
-> +
-> +		if (copy_from_user(&mem_op, argp, sizeof(mem_op)) == 0)
-> +			r = kvm_s390_vm_mem_op(kvm, &mem_op);
-> +		else
-> +			r = -EFAULT;
-> +		break;
-> +	}
->  	default:
->  		r = -ENOTTY;
->  	}
-> diff --git a/include/uapi/linux/kvm.h b/include/uapi/linux/kvm.h
-> index 4566f429db2c..4bc7623def87 100644
-> --- a/include/uapi/linux/kvm.h
-> +++ b/include/uapi/linux/kvm.h
-> @@ -575,6 +575,8 @@ struct kvm_s390_mem_op {
->  #define KVM_S390_MEMOP_LOGICAL_WRITE	1
->  #define KVM_S390_MEMOP_SIDA_READ	2
->  #define KVM_S390_MEMOP_SIDA_WRITE	3
-> +#define KVM_S390_MEMOP_ABSOLUTE_READ	4
-> +#define KVM_S390_MEMOP_ABSOLUTE_WRITE	5
->  /* flags for kvm_s390_mem_op->flags */
->  #define KVM_S390_MEMOP_F_CHECK_ONLY		(1ULL << 0)
->  #define KVM_S390_MEMOP_F_INJECT_EXCEPTION	(1ULL << 1)
-
+DQo+IC0tLS0tT3JpZ2luYWwgTWVzc2FnZS0tLS0tDQo+IEZyb206IFJhbmR5IER1bmxhcCA8cmR1
+bmxhcEBpbmZyYWRlYWQub3JnPg0KPiBTZW50OiBUdWVzZGF5LCBGZWJydWFyeSAxNSwgMjAyMiAx
+OjU3IEFNDQo+IFRvOiBBa2lyYSBZb2tvc2F3YSA8YWtpeWtzQGdtYWlsLmNvbT47IFpoYW5nLCBU
+aWFuZmVpDQo+IDx0aWFuZmVpLnpoYW5nQGludGVsLmNvbT4NCj4gQ2M6IGNvcmJldEBsd24ubmV0
+OyBXdSwgSGFvIDxoYW8ud3VAaW50ZWwuY29tPjsgbGludXgtDQo+IGRvY0B2Z2VyLmtlcm5lbC5v
+cmc7IGxpbnV4LWZwZ2FAdmdlci5rZXJuZWwub3JnOyBsaW51eC0NCj4ga2VybmVsQHZnZXIua2Vy
+bmVsLm9yZzsgbWRmQGtlcm5lbC5vcmc7IHRyaXhAcmVkaGF0LmNvbTsgWHUsIFlpbHVuDQo+IDx5
+aWx1bi54dUBpbnRlbC5jb20+DQo+IFN1YmplY3Q6IFJlOiBbUEFUQ0ggdjEgMS83XSBEb2N1bWVu
+dGF0aW9uOiBmcGdhOiBkZmw6IGFkZCBkZXNjcmlwdGlvbiBvZiBJT0ZTDQo+IA0KPiANCj4gDQo+
+IE9uIDIvMTQvMjIgMDQ6MTgsIEFraXJhIFlva29zYXdhIHdyb3RlOg0KPiA+IEhpLA0KPiA+DQo+
+ID4gSnVzdCBhIGNvdXBsZSBvZiBuaXRzIG9uIFJlU1QgZm9ybWF0dGluZy4NCj4gPg0KPiANCj4g
+VGhhbmtzIDopDQo+IA0KPiANCj4gPg0KPiA+IEknZCByZWNvbW1lbmQgcnVubmluZyAibWFrZSBo
+dG1kb2NzIiBhbmQgc2VlIGlmIHRoZSBwYWdlcyBhcmUgcmVuZGVyZWQNCj4gPiBhcyB5b3UgZXhw
+ZWN0Lg0KPiANCj4gSSB0aGluayB0aGF0J3MgIm1ha2UgaHRtbGRvY3MiLiBCdXQgcGxlYXNlIGRv
+IHVzZSBpdC4NCg0KVGhhbmtz77yMSSB3aWxsIGZpeCBpdCBvbiBuZXh0IHZlcnNpb24uDQoNCj4g
+DQo+IC0tDQo+IH5SYW5keQ0K
