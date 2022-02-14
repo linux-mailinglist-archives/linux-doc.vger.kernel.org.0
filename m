@@ -2,190 +2,227 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id A0A574B4E43
-	for <lists+linux-doc@lfdr.de>; Mon, 14 Feb 2022 12:27:44 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id D86D44B4E52
+	for <lists+linux-doc@lfdr.de>; Mon, 14 Feb 2022 12:27:49 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1350682AbiBNLWH (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 14 Feb 2022 06:22:07 -0500
-Received: from mxb-00190b01.gslb.pphosted.com ([23.128.96.19]:48362 "EHLO
+        id S1351240AbiBNL13 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 14 Feb 2022 06:27:29 -0500
+Received: from mxb-00190b01.gslb.pphosted.com ([23.128.96.19]:53820 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1350663AbiBNLVp (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Mon, 14 Feb 2022 06:21:45 -0500
-Received: from mx0b-00069f02.pphosted.com (mx0b-00069f02.pphosted.com [205.220.177.32])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 065E3E025
-        for <linux-doc@vger.kernel.org>; Mon, 14 Feb 2022 02:57:45 -0800 (PST)
-Received: from pps.filterd (m0246632.ppops.net [127.0.0.1])
-        by mx0b-00069f02.pphosted.com (8.16.1.2/8.16.1.2) with SMTP id 21EAeO2P017063;
-        Mon, 14 Feb 2022 10:57:26 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=oracle.com; h=message-id : date :
- subject : to : cc : references : from : in-reply-to : content-type :
- content-transfer-encoding : mime-version; s=corp-2021-07-09;
- bh=/KDCLuRsDu4KUB5iioFpPsQPOPNWBkDRg2Is3ExFK3w=;
- b=TuEGZ7ifvKae52UvQrS+sCsDtyp49tH8aG4+79UoDYvOZezjyQp+KLcpctZW8mjEfg5X
- v+11vk5LLiXgTkKRQFBznXLqdMy9MwpI9Hmnc0xDvaW2hiHRh8BzShfgnLvbacTYEqSg
- bJnmbZ6fOiclZ92dw4RG8Iug0mhV0Pqovj/abSlPKr5rTkjtdJ23F61t4woxb8Q/qMi9
- RniWXc58h6hi1ivl0yc7OZsphUdvFgZYRQlvIwL0uxNhmdAlaloX8oLVBJiBT3g+Z6aY
- qiHAEVgjekinvs8Jo6a+kxtYzqCSIQzLOJrsDZrzjki0rfhxgP6/T8PX6y/mcvuKMxVv /A== 
-Received: from aserp3020.oracle.com (aserp3020.oracle.com [141.146.126.70])
-        by mx0b-00069f02.pphosted.com with ESMTP id 3e64gt43ry-1
-        (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
-        Mon, 14 Feb 2022 10:57:26 +0000
-Received: from pps.filterd (aserp3020.oracle.com [127.0.0.1])
-        by aserp3020.oracle.com (8.16.1.2/8.16.1.2) with SMTP id 21EAu1NG049023;
-        Mon, 14 Feb 2022 10:57:24 GMT
-Received: from nam12-bn8-obe.outbound.protection.outlook.com (mail-bn8nam12lp2168.outbound.protection.outlook.com [104.47.55.168])
-        by aserp3020.oracle.com with ESMTP id 3e6qkwfqpt-1
-        (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
-        Mon, 14 Feb 2022 10:57:24 +0000
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=S8fXL668PMlReFEz3m19S5AXU0q/HhCq+X/BFnwz4OP3SPJRci8ebVABq3jZXhlniwxDwmzLrOKFxr24JvMjPTrgtW8ZufqDZ6GjI6MoIA61cTv7R6U0e8jxkr5yh9Zg1aJhYC4qEZd1V5d42koriq23jWwTghrtAHN4PNIS5ZBFZRaKHeFj8lHVXrlvPr2tCo0M83hmmrbZw3du9e2QgVTxwQXxtCb6dsEd/xvVdmTZknlDjiACUf5b06Xq0HXRYnM0iFzNDHjU6O62giphDb7py78MEQMBDx4VgSroDXNSXI/qi7GZ4p7lJUOppizzBzzDXpVoln+uBWPhmGnxgw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=/KDCLuRsDu4KUB5iioFpPsQPOPNWBkDRg2Is3ExFK3w=;
- b=Bknv8uWeo3+JvN+cLz13Ol8vR6wBk7E58U8w3V89qBxZsOrZPnv+38kTgrbUnv5rQz3A8uzU1EWEMxgDxJbfCZkgR0IN6PUFgWKsteK170KDw76xZ1Q2Y7AObMn41fqBcrSEUgbOw/KRzaaJmEd9OsIO8guDmjs0UJ8GMmOW67JctPFO0ztjfJ7FCsG4R/9Ihvj1OISAjFD4GWSMTXC9KbMpzwVVPM8NfIbufDE7Wa40NN5L4mYyqEv8QC9+PpkFxGMT/jTwTAeXOrvxrM3b+INI/MMi9Ev9WHmvEmUJ0eEsLE8YxZq1mqgGhEQ4JaioEhPSteFaG4q1WsK4TCkKrg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=none; dmarc=none;
- dkim=none; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oracle.onmicrosoft.com; s=selector2-oracle-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=/KDCLuRsDu4KUB5iioFpPsQPOPNWBkDRg2Is3ExFK3w=;
- b=yvEx6uppRiQeshmhaa+siZ/6F1oQuAmFJVIkAtT6kMi0YCAbaTreVBb/lztJS0ffQo59Vl+uUg3Zcuws9krPpWXowgEY2PEee/ibugXHJVMLjj73nzoHJGqagqL1Jj+TJac4/IYUs+vOWFIv6fPSTUknwAX76dKoj6s4p+nWoyM=
-Received: from BLAPR10MB4835.namprd10.prod.outlook.com (2603:10b6:208:331::11)
- by CY4PR10MB1560.namprd10.prod.outlook.com (2603:10b6:903:2d::22) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4975.12; Mon, 14 Feb
- 2022 10:57:22 +0000
-Received: from BLAPR10MB4835.namprd10.prod.outlook.com
- ([fe80::4910:964a:4156:242a]) by BLAPR10MB4835.namprd10.prod.outlook.com
- ([fe80::4910:964a:4156:242a%5]) with mapi id 15.20.4975.019; Mon, 14 Feb 2022
- 10:57:22 +0000
-Message-ID: <23cd2843-9494-c129-4038-b23a16ecb0a9@oracle.com>
-Date:   Mon, 14 Feb 2022 10:57:15 +0000
-Subject: Re: [PATCH v5 4/5] mm/sparse-vmemmap: improve memory savings for
- compound devmaps
-Content-Language: en-US
-To:     Muchun Song <songmuchun@bytedance.com>
-Cc:     Linux Memory Management List <linux-mm@kvack.org>,
-        Dan Williams <dan.j.williams@intel.com>,
-        Vishal Verma <vishal.l.verma@intel.com>,
-        Matthew Wilcox <willy@infradead.org>,
-        Jason Gunthorpe <jgg@ziepe.ca>, Jane Chu <jane.chu@oracle.com>,
-        Mike Kravetz <mike.kravetz@oracle.com>,
-        Andrew Morton <akpm@linux-foundation.org>,
-        Jonathan Corbet <corbet@lwn.net>,
-        Christoph Hellwig <hch@lst.de>, nvdimm@lists.linux.dev,
-        Linux Doc Mailing List <linux-doc@vger.kernel.org>
-References: <20220210193345.23628-1-joao.m.martins@oracle.com>
- <20220210193345.23628-5-joao.m.martins@oracle.com>
- <CAMZfGtUEaFg=CGLRJomyumsZzcyn8O0JE1+De2Vd3a5remcH6w@mail.gmail.com>
- <d258c471-1291-e0c7-f1b3-a495b4d40bb9@oracle.com>
- <CAMZfGtWUHRRfowwPf1o-SycKZMDzMdeGdahaR2OEJZzLhLioNg@mail.gmail.com>
- <CAMZfGtUSxtnrY3Vkn8gP2T2jUjWdfVXu7+zt5Ny4VBi7ZDkWAg@mail.gmail.com>
-From:   Joao Martins <joao.m.martins@oracle.com>
-In-Reply-To: <CAMZfGtUSxtnrY3Vkn8gP2T2jUjWdfVXu7+zt5Ny4VBi7ZDkWAg@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: LO3P265CA0011.GBRP265.PROD.OUTLOOK.COM
- (2603:10a6:600:bb::16) To BLAPR10MB4835.namprd10.prod.outlook.com
- (2603:10b6:208:331::11)
+        with ESMTP id S1351274AbiBNL1O (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Mon, 14 Feb 2022 06:27:14 -0500
+Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.133.124])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTP id F3BCF5A59D
+        for <linux-doc@vger.kernel.org>; Mon, 14 Feb 2022 03:03:23 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+        s=mimecast20190719; t=1644836603;
+        h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+         to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+         in-reply-to:in-reply-to:references:references;
+        bh=hWhbGGGKn+bDX+rmVqjerjVIp4FoCEokyN680ikvwEs=;
+        b=IgPRyc42bJh6PRxRTxXu1ncoNpntuNRYNVoQysqz0mKHeS1A/u2ALKg0V6XtJsJn3RROZE
+        nx4t1uAUc7dZCNusC+XsTTWaS1V2XfV6d5AsOBKDBUWw0N5/+97RNjQ8VmvBo5IGe0nyd9
+        Cz773Zod+eyjB4cLt+fPLiflLPqJps0=
+Received: from mail-pf1-f199.google.com (mail-pf1-f199.google.com
+ [209.85.210.199]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ us-mta-16-YTH7M96lOICrvfmGDkt7lA-1; Mon, 14 Feb 2022 06:03:22 -0500
+X-MC-Unique: YTH7M96lOICrvfmGDkt7lA-1
+Received: by mail-pf1-f199.google.com with SMTP id 7-20020aa79247000000b004cdd523525eso11489881pfp.19
+        for <linux-doc@vger.kernel.org>; Mon, 14 Feb 2022 03:03:21 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=hWhbGGGKn+bDX+rmVqjerjVIp4FoCEokyN680ikvwEs=;
+        b=yk3ShsFHAFmt0th+PSeMFZ+YEfXD+5BcbDUUDa4cEpmO4uxNnpwl/Kf0aMIxHlWMgd
+         JMTBEQZtxx7xW5Fg1Uf/tLMGfkYP68/kYoBUJMz0CBVK+1QVU6CmazQBGblJxgdseZ1g
+         V36LPo9xB6ccdIZpdVJJhXICnoubWiP3qgdp+pPahGFJ2loS0vfIzhBt3PKSGKGQWRjV
+         wuiqfsP9OT9nLJeyrOjQsSt/Nu/v7BZ4snjCCTVD5RVQSPyneVNHQHgf5b9F5ovxsQxu
+         1efbV/YJz3C2iUqE4xD8tGi2nXCTQXaaEgHVDpG703lnO4Q+PHwE6dhQsivj1vz/s84T
+         sJPA==
+X-Gm-Message-State: AOAM5326QAZC1juVv8iiyaQaDLF2fPV5SiSpUqOkooQfhbLoO7UiLYsr
+        pm4+QqQVcX6ssn3nmZofWKRQ34MxOF/NW9+PjykXtCad7tU2owayqsNvgd8GdJl6Og+2RbwYdPd
+        JbW0f1L6QtzJZdEGwGFNJ5sYfoPcp3rm4kZ+5
+X-Received: by 2002:a17:90b:4a48:: with SMTP id lb8mr13869243pjb.246.1644836600818;
+        Mon, 14 Feb 2022 03:03:20 -0800 (PST)
+X-Google-Smtp-Source: ABdhPJxIgNSaQv0Pdi+0OuVv8zJKJEtv8+8VYc4ndU71icI1bcO5ov9up72ABZDSMDeRdlcnA4BrimL8T+lEFfAhVto=
+X-Received: by 2002:a17:90b:4a48:: with SMTP id lb8mr13869208pjb.246.1644836600472;
+ Mon, 14 Feb 2022 03:03:20 -0800 (PST)
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: 2d85fad4-eaf1-4b70-b3e9-08d9efa8c6c1
-X-MS-TrafficTypeDiagnostic: CY4PR10MB1560:EE_
-X-Microsoft-Antispam-PRVS: <CY4PR10MB1560DFD48B6866954142492EBB339@CY4PR10MB1560.namprd10.prod.outlook.com>
-X-MS-Oob-TLC-OOBClassifiers: OLM:7219;
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: jTUQ3a/yW8Gwxo4WOWHRpUPsLzrOIMW9HDIL+OoX/DJVrO1WSVtLjMm0gwNqTIAKPudazL4H9RG/v+Vkf8lZDcXScCAJAUeAoG3exyBMlLIXwxpytODGXu588Sm/vUnaCuskOs4JMmkxZ1feOlNmhiV1kUzwkWRaT2EUIu5DJp7/AQ7G1vfpwq9yZlNFliNCJQJicL7ELyigWeE8KE9jhURdEx/yw0XPOtUi+hBoBvtjeZeWV8rpSQV0OZ9iTXNvbUalCiISOsxMrO4nZKHbmFMTkiDQfc9foIkzMXTiCGCks4Jp7Rsy07xmBXrmXx8MBHBhgIrBHY4JeSJC+rYWgfbnXmCtIeVcEsuc0ZUpv+tjrwtBjJENxq/qONqm7FTPHHgpftvs4gQAkk8m8yD2zw3NYt0ZcSNrJHw/s+6VLTAqb/mqfKfEaHZ/YNyhleZFqZtm9/qojdEjewvJmGlAaX5iTL/yQfuBwtHnol9FOMqSN/Yr1Tw3SpEgvdExMhRJJg2eCBy5AksuF83shHkrnACAPPTQxN0rDN+bQOvmCFzjkSqfKxfsdC+d9fnmV5iFaTIjEZlZniECGi3Nq9A/9lz0jf05DM/xHVpmiSgnmNA7WQEgcwGot9IidmJ6+EILM1HhXppeVXFtsL6s/bGEWqAiHse5Dy0OoRweNrIfLJMfIhdKJAahIDTduZAYX1R18vZb7oE8QfoFINMBh34+LuufApuaP/SDRbdSIPcIaf8=
-X-Forefront-Antispam-Report: CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BLAPR10MB4835.namprd10.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230001)(366004)(66556008)(186003)(54906003)(31696002)(8936002)(316002)(8676002)(86362001)(66476007)(66946007)(4326008)(38100700002)(26005)(53546011)(6506007)(2616005)(6512007)(6916009)(2906002)(6486002)(508600001)(6666004)(36756003)(4744005)(31686004)(5660300002)(7416002)(25903002)(45980500001);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?K2dKOUEvTitxckQxczBaYmwyekxUcnIydnVTZVdOZXFQdjMwYVQrS0lsL3Vq?=
- =?utf-8?B?M011MVBpckxNYlgxczZMNGRZSWw5dVh0Z3JyZCtVZXRVWGFvMXhTSkpqcFRO?=
- =?utf-8?B?R01BeGNQWk4wcVB5ZFdvL1FOdTVjSm82RW1DcHRkRFZRclVrcnd6QW5HV1lV?=
- =?utf-8?B?NDBBbmVQMmV5VG45RlkvOVVFT0NOT3NwelI4OTJUTDBscUdMdGloUVFKRENV?=
- =?utf-8?B?cUVlZVdPcDZrRGQ5R1djWWIxSzcvMTNrRHJQOGlKeFFlK2h0bGxIQmVBc2JU?=
- =?utf-8?B?Uy9QemdvekZmeS9za1RZalZ6a1I3N0ZyZEdHQUlYb0lsbjEvaWQwQzhPQ081?=
- =?utf-8?B?QURnR1FxT3J1dG5lUVUzOGkvbzgxYThrUUF5NVBlRDJ6TFVDeHdVZTZRTHpQ?=
- =?utf-8?B?S3JmN3lFZkgxMlJldlhyK1pjbkpDcmNNRThPMitBZ2VoTHhSY2t4OWRpK21h?=
- =?utf-8?B?Q2lCSUhVMFZnLzh0dmlyWG84cmhRQTdnUExBdnVjWmlDZENxc2VhSCs0NlBR?=
- =?utf-8?B?TDUzQ3J1T0Z2VWxVNG54Sit6dXVmRTh3aHNodWV3Ri8rTnFNdXdzUXlEdnI5?=
- =?utf-8?B?MzhxMlczdjRlUlJ3dTV1czdJOUdqMnBqWGVOejhkRm83UTBoNXV3dWlseWYr?=
- =?utf-8?B?NDFRMTZYVUYyaFlVWlFDWFJ2YkhITUN3V240bUwyTnNkZktyRzNJS0NsdkFy?=
- =?utf-8?B?K0ZXUUJ6WTk3cEVWMGx1R2JCTVRybXp2UXZ1bitBRExNT1h0Wm9JM3daYnAv?=
- =?utf-8?B?TzZFZEpmVGhNVTVkOFczS0kySVlDTmFyalp4QXU3UFEzeTU1QTltOHllNTBt?=
- =?utf-8?B?SGpob3dwMHhvUzlJdjFBUW5xdlFVOEdRL0RlSnR4WExKVlIvbmQ0K016RGhl?=
- =?utf-8?B?ZjFna0RkM0V3dkp2cmFIZXhadGFYVFR1ZGFTb2dQMm1uR1JIRzdxWGZ1NklN?=
- =?utf-8?B?dWpWN085blJlZEFKbmFWcVhmNkNDTkVPVnl1cUl0U1pBak1LOHFad0s0YTFl?=
- =?utf-8?B?dk4xbUdpT2NTYmt5YmNBYk83U2pnU05NVmRWMkIvQlc1elhJbmdZbzNET2Vo?=
- =?utf-8?B?d1hITHhRSWpTeEI3T1VBNXNOdEptM2d5ZHVXYnFLVWtrTUpFMHl2SEgxeHd5?=
- =?utf-8?B?bXdKMlNsLzJqTW9ZbzhvTGZVNGg1R3djQWliVlhmbzZDajNsNEV6NkVFZ2xn?=
- =?utf-8?B?QnBGNWUvNzRzemRCU1o2NXkwSFJuT3RBMjB0Zm1hancxNVc5dytjMkFYK2Zx?=
- =?utf-8?B?Wk1PSVRqL0lSTU9oYjM5b2hiV3AvanN2Tk5lNlZWTGVBTUk1UmZObWxONXpj?=
- =?utf-8?B?RHNiT0hxVnF2Tkp3ejdxU2N4QklMbUZJcGxJZTlnejdlbUtndzdUczlkQ25B?=
- =?utf-8?B?QzlPTERhZGY5VVJuOU1NQ1NKNHErU1RpL08xd0JucFJXS2IrWk9vN29hdTEy?=
- =?utf-8?B?VE9UUzVMOEJuN1VDNFd3aWxwcys4SzByYnVDeVhwU01OOVFiVTBERW9FRGVr?=
- =?utf-8?B?d2pJVFp0cmFzekpIa0h2MHdOQmt2bURlY0FhaGdiV0NQS05yUTF6b1RNY1Nu?=
- =?utf-8?B?VU16TXZIMHhkbFFRM1ROeTZJcnVabDdnVi9wcnMwaGVQV0c1V21UcFZua2tT?=
- =?utf-8?B?MTVkeVRFMW1WeXVPdmFSdmp0ZWxvcW9PM082SnRCTzJWT0pnTWRyZ3FJSlJh?=
- =?utf-8?B?WlI1cnk5ZWdOSjZhMDYvc1diYlk2Vm9Dc2RDVC9jTzJaYXFtSUduSDBsNEN0?=
- =?utf-8?B?WFFvQ0NwdmhvajVsVEVXUk14Rm4vUlZhUlJxZUJKUjZ4TVdXOEpvZHVwSmEv?=
- =?utf-8?B?d0RjNElmRE9qaklDT1ltOTg0cGltbGVhSE9pbUNkUSt0eDVraEkzenB3YTZt?=
- =?utf-8?B?eXFMMG04eXJ0NTdnVVBHcW1LM1NVUVhCTkdLU1I3eEtFQXdURTR5cnpvQm9T?=
- =?utf-8?B?dXhVUzZpQVFEeU5ScUdvNjdHcGttaXd3R1k3S0UwMjlBbUlmZy9IZjgrQjIw?=
- =?utf-8?B?eGg0OWNnek1jZ1g1SjdCaVY5UUpPZ09scHpWZnVzR1JtOFZFVzVVZHY0L2pq?=
- =?utf-8?B?N1ZsZTF1L3EyM3FpZWE3OFhqSnJqNzRvNTlBdzVKTVdBRm1iZFdCSUpHenRm?=
- =?utf-8?B?TnNqTzBpTXRvSVh0aXdXOVYvZzU3YzVxR2EySUNKMHRXN3NEWnlBRnlORmxU?=
- =?utf-8?B?eG92ZHZZamVXeVdFSmlOd0hITmtXTHRQNncxVFcrK015YTNWbThYeGN0bG9C?=
- =?utf-8?B?Q292MURwNSswbzlGandmRm9WdzRBPT0=?=
-X-OriginatorOrg: oracle.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 2d85fad4-eaf1-4b70-b3e9-08d9efa8c6c1
-X-MS-Exchange-CrossTenant-AuthSource: BLAPR10MB4835.namprd10.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 14 Feb 2022 10:57:21.9950
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 4e2c6054-71cb-48f1-bd6c-3a9705aca71b
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: gHCNEeyBgXQIyswsEbfVNEk4yZ++GyitGqPfCNAXuGr+Y2FGp7jwGdVCYKSVjk0b9l+UYzoidNNDIM9o+/LUkpCUOhL8MsmFqxuutbgRAmo=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: CY4PR10MB1560
-X-Proofpoint-Virus-Version: vendor=nai engine=6300 definitions=10257 signatures=673431
-X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 spamscore=0 bulkscore=0 suspectscore=0
- phishscore=0 malwarescore=0 mlxscore=0 mlxlogscore=999 adultscore=0
- classifier=spam adjust=0 reason=mlx scancount=1 engine=8.12.0-2201110000
- definitions=main-2202140067
-X-Proofpoint-GUID: B4JX8zg6_77zTOpbc9uUo5-4OpqoUmvk
-X-Proofpoint-ORIG-GUID: B4JX8zg6_77zTOpbc9uUo5-4OpqoUmvk
-X-Spam-Status: No, score=-2.8 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_LOW,
-        RCVD_IN_MSPIKE_H5,RCVD_IN_MSPIKE_WL,SPF_HELO_NONE,SPF_NONE,
-        T_SCC_BODY_TEXT_LINE autolearn=ham autolearn_force=no version=3.4.6
+References: <20220126161832.3193805-1-benjamin.tissoires@redhat.com>
+ <CAB4aORW_b+6=a-fXCL-MJoM9uNvjeYL01W85Rb=6rMP-Nm11QQ@mail.gmail.com> <CAB4aORU51aZc7BHdTfrXanYVvFG4wxQRqfsrs6mdttYCB+LY8A@mail.gmail.com>
+In-Reply-To: <CAB4aORU51aZc7BHdTfrXanYVvFG4wxQRqfsrs6mdttYCB+LY8A@mail.gmail.com>
+From:   Benjamin Tissoires <benjamin.tissoires@redhat.com>
+Date:   Mon, 14 Feb 2022 12:03:09 +0100
+Message-ID: <CAO-hwJKfDtq-397R8A59tvkNQ18AF-0FbHzTqNiErADYNQMHGw@mail.gmail.com>
+Subject: Re: [PATCH 00/12] HID: fix for generic input processing
+To:     Angela Czubak <acz@semihalf.com>
+Cc:     Jiri Kosina <jikos@kernel.org>,
+        Dmitry Torokhov <dmitry.torokhov@gmail.com>,
+        Jonathan Corbet <corbet@lwn.net>,
+        =?UTF-8?Q?Ahelenia_Ziemia=C5=84ska?= 
+        <nabijaczleweli@nabijaczleweli.xyz>,
+        Ping Cheng <pinglinux@gmail.com>,
+        Aaron Armstrong Skomra <skomra@gmail.com>,
+        Jason Gerecke <killertofu@gmail.com>,
+        Peter Hutterer <peter.hutterer@who-t.net>,
+        "open list:HID CORE LAYER" <linux-input@vger.kernel.org>,
+        Linux Doc Mailing List <linux-doc@vger.kernel.org>,
+        lkml <linux-kernel@vger.kernel.org>
+Content-Type: text/plain; charset="UTF-8"
+X-Spam-Status: No, score=-2.9 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_LOW,
+        SPF_HELO_NONE,SPF_NONE,T_SCC_BODY_TEXT_LINE autolearn=ham
+        autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On 2/12/22 14:49, Muchun Song wrote:
-> On Sat, Feb 12, 2022 at 6:08 PM Muchun Song <songmuchun@bytedance.com> wrote:
->> On Fri, Feb 11, 2022 at 8:37 PM Joao Martins <joao.m.martins@oracle.com> wrote:
->>> On 2/11/22 07:54, Muchun Song wrote:
->>>> On Fri, Feb 11, 2022 at 3:34 AM Joao Martins <joao.m.martins@oracle.com> wrote:
->>>>> -       if (vmemmap_populate(start, end, nid, altmap))
->>>>> +       if (pgmap && pgmap_vmemmap_nr(pgmap) > 1 && !altmap)
->>>>
->>>> Should we add a judgment like "is_power_of_2(sizeof(struct page))" since
->>>> this optimization is only applied when the size of the struct page does not
->>>> cross page boundaries?
->>>
->>> Totally miss that -- let me make that adjustment.
->>>
->>> Can I ask which architectures/conditions this happens?
->>
->> E.g. arm64 when !CONFIG_MEMCG.
-> 
-> Plus !CONFIG_SLUB even on x86_64.
+On Mon, Feb 14, 2022 at 11:51 AM Angela Czubak <acz@semihalf.com> wrote:
+>
+> On Tue, Feb 8, 2022 at 8:19 PM Angela Czubak <acz@semihalf.com> wrote:
+> >
+> > Hi Benjamin,
+> >
+> > On Wed, Jan 26, 2022 at 5:18 PM Benjamin Tissoires
+> > <benjamin.tissoires@redhat.com> wrote:
+> > >
+> > > Hi,
+> > >
+> > > This is a followup of the discussion we had between Wacom and
+> > > the maintainers, and a followup of those 2 patch series:
+> > >
+> > > https://lore.kernel.org/r/20211022232837.18988-1-ping.cheng@wacom.com/
+> > > https://lore.kernel.org/r/2ca91ac7cf92e3048a236db3cd519f04e12c1e61.1615224800.git.nabijaczleweli@nabijaczleweli.xyz/
+> > >
+> > > It took me a while to get it right, but I finally can submit the
+> > > series:
+> > >
+> > > - the first 8 patches are some cleanup in the hid-input.c and
+> > >   hid-core.c code. They also create a list of input fields that
+> > >   is then used to process the event, in the priority we think
+> > >   is good.
+> > >
+> > >   For instance, on multitouch devices, it is better to have
+> > >   Contact Count before processing all touches, and in each
+> > >   touch, having Contact ID first is better. This series doesn't
+> > >   cover hid-multitouch, but I have a series on top of this one that
+> > >   does cover it.
+> > >
+> > >   Anyway, in our case, here, we need to process Invert before
+> > >   In Range for tablets so we can make a decision whether the user
+> > >   has the intend to erase or not.
+> > >
+> > > - patch 9 enforces the invert usage before In Range as mentioned
+> > >   above
+> > >
+> > > - patch 10 is the actual bulk of processing that should fix the
+> > >   generic tablet handling. Now that we have a reliable ordering
+> > >   of the fields, we can compute the state of the tool in a reliable
+> > >   way, and be kinder to userspace by not sending to it 2 tools at
+> > >   the same time.
+> > >
+> > >   This patch has been extensively tested by hid-tools with the new
+> > >   MR I submitted that add tests for tablets [0].
+> > >
+> > > - patch 11 is a nice to have that I need for my second series regarding
+> > >   hid-multitouch. It is not mandatory with that series, but given
+> > >   that it changes the format of the priorities in hid-input.c I thought
+> > >   it would be best to send it as part of this series.
+> > >
+> > >   Note that now we are tagging the *reports* and the individual fields
+> > >   when they are part of a multitouch collection, which should help
+> > >   the drivers that implement this processing (hid-multitouch and wacom).
+> > >
+> > > - last, patch 12 is an attempt at fixing the documentation regarding
+> > >   BTN_TOOL_* (requested by Peter).
+> > >
+> > >   Dmitry, feel free to take this one through your tree if you prefer
+> > >   to do so (and if you are happy with it), otherwise we can take it
+> > >   through the hid tree.
+> > >
+> > > As mentioned above, I have a followup series not entirely tidied up
+> > > that implements the processing of Win8 mutltiouch devices in
+> > > hid-input.c.
+> > > There are several benefits for that: we should be able to drop the
+> > > multitouch code in wacom.ko, we can simplify part of hid-multitouch,
+> > > and we will be able to quirk a particular device in a separate module,
+> > > without touching at the generic code (in hid-multitouch or hid-input).
+> > >
+> > > Anyway, I am missing a few bits for that so that's coming in later.
+> > >
+> >
+> > Is there any timeline for the followup series? I am wondering how that
+> > would affect haptic support implementation.
+>
+> Hi Benjamin,
+>
+> just pinging in hope of receiving some answer :)
+> I am thinking of preparing another version of haptic support patches
+> (https://lore.kernel.org/all/20220114183152.1691659-1-acz@semihalf.com/T/)
+> and if I could already start remodelling them based on your changes so that
+> it is actually a haptic hid driver and not and API that would be great :)
+> I am simply wondering when multitouch driver is going to be expressed simply
+> by your changes.
 
-Oh, thanks for the ref -- hadn't realized that this was
-possible on arm64/x86.
+Hi Angela,
+
+FWIW, I got a public branch that has the multitouch changes at
+https://gitlab.freedesktop.org/bentiss/hid/-/commits/wip/input-mt-v5
+
+The logic in the multitouch processing is correct but it is missing a
+few bits IIRC:
+- suspend/resume doesn't unset/set the multitouch parameters (doesn't
+seem to be an issue on my devel laptop though)
+- scantime is not properly handled
+- width/height is not using the same path than hid-multitouch (and
+probably not reported at all)
+- hid-multitouch needs to be cleaned up to use the new core changes
+instead of re-doing stuffs itself
+
+I think that you should be able to experiment your hid-haptic changes
+already, and see if that is indeed easier to use than creating an API
+driver.
+
+Cheers,
+Benjamin
+
+>
+> >
+> > > Cheers,
+> > > Benjamin
+> > >
+> > >
+> > > [0] https://gitlab.freedesktop.org/libevdev/hid-tools/-/merge_requests/127
+> > >
+> > > Benjamin Tissoires (12):
+> > >   HID: core: statically allocate read buffers
+> > >   HID: core: de-duplicate some code in hid_input_field()
+> > >   HID: core: split data fetching from processing in hid_input_field()
+> > >   HID: input: tag touchscreens as such if the physical is not there
+> > >   HID: input: rework spaghetti code with switch statements
+> > >   HID: input: move up out-of-range processing of input values
+> > >   HID: compute an ordered list of input fields to process
+> > >   HID: core: for input reports, process the usages by priority list
+> > >   HID: input: enforce Invert usage to be processed before InRange
+> > >   HID: input: remove the need for HID_QUIRK_INVERT
+> > >   HID: input: accommodate priorities for slotted devices
+> > >   Input: docs: add more details on the use of BTN_TOOL
+> > >
+> > >  Documentation/input/event-codes.rst |   5 +-
+> > >  drivers/hid/hid-core.c              | 280 ++++++++++++++++++++---
+> > >  drivers/hid/hid-input.c             | 330 ++++++++++++++++++++++------
+> > >  include/linux/hid.h                 |  23 +-
+> > >  4 files changed, 533 insertions(+), 105 deletions(-)
+> > >
+> > > --
+> > > 2.33.1
+> > >
+> >
+> > Does this patch series introduce the leaf driver support you mentioned
+> > in the haptic review?
+>
+
