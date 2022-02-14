@@ -2,296 +2,343 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id D0B144B5D95
-	for <lists+linux-doc@lfdr.de>; Mon, 14 Feb 2022 23:27:01 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 193614B5E7E
+	for <lists+linux-doc@lfdr.de>; Tue, 15 Feb 2022 01:00:25 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S231826AbiBNW0J (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 14 Feb 2022 17:26:09 -0500
-Received: from mxb-00190b01.gslb.pphosted.com ([23.128.96.19]:38966 "EHLO
+        id S232286AbiBOAAb (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 14 Feb 2022 19:00:31 -0500
+Received: from mxb-00190b01.gslb.pphosted.com ([23.128.96.19]:39928 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S231234AbiBNW0J (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Mon, 14 Feb 2022 17:26:09 -0500
-Received: from mail-ej1-x629.google.com (mail-ej1-x629.google.com [IPv6:2a00:1450:4864:20::629])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 0A4161451C3
-        for <linux-doc@vger.kernel.org>; Mon, 14 Feb 2022 14:26:00 -0800 (PST)
-Received: by mail-ej1-x629.google.com with SMTP id p15so40287376ejc.7
-        for <linux-doc@vger.kernel.org>; Mon, 14 Feb 2022 14:25:59 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=google.com; s=20210112;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc:content-transfer-encoding;
-        bh=IHISBmUOI/ikE6WItRpq9TFUbX44lb92b2lXd2BONMg=;
-        b=kXzDIbeon23MHLMt55FkUQMNMzpbUwjF4pGEHQVVR8kxY9f8bNkaLn7jE0kbUtbn3L
-         b9kl4UwC8flsLgF3qVMkSmkvmdF1Jt9Kjef1jBBpf5/Zf+a+E7tm2ei87Qd5NbmIKrOF
-         N82gD75TFZH0mtC5IYIsG8oT11N0ErdMbUQ+vDx4iQdPDduvByEYqq0+N85F+cKyEzjH
-         qAJ9CPKDgzdEdqLPAEum3T8FIlDiMJQUosPgAeySYE6owzXoDc9a5wNuN0Re5wGSB2JK
-         +J/lWvtMVPoSlQn5X6RkXil8/6Lfo9tlft0Vb/pupOfjNdjHeBjWfIslcuL+R2HeH5L/
-         d/2g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc:content-transfer-encoding;
-        bh=IHISBmUOI/ikE6WItRpq9TFUbX44lb92b2lXd2BONMg=;
-        b=2ZWWARwNii4vdGiLOdouVW8Exz72BixGc8RI+KANkjo/kEIkoUfz4MWLaL91kOQrQr
-         CFTF+KCFGEjQckwOn2NAJecR39EMGcQD9+xuz7PCIxv37nto651kMqdpMfjaAwx4AQIk
-         N4cUhIHcQWtqmL2gY6oW4a7nu6+tvBqHHRdQHSB1uu0oMwS2YHxfrqM55vYYorbi2hSX
-         a0RpV/XLy7qU6Te5YF9sIqG/6vutorKZhJca7HX9R53jlXRjzAKz2M/1LPl0VSBBRbz2
-         nyXHYhxCilYqHHaakYDZjA9KMZPCs8H3xyr95WHHhbNc6r7kVnnQI+xn/veQiOi0J7IJ
-         HG5Q==
-X-Gm-Message-State: AOAM530ErGPyI2R2Kj76/3oeT4ua3/oPrUejGZqD2qIrB+CW2Isyol9b
-        ryQuPVjdx12VAQqFJO2TzeHICHwWr4R14a5FHUeYnQ==
-X-Google-Smtp-Source: ABdhPJzGACGFNq1BPwRwv23eE84sjRC0d54XfeIYewn82JWldVK/PTYDHJp5HG1XHJwLS3IoON1Lvd3AWtka9GIbv0c=
-X-Received: by 2002:a17:906:51d6:: with SMTP id v22mr734664ejk.446.1644877558320;
- Mon, 14 Feb 2022 14:25:58 -0800 (PST)
+        with ESMTP id S229636AbiBOAA3 (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Mon, 14 Feb 2022 19:00:29 -0500
+Received: from mx0a-001b2d01.pphosted.com (mx0a-001b2d01.pphosted.com [148.163.156.1])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id B7B9C403C6;
+        Mon, 14 Feb 2022 16:00:20 -0800 (PST)
+Received: from pps.filterd (m0098409.ppops.net [127.0.0.1])
+        by mx0a-001b2d01.pphosted.com (8.16.1.2/8.16.1.2) with SMTP id 21ENX1hJ019774;
+        Tue, 15 Feb 2022 00:00:20 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ibm.com; h=date : from : to : cc :
+ subject : message-id : in-reply-to : references : mime-version :
+ content-type : content-transfer-encoding; s=pp1;
+ bh=J3faY/DanDPihzvBOoFhm5o0uGb8lNbKSjixyKz24a4=;
+ b=L7zjsXdU/behPiYfhjaJAek8StavL1GWqgnWXH0syp0IDMa9Y102WfcykzxTWW/zF/YH
+ C4vdUvAhAOZAy5MXbEJUwaETY7BiSuBp5DLCM3YIWrO7vEXHEQEm6DrorpORCutA+c0T
+ iPKWryhByoEqtVoeQd854InTcEdYYtw/8XGHXy97eEBJWpXazFjH1bxVqAwi47s1qudc
+ 7Kf9TlBdHw/l03N5nhfJ5C+NH9Mk7jN36E5dNpUfKQ/E0gNYWDj96XPHk5cG5B01Ec30
+ 0SIM7QxnI/qAaJdr9sJLNXOr/iypOB8IzOnbybUhnYhb/mjEgC35qerxUjk958kUFgrI BA== 
+Received: from pps.reinject (localhost [127.0.0.1])
+        by mx0a-001b2d01.pphosted.com with ESMTP id 3e785tg9x7-1
+        (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+        Tue, 15 Feb 2022 00:00:19 +0000
+Received: from m0098409.ppops.net (m0098409.ppops.net [127.0.0.1])
+        by pps.reinject (8.16.0.43/8.16.0.43) with SMTP id 21F00JVI028653;
+        Tue, 15 Feb 2022 00:00:19 GMT
+Received: from ppma06ams.nl.ibm.com (66.31.33a9.ip4.static.sl-reverse.com [169.51.49.102])
+        by mx0a-001b2d01.pphosted.com with ESMTP id 3e785tg9wc-1
+        (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+        Tue, 15 Feb 2022 00:00:19 +0000
+Received: from pps.filterd (ppma06ams.nl.ibm.com [127.0.0.1])
+        by ppma06ams.nl.ibm.com (8.16.1.2/8.16.1.2) with SMTP id 21ENwH1c005203;
+        Tue, 15 Feb 2022 00:00:17 GMT
+Received: from b06avi18878370.portsmouth.uk.ibm.com (b06avi18878370.portsmouth.uk.ibm.com [9.149.26.194])
+        by ppma06ams.nl.ibm.com with ESMTP id 3e645jhxhj-1
+        (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+        Tue, 15 Feb 2022 00:00:16 +0000
+Received: from d06av23.portsmouth.uk.ibm.com (d06av23.portsmouth.uk.ibm.com [9.149.105.59])
+        by b06avi18878370.portsmouth.uk.ibm.com (8.14.9/8.14.9/NCO v10.0) with ESMTP id 21F00D7i27132324
+        (version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+        Tue, 15 Feb 2022 00:00:13 GMT
+Received: from d06av23.portsmouth.uk.ibm.com (unknown [127.0.0.1])
+        by IMSVA (Postfix) with ESMTP id 81E8AA405B;
+        Tue, 15 Feb 2022 00:00:13 +0000 (GMT)
+Received: from d06av23.portsmouth.uk.ibm.com (unknown [127.0.0.1])
+        by IMSVA (Postfix) with ESMTP id E561EA4059;
+        Tue, 15 Feb 2022 00:00:12 +0000 (GMT)
+Received: from p-imbrenda (unknown [9.145.2.54])
+        by d06av23.portsmouth.uk.ibm.com (Postfix) with ESMTP;
+        Tue, 15 Feb 2022 00:00:12 +0000 (GMT)
+Date:   Mon, 14 Feb 2022 16:30:53 +0100
+From:   Claudio Imbrenda <imbrenda@linux.ibm.com>
+To:     Janis Schoetterl-Glausch <scgl@linux.ibm.com>
+Cc:     Christian Borntraeger <borntraeger@linux.ibm.com>,
+        Heiko Carstens <hca@linux.ibm.com>,
+        Janosch Frank <frankja@linux.ibm.com>,
+        Alexander Gordeev <agordeev@linux.ibm.com>,
+        David Hildenbrand <david@redhat.com>,
+        Jonathan Corbet <corbet@lwn.net>, kvm@vger.kernel.org,
+        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
+        linux-s390@vger.kernel.org, Paolo Bonzini <pbonzini@redhat.com>,
+        Sven Schnelle <svens@linux.ibm.com>,
+        Vasily Gorbik <gor@linux.ibm.com>
+Subject: Re: [PATCH v4 01/10] s390/uaccess: Add copy_from/to_user_key
+ functions
+Message-ID: <20220214163053.13e71683@p-imbrenda>
+In-Reply-To: <20220211182215.2730017-2-scgl@linux.ibm.com>
+References: <20220211182215.2730017-1-scgl@linux.ibm.com>
+        <20220211182215.2730017-2-scgl@linux.ibm.com>
+Organization: IBM
+X-Mailer: Claws Mail 3.18.0 (GTK+ 2.24.33; x86_64-redhat-linux-gnu)
 MIME-Version: 1.0
-References: <20220211161831.3493782-1-tjmercier@google.com>
- <20220211161831.3493782-7-tjmercier@google.com> <Ygdfe3XSvN8iFuUc@kroah.com>
-In-Reply-To: <Ygdfe3XSvN8iFuUc@kroah.com>
-From:   "T.J. Mercier" <tjmercier@google.com>
-Date:   Mon, 14 Feb 2022 14:25:47 -0800
-Message-ID: <CABdmKX1eKZZ9809uxnzT_Bm+mdNuK2AObLRxyBpdDF3yE76Hrg@mail.gmail.com>
-Subject: Re: [RFC v2 6/6] android: binder: Add a buffer flag to relinquish
- ownership of fds
-To:     Greg Kroah-Hartman <gregkh@linuxfoundation.org>
-Cc:     Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
-        Maxime Ripard <mripard@kernel.org>,
-        Thomas Zimmermann <tzimmermann@suse.de>,
-        David Airlie <airlied@linux.ie>,
-        Daniel Vetter <daniel@ffwll.ch>,
-        Jonathan Corbet <corbet@lwn.net>,
-        =?UTF-8?B?QXJ2ZSBIasO4bm5ldsOlZw==?= <arve@android.com>,
-        Todd Kjos <tkjos@android.com>,
-        Martijn Coenen <maco@android.com>,
-        Joel Fernandes <joel@joelfernandes.org>,
-        Christian Brauner <brauner@kernel.org>,
-        Hridya Valsaraju <hridya@google.com>,
-        Suren Baghdasaryan <surenb@google.com>,
-        Sumit Semwal <sumit.semwal@linaro.org>,
-        =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>,
-        Benjamin Gaignard <benjamin.gaignard@linaro.org>,
-        Liam Mark <lmark@codeaurora.org>,
-        Laura Abbott <labbott@redhat.com>,
-        Brian Starkey <Brian.Starkey@arm.com>,
-        John Stultz <john.stultz@linaro.org>,
-        Tejun Heo <tj@kernel.org>, Zefan Li <lizefan.x@bytedance.com>,
-        Johannes Weiner <hannes@cmpxchg.org>,
-        Kalesh Singh <kaleshsingh@google.com>, Kenny.Ho@amd.com,
-        dri-devel@lists.freedesktop.org, linux-doc@vger.kernel.org,
-        linux-kernel@vger.kernel.org, linux-media@vger.kernel.org,
-        linaro-mm-sig@lists.linaro.org, cgroups@vger.kernel.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Spam-Status: No, score=-17.6 required=5.0 tests=BAYES_00,DKIMWL_WL_MED,
-        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,
-        ENV_AND_HDR_SPF_MATCH,RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,SPF_PASS,
-        T_SCC_BODY_TEXT_LINE,USER_IN_DEF_DKIM_WL,USER_IN_DEF_SPF_WL
-        autolearn=ham autolearn_force=no version=3.4.6
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 7bit
+X-TM-AS-GCONF: 00
+X-Proofpoint-GUID: BwgqTVATgoIpAz9oIa5f680-uma8_m3g
+X-Proofpoint-ORIG-GUID: B4tDmq-WKFrCwUYYxoj8b0-6O0b6sOi3
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.205,Aquarius:18.0.816,Hydra:6.0.425,FMLib:17.11.62.513
+ definitions=2022-02-14_07,2022-02-14_03,2021-12-02_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 mlxscore=0 mlxlogscore=999
+ malwarescore=0 adultscore=0 lowpriorityscore=0 clxscore=1015
+ impostorscore=0 priorityscore=1501 bulkscore=0 suspectscore=0 spamscore=0
+ phishscore=0 classifier=spam adjust=0 reason=mlx scancount=1
+ engine=8.12.0-2201110000 definitions=main-2202140134
+X-Spam-Status: No, score=-0.5 required=5.0 tests=BAYES_00,DATE_IN_PAST_06_12,
+        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_EF,RCVD_IN_MSPIKE_H5,
+        RCVD_IN_MSPIKE_WL,SPF_HELO_NONE,SPF_PASS,T_SCC_BODY_TEXT_LINE
+        autolearn=no autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Fri, Feb 11, 2022 at 11:19 PM Greg Kroah-Hartman
-<gregkh@linuxfoundation.org> wrote:
->
-> On Fri, Feb 11, 2022 at 04:18:29PM +0000, T.J. Mercier wrote:
-> > This patch introduces a buffer flag BINDER_BUFFER_FLAG_SENDER_NO_NEED
-> > that a process sending an fd array to another process over binder IPC
-> > can set to relinquish ownership of the fds being sent for memory
-> > accounting purposes. If the flag is found to be set during the fd array
-> > translation and the fd is for a DMA-BUF, the buffer is uncharged from
-> > the sender's cgroup and charged to the receiving process's cgroup
-> > instead.
-> >
-> > It is up to the sending process to ensure that it closes the fds
-> > regardless of whether the transfer failed or succeeded.
-> >
-> > Most graphics shared memory allocations in Android are done by the
-> > graphics allocator HAL process. On requests from clients, the HAL proce=
-ss
-> > allocates memory and sends the fds to the clients over binder IPC.
-> > The graphics allocator HAL will not retain any references to the
-> > buffers. When the HAL sets the BINDER_BUFFER_FLAG_SENDER_NO_NEED for fd
-> > arrays holding DMA-BUF fds, the gpu cgroup controller will be able to
-> > correctly charge the buffers to the client processes instead of the
-> > graphics allocator HAL.
-> >
-> > From: Hridya Valsaraju <hridya@google.com>
-> > Signed-off-by: Hridya Valsaraju <hridya@google.com>
-> > Co-developed-by: T.J. Mercier <tjmercier@google.com>
-> > Signed-off-by: T.J. Mercier <tjmercier@google.com>
-> > ---
-> > changes in v2
-> > - Move dma-buf cgroup charge transfer from a dma_buf_op defined by ever=
-y
-> > heap to a single dma-buf function for all heaps per Daniel Vetter and
-> > Christian K=C3=B6nig.
-> >
-> >  drivers/android/binder.c            | 26 ++++++++++++++++++++++++++
-> >  include/uapi/linux/android/binder.h |  1 +
-> >  2 files changed, 27 insertions(+)
-> >
-> > diff --git a/drivers/android/binder.c b/drivers/android/binder.c
-> > index 8351c5638880..f50d88ded188 100644
-> > --- a/drivers/android/binder.c
-> > +++ b/drivers/android/binder.c
-> > @@ -42,6 +42,7 @@
-> >
-> >  #define pr_fmt(fmt) KBUILD_MODNAME ": " fmt
-> >
-> > +#include <linux/dma-buf.h>
-> >  #include <linux/fdtable.h>
-> >  #include <linux/file.h>
-> >  #include <linux/freezer.h>
-> > @@ -2482,8 +2483,10 @@ static int binder_translate_fd_array(struct list=
-_head *pf_head,
-> >  {
-> >       binder_size_t fdi, fd_buf_size;
-> >       binder_size_t fda_offset;
-> > +     bool transfer_gpu_charge =3D false;
-> >       const void __user *sender_ufda_base;
-> >       struct binder_proc *proc =3D thread->proc;
-> > +     struct binder_proc *target_proc =3D t->to_proc;
-> >       int ret;
-> >
-> >       fd_buf_size =3D sizeof(u32) * fda->num_fds;
-> > @@ -2521,8 +2524,15 @@ static int binder_translate_fd_array(struct list=
-_head *pf_head,
-> >       if (ret)
-> >               return ret;
-> >
-> > +     if (IS_ENABLED(CONFIG_CGROUP_GPU) &&
-> > +             parent->flags & BINDER_BUFFER_FLAG_SENDER_NO_NEED)
-> > +             transfer_gpu_charge =3D true;
-> > +
-> >       for (fdi =3D 0; fdi < fda->num_fds; fdi++) {
-> >               u32 fd;
-> > +             struct dma_buf *dmabuf;
-> > +             struct gpucg *gpucg;
-> > +
-> >               binder_size_t offset =3D fda_offset + fdi * sizeof(fd);
-> >               binder_size_t sender_uoffset =3D fdi * sizeof(fd);
-> >
-> > @@ -2532,6 +2542,22 @@ static int binder_translate_fd_array(struct list=
-_head *pf_head,
-> >                                                 in_reply_to);
-> >               if (ret)
-> >                       return ret > 0 ? -EINVAL : ret;
-> > +
-> > +             if (!transfer_gpu_charge)
-> > +                     continue;
-> > +
-> > +             dmabuf =3D dma_buf_get(fd);
-> > +             if (IS_ERR(dmabuf))
-> > +                     continue;
-> > +
-> > +             gpucg =3D gpucg_get(target_proc->tsk);
-> > +             ret =3D dma_buf_charge_transfer(dmabuf, gpucg);
-> > +             if (ret) {
-> > +                     pr_warn("%d:%d Unable to transfer DMA-BUF fd char=
-ge to %d",
-> > +                             proc->pid, thread->pid, target_proc->pid)=
-;
-> > +                     gpucg_put(gpucg);
-> > +             }
-> > +             dma_buf_put(dmabuf);
-> >       }
-> >       return 0;
-> >  }
-> > diff --git a/include/uapi/linux/android/binder.h b/include/uapi/linux/a=
-ndroid/binder.h
-> > index 3246f2c74696..169fd5069a1a 100644
-> > --- a/include/uapi/linux/android/binder.h
-> > +++ b/include/uapi/linux/android/binder.h
-> > @@ -137,6 +137,7 @@ struct binder_buffer_object {
-> >
-> >  enum {
-> >       BINDER_BUFFER_FLAG_HAS_PARENT =3D 0x01,
-> > +     BINDER_BUFFER_FLAG_SENDER_NO_NEED =3D 0x02,
-> >  };
-> >
-> >  /* struct binder_fd_array_object - object describing an array of fds i=
-n a buffer
-> > --
-> > 2.35.1.265.g69c8d7142f-goog
-> >
->
-> How does userspace know that binder supports this new flag?
+On Fri, 11 Feb 2022 19:22:06 +0100
+Janis Schoetterl-Glausch <scgl@linux.ibm.com> wrote:
 
-Sorry, I don't completely follow even after Todd's comment. Doesn't
-the presence of BINDER_BUFFER_FLAG_SENDER_NO_NEED in the header do
-this? So wouldn't userspace need to be compiled against the wrong
-kernel headers for there to be a problem? In that case the allocation
-would still succeed, but there would be no charge transfer and
-unfortunately no error code.
+> Add copy_from/to_user_key functions, which perform storage key checking.
+> These functions can be used by KVM for emulating instructions that need
+> to be key checked.
+> These functions differ from their non _key counterparts in
+> include/linux/uaccess.h only in the additional key argument and must be
+> kept in sync with those.
+> 
+> Since the existing uaccess implementation on s390 makes use of move
+> instructions that support having an additional access key supplied,
+> we can implement raw_copy_from/to_user_key by enhancing the
+> existing implementation.
+> 
+> Signed-off-by: Janis Schoetterl-Glausch <scgl@linux.ibm.com>
+> Acked-by: Heiko Carstens <hca@linux.ibm.com>
+> Reviewed-by: Christian Borntraeger <borntraeger@linux.ibm.com>
+> Acked-by: Janosch Frank <frankja@linux.ibm.com>
 
-> And where is the userspace test for this new feature?
+Reviewed-by: Claudio Imbrenda <imbrenda@linux.ibm.com>
 
-I tested this on a Pixel after modifying the gralloc implementation to
-mark allocated buffers as not used by the sender. This required
-setting the BINDER_BUFFER_FLAG_SENDER_NO_NEED in libhwbinder. That
-code can be found here:
-https://android-review.googlesource.com/c/platform/system/libhwbinder/+/191=
-0752/1/Parcel.cpp
-https://android-review.googlesource.com/c/platform/system/libhidl/+/1910611=
-/
+> ---
+>  arch/s390/include/asm/uaccess.h | 22 +++++++++
+>  arch/s390/lib/uaccess.c         | 81 +++++++++++++++++++++++++--------
+>  2 files changed, 85 insertions(+), 18 deletions(-)
+> 
+> diff --git a/arch/s390/include/asm/uaccess.h b/arch/s390/include/asm/uaccess.h
+> index d74e26b48604..ba1bcb91af95 100644
+> --- a/arch/s390/include/asm/uaccess.h
+> +++ b/arch/s390/include/asm/uaccess.h
+> @@ -44,6 +44,28 @@ raw_copy_to_user(void __user *to, const void *from, unsigned long n);
+>  #define INLINE_COPY_TO_USER
+>  #endif
+>  
+> +unsigned long __must_check
+> +_copy_from_user_key(void *to, const void __user *from, unsigned long n, unsigned long key);
+> +
+> +static __always_inline unsigned long __must_check
+> +copy_from_user_key(void *to, const void __user *from, unsigned long n, unsigned long key)
+> +{
+> +	if (likely(check_copy_size(to, n, false)))
+> +		n = _copy_from_user_key(to, from, n, key);
+> +	return n;
+> +}
+> +
+> +unsigned long __must_check
+> +_copy_to_user_key(void __user *to, const void *from, unsigned long n, unsigned long key);
+> +
+> +static __always_inline unsigned long __must_check
+> +copy_to_user_key(void __user *to, const void *from, unsigned long n, unsigned long key)
+> +{
+> +	if (likely(check_copy_size(from, n, true)))
+> +		n = _copy_to_user_key(to, from, n, key);
+> +	return n;
+> +}
+> +
+>  int __put_user_bad(void) __attribute__((noreturn));
+>  int __get_user_bad(void) __attribute__((noreturn));
+>  
+> diff --git a/arch/s390/lib/uaccess.c b/arch/s390/lib/uaccess.c
+> index 8a5d21461889..b709239feb5d 100644
+> --- a/arch/s390/lib/uaccess.c
+> +++ b/arch/s390/lib/uaccess.c
+> @@ -59,11 +59,13 @@ static inline int copy_with_mvcos(void)
+>  #endif
+>  
+>  static inline unsigned long copy_from_user_mvcos(void *x, const void __user *ptr,
+> -						 unsigned long size)
+> +						 unsigned long size, unsigned long key)
+>  {
+>  	unsigned long tmp1, tmp2;
+>  	union oac spec = {
+> +		.oac2.key = key,
+>  		.oac2.as = PSW_BITS_AS_SECONDARY,
+> +		.oac2.k = 1,
+>  		.oac2.a = 1,
+>  	};
+>  
+> @@ -94,19 +96,19 @@ static inline unsigned long copy_from_user_mvcos(void *x, const void __user *ptr
+>  }
+>  
+>  static inline unsigned long copy_from_user_mvcp(void *x, const void __user *ptr,
+> -						unsigned long size)
+> +						unsigned long size, unsigned long key)
+>  {
+>  	unsigned long tmp1, tmp2;
+>  
+>  	tmp1 = -256UL;
+>  	asm volatile(
+>  		"   sacf  0\n"
+> -		"0: mvcp  0(%0,%2),0(%1),%3\n"
+> +		"0: mvcp  0(%0,%2),0(%1),%[key]\n"
+>  		"7: jz    5f\n"
+>  		"1: algr  %0,%3\n"
+>  		"   la    %1,256(%1)\n"
+>  		"   la    %2,256(%2)\n"
+> -		"2: mvcp  0(%0,%2),0(%1),%3\n"
+> +		"2: mvcp  0(%0,%2),0(%1),%[key]\n"
+>  		"8: jnz   1b\n"
+>  		"   j     5f\n"
+>  		"3: la    %4,255(%1)\n"	/* %4 = ptr + 255 */
+> @@ -115,7 +117,7 @@ static inline unsigned long copy_from_user_mvcp(void *x, const void __user *ptr,
+>  		"   slgr  %4,%1\n"
+>  		"   clgr  %0,%4\n"	/* copy crosses next page boundary? */
+>  		"   jnh   6f\n"
+> -		"4: mvcp  0(%4,%2),0(%1),%3\n"
+> +		"4: mvcp  0(%4,%2),0(%1),%[key]\n"
+>  		"9: slgr  %0,%4\n"
+>  		"   j     6f\n"
+>  		"5: slgr  %0,%0\n"
+> @@ -123,24 +125,49 @@ static inline unsigned long copy_from_user_mvcp(void *x, const void __user *ptr,
+>  		EX_TABLE(0b,3b) EX_TABLE(2b,3b) EX_TABLE(4b,6b)
+>  		EX_TABLE(7b,3b) EX_TABLE(8b,3b) EX_TABLE(9b,6b)
+>  		: "+a" (size), "+a" (ptr), "+a" (x), "+a" (tmp1), "=a" (tmp2)
+> -		: : "cc", "memory");
+> +		: [key] "d" (key << 4)
+> +		: "cc", "memory");
+>  	return size;
+>  }
+>  
+> -unsigned long raw_copy_from_user(void *to, const void __user *from, unsigned long n)
+> +static unsigned long raw_copy_from_user_key(void *to, const void __user *from,
+> +					    unsigned long n, unsigned long key)
+>  {
+>  	if (copy_with_mvcos())
+> -		return copy_from_user_mvcos(to, from, n);
+> -	return copy_from_user_mvcp(to, from, n);
+> +		return copy_from_user_mvcos(to, from, n, key);
+> +	return copy_from_user_mvcp(to, from, n, key);
+> +}
+> +
+> +unsigned long raw_copy_from_user(void *to, const void __user *from, unsigned long n)
+> +{
+> +	return raw_copy_from_user_key(to, from, n, 0);
+>  }
+>  EXPORT_SYMBOL(raw_copy_from_user);
+>  
+> +unsigned long _copy_from_user_key(void *to, const void __user *from,
+> +				  unsigned long n, unsigned long key)
+> +{
+> +	unsigned long res = n;
+> +
+> +	might_fault();
+> +	if (!should_fail_usercopy()) {
+> +		instrument_copy_from_user(to, from, n);
+> +		res = raw_copy_from_user_key(to, from, n, key);
+> +	}
+> +	if (unlikely(res))
+> +		memset(to + (n - res), 0, res);
+> +	return res;
+> +}
+> +EXPORT_SYMBOL(_copy_from_user_key);
+> +
+>  static inline unsigned long copy_to_user_mvcos(void __user *ptr, const void *x,
+> -					       unsigned long size)
+> +					       unsigned long size, unsigned long key)
+>  {
+>  	unsigned long tmp1, tmp2;
+>  	union oac spec = {
+> +		.oac1.key = key,
+>  		.oac1.as = PSW_BITS_AS_SECONDARY,
+> +		.oac1.k = 1,
+>  		.oac1.a = 1,
+>  	};
+>  
+> @@ -171,19 +198,19 @@ static inline unsigned long copy_to_user_mvcos(void __user *ptr, const void *x,
+>  }
+>  
+>  static inline unsigned long copy_to_user_mvcs(void __user *ptr, const void *x,
+> -					      unsigned long size)
+> +					      unsigned long size, unsigned long key)
+>  {
+>  	unsigned long tmp1, tmp2;
+>  
+>  	tmp1 = -256UL;
+>  	asm volatile(
+>  		"   sacf  0\n"
+> -		"0: mvcs  0(%0,%1),0(%2),%3\n"
+> +		"0: mvcs  0(%0,%1),0(%2),%[key]\n"
+>  		"7: jz    5f\n"
+>  		"1: algr  %0,%3\n"
+>  		"   la    %1,256(%1)\n"
+>  		"   la    %2,256(%2)\n"
+> -		"2: mvcs  0(%0,%1),0(%2),%3\n"
+> +		"2: mvcs  0(%0,%1),0(%2),%[key]\n"
+>  		"8: jnz   1b\n"
+>  		"   j     5f\n"
+>  		"3: la    %4,255(%1)\n" /* %4 = ptr + 255 */
+> @@ -192,7 +219,7 @@ static inline unsigned long copy_to_user_mvcs(void __user *ptr, const void *x,
+>  		"   slgr  %4,%1\n"
+>  		"   clgr  %0,%4\n"	/* copy crosses next page boundary? */
+>  		"   jnh   6f\n"
+> -		"4: mvcs  0(%4,%1),0(%2),%3\n"
+> +		"4: mvcs  0(%4,%1),0(%2),%[key]\n"
+>  		"9: slgr  %0,%4\n"
+>  		"   j     6f\n"
+>  		"5: slgr  %0,%0\n"
+> @@ -200,18 +227,36 @@ static inline unsigned long copy_to_user_mvcs(void __user *ptr, const void *x,
+>  		EX_TABLE(0b,3b) EX_TABLE(2b,3b) EX_TABLE(4b,6b)
+>  		EX_TABLE(7b,3b) EX_TABLE(8b,3b) EX_TABLE(9b,6b)
+>  		: "+a" (size), "+a" (ptr), "+a" (x), "+a" (tmp1), "=a" (tmp2)
+> -		: : "cc", "memory");
+> +		: [key] "d" (key << 4)
+> +		: "cc", "memory");
+>  	return size;
+>  }
+>  
+> -unsigned long raw_copy_to_user(void __user *to, const void *from, unsigned long n)
+> +static unsigned long raw_copy_to_user_key(void __user *to, const void *from,
+> +					  unsigned long n, unsigned long key)
+>  {
+>  	if (copy_with_mvcos())
+> -		return copy_to_user_mvcos(to, from, n);
+> -	return copy_to_user_mvcs(to, from, n);
+> +		return copy_to_user_mvcos(to, from, n, key);
+> +	return copy_to_user_mvcs(to, from, n, key);
+> +}
+> +
+> +unsigned long raw_copy_to_user(void __user *to, const void *from, unsigned long n)
+> +{
+> +	return raw_copy_to_user_key(to, from, n, 0);
+>  }
+>  EXPORT_SYMBOL(raw_copy_to_user);
+>  
+> +unsigned long _copy_to_user_key(void __user *to, const void *from,
+> +				unsigned long n, unsigned long key)
+> +{
+> +	might_fault();
+> +	if (should_fail_usercopy())
+> +		return n;
+> +	instrument_copy_to_user(to, from, n);
+> +	return raw_copy_to_user_key(to, from, n, key);
+> +}
+> +EXPORT_SYMBOL(_copy_to_user_key);
+> +
+>  static inline unsigned long clear_user_mvcos(void __user *to, unsigned long size)
+>  {
+>  	unsigned long tmp1, tmp2;
 
-Then by inspecting gpu.memory.current files in sysfs I was able to see
-the memory attributed to processes other than the graphics allocator
-service. Before this change, several megabytes of memory were
-attributed to the graphics allocator service but those buffers are
-actually used by other processes like surfaceflinger, the camera, etc.
-After the change, the gpu.memory.current amount for the graphics
-allocator service was 0 and the charges showed up in the
-gpu.memory.current files for those other processes like this:
-
-PID: 764 Process Name: zygote64
-system 8192
-system-uncached 23191552
-
-PID: 529 Process Name: /system/bin/surfaceflinger
-system-uncached 109535232
-system 92196864
-
-PID: 530 Process Name:
-/vendor/bin/hw/android.hardware.graphics.allocator@4.0-service
-system-uncached 0
-system 0
-sensor_direct_heap 0
-
-PID: 806 Process Name:
-/apex/com.google.pixel.camera.hal/bin/hw/android.hardware.camera.provider@2=
-.7-service-google
-system 1196032
-
-PID: 4608 Process Name: com.google.android.GoogleCamera
-system 2408448
-system-uncached 38887424
-sensor_direct_heap 0
-
-PID: 32102 Process Name: com.google.android.googlequicksearchbox:search
-system-uncached 91279360
-system 20480
-
-PID: 2758 Process Name: com.google.android.youtube
-system-uncached 1662976
-system 8192
-
-PID: 2517 Process Name: com.google.android.apps.nexuslauncher
-system-uncached 115662848
-system 122880
-
-PID: 2066 Process Name: com.android.systemui
-system 86016
-system-uncached 37957632
-
->  Isn't there a binder test framework somewhere?
-
-Android has the Vendor Test Suite where automated tests could be added
-for this. Is that what you're thinking of?
-
->
-> thanks,
->
-> greg k-h
