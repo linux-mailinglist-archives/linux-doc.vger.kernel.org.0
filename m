@@ -2,116 +2,153 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 189CC4B8FF3
-	for <lists+linux-doc@lfdr.de>; Wed, 16 Feb 2022 19:15:20 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 01D084B909D
+	for <lists+linux-doc@lfdr.de>; Wed, 16 Feb 2022 19:44:43 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S233864AbiBPSPa (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 16 Feb 2022 13:15:30 -0500
-Received: from mxb-00190b01.gslb.pphosted.com ([23.128.96.19]:59694 "EHLO
+        id S237768AbiBPSox (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 16 Feb 2022 13:44:53 -0500
+Received: from mxb-00190b01.gslb.pphosted.com ([23.128.96.19]:36000 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S237493AbiBPSPa (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Wed, 16 Feb 2022 13:15:30 -0500
-Received: from mail-yw1-x112d.google.com (mail-yw1-x112d.google.com [IPv6:2607:f8b0:4864:20::112d])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id BC2192B101B
-        for <linux-doc@vger.kernel.org>; Wed, 16 Feb 2022 10:15:17 -0800 (PST)
-Received: by mail-yw1-x112d.google.com with SMTP id 00721157ae682-2d68d519a33so6751537b3.7
-        for <linux-doc@vger.kernel.org>; Wed, 16 Feb 2022 10:15:17 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=mime-version:sender:from:date:message-id:subject:to;
-        bh=lY9tt/IhIWv9LzXk1s5BH9xemeCbBCE2YYRK5FOvrNE=;
-        b=ni/werUL/yEI1aegV4D5EMz6obl2PUwta0+h+f3TbRUBUQpM0RfpHWkVoUnKpyF+IP
-         OJr2zja/T6N9kH5wIGzymHpJWORXfAv+kvw9pjtOwzqosuZq/q1hyfYFdPYW52BlJtXJ
-         1TkH6I5YFwD0B4666jec5Z9Zj8Rld/yKqoDrs2y07shxptid1tice37PVB7pvLy9b3jQ
-         qJd9KkFp9mecrKXonsgmespO4QQBqoxh6vwDcZieygyJlJ9qaN2OHMtMJYEQppvS2ZxA
-         YPXBdmPfLA5Hk/lwF/xIg995VHoUbKb4JTnTbRB1Txp3FM8C6L9k3jQDWOcxVUKrSrF8
-         /oxg==
+        with ESMTP id S237815AbiBPSov (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Wed, 16 Feb 2022 13:44:51 -0500
+Received: from mail-yb1-f177.google.com (mail-yb1-f177.google.com [209.85.219.177])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 6DD3C224948;
+        Wed, 16 Feb 2022 10:44:35 -0800 (PST)
+Received: by mail-yb1-f177.google.com with SMTP id p19so8012088ybc.6;
+        Wed, 16 Feb 2022 10:44:35 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=x-gm-message-state:mime-version:sender:from:date:message-id:subject
-         :to;
-        bh=lY9tt/IhIWv9LzXk1s5BH9xemeCbBCE2YYRK5FOvrNE=;
-        b=0YaxKhZvJKJQAn0xKOtauM0QAnGKlRsVkoWzr0bxf/lWSDEVsY7CGg0+FnYMx9F0W8
-         oO0CbM7N9f/E4JouYneI+VB5zCyi1PlqsT3NYenvA63X2QEu/ryhfKJVf8D3rkNams4r
-         MxJbeJ5IJL/g+t0XhcDCKCGQoRI517A462XFDQ7PFt8LnoBRq3FGORkT3EFk2TLJicsy
-         rveoV2MHKqdbs/NnIvWd0iKeUSVrZe7p+2/IGRvlglzZA7K7Ahut9Dalwv8QYFs+5RqT
-         dAuQmW5jjvmM8E7NjZ2AMH1ayupFeiRe4CU6YA8Oc4QzO/8AWVc8s5HgNHoUGtunYE9B
-         uT8g==
-X-Gm-Message-State: AOAM532Gpx84Z5srvmOdBEzZi1W5BWRZOZQRs3eLt79cmWWKBrdEHPWA
-        /UwyLlBKuq+PpMSFFRTSCdIrFKEgeLAAZOVcQts=
-X-Google-Smtp-Source: ABdhPJwNVmJwMGhPRjihgxPGk3xfBTsNjUcUHFkdfYg0kwdaoURq1+xVYIc3oPmC5dAYQzpFFVPFJ9wj3arWOSkP9mY=
-X-Received: by 2002:a0d:e283:0:b0:2cb:66f8:ae44 with SMTP id
- l125-20020a0de283000000b002cb66f8ae44mr3603520ywe.361.1645035316931; Wed, 16
- Feb 2022 10:15:16 -0800 (PST)
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=5O250ZbFc6xxsVLUfdV/FJOXw/nR5fNqCdyV/14B3ag=;
+        b=mK6zaclFqkvD1f9Ca/vKA6Lw8nZXc4oq40l6z6SKDT4pthNMQQ5jn9F8BP7BMylH4L
+         w9tbdBjH8o+OlAWrMWajbOzS0KVUo3I7b7lLjwQVHsFbJl5H4Dbt/yd5BK+/4+pSFPUv
+         dUg4WxTg9a5vkHildKiEfuKfsEeTaIFJbtZmSbE96T/zH8HcbEc4AcTg6YaUvP9SSOIq
+         b18lnZZ1KdZfjLlfSUyee7FlzrPg3yVlfb27s0VL872sz+OpbaKaqjmW64x6tWbAPwf4
+         CPKA9RN3tjj2VPPwTIgK6GIVkIQf9Czl9RBpqE0Rtmz8JdNaJ2t4nakndt1IqVLgg/Rx
+         DfVw==
+X-Gm-Message-State: AOAM532+6AAVBkfyWg9rPyYNg/BdYgVBj3bMudLTauJDgbAhPiyUdTZ8
+        QOgaTLilhOCzYgdiFkqNSMqKt4FZjRBh9bIZt4M=
+X-Google-Smtp-Source: ABdhPJz0dWMy9L0KImFinDaYaMygvUl1SbDHcjdRyT+qEsarJa5kaonBjrPTHfW29kEqH5aPq9sc2TsznEJQlz8zU3E=
+X-Received: by 2002:a25:782:0:b0:61d:62ed:112d with SMTP id
+ 124-20020a250782000000b0061d62ed112dmr3384808ybh.466.1645037074491; Wed, 16
+ Feb 2022 10:44:34 -0800 (PST)
 MIME-Version: 1.0
-Sender: adonald323@gmail.com
-Received: by 2002:a05:7000:8c21:0:0:0:0 with HTTP; Wed, 16 Feb 2022 10:15:16
- -0800 (PST)
-From:   Aisha Al-Qaddafi <aishagaddafi1894@gmail.com>
-Date:   Wed, 16 Feb 2022 18:15:16 +0000
-X-Google-Sender-Auth: jk0SiDOShm47xUELsPx3c2WxPrA
-Message-ID: <CANHbP4OM33oNZKigthSCdni+KgCnqQae=VYkcdzagRvOQn-obg@mail.gmail.com>
-Subject: Investment proposal,
-To:     undisclosed-recipients:;
+References: <20220207191307.2903314-1-srinivas.pandruvada@linux.intel.com>
+In-Reply-To: <20220207191307.2903314-1-srinivas.pandruvada@linux.intel.com>
+From:   "Rafael J. Wysocki" <rafael@kernel.org>
+Date:   Wed, 16 Feb 2022 19:44:23 +0100
+Message-ID: <CAJZ5v0gqatnkRt0VqTyHjgL8yNp40Ui3UCMv-PV8qvzefaV5HQ@mail.gmail.com>
+Subject: Re: [PATCH] Documentation: admin-guide: pm: Document uncore frequency scaling
+To:     Srinivas Pandruvada <srinivas.pandruvada@linux.intel.com>
+Cc:     Jonathan Corbet <corbet@lwn.net>,
+        "Rafael J. Wysocki" <rafael@kernel.org>,
+        Hans de Goede <hdegoede@redhat.com>,
+        Mark Gross <markgross@kernel.org>,
+        "open list:DOCUMENTATION" <linux-doc@vger.kernel.org>,
+        Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
+        Linux PM <linux-pm@vger.kernel.org>
 Content-Type: text/plain; charset="UTF-8"
-X-Spam-Status: Yes, score=7.4 required=5.0 tests=ADVANCE_FEE_5_NEW_MONEY,
-        BAYES_50,DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,
-        FREEMAIL_ENVFROM_END_DIGIT,FREEMAIL_FROM,LOTS_OF_MONEY,MILLION_HUNDRED,
-        SPF_HELO_NONE,SPF_PASS,T_SCC_BODY_TEXT_LINE,UNDISC_MONEY,URG_BIZ
-        autolearn=no autolearn_force=no version=3.4.6
-X-Spam-Report: *  0.8 BAYES_50 BODY: Bayes spam probability is 40 to 60%
-        *      [score: 0.5823]
-        *  0.0 SPF_HELO_NONE SPF: HELO does not publish an SPF Record
-        * -0.0 SPF_PASS SPF: sender matches SPF record
-        *  0.0 FREEMAIL_FROM Sender email is commonly abused enduser mail
-        *      provider
-        *      [aishagaddafi1894[at]gmail.com]
-        *  0.2 FREEMAIL_ENVFROM_END_DIGIT Envelope-from freemail username ends
-        *       in digit
-        *      [adonald323[at]gmail.com]
-        *  0.0 MILLION_HUNDRED BODY: Million "One to Nine" Hundred
-        * -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
-        *      author's domain
-        *  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
-        *       valid
-        * -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
-        * -0.1 DKIM_VALID_EF Message has a valid DKIM or DK signature from
-        *      envelope-from domain
-        * -0.0 T_SCC_BODY_TEXT_LINE No description available.
-        *  0.6 URG_BIZ Contains urgent matter
-        *  0.0 LOTS_OF_MONEY Huge... sums of money
-        *  3.0 ADVANCE_FEE_5_NEW_MONEY Advance Fee fraud and lots of money
-        *  3.0 UNDISC_MONEY Undisclosed recipients + money/fraud signs
-X-Spam-Level: *******
+X-Spam-Status: No, score=-1.4 required=5.0 tests=BAYES_00,
+        FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,HEADER_FROM_DIFFERENT_DOMAINS,
+        RCVD_IN_DNSWL_NONE,RCVD_IN_MSPIKE_H2,SPF_HELO_NONE,SPF_PASS,
+        T_SCC_BODY_TEXT_LINE autolearn=no autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Hello Dear Friend,
+On Mon, Feb 7, 2022 at 8:13 PM Srinivas Pandruvada
+<srinivas.pandruvada@linux.intel.com> wrote:
+>
+> Added documentation to configure uncore frequency limits in Intel
+> Xeon processors.
+>
+> Signed-off-by: Srinivas Pandruvada <srinivas.pandruvada@linux.intel.com>
+> ---
+> Resent by adding linux-pm@vger.kernel.org
+>
+>  .../pm/intel_uncore_frequency_scaling.rst     | 56 +++++++++++++++++++
+>  .../admin-guide/pm/working-state.rst          |  1 +
+>  2 files changed, 57 insertions(+)
+>  create mode 100644 Documentation/admin-guide/pm/intel_uncore_frequency_scaling.rst
+>
+> diff --git a/Documentation/admin-guide/pm/intel_uncore_frequency_scaling.rst b/Documentation/admin-guide/pm/intel_uncore_frequency_scaling.rst
+> new file mode 100644
+> index 000000000000..b3519560594b
+> --- /dev/null
+> +++ b/Documentation/admin-guide/pm/intel_uncore_frequency_scaling.rst
+> @@ -0,0 +1,56 @@
+> +.. SPDX-License-Identifier: GPL-2.0
+> +.. include:: <isonum.txt>
+> +
+> +==============================
+> +Intel Uncore Frequency Scaling
+> +==============================
+> +
+> +:Copyright: |copy| 2022 Intel Corporation
+> +
+> +:Author: Srinivas Pandruvada <srinivas.pandruvada@linux.intel.com>
+> +
+> +Introduction
+> +===========================================
 
-With due respect to your person and much sincerity of purpose I wish
-to write to you today for our mutual benefit in this investment
-transaction..
-I'm Mrs. Aisha Al-Gaddafi, presently residing herein Oman the
-Southeastern coast of the Arabian Peninsula in Western Asia, I'm a
-single Mother and a widow with three Children. I am the only
-biological Daughter of the late Libyan President (Late Colonel Muammar
-Gaddafi). I have an investment funds worth Twenty Seven Million Five
-Hundred Thousand United State Dollars ($27.500.000.00 ) and i need an
-investment Manager/Partner and because of my Asylum Status I will
-authorize you the ownership of the investment funds, However, I am
-interested in you for investment project assistance in your country,
-may be from there,. we can build a business relationship in the
-nearest future.
+There are no other sections in this file, so can the section header
+above be dropped?
 
-I am willing to negotiate an investment/business profit sharing ratio
-with you based on the future investment earning profits. If you are
-willing to handle this project kindly reply urgently to enable me to
-provide you more information about the investment funds..
-
-Your urgent reply will be appreciated if only you are interested in
-this investment project.
-Best Regards
-Mrs. Aisha Al-Gaddafi.
+> +
+> +Uncore can consume significant amount of power in Intel's Xeon servers based
+> +on the workload characteristics. To optimize total power and improve overall
+> +performance, SoC has an internal algorithm for scaling uncore frequency. These
+> +algorithms monitor workload usage of uncore and set a desirable frequency.
+> +
+> +It is possible that users have different expectations of uncore performance and
+> +want to have control over it. The objective is similar to set scaling min/max
+> +frequencies using cpufreq sysfs to improve compute performance. Users may have
+> +some latency sensitive workload where they do not want any change to uncore
+> +frequency. Also, users may have workload which requires different core and
+> +uncore performance at distinct phases and they want to use both cpufreq and
+> +uncore scaling interface to distribute power and improve overall performance.
+> +
+> +To control uncore frequency, a sysfs interface is provided in the directory:
+> +`/sys/devices/system/cpu/intel_uncore_frequency/`.
+> +
+> +There is one directory for each package and die combination as the scope of
+> +uncore scaling control is per die in multiple dies/package SoC or per
+> +package for single die per package SoC. The name represents the
+> +scope of control. For example: 'package_00_die_00' is for package id 0 and
+> +die 0 in it.
+> +
+> +Each package_*_die_* contains following attributes:
+> +
+> +``initial_max_freq_khz``
+> +       Out of reset, this attribute represent the maximum possible frequency.
+> +       This is a read only attribute. If users adjust max_freq_khz,
+> +       they can always go back to maximum using the value from this attribute.
+> +
+> +``initial_min_freq_khz``
+> +       Out of reset, this attribute represent the minimum possible frequency.
+> +       This is a read only attribute. If users adjust min_freq_khz,
+> +       they can always go back to minimum using the value from this attribute.
+> +
+> +``max_freq_khz``
+> +       This attribute is used to set the maximum uncore frequency.
+> +
+> +``min_freq_khz``
+> +       This attribute is used to set the minimum uncore frequency.
+> +
+> +``current_freq_khz``
+> +       This attribute is used to get the current uncore frequency.
+> diff --git a/Documentation/admin-guide/pm/working-state.rst b/Documentation/admin-guide/pm/working-state.rst
+> index 5d2757e2de65..ee45887811ff 100644
+> --- a/Documentation/admin-guide/pm/working-state.rst
+> +++ b/Documentation/admin-guide/pm/working-state.rst
+> @@ -15,3 +15,4 @@ Working-State Power Management
+>     cpufreq_drivers
+>     intel_epb
+>     intel-speed-select
+> +   intel_uncore_frequency_scaling
+> --
+> 2.34.1
+>
