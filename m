@@ -2,101 +2,129 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id B28504BA77A
-	for <lists+linux-doc@lfdr.de>; Thu, 17 Feb 2022 18:51:59 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id B54DF4BA80E
+	for <lists+linux-doc@lfdr.de>; Thu, 17 Feb 2022 19:22:05 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S243883AbiBQRux (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 17 Feb 2022 12:50:53 -0500
-Received: from mxb-00190b01.gslb.pphosted.com ([23.128.96.19]:48744 "EHLO
+        id S244163AbiBQSVT (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 17 Feb 2022 13:21:19 -0500
+Received: from mxb-00190b01.gslb.pphosted.com ([23.128.96.19]:48334 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S243882AbiBQRum (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Thu, 17 Feb 2022 12:50:42 -0500
-Received: from casper.infradead.org (casper.infradead.org [IPv6:2001:8b0:10b:1236::1])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 44167291FBF;
-        Thu, 17 Feb 2022 09:50:28 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-        d=infradead.org; s=casper.20170209; h=Content-Transfer-Encoding:Content-Type:
-        In-Reply-To:From:References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender
-        :Reply-To:Content-ID:Content-Description;
-        bh=tZJd3tUWhWrXachupZO/hQmGz5iMArfFv79ZqSbFeZg=; b=PXx/Y/rkGTPIlS8rx5n4plDFJh
-        6FvIy8xg53sE3BkpYnDgcUCjB9WHxxOWYIwO2oqrutIPV1r1nmsHf0vaJKo2gP5YOrUbyQX8YEnLE
-        05eJCaUsIo/vw5cvk71xlvcf/1t8hth3+ajFXuMdsyYoDZhKSwK27vlqGqW1Ca2iWEwZ5GeYZaiiD
-        gPSxwUFTYBRRSu7pxNQIDReIJpeeP8rk+UMJPzw+A96CPOplkrsF55b4P0K45UJlFcobBQuTkSD0D
-        bSUy537cIyRZrxYJGgn6VYCc5H8c2zMUxd3h6cK8EiYVxmbpUvDESMtdoxUQz4szjQsy0bqzxl5v7
-        xwEjal8g==;
-Received: from [2601:1c0:6280:3f0::aa0b]
-        by casper.infradead.org with esmtpsa (Exim 4.94.2 #2 (Red Hat Linux))
-        id 1nKkvB-00Fods-2u; Thu, 17 Feb 2022 17:50:25 +0000
-Message-ID: <f30311b5-1b30-ed79-ca66-4359a8f9586b@infradead.org>
-Date:   Thu, 17 Feb 2022 09:50:21 -0800
+        with ESMTP id S230344AbiBQSVT (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Thu, 17 Feb 2022 13:21:19 -0500
+X-Greylist: delayed 1449 seconds by postgrey-1.37 at lindbergh.monkeyblade.net; Thu, 17 Feb 2022 10:21:04 PST
+Received: from gateway23.websitewelcome.com (gateway23.websitewelcome.com [192.185.49.177])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 73D2D1712AC
+        for <linux-doc@vger.kernel.org>; Thu, 17 Feb 2022 10:21:03 -0800 (PST)
+Received: from cm16.websitewelcome.com (cm16.websitewelcome.com [100.42.49.19])
+        by gateway23.websitewelcome.com (Postfix) with ESMTP id 790AE8631
+        for <linux-doc@vger.kernel.org>; Thu, 17 Feb 2022 11:56:52 -0600 (CST)
+Received: from gator4132.hostgator.com ([192.185.4.144])
+        by cmsmtp with SMTP
+        id Kl1QnPg3jXvvJKl1QnHRyv; Thu, 17 Feb 2022 11:56:52 -0600
+X-Authority-Reason: nr=8
+Received: from host-95-232-30-176.retail.telecomitalia.it ([95.232.30.176]:34154 helo=[10.0.0.45])
+        by gator4132.hostgator.com with esmtpsa  (TLS1.2) tls TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256
+        (Exim 4.94.2)
+        (envelope-from <bristot@kernel.org>)
+        id 1nKl1O-001Zrd-AE; Thu, 17 Feb 2022 11:56:50 -0600
+Message-ID: <ca674409-34bb-69b2-0df5-e01b6facee88@kernel.org>
+Date:   Thu, 17 Feb 2022 18:56:44 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.6.1
-Subject: Re: [RFC] scripts: kernel-doc: Major kernel-doc rework
+ Thunderbird/91.5.0
+Subject: Re: [RFC V2 17/21] watchdog/dev: Add tracepoints
 Content-Language: en-US
-To:     Jonathan Corbet <corbet@lwn.net>,
-        =?UTF-8?B?VG9tYXN6IFdhcm5pZcWCxYJv?= <tomasz.warniello@gmail.com>
-Cc:     linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org
-References: <20220205233945.7a4d22d8@fuji.fritz.box>
- <8735ki2x62.fsf@meer.lwn.net> <20220217163247.03e37c9b@fuji.fritz.box>
- <87bkz51l2g.fsf@meer.lwn.net>
-From:   Randy Dunlap <rdunlap@infradead.org>
-In-Reply-To: <87bkz51l2g.fsf@meer.lwn.net>
+To:     Gabriele Paoloni <gpaoloni@redhat.com>,
+        Guenter Roeck <linux@roeck-us.net>,
+        "Peter.Enderborg@sony.com" <Peter.Enderborg@sony.com>,
+        Wim Van Sebroeck <wim@linux-watchdog.org>
+Cc:     Jonathan Corbet <corbet@lwn.net>, Ingo Molnar <mingo@redhat.com>,
+        Thomas Gleixner <tglx@linutronix.de>,
+        Peter Zijlstra <peterz@infradead.org>,
+        Will Deacon <will@kernel.org>,
+        Catalin Marinas <catalin.marinas@arm.com>,
+        Marco Elver <elver@google.com>,
+        Dmitry Vyukov <dvyukov@google.com>,
+        "Paul E. McKenney" <paulmck@kernel.org>,
+        Shuah Khan <skhan@linuxfoundation.org>,
+        Juri Lelli <juri.lelli@redhat.com>,
+        Clark Williams <williams@redhat.com>,
+        "linux-doc@vger.kernel.org" <linux-doc@vger.kernel.org>,
+        "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
+        "linux-trace-devel@vger.kernel.org" 
+        <linux-trace-devel@vger.kernel.org>,
+        Steven Rostedt <rostedt@goodmis.org>
+References: <cover.1644830251.git.bristot@kernel.org>
+ <e67874c8b676ea8dfe38679efa25363889bb1e76.1644830251.git.bristot@kernel.org>
+ <96f418b4-0ba8-01fe-ead0-2028bfc42560@sony.com>
+ <ba924008-c0ab-4800-aac4-d9d9ae930c32@kernel.org>
+ <ef1b1d99-6172-2b4d-9612-7ecbe8fc6c8b@roeck-us.net>
+ <6c6fc4fa-6464-2dbf-40da-e3c61f322d95@redhat.com>
+From:   Daniel Bristot de Oliveira <bristot@kernel.org>
+In-Reply-To: <6c6fc4fa-6464-2dbf-40da-e3c61f322d95@redhat.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-Spam-Status: No, score=-4.4 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,NICE_REPLY_A,RCVD_IN_DNSWL_MED,
-        SPF_HELO_NONE,SPF_NONE,T_SCC_BODY_TEXT_LINE autolearn=ham
-        autolearn_force=no version=3.4.6
+X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
+X-AntiAbuse: Primary Hostname - gator4132.hostgator.com
+X-AntiAbuse: Original Domain - vger.kernel.org
+X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
+X-AntiAbuse: Sender Address Domain - kernel.org
+X-BWhitelist: no
+X-Source-IP: 95.232.30.176
+X-Source-L: No
+X-Exim-ID: 1nKl1O-001Zrd-AE
+X-Source: 
+X-Source-Args: 
+X-Source-Dir: 
+X-Source-Sender: host-95-232-30-176.retail.telecomitalia.it ([10.0.0.45]) [95.232.30.176]:34154
+X-Source-Auth: kernel@bristot.me
+X-Email-Count: 4
+X-Source-Cap: YnJpc3RvdG1lO2JyaXN0b3RtZTtnYXRvcjQxMzIuaG9zdGdhdG9yLmNvbQ==
+X-Local-Domain: no
+X-Spam-Status: No, score=-1.2 required=5.0 tests=BAYES_00,NICE_REPLY_A,
+        RCVD_IN_DNSWL_NONE,RCVD_IN_MSPIKE_H5,RCVD_IN_MSPIKE_WL,SPF_HELO_PASS,
+        SPF_SOFTFAIL,T_SCC_BODY_TEXT_LINE autolearn=no autolearn_force=no
+        version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
+On 2/17/22 18:49, Gabriele Paoloni wrote:
+> 
+> On 17/02/2022 18:27, Guenter Roeck wrote:
+>> On 2/17/22 08:27, Daniel Bristot de Oliveira wrote:
+>>> Hi Peter
+>>>
+>>> On 2/16/22 17:01, Peter.Enderborg@sony.com wrote:
+>>>> On 2/14/22 11:45, Daniel Bristot de Oliveira wrote:
+>>>>> Add a set of tracepoints, enabling the observability of the watchdog
+>>>>> device interactions with user-space.
+>>>>>
+>>>>> The events are:
+>>>>>     watchdog:watchdog_open
+>>>>>     watchdog:watchdog_close
+>>>>>     watchdog:watchdog_start
+>>>>>     watchdog:watchdog_stop
+>>>>>     watchdog:watchdog_set_timeout
+>>>>>     watchdog:watchdog_ping
+>>>>>     watchdog:watchdog_nowayout
+>>>>>     watchdog:watchdog_set_keep_alive
+>>>>>     watchdog:watchdog_keep_alive
+>>>> Some watchdogs have a bark functionality, I think it should be event
+>>>> for that too.
+>>>>
+>>> I understand. The problems is that I do not see the bark abstraction
+>>> in the
+>>> watchdog_dev layer.
+>>>
+>> I don't even know what "bark functionality" means. A new term for
+>> pretimeout ?
+>> Something else ?
+> From my understanding the bark timeout is actually the pretimeout
+> whereas the bite timeout is the actual timeout.
 
+So, what Peter wants is tracepoints for the pretimeout actions?
 
-On 2/17/22 09:04, Jonathan Corbet wrote:
-> Tomasz Warniełło <tomasz.warniello@gmail.com> writes:
-> 
->> I will prepare the POD part. As for the rest, you will need a porter if you
->> decide this is the way to go. I could help with explanations if something is
->> unclear and as long as the questions come soon. The winter is almost over and
->> I need to switch to other activities like earning money.
-> 
-> Understood.
-> 
->> I understand. I didn't know there was a rewrite. I'm not into Python, but
->> if you could post a link, I'd take a look out of curiosity.
->>
->> If the community prefers Python, what can I say about this? Their choice.
-> 
-> This is the kernel community you're talking about - saying that it
-> prefers any language (except possibly C) is asking for big-time trouble
-> :)
-> 
-> *I* prefer Python, and the Sphinx side of things is necessarily in
-> Python, so I'd be happy to see kernel-doc move over.  That said, others
-> certainly disagree.
-> 
-> Markus's work was here:
-> 
->   https://lore.kernel.org/lkml/1485287564-24205-1-git-send-email-markus.heiser@darmarit.de/
-
-I can barely modify Python script, but I think that this would be a good move overall.
-Then I could learn more Python.
-
-> At the time, we were just trying to get the RST transition done, and
-> swapping out the kernel-doc script seemed like a major distraction that
-> we didn't need, so this never got looked at as seriously as I would have
-> liked.
-> 
->> Personally, I'd rather play with translating this script to Raku (aka
->> Perl 6).
-> 
-> Trying to add yet another language dependency is another path to
-> unhappiness, we're not going to go there.
-
-
--- 
-~Randy
+-- Daniel
