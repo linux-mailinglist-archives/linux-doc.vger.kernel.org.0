@@ -2,118 +2,95 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 8E4F54BA6C7
-	for <lists+linux-doc@lfdr.de>; Thu, 17 Feb 2022 18:13:45 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id DA76A4BA6A5
+	for <lists+linux-doc@lfdr.de>; Thu, 17 Feb 2022 18:04:49 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S243597AbiBQRNd (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 17 Feb 2022 12:13:33 -0500
-Received: from mxb-00190b01.gslb.pphosted.com ([23.128.96.19]:58194 "EHLO
+        id S243543AbiBQREl (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 17 Feb 2022 12:04:41 -0500
+Received: from mxb-00190b01.gslb.pphosted.com ([23.128.96.19]:56526 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S243600AbiBQRNc (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Thu, 17 Feb 2022 12:13:32 -0500
-X-Greylist: delayed 1496 seconds by postgrey-1.37 at lindbergh.monkeyblade.net; Thu, 17 Feb 2022 09:13:18 PST
-Received: from gateway30.websitewelcome.com (gateway30.websitewelcome.com [192.185.179.30])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 12F6829C11D
-        for <linux-doc@vger.kernel.org>; Thu, 17 Feb 2022 09:13:17 -0800 (PST)
-Received: from cm10.websitewelcome.com (cm10.websitewelcome.com [100.42.49.4])
-        by gateway30.websitewelcome.com (Postfix) with ESMTP id BF10A3D342
-        for <linux-doc@vger.kernel.org>; Thu, 17 Feb 2022 10:27:18 -0600 (CST)
-Received: from gator4132.hostgator.com ([192.185.4.144])
-        by cmsmtp with SMTP
-        id KjcknUkY7RnrrKjcknhH9G; Thu, 17 Feb 2022 10:27:18 -0600
-X-Authority-Reason: nr=8
-Received: from host-95-232-30-176.retail.telecomitalia.it ([95.232.30.176]:34148 helo=[10.0.0.45])
-        by gator4132.hostgator.com with esmtpsa  (TLS1.2) tls TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256
-        (Exim 4.94.2)
-        (envelope-from <bristot@kernel.org>)
-        id 1nKjcj-003u9J-0E; Thu, 17 Feb 2022 10:27:17 -0600
-Message-ID: <ba924008-c0ab-4800-aac4-d9d9ae930c32@kernel.org>
-Date:   Thu, 17 Feb 2022 17:27:09 +0100
+        with ESMTP id S232955AbiBQREj (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Thu, 17 Feb 2022 12:04:39 -0500
+Received: from ms.lwn.net (ms.lwn.net [IPv6:2600:3c01:e000:3a1::42])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id DD399207565;
+        Thu, 17 Feb 2022 09:04:24 -0800 (PST)
+Received: from localhost (unknown [IPv6:2601:281:8300:104d::5f6])
+        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+        (No client certificate requested)
+        by ms.lwn.net (Postfix) with ESMTPSA id 882C89A2;
+        Thu, 17 Feb 2022 17:04:24 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 ms.lwn.net 882C89A2
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=lwn.net; s=20201203;
+        t=1645117464; bh=7yI7eNlBEA3Kgl9clAQBNuaZ7/DvcyD/YbJxoPU4uJA=;
+        h=From:To:Cc:Subject:In-Reply-To:References:Date:From;
+        b=YGOTmOvzxAvCyfI3pnrs2/f+IvHClKI+/uQVShpeotismozv273VSKUofYhvZhh7l
+         SRf/GCcQnMKUfN7iYA/1fsftEMk6UaSQWLSgNvDGvfXCTeLE2zrc34Voip9yEC/PNh
+         Hxo/EvzzwDHnbAZoLjdE/OJhcqYdWxp0yHYRFjM2CUzwyT6ure++V1ckRm6EAEi4RF
+         nUO23rTPKeEkFENaLrGLm1/ZEIZcf0ezXcNuRKX0FLKn4OZUse5cxEgybevHScobLq
+         zXISXKvedXnpWZnbQJ530QGTZzzYffPamfBPf/txiS89/jOvBnIZVa1h4YKGWsk56c
+         PfiZWczQWn0Ww==
+From:   Jonathan Corbet <corbet@lwn.net>
+To:     Tomasz =?utf-8?B?V2FybmllxYLFgm8=?= <tomasz.warniello@gmail.com>
+Cc:     linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org
+Subject: Re: [RFC] scripts: kernel-doc: Major kernel-doc rework
+In-Reply-To: <20220217163247.03e37c9b@fuji.fritz.box>
+References: <20220205233945.7a4d22d8@fuji.fritz.box>
+ <8735ki2x62.fsf@meer.lwn.net> <20220217163247.03e37c9b@fuji.fritz.box>
+Date:   Thu, 17 Feb 2022 10:04:23 -0700
+Message-ID: <87bkz51l2g.fsf@meer.lwn.net>
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.5.0
-Subject: Re: [RFC V2 17/21] watchdog/dev: Add tracepoints
-Content-Language: en-US
-To:     "Peter.Enderborg@sony.com" <Peter.Enderborg@sony.com>,
-        Guenter Roeck <linux@roeck-us.net>,
-        Wim Van Sebroeck <wim@linux-watchdog.org>
-Cc:     Jonathan Corbet <corbet@lwn.net>, Ingo Molnar <mingo@redhat.com>,
-        Thomas Gleixner <tglx@linutronix.de>,
-        Peter Zijlstra <peterz@infradead.org>,
-        Will Deacon <will@kernel.org>,
-        Catalin Marinas <catalin.marinas@arm.com>,
-        Marco Elver <elver@google.com>,
-        Dmitry Vyukov <dvyukov@google.com>,
-        "Paul E. McKenney" <paulmck@kernel.org>,
-        Shuah Khan <skhan@linuxfoundation.org>,
-        Gabriele Paoloni <gpaoloni@redhat.com>,
-        Juri Lelli <juri.lelli@redhat.com>,
-        Clark Williams <williams@redhat.com>,
-        "linux-doc@vger.kernel.org" <linux-doc@vger.kernel.org>,
-        "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
-        "linux-trace-devel@vger.kernel.org" 
-        <linux-trace-devel@vger.kernel.org>,
-        Steven Rostedt <rostedt@goodmis.org>
-References: <cover.1644830251.git.bristot@kernel.org>
- <e67874c8b676ea8dfe38679efa25363889bb1e76.1644830251.git.bristot@kernel.org>
- <96f418b4-0ba8-01fe-ead0-2028bfc42560@sony.com>
-From:   Daniel Bristot de Oliveira <bristot@kernel.org>
-In-Reply-To: <96f418b4-0ba8-01fe-ead0-2028bfc42560@sony.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
-X-AntiAbuse: Primary Hostname - gator4132.hostgator.com
-X-AntiAbuse: Original Domain - vger.kernel.org
-X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
-X-AntiAbuse: Sender Address Domain - kernel.org
-X-BWhitelist: no
-X-Source-IP: 95.232.30.176
-X-Source-L: No
-X-Exim-ID: 1nKjcj-003u9J-0E
-X-Source: 
-X-Source-Args: 
-X-Source-Dir: 
-X-Source-Sender: host-95-232-30-176.retail.telecomitalia.it ([10.0.0.45]) [95.232.30.176]:34148
-X-Source-Auth: kernel@bristot.me
-X-Email-Count: 4
-X-Source-Cap: YnJpc3RvdG1lO2JyaXN0b3RtZTtnYXRvcjQxMzIuaG9zdGdhdG9yLmNvbQ==
-X-Local-Domain: no
-X-Spam-Status: No, score=-1.2 required=5.0 tests=BAYES_00,NICE_REPLY_A,
-        RCVD_IN_DNSWL_NONE,RCVD_IN_MSPIKE_H2,SPF_HELO_PASS,SPF_SOFTFAIL,
-        T_SCC_BODY_TEXT_LINE autolearn=no autolearn_force=no version=3.4.6
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+X-Spam-Status: No, score=-2.1 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,SPF_HELO_NONE,SPF_PASS,
+        T_SCC_BODY_TEXT_LINE autolearn=ham autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Hi Peter
+Tomasz Warnie=C5=82=C5=82o <tomasz.warniello@gmail.com> writes:
 
-On 2/16/22 17:01, Peter.Enderborg@sony.com wrote:
-> On 2/14/22 11:45, Daniel Bristot de Oliveira wrote:
->> Add a set of tracepoints, enabling the observability of the watchdog
->> device interactions with user-space.
->>
->> The events are:
->> 	watchdog:watchdog_open
->> 	watchdog:watchdog_close
->> 	watchdog:watchdog_start
->> 	watchdog:watchdog_stop
->> 	watchdog:watchdog_set_timeout
->> 	watchdog:watchdog_ping
->> 	watchdog:watchdog_nowayout
->> 	watchdog:watchdog_set_keep_alive
->> 	watchdog:watchdog_keep_alive
-> 
-> Some watchdogs have a bark functionality, I think it should be event for that too.
-> 
+> I will prepare the POD part. As for the rest, you will need a porter if y=
+ou
+> decide this is the way to go. I could help with explanations if something=
+ is
+> unclear and as long as the questions come soon. The winter is almost over=
+ and
+> I need to switch to other activities like earning money.
 
-I understand. The problems is that I do not see the bark abstraction in the
-watchdog_dev layer.
+Understood.
 
-In the case I am investigating (the safety_monitor/safety_app) the bark is
-outside of the "OS" view, it is an hardware action - like. shutdown.
+> I understand. I didn't know there was a rewrite. I'm not into Python, but
+> if you could post a link, I'd take a look out of curiosity.
+>
+> If the community prefers Python, what can I say about this? Their choice.
 
-Am I missing something? Thoughts?
+This is the kernel community you're talking about - saying that it
+prefers any language (except possibly C) is asking for big-time trouble
+:)
 
--- Daniel
+*I* prefer Python, and the Sphinx side of things is necessarily in
+Python, so I'd be happy to see kernel-doc move over.  That said, others
+certainly disagree.
+
+Markus's work was here:
+
+  https://lore.kernel.org/lkml/1485287564-24205-1-git-send-email-markus.hei=
+ser@darmarit.de/
+
+At the time, we were just trying to get the RST transition done, and
+swapping out the kernel-doc script seemed like a major distraction that
+we didn't need, so this never got looked at as seriously as I would have
+liked.
+
+> Personally, I'd rather play with translating this script to Raku (aka
+> Perl 6).
+
+Trying to add yet another language dependency is another path to
+unhappiness, we're not going to go there.
+
+Thanks,
+
+jon
