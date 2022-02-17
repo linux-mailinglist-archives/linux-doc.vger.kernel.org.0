@@ -2,129 +2,243 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id B54DF4BA80E
-	for <lists+linux-doc@lfdr.de>; Thu, 17 Feb 2022 19:22:05 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 143C54BA7E2
+	for <lists+linux-doc@lfdr.de>; Thu, 17 Feb 2022 19:14:15 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S244163AbiBQSVT (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 17 Feb 2022 13:21:19 -0500
-Received: from mxb-00190b01.gslb.pphosted.com ([23.128.96.19]:48334 "EHLO
+        id S240837AbiBQSMR (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 17 Feb 2022 13:12:17 -0500
+Received: from mxb-00190b01.gslb.pphosted.com ([23.128.96.19]:45872 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S230344AbiBQSVT (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Thu, 17 Feb 2022 13:21:19 -0500
-X-Greylist: delayed 1449 seconds by postgrey-1.37 at lindbergh.monkeyblade.net; Thu, 17 Feb 2022 10:21:04 PST
-Received: from gateway23.websitewelcome.com (gateway23.websitewelcome.com [192.185.49.177])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 73D2D1712AC
-        for <linux-doc@vger.kernel.org>; Thu, 17 Feb 2022 10:21:03 -0800 (PST)
-Received: from cm16.websitewelcome.com (cm16.websitewelcome.com [100.42.49.19])
-        by gateway23.websitewelcome.com (Postfix) with ESMTP id 790AE8631
-        for <linux-doc@vger.kernel.org>; Thu, 17 Feb 2022 11:56:52 -0600 (CST)
-Received: from gator4132.hostgator.com ([192.185.4.144])
-        by cmsmtp with SMTP
-        id Kl1QnPg3jXvvJKl1QnHRyv; Thu, 17 Feb 2022 11:56:52 -0600
-X-Authority-Reason: nr=8
-Received: from host-95-232-30-176.retail.telecomitalia.it ([95.232.30.176]:34154 helo=[10.0.0.45])
-        by gator4132.hostgator.com with esmtpsa  (TLS1.2) tls TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256
-        (Exim 4.94.2)
-        (envelope-from <bristot@kernel.org>)
-        id 1nKl1O-001Zrd-AE; Thu, 17 Feb 2022 11:56:50 -0600
-Message-ID: <ca674409-34bb-69b2-0df5-e01b6facee88@kernel.org>
-Date:   Thu, 17 Feb 2022 18:56:44 +0100
+        with ESMTP id S244092AbiBQSMP (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Thu, 17 Feb 2022 13:12:15 -0500
+Received: from mail-qv1-xf2c.google.com (mail-qv1-xf2c.google.com [IPv6:2607:f8b0:4864:20::f2c])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 44AE11A4D7A;
+        Thu, 17 Feb 2022 10:11:59 -0800 (PST)
+Received: by mail-qv1-xf2c.google.com with SMTP id v10so9879548qvk.7;
+        Thu, 17 Feb 2022 10:11:59 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112;
+        h=sender:message-id:date:mime-version:user-agent:content-language:to
+         :cc:references:from:subject:in-reply-to:content-transfer-encoding;
+        bh=XdszSOy+2aICjmu+eCmovILOPJgj1bdrPeWOPdlbR3A=;
+        b=QVDvsf7Led/rkebFlibDUMr0L14/uuM6rIKy0lds+CcX9ZcDnnB896stm/l4Q7Vott
+         M7fo08f6YQHL3hHR9Bhj5ygMZsJPi3YN6GG0584ATSJYrlT3w4jeFMniLkwvbVjGVtZl
+         +C1AEpbXpRVPPm5gSpDo1PD8Vf5n+zObksopl6x/eatDnKnCpy0deMFkon7Mg7wcZc46
+         MNLpKoOhEo4YqbCqKFQVlQ5mfptc+QZ1agWdxbAqTxppkY1n6+Mgx7zVLjgRsrhrGI6l
+         JT5MBCHI8QgEjWqGLROHRsu9llE9BYyxQsf5QzkkAeHvjNSwzY5itV42KZuMFWzDBn0d
+         yIWQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:sender:message-id:date:mime-version:user-agent
+         :content-language:to:cc:references:from:subject:in-reply-to
+         :content-transfer-encoding;
+        bh=XdszSOy+2aICjmu+eCmovILOPJgj1bdrPeWOPdlbR3A=;
+        b=pLo0JJlhKihdhGJ3N3quL41l1kZxaTsB7QKYB+BOyvzSY18031+x8Hoka/QcLsX7CW
+         S3Tg1R0X1dfKF97SAIOrgX6zZqaaBjNznv1KwQPoly9KsI9SXgjsuGamHKpTm+TUfVc3
+         qMTZhIAgKhP4Iq7tQb8rdr8apIZemxKFdAvq69FDVJ1MjR71MPJjUaCGgyMwx28nDqVX
+         xUpLz5svX3ydpg6qaOuWAmkPK7mAupyLDk/nOn7Mj55I4EajzoP3xHfPJKXWYOmmJMEi
+         KnAv49h9OhUbzpCMvjM8q1alZb+oMxKstHlx82eBTH+f/LAV9pP1OlKWAdhDIN5njgsV
+         T+uQ==
+X-Gm-Message-State: AOAM532ADgux+dumUQQOP7u6hTOTPxQ8rba59wLNNQKMOpyD3jkPe0wW
+        0jL+jIT7dtlReq5ewaqA8Xk=
+X-Google-Smtp-Source: ABdhPJxHJkKUQhJlchPKkdoF136yI5yQePII8iTDAHJl6fb1N210CyMIp+VHmjVHvY+E8BkiREYPfw==
+X-Received: by 2002:ad4:5bc1:0:b0:42d:758c:f694 with SMTP id t1-20020ad45bc1000000b0042d758cf694mr3064281qvt.99.1645121518409;
+        Thu, 17 Feb 2022 10:11:58 -0800 (PST)
+Received: from ?IPV6:2600:1700:e321:62f0:329c:23ff:fee3:9d7c? ([2600:1700:e321:62f0:329c:23ff:fee3:9d7c])
+        by smtp.gmail.com with ESMTPSA id g20sm21296956qko.27.2022.02.17.10.11.56
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Thu, 17 Feb 2022 10:11:57 -0800 (PST)
+Sender: Guenter Roeck <groeck7@gmail.com>
+Message-ID: <66d4ea0b-0377-c9ae-68eb-7303c32cf87e@roeck-us.net>
+Date:   Thu, 17 Feb 2022 10:11:55 -0800
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
  Thunderbird/91.5.0
-Subject: Re: [RFC V2 17/21] watchdog/dev: Add tracepoints
 Content-Language: en-US
-To:     Gabriele Paoloni <gpaoloni@redhat.com>,
-        Guenter Roeck <linux@roeck-us.net>,
-        "Peter.Enderborg@sony.com" <Peter.Enderborg@sony.com>,
-        Wim Van Sebroeck <wim@linux-watchdog.org>
-Cc:     Jonathan Corbet <corbet@lwn.net>, Ingo Molnar <mingo@redhat.com>,
-        Thomas Gleixner <tglx@linutronix.de>,
-        Peter Zijlstra <peterz@infradead.org>,
-        Will Deacon <will@kernel.org>,
-        Catalin Marinas <catalin.marinas@arm.com>,
-        Marco Elver <elver@google.com>,
-        Dmitry Vyukov <dvyukov@google.com>,
-        "Paul E. McKenney" <paulmck@kernel.org>,
-        Shuah Khan <skhan@linuxfoundation.org>,
-        Juri Lelli <juri.lelli@redhat.com>,
-        Clark Williams <williams@redhat.com>,
-        "linux-doc@vger.kernel.org" <linux-doc@vger.kernel.org>,
-        "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
-        "linux-trace-devel@vger.kernel.org" 
-        <linux-trace-devel@vger.kernel.org>,
-        Steven Rostedt <rostedt@goodmis.org>
-References: <cover.1644830251.git.bristot@kernel.org>
- <e67874c8b676ea8dfe38679efa25363889bb1e76.1644830251.git.bristot@kernel.org>
- <96f418b4-0ba8-01fe-ead0-2028bfc42560@sony.com>
- <ba924008-c0ab-4800-aac4-d9d9ae930c32@kernel.org>
- <ef1b1d99-6172-2b4d-9612-7ecbe8fc6c8b@roeck-us.net>
- <6c6fc4fa-6464-2dbf-40da-e3c61f322d95@redhat.com>
-From:   Daniel Bristot de Oliveira <bristot@kernel.org>
-In-Reply-To: <6c6fc4fa-6464-2dbf-40da-e3c61f322d95@redhat.com>
-Content-Type: text/plain; charset=UTF-8
+To:     sylv <sylv@sylv.io>, Jean Delvare <jdelvare@suse.com>,
+        Jonathan Corbet <corbet@lwn.net>
+Cc:     linux-kernel@vger.kernel.org, linux-hwmon@vger.kernel.org,
+        Patrick Rudolph <patrick.rudolph@9elements.com>,
+        linux-doc@vger.kernel.org
+References: <cover.1645108566.git.sylv@sylv.io>
+ <6103836f1116a045a25919ae3e5c18dfdc485902.1645108566.git.sylv@sylv.io>
+ <f1e13a4e-2e86-1d53-f34d-a04838e8e8f9@roeck-us.net>
+ <246de83631dd5e165f95904d7f1628502f030e02.camel@sylv.io>
+From:   Guenter Roeck <linux@roeck-us.net>
+Subject: Re: [PATCH v2 2/3] hwmon (xdpe12284): Add support for xdpe11280
+In-Reply-To: <246de83631dd5e165f95904d7f1628502f030e02.camel@sylv.io>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
-X-AntiAbuse: Primary Hostname - gator4132.hostgator.com
-X-AntiAbuse: Original Domain - vger.kernel.org
-X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
-X-AntiAbuse: Sender Address Domain - kernel.org
-X-BWhitelist: no
-X-Source-IP: 95.232.30.176
-X-Source-L: No
-X-Exim-ID: 1nKl1O-001Zrd-AE
-X-Source: 
-X-Source-Args: 
-X-Source-Dir: 
-X-Source-Sender: host-95-232-30-176.retail.telecomitalia.it ([10.0.0.45]) [95.232.30.176]:34154
-X-Source-Auth: kernel@bristot.me
-X-Email-Count: 4
-X-Source-Cap: YnJpc3RvdG1lO2JyaXN0b3RtZTtnYXRvcjQxMzIuaG9zdGdhdG9yLmNvbQ==
-X-Local-Domain: no
-X-Spam-Status: No, score=-1.2 required=5.0 tests=BAYES_00,NICE_REPLY_A,
-        RCVD_IN_DNSWL_NONE,RCVD_IN_MSPIKE_H5,RCVD_IN_MSPIKE_WL,SPF_HELO_PASS,
-        SPF_SOFTFAIL,T_SCC_BODY_TEXT_LINE autolearn=no autolearn_force=no
-        version=3.4.6
+X-Spam-Status: No, score=-1.3 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+        DKIM_VALID,DKIM_VALID_EF,FREEMAIL_ENVFROM_END_DIGIT,
+        FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,HEADER_FROM_DIFFERENT_DOMAINS,
+        NICE_REPLY_A,RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,SPF_PASS,
+        T_SCC_BODY_TEXT_LINE autolearn=no autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On 2/17/22 18:49, Gabriele Paoloni wrote:
+On 2/17/22 08:39, sylv wrote:
+> On Thu, 2022-02-17 at 07:20 -0800, Guenter Roeck wrote:
+>> On 2/17/22 06:41, Marcello Sylvester Bauer wrote:
+>>> Add support for another family of Infineon Multi-phase controllers.
+>>> The xdpe11280 uses linear instead of vid data format for VOUT.
+>>> Add the required logic to detect VOUT_MODE during identification,
+>>> and set the format accordingly.
+>>>
+>> This talks about the chip, but ...
 > 
-> On 17/02/2022 18:27, Guenter Roeck wrote:
->> On 2/17/22 08:27, Daniel Bristot de Oliveira wrote:
->>> Hi Peter
+> Oh, sure. I should be more clear that it is a chip of a different
+> family.
+> 
+>>
+>>> Signed-off-by: Marcello Sylvester Bauer <sylv@sylv.io>
+>>> ---
+>>>    Documentation/hwmon/xdpe12284.rst | 10 +++++++---
+>>>    drivers/hwmon/pmbus/xdpe12284.c   | 17 ++++++++++++++++-
+>>>    2 files changed, 23 insertions(+), 4 deletions(-)
 >>>
->>> On 2/16/22 17:01, Peter.Enderborg@sony.com wrote:
->>>> On 2/14/22 11:45, Daniel Bristot de Oliveira wrote:
->>>>> Add a set of tracepoints, enabling the observability of the watchdog
->>>>> device interactions with user-space.
->>>>>
->>>>> The events are:
->>>>>     watchdog:watchdog_open
->>>>>     watchdog:watchdog_close
->>>>>     watchdog:watchdog_start
->>>>>     watchdog:watchdog_stop
->>>>>     watchdog:watchdog_set_timeout
->>>>>     watchdog:watchdog_ping
->>>>>     watchdog:watchdog_nowayout
->>>>>     watchdog:watchdog_set_keep_alive
->>>>>     watchdog:watchdog_keep_alive
->>>> Some watchdogs have a bark functionality, I think it should be event
->>>> for that too.
->>>>
->>> I understand. The problems is that I do not see the bark abstraction
->>> in the
->>> watchdog_dev layer.
->>>
->> I don't even know what "bark functionality" means. A new term for
->> pretimeout ?
->> Something else ?
-> From my understanding the bark timeout is actually the pretimeout
-> whereas the bite timeout is the actual timeout.
+>>> diff --git a/Documentation/hwmon/xdpe12284.rst
+>>> b/Documentation/hwmon/xdpe12284.rst
+>>> index 67d1f87808e5..e9a5a19b0c3d 100644
+>>> --- a/Documentation/hwmon/xdpe12284.rst
+>>> +++ b/Documentation/hwmon/xdpe12284.rst
+>>> @@ -5,6 +5,10 @@ Kernel driver xdpe122
+>>>    
+>>>    Supported chips:
+>>>    
+>>> +  * Infineon XDPE11280
+>>> +
+>>> +    Prefix: 'xdpe11280'
+>>> +
+>>>      * Infineon XDPE12254
+>>>    
+>>>        Prefix: 'xdpe12254'
+>>> @@ -20,9 +24,9 @@ Authors:
+>>>    Description
+>>>    -----------
+>>>    
+>>> -This driver implements support for Infineon Multi-phase XDPE122
+>>> family
+>>> -dual loop voltage regulators.
+>>> -The family includes XDPE12284 and XDPE12254 devices.
+>>> +This driver implements support for Infineon Multi-phase XDPE112
+>>> and XDPE122
+>>> +family dual loop voltage regulators.
+>>> +These families include XDPE11280, XDPE12284 and XDPE12254 devices.
+>>>    The devices from this family complaint with:
+>>
+>> Hmm, s/complaint/compliant/.
+> 
+> ack
+> 
+>>
+>> Anyway, is it still correct that the XDPE11280 is compliant with the
+>> Intel specifications ? The datasheet isn't public, so I can not check
+>> myself
+>> what the chip actually supports.
+> 
+> The hardware we are testing on is an Intel Cascade Lake, which uses
+> this chip. The datasheet tells us it is compliant:
+> 
+> ```
+> The XDPE11280B implements a fully compliant Intel® VR 13, VR12, VR
+> 12.5, VR13.HC, and IMVP8 Serial VID (SVID)
+> interface.
+> ```
+> 
 
-So, what Peter wants is tracepoints for the pretimeout actions?
+This seems to be one of those chips where the vendor doesn't even admit
+that it exists unless one signs an NDA. Sigh :-(.
 
--- Daniel
+>>
+>>>    
+>>>    - Intel VR13 and VR13HC rev 1.3, IMVP8 rev 1.2 and IMPVP9 rev 1.3
+>>> DC-DC
+>>> diff --git a/drivers/hwmon/pmbus/xdpe12284.c
+>>> b/drivers/hwmon/pmbus/xdpe12284.c
+>>> index b07da06a40c9..ec947c697670 100644
+>>> --- a/drivers/hwmon/pmbus/xdpe12284.c
+>>> +++ b/drivers/hwmon/pmbus/xdpe12284.c
+>>> @@ -27,6 +27,9 @@ static int xdpe122_read_word_data(struct
+>>> i2c_client *client, int page,
+>>>          s32 mantissa;
+>>>          int ret;
+>>>    
+>>> +       if (info->format[PSC_VOLTAGE_OUT] == linear)
+>>> +               return -ENODATA;
+>>> +
+>>>          switch (reg) {
+>>>          case PMBUS_VOUT_OV_FAULT_LIMIT:
+>>>          case PMBUS_VOUT_UV_FAULT_LIMIT:
+>>> @@ -75,9 +78,19 @@ static int xdpe122_read_word_data(struct
+>>> i2c_client *client, int page,
+>>>    static int xdpe122_identify(struct i2c_client *client,
+>>>                              struct pmbus_driver_info *info)
+>>>    {
+>>> -       u8 vout_params;
+>>> +       u8 vout_mode, vout_params;
+>>>          int i, ret;
+>>>    
+>>> +       ret = pmbus_read_byte_data(client, 0, PMBUS_VOUT_MODE);
+>>> +       if (ret < 0)
+>>> +               return ret;
+>>> +
+>>> +       vout_mode = ret >> 5;
+>>> +       if (vout_mode == 0) {
+>>> +               info->format[PSC_VOLTAGE_OUT] = linear;
+>>> +               return 0;
+>>> +       }
+>>
+>> .... the code above is not chip dependent but this code checks the
+>> mode register on page 0. At the very least this is confusing.
+>>
+>> What the driver should do instead is to check the chip type during
+>> probe and make the necessary changes there, ie set the output format
+>> for xdpe11280 to linear and drop the pointers to the .identify
+>> and .read_word_data.
+> 
+> Sgtm. This sounds like a better approach indeed.
+> 
+
+That makes me wonder if the chip needs to be added to this driver in the first
+place, or if it could be added to pmbus.c instead. Any idea ?
+
+Thanks,
+Guenter
+
+> Thanks,
+> Marcello
+> 
+>>
+>> Guenter
+>>
+>>> +
+>>>          for (i = 0; i < XDPE122_PAGE_NUM; i++) {
+>>>                  /* Read the register with VOUT scaling value.*/
+>>>                  ret = pmbus_read_byte_data(client, i,
+>>> PMBUS_VOUT_MODE);
+>>> @@ -140,6 +153,7 @@ static int xdpe122_probe(struct i2c_client
+>>> *client)
+>>>    }
+>>>    
+>>>    static const struct i2c_device_id xdpe122_id[] = {
+>>> +       {"xdpe11280", 0},
+>>>          {"xdpe12254", 0},
+>>>          {"xdpe12284", 0},
+>>>          {}
+>>> @@ -148,6 +162,7 @@ static const struct i2c_device_id xdpe122_id[]
+>>> = {
+>>>    MODULE_DEVICE_TABLE(i2c, xdpe122_id);
+>>>    
+>>>    static const struct of_device_id __maybe_unused
+>>> xdpe122_of_match[] = {
+>>> +       {.compatible = "infineon,xdpe11280"},
+>>>          {.compatible = "infineon,xdpe12254"},
+>>>          {.compatible = "infineon,xdpe12284"},
+>>>          {}
+>>
+> 
+
