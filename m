@@ -2,473 +2,159 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id BEE824B95C2
-	for <lists+linux-doc@lfdr.de>; Thu, 17 Feb 2022 02:58:17 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 6007E4B960B
+	for <lists+linux-doc@lfdr.de>; Thu, 17 Feb 2022 03:47:06 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S229815AbiBQB62 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 16 Feb 2022 20:58:28 -0500
-Received: from mxb-00190b01.gslb.pphosted.com ([23.128.96.19]:43358 "EHLO
+        id S231883AbiBQCrS (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 16 Feb 2022 21:47:18 -0500
+Received: from mxb-00190b01.gslb.pphosted.com ([23.128.96.19]:50814 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S229721AbiBQB61 (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Wed, 16 Feb 2022 20:58:27 -0500
-Received: from szxga02-in.huawei.com (szxga02-in.huawei.com [45.249.212.188])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id D962E172E7E;
-        Wed, 16 Feb 2022 17:58:12 -0800 (PST)
-Received: from dggpemm500021.china.huawei.com (unknown [172.30.72.55])
-        by szxga02-in.huawei.com (SkyGuard) with ESMTP id 4JzdGm1fBrz9skk;
-        Thu, 17 Feb 2022 09:56:32 +0800 (CST)
-Received: from dggpemm500006.china.huawei.com (7.185.36.236) by
- dggpemm500021.china.huawei.com (7.185.36.109) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2308.21; Thu, 17 Feb 2022 09:58:10 +0800
-Received: from [10.174.178.55] (10.174.178.55) by
- dggpemm500006.china.huawei.com (7.185.36.236) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2308.21; Thu, 17 Feb 2022 09:58:09 +0800
-Subject: Re: [PATCH v20 3/5] arm64: kdump: reimplement crashkernel=X
-To:     Baoquan He <bhe@redhat.com>
-CC:     Thomas Gleixner <tglx@linutronix.de>,
-        Ingo Molnar <mingo@redhat.com>, Borislav Petkov <bp@alien8.de>,
-        <x86@kernel.org>, "H . Peter Anvin" <hpa@zytor.com>,
-        <linux-kernel@vger.kernel.org>, Dave Young <dyoung@redhat.com>,
-        Vivek Goyal <vgoyal@redhat.com>,
-        Eric Biederman <ebiederm@xmission.com>,
-        <kexec@lists.infradead.org>,
-        Catalin Marinas <catalin.marinas@arm.com>,
-        Will Deacon <will@kernel.org>,
-        <linux-arm-kernel@lists.infradead.org>,
-        Rob Herring <robh+dt@kernel.org>,
-        Frank Rowand <frowand.list@gmail.com>,
-        <devicetree@vger.kernel.org>, "Jonathan Corbet" <corbet@lwn.net>,
-        <linux-doc@vger.kernel.org>, Randy Dunlap <rdunlap@infradead.org>,
-        Feng Zhou <zhoufeng.zf@bytedance.com>,
-        Kefeng Wang <wangkefeng.wang@huawei.com>,
-        Chen Zhou <dingguo.cz@antgroup.com>,
-        "John Donnelly" <John.p.donnelly@oracle.com>,
-        Dave Kleikamp <dave.kleikamp@oracle.com>
-References: <20220124084708.683-1-thunder.leizhen@huawei.com>
- <20220124084708.683-4-thunder.leizhen@huawei.com>
- <YgnSCxlr1O2ZZ1sO@MiWiFi-R3L-srv>
- <0e84548b-179a-1bad-8f49-963d66426e43@huawei.com>
- <f1614874-306d-482a-a652-d71a8bcbe3a9@huawei.com>
- <YgzQCqwmCOfzwzx/@MiWiFi-R3L-srv>
-From:   "Leizhen (ThunderTown)" <thunder.leizhen@huawei.com>
-Message-ID: <41c5880b-a5f7-6fe1-275f-f68e705dded0@huawei.com>
-Date:   Thu, 17 Feb 2022 09:57:57 +0800
-User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64; rv:60.0) Gecko/20100101
- Thunderbird/60.7.0
+        with ESMTP id S231864AbiBQCrR (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Wed, 16 Feb 2022 21:47:17 -0500
+Received: from mga17.intel.com (mga17.intel.com [192.55.52.151])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 10C731FFC8E;
+        Wed, 16 Feb 2022 18:47:04 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1645066024; x=1676602024;
+  h=date:from:to:cc:subject:message-id:references:
+   mime-version:content-transfer-encoding:in-reply-to;
+  bh=QSnSOxdDtObgqzE/ltifayE1DCxwz1VCxKc2xdK3BnQ=;
+  b=iLUKKwqyOfbqw+wVLqKkAXgMews9dyh47MjeTZ6KVmpp75ILA9p+qHhU
+   eubs3/8EUdOQ34x5giGe0RAr1xHEbgCsZW9V1pfkjiXRd25whignlWtXg
+   +R2sDq9DIwh6su3/YGAZ3WJuV7vzhPiJdv2voITp7KgGRIO0P+iGaM1v1
+   BUzFI+BdBxFYGMwRguEzSam6OHTzyGjFBYAm+SBm5GYDmoX4+nu+cpE97
+   bpdjYayBinwRbCgdJzvE3/GMu5jMo1Xz0G/WY5/2C2Tebmr08yL8VpO41
+   Ne2610ibnXgDQcEFShZhal8a12AKcQEpIdQCmMo5froNr41vyAGGHpDBi
+   g==;
+X-IronPort-AV: E=McAfee;i="6200,9189,10260"; a="231399148"
+X-IronPort-AV: E=Sophos;i="5.88,374,1635231600"; 
+   d="scan'208";a="231399148"
+Received: from orsmga008.jf.intel.com ([10.7.209.65])
+  by fmsmga107.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 16 Feb 2022 18:46:50 -0800
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.88,374,1635231600"; 
+   d="scan'208";a="545307562"
+Received: from yilunxu-optiplex-7050.sh.intel.com (HELO localhost) ([10.239.159.68])
+  by orsmga008.jf.intel.com with ESMTP; 16 Feb 2022 18:46:46 -0800
+Date:   Thu, 17 Feb 2022 10:38:16 +0800
+From:   Xu Yilun <yilun.xu@intel.com>
+To:     Tom Rix <trix@redhat.com>
+Cc:     Tianfei zhang <tianfei.zhang@intel.com>, hao.wu@intel.com,
+        mdf@kernel.org, linux-fpga@vger.kernel.org,
+        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
+        corbet@lwn.net
+Subject: Re: [PATCH v1 2/7] fpga: dfl: check feature type before parse irq
+  info
+Message-ID: <20220217023816.GD1145049@yilunxu-OptiPlex-7050>
+References: <20220214112619.219761-1-tianfei.zhang@intel.com>
+ <20220214112619.219761-3-tianfei.zhang@intel.com>
+ <0de9c8fb-0f04-684f-630c-1d13b0b55ba1@redhat.com>
 MIME-Version: 1.0
-In-Reply-To: <YgzQCqwmCOfzwzx/@MiWiFi-R3L-srv>
-Content-Type: text/plain; charset="utf-8"
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
-X-Originating-IP: [10.174.178.55]
-X-ClientProxiedBy: dggems701-chm.china.huawei.com (10.3.19.178) To
- dggpemm500006.china.huawei.com (7.185.36.236)
-X-CFilter-Loop: Reflected
-X-Spam-Status: No, score=-4.2 required=5.0 tests=BAYES_00,NICE_REPLY_A,
-        RCVD_IN_DNSWL_MED,SPF_HELO_NONE,SPF_PASS,T_SCC_BODY_TEXT_LINE
-        autolearn=ham autolearn_force=no version=3.4.6
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <0de9c8fb-0f04-684f-630c-1d13b0b55ba1@redhat.com>
+X-Spam-Status: No, score=-4.5 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_MED,
+        SPF_HELO_NONE,SPF_NONE,T_SCC_BODY_TEXT_LINE autolearn=ham
+        autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
+On Tue, Feb 15, 2022 at 06:49:05AM -0800, Tom Rix wrote:
+> 
+> On 2/14/22 3:26 AM, Tianfei zhang wrote:
+> > From: Tianfei Zhang <tianfei.zhang@intel.com>
+> > 
+> > The feature ID of "Port User Interrupt" and the
+> > "PMCI Subsystem" are identical, 0x12, but one is for FME,
+> > other is for Port. It should check the feature type While
+> > parsing the irq info in parse_feature_irqs().
+> 
+> This seems like a bug fix and not part of iofs feature.
+> 
+> Split this out of the patchset.
+> 
+> This is a workaround a hardware problem, there should be some comments to
+> the effect that you can't trust _this_ or _that_ feature id and some special
+> handling earlier.
+> 
+> The ambiguity of feature id is a problem, and this sort of bug will happen
 
+Actually this is not the feature id definition problem. The identity of the
+feature is determined by the dfl_id_type(FME, PORT) AND feature_id. So the
+driver should match the dfl_id_type & feature_id to know what feature it
+is.
 
-On 2022/2/16 18:20, Baoquan He wrote:
-> On 02/16/22 at 10:58am, Leizhen (ThunderTown) wrote:
->>
->>
->> On 2022/2/14 15:53, Leizhen (ThunderTown) wrote:
->>>
->>>
->>> On 2022/2/14 11:52, Baoquan He wrote:
->>>> On 01/24/22 at 04:47pm, Zhen Lei wrote:
->>>> ......
->>>>> diff --git a/arch/arm64/mm/init.c b/arch/arm64/mm/init.c
->>>>> index 6c653a2c7cff052..a5d43feac0d7d96 100644
->>>>> --- a/arch/arm64/mm/init.c
->>>>> +++ b/arch/arm64/mm/init.c
->>>>> @@ -71,6 +71,30 @@ phys_addr_t arm64_dma_phys_limit __ro_after_init;
->>>>>  #define CRASH_ADDR_LOW_MAX	arm64_dma_phys_limit
->>>>>  #define CRASH_ADDR_HIGH_MAX	MEMBLOCK_ALLOC_ACCESSIBLE
->>>>>  
->>>>> +static int __init reserve_crashkernel_low(unsigned long long low_size)
->>>>> +{
->>>>> +	unsigned long long low_base;
->>>>> +
->>>>> +	/* passed with crashkernel=0,low ? */
->>>>> +	if (!low_size)
->>>>> +		return 0;
->>>>> +
->>>>> +	low_base = memblock_phys_alloc_range(low_size, CRASH_ALIGN, 0, CRASH_ADDR_LOW_MAX);
->>>>> +	if (!low_base) {
->>>>> +		pr_err("cannot allocate crashkernel low memory (size:0x%llx).\n", low_size);
->>>>> +		return -ENOMEM;
->>>>> +	}
->>>>> +
->>>>> +	pr_info("crashkernel low memory reserved: 0x%llx - 0x%llx (%lld MB)\n",
->>>>> +		low_base, low_base + low_size, low_size >> 20);
->>>>> +
->>>>> +	crashk_low_res.start = low_base;
->>>>> +	crashk_low_res.end   = low_base + low_size - 1;
->>>>> +	insert_resource(&iomem_resource, &crashk_low_res);
->>>>> +
->>>>> +	return 0;
->>>>> +}
->>>>> +
->>>>>  /*
->>>>>   * reserve_crashkernel() - reserves memory for crash kernel
->>>>
->>>> My another concern is the crashkernel=,low handling. In this patch, the
->>>> code related to low memory is obscure. Wondering if we should make them
->>>> explicit with a little redundant but very clear code flows. Saying this
->>>> because the code must be very clear to you and reviewers, it may be
->>>> harder for later code reader or anyone interested to understand.
->>>>
->>>> 1) crashkernel=X,high
->>>> 2) crashkernel=X,high crashkernel=Y,low
->>>> 3) crashkernel=X,high crashkernel=0,low
->>>> 4) crashkernel=X,high crashkernel='messy code',low
->>>> 5) crashkernel=X //fall back to high memory, low memory is required then.
->>>>
->>>> It could be me thinking about it too much. I made changes to your patch
->>>> with a tuning, not sure if it's OK to you. Otherwise, this patchset
->>>
->>> I think it's good.
->>>
->>>> works very well for all above test cases, it's ripe to be merged for
->>>> wider testing.
->>>
->>> I will test it tomorrow. I've prepared a little more use cases than yours.
->>
->> After the following modifications, I have tested it and it works well. Passed
->> all the test cases I prepared.
-> 
-> That's great.
-> 
-> You might need to add 'crashkernel=xM, crashkernel=0,low',
-> 'crashkernel=xM, crashkernel='messy code',low' to your test cases.
+Thanks,
+Yilun
 
-Oh, right, I will add them.
-
+> again.
 > 
->>
->>>
->>> 1) crashkernel=4G						//high=4G, low=256M
->>> 2) crashkernel=4G crashkernel=512M,high crashkernel=512M,low	//high=4G, low=256M, high and low are ignored
->>> 3) crashkernel=4G crashkernel=512M,high				//high=4G, low=256M, high is ignored
->>> 4) crashkernel=4G crashkernel=512M,low				//high=4G, low=256M, low is ignored
->>> 5) crashkernel=4G@0xe0000000					//high=0G, low=0M, cannot allocate, failed
->>> 6) crashkernel=512M						//high=0G, low=512M
->>> 7) crashkernel=128M						//high=0G, low=128M
->>> 8) crashkernel=512M@0xde000000		//512M@3552M		//high=0G, low=512M
->>> 9) crashkernel=4G,high						//high=4G, low=256M
->>> a) crashkernel=4G,high crashkernel=512M,low			//high=4G, low=512M
->>> b) crashkernel=512M,high crashkernel=128M,low			//high=512M, low=128M
->>> c) crashkernel=512M,low						//high=0G, low=0M, invalid
->>>
->>>
->>>>
->>>> diff --git a/arch/arm64/mm/init.c b/arch/arm64/mm/init.c
->>>> index a5d43feac0d7..671862c56d7d 100644
->>>> --- a/arch/arm64/mm/init.c
->>>> +++ b/arch/arm64/mm/init.c
->>>> @@ -94,7 +94,8 @@ static int __init reserve_crashkernel_low(unsigned long long low_size)
->>>>  
->>>>  	return 0;
->>>>  }
->>>> -
->>>> +/*Words explaining why it's 256M*/
->>>> +#define DEFAULT_CRASH_KERNEL_LOW_SIZE SZ_256M
->>
->> It's an empirical value.
->>
->> 94fb9334182284e8e7e4bcb9125c25dc33af19d4 x86/crash: Allocate enough low memory when crashkernel=high
->>
->>     When the crash kernel is loaded above 4GiB in memory, the
->>     first kernel allocates only 72MiB of low-memory for the DMA
->>     requirements of the second kernel. On systems with many
->>     devices this is not enough and causes device driver
->>     initialization errors and failed crash dumps. Testing by
->>     SUSE and Redhat has shown that 256MiB is a good default
->>     value for now and the discussion has lead to this value as
->>     well. So set this default value to 256MiB to make sure there
->>     is enough memory available for DMA.
+> What can be done to prevent this in the future ?
 > 
-> Then, some words like below can be added. I am not confident it's good
-> enought, hope someone else can help to polish it.
+> > 
+> > Signed-off-by: Tianfei Zhang <tianfei.zhang@intel.com>
+> > ---
+> >   drivers/fpga/dfl.c | 11 +++++++++++
+> >   1 file changed, 11 insertions(+)
+> > 
+> > diff --git a/drivers/fpga/dfl.c b/drivers/fpga/dfl.c
+> > index 599bb21d86af..26f8cf890700 100644
+> > --- a/drivers/fpga/dfl.c
+> > +++ b/drivers/fpga/dfl.c
+> > @@ -940,9 +940,14 @@ static int parse_feature_irqs(struct build_feature_devs_info *binfo,
+> >   {
+> >   	void __iomem *base = binfo->ioaddr + ofst;
+> >   	unsigned int i, ibase, inr = 0;
+> > +	enum dfl_id_type type;
+> >   	int virq;
+> >   	u64 v;
+> > +	type = feature_dev_id_type(binfo->feature_dev);
+> > +	if (type >= DFL_ID_MAX)
+> > +		return -EINVAL;
+> > +
+> >   	/*
+> >   	 * Ideally DFL framework should only read info from DFL header, but
+> >   	 * current version DFL only provides mmio resources information for
+> > @@ -959,16 +964,22 @@ static int parse_feature_irqs(struct build_feature_devs_info *binfo,
+> >   	 */
+> >   	switch (fid) {
+> >   	case PORT_FEATURE_ID_UINT:
+> > +		if (type != PORT_ID)
+> > +			break;
 > 
-> /*
->  * This is an empirical value in x86_64 and taken here directly. Please
->  * refer to code comment in reserve_crashkernel_low() of x86_64 for more
->  * details.
->  */
-> #define DEFAULT_CRASH_KERNEL_LOW_SIZE SZ_256M
-
-I think it's good. If no correction is made, I will use it.
-
-"code comment" --> "the code comment"
-
+> Instead of embedding a break in the switch, break the switch into fme switch
+> and port switch
 > 
->>
->>
->>>>  /*
->>>>   * reserve_crashkernel() - reserves memory for crash kernel
->>>>   *
->>>> @@ -105,10 +106,10 @@ static int __init reserve_crashkernel_low(unsigned long long low_size)
->>>>  static void __init reserve_crashkernel(void)
->>>>  {
->>>>  	unsigned long long crash_base, crash_size;
->>>> -	unsigned long long crash_low_size = SZ_256M;
->>>> +	unsigned long long crash_low_size;
->>>>  	unsigned long long crash_max = CRASH_ADDR_LOW_MAX;
->>>>  	int ret;
->>>> -	bool fixed_base;
->>>> +	bool fixed_base, high;
->>
->> high = false;
->>
->>>>  	char *cmdline = boot_command_line;
->>>>  
->>>>  	/* crashkernel=X[@offset] */
->>>> @@ -126,7 +127,10 @@ static void __init reserve_crashkernel(void)
->>>>  		ret = parse_crashkernel_low(cmdline, 0, &low_size, &crash_base);
->>>>  		if (!ret)
->>>>  			crash_low_size = low_size;
->>>> +		else
->>>> +			crash_low_size = DEFAULT_CRASH_KERNEL_LOW_SIZE;
->>>>  
->>>> +		high = true;
->>>>  		crash_max = CRASH_ADDR_HIGH_MAX;
->>>>  	}
->>>>  
->>>> @@ -134,7 +138,7 @@ static void __init reserve_crashkernel(void)
->>>>  	crash_size = PAGE_ALIGN(crash_size);
->>>>  
->>>>  	/* User specifies base address explicitly. */
->>>> -	if (crash_base)
->>>> +	if (fixed_base)
->>>>  		crash_max = crash_base + crash_size;
->>>>  
->>>>  retry:
->>>> @@ -156,7 +160,10 @@ static void __init reserve_crashkernel(void)
->>>>  		return;
->>>>  	}
->>>>  
->>>> -	if (crash_base >= SZ_4G && reserve_crashkernel_low(crash_low_size)) {
->>>> +	if (crash_base >= SZ_4G && !high) 
->>>> +		crash_low_size = DEFAULT_CRASH_KERNEL_LOW_SIZE;
->>>> +
->>>> +	if (reserve_crashkernel_low(crash_low_size)) {
->>>>  		memblock_phys_free(crash_base, crash_size);
->>>>  		return;
->>>>  	}
->>
->> -       if (crash_base >= SZ_4G && reserve_crashkernel_low(crash_low_size)) {
->> -               memblock_phys_free(crash_base, crash_size);
->> -               return;
->> +       if (crash_base >= SZ_4G) {
->> +               if (!high)
->> +                       crash_low_size = SZ_256M;
->> +
->> +               if (reserve_crashkernel_low(crash_low_size)) {
->> +                       memblock_phys_free(crash_base, crash_size);
->> +                       return;
->> +               }
->>         }
->>
->> Looks like changing 'high' to 'low' would be more accurate. Whether crashkernel=Y,low is specified.
+> if (type == PORT_ID)
 > 
-> What I menat is like below, we even can add code comment to make it more
-> clearer.
-
-OK, I got it. I'll add the necessary comments. Thanks.
-
+>   port-switch
 > 
-> static void __init reserve_crashkernel(void)
-> {
+> else if (type == FME_ID
 > 
->         /* crashkernel=X[@offset] */
->         ret = parse_crashkernel(cmdline, memblock_phys_mem_size(),
->                                 &crash_size, &crash_base);
->         if (ret || !crash_size) {
->                 unsigned long long low_size;
+>   fme-switch
 > 
->                 /* crashkernel=X,high */
->                 ret = parse_crashkernel_high(cmdline, 0, &crash_size, &crash_base);
->                 if (ret || !crash_size)
->                         return;
+> Tom
 > 
->                 /* crashkernel=X,low */
->                 ret = parse_crashkernel_low(cmdline, 0, &low_size, &crash_base);
-> 		//case #1, crashkernel=yM,low is specified explicitly in cmdline
->                 if (!ret)
->                         crash_low_size = low_size;
-> 		else //case #2, crashkernel=yM,low is not specified explicitly
->                         crash_low_size = DEFAULT_CRASH_KERNEL_LOW_SIZE;
-> 
-> 		//high means crashkernel,high is specified explicitly
-> 		high = true;
->                 crash_max = CRASH_ADDR_HIGH_MAX;
->         }
-> 
->         fixed_base = !!crash_base;
->         crash_size = PAGE_ALIGN(crash_size);
-> 
->         /* User specifies base address explicitly. */
->         if (crash_base)
->                 crash_max = crash_base + crash_size;
-> retry:
->         crash_base = memblock_phys_alloc_range(crash_size, CRASH_ALIGN,
->                                                crash_base, crash_max);
->         if (!crash_base) {
->                 /*
->                  * Attempt to fully allocate low memory failed, fall back
->                  * to high memory, the minimum required low memory will be
->                  * reserved later.
->                  */
->                 if (!fixed_base && (crash_max == CRASH_ADDR_LOW_MAX)) {
->                         crash_max = CRASH_ADDR_HIGH_MAX;
->                         goto retry;
->                 }
-> 
->                 pr_warn("cannot allocate crashkernel (size:0x%llx)\n",
->                         crash_size);
->                 return;
->         }
-> 
-> 
-> 	//case #3: get crashkernel from high memory through fallback, let's set crashkernel,low too.
->         if (crash_base >= SZ_4G && !high)
-> 		crash_low_size = DEFAULT_CRASH_KERNEL_LOW_SIZE;	
-> 
->         if (reserve_crashkernel_low(crash_low_size)) {
->                 memblock_phys_free(crash_base, crash_size);
->                 return;
->         }
-> 
->         pr_info("crashkernel reserved: 0x%016llx - 0x%016llx (%lld MB)\n",
->                 crash_base, crash_base + crash_size, crash_size >> 20);
-> 
->         /*
->          * The crashkernel memory will be removed from the kernel linear
->          * map. Inform kmemleak so that it won't try to access it.
->          */
->         kmemleak_ignore_phys(crash_base);
->         if (crashk_low_res.end)
->                 kmemleak_ignore_phys(crashk_low_res.start);
-> 
->         crashk_res.start = crash_base;
->         crashk_res.end = crash_base + crash_size - 1;
->         insert_resource(&iomem_resource, &crashk_res);
-> }
-> 
-> 
->>
->>
->>>
->>> It feels like {} may need to be added here so that it is in branch "if (crash_base >= SZ_4G)".
->>> The case of "crashkernel=128M" will not fall back to high memory and does not need to reserve
->>> low memory again.
->>>
->>>>
->>>>>   *
->>>>> @@ -81,29 +105,62 @@ phys_addr_t arm64_dma_phys_limit __ro_after_init;
->>>>>  static void __init reserve_crashkernel(void)
->>>>>  {
->>>>>  	unsigned long long crash_base, crash_size;
->>>>> +	unsigned long long crash_low_size = SZ_256M;
->>>>>  	unsigned long long crash_max = CRASH_ADDR_LOW_MAX;
->>>>>  	int ret;
->>>>> +	bool fixed_base;
->>>>> +	char *cmdline = boot_command_line;
->>>>>  
->>>>> -	ret = parse_crashkernel(boot_command_line, memblock_phys_mem_size(),
->>>>> +	/* crashkernel=X[@offset] */
->>>>> +	ret = parse_crashkernel(cmdline, memblock_phys_mem_size(),
->>>>>  				&crash_size, &crash_base);
->>>>> -	/* no crashkernel= or invalid value specified */
->>>>> -	if (ret || !crash_size)
->>>>> -		return;
->>>>> +	if (ret || !crash_size) {
->>>>> +		unsigned long long low_size;
->>>>>  
->>>>> +		/* crashkernel=X,high */
->>>>> +		ret = parse_crashkernel_high(cmdline, 0, &crash_size, &crash_base);
->>>>> +		if (ret || !crash_size)
->>>>> +			return;
->>>>> +
->>>>> +		/* crashkernel=X,low */
->>>>> +		ret = parse_crashkernel_low(cmdline, 0, &low_size, &crash_base);
->>>>> +		if (!ret)
->>>>> +			crash_low_size = low_size;
->>>>> +
->>>>> +		crash_max = CRASH_ADDR_HIGH_MAX;
->>>>> +	}
->>>>> +
->>>>> +	fixed_base = !!crash_base;
->>>>>  	crash_size = PAGE_ALIGN(crash_size);
->>>>>  
->>>>>  	/* User specifies base address explicitly. */
->>>>>  	if (crash_base)
->>>>>  		crash_max = crash_base + crash_size;
->>>>>  
->>>>> +retry:
->>>>>  	crash_base = memblock_phys_alloc_range(crash_size, CRASH_ALIGN,
->>>>>  					       crash_base, crash_max);
->>>>>  	if (!crash_base) {
->>>>> +		/*
->>>>> +		 * Attempt to fully allocate low memory failed, fall back
->>>>> +		 * to high memory, the minimum required low memory will be
->>>>> +		 * reserved later.
->>>>> +		 */
->>>>> +		if (!fixed_base && (crash_max == CRASH_ADDR_LOW_MAX)) {
->>>>> +			crash_max = CRASH_ADDR_HIGH_MAX;
->>>>> +			goto retry;
->>>>> +		}
->>>>> +
->>>>>  		pr_warn("cannot allocate crashkernel (size:0x%llx)\n",
->>>>>  			crash_size);
->>>>>  		return;
->>>>>  	}
->>>>>  
->>>>> +	if (crash_base >= SZ_4G && reserve_crashkernel_low(crash_low_size)) {
->>>>> +		memblock_phys_free(crash_base, crash_size);
->>>>> +		return;
->>>>> +	}
->>>>> +
->>>>>  	pr_info("crashkernel reserved: 0x%016llx - 0x%016llx (%lld MB)\n",
->>>>>  		crash_base, crash_base + crash_size, crash_size >> 20);
->>>>>  
->>>>> @@ -112,6 +169,9 @@ static void __init reserve_crashkernel(void)
->>>>>  	 * map. Inform kmemleak so that it won't try to access it.
->>>>>  	 */
->>>>>  	kmemleak_ignore_phys(crash_base);
->>>>> +	if (crashk_low_res.end)
->>>>> +		kmemleak_ignore_phys(crashk_low_res.start);
->>>>> +
->>>>>  	crashk_res.start = crash_base;
->>>>>  	crashk_res.end = crash_base + crash_size - 1;
->>>>>  	insert_resource(&iomem_resource, &crashk_res);
->>>>> -- 
->>>>> 2.25.1
->>>>>
->>>>
->>>> .
->>>>
->>>
->>
->> -- 
->> Regards,
->>   Zhen Lei
->>
-> 
-> .
-> 
-
--- 
-Regards,
-  Zhen Lei
+> >   		v = readq(base + PORT_UINT_CAP);
+> >   		ibase = FIELD_GET(PORT_UINT_CAP_FST_VECT, v);
+> >   		inr = FIELD_GET(PORT_UINT_CAP_INT_NUM, v);
+> >   		break;
+> >   	case PORT_FEATURE_ID_ERROR:
+> > +		if (type != PORT_ID)
+> > +			break;
+> >   		v = readq(base + PORT_ERROR_CAP);
+> >   		ibase = FIELD_GET(PORT_ERROR_CAP_INT_VECT, v);
+> >   		inr = FIELD_GET(PORT_ERROR_CAP_SUPP_INT, v);
+> >   		break;
+> >   	case FME_FEATURE_ID_GLOBAL_ERR:
+> > +		if (type != FME_ID)
+> > +			break;
+> >   		v = readq(base + FME_ERROR_CAP);
+> >   		ibase = FIELD_GET(FME_ERROR_CAP_INT_VECT, v);
+> >   		inr = FIELD_GET(FME_ERROR_CAP_SUPP_INT, v);
