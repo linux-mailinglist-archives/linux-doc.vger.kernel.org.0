@@ -2,163 +2,109 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id AA4F14BED26
-	for <lists+linux-doc@lfdr.de>; Mon, 21 Feb 2022 23:18:15 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 42E074BEF1D
+	for <lists+linux-doc@lfdr.de>; Tue, 22 Feb 2022 02:53:45 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S235532AbiBUWS3 convert rfc822-to-8bit (ORCPT
-        <rfc822;lists+linux-doc@lfdr.de>); Mon, 21 Feb 2022 17:18:29 -0500
-Received: from mxb-00190b01.gslb.pphosted.com ([23.128.96.19]:40278 "EHLO
+        id S230205AbiBVBa0 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 21 Feb 2022 20:30:26 -0500
+Received: from mxb-00190b01.gslb.pphosted.com ([23.128.96.19]:59340 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S235700AbiBUWSY (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Mon, 21 Feb 2022 17:18:24 -0500
-Received: from us-smtp-delivery-44.mimecast.com (us-smtp-delivery-44.mimecast.com [207.211.30.44])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTP id 54D0D23BC3
-        for <linux-doc@vger.kernel.org>; Mon, 21 Feb 2022 14:17:59 -0800 (PST)
-Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
- [209.132.183.4]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- us-mta-99-m9qPKYq2OQeeZSWgQGeZTw-1; Mon, 21 Feb 2022 17:17:55 -0500
-X-MC-Unique: m9qPKYq2OQeeZSWgQGeZTw-1
-Received: from smtp.corp.redhat.com (int-mx01.intmail.prod.int.phx2.redhat.com [10.5.11.11])
-        (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
-        (No client certificate requested)
-        by mimecast-mx01.redhat.com (Postfix) with ESMTPS id DD69B1091DA1;
-        Mon, 21 Feb 2022 22:17:53 +0000 (UTC)
-Received: from x1.com (unknown [10.22.16.159])
-        by smtp.corp.redhat.com (Postfix) with ESMTP id 57EA55DB8F;
-        Mon, 21 Feb 2022 22:17:40 +0000 (UTC)
-From:   Daniel Bristot de Oliveira <bristot@kernel.org>
-To:     Steven Rostedt <rostedt@goodmis.org>
-Cc:     Daniel Bristot de Oliveira <bristot@kernel.org>,
-        Jonathan Corbet <corbet@lwn.net>,
-        Clark Williams <williams@redhat.com>,
-        Juri Lelli <juri.lelli@redhat.com>, linux-doc@vger.kernel.org,
-        linux-kernel@vger.kernel.org, linux-trace-devel@vger.kernel.org
-Subject: [PATCH V2 11/11] rtla/trace: Save event histogram output to a file
-Date:   Mon, 21 Feb 2022 23:16:56 +0100
-Message-Id: <2ec469fef0afa5b51d741d334268e2dc3ce60672.1645481500.git.bristot@kernel.org>
-In-Reply-To: <cover.1645481500.git.bristot@kernel.org>
-References: <cover.1645481500.git.bristot@kernel.org>
+        with ESMTP id S230115AbiBVBaY (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Mon, 21 Feb 2022 20:30:24 -0500
+Received: from esa3.hgst.iphmx.com (esa3.hgst.iphmx.com [216.71.153.141])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 8865A25585;
+        Mon, 21 Feb 2022 17:30:00 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+  d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
+  t=1645493400; x=1677029400;
+  h=from:to:cc:subject:date:message-id:mime-version:
+   content-transfer-encoding;
+  bh=eyXpTaIq25nB5bdHP4lR4iF+QtCbpy796Ah/ggXuoxw=;
+  b=XYqpVKQMEXxkGAotQ6G0sUH2lv6KVtpkA2V2IR4Z3I/Jvy9q7cip/voD
+   iIG4aTzu0IFG6iOFqfgyDB2hesI1n3UvxqExhVkF0MmmGKqqsj8BXR7mJ
+   wpXqbQteaqlc8/uKP4hnsUqOd8QD1FPpzXOXhHk9lMFx8YJVmClXHfP3R
+   /Jv5yU/MHj7jJ1Fu/e5KbJ1AJdYwsR7KV0Vdw4qJAPkBL4YUu9WKivNCj
+   kwh9adesBvJr5gyzk1+FdVN+9HvITdvl7byozjccaDTIp1PuwcRa2uuVM
+   7CaUO+5UQnOLE/RNnGAZe3FR3Iixd3S3WqIch0WFRoeFbUPdLk8Pv7FjR
+   w==;
+X-IronPort-AV: E=Sophos;i="5.88,386,1635177600"; 
+   d="scan'208";a="198419408"
+Received: from uls-op-cesaip02.wdc.com (HELO uls-op-cesaep02.wdc.com) ([199.255.45.15])
+  by ob1.hgst.iphmx.com with ESMTP; 22 Feb 2022 09:29:59 +0800
+IronPort-SDR: 9KiK8UW06quco6nxQtLGaNpIeJHha3/04PQRsqjyzNjlajbNe2EfrX5eflgzAeuRsvSPE+BdAk
+ zJMt7atHvdAs6P36ji++NvAljbh9UXqrFagIABKF6deF+rzIzHs3OsSJKduPYKm0MJYrUPE05D
+ 6M1skOODT5ko398pSBN9uGWB8JhuO3Vwvz8DB+UIV3RlEZaMRP1MN8w+1fqLkTfNZW4xsAzPa1
+ XqSa43XqFTQmLVrA1h/xpErJGhvPBwD+kNDIWS5T7ZVyh3ue3TyTaEcduVVGOzrQINMOcoEZ1B
+ yQuJq9NdtriNuhFbqVtFWGmc
+Received: from uls-op-cesaip02.wdc.com ([10.248.3.37])
+  by uls-op-cesaep02.wdc.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 21 Feb 2022 17:01:33 -0800
+IronPort-SDR: hP/NO1r0AXmpYAmOdVmDuk4md91+2huKGSssd3ZywihjXh5pebiz89MX3TFxdCJ6JGak0lFA9e
+ 4WuvzU993R6V725NLuc4ucCdksrijTLKmpDFOOk1hagtcH6hh0W77SHLAjNq9+QTjqKbeIIE/D
+ e2i0vXjZC5zPQsOGaoNL1GpVIlKXPdhbAKl2+DBz+o3XTuJ398Bc/SPyQiMxpf14Jr8mVIPoQP
+ 3nJY841nlgErkxQbAAX28Pqh0Of3LOPpwlyeJcdhoESnOSjoRET54p1tdUiq/SzaT3NtMcYcAq
+ xWI=
+WDCIronportException: Internal
+Received: from hlpbl13.ad.shared (HELO naota-xeon.wdc.com) ([10.225.55.32])
+  by uls-op-cesaip02.wdc.com with ESMTP; 21 Feb 2022 17:29:59 -0800
+From:   Naohiro Aota <naohiro.aota@wdc.com>
+To:     linux-block@vger.kernel.org, Jens Axboe <axboe@kernel.dk>
+Cc:     linux-doc@vger.kernel.org, Jonathan Corbet <corbet@lwn.net>,
+        Naohiro Aota <naohiro.aota@wdc.com>
+Subject: [PATCH] Documentation: block/diskstats: update function names
+Date:   Tue, 22 Feb 2022 10:27:51 +0900
+Message-Id: <20220222012751.1933194-1-naohiro.aota@wdc.com>
+X-Mailer: git-send-email 2.35.1
 MIME-Version: 1.0
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.11
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: kernel.org
-Content-Transfer-Encoding: 8BIT
-Content-Type: text/plain; charset=WINDOWS-1252
-X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_LOW,
-        RCVD_IN_MSPIKE_H2,SPF_HELO_NONE,SPF_SOFTFAIL,T_SCC_BODY_TEXT_LINE
-        autolearn=no autolearn_force=no version=3.4.6
+Content-Transfer-Encoding: 8bit
+X-Spam-Status: No, score=-4.4 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_MED,SPF_HELO_PASS,
+        SPF_NONE,T_SCC_BODY_TEXT_LINE autolearn=ham autolearn_force=no
+        version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-The hist: trigger generates a histogram in the file sys/event/hist.
-If the hist: trigger is used, automatically save the histogram output of
-the event sys:event in the sys_event_hist.txt file.
+__make_request() and end_that_request_last() do no longer exist. Replace
+them with the current call-site.
 
-Cc: Daniel Bristot de Oliveira <bristot@kernel.org>
-Cc: Steven Rostedt <rostedt@goodmis.org>
-Cc: Jonathan Corbet <corbet@lwn.net>
-Signed-off-by: Daniel Bristot de Oliveira <bristot@kernel.org>
+Signed-off-by: Naohiro Aota <naohiro.aota@wdc.com>
 ---
- Documentation/tools/rtla/common_options.rst | 10 +++-
- tools/tracing/rtla/src/trace.c              | 53 +++++++++++++++++++++
- 2 files changed, 62 insertions(+), 1 deletion(-)
+ Documentation/admin-guide/iostats.rst | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/Documentation/tools/rtla/common_options.rst b/Documentation/tools/rtla/common_options.rst
-index afd45bae821f..af76df6205d4 100644
---- a/Documentation/tools/rtla/common_options.rst
-+++ b/Documentation/tools/rtla/common_options.rst
-@@ -23,7 +23,15 @@
-         Filter the previous **-e** *sys:event* event with *<filter>*. For further information about event filtering see https://www.kernel.org/doc/html/latest/trace/events.html#event-filtering.
+diff --git a/Documentation/admin-guide/iostats.rst b/Documentation/admin-guide/iostats.rst
+index 9b14b0c2c9c4..609a3201fd4e 100644
+--- a/Documentation/admin-guide/iostats.rst
++++ b/Documentation/admin-guide/iostats.rst
+@@ -76,7 +76,7 @@ Field  3 -- # of sectors read (unsigned long)
  
- **--trigger** *<trigger>*
--        Enable a trace event trigger to the previous **-e** *sys:event*. For further information about event trigger see https://www.kernel.org/doc/html/latest/trace/events.html#event-triggers.
-+        Enable a trace event trigger to the previous **-e** *sys:event*.
-+        If the *hist:* trigger is activated, the output histogram will be automatically saved to a file named *system_event_hist.txt*.
-+        For example, the command:
-+
-+        rtla <command> <mode> -t -e osnoise:irq_noise --trigger="hist:key=desc,duration/1000:sort=desc,duration/1000:vals=hitcount"
-+
-+        Will automatically save the content of the histogram associated to *osnoise:irq_noise* event in *osnoise_irq_noise_hist.txt*.
-+
-+        For further information about event trigger see https://www.kernel.org/doc/html/latest/trace/events.html#event-triggers.
+ Field  4 -- # of milliseconds spent reading (unsigned int)
+     This is the total number of milliseconds spent by all reads (as
+-    measured from __make_request() to end_that_request_last()).
++    measured from blk_mq_alloc_request() to __blk_mq_end_request()).
  
- **-P**, **--priority** *o:prio|r:prio|f:prio|d:runtime:period*
+ Field  5 -- # of writes completed (unsigned long)
+     This is the total number of writes completed successfully.
+@@ -89,7 +89,7 @@ Field  7 -- # of sectors written (unsigned long)
  
-diff --git a/tools/tracing/rtla/src/trace.c b/tools/tracing/rtla/src/trace.c
-index ef44bab0c404..8249ec4d77cc 100644
---- a/tools/tracing/rtla/src/trace.c
-+++ b/tools/tracing/rtla/src/trace.c
-@@ -296,6 +296,57 @@ static void trace_event_disable_filter(struct trace_instance *instance,
- 			tevent->event ? : "*", tevent->filter);
- }
+ Field  8 -- # of milliseconds spent writing (unsigned int)
+     This is the total number of milliseconds spent by all writes (as
+-    measured from __make_request() to end_that_request_last()).
++    measured from blk_mq_alloc_request() to __blk_mq_end_request()).
  
-+/*
-+ * trace_event_save_hist - save the content of an event hist
-+ *
-+ * If the trigger is a hist: one, save the content of the hist file.
-+ */
-+static void trace_event_save_hist(struct trace_instance *instance,
-+				  struct trace_events *tevent)
-+{
-+	int retval, index, out_fd;
-+	mode_t mode = 0644;
-+	char path[1024];
-+	char *hist;
-+
-+	if (!tevent)
-+		return;
-+
-+	/* trigger enables hist */
-+	if (!tevent->trigger)
-+		return;
-+
-+	/* is this a hist: trigger? */
-+	retval = strncmp(tevent->trigger, "hist:", strlen("hist:"));
-+	if (retval)
-+		return;
-+
-+	snprintf(path, 1024, "%s_%s_hist.txt", tevent->system, tevent->event);
-+
-+	printf("  Saving event %s:%s hist to %s\n", tevent->system, tevent->event, path);
-+
-+	out_fd = creat(path, mode);
-+	if (out_fd < 0) {
-+		err_msg("  Failed to create %s output file\n", path);
-+		return;
-+	}
-+
-+	hist = tracefs_event_file_read(instance->inst, tevent->system, tevent->event, "hist", 0);
-+	if (!hist) {
-+		err_msg("  Failed to read %s:%s hist file\n", tevent->system, tevent->event);
-+		goto out_close;
-+	}
-+
-+	index = 0;
-+	do {
-+		index += write(out_fd, &hist[index], strlen(hist) - index);
-+	} while (index < strlen(hist));
-+
-+	free(hist);
-+out_close:
-+	close(out_fd);
-+}
-+
- /*
-  * trace_event_disable_trigger - disable an event trigger
-  */
-@@ -314,6 +365,8 @@ static void trace_event_disable_trigger(struct trace_instance *instance,
- 	debug_msg("Disabling %s:%s trigger %s\n", tevent->system,
- 		  tevent->event ? : "*", tevent->trigger);
+ Field  9 -- # of I/Os currently in progress (unsigned int)
+     The only field that should go to zero. Incremented as requests are
+@@ -120,7 +120,7 @@ Field 14 -- # of sectors discarded (unsigned long)
  
-+	trace_event_save_hist(instance, tevent);
-+
- 	snprintf(trigger, 1024, "!%s\n", tevent->trigger);
+ Field 15 -- # of milliseconds spent discarding (unsigned int)
+     This is the total number of milliseconds spent by all discards (as
+-    measured from __make_request() to end_that_request_last()).
++    measured from blk_mq_alloc_request() to __blk_mq_end_request()).
  
- 	retval = tracefs_event_file_write(instance->inst, tevent->system,
+ Field 16 -- # of flush requests completed
+     This is the total number of flush requests completed successfully.
 -- 
-2.34.1
+2.35.1
 
