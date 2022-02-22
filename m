@@ -2,337 +2,231 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id C67B94BF051
-	for <lists+linux-doc@lfdr.de>; Tue, 22 Feb 2022 05:10:20 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id B16F64BF0CD
+	for <lists+linux-doc@lfdr.de>; Tue, 22 Feb 2022 05:11:00 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S234431AbiBVDRV (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 21 Feb 2022 22:17:21 -0500
-Received: from mxb-00190b01.gslb.pphosted.com ([23.128.96.19]:36686 "EHLO
+        id S240067AbiBVDTN (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 21 Feb 2022 22:19:13 -0500
+Received: from mxb-00190b01.gslb.pphosted.com ([23.128.96.19]:43900 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S233394AbiBVDRU (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Mon, 21 Feb 2022 22:17:20 -0500
-Received: from mga11.intel.com (mga11.intel.com [192.55.52.93])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 88B95F73;
-        Mon, 21 Feb 2022 19:16:55 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1645499815; x=1677035815;
-  h=date:from:to:cc:subject:message-id:references:
-   mime-version:content-transfer-encoding:in-reply-to;
-  bh=Pb8e2G+GuH8BcVicwGHPqL0koQdXd5XV3os9pLa+pGY=;
-  b=c2J1p921pyeZq7W1ZJcTPPdvvyKMSa1NBjCgoO/728S7T9A76GxNiSZH
-   dSmurQNemHmoxUmDkbh0VPlw6WuV/e20MWlcCyE1EHJNkYKdjhtAKlv/R
-   9VZI5jU6ObyWkgXJyMRnHcAR2Gf74t0v1Bd7PPvsnqh67PQb0KnjBo9dM
-   2r7LGic3ntMO+Ze0mCRchlQ7IJonr5QxckhrXNFZ9TX6B/sqNxkoIx5gi
-   RnBZYR/UfEtvAgH/EDLLfMivN+rD/eDA5pQ7iIzy24WiALrBlXXOAr1Da
-   c+ROSkndjQRRfSJ3p9k5TVlmpZUh+EQE9uI6C65CdJokAyY6cS+GZQl3A
-   g==;
-X-IronPort-AV: E=McAfee;i="6200,9189,10265"; a="249181597"
-X-IronPort-AV: E=Sophos;i="5.88,387,1635231600"; 
-   d="scan'208";a="249181597"
-Received: from fmsmga001.fm.intel.com ([10.253.24.23])
-  by fmsmga102.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 21 Feb 2022 19:16:53 -0800
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.88,387,1635231600"; 
-   d="scan'208";a="683361065"
-Received: from lkp-server01.sh.intel.com (HELO da3212ac2f54) ([10.239.97.150])
-  by fmsmga001.fm.intel.com with ESMTP; 21 Feb 2022 19:16:49 -0800
-Received: from kbuild by da3212ac2f54 with local (Exim 4.92)
-        (envelope-from <lkp@intel.com>)
-        id 1nMLfV-0002Gw-5s; Tue, 22 Feb 2022 03:16:49 +0000
-Date:   Tue, 22 Feb 2022 11:16:32 +0800
-From:   kernel test robot <lkp@intel.com>
-To:     =?iso-8859-1?Q?Micka=EBl_Sala=FCn?= <mic@digikod.net>,
-        James Morris <jmorris@namei.org>,
-        "Serge E . Hallyn" <serge@hallyn.com>
-Cc:     llvm@lists.linux.dev, kbuild-all@lists.01.org,
-        =?iso-8859-1?Q?Micka=EBl_Sala=FCn?= <mic@digikod.net>,
-        Al Viro <viro@zeniv.linux.org.uk>,
-        Jann Horn <jannh@google.com>,
-        Kees Cook <keescook@chromium.org>,
-        Konstantin Meskhidze <konstantin.meskhidze@huawei.com>,
-        Paul Moore <paul@paul-moore.com>,
-        Shuah Khan <skhan@linuxfoundation.org>,
-        linux-doc@vger.kernel.org, linux-fsdevel@vger.kernel.org,
-        linux-kernel@vger.kernel.org, linux-security-module@vger.kernel.org
-Subject: Re: [PATCH v1 06/11] landlock: Add support for file reparenting with
- LANDLOCK_ACCESS_FS_REFER
-Message-ID: <202202221149.qLO9DEqo-lkp@intel.com>
-References: <20220221212522.320243-7-mic@digikod.net>
+        with ESMTP id S233775AbiBVDTN (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Mon, 21 Feb 2022 22:19:13 -0500
+Received: from smtp-out2.suse.de (smtp-out2.suse.de [195.135.220.29])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id A1552F73;
+        Mon, 21 Feb 2022 19:18:48 -0800 (PST)
+Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
+        (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+         key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
+        (No client certificate requested)
+        by smtp-out2.suse.de (Postfix) with ESMTPS id 562ED1F396;
+        Tue, 22 Feb 2022 03:18:47 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
+        t=1645499927; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+         mime-version:mime-version:content-type:content-type:
+         content-transfer-encoding:content-transfer-encoding:
+         in-reply-to:in-reply-to:references:references;
+        bh=j2iKmKfQAV47ltxyUTpJL5kF151jPpkpJZBMxZj0hPA=;
+        b=0+g51AMGEI3r9A8ASMpz3wY3CyKSJDeDWn0AKqsQTwh9NMem16Yu3oX327mnvhNj8U+DA9
+        33oY/yjrsDIe2YUWn2bZG7jQOA+4FUB3X9JdnoOXaU38SgqeQ9WEuMqtv61aD05pH60kr9
+        62rxLcOCo92AZ73iiwrb3gpP+RZqT9c=
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
+        s=susede2_ed25519; t=1645499927;
+        h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+         mime-version:mime-version:content-type:content-type:
+         content-transfer-encoding:content-transfer-encoding:
+         in-reply-to:in-reply-to:references:references;
+        bh=j2iKmKfQAV47ltxyUTpJL5kF151jPpkpJZBMxZj0hPA=;
+        b=RQ5ZNUEdexnmqLSqD8rTQIgSPwQRUQeUCQajOzdhoZRnXzxb5C8Ud6kKPvOlourkGfZFR4
+        QB7vKbrUxbKosNBQ==
+Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
+        (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+         key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
+        (No client certificate requested)
+        by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id A183013BA7;
+        Tue, 22 Feb 2022 03:18:36 +0000 (UTC)
+Received: from dovecot-director2.suse.de ([192.168.254.65])
+        by imap2.suse-dmz.suse.de with ESMTPSA
+        id Pv19FwxWFGKWWgAAMHmgww
+        (envelope-from <neilb@suse.de>); Tue, 22 Feb 2022 03:18:36 +0000
+Subject: [PATCH 04/11] fuse: remove reliance on bdi congestion
+From:   NeilBrown <neilb@suse.de>
+To:     Andrew Morton <akpm@linux-foundation.org>, Jan Kara <jack@suse.cz>,
+        Wu Fengguang <fengguang.wu@intel.com>,
+        Jaegeuk Kim <jaegeuk@kernel.org>, Chao Yu <chao@kernel.org>,
+        Jeff Layton <jlayton@kernel.org>,
+        Ilya Dryomov <idryomov@gmail.com>,
+        Miklos Szeredi <miklos@szeredi.hu>,
+        Trond Myklebust <trond.myklebust@hammerspace.com>,
+        Anna Schumaker <anna.schumaker@netapp.com>,
+        Ryusuke Konishi <konishi.ryusuke@gmail.com>,
+        "Darrick J. Wong" <djwong@kernel.org>,
+        Philipp Reisner <philipp.reisner@linbit.com>,
+        Lars Ellenberg <lars.ellenberg@linbit.com>,
+        Paolo Valente <paolo.valente@linaro.org>,
+        Jens Axboe <axboe@kernel.dk>
+Cc:     linux-doc@vger.kernel.org, linux-mm@kvack.org,
+        linux-nilfs@vger.kernel.org, linux-nfs@vger.kernel.org,
+        linux-fsdevel@vger.kernel.org,
+        linux-f2fs-devel@lists.sourceforge.net, linux-ext4@vger.kernel.org,
+        ceph-devel@vger.kernel.org, drbd-dev@lists.linbit.com,
+        linux-kernel@vger.kernel.org
+Date:   Tue, 22 Feb 2022 14:17:17 +1100
+Message-ID: <164549983737.9187.2627117501000365074.stgit@noble.brown>
+In-Reply-To: <164549971112.9187.16871723439770288255.stgit@noble.brown>
+References: <164549971112.9187.16871723439770288255.stgit@noble.brown>
+User-Agent: StGit/0.23
 MIME-Version: 1.0
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <20220221212522.320243-7-mic@digikod.net>
-User-Agent: Mutt/1.10.1 (2018-07-13)
-X-Spam-Status: No, score=-7.1 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_HI,
-        RCVD_IN_MSPIKE_H2,SPF_HELO_NONE,SPF_NONE,T_SCC_BODY_TEXT_LINE
-        autolearn=ham autolearn_force=no version=3.4.6
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-Spam-Status: No, score=-4.4 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_MED,SPF_HELO_NONE,
+        SPF_PASS,T_SCC_BODY_TEXT_LINE autolearn=ham autolearn_force=no
+        version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Hi "Mickaël,
+The bdi congestion tracking in not widely used and will be removed.
 
-I love your patch! Yet something to improve:
+Fuse is one of a small number of filesystems that uses it, setting both
+the sync (read) and async (write) congestion flags at what it determines
+are appropriate times.
 
-[auto build test ERROR on cfb92440ee71adcc2105b0890bb01ac3cddb8507]
+The only remaining effect of the sync flag is to cause read-ahead to be
+skipped.
+The only remaining effect of the async flag is to cause (some)
+WB_SYNC_NONE writes to be skipped.
 
-url:    https://github.com/0day-ci/linux/commits/Micka-l-Sala-n/Landlock-file-linking-and-renaming-support/20220222-051842
-base:   cfb92440ee71adcc2105b0890bb01ac3cddb8507
-config: hexagon-randconfig-r002-20220221 (https://download.01.org/0day-ci/archive/20220222/202202221149.qLO9DEqo-lkp@intel.com/config)
-compiler: clang version 15.0.0 (https://github.com/llvm/llvm-project d271fc04d5b97b12e6b797c6067d3c96a8d7470e)
-reproduce (this is a W=1 build):
-        wget https://raw.githubusercontent.com/intel/lkp-tests/master/sbin/make.cross -O ~/bin/make.cross
-        chmod +x ~/bin/make.cross
-        # https://github.com/0day-ci/linux/commit/c68b879f54d6262963d435a18cedbc238b7faeaf
-        git remote add linux-review https://github.com/0day-ci/linux
-        git fetch --no-tags linux-review Micka-l-Sala-n/Landlock-file-linking-and-renaming-support/20220222-051842
-        git checkout c68b879f54d6262963d435a18cedbc238b7faeaf
-        # save the config file to linux build tree
-        mkdir build_dir
-        COMPILER_INSTALL_PATH=$HOME/0day COMPILER=clang make.cross W=1 O=build_dir ARCH=hexagon SHELL=/bin/bash
+So instead of setting the flags, change:
+ - .readahead to stop when it has submitted all non-async pages
+    for read.
+ - .writepages to do nothing if WB_SYNC_NONE and the flag would be set
+ - .writepage to return AOP_WRITEPAGE_ACTIVATE if WB_SYNC_NONE
+    and the flag would be set.
 
-If you fix the issue, kindly add following tag as appropriate
-Reported-by: kernel test robot <lkp@intel.com>
+The writepages change causes a behavioural change in that pageout() can
+now return PAGE_ACTIVATE instead of PAGE_KEEP, so SetPageActive() will
+be called on the page which (I think) will further delay the next attempt
+at writeout.  This might be a good thing.
 
-All errors (new ones prefixed by >>):
-
->> security/landlock/fs.c:463:2: error: call to __compiletime_assert_228 declared with 'error' attribute: BUILD_BUG_ON failed: !layer_masks_dst_parent
-           BUILD_BUG_ON(!layer_masks_dst_parent);
-           ^
-   include/linux/build_bug.h:50:2: note: expanded from macro 'BUILD_BUG_ON'
-           BUILD_BUG_ON_MSG(condition, "BUILD_BUG_ON failed: " #condition)
-           ^
-   include/linux/build_bug.h:39:37: note: expanded from macro 'BUILD_BUG_ON_MSG'
-   #define BUILD_BUG_ON_MSG(cond, msg) compiletime_assert(!(cond), msg)
-                                       ^
-   include/linux/compiler_types.h:346:2: note: expanded from macro 'compiletime_assert'
-           _compiletime_assert(condition, msg, __compiletime_assert_, __COUNTER__)
-           ^
-   include/linux/compiler_types.h:334:2: note: expanded from macro '_compiletime_assert'
-           __compiletime_assert(condition, msg, prefix, suffix)
-           ^
-   include/linux/compiler_types.h:327:4: note: expanded from macro '__compiletime_assert'
-                           prefix ## suffix();                             \
-                           ^
-   <scratch space>:170:1: note: expanded from here
-   __compiletime_assert_228
-   ^
->> security/landlock/fs.c:670:2: error: call to __compiletime_assert_229 declared with 'error' attribute: BUILD_BUG_ON failed: !layer_masks_dom
-           BUILD_BUG_ON(!layer_masks_dom);
-           ^
-   include/linux/build_bug.h:50:2: note: expanded from macro 'BUILD_BUG_ON'
-           BUILD_BUG_ON_MSG(condition, "BUILD_BUG_ON failed: " #condition)
-           ^
-   include/linux/build_bug.h:39:37: note: expanded from macro 'BUILD_BUG_ON_MSG'
-   #define BUILD_BUG_ON_MSG(cond, msg) compiletime_assert(!(cond), msg)
-                                       ^
-   include/linux/compiler_types.h:346:2: note: expanded from macro 'compiletime_assert'
-           _compiletime_assert(condition, msg, __compiletime_assert_, __COUNTER__)
-           ^
-   include/linux/compiler_types.h:334:2: note: expanded from macro '_compiletime_assert'
-           __compiletime_assert(condition, msg, prefix, suffix)
-           ^
-   include/linux/compiler_types.h:327:4: note: expanded from macro '__compiletime_assert'
-                           prefix ## suffix();                             \
-                           ^
-   <scratch space>:174:1: note: expanded from here
-   __compiletime_assert_229
-   ^
-   2 errors generated.
-
-
-vim +/error +463 security/landlock/fs.c
-
-   401	
-   402	/**
-   403	 * check_access_path_dual - Check a source and a destination accesses
-   404	 *
-   405	 * @domain: Domain to check against.
-   406	 * @path: File hierarchy to walk through.
-   407	 * @child_is_directory: Must be set to true if the (original) leaf is a
-   408	 *     directory, false otherwise.
-   409	 * @access_request_dst_parent: Accesses to check, once @layer_masks_dst_parent
-   410	 *     is equal to @layer_masks_src_parent (if any).
-   411	 * @layer_masks_dst_parent: Pointer to a matrix of layer masks per access
-   412	 *     masks, identifying the layers that forbid a specific access.  Bits from
-   413	 *     this matrix can be unset according to the @path walk.  An empty matrix
-   414	 *     means that @domain allows all possible Landlock accesses (i.e. not only
-   415	 *     those identified by @access_request_dst_parent).  This matrix can
-   416	 *     initially refer to domain layer masks and, when the accesses for the
-   417	 *     destination and source are the same, to request layer masks.
-   418	 * @access_request_src_parent: Similar to @access_request_dst_parent but for an
-   419	 *     initial source path request.  Only taken into account if
-   420	 *     @layer_masks_src_parent is not NULL.
-   421	 * @layer_masks_src_parent: Similar to @layer_masks_dst_parent but for an
-   422	 *     initial source path walk.  This can be NULL if only dealing with a
-   423	 *     destination access request (i.e. not a rename nor a link action).
-   424	 * @layer_masks_child: Similar to @layer_masks_src_parent but only for the
-   425	 *     linked or renamed inode (without hierarchy).  This is only used if
-   426	 *     @layer_masks_src_parent is not NULL.
-   427	 *
-   428	 * This helper first checks that the destination has a superset of restrictions
-   429	 * compared to the source (if any) for a common path.  It then checks that the
-   430	 * collected accesses and the remaining ones are enough to allow the request.
-   431	 *
-   432	 * Returns:
-   433	 * - 0 if the access request is granted;
-   434	 * - -EACCES if it is denied because of access right other than
-   435	 *   LANDLOCK_ACCESS_FS_REFER;
-   436	 * - -EXDEV if the renaming or linking would be a privileged escalation
-   437	 *   (according to each layered policies), or if LANDLOCK_ACCESS_FS_REFER is
-   438	 *   not allowed by the source or the destination.
-   439	 */
-   440	static int check_access_path_dual(const struct landlock_ruleset *const domain,
-   441			const struct path *const path,
-   442			bool child_is_directory,
-   443			const access_mask_t access_request_dst_parent,
-   444			layer_mask_t (*const
-   445				layer_masks_dst_parent)[LANDLOCK_NUM_ACCESS_FS],
-   446			const access_mask_t access_request_src_parent,
-   447			layer_mask_t (*layer_masks_src_parent)[LANDLOCK_NUM_ACCESS_FS],
-   448			layer_mask_t (*layer_masks_child)[LANDLOCK_NUM_ACCESS_FS])
-   449	{
-   450		bool allowed_dst_parent = false, allowed_src_parent = false, is_dom_check;
-   451		struct path walker_path;
-   452		access_mask_t access_masked_dst_parent, access_masked_src_parent;
-   453	
-   454		if (!access_request_dst_parent && !access_request_src_parent)
-   455			return 0;
-   456		if (WARN_ON_ONCE(!domain || !path))
-   457			return 0;
-   458		if (is_nouser_or_private(path->dentry))
-   459			return 0;
-   460		if (WARN_ON_ONCE(domain->num_layers < 1))
-   461			return -EACCES;
-   462	
- > 463		BUILD_BUG_ON(!layer_masks_dst_parent);
-   464		if (layer_masks_src_parent) {
-   465			if (WARN_ON_ONCE(!layer_masks_child))
-   466				return -EACCES;
-   467			access_masked_dst_parent = access_masked_src_parent =
-   468				get_handled_accesses(domain);
-   469			is_dom_check = true;
-   470		} else {
-   471			if (WARN_ON_ONCE(layer_masks_child))
-   472				return -EACCES;
-   473			access_masked_dst_parent = access_request_dst_parent;
-   474			access_masked_src_parent = access_request_src_parent;
-   475			is_dom_check = false;
-   476		}
-   477	
-   478		walker_path = *path;
-   479		path_get(&walker_path);
-   480		/*
-   481		 * We need to walk through all the hierarchy to not miss any relevant
-   482		 * restriction.
-   483		 */
-   484		while (true) {
-   485			struct dentry *parent_dentry;
-   486			const struct landlock_rule *rule;
-   487	
-   488			/*
-   489			 * If at least all accesses allowed on the destination are
-   490			 * already allowed on the source, respectively if there is at
-   491			 * least as much as restrictions on the destination than on the
-   492			 * source, then we can safely refer files from the source to
-   493			 * the destination without risking a privilege escalation.
-   494			 * This is crucial for standalone multilayered security
-   495			 * policies.  Furthermore, this helps avoid policy writers to
-   496			 * shoot themselves in the foot.
-   497			 */
-   498			if (is_dom_check && is_superset(child_is_directory,
-   499						layer_masks_dst_parent,
-   500						layer_masks_src_parent,
-   501						layer_masks_child)) {
-   502				allowed_dst_parent =
-   503					scope_to_request(access_request_dst_parent,
-   504							layer_masks_dst_parent);
-   505				allowed_src_parent =
-   506					scope_to_request(access_request_src_parent,
-   507							layer_masks_src_parent);
-   508	
-   509				/* Stops when all accesses are granted. */
-   510				if (allowed_dst_parent && allowed_src_parent)
-   511					break;
-   512	
-   513				/*
-   514				 * Downgrades checks from domain handled accesses to
-   515				 * requested accesses.
-   516				 */
-   517				is_dom_check = false;
-   518				access_masked_dst_parent = access_request_dst_parent;
-   519				access_masked_src_parent = access_request_src_parent;
-   520			}
-   521	
-   522			rule = find_rule(domain, walker_path.dentry);
-   523			allowed_dst_parent = unmask_layers(rule, access_masked_dst_parent,
-   524					layer_masks_dst_parent);
-   525			allowed_src_parent = unmask_layers(rule, access_masked_src_parent,
-   526					layer_masks_src_parent);
-   527	
-   528			/* Stops when a rule from each layer grants access. */
-   529			if (allowed_dst_parent && allowed_src_parent)
-   530				break;
-   531	
-   532	jump_up:
-   533			if (walker_path.dentry == walker_path.mnt->mnt_root) {
-   534				if (follow_up(&walker_path)) {
-   535					/* Ignores hidden mount points. */
-   536					goto jump_up;
-   537				} else {
-   538					/*
-   539					 * Stops at the real root.  Denies access
-   540					 * because not all layers have granted access.
-   541					 */
-   542					allowed_dst_parent = false;
-   543					break;
-   544				}
-   545			}
-   546			if (unlikely(IS_ROOT(walker_path.dentry))) {
-   547				/*
-   548				 * Stops at disconnected root directories.  Only allows
-   549				 * access to internal filesystems (e.g. nsfs, which is
-   550				 * reachable through /proc/<pid>/ns/<namespace>).
-   551				 */
-   552				allowed_dst_parent = !!(walker_path.mnt->mnt_flags &
-   553						MNT_INTERNAL);
-   554				break;
-   555			}
-   556			parent_dentry = dget_parent(walker_path.dentry);
-   557			dput(walker_path.dentry);
-   558			walker_path.dentry = parent_dentry;
-   559		}
-   560		path_put(&walker_path);
-   561	
-   562		if (allowed_dst_parent && allowed_src_parent)
-   563			return 0;
-   564	
-   565		/*
-   566		 * Unfortunately, we cannot prioritize EACCES over EXDEV for all
-   567		 * RENAME_EXCHANGE cases because it depends on the source and
-   568		 * destination order.  This could be changed with a new
-   569		 * security_path_rename hook implementation.
-   570		 */
-   571		if (likely(is_eacces(layer_masks_dst_parent, access_request_dst_parent)
-   572					|| is_eacces(layer_masks_src_parent,
-   573						access_request_src_parent)))
-   574			return -EACCES;
-   575	
-   576		/*
-   577		 * Gracefully forbids reparenting if the destination directory
-   578		 * hierarchy is not a superset of restrictions of the source directory
-   579		 * hierarchy, or if LANDLOCK_ACCESS_FS_REFER is not allowed by the
-   580		 * source or the destination.
-   581		 */
-   582		return -EXDEV;
-   583	}
-   584	
-
+Signed-off-by: NeilBrown <neilb@suse.de>
 ---
-0-DAY CI Kernel Test Service, Intel Corporation
-https://lists.01.org/hyperkitty/list/kbuild-all@lists.01.org
+ fs/fuse/control.c |   17 -----------------
+ fs/fuse/dev.c     |    8 --------
+ fs/fuse/file.c    |   17 +++++++++++++++++
+ 3 files changed, 17 insertions(+), 25 deletions(-)
+
+diff --git a/fs/fuse/control.c b/fs/fuse/control.c
+index 000d2e5627e9..7cede9a3bc96 100644
+--- a/fs/fuse/control.c
++++ b/fs/fuse/control.c
+@@ -164,7 +164,6 @@ static ssize_t fuse_conn_congestion_threshold_write(struct file *file,
+ {
+ 	unsigned val;
+ 	struct fuse_conn *fc;
+-	struct fuse_mount *fm;
+ 	ssize_t ret;
+ 
+ 	ret = fuse_conn_limit_write(file, buf, count, ppos, &val,
+@@ -178,22 +177,6 @@ static ssize_t fuse_conn_congestion_threshold_write(struct file *file,
+ 	down_read(&fc->killsb);
+ 	spin_lock(&fc->bg_lock);
+ 	fc->congestion_threshold = val;
+-
+-	/*
+-	 * Get any fuse_mount belonging to this fuse_conn; s_bdi is
+-	 * shared between all of them
+-	 */
+-
+-	if (!list_empty(&fc->mounts)) {
+-		fm = list_first_entry(&fc->mounts, struct fuse_mount, fc_entry);
+-		if (fc->num_background < fc->congestion_threshold) {
+-			clear_bdi_congested(fm->sb->s_bdi, BLK_RW_SYNC);
+-			clear_bdi_congested(fm->sb->s_bdi, BLK_RW_ASYNC);
+-		} else {
+-			set_bdi_congested(fm->sb->s_bdi, BLK_RW_SYNC);
+-			set_bdi_congested(fm->sb->s_bdi, BLK_RW_ASYNC);
+-		}
+-	}
+ 	spin_unlock(&fc->bg_lock);
+ 	up_read(&fc->killsb);
+ 	fuse_conn_put(fc);
+diff --git a/fs/fuse/dev.c b/fs/fuse/dev.c
+index cd54a529460d..e1b4a846c90d 100644
+--- a/fs/fuse/dev.c
++++ b/fs/fuse/dev.c
+@@ -315,10 +315,6 @@ void fuse_request_end(struct fuse_req *req)
+ 				wake_up(&fc->blocked_waitq);
+ 		}
+ 
+-		if (fc->num_background == fc->congestion_threshold && fm->sb) {
+-			clear_bdi_congested(fm->sb->s_bdi, BLK_RW_SYNC);
+-			clear_bdi_congested(fm->sb->s_bdi, BLK_RW_ASYNC);
+-		}
+ 		fc->num_background--;
+ 		fc->active_background--;
+ 		flush_bg_queue(fc);
+@@ -540,10 +536,6 @@ static bool fuse_request_queue_background(struct fuse_req *req)
+ 		fc->num_background++;
+ 		if (fc->num_background == fc->max_background)
+ 			fc->blocked = 1;
+-		if (fc->num_background == fc->congestion_threshold && fm->sb) {
+-			set_bdi_congested(fm->sb->s_bdi, BLK_RW_SYNC);
+-			set_bdi_congested(fm->sb->s_bdi, BLK_RW_ASYNC);
+-		}
+ 		list_add_tail(&req->list, &fc->bg_queue);
+ 		flush_bg_queue(fc);
+ 		queued = true;
+diff --git a/fs/fuse/file.c b/fs/fuse/file.c
+index 829094451774..94747bac3489 100644
+--- a/fs/fuse/file.c
++++ b/fs/fuse/file.c
+@@ -966,6 +966,14 @@ static void fuse_readahead(struct readahead_control *rac)
+ 		struct fuse_io_args *ia;
+ 		struct fuse_args_pages *ap;
+ 
++		if (fc->num_background >= fc->congestion_threshold &&
++		    rac->ra->async_size >= readahead_count(rac))
++			/*
++			 * Congested and only async pages left, so skip the
++			 * rest.
++			 */
++			break;
++
+ 		nr_pages = readahead_count(rac) - nr_pages;
+ 		if (nr_pages > max_pages)
+ 			nr_pages = max_pages;
+@@ -1958,6 +1966,7 @@ static int fuse_writepage_locked(struct page *page)
+ 
+ static int fuse_writepage(struct page *page, struct writeback_control *wbc)
+ {
++	struct fuse_conn *fc = get_fuse_conn(page->mapping->host);
+ 	int err;
+ 
+ 	if (fuse_page_is_writeback(page->mapping->host, page->index)) {
+@@ -1973,6 +1982,10 @@ static int fuse_writepage(struct page *page, struct writeback_control *wbc)
+ 		return 0;
+ 	}
+ 
++	if (wbc->sync_mode == WB_SYNC_NONE &&
++	    fc->num_background >= fc->congestion_threshold)
++		return AOP_WRITEPAGE_ACTIVATE;
++
+ 	err = fuse_writepage_locked(page);
+ 	unlock_page(page);
+ 
+@@ -2226,6 +2239,10 @@ static int fuse_writepages(struct address_space *mapping,
+ 	if (fuse_is_bad(inode))
+ 		goto out;
+ 
++	if (wbc->sync_mode == WB_SYNC_NONE &&
++	    fc->num_background >= fc->congestion_threshold)
++		return 0;
++
+ 	data.inode = inode;
+ 	data.wpa = NULL;
+ 	data.ff = NULL;
+
+
