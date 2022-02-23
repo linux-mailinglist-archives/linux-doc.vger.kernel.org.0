@@ -2,70 +2,73 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 288104C1581
-	for <lists+linux-doc@lfdr.de>; Wed, 23 Feb 2022 15:36:54 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 612F54C15CC
+	for <lists+linux-doc@lfdr.de>; Wed, 23 Feb 2022 15:51:47 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S241636AbiBWOhT (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 23 Feb 2022 09:37:19 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:53622 "EHLO
+        id S237004AbiBWOwM (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 23 Feb 2022 09:52:12 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:43838 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S241635AbiBWOhR (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Wed, 23 Feb 2022 09:37:17 -0500
-Received: from ms.lwn.net (ms.lwn.net [IPv6:2600:3c01:e000:3a1::42])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id CB40B3ED09;
-        Wed, 23 Feb 2022 06:36:48 -0800 (PST)
-Received: from localhost (unknown [IPv6:2601:281:8300:104d::5f6])
-        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
-        (No client certificate requested)
-        by ms.lwn.net (Postfix) with ESMTPSA id C87302AE;
-        Wed, 23 Feb 2022 14:36:47 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 ms.lwn.net C87302AE
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=lwn.net; s=20201203;
-        t=1645627007; bh=4p6KEbofRbMYhdOb2vatXNsLo3CH5ucyHVIfnyIPNIw=;
-        h=From:To:Cc:Subject:In-Reply-To:References:Date:From;
-        b=C6QPLhKkYGWfNEKPTdWWALp/Etvi5fadDYV4Pip5To1tzugylg9g2WjaXnXxzpDD5
-         2wrkyE3/JcjJpQ7vaG3Z5R1y/7gau0kGrvp3NsPGvgWFwK1gyEsEfl8wIbybHzR4+m
-         sTIAdplIg4U1FUh1skr5y8Prtur74w3UClWgAbB17d/sf3f65qDLahBXEtDLJBH/dh
-         87yztfdAL9KAzC0XX9OmFAlN2zpIcnZULWczZcLdQ0qIUdHoSJ+t8sNTmwpfEkxeJF
-         Ir4q6QxsbRgUlhiEKxJrmBfZflCt4YJZJjk5vC5P9tmPnAGsmdgKodbebSsaP822hC
-         Xlc2wLwZZ/e8w==
-From:   Jonathan Corbet <corbet@lwn.net>
-To:     Tomasz =?utf-8?B?V2FybmllxYLFgm8=?= <tomasz.warniello@gmail.com>,
-        Akira Yokosawa <akiyks@gmail.com>
-Cc:     Randy Dunlap <rdunlap@infradead.org>, linux-doc@vger.kernel.org,
-        linux-kernel@vger.kernel.org
-Subject: Re: [PATCH] scripts: kernel-doc: Check existence of FILE arg
-In-Reply-To: <20220223151702.55a3a7a5@fuji.fritz.box>
-References: <1c71e5d2-f87e-6c8e-6176-e5ce42e4d41b@gmail.com>
- <20220223144713.6e2284e3@fuji.fritz.box>
- <721f860a-a662-0f0c-a82d-eacf80841eb3@gmail.com>
- <20220223151702.55a3a7a5@fuji.fritz.box>
-Date:   Wed, 23 Feb 2022 07:36:47 -0700
-Message-ID: <87tucpr6o0.fsf@meer.lwn.net>
+        with ESMTP id S234521AbiBWOwK (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Wed, 23 Feb 2022 09:52:10 -0500
+Received: from mail-ed1-x52f.google.com (mail-ed1-x52f.google.com [IPv6:2a00:1450:4864:20::52f])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id E399145ADC
+        for <linux-doc@vger.kernel.org>; Wed, 23 Feb 2022 06:51:41 -0800 (PST)
+Received: by mail-ed1-x52f.google.com with SMTP id bq11so23294199edb.2
+        for <linux-doc@vger.kernel.org>; Wed, 23 Feb 2022 06:51:41 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112;
+        h=mime-version:reply-to:from:date:message-id:subject:to;
+        bh=/rL+TycpMQLfB5P4Zn9xgGfUWg8yPCNTwrE46ZNldMM=;
+        b=cc9MqNMmRPnGn2jNc7Pps65gjZID7Zsj838zurhiU3RpQ1hviS1Qors8acteYzwE5/
+         sVQwm1RhW2p+0lMpwc5138aCJ/arkBRgNuZBItqX1cnCV/GFT/FbQ5RTe3eLuCJ5azwJ
+         gl3USkY/oQB+r24UyVHZ8stpxvVQ1hBfcAdZQPnIHanPjKglDWzr4Y1vv7oe1rPGCHhy
+         +P4ZoUECS72mNSazRKgGfLzksQPQ3hianGB5AXc4ezEtcBjS/cN5rkCLFMZ+puHBaSSc
+         QDPhuheObzxnfuXhgvo8vp+5oZkoU6x8Baa6GCVNkJm1Ufnro5ut3sibAj1A/EMo29tK
+         19Vw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:mime-version:reply-to:from:date:message-id
+         :subject:to;
+        bh=/rL+TycpMQLfB5P4Zn9xgGfUWg8yPCNTwrE46ZNldMM=;
+        b=XxYKSermOceNE5+pzgLkG/DtwcZg4idLHRVS28vqYEYBIECMGM0iSMC78DjKj2dXIy
+         QiFhs9R4+66KXE9L8gSMlLD2yygidLsSi0sQ6Cg8SjLZd4qTQsug65IPi/a+e9m7gZET
+         A4TUAPO4YDSPaSJcS65IKn+rUVdC+i8cwVGDXRPY+5W9CQ/AL3b+ylPfXaYyKdHPg+uB
+         ULJAKupcKn8sYbWl+4ovBR29NNKq2sxv9uB99VPHZZWiUrybY66LOJpK7Z7Q9K5TqCQo
+         Pd4zODSOD1OoZrAA2Tc5NZHU2BGoMy39XtLvTJjKSz77UlenhFnpz/Cq70lHQkwN1ju2
+         yuDA==
+X-Gm-Message-State: AOAM5312D+yvMRwEBwZaWLzdPOy5PQyMMuncO9Eb+k3JGesg5Jv2fHvE
+        +8PPA8zRj7qTiAfeaj4EmFSISR6Y/PcCF3EZA6Y=
+X-Google-Smtp-Source: ABdhPJy9kNKhy0W1vTVANhBanBxz+2ZuiOK/eQxSbnYvSVYEvhXrniitLscasACW5Y3sEwASSotEBIFuXLTDoStFezc=
+X-Received: by 2002:a50:c30a:0:b0:413:2ddb:b75 with SMTP id
+ a10-20020a50c30a000000b004132ddb0b75mr4709337edb.19.1645627900098; Wed, 23
+ Feb 2022 06:51:40 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-X-Spam-Status: No, score=-2.1 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,SPF_HELO_NONE,SPF_PASS,
-        T_SCC_BODY_TEXT_LINE autolearn=ham autolearn_force=no version=3.4.6
+Received: by 2002:a05:6402:440d:0:0:0:0 with HTTP; Wed, 23 Feb 2022 06:51:39
+ -0800 (PST)
+Reply-To: avamedicinemed3@gmail.com
+From:   Dr Ava Smith <tracywilliamusa@gmail.com>
+Date:   Wed, 23 Feb 2022 06:51:39 -0800
+Message-ID: <CAKU4NYmg4qt-Uk4ovetvcH3FDAYsfw2wiY-r5h_kjke_yz-Vdg@mail.gmail.com>
+Subject: From Dr Ava Smith from United States
+To:     undisclosed-recipients:;
+Content-Type: text/plain; charset="UTF-8"
+X-Spam-Status: No, score=4.0 required=5.0 tests=BAYES_05,DKIM_SIGNED,
+        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_FROM,FREEMAIL_REPLYTO,
+        FREEMAIL_REPLYTO_END_DIGIT,RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,SPF_PASS,
+        T_SCC_BODY_TEXT_LINE,UNDISC_FREEM autolearn=no autolearn_force=no
+        version=3.4.6
+X-Spam-Level: ****
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Tomasz Warnie=C5=82=C5=82o <tomasz.warniello@gmail.com> writes:
-
-> But I'm not sure this is the right moment to do this. Have you seen
-> my RFC thread? I'd wait until the water stabilises and see the result.
-> This script may be phased out - how soon, I don't know. Unless you want
-> to do this purely for sport.
-
-Unless somebody steps up to do the work, I don't see that phasing out
-happening any time really soon.  I know I'll not be able to find the
-time to take on a project like that...so I certainly wouldn't be turning
-away improvements to the current script on that basis.
-
-Thanks,
-
-jon
+-- 
+Hello Dear,
+how are you today?hope you are fine
+My name is Dr Ava Smith ,Am an English and French nationalities.
+I will give you pictures and more details about me as soon as i hear from you
+Thanks
+Ava
