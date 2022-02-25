@@ -2,200 +2,160 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 5E4F64C3C3B
-	for <lists+linux-doc@lfdr.de>; Fri, 25 Feb 2022 04:15:16 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 819E44C3E4F
+	for <lists+linux-doc@lfdr.de>; Fri, 25 Feb 2022 07:17:36 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S236963AbiBYDOS (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 24 Feb 2022 22:14:18 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:42834 "EHLO
+        id S237473AbiBYGRz (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Fri, 25 Feb 2022 01:17:55 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:43462 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S236965AbiBYDN7 (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Thu, 24 Feb 2022 22:13:59 -0500
-Received: from mga14.intel.com (mga14.intel.com [192.55.52.115])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 510127DA98;
-        Thu, 24 Feb 2022 19:13:27 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1645758807; x=1677294807;
-  h=from:to:cc:subject:date:message-id:in-reply-to:
-   references:mime-version:content-transfer-encoding;
-  bh=rH1pJ8ne/FKJWQirIoIp2z6yrhy7FoypqadKznLIPjE=;
-  b=e6zD/M8itgBK6qi1uesdav5jgzgmaVetyzpgPx0Zx32fsan74oOMRFc4
-   /EMw+D0u5bjOHtufoBjkXm+PMotx1emL/daN7Y/HJ7hPpP5Z0Rd4dwEck
-   foYCcOdgFVSvRqTWqlWfcYRSfl7+5yNxE6bWaiKwVnhBd8LAALHDsmYmp
-   hrOFR7K1g/4pV4wIOxNNsF5A+uBUswzH3RxcrcOK7kgJCa9b2MwdEI56Q
-   /uM0H4vpmYh3khClb7zVJkAEnoI/fz4U2xf2O20oGEQXnpVRNpXs2BFXV
-   ZqYjch9SYhuWrDC05Rq/WEbYPs0iotWT50XJ66vNPO1VxBk7r6NE6Hmw6
-   A==;
-X-IronPort-AV: E=McAfee;i="6200,9189,10268"; a="252603002"
-X-IronPort-AV: E=Sophos;i="5.90,135,1643702400"; 
-   d="scan'208";a="252603002"
-Received: from fmsmga001.fm.intel.com ([10.253.24.23])
-  by fmsmga103.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 24 Feb 2022 19:13:27 -0800
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.90,135,1643702400"; 
-   d="scan'208";a="684512515"
-Received: from unknown (HELO localhost.localdomain.sh.intel.com) ([10.238.175.107])
-  by fmsmga001.fm.intel.com with ESMTP; 24 Feb 2022 19:13:24 -0800
-From:   Tianfei zhang <tianfei.zhang@intel.com>
-To:     hao.wu@intel.com, trix@redhat.com, mdf@kernel.org,
-        yilun.xu@intel.com, linux-fpga@vger.kernel.org,
-        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org
-Cc:     corbet@lwn.net, Tianfei zhang <tianfei.zhang@intel.com>
-Subject: [PATCH v2 5/5] Documentation: fpga: dfl: add description of IOFS
-Date:   Thu, 24 Feb 2022 22:10:02 -0500
-Message-Id: <20220225031002.261264-6-tianfei.zhang@intel.com>
-X-Mailer: git-send-email 2.26.2
-In-Reply-To: <20220225031002.261264-1-tianfei.zhang@intel.com>
-References: <20220225031002.261264-1-tianfei.zhang@intel.com>
+        with ESMTP id S236480AbiBYGRy (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Fri, 25 Feb 2022 01:17:54 -0500
+Received: from mail-il1-x134.google.com (mail-il1-x134.google.com [IPv6:2607:f8b0:4864:20::134])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 805C3194167
+        for <linux-doc@vger.kernel.org>; Thu, 24 Feb 2022 22:17:22 -0800 (PST)
+Received: by mail-il1-x134.google.com with SMTP id d7so3557390ilf.8
+        for <linux-doc@vger.kernel.org>; Thu, 24 Feb 2022 22:17:22 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc:content-transfer-encoding;
+        bh=9I1aTWJWLl8bearaRa1m01v/mRvsike65BjMUBW1br8=;
+        b=IgyUSxdB+Iy5nL0OEhwyJvf0gaLYuXPK8vx0FVhw8ynSMVBxW1mSv104gntwYUlItF
+         ru0LTMGHJFf47qAalqBDlLajALj5r/z/kIee0wVz766iBIKHIbAJOOYTMHg5YhRefvni
+         YysUTnQtPv2GAnKCTNw0UqwZwmyO/IhPLtnFxKJdQCWvNYz9+5eJk9uyv2zqITLeNR/a
+         j2tHBbYGrr21bbys/YEIPP3Igw4BYIwJjsoAd5iL1OuwSliFR0w6QZCCbfJomuxQL87F
+         EEmfEuuoHsOyl+JrKVc9K/IfMzcf3DidomD0Pb/LbJlZmPU6kbWtdty7fhBORrwyAuL3
+         FI6A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc:content-transfer-encoding;
+        bh=9I1aTWJWLl8bearaRa1m01v/mRvsike65BjMUBW1br8=;
+        b=fNXhale8AHG+JM0IdkHjS++CLZHCK1cRmxAXPBa+QstlH5wRTiAw1Up7Cgbnztmr4V
+         HBEGGCKGHY6RKYJWjDlhYmDicY7/YPmi5bz1voLYR3m6aLpgSj/pxTfDZG68XP4Bag4M
+         iTJ9XIIceQH6i1ql+YLSV/cqVUQhReTmBmP/jUmoN+mhdA8TmndjYmZUkuiZ0szA55dL
+         tFkoOLPPMXVaHgav72WhOi0iiPamPEJGCkpUWRmtSXAcvEl/LsUeACTYEMpFz10nZD5/
+         gTKyQn1NmpMKkyppSBcGWz4V04ffMun4Kw7yEzQ1GjT5CQzQmVzTq6hXU57Malm8Pxt9
+         or1Q==
+X-Gm-Message-State: AOAM531J0aMKTFRA6vG4556s0rYIdLa5a18l0e8WcpsaCHunnNDetlJ5
+        DHORC0qMQhLFA8g3WE8YauKx6AMCHRnyLim/WUgvWChS5Uk=
+X-Google-Smtp-Source: ABdhPJwN/IleLPcO0RQM7Aijov9G+9I7kURoTxkdGjnvEj3P1pw7TbGkEge2NAE8Puy3+n5epZmhD8HM/6S+6LTUuBs=
+X-Received: by 2002:a05:6e02:1448:b0:2c2:6d23:5491 with SMTP id
+ p8-20020a056e02144800b002c26d235491mr5021612ilo.103.1645769841895; Thu, 24
+ Feb 2022 22:17:21 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Spam-Status: No, score=-7.1 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_HI,
-        SPF_HELO_NONE,SPF_NONE,T_SCC_BODY_TEXT_LINE autolearn=ham
-        autolearn_force=no version=3.4.6
+References: <cover.1645704571.git.siyanteng@loongson.cn> <9b9e348d275a3745c070790949630789106172db.1645704571.git.siyanteng@loongson.cn>
+In-Reply-To: <9b9e348d275a3745c070790949630789106172db.1645704571.git.siyanteng@loongson.cn>
+From:   Alex Shi <seakeel@gmail.com>
+Date:   Fri, 25 Feb 2022 14:16:46 +0800
+Message-ID: <CAJy-AmkicsoN3K8KqigZwUk0uDeQVJ6Cw+gHAtXwaK-m9UiONQ@mail.gmail.com>
+Subject: Re: [PATCH 1/3] docs/zh_CN: add riscv vm-layout translation
+To:     Yanteng Si <siyanteng01@gmail.com>
+Cc:     Jonathan Corbet <corbet@lwn.net>, Alex Shi <alexs@kernel.org>,
+        Yanteng Si <siyanteng@loongson.cn>,
+        Huacai Chen <chenhuacai@kernel.org>,
+        Jiaxun Yang <jiaxun.yang@flygoat.com>,
+        Linux Doc Mailing List <linux-doc@vger.kernel.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: base64
+X-Spam-Status: No, score=-2.1 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_FROM,
+        RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,SPF_PASS,T_SCC_BODY_TEXT_LINE
+        autolearn=ham autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-This patch adds description about IOFS support for DFL.
-
----
-v2:
-* Fixs some typos.
-* Adds more detail description about the models of AFU access which supported in IOFS.
-
-Signed-off-by: Tianfei zhang <tianfei.zhang@intel.com>
----
- Documentation/fpga/dfl.rst | 113 +++++++++++++++++++++++++++++++++++++
- 1 file changed, 113 insertions(+)
-
-diff --git a/Documentation/fpga/dfl.rst b/Documentation/fpga/dfl.rst
-index ef9eec71f6f3..4c3ac6f452bc 100644
---- a/Documentation/fpga/dfl.rst
-+++ b/Documentation/fpga/dfl.rst
-@@ -556,6 +556,119 @@ new DFL feature via UIO direct access, its feature id should be added to the
- driver's id_table.
- 
- 
-+Intel Open FPGA stack
-+=====================
-+
-+Intel Open FPGA stack aka IOFS, Intel's version of a common core set of
-+RTL to allow customers to easily interface to logic and IP on the FPGA.
-+IOFS leverages the DFL for the implementation of the FPGA RTL design.
-+
-+IOFS designs allow for the arrangement of software interfaces across multiple
-+PCIe endpoints. Some of these interfaces may be PFs defined in the static region
-+that connect to interfaces in an IP that is loaded via Partial Reconfiguration (PR).
-+And some of these interfaces may be VFs defined in the PR region that can be
-+reconfigured by the end-user. Furthermore, these PFs/VFs may also be arranged
-+using a DFL such that features may be discovered and accessed in user space
-+(with the aid of a generic kernel driver like vfio-pci). The diagram below depicts
-+an example design with two PFs and two VFs. In this example, it will export the
-+management functions via PF0, PF1 will bind with virtio-net driver presenting itself
-+as a network interface to the OS. The other functions, VF0 and VF1, leverage VFIO
-+to export the MMIO space to an application or assign to a VM.
-+::
-+
-+     +-----------------+  +--------------+  +-------------+  +------------+
-+     | FPGA Management |  |   VirtIO     |  |  User App   |  | Virtual    |
-+     |      App        |  |     App      |  |             |  | Machine    |
-+     +--------+--------+  +------+-------+  +------+------+  +-----+------+
-+              |                  |                 |               |
-+     +--------+--------+  +------+-------+  +------+------+        |
-+     |     DFL Driver  |  |VirtIO driver |  |    VFIO     |        |
-+     +--------+--------+--+------+-------+  +------+------+        |
-+              |                  |                 |               |
-+              |                  |                 |               |
-+     +--------+--------+  +------+-------+  +------+------+   +----+------+
-+     |     PF0         |  |     PF1      |  |   PF0_VF0   |   |  PF0_VF1  |
-+     +-----------------+  +--------------+  +-------------+   +-----------+
-+
-+As accelerators are specialized hardware, they are typically limited in the
-+number installed in a given system. Many use cases require them to be shared
-+across multiple software contexts or threads of software execution, either
-+through partitioning of individual dedicated resources, or virtualization of
-+shared resources. On IOFS, it provides several models to share the AFU
-+resources via PR mechanism and hardware-based virtualization schemes.
-+
-+1. Legacy model.
-+   In legacy FPGA card platforms (like Intel PAC N3000 or N5000 Card),there is
-+   a notion that the boundary between the AFU and the shell is also the unit of
-+   PR for those FPGA platforms. In this model, it can only able to handle a
-+   single context, because it only has one PR engine, and one PR region which
-+   has an associated Port device.
-+2. Multiple VFs per PR slot.
-+   In this model, available AFU resources may allow instantiation of many of VFs
-+   which has a dedicated PCIe function with their own dedicated MMIO space, or
-+   partition a region of MMIO space on a single PCIe function.
-+   In this model, the Port device would not connected to AFU/PR slot, so we don't
-+   need to release the Port device before creating the VFs. For DFL's view, the AFU
-+   will not connect to Port device, so the Next_AFU pointer in FIU feature header
-+   of port device points to NULL in this model. On the other hand, each VF can start
-+   with an AFU feature header without connected to a FIU Port feature header.
-+3. Micro-Personas in AFU.
-+   IOFS introducing a new concept to extend the FPGA usage, Micro-Personas in
-+   AFU. It finds some downsides of the legacy model to be unacceptable, because
-+   this may be desirable by a customer who intends to switch out one accelerator
-+   for another accelerator without having to reconfigure the entire FPGA.
-+   Micro-Personas allow the developer to designate their own AFU-defined PR
-+   regions. In this model the unit of PR is not the entire AFU, instead
-+   the unit of PR can be any size block or blocks inside the AFU.
-+   In this model, it has PR capability includes one PR engine and multiple PR regions,
-+   and each PR region has an associated port gasket. A PR region may also be
-+   referred to as a PR slot. Port gasket is similar with port device in legacy
-+   model which include the port control, port user clock control and port errors.
-+
-+IOFS provides the diversity for access the AFU resource to RTL developer.
-+An IP designer may choose to add more than one PF for interfacing with IP
-+on the FPGA and choose different model to access the AFU resource.
-+
-+There is one reference architecture design using the "Multiple VFs per PR slot"
-+model for IOFS as illustrated below. In this reference design, it exports the
-+FPGA management functions via PF0. PF1 will bind with virtio-net driver
-+presenting itself as a network interface to the OS. PF2 will bound to the
-+vfio-pci driver allowing the user space software to discover and interface
-+with the specific workload like diagnostic test. To access the AFU resource,
-+it uses SR-IOV to partition workload interfaces across various VFs.
-+::
-+
-+                              +----------------------+
-+                              |   PF/VF mux/demux    |
-+                              +--+--+-----+------+-+-+
-+                                 |  |     |      | |
-+        +------------------------+  |     |      | |
-+  PF0   |                 +---------+   +-+      | |
-+    +---+---+             |         +---+----+   | |
-+    |  DFH  |             |         |   DFH  |   | |
-+    +-------+       +-----+----+    +--------+   | |
-+    |  FME  |       |  VirtIO  |    |  Test  |   | |
-+    +---+---+       +----------+    +--------+   | |
-+        |                PF1            PF2      | |
-+        |                                        | |
-+        |                             +----------+ |
-+        |                             |           ++
-+        |                             |           |
-+        |                             | PF0_VF0   | PF0_VF1
-+        |           +-----------------+-----------+------------+
-+        |           |           +-----+-----------+--------+   |
-+        |           |           |     |           |        |   |
-+        |           | +------+  |  +--+ -+     +--+---+    |   |
-+        |           | | Port |  |  | DFH |     |  DFH |    |   |
-+        +-----------+ +------+  |  +-----+     +------+    |   |
-+                    |           |  | DEV |     |  DEV |    |   |
-+                    |           |  +-----+     +------+    |   |
-+                    |           |            PR Slot       |   |
-+                    |           +--------------------------+   |
-+                    | Port Gasket                              |
-+                    +------------------------------------------+
-+
-+
- Open discussion
- ===============
- FME driver exports one ioctl (DFL_FPGA_FME_PORT_PR) for partial reconfiguration
--- 
-2.26.2
-
+T24gVGh1LCBGZWIgMjQsIDIwMjIgYXQgODoxOCBQTSBZYW50ZW5nIFNpIDxzaXlhbnRlbmcwMUBn
+bWFpbC5jb20+IHdyb3RlOg0KPg0KPiBUcmFuc2xhdGUgLi4uL3Jpc2N2L3ZtLWxheW91dC5yc3Qg
+aW50byBDaGluZXNlLg0KPg0KPiBTaWduZWQtb2ZmLWJ5OiBZYW50ZW5nIFNpIDxzaXlhbnRlbmdA
+bG9vbmdzb24uY24+DQoNClJldmlld2VkLWJ5OiBBbGV4IFNoaSA8YWxleHNAa2VybmVsLm9yZz4N
+Cg0KPiAtLS0NCj4gIC4uLi90cmFuc2xhdGlvbnMvemhfQ04vcmlzY3YvaW5kZXgucnN0ICAgICAg
+ICB8ICAxICsNCj4gIC4uLi90cmFuc2xhdGlvbnMvemhfQ04vcmlzY3Yvdm0tbGF5b3V0LnJzdCAg
+ICB8IDY3ICsrKysrKysrKysrKysrKysrKysNCj4gIDIgZmlsZXMgY2hhbmdlZCwgNjggaW5zZXJ0
+aW9ucygrKQ0KPiAgY3JlYXRlIG1vZGUgMTAwNjQ0IERvY3VtZW50YXRpb24vdHJhbnNsYXRpb25z
+L3poX0NOL3Jpc2N2L3ZtLWxheW91dC5yc3QNCj4NCj4gZGlmZiAtLWdpdCBhL0RvY3VtZW50YXRp
+b24vdHJhbnNsYXRpb25zL3poX0NOL3Jpc2N2L2luZGV4LnJzdCBiL0RvY3VtZW50YXRpb24vdHJh
+bnNsYXRpb25zL3poX0NOL3Jpc2N2L2luZGV4LnJzdA0KPiBpbmRleCBiYmY1ZDdiMzc3N2EuLjYx
+NGNkZTBjMDk5NyAxMDA2NDQNCj4gLS0tIGEvRG9jdW1lbnRhdGlvbi90cmFuc2xhdGlvbnMvemhf
+Q04vcmlzY3YvaW5kZXgucnN0DQo+ICsrKyBiL0RvY3VtZW50YXRpb24vdHJhbnNsYXRpb25zL3po
+X0NOL3Jpc2N2L2luZGV4LnJzdA0KPiBAQCAtMTgsNiArMTgsNyBAQCBSSVNDLVYg5L2T57O757uT
+5p6EDQo+ICAgICAgOm1heGRlcHRoOiAxDQo+DQo+ICAgICAgYm9vdC1pbWFnZS1oZWFkZXINCj4g
+KyAgICB2bS1sYXlvdXQNCj4gICAgICBwbXUNCj4gICAgICBwYXRjaC1hY2NlcHRhbmNlDQo+DQo+
+IGRpZmYgLS1naXQgYS9Eb2N1bWVudGF0aW9uL3RyYW5zbGF0aW9ucy96aF9DTi9yaXNjdi92bS1s
+YXlvdXQucnN0IGIvRG9jdW1lbnRhdGlvbi90cmFuc2xhdGlvbnMvemhfQ04vcmlzY3Yvdm0tbGF5
+b3V0LnJzdA0KPiBuZXcgZmlsZSBtb2RlIDEwMDY0NA0KPiBpbmRleCAwMDAwMDAwMDAwMDAuLjU4
+NWNiODkzMTdhMw0KPiAtLS0gL2Rldi9udWxsDQo+ICsrKyBiL0RvY3VtZW50YXRpb24vdHJhbnNs
+YXRpb25zL3poX0NOL3Jpc2N2L3ZtLWxheW91dC5yc3QNCj4gQEAgLTAsMCArMSw2NyBAQA0KPiAr
+Li4gU1BEWC1MaWNlbnNlLUlkZW50aWZpZXI6IEdQTC0yLjANCj4gKy4uIGluY2x1ZGU6OiAuLi9k
+aXNjbGFpbWVyLXpoX0NOLnJzdA0KPiArDQo+ICs6T3JpZ2luYWw6IERvY3VtZW50YXRpb24vcmlz
+Y3Yvdm0tbGF5b3V0LnJzdA0KPiArDQo+ICs657+76K+ROg0KPiArDQo+ICsg5Y+45bu26IW+IFlh
+bnRlbmcgU2kgPHNpeWFudGVuZ0Bsb29uZ3Nvbi5jbj4NCj4gKw0KPiArPT09PT09PT09PT09PT09
+PT09PT09PT09PT09PQ0KPiArUklTQy1WIExpbnV45LiK55qE6Jma5ouf5YaF5a2Y5biD5bGADQo+
+ICs9PT09PT09PT09PT09PT09PT09PT09PT09PT09DQo+ICsNCj4gKzrkvZzogIU6IEFsZXhhbmRy
+ZSBHaGl0aSA8YWxleEBnaGl0aS5mcj4NCj4gKzrml6XmnJ86IDEyIEZlYnJ1YXJ5IDIwMjENCj4g
+Kw0KPiAr6L+Z5Lu95paH5Lu25o+P6L+w5LqGUklTQy1WIExpbnV45YaF5qC45L2/55So55qE6Jma
+5ouf5YaF5a2Y5biD5bGA44CCDQo+ICsNCj4gKzMy5L2NIFJJU0MtViBMaW51eCDlhoXmoLgNCj4g
+Kz09PT09PT09PT09PT09PT09PT09PT0NCj4gKw0KPiArUklTQy1WIExpbnV4IEtlcm5lbCBTVjMy
+DQo+ICstLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0NCj4gKw0KPiArVE9ETw0KPiArDQo+ICs2NOS9
+jSBSSVNDLVYgTGludXgg5YaF5qC4DQo+ICs9PT09PT09PT09PT09PT09PT09PT09DQo+ICsNCj4g
+K1JJU0MtVueJueadg+aetuaehOaWh+aho+aMh+WHuu+8jDY05L2N5Zyw5Z2AICLlv4Xpobvkvb/n
+rKw2My00OOS9jeWAvOmDveetieS6juesrDQ35L2N77yM5ZCm5YiZ5bCG5Y+R55Sf57y66aG15byC
+5bi444CCIu+8mui/meWwhuiZmg0KPiAr5ouf5Zyw5Z2A56m66Ze05YiG5oiQ5Lik5Y2K77yM5Lit
+6Ze05pyJ5LiA5Liq6Z2e5bi45aSn55qE5rSe77yM5LiL5Y2K6YOo5YiG5piv55So5oi356m66Ze0
+5omA5Zyo55qE5Zyw5pa577yM5LiK5Y2K6YOo5YiG5pivUklTQy1WIExpbnV4DQo+ICvlhoXmoLjm
+iYDlnKjnmoTlnLDmlrnjgIINCj4gKw0KPiArUklTQy1WIExpbnV4IEtlcm5lbCBTVjM5DQo+ICst
+LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0NCj4gKw0KPiArOjoNCj4gKw0KPiArICA9PT09PT09PT09
+PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09
+PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT0NCj4g
+KyAgICAgIOW8gOWni+WcsOWdgCAgICAgICB8ICAg5YGP56e7ICAgICAgfCAgICAg57uT5p2f5Zyw
+5Z2AICAgICAgfCAg5aSn5bCPICAgIHwg6Jma5ouf5YaF5a2Y5Yy65Z+f5o+P6L+wDQo+ICsgID09
+PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09
+PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09
+PT09PQ0KPiArICAgICAgICAgICAgICAgICAgICB8ICAgICAgICAgICAgfCAgICAgICAgICAgICAg
+ICAgIHwgICAgICAgICB8DQo+ICsgICAwMDAwMDAwMDAwMDAwMDAwIHwgICAgMCAgICAgICB8IDAw
+MDAwMDNmZmZmZmZmZmYgfCAgMjU2IEdCIHwg55So5oi356m66Ze06Jma5ouf5YaF5a2Y77yM5q+P
+5Liq5YaF5a2Y566h55CG5Zmo5LiN5ZCMDQo+ICsgIF9fX19fX19fX19fX19fX19fX3xfX19fX19f
+X19fX198X19fX19fX19fX19fX19fX19ffF9fX19fX19fX3xfX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXw0KPiArICAgICAgICAgICAgICAg
+ICAgICB8ICAgICAgICAgICAgfCAgICAgICAgICAgICAgICAgIHwgICAgICAgICB8DQo+ICsgICAw
+MDAwMDA0MDAwMDAwMDAwIHwgKzI1NiAgICBHQiB8IGZmZmZmZmJmZmZmZmZmZmYgfCB+MTZNIFRC
+IHwgLi4uIOW3qOWkp+eahOOAgeWHoOS5jjY05L2N5a6955qE55u05Yiw5YaF5qC45pig5bCE55qE
+LTI1NkdC5Zyw5pa5DQo+ICsgICAgICAgICAgICAgICAgICAgIHwgICAgICAgICAgICB8ICAgICAg
+ICAgICAgICAgICAgfCAgICAgICAgIHwgICAgIOW8gOWni+WBj+enu+eahOmdnue7j+WFuOiZmuaL
+n+WGheWtmOWcsOWdgOepuua0nuOAgg0KPiArICAgICAgICAgICAgICAgICAgICB8ICAgICAgICAg
+ICAgfCAgICAgICAgICAgICAgICAgIHwgICAgICAgICB8DQo+ICsgIF9fX19fX19fX19fX19fX19f
+X3xfX19fX19fX19fX198X19fX19fX19fX19fX19fX19ffF9fX19fX19fX3xfX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXw0KPiArICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICB8
+DQo+ICsgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgIHwg5YaF5qC456m66Ze055qE6Jma5ouf5YaF5a2Y77yM5Zyo5omA5pyJ6L+b56iL
+5LmL6Ze05YWx5LqrOg0KPiArICBfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX198X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX18NCj4gKyAgICAgICAgICAgICAgICAgICAgfCAgICAg
+ICAgICAgIHwgICAgICAgICAgICAgICAgICB8ICAgICAgICAgfA0KPiArICAgZmZmZmZmYzZmZWUw
+MDAwMCB8IC0yMjggICAgR0IgfCBmZmZmZmZjNmZlZmZmZmZmIHwgICAgMiBNQiB8IGZpeG1hcA0K
+PiArICAgZmZmZmZmYzZmZjAwMDAwMCB8IC0yMjggICAgR0IgfCBmZmZmZmZjNmZmZmZmZmZmIHwg
+ICAxNiBNQiB8IFBDSSBpbw0KPiArICAgZmZmZmZmYzcwMDAwMDAwMCB8IC0yMjggICAgR0IgfCBm
+ZmZmZmZjN2ZmZmZmZmZmIHwgICAgNCBHQiB8IHZtZW1tYXANCj4gKyAgIGZmZmZmZmM4MDAwMDAw
+MDAgfCAtMjI0ICAgIEdCIHwgZmZmZmZmZDdmZmZmZmZmZiB8ICAgNjQgR0IgfCB2bWFsbG9jL2lv
+cmVtYXAgc3BhY2UNCj4gKyAgIGZmZmZmZmQ4MDAwMDAwMDAgfCAtMTYwICAgIEdCIHwgZmZmZmZm
+ZjZmZmZmZmZmZiB8ICAxMjQgR0IgfCDnm7TmjqXmmKDlsITmiYDmnInniannkIblhoXlrZgNCj4g
+KyAgIGZmZmZmZmY3MDAwMDAwMDAgfCAgLTM2ICAgIEdCIHwgZmZmZmZmZmVmZmZmZmZmZiB8ICAg
+MzIgR0IgfCBrYXNhbg0KPiArICBfX19fX19fX19fX19fX19fX198X19fX19fX19fX19ffF9fX19f
+X19fX19fX19fX19fX3xfX19fX19fX198X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fDQo+ICsgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHwNCj4gKyAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgfA0KPiArICBf
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X198X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fDQo+ICsgICAgICAgICAgICAgICAgICAgIHwgICAgICAgICAgICB8ICAgICAgICAgICAg
+ICAgICAgfCAgICAgICAgIHwNCj4gKyAgIGZmZmZmZmZmMDAwMDAwMDAgfCAgIC00ICAgIEdCIHwg
+ZmZmZmZmZmY3ZmZmZmZmZiB8ICAgIDIgR0IgfCBtb2R1bGVzLCBCUEYNCj4gKyAgIGZmZmZmZmZm
+ODAwMDAwMDAgfCAgIC0yICAgIEdCIHwgZmZmZmZmZmZmZmZmZmZmZiB8ICAgIDIgR0IgfCBrZXJu
+ZWwNCj4gKyAgX19fX19fX19fX19fX19fX19ffF9fX19fX19fX19fX3xfX19fX19fX19fX19fX19f
+X198X19fX19fX19ffF9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fXw0KPiAtLQ0KPiAyLjI3LjANCj4NCg==
