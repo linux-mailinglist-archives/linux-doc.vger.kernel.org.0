@@ -2,108 +2,1272 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id B5B674C3EC1
-	for <lists+linux-doc@lfdr.de>; Fri, 25 Feb 2022 08:10:15 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 9420C4C3EE7
+	for <lists+linux-doc@lfdr.de>; Fri, 25 Feb 2022 08:21:19 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S238017AbiBYHK1 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Fri, 25 Feb 2022 02:10:27 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:53176 "EHLO
+        id S235822AbiBYHVs (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Fri, 25 Feb 2022 02:21:48 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:54366 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S231335AbiBYHK0 (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Fri, 25 Feb 2022 02:10:26 -0500
-Received: from mail-yb1-xb44.google.com (mail-yb1-xb44.google.com [IPv6:2607:f8b0:4864:20::b44])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 970511E14BF
-        for <linux-doc@vger.kernel.org>; Thu, 24 Feb 2022 23:09:55 -0800 (PST)
-Received: by mail-yb1-xb44.google.com with SMTP id j2so4216389ybu.0
-        for <linux-doc@vger.kernel.org>; Thu, 24 Feb 2022 23:09:55 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=mime-version:reply-to:from:date:message-id:subject:to;
-        bh=Y7X8uyaFI8LljuLAxhyM48+yTSBDN9zANH/IhPwl+SQ=;
-        b=YxomcVhOZ/D49FW5qhwHTKoVVib0raMx5yC3Cya4g5ngOi0w1jl8BZoM4/clKni9Pb
-         yqoJGrMCYLdk/a/fBmkEj5mgtBGwevKi6DWOOV0i0q7qvExwaF9CzGOrqPOYG/1lG9zD
-         ZwlOgzI2BA+6PahiABm3nQLGehJn3VM6QwcvY/6neMPcrXkzQ9Tl7TGKGYzlEQJljtlD
-         zbhL1ayhMorW5QmGKTl51KHBUSHxXl8QHxXV/adaBlMgVTOPldniBdDjFZpOD9Clltms
-         ZjeouqtAZnm9o9GLdHn3NNZg9HBE79mH3Hh0s/2fuDMGHH/3d5dX93GnySGwNtbU1hfT
-         FGfg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=x-gm-message-state:mime-version:reply-to:from:date:message-id
-         :subject:to;
-        bh=Y7X8uyaFI8LljuLAxhyM48+yTSBDN9zANH/IhPwl+SQ=;
-        b=qeb0+mtrBos/GYg+a55Ss9QqMQish/RQB2nj7zmKw391H7/4q1E9yXPXs2sKn1Al2V
-         PcG3jpUQmnPkfo3UsgipBb5cc7RONV6//QrfJkWAt/BKWRseumgWopzxp9p5ByKob/SX
-         acG2uOtWFBmTGmaXXgxf/fHy2mlYbVO0Zyd+ke0rYLAzoRZ2ZufFSoOizwGJ+ryjVpi+
-         IRKep7DYYM1bLryBiS3k4FQNykGE2aNAkmUjE1x/dBkapC2ZpbTbkUFSb5GeWP4Ifbgr
-         HU7HCDjQv6gb6viciYUTpO86U3rwWMBUUaSYf4OD76zXq+KGhlE0lcxpRkFCAfSZ41ep
-         Y5ug==
-X-Gm-Message-State: AOAM533qG51Ua9XbrUG7LirSbRoVvJDmYYIqaT14cXDwyiOPhV5cR6Wk
-        nJp9FdYPJ/FGoSQD31+2I2i76dpkho0MUjjhcMY=
-X-Google-Smtp-Source: ABdhPJzqP1eVeGmxq/Knm0kECMjsxmNWnoVdI9YWwZX0WuM0dRU/22lNt/XNJwSwuYOkYZicPx9TtPhvmt88a1BmNmE=
-X-Received: by 2002:a25:8149:0:b0:623:bc3c:be06 with SMTP id
- j9-20020a258149000000b00623bc3cbe06mr6240911ybm.223.1645772994878; Thu, 24
- Feb 2022 23:09:54 -0800 (PST)
+        with ESMTP id S233550AbiBYHVs (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Fri, 25 Feb 2022 02:21:48 -0500
+Received: from out30-54.freemail.mail.aliyun.com (out30-54.freemail.mail.aliyun.com [115.124.30.54])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id CDB2D188A04;
+        Thu, 24 Feb 2022 23:21:13 -0800 (PST)
+X-Alimail-AntiSpam: AC=PASS;BC=-1|-1;BR=01201311R211e4;CH=green;DM=||false|;DS=||;FP=0|-1|-1|-1|0|-1|-1|-1;HT=e01e04407;MF=xhao@linux.alibaba.com;NM=1;PH=DS;RN=10;SR=0;TI=SMTPD_---0V5S9TgR_1645773668;
+Received: from B-X3VXMD6M-2058.local(mailfrom:xhao@linux.alibaba.com fp:SMTPD_---0V5S9TgR_1645773668)
+          by smtp.aliyun-inc.com(127.0.0.1);
+          Fri, 25 Feb 2022 15:21:10 +0800
+From:   xhao@linux.alibaba.com
+Reply-To: xhao@linux.alibaba.com
+Subject: Re: [PATCH 03/12] mm/damon: Implement a minimal stub for sysfs-based
+ DAMON interface
+To:     SeongJae Park <sj@kernel.org>, akpm@linux-foundation.org
+Cc:     corbet@lwn.net, skhan@linuxfoundation.org, rientjes@google.com,
+        linux-damon@amazon.com, linux-mm@kvack.org,
+        linux-doc@vger.kernel.org, linux-kselftest@vger.kernel.org,
+        linux-kernel@vger.kernel.org
+References: <20220223152051.22936-1-sj@kernel.org>
+ <20220223152051.22936-4-sj@kernel.org>
+Message-ID: <66331451-48d8-6658-cdce-6e79df27ae5e@linux.alibaba.com>
+Date:   Fri, 25 Feb 2022 15:21:05 +0800
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:78.0)
+ Gecko/20100101 Thunderbird/78.14.0
 MIME-Version: 1.0
-Received: by 2002:a81:a389:0:0:0:0:0 with HTTP; Thu, 24 Feb 2022 23:09:54
- -0800 (PST)
-Reply-To: markwillima00@gmail.com
-From:   Mark <nnannacolins@gmail.com>
-Date:   Thu, 24 Feb 2022 23:09:54 -0800
-Message-ID: <CAJAQTionfYc5m6BnPT_TCmsEnQvktMLHod+ArwPjJ_2yQ_V0RQ@mail.gmail.com>
-Subject: Re: Greetings!
-To:     undisclosed-recipients:;
-Content-Type: text/plain; charset="UTF-8"
-X-Spam-Status: Yes, score=5.3 required=5.0 tests=BAYES_50,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_FROM,FREEMAIL_REPLYTO,
-        FREEMAIL_REPLYTO_END_DIGIT,RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,SPF_PASS,
-        T_SCC_BODY_TEXT_LINE,UNDISC_FREEM autolearn=no autolearn_force=no
-        version=3.4.6
-X-Spam-Report: * -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at
-        *      https://www.dnswl.org/, no trust
-        *      [2607:f8b0:4864:20:0:0:0:b44 listed in]
-        [list.dnswl.org]
-        *  0.8 BAYES_50 BODY: Bayes spam probability is 40 to 60%
-        *      [score: 0.5000]
-        * -0.0 SPF_PASS SPF: sender matches SPF record
-        *  0.0 FREEMAIL_FROM Sender email is commonly abused enduser mail
-        *      provider
-        *      [nnannacolins[at]gmail.com]
-        *  0.2 FREEMAIL_REPLYTO_END_DIGIT Reply-To freemail username ends in
-        *      digit
-        *      [markwillima00[at]gmail.com]
-        *  0.0 SPF_HELO_NONE SPF: HELO does not publish an SPF Record
-        * -0.1 DKIM_VALID_EF Message has a valid DKIM or DK signature from
-        *      envelope-from domain
-        * -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
-        *      author's domain
-        * -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
-        *  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
-        *       valid
-        * -0.0 T_SCC_BODY_TEXT_LINE No description available.
-        *  3.5 UNDISC_FREEM Undisclosed recipients + freemail reply-to
-        *  1.0 FREEMAIL_REPLYTO Reply-To/From or Reply-To/body contain
-        *      different freemails
-X-Spam-Level: *****
+In-Reply-To: <20220223152051.22936-4-sj@kernel.org>
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-Spam-Status: No, score=-9.9 required=5.0 tests=BAYES_00,
+        ENV_AND_HDR_SPF_MATCH,NICE_REPLY_A,RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,
+        SPF_PASS,T_SCC_BODY_TEXT_LINE,UNPARSEABLE_RELAY,USER_IN_DEF_SPF_WL
+        autolearn=ham autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Hello,
+Hi, SeongJae:
 
-The HSBC Bank is a financial institution in United Kingdom. We
-promotes long-term,sustainable and broad-based economic growth in
-developing and emerging countries by providing financial support like
-loans and investment to large, small and
-medium-sized companies (SMEs) as well as fast-growing enterprises
-which in turn helps to create secure and permanent jobs and reduce
-poverty.
+On 2/23/22 11:20 PM, SeongJae Park wrote:
+> DAMON's debugfs-based user interface served very well, so far.  However,
+> it unnecessarily depends on debugfs, while DAMON is not aimed to be used
+> for only debugging.  Also, the interface receives multiple values via
+> one file.  For example, schemes file receives 18 values separated by
+> white spaces.  As a result, it is ineffient, hard to be used, and
+> difficult to be extended.  Especially, keeping backward compatibility of
+> user space tools is getting only challenging.  It would be better to
+> implement another reliable and flexible interface and deprecate the
+> debugfs interface in long term.
+>
+> To this end, this commit implements a stub of a part of the new user
+> interface of DAMON using sysfs.  Specifically, this commit implements
+> the sysfs control parts for virtual address space monitoring.
+>
+> More specifically, the idea of the new interface is, using directory
+> hierarchies and making one file for one value.  The hierarchy that this
+> commit is introducing is as below.  In the below figure,
+> parents-children relations are represented with indentations, each
+> directory is having ``/`` suffix, and files in each directory are
+> separated by comma (",").
+>
+>      /sys/kernel/mm/damon/admin
+>      │ kdamonds/nr
+>      │ │ 0/state,pid
+>      │ │ │ contexts/nr
+>      │ │ │ │ 0/operations
+>      │ │ │ │ │ monitoring_attrs/
+>      │ │ │ │ │ │ intervals/sample_us,aggr_us,update_us
+>      │ │ │ │ │ │ nr_regions/min,max
+>      │ │ │ │ │ targets/nr
+>      │ │ │ │ │ │ 0/pid
+>      │ │ │ │ │ │ ...
+>      │ │ │ │ ...
+>      │ │ ...
 
-If you need fund to promotes your business, project(Project Funding),
-Loan, planning, budgeting and expansion of your business(s) , do not
-hesitate to indicate your interest as we are here to serve you better
-by granting your request.
+>
+> Writing a number <N> to each 'nr' file makes directories of name <0> to
+> <N-1> in the directory of the 'nr' file.  That's all this commit does.
+> Writing proper values to relevant files will construct the DAMON
+> contexts, and writing a special keyword, 'on', to 'state' files for each
+> kdamond will ask DAMON to start the constructed contexts.
+>
+> For a short example, using below commands for
+> monitoring virtual address spaces of a given workload is imaginable:
+>
+>      # cd /sys/kernel/mm/damon/admin/
+>      # echo 1 > kdamonds/nr
+>      # echo 1 > kdamonds/0/contexts/nr
+>      # echo vaddr > kdamonds/0/contexts/0/damon_type
+>      # echo 1 > kdamonds/0/contexts/0/targets/nr
+>      # echo $(pidof <workload>) > kdamonds/0/contexts/0/targets/0/pid
+>      # echo on > kdamonds/0/state
 
-Thank you
-Mr:Mark
+I do some test  about the sys interface, like this:
+
+[root@rt2k03395 0]# tree
+.
+├── contexts
+│   ├── 0
+│   │   ├── monitoring_attrs
+│   │   │   ├── intervals
+│   │   │   │   ├── aggr_us
+│   │   │   │   ├── sample_us
+│   │   │   │   └── update_us
+│   │   │   └── nr_regions
+│   │   │       ├── max
+│   │   │       └── min
+│   │   ├── operations
+│   │   ├── schemes
+│   │   │   └── nr
+│   │   └── targets
+│   │       ├── 0
+│   │       │   ├── pid
+│   │       │   └── regions
+│   │       │       ├── 0
+│   │       │       │   ├── end
+│   │       │       │   └── start
+│   │       │       ├── 1
+│   │       │       │   ├── end
+│   │       │       │   └── start
+│   │       │       ├── 10
+│   │       │       │   ├── end
+│   │       │       │   └── start
+│   │       │       ├── 11
+│   │       │       │   ├── end
+│   │       │       │   └── start
+│   │       │       ├── 12
+
+cd regions/
+[root@rt2k03395 regions]# ls
+0  10  12  14  16  18  2   21  23  25  27  29  30  32  34  36  38 4   
+41  43  45  47  49  6  8  nr
+1  11  13  15  17  19  20  22  24  26  28  3   31  33  35  37  39 40  
+42  44  46  48  5   7  9
+[root@rt2k03395 regions]# cd 44/cat *
+
+[root@rt2k03395 regions/44]# cat *
+0  0
+
+I'm skeptical about the number regions ? And after manually setting the 
+number of nr, the processing of
+
+"start" and "end" will be very troublesome,I guess you might want to do 
+some special region addresses,
+
+such as hot or cold region, Is that true ？But I think you need to think 
+about how do you deal with too many
+
+uncontacted reigons that need to be done.
+
+> Please note that this commit is implementing only the sysfs part stub as
+> abovely mentioned.  This commit doesn't implement the special keywords
+> for 'state' files.  Following commits will do that.
+>
+> Signed-off-by: SeongJae Park <sj@kernel.org>
+> ---
+>   mm/damon/Kconfig  |    7 +
+>   mm/damon/Makefile |    1 +
+>   mm/damon/sysfs.c  | 1059 +++++++++++++++++++++++++++++++++++++++++++++
+>   3 files changed, 1067 insertions(+)
+>   create mode 100644 mm/damon/sysfs.c
+>
+> diff --git a/mm/damon/Kconfig b/mm/damon/Kconfig
+> index 01bad77ad7ae..9b559c76d6dd 100644
+> --- a/mm/damon/Kconfig
+> +++ b/mm/damon/Kconfig
+> @@ -52,6 +52,13 @@ config DAMON_VADDR_KUNIT_TEST
+>   
+>   	  If unsure, say N.
+>   
+> +config DAMON_SYSFS
+> +	bool "DAMON sysfs interface"
+> +	depends on DAMON && SYSFS
+> +	help
+> +	  This builds the sysfs interface for DAMON.  The user space can use
+> +	  the interface for arbitrary data access monitoring.
+> +
+>   config DAMON_DBGFS
+>   	bool "DAMON debugfs interface"
+>   	depends on DAMON_VADDR && DAMON_PADDR && DEBUG_FS
+> diff --git a/mm/damon/Makefile b/mm/damon/Makefile
+> index aebbf6c14c51..dbf7190b4144 100644
+> --- a/mm/damon/Makefile
+> +++ b/mm/damon/Makefile
+> @@ -3,5 +3,6 @@
+>   obj-y				:= core.o
+>   obj-$(CONFIG_DAMON_VADDR)	+= ops-common.o vaddr.o
+>   obj-$(CONFIG_DAMON_PADDR)	+= ops-common.o paddr.o
+> +obj-$(CONFIG_DAMON_SYSFS)	+= sysfs.o
+>   obj-$(CONFIG_DAMON_DBGFS)	+= dbgfs.o
+>   obj-$(CONFIG_DAMON_RECLAIM)	+= reclaim.o
+> diff --git a/mm/damon/sysfs.c b/mm/damon/sysfs.c
+> new file mode 100644
+> index 000000000000..e8087ffd924c
+> --- /dev/null
+> +++ b/mm/damon/sysfs.c
+> @@ -0,0 +1,1059 @@
+> +// SPDX-License-Identifier: GPL-2.0
+> +/*
+> + * DAMON sysfs Interface
+> + *
+> + * Copyright (c) 2022 SeongJae Park <sj@kernel.org>
+> + */
+> +
+> +#include <linux/damon.h>
+> +#include <linux/kobject.h>
+> +#include <linux/pid.h>
+> +#include <linux/sched.h>
+> +#include <linux/slab.h>
+> +
+> +static DEFINE_MUTEX(damon_sysfs_lock);
+> +
+> +/*
+> + * unsigned long range directory
+> + */
+> +
+> +struct damon_sysfs_ul_range {
+> +	struct kobject kobj;
+> +	unsigned long min;
+> +	unsigned long max;
+> +};
+> +
+> +static struct damon_sysfs_ul_range *damon_sysfs_ul_range_alloc(
+> +		unsigned long min,
+> +		unsigned long max)
+> +{
+> +	struct damon_sysfs_ul_range *range = kmalloc(sizeof(*range),
+> +			GFP_KERNEL);
+> +
+> +	if (!range)
+> +		return NULL;
+> +	range->kobj = (struct kobject){};
+> +	range->min = min;
+> +	range->max = max;
+> +
+> +	return range;
+> +}
+> +
+> +static ssize_t damon_sysfs_ul_range_min_show(struct kobject *kobj,
+> +		struct kobj_attribute *attr, char *buf)
+> +{
+> +	struct damon_sysfs_ul_range *range = container_of(kobj,
+> +			struct damon_sysfs_ul_range, kobj);
+> +
+> +	return sysfs_emit(buf, "%lu\n", range->min);
+> +}
+> +
+> +static ssize_t damon_sysfs_ul_range_min_store(struct kobject *kobj,
+> +		struct kobj_attribute *attr, const char *buf, size_t count)
+> +{
+> +	struct damon_sysfs_ul_range *range = container_of(kobj,
+> +			struct damon_sysfs_ul_range, kobj);
+> +	unsigned long min;
+> +	int err;
+> +
+> +	err = kstrtoul(buf, 0, &min);
+> +	if (err)
+> +		return -EINVAL;
+> +
+> +	range->min = min;
+> +	return count;
+> +}
+> +
+> +static ssize_t damon_sysfs_ul_range_max_show(struct kobject *kobj,
+> +		struct kobj_attribute *attr, char *buf)
+> +{
+> +	struct damon_sysfs_ul_range *range = container_of(kobj,
+> +			struct damon_sysfs_ul_range, kobj);
+> +
+> +	return sysfs_emit(buf, "%lu\n", range->max);
+> +}
+> +
+> +static ssize_t damon_sysfs_ul_range_max_store(struct kobject *kobj,
+> +		struct kobj_attribute *attr, const char *buf, size_t count)
+> +{
+> +	struct damon_sysfs_ul_range *range = container_of(kobj,
+> +			struct damon_sysfs_ul_range, kobj);
+> +	unsigned long max;
+> +	int err;
+> +
+> +	err = kstrtoul(buf, 0, &max);
+> +	if (err)
+> +		return -EINVAL;
+> +
+> +	range->max = max;
+> +	return count;
+> +}
+> +
+> +static void damon_sysfs_ul_range_release(struct kobject *kobj)
+> +{
+> +	kfree(container_of(kobj, struct damon_sysfs_ul_range, kobj));
+> +}
+> +
+> +static struct kobj_attribute damon_sysfs_ul_range_min_attr =
+> +		__ATTR(min, 0600, damon_sysfs_ul_range_min_show,
+> +				damon_sysfs_ul_range_min_store);
+> +
+> +static struct kobj_attribute damon_sysfs_ul_range_max_attr =
+> +		__ATTR(max, 0600, damon_sysfs_ul_range_max_show,
+> +				damon_sysfs_ul_range_max_store);
+> +
+> +static struct attribute *damon_sysfs_ul_range_attrs[] = {
+> +	&damon_sysfs_ul_range_min_attr.attr,
+> +	&damon_sysfs_ul_range_max_attr.attr,
+> +	NULL,
+> +};
+> +ATTRIBUTE_GROUPS(damon_sysfs_ul_range);
+> +
+> +static struct kobj_type damon_sysfs_ul_range_ktype = {
+> +	.release = damon_sysfs_ul_range_release,
+> +	.sysfs_ops = &kobj_sysfs_ops,
+> +	.default_groups = damon_sysfs_ul_range_groups,
+> +};
+> +
+> +/*
+> + * target directory
+> + */
+> +
+> +struct damon_sysfs_target {
+> +	struct kobject kobj;
+> +	int pid;
+> +};
+> +
+> +static struct damon_sysfs_target *damon_sysfs_target_alloc(void)
+> +{
+> +	return kzalloc(sizeof(struct damon_sysfs_target), GFP_KERNEL);
+> +}
+> +
+> +static ssize_t damon_sysfs_target_pid_show(struct kobject *kobj,
+> +		struct kobj_attribute *attr, char *buf)
+> +{
+> +	struct damon_sysfs_target *target = container_of(kobj,
+> +			struct damon_sysfs_target, kobj);
+> +
+> +	return sysfs_emit(buf, "%d\n", target->pid);
+> +}
+> +
+> +static ssize_t damon_sysfs_target_pid_store(struct kobject *kobj,
+> +		struct kobj_attribute *attr, const char *buf, size_t count)
+> +{
+> +	struct damon_sysfs_target *target = container_of(kobj,
+> +			struct damon_sysfs_target, kobj);
+> +	int err = kstrtoint(buf, 0, &target->pid);
+> +
+> +	if (err)
+> +		return -EINVAL;
+> +	return count;
+> +}
+> +
+> +static void damon_sysfs_target_release(struct kobject *kobj)
+> +{
+> +	kfree(container_of(kobj, struct damon_sysfs_target, kobj));
+> +}
+> +
+> +static struct kobj_attribute damon_sysfs_target_pid_attr = __ATTR(pid, 0600,
+> +		damon_sysfs_target_pid_show, damon_sysfs_target_pid_store);
+> +
+> +static struct attribute *damon_sysfs_target_attrs[] = {
+> +	&damon_sysfs_target_pid_attr.attr,
+> +	NULL,
+> +};
+> +ATTRIBUTE_GROUPS(damon_sysfs_target);
+> +
+> +static struct kobj_type damon_sysfs_target_ktype = {
+> +	.release = damon_sysfs_target_release,
+> +	.sysfs_ops = &kobj_sysfs_ops,
+> +	.default_groups = damon_sysfs_target_groups,
+> +};
+> +
+> +/*
+> + * targets directory
+> + */
+> +
+> +struct damon_sysfs_targets {
+> +	struct kobject kobj;
+> +	struct damon_sysfs_target **targets_arr;
+> +	int nr;
+> +};
+> +
+> +static struct damon_sysfs_targets *damon_sysfs_targets_alloc(void)
+> +{
+> +	return kzalloc(sizeof(struct damon_sysfs_targets), GFP_KERNEL);
+> +}
+> +
+> +static void damon_sysfs_targets_rm_dirs(struct damon_sysfs_targets *targets)
+> +{
+> +	struct damon_sysfs_target **targets_arr = targets->targets_arr;
+> +	int i;
+> +
+> +	for (i = 0; i < targets->nr; i++)
+> +		kobject_put(&targets_arr[i]->kobj);
+> +	targets->nr = 0;
+> +	kfree(targets_arr);
+> +	targets->targets_arr = NULL;
+> +}
+> +
+> +static int damon_sysfs_targets_add_dirs(struct damon_sysfs_targets *targets,
+> +		int nr_targets)
+> +{
+> +	struct damon_sysfs_target **targets_arr, *target;
+> +	int err, i;
+> +
+> +	damon_sysfs_targets_rm_dirs(targets);
+> +	if (!nr_targets)
+> +		return 0;
+> +
+> +	targets_arr = kmalloc_array(nr_targets, sizeof(*targets_arr),
+> +			GFP_KERNEL | __GFP_NOWARN);
+> +	if (!targets_arr)
+> +		return -ENOMEM;
+> +	targets->targets_arr = targets_arr;
+> +
+> +	for (i = 0; i < nr_targets; i++) {
+> +		target = damon_sysfs_target_alloc();
+> +		if (!target) {
+> +			damon_sysfs_targets_rm_dirs(targets);
+> +			return -ENOMEM;
+> +		}
+> +
+> +		err = kobject_init_and_add(&target->kobj,
+> +				&damon_sysfs_target_ktype, &targets->kobj,
+> +				"%d", i);
+> +		if (err)
+> +			goto out;
+> +
+> +		targets_arr[i] = target;
+> +		targets->nr++;
+> +	}
+> +	return 0;
+> +
+> +out:
+> +	damon_sysfs_targets_rm_dirs(targets);
+> +	kobject_put(&target->kobj);
+> +	return err;
+> +}
+> +
+> +static ssize_t damon_sysfs_targets_nr_show(struct kobject *kobj,
+> +		struct kobj_attribute *attr, char *buf)
+> +{
+> +	struct damon_sysfs_targets *targets = container_of(kobj,
+> +			struct damon_sysfs_targets, kobj);
+> +
+> +	return sysfs_emit(buf, "%d\n", targets->nr);
+> +}
+> +
+> +static ssize_t damon_sysfs_targets_nr_store(struct kobject *kobj,
+> +		struct kobj_attribute *attr, const char *buf, size_t count)
+> +{
+> +	struct damon_sysfs_targets *targets = container_of(kobj,
+> +			struct damon_sysfs_targets, kobj);
+> +	int nr, err = kstrtoint(buf, 0, &nr);
+> +
+> +	if (err)
+> +		return err;
+> +	if (nr < 0)
+> +		return -EINVAL;
+> +
+> +	if (!mutex_trylock(&damon_sysfs_lock))
+> +		return -EBUSY;
+> +	err = damon_sysfs_targets_add_dirs(targets, nr);
+> +	mutex_unlock(&damon_sysfs_lock);
+> +	if (err)
+> +		return err;
+> +
+> +	return count;
+> +}
+> +
+> +static void damon_sysfs_targets_release(struct kobject *kobj)
+> +{
+> +	kfree(container_of(kobj, struct damon_sysfs_targets, kobj));
+> +}
+> +
+> +static struct kobj_attribute damon_sysfs_targets_nr_attr = __ATTR(nr, 0600,
+> +		damon_sysfs_targets_nr_show, damon_sysfs_targets_nr_store);
+> +
+> +static struct attribute *damon_sysfs_targets_attrs[] = {
+> +	&damon_sysfs_targets_nr_attr.attr,
+> +	NULL,
+> +};
+> +ATTRIBUTE_GROUPS(damon_sysfs_targets);
+> +
+> +static struct kobj_type damon_sysfs_targets_ktype = {
+> +	.release = damon_sysfs_targets_release,
+> +	.sysfs_ops = &kobj_sysfs_ops,
+> +	.default_groups = damon_sysfs_targets_groups,
+> +};
+> +
+> +/*
+> + * intervals directory
+> + */
+> +
+> +struct damon_sysfs_intervals {
+> +	struct kobject kobj;
+> +	unsigned long sample_us;
+> +	unsigned long aggr_us;
+> +	unsigned long update_us;
+> +};
+> +
+> +static struct damon_sysfs_intervals *damon_sysfs_intervals_alloc(
+> +		unsigned long sample_us, unsigned long aggr_us,
+> +		unsigned long update_us)
+> +{
+> +	struct damon_sysfs_intervals *intervals = kmalloc(sizeof(*intervals),
+> +			GFP_KERNEL);
+> +
+> +	if (!intervals)
+> +		return NULL;
+> +
+> +	intervals->kobj = (struct kobject){};
+> +	intervals->sample_us = sample_us;
+> +	intervals->aggr_us = aggr_us;
+> +	intervals->update_us = update_us;
+> +	return intervals;
+> +}
+> +
+> +static ssize_t damon_sysfs_intervals_sample_us_show(struct kobject *kobj,
+> +		struct kobj_attribute *attr, char *buf)
+> +{
+> +	struct damon_sysfs_intervals *intervals = container_of(kobj,
+> +			struct damon_sysfs_intervals, kobj);
+> +
+> +	return sysfs_emit(buf, "%lu\n", intervals->sample_us);
+> +}
+> +
+> +static ssize_t damon_sysfs_intervals_sample_us_store(struct kobject *kobj,
+> +		struct kobj_attribute *attr, const char *buf, size_t count)
+> +{
+> +	struct damon_sysfs_intervals *intervals = container_of(kobj,
+> +			struct damon_sysfs_intervals, kobj);
+> +	unsigned long us;
+> +	int err = kstrtoul(buf, 0, &us);
+> +
+> +	if (err)
+> +		return -EINVAL;
+> +
+> +	intervals->sample_us = us;
+> +	return count;
+> +}
+> +
+> +static ssize_t damon_sysfs_intervals_aggr_us_show(struct kobject *kobj,
+> +		struct kobj_attribute *attr, char *buf)
+> +{
+> +	struct damon_sysfs_intervals *intervals = container_of(kobj,
+> +			struct damon_sysfs_intervals, kobj);
+> +
+> +	return sysfs_emit(buf, "%lu\n", intervals->aggr_us);
+> +}
+> +
+> +static ssize_t damon_sysfs_intervals_aggr_us_store(struct kobject *kobj,
+> +		struct kobj_attribute *attr, const char *buf, size_t count)
+> +{
+> +	struct damon_sysfs_intervals *intervals = container_of(kobj,
+> +			struct damon_sysfs_intervals, kobj);
+> +	unsigned long us;
+> +	int err = kstrtoul(buf, 0, &us);
+> +
+> +	if (err)
+> +		return -EINVAL;
+> +
+> +	intervals->aggr_us = us;
+> +	return count;
+> +}
+> +
+> +static ssize_t damon_sysfs_intervals_update_us_show(struct kobject *kobj,
+> +		struct kobj_attribute *attr, char *buf)
+> +{
+> +	struct damon_sysfs_intervals *intervals = container_of(kobj,
+> +			struct damon_sysfs_intervals, kobj);
+> +
+> +	return sysfs_emit(buf, "%lu\n", intervals->update_us);
+> +}
+> +
+> +static ssize_t damon_sysfs_intervals_update_us_store(struct kobject *kobj,
+> +		struct kobj_attribute *attr, const char *buf, size_t count)
+> +{
+> +	struct damon_sysfs_intervals *intervals = container_of(kobj,
+> +			struct damon_sysfs_intervals, kobj);
+> +	unsigned long us;
+> +	int err = kstrtoul(buf, 0, &us);
+> +
+> +	if (err)
+> +		return -EINVAL;
+> +
+> +	intervals->update_us = us;
+> +	return count;
+> +}
+> +
+> +static void damon_sysfs_intervals_release(struct kobject *kobj)
+> +{
+> +	kfree(container_of(kobj, struct damon_sysfs_intervals, kobj));
+> +}
+> +
+> +static struct kobj_attribute damon_sysfs_intervals_sample_us_attr =
+> +		__ATTR(sample_us, 0600,
+> +				damon_sysfs_intervals_sample_us_show,
+> +				damon_sysfs_intervals_sample_us_store);
+> +
+> +static struct kobj_attribute damon_sysfs_intervals_aggr_us_attr =
+> +		__ATTR(aggr_us, 0600,
+> +				damon_sysfs_intervals_aggr_us_show,
+> +				damon_sysfs_intervals_aggr_us_store);
+> +
+> +static struct kobj_attribute damon_sysfs_intervals_update_us_attr =
+> +		__ATTR(update_us, 0600,
+> +				damon_sysfs_intervals_update_us_show,
+> +				damon_sysfs_intervals_update_us_store);
+> +
+> +static struct attribute *damon_sysfs_intervals_attrs[] = {
+> +	&damon_sysfs_intervals_sample_us_attr.attr,
+> +	&damon_sysfs_intervals_aggr_us_attr.attr,
+> +	&damon_sysfs_intervals_update_us_attr.attr,
+> +	NULL,
+> +};
+> +ATTRIBUTE_GROUPS(damon_sysfs_intervals);
+> +
+> +static struct kobj_type damon_sysfs_intervals_ktype = {
+> +	.release = damon_sysfs_intervals_release,
+> +	.sysfs_ops = &kobj_sysfs_ops,
+> +	.default_groups = damon_sysfs_intervals_groups,
+> +};
+> +
+> +/*
+> + * monitoring_attrs directory
+> + */
+> +
+> +struct damon_sysfs_attrs {
+> +	struct kobject kobj;
+> +	struct damon_sysfs_intervals *intervals;
+> +	struct damon_sysfs_ul_range *nr_regions_range;
+> +};
+> +
+> +static struct damon_sysfs_attrs *damon_sysfs_attrs_alloc(void)
+> +{
+> +	struct damon_sysfs_attrs *attrs = kmalloc(sizeof(*attrs), GFP_KERNEL);
+> +
+> +	if (!attrs)
+> +		return NULL;
+> +	attrs->kobj = (struct kobject){};
+> +	return attrs;
+> +}
+> +
+> +static int damon_sysfs_attrs_add_dirs(struct damon_sysfs_attrs *attrs)
+> +{
+> +	struct damon_sysfs_intervals *intervals;
+> +	struct damon_sysfs_ul_range *nr_regions_range;
+> +	int err;
+> +
+> +	intervals = damon_sysfs_intervals_alloc(5000, 100000, 60000000);
+> +	if (!intervals)
+> +		return -ENOMEM;
+> +
+> +	err = kobject_init_and_add(&intervals->kobj,
+> +			&damon_sysfs_intervals_ktype, &attrs->kobj,
+> +			"intervals");
+> +	if (err)
+> +		goto put_intervals_out;
+> +	attrs->intervals = intervals;
+> +
+> +	nr_regions_range = damon_sysfs_ul_range_alloc(10, 1000);
+> +	if (!nr_regions_range)
+> +		goto put_intervals_out;
+> +
+> +	err = kobject_init_and_add(&nr_regions_range->kobj,
+> +			&damon_sysfs_ul_range_ktype, &attrs->kobj,
+> +			"nr_regions");
+> +	if (err)
+> +		goto put_nr_regions_intervals_out;
+> +	attrs->nr_regions_range = nr_regions_range;
+> +	return 0;
+> +
+> +put_nr_regions_intervals_out:
+> +	kobject_put(&nr_regions_range->kobj);
+> +	attrs->nr_regions_range = NULL;
+> +put_intervals_out:
+> +	kobject_put(&intervals->kobj);
+> +	attrs->intervals = NULL;
+> +	return err;
+> +}
+> +
+> +static void damon_sysfs_attrs_rm_dirs(struct damon_sysfs_attrs *attrs)
+> +{
+> +	kobject_put(&attrs->nr_regions_range->kobj);
+> +	kobject_put(&attrs->intervals->kobj);
+> +}
+> +
+> +static void damon_sysfs_attrs_release(struct kobject *kobj)
+> +{
+> +	kfree(container_of(kobj, struct damon_sysfs_attrs, kobj));
+> +}
+> +
+> +static struct attribute *damon_sysfs_attrs_attrs[] = {
+> +	NULL,
+> +};
+> +ATTRIBUTE_GROUPS(damon_sysfs_attrs);
+> +
+> +static struct kobj_type damon_sysfs_attrs_ktype = {
+> +	.release = damon_sysfs_attrs_release,
+> +	.sysfs_ops = &kobj_sysfs_ops,
+> +	.default_groups = damon_sysfs_attrs_groups,
+> +};
+> +
+> +/*
+> + * context directory
+> + */
+> +
+> +/* This should match with enum damon_ops_id */
+> +static const char * const damon_sysfs_ops_strs[] = {
+> +	"vaddr",
+> +	"paddr",
+> +};
+> +
+> +struct damon_sysfs_context {
+> +	struct kobject kobj;
+> +	enum damon_ops_id ops_id;
+> +	struct damon_sysfs_attrs *attrs;
+> +	struct damon_sysfs_targets *targets;
+> +};
+> +
+> +static struct damon_sysfs_context *damon_sysfs_context_alloc(
+> +		enum damon_ops_id ops_id)
+> +{
+> +	struct damon_sysfs_context *context = kmalloc(sizeof(*context),
+> +				GFP_KERNEL);
+> +
+> +	if (!context)
+> +		return NULL;
+> +	context->kobj = (struct kobject){};
+> +	context->ops_id = ops_id;
+> +	return context;
+> +}
+> +
+> +static int damon_sysfs_context_set_attrs(struct damon_sysfs_context *context)
+> +{
+> +	struct damon_sysfs_attrs *attrs = damon_sysfs_attrs_alloc();
+> +	int err;
+> +
+> +	if (!attrs)
+> +		return -ENOMEM;
+> +	err = kobject_init_and_add(&attrs->kobj, &damon_sysfs_attrs_ktype,
+> +			&context->kobj, "monitoring_attrs");
+> +	if (err)
+> +		goto out;
+> +	err = damon_sysfs_attrs_add_dirs(attrs);
+> +	if (err)
+> +		goto out;
+> +	context->attrs = attrs;
+> +	return 0;
+> +
+> +out:
+> +	kobject_put(&attrs->kobj);
+> +	return err;
+> +}
+> +
+> +static int damon_sysfs_context_set_targets(struct damon_sysfs_context *context)
+> +{
+> +	struct damon_sysfs_targets *targets = damon_sysfs_targets_alloc();
+> +	int err;
+> +
+> +	if (!targets)
+> +		return -ENOMEM;
+> +	err = kobject_init_and_add(&targets->kobj, &damon_sysfs_targets_ktype,
+> +			&context->kobj, "targets");
+> +	if (err) {
+> +		kobject_put(&targets->kobj);
+> +		return err;
+> +	}
+> +	context->targets = targets;
+> +	return 0;
+> +}
+> +
+> +static int damon_sysfs_context_add_dirs(struct damon_sysfs_context *context)
+> +{
+> +	int err;
+> +
+> +	err = damon_sysfs_context_set_attrs(context);
+> +	if (err)
+> +		return err;
+> +
+> +	err = damon_sysfs_context_set_targets(context);
+> +	if (err)
+> +		goto put_attrs_out;
+> +
+> +	return 0;
+> +
+> +put_attrs_out:
+> +	kobject_put(&context->attrs->kobj);
+> +	context->attrs = NULL;
+> +	return err;
+> +}
+> +
+> +static void damon_sysfs_context_rm_dirs(struct damon_sysfs_context *context)
+> +{
+> +	damon_sysfs_attrs_rm_dirs(context->attrs);
+> +	kobject_put(&context->attrs->kobj);
+> +	damon_sysfs_targets_rm_dirs(context->targets);
+> +	kobject_put(&context->targets->kobj);
+> +}
+> +
+> +static ssize_t damon_sysfs_context_operations_show(struct kobject *kobj,
+> +		struct kobj_attribute *attr, char *buf)
+> +{
+> +	struct damon_sysfs_context *context = container_of(kobj,
+> +			struct damon_sysfs_context, kobj);
+> +
+> +	return sysfs_emit(buf, "%s\n", damon_sysfs_ops_strs[context->ops_id]);
+> +}
+> +
+> +static ssize_t damon_sysfs_context_operations_store(struct kobject *kobj,
+> +		struct kobj_attribute *attr, const char *buf, size_t count)
+> +{
+> +	struct damon_sysfs_context *context = container_of(kobj,
+> +			struct damon_sysfs_context, kobj);
+> +
+> +	if (sysfs_streq(buf, damon_sysfs_ops_strs[DAMON_OPS_VADDR])) {
+> +		context->ops_id = DAMON_OPS_VADDR;
+> +		return count;
+> +	}
+> +	return -EINVAL;
+> +}
+> +
+> +static void damon_sysfs_context_release(struct kobject *kobj)
+> +{
+> +	kfree(container_of(kobj, struct damon_sysfs_context, kobj));
+> +}
+> +
+> +static struct kobj_attribute damon_sysfs_context_operations_attr = __ATTR(
+> +		operations, 0600, damon_sysfs_context_operations_show,
+> +		damon_sysfs_context_operations_store);
+> +
+> +static struct attribute *damon_sysfs_context_attrs[] = {
+> +	&damon_sysfs_context_operations_attr.attr,
+> +	NULL,
+> +};
+> +ATTRIBUTE_GROUPS(damon_sysfs_context);
+> +
+> +static struct kobj_type damon_sysfs_context_ktype = {
+> +	.release = damon_sysfs_context_release,
+> +	.sysfs_ops = &kobj_sysfs_ops,
+> +	.default_groups = damon_sysfs_context_groups,
+> +};
+> +
+> +/*
+> + * contexts directory
+> + */
+> +
+> +struct damon_sysfs_contexts {
+> +	struct kobject kobj;
+> +	struct damon_sysfs_context **contexts_arr;
+> +	int nr;
+> +};
+> +
+> +static struct damon_sysfs_contexts *damon_sysfs_contexts_alloc(void)
+> +{
+> +	return kzalloc(sizeof(struct damon_sysfs_contexts), GFP_KERNEL);
+> +}
+> +
+> +static void damon_sysfs_contexts_rm_dirs(struct damon_sysfs_contexts *contexts)
+> +{
+> +	struct damon_sysfs_context **contexts_arr = contexts->contexts_arr;
+> +	int i;
+> +
+> +	for (i = 0; i < contexts->nr; i++) {
+> +		damon_sysfs_context_rm_dirs(contexts_arr[i]);
+> +		kobject_put(&contexts_arr[i]->kobj);
+> +	}
+> +	contexts->nr = 0;
+> +	kfree(contexts_arr);
+> +	contexts->contexts_arr = NULL;
+> +}
+> +
+> +static int damon_sysfs_contexts_add_dirs(struct damon_sysfs_contexts *contexts,
+> +		int nr_contexts)
+> +{
+> +	struct damon_sysfs_context **contexts_arr, *context;
+> +	int err, i;
+> +
+> +	damon_sysfs_contexts_rm_dirs(contexts);
+> +	if (!nr_contexts)
+> +		return 0;
+> +
+> +	contexts_arr = kmalloc_array(nr_contexts, sizeof(*contexts_arr),
+> +			GFP_KERNEL | __GFP_NOWARN);
+> +	if (!contexts_arr)
+> +		return -ENOMEM;
+> +	contexts->contexts_arr = contexts_arr;
+> +
+> +	for (i = 0; i < nr_contexts; i++) {
+> +		context = damon_sysfs_context_alloc(DAMON_OPS_VADDR);
+> +		if (!context) {
+> +			damon_sysfs_contexts_rm_dirs(contexts);
+> +			return -ENOMEM;
+> +		}
+> +
+> +		err = kobject_init_and_add(&context->kobj,
+> +				&damon_sysfs_context_ktype, &contexts->kobj,
+> +				"%d", i);
+> +		if (err)
+> +			goto out;
+> +
+> +		err = damon_sysfs_context_add_dirs(context);
+> +		if (err)
+> +			goto out;
+> +
+> +		contexts_arr[i] = context;
+> +		contexts->nr++;
+> +	}
+> +	return 0;
+> +
+> +out:
+> +	damon_sysfs_contexts_rm_dirs(contexts);
+> +	kobject_put(&context->kobj);
+> +	return err;
+> +}
+> +
+> +static ssize_t damon_sysfs_contexts_nr_show(struct kobject *kobj,
+> +		struct kobj_attribute *attr, char *buf)
+> +{
+> +	struct damon_sysfs_contexts *contexts = container_of(kobj,
+> +			struct damon_sysfs_contexts, kobj);
+> +
+> +	return sysfs_emit(buf, "%d\n", contexts->nr);
+> +}
+> +
+> +static ssize_t damon_sysfs_contexts_nr_store(struct kobject *kobj,
+> +		struct kobj_attribute *attr, const char *buf, size_t count)
+> +{
+> +	struct damon_sysfs_contexts *contexts = container_of(kobj,
+> +			struct damon_sysfs_contexts, kobj);
+> +	int nr, err;
+> +
+> +	err = kstrtoint(buf, 0, &nr);
+> +	if (err)
+> +		return err;
+> +	/* TODO: support multiple contexts per kdamond */
+> +	if (nr < 0 || 1 < nr)
+> +		return -EINVAL;
+> +
+> +	if (!mutex_trylock(&damon_sysfs_lock))
+> +		return -EBUSY;
+> +	err = damon_sysfs_contexts_add_dirs(contexts, nr);
+> +	mutex_unlock(&damon_sysfs_lock);
+> +	if (err)
+> +		return err;
+> +
+> +	return count;
+> +}
+> +
+> +static void damon_sysfs_contexts_release(struct kobject *kobj)
+> +{
+> +	kfree(container_of(kobj, struct damon_sysfs_contexts, kobj));
+> +}
+> +
+> +static struct kobj_attribute damon_sysfs_contexts_nr_attr = __ATTR(nr, 0600,
+> +		damon_sysfs_contexts_nr_show, damon_sysfs_contexts_nr_store);
+> +
+> +static struct attribute *damon_sysfs_contexts_attrs[] = {
+> +	&damon_sysfs_contexts_nr_attr.attr,
+> +	NULL,
+> +};
+> +ATTRIBUTE_GROUPS(damon_sysfs_contexts);
+> +
+> +static struct kobj_type damon_sysfs_contexts_ktype = {
+> +	.release = damon_sysfs_contexts_release,
+> +	.sysfs_ops = &kobj_sysfs_ops,
+> +	.default_groups = damon_sysfs_contexts_groups,
+> +};
+> +
+> +/*
+> + * kdamond directory
+> + */
+> +
+> +struct damon_sysfs_kdamond {
+> +	struct kobject kobj;
+> +	struct damon_sysfs_contexts *contexts;
+> +};
+> +
+> +static struct damon_sysfs_kdamond *damon_sysfs_kdamond_alloc(void)
+> +{
+> +	return kzalloc(sizeof(struct damon_sysfs_kdamond), GFP_KERNEL);
+> +}
+> +
+> +static int damon_sysfs_kdamond_add_dirs(struct damon_sysfs_kdamond *kdamond)
+> +{
+> +	struct damon_sysfs_contexts *contexts;
+> +	int err;
+> +
+> +	contexts = damon_sysfs_contexts_alloc();
+> +	if (!contexts)
+> +		return -ENOMEM;
+> +
+> +	err = kobject_init_and_add(&contexts->kobj,
+> +			&damon_sysfs_contexts_ktype, &kdamond->kobj,
+> +			"contexts");
+> +	if (err) {
+> +		kobject_put(&contexts->kobj);
+> +		return err;
+> +	}
+> +	kdamond->contexts = contexts;
+> +
+> +	return err;
+> +}
+> +
+> +static void damon_sysfs_kdamond_rm_dirs(struct damon_sysfs_kdamond *kdamond)
+> +{
+> +	damon_sysfs_contexts_rm_dirs(kdamond->contexts);
+> +	kobject_put(&kdamond->contexts->kobj);
+> +}
+> +
+> +static ssize_t damon_sysfs_kdamond_state_show(struct kobject *kobj,
+> +		struct kobj_attribute *attr, char *buf)
+> +{
+> +	return sysfs_emit(buf, "off\n");
+> +}
+> +
+> +static ssize_t damon_sysfs_kdamond_state_store(struct kobject *kobj,
+> +		struct kobj_attribute *attr, const char *buf, size_t count)
+> +{
+> +	return count;
+> +}
+> +
+> +static ssize_t damon_sysfs_kdamond_pid_show(struct kobject *kobj,
+> +		struct kobj_attribute *attr, char *buf)
+> +{
+> +	return sysfs_emit(buf, "-1\n");
+> +}
+> +
+> +static void damon_sysfs_kdamond_release(struct kobject *kobj)
+> +{
+> +	kfree(container_of(kobj, struct damon_sysfs_kdamond, kobj));
+> +}
+> +
+> +static struct kobj_attribute damon_sysfs_kdamond_state_attr =
+> +	__ATTR(state, 0600, damon_sysfs_kdamond_state_show,
+> +		damon_sysfs_kdamond_state_store);
+> +
+> +static struct kobj_attribute damon_sysfs_kdamond_pid_attr = __ATTR(pid, 0400,
+> +		damon_sysfs_kdamond_pid_show, NULL);
+> +
+> +static struct attribute *damon_sysfs_kdamond_attrs[] = {
+> +	&damon_sysfs_kdamond_state_attr.attr,
+> +	&damon_sysfs_kdamond_pid_attr.attr,
+> +	NULL,
+> +};
+> +ATTRIBUTE_GROUPS(damon_sysfs_kdamond);
+> +
+> +static struct kobj_type damon_sysfs_kdamond_ktype = {
+> +	.release = damon_sysfs_kdamond_release,
+> +	.sysfs_ops = &kobj_sysfs_ops,
+> +	.default_groups = damon_sysfs_kdamond_groups,
+> +};
+> +
+> +/*
+> + * kdamonds directory
+> + */
+> +
+> +struct damon_sysfs_kdamonds {
+> +	struct kobject kobj;
+> +	struct damon_sysfs_kdamond **kdamonds_arr;
+> +	int nr;
+> +};
+> +
+> +static struct damon_sysfs_kdamonds *damon_sysfs_kdamonds_alloc(void)
+> +{
+> +	return kzalloc(sizeof(struct damon_sysfs_kdamonds), GFP_KERNEL);
+> +}
+> +
+> +static void damon_sysfs_kdamonds_rm_dirs(struct damon_sysfs_kdamonds *kdamonds)
+> +{
+> +	struct damon_sysfs_kdamond **kdamonds_arr = kdamonds->kdamonds_arr;
+> +	int i;
+> +
+> +	for (i = 0; i < kdamonds->nr; i++) {
+> +		damon_sysfs_kdamond_rm_dirs(kdamonds_arr[i]);
+> +		kobject_put(&kdamonds_arr[i]->kobj);
+> +	}
+> +	kdamonds->nr = 0;
+> +	kfree(kdamonds_arr);
+> +	kdamonds->kdamonds_arr = NULL;
+> +}
+> +
+> +static int damon_sysfs_kdamonds_add_dirs(struct damon_sysfs_kdamonds *kdamonds,
+> +		int nr_kdamonds)
+> +{
+> +	struct damon_sysfs_kdamond **kdamonds_arr, *kdamond;
+> +	int err, i;
+> +
+> +	damon_sysfs_kdamonds_rm_dirs(kdamonds);
+> +	if (!nr_kdamonds)
+> +		return 0;
+> +
+> +	kdamonds_arr = kmalloc_array(nr_kdamonds, sizeof(*kdamonds_arr),
+> +			GFP_KERNEL | __GFP_NOWARN);
+> +	if (!kdamonds_arr)
+> +		return -ENOMEM;
+> +	kdamonds->kdamonds_arr = kdamonds_arr;
+> +
+> +	for (i = 0; i < nr_kdamonds; i++) {
+> +		kdamond = damon_sysfs_kdamond_alloc();
+> +		if (!kdamond) {
+> +			damon_sysfs_kdamonds_rm_dirs(kdamonds);
+> +			return -ENOMEM;
+> +		}
+> +
+> +		err = kobject_init_and_add(&kdamond->kobj,
+> +				&damon_sysfs_kdamond_ktype, &kdamonds->kobj,
+> +				"%d", i);
+> +		if (err)
+> +			goto out;
+> +
+> +		err = damon_sysfs_kdamond_add_dirs(kdamond);
+> +		if (err)
+> +			goto out;
+> +
+> +		kdamonds_arr[i] = kdamond;
+> +		kdamonds->nr++;
+> +	}
+> +	return 0;
+> +
+> +out:
+> +	damon_sysfs_kdamonds_rm_dirs(kdamonds);
+> +	kobject_put(&kdamond->kobj);
+> +	return err;
+> +}
+> +
+> +static ssize_t damon_sysfs_kdamonds_nr_show(struct kobject *kobj,
+> +		struct kobj_attribute *attr, char *buf)
+> +{
+> +	struct damon_sysfs_kdamonds *kdamonds = container_of(kobj,
+> +			struct damon_sysfs_kdamonds, kobj);
+> +
+> +	return sysfs_emit(buf, "%d\n", kdamonds->nr);
+> +}
+> +
+> +static ssize_t damon_sysfs_kdamonds_nr_store(struct kobject *kobj,
+> +		struct kobj_attribute *attr, const char *buf, size_t count)
+> +{
+> +	struct damon_sysfs_kdamonds *kdamonds = container_of(kobj,
+> +			struct damon_sysfs_kdamonds, kobj);
+> +	int nr, err;
+> +
+> +	err = kstrtoint(buf, 0, &nr);
+> +	if (err)
+> +		return err;
+> +	if (nr < 0)
+> +		return -EINVAL;
+> +
+> +	if (!mutex_trylock(&damon_sysfs_lock))
+> +		return -EBUSY;
+> +	err = damon_sysfs_kdamonds_add_dirs(kdamonds, nr);
+> +	mutex_unlock(&damon_sysfs_lock);
+> +	if (err)
+> +		return err;
+> +
+> +	return count;
+> +}
+> +
+> +static void damon_sysfs_kdamonds_release(struct kobject *kobj)
+> +{
+> +	kfree(container_of(kobj, struct damon_sysfs_kdamonds, kobj));
+> +}
+> +
+> +static struct kobj_attribute damon_sysfs_kdamonds_nr_attr = __ATTR(nr, 0600,
+> +		damon_sysfs_kdamonds_nr_show, damon_sysfs_kdamonds_nr_store);
+> +
+> +static struct attribute *damon_sysfs_kdamonds_attrs[] = {
+> +	&damon_sysfs_kdamonds_nr_attr.attr,
+> +	NULL,
+> +};
+> +ATTRIBUTE_GROUPS(damon_sysfs_kdamonds);
+> +
+> +static struct kobj_type damon_sysfs_kdamonds_ktype = {
+> +	.release = damon_sysfs_kdamonds_release,
+> +	.sysfs_ops = &kobj_sysfs_ops,
+> +	.default_groups = damon_sysfs_kdamonds_groups,
+> +};
+> +
+> +/*
+> + * damon user interface directory
+> + */
+> +
+> +struct damon_sysfs_ui_dir {
+> +	struct kobject kobj;
+> +	struct damon_sysfs_kdamonds *kdamonds;
+> +};
+> +
+> +static struct damon_sysfs_ui_dir *damon_sysfs_ui_dir_alloc(void)
+> +{
+> +	return kzalloc(sizeof(struct damon_sysfs_ui_dir), GFP_KERNEL);
+> +}
+> +
+> +static int damon_sysfs_ui_dir_add_dirs(struct damon_sysfs_ui_dir *ui_dir)
+> +{
+> +	struct damon_sysfs_kdamonds *kdamonds;
+> +	int err;
+> +
+> +	kdamonds = damon_sysfs_kdamonds_alloc();
+> +	if (!kdamonds)
+> +		return -ENOMEM;
+> +
+> +	err = kobject_init_and_add(&kdamonds->kobj,
+> +			&damon_sysfs_kdamonds_ktype, &ui_dir->kobj,
+> +			"kdamonds");
+> +	if (err) {
+> +		kobject_put(&kdamonds->kobj);
+> +		return err;
+> +	}
+> +	ui_dir->kdamonds = kdamonds;
+> +	return err;
+> +}
+> +
+> +static void damon_sysfs_ui_dir_release(struct kobject *kobj)
+> +{
+> +	kfree(container_of(kobj, struct damon_sysfs_ui_dir, kobj));
+> +}
+> +
+> +static struct attribute *damon_sysfs_ui_dir_attrs[] = {
+> +	NULL,
+> +};
+> +ATTRIBUTE_GROUPS(damon_sysfs_ui_dir);
+> +
+> +static struct kobj_type damon_sysfs_ui_dir_ktype = {
+> +	.release = damon_sysfs_ui_dir_release,
+> +	.sysfs_ops = &kobj_sysfs_ops,
+> +	.default_groups = damon_sysfs_ui_dir_groups,
+> +};
+> +
+> +static int __init damon_sysfs_init(void)
+> +{
+> +	struct kobject *damon_sysfs_root;
+> +	struct damon_sysfs_ui_dir *admin;
+> +	int err;
+> +
+> +	damon_sysfs_root = kobject_create_and_add("damon", mm_kobj);
+> +	if (!damon_sysfs_root)
+> +		return -ENOMEM;
+> +
+> +	admin = damon_sysfs_ui_dir_alloc();
+> +	if (!admin) {
+> +		kobject_put(damon_sysfs_root);
+> +		return -ENOMEM;
+> +	}
+> +	err = kobject_init_and_add(&admin->kobj, &damon_sysfs_ui_dir_ktype,
+> +			damon_sysfs_root, "admin");
+> +	if (err)
+> +		goto out;
+> +	err = damon_sysfs_ui_dir_add_dirs(admin);
+> +	if (err)
+> +		goto out;
+> +	return 0;
+> +
+> +out:
+> +	kobject_put(&admin->kobj);
+> +	kobject_put(damon_sysfs_root);
+> +	return err;
+> +}
+> +subsys_initcall(damon_sysfs_init);
+
+-- 
+Best Regards!
+Xin Hao
+
