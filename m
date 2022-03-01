@@ -2,160 +2,103 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id F2E734C891F
-	for <lists+linux-doc@lfdr.de>; Tue,  1 Mar 2022 11:20:22 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id A91B44C8994
+	for <lists+linux-doc@lfdr.de>; Tue,  1 Mar 2022 11:44:12 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S233685AbiCAKVC (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 1 Mar 2022 05:21:02 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:57654 "EHLO
+        id S234354AbiCAKot (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 1 Mar 2022 05:44:49 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:43636 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S231678AbiCAKVB (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 1 Mar 2022 05:21:01 -0500
-Received: from mga03.intel.com (mga03.intel.com [134.134.136.65])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 0144349F1B;
-        Tue,  1 Mar 2022 02:20:20 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1646130021; x=1677666021;
-  h=date:from:to:cc:subject:message-id:references:
-   mime-version:in-reply-to;
-  bh=0eY4zn4pc+vtCu2Xj5DMz6jR8t4IQ6TDuDN/OXFaE30=;
-  b=CiZ1VpmI8hbbNqQUxrADj5hwnP4+scLVV9n2gWTpxBxjHACFrUvQgDrA
-   AVtVHaLFFGnMlcYUKy6nz0NPq3OcpMSB2PLyehDKaZMS5i6F6upa+gc1Z
-   uP84jMpe+BmVQmVm57C+aISbOGo1XiXcIUOd7q0wY5qCKp1+f6KJA60bQ
-   8Bpi6PTxn4HSMKqmkl0yeltWaHH6lMfa5/NOxk/xqhFumTv8OSs0uF5jK
-   vr+6RzJBMjT9LTgszZLoKv00fgx928BwJ4W675G3HPAwlM/8WcA0yjs5+
-   l89zK7PLrC5ggfg08bxHcbDB5jpnFGtKXU/n1GMN3A3sa1q8kWVQQFX8W
-   Q==;
-X-IronPort-AV: E=McAfee;i="6200,9189,10272"; a="253032648"
-X-IronPort-AV: E=Sophos;i="5.90,145,1643702400"; 
-   d="scan'208";a="253032648"
-Received: from orsmga002.jf.intel.com ([10.7.209.21])
-  by orsmga103.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 01 Mar 2022 02:20:19 -0800
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.90,145,1643702400"; 
-   d="scan'208";a="507751717"
-Received: from lkp-server01.sh.intel.com (HELO 2146afe809fb) ([10.239.97.150])
-  by orsmga002.jf.intel.com with ESMTP; 01 Mar 2022 02:20:16 -0800
-Received: from kbuild by 2146afe809fb with local (Exim 4.92)
-        (envelope-from <lkp@intel.com>)
-        id 1nOzc6-0000Ha-Rz; Tue, 01 Mar 2022 10:20:14 +0000
-Date:   Tue, 1 Mar 2022 18:19:11 +0800
-From:   kernel test robot <lkp@intel.com>
-To:     Veerasenareddy Burru <vburru@marvell.com>, davem@davemloft.net,
-        kuba@kernel.org, corbet@lwn.net, netdev@vger.kernel.org,
-        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org
-Cc:     kbuild-all@lists.01.org, Abhijit Ayarekar <aayarekar@marvell.com>,
-        Satananda Burla <sburla@marvell.com>
-Subject: Re: [PATCH v2 6/7] octeon_ep: add Tx/Rx processing and interrupt
- support
-Message-ID: <202203011844.8vlB6VII-lkp@intel.com>
-References: <20220301050359.19374-7-vburru@marvell.com>
+        with ESMTP id S233104AbiCAKoq (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 1 Mar 2022 05:44:46 -0500
+Received: from mail-io1-xd29.google.com (mail-io1-xd29.google.com [IPv6:2607:f8b0:4864:20::d29])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id B08968B6D2;
+        Tue,  1 Mar 2022 02:44:05 -0800 (PST)
+Received: by mail-io1-xd29.google.com with SMTP id q8so17972978iod.2;
+        Tue, 01 Mar 2022 02:44:05 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc;
+        bh=dohQLzfhr7wZu6SxVtIw3CHG42SObGN2SXyswtlVBsg=;
+        b=WrUDonvN2fO25UTk5VNVhFhd8gruRaN5xzDoP4JD0Sakac0hlwGn0vLFs4yYd4XAFv
+         uZKJIKn4j7cuELvqeeSDPXMNu2C1n0MsJpfl9rt1CcXMWz8ysAwYiWu0FU5ssFw8GnBu
+         KImb7bl4uZxpEQ889GR2FwiQtAowT5cOncwrkuheaR+UErGWa6dJdP5knzUj9ZNji+C6
+         SaCIGAmJwbqyXPo1H+nGW/xKoV4Sv5xxMQcmeQv2UvCQ1LPx9cytIPoPatO3xtpXO37Q
+         QL3drAKRoTDr8u6LO2OfPrWDqwyTUyYOMOn4N3XOwbIN3FW3QG+ijjXJMFfWWnQ72HyS
+         YuTQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=dohQLzfhr7wZu6SxVtIw3CHG42SObGN2SXyswtlVBsg=;
+        b=fWjcwHYaEZ8qElLi1dKVLNNEPPJlBkdYfAk9mLmtpjVniiaQknwJyHzxkiX1oEYBUR
+         NXdoKB5jAMVa/3+5lrduGHA6Qy5ZQAMD5FsM+JRv5LQjvtX/pYcdFUB3dfEzd9bGfnhI
+         ogtZSpBp/4sIp1G/GF9enXN2VCrlZIiF5D4E/k2eFhyiP0TiSVh0PNwcnpHRrJeg/Kt5
+         vMIptiG7xI6OqKCd8pXxdpE4psbkP9lvKHI7wa8Ht8Dn7MecvofHFAxJqssltKXMnhNJ
+         k1Q4aTpcKdBvpdnpoI5/xol71EZzd7AR1RjcDx3A7goskIR8wQ3BmufPe4xE/g2r9Ofr
+         eSEw==
+X-Gm-Message-State: AOAM530jyOQQEssfOEowONXnC/Cn7vxJZs1oKym0bhQjdFYYkKFntgrX
+        8Qh8AxQ7MXVqO1hTswymG+W5hmw6AzhkGsdK8CA=
+X-Google-Smtp-Source: ABdhPJw1aZ/CGkeAZM6RKVYVHBay0f9lMjJdsMqyLhdijbZf60uaKu7bggqdaHiabrS+XPZY5qiqhEF5Hass1iDJqZk=
+X-Received: by 2002:a6b:661a:0:b0:640:dd42:58ff with SMTP id
+ a26-20020a6b661a000000b00640dd4258ffmr18921633ioc.64.1646131444958; Tue, 01
+ Mar 2022 02:44:04 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20220301050359.19374-7-vburru@marvell.com>
-User-Agent: Mutt/1.10.1 (2018-07-13)
-X-Spam-Status: No, score=-4.8 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_MED,
-        SPF_HELO_NONE,SPF_NONE,T_SCC_BODY_TEXT_LINE autolearn=ham
-        autolearn_force=no version=3.4.6
+References: <20220228103142.3301082-1-arnd@kernel.org>
+In-Reply-To: <20220228103142.3301082-1-arnd@kernel.org>
+From:   Miguel Ojeda <miguel.ojeda.sandonis@gmail.com>
+Date:   Tue, 1 Mar 2022 11:43:53 +0100
+Message-ID: <CANiq72=wmYeBcJvRbBgRj1q_cHjZBVjxStXSu-8Ogv5bJhCqpA@mail.gmail.com>
+Subject: Re: [PATCH] [v2] Kbuild: move to -std=gnu11
+To:     Arnd Bergmann <arnd@kernel.org>
+Cc:     Linux Kbuild mailing list <linux-kbuild@vger.kernel.org>,
+        Arnd Bergmann <arnd@arndb.de>,
+        Linus Torvalds <torvalds@linux-foundation.org>,
+        Masahiro Yamada <masahiroy@kernel.org>, llvm@lists.linux.dev,
+        Jonathan Corbet <corbet@lwn.net>,
+        Federico Vaga <federico.vaga@vaga.pv.it>,
+        Alex Shi <alexs@kernel.org>, Hu Haowen <src.res@email.cn>,
+        Michal Marek <michal.lkml@markovi.net>,
+        Nick Desaulniers <ndesaulniers@google.com>,
+        Linux Doc Mailing List <linux-doc@vger.kernel.org>,
+        linux-kernel <linux-kernel@vger.kernel.org>,
+        linux-doc-tw-discuss@lists.sourceforge.net,
+        Linux ARM <linux-arm-kernel@lists.infradead.org>,
+        Intel Graphics Development <intel-gfx@lists.freedesktop.org>,
+        dri-devel <dri-devel@lists.freedesktop.org>,
+        greybus-dev@lists.linaro.org, linux-staging@lists.linux.dev,
+        Linux Btrfs <linux-btrfs@vger.kernel.org>
+Content-Type: text/plain; charset="UTF-8"
+X-Spam-Status: No, score=-2.1 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_FROM,
+        RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,SPF_PASS,T_SCC_BODY_TEXT_LINE
+        autolearn=ham autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Hi Veerasenareddy,
+On Mon, Feb 28, 2022 at 11:32 AM Arnd Bergmann <arnd@kernel.org> wrote:
+>
+> -under ``-std=gnu89`` [gcc-c-dialect-options]_: the GNU dialect of ISO C90
+> -(including some C99 features). ``clang`` [clang]_ is also supported, see
+> +under ``-std=gnu11`` [gcc-c-dialect-options]_: the GNU dialect of ISO C11
+> +(including some C17 features). ``clang`` [clang]_ is also supported, see
 
-I love your patch! Perhaps something to improve:
+I think the "(including some C17)" bit would not make much sense
+anymore. There were no major changes in C17 and GCC implements
+`-std=c11` and `-std=c17` as basically the same thing according to the
+docs (and GNU extensions apply equally to both, I would assume).
 
-[auto build test WARNING on linus/master]
-[also build test WARNING on v5.17-rc6 next-20220228]
-[If your patch is applied to the wrong git tree, kindly drop us a note.
-And when submitting patch, we suggest to use '--base' as documented in
-https://git-scm.com/docs/git-format-patch]
+When I wrote the "(including some C99 features)" I meant that GCC
+implemented some C99 features as extensions in C90 mode, and the
+kernel used some of those (e.g. the now gone VLAs).
 
-url:    https://github.com/0day-ci/linux/commits/Veerasenareddy-Burru/Add-octeon_ep-driver/20220301-130525
-base:   https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git 719fce7539cd3e186598e2aed36325fe892150cf
-config: alpha-allyesconfig (https://download.01.org/0day-ci/archive/20220301/202203011844.8vlB6VII-lkp@intel.com/config)
-compiler: alpha-linux-gcc (GCC) 11.2.0
-reproduce (this is a W=1 build):
-        wget https://raw.githubusercontent.com/intel/lkp-tests/master/sbin/make.cross -O ~/bin/make.cross
-        chmod +x ~/bin/make.cross
-        # https://github.com/0day-ci/linux/commit/e0d69d884293634bda9cacbf722024931c0194f2
-        git remote add linux-review https://github.com/0day-ci/linux
-        git fetch --no-tags linux-review Veerasenareddy-Burru/Add-octeon_ep-driver/20220301-130525
-        git checkout e0d69d884293634bda9cacbf722024931c0194f2
-        # save the config file to linux build tree
-        mkdir build_dir
-        COMPILER_INSTALL_PATH=$HOME/0day COMPILER=gcc-11.2.0 make.cross O=build_dir ARCH=alpha SHELL=/bin/bash drivers/net/ethernet/marvell/octeon_ep/
+With that changed, for `programming-language.rst`:
 
-If you fix the issue, kindly add following tag as appropriate
-Reported-by: kernel test robot <lkp@intel.com>
+Reviewed-by: Miguel Ojeda <ojeda@kernel.org>
 
-All warnings (new ones prefixed by >>):
-
-   drivers/net/ethernet/marvell/octeon_ep/octep_main.c: In function 'octep_alloc_ioq_vectors':
-   drivers/net/ethernet/marvell/octeon_ep/octep_main.c:53:38: error: implicit declaration of function 'vzalloc'; did you mean 'kvzalloc'? [-Werror=implicit-function-declaration]
-      53 |                 oct->ioq_vector[i] = vzalloc(sizeof(*oct->ioq_vector[i]));
-         |                                      ^~~~~~~
-         |                                      kvzalloc
->> drivers/net/ethernet/marvell/octeon_ep/octep_main.c:53:36: warning: assignment to 'struct octep_ioq_vector *' from 'int' makes pointer from integer without a cast [-Wint-conversion]
-      53 |                 oct->ioq_vector[i] = vzalloc(sizeof(*oct->ioq_vector[i]));
-         |                                    ^
-   drivers/net/ethernet/marvell/octeon_ep/octep_main.c:69:17: error: implicit declaration of function 'vfree'; did you mean 'kvfree'? [-Werror=implicit-function-declaration]
-      69 |                 vfree(oct->ioq_vector[i]);
-         |                 ^~~~~
-         |                 kvfree
-   cc1: some warnings being treated as errors
-
-
-vim +53 drivers/net/ethernet/marvell/octeon_ep/octep_main.c
-
-    33	
-    34	/**
-    35	 * octep_alloc_ioq_vectors() - Allocate Tx/Rx Queue interrupt info.
-    36	 *
-    37	 * @oct: Octeon device private data structure.
-    38	 *
-    39	 * Allocate resources to hold per Tx/Rx queue interrupt info.
-    40	 * This is the information passed to interrupt handler, from which napi poll
-    41	 * is scheduled and includes quick access to private data of Tx/Rx queue
-    42	 * corresponding to the interrupt being handled.
-    43	 *
-    44	 * Return: 0, on successful allocation of resources for all queue interrupts.
-    45	 *         -1, if failed to allocate any resource.
-    46	 */
-    47	static int octep_alloc_ioq_vectors(struct octep_device *oct)
-    48	{
-    49		int i;
-    50		struct octep_ioq_vector *ioq_vector;
-    51	
-    52		for (i = 0; i < oct->num_oqs; i++) {
-  > 53			oct->ioq_vector[i] = vzalloc(sizeof(*oct->ioq_vector[i]));
-    54			if (!oct->ioq_vector[i])
-    55				goto free_ioq_vector;
-    56	
-    57			ioq_vector = oct->ioq_vector[i];
-    58			ioq_vector->iq = oct->iq[i];
-    59			ioq_vector->oq = oct->oq[i];
-    60			ioq_vector->octep_dev = oct;
-    61		}
-    62	
-    63		dev_info(&oct->pdev->dev, "Allocated %d IOQ vectors\n", oct->num_oqs);
-    64		return 0;
-    65	
-    66	free_ioq_vector:
-    67		while (i) {
-    68			i--;
-    69			vfree(oct->ioq_vector[i]);
-    70			oct->ioq_vector[i] = NULL;
-    71		}
-    72		return -1;
-    73	}
-    74	
-
----
-0-DAY CI Kernel Test Service, Intel Corporation
-https://lists.01.org/hyperkitty/list/kbuild-all@lists.01.org
+Cheers,
+Miguel
