@@ -2,75 +2,98 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 317AE4C95F0
-	for <lists+linux-doc@lfdr.de>; Tue,  1 Mar 2022 21:18:16 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 2181C4C9696
+	for <lists+linux-doc@lfdr.de>; Tue,  1 Mar 2022 21:25:03 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S237845AbiCAUSl (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 1 Mar 2022 15:18:41 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:56664 "EHLO
+        id S238195AbiCAUZA (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 1 Mar 2022 15:25:00 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:33888 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S238336AbiCAUSe (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 1 Mar 2022 15:18:34 -0500
-Received: from ams.source.kernel.org (ams.source.kernel.org [145.40.68.75])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 1D0FB37024;
-        Tue,  1 Mar 2022 12:17:51 -0800 (PST)
-Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
-        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
-        (No client certificate requested)
-        by ams.source.kernel.org (Postfix) with ESMTPS id BD457B81D1D;
-        Tue,  1 Mar 2022 20:17:49 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 69D77C340F1;
-        Tue,  1 Mar 2022 20:17:46 +0000 (UTC)
-Date:   Tue, 1 Mar 2022 15:17:44 -0500
-From:   Steven Rostedt <rostedt@goodmis.org>
-To:     Jithu Joseph <jithu.joseph@intel.com>
-Cc:     hdegoede@redhat.com, markgross@kernel.org, tglx@linutronix.de,
-        mingo@redhat.com, bp@alien8.de, dave.hansen@linux.intel.com,
-        x86@kernel.org, hpa@zytor.com, corbet@lwn.net,
-        gregkh@linuxfoundation.org, andriy.shevchenko@linux.intel.com,
-        ashok.raj@intel.com, tony.luck@intel.com,
-        linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org,
-        platform-driver-x86@vger.kernel.org, patches@lists.linux.dev,
-        ravi.v.shankar@intel.com
-Subject: Re: [RFC 10/10] trace: platform/x86/intel/ifs: Add trace point to
- track Intel IFS operations
-Message-ID: <20220301151744.1ad5e11a@gandalf.local.home>
-In-Reply-To: <20220301195457.21152-11-jithu.joseph@intel.com>
-References: <20220301195457.21152-1-jithu.joseph@intel.com>
-        <20220301195457.21152-11-jithu.joseph@intel.com>
-X-Mailer: Claws Mail 3.17.8 (GTK+ 2.24.33; x86_64-pc-linux-gnu)
+        with ESMTP id S238542AbiCAUXV (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 1 Mar 2022 15:23:21 -0500
+Received: from mail-lf1-x12e.google.com (mail-lf1-x12e.google.com [IPv6:2a00:1450:4864:20::12e])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 0683AA0BF6
+        for <linux-doc@vger.kernel.org>; Tue,  1 Mar 2022 12:20:38 -0800 (PST)
+Received: by mail-lf1-x12e.google.com with SMTP id m14so28825365lfu.4
+        for <linux-doc@vger.kernel.org>; Tue, 01 Mar 2022 12:20:38 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=linux-foundation.org; s=google;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc;
+        bh=PdjKf/a3poLbp/gbxt+Rqw8zr6wpWCPEMBt3Gdf0vVY=;
+        b=K7n4eVxkkqxw4LVOCYp6qjz4Lrn8nUG8scqpDLjNdEqFXZMud6qwqiSVAz5st7Yg7d
+         vC2q3Dqvtvzi4XIPeFoMoc2+dMBhZ16QOgzUWOKknYeZr7LRcjqzvrH7Gver9/sEKKQs
+         f6/zgOwraRIJv6M9/T7aFKvmQFpJdJkC/c588=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=PdjKf/a3poLbp/gbxt+Rqw8zr6wpWCPEMBt3Gdf0vVY=;
+        b=cDihLAwO++jpIM8L47pqAXeBANSBD0Vd7rKod+2PALdXkZSBpD5upLGYIy27sxVNbZ
+         gHOSgX4dECZY96wi0eDj1kIckpueU/F7FZ7bEyrzNGOJKRsOlhpsRjwJXvA5MGSKvkMV
+         7wUQQc9XG1ehm/MYVu194HIgmb3Hm+AuqMT8Pi2//qHlnhmFeAnvwoRBL13e+/0KTRho
+         iKbHvtginXoajiJ5q9z+cTJxH7WfwHI25x/Y4rvhn4hWw9g/Lr2EKllet/sCf8p4ENFQ
+         jBebJK0KlC1H8EJsHbBU4JDzlvHoeELGo+IdnqQqDrqWscpNaFaJNaoTXWCbXeWFZsJq
+         jgug==
+X-Gm-Message-State: AOAM530xbT01eHhds2X5FlloZPl2iZMCm+vbz2x/udRTuf17XzmhMziX
+        sFrqYd/fhZfmqQkwuFLJGg/b2Omiat2IvG+zzAE=
+X-Google-Smtp-Source: ABdhPJynUMyTsVuR8UUlwlsPTIq8rBzNFjzfnBnV8udLpsXLtWql2lgzW6NxG8o2IKNXHVnlzmxtZA==
+X-Received: by 2002:a05:6512:1105:b0:443:8b92:29ff with SMTP id l5-20020a056512110500b004438b9229ffmr16958999lfg.413.1646166028722;
+        Tue, 01 Mar 2022 12:20:28 -0800 (PST)
+Received: from mail-lj1-f176.google.com (mail-lj1-f176.google.com. [209.85.208.176])
+        by smtp.gmail.com with ESMTPSA id u16-20020ac25190000000b004433b80c1d3sm1651711lfi.182.2022.03.01.12.20.26
+        for <linux-doc@vger.kernel.org>
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Tue, 01 Mar 2022 12:20:27 -0800 (PST)
+Received: by mail-lj1-f176.google.com with SMTP id 29so23371000ljv.10
+        for <linux-doc@vger.kernel.org>; Tue, 01 Mar 2022 12:20:26 -0800 (PST)
+X-Received: by 2002:a2e:aa1f:0:b0:244:c2ea:7f20 with SMTP id
+ bf31-20020a2eaa1f000000b00244c2ea7f20mr18277669ljb.164.1646166026459; Tue, 01
+ Mar 2022 12:20:26 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: 7bit
-X-Spam-Status: No, score=-6.7 required=5.0 tests=BAYES_00,
-        HEADER_FROM_DIFFERENT_DOMAINS,RCVD_IN_DNSWL_HI,SPF_HELO_NONE,SPF_PASS,
-        T_SCC_BODY_TEXT_LINE autolearn=ham autolearn_force=no version=3.4.6
+References: <20220301145233.3689119-1-arnd@kernel.org> <20220301145233.3689119-2-arnd@kernel.org>
+ <CAKwvOdnkfuT_w_0RNCb+WTKJ+282zLKmhB9UNG=D-UFz9VkUng@mail.gmail.com> <CAKwvOdn-PrCUPe2WzLv18AH3=9DjtFES+r=M1DhoQivy8sHm-g@mail.gmail.com>
+In-Reply-To: <CAKwvOdn-PrCUPe2WzLv18AH3=9DjtFES+r=M1DhoQivy8sHm-g@mail.gmail.com>
+From:   Linus Torvalds <torvalds@linux-foundation.org>
+Date:   Tue, 1 Mar 2022 12:20:10 -0800
+X-Gmail-Original-Message-ID: <CAHk-=wh4OdQANe7TLYGdPWUub0MEdbGDr72wpATHxypaSEGAyg@mail.gmail.com>
+Message-ID: <CAHk-=wh4OdQANe7TLYGdPWUub0MEdbGDr72wpATHxypaSEGAyg@mail.gmail.com>
+Subject: Re: [PATCH 2/3] treewide: use -Wdeclaration-after-statement
+To:     Nick Desaulniers <ndesaulniers@google.com>
+Cc:     Arnd Bergmann <arnd@kernel.org>,
+        Masahiro Yamada <masahiroy@kernel.org>,
+        Arnd Bergmann <arnd@arndb.de>, Marco Elver <elver@google.com>,
+        Jani Nikula <jani.nikula@intel.com>,
+        David Sterba <dsterba@suse.com>, Alex Shi <alexs@kernel.org>,
+        Miguel Ojeda <ojeda@kernel.org>,
+        Mark Rutland <mark.rutland@arm.com>,
+        Linux Kbuild mailing list <linux-kbuild@vger.kernel.org>,
+        llvm@lists.linux.dev,
+        "open list:DOCUMENTATION" <linux-doc@vger.kernel.org>,
+        Linux Kernel Mailing List <linux-kernel@vger.kernel.org>
+Content-Type: text/plain; charset="UTF-8"
+X-Spam-Status: No, score=-1.8 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+        DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
+        RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,SPF_PASS,T_SCC_BODY_TEXT_LINE
+        autolearn=no autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Tue,  1 Mar 2022 11:54:57 -0800
-Jithu Joseph <jithu.joseph@intel.com> wrote:
+On Tue, Mar 1, 2022 at 12:06 PM Nick Desaulniers
+<ndesaulniers@google.com> wrote:
+>
+> That said, there's a few additional places that reset KBUILD_CFLAGS.
 
-> +	TP_STRUCT__entry(
-> +		__field(	u8,	start	)
-> +		__field(	u8,	stop	)
-> +		__field(	u64,	status	)
-> +	),
+Yeah, the boot code and vdso code often sets its own private flags,
+because it's _so_ different.
 
-I'd suggest swapping this to:
+The generic kernel CFLAGS often don't work at all, because that code
+may be doing some truly horrendous things.
 
-		__field(	u64,	status	)
-		__field(	u8,	start	)
-		__field(	u8,	stop	)
+So I agree that this may not catch all the kernel code, but I don't
+think it's much of a problem.
 
-As trace events are usually aligned by 4 bytes (sometimes 8 for archs that
-require 8byte alignment for 8 byte words), but any event, putting the
-padding at the end of the event is better than in the middle of the event.
-
-Having the u64 come after two u8 (two byes) will pretty much guarantee a 6
-bytes hole in the middle of the event.
-
--- Steve
+             Linus
