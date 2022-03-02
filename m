@@ -2,122 +2,233 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id A955C4CB2D5
-	for <lists+linux-doc@lfdr.de>; Thu,  3 Mar 2022 00:51:45 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 4E8064CB310
+	for <lists+linux-doc@lfdr.de>; Thu,  3 Mar 2022 00:52:07 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S229475AbiCBXpy (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 2 Mar 2022 18:45:54 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:51982 "EHLO
+        id S229473AbiCBXsF (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 2 Mar 2022 18:48:05 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:33582 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S229491AbiCBXpx (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Wed, 2 Mar 2022 18:45:53 -0500
-Received: from mail-oo1-xc29.google.com (mail-oo1-xc29.google.com [IPv6:2607:f8b0:4864:20::c29])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 4FB41483B0;
-        Wed,  2 Mar 2022 15:43:48 -0800 (PST)
-Received: by mail-oo1-xc29.google.com with SMTP id j7-20020a4ad6c7000000b0031c690e4123so3845592oot.11;
-        Wed, 02 Mar 2022 15:43:48 -0800 (PST)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=x-gm-message-state:date:from:to:cc:subject:message-id:references
-         :mime-version:content-disposition:in-reply-to;
-        bh=/c70eOOtZ8Slm0RoKC+PAhJNIVgAv9doZtxHf/Xm/kc=;
-        b=D75DC4zuoJBqmhya9kPnt4KrKzDXMqZ75ebnx3hhjnbfIBCys7HuFEWftGWMjJ4p9j
-         CKCm3AMypFD3XKtVX2VPFs3ECFXjgxwYTrSCkhFwMYHnoP1fJyrGSFM9jvOqHx16Phk/
-         RAi2XZRM9JZsd9Wx5gbt9gagkLhGwDMCYFzkWdYm9VCHVHkwqt8IiwTx1Gb9QHERnYMJ
-         5As4v7RqFn7ivCaNPlNV4LSIZNBqR+gQif5sLQBvINiLqgJJ1rSd6+V4RYG7/Ctdc1QA
-         eteYk5L5EAaQzOiVpiRAyEQ9AvFuPx4P0avz2jCtdPxuQxWMCR4v+t0VWDrS0B5CPFs7
-         nBjA==
-X-Gm-Message-State: AOAM532NaU3rEKogtt/dZRINul3XjGJJ0+J2bcQsxMNmEN7cjNEyuEQp
-        ZgOoJeCA+0s/UWyHX15I+ZatRE6XOw==
-X-Google-Smtp-Source: ABdhPJwgPoO9G+g2UL7d6AnfejCdiifxATPEVty//3FdiAhYyj/XEHnLOtfsAaL+W8FuBOOev/+m4Q==
-X-Received: by 2002:a05:6871:85:b0:d9:ac7a:7a5a with SMTP id u5-20020a056871008500b000d9ac7a7a5amr1932120oaa.9.1646264526194;
-        Wed, 02 Mar 2022 15:42:06 -0800 (PST)
-Received: from robh.at.kernel.org (66-90-148-213.dyn.grandenetworks.net. [66.90.148.213])
-        by smtp.gmail.com with ESMTPSA id a11-20020a0568300b8b00b005acfd19434asm163073otv.75.2022.03.02.15.42.05
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 02 Mar 2022 15:42:05 -0800 (PST)
-Received: (nullmailer pid 276450 invoked by uid 1000);
-        Wed, 02 Mar 2022 23:42:04 -0000
-Date:   Wed, 2 Mar 2022 17:42:04 -0600
-From:   Rob Herring <robh@kernel.org>
-To:     Pawel Dembicki <paweldembicki@gmail.com>
-Cc:     devicetree@vger.kernel.org, linux-doc@vger.kernel.org,
-        Jacek Anaszewski <jacek.anaszewski@gmail.com>,
-        Pavel Machek <pavel@ucw.cz>
-Subject: Re: [PATCH] leds: add new functions for mobile routers
-Message-ID: <YiAAzH4GDnC8ridY@robh.at.kernel.org>
-References: <20220218085002.18110-1-paweldembicki@gmail.com>
+        with ESMTP id S229599AbiCBXsD (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Wed, 2 Mar 2022 18:48:03 -0500
+Received: from ams.source.kernel.org (ams.source.kernel.org [IPv6:2604:1380:4601:e00::1])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 6F1CF17185A;
+        Wed,  2 Mar 2022 15:47:06 -0800 (PST)
+Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
+        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+        (No client certificate requested)
+        by ams.source.kernel.org (Postfix) with ESMTPS id D3278B82259;
+        Wed,  2 Mar 2022 23:47:04 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id EA1D5C004E1;
+        Wed,  2 Mar 2022 23:47:02 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+        s=k20201202; t=1646264823;
+        bh=iNqELq+lX+h6oGIXCLQayAVdk7lzG1NGvnedGOzYkkM=;
+        h=From:To:Cc:Subject:Date:From;
+        b=RTYDe4ktdxhZsPRhExKj5tzN1nAbRVZrUpiXPL2JtIpf2z/I5dM3rN/1hplrrHVs/
+         AUUE+VpS6cjgBRyL66ETXfgZwMZAYlZPgDbdWIDa65uq/AxQlf6oG9J9RWutENDa0o
+         JHHftuSm5ZOPYgoGkP591g+wjyXgKK4yZnaK9ZJHlbBAiVQE63iEGuokIK6nUFN1bo
+         RG3Yiz6cY6KfcrZwCa2dsWYIkiI1oEgeaUI1Fn4LFh3SGmg1IkY7WRVNAVZ/j7wXGM
+         Ri3ihv+umpKM4bgUArI+aDAWp5qB1oWbM1js+cB/KBgtkh2ZZh7Q4NtKvdNxLpbAff
+         socg10N3TsW5Q==
+From:   Nathan Chancellor <nathan@kernel.org>
+To:     Masahiro Yamada <masahiroy@kernel.org>
+Cc:     Nick Desaulniers <ndesaulniers@google.com>,
+        Shuah Khan <shuah@kernel.org>, llvm@lists.linux.dev,
+        linux-kbuild@vger.kernel.org, linux-doc@vger.kernel.org,
+        linux-kernel@vger.kernel.org, linux-kselftest@vger.kernel.org,
+        Nathan Chancellor <nathan@kernel.org>,
+        Peter Zijlstra <peterz@infradead.org>,
+        Kees Cook <keescook@chromium.org>
+Subject: [PATCH] kbuild: Allow a suffix with $(LLVM)
+Date:   Wed,  2 Mar 2022 16:44:01 -0700
+Message-Id: <20220302234400.782002-1-nathan@kernel.org>
+X-Mailer: git-send-email 2.35.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20220218085002.18110-1-paweldembicki@gmail.com>
-X-Spam-Status: No, score=-1.2 required=5.0 tests=BAYES_00,
-        FREEMAIL_ENVFROM_END_DIGIT,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
-        HEADER_FROM_DIFFERENT_DOMAINS,RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,
-        SPF_PASS,T_SCC_BODY_TEXT_LINE autolearn=no autolearn_force=no
-        version=3.4.6
+Content-Transfer-Encoding: 8bit
+X-Spam-Status: No, score=-7.5 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_HI,
+        SPF_HELO_NONE,SPF_PASS,T_SCC_BODY_TEXT_LINE autolearn=ham
+        autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Fri, Feb 18, 2022 at 09:50:02AM +0100, Pawel Dembicki wrote:
-> 2G/2G/4G routers have some special leds functions:
->   - signal strength, which shows info about signal status.
->     Some devices have multicolor indication (e.g. D-Link DWR-960)
->     other use multiple leds for different levels (e.g. Cell-C RTL30VW)
->   - connection status, which shows if connection is active. Some devices
->     have multiple leds for different bands (e.g. D-Link DWR-960).
->   - sms indicator
-> 
-> This patch adds new LED_FUNCTION_* defines of them.
-> 
-> Signed-off-by: Pawel Dembicki <paweldembicki@gmail.com>
-> ---
->  Documentation/leds/well-known-leds.txt | 9 +++++++++
->  include/dt-bindings/leds/common.h      | 5 +++++
->  2 files changed, 14 insertions(+)
-> 
-> diff --git a/Documentation/leds/well-known-leds.txt b/Documentation/leds/well-known-leds.txt
-> index 2160382c86be..677cf7e57a76 100644
-> --- a/Documentation/leds/well-known-leds.txt
-> +++ b/Documentation/leds/well-known-leds.txt
-> @@ -16,6 +16,15 @@ but then try the legacy ones, too.
->  
->  Notice there's a list of functions in include/dt-bindings/leds/common.h .
->  
-> +* 4G/3G/2G routers
-> +
-> +Cellular routers use LEDs for signal strength identification and connection
-> +status. Some models also have incoming SMS indicator.
-> +
-> +Good: "*:connection"
-> +Good: "*:signal"
-> +Good: "*:sms"
-> +
->  * Gamepads and joysticks
->  
->  Game controllers may feature LEDs to indicate a player number. This is commonly
-> diff --git a/include/dt-bindings/leds/common.h b/include/dt-bindings/leds/common.h
-> index 3be89a7c20a9..3adfa120353e 100644
-> --- a/include/dt-bindings/leds/common.h
-> +++ b/include/dt-bindings/leds/common.h
-> @@ -60,6 +60,11 @@
->  #define LED_FUNCTION_MICMUTE "micmute"
->  #define LED_FUNCTION_MUTE "mute"
->  
-> +/* Used for 4G/3G/2G routers. */
-> +#define LED_FUNCTION_CONNECTION "connection"
+The LLVM make variable allows a developer to quickly switch between the
+GNU and LLVM tools. However, it does not handle versioned binaries, such
+as the ones shipped by Debian, as LLVM=1 just defines the tool variables
+with the unversioned binaries.
 
-wan?
+There was some discussion during the review of the patch that introduces
+LLVM=1 around versioned binaries, ultimately coming to the conclusion
+that developers can just add the folder that contains the unversioned
+binaries to their PATH, as Debian's versioned suffixed binaries are
+really just symlinks to the unversioned binaries in /usr/lib/llvm-#/bin:
 
-> +#define LED_FUNCTION_SIGNAL "signal"
-> +#define LED_FUNCTION_SMS "sms"
+$ realpath /usr/bin/clang-14
+/usr/lib/llvm-14/bin/clang
 
-mail?
+$ PATH=/usr/lib/llvm-14/bin:$PATH make ... LLVM=1
 
-The whole idea with defining the names was to not create different names 
-for roughly the same thing.
+However, that can be cumbersome to developers who are constantly testing
+series with different toolchains and versions. It is simple enough to
+support these versioned binaries directly in the Kbuild system by
+allowing the developer to specify the version suffix with LLVM=, which
+is shorter than the above suggestion:
 
-Rob
+$ make ... LLVM=-14
+
+It does not change the meaning of LLVM=1 (which will continue to use
+unversioned binaries) and it does not add too much additional complexity
+to the existing $(LLVM) code, while allowing developers to quickly test
+their series with different versions of the whole LLVM suite of tools.
+
+Link: https://lore.kernel.org/r/20200317215515.226917-1-ndesaulniers@google.com/
+Link: https://lore.kernel.org/r/20220224151322.072632223@infradead.org/
+Suggested-by: Peter Zijlstra <peterz@infradead.org>
+Reviewed-by: Kees Cook <keescook@chromium.org>
+Reviewed-by: Nick Desaulniers <ndesaulniers@google.com>
+Signed-off-by: Nathan Chancellor <nathan@kernel.org>
+---
+
+RFC -> v1: https://lore.kernel.org/r/Yh%2FegU1LZudfrgVy@dev-arch.thelio-3990X/
+
+* Tidy up commit message slightly.
+
+* Add tags.
+
+* Add links to prior discussions for context.
+
+* Add change to tools/testing/selftests/lib.mk.
+
+I would like for this to go through the Kbuild tree, please ack as
+necessary.
+
+ Documentation/kbuild/llvm.rst  |  7 +++++++
+ Makefile                       | 24 ++++++++++++++----------
+ tools/scripts/Makefile.include | 20 ++++++++++++--------
+ tools/testing/selftests/lib.mk |  6 +++++-
+ 4 files changed, 38 insertions(+), 19 deletions(-)
+
+diff --git a/Documentation/kbuild/llvm.rst b/Documentation/kbuild/llvm.rst
+index d32616891dcf..5805a8473a36 100644
+--- a/Documentation/kbuild/llvm.rst
++++ b/Documentation/kbuild/llvm.rst
+@@ -60,6 +60,13 @@ They can be enabled individually. The full list of the parameters: ::
+ 	  OBJCOPY=llvm-objcopy OBJDUMP=llvm-objdump READELF=llvm-readelf \
+ 	  HOSTCC=clang HOSTCXX=clang++ HOSTAR=llvm-ar HOSTLD=ld.lld
+ 
++If your LLVM tools have a suffix and you prefer to test an explicit version rather
++than the unsuffixed executables, use ``LLVM=<suffix>``. For example: ::
++
++	make LLVM=-14
++
++will use ``clang-14``, ``ld.lld-14``, etc.
++
+ The integrated assembler is enabled by default. You can pass ``LLVM_IAS=0`` to
+ disable it.
+ 
+diff --git a/Makefile b/Makefile
+index a82095c69fdd..963840c00eae 100644
+--- a/Makefile
++++ b/Makefile
+@@ -424,8 +424,12 @@ HOST_LFS_LDFLAGS := $(shell getconf LFS_LDFLAGS 2>/dev/null)
+ HOST_LFS_LIBS := $(shell getconf LFS_LIBS 2>/dev/null)
+ 
+ ifneq ($(LLVM),)
+-HOSTCC	= clang
+-HOSTCXX	= clang++
++ifneq ($(LLVM),1)
++LLVM_SFX := $(LLVM)
++endif
++
++HOSTCC	= clang$(LLVM_SFX)
++HOSTCXX	= clang++$(LLVM_SFX)
+ else
+ HOSTCC	= gcc
+ HOSTCXX	= g++
+@@ -444,14 +448,14 @@ KBUILD_HOSTLDLIBS   := $(HOST_LFS_LIBS) $(HOSTLDLIBS)
+ # Make variables (CC, etc...)
+ CPP		= $(CC) -E
+ ifneq ($(LLVM),)
+-CC		= clang
+-LD		= ld.lld
+-AR		= llvm-ar
+-NM		= llvm-nm
+-OBJCOPY		= llvm-objcopy
+-OBJDUMP		= llvm-objdump
+-READELF		= llvm-readelf
+-STRIP		= llvm-strip
++CC		= clang$(LLVM_SFX)
++LD		= ld.lld$(LLVM_SFX)
++AR		= llvm-ar$(LLVM_SFX)
++NM		= llvm-nm$(LLVM_SFX)
++OBJCOPY		= llvm-objcopy$(LLVM_SFX)
++OBJDUMP		= llvm-objdump$(LLVM_SFX)
++READELF		= llvm-readelf$(LLVM_SFX)
++STRIP		= llvm-strip$(LLVM_SFX)
+ else
+ CC		= $(CROSS_COMPILE)gcc
+ LD		= $(CROSS_COMPILE)ld
+diff --git a/tools/scripts/Makefile.include b/tools/scripts/Makefile.include
+index 79d102304470..ab3b2a7dcc94 100644
+--- a/tools/scripts/Makefile.include
++++ b/tools/scripts/Makefile.include
+@@ -52,11 +52,15 @@ define allow-override
+ endef
+ 
+ ifneq ($(LLVM),)
+-$(call allow-override,CC,clang)
+-$(call allow-override,AR,llvm-ar)
+-$(call allow-override,LD,ld.lld)
+-$(call allow-override,CXX,clang++)
+-$(call allow-override,STRIP,llvm-strip)
++ifneq ($(LLVM),1)
++LLVM_SFX := $(LLVM)
++endif
++
++$(call allow-override,CC,clang$(LLVM_SFX))
++$(call allow-override,AR,llvm-ar$(LLVM_SFX))
++$(call allow-override,LD,ld.lld$(LLVM_SFX))
++$(call allow-override,CXX,clang++$(LLVM_SFX))
++$(call allow-override,STRIP,llvm-strip$(LLVM_SFX))
+ else
+ # Allow setting various cross-compile vars or setting CROSS_COMPILE as a prefix.
+ $(call allow-override,CC,$(CROSS_COMPILE)gcc)
+@@ -69,9 +73,9 @@ endif
+ CC_NO_CLANG := $(shell $(CC) -dM -E -x c /dev/null | grep -Fq "__clang__"; echo $$?)
+ 
+ ifneq ($(LLVM),)
+-HOSTAR  ?= llvm-ar
+-HOSTCC  ?= clang
+-HOSTLD  ?= ld.lld
++HOSTAR  ?= llvm-ar$(LLVM_SFX)
++HOSTCC  ?= clang$(LLVM_SFX)
++HOSTLD  ?= ld.lld$(LLVM_SFX)
+ else
+ HOSTAR  ?= ar
+ HOSTCC  ?= gcc
+diff --git a/tools/testing/selftests/lib.mk b/tools/testing/selftests/lib.mk
+index a40add31a2e3..b3ab713537c6 100644
+--- a/tools/testing/selftests/lib.mk
++++ b/tools/testing/selftests/lib.mk
+@@ -1,7 +1,11 @@
+ # This mimics the top-level Makefile. We do it explicitly here so that this
+ # Makefile can operate with or without the kbuild infrastructure.
+ ifneq ($(LLVM),)
+-CC := clang
++ifneq ($(LLVM),1)
++LLVM_SFX := $(LLVM)
++endif
++
++CC := clang$(LLVM_SFX)
+ else
+ CC := $(CROSS_COMPILE)gcc
+ endif
+
+base-commit: 55de8686df7ed2b5237867b130e30c728bbd9db4
+-- 
+2.35.1
+
