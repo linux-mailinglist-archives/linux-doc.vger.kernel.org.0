@@ -2,298 +2,186 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 4410C4CB878
-	for <lists+linux-doc@lfdr.de>; Thu,  3 Mar 2022 09:10:00 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id A36F64CB881
+	for <lists+linux-doc@lfdr.de>; Thu,  3 Mar 2022 09:14:43 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S229752AbiCCIKm (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 3 Mar 2022 03:10:42 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:53268 "EHLO
+        id S229678AbiCCIP0 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 3 Mar 2022 03:15:26 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:37780 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S231127AbiCCIKl (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Thu, 3 Mar 2022 03:10:41 -0500
-Received: from mail-pj1-x102b.google.com (mail-pj1-x102b.google.com [IPv6:2607:f8b0:4864:20::102b])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 368EE170D7E
-        for <linux-doc@vger.kernel.org>; Thu,  3 Mar 2022 00:09:56 -0800 (PST)
-Received: by mail-pj1-x102b.google.com with SMTP id c16-20020a17090aa61000b001befad2bfaaso3688551pjq.1
-        for <linux-doc@vger.kernel.org>; Thu, 03 Mar 2022 00:09:56 -0800 (PST)
+        with ESMTP id S229662AbiCCIPZ (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Thu, 3 Mar 2022 03:15:25 -0500
+Received: from mail-pf1-x429.google.com (mail-pf1-x429.google.com [IPv6:2607:f8b0:4864:20::429])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 17E7D2C12A;
+        Thu,  3 Mar 2022 00:14:40 -0800 (PST)
+Received: by mail-pf1-x429.google.com with SMTP id j1so148546pfj.5;
+        Thu, 03 Mar 2022 00:14:40 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
-        h=from:to:cc:subject:date:message-id:in-reply-to:references
-         :mime-version:content-transfer-encoding;
-        bh=BlHftytjBuyoRKIXnSA9u4UHiVRKtBie/ZZSVHzn4HE=;
-        b=L2UNx+WqtGzUPMfGtVgcgF51DX9vz7Sw4DogZVN2phE/aKEyzlwm9UfWoPEASAaT/v
-         Fh9/NqolS5gXOJV5UOJPFxfoY88TtSmaP5x6LUHBvdhQZDqEjjIlN3uRGq9JRxaoAE+n
-         9Dn4pF7UovFMYxwOaW3RAVLrf0EAjRHl1P+cVfMvAmAQzWcGewzDIG9mTbTEtZN2qqXJ
-         Mj5HaKQsDdPDm6YKp2dImq0HaYhI7d4tJZLbA/ky+FG++xSDHdvB/P9js6MOKAbMvreT
-         Sw/31hnKkpcRa0puWe0aD9cs/m2Q//ZUMBOhBe0KlD1NH9B1H8y/k50WxPPo6UIUWohh
-         qUcg==
+        h=date:from:to:cc:subject:message-id:references:mime-version
+         :content-disposition:in-reply-to;
+        bh=ISlWWlirLRCfRuygLCDpsxrSlB4F7uzE5cIMR4QLuec=;
+        b=UuzTuUci6aK6ow1N3IaTsNO7MQ8a6Nrzw+5mQsqg3df+XZJhIZdmlJOI6kc6LDmtnA
+         CmPj8spfKFgFMcZ0Df6n05cWcoeoNoWH5rO6k8MFV4f4g2rfhqoxZ9XpwvuPETpiYqw7
+         W9LICq6mA41eGxZ3IZ/DHaB+ze3JJS5sEQCV5fApzEOOJU5n6MGRSqSz4BUCEH/sUd+0
+         6GeYIzAAB3V2MIdt5XNPU5Cc1Hgh5JKCdoGaPf/qgw9U80RNUBRfXzTzAk52694KriMH
+         k415d8/DJ0RZAOlFYjyUn33QqAJz+n8Mx/8vWZduCRJC2ZztCtJtLwIPjqn6ddZ4/tMp
+         Vd5A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-         :references:mime-version:content-transfer-encoding;
-        bh=BlHftytjBuyoRKIXnSA9u4UHiVRKtBie/ZZSVHzn4HE=;
-        b=4BbObnz/78iY0uuTFiv2dMxfrGff4qOchQK9Zo2dT6uGarP32ExKz6pxSKDRk7qNdf
-         UZWpXoI3kr/7Ju7cPxXCEH8VyXDkkHF6+8WGdOOcnFJmUCMBxrO0vxBEvDIyZvJf9ncy
-         d4Ev8hS1IRMHcSMeQDO+I1VwFwov7HVHtgayr4ug4Pcoq6w4yAtyf5xMF6QDh9iofAb9
-         pjLqhnP9k1/fXS+rWoU1777xsLmcx1mrwkr8ZYQcOTdVLXKmw1ZxynOB1FThxMr9hFxt
-         qUUAY4JITRAsY170iGJ8vMm/evOvmms4vBTjYw6xvdtl8nRcQl8biTVe68mCxCJg16Vi
-         akQA==
-X-Gm-Message-State: AOAM531ojJUldRaxOYS4WzB1GYTeNyyLdmawcF58Fz9Ru0J7Ua+3/1it
-        BjS4MzP5HHhiQg2/df2nJuGEKeUb8KT16N03
-X-Google-Smtp-Source: ABdhPJzzsMAwm4LBgYt3v6EcHuqdrldA7D+hWR+NzhYiYgDPa6we4kppLmw1MN9iEzFguC7XiVNQnA==
-X-Received: by 2002:a17:90a:8581:b0:1b2:7541:af6c with SMTP id m1-20020a17090a858100b001b27541af6cmr4076980pjn.48.1646294995626;
-        Thu, 03 Mar 2022 00:09:55 -0800 (PST)
-Received: from localhost.localdomain (42-200-190-71.static.imsbiz.com. [42.200.190.71])
-        by smtp.gmail.com with ESMTPSA id 6-20020a630006000000b0036d11540db8sm1371229pga.76.2022.03.03.00.09.53
+        h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+         :mime-version:content-disposition:in-reply-to;
+        bh=ISlWWlirLRCfRuygLCDpsxrSlB4F7uzE5cIMR4QLuec=;
+        b=PEnpbA0CG7TgsWIoEi/mIljJFn/5sO1F4Iox6sY6/Q+xFyRsTh9OHtdXy4/DcENpfj
+         NIAvBSx5lPDzUoR+rp2MKTvihRVq/fruPJ6vyCv7iFiTe0Jx8sA2rKYEh93WzoepsFDG
+         7wyWuy4o46w3/b/h61otD1KQ8nPs0NxU4GU8J7/5ZBoHW/4Ephy+43gYspVOxZ+dh6Nn
+         wC29d8ThcC4S8b5FcN11gg0ayz0x9prLivried0kbbh6w8dkA4TnMVn+bOg50X1zHGwJ
+         n43FOTNr30m8WqvnGKeKD8o9QeRQvxJ7QGIQQaPyMiINziR16cHXUPdxrvJ67ptq4Tpa
+         yjBg==
+X-Gm-Message-State: AOAM531zMpROycoITRa8+tVf7OFn1OeneJu511/zLFOr3H4xY+1OUjb0
+        Q9231lnO+k+y2DF8yX5obWc=
+X-Google-Smtp-Source: ABdhPJxcNkKpsuJjHdwFnkDb4TH/wt2cxpWJ35c6lExQbrgrQ00nw8YUMZseH1O+SPJfCQ/57hMpUA==
+X-Received: by 2002:a05:6a00:23d1:b0:4f4:76:4b69 with SMTP id g17-20020a056a0023d100b004f400764b69mr22058010pfc.29.1646295279600;
+        Thu, 03 Mar 2022 00:14:39 -0800 (PST)
+Received: from ip-172-31-19-208.ap-northeast-1.compute.internal (ec2-18-181-137-102.ap-northeast-1.compute.amazonaws.com. [18.181.137.102])
+        by smtp.gmail.com with ESMTPSA id 23-20020a17090a0d5700b001bc3c650e01sm7792755pju.1.2022.03.03.00.14.35
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 03 Mar 2022 00:09:55 -0800 (PST)
-From:   Yanteng Si <siyanteng01@gmail.com>
-X-Google-Original-From: Yanteng Si <siyanteng@loongson.cn>
-To:     corbet@lwn.net, alexs@kernel.org, seakeel@gmail.com
-Cc:     Yanteng Si <siyanteng@loongson.cn>, chenhuacai@kernel.org,
-        jiaxun.yang@flygoat.com, linux-doc@vger.kernel.org,
-        siyanteng01@gmail.com
-Subject: [PATCH 3/3] docs/zh_CN: add devicetree of_unittest translation
-Date:   Thu,  3 Mar 2022 16:06:29 +0800
-Message-Id: <1769ee238ef217f0d55bf6d9b200a37bb8eb386d.1646294349.git.siyanteng@loongson.cn>
-X-Mailer: git-send-email 2.27.0
-In-Reply-To: <cover.1646294349.git.siyanteng@loongson.cn>
-References: <cover.1646294349.git.siyanteng@loongson.cn>
+        Thu, 03 Mar 2022 00:14:39 -0800 (PST)
+Date:   Thu, 3 Mar 2022 08:14:33 +0000
+From:   Hyeonggon Yoo <42.hyeyoo@gmail.com>
+To:     Vlastimil Babka <vbabka@suse.cz>
+Cc:     David Rientjes <rientjes@google.com>,
+        Christoph Lameter <cl@linux.com>,
+        Joonsoo Kim <iamjoonsoo.kim@lge.com>,
+        Pekka Enberg <penberg@kernel.org>,
+        Roman Gushchin <roman.gushchin@linux.dev>,
+        Andrew Morton <akpm@linux-foundation.org>, linux-mm@kvack.org,
+        patches@lists.linux.dev, linux-kernel@vger.kernel.org,
+        Oliver Glitta <glittao@gmail.com>,
+        Faiyaz Mohammed <faiyazm@codeaurora.org>,
+        Marco Elver <elver@google.com>,
+        Mike Rapoport <rppt@linux.ibm.com>,
+        Imran Khan <imran.f.khan@oracle.com>,
+        Jonathan Corbet <corbet@lwn.net>,
+        Randy Dunlap <rdunlap@infradead.org>, linux-doc@vger.kernel.org
+Subject: Re: [PATCH v2 6/6] slab, documentation: add description of debugfs
+ files for SLUB caches
+Message-ID: <YiB46Z9od9aF61iO@ip-172-31-19-208.ap-northeast-1.compute.internal>
+References: <20220302173122.11939-1-vbabka@suse.cz>
+ <20220302173122.11939-7-vbabka@suse.cz>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_ENVFROM_END_DIGIT,
-        FREEMAIL_FROM,RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,SPF_PASS,
-        T_SCC_BODY_TEXT_LINE autolearn=ham autolearn_force=no version=3.4.6
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20220302173122.11939-7-vbabka@suse.cz>
+X-Spam-Status: No, score=-0.1 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_FROM,HK_RANDOM_ENVFROM,
+        HK_RANDOM_FROM,RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,SPF_PASS,
+        T_SCC_BODY_TEXT_LINE autolearn=no autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Translate .../Devicetree/of_unittest.rst into Chinese.
+On Wed, Mar 02, 2022 at 06:31:22PM +0100, Vlastimil Babka wrote:
+> From: Oliver Glitta <glittao@gmail.com>
+> 
+> Add description of debugfs files alloc_traces and free_traces
+> to SLUB cache documentation.
+> 
+> [ vbabka@suse.cz: some rewording ]
+> 
+> Signed-off-by: Oliver Glitta <glittao@gmail.com>
+> Signed-off-by: Vlastimil Babka <vbabka@suse.cz>
+> Cc: Jonathan Corbet <corbet@lwn.net>
+> Cc: Randy Dunlap <rdunlap@infradead.org>
+> Cc: linux-doc@vger.kernel.org
+> ---
+>  Documentation/vm/slub.rst | 64 +++++++++++++++++++++++++++++++++++++++
+>  1 file changed, 64 insertions(+)
+> 
+> diff --git a/Documentation/vm/slub.rst b/Documentation/vm/slub.rst
+> index d3028554b1e9..43063ade737a 100644
+> --- a/Documentation/vm/slub.rst
+> +++ b/Documentation/vm/slub.rst
+> @@ -384,5 +384,69 @@ c) Execute ``slabinfo-gnuplot.sh`` in '-t' mode, passing all of the
+>        40,60`` range will plot only samples collected between 40th and
+>        60th seconds).
+>  
+> +
+> +DebugFS files for SLUB
+> +======================
+> +
+> +For more information about current state of SLUB caches with the user tracking
+> +debug option enabled, debugfs files are available, typically under
+> +/sys/kernel/debug/slab/<cache>/ (created only for caches with enabled user
+> +tracking). There are 2 types of these files with the following debug
+> +information:
+> +
+> +1. alloc_traces::
+> +
+> +    Prints information about unique allocation traces of the currently
+> +    allocated objects. The output is sorted by frequency of each trace.
+> +
+> +    Information in the output:
+> +    Number of objects, allocating function, minimal/average/maximal jiffies since alloc,
+> +    pid range of the allocating processes, cpu mask of allocating cpus, and stack trace.
+> +
+> +    Example:::
+> +
+> +    1085 populate_error_injection_list+0x97/0x110 age=166678/166680/166682 pid=1 cpus=1::
+> +	__slab_alloc+0x6d/0x90
+> +	kmem_cache_alloc_trace+0x2eb/0x300
+> +	populate_error_injection_list+0x97/0x110
+> +	init_error_injection+0x1b/0x71
+> +	do_one_initcall+0x5f/0x2d0
+> +	kernel_init_freeable+0x26f/0x2d7
+> +	kernel_init+0xe/0x118
+> +	ret_from_fork+0x22/0x30
+> +
+> +
+> +2. free_traces::
+> +
+> +    Prints information about unique freeing traces of the currently allocated
+> +    objects. The freeing traces thus come from the previous life-cycle of the
+> +    objects and are reported as not available for objects allocated for the first
+> +    time. The output is sorted by frequency of each trace.
+> +
+> +    Information in the output:
+> +    Number of objects, freeing function, minimal/average/maximal jiffies since free,
+> +    pid range of the freeing processes, cpu mask of freeing cpus, and stack trace.
+> +
+> +    Example:::
+> +
+> +    1980 <not-available> age=4294912290 pid=0 cpus=0
+> +    51 acpi_ut_update_ref_count+0x6a6/0x782 age=236886/237027/237772 pid=1 cpus=1
+> +	kfree+0x2db/0x420
+> +	acpi_ut_update_ref_count+0x6a6/0x782
+> +	acpi_ut_update_object_reference+0x1ad/0x234
+> +	acpi_ut_remove_reference+0x7d/0x84
+> +	acpi_rs_get_prt_method_data+0x97/0xd6
+> +	acpi_get_irq_routing_table+0x82/0xc4
+> +	acpi_pci_irq_find_prt_entry+0x8e/0x2e0
+> +	acpi_pci_irq_lookup+0x3a/0x1e0
+> +	acpi_pci_irq_enable+0x77/0x240
+> +	pcibios_enable_device+0x39/0x40
+> +	do_pci_enable_device.part.0+0x5d/0xe0
+> +	pci_enable_device_flags+0xfc/0x120
+> +	pci_enable_device+0x13/0x20
+> +	virtio_pci_probe+0x9e/0x170
+> +	local_pci_probe+0x48/0x80
+> +	pci_device_probe+0x105/0x1c0
+> +
 
-Signed-off-by: Yanteng Si <siyanteng@loongson.cn>
-Signed-off-by: Yanteng Si <siyanteng01@gmail.com>
----
- .../translations/zh_CN/devicetree/index.rst   |   3 +-
- .../zh_CN/devicetree/of_unittest.rst          | 189 ++++++++++++++++++
- 2 files changed, 190 insertions(+), 2 deletions(-)
- create mode 100644 Documentation/translations/zh_CN/devicetree/of_unittest.rst
+Looks very good.
+Reviewed-by: Hyeonggon Yoo <42.hyeyoo@gmail.com>
 
-diff --git a/Documentation/translations/zh_CN/devicetree/index.rst b/Documentation/translations/zh_CN/devicetree/index.rst
-index 6d9ac4254a1c..23d0b6fccd58 100644
---- a/Documentation/translations/zh_CN/devicetree/index.rst
-+++ b/Documentation/translations/zh_CN/devicetree/index.rst
-@@ -23,11 +23,10 @@ Open Firmware 和 Devicetree
-    :maxdepth: 1
- 
-    usage-model
-+   of_unittest
- 
- Todolist:
- 
--
--*   of_unittest
- *   kernel-api
- 
- Devicetree Overlays
-diff --git a/Documentation/translations/zh_CN/devicetree/of_unittest.rst b/Documentation/translations/zh_CN/devicetree/of_unittest.rst
-new file mode 100644
-index 000000000000..fc7f3934b345
---- /dev/null
-+++ b/Documentation/translations/zh_CN/devicetree/of_unittest.rst
-@@ -0,0 +1,189 @@
-+.. SPDX-License-Identifier: GPL-2.0
-+.. include:: ../disclaimer-zh_CN.rst
-+
-+:Original: Documentation/Devicetree/of_unittest.rst
-+
-+:翻译:
-+
-+ 司延腾 Yanteng Si <siyanteng@loongson.cn>
-+
-+:校译:
-+
-+=================================
-+Open Firmware Devicetree 单元测试
-+=================================
-+
-+作者: Gaurav Minocha <gaurav.minocha.os@gmail.com>
-+
-+1. 概述
-+=======
-+
-+本文档解释了执行 OF 单元测试所需的测试数据是如何动态地附加到实时树上的，与机器的架构无关。
-+
-+建议在继续读下去之前，先阅读以下文件。
-+
-+(1) Documentation/devicetree/usage-model.rst
-+(2) http://www.devicetree.org/Device_Tree_Usage
-+
-+OF Selftest被设计用来测试提供给设备驱动开发者的接口（include/linux/of.h），以从未扁平
-+化的设备树数据结构中获取设备信息等。这个接口被大多数设备驱动在各种使用情况下使用。
-+
-+
-+2. Test-data
-+============
-+
-+设备树源文件（drivers/of/unittest-data/testcases.dts）包含执行drivers/of/unittest.c
-+中自动化单元测试所需的测试数据。目前，以下设备树源包含文件（.dtsi）被包含在testcases.dt中::
-+
-+    drivers/of/unittest-data/tests-interrupts.dtsi
-+    drivers/of/unittest-data/tests-platform.dtsi
-+    drivers/of/unittest-data/tests-phandle.dtsi
-+    drivers/of/unittest-data/tests-match.dtsi
-+
-+当内核在启用OF_SELFTEST的情况下被构建时，那么下面的make规则::
-+
-+    $(obj)/%.dtb: $(src)/%.dts FORCE
-+	    $(call if_changed_dep, dtc)
-+
-+用于将DT源文件（testcases.dts）编译成二进制blob（testcases.dtb），也被称为扁平化的DT。
-+
-+之后，使用以下规则将上述二进制blob包装成一个汇编文件（testcases.dtb.S）::
-+
-+    $(obj)/%.dtb.S: $(obj)/%.dtb
-+	    $(call cmd, dt_S_dtb)
-+
-+汇编文件被编译成一个对象文件（testcases.dtb.o），并被链接到内核镜像中。
-+
-+
-+2.1. 添加测试数据
-+-----------------
-+
-+未扁平化的设备树结构体:
-+
-+未扁平化的设备树由连接的设备节点组成，其树状结构形式如下所述::
-+
-+    // following struct members are used to construct the tree
-+    struct device_node {
-+	...
-+	struct  device_node *parent;
-+	struct  device_node *child;
-+	struct  device_node *sibling;
-+	...
-+    };
-+
-+图1描述了一个机器的未扁平化设备树的通用结构，只考虑了子节点和同级指针。存在另一个指针，
-+``*parent`` ，用于反向遍历该树。因此，在一个特定的层次上，子节点和所有的兄弟姐妹节点将
-+有一个指向共同节点的父指针（例如，child1、sibling2、sibling3、sibling4的父指针指向
-+根节点）::
-+
-+    root ('/')
-+    |
-+    child1 -> sibling2 -> sibling3 -> sibling4 -> null
-+    |         |           |           |
-+    |         |           |          null
-+    |         |           |
-+    |         |        child31 -> sibling32 -> null
-+    |         |           |          |
-+    |         |          null       null
-+    |         |
-+    |      child21 -> sibling22 -> sibling23 -> null
-+    |         |          |            |
-+    |        null       null         null
-+    |
-+    child11 -> sibling12 -> sibling13 -> sibling14 -> null
-+    |           |           |            |
-+    |           |           |           null
-+    |           |           |
-+    null        null       child131 -> null
-+			    |
-+			    null
-+
-+Figure 1: 未扁平化的设备树的通用结构
-+
-+
-+在执行OF单元测试之前，需要将测试数据附加到机器的设备树上（如果存在）。因此，当调用
-+selftest_data_add()时，首先会读取通过以下内核符号链接到内核镜像中的扁平化设备树
-+数据::
-+
-+    __dtb_testcases_begin - address marking the start of test data blob
-+    __dtb_testcases_end   - address marking the end of test data blob
-+
-+其次，它调用of_fdt_unflatten_tree()来解除扁平化的blob。最后，如果机器的设备树
-+（即实时树）是存在的，那么它将未扁平化的测试数据树附加到实时树上，否则它将自己作为
-+实时设备树附加。
-+
-+attach_node_and_children()使用of_attach_node()将节点附加到实时树上，如下所
-+述。为了解释这一点，图2中描述的测试数据树被附加到图1中描述的实时树上::
-+
-+    root ('/')
-+	|
-+    testcase-data
-+	|
-+    test-child0 -> test-sibling1 -> test-sibling2 -> test-sibling3 -> null
-+	|               |                |                |
-+    test-child01      null             null             null
-+
-+
-+Figure 2: 将测试数据树附在实时树上的例子。
-+
-+根据上面的方案，实时树已经存在，所以不需要附加根('/')节点。所有其他节点都是通过在
-+每个节点上调用of_attach_node()来附加的。
-+
-+在函数of_attach_node()中，新的节点被附在实时树中给定的父节点的子节点上。但是，如
-+果父节点已经有了一个孩子，那么新节点就会取代当前的孩子，并将其变成其兄弟姐妹。因此，
-+当测试案例的数据节点被连接到上面的实时树（图1）时，最终的结构如图3所示::
-+
-+    root ('/')
-+    |
-+    testcase-data -> child1 -> sibling2 -> sibling3 -> sibling4 -> null
-+    |               |          |           |           |
-+    (...)             |          |           |          null
-+		    |          |         child31 -> sibling32 -> null
-+		    |          |           |           |
-+		    |          |          null        null
-+		    |          |
-+		    |        child21 -> sibling22 -> sibling23 -> null
-+		    |          |           |            |
-+		    |         null        null         null
-+		    |
-+		    child11 -> sibling12 -> sibling13 -> sibling14 -> null
-+		    |          |            |            |
-+		    null       null          |           null
-+					    |
-+					    child131 -> null
-+					    |
-+					    null
-+    -----------------------------------------------------------------------
-+
-+    root ('/')
-+    |
-+    testcase-data -> child1 -> sibling2 -> sibling3 -> sibling4 -> null
-+    |               |          |           |           |
-+    |             (...)      (...)       (...)        null
-+    |
-+    test-sibling3 -> test-sibling2 -> test-sibling1 -> test-child0 -> null
-+    |                |                   |                |
-+    null             null                null         test-child01
-+
-+
-+Figure 3: 附加测试案例数据后的实时设备树结构。
-+
-+
-+聪明的读者会注意到，与先前的结构相比，test-child0节点成为最后一个兄弟姐妹（图2）。
-+在连接了第一个test-child0节点之后，又连接了test-sibling1节点，该节点推动子节点
-+（即test-child0）成为兄弟姐妹，并使自己成为子节点，如上所述。
-+
-+如果发现一个重复的节点（即如果一个具有相同full_name属性的节点已经存在于实时树中），
-+那么该节点不会被附加，而是通过调用函数update_node_properties()将其属性更新到活
-+树的节点中。
-+
-+
-+2.2. 删除测试数据
-+-----------------
-+
-+一旦测试用例执行完，selftest_data_remove被调用，以移除最初连接的设备节点（首先是
-+叶子节点被分离，然后向上移动父节点被移除，最后是整个树）。selftest_data_remove()
-+调用detach_node_and_children()，使用of_detach_node()将节点从实时设备树上分离。
-+
-+为了分离一个节点，of_detach_node()要么将给定节点的父节点的子节点指针更新为其同级节
-+点，要么根据情况将前一个同级节点附在给定节点的同级节点上。就这样吧。 :)
+>  Christoph Lameter, May 30, 2007
+>  Sergey Senozhatsky, October 23, 2015
+> -- 
+> 2.35.1
+> 
+
 -- 
-2.27.0
-
+Thank you, You are awesome!
+Hyeonggon :-)
