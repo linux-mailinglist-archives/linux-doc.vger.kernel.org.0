@@ -2,97 +2,79 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id D365B4CB368
-	for <lists+linux-doc@lfdr.de>; Thu,  3 Mar 2022 01:35:11 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 6F0C64CB3BE
+	for <lists+linux-doc@lfdr.de>; Thu,  3 Mar 2022 01:35:41 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S229973AbiCCAHS (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 2 Mar 2022 19:07:18 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:46092 "EHLO
+        id S229990AbiCCAEX (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 2 Mar 2022 19:04:23 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:34820 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S229961AbiCCAHR (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Wed, 2 Mar 2022 19:07:17 -0500
-Received: from mga04.intel.com (mga04.intel.com [192.55.52.120])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 4FA036929A;
-        Wed,  2 Mar 2022 16:06:32 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1646265992; x=1677801992;
-  h=from:to:cc:subject:date:message-id:references:
-   in-reply-to:content-transfer-encoding:mime-version;
-  bh=PXuGfXojzUGtOg6FhOREhI+2NM5us/0wtFa7cTXnUi4=;
-  b=GWgb5a0DUraITp9YRDxw1YSA0/JNJkKPdBaYa0TUUoyKJsURtu2zzhWx
-   T/gdso7fLepTXHx/JnRpemuo54UtgrdPA0XWvnJ8hQccVf19EV64gzXOT
-   9vTO9aQgvbTKLiYl/VehhUEqH80KbGMpGwGwWxqrEnLKwuCulj+wteV/6
-   qjLrLs/j+0ixKinZfm7MhCQxdiqYn+wiMC7FSgHefQZd13oCrC7KY5IKK
-   uWZB1L2qo4M1O5nxsJgbo4xzWgoHw5nY/ZG3dHWDKW2JkNhMGf9hOMoaQ
-   cBy1i8TTNbM1hnuHBxYja3Vy45PgWyO+wyEeVl7wOq0tllZ5C0b+ieAjA
-   Q==;
-X-IronPort-AV: E=McAfee;i="6200,9189,10274"; a="252363697"
-X-IronPort-AV: E=Sophos;i="5.90,150,1643702400"; 
-   d="scan'208";a="252363697"
-Received: from orsmga004.jf.intel.com ([10.7.209.38])
-  by fmsmga104.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 02 Mar 2022 16:02:47 -0800
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.90,150,1643702400"; 
-   d="scan'208";a="641891445"
-Received: from fmsmsx601.amr.corp.intel.com ([10.18.126.81])
-  by orsmga004.jf.intel.com with ESMTP; 02 Mar 2022 16:02:47 -0800
-Received: from fmsmsx611.amr.corp.intel.com (10.18.126.91) by
- fmsmsx601.amr.corp.intel.com (10.18.126.81) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2308.21; Wed, 2 Mar 2022 16:02:46 -0800
-Received: from fmsmsx610.amr.corp.intel.com (10.18.126.90) by
- fmsmsx611.amr.corp.intel.com (10.18.126.91) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2308.21; Wed, 2 Mar 2022 16:02:45 -0800
-Received: from fmsmsx610.amr.corp.intel.com ([10.18.126.90]) by
- fmsmsx610.amr.corp.intel.com ([10.18.126.90]) with mapi id 15.01.2308.021;
- Wed, 2 Mar 2022 16:02:45 -0800
-From:   "Luck, Tony" <tony.luck@intel.com>
-To:     "Williams, Dan J" <dan.j.williams@intel.com>,
-        "hdegoede@redhat.com" <hdegoede@redhat.com>,
-        "markgross@kernel.org" <markgross@kernel.org>,
-        "Joseph, Jithu" <jithu.joseph@intel.com>
-CC:     "corbet@lwn.net" <corbet@lwn.net>,
-        "Raj, Ashok" <ashok.raj@intel.com>,
-        "dave.hansen@linux.intel.com" <dave.hansen@linux.intel.com>,
-        "patches@lists.linux.dev" <patches@lists.linux.dev>,
-        "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
-        "mingo@redhat.com" <mingo@redhat.com>,
-        "rostedt@goodmis.org" <rostedt@goodmis.org>,
-        "Shankar, Ravi V" <ravi.v.shankar@intel.com>,
-        "tglx@linutronix.de" <tglx@linutronix.de>,
-        "platform-driver-x86@vger.kernel.org" 
-        <platform-driver-x86@vger.kernel.org>,
-        "linux-doc@vger.kernel.org" <linux-doc@vger.kernel.org>,
-        "hpa@zytor.com" <hpa@zytor.com>, "bp@alien8.de" <bp@alien8.de>,
-        "gregkh@linuxfoundation.org" <gregkh@linuxfoundation.org>,
-        "andriy.shevchenko@linux.intel.com" 
-        <andriy.shevchenko@linux.intel.com>,
-        "x86@kernel.org" <x86@kernel.org>
-Subject: RE: [RFC 03/10] platform/x86/intel/ifs: Add driver for In-Field Scan
-Thread-Topic: [RFC 03/10] platform/x86/intel/ifs: Add driver for In-Field Scan
-Thread-Index: AQHYLaZdi8+klwhBg0WsNZ9Nl1bmr6ytRDmA//+COEA=
-Date:   Thu, 3 Mar 2022 00:02:45 +0000
-Message-ID: <2002880f24ca430ab51e9ca8bb07097d@intel.com>
-References: <20220301195457.21152-1-jithu.joseph@intel.com>
-         <20220301195457.21152-4-jithu.joseph@intel.com>
- <f0e958c612ac4dab30ba458a08a7681e1114668f.camel@intel.com>
-In-Reply-To: <f0e958c612ac4dab30ba458a08a7681e1114668f.camel@intel.com>
-Accept-Language: en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-dlp-product: dlpe-windows
-dlp-reaction: no-action
-dlp-version: 11.6.401.20
-x-originating-ip: [10.1.200.100]
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+        with ESMTP id S229983AbiCCAEV (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Wed, 2 Mar 2022 19:04:21 -0500
+Received: from mail-ej1-x62e.google.com (mail-ej1-x62e.google.com [IPv6:2a00:1450:4864:20::62e])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 4A1EEB847
+        for <linux-doc@vger.kernel.org>; Wed,  2 Mar 2022 16:03:32 -0800 (PST)
+Received: by mail-ej1-x62e.google.com with SMTP id d10so7102187eje.10
+        for <linux-doc@vger.kernel.org>; Wed, 02 Mar 2022 16:03:31 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=chromium.org; s=google;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc;
+        bh=712s7UNzasxlj0dwsyjRXVd8K8/HcJjmlNagNGk3tak=;
+        b=ED9WDqjaIvY/PNhXMFZcJHPNR7h/tTUuq7WLYZ1ylEvNffoEcxKxybLHrav42m9Cnn
+         RVEvb/IBLv+PhIPTpr690rtY8c24fbS5byCNqvx9Uwev3vYjz8sAMB11j/c+q3crVNAP
+         sIZB594RAxB9rrrDgiPoWjkncYFw0ihals3NI=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=712s7UNzasxlj0dwsyjRXVd8K8/HcJjmlNagNGk3tak=;
+        b=nh0g892ShQBUfs+u9ro3NOBKiQUrb5Fp2/KLm4NtPgrUhGQFzzrAEANNh4vbPhPQIG
+         1i8xm2QzDfW9srxKfctxbcBXhqP3zAUzaWqeKpz4smrVb2LG68GMT8wt42ZZI0jkSKCZ
+         1SpcwCV9GdxqduLsslDZ5cuvToOnqynUrWGB4sKxFmg9w+Of0F01SucwGrq2+Td+DYNr
+         HJ9C78aYKYsdI9+y3OrUgZ8HcxwgLiEDl2lybbw6ALI2u3LG/I93JuSr0Z49AoiMLKqT
+         ES4siF4/lBikAI9wlUBaJhKLdWFiVJeF+rrXC+KgV2FVfiLN5njrMxfnZzocYZ8J40bG
+         PCuQ==
+X-Gm-Message-State: AOAM530ph3AAB9N7KKb9gDEz1xsMMdI53ZtMD1Lrr+1bMIDAsfjcAoFu
+        1ECSnpFF0GcxyardfDCBaK5p3mPB2OzvN/vY
+X-Google-Smtp-Source: ABdhPJx5szpiHJ0iaXrptzTdxjc1yzMxntmSDkoPxKwIehwduRvhp0/useugpHshFM1ST6O3bz/saw==
+X-Received: by 2002:a17:907:9621:b0:6d7:355d:6da5 with SMTP id gb33-20020a170907962100b006d7355d6da5mr6319908ejc.195.1646265810327;
+        Wed, 02 Mar 2022 16:03:30 -0800 (PST)
+Received: from mail-wm1-f51.google.com (mail-wm1-f51.google.com. [209.85.128.51])
+        by smtp.gmail.com with ESMTPSA id fs6-20020a170907600600b006da8ec6e4a6sm104644ejc.26.2022.03.02.16.03.28
+        for <linux-doc@vger.kernel.org>
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Wed, 02 Mar 2022 16:03:28 -0800 (PST)
+Received: by mail-wm1-f51.google.com with SMTP id p184-20020a1c29c1000000b0037f76d8b484so2251336wmp.5
+        for <linux-doc@vger.kernel.org>; Wed, 02 Mar 2022 16:03:28 -0800 (PST)
+X-Received: by 2002:a05:600c:190d:b0:381:6ea1:8cc with SMTP id
+ j13-20020a05600c190d00b003816ea108ccmr1737073wmq.118.1646265807989; Wed, 02
+ Mar 2022 16:03:27 -0800 (PST)
 MIME-Version: 1.0
-X-Spam-Status: No, score=-4.8 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_MED,
-        SPF_HELO_NONE,SPF_NONE,T_SCC_BODY_TEXT_LINE autolearn=ham
+References: <20220218183116.2261770-1-bjorn.andersson@linaro.org> <20220218183116.2261770-2-bjorn.andersson@linaro.org>
+In-Reply-To: <20220218183116.2261770-2-bjorn.andersson@linaro.org>
+From:   Doug Anderson <dianders@chromium.org>
+Date:   Wed, 2 Mar 2022 16:03:15 -0800
+X-Gmail-Original-Message-ID: <CAD=FV=UOLcu5xycimDsYTO1spwf=CMRPUSU3o0qRRC+a+zuRTQ@mail.gmail.com>
+Message-ID: <CAD=FV=UOLcu5xycimDsYTO1spwf=CMRPUSU3o0qRRC+a+zuRTQ@mail.gmail.com>
+Subject: Re: [PATCH v13 2/2] leds: Add driver for Qualcomm LPG
+To:     Bjorn Andersson <bjorn.andersson@linaro.org>
+Cc:     Pavel Machek <pavel@ucw.cz>,
+        Thierry Reding <thierry.reding@gmail.com>,
+        =?UTF-8?Q?Uwe_Kleine=2DK=C3=B6nig?= 
+        <u.kleine-koenig@pengutronix.de>, Lee Jones <lee.jones@linaro.org>,
+        Rob Herring <robh+dt@kernel.org>,
+        Jonathan Corbet <corbet@lwn.net>, linux-leds@vger.kernel.org,
+        "open list:OPEN FIRMWARE AND FLATTENED DEVICE TREE BINDINGS" 
+        <devicetree@vger.kernel.org>, LKML <linux-kernel@vger.kernel.org>,
+        Linux Doc Mailing List <linux-doc@vger.kernel.org>,
+        linux-pwm <linux-pwm@vger.kernel.org>,
+        linux-arm-msm <linux-arm-msm@vger.kernel.org>,
+        Luca Weiss <luca@z3ntu.xyz>
+Content-Type: text/plain; charset="UTF-8"
+X-Spam-Status: No, score=-2.5 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_NONE,
+        SPF_HELO_NONE,SPF_PASS,T_SCC_BODY_TEXT_LINE autolearn=unavailable
         autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
@@ -100,16 +82,41 @@ Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Pj4gK2NvbmZpZyBJTlRFTF9JRlMNCj4+ICsgICAgICAgdHJpc3RhdGUgIkludGVsIEluIEZpZWxk
-IFNjYW4iDQo+PiArICAgICAgIGRlcGVuZHMgb24gWDg2ICYmIDY0QklUICYmIFNNUA0KPg0KPiBB
-cmUgdGhlcmUgYWN0dWFsIENPTkZJR19TTVAgYW5kIENPTkZJR182NEJJVCBjb21waWxhdGlvbiBk
-ZXBlbmRlbmNpZXMNCj4gaW4gdGhpcyBkcml2ZXI/IEl0IGxvb2tzIGxpa2UgdGhpcyBjb3VsZCBj
-b21waWxlIHdpdGhvdXQgdGhvc2UgY29uZmlnDQo+IGRlcGVuZGVuY2llcy4NCg0KTWF5YmUgQ09O
-RklHX1NNUCBpcyB0aGVyZSBhcyBhIGtpbmRuZXNzIHRvIGtlcm5lbCBidWlsZGluZyByb2JvdHMg
-Oi0pDQoNClllcywgeW91IGNhbiBidWlsZCB0aGlzIGZvciBhIFVQIGtlcm5lbCAoSSBqdXN0IGRp
-ZCwgYW5kIHRoZXJlIHdlcmUgbm8gYnVpbGQNCmVycm9ycykuIEJ1dCB3aHk/IE5vYm9keSBpcyBn
-b2luZyB0byB0YWtlIHRoZWlyIGR1YWwgc29ja2V0IHNlcnZlciB3aXRoIG92ZXINCmEgaHVuZHJl
-ZCBsb2dpY2FsIHByb2Nlc3NvcnMgYW5kIHJ1biBhIFVQIGtlcm5lbCBvbiBpdC4NCg0KUHJvYmFi
-bHkgZGl0dG8gZm9yIDY0QklULiBJIGRpZG4ndCB0cnkgdGhlIGJ1aWxkIHdpdGhvdXQgdGhhdC4g
-QnV0IG1pbmltdW0NCm1lbW9yeSBvbiB0aGVzZSBzeXN0ZW1zIGlzIGxhcmdlciB0aGFuIHN1cHBv
-cnRlZCBieSAzMi1iaXQga2VybmVscy4NCg0KLVRvbnkNCg==
+Hi,
+
+On Fri, Feb 18, 2022 at 10:29 AM Bjorn Andersson
+<bjorn.andersson@linaro.org> wrote:
+>
+> +static void lpg_pwm_get_state(struct pwm_chip *chip, struct pwm_device *pwm,
+> +                             struct pwm_state *state)
+> +{
+> +       struct lpg *lpg = container_of(chip, struct lpg, pwm);
+> +       struct lpg_channel *chan = &lpg->channels[pwm->hwpwm];
+> +       unsigned int pre_div;
+> +       unsigned int refclk;
+> +       unsigned int val;
+> +       unsigned int m;
+> +       u16 pwm_value;
+> +       int ret;
+> +
+> +       ret = regmap_read(lpg->map, chan->base + LPG_SIZE_CLK_REG, &val);
+> +       if (ret)
+> +               return;
+> +
+> +       refclk = lpg_clk_rates[(val & PWM_CLK_SELECT_MASK) - 1];
+
+I don't know why I didn't notice it before (maybe I was accidentally
+not building with KASAN?), but in my recent boots I'm getting a KASAN
+error pointing at the line above.
+
+Sure enough, the above looks a bit on the unsafe side. If (val & 0x3)
+is 0 then the "-1" will not be so wonderful. I put some printouts and,
+indeed, it's not so great.
+
+[    7.201635] DOUG: val is 0x00000004
+
+Amazingly my `refclk` ends up as 0 and I guess somehow this doesn't
+cause a divide by 0.
+
+
+-Doug
