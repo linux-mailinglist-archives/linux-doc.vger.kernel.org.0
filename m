@@ -2,99 +2,156 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 397AE4D23B8
-	for <lists+linux-doc@lfdr.de>; Tue,  8 Mar 2022 22:57:32 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id D5C684D259E
+	for <lists+linux-doc@lfdr.de>; Wed,  9 Mar 2022 02:14:23 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1344765AbiCHV6K (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 8 Mar 2022 16:58:10 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:56550 "EHLO
+        id S230498AbiCIBJo (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 8 Mar 2022 20:09:44 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:55802 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1350520AbiCHV6J (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 8 Mar 2022 16:58:09 -0500
-Received: from ams.source.kernel.org (ams.source.kernel.org [145.40.68.75])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id EF89656C3B;
-        Tue,  8 Mar 2022 13:57:11 -0800 (PST)
-Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
-        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
-        (No client certificate requested)
-        by ams.source.kernel.org (Postfix) with ESMTPS id 79442B81DFE;
-        Tue,  8 Mar 2022 21:57:10 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id F2B2AC340EC;
-        Tue,  8 Mar 2022 21:57:05 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-        s=k20201202; t=1646776629;
-        bh=eGD/su/n2B61nqlOmpuFpZhwnQeDphrdFbvHLaijoSc=;
-        h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-        b=b7OJ9Rf2Y+g8br7xVIjyOlcfvW8+SyMmqJCm6j/ZXEEyA4S+LY+3b8r4799BuOLYk
-         TLWFQ5r2ZbzLJTRSMjAzXn/8CWEfEfz1etzwIxlED128hvB271uttJhrCazgihEbWI
-         ZL1t0qMlBb2KK9yZ1W+SfHMT4ii+vS/0aMPrtuDh443A3/VIYXgiF7k4hXqJeKl8C9
-         NIjUTtcubyLdk09OagrHy1D+bABzL0S6Jg3Seoq8jjBHPgnXrOeqAzoMcl/uKsiSOv
-         th/iWa4NXq8H+a/FDexq0GqMBOEUlcUVL//Cz2ehBBxRMMuabOH5nsxZdwJ6hBII3t
-         FbwQteQSri0DA==
-From:   Arnd Bergmann <arnd@kernel.org>
-To:     Masahiro Yamada <masahiroy@kernel.org>
-Cc:     alexs@kernel.org, arnd@arndb.de, arnd@kernel.org, dsterba@suse.com,
-        elver@google.com, jani.nikula@intel.com, linux-doc@vger.kernel.org,
-        linux-kbuild@vger.kernel.org, linux-kernel@vger.kernel.org,
-        llvm@lists.linux.dev, mark.rutland@arm.com,
-        ndesaulniers@google.com, ojeda@kernel.org,
-        torvalds@linux-foundation.org
-Subject: [PATCH 4/4] Kbuild: use -std=gnu11 for KBUILD_USERCFLAGS
-Date:   Tue,  8 Mar 2022 22:56:15 +0100
-Message-Id: <20220308215615.14183-5-arnd@kernel.org>
-X-Mailer: git-send-email 2.29.2
-In-Reply-To: <20220308215615.14183-1-arnd@kernel.org>
-References: <20220308215615.14183-1-arnd@kernel.org>
+        with ESMTP id S230501AbiCIBJc (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 8 Mar 2022 20:09:32 -0500
+Received: from mail-pl1-x62f.google.com (mail-pl1-x62f.google.com [IPv6:2607:f8b0:4864:20::62f])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id F1F9414ACB0
+        for <linux-doc@vger.kernel.org>; Tue,  8 Mar 2022 16:51:50 -0800 (PST)
+Received: by mail-pl1-x62f.google.com with SMTP id p17so586755plo.9
+        for <linux-doc@vger.kernel.org>; Tue, 08 Mar 2022 16:51:50 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=google.com; s=20210112;
+        h=date:from:to:cc:subject:message-id:references:mime-version
+         :content-disposition:in-reply-to;
+        bh=2kU1A0mZ+Yf718gi2yxK3phVn7nYLq00SbSALiBBt2c=;
+        b=a3wxXsXXiZ50ZckVfXFMr8KdVU78K5T3RLsMnlj3KUTmsXr2mTTchwj6lfSmoIW6Jw
+         Xxcj7nT6ioNm+beNeT7w/gpTTEoesAjFfDTQkbfIWQwfq91ifPoOm3HZ8d5QpMlRFFmu
+         /SvS/C3P+W10CB6HG+SZCcWMlW7qlD0MjWDZHoph8a3b1v7eqS2BfyKguOEWwdkttbdX
+         RqHb2uCJ+bspxUluBYFhwxvdHNOj0fFpnkuHxLzLPAlkPVyOzDfrRkJ8/tz488d1UDi3
+         MOfKNkuD4sJ9Xv7tvkhmywY4CjEK6CRMke81P29RSspDH8NnokaenIYa9TIs71rPiZ4j
+         hzYQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+         :mime-version:content-disposition:in-reply-to;
+        bh=2kU1A0mZ+Yf718gi2yxK3phVn7nYLq00SbSALiBBt2c=;
+        b=FscnLH7nZMmg4NoXnLcTC0eaaOVoOkOpShHCEHwc7dLfOGwf3lQ/1vPNOeOpVTu49j
+         EHZckVrlcPPsTnb3IM6MTHjkz6y/nYJz/EB7ibzkooAOI6cIZC7Ian2/8QPJn9KTJyIh
+         XWL5HcSwKENfmI1rXV/lD/ElA+hpPId6YqcOPFqSoiO+HN3xQiLwNudPSxrd3mNtIEuP
+         KcMDDPbx1mLAKrjr7Mg3BViXfiNxIPmUlpCaOY+Yqvu0XTb/VTS5bfS8oW5fEv9T9/Wk
+         rk+ofmCWwT5awDUFF38C9kr06j/NMA3eoSBwbzaDRuww39vKNZAFLgrLZdRDE08FH/mH
+         PJrw==
+X-Gm-Message-State: AOAM531qnLUyt7CjD7SFcAi1yLWFLG+TxANYGGHO0ugmUI7a74Okauuf
+        7T9wF2LUd1QX/NBMuHAfc22hSiXfdAV7/A==
+X-Google-Smtp-Source: ABdhPJxu5BNOL66aUTFVR0ibkfjQAJZxN1/5Jln5I65fELTDrubmqTQaTFywu9mFnXzUzDH+EMVzEQ==
+X-Received: by 2002:a17:902:b602:b0:14f:e42b:d547 with SMTP id b2-20020a170902b60200b0014fe42bd547mr19779057pls.91.1646782670904;
+        Tue, 08 Mar 2022 15:37:50 -0800 (PST)
+Received: from google.com (157.214.185.35.bc.googleusercontent.com. [35.185.214.157])
+        by smtp.gmail.com with ESMTPSA id e13-20020a056a001a8d00b004f0f28910cdsm185636pfv.42.2022.03.08.15.37.49
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 08 Mar 2022 15:37:50 -0800 (PST)
+Date:   Tue, 8 Mar 2022 23:37:46 +0000
+From:   Sean Christopherson <seanjc@google.com>
+To:     Maxim Levitsky <mlevitsk@redhat.com>
+Cc:     kvm@vger.kernel.org, Kieran Bingham <kbingham@kernel.org>,
+        Jan Kiszka <jan.kiszka@siemens.com>,
+        Andrew Jones <drjones@redhat.com>,
+        Jonathan Corbet <corbet@lwn.net>,
+        Vitaly Kuznetsov <vkuznets@redhat.com>,
+        Ingo Molnar <mingo@redhat.com>,
+        Thomas Gleixner <tglx@linutronix.de>,
+        "maintainer:X86 ARCHITECTURE (32-BIT AND 64-BIT)" <x86@kernel.org>,
+        Johannes Berg <johannes.berg@intel.com>,
+        Wanpeng Li <wanpengli@tencent.com>,
+        "H. Peter Anvin" <hpa@zytor.com>, Jessica Yu <jeyu@kernel.org>,
+        Jim Mattson <jmattson@google.com>,
+        Paolo Bonzini <pbonzini@redhat.com>,
+        Joerg Roedel <joro@8bytes.org>,
+        Yang Weijiang <weijiang.yang@intel.com>,
+        linux-kernel@vger.kernel.org, Borislav Petkov <bp@alien8.de>,
+        "open list:KERNEL SELFTEST FRAMEWORK" 
+        <linux-kselftest@vger.kernel.org>,
+        "open list:DOCUMENTATION" <linux-doc@vger.kernel.org>,
+        Shuah Khan <shuah@kernel.org>,
+        Andrew Morton <akpm@linux-foundation.org>,
+        Borislav Petkov <bp@suse.de>
+Subject: Re: [PATCH v3 2/6] KVM: x86: add force_intercept_exceptions_mask
+Message-ID: <YifoysEvfnQgq59A@google.com>
+References: <20210811122927.900604-1-mlevitsk@redhat.com>
+ <20210811122927.900604-3-mlevitsk@redhat.com>
+ <YTECUaPa9kySQxRX@google.com>
+ <0cdac80177eea408b7e316bd1fc4c0c5839ba1d4.camel@redhat.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Spam-Status: No, score=-7.6 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_HI,
-        SPF_HELO_NONE,SPF_PASS,T_SCC_BODY_TEXT_LINE autolearn=ham
-        autolearn_force=no version=3.4.6
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <0cdac80177eea408b7e316bd1fc4c0c5839ba1d4.camel@redhat.com>
+X-Spam-Status: No, score=-17.6 required=5.0 tests=BAYES_00,DKIMWL_WL_MED,
+        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,
+        ENV_AND_HDR_SPF_MATCH,RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,SPF_PASS,
+        T_SCC_BODY_TEXT_LINE,USER_IN_DEF_DKIM_WL,USER_IN_DEF_SPF_WL
+        autolearn=unavailable autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-From: Arnd Bergmann <arnd@arndb.de>
+On Tue, Feb 08, 2022, Maxim Levitsky wrote:
+> On Thu, 2021-09-02 at 16:56 +0000, Sean Christopherson wrote:
+> > Assuming this hasn't been abandoned...
+> > 
+> > On Wed, Aug 11, 2021, Maxim Levitsky wrote:
+> > > This parameter will be used by VMX and SVM code to force
+> > > interception of a set of exceptions, given by a bitmask
+> > > for guest debug and/or kvm debug.
+> > > 
+> > > This is based on an idea first shown here:
+> > > https://patchwork.kernel.org/project/kvm/patch/20160301192822.GD22677@pd.tnic/
+> > > 
+> > > CC: Borislav Petkov <bp@suse.de>
+> > > Signed-off-by: Maxim Levitsky <mlevitsk@redhat.com>
+> > > ---
+> > >  arch/x86/kvm/x86.c | 3 +++
+> > >  arch/x86/kvm/x86.h | 2 ++
+> > >  2 files changed, 5 insertions(+)
+> > > 
+> > > diff --git a/arch/x86/kvm/x86.c b/arch/x86/kvm/x86.c
+> > > index fdc0c18339fb..092e2fad3c0d 100644
+> > > --- a/arch/x86/kvm/x86.c
+> > > +++ b/arch/x86/kvm/x86.c
+> > > @@ -184,6 +184,9 @@ module_param(force_emulation_prefix, bool, S_IRUGO);
+> > >  int __read_mostly pi_inject_timer = -1;
+> > >  module_param(pi_inject_timer, bint, S_IRUGO | S_IWUSR);
+> > >  
+> > > +uint force_intercept_exceptions_mask;
+> > > +module_param(force_intercept_exceptions_mask, uint, S_IRUGO | S_IWUSR);
+> > 
+> > Use octal permissions.  This also can't be a simple writable param, at least not
+> > without a well-documented disclaimer, as there's no guarantee a vCPU will update
+> > its exception bitmap in a timely fashion.  An alternative to a module param would
+> > be to extend/add a per-VM ioctl(), e.g. maybe KVM_SET_GUEST_DEBUG?  The downside
+> > of an ioctl() is that it would require userspace enabling :-/
+> > 
+> 
+> All other module params in this file use macros for permissions, that is why
+> I used them too.
+> 
+> I'll add a comment with a disclaimer here - this is only for debug.
+> I strongly don't want to have this as ioctl as that will indeed need qemu patches,
+> not to mention things like unit tests and which don't even always use qemu.
+> 
+> Or I can make this parameter read-only. I don't mind reloading kvm module when
+> I change this parameter.
 
-As we change the C language standard for the kernel from gnu89 to
-gnu11, it makes sense to also update the version for user space
-compilation.
+Oh!  We can force an update, a la nx_huge_pages, where the setter loops through
+all VMs and does a kvm_make_all_cpus_request() to instruct vCPUs to update their
+bitmaps.  Requires a new request, but that doesn't seem like a huge deal, and it
+might help pave the way for adding more debug hooks for developers.
 
-Some users have older native compilers than what they use for
-kernel builds, so I considered using gnu99 as the default version
-for wider compatibility with gcc-4.6 and earlier.
+The param should also be "unsafe".
 
-However, testing with older compilers showed that we already require
-HOSTCC version 5.1 as well because a lot of host tools include
-linux/compiler.h that uses __has_attribute():
+E.g. something like
 
-  CC      tools/objtool/exec-cmd.o
-In file included from tools/include/linux/compiler_types.h:36:0,
-                 from tools/include/linux/compiler.h:5,
-                 from exec-cmd.c:2:
-tools/include/linux/compiler-gcc.h:19:5: error: "__has_attribute" is not defined [-Werror=undef]
-
-Signed-off-by: Arnd Bergmann <arnd@arndb.de>
----
- Makefile | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
-
-diff --git a/Makefile b/Makefile
-index 1ba8dc523952..e0b11ddd0760 100644
---- a/Makefile
-+++ b/Makefile
-@@ -432,7 +432,7 @@ HOSTCXX	= g++
- endif
- 
- KBUILD_USERHOSTCFLAGS := -Wall -Wmissing-prototypes -Wstrict-prototypes \
--			 -O2 -fomit-frame-pointer -std=gnu89 \
-+			 -O2 -fomit-frame-pointer -std=gnu11 \
- 			 -Wdeclaration-after-statement
- KBUILD_USERCFLAGS  := $(KBUILD_USERHOSTCFLAGS) $(USERCFLAGS)
- KBUILD_USERLDFLAGS := $(USERLDFLAGS)
--- 
-2.29.2
-
+static const struct kernel_param_ops force_ex_intercepts_ops = {
+	.set = set_force_exception_intercepts,
+	.get = get_force_exception_intercepts,
+};
+module_param_cb_unsafe(force_exception_intercepts, &force_ex_intercepts_ops,
+		       &force_exception_intercepts, 0644);
