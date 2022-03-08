@@ -2,62 +2,65 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 498574D11C4
-	for <lists+linux-doc@lfdr.de>; Tue,  8 Mar 2022 09:11:16 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 9460C4D11BF
+	for <lists+linux-doc@lfdr.de>; Tue,  8 Mar 2022 09:11:14 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1344819AbiCHIL4 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 8 Mar 2022 03:11:56 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:60492 "EHLO
+        id S1344886AbiCHIMF (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 8 Mar 2022 03:12:05 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:60832 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1344901AbiCHILn (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 8 Mar 2022 03:11:43 -0500
-Received: from mail-pl1-x634.google.com (mail-pl1-x634.google.com [IPv6:2607:f8b0:4864:20::634])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id B54823EF29
-        for <linux-doc@vger.kernel.org>; Tue,  8 Mar 2022 00:10:41 -0800 (PST)
-Received: by mail-pl1-x634.google.com with SMTP id z11so16362827pla.7
-        for <linux-doc@vger.kernel.org>; Tue, 08 Mar 2022 00:10:41 -0800 (PST)
+        with ESMTP id S1344845AbiCHILo (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 8 Mar 2022 03:11:44 -0500
+Received: from mail-pg1-x52f.google.com (mail-pg1-x52f.google.com [IPv6:2607:f8b0:4864:20::52f])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 0F9003EF17
+        for <linux-doc@vger.kernel.org>; Tue,  8 Mar 2022 00:10:45 -0800 (PST)
+Received: by mail-pg1-x52f.google.com with SMTP id bc27so15784142pgb.4
+        for <linux-doc@vger.kernel.org>; Tue, 08 Mar 2022 00:10:45 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
-        h=from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=JyJnw5KmzjztIYRh9AYntg6yEfzpdS/pcpt5AbZll/0=;
-        b=Xc/hjwcHFtkguQTei0MTIwRh0lYC4R+n6SETGC8h+m7dwG9d7Dv15tuW2uzrXyrVtJ
-         1ABrGICeTl0JKwoX94PXRKNg9iGT2WQyna+ef65IAgtfOcjL9UXdGktXAgnZJxAnHkAe
-         kaTkeZTPFBUi6z18nQLyQu5WVI/dFkfr3uhD5pdPFV81hrRiEmQXZx6UEUx0mrXUBEvU
-         zS27W3nTPyAJE3bZhXrUKEzJLjmPj4n/Q0U7yD4HUWKgKvVu5GU0QlXs2BfQ8m6JLi+o
-         kJ892KHcSUalarff6vq+lJ+I+xR3ke4vjqrl5q6FWcUw9CeWmMAYUEztfZESZDhMoTXY
-         4fFQ==
+        h=from:to:cc:subject:date:message-id:in-reply-to:references
+         :mime-version:content-transfer-encoding;
+        bh=a465xb2KbYFoqoIEJGWa82/Xx7nYSzF3Ap4I6nfNorw=;
+        b=Xrlf5GHEgFPJwCuXFkhT3xwburzSvKsciFWLwiEJc45anIo0jYHyQwQri11TIucIWY
+         hoDzJTXk+HFCUc1df8YJCZj+lE70ajcNPZ+oHrhcyiUEijnvKK/LRM1s6azP8j9yHgm+
+         YxkitvPYKILKq8XL1xsCoYHyknOkMcim9oRzTSx9gMUuioVJ/5aQ7JPa/VWVPHFXVoTQ
+         /u6Ol5qFbNy7CrIyW3tqFzzBeGp6L59B9FebszWpoGec6T1Xwi3MnkACIzWbbBCXqLW3
+         NUvfUR9XeQox48BPrm6AvS5U13/oW6n6RBuYLL5X5SpD8PimuHiA8zQG1lZ+ylOg9EpH
+         2raQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=JyJnw5KmzjztIYRh9AYntg6yEfzpdS/pcpt5AbZll/0=;
-        b=0PSvhQI5LkQUsflxzJ4DvD8UdKCXMCUn5tbX9BzGZP40ugcqbZUIxdcvF2VxwNN5Wv
-         uKR3PJhMemR9l3PCF/Ljbc3sYwvPMFz7tPEbuxAoj7WXYFwIql502hQjICTfPzs42d9e
-         mphOvyI84q/UKjIDD9iTVKjMdjdM8HKhLVojl+2X4O9kN2ffvsfb4+zuc3Eqv2nXimam
-         wmUpHnXvh9xTTbgJIWtQYk3VEYSqQjnd0yaMNn1Nk0/DZDZJ58XGe5Ez7A5shCoJQC0/
-         20SB8G8BylHwCS+i7WranhumCXFZDfUsvEETwmp8+U4yEszLilzRfJpFEh5eGMuh7pjx
-         Fp1w==
-X-Gm-Message-State: AOAM532QbepO58Re6lHfkh4Hy93dJTFpvF4JLHtd1b7cPlpkvUFnwdte
-        qoctmAUKI5o16MG4R+1BWAE=
-X-Google-Smtp-Source: ABdhPJwkbE1KKqp6oYs9wHCDekfmVG9p3yMWpXz3CHHk6wYDTJ8LnaejBzWJBIPTjU4FypK1imVyVg==
-X-Received: by 2002:a17:90a:2d6:b0:1b8:cd70:697d with SMTP id d22-20020a17090a02d600b001b8cd70697dmr3465649pjd.78.1646727041259;
-        Tue, 08 Mar 2022 00:10:41 -0800 (PST)
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+         :references:mime-version:content-transfer-encoding;
+        bh=a465xb2KbYFoqoIEJGWa82/Xx7nYSzF3Ap4I6nfNorw=;
+        b=ccfsoiRn3dCaXJAUz7SlYUJitDuSFa0p7PtidTHVzecZnVaQg1cvv78EbRyZ1b+k+8
+         8Qv6mCOUAa0YvosFYRVmsZqvyHHaLXTD1a2Sd69rHVkee5GNP6c3O7Bvgw3q/0eRlqh+
+         y/53OwaSe5lfsV/IJlOOl/PDhbb4+9kLd1QReLwXK0qncN20imLwwPtjdttMt2bClr8Y
+         LmfsavKDh6dZMJxYqOA3ggLrn7gtCOpkbT9EVVFmy+N8mlGPFFcJleUOiYHqEiWhcyil
+         e9aMGOIxsSCLhI+VGnWq+fIYNEEGvaZeufaTVNsEylIk+pjVHoXDPp8OWHVVPF66QrYq
+         6+hg==
+X-Gm-Message-State: AOAM531LU2AtT5iFZPTyQ3ImtOBBGQ6B+r7wMnRkdYQxRBDS4TIrpe7w
+        6YNSYZvSK5x9BWRsWEzhC2I=
+X-Google-Smtp-Source: ABdhPJzsLfv1iq8wmWUdLPKL0RHvAelXR48bZEIbkY4DKcUWOgrH9aPhWGE0I62TS2x2IgSJA5Uhow==
+X-Received: by 2002:a63:dd45:0:b0:373:296e:3cea with SMTP id g5-20020a63dd45000000b00373296e3ceamr13348523pgj.299.1646727044573;
+        Tue, 08 Mar 2022 00:10:44 -0800 (PST)
 Received: from localhost.localdomain ([50.7.60.25])
-        by smtp.gmail.com with ESMTPSA id d14-20020a056a0024ce00b004f7281cda21sm2165282pfv.167.2022.03.08.00.10.38
+        by smtp.gmail.com with ESMTPSA id d14-20020a056a0024ce00b004f7281cda21sm2165282pfv.167.2022.03.08.00.10.41
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 08 Mar 2022 00:10:40 -0800 (PST)
+        Tue, 08 Mar 2022 00:10:44 -0800 (PST)
 From:   Yanteng Si <siyanteng01@gmail.com>
 X-Google-Original-From: Yanteng Si <siyanteng@loongson.cn>
 To:     corbet@lwn.net, alexs@kernel.org, seakeel@gmail.com
-Cc:     Yanteng Si <siyanteng@loongson.cn>, chenhuacai@kernel.org,
+Cc:     Yanteng Si <siyanteng01@gmail.com>, chenhuacai@kernel.org,
         jiaxun.yang@flygoat.com, linux-doc@vger.kernel.org,
-        siyanteng01@gmail.com
-Subject: [PATCH v4 0/5] docs/zh_CN: add admin-guide damon translation
-Date:   Tue,  8 Mar 2022 16:11:58 +0800
-Message-Id: <cover.1646723249.git.siyanteng@loongson.cn>
+        Yanteng Si <siyanteng@loongson.cn>
+Subject: [PATCH v4 1/5] docs/zh_CN: Refactoring the admin-guide directory index
+Date:   Tue,  8 Mar 2022 16:11:59 +0800
+Message-Id: <d9829d5280387bddeadb355eaddc5da113494cf5.1646723249.git.siyanteng@loongson.cn>
 X-Mailer: git-send-email 2.27.0
+In-Reply-To: <cover.1646723249.git.siyanteng@loongson.cn>
+References: <cover.1646723249.git.siyanteng@loongson.cn>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00,DKIM_SIGNED,
         DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_ENVFROM_END_DIGIT,
@@ -69,42 +72,174 @@ Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-v4:
-* Build test in next-20220307.
-* My patch thread is based on
-<https://lore.kernel.org/linux-doc/cover.1646723502.git.siyanteng@loongson.cn/T/#t>
+From: Yanteng Si <siyanteng01@gmail.com>
 
-v3:
-* Build test in next-20220304.
+The Todolist in the html document looks a mess, now give it a nice looking format.
 
-v2:
-* Pick Alexs Reviewed-by tag. [PATCH 1-3/5]
-* Fix a build warning.(introduce from usage.rst)
+Signed-off-by: Yanteng Si <siyanteng@loongson.cn>
+Reviewed-by: Alex Shi <alexs@kernel.org>
+---
+ .../translations/zh_CN/admin-guide/index.rst  | 122 +++++++++---------
+ 1 file changed, 61 insertions(+), 61 deletions(-)
 
-v1:
-* Translate .../admin-guide/mm/damon/* into Chinese
-* note my patch thread is based on
-<https://lore.kernel.org/linux-doc/20220212080024.1684590-1-xu.xin16@zte.com.cn/T/#t>
-
-Yanteng Si (5):
-  docs/zh_CN: Refactoring the admin-guide directory index
-  docs/zh_CN: add admin-guide damon index translation
-  docs/zh_CN: add admin-guide damon start translation
-  docs/zh_CN: add damon usage translation
-  docs/zh_CN: add damon reclaim translation
-
- .../translations/zh_CN/admin-guide/index.rst  | 122 ++++----
- .../zh_CN/admin-guide/mm/damon/index.rst      |  28 ++
- .../zh_CN/admin-guide/mm/damon/reclaim.rst    | 232 ++++++++++++++
- .../zh_CN/admin-guide/mm/damon/start.rst      | 132 ++++++++
- .../zh_CN/admin-guide/mm/damon/usage.rst      | 286 ++++++++++++++++++
- .../zh_CN/admin-guide/mm/index.rst            |   2 +-
- 6 files changed, 740 insertions(+), 62 deletions(-)
- create mode 100644 Documentation/translations/zh_CN/admin-guide/mm/damon/index.rst
- create mode 100644 Documentation/translations/zh_CN/admin-guide/mm/damon/reclaim.rst
- create mode 100644 Documentation/translations/zh_CN/admin-guide/mm/damon/start.rst
- create mode 100644 Documentation/translations/zh_CN/admin-guide/mm/damon/usage.rst
-
+diff --git a/Documentation/translations/zh_CN/admin-guide/index.rst b/Documentation/translations/zh_CN/admin-guide/index.rst
+index 763055f161dd..be535ffaf4b0 100644
+--- a/Documentation/translations/zh_CN/admin-guide/index.rst
++++ b/Documentation/translations/zh_CN/admin-guide/index.rst
+@@ -20,15 +20,15 @@ Linux 内核用户和管理员指南
+ 
+ Todolist:
+ 
+-   kernel-parameters
+-   devices
+-   sysctl/index
++*   kernel-parameters
++*   devices
++*   sysctl/index
+ 
+ 本节介绍CPU漏洞及其缓解措施。
+ 
+ Todolist:
+ 
+-   hw-vuln/index
++*   hw-vuln/index
+ 
+ 下面的一组文档，针对的是试图跟踪问题和bug的用户。
+ 
+@@ -44,18 +44,18 @@ Todolist:
+ 
+ Todolist:
+ 
+-   reporting-bugs
+-   ramoops
+-   dynamic-debug-howto
+-   kdump/index
+-   perf/index
++*   reporting-bugs
++*   ramoops
++*   dynamic-debug-howto
++*   kdump/index
++*   perf/index
+ 
+ 这是应用程序开发人员感兴趣的章节的开始。可以在这里找到涵盖内核ABI各个
+ 方面的文档。
+ 
+ Todolist:
+ 
+-   sysfs-rules
++*   sysfs-rules
+ 
+ 本手册的其余部分包括各种指南，介绍如何根据您的喜好配置内核的特定行为。
+ 
+@@ -73,57 +73,57 @@ Todolist:
+ 
+ Todolist:
+ 
+-   acpi/index
+-   aoe/index
+-   auxdisplay/index
+-   bcache
+-   binderfs
+-   binfmt-misc
+-   blockdev/index
+-   bootconfig
+-   braille-console
+-   btmrvl
+-   cgroup-v1/index
+-   cgroup-v2
+-   cifs/index
+-   dell_rbu
+-   device-mapper/index
+-   edid
+-   efi-stub
+-   ext4
+-   nfs/index
+-   gpio/index
+-   highuid
+-   hw_random
+-   initrd
+-   iostats
+-   java
+-   jfs
+-   kernel-per-CPU-kthreads
+-   laptops/index
+-   lcd-panel-cgram
+-   ldm
+-   LSM/index
+-   md
+-   media/index
+-   module-signing
+-   mono
+-   namespaces/index
+-   numastat
+-   parport
+-   perf-security
+-   pm/index
+-   pnp
+-   rapidio
+-   ras
+-   rtc
+-   serial-console
+-   svga
+-   thunderbolt
+-   ufs
+-   vga-softcursor
+-   video-output
+-   xfs
++*   acpi/index
++*   aoe/index
++*   auxdisplay/index
++*   bcache
++*   binderfs
++*   binfmt-misc
++*   blockdev/index
++*   bootconfig
++*   braille-console
++*   btmrvl
++*   cgroup-v1/index
++*   cgroup-v2
++*   cifs/index
++*   dell_rbu
++*   device-mapper/index
++*   edid
++*   efi-stub
++*   ext4
++*   nfs/index
++*   gpio/index
++*   highuid
++*   hw_random
++*   initrd
++*   iostats
++*   java
++*   jfs
++*   kernel-per-CPU-kthreads
++*   laptops/index
++*   lcd-panel-cgram
++*   ldm
++*   LSM/index
++*   md
++*   media/index
++*   module-signing
++*   mono
++*   namespaces/index
++*   numastat
++*   parport
++*   perf-security
++*   pm/index
++*   pnp
++*   rapidio
++*   ras
++*   rtc
++*   serial-console
++*   svga
++*   thunderbolt
++*   ufs
++*   vga-softcursor
++*   video-output
++*   xfs
+ 
+ .. only::  subproject and html
+ 
 -- 
 2.27.0
 
