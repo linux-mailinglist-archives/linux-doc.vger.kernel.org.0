@@ -2,59 +2,65 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 9A2194D25FB
-	for <lists+linux-doc@lfdr.de>; Wed,  9 Mar 2022 02:14:55 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 61C214D25AE
+	for <lists+linux-doc@lfdr.de>; Wed,  9 Mar 2022 02:14:29 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S230391AbiCIBPJ (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 8 Mar 2022 20:15:09 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:39934 "EHLO
+        id S229887AbiCIBMW (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 8 Mar 2022 20:12:22 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:33942 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S230343AbiCIBOK (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 8 Mar 2022 20:14:10 -0500
-Received: from mail-yw1-x1149.google.com (mail-yw1-x1149.google.com [IPv6:2607:f8b0:4864:20::1149])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id BFEB2E8697
-        for <linux-doc@vger.kernel.org>; Tue,  8 Mar 2022 17:00:32 -0800 (PST)
-Received: by mail-yw1-x1149.google.com with SMTP id 00721157ae682-2dc383ba34eso4526637b3.21
-        for <linux-doc@vger.kernel.org>; Tue, 08 Mar 2022 17:00:32 -0800 (PST)
+        with ESMTP id S230099AbiCIBMQ (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 8 Mar 2022 20:12:16 -0500
+Received: from mail-ej1-x632.google.com (mail-ej1-x632.google.com [IPv6:2a00:1450:4864:20::632])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id BF70312E14D
+        for <linux-doc@vger.kernel.org>; Tue,  8 Mar 2022 17:03:46 -0800 (PST)
+Received: by mail-ej1-x632.google.com with SMTP id d10so1561818eje.10
+        for <linux-doc@vger.kernel.org>; Tue, 08 Mar 2022 17:03:46 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=google.com; s=20210112;
-        h=date:in-reply-to:message-id:mime-version:references:subject:from:to
-         :cc:content-transfer-encoding;
-        bh=2eLf1OQ5c5M4ayVX+55KychHLqSf2s8rTUtR5N1e2O4=;
-        b=mYotAHnmck7cPQSLQ5H1Jgup5Q0G9nVPyWtfD7SnKNQ/M1hTgghhfpZ4cCWtoxTj44
-         csktK1vQp32m/Bge+p2XZSFeDfN3BXrGi2ngYB4B65c8GF5Yvc7CLZrTXZ11atQzrGM5
-         VjENj2CN3KFi5es5T3m/Q7BW01EhOnrOo2x7oMaydXpG4LIHJd+ec5LbiaMNTwNwIvnl
-         oMFKIdT5QiCz69GuODtpKmAewOxPROVTG3nziYa8tllTKYTT3dkOKF/7mIBANAhva48u
-         DRpSchfdmuLJQq9gWHowdHZaMNiPSaR1K16OSkOVXkcsbYAcKUyt1NRFc+fCE0Se/+po
-         AJAA==
+        d=linux-foundation.org; s=google;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc;
+        bh=BVNrGCcOfvHiAcGFTY5YLY7Z1HHPIFngZYQsO1KxKDY=;
+        b=SG8/miPNs2SqQ8nycTJeRar97B4Q7FMFusbGeyij2z7w6RORJwBq1pHwdtxhXCkrRP
+         31vF6vX9uuDq2YbmdD68fWT0Gox8vxJsIr/Xdf2NdLBT+tW3RUdzKm+1mBy81yu0fuoT
+         DDi5tUBGsrtwdVz6rvkrIvBZrf5rTovzb5E7U=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=x-gm-message-state:date:in-reply-to:message-id:mime-version
-         :references:subject:from:to:cc:content-transfer-encoding;
-        bh=2eLf1OQ5c5M4ayVX+55KychHLqSf2s8rTUtR5N1e2O4=;
-        b=v8hTsStHBp3BTxQ3u2qAe7gqop2Ob7zvmFIo7MoebvkPPnlIw8jnF/Gdj3VWsoz3Nz
-         OvyFa+wt35NWyurc64qrBU9LKMBJHqdDSyepcT+59AzuYDkKcDmJmpJqfGnVZDtKBWeQ
-         xiOy+mdRXn3W2WzfyO0MTob/aRTmymBOV/AMRsXCzNBEahX94Zy+0J67cX8rZVc7/kb7
-         4RRtiSy/CqveU//pPa9aWMXM2yoI2qEeGJQcGdcgfvg8F7lbPjRJ9WXHmOuVKGuvrALv
-         LpE44XQqul/vLC3rtdIe3/4cJuoBjljFYEbt5JD3tRVItkhDzpQhUxmIwLbq+dyBOCEb
-         1nbQ==
-X-Gm-Message-State: AOAM532G/PGWeIEehxWbMzRr4rHb8ZTBPQDAii9F6gAXWyVCmIbk6wdU
-        Voe2hsq/voPT6jorUPLYtUZyMmGe7Fk=
-X-Google-Smtp-Source: ABdhPJy2qWRKAnebFlR4r0klAb03fdPmcYWhFD9wA2KdO3CK7iDFRKSpNcQybt31JhmXhU2fP2/5pR0E+WE=
-X-Received: from yuzhao.bld.corp.google.com ([2620:15c:183:200:57a6:54a6:aad1:c0a8])
- (user=yuzhao job=sendgmr) by 2002:a81:1d2:0:b0:2dc:5915:661 with SMTP id
- 201-20020a8101d2000000b002dc59150661mr15391184ywb.154.1646783324137; Tue, 08
- Mar 2022 15:48:44 -0800 (PST)
-Date:   Tue,  8 Mar 2022 16:47:24 -0700
-In-Reply-To: <20220308234723.3834941-1-yuzhao@google.com>
-Message-Id: <20220308234723.3834941-15-yuzhao@google.com>
-Mime-Version: 1.0
-References: <20220308234723.3834941-1-yuzhao@google.com>
-X-Mailer: git-send-email 2.35.1.616.g0bdcbb4464-goog
-Subject: [PATCH v8 14/14] mm: multi-gen LRU: design doc
-From:   Yu Zhao <yuzhao@google.com>
-To:     Andrew Morton <akpm@linux-foundation.org>
-Cc:     Andi Kleen <ak@linux.intel.com>,
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=BVNrGCcOfvHiAcGFTY5YLY7Z1HHPIFngZYQsO1KxKDY=;
+        b=hOXe+JwaxFAzdAjpImvzTg0QsjHgTsvfKmJIA+q4p/BEPkSK52fsImA0mL8MIU+50b
+         zeh1W8xx5NsxItI5qqXaqQL1SyJcBS9VNIFdiELN6fHNWcLF2eyZvfQiMweTsWfW0vfU
+         Zk1/W0cHNGfVgTq36WpXp77CrJA0ntg2cl033f2CvyXMsT4tvUcEVibGsh1hC0bXDq/v
+         Dai7rSrNA1qYgOLqNEQZGDJRSXRGiJnBDYVNV26qV3aihna1WCEuiovlW/xqKzDk0Yz+
+         4gkeIIFMpxn5ZZiFlBTTIvqyP+3ScatA1/hiO7QXPx0zi31JDtToTDfsRdvZoXJXn7RQ
+         rdpA==
+X-Gm-Message-State: AOAM5303613KpPJRGhC9A7VJZizDIB8FnF+DGJW3Vm0L9sVa453umYXx
+        a9cnMe2UuLotJMpDKzy1lUV5Nadr2N4VFoIZDUU=
+X-Google-Smtp-Source: ABdhPJy71PcGBgZJbGWqBXw+KqFh3F+UstasB3PGQOTV6poCCCySFWO32hlcdqmUMguUurdEZR3Pzg==
+X-Received: by 2002:a17:907:1c16:b0:6d7:622b:efea with SMTP id nc22-20020a1709071c1600b006d7622befeamr15434899ejc.110.1646783953506;
+        Tue, 08 Mar 2022 15:59:13 -0800 (PST)
+Received: from mail-wr1-f53.google.com (mail-wr1-f53.google.com. [209.85.221.53])
+        by smtp.gmail.com with ESMTPSA id s5-20020a170906284500b006cc551d6cabsm86833ejc.63.2022.03.08.15.59.11
+        for <linux-doc@vger.kernel.org>
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Tue, 08 Mar 2022 15:59:12 -0800 (PST)
+Received: by mail-wr1-f53.google.com with SMTP id p9so495562wra.12
+        for <linux-doc@vger.kernel.org>; Tue, 08 Mar 2022 15:59:11 -0800 (PST)
+X-Received: by 2002:a2e:924d:0:b0:246:370c:5618 with SMTP id
+ v13-20020a2e924d000000b00246370c5618mr12145935ljg.358.1646783940635; Tue, 08
+ Mar 2022 15:59:00 -0800 (PST)
+MIME-Version: 1.0
+References: <20220308234723.3834941-1-yuzhao@google.com> <20220308234723.3834941-6-yuzhao@google.com>
+In-Reply-To: <20220308234723.3834941-6-yuzhao@google.com>
+From:   Linus Torvalds <torvalds@linux-foundation.org>
+Date:   Tue, 8 Mar 2022 15:58:44 -0800
+X-Gmail-Original-Message-ID: <CAHk-=wggLcQSk3i2h8RWR2GYnCDQW_t5sWOExh2Oojmxvz0hcA@mail.gmail.com>
+Message-ID: <CAHk-=wggLcQSk3i2h8RWR2GYnCDQW_t5sWOExh2Oojmxvz0hcA@mail.gmail.com>
+Subject: Re: [PATCH v8 05/14] mm: multi-gen LRU: groundwork
+To:     Yu Zhao <yuzhao@google.com>
+Cc:     Andrew Morton <akpm@linux-foundation.org>,
+        Andi Kleen <ak@linux.intel.com>,
         Aneesh Kumar <aneesh.kumar@linux.ibm.com>,
         Catalin Marinas <catalin.marinas@arm.com>,
         Dave Hansen <dave.hansen@linux.intel.com>,
@@ -62,7 +68,6 @@ Cc:     Andi Kleen <ak@linux.intel.com>,
         Jesse Barnes <jsbarnes@google.com>,
         Johannes Weiner <hannes@cmpxchg.org>,
         Jonathan Corbet <corbet@lwn.net>,
-        Linus Torvalds <torvalds@linux-foundation.org>,
         Matthew Wilcox <willy@infradead.org>,
         Mel Gorman <mgorman@suse.de>,
         Michael Larabel <Michael@michaellarabel.com>,
@@ -72,231 +77,85 @@ Cc:     Andi Kleen <ak@linux.intel.com>,
         Vlastimil Babka <vbabka@suse.cz>,
         Will Deacon <will@kernel.org>,
         Ying Huang <ying.huang@intel.com>,
-        linux-arm-kernel@lists.infradead.org, linux-doc@vger.kernel.org,
-        linux-kernel@vger.kernel.org, linux-mm@kvack.org,
-        page-reclaim@google.com, x86@kernel.org,
-        Yu Zhao <yuzhao@google.com>, Brian Geffon <bgeffon@google.com>,
+        Linux ARM <linux-arm-kernel@lists.infradead.org>,
+        "open list:DOCUMENTATION" <linux-doc@vger.kernel.org>,
+        Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
+        Linux-MM <linux-mm@kvack.org>, page-reclaim@google.com,
+        "the arch/x86 maintainers" <x86@kernel.org>,
+        Brian Geffon <bgeffon@google.com>,
         Jan Alexander Steffens <heftig@archlinux.org>,
         Oleksandr Natalenko <oleksandr@natalenko.name>,
         Steven Barrett <steven@liquorix.net>,
         Suleiman Souhlal <suleiman@google.com>,
         Daniel Byrne <djbyrne@mtu.edu>,
         Donald Carr <d@chaos-reins.com>,
-        "=?UTF-8?q?Holger=20Hoffst=C3=A4tte?=" 
-        <holger@applied-asynchrony.com>,
+        =?UTF-8?Q?Holger_Hoffst=C3=A4tte?= <holger@applied-asynchrony.com>,
         Konstantin Kharlamov <Hi-Angel@yandex.ru>,
         Shuang Zhai <szhai2@cs.rochester.edu>,
         Sofia Trinh <sofia.trinh@edi.works>,
         Vaibhav Jain <vaibhav@linux.ibm.com>
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Spam-Status: No, score=-9.6 required=5.0 tests=BAYES_00,DKIMWL_WL_MED,
-        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_NONE,
-        SPF_HELO_NONE,SPF_PASS,T_SCC_BODY_TEXT_LINE,USER_IN_DEF_DKIM_WL
-        autolearn=unavailable autolearn_force=no version=3.4.6
+X-Spam-Status: No, score=-1.8 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+        DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
+        RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,SPF_PASS,T_SCC_BODY_TEXT_LINE
+        autolearn=no autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Add a design doc.
+I still think this part is fundamentally wrong:
 
-Signed-off-by: Yu Zhao <yuzhao@google.com>
-Acked-by: Brian Geffon <bgeffon@google.com>
-Acked-by: Jan Alexander Steffens (heftig) <heftig@archlinux.org>
-Acked-by: Oleksandr Natalenko <oleksandr@natalenko.name>
-Acked-by: Steven Barrett <steven@liquorix.net>
-Acked-by: Suleiman Souhlal <suleiman@google.com>
-Tested-by: Daniel Byrne <djbyrne@mtu.edu>
-Tested-by: Donald Carr <d@chaos-reins.com>
-Tested-by: Holger Hoffst=C3=A4tte <holger@applied-asynchrony.com>
-Tested-by: Konstantin Kharlamov <Hi-Angel@yandex.ru>
-Tested-by: Shuang Zhai <szhai2@cs.rochester.edu>
-Tested-by: Sofia Trinh <sofia.trinh@edi.works>
-Tested-by: Vaibhav Jain <vaibhav@linux.ibm.com>
----
- Documentation/vm/index.rst        |   1 +
- Documentation/vm/multigen_lru.rst | 156 ++++++++++++++++++++++++++++++
- 2 files changed, 157 insertions(+)
- create mode 100644 Documentation/vm/multigen_lru.rst
+On Tue, Mar 8, 2022 at 3:48 PM Yu Zhao <yuzhao@google.com> wrote:
+>
+> diff --git a/mm/Kconfig b/mm/Kconfig
+> index 3326ee3903f3..4ef67f157374 100644
+> --- a/mm/Kconfig
+> +++ b/mm/Kconfig
+> @@ -892,6 +892,28 @@ config ANON_VMA_NAME
+>           area from being merged with adjacent virtual memory areas due to the
+>           difference in their name.
+>
+> +# the multi-gen LRU {
+> +config LRU_GEN
+> +       bool "Multi-Gen LRU"
+> +       depends on MMU
+> +       # the following options can use up the spare bits in page flags
+> +       depends on !MAXSMP && (64BIT || !SPARSEMEM || SPARSEMEM_VMEMMAP)
+> +       help
+> +         A high performance LRU implementation for memory overcommit.
+> +
+> +config NR_LRU_GENS
+> +       int "Max number of generations"
+> +       depends on LRU_GEN
+> +       range 4 31
+> +       default 4
+> +       help
+> +         Do not increase this value unless you plan to use working set
+> +         estimation and proactive reclaim. These features are usually for job
+> +         scheduling optimizations in data centers.
+> +
+> +         This option uses order_base_2(N+1) bits in page flags.
+> +# }
 
-diff --git a/Documentation/vm/index.rst b/Documentation/vm/index.rst
-index 44365c4574a3..b48434300226 100644
---- a/Documentation/vm/index.rst
-+++ b/Documentation/vm/index.rst
-@@ -25,6 +25,7 @@ algorithms.  If you are looking for advice on simply allo=
-cating memory, see the
-    ksm
-    memory-model
-    mmu_notifier
-+   multigen_lru
-    numa
-    overcommit-accounting
-    page_migration
-diff --git a/Documentation/vm/multigen_lru.rst b/Documentation/vm/multigen_=
-lru.rst
-new file mode 100644
-index 000000000000..cde60de16621
---- /dev/null
-+++ b/Documentation/vm/multigen_lru.rst
-@@ -0,0 +1,156 @@
-+.. SPDX-License-Identifier: GPL-2.0
-+
-+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-+Multi-Gen LRU
-+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-+
-+Design overview
-+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-+Objectives
-+----------
-+The design objectives are:
-+
-+* Good representation of access recency
-+* Try to profit from spatial locality
-+* Fast paths to make obvious choices
-+* Simple self-correcting heuristics
-+
-+The representation of access recency is at the core of all LRU
-+implementations. In the multi-gen LRU, each generation represents a
-+group of pages with similar access recency. Generations establish a
-+common frame of reference and therefore help make better choices,
-+e.g., between different memcgs on a computer or different computers in
-+a data center (for job scheduling).
-+
-+Exploiting spatial locality improves efficiency when gathering the
-+accessed bit. A rmap walk targets a single page and does not try to
-+profit from discovering a young PTE. A page table walk can sweep all
-+the young PTEs in an address space, but the address space can be too
-+large to make a profit. The key is to optimize both methods and use
-+them in combination.
-+
-+Fast paths reduce code complexity and runtime overhead. Unmapped pages
-+do not require TLB flushes; clean pages do not require writeback.
-+These facts are only helpful when other conditions, e.g., access
-+recency, are similar. With generations as a common frame of reference,
-+additional factors stand out. But obvious choices might not be good
-+choices; thus self-correction is required.
-+
-+The benefits of simple self-correcting heuristics are self-evident.
-+Again, with generations as a common frame of reference, this becomes
-+attainable. Specifically, pages in the same generation can be
-+categorized based on additional factors, and a feedback loop can
-+statistically compare the refault percentages across those categories
-+and infer which of them are better choices.
-+
-+Assumptions
-+-----------
-+The protection of hot pages and the selection of cold pages are based
-+on page access channels and patterns. There are two access channels:
-+
-+* Accesses through page tables
-+* Accesses through file descriptors
-+
-+The protection of the former channel is by design stronger because:
-+
-+1. The uncertainty in determining the access patterns of the former
-+   channel is higher due to the approximation of the accessed bit.
-+2. The cost of evicting the former channel is higher due to the TLB
-+   flushes required and the likelihood of encountering the dirty bit.
-+3. The penalty of underprotecting the former channel is higher because
-+   applications usually do not prepare themselves for major page
-+   faults like they do for blocked I/O. E.g., GUI applications
-+   commonly use dedicated I/O threads to avoid blocking the rendering
-+   threads.
-+
-+There are also two access patterns:
-+
-+* Accesses exhibiting temporal locality
-+* Accesses not exhibiting temporal locality
-+
-+For the reasons listed above, the former channel is assumed to follow
-+the former pattern unless ``VM_SEQ_READ`` or ``VM_RAND_READ`` is
-+present, and the latter channel is assumed to follow the latter
-+pattern unless outlying refaults have been observed.
-+
-+Workflow overview
-+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-+Evictable pages are divided into multiple generations for each
-+``lruvec``. The youngest generation number is stored in
-+``lrugen->max_seq`` for both anon and file types as they are aged on
-+an equal footing. The oldest generation numbers are stored in
-+``lrugen->min_seq[]`` separately for anon and file types as clean file
-+pages can be evicted regardless of swap constraints. These three
-+variables are monotonically increasing.
-+
-+Generation numbers are truncated into ``order_base_2(MAX_NR_GENS+1)``
-+bits in order to fit into the gen counter in ``folio->flags``. Each
-+truncated generation number is an index to ``lrugen->lists[]``. The
-+sliding window technique is used to track at least ``MIN_NR_GENS`` and
-+at most ``MAX_NR_GENS`` generations. The gen counter stores a value
-+within ``[1, MAX_NR_GENS]`` while a page is on one of
-+``lrugen->lists[]``; otherwise it stores zero.
-+
-+Each generation is divided into multiple tiers. Tiers represent
-+different ranges of numbers of accesses through file descriptors. A
-+page accessed ``N`` times through file descriptors is in tier
-+``order_base_2(N)``. In contrast to moving across generations, which
-+requires the LRU lock, moving across tiers only requires operations on
-+``folio->flags`` and therefore has a negligible cost. A feedback loop
-+modeled after the PID controller monitors refaults over all the tiers
-+from anon and file types and decides which tiers from which types to
-+evict or protect.
-+
-+There are two conceptually independent procedures: the aging and the
-+eviction. They form a closed-loop system, i.e., the page reclaim.
-+
-+Aging
-+-----
-+The aging produces young generations. Given an ``lruvec``, it
-+increments ``max_seq`` when ``max_seq-min_seq+1`` approaches
-+``MIN_NR_GENS``. The aging promotes hot pages to the youngest
-+generation when it finds them accessed through page tables; the
-+demotion of cold pages happens consequently when it increments
-+``max_seq``. The aging uses page table walks and rmap walks to find
-+young PTEs. For the former, it iterates ``lruvec_memcg()->mm_list``
-+and calls ``walk_page_range()`` with each ``mm_struct`` on this list
-+to scan PTEs. On finding a young PTE, it clears the accessed bit and
-+updates the gen counter of the page mapped by this PTE to
-+``(max_seq%MAX_NR_GENS)+1``. After each iteration of this list, it
-+increments ``max_seq``. For the latter, when the eviction walks the
-+rmap and finds a young PTE, the aging scans the adjacent PTEs and
-+follows the same steps just described.
-+
-+Eviction
-+--------
-+The eviction consumes old generations. Given an ``lruvec``, it
-+increments ``min_seq`` when ``lrugen->lists[]`` indexed by
-+``min_seq%MAX_NR_GENS`` becomes empty. To select a type and a tier to
-+evict from, it first compares ``min_seq[]`` to select the older type.
-+If both types are equally old, it selects the one whose first tier has
-+a lower refault percentage. The first tier contains single-use
-+unmapped clean pages, which are the best bet. The eviction sorts a
-+page according to the gen counter if the aging has found this page
-+accessed through page tables and updated the gen counter. It also
-+moves a page to the next generation, i.e., ``min_seq+1``, if this page
-+was accessed multiple times through file descriptors and the feedback
-+loop has detected outlying refaults from the tier this page is in. To
-+do this, the feedback loop uses the first tier as the baseline, for
-+the reason stated earlier.
-+
-+Summary
-+-------
-+The multi-gen LRU can be disassembled into the following parts:
-+
-+* Generations
-+* Page table walks
-+* Rmap walks
-+* Bloom filters
-+* The PID controller
-+
-+The aging and the eviction is a producer-consumer model; specifically,
-+the latter drives the former by the sliding window over generations.
-+Within the aging, rmap walks drive page table walks by inserting hot
-+densely populated page tables to the Bloom filters. Within the
-+eviction, the PID controller uses refaults as the feedback to select
-+types to evict and tiers to protect.
---=20
-2.35.1.616.g0bdcbb4464-goog
+Pick a value. Don't ask a user for a value.
 
+If you don't know what the value should be, the user sure as hell doesn't.
+
+And if you don't pick a value for people to test, then people will
+test random values and dilute and make the testing less valid in the
+process.
+
+There is absolutely no upside to asking people a question like this,
+and only downsides.
+
+If the quoted "schedulign optimizations" are real, then maybe bigger
+values should be the default? Or maybe it should be a run-time
+tunable, so that people can actually _test_ them?
+
+Or - more likely - that config variable just shouldn't exist, at least
+in some initial series, and you just should say "we use four
+generations, we can tweak this if people have hard numbers later".
+
+                 Linus
