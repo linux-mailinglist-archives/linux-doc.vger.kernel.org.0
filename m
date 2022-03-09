@@ -2,47 +2,48 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id D41CA4D3D99
-	for <lists+linux-doc@lfdr.de>; Thu, 10 Mar 2022 00:32:38 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 480E14D3D9C
+	for <lists+linux-doc@lfdr.de>; Thu, 10 Mar 2022 00:34:59 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S232620AbiCIXdg (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 9 Mar 2022 18:33:36 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:56442 "EHLO
+        id S234373AbiCIXf4 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 9 Mar 2022 18:35:56 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:36052 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S229652AbiCIXdg (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Wed, 9 Mar 2022 18:33:36 -0500
+        with ESMTP id S232807AbiCIXf4 (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Wed, 9 Mar 2022 18:35:56 -0500
 Received: from ms.lwn.net (ms.lwn.net [IPv6:2600:3c01:e000:3a1::42])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id C776A20185
-        for <linux-doc@vger.kernel.org>; Wed,  9 Mar 2022 15:32:34 -0800 (PST)
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id D212525587
+        for <linux-doc@vger.kernel.org>; Wed,  9 Mar 2022 15:34:56 -0800 (PST)
 Received: from localhost (unknown [IPv6:2601:281:8300:104d::5f6])
         (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
         (No client certificate requested)
-        by ms.lwn.net (Postfix) with ESMTPSA id 63990383;
-        Wed,  9 Mar 2022 23:32:34 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 ms.lwn.net 63990383
+        by ms.lwn.net (Postfix) with ESMTPSA id 754862C3;
+        Wed,  9 Mar 2022 23:34:56 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 ms.lwn.net 754862C3
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=lwn.net; s=20201203;
-        t=1646868754; bh=hLjlBCM7Y2H+HhVlUbXqpgEVb3jLdNA+tfKcTxAGUXw=;
+        t=1646868896; bh=9lJgLzkTshePGMmbEPGHCWhGxoc3kMTvyr55DL4fAKA=;
         h=From:To:Cc:Subject:In-Reply-To:References:Date:From;
-        b=fYLf5yGfMAWyHpykyJ1PkyU6i+Kpjq2Az1RznOY975bvk8Ja06if11gMvrK0XWsJ+
-         v7PARSHh+qHmOH9H4WSHzMAQ6CBvAYlHwOPFcRC4SqoQJFJr6EU1ElUqXfwk7U7VxA
-         UCbrkMRGF9+BhIMtzj629Hmzwae65qs+05sTZqMOukxGYIC/0x5p4Sp0S7kuu2lTJE
-         NU/Jwy7RNSnnl9ieObVTrz8afAu5iS4cSw3uUs67Sz51b/xVQJ+lD2AQmEFCZVQSyQ
-         7cXbgmRMcoAKSInkBcyUQd5B+x4/7p4cjdRqrkLvhqVIJl3ZHvzu1k27ujoNYwExCN
-         LcpknOtR3EUvA==
+        b=KMC6FROmxIUb2DajvbInhM+lGIdISCAi6qIvsjFqDEbtJQ1dpjcp/yO6FnzxRiQEg
+         0dGVJ+yvuJDYiuLXn4fG2/EapjFpv7CnXSo2+qVhFlX42c1kIGg5vyaXu6CLNtFySR
+         qfTn2AvmDjKSS1m9so4TdqsjFTvcHWZegncHbAGPWU0cBr4KHncRWVEVaZQhk8O/5B
+         NbhzUf8yvpiC9PlGgakeTbdgAoXiFm2yQVWor4zPX1wmTkzE/AhXZ42oD9h324IXNR
+         agewhF8SF5m0F3dN+2+QStZavNa/bc0ewSIL/PDvIrSTCMwqmH6eO1PFGMNnzYF/rf
+         bLVmnfs0L8gcw==
 From:   Jonathan Corbet <corbet@lwn.net>
 To:     Yanteng Si <siyanteng01@gmail.com>, alexs@kernel.org,
         seakeel@gmail.com
-Cc:     Yanteng Si <siyanteng@loongson.cn>,
-        Yanteng Si <siyanteng01@gmail.com>, chenhuacai@kernel.org,
-        jiaxun.yang@flygoat.com, linux-doc@vger.kernel.org
-Subject: Re: [PATCH v2 0/3] docs/zh_CN: add devicetree translation
-In-Reply-To: <cover.1646642188.git.siyanteng@loongson.cn>
-References: <cover.1646642188.git.siyanteng@loongson.cn>
-Date:   Wed, 09 Mar 2022 16:32:33 -0700
-Message-ID: <87ilsm7lda.fsf@meer.lwn.net>
+Cc:     xu xin <xu.xin16@zte.com.cn>, chenhuacai@kernel.org,
+        jiaxun.yang@flygoat.com, linux-doc@vger.kernel.org,
+        siyanteng01@gmail.com, Yang Yang <yang.yang29@zte.com.cn>,
+        Yanteng Si <siyanteng@loongson.cn>
+Subject: Re: [PATCH v6 1/3] Add Chinese translation for vm/ksm.rst
+In-Reply-To: <5c1d9b95b570cc3412b6bf87fdcc35046b3ce606.1646723502.git.siyanteng@loongson.cn>
+References: <cover.1646723502.git.siyanteng@loongson.cn>
+ <5c1d9b95b570cc3412b6bf87fdcc35046b3ce606.1646723502.git.siyanteng@loongson.cn>
+Date:   Wed, 09 Mar 2022 16:34:55 -0700
+Message-ID: <87ee3a7l9c.fsf@meer.lwn.net>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain
 X-Spam-Status: No, score=-2.1 required=5.0 tests=BAYES_00,DKIM_SIGNED,
         DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,SPF_HELO_NONE,SPF_PASS,
         T_SCC_BODY_TEXT_LINE autolearn=ham autolearn_force=no version=3.4.6
@@ -54,37 +55,23 @@ X-Mailing-List: linux-doc@vger.kernel.org
 
 Yanteng Si <siyanteng01@gmail.com> writes:
 
-> From: Yanteng Si <siyanteng01@gmail.com>
+> From: xu xin <xu.xin16@zte.com.cn>
 >
-> v2:
-> * Pick Alex's Review-by tag.
-> * Modify "test-date" to "=E6=B5=8B=E8=AF=95=E6=95=B0=E6=8D=AE" according =
-to Alex's opinion.
+> Translate Documentation/vm/ksm.rst into Chinese.
+> Update Documentation/translations/zh_CN/vm/index.rst.
 >
-> v1:
-> * Translate .../devicetree/of_unittest.rst and .../devicetree/usage-model=
-.rst into Chinese.
->
-> Yanteng Si (3):
->   docs/zh_CN: add devicetree index translation
->   docs/zh_CN: add devicetree usage-model translation
->   docs/zh_CN: add devicetree of_unittest translation
->
->  .../translations/zh_CN/devicetree/index.rst   |  50 +++
->  .../zh_CN/devicetree/of_unittest.rst          | 189 ++++++++++
->  .../zh_CN/devicetree/usage-model.rst          | 330 ++++++++++++++++++
->  Documentation/translations/zh_CN/index.rst    |   6 +-
->  4 files changed, 574 insertions(+), 1 deletion(-)
->  create mode 100644 Documentation/translations/zh_CN/devicetree/index.rst
->  create mode 100644 Documentation/translations/zh_CN/devicetree/of_unitte=
-st.rst
->  create mode 100644 Documentation/translations/zh_CN/devicetree/usage-mod=
-el.rst
+> Reviewed-by: Yang Yang <yang.yang29@zte.com.cn>
+> Reviewed-by: Alex Shi <alexs@kernel.org>
+> Reviewed-by: Yanteng Si <siyanteng@loongson.cn>
+> Signed-off-by: xu xin <xu.xin16@zte.com.cn>
+> ---
+>  Documentation/translations/zh_CN/vm/index.rst |  1 +
+>  Documentation/translations/zh_CN/vm/ksm.rst   | 70 +++++++++++++++++++
+>  2 files changed, 71 insertions(+)
+>  create mode 100644 Documentation/translations/zh_CN/vm/ksm.rst
 
-Set applied, thanks.
-
-For future patches, though, could you please ensure that your signoff
-and sending email addresses match?
+Since you are passing this patch onward, you need to apply your sigoff
+to it.
 
 Thanks,
 
