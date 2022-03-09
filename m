@@ -2,101 +2,121 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 4E6D44D25CA
-	for <lists+linux-doc@lfdr.de>; Wed,  9 Mar 2022 02:14:39 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 56A9B4D25DD
+	for <lists+linux-doc@lfdr.de>; Wed,  9 Mar 2022 02:14:45 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S229746AbiCIBFU (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 8 Mar 2022 20:05:20 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:47130 "EHLO
+        id S229764AbiCIBG5 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 8 Mar 2022 20:06:57 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:46148 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S229873AbiCIBFE (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 8 Mar 2022 20:05:04 -0500
-Received: from mail-lj1-x22a.google.com (mail-lj1-x22a.google.com [IPv6:2a00:1450:4864:20::22a])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 89D4EAC929
-        for <linux-doc@vger.kernel.org>; Tue,  8 Mar 2022 16:42:50 -0800 (PST)
-Received: by mail-lj1-x22a.google.com with SMTP id s25so929638lji.5
-        for <linux-doc@vger.kernel.org>; Tue, 08 Mar 2022 16:42:50 -0800 (PST)
+        with ESMTP id S229942AbiCIBGm (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 8 Mar 2022 20:06:42 -0500
+Received: from mail-pf1-x42c.google.com (mail-pf1-x42c.google.com [IPv6:2607:f8b0:4864:20::42c])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id A3F7814994E
+        for <linux-doc@vger.kernel.org>; Tue,  8 Mar 2022 16:45:54 -0800 (PST)
+Received: by mail-pf1-x42c.google.com with SMTP id g1so867117pfv.1
+        for <linux-doc@vger.kernel.org>; Tue, 08 Mar 2022 16:45:54 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linux-foundation.org; s=google;
+        d=google.com; s=20210112;
         h=mime-version:references:in-reply-to:from:date:message-id:subject:to
          :cc;
-        bh=tYmupwL1NthFsF42+Fr0z4aIrhKGW9iSWfQCfyDDaEk=;
-        b=T9Y8CKYiSW3hGc9HM0/MT5sFo5blD99UIhMWcRbFD5kggM3DUwxybXuISqMFUGIjrg
-         mWQ74CDHtfn9kXLqt5VqIvjs1zPAj3pO65tEdbgr+OX1FrAEaiMiYghKLtQSRfh7w9WS
-         TgKR2SZWDkmK6Hkv45V1e1kyBDZQ0M8AOrIp8=
+        bh=C9mwhzMPXsuBhWeNQaY1yLcs8fwNMTqk4ERNtUz41w0=;
+        b=BDABS9uVQcFS/djzmKr84X48kvQ7FDJAHE5GyVdrdiXPfTAYC3kgAFEzfvB6h5+7Ne
+         DKI04IYSdFHK205mfzwOunyx4PHkbqy5VyoQ+nymhIwFfW7fLx6kcpzrepYQtmDNfncI
+         YRhh6zrCf45T/6Th5xWqyvHHaC1k7FaJUXexXtRN4AiXd2xH+N4D4P3m+p/ADG+Xg6ve
+         AFjeP6Jm272NK/5u/t9B1O8Qh2xSavwE4p9U+Dr8Oiwr+ilU5lrCUw3f+pMoIIM882Va
+         O0xSq8iwXs3eCyKaIJHJymhVdMnlCnaqFoNkx7QlKg6nFd850+5Z0Y1pVrPq8DGUnblw
+         V87g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=x-gm-message-state:mime-version:references:in-reply-to:from:date
          :message-id:subject:to:cc;
-        bh=tYmupwL1NthFsF42+Fr0z4aIrhKGW9iSWfQCfyDDaEk=;
-        b=uBB9ORTq6DPqqzQtSJIWz+yKi3I6xlWS4p8sH0fWNMb8Gxytsb9jNzvMKN6GnTILtu
-         zIaXZVNn9zN32SqJTlfn5xAuwyP0AKU6SNcXMkcgpBX1/Sbg50wa7Oe+3cnPoJE9dUV+
-         Vs7yeY86X1fDhH2Tk7946PHM7lYxXM+6NQWUFCNpD+BueF1lTWrbLnxWA2booVUKTAp7
-         EG/KRiQgoqSJjBhMqm5s1QKs+7BDEV4MDO+IzfLC5z6LbtPryDpbOZcObsvOGYPe/wgD
-         oU7qo2xro2rGIbyKKezzfgH3JZ3tIL1sh2A7/U14DPT8fmI1wqQsmKek3igk1Ou8e3XY
-         bxrQ==
-X-Gm-Message-State: AOAM530qQUrRdNTep8o3H4CQHoP6BT+zQjNv5eJoQRyopiLcyLeaGpQq
-        2PYzsURy/F5NJJLeB+2P30s6X3T31ZUHuvaCm+4=
-X-Google-Smtp-Source: ABdhPJz2XEykMLhmMUN6ozxvg3m1XH0XhomPSONGadtsygBNntZHZexqNmE49Iz8/Ejop+v5Z6SVjw==
-X-Received: by 2002:a2e:864b:0:b0:248:321:f13a with SMTP id i11-20020a2e864b000000b002480321f13amr39933ljj.210.1646784570057;
-        Tue, 08 Mar 2022 16:09:30 -0800 (PST)
-Received: from mail-lj1-f170.google.com (mail-lj1-f170.google.com. [209.85.208.170])
-        by smtp.gmail.com with ESMTPSA id f4-20020a056512092400b004485164791csm43467lft.119.2022.03.08.16.09.27
-        for <linux-doc@vger.kernel.org>
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Tue, 08 Mar 2022 16:09:28 -0800 (PST)
-Received: by mail-lj1-f170.google.com with SMTP id u7so809597ljk.13
-        for <linux-doc@vger.kernel.org>; Tue, 08 Mar 2022 16:09:27 -0800 (PST)
-X-Received: by 2002:a2e:9b10:0:b0:247:f28c:ffd3 with SMTP id
- u16-20020a2e9b10000000b00247f28cffd3mr3400178lji.152.1646784567653; Tue, 08
- Mar 2022 16:09:27 -0800 (PST)
+        bh=C9mwhzMPXsuBhWeNQaY1yLcs8fwNMTqk4ERNtUz41w0=;
+        b=Qwak8zvVAzSMKyBWMp70+aoZtveaF/S2RCoN24QI5bwsbcz3hGqdVmW7ZTvaxhM5Sn
+         WBTf5VzCq54mafqNS5h6t3+sv5Fmm+rG/K335tgfp7eddHBwYma/30uBr81PBUI1RH1T
+         JQzh/+/a4gBWtU+dlVDevN6sBzPUDRtgCQnCVxqcy4N6zj1twlJK8e3PjxfqjYtDZpNb
+         U15iyjLHDsJ3r5Lx+fBNqUsYh37lnM5SXEebWA225MKhJxl9iUEHiF1XBqkgy8/IAKXG
+         lJFPlGd1a1a9+npc9DwNzmANSZ3PQ1X7gICPRNke/R+qTsS6RLrehpnN9/9avb6AP1GP
+         doSg==
+X-Gm-Message-State: AOAM530DxFLiWfHghyACVzZCb2iE3O6SOy6TAkfdkvRrb9j2uWTgPtIy
+        6WPWtzZ2KNovPdESfm2w916QB31aixfxjZzG3fNQm437hxr6Ow8/
+X-Google-Smtp-Source: ABdhPJyBAfeSZLyjOQmRLVwYDPtCASEbExuTxYgwggPQnIDguzuOxXWN2t0qp9chTtu67kkdtr9sUGRdA8hf3NSsJIk=
+X-Received: by 2002:a1f:314b:0:b0:331:fff6:a89e with SMTP id
+ x72-20020a1f314b000000b00331fff6a89emr8182208vkx.26.1646784902851; Tue, 08
+ Mar 2022 16:15:02 -0800 (PST)
 MIME-Version: 1.0
-References: <20220308215615.14183-1-arnd@kernel.org>
-In-Reply-To: <20220308215615.14183-1-arnd@kernel.org>
-From:   Linus Torvalds <torvalds@linux-foundation.org>
-Date:   Tue, 8 Mar 2022 16:09:11 -0800
-X-Gmail-Original-Message-ID: <CAHk-=wjsCrVxToP0Zx+cUAVZmSKi=Y6NP1+VnBcoPyPPEBfonQ@mail.gmail.com>
-Message-ID: <CAHk-=wjsCrVxToP0Zx+cUAVZmSKi=Y6NP1+VnBcoPyPPEBfonQ@mail.gmail.com>
-Subject: Re: [PATCH 0/4] [v4] Kbuild: std=gnu11 changes
-To:     Arnd Bergmann <arnd@kernel.org>
-Cc:     Masahiro Yamada <masahiroy@kernel.org>,
-        Alex Shi <alexs@kernel.org>, Arnd Bergmann <arnd@arndb.de>,
-        David Sterba <dsterba@suse.com>,
-        Marco Elver <elver@google.com>,
-        Jani Nikula <jani.nikula@intel.com>,
+References: <20220308234723.3834941-1-yuzhao@google.com> <CAHk-=wi5wg=72exwHODJdVtAfqa1e85dGfjGftuhHQ5Z4v-DNA@mail.gmail.com>
+In-Reply-To: <CAHk-=wi5wg=72exwHODJdVtAfqa1e85dGfjGftuhHQ5Z4v-DNA@mail.gmail.com>
+From:   Yu Zhao <yuzhao@google.com>
+Date:   Tue, 8 Mar 2022 17:14:51 -0700
+Message-ID: <CAOUHufYFDawK6vmkQ16EQm7FSHresViifnxW2yj_RDuMSjJPjg@mail.gmail.com>
+Subject: Re: [PATCH v8 00/14] Multi-Gen LRU Framework
+To:     Linus Torvalds <torvalds@linux-foundation.org>
+Cc:     Andrew Morton <akpm@linux-foundation.org>,
+        Andi Kleen <ak@linux.intel.com>,
+        Aneesh Kumar <aneesh.kumar@linux.ibm.com>,
+        Catalin Marinas <catalin.marinas@arm.com>,
+        Dave Hansen <dave.hansen@linux.intel.com>,
+        Hillf Danton <hdanton@sina.com>, Jens Axboe <axboe@kernel.dk>,
+        Jesse Barnes <jsbarnes@google.com>,
+        Johannes Weiner <hannes@cmpxchg.org>,
+        Jonathan Corbet <corbet@lwn.net>,
+        Matthew Wilcox <willy@infradead.org>,
+        Mel Gorman <mgorman@suse.de>,
+        Michael Larabel <Michael@michaellarabel.com>,
+        Michal Hocko <mhocko@kernel.org>,
+        Mike Rapoport <rppt@kernel.org>,
+        Rik van Riel <riel@surriel.com>,
+        Vlastimil Babka <vbabka@suse.cz>,
+        Will Deacon <will@kernel.org>,
+        Ying Huang <ying.huang@intel.com>,
+        Linux ARM <linux-arm-kernel@lists.infradead.org>,
         "open list:DOCUMENTATION" <linux-doc@vger.kernel.org>,
-        Linux Kbuild mailing list <linux-kbuild@vger.kernel.org>,
         Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
-        llvm@lists.linux.dev, Mark Rutland <mark.rutland@arm.com>,
-        Nick Desaulniers <ndesaulniers@google.com>,
-        Miguel Ojeda <ojeda@kernel.org>
+        Linux-MM <linux-mm@kvack.org>,
+        Kernel Page Reclaim v2 <page-reclaim@google.com>,
+        "the arch/x86 maintainers" <x86@kernel.org>
 Content-Type: text/plain; charset="UTF-8"
-X-Spam-Status: No, score=-1.8 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
-        RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,SPF_PASS,T_SCC_BODY_TEXT_LINE
-        autolearn=no autolearn_force=no version=3.4.6
+X-Spam-Status: No, score=-17.6 required=5.0 tests=BAYES_00,DKIMWL_WL_MED,
+        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,
+        ENV_AND_HDR_SPF_MATCH,RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,SPF_PASS,
+        T_SCC_BODY_TEXT_LINE,USER_IN_DEF_DKIM_WL,USER_IN_DEF_SPF_WL
+        autolearn=unavailable autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Tue, Mar 8, 2022 at 1:56 PM Arnd Bergmann <arnd@kernel.org> wrote:
+On Tue, Mar 8, 2022 at 5:07 PM Linus Torvalds
+<torvalds@linux-foundation.org> wrote:
 >
-> From: Arnd Bergmann <arnd@arndb.de>
+> On Tue, Mar 8, 2022 at 3:48 PM Yu Zhao <yuzhao@google.com> wrote:
+> >
+> > The current page reclaim is too expensive in terms of CPU usage and it
+> > often makes poor choices about what to evict. This patchset offers an
+> > alternative solution that is performant, versatile and
+> > straightforward.
 >
-> I've incorporated the feedback from Masahiro Yamada in this
-> version, splitting out one more patch, rebasing on top of
-> the kbuild tree, and changing the order of the patches.
+> So apart from my complaints about asking users config questions that
+> simply should not be asked, I really think this just needs to start
+> getting merged.
 >
-> Please apply to the kbuild tree.
+> We've seen several numbers on the upsides, and I don't think we'll see
+> any of the downsides until we try it. And I don't think there is any
+> question that we _shouldn't_ try it, given the numbers posted.
+>
+> But yeah, I certainly _hope_ that all the benchmarking has been done
+> with a unified set of config values, and it's not some kind of bogus
+> "cherry-picked config values for this particular machine" kind of
+> benchmarking that has been done.
+>
+> Because that isn't valid benchmarking - comparing some "tuned for this
+> paeticular machine or load" setup to a default one is just not worth
+> even setting numbers to, and debases the whole value of posting
+> results.
 
-I'd actually like to see this as a separate branch, so that I can
-merge it early - or other peoples git branches end up depending on it.
+All benchmarks were done with the default config values. I'm removing
+those config options now.
 
-Yeah, it shouldn't change anything on its own, but since it allows for
-new syntax, we might have other things depending on it (I'm obviously
-thinking of the list_for_each_entry() series that keeps getting
-posted).
-
-                      Linus
+This sounds self-serving: our data centers want them, so I had to try.
