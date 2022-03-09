@@ -2,56 +2,64 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 56A9B4D25DD
-	for <lists+linux-doc@lfdr.de>; Wed,  9 Mar 2022 02:14:45 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id E9F224D2590
+	for <lists+linux-doc@lfdr.de>; Wed,  9 Mar 2022 02:14:17 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S229764AbiCIBG5 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 8 Mar 2022 20:06:57 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:46148 "EHLO
+        id S230159AbiCIBOG (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 8 Mar 2022 20:14:06 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:44776 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S229942AbiCIBGm (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 8 Mar 2022 20:06:42 -0500
-Received: from mail-pf1-x42c.google.com (mail-pf1-x42c.google.com [IPv6:2607:f8b0:4864:20::42c])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id A3F7814994E
-        for <linux-doc@vger.kernel.org>; Tue,  8 Mar 2022 16:45:54 -0800 (PST)
-Received: by mail-pf1-x42c.google.com with SMTP id g1so867117pfv.1
-        for <linux-doc@vger.kernel.org>; Tue, 08 Mar 2022 16:45:54 -0800 (PST)
+        with ESMTP id S231435AbiCIBNW (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 8 Mar 2022 20:13:22 -0500
+Received: from mail-ej1-x62f.google.com (mail-ej1-x62f.google.com [IPv6:2a00:1450:4864:20::62f])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 9404D141E38
+        for <linux-doc@vger.kernel.org>; Tue,  8 Mar 2022 16:56:44 -0800 (PST)
+Received: by mail-ej1-x62f.google.com with SMTP id bi12so1611874ejb.3
+        for <linux-doc@vger.kernel.org>; Tue, 08 Mar 2022 16:56:44 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=google.com; s=20210112;
+        d=linux-foundation.org; s=google;
         h=mime-version:references:in-reply-to:from:date:message-id:subject:to
          :cc;
-        bh=C9mwhzMPXsuBhWeNQaY1yLcs8fwNMTqk4ERNtUz41w0=;
-        b=BDABS9uVQcFS/djzmKr84X48kvQ7FDJAHE5GyVdrdiXPfTAYC3kgAFEzfvB6h5+7Ne
-         DKI04IYSdFHK205mfzwOunyx4PHkbqy5VyoQ+nymhIwFfW7fLx6kcpzrepYQtmDNfncI
-         YRhh6zrCf45T/6Th5xWqyvHHaC1k7FaJUXexXtRN4AiXd2xH+N4D4P3m+p/ADG+Xg6ve
-         AFjeP6Jm272NK/5u/t9B1O8Qh2xSavwE4p9U+Dr8Oiwr+ilU5lrCUw3f+pMoIIM882Va
-         O0xSq8iwXs3eCyKaIJHJymhVdMnlCnaqFoNkx7QlKg6nFd850+5Z0Y1pVrPq8DGUnblw
-         V87g==
+        bh=dlXc7nO4VVenbG9TQJ/z1TWtkG9nDmF64Ost29V8AWc=;
+        b=fk9Kkf3UiaboVe5n2sPqRmsu9R/9pSJ0MBG82T7odsoD9Z+4tUrGity1EBUSVcd5bO
+         Ay+GVgtTlqOjk5DG157lanciRnAlDA9OLu41FZ3ehebtgoQkdRl4IX3y8PNM/lSEI5AP
+         dZRPNM6mHBzmKNa87ZpX/gBVrjQgnOz7vbrW0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=x-gm-message-state:mime-version:references:in-reply-to:from:date
          :message-id:subject:to:cc;
-        bh=C9mwhzMPXsuBhWeNQaY1yLcs8fwNMTqk4ERNtUz41w0=;
-        b=Qwak8zvVAzSMKyBWMp70+aoZtveaF/S2RCoN24QI5bwsbcz3hGqdVmW7ZTvaxhM5Sn
-         WBTf5VzCq54mafqNS5h6t3+sv5Fmm+rG/K335tgfp7eddHBwYma/30uBr81PBUI1RH1T
-         JQzh/+/a4gBWtU+dlVDevN6sBzPUDRtgCQnCVxqcy4N6zj1twlJK8e3PjxfqjYtDZpNb
-         U15iyjLHDsJ3r5Lx+fBNqUsYh37lnM5SXEebWA225MKhJxl9iUEHiF1XBqkgy8/IAKXG
-         lJFPlGd1a1a9+npc9DwNzmANSZ3PQ1X7gICPRNke/R+qTsS6RLrehpnN9/9avb6AP1GP
-         doSg==
-X-Gm-Message-State: AOAM530DxFLiWfHghyACVzZCb2iE3O6SOy6TAkfdkvRrb9j2uWTgPtIy
-        6WPWtzZ2KNovPdESfm2w916QB31aixfxjZzG3fNQm437hxr6Ow8/
-X-Google-Smtp-Source: ABdhPJyBAfeSZLyjOQmRLVwYDPtCASEbExuTxYgwggPQnIDguzuOxXWN2t0qp9chTtu67kkdtr9sUGRdA8hf3NSsJIk=
-X-Received: by 2002:a1f:314b:0:b0:331:fff6:a89e with SMTP id
- x72-20020a1f314b000000b00331fff6a89emr8182208vkx.26.1646784902851; Tue, 08
- Mar 2022 16:15:02 -0800 (PST)
+        bh=dlXc7nO4VVenbG9TQJ/z1TWtkG9nDmF64Ost29V8AWc=;
+        b=3wp+oos4IfaC8Y8UTac43SJHY2ZB03XmNwDsItenoWEmWfgxgwU/Kf8XA+HV+IOIWt
+         Tq+yzNGHHcFVtrpPlDYIXPMn7+/N3kUrzL8B5ks799wWJuzNH9OYDSIPeiHQYUHNKxpV
+         DYRw5E9X7Ol5pTIPZOvzk9ivBqeiTD1Su3091MacC8uh3q4ssyFC+SyF8IK7a1PTAPyi
+         v/jZa9z35p3vKFmKhn/rHuahs609KpBO3cCmp4fGqcKE78MMPUHP/OPQnlVGDGm3UqIL
+         WWNpFdh4qIi89msQ4SkDaASihaGqqbutVT8VBwzTooePkaVvg1qJLldJr98FraaDW+M2
+         OAog==
+X-Gm-Message-State: AOAM533siQB7XDo83GcIgaqYyZepmhk+5l5desQDXPdTYyUJMrZs6t++
+        tyZvocScqc92XlVF2w8Su6NjZNNhnVW8/sKpXzU=
+X-Google-Smtp-Source: ABdhPJxiDFW0uvmX5HQ3sZnHJjXv8FXEtIky8PxYck5f9b9anFofUPHY6AwsRoZ/fq1EcT8Z/2blyQ==
+X-Received: by 2002:a17:907:6d9f:b0:6db:62b6:f3d6 with SMTP id sb31-20020a1709076d9f00b006db62b6f3d6mr1669581ejc.366.1646785800973;
+        Tue, 08 Mar 2022 16:30:00 -0800 (PST)
+Received: from mail-ej1-f43.google.com (mail-ej1-f43.google.com. [209.85.218.43])
+        by smtp.gmail.com with ESMTPSA id y13-20020a1709060a8d00b006dabeaf86c7sm102105ejf.137.2022.03.08.16.30.00
+        for <linux-doc@vger.kernel.org>
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Tue, 08 Mar 2022 16:30:00 -0800 (PST)
+Received: by mail-ej1-f43.google.com with SMTP id bi12so1516066ejb.3
+        for <linux-doc@vger.kernel.org>; Tue, 08 Mar 2022 16:30:00 -0800 (PST)
+X-Received: by 2002:ac2:44a4:0:b0:445:8fc5:a12a with SMTP id
+ c4-20020ac244a4000000b004458fc5a12amr12499712lfm.27.1646785789558; Tue, 08
+ Mar 2022 16:29:49 -0800 (PST)
 MIME-Version: 1.0
 References: <20220308234723.3834941-1-yuzhao@google.com> <CAHk-=wi5wg=72exwHODJdVtAfqa1e85dGfjGftuhHQ5Z4v-DNA@mail.gmail.com>
-In-Reply-To: <CAHk-=wi5wg=72exwHODJdVtAfqa1e85dGfjGftuhHQ5Z4v-DNA@mail.gmail.com>
-From:   Yu Zhao <yuzhao@google.com>
-Date:   Tue, 8 Mar 2022 17:14:51 -0700
-Message-ID: <CAOUHufYFDawK6vmkQ16EQm7FSHresViifnxW2yj_RDuMSjJPjg@mail.gmail.com>
+ <CAOUHufYFDawK6vmkQ16EQm7FSHresViifnxW2yj_RDuMSjJPjg@mail.gmail.com>
+In-Reply-To: <CAOUHufYFDawK6vmkQ16EQm7FSHresViifnxW2yj_RDuMSjJPjg@mail.gmail.com>
+From:   Linus Torvalds <torvalds@linux-foundation.org>
+Date:   Tue, 8 Mar 2022 16:29:33 -0800
+X-Gmail-Original-Message-ID: <CAHk-=wgwgqJMyxbrxa-mY3cYh--BZ5JKDieVc=RfXR1mdqsYkQ@mail.gmail.com>
+Message-ID: <CAHk-=wgwgqJMyxbrxa-mY3cYh--BZ5JKDieVc=RfXR1mdqsYkQ@mail.gmail.com>
 Subject: Re: [PATCH v8 00/14] Multi-Gen LRU Framework
-To:     Linus Torvalds <torvalds@linux-foundation.org>
+To:     Yu Zhao <yuzhao@google.com>
 Cc:     Andrew Morton <akpm@linux-foundation.org>,
         Andi Kleen <ak@linux.intel.com>,
         Aneesh Kumar <aneesh.kumar@linux.ibm.com>,
@@ -77,46 +85,43 @@ Cc:     Andrew Morton <akpm@linux-foundation.org>,
         Kernel Page Reclaim v2 <page-reclaim@google.com>,
         "the arch/x86 maintainers" <x86@kernel.org>
 Content-Type: text/plain; charset="UTF-8"
-X-Spam-Status: No, score=-17.6 required=5.0 tests=BAYES_00,DKIMWL_WL_MED,
-        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,
-        ENV_AND_HDR_SPF_MATCH,RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,SPF_PASS,
-        T_SCC_BODY_TEXT_LINE,USER_IN_DEF_DKIM_WL,USER_IN_DEF_SPF_WL
-        autolearn=unavailable autolearn_force=no version=3.4.6
+X-Spam-Status: No, score=-1.8 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+        DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
+        RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,SPF_PASS,T_SCC_BODY_TEXT_LINE
+        autolearn=no autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Tue, Mar 8, 2022 at 5:07 PM Linus Torvalds
-<torvalds@linux-foundation.org> wrote:
+On Tue, Mar 8, 2022 at 4:15 PM Yu Zhao <yuzhao@google.com> wrote:
 >
-> On Tue, Mar 8, 2022 at 3:48 PM Yu Zhao <yuzhao@google.com> wrote:
-> >
-> > The current page reclaim is too expensive in terms of CPU usage and it
-> > often makes poor choices about what to evict. This patchset offers an
-> > alternative solution that is performant, versatile and
-> > straightforward.
->
-> So apart from my complaints about asking users config questions that
-> simply should not be asked, I really think this just needs to start
-> getting merged.
->
-> We've seen several numbers on the upsides, and I don't think we'll see
-> any of the downsides until we try it. And I don't think there is any
-> question that we _shouldn't_ try it, given the numbers posted.
->
-> But yeah, I certainly _hope_ that all the benchmarking has been done
-> with a unified set of config values, and it's not some kind of bogus
-> "cherry-picked config values for this particular machine" kind of
-> benchmarking that has been done.
->
-> Because that isn't valid benchmarking - comparing some "tuned for this
-> paeticular machine or load" setup to a default one is just not worth
-> even setting numbers to, and debases the whole value of posting
-> results.
+> This sounds self-serving: our data centers want them, so I had to try.
 
-All benchmarks were done with the default config values. I'm removing
-those config options now.
+Heh. I'm not opposed to putting them back in, but if/when we merge the
+multi-gen LRU code, I really want people to be all testing the same
+thing.
 
-This sounds self-serving: our data centers want them, so I had to try.
+I also think that if we put them back in, that should come with
+
+ (a) performance numbers for the different cases
+
+ (b) hard guidance of what the numbers should be, and under what
+circumstances (ie giving the user enough information that he *can*
+answer the question for his configuration)
+
+ (c) some thought about perhaps making them possibly more dynamic than
+a hardcoded build-time value (assuming the numbers show that it's
+worth doing in the first place, of course)
+
+so I think that the support for the concept can/should be left in, but
+I think that kind of fancy "I want more generations or fewer
+tiers-per-generation because of XYZ" needs to be a separate issue with
+more explanation from the initial "This multi-gen LRU gives better
+performance" merge.
+
+Because as-is, I don't think those config options had nearly enough
+information associated with them to merit them existing.
+
+                  Linus
