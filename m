@@ -2,77 +2,70 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 480E14D3D9C
-	for <lists+linux-doc@lfdr.de>; Thu, 10 Mar 2022 00:34:59 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 591244D3DB0
+	for <lists+linux-doc@lfdr.de>; Thu, 10 Mar 2022 00:44:27 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S234373AbiCIXf4 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 9 Mar 2022 18:35:56 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:36052 "EHLO
+        id S238190AbiCIXpS (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 9 Mar 2022 18:45:18 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:41160 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S232807AbiCIXf4 (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Wed, 9 Mar 2022 18:35:56 -0500
-Received: from ms.lwn.net (ms.lwn.net [IPv6:2600:3c01:e000:3a1::42])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id D212525587
-        for <linux-doc@vger.kernel.org>; Wed,  9 Mar 2022 15:34:56 -0800 (PST)
+        with ESMTP id S234529AbiCIXpL (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Wed, 9 Mar 2022 18:45:11 -0500
+Received: from ms.lwn.net (ms.lwn.net [45.79.88.28])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id A7265119427
+        for <linux-doc@vger.kernel.org>; Wed,  9 Mar 2022 15:44:11 -0800 (PST)
 Received: from localhost (unknown [IPv6:2601:281:8300:104d::5f6])
         (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
         (No client certificate requested)
-        by ms.lwn.net (Postfix) with ESMTPSA id 754862C3;
-        Wed,  9 Mar 2022 23:34:56 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 ms.lwn.net 754862C3
+        by ms.lwn.net (Postfix) with ESMTPSA id 1AA872C3;
+        Wed,  9 Mar 2022 23:44:11 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 ms.lwn.net 1AA872C3
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=lwn.net; s=20201203;
-        t=1646868896; bh=9lJgLzkTshePGMmbEPGHCWhGxoc3kMTvyr55DL4fAKA=;
+        t=1646869451; bh=hlbQi1Wqx5pRwzVF3mqhVov31aQggBVLGld/2o1LxTI=;
         h=From:To:Cc:Subject:In-Reply-To:References:Date:From;
-        b=KMC6FROmxIUb2DajvbInhM+lGIdISCAi6qIvsjFqDEbtJQ1dpjcp/yO6FnzxRiQEg
-         0dGVJ+yvuJDYiuLXn4fG2/EapjFpv7CnXSo2+qVhFlX42c1kIGg5vyaXu6CLNtFySR
-         qfTn2AvmDjKSS1m9so4TdqsjFTvcHWZegncHbAGPWU0cBr4KHncRWVEVaZQhk8O/5B
-         NbhzUf8yvpiC9PlGgakeTbdgAoXiFm2yQVWor4zPX1wmTkzE/AhXZ42oD9h324IXNR
-         agewhF8SF5m0F3dN+2+QStZavNa/bc0ewSIL/PDvIrSTCMwqmH6eO1PFGMNnzYF/rf
-         bLVmnfs0L8gcw==
+        b=QIVhcdJYA7802nflgND4dvuHfowyAzIpvw5Ep7ESSQWhENYzL+YbjdIwg7wMSiH9u
+         lpTo1GUsRnDW5r61eYmibb263JaLE5UzFH3Fl9RMV3qA+B35Dn7UPStkRVSf70KlQa
+         n1AJU3eZA5UGJs5rYsUjGTLE3Rfkjmngnt0U/zqObzHauOrVjBmDvNu1xAOr/hR8rr
+         H0mN+U+Df0yfWiYhxwIWXaXk3eSWmpVBnlKTFdjSD+BbZluHYsoWOKf+SXdjCvhFJM
+         CZtxxCYKsEQ25N4nSbnr/Tv/pstXaJwTle0k3/DD1mAfCiybbBekmr6vnINAAC6b8H
+         OQDslcTOxFLEQ==
 From:   Jonathan Corbet <corbet@lwn.net>
-To:     Yanteng Si <siyanteng01@gmail.com>, alexs@kernel.org,
-        seakeel@gmail.com
-Cc:     xu xin <xu.xin16@zte.com.cn>, chenhuacai@kernel.org,
-        jiaxun.yang@flygoat.com, linux-doc@vger.kernel.org,
-        siyanteng01@gmail.com, Yang Yang <yang.yang29@zte.com.cn>,
-        Yanteng Si <siyanteng@loongson.cn>
-Subject: Re: [PATCH v6 1/3] Add Chinese translation for vm/ksm.rst
-In-Reply-To: <5c1d9b95b570cc3412b6bf87fdcc35046b3ce606.1646723502.git.siyanteng@loongson.cn>
-References: <cover.1646723502.git.siyanteng@loongson.cn>
- <5c1d9b95b570cc3412b6bf87fdcc35046b3ce606.1646723502.git.siyanteng@loongson.cn>
-Date:   Wed, 09 Mar 2022 16:34:55 -0700
-Message-ID: <87ee3a7l9c.fsf@meer.lwn.net>
+To:     Tang Yizhou <tangyizhou@huawei.com>, siyanteng@loongson.cn,
+        siyanteng01@gmail.com, alexs@kernel.org, seakeel@gmail.com
+Cc:     linux-doc@vger.kernel.org, zhengbin13@huawei.com,
+        tangyeechou@gmail.com, Tang Yizhou <tangyizhou@huawei.com>
+Subject: Re: [PATCH v2] docs/zh_CN: Add sched-stats Chinese translation
+In-Reply-To: <20220309153659.24437-1-tangyizhou@huawei.com>
+References: <20220309153659.24437-1-tangyizhou@huawei.com>
+Date:   Wed, 09 Mar 2022 16:44:10 -0700
+Message-ID: <87a6dy7ktx.fsf@meer.lwn.net>
 MIME-Version: 1.0
 Content-Type: text/plain
 X-Spam-Status: No, score=-2.1 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,SPF_HELO_NONE,SPF_PASS,
-        T_SCC_BODY_TEXT_LINE autolearn=ham autolearn_force=no version=3.4.6
+        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_NONE,
+        SPF_HELO_NONE,SPF_PASS,T_SCC_BODY_TEXT_LINE autolearn=ham
+        autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Yanteng Si <siyanteng01@gmail.com> writes:
+Tang Yizhou <tangyizhou@huawei.com> writes:
 
-> From: xu xin <xu.xin16@zte.com.cn>
+> Translate scheduler/sched-stats.rst into Chinese.
 >
-> Translate Documentation/vm/ksm.rst into Chinese.
-> Update Documentation/translations/zh_CN/vm/index.rst.
->
-> Reviewed-by: Yang Yang <yang.yang29@zte.com.cn>
-> Reviewed-by: Alex Shi <alexs@kernel.org>
+> Signed-off-by: Tang Yizhou <tangyizhou@huawei.com>
 > Reviewed-by: Yanteng Si <siyanteng@loongson.cn>
-> Signed-off-by: xu xin <xu.xin16@zte.com.cn>
+> Reviewed-by: Alex Shi <alexs@kernel.org>
 > ---
->  Documentation/translations/zh_CN/vm/index.rst |  1 +
->  Documentation/translations/zh_CN/vm/ksm.rst   | 70 +++++++++++++++++++
->  2 files changed, 71 insertions(+)
->  create mode 100644 Documentation/translations/zh_CN/vm/ksm.rst
+> v2:
+> Pick Yangteng and Alex's reviewed-by tags.
+>  .../translations/zh_CN/scheduler/index.rst    |   3 +-
+>  .../zh_CN/scheduler/sched-stats.rst           | 156 ++++++++++++++++++
+>  2 files changed, 157 insertions(+), 2 deletions(-)
+>  create mode 100644 Documentation/translations/zh_CN/scheduler/sched-stats.rst
 
-Since you are passing this patch onward, you need to apply your sigoff
-to it.
-
-Thanks,
+Applied, thanks.
 
 jon
