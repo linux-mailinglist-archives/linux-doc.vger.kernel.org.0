@@ -2,99 +2,101 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 345D84D34BA
-	for <lists+linux-doc@lfdr.de>; Wed,  9 Mar 2022 17:26:25 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 595DF4D3676
+	for <lists+linux-doc@lfdr.de>; Wed,  9 Mar 2022 18:43:34 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S235898AbiCIQ0Z (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 9 Mar 2022 11:26:25 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:38472 "EHLO
+        id S237257AbiCIRFU (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 9 Mar 2022 12:05:20 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:41114 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S238290AbiCIQVs (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Wed, 9 Mar 2022 11:21:48 -0500
-Received: from mxout04.lancloud.ru (mxout04.lancloud.ru [45.84.86.114])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id D60DC3A5;
-        Wed,  9 Mar 2022 08:20:46 -0800 (PST)
-Received: from LanCloud
-DKIM-Filter: OpenDKIM Filter v2.11.0 mxout04.lancloud.ru B5CC8209A0EF
-Received: from LanCloud
-Received: from LanCloud
-Received: from LanCloud
-Subject: Re: [PATCH] docs/kernel-parameters: update description of mem=
-To:     Mike Rapoport <rppt@kernel.org>, Jonathan Corbet <corbet@lwn.net>
-CC:     Andrew Morton <akpm@linux-foundation.org>,
-        "Maciej W. Rozycki" <macro@orcam.me.uk>,
-        Mike Rapoport <rppt@linux.ibm.com>,
-        Tiezhu Yang <yangtiezhu@loongson.cn>,
-        Thomas Bogendoerfer <tsbogend@alpha.franken.de>,
-        <linux-doc@vger.kernel.org>, <linux-mips@vger.kernel.org>,
-        <linux-mm@kvack.org>, <linux-kernel@vger.kernel.org>
-References: <20220309122446.1118738-1-rppt@kernel.org>
-From:   Sergey Shtylyov <s.shtylyov@omp.ru>
-Organization: Open Mobile Platform
-Message-ID: <d3679148-598e-4b58-96be-e3ab255ab8d9@omp.ru>
-Date:   Wed, 9 Mar 2022 19:20:42 +0300
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
- Thunderbird/78.10.1
+        with ESMTP id S237519AbiCIRDC (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Wed, 9 Mar 2022 12:03:02 -0500
+Received: from smtp-out2.suse.de (smtp-out2.suse.de [195.135.220.29])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 8B4601B2ACD;
+        Wed,  9 Mar 2022 08:51:11 -0800 (PST)
+Received: from relay2.suse.de (relay2.suse.de [149.44.160.134])
+        by smtp-out2.suse.de (Postfix) with ESMTP id 580A91F382;
+        Wed,  9 Mar 2022 16:51:09 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.cz; s=susede2_rsa;
+        t=1646844669;
+        h=from:from:reply-to:reply-to:date:date:message-id:message-id:to:to:
+         cc:cc:mime-version:mime-version:content-type:content-type:
+         in-reply-to:in-reply-to:references:references;
+        bh=+ydrdKSlhrPNxyTjqpwFz/lVnyTdgAwQsHL5yVVlnOA=;
+        b=eT82rI/QkvGXelJqBnDXZ6DSfPbxpE/9kD06Wm421Hm28d/zpE1K/K13KnElJN5d398JeQ
+        RonRRpZIKvqzB9DndgVzGEF+km1Drf8ASsp0Z5z3QYRgp3nDF+PHkgDWoDZ0xSUG1Sq9fd
+        +hLU73pHUPEXalYPJ3MNoU06ZwyMbSE=
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.cz;
+        s=susede2_ed25519; t=1646844669;
+        h=from:from:reply-to:reply-to:date:date:message-id:message-id:to:to:
+         cc:cc:mime-version:mime-version:content-type:content-type:
+         in-reply-to:in-reply-to:references:references;
+        bh=+ydrdKSlhrPNxyTjqpwFz/lVnyTdgAwQsHL5yVVlnOA=;
+        b=yLp5xgKJZ2+1DXVn2EKVVMwLVmSTPLl60bWHoe7jQGGzYDxZ+kesslNxqqwqygWh/uLI0o
+        f+LcpnR/hjl7ZWCQ==
+Received: from ds.suse.cz (ds.suse.cz [10.100.12.205])
+        by relay2.suse.de (Postfix) with ESMTP id 342BAA3BCC;
+        Wed,  9 Mar 2022 16:51:09 +0000 (UTC)
+Received: by ds.suse.cz (Postfix, from userid 10065)
+        id 9C727DA7DE; Wed,  9 Mar 2022 17:47:13 +0100 (CET)
+Date:   Wed, 9 Mar 2022 17:47:13 +0100
+From:   David Sterba <dsterba@suse.cz>
+To:     Arnd Bergmann <arnd@kernel.org>
+Cc:     Masahiro Yamada <masahiroy@kernel.org>, alexs@kernel.org,
+        arnd@arndb.de, dsterba@suse.com, elver@google.com,
+        jani.nikula@intel.com, linux-doc@vger.kernel.org,
+        linux-kbuild@vger.kernel.org, linux-kernel@vger.kernel.org,
+        llvm@lists.linux.dev, mark.rutland@arm.com,
+        ndesaulniers@google.com, ojeda@kernel.org,
+        torvalds@linux-foundation.org
+Subject: Re: [PATCH 1/4] [v4] Kbuild: add -Wno-shift-negative-value where
+ -Wextra is used
+Message-ID: <20220309164713.GX12643@suse.cz>
+Reply-To: dsterba@suse.cz
+Mail-Followup-To: dsterba@suse.cz, Arnd Bergmann <arnd@kernel.org>,
+        Masahiro Yamada <masahiroy@kernel.org>, alexs@kernel.org,
+        arnd@arndb.de, dsterba@suse.com, elver@google.com,
+        jani.nikula@intel.com, linux-doc@vger.kernel.org,
+        linux-kbuild@vger.kernel.org, linux-kernel@vger.kernel.org,
+        llvm@lists.linux.dev, mark.rutland@arm.com, ndesaulniers@google.com,
+        ojeda@kernel.org, torvalds@linux-foundation.org
+References: <20220308215615.14183-1-arnd@kernel.org>
+ <20220308215615.14183-2-arnd@kernel.org>
 MIME-Version: 1.0
-In-Reply-To: <20220309122446.1118738-1-rppt@kernel.org>
-Content-Type: text/plain; charset="utf-8"
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
-X-Originating-IP: [192.168.11.198]
-X-ClientProxiedBy: LFEXT02.lancloud.ru (fd00:f066::142) To
- LFEX1907.lancloud.ru (fd00:f066::207)
-X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00,NICE_REPLY_A,
-        SPF_HELO_NONE,SPF_PASS,T_SCC_BODY_TEXT_LINE,UNPARSEABLE_RELAY
-        autolearn=ham autolearn_force=no version=3.4.6
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20220308215615.14183-2-arnd@kernel.org>
+User-Agent: Mutt/1.5.23.1-rc1 (2014-03-12)
+X-Spam-Status: No, score=-4.4 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_MED,SPF_HELO_NONE,
+        SPF_PASS,T_SCC_BODY_TEXT_LINE autolearn=ham autolearn_force=no
+        version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On 3/9/22 3:24 PM, Mike Rapoport wrote:
-
-> From: Mike Rapoport <rppt@linux.ibm.com>
+On Tue, Mar 08, 2022 at 10:56:12PM +0100, Arnd Bergmann wrote:
+> From: Arnd Bergmann <arnd@arndb.de>
 > 
-> The existing description of mem= does not cover all the cases and
-> differences between how architectures treat it.
+> As a preparation for moving to -std=gnu11, turn off the
+> -Wshift-negative-value option. This warning is enabled by gcc when
+> building with -Wextra for c99 or higher, but not for c89. Since
+> the kernel already relies on well-defined overflow behavior,
+> the warning is not helpful and can simply be disabled in
+> all locations that use -Wextra.
 > 
-> Extend the description to match the code.
-> 
-> Signed-off-by: Mike Rapoport <rppt@linux.ibm.com>
+> Signed-off-by: Arnd Bergmann <arnd@arndb.de>
 > ---
-> 
-> This is in a way a followup for the discussion of mem= usage on MIPS:
-> 
-> https://lore.kernel.org/all/1646461289-31992-1-git-send-email-yangtiezhu@loongson.cn
-> 
->  .../admin-guide/kernel-parameters.txt         | 20 +++++++++++++++++++
->  1 file changed, 20 insertions(+)
-> 
-> diff --git a/Documentation/admin-guide/kernel-parameters.txt b/Documentation/admin-guide/kernel-parameters.txt
-> index f5a27f067db9..f3597841a031 100644
-> --- a/Documentation/admin-guide/kernel-parameters.txt
-> +++ b/Documentation/admin-guide/kernel-parameters.txt
-> @@ -2834,6 +2834,15 @@
->  			2 when the kernel is not able to see the whole system memory;
->  			3 memory that lies after 'mem=' boundary is excluded from
->  			 the hypervisor, then assigned to KVM guests.
-> +			4 to limit the memory available for kdump kernel.
-> +
-> +			[ARC,MICROBLAZE] - the limit applies only to low memory,
-> +			high memory is not affected.
-> +
-> +			[ARM64] - only limits memory covered by the linear
-> +			mapping. The NOMAP regions are not affected.
-> +
-> +			[HEXAGON] - must be use
+> [v4]
+>   split into a separate patch
+> ---
+>  drivers/gpu/drm/i915/Makefile          | 1 +
+>  drivers/staging/greybus/tools/Makefile | 3 ++-
 
-   Used?
+For
 
-> to set the memory size, there is
+>  fs/btrfs/Makefile                      | 1 +
 
-   What? :-)
-
-[...]
-
-MBR, Sergey
+Acked-by: David Sterba <dsterba@suse.com>
