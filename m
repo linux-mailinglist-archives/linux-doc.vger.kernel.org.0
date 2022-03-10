@@ -2,62 +2,77 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 1DECD4D3DDF
-	for <lists+linux-doc@lfdr.de>; Thu, 10 Mar 2022 01:06:57 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id C10A14D3E5B
+	for <lists+linux-doc@lfdr.de>; Thu, 10 Mar 2022 01:46:03 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S238357AbiCJAHy (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 9 Mar 2022 19:07:54 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:50452 "EHLO
+        id S239057AbiCJArB (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 9 Mar 2022 19:47:01 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:42410 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S236719AbiCJAHx (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Wed, 9 Mar 2022 19:07:53 -0500
-Received: from dfw.source.kernel.org (dfw.source.kernel.org [IPv6:2604:1380:4641:c500::1])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 65100EBBA0;
-        Wed,  9 Mar 2022 16:06:54 -0800 (PST)
-Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
-        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
-        (No client certificate requested)
-        by dfw.source.kernel.org (Postfix) with ESMTPS id 0158960AFA;
-        Thu, 10 Mar 2022 00:06:54 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 94412C340E8;
-        Thu, 10 Mar 2022 00:06:52 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-        s=k20201202; t=1646870813;
-        bh=ymR0+7HJt+j828kNldSOLB8CDGjogSDdd9MtZMnSRf8=;
-        h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-        b=kY4jITnnMG2z8hapDLQ2cYnx22dUElqPtYRFwkydqNXC94aVJ4vIe3ToaGgauI/Ei
-         o/PoV/dPeuwBheaYOAfmNgwhXc2T5xK+OoHwgk74JyhTZ+cYTTwL+Yx4VLXQF557Mr
-         eQ6gzsSvwABZk7reqgfbWBsU4RJHb7oKmA1dbdMVejuT3KnntEQsX8It+6/ijhaPmJ
-         GCgsgkzkgh8zLtrr042Vt6IdGjqj7w6etciUlmLiQ1hbMmlrsK4ReWCufg2T0rPGa+
-         1UcnL9YglRTf4F6D20QupWzWYFChxdAnqax/zQnghbnkBNozxhtuX/M7UlTlOV8X3w
-         1WtYGoXz5f45w==
-Date:   Wed, 9 Mar 2022 17:06:45 -0700
-From:   Nathan Chancellor <nathan@kernel.org>
-To:     Masahiro Yamada <masahiroy@kernel.org>
-Cc:     Linus Torvalds <torvalds@linux-foundation.org>,
-        Arnd Bergmann <arnd@kernel.org>, Alex Shi <alexs@kernel.org>,
-        Arnd Bergmann <arnd@arndb.de>, David Sterba <dsterba@suse.com>,
-        Marco Elver <elver@google.com>,
-        Jani Nikula <jani.nikula@intel.com>,
-        "open list:DOCUMENTATION" <linux-doc@vger.kernel.org>,
-        Linux Kbuild mailing list <linux-kbuild@vger.kernel.org>,
-        Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
-        llvm@lists.linux.dev, Mark Rutland <mark.rutland@arm.com>,
-        Nick Desaulniers <ndesaulniers@google.com>,
-        Miguel Ojeda <ojeda@kernel.org>
-Subject: Re: [PATCH 0/4] [v4] Kbuild: std=gnu11 changes
-Message-ID: <YilBFcKIN1Ao5Ld1@dev-arch.thelio-3990X>
-References: <20220308215615.14183-1-arnd@kernel.org>
- <CAHk-=wjsCrVxToP0Zx+cUAVZmSKi=Y6NP1+VnBcoPyPPEBfonQ@mail.gmail.com>
- <CAK7LNAQoFFVLfkhA7FC9vDbvc4wdLginYeRHL0xHVAumu6p=uw@mail.gmail.com>
- <CAK7LNASuy5hSOU7Y7Tr8_6Ks1ZqEeUKv_-c6fDjMubq0_ENRaw@mail.gmail.com>
+        with ESMTP id S232540AbiCJAq7 (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Wed, 9 Mar 2022 19:46:59 -0500
+X-Greylist: delayed 965 seconds by postgrey-1.37 at lindbergh.monkeyblade.net; Wed, 09 Mar 2022 16:46:00 PST
+Received: from smtpq3.tb.ukmail.iss.as9143.net (smtpq3.tb.ukmail.iss.as9143.net [212.54.57.98])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 6AA1D65437
+        for <linux-doc@vger.kernel.org>; Wed,  9 Mar 2022 16:46:00 -0800 (PST)
+Received: from [212.54.57.96] (helo=smtpq1.tb.ukmail.iss.as9143.net)
+        by smtpq3.tb.ukmail.iss.as9143.net with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+        (Exim 4.90_1)
+        (envelope-from <zarniwhoop@ntlworld.com>)
+        id 1nS6gl-0007ZM-6X
+        for linux-doc@vger.kernel.org; Thu, 10 Mar 2022 01:29:55 +0100
+Received: from [212.54.57.106] (helo=csmtp2.tb.ukmail.iss.as9143.net)
+        by smtpq1.tb.ukmail.iss.as9143.net with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+        (Exim 4.90_1)
+        (envelope-from <zarniwhoop@ntlworld.com>)
+        id 1nS6gj-0002sH-8B
+        for linux-doc@vger.kernel.org; Thu, 10 Mar 2022 01:29:53 +0100
+Received: from llamedos.mydomain ([81.97.236.130])
+        by cmsmtp with ESMTPA
+        id S6ginWO6qB5IlS6ginzfBV; Thu, 10 Mar 2022 01:29:53 +0100
+X-SourceIP: 81.97.236.130
+X-Authenticated-Sender: zarniwhoop@ntlworld.com
+X-Spam: 0
+X-Authority: v=2.4 cv=XIEj9CtE c=1 sm=1 tr=0 ts=62294681 cx=a_exe
+ a=OGiDJHazYrvzwCbh7ZIPzQ==:117 a=OGiDJHazYrvzwCbh7ZIPzQ==:17
+ a=IkcTkHD0fZMA:10 a=o8Y5sQTvuykA:10 a=pGLkceISAAAA:8 a=07d9gI8wAAAA:8
+ a=VwQbUJbxAAAA:8 a=5gREawPU8w4pKPWqZwoA:9 a=QEXdDO2ut3YA:10
+ a=e2CUPOnPG4QKp8I52DXD:22 a=AjGcO6oz07-iQ99wixmX:22
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ntlworld.com;
+        s=meg.feb2017; t=1646872193;
+        bh=itlXJNpz8fUGS/shN3O1AKR2ZZ8QkAg/FhMvnKn4DDc=;
+        h=Date:From:To:Cc:Subject:References:In-Reply-To;
+        b=D+ZDBuBVvEaIi8YQ4xpbEYK4eYFqIUi42FxAXwVdx4XtOubizvEK8VvgtJC5VPe/W
+         aYRx73kkjrTpYAXF/xcbSLh/++gpCg6cmoOy1pAIdlaF8p2B+24QfVTW+9LHF5yeqs
+         ZnMY3zMkp/kr+8vvyx5HinJqF9wq/cQZ2AjQBsPgc1tAQWoLmM+mdikK+NZUbLg34s
+         qhRP8T1zhUyd+uH9cW68b4+NzErObc7acgJn0oFf4f6cmbOUCqQuWIdFr1VHAfOtzv
+         d+Zn51S9Qm2yFbKjW9D201slH+8ToJZa36SP1SPOfVwUgKOr8Wv5DdNIenYYRj7o4D
+         munX5+AksRNSA==
+Received: by llamedos.mydomain (Postfix, from userid 1000)
+        id D5CFE60C4F; Thu, 10 Mar 2022 00:29:52 +0000 (GMT)
+Date:   Thu, 10 Mar 2022 00:29:52 +0000
+From:   Ken Moffat <zarniwhoop@ntlworld.com>
+To:     Jonathan Corbet <corbet@lwn.net>
+Cc:     Bagas Sanjaya <bagasdotme@gmail.com>, linux-doc@vger.kernel.org,
+        SeongJae Park <sjpark@amazon.de>, linux-kernel@vger.kernel.org
+Subject: Re: [PATCH] Documentation: describe how to apply incremental stable
+ patches
+Message-ID: <YilGgO03v+CM0aDq@llamedos.localdomain>
+References: <20220307063340.256671-1-bagasdotme@gmail.com>
+ <87mthy7lif.fsf@meer.lwn.net>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
+Content-Type: text/plain; charset=utf-8
 Content-Disposition: inline
-In-Reply-To: <CAK7LNASuy5hSOU7Y7Tr8_6Ks1ZqEeUKv_-c6fDjMubq0_ENRaw@mail.gmail.com>
-X-Spam-Status: No, score=-7.6 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_HI,
-        SPF_HELO_NONE,SPF_PASS,T_SCC_BODY_TEXT_LINE autolearn=ham
+X-Clacks-Overhead: GNU Terry Pratchett
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <87mthy7lif.fsf@meer.lwn.net>
+User-Agent: Mutt/2.2.1 (2022-02-19)
+X-CMAE-Envelope: MS4xfHUqsACAFenD9OguapbTyegxxLYTnV8mJh64zwNVt3Tgg+VfIvzTPQMLGrrPy5Dtpj3sfc9VQTp8vEqAvF5E5ivkgvOhV3KN4qswmB5Ct9z5E90WdV8+
+ meUWmYW7YmLfv9KuI17sJMcuS0me33iPkEaaFG0ZELukS7I/ObusBphPu+5p+1b5HdrombyZk3QUwlAnF/O4irBv1+CPfnAlKeX6nB55CTPTddH5BTWHs3+j
+ 8L3r21RV6puQ+pAogSm5tnY8D60/iRcpUXb/MGKBHWb3mdWyaQaqQWjiot5+ds61wpsm+an4mh4b5vwOpJTqGtrjONrzWX8uXDnhsn4KoHs=
+X-Spam-Status: No, score=-2.1 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_NONE,
+        SPF_HELO_NONE,SPF_PASS,T_SCC_BODY_TEXT_LINE autolearn=unavailable
         autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
@@ -65,55 +80,47 @@ Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Wed, Mar 09, 2022 at 06:18:18PM +0900, Masahiro Yamada wrote:
-> On Wed, Mar 9, 2022 at 11:16 AM Masahiro Yamada <masahiroy@kernel.org> wrote:
-> >
-> > On Wed, Mar 9, 2022 at 9:09 AM Linus Torvalds
-> > <torvalds@linux-foundation.org> wrote:
-> > >
-> > > On Tue, Mar 8, 2022 at 1:56 PM Arnd Bergmann <arnd@kernel.org> wrote:
-> > > >
-> > > > From: Arnd Bergmann <arnd@arndb.de>
-> > > >
-> > > > I've incorporated the feedback from Masahiro Yamada in this
-> > > > version, splitting out one more patch, rebasing on top of
-> > > > the kbuild tree, and changing the order of the patches.
-> > > >
-> > > > Please apply to the kbuild tree.
-> > >
-> > > I'd actually like to see this as a separate branch, so that I can
-> > > merge it early - or other peoples git branches end up depending on it.
-> >
-> >
-> > OK, I can apply this to a separate branch, kbuild-gnu11.
-> > (and I will queue this up shortly because it is already -rc7)
-> >
-> > Then, I will send two pull reqs in the next MW,
-> > but please note they will conflict with each other,
-> > between this gnu11 patch set and the following
-> > one in my usual kbuild branch:
-> >
-> > https://patchwork.kernel.org/project/linux-kbuild/patch/20220201213542.2808035-1-quic_eberman@quicinc.com/
-> >
-> >
-> > I hope this is not a complex conflict, but please let me know
-> > if you have any requests to me.
-> >
-> >
-> >
-> >
-> >
+On Wed, Mar 09, 2022 at 04:29:28PM -0700, Jonathan Corbet wrote:
+> Bagas Sanjaya <bagasdotme@gmail.com> writes:
 > 
+> > The applying patches document
+> > (Documentation/process/applying-patches.rst) mentions incremental stable
+> > patches, but there is no example of how to apply them. Describe the
+> > process.
+> >
+> > While at it, remove note about incremental patches and move the external
+> > link of 5.x.y incremental patches to "Where can I download patches?"
+> > section.
+> >
+> > Cc: Jonathan Corbet <corbet@lwn.net>
+> > Cc: SeongJae Park <sjpark@amazon.de>
+> > Cc: linux-kernel@vger.kernel.org
+> > Signed-off-by: Bagas Sanjaya <bagasdotme@gmail.com>
+> > ---
+> >  Documentation/process/applying-patches.rst | 28 ++++++++++++++++++----
+> >  1 file changed, 23 insertions(+), 5 deletions(-)
 > 
-> All, applied to linux-kbuild/kbuild-gnu11.
+> I've applied this, thanks.  I do have to wonder, though, how useful this
+> information is anymore.  Does anybody actually apply kernel-patch files
+> this far into the Git era?
 > 
-> If somebody wants to give Reviewed-by, Acked-by, Tested-by, please.
+> Thanks,
 > 
-> I will append them later.
+> jon
 
-For the series:
+I do.  I have several machines with multiple systems (current, old,
+older, experimental) and mostly I build current kernels in the
+current system, and older LTS in the old systems.  Ideally I will
+find time to test an rc, but I only use git for kernels when I need
+to bisect.  I find it much easier to keep the initial relase tarball
+and chosen point patches on my local nfs.
 
-Reviewed-by: Nathan Chancellor <nathan@kernel.org>
+My interests are userspace, and some of my machines are
+comparatively slow to compile kernels.
 
-Cheers,
-Nathan
+ĸen 
+
+-- 
+The beauty of reading a page of de Selby is that it leads one
+inescapably to the conclusion that one is not, of all nincompoops,
+the greatest.            -- du Garbandier
