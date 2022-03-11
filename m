@@ -2,141 +2,71 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id A3E6C4D69B9
-	for <lists+linux-doc@lfdr.de>; Fri, 11 Mar 2022 21:53:21 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 46EC64D6A71
+	for <lists+linux-doc@lfdr.de>; Sat, 12 Mar 2022 00:26:44 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S230341AbiCKUyV (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Fri, 11 Mar 2022 15:54:21 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:56962 "EHLO
+        id S229884AbiCKXEi (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Fri, 11 Mar 2022 18:04:38 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:57814 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S230310AbiCKUyT (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Fri, 11 Mar 2022 15:54:19 -0500
-Received: from mail-ed1-x530.google.com (mail-ed1-x530.google.com [IPv6:2a00:1450:4864:20::530])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id C67D3C4B6E
-        for <linux-doc@vger.kernel.org>; Fri, 11 Mar 2022 12:53:07 -0800 (PST)
-Received: by mail-ed1-x530.google.com with SMTP id b24so12288939edu.10
-        for <linux-doc@vger.kernel.org>; Fri, 11 Mar 2022 12:53:07 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=paul-moore-com.20210112.gappssmtp.com; s=20210112;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc;
-        bh=1GNOH6IByfdma2vK0oN46OfXdE9F5N+dlrc1RJjEFIk=;
-        b=RjeIvEgAZemAjh7MW5o+VKfWDPmEow0ENexq1P+K144S2pVSqDjee0cdc4oZOCqpUn
-         owc6GknawkgmT4HhECQzAJruWMy4OX5wgfWGvHcgiqL4Qn6FKSh6eGCkSDNwOO3qdYGB
-         TVWBvbiYnMqIZynJcRgG7j1ULCqToHZ8s7RStTM0nXC2XpGJcy0gpFg/MzsARoANMg+r
-         k9zcJafb990WHJIKgVy/EKpW/Qcr4zOM3f5frffwcfKqHDShTtlEF/JkKxeslfOPaUpd
-         8IjkL0X9Q8vwC5RBPVsVuob5Sx7UFW+kiv5dty0Da0xaxC8eAlrZfes2eJXxABHjCXT0
-         KBLw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc;
-        bh=1GNOH6IByfdma2vK0oN46OfXdE9F5N+dlrc1RJjEFIk=;
-        b=h4Tk748SEz8S/ZZolvuNtUaFlR0dO/9Mnfx+itJfqFkeAtq7o9j+U0INLPXott/UOM
-         px+z0amXHs/GMBlnb5vHorHkeh9kf10xteGHyrphhYfMyn8Jg0ayTfYxb04Q24XhOl+k
-         HZIdWaOQtnzqcyi1alT27syZtRiQSjOgvq9tGRvfDATLuesiJjJIEPtjDzw2J9pNbF00
-         UU29K01ewThGXCa+tVX3lGP5eTRd24TNnWpeXv5VkmIascjBA98Sc1sgj/jXYFTwbqji
-         64KZfnF0Mqml7Gx9CS+W9Mj970iF4XMkaiN8J5uvWcdhVAacEumItR6K0EoJmvXIXZ/q
-         ncdQ==
-X-Gm-Message-State: AOAM530meWL+fsiNSLPOa1VEmb/0VLoH/L1wSRy9sgwV8TXuq6Rbl0WN
-        8gfaHgiVt64fkNylrc6gqLt4cnrmW5BGvv89F8QB
-X-Google-Smtp-Source: ABdhPJwSR0cPGoV54LnNJjSTlEQtUj6d/H5MywubGfYXG4EWqco8EDA0qvmEgqp6RbgvnM4pYc61bLNnIxwMEl9aSDA=
-X-Received: by 2002:aa7:d494:0:b0:415:a309:7815 with SMTP id
- b20-20020aa7d494000000b00415a3097815mr10502424edr.340.1647031985810; Fri, 11
- Mar 2022 12:53:05 -0800 (PST)
+        with ESMTP id S229993AbiCKXEb (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Fri, 11 Mar 2022 18:04:31 -0500
+Received: from ms.lwn.net (ms.lwn.net [45.79.88.28])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id C726E61A30;
+        Fri, 11 Mar 2022 15:01:17 -0800 (PST)
+Received: from localhost (unknown [IPv6:2601:281:8300:104d::5f6])
+        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+        (No client certificate requested)
+        by ms.lwn.net (Postfix) with ESMTPSA id 4C6362CD;
+        Fri, 11 Mar 2022 21:06:01 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 ms.lwn.net 4C6362CD
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=lwn.net; s=20201203;
+        t=1647032761; bh=IyMpYQ9kln0EK8/pE+QsiTKmFWwoyuRDhba1yJzMID8=;
+        h=From:To:Cc:Subject:In-Reply-To:References:Date:From;
+        b=HWNpdeAbZ36NZaMZUDX/c7DIG4duixCytjeZQ4Igq69Ci9oTzU0PtXAOPRidn8cpU
+         VV5c7E3Gz44am1BGsAlI283+UPG8FvAgoWdVE4Jmx/1SJK/2zC9uNKX+5vgK/DHG7C
+         lpqQKMlM/b+q8+2UMZfTvg/BkqS3TAhrkfHgGm5byDkVF3D8zwIvphKEXzs002P9Js
+         5wBpZNHn/u1yOLN0aikH7uVmHkfj3ghbCZGl8ZV/XgO8Sq6y/v36iDKAfvlzdsbQVv
+         7DCS2yZ25O/a9csmYrRdGCeZju0/rXmvS3Ys48Psa30k+2fRGO2xfENxOKTJ5NQBCB
+         ibz5eL7u1r1zw==
+From:   Jonathan Corbet <corbet@lwn.net>
+To:     Jiri Slaby <jirislaby@kernel.org>,
+        Wan Jiabing <wanjiabing@vivo.com>,
+        Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org
+Cc:     kael_w@qq.com
+Subject: Re: [PATCH] docs: serial: fix a reference file name in driver.rst
+In-Reply-To: <f48dcaba-8015-380f-ac3b-54818c48350d@kernel.org>
+References: <20220304100315.6732-1-wanjiabing@vivo.com>
+ <f48dcaba-8015-380f-ac3b-54818c48350d@kernel.org>
+Date:   Fri, 11 Mar 2022 14:06:00 -0700
+Message-ID: <87mthw2o93.fsf@meer.lwn.net>
 MIME-Version: 1.0
-References: <20211117015806.2192263-1-dvander@google.com> <CAOQ4uxjjapFeOAFGLmsXObdgFVYLfNer-rnnee1RR+joxK3xYg@mail.gmail.com>
- <Yao51m9EXszPsxNN@redhat.com> <CAOQ4uxjk4piLyx67Ena-FfypDVWzRqVN0xmFUXXPYa+SC4Q-vQ@mail.gmail.com>
- <YapjNRrjpDu2a5qQ@redhat.com> <CAHC9VhQTUgBRBEz_wFX8daSA70nGJCJLXj8Yvcqr5+DHcfDmwA@mail.gmail.com>
- <CA+FmFJA-r+JgMqObNCvE_X+L6jxWtDrczM9Jh0L38Fq-6mnbbA@mail.gmail.com>
- <CAHC9VhRer7UWdZyizWO4VuxrgQDnLCOyj8LO7P6T5BGjd=s9zQ@mail.gmail.com>
- <CAHC9VhQkLSBGQ-F5Oi9p3G6L7Bf_jQMWAxug_G4bSOJ0_cYXxQ@mail.gmail.com>
- <CAOQ4uxhfU+LGunL3cweorPPdoCXCZU0xMtF=MekOAe-F-68t_Q@mail.gmail.com> <YitWOqzIRjnP1lok@redhat.com>
-In-Reply-To: <YitWOqzIRjnP1lok@redhat.com>
-From:   Paul Moore <paul@paul-moore.com>
-Date:   Fri, 11 Mar 2022 15:52:54 -0500
-Message-ID: <CAHC9VhQ+x3ko+=oU-P+w4ssqyyskRxaKsBGJLnXtP_NzWNuxHg@mail.gmail.com>
-Subject: Re: [PATCH v19 0/4] overlayfs override_creds=off & nested get xattr fix
-To:     Amir Goldstein <amir73il@gmail.com>,
-        Vivek Goyal <vgoyal@redhat.com>
-Cc:     Miklos Szeredi <miklos@szeredi.hu>,
-        David Anderson <dvander@google.com>,
-        Mark Salyzyn <salyzyn@android.com>,
-        Jonathan Corbet <corbet@lwn.net>,
-        "Eric W . Biederman" <ebiederm@xmission.com>,
-        Randy Dunlap <rdunlap@infradead.org>,
-        Stephen Smalley <sds@tycho.nsa.gov>,
-        John Stultz <john.stultz@linaro.org>,
-        linux-doc@vger.kernel.org,
-        linux-kernel <linux-kernel@vger.kernel.org>,
-        linux-fsdevel <linux-fsdevel@vger.kernel.org>,
-        overlayfs <linux-unionfs@vger.kernel.org>,
-        LSM List <linux-security-module@vger.kernel.org>,
-        kernel-team <kernel-team@android.com>, selinux@vger.kernel.org,
-        paulmoore@microsoft.com, luca.boccassi@microsoft.com
-Content-Type: text/plain; charset="UTF-8"
-X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-        DKIM_VALID,RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,SPF_NONE,
-        T_SCC_BODY_TEXT_LINE autolearn=unavailable autolearn_force=no
-        version=3.4.6
+Content-Type: text/plain
+X-Spam-Status: No, score=-2.1 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_NONE,
+        SPF_HELO_NONE,SPF_PASS,T_SCC_BODY_TEXT_LINE autolearn=ham
+        autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Fri, Mar 11, 2022 at 9:01 AM Vivek Goyal <vgoyal@redhat.com> wrote:
-> On Fri, Mar 11, 2022 at 06:09:56AM +0200, Amir Goldstein wrote:
-> > Hi Paul,
+Jiri Slaby <jirislaby@kernel.org> writes:
 
-Hi Amir, Vivek,
-
-Thanks for the replies, I think I now have a better understanding of
-the concerns which is starting to make the path forward a bit more
-clear.  A few more comments below ...
-
-> > In this thread I claimed that the authors of the patches did not present
-> > a security model for overlayfs, such as the one currently in overlayfs.rst.
-> > If we had a model we could have debated its correctness and review its
-> > implementation.
+> On 04. 03. 22, 11:03, Wan Jiabing wrote:
+>> Fix the following 'make refcheckdocs' warning:
+>> Warning: Documentation/driver-api/serial/driver.rst references a file
+>> that doesn't exist: Documentation/driver-api/serial/tty.rst
+>> 
+>> Signed-off-by: Wan Jiabing <wanjiabing@vivo.com>
 >
-> Agreed. After going through the patch set, I was wondering what's the
-> overall security model and how to visualize that.
->
-> So probably there needs to be a documentation patch which explains
-> what's the new security model and how does it work.
+> Reviewed-by: Jiri Slaby <jirislaby@kernel.org>
 
-Yes, of course.  I'll be sure to add a section to the existing docs.
+I've applied this.  But I have to wonder why Documentation/tty exists at
+all; is there any reason not to move it all under driver-api?
 
-> Also think both in terms of DAC and MAC. (Instead of just focussing too
-> hard on SELinux).
+Thanks,
 
-Definitely.  Most of what I've been thinking about the past day or so
-has been how to properly handle some of the DAC/capability issues; I
-have yet to start playing with the code, but for the most part I think
-the MAC/SELinux bits are already working properly.
-
-> My understanding is that in current model, some of the overlayfs
-> operations require priviliges. So mounter is supposed to be priviliged
-> and does the operation on underlying layers.
->
-> Now in this new model, there will be two levels of check. Both overlay
-> level and underlying layer checks will happen in the context of task
-> which is doing the operation. So first of all, all tasks will need
-> to have enough priviliges to be able to perform various operations
-> on lower layer.
->
-> If we do checks at both the levels in with the creds of calling task,
-> I guess that probably is fine. (But will require a closer code inspection
-> to make sure there is no privilege escalation both for mounter as well
-> calling task).
-
-I have thoughts on this, but I don't think I'm yet in a position to
-debate this in depth just yet; I still need to finish poking around
-the code and playing with a few things :)
-
-It may take some time before I'm back with patches, but I appreciate
-all of the tips and insight - thank you!
-
--- 
-paul-moore.com
+jon
