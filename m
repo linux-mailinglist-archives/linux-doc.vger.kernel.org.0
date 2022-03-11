@@ -2,71 +2,70 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 578D44D6A81
-	for <lists+linux-doc@lfdr.de>; Sat, 12 Mar 2022 00:26:49 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 25BE74D6B1C
+	for <lists+linux-doc@lfdr.de>; Sat, 12 Mar 2022 00:55:57 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S230260AbiCKXDU (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Fri, 11 Mar 2022 18:03:20 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:32876 "EHLO
+        id S229784AbiCKXqW (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Fri, 11 Mar 2022 18:46:22 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:45730 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S231336AbiCKXDI (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Fri, 11 Mar 2022 18:03:08 -0500
-Received: from mail-vk1-xa35.google.com (mail-vk1-xa35.google.com [IPv6:2607:f8b0:4864:20::a35])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 0F9FE24893B
-        for <linux-doc@vger.kernel.org>; Fri, 11 Mar 2022 14:58:10 -0800 (PST)
-Received: by mail-vk1-xa35.google.com with SMTP id w128so5459632vkd.3
-        for <linux-doc@vger.kernel.org>; Fri, 11 Mar 2022 14:58:10 -0800 (PST)
+        with ESMTP id S229852AbiCKXqW (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Fri, 11 Mar 2022 18:46:22 -0500
+Received: from mail-vs1-xe36.google.com (mail-vs1-xe36.google.com [IPv6:2607:f8b0:4864:20::e36])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id B1B58B2A
+        for <linux-doc@vger.kernel.org>; Fri, 11 Mar 2022 15:45:17 -0800 (PST)
+Received: by mail-vs1-xe36.google.com with SMTP id v128so11156575vsb.8
+        for <linux-doc@vger.kernel.org>; Fri, 11 Mar 2022 15:45:17 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=google.com; s=20210112;
         h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc:content-transfer-encoding;
-        bh=3INdYjmD9sI3AAGt1tE2s/Am9WLmWC+N03DHnuY4rE8=;
-        b=BMA7qz0hmDXjgLAj/07b1iUaF7Hpsjn69duyTb+GziOeEl6FfVlZDbJDnlOKFb5OxL
-         993gwyQ2uOEj3GwTJER0T9zTHJQ6k2YiGQTupxTGAeMkt/rxQ8SU7B9al7D4z9jq+inU
-         xbnrI77JFap8h53TWHjivFVxM/5MoRxNBSh2yX54H67Yp6YZMsQAViCyWkISwhr/YT+i
-         mF5wyHwgkInp+C4d5kf++Um69oOINKpvHpy1b28ckD6Y+qNFCGvwWa9cJ9efFbon6Epm
-         qL/hHNgx/Su35VLn9pfl0NE6jHYctKc0W1IDlZ6EMyJaDiqCHBSVDl5l8Gtv573d3IuH
-         NkEA==
+         :cc;
+        bh=jgWt/h1KdiygO0MXrJh7m5UOZKMB2VItBU/y6w5jdRk=;
+        b=oZytWIDQPcCDRDIoQChqrlmhIaD7llu9P5DEu+KS08AIzPIgLCPKKBsZwyF5mi1Pc4
+         HXZCyOe3GkMnCEF/VHXh49dszLjisjb1WNh4B1X5fMVv4jCDWLEKJ7v9CwjbYUjSm6xt
+         4hq89LSLAzFz79dWnRWkQ6TCQPCALfFEDTmXwI5Mmrmg3xi/j5/UYeU4FVFXslNem1ZT
+         gmJC8ftfUIis2szN1Q/4wywZpcNI/hyLDDyB6ubDBpasB/vWMQuEdlOddyRN/oOxxWaM
+         0onT8FS0mikrQJQgRDh+oTQPV5A8N73AorqNYxSEGOdbRGq75oAWoPwfmACGFTSVUqgA
+         wklA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc:content-transfer-encoding;
-        bh=3INdYjmD9sI3AAGt1tE2s/Am9WLmWC+N03DHnuY4rE8=;
-        b=Me8gCFfndqxia+/TbDBF89aAgPvs8xF57zp91u7fEoc57rneugxAWjRIVX7Cf9WMot
-         wwT9KGXLKEsgxJVZ0XJmgsUOaLeu01Qc0v9wMxyFYNWbv7eDT7URiGubJq3s87FSWX5Z
-         Hi67MdjYch0wMo153iiQSLSHnnt9URzd7wl8g/8YDakB3dNqhPS1JGr9i2cTb70qrZBN
-         HZX/YSqq6sXQWYfcjlKwNFVm++atk12pXlpTOuOCaxceBnD35GiSQH6RrxKAxNk23i41
-         gJtTpPy1ZdMlnwPPq6IwjLGK3x8ZaL+Vm6noW59HFzvCjEmNcmel/eF2HDZf7VQTMZIC
-         WpDA==
-X-Gm-Message-State: AOAM5337enr9+KB/JWjUXINCXWg3XRfHQxAwF3zmDp1YHMdyujnEOg8h
-        j05eDygZ3ZMI+wgnUlLbtQc1apHRCw2z/ore9RQb4A==
-X-Google-Smtp-Source: ABdhPJwGpXBfC5BGWFXcbt51OotnQdLdCIZrxqrjphxJw0BNDdEab0gCbm4RnWAIGbVNilKBQ/CyJES1Xl9HPBWgrnk=
-X-Received: by 2002:a05:6122:2089:b0:337:bb38:9145 with SMTP id
- i9-20020a056122208900b00337bb389145mr5955292vkd.14.1647039488964; Fri, 11 Mar
- 2022 14:58:08 -0800 (PST)
+         :message-id:subject:to:cc;
+        bh=jgWt/h1KdiygO0MXrJh7m5UOZKMB2VItBU/y6w5jdRk=;
+        b=H0W+J3yS5JZnSZ0wePBMwMiOfXk7+kSHOvFmlQ0M0bIfQ20OZUXvKtCak9pDnhI9B7
+         0hDxQPBD/qn+mmqyIyFc5RQqCNqQ4/YaOaUjx3laoMwuKx883eT61rmMi6jMm1DyI2fx
+         u7G07vdnk24fi+uOtExwPOeAn+UvvH841mCeonZ0NQ2Goz9/X8RJCwi7d9zguVe1oKvD
+         JCKkt3AHQSPr0ywvb0Vc5fQAhXBbc1HzhL7jtjAJ+k6Sj8vHl2lWQmkoU4781eyAoIth
+         LO9Qov0sFjVn+Yngi96Eu/Fbvnk+zaAiPnnCw7HzHQ++ZmeEKFz+PcHoqerLa82ex8K1
+         OpaA==
+X-Gm-Message-State: AOAM530I76wG81BINL/8Zn4X0VTXrGDVtjmNd8WwtJwRyNRbHPOmM5AY
+        08Rkw+m0x22N3Dij4FwcW8ERzzwsrLBaMVRMZPqq1A==
+X-Google-Smtp-Source: ABdhPJzo48Uus6VFTpGZvjATe6Iht5+Z3+GWkPxJhUQ3VuQempIIQjYA0aVJsViX8+/2Mk2XMNiUidRQDZfkYAxEtJU=
+X-Received: by 2002:a05:6102:3a06:b0:31b:d9c6:c169 with SMTP id
+ b6-20020a0561023a0600b0031bd9c6c169mr5989160vsu.22.1647042316582; Fri, 11 Mar
+ 2022 15:45:16 -0800 (PST)
 MIME-Version: 1.0
-References: <20220309021230.721028-1-yuzhao@google.com> <20220309021230.721028-2-yuzhao@google.com>
- <CAGsJ_4yt_q4=pPW1M6fHN9HrV5JuTo9_9GQ0wv4-VT7tivU1+Q@mail.gmail.com>
-In-Reply-To: <CAGsJ_4yt_q4=pPW1M6fHN9HrV5JuTo9_9GQ0wv4-VT7tivU1+Q@mail.gmail.com>
+References: <20220208081902.3550911-1-yuzhao@google.com> <20220208081902.3550911-5-yuzhao@google.com>
+ <YgV4lZXc6+jhUdsR@cmpxchg.org> <Ygt1qaQM5YobEZK9@google.com> <CAGsJ_4wN_CAOsyR3LATE+EUhuV0gO-zhhNiMwEBwyXOp0CbkZg@mail.gmail.com>
+In-Reply-To: <CAGsJ_4wN_CAOsyR3LATE+EUhuV0gO-zhhNiMwEBwyXOp0CbkZg@mail.gmail.com>
 From:   Yu Zhao <yuzhao@google.com>
-Date:   Fri, 11 Mar 2022 15:57:57 -0700
-Message-ID: <CAOUHufZy+3+0zWTpAr8wJkWeQ4c4b9msiuWWu0XK=_aedqB=8w@mail.gmail.com>
-Subject: Re: [PATCH v9 01/14] mm: x86, arm64: add arch_has_hw_pte_young()
+Date:   Fri, 11 Mar 2022 16:45:04 -0700
+Message-ID: <CAOUHufaUJD8nC6PDVfmkeTwB4BtzBzigxh+V-hfR-_26VwjOPA@mail.gmail.com>
+Subject: Re: [PATCH v7 04/12] mm: multigenerational LRU: groundwork
 To:     Barry Song <21cnbao@gmail.com>
-Cc:     Andrew Morton <akpm@linux-foundation.org>,
-        Linus Torvalds <torvalds@linux-foundation.org>,
+Cc:     Johannes Weiner <hannes@cmpxchg.org>,
+        Andrew Morton <akpm@linux-foundation.org>,
+        Mel Gorman <mgorman@suse.de>, Michal Hocko <mhocko@kernel.org>,
         Andi Kleen <ak@linux.intel.com>,
         Aneesh Kumar <aneesh.kumar@linux.ibm.com>,
         Catalin Marinas <catalin.marinas@arm.com>,
         Dave Hansen <dave.hansen@linux.intel.com>,
         Hillf Danton <hdanton@sina.com>, Jens Axboe <axboe@kernel.dk>,
         Jesse Barnes <jsbarnes@google.com>,
-        Johannes Weiner <hannes@cmpxchg.org>,
         Jonathan Corbet <corbet@lwn.net>,
+        Linus Torvalds <torvalds@linux-foundation.org>,
         Matthew Wilcox <willy@infradead.org>,
-        Mel Gorman <mgorman@suse.de>,
         Michael Larabel <Michael@michaellarabel.com>,
-        Michal Hocko <mhocko@kernel.org>,
         Mike Rapoport <rppt@kernel.org>,
         Rik van Riel <riel@surriel.com>,
         Vlastimil Babka <vbabka@suse.cz>,
@@ -87,10 +86,8 @@ Cc:     Andrew Morton <akpm@linux-foundation.org>,
         =?UTF-8?Q?Holger_Hoffst=C3=A4tte?= <holger@applied-asynchrony.com>,
         Konstantin Kharlamov <Hi-Angel@yandex.ru>,
         Shuang Zhai <szhai2@cs.rochester.edu>,
-        Sofia Trinh <sofia.trinh@edi.works>,
-        Vaibhav Jain <vaibhav@linux.ibm.com>
+        Sofia Trinh <sofia.trinh@edi.works>
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
 X-Spam-Status: No, score=-17.6 required=5.0 tests=BAYES_00,DKIMWL_WL_MED,
         DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,
         ENV_AND_HDR_SPF_MATCH,RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,SPF_PASS,
@@ -102,51 +99,99 @@ Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Fri, Mar 11, 2022 at 3:55 AM Barry Song <21cnbao@gmail.com> wrote:
+On Fri, Mar 11, 2022 at 3:16 AM Barry Song <21cnbao@gmail.com> wrote:
 >
-> On Wed, Mar 9, 2022 at 3:47 PM Yu Zhao <yuzhao@google.com> wrote:
+> On Tue, Feb 15, 2022 at 10:43 PM Yu Zhao <yuzhao@google.com> wrote:
 > >
-> > Some architectures automatically set the accessed bit in PTEs, e.g.,
-> > x86 and arm64 v8.2. On architectures that do not have this capability,
-> > clearing the accessed bit in a PTE usually triggers a page fault
-> > following the TLB miss of this PTE (to emulate the accessed bit).
+> > On Thu, Feb 10, 2022 at 03:41:57PM -0500, Johannes Weiner wrote:
 > >
-> > Being aware of this capability can help make better decisions, e.g.,
-> > whether to spread the work out over a period of time to reduce bursty
-> > page faults when trying to clear the accessed bit in many PTEs.
+> > Thanks for reviewing.
 > >
-> > Note that theoretically this capability can be unreliable, e.g.,
-> > hotplugged CPUs might be different from builtin ones. Therefore it
-> > should not be used in architecture-independent code that involves
-> > correctness, e.g., to determine whether TLB flushes are required (in
-> > combination with the accessed bit).
+> > > > +static inline bool lru_gen_is_active(struct lruvec *lruvec, int gen)
+> > > > +{
+> > > > +   unsigned long max_seq = lruvec->lrugen.max_seq;
+> > > > +
+> > > > +   VM_BUG_ON(gen >= MAX_NR_GENS);
+> > > > +
+> > > > +   /* see the comment on MIN_NR_GENS */
+> > > > +   return gen == lru_gen_from_seq(max_seq) || gen == lru_gen_from_seq(max_seq - 1);
+> > > > +}
+> > >
+> > > I'm still reading the series, so correct me if I'm wrong: the "active"
+> > > set is split into two generations for the sole purpose of the
+> > > second-chance policy for fresh faults, right?
 > >
-> > Signed-off-by: Yu Zhao <yuzhao@google.com>
-> > Acked-by: Brian Geffon <bgeffon@google.com>
-> > Acked-by: Jan Alexander Steffens (heftig) <heftig@archlinux.org>
-> > Acked-by: Oleksandr Natalenko <oleksandr@natalenko.name>
-> > Acked-by: Steven Barrett <steven@liquorix.net>
-> > Acked-by: Suleiman Souhlal <suleiman@google.com>
-> > Acked-by: Will Deacon <will@kernel.org>
-> > Tested-by: Daniel Byrne <djbyrne@mtu.edu>
-> > Tested-by: Donald Carr <d@chaos-reins.com>
-> > Tested-by: Holger Hoffst=C3=A4tte <holger@applied-asynchrony.com>
-> > Tested-by: Konstantin Kharlamov <Hi-Angel@yandex.ru>
-> > Tested-by: Shuang Zhai <szhai2@cs.rochester.edu>
-> > Tested-by: Sofia Trinh <sofia.trinh@edi.works>
-> > Tested-by: Vaibhav Jain <vaibhav@linux.ibm.com>
-> > ---
+> > To be precise, the active/inactive notion on top of generations is
+> > just for ABI compatibility, e.g., the counters in /proc/vmstat.
+> > Otherwise, this function wouldn't be needed.
 >
-> Reviewed-by: Barry Song <baohua@kernel.org>
+> Hi Yu,
+> I am still quite confused as i am seeing both active/inactive and lru_gen.
+> eg:
+>
+> root@ubuntu:~# cat /proc/vmstat | grep active
+> nr_zone_inactive_anon 22797
+> nr_zone_active_anon 578405
+> nr_zone_inactive_file 0
+> nr_zone_active_file 4156
+> nr_inactive_anon 22800
+> nr_active_anon 578574
+> nr_inactive_file 0
+> nr_active_file 4215
 
-Thanks.
+Yes, this is expected. We have to maintain the ABI, i.e., the
+*_active/inactive_* counters.
 
-> i guess arch_has_hw_pte_young() isn't called that often in either
-> mm/memory.c or mm/vmscan.c.
-> Otherwise, moving to a static key might help. Is it?
+> and:
+>
+> root@ubuntu:~# cat /sys//kernel/debug/lru_gen
+>
+> ...
+> memcg    36 /user.slice/user-0.slice/user@0.service
+>  node     0
+>          20      18820         22           0
+>          21       7452          0           0
+>          22       7448          0           0
+> memcg    33 /user.slice/user-0.slice/user@0.service/app.slice
+>  node     0
+>           0    2171452          0           0
+>           1    2171452          0           0
+>           2    2171452          0           0
+>           3    2171452          0           0
+> memcg    37 /user.slice/user-0.slice/session-1.scope
+>  node     0
+>          42      51804     102127           0
+>          43      18840     275622           0
+>          44      16104     216805           1
+>
+> Does it mean one page could be in both one of the generations and one
+> of the active/inactive lists?
 
-MRS shouldn't be slower than either branch of a static key. With a
-static key, we only can optimize one of the two cases.
+In terms of the data structure, evictable pages are either on
+lruvec->lists or lrugen->lists.
 
-There is a *theoretical* problem with MRS: ARM specs don't prohibit a
-physical CPU to support both cases (on different logical CPUs).
+> Do we have some mapping relationship between active/inactive lists
+> with generations?
+
+For the counters, yes -- pages in max_seq and max_seq-1 are counted as
+active, and the rest are inactive.
+
+> We used to put a faulted file page in inactive, if we access it a
+> second time, it can be promoted
+> to active. then in recent years, we have also applied this to anon
+> pages while kernel adds
+> workingset protection for anon pages. so basically both anon and file
+> pages go into the inactive
+> list for the 1st time, if we access it for the second time, they go to
+> the active list. if we don't access
+> it any more, they are likely to be reclaimed as they are inactive.
+> we do have some special fastpath for code section, executable file
+> pages are kept on active list
+> as long as they are accessed.
+
+Yes.
+
+> so all of the above concerns are actually not that correct?
+
+They are valid concerns but I don't know any popular workloads that
+care about them.
