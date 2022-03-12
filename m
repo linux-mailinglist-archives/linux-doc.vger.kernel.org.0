@@ -2,187 +2,103 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 7F8F14D6D14
-	for <lists+linux-doc@lfdr.de>; Sat, 12 Mar 2022 07:54:50 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 4894D4D6D5A
+	for <lists+linux-doc@lfdr.de>; Sat, 12 Mar 2022 09:01:02 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S230501AbiCLGzx (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Sat, 12 Mar 2022 01:55:53 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:57112 "EHLO
+        id S231154AbiCLICF (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Sat, 12 Mar 2022 03:02:05 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:46412 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S229448AbiCLGzw (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Sat, 12 Mar 2022 01:55:52 -0500
-Received: from szxga08-in.huawei.com (szxga08-in.huawei.com [45.249.212.255])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id B05CA246F50
-        for <linux-doc@vger.kernel.org>; Fri, 11 Mar 2022 22:54:46 -0800 (PST)
-Received: from dggpeml500025.china.huawei.com (unknown [172.30.72.55])
-        by szxga08-in.huawei.com (SkyGuard) with ESMTP id 4KFthc1jfFz1GC02;
-        Sat, 12 Mar 2022 14:49:52 +0800 (CST)
-Received: from dggpeml500006.china.huawei.com (7.185.36.76) by
- dggpeml500025.china.huawei.com (7.185.36.35) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2308.21; Sat, 12 Mar 2022 14:54:44 +0800
-Received: from huawei.com (10.175.100.227) by dggpeml500006.china.huawei.com
- (7.185.36.76) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2308.21; Sat, 12 Mar
- 2022 14:54:44 +0800
-From:   Tang Yizhou <tangyizhou@huawei.com>
-To:     <siyanteng@loongson.cn>, <siyanteng01@gmail.com>,
-        <alexs@kernel.org>, <seakeel@gmail.com>
-CC:     <linux-doc@vger.kernel.org>, <corbet@lwn.net>,
-        <zhengbin13@huawei.com>, <tangyeechou@gmail.com>,
-        Tang Yizhou <tangyizhou@huawei.com>
-Subject: [PATCH] docs/zh_CN: Add sched-nice-design Chinese translation
-Date:   Sat, 12 Mar 2022 15:26:42 +0800
-Message-ID: <20220312072642.23118-1-tangyizhou@huawei.com>
-X-Mailer: git-send-email 2.17.1
+        with ESMTP id S230415AbiCLICE (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Sat, 12 Mar 2022 03:02:04 -0500
+Received: from mail-pg1-x52d.google.com (mail-pg1-x52d.google.com [IPv6:2607:f8b0:4864:20::52d])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 951BA1C60CE;
+        Sat, 12 Mar 2022 00:00:59 -0800 (PST)
+Received: by mail-pg1-x52d.google.com with SMTP id c11so9348065pgu.11;
+        Sat, 12 Mar 2022 00:00:59 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112;
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=pz807mPXL9wmAOsZik9uq5miIUnAKaI7W2BvkwtKBhw=;
+        b=CDlX98WpFMvMUJQXbIQMsrF/8YCY16xZsoQRbDtI/ZTetdXoMX4tM8lCVX+injymgF
+         9eiPveWl8yE/o0AThp2w3cWm7nDCMFMMgxNprFiMgLobrwNbXep4gK9W1h4rUL0eo+7R
+         Tgk0bN3PG6+4qrD9+UM8dNqyRnWA2AsFYiTw+CyA7yxOV8seAXRNra4AQAW/D6Z28KN6
+         vPt+9jX5C/qBgsnsFVgiNl1NGGJlB/HLeKKp/Q+iiw5BWv3RqtWw/dSp76+Gg0cYRgw+
+         r4avuWZXqA9OFUU19idwrPOotQ5Cr4xYQ1aH+w+zvRSWVcHHswHl1OAJt2OhQtQ8tx8I
+         hdkQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=pz807mPXL9wmAOsZik9uq5miIUnAKaI7W2BvkwtKBhw=;
+        b=oyoLkTfzdV5wLzXL1iW0lxsyGSbYAnYq5Qd05B/iN52zmtcSOw/U46k9dAFpFRQTGa
+         8bWQhYc2KDlc1985xk3eNZTdEIpsABw99cw6ZO+t0ZUDxOpamhnY/CWh82h7HaSULFxe
+         RhB5PU6pl5PlC7Zs6QYLnU45ZXOc6QUnPVwBqJT1OJUO0yi/pnTS18+zJomfRRcLcHU8
+         awaARmaMHLCoNgl1J7Ok/I/8gPzB6YunhIRzSM3dgG0t434Lo4SO8cm1uPVEbPbBCAjq
+         I+YxIhIR9UIVIHELSQTYKwlkh0pB+3+Zu+HgzpOj21dfxnXedOStxHBcsAmt2bcajadN
+         9jtw==
+X-Gm-Message-State: AOAM533O1OO2G/TIewQ2wGtQujDJZlOnFFGm2cV8xWqBLJpm8ek/bbq0
+        rezqPTLzxjDmQSylHmJhsrLoVuY0maRhUw==
+X-Google-Smtp-Source: ABdhPJxwpB0uaAFH91wsxCSokGUcPouvlPPxxlPVpb8sn2MIGYwfHB4yDzT7bJHogOb0EojAVsaCCg==
+X-Received: by 2002:a65:6246:0:b0:363:396a:a00f with SMTP id q6-20020a656246000000b00363396aa00fmr11413522pgv.28.1647072058704;
+        Sat, 12 Mar 2022 00:00:58 -0800 (PST)
+Received: from ubuntu.mate (subs02-180-214-232-88.three.co.id. [180.214.232.88])
+        by smtp.gmail.com with ESMTPSA id x33-20020a056a0018a100b004f71b6a8698sm13025141pfh.169.2022.03.12.00.00.55
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Sat, 12 Mar 2022 00:00:57 -0800 (PST)
+From:   Bagas Sanjaya <bagasdotme@gmail.com>
+To:     linux-doc@vger.kernel.org
+Cc:     Bagas Sanjaya <bagasdotme@gmail.com>,
+        Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+        Sasha Levin <sashal@kernel.org>,
+        Jonathan Corbet <corbet@lwn.net>, stable@vger.kernel.org,
+        linux-kernel@vger.kernel.org
+Subject: [PATCH 0/4] Stable kernel release process update
+Date:   Sat, 12 Mar 2022 15:00:39 +0700
+Message-Id: <20220312080043.37581-1-bagasdotme@gmail.com>
+X-Mailer: git-send-email 2.35.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
-X-Originating-IP: [10.175.100.227]
-X-ClientProxiedBy: dggems701-chm.china.huawei.com (10.3.19.178) To
- dggpeml500006.china.huawei.com (7.185.36.76)
-X-CFilter-Loop: Reflected
-X-Spam-Status: No, score=-1.5 required=5.0 tests=BAYES_50,RCVD_IN_DNSWL_MED,
-        RCVD_IN_MSPIKE_H5,RCVD_IN_MSPIKE_WL,SPF_HELO_NONE,SPF_PASS,
-        T_SCC_BODY_TEXT_LINE autolearn=ham autolearn_force=no version=3.4.6
+X-Spam-Status: No, score=-0.6 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_FROM,
+        RCVD_IN_DNSWL_NONE,RCVD_IN_SORBS_WEB,SPF_HELO_NONE,SPF_PASS,
+        T_SCC_BODY_TEXT_LINE autolearn=no autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Translate scheduler/sched-nice-design.rst into Chinese.
+The stable release process documented in stable-kernel-rules.rst needs
+to be updated to reflect current procedure.
 
-Signed-off-by: Tang Yizhou <tangyizhou@huawei.com>
----
- .../translations/zh_CN/scheduler/index.rst    |  2 +-
- .../zh_CN/scheduler/sched-nice-design.rst     | 99 +++++++++++++++++++
- 2 files changed, 100 insertions(+), 1 deletion(-)
- create mode 100644 Documentation/translations/zh_CN/scheduler/sched-nice-design.rst
+Patch 1 is merely reorganizing three submission option lists to be
+subsection of the procedure section.
 
-diff --git a/Documentation/translations/zh_CN/scheduler/index.rst b/Documentation/translations/zh_CN/scheduler/index.rst
-index c020f8382785..12bf3bd02ccf 100644
---- a/Documentation/translations/zh_CN/scheduler/index.rst
-+++ b/Documentation/translations/zh_CN/scheduler/index.rst
-@@ -25,12 +25,12 @@ Linux调度器
-     sched-domains
-     sched-capacity
-     sched-energy
-+    sched-nice-design
-     sched-stats
- 
- TODOList:
- 
-     sched-deadline
--    sched-nice-design
-     sched-rt-group
- 
-     text_files
-diff --git a/Documentation/translations/zh_CN/scheduler/sched-nice-design.rst b/Documentation/translations/zh_CN/scheduler/sched-nice-design.rst
-new file mode 100644
-index 000000000000..9107f0c0b979
---- /dev/null
-+++ b/Documentation/translations/zh_CN/scheduler/sched-nice-design.rst
-@@ -0,0 +1,99 @@
-+.. SPDX-License-Identifier: GPL-2.0
-+.. include:: ../disclaimer-zh_CN.rst
-+
-+:Original: Documentation/scheduler/sched-nice-design.rst
-+
-+:翻译:
-+
-+  唐艺舟 Tang Yizhou <tangyeechou@gmail.com>
-+
-+=====================
-+调度器nice值设计
-+=====================
-+
-+本文档解释了新的Linux调度器中修改和精简后的nice级别的实现思路。
-+
-+Linux的nice级别总是非常脆弱，人们持续不断地缠着我们，让nice +19的任务占用
-+更少的CPU时间。
-+
-+不幸的是，在旧的调度器中，这不是那么容易实现的（否则我们早就做到了），因为对
-+nice级别的支持在历史上是与时间片长度耦合的，而时间片单位是由HZ滴答驱动的，
-+所以最小的时间片是1/HZ。
-+
-+在O(1)调度器中（2003年），我们改变了负的nice级别，使它们比2.4内核更强
-+（人们对这一变化很满意），而且我们还故意校正了线性时间片准则，使得nice +19
-+的级别 _正好_ 是1 jiffy。为了让大家更好地理解它，时间片的图会是这样的（质量
-+不佳的ASCII艺术提醒！）::
-+
-+
-+                   A
-+             \     | [timeslice length]
-+              \    |
-+               \   |
-+                \  |
-+                 \ |
-+                  \|___100msecs
-+                   |^ . _
-+                   |      ^ . _
-+                   |            ^ . _
-+ -*----------------------------------*-----> [nice level]
-+ -20               |                +19
-+                   |
-+                   |
-+
-+因此，如果有人真的想renice任务，相较线性规则，+19会给出更大的效果（改变
-+ABI来扩展优先级的解决方案在早期就被放弃了）。
-+
-+这种方法在一定程度上奏效了一段时间，但后来HZ=1000时，它导致1 jiffy为
-+1ms，这意味着0.1%的CPU使用率，我们认为这有点过度。过度 _不是_ 因为它表示
-+的CPU使用率过小，而是因为它引发了过于频繁（每毫秒1次）的重新调度（因此会
-+破坏缓存，等等。请记住，硬件更弱、cache更小是很久以前的事了，当时人们在
-+nice +19级别运行数量颇多的应用程序）。
-+
-+因此，对于HZ=1000，我们将nice +19改为5毫秒，因为这感觉像是正确的最小
-+粒度——这相当于5%的CPU利用率。但nice +19的根本的HZ敏感属性依然保持不变，
-+我们没有收到过关于nice +19在CPU利用率方面太 _弱_ 的任何抱怨，我们只收到
-+过它（依然）太 _强_ 的抱怨 :-)。
-+
-+总结一下：我们一直想让nice各级别一致性更强，但在HZ和jiffies的限制下，以及
-+nice级别与时间片、调度粒度耦合是令人讨厌的设计，这一目标并不真正可行。
-+
-+第二个关于Linux nice级别支持的抱怨是（不那么频繁，但仍然定期发生），它
-+在原点周围的不对称性（你可以在上面的图片中看到），或者更准确地说：事实上
-+nice级别的行为取决于 _绝对的_ nice级别，而nice应用程序接口本身从根本上
-+说是“相对”的：
-+
-+   int nice(int inc);
-+
-+   asmlinkage long sys_nice(int increment)
-+
-+（第一个是glibc的应用程序接口，第二个是syscall的应用程序接口）
-+注意，“inc”是相对当前nice级别而言的，类似bash的“nice”命令等工具是这个
-+相对性应用程序接口的镜像。
-+
-+在旧的调度器中，举例来说，如果你以nice +1启动一个任务，并以nice +2启动
-+另一个任务，这两个任务的CPU分配将取决于父外壳程序的nice级别——如果它是
-+nice -10，那么CPU的分配不同于+5或+10。
-+
-+第三个关于Linux nice级别支持的抱怨是，负数nice级别“不够有力”，以很多人
-+不得不诉诸于实时调度优先级来运行音频（和其它多媒体）应用程序，比如
-+SCHED_FIFO。但这也造成了其它问题：SCHED_FIFO未被证明是免于饥饿的，一个
-+有问题的SCHED_FIFO应用程序也会锁住运行良好的系统。
-+
-+v2.6.23版内核的新调度器解决了这三种类型的抱怨：
-+
-+为了解决第一个抱怨（nice级别不够“有力”），调度器与“时间片”、HZ的概念
-+解耦（调度粒度被处理成一个和nice级别独立的概念），因此有可能实现更好、
-+更一致的nice +19支持：在新的调度器中，nice +19的任务得到一个HZ无关的
-+1.5%CPU使用率，而不是旧版调度器中3%-5%-9%的可变范围。
-+
-+为了解决第二个抱怨（nice各级别不一致），新调度器令调用nice(1)对各任务的
-+CPU利用率有相同的影响，无论其绝对nice级别如何。所以在新调度器上，运行一个
-+nice +10和一个nice +11的任务会与运行一个nice -5和一个nice -4的任务的
-+CPU利用率分割是相同的（一个会得到55%的CPU，另一个会得到45%）。这是为什么
-+nice级别被改为“乘法”（或指数）——这样的话，不管你从哪个级别开始，“相对”
-+结果将总是一样的。
-+
-+第三个抱怨（负数nice级别不够“有力”，并迫使音频应用程序在更危险的
-+SCHED_FIFO调度策略下运行）几乎被新的调度器自动解决了：更强的负数级别
-+具有重新校正nice级别动态范围的自动化副作用。
+Patch 2 contains the actual process documentation update.
+
+Patch 3 and 4 updates "Tree" section by adding stable -rc tree link and
+correcting link for stable tree, respectively.
+
+Cc: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+Cc: Sasha Levin <sashal@kernel.org>
+Cc: Jonathan Corbet <corbet@lwn.net>
+Cc: stable@vger.kernel.org
+Cc: linux-kernel@vger.kernel.org
+
+Bagas Sanjaya (4):
+  Documentation: make option lists subsection of "Procedure for
+    submitting patches to the -stable tree" in stable-kernel-rules.rst
+  Documentation: update stable review cycle documentation
+  Documentation: add link to stable release candidate tree
+  Documentation: update stable tree link
+
+ Documentation/process/stable-kernel-rules.rst | 31 ++++++++++++++-----
+ 1 file changed, 24 insertions(+), 7 deletions(-)
+
+
+base-commit: ffb217a13a2eaf6d5bd974fc83036a53ca69f1e2
 -- 
-2.17.1
+An old man doll... just what I always wanted! - Clara
 
