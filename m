@@ -2,96 +2,77 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 1DE034D8D6C
-	for <lists+linux-doc@lfdr.de>; Mon, 14 Mar 2022 20:52:37 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 2307D4D8D79
+	for <lists+linux-doc@lfdr.de>; Mon, 14 Mar 2022 20:53:51 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S244612AbiCNTxo (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 14 Mar 2022 15:53:44 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:37086 "EHLO
+        id S244558AbiCNTy5 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 14 Mar 2022 15:54:57 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:42308 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S244778AbiCNTwq (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Mon, 14 Mar 2022 15:52:46 -0400
-Received: from mx0a-001b2d01.pphosted.com (mx0a-001b2d01.pphosted.com [148.163.156.1])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 4B609403E6;
-        Mon, 14 Mar 2022 12:51:06 -0700 (PDT)
-Received: from pps.filterd (m0098396.ppops.net [127.0.0.1])
-        by mx0a-001b2d01.pphosted.com (8.16.1.2/8.16.1.2) with SMTP id 22EJlYtp025603;
-        Mon, 14 Mar 2022 19:50:23 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ibm.com; h=from : to : cc : subject
- : date : message-id : in-reply-to : references : content-transfer-encoding
- : mime-version; s=pp1; bh=EIN5YKNShvtpefl6wXDR1mrno0orRYnzj0xkq2tV9tY=;
- b=IuUXQ4g6nE6s+CbTewHR0HBK37VysywtedFxJHDgFICWNQzV7p/4IZFO1RU+QR1pIw3/
- 7nK49OonFLPkFQreR8DASVesWL3DQF8oP6URCY9fQSb2cwD8IKRnVohFEToNRCRkeEip
- 30BJPEMJW5HVV3+OVIao2fGpm+Pq/GhyWYnUr5g+KErgO8KtgyVOasjqucCQFq3aITWR
- DBEEJX2WFxtHUunstvBvuGfnOSf3cShnvvuHJ6ylR5jbJUeHox1BAhWKCFS7A9T5UpZK
- 12oK519Uw6GsMJvF81y1o+2JkcpKJE0w1jT2jlz5sHuf/UC5ID0QnqJ7tdn3iaVBC/jU xw== 
-Received: from pps.reinject (localhost [127.0.0.1])
-        by mx0a-001b2d01.pphosted.com with ESMTP id 3et6ag101c-1
-        (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
-        Mon, 14 Mar 2022 19:50:23 +0000
-Received: from m0098396.ppops.net (m0098396.ppops.net [127.0.0.1])
-        by pps.reinject (8.16.0.43/8.16.0.43) with SMTP id 22EJlklL026151;
-        Mon, 14 Mar 2022 19:50:22 GMT
-Received: from ppma02dal.us.ibm.com (a.bd.3ea9.ip4.static.sl-reverse.com [169.62.189.10])
-        by mx0a-001b2d01.pphosted.com with ESMTP id 3et6ag100w-1
-        (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
-        Mon, 14 Mar 2022 19:50:22 +0000
-Received: from pps.filterd (ppma02dal.us.ibm.com [127.0.0.1])
-        by ppma02dal.us.ibm.com (8.16.1.2/8.16.1.2) with SMTP id 22EJlqUq003136;
-        Mon, 14 Mar 2022 19:50:21 GMT
-Received: from b01cxnp23032.gho.pok.ibm.com (b01cxnp23032.gho.pok.ibm.com [9.57.198.27])
-        by ppma02dal.us.ibm.com with ESMTP id 3etaj6gpse-1
-        (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
-        Mon, 14 Mar 2022 19:50:21 +0000
-Received: from b01ledav004.gho.pok.ibm.com (b01ledav004.gho.pok.ibm.com [9.57.199.109])
-        by b01cxnp23032.gho.pok.ibm.com (8.14.9/8.14.9/NCO v10.0) with ESMTP id 22EJoJMH22020566
-        (version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
-        Mon, 14 Mar 2022 19:50:19 GMT
-Received: from b01ledav004.gho.pok.ibm.com (unknown [127.0.0.1])
-        by IMSVA (Postfix) with ESMTP id 622A9112069;
-        Mon, 14 Mar 2022 19:50:19 +0000 (GMT)
-Received: from b01ledav004.gho.pok.ibm.com (unknown [127.0.0.1])
-        by IMSVA (Postfix) with ESMTP id A3F57112065;
-        Mon, 14 Mar 2022 19:50:10 +0000 (GMT)
-Received: from li-c92d2ccc-254b-11b2-a85c-a700b5bfb098.ibm.com.com (unknown [9.211.32.184])
-        by b01ledav004.gho.pok.ibm.com (Postfix) with ESMTP;
-        Mon, 14 Mar 2022 19:50:10 +0000 (GMT)
-From:   Matthew Rosato <mjrosato@linux.ibm.com>
-To:     linux-s390@vger.kernel.org
-Cc:     alex.williamson@redhat.com, cohuck@redhat.com,
-        schnelle@linux.ibm.com, farman@linux.ibm.com, pmorel@linux.ibm.com,
-        borntraeger@linux.ibm.com, hca@linux.ibm.com, gor@linux.ibm.com,
-        gerald.schaefer@linux.ibm.com, agordeev@linux.ibm.com,
-        svens@linux.ibm.com, frankja@linux.ibm.com, david@redhat.com,
-        imbrenda@linux.ibm.com, vneethv@linux.ibm.com,
-        oberpar@linux.ibm.com, freude@linux.ibm.com, thuth@redhat.com,
-        pasic@linux.ibm.com, joro@8bytes.org, will@kernel.org,
-        pbonzini@redhat.com, corbet@lwn.net, jgg@nvidia.com,
-        kvm@vger.kernel.org, linux-kernel@vger.kernel.org,
-        iommu@lists.linux-foundation.org, linux-doc@vger.kernel.org
-Subject: [PATCH v4 32/32] MAINTAINERS: update s390 IOMMU entry
-Date:   Mon, 14 Mar 2022 15:44:51 -0400
-Message-Id: <20220314194451.58266-33-mjrosato@linux.ibm.com>
-X-Mailer: git-send-email 2.27.0
-In-Reply-To: <20220314194451.58266-1-mjrosato@linux.ibm.com>
-References: <20220314194451.58266-1-mjrosato@linux.ibm.com>
-X-TM-AS-GCONF: 00
-X-Proofpoint-ORIG-GUID: M3EoNyUKbnbOabH4Rxt-JZJHmpcH11J5
-X-Proofpoint-GUID: gSFlrQQ5rUK4xe3pNmkYLRLcmVNL5p4l
-Content-Transfer-Encoding: 8bit
-X-Proofpoint-UnRewURL: 0 URL was un-rewritten
+        with ESMTP id S244607AbiCNTys (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Mon, 14 Mar 2022 15:54:48 -0400
+Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.129.124])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTP id 2F9BB25EC
+        for <linux-doc@vger.kernel.org>; Mon, 14 Mar 2022 12:53:22 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+        s=mimecast20190719; t=1647287540;
+        h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+         to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+         content-transfer-encoding:content-transfer-encoding:
+         in-reply-to:in-reply-to:references:references;
+        bh=GBOGyth8SUjOhbMl4iXnJi0rODftuyM/OOyrFjsN+/8=;
+        b=YDi9++S7ansLS1XXVkMeV3KK2bR5HXzt7v4NlkzidBfh5qkYT7yNOaKwgT+F1X30DLZb3U
+        O3r6RETn5h00jQuW6C5xEGFiFjmoEdp8RHItFrP0XziNiJUJ4ooZ5X69mUBl1nz9CbHKKz
+        8EICQpdQetMLvUVV3QQdEY8gskt6qQE=
+Received: from mail-io1-f69.google.com (mail-io1-f69.google.com
+ [209.85.166.69]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ us-mta-387-UQf5v2-yPqqlQOsfBKn1RA-1; Mon, 14 Mar 2022 15:52:18 -0400
+X-MC-Unique: UQf5v2-yPqqlQOsfBKn1RA-1
+Received: by mail-io1-f69.google.com with SMTP id u17-20020a6be311000000b00648f92b7b8cso2773882ioc.23
+        for <linux-doc@vger.kernel.org>; Mon, 14 Mar 2022 12:52:18 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:date:from:to:cc:subject:message-id:in-reply-to
+         :references:mime-version:content-transfer-encoding;
+        bh=GBOGyth8SUjOhbMl4iXnJi0rODftuyM/OOyrFjsN+/8=;
+        b=fxsNWOoH89Y7eM80lc0/qjeEs9ep40vIsjWq7GXQnCL8G7qBeF1jFJcI+4eIRIXm2J
+         Pp1WgzgxxqRr07hIQ+dtKmzVxdapBSJp4jb8VyhKsBngFlz1n15y8KJqqIRqMc9h9g0y
+         WFuQLLm/hIh/+4hq3hg+bqF1juPR6rKv2BrToFd3LPFSTtHEj8SmAL0DcrHG1c31WEZH
+         gXrMJT5WHGmavBe3iQGuq9gKh9Z1N74U6XCtSfRo9BRTr+AeswEnyoMerinFVjYv1Xwk
+         znJron+bEmZIa3bgSY0ntsqzasnRZC4xU5X02QhpPqY/GXFO3zWgXpNhkTMFBJ0/B2Dd
+         YwNQ==
+X-Gm-Message-State: AOAM533NfDg53rxUIEY4mac+B2Opylkla8cZRRcdp7rX7EbEWWlbREif
+        WyxChQasBDDbbEN3MLFZVo5wJB1DpuRJ1hOfVRIuwjojbrXcUkyL2bN8DfbxUmCJbtdRnWLue9O
+        BTps3L4dB3KBf9K8M6k3p
+X-Received: by 2002:a02:1d45:0:b0:317:c1ed:882f with SMTP id 66-20020a021d45000000b00317c1ed882fmr22366749jaj.33.1647287538238;
+        Mon, 14 Mar 2022 12:52:18 -0700 (PDT)
+X-Google-Smtp-Source: ABdhPJzL70MDAi9m5dOEzNFXAK2hOJ4q3gZT3CFGBlHf6tZ4stiRQUgD9xY/OIi31lTSnRRajnBrsQ==
+X-Received: by 2002:a02:1d45:0:b0:317:c1ed:882f with SMTP id 66-20020a021d45000000b00317c1ed882fmr22366737jaj.33.1647287538003;
+        Mon, 14 Mar 2022 12:52:18 -0700 (PDT)
+Received: from redhat.com ([38.15.36.239])
+        by smtp.gmail.com with ESMTPSA id w6-20020a056e021c8600b002c602537ab9sm9693969ill.54.2022.03.14.12.52.17
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 14 Mar 2022 12:52:17 -0700 (PDT)
+Date:   Mon, 14 Mar 2022 13:52:16 -0600
+From:   Alex Williamson <alex.williamson@redhat.com>
+To:     Jonathan Corbet <corbet@lwn.net>
+Cc:     kvm@vger.kernel.org, linux-kernel@vger.kernel.org, jgg@nvidia.com,
+        shameerali.kolothum.thodi@huawei.com, kevin.tian@intel.com,
+        yishaih@nvidia.com, linux-doc@vger.kernel.org
+Subject: Re: [PATCH v2] vfio-pci: Provide reviewers and acceptance criteria
+ for vendor drivers
+Message-ID: <20220314135216.0cd5e16a.alex.williamson@redhat.com>
+In-Reply-To: <87pmmoxqv8.fsf@meer.lwn.net>
+References: <164728518026.40450.7442813673746870904.stgit@omen>
+        <87pmmoxqv8.fsf@meer.lwn.net>
+X-Mailer: Claws Mail 3.18.0 (GTK+ 2.24.33; x86_64-redhat-linux-gnu)
 MIME-Version: 1.0
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.205,Aquarius:18.0.850,Hydra:6.0.425,FMLib:17.11.64.514
- definitions=2022-03-14_13,2022-03-14_02,2022-02-23_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 clxscore=1015
- lowpriorityscore=0 priorityscore=1501 bulkscore=0 malwarescore=0
- adultscore=0 phishscore=0 impostorscore=0 mlxscore=0 mlxlogscore=865
- suspectscore=0 spamscore=0 classifier=spam adjust=0 reason=mlx scancount=1
- engine=8.12.0-2202240000 definitions=main-2203140116
-X-Spam-Status: No, score=-2.0 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_EF,RCVD_IN_MSPIKE_H5,RCVD_IN_MSPIKE_WL,
-        SPF_HELO_NONE,SPF_PASS,T_SCC_BODY_TEXT_LINE autolearn=ham
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 7bit
+X-Spam-Status: No, score=-3.6 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_NONE,
+        SPF_HELO_NONE,SPF_NONE,T_SCC_BODY_TEXT_LINE autolearn=unavailable
         autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
@@ -99,26 +80,46 @@ Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Use wildcard to pick up new parts added by KVM domain support.
+Hi Jon,
 
-Signed-off-by: Matthew Rosato <mjrosato@linux.ibm.com>
----
- MAINTAINERS | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+On Mon, 14 Mar 2022 13:42:51 -0600
+Jonathan Corbet <corbet@lwn.net> wrote:
 
-diff --git a/MAINTAINERS b/MAINTAINERS
-index 6c76eb66b10a..d803f490eafb 100644
---- a/MAINTAINERS
-+++ b/MAINTAINERS
-@@ -16867,7 +16867,7 @@ M:	Gerald Schaefer <gerald.schaefer@linux.ibm.com>
- L:	linux-s390@vger.kernel.org
- S:	Supported
- W:	http://www.ibm.com/developerworks/linux/linux390/
--F:	drivers/iommu/s390-iommu.c
-+F:	drivers/iommu/s390*
- 
- S390 IUCV NETWORK LAYER
- M:	Alexandra Winter <wintera@linux.ibm.com>
--- 
-2.27.0
+> Alex Williamson <alex.williamson@redhat.com> writes:
+> 
+> > Vendor or device specific extensions for devices exposed to userspace
+> > through the vfio-pci-core library open both new functionality and new
+> > risks.  Here we attempt to provided formalized requirements and
+> > expectations to ensure that future drivers both collaborate in their
+> > interaction with existing host drivers, as well as receive additional
+> > reviews from community members with experience in this area.
+> >
+> > Cc: Jason Gunthorpe <jgg@nvidia.com>
+> > Cc: Yishai Hadas <yishaih@nvidia.com>
+> > Cc: Shameer Kolothum <shameerali.kolothum.thodi@huawei.com>
+> > Cc: Kevin Tian <kevin.tian@intel.com>
+> > Signed-off-by: Alex Williamson <alex.williamson@redhat.com>
+> > ---  
+> 
+> One thing...
+> 
+> >  .../vfio/vfio-pci-vendor-driver-acceptance.rst     |   35 ++++++++++++++++++++
+> >  MAINTAINERS                                        |   10 ++++++
+> >  2 files changed, 45 insertions(+)  
+> 
+> If you add a new RST file, you need to add it to an index.rst somewhere
+> so that it becomes part of the kernel docs build.
+
+Whoops
+
+> Also, though: can we avoid creating a new top-level documentation
+> directory for just this file?  It seems like it would logically be a
+> part of the maintainers guide (Documentation/maintainer) ... ?
+
+I'm not sure it's appropriate for Documentation/maintainer/ but it
+would make sense to link it from maintainer-entry-profile.rst there.
+What if I move it to Documentation/driver-api where there are a couple
+other vfio docs?  Thanks,
+
+Alex
 
