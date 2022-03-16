@@ -2,68 +2,66 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 3D1054DB86D
-	for <lists+linux-doc@lfdr.de>; Wed, 16 Mar 2022 20:16:55 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 2BEC84DB95A
+	for <lists+linux-doc@lfdr.de>; Wed, 16 Mar 2022 21:26:55 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S239382AbiCPTSI (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 16 Mar 2022 15:18:08 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:41422 "EHLO
+        id S1355976AbiCPU2H (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 16 Mar 2022 16:28:07 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:33246 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S239247AbiCPTSH (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Wed, 16 Mar 2022 15:18:07 -0400
-Received: from mail-ej1-x632.google.com (mail-ej1-x632.google.com [IPv6:2a00:1450:4864:20::632])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 7E2182C11E;
-        Wed, 16 Mar 2022 12:16:52 -0700 (PDT)
-Received: by mail-ej1-x632.google.com with SMTP id yy13so6277988ejb.2;
-        Wed, 16 Mar 2022 12:16:52 -0700 (PDT)
+        with ESMTP id S1357944AbiCPU15 (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Wed, 16 Mar 2022 16:27:57 -0400
+Received: from mail-qt1-x831.google.com (mail-qt1-x831.google.com [IPv6:2607:f8b0:4864:20::831])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id A74BD3F8AE;
+        Wed, 16 Mar 2022 13:26:41 -0700 (PDT)
+Received: by mail-qt1-x831.google.com with SMTP id v2so2821712qtc.5;
+        Wed, 16 Mar 2022 13:26:41 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
-        h=date:from:to:cc:subject:message-id:references:mime-version
-         :content-disposition:in-reply-to:user-agent;
-        bh=RkfrJNG8t17LURuEyWQI2LF3gagrZVlUtyrEQH/7zIc=;
-        b=oY35iQPJNL8kb2Q+kXv0zYjdB2FLgugzyrhKyq6Z0HiKYk4A6TUvfzg7+Uy+XB+1kg
-         wtgN1mbFlxcGBIp7xWv+3ZnGgUVVV82SyPHd/zKnXOAHlJlilK56P+fFkDVIAbNPiLAh
-         lG86yiJCgvcTLar05R7k4DlqAv3K0K25Y2vX4YXB1dxUnkPCt0Cqn69ombA9tzDLoFm0
-         ahGbO7ukP6BBY/qx42jcKf0bK0oBn+Ls93lcdtJIOo1IRFMK6mnW052mH/eOT7Rz/W3S
-         7pvaryusP1ONWmJVXh22xslPpHnPJkZ0QHXWraJvX4QlREyPh5XamR0IuNNSDVHHr2F7
-         j5Sg==
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=qYynkwQ+j3b/YGx/TNtwPxZ5TKXzPPLTT7lPgCZm+48=;
+        b=DzH36QZjHNcrZ0UH3XWqpH7SBIvo6qxszr0gTMibyuzJMeuva7mRN9TFl0oiYdnYUE
+         FGF49z9z6uzwT68tr/hmHPEiExZSm/gPs0gxTgq0Hs8H7RvhCGWM+ambf3f3LOqxguVU
+         yPZO5j+UrdUUl1vkAOwvBK3jvEKbMHD9GnVo5fYaLHTy5KGuZvWEOEY0qXAFIss+GTuF
+         UZlMsSDenY9IG83XPNN4FsEGIqeGzMZphQKVqqVch1wF9GR1sbzZyjbCrTAmgdKvpVbV
+         63x9+aXkKCwhfqF/sk+fBURf0uoLkIh6JlHhQ8YIWW/a32CSj3o1NH4rEuUhJNKOKS3f
+         EIxg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=x-gm-message-state:date:from:to:cc:subject:message-id:references
-         :mime-version:content-disposition:in-reply-to:user-agent;
-        bh=RkfrJNG8t17LURuEyWQI2LF3gagrZVlUtyrEQH/7zIc=;
-        b=oDjVNUNIrJST+N8WO9ntDxSFOsgkjUrxq8XZsTHp7y0Jp7WZRH8ZAcVZNBML+EvsvN
-         EV/xlyzpQpO3QMCU2mRZl3ocrjRqVseeaLIFcA/7aC88Pdb+nWNFI2zqDnPi1v79e9Jr
-         Eu/waCMlsR1rJkg3zaYCltUhQ/JZdzNfYusyHDlpj0BW2QqrKX3hkrZQFS9cgrSxVP8r
-         lwNcLqsgre2ulKO0ZGS/oflrVakJ+RIwtM6980I0VNzcsFIRzgA8S2sVbqgVwK/qLhVc
-         YXKAcMg1ue/4ICjKG6zJUC2Da5YES6TlEm+H8LXCYIoreTYqyPNKpTKd98frVh/S6DjW
-         heaQ==
-X-Gm-Message-State: AOAM533YioskGADZjVG7hiEtbN9xBQM8IiFO0yVbTVYi5sgyysqNymx/
-        +yfQ8f107KVci+zX5zhdWJs=
-X-Google-Smtp-Source: ABdhPJyVDm6rP5DLjJJe3mX6QOo7rXtAop98+oEhFDNT550DP7C3nwbz1eBmMt6lpGyLPHCpqjEFwg==
-X-Received: by 2002:a17:906:c18c:b0:6d5:8518:e567 with SMTP id g12-20020a170906c18c00b006d58518e567mr1181411ejz.37.1647458210814;
-        Wed, 16 Mar 2022 12:16:50 -0700 (PDT)
-Received: from pswork ([62.96.250.75])
-        by smtp.gmail.com with ESMTPSA id rh13-20020a17090720ed00b006da69254082sm1248954ejb.135.2022.03.16.12.16.49
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=qYynkwQ+j3b/YGx/TNtwPxZ5TKXzPPLTT7lPgCZm+48=;
+        b=FrDn/n8DWgIh6adtm5uVePd+Q4g0vT/PQzz/fUFYc38S57u+yxImQOOUPuZil9xRmS
+         05SWvTy99/pO6XumJ5cGGihpglCsi03eA3fOHebkM4yceDXIj2V2cIwyIySKU9oRuod9
+         gjgEeUFABurkGIX2J6aJnUifiNd6Su5Xq1fD6rdhGBCu6KkkSsptj0cJdrXKr9+dtY0t
+         InG09egxumpbxO/Rg7b47niLXiEkbyT0xXZQ5ZUg2neiSBG7aPVsSvKI1/GkUtyu+uOj
+         YawWB4QP/9al4Roal1i55YfuQgqLRMAo0RhuoRbCbWlfcHqHJjBiqogS94q2zG4O/0w/
+         KtkQ==
+X-Gm-Message-State: AOAM531f3lwgOdvoFlDPackbt7fx1S4o/wTYAjcsXNgUv9CrKKN7Fi9r
+        wSRwEvaC+jKYsIzGOUH3uB8=
+X-Google-Smtp-Source: ABdhPJyUyCHgYvLQH1YEBa8eWojwkGpa42X+W5njt6/tHky6i+6enBnVEZTswalGWe4gbYUBQV4BYg==
+X-Received: by 2002:ac8:5711:0:b0:2e1:cde2:6922 with SMTP id 17-20020ac85711000000b002e1cde26922mr1383558qtw.116.1647462400814;
+        Wed, 16 Mar 2022 13:26:40 -0700 (PDT)
+Received: from xps8900.attlocal.net ([2600:1700:2442:6db0:7488:f626:3f3b:5607])
+        by smtp.gmail.com with ESMTPSA id bp9-20020a05622a1b8900b002e0e86b8ac6sm1940074qtb.67.2022.03.16.13.26.39
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 16 Mar 2022 12:16:49 -0700 (PDT)
-Date:   Wed, 16 Mar 2022 20:16:49 +0100
-From:   Padmanabha Srinivasaiah <treasure4paddy@gmail.com>
-To:     Masami Hiramatsu <mhiramat@kernel.org>
-Cc:     Steven Rostedt <rostedt@goodmis.org>,
-        LKML <linux-kernel@vger.kernel.org>,
-        Jonathan Corbet <corbet@lwn.net>, linux-doc@vger.kernel.org,
-        Randy Dunlap <rdunlap@infradead.org>
-Subject: Re: [PATCH v2 2/3] bootconfig: Support embedding a bootconfig file
- in kernel
-Message-ID: <20220316191649.GA11547@pswork>
-References: <164724890153.731226.1478494969800777757.stgit@devnote2>
- <164724892075.731226.14103557516176115189.stgit@devnote2>
+        Wed, 16 Mar 2022 13:26:40 -0700 (PDT)
+From:   frowand.list@gmail.com
+To:     Jonathan Corbet <corbet@lwn.net>, David Gow <davidgow@google.com>,
+        Shuah Khan <skhan@linuxfoundation.org>,
+        Kees Cook <keescook@chromium.org>, Tim.Bird@sony.com,
+        Brendan Higgins <brendanhiggins@google.com>
+Cc:     rmr167@gmail.com, guillaume.tucker@collabora.com,
+        dlatypov@google.com, kernelci@groups.io,
+        kunit-dev@googlegroups.com, linux-kselftest@vger.kernel.org,
+        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org
+Subject: [RFC PATCH 0/2] Documentation: dev-tools: begin KTAP spec v2 process
+Date:   Wed, 16 Mar 2022 15:26:20 -0500
+Message-Id: <20220316202622.324866-1-frowand.list@gmail.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <164724892075.731226.14103557516176115189.stgit@devnote2>
-User-Agent: Mutt/1.9.4 (2018-02-28)
+Content-Transfer-Encoding: 8bit
 X-Spam-Status: No, score=-2.1 required=5.0 tests=BAYES_00,DKIM_SIGNED,
         DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_FROM,
         RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,SPF_PASS,T_SCC_BODY_TEXT_LINE
@@ -74,204 +72,41 @@ Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Hello Masami Hiramatsu,
+From: Frank Rowand <frank.rowand@sony.com>
 
-On Mon, Mar 14, 2022 at 06:08:41PM +0900, Masami Hiramatsu wrote:
-> This allows kernel developer to embed a default bootconfig file in
-> the kernel instead of embedding it in the initrd. This will be good
-> for who are using the kernel without initrd, or who needs a default
-> bootconfigs.
-> This needs to set two kconfigs: CONFIG_EMBED_BOOT_CONFIG=y and set
-> the file path to CONFIG_EMBED_BOOT_CONFIG_FILE.
-> 
-> Note that you still need 'bootconfig' command line option to load the
-> embedded bootconfig. Also if you boot using an initrd with a different
-> bootconfig, the kernel will use the bootconfig in the initrd, instead
-> of the default bootconfig.
-> 
-> Signed-off-by: Masami Hiramatsu <mhiramat@kernel.org>
-> ---
->  include/linux/bootconfig.h |   10 ++++++++++
->  init/Kconfig               |   21 +++++++++++++++++++++
->  init/main.c                |   13 ++++++++-----
->  lib/.gitignore             |    1 +
->  lib/Makefile               |   12 ++++++++++++
->  lib/bootconfig.c           |   23 +++++++++++++++++++++++
->  6 files changed, 75 insertions(+), 5 deletions(-)
-> 
-> diff --git a/include/linux/bootconfig.h b/include/linux/bootconfig.h
-> index a4665c7ab07c..5dbda5e3e9bb 100644
-> --- a/include/linux/bootconfig.h
-> +++ b/include/linux/bootconfig.h
-> @@ -289,4 +289,14 @@ int __init xbc_get_info(int *node_size, size_t *data_size);
->  /* XBC cleanup data structures */
->  void __init xbc_exit(void);
->  
-> +/* XBC embedded bootconfig data in kernel */
-> +#ifdef CONFIG_EMBED_BOOT_CONFIG
-> +char * __init xbc_get_embedded_bootconfig(size_t *size);
-> +#else
-> +static inline char *xbc_get_embedded_bootconfig(size_t *size)
-> +{
-> +	return NULL;
-> +}
-> +#endif
-> +
->  #endif
-> diff --git a/init/Kconfig b/init/Kconfig
-> index e9119bf54b1f..70440804874d 100644
-> --- a/init/Kconfig
-> +++ b/init/Kconfig
-> @@ -1357,6 +1357,27 @@ config BOOT_CONFIG
->  
->  	  If unsure, say Y.
->  
-> +config EMBED_BOOT_CONFIG
-> +	bool "Embed bootconfig file in the kernel"
-> +	depends on BOOT_CONFIG
-> +	default n
-> +	help
-> +	  Embed a bootconfig file given by EMBED_BOOT_CONFIG_FILE in the
-> +	  kernel. Usually, the bootconfig file is loaded with the initrd
-> +	  image. But if the system doesn't support initrd, this option will
-> +	  help you by embedding a bootconfig file while building the kernel.
-> +
-> +	  If unsure, say N.
-> +
-> +config EMBED_BOOT_CONFIG_FILE
-> +	string "Embedded bootconfig file path"
-> +	default ""
-> +	depends on EMBED_BOOT_CONFIG
-> +	help
-> +	  Specify a bootconfig file which will be embedded to the kernel.
-> +	  This bootconfig will be used if there is no initrd or no other
-> +	  bootconfig in the initrd.
-> +
->  choice
->  	prompt "Compiler optimization level"
->  	default CC_OPTIMIZE_FOR_PERFORMANCE
-> diff --git a/init/main.c b/init/main.c
-> index 421050be5039..3803bf2e22ea 100644
-> --- a/init/main.c
-> +++ b/init/main.c
-> @@ -265,7 +265,7 @@ static int __init loglevel(char *str)
->  early_param("loglevel", loglevel);
->  
->  #ifdef CONFIG_BLK_DEV_INITRD
-> -static void * __init get_boot_config_from_initrd(u32 *_size)
-> +static void * __init get_boot_config_from_initrd(size_t *_size)
->  {
->  	u32 size, csum;
->  	char *data;
-> @@ -411,12 +411,15 @@ static void __init setup_boot_config(void)
->  	static char tmp_cmdline[COMMAND_LINE_SIZE] __initdata;
->  	const char *msg;
->  	int pos;
-> -	u32 size;
-> +	size_t size;
->  	char *data, *err;
->  	int ret;
->  
->  	/* Cut out the bootconfig data even if we have no bootconfig option */
->  	data = get_boot_config_from_initrd(&size);
-> +	/* If there is no bootconfig in initrd, try embedded one. */
-> +	if (!data)
-> +		data = xbc_get_embedded_bootconfig(&size);
->  
->  	strlcpy(tmp_cmdline, boot_command_line, COMMAND_LINE_SIZE);
->  	err = parse_args("bootconfig", tmp_cmdline, NULL, 0, 0, 0, NULL,
-> @@ -435,8 +438,8 @@ static void __init setup_boot_config(void)
->  	}
->  
->  	if (size >= XBC_DATA_MAX) {
-> -		pr_err("bootconfig size %d greater than max size %d\n",
-> -			size, XBC_DATA_MAX);
-> +		pr_err("bootconfig size %ld greater than max size %d\n",
-> +			(long)size, XBC_DATA_MAX);
->  		return;
->  	}
->  
-> @@ -449,7 +452,7 @@ static void __init setup_boot_config(void)
->  				msg, pos);
->  	} else {
->  		xbc_get_info(&ret, NULL);
-> -		pr_info("Load bootconfig: %d bytes %d nodes\n", size, ret);
-> +		pr_info("Load bootconfig: %ld bytes %d nodes\n", (long)size, ret);
->  		/* keys starting with "kernel." are passed via cmdline */
->  		extra_command_line = xbc_make_cmdline("kernel");
->  		/* Also, "init." keys are init arguments */
-> diff --git a/lib/.gitignore b/lib/.gitignore
-> index e5e217b8307b..30a2a5db7033 100644
-> --- a/lib/.gitignore
-> +++ b/lib/.gitignore
-> @@ -6,3 +6,4 @@
->  /oid_registry_data.c
->  /test_fortify.log
->  /test_fortify/*.log
-> +/default.bconf
-> diff --git a/lib/Makefile b/lib/Makefile
-> index 300f569c626b..8183785ee99d 100644
-> --- a/lib/Makefile
-> +++ b/lib/Makefile
-> @@ -279,6 +279,18 @@ $(foreach file, $(libfdt_files), \
->  	$(eval CFLAGS_$(file) = -I $(srctree)/scripts/dtc/libfdt))
->  lib-$(CONFIG_LIBFDT) += $(libfdt_files)
->  
-> +ifeq ($(CONFIG_EMBED_BOOT_CONFIG),y)
-> +# Since the specified bootconfig file can be switched, we forcibly update the
-> +# default.bconf file always.
-> +$(obj)/default.bconf: FORCE
-> +	$(call cmd,defbconf)
-> +
-> +quiet_cmd_defbconf = GEN     $@
-> +      cmd_defbconf = cat < /dev/null $(CONFIG_EMBED_BOOT_CONFIG_FILE) > $@
-> +clean-files	+= default.bconf
-> +$(obj)/bootconfig.o: $(obj)/default.bconf
-> +endif
-> +
->  lib-$(CONFIG_BOOT_CONFIG) += bootconfig.o
->  
->  obj-$(CONFIG_RBTREE_TEST) += rbtree_test.o
-> diff --git a/lib/bootconfig.c b/lib/bootconfig.c
-> index 74f3201ab8e5..3a3bf3a208e3 100644
-> --- a/lib/bootconfig.c
-> +++ b/lib/bootconfig.c
-> @@ -12,6 +12,29 @@
->  #include <linux/kernel.h>
->  #include <linux/memblock.h>
->  #include <linux/string.h>
-> +
-> +#ifdef CONFIG_EMBED_BOOT_CONFIG
-> +asm (
-> +"	.pushsection .init.data, \"aw\"			\n"
-> +"	.global embedded_bootconfig_data		\n"
-> +"embedded_bootconfig_data:				\n"
-> +"	.incbin \"lib/default.bconf\"			\n"
-> +"	.global embedded_bootconfig_data_end		\n"
-> +"embedded_bootconfig_data_end:				\n"
-> +"	.popsection					\n"
-> +);
-> +
-> +extern __visible char embedded_bootconfig_data[];
-> +extern __visible char embedded_bootconfig_data_end[];
-> +
-> +char * __init xbc_get_embedded_bootconfig(size_t *size)
-> +{
-> +	*size = embedded_bootconfig_data_end - embedded_bootconfig_data;
-> +	return (*size) ? embedded_bootconfig_data : NULL;
-> +}
-> +
-> +#endif
-> +
->  #else /* !__KERNEL__ */
->  /*
->   * NOTE: This is only for tools/bootconfig, because tools/bootconfig will
->
+An August 2021 RFC patch [1] to create the KTAP Specification resulted in
+some discussion of possible items to add to the specification.
+The conversation ended without completing the document.
 
-Thanks tested the implemation, it works as expected.
+Progress resumed with a December 2021 RFC patch [2] to add a KTAP
+Specification file (Version 1) to the Linux kernel.  Many of the
+suggestions from the August 2021 discussion were not included in
+Version 1.  This patch series is intended to revisit some of the
+suggestions from the August 2021 discussion.
 
-Also noted that a change in default.bconf requries a clean build, is it
-expected behaviour?
+Patch 1 changes the Specification version to "2-rc" to indicate
+that following patches are not yet accepted into a final version 2.
 
-Thanks and Regards,
-Padmanabha.S
+Patch 2 is an example of a simple change to the Specification.  The
+change does not change the content of the Specification, but updates
+a formatting directive as suggested by the Documentation maintainer.
+
+I intend to take some specific suggestions from the August 2021
+discussion to create stand-alone RFC patches to the Specification
+instead of adding them as additional patches in this series.  The
+intent is to focus discussion on a single area of the Specification
+in each patch email thread.
+
+[1] https://lore.kernel.org/r/CA+GJov6tdjvY9x12JsJT14qn6c7NViJxqaJk+r-K1YJzPggFDQ@mail.gmail.com
+[2] https://lore.kernel.org/r/20211207190251.18426-1-davidgow@google.com
+
+Frank Rowand (2):
+  Documentation: dev-tools: KTAP spec change version to 2-rc
+  Documentation: dev-tools: use literal block instead of code-block
+
+ Documentation/dev-tools/ktap.rst | 20 +++++++++-----------
+ 1 file changed, 9 insertions(+), 11 deletions(-)
+
+-- 
+Frank Rowand <frank.rowand@sony.com>
+
