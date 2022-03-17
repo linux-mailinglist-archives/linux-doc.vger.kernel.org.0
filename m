@@ -2,60 +2,60 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 01EA14DBFB5
+	by mail.lfdr.de (Postfix) with ESMTP id 50FF34DBFB6
 	for <lists+linux-doc@lfdr.de>; Thu, 17 Mar 2022 07:51:52 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S229961AbiCQGwj (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 17 Mar 2022 02:52:39 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:49362 "EHLO
+        id S229987AbiCQGwl (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 17 Mar 2022 02:52:41 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:49422 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S230063AbiCQGwg (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Thu, 17 Mar 2022 02:52:36 -0400
-Received: from mail-pj1-x102f.google.com (mail-pj1-x102f.google.com [IPv6:2607:f8b0:4864:20::102f])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 88261ECC5C
-        for <linux-doc@vger.kernel.org>; Wed, 16 Mar 2022 23:51:21 -0700 (PDT)
-Received: by mail-pj1-x102f.google.com with SMTP id b8so4084703pjb.4
-        for <linux-doc@vger.kernel.org>; Wed, 16 Mar 2022 23:51:21 -0700 (PDT)
+        with ESMTP id S230004AbiCQGwk (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Thu, 17 Mar 2022 02:52:40 -0400
+Received: from mail-pj1-x1031.google.com (mail-pj1-x1031.google.com [IPv6:2607:f8b0:4864:20::1031])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 9D4B4A27F6
+        for <linux-doc@vger.kernel.org>; Wed, 16 Mar 2022 23:51:24 -0700 (PDT)
+Received: by mail-pj1-x1031.google.com with SMTP id o6-20020a17090a9f8600b001c6562049d9so4639081pjp.3
+        for <linux-doc@vger.kernel.org>; Wed, 16 Mar 2022 23:51:24 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
         h=from:to:cc:subject:date:message-id:in-reply-to:references
          :mime-version:content-transfer-encoding;
-        bh=26pzTILSSAB+jNQyEXdO7hC3IPsWydlNEbQ3tR74x4I=;
-        b=QX6tq1Lx5V4F6vy0exa/xey67BeBWi+9f64yKoM0tHUwmLkZdAXSUmyff9iqSwtXBQ
-         qTS6lNIkJgC0u4duoYKGm7yHJ4YqKlBpEJ2br4VXzNJQSilg/mis41pLIaz2nTwMY5l+
-         1TtUEpRHPURNx3fVPEgW0weWIdk6UkZVST0wxySj6atQhFuveIirLwVLDe55sDmIHGcb
-         wwEITNO49eXLrwlntWabOjA4Ytli5iRYDV/SKjoLqxunR+Ydv1lE1EVMeVAVibJTi64k
-         GFMznebCegmF2WkFheJMcxqQRcBVMYcNbt9wk1Q6jANc8cPvQbkFY6SZiBaoRuVr3qmh
-         6ObQ==
+        bh=G0W58orY6Fh1lEetntpA/bBRFYqPrNuvTV14YHltAGk=;
+        b=RTSVvOawbK4FN2NSALZeKa+8IEh8xEAegFrxMJJZVRRuQFexcyn5E4E6Vfq9dQ4oLB
+         dFysWNHH01AN4TRP3A8CcTtNNSVAj2/LbsceXnpTU6eR/JmPvSf01H5N8M3y8xQ9NtZn
+         oxjS7sQthxyec8UGwaVqSmbcqK57vsM6ji9VWah7SCGsiJe6X2khyozyBz7RPH8VuK//
+         qHA1fCf9lmv/xQjV4KdhoRzXCXL3aV1OgU6NR+7RVPu11TbLCQJ71GL9MF230mb8xhjf
+         QCSSklk5E25JnEPw40D4tRFvGxWOoFdJIqby1n2/1FWhG7Kfla5+qsr3OhUUiTMoxfu3
+         k5Yg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
          :references:mime-version:content-transfer-encoding;
-        bh=26pzTILSSAB+jNQyEXdO7hC3IPsWydlNEbQ3tR74x4I=;
-        b=hvaZ6T8akXrghRiSqTwfUdo8CmIfzsDqMuJ6ev1259X3uUxmpZYlC1GqUW/Jx1pLKc
-         F/69yDnc7PdpMPXHcSvXmMJFcVZE9DM5SObCwh7Tt84f6WchWV551qFPVxYeiNQBUJZY
-         ZyKb/ZDmYXfecn/jDtxUzJADfr2FEx5atEIXkJT51ODbhPov8QODjg6cvZLzbti4NX3J
-         A7WJ7Xkzn7XhLXrFQG55d/m1fmkVmIbWw9ZrXjMooNEOD+CcEFYOElAzg6zTI/YrHs/c
-         xYtzcwxAXW1w73pAa+6a7Aq5JIW37/r43hRIe3BLk2rYawTbUfZJvbS9a+/2yqwqIgQc
-         fKAg==
-X-Gm-Message-State: AOAM530zh19IicbU2y50cY93ZPjnLPtjM5HUplY1YRKroK74Jv5i/MBn
-        rpZmjR/V31EyeASZWyNmKvU=
-X-Google-Smtp-Source: ABdhPJxkyQwze0Gm44R11AAnH6znxPcATlnnL/PyzW7r+5zJEDZYWZvdY9rDWuj2vikHFENdtEj+FQ==
-X-Received: by 2002:a17:90b:1bc1:b0:1bf:7dc6:bc78 with SMTP id oa1-20020a17090b1bc100b001bf7dc6bc78mr3662162pjb.122.1647499880998;
-        Wed, 16 Mar 2022 23:51:20 -0700 (PDT)
+        bh=G0W58orY6Fh1lEetntpA/bBRFYqPrNuvTV14YHltAGk=;
+        b=Vag8LmYUGl1alDDKgeDBkEPL+vvkTFJQ0rK+9CvJRadqSdoMeda9VwgRDzwHe9MHyL
+         7w+XKzw4jtUPpc9i4suJqaiChbv83MqCSwGoTr/AbqUJvQZ3I/V11oq9DUO6cei3Hjfi
+         sJ0SELLL/h4Qwzc9T1eicw2geqHrJpCRPmQUSRNssc1YfJXQQ8KJBTApDQ2j/iVJ93q1
+         0DvrG04fT1yoNpmdM6I/qNywb/ENxXad3MFymokQs8raaArLe+XPs4CDRdVdlUIp3/wm
+         i+8zwlx36ca7bhMby8YlSDwhgS6oy2ZIwAa5eo3bt02R4xApWEOBXwm0fj7E29TL5wIs
+         o7fg==
+X-Gm-Message-State: AOAM530FBRSTD5LPon8uwW8zFJIWfGcE2H7o4NT4gP/yDmLb7NzvDRVW
+        9ik9d58ao6WC4omPeryHWl8=
+X-Google-Smtp-Source: ABdhPJwc5B7evkh3Dpg+oGNa7obSsuNIct1ZRx3AiKYb4pafa0RIdtDALSuciwNTxTPhO9PpICZYJA==
+X-Received: by 2002:a17:90b:3910:b0:1bf:2972:ccea with SMTP id ob16-20020a17090b391000b001bf2972cceamr13972227pjb.221.1647499884083;
+        Wed, 16 Mar 2022 23:51:24 -0700 (PDT)
 Received: from localhost.localdomain (pcd454078.netvigator.com. [203.218.244.78])
-        by smtp.gmail.com with ESMTPSA id k15-20020a63ab4f000000b00381eef69bfbsm3622152pgp.3.2022.03.16.23.51.18
+        by smtp.gmail.com with ESMTPSA id k15-20020a63ab4f000000b00381eef69bfbsm3622152pgp.3.2022.03.16.23.51.21
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 16 Mar 2022 23:51:20 -0700 (PDT)
+        Wed, 16 Mar 2022 23:51:23 -0700 (PDT)
 From:   Yanteng Si <siyanteng01@gmail.com>
 X-Google-Original-From: Yanteng Si <siyanteng@loongson.cn>
 To:     corbet@lwn.net, alexs@kernel.org, seakeel@gmail.com
 Cc:     Yanteng Si <siyanteng01@gmail.com>, chenhuacai@kernel.org,
         jiaxun.yang@flygoat.com, linux-doc@vger.kernel.org,
         Yanteng Si <siyanteng@loongson.cn>
-Subject: [PATCH v2 09/12] docs/zh_CN: add vm remap_file_pages translation
-Date:   Thu, 17 Mar 2022 14:50:50 +0800
-Message-Id: <1506219c6153c3f47966feee8948ccd646e16157.1647498763.git.siyanteng@loongson.cn>
+Subject: [PATCH v2 10/12] docs/zh_CN: add vm split_page_table_lock translation
+Date:   Thu, 17 Mar 2022 14:50:51 +0800
+Message-Id: <65bfa72047bf00c645b7dae316bfde43310aae4d.1647498763.git.siyanteng@loongson.cn>
 X-Mailer: git-send-email 2.27.0
 In-Reply-To: <cover.1647498763.git.siyanteng@loongson.cn>
 References: <cover.1647498763.git.siyanteng@loongson.cn>
@@ -74,42 +74,42 @@ X-Mailing-List: linux-doc@vger.kernel.org
 
 From: Yanteng Si <siyanteng01@gmail.com>
 
-Translate .../vm/remap_file_pages.rst into Chinese.
+Translate .../vm/split_page_table_lock.rst into Chinese.
 
 Signed-off-by: Yanteng Si <siyanteng@loongson.cn>
 ---
  Documentation/translations/zh_CN/vm/index.rst |  2 +-
- .../zh_CN/vm/remap_file_pages.rst             | 32 +++++++++++++++++++
- 2 files changed, 33 insertions(+), 1 deletion(-)
- create mode 100644 Documentation/translations/zh_CN/vm/remap_file_pages.rst
+ .../zh_CN/vm/split_page_table_lock.rst        | 96 +++++++++++++++++++
+ 2 files changed, 97 insertions(+), 1 deletion(-)
+ create mode 100644 Documentation/translations/zh_CN/vm/split_page_table_lock.rst
 
 diff --git a/Documentation/translations/zh_CN/vm/index.rst b/Documentation/translations/zh_CN/vm/index.rst
-index a2dea8b618ad..3e4f4cac509c 100644
+index 3e4f4cac509c..8c7d0b1e5c3e 100644
 --- a/Documentation/translations/zh_CN/vm/index.rst
 +++ b/Documentation/translations/zh_CN/vm/index.rst
-@@ -35,6 +35,7 @@ TODO:待引用文档集被翻译完毕后请及时修改此处）
-    page_frags
+@@ -36,6 +36,7 @@ TODO:待引用文档集被翻译完毕后请及时修改此处）
     page_owner
     page_table_check
-+   remap_file_pages
+    remap_file_pages
++   split_page_table_lock
  
  TODOLIST:
  * arch_pgtable_helpers
-@@ -43,7 +44,6 @@ TODOLIST:
- * hugetlbfs_reserv
+@@ -45,7 +46,6 @@ TODOLIST:
  * numa
  * page_migration
--* remap_file_pages
  * slub
- * split_page_table_lock
+-* split_page_table_lock
  * transhuge
-diff --git a/Documentation/translations/zh_CN/vm/remap_file_pages.rst b/Documentation/translations/zh_CN/vm/remap_file_pages.rst
+ * unevictable-lru
+ * vmalloced-kernel-stacks
+diff --git a/Documentation/translations/zh_CN/vm/split_page_table_lock.rst b/Documentation/translations/zh_CN/vm/split_page_table_lock.rst
 new file mode 100644
-index 000000000000..3e0e49b3dffb
+index 000000000000..50694d97c426
 --- /dev/null
-+++ b/Documentation/translations/zh_CN/vm/remap_file_pages.rst
-@@ -0,0 +1,32 @@
-+:Original: Documentation/vm/remap_file_pages.rst
++++ b/Documentation/translations/zh_CN/vm/split_page_table_lock.rst
+@@ -0,0 +1,96 @@
++:Original: Documentation/vm/split_page_table_lock.rst
 +
 +:翻译:
 +
@@ -118,30 +118,93 @@ index 000000000000..3e0e49b3dffb
 +:校译:
 +
 +
-+==============================
-+remap_file_pages()系统调用
-+==============================
++=================================
++分页表锁（split page table lock）
++=================================
 +
-+remap_file_pages()系统调用被用来创建一个非线性映射，也就是说，在这个映射中，
-+文件的页面被无序映射到内存中。使用remap_file_pages()比重复调用mmap(2)的好
-+处是，前者不需要内核创建额外的VMA（虚拟内存区）数据结构。
++最初，mm->page_table_lock spinlock保护了mm_struct的所有页表。但是这种方
++法导致了多线程应用程序的缺页异常可扩展性差，因为对锁的争夺很激烈。为了提高可扩
++展性，我们引入了分页表锁。
 +
-+支持非线性映射需要在内核虚拟内存子系统中编写大量的non-trivial的代码，包括热
-+路径。另外，为了使非线性映射工作，内核需要一种方法来区分正常的页表项和带有文件
-+偏移的项（pte_file）。内核为达到这个目的在PTE中保留了标志。PTE标志是稀缺资
-+源，特别是在某些CPU架构上。如果能腾出这个标志用于其他用途就更好了。
++有了分页表锁，我们就有了单独的每张表锁来顺序化对表的访问。目前，我们对PTE和
++PMD表使用分页锁。对高层表的访问由mm->page_table_lock保护。
 +
-+幸运的是，在生活中并没有很多remap_file_pages()的用户。只知道有一个企业的RDBMS
-+实现在32位系统上使用这个系统调用来映射比32位虚拟地址空间线性尺寸更大的文件。
-+由于64位系统的广泛使用，这种使用情况已经不重要了。
++有一些辅助工具来锁定/解锁一个表和其他访问器函数:
 +
-+syscall被废弃了，现在用一个模拟来代替它。仿真会创建新的VMA，而不是非线性映射。
-+对于remap_file_pages()的少数用户来说，它的工作速度会变慢，但ABI被保留了。
++ - pte_offset_map_lock()
++	映射pte并获取PTE表锁，返回所取锁的指针；
++ - pte_unmap_unlock()
++	解锁和解映射PTE表；
++ - pte_alloc_map_lock()
++	如果需要的话，分配PTE表并获取锁，如果分配失败，返回已获取的锁的指针
++	或NULL；
++ - pte_lockptr()
++	返回指向PTE表锁的指针；
++ - pmd_lock()
++	取得PMD表锁，返回所取锁的指针。
++ - pmd_lockptr()
++	返回指向PMD表锁的指针；
 +
-+仿真的一个副作用（除了性能之外）是，由于额外的VMA，用户可以更容易达到
-+vm.max_map_count的限制。关于限制的更多细节，请参见DEFAULT_MAX_MAP_COUNT
-+的注释。
-\ No newline at end of file
++如果CONFIG_SPLIT_PTLOCK_CPUS（通常为4）小于或等于NR_CPUS，则在编译
++时启用PTE表的分页表锁。如果分页锁被禁用，所有的表都由mm->page_table_lock
++来保护。
++
++如果PMD表启用了分页锁，并且架构支持它，那么PMD表的分页锁就会被启用（见
++下文）。
++
++Hugetlb 和分页表锁
++==================
++
++Hugetlb可以支持多种页面大小。我们只对PMD级别使用分页锁，但不对PUD使用。
++
++Hugetlb特定的辅助函数:
++
++ - huge_pte_lock()
++	对PMD_SIZE页面采取pmd分割锁，否则mm->page_table_lock；
++ - huge_pte_lockptr()
++	返回指向表锁的指针。
++
++架构对分页表锁的支持
++====================
++
++没有必要特别启用PTE分页表锁：所有需要的东西都由pgtable_pte_page_ctor()
++和pgtable_pte_page_dtor()完成，它们必须在PTE表分配/释放时被调用。
++
++确保架构不使用slab分配器来分配页表：slab使用page->slab_cache来分配其页
++面。这个区域与page->ptl共享存储。
++
++PMD分页锁只有在你有两个以上的页表级别时才有意义。
++
++启用PMD分页锁需要在PMD表分配时调用pgtable_pmd_page_ctor()，在释放时调
++用pgtable_pmd_page_dtor()。
++
++分配通常发生在pmd_alloc_one()中，释放发生在pmd_free()和pmd_free_tlb()
++中，但要确保覆盖所有的PMD表分配/释放路径：即X86_PAE在pgd_alloc()中预先
++分配一些PMD。
++
++一切就绪后，你可以设置CONFIG_ARCH_ENABLE_SPLIT_PMD_PTLOCK。
++
++注意：pgtable_pte_page_ctor()和pgtable_pmd_page_ctor()可能失败--必
++须正确处理。
++
++page->ptl
++=========
++
++page->ptl用于访问分割页表锁，其中'page'是包含该表的页面struct page。它
++与page->private（以及union中的其他几个字段）共享存储。
++
++为了避免增加struct page的大小并获得最佳性能，我们使用了一个技巧:
++
++ - 如果spinlock_t适合于long，我们使用page->ptr作为spinlock，这样我们
++   就可以避免间接访问并节省一个缓存行。
++ - 如果spinlock_t的大小大于long的大小，我们使用page->ptl作为spinlock_t
++   的指针并动态分配它。这允许在启用DEBUG_SPINLOCK或DEBUG_LOCK_ALLOC的
++   情况下使用分页锁，但由于间接访问而多花了一个缓存行。
++
++PTE表的spinlock_t分配在pgtable_pte_page_ctor()中，PMD表的spinlock_t
++分配在pgtable_pmd_page_ctor()中。
++
++请不要直接访问page->ptl - -使用适当的辅助函数。
 -- 
 2.27.0
 
