@@ -2,230 +2,233 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 56A0B4DC1DD
-	for <lists+linux-doc@lfdr.de>; Thu, 17 Mar 2022 09:50:19 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 05BC24DC18B
+	for <lists+linux-doc@lfdr.de>; Thu, 17 Mar 2022 09:43:11 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S231192AbiCQIu7 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 17 Mar 2022 04:50:59 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:43352 "EHLO
+        id S230307AbiCQIoY (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 17 Mar 2022 04:44:24 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:55836 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S231143AbiCQIu6 (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Thu, 17 Mar 2022 04:50:58 -0400
-Received: from smtp-190e.mail.infomaniak.ch (smtp-190e.mail.infomaniak.ch [185.125.25.14])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 404C9D1CFB
-        for <linux-doc@vger.kernel.org>; Thu, 17 Mar 2022 01:49:41 -0700 (PDT)
-Received: from smtp-3-0000.mail.infomaniak.ch (unknown [10.4.36.107])
-        by smtp-3-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4KK0pf5LWCzMq31C;
-        Thu, 17 Mar 2022 09:35:54 +0100 (CET)
-Received: from ns3096276.ip-94-23-54.eu (unknown [23.97.221.149])
-        by smtp-3-0000.mail.infomaniak.ch (Postfix) with ESMTPA id 4KK0pd1DtQzlhRV1;
-        Thu, 17 Mar 2022 09:35:53 +0100 (CET)
-Message-ID: <ed8467f2-dcd0-bc2f-8e98-1d9129fb2c30@digikod.net>
-Date:   Thu, 17 Mar 2022 09:36:36 +0100
+        with ESMTP id S229890AbiCQIoX (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Thu, 17 Mar 2022 04:44:23 -0400
+Received: from mail-qv1-xf30.google.com (mail-qv1-xf30.google.com [IPv6:2607:f8b0:4864:20::f30])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id EE2407DAB9
+        for <linux-doc@vger.kernel.org>; Thu, 17 Mar 2022 01:43:06 -0700 (PDT)
+Received: by mail-qv1-xf30.google.com with SMTP id kl20so3706441qvb.10
+        for <linux-doc@vger.kernel.org>; Thu, 17 Mar 2022 01:43:06 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=google.com; s=20210112;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc;
+        bh=qJ5324mXHmvmdy0RadTI1yXZIuPol7vGmq96jYGkv+E=;
+        b=NNBZ9VphAmb4E1ipnE9WDRoZFhKMvDCB7MUeuTp8jEqeXdDxYz0OkjDN6SRKIoBsG0
+         5wJOSNZakF2vhUqGTyWh7DditsA/GzgnkwuLrXbbg9ZCVF7h+ekIh7MmrC1OG/3yUtLK
+         LCBeldb9MMNRE8oZwTAQ8E5VN9QMZuIMYxjKEjEgT2n+Lkgu1Z/MnSPr4WE1sJxp1KQo
+         bXux3GVHHErK3+F7ibVMmbmWbWkUfVsnLhDqVOlNFFM/vqk9krzLABLoJdQ/IstIQMhp
+         JY/yC/KcwAJj5tCQ8DX6rrfbTx1/7JBTHX9cDSmXbzzbLEky9OYeZN1Ugth7/SKVR5RP
+         XmgA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=qJ5324mXHmvmdy0RadTI1yXZIuPol7vGmq96jYGkv+E=;
+        b=c8P3u9AFt1mot72CDBXmupxd01UNd2a2jCP7rZQtAmLg9gNZH1tZTtMTjfTrKc4T0I
+         KhSHaC/8PEJVK0/T9eZqjv3TX3PN9/n5sC8QymKnYOQpRBU0FNbLc7rm6o3eIGB/P1Fw
+         1d+0Wgj+QdwWg8Z6SONifUyiEXt8aRXO8DJFEmPuGiKrc6A5ZPV6KXM6uKjEP0GRVInI
+         X8Vo3hCoYRnYkiRxQ1ixgtmCUXRCOeUc8ckrQGMpXoS+hXq5ZVK5t1UvsE8BngOiKx8J
+         y34T8zhkTMsM5XJVi+bInAySX3fWYgewJeCJgxP5/4c7oTrdUPKgikMS7HzGcEKBZZr8
+         ApCQ==
+X-Gm-Message-State: AOAM533oL8iSjpU5rPfaFuFr0RsjUkZmZK2kuxHZ6qY3RovthwIBjMDG
+        pgZlz8SopfBjGeVM5QoboqOXzB/vBjxi9PbRfSSLbQ==
+X-Google-Smtp-Source: ABdhPJyMaPc+wBVz0IYSasdBtgb8T2E7a2EUZN9kgmCOuoZkWd/JEx7gXuELJXoMc1WGWhFBoNA5i3897Jj4qXASHbc=
+X-Received: by 2002:a05:6214:29c7:b0:435:d0ae:dcd9 with SMTP id
+ gh7-20020a05621429c700b00435d0aedcd9mr2559194qvb.101.1647506585131; Thu, 17
+ Mar 2022 01:43:05 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: 
-Content-Language: en-US
-To:     Paul Moore <paul@paul-moore.com>
-Cc:     James Morris <jmorris@namei.org>,
-        "Serge E . Hallyn" <serge@hallyn.com>,
-        Al Viro <viro@zeniv.linux.org.uk>,
-        Jann Horn <jannh@google.com>,
+References: <20220316202622.324866-1-frowand.list@gmail.com>
+In-Reply-To: <20220316202622.324866-1-frowand.list@gmail.com>
+From:   David Gow <davidgow@google.com>
+Date:   Thu, 17 Mar 2022 16:42:50 +0800
+Message-ID: <CABVgOSmkvxhHSJx0W6BEYz=Ai9vB=nCz625dSKLLUfU0rMLkFA@mail.gmail.com>
+Subject: Re: [RFC PATCH 0/2] Documentation: dev-tools: begin KTAP spec v2 process
+To:     Frank Rowand <frowand.list@gmail.com>
+Cc:     Jonathan Corbet <corbet@lwn.net>,
+        Shuah Khan <skhan@linuxfoundation.org>,
         Kees Cook <keescook@chromium.org>,
-        Konstantin Meskhidze <konstantin.meskhidze@huawei.com>,
-        Shuah Khan <shuah@kernel.org>, linux-doc@vger.kernel.org,
-        linux-fsdevel@vger.kernel.org, linux-kernel@vger.kernel.org,
-        linux-security-module@vger.kernel.org,
-        =?UTF-8?Q?Micka=c3=abl_Sala=c3=bcn?= <mic@linux.microsoft.com>
-References: <20220221212522.320243-1-mic@digikod.net>
- <20220221212522.320243-2-mic@digikod.net>
- <CAHC9VhQEEKGgCn7fYgUt-_WhXc-vrKq9TVm=cfwJUyWaUgY2Vw@mail.gmail.com>
-From:   =?UTF-8?Q?Micka=c3=abl_Sala=c3=bcn?= <mic@digikod.net>
-Subject: Re: [PATCH v1 01/11] landlock: Define access_mask_t to enforce a
- consistent access mask size
-In-Reply-To: <CAHC9VhQEEKGgCn7fYgUt-_WhXc-vrKq9TVm=cfwJUyWaUgY2Vw@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_LOW,
-        RCVD_IN_MSPIKE_H5,RCVD_IN_MSPIKE_WL,SPF_HELO_NONE,SPF_PASS,
-        T_SCC_BODY_TEXT_LINE autolearn=unavailable autolearn_force=no
-        version=3.4.6
+        "Bird, Tim" <Tim.Bird@sony.com>,
+        Brendan Higgins <brendanhiggins@google.com>,
+        Rae Moar <rmr167@gmail.com>,
+        Guillaume Tucker <guillaume.tucker@collabora.com>,
+        Daniel Latypov <dlatypov@google.com>, kernelci@groups.io,
+        KUnit Development <kunit-dev@googlegroups.com>,
+        "open list:KERNEL SELFTEST FRAMEWORK" 
+        <linux-kselftest@vger.kernel.org>,
+        "open list:DOCUMENTATION" <linux-doc@vger.kernel.org>,
+        Linux Kernel Mailing List <linux-kernel@vger.kernel.org>
+Content-Type: multipart/signed; protocol="application/pkcs7-signature"; micalg=sha-256;
+        boundary="000000000000cbdd4605da6604b0"
+X-Spam-Status: No, score=-17.6 required=5.0 tests=BAYES_00,DKIMWL_WL_MED,
+        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,
+        ENV_AND_HDR_SPF_MATCH,RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,SPF_PASS,
+        T_SCC_BODY_TEXT_LINE,USER_IN_DEF_DKIM_WL,USER_IN_DEF_SPF_WL
+        autolearn=ham autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
+--000000000000cbdd4605da6604b0
+Content-Type: text/plain; charset="UTF-8"
 
-On 17/03/2022 02:26, Paul Moore wrote:
-> On Mon, Feb 21, 2022 at 4:15 PM Mickaël Salaün <mic@digikod.net> wrote:
->>
->> From: Mickaël Salaün <mic@linux.microsoft.com>
->>
->> Create and use the access_mask_t typedef to enforce a consistent access
->> mask size and uniformly use a 16-bits type.  This will helps transition
->> to a 32-bits value one day.
->>
->> Add a build check to make sure all (filesystem) access rights fit in.
->> This will be extended with a following commit.
->>
->> Signed-off-by: Mickaël Salaün <mic@linux.microsoft.com>
->> Link: https://lore.kernel.org/r/20220221212522.320243-2-mic@digikod.net
->> ---
->>   security/landlock/fs.c      | 19 ++++++++++---------
->>   security/landlock/fs.h      |  2 +-
->>   security/landlock/limits.h  |  2 ++
->>   security/landlock/ruleset.c |  6 ++++--
->>   security/landlock/ruleset.h | 17 +++++++++++++----
->>   5 files changed, 30 insertions(+), 16 deletions(-)
->>
->> diff --git a/security/landlock/fs.c b/security/landlock/fs.c
->> index 97b8e421f617..9de2a460a762 100644
->> --- a/security/landlock/fs.c
->> +++ b/security/landlock/fs.c
->> @@ -150,7 +150,7 @@ static struct landlock_object *get_inode_object(struct inode *const inode)
->>    * @path: Should have been checked by get_path_from_fd().
->>    */
->>   int landlock_append_fs_rule(struct landlock_ruleset *const ruleset,
->> -               const struct path *const path, u32 access_rights)
->> +               const struct path *const path, access_mask_t access_rights)
->>   {
->>          int err;
->>          struct landlock_object *object;
->> @@ -182,8 +182,8 @@ int landlock_append_fs_rule(struct landlock_ruleset *const ruleset,
->>
->>   static inline u64 unmask_layers(
->>                  const struct landlock_ruleset *const domain,
->> -               const struct path *const path, const u32 access_request,
->> -               u64 layer_mask)
->> +               const struct path *const path,
->> +               const access_mask_t access_request, u64 layer_mask)
->>   {
->>          const struct landlock_rule *rule;
->>          const struct inode *inode;
->> @@ -223,7 +223,8 @@ static inline u64 unmask_layers(
->>   }
->>
->>   static int check_access_path(const struct landlock_ruleset *const domain,
->> -               const struct path *const path, u32 access_request)
->> +               const struct path *const path,
->> +               const access_mask_t access_request)
->>   {
->>          bool allowed = false;
->>          struct path walker_path;
->> @@ -308,7 +309,7 @@ static int check_access_path(const struct landlock_ruleset *const domain,
->>   }
->>
->>   static inline int current_check_access_path(const struct path *const path,
->> -               const u32 access_request)
->> +               const access_mask_t access_request)
->>   {
->>          const struct landlock_ruleset *const dom =
->>                  landlock_get_current_domain();
->> @@ -511,7 +512,7 @@ static int hook_sb_pivotroot(const struct path *const old_path,
->>
->>   /* Path hooks */
->>
->> -static inline u32 get_mode_access(const umode_t mode)
->> +static inline access_mask_t get_mode_access(const umode_t mode)
->>   {
->>          switch (mode & S_IFMT) {
->>          case S_IFLNK:
->> @@ -563,7 +564,7 @@ static int hook_path_link(struct dentry *const old_dentry,
->>                          get_mode_access(d_backing_inode(old_dentry)->i_mode));
->>   }
->>
->> -static inline u32 maybe_remove(const struct dentry *const dentry)
->> +static inline access_mask_t maybe_remove(const struct dentry *const dentry)
->>   {
->>          if (d_is_negative(dentry))
->>                  return 0;
->> @@ -631,9 +632,9 @@ static int hook_path_rmdir(const struct path *const dir,
->>
->>   /* File hooks */
->>
->> -static inline u32 get_file_access(const struct file *const file)
->> +static inline access_mask_t get_file_access(const struct file *const file)
->>   {
->> -       u32 access = 0;
->> +       access_mask_t access = 0;
->>
->>          if (file->f_mode & FMODE_READ) {
->>                  /* A directory can only be opened in read mode. */
->> diff --git a/security/landlock/fs.h b/security/landlock/fs.h
->> index 187284b421c9..74be312aad96 100644
->> --- a/security/landlock/fs.h
->> +++ b/security/landlock/fs.h
->> @@ -65,6 +65,6 @@ static inline struct landlock_superblock_security *landlock_superblock(
->>   __init void landlock_add_fs_hooks(void);
->>
->>   int landlock_append_fs_rule(struct landlock_ruleset *const ruleset,
->> -               const struct path *const path, u32 access_hierarchy);
->> +               const struct path *const path, access_mask_t access_hierarchy);
->>
->>   #endif /* _SECURITY_LANDLOCK_FS_H */
->> diff --git a/security/landlock/limits.h b/security/landlock/limits.h
->> index 2a0a1095ee27..458d1de32ed5 100644
->> --- a/security/landlock/limits.h
->> +++ b/security/landlock/limits.h
->> @@ -9,6 +9,7 @@
->>   #ifndef _SECURITY_LANDLOCK_LIMITS_H
->>   #define _SECURITY_LANDLOCK_LIMITS_H
->>
->> +#include <linux/bitops.h>
->>   #include <linux/limits.h>
->>   #include <uapi/linux/landlock.h>
->>
->> @@ -17,5 +18,6 @@
->>
->>   #define LANDLOCK_LAST_ACCESS_FS                LANDLOCK_ACCESS_FS_MAKE_SYM
->>   #define LANDLOCK_MASK_ACCESS_FS                ((LANDLOCK_LAST_ACCESS_FS << 1) - 1)
->> +#define LANDLOCK_NUM_ACCESS_FS         __const_hweight64(LANDLOCK_MASK_ACCESS_FS)
-> 
-> The line above, and the static_assert() in ruleset.h are clever.  I'll
-> admit I didn't even know the hweightX() macros existed until looking
-> at this code :)
-> 
-> However, the LANDLOCK_NUM_ACCESS_FS is never really going to be used
-> outside the static_assert() in ruleset.h is it?  I wonder if it would
-> be better to skip the extra macro and rewrite the static_assert like
-> this:
-> 
-> static_assert(BITS_PER_TYPE(access_mask_t) >=
-> __const_hweight64(LANDLOCK_MASK_ACCESS_FS));
-> 
-> If not, I might suggest changing LANDLOCK_NUM_ACCESS_FS to
-> LANDLOCK_BITS_ACCESS_FS or something similar.
+On Thu, Mar 17, 2022 at 4:26 AM <frowand.list@gmail.com> wrote:
+>
+> From: Frank Rowand <frank.rowand@sony.com>
+>
+> An August 2021 RFC patch [1] to create the KTAP Specification resulted in
+> some discussion of possible items to add to the specification.
+> The conversation ended without completing the document.
+>
+> Progress resumed with a December 2021 RFC patch [2] to add a KTAP
+> Specification file (Version 1) to the Linux kernel.  Many of the
+> suggestions from the August 2021 discussion were not included in
+> Version 1.  This patch series is intended to revisit some of the
+> suggestions from the August 2021 discussion.
 
-I declared LANDLOCK_NUM_ACCESS_FS in this patch to be able to have the 
-static_assert() here and ease the review, but LANDLOCK_NUM_ACCESS_FS is 
-really used in patch 6/11 to define an array size: 
-get_handled_acceses(), init_layer_masks(), is_superset(), 
-check_access_path_dual()…
+Thanks for kicking this off again. There were definitely a lot of good
+ideas in those threads which we haven't got to yet.
 
+I think there is an interesting line to walk between keeping KTAP
+sufficiently "TAP-like" (particularly w/r/t being able to reuse
+existing TAP parsers), and actually adding features, but I don't
+recall seeing many such issues in the previous threads.
 
-> 
-> 
->> diff --git a/security/landlock/ruleset.h b/security/landlock/ruleset.h
->> index 2d3ed7ec5a0a..7e7cac68e443 100644
->> --- a/security/landlock/ruleset.h
->> +++ b/security/landlock/ruleset.h
->> @@ -9,13 +9,20 @@
->>   #ifndef _SECURITY_LANDLOCK_RULESET_H
->>   #define _SECURITY_LANDLOCK_RULESET_H
->>
->> +#include <linux/bitops.h>
->> +#include <linux/build_bug.h>
->>   #include <linux/mutex.h>
->>   #include <linux/rbtree.h>
->>   #include <linux/refcount.h>
->>   #include <linux/workqueue.h>
->>
->> +#include "limits.h"
->>   #include "object.h"
->>
->> +typedef u16 access_mask_t;
->> +/* Makes sure all filesystem access rights can be stored. */
->> +static_assert(BITS_PER_TYPE(access_mask_t) >= LANDLOCK_NUM_ACCESS_FS);
-> 
+>
+> Patch 1 changes the Specification version to "2-rc" to indicate
+> that following patches are not yet accepted into a final version 2.
+
+I'm okay with this, though I'd want us to be a little careful with the
+timing so we don't end up with, for example, 5.18 having a KTAP spec
+called 2-rc which is functionally indistinguishable from v1.
+
+>
+> Patch 2 is an example of a simple change to the Specification.  The
+> change does not change the content of the Specification, but updates
+> a formatting directive as suggested by the Documentation maintainer.
+
+Thanks -- personally, I'd rather this change _does_ go in straight
+away, even before the 2-rc renaming.
+
+> I intend to take some specific suggestions from the August 2021
+> discussion to create stand-alone RFC patches to the Specification
+> instead of adding them as additional patches in this series.  The
+> intent is to focus discussion on a single area of the Specification
+> in each patch email thread.
+
+Seems like a sensible way to structure the discussion. It could get a
+little bit messy if there end up being merge conflicts, but the whole
+thing could be collapsed into a single patchset later if that ended up
+making more sense. (Though that might remove the need for the "rc"
+version, depending on exactly when and how it happened.)
+
+I'd also be curious to see patches to tests and/or test parsers to
+show off any particularly compatibility-breaking and/or interesting
+changes, though I don't think that _has_ to be a prerequisite for
+discussion or the spec.
+
+>
+> [1] https://lore.kernel.org/r/CA+GJov6tdjvY9x12JsJT14qn6c7NViJxqaJk+r-K1YJzPggFDQ@mail.gmail.com
+> [2] https://lore.kernel.org/r/20211207190251.18426-1-davidgow@google.com
+>
+> Frank Rowand (2):
+>   Documentation: dev-tools: KTAP spec change version to 2-rc
+>   Documentation: dev-tools: use literal block instead of code-block
+>
+>  Documentation/dev-tools/ktap.rst | 20 +++++++++-----------
+>  1 file changed, 9 insertions(+), 11 deletions(-)
+>
 > --
-> paul-moore.com
+> Frank Rowand <frank.rowand@sony.com>
+>
+
+Cheers,
+-- David
+
+--000000000000cbdd4605da6604b0
+Content-Type: application/pkcs7-signature; name="smime.p7s"
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment; filename="smime.p7s"
+Content-Description: S/MIME Cryptographic Signature
+
+MIIPnwYJKoZIhvcNAQcCoIIPkDCCD4wCAQExDzANBglghkgBZQMEAgEFADALBgkqhkiG9w0BBwGg
+ggz5MIIEtjCCA56gAwIBAgIQeAMYYHb81ngUVR0WyMTzqzANBgkqhkiG9w0BAQsFADBMMSAwHgYD
+VQQLExdHbG9iYWxTaWduIFJvb3QgQ0EgLSBSMzETMBEGA1UEChMKR2xvYmFsU2lnbjETMBEGA1UE
+AxMKR2xvYmFsU2lnbjAeFw0yMDA3MjgwMDAwMDBaFw0yOTAzMTgwMDAwMDBaMFQxCzAJBgNVBAYT
+AkJFMRkwFwYDVQQKExBHbG9iYWxTaWduIG52LXNhMSowKAYDVQQDEyFHbG9iYWxTaWduIEF0bGFz
+IFIzIFNNSU1FIENBIDIwMjAwggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQCvLe9xPU9W
+dpiHLAvX7kFnaFZPuJLey7LYaMO8P/xSngB9IN73mVc7YiLov12Fekdtn5kL8PjmDBEvTYmWsuQS
+6VBo3vdlqqXZ0M9eMkjcKqijrmDRleudEoPDzTumwQ18VB/3I+vbN039HIaRQ5x+NHGiPHVfk6Rx
+c6KAbYceyeqqfuJEcq23vhTdium/Bf5hHqYUhuJwnBQ+dAUcFndUKMJrth6lHeoifkbw2bv81zxJ
+I9cvIy516+oUekqiSFGfzAqByv41OrgLV4fLGCDH3yRh1tj7EtV3l2TngqtrDLUs5R+sWIItPa/4
+AJXB1Q3nGNl2tNjVpcSn0uJ7aFPbAgMBAAGjggGKMIIBhjAOBgNVHQ8BAf8EBAMCAYYwHQYDVR0l
+BBYwFAYIKwYBBQUHAwIGCCsGAQUFBwMEMBIGA1UdEwEB/wQIMAYBAf8CAQAwHQYDVR0OBBYEFHzM
+CmjXouseLHIb0c1dlW+N+/JjMB8GA1UdIwQYMBaAFI/wS3+oLkUkrk1Q+mOai97i3Ru8MHsGCCsG
+AQUFBwEBBG8wbTAuBggrBgEFBQcwAYYiaHR0cDovL29jc3AyLmdsb2JhbHNpZ24uY29tL3Jvb3Ry
+MzA7BggrBgEFBQcwAoYvaHR0cDovL3NlY3VyZS5nbG9iYWxzaWduLmNvbS9jYWNlcnQvcm9vdC1y
+My5jcnQwNgYDVR0fBC8wLTAroCmgJ4YlaHR0cDovL2NybC5nbG9iYWxzaWduLmNvbS9yb290LXIz
+LmNybDBMBgNVHSAERTBDMEEGCSsGAQQBoDIBKDA0MDIGCCsGAQUFBwIBFiZodHRwczovL3d3dy5n
+bG9iYWxzaWduLmNvbS9yZXBvc2l0b3J5LzANBgkqhkiG9w0BAQsFAAOCAQEANyYcO+9JZYyqQt41
+TMwvFWAw3vLoLOQIfIn48/yea/ekOcParTb0mbhsvVSZ6sGn+txYAZb33wIb1f4wK4xQ7+RUYBfI
+TuTPL7olF9hDpojC2F6Eu8nuEf1XD9qNI8zFd4kfjg4rb+AME0L81WaCL/WhP2kDCnRU4jm6TryB
+CHhZqtxkIvXGPGHjwJJazJBnX5NayIce4fGuUEJ7HkuCthVZ3Rws0UyHSAXesT/0tXATND4mNr1X
+El6adiSQy619ybVERnRi5aDe1PTwE+qNiotEEaeujz1a/+yYaaTY+k+qJcVxi7tbyQ0hi0UB3myM
+A/z2HmGEwO8hx7hDjKmKbDCCA18wggJHoAMCAQICCwQAAAAAASFYUwiiMA0GCSqGSIb3DQEBCwUA
+MEwxIDAeBgNVBAsTF0dsb2JhbFNpZ24gUm9vdCBDQSAtIFIzMRMwEQYDVQQKEwpHbG9iYWxTaWdu
+MRMwEQYDVQQDEwpHbG9iYWxTaWduMB4XDTA5MDMxODEwMDAwMFoXDTI5MDMxODEwMDAwMFowTDEg
+MB4GA1UECxMXR2xvYmFsU2lnbiBSb290IENBIC0gUjMxEzARBgNVBAoTCkdsb2JhbFNpZ24xEzAR
+BgNVBAMTCkdsb2JhbFNpZ24wggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQDMJXaQeQZ4
+Ihb1wIO2hMoonv0FdhHFrYhy/EYCQ8eyip0EXyTLLkvhYIJG4VKrDIFHcGzdZNHr9SyjD4I9DCuu
+l9e2FIYQebs7E4B3jAjhSdJqYi8fXvqWaN+JJ5U4nwbXPsnLJlkNc96wyOkmDoMVxu9bi9IEYMpJ
+pij2aTv2y8gokeWdimFXN6x0FNx04Druci8unPvQu7/1PQDhBjPogiuuU6Y6FnOM3UEOIDrAtKeh
+6bJPkC4yYOlXy7kEkmho5TgmYHWyn3f/kRTvriBJ/K1AFUjRAjFhGV64l++td7dkmnq/X8ET75ti
++w1s4FRpFqkD2m7pg5NxdsZphYIXAgMBAAGjQjBAMA4GA1UdDwEB/wQEAwIBBjAPBgNVHRMBAf8E
+BTADAQH/MB0GA1UdDgQWBBSP8Et/qC5FJK5NUPpjmove4t0bvDANBgkqhkiG9w0BAQsFAAOCAQEA
+S0DbwFCq/sgM7/eWVEVJu5YACUGssxOGhigHM8pr5nS5ugAtrqQK0/Xx8Q+Kv3NnSoPHRHt44K9u
+bG8DKY4zOUXDjuS5V2yq/BKW7FPGLeQkbLmUY/vcU2hnVj6DuM81IcPJaP7O2sJTqsyQiunwXUaM
+ld16WCgaLx3ezQA3QY/tRG3XUyiXfvNnBB4V14qWtNPeTCekTBtzc3b0F5nCH3oO4y0IrQocLP88
+q1UOD5F+NuvDV0m+4S4tfGCLw0FREyOdzvcya5QBqJnnLDMfOjsl0oZAzjsshnjJYS8Uuu7bVW/f
+hO4FCU29KNhyztNiUGUe65KXgzHZs7XKR1g/XzCCBNgwggPAoAMCAQICEAFB5XJs46lHhs45dlgv
+lPcwDQYJKoZIhvcNAQELBQAwVDELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
+c2ExKjAoBgNVBAMTIUdsb2JhbFNpZ24gQXRsYXMgUjMgU01JTUUgQ0EgMjAyMDAeFw0yMjAyMDcy
+MDA0MDZaFw0yMjA4MDYyMDA0MDZaMCQxIjAgBgkqhkiG9w0BCQEWE2RhdmlkZ293QGdvb2dsZS5j
+b20wggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQC0RBy/38QAswohnM4+BbSvCjgfqx6l
+RZ05OpnPrwqbR8foYkoeQ8fvsoU+MkOAQlzaA5IaeOc6NZYDYl7PyNLLSdnRwaXUkHOJIn09IeqE
+9aKAoxWV8wiieIh3izFAHR+qm0hdG+Uet3mU85dzScP5UtFgctSEIH6Ay6pa5E2gdPEtO5frCOq2
+PpOgBNfXVa5nZZzgWOqtL44txbQw/IsOJ9VEC8Y+4+HtMIsnAtHem5wcQJ+MqKWZ0okg/wYl/PUj
+uaq2nM/5+Waq7BlBh+Wh4NoHIJbHHeGzAxeBcOU/2zPbSHpAcZ4WtpAKGvp67PlRYKSFXZvbORQz
+LdciYl8fAgMBAAGjggHUMIIB0DAeBgNVHREEFzAVgRNkYXZpZGdvd0Bnb29nbGUuY29tMA4GA1Ud
+DwEB/wQEAwIFoDAdBgNVHSUEFjAUBggrBgEFBQcDBAYIKwYBBQUHAwIwHQYDVR0OBBYEFKbSiBVQ
+G7p3AiuB2sgfq6cOpbO5MEwGA1UdIARFMEMwQQYJKwYBBAGgMgEoMDQwMgYIKwYBBQUHAgEWJmh0
+dHBzOi8vd3d3Lmdsb2JhbHNpZ24uY29tL3JlcG9zaXRvcnkvMAwGA1UdEwEB/wQCMAAwgZoGCCsG
+AQUFBwEBBIGNMIGKMD4GCCsGAQUFBzABhjJodHRwOi8vb2NzcC5nbG9iYWxzaWduLmNvbS9jYS9n
+c2F0bGFzcjNzbWltZWNhMjAyMDBIBggrBgEFBQcwAoY8aHR0cDovL3NlY3VyZS5nbG9iYWxzaWdu
+LmNvbS9jYWNlcnQvZ3NhdGxhc3Izc21pbWVjYTIwMjAuY3J0MB8GA1UdIwQYMBaAFHzMCmjXouse
+LHIb0c1dlW+N+/JjMEYGA1UdHwQ/MD0wO6A5oDeGNWh0dHA6Ly9jcmwuZ2xvYmFsc2lnbi5jb20v
+Y2EvZ3NhdGxhc3Izc21pbWVjYTIwMjAuY3JsMA0GCSqGSIb3DQEBCwUAA4IBAQBsL34EJkCtu9Nu
+2+R6l1Qzno5Gl+N2Cm6/YLujukDGYa1JW27txXiilR9dGP7yl60HYyG2Exd5i6fiLDlaNEw0SqzE
+dw9ZSIak3Qvm2UybR8zcnB0deCUiwahqh7ZncEPlhnPpB08ETEUtwBEqCEnndNEkIN67yz4kniCZ
+jZstNF/BUnI3864fATiXSbnNqBwlJS3YkoaCTpbI9qNTrf5VIvnbryT69xJ6f25yfmxrXNJJe5OG
+ncB34Cwnb7xQyk+uRLZ465yUBkbjk9pC/yamL0O7SOGYUclrQl2c5zzGuVBD84YcQGDOK6gSPj6w
+QuBfOooZPOyZZZ8AMih7J980MYICajCCAmYCAQEwaDBUMQswCQYDVQQGEwJCRTEZMBcGA1UEChMQ
+R2xvYmFsU2lnbiBudi1zYTEqMCgGA1UEAxMhR2xvYmFsU2lnbiBBdGxhcyBSMyBTTUlNRSBDQSAy
+MDIwAhABQeVybOOpR4bOOXZYL5T3MA0GCWCGSAFlAwQCAQUAoIHUMC8GCSqGSIb3DQEJBDEiBCBn
+daIT+gpBNflXR4eLXrgbGfvj3MmwMqJl0RWGuPkw1DAYBgkqhkiG9w0BCQMxCwYJKoZIhvcNAQcB
+MBwGCSqGSIb3DQEJBTEPFw0yMjAzMTcwODQzMDVaMGkGCSqGSIb3DQEJDzFcMFowCwYJYIZIAWUD
+BAEqMAsGCWCGSAFlAwQBFjALBglghkgBZQMEAQIwCgYIKoZIhvcNAwcwCwYJKoZIhvcNAQEKMAsG
+CSqGSIb3DQEBBzALBglghkgBZQMEAgEwDQYJKoZIhvcNAQEBBQAEggEAo8L6wf0I/ZY1xewwSQTI
+EhaTLXZy/q023l2Lse8T/Zpk9V0p80n8P9lnY9fj8Pzs4YRM7NWQywvXhI8JctLfQIPpKN6cP4WZ
+ke44wDVqyD2WZJCFeumnrS3TRLKXYKZ9NjQ7BWRvxsogcsgKmPRrEbDb6OiWz1fbNCjWhrl6rzyy
+usM5r4ZheVxA55ua/MleCH8DnzVwNIardaYtA3hDap4D8fA4PeGFWAxlos++gyKaLLF9UijfNmyw
+zKPd01WixgDbhL4f5Z60VRry/0ntcMF68A0HEUvSx2XrtNvl+SDdltYB6+SRjVdUMQ6Yib6KHAjp
+R0Xsncfu+A1WRlXOIg==
+--000000000000cbdd4605da6604b0--
