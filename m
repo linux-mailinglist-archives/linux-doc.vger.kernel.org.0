@@ -2,118 +2,113 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id F3E224E3389
-	for <lists+linux-doc@lfdr.de>; Mon, 21 Mar 2022 23:56:51 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 730CE4E33D3
+	for <lists+linux-doc@lfdr.de>; Tue, 22 Mar 2022 00:11:19 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S230149AbiCUWua (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 21 Mar 2022 18:50:30 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:34272 "EHLO
+        id S231374AbiCUXBG (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 21 Mar 2022 19:01:06 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:44206 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S230230AbiCUWuQ (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Mon, 21 Mar 2022 18:50:16 -0400
-Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.133.124])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTP id CACEB370C8C
-        for <linux-doc@vger.kernel.org>; Mon, 21 Mar 2022 15:30:10 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-        s=mimecast20190719; t=1647901809;
-        h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-         to:to:cc:cc:mime-version:mime-version:
-         content-transfer-encoding:content-transfer-encoding;
-        bh=EAE8HCtpjM+jUc1ApTBvyoxBSZREVuBpm/2ip+JPuvw=;
-        b=g3xaE9ts4I5zA/pQyhDUnSj3damHaMO3Yj9chLDNMvrH0e4NOKUF3iUbtuNf6CqkKXgZtK
-        j8zBKaRtV6GeN1vxq6huZ+ZdiS5vq2kVllc363sMkny7Kd5myoo45YoycskZUUshOq7F6G
-        DZwpPHvPWgQKAGFpdrSVai7A8CLpndg=
-Received: from mail-qt1-f199.google.com (mail-qt1-f199.google.com
- [209.85.160.199]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- us-mta-323-x7dkvXqyNu2Ix8rmMfkvhg-1; Mon, 21 Mar 2022 18:04:24 -0400
-X-MC-Unique: x7dkvXqyNu2Ix8rmMfkvhg-1
-Received: by mail-qt1-f199.google.com with SMTP id t26-20020ac8739a000000b002e06aa03d4cso10247181qtp.13
-        for <linux-doc@vger.kernel.org>; Mon, 21 Mar 2022 15:04:24 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=EAE8HCtpjM+jUc1ApTBvyoxBSZREVuBpm/2ip+JPuvw=;
-        b=1aEoXWJgGmcKZa3D4p9WVqTdie06IwQRkh2RxRPpj/40LlonJ3ytIZpoalVHkbKrl8
-         vgxhUBarx7iKfGsV/BjS5Zm3SePl+ivlmD27maL7vu5QU8xN7eiTSQirL3vT33a1VhYc
-         6OAvL4AAbVAvnDDfHOho5wtUulvAbdWT56Bl5DgE8G5W6FYP5E6FmFPMvGAexMfHZPOi
-         L74EoaF50KQRB+Qe0/KMk1xROH8i1yoJR63dJCgDKXuaoM+iE6YnGhCG2oHeLKevDOys
-         4JdvIPsJLuQCTPFEIbY1toNX0/k1s8p0YlzJUNXqgoXHWaQKd8eEE1E2o/YThHvARXhp
-         RYxQ==
-X-Gm-Message-State: AOAM531Lp1iuiGi3jAwlKjmRYBWzg5c/vP0o2kl3MrLLi9YgB+ek/Laj
-        gYOSD6NwT1auWLJqE9nTBfa89q1b0q0kk5UymxvrwW23Vq924Sev+fqls7nowETyRKG/tWtVpY5
-        gS4KRbVe/TgiNXpKfRZFX
-X-Received: by 2002:a05:622a:13d2:b0:2e1:eedb:c81a with SMTP id p18-20020a05622a13d200b002e1eedbc81amr17047685qtk.437.1647900263482;
-        Mon, 21 Mar 2022 15:04:23 -0700 (PDT)
-X-Google-Smtp-Source: ABdhPJy1U5Tj/wJe6NsZNnB2FgrrKyvSVD8FAkqs6udLgi3vy3yBsH2/Xd1pfjMZojGr6sjDBC2Sug==
-X-Received: by 2002:a05:622a:13d2:b0:2e1:eedb:c81a with SMTP id p18-20020a05622a13d200b002e1eedbc81amr17047671qtk.437.1647900263231;
-        Mon, 21 Mar 2022 15:04:23 -0700 (PDT)
-Received: from localhost.localdomain.com (024-205-208-113.res.spectrum.com. [24.205.208.113])
-        by smtp.gmail.com with ESMTPSA id de26-20020a05620a371a00b0067dc7923b14sm8218854qkb.132.2022.03.21.15.04.21
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 21 Mar 2022 15:04:22 -0700 (PDT)
-From:   trix@redhat.com
-To:     corbet@lwn.net, dan.j.williams@intel.com
-Cc:     linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
-        Tom Rix <trix@redhat.com>
-Subject: [PATCH] nvdimm/blk: Fix title level
-Date:   Mon, 21 Mar 2022 15:04:08 -0700
-Message-Id: <20220321220408.2381974-1-trix@redhat.com>
-X-Mailer: git-send-email 2.26.3
+        with ESMTP id S232616AbiCUW6b (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Mon, 21 Mar 2022 18:58:31 -0400
+Received: from mout.kundenserver.de (mout.kundenserver.de [212.227.17.13])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id B9D62459006;
+        Mon, 21 Mar 2022 15:36:44 -0700 (PDT)
+Received: from mail-wr1-f45.google.com ([209.85.221.45]) by
+ mrelayeu.kundenserver.de (mreue107 [213.165.67.113]) with ESMTPSA (Nemesis)
+ id 1MN4qp-1npJtI3mRJ-00J5EQ; Mon, 21 Mar 2022 22:55:25 +0100
+Received: by mail-wr1-f45.google.com with SMTP id u16so21508673wru.4;
+        Mon, 21 Mar 2022 14:55:25 -0700 (PDT)
+X-Gm-Message-State: AOAM530RMxgk3jwFb0JEJYnUYEgIrgliaJYGuAwTZ5ezEyLz5TYH6vAj
+        u51yL9F8v1mBTEmy2GOsCbnBAsDvrd20fH6TlqU=
+X-Google-Smtp-Source: ABdhPJzwh5VrdiI1bc3kA/qP0tQTiqByLF123LNSVb5g7hlw9GovPGy8qh6+Cx7cu+lXNoLCe/LDwLKoy2W/g1NPcQo=
+X-Received: by 2002:a05:6000:178c:b0:204:648:b4c4 with SMTP id
+ e12-20020a056000178c00b002040648b4c4mr8462867wrg.219.1647899725513; Mon, 21
+ Mar 2022 14:55:25 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Spam-Status: No, score=-3.3 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_NONE,
-        RCVD_IN_MSPIKE_H5,RCVD_IN_MSPIKE_WL,SPF_HELO_NONE,SPF_NONE,
-        T_SCC_BODY_TEXT_LINE autolearn=ham autolearn_force=no version=3.4.6
+References: <20220319142759.1026237-1-chenhuacai@loongson.cn>
+ <CAK8P3a12dY57+ZPEREAUrsNf45S0_4-yYHen6p0-PjJEivjczg@mail.gmail.com> <CAHk-=wj81Cgjb5xj=ghB0oEA4ronnc=WKZLTPGpJYPUn=QcQ5g@mail.gmail.com>
+In-Reply-To: <CAHk-=wj81Cgjb5xj=ghB0oEA4ronnc=WKZLTPGpJYPUn=QcQ5g@mail.gmail.com>
+From:   Arnd Bergmann <arnd@arndb.de>
+Date:   Mon, 21 Mar 2022 22:55:09 +0100
+X-Gmail-Original-Message-ID: <CAK8P3a33TZm2NZg28KbCCeLzLvf759_5r8hr-rcWftci9qinog@mail.gmail.com>
+Message-ID: <CAK8P3a33TZm2NZg28KbCCeLzLvf759_5r8hr-rcWftci9qinog@mail.gmail.com>
+Subject: Re: [PATCH V8 00/22] arch: Add basic LoongArch support
+To:     Linus Torvalds <torvalds@linux-foundation.org>
+Cc:     Arnd Bergmann <arnd@arndb.de>, Huacai Chen <chenhuacai@kernel.org>,
+        Andy Lutomirski <luto@kernel.org>,
+        Thomas Gleixner <tglx@linutronix.de>,
+        Peter Zijlstra <peterz@infradead.org>,
+        Andrew Morton <akpm@linux-foundation.org>,
+        David Airlie <airlied@linux.ie>,
+        Jonathan Corbet <corbet@lwn.net>,
+        linux-arch <linux-arch@vger.kernel.org>,
+        "open list:DOCUMENTATION" <linux-doc@vger.kernel.org>,
+        Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
+        Xuefeng Li <lixuefeng@loongson.cn>,
+        Yanteng Si <siyanteng@loongson.cn>,
+        Huacai Chen <chenhuacai@gmail.com>,
+        Jiaxun Yang <jiaxun.yang@flygoat.com>,
+        Huacai Chen <chenhuacai@loongson.cn>
+Content-Type: text/plain; charset="UTF-8"
+X-Provags-ID: V03:K1:+7UIanepdnWa2y7TiiQIeUT8W83/7V7wzhsPgFRjHFNqvuxf6Ea
+ 4jG1C00t5AA4MofPcfSmyU1it8aKVVsCO2chwy50b7NQk56Qhithtgnyc9ihjzcBWNpAIF/
+ PmecXMghJ1mJDiA2zrBX01SNt7jxEA7W6XyECNg4WIxaRPTwoH4MPP6BqO1KJr1gMuKT1Za
+ KXX5/2ySt9N9Z9SmBq8+w==
+X-UI-Out-Filterresults: notjunk:1;V03:K0:aEu/Ol8GpwM=:0fBGCWKS7vVuj3OtDQgSgs
+ VC3AifaiTuHSZGdq5SX073YeMRn/29OpYFprppfViOnPyoFkVkVZjSsptCMIeeYatDLbDISRq
+ l/VVvlP1PAV6EdbGRFyNtvI/AdRrWroQE+6CzpcAuNrHqv8pHyfAE53igm5Aj7Y5hwyN02LEv
+ 5Ja6moSRj6p5npZMGQRWtm7jQFNw3u3jOiMT1Y2Zwt5Dx0jzq9kukL+IJv15ETytYUYzCJAsg
+ DIggBItQzwfZz3FnUwxCbJ6UKl8XPKL5r1JnG03PNhC1IQVLBKbMo3GLE/yKPXR/FII8I3S/E
+ ysv3sGlJCXrkYU0dP7Nco4yGPAJI0caJw664rKlu3rydYJx/mLm27WG0GeQG5c/dAoVCB1f2I
+ dv3FW1NDO9jXYQgiYwgpIKP3MGA2jtGk/cDRqA5jfn1utA6Ptax6Bj8wYzXxHkvdDI0ocOohE
+ HpuSf/8Ctfk/PnMLbO+vmq5BhlXyctzvm5FY5LUOBdwCqiUGhhjpFOU5N8FuNjz6JgY4wRgcJ
+ 93iJ0bGbjnrsvWcvrkmOqVNw8si/b5MbKirzljAFIfPfz5/5SA3XcAZw+23N/sCfnMjKXiZjQ
+ gYpLUHrNk20ItwOZUlmx+vyOx+4B5T+lRyq/XAKX61S2hERczmzXnvocUTdgKYEBNL2PR+SgI
+ ZtAQRa6X9Y9poY3jZLV5f/eVbKgIq+ba/pdZzKf0oIlNDISzy0Cd2udCw6uyMKTobjsdh3AKm
+ h9iiMU6CMIL0vF1kOdJvqEfRPRI73vQiECJk+bFaYrHoa0yQFzj5vkeV4lFJCwA6BFyhGIzY8
+ tPxkefWPpcB4Z6vxJEI3nh1ew/Gctq3BRn8aDL4LJ6ybReJX5k=
+X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00,RCVD_IN_MSPIKE_H4,
+        RCVD_IN_MSPIKE_WL,SPF_HELO_NONE,SPF_NONE,T_SCC_BODY_TEXT_LINE
+        autolearn=ham autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-From: Tom Rix <trix@redhat.com>
+On Mon, Mar 21, 2022 at 5:59 PM Linus Torvalds
+<torvalds@linux-foundation.org> wrote:
+> On Mon, Mar 21, 2022 at 4:09 AM Arnd Bergmann <arnd@arndb.de> wrote:
+> >
+> > This looks fine to me for the most part [...]
+>
+> So it looks like this is getting there.. Do we have a way forward for
+> this to be merged?
+>
+> I obviously can take the patches, but it would be even nicer to have a
+> pull request, and you'd be the obvious person since you are - whether
+> you like it or not - the "odd architecture guy".
 
-make htmldocs fails with
-Sphinx parallel build error:
-docutils.utils.SystemMessage: ...nvdimm.rst:146:
-  (SEVERE/4) Title level inconsistent:
+I can prepare a pull request when it gets to that, but I think the boot protocol
+should be fixed first, and that makes it 5.19 material.
 
-PMEM-REGIONs, Atomic Sectors, and DAX
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+The TL;DR version here is that LoongArch requires the use of ACPI/UEFI
+firmware, but does not currently enter the kernel using the UEFI protocol.
 
-The PMEM vs BLK section was removed without changing
-the PMEM-REGIONS... title line.  Replace '^' with '_'.
+Instead, grub gets loaded by the firmware (not sure using which protocol),
+and it then loads the kernel from disk, entering it through an ad-hoc
+method passing data from grub to the kernel using a combination of
+CPU registers and in-memory data structures that are different from
+how UEFI passes the same information using the drivers/firmware/efi
+stub entry.
 
-Fixes: f8669f1d6a86 ("nvdimm/blk: Delete the block-aperture window driver")
-Signed-off-by: Tom Rix <trix@redhat.com>
----
- Documentation/driver-api/nvdimm/nvdimm.rst | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+We have already discussed that this will be replaced with a regular
+UEFI entry using the same code that x86 and arm64 have, but at the
+moment, neither the specification nor the code is there.
 
-diff --git a/Documentation/driver-api/nvdimm/nvdimm.rst b/Documentation/driver-api/nvdimm/nvdimm.rst
-index 7917f64710920..be8587a558e1e 100644
---- a/Documentation/driver-api/nvdimm/nvdimm.rst
-+++ b/Documentation/driver-api/nvdimm/nvdimm.rst
-@@ -15,7 +15,7 @@ Version 13
- 	    Supporting Documents
- 	    Git Trees
- 	LIBNVDIMM PMEM
--	        PMEM-REGIONs, Atomic Sectors, and DAX
-+	    PMEM-REGIONs, Atomic Sectors, and DAX
- 	Example NVDIMM Platform
- 	LIBNVDIMM Kernel Device Model and LIBNDCTL Userspace API
- 	    LIBNDCTL: Context
-@@ -144,7 +144,7 @@ can be immediately attached to nd_pmem. This latter mode is called
- label-less or "legacy".
- 
- PMEM-REGIONs, Atomic Sectors, and DAX
--^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-+-------------------------------------
- 
- For the cases where an application or filesystem still needs atomic sector
- update guarantees it can register a BTT on a PMEM device or partition.  See
--- 
-2.26.3
+Merging the current version and changing it to the standard boot
+protocol later would mean they'd have to keep both protocols in
+the kernel, which adds complexity.
 
+         Arnd
