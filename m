@@ -2,64 +2,125 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id AAD4D4E2048
-	for <lists+linux-doc@lfdr.de>; Mon, 21 Mar 2022 06:54:03 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 402B84E21C7
+	for <lists+linux-doc@lfdr.de>; Mon, 21 Mar 2022 09:14:40 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1344469AbiCUFzZ (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 21 Mar 2022 01:55:25 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:34310 "EHLO
+        id S1344398AbiCUIQC (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 21 Mar 2022 04:16:02 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:43764 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1344450AbiCUFzW (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Mon, 21 Mar 2022 01:55:22 -0400
-Received: from mx0b-0016f401.pphosted.com (mx0a-0016f401.pphosted.com [67.231.148.174])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 87A694F470;
-        Sun, 20 Mar 2022 22:53:55 -0700 (PDT)
-Received: from pps.filterd (m0045849.ppops.net [127.0.0.1])
-        by mx0a-0016f401.pphosted.com (8.16.1.2/8.16.1.2) with ESMTP id 22KMvCXr009189;
-        Sun, 20 Mar 2022 22:53:45 -0700
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=marvell.com; h=from : to : cc :
- subject : date : message-id : in-reply-to : references : mime-version :
- content-type; s=pfpt0220; bh=4YPWAswcVAf236VF6nT/95B3FFUNy0VJDJjc4p7nO9A=;
- b=XAlsbH1FC9suiVA8mqFF3SnJIO27qhSIluRw59KKjCs2BvTu+5aKZKqU31m5sJSUvX/1
- Od5oGHd2UFs9XlFkKb5T0XGayzbDvK/AW4XJC/9c2EiIhxFFQMorNmgB8miJAuvcoy1K
- gav4d08iV+ATCCxI93HoVrwFxLCVk4RCcT0GtTGlu7yixVk6UCR9IhRgP9jgA5XNz2iC
- s5eVH1gf2u/9QCVWshwfF+y7c+fJwK6zD2kUG3lP8EQRweOlzbF5WE4rh1//z8m9d8f1
- +3JTukxaYJ7dAnUpOVNRRCeMXeCHtMks5CD0ztq9SYOxyueDVhd4yoiMmcZnhyKszjS7 aA== 
-Received: from dc5-exch01.marvell.com ([199.233.59.181])
-        by mx0a-0016f401.pphosted.com (PPS) with ESMTPS id 3ewchnp527-4
-        (version=TLSv1.2 cipher=ECDHE-RSA-AES256-SHA384 bits=256 verify=NOT);
-        Sun, 20 Mar 2022 22:53:44 -0700
-Received: from DC5-EXCH02.marvell.com (10.69.176.39) by DC5-EXCH01.marvell.com
- (10.69.176.38) with Microsoft SMTP Server (TLS) id 15.0.1497.2; Sun, 20 Mar
- 2022 22:53:42 -0700
-Received: from maili.marvell.com (10.69.176.80) by DC5-EXCH02.marvell.com
- (10.69.176.39) with Microsoft SMTP Server id 15.0.1497.18 via Frontend
- Transport; Sun, 20 Mar 2022 22:53:42 -0700
-Received: from sburla-PowerEdge-T630.caveonetworks.com (unknown [10.106.27.217])
-        by maili.marvell.com (Postfix) with ESMTP id 65FB03F7061;
-        Sun, 20 Mar 2022 22:53:42 -0700 (PDT)
-From:   Veerasenareddy Burru <vburru@marvell.com>
-To:     <vburru@marvell.com>, <davem@davemloft.net>, <kuba@kernel.org>,
-        <corbet@lwn.net>, <netdev@vger.kernel.org>,
-        <linux-doc@vger.kernel.org>, <linux-kernel@vger.kernel.org>
-CC:     Abhijit Ayarekar <aayarekar@marvell.com>,
-        Satananda Burla <sburla@marvell.com>
-Subject: [net-next PATCH v4 7/7] octeon_ep: add ethtool support for Octeon PCI Endpoint NIC
-Date:   Sun, 20 Mar 2022 22:53:37 -0700
-Message-ID: <20220321055337.4488-8-vburru@marvell.com>
-X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20220321055337.4488-1-vburru@marvell.com>
-References: <20220321055337.4488-1-vburru@marvell.com>
-MIME-Version: 1.0
+        with ESMTP id S233809AbiCUIQC (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Mon, 21 Mar 2022 04:16:02 -0400
+Received: from NAM10-BN7-obe.outbound.protection.outlook.com (mail-bn7nam10on2098.outbound.protection.outlook.com [40.107.92.98])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 601744F9D3;
+        Mon, 21 Mar 2022 01:14:36 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=TfNabEBF8n+/16qurOO3a6yhDU5OdHYvc++EYmCLhYtXdwDPSBQU3YOz2FuMVkn/n8gvy7j4G6xOWbLENEIC7oCCMyOiMxIL7QBZShrLOKN7uGRBE+W8rWMV3VU4Apl3IJYiQHZMNEXPuqH9O30a4YZqbqYfykfdG1cwGu21TY5P9iWx9t8PE3UK3w6za4c8hyNqGdWTgxauYaiM9Q+yY9J79rqYPpz5dYmGKTIaaN+keGxhPyl4Z1T32+PvpmcDgHFOnkU7Hl78gAUxt+MePT5d/N6/yNGbT84LL/G+h65WXeD3msHnpji6x+synmUFkw0PT48+PPbcPe3l4CvEQw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=STqtF5nkbDBMoESOnwi6xIY9VrkPK2Gt2YkGRSobuI4=;
+ b=dyLOjWxcaFQK4HCuN9w/2p+ac1J2chLFucP79y+qClmYEP0WFYtiNksby7uqCz8gumVoPE3whZMHQ8GkV+GTOF99OV2AS2fCyqwpxfrR/YQV9FuCSdrFeIlq7yEpW2KUEI97uAMgrxgPm7i5aw/TpNoyOG3KRybGceqtjboz9WkQUMjmMNetSqAeCEjCI+HSni/10jhcT9gkS5qGXI0X05CWgCIpGuvX0oVnNTQAp5LXfSolzVgOVfJc0AQu70WcAP2IZMs3+I4kEhoPq4LR2AgtgAoOt5TY4Ttafev0ARAhY3fxAbRUq4D77Sv2E00ZrUTJaWTn6po7A/RLfNW8Fw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=os.amperecomputing.com; dmarc=pass action=none
+ header.from=os.amperecomputing.com; dkim=pass
+ header.d=os.amperecomputing.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=os.amperecomputing.com; s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=STqtF5nkbDBMoESOnwi6xIY9VrkPK2Gt2YkGRSobuI4=;
+ b=DNhYiLDuH62Cmqkiobavylrz7GP0q0bjw7U+Nne/CTRoLW5tE1tgZkx+NiKFf1KUb1zC9/jRGHE2Hyh9C7fts56ef1Z+ACr+fXdvHFIw2oN/6S5O+Uet+42v/U2SowjBtDfUzdo/GLG4/UTKD7YAG3uc44mUUFfX3gNOgPUsnY4=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=os.amperecomputing.com;
+Received: from SJ0PR01MB7282.prod.exchangelabs.com (2603:10b6:a03:3f2::24) by
+ BN6PR01MB2738.prod.exchangelabs.com (2603:10b6:404:ce::11) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.5081.14; Mon, 21 Mar 2022 08:14:33 +0000
+Received: from SJ0PR01MB7282.prod.exchangelabs.com
+ ([fe80::cd24:39ed:7042:46d6]) by SJ0PR01MB7282.prod.exchangelabs.com
+ ([fe80::cd24:39ed:7042:46d6%8]) with mapi id 15.20.5081.022; Mon, 21 Mar 2022
+ 08:14:32 +0000
+From:   Quan Nguyen <quan@os.amperecomputing.com>
+To:     Lee Jones <lee.jones@linaro.org>, Rob Herring <robh+dt@kernel.org>,
+        Krzysztof Kozlowski <krzk+dt@kernel.org>,
+        Jean Delvare <jdelvare@suse.com>,
+        Guenter Roeck <linux@roeck-us.net>,
+        Jonathan Corbet <corbet@lwn.net>,
+        Derek Kiernan <derek.kiernan@xilinx.com>,
+        Dragan Cvetic <dragan.cvetic@xilinx.com>,
+        Arnd Bergmann <arnd@arndb.de>,
+        Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+        Quan Nguyen <quan@os.amperecomputing.com>,
+        Thu Nguyen <thu@os.amperecomputing.com>,
+        Gustavo Pimentel <Gustavo.Pimentel@synopsys.com>,
+        linux-kernel@vger.kernel.org (open list),
+        devicetree@vger.kernel.org (open list:OPEN FIRMWARE AND FLATTENED
+        DEVICE TREE BINDINGS),
+        linux-hwmon@vger.kernel.org (open list:HARDWARE MONITORING),
+        linux-doc@vger.kernel.org (open list:DOCUMENTATION),
+        OpenBMC Maillist <openbmc@lists.ozlabs.org>
+Cc:     Open Source Submission <patches@amperecomputing.com>,
+        Phong Vo <phong@os.amperecomputing.com>,
+        "Thang Q . Nguyen" <thang@os.amperecomputing.com>
+Subject: [PATCH v7 0/9] Add Ampere's Altra SMPro MFD and its child drivers
+Date:   Mon, 21 Mar 2022 15:13:46 +0700
+Message-Id: <20220321081355.6802-1-quan@os.amperecomputing.com>
+X-Mailer: git-send-email 2.35.1
+Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
-X-Proofpoint-GUID: 1tdoHo9JTtJXJulhin-GV7FcgUXleeE0
-X-Proofpoint-ORIG-GUID: 1tdoHo9JTtJXJulhin-GV7FcgUXleeE0
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.205,Aquarius:18.0.850,Hydra:6.0.425,FMLib:17.11.64.514
- definitions=2022-03-21_02,2022-03-15_01,2022-02-23_01
-X-Spam-Status: No, score=-2.1 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_NONE,
-        SPF_HELO_NONE,SPF_PASS,T_SCC_BODY_TEXT_LINE autolearn=ham
+X-ClientProxiedBy: SGXP274CA0010.SGPP274.PROD.OUTLOOK.COM (2603:1096:4:b8::22)
+ To SJ0PR01MB7282.prod.exchangelabs.com (2603:10b6:a03:3f2::24)
+MIME-Version: 1.0
+X-MS-PublicTrafficType: Email
+X-MS-Office365-Filtering-Correlation-Id: b04e44e8-8557-4cfc-c24c-08da0b12d410
+X-MS-TrafficTypeDiagnostic: BN6PR01MB2738:EE_
+X-Microsoft-Antispam-PRVS: <BN6PR01MB273866D0787057D916E628ACF2169@BN6PR01MB2738.prod.exchangelabs.com>
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: 2Zatu/ayNy1IXpO4A5Gxx4s5OCyRWumFtwoiTCgrNjuW7+rA/thz2Yau6w5pUudhfm4wQQQgvlFAE6izdVJV71kdoNyfH4mY99Jj5bRyRXNkIJA9v4YSNogtyFrxQ6gCXJQztJsE7mYQw34eXOVT5QnKBwMRphCthtJA0VYhYzzdq0rmsALHh3jNAv4hYazjuxdAqWt5k5D8xhWo+xGJk2raGAG3FiTL+1dJD9Ou54TFgV84cgxGZURUOfsoCD9ntMJTlMVjOfhm2ahGF35i/Xqx99Cx6A4osuyW8jkfIhTXZ12def1KdUXwbGkhmt12ocCfvfds5cajn8KW7xjJZZioCFLTi92X0VKHmb9LQEiMgpZVOyo85QZ/+ZMhAU/xaTIuJZeg3quHft5kGx3tSBpfE/B5VtSSFs+G9ix4zQKLXZZjftSaoEbV7Hsnf9kaLcnrxrBMJwrTxKJR78uKQ8gZFgjKl/rc4WxYPTae9ugl6x6P52dibC6XuqvfMqiPp337TO1kGMEbKSw2z3UApWMdWE1ei9p12+c1nrfzaYVR22JqeiHTmvuTDS+SSIiTkoP4OjOqRSGTMDEvrxcPkLaZwuP8Emm3gi0flU3RfYfIfallrOjb80JhR4GYiFvZyEu8+bfhaRj2n4XAi8oDYdL9g6zX/4Mu2lLIt5W/P89FNLRYB401sSJX73xO0I6k00BJa1Br580Qo3U5Vu4YO7TIgb8WCmDDj4iKkklqDab1QpVEiqe4qcDdzr3M2ravnWsg/Xj9LjK/Gx2YBzm3e1QvP1K9xqqhAozaHzk7sYpJ8aTJdavhsK0oJ4M7fhBJ
+X-Forefront-Antispam-Report: CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:SJ0PR01MB7282.prod.exchangelabs.com;PTR:;CAT:NONE;SFS:(13230001)(4636009)(366004)(38100700002)(66476007)(66556008)(6512007)(66946007)(7416002)(107886003)(186003)(1076003)(86362001)(38350700002)(4326008)(5660300002)(8676002)(26005)(316002)(52116002)(110136005)(921005)(54906003)(2616005)(2906002)(508600001)(8936002)(6486002)(6506007)(966005)(6666004)(83380400001);DIR:OUT;SFP:1102;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?HH3M20RRi1bEPj+AACgJ6qxz9allBrGbIczGieByaERi7fhzkY7uXYpFYUEA?=
+ =?us-ascii?Q?TbvWEQuG6EuBP8Br8Jy+Py4SoiFt1Hg51YjK/NDP0QQ3VXWdGQ/B3Qdmi+vC?=
+ =?us-ascii?Q?1pv2u+4W5emXyHD5Tt39CYin4tTdAzj1/rsCbJLojcw9TolMbtgIvQDcqlHc?=
+ =?us-ascii?Q?Jw34K/Yrv9B7SCBQ4vvMfMua5cjwl4FR6Kqofqc1QjnXiuuZ8PCwPVpBNIU1?=
+ =?us-ascii?Q?efSKQyYzkWhmAsoKYizuHMxMnmyKQOHQxLb7FuKuH4l1JnPhLlgBEiMJf9WK?=
+ =?us-ascii?Q?uklZejmA4C8syt2mjbF7l1369n0FC6bnJKK5edIRpgKjj5lO2T7q1Q/+bclx?=
+ =?us-ascii?Q?3OMrfOHwJNFX32wCUWEWUUYFmEiE2MgEGnf68VdTAbJCGau4E7PERnMjh32y?=
+ =?us-ascii?Q?LyQq9ntAZYQIT0P/agNWIbvYDcVg3NH10/r2cYpOhIbvD6CDldcHtovobjAC?=
+ =?us-ascii?Q?wrwFnKqlhHa+dgqzBLon7yTdwsiXQGe/XNPpuk5SsumyL/2+RstUJQYZGd2f?=
+ =?us-ascii?Q?WqFIeE3XRDOlUDcZ9/YUWmN8KIHeNz+uMCPXeh0EhcHGd4RGfzWKfbJb7HoG?=
+ =?us-ascii?Q?7mlrFtGDW3kzR2Abxxx1DhcokvxFzlH4QUsHAHi1p3AC4JiJ91orhG1Ifwqq?=
+ =?us-ascii?Q?+EXHf8opQQXAg/eeIqKkRQXHYZEJ5GSTC/CkR57xJSWTUCfBmvHKs3TPpcyT?=
+ =?us-ascii?Q?SOpjUGjxpLY9PGGVllorKNE2YzV6+9MTR2ZB16KgxoV/E0Pf+lNN/ofRm99V?=
+ =?us-ascii?Q?lLVdDVkD0uADJaBrmWtgeIsJOVwHkpRIdpjKOj1fIs6P3R10Q3bKXqyVKFGE?=
+ =?us-ascii?Q?dQklPt5U9ejKwQ0Vuwn6/MXhsyNLGkZah8f6XURmtPzDbXDdAcKmD64/vh85?=
+ =?us-ascii?Q?owp+e46Bj2IOsmHqpAjmEcXGXrvnTiUTJZDGQaDw0he4jjMU39LcLJkcVtwc?=
+ =?us-ascii?Q?qxRGJgGg3oTbR61oUqndPBcSQqx0DnORV5Ta1CjweNFbI0XoMjEkSr+qmcf3?=
+ =?us-ascii?Q?cu3Q7dZZa8iUQg3KKJmpUUJgJuEqD8XSFXtl947NxQfm/AmWnc6KROwGNm0z?=
+ =?us-ascii?Q?MpysdzLn2jIlXg9jJJxYccl5c0I2sPxzR97PZyXch5TQEDzJna9TT8Qy3Mt3?=
+ =?us-ascii?Q?xlSrcReHzG8hDdfUdhb+NM16dMp8zrW11K7caJosIrcSjN6f654gKTe7b2ns?=
+ =?us-ascii?Q?Rub1lWqov97lIK39+xlOfMrth8oVCH2V/R+8VKRNJdW1HLWasw5mfr9wsQOu?=
+ =?us-ascii?Q?MsNoP+5bDxLxZAncFhbgP8QQ1FSQd/Y90xFrffJ2iv/IzFDW8CWapPG+phcr?=
+ =?us-ascii?Q?TQpolyXW9tFjyrDa+VoCp7sdL18drKXbfALnJx9YFvkjfMvnUSSFePRkCgap?=
+ =?us-ascii?Q?hAfPpYL6jQd6O7HdY3P0y/6h7ovBDDP84lDn2OMNCiUcEu6CG4AgO65mZ8KW?=
+ =?us-ascii?Q?8wfGB2xHw6Au2a/EVsaOhgbbVHj7W2yiIbCLTGaNJfr52uhqzmPoEe1iZasv?=
+ =?us-ascii?Q?kdJWqQaDFzNc8zg=3D?=
+X-OriginatorOrg: os.amperecomputing.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: b04e44e8-8557-4cfc-c24c-08da0b12d410
+X-MS-Exchange-CrossTenant-AuthSource: SJ0PR01MB7282.prod.exchangelabs.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 21 Mar 2022 08:14:32.4655
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 3bc2b170-fd94-476d-b0ce-4229bdc904a7
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: XodbWveoAKEuKo2ch0ZFK+Er7IWbVoQZzXubLp05Y8Ida08XW9MRHn9oFzV9qYLGFXwrm8PysnW7+KFyAoKee9UvThC8hdBSg1BVLeThqhw=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: BN6PR01MB2738
+X-Spam-Status: No, score=-2.0 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+        DKIM_VALID,DKIM_VALID_AU,RCVD_IN_DNSWL_NONE,RCVD_IN_MSPIKE_H2,
+        SPF_HELO_PASS,SPF_PASS,T_SCC_BODY_TEXT_LINE autolearn=ham
         autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
@@ -67,528 +128,120 @@ Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Add support for the following ethtool commands:
+The SMpro co-processor on Ampere Altra processor family is to monitor
+and report various data included hwmon-related info, RAS errors, and
+other miscellaneous information. The SMPro MFD driver intializes the
+register map and instantiates all sub-devices. All the specifics will
+be handled in the child drivers.
 
-ethtool -i|--driver devname
-ethtool devname
-ethtool -s devname [speed N] [autoneg on|off] [advertise N]
-ethtool -S|--statistics devname
+This patch set includes support for Ampere SMpro hwmon, errmon, and
+misc as the child drivers. The hwmon driver supports accessing various
+CPU sensors provided by the SMpro co-processor including temperature,
+power, voltages, and current found on Ampere Altra processor family.
+The errmon driver supports monitoring and reporting RAS-related errors.
+The misc driver is to support reporting boot progress and other
+miscellaneous information.
 
-Signed-off-by: Veerasenareddy Burru <vburru@marvell.com>
-Signed-off-by: Abhijit Ayarekar <aayarekar@marvell.com>
-Signed-off-by: Satananda Burla <sburla@marvell.com>
----
-V3 -> V4:
-  - fix build errors observed with "make W=1 C=1", that were missed
-    to fix in v3 patchset.
-  - declare the variables used with-in the file as static.
+Discuss for v6: https://lkml.org/lkml/2021/12/23/760
 
-V2 -> V3: no change.
+v7:
+  + Add docs to Documentation/ABI/testing                       [Greg]
+  + Re-order patches to avoid compile dependency           [Lee Jones]
+  + Remove regmap_acquire/release_lock()                        [Quan]
+  + Install regmap bus->read/write() to handle multiple types of bus
+    access                                                      [Quan]
+  + Replace i2c block read by regmap_noinc_read()               [Quan]
+  + Fix wrong return type of *show/store()         [kernel test robot]
+  + Update GPL version                                          [Quan]
+  + Add some others minor code refactor                         [Quan]
 
-V1 -> V2:
-  - Fix build errors observed with clang and "make W=1 C=1".
-  - Address review comments:
-      - removed setting version string in get_drvinfo.
-      - defined helper macro for common code to set supported and
-        advertised modes in get_link_ksettings.
+v6:
+  + Introduced smpro-errmon, smpro-misc as smpro-mfd sub-device [Quan]
 
- .../net/ethernet/marvell/octeon_ep/Makefile   |   2 +-
- .../marvell/octeon_ep/octep_ethtool.c         | 463 ++++++++++++++++++
- .../ethernet/marvell/octeon_ep/octep_main.c   |   1 +
- 3 files changed, 465 insertions(+), 1 deletion(-)
- create mode 100644 drivers/net/ethernet/marvell/octeon_ep/octep_ethtool.c
+v5:
+  + Introduced the smpro-mfd driver and drop the use of
+  simple-mfd-i2c driver to avoid DT node with no resource in child
+  device DT nodes [Rob]
+  + Removed the use of reg DT property in child driver [Quan]
+  + Validated ManufactureID when probing smpro-mfd drivers [Quan]
+  + As child devices are instantiated by SMPro MFD driver, drop the
+  ManufacturerID checking in child driver, ie: smpro-hwmon [Quan]
+  + Revised commit messages [Quan]
 
-diff --git a/drivers/net/ethernet/marvell/octeon_ep/Makefile b/drivers/net/ethernet/marvell/octeon_ep/Makefile
-index 6e2db8e80b4a..2026c8118158 100644
---- a/drivers/net/ethernet/marvell/octeon_ep/Makefile
-+++ b/drivers/net/ethernet/marvell/octeon_ep/Makefile
-@@ -6,4 +6,4 @@
- obj-$(CONFIG_OCTEON_EP) += octeon_ep.o
- 
- octeon_ep-y := octep_main.o octep_cn9k_pf.o octep_tx.o octep_rx.o \
--	       octep_ctrl_mbox.o octep_ctrl_net.o
-+	       octep_ethtool.o octep_ctrl_mbox.o octep_ctrl_net.o
-diff --git a/drivers/net/ethernet/marvell/octeon_ep/octep_ethtool.c b/drivers/net/ethernet/marvell/octeon_ep/octep_ethtool.c
-new file mode 100644
-index 000000000000..87ef129b269a
---- /dev/null
-+++ b/drivers/net/ethernet/marvell/octeon_ep/octep_ethtool.c
-@@ -0,0 +1,463 @@
-+// SPDX-License-Identifier: GPL-2.0
-+/* Marvell Octeon EP (EndPoint) Ethernet Driver
-+ *
-+ * Copyright (C) 2020 Marvell.
-+ *
-+ */
-+
-+#include <linux/pci.h>
-+#include <linux/netdevice.h>
-+#include <linux/ethtool.h>
-+
-+#include "octep_config.h"
-+#include "octep_main.h"
-+#include "octep_ctrl_net.h"
-+
-+static const char octep_gstrings_global_stats[][ETH_GSTRING_LEN] = {
-+	"rx_packets",
-+	"tx_packets",
-+	"rx_bytes",
-+	"tx_bytes",
-+	"rx_alloc_errors",
-+	"tx_busy_errors",
-+	"rx_dropped",
-+	"tx_dropped",
-+	"tx_hw_pkts",
-+	"tx_hw_octs",
-+	"tx_hw_bcast",
-+	"tx_hw_mcast",
-+	"tx_hw_underflow",
-+	"tx_hw_control",
-+	"tx_less_than_64",
-+	"tx_equal_64",
-+	"tx_equal_65_to_127",
-+	"tx_equal_128_to_255",
-+	"tx_equal_256_to_511",
-+	"tx_equal_512_to_1023",
-+	"tx_equal_1024_to_1518",
-+	"tx_greater_than_1518",
-+	"rx_hw_pkts",
-+	"rx_hw_bytes",
-+	"rx_hw_bcast",
-+	"rx_hw_mcast",
-+	"rx_pause_pkts",
-+	"rx_pause_bytes",
-+	"rx_dropped_pkts_fifo_full",
-+	"rx_dropped_bytes_fifo_full",
-+	"rx_err_pkts",
-+};
-+
-+#define OCTEP_GLOBAL_STATS_CNT (sizeof(octep_gstrings_global_stats) / ETH_GSTRING_LEN)
-+
-+static const char octep_gstrings_tx_q_stats[][ETH_GSTRING_LEN] = {
-+	"tx_packets_posted[Q-%u]",
-+	"tx_packets_completed[Q-%u]",
-+	"tx_bytes[Q-%u]",
-+	"tx_busy[Q-%u]",
-+};
-+
-+#define OCTEP_TX_Q_STATS_CNT (sizeof(octep_gstrings_tx_q_stats) / ETH_GSTRING_LEN)
-+
-+static const char octep_gstrings_rx_q_stats[][ETH_GSTRING_LEN] = {
-+	"rx_packets[Q-%u]",
-+	"rx_bytes[Q-%u]",
-+	"rx_alloc_errors[Q-%u]",
-+};
-+
-+#define OCTEP_RX_Q_STATS_CNT (sizeof(octep_gstrings_rx_q_stats) / ETH_GSTRING_LEN)
-+
-+static void octep_get_drvinfo(struct net_device *netdev,
-+			      struct ethtool_drvinfo *info)
-+{
-+	struct octep_device *oct = netdev_priv(netdev);
-+
-+	strscpy(info->driver, OCTEP_DRV_NAME, sizeof(info->driver));
-+	strscpy(info->bus_info, pci_name(oct->pdev), sizeof(info->bus_info));
-+}
-+
-+static void octep_get_strings(struct net_device *netdev,
-+			      u32 stringset, u8 *data)
-+{
-+	struct octep_device *oct = netdev_priv(netdev);
-+	u16 num_queues = CFG_GET_PORTS_ACTIVE_IO_RINGS(oct->conf);
-+	char *strings = (char *)data;
-+	int i, j;
-+
-+	switch (stringset) {
-+	case ETH_SS_STATS:
-+		for (i = 0; i < OCTEP_GLOBAL_STATS_CNT; i++) {
-+			snprintf(strings, ETH_GSTRING_LEN,
-+				 octep_gstrings_global_stats[i]);
-+			strings += ETH_GSTRING_LEN;
-+		}
-+
-+		for (i = 0; i < num_queues; i++) {
-+			for (j = 0; j < OCTEP_TX_Q_STATS_CNT; j++) {
-+				snprintf(strings, ETH_GSTRING_LEN,
-+					 octep_gstrings_tx_q_stats[j], i);
-+				strings += ETH_GSTRING_LEN;
-+			}
-+		}
-+
-+		for (i = 0; i < num_queues; i++) {
-+			for (j = 0; j < OCTEP_RX_Q_STATS_CNT; j++) {
-+				snprintf(strings, ETH_GSTRING_LEN,
-+					 octep_gstrings_rx_q_stats[j], i);
-+				strings += ETH_GSTRING_LEN;
-+			}
-+		}
-+		break;
-+	default:
-+		break;
-+	}
-+}
-+
-+static int octep_get_sset_count(struct net_device *netdev, int sset)
-+{
-+	struct octep_device *oct = netdev_priv(netdev);
-+	u16 num_queues = CFG_GET_PORTS_ACTIVE_IO_RINGS(oct->conf);
-+
-+	switch (sset) {
-+	case ETH_SS_STATS:
-+		return OCTEP_GLOBAL_STATS_CNT + (num_queues *
-+		       (OCTEP_TX_Q_STATS_CNT + OCTEP_RX_Q_STATS_CNT));
-+		break;
-+	default:
-+		return -EOPNOTSUPP;
-+	}
-+}
-+
-+static void
-+octep_get_ethtool_stats(struct net_device *netdev,
-+			struct ethtool_stats *stats, u64 *data)
-+{
-+	struct octep_device *oct = netdev_priv(netdev);
-+	struct octep_iface_tx_stats *iface_tx_stats;
-+	struct octep_iface_rx_stats *iface_rx_stats;
-+	u64 rx_packets, rx_bytes;
-+	u64 tx_packets, tx_bytes;
-+	u64 rx_alloc_errors, tx_busy_errors;
-+	int q, i;
-+
-+	rx_packets = 0;
-+	rx_bytes = 0;
-+	tx_packets = 0;
-+	tx_bytes = 0;
-+	rx_alloc_errors = 0;
-+	tx_busy_errors = 0;
-+	tx_packets = 0;
-+	tx_bytes = 0;
-+	rx_packets = 0;
-+	rx_bytes = 0;
-+
-+	octep_get_if_stats(oct);
-+	iface_tx_stats = &oct->iface_tx_stats;
-+	iface_rx_stats = &oct->iface_rx_stats;
-+
-+	for (q = 0; q < oct->num_oqs; q++) {
-+		struct octep_iq *iq = oct->iq[q];
-+		struct octep_oq *oq = oct->oq[q];
-+
-+		tx_packets += iq->stats.instr_completed;
-+		tx_bytes += iq->stats.bytes_sent;
-+		tx_busy_errors += iq->stats.tx_busy;
-+
-+		rx_packets += oq->stats.packets;
-+		rx_bytes += oq->stats.bytes;
-+		rx_alloc_errors += oq->stats.alloc_failures;
-+	}
-+	i = 0;
-+	data[i++] = rx_packets;
-+	data[i++] = tx_packets;
-+	data[i++] = rx_bytes;
-+	data[i++] = tx_bytes;
-+	data[i++] = rx_alloc_errors;
-+	data[i++] = tx_busy_errors;
-+	data[i++] = iface_rx_stats->dropped_pkts_fifo_full +
-+		    iface_rx_stats->err_pkts;
-+	data[i++] = iface_tx_stats->xscol +
-+		    iface_tx_stats->xsdef;
-+	data[i++] = iface_tx_stats->pkts;
-+	data[i++] = iface_tx_stats->octs;
-+	data[i++] = iface_tx_stats->bcst;
-+	data[i++] = iface_tx_stats->mcst;
-+	data[i++] = iface_tx_stats->undflw;
-+	data[i++] = iface_tx_stats->ctl;
-+	data[i++] = iface_tx_stats->hist_lt64;
-+	data[i++] = iface_tx_stats->hist_eq64;
-+	data[i++] = iface_tx_stats->hist_65to127;
-+	data[i++] = iface_tx_stats->hist_128to255;
-+	data[i++] = iface_tx_stats->hist_256to511;
-+	data[i++] = iface_tx_stats->hist_512to1023;
-+	data[i++] = iface_tx_stats->hist_1024to1518;
-+	data[i++] = iface_tx_stats->hist_gt1518;
-+	data[i++] = iface_rx_stats->pkts;
-+	data[i++] = iface_rx_stats->octets;
-+	data[i++] = iface_rx_stats->mcast_pkts;
-+	data[i++] = iface_rx_stats->bcast_pkts;
-+	data[i++] = iface_rx_stats->pause_pkts;
-+	data[i++] = iface_rx_stats->pause_octets;
-+	data[i++] = iface_rx_stats->dropped_pkts_fifo_full;
-+	data[i++] = iface_rx_stats->dropped_octets_fifo_full;
-+	data[i++] = iface_rx_stats->err_pkts;
-+
-+	/* Per Tx Queue stats */
-+	for (q = 0; q < oct->num_iqs; q++) {
-+		struct octep_iq *iq = oct->iq[q];
-+
-+		data[i++] = iq->stats.instr_posted;
-+		data[i++] = iq->stats.instr_completed;
-+		data[i++] = iq->stats.bytes_sent;
-+		data[i++] = iq->stats.tx_busy;
-+	}
-+
-+	/* Per Rx Queue stats */
-+	for (q = 0; q < oct->num_oqs; q++) {
-+		struct octep_oq *oq = oct->oq[q];
-+
-+		data[i++] = oq->stats.packets;
-+		data[i++] = oq->stats.bytes;
-+		data[i++] = oq->stats.alloc_failures;
-+	}
-+}
-+
-+#define OCTEP_SET_ETHTOOL_LINK_MODES_BITMAP(octep_speeds, ksettings, name) \
-+{ \
-+	if ((octep_speeds) & BIT(OCTEP_LINK_MODE_10GBASE_T)) \
-+		ethtool_link_ksettings_add_link_mode(ksettings, name, 10000baseT_Full); \
-+	if ((octep_speeds) & BIT(OCTEP_LINK_MODE_10GBASE_R)) \
-+		ethtool_link_ksettings_add_link_mode(ksettings, name, 10000baseR_FEC); \
-+	if ((octep_speeds) & BIT(OCTEP_LINK_MODE_10GBASE_CR)) \
-+		ethtool_link_ksettings_add_link_mode(ksettings, name, 10000baseCR_Full); \
-+	if ((octep_speeds) & BIT(OCTEP_LINK_MODE_10GBASE_KR)) \
-+		ethtool_link_ksettings_add_link_mode(ksettings, name, 10000baseKR_Full); \
-+	if ((octep_speeds) & BIT(OCTEP_LINK_MODE_10GBASE_LR)) \
-+		ethtool_link_ksettings_add_link_mode(ksettings, name, 10000baseLR_Full); \
-+	if ((octep_speeds) & BIT(OCTEP_LINK_MODE_10GBASE_SR)) \
-+		ethtool_link_ksettings_add_link_mode(ksettings, name, 10000baseSR_Full); \
-+	if ((octep_speeds) & BIT(OCTEP_LINK_MODE_25GBASE_CR)) \
-+		ethtool_link_ksettings_add_link_mode(ksettings, name, 25000baseCR_Full); \
-+	if ((octep_speeds) & BIT(OCTEP_LINK_MODE_25GBASE_KR)) \
-+		ethtool_link_ksettings_add_link_mode(ksettings, name, 25000baseKR_Full); \
-+	if ((octep_speeds) & BIT(OCTEP_LINK_MODE_25GBASE_SR)) \
-+		ethtool_link_ksettings_add_link_mode(ksettings, name, 25000baseSR_Full); \
-+	if ((octep_speeds) & BIT(OCTEP_LINK_MODE_40GBASE_CR4)) \
-+		ethtool_link_ksettings_add_link_mode(ksettings, name, 40000baseCR4_Full); \
-+	if ((octep_speeds) & BIT(OCTEP_LINK_MODE_40GBASE_KR4)) \
-+		ethtool_link_ksettings_add_link_mode(ksettings, name, 40000baseKR4_Full); \
-+	if ((octep_speeds) & BIT(OCTEP_LINK_MODE_40GBASE_LR4)) \
-+		ethtool_link_ksettings_add_link_mode(ksettings, name, 40000baseLR4_Full); \
-+	if ((octep_speeds) & BIT(OCTEP_LINK_MODE_40GBASE_SR4)) \
-+		ethtool_link_ksettings_add_link_mode(ksettings, name, 40000baseSR4_Full); \
-+	if ((octep_speeds) & BIT(OCTEP_LINK_MODE_50GBASE_CR2)) \
-+		ethtool_link_ksettings_add_link_mode(ksettings, name, 50000baseCR2_Full); \
-+	if ((octep_speeds) & BIT(OCTEP_LINK_MODE_50GBASE_KR2)) \
-+		ethtool_link_ksettings_add_link_mode(ksettings, name, 50000baseKR2_Full); \
-+	if ((octep_speeds) & BIT(OCTEP_LINK_MODE_50GBASE_SR2)) \
-+		ethtool_link_ksettings_add_link_mode(ksettings, name, 50000baseSR2_Full); \
-+	if ((octep_speeds) & BIT(OCTEP_LINK_MODE_50GBASE_CR)) \
-+		ethtool_link_ksettings_add_link_mode(ksettings, name, 50000baseCR_Full); \
-+	if ((octep_speeds) & BIT(OCTEP_LINK_MODE_50GBASE_KR)) \
-+		ethtool_link_ksettings_add_link_mode(ksettings, name, 50000baseKR_Full); \
-+	if ((octep_speeds) & BIT(OCTEP_LINK_MODE_50GBASE_LR)) \
-+		ethtool_link_ksettings_add_link_mode(ksettings, name, 50000baseLR_ER_FR_Full); \
-+	if ((octep_speeds) & BIT(OCTEP_LINK_MODE_50GBASE_SR)) \
-+		ethtool_link_ksettings_add_link_mode(ksettings, name, 50000baseSR_Full); \
-+	if ((octep_speeds) & BIT(OCTEP_LINK_MODE_100GBASE_CR4)) \
-+		ethtool_link_ksettings_add_link_mode(ksettings, name, 100000baseCR4_Full); \
-+	if ((octep_speeds) & BIT(OCTEP_LINK_MODE_100GBASE_KR4)) \
-+		ethtool_link_ksettings_add_link_mode(ksettings, name, 100000baseKR4_Full); \
-+	if ((octep_speeds) & BIT(OCTEP_LINK_MODE_100GBASE_LR4)) \
-+		ethtool_link_ksettings_add_link_mode(ksettings, name, 100000baseLR4_ER4_Full); \
-+	if ((octep_speeds) & BIT(OCTEP_LINK_MODE_100GBASE_SR4)) \
-+		ethtool_link_ksettings_add_link_mode(ksettings, name, 100000baseSR4_Full); \
-+}
-+
-+static int octep_get_link_ksettings(struct net_device *netdev,
-+				    struct ethtool_link_ksettings *cmd)
-+{
-+	struct octep_device *oct = netdev_priv(netdev);
-+	struct octep_iface_link_info *link_info;
-+	u32 advertised_modes, supported_modes;
-+
-+	ethtool_link_ksettings_zero_link_mode(cmd, supported);
-+	ethtool_link_ksettings_zero_link_mode(cmd, advertising);
-+
-+	octep_get_link_info(oct);
-+
-+	advertised_modes = oct->link_info.advertised_modes;
-+	supported_modes = oct->link_info.supported_modes;
-+	link_info = &oct->link_info;
-+
-+	OCTEP_SET_ETHTOOL_LINK_MODES_BITMAP(supported_modes, cmd, supported);
-+	OCTEP_SET_ETHTOOL_LINK_MODES_BITMAP(advertised_modes, cmd, advertising);
-+
-+	if (link_info->autoneg) {
-+		if (link_info->autoneg & OCTEP_LINK_MODE_AUTONEG_SUPPORTED)
-+			ethtool_link_ksettings_add_link_mode(cmd, supported, Autoneg);
-+		if (link_info->autoneg & OCTEP_LINK_MODE_AUTONEG_ADVERTISED) {
-+			ethtool_link_ksettings_add_link_mode(cmd, advertising, Autoneg);
-+			cmd->base.autoneg = AUTONEG_ENABLE;
-+		} else {
-+			cmd->base.autoneg = AUTONEG_DISABLE;
-+		}
-+	} else {
-+		cmd->base.autoneg = AUTONEG_DISABLE;
-+	}
-+
-+	if (link_info->pause) {
-+		if (link_info->pause & OCTEP_LINK_MODE_PAUSE_SUPPORTED)
-+			ethtool_link_ksettings_add_link_mode(cmd, supported, Pause);
-+		if (link_info->pause & OCTEP_LINK_MODE_PAUSE_ADVERTISED)
-+			ethtool_link_ksettings_add_link_mode(cmd, advertising, Pause);
-+	}
-+
-+	cmd->base.port = PORT_FIBRE;
-+	ethtool_link_ksettings_add_link_mode(cmd, supported, FIBRE);
-+	ethtool_link_ksettings_add_link_mode(cmd, advertising, FIBRE);
-+
-+	if (netif_carrier_ok(netdev)) {
-+		cmd->base.speed = link_info->speed;
-+		cmd->base.duplex = DUPLEX_FULL;
-+	} else {
-+		cmd->base.speed = SPEED_UNKNOWN;
-+		cmd->base.duplex = DUPLEX_UNKNOWN;
-+	}
-+	return 0;
-+}
-+
-+static int octep_set_link_ksettings(struct net_device *netdev,
-+				    const struct ethtool_link_ksettings *cmd)
-+{
-+	struct octep_device *oct = netdev_priv(netdev);
-+	struct octep_iface_link_info link_info_new;
-+	struct octep_iface_link_info *link_info;
-+	u64 advertised = 0;
-+	u8 autoneg = 0;
-+	int err;
-+
-+	link_info = &oct->link_info;
-+	memcpy(&link_info_new, link_info, sizeof(struct octep_iface_link_info));
-+
-+	/* Only Full duplex is supported;
-+	 * Assume full duplex when duplex is unknown.
-+	 */
-+	if (cmd->base.duplex != DUPLEX_FULL &&
-+	    cmd->base.duplex != DUPLEX_UNKNOWN)
-+		return -EOPNOTSUPP;
-+
-+	if (cmd->base.autoneg == AUTONEG_ENABLE) {
-+		if (!(link_info->autoneg & OCTEP_LINK_MODE_AUTONEG_SUPPORTED))
-+			return -EOPNOTSUPP;
-+		autoneg = 1;
-+	}
-+
-+	if (!bitmap_subset(cmd->link_modes.advertising,
-+			   cmd->link_modes.supported,
-+			   __ETHTOOL_LINK_MODE_MASK_NBITS))
-+		return -EINVAL;
-+
-+	if (ethtool_link_ksettings_test_link_mode(cmd, advertising,
-+						  10000baseT_Full))
-+		advertised |= BIT(OCTEP_LINK_MODE_10GBASE_T);
-+	if (ethtool_link_ksettings_test_link_mode(cmd, advertising,
-+						  10000baseR_FEC))
-+		advertised |= BIT(OCTEP_LINK_MODE_10GBASE_R);
-+	if (ethtool_link_ksettings_test_link_mode(cmd, advertising,
-+						  10000baseCR_Full))
-+		advertised |= BIT(OCTEP_LINK_MODE_10GBASE_CR);
-+	if (ethtool_link_ksettings_test_link_mode(cmd, advertising,
-+						  10000baseKR_Full))
-+		advertised |= BIT(OCTEP_LINK_MODE_10GBASE_KR);
-+	if (ethtool_link_ksettings_test_link_mode(cmd, advertising,
-+						  10000baseLR_Full))
-+		advertised |= BIT(OCTEP_LINK_MODE_10GBASE_LR);
-+	if (ethtool_link_ksettings_test_link_mode(cmd, advertising,
-+						  10000baseSR_Full))
-+		advertised |= BIT(OCTEP_LINK_MODE_10GBASE_SR);
-+	if (ethtool_link_ksettings_test_link_mode(cmd, advertising,
-+						  25000baseCR_Full))
-+		advertised |= BIT(OCTEP_LINK_MODE_25GBASE_CR);
-+	if (ethtool_link_ksettings_test_link_mode(cmd, advertising,
-+						  25000baseKR_Full))
-+		advertised |= BIT(OCTEP_LINK_MODE_25GBASE_KR);
-+	if (ethtool_link_ksettings_test_link_mode(cmd, advertising,
-+						  25000baseSR_Full))
-+		advertised |= BIT(OCTEP_LINK_MODE_25GBASE_SR);
-+	if (ethtool_link_ksettings_test_link_mode(cmd, advertising,
-+						  40000baseCR4_Full))
-+		advertised |= BIT(OCTEP_LINK_MODE_40GBASE_CR4);
-+	if (ethtool_link_ksettings_test_link_mode(cmd, advertising,
-+						  40000baseKR4_Full))
-+		advertised |= BIT(OCTEP_LINK_MODE_40GBASE_KR4);
-+	if (ethtool_link_ksettings_test_link_mode(cmd, advertising,
-+						  40000baseLR4_Full))
-+		advertised |= BIT(OCTEP_LINK_MODE_40GBASE_LR4);
-+	if (ethtool_link_ksettings_test_link_mode(cmd, advertising,
-+						  40000baseSR4_Full))
-+		advertised |= BIT(OCTEP_LINK_MODE_40GBASE_SR4);
-+	if (ethtool_link_ksettings_test_link_mode(cmd, advertising,
-+						  50000baseCR2_Full))
-+		advertised |= BIT(OCTEP_LINK_MODE_50GBASE_CR2);
-+	if (ethtool_link_ksettings_test_link_mode(cmd, advertising,
-+						  50000baseKR2_Full))
-+		advertised |= BIT(OCTEP_LINK_MODE_50GBASE_KR2);
-+	if (ethtool_link_ksettings_test_link_mode(cmd, advertising,
-+						  50000baseSR2_Full))
-+		advertised |= BIT(OCTEP_LINK_MODE_50GBASE_SR2);
-+	if (ethtool_link_ksettings_test_link_mode(cmd, advertising,
-+						  50000baseCR_Full))
-+		advertised |= BIT(OCTEP_LINK_MODE_50GBASE_CR);
-+	if (ethtool_link_ksettings_test_link_mode(cmd, advertising,
-+						  50000baseKR_Full))
-+		advertised |= BIT(OCTEP_LINK_MODE_50GBASE_KR);
-+	if (ethtool_link_ksettings_test_link_mode(cmd, advertising,
-+						  50000baseLR_ER_FR_Full))
-+		advertised |= BIT(OCTEP_LINK_MODE_50GBASE_LR);
-+	if (ethtool_link_ksettings_test_link_mode(cmd, advertising,
-+						  50000baseSR_Full))
-+		advertised |= BIT(OCTEP_LINK_MODE_50GBASE_SR);
-+	if (ethtool_link_ksettings_test_link_mode(cmd, advertising,
-+						  100000baseCR4_Full))
-+		advertised |= BIT(OCTEP_LINK_MODE_100GBASE_CR4);
-+	if (ethtool_link_ksettings_test_link_mode(cmd, advertising,
-+						  100000baseKR4_Full))
-+		advertised |= BIT(OCTEP_LINK_MODE_100GBASE_KR4);
-+	if (ethtool_link_ksettings_test_link_mode(cmd, advertising,
-+						  100000baseLR4_ER4_Full))
-+		advertised |= BIT(OCTEP_LINK_MODE_100GBASE_LR4);
-+	if (ethtool_link_ksettings_test_link_mode(cmd, advertising,
-+						  100000baseSR4_Full))
-+		advertised |= BIT(OCTEP_LINK_MODE_100GBASE_SR4);
-+
-+	if (advertised == link_info->advertised_modes &&
-+	    cmd->base.speed == link_info->speed &&
-+	    cmd->base.autoneg == link_info->autoneg)
-+		return 0;
-+
-+	link_info_new.advertised_modes = advertised;
-+	link_info_new.speed = cmd->base.speed;
-+	link_info_new.autoneg = autoneg;
-+
-+	err = octep_set_link_info(oct, &link_info_new);
-+	if (err)
-+		return err;
-+
-+	memcpy(link_info, &link_info_new, sizeof(struct octep_iface_link_info));
-+	return 0;
-+}
-+
-+static const struct ethtool_ops octep_ethtool_ops = {
-+	.get_drvinfo = octep_get_drvinfo,
-+	.get_link = ethtool_op_get_link,
-+	.get_strings = octep_get_strings,
-+	.get_sset_count = octep_get_sset_count,
-+	.get_ethtool_stats = octep_get_ethtool_stats,
-+	.get_link_ksettings = octep_get_link_ksettings,
-+	.set_link_ksettings = octep_set_link_ksettings,
-+};
-+
-+void octep_set_ethtool_ops(struct net_device *netdev)
-+{
-+	netdev->ethtool_ops = &octep_ethtool_ops;
-+}
-diff --git a/drivers/net/ethernet/marvell/octeon_ep/octep_main.c b/drivers/net/ethernet/marvell/octeon_ep/octep_main.c
-index 1c9c00cc4641..31435c41e3f0 100644
---- a/drivers/net/ethernet/marvell/octeon_ep/octep_main.c
-+++ b/drivers/net/ethernet/marvell/octeon_ep/octep_main.c
-@@ -1059,6 +1059,7 @@ static int octep_probe(struct pci_dev *pdev, const struct pci_device_id *ent)
- 	INIT_WORK(&octep_dev->ctrl_mbox_task, octep_ctrl_mbox_task);
- 
- 	netdev->netdev_ops = &octep_netdev_ops;
-+	octep_set_ethtool_ops(netdev);
- 	netif_carrier_off(netdev);
- 
- 	netdev->hw_features = NETIF_F_SG;
+v4:
+  + Revised commit message [Quan]
+  + Fixed build issue found by kernel test robot [Guenter]
+  + Returned regmap_read() error code [Guenter]
+
+v3:
+  + Supported list of compatible string [Rob]
+  + Introduced reg property in DT to specify reg offset [Rob]
+  + Updated description and other minor changes in yaml file [Rob]
+  + Handled negative temperature value [Guenter]
+  + Returned -ENODEV if Manufacturer ID is wrong [Guenter]
+  + Refactored smpro_read_string() and smpro_temp_read() [Guenter]
+  + Removed smpro_write() function [Guenter]
+  + Added minor refactor changes [Quan]
+
+v2:
+  + Used 'struct of_device_id's .data attribute [Lee Jones]
+  + Removed "virtual" sensors [Guenter]
+  + Fixed typo "mili" to "milli", "nanoWatt" to "microWatt" [Guenter]
+  + Reported SOC_TDP as "Socket TDP" using max attributes [Guenter]
+  + Clarified "highest" meaning in documentation [Guenter]
+  + Corrected return error code when host is turn off [Guenter]
+  + Reported MEM HOT Threshold for all DIMMs as temp*_crit [Guenter]
+  + Removed license info as SPDX-License-Identifier existed [Guenter]
+  + Added is_visible() support [Guenter]
+  + Used HWMON_CHANNEL_INFO() macro and LABEL attributes [Guenter]
+  + Made is_valid_id() return boolean [Guenter]
+  + Returned -EPROBE_DEFER when smpro reg inaccessible [Guenter]
+  + Removed unnecessary error message when dev register fail [Guenter]
+  + Removed Socket TDP sensor [Quan]
+  + Changed "ampere,ac01-smpro" to "ampere,smpro" [Quan]
+  + Included sensor type and channel in labels [Quan]
+  + Refactorized code to fix checkpatch.pl --strict complaint [Quan]
+
+Quan Nguyen (9):
+  hwmon: smpro: Add Ampere's Altra smpro-hwmon driver
+  docs: hwmon: (smpro-hwmon) Add documentation
+  misc: smpro-errmon: Add Ampere's SMpro error monitor driver
+  docs: misc-devices: (smpro-errmon) Add documentation
+  misc: smpro-misc: Add Ampere's Altra SMpro misc driver
+  docs: misc-devices: (smpro-misc) Add documentation
+  dt-bindings: mfd: Add bindings for Ampere Altra SMPro MFD driver
+  mfd: smpro-mfd: Adds Ampere's Altra SMpro MFD driver
+  docs: ABI: testing: Document the Ampere Altra Family's SMpro sysfs
+    interfaces
+
+ .../sysfs-bus-platform-devices-ampere-smpro   | 133 +++++
+ .../devicetree/bindings/mfd/ampere,smpro.yaml |  48 ++
+ Documentation/hwmon/index.rst                 |   1 +
+ Documentation/hwmon/smpro-hwmon.rst           | 101 ++++
+ Documentation/misc-devices/index.rst          |   2 +
+ Documentation/misc-devices/smpro-errmon.rst   | 206 +++++++
+ Documentation/misc-devices/smpro-misc.rst     |  82 +++
+ drivers/hwmon/Kconfig                         |   8 +
+ drivers/hwmon/Makefile                        |   1 +
+ drivers/hwmon/smpro-hwmon.c                   | 463 ++++++++++++++++
+ drivers/mfd/Kconfig                           |  12 +
+ drivers/mfd/Makefile                          |   1 +
+ drivers/mfd/smpro-mfd.c                       | 134 +++++
+ drivers/misc/Kconfig                          |  14 +
+ drivers/misc/Makefile                         |   2 +
+ drivers/misc/smpro-errmon.c                   | 517 ++++++++++++++++++
+ drivers/misc/smpro-misc.c                     | 177 ++++++
+ 17 files changed, 1902 insertions(+)
+ create mode 100644 Documentation/ABI/testing/sysfs-bus-platform-devices-ampere-smpro
+ create mode 100644 Documentation/devicetree/bindings/mfd/ampere,smpro.yaml
+ create mode 100644 Documentation/hwmon/smpro-hwmon.rst
+ create mode 100644 Documentation/misc-devices/smpro-errmon.rst
+ create mode 100644 Documentation/misc-devices/smpro-misc.rst
+ create mode 100644 drivers/hwmon/smpro-hwmon.c
+ create mode 100644 drivers/mfd/smpro-mfd.c
+ create mode 100644 drivers/misc/smpro-errmon.c
+ create mode 100644 drivers/misc/smpro-misc.c
+
 -- 
-2.17.1
+2.35.1
 
