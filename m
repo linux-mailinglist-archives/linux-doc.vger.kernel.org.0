@@ -2,205 +2,195 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 8C8864E2A36
-	for <lists+linux-doc@lfdr.de>; Mon, 21 Mar 2022 15:14:03 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 915BF4E2A9B
+	for <lists+linux-doc@lfdr.de>; Mon, 21 Mar 2022 15:28:20 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1348565AbiCUOOm (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 21 Mar 2022 10:14:42 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:57692 "EHLO
+        id S1349086AbiCUO3b (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 21 Mar 2022 10:29:31 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:34100 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1351814AbiCUOLu (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Mon, 21 Mar 2022 10:11:50 -0400
-Received: from mx0a-00069f02.pphosted.com (mx0a-00069f02.pphosted.com [205.220.165.32])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id DA3C9DFDC1;
-        Mon, 21 Mar 2022 07:10:24 -0700 (PDT)
-Received: from pps.filterd (m0246629.ppops.net [127.0.0.1])
-        by mx0b-00069f02.pphosted.com (8.16.1.2/8.16.1.2) with SMTP id 22LCwA0S009877;
-        Mon, 21 Mar 2022 14:09:29 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=oracle.com; h=message-id : date :
- subject : to : cc : references : from : in-reply-to : content-type :
- content-transfer-encoding : mime-version; s=corp-2021-07-09;
- bh=jJvjaD9nDPINy+yDER4EzUWY4D2RflHCie4NZqkBL5M=;
- b=yzinJ2+Z10kVBOUVRRRflvhCizRqfLTxhzITyZk68qsGj8SJ6WCJm1ORyZSMTLLZU857
- FxXycx6ws5J1DfPnShaBppZI9REk/AIzJPbqfSjKwemo/+2jInNtNrftOdhr/u7cUrFt
- glL5A5rl8LJ6Y80zXyOWqkbZjgHeQzUo5UxYs85Y71ewT2tWQuoJGb1qhSoXrvLql9lQ
- wQW17ppoTMDC6zL1vhB+Kbbne9WKYzHaDRxxsS8xerZc/wzNq1l3uBoLBTVrscpJMq42
- /9ug7bMr/4K872OGlnHmBAo6Uew8Rtf3lA+7Shlve8ZbJdnP2bvxbVUIT9LpAx3fNf2b LA== 
-Received: from userp3030.oracle.com (userp3030.oracle.com [156.151.31.80] (may be forged))
-        by mx0b-00069f02.pphosted.com with ESMTP id 3ew72abb8f-1
-        (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
-        Mon, 21 Mar 2022 14:09:28 +0000
-Received: from pps.filterd (userp3030.oracle.com [127.0.0.1])
-        by userp3030.oracle.com (8.16.1.2/8.16.1.2) with SMTP id 22LE85vv038153;
-        Mon, 21 Mar 2022 14:09:27 GMT
-Received: from nam12-bn8-obe.outbound.protection.outlook.com (mail-bn8nam12lp2173.outbound.protection.outlook.com [104.47.55.173])
-        by userp3030.oracle.com with ESMTP id 3ew49r3k8h-1
-        (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
-        Mon, 21 Mar 2022 14:09:26 +0000
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=Fi3vHHOQmg/8+J8BUfKOs5SO+Obgu09/6kMplfMFQic6+XgyFsaVGW78q4ewpvx/0W0DBnz0AGSW+OFq7RxRXhsPkUy7zcf2HIXvDNLi4GWf5oDnjLrB/R3O+7h0nir3tXy2JyUouoOxBN2ZnvUmqoyVq1csuvTHUPXcybvXb0gNlM2w8Dxvtrnlw0Z+0S+QMSnXG9zGNAh6oj0xnqTAycluLL3SJHMWnAZqULDANwMfkRLn3mb9dJ5gW5Eg/0h/OCVwwyQUIhmWMldOyd72SQsV2k1Yk5LPrxDTjWoSB4DLFqLAffAiEg5G8ASgn/xqm5WA14od13Wh4hceQ+o/lQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=jJvjaD9nDPINy+yDER4EzUWY4D2RflHCie4NZqkBL5M=;
- b=kRDGgPJ7u2eUqLjUlKziDP/QrFhs2FHmJMO3ZABM4eOMcOc26alBWIkYcidx0dvtS1LMiPvikLqHtPV/U+EgLMF1YQvuAPR1yJGoYgXgueVA46hXE4wNf2FYfOkv01eqvyWmpmaUskjB7r2FzNIbRS2AMR+XXC7TV+RA4uCF9/nnEQ87n5wF+sa30qr4QDrcVtp7qXgTRvj07VMGQpbImTRa6zBdeaWkPuY/ChyOkksTvNZh0YMW/RzIJ2NzL5IuC19huqy1x/n6Uk1/7AgG0TcelyG5p8Tp3pPv1GsP/4B5kDhEcGfiQzVbetWG3KcebtIf30nI6KjG/kBZPVQpXw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=oracle.com; dmarc=pass action=none header.from=oracle.com;
- dkim=pass header.d=oracle.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oracle.onmicrosoft.com; s=selector2-oracle-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=jJvjaD9nDPINy+yDER4EzUWY4D2RflHCie4NZqkBL5M=;
- b=QKVz2fJRGHsmQhQCAJm+/ClYQRFhl7TLanghabE8JGvznKUIPqLYmv1u7V++pUXNsR6/j5n3SDddF1Ne0r3s3VqoMN9WZBQASW1NyFQSJu37cwnI6uXajsm99bUMM4N+Z3yjxiAYmg2+lHmOnBt6kk0vBDQ+LfYZYHn4Q049Yy4=
-Received: from SJ0PR10MB5742.namprd10.prod.outlook.com (2603:10b6:a03:3ed::20)
- by SA2PR10MB4714.namprd10.prod.outlook.com (2603:10b6:806:111::7) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5081.17; Mon, 21 Mar
- 2022 14:09:24 +0000
-Received: from SJ0PR10MB5742.namprd10.prod.outlook.com
- ([fe80::2400:c9fb:a176:3502]) by SJ0PR10MB5742.namprd10.prod.outlook.com
- ([fe80::2400:c9fb:a176:3502%2]) with mapi id 15.20.5081.022; Mon, 21 Mar 2022
- 14:09:23 +0000
-Message-ID: <d938a7e8-6b4f-f24d-41d3-8058ca2b2ac8@oracle.com>
-Date:   Mon, 21 Mar 2022 09:09:19 -0500
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.7.0
-Subject: Re: [PATCH v21 3/5] arm64: kdump: reimplement crashkernel=X
-Content-Language: en-US
-To:     John Donnelly <John.p.donnelly@oracle.com>,
-        Zhen Lei <thunder.leizhen@huawei.com>,
-        Thomas Gleixner <tglx@linutronix.de>,
-        Ingo Molnar <mingo@redhat.com>, Borislav Petkov <bp@alien8.de>,
-        x86@kernel.org, "H . Peter Anvin" <hpa@zytor.com>,
-        linux-kernel@vger.kernel.org, Dave Young <dyoung@redhat.com>,
-        Baoquan He <bhe@redhat.com>, Vivek Goyal <vgoyal@redhat.com>,
-        Eric Biederman <ebiederm@xmission.com>,
-        kexec@lists.infradead.org,
-        Catalin Marinas <catalin.marinas@arm.com>,
-        Will Deacon <will@kernel.org>,
-        linux-arm-kernel@lists.infradead.org,
+        with ESMTP id S1349090AbiCUO3T (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Mon, 21 Mar 2022 10:29:19 -0400
+Received: from mga12.intel.com (mga12.intel.com [192.55.52.136])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id CD3BD5675B;
+        Mon, 21 Mar 2022 07:25:06 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1647872706; x=1679408706;
+  h=date:from:to:cc:subject:message-id:references:
+   mime-version:in-reply-to;
+  bh=ZRgMOrMKRu4QklsqExf2gmjTp684KRU6lmpsY+ibWYM=;
+  b=i0/4zLYkwiJ8NvI69RnJ/Eg2uKUZ27hDn5B90vRAAJHIxqUp4nVJhvQD
+   FLIRifQoWSx0uXI2FB7o6FtMes/po82QJpzo7cpJ6v44BKXs1kst0XfY1
+   hGLRusJWVnJ/nqttbjkMSE4UvI5qvTLvyf4e8VxeJlbR4uMSjuXgbWRVl
+   4AMHvZxbdT4RalOsU2cWM3E8lGltXZvTeIZZxqIJB0Zo+nAzTdHH4SYrC
+   ZlaqkVfJ0HDD3Lsn2JXRrzivQzGv9i5uPjYLZqLl3146OqLCE3e01wcsb
+   DDOyFv//8Tf7cXvMEWPidEuI98Is629XEwcHHv6GCez0ySqyNPSUn6fC+
+   g==;
+X-IronPort-AV: E=McAfee;i="6200,9189,10292"; a="237506512"
+X-IronPort-AV: E=Sophos;i="5.90,198,1643702400"; 
+   d="scan'208";a="237506512"
+Received: from fmsmga005.fm.intel.com ([10.253.24.32])
+  by fmsmga106.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 21 Mar 2022 07:25:06 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.90,198,1643702400"; 
+   d="scan'208";a="824465825"
+Received: from lkp-server02.sh.intel.com (HELO 89b41b6ae01c) ([10.239.97.151])
+  by fmsmga005.fm.intel.com with ESMTP; 21 Mar 2022 07:25:01 -0700
+Received: from kbuild by 89b41b6ae01c with local (Exim 4.92)
+        (envelope-from <lkp@intel.com>)
+        id 1nWIxu-000HtG-Qp; Mon, 21 Mar 2022 14:24:58 +0000
+Date:   Mon, 21 Mar 2022 22:24:20 +0800
+From:   kernel test robot <lkp@intel.com>
+To:     Quan Nguyen <quan@os.amperecomputing.com>,
+        Lee Jones <lee.jones@linaro.org>,
         Rob Herring <robh+dt@kernel.org>,
-        Frank Rowand <frowand.list@gmail.com>,
-        devicetree@vger.kernel.org, Jonathan Corbet <corbet@lwn.net>,
-        linux-doc@vger.kernel.org
-Cc:     Randy Dunlap <rdunlap@infradead.org>,
-        Feng Zhou <zhoufeng.zf@bytedance.com>,
-        Kefeng Wang <wangkefeng.wang@huawei.com>,
-        Chen Zhou <dingguo.cz@antgroup.com>
-References: <20220227030717.1464-1-thunder.leizhen@huawei.com>
- <20220227030717.1464-4-thunder.leizhen@huawei.com>
- <cc0186d9-29a3-8eff-e38a-95fd4dd9c46f@oracle.com>
-From:   Dave Kleikamp <dave.kleikamp@oracle.com>
-In-Reply-To: <cc0186d9-29a3-8eff-e38a-95fd4dd9c46f@oracle.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-ClientProxiedBy: SN7PR04CA0176.namprd04.prod.outlook.com
- (2603:10b6:806:125::31) To SJ0PR10MB5742.namprd10.prod.outlook.com
- (2603:10b6:a03:3ed::20)
+        Krzysztof Kozlowski <krzk@kernel.org>,
+        Jean Delvare <jdelvare@suse.com>,
+        Guenter Roeck <linux@roeck-us.net>,
+        Jonathan Corbet <corbet@lwn.net>,
+        Derek Kiernan <derek.kiernan@xilinx.com>,
+        Dragan Cvetic <dragan.cvetic@xilinx.com>,
+        Arnd Bergmann <arnd@arndb.de>,
+        Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+        Thu Nguyen <thu@os.amperecomputing.com>,
+        Gustavo Pimentel <Gustavo.Pimentel@synopsys.com>,
+        open list <linux-kernel@vger.kernel.org>,
+        "open list:OPEN FIRMWARE AND FLATTENED DEVICE TREE BINDINGS" 
+        <devicetree@vger.kernel.org>,
+        "open list:HARDWARE MONITORING" <linux-hwmon@vger.kernel.org>,
+        "open list:DOCUMENTATION" <linux-doc@vger.kernel.org>,
+        OpenBMC Maillist <openbmc@lists.ozlabs.org>
+Cc:     llvm@lists.linux.dev, kbuild-all@lists.01.org,
+        Open Source Submission <patches@amperecomputing.com>,
+        Phong Vo <phong@os.amperecomputing.com>,
+        "Thang Q . Nguyen" <thang@os.amperecomputing.com>
+Subject: Re: [PATCH v7 3/9] misc: smpro-errmon: Add Ampere's SMpro error
+ monitor driver
+Message-ID: <202203212244.dJ8wLdCt-lkp@intel.com>
+References: <20220321081355.6802-4-quan@os.amperecomputing.com>
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: acde4f42-0a05-482f-c5ce-08da0b4466ae
-X-MS-TrafficTypeDiagnostic: SA2PR10MB4714:EE_
-X-Microsoft-Antispam-PRVS: <SA2PR10MB4714316445B7D14C213E503087169@SA2PR10MB4714.namprd10.prod.outlook.com>
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: LUg/c+pnbFntsIAIdpaRfkDVRaSEmJno+d1iGmyXkROQUhOs8O5or1T7f2vHF+MOv9iZfCjc3FUvBelR0BEW4Sz2t0a3Y3tt2wUs8hXo2K14wysKC8FmlRjffrwLefvJWoRgn8FLJ/Wt6IJ7OGcpV5JOQLK/xTtPR5PSbs0dPrJervG9zi93EnoRlr3qJE+qgR3nffIAeLo3zmtFej4B2Bes162ddEk+nMbW1fe4O5TrryTn0imSR0now4+RUB2HGWoQgwOV5jNPUcJSS+lpiVzcMF4Puh9Sgd/L3654E9NNsiMjcWBTyQeuZLRbjwpZRpOrNRi6tlZy5Do44M3/5+TSvmclKrPeOERJWPXuxw3aDHVUmgoiVhf0boNe6t4wxvvzFLMOHkmngqCyIDZoXIk89ArliIMpfI9M//UgvI83Cc1Sr5ICLfgG64bqUPJfUNlez23lXpVxj7gjS9hb1kiPYxTJgbR3KQob8gNJ4q6P2jxuYm9+3SqzUFqvxSGqo0pL56jiMEPzI3bxnOUfqPk52gt3fAqmCMSmTmQCTAFV+uCBXUvSOfSwlRh5TejJhrzHIjQ/QRBx5Y0mhm+TAMBWWukiRq92TgrXd6WveGT6F2leU6VFaGyVu8L/FB1W105ytHeD6oFJ0a3uWsfcfdt4Rqf4DqCGAk/RoO8p91uOWglQnBBRPeKfqaQSov28BBjKu/uytJyg5yduZgtQrg8mG0JuhoHWkHocpsVY842W0gyz/YpF9sMmbxSjixl33TSgiG/qIzIy9prTsEPi4Q==
-X-Forefront-Antispam-Report: CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:SJ0PR10MB5742.namprd10.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230001)(366004)(54906003)(31686004)(316002)(38100700002)(6512007)(44832011)(110136005)(6666004)(8936002)(4326008)(8676002)(6506007)(83380400001)(86362001)(31696002)(36756003)(26005)(921005)(66556008)(66946007)(186003)(53546011)(5660300002)(7416002)(508600001)(2906002)(6486002)(2616005)(66476007)(43740500002)(45980500001);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?bWRydVFLNndoaUlaS2pnS1hjSG5PV3d5aUliYU9HZzZhc216NlFUcndXcFNa?=
- =?utf-8?B?YjBVNm1vYkpwQzhCRjJqTTY1WWtHSUFsMmZoemdQNkhPcHh1cnJYRVpJTEs3?=
- =?utf-8?B?dnZYMWpoWlVSVDlnWkVZYzM3bnpLT0loc3k2MVowWi9JQ2ZZNWVlOXRWUW1K?=
- =?utf-8?B?Y0hhVlZwODFDS0NldlVDNVh6V3JtRmhLS1NGVXVmNzUyeXF1UlBuQzV2NSti?=
- =?utf-8?B?bWozNGlnMTU2OVFyWTBUWlFZZ0txRGxmU3RRNWtyVlBjUDNhZEJWUTVaYjlF?=
- =?utf-8?B?ZHk3NXpReDJRdXlPN2tDdG9rYlFTNDEzaFBSUTFVOUpRNGthSzdRemEyTFVq?=
- =?utf-8?B?aVBLcEp6Smt5aWRQNVJmNkpIVkhLOE5XRFdhZXBlT2gxanhiQU5pRDFOYjcz?=
- =?utf-8?B?aGRFMCtMTkNJemNvTXoxdGY4Zi9jZWtmazUvSjJkK3VxL2xVVW8xL3VBbGhR?=
- =?utf-8?B?MmJFc0pBU1IrSTd3WGIwR2pSbHNWa3BDaU5TUm9TQ0IxMy9JZ1puY21PZi9N?=
- =?utf-8?B?R3g4UUlVZ0IvUEFYbHY1R1pWaHUwYVZZTE9ncE1PZ2dvNThaQnNzL3JHRlh6?=
- =?utf-8?B?akVqMEdTVlMwL2xpOFhPcHo3V1BBby9RN0NUaXMxVmxvYTdCUUIxaWlyUHUw?=
- =?utf-8?B?bmJmKzR2N3BTaW9kalVSMWRuK1pMU2x3N2U4enVmeXFLL05FVDcxc2NpRFJu?=
- =?utf-8?B?aDdlTVU1KzVDdkovYjNTRXp3bGZacXZvQjF6SFhmUkRCd0dDdTU3dUFRMFlx?=
- =?utf-8?B?TGhXcTBpem90dzRBeDA2dUZYakgzVWZ3YURKbThreDE5WEZEaWY2VER0dGVx?=
- =?utf-8?B?VHdwalJTYldYOU5pazAyK0dFaHZ4RVZmd3REQlZzeXc2YUxPajhJalBLYnFZ?=
- =?utf-8?B?Vmx4REhQRzFnZWplU3hZZ0xWMTJ6MkorOStIVmExcnBOVzBuckNlajYvRUdw?=
- =?utf-8?B?Q1NnYUExc2s3bCs2L0NUMVpRL1UzdDJYQUtrS0V2akFlb0pBK29zTUhCemtI?=
- =?utf-8?B?WGVJNXdKQlNLYTZEUWorQ3ZmVzhtYjFIMWVnc3RTZkR3aUtPYStIb3g5TDlG?=
- =?utf-8?B?dE9haGZaSTZnaEpQNkJpR3l0QzNTcHhCb2IwQUdDV015WisyWWhtcWVmY2F4?=
- =?utf-8?B?YW9abHYrdFlmckEwd2tHc0V3TlVNOFJ0M2NBamxzVUhhOWQ4Z3NOdUZwbEVT?=
- =?utf-8?B?c0RXVVA3YXU3emV5Y0VMVi9hQUcxYkhuMUdkSEoxcm5qZXBIS21ZN0VLWk50?=
- =?utf-8?B?eVowNXVON2E3UmhCdk01bGY0ZncvZFR1cElINFRKLzc0RURaWHB6WUZNZWxV?=
- =?utf-8?B?b3NvRU5wcVQzRkZ4VzFQL0tXMzhhRFhNc013TXJGUllBeTJ6aU1wSGRHaVoy?=
- =?utf-8?B?bkZORi9rTXRIak44NVdTZGh0aUdtNHhyT2RtS2ZBWlB1aUhTVzF6Z25SZ3NF?=
- =?utf-8?B?VHJ2eERZeTdXR044NFhhR0VzNDJiOVlZczhlZ1loSFAzOXlITGVIWVJaRFda?=
- =?utf-8?B?RkhHUndsMlJuRWNVTTJYeC9kT0VJRDU0dldodDRBUzcwMVJ6c3JEdHNLYURJ?=
- =?utf-8?B?N0Q4QmhlcnprTUNSbUZBZUFjWDhnQVVnTGNQY1p1NUc0aGhvZlFBMkptcVIr?=
- =?utf-8?B?UUg1N2lYNVNMaTllTzkvbmFJb1RUM2VRWURXYUdVcG1UNGlGUGtOMFBsWm9a?=
- =?utf-8?B?ZDJ3TzgzcUptbEhlTXJxZWlGMFU1KzRGV1FJZkFtMG1GTi9tbEVrUzBIczdJ?=
- =?utf-8?B?TkduaHl1Vmh6Sk9tVVJOUXZkam1KVXhMbmxwdnB2Y1FkV2ZuUmpvejZ1SG1h?=
- =?utf-8?B?ZDNPc2NHQ0lZYXE4SnNFSnBJbTdoVVNSNDUyUmY2MEpiVkZxWjNRaWNjckQ5?=
- =?utf-8?B?K3ptWXQrODI4eTlnalNXdmVyemVyMU1xQXdpdFBCSWs1Y3VQTjJKOFoyZFBZ?=
- =?utf-8?B?QkNmbUp1K2NzN0tCYjd1Ri93MVpNZWNteEVLSDhJL3hUa1NGMGNNR2hhekk2?=
- =?utf-8?B?UnkralFKWTRBPT0=?=
-X-OriginatorOrg: oracle.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: acde4f42-0a05-482f-c5ce-08da0b4466ae
-X-MS-Exchange-CrossTenant-AuthSource: SJ0PR10MB5742.namprd10.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 21 Mar 2022 14:09:23.6164
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 4e2c6054-71cb-48f1-bd6c-3a9705aca71b
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: nzWL1sSv5bw9oP+u6Tn5kKBT03trK8lspgBr3sLXLXLTfVujtgcwmaUyOkhbGK7MPBcP/oti6AhYO23yVLww9D2xiLR86rlvVEWDl/UB2dk=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SA2PR10MB4714
-X-Proofpoint-Virus-Version: vendor=nai engine=6300 definitions=10292 signatures=694221
-X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 adultscore=0 malwarescore=0 mlxscore=0
- bulkscore=0 phishscore=0 spamscore=0 mlxlogscore=999 suspectscore=0
- classifier=spam adjust=0 reason=mlx scancount=1 engine=8.12.0-2202240000
- definitions=main-2203210091
-X-Proofpoint-GUID: IRD0u_w1U8uV-9o6ukynIRVo8EFQqtM2
-X-Proofpoint-ORIG-GUID: IRD0u_w1U8uV-9o6ukynIRVo8EFQqtM2
-X-Spam-Status: No, score=-2.8 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,NICE_REPLY_A,RCVD_IN_DNSWL_LOW,
-        RCVD_IN_MSPIKE_H5,RCVD_IN_MSPIKE_WL,SPF_HELO_NONE,SPF_NONE,
-        T_SCC_BODY_TEXT_LINE autolearn=ham autolearn_force=no version=3.4.6
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20220321081355.6802-4-quan@os.amperecomputing.com>
+User-Agent: Mutt/1.10.1 (2018-07-13)
+X-Spam-Status: No, score=-5.6 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_MED,
+        SPF_HELO_PASS,SPF_NONE,T_SCC_BODY_TEXT_LINE autolearn=ham
+        autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On 3/21/22 8:29AM, John Donnelly wrote:
-> On 2/26/22 9:07 PM, Zhen Lei wrote:
->> From: Chen Zhou <chenzhou10@huawei.com>
->>
->> There are following issues in arm64 kdump:
->> 1. We use crashkernel=X to reserve crashkernel below 4G, which
->> will fail when there is no enough low memory.
-> 
->                          " Not enough "
->> 2. If reserving crashkernel above 4G, in this case, crash dump
->> kernel will boot failure because there is no low memory available
->> for allocation.
-> 
->   We can't have a "boot failure". If the requested reservation
->   can not be met,  the kdump  configuration is not setup.
+Hi Quan,
 
-I think you misread this. Without these patches, if only high memory is 
-reserved for the crash kernel, then the crash kernel will fail to boot.
+I love your patch! Perhaps something to improve:
 
->>
->> To solve these issues, change the behavior of crashkernel=X and
->> introduce crashkernel=X,[high,low]. crashkernel=X tries low allocation
->> in DMA zone, and fall back to high allocation if it fails.
->> We can also use "crashkernel=X,high" to select a region above DMA zone,
->> which also tries to allocate at least 256M in DMA zone automatically.
->> "crashkernel=Y,low" can be used to allocate specified size low memory.
-> 
-> Is there going to be documentation on what values certain Arm platforms 
-> are going to use this on ?
-> 
->>
->> Signed-off-by: Chen Zhou <chenzhou10@huawei.com>
->> Co-developed-by: Zhen Lei <thunder.leizhen@huawei.com>
->> Signed-off-by: Zhen Lei <thunder.leizhen@huawei.com>
+[auto build test WARNING on char-misc/char-misc-testing]
+[also build test WARNING on groeck-staging/hwmon-next lee-mfd/for-mfd-next v5.17 next-20220318]
+[If your patch is applied to the wrong git tree, kindly drop us a note.
+And when submitting patch, we suggest to use '--base' as documented in
+https://git-scm.com/docs/git-format-patch]
+
+url:    https://github.com/0day-ci/linux/commits/Quan-Nguyen/Add-Ampere-s-Altra-SMPro-MFD-and-its-child-drivers/20220321-161811
+base:   https://git.kernel.org/pub/scm/linux/kernel/git/gregkh/char-misc.git 37fd83916da2e4cae03d350015c82a67b1b334c4
+config: hexagon-allyesconfig (https://download.01.org/0day-ci/archive/20220321/202203212244.dJ8wLdCt-lkp@intel.com/config)
+compiler: clang version 15.0.0 (https://github.com/llvm/llvm-project 85e9b2687a13d1908aa86d1b89c5ce398a06cd39)
+reproduce (this is a W=1 build):
+        wget https://raw.githubusercontent.com/intel/lkp-tests/master/sbin/make.cross -O ~/bin/make.cross
+        chmod +x ~/bin/make.cross
+        # https://github.com/0day-ci/linux/commit/3e85c45303bab9bd02a4761bc7e182fb001ac625
+        git remote add linux-review https://github.com/0day-ci/linux
+        git fetch --no-tags linux-review Quan-Nguyen/Add-Ampere-s-Altra-SMPro-MFD-and-its-child-drivers/20220321-161811
+        git checkout 3e85c45303bab9bd02a4761bc7e182fb001ac625
+        # save the config file to linux build tree
+        mkdir build_dir
+        COMPILER_INSTALL_PATH=$HOME/0day COMPILER=clang make.cross W=1 O=build_dir ARCH=hexagon SHELL=/bin/bash drivers/hwmon/ drivers/misc/
+
+If you fix the issue, kindly add following tag as appropriate
+Reported-by: kernel test robot <lkp@intel.com>
+
+All warnings (new ones prefixed by >>):
+
+>> drivers/misc/smpro-errmon.c:276:6: warning: variable 'data_hi' is used uninitialized whenever 'if' condition is false [-Wsometimes-uninitialized]
+           if (addr2 != 0xff) {
+               ^~~~~~~~~~~~~
+   drivers/misc/smpro-errmon.c:303:28: note: uninitialized use occurs here
+                            ret_hi & 0xff, ret_lo, data_hi, data_lo);
+                                                   ^~~~~~~
+   drivers/misc/smpro-errmon.c:276:2: note: remove the 'if' if its condition is always true
+           if (addr2 != 0xff) {
+           ^~~~~~~~~~~~~~~~~~~
+   drivers/misc/smpro-errmon.c:265:47: note: initialize the variable 'data_hi' to silence this warning
+           unsigned int ret_hi, ret_lo, data_lo, data_hi;
+                                                        ^
+                                                         = 0
+>> drivers/misc/smpro-errmon.c:276:6: warning: variable 'data_lo' is used uninitialized whenever 'if' condition is false [-Wsometimes-uninitialized]
+           if (addr2 != 0xff) {
+               ^~~~~~~~~~~~~
+   drivers/misc/smpro-errmon.c:303:37: note: uninitialized use occurs here
+                            ret_hi & 0xff, ret_lo, data_hi, data_lo);
+                                                            ^~~~~~~
+   drivers/misc/smpro-errmon.c:276:2: note: remove the 'if' if its condition is always true
+           if (addr2 != 0xff) {
+           ^~~~~~~~~~~~~~~~~~~
+   drivers/misc/smpro-errmon.c:265:38: note: initialize the variable 'data_lo' to silence this warning
+           unsigned int ret_hi, ret_lo, data_lo, data_hi;
+                                               ^
+                                                = 0
+   2 warnings generated.
+
+
+vim +276 drivers/misc/smpro-errmon.c
+
+   261	
+   262	static s32 smpro_internal_err_get_info(struct regmap *regmap, u8 addr, u8 addr1,
+   263					       u8 addr2, u8 addr3, u8 subtype, char *buf)
+   264	{
+   265		unsigned int ret_hi, ret_lo, data_lo, data_hi;
+   266		int ret;
+   267	
+   268		ret = regmap_read(regmap, addr, &ret_lo);
+   269		if (ret)
+   270			return ret;
+   271	
+   272		ret = regmap_read(regmap, addr1, &ret_hi);
+   273		if (ret)
+   274			return ret;
+   275	
+ > 276		if (addr2 != 0xff) {
+   277			ret = regmap_read(regmap, addr2, &data_lo);
+   278			if (ret)
+   279				return ret;
+   280			ret = regmap_read(regmap, addr3, &data_hi);
+   281			if (ret)
+   282				return ret;
+   283		}
+   284		/*
+   285		 * Output format:
+   286		 * <errType> <image> <dir> <Location> <errorCode> <data>
+   287		 * Where:
+   288		 *   + errType: SCP Error Type (3 bits)
+   289		 *      1: Warning
+   290		 *      2: Error
+   291		 *      4: Error with data
+   292		 *   + image: SCP Image Code (8 bits)
+   293		 *   + dir: Direction (1 bit)
+   294		 *      0: Enter
+   295		 *      1: Exit
+   296		 *   + location: SCP Module Location Code (8 bits)
+   297		 *   + errorCode: SCP Error Code (16 bits)
+   298		 *   + data : Extensive data (32 bits)
+   299		 *      All bits are 0 when errType is warning or error.
+   300		 */
+   301		return scnprintf(buf, MAX_MSG_LEN, "%01x %02x %01x %02x %04x %04x%04x\n",
+   302				 subtype, (ret_hi & 0xf000) >> 12, (ret_hi & 0x0800) >> 11,
+   303				 ret_hi & 0xff, ret_lo, data_hi, data_lo);
+   304	}
+   305	
+
+-- 
+0-DAY CI Kernel Test Service
+https://01.org/lkp
