@@ -2,80 +2,70 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 073CC4E2BA2
-	for <lists+linux-doc@lfdr.de>; Mon, 21 Mar 2022 16:17:06 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 88BE24E2C0A
+	for <lists+linux-doc@lfdr.de>; Mon, 21 Mar 2022 16:22:30 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1347597AbiCUPS2 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 21 Mar 2022 11:18:28 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:37136 "EHLO
+        id S1350041AbiCUPVv (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 21 Mar 2022 11:21:51 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:39712 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S235225AbiCUPS2 (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Mon, 21 Mar 2022 11:18:28 -0400
-X-Greylist: delayed 2095 seconds by postgrey-1.37 at lindbergh.monkeyblade.net; Mon, 21 Mar 2022 08:17:02 PDT
-Received: from fanzine2.igalia.com (fanzine.igalia.com [178.60.130.6])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 73C73105064;
-        Mon, 21 Mar 2022 08:17:01 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=igalia.com;
-        s=20170329; h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:
-        Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:Content-Description:
-        Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:
-        In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
-        List-Post:List-Owner:List-Archive;
-        bh=zPMe5slwjVlR5NZ8SoEn7+jv/tU4wKHM4MULXO4el7E=; b=lP9VSHa8/RitwBvhw1IRLZWY1s
-        ntwJSXFtmAUK5Wy+pERCG/tr7Tj7+wIMr7/QSpTYj2QHXsM0UUHKhm9NKq94LFVwWEZVPhmqiuxjE
-        I3bembYQkjV3McKUcJ18LmCUlyC669SRGC8HssNm6AAhaOg3DqtG4q12QQTp5uQRcljDmd5sgM3/z
-        Io4axnOpi8u5Q9R1Bb78+4EyJA7mpdsj8MzGzuOEDjwf/gX9CfUqzjaNa5kurNld/Asq8hLLUjkNe
-        3OeKjY1p8fIdrXOdOhRI+Zwdx3xEZz0gR9yB/4zCdE3MW0R/z+xC+w+wDBQ7CM8/WyjzjT0xMKRXp
-        dxN5vsNA==;
-Received: from [187.39.124.208] (helo=localhost)
-        by fanzine2.igalia.com with esmtpsa 
-        (Cipher TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__AES_256_GCM:256) (Exim)
-        id 1nWJEP-0002GL-Uz; Mon, 21 Mar 2022 15:42:02 +0100
-From:   "Guilherme G. Piccoli" <gpiccoli@igalia.com>
-To:     linux-doc@vger.kernel.org
-Cc:     corbet@lwn.net, linux-kernel@vger.kernel.org, gpiccoli@igalia.com,
-        kernel@gpiccoli.net, Thomas Gleixner <tglx@linutronix.de>
-Subject: [PATCH] Documentation: Fix duplicate statement about raw_spinlock_t type
-Date:   Mon, 21 Mar 2022 11:41:33 -0300
-Message-Id: <20220321144133.49804-1-gpiccoli@igalia.com>
-X-Mailer: git-send-email 2.35.1
+        with ESMTP id S1350248AbiCUPVg (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Mon, 21 Mar 2022 11:21:36 -0400
+Received: from www62.your-server.de (www62.your-server.de [213.133.104.62])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 1C86F4C415;
+        Mon, 21 Mar 2022 08:19:28 -0700 (PDT)
+Received: from sslproxy01.your-server.de ([78.46.139.224])
+        by www62.your-server.de with esmtpsa (TLSv1.3:TLS_AES_256_GCM_SHA384:256)
+        (Exim 4.92.3)
+        (envelope-from <daniel@iogearbox.net>)
+        id 1nWJob-0000YE-NC; Mon, 21 Mar 2022 16:19:25 +0100
+Received: from [2a02:168:f656:0:d16a:7287:ccf0:4fff] (helo=localhost.localdomain)
+        by sslproxy01.your-server.de with esmtpsa (TLSv1.3:TLS_AES_256_GCM_SHA384:256)
+        (Exim 4.92)
+        (envelope-from <daniel@iogearbox.net>)
+        id 1nWJob-0006bq-DU; Mon, 21 Mar 2022 16:19:25 +0100
+Subject: Re: [PATCH] docs/bpf: Fix most/least significant bit typos
+To:     Mahmoud Abumandour <ma.mandourr@gmail.com>,
+        linux-doc@vger.kernel.org
+Cc:     Jonathan Corbet <corbet@lwn.net>,
+        Alexei Starovoitov <ast@kernel.org>,
+        Andrii Nakryiko <andrii@kernel.org>,
+        Martin KaFai Lau <kafai@fb.com>,
+        Song Liu <songliubraving@fb.com>, Yonghong Song <yhs@fb.com>,
+        John Fastabend <john.fastabend@gmail.com>,
+        KP Singh <kpsingh@kernel.org>,
+        Nathan Chancellor <nathan@kernel.org>, bpf@vger.kernel.org
+References: <20220319164337.1272312-1-ma.mandourr@gmail.com>
+From:   Daniel Borkmann <daniel@iogearbox.net>
+Message-ID: <c40b0d55-e3c9-2027-765b-a4868ae16795@iogearbox.net>
+Date:   Mon, 21 Mar 2022 16:19:24 +0100
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
+ Thunderbird/60.7.2
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Spam-Status: No, score=-2.1 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,SPF_HELO_NONE,SPF_PASS,
-        T_SCC_BODY_TEXT_LINE autolearn=ham autolearn_force=no version=3.4.6
+In-Reply-To: <20220319164337.1272312-1-ma.mandourr@gmail.com>
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Language: en-US
+Content-Transfer-Encoding: 7bit
+X-Authenticated-Sender: daniel@iogearbox.net
+X-Virus-Scanned: Clear (ClamAV 0.103.5/26488/Mon Mar 21 09:28:19 2022)
+X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00,NICE_REPLY_A,
+        RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,SPF_PASS,T_SCC_BODY_TEXT_LINE
+        autolearn=ham autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Unless it was duplicate on purpose, to emphasize that a raw_spinlock_t
-is always a spinning lock regardless of PREEMPT_RT or kernel config,
-it's a bit odd that this text is duplicate. So, this patch just clean
-it up, keeping the consistency with the other sections of the text.
+On 3/19/22 5:43 PM, Mahmoud Abumandour wrote:
+> The LSB and MSB acronyms should not be followed by the word "bits". This
+> fixes this issue and uses the full phrases "most/least significant bits"
+> for better readibility.
+> 
+> Signed-off-by: Mahmoud Abumandour <ma.mandourr@gmail.com>
 
-Cc: Thomas Gleixner <tglx@linutronix.de>
-Fixes: 919e9e6395cf ("Documentation: Add lock ordering and nesting documentation")
-Signed-off-by: Guilherme G. Piccoli <gpiccoli@igalia.com>
----
- Documentation/locking/locktypes.rst | 3 ---
- 1 file changed, 3 deletions(-)
+What "issue" is being fixed here? Why would you not use the acronyms? It's fine
+as-is, not applying it.
 
-diff --git a/Documentation/locking/locktypes.rst b/Documentation/locking/locktypes.rst
-index bfa75ea1b66a..9933faad4771 100644
---- a/Documentation/locking/locktypes.rst
-+++ b/Documentation/locking/locktypes.rst
-@@ -211,9 +211,6 @@ raw_spinlock_t and spinlock_t
- raw_spinlock_t
- --------------
- 
--raw_spinlock_t is a strict spinning lock implementation regardless of the
--kernel configuration including PREEMPT_RT enabled kernels.
--
- raw_spinlock_t is a strict spinning lock implementation in all kernels,
- including PREEMPT_RT kernels.  Use raw_spinlock_t only in real critical
- core code, low-level interrupt handling and places where disabling
--- 
-2.35.1
-
+Thanks,
+Daniel
