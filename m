@@ -2,51 +2,90 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 2C4974E6B0C
-	for <lists+linux-doc@lfdr.de>; Fri, 25 Mar 2022 00:13:25 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 8780D4E6B99
+	for <lists+linux-doc@lfdr.de>; Fri, 25 Mar 2022 01:50:20 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1355659AbiCXXOy (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 24 Mar 2022 19:14:54 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:50924 "EHLO
+        id S1357072AbiCYAvq (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 24 Mar 2022 20:51:46 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:45180 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1355657AbiCXXOx (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Thu, 24 Mar 2022 19:14:53 -0400
-Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id E5CD724BF1;
-        Thu, 24 Mar 2022 16:13:19 -0700 (PDT)
-Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
-        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+        with ESMTP id S240383AbiCYAvp (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Thu, 24 Mar 2022 20:51:45 -0400
+Received: from smtp-relay-internal-1.canonical.com (smtp-relay-internal-1.canonical.com [185.125.188.123])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 98EFC7091D
+        for <linux-doc@vger.kernel.org>; Thu, 24 Mar 2022 17:50:11 -0700 (PDT)
+Received: from mail-pg1-f199.google.com (mail-pg1-f199.google.com [209.85.215.199])
+        (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+         key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
         (No client certificate requested)
-        by dfw.source.kernel.org (Postfix) with ESMTPS id 71223616DD;
-        Thu, 24 Mar 2022 23:13:19 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 7F579C340F8;
-        Thu, 24 Mar 2022 23:13:18 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-        s=k20201202; t=1648163598;
-        bh=+fltb//Qd46MccG45fyna2HYRfrQcWokpa1WZMMXSTc=;
-        h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-        b=raBCs8g0skdo7YCRm0LPRzQfq5sosuig94Y3qAAppz5Cpm/6/F6m9pfBpmTZ/+A9K
-         zV4kTrhtHd5i48SzS16jR8StBtwLcQWqPfnFtzeBDV8q3G1QP1T4wqk1COQX1tIPhS
-         uSdB0b1cKe0t74OMLc3PAIv8heXSXNgJsIp+Of+KeGhtXfXd6od4Xt9j2x4cBaoh23
-         rOoc05WndGcu8yE98XIXaj1cMA1HL3MxVlyKCGONaLQs8b6dTyMHa79iWPKI6aWFlM
-         tEnHvACzsgblyBrrn5N8ZnMYqqQxSeeKbnL5FF0cl3rLxCiUhm6dBnUklVraJ/N+S5
-         8vfyZKfF6SAdg==
-From:   Jakub Kicinski <kuba@kernel.org>
-To:     davem@davemloft.net
-Cc:     netdev@vger.kernel.org, pabeni@redhat.com, corbet@lwn.net,
-        imagedong@tencent.com, edumazet@google.com, dsahern@kernel.org,
-        talalahmad@google.com, linux-doc@vger.kernel.org,
-        Jakub Kicinski <kuba@kernel.org>
-Subject: [RFC v2 3/3] skbuff: render the checksum comment to documentation
-Date:   Thu, 24 Mar 2022 16:13:12 -0700
-Message-Id: <20220324231312.2241166-4-kuba@kernel.org>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20220324231312.2241166-1-kuba@kernel.org>
-References: <20220324231312.2241166-1-kuba@kernel.org>
+        by smtp-relay-internal-1.canonical.com (Postfix) with ESMTPS id 082B53F0EC
+        for <linux-doc@vger.kernel.org>; Fri, 25 Mar 2022 00:50:04 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
+        s=20210705; t=1648169404;
+        bh=vW2uiFi4Owf4Y0WZunIGfR72ibo0Z88XaHvRsbPLOPs=;
+        h=From:To:cc:Subject:In-reply-to:References:MIME-Version:
+         Content-Type:Date:Message-ID;
+        b=p3ZRR34wFdvno75CEzKgQ/SL60Jv1Gtao/V8lgKbcz5cSxeCVS0jlEw4+Vjdsb30c
+         s+7dMYsQu2cgjRDnX/hzYP5BdOWvYK3yrFiwiIVvHCECdMBr4I/iMYZ7SgL11NvYUf
+         K6Or1LHyaFZWsBIfkxUeLHqxowVJlP0ATVJauOrDxPwrc6jrIA8LgzTxqY/jBCf3H0
+         c63Z0OC9AeV7LvtfbD6ljgJEPLH0DEuHKAfK5r7e5zCr6te5N6SSVKcrokDPOAKfAg
+         IcZo9+g8dCTC9MwBuwercRq4a2sYqI5TlmIEds01grjcbETbx5kfYGH8bXDSeeG+ou
+         GwxbxFshEujGA==
+Received: by mail-pg1-f199.google.com with SMTP id k71-20020a636f4a000000b00382a7c27856so3063213pgc.3
+        for <linux-doc@vger.kernel.org>; Thu, 24 Mar 2022 17:50:03 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:from:to:cc:subject:in-reply-to:references
+         :comments:mime-version:content-id:content-transfer-encoding:date
+         :message-id;
+        bh=vW2uiFi4Owf4Y0WZunIGfR72ibo0Z88XaHvRsbPLOPs=;
+        b=2LTUmDT/+msYImUxTsH8R2ueblzIHtJuVdG9EM0hHO1pJz8EPz0Udoknb385cUJVdY
+         pQflRs00MDQQNCuKRL9u76OxN8ShK3GmkW6KVINj9jTmTqBqoRR8GpAzxB9SC3JAbgSl
+         dJM+1ZKHhLurkAgI7EMt5I1VPhUvc7FMAxHXAh5s3NR0y29IlBB6GCno45hmJnJdU6Nl
+         /jkD9LzSPykakVVpwP5ncMbnXp4JQatdA/I79FkdK/LW/vdzHbW1kb1uaoA345eWh5jV
+         +OeE0xUEvfn+eFO1mh48w3YWqoKNL3EfnxvNAgHHU9qyltzKCCYevYQyiXZLGUmkfqBW
+         Ewbw==
+X-Gm-Message-State: AOAM530e7IPDjwsqtvLQThtYkaZTHZ+4u/5LaGUSUr7MBsiA34eIfoZH
+        YOWOXDfsfWp59Ln4V5zYJ9ook56PsNQjzfufN+N404uECVQqIE1lNvlFVC3sT9RfV8xhEWUzdOs
+        vTLF11wE5b5lgPShFsehCUQKFK/p7IoXoU9JVjA==
+X-Received: by 2002:a63:5b63:0:b0:378:5645:90f6 with SMTP id l35-20020a635b63000000b00378564590f6mr5900873pgm.505.1648169402453;
+        Thu, 24 Mar 2022 17:50:02 -0700 (PDT)
+X-Google-Smtp-Source: ABdhPJyRwdWWmUSzACldZ1e2BspTq/MatGVgjxrUDK0i3uo+IzxWxg7k/EjXdugLGuPu93mnvtwtrg==
+X-Received: by 2002:a63:5b63:0:b0:378:5645:90f6 with SMTP id l35-20020a635b63000000b00378564590f6mr5900850pgm.505.1648169402069;
+        Thu, 24 Mar 2022 17:50:02 -0700 (PDT)
+Received: from famine.localdomain ([50.125.80.157])
+        by smtp.gmail.com with ESMTPSA id h17-20020a63df51000000b0036b9776ae5bsm3562172pgj.85.2022.03.24.17.50.01
+        (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
+        Thu, 24 Mar 2022 17:50:01 -0700 (PDT)
+Received: by famine.localdomain (Postfix, from userid 1000)
+        id 38B706093D; Thu, 24 Mar 2022 17:50:01 -0700 (PDT)
+Received: from famine (localhost [127.0.0.1])
+        by famine.localdomain (Postfix) with ESMTP id 32FEAA0B18;
+        Thu, 24 Mar 2022 17:50:01 -0700 (PDT)
+From:   Jay Vosburgh <jay.vosburgh@canonical.com>
+To:     Jonathan Toppins <jtoppins@redhat.com>
+cc:     netdev@vger.kernel.org, Long Xin <lxin@redhat.com>,
+        Veaceslav Falico <vfalico@gmail.com>,
+        Andy Gospodarek <andy@greyhouse.net>,
+        "David S. Miller" <davem@davemloft.net>,
+        Jakub Kicinski <kuba@kernel.org>,
+        Paolo Abeni <pabeni@redhat.com>,
+        Jonathan Corbet <corbet@lwn.net>, linux-doc@vger.kernel.org,
+        linux-kernel@vger.kernel.org
+Subject: Re: [PATCH net-next] bond: add mac filter option for balance-xor
+In-reply-to: <b03f0896e1a0b65cc1b278aecc9d080b2ec9d8a6.1648136359.git.jtoppins@redhat.com>
+References: <b03f0896e1a0b65cc1b278aecc9d080b2ec9d8a6.1648136359.git.jtoppins@redhat.com>
+Comments: In-reply-to Jonathan Toppins <jtoppins@redhat.com>
+   message dated "Thu, 24 Mar 2022 11:54:41 -0400."
+X-Mailer: MH-E 8.6+git; nmh 1.6; Emacs 29.0.50
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Spam-Status: No, score=-8.3 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_HI,
+Content-Type: text/plain; charset="us-ascii"
+Content-ID: <12685.1648169401.1@famine>
+Content-Transfer-Encoding: quoted-printable
+Date:   Thu, 24 Mar 2022 17:50:01 -0700
+Message-ID: <12686.1648169401@famine>
+X-Spam-Status: No, score=-5.6 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_MED,
         SPF_HELO_NONE,SPF_PASS,T_SCC_BODY_TEXT_LINE autolearn=ham
         autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
@@ -55,328 +94,773 @@ Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Long time ago Tom added a giant comment to skbuff.h explaining
-checksums. Now that we have a place in Documentation for skbuff
-docs we should render it. Sprinkle some markup while at it.
+	Considering this as an RFC given that net-next is closed...
+	=
 
-Signed-off-by: Jakub Kicinski <kuba@kernel.org>
+Jonathan Toppins <jtoppins@redhat.com> wrote:
+
+>Attempt to replicate the OvS SLB Bonding[1] feature by preventing
+>duplicate frame delivery on a bond whos members are connected to
+>physically different switches.
+>
+>Combining this feature with vlan+srcmac hash policy allows a user to
+>create an access network without the need to use expensive switches that
+>support features like Cisco's VCP.
+
+	Could you describe this use case / implementation in a bit more
+detail?  I.e., how exactly that configuration works.  I don't think this
+patch is replicating everything in the OVS SLB documentation.
+
+>[1] https://docs.openvswitch.org/en/latest/topics/bonding/#slb-bonding
+>
+>Co-developed-by: Long Xin <lxin@redhat.com>
+>Signed-off-by: Long Xin <lxin@redhat.com>
+>Signed-off-by: Jonathan Toppins <jtoppins@redhat.com>
+>---
+> Documentation/networking/bonding.rst  |  19 +++
+> drivers/net/bonding/Makefile          |   2 +-
+> drivers/net/bonding/bond_mac_filter.c | 222 ++++++++++++++++++++++++++
+> drivers/net/bonding/bond_mac_filter.h |  40 +++++
+> drivers/net/bonding/bond_main.c       |  26 +++
+> drivers/net/bonding/bond_netlink.c    |  13 ++
+> drivers/net/bonding/bond_options.c    |  58 ++++++-
+> drivers/net/bonding/bonding_priv.h    |   1 +
+> include/net/bond_options.h            |   1 +
+> include/net/bonding.h                 |   3 +
+> include/uapi/linux/if_link.h          |   1 +
+> 11 files changed, 384 insertions(+), 2 deletions(-)
+> create mode 100644 drivers/net/bonding/bond_mac_filter.c
+> create mode 100644 drivers/net/bonding/bond_mac_filter.h
+>
+>diff --git a/Documentation/networking/bonding.rst b/Documentation/network=
+ing/bonding.rst
+>index 525e6842dd33..a5a1669d3efe 100644
+>--- a/Documentation/networking/bonding.rst
+>+++ b/Documentation/networking/bonding.rst
+>@@ -550,6 +550,25 @@ lacp_rate
+> =
+
+> 	The default is slow.
+> =
+
+>+mac_filter
+>+
+>+	Tells the bonding device to drop frames received who's source MAC
+>+	address	matches entries in a filter table. The filter table is
+>+	populated when the bond transmits frames. This is similar in
+>+	concept to the MAC learning table implemented in the bridge code.
+>+
+>+	This filtering is only enabled for the balance-xor bonding mode.
+>+
+>+	off or 0
+>+		Turns the feature off
+>+
+>+	number
+>+		A number greater than zero turns the feature on and sets
+>+		the maximum number of MAC addresses to store in the hash
+>+		table.
+>+
+>+	The default is off.
+>+
+> max_bonds
+> =
+
+> 	Specifies the number of bonding devices to create for this
+>diff --git a/drivers/net/bonding/Makefile b/drivers/net/bonding/Makefile
+>index 30e8ae3da2da..5dbc360a8522 100644
+>--- a/drivers/net/bonding/Makefile
+>+++ b/drivers/net/bonding/Makefile
+>@@ -5,7 +5,7 @@
+> =
+
+> obj-$(CONFIG_BONDING) +=3D bonding.o
+> =
+
+>-bonding-objs :=3D bond_main.o bond_3ad.o bond_alb.o bond_sysfs.o bond_sy=
+sfs_slave.o bond_debugfs.o bond_netlink.o bond_options.o
+>+bonding-objs :=3D bond_main.o bond_3ad.o bond_alb.o bond_sysfs.o bond_sy=
+sfs_slave.o bond_debugfs.o bond_netlink.o bond_options.o bond_mac_filter.o
+> =
+
+> proc-$(CONFIG_PROC_FS) +=3D bond_procfs.o
+> bonding-objs +=3D $(proc-y)
+>diff --git a/drivers/net/bonding/bond_mac_filter.c b/drivers/net/bonding/=
+bond_mac_filter.c
+>new file mode 100644
+>index 000000000000..a16a1a000f05
+>--- /dev/null
+>+++ b/drivers/net/bonding/bond_mac_filter.c
+>@@ -0,0 +1,222 @@
+>+// SPDX-License-Identifier: GPL-2.0-only
+>+/*
+>+ * Filter received frames based on MAC addresses "behind" the bond.
+>+ */
+>+
+>+#include "bonding_priv.h"
+>+
+>+/* -------------- Cache Management -------------- */
+
+	I don't think this header adds anything, given that there's not
+really a lot in the section.
+
+>+static struct kmem_cache *bond_mac_cache __read_mostly;
+>+
+>+int __init bond_mac_cache_init(void)
+>+{
+>+	bond_mac_cache =3D kmem_cache_create("bond_mac_cache",
+>+					   sizeof(struct bond_mac_cache_entry),
+>+					   0, SLAB_HWCACHE_ALIGN, NULL);
+>+	if (!bond_mac_cache)
+>+		return -ENOMEM;
+>+	return 0;
+>+}
+>+
+>+void bond_mac_cache_destroy(void)
+>+{
+>+	kmem_cache_destroy(bond_mac_cache);
+>+}
+
+	There are a lot of the above sort of wrapper functions that are
+only ever called once.  Some of these, e.g., mac_delete, below, I agree
+with, as the call site is nested fairly deep and the function is
+non-trivial; or, mac_delete_rcu, which is used as a callback.
+
+	The above two, though, I don't see a justification for, along
+with hold_time and maybe a couple others, below.  In my opinion,
+over-abstracting these trivial things with one call site makes the code
+harder to follow.
+
+>+
+>+/* -------------- Hash Table Management -------------- */
+>+
+>+static const struct rhashtable_params bond_rht_params =3D {
+>+	.head_offset         =3D offsetof(struct bond_mac_cache_entry, rhnode),
+>+	.key_offset          =3D offsetof(struct bond_mac_cache_entry, key),
+>+	.key_len             =3D sizeof(struct mac_addr),
+>+	.automatic_shrinking =3D true,
+>+};
+>+
+>+static inline unsigned long hold_time(const struct bonding *bond)
+>+{
+>+	return msecs_to_jiffies(5000);
+>+}
+
+	This shouldn't be a magic number, and if it's an important
+timeout, should it be configurable?
+
+>+
+>+static bool has_expired(const struct bonding *bond,
+>+			struct bond_mac_cache_entry *mac)
+>+{
+>+	return time_before_eq(mac->used + hold_time(bond), jiffies);
+>+}
+>+
+>+static void mac_delete_rcu(struct callback_head *head)
+>+{
+>+	kmem_cache_free(bond_mac_cache,
+>+			container_of(head, struct bond_mac_cache_entry, rcu));
+>+}
+>+
+>+static int mac_delete(struct bonding *bond,
+>+		      struct bond_mac_cache_entry *entry)
+>+{
+>+	int ret;
+>+
+>+	ret =3D rhashtable_remove_fast(bond->mac_filter_tbl,
+>+				     &entry->rhnode,
+>+				     bond->mac_filter_tbl->p);
+>+	set_bit(BOND_MAC_DEAD, &entry->flags);
+>+	call_rcu(&entry->rcu, mac_delete_rcu);
+>+	return ret;
+>+}
+>+
+>+void bond_mac_hash_release_entries(struct work_struct *work)
+>+{
+>+	struct bonding *bond =3D container_of(work, struct bonding,
+>+				mac_work.work);
+>+	struct rhashtable_iter iter;
+>+	struct bond_mac_cache_entry *entry;
+>+	unsigned long flags;
+>+
+>+	rhashtable_walk_enter(bond->mac_filter_tbl, &iter);
+>+	rhashtable_walk_start(&iter);
+>+	while ((entry =3D rhashtable_walk_next(&iter)) !=3D NULL) {
+>+		if (IS_ERR(entry))
+>+			continue;
+>+
+>+		spin_lock_irqsave(&entry->lock, flags);
+>+		if (has_expired(bond, entry))
+>+			mac_delete(bond, entry);
+>+		spin_unlock_irqrestore(&entry->lock, flags);
+>+	}
+>+	rhashtable_walk_stop(&iter);
+>+	rhashtable_walk_exit(&iter);
+>+	queue_delayed_work(bond->wq, &bond->mac_work,
+>+			   msecs_to_jiffies(5 * 60 * 1000));
+>+}
+>+
+>+int bond_mac_hash_init(struct bonding *bond)
+>+{
+>+	int rc;
+
+	As a point of style, (almost) everywhere else in bonding uses
+"ret" for a return value.  The exceptions are largely my doing, but,
+still, it'd be nice to be mostly consistent in nomenclature.
+
+>+
+>+	netdev_dbg(bond->dev, "mac_filter: alloc memory for hash table\n");
+>+	bond->mac_filter_tbl =3D kzalloc(sizeof(*bond->mac_filter_tbl),
+>+				       GFP_KERNEL);
+>+	if (!bond->mac_filter_tbl)
+>+		return -ENOMEM;
+>+
+>+	rc =3D rhashtable_init(bond->mac_filter_tbl, &bond_rht_params);
+>+	if (rc)
+>+		kfree(bond->mac_filter_tbl);
+>+
+>+	return rc;
+>+}
+>+
+>+static void bond_mac_free_entry(void *entry, void *ctx)
+>+{
+>+	kmem_cache_free((struct kmem_cache *)ctx, entry);
+>+}
+>+
+>+void bond_mac_hash_destroy(struct bonding *bond)
+>+{
+>+	if (bond->mac_filter_tbl) {
+>+		rhashtable_free_and_destroy(bond->mac_filter_tbl,
+>+					    bond_mac_free_entry,
+>+					    bond_mac_cache);
+>+		kfree(bond->mac_filter_tbl);
+>+		bond->mac_filter_tbl =3D NULL;
+>+	}
+>+}
+>+
+>+static int mac_create(struct bonding *bond, const u8 *addr)
+>+{
+>+	struct bond_mac_cache_entry *entry;
+>+	int ret;
+>+
+>+	entry =3D kmem_cache_alloc(bond_mac_cache, GFP_ATOMIC);
+>+	if (!entry)
+>+		return -ENOMEM;
+>+	spin_lock_init(&entry->lock);
+>+	memcpy(&entry->key, addr, sizeof(entry->key));
+>+	entry->used =3D jiffies;
+>+	ret =3D rhashtable_lookup_insert_fast(bond->mac_filter_tbl,
+>+					    &entry->rhnode,
+>+					    bond->mac_filter_tbl->p);
+>+	if (ret) {
+>+		kmem_cache_free(bond_mac_cache, entry);
+>+		entry =3D NULL;
+>+		if (ret =3D=3D -EEXIST)
+>+			return 0;
+>+		pr_err_once("Failed to insert mac entry %d\n", ret);
+>+	}
+>+	return ret;
+>+}
+>+
+>+static struct bond_mac_cache_entry *mac_find(struct bonding *bond,
+>+					     const u8 *addr)
+>+{
+>+	struct mac_addr key;
+>+
+>+	memcpy(&key, addr, sizeof(key));
+>+	return rhashtable_lookup(bond->mac_filter_tbl, &key,
+>+				 bond->mac_filter_tbl->p);
+>+}
+>+
+>+inline void mac_update(struct bond_mac_cache_entry *entry)
+>+{
+>+	entry->used =3D jiffies;
+>+}
+>+
+>+int bond_mac_insert(struct bonding *bond, const u8 *addr)
+>+{
+>+	struct bond_mac_cache_entry *entry;
+>+	int rc =3D 0;
+>+
+>+	if (!is_valid_ether_addr(addr))
+>+		return -EINVAL;
+>+
+>+	rcu_read_lock();
+>+	entry =3D mac_find(bond, addr);
+>+	if (entry) {
+>+		unsigned long flags;
+>+
+>+		spin_lock_irqsave(&entry->lock, flags);
+>+		if (!test_bit(BOND_MAC_DEAD, &entry->flags)) {
+>+			mac_update(entry);
+>+			spin_unlock_irqrestore(&entry->lock, flags);
+>+			goto out;
+>+		}
+>+		spin_unlock_irqrestore(&entry->lock, flags);
+
+	This seems really expensive, as it will add a spin_lock_irqsave
+round trip for almost every packet transmitted when mac_filter is
+enabled (as this will be called by bond_xmit_3ad_xor_slave_get).
+
+>+	}
+>+
+>+	rc =3D mac_create(bond, addr);
+>+
+>+out:
+>+	rcu_read_unlock();
+>+	return rc;
+>+}
+>+
+>+int bond_xor_recv(const struct sk_buff *skb, struct bonding *bond,
+>+		  struct slave *slave)
+>+{
+>+	const struct ethhdr *mac_hdr;
+>+	struct bond_mac_cache_entry *entry;
+>+	int rc =3D RX_HANDLER_PASS;
+>+
+>+	mac_hdr =3D (struct ethhdr *)skb_mac_header(skb);
+>+	rcu_read_lock();
+>+	if (is_multicast_ether_addr(mac_hdr->h_dest) &&
+>+	    slave !=3D rcu_dereference(bond->curr_active_slave)) {
+>+		rc =3D RX_HANDLER_CONSUMED;
+>+		goto out;
+>+	}
+>+
+>+	entry =3D mac_find(bond, mac_hdr->h_source);
+>+	if (entry) {
+>+		unsigned long flags;
+>+		bool expired;
+>+
+>+		spin_lock_irqsave(&entry->lock, flags);
+>+		expired =3D has_expired(bond, entry);
+>+		spin_unlock_irqrestore(&entry->lock, flags);
+>+		if (!expired)
+>+			rc =3D RX_HANDLER_CONSUMED;
+>+	}
+
+	As above, really expensive, except for incoming packets here
+(since this is called as the recv_probe).
+
+>+
+>+out:
+>+	rcu_read_unlock();
+>+	return rc;
+>+}
+>diff --git a/drivers/net/bonding/bond_mac_filter.h b/drivers/net/bonding/=
+bond_mac_filter.h
+>new file mode 100644
+>index 000000000000..0cfcc5653e7e
+>--- /dev/null
+>+++ b/drivers/net/bonding/bond_mac_filter.h
+>@@ -0,0 +1,40 @@
+>+/* SPDX-License-Identifier: GPL-2.0-only
+>+ *
+>+ * Filter received frames based on MAC addresses "behind" the bond.
+>+ */
+>+
+>+#ifndef _BOND_MAC_FILTER_H
+>+#define _BOND_MAC_FILTER_H
+>+#include <net/bonding.h>
+>+#include <linux/spinlock.h>
+>+#include <linux/rhashtable.h>
+>+
+>+enum {
+>+	BOND_MAC_DEAD,
+>+	BOND_MAC_LOCKED,
+>+	BOND_MAC_STATIC,
+>+};
+>+
+>+struct bond_mac_cache_entry {
+>+	struct rhash_head	rhnode;
+>+	struct mac_addr		key;
+>+
+>+	spinlock_t		lock; /* protects used member */
+>+	unsigned long		flags;
+>+	unsigned long		used;
+>+	struct rcu_head		rcu;
+>+};
+>+
+>+int __init bond_mac_cache_init(void);
+>+void bond_mac_cache_destroy(void);
+>+
+>+void bond_mac_hash_release_entries(struct work_struct *work);
+>+int bond_mac_hash_init(struct bonding *bond);
+>+void bond_mac_hash_destroy(struct bonding *bond);
+>+
+>+int bond_mac_insert(struct bonding *bond, const u8 *addr);
+>+int bond_xor_recv(const struct sk_buff *skb,
+>+		  struct bonding *bond,
+>+		  struct slave *slave);
+>+
+>+#endif
+>diff --git a/drivers/net/bonding/bond_main.c b/drivers/net/bonding/bond_m=
+ain.c
+>index 15eddca7b4b6..f5a8a50e9116 100644
+>--- a/drivers/net/bonding/bond_main.c
+>+++ b/drivers/net/bonding/bond_main.c
+>@@ -1549,6 +1549,10 @@ static rx_handler_result_t bond_handle_frame(struc=
+t sk_buff **pskb)
+> 		return RX_HANDLER_EXACT;
+> 	}
+> =
+
+>+	/* this function should not rely on the recv_probe to set ret
+>+	 * correctly
+>+	 */
+>+	ret =3D RX_HANDLER_ANOTHER;
+
+	This change is overriding the return from a recv_probe added by
+this patch (bond_xor_recv can return RX_HANDLER_PASS).  Why?
+
+	Also, I don't agree with the comment; the recv_probe return
+value by design affects the return value from bond_handle_frame.
+
+> 	skb->dev =3D bond->dev;
+> =
+
+> 	if (BOND_MODE(bond) =3D=3D BOND_MODE_ALB &&
+>@@ -4117,6 +4121,7 @@ void bond_work_init_all(struct bonding *bond)
+> 	INIT_DELAYED_WORK(&bond->arp_work, bond_arp_monitor);
+> 	INIT_DELAYED_WORK(&bond->ad_work, bond_3ad_state_machine_handler);
+> 	INIT_DELAYED_WORK(&bond->slave_arr_work, bond_slave_arr_handler);
+>+	INIT_DELAYED_WORK(&bond->mac_work, bond_mac_hash_release_entries);
+> }
+> =
+
+> static void bond_work_cancel_all(struct bonding *bond)
+>@@ -4127,6 +4132,7 @@ static void bond_work_cancel_all(struct bonding *bo=
+nd)
+> 	cancel_delayed_work_sync(&bond->ad_work);
+> 	cancel_delayed_work_sync(&bond->mcast_work);
+> 	cancel_delayed_work_sync(&bond->slave_arr_work);
+>+	cancel_delayed_work_sync(&bond->mac_work);
+> }
+> =
+
+> static int bond_open(struct net_device *bond_dev)
+>@@ -4174,6 +4180,11 @@ static int bond_open(struct net_device *bond_dev)
+> 		bond_3ad_initiate_agg_selection(bond, 1);
+> 	}
+> =
+
+>+	if (bond->params.mac_filter) {
+>+		bond->recv_probe =3D bond_xor_recv;
+>+		queue_delayed_work(bond->wq, &bond->mac_work, 0);
+>+	}
+>+
+> 	if (bond_mode_can_use_xmit_hash(bond))
+> 		bond_update_slave_arr(bond, NULL);
+> =
+
+>@@ -5043,6 +5054,13 @@ static struct slave *bond_xmit_3ad_xor_slave_get(s=
+truct bonding *bond,
+> 	if (unlikely(!count))
+> 		return NULL;
+> =
+
+>+	if (bond->params.mac_filter) {
+>+		const struct ethhdr *mac_hdr;
+>+
+>+		mac_hdr =3D (struct ethhdr *)skb_mac_header(skb);
+>+		if (bond_mac_insert(bond, mac_hdr->h_source))
+>+			return NULL;
+>+	}
+> 	slave =3D slaves->arr[hash % count];
+> 	return slave;
+> }
+>@@ -5660,6 +5678,8 @@ static void bond_destructor(struct net_device *bond=
+_dev)
+> =
+
+> 	if (bond->rr_tx_counter)
+> 		free_percpu(bond->rr_tx_counter);
+>+
+>+	bond_mac_hash_destroy(bond);
+> }
+> =
+
+> void bond_setup(struct net_device *bond_dev)
+>@@ -6115,6 +6135,7 @@ static int bond_check_params(struct bond_params *pa=
+rams)
+> 	params->downdelay =3D downdelay;
+> 	params->peer_notif_delay =3D 0;
+> 	params->use_carrier =3D use_carrier;
+>+	params->mac_filter =3D 0;
+> 	params->lacp_active =3D 1;
+> 	params->lacp_fast =3D lacp_fast;
+> 	params->primary[0] =3D 0;
+>@@ -6317,6 +6338,10 @@ static int __init bonding_init(void)
+> 			goto err;
+> 	}
+> =
+
+>+	res =3D bond_mac_cache_init();
+>+	if (res)
+>+		goto err;
+>+
+> 	skb_flow_dissector_init(&flow_keys_bonding,
+> 				flow_keys_bonding_keys,
+> 				ARRAY_SIZE(flow_keys_bonding_keys));
+>@@ -6346,6 +6371,7 @@ static void __exit bonding_exit(void)
+> 	/* Make sure we don't have an imbalance on our netpoll blocking */
+> 	WARN_ON(atomic_read(&netpoll_block_tx));
+> #endif
+>+	bond_mac_cache_destroy();
+> }
+> =
+
+> module_init(bonding_init);
+>diff --git a/drivers/net/bonding/bond_netlink.c b/drivers/net/bonding/bon=
+d_netlink.c
+>index f427fa1737c7..249d79b6e21a 100644
+>--- a/drivers/net/bonding/bond_netlink.c
+>+++ b/drivers/net/bonding/bond_netlink.c
+>@@ -113,6 +113,7 @@ static const struct nla_policy bond_policy[IFLA_BOND_=
+MAX + 1] =3D {
+> 	[IFLA_BOND_PEER_NOTIF_DELAY]    =3D { .type =3D NLA_U32 },
+> 	[IFLA_BOND_MISSED_MAX]		=3D { .type =3D NLA_U8 },
+> 	[IFLA_BOND_NS_IP6_TARGET]	=3D { .type =3D NLA_NESTED },
+>+	[IFLA_BOND_MAC_FILTER]		=3D { .type =3D NLA_U8 },
+> };
+> =
+
+> static const struct nla_policy bond_slave_policy[IFLA_BOND_SLAVE_MAX + 1=
+] =3D {
+>@@ -498,6 +499,14 @@ static int bond_changelink(struct net_device *bond_d=
+ev, struct nlattr *tb[],
+> 		if (err)
+> 			return err;
+> 	}
+>+	if (data[IFLA_BOND_MAC_FILTER]) {
+>+		u8 mac_filter =3D nla_get_u8(data[IFLA_BOND_MAC_FILTER]);
+>+
+>+		bond_opt_initval(&newval, mac_filter);
+>+		err =3D __bond_opt_set(bond, BOND_OPT_MAC_FILTER, &newval);
+>+		if (err)
+>+			return err;
+>+	}
+> =
+
+> 	return 0;
+> }
+>@@ -565,6 +574,7 @@ static size_t bond_get_size(const struct net_device *=
+bond_dev)
+> 						/* IFLA_BOND_NS_IP6_TARGET */
+> 		nla_total_size(sizeof(struct nlattr)) +
+> 		nla_total_size(sizeof(struct in6_addr)) * BOND_MAX_NS_TARGETS +
+>+		nla_total_size(sizeof(u8)) +	/* IFLA_BOND_MAC_FILTER */
+> 		0;
+> }
+> =
+
+>@@ -723,6 +733,9 @@ static int bond_fill_info(struct sk_buff *skb,
+> 	if (nla_put_u8(skb, IFLA_BOND_MISSED_MAX,
+> 		       bond->params.missed_max))
+> 		goto nla_put_failure;
+>+	if (nla_put_u8(skb, IFLA_BOND_MAC_FILTER,
+>+		       bond->params.mac_filter))
+>+		goto nla_put_failure;
+> =
+
+> 	if (BOND_MODE(bond) =3D=3D BOND_MODE_8023AD) {
+> 		struct ad_info info;
+>diff --git a/drivers/net/bonding/bond_options.c b/drivers/net/bonding/bon=
+d_options.c
+>index 64f7db2627ce..0f6036ff7b86 100644
+>--- a/drivers/net/bonding/bond_options.c
+>+++ b/drivers/net/bonding/bond_options.c
+>@@ -15,6 +15,7 @@
+> #include <linux/sched/signal.h>
+> =
+
+> #include <net/bonding.h>
+>+#include "bonding_priv.h"
+> =
+
+> static int bond_option_active_slave_set(struct bonding *bond,
+> 					const struct bond_opt_value *newval);
+>@@ -84,6 +85,8 @@ static int bond_option_ad_user_port_key_set(struct bond=
+ing *bond,
+> 					    const struct bond_opt_value *newval);
+> static int bond_option_missed_max_set(struct bonding *bond,
+> 				      const struct bond_opt_value *newval);
+>+static int bond_option_mac_filter_set(struct bonding *bond,
+>+				      const struct bond_opt_value *newval);
+> =
+
+> =
+
+> static const struct bond_opt_value bond_mode_tbl[] =3D {
+>@@ -226,6 +229,12 @@ static const struct bond_opt_value bond_missed_max_t=
+bl[] =3D {
+> 	{ NULL,		-1,	0},
+> };
+> =
+
+>+static const struct bond_opt_value bond_mac_filter_tbl[] =3D {
+>+	{ "off",	0,	BOND_VALFLAG_MIN | BOND_VALFLAG_DEFAULT},
+>+	{ "maxval",	18,	BOND_VALFLAG_MAX},
+
+	What's the magic number 18?
+
+>+	{ NULL,		-1,	0}
+>+};
+>+
+> static const struct bond_option bond_opts[BOND_OPT_LAST] =3D {
+> 	[BOND_OPT_MODE] =3D {
+> 		.id =3D BOND_OPT_MODE,
+>@@ -482,7 +491,16 @@ static const struct bond_option bond_opts[BOND_OPT_L=
+AST] =3D {
+> 		.desc =3D "Delay between each peer notification on failover event, in =
+milliseconds",
+> 		.values =3D bond_intmax_tbl,
+> 		.set =3D bond_option_peer_notif_delay_set
+>-	}
+>+	},
+>+	[BOND_OPT_MAC_FILTER] =3D {
+>+		.id =3D BOND_OPT_MAC_FILTER,
+>+		.name =3D "mac_filter",
+>+		.unsuppmodes =3D BOND_MODE_ALL_EX(BIT(BOND_MODE_XOR)),
+>+		.desc =3D "filter received frames based on MAC addresses that have tra=
+nsmitted from the bond, number of MAC addresses to track",
+>+		.flags =3D BOND_OPTFLAG_NOSLAVES | BOND_OPTFLAG_IFDOWN,
+>+		.values =3D bond_mac_filter_tbl,
+>+		.set =3D bond_option_mac_filter_set
+>+	},
+> };
+> =
+
+> /* Searches for an option by name */
+>@@ -1035,6 +1053,44 @@ static int bond_option_use_carrier_set(struct bond=
+ing *bond,
+> 	return 0;
+> }
+> =
+
+>+static int bond_option_mac_filter_set(struct bonding *bond,
+>+				      const struct bond_opt_value *newval)
+>+{
+>+	int rc =3D 0;
+>+	u8 prev =3D bond->params.mac_filter;
+>+
+>+	if (newval->value && bond->params.arp_interval) {
+>+		netdev_err(bond->dev, "ARP monitoring cannot be used with MAC Filterin=
+g.\n");
+>+		rc =3D -EPERM;
+>+		goto err;
+>+	}
+
+	What happens if a user (a) switches to ARP monitor with
+arp_validate in balance-xor mode after mac_filter is enabled, or, (b)
+changes the mode to something other than balance-xor with mac_filter
+enabled (both by changing the configuration in real time)?
+
+	-J
+
+>+
+>+	netdev_dbg(bond->dev, "Setting mac_filter to %llu\n",
+>+		   newval->value);
+>+	bond->params.mac_filter =3D newval->value;
+>+
+>+	if (prev =3D=3D 0 && bond->params.mac_filter > 0) {
+>+		rc =3D bond_mac_hash_init(bond);
+>+		if (rc)
+>+			goto err;
+>+	} else if (prev > 0 && bond->params.mac_filter =3D=3D 0)
+>+		bond_mac_hash_destroy(bond);
+>+
+>+	if (bond->mac_filter_tbl) {
+>+		bond->mac_filter_tbl->p.max_size =3D
+>+			1 << bond->params.mac_filter;
+>+		netdev_dbg(bond->dev, "mac_filter hash table size: %d\n",
+>+			   bond->mac_filter_tbl->p.max_size);
+>+	}
+>+
+>+out:
+>+	return rc;
+>+
+>+err:
+>+	bond->params.mac_filter =3D 0;
+>+	goto out;
+>+}
+>+
+> /* There are two tricky bits here.  First, if ARP monitoring is activate=
+d, then
+>  * we must disable MII monitoring.  Second, if the ARP timer isn't runni=
+ng,
+>  * we must start it.
+>diff --git a/drivers/net/bonding/bonding_priv.h b/drivers/net/bonding/bon=
+ding_priv.h
+>index 48cdf3a49a7d..0299f8bcb5fd 100644
+>--- a/drivers/net/bonding/bonding_priv.h
+>+++ b/drivers/net/bonding/bonding_priv.h
+>@@ -15,6 +15,7 @@
+> #ifndef _BONDING_PRIV_H
+> #define _BONDING_PRIV_H
+> #include <generated/utsrelease.h>
+>+#include "bond_mac_filter.h"
+> =
+
+> #define DRV_NAME	"bonding"
+> #define DRV_DESCRIPTION	"Ethernet Channel Bonding Driver"
+>diff --git a/include/net/bond_options.h b/include/net/bond_options.h
+>index 61b49063791c..42e3e676b9c2 100644
+>--- a/include/net/bond_options.h
+>+++ b/include/net/bond_options.h
+>@@ -67,6 +67,7 @@ enum {
+> 	BOND_OPT_LACP_ACTIVE,
+> 	BOND_OPT_MISSED_MAX,
+> 	BOND_OPT_NS_TARGETS,
+>+	BOND_OPT_MAC_FILTER,
+> 	BOND_OPT_LAST
+> };
+> =
+
+>diff --git a/include/net/bonding.h b/include/net/bonding.h
+>index b14f4c0b4e9e..5bc3e7b5a2af 100644
+>--- a/include/net/bonding.h
+>+++ b/include/net/bonding.h
+>@@ -125,6 +125,7 @@ struct bond_params {
+> 	int miimon;
+> 	u8 num_peer_notif;
+> 	u8 missed_max;
+>+	u8 mac_filter;
+> 	int arp_interval;
+> 	int arp_validate;
+> 	int arp_all_targets;
+>@@ -248,6 +249,7 @@ struct bonding {
+> 	struct   delayed_work alb_work;
+> 	struct   delayed_work ad_work;
+> 	struct   delayed_work mcast_work;
+>+	struct   delayed_work mac_work;
+> 	struct   delayed_work slave_arr_work;
+> #ifdef CONFIG_DEBUG_FS
+> 	/* debugging support via debugfs */
+>@@ -260,6 +262,7 @@ struct bonding {
+> 	spinlock_t ipsec_lock;
+> #endif /* CONFIG_XFRM_OFFLOAD */
+> 	struct bpf_prog *xdp_prog;
+>+	struct rhashtable *mac_filter_tbl;
+> };
+> =
+
+> #define bond_slave_get_rcu(dev) \
+>diff --git a/include/uapi/linux/if_link.h b/include/uapi/linux/if_link.h
+>index cc284c048e69..9291df89581f 100644
+>--- a/include/uapi/linux/if_link.h
+>+++ b/include/uapi/linux/if_link.h
+>@@ -929,6 +929,7 @@ enum {
+> 	IFLA_BOND_AD_LACP_ACTIVE,
+> 	IFLA_BOND_MISSED_MAX,
+> 	IFLA_BOND_NS_IP6_TARGET,
+>+	IFLA_BOND_MAC_FILTER,
+> 	__IFLA_BOND_MAX,
+> };
+> =
+
+>-- =
+
+>2.27.0
+>
+
 ---
- Documentation/networking/skbuff.rst |   6 +
- include/linux/skbuff.h              | 219 ++++++++++++++++------------
- 2 files changed, 130 insertions(+), 95 deletions(-)
-
-diff --git a/Documentation/networking/skbuff.rst b/Documentation/networking/skbuff.rst
-index 94681523e345..5b74275a73a3 100644
---- a/Documentation/networking/skbuff.rst
-+++ b/Documentation/networking/skbuff.rst
-@@ -29,3 +29,9 @@ dataref and headerless skbs
- 
- .. kernel-doc:: include/linux/skbuff.h
-    :doc: dataref and headerless skbs
-+
-+Checksum information
-+--------------------
-+
-+.. kernel-doc:: include/linux/skbuff.h
-+   :doc: skb checksums
-diff --git a/include/linux/skbuff.h b/include/linux/skbuff.h
-index 45a48f57d488..3bb3118125b1 100644
---- a/include/linux/skbuff.h
-+++ b/include/linux/skbuff.h
-@@ -43,98 +43,112 @@
- #include <linux/netfilter/nf_conntrack_common.h>
- #endif
- 
--/* The interface for checksum offload between the stack and networking drivers
-+/**
-+ * DOC: skb checksums
-+ *
-+ * The interface for checksum offload between the stack and networking drivers
-  * is as follows...
-  *
-- * A. IP checksum related features
-+ * IP checksum related features
-+ * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  *
-  * Drivers advertise checksum offload capabilities in the features of a device.
-  * From the stack's point of view these are capabilities offered by the driver.
-  * A driver typically only advertises features that it is capable of offloading
-  * to its device.
-  *
-- * The checksum related features are:
-- *
-- *	NETIF_F_HW_CSUM	- The driver (or its device) is able to compute one
-- *			  IP (one's complement) checksum for any combination
-- *			  of protocols or protocol layering. The checksum is
-- *			  computed and set in a packet per the CHECKSUM_PARTIAL
-- *			  interface (see below).
-- *
-- *	NETIF_F_IP_CSUM - Driver (device) is only able to checksum plain
-- *			  TCP or UDP packets over IPv4. These are specifically
-- *			  unencapsulated packets of the form IPv4|TCP or
-- *			  IPv4|UDP where the Protocol field in the IPv4 header
-- *			  is TCP or UDP. The IPv4 header may contain IP options.
-- *			  This feature cannot be set in features for a device
-- *			  with NETIF_F_HW_CSUM also set. This feature is being
-- *			  DEPRECATED (see below).
-- *
-- *	NETIF_F_IPV6_CSUM - Driver (device) is only able to checksum plain
-- *			  TCP or UDP packets over IPv6. These are specifically
-- *			  unencapsulated packets of the form IPv6|TCP or
-- *			  IPv6|UDP where the Next Header field in the IPv6
-- *			  header is either TCP or UDP. IPv6 extension headers
-- *			  are not supported with this feature. This feature
-- *			  cannot be set in features for a device with
-- *			  NETIF_F_HW_CSUM also set. This feature is being
-- *			  DEPRECATED (see below).
-- *
-- *	NETIF_F_RXCSUM - Driver (device) performs receive checksum offload.
-- *			 This flag is only used to disable the RX checksum
-- *			 feature for a device. The stack will accept receive
-- *			 checksum indication in packets received on a device
-- *			 regardless of whether NETIF_F_RXCSUM is set.
-- *
-- * B. Checksumming of received packets by device. Indication of checksum
-- *    verification is set in skb->ip_summed. Possible values are:
-- *
-- * CHECKSUM_NONE:
-+ * .. flat-table:: Checksum related device features
-+ *   :widths: 1 10
-+ *
-+ *   * - %NETIF_F_HW_CSUM
-+ *     - The driver (or its device) is able to compute one
-+ *	 IP (one's complement) checksum for any combination
-+ *	 of protocols or protocol layering. The checksum is
-+ *	 computed and set in a packet per the CHECKSUM_PARTIAL
-+ *	 interface (see below).
-+ *
-+ *   * - %NETIF_F_IP_CSUM
-+ *     - Driver (device) is only able to checksum plain
-+ *	 TCP or UDP packets over IPv4. These are specifically
-+ *	 unencapsulated packets of the form IPv4|TCP or
-+ *	 IPv4|UDP where the Protocol field in the IPv4 header
-+ *	 is TCP or UDP. The IPv4 header may contain IP options.
-+ *	 This feature cannot be set in features for a device
-+ *	 with NETIF_F_HW_CSUM also set. This feature is being
-+ *	 DEPRECATED (see below).
-+ *
-+ *   * - %NETIF_F_IPV6_CSUM
-+ *     - Driver (device) is only able to checksum plain
-+ *	 TCP or UDP packets over IPv6. These are specifically
-+ *	 unencapsulated packets of the form IPv6|TCP or
-+ *	 IPv6|UDP where the Next Header field in the IPv6
-+ *	 header is either TCP or UDP. IPv6 extension headers
-+ *	 are not supported with this feature. This feature
-+ *	 cannot be set in features for a device with
-+ *	 NETIF_F_HW_CSUM also set. This feature is being
-+ *	 DEPRECATED (see below).
-+ *
-+ *   * - %NETIF_F_RXCSUM
-+ *     - Driver (device) performs receive checksum offload.
-+ *	 This flag is only used to disable the RX checksum
-+ *	 feature for a device. The stack will accept receive
-+ *	 checksum indication in packets received on a device
-+ *	 regardless of whether NETIF_F_RXCSUM is set.
-+ *
-+ * Checksumming of received packets by device
-+ * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-+ *
-+ * Indication of checksum verification is set in &sk_buff.ip_summed.
-+ * Possible values are:
-+ *
-+ * - %CHECKSUM_NONE
-  *
-  *   Device did not checksum this packet e.g. due to lack of capabilities.
-  *   The packet contains full (though not verified) checksum in packet but
-  *   not in skb->csum. Thus, skb->csum is undefined in this case.
-  *
-- * CHECKSUM_UNNECESSARY:
-+ * - %CHECKSUM_UNNECESSARY
-  *
-  *   The hardware you're dealing with doesn't calculate the full checksum
-- *   (as in CHECKSUM_COMPLETE), but it does parse headers and verify checksums
-- *   for specific protocols. For such packets it will set CHECKSUM_UNNECESSARY
-- *   if their checksums are okay. skb->csum is still undefined in this case
-+ *   (as in %CHECKSUM_COMPLETE), but it does parse headers and verify checksums
-+ *   for specific protocols. For such packets it will set %CHECKSUM_UNNECESSARY
-+ *   if their checksums are okay. &sk_buff.csum is still undefined in this case
-  *   though. A driver or device must never modify the checksum field in the
-  *   packet even if checksum is verified.
-  *
-- *   CHECKSUM_UNNECESSARY is applicable to following protocols:
-- *     TCP: IPv6 and IPv4.
-- *     UDP: IPv4 and IPv6. A device may apply CHECKSUM_UNNECESSARY to a
-+ *   %CHECKSUM_UNNECESSARY is applicable to following protocols:
-+ *
-+ *     - TCP: IPv6 and IPv4.
-+ *     - UDP: IPv4 and IPv6. A device may apply CHECKSUM_UNNECESSARY to a
-  *       zero UDP checksum for either IPv4 or IPv6, the networking stack
-  *       may perform further validation in this case.
-- *     GRE: only if the checksum is present in the header.
-- *     SCTP: indicates the CRC in SCTP header has been validated.
-- *     FCOE: indicates the CRC in FC frame has been validated.
-+ *     - GRE: only if the checksum is present in the header.
-+ *     - SCTP: indicates the CRC in SCTP header has been validated.
-+ *     - FCOE: indicates the CRC in FC frame has been validated.
-  *
-- *   skb->csum_level indicates the number of consecutive checksums found in
-- *   the packet minus one that have been verified as CHECKSUM_UNNECESSARY.
-+ *   &sk_buff.csum_level indicates the number of consecutive checksums found in
-+ *   the packet minus one that have been verified as %CHECKSUM_UNNECESSARY.
-  *   For instance if a device receives an IPv6->UDP->GRE->IPv4->TCP packet
-  *   and a device is able to verify the checksums for UDP (possibly zero),
-- *   GRE (checksum flag is set) and TCP, skb->csum_level would be set to
-+ *   GRE (checksum flag is set) and TCP, &sk_buff.csum_level would be set to
-  *   two. If the device were only able to verify the UDP checksum and not
-  *   GRE, either because it doesn't support GRE checksum or because GRE
-  *   checksum is bad, skb->csum_level would be set to zero (TCP checksum is
-  *   not considered in this case).
-  *
-- * CHECKSUM_COMPLETE:
-+ * - %CHECKSUM_COMPLETE
-  *
-  *   This is the most generic way. The device supplied checksum of the _whole_
-- *   packet as seen by netif_rx() and fills in skb->csum. This means the
-+ *   packet as seen by netif_rx() and fills in &sk_buff.csum. This means the
-  *   hardware doesn't need to parse L3/L4 headers to implement this.
-  *
-  *   Notes:
-+ *
-  *   - Even if device supports only some protocols, but is able to produce
-  *     skb->csum, it MUST use CHECKSUM_COMPLETE, not CHECKSUM_UNNECESSARY.
-  *   - CHECKSUM_COMPLETE is not applicable to SCTP and FCoE protocols.
-  *
-- * CHECKSUM_PARTIAL:
-+ * - %CHECKSUM_PARTIAL
-  *
-  *   A checksum is set up to be offloaded to a device as described in the
-  *   output description for CHECKSUM_PARTIAL. This may occur on a packet
-@@ -146,14 +160,18 @@
-  *   packet that are after the checksum being offloaded are not considered to
-  *   be verified.
-  *
-- * C. Checksumming on transmit for non-GSO. The stack requests checksum offload
-- *    in the skb->ip_summed for a packet. Values are:
-+ * Checksumming on transmit for non-GSO
-+ * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-+ *
-+ * The stack requests checksum offload in the &sk_buff.ip_summed for a packet.
-+ * Values are:
-  *
-- * CHECKSUM_PARTIAL:
-+ * - %CHECKSUM_PARTIAL
-  *
-  *   The driver is required to checksum the packet as seen by hard_start_xmit()
-- *   from skb->csum_start up to the end, and to record/write the checksum at
-- *   offset skb->csum_start + skb->csum_offset. A driver may verify that the
-+ *   from &sk_buff.csum_start up to the end, and to record/write the checksum at
-+ *   offset &sk_buff.csum_start + &sk_buff.csum_offset.
-+ *   A driver may verify that the
-  *   csum_start and csum_offset values are valid values given the length and
-  *   offset of the packet, but it should not attempt to validate that the
-  *   checksum refers to a legitimate transport layer checksum -- it is the
-@@ -165,55 +183,66 @@
-  *   checksum calculation to the device, or call skb_checksum_help (in the case
-  *   that the device does not support offload for a particular checksum).
-  *
-- *   NETIF_F_IP_CSUM and NETIF_F_IPV6_CSUM are being deprecated in favor of
-- *   NETIF_F_HW_CSUM. New devices should use NETIF_F_HW_CSUM to indicate
-+ *   %NETIF_F_IP_CSUM and %NETIF_F_IPV6_CSUM are being deprecated in favor of
-+ *   %NETIF_F_HW_CSUM. New devices should use %NETIF_F_HW_CSUM to indicate
-  *   checksum offload capability.
-- *   skb_csum_hwoffload_help() can be called to resolve CHECKSUM_PARTIAL based
-+ *   skb_csum_hwoffload_help() can be called to resolve %CHECKSUM_PARTIAL based
-  *   on network device checksumming capabilities: if a packet does not match
-- *   them, skb_checksum_help or skb_crc32c_help (depending on the value of
-- *   csum_not_inet, see item D.) is called to resolve the checksum.
-+ *   them, skb_checksum_help() or skb_crc32c_help() (depending on the value of
-+ *   &sk_buff.csum_not_inet, see :ref:`crc`)
-+ *   is called to resolve the checksum.
-  *
-- * CHECKSUM_NONE:
-+ * - %CHECKSUM_NONE
-  *
-  *   The skb was already checksummed by the protocol, or a checksum is not
-  *   required.
-  *
-- * CHECKSUM_UNNECESSARY:
-+ * - %CHECKSUM_UNNECESSARY
-  *
-  *   This has the same meaning as CHECKSUM_NONE for checksum offload on
-  *   output.
-  *
-- * CHECKSUM_COMPLETE:
-+ * - %CHECKSUM_COMPLETE
-+ *
-  *   Not used in checksum output. If a driver observes a packet with this value
-- *   set in skbuff, it should treat the packet as if CHECKSUM_NONE were set.
-- *
-- * D. Non-IP checksum (CRC) offloads
-- *
-- *   NETIF_F_SCTP_CRC - This feature indicates that a device is capable of
-- *     offloading the SCTP CRC in a packet. To perform this offload the stack
-- *     will set csum_start and csum_offset accordingly, set ip_summed to
-- *     CHECKSUM_PARTIAL and set csum_not_inet to 1, to provide an indication in
-- *     the skbuff that the CHECKSUM_PARTIAL refers to CRC32c.
-- *     A driver that supports both IP checksum offload and SCTP CRC32c offload
-- *     must verify which offload is configured for a packet by testing the
-- *     value of skb->csum_not_inet; skb_crc32c_csum_help is provided to resolve
-- *     CHECKSUM_PARTIAL on skbs where csum_not_inet is set to 1.
-- *
-- *   NETIF_F_FCOE_CRC - This feature indicates that a device is capable of
-- *     offloading the FCOE CRC in a packet. To perform this offload the stack
-- *     will set ip_summed to CHECKSUM_PARTIAL and set csum_start and csum_offset
-- *     accordingly. Note that there is no indication in the skbuff that the
-- *     CHECKSUM_PARTIAL refers to an FCOE checksum, so a driver that supports
-- *     both IP checksum offload and FCOE CRC offload must verify which offload
-- *     is configured for a packet, presumably by inspecting packet headers.
-- *
-- * E. Checksumming on output with GSO.
-- *
-- * In the case of a GSO packet (skb_is_gso(skb) is true), checksum offload
-+ *   set in skbuff, it should treat the packet as if %CHECKSUM_NONE were set.
-+ *
-+ * .. _crc:
-+ *
-+ * Non-IP checksum (CRC) offloads
-+ * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-+ *
-+ * .. flat-table::
-+ *   :widths: 1 10
-+ *
-+ *   * - %NETIF_F_SCTP_CRC
-+ *     - This feature indicates that a device is capable of
-+ *	 offloading the SCTP CRC in a packet. To perform this offload the stack
-+ *	 will set csum_start and csum_offset accordingly, set ip_summed to
-+ *	 %CHECKSUM_PARTIAL and set csum_not_inet to 1, to provide an indication
-+ *	 in the skbuff that the %CHECKSUM_PARTIAL refers to CRC32c.
-+ *	 A driver that supports both IP checksum offload and SCTP CRC32c offload
-+ *	 must verify which offload is configured for a packet by testing the
-+ *	 value of &sk_buff.csum_not_inet; skb_crc32c_csum_help() is provided to
-+ *	 resolve %CHECKSUM_PARTIAL on skbs where csum_not_inet is set to 1.
-+ *
-+ *   * - %NETIF_F_FCOE_CRC
-+ *     - This feature indicates that a device is capable of offloading the FCOE
-+ *	 CRC in a packet. To perform this offload the stack will set ip_summed
-+ *	 to %CHECKSUM_PARTIAL and set csum_start and csum_offset
-+ *	 accordingly. Note that there is no indication in the skbuff that the
-+ *	 %CHECKSUM_PARTIAL refers to an FCOE checksum, so a driver that supports
-+ *	 both IP checksum offload and FCOE CRC offload must verify which offload
-+ *	 is configured for a packet, presumably by inspecting packet headers.
-+ *
-+ * Checksumming on output with GSO
-+ * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-+ *
-+ * In the case of a GSO packet (skb_is_gso() is true), checksum offload
-  * is implied by the SKB_GSO_* flags in gso_type. Most obviously, if the
-- * gso_type is SKB_GSO_TCPV4 or SKB_GSO_TCPV6, TCP checksum offload as
-+ * gso_type is %SKB_GSO_TCPV4 or %SKB_GSO_TCPV6, TCP checksum offload as
-  * part of the GSO operation is implied. If a checksum is being offloaded
-- * with GSO then ip_summed is CHECKSUM_PARTIAL, and both csum_start and
-+ * with GSO then ip_summed is %CHECKSUM_PARTIAL, and both csum_start and
-  * csum_offset are set to refer to the outermost checksum being offloaded
-  * (two offloaded checksums are possible with UDP encapsulation).
-  */
--- 
-2.34.1
-
+	-Jay Vosburgh, jay.vosburgh@canonical.com
