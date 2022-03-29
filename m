@@ -2,87 +2,155 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 8D38F4EB0C2
-	for <lists+linux-doc@lfdr.de>; Tue, 29 Mar 2022 17:37:18 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id C3BD24EB0D3
+	for <lists+linux-doc@lfdr.de>; Tue, 29 Mar 2022 17:37:52 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S233740AbiC2Pi4 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 29 Mar 2022 11:38:56 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:35960 "EHLO
+        id S238901AbiC2Pjc (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 29 Mar 2022 11:39:32 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:40106 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S239134AbiC2PiY (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 29 Mar 2022 11:38:24 -0400
-Received: from desiato.infradead.org (desiato.infradead.org [IPv6:2001:8b0:10b:1:d65d:64ff:fe57:4e05])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id AF2ED1BD83B
-        for <linux-doc@vger.kernel.org>; Tue, 29 Mar 2022 08:36:41 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-        d=infradead.org; s=desiato.20200630; h=Content-Transfer-Encoding:Content-Type
-        :In-Reply-To:From:References:Cc:To:Subject:MIME-Version:Date:Message-ID:
-        Sender:Reply-To:Content-ID:Content-Description;
-        bh=/sYa/wjFbH9UOVAzJ1A/HyPpDpIUp+pYrzFG+QKERao=; b=UGyLHAxgmGoSwU6HZXv7QWODY3
-        AjzuZWFmKm5oNhIsIlxzlhxcbbKl9hakQgbTAJrjLiszS3PuuDYilCljaF7JnNORPFgUCT3oXL0zc
-        X0h65e0fQ++vyz+m2Q8fcJJjUxRMdhBiQfFBiLXkX6N/eO2H30xluKbwTfVoV70k5mJODbkD/gN23
-        k3G4kSqji8Iz5zY4RKFOLDi2u1dD7tzqOnL0JpUuFAL4Vi70F//y/q9v0NagZCTngHwsAjMjg2eem
-        JsABmKLvYbUGEISbr60p1H0+U8+m/wG8HNgTD/826XTviq+YeekFVG06yShrspkwQvMx/2rlEyzI0
-        730yw4RQ==;
-Received: from [2601:1c0:6280:3f0::aa0b]
-        by desiato.infradead.org with esmtpsa (Exim 4.94.2 #2 (Red Hat Linux))
-        id 1nZDtV-005wfE-Il; Tue, 29 Mar 2022 15:36:29 +0000
-Message-ID: <42ae72ad-70db-719b-ed0b-8afedf50121d@infradead.org>
-Date:   Tue, 29 Mar 2022 08:36:23 -0700
+        with ESMTP id S238891AbiC2Pjb (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 29 Mar 2022 11:39:31 -0400
+Received: from mail-yw1-x1135.google.com (mail-yw1-x1135.google.com [IPv6:2607:f8b0:4864:20::1135])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 01BB1255A85
+        for <linux-doc@vger.kernel.org>; Tue, 29 Mar 2022 08:37:47 -0700 (PDT)
+Received: by mail-yw1-x1135.google.com with SMTP id 00721157ae682-2ea1b9b3813so82627797b3.2
+        for <linux-doc@vger.kernel.org>; Tue, 29 Mar 2022 08:37:47 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=bytedance-com.20210112.gappssmtp.com; s=20210112;
+        h=mime-version:from:date:message-id:subject:to:cc;
+        bh=cdiQn4MDYBZT4MD+COiiujM149rg5cmUvhmDH4fWhAI=;
+        b=b0FFvlB+8/wM/+w8iI8lE3ZS1QMXytKOW4Cd8OhonyTCVfrB84LSEiNtPADXgnwKgl
+         N+ZiZJwyZfFo12Ku19vtLdM8bGKMUoBbqeZfKMl00u5tCdsmeS7yK9jciIMY65MA5Leh
+         wi7Vi6n17nHUdocZtBuEF0AfuX37TtK3WKvQjR3nmDnEsDi+Sr4TAxOEamyJ1xSBSmCe
+         4Pwh7A+3X82yrIM0K7qQjp/6hfecVXgWXVdpSDFEju9zKhESv8854khenVmLUnxFipPo
+         Buzkkyx8o6TwydErWCWb7snbfCJa755Z52eELhBcDUkvsuMykgHRWeBQ2eiFPsbGrvz3
+         PeAA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:mime-version:from:date:message-id:subject:to:cc;
+        bh=cdiQn4MDYBZT4MD+COiiujM149rg5cmUvhmDH4fWhAI=;
+        b=Csd2HBNTOK28fX7oGXXNp3N9cRiVNW3EVj8vjWHn4wLEwRl1lJWw4ZZofjLvHNUmDf
+         mBIMeECNGPjkrpqf53V/+XVJB1ybB/V27Gb7bys3dJmWpo8fmJve6kir03yB1liKdhov
+         z8L0CqVNe5SjmTwEaHbMf4Bq3LMbllzdvGlGY1p0RQqd0UiXsSkqCtu75wp4CmVAUVYU
+         rj43RqVSOpUkvN3XVTH/tlcnPzLOulqeiwsJueB9DGIPLrC2APvUGAfUD7OlEUEAkxbu
+         QBlhQdG/iyHYNi9rNQi2YhxkO7YwP6ghEo8/cSiiN8uraMVrlh8o9auXd4FFOMN7HODu
+         1BdA==
+X-Gm-Message-State: AOAM531lXkS2VGhBuGEV3dJpIiZNVyKsI0SEANY2fjcFy62cRl4A9flE
+        +R9h1BvVgaYoMuMCDDiKIOBHFWtAw24TEhSvyh1s6w==
+X-Google-Smtp-Source: ABdhPJy264N9elL1uOkqTXbYsKQktV0xNWVZwrTTKjVZDqGQCViM7C+xgfzXs+Ws9tjYbgAAQVu8W3L5CmwVqLyLbVo=
+X-Received: by 2002:a0d:ccca:0:b0:2e6:2b53:3f16 with SMTP id
+ o193-20020a0dccca000000b002e62b533f16mr32560002ywd.35.1648568266768; Tue, 29
+ Mar 2022 08:37:46 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.7.0
-Subject: Re: [PATCH] docs: sphinx/requirements: Limit jinja2<3.1
-Content-Language: en-US
-To:     Jonathan Corbet <corbet@lwn.net>, Akira Yokosawa <akiyks@gmail.com>
-Cc:     Mauro Carvalho Chehab <mchehab@kernel.org>,
-        linux-doc@vger.kernel.org
-References: <7dbff8a0-f4ff-34a0-71c7-1987baf471f9@gmail.com>
- <871qyk7p28.fsf@meer.lwn.net>
-From:   Randy Dunlap <rdunlap@infradead.org>
-In-Reply-To: <871qyk7p28.fsf@meer.lwn.net>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-Spam-Status: No, score=-4.4 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,NICE_REPLY_A,RCVD_IN_DNSWL_MED,
-        SPF_HELO_NONE,SPF_NONE,T_SCC_BODY_TEXT_LINE autolearn=ham
-        autolearn_force=no version=3.4.6
+From:   Muchun Song <songmuchun@bytedance.com>
+Date:   Tue, 29 Mar 2022 23:37:10 +0800
+Message-ID: <CAMZfGtU1sbsrnCbCKi_By8VTGN1CA1s4A=s1NcHzRunDUpGXgQ@mail.gmail.com>
+Subject: Re: [PATCH v5 1/4] mm: hugetlb_vmemmap: introduce STRUCT_PAGE_SIZE_IS_POWER_OF_2
+To:     Masahiro Yamada <masahiroy@kernel.org>
+Cc:     Jonathan Corbet <corbet@lwn.net>,
+        Mike Kravetz <mike.kravetz@oracle.com>,
+        Andrew Morton <akpm@linux-foundation.org>,
+        "Luis R. Rodriguez" <mcgrof@kernel.org>,
+        Kees Cook <keescook@chromium.org>,
+        Iurii Zaikin <yzaikin@google.com>,
+        Oscar Salvador <osalvador@suse.de>,
+        David Hildenbrand <david@redhat.com>,
+        "open list:DOCUMENTATION" <linux-doc@vger.kernel.org>,
+        Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
+        Linux Memory Management List <linux-mm@kvack.org>,
+        Xiongchun duan <duanxiongchun@bytedance.com>,
+        Muchun Song <smuchun@gmail.com>
+Content-Type: text/plain; charset="UTF-8"
+X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+        DKIM_VALID,RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,SPF_NONE,
+        T_SCC_BODY_TEXT_LINE autolearn=ham autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
+On Fri, Mar 25, 2022 at 1:11 PM Masahiro Yamada <masahiroy@kernel.org> wrote:
+>
+> On Wed, Mar 23, 2022 at 9:57 PM Muchun Song <songmuchun@bytedance.com> wrote:
+> >
+> > If the size of "struct page" is not the power of two and this
+> > feature is enabled, then the vmemmap pages of HugeTLB will be
+> > corrupted after remapping (panic is about to happen in theory).
+> > But this only exists when !CONFIG_MEMCG && !CONFIG_SLUB on
+> > x86_64.  However, it is not a conventional configuration nowadays.
+> > So it is not a real word issue, just the result of a code review.
+> > But we have to prevent anyone from configuring that combined
+> > configuration.  In order to avoid many checks like "is_power_of_2
+> > (sizeof(struct page))" through mm/hugetlb_vmemmap.c.  Introduce
+> > STRUCT_PAGE_SIZE_IS_POWER_OF_2 to detect if the size of struct
+> > page is power of 2 and make this feature depends on this new
+> > config.  Then we could prevent anyone do any unexpected
+> > configuration.
+> >
+> > Signed-off-by: Muchun Song <songmuchun@bytedance.com>
+> > Suggested-by: Luis Chamberlain <mcgrof@kernel.org>
+> > ---
+> >  Kbuild                           | 14 ++++++++++++++
+> >  fs/Kconfig                       |  1 +
+> >  include/linux/mm_types.h         |  2 ++
+> >  mm/Kconfig                       |  3 +++
+> >  mm/hugetlb_vmemmap.c             |  6 ------
+> >  mm/struct_page_size.c            | 19 +++++++++++++++++++
+> >  scripts/check_struct_page_po2.sh |  9 +++++++++
+> >  7 files changed, 48 insertions(+), 6 deletions(-)
+> >  create mode 100644 mm/struct_page_size.c
+> >  create mode 100755 scripts/check_struct_page_po2.sh
+> >
+> > diff --git a/Kbuild b/Kbuild
+> > index fa441b98c9f6..21415c3b2728 100644
+> > --- a/Kbuild
+> > +++ b/Kbuild
+> > @@ -37,6 +37,20 @@ $(offsets-file): arch/$(SRCARCH)/kernel/asm-offsets.s FORCE
+> >         $(call filechk,offsets,__ASM_OFFSETS_H__)
+> >
+> >  #####
+> > +# Generate struct_page_size.h.
+> > +
+> > +struct_page_size-file := include/generated/struct_page_size.h
+> > +
+> > +always-y := $(struct_page_size-file)
+> > +targets := mm/struct_page_size.s
+> > +
+> > +mm/struct_page_size.s: $(timeconst-file) $(bounds-file)
+> > +
+> > +$(struct_page_size-file): mm/struct_page_size.s FORCE
+> > +       $(call filechk,offsets,__LINUX_STRUCT_PAGE_SIZE_H__)
+> > +       $(Q)$(MAKE) -f $(srctree)/Makefile syncconfig
+>
+>
+> No, please do not do this.
+> It is terrible to feed back this to Kconfig again.
 
+OK. I'll remove syncconfig.
 
-On 3/29/22 08:31, Jonathan Corbet wrote:
-> Akira Yokosawa <akiyks@gmail.com> writes:
-> 
->> jinja2 release 3.1.0 (March 24, 2022) broke Sphinx<4.0.
->> This looks like the result of deprecating Python 3.6.
->> It has been tested against Sphinx 4.3.0 and later later.
-> 
-> *Sigh*.  I wish this stuff didn't feel like such a house of cards
-> sometimes... 
+>
+> If you know this happens on !CONFIG_MEMCG && !CONFIG_SLUB on x86_64,
+> why don't you add this dependency directly?
 
-ack.
+It is not enough since the size of the struct page also depends on
+LAST_CPUPID_NOT_IN_PAGE_FLAGS && CONFIG_SLAB.
+We cannot know the result of LAST_CPUPID_NOT_IN_PAGE_FLAGS in
+Kconfig.
 
->> Setting an upper limit of <3.1 to junja2 can unbreak Sphinx<4.0
->> including Sphinx 2.4.4.
->>
->> Signed-off-by: Akira Yokosawa <akiyks@gmail.com>
->> Cc: Jonathan Corbet <corbet@lwn.net>
->> Cc: Mauro Carvalho Chehab <mchehab@kernel.org>
->> Cc: linux-doc@vger.kernel.org
->> ---
->> Or we can bump the requirement to Sphinx>=4.0.
->> Thoughts?
-> 
-> It's probably time to consider a bump there, but that is a bigger one
-> than I would want to do at this point.  So I'll just fast-track this
-> patch in; dropping it into the stable updates probably makes sense too.
+>
+>
+> If you want to avoid the run-time check,
+> why don't you use  BUILD_BUG_ON() ?
+>
 
-Yeah, some of us don't have Python4 installed...
+Now I have another solution to avoid the run-time check.
+We could use macro STRUCT_PAGE_SIZE_IS_POWER_OF_2
+to do that like the following.
 
--- 
-~Randy
+#ifdef STRUCT_PAGE_SIZE_IS_POWER_OF_2
+/* code */
+#endif
+
+Thanks.
