@@ -2,58 +2,46 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id C214E4EADC6
-	for <lists+linux-doc@lfdr.de>; Tue, 29 Mar 2022 14:51:45 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id ED5B84EADEC
+	for <lists+linux-doc@lfdr.de>; Tue, 29 Mar 2022 14:55:17 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S236913AbiC2MxV (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 29 Mar 2022 08:53:21 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:36162 "EHLO
+        id S236776AbiC2M4n (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 29 Mar 2022 08:56:43 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:51242 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S237202AbiC2MxC (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 29 Mar 2022 08:53:02 -0400
-Received: from smtp-1908.mail.infomaniak.ch (smtp-1908.mail.infomaniak.ch [185.125.25.8])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 477C41CB19
-        for <linux-doc@vger.kernel.org>; Tue, 29 Mar 2022 05:51:09 -0700 (PDT)
-Received: from smtp-3-0001.mail.infomaniak.ch (unknown [10.4.36.108])
-        by smtp-3-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4KSTvc1kLVzMq173;
-        Tue, 29 Mar 2022 14:51:08 +0200 (CEST)
-Received: from localhost (unknown [23.97.221.149])
-        by smtp-3-0001.mail.infomaniak.ch (Postfix) with ESMTPA id 4KSTvb754VzlhMbh;
-        Tue, 29 Mar 2022 14:51:07 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=digikod.net;
-        s=20191114; t=1648558268;
-        bh=smcHkSzsHA9UZrPxO4w4wuj0alDdabBqgJAayQUQddQ=;
-        h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-        b=0Spx8mfvteAOpN5mHxVWCFqncvkCGz4WPO4np6Z2DNZsi685wIXBij4Q3qpCU9Ld2
-         FYuOBVwBQZf04SFcEHQwAnZS+4Nwf8pOPhvrFsZI9Vl11zKUyHZvi0UwUZpKkk05T9
-         e4rIBNgAen+ssbWfvNqAQUta5mFhqHmg5KMuu870=
-From:   =?UTF-8?q?Micka=C3=ABl=20Sala=C3=BCn?= <mic@digikod.net>
-To:     James Morris <jmorris@namei.org>,
-        "Serge E . Hallyn" <serge@hallyn.com>
-Cc:     =?UTF-8?q?Micka=C3=ABl=20Sala=C3=BCn?= <mic@digikod.net>,
-        Al Viro <viro@zeniv.linux.org.uk>,
-        Jann Horn <jannh@google.com>,
-        John Johansen <john.johansen@canonical.com>,
-        Kees Cook <keescook@chromium.org>,
-        Konstantin Meskhidze <konstantin.meskhidze@huawei.com>,
-        Paul Moore <paul@paul-moore.com>,
-        Shuah Khan <shuah@kernel.org>,
-        Tetsuo Handa <penguin-kernel@I-love.SAKURA.ne.jp>,
-        linux-doc@vger.kernel.org, linux-fsdevel@vger.kernel.org,
-        linux-kernel@vger.kernel.org,
-        linux-security-module@vger.kernel.org,
-        =?UTF-8?q?Micka=C3=ABl=20Sala=C3=BCn?= <mic@linux.microsoft.com>
-Subject: [PATCH v2 12/12] landlock: Add design choices documentation for filesystem access rights
-Date:   Tue, 29 Mar 2022 14:51:17 +0200
-Message-Id: <20220329125117.1393824-13-mic@digikod.net>
-In-Reply-To: <20220329125117.1393824-1-mic@digikod.net>
-References: <20220329125117.1393824-1-mic@digikod.net>
+        with ESMTP id S236960AbiC2M4Z (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 29 Mar 2022 08:56:25 -0400
+Received: from vps0.lunn.ch (vps0.lunn.ch [185.16.172.187])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id E148B25DA86;
+        Tue, 29 Mar 2022 05:52:58 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=lunn.ch;
+        s=20171124; h=In-Reply-To:Content-Disposition:Content-Type:MIME-Version:
+        References:Message-ID:Subject:Cc:To:From:Date:From:Sender:Reply-To:Subject:
+        Date:Message-ID:To:Cc:MIME-Version:Content-Type:Content-Transfer-Encoding:
+        Content-ID:Content-Description:Content-Disposition:In-Reply-To:References;
+        bh=AItGskdKd8cHRwUBi5yZJ0huf1KiLM64DY3yzo0wmYw=; b=0YRjGWMtjc6njdk43NOcdUQHuA
+        RFgSgFap6Qk7+VpnoheJgLmaQ5MLOzs/6t21Ms90FLEmC3ikkRjESBx4LTwJNxyoO17Gjo38TQOXU
+        fBtIhpxePRQZcEpmeTT/e+4qEFB/PAdOLeWKJK+o1Zew+SM28YAY4kdaJpyJZAT7BEjU=;
+Received: from andrew by vps0.lunn.ch with local (Exim 4.94.2)
+        (envelope-from <andrew@lunn.ch>)
+        id 1nZBL0-00DAC2-4w; Tue, 29 Mar 2022 14:52:42 +0200
+Date:   Tue, 29 Mar 2022 14:52:42 +0200
+From:   Andrew Lunn <andrew@lunn.ch>
+To:     Jakub Kicinski <kuba@kernel.org>
+Cc:     davem@davemloft.net, netdev@vger.kernel.org, pabeni@redhat.com,
+        corbet@lwn.net, bpf@vger.kernel.org, linux-doc@vger.kernel.org,
+        f.fainelli@gmail.com
+Subject: Re: [PATCH net v2 03/14] docs: netdev: move the patch marking
+ section up
+Message-ID: <YkMBGm5bjHp/eZFq@lunn.ch>
+References: <20220329050830.2755213-1-kuba@kernel.org>
+ <20220329050830.2755213-4-kuba@kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-Spam-Status: No, score=-2.8 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_LOW,
-        RCVD_IN_MSPIKE_H5,RCVD_IN_MSPIKE_WL,SPF_HELO_NONE,SPF_PASS,
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20220329050830.2755213-4-kuba@kernel.org>
+X-Spam-Status: No, score=-2.1 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,SPF_HELO_PASS,SPF_PASS,
         T_SCC_BODY_TEXT_LINE autolearn=ham autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
@@ -61,55 +49,17 @@ Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-From: Mickaël Salaün <mic@linux.microsoft.com>
+On Mon, Mar 28, 2022 at 10:08:19PM -0700, Jakub Kicinski wrote:
+> We want people to mark their patches with net and net-next in the subject.
+> Many miss doing that. Move the FAQ section which points that out up, and
+> place it after the section which enumerates the trees, that seems like
+> a pretty logical place for it. Since the two sections are together we
+> can remove a little bit (not too much) of the repetition.
+> 
+> v2: also remove the text for non-git setups, we want people to use git.
+> 
+> Signed-off-by: Jakub Kicinski <kuba@kernel.org>
 
-Reviewed-by: Paul Moore <paul@paul-moore.com>
-Signed-off-by: Mickaël Salaün <mic@linux.microsoft.com>
-Link: https://lore.kernel.org/r/20220329125117.1393824-13-mic@digikod.net
----
+Reviewed-by: Andrew Lunn <andrew@lunn.ch>
 
-Changes since v1:
-* Add Reviewed-by: Paul Moore.
-* Update date.
----
- Documentation/security/landlock.rst | 17 ++++++++++++++++-
- 1 file changed, 16 insertions(+), 1 deletion(-)
-
-diff --git a/Documentation/security/landlock.rst b/Documentation/security/landlock.rst
-index 3df68cb1d10f..eb4905993a59 100644
---- a/Documentation/security/landlock.rst
-+++ b/Documentation/security/landlock.rst
-@@ -7,7 +7,7 @@ Landlock LSM: kernel documentation
- ==================================
- 
- :Author: Mickaël Salaün
--:Date: March 2021
-+:Date: March 2022
- 
- Landlock's goal is to create scoped access-control (i.e. sandboxing).  To
- harden a whole system, this feature should be available to any process,
-@@ -42,6 +42,21 @@ Guiding principles for safe access controls
- * Computation related to Landlock operations (e.g. enforcing a ruleset) shall
-   only impact the processes requesting them.
- 
-+Design choices
-+==============
-+
-+Filesystem access rights
-+------------------------
-+
-+All access rights are tied to an inode and what can be accessed through it.
-+Reading the content of a directory doesn't imply to be allowed to read the
-+content of a listed inode.  Indeed, a file name is local to its parent
-+directory, and an inode can be referenced by multiple file names thanks to
-+(hard) links.  Being able to unlink a file only has a direct impact on the
-+directory, not the unlinked inode.  This is the reason why
-+`LANDLOCK_ACCESS_FS_REMOVE_FILE` or `LANDLOCK_ACCESS_FS_REFER` are not allowed
-+to be tied to files but only to directories.
-+
- Tests
- =====
- 
--- 
-2.35.1
-
+    Andrew
