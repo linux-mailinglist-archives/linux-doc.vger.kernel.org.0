@@ -2,98 +2,162 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id D3FF54EACE8
-	for <lists+linux-doc@lfdr.de>; Tue, 29 Mar 2022 14:15:33 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id C31924EADD3
+	for <lists+linux-doc@lfdr.de>; Tue, 29 Mar 2022 14:51:50 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S236216AbiC2MRO (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 29 Mar 2022 08:17:14 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:46370 "EHLO
+        id S236261AbiC2Mxa (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 29 Mar 2022 08:53:30 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:35374 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S232767AbiC2MRN (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 29 Mar 2022 08:17:13 -0400
-Received: from mail-pl1-x631.google.com (mail-pl1-x631.google.com [IPv6:2607:f8b0:4864:20::631])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id CBD59235870
-        for <linux-doc@vger.kernel.org>; Tue, 29 Mar 2022 05:15:30 -0700 (PDT)
-Received: by mail-pl1-x631.google.com with SMTP id j13so17436082plj.8
-        for <linux-doc@vger.kernel.org>; Tue, 29 Mar 2022 05:15:30 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=message-id:date:mime-version:user-agent:subject:content-language:to
-         :cc:references:from:in-reply-to:content-transfer-encoding;
-        bh=YfApOhHTVAmeFLGlimnHex3IRdXH9OlxhzDzom5I7C4=;
-        b=dLFm5bP9wSrdo9/5ECEkDGf+79JIqBue3V7fVrC8Vr3hC7WUgJ4syCn52Kx8QolON8
-         SKMr54lqVm2R20N6rpCn5XVFLf1NpbjALZtd+KKsIUcGqhgvEPwSKHMHHhVSsEUzuGGC
-         Vn6LnvUrEjqryc+aJikcMYXal+yzM1tpMidKyQzjznLLa26mcGPsJRircQXmGMNyz0+7
-         3cKaGjvU6em0fk9A93kQNQIxvyTxnTpAXbGQ5/wockXy+dZ6bRiKx/8b/b/MP+PIgvfO
-         E/FoQf7b/xdHNB7Gk7/l+3c1IKYxCfsUP9ylqWsyKY7GfgAZHKzcdDzy7vaYSbmbSKHh
-         8xGw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=x-gm-message-state:message-id:date:mime-version:user-agent:subject
-         :content-language:to:cc:references:from:in-reply-to
-         :content-transfer-encoding;
-        bh=YfApOhHTVAmeFLGlimnHex3IRdXH9OlxhzDzom5I7C4=;
-        b=2SCdEnQnOPY9TNW3X04WaJbBbRZmwpSyJNRnuKnWgVzDgQE/CCz9voq1q/VotA7YNo
-         +u1ZVpsm0hUMqAmQj2Fi/1q5GEeQVaKgvwuvTnn2Xd6qxQiuiMUlxlBKo3zqp0FYpqrU
-         AXU3JfOgvciuyB1TGzOrxaZd06N8Q2wzRkirSDl++Lsw0fBRqjaYx4cX6sGV+D1uWtM5
-         i+MdwSVh+JZ/qqC6TfZ8+dr6SW4OkDG+feKIyUKDNzHdxWKbimdCuYOh6xx3pe6ZK/Jm
-         pqgQ8PJZn6tNlxhtXIyxce0n7lMLaM24Q4OFfmq6euaUVLtOwukvWhzO9mYFCrZjSbv0
-         dR/w==
-X-Gm-Message-State: AOAM532fV3pweAakFAmh+DK2TZV+4GSl6qKBPGw1sqGzbIEPeHKaTfmz
-        LCBaamjIwDKz9m+vEw3+PB4=
-X-Google-Smtp-Source: ABdhPJxWvougn4Pj5xyQuzdpKyoHw8N2JvQOJvanHhMwBUqj27J5hN2IfODF0Kf9k2OU8vFe6Lzfrw==
-X-Received: by 2002:a17:90b:3a82:b0:1c7:bc91:a87e with SMTP id om2-20020a17090b3a8200b001c7bc91a87emr4266303pjb.7.1648556130203;
-        Tue, 29 Mar 2022 05:15:30 -0700 (PDT)
-Received: from [192.168.43.80] (subs02-180-214-232-29.three.co.id. [180.214.232.29])
-        by smtp.gmail.com with ESMTPSA id u12-20020a17090a890c00b001b8efcf8e48sm2741886pjn.14.2022.03.29.05.15.27
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Tue, 29 Mar 2022 05:15:29 -0700 (PDT)
-Message-ID: <f960c2d6-e3c5-f452-488f-bba3dada57ec@gmail.com>
-Date:   Tue, 29 Mar 2022 19:15:26 +0700
+        with ESMTP id S237146AbiC2Mw7 (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 29 Mar 2022 08:52:59 -0400
+Received: from smtp-bc08.mail.infomaniak.ch (smtp-bc08.mail.infomaniak.ch [45.157.188.8])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 65606A186
+        for <linux-doc@vger.kernel.org>; Tue, 29 Mar 2022 05:51:00 -0700 (PDT)
+Received: from smtp-3-0000.mail.infomaniak.ch (unknown [10.4.36.107])
+        by smtp-3-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4KSTvQ1PW2zMq12m;
+        Tue, 29 Mar 2022 14:50:58 +0200 (CEST)
+Received: from localhost (unknown [23.97.221.149])
+        by smtp-3-0000.mail.infomaniak.ch (Postfix) with ESMTPA id 4KSTvN48RFzlhRV5;
+        Tue, 29 Mar 2022 14:50:56 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=digikod.net;
+        s=20191114; t=1648558258;
+        bh=30DsOpvra0kSW59WSQV7y+gbtpJ+JQgeFCNzw4XWLXI=;
+        h=From:To:Cc:Subject:Date:From;
+        b=Z5sh+qFGfjJpuUF5qsB5XzdkskXrGFLBI3Q6fzWTYyXKD+nhwaqOvB5HiegtH2D8w
+         RDfu3m4SO160S/f0OOmoS0kbP7OyZw1GI2Yln5ATMN6k/srgFbRZS28BKKaAoVH+/Z
+         qIUNkVv8mSRMXPNMny64kCBix40BpgleK56Jib+M=
+From:   =?UTF-8?q?Micka=C3=ABl=20Sala=C3=BCn?= <mic@digikod.net>
+To:     James Morris <jmorris@namei.org>,
+        "Serge E . Hallyn" <serge@hallyn.com>
+Cc:     =?UTF-8?q?Micka=C3=ABl=20Sala=C3=BCn?= <mic@digikod.net>,
+        Al Viro <viro@zeniv.linux.org.uk>,
+        Jann Horn <jannh@google.com>,
+        John Johansen <john.johansen@canonical.com>,
+        Kees Cook <keescook@chromium.org>,
+        Konstantin Meskhidze <konstantin.meskhidze@huawei.com>,
+        Paul Moore <paul@paul-moore.com>,
+        Shuah Khan <shuah@kernel.org>,
+        Tetsuo Handa <penguin-kernel@I-love.SAKURA.ne.jp>,
+        linux-doc@vger.kernel.org, linux-fsdevel@vger.kernel.org,
+        linux-kernel@vger.kernel.org, linux-security-module@vger.kernel.org
+Subject: [PATCH v2 00/12] Landlock: file linking and renaming support
+Date:   Tue, 29 Mar 2022 14:51:05 +0200
+Message-Id: <20220329125117.1393824-1-mic@digikod.net>
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.7.0
-Subject: Re: [PATCH v3 1/2] Documentation: kernel-doc: Promote two chapter
- headings to page title
-Content-Language: en-US
-To:     Akira Yokosawa <akiyks@gmail.com>
-Cc:     Jonathan Corbet <corbet@lwn.net>,
-        Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
-        linux-doc@vger.kernel.org
-References: <20220328065030.24936-1-bagasdotme@gmail.com>
- <20220328065030.24936-2-bagasdotme@gmail.com>
- <6a5ce717-cc0a-9b7c-ba08-88e3b9f760bb@gmail.com>
- <b92e00a1-04e4-c1e2-42a8-16d87d3d0183@gmail.com>
- <d3db3281-6cf2-51a9-c3ca-9fdae309de34@gmail.com>
-From:   Bagas Sanjaya <bagasdotme@gmail.com>
-In-Reply-To: <d3db3281-6cf2-51a9-c3ca-9fdae309de34@gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-Spam-Status: No, score=-0.6 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_FROM,NICE_REPLY_A,
-        RCVD_IN_DNSWL_NONE,RCVD_IN_SORBS_WEB,SPF_HELO_NONE,SPF_PASS,
-        T_SCC_BODY_TEXT_LINE autolearn=no autolearn_force=no version=3.4.6
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+X-Spam-Status: No, score=-2.8 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_LOW,
+        RCVD_IN_MSPIKE_H4,RCVD_IN_MSPIKE_WL,SPF_HELO_NONE,SPF_PASS,
+        T_SCC_BODY_TEXT_LINE autolearn=unavailable autolearn_force=no
+        version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On 29/03/22 15.25, Akira Yokosawa wrote:
-> [Dropped irrelevant CCs]
-> 
-> Hi Bagas,
-> 
-> First of all, can I ask you to refrain from submitting new versions
-> everyday?  It is one of the most frowned-upon behavior in the kernel
-> community.
-> 
-> See: https://www.kernel.org/doc/html/latest/process/submitting-patches.html#don-t-get-discouraged-or-impatient
-> 
-> I'm intentionally ignoring v4.
-> 
+Hi,
 
-Thanks, dropping it.
+This second patch series includes a path_rename hook update:
+https://lore.kernel.org/r/20220222175332.384545-1-mic@digikod.net
+This enables to return consistent errors (EXDEV or EACCES) in case of
+file renaming with RENAME_EXCHANGE.  This led to a some refactoring of
+check_access_path_dual(), no_more_access() and
+current_check_refer_path() to make them more generic and properly handle
+access requests indifferently for a source or a destination path.  I
+also added 5 new test suites to cover new edge cases.
 
+Problem
+=======
+
+One of the most annoying limitations of Landlock is that sandboxed
+processes can only link and rename files to the same directory (i.e.
+file reparenting is always denied).  Indeed, because of the unprivileged
+nature of Landlock, file hierarchy are identified thanks to ephemeral
+inode tagging, which may cause arbitrary renaming and linking to change
+the security policy in an unexpected way.
+
+Solution
+========
+
+This patch series brings a new access right, LANDLOCK_ACCESS_FS_REFER,
+which enables to allow safe file linking and renaming.  In a nutshell,
+Landlock checks that the inherited access rights of a moved or renamed
+file cannot increase but only reduce.  Eleven new test suits cover file
+renaming and linking, which brings coverage for security/landlock/ from
+93.5% of lines to 94.6%.
+
+The documentation and the tutorial is extended with this new access
+right, along with more explanations about backward and forward
+compatibility, good practices, and a bit about the current access
+rights rational.
+
+While developing this new feature, I also found an issue with the
+current implementation of Landlock.  In some (rare) cases, sandboxed
+processes may be more restricted than intended.  Indeed, because of the
+current way to check file hierarchy access rights, composition of rules
+may be incomplete when requesting multiple accesses at the same time.
+This is fixed with a dedicated patch involving some refactoring.  A new
+test suite checks relevant new edge cases.
+
+As a side effect, and to limit the increased use of the stack, I reduced
+the number of Landlock nested domains from 64 to 16.  I think this
+should be more than enough for legitimate use cases, but feel free to
+challenge this decision with real and legitimate use cases.
+
+This patch series was developed with some complementary new tests sent
+in a standalone patch series:
+https://lore.kernel.org/r/20220221155311.166278-1-mic@digikod.net
+
+Additionally, a new dedicated syzkaller test has been developed to cover
+new paths.
+
+Previous version:
+https://lore.kernel.org/r/20220221212522.320243-1-mic@digikod.net
+
+Regards,
+
+Mickaël Salaün (12):
+  landlock: Define access_mask_t to enforce a consistent access mask
+    size
+  landlock: Reduce the maximum number of layers to 16
+  landlock: Create find_rule() from unmask_layers()
+  landlock: Fix same-layer rule unions
+  landlock: Move filesystem helpers and add a new one
+  LSM: Remove double path_rename hook calls for RENAME_EXCHANGE
+  landlock: Add support for file reparenting with
+    LANDLOCK_ACCESS_FS_REFER
+  selftest/landlock: Add 11 new test suites dedicated to file
+    reparenting
+  samples/landlock: Add support for file reparenting
+  landlock: Document LANDLOCK_ACCESS_FS_REFER and ABI versioning
+  landlock: Document good practices about filesystem policies
+  landlock: Add design choices documentation for filesystem access
+    rights
+
+ Documentation/security/landlock.rst          |   17 +-
+ Documentation/userspace-api/landlock.rst     |  149 ++-
+ include/linux/lsm_hook_defs.h                |    2 +-
+ include/linux/lsm_hooks.h                    |    1 +
+ include/uapi/linux/landlock.h                |   27 +-
+ samples/landlock/sandboxer.c                 |   37 +-
+ security/apparmor/lsm.c                      |   30 +-
+ security/landlock/fs.c                       |  776 ++++++++++---
+ security/landlock/fs.h                       |    2 +-
+ security/landlock/limits.h                   |    6 +-
+ security/landlock/ruleset.c                  |    6 +-
+ security/landlock/ruleset.h                  |   23 +-
+ security/landlock/syscalls.c                 |    2 +-
+ security/security.c                          |    9 +-
+ security/tomoyo/tomoyo.c                     |   11 +-
+ tools/testing/selftests/landlock/base_test.c |    2 +-
+ tools/testing/selftests/landlock/fs_test.c   | 1038 ++++++++++++++++--
+ 17 files changed, 1857 insertions(+), 281 deletions(-)
+
+
+base-commit: 59db887d13b3a4df2713c2a866fa2767e0dea569
 -- 
-An old man doll... just what I always wanted! - Clara
+2.35.1
+
