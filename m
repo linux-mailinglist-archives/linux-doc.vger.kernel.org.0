@@ -2,280 +2,183 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 6A2394EFAF6
-	for <lists+linux-doc@lfdr.de>; Fri,  1 Apr 2022 22:14:51 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id A30314EFB9F
+	for <lists+linux-doc@lfdr.de>; Fri,  1 Apr 2022 22:29:59 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S234146AbiDAUQj (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Fri, 1 Apr 2022 16:16:39 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:35518 "EHLO
+        id S1352591AbiDAUaM (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Fri, 1 Apr 2022 16:30:12 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:33114 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1351832AbiDAUQi (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Fri, 1 Apr 2022 16:16:38 -0400
-Received: from mail-io1-xd32.google.com (mail-io1-xd32.google.com [IPv6:2607:f8b0:4864:20::d32])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 31BA6256668
-        for <linux-doc@vger.kernel.org>; Fri,  1 Apr 2022 13:14:48 -0700 (PDT)
-Received: by mail-io1-xd32.google.com with SMTP id p22so4501021iod.2
-        for <linux-doc@vger.kernel.org>; Fri, 01 Apr 2022 13:14:48 -0700 (PDT)
+        with ESMTP id S1352752AbiDAU37 (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Fri, 1 Apr 2022 16:29:59 -0400
+Received: from mx0a-00069f02.pphosted.com (mx0a-00069f02.pphosted.com [205.220.165.32])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id BC144281689;
+        Fri,  1 Apr 2022 13:28:01 -0700 (PDT)
+Received: from pps.filterd (m0246617.ppops.net [127.0.0.1])
+        by mx0b-00069f02.pphosted.com (8.16.1.2/8.16.1.2) with SMTP id 231JPY1P017622;
+        Fri, 1 Apr 2022 20:27:08 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=oracle.com; h=from : to : cc :
+ subject : date : message-id : content-transfer-encoding : content-type :
+ mime-version; s=corp-2021-07-09;
+ bh=5VhHD7pjMD+T3C2spMZq5JoaTZsiY3zYGNlYP9FtNX4=;
+ b=ehX/HCZ0EYtusMExGUbNHvENPfL5Yh4loJVXop9P1ahl5KgIK8Ye2l+4u14d0jtE4iHf
+ 3j1qkmxfqE33fCajkh1ReS/elBYviBWQ1ke6A2pI3QlcZwz6i7YKRjQskAKNuiYkWuzX
+ NDiGHBotpmPvP4mVff81jBg5iUQe8nPQXNXg8c2zh4rbB/Hg9nXd0ptObp9NJbZIqyZX
+ Lm0n495rb75Ala6jSqgXMyY/fy4FQRoRjUf60XaFXovMDzAq8HTjx3eZTbtTawjJxqJX
+ PiYMwnHbnQRFt4tDjDE1MbkvpwWFb36AvBleR0mIcJ2e/P2VS34/a+9gLFI8eRx7CIZ9 mw== 
+Received: from phxpaimrmta02.imrmtpd1.prodappphxaev1.oraclevcn.com (phxpaimrmta02.appoci.oracle.com [147.154.114.232])
+        by mx0b-00069f02.pphosted.com with ESMTP id 3f1ucu07c2-1
+        (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+        Fri, 01 Apr 2022 20:27:08 +0000
+Received: from pps.filterd (phxpaimrmta02.imrmtpd1.prodappphxaev1.oraclevcn.com [127.0.0.1])
+        by phxpaimrmta02.imrmtpd1.prodappphxaev1.oraclevcn.com (8.16.1.2/8.16.1.2) with SMTP id 231KFSIp036617;
+        Fri, 1 Apr 2022 20:27:07 GMT
+Received: from nam12-bn8-obe.outbound.protection.outlook.com (mail-bn8nam12lp2172.outbound.protection.outlook.com [104.47.55.172])
+        by phxpaimrmta02.imrmtpd1.prodappphxaev1.oraclevcn.com with ESMTP id 3f1s96vg95-1
+        (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+        Fri, 01 Apr 2022 20:27:07 +0000
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=MrWzWX1RbTq6RFh6LvCMKOpN7UMrS0dmoRpuup7yZVSD7Lpkj0pRQEzECuM7W+r1c8ekn/NhH19cBEtKGCzxhAGNZL1exnL2VSLn0aoXY34aQb8SinUvg47ka0C1vBXf9r+aGqQL8GLT8WBXu18ohPu5UGL1LpljWPupPSg+lmzIPQZXz5NrPSp/kAUjz3QwcbjjEyXNEMfWrkzdCxY4G7Tm8YOTfdwhZHOo1Dps5/fKszp3FqBrDXV41myhTRis3EWiX53dXlF62jO1oATkQ7cQhxlYwuZ14KmVgOUE+3M00txvza5XXel9AIQic6JidNjEofCpvsiyX7S5wxWRSQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=5VhHD7pjMD+T3C2spMZq5JoaTZsiY3zYGNlYP9FtNX4=;
+ b=agdpLiYKTcTisfz8Kgi1W8fyHT3eDDv4eY23mze+Gs4aYAP3fEJRcOd7SiSH5vV2jtIBe5+8J9tv1ySNATt48+RVjYuByozxhEQD3A//s24CETPOFrXz8K8HOMFs1BiH564RghufSuCJP/Qf+4yFl+8BevT8GFC0cGiF9imuRYoxB0g3WJyL+ZCledn4gyLVqMIQOylTX7i+RA459vTprkeKIYdIQ/57GNTrnydwth4yzRe/3dPf5OVLaUDXX/cj9Ih3mjlvLq4TfXD9F6MsoidhZJ1dgV/zso9HWT45RkjU96tWmw876K3SqXP1xUHGZRT3Yg0ns7lo+CwKJcyQLA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=oracle.com; dmarc=pass action=none header.from=oracle.com;
+ dkim=pass header.d=oracle.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=google.com; s=20210112;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc;
-        bh=2PNyAd+p3CV4NbixBgg+nxPXydMeiKfM73e0dmTb/Q4=;
-        b=gYLthgNwbAx3gWG/zbiWdQVV2/XJ/ql9pVrdl4e3iNqbAunwWyab7ShFUh9zJWiv7y
-         JpkbM5YpThvi/XXa8CwLL8ZJwOTlxVLzAPHmSpkY9j2iEPbHvQvAeHxfc08FKQ0Xgioo
-         faUl9YI2UzzAwMzsrwTJ5/wHCcYSRQLA2hYTPw+ialtwBCFas2egESpL/rJIs1FWd5XO
-         WIFORmjoTKEUqdrJLJlzeYaralkPBES/6dYYcwOMZJCghgFLogLvg5b8PHi52mLKWVWf
-         gGXgpCKY9c1SUxd51x7NK95FJzPzc595BLAcg2wNGYwRqV1dNTqqGtFT3S46AFR5Esmr
-         2mIA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc;
-        bh=2PNyAd+p3CV4NbixBgg+nxPXydMeiKfM73e0dmTb/Q4=;
-        b=RyI/6dO8Bj/z4oDFgA8jyExNO0pQKCWcneG27Im1RRkc1ydFp7R7xEyPgnRehw/s88
-         KrmusSkESV4DYhe+E9tuHWWKFkyXjWXmpHjWEa6P4BYQWCOJI3zPGhlHt6IJIRp9lPVw
-         aGn8mHcVBkz6nwNe1oo4GSoIkBSDs1QU2u1cjX4QkyGaNlO6jjp3KyqN1U6zK/tikG4a
-         Rd6lrILYOtnqsX/jtjzTqNBlmaDzj0ZpKOdezI4DhRDiEF9cHHkoE12PgeRJLSspX1HF
-         W3Sii0szlYA+0n8le66pvuo7mcVVSJrNGGJ058QdiFFnR84CL67f05Q2ys5wUgxHz0Eh
-         Io/g==
-X-Gm-Message-State: AOAM53158iTkWK9ZWSk3UiqO9KVURNZMYXGMdjffaN8C3wqH83FHGxqo
-        dwGPKyHuzPEqBB0BSdTjCEROSG319+qufbRZt7x2DA==
-X-Google-Smtp-Source: ABdhPJx6m2+ZPtniA6bdR166gHGH8pyPxjiVe1MAQFSrGxKfRwFuoHES6yAjW0YSc2JM+b/OJoYkLcP24S0If8lQdxg=
-X-Received: by 2002:a6b:e40a:0:b0:64c:8ce1:3757 with SMTP id
- u10-20020a6be40a000000b0064c8ce13757mr627949iog.106.1648844086958; Fri, 01
- Apr 2022 13:14:46 -0700 (PDT)
+ d=oracle.onmicrosoft.com; s=selector2-oracle-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=5VhHD7pjMD+T3C2spMZq5JoaTZsiY3zYGNlYP9FtNX4=;
+ b=bgoc0hX+5teMf7kbHl119oFifjCxasgSr4zuwNizBIKaqBeCahWlVCMCGfYUG5W3GRQQic1v/bbf33FQKrbOIvzKFdDocavSuaZLbUPizGv1Kh68vzFiVcbnWSetGpSES8aouMzIKGj5CpF6hfzWgXliN8qmD4o8PLT2HBW9huM=
+Received: from SA1PR10MB5866.namprd10.prod.outlook.com (2603:10b6:806:22b::19)
+ by SJ0PR10MB5647.namprd10.prod.outlook.com (2603:10b6:a03:3da::17) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5123.29; Fri, 1 Apr
+ 2022 20:27:05 +0000
+Received: from SA1PR10MB5866.namprd10.prod.outlook.com
+ ([fe80::25e3:38e5:fb02:34c1]) by SA1PR10MB5866.namprd10.prod.outlook.com
+ ([fe80::25e3:38e5:fb02:34c1%5]) with mapi id 15.20.5123.026; Fri, 1 Apr 2022
+ 20:27:05 +0000
+From:   Alejandro Jimenez <alejandro.j.jimenez@oracle.com>
+To:     corbet@lwn.net, mcgrof@kernel.org, keescook@chromium.org,
+        yzaikin@google.com, linux-fsdevel@vger.kernel.org,
+        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org
+Cc:     akpm@linux-foundation.org, linux@rasmusvillemoes.dk,
+        ebiggers@google.com, peterz@infradead.org, ying.huang@intel.com,
+        gpiccoli@igalia.com, mchehab+huawei@kernel.org, Jason@zx2c4.com,
+        daniel@iogearbox.net, robh@kernel.org, wangqing@vivo.com,
+        prestwoj@gmail.com, dsahern@kernel.org,
+        stephen.s.brennan@oracle.com, alejandro.j.jimenez@oracle.com
+Subject: [RFC 0/1] Add sysctl entry for controlling crash_kexec_post_notifiers
+Date:   Fri,  1 Apr 2022 16:22:59 -0400
+Message-Id: <20220401202300.12660-1-alejandro.j.jimenez@oracle.com>
+X-Mailer: git-send-email 2.34.1
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-ClientProxiedBy: DM5PR07CA0083.namprd07.prod.outlook.com
+ (2603:10b6:4:ad::48) To SA1PR10MB5866.namprd10.prod.outlook.com
+ (2603:10b6:806:22b::19)
 MIME-Version: 1.0
-References: <20220331084151.2600229-1-yosryahmed@google.com>
- <CAAPL-u8g2qkhdTQtFtBS3GNYz0WnyahWEXvR4g_OSaKv+7EozA@mail.gmail.com> <YkcYq8F6MYlMi+yS@cmpxchg.org>
-In-Reply-To: <YkcYq8F6MYlMi+yS@cmpxchg.org>
-From:   Wei Xu <weixugc@google.com>
-Date:   Fri, 1 Apr 2022 13:14:35 -0700
-Message-ID: <CAAPL-u-za-TTyyC5uMVev9eQyhxZS7q3pVqaUxCFjqk+Sv9+ig@mail.gmail.com>
-Subject: Re: [PATCH resend] memcg: introduce per-memcg reclaim interface
-To:     Johannes Weiner <hannes@cmpxchg.org>
-Cc:     Yosry Ahmed <yosryahmed@google.com>,
-        Michal Hocko <mhocko@kernel.org>,
-        Shakeel Butt <shakeelb@google.com>,
-        Andrew Morton <akpm@linux-foundation.org>,
-        David Rientjes <rientjes@google.com>,
-        Tejun Heo <tj@kernel.org>, Zefan Li <lizefan.x@bytedance.com>,
-        Roman Gushchin <roman.gushchin@linux.dev>,
-        cgroups@vger.kernel.org, linux-doc@vger.kernel.org,
-        Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
-        Linux MM <linux-mm@kvack.org>,
-        Jonathan Corbet <corbet@lwn.net>, Yu Zhao <yuzhao@google.com>,
-        Dave Hansen <dave.hansen@linux.intel.com>,
-        Greg Thelen <gthelen@google.com>
-Content-Type: text/plain; charset="UTF-8"
-X-Spam-Status: No, score=-17.6 required=5.0 tests=BAYES_00,DKIMWL_WL_MED,
-        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,
-        ENV_AND_HDR_SPF_MATCH,RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,SPF_PASS,
-        T_SCC_BODY_TEXT_LINE,USER_IN_DEF_DKIM_WL,USER_IN_DEF_SPF_WL
-        autolearn=unavailable autolearn_force=no version=3.4.6
+X-MS-PublicTrafficType: Email
+X-MS-Office365-Filtering-Correlation-Id: f02fd156-e53c-4d6f-fc9b-08da141dfc76
+X-MS-TrafficTypeDiagnostic: SJ0PR10MB5647:EE_
+X-Microsoft-Antispam-PRVS: <SJ0PR10MB5647999B5928D2531A70E0DBC7E09@SJ0PR10MB5647.namprd10.prod.outlook.com>
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: kab1u6Upk8YI7Ham1MHy1O+jDz6g0aGGJDPZg6Y5z04Na9tBiv8/uX1VyIlcNaLzKlAO9WdSOtTa+/6vQm3KB/RdOR1mCxxQkwto0zYuWXu5+uuc/H67bXaJ8GnOO1nogIqMF+BHkPw4yQ5SqsfCySC1KtkKoch9TH5Rls3jtDVYKXZI6JVoKIEybNdOe3BVLIpkgUVDi2bk+Ye5resp5Gj711xhvsMXCQSn9E2DAyw6hcM2QPbKcCDQ/EtKS6/pzcFILvHHyyUiXzTELgTpHQTp8NAIreJOdFMkTkKTC7XYWVJkvbvPuSur8xnXBMz3eLmNKGhtt7XBNNnepob8YHE5nZhI8U9O/aIh7FXOa/UviA9VWQESiCe6hzUHp98oPxQhQfAjo4cZj7/rdtvEhFC3N0jBKH1ZaFmU88E0iDBgc7DfnrugTYixxIxxvQMq4deTKA8SbP1EdJtM6VmR/naifoEzypBE4Kz6CfixJfRcske250+BWQEbbeVVGpdaKNiJ36TwiEMkaubOU38VJRe9w0jU2guoLeSbjSFHNmTsxhIX77F4e+SAqjuhLlGdn5dXqOTT5wS2oeMgn3SrB8DiI0hWSabcceTM655kL+qsHdeZ9tCnXmLG8JK8hEx+uBFVK2PXO8KH+A+AI6I+IBKs9pHsKp7XqFcBEwzXfAj949TF89yzb2DrFOGPDrgR2bPZgrr5pdHX0ZDf1s7BzQ==
+X-Forefront-Antispam-Report: CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:SA1PR10MB5866.namprd10.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230001)(366004)(2906002)(6506007)(52116002)(2616005)(1076003)(26005)(186003)(107886003)(6512007)(103116003)(38100700002)(38350700002)(83380400001)(8936002)(508600001)(316002)(5660300002)(7416002)(86362001)(36756003)(6486002)(8676002)(4326008)(6666004)(66556008)(66946007)(66476007);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?rpdBQ5GgVip/R2UWNC1wTwyDWB1iU1HGbtoszrMRTTgJ6Z/CH2BQDbjK+TES?=
+ =?us-ascii?Q?/5bQswTE4GOIbEQsk8c0v4toikNBJfdya/A/SWOrAbTdRskE5pPsy5bx1FaU?=
+ =?us-ascii?Q?4HN7W7Lgt0LFs6g+4Bnfwkw55sK4VzxeMRCxw4TmyarEewdRwVuKzMOsFrbN?=
+ =?us-ascii?Q?GAFVsJFkbOPuJdpQCY5cphsz5knkpFgrsOFVPEyMTPsgYBHuPr7CPAQ/X5LN?=
+ =?us-ascii?Q?m5tf7ySRPfRYNu+GzO4ezv/SHsNbpt3/qOXlC6DQ0vEcR9jVapTjIehb/9sJ?=
+ =?us-ascii?Q?0xw4t+NRh0mGOAMQij8/7CRjfnCj0/B571Ml3cvHGNPw+pYt4NuGcFKg25Sf?=
+ =?us-ascii?Q?AdwQ5Y2oMPW2g+VaUhLe5Uw+lenGdFf1NiFZ/aEwSk92ConrTtPIAlU+BjHR?=
+ =?us-ascii?Q?YMQcuWmKzLjZplktVAHuJBsCL3+5oQmAKW7VCfM0gDqQ+VgQSahDEKg1x/T8?=
+ =?us-ascii?Q?AXO+FVahrV5lbsRr6FElSoAJKsEGq1B2Ph3iJDCI5admqfMwkj7PC743akpO?=
+ =?us-ascii?Q?+BJ3Ga9e43XVt/hf3aylw5trrTC7Fb77gBvlpDFtFBxLghljEgUVIjzXdE4B?=
+ =?us-ascii?Q?mnbBKdgHGJL7Qj/aGi2wwyLUgg+yoIG7VBU9ZLnBhyaMN8R/xoWDQdeMubfw?=
+ =?us-ascii?Q?UVq7diZQ4VpXX82ON9u/IMukCNrskgJM4jedzpTiXdmlB7yJRVmYYcnnKcKf?=
+ =?us-ascii?Q?0YdJe34qBm9ALYBa6K9R/VLhYleOlFtyOUQRtK6iD10By7EKSOztBcYKf8aU?=
+ =?us-ascii?Q?dFp6fjmE22UzzUtI0nm32XJcUiHaOzF9rntvjPjEBqsI2aXxPC7IQMzaPVgF?=
+ =?us-ascii?Q?U4MZGC7nWwRktRl+yNW4+KBB92cQfIzFcubU5DW5/m8k4v6sYpJMO43mbsZt?=
+ =?us-ascii?Q?rjVKu94aAHX1s6ACrbcMKV1vo31LXmRUt7sqmIYEk+tEhVBOTHWuCzXq5NWu?=
+ =?us-ascii?Q?w3dE1RhRDQaq2o7v3Cbh2cw8dPv6pjteAE8DI2EUtS+7gOlhtpcFsqBvIx5L?=
+ =?us-ascii?Q?h5sPe371STveOkJawoVhjQvAG45Em4tCWJpuUgNKCM+M8y+nlGM46QkRxc2f?=
+ =?us-ascii?Q?CQCbaR9rq4LMQOZHGoJ8koXwoA5bCnMburBp5YG3qPm0Qf+MXdLVDhVJF+YA?=
+ =?us-ascii?Q?NL47O8MsF9QOcXtCwH/jsxvhwVhejMlG/oNyhLxRoO4ElusnmHvD8py5l58b?=
+ =?us-ascii?Q?lDGld5AFbTgDvdn0c87eQdi5iW8kWm5jmzkmMFo4XHlC20AnuXIag89VYVyp?=
+ =?us-ascii?Q?aT5UdRn4gVgzZiSmmIbzl2pxLlMHrhLGE1z6Ok/8JmIWnVTGf5v1RU/dGIhk?=
+ =?us-ascii?Q?8rHesmZ53jVC8PywRcvb1b5cJEOAi67QYQeDS8P+UzSSPMJJHHJFWIMCa1s0?=
+ =?us-ascii?Q?QkDueB87a7qvTibyyX2mIAoMPUU97DKpYoAKBVJF+K8XMQU46aVUQW9bQ0r3?=
+ =?us-ascii?Q?6Oqp8j1FmfVaRfyQzNfU0lWwPWKDwmfYf/OaBl1DSvMHot/nFxG8kmqnXGXV?=
+ =?us-ascii?Q?6Yuf141Z+UhO2snd6kbdA+RM1YvsK4VsjqYfMA1JhmnMMQvWX+xjQaH09dAr?=
+ =?us-ascii?Q?HCBl2Q/A4K27g/bgmLhKB1mhsPhmpXnjoNquSBBadhgoV7PEZmPpl8x31ZWU?=
+ =?us-ascii?Q?eFzhK5pLDCzXtxUavvJKsGyLTHPeXlJFilYLFaqukWpGeXEFZ6obO0GDBNE3?=
+ =?us-ascii?Q?gJYoDpvhGRtxD1FDhGbnI53OpAysJhg213mAioici0j3k8/Won2hPoykmIxR?=
+ =?us-ascii?Q?nx0cGwpgg7AysA0zsudK1FqJp/XIM1Q=3D?=
+X-OriginatorOrg: oracle.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: f02fd156-e53c-4d6f-fc9b-08da141dfc76
+X-MS-Exchange-CrossTenant-AuthSource: SA1PR10MB5866.namprd10.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 01 Apr 2022 20:27:05.1135
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 4e2c6054-71cb-48f1-bd6c-3a9705aca71b
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: HKeN2YA5eB/KgzJFxo0anol3MjB1py/SBr0AvUXfgYtzzuz77qECCzcaaCGyBEdAAbuytzPsb/5daCO/xjOZwxo8GSC4x3I954pBX/0EFXY=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ0PR10MB5647
+X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.425,18.0.850
+ definitions=2022-04-01_05:2022-03-30,2022-04-01 signatures=0
+X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 adultscore=0 bulkscore=0 malwarescore=0
+ mlxscore=0 phishscore=0 spamscore=0 suspectscore=0 mlxlogscore=999
+ classifier=spam adjust=0 reason=mlx scancount=1 engine=8.12.0-2202240000
+ definitions=main-2204010097
+X-Proofpoint-ORIG-GUID: 7qhiosjQ7KSsRZMPTHiD3N-LCp8pRoRe
+X-Proofpoint-GUID: 7qhiosjQ7KSsRZMPTHiD3N-LCp8pRoRe
+X-Spam-Status: No, score=-2.8 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_LOW,
+        RCVD_IN_MSPIKE_H5,RCVD_IN_MSPIKE_WL,SPF_HELO_NONE,SPF_NONE,
+        T_SCC_BODY_TEXT_LINE autolearn=ham autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Fri, Apr 1, 2022 at 8:22 AM Johannes Weiner <hannes@cmpxchg.org> wrote:
->
-> On Thu, Mar 31, 2022 at 09:05:15PM -0700, Wei Xu wrote:
-> > On Thu, Mar 31, 2022 at 1:42 AM Yosry Ahmed <yosryahmed@google.com> wrote:
-> > >
-> > > From: Shakeel Butt <shakeelb@google.com>
-> > >
-> > > Introduce an memcg interface to trigger memory reclaim on a memory cgroup.
-> > >
-> > > Use case: Proactive Reclaim
-> > > ---------------------------
-> > >
-> > > A userspace proactive reclaimer can continuously probe the memcg to
-> > > reclaim a small amount of memory. This gives more accurate and
-> > > up-to-date workingset estimation as the LRUs are continuously
-> > > sorted and can potentially provide more deterministic memory
-> > > overcommit behavior. The memory overcommit controller can provide
-> > > more proactive response to the changing behavior of the running
-> > > applications instead of being reactive.
-> > >
-> > > A userspace reclaimer's purpose in this case is not a complete replacement
-> > > for kswapd or direct reclaim, it is to proactively identify memory savings
-> > > opportunities and reclaim some amount of cold pages set by the policy
-> > > to free up the memory for more demanding jobs or scheduling new jobs.
-> > >
-> > > A user space proactive reclaimer is used in Google data centers.
-> > > Additionally, Meta's TMO paper recently referenced a very similar
-> > > interface used for user space proactive reclaim:
-> > > https://dl.acm.org/doi/pdf/10.1145/3503222.3507731
-> > >
-> > > Benefits of a user space reclaimer:
-> > > -----------------------------------
-> > >
-> > > 1) More flexible on who should be charged for the cpu of the memory
-> > > reclaim. For proactive reclaim, it makes more sense to be centralized.
-> > >
-> > > 2) More flexible on dedicating the resources (like cpu). The memory
-> > > overcommit controller can balance the cost between the cpu usage and
-> > > the memory reclaimed.
-> > >
-> > > 3) Provides a way to the applications to keep their LRUs sorted, so,
-> > > under memory pressure better reclaim candidates are selected. This also
-> > > gives more accurate and uptodate notion of working set for an
-> > > application.
-> > >
-> > > Why memory.high is not enough?
-> > > ------------------------------
-> > >
-> > > - memory.high can be used to trigger reclaim in a memcg and can
-> > >   potentially be used for proactive reclaim.
-> > >   However there is a big downside in using memory.high. It can potentially
-> > >   introduce high reclaim stalls in the target application as the
-> > >   allocations from the processes or the threads of the application can hit
-> > >   the temporary memory.high limit.
-> > >
-> > > - Userspace proactive reclaimers usually use feedback loops to decide
-> > >   how much memory to proactively reclaim from a workload. The metrics
-> > >   used for this are usually either refaults or PSI, and these metrics
-> > >   will become messy if the application gets throttled by hitting the
-> > >   high limit.
-> > >
-> > > - memory.high is a stateful interface, if the userspace proactive
-> > >   reclaimer crashes for any reason while triggering reclaim it can leave
-> > >   the application in a bad state.
-> > >
-> > > - If a workload is rapidly expanding, setting memory.high to proactively
-> > >   reclaim memory can result in actually reclaiming more memory than
-> > >   intended.
-> > >
-> > > The benefits of such interface and shortcomings of existing interface
-> > > were further discussed in this RFC thread:
-> > > https://lore.kernel.org/linux-mm/5df21376-7dd1-bf81-8414-32a73cea45dd@google.com/
-> > >
-> > > Interface:
-> > > ----------
-> > >
-> > > Introducing a very simple memcg interface 'echo 10M > memory.reclaim' to
-> > > trigger reclaim in the target memory cgroup.
-> > >
-> > >
-> > > Possible Extensions:
-> > > --------------------
-> > >
-> > > - This interface can be extended with an additional parameter or flags
-> > >   to allow specifying one or more types of memory to reclaim from (e.g.
-> > >   file, anon, ..).
-> > >
-> > > - The interface can also be extended with a node mask to reclaim from
-> > >   specific nodes. This has use cases for reclaim-based demotion in memory
-> > >   tiering systens.
-> > >
-> > > - A similar per-node interface can also be added to support proactive
-> > >   reclaim and reclaim-based demotion in systems without memcg.
-> > >
-> > > For now, let's keep things simple by adding the basic functionality.
-> > >
-> > > [yosryahmed@google.com: refreshed to current master, updated commit
-> > > message based on recent discussions and use cases]
-> > > Signed-off-by: Shakeel Butt <shakeelb@google.com>
-> > > Signed-off-by: Yosry Ahmed <yosryahmed@google.com>
-> > > ---
-> > >  Documentation/admin-guide/cgroup-v2.rst |  9 ++++++
-> > >  mm/memcontrol.c                         | 37 +++++++++++++++++++++++++
-> > >  2 files changed, 46 insertions(+)
-> > >
-> > > diff --git a/Documentation/admin-guide/cgroup-v2.rst b/Documentation/admin-guide/cgroup-v2.rst
-> > > index 69d7a6983f78..925aaabb2247 100644
-> > > --- a/Documentation/admin-guide/cgroup-v2.rst
-> > > +++ b/Documentation/admin-guide/cgroup-v2.rst
-> > > @@ -1208,6 +1208,15 @@ PAGE_SIZE multiple when read back.
-> > >         high limit is used and monitored properly, this limit's
-> > >         utility is limited to providing the final safety net.
-> > >
-> > > +  memory.reclaim
-> > > +       A write-only file which exists on non-root cgroups.
-> > > +
-> > > +       This is a simple interface to trigger memory reclaim in the
-> > > +       target cgroup. Write the number of bytes to reclaim to this
-> > > +       file and the kernel will try to reclaim that much memory.
-> > > +       Please note that the kernel can over or under reclaim from
-> > > +       the target cgroup.
-> > > +
-> > >    memory.oom.group
-> > >         A read-write single value file which exists on non-root
-> > >         cgroups.  The default value is "0".
-> > > diff --git a/mm/memcontrol.c b/mm/memcontrol.c
-> > > index 725f76723220..994849fab7df 100644
-> > > --- a/mm/memcontrol.c
-> > > +++ b/mm/memcontrol.c
-> > > @@ -6355,6 +6355,38 @@ static ssize_t memory_oom_group_write(struct kernfs_open_file *of,
-> > >         return nbytes;
-> > >  }
-> > >
-> > > +static ssize_t memory_reclaim(struct kernfs_open_file *of, char *buf,
-> > > +                             size_t nbytes, loff_t off)
-> > > +{
-> > > +       struct mem_cgroup *memcg = mem_cgroup_from_css(of_css(of));
-> > > +       unsigned int nr_retries = MAX_RECLAIM_RETRIES;
-> > > +       unsigned long nr_to_reclaim, nr_reclaimed = 0;
-> > > +       int err;
-> > > +
-> > > +       buf = strstrip(buf);
-> > > +       err = page_counter_memparse(buf, "", &nr_to_reclaim);
-> > > +       if (err)
-> > > +               return err;
-> > > +
-> > > +       while (nr_reclaimed < nr_to_reclaim) {
-> > > +               unsigned long reclaimed;
-> > > +
-> > > +               if (signal_pending(current))
-> > > +                       break;
-> > > +
-> > > +               reclaimed = try_to_free_mem_cgroup_pages(memcg,
-> > > +                                               nr_to_reclaim - nr_reclaimed,
-> > > +                                               GFP_KERNEL, true);
-> > > +
-> > > +               if (!reclaimed && !nr_retries--)
-> > > +                       break;
-> > > +
-> > > +               nr_reclaimed += reclaimed;
-> > > +       }
-> > > +
-> > > +       return nbytes;
-> >
-> > It is better to return an error code (e.g. -EBUSY) when
-> > memory_reclaim() fails to reclaim nr_to_reclaim bytes of memory,
-> > except if the cgroup memory usage is already 0.  We can also return
-> > -EINVAL if nr_to_reclaim is too large (e.g. > limit).
->
-> For -EBUSY, are you thinking of a specific usecase where that would
-> come in handy? I'm not really opposed to it, but couldn't convince
-> myself of the practical benefits of it, either.
->
-> Keep in mind that MAX_RECLAIM_RETRIES failed reclaim attempts usually
-> constitute an OOM situation: memory.max will issue kills and
-> memory.high will begin crippling throttling. In what scenario would
-> you want to keep reclaiming a workload that is considered OOM?
->
-> Certainly, proactive reclaim that wants to purge only the cold tail of
-> the workload wouldn't retry. Meta's version of this patch actually
-> does return -EAGAIN on reclaim failure, but the userspace daemon
-> doesn't do anything with it, so I didn't bring it up.
+I noticed that in contrast to other kernel core parameters (e.g. kernel.panic,
+kernel.panic_on_warn, kernel.panic_print) crash_kexec_post_notifiers is not
+available as a sysctl tunable. I am aware that because it is a kernel core
+parameter, there is already an entry under:
 
--EAGAIN sounds good, too.  Given that the userspace requests to
-reclaim a specified number of bytes, I think it is generally better to
-tell the userspace whether the request has been successfully
-fulfilled. Ideally, it would be even better to return how many bytes
-that have been reclaimed, though that is not easy to do through the
-cgroup interface. The userspace can choose to ignore the return value
-or log a message/update some stats (which Google does) for the
-monitoring purpose.
+  /sys/module/kernel/parameters/crash_kexec_post_notifiers
 
-> For -EINVAL, I tend to lean more toward disagreeing. We've been trying
-> to avoid arbitrary dependencies between control knobs in cgroup2, just
-> because it exposes us to race conditions and adds complications to the
-> interface. For example, it *usually* doesn't make sense to set limits
-> to 0, or set local limits and protections higher than the parent. But
-> we allow it anyway, to avoid creating well-intended linting rules that
-> could interfere with somebody's unforeseen, legitimate usecase.
+and that allows us to read/modify it at runtime. However, I thought it should
+also be available via sysctl, since users that want to read/set this value at
+runtime might look there first.
 
-OK, let's then not check against the limit.
+I believe there is an ongoing effort to clean up kernel/sysctl.c, but it wasn't
+clear to me if this entry (and perhaps the other panic related entries too)
+should be placed on kernel/panic.c. I wanted to verify first that this change
+would be welcomed before doing additional refactoring work.
+
+I'd appreciate any comments or suggestions.
+
+Thank you,
+Alejandro
+
+Alejandro Jimenez (1):
+  kernel/sysctl: Add sysctl entry for crash_kexec_post_notifiers
+
+ Documentation/admin-guide/sysctl/kernel.rst | 8 ++++++++
+ include/uapi/linux/sysctl.h                 | 1 +
+ kernel/sysctl.c                             | 7 +++++++
+ 3 files changed, 16 insertions(+)
+
+-- 
+2.34.1
+
