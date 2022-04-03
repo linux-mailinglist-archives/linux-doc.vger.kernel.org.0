@@ -2,131 +2,70 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 74BF04F06D6
-	for <lists+linux-doc@lfdr.de>; Sun,  3 Apr 2022 04:57:24 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 50FC94F06F2
+	for <lists+linux-doc@lfdr.de>; Sun,  3 Apr 2022 05:06:31 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S231140AbiDCC7O (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Sat, 2 Apr 2022 22:59:14 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:33308 "EHLO
+        id S232735AbiDCDIT (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Sat, 2 Apr 2022 23:08:19 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:52862 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S230133AbiDCC7O (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Sat, 2 Apr 2022 22:59:14 -0400
-Received: from mga02.intel.com (mga02.intel.com [134.134.136.20])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 61EA938BE5
-        for <linux-doc@vger.kernel.org>; Sat,  2 Apr 2022 19:57:21 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1648954641; x=1680490641;
-  h=date:from:to:cc:subject:message-id:mime-version;
-  bh=IQwPXp5HGTzECEamiXyW0U17LALjYA2aFLTh93mES3c=;
-  b=hjjbc3GdH5vDaNvfXVxGB9emorzgPWU+PMEA8C13alx4kVAhcWFANgrO
-   HOwFsYHWkXDtDwAyVwx22hy40XWQ+mrnRwIhGSJ145Z3cAKEgJeXVDsfa
-   G6PRqqvesfCU4gVO+zrCEdHDvPXoQTLkzRmNfrzX7jKvF+3YPCz0l0KhN
-   4UR/ioGpXF/2psXnxMtM8w03C1cFdXmi1hPKx5FO9LtAcEfceWsSFbZ4j
-   99hRHMvqa10XWQJTQg5qcyl0pkoR4N3nVlyAo4oMsmmeb84IkB02UgOBa
-   KxXfC/6RlowcW4YkDonNWLMJqeDTLOShgUPAY+bt+W47EGBv7eojt0+PR
-   A==;
-X-IronPort-AV: E=McAfee;i="6200,9189,10305"; a="247861871"
-X-IronPort-AV: E=Sophos;i="5.90,231,1643702400"; 
-   d="scan'208";a="247861871"
-Received: from orsmga007.jf.intel.com ([10.7.209.58])
-  by orsmga101.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 02 Apr 2022 19:57:20 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.90,231,1643702400"; 
-   d="scan'208";a="548259914"
-Received: from lkp-server02.sh.intel.com (HELO a44fdfb70b94) ([10.239.97.151])
-  by orsmga007.jf.intel.com with ESMTP; 02 Apr 2022 19:57:19 -0700
-Received: from kbuild by a44fdfb70b94 with local (Exim 4.95)
-        (envelope-from <lkp@intel.com>)
-        id 1naqQY-0000fZ-Ed;
-        Sun, 03 Apr 2022 02:57:18 +0000
-Date:   Sun, 3 Apr 2022 10:57:01 +0800
-From:   kernel test robot <lkp@intel.com>
-To:     Arnd Bergmann <arnd@arndb.de>
-Cc:     kbuild-all@lists.01.org, linux-arm-kernel@lists.infradead.org,
-        arm@kernel.org, linux-doc@vger.kernel.org
-Subject: [soc:multiplatform-misc-5.18 1/13]
- arch/arm/mach-versatile/spc.c:231: warning: This comment starts with '/**',
- but isn't a kernel-doc comment. Refer Documentation/doc-guide/kernel-doc.rst
-Message-ID: <202204031026.4ogKxt89-lkp@intel.com>
+        with ESMTP id S231464AbiDCDHy (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Sat, 2 Apr 2022 23:07:54 -0400
+X-Greylist: delayed 338 seconds by postgrey-1.37 at lindbergh.monkeyblade.net; Sat, 02 Apr 2022 20:06:01 PDT
+Received: from mta-out-05.alice.it (mta-out-05.alice.it [217.169.118.11])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTP id E95EC31212
+        for <linux-doc@vger.kernel.org>; Sat,  2 Apr 2022 20:06:01 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=alice.it; s=20211207; t=1648955162; 
+        bh=47DEQpj8HBSa+/TImW+5JCeuQeRkm5NMpJWZG3hSuFU=;
+        h=Reply-To:From:To:Date:Message-ID:MIME-Version;
+        b=zJWpeMLyCdOMuHV3faEzIIYpgPD8aUKrwgZAdZTy9l4dmDja3qjCZJHLfSpz12TKr6kSb9acaS1KHoIxtM7q50/kKShbm13Nw6wNCMCNIOKgUUG2cGCESCcZJFOL4fyR9YMc7PKr9t+ZURFz4DkTx2rP1wLk7cru4kMpb+U0wMbH+mVF+9Aom+qqdQjpqBnrWRRgNuY8AMH2D4ZeTA7tL+Y3B+LgK+9AeVUNNBRgHJds+84QmLAK01SEPab7Hu9diCT1CtIuQdVI280qIMe9AHjx/19pz+kZ+BXNEM+9xk+uRG9BdhvqSBE1hmZBHp6sqwKQ4XuTKoEvEu8KjadA1w==
+X-RazorGate-Vade: gggruggvucftvghtrhhoucdtuddrgedvvddrudeiledgiedvucetufdoteggodetrfdotffvucfrrhhofhhilhgvmecuvffgnffgvefqoffkvfetnffktedpqfgfvfenuceurghilhhouhhtmecufedtudenucfgmhhpthihuchsuhgsjhgvtghtucdluddtmdengfhmphhthicusghougihucdlhedtmdenucfjughrpehrhffvfffkggestddtfedttddttdenucfhrhhomhephggvuchhrghvvgcurghnuchofhhfvghruchtohcuihhnvhgvshhtuchinhcuhihouhhrucgtohhunhhtrhihuchunhguvghrucgruchjohhinhhtuchvvghnthhurhgvuchprghrthhnvghrshhhihhpuchplhgvrghsvgcurhgvphhlhicufhhorhcumhhorhgvucguvghtrghilhhsuceofhgpphgvnhhnrgesrghlihgtvgdrihhtqeenucggtffrrghtthgvrhhnpeehjeetgefhleetiedtkeelfffgjeeugeegleekueffgfegtdekkeeifedvvdffteenucfkphepudejiedrvddvjedrvdegvddrudeltdenucevlhhushhtvghrufhiiigvpedtnecurfgrrhgrmhephhgvlhhopegrlhhitggvrdhithdpihhnvghtpedujeeirddvvdejrddvgedvrdduledtpdhmrghilhhfrhhomhepfhgpphgvnhhnrgesrghlihgtvgdrihhtpdhnsggprhgtphhtthhopedupdhrtghpthhtoheplhhinhhugidqughotgesvhhgvghrrdhkvghrnhgvlhdrohhrgh
+X-RazorGate-Vade-Verdict: clean 60
+X-RazorGate-Vade-Classification: clean
+Received: from alice.it (176.227.242.190) by mta-out-05.alice.it (5.8.807.04) (authenticated as f_penna@alice.it)
+        id 623DD3C500EA865B for linux-doc@vger.kernel.org; Sun, 3 Apr 2022 05:00:21 +0200
+Reply-To: dougfield20@inbox.lv
+From:   We have an offer to invest in your country under a
+         joint venture partnership please reply for more
+         details <f_penna@alice.it>
+To:     linux-doc@vger.kernel.org
+Date:   02 Apr 2022 20:00:19 -0700
+Message-ID: <20220402200019.FDE6957E09764C14@alice.it>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-User-Agent: Mutt/1.10.1 (2018-07-13)
-X-Spam-Status: No, score=-1.8 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,HEXHASH_WORD,
-        RCVD_IN_DNSWL_LOW,RCVD_IN_MSPIKE_H3,RCVD_IN_MSPIKE_WL,SPF_HELO_NONE,
-        SPF_NONE,T_SCC_BODY_TEXT_LINE autolearn=ham autolearn_force=no
-        version=3.4.6
+X-Spam-Status: Yes, score=5.7 required=5.0 tests=BAYES_50,BODY_EMPTY,
+        DKIM_INVALID,DKIM_SIGNED,EMPTY_MESSAGE,FREEMAIL_FROM,FREEMAIL_REPLYTO,
+        FREEMAIL_REPLYTO_END_DIGIT,MISSING_SUBJECT,RCVD_IN_DNSWL_LOW,
+        RCVD_IN_MSPIKE_BL,RCVD_IN_MSPIKE_L4,SPF_HELO_NONE,SPF_PASS
+        autolearn=no autolearn_force=no version=3.4.6
+X-Spam-Report: * -0.7 RCVD_IN_DNSWL_LOW RBL: Sender listed at https://www.dnswl.org/,
+        *       low trust
+        *      [217.169.118.11 listed in list.dnswl.org]
+        *  0.0 RCVD_IN_MSPIKE_L4 RBL: Bad reputation (-4)
+        *      [217.169.118.11 listed in bl.mailspike.net]
+        *  0.8 BAYES_50 BODY: Bayes spam probability is 40 to 60%
+        *      [score: 0.5025]
+        *  0.0 FREEMAIL_FROM Sender email is commonly abused enduser mail
+        *      provider
+        *      [f_penna[at]alice.it]
+        * -0.0 SPF_PASS SPF: sender matches SPF record
+        *  0.2 FREEMAIL_REPLYTO_END_DIGIT Reply-To freemail username ends in
+        *      digit
+        *      [dougfield20[at]inbox.lv]
+        *  0.0 SPF_HELO_NONE SPF: HELO does not publish an SPF Record
+        *  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
+        *       valid
+        *  2.3 EMPTY_MESSAGE Message appears to have no textual parts and no
+        *      Subject: text
+        *  1.8 MISSING_SUBJECT Missing Subject: header
+        *  0.1 DKIM_INVALID DKIM or DK signature exists, but is not valid
+        *  0.0 RCVD_IN_MSPIKE_BL Mailspike blacklisted
+        *  0.0 BODY_EMPTY No body text in message
+        *  1.0 FREEMAIL_REPLYTO Reply-To/From or Reply-To/body contain
+        *      different freemails
+X-Spam-Level: *****
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-tree:   https://git.kernel.org/pub/scm/linux/kernel/git/soc/soc.git multiplatform-misc-5.18
-head:   9e48eacd8cb623d8638d06d0f3c523d5222e2e82
-commit: 57aa73aeafb7e2cacc9c89b4ff69306136c77a82 [1/13] ARM: versatile: move integrator/realview/vexpress to versatile
-config: arm-defconfig (https://download.01.org/0day-ci/archive/20220403/202204031026.4ogKxt89-lkp@intel.com/config)
-compiler: arm-linux-gnueabi-gcc (GCC) 11.2.0
-reproduce (this is a W=1 build):
-        wget https://raw.githubusercontent.com/intel/lkp-tests/master/sbin/make.cross -O ~/bin/make.cross
-        chmod +x ~/bin/make.cross
-        # https://git.kernel.org/pub/scm/linux/kernel/git/soc/soc.git/commit/?id=57aa73aeafb7e2cacc9c89b4ff69306136c77a82
-        git remote add soc https://git.kernel.org/pub/scm/linux/kernel/git/soc/soc.git
-        git fetch --no-tags soc multiplatform-misc-5.18
-        git checkout 57aa73aeafb7e2cacc9c89b4ff69306136c77a82
-        # save the config file to linux build tree
-        mkdir build_dir
-        COMPILER_INSTALL_PATH=$HOME/0day COMPILER=gcc-11.2.0 make.cross O=build_dir ARCH=arm SHELL=/bin/bash
-
-If you fix the issue, kindly add following tag as appropriate
-Reported-by: kernel test robot <lkp@intel.com>
-
-All warnings (new ones prefixed by >>):
-
->> arch/arm/mach-versatile/spc.c:231: warning: This comment starts with '/**', but isn't a kernel-doc comment. Refer Documentation/doc-guide/kernel-doc.rst
-    * ve_spc_cpu_in_wfi(u32 cpu, u32 cluster)
-
-
-vim +231 arch/arm/mach-versatile/spc.c
-
-33cb667a00f841 arch/arm/mach-vexpress/spc.c Dave Martin 2013-11-25  229  
-33cb667a00f841 arch/arm/mach-vexpress/spc.c Dave Martin 2013-11-25  230  /**
-33cb667a00f841 arch/arm/mach-vexpress/spc.c Dave Martin 2013-11-25 @231   * ve_spc_cpu_in_wfi(u32 cpu, u32 cluster)
-33cb667a00f841 arch/arm/mach-vexpress/spc.c Dave Martin 2013-11-25  232   *
-33cb667a00f841 arch/arm/mach-vexpress/spc.c Dave Martin 2013-11-25  233   * @cpu: mpidr[7:0] bitfield describing CPU affinity level within cluster
-33cb667a00f841 arch/arm/mach-vexpress/spc.c Dave Martin 2013-11-25  234   * @cluster: mpidr[15:8] bitfield describing cluster affinity level
-33cb667a00f841 arch/arm/mach-vexpress/spc.c Dave Martin 2013-11-25  235   *
-33cb667a00f841 arch/arm/mach-vexpress/spc.c Dave Martin 2013-11-25  236   * @return: non-zero if and only if the specified CPU is in WFI
-33cb667a00f841 arch/arm/mach-vexpress/spc.c Dave Martin 2013-11-25  237   *
-33cb667a00f841 arch/arm/mach-vexpress/spc.c Dave Martin 2013-11-25  238   * Take care when interpreting the result of this function: a CPU might
-33cb667a00f841 arch/arm/mach-vexpress/spc.c Dave Martin 2013-11-25  239   * be in WFI temporarily due to idle, and is not necessarily safely
-33cb667a00f841 arch/arm/mach-vexpress/spc.c Dave Martin 2013-11-25  240   * parked.
-33cb667a00f841 arch/arm/mach-vexpress/spc.c Dave Martin 2013-11-25  241   */
-33cb667a00f841 arch/arm/mach-vexpress/spc.c Dave Martin 2013-11-25  242  int ve_spc_cpu_in_wfi(u32 cpu, u32 cluster)
-33cb667a00f841 arch/arm/mach-vexpress/spc.c Dave Martin 2013-11-25  243  {
-33cb667a00f841 arch/arm/mach-vexpress/spc.c Dave Martin 2013-11-25  244  	int ret;
-33cb667a00f841 arch/arm/mach-vexpress/spc.c Dave Martin 2013-11-25  245  	u32 mask = standbywfi_cpu_mask(cpu, cluster);
-33cb667a00f841 arch/arm/mach-vexpress/spc.c Dave Martin 2013-11-25  246  
-33cb667a00f841 arch/arm/mach-vexpress/spc.c Dave Martin 2013-11-25  247  	if (cluster >= MAX_CLUSTERS)
-33cb667a00f841 arch/arm/mach-vexpress/spc.c Dave Martin 2013-11-25  248  		return 1;
-33cb667a00f841 arch/arm/mach-vexpress/spc.c Dave Martin 2013-11-25  249  
-33cb667a00f841 arch/arm/mach-vexpress/spc.c Dave Martin 2013-11-25  250  	ret = readl_relaxed(info->baseaddr + STANDBYWFI_STAT);
-33cb667a00f841 arch/arm/mach-vexpress/spc.c Dave Martin 2013-11-25  251  
-33cb667a00f841 arch/arm/mach-vexpress/spc.c Dave Martin 2013-11-25  252  	pr_debug("%s: PCFGREG[0x%X] = 0x%08X, mask = 0x%X\n",
-33cb667a00f841 arch/arm/mach-vexpress/spc.c Dave Martin 2013-11-25  253  		 __func__, STANDBYWFI_STAT, ret, mask);
-33cb667a00f841 arch/arm/mach-vexpress/spc.c Dave Martin 2013-11-25  254  
-33cb667a00f841 arch/arm/mach-vexpress/spc.c Dave Martin 2013-11-25  255  	return ret & mask;
-33cb667a00f841 arch/arm/mach-vexpress/spc.c Dave Martin 2013-11-25  256  }
-33cb667a00f841 arch/arm/mach-vexpress/spc.c Dave Martin 2013-11-25  257  
-
-:::::: The code at line 231 was first introduced by commit
-:::::: 33cb667a00f841fa036ad79f1aaaf7d6380c971d ARM: vexpress/TC2: Implement MCPM power_down_finish()
-
-:::::: TO: Dave Martin <Dave.Martin@arm.com>
-:::::: CC: Olof Johansson <olof@lixom.net>
-
--- 
-0-DAY CI Kernel Test Service
-https://01.org/lkp
