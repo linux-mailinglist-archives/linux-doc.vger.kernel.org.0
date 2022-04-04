@@ -2,131 +2,149 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 6DB8C4F1CA4
-	for <lists+linux-doc@lfdr.de>; Mon,  4 Apr 2022 23:28:54 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 5C64E4F1CB5
+	for <lists+linux-doc@lfdr.de>; Mon,  4 Apr 2022 23:29:05 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1382378AbiDDV2L (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 4 Apr 2022 17:28:11 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:56660 "EHLO
+        id S1379846AbiDDV2i (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 4 Apr 2022 17:28:38 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:35280 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1379500AbiDDRQo (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Mon, 4 Apr 2022 13:16:44 -0400
-Received: from mail-pf1-x436.google.com (mail-pf1-x436.google.com [IPv6:2607:f8b0:4864:20::436])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 80BE514019
-        for <linux-doc@vger.kernel.org>; Mon,  4 Apr 2022 10:14:48 -0700 (PDT)
-Received: by mail-pf1-x436.google.com with SMTP id f3so9590897pfe.2
-        for <linux-doc@vger.kernel.org>; Mon, 04 Apr 2022 10:14:48 -0700 (PDT)
+        with ESMTP id S1379518AbiDDRVR (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Mon, 4 Apr 2022 13:21:17 -0400
+Received: from mail-pj1-x1032.google.com (mail-pj1-x1032.google.com [IPv6:2607:f8b0:4864:20::1032])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id CCF62E028
+        for <linux-doc@vger.kernel.org>; Mon,  4 Apr 2022 10:19:19 -0700 (PDT)
+Received: by mail-pj1-x1032.google.com with SMTP id ch16-20020a17090af41000b001ca867ef52bso400435pjb.0
+        for <linux-doc@vger.kernel.org>; Mon, 04 Apr 2022 10:19:19 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=google.com; s=20210112;
         h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc:content-transfer-encoding;
-        bh=9G0a90Ep/Bz5OOoDZhbBO26Y5kHqZZt4pCiJoHTyyw4=;
-        b=dbsKFhi7Qrtq/Rq9OZDWGOfaDFXlehFA5Dvy8IhvRrLeU0T4wP85YNiBqYaU9XUcaR
-         eUVN69DjjMnifijLW25m+YKzc/I0odbx2wV1tPCdU+KBxslLKSqFwvkD4pVvTF50IUQa
-         +QaIH7XLXTeNMaw7eguYI4S17J2ihOJkhUqbubb0twU+NF44WOBEs4KEZwuyI2cQ1OWg
-         DjvmsdfzKYHIffEOCxLZBCluUxcZ7//A9FO1lCcnt+AcAMATqSVWgw8Xu0BUE/Jl7VQw
-         rtUspdPnkhbICsCmzGy+IMML4dl30xRIEscdXvevjnn2tvTt7h6mqDEkiKuyZ7Z/UY9Z
-         FpEA==
+         :cc;
+        bh=uhZvWBIYSPxrHtL/UXP4sOCKqMqAgTQ5cHbzprIzUlI=;
+        b=rzW4aaUe8wJHBTW/ExLvJddgYRg1t4YhtSpQVQScLfUwXMUjqtSxLLNi52Rpn5/B9e
+         4fm33kwEjNNC8PObxWVWNVFke/MshRfAUZolEP0oeRGIcWs1cMZ8dqnCMHUOTSSXF2R+
+         Nxc7bj+ITBZAcBUCg6yEKcw6zz2obIN/RDEpBS+4YLPJ4AjvRWmQYm9ga69a1RiY4EDX
+         oGzty137ABa8Ztyvwr1RlrkdXRpVcepr1eO0rJxfGr76K3XVs6VQ3L6PIza3Wro/7erv
+         oZSbbPlhDhdZagCPj0TuB4euNN0h0a1bfMWvh80WoOYfDkjShCEByhv1m6HFJ/OrDhaM
+         E/NQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc:content-transfer-encoding;
-        bh=9G0a90Ep/Bz5OOoDZhbBO26Y5kHqZZt4pCiJoHTyyw4=;
-        b=6nJs3CVmJA+e6jvsBy4/KEoDcgwq11mP7XSM3tNgQBW/eaSzamiWH+WQ/YuoQL9N3z
-         u8/f/QIazUDSkOUiBqoP9SSq7Ei8A5Z9bXUDC/vpU15sUkGDOOQugabB6KHEO/9m+TNd
-         PZGPXPVv6J25gd9yl00d7PTeJOZ+SZ4dDKk98OLMTLEE3S5BgsiYHu1vlHxM6+pV7ijM
-         s+Xd9hX+byXkuaPttf0wh3HBAaOwiL7wDC6S3qZcJkgNTL0OSk75XPjk8cjsoPqZ5iFK
-         aehygd2C52o3Z+75XQa7q5QEqXi4yNI4CGC0bSPZhfOpoPvs3st/aNE00iwv17YGfTT9
-         cE/w==
-X-Gm-Message-State: AOAM533fYKgBR/APgw0FLYq3RJA4a2gKK/8d+WydLfAzDEzw6SSMjR0T
-        NUjLsscGLBVOYz7md0rOmmBbDVZ3tNDPmsKdcj4evg==
-X-Google-Smtp-Source: ABdhPJwExpdEGnyWDK69sFVEHi5zDLcGulVNorqTNcKNzqhC2Qfdem89xzMoC4eHonTJ3Nemx/2dgOoEjbxz5HBpdFw=
-X-Received: by 2002:a05:6a00:bd1:b0:4fa:a5d7:c082 with SMTP id
- x17-20020a056a000bd100b004faa5d7c082mr520472pfu.85.1649092487680; Mon, 04 Apr
- 2022 10:14:47 -0700 (PDT)
+         :message-id:subject:to:cc;
+        bh=uhZvWBIYSPxrHtL/UXP4sOCKqMqAgTQ5cHbzprIzUlI=;
+        b=NQY4k4z+Imgs8qMzHo44+tNtyIYWrzF9XW0cxjIxOM+2pm11IRmPnRpDTuBmXH6exX
+         pKZFzryi0oMkwX/O+Nyfet9O885QvtEGInj8gimIg9WAiccpJ1pxjkuCZ1DYeSHSt3Cs
+         WzmbC6lXXaHY1vXhVKrotBLw5mNSp3siDoHcZwpZSBpYQqbn9Bz5ydu2ocsQ+7t88bqF
+         UKiLcPCNEOc+X8Albsr8AEFmJgVl/CRhybA9EooUCyS7HeAXgCD+o6hju+Yh7Dd7gU8X
+         N5rk06Nt83X+Oyg7A8K55NjmXnApakkdAh2IrQ5JY8dhCtvkomwrxsGl6nIzy9ik5w9r
+         TAng==
+X-Gm-Message-State: AOAM5322cvuAFORZuB5HTmqn98pYs9znGroDNs8IRb0L9/oRLvT3j2cX
+        tSIV3Hdj9p8w7phlsFO3MELRUlhnwMmYtlsjkP982w==
+X-Google-Smtp-Source: ABdhPJz50EolXnmloOFRdflV7luhmQEbXQ6TLx1sRiAzjczB5dC9hpz0y8SCGJwdMY8U2thvWleWIxvnBRXFYbPjKbA=
+X-Received: by 2002:a17:903:2351:b0:156:a562:b3f8 with SMTP id
+ c17-20020a170903235100b00156a562b3f8mr670651plh.81.1649092759112; Mon, 04 Apr
+ 2022 10:19:19 -0700 (PDT)
 MIME-Version: 1.0
-References: <YkdrEG5FlL7Gq2Vi@cmpxchg.org> <243A0156-D26A-47C9-982A-C8B0CDD69DA2@linux.dev>
- <Ykdz7fiMFZeFltYy@cmpxchg.org>
-In-Reply-To: <Ykdz7fiMFZeFltYy@cmpxchg.org>
-From:   Shakeel Butt <shakeelb@google.com>
-Date:   Mon, 4 Apr 2022 10:14:36 -0700
-Message-ID: <CALvZod466jLN8Bb67X9=iF5TvjOo-oEsHA-mGhpHnywGCP+WvA@mail.gmail.com>
+References: <20220331084151.2600229-1-yosryahmed@google.com>
+ <874k3d6vuq.fsf@vajain21.in.ibm.com> <CAJD7tka1UstKYBVrie-_1CgvtaLtVD1uwgzfk5SifxW4FQbOVw@mail.gmail.com>
+ <871qyd7bif.fsf@vajain21.in.ibm.com>
+In-Reply-To: <871qyd7bif.fsf@vajain21.in.ibm.com>
+From:   Yosry Ahmed <yosryahmed@google.com>
+Date:   Mon, 4 Apr 2022 10:18:42 -0700
+Message-ID: <CAJD7tka01bKnxQuizxTN7MtHj_hYu+dSztC2fY0jUPCcvk-9JA@mail.gmail.com>
 Subject: Re: [PATCH resend] memcg: introduce per-memcg reclaim interface
-To:     Johannes Weiner <hannes@cmpxchg.org>
-Cc:     Roman Gushchin <roman.gushchin@linux.dev>,
-        Yosry Ahmed <yosryahmed@google.com>,
+To:     Vaibhav Jain <vaibhav@linux.ibm.com>
+Cc:     Johannes Weiner <hannes@cmpxchg.org>,
         Michal Hocko <mhocko@kernel.org>,
+        Shakeel Butt <shakeelb@google.com>,
         Andrew Morton <akpm@linux-foundation.org>,
         David Rientjes <rientjes@google.com>,
         Tejun Heo <tj@kernel.org>, Zefan Li <lizefan.x@bytedance.com>,
-        Cgroups <cgroups@vger.kernel.org>,
-        "open list:DOCUMENTATION" <linux-doc@vger.kernel.org>,
-        LKML <linux-kernel@vger.kernel.org>,
+        Roman Gushchin <roman.gushchin@linux.dev>,
+        cgroups@vger.kernel.org, linux-doc@vger.kernel.org,
+        Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
         Linux-MM <linux-mm@kvack.org>, Jonathan Corbet <corbet@lwn.net>,
         Yu Zhao <yuzhao@google.com>,
         Dave Hansen <dave.hansen@linux.intel.com>,
         Wei Xu <weixugc@google.com>, Greg Thelen <gthelen@google.com>
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
 X-Spam-Status: No, score=-17.6 required=5.0 tests=BAYES_00,DKIMWL_WL_MED,
         DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,
         ENV_AND_HDR_SPF_MATCH,RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,SPF_PASS,
         T_SCC_BODY_TEXT_LINE,USER_IN_DEF_DKIM_WL,USER_IN_DEF_SPF_WL
-        autolearn=ham autolearn_force=no version=3.4.6
+        autolearn=unavailable autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Fri, Apr 1, 2022 at 2:51 PM Johannes Weiner <hannes@cmpxchg.org> wrote:
+On Sun, Apr 3, 2022 at 8:50 PM Vaibhav Jain <vaibhav@linux.ibm.com> wrote:
 >
-> On Fri, Apr 01, 2022 at 02:21:52PM -0700, Roman Gushchin wrote:
-> > > On Apr 1, 2022, at 2:13 PM, Johannes Weiner <hannes@cmpxchg.org> wrot=
-e:
-> > >
-> > > =EF=BB=BFOn Fri, Apr 01, 2022 at 11:39:30AM -0700, Roman Gushchin wro=
-te:
-> > >> The interface you're proposing is not really extensible, so we'll li=
-kely need to
-> > >> introduce a new interface like memory.reclaim_ext very soon. Why not=
- create
-> > >> an extensible API from scratch?
-> > >>
-> > >> I'm looking at cgroup v2 documentation which describes various inter=
-face files
-> > >> formats and it seems like given the number of potential optional arg=
-uments
-> > >> the best option is nested keyed (please, refer to the Interface File=
-s section).
-> > >>
-> > >> E.g. the format can be:
-> > >> echo "1G type=3Dfile nodemask=3D1-2 timeout=3D30s" > memory.reclaim
-> > >
-> > > Yeah, that syntax looks perfect.
-> > >
-> > > But why do you think it's not extensible from the current patch? We
-> > > can add those arguments one by one as we agree on them, and return
-> > > -EINVAL if somebody passes an unknown parameter.
-> > >
-> > > It seems to me the current proposal is forward-compatible that way
-> > > (with the current set of keyword pararms being the empty set :-))
-> >
-> > It wasn=E2=80=99t obvious to me. We spoke about positional arguments an=
-d then it wasn=E2=80=99t clear how to add them in a backward-compatible way=
-. The last thing we want is a bunch of memory.reclaim* interfaces :)
-> >
-> > So yeah, let=E2=80=99s just describe it properly in the documentation, =
-no code changes are needed.
 >
-> Sounds good to me!
-
-To summarize for next version:
-
-1) Add selftests.
-2) Add documentation for potential future extension, so whoever adds
-those features in future should follow the key-value format Roman is
-suggesting.
-
-Yosry, once we have agreement on the return value, please send the
-next version resolving these three points.
+> Apologies for the delayed response,
+>
+> Yosry Ahmed <yosryahmed@google.com> writes:
+>
+> > On Fri, Apr 1, 2022 at 1:39 AM Vaibhav Jain <vaibhav@linux.ibm.com> wrote:
+> >>
+> >>
+> >> Yosry Ahmed <yosryahmed@google.com> writes:
+> >> > From: Shakeel Butt <shakeelb@google.com>
+> >> >
+> >> > Introduce an memcg interface to trigger memory reclaim on a memory cgroup.
+> >> <snip>
+> >>
+> >> > +
+> >> > +     while (nr_reclaimed < nr_to_reclaim) {
+> >> > +             unsigned long reclaimed;
+> >> > +
+> >> > +             if (signal_pending(current))
+> >> > +                     break;
+> >> > +
+> >> > +             reclaimed = try_to_free_mem_cgroup_pages(memcg,
+> >> > +                                             nr_to_reclaim - nr_reclaimed,
+> >> > +                                             GFP_KERNEL, true);
+> >> > +
+> >> > +             if (!reclaimed && !nr_retries--)
+> >> > +                     break;
+> >> > +
+> >> > +             nr_reclaimed += reclaimed;
+> >>
+> >> I think there should be a cond_resched() in this loop before
+> >> try_to_free_mem_cgroup_pages() to have better chances of reclaim
+> >> succeding early.
+> >>
+> > Thanks for taking the time to look at this!
+> >
+> > I believe this loop is modeled after the loop in memory_high_write()
+> > for the memory.high interface. Is there a reason why it should be
+> > needed here but not there?
+> >
+>
+> memory_high_write() calls drain_all_stock() atleast once before calling
+> try_to_free_mem_cgroup_pages(). This would drain all percpu stocks
+> for the given memcg and its descendents, giving a high chance
+> try_to_free_mem_cgroup_pages() to succeed quickly. Such a functionality
+> is missing from this patch.
+>
+> Adding a cond_resched() would atleast give chance to other processess
+> within the memcg to run and make forward progress thereby making more
+> pages available for reclaim.
+>
+> Suggestion is partly based on __perform_reclaim() issues a cond_resche()
+> as it may get called repeatedly during direct reclaim path.
+>
+As Michal pointed out, there is already a call to cond_resched() in
+shrink_node_memcgs().
+>
+> >> <snip>
+> >>
+> >> --
+> >> Cheers
+> >> ~ Vaibhav
+> >
+>
+> --
+> Cheers
+> ~ Vaibhav
