@@ -2,275 +2,180 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 7343A4F17BA
-	for <lists+linux-doc@lfdr.de>; Mon,  4 Apr 2022 16:59:03 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 2C0C94F1CC9
+	for <lists+linux-doc@lfdr.de>; Mon,  4 Apr 2022 23:29:25 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1378309AbiDDPA5 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 4 Apr 2022 11:00:57 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:38498 "EHLO
+        id S1380418AbiDDV3A (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 4 Apr 2022 17:29:00 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:59728 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1378296AbiDDPAz (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Mon, 4 Apr 2022 11:00:55 -0400
-Received: from frasgout.his.huawei.com (frasgout.his.huawei.com [185.176.79.56])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 35112BF6F;
-        Mon,  4 Apr 2022 07:58:59 -0700 (PDT)
-Received: from fraeml738-chm.china.huawei.com (unknown [172.18.147.201])
-        by frasgout.his.huawei.com (SkyGuard) with ESMTP id 4KXDQM5WYWz67ms2;
-        Mon,  4 Apr 2022 22:57:15 +0800 (CST)
-Received: from lhreml724-chm.china.huawei.com (10.201.108.75) by
- fraeml738-chm.china.huawei.com (10.206.15.219) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2375.24; Mon, 4 Apr 2022 16:58:57 +0200
-Received: from localhost.localdomain (10.69.192.58) by
- lhreml724-chm.china.huawei.com (10.201.108.75) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2375.24; Mon, 4 Apr 2022 15:58:54 +0100
-From:   John Garry <john.garry@huawei.com>
-To:     <damien.lemoal@opensource.wdc.com>, <hch@lst.de>
-CC:     <linux-kernel@vger.kernel.org>, <linux-ide@vger.kernel.org>,
-        <linux-doc@vger.kernel.org>, <linux-scsi@vger.kernel.org>,
-        John Garry <john.garry@huawei.com>
-Subject: [PATCH v2 2/2] libata: Inline ata_qc_new_init() in ata_scsi_qc_new()
-Date:   Mon, 4 Apr 2022 22:53:10 +0800
-Message-ID: <1649083990-207133-3-git-send-email-john.garry@huawei.com>
-X-Mailer: git-send-email 2.8.1
-In-Reply-To: <1649083990-207133-1-git-send-email-john.garry@huawei.com>
-References: <1649083990-207133-1-git-send-email-john.garry@huawei.com>
+        with ESMTP id S1379204AbiDDQnT (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Mon, 4 Apr 2022 12:43:19 -0400
+Received: from smtp-out2.suse.de (smtp-out2.suse.de [195.135.220.29])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id A450F35856;
+        Mon,  4 Apr 2022 09:41:22 -0700 (PDT)
+Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
+        (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+         key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
+        (No client certificate requested)
+        by smtp-out2.suse.de (Postfix) with ESMTPS id 2E1961F390;
+        Mon,  4 Apr 2022 16:41:21 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.cz; s=susede2_rsa;
+        t=1649090481; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+         mime-version:mime-version:
+         content-transfer-encoding:content-transfer-encoding:
+         in-reply-to:in-reply-to:references:references;
+        bh=bei0JZDnlsbNqP4J+qIzBne1zsUAj2g0RJqQ6r2Qiqw=;
+        b=i0ObrEE+b2RebhFzMnlcKdL0BqgE865TCRWCuhUnAv17qBxbGvIcJplUrQaMTs8YblHn+x
+        JVYozogrIS2Flhw1EeDSlj69/ISgAxaOJXo8Mn306ngj4wFWuSk/ION7LdkcmFuho1kt6R
+        AVD9SLP//1+twgSKqikQFnTX4ieiAgM=
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.cz;
+        s=susede2_ed25519; t=1649090481;
+        h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+         mime-version:mime-version:
+         content-transfer-encoding:content-transfer-encoding:
+         in-reply-to:in-reply-to:references:references;
+        bh=bei0JZDnlsbNqP4J+qIzBne1zsUAj2g0RJqQ6r2Qiqw=;
+        b=pjR4WFPCNtrEDWu4FIUpx1x9XcuuyDgEQPSsLzovOSperD09sJK2XCWlVGiXuHNbagn1dx
+        JIOhyrVxO5bavqCQ==
+Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
+        (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+         key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
+        (No client certificate requested)
+        by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id EC0B112FC5;
+        Mon,  4 Apr 2022 16:41:20 +0000 (UTC)
+Received: from dovecot-director2.suse.de ([192.168.254.65])
+        by imap2.suse-dmz.suse.de with ESMTPSA
+        id yPnrOLAfS2LjfAAAMHmgww
+        (envelope-from <vbabka@suse.cz>); Mon, 04 Apr 2022 16:41:20 +0000
+From:   Vlastimil Babka <vbabka@suse.cz>
+To:     David Rientjes <rientjes@google.com>,
+        Christoph Lameter <cl@linux.com>,
+        Joonsoo Kim <iamjoonsoo.kim@lge.com>,
+        Pekka Enberg <penberg@kernel.org>,
+        Roman Gushchin <roman.gushchin@linux.dev>
+Cc:     Andrew Morton <akpm@linux-foundation.org>, linux-mm@kvack.org,
+        patches@lists.linux.dev, linux-kernel@vger.kernel.org,
+        Oliver Glitta <glittao@gmail.com>,
+        Marco Elver <elver@google.com>,
+        Mike Rapoport <rppt@linux.ibm.com>,
+        Hyeonggon Yoo <42.hyeyoo@gmail.com>,
+        Imran Khan <imran.f.khan@oracle.com>,
+        Vlastimil Babka <vbabka@suse.cz>,
+        Jonathan Corbet <corbet@lwn.net>,
+        Randy Dunlap <rdunlap@infradead.org>, linux-doc@vger.kernel.org
+Subject: [PATCH v3 6/6] slab, documentation: add description of debugfs files for SLUB caches
+Date:   Mon,  4 Apr 2022 18:41:12 +0200
+Message-Id: <20220404164112.18372-7-vbabka@suse.cz>
+X-Mailer: git-send-email 2.35.1
+In-Reply-To: <20220404164112.18372-1-vbabka@suse.cz>
+References: <20220404164112.18372-1-vbabka@suse.cz>
 MIME-Version: 1.0
-Content-Type: text/plain
-X-Originating-IP: [10.69.192.58]
-X-ClientProxiedBy: dggems706-chm.china.huawei.com (10.3.19.183) To
- lhreml724-chm.china.huawei.com (10.201.108.75)
-X-CFilter-Loop: Reflected
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_LOW,
-        RCVD_IN_MSPIKE_H4,RCVD_IN_MSPIKE_WL,SPF_HELO_NONE,SPF_PASS,
-        T_SCC_BODY_TEXT_LINE autolearn=ham autolearn_force=no version=3.4.6
+X-Developer-Signature: v=1; a=openpgp-sha256; l=3418; i=vbabka@suse.cz; h=from:subject; bh=aiEHhTlwaPsxqCPnZoF+zACTkJmNyiCa8U4FMIlm4hU=; b=owEBbQGS/pANAwAIAeAhynPxiakQAcsmYgBiSx+n9eEtd8BOf/2A9Gbbt9oR1Y/79g1fBU4U6ywZ pM9StUiJATMEAAEIAB0WIQSNS5MBqTXjGL5IXszgIcpz8YmpEAUCYksfpwAKCRDgIcpz8YmpEECtB/ 9deLfjoG4HXeZchPe/4/vX8Z2LlMjZ83wdxrA0d76J0Ln8c9FtzXuvRCjAhEdYj2UCH80jXW7fMBWF NDqQnwSChm4yVLEyZ9tpycx4qYoRFuoLCug2IVu6YKqglXKFFdMelZXfeqQT7YszkiDYbUTrfmShc/ fZp5U2dZ32SnH3TCbuM+x9Pe8K1tl9FEX0d4pl7xGrHArnPkyB3cA2wLoFleb0C/ZnuJ8R8cCuZQfG 9VHsYtj7qeRn1sgF6cqJ/ycMZf443uHFR6U/7Up+st7X33szxhjIQPP0hto8IlaHBeI2PS+sRU8viJ kT0X6iWUw5xO/W47QkjQckQ7Ozq0xe
+X-Developer-Key: i=vbabka@suse.cz; a=openpgp; fpr=A940D434992C2E8E99103D50224FA7E7CC82A664
+Content-Transfer-Encoding: 8bit
+X-Spam-Status: No, score=-4.4 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_MED,SPF_HELO_NONE,
+        SPF_PASS,T_SCC_BODY_TEXT_LINE autolearn=ham autolearn_force=no
+        version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-From: Christoph Hellwig <hch@lst.de>
+From: Oliver Glitta <glittao@gmail.com>
 
-It is a bit pointless to have ata_qc_new_init() in libata-core.c since it
-pokes scsi internals, so inline it in ata_scsi_qc_new() (in libata-scsi.c).
+Add description of debugfs files alloc_traces and free_traces
+to SLUB cache documentation.
 
-<Christoph, please provide signed-off-by>
-[jpg, Take Christoph's change from list and form into a patch]
-Signed-off-by: John Garry <john.garry@huawei.com>
+[ vbabka@suse.cz: some rewording ]
+
+Signed-off-by: Oliver Glitta <glittao@gmail.com>
+Signed-off-by: Vlastimil Babka <vbabka@suse.cz>
+Cc: Jonathan Corbet <corbet@lwn.net>
+Cc: Randy Dunlap <rdunlap@infradead.org>
+Cc: linux-doc@vger.kernel.org
+Reviewed-by: Hyeonggon Yoo <42.hyeyoo@gmail.com>
+Acked-by: Mike Rapoport <rppt@linux.ibm.com>
 ---
- Documentation/driver-api/libata.rst | 11 -------
- drivers/ata/libata-core.c           | 44 +---------------------------
- drivers/ata/libata-sata.c           |  8 -----
- drivers/ata/libata-scsi.c           | 45 ++++++++++++++++++++++-------
- drivers/ata/libata.h                | 12 --------
- 5 files changed, 35 insertions(+), 85 deletions(-)
+ Documentation/vm/slub.rst | 64 +++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 64 insertions(+)
 
-diff --git a/Documentation/driver-api/libata.rst b/Documentation/driver-api/libata.rst
-index d477e296bda5..311af516a3fd 100644
---- a/Documentation/driver-api/libata.rst
-+++ b/Documentation/driver-api/libata.rst
-@@ -424,12 +424,6 @@ How commands are issued
- -----------------------
+diff --git a/Documentation/vm/slub.rst b/Documentation/vm/slub.rst
+index d3028554b1e9..43063ade737a 100644
+--- a/Documentation/vm/slub.rst
++++ b/Documentation/vm/slub.rst
+@@ -384,5 +384,69 @@ c) Execute ``slabinfo-gnuplot.sh`` in '-t' mode, passing all of the
+       40,60`` range will plot only samples collected between 40th and
+       60th seconds).
  
- Internal commands
--    First, qc is allocated and initialized using :c:func:`ata_qc_new_init`.
--    Although :c:func:`ata_qc_new_init` doesn't implement any wait or retry
--    mechanism when qc is not available, internal commands are currently
--    issued only during initialization and error recovery, so no other
--    command is active and allocation is guaranteed to succeed.
--
-     Once allocated qc's taskfile is initialized for the command to be
-     executed. qc currently has two mechanisms to notify completion. One
-     is via ``qc->complete_fn()`` callback and the other is completion
-@@ -447,11 +441,6 @@ SCSI commands
-     translated. No qc is involved in processing a simulated scmd. The
-     result is computed right away and the scmd is completed.
- 
--    For a translated scmd, :c:func:`ata_qc_new_init` is invoked to allocate a
--    qc and the scmd is translated into the qc. SCSI midlayer's
--    completion notification function pointer is stored into
--    ``qc->scsidone``.
--
-     ``qc->complete_fn()`` callback is used for completion notification. ATA
-     commands use :c:func:`ata_scsi_qc_complete` while ATAPI commands use
-     :c:func:`atapi_qc_complete`. Both functions end up calling ``qc->scsidone``
-diff --git a/drivers/ata/libata-core.c b/drivers/ata/libata-core.c
-index 1067b2e2be28..5e7d6ccad5da 100644
---- a/drivers/ata/libata-core.c
-+++ b/drivers/ata/libata-core.c
-@@ -4563,43 +4563,6 @@ void swap_buf_le16(u16 *buf, unsigned int buf_words)
- #endif /* __BIG_ENDIAN */
- }
- 
--/**
-- *	ata_qc_new_init - Request an available ATA command, and initialize it
-- *	@dev: Device from whom we request an available command structure
-- *	@scmd: scmd for which to get qc
-- *
-- *	LOCKING:
-- *	None.
-- */
--
--struct ata_queued_cmd *ata_qc_new_init(struct ata_device *dev, struct scsi_cmnd *scmd)
--{
--	int tag = scsi_cmd_to_rq(scmd)->tag;
--	struct ata_port *ap = dev->link->ap;
--	struct ata_queued_cmd *qc;
--
--	/* no command while frozen */
--	if (unlikely(ap->pflags & ATA_PFLAG_FROZEN))
--		return NULL;
--
--	/* libsas case */
--	if (ap->flags & ATA_FLAG_SAS_HOST) {
--		tag = ata_sas_get_tag(scmd);
--		if (tag < 0)
--			return NULL;
--	}
--
--	qc = __ata_qc_from_tag(ap, tag);
--	qc->tag = qc->hw_tag = tag;
--	qc->scsicmd = NULL;
--	qc->ap = ap;
--	qc->dev = dev;
--
--	ata_qc_reinit(qc);
--
--	return qc;
--}
--
- /**
-  *	ata_qc_free - free unused ata_queued_cmd
-  *	@qc: Command to complete
-@@ -4612,13 +4575,8 @@ struct ata_queued_cmd *ata_qc_new_init(struct ata_device *dev, struct scsi_cmnd
-  */
- void ata_qc_free(struct ata_queued_cmd *qc)
- {
--	unsigned int tag;
--
--	WARN_ON_ONCE(qc == NULL); /* ata_qc_from_tag _might_ return NULL */
--
- 	qc->flags = 0;
--	tag = qc->tag;
--	if (ata_tag_valid(tag))
-+	if (ata_tag_valid(qc->tag))
- 		qc->tag = ATA_TAG_POISON;
- }
- 
-diff --git a/drivers/ata/libata-sata.c b/drivers/ata/libata-sata.c
-index c3e9fd7d920c..7a5fe41aa5ae 100644
---- a/drivers/ata/libata-sata.c
-+++ b/drivers/ata/libata-sata.c
-@@ -1268,14 +1268,6 @@ int ata_sas_queuecmd(struct scsi_cmnd *cmd, struct ata_port *ap)
- }
- EXPORT_SYMBOL_GPL(ata_sas_queuecmd);
- 
--int ata_sas_get_tag(struct scsi_cmnd *scmd)
--{
--	if (WARN_ON_ONCE(scmd->budget_token >= ATA_MAX_QUEUE))
--		return -1;
--
--	return scmd->budget_token;
--}
--
- /**
-  *	sata_async_notification - SATA async notification handler
-  *	@ap: ATA port where async notification is received
-diff --git a/drivers/ata/libata-scsi.c b/drivers/ata/libata-scsi.c
-index 61dd7f7c7743..50ef132ec48c 100644
---- a/drivers/ata/libata-scsi.c
-+++ b/drivers/ata/libata-scsi.c
-@@ -638,24 +638,47 @@ EXPORT_SYMBOL_GPL(ata_scsi_ioctl);
- static struct ata_queued_cmd *ata_scsi_qc_new(struct ata_device *dev,
- 					      struct scsi_cmnd *cmd)
- {
-+	struct ata_port *ap = dev->link->ap;
- 	struct ata_queued_cmd *qc;
-+	int tag;
- 
--	qc = ata_qc_new_init(dev, cmd);
--	if (qc) {
--		qc->scsicmd = cmd;
--		qc->scsidone = scsi_done;
--
--		qc->sg = scsi_sglist(cmd);
--		qc->n_elem = scsi_sg_count(cmd);
-+	if (unlikely(ap->pflags & ATA_PFLAG_FROZEN))
-+		goto fail;
- 
--		if (scsi_cmd_to_rq(cmd)->rq_flags & RQF_QUIET)
--			qc->flags |= ATA_QCFLAG_QUIET;
-+	if (ap->flags & ATA_FLAG_SAS_HOST) {
-+		/*
-+		 * SAS hosts may queue > ATA_MAX_QUEUE commands so use
-+		 * unique per-device budget token as a tag.
-+		 */
-+		if (WARN_ON_ONCE(cmd->budget_token >= ATA_MAX_QUEUE))
-+			goto fail;
-+		tag = cmd->budget_token;
- 	} else {
--		cmd->result = (DID_OK << 16) | SAM_STAT_TASK_SET_FULL;
--		scsi_done(cmd);
-+		tag = scsi_cmd_to_rq(cmd)->tag;
- 	}
- 
-+	qc = __ata_qc_from_tag(ap, tag);
-+	qc->tag = qc->hw_tag = tag;
-+	qc->scsicmd = NULL;
-+	qc->ap = ap;
-+	qc->dev = dev;
 +
-+	ata_qc_reinit(qc);
++DebugFS files for SLUB
++======================
 +
-+	qc->scsicmd = cmd;
-+	qc->scsidone = scsi_done;
++For more information about current state of SLUB caches with the user tracking
++debug option enabled, debugfs files are available, typically under
++/sys/kernel/debug/slab/<cache>/ (created only for caches with enabled user
++tracking). There are 2 types of these files with the following debug
++information:
 +
-+	qc->sg = scsi_sglist(cmd);
-+	qc->n_elem = scsi_sg_count(cmd);
++1. alloc_traces::
 +
-+	if (scsi_cmd_to_rq(cmd)->rq_flags & RQF_QUIET)
-+		qc->flags |= ATA_QCFLAG_QUIET;
- 	return qc;
++    Prints information about unique allocation traces of the currently
++    allocated objects. The output is sorted by frequency of each trace.
 +
-+fail:
-+	cmd->result = (DID_OK << 16) | SAM_STAT_TASK_SET_FULL;
-+	scsi_done(cmd);
-+	return NULL;
- }
- 
- static void ata_qc_set_pc_nbytes(struct ata_queued_cmd *qc)
-diff --git a/drivers/ata/libata.h b/drivers/ata/libata.h
-index 92e52090165b..926a7f41303d 100644
---- a/drivers/ata/libata.h
-+++ b/drivers/ata/libata.h
-@@ -44,7 +44,6 @@ static inline void ata_force_cbl(struct ata_port *ap) { }
- #endif
- extern u64 ata_tf_to_lba(const struct ata_taskfile *tf);
- extern u64 ata_tf_to_lba48(const struct ata_taskfile *tf);
--extern struct ata_queued_cmd *ata_qc_new_init(struct ata_device *dev, struct scsi_cmnd *scmd);
- extern int ata_build_rw_tf(struct ata_taskfile *tf, struct ata_device *dev,
- 			   u64 block, u32 n_block, unsigned int tf_flags,
- 			   unsigned int tag, int class);
-@@ -91,17 +90,6 @@ extern unsigned int ata_read_log_page(struct ata_device *dev, u8 log,
- 
- #define to_ata_port(d) container_of(d, struct ata_port, tdev)
- 
--/* libata-sata.c */
--#ifdef CONFIG_SATA_HOST
--int ata_sas_get_tag(struct scsi_cmnd *scmd);
--#else
--static inline int ata_sas_get_tag(struct scsi_cmnd *scmd)
--{
--	return -EOPNOTSUPP;
--}
--static inline void ata_sas_free_tag(unsigned int tag, struct ata_port *ap) { }
--#endif
--
- /* libata-acpi.c */
- #ifdef CONFIG_ATA_ACPI
- extern unsigned int ata_acpi_gtf_filter;
++    Information in the output:
++    Number of objects, allocating function, minimal/average/maximal jiffies since alloc,
++    pid range of the allocating processes, cpu mask of allocating cpus, and stack trace.
++
++    Example:::
++
++    1085 populate_error_injection_list+0x97/0x110 age=166678/166680/166682 pid=1 cpus=1::
++	__slab_alloc+0x6d/0x90
++	kmem_cache_alloc_trace+0x2eb/0x300
++	populate_error_injection_list+0x97/0x110
++	init_error_injection+0x1b/0x71
++	do_one_initcall+0x5f/0x2d0
++	kernel_init_freeable+0x26f/0x2d7
++	kernel_init+0xe/0x118
++	ret_from_fork+0x22/0x30
++
++
++2. free_traces::
++
++    Prints information about unique freeing traces of the currently allocated
++    objects. The freeing traces thus come from the previous life-cycle of the
++    objects and are reported as not available for objects allocated for the first
++    time. The output is sorted by frequency of each trace.
++
++    Information in the output:
++    Number of objects, freeing function, minimal/average/maximal jiffies since free,
++    pid range of the freeing processes, cpu mask of freeing cpus, and stack trace.
++
++    Example:::
++
++    1980 <not-available> age=4294912290 pid=0 cpus=0
++    51 acpi_ut_update_ref_count+0x6a6/0x782 age=236886/237027/237772 pid=1 cpus=1
++	kfree+0x2db/0x420
++	acpi_ut_update_ref_count+0x6a6/0x782
++	acpi_ut_update_object_reference+0x1ad/0x234
++	acpi_ut_remove_reference+0x7d/0x84
++	acpi_rs_get_prt_method_data+0x97/0xd6
++	acpi_get_irq_routing_table+0x82/0xc4
++	acpi_pci_irq_find_prt_entry+0x8e/0x2e0
++	acpi_pci_irq_lookup+0x3a/0x1e0
++	acpi_pci_irq_enable+0x77/0x240
++	pcibios_enable_device+0x39/0x40
++	do_pci_enable_device.part.0+0x5d/0xe0
++	pci_enable_device_flags+0xfc/0x120
++	pci_enable_device+0x13/0x20
++	virtio_pci_probe+0x9e/0x170
++	local_pci_probe+0x48/0x80
++	pci_device_probe+0x105/0x1c0
++
+ Christoph Lameter, May 30, 2007
+ Sergey Senozhatsky, October 23, 2015
 -- 
-2.26.2
+2.35.1
 
