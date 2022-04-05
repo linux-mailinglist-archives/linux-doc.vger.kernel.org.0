@@ -2,48 +2,87 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 2507F4F4A28
-	for <lists+linux-doc@lfdr.de>; Wed,  6 Apr 2022 02:41:23 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 3583E4F49FE
+	for <lists+linux-doc@lfdr.de>; Wed,  6 Apr 2022 02:36:27 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1445093AbiDEWfW (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 5 Apr 2022 18:35:22 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:40864 "EHLO
+        id S229798AbiDEWdp (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 5 Apr 2022 18:33:45 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:43400 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1457740AbiDEQhE (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 5 Apr 2022 12:37:04 -0400
-Received: from ms.lwn.net (ms.lwn.net [45.79.88.28])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 45880CF480
-        for <linux-doc@vger.kernel.org>; Tue,  5 Apr 2022 09:35:04 -0700 (PDT)
-Received: from localhost (unknown [IPv6:2601:281:8300:35:2589:2a93:190d:b787])
+        with ESMTP id S1457753AbiDEQj5 (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 5 Apr 2022 12:39:57 -0400
+Received: from ams.source.kernel.org (ams.source.kernel.org [IPv6:2604:1380:4601:e00::1])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 0277ED95C9
+        for <linux-doc@vger.kernel.org>; Tue,  5 Apr 2022 09:37:57 -0700 (PDT)
+Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
         (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
         (No client certificate requested)
-        by ms.lwn.net (Postfix) with ESMTPSA id 7F26930D;
-        Tue,  5 Apr 2022 16:35:04 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 ms.lwn.net 7F26930D
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=lwn.net; s=20201203;
-        t=1649176504; bh=ny+2CUlYmXa8pnZEkTWJT55eEzt1u6l/Pzrd8I3ssOo=;
-        h=From:To:Cc:Subject:In-Reply-To:References:Date:From;
-        b=I5FG5xytlOBMvuQXel+FBzp9QXwmb5Ql2J6qARYM65UqdJWNxVnsZhIw7/EEsHGjj
-         T4cn9bB6+srL0crr5hODJC47YqR+tKp/u+/AmVfGl2jjJLRr9eVNSDElaMfFhbdSfJ
-         4r6PcCtyGtqskuREwSdqNMVcdl+5ZqN/xoqbpnXY9f6CWoFWD8rnTNitsLBvIzGXS8
-         wD7+nQqtv/d9S/+kvor5smeIFhK9lsrfYnawmHwB5UYV7tyYm6wkMZvI/4p1eVXT9V
-         5dESuXFwakY9A5gudi2+JuZfieJiK175ggD3oQ+LF9S4tdEwZeMLtzHsLVtCXNJaaK
-         1s9WKImYXGIKg==
-From:   Jonathan Corbet <corbet@lwn.net>
-To:     Tang Yizhou <tangyizhou@huawei.com>, siyanteng@loongson.cn,
-        siyanteng01@gmail.com, alexs@kernel.org, seakeel@gmail.com
-Cc:     linux-doc@vger.kernel.org, zhengbin13@huawei.com,
-        tangyeechou@gmail.com, Tang Yizhou <tangyizhou@huawei.com>
-Subject: Re: [PATCH] docs/zh_CN: Add sched-debug Chinese translation
-In-Reply-To: <20220317025914.27588-1-tangyizhou@huawei.com>
-References: <20220317025914.27588-1-tangyizhou@huawei.com>
-Date:   Tue, 05 Apr 2022 10:35:03 -0600
-Message-ID: <875ynnebew.fsf@meer.lwn.net>
+        by ams.source.kernel.org (Postfix) with ESMTPS id 77471B81E8B
+        for <linux-doc@vger.kernel.org>; Tue,  5 Apr 2022 16:37:56 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 16A0FC385B3
+        for <linux-doc@vger.kernel.org>; Tue,  5 Apr 2022 16:37:55 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+        s=k20201202; t=1649176675;
+        bh=Godeb1QF1XaLrnNDs3lSu+RGeizZyertdC0hYAIHClw=;
+        h=References:In-Reply-To:From:Date:Subject:To:Cc:From;
+        b=Yu6iJOgByni16xc1pZ6bNBjAeQxQqcTuh8UKL3qI0gplsZ+8nNmFn1SKThC9FuxN4
+         u34E1aUA4n2FU907IP7rNdM9/W/IUVWPsUAHOC9JAsZEyGh80oZzqmGL96ilHd7Sbu
+         WUA65ocB+C7/WAgR5eYriY7oSzvDourQ0S1hAm7WGWKc9TOc9gkHJD1+6svOgIk5Qz
+         vPEvbcZ49dRQ1Gu6eRN0JjgqEy8ECUIqzV5pL2Ye1wUW20zvKfEwOFYL9CeIBZ0wwr
+         5WNMCE6QkkXOKsZZldvORIw/sUvgOIPJJAeWoGHwDSLxfkQjOM09FT4bH/eMbwLt0h
+         zAFPwI7MN/0ZA==
+Received: by mail-ej1-f48.google.com with SMTP id ot30so17925466ejb.12
+        for <linux-doc@vger.kernel.org>; Tue, 05 Apr 2022 09:37:55 -0700 (PDT)
+X-Gm-Message-State: AOAM530hgFiL6QypnUJggGBWldVlqs43WCylthwnxglqG5q+PWgrd4gu
+        Ap0Zj+2e7qksZhqT488HBMsCNkIWoy5RTf93pRiEcw==
+X-Google-Smtp-Source: ABdhPJzKjYrImTJI9WyByUp50Mj9PCG8J06DWt1ucdJTqdDxCPRpsxJHnkt2Vhm9WUOmFxdnESIK5CAyDWTZbEBHta8=
+X-Received: by 2002:a17:907:6089:b0:6db:a3d7:3fa9 with SMTP id
+ ht9-20020a170907608900b006dba3d73fa9mr4556278ejc.593.1649176672844; Tue, 05
+ Apr 2022 09:37:52 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain
-X-Spam-Status: No, score=-2.1 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_NONE,
-        SPF_HELO_NONE,SPF_PASS,T_SCC_BODY_TEXT_LINE autolearn=ham
+References: <20220328175033.2437312-1-roberto.sassu@huawei.com>
+ <20220331022727.ybj4rui4raxmsdpu@MBP-98dd607d3435.dhcp.thefacebook.com>
+ <b9f5995f96da447c851f7c9db8232a9b@huawei.com> <20220401235537.mwziwuo4n53m5cxp@MBP-98dd607d3435.dhcp.thefacebook.com>
+ <CACYkzJ5QgkucL3HZ4bY5Rcme4ey6U3FW4w2Gz-9rdWq0_RHvgA@mail.gmail.com>
+ <CAEiveUcx1KHoJ421Cv+52t=0U+Uy2VF51VC_zfTSftQ4wVYOPw@mail.gmail.com>
+ <c2e57f10b62940eba3cfcae996e20e3c@huawei.com> <385e4cf4-4cd1-8f41-5352-ea87a1f419ad@schaufler-ca.com>
+ <0497bb46586c4f37b9bd01950ba9e6a5@huawei.com> <fb804242-da2c-4213-9dc3-f09ea42f0355@schaufler-ca.com>
+In-Reply-To: <fb804242-da2c-4213-9dc3-f09ea42f0355@schaufler-ca.com>
+From:   KP Singh <kpsingh@kernel.org>
+Date:   Tue, 5 Apr 2022 18:37:42 +0200
+X-Gmail-Original-Message-ID: <CACYkzJ4KwWykYjb0DJ1SHe9syiefqgfjDB8om7RNx10vZ3UiKg@mail.gmail.com>
+Message-ID: <CACYkzJ4KwWykYjb0DJ1SHe9syiefqgfjDB8om7RNx10vZ3UiKg@mail.gmail.com>
+Subject: Re: [PATCH 00/18] bpf: Secure and authenticated preloading of eBPF programs
+To:     Casey Schaufler <casey@schaufler-ca.com>
+Cc:     Roberto Sassu <roberto.sassu@huawei.com>,
+        Djalal Harouni <tixxdz@gmail.com>,
+        Alexei Starovoitov <alexei.starovoitov@gmail.com>,
+        "corbet@lwn.net" <corbet@lwn.net>,
+        "viro@zeniv.linux.org.uk" <viro@zeniv.linux.org.uk>,
+        "ast@kernel.org" <ast@kernel.org>,
+        "daniel@iogearbox.net" <daniel@iogearbox.net>,
+        "andrii@kernel.org" <andrii@kernel.org>,
+        "shuah@kernel.org" <shuah@kernel.org>,
+        "mcoquelin.stm32@gmail.com" <mcoquelin.stm32@gmail.com>,
+        "alexandre.torgue@foss.st.com" <alexandre.torgue@foss.st.com>,
+        "zohar@linux.ibm.com" <zohar@linux.ibm.com>,
+        "linux-doc@vger.kernel.org" <linux-doc@vger.kernel.org>,
+        "linux-fsdevel@vger.kernel.org" <linux-fsdevel@vger.kernel.org>,
+        "netdev@vger.kernel.org" <netdev@vger.kernel.org>,
+        "bpf@vger.kernel.org" <bpf@vger.kernel.org>,
+        "linux-kselftest@vger.kernel.org" <linux-kselftest@vger.kernel.org>,
+        "linux-stm32@st-md-mailman.stormreply.com" 
+        <linux-stm32@st-md-mailman.stormreply.com>,
+        "linux-arm-kernel@lists.infradead.org" 
+        <linux-arm-kernel@lists.infradead.org>,
+        "linux-integrity@vger.kernel.org" <linux-integrity@vger.kernel.org>,
+        "linux-security-module@vger.kernel.org" 
+        <linux-security-module@vger.kernel.org>,
+        "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>
+Content-Type: text/plain; charset="UTF-8"
+X-Spam-Status: No, score=-7.1 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_HI,
+        SPF_HELO_NONE,SPF_PASS,T_SCC_BODY_TEXT_LINE autolearn=unavailable
         autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
@@ -51,17 +90,119 @@ Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Tang Yizhou <tangyizhou@huawei.com> writes:
-
-> Translate scheduler/sched-debug.rst into Chinese.
+On Tue, Apr 5, 2022 at 6:22 PM Casey Schaufler <casey@schaufler-ca.com> wrote:
 >
-> Signed-off-by: Tang Yizhou <tangyizhou@huawei.com>
-> ---
->  .../translations/zh_CN/scheduler/index.rst    |  1 +
->  .../zh_CN/scheduler/sched-debug.rst           | 51 +++++++++++++++++++
->  2 files changed, 52 insertions(+)
->  create mode 100644 Documentation/translations/zh_CN/scheduler/sched-debug.rst
+> On 4/5/2022 8:29 AM, Roberto Sassu wrote:
+> >> From: Casey Schaufler [mailto:casey@schaufler-ca.com]
+> >> Sent: Tuesday, April 5, 2022 4:50 PM
+> >> On 4/4/2022 10:20 AM, Roberto Sassu wrote:
+> >>>> From: Djalal Harouni [mailto:tixxdz@gmail.com]
+> >>>> Sent: Monday, April 4, 2022 9:45 AM
+> >>>> On Sun, Apr 3, 2022 at 5:42 PM KP Singh <kpsingh@kernel.org> wrote:
+> >>>>> On Sat, Apr 2, 2022 at 1:55 AM Alexei Starovoitov
+> >>>>> <alexei.starovoitov@gmail.com> wrote:
+> >>>> ...
+> >>>>>>> Pinning
+> >>>>>>> them to unreachable inodes intuitively looked the
+> >>>>>>> way to go for achieving the stated goal.
+> >>>>>> We can consider inodes in bpffs that are not unlinkable by root
+> >>>>>> in the future, but certainly not for this use case.
+> >>>>> Can this not be already done by adding a BPF_LSM program to the
+> >>>>> inode_unlink LSM hook?
+> >>>>>
+> >>>> Also, beside of the inode_unlink... and out of curiosity: making
+> >> sysfs/bpffs/
+> >>>> readonly after pinning, then using bpf LSM hooks
+> >>>> sb_mount|remount|unmount...
+> >>>> family combining bpf() LSM hook... isn't this enough to:
+> >>>> 1. Restrict who can pin to bpffs without using a full MAC
+> >>>> 2. Restrict who can delete or unmount bpf filesystem
+> >>>>
+> >>>> ?
+> >>> I'm thinking to implement something like this.
+> >>>
+> >>> First, I add a new program flag called
+> >>> BPF_F_STOP_ONCONFIRM, which causes the ref count
+> >>> of the link to increase twice at creation time. In this way,
+> >>> user space cannot make the link disappear, unless a
+> >>> confirmation is explicitly sent via the bpf() system call.
+> >>>
+> >>> Another advantage is that other LSMs can decide
+> >>> whether or not they allow a program with this flag
+> >>> (in the bpf security hook).
+> >>>
+> >>> This would work regardless of the method used to
+> >>> load the eBPF program (user space or kernel space).
+> >>>
+> >>> Second, I extend the bpf() system call with a new
+> >>> subcommand, BPF_LINK_CONFIRM_STOP, which
+> >>> decreasres the ref count for the link of the programs
+> >>> with the BPF_F_STOP_ONCONFIRM flag. I will also
+> >>> introduce a new security hook (something like
+> >>> security_link_confirm_stop), so that an LSM has the
+> >>> opportunity to deny the stop (the bpf security hook
+> >>> would not be sufficient to determine exactly for
+> >>> which link the confirmation is given, an LSM should
+> >>> be able to deny the stop for its own programs).
+> >> Would you please stop referring to a set of eBPF programs
+> >> loaded into the BPF LSM as an LSM? Call it a BPF security
+> >> module (BSM) if you must use an abbreviation. An LSM is a
+> >> provider of security_ hooks. In your case that is BPF. When
+> >> you call the set of eBPF programs an LSM it is like calling
+> >> an SELinux policy an LSM.
+> > An eBPF program could be a provider of security_ hooks
+> > too.
+>
+> No, it can't. If I look in /sys/kernel/security/lsm what
+> you see is "bpf". The LSM is BPF. What BPF does in its
+> hooks is up to it and its responsibility.
+>
+> >   The bpf LSM is an aggregator, similarly to your
+> > infrastructure to manage built-in LSMs. Maybe, calling
+> > it second-level LSM or secondary LSM would better
+> > represent this new class.
+>
+> It isn't an LSM, and adding a qualifier doesn't make it
+> one and only adds to the confusion.
+>
+> > The only differences are the registration method, (SEC
+> > directive instead of DEFINE_LSM), and what the hook
+> > implementation can access.
+>
+> Those two things pretty well define what an LSM is.
+>
+> > The implementation of a security_ hook via eBPF can
+> > follow the same structure of built-in LSMs, i.e. it can be
+> > uniquely responsible for enforcing and be policy-agnostic,
+> > and can retrieve the decisions based on a policy from a
+> > component implemented somewhere else.
+>
+> The BPF LSM provides mechanism. The eBPF programs provide policy.
 
-Applied, thanks.
+Yeah, let's stick what we call an LSM in the kernel, Here,
+"bpf" is the LSM like selinux,apparmor and this is what you set in
+CONFIG_LSM or pass on cmdline as lsm= and can be seen
+in /sys/kernel/security/lsm
 
-jon
+Calling your BPF programs an LSM will just confuse people.
+
+>
+> >
+> > Hopefully, I understood the basic principles correctly.
+> > I let the eBPF maintainers comment on this.
+> >
+> > Thanks
+> >
+> > Roberto
+> >
+> > HUAWEI TECHNOLOGIES Duesseldorf GmbH, HRB 56063
+> > Managing Director: Li Peng, Zhong Ronghua
+> >
+> >>> What do you think?
+> >>>
+> >>> Thanks
+> >>>
+> >>> Roberto
+> >>>
+> >>> HUAWEI TECHNOLOGIES Duesseldorf GmbH, HRB 56063
+> >>> Managing Director: Li Peng, Zhong Ronghua
