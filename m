@@ -2,46 +2,48 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 7A28D4F49BD
-	for <lists+linux-doc@lfdr.de>; Wed,  6 Apr 2022 02:29:25 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id BAB514F4A08
+	for <lists+linux-doc@lfdr.de>; Wed,  6 Apr 2022 02:40:18 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S231939AbiDEWZC (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 5 Apr 2022 18:25:02 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:37352 "EHLO
+        id S233433AbiDEWd5 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 5 Apr 2022 18:33:57 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:37282 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1457456AbiDEQDP (ORCPT
+        with ESMTP id S1457459AbiDEQDP (ORCPT
         <rfc822;linux-doc@vger.kernel.org>); Tue, 5 Apr 2022 12:03:15 -0400
 Received: from ms.lwn.net (ms.lwn.net [IPv6:2600:3c01:e000:3a1::42])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 476C24FC45;
-        Tue,  5 Apr 2022 08:44:54 -0700 (PDT)
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id B7D455D1A0;
+        Tue,  5 Apr 2022 08:46:55 -0700 (PDT)
 Received: from localhost (unknown [IPv6:2601:281:8300:35:2589:2a93:190d:b787])
         (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
         (No client certificate requested)
-        by ms.lwn.net (Postfix) with ESMTPSA id C920C30D;
-        Tue,  5 Apr 2022 15:44:53 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 ms.lwn.net C920C30D
+        by ms.lwn.net (Postfix) with ESMTPSA id 20691608;
+        Tue,  5 Apr 2022 15:46:55 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 ms.lwn.net 20691608
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=lwn.net; s=20201203;
-        t=1649173494; bh=Y8JQDAaUoR51nr0vreh9K+hDkAMzDHJLaO+1EAdFo9U=;
+        t=1649173615; bh=kHfYrSzZyDs+Fu27L1LKoiRzei4/RCGk3O/QVQBW1rk=;
         h=From:To:Cc:Subject:In-Reply-To:References:Date:From;
-        b=lu+X5ocZQ6WZkbc2wXsM4cqL34a9FLx1z3xpNTOL3MT4WKsa5vuLqHNmJNNRUEhmr
-         URG4ecTZsNnVxgMf/x1lsfzpYbSGj7uoQjS0M6JRxWEO/InCglQctIWK0sYZAoWCz7
-         LeYJ558E8Paj4f32H7ziSiD2dogckzHvwzDbqcQ3ti5gK7p/hxVfA9A8ewHRdZp56Z
-         0XJ73mMFyorsbpO8kHDT5xJp+hSd6SZ1b0tIdTSEWugZPIyAy9hSLGqbXF6G0R+u4R
-         GWuvP0THvPffQb9yi8v3hSWKNtBJtP7sB1LG4xZFx3nsjyWp86ninn35Hb3QRf6LRq
-         q13qDHPZUvwDA==
+        b=Ym15LNvNX+5bNBTOTEfnrPAQERPQL+4Q3JLRjO3chKJgurqlYd90WxSYSbab+74hK
+         r5fkWh/kQQqTfh96JTYHX9Jm4ZvoIDKhcBSNcPIQgF+XHN3iXU4rz9WPOBoOUYAksU
+         ++4u3F3nNERfFWdutVRxQI27DWewR1g5jk7AC/3c/Lkazl4f47H5hZqBjfkzZpegHi
+         jXwVMJ8BqvwpUGapCdr50+Dg8Gke5bX+PaFEffzqGVJdXy7WKib0ztNhbRQGiedDNz
+         p4MsveBUV35qF82ZxnpB1UtqerBoYaqlvgmdeKqBsHQnBhrvx+jlOoKXA5NmKDhCz2
+         dt7e1tX0WOWoQ==
 From:   Jonathan Corbet <corbet@lwn.net>
-To:     Krzysztof Kozlowski <krzysztof.kozlowski@linaro.org>,
-        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org
-Cc:     Stephen Boyd <sboyd@kernel.org>,
-        Krzysztof Kozlowski <krzysztof.kozlowski@linaro.org>
-Subject: Re: [PATCH] Documentation/process: mention patch changelog in
- review process
-In-Reply-To: <20220402100706.57507-1-krzysztof.kozlowski@linaro.org>
-References: <20220402100706.57507-1-krzysztof.kozlowski@linaro.org>
-Date:   Tue, 05 Apr 2022 09:44:52 -0600
-Message-ID: <874k37fsaz.fsf@meer.lwn.net>
+To:     Akira Yokosawa <akiyks@gmail.com>,
+        "Rafael J. Wysocki" <rafael@kernel.org>,
+        Srinivas Pandruvada <srinivas.pandruvada@linux.intel.com>
+Cc:     Randy Dunlap <rdunlap@infradead.org>, linux-pm@vger.kernel.org,
+        linux-doc@vger.kernel.org, Akira Yokosawa <akiyks@gmail.com>
+Subject: Re: [PATCH -pm v2] docs: driver-api/thermal/intel_dptf: Use
+ copyright symbol
+In-Reply-To: <fffa1d50-f155-b6a4-bf58-22e395d7401c@gmail.com>
+References: <fffa1d50-f155-b6a4-bf58-22e395d7401c@gmail.com>
+Date:   Tue, 05 Apr 2022 09:46:54 -0600
+Message-ID: <871qybfs7l.fsf@meer.lwn.net>
 MIME-Version: 1.0
-Content-Type: text/plain
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
 X-Spam-Status: No, score=-2.1 required=5.0 tests=BAYES_00,DKIM_SIGNED,
         DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,SPF_HELO_NONE,SPF_PASS,
         T_SCC_BODY_TEXT_LINE autolearn=ham autolearn_force=no version=3.4.6
@@ -51,15 +53,47 @@ Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Krzysztof Kozlowski <krzysztof.kozlowski@linaro.org> writes:
+Akira Yokosawa <akiyks@gmail.com> writes:
 
-> Extend the "Respond to review comments" section of "Submitting patches"
-> with reference to patch changelogs.
+> Using a substitution pattern of "|copy|" without including
+> isonum.txt causes a doc build warning.
 >
-> Signed-off-by: Krzysztof Kozlowski <krzysztof.kozlowski@linaro.org>
+> Using the symbol "=C2=A9" itself is a better choice for those
+> who read .rst sources.
+>
+> Fixes: 16c02447f3e1 ("Documentation: thermal: DPTF Documentation")
+> Reported by: Randy Dunlap <rdunlap@infradead.org>
+> Suggested-by: Jonathan Corbet <corbet@lwn.net>
+> Signed-off-by: Akira Yokosawa <akiyks@gmail.com>
+> Cc: "Rafael J. Wysocki" <rafael@kernel.org>
+> Cc: Srinivas Pandruvada <srinivas.pandruvada@linux.intel.com>
+> Cc: linux-pm@vger.kernel.org
+> Cc: linux-doc@vger.kernel.org
 > ---
->  Documentation/process/submitting-patches.rst | 5 ++++-
->  1 file changed, 4 insertions(+), 1 deletion(-)
+> Changes since v1 [1]:
+>
+>   - Use =C2=A9 instead of including isonum.txt (Jon).
+>   - Amend title and changelog.
+>
+> v1 [1]: https://lore.kernel.org/r/e06542af-aa8b-0885-37a3-bb7bc5fafa1e@gm=
+ail.com/
+> ---
+>  Documentation/driver-api/thermal/intel_dptf.rst | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+>
+> diff --git a/Documentation/driver-api/thermal/intel_dptf.rst b/Documentat=
+ion/driver-api/thermal/intel_dptf.rst
+> index 96668dca753a..372bdb4d04c6 100644
+> --- a/Documentation/driver-api/thermal/intel_dptf.rst
+> +++ b/Documentation/driver-api/thermal/intel_dptf.rst
+> @@ -4,7 +4,7 @@
+>  Intel(R) Dynamic Platform and Thermal Framework Sysfs Interface
+>  =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+>=20=20
+> -:Copyright: |copy| 2022 Intel Corporation
+> +:Copyright: =C2=A9 2022 Intel Corporation
 
 Applied, thanks.
 
