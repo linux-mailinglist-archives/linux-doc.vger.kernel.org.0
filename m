@@ -2,138 +2,85 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 0EFCA4F4A2B
-	for <lists+linux-doc@lfdr.de>; Wed,  6 Apr 2022 02:41:25 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id F09614F4A07
+	for <lists+linux-doc@lfdr.de>; Wed,  6 Apr 2022 02:40:15 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1447194AbiDEWfb (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 5 Apr 2022 18:35:31 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:34418 "EHLO
+        id S232566AbiDEWd4 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 5 Apr 2022 18:33:56 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:44260 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1457612AbiDEQRJ (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 5 Apr 2022 12:17:09 -0400
-Received: from ms.lwn.net (ms.lwn.net [IPv6:2600:3c01:e000:3a1::42])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 96CBB192B9;
-        Tue,  5 Apr 2022 09:15:11 -0700 (PDT)
+        with ESMTP id S1457631AbiDEQVD (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 5 Apr 2022 12:21:03 -0400
+Received: from ms.lwn.net (ms.lwn.net [45.79.88.28])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 39D2E1AD8A;
+        Tue,  5 Apr 2022 09:19:05 -0700 (PDT)
 Received: from localhost (unknown [IPv6:2601:281:8300:35:2589:2a93:190d:b787])
         (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
         (No client certificate requested)
-        by ms.lwn.net (Postfix) with ESMTPSA id CDADA30D;
-        Tue,  5 Apr 2022 16:15:10 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 ms.lwn.net CDADA30D
+        by ms.lwn.net (Postfix) with ESMTPSA id C40DA608;
+        Tue,  5 Apr 2022 16:19:04 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 ms.lwn.net C40DA608
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=lwn.net; s=20201203;
-        t=1649175311; bh=rE6rzCNpDJ68w+IwBoDN9Cf1DCDHPiYHstqLXZaFU7k=;
+        t=1649175544; bh=+RhP2wMlIenQpNZ9gtWvA3htzpj/xSyZCWrs4wfF5R4=;
         h=From:To:Cc:Subject:In-Reply-To:References:Date:From;
-        b=J2Ns1jRSjvyM1mYJSL3V7kG1cTsmgZwyNrjCkiP+k84kUWO3JPqurBKy7zBAjPMyJ
-         Ott5DZyA+QJyeTCEwJKDoMCcshoGoh8CwR/L1ba8KNK4xcW/aA6rXiBpefXdAMte3C
-         PjftgljOkwDF4D29WR8nfffJwfRMAX70J4wLBLgJCLGM+1pb0HUTarmpcgm7YpWYgg
-         Qw3nh1LZ831VdmtW6NcllXeV8I2RpC0CSezs5Hg20lPSITd6kIt6hVyMJ83Q7/8z+m
-         h15UmZZLua6OFynX3VKxyUD5pRB4baQ3+uOlokTwt8cEc0XAdIs24491ouc5FZPpLR
-         1LExVsq2eG6ew==
+        b=Dbi7/Icr5no8hLxOP/HvRNkR+/DLgmH7zPFb7qoscjVnFjPXIwCUZvcUGxyjYmjkf
+         Eb3dLtQauUFcK1iSVfxNsN6fqpXptzN04Qsqg8M5tgXbJ/hBwmmCVwPYJqQ+50Eboo
+         4FIowjl5heWiwvfnkmGxpiGd4qxbeRE0A8CXfU6ovmF0tjRdRgzsxldPVHkX0QuOGn
+         0aSxbJM6iAmo9EpNPwOIxYq78sFytT3b57pDxVS9sUD1xzTU6tDpA8GtNFlrwpNUT7
+         HD/ZJ3w7jfwc4WEX5h4YpuiUf75yZmq2zeaMWSiEkkDPiQurl219XAwfH44Fy+aezE
+         l5N1Bufr+zk7A==
 From:   Jonathan Corbet <corbet@lwn.net>
-To:     Bagas Sanjaya <bagasdotme@gmail.com>, linux-doc@vger.kernel.org
-Cc:     Bagas Sanjaya <bagasdotme@gmail.com>,
-        "David S. Miller" <davem@davemloft.net>,
-        Andrew Morton <akpm@linux-foundation.org>,
-        Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
-        Jens Axboe <axboe@kernel.dk>,
-        "Rafael J. Wysocki" <rafael.j.wysocki@intel.com>,
-        Anshuman Khandual <anshuman.khandual@arm.com>,
-        Pasha Tatashin <pasha.tatashin@soleen.com>, linux-mm@kvack.org,
-        linux-kernel@vger.kernel.org
-Subject: Re: [PATCH] Documentation: arch_pgtable_helpers: demote pgtable
- list headings
-In-Reply-To: <20220326131313.691027-1-bagasdotme@gmail.com>
-References: <20220326131313.691027-1-bagasdotme@gmail.com>
-Date:   Tue, 05 Apr 2022 10:15:10 -0600
-Message-ID: <87k0c3ecc1.fsf@meer.lwn.net>
+To:     Catalin Marinas <catalin.marinas@arm.com>,
+        linux-doc@vger.kernel.org
+Cc:     linux-kernel@vger.kernel.org, Grant Likely <grant.likely@arm.com>,
+        Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+Subject: Re: [PATCH] Documentation/process: Update ARM contact for embargoed
+ hardware issues
+In-Reply-To: <20220324151605.266645-1-catalin.marinas@arm.com>
+References: <20220324151605.266645-1-catalin.marinas@arm.com>
+Date:   Tue, 05 Apr 2022 10:19:04 -0600
+Message-ID: <87h777ec5j.fsf@meer.lwn.net>
 MIME-Version: 1.0
 Content-Type: text/plain
 X-Spam-Status: No, score=-2.1 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,SPF_HELO_NONE,SPF_PASS,
-        T_SCC_BODY_TEXT_LINE autolearn=ham autolearn_force=no version=3.4.6
+        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_NONE,
+        SPF_HELO_NONE,SPF_PASS,T_SCC_BODY_TEXT_LINE autolearn=ham
+        autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Bagas Sanjaya <bagasdotme@gmail.com> writes:
+Catalin Marinas <catalin.marinas@arm.com> writes:
 
-> Demote pgtable list headings from title heading to chapter heading.
+> With Grant taking a prominent role in Linaro, I will take over as the
+> process ambassador for ARM w.r.t. embargoed hardware issues.
+>
+> Signed-off-by: Catalin Marinas <catalin.marinas@arm.com>
+> Cc: Grant Likely <grant.likely@arm.com>
+> Cc: Jonathan Corbet <corbet@lwn.net>
+> Cc: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+> ---
+>  Documentation/process/embargoed-hardware-issues.rst | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+>
+> diff --git a/Documentation/process/embargoed-hardware-issues.rst b/Documentation/process/embargoed-hardware-issues.rst
+> index 6f8f36e10e8b..41a2afaaea75 100644
+> --- a/Documentation/process/embargoed-hardware-issues.rst
+> +++ b/Documentation/process/embargoed-hardware-issues.rst
+> @@ -244,7 +244,7 @@ disclosure of a particular issue, unless requested by a response team or by
+>  an involved disclosed party. The current ambassadors list:
+>  
+>    ============= ========================================================
+> -  ARM           Grant Likely <grant.likely@arm.com>
+> +  ARM		Catalin Marinas <catalin.marinas@arm.com>
+>    AMD		Tom Lendacky <tom.lendacky@amd.com>
+>    IBM Z         Christian Borntraeger <borntraeger@de.ibm.com>
+>    IBM Power     Anton Blanchard <anton@linux.ibm.com>
 
-This is a classic example of the sort of changelog that says *what* the
-patch does (which we can also see from the patch itself) but not *why*.
-Why do these headings need to be changed?
+I've applied this, thanks.
 
-Thanks,
+I wish I could have added Grant's ack, but that email told me not to...
 
 jon
-
-> Cc: Jonathan Corbet <corbet@lwn.net>
-> Cc: "David S. Miller" <davem@davemloft.net>
-> Cc: Andrew Morton <akpm@linux-foundation.org>
-> Cc: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
-> Cc: Jens Axboe <axboe@kernel.dk>
-> Cc: "Rafael J. Wysocki" <rafael.j.wysocki@intel.com>
-> Cc: Anshuman Khandual <anshuman.khandual@arm.com>
-> Cc: Pasha Tatashin <pasha.tatashin@soleen.com>
-> Cc: linux-mm@kvack.org
-> Cc: linux-kernel@vger.kernel.org
-> Signed-off-by: Bagas Sanjaya <bagasdotme@gmail.com>
-> ---
->  Documentation/vm/arch_pgtable_helpers.rst | 10 +++++-----
->  1 file changed, 5 insertions(+), 5 deletions(-)
->
-> diff --git a/Documentation/vm/arch_pgtable_helpers.rst b/Documentation/vm/arch_pgtable_helpers.rst
-> index f8b225fc919047..cbaee9e592410f 100644
-> --- a/Documentation/vm/arch_pgtable_helpers.rst
-> +++ b/Documentation/vm/arch_pgtable_helpers.rst
-> @@ -13,7 +13,7 @@ Following tables describe the expected semantics which can also be tested during
->  boot via CONFIG_DEBUG_VM_PGTABLE option. All future changes in here or the debug
->  test need to be in sync.
->  
-> -======================
-> +
->  PTE Page Table Helpers
->  ======================
->  
-> @@ -79,7 +79,7 @@ PTE Page Table Helpers
->  | ptep_set_access_flags     | Converts into a more permissive PTE              |
->  +---------------------------+--------------------------------------------------+
->  
-> -======================
-> +
->  PMD Page Table Helpers
->  ======================
->  
-> @@ -153,7 +153,7 @@ PMD Page Table Helpers
->  | pmdp_set_access_flags     | Converts into a more permissive PMD              |
->  +---------------------------+--------------------------------------------------+
->  
-> -======================
-> +
->  PUD Page Table Helpers
->  ======================
->  
-> @@ -209,7 +209,7 @@ PUD Page Table Helpers
->  | pudp_set_access_flags     | Converts into a more permissive PUD              |
->  +---------------------------+--------------------------------------------------+
->  
-> -==========================
-> +
->  HugeTLB Page Table Helpers
->  ==========================
->  
-> @@ -235,7 +235,7 @@ HugeTLB Page Table Helpers
->  | huge_ptep_set_access_flags  | Converts into a more permissive HugeTLB        |
->  +---------------------------+--------------------------------------------------+
->  
-> -========================
-> +
->  SWAP Page Table Helpers
->  ========================
->  
->
-> base-commit: f443e374ae131c168a065ea1748feac6b2e76613
-> -- 
-> An old man doll... just what I always wanted! - Clara
