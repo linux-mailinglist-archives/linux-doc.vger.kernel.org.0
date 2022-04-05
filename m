@@ -2,102 +2,85 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 2627F4F2ED4
-	for <lists+linux-doc@lfdr.de>; Tue,  5 Apr 2022 14:04:32 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id D5C0B4F36DE
+	for <lists+linux-doc@lfdr.de>; Tue,  5 Apr 2022 16:09:42 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S236738AbiDEJPC (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 5 Apr 2022 05:15:02 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:34818 "EHLO
+        id S233937AbiDELIf (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 5 Apr 2022 07:08:35 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:43040 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S236458AbiDEIQq (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 5 Apr 2022 04:16:46 -0400
-Received: from ams.source.kernel.org (ams.source.kernel.org [IPv6:2604:1380:4601:e00::1])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 275B970CD3;
-        Tue,  5 Apr 2022 01:04:15 -0700 (PDT)
-Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
-        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
-        (No client certificate requested)
-        by ams.source.kernel.org (Postfix) with ESMTPS id AA3C7B81B90;
-        Tue,  5 Apr 2022 08:04:10 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id D5DE3C385A9;
-        Tue,  5 Apr 2022 08:04:07 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-        s=k20201202; t=1649145849;
-        bh=qsQljiMucqRqUd4z9Wprhd8esh75p1YRIbEPGlFNo3E=;
-        h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-        b=tH4wksIOmH925t36apUo4rEAwz/Kw5BXVljl8CZcdvTQHmZK4pXSqxJn7aWRy3ago
-         hgb6L0aVPRUdzTeVnwPDSqXF8v4Ubbrgal+OGCCSJxuagKU2zxkmJFYmlJsGl3o3ZE
-         UNptV5Gw5TUTftVFX/KUs+BSuNKTtjtqtU2qAdKkJmgyO6ahfnMam4xHfBdL7NpMeC
-         LExnO4naFkC6fFTHBM0Dy4BzfLHTcOsbseIVpL9Txm/xlJuCwn8k5I12MAR2Dmx6ta
-         Ror/O5sMJS+FqWH03vZnwylCiXanCpmD8zS0XSZgb11WfLJ2ZRiT9An6qPiV6+M7IP
-         XcPuBvxBNZhPg==
-Date:   Tue, 5 Apr 2022 09:04:04 +0100
-From:   Mark Brown <broonie@kernel.org>
-To:     Peter Collingbourne <pcc@google.com>
-Cc:     Catalin Marinas <catalin.marinas@arm.com>,
-        Will Deacon <will@kernel.org>,
-        Jonathan Corbet <corbet@lwn.net>,
-        linux-arm-kernel@lists.infradead.org, linux-doc@vger.kernel.org,
-        linux-kernel@vger.kernel.org
-Subject: Re: [PATCH] arm64: document the boot requirements for MTE
-Message-ID: <Ykv39KMpKXb2Mr6p@sirena.org.uk>
-References: <20220404211858.968452-1-pcc@google.com>
+        with ESMTP id S1347720AbiDEJqm (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 5 Apr 2022 05:46:42 -0400
+Received: from out30-133.freemail.mail.aliyun.com (out30-133.freemail.mail.aliyun.com [115.124.30.133])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 29622DFD4A;
+        Tue,  5 Apr 2022 02:32:58 -0700 (PDT)
+X-Alimail-AntiSpam: AC=PASS;BC=-1|-1;BR=01201311R181e4;CH=green;DM=||false|;DS=||;FP=0|-1|-1|-1|0|-1|-1|-1;HT=e01e01424;MF=hsiangkao@linux.alibaba.com;NM=1;PH=DS;RN=21;SR=0;TI=SMTPD_---0V9GYmUY_1649151171;
+Received: from B-P7TQMD6M-0146.local(mailfrom:hsiangkao@linux.alibaba.com fp:SMTPD_---0V9GYmUY_1649151171)
+          by smtp.aliyun-inc.com(127.0.0.1);
+          Tue, 05 Apr 2022 17:32:53 +0800
+Date:   Tue, 5 Apr 2022 17:32:50 +0800
+From:   Gao Xiang <hsiangkao@linux.alibaba.com>
+To:     Bagas Sanjaya <bagasdotme@gmail.com>
+Cc:     Hans de Goede <hdegoede@redhat.com>, linux-doc@vger.kernel.org,
+        'Linux Kernel' <linux-kernel@vger.kernel.org>,
+        platform-driver-x86@vger.kernel.org, Dell.Client.Kernel@dell.com,
+        linux-iio@vger.kernel.org, Huang Jianan <huangjianan@oppo.com>,
+        Chao Yu <chao@kernel.org>,
+        Divya Bharathi <divya.bharathi@dell.com>,
+        Mark Pearson <markpearson@lenovo.com>,
+        Jonathan Cameron <jic23@kernel.org>,
+        Lars-Peter Clausen <lars@metafoo.de>,
+        Gwendal Grignou <gwendal@chromium.org>,
+        Kajol Jain <kjain@linux.ibm.com>,
+        Andrew Morton <akpm@linux-foundation.org>,
+        Daniel Borkmann <daniel@iogearbox.net>,
+        Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+        "David S. Miller" <davem@davemloft.net>,
+        "David E. Box" <david.e.box@linux.intel.com>,
+        Mark Gross <markgross@kernel.org>
+Subject: Re: unexpected indentation warning in
+ Documentation/ABI/testing/sysfs-*
+Message-ID: <YkwMwqWDPokAxfY0@B-P7TQMD6M-0146.local>
+References: <564f87a9-dd57-d3a1-d476-d81350baf75d@gmail.com>
+ <4df1fc93-2a2a-3482-085f-3a88970440ff@redhat.com>
+ <1b01580f-f888-5725-e571-816073148303@gmail.com>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
-        protocol="application/pgp-signature"; boundary="U4yPShB2sk24Ez1L"
+Content-Type: text/plain; charset=utf-8
 Content-Disposition: inline
-In-Reply-To: <20220404211858.968452-1-pcc@google.com>
-X-Cookie: diplomacy, n:
-X-Spam-Status: No, score=-7.1 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_HI,
-        SPF_HELO_NONE,SPF_PASS,T_SCC_BODY_TEXT_LINE autolearn=ham
-        autolearn_force=no version=3.4.6
+In-Reply-To: <1b01580f-f888-5725-e571-816073148303@gmail.com>
+X-Spam-Status: No, score=-9.9 required=5.0 tests=BAYES_00,
+        ENV_AND_HDR_SPF_MATCH,RCVD_IN_DNSWL_NONE,RCVD_IN_MSPIKE_H5,
+        RCVD_IN_MSPIKE_WL,SPF_HELO_NONE,SPF_PASS,T_SCC_BODY_TEXT_LINE,
+        UNPARSEABLE_RELAY,USER_IN_DEF_SPF_WL autolearn=ham autolearn_force=no
+        version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
+Hi,
 
---U4yPShB2sk24Ez1L
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+On Tue, Apr 05, 2022 at 02:52:18PM +0700, Bagas Sanjaya wrote:
+> On 04/04/22 19.54, Hans de Goede wrote:
+> > 
+> > These 2 are fixed by this (pending) patch:
+> > https://lore.kernel.org/linux-kernel/20220324165918.22005-4-hdegoede@redhat.com/
+> > 
+> > And I also have this pending patch for a pre-existing warning:
+> > https://lore.kernel.org/linux-kernel/20220324165918.22005-3-hdegoede@redhat.com/
+> > 
+> > I'm not sure who should pick these 2 up ?
+> > 
+> 
+> I think linux-doc can pick them, if no subsystems do it.
+> 
 
-On Mon, Apr 04, 2022 at 02:18:58PM -0700, Peter Collingbourne wrote:
+btw, I can pick the erofs one up though, but since it's a doc-specific
+series, I think it can go with linux-doc too.
 
-> +  For CPUs with the Memory Tagging Extension feature:
-> +
-> +  - If EL3 is present:
-> +
-> +    - SCR_EL3.ATA (bit 26) must be initialised to 0b1.
-> +
-> +  - If the kernel is entered at EL1 and EL2 is present:
-> +
-> +    - HCR_EL2.ATA (bit 56) must be initialised to 0b1.
+Thanks,
+Gao Xiang
 
-Very nitpicky but this is only required for FEAT_MTE2 and above, plain
-FEAT_MTE doesn't have these traps.  I don't know that this is a thing
-that anyone's actually implemented and from v8.7 on it's not permitted
-but the above isn't strictly true if someone did for some reason have
-the most basic version.
-
-Otherwise
-
-Reviewed-by: Mark Brown <broonie@kernel.org>
-
---U4yPShB2sk24Ez1L
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQEzBAABCgAdFiEEreZoqmdXGLWf4p/qJNaLcl1Uh9AFAmJL9/AACgkQJNaLcl1U
-h9Advgf+IuZZugXrsq2QTXupthCBNsC0BjU8HXkBBUqx6xRi96h59EIv/TR0K9Tv
-o/Ku1OZjykNhby0S0ts/PhxEWP79+z4mpA+kN13hYiTUp9HytXg4hppOtikWnNE5
-qVieJHkjEL5QLmqaxEOd3zf9MPotutz9n+AXI4UC+Av6p3cYamCKwpalZKcenm66
-1k6/2iJooTZa+U2jEcZE18tokuwbTMC3lkqjyKoNAEXmSq3DkOHbaxblDFm9eXgf
-UeYeYH8GPAU5EO7WASyDs5zYVMouxfO9yFpafW0JoK7HuI/AqlFycD98lwbHvufv
-6rlXx8H0HRoghHMSO92joqBVQymltA==
-=78rB
------END PGP SIGNATURE-----
-
---U4yPShB2sk24Ez1L--
+> -- 
+> An old man doll... just what I always wanted! - Clara
