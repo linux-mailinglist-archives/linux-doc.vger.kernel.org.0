@@ -2,45 +2,43 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id AA44B4F4A1C
-	for <lists+linux-doc@lfdr.de>; Wed,  6 Apr 2022 02:40:55 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 2507F4F4A28
+	for <lists+linux-doc@lfdr.de>; Wed,  6 Apr 2022 02:41:23 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1388711AbiDEWew (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 5 Apr 2022 18:34:52 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:56720 "EHLO
+        id S1445093AbiDEWfW (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 5 Apr 2022 18:35:22 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:40864 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1457669AbiDEQcQ (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 5 Apr 2022 12:32:16 -0400
+        with ESMTP id S1457740AbiDEQhE (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 5 Apr 2022 12:37:04 -0400
 Received: from ms.lwn.net (ms.lwn.net [45.79.88.28])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 79B47BF00A;
-        Tue,  5 Apr 2022 09:30:17 -0700 (PDT)
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 45880CF480
+        for <linux-doc@vger.kernel.org>; Tue,  5 Apr 2022 09:35:04 -0700 (PDT)
 Received: from localhost (unknown [IPv6:2601:281:8300:35:2589:2a93:190d:b787])
         (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
         (No client certificate requested)
-        by ms.lwn.net (Postfix) with ESMTPSA id B8E77608;
-        Tue,  5 Apr 2022 16:30:16 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 ms.lwn.net B8E77608
+        by ms.lwn.net (Postfix) with ESMTPSA id 7F26930D;
+        Tue,  5 Apr 2022 16:35:04 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 ms.lwn.net 7F26930D
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=lwn.net; s=20201203;
-        t=1649176216; bh=yij2fHsXTf4G+j5va51uVCSzBxLR4AmBmwSualkA3To=;
+        t=1649176504; bh=ny+2CUlYmXa8pnZEkTWJT55eEzt1u6l/Pzrd8I3ssOo=;
         h=From:To:Cc:Subject:In-Reply-To:References:Date:From;
-        b=Re3UZ78E/X9xogYjhRmUCeC4BE4weHRkssFjQKYLpcfQMFb08YPhHw7SiVat969tp
-         UIIIuQKlsW7Lrhae31WV/th451Jr1Lqxm3qrFHIYtujgvKBS1CFKjupfE5eLVgRKz4
-         t2zS2kqzcqqQIzL/zFeM/7UYBWQ7rH0edgWhAtgFRUdVEIj/3NQXEP+aMONZbzxcdF
-         EbDlooIGHHxn+vlhyTkxxNfDtOrp7dmAkzfrPQ6Qclz1RA3w+ibWAR3eqAb9orpp11
-         DDdm7FUr4OJcewWt1TyeSmV2blaPxifx/D2W6BkGs04A9OL6h+0BC/CXD0CLNNts94
-         dETfHvbBpCP9Q==
+        b=I5FG5xytlOBMvuQXel+FBzp9QXwmb5Ql2J6qARYM65UqdJWNxVnsZhIw7/EEsHGjj
+         T4cn9bB6+srL0crr5hODJC47YqR+tKp/u+/AmVfGl2jjJLRr9eVNSDElaMfFhbdSfJ
+         4r6PcCtyGtqskuREwSdqNMVcdl+5ZqN/xoqbpnXY9f6CWoFWD8rnTNitsLBvIzGXS8
+         wD7+nQqtv/d9S/+kvor5smeIFhK9lsrfYnawmHwB5UYV7tyYm6wkMZvI/4p1eVXT9V
+         5dESuXFwakY9A5gudi2+JuZfieJiK175ggD3oQ+LF9S4tdEwZeMLtzHsLVtCXNJaaK
+         1s9WKImYXGIKg==
 From:   Jonathan Corbet <corbet@lwn.net>
-To:     Chin En Lin <shiyn.lin@gmail.com>
-Cc:     tglx@linutronix.de, mingo@redhat.com, bp@alien8.de,
-        dave.hansen@linux.intel.com, x86@kernel.org, hpa@zytor.com,
-        linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org,
-        Chin En Lin <shiyn.lin@gmail.com>
-Subject: Re: [PATCH v2] Documentation: x86: Fix obsolete name of page fault
- handler
-In-Reply-To: <20220318142536.116761-1-shiyn.lin@gmail.com>
-References: <20220318142536.116761-1-shiyn.lin@gmail.com>
-Date:   Tue, 05 Apr 2022 10:30:16 -0600
-Message-ID: <878rsjebmv.fsf@meer.lwn.net>
+To:     Tang Yizhou <tangyizhou@huawei.com>, siyanteng@loongson.cn,
+        siyanteng01@gmail.com, alexs@kernel.org, seakeel@gmail.com
+Cc:     linux-doc@vger.kernel.org, zhengbin13@huawei.com,
+        tangyeechou@gmail.com, Tang Yizhou <tangyizhou@huawei.com>
+Subject: Re: [PATCH] docs/zh_CN: Add sched-debug Chinese translation
+In-Reply-To: <20220317025914.27588-1-tangyizhou@huawei.com>
+References: <20220317025914.27588-1-tangyizhou@huawei.com>
+Date:   Tue, 05 Apr 2022 10:35:03 -0600
+Message-ID: <875ynnebew.fsf@meer.lwn.net>
 MIME-Version: 1.0
 Content-Type: text/plain
 X-Spam-Status: No, score=-2.1 required=5.0 tests=BAYES_00,DKIM_SIGNED,
@@ -53,30 +51,17 @@ Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Chin En Lin <shiyn.lin@gmail.com> writes:
+Tang Yizhou <tangyizhou@huawei.com> writes:
 
-> Since commit 91eeafea1e4b ("x86/entry: Switch page fault exception to
-> IDTENTRY_RAW"), the function name of the page fault handler is out of date.
-> And because of commit aa37c51b9421 ("x86/mm: Break out user address space
-> handling"), the description of search_exception_table is not correct
-> anymore. It may mislead the user who wants to use the documentation to
-> figure out the page fault handler.
+> Translate scheduler/sched-debug.rst into Chinese.
 >
-> Also, fix typo and add the parentheses after function and macro name.
-
-"Also" in a changelog like this is an indication that you've moved on to
-an independent change that should be done as its own patch.  That is
-certainly true of typo fixes and such, which should be separated out
-from more substantive changes.
-
-> Signed-off-by: Chin En Lin <shiyn.lin@gmail.com>
+> Signed-off-by: Tang Yizhou <tangyizhou@huawei.com>
 > ---
->  Documentation/x86/exception-tables.rst | 23 +++++++++++++----------
->  1 file changed, 13 insertions(+), 10 deletions(-)
+>  .../translations/zh_CN/scheduler/index.rst    |  1 +
+>  .../zh_CN/scheduler/sched-debug.rst           | 51 +++++++++++++++++++
+>  2 files changed, 52 insertions(+)
+>  create mode 100644 Documentation/translations/zh_CN/scheduler/sched-debug.rst
 
-Nonetheless, the patch seems clear enough and nobody has objected, so
-I've applied it.
-
-Thanks,
+Applied, thanks.
 
 jon
