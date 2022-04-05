@@ -2,164 +2,151 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 3BBCD4F4A20
-	for <lists+linux-doc@lfdr.de>; Wed,  6 Apr 2022 02:41:06 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 5E8B34F4A16
+	for <lists+linux-doc@lfdr.de>; Wed,  6 Apr 2022 02:40:43 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1442153AbiDEWfF (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 5 Apr 2022 18:35:05 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:59152 "EHLO
+        id S243570AbiDEWem (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 5 Apr 2022 18:34:42 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:36910 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1454194AbiDEP6B (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 5 Apr 2022 11:58:01 -0400
-Received: from mx0a-001b2d01.pphosted.com (mx0a-001b2d01.pphosted.com [148.163.156.1])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id ACC2B169B2F;
-        Tue,  5 Apr 2022 08:03:30 -0700 (PDT)
-Received: from pps.filterd (m0098396.ppops.net [127.0.0.1])
-        by mx0a-001b2d01.pphosted.com (8.16.1.2/8.16.1.2) with SMTP id 235DWSsS015100;
-        Tue, 5 Apr 2022 15:03:30 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ibm.com; h=message-id : date :
- mime-version : subject : to : cc : references : from : in-reply-to :
- content-type : content-transfer-encoding; s=pp1;
- bh=kWjQMYfk1AG+xyWV+LOmEg/Nsxt7nzoqkaOys+fqmaI=;
- b=Ox2JSU3zeaNG8Q6/LL1VQ58mhM27hRLVD5FXxgT5WgHuXw3ON0ebnQL0Slaygi3GmqiG
- 6wCJd4FiM6aMrbKRGjvAaB/Apm/l3iJsPJV+27CITNSAqrc2EaCl60b+0bOPvBe/fiFJ
- AD4/0QZTFpfRzh0hnwvcqEBmMZAdVV4+lEnAEN4IdQksY8RPsShsdRU1MeN2CWpVElyN
- UA8afs4jnR4Kbl61KG2uzfuDKuEKOienpYBwRBr7TPxxGI5tJ4Cxyun9zWMjjNQqyMgx
- CLtZd4erinolr5wL0FOajZuIrNLkdKgEmlZztRfBcUvWMGBNXsjU/WCxJ5ADJHm68SJs Gw== 
-Received: from pps.reinject (localhost [127.0.0.1])
-        by mx0a-001b2d01.pphosted.com with ESMTP id 3f8n6qmeyt-1
-        (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
-        Tue, 05 Apr 2022 15:03:29 +0000
-Received: from m0098396.ppops.net (m0098396.ppops.net [127.0.0.1])
-        by pps.reinject (8.16.0.43/8.16.0.43) with SMTP id 235DWXQc015608;
-        Tue, 5 Apr 2022 15:03:29 GMT
-Received: from ppma04ams.nl.ibm.com (63.31.33a9.ip4.static.sl-reverse.com [169.51.49.99])
-        by mx0a-001b2d01.pphosted.com with ESMTP id 3f8n6qmexq-1
-        (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
-        Tue, 05 Apr 2022 15:03:29 +0000
-Received: from pps.filterd (ppma04ams.nl.ibm.com [127.0.0.1])
-        by ppma04ams.nl.ibm.com (8.16.1.2/8.16.1.2) with SMTP id 235F3CCP009010;
-        Tue, 5 Apr 2022 15:03:27 GMT
-Received: from b06cxnps3075.portsmouth.uk.ibm.com (d06relay10.portsmouth.uk.ibm.com [9.149.109.195])
-        by ppma04ams.nl.ibm.com with ESMTP id 3f6e48x10y-1
-        (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
-        Tue, 05 Apr 2022 15:03:26 +0000
-Received: from d06av23.portsmouth.uk.ibm.com (d06av23.portsmouth.uk.ibm.com [9.149.105.59])
-        by b06cxnps3075.portsmouth.uk.ibm.com (8.14.9/8.14.9/NCO v10.0) with ESMTP id 235F3Nok38207980
-        (version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
-        Tue, 5 Apr 2022 15:03:23 GMT
-Received: from d06av23.portsmouth.uk.ibm.com (unknown [127.0.0.1])
-        by IMSVA (Postfix) with ESMTP id 6F437A4040;
-        Tue,  5 Apr 2022 15:03:23 +0000 (GMT)
-Received: from d06av23.portsmouth.uk.ibm.com (unknown [127.0.0.1])
-        by IMSVA (Postfix) with ESMTP id 57A37A404D;
-        Tue,  5 Apr 2022 15:03:22 +0000 (GMT)
-Received: from [9.171.66.169] (unknown [9.171.66.169])
-        by d06av23.portsmouth.uk.ibm.com (Postfix) with ESMTP;
-        Tue,  5 Apr 2022 15:03:22 +0000 (GMT)
-Message-ID: <2978f1c7-e299-a385-9ef3-5ee796b134e4@linux.ibm.com>
-Date:   Tue, 5 Apr 2022 17:06:23 +0200
-MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.3.0
-Subject: Re: [PATCH v5 14/21] KVM: s390: pci: provide routines for
- enabling/disabling interrupt forwarding
+        with ESMTP id S1457131AbiDEQCq (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 5 Apr 2022 12:02:46 -0400
+Received: from frasgout.his.huawei.com (frasgout.his.huawei.com [185.176.79.56])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 8C60C1965CE;
+        Tue,  5 Apr 2022 08:29:40 -0700 (PDT)
+Received: from fraeml713-chm.china.huawei.com (unknown [172.18.147.200])
+        by frasgout.his.huawei.com (SkyGuard) with ESMTP id 4KXs1t6CNPz681Vp;
+        Tue,  5 Apr 2022 23:26:42 +0800 (CST)
+Received: from fraeml714-chm.china.huawei.com (10.206.15.33) by
+ fraeml713-chm.china.huawei.com (10.206.15.32) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2375.24; Tue, 5 Apr 2022 17:29:37 +0200
+Received: from fraeml714-chm.china.huawei.com ([10.206.15.33]) by
+ fraeml714-chm.china.huawei.com ([10.206.15.33]) with mapi id 15.01.2375.024;
+ Tue, 5 Apr 2022 17:29:37 +0200
+From:   Roberto Sassu <roberto.sassu@huawei.com>
+To:     Casey Schaufler <casey@schaufler-ca.com>,
+        Djalal Harouni <tixxdz@gmail.com>,
+        KP Singh <kpsingh@kernel.org>
+CC:     Alexei Starovoitov <alexei.starovoitov@gmail.com>,
+        "corbet@lwn.net" <corbet@lwn.net>,
+        "viro@zeniv.linux.org.uk" <viro@zeniv.linux.org.uk>,
+        "ast@kernel.org" <ast@kernel.org>,
+        "daniel@iogearbox.net" <daniel@iogearbox.net>,
+        "andrii@kernel.org" <andrii@kernel.org>,
+        "shuah@kernel.org" <shuah@kernel.org>,
+        "mcoquelin.stm32@gmail.com" <mcoquelin.stm32@gmail.com>,
+        "alexandre.torgue@foss.st.com" <alexandre.torgue@foss.st.com>,
+        "zohar@linux.ibm.com" <zohar@linux.ibm.com>,
+        "linux-doc@vger.kernel.org" <linux-doc@vger.kernel.org>,
+        "linux-fsdevel@vger.kernel.org" <linux-fsdevel@vger.kernel.org>,
+        "netdev@vger.kernel.org" <netdev@vger.kernel.org>,
+        "bpf@vger.kernel.org" <bpf@vger.kernel.org>,
+        "linux-kselftest@vger.kernel.org" <linux-kselftest@vger.kernel.org>,
+        "linux-stm32@st-md-mailman.stormreply.com" 
+        <linux-stm32@st-md-mailman.stormreply.com>,
+        "linux-arm-kernel@lists.infradead.org" 
+        <linux-arm-kernel@lists.infradead.org>,
+        "linux-integrity@vger.kernel.org" <linux-integrity@vger.kernel.org>,
+        "linux-security-module@vger.kernel.org" 
+        <linux-security-module@vger.kernel.org>,
+        "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>
+Subject: RE: [PATCH 00/18] bpf: Secure and authenticated preloading of eBPF
+ programs
+Thread-Topic: [PATCH 00/18] bpf: Secure and authenticated preloading of eBPF
+ programs
+Thread-Index: AQHYQsxoL5kXhl8+JE6PJPNWV+NOTqzYppqAgABrSsCAAo7zgIAAEt0AgAOU8YCAALoz0IABTtSAgAAmCSA=
+Date:   Tue, 5 Apr 2022 15:29:37 +0000
+Message-ID: <0497bb46586c4f37b9bd01950ba9e6a5@huawei.com>
+References: <20220328175033.2437312-1-roberto.sassu@huawei.com>
+        <20220331022727.ybj4rui4raxmsdpu@MBP-98dd607d3435.dhcp.thefacebook.com>
+        <b9f5995f96da447c851f7c9db8232a9b@huawei.com>
+        <20220401235537.mwziwuo4n53m5cxp@MBP-98dd607d3435.dhcp.thefacebook.com>
+        <CACYkzJ5QgkucL3HZ4bY5Rcme4ey6U3FW4w2Gz-9rdWq0_RHvgA@mail.gmail.com>
+        <CAEiveUcx1KHoJ421Cv+52t=0U+Uy2VF51VC_zfTSftQ4wVYOPw@mail.gmail.com>
+        <c2e57f10b62940eba3cfcae996e20e3c@huawei.com>
+ <385e4cf4-4cd1-8f41-5352-ea87a1f419ad@schaufler-ca.com>
+In-Reply-To: <385e4cf4-4cd1-8f41-5352-ea87a1f419ad@schaufler-ca.com>
+Accept-Language: en-US
 Content-Language: en-US
-To:     Matthew Rosato <mjrosato@linux.ibm.com>,
-        Niklas Schnelle <schnelle@linux.ibm.com>,
-        linux-s390@vger.kernel.org
-Cc:     alex.williamson@redhat.com, cohuck@redhat.com,
-        farman@linux.ibm.com, borntraeger@linux.ibm.com, hca@linux.ibm.com,
-        gor@linux.ibm.com, gerald.schaefer@linux.ibm.com,
-        agordeev@linux.ibm.com, svens@linux.ibm.com, frankja@linux.ibm.com,
-        david@redhat.com, imbrenda@linux.ibm.com, vneethv@linux.ibm.com,
-        oberpar@linux.ibm.com, freude@linux.ibm.com, thuth@redhat.com,
-        pasic@linux.ibm.com, pbonzini@redhat.com, corbet@lwn.net,
-        kvm@vger.kernel.org, linux-kernel@vger.kernel.org,
-        linux-doc@vger.kernel.org
-References: <20220404174349.58530-1-mjrosato@linux.ibm.com>
- <20220404174349.58530-15-mjrosato@linux.ibm.com>
- <9a551f04c3878ecb3a26fed6aff2834fbfe41f18.camel@linux.ibm.com>
- <7196af99-fcfa-c9a6-a245-c15268c6851b@linux.ibm.com>
-From:   Pierre Morel <pmorel@linux.ibm.com>
-In-Reply-To: <7196af99-fcfa-c9a6-a245-c15268c6851b@linux.ibm.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-TM-AS-GCONF: 00
-X-Proofpoint-ORIG-GUID: Ch0IAO81t8SfZ7nOV3dnHL24lRQ8XSIM
-X-Proofpoint-GUID: bAcl5T6iJp8Wwm6dPQSQjmGwA7Wo8-7X
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.205,Aquarius:18.0.850,Hydra:6.0.425,FMLib:17.11.64.514
- definitions=2022-04-05_04,2022-04-05_01,2022-02-23_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 clxscore=1011
- lowpriorityscore=0 priorityscore=1501 impostorscore=0 mlxscore=0
- suspectscore=0 bulkscore=0 adultscore=0 phishscore=0 spamscore=0
- mlxlogscore=999 malwarescore=0 classifier=spam adjust=0 reason=mlx
- scancount=1 engine=8.12.0-2202240000 definitions=main-2204050084
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_EF,NICE_REPLY_A,RCVD_IN_MSPIKE_H5,
-        RCVD_IN_MSPIKE_WL,SPF_HELO_NONE,SPF_PASS,T_SCC_BODY_TEXT_LINE
-        autolearn=ham autolearn_force=no version=3.4.6
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [10.81.221.206]
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
+MIME-Version: 1.0
+X-CFilter-Loop: Reflected
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_LOW,
+        RCVD_IN_MSPIKE_H4,RCVD_IN_MSPIKE_WL,SPF_HELO_NONE,SPF_PASS,
+        T_SCC_BODY_TEXT_LINE autolearn=ham autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-
-
-On 4/5/22 15:48, Matthew Rosato wrote:
-> On 4/5/22 9:39 AM, Niklas Schnelle wrote:
->> On Mon, 2022-04-04 at 13:43 -0400, Matthew Rosato wrote:
->>> These routines will be wired into a kvm ioctl in order to respond to
->>> requests to enable / disable a device for Adapter Event Notifications /
->>> Adapter Interuption Forwarding.
->>>
->>> Signed-off-by: Matthew Rosato <mjrosato@linux.ibm.com>
->>> ---
->>>   arch/s390/kvm/pci.c      | 247 +++++++++++++++++++++++++++++++++++++++
->>>   arch/s390/kvm/pci.h      |   1 +
->>>   arch/s390/pci/pci_insn.c |   1 +
->>>   3 files changed, 249 insertions(+)
->>>
->>> diff --git a/arch/s390/kvm/pci.c b/arch/s390/kvm/pci.c
->>> index 01bd8a2f503b..f0fd68569a9d 100644
->>> --- a/arch/s390/kvm/pci.c
->>> +++ b/arch/s390/kvm/pci.c
->>> @@ -11,6 +11,7 @@
->>>   #include <linux/pci.h>
->>>   #include <asm/pci.h>
->>>   #include <asm/pci_insn.h>
->>> +#include <asm/pci_io.h>
->>>   #include "pci.h"
->>>   struct zpci_aift *aift;
->>> @@ -152,6 +153,252 @@ int kvm_s390_pci_aen_init(u8 nisc)
->>>       return rc;
->>>   }
->>> +/* Modify PCI: Register floating adapter interruption forwarding */
->>> +static int kvm_zpci_set_airq(struct zpci_dev *zdev)
->>> +{
->>> +    u64 req = ZPCI_CREATE_REQ(zdev->fh, 0, ZPCI_MOD_FC_REG_INT);
->>> +    struct zpci_fib fib = {};
->>
->> Hmm this one uses '{}' as initializer while all current callers of
->> zpci_mod_fc() use '{0}'. As far as I know the empty braces are a GNU
->> extension so should work for the kernel but for consistency I'd go with
->> '{0}' or possibly '{.foo = bar, ...}' where that is more readable.
->> There too uninitialized fields will be set to 0. Unless of course there
->> is a conflicting KVM convention that I don't know about.
-> 
-> No convention that I'm aware of, I previously had fib = {0} based on the 
-> same rationale you describe and changed to fib = {} per review request 
-> from Pierre a few versions back.  I don't have a strong preference, but 
-> I did not note any functional difference between the two and see a bunch 
-> of examples of both methods throughout the kernel.
-> 
-
-Was stupid of me to comment that, as you said there are no difference, 
-so do as you want.
-
-
--- 
-Pierre Morel
-IBM Lab Boeblingen
+PiBGcm9tOiBDYXNleSBTY2hhdWZsZXIgW21haWx0bzpjYXNleUBzY2hhdWZsZXItY2EuY29tXQ0K
+PiBTZW50OiBUdWVzZGF5LCBBcHJpbCA1LCAyMDIyIDQ6NTAgUE0NCj4gT24gNC80LzIwMjIgMTA6
+MjAgQU0sIFJvYmVydG8gU2Fzc3Ugd3JvdGU6DQo+ID4+IEZyb206IERqYWxhbCBIYXJvdW5pIFtt
+YWlsdG86dGl4eGR6QGdtYWlsLmNvbV0NCj4gPj4gU2VudDogTW9uZGF5LCBBcHJpbCA0LCAyMDIy
+IDk6NDUgQU0NCj4gPj4gT24gU3VuLCBBcHIgMywgMjAyMiBhdCA1OjQyIFBNIEtQIFNpbmdoIDxr
+cHNpbmdoQGtlcm5lbC5vcmc+IHdyb3RlOg0KPiA+Pj4gT24gU2F0LCBBcHIgMiwgMjAyMiBhdCAx
+OjU1IEFNIEFsZXhlaSBTdGFyb3ZvaXRvdg0KPiA+Pj4gPGFsZXhlaS5zdGFyb3ZvaXRvdkBnbWFp
+bC5jb20+IHdyb3RlOg0KPiA+PiAuLi4NCj4gPj4+Pj4gUGlubmluZw0KPiA+Pj4+PiB0aGVtIHRv
+IHVucmVhY2hhYmxlIGlub2RlcyBpbnR1aXRpdmVseSBsb29rZWQgdGhlDQo+ID4+Pj4+IHdheSB0
+byBnbyBmb3IgYWNoaWV2aW5nIHRoZSBzdGF0ZWQgZ29hbC4NCj4gPj4+PiBXZSBjYW4gY29uc2lk
+ZXIgaW5vZGVzIGluIGJwZmZzIHRoYXQgYXJlIG5vdCB1bmxpbmthYmxlIGJ5IHJvb3QNCj4gPj4+
+PiBpbiB0aGUgZnV0dXJlLCBidXQgY2VydGFpbmx5IG5vdCBmb3IgdGhpcyB1c2UgY2FzZS4NCj4g
+Pj4+IENhbiB0aGlzIG5vdCBiZSBhbHJlYWR5IGRvbmUgYnkgYWRkaW5nIGEgQlBGX0xTTSBwcm9n
+cmFtIHRvIHRoZQ0KPiA+Pj4gaW5vZGVfdW5saW5rIExTTSBob29rPw0KPiA+Pj4NCj4gPj4gQWxz
+bywgYmVzaWRlIG9mIHRoZSBpbm9kZV91bmxpbmsuLi4gYW5kIG91dCBvZiBjdXJpb3NpdHk6IG1h
+a2luZw0KPiBzeXNmcy9icGZmcy8NCj4gPj4gcmVhZG9ubHkgYWZ0ZXIgcGlubmluZywgdGhlbiB1
+c2luZyBicGYgTFNNIGhvb2tzDQo+ID4+IHNiX21vdW50fHJlbW91bnR8dW5tb3VudC4uLg0KPiA+
+PiBmYW1pbHkgY29tYmluaW5nIGJwZigpIExTTSBob29rLi4uIGlzbid0IHRoaXMgZW5vdWdoIHRv
+Og0KPiA+PiAxLiBSZXN0cmljdCB3aG8gY2FuIHBpbiB0byBicGZmcyB3aXRob3V0IHVzaW5nIGEg
+ZnVsbCBNQUMNCj4gPj4gMi4gUmVzdHJpY3Qgd2hvIGNhbiBkZWxldGUgb3IgdW5tb3VudCBicGYg
+ZmlsZXN5c3RlbQ0KPiA+Pg0KPiA+PiA/DQo+ID4gSSdtIHRoaW5raW5nIHRvIGltcGxlbWVudCBz
+b21ldGhpbmcgbGlrZSB0aGlzLg0KPiA+DQo+ID4gRmlyc3QsIEkgYWRkIGEgbmV3IHByb2dyYW0g
+ZmxhZyBjYWxsZWQNCj4gPiBCUEZfRl9TVE9QX09OQ09ORklSTSwgd2hpY2ggY2F1c2VzIHRoZSBy
+ZWYgY291bnQNCj4gPiBvZiB0aGUgbGluayB0byBpbmNyZWFzZSB0d2ljZSBhdCBjcmVhdGlvbiB0
+aW1lLiBJbiB0aGlzIHdheSwNCj4gPiB1c2VyIHNwYWNlIGNhbm5vdCBtYWtlIHRoZSBsaW5rIGRp
+c2FwcGVhciwgdW5sZXNzIGENCj4gPiBjb25maXJtYXRpb24gaXMgZXhwbGljaXRseSBzZW50IHZp
+YSB0aGUgYnBmKCkgc3lzdGVtIGNhbGwuDQo+ID4NCj4gPiBBbm90aGVyIGFkdmFudGFnZSBpcyB0
+aGF0IG90aGVyIExTTXMgY2FuIGRlY2lkZQ0KPiA+IHdoZXRoZXIgb3Igbm90IHRoZXkgYWxsb3cg
+YSBwcm9ncmFtIHdpdGggdGhpcyBmbGFnDQo+ID4gKGluIHRoZSBicGYgc2VjdXJpdHkgaG9vayku
+DQo+ID4NCj4gPiBUaGlzIHdvdWxkIHdvcmsgcmVnYXJkbGVzcyBvZiB0aGUgbWV0aG9kIHVzZWQg
+dG8NCj4gPiBsb2FkIHRoZSBlQlBGIHByb2dyYW0gKHVzZXIgc3BhY2Ugb3Iga2VybmVsIHNwYWNl
+KS4NCj4gPg0KPiA+IFNlY29uZCwgSSBleHRlbmQgdGhlIGJwZigpIHN5c3RlbSBjYWxsIHdpdGgg
+YSBuZXcNCj4gPiBzdWJjb21tYW5kLCBCUEZfTElOS19DT05GSVJNX1NUT1AsIHdoaWNoDQo+ID4g
+ZGVjcmVhc3JlcyB0aGUgcmVmIGNvdW50IGZvciB0aGUgbGluayBvZiB0aGUgcHJvZ3JhbXMNCj4g
+PiB3aXRoIHRoZSBCUEZfRl9TVE9QX09OQ09ORklSTSBmbGFnLiBJIHdpbGwgYWxzbw0KPiA+IGlu
+dHJvZHVjZSBhIG5ldyBzZWN1cml0eSBob29rIChzb21ldGhpbmcgbGlrZQ0KPiA+IHNlY3VyaXR5
+X2xpbmtfY29uZmlybV9zdG9wKSwgc28gdGhhdCBhbiBMU00gaGFzIHRoZQ0KPiA+IG9wcG9ydHVu
+aXR5IHRvIGRlbnkgdGhlIHN0b3AgKHRoZSBicGYgc2VjdXJpdHkgaG9vaw0KPiA+IHdvdWxkIG5v
+dCBiZSBzdWZmaWNpZW50IHRvIGRldGVybWluZSBleGFjdGx5IGZvcg0KPiA+IHdoaWNoIGxpbmsg
+dGhlIGNvbmZpcm1hdGlvbiBpcyBnaXZlbiwgYW4gTFNNIHNob3VsZA0KPiA+IGJlIGFibGUgdG8g
+ZGVueSB0aGUgc3RvcCBmb3IgaXRzIG93biBwcm9ncmFtcykuDQo+IA0KPiBXb3VsZCB5b3UgcGxl
+YXNlIHN0b3AgcmVmZXJyaW5nIHRvIGEgc2V0IG9mIGVCUEYgcHJvZ3JhbXMNCj4gbG9hZGVkIGlu
+dG8gdGhlIEJQRiBMU00gYXMgYW4gTFNNPyBDYWxsIGl0IGEgQlBGIHNlY3VyaXR5DQo+IG1vZHVs
+ZSAoQlNNKSBpZiB5b3UgbXVzdCB1c2UgYW4gYWJicmV2aWF0aW9uLiBBbiBMU00gaXMgYQ0KPiBw
+cm92aWRlciBvZiBzZWN1cml0eV8gaG9va3MuIEluIHlvdXIgY2FzZSB0aGF0IGlzIEJQRi4gV2hl
+bg0KPiB5b3UgY2FsbCB0aGUgc2V0IG9mIGVCUEYgcHJvZ3JhbXMgYW4gTFNNIGl0IGlzIGxpa2Ug
+Y2FsbGluZw0KPiBhbiBTRUxpbnV4IHBvbGljeSBhbiBMU00uDQoNCkFuIGVCUEYgcHJvZ3JhbSBj
+b3VsZCBiZSBhIHByb3ZpZGVyIG9mIHNlY3VyaXR5XyBob29rcw0KdG9vLiBUaGUgYnBmIExTTSBp
+cyBhbiBhZ2dyZWdhdG9yLCBzaW1pbGFybHkgdG8geW91cg0KaW5mcmFzdHJ1Y3R1cmUgdG8gbWFu
+YWdlIGJ1aWx0LWluIExTTXMuIE1heWJlLCBjYWxsaW5nDQppdCBzZWNvbmQtbGV2ZWwgTFNNIG9y
+IHNlY29uZGFyeSBMU00gd291bGQgYmV0dGVyDQpyZXByZXNlbnQgdGhpcyBuZXcgY2xhc3MuDQoN
+ClRoZSBvbmx5IGRpZmZlcmVuY2VzIGFyZSB0aGUgcmVnaXN0cmF0aW9uIG1ldGhvZCwgKFNFQw0K
+ZGlyZWN0aXZlIGluc3RlYWQgb2YgREVGSU5FX0xTTSksIGFuZCB3aGF0IHRoZSBob29rDQppbXBs
+ZW1lbnRhdGlvbiBjYW4gYWNjZXNzLg0KDQpUaGUgaW1wbGVtZW50YXRpb24gb2YgYSBzZWN1cml0
+eV8gaG9vayB2aWEgZUJQRiBjYW4NCmZvbGxvdyB0aGUgc2FtZSBzdHJ1Y3R1cmUgb2YgYnVpbHQt
+aW4gTFNNcywgaS5lLiBpdCBjYW4gYmUNCnVuaXF1ZWx5IHJlc3BvbnNpYmxlIGZvciBlbmZvcmNp
+bmcgYW5kIGJlIHBvbGljeS1hZ25vc3RpYywNCmFuZCBjYW4gcmV0cmlldmUgdGhlIGRlY2lzaW9u
+cyBiYXNlZCBvbiBhIHBvbGljeSBmcm9tIGENCmNvbXBvbmVudCBpbXBsZW1lbnRlZCBzb21ld2hl
+cmUgZWxzZS4NCg0KSG9wZWZ1bGx5LCBJIHVuZGVyc3Rvb2QgdGhlIGJhc2ljIHByaW5jaXBsZXMg
+Y29ycmVjdGx5Lg0KSSBsZXQgdGhlIGVCUEYgbWFpbnRhaW5lcnMgY29tbWVudCBvbiB0aGlzLg0K
+DQpUaGFua3MNCg0KUm9iZXJ0bw0KDQpIVUFXRUkgVEVDSE5PTE9HSUVTIER1ZXNzZWxkb3JmIEdt
+YkgsIEhSQiA1NjA2Mw0KTWFuYWdpbmcgRGlyZWN0b3I6IExpIFBlbmcsIFpob25nIFJvbmdodWEN
+Cg0KPiA+IFdoYXQgZG8geW91IHRoaW5rPw0KPiA+DQo+ID4gVGhhbmtzDQo+ID4NCj4gPiBSb2Jl
+cnRvDQo+ID4NCj4gPiBIVUFXRUkgVEVDSE5PTE9HSUVTIER1ZXNzZWxkb3JmIEdtYkgsIEhSQiA1
+NjA2Mw0KPiA+IE1hbmFnaW5nIERpcmVjdG9yOiBMaSBQZW5nLCBaaG9uZyBSb25naHVhDQoNCg==
