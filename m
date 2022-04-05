@@ -2,116 +2,100 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id C5EED4F4A1D
-	for <lists+linux-doc@lfdr.de>; Wed,  6 Apr 2022 02:40:56 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 9C0A44F54C4
+	for <lists+linux-doc@lfdr.de>; Wed,  6 Apr 2022 07:24:16 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1389719AbiDEWe4 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 5 Apr 2022 18:34:56 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:35710 "EHLO
+        id S231338AbiDFFJp (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 6 Apr 2022 01:09:45 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:60622 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1573148AbiDESCz (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 5 Apr 2022 14:02:55 -0400
-Received: from ams.source.kernel.org (ams.source.kernel.org [145.40.68.75])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 5AB58EBB9D;
-        Tue,  5 Apr 2022 11:00:56 -0700 (PDT)
-Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
-        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
-        (No client certificate requested)
-        by ams.source.kernel.org (Postfix) with ESMTPS id 05824B81F46;
-        Tue,  5 Apr 2022 18:00:55 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id B8E3CC385A9;
-        Tue,  5 Apr 2022 18:00:53 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-        s=k20201202; t=1649181653;
-        bh=DEsPoEU/5E2aHVZgQZCveB9mC/4vVgGzX7eDnKQsH1g=;
-        h=References:In-Reply-To:From:Date:Subject:To:Cc:From;
-        b=WMBUPiXVn4jIQOTsqBIO5vrfkhbqjHt/h5chaD/wedjcngfWcwTLh8h2oi1DE6HDX
-         dzaPOcbmTH8LZnQcfebDxTtYx2gqmevPCKAk4URCFU4AdFBqSRdcVso5GsMpG3wunl
-         eorVXyUYwCq8OJ4dXIzo1OANkewLZNXlZf4ySbWxfEjAqfqp5e85PEiEXkY4fDWO3E
-         wg3Z2xs3ne4ObjHj1ZPtBzQzLqeHHfDB0IuGDztVbIfZY8VOlMi6EXW4Uty471eAkH
-         58TvAlMhDwmLmpkSKu51sdGtU49ep+8xapGkk7+J9U82gXjbzphShbQR5EV0Xooq83
-         VWMHsLVvxbkyQ==
-Received: by mail-oa1-f52.google.com with SMTP id 586e51a60fabf-de48295467so224592fac.2;
-        Tue, 05 Apr 2022 11:00:53 -0700 (PDT)
-X-Gm-Message-State: AOAM5322x8xzMvuoZsOtOxes/AEuidd6XLZhgwhKZZWjyrrfvxnKdGWt
-        3bwn0vFzeWhdA19MJywcTKqvTSAOV4FkrWWlMX0=
-X-Google-Smtp-Source: ABdhPJyVj5hV5enQfSRyb6Ywt5+n+is6l9llY4/UZnczlt0FqbI9Kjr5WpW5ZDCur6hEypd5gKBpIfcsLtQ1wmevZ7g=
-X-Received: by 2002:a05:6870:eaa5:b0:da:b3f:2b45 with SMTP id
- s37-20020a056870eaa500b000da0b3f2b45mr2221796oap.228.1649181652698; Tue, 05
- Apr 2022 11:00:52 -0700 (PDT)
+        with ESMTP id S1575991AbiDEXJs (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 5 Apr 2022 19:09:48 -0400
+Received: from mail-pf1-x436.google.com (mail-pf1-x436.google.com [IPv6:2607:f8b0:4864:20::436])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 8705935870
+        for <linux-doc@vger.kernel.org>; Tue,  5 Apr 2022 14:40:34 -0700 (PDT)
+Received: by mail-pf1-x436.google.com with SMTP id s2so678351pfh.6
+        for <linux-doc@vger.kernel.org>; Tue, 05 Apr 2022 14:40:34 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=google.com; s=20210112;
+        h=date:from:to:cc:subject:in-reply-to:message-id:references
+         :mime-version;
+        bh=+VkEMKPsUn5codAwC2objI7iKq9LeQy/6DGModLXRws=;
+        b=a8L5o5P9uTOesLLONs4iibuBLPNtqXkJvnT5lW7YCQHxQj+KHSe3RjpJncrX2lwxya
+         m0fpQalAUhuzaUI4Tcwrw1xxjobzM5WSzUovJuKD63HaCOAusMNombgK9/8bW0kMD9RA
+         uXW3PuCngloNczariQrjxBBTI4pEg/lF5UhdpHu4gZf2rRUUsPk5RzgzY2vdluwR9223
+         pvjyjRYpy+K2FvL0jB38jXUwaPr6w56Vx3V/I/KUvL1Eg21tAnG7cNwW8ZB8IVEFLgFp
+         9d8bP7jb0a04ePZkHF8/bcPfS16jTZpInlewoW8Mby/pG/YZ/tNxtGBvPi8vwpW/VET7
+         WQng==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:date:from:to:cc:subject:in-reply-to:message-id
+         :references:mime-version;
+        bh=+VkEMKPsUn5codAwC2objI7iKq9LeQy/6DGModLXRws=;
+        b=x8FEY/yytyjNIZ5hOpBSrd/7nv7Vp0P3ZdUTUlTzjnDtZwDpBOpECX4VXMJhyJXXo/
+         AeZnQHvH2z8GL9D2reyIU26ULDMrkizGzU0fZOCXtTMLaom6JMCWR+vQoxMIfpQu22u4
+         iDEyLbSBr/qPVlN92atbCLqMwnokfDKAsDwGuFwD0GEs+2C+EitWFeMTzYW0/DC485sq
+         ZKg6dYRYsXLNHkmSOev6lxR6ngSAV9o6JnpO8drbm6Uwg+cGlNxouwXIBqwJh0d3nOaJ
+         1HQ5curso8+zjtxbOsVamaTupeWSBKU1vKa7fqNnEyeX6MbsmdlvwEGDu+djx3Qha0Ql
+         5Big==
+X-Gm-Message-State: AOAM531YhaFWXlXVeFYElf5pZj/u2DsD1O1gXEeX6IezQr/TjARUm8LR
+        OTjKVWnX/Arzke97GMNK3WtgKA==
+X-Google-Smtp-Source: ABdhPJzohfbOUrOhh/eLDwWhPKl7DNSBnOmqX6sET9SS3mk7vVXphuAZWMw56KG1ZqqSbTanxtD0Bg==
+X-Received: by 2002:a05:6a00:1341:b0:4fa:a3af:6ba3 with SMTP id k1-20020a056a00134100b004faa3af6ba3mr5505300pfu.51.1649194826458;
+        Tue, 05 Apr 2022 14:40:26 -0700 (PDT)
+Received: from [2620:15c:29:204:be3e:5e1c:99cc:513f] ([2620:15c:29:204:be3e:5e1c:99cc:513f])
+        by smtp.gmail.com with ESMTPSA id o30-20020a63921e000000b00398e665e830sm13002381pgd.48.2022.04.05.14.40.25
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 05 Apr 2022 14:40:26 -0700 (PDT)
+Date:   Tue, 5 Apr 2022 14:40:25 -0700 (PDT)
+From:   David Rientjes <rientjes@google.com>
+To:     Vlastimil Babka <vbabka@suse.cz>
+cc:     Christoph Lameter <cl@linux.com>,
+        Joonsoo Kim <iamjoonsoo.kim@lge.com>,
+        Pekka Enberg <penberg@kernel.org>,
+        Roman Gushchin <roman.gushchin@linux.dev>,
+        Andrew Morton <akpm@linux-foundation.org>, linux-mm@kvack.org,
+        patches@lists.linux.dev, linux-kernel@vger.kernel.org,
+        Oliver Glitta <glittao@gmail.com>,
+        Marco Elver <elver@google.com>,
+        Mike Rapoport <rppt@linux.ibm.com>,
+        Hyeonggon Yoo <42.hyeyoo@gmail.com>,
+        Imran Khan <imran.f.khan@oracle.com>,
+        Jonathan Corbet <corbet@lwn.net>,
+        Randy Dunlap <rdunlap@infradead.org>, linux-doc@vger.kernel.org
+Subject: Re: [PATCH v3 6/6] slab, documentation: add description of debugfs
+ files for SLUB caches
+In-Reply-To: <20220404164112.18372-7-vbabka@suse.cz>
+Message-ID: <fcf0fbc-b464-cab-e8d7-ae1322b2ffb3@google.com>
+References: <20220404164112.18372-1-vbabka@suse.cz> <20220404164112.18372-7-vbabka@suse.cz>
 MIME-Version: 1.0
-References: <20220321045853.3324-1-akihiko.odaki@gmail.com> <87bkxfebsu.fsf@meer.lwn.net>
-In-Reply-To: <87bkxfebsu.fsf@meer.lwn.net>
-From:   Ard Biesheuvel <ardb@kernel.org>
-Date:   Tue, 5 Apr 2022 20:00:41 +0200
-X-Gmail-Original-Message-ID: <CAMj1kXGHQm7yy2QPCEVRiXBzb8HWOHzKMCuoS+mbnBKujEXQnA@mail.gmail.com>
-Message-ID: <CAMj1kXGHQm7yy2QPCEVRiXBzb8HWOHzKMCuoS+mbnBKujEXQnA@mail.gmail.com>
-Subject: Re: [PATCH] x86/efi: Remove references of EFI earlyprintk from documentation
-To:     Jonathan Corbet <corbet@lwn.net>
-Cc:     Akihiko Odaki <akihiko.odaki@gmail.com>,
-        linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org,
-        linux-efi@vger.kernel.org, x86@kernel.org,
-        Thomas Gleixner <tglx@linutronix.de>,
-        Ingo Molnar <mingo@redhat.com>, Borislav Petkov <bp@alien8.de>,
-        Dave Hansen <dave.hansen@linux.intel.com>,
-        "H . Peter Anvin" <hpa@zytor.com>
-Content-Type: text/plain; charset="UTF-8"
-X-Spam-Status: No, score=-7.1 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_HI,
-        SPF_HELO_NONE,SPF_PASS,T_SCC_BODY_TEXT_LINE autolearn=ham
-        autolearn_force=no version=3.4.6
+Content-Type: text/plain; charset=US-ASCII
+X-Spam-Status: No, score=-17.6 required=5.0 tests=BAYES_00,DKIMWL_WL_MED,
+        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,
+        ENV_AND_HDR_SPF_MATCH,RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,SPF_PASS,
+        T_SCC_BODY_TEXT_LINE,USER_IN_DEF_DKIM_WL,USER_IN_DEF_SPF_WL
+        autolearn=unavailable autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Tue, 5 Apr 2022 at 18:26, Jonathan Corbet <corbet@lwn.net> wrote:
->
-> Akihiko Odaki <akihiko.odaki@gmail.com> writes:
->
-> > x86 EFI earlyprink was removed with commit 69c1f396f25b ("efi/x86:
-> > Convert x86 EFI earlyprintk into generic earlycon implementation").
->
-> So I will confess that I don't know this area well enough to know
-> whether this patch makes sense or not.  To help with that, it would have
-> been good to CC Ard, who is the author of the patch you cite above.
-> Adding him now.
->
-> Ard, do you agree with this change (preserved below)?
->
+On Mon, 4 Apr 2022, Vlastimil Babka wrote:
 
-Yes, it looks fine to me.
+> From: Oliver Glitta <glittao@gmail.com>
+> 
+> Add description of debugfs files alloc_traces and free_traces
+> to SLUB cache documentation.
+> 
+> [ vbabka@suse.cz: some rewording ]
+> 
+> Signed-off-by: Oliver Glitta <glittao@gmail.com>
+> Signed-off-by: Vlastimil Babka <vbabka@suse.cz>
+> Cc: Jonathan Corbet <corbet@lwn.net>
+> Cc: Randy Dunlap <rdunlap@infradead.org>
+> Cc: linux-doc@vger.kernel.org
+> Reviewed-by: Hyeonggon Yoo <42.hyeyoo@gmail.com>
+> Acked-by: Mike Rapoport <rppt@linux.ibm.com>
 
-Reviewed-by: Ard Biesheuvel <ardb@kernel.org>
-
->
-> > Signed-off-by: Akihiko Odaki <akihiko.odaki@gmail.com>
-> > ---
-> >  Documentation/admin-guide/kernel-parameters.txt | 4 ++--
-> >  1 file changed, 2 insertions(+), 2 deletions(-)
-> >
-> > diff --git a/Documentation/admin-guide/kernel-parameters.txt b/Documentation/admin-guide/kernel-parameters.txt
-> > index f5a27f067db9..fb39337f4123 100644
-> > --- a/Documentation/admin-guide/kernel-parameters.txt
-> > +++ b/Documentation/admin-guide/kernel-parameters.txt
-> > @@ -1252,7 +1252,7 @@
-> >                       Append ",keep" to not disable it when the real console
-> >                       takes over.
-> >
-> > -                     Only one of vga, efi, serial, or usb debug port can
-> > +                     Only one of vga, serial, or usb debug port can
-> >                       be used at a time.
-> >
-> >                       Currently only ttyS0 and ttyS1 may be specified by
-> > @@ -1267,7 +1267,7 @@
-> >                       Interaction with the standard serial driver is not
-> >                       very good.
-> >
-> > -                     The VGA and EFI output is eventually overwritten by
-> > +                     The VGA output is eventually overwritten by
-> >                       the real console.
-> >
-> >                       The xen option can only be used in Xen domains.
-> > --
-> > 2.35.1
+Acked-by: David Rientjes <rientjes@google.com>
