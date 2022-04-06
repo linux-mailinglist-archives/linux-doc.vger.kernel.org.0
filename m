@@ -2,72 +2,97 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id E3BF54F54AB
-	for <lists+linux-doc@lfdr.de>; Wed,  6 Apr 2022 07:23:16 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 6B4704F5881
+	for <lists+linux-doc@lfdr.de>; Wed,  6 Apr 2022 11:15:37 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S230043AbiDFFJi (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 6 Apr 2022 01:09:38 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:33142 "EHLO
+        id S236522AbiDFJBr (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 6 Apr 2022 05:01:47 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:35074 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1447167AbiDFE5t (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Wed, 6 Apr 2022 00:57:49 -0400
-Received: from mga05.intel.com (mga05.intel.com [192.55.52.43])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 72EC731C094;
-        Tue,  5 Apr 2022 17:48:54 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1649206134; x=1680742134;
-  h=from:to:cc:subject:references:date:in-reply-to:
-   message-id:mime-version;
-  bh=JVq/0q1U8J0tjQQNcPkukCTp/eQviHcDu+kC6AMz/cE=;
-  b=HPGRRLp4tR/ry/OLh+j36AyaN/1iKfQZ7peezzax2zeFm+qeXjaTYIsr
-   1kP0MjoA0pgxla7EPRJNL725H0kQDtjrDse+OAoF9AkkYm9FUjp/KiWsL
-   6U3LtmwLSBsL2TcUPexWaGukl6fNfQBTpojry7PjoKjIMJpGOsTJv35nv
-   MYCPUS9ctizUosSQOHjeKK+oZrbuNOnFqAOb50if1U3euXsga7HIqN+4t
-   IP+vHmP3j2712HgE4dMk7MZc0Q/Y/gcUTM5c5kfa+bp3Md4Bym8VHyY6M
-   +fdE53QucJbPfETX/NbtONMreqtO6qxXjny7NacfgloW8HbD4AcuEZcF3
-   Q==;
-X-IronPort-AV: E=McAfee;i="6200,9189,10308"; a="347351964"
-X-IronPort-AV: E=Sophos;i="5.90,238,1643702400"; 
-   d="scan'208";a="347351964"
-Received: from orsmga007.jf.intel.com ([10.7.209.58])
-  by fmsmga105.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 05 Apr 2022 17:48:54 -0700
-X-IronPort-AV: E=Sophos;i="5.90,238,1643702400"; 
-   d="scan'208";a="549302253"
-Received: from yhuang6-desk2.sh.intel.com (HELO yhuang6-desk2.ccr.corp.intel.com) ([10.239.13.94])
-  by orsmga007-auth.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 05 Apr 2022 17:48:49 -0700
-From:   "Huang, Ying" <ying.huang@intel.com>
-To:     Wei Xu <weixugc@google.com>
-Cc:     Michal Hocko <mhocko@suse.com>,
-        Yosry Ahmed <yosryahmed@google.com>,
-        Johannes Weiner <hannes@cmpxchg.org>,
-        Shakeel Butt <shakeelb@google.com>,
-        Andrew Morton <akpm@linux-foundation.org>,
-        David Rientjes <rientjes@google.com>,
-        Tejun Heo <tj@kernel.org>, Zefan Li <lizefan.x@bytedance.com>,
-        Roman Gushchin <roman.gushchin@linux.dev>,
-        cgroups@vger.kernel.org, linux-doc@vger.kernel.org,
-        Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
-        Linux MM <linux-mm@kvack.org>,
-        Jonathan Corbet <corbet@lwn.net>, Yu Zhao <yuzhao@google.com>,
-        Dave Hansen <dave.hansen@linux.intel.com>,
-        Greg Thelen <gthelen@google.com>
-Subject: Re: [PATCH resend] memcg: introduce per-memcg reclaim interface
-References: <20220331084151.2600229-1-yosryahmed@google.com>
-        <YkcEMdsi9G5y8mX4@dhcp22.suse.cz>
-        <CAAPL-u_i-Mp-Bo7LtP_4aJscY=1JHG_y1H_-A7N_HRAgtz+arg@mail.gmail.com>
-        <87y20nzyw4.fsf@yhuang6-desk2.ccr.corp.intel.com>
-        <CAAPL-u8wjtBRE7KZyZjoQ0eTJecnW35uEXAE3KU0M+AvL=5-ug@mail.gmail.com>
-Date:   Wed, 06 Apr 2022 08:48:47 +0800
-In-Reply-To: <CAAPL-u8wjtBRE7KZyZjoQ0eTJecnW35uEXAE3KU0M+AvL=5-ug@mail.gmail.com>
-        (Wei Xu's message of "Sat, 2 Apr 2022 23:56:19 -0700")
-Message-ID: <87o81fujdc.fsf@yhuang6-desk2.ccr.corp.intel.com>
-User-Agent: Gnus/5.13 (Gnus v5.13) Emacs/27.1 (gnu/linux)
+        with ESMTP id S1446748AbiDFI4j (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Wed, 6 Apr 2022 04:56:39 -0400
+Received: from esa3.hgst.iphmx.com (esa3.hgst.iphmx.com [216.71.153.141])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 6412241FA3A
+        for <linux-doc@vger.kernel.org>; Tue,  5 Apr 2022 18:48:10 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+  d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
+  t=1649209691; x=1680745691;
+  h=message-id:date:mime-version:subject:to:cc:references:
+   from:in-reply-to:content-transfer-encoding;
+  bh=VuoVmwsM1kjAIgmEzd4iWUN0hXYBPqUPYmlYGxx90q0=;
+  b=kJ1NHzeHl5aQt+tO+r1y0nJkUwR+AyAMkpIc13M4tcbFKjrHIzsjSvUT
+   whZcipRu6mqZAW1I1jMyYd4gmiwzG+ui2UGrOd/FjDcRRQ6yd+2S/c01d
+   2VUYfVzrgaB/ZkXXRmRgJ85ZVf0TMCuo9PXfuEyIHgGhKja2NhKhiZzMV
+   GDpLIkTYdg0xyiBY+ilbBastNQWnyn5FiWETd+ncuRn1y55wqiNI/v2gG
+   MqHRdjbhFJTdB9fKDHfRPjXqCeeksm34Nq3gQfi1nzghnXq8W7fnZhYxo
+   /eaWXJUGLL9+C/G+4+090rqSMbMAs/pa+SaRITDlheqRYARZm7F/QUxvl
+   w==;
+X-IronPort-AV: E=Sophos;i="5.90,238,1643644800"; 
+   d="scan'208";a="202037230"
+Received: from h199-255-45-15.hgst.com (HELO uls-op-cesaep02.wdc.com) ([199.255.45.15])
+  by ob1.hgst.iphmx.com with ESMTP; 06 Apr 2022 09:48:05 +0800
+IronPort-SDR: R5z1LoHBZU495kWQFWRmqeK3ZqNBVdDS3PmggahFJ39ssJmgJ9N8hTjs3U8DIMeKMS0zksUFIW
+ 6v4sbcXeabiJIEnV5ayJh3kWR95MztrX5jtbQM+BrTbep+syMQOG4k0z0TxlXBoPBXZ17STXkC
+ STxTiaA4DVWU4Wj6HBuckv+Aoql/MWAxk2DrnpC6f//VVsfOsgqm/sj6FiqVDk2GIbpg/TIdig
+ 3Eu5XMGKwKO9itXClgN9WXIXJdhb3QjLhXwBM+bCcGVTBi/guLMPFGJkS4d5+Q0pdwQB+c2oi7
+ CdFjIzcRoQgiM2bZVmoqREk5
+Received: from uls-op-cesaip02.wdc.com ([10.248.3.37])
+  by uls-op-cesaep02.wdc.com with ESMTP/TLS/ECDHE-RSA-AES128-GCM-SHA256; 05 Apr 2022 18:18:48 -0700
+IronPort-SDR: 2enYcOEv4x+BAhSneFO+nyP1OFDxxFWtSeJ3xRaF7NL+3cr5fi/ls0o4qlQtNYZVC8EIVSRjrj
+ +OnoU5o4TK/v9j6kBELsG1zf88iss/f5WHP6RIUt4OUsiuJd/iLCyVdrlj6OKE7h2YOLGji3ac
+ 7eSxlncpNA+Zrz80/caTwnxq9mHK6ZTra0fUQnipB6AQSIk8qPF/F1jKhw0ShBh6KNuTXoYrwp
+ ISbQnMmGw+0kNfdHpjI1mRnD1E73wUhtJkRRBxO+gP5EHW4rmAU6PCjvv6i5cYam+iyOFjcqrl
+ ibA=
+WDCIronportException: Internal
+Received: from usg-ed-osssrv.wdc.com ([10.3.10.180])
+  by uls-op-cesaip02.wdc.com with ESMTP/TLS/ECDHE-RSA-AES128-GCM-SHA256; 05 Apr 2022 18:48:06 -0700
+Received: from usg-ed-osssrv.wdc.com (usg-ed-osssrv.wdc.com [127.0.0.1])
+        by usg-ed-osssrv.wdc.com (Postfix) with ESMTP id 4KY6ps52v2z1SVp0
+        for <linux-doc@vger.kernel.org>; Tue,  5 Apr 2022 18:48:05 -0700 (PDT)
+Authentication-Results: usg-ed-osssrv.wdc.com (amavisd-new); dkim=pass
+        reason="pass (just generated, assumed good)"
+        header.d=opensource.wdc.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=
+        opensource.wdc.com; h=content-transfer-encoding:content-type
+        :in-reply-to:organization:from:references:to:content-language
+        :subject:user-agent:mime-version:date:message-id; s=dkim; t=
+        1649209685; x=1651801686; bh=VuoVmwsM1kjAIgmEzd4iWUN0hXYBPqUPYml
+        YGxx90q0=; b=E4UOnw8BjAuFsxgUNz1JVDSZoX8yQLctisFANLe1Z/7C0dFuEJk
+        LfdRZDbW8aSOdPPRAKOLeHbtE6mmG+YYKwab0H3EYIozRVzMTdKBgE2ik7HJHuwe
+        1b/tZXQrhQEBKn14uwEUh3KXtkYU3AwYxZb/cftSIWs4sLb5Ii1/2OmbJOA5JmTM
+        pMTGewU2Q4eeocqSTsJgcr3aFdUI/EEHKR3ZwRZqyhl210d7gKEwFqJzkMZnFvWx
+        sVkMFEpQFSvwkCv/cyub/aWGqmuHgeyvyl77QlJzkoPLP94S2ray/pI2ibZtgHr6
+        MBrtS9l0xhBIHxhWo4d1BYM4S1B2CX7v4tQ==
+X-Virus-Scanned: amavisd-new at usg-ed-osssrv.wdc.com
+Received: from usg-ed-osssrv.wdc.com ([127.0.0.1])
+        by usg-ed-osssrv.wdc.com (usg-ed-osssrv.wdc.com [127.0.0.1]) (amavisd-new, port 10026)
+        with ESMTP id 1IITOeN00g7o for <linux-doc@vger.kernel.org>;
+        Tue,  5 Apr 2022 18:48:05 -0700 (PDT)
+Received: from [10.149.53.254] (washi.fujisawa.hgst.com [10.149.53.254])
+        by usg-ed-osssrv.wdc.com (Postfix) with ESMTPSA id 4KY6pr31hmz1Rvlx;
+        Tue,  5 Apr 2022 18:48:04 -0700 (PDT)
+Message-ID: <f7bbb09f-562f-fce2-cd16-a1c67fc334b5@opensource.wdc.com>
+Date:   Wed, 6 Apr 2022 10:48:03 +0900
 MIME-Version: 1.0
-Content-Type: text/plain; charset=ascii
-X-Spam-Status: No, score=-4.4 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_MED,
-        SPF_HELO_NONE,SPF_NONE,T_SCC_BODY_TEXT_LINE autolearn=ham
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
+ Thunderbird/91.7.0
+Subject: Re: [PATCH v2 2/2] libata: Inline ata_qc_new_init() in
+ ata_scsi_qc_new()
+Content-Language: en-US
+To:     Christoph Hellwig <hch@lst.de>, John Garry <john.garry@huawei.com>
+Cc:     linux-kernel@vger.kernel.org, linux-ide@vger.kernel.org,
+        linux-doc@vger.kernel.org, linux-scsi@vger.kernel.org
+References: <1649083990-207133-1-git-send-email-john.garry@huawei.com>
+ <1649083990-207133-3-git-send-email-john.garry@huawei.com>
+ <20220405055252.GA23698@lst.de>
+From:   Damien Le Moal <damien.lemoal@opensource.wdc.com>
+Organization: Western Digital Research
+In-Reply-To: <20220405055252.GA23698@lst.de>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-Spam-Status: No, score=-5.0 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,NICE_REPLY_A,RCVD_IN_DNSWL_MED,
+        SPF_HELO_PASS,SPF_PASS,T_SCC_BODY_TEXT_LINE autolearn=unavailable
         autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
@@ -75,94 +100,25 @@ Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Wei Xu <weixugc@google.com> writes:
-
-> On Sat, Apr 2, 2022 at 1:13 AM Huang, Ying <ying.huang@intel.com> wrote:
+On 4/5/22 14:52, Christoph Hellwig wrote:
+> On Mon, Apr 04, 2022 at 10:53:10PM +0800, John Garry wrote:
+>> From: Christoph Hellwig <hch@lst.de>
 >>
->> Wei Xu <weixugc@google.com> writes:
+>> It is a bit pointless to have ata_qc_new_init() in libata-core.c since it
+>> pokes scsi internals, so inline it in ata_scsi_qc_new() (in libata-scsi.c).
 >>
->> > On Fri, Apr 1, 2022 at 6:54 AM Michal Hocko <mhocko@suse.com> wrote:
->> >>
->> >> On Thu 31-03-22 08:41:51, Yosry Ahmed wrote:
->> >> > From: Shakeel Butt <shakeelb@google.com>
->> >> >
->>
->> [snip]
->>
->> >> > Possible Extensions:
->> >> > --------------------
->> >> >
->> >> > - This interface can be extended with an additional parameter or flags
->> >> >   to allow specifying one or more types of memory to reclaim from (e.g.
->> >> >   file, anon, ..).
->> >> >
->> >> > - The interface can also be extended with a node mask to reclaim from
->> >> >   specific nodes. This has use cases for reclaim-based demotion in memory
->> >> >   tiering systens.
->> >> >
->> >> > - A similar per-node interface can also be added to support proactive
->> >> >   reclaim and reclaim-based demotion in systems without memcg.
->> >> >
->> >> > For now, let's keep things simple by adding the basic functionality.
->> >>
->> >> Yes, I am for the simplicity and this really looks like a bare minumum
->> >> interface. But it is not really clear who do you want to add flags on
->> >> top of it?
->> >>
->> >> I am not really sure we really need a node aware interface for memcg.
->> >> The global reclaim interface will likely need a different node because
->> >> we do not want to make this CONFIG_MEMCG constrained.
->> >
->> > A nodemask argument for memory.reclaim can be useful for memory
->> > tiering between NUMA nodes with different performance.  Similar to
->> > proactive reclaim, it can allow a userspace daemon to drive
->> > memcg-based proactive demotion via the reclaim-based demotion
->> > mechanism in the kernel.
->>
->> I am not sure whether nodemask is a good way for demoting pages between
->> different types of memory.  For example, for a system with DRAM and
->> PMEM, if specifying DRAM node in nodemask means demoting to PMEM, what
->> is the meaning of specifying PMEM node? reclaiming to disk?
->>
->> In general, I have no objection to the idea in general.  But we should
->> have a clear and consistent interface.  Per my understanding the default
->> memcg interface is for memory, regardless of memory types.  The memory
->> reclaiming means reduce the memory usage, regardless of memory types.
->> We need to either extending the semantics of memory reclaiming (to
->> include memory demoting too), or add another interface for memory
->> demoting.
->
-> Good point.  With the "demote pages during reclaim" patch series,
-> reclaim is already extended to demote pages as well.  For example,
-> can_reclaim_anon_pages() returns true if demotion is allowed and
-> shrink_page_list() can demote pages instead of reclaiming pages.
+>> <Christoph, please provide signed-off-by>
+>> [jpg, Take Christoph's change from list and form into a patch]
+>> Signed-off-by: John Garry <john.garry@huawei.com>
+> 
+> Signed-off-by: Christoph Hellwig <hch@lst.de>
+> 
+> Although I still think merging the two patches into one to avoid all
+> the churn would be much better.
 
-These are in-kernel implementation, not the ABI.  So we still have
-the opportunity to define the ABI now.
+I agree. Let's merge these 2 patches.
 
-> Currently, demotion is disabled for memcg reclaim, which I think can
-> be relaxed and also necessary for memcg-based proactive demotion.  I'd
-> like to suggest that we extend the semantics of memory.reclaim to
-> cover memory demotion as well.  A flag can be used to enable/disable
-> the demotion behavior.
 
-If so,
-
-# echo A > memory.reclaim
-
-means
-
-a) "A" bytes memory are freed from the memcg, regardless demoting is
-   used or not.
-
-or
-
-b) "A" bytes memory are reclaimed from the memcg, some of them may be
-   freed, some of them may be just demoted from DRAM to PMEM.  The total
-   number is "A".
-
-For me, a) looks more reasonable.
-
-Best Regards,
-Huang, Ying
-
+-- 
+Damien Le Moal
+Western Digital Research
