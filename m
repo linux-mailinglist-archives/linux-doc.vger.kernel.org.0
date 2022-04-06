@@ -2,60 +2,75 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id D78E24F6508
-	for <lists+linux-doc@lfdr.de>; Wed,  6 Apr 2022 18:27:24 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 9CB394F650D
+	for <lists+linux-doc@lfdr.de>; Wed,  6 Apr 2022 18:27:26 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S237127AbiDFQXc (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 6 Apr 2022 12:23:32 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:52966 "EHLO
+        id S237554AbiDFQVf (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 6 Apr 2022 12:21:35 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:51034 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S238312AbiDFQXD (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Wed, 6 Apr 2022 12:23:03 -0400
-Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 202FA1DE6CA;
-        Tue,  5 Apr 2022 19:31:37 -0700 (PDT)
-Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
-        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
-        (No client certificate requested)
-        by dfw.source.kernel.org (Postfix) with ESMTPS id B0645616CA;
-        Wed,  6 Apr 2022 02:31:36 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 48457C385A1;
-        Wed,  6 Apr 2022 02:31:33 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-        s=k20201202; t=1649212296;
-        bh=2MxGsdREcZcC5dPhVe4pegMYaaOwE0pzgrqWpuXtrGc=;
-        h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-        b=GXwGW062YdKL8+Jg+FwAV0W7WDkdIVsTVXDAEN7aXQNujZ35ZW3r/eAzX8retscRF
-         R9mIWL8TtQRblz9fugeEJb203dMObcn5oNScGIeR3sTZoFengiBixG5/iVNGpYi/dU
-         YhfsDDCZNrWTtqSUw78W6s1gQ9MH/u+xK5aE2Yiw/E+8AKSdcDiG/GAPzXuSu1RhLK
-         lZ3q7+NR6Mvqb45MbN5emzUF4tUofgGHUgTqXZNN1GqMSi3+iIeRHrwmvyY3osNY8n
-         KCqwT+BFAEC12NbbDkLtWy4gB1UYTjQ8Pj/h6lX4HUnT5sKKAgmF5yeqtbSj64VBMZ
-         jf7B1pxWVkXmg==
-From:   Masami Hiramatsu <mhiramat@kernel.org>
-To:     Steven Rostedt <rostedt@goodmis.org>
-Cc:     Masami Hiramatsu <mhiramat@kernel.org>,
-        Padmanabha Srinivasaiah <treasure4paddy@gmail.com>,
-        LKML <linux-kernel@vger.kernel.org>,
-        Jonathan Corbet <corbet@lwn.net>, linux-doc@vger.kernel.org,
-        Randy Dunlap <rdunlap@infradead.org>,
-        Nick Desaulniers <ndesaulniers@google.com>,
-        Sami Tolvanen <samitolvanen@google.com>,
-        Nathan Chancellor <nathan@kernel.org>, llvm@lists.linux.dev,
-        Masahiro Yamada <masahiroy@kernel.org>,
-        Linux Kbuild mailing list <linux-kbuild@vger.kernel.org>
-Subject: [PATCH v8 4/4] docs: bootconfig: Add how to embed the bootconfig into kernel
-Date:   Wed,  6 Apr 2022 11:31:30 +0900
-Message-Id: <164921228987.1090670.16843569536974147213.stgit@devnote2>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <164921224829.1090670.9700650651725930602.stgit@devnote2>
-References: <164921224829.1090670.9700650651725930602.stgit@devnote2>
-User-Agent: StGit/0.19
+        with ESMTP id S237542AbiDFQVX (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Wed, 6 Apr 2022 12:21:23 -0400
+Received: from mga12.intel.com (mga12.intel.com [192.55.52.136])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 236B02DCCAA;
+        Tue,  5 Apr 2022 19:49:59 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1649213399; x=1680749399;
+  h=from:to:cc:subject:references:date:in-reply-to:
+   message-id:mime-version;
+  bh=z3FJMwq8joZOXA61vyLoUR6apgy9wvWVJ1HAf2QRlg8=;
+  b=Sq8QeBpXEQhWMifulmiCoQiTwmk46+APSOl/ZDTE40CRdZAaoLVlUJCG
+   KT3rlX3S94SJm5x1NyO6BG56UqjHQJcp/eq0GNZFQ8b6Mup+s6mzT97aa
+   f3fTUB6lAySUKqTyjLPJbQsMcITXIcgLfbkTaT2KvAfLHjw8j5zqlJbf7
+   ThdBvpMhKTazhbbaO5E6mTIpGdVfBzmp5oLAlP9Te5jibUooOO2p4JnlD
+   rRyWAfDLAxVsOCDjIRxsqJR8TIHdx2LfiyOJXam85qmghH97RyW7+GQCz
+   Dky65VskAxeUFm5CXtbJA5/Ige4xX2nDlduOUcJ8eybQVOxLEW/Pac3bm
+   w==;
+X-IronPort-AV: E=McAfee;i="6200,9189,10308"; a="240867137"
+X-IronPort-AV: E=Sophos;i="5.90,238,1643702400"; 
+   d="scan'208";a="240867137"
+Received: from orsmga008.jf.intel.com ([10.7.209.65])
+  by fmsmga106.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 05 Apr 2022 19:49:58 -0700
+X-IronPort-AV: E=Sophos;i="5.90,238,1643702400"; 
+   d="scan'208";a="570305329"
+Received: from yhuang6-desk2.sh.intel.com (HELO yhuang6-desk2.ccr.corp.intel.com) ([10.239.13.94])
+  by orsmga008-auth.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 05 Apr 2022 19:49:53 -0700
+From:   "Huang, Ying" <ying.huang@intel.com>
+To:     Wei Xu <weixugc@google.com>
+Cc:     Michal Hocko <mhocko@suse.com>,
+        Yosry Ahmed <yosryahmed@google.com>,
+        Johannes Weiner <hannes@cmpxchg.org>,
+        Shakeel Butt <shakeelb@google.com>,
+        Andrew Morton <akpm@linux-foundation.org>,
+        David Rientjes <rientjes@google.com>,
+        Tejun Heo <tj@kernel.org>, Zefan Li <lizefan.x@bytedance.com>,
+        Roman Gushchin <roman.gushchin@linux.dev>,
+        Cgroups <cgroups@vger.kernel.org>,
+        "open list:DOCUMENTATION" <linux-doc@vger.kernel.org>,
+        Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
+        Linux MM <linux-mm@kvack.org>,
+        Jonathan Corbet <corbet@lwn.net>, Yu Zhao <yuzhao@google.com>,
+        Dave Hansen <dave.hansen@linux.intel.com>,
+        Greg Thelen <gthelen@google.com>
+Subject: Re: [PATCH resend] memcg: introduce per-memcg reclaim interface
+References: <20220331084151.2600229-1-yosryahmed@google.com>
+        <YkcEMdsi9G5y8mX4@dhcp22.suse.cz>
+        <CAAPL-u_i-Mp-Bo7LtP_4aJscY=1JHG_y1H_-A7N_HRAgtz+arg@mail.gmail.com>
+        <87y20nzyw4.fsf@yhuang6-desk2.ccr.corp.intel.com>
+        <CAAPL-u8wjtBRE7KZyZjoQ0eTJecnW35uEXAE3KU0M+AvL=5-ug@mail.gmail.com>
+        <87o81fujdc.fsf@yhuang6-desk2.ccr.corp.intel.com>
+        <CAAPL-u_6XqQYtLAMNFvEo+0XU2VR=XYm0T9btL=g6rVVW2h93w@mail.gmail.com>
+Date:   Wed, 06 Apr 2022 10:49:51 +0800
+In-Reply-To: <CAAPL-u_6XqQYtLAMNFvEo+0XU2VR=XYm0T9btL=g6rVVW2h93w@mail.gmail.com>
+        (Wei Xu's message of "Tue, 5 Apr 2022 18:07:49 -0700")
+Message-ID: <87bkxfudrk.fsf@yhuang6-desk2.ccr.corp.intel.com>
+User-Agent: Gnus/5.13 (Gnus v5.13) Emacs/27.1 (gnu/linux)
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 8bit
-X-Spam-Status: No, score=-7.1 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_HI,
-        SPF_HELO_NONE,SPF_PASS,T_SCC_BODY_TEXT_LINE autolearn=ham
+Content-Type: text/plain; charset=ascii
+X-Spam-Status: No, score=-4.4 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_MED,
+        SPF_HELO_PASS,SPF_NONE,T_SCC_BODY_TEXT_LINE autolearn=ham
         autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
@@ -63,70 +78,110 @@ Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Add a description how to embed the bootconfig file into kernel.
+Wei Xu <weixugc@google.com> writes:
 
-Signed-off-by: Masami Hiramatsu <mhiramat@kernel.org>
----
- Changes in v7:
-  - Rename CONFIG_EMBED_BOOT_CONFIG* to CONFIG_BOOT_CONFIG_EMBED*.
- Changes in v5:
-  - Update CONFIG_EMBED_BOOT_CONFIG_FILE which can accept relative path.
- Changes in v3:
-  - Fix typos.
- Changes in v2:
-  - Corrected the text accoding to Randy's suggestion.
-  - Do not reccomend to use relative path for CONFIG_EMBED_BOOT_CONFIG_FILE.
----
- Documentation/admin-guide/bootconfig.rst |   31 +++++++++++++++++++++++++++---
- 1 file changed, 28 insertions(+), 3 deletions(-)
+> On Tue, Apr 5, 2022 at 5:49 PM Huang, Ying <ying.huang@intel.com> wrote:
+>>
+>> Wei Xu <weixugc@google.com> writes:
+>>
+>> > On Sat, Apr 2, 2022 at 1:13 AM Huang, Ying <ying.huang@intel.com> wrote:
+>> >>
+>> >> Wei Xu <weixugc@google.com> writes:
+>> >>
+>> >> > On Fri, Apr 1, 2022 at 6:54 AM Michal Hocko <mhocko@suse.com> wrote:
+>> >> >>
+>> >> >> On Thu 31-03-22 08:41:51, Yosry Ahmed wrote:
+>> >> >> > From: Shakeel Butt <shakeelb@google.com>
+>> >> >> >
+>> >>
+>> >> [snip]
+>> >>
+>> >> >> > Possible Extensions:
+>> >> >> > --------------------
+>> >> >> >
+>> >> >> > - This interface can be extended with an additional parameter or flags
+>> >> >> >   to allow specifying one or more types of memory to reclaim from (e.g.
+>> >> >> >   file, anon, ..).
+>> >> >> >
+>> >> >> > - The interface can also be extended with a node mask to reclaim from
+>> >> >> >   specific nodes. This has use cases for reclaim-based demotion in memory
+>> >> >> >   tiering systens.
+>> >> >> >
+>> >> >> > - A similar per-node interface can also be added to support proactive
+>> >> >> >   reclaim and reclaim-based demotion in systems without memcg.
+>> >> >> >
+>> >> >> > For now, let's keep things simple by adding the basic functionality.
+>> >> >>
+>> >> >> Yes, I am for the simplicity and this really looks like a bare minumum
+>> >> >> interface. But it is not really clear who do you want to add flags on
+>> >> >> top of it?
+>> >> >>
+>> >> >> I am not really sure we really need a node aware interface for memcg.
+>> >> >> The global reclaim interface will likely need a different node because
+>> >> >> we do not want to make this CONFIG_MEMCG constrained.
+>> >> >
+>> >> > A nodemask argument for memory.reclaim can be useful for memory
+>> >> > tiering between NUMA nodes with different performance.  Similar to
+>> >> > proactive reclaim, it can allow a userspace daemon to drive
+>> >> > memcg-based proactive demotion via the reclaim-based demotion
+>> >> > mechanism in the kernel.
+>> >>
+>> >> I am not sure whether nodemask is a good way for demoting pages between
+>> >> different types of memory.  For example, for a system with DRAM and
+>> >> PMEM, if specifying DRAM node in nodemask means demoting to PMEM, what
+>> >> is the meaning of specifying PMEM node? reclaiming to disk?
+>> >>
+>> >> In general, I have no objection to the idea in general.  But we should
+>> >> have a clear and consistent interface.  Per my understanding the default
+>> >> memcg interface is for memory, regardless of memory types.  The memory
+>> >> reclaiming means reduce the memory usage, regardless of memory types.
+>> >> We need to either extending the semantics of memory reclaiming (to
+>> >> include memory demoting too), or add another interface for memory
+>> >> demoting.
+>> >
+>> > Good point.  With the "demote pages during reclaim" patch series,
+>> > reclaim is already extended to demote pages as well.  For example,
+>> > can_reclaim_anon_pages() returns true if demotion is allowed and
+>> > shrink_page_list() can demote pages instead of reclaiming pages.
+>>
+>> These are in-kernel implementation, not the ABI.  So we still have
+>> the opportunity to define the ABI now.
+>>
+>> > Currently, demotion is disabled for memcg reclaim, which I think can
+>> > be relaxed and also necessary for memcg-based proactive demotion.  I'd
+>> > like to suggest that we extend the semantics of memory.reclaim to
+>> > cover memory demotion as well.  A flag can be used to enable/disable
+>> > the demotion behavior.
+>>
+>> If so,
+>>
+>> # echo A > memory.reclaim
+>>
+>> means
+>>
+>> a) "A" bytes memory are freed from the memcg, regardless demoting is
+>>    used or not.
+>>
+>> or
+>>
+>> b) "A" bytes memory are reclaimed from the memcg, some of them may be
+>>    freed, some of them may be just demoted from DRAM to PMEM.  The total
+>>    number is "A".
+>>
+>> For me, a) looks more reasonable.
+>>
+>
+> We can use a DEMOTE flag to control the demotion behavior for
+> memory.reclaim.  If the flag is not set (the default), then
+> no_demotion of scan_control can be set to 1, similar to
+> reclaim_pages().
 
-diff --git a/Documentation/admin-guide/bootconfig.rst b/Documentation/admin-guide/bootconfig.rst
-index a1860fc0ca88..d99994345d41 100644
---- a/Documentation/admin-guide/bootconfig.rst
-+++ b/Documentation/admin-guide/bootconfig.rst
-@@ -158,9 +158,15 @@ Each key-value pair is shown in each line with following style::
- Boot Kernel With a Boot Config
- ==============================
- 
--Since the boot configuration file is loaded with initrd, it will be added
--to the end of the initrd (initramfs) image file with padding, size,
--checksum and 12-byte magic word as below.
-+There are two options to boot the kernel with bootconfig: attaching the
-+bootconfig to the initrd image or embedding it in the kernel itself.
-+
-+Attaching a Boot Config to Initrd
-+---------------------------------
-+
-+Since the boot configuration file is loaded with initrd by default,
-+it will be added to the end of the initrd (initramfs) image file with
-+padding, size, checksum and 12-byte magic word as below.
- 
- [initrd][bootconfig][padding][size(le32)][checksum(le32)][#BOOTCONFIG\n]
- 
-@@ -196,6 +202,25 @@ To remove the config from the image, you can use -d option as below::
- Then add "bootconfig" on the normal kernel command line to tell the
- kernel to look for the bootconfig at the end of the initrd file.
- 
-+Embedding a Boot Config into Kernel
-+-----------------------------------
-+
-+If you can not use initrd, you can also embed the bootconfig file in the
-+kernel by Kconfig options. In this case, you need to recompile the kernel
-+with the following configs::
-+
-+ CONFIG_BOOT_CONFIG_EMBED=y
-+ CONFIG_BOOT_CONFIG_EMBED_FILE="/PATH/TO/BOOTCONFIG/FILE"
-+
-+``CONFIG_BOOT_CONFIG_EMBED_FILE`` requires an absolute path or a relative
-+path to the bootconfig file from source tree or object tree.
-+The kernel will embed it as the default bootconfig.
-+
-+Just as when attaching the bootconfig to the initrd, you need ``bootconfig``
-+option on the kernel command line to enable the embedded bootconfig.
-+
-+Note that even if you set this option, you can override the embedded
-+bootconfig by another bootconfig which attached to the initrd.
- 
- Kernel parameters via Boot Config
- =================================
+If we have to use a flag to control the behavior, I think it's better to
+have a separate interface (e.g. memory.demote).  But do we really need b)?
 
+> The question is then whether we want to rename memory.reclaim to
+> something more general.  I think this name is fine if reclaim-based
+> demotion is an accepted concept.
+
+Best Regards,
+Huang, Ying
