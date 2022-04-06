@@ -2,60 +2,78 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 885EE4F5AF7
-	for <lists+linux-doc@lfdr.de>; Wed,  6 Apr 2022 12:40:49 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id CE3434F5B70
+	for <lists+linux-doc@lfdr.de>; Wed,  6 Apr 2022 12:42:52 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1377340AbiDFJjr (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 6 Apr 2022 05:39:47 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:53384 "EHLO
+        id S1349092AbiDFKFw (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 6 Apr 2022 06:05:52 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:47656 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1585823AbiDFJgr (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Wed, 6 Apr 2022 05:36:47 -0400
-Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 8674A19D61B;
-        Tue,  5 Apr 2022 19:31:25 -0700 (PDT)
-Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
-        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
-        (No client certificate requested)
-        by dfw.source.kernel.org (Postfix) with ESMTPS id 20AEB616B8;
-        Wed,  6 Apr 2022 02:31:25 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 321F8C385A0;
-        Wed,  6 Apr 2022 02:31:22 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-        s=k20201202; t=1649212284;
-        bh=aw2bq5SC6SuV7FHJKRzv7VxT/0OLDHfP3nbZybj0tO4=;
-        h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-        b=KhCwMTsQmGqmfrifRKhNYRshX9Xl9dg1YeS5en9OMMAb2Jvrns3OwcFsiRAk0ZCnd
-         rI2Bg8FjLLLuBPzw9N72CUjdrH6EoTPNI7QW/FhqY4RF5e3FxcgaZT/2eRAK5pSjx4
-         Pp2l2FRn8bATi7BHqSjPCDXWCyIx+PdUDux/4dqcB1QnWlndoTVHb9WvwsRg57d/di
-         JczJt0ogZ3iw3ZsLJYKLx3zH6dMSoFp4ggG2cg67QshCe4NQcbEYnQfvWENpLYOWSR
-         dWsfEf5l6TJqokFrQ/yspb+QoqXysk+1geOPyW/O+erY/UXNXD3p89nq5iPqcObaZL
-         yOfmu+Sc25IHA==
-From:   Masami Hiramatsu <mhiramat@kernel.org>
-To:     Steven Rostedt <rostedt@goodmis.org>
-Cc:     Masami Hiramatsu <mhiramat@kernel.org>,
-        Padmanabha Srinivasaiah <treasure4paddy@gmail.com>,
-        LKML <linux-kernel@vger.kernel.org>,
-        Jonathan Corbet <corbet@lwn.net>, linux-doc@vger.kernel.org,
-        Randy Dunlap <rdunlap@infradead.org>,
-        Nick Desaulniers <ndesaulniers@google.com>,
-        Sami Tolvanen <samitolvanen@google.com>,
-        Nathan Chancellor <nathan@kernel.org>, llvm@lists.linux.dev,
-        Masahiro Yamada <masahiroy@kernel.org>,
-        Linux Kbuild mailing list <linux-kbuild@vger.kernel.org>
-Subject: [PATCH v8 3/4] bootconfig: Support embedding a bootconfig file in kernel
-Date:   Wed,  6 Apr 2022 11:31:19 +0900
-Message-Id: <164921227943.1090670.14035119557571329218.stgit@devnote2>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <164921224829.1090670.9700650651725930602.stgit@devnote2>
-References: <164921224829.1090670.9700650651725930602.stgit@devnote2>
-User-Agent: StGit/0.19
+        with ESMTP id S1347888AbiDFKEv (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Wed, 6 Apr 2022 06:04:51 -0400
+Received: from mga07.intel.com (mga07.intel.com [134.134.136.100])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 11F0C8148E;
+        Tue,  5 Apr 2022 23:32:31 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1649226751; x=1680762751;
+  h=from:to:cc:subject:references:date:in-reply-to:
+   message-id:mime-version;
+  bh=DRhUZhi+ke2tCAFDOkKtZrnyyEngvYwmfRdoy6Io8Ts=;
+  b=GyrRfB3FqCkLokIVTf4cQ5+oUUTL1jAX1I1bzJkd/ZZYs6v5M4eyFFFC
+   ak2yTR9dCCmHsn42LosqbTF6ZDX33atsxZ0bppvu714oMHuTlNQD8KVwk
+   mGEB0u3UWSkn6Z+bgOleoB/vgOtIPUH6JQffPQIIJJUYUKcpz9Bp5gIcl
+   r5fsuyJG2ZIzMgZEE1XTCTFWEMDkrHNNvhgFUQ63vFU/v6wBlGWtyPtB5
+   pw0n80F3LvdPfJ3cCutqfVCsLvulbEiH+wH0U2NUr2UmsyXS+yqWkobJ/
+   p8r8Zs8TOy7OfxtwmX4xK02zxWWWD5AtkQQ9i6X4BehgwJiIkZaNdl2tR
+   w==;
+X-IronPort-AV: E=McAfee;i="6200,9189,10308"; a="324134252"
+X-IronPort-AV: E=Sophos;i="5.90,239,1643702400"; 
+   d="scan'208";a="324134252"
+Received: from orsmga007.jf.intel.com ([10.7.209.58])
+  by orsmga105.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 05 Apr 2022 23:32:30 -0700
+X-IronPort-AV: E=Sophos;i="5.90,239,1643702400"; 
+   d="scan'208";a="549408024"
+Received: from yhuang6-desk2.sh.intel.com (HELO yhuang6-desk2.ccr.corp.intel.com) ([10.239.13.94])
+  by orsmga007-auth.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 05 Apr 2022 23:32:26 -0700
+From:   "Huang, Ying" <ying.huang@intel.com>
+To:     Wei Xu <weixugc@google.com>
+Cc:     Michal Hocko <mhocko@suse.com>,
+        Yosry Ahmed <yosryahmed@google.com>,
+        Johannes Weiner <hannes@cmpxchg.org>,
+        Shakeel Butt <shakeelb@google.com>,
+        Andrew Morton <akpm@linux-foundation.org>,
+        David Rientjes <rientjes@google.com>,
+        Tejun Heo <tj@kernel.org>, Zefan Li <lizefan.x@bytedance.com>,
+        Roman Gushchin <roman.gushchin@linux.dev>,
+        Cgroups <cgroups@vger.kernel.org>,
+        "open list:DOCUMENTATION" <linux-doc@vger.kernel.org>,
+        Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
+        Linux MM <linux-mm@kvack.org>,
+        Jonathan Corbet <corbet@lwn.net>, Yu Zhao <yuzhao@google.com>,
+        Dave Hansen <dave.hansen@linux.intel.com>,
+        Greg Thelen <gthelen@google.com>,
+        Tim Chen <tim.c.chen@linux.intel.com>
+Subject: Re: [PATCH resend] memcg: introduce per-memcg reclaim interface
+References: <20220331084151.2600229-1-yosryahmed@google.com>
+        <YkcEMdsi9G5y8mX4@dhcp22.suse.cz>
+        <CAAPL-u_i-Mp-Bo7LtP_4aJscY=1JHG_y1H_-A7N_HRAgtz+arg@mail.gmail.com>
+        <87y20nzyw4.fsf@yhuang6-desk2.ccr.corp.intel.com>
+        <CAAPL-u8wjtBRE7KZyZjoQ0eTJecnW35uEXAE3KU0M+AvL=5-ug@mail.gmail.com>
+        <87o81fujdc.fsf@yhuang6-desk2.ccr.corp.intel.com>
+        <CAAPL-u_6XqQYtLAMNFvEo+0XU2VR=XYm0T9btL=g6rVVW2h93w@mail.gmail.com>
+        <87bkxfudrk.fsf@yhuang6-desk2.ccr.corp.intel.com>
+        <CAAPL-u_FVEVE+wTBNYfDibLVKsRuOwEnpigYYRiZ2MbeUs1u8w@mail.gmail.com>
+Date:   Wed, 06 Apr 2022 14:32:24 +0800
+In-Reply-To: <CAAPL-u_FVEVE+wTBNYfDibLVKsRuOwEnpigYYRiZ2MbeUs1u8w@mail.gmail.com>
+        (Wei Xu's message of "Tue, 5 Apr 2022 22:02:03 -0700")
+Message-ID: <877d82vi13.fsf@yhuang6-desk2.ccr.corp.intel.com>
+User-Agent: Gnus/5.13 (Gnus v5.13) Emacs/27.1 (gnu/linux)
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 8bit
-X-Spam-Status: No, score=-7.1 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_HI,
-        SPF_HELO_NONE,SPF_PASS,T_SCC_BODY_TEXT_LINE autolearn=ham
+Content-Type: text/plain; charset=ascii
+X-Spam-Status: No, score=-2.8 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_LOW,
+        SPF_HELO_NONE,SPF_NONE,T_SCC_BODY_TEXT_LINE autolearn=ham
         autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
@@ -63,253 +81,147 @@ Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-This allows kernel developer to embed a default bootconfig file in
-the kernel instead of embedding it in the initrd. This will be good
-for who are using the kernel without initrd, or who needs a default
-bootconfigs.
-This needs to set two kconfigs: CONFIG_BOOT_CONFIG_EMBED=y and set
-the file path to CONFIG_BOOT_CONFIG_EMBED_FILE.
+Wei Xu <weixugc@google.com> writes:
 
-Note that you still need 'bootconfig' command line option to load the
-embedded bootconfig. Also if you boot using an initrd with a different
-bootconfig, the kernel will use the bootconfig in the initrd, instead
-of the default bootconfig.
+> On Tue, Apr 5, 2022 at 7:50 PM Huang, Ying <ying.huang@intel.com> wrote:
+>>
+>> Wei Xu <weixugc@google.com> writes:
+>>
+>> > On Tue, Apr 5, 2022 at 5:49 PM Huang, Ying <ying.huang@intel.com> wrote:
+>> >>
+>> >> Wei Xu <weixugc@google.com> writes:
+>> >>
+>> >> > On Sat, Apr 2, 2022 at 1:13 AM Huang, Ying <ying.huang@intel.com> wrote:
+>> >> >>
+>> >> >> Wei Xu <weixugc@google.com> writes:
+>> >> >>
+>> >> >> > On Fri, Apr 1, 2022 at 6:54 AM Michal Hocko <mhocko@suse.com> wrote:
+>> >> >> >>
+>> >> >> >> On Thu 31-03-22 08:41:51, Yosry Ahmed wrote:
+>> >> >> >> > From: Shakeel Butt <shakeelb@google.com>
+>> >> >> >> >
+>> >> >>
+>> >> >> [snip]
+>> >> >>
+>> >> >> >> > Possible Extensions:
+>> >> >> >> > --------------------
+>> >> >> >> >
+>> >> >> >> > - This interface can be extended with an additional parameter or flags
+>> >> >> >> >   to allow specifying one or more types of memory to reclaim from (e.g.
+>> >> >> >> >   file, anon, ..).
+>> >> >> >> >
+>> >> >> >> > - The interface can also be extended with a node mask to reclaim from
+>> >> >> >> >   specific nodes. This has use cases for reclaim-based demotion in memory
+>> >> >> >> >   tiering systens.
+>> >> >> >> >
+>> >> >> >> > - A similar per-node interface can also be added to support proactive
+>> >> >> >> >   reclaim and reclaim-based demotion in systems without memcg.
+>> >> >> >> >
+>> >> >> >> > For now, let's keep things simple by adding the basic functionality.
+>> >> >> >>
+>> >> >> >> Yes, I am for the simplicity and this really looks like a bare minumum
+>> >> >> >> interface. But it is not really clear who do you want to add flags on
+>> >> >> >> top of it?
+>> >> >> >>
+>> >> >> >> I am not really sure we really need a node aware interface for memcg.
+>> >> >> >> The global reclaim interface will likely need a different node because
+>> >> >> >> we do not want to make this CONFIG_MEMCG constrained.
+>> >> >> >
+>> >> >> > A nodemask argument for memory.reclaim can be useful for memory
+>> >> >> > tiering between NUMA nodes with different performance.  Similar to
+>> >> >> > proactive reclaim, it can allow a userspace daemon to drive
+>> >> >> > memcg-based proactive demotion via the reclaim-based demotion
+>> >> >> > mechanism in the kernel.
+>> >> >>
+>> >> >> I am not sure whether nodemask is a good way for demoting pages between
+>> >> >> different types of memory.  For example, for a system with DRAM and
+>> >> >> PMEM, if specifying DRAM node in nodemask means demoting to PMEM, what
+>> >> >> is the meaning of specifying PMEM node? reclaiming to disk?
+>> >> >>
+>> >> >> In general, I have no objection to the idea in general.  But we should
+>> >> >> have a clear and consistent interface.  Per my understanding the default
+>> >> >> memcg interface is for memory, regardless of memory types.  The memory
+>> >> >> reclaiming means reduce the memory usage, regardless of memory types.
+>> >> >> We need to either extending the semantics of memory reclaiming (to
+>> >> >> include memory demoting too), or add another interface for memory
+>> >> >> demoting.
+>> >> >
+>> >> > Good point.  With the "demote pages during reclaim" patch series,
+>> >> > reclaim is already extended to demote pages as well.  For example,
+>> >> > can_reclaim_anon_pages() returns true if demotion is allowed and
+>> >> > shrink_page_list() can demote pages instead of reclaiming pages.
+>> >>
+>> >> These are in-kernel implementation, not the ABI.  So we still have
+>> >> the opportunity to define the ABI now.
+>> >>
+>> >> > Currently, demotion is disabled for memcg reclaim, which I think can
+>> >> > be relaxed and also necessary for memcg-based proactive demotion.  I'd
+>> >> > like to suggest that we extend the semantics of memory.reclaim to
+>> >> > cover memory demotion as well.  A flag can be used to enable/disable
+>> >> > the demotion behavior.
+>> >>
+>> >> If so,
+>> >>
+>> >> # echo A > memory.reclaim
+>> >>
+>> >> means
+>> >>
+>> >> a) "A" bytes memory are freed from the memcg, regardless demoting is
+>> >>    used or not.
+>> >>
+>> >> or
+>> >>
+>> >> b) "A" bytes memory are reclaimed from the memcg, some of them may be
+>> >>    freed, some of them may be just demoted from DRAM to PMEM.  The total
+>> >>    number is "A".
+>> >>
+>> >> For me, a) looks more reasonable.
+>> >>
+>> >
+>> > We can use a DEMOTE flag to control the demotion behavior for
+>> > memory.reclaim.  If the flag is not set (the default), then
+>> > no_demotion of scan_control can be set to 1, similar to
+>> > reclaim_pages().
+>>
+>> If we have to use a flag to control the behavior, I think it's better to
+>> have a separate interface (e.g. memory.demote).  But do we really need b)?
+>>
+>
+> I am fine with either approach: a separate interface similar to
+> memory.reclaim, but dedicated to demotion, or multiplexing
+> memory.reclaim for demotion with a flag.
+>
+> My understanding is that with the "demote pages during reclaim"
+> support, b) is the expected behavior, or more precisely, pages that
+> cannot be demoted may be freed or swapped out.  This is reasonable.
+> Demotion-only can also be supported via some arguments to the
+> interface and changes to demotion code in the kernel.  After all, this
+> interface is being designed to be extensible based on the discussions
+> so far.
 
-Signed-off-by: Masami Hiramatsu <mhiramat@kernel.org>
----
- Changes in v8:
-  - Fix a build error in CONFIG_BLK_DEV_INITRD=n case.
- Changes in v7:
-  - Change kconfig option name to share the common prefix so that
-    we can search it easier.
-  - Make embedded_bootconfig_data readonly.
-  - Select CONFIG_BLK_DEV_INITRD only if CONFIG_BOOT_CONFIG_EMBED=n
-  - Remove redundant default settings for new Kconfig options.
- Changes in v6:
-  - Split out the .incbin asm part as bootconfig-data.S according to
-    Masahiro's comment.
- Changes in v5:
-  - Fix .gitignore to be sorted alphabetically.
-  - Make default.bconf is cleaned up correctly.
-  - Allow user to specify relative path to CONFIG_EMBED_BOOT_CONFIG_FILE.
-    (Thanks Masahiro!)
- Changes in v4:
-  - Avoid updating the default.bconf if the file is not changed.
----
- MAINTAINERS                |    1 +
- include/linux/bootconfig.h |   10 ++++++++++
- init/Kconfig               |   21 ++++++++++++++++++++-
- init/main.c                |   22 ++++++++++++----------
- lib/.gitignore             |    1 +
- lib/Makefile               |    8 ++++++++
- lib/bootconfig-data.S      |   10 ++++++++++
- lib/bootconfig.c           |   13 +++++++++++++
- 8 files changed, 75 insertions(+), 11 deletions(-)
- create mode 100644 lib/bootconfig-data.S
+I think we should define the interface not from the current
+implementation point of view, but from the requirement point of view.
+For proactive reclaim, per my understanding, the requirement is,
 
-diff --git a/MAINTAINERS b/MAINTAINERS
-index c10fbd13080a..88c9d62acd90 100644
---- a/MAINTAINERS
-+++ b/MAINTAINERS
-@@ -7318,6 +7318,7 @@ S:	Maintained
- F:	Documentation/admin-guide/bootconfig.rst
- F:	fs/proc/bootconfig.c
- F:	include/linux/bootconfig.h
-+F:	lib/bootconfig-data.S
- F:	lib/bootconfig.c
- F:	tools/bootconfig/*
- F:	tools/bootconfig/scripts/*
-diff --git a/include/linux/bootconfig.h b/include/linux/bootconfig.h
-index a4665c7ab07c..1611f9db878e 100644
---- a/include/linux/bootconfig.h
-+++ b/include/linux/bootconfig.h
-@@ -289,4 +289,14 @@ int __init xbc_get_info(int *node_size, size_t *data_size);
- /* XBC cleanup data structures */
- void __init xbc_exit(void);
- 
-+/* XBC embedded bootconfig data in kernel */
-+#ifdef CONFIG_BOOT_CONFIG_EMBED
-+const char * __init xbc_get_embedded_bootconfig(size_t *size);
-+#else
-+static inline const char *xbc_get_embedded_bootconfig(size_t *size)
-+{
-+	return NULL;
-+}
-+#endif
-+
- #endif
-diff --git a/init/Kconfig b/init/Kconfig
-index beb5b866c318..e7c75fb7d244 100644
---- a/init/Kconfig
-+++ b/init/Kconfig
-@@ -1347,7 +1347,7 @@ endif
- 
- config BOOT_CONFIG
- 	bool "Boot config support"
--	select BLK_DEV_INITRD
-+	select BLK_DEV_INITRD if !BOOT_CONFIG_EMBED
- 	help
- 	  Extra boot config allows system admin to pass a config file as
- 	  complemental extension of kernel cmdline when booting.
-@@ -1357,6 +1357,25 @@ config BOOT_CONFIG
- 
- 	  If unsure, say Y.
- 
-+config BOOT_CONFIG_EMBED
-+	bool "Embed bootconfig file in the kernel"
-+	depends on BOOT_CONFIG
-+	help
-+	  Embed a bootconfig file given by BOOT_CONFIG_EMBED_FILE in the
-+	  kernel. Usually, the bootconfig file is loaded with the initrd
-+	  image. But if the system doesn't support initrd, this option will
-+	  help you by embedding a bootconfig file while building the kernel.
-+
-+	  If unsure, say N.
-+
-+config BOOT_CONFIG_EMBED_FILE
-+	string "Embedded bootconfig file path"
-+	depends on BOOT_CONFIG_EMBED
-+	help
-+	  Specify a bootconfig file which will be embedded to the kernel.
-+	  This bootconfig will be used if there is no initrd or no other
-+	  bootconfig in the initrd.
-+
- choice
- 	prompt "Compiler optimization level"
- 	default CC_OPTIMIZE_FOR_PERFORMANCE
-diff --git a/init/main.c b/init/main.c
-index 4f3ba3b84e34..d00c6f77d0e0 100644
---- a/init/main.c
-+++ b/init/main.c
-@@ -265,7 +265,7 @@ static int __init loglevel(char *str)
- early_param("loglevel", loglevel);
- 
- #ifdef CONFIG_BLK_DEV_INITRD
--static void * __init get_boot_config_from_initrd(u32 *_size)
-+static void * __init get_boot_config_from_initrd(size_t *_size)
- {
- 	u32 size, csum;
- 	char *data;
-@@ -312,7 +312,7 @@ static void * __init get_boot_config_from_initrd(u32 *_size)
- 	return data;
- }
- #else
--static void * __init get_boot_config_from_initrd(u32 *_size)
-+static void * __init get_boot_config_from_initrd(size_t *_size)
- {
- 	return NULL;
- }
-@@ -409,14 +409,16 @@ static int __init warn_bootconfig(char *str)
- static void __init setup_boot_config(void)
- {
- 	static char tmp_cmdline[COMMAND_LINE_SIZE] __initdata;
--	const char *msg;
--	int pos;
--	u32 size;
--	char *data, *err;
--	int ret;
-+	const char *msg, *data;
-+	int pos, ret;
-+	size_t size;
-+	char *err;
- 
- 	/* Cut out the bootconfig data even if we have no bootconfig option */
- 	data = get_boot_config_from_initrd(&size);
-+	/* If there is no bootconfig in initrd, try embedded one. */
-+	if (!data)
-+		data = xbc_get_embedded_bootconfig(&size);
- 
- 	strlcpy(tmp_cmdline, boot_command_line, COMMAND_LINE_SIZE);
- 	err = parse_args("bootconfig", tmp_cmdline, NULL, 0, 0, 0, NULL,
-@@ -435,8 +437,8 @@ static void __init setup_boot_config(void)
- 	}
- 
- 	if (size >= XBC_DATA_MAX) {
--		pr_err("bootconfig size %d greater than max size %d\n",
--			size, XBC_DATA_MAX);
-+		pr_err("bootconfig size %ld greater than max size %d\n",
-+			(long)size, XBC_DATA_MAX);
- 		return;
- 	}
- 
-@@ -449,7 +451,7 @@ static void __init setup_boot_config(void)
- 				msg, pos);
- 	} else {
- 		xbc_get_info(&ret, NULL);
--		pr_info("Load bootconfig: %d bytes %d nodes\n", size, ret);
-+		pr_info("Load bootconfig: %ld bytes %d nodes\n", (long)size, ret);
- 		/* keys starting with "kernel." are passed via cmdline */
- 		extra_command_line = xbc_make_cmdline("kernel");
- 		/* Also, "init." keys are init arguments */
-diff --git a/lib/.gitignore b/lib/.gitignore
-index e5e217b8307b..54596b634ecb 100644
---- a/lib/.gitignore
-+++ b/lib/.gitignore
-@@ -1,6 +1,7 @@
- # SPDX-License-Identifier: GPL-2.0-only
- /crc32table.h
- /crc64table.h
-+/default.bconf
- /gen_crc32table
- /gen_crc64table
- /oid_registry_data.c
-diff --git a/lib/Makefile b/lib/Makefile
-index 4fc48543dc8f..62a103aaabd4 100644
---- a/lib/Makefile
-+++ b/lib/Makefile
-@@ -277,6 +277,14 @@ $(foreach file, $(libfdt_files), \
- lib-$(CONFIG_LIBFDT) += $(libfdt_files)
- 
- obj-$(CONFIG_BOOT_CONFIG) += bootconfig.o
-+obj-$(CONFIG_BOOT_CONFIG_EMBED) += bootconfig-data.o
-+
-+$(obj)/bootconfig-data.o: $(obj)/default.bconf
-+
-+targets += default.bconf
-+filechk_defbconf = cat $(or $(real-prereqs), /dev/null)
-+$(obj)/default.bconf: $(CONFIG_BOOT_CONFIG_EMBED_FILE) FORCE
-+	$(call filechk,defbconf)
- 
- obj-$(CONFIG_RBTREE_TEST) += rbtree_test.o
- obj-$(CONFIG_INTERVAL_TREE_TEST) += interval_tree_test.o
-diff --git a/lib/bootconfig-data.S b/lib/bootconfig-data.S
-new file mode 100644
-index 000000000000..ef85ba1a82f4
---- /dev/null
-+++ b/lib/bootconfig-data.S
-@@ -0,0 +1,10 @@
-+/* SPDX-License-Identifier: GPL-2.0 */
-+/*
-+ * Embed default bootconfig in the kernel.
-+ */
-+	.section .init.rodata, "aw"
-+	.global embedded_bootconfig_data
-+embedded_bootconfig_data:
-+	.incbin "lib/default.bconf"
-+	.global embedded_bootconfig_data_end
-+embedded_bootconfig_data_end:
-diff --git a/lib/bootconfig.c b/lib/bootconfig.c
-index 74f3201ab8e5..c59d26068a64 100644
---- a/lib/bootconfig.c
-+++ b/lib/bootconfig.c
-@@ -12,6 +12,19 @@
- #include <linux/kernel.h>
- #include <linux/memblock.h>
- #include <linux/string.h>
-+
-+#ifdef CONFIG_BOOT_CONFIG_EMBED
-+/* embedded_bootconfig_data is defined in bootconfig-data.S */
-+extern __visible const char embedded_bootconfig_data[];
-+extern __visible const char embedded_bootconfig_data_end[];
-+
-+const char * __init xbc_get_embedded_bootconfig(size_t *size)
-+{
-+	*size = embedded_bootconfig_data_end - embedded_bootconfig_data;
-+	return (*size) ? embedded_bootconfig_data : NULL;
-+}
-+#endif
-+
- #else /* !__KERNEL__ */
- /*
-  * NOTE: This is only for tools/bootconfig, because tools/bootconfig will
+  we found that there's some cold pages in some workloads, so we can
+  take advantage of the proactive reclaim to reclaim some pages so that
+  other workload can use the freed memory.
 
+For proactive demotion, per my understanding, the requirement could be,
+
+  We found that there's some cold pages in fast memory (e.g. DRAM) in
+  some workloads, so we can take advantage of the proactive demotion to
+  demote some pages so that other workload can use the freed fast
+  memory.  Given the DRAM partition support Tim (Cced) is working on.
+
+Why do we need something in the middle?
+
+Best Regards,
+Huang, Ying
+
+>> > The question is then whether we want to rename memory.reclaim to
+>> > something more general.  I think this name is fine if reclaim-based
+>> > demotion is an accepted concept.
+>>
+>> Best Regards,
+>> Huang, Ying
