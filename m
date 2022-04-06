@@ -2,219 +2,141 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 4193A4F649D
-	for <lists+linux-doc@lfdr.de>; Wed,  6 Apr 2022 18:08:33 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id DF0C34F656C
+	for <lists+linux-doc@lfdr.de>; Wed,  6 Apr 2022 18:43:05 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S237155AbiDFQIx (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 6 Apr 2022 12:08:53 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:57092 "EHLO
+        id S237869AbiDFQgU (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 6 Apr 2022 12:36:20 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:41498 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S237972AbiDFQIU (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Wed, 6 Apr 2022 12:08:20 -0400
-Received: from mail-pj1-x102e.google.com (mail-pj1-x102e.google.com [IPv6:2607:f8b0:4864:20::102e])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 5E3352E1970
-        for <linux-doc@vger.kernel.org>; Tue,  5 Apr 2022 21:24:24 -0700 (PDT)
-Received: by mail-pj1-x102e.google.com with SMTP id i10-20020a17090a2aca00b001ca56c9ab16so3212349pjg.1
-        for <linux-doc@vger.kernel.org>; Tue, 05 Apr 2022 21:24:24 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=arista.com; s=google;
-        h=from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=EeYSfZ5xH+IlAcJ+xTcG79IheqB96eU+egCEaXP6x+E=;
-        b=AHF1rXqXob8GH6Q42EmoIPDa3FIN/ShW5cryQ1NF5CsnI3Q4IBqEluwLsG6COLPDx0
-         Z3SWGnP4ihH7x8YNVj62yYfO/96aZU1+aPoiUYoyc1wtms/QghNZFvN1KvjESswg8R2y
-         ZQ1Bqo3CjtDWo0i3JnzVofQ3E0Ldc26N4vNQhVuTq++0u02l+131z6Vr9gQXIBGSmEeg
-         Hykj0SsCvX1UZh9VrWSUeejNNeT6m2/JJx+vx00vsGB7nmgeX0TCZVIbjdYLk7ANs7oO
-         GelNP2wxknJhqLGogdUwWbHfeTPsYaPkfdbjig+bKUNEuOXbK621hVR7CMejpJ8ViiBo
-         e3WA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=EeYSfZ5xH+IlAcJ+xTcG79IheqB96eU+egCEaXP6x+E=;
-        b=vmDSZDTC0RDjzgdj1nPXCpAFF4P31sCzhmR2f554xxgQcMh5S+li0Gfz42yKwp/GOr
-         SwbibaYbNMbHOiLCZe1cp/v8Gsxl8GVygXLMZXhJsinbMRwgv+ExdAcKDd3Q/8zu+Tuh
-         L9C2SyNpNGBy6n/8y6rZn0vyuUbajKomzHYXqpqqoTKSNh/+EvcFcA6D6rYEFo2Gvlw9
-         UUle9/zexo/fIxuVtdcsp+2O1kbbWZ+oUYi4ZHp2GeMJxmLX21AZRkWk0LqCuFkzH00i
-         9u8lt22YQ2+S+Kjuv4Lb32X6zawXtjFC7nurQpHic+oCYLbMKQp8o/CQLaeCf/xT3NCf
-         SaQA==
-X-Gm-Message-State: AOAM530fKOWvJPhsqYdc12eHEd6dliloQ79xufxe+BPHnWn1LUzZYmsd
-        rdmfaZT9kYKXmx/mdXH6bd9jBw==
-X-Google-Smtp-Source: ABdhPJxtDZ3YxYOmx1j8+U4YCNNKFsjDW1w53GcKKllZ/RrkFc1eKLttBEbYltHxtMDJirkkE7liRQ==
-X-Received: by 2002:a17:90b:4a01:b0:1c9:a552:f487 with SMTP id kk1-20020a17090b4a0100b001c9a552f487mr8001917pjb.68.1649219063598;
-        Tue, 05 Apr 2022 21:24:23 -0700 (PDT)
-Received: from localhost.localdomain ([2405:201:d008:8bfd:2c57:ced7:5f4:42e2])
-        by smtp.gmail.com with ESMTPSA id l27-20020a63701b000000b0038233e59422sm14437523pgc.84.2022.04.05.21.24.19
-        (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
-        Tue, 05 Apr 2022 21:24:22 -0700 (PDT)
-From:   Arun Ajith S <aajith@arista.com>
-To:     netdev@vger.kernel.org
-Cc:     davem@davemloft.net, linux-kernel@vger.kernel.org,
-        linux-doc@vger.kernel.org, dsahern@kernel.org,
-        yoshfuji@linux-ipv6.org, gilligan@arista.com,
-        noureddine@arista.com, aajith@arista.com
-Subject: [PATCH net-next] net/ipv6: Introduce accept_unsolicited_na knob to implement router-side changes for RFC9131
-Date:   Wed,  6 Apr 2022 09:53:39 +0530
-Message-Id: <20220406042339.10986-1-aajith@arista.com>
-X-Mailer: git-send-email 2.32.0 (Apple Git-132)
+        with ESMTP id S237855AbiDFQgK (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Wed, 6 Apr 2022 12:36:10 -0400
+Received: from NAM10-DM6-obe.outbound.protection.outlook.com (mail-dm6nam10on2082.outbound.protection.outlook.com [40.107.93.82])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 942E01CD7C5;
+        Wed,  6 Apr 2022 06:54:40 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=Zq5Wz0MIx83xXFdENNgYKfZwdhiABCP5qe8NNfdLpDihBO7Y3N+GgQKrMtdLgIAAfRAItaB8oUmFdQX/tWfs/nTN3yDAsZD1o+FY4En1whe8ZaL5qz/H64bWPyImESFLG27H9KZ3NBP434TkMhlzCcJmtivPH7iNwalLbqE8LGIHXRH9K9ZD7UyyXJgrRbrYbe0U2lWsN7bciSCCjcCieiVwJPZB5+N0qD9r0yzN76YhIAnLpx+TAkKvNiZXXIdY8n6JzRphtGWNUdn+0ZtbHG9HOxT8ONO7Oy43uPYvyouChsKobh1EqXenvKYirYG9iTRXY1dFacC2PW7wT45VXw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=51ebBRoOpjgO7xjAcjgrfC3aKeje9aSvxO/OfJrv0ew=;
+ b=jq5uVhb/8wgQeZJUc7YckYPidg3cPGQgjH4sB/N4rD4W/7j/iEvCNb1mRHUGq8A+RVJgW5g1D7l8l+mQyVfqSFvJ5vZc5WyRRz3Li73wCM2NVzUGcAwDeFenSoYnJXtpoqhDBg9Xy0fkUJrTZD4SsBvk/EBjGzxwRT/GWu0NFliQLRIWzeLtwlBJ+jT1RAV6Nbh5+cEeR9ifl/pCNh9qXA4/Sg19V0SWLNBqy0OH+pqr1Qt2EH0z6/Ltyqzqu+hErTCSs1c753Q0VL27TLqMk3ct58bjGrDE+ovwR3UQwOJ3BoL1Nwx3jvsuxpkjnfJXopQEDhyfXItQkWVy5Uq4eQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 12.22.5.235) smtp.rcpttodomain=greyhouse.net smtp.mailfrom=nvidia.com;
+ dmarc=pass (p=reject sp=reject pct=100) action=none header.from=nvidia.com;
+ dkim=none (message not signed); arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
+ s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=51ebBRoOpjgO7xjAcjgrfC3aKeje9aSvxO/OfJrv0ew=;
+ b=laqQQSNVy4gW/lIohl+iT1vmat1w4A0+a3PL9hVbwgIUwH3seCzO7pHnmDopWJWvrDI8V9q4dsCtEiIYU/iM8xnebiUkswzhZ0jsvTuoLejoMoXfg/ZufcbLuACWtfaJdSImCHAHyHvfcy8gw718QI3XNTJIrSfSv6bIN9vMeq55w9KyouoolvbbLyiiKXvTMKhBVTeBGv+uODHoiGXN+vbMoW+jFxNC6V8MGXPZjMbyRfezj9Tit/Hoas5Ttua2JC9X5XowqkQTAUdNBxfGBlcHfsd3LqJVPmoVa0Aia+bhVDSQUGgHelWX1Z+WUAAw22PkPxqAymp5c6vvqHl42w==
+Received: from BN1PR13CA0018.namprd13.prod.outlook.com (2603:10b6:408:e2::23)
+ by CY4PR1201MB0152.namprd12.prod.outlook.com (2603:10b6:910:1b::8) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5123.31; Wed, 6 Apr
+ 2022 13:54:39 +0000
+Received: from BN8NAM11FT005.eop-nam11.prod.protection.outlook.com
+ (2603:10b6:408:e2:cafe::4d) by BN1PR13CA0018.outlook.office365.com
+ (2603:10b6:408:e2::23) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5144.21 via Frontend
+ Transport; Wed, 6 Apr 2022 13:54:39 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 12.22.5.235)
+ smtp.mailfrom=nvidia.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=nvidia.com;
+Received-SPF: Pass (protection.outlook.com: domain of nvidia.com designates
+ 12.22.5.235 as permitted sender) receiver=protection.outlook.com;
+ client-ip=12.22.5.235; helo=mail.nvidia.com;
+Received: from mail.nvidia.com (12.22.5.235) by
+ BN8NAM11FT005.mail.protection.outlook.com (10.13.176.69) with Microsoft SMTP
+ Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384) id
+ 15.20.5144.20 via Frontend Transport; Wed, 6 Apr 2022 13:54:38 +0000
+Received: from rnnvmail205.nvidia.com (10.129.68.10) by DRHQMAIL107.nvidia.com
+ (10.27.9.16) with Microsoft SMTP Server (TLS) id 15.0.1497.32; Wed, 6 Apr
+ 2022 13:54:38 +0000
+Received: from rnnvmail201.nvidia.com (10.129.68.8) by rnnvmail205.nvidia.com
+ (10.129.68.10) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.986.22; Wed, 6 Apr 2022
+ 06:54:37 -0700
+Received: from vdi.nvidia.com (10.127.8.9) by mail.nvidia.com (10.129.68.8)
+ with Microsoft SMTP Server id 15.2.986.22 via Frontend Transport; Wed, 6 Apr
+ 2022 06:54:34 -0700
+From:   Gal Pressman <gal@nvidia.com>
+To:     "David S. Miller" <davem@davemloft.net>,
+        Jakub Kicinski <kuba@kernel.org>,
+        Paolo Abeni <pabeni@redhat.com>,
+        Jonathan Corbet <corbet@lwn.net>,
+        "Jay Vosburgh" <j.vosburgh@gmail.com>,
+        Veaceslav Falico <vfalico@gmail.com>,
+        "Andy Gospodarek" <andy@greyhouse.net>
+CC:     <netdev@vger.kernel.org>, <linux-kernel@vger.kernel.org>,
+        <linux-doc@vger.kernel.org>, Gal Pressman <gal@nvidia.com>
+Subject: [PATCH] bonding: Update layer2 and layer2+3 hash formula documentation
+Date:   Wed, 6 Apr 2022 16:54:20 +0300
+Message-ID: <20220406135420.21682-1-gal@nvidia.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Spam-Status: No, score=-2.1 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_NONE,
-        SPF_HELO_NONE,SPF_NONE,T_SCC_BODY_TEXT_LINE autolearn=ham
-        autolearn_force=no version=3.4.6
+Content-Type: text/plain
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-Office365-Filtering-Correlation-Id: 95988924-912f-46fc-2b5d-08da17d4fe18
+X-MS-TrafficTypeDiagnostic: CY4PR1201MB0152:EE_
+X-Microsoft-Antispam-PRVS: <CY4PR1201MB0152E46F7566A6B0428EF53FC2E79@CY4PR1201MB0152.namprd12.prod.outlook.com>
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: y55mxTUSfTqzs2KNZiRTgqHhN52BjWfUm6ABxcGPOwDqq3THqqypnhJA0JFLXAOtA55J1pMj6Xrh1TVjwivBPcVBKpoH1rOtLuHs9lH4qiWArBIf2aOknVk3yyYPDf8lh47VwZyanxZZHjz/nuiZpTw7znB3geJCWPzMyI69F6xjKJlxVEsduOshxKWym4D2DCQ5G7JLjPG2qt/mKrBHzj+HNMOdE7w9E519i1sVWLKH15wbYWK49c7C5P1M9Dp9gEJEJ0ELLxC+ivsvPD96ElayTCNCl8ABvyX28Z75jZzvxQ2OqwkaMHqG3lrclo42h384WDzRlOc9qRiyd264R9oItAzVf/sLwMnGOVjAT1JNTsuRJzo7c8nS7X147GDtUlxoYKGJa8wSK1wIC05Wc9RVQyk8ZYgOaTqbqVP9XexUxObwEDHE73HrlBs7f6Sh0cHQJNt4uL7zW6Mgo5d/YNcPkA8fDFtQTRdDxgirSuU1FTrapWf3uTncQeh/J8Adp7ZCDN7008Kzo7Plu/aPFOe5E2FN2z3xyKFubfEPooJZxQUWh6cyDJ9lSgH5tGDQLMzGKHbPSKYtchcfGvqQzpmRoVGX3lvR1/8UM5nrV+QBO/HjyWFxi7YXi1fplE4oy6lpKRzAtOTWHVVc8Z1pbLLHLdLNDPX0wGZEOdI/MEu38lcyhLvs43wgqG7R4LTokGP37EsE7wWkQuNAHAB7tQ==
+X-Forefront-Antispam-Report: CIP:12.22.5.235;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:mail.nvidia.com;PTR:InfoNoRecords;CAT:NONE;SFS:(13230001)(4636009)(40470700004)(36840700001)(46966006)(2906002)(316002)(7696005)(356005)(6666004)(110136005)(36756003)(36860700001)(47076005)(4326008)(70586007)(8676002)(70206006)(83380400001)(5660300002)(40460700003)(7416002)(82310400005)(54906003)(107886003)(1076003)(2616005)(186003)(508600001)(336012)(26005)(81166007)(8936002)(86362001)(426003)(36900700001);DIR:OUT;SFP:1101;
+X-OriginatorOrg: Nvidia.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 06 Apr 2022 13:54:38.7974
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 95988924-912f-46fc-2b5d-08da17d4fe18
+X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=43083d15-7273-40c1-b7db-39efd9ccc17a;Ip=[12.22.5.235];Helo=[mail.nvidia.com]
+X-MS-Exchange-CrossTenant-AuthSource: BN8NAM11FT005.eop-nam11.prod.protection.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: CY4PR1201MB0152
+X-Spam-Status: No, score=-1.1 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FORGED_SPF_HELO,
+        RCVD_IN_MSPIKE_H2,SPF_HELO_PASS,SPF_NONE,T_SCC_BODY_TEXT_LINE
+        autolearn=no autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Add a new neighbour cache entry in STALE state for routers on receiving
-an unsolicited (gratuitous) neighbour advertisement with
-source-link-layer-address option specified.
-This is similar to the arp_accept configuration for IPv4.
-A new sysctl endpoint is created to turn on this behaviour:
-/proc/sys/net/ipv6/conf/interface/accept_unsolicited_na.
+When using layer2 or layer2+3 hash, only the 5th byte of the MAC
+addresses is used.
 
-Signed-off-by: Arun Ajith S <aajith@arista.com>
-Tested-by: Arun Ajith S <aajith@arista.com>
+Signed-off-by: Gal Pressman <gal@nvidia.com>
 ---
- Documentation/networking/ip-sysctl.rst | 23 +++++++++++++++++++++++
- include/linux/ipv6.h                   |  1 +
- include/uapi/linux/ipv6.h              |  1 +
- net/ipv6/addrconf.c                    |  8 ++++++++
- net/ipv6/ndisc.c                       | 20 +++++++++++++++++++-
- 5 files changed, 52 insertions(+), 1 deletion(-)
+ Documentation/networking/bonding.rst | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/Documentation/networking/ip-sysctl.rst b/Documentation/networking/ip-sysctl.rst
-index b0024aa7b051..92e870693436 100644
---- a/Documentation/networking/ip-sysctl.rst
-+++ b/Documentation/networking/ip-sysctl.rst
-@@ -2467,6 +2467,29 @@ drop_unsolicited_na - BOOLEAN
+diff --git a/Documentation/networking/bonding.rst b/Documentation/networking/bonding.rst
+index 525e6842dd33..43be3782e5df 100644
+--- a/Documentation/networking/bonding.rst
++++ b/Documentation/networking/bonding.rst
+@@ -894,7 +894,7 @@ xmit_hash_policy
+ 		Uses XOR of hardware MAC addresses and packet type ID
+ 		field to generate the hash. The formula is
  
- 	By default this is turned off.
+-		hash = source MAC XOR destination MAC XOR packet type ID
++		hash = source MAC[5] XOR destination MAC[5] XOR packet type ID
+ 		slave number = hash modulo slave count
  
-+accept_unsolicited_na - BOOLEAN
-+	Add a new neighbour cache entry in STALE state for routers on receiving an
-+	unsolicited neighbour advertisement with source-link-layer address option
-+	specified. This is as per router-side behavior documented in RFC9131.
-+	This has lower precedence than drop_unsolicited_na.
-+	 drop   accept  fwding                   behaviour
-+	 ----   ------  ------  ----------------------------------------------
-+	    1        X       X  Drop NA packet and don't pass up the stack
-+	    0        0       X  Pass NA packet up the stack, don't update NC
-+	    0        1       0  Pass NA packet up the stack, don't update NC
-+	    0        1       1  Pass NA packet up the stack, and add a STALE
-+	                          NC entry
-+	This will optimize the return path for the initial off-link communication
-+	that is initiated by a directly connected host, by ensuring that
-+	the first-hop router which turns on this setting doesn't have to
-+	buffer the initial return packets to do neighbour-solicitation.
-+	The prerequisite is that the host is configured to send
-+	unsolicited neighbour advertisements on interface bringup.
-+	This setting should be used in conjunction with the ndisc_notify setting
-+	on the host to satisfy this prerequisite.
-+
-+	By default this is turned off.
-+
- enhanced_dad - BOOLEAN
- 	Include a nonce option in the IPv6 neighbor solicitation messages used for
- 	duplicate address detection per RFC7527. A received DAD NS will only signal
-diff --git a/include/linux/ipv6.h b/include/linux/ipv6.h
-index 16870f86c74d..918bfea4ef5f 100644
---- a/include/linux/ipv6.h
-+++ b/include/linux/ipv6.h
-@@ -61,6 +61,7 @@ struct ipv6_devconf {
- 	__s32		suppress_frag_ndisc;
- 	__s32		accept_ra_mtu;
- 	__s32		drop_unsolicited_na;
-+	__s32		accept_unsolicited_na;
- 	struct ipv6_stable_secret {
- 		bool initialized;
- 		struct in6_addr secret;
-diff --git a/include/uapi/linux/ipv6.h b/include/uapi/linux/ipv6.h
-index d4178dace0bf..549ddeaf788b 100644
---- a/include/uapi/linux/ipv6.h
-+++ b/include/uapi/linux/ipv6.h
-@@ -194,6 +194,7 @@ enum {
- 	DEVCONF_IOAM6_ID,
- 	DEVCONF_IOAM6_ID_WIDE,
- 	DEVCONF_NDISC_EVICT_NOCARRIER,
-+	DEVCONF_ACCEPT_UNSOLICITED_NA,
- 	DEVCONF_MAX
- };
+ 		This algorithm will place all traffic to a particular
+@@ -910,7 +910,7 @@ xmit_hash_policy
+ 		Uses XOR of hardware MAC addresses and IP addresses to
+ 		generate the hash.  The formula is
  
-diff --git a/net/ipv6/addrconf.c b/net/ipv6/addrconf.c
-index b22504176588..e8a50f2c08d7 100644
---- a/net/ipv6/addrconf.c
-+++ b/net/ipv6/addrconf.c
-@@ -5569,6 +5569,7 @@ static inline void ipv6_store_devconf(struct ipv6_devconf *cnf,
- 	array[DEVCONF_IOAM6_ID] = cnf->ioam6_id;
- 	array[DEVCONF_IOAM6_ID_WIDE] = cnf->ioam6_id_wide;
- 	array[DEVCONF_NDISC_EVICT_NOCARRIER] = cnf->ndisc_evict_nocarrier;
-+	array[DEVCONF_ACCEPT_UNSOLICITED_NA] = cnf->accept_unsolicited_na;
- }
- 
- static inline size_t inet6_ifla6_size(void)
-@@ -7019,6 +7020,13 @@ static const struct ctl_table addrconf_sysctl[] = {
- 		.extra1		= (void *)SYSCTL_ZERO,
- 		.extra2		= (void *)SYSCTL_ONE,
- 	},
-+	{
-+		.procname	= "accept_unsolicited_na",
-+		.data		= &ipv6_devconf.accept_unsolicited_na,
-+		.maxlen		= sizeof(int),
-+		.mode		= 0644,
-+		.proc_handler	= proc_dointvec,
-+	},
- 	{
- 		/* sentinel */
- 	}
-diff --git a/net/ipv6/ndisc.c b/net/ipv6/ndisc.c
-index fcb288b0ae13..254addad0dd3 100644
---- a/net/ipv6/ndisc.c
-+++ b/net/ipv6/ndisc.c
-@@ -979,6 +979,7 @@ static void ndisc_recv_na(struct sk_buff *skb)
- 	struct inet6_dev *idev = __in6_dev_get(dev);
- 	struct inet6_ifaddr *ifp;
- 	struct neighbour *neigh;
-+	bool create_neigh;
- 
- 	if (skb->len < sizeof(struct nd_msg)) {
- 		ND_PRINTK(2, warn, "NA: packet too short\n");
-@@ -999,6 +1000,7 @@ static void ndisc_recv_na(struct sk_buff *skb)
- 	/* For some 802.11 wireless deployments (and possibly other networks),
- 	 * there will be a NA proxy and unsolicitd packets are attacks
- 	 * and thus should not be accepted.
-+	 * drop_unsolicited_na takes precedence over accept_unsolicited_na
- 	 */
- 	if (!msg->icmph.icmp6_solicited && idev &&
- 	    idev->cnf.drop_unsolicited_na)
-@@ -1039,7 +1041,23 @@ static void ndisc_recv_na(struct sk_buff *skb)
- 		in6_ifa_put(ifp);
- 		return;
- 	}
--	neigh = neigh_lookup(&nd_tbl, &msg->target, dev);
-+	/* RFC 9131 updates original Neighbour Discovery RFC 4861.
-+	 * An unsolicited NA can now create a neighbour cache entry
-+	 * on routers if it has Target LL Address option.
-+	 *
-+	 * drop   accept  fwding                   behaviour
-+	 * ----   ------  ------  ----------------------------------------------
-+	 *    1        X       X  Drop NA packet and don't pass up the stack
-+	 *    0        0       X  Pass NA packet up the stack, don't update NC
-+	 *    0        1       0  Pass NA packet up the stack, don't update NC
-+	 *    0        1       1  Pass NA packet up the stack, and add a STALE
-+	 *                          NC entry
-+	 * Note that we don't do a (daddr == all-routers-mcast) check.
-+	 */
-+	create_neigh = !msg->icmph.icmp6_solicited && lladdr &&
-+		       idev && idev->cnf.forwarding &&
-+		       idev->cnf.accept_unsolicited_na;
-+	neigh = __neigh_lookup(&nd_tbl, &msg->target, dev, create_neigh);
- 
- 	if (neigh) {
- 		u8 old_flags = neigh->flags;
+-		hash = source MAC XOR destination MAC XOR packet type ID
++		hash = source MAC[5] XOR destination MAC[5] XOR packet type ID
+ 		hash = hash XOR source IP XOR destination IP
+ 		hash = hash XOR (hash RSHIFT 16)
+ 		hash = hash XOR (hash RSHIFT 8)
 -- 
-2.32.0 (Apple Git-132)
+2.25.1
 
