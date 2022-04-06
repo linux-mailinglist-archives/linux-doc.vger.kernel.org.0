@@ -2,286 +2,130 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id E345D4F5FB0
-	for <lists+linux-doc@lfdr.de>; Wed,  6 Apr 2022 15:30:06 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 837524F5E42
+	for <lists+linux-doc@lfdr.de>; Wed,  6 Apr 2022 14:46:43 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S232724AbiDFNO5 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 6 Apr 2022 09:14:57 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:45912 "EHLO
+        id S233007AbiDFM0E (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 6 Apr 2022 08:26:04 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:56480 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S233019AbiDFNNz (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Wed, 6 Apr 2022 09:13:55 -0400
-Received: from mail-oa1-x36.google.com (mail-oa1-x36.google.com [IPv6:2001:4860:4864:20::36])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id BA8BFD4C82
-        for <linux-doc@vger.kernel.org>; Tue,  5 Apr 2022 20:48:37 -0700 (PDT)
-Received: by mail-oa1-x36.google.com with SMTP id 586e51a60fabf-de3ca1efbaso1627480fac.9
-        for <linux-doc@vger.kernel.org>; Tue, 05 Apr 2022 20:48:37 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=google.com; s=20210112;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc;
-        bh=MFmTgxf9WBcNk7Ma/JrKZuUBcy9vPCSbw8pZ9uClHTw=;
-        b=YypRbhtO8BcBmRggboLh9kUJpIeTfFXGKoZsD0ZnoejSfdmmzYTQpP/JfEecm8Y500
-         iJPawkPorpBAekDKLBjzjXCYRoNb8eJH5KnsRc6fKXdcf1TxA/m+CzW/SD1eE6tkqpOM
-         1JRh0QR/OrOvj0toPdgpiEGpVp15+yWg07ogk1JYPsFggabu2oCVws2py+0UrpX23EHP
-         yptHVd51tf46p3eE1TKalnflMbpXBkQ5gNFy8kBVpmM49WAhoFM+zWRnklugDEXdkbbV
-         YJp7r2LY3UX7IqqDvI5gE5Zhqm7VN3wb2VqRTBRvAgMAomXyjzvG3O+2Xl+CtIjVHcTf
-         WLzg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc;
-        bh=MFmTgxf9WBcNk7Ma/JrKZuUBcy9vPCSbw8pZ9uClHTw=;
-        b=YpNrHLwii+7RT1N+89Zs8dWRdj4sZ+mCNTP0OqktOIbMWKPwS4pF2yKAkaukhb4Jqs
-         pKfTt3WPORFJ3yj3c+G/DlBiokq1/5LeotwKkLvF6XrgOZsM2Scr8hpivlufLaKZY1UR
-         yb0qz5mMRJU8mtlLsRwXgJ2bBEgjBzXRf5r6MNhU9Pp30FtPdc3n9mXuFFHlxlojqCZV
-         IEzEUpXk4yLSNE5zIhXzpf5E/nBpZn8F+9/a/5KppB3dV2pEIHJiFIK4INx15CiJPkJS
-         HVqL9uiuXDrvDh0TAeC5sBiqB14EYqzi3c9648DAXYFAfVAtLCjN0Kj3Buu7tHb5FhDQ
-         +SQA==
-X-Gm-Message-State: AOAM532KVgpKHSWqlvFp0MQRAx2TE7JCOc1lQ4HvCy4ESc6tL+2Wgth1
-        oxhpGN8goCigbo/D234LTv7Lob0bG6LoHgD4WNfEvQ==
-X-Google-Smtp-Source: ABdhPJyxAr5hj9JV2vfWacQoXf6sk62oN5mHLsY6YCWNGSyPaLtPyyxS5o+87kuYsiIBa5Fm1g/g/5aaLq72FwNzkuo=
-X-Received: by 2002:a05:6870:95a4:b0:d7:18b5:f927 with SMTP id
- k36-20020a05687095a400b000d718b5f927mr2948940oao.45.1649216916747; Tue, 05
- Apr 2022 20:48:36 -0700 (PDT)
+        with ESMTP id S233019AbiDFMZn (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Wed, 6 Apr 2022 08:25:43 -0400
+Received: from esa6.hgst.iphmx.com (esa6.hgst.iphmx.com [216.71.154.45])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 8BA361D08F7
+        for <linux-doc@vger.kernel.org>; Wed,  6 Apr 2022 01:10:18 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+  d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
+  t=1649232619; x=1680768619;
+  h=message-id:date:mime-version:subject:to:cc:references:
+   from:in-reply-to:content-transfer-encoding;
+  bh=W+sQyQXwqNPtg3DW2PfzXKmUropifws/e8bOcPZZ7OU=;
+  b=Ikh9/WBRVWkxL0SZ32Q8cpYE7/amOzDB3g/u/wUsnSH/IoVlxNF115og
+   GrJOSfHKLHuqui4Kj85nPBJlXXUvdtk6k8KxJ1HetBx9oRZe89oXdgk+H
+   BgWir0zL84go5t1BvwuqeaA8dQ70X5Ywg4Ied8U325b1BPJBKmVIA4Iym
+   EcVceVNO8ABwmAFSz3ZDyG2Ob852lRfl5OoT+BFZRvyiBZR14EbYGDfF+
+   nnz7u4KvRExKw6Du76LTf5PQUvCCLrnY39NRuty4uVw2gcHrKHOSpzxAz
+   0gLErK9oSF35+eeJf/IaC++nGTqKeybXCabFxtbyHhSQ1Xli2ohsYDDSh
+   g==;
+X-IronPort-AV: E=Sophos;i="5.90,239,1643644800"; 
+   d="scan'208";a="198116342"
+Received: from h199-255-45-15.hgst.com (HELO uls-op-cesaep02.wdc.com) ([199.255.45.15])
+  by ob1.hgst.iphmx.com with ESMTP; 06 Apr 2022 16:10:18 +0800
+IronPort-SDR: kGIYD3rI6UjUIM8gwh/485Sf2TPIUw2IELNLRSqZ6trRMsD+WTTNyXPbS0QOyUi6QmQgN8ui8V
+ RgaU3qQKmAkDufXf1FYT4heg/2cXpVgFvEtTGpSRkTkwnilLnqkJYudkOuwzfIyLSLGA5LpK5P
+ q6+QKjrI34DekNTpWgX+Qx4GY410EqwkdWx60WS5GTfeAkXEC+Fut9gzU5muSx3/r71/KwL9BO
+ UgZwBdnNMpPjoJaRkjtjy+MrVjUfAuBDD64dcUApPotoXD3z9aqp24C7YgqAaX1hqEApF4xam3
+ 5XSIDjmlu/sGx0grnOlQNRnj
+Received: from uls-op-cesaip02.wdc.com ([10.248.3.37])
+  by uls-op-cesaep02.wdc.com with ESMTP/TLS/ECDHE-RSA-AES128-GCM-SHA256; 06 Apr 2022 00:40:59 -0700
+IronPort-SDR: 3yl+LXyu5gtyhlbzLAyr70wRKT8oiD3kMmuPlpb4eYqH+L8EPQneGDAn2TtQFtWrJtk9GKmRQY
+ lkgLIR2DFJlKDNZs6J9L2oojZyxJCTTPR5xY+JtrMen6f0hgcHmY0Atpr6Il0i+hHoLArxs97M
+ tnKx+mUm8wLgoe17lyOe+UenecFuH1Iy8KY/BY8emimHdyFSIyPJ4yDZdFtUGlOYONuAUXcstN
+ 7YvH5SE0nynWytsfENpnx7kVZjt4n59aahpWvphdWgiOmqDo88DPkVSPsk/ThTu6V9EnFW2wuM
+ YMA=
+WDCIronportException: Internal
+Received: from usg-ed-osssrv.wdc.com ([10.3.10.180])
+  by uls-op-cesaip02.wdc.com with ESMTP/TLS/ECDHE-RSA-AES128-GCM-SHA256; 06 Apr 2022 01:10:18 -0700
+Received: from usg-ed-osssrv.wdc.com (usg-ed-osssrv.wdc.com [127.0.0.1])
+        by usg-ed-osssrv.wdc.com (Postfix) with ESMTP id 4KYHHs1NgLz1SHwl
+        for <linux-doc@vger.kernel.org>; Wed,  6 Apr 2022 01:10:17 -0700 (PDT)
+Authentication-Results: usg-ed-osssrv.wdc.com (amavisd-new); dkim=pass
+        reason="pass (just generated, assumed good)"
+        header.d=opensource.wdc.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=
+        opensource.wdc.com; h=content-transfer-encoding:content-type
+        :in-reply-to:organization:from:references:to:content-language
+        :subject:user-agent:mime-version:date:message-id; s=dkim; t=
+        1649232616; x=1651824617; bh=W+sQyQXwqNPtg3DW2PfzXKmUropifws/e8b
+        OcPZZ7OU=; b=Y6xg7hgBprDMhQ9Dd9yZYi4n5vw1VkHmGMIB+1Gb/HpwKMH3Nc8
+        gmrqc9mu3pjeJ1LUydu6p2X3dmmBsJP3EoDbypQA/8EgW2uuzAZcnQXTLBie40HT
+        sZpZjRgozIo+IbnV0QDFQl4B0efwec0utMN5DpPxOY7t6+MzUGJMwgNrWPRE6gzX
+        sQts++PNkctblTnuD72tngEIhJqlOYt5lgcByWZ/T5f+Fy4SRXuAA3els6ycoCXg
+        5uW49QQMj7eArdp23KXOlIUuB9dpUlsIxPbld4lYaY6sFmcc5C0mol9wz1bfBHq1
+        XnmlhUEWsKdxBbVph8Ztd4qXHawIv/MbS5Q==
+X-Virus-Scanned: amavisd-new at usg-ed-osssrv.wdc.com
+Received: from usg-ed-osssrv.wdc.com ([127.0.0.1])
+        by usg-ed-osssrv.wdc.com (usg-ed-osssrv.wdc.com [127.0.0.1]) (amavisd-new, port 10026)
+        with ESMTP id BhwfgL0k5CN9 for <linux-doc@vger.kernel.org>;
+        Wed,  6 Apr 2022 01:10:16 -0700 (PDT)
+Received: from [10.149.53.254] (washi.fujisawa.hgst.com [10.149.53.254])
+        by usg-ed-osssrv.wdc.com (Postfix) with ESMTPSA id 4KYHHq6LY1z1Rvlx;
+        Wed,  6 Apr 2022 01:10:15 -0700 (PDT)
+Message-ID: <0c6c0c64-74f8-e15a-d79e-0866b5cc209d@opensource.wdc.com>
+Date:   Wed, 6 Apr 2022 17:10:14 +0900
 MIME-Version: 1.0
-References: <20211020120431.776494-1-hikalium@chromium.org>
- <874k9bdcrk.wl-maz@kernel.org> <CACTzKb+vVU0Ymh2Nx5B6kSydBsJ6AgrbQMF39RFvqoHpvL_riw@mail.gmail.com>
- <87zgpgqnvm.wl-maz@kernel.org>
-In-Reply-To: <87zgpgqnvm.wl-maz@kernel.org>
-From:   Hikaru Nishida <hikalium@google.com>
-Date:   Wed, 6 Apr 2022 12:48:25 +0900
-Message-ID: <CAKULNjVkBDuBn4x=S646nZoKYqSn95ToFsZT_ioVfz0-MsZhxg@mail.gmail.com>
-Subject: Re: [RFC PATCH v3 0/5] x86/kvm: Virtual suspend time injection support
-To:     Marc Zyngier <maz@kernel.org>
-Cc:     Hikaru Nishida <hikalium@chromium.org>,
-        linux-kernel@vger.kernel.org, dme@dme.org,
-        Thomas Gleixner <tglx@linutronix.de>, mlevitsk@redhat.com,
-        linux@roeck-us.net, pbonzini@redhat.com, vkuznets@redhat.com,
-        will@kernel.org, Suleiman Souhlal <suleiman@google.com>,
-        Sergey Senozhatsky <senozhatsky@google.com>,
-        kvmarm@lists.cs.columbia.edu, linux-arm-kernel@lists.infradead.org,
-        Andy Lutomirski <luto@kernel.org>,
-        Arnd Bergmann <arnd@arndb.de>, Borislav Petkov <bp@alien8.de>,
-        Dave Hansen <dave.hansen@linux.intel.com>,
-        Geert Uytterhoeven <geert@linux-m68k.org>,
-        "H. Peter Anvin" <hpa@zytor.com>, Ingo Molnar <mingo@kernel.org>,
-        Ingo Molnar <mingo@redhat.com>,
-        Jim Mattson <jmattson@google.com>,
-        Joerg Roedel <joro@8bytes.org>,
-        John Stultz <john.stultz@linaro.org>,
-        Jonathan Corbet <corbet@lwn.net>,
-        Juergen Gross <jgross@suse.com>,
-        Kees Cook <keescook@chromium.org>,
-        Lai Jiangshan <laijs@linux.alibaba.com>,
-        Linus Walleij <linus.walleij@linaro.org>,
-        Peter Zijlstra <peterz@infradead.org>,
-        Sean Christopherson <seanjc@google.com>,
-        Stephen Boyd <sboyd@kernel.org>,
-        Wanpeng Li <wanpengli@tencent.com>,
-        KVM list <kvm@vger.kernel.org>, linux-doc@vger.kernel.org,
-        x86@kernel.org, Sangwhan Moon <sxm@google.com>
-Content-Type: text/plain; charset="UTF-8"
-X-Spam-Status: No, score=-17.6 required=5.0 tests=BAYES_00,DKIMWL_WL_MED,
-        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,
-        ENV_AND_HDR_SPF_MATCH,RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,SPF_PASS,
-        T_SCC_BODY_TEXT_LINE,USER_IN_DEF_DKIM_WL,USER_IN_DEF_SPF_WL
-        autolearn=unavailable autolearn_force=no version=3.4.6
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
+ Thunderbird/91.7.0
+Subject: Re: [PATCH v2 1/2] libata: Use scsi cmnd budget token for qc tag for
+ SAS host
+Content-Language: en-US
+To:     John Garry <john.garry@huawei.com>, hch@lst.de
+Cc:     linux-kernel@vger.kernel.org, linux-ide@vger.kernel.org,
+        linux-doc@vger.kernel.org, linux-scsi@vger.kernel.org
+References: <1649083990-207133-1-git-send-email-john.garry@huawei.com>
+ <1649083990-207133-2-git-send-email-john.garry@huawei.com>
+ <a3cce73f-2e91-309d-bee0-a34a30335a18@opensource.wdc.com>
+ <ab6a13c1-90c4-63f0-c48d-c1faa0ae68fd@huawei.com>
+From:   Damien Le Moal <damien.lemoal@opensource.wdc.com>
+Organization: Western Digital Research
+In-Reply-To: <ab6a13c1-90c4-63f0-c48d-c1faa0ae68fd@huawei.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-Spam-Status: No, score=-7.3 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,NICE_REPLY_A,RCVD_IN_DNSWL_MED,
+        SPF_HELO_PASS,SPF_PASS,T_SCC_BODY_TEXT_LINE autolearn=ham
+        autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Hi Marc,
+On 4/6/22 16:12, John Garry wrote:
+> On 06/04/2022 02:39, Damien Le Moal wrote:
+>> On 4/4/22 23:53, John Garry wrote:
+>>> For attaining a qc tag for a SAS host we need to allocate a bit in
+>>> ata_port.sas_tag_allocated bitmap.
+>>>
+>>> However we already have a unique tag per device in range
+>>> [0, ATA_MAX_QUEUE) in the scsi cmnd budget token, so just use that
+>>> instead.
+>>
+>> The valid range is [0, ATA_MAX_QUEUE - 1]. Tag ATA_MAX_QUEUE is 
+>> ATA_TAG_INTERNAL which is never allocated as a valid device tag but 
+>> used directly in ata_exec_internal().
+> 
+> But that is what I have in [0, ATA_MAX_QUEUE), which is same as [0, 
+> ATA_MAX_QUEUE - 1].
 
-Thanks for the reply! (And sorry for a late reply...)
+Oh ! I missed the ")" !
+I would prefer an explicit [0, ATA_MAX_QUEUE - 1] to be clear :)
 
-On Sun, Dec 5, 2021 at 2:30 AM Marc Zyngier <maz@kernel.org> wrote:
->
-> Hi Hikaru,
->
-> Apologies for the much delayed reply.
->
-> > The problems described by Thomas in the thread was:
-> > - User space or kernel space can observe the stale timestamp before
-> > the adjustment
-> >   - Moving CLOCK_MONOTONIC forward will trigger all sorts of timeouts,
-> > watchdogs, etc...
-> > - The last attempt to make CLOCK_MONOTONIC behave like CLOCK_BOOTTIME
-> > was reverted within 3 weeks. a3ed0e4393d6 ("Revert: Unify
-> > CLOCK_MONOTONIC and CLOCK_BOOTTIME")
-> >   - CLOCK_MONOTONIC correctness (stops during the suspend) should be maintained.
-> >
-> > I agree with the points above. And, the current CLOCK_MONOTONIC
-> > behavior in the KVM guest is not aligned with the statements above.
-> > (it advances during the host's suspension.)
-> > This causes the problems described above (triggering watchdog
-> > timeouts, etc...) so my patches are going to fix this by 2 steps
-> > roughly:
-> > 1. Stopping the guest's clocks during the host's suspension
-> > 2. Adjusting CLOCK_BOOTTIME later
-> > This will make the clocks behave like the host does, not making
-> > CLOCK_MONOTONIC behave like CLOCK_BOOTTIME.
-> >
-> > First one is a bit tricky since the guest can use a timestamp counter
-> > in each CPUs (TSC in x86) and we need to adjust it without stale
-> > values are observed by the guest kernel to prevent rewinding of
-> > CLOCK_MONOTONIC (which is our top priority to make the kernel happy).
-> > To achieve this, my patch adjusts TSCs (and a kvm-clock) before the
-> > first vcpu runs of each vcpus after the resume.
-> >
-> > Second one is relatively safe: since jumping CLOCK_BOOTTIME forward
-> > can happen even before my patches when suspend/resume happens, and
-> > that will not break the monotonicity of the clocks, we can do that
-> > through IRQ.
-> >
-> > [1] shows the flow of the adjustment logic, and [2] shows how the
-> > clocks behave in the guest and the host before/after my patches.
-> > The numbers on each step in [1] corresponds to the timing shown in [2].
-> > The left side of [2] is showing the behavior of the clocks before the
-> > patches, and the right side shows after the patches. Also, upper
-> > charts show the guest clocks, and bottom charts are host clocks.
-> >
-> > Before the patches(left side), CLOCK_MONOTONIC seems to be jumped from
-> > the guest's perspective after the host's suspension. As Thomas says,
-> > large jumps of CLOCK_MONOTONIC may lead to watchdog timeouts and other
-> > bad things that we want to avoid.
-> > With the patches(right side), both clocks will be adjusted (t=4,5) as
-> > if they are stopped during the suspension. This adjustment is done by
-> > the host side and invisible to the guest since it is done before the
-> > first vcpu run after the resume. After that, CLOCK_BOOTTIME will be
-> > adjusted from the guest side, triggered by the IRQ sent from the host.
-> >
-> > [1]: https://hikalium.com/files/kvm_virt_suspend_time_seq.png
-> > [2]: https://hikalium.com/files/kvm_virt_suspend_time_clocks.png
->
-> Thanks for the very detailed explanation. You obviously have though
-> about this, and it makes sense.
->
-> My worry is that this looks to be designed for the needs of Linux on
-> x86, and does not match the reality of KVM on arm64, where there is no
-> KVM clock (there is no need for it, and I have no plan to support it),
-> and there is more than a single counter visible to the guest (at least
-> two, and up to four with NV, all with various offsets). This also
-> deals with concepts that are Linux-specific. How would it work for
-> another (arbitrary) guest operating system?
-
-Whether the architecture has a kvm-clock or not will not be a problem.
-The high-level requirements for implementing this feature are:
-- host hypervisor can adjust the offset of the virtualized hardware
-clocks (tsc and kvm-clock in x86, generic timer in aarch64)
-- host hypervisor can notify guest kernel about the host suspension
-(interrupts etc.)
-- host hypervisor can share the duration to be injected with the guest
-(by shared memory or registers etc...)
-so I believe it can be implemented on aarch64 as well.
-
-This logic is only designed for Linux since the problem we want to
-solve is linux specific.
-(CLOCK_MONOTONIC vs CLOCK_BOOTTIME)
-
->
-> Can we please take a step back and look at what we want to expose from
-> a hypervisor PoV? It seems to me that all we want is:
->
-> (1) tell the guest that time has moved forward
-> (2) tell the guest by how much time has moved forward
->
-> In a way, this isn't different from stolen time, only that it affects
-> the whole VM and not just a single CPU (and for a much longer quantum
-> of time).
->
-
-(1) and (2) in the above may be implemented out of the host kernel,
-but there is another most important step (0) is existed:
-
-(0) adjust the clocks to compensate for how much the clocks have
-incremented over a period of suspension, *before* any vcpu resume.
-
-(0) is not possible to be done from outside of the host kernel (as far
-as I tried) since there is no way to ensure that we can do the
-adjustment "before the first vcpu runs after the host's resume" in the
-userland.
-Suspending a VM from VMM before the host's suspend will not always
-work, since we can't guarantee that the VMM stopped the VM before the
-host kernel enters into suspend.
-That's why we implemented this feature with a modification in the host side.
-
-As described in the above, just telling the guest about the time has
-moved forward is not enough to solve the problem (a large jump of
-CLOCK_MONOTONIC forward after the host's suspension will happen, which
-can cause bad things like watchdog timeouts etc...).
-
-> How the event is handled by the guest (what it means for its clocks
-> and all that) is a guest problem. Why should KVM itself adjust the
-> counters? This goes against what the architecture specifies (the
-> counter is in an always-on domain that keeps counting when suspended),
-> and KVM must preserve the architectural guarantees instead of
-> deviating from them.
->
-
-The counters need to be adjusted by KVM because:
-1. We cannot adjust the guest's CLOCK_MONOTONIC from the guest side
-since it breaks its monotonicity.
-2. The counters are used by the guest userland to provide a fast
-interface to read the clocks (vdso)
-so the only way to adjust the counters without breaking their
-monotonicity is doing that adjustment outside of the guest.
-
-Let's think about this in a different way... For VM migrations, TSC
-offset can be modified since we need to adjust it.
-My patches are doing a similar thing, maybe we can say our patches are
-doing "VM migration on the timeline". In this perspective, the
-architectural restriction from the guest side is not broken since we
-can consider that the VM has been time-traveled forward.
-
-> > > Assuming you solve these, you should model the guest memory access
-> > > similarly to what we do for stolen time. As for injecting an
-> > > interrupt, why can't this be a userspace thing?
-> >
-> > Since CLOCK_BOOTTIME is calculated by adding a gap
-> > (tk->monotonic_to_boot) to CLOCK_MONOTONIC, and there are no way to
-> > change the value from the outside of the guest kernel, we should
-> > implement some mechanism in the kernel to adjust it.
-> > (Actually, I tried to add a sysfs interface to modify the gap [3], but
-> > I learned that that is not a good idea...)
->
-> It is not what I was suggesting.
->
-> My suggestion was to have a shared memory between the VMM and the
-> guest again, similar to the way we handle stolen time), let the VMM
-> expose the drift in this shared memory, and inject an interrupt from
-> userspace to signify a wake-up. All this requires is that on suspend,
-> you force the vcpus to exit. On resume, the VMM update the guest
-> visible drift, posts an interrupt, and let things rip.
->
-> This requires very minimal KVM support, and squarely places the logic
-> in the guest. Why doesn't this work?
-
-Is there a way to know the host is going to suspend from host'
-userland applications?
-If there is a way to do that, it may be possible to implement the
-feature outside of KVM but my knowledge about the Linux kernel was not
-enough to find out how to do that. I would really appreciate it if you
-could tell me how to do that.
-
->
-> Another question is maybe even more naive: on bare metal, we don't
-> need any of this. The system suspends, resumes, and recovers well
-> enough. Nobody hides anything, and yet everything works just fine.
-> That's because the kernel knows it is being suspended, and it acts
-> accordingly. It looks to me that there is some value in following the
-> same principles, even if this means that the host suspend has to
-> synchronise with the guest being suspended.
->
+> 
 > Thanks,
->
->         M.
->
-> --
-> Without deviation from the norm, progress is not possible.
+> john
 
-Thank you,
---
-Hikaru Nishida
+
+-- 
+Damien Le Moal
+Western Digital Research
