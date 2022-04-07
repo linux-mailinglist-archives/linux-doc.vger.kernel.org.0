@@ -2,141 +2,92 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id AB0954F7ECB
-	for <lists+linux-doc@lfdr.de>; Thu,  7 Apr 2022 14:14:17 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id B9AFF4F7F12
+	for <lists+linux-doc@lfdr.de>; Thu,  7 Apr 2022 14:32:10 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S240671AbiDGMQH (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 7 Apr 2022 08:16:07 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:49806 "EHLO
+        id S245191AbiDGMeH (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 7 Apr 2022 08:34:07 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:43298 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S240282AbiDGMQG (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Thu, 7 Apr 2022 08:16:06 -0400
-Received: from gandalf.ozlabs.org (mail.ozlabs.org [IPv6:2404:9400:2221:ea00::3])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 4121324BD51;
-        Thu,  7 Apr 2022 05:14:06 -0700 (PDT)
-Received: from authenticated.ozlabs.org (localhost [127.0.0.1])
-        (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-         key-exchange ECDHE (P-256) server-signature RSA-PSS (4096 bits) server-digest SHA256)
-        (No client certificate requested)
-        by mail.ozlabs.org (Postfix) with ESMTPSA id 4KZ0fW5j88z4xXx;
-        Thu,  7 Apr 2022 22:13:55 +1000 (AEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canb.auug.org.au;
-        s=201702; t=1649333641;
-        bh=MSGiGfMrsCY+cwdbzhUi4BbKmNkxN9MYKn3xiEn0Dho=;
-        h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
-        b=rNSjlqWeCTSM+gVyuKWTJLS1BrOfrrI0EGcvnfnXZkN74NktFoHqOJfIqKNja+eyZ
-         sPy1hmVF5qqGjYqaV4G3k9PbZv29p9cu2MxTTiuTZei1SL5KpSLBIuaztOrL84KXHC
-         mvTxXg50c2ZbD+qBZa/Jq3FBa70g6Yqs+Ga6zoz/+LScssPrfkZ2IR8WNDJONqhjcZ
-         e323Zu1SG4X/cUJLy77WVNxjBFE277h5TgJfnWU8Ez5ZEREj6Y8mOiBXYQs1+ShYY/
-         FCPJcXSaQkPqr/WAIIE7hwaJrPnvaQstkFIRzLH8UoGycWs8Y5sSjnHSu1R8Eq4bin
-         VqEZM92AXjCWw==
-Date:   Thu, 7 Apr 2022 22:13:54 +1000
-From:   Stephen Rothwell <sfr@canb.auug.org.au>
-To:     Yu Zhao <yuzhao@google.com>
-Cc:     Linux-MM <linux-mm@kvack.org>, Andi Kleen <ak@linux.intel.com>,
-        Andrew Morton <akpm@linux-foundation.org>,
-        Aneesh Kumar <aneesh.kumar@linux.ibm.com>,
-        Barry Song <21cnbao@gmail.com>,
-        Catalin Marinas <catalin.marinas@arm.com>,
-        Dave Hansen <dave.hansen@linux.intel.com>,
-        Hillf Danton <hdanton@sina.com>, Jens Axboe <axboe@kernel.dk>,
-        Jesse Barnes <jsbarnes@google.com>,
-        Johannes Weiner <hannes@cmpxchg.org>,
-        Jonathan Corbet <corbet@lwn.net>,
-        Linus Torvalds <torvalds@linux-foundation.org>,
-        Matthew Wilcox <willy@infradead.org>,
-        Mel Gorman <mgorman@suse.de>,
-        Michael Larabel <Michael@michaellarabel.com>,
-        Michal Hocko <mhocko@kernel.org>,
-        Mike Rapoport <rppt@kernel.org>,
-        Rik van Riel <riel@surriel.com>,
-        Vlastimil Babka <vbabka@suse.cz>,
-        Will Deacon <will@kernel.org>,
-        Ying Huang <ying.huang@intel.com>,
-        Linux ARM <linux-arm-kernel@lists.infradead.org>,
-        "open list:DOCUMENTATION" <linux-doc@vger.kernel.org>,
-        linux-kernel <linux-kernel@vger.kernel.org>,
-        Kernel Page Reclaim v2 <page-reclaim@google.com>,
-        "the arch/x86 maintainers" <x86@kernel.org>
-Subject: Re: [PATCH v10 00/14] Multi-Gen LRU Framework
-Message-ID: <20220407221354.5acc2711@canb.auug.org.au>
-In-Reply-To: <CAOUHufbaPR3H2KcYywCf0ycFWh=2Nf1PwiO4t8tO6TXB9U1MwA@mail.gmail.com>
-References: <20220407031525.2368067-1-yuzhao@google.com>
-        <CAOUHufZ8x5B-e+Wwgrh+qWryf8dAbfMWVEE0s-AfwZ-H7DouQg@mail.gmail.com>
-        <20220407183112.2cb5b627@canb.auug.org.au>
-        <CAOUHufbaPR3H2KcYywCf0ycFWh=2Nf1PwiO4t8tO6TXB9U1MwA@mail.gmail.com>
+        with ESMTP id S245178AbiDGMeF (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Thu, 7 Apr 2022 08:34:05 -0400
+Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com [185.132.182.106])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id DE591118F72;
+        Thu,  7 Apr 2022 05:32:04 -0700 (PDT)
+Received: from pps.filterd (m0241204.ppops.net [127.0.0.1])
+        by mx07-00178001.pphosted.com (8.16.1.2/8.16.1.2) with ESMTP id 237AqVOs030925;
+        Thu, 7 Apr 2022 14:31:42 +0200
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=from : to : cc :
+ subject : date : message-id : mime-version : content-transfer-encoding :
+ content-type; s=selector1;
+ bh=owUEJ7iD+BP82fjCmjwq+zWvle0UiOQCR5A8Eyb+rOQ=;
+ b=oLV1pv6MD4SJFRpyMZZrkJJgDup7pVNL85ichA6seb4xdnpQZzQE29TpThs072YbnnwQ
+ gJyt65twCWQy3vM2vMCQ/GN6uwQf8Bwt7xyWwSyQnuP0WTSaQ7OiqkLlZwlPvp8D3cwx
+ DfIVddAcg3/iH4egEo55BYbBJx7YNnKzeFjXhv0opJiNMRxYvZeH27qzo9ErtJmeaJEV
+ p1Oabnj7wJtZkbbmLMWascUhGQrW6l9Z5usXj9JWGT1Q3y301BOY10hi0vZLIWOyRMNi
+ 4LFekVXMlfY3KzGqqol4hLckVT68UaTSMUGPioiuz9FGAKNQqZCMw+CpICum2DT1fb02 PQ== 
+Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
+        by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3f6du14vyg-1
+        (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+        Thu, 07 Apr 2022 14:31:42 +0200
+Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
+        by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 5A79110002A;
+        Thu,  7 Apr 2022 14:31:20 +0200 (CEST)
+Received: from Webmail-eu.st.com (sfhdag2node2.st.com [10.75.127.5])
+        by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 5351021A223;
+        Thu,  7 Apr 2022 14:31:20 +0200 (CEST)
+Received: from localhost (10.75.127.49) by SFHDAG2NODE2.st.com (10.75.127.5)
+ with Microsoft SMTP Server (TLS) id 15.0.1497.26; Thu, 7 Apr 2022 14:31:19
+ +0200
+From:   Valentin Caron <valentin.caron@foss.st.com>
+To:     Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+        Jonathan Corbet <corbet@lwn.net>
+CC:     Jiri Slaby <jirislaby@kernel.org>,
+        Maxime Coquelin <mcoquelin.stm32@gmail.com>,
+        Alexandre Torgue <alexandre.torgue@foss.st.com>,
+        Erwan Le Ray <erwan.leray@foss.st.com>,
+        Valentin Caron <valentin.caron@foss.st.com>,
+        <linux-serial@vger.kernel.org>,
+        <linux-stm32@st-md-mailman.stormreply.com>,
+        <linux-arm-kernel@lists.infradead.org>,
+        <linux-kernel@vger.kernel.org>, <linux-doc@vger.kernel.org>
+Subject: [PATCH 0/3] serial: stm32: add earlycon and polling mode
+Date:   Thu, 7 Apr 2022 14:31:06 +0200
+Message-ID: <20220407123109.132035-1-valentin.caron@foss.st.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-Content-Type: multipart/signed; boundary="Sig_/6mpp.nsQNupxMrrWV5KylHR";
- protocol="application/pgp-signature"; micalg=pgp-sha256
-X-Spam-Status: No, score=-2.0 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_AU,SPF_HELO_PASS,SPF_PASS,T_SCC_BODY_TEXT_LINE,
-        URIBL_BLOCKED autolearn=ham autolearn_force=no version=3.4.6
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Originating-IP: [10.75.127.49]
+X-ClientProxiedBy: SFHDAG2NODE3.st.com (10.75.127.6) To SFHDAG2NODE2.st.com
+ (10.75.127.5)
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.205,Aquarius:18.0.850,Hydra:6.0.425,FMLib:17.11.64.514
+ definitions=2022-04-07_01,2022-04-07_01,2022-02-23_01
+X-Spam-Status: No, score=-2.7 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+        DKIM_VALID,DKIM_VALID_AU,RCVD_IN_DNSWL_LOW,SPF_HELO_NONE,SPF_PASS,
+        T_SCC_BODY_TEXT_LINE,URIBL_BLOCKED autolearn=ham autolearn_force=no
+        version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
---Sig_/6mpp.nsQNupxMrrWV5KylHR
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: quoted-printable
+- Add support of early console and polling mode in stm32-usart driver.
+- Avoid a possible infinite loop in putchar function.
 
-Hi,
+Valentin Caron (3):
+  serial: stm32: remove infinite loop possibility in putchar function
+  serial: stm32: add KGDB support
+  serial: stm32: add earlycon support
 
-On Thu, 7 Apr 2022 03:41:15 -0600 Yu Zhao <yuzhao@google.com> wrote:
->
-> > So, a couple of questions:
-> >
-> > Have you done a trial merge with a current linux-next tree to see what
-> > sort of mess/pain we may already be in? =20
->=20
-> Yes, the repo I prepared for you is based on the latest linux-next.
-> There shouldn't be any conflicts.
+ .../admin-guide/kernel-parameters.txt         |   6 ++
+ drivers/tty/serial/Kconfig                    |   1 +
+ drivers/tty/serial/stm32-usart.c              | 101 +++++++++++++++++-
+ drivers/tty/serial/stm32-usart.h              |   2 +
+ 4 files changed, 105 insertions(+), 5 deletions(-)
 
-Ah, that is a problem :-(  I can't merge a branch into linux-next if
-that branch is based on linux-next itself.  linux-next rebases
-everyday, so that merge would bring in the previous version of
-linux-next - including other branches that may have rebased :-(
+-- 
+2.25.1
 
-All the branches in linux-next need to be based on Linus' tree or some
-tree that does not rebase (or one you can keep up with if it does
-rebase).
-
-The only exception is part of Andrew's patch series which is rebased
-(by me) on top of linux-next each day.
-
-> > Is it all stable enough now that it could be sent as a patch series for
-> > Andrew to include in mmotm (with perhaps just smallish followup patches=
-)? =20
->=20
-> Yes, on multiple occasions, e.g., [1][2][3], I've claimed this
-> patchset has an unprecedented test coverage and nobody has proven
-> otherwise so far.
->=20
-> Andrew suggested a cycle in linux-next [4]. So here we are :)
-
-So the easiest thing for me is if Andrew takes it into his mmotm patch
-series (most of which ends up in linux-next).  Otherwise I am probably
-at some point going to need help fixing the conflicts.
-
---=20
-Cheers,
-Stephen Rothwell
-
---Sig_/6mpp.nsQNupxMrrWV5KylHR
-Content-Type: application/pgp-signature
-Content-Description: OpenPGP digital signature
-
------BEGIN PGP SIGNATURE-----
-
-iQEzBAEBCAAdFiEENIC96giZ81tWdLgKAVBC80lX0GwFAmJO1YIACgkQAVBC80lX
-0Gw6cwf+MTaNNd0mEgs/tJ4oSFU0X67FO4pXdyzCjCdp1UB54niZQdb3kMqfc02a
-RRkhV0jDgdDYFiEsW3lsdb4qf+dOVx3CRFYz6u/gQ06xMe5CXo2BqvTd3gKmrYH0
-uFSh0XaIdm2xW5WlQwg3gKgkgYlTNaqjt88X72GhV8HLPqgp58cl+APq/4UTz94+
-5GEdaKM9Nyec6todaeP1Ih7WlL4Nj6KV+TQPq9/y3Kipfa0teIQMQQaHplOzfyXh
-oUW58hcwYEaPuADo6SHMO0Ex6OtWE1PAe3OiYYMQ2dan3xU4hbQLtsUZGFJXdYR6
-FpTRB/bJBWEeBekO3GsLLa8FrF1zLg==
-=HCxM
------END PGP SIGNATURE-----
-
---Sig_/6mpp.nsQNupxMrrWV5KylHR--
