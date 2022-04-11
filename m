@@ -2,100 +2,102 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 980DF4FB273
-	for <lists+linux-doc@lfdr.de>; Mon, 11 Apr 2022 05:43:22 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id BC1B44FB484
+	for <lists+linux-doc@lfdr.de>; Mon, 11 Apr 2022 09:20:47 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S244576AbiDKDp2 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Sun, 10 Apr 2022 23:45:28 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:56960 "EHLO
+        id S244043AbiDKHWz (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 11 Apr 2022 03:22:55 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:45790 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S240770AbiDKDp1 (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Sun, 10 Apr 2022 23:45:27 -0400
-Received: from mail-yb1-xb2b.google.com (mail-yb1-xb2b.google.com [IPv6:2607:f8b0:4864:20::b2b])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 34231377D2
-        for <linux-doc@vger.kernel.org>; Sun, 10 Apr 2022 20:43:14 -0700 (PDT)
-Received: by mail-yb1-xb2b.google.com with SMTP id g34so5295656ybj.1
-        for <linux-doc@vger.kernel.org>; Sun, 10 Apr 2022 20:43:14 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=mime-version:reply-to:from:date:message-id:subject:to;
-        bh=GZhe697/HvKmHr7ntqH6OYJuaAm1dy3g/Lk5HgBeAfU=;
-        b=Bf/3uRC3a/bwx7+tbSpefoY+6oNTuPpCsIxV6Bwif5c8tX/I8S/ILWgLF7UBGxV538
-         18wHEmmH89kh93o1ZkWITXkGmn/r3I6xzKvS1cC1k7Fj9DdT1mXdrA9OpIFaG6QyKck9
-         ytc4eA3+QIMwx1Jv2vQ1znBL4Sl2uLQJifDcBM6TujeqGqlJwVeyFUN4/MplC8k7ed9Y
-         Edq0H+BV1hFz2GeUs1SN77yMjN6Qo1WygPGPFPMOG/lssc9oIM2e3ZjpXdjemLMHiXi0
-         dqaUVh+r3aIb7griJdJdmEJ3DJf8LqWDHsJ8jw2ZioyuGiiGiDGmK1RcMB+qtc4VjsN3
-         O/NQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=x-gm-message-state:mime-version:reply-to:from:date:message-id
-         :subject:to;
-        bh=GZhe697/HvKmHr7ntqH6OYJuaAm1dy3g/Lk5HgBeAfU=;
-        b=M64Wjdu3DhIR2uY9BVSmr+j3+0meTfu8H/7ytbd/sqDXypp5X/zACo0Q2mxRKKqi6F
-         OgrTxhe0GAw0Tj+wk6fyCIZkNWS86nhqXnHg139q/CFw/Qn6UDdL1tbySnaefy40oM/J
-         sLIGYwZTs/FvRGsMtgBmKL2nno0fmIuFUE3Upuq8gONkkjDgEoXUAr4rWKFOEVNUmL45
-         vRnHHeHPIRAZdfZ5bmzCMcnFZGrvUaxaWKBO13SwlSn/pazbBDff/TdT9ia/DqlMhtab
-         BQznJEKXH8c8K+mISHrWVeH3YzAZMg9nIdXQCcohz5rRSIBClwS+yPa52GKywyIO/eBb
-         YVwQ==
-X-Gm-Message-State: AOAM533NbN8dEmTAbSatVyyDYDMRnaBV4mZrFOgGWztL34UEwsvuOoik
-        Q65n5RErrsEBBAKOtTgNRQLA5jdMbXcps6FuHKw=
-X-Google-Smtp-Source: ABdhPJyfGV0aJA4dugz4g4/Z0qE0ZrJBR68iSXF5sM/hq9xTmxNuCEsp8kwO27IUeCdkDIyRf7UyQpZmzatXjfGIFf8=
-X-Received: by 2002:a25:2e02:0:b0:641:3772:6f7a with SMTP id
- u2-20020a252e02000000b0064137726f7amr4012597ybu.526.1649648593229; Sun, 10
- Apr 2022 20:43:13 -0700 (PDT)
+        with ESMTP id S245325AbiDKHWu (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Mon, 11 Apr 2022 03:22:50 -0400
+Received: from smtp-out2.suse.de (smtp-out2.suse.de [195.135.220.29])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id E8B872F3AB;
+        Mon, 11 Apr 2022 00:20:36 -0700 (PDT)
+Received: from relay2.suse.de (relay2.suse.de [149.44.160.134])
+        by smtp-out2.suse.de (Postfix) with ESMTP id 239E11F38C;
+        Mon, 11 Apr 2022 07:20:35 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
+        t=1649661635; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+         mime-version:mime-version:content-type:content-type:
+         in-reply-to:in-reply-to:references:references;
+        bh=EKQ22xGnCAfhZWYXu0EvGb4wthBpsfoBSJ1Jf+KqZ/U=;
+        b=ZyojcBVo92JmwvoAqRyuWeNWhRdm2bTVzL3tgs8ML4g9f+5OapIHmsoh8iSO3TZbUFORDW
+        l7lVqpJ+JmozjlZtoMfJjR4SyYzHmgOUP3TOxtkw2i10q7qGLIWBSnvnX/BajoavEbPNJp
+        v/KvnynxlBntXBl4aDgMwxDLnE8Fnlg=
+Received: from suse.cz (unknown [10.100.201.86])
+        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+        (No client certificate requested)
+        by relay2.suse.de (Postfix) with ESMTPS id 68ECBA3B83;
+        Mon, 11 Apr 2022 07:20:34 +0000 (UTC)
+Date:   Mon, 11 Apr 2022 09:20:30 +0200
+From:   Michal Hocko <mhocko@suse.com>
+To:     Dan Schatzberg <schatzberg.dan@gmail.com>
+Cc:     Yosry Ahmed <yosryahmed@google.com>,
+        Johannes Weiner <hannes@cmpxchg.org>,
+        Shakeel Butt <shakeelb@google.com>,
+        Andrew Morton <akpm@linux-foundation.org>,
+        Roman Gushchin <roman.gushchin@linux.dev>,
+        David Rientjes <rientjes@google.com>,
+        Tejun Heo <tj@kernel.org>, Zefan Li <lizefan.x@bytedance.com>,
+        Jonathan Corbet <corbet@lwn.net>,
+        Shuah Khan <shuah@kernel.org>, Yu Zhao <yuzhao@google.com>,
+        Dave Hansen <dave.hansen@linux.intel.com>,
+        Wei Xu <weixugc@google.com>, Greg Thelen <gthelen@google.com>,
+        Chen Wandun <chenwandun@huawei.com>,
+        Vaibhav Jain <vaibhav@linux.ibm.com>,
+        Michal =?iso-8859-1?Q?Koutn=FD?= <mkoutny@suse.com>,
+        Tim Chen <tim.c.chen@linux.intel.com>, cgroups@vger.kernel.org,
+        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
+        linux-mm@kvack.org, linux-kselftest@vger.kernel.org
+Subject: Re: [PATCH v3 1/4] memcg: introduce per-memcg reclaim interface
+Message-ID: <YlPWvuK5pG/CapKv@dhcp22.suse.cz>
+References: <20220408045743.1432968-1-yosryahmed@google.com>
+ <20220408045743.1432968-2-yosryahmed@google.com>
+ <YlA754XNFAmWQcm6@dschatzberg-fedora-PC0Y6AEN.dhcp.thefacebook.com>
+ <YlBCeadBqbeVvALK@dhcp22.suse.cz>
+ <YlBM/HlPyPUZew5N@dschatzberg-fedora-PC0Y6AEN.dhcp.thefacebook.com>
 MIME-Version: 1.0
-Received: by 2002:a05:7000:ad9a:0:0:0:0 with HTTP; Sun, 10 Apr 2022 20:43:12
- -0700 (PDT)
-Reply-To: ahmednasserkhalifa001@gmail.com
-From:   Nasser <wernermrthomas@gmail.com>
-Date:   Mon, 11 Apr 2022 04:43:12 +0100
-Message-ID: <CAB58LbXZksOFOrZCL+g5Rm0XSMeN_yENZSZVur9U_g5xSiZ-Qg@mail.gmail.com>
-Subject: Hello sir
-To:     undisclosed-recipients:;
-Content-Type: text/plain; charset="UTF-8"
-X-Spam-Status: Yes, score=5.5 required=5.0 tests=BAYES_50,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_FROM,FREEMAIL_REPLYTO,
-        FREEMAIL_REPLYTO_END_DIGIT,RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,SPF_PASS,
-        T_SCC_BODY_TEXT_LINE,UNDISC_FREEM autolearn=no autolearn_force=no
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <YlBM/HlPyPUZew5N@dschatzberg-fedora-PC0Y6AEN.dhcp.thefacebook.com>
+X-Spam-Status: No, score=-4.4 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_MED,SPF_HELO_NONE,
+        SPF_PASS,T_SCC_BODY_TEXT_LINE autolearn=ham autolearn_force=no
         version=3.4.6
-X-Spam-Report: * -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at
-        *      https://www.dnswl.org/, no trust
-        *      [2607:f8b0:4864:20:0:0:0:b2b listed in]
-        [list.dnswl.org]
-        *  0.8 BAYES_50 BODY: Bayes spam probability is 40 to 60%
-        *      [score: 0.5000]
-        *  0.0 FREEMAIL_FROM Sender email is commonly abused enduser mail
-        *      provider
-        *      [wernermrthomas[at]gmail.com]
-        * -0.0 SPF_PASS SPF: sender matches SPF record
-        *  0.2 FREEMAIL_REPLYTO_END_DIGIT Reply-To freemail username ends in
-        *      digit
-        *      [ahmednasserkhalifa001[at]gmail.com]
-        *  0.0 SPF_HELO_NONE SPF: HELO does not publish an SPF Record
-        *  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
-        *       valid
-        * -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
-        * -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
-        *      author's domain
-        * -0.1 DKIM_VALID_EF Message has a valid DKIM or DK signature from
-        *      envelope-from domain
-        * -0.0 T_SCC_BODY_TEXT_LINE No description available.
-        *  3.7 UNDISC_FREEM Undisclosed recipients + freemail reply-to
-        *  1.0 FREEMAIL_REPLYTO Reply-To/From or Reply-To/body contain
-        *      different freemails
-X-Spam-Level: *****
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
+On Fri 08-04-22 10:55:56, Dan Schatzberg wrote:
+> On Fri, Apr 08, 2022 at 04:11:05PM +0200, Michal Hocko wrote:
+> > Regarding "max" as a possible input. I am not really sure to be honest.
+> > I can imagine that it could be legit to simply reclaim all the charges
+> > (e.g. before removing the memcg) which should be achieveable by
+> > reclaiming the reported consumption. Or what exactly should be the
+> > semantic?
+> 
+> Yeah, it just allows you to avoid reading memory.current to just
+> reclaim everything if you can specify "max"
+
+The same could be achieved by requesting a really high number (-1Ul)
+
+> - you're still protected
+> by nretries to eventually bail out.
+
+The number of retries is an implementation detail and nobody should
+really rely on that. Bail out on signal can be still used so yeah
+getting a large input or whatever alias of that should be just fine.
+
+> Mostly, though I just feel like
+> supporting "max" makes memory.reclaim semetric with a lot of the
+> cgroup memory control files which tend to support "max".
+
+max is used for limits now and this doesn't have a semantic of one.
+But I have to say I do not really feel strongly about this.
+
 -- 
-My name is Ahmed Sultan Al-Suwaidi from United Arab Emirates, i want us to
-be partners in business.
-
-What did you think?
-
-Best regards,
-
-Ahmed.
+Michal Hocko
+SUSE Labs
