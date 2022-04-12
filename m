@@ -2,179 +2,220 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 6A5714FE3E0
-	for <lists+linux-doc@lfdr.de>; Tue, 12 Apr 2022 16:32:39 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id DE2E54FE546
+	for <lists+linux-doc@lfdr.de>; Tue, 12 Apr 2022 17:53:54 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1345681AbiDLOey (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 12 Apr 2022 10:34:54 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:42016 "EHLO
+        id S1357415AbiDLP4G (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 12 Apr 2022 11:56:06 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:51898 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S231604AbiDLOex (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 12 Apr 2022 10:34:53 -0400
-Received: from mx0a-001b2d01.pphosted.com (mx0a-001b2d01.pphosted.com [148.163.156.1])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id CFF2E5EDDE;
-        Tue, 12 Apr 2022 07:32:34 -0700 (PDT)
-Received: from pps.filterd (m0098409.ppops.net [127.0.0.1])
-        by mx0a-001b2d01.pphosted.com (8.16.1.2/8.16.1.2) with SMTP id 23CD7eWM029884;
-        Tue, 12 Apr 2022 14:32:34 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ibm.com; h=message-id : date :
- mime-version : subject : to : cc : references : from : in-reply-to :
- content-type : content-transfer-encoding; s=pp1;
- bh=HXBMRHEi2/708n5x9K+5FRvYId0NbVxKCUq5l1FNyng=;
- b=SNBk/OyhGmCWc+/YCk3nr5VKFMJAAkcewE6C+iN4vgDXDZib9lFXYFg/w5jakNruklFr
- S/sX3bShAPWrd1hNAbr0Ph2MdVIaRJtbOkXiN5N3/PTMLA36QkSKeht9FtkHdoQVzC2e
- z05Hp8CBKWBaHumBZKug/nRdjSlX/hrzL5JZK21O83NZz6LH4lzWSjIWno3d9T64S5f+
- RK7N0GK3ft0nQlq+Xun7MqjkLhUJmXE4vaKzU+Ql3xIg0Hu3cMn919VcMFwUgVG/3phQ
- B8dAwAfzzcJDu+E6CTvWY7MPFRCj5IhqQCi3l2IuHKqXDlvHLl6asEA7qsHWAoPDuPM2 4w== 
-Received: from pps.reinject (localhost [127.0.0.1])
-        by mx0a-001b2d01.pphosted.com with ESMTP id 3fd8b5mv7p-1
-        (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
-        Tue, 12 Apr 2022 14:32:34 +0000
-Received: from m0098409.ppops.net (m0098409.ppops.net [127.0.0.1])
-        by pps.reinject (8.16.0.43/8.16.0.43) with SMTP id 23CDVFoq023898;
-        Tue, 12 Apr 2022 14:32:33 GMT
-Received: from ppma02dal.us.ibm.com (a.bd.3ea9.ip4.static.sl-reverse.com [169.62.189.10])
-        by mx0a-001b2d01.pphosted.com with ESMTP id 3fd8b5mv79-1
-        (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
-        Tue, 12 Apr 2022 14:32:33 +0000
-Received: from pps.filterd (ppma02dal.us.ibm.com [127.0.0.1])
-        by ppma02dal.us.ibm.com (8.16.1.2/8.16.1.2) with SMTP id 23CEDvoU017750;
-        Tue, 12 Apr 2022 14:32:32 GMT
-Received: from b01cxnp22035.gho.pok.ibm.com (b01cxnp22035.gho.pok.ibm.com [9.57.198.25])
-        by ppma02dal.us.ibm.com with ESMTP id 3fb1s9pqqr-1
-        (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
-        Tue, 12 Apr 2022 14:32:32 +0000
-Received: from b01ledav003.gho.pok.ibm.com (b01ledav003.gho.pok.ibm.com [9.57.199.108])
-        by b01cxnp22035.gho.pok.ibm.com (8.14.9/8.14.9/NCO v10.0) with ESMTP id 23CEWVvS25952684
-        (version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
-        Tue, 12 Apr 2022 14:32:31 GMT
-Received: from b01ledav003.gho.pok.ibm.com (unknown [127.0.0.1])
-        by IMSVA (Postfix) with ESMTP id C0DDAB205F;
-        Tue, 12 Apr 2022 14:32:31 +0000 (GMT)
-Received: from b01ledav003.gho.pok.ibm.com (unknown [127.0.0.1])
-        by IMSVA (Postfix) with ESMTP id 58B3AB2065;
-        Tue, 12 Apr 2022 14:32:26 +0000 (GMT)
-Received: from [9.211.106.50] (unknown [9.211.106.50])
-        by b01ledav003.gho.pok.ibm.com (Postfix) with ESMTP;
-        Tue, 12 Apr 2022 14:32:26 +0000 (GMT)
-Message-ID: <cf92d65e-f069-cd4b-d229-9fea794eea5d@linux.ibm.com>
-Date:   Tue, 12 Apr 2022 10:32:25 -0400
+        with ESMTP id S235086AbiDLP4A (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 12 Apr 2022 11:56:00 -0400
+Received: from NAM10-DM6-obe.outbound.protection.outlook.com (mail-dm6nam10on2088.outbound.protection.outlook.com [40.107.93.88])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 21A915FF2F;
+        Tue, 12 Apr 2022 08:53:43 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=YZoLUjz8RxWHQlReSm6LGyEPqWbjljvB5hzatHppVrIcJsX+X7isKJS14PaKEkgDmbAUWTS4NH27bk2Rx44ryAH5BQNrG5GA1mR+yKd2AHLtYKvuv3Mmo8bt2hxMqm2KIsuiRfM4lwGjsi/Ol1Q3x9LPZd0pOX301N7Gd+/AH33Z2lMb0WpbgoOZKZB5VQu5YTmJL5vVSQZC+9/Lc4zu0hEy2KQC5u1E6m6Gp4FqG6Tku00JH5Oq5kNmMeguSky0idTRJ8Gxir9gE6wrHsij1vwSve5n4p4tGzqvZs1/P3U7iqKSj2yGU8Xtt0d7fTDXEoj/JJhyuMS4MMcunoDM2A==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=x64G88Wxylhs3RaiocP0IhUqU1D+Lnwukl7MqFV/rxk=;
+ b=RgjBscbZol97Faq++zkPDs21CivxoS5ww+VrMIK7GwyH9vdEpdhpHtpoh1Yk+7Wy8VnIeQRym48IEMmf14m4pyH+RAMF43o7DLJI1LbM/P2UFGuEY8r1EgzW9GFvNBVqBDiR6Rdw+Ujvm8PXDoPJksROzwk0FGsP4NXSOHLCY3rxYbImzNN3YiXv+ftPa6YEwKphQKLenH744ARrG0sFQiDnfh3ZT0q9JhCKIMhnxi2MtDsugmEDxnReWFROR4fNCkppBMnrjMG5rhVp44xY332cnprPqoQo6ATEiNdbym2nkGh5ERbHSFN0j76tk5ccNZMOJVqWtzzJ2PPlEegTTw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=nvidia.com; dmarc=pass action=none header.from=nvidia.com;
+ dkim=pass header.d=nvidia.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
+ s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=x64G88Wxylhs3RaiocP0IhUqU1D+Lnwukl7MqFV/rxk=;
+ b=Ui66VGqPWcYemVNpRz/l48QUjj/em73edVCqvSvgZ+fPYBUsJQDqJMtUtvz1BT0enL/Wf0sxtWl4kUMp7l4hEhUB1eKwfWQYmwzeYTwVk5VIIBZzYaN1Nt+Hqf9+bFNMXuZsdLNzjA3yeyAttevqVnJHts/t+cU5mXp1ewlnWJ6kqnFpc9Ac5al5wSvv1/X+SgRakrrmzOUdXoVPaaUcOEk9u66KtG4QaqW/02GSkdW4aZ6cuADQpAAzwbXLBcq4N+kdro50Dg2r88SvEPsxfkmgeTh4QSlTy22urfN+5uEZ2b3Wu0IVH0wuahi3/f0E7tny2f1x2l3Cy5sgUR18MQ==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=nvidia.com;
+Received: from CH2PR12MB4181.namprd12.prod.outlook.com (2603:10b6:610:a8::16)
+ by DM6PR12MB4172.namprd12.prod.outlook.com (2603:10b6:5:212::9) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5144.29; Tue, 12 Apr
+ 2022 15:53:40 +0000
+Received: from CH2PR12MB4181.namprd12.prod.outlook.com
+ ([fe80::c911:71b5:78e6:3a38]) by CH2PR12MB4181.namprd12.prod.outlook.com
+ ([fe80::c911:71b5:78e6:3a38%8]) with mapi id 15.20.5144.029; Tue, 12 Apr 2022
+ 15:53:40 +0000
+From:   Jason Gunthorpe <jgg@nvidia.com>
+To:     Alexander Gordeev <agordeev@linux.ibm.com>,
+        David Airlie <airlied@linux.ie>,
+        Tony Krowiak <akrowiak@linux.ibm.com>,
+        Alex Williamson <alex.williamson@redhat.com>,
+        Christian Borntraeger <borntraeger@linux.ibm.com>,
+        Cornelia Huck <cohuck@redhat.com>,
+        Jonathan Corbet <corbet@lwn.net>,
+        Daniel Vetter <daniel@ffwll.ch>,
+        dri-devel@lists.freedesktop.org,
+        Eric Farman <farman@linux.ibm.com>,
+        Harald Freudenberger <freude@linux.ibm.com>,
+        Vasily Gorbik <gor@linux.ibm.com>,
+        Heiko Carstens <hca@linux.ibm.com>,
+        intel-gfx@lists.freedesktop.org,
+        intel-gvt-dev@lists.freedesktop.org,
+        Jani Nikula <jani.nikula@linux.intel.com>,
+        Jason Herne <jjherne@linux.ibm.com>,
+        Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
+        kvm@vger.kernel.org, Kirti Wankhede <kwankhede@nvidia.com>,
+        linux-doc@vger.kernel.org, linux-s390@vger.kernel.org,
+        Matthew Rosato <mjrosato@linux.ibm.com>,
+        Peter Oberparleiter <oberpar@linux.ibm.com>,
+        Halil Pasic <pasic@linux.ibm.com>,
+        Rodrigo Vivi <rodrigo.vivi@intel.com>,
+        Sven Schnelle <svens@linux.ibm.com>,
+        Tvrtko Ursulin <tvrtko.ursulin@linux.intel.com>,
+        Vineeth Vijayan <vneethv@linux.ibm.com>,
+        Zhenyu Wang <zhenyuw@linux.intel.com>,
+        Zhi Wang <zhi.a.wang@intel.com>
+Cc:     Christoph Hellwig <hch@lst.de>,
+        "Tian, Kevin" <kevin.tian@intel.com>,
+        "Liu, Yi L" <yi.l.liu@intel.com>
+Subject: [PATCH 0/9] Make the rest of the VFIO driver interface use vfio_device
+Date:   Tue, 12 Apr 2022 12:53:27 -0300
+Message-Id: <0-v1-a8faf768d202+125dd-vfio_mdev_no_group_jgg@nvidia.com>
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-ClientProxiedBy: BL0PR0102CA0035.prod.exchangelabs.com
+ (2603:10b6:207:18::48) To CH2PR12MB4181.namprd12.prod.outlook.com
+ (2603:10b6:610:a8::16)
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.7.0
-Subject: Re: [PATCH v5 16/21] KVM: vfio: add s390x hook to register KVM guest
- designation
-Content-Language: en-US
-To:     Jason Gunthorpe <jgg@ziepe.ca>
-Cc:     alex.williamson@redhat.com, linux-s390@vger.kernel.org,
-        cohuck@redhat.com, schnelle@linux.ibm.com, farman@linux.ibm.com,
-        pmorel@linux.ibm.com, borntraeger@linux.ibm.com, hca@linux.ibm.com,
-        gor@linux.ibm.com, gerald.schaefer@linux.ibm.com,
-        agordeev@linux.ibm.com, svens@linux.ibm.com, frankja@linux.ibm.com,
-        david@redhat.com, imbrenda@linux.ibm.com, vneethv@linux.ibm.com,
-        oberpar@linux.ibm.com, freude@linux.ibm.com, thuth@redhat.com,
-        pasic@linux.ibm.com, pbonzini@redhat.com, corbet@lwn.net,
-        kvm@vger.kernel.org, linux-kernel@vger.kernel.org,
-        linux-doc@vger.kernel.org
-References: <20220404174349.58530-1-mjrosato@linux.ibm.com>
- <20220404174349.58530-17-mjrosato@linux.ibm.com>
- <20220408124536.GX64706@ziepe.ca>
- <3639d5fb-ff71-d42e-ef09-0b297f7e1a45@linux.ibm.com>
- <20220412135517.GE64706@ziepe.ca>
-From:   Matthew Rosato <mjrosato@linux.ibm.com>
-In-Reply-To: <20220412135517.GE64706@ziepe.ca>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-TM-AS-GCONF: 00
-X-Proofpoint-ORIG-GUID: ZGwu49q27VBGXYCaTEyco3gw89qlNgyL
-X-Proofpoint-GUID: M4clunag9ROxfedXJmYuNZItOYxpujxh
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.205,Aquarius:18.0.858,Hydra:6.0.486,FMLib:17.11.64.514
- definitions=2022-04-12_05,2022-04-12_02,2022-02-23_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 mlxscore=0 suspectscore=0
- bulkscore=0 spamscore=0 impostorscore=0 mlxlogscore=999 adultscore=0
- priorityscore=1501 lowpriorityscore=0 clxscore=1015 malwarescore=0
- phishscore=0 classifier=spam adjust=0 reason=mlx scancount=1
- engine=8.12.0-2202240000 definitions=main-2204120070
-X-Spam-Status: No, score=-3.1 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_EF,NICE_REPLY_A,RCVD_IN_MSPIKE_H4,
-        RCVD_IN_MSPIKE_WL,SPF_HELO_NONE,SPF_PASS,T_SCC_BODY_TEXT_LINE
-        autolearn=ham autolearn_force=no version=3.4.6
+X-MS-PublicTrafficType: Email
+X-MS-Office365-Filtering-Correlation-Id: 527b8319-a6ed-47d3-bb7b-08da1c9c9c22
+X-MS-TrafficTypeDiagnostic: DM6PR12MB4172:EE_
+X-Microsoft-Antispam-PRVS: <DM6PR12MB4172F5046F68D7B55C9CCE27C2ED9@DM6PR12MB4172.namprd12.prod.outlook.com>
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: FUnN+CUNlFNy9JywqBVHJ2r29VSSmWV/BdsAQaN3PlsvkBzB2AVS+74eIaPPe3dFHqrWaIu5HIEjMneDCi1y432hxiWPQNvPv+cAXEyQwmGawT9WJvU31A5ugLECWIwoNk7blRb7+Is9/DTdSvi2mGavc7Hfy67W5wvqo4oNs7zmpEjDHO9CoCp6huyY8tPFgG+QXZeWh8ON7eBcEGLVORs9e9ZkqIVC9TkHh098KerdWSqxH4ryaUUxNhe4l00Isj0+y8YeX4Qpin3pMgO1AjzUMU172s/OHzeHSPgCFnPo/oDrTP7jfwgrsyIt4eYPOJ32bG14Jusa0N14FZqCDybbxGG8qQ5YFyfsrIlLVKb98LYonJOGioCpMHwXUAvUodoR/FLkG+giQlVtojq/3cbFl7vcEJpk3wRzV1/j7dOJtp8U24LrBFKHrQg4hwc0Vck41+voUWDHxN6R8y+7g3whDek/KywEn2fZR7ifqwBvPfXKSZ/cuIY9wgfgRs6zph3YIuSNhiLm9tJz8ECboS/DIGwVxr2yBmgiTZlCS6Xn3zXyXQa+GBl7osniMEJjSdPC4yvPxa5Yom0FGHdSwca/xp7Kz8Ouuh5feRwGHA6aUCwBmPj3kFljGCQkD7aIn5XmGeAdBIKSckzSkzzLQNv2W81pjsvNdE71cN/WbUqVszKYHQ1i2tYzVE2NBeQQiOdl4F7bjBf6WPgJv8YYt7GNHRBzpafRJpqRdNOGyk6Exi90OmD0Llfmx0BX2IQzGuvkQe1qAr4eQ+lJdzjqrvG8JbXF/g5yOXHfEhQXoDw=
+X-Forefront-Antispam-Report: CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:CH2PR12MB4181.namprd12.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230001)(4636009)(366004)(508600001)(6486002)(6506007)(6666004)(66946007)(66476007)(4326008)(66556008)(26005)(186003)(966005)(36756003)(83380400001)(8676002)(316002)(54906003)(86362001)(8936002)(6512007)(2616005)(921005)(110136005)(7416002)(5660300002)(38100700002)(2906002)(7406005)(4216001);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?Cvp1jIPCQ8jbm81MYgEG/TzJvHIWf3s43nmBXwa3oaaEjRugysyvyY+ag0PR?=
+ =?us-ascii?Q?6zGM9WeiyNHETWdlssvpy5gyazvJB13guXlomupIr8g5DVS2HaXervDnGV3N?=
+ =?us-ascii?Q?THKBoJpwp6yRzCWoVAY5IGhnhHx5DOwlNc0rx4M01qVwn3/L8Pu5DW4xS0a8?=
+ =?us-ascii?Q?iDskllH6akfn4p0ewhV8FLRUZeuGgOmo7nVF/OYRAPZHNFHj5htA7XwT+OJt?=
+ =?us-ascii?Q?IsKFGO6YFCGRrtaJ+KyZFZjoJbYvSxUhjMpVhfFrvxyXQb/bS+xkTCoX6I1K?=
+ =?us-ascii?Q?3OmcCUZxqYyePs2J6Zao2UcW1HgW0sQIg6SgDeR80lmyOMTBSzqwT3Oen3u6?=
+ =?us-ascii?Q?KKNE+LrvWntOEdYdxgiIvWXADT1US3p+OvCzBjVHYB+jO1li2xRfCyldJWt/?=
+ =?us-ascii?Q?bQkk4mI6ANzCiqIEtoOFa4nX33ReBpdPW/TFfaEbHXjZxodnQQh+D0/PlfIB?=
+ =?us-ascii?Q?vHcwos+QSSnwUA2H6kdwXo5aHoNN/yt6ceObwyrmYPN1lOP6OednPDntdvDJ?=
+ =?us-ascii?Q?P8+FUpEUneIviaGYu3MO2LoEcyvpcXccrxfYN/si2E/UScWyszFS66dA4mu1?=
+ =?us-ascii?Q?bxQso3WBs8xGiJV8VXMlFE0yEUtynk4ALYAwmvN5fbOHNAmDC3MpTFlyVz81?=
+ =?us-ascii?Q?mWinFCWLTM8h/vNKnSnU3xL4dnOqEWVJzrdhLqsRu2a0m38sZvARiP4JpAkn?=
+ =?us-ascii?Q?SvYD8NUauSQsADD6d+ye9tVNtFmfQThM3I+MHmPFsTpTQvqVWF2eMilRDMHU?=
+ =?us-ascii?Q?RG2xRWB94tuJbqjACse5LF9NHHpHOP/a88fyLKjQUleE0MfHSWJ7DJ6rFj28?=
+ =?us-ascii?Q?2XmzOo8dQBOTPfIhLQvpoQghbl0Gg1YrNo81r7XroOg+fwh9qLDUdJ5csslU?=
+ =?us-ascii?Q?gDAgCshZKXvZLu0Lb2u4G5lNatF5Orx3dnoc0LWAMoCt4SewswYUKuFcyj/m?=
+ =?us-ascii?Q?pLQJell3fruiAfYtkXvTAcnSHe8cHdcp8Vw5TUHykNO7IXmyrYop3SitrKGa?=
+ =?us-ascii?Q?21+r+0whLJ8BNTaJ4GfQfjud7irBwBj7viEK+9QUOFmB1z0WG3ni2HagPKpZ?=
+ =?us-ascii?Q?vhSpdeGSGBUXOPxinXq36G7z3oq2xdpmu2CVJjvO6CWN6gmVFI+DxYFfP6a8?=
+ =?us-ascii?Q?guOMVOb/8xh6aDL9XBaHm4vw1y/hpm4q7Yth0PCt/alXt/lCrKGasnTasbxs?=
+ =?us-ascii?Q?WOHmREdG7PHqbc31yb/dil8GQiB4ViE/yjcO/JrXXdq93MrGkEmfGoVzzuFQ?=
+ =?us-ascii?Q?Z0Nzfu/yPM+BwOr1hphNVC+K1IQrautYI57yYOUrkM6EguSOlPVMN8+R6PU/?=
+ =?us-ascii?Q?oi38Pqqlnswt40CUUDckjQFMh/5DIrDnB88vSo9cYi/Un9GLyzdWRCAIG/No?=
+ =?us-ascii?Q?hHZ6BC8xWRUVTGnqjvAW8BCxaEzi0j9Lw7HmZ09nssZ6Z/ghwyUChpgX7BaP?=
+ =?us-ascii?Q?o0t7U6s9SgTE27es+/gcios9sP6BpRoVDup/47z/DolBlK0iwf5xz0/AebQv?=
+ =?us-ascii?Q?q9I/Cu43tUsvnUmp2gs2PZygpnWH5KLDGDD+6MrX6+316SIm7Sk/KZT++sYF?=
+ =?us-ascii?Q?CRfOroSmhfyPi41msYW4l2OBRFp5CQ2x/s/ThjmGZguoCYygnZ/CjrbN38Fn?=
+ =?us-ascii?Q?iYDZMY9i1x5nqOu4Ly7rG1zbpec4fbaTVWLFCZRzi/HjfeBEnCoZlcfraTNo?=
+ =?us-ascii?Q?0OqAqO0YknIEkcDZ7ORQSPR+fCepLGHLBPelRpKbP5fAOa2GLml0a9k7r6cB?=
+ =?us-ascii?Q?b8w+9BMq0g=3D=3D?=
+X-OriginatorOrg: Nvidia.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 527b8319-a6ed-47d3-bb7b-08da1c9c9c22
+X-MS-Exchange-CrossTenant-AuthSource: CH2PR12MB4181.namprd12.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 12 Apr 2022 15:53:38.7594
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: SuKel238Gp52jJKR5AGKeOQNPD/hn0/uTW6Nn1pCY//obY2rqLGo80zGJepM6BRS
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM6PR12MB4172
+X-Spam-Status: No, score=-1.1 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FORGED_SPF_HELO,
+        RCVD_IN_DNSWL_NONE,RCVD_IN_MSPIKE_H2,SPF_HELO_PASS,SPF_NONE,
+        T_SCC_BODY_TEXT_LINE autolearn=no autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On 4/12/22 9:55 AM, Jason Gunthorpe wrote:
-> On Tue, Apr 12, 2022 at 09:39:44AM -0400, Matthew Rosato wrote:
->> On 4/8/22 8:45 AM, Jason Gunthorpe wrote:
->>> On Mon, Apr 04, 2022 at 01:43:44PM -0400, Matthew Rosato wrote:
->>>> At the time a KVM is associated with a vfio group, s390x zPCI devices
->>>> must register a special guest indication (GISA designation) to allow
->>>> for the use of interpretive execution facilities.  This indication is
->>>> used to ensure that only the specified KVM can interact with the device.
->>>> Similarly, the indication must be removed once the KVM is no longer
->>>> associated with the device.
->>>>
->>>> This patch adds an s390-specific hook to invoke a KVM registration routine
->>>> for each device associated with the iommu group; in reality, it will be a
->>>> NOP for all but zPCI devices on s390x.
->>>>
->>>> Signed-off-by: Matthew Rosato <mjrosato@linux.ibm.com>
->>>>    virt/kvm/vfio.c | 35 ++++++++++++++++++++++++++++++++++-
->>>>    1 file changed, 34 insertions(+), 1 deletion(-)
->>>
->>> I wonder if this should be done in the vfio_pci side from the existing
->>> kvm notifier
->>>
->>
->> So you mean rather than hooking into virt as I do here, drive something out
->> of drivers/vfio/vfio.c:vfio_group_set_kvm?  Note, the kvm notifier is
->> handled in vfio, not vfio_pci, so if you want to handle it in vfio_pci I
->> think we'd need to add a new routine to vfio_device_ops and only define it
->> vfio_pci for s390
-> 
-> I've been thinking about doing that anyhow, exactly for reasons like
-> this..
-> 
->> static const struct vfio_device_ops vfio_pci_ops = {
->> 	.name		= "vfio-pci",
->> [...]
->> #ifdef CONFIG_S390
->> 	.set_kvm = vfio_pci_zdev_set_kvm,
->> #endif
->> };
->>
->> and something like...
->>
->> void vfio_group_set_kvm(struct vfio_group *group, struct kvm *kvm)
->> {
->> 	struct vfio_device *vdev;
->> 	group->kvm = kvm;
->>
->> 	mutex_lock(&group->device_lock);
->> 	list_for_each_entry(vdev, &group->device_list, group_next) {
->> 		if (vdev->ops->set_kvm)
->> 			it->ops->set_kvm(vdev, kvm);
->> 	}
->> 	mutex_unlock(&group->device_lock);
-> 
-> Almost, the device should be open before calling the callback
-> 
-> And you have to inject a callback during open if the device is opened
-> after the kvm was set.
-> 
-> But I don't think you need to do this, you can just register a
-> notifier in zpci when it hooks open_device like everything else,
-> right?
+Prior series have transformed other parts of VFIO from working on struct
+device or struct vfio_group into working directly on struct
+vfio_device. Based on that work we now have vfio_device's readily
+available in all the drivers.
 
-Yes, that would also work -- I was registering a notifier for a few 
-prior versions of this series (granted, not from open_device) but got 
-the impression I should avoid registering a notifier from within 
-vfio_pci_zdev.
+Update the rest of the driver facing API to use vfio_device as an input.
 
-I will go ahead and add register/unregister notifiers hooked from 
-vfio_pci_core_finish_enable/vfio_pci_core_close_device for zpci (e.g. 
-vfio_pci_zdev_{open,close}) and use the notifier events to drive the 
-routines from patch 15.
+The following are switched from struct device to struct vfio_device:
+  vfio_register_notifier()
+  vfio_unregister_notifier()
+  vfio_pin_pages()
+  vfio_unpin_pages()
+  vfio_dma_rw()
+
+The following group APIs are obsoleted and removed by just using struct
+vfio_device with the above:
+  vfio_group_pin_pages()
+  vfio_group_unpin_pages()
+  vfio_group_iommu_domain()
+  vfio_group_get_external_user_from_dev()
+
+To retain the performance of the new device APIs relative to their group
+versions optimize how vfio_group_add_container_user() is used to avoid
+calling it when the driver must already guarantee the device is open and
+the container_users incrd.
+
+The remaining exported VFIO group interfaces are only used by kvm, and are
+addressed by a parallel series.
+
+There is a conflict with Christoph's gvt rework here:
+
+ https://lore.kernel.org/all/20220411141403.86980-1-hch@lst.de/
+
+I've organized this so it is independent of Christoph's series, by adding
+the temporary mdev_legacy_get_vfio_device(), however it is easy for me to
+rebase. We can decide what to do as we see what becomes mergable. My
+preference would be to see Christoph's series merged into the drm&vfio
+trees and we do both series this cycle.
+
+I have a followup series that needs this.
+
+This is also part of the iommufd work - moving the driver facing interface
+to vfio_device provides a much cleaner path to integrate with iommufd.
+
+Signed-off-by: Jason Gunthorpe <jgg@nvidia.com>
+
+Jason Gunthorpe (9):
+  vfio: Make vfio_(un)register_notifier accept a vfio_device
+  vfio/ccw: Remove mdev from struct channel_program
+  vfio/mdev: Pass in a struct vfio_device * to vfio_pin/unpin_pages()
+  drm/i915/gvt: Change from vfio_group_(un)pin_pages to
+    vfio_(un)pin_pages
+  vfio: Pass in a struct vfio_device * to vfio_dma_rw()
+  drm/i915/gvt: Add missing module_put() in error unwind
+  drm/i915/gvt: Delete kvmgt_vdev::vfio_group
+  vfio: Remove dead code
+  vfio: Remove calls to vfio_group_add_container_user()
+
+ .../driver-api/vfio-mediated-device.rst       |   4 +-
+ drivers/gpu/drm/i915/gvt/kvmgt.c              |  48 ++-
+ drivers/s390/cio/vfio_ccw_cp.c                |  44 +--
+ drivers/s390/cio/vfio_ccw_cp.h                |   4 +-
+ drivers/s390/cio/vfio_ccw_fsm.c               |   3 +-
+ drivers/s390/cio/vfio_ccw_ops.c               |   7 +-
+ drivers/s390/crypto/vfio_ap_ops.c             |  22 +-
+ drivers/vfio/mdev/vfio_mdev.c                 |  12 +
+ drivers/vfio/vfio.c                           | 283 ++----------------
+ include/linux/mdev.h                          |   1 +
+ include/linux/vfio.h                          |  21 +-
+ 11 files changed, 115 insertions(+), 334 deletions(-)
+
+
+base-commit: ce522ba9ef7e2d9fb22a39eb3371c0c64e2a433e
+-- 
+2.35.1
+
