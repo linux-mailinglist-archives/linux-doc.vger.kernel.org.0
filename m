@@ -2,91 +2,55 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id CE28B50095F
-	for <lists+linux-doc@lfdr.de>; Thu, 14 Apr 2022 11:09:17 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 0A03C500983
+	for <lists+linux-doc@lfdr.de>; Thu, 14 Apr 2022 11:18:22 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S238109AbiDNJLY (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 14 Apr 2022 05:11:24 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:44446 "EHLO
+        id S241608AbiDNJUm (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 14 Apr 2022 05:20:42 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:40850 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S241565AbiDNJLX (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Thu, 14 Apr 2022 05:11:23 -0400
-Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.129.124])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTP id 8AC7F6E574
-        for <linux-doc@vger.kernel.org>; Thu, 14 Apr 2022 02:08:58 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-        s=mimecast20190719; t=1649927337;
+        with ESMTP id S241358AbiDNJUi (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Thu, 14 Apr 2022 05:20:38 -0400
+Received: from galois.linutronix.de (Galois.linutronix.de [193.142.43.55])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 25B1A50B34;
+        Thu, 14 Apr 2022 02:18:14 -0700 (PDT)
+From:   Kurt Kanzenbach <kurt@linutronix.de>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linutronix.de;
+        s=2020; t=1649927892;
         h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-         to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-         content-transfer-encoding:content-transfer-encoding:
-         in-reply-to:in-reply-to:references:references;
-        bh=EXK01xwL5FfymBT2O/wpbjGm/1sDlFHcoIHw2SavFDU=;
-        b=B06tffjLZSX1XnvvZA+ozn+tQWpM5Jcmyiag3mzobVOeiWdedUkdctcnhe7+gVyeOmUOu9
-        9Om/KHnT0XS9r1aKaXAkhMrjwh1t2rwVyp86Vh3lHmY+jBA5oxN8KCJ71kvAjnUShYBMJH
-        aqeHiq6eWy3YJYgOp7A4MB3yLA9fQ3E=
-Received: from mail-wm1-f69.google.com (mail-wm1-f69.google.com
- [209.85.128.69]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- us-mta-439-YDOMtDKaOLy8rMGP0kxKCQ-1; Thu, 14 Apr 2022 05:08:48 -0400
-X-MC-Unique: YDOMtDKaOLy8rMGP0kxKCQ-1
-Received: by mail-wm1-f69.google.com with SMTP id i66-20020a1c3b45000000b0038eab4e0feaso2129013wma.9
-        for <linux-doc@vger.kernel.org>; Thu, 14 Apr 2022 02:08:48 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=x-gm-message-state:message-id:date:mime-version:user-agent:subject
-         :content-language:to:cc:references:from:in-reply-to
-         :content-transfer-encoding;
-        bh=EXK01xwL5FfymBT2O/wpbjGm/1sDlFHcoIHw2SavFDU=;
-        b=jdV4m7HAgSiyC2kf1FPVRPdDGXG8LBXg8JBAtnuKataN9yXUNOuGwKUGowrAFh/6fD
-         hFJw38CzwY8AwgF8y3nxsHd+zMamFpo45XLxcl1tWUo48NMPw7Jv7sN/P5G91c3vndcU
-         1AKxN/lrCxdXKF3agmDmCdqhiWPsHqdgrC50/wGpg/aknFgP9DckPEQa2TMEw01ABexk
-         STF6GMGTyyGsZxYrD1dhGfXNwdi0xvF72TNY7VJ8RWM6irLNL82y80x2keKh7t6MGThk
-         BrBg1kdK14PgodkcAE29ClzMnZIWOjvZRH5vNU6tHKyJM3gnEnf4WpHv7co0gi2hn3D5
-         3Pew==
-X-Gm-Message-State: AOAM533DNKXjYTc95SIWImM+w3TFjuXjoaIWv8U0GJU6WgqRlffHiBZ+
-        JePlxiIi/EEAoQ2+ALM1Ym4ZUa88SXyrHnW5iWcH2P8ixFXWaN52s2UMLVQXcGZ5ZEqTBQ3wmCx
-        nItSDJmpTBziVNH8QMCXD
-X-Received: by 2002:a5d:64a5:0:b0:205:8e66:e9b1 with SMTP id m5-20020a5d64a5000000b002058e66e9b1mr1312050wrp.464.1649927327730;
-        Thu, 14 Apr 2022 02:08:47 -0700 (PDT)
-X-Google-Smtp-Source: ABdhPJwAXM3iNNx7LZYO7MKlv+Z8ZcSXxb0BvT2R6br6VU+ZZLHt08JHqpN2CnaubzNSWxNIqo5rdQ==
-X-Received: by 2002:a5d:64a5:0:b0:205:8e66:e9b1 with SMTP id m5-20020a5d64a5000000b002058e66e9b1mr1312028wrp.464.1649927327531;
-        Thu, 14 Apr 2022 02:08:47 -0700 (PDT)
-Received: from ?IPV6:2001:b07:6468:f312:c8dd:75d4:99ab:290a? ([2001:b07:6468:f312:c8dd:75d4:99ab:290a])
-        by smtp.googlemail.com with ESMTPSA id r4-20020a05600c35c400b0038cbd8c41e9sm4947976wmq.12.2022.04.14.02.08.46
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Thu, 14 Apr 2022 02:08:46 -0700 (PDT)
-Message-ID: <683974e7-5801-e289-8fa4-c8a8d21ec1b2@redhat.com>
-Date:   Thu, 14 Apr 2022 11:08:45 +0200
-MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.7.0
-Subject: Re: [RFC PATCH V3 3/4] KVM: X86: Alloc role.pae_root shadow page
-Content-Language: en-US
-To:     Lai Jiangshan <jiangshanlai@gmail.com>,
-        Sean Christopherson <seanjc@google.com>
-Cc:     LKML <linux-kernel@vger.kernel.org>, kvm@vger.kernel.org,
-        Lai Jiangshan <jiangshan.ljs@antgroup.com>,
-        Jonathan Corbet <corbet@lwn.net>,
-        Vitaly Kuznetsov <vkuznets@redhat.com>,
-        Wanpeng Li <wanpengli@tencent.com>,
-        Jim Mattson <jmattson@google.com>,
-        Joerg Roedel <joro@8bytes.org>,
+         to:to:cc:cc:mime-version:mime-version:
+         content-transfer-encoding:content-transfer-encoding;
+        bh=VKYOKsNdtO2aGH0r6q2BwEHQC1rQZ88mXZkktgYJ4/M=;
+        b=fMEDdqLD67Im0YAB13eH/+DEbam1jQociwxB96JNa3zPzdM6DQqjoG1jroCoSV2nnnwkBH
+        fLKur5K2WWkZ2qAOtUUboTc/+1T0Dphvz0hHIYbur9ZNZX/pvnAdYRkiEUxMGDvUFsysee
+        siMxqZzxKrO0F4B1YJAGDvM0Vm2GxSEoLNQyOAwiJTjEwUKfu5TmSjAd0y8COHgIUanJ7s
+        fERMeFkrqtIEjBaDl2J/UCGf25sLTQ9kHVlCBdIzVBqq2L0MBrJ5OClTD0n41yxOE5UmFS
+        4u91nEvC4UadJOZslVkHhy416tn1ZXlPGH+cgwH1ZvWgVQG5QSgHmu/9mUizyA==
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=linutronix.de;
+        s=2020e; t=1649927892;
+        h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+         to:to:cc:cc:mime-version:mime-version:
+         content-transfer-encoding:content-transfer-encoding;
+        bh=VKYOKsNdtO2aGH0r6q2BwEHQC1rQZ88mXZkktgYJ4/M=;
+        b=sero7Ruh9jP3d3VowrepRmpjg7HgtFyrarLTJ3Ys29MkDnSdA84oPsf2bygzOdsNcBl9de
+        euYeBzXWygmu/5BQ==
+To:     John Stultz <john.stultz@linaro.org>,
         Thomas Gleixner <tglx@linutronix.de>,
-        Ingo Molnar <mingo@redhat.com>, Borislav Petkov <bp@alien8.de>,
-        Dave Hansen <dave.hansen@linux.intel.com>,
-        X86 ML <x86@kernel.org>, "H. Peter Anvin" <hpa@zytor.com>,
-        linux-doc@vger.kernel.org
-References: <20220330132152.4568-1-jiangshanlai@gmail.com>
- <20220330132152.4568-4-jiangshanlai@gmail.com> <YlXrshJa2Sd1WQ0P@google.com>
- <CAJhGHyD-4YFDhkxk2SQFmKe3ooqw_0wE+9u3+sZ8zOdSUfbnxw@mail.gmail.com>
-From:   Paolo Bonzini <pbonzini@redhat.com>
-In-Reply-To: <CAJhGHyD-4YFDhkxk2SQFmKe3ooqw_0wE+9u3+sZ8zOdSUfbnxw@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-Spam-Status: No, score=-5.3 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,NICE_REPLY_A,
-        RCVD_IN_DNSWL_LOW,RCVD_IN_MSPIKE_H4,RCVD_IN_MSPIKE_WL,SPF_HELO_NONE,
-        SPF_NONE,T_SCC_BODY_TEXT_LINE autolearn=unavailable autolearn_force=no
+        Stephen Boyd <sboyd@kernel.org>,
+        Steven Rostedt <rostedt@goodmis.org>,
+        Ingo Molnar <mingo@redhat.com>,
+        Jonathan Corbet <corbet@lwn.net>
+Cc:     Richard Cochran <richardcochran@gmail.com>,
+        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
+        Kurt Kanzenbach <kurt@linutronix.de>
+Subject: [PATCH v2 0/3] tracing: Introduce trace clock tai
+Date:   Thu, 14 Apr 2022 11:18:02 +0200
+Message-Id: <20220414091805.89667-1-kurt@linutronix.de>
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
+X-Spam-Status: No, score=-4.4 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_MED,SPF_HELO_NONE,
+        SPF_PASS,T_SCC_BODY_TEXT_LINE autolearn=ham autolearn_force=no
         version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
@@ -94,21 +58,45 @@ Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On 4/14/22 11:07, Lai Jiangshan wrote:
->> I don't think this will work for shadow paging.  CR3 only has to be 32-byte aligned
->> for PAE paging.  Unless I'm missing something subtle in the code, KVM will incorrectly
->> reuse a pae_root if the guest puts multiple PAE CR3s on a single page because KVM's
->> gfn calculation will drop bits 11:5.
-> 
-> I forgot about it.
+Hi,
 
+the Linux kernel tracing infrastructure has support for using different clocks
+to generate timestamps for trace events. Especially in TSN networks it's useful
+to have TAI as trace clock, because the application scheduling is done in
+accordance to the network time, which is based on TAI. With a tai trace_clock in
+place, it becomes very convenient to correlate network activity with Linux
+kernel application traces.
 
-Isn't the pae_root always rebuilt by
+However, there's no fast accessor for CLOCK_TAI yet. Therefore, patch #1 is
+adding one. Patch #2 introduces the clock and the last one adds documentation
+for it.
 
-         if (!tdp_enabled && memcmp(mmu->pdptrs, pdpte, sizeof(mmu->pdptrs)))
-                 kvm_mmu_free_roots(vcpu->kvm, mmu, KVM_MMU_ROOT_CURRENT);
+Changes since v1:
 
-in load_pdptrs?  I think reuse cannot happen.
+ - Add missing data_race() annotation for TAI offset which is accessed without
+   any form of locking for KCSAN (Thomas)
+ - Add missing documentation entry for ktime_get_tai_fast_ns()
+ - Minor changelog tweaks
 
-Paolo
+Previous versions:
+
+ - https://lore.kernel.org/all/20220409081300.4762-1-kurt@linutronix.de/
+
+Thanks,
+Kurt
+
+Kurt Kanzenbach (3):
+  timekeeping: Introduce fast accessor to clock tai
+  tracing: Introduce trace clock tai
+  tracing: Add documentation for trace clock tai
+
+ Documentation/core-api/timekeeping.rst |  1 +
+ Documentation/trace/ftrace.rst         | 12 ++++++++++++
+ include/linux/timekeeping.h            |  1 +
+ kernel/time/timekeeping.c              | 17 +++++++++++++++++
+ kernel/trace/trace.c                   |  1 +
+ 5 files changed, 32 insertions(+)
+
+-- 
+2.30.2
 
