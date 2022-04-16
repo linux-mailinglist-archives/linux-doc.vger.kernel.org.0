@@ -2,128 +2,83 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id B520F503579
-	for <lists+linux-doc@lfdr.de>; Sat, 16 Apr 2022 11:04:05 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 5523D50368A
+	for <lists+linux-doc@lfdr.de>; Sat, 16 Apr 2022 14:14:13 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S229826AbiDPJGW (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Sat, 16 Apr 2022 05:06:22 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:51776 "EHLO
+        id S231836AbiDPMQm (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Sat, 16 Apr 2022 08:16:42 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:58002 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S229792AbiDPJGV (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Sat, 16 Apr 2022 05:06:21 -0400
-Received: from mail-pj1-x102a.google.com (mail-pj1-x102a.google.com [IPv6:2607:f8b0:4864:20::102a])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id B28921066E5
-        for <linux-doc@vger.kernel.org>; Sat, 16 Apr 2022 02:03:50 -0700 (PDT)
-Received: by mail-pj1-x102a.google.com with SMTP id s14-20020a17090a880e00b001caaf6d3dd1so13443979pjn.3
-        for <linux-doc@vger.kernel.org>; Sat, 16 Apr 2022 02:03:50 -0700 (PDT)
+        with ESMTP id S231346AbiDPMQj (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Sat, 16 Apr 2022 08:16:39 -0400
+Received: from mail-wm1-x335.google.com (mail-wm1-x335.google.com [IPv6:2a00:1450:4864:20::335])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 3CF8659389
+        for <linux-doc@vger.kernel.org>; Sat, 16 Apr 2022 05:14:07 -0700 (PDT)
+Received: by mail-wm1-x335.google.com with SMTP id r64so6263954wmr.4
+        for <linux-doc@vger.kernel.org>; Sat, 16 Apr 2022 05:14:07 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
-        h=message-id:date:mime-version:user-agent:subject:content-language:to
-         :cc:references:from:in-reply-to:content-transfer-encoding;
-        bh=r755sEHS6XKHg2sFZbGwHYnpwi1Rp7A12cZ06QPHbdc=;
-        b=MLC7JQ6aQUGV5rPBkez+gYUL9psM2ggrs1jAqzFDWJLruf11fmATFsOtoy94NHzoPT
-         sjwJGDPuWBtA+79RYJlTq3B5E2U8+MO+4jjRrl0Qkrk8pFpzdu6vgTegAGUN9lSQljlE
-         AVY6/4XkQcdEbRXeyk1C2nAUXBlzFY9VTfgK+whPUPPYVEjRMOo4XRnqaja+Ta5OcmmT
-         wYCrg9sKqaGsvlbyb0yIoUSkF8ZNh2sQE8XBmY+PeB/qvLi+hnf8H1KjpmHsPzQk975l
-         w3mkszl7gyG4Nqq28vw0Be2pj227RdVX4im7DLgpXcskPcpKi0TeOaQhzTCYlnp7S3Kd
-         nUUA==
+        h=mime-version:reply-to:from:date:message-id:subject:to
+         :content-transfer-encoding;
+        bh=SQy9P0rhOwUhvSd+a71wnOE0BH8FM3Td4SEvEsoSu9o=;
+        b=FqBJaCmRLB6hDI9JF8uSymsMmYxv0K6jhmjKnjGaz5Q61hmXGbYMaFF8bg1JJrah0A
+         3H9x/GA+jO9F15OiBljOnVWPtDvBH3zxPDN9AH0xiVdZoUuL8/H2lSzjIqMfAF/VRIk1
+         /hdsgcfZjYz5/wo6fI0wW3cegSiJPFFZvfgk+PKNs3OT8iyhqx/+jCx74fu6zx8fO6qB
+         sHmy0r+UnR1RbP9YN5tFoJOfWWEo9s1Oim4BHskG1ttUqSSH1b7ctBFzihmaGKMh4azo
+         oFgkEUesZ2O+QlpkkktzEEKVq+Zqxt4TJLi1S5Q7noyJ45eCxCnipuB+Wyl5knPM2rhu
+         REBw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=x-gm-message-state:message-id:date:mime-version:user-agent:subject
-         :content-language:to:cc:references:from:in-reply-to
-         :content-transfer-encoding;
-        bh=r755sEHS6XKHg2sFZbGwHYnpwi1Rp7A12cZ06QPHbdc=;
-        b=AhE2bDhIGcvOhAZvMgCncL4B/CtQEaCAONJfpPhWA617KxtgiIYFKnzDVZQKXKQM5E
-         +9zMgbwzgZDzAQlenEYZR5uHJQLAhkeLiAXZUWI/US0UzN1Kz/c0KO+J6g1ZdP2hnpCW
-         /xLu+G2b+GD8q/dCiuVnAtVjkgwK27qFdatZz9X4FCOcp0LzTWWCYTiLgK0EQg9P+YNJ
-         paCGGeDTRo7IC2lQmKGIIXr4xGR4Bf25CJ0tQuo1waHnmSbLUG+quAmSJTzJU6xkqGyf
-         Zyg7B2ipGV78x5pYo/JnGGkmADsSYSUi/Kdl4QG4rDwZv++PLw7ilySWqDBFZkTT597T
-         Sh0g==
-X-Gm-Message-State: AOAM530/seOiP02kXC9Ccavh1dGTFX4vYS6TD9bRYZSVCm002cu6RWsD
-        0d13XD+IW+2xCVrUiKbIsNg=
-X-Google-Smtp-Source: ABdhPJwfBrbUhWF1z0UBHxhGErrDKYlvqim44SjGpgxAl1hWz1QyFEo+5o0lCxr85+IGOFTgjHQXZg==
-X-Received: by 2002:a17:902:f605:b0:14f:5d75:4fb0 with SMTP id n5-20020a170902f60500b0014f5d754fb0mr2729015plg.101.1650099830157;
-        Sat, 16 Apr 2022 02:03:50 -0700 (PDT)
-Received: from [192.168.11.5] (KD106167171201.ppp-bb.dion.ne.jp. [106.167.171.201])
-        by smtp.gmail.com with ESMTPSA id pi2-20020a17090b1e4200b001c7b15928e0sm11634951pjb.23.2022.04.16.02.03.48
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Sat, 16 Apr 2022 02:03:49 -0700 (PDT)
-Message-ID: <09f5e92a-286b-afe3-ebea-2054363173d8@gmail.com>
-Date:   Sat, 16 Apr 2022 18:03:44 +0900
+        h=x-gm-message-state:mime-version:reply-to:from:date:message-id
+         :subject:to:content-transfer-encoding;
+        bh=SQy9P0rhOwUhvSd+a71wnOE0BH8FM3Td4SEvEsoSu9o=;
+        b=r9X0rXM82NF0Put5Ct4Z65WgZamE1PjuKsluKsDDH2Q1RAX+bdd1Mc1DrdVFVvq5Oq
+         6VF8pI1IACLtYIxKQBBIYPEaWaNVjPLE7R/A4xl53O9hFmlCBPIHx4iJqJe8RmmjwBTd
+         gr28Od+skGM1ZCq/A7ea/1OPDKwHlXi5yLF6RtNZe5pGQoYPWt/0bYzFAxMjZ7zK1JOc
+         SgQw6qgK8FoQLgR2xZFx+9QSX9vPMORh0PBQZcecbukP2/mfWB+WGbrFivYtQBhddU0l
+         5cCliDWMuFKA/C0raldN2fNd1i7UTSkBT48fC2xYfQZFNL3z0KnDe9qvVMOKgjoVu3H2
+         uZZw==
+X-Gm-Message-State: AOAM5332FAp5eb/UqMAdYnWJMnASIumEfWokU5GGHXLiAo4x07aE2T+D
+        ZCej12/45fYgrnAto1OEnoirxWHEwwrC3EnTNeY=
+X-Google-Smtp-Source: ABdhPJxyH2dEJMWTd8v4FKTwoRlAd0a187aYrY5b4hdGRWlfdnM0ousqI+7ujjkVYo7UCVc3EFdsOLHCTORi00W8av4=
+X-Received: by 2002:a05:600c:35c5:b0:390:9982:7409 with SMTP id
+ r5-20020a05600c35c500b0039099827409mr2948986wmq.127.1650111245808; Sat, 16
+ Apr 2022 05:14:05 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.7.0
-Subject: Re: Is there any Japanese translation maintainer?
-Content-Language: en-US
-To:     Jonathan Corbet <corbet@lwn.net>
-Cc:     linux-doc@vger.kernel.org,
-        Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
-        Kosuke Fujimoto <fujimotokosuke0@gmail.com>,
-        Tsugikazu Shibata <shibata@linuxfoundation.org>
-References: <172fa015-26df-c978-853d-3aba67c581cc@gmail.com>
- <15b941a4-c41d-3fc1-c4f8-9a6736f6b874@gmail.com>
- <87pmlh4f5h.fsf@meer.lwn.net>
-From:   Akira Yokosawa <akiyks@gmail.com>
-In-Reply-To: <87pmlh4f5h.fsf@meer.lwn.net>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-Spam-Status: No, score=-6.0 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_FROM,NICE_REPLY_A,
-        RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,SPF_PASS,T_SCC_BODY_TEXT_LINE
-        autolearn=ham autolearn_force=no version=3.4.6
+Received: by 2002:a05:6000:3cc:0:0:0:0 with HTTP; Sat, 16 Apr 2022 05:14:05
+ -0700 (PDT)
+Reply-To: orlandomoris56@gmail.com
+From:   Orlando Moris <ndanakadahonorine@gmail.com>
+Date:   Sat, 16 Apr 2022 12:14:05 +0000
+Message-ID: <CADx9BJCF1Z2OBk5BFju6cQLXwW6w4x+XtbNQiwYT6CvrUfvq6Q@mail.gmail.com>
+Subject: 
+To:     undisclosed-recipients:;
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: base64
+X-Spam-Status: No, score=2.8 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_FROM,FREEMAIL_REPLYTO,
+        FREEMAIL_REPLYTO_END_DIGIT,RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,SPF_PASS,
+        T_SCC_BODY_TEXT_LINE,UNDISC_FREEM autolearn=no autolearn_force=no
+        version=3.4.6
+X-Spam-Level: **
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-[+Cc: Shibata-san]
-
-On Sat, 16 Apr 2022 02:16:10 -0600,
-Jonathan Corbet wrote:
-> Akira Yokosawa <akiyks@gmail.com> writes:
-> 
->> On Wed, 13 Apr 2022 18:09:59 +0900,
->> Kosuke Fujimoto wrote:
->>> Hello,
->>>
->>> I would like to contact with Japanese documentation maintainer for some 
->>> changes. However, it looks like there is no one listed in MAINTAINERS file.
->>> Is there anyone who is maintaining Japanese documentation?
->>
->> Existing Japanese translation has a note on its first page saying:
->>
->>> This document is maintained by Tsugikazu Shibata <tshibata@ab.jp.nec.com>
->>
->> However, this email address is not reachable any more.
->>
->> I also have a few things I'd like to fix/update in it.
->> I'm glad to know there exists someone else who has similar
->> thoughts.
->>
->> I think I can play a role as a tentative maintainer who can
->> review your changes.
-> 
-> The Japanese translation has been effectively unmtaintained for some
-> years.  I would be delighted if somebody would be willing to work to
-> improve it - please don't hesitate!
-
-Jon,
-
-As a matter of fact, with Greg's kind help, I could reach
-Shibata-san, who is now with Linux Foundation.
-
-I'm preparing a patch adding an entry of DOCUMENTATION/JAPANESE
-to MAINTAINERS.
-
-Fujimoto-san is working on an update in ja_JP/howto.rst as well.
-
-You will likely see both of them shortly.
-Stay tuned!  ;-)
-
-        Thanks, Akira
-
-> 
-> Thanks,
-> 
-> jon
+2YXYsdit2KjZi9inINiMINmK2LHYrNmJINin2YTYudmE2YUg2KPZhiDZh9iw2Kcg2KfZhNio2LHZ
+itivINin2YTYpdmE2YPYqtix2YjZhtmKINin2YTYsNmKINmI2LXZhCDYpdmE2Ykg2LXZhtiv2YjZ
+giDYp9mE2KjYsdmK2K8NCtin2YTYrtin2LUg2KjZgyDZhNmK2LMg2K7Yt9ijINmI2YTZg9mG2Ycg
+2KrZhSDYqtmI2KzZitmH2Ycg2KXZhNmK2YMg2LnZhNmJINmI2KzZhyDYp9mE2KrYrdiv2YrYryDZ
+hNmE2YbYuNixINmB2YrZhy4g2YTYr9mKDQrYudix2LYgKDcuNTAwLjAwMC4wMCDYr9mI2YTYp9ix
+KSDYqtix2YPZhyDZhdmI2YPZhNmKINin2YTYsdin2K3ZhCDYp9mE2YXZh9mG2K/YsyDZg9in2LHZ
+hNmI2LMg2Iwg2KfZhNiw2Yog2LnYp9i0DQrZiNi52YXZhCDZh9mG2Kcg2YHZiiDZhNmI2YXZiiDY
+qtmI2LrZiCDZgtio2YQg2YjZgdin2KrZhyDYp9mE2YXYpNmE2YXYqSDZiNin2YTZhdij2LPYp9mI
+2YrYqSDZgdmKINit2KfYr9irINiz2YrYp9ix2Kkg2YXYuQ0K2LnYp9im2YTYqtmHINiMINmI2KPZ
+htinINij2KrYtdmEINio2YMg2YPYo9mC2LHYqCDYo9mC2LHYqNin2KEg2YTZgCDZhNmHINit2KrZ
+iSDYqtiq2YXZg9mGINmF2YYg2KfYs9iq2YTYp9mFINin2YTYo9mF2YjYp9mEDQrYudmG2K8g2KfZ
+hNmF2LfYp9mE2KjYp9iqLiDYudmE2Ykg2KfYs9iq2KzYp9io2KrZgyDYp9mE2LPYsdmK2LnYqSDY
+s9ij2KjZhNi62YMg2KjYo9mG2YXYp9i3DQrYqtmG2YHZitiwINmH2LDYpyDYp9mE2LnZh9ivLiDY
+jCDYp9iq2LXZhCDYqNmKINi52YTZiSDZh9iw2Ycg2KfZhNix2LPYp9im2YQg2KfZhNil2YTZg9iq
+2LHZiNmG2YrYqQ0KKG9ybGFuZG9tb3JpczU2QGdtYWlsLmNvbSkNCg==
