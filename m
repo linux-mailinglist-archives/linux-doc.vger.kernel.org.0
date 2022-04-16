@@ -2,83 +2,119 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 5523D50368A
-	for <lists+linux-doc@lfdr.de>; Sat, 16 Apr 2022 14:14:13 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id C9A6950368D
+	for <lists+linux-doc@lfdr.de>; Sat, 16 Apr 2022 14:20:38 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S231836AbiDPMQm (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Sat, 16 Apr 2022 08:16:42 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:58002 "EHLO
+        id S231893AbiDPMXH (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Sat, 16 Apr 2022 08:23:07 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:44746 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S231346AbiDPMQj (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Sat, 16 Apr 2022 08:16:39 -0400
-Received: from mail-wm1-x335.google.com (mail-wm1-x335.google.com [IPv6:2a00:1450:4864:20::335])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 3CF8659389
-        for <linux-doc@vger.kernel.org>; Sat, 16 Apr 2022 05:14:07 -0700 (PDT)
-Received: by mail-wm1-x335.google.com with SMTP id r64so6263954wmr.4
-        for <linux-doc@vger.kernel.org>; Sat, 16 Apr 2022 05:14:07 -0700 (PDT)
+        with ESMTP id S231346AbiDPMXH (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Sat, 16 Apr 2022 08:23:07 -0400
+Received: from mail-pl1-x633.google.com (mail-pl1-x633.google.com [IPv6:2607:f8b0:4864:20::633])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id F2A92CF4B3
+        for <linux-doc@vger.kernel.org>; Sat, 16 Apr 2022 05:20:34 -0700 (PDT)
+Received: by mail-pl1-x633.google.com with SMTP id q3so9013108plg.3
+        for <linux-doc@vger.kernel.org>; Sat, 16 Apr 2022 05:20:34 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=mime-version:reply-to:from:date:message-id:subject:to
-         :content-transfer-encoding;
-        bh=SQy9P0rhOwUhvSd+a71wnOE0BH8FM3Td4SEvEsoSu9o=;
-        b=FqBJaCmRLB6hDI9JF8uSymsMmYxv0K6jhmjKnjGaz5Q61hmXGbYMaFF8bg1JJrah0A
-         3H9x/GA+jO9F15OiBljOnVWPtDvBH3zxPDN9AH0xiVdZoUuL8/H2lSzjIqMfAF/VRIk1
-         /hdsgcfZjYz5/wo6fI0wW3cegSiJPFFZvfgk+PKNs3OT8iyhqx/+jCx74fu6zx8fO6qB
-         sHmy0r+UnR1RbP9YN5tFoJOfWWEo9s1Oim4BHskG1ttUqSSH1b7ctBFzihmaGKMh4azo
-         oFgkEUesZ2O+QlpkkktzEEKVq+Zqxt4TJLi1S5Q7noyJ45eCxCnipuB+Wyl5knPM2rhu
-         REBw==
+        d=arista.com; s=google;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc;
+        bh=10g5PeA+XaJ6h4fM6nvbGbNybYbukOrQjkFvmHObJsc=;
+        b=CgebbriGoAmkr1Rg5xVdZLvCCa309ajlKcDJD/JIiowCsjIx+cXkj7m8JGGVBfcW9r
+         wFzsYqQPaVFnDYbPKT+BdF2oE5TLzMdhyWQagqh1hTk55/3Kg1whLMV0OlsDBVPGEa08
+         XaVkOARq89nr1JApNWywxLqHflj7ZafQSGntDGnOnXwiH+0pKLKfEmuINxEWWLr2gBmd
+         CYdRtYch1N9wCOy/JfpTRLv9Ri4+tnR09/lcaWyPt2ZXYZoXBuKzOhI5XwZAdCEvvtL+
+         hDCOGwAfnk+mdI6Br0zfqKb3F5w7TuwFLISTguDvdAY+8JgZCJvJ+c+81e855UBlZlvi
+         smIw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=x-gm-message-state:mime-version:reply-to:from:date:message-id
-         :subject:to:content-transfer-encoding;
-        bh=SQy9P0rhOwUhvSd+a71wnOE0BH8FM3Td4SEvEsoSu9o=;
-        b=r9X0rXM82NF0Put5Ct4Z65WgZamE1PjuKsluKsDDH2Q1RAX+bdd1Mc1DrdVFVvq5Oq
-         6VF8pI1IACLtYIxKQBBIYPEaWaNVjPLE7R/A4xl53O9hFmlCBPIHx4iJqJe8RmmjwBTd
-         gr28Od+skGM1ZCq/A7ea/1OPDKwHlXi5yLF6RtNZe5pGQoYPWt/0bYzFAxMjZ7zK1JOc
-         SgQw6qgK8FoQLgR2xZFx+9QSX9vPMORh0PBQZcecbukP2/mfWB+WGbrFivYtQBhddU0l
-         5cCliDWMuFKA/C0raldN2fNd1i7UTSkBT48fC2xYfQZFNL3z0KnDe9qvVMOKgjoVu3H2
-         uZZw==
-X-Gm-Message-State: AOAM5332FAp5eb/UqMAdYnWJMnASIumEfWokU5GGHXLiAo4x07aE2T+D
-        ZCej12/45fYgrnAto1OEnoirxWHEwwrC3EnTNeY=
-X-Google-Smtp-Source: ABdhPJxyH2dEJMWTd8v4FKTwoRlAd0a187aYrY5b4hdGRWlfdnM0ousqI+7ujjkVYo7UCVc3EFdsOLHCTORi00W8av4=
-X-Received: by 2002:a05:600c:35c5:b0:390:9982:7409 with SMTP id
- r5-20020a05600c35c500b0039099827409mr2948986wmq.127.1650111245808; Sat, 16
- Apr 2022 05:14:05 -0700 (PDT)
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=10g5PeA+XaJ6h4fM6nvbGbNybYbukOrQjkFvmHObJsc=;
+        b=JguFXPxjCEhZHs5uP3LmQ2XNhxJCGqhzWRQ0j/1hkHrVo98XNwAsGlKRcbGNWc2sU4
+         8t9DcTl/0eGkxELPwoIyLPMJqGoakEH+iuUlwP9E0v2eMJ9lpGwSmc9J6UtSg3xHtY9a
+         uPRvUIl/TVybPIXvbNQyvbdg0m/MiN4avLndB24s7wWAjWcCDdcyWXB51ZjSHjhHvWcm
+         FkZnKOngglYr/X2OhE+qlXMHqBsgVphpoyiSzIHMfjfJ/c7vbPnlmj9FH5t08sh2Veb8
+         uH1H0POCQh44e9QADgHdUzvKg24n1tWII2v5hvi71O7RSWX98zvk0wUooGafOTuEac9s
+         Ob4g==
+X-Gm-Message-State: AOAM5336dVX5r1jBXAgiGiZdLWRw7JooiCImRffngab6C2KQ94nYFr/w
+        hhJatKcVVEFpyzVMSkWAtRYZV9UqhWkTl8W5QCv/UA==
+X-Google-Smtp-Source: ABdhPJyEwRorxFq6OT7m+o6QC9Ai2tfvWEY9TKOl8S83xNzbiirkOnUcAtuBGD2k9i6Sa/2MBVAssWO1MK9O/UnsI08=
+X-Received: by 2002:a17:903:285:b0:158:d693:c52c with SMTP id
+ j5-20020a170903028500b00158d693c52cmr3348830plr.36.1650111634362; Sat, 16 Apr
+ 2022 05:20:34 -0700 (PDT)
 MIME-Version: 1.0
-Received: by 2002:a05:6000:3cc:0:0:0:0 with HTTP; Sat, 16 Apr 2022 05:14:05
- -0700 (PDT)
-Reply-To: orlandomoris56@gmail.com
-From:   Orlando Moris <ndanakadahonorine@gmail.com>
-Date:   Sat, 16 Apr 2022 12:14:05 +0000
-Message-ID: <CADx9BJCF1Z2OBk5BFju6cQLXwW6w4x+XtbNQiwYT6CvrUfvq6Q@mail.gmail.com>
-Subject: 
-To:     undisclosed-recipients:;
+References: <20220415083402.39080-1-aajith@arista.com> <642672cb-8b11-c78f-8975-f287ece9e89e@gmail.com>
+In-Reply-To: <642672cb-8b11-c78f-8975-f287ece9e89e@gmail.com>
+From:   Arun Ajith S <aajith@arista.com>
+Date:   Sat, 16 Apr 2022 17:50:22 +0530
+Message-ID: <CAOvjArRX_CXbUdAbfnta9sBad30aV0Q7HSA6rNPTKPbENRsnqQ@mail.gmail.com>
+Subject: Re: [PATCH net-next v6] net/ipv6: Introduce accept_unsolicited_na
+ knob to implement router-side changes for RFC9131
+To:     Bagas Sanjaya <bagasdotme@gmail.com>
+Cc:     netdev@vger.kernel.org, davem@davemloft.net,
+        linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org,
+        David Ahern <dsahern@kernel.org>, yoshfuji@linux-ipv6.org,
+        kuba@kernel.org, pabeni@redhat.com, corbet@lwn.net,
+        prestwoj@gmail.com, Bob Gilligan <gilligan@arista.com>,
+        Salam Noureddine <noureddine@arista.com>,
+        Gautam Kachroo <gk@arista.com>
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: base64
-X-Spam-Status: No, score=2.8 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_FROM,FREEMAIL_REPLYTO,
-        FREEMAIL_REPLYTO_END_DIGIT,RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,SPF_PASS,
-        T_SCC_BODY_TEXT_LINE,UNDISC_FREEM autolearn=no autolearn_force=no
-        version=3.4.6
-X-Spam-Level: **
+X-Spam-Status: No, score=-2.1 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_NONE,
+        SPF_HELO_NONE,SPF_NONE,T_SCC_BODY_TEXT_LINE autolearn=ham
+        autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-2YXYsdit2KjZi9inINiMINmK2LHYrNmJINin2YTYudmE2YUg2KPZhiDZh9iw2Kcg2KfZhNio2LHZ
-itivINin2YTYpdmE2YPYqtix2YjZhtmKINin2YTYsNmKINmI2LXZhCDYpdmE2Ykg2LXZhtiv2YjZ
-giDYp9mE2KjYsdmK2K8NCtin2YTYrtin2LUg2KjZgyDZhNmK2LMg2K7Yt9ijINmI2YTZg9mG2Ycg
-2KrZhSDYqtmI2KzZitmH2Ycg2KXZhNmK2YMg2LnZhNmJINmI2KzZhyDYp9mE2KrYrdiv2YrYryDZ
-hNmE2YbYuNixINmB2YrZhy4g2YTYr9mKDQrYudix2LYgKDcuNTAwLjAwMC4wMCDYr9mI2YTYp9ix
-KSDYqtix2YPZhyDZhdmI2YPZhNmKINin2YTYsdin2K3ZhCDYp9mE2YXZh9mG2K/YsyDZg9in2LHZ
-hNmI2LMg2Iwg2KfZhNiw2Yog2LnYp9i0DQrZiNi52YXZhCDZh9mG2Kcg2YHZiiDZhNmI2YXZiiDY
-qtmI2LrZiCDZgtio2YQg2YjZgdin2KrZhyDYp9mE2YXYpNmE2YXYqSDZiNin2YTZhdij2LPYp9mI
-2YrYqSDZgdmKINit2KfYr9irINiz2YrYp9ix2Kkg2YXYuQ0K2LnYp9im2YTYqtmHINiMINmI2KPZ
-htinINij2KrYtdmEINio2YMg2YPYo9mC2LHYqCDYo9mC2LHYqNin2KEg2YTZgCDZhNmHINit2KrZ
-iSDYqtiq2YXZg9mGINmF2YYg2KfYs9iq2YTYp9mFINin2YTYo9mF2YjYp9mEDQrYudmG2K8g2KfZ
-hNmF2LfYp9mE2KjYp9iqLiDYudmE2Ykg2KfYs9iq2KzYp9io2KrZgyDYp9mE2LPYsdmK2LnYqSDY
-s9ij2KjZhNi62YMg2KjYo9mG2YXYp9i3DQrYqtmG2YHZitiwINmH2LDYpyDYp9mE2LnZh9ivLiDY
-jCDYp9iq2LXZhCDYqNmKINi52YTZiSDZh9iw2Ycg2KfZhNix2LPYp9im2YQg2KfZhNil2YTZg9iq
-2LHZiNmG2YrYqQ0KKG9ybGFuZG9tb3JpczU2QGdtYWlsLmNvbSkNCg==
+On Sat, Apr 16, 2022 at 11:13 AM Bagas Sanjaya <bagasdotme@gmail.com> wrote:
+>
+> On 4/15/22 15:34, Arun Ajith S wrote:
+> > +accept_unsolicited_na - BOOLEAN
+> > +     Add a new neighbour cache entry in STALE state for routers on receiving an
+> > +     unsolicited neighbour advertisement with target link-layer address option
+> > +     specified. This is as per router-side behavior documented in RFC9131.
+> > +     This has lower precedence than drop_unsolicited_na.
+> > +
+> > +      ====   ======  ======  ==============================================
+> > +      drop   accept  fwding                   behaviour
+> > +      ----   ------  ------  ----------------------------------------------
+> > +         1        X       X  Drop NA packet and don't pass up the stack
+> > +         0        0       X  Pass NA packet up the stack, don't update NC
+> > +         0        1       0  Pass NA packet up the stack, don't update NC
+> > +         0        1       1  Pass NA packet up the stack, and add a STALE
+> > +                             NC entry
+> > +      ====   ======  ======  ==============================================
+> > +
+> > +     This will optimize the return path for the initial off-link communication
+> > +     that is initiated by a directly connected host, by ensuring that
+> > +     the first-hop router which turns on this setting doesn't have to
+> > +     buffer the initial return packets to do neighbour-solicitation.
+> > +     The prerequisite is that the host is configured to send
+> > +     unsolicited neighbour advertisements on interface bringup.
+> > +     This setting should be used in conjunction with the ndisc_notify setting
+> > +     on the host to satisfy this prerequisite.
+> > +
+> > +     By default this is turned off.
+> > +
+>
+> Looks good. htmldocs builds successfully and the table displayed properly.
+>
+> Reviewed-by: Bagas Sanjaya <bagasdotme@gmail.com>
+>
+> However, I remind you the following:
+>
+> - The patch changelogs should be put between the dashes (---) and diffstat.
+>   I don't see the changelogs when I hit reply-all because you put them as
+>   message signature (at very bottom of patch message).
+> - DON'T DO top-posting, DO configure your MUA to make reply text below
+>   the quoted text instead.
+>
+> --
+> An old man doll... just what I always wanted! - Clara
+Thank you.
+I will keep the tips for the Changelog in my mind for my next patch.
