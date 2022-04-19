@@ -2,96 +2,90 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 27775506253
-	for <lists+linux-doc@lfdr.de>; Tue, 19 Apr 2022 04:54:29 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 16995506270
+	for <lists+linux-doc@lfdr.de>; Tue, 19 Apr 2022 05:02:28 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S238306AbiDSC5B (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 18 Apr 2022 22:57:01 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:56590 "EHLO
+        id S1343812AbiDSDE5 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 18 Apr 2022 23:04:57 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:34314 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S229510AbiDSC5A (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Mon, 18 Apr 2022 22:57:00 -0400
-Received: from bombadil.infradead.org (bombadil.infradead.org [IPv6:2607:7c80:54:e::133])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 91F1524BF6;
-        Mon, 18 Apr 2022 19:54:18 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-        d=infradead.org; s=bombadil.20210309; h=Content-Transfer-Encoding:
-        MIME-Version:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
-        Content-ID:Content-Description:In-Reply-To:References;
-        bh=WzX7TzG1xIdHxDY2BZ0Xm745acZi7pqaZxLEvJnxMaU=; b=D9QU5UEqO3Wr2E82Zk1zzLKNab
-        gmMBefBTbOEdSN8l/A+V29z1cFT5VZJL64bJhjAdpLd0p09KQMjf/w2Y2cLTf11uHIDHNElHBOsVN
-        QywYiuzvgpUm5NYGXNpAsa89xgO4FvBNmOMrjZO9ILOYg/T93M07ISqFfu17tZxgh5CVIDRJ97Ud4
-        LfCbKO5YocrU2plEaRUAzHoszdJM7QhELYD8eHX/C5Gtu0JDTloqE5+ibtbgEldXupiVpl9hJCd3/
-        5fgXBHlJBkz0Tjhjd6veeCwSfauwKpGQPe5B82mdLGqxAgIOBHs3T1//Dlry9loLvVZZu6KXnmUbn
-        7Fy5VUdg==;
-Received: from [2601:1c0:6280:3f0::aa0b] (helo=bombadil.infradead.org)
-        by bombadil.infradead.org with esmtpsa (Exim 4.94.2 #2 (Red Hat Linux))
-        id 1nge0P-001Cr7-Fu; Tue, 19 Apr 2022 02:54:17 +0000
-From:   Randy Dunlap <rdunlap@infradead.org>
-To:     linux-kernel@vger.kernel.org
-Cc:     Randy Dunlap <rdunlap@infradead.org>,
-        David Howells <dhowells@redhat.com>,
-        Jonathan Corbet <corbet@lwn.net>, linux-doc@vger.kernel.org
-Subject: [PATCH] Documentation: move watch_queue to core-api
-Date:   Mon, 18 Apr 2022 19:54:16 -0700
-Message-Id: <20220419025416.19434-1-rdunlap@infradead.org>
-X-Mailer: git-send-email 2.34.1
+        with ESMTP id S231714AbiDSDE4 (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Mon, 18 Apr 2022 23:04:56 -0400
+Received: from m228-13.mailgun.net (m228-13.mailgun.net [159.135.228.13])
+        by lindbergh.monkeyblade.net (Postfix) with UTF8SMTPS id 8BC3FE0D1
+        for <linux-doc@vger.kernel.org>; Mon, 18 Apr 2022 20:02:15 -0700 (PDT)
+DKIM-Signature: a=rsa-sha256; v=1; c=relaxed/relaxed; d=codeagain.dev; q=dns/txt;
+ s=smtp; t=1650337335; h=Content-Type: MIME-Version: Message-ID:
+ Subject: Subject: To: To: From: From: Date: Sender: Sender;
+ bh=1rL2vp7V7+wKoQ87BcU2C7fDdhb8wqUApGLXA1ggxm4=; b=ScQWv/e7Y9B35bI1i1tPLc7aMYXjy7Xz4IpX4FrnfAxrKZveDApD9FRJbmAwNHBVKksUzqx5
+ hpuiT4Lz8xAqId2Sb3L4XOeHnIxdUjmrm02+lo5IpH1zH5Z1UvX/+KULS2lWFSdk7yzlW/3Z
+ RDvrzYYSayoJmYjlGytePvYU7sylFjI7y2oXrzbJkZV9ojzz3O1+NNJAegQtDWdoOjBTzSD/
+ qZfRAfrse1ttqe4eJRZQ9kLka3OCk192sEXxwU89cbtwSHP7lLGTGthugWx8MV8p/sloamA5
+ SXWTaNYuBtkg7dX8x3zsP44rM2jr3q9liH0imB8iVtNsg9y7xWaJdQ==
+X-Mailgun-Sending-Ip: 159.135.228.13
+X-Mailgun-Sid: WyJkNWI4MiIsICJsaW51eC1kb2NAdmdlci5rZXJuZWwub3JnIiwgImJlOWM2ZCJd
+Received: from AN5Bruno (186-250-90-1.mhnet.com.br [186.250.90.1]) by
+ smtp-out-n02.prod.us-west-2.postgun.com with SMTP id
+ 625e2507487c9ee854800175 (version=TLS1.3, cipher=TLS_AES_128_GCM_SHA256);
+ Tue, 19 Apr 2022 02:57:11 GMT
+Sender: codeagain@codeagain.dev
+Date:   Mon, 18 Apr 2022 23:57:06 -0300
+From:   Bruno Moreira-Guedes <codeagain@codeagain.dev>
+To:     Jonathan Corbet <corbet@lwn.net>, linux-doc@vger.kernel.org,
+        linux-kernel@vger.kernel.org, outreachy@lists.linux.dev,
+        Bruno's Patch Watchbox <patch-reply@codeagain.dev>
+Subject: [PATCH 0/2] Docs: Update information at changes.rst
+Message-ID: <cover.1650336366.git.codeagain@codeagain.dev>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Spam-Status: No, score=-4.4 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_MED,SPF_HELO_NONE,
-        SPF_NONE,T_SCC_BODY_TEXT_LINE autolearn=ham autolearn_force=no
-        version=3.4.6
+Content-Type: multipart/signed; micalg=pgp-sha256;
+        protocol="application/pgp-signature"; boundary="bpzzsdc6houvacyh"
+Content-Disposition: inline
+X-Spam-Status: No, score=-2.1 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_NONE,
+        SPF_HELO_NONE,T_SCC_BODY_TEXT_LINE,T_SPF_PERMERROR
+        autolearn=unavailable autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Move watch_queue documentation to the core-api index and
-subdirectory.
 
-Fixes: c73be61cede5 ("pipe: Add general notification queue support")
-Signed-off-by: Randy Dunlap <rdunlap@infradead.org>
-Cc: David Howells <dhowells@redhat.com>
-Cc: Jonathan Corbet <corbet@lwn.net>
-Cc: linux-doc@vger.kernel.org
+--bpzzsdc6houvacyh
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+Add and update information at 'Documentation/process/changes.rst'. The
+text has outdated kernel version and misses the 'cpio' build
+requirement, necessary for the `kernel/gen_kheaders.sh` script called by
+the install target.
+
+The PATCH 1/2 fixes the missing cpio requirement, while PATCH 2/2 fixes
+the kernel version.
+
+Signed-off-by: Bruno Moreira-Guedes <codeagain@codeagain.dev>
 ---
+Bruno Moreira-Guedes (2):
+  Docs: Add cpio requirement to changes.rst
+  Docs: Update kernel series in changes.rst
 
- Documentation/core-api/index.rst             | 1 +
- Documentation/{ => core-api}/watch_queue.rst | 0
- Documentation/index.rst                      | 1 -
- 3 files changed, 1 insertion(+), 1 deletion(-)
- rename Documentation/{ => core-api}/watch_queue.rst (100%)
+ Documentation/process/changes.rst | 8 +++++++-
+ 1 file changed, 7 insertions(+), 1 deletion(-)
 
-diff --git a/Documentation/core-api/index.rst b/Documentation/core-api/index.rst
-index 972d46a5ddf6..2bfbf7093338 100644
---- a/Documentation/core-api/index.rst
-+++ b/Documentation/core-api/index.rst
-@@ -18,6 +18,7 @@ it.
- 
-    kernel-api
-    workqueue
-+   watch_queue
-    printk-basics
-    printk-formats
-    symbol-namespaces
-diff --git a/Documentation/watch_queue.rst b/Documentation/core-api/watch_queue.rst
-similarity index 100%
-rename from Documentation/watch_queue.rst
-rename to Documentation/core-api/watch_queue.rst
-diff --git a/Documentation/index.rst b/Documentation/index.rst
-index 1988c19d9daf..617503a39200 100644
---- a/Documentation/index.rst
-+++ b/Documentation/index.rst
-@@ -169,7 +169,6 @@ to ReStructured Text format, or are simply too old.
- 
-    tools/index
-    staging/index
--   watch_queue
- 
- 
- Translations
--- 
-2.34.1
+--=20
+2.35.3
 
+
+--bpzzsdc6houvacyh
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYIAB0WIQQTUrsHCxGmQ5vyKRAZtd3tyEY2kgUCYl4lAgAKCRAZtd3tyEY2
+kpd3AP9O+BHCyMUtLB86c1qgQEfZhDCee86AS1T4mqPw/ZIdOAD+KaTrWFtyqDTT
+7m3mQ+XzO7ShHw1XylPSkQr76iV3sgQ=
+=zLsk
+-----END PGP SIGNATURE-----
+
+--bpzzsdc6houvacyh--
