@@ -2,50 +2,50 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 827CA5070F9
-	for <lists+linux-doc@lfdr.de>; Tue, 19 Apr 2022 16:49:25 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 54C6D50713D
+	for <lists+linux-doc@lfdr.de>; Tue, 19 Apr 2022 17:00:46 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1351305AbiDSOvG (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 19 Apr 2022 10:51:06 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:42160 "EHLO
+        id S1345605AbiDSPBm (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 19 Apr 2022 11:01:42 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:52844 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1352193AbiDSOvE (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 19 Apr 2022 10:51:04 -0400
-Received: from m228-13.mailgun.net (m228-13.mailgun.net [159.135.228.13])
-        by lindbergh.monkeyblade.net (Postfix) with UTF8SMTPS id 858D73A1B1
-        for <linux-doc@vger.kernel.org>; Tue, 19 Apr 2022 07:48:20 -0700 (PDT)
+        with ESMTP id S242560AbiDSPBl (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 19 Apr 2022 11:01:41 -0400
+Received: from m228-62.mailgun.net (m228-62.mailgun.net [159.135.228.62])
+        by lindbergh.monkeyblade.net (Postfix) with UTF8SMTPS id 23EE93B029
+        for <linux-doc@vger.kernel.org>; Tue, 19 Apr 2022 07:58:58 -0700 (PDT)
 DKIM-Signature: a=rsa-sha256; v=1; c=relaxed/relaxed; d=codeagain.dev; q=dns/txt;
- s=smtp; t=1650379700; h=In-Reply-To: Content-Type: MIME-Version:
+ s=smtp; t=1650380338; h=In-Reply-To: Content-Type: MIME-Version:
  References: Message-ID: Subject: Subject: To: To: From: From: Date:
- Sender: Sender; bh=uM5EMjf3NP4QzCk0UqXPKFMY+n748Cl/JUdN11a6lQk=; b=ZZAPByZW9F/NdRf0zcIisTwTD2ZHwnDAQY+ytfMz5bOQwAnS1/Tr9CgJ9EEOVTvbLiAFQ4Xo
- 0h23dgM9vaE77jMfWuGRVfLy5o1T0tlSXr9PI7lOrzFb52xqFd6TGkgWn49tdxs9Gt8Ehhqx
- XC2v6YVoctKOMQ+GZlcbcUXL768KkZHYK23kbr1pTcag1MDsl0V/6Hvs6mstq7aNBYNKlAhu
- LX/ZamIy3P1Lxjw0Sryijan6/Mo62XtecIgRCvjA7ekQuYjDZGIPGNzlDTZZb17HaJazPK9/
- 2ECLgSiKuFToIi9teBrdWKAut+7ITLp21eyiO8/u4GfxC+0Vmc5Jyg==
-X-Mailgun-Sending-Ip: 159.135.228.13
+ Sender: Sender; bh=GjGIZv1fDSI8+XOsFgpIg9UmNpf9tCa3JfKCPZn26Ls=; b=EnZCf3hKa7r4xBhcDpsqM4iTHzMxLNHms8kJhjhfkQ7ymFL8tVeoZckEz78rnzzoVA/RVQHk
+ hP2B2XaAGAI2d8Vz86I1HJ6qrt2FTo8b8nFvAjhPL1/AiSy4ZfLwO1IlFxwPXAoMbTwIVrUD
+ JMRkaLygskDXISY2ijihbJJgGL1xzUz8YV/DcjST7jOf4ZbVKGyyekTX5/zHTu/AdIqMjZbt
+ m3qnss6rGCbfI+H5RiPAU4Uk18ywoLj3xjdCxPylMG26P9mK/apZtLA04HAEOW3qMGflTCnE
+ NFUx7ZDoXzaGLv5ri7V7UxGjDzvNYlrQz3DdVZX1DgLOnWHHFNx6Eg==
+X-Mailgun-Sending-Ip: 159.135.228.62
 X-Mailgun-Sid: WyJkNWI4MiIsICJsaW51eC1kb2NAdmdlci5rZXJuZWwub3JnIiwgImJlOWM2ZCJd
 Received: from AN5Bruno (dynamic-user.170.84.57.33.mhnet.com.br
- [170.84.57.33]) by smtp-out-n01.prod.us-west-2.postgun.com with SMTP id
- 625ecbb3c172fc5066005441 (version=TLS1.3, cipher=TLS_AES_128_GCM_SHA256);
- Tue, 19 Apr 2022 14:48:19 GMT
+ [170.84.57.33]) by smtp-out-n02.prod.us-west-2.postgun.com with SMTP id
+ 625ecbd8487c9ee854b06237 (version=TLS1.3, cipher=TLS_AES_128_GCM_SHA256);
+ Tue, 19 Apr 2022 14:48:56 GMT
 Sender: codeagain@codeagain.dev
-Date:   Tue, 19 Apr 2022 11:48:15 -0300
+Date:   Tue, 19 Apr 2022 11:48:52 -0300
 From:   Bruno Moreira-Guedes <codeagain@codeagain.dev>
 To:     Jonathan Corbet <corbet@lwn.net>, linux-doc@vger.kernel.org,
         linux-kernel@vger.kernel.org, outreachy@lists.linux.dev,
         Bruno's Patch Watchbox <patch-reply@codeagain.dev>
-Subject: [PATCH v2 1/2] Docs: Add cpio requirement to changes.rst
-Message-ID: <16abd8eb6a5c8398a030ae5d8919d5c8e92e2af1.1650376049.git.codeagain@codeagain.dev>
+Subject: [PATCH v2 2/2] Docs: Replace version by 'current' in changes.rst
+Message-ID: <664bdcbb2b33b866de200ac9c05fa020ecb27ffd.1650376049.git.codeagain@codeagain.dev>
 References: <cover.1650376049.git.codeagain@codeagain.dev>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha256;
-        protocol="application/pgp-signature"; boundary="ro2gw6s6psca55fi"
+        protocol="application/pgp-signature"; boundary="smwaj257h7s7n5bg"
 Content-Disposition: inline
 In-Reply-To: <cover.1650376049.git.codeagain@codeagain.dev>
 X-Spam-Status: No, score=-2.1 required=5.0 tests=BAYES_00,DKIM_SIGNED,
         DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_NONE,
-        SPF_HELO_NONE,T_SCC_BODY_TEXT_LINE,T_SPF_PERMERROR autolearn=ham
-        autolearn_force=no version=3.4.6
+        RCVD_IN_MSPIKE_H3,RCVD_IN_MSPIKE_WL,SPF_HELO_NONE,T_SCC_BODY_TEXT_LINE,
+        T_SPF_PERMERROR autolearn=unavailable autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
@@ -53,61 +53,49 @@ List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
 
---ro2gw6s6psca55fi
+--smwaj257h7s7n5bg
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-The install target requires cpio to run the `kernel/gen_kheaders.sh`
-script, but it's missing in the requirements list at
-'Documentation/process/changes.rst'. This patch adds it to the list.
+The file 'Documentation/process/changes.rst' states the listed
+requirements are for the 4.x kernel version. However, there are
+requirements updated for the 5.x version, as there might be in other
+future versions. This patch updates it to 'latest' so the document won't
+be outdated in the future.
 
 Signed-off-by: Bruno Moreira-Guedes <codeagain@codeagain.dev>
 ---
- Documentation/process/changes.rst | 6 ++++++
- 1 file changed, 6 insertions(+)
+ Documentation/process/changes.rst | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/Documentation/process/changes.rst b/Documentation/process/chan=
 ges.rst
-index a337e8eabfe1..41a44e5f47e6 100644
+index 41a44e5f47e6..34415ae1af1b 100644
 --- a/Documentation/process/changes.rst
 +++ b/Documentation/process/changes.rst
-@@ -56,6 +56,7 @@ iptables               1.4.2            iptables -V
- openssl & libcrypto    1.0.0            openssl version
- bc                     1.06.95          bc --version
- Sphinx\ [#f1]_         1.7              sphinx-build --version
-+cpio                   any              cpio --version
- =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D =3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D  =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D
+@@ -7,7 +7,7 @@ Intro
+ =3D=3D=3D=3D=3D
 =20
- .. [#f1] Sphinx is needed only to build the Kernel documentation
-@@ -458,6 +459,11 @@ mcelog
+ This document is designed to provide a list of the minimum levels of
+-software necessary to run the 4.x kernels.
++software necessary to run the current kernel version.
 =20
- - <http://www.mcelog.org/>
-=20
-+cpio
-+----
-+
-+- <https://www.gnu.org/software/cpio/>
-+
- Networking
- **********
-=20
+ This document is originally based on my "Changes" file for 2.0.x kernels
+ and therefore owes credit to the same people as that file (Jared Mauch,
 --=20
 2.35.3
 
 
---ro2gw6s6psca55fi
+--smwaj257h7s7n5bg
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iHUEABYIAB0WIQQTUrsHCxGmQ5vyKRAZtd3tyEY2kgUCYl7LrwAKCRAZtd3tyEY2
-khKiAPwMG6OI0lpf1AqUjruuyLLHmrs28B7fL3Coejgkddt3ywEAlONSYrtnoWbg
-xSXIjuZTI63w/6yE6VW9SjVVJ1KOFws=
-=juu4
+iHUEABYIAB0WIQQTUrsHCxGmQ5vyKRAZtd3tyEY2kgUCYl7L1AAKCRAZtd3tyEY2
+kjxuAQC2/iSX96CmxkNiFSJlO8cmjxx+nY1jpNuRRBKM/h1rKwEAkBFye8E5g73s
+zA5bJaF1FVz9nhBQP1YPEpjT6CgxcAY=
+=ytKt
 -----END PGP SIGNATURE-----
 
---ro2gw6s6psca55fi--
+--smwaj257h7s7n5bg--
