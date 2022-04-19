@@ -2,62 +2,49 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 3D53E5064BB
-	for <lists+linux-doc@lfdr.de>; Tue, 19 Apr 2022 08:43:20 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id E225E506596
+	for <lists+linux-doc@lfdr.de>; Tue, 19 Apr 2022 09:19:56 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1348971AbiDSGpx (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 19 Apr 2022 02:45:53 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:56082 "EHLO
+        id S1349257AbiDSHWe (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 19 Apr 2022 03:22:34 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:42684 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1348966AbiDSGpw (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 19 Apr 2022 02:45:52 -0400
-Received: from szxga02-in.huawei.com (szxga02-in.huawei.com [45.249.212.188])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 6CC1E30F7F;
-        Mon, 18 Apr 2022 23:43:10 -0700 (PDT)
-Received: from dggpemm500023.china.huawei.com (unknown [172.30.72.57])
-        by szxga02-in.huawei.com (SkyGuard) with ESMTP id 4KjDlB2KG7zhXb2;
-        Tue, 19 Apr 2022 14:43:02 +0800 (CST)
-Received: from dggpemm500014.china.huawei.com (7.185.36.153) by
- dggpemm500023.china.huawei.com (7.185.36.83) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2375.24; Tue, 19 Apr 2022 14:43:08 +0800
-Received: from localhost.localdomain (10.175.112.125) by
- dggpemm500014.china.huawei.com (7.185.36.153) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2375.24; Tue, 19 Apr 2022 14:43:07 +0800
-From:   Wupeng Ma <mawupeng1@huawei.com>
-To:     <akpm@linux-foundation.org>, <catalin.marinas@arm.com>,
-        <will@kernel.org>, <corbet@lwn.net>
-CC:     <ardb@kernel.org>, <tglx@linutronix.de>, <mingo@redhat.com>,
-        <bp@alien8.de>, <dave.hansen@linux.intel.com>, <x86@kernel.org>,
-        <dvhart@infradead.org>, <andy@infradead.org>, <rppt@kernel.org>,
-        <paulmck@kernel.org>, <peterz@infradead.org>, <jroedel@suse.de>,
-        <songmuchun@bytedance.com>, <macro@orcam.me.uk>,
-        <frederic@kernel.org>, <W_Armin@gmx.de>, <john.garry@huawei.com>,
-        <seanjc@google.com>, <tsbogend@alpha.franken.de>,
-        <anshuman.khandual@arm.com>, <chenhuacai@kernel.org>,
-        <david@redhat.com>, <gpiccoli@igalia.com>, <mark.rutland@arm.com>,
-        <wangkefeng.wang@huawei.com>, <mawupeng1@huawei.com>,
-        <linux-doc@vger.kernel.org>, <linux-kernel@vger.kernel.org>,
-        <linux-arm-kernel@lists.infradead.org>,
-        <linux-efi@vger.kernel.org>, <linux-ia64@vger.kernel.org>,
-        <platform-driver-x86@vger.kernel.org>, <linux-mm@kvack.org>
-Subject: [PATCH 2/2] arm64/boot: Add support to relocate kernel image to mirrored region without kaslr
-Date:   Tue, 19 Apr 2022 15:01:50 +0800
-Message-ID: <20220419070150.254377-3-mawupeng1@huawei.com>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20220419070150.254377-1-mawupeng1@huawei.com>
-References: <CAMj1kXGSStDgj9ABmUaTLnBmpQFksh3wx4tx=mJohum4GQe3Gg@mail.gmail.com>
- <20220419070150.254377-1-mawupeng1@huawei.com>
+        with ESMTP id S1349255AbiDSHWd (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 19 Apr 2022 03:22:33 -0400
+Received: from ms.lwn.net (ms.lwn.net [IPv6:2600:3c01:e000:3a1::42])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 9E77FFEC;
+        Tue, 19 Apr 2022 00:19:50 -0700 (PDT)
+Received: from localhost (mdns.lwn.net [45.79.72.68])
+        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+        (No client certificate requested)
+        by ms.lwn.net (Postfix) with ESMTPSA id 17A0A6E2;
+        Tue, 19 Apr 2022 07:19:48 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 ms.lwn.net 17A0A6E2
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=lwn.net; s=20201203;
+        t=1650352790; bh=ooJki6sjwm1hI0zPo+XkNZ8ui/EchIPHs5t8q6fhubs=;
+        h=From:To:Cc:Subject:In-Reply-To:References:Date:From;
+        b=OWMOncQHeK9xJiDfrnfVFrcLV3n6jkMHP9pghDEDIc1xs5f0F3ndY/9ocE8w8W3GP
+         DL3jSRyOHaJJjjAq+Pvvz9a/Vnzv0Poyeud5iykp0aLRRiKZggVNc9iWAIc39vruN4
+         ONfJSq09ygF/pTGEDi6TJaC19tB6wBdxCQASCpKlWC5SUqVVUalHnaGTR4qrhA3Aqc
+         i/mSV6eObXSkEPq/TZFCRKVsA6JqXcj+Qz+PS7ztT0FJvuML9cUdpvVGuk2APpiEMr
+         XqAZNRXs9izBZIrKl5O3ZCSz7tMcEiyFprH2BLWr8upsbQ3ysd+d2RBRfvFA998Riu
+         ok0UUTpqi05gg==
+From:   Jonathan Corbet <corbet@lwn.net>
+To:     Damien Le Moal <damien.lemoal@opensource.wdc.com>,
+        Randy Dunlap <rdunlap@infradead.org>, linux-doc@vger.kernel.org
+Cc:     patches@lists.linux.dev, Christoph Hellwig <hch@lst.de>,
+        Jens Axboe <axboe@kernel.dk>, linux-ide@vger.kernel.org,
+        linux-block@vger.kernel.org
+Subject: Re: [PATCH] Drop Documentation/ide/
+In-Reply-To: <7991758d-16b4-c9c4-0425-c2ec41943db8@opensource.wdc.com>
+References: <20220419011021.15527-1-rdunlap@infradead.org>
+ <7991758d-16b4-c9c4-0425-c2ec41943db8@opensource.wdc.com>
+Date:   Tue, 19 Apr 2022 01:19:45 -0600
+Message-ID: <87ilr5zgj2.fsf@meer.lwn.net>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 7BIT
-Content-Type:   text/plain; charset=US-ASCII
-X-Originating-IP: [10.175.112.125]
-X-ClientProxiedBy: dggems705-chm.china.huawei.com (10.3.19.182) To
- dggpemm500014.china.huawei.com (7.185.36.153)
-X-CFilter-Loop: Reflected
-X-Spam-Status: No, score=-4.2 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_MED,
-        RCVD_IN_MSPIKE_H5,RCVD_IN_MSPIKE_WL,SPF_HELO_NONE,SPF_PASS,
+Content-Type: text/plain
+X-Spam-Status: No, score=-2.1 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,SPF_HELO_NONE,SPF_PASS,
         T_SCC_BODY_TEXT_LINE autolearn=ham autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
@@ -65,54 +52,29 @@ Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-From: Ma Wupeng <mawupeng1@huawei.com>
+Damien Le Moal <damien.lemoal@opensource.wdc.com> writes:
 
-Add support to relocate kernel image to mirrord regions if KASLR doesn't
-work.
+> On 4/19/22 10:10, Randy Dunlap wrote:
+>> Drop all Documentation/ide/ since IDE support was deleted by
+>> Christoph Hellwig <hch@lst.de>, Jun 16 2021.
+>> 
+>> Fixes: b7fb14d3ac63 ("ide: remove the legacy ide driver")
+>> Signed-off-by: Randy Dunlap <rdunlap@infradead.org>
+>> Cc: Christoph Hellwig <hch@lst.de>
+>> Cc: Jens Axboe <axboe@kernel.dk>
+>> Cc: linux-ide@vger.kernel.org
+>> Cc: linux-block@vger.kernel.org
+>
+> Acked-by: Damien Le Moal <damien.lemoal@opensource.wdc.com>
+>
+> Jonathan,
+>
+> Are you going to take this patch or do you want me to queue it through the
+> libata tree ?
 
-If a suiable mirrored slot if found, call efi_random_alloc() with
-random_seed be zero to relocate kernel code and data to the first slot
-available.
+I'll take it, unless you want to carry it for some reason - just let me
+know.
 
-Signed-off-by: Ma Wupeng <mawupeng1@huawei.com>
----
- drivers/firmware/efi/libstub/arm64-stub.c  | 10 ++++++++++
- drivers/firmware/efi/libstub/randomalloc.c |  1 +
- 2 files changed, 11 insertions(+)
+Thanks,
 
-diff --git a/drivers/firmware/efi/libstub/arm64-stub.c b/drivers/firmware/efi/libstub/arm64-stub.c
-index 39b774853b93..851a8948cafb 100644
---- a/drivers/firmware/efi/libstub/arm64-stub.c
-+++ b/drivers/firmware/efi/libstub/arm64-stub.c
-@@ -190,6 +190,16 @@ efi_status_t handle_kernel_image(unsigned long *image_addr,
- 	}
- 
- 	if (status != EFI_SUCCESS) {
-+		if (efi_mirror_found) {
-+			status = efi_random_alloc(*reserve_size, min_kimg_align,
-+					  reserve_addr, 0,
-+					  efi_mirror_found);
-+			if (status == EFI_SUCCESS)
-+				goto out;
-+
-+			efi_err("Failed to relocate kernel to mirrored region\n");
-+		}
-+
- 		if (!check_image_region((u64)_text, kernel_memsize)) {
- 			efi_err("FIRMWARE BUG: Image BSS overlaps adjacent EFI memory region\n");
- 		} else if (IS_ALIGNED((u64)_text, min_kimg_align)) {
-diff --git a/drivers/firmware/efi/libstub/randomalloc.c b/drivers/firmware/efi/libstub/randomalloc.c
-index dd81d6c3c406..d5f4249943a7 100644
---- a/drivers/firmware/efi/libstub/randomalloc.c
-+++ b/drivers/firmware/efi/libstub/randomalloc.c
-@@ -50,6 +50,7 @@ unsigned long get_entry_num_slots(efi_memory_desc_t *md,
-  */
- #define MD_NUM_SLOTS(md)	((md)->virt_addr)
- 
-+/* random_seed == 0 means alloc mem from the first suitable slot */
- efi_status_t efi_random_alloc(unsigned long size,
- 			      unsigned long align,
- 			      unsigned long *addr,
--- 
-2.25.1
-
+jon
