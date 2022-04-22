@@ -2,153 +2,108 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 6967450C1AD
-	for <lists+linux-doc@lfdr.de>; Sat, 23 Apr 2022 00:07:06 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 1ACCD50C1BC
+	for <lists+linux-doc@lfdr.de>; Sat, 23 Apr 2022 00:07:13 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S231402AbiDVWFF (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Fri, 22 Apr 2022 18:05:05 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:34000 "EHLO
+        id S231517AbiDVWIz (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Fri, 22 Apr 2022 18:08:55 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:37334 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S231416AbiDVWFB (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Fri, 22 Apr 2022 18:05:01 -0400
-Received: from mga04.intel.com (mga04.intel.com [192.55.52.120])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id F049B12C8D3;
-        Fri, 22 Apr 2022 13:47:36 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1650660457; x=1682196457;
-  h=date:from:to:cc:subject:message-id:references:
-   mime-version:in-reply-to;
-  bh=3ykNKyTeK2OUg9JXBqIirdWxYu+LgsMf1w5bMSCs968=;
-  b=eT4ZZrpmzTYQt6/lP8bXOpH30uGpVLY3xNmmY5z4K7OG+Gtw7w2zXfGv
-   gdlBpOYsi+lpSOHuLdBibvUjVQ4Xjl97+BPAtcwbvjZJtuMh8of61e1sS
-   zBkjZdLNVBdCiai5tAWzsyKAUqGMkscocaRGDql+g/LZWP6GuYN/cbLx0
-   WgEjPZEXMw+pdOTm8Aw5VY8hEMlfknvBu/DLTu9aMul0Y0n0Jzw6fU1nG
-   4YBgdy0DhRyOIG8fX8N7bGhMWsojXbwtbqbhuPCapqcAfSbBnEjyOT7UM
-   GWuQe3nvUkOapscBu6GivPRAlvsGSyRb/HKbtPXxcH2YOLFMwqGJ3ny/3
-   g==;
-X-IronPort-AV: E=McAfee;i="6400,9594,10324"; a="263600761"
-X-IronPort-AV: E=Sophos;i="5.90,282,1643702400"; 
-   d="scan'208";a="263600761"
-Received: from fmsmga001.fm.intel.com ([10.253.24.23])
-  by fmsmga104.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 22 Apr 2022 11:38:09 -0700
-X-IronPort-AV: E=Sophos;i="5.90,282,1643702400"; 
-   d="scan'208";a="703659339"
-Received: from hltravis-mobl1.amr.corp.intel.com (HELO localhost) ([10.213.166.215])
-  by fmsmga001-auth.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 22 Apr 2022 11:38:09 -0700
-Date:   Fri, 22 Apr 2022 11:38:09 -0700
-From:   Ira Weiny <ira.weiny@intel.com>
-To:     "Fabio M. De Francesco" <fmdefrancesco@gmail.com>
-Cc:     Andrew Morton <akpm@linux-foundation.org>,
-        Catalin Marinas <catalin.marinas@arm.com>,
-        "Matthew Wilcox (Oracle)" <willy@infradead.org>,
-        Will Deacon <will@kernel.org>,
-        Peter Collingbourne <pcc@google.com>,
-        Vlastimil Babka <vbabka@suse.cz>,
-        Sebastian Andrzej Siewior <bigeasy@linutronix.de>,
-        linux-kernel@vger.kernel.org, Jonathan Corbet <corbet@lwn.net>,
-        linux-doc@vger.kernel.org, outreachy@lists.linux.dev,
-        Thomas Gleixner <tglx@linutronix.de>,
-        Peter Zijlstra <peterz@infradead.org>
-Subject: Re: [PATCH 3/4] Documentation/vm: Remove "Using kmap-atomic" from
- highmem.rst.
-Message-ID: <YmL2EQhfQLMoU1WV@iweiny-desk3>
-References: <20220421180200.16901-1-fmdefrancesco@gmail.com>
- <20220421180200.16901-4-fmdefrancesco@gmail.com>
+        with ESMTP id S232375AbiDVWIO (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Fri, 22 Apr 2022 18:08:14 -0400
+Received: from alexa-out-sd-01.qualcomm.com (alexa-out-sd-01.qualcomm.com [199.106.114.38])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 2C67B1DFE78;
+        Fri, 22 Apr 2022 13:54:35 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+  d=quicinc.com; i=@quicinc.com; q=dns/txt; s=qcdkim;
+  t=1650660876; x=1682196876;
+  h=from:to:cc:subject:date:message-id:mime-version:
+   content-transfer-encoding;
+  bh=Yhh9Ox6gWEy5WyqGfCoP9kTx2lrAgn2h1flSuBeiyak=;
+  b=XYOGMIPiSF5FUuqyXzh+bWHtx0r8uqrmxsX7V1nLlIk2Oqclw5clK93f
+   /dU06yXbzlg8taNrypbNQeT8m7y+pRAyATwjHjc/x5+lvsAuXz41SqrwW
+   qMKz9uIkpF5JJcIrJM78KaUQdaS11T4BiveDQTn8Px/MmmOStt3Y39Soa
+   8=;
+Received: from unknown (HELO ironmsg04-sd.qualcomm.com) ([10.53.140.144])
+  by alexa-out-sd-01.qualcomm.com with ESMTP; 22 Apr 2022 12:13:23 -0700
+X-QCInternal: smtphost
+Received: from nasanex01c.na.qualcomm.com ([10.47.97.222])
+  by ironmsg04-sd.qualcomm.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 22 Apr 2022 12:13:20 -0700
+Received: from nalasex01a.na.qualcomm.com (10.47.209.196) by
+ nasanex01c.na.qualcomm.com (10.47.97.222) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.986.22; Fri, 22 Apr 2022 12:13:20 -0700
+Received: from hu-amelende-lv.qualcomm.com (10.49.16.6) by
+ nalasex01a.na.qualcomm.com (10.47.209.196) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.986.22; Fri, 22 Apr 2022 12:13:19 -0700
+From:   Anjelique Melendez <quic_amelende@quicinc.com>
+To:     <dmitry.torokhov@gmail.com>, <corbet@lwn.net>, <sre@kernel.org>,
+        <robh+dt@kernel.org>
+CC:     <linux-input@vger.kernel.org>, <linux-kernel@vger.kernel.org>,
+        <linux-arm-msm@vger.kernel.org>, <bjorn.andersson@linaro.org>,
+        <swboyd@chromium.org>, <linux-doc@vger.kernel.org>,
+        <linux-pm@vger.kernel.org>, <devicetree@vger.kernel.org>,
+        Anjelique Melendez <quic_amelende@quicinc.com>
+Subject: [PATCH v6 0/5] Extend pm8941-pwrkey driver
+Date:   Fri, 22 Apr 2022 12:12:35 -0700
+Message-ID: <20220422191239.6271-1-quic_amelende@quicinc.com>
+X-Mailer: git-send-email 2.35.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20220421180200.16901-4-fmdefrancesco@gmail.com>
-X-Spam-Status: No, score=-5.0 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_MED,
-        SPF_HELO_NONE,SPF_NONE autolearn=ham autolearn_force=no version=3.4.6
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Originating-IP: [10.49.16.6]
+X-ClientProxiedBy: nalasex01a.na.qualcomm.com (10.47.209.196) To
+ nalasex01a.na.qualcomm.com (10.47.209.196)
+X-Spam-Status: No, score=-4.4 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_MED,SPF_HELO_NONE,
+        SPF_PASS autolearn=ham autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Thu, Apr 21, 2022 at 08:01:59PM +0200, Fabio M. De Francesco wrote:
-> The use of kmap_atomic() is deprecated in favor of kmap_local_page().
+Changed from v5:
+  - Addressed Rob's comment in 1/5 and fixed reg property
+  - Addressed Dmitry's comment in 3/5 ang got rid of declaring
+    properties as false
 
-I'm not sure deprecated is the right word.  And I think the fact that this
-documentation is stale is a better reason for the patch as is.
+Changes from v4:
+  - Added new dt-binding patch as 1/5
+ 
+Changes from v3:
+  - Fixed dereference issue in 2/4
+  - Added Stephen's reviewed by tag for 2/4
 
-This series should end up indicating the desire to stop growing kmap() and
-kmap_atomic() call sites and that their deprecation is on the horizon.  I've
-not read the text in patch 4/4 yet.
+Changes from v2:
+  - Addressed Stephen's comments
+    - Add Stephen's reviewed by tag for 1/4
+    - Fixed style for 2/4
+    - Corrected function call to use correct function for 3/4
 
-> For
-> this reason the "Using kmap_atomic" section in highmem.rst is obsolete and
-> unnecessary.
+Changes from v1:
+  - Removed Change-Id from all patches
+  - Updated subject line of cover letter
+  - Addressed Stephen's comments for v1 1/3
+    - Separated error message fix to own patch (v2 1/4)
+    - Separated PON GEN3 base address changes to own patch (v2 2/4)
+    - Added new variables and functions to make code more readable
+  - Removed v1 3/3 as per Bjorn's comments
 
-A lot of the text is obsolete (and redundant) but the example code might be
-useful.
+Anjelique Melendez (2):
+  input: misc: pm8941-pwrkey: fix error message
+  input: misc: pm8941-pwrkey: add support for PON GEN3 base addresses
 
-Why not move the example and relevant bits into the kdoc for kmap_atomic()
-which is then automatically picked up via patch 2/4.
+David Collins (3):
+  dt-bindings: power: reset: qcom-pon: update "reg" property details
+  input: misc: pm8941-pwrkey: add software key press debouncing support
+  input: misc: pm8941-pwrkey: simulate missed key press events
 
-Ira
+ Documentation/devicetree/bindings/power/reset/qcom,pon.yaml | 19 ++++++++++++++++++-
+ drivers/input/misc/pm8941-pwrkey.c | 124 +++++++++++++++++++++++++----
+ 2 files changed, 129 insertions(+), 14 deletions(-)
 
-> 
-> Therefore, just remove it.
-> 
-> Cc: Jonathan Corbet <corbet@lwn.net>
-> Cc: Thomas Gleixner <tglx@linutronix.de>
-> Cc: Ira Weiny <ira.weiny@intel.com>
-> Cc: Matthew Wilcox <willy@infradead.org>
-> Cc: Peter Zijlstra <peterz@infradead.org>
-> Signed-off-by: Fabio M. De Francesco <fmdefrancesco@gmail.com>
-> ---
->  Documentation/vm/highmem.rst | 35 -----------------------------------
->  1 file changed, 35 deletions(-)
-> 
-> diff --git a/Documentation/vm/highmem.rst b/Documentation/vm/highmem.rst
-> index ccff08a8211d..e05bf5524174 100644
-> --- a/Documentation/vm/highmem.rst
-> +++ b/Documentation/vm/highmem.rst
-> @@ -72,41 +72,6 @@ The kernel contains several ways of creating temporary mappings:
->    It may be assumed that k[un]map_atomic() won't fail.
->  
->  
-> -Using kmap_atomic
-> -=================
-> -
-> -When and where to use kmap_atomic() is straightforward.  It is used when code
-> -wants to access the contents of a page that might be allocated from high memory
-> -(see __GFP_HIGHMEM), for example a page in the pagecache.  The API has two
-> -functions, and they can be used in a manner similar to the following::
-> -
-> -	/* Find the page of interest. */
-> -	struct page *page = find_get_page(mapping, offset);
-> -
-> -	/* Gain access to the contents of that page. */
-> -	void *vaddr = kmap_atomic(page);
-> -
-> -	/* Do something to the contents of that page. */
-> -	memset(vaddr, 0, PAGE_SIZE);
-> -
-> -	/* Unmap that page. */
-> -	kunmap_atomic(vaddr);
-> -
-> -Note that the kunmap_atomic() call takes the result of the kmap_atomic() call
-> -not the argument.
-> -
-> -If you need to map two pages because you want to copy from one page to
-> -another you need to keep the kmap_atomic calls strictly nested, like::
-> -
-> -	vaddr1 = kmap_atomic(page1);
-> -	vaddr2 = kmap_atomic(page2);
-> -
-> -	memcpy(vaddr1, vaddr2, PAGE_SIZE);
-> -
-> -	kunmap_atomic(vaddr2);
-> -	kunmap_atomic(vaddr1);
-> -
-> -
->  Cost of Temporary Mappings
->  ==========================
->  
-> -- 
-> 2.34.1
-> 
+-- 
+2.35.1
+
