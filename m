@@ -2,62 +2,67 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id BBEA850C45D
-	for <lists+linux-doc@lfdr.de>; Sat, 23 Apr 2022 01:12:40 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 2EBF350C19E
+	for <lists+linux-doc@lfdr.de>; Sat, 23 Apr 2022 00:07:01 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S231530AbiDVWLE (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Fri, 22 Apr 2022 18:11:04 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:41514 "EHLO
+        id S230272AbiDVVz4 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Fri, 22 Apr 2022 17:55:56 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:57532 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S231981AbiDVWJf (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Fri, 22 Apr 2022 18:09:35 -0400
-Received: from mga01.intel.com (mga01.intel.com [192.55.52.88])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id DFE932D823C;
-        Fri, 22 Apr 2022 13:56:26 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1650660986; x=1682196986;
-  h=from:to:cc:subject:date:message-id:in-reply-to:
-   references:mime-version:content-transfer-encoding;
-  bh=cwJd5e6aeRwgU9xPsGnRNV1wC06YL4Fz8JBExprqrBA=;
-  b=MzL1M7mrxG9O455ycAVFH0PzUG2znA0DkXqw9Wgm3CdpcZsN9QJq/ma7
-   cp2mIJuZGHVgCuclLckCx0PpqFLQlLNHY4YFNZoz3SEoIfbtDFvMoszUb
-   mH8zdtBxQspUqbCr8wUbhbBqRsy30JjXpJ5A0r7zPN7wUGHO0sVMM2avP
-   lMVfHcdhGXJODsQqWTjVz3o1/R3hw3KfEOeA04Cj1MyV1XojLQqhT5Jiv
-   n5p6rQ97Sh03sMCOc1Lo1AU6hY37B7ZkS/gvsSZXgy9scpKxzvIGyGrCZ
-   VdAftODcfUtZahnwW1I6CcESz8rVd/+XS/cVzcaoXS2Azkit7BP/pnpfL
-   A==;
-X-IronPort-AV: E=McAfee;i="6400,9594,10324"; a="289897476"
-X-IronPort-AV: E=Sophos;i="5.90,282,1643702400"; 
-   d="scan'208";a="289897476"
-Received: from orsmga003.jf.intel.com ([10.7.209.27])
-  by fmsmga101.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 22 Apr 2022 13:02:29 -0700
-X-IronPort-AV: E=Sophos;i="5.90,282,1643702400"; 
-   d="scan'208";a="511719367"
-Received: from agluck-desk3.sc.intel.com ([172.25.222.78])
-  by orsmga003-auth.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 22 Apr 2022 13:02:29 -0700
-From:   Tony Luck <tony.luck@intel.com>
-To:     hdegoede@redhat.com, markgross@kernel.org
-Cc:     tglx@linutronix.de, mingo@redhat.com, bp@alien8.de,
-        dave.hansen@linux.intel.com, x86@kernel.org, hpa@zytor.com,
-        corbet@lwn.net, gregkh@linuxfoundation.org,
-        andriy.shevchenko@linux.intel.com, jithu.joseph@intel.com,
-        ashok.raj@intel.com, tony.luck@intel.com, rostedt@goodmis.org,
-        dan.j.williams@intel.com, linux-kernel@vger.kernel.org,
-        linux-doc@vger.kernel.org, platform-driver-x86@vger.kernel.org,
-        patches@lists.linux.dev, ravi.v.shankar@intel.com
-Subject: [PATCH v4 10/10] platform/x86/intel/ifs: add ABI documentation for IFS
-Date:   Fri, 22 Apr 2022 13:02:19 -0700
-Message-Id: <20220422200219.2843823-11-tony.luck@intel.com>
-X-Mailer: git-send-email 2.35.1
-In-Reply-To: <20220422200219.2843823-1-tony.luck@intel.com>
-References: <20220419163859.2228874-1-tony.luck@intel.com>
- <20220422200219.2843823-1-tony.luck@intel.com>
+        with ESMTP id S230296AbiDVVzv (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Fri, 22 Apr 2022 17:55:51 -0400
+Received: from mail-vs1-f44.google.com (mail-vs1-f44.google.com [209.85.217.44])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id ABF0C3FF3D1
+        for <linux-doc@vger.kernel.org>; Fri, 22 Apr 2022 13:38:09 -0700 (PDT)
+Received: by mail-vs1-f44.google.com with SMTP id f32so8532086vsv.1
+        for <linux-doc@vger.kernel.org>; Fri, 22 Apr 2022 13:38:09 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=google.com; s=20210112;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc;
+        bh=6Nnz4Zst0bPhyG4+bPpJ1xif7BM4/fGW7NbRucrhml4=;
+        b=luurb7sSi/ydYptLRDsPmPwgsj6ufhuQqTdkq2XihF24gSb2V7bQpiYml/6vCKS/nV
+         RNwz6hd7Kv0zPgYslUtDlapSgocvuQiiW5DxU24L5e1VOHPqVsiYVaevTmMy9HlS3nnY
+         Typdh3lq3/ajCM5q9+iqANcP4SdwcVj9PZge1oo/k5CxmS4whtxk+O4A0uWX/ed1vK/S
+         n14AT1JOExIKMY9XX7X/X1aOMAc5ewYRjXPDcwH1xf2p1kdrLWPyIv3LT/50eAI1Iby0
+         0q/7W/WJTnTDcGs3HzyiJ8fvNJWC7ekuTAynzua6W4tXY7u2i7sJMPJ9Nm9AkKfaKj/4
+         PrtQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=6Nnz4Zst0bPhyG4+bPpJ1xif7BM4/fGW7NbRucrhml4=;
+        b=2Zjy0ftNX7iHMrQ+aZMb3XLG1wzrAmc5QBUbqTeSt2lFLdNkxEo0jymQGlJz04fKl+
+         tk9vfckCbKLtHbW7Tem4XbQWlpfk5QPaiFcN08SNQG8qKXLi/Jw00BpXxSMOcaagmY0d
+         +O2qf2UF8CA3N+UprMqNKW3DiMv9ggjSqid+GYJW+i45VTfIOaXVCwKYKEp8Y8qXZP6r
+         ysQAbJcX5gYbru+v8IVTV08a0+8r9N01fdbQyK1UkdLrAQ7mWZdwQpmp5aNPx/t1TswT
+         ph8gScFLrhUULE+AKaoMbgrWmtYLUV4g5AmQXzRFxxiRAUnCcb6nhY3ic7tiuhcljvnC
+         2CoA==
+X-Gm-Message-State: AOAM530ZdmwypcW8UI0AMYIIMOnp4+lLFoemU7Qi/kfESxNOuqp+CjZd
+        yiPB6eTgVzLQw7g1CodUF0GGSrAPmq2955gOkAyB3A==
+X-Google-Smtp-Source: ABdhPJwF0+upByX+DdZ/72pi7fzsHrXNgmXb7HtLilh8tuy0NH6tPuc0QIJCs/OUzOAwlkvo93PFjdq+Q5ZyWCRAAF0=
+X-Received: by 2002:a67:2f44:0:b0:32a:27a3:7319 with SMTP id
+ v65-20020a672f44000000b0032a27a37319mr2012915vsv.49.1650659372631; Fri, 22
+ Apr 2022 13:29:32 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Spam-Status: No, score=-7.7 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_HI,
-        RCVD_IN_MSPIKE_H3,RCVD_IN_MSPIKE_WL,SPF_HELO_NONE,SPF_NONE
+References: <20220404211858.968452-1-pcc@google.com> <Ykv39KMpKXb2Mr6p@sirena.org.uk>
+ <YmKwrs3dJ09ybBJa@arm.com>
+In-Reply-To: <YmKwrs3dJ09ybBJa@arm.com>
+From:   Peter Collingbourne <pcc@google.com>
+Date:   Fri, 22 Apr 2022 13:29:21 -0700
+Message-ID: <CAMn1gO7Drzj-sXy5qyCAzm01aFZx8QXHQ8F5C5=BDaDNuap_Dw@mail.gmail.com>
+Subject: Re: [PATCH] arm64: document the boot requirements for MTE
+To:     Catalin Marinas <catalin.marinas@arm.com>
+Cc:     Mark Brown <broonie@kernel.org>, Will Deacon <will@kernel.org>,
+        Jonathan Corbet <corbet@lwn.net>,
+        Linux ARM <linux-arm-kernel@lists.infradead.org>,
+        linux-doc@vger.kernel.org,
+        Linux Kernel Mailing List <linux-kernel@vger.kernel.org>
+Content-Type: text/plain; charset="UTF-8"
+X-Spam-Status: No, score=-17.6 required=5.0 tests=BAYES_00,DKIMWL_WL_MED,
+        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,
+        ENV_AND_HDR_SPF_MATCH,RCVD_IN_DNSWL_NONE,RCVD_IN_MSPIKE_H2,
+        SPF_HELO_NONE,SPF_PASS,USER_IN_DEF_DKIM_WL,USER_IN_DEF_SPF_WL
         autolearn=ham autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
@@ -65,64 +70,38 @@ Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-From: Jithu Joseph <jithu.joseph@intel.com>
+On Fri, Apr 22, 2022 at 6:42 AM Catalin Marinas <catalin.marinas@arm.com> wrote:
+>
+> On Tue, Apr 05, 2022 at 09:04:04AM +0100, Mark Brown wrote:
+> > On Mon, Apr 04, 2022 at 02:18:58PM -0700, Peter Collingbourne wrote:
+> >
+> > > +  For CPUs with the Memory Tagging Extension feature:
+> > > +
+> > > +  - If EL3 is present:
+> > > +
+> > > +    - SCR_EL3.ATA (bit 26) must be initialised to 0b1.
+> > > +
+> > > +  - If the kernel is entered at EL1 and EL2 is present:
+> > > +
+> > > +    - HCR_EL2.ATA (bit 56) must be initialised to 0b1.
+> >
+> > Very nitpicky but this is only required for FEAT_MTE2 and above, plain
+> > FEAT_MTE doesn't have these traps.  I don't know that this is a thing
+> > that anyone's actually implemented
+>
+> I think that's a valid point. CPUs may implement FEAT_MTE2 but downgrade
+> it to FEAT_MTE if the SoC does not provide allocation tag storage. So we
+> should make it clear here that only from FEAT_MTE2 we should set those
+> bits (ID_AA64PFR1_EL1.MTE >= 2), otherwise they should be 0 or
+> hyp/firmware risks the OS triggering random external aborts.
+>
+> > and from v8.7 on it's not permitted but the above isn't strictly true
+> > if someone did for some reason have the most basic version.
+>
+> The wording is tricky: "This feature is mandatory from Armv8.7 when
+> FEAT_MTE2 is implemented". So one can still implement FEAT_MTE (or none
+> at all).
 
-Add the sysfs attributes in ABI/testing for In-Field Scan.
+Okay, I changed it in v2 to explicitly say FEAT_MTE2.
 
-Reviewed-by: Dan Williams <dan.j.williams@intel.com>
-Signed-off-by: Jithu Joseph <jithu.joseph@intel.com>
-Co-developed-by: Tony Luck <tony.luck@intel.com>
-Signed-off-by: Tony Luck <tony.luck@intel.com>
----
- .../ABI/testing/sysfs-platform-intel-ifs      | 39 +++++++++++++++++++
- 1 file changed, 39 insertions(+)
- create mode 100644 Documentation/ABI/testing/sysfs-platform-intel-ifs
-
-diff --git a/Documentation/ABI/testing/sysfs-platform-intel-ifs b/Documentation/ABI/testing/sysfs-platform-intel-ifs
-new file mode 100644
-index 000000000000..486d6d2ff8a0
---- /dev/null
-+++ b/Documentation/ABI/testing/sysfs-platform-intel-ifs
-@@ -0,0 +1,39 @@
-+What:		/sys/devices/virtual/misc/intel_ifs_<N>/run_test
-+Date:		April 21 2022
-+KernelVersion:	5.19
-+Contact:	"Jithu Joseph" <jithu.joseph@intel.com>
-+Description:	Write <cpu#> to trigger IFS test for one online core.
-+		Note that the test is per core. The cpu# can be
-+		for any thread on the core. Running on one thread
-+		completes the test for the core containing that thread.
-+		Example: to test the core containing cpu5: echo 5 >
-+		/sys/devices/platform/intel_ifs.<N>/run_test
-+
-+What:		/sys/devices/virtual/misc/intel_ifs_<N>/status
-+Date:		April 21 2022
-+KernelVersion:	5.19
-+Contact:	"Jithu Joseph" <jithu.joseph@intel.com>
-+Description:	The status of the last test. It can be one of "pass", "fail"
-+		or "untested".
-+
-+What:		/sys/devices/virtual/misc/intel_ifs_<N>/details
-+Date:		April 21 2022
-+KernelVersion:	5.19
-+Contact:	"Jithu Joseph" <jithu.joseph@intel.com>
-+Description:	Additional information regarding the last test. The details file reports
-+		the hex value of the SCAN_STATUS MSR. Note that the error_code field
-+		may contain driver defined software code not defined in the Intel SDM.
-+
-+What:		/sys/devices/virtual/misc/intel_ifs_<N>/image_version
-+Date:		April 21 2022
-+KernelVersion:	5.19
-+Contact:	"Jithu Joseph" <jithu.joseph@intel.com>
-+Description:	Version (hexadecimal) of loaded IFS binary image. If no scan image
-+		is loaded reports "none".
-+
-+What:		/sys/devices/virtual/misc/intel_ifs_<N>/reload
-+Date:		April 21 2022
-+KernelVersion:	5.19
-+Contact:	"Jithu Joseph" <jithu.joseph@intel.com>
-+Description:	Write "1" (or "y" or "Y") to reload the IFS image from
-+		/lib/firmware/intel/ifs/ff-mm-ss.scan.
--- 
-2.35.1
-
+Peter
