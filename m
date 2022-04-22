@@ -2,157 +2,157 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 2CB8550C3B0
-	for <lists+linux-doc@lfdr.de>; Sat, 23 Apr 2022 01:11:11 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 0B1FD50C37E
+	for <lists+linux-doc@lfdr.de>; Sat, 23 Apr 2022 01:10:46 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S232185AbiDVWLm (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Fri, 22 Apr 2022 18:11:42 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:56202 "EHLO
+        id S231824AbiDVW2j (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Fri, 22 Apr 2022 18:28:39 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:36674 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S232171AbiDVWLB (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Fri, 22 Apr 2022 18:11:01 -0400
-Received: from NAM02-BN1-obe.outbound.protection.outlook.com (mail-bn1nam07on2046.outbound.protection.outlook.com [40.107.212.46])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id D65BA2FB720;
-        Fri, 22 Apr 2022 13:56:54 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=XgiBommJ2JnhDvWVZaTY19+vyG/LMZEL4pKenxM6S/OwAryRDxJXChnmj1AHu0i7OnnMVApQnTNDpO9GhAP1V6yJ1zBfxwSgZ943JNPVLbqc97O4gPFpCW1bSYJAg3UY4UGBeJv6Ra/SMA8cl6U8ojJCnzicLORDRMQOUBzMxv2dckqWAMBWYkKotCnW2wkcaYRlqeFmIximOxgfXaiYqBhVI78RoUbZuQkIMsDUpnSbQ+OAba03RiHYVbamWI7tGnLFaGO4ewZKU2QMdDUR53yCxCYjnsOTQPLIPJAVSWLSUKYPzIcQImjdPtLwxh2+8mzoVovaeZaNpUfE6g8YaA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=vxibsf8cByjjZeGnUn4z+BlsXvPhTa2oK+uo8+uLxGo=;
- b=V8+Dcw9Rf+VvBBOa8AQveSTETERal3LiAShcDILh1r1btwv4KklVOk754AnoCU5Afg7FgPMtHuRULtvc0xWsCyZo7eNwc2KH47kAIm8r1eLOFh3n5eBrQjM5tC5XejpSFSWqMKGTkMjDrtt9p9SGxHPYWhlso8OEIoAUOGJHXIUL1iykV4I2h++o1caovsGnRH1Oe01I0pa4OXI8jgMnSnuMOmh/7FKwIvGxWhozDv/65p5cOdSz3hELmYmfUKaIpG8LoDSrrYkDLWrvy1cJMLHiJFr8W4dWHp5WjUPO51gUMLlaxnuVavgfurULOOFg8MNiTVPssPKdyHb5bs++SQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=nvidia.com; dmarc=pass action=none header.from=nvidia.com;
- dkim=pass header.d=nvidia.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
- s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=vxibsf8cByjjZeGnUn4z+BlsXvPhTa2oK+uo8+uLxGo=;
- b=dsgMNyx/jfV21NRwCjWpMbEMQSalRhTk2E96mGglYvX9jb8RABBOlB9DDoWi59A4QvfzTuOdh34YDRtLM2vB67wZFxjxITt0yysTqXMIYl8C50FkOX2XZKgyEzLu1dSuH8ABIcBS1nDaJO11003O7FFIRKRdqVQLh5F3R7yyrSYo13nuJmGLATsx2SCQbYm1BSxzX5RTxm/5ZIj0GhHYdS35LN72MagGgHvhS0beO0RFYel3/Xcu6DJy4gIkCXmnKhgO2nDgU9Terfxi0CBSZgaXi1/QeTpRdVeGRfAk0x2HUGaRrcZC4GYfzfkCB2PptR2FJXEnEf/qDrlcMOu8SQ==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=nvidia.com;
-Received: from MN2PR12MB4192.namprd12.prod.outlook.com (2603:10b6:208:1d5::15)
- by DM5PR1201MB0058.namprd12.prod.outlook.com (2603:10b6:4:50::11) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5186.13; Fri, 22 Apr
- 2022 20:56:52 +0000
-Received: from MN2PR12MB4192.namprd12.prod.outlook.com
- ([fe80::ec2d:9167:1b47:2db2]) by MN2PR12MB4192.namprd12.prod.outlook.com
- ([fe80::ec2d:9167:1b47:2db2%6]) with mapi id 15.20.5186.015; Fri, 22 Apr 2022
- 20:56:52 +0000
-Date:   Fri, 22 Apr 2022 17:56:51 -0300
-From:   Jason Gunthorpe <jgg@nvidia.com>
-To:     Christoph Hellwig <hch@lst.de>
-Cc:     Alexander Gordeev <agordeev@linux.ibm.com>,
-        David Airlie <airlied@linux.ie>,
-        Alex Williamson <alex.williamson@redhat.com>,
-        Christian Borntraeger <borntraeger@linux.ibm.com>,
-        Cornelia Huck <cohuck@redhat.com>,
+        with ESMTP id S232984AbiDVW13 (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Fri, 22 Apr 2022 18:27:29 -0400
+Received: from mga01.intel.com (mga01.intel.com [192.55.52.88])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 7C9831C9CE0;
+        Fri, 22 Apr 2022 14:20:19 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1650662419; x=1682198419;
+  h=date:from:to:cc:subject:message-id:references:
+   mime-version:in-reply-to;
+  bh=8oZmbcJgaLEluY4MIs8edkXFbtUVeZ9n1fl2FQ+iUbA=;
+  b=kJGLDCdx9C1PNY3UqEYU2MHpUor31XnYDshCnXcSsvJZU9Z5Xsb7j4W8
+   PLL3B4tztuJn5gjQ5xet6qMLXvTAcgNs3gf7Sqrnpg2b+1Hqc39sNK7rK
+   TnXx9TT64XZFO9E+aNTCtmM5CrIrNKrtifcGMjY+W/nZKKhvuech7HInR
+   GtSp4YiPc+KK6t7tngpplf8ffR2vyHMF+5WaBtB08in6JLeseZVtlZo2/
+   y3ShcXUpf+cI5Z2SLfk1TJivSSQ8PcjcoKDMqOVmaCcltsD9QafhSf2V9
+   NrVGoRaTKE2METarNKoBjq2tKa46sSZrcZZaXgA3fg6om8b7kW+63lJPb
+   g==;
+X-IronPort-AV: E=McAfee;i="6400,9594,10324"; a="289914444"
+X-IronPort-AV: E=Sophos;i="5.90,282,1643702400"; 
+   d="scan'208";a="289914444"
+Received: from fmsmga002.fm.intel.com ([10.253.24.26])
+  by fmsmga101.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 22 Apr 2022 14:20:19 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.90,282,1643702400"; 
+   d="scan'208";a="659211292"
+Received: from lkp-server01.sh.intel.com (HELO 3abc53900bec) ([10.239.97.150])
+  by fmsmga002.fm.intel.com with ESMTP; 22 Apr 2022 14:20:14 -0700
+Received: from kbuild by 3abc53900bec with local (Exim 4.95)
+        (envelope-from <lkp@intel.com>)
+        id 1ni0hJ-000Aag-Ri;
+        Fri, 22 Apr 2022 21:20:13 +0000
+Date:   Sat, 23 Apr 2022 05:19:22 +0800
+From:   kernel test robot <lkp@intel.com>
+To:     Quan Nguyen <quan@os.amperecomputing.com>,
+        Lee Jones <lee.jones@linaro.org>,
+        Rob Herring <robh+dt@kernel.org>,
+        Krzysztof Kozlowski <krzk@kernel.org>,
+        Jean Delvare <jdelvare@suse.com>,
+        Guenter Roeck <linux@roeck-us.net>,
         Jonathan Corbet <corbet@lwn.net>,
-        Daniel Vetter <daniel@ffwll.ch>,
-        dri-devel@lists.freedesktop.org,
-        Harald Freudenberger <freude@linux.ibm.com>,
-        Vasily Gorbik <gor@linux.ibm.com>,
-        Heiko Carstens <hca@linux.ibm.com>,
-        intel-gfx@lists.freedesktop.org,
-        intel-gvt-dev@lists.freedesktop.org,
-        Jani Nikula <jani.nikula@linux.intel.com>,
-        Jason Herne <jjherne@linux.ibm.com>,
-        Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
-        kvm@vger.kernel.org, Kirti Wankhede <kwankhede@nvidia.com>,
-        linux-doc@vger.kernel.org, linux-s390@vger.kernel.org,
-        Matthew Rosato <mjrosato@linux.ibm.com>,
-        Peter Oberparleiter <oberpar@linux.ibm.com>,
-        Halil Pasic <pasic@linux.ibm.com>,
-        Rodrigo Vivi <rodrigo.vivi@intel.com>,
-        Sven Schnelle <svens@linux.ibm.com>,
-        Tvrtko Ursulin <tvrtko.ursulin@linux.intel.com>,
-        Vineeth Vijayan <vneethv@linux.ibm.com>,
-        Zhenyu Wang <zhenyuw@linux.intel.com>,
-        Zhi Wang <zhi.a.wang@intel.com>,
-        Tony Krowiak <akrowiak@linux.ibm.com>,
-        Eric Farman <farman@linux.ibm.com>,
-        "Tian, Kevin" <kevin.tian@intel.com>,
-        "Liu, Yi L" <yi.l.liu@intel.com>
-Subject: Re: [PATCH v2 3/7] vfio/mdev: Pass in a struct vfio_device * to
- vfio_pin/unpin_pages()
-Message-ID: <20220422205651.GF1951132@nvidia.com>
-References: <0-v2-6011bde8e0a1+5f-vfio_mdev_no_group_jgg@nvidia.com>
- <3-v2-6011bde8e0a1+5f-vfio_mdev_no_group_jgg@nvidia.com>
- <20220422062232.GB11926@lst.de>
+        Derek Kiernan <derek.kiernan@xilinx.com>,
+        Dragan Cvetic <dragan.cvetic@xilinx.com>,
+        Arnd Bergmann <arnd@arndb.de>,
+        Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+        Thu Nguyen <thu@os.amperecomputing.com>,
+        linux-kernel@vger.kernel.org, devicetree@vger.kernel.org,
+        linux-hwmon@vger.kernel.org, linux-doc@vger.kernel.org,
+        OpenBMC Maillist <openbmc@lists.ozlabs.org>
+Cc:     llvm@lists.linux.dev, kbuild-all@lists.01.org,
+        Open Source Submission <patches@amperecomputing.com>,
+        Phong Vo <phong@os.amperecomputing.com>,
+        "Thang Q . Nguyen" <thang@os.amperecomputing.com>
+Subject: Re: [PATCH v8 8/9] mfd: smpro-mfd: Adds Ampere's Altra SMpro MFD
+ driver
+Message-ID: <202204230554.4528TqPu-lkp@intel.com>
+References: <20220422024653.2199489-9-quan@os.amperecomputing.com>
+MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20220422062232.GB11926@lst.de>
-X-ClientProxiedBy: BLAP220CA0019.NAMP220.PROD.OUTLOOK.COM
- (2603:10b6:208:32c::24) To MN2PR12MB4192.namprd12.prod.outlook.com
- (2603:10b6:208:1d5::15)
-MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: c84d5a39-6ffb-4726-9798-08da24a2a06a
-X-MS-TrafficTypeDiagnostic: DM5PR1201MB0058:EE_
-X-Microsoft-Antispam-PRVS: <DM5PR1201MB00586ED21E7521728645EDBEC2F79@DM5PR1201MB0058.namprd12.prod.outlook.com>
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: zqNRQPF5q8Z6cxNuQ5T2DxvSKHn2SQzP/Co6GBYI5+xWSut65VCmcmYs3wZAhWx02pCLfvusnC82Zl5QC1g0+7r5ZJ6BFQ65fbIXR4KaVn2C74fju9nKX8sRAjJ3L/Q9E5ABtMT6x9XB3ASr7yrYmoK42PF88l/GJCs59Y3sABWbk0/lzl7jnfbpcfola2lgm/NvFDk1Jl2NnD73waRLHZ+MdEw8gtvIYBmhY0EkwK9ujAtZDOPQoVfxB/cWT0V8zskDSfbpW63czmew2fWB0zZPmVX6OLtHsKMjBKFKaudfAZruGWWzrqVm7JNJIIUGTAX80qb2Uj28NpVQT3hQ/ALMOS4nCHykTDey9xZhCHq97lzlZnfOTqM1TEG/ZnombVZEEY04NqUBv2Uw+yvArUZh66sgZunggUoG4CSfnuhXeTPPeV6HIYo/mEmCaLHcgYJthdqyimTilNZ+AhV+n3t6ui3iw1uDvevqP2jUW3KD09ZmKZ/eig8d1aVhqi7TmRvvGxSJp/tkhihmp3E0LVYUA63W44CQGSCH204nOjMHtd/JI7naHpEwD0OuX22qzJKR+DmUT/D/AZY1aRgeTGXO6QjJVPsidnbyLZe9Ru1QzsmSQhg+LAnWwgmrZI6dshaln+1nuNahup8v2NirWw==
-X-Forefront-Antispam-Report: CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:MN2PR12MB4192.namprd12.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230001)(4636009)(366004)(8676002)(316002)(66476007)(66946007)(66556008)(5660300002)(6506007)(6512007)(7406005)(36756003)(558084003)(54906003)(33656002)(6916009)(2906002)(86362001)(8936002)(7416002)(4326008)(508600001)(2616005)(38100700002)(186003)(1076003)(26005)(6486002);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?5Dp2SnMdGu6/U5GYIaacIevp35Cv1pPnlTUN8SnLA/Euar2VfabSKS6rUTpJ?=
- =?us-ascii?Q?4gY5MI5+h0zmvn581/9WVoYO9tAEInJCO8e18ilhzNJRR4z/L+Ll0VYL1Ju2?=
- =?us-ascii?Q?/nFzeKdx0rGkkY358BK5ezfuMmQGqP/Vl+2txIF+UvVI+iKjgDM3UvPEltjo?=
- =?us-ascii?Q?gqT8x0XS2J0hV1ac7C7/QzFGRlN5/NYuoSlMnVzM3O1uNJs9hGbNchh+HVwN?=
- =?us-ascii?Q?xpKGDkZYfb1EaHgZPESdAHjYd+BhkuKtTUIplPazbzrmpDifb2azLq1br1fc?=
- =?us-ascii?Q?T2ab3Owk4W8g648HkvI6X1AUL9tiwICVayNlLBjQDLFCEvKFwfe8Gc4XNY7S?=
- =?us-ascii?Q?GS5/hS5Da/ovH3YF9SRgGQpOCkNxI/tWvnRnxsR6GBM/fDMpLD5TmcFbZwer?=
- =?us-ascii?Q?cgbdj+AwPvjrRzg/Uy4UotwVkpg6UeLJDP2eZASKJ0QpKwadT5LIBIxEuLBE?=
- =?us-ascii?Q?E8tVV/NFLiEBFDcJnSw/Y16PUgpX1JNdZSNZ9kHLX4aL/KtHRajN1iIemcVj?=
- =?us-ascii?Q?pTgZT0FGMBrlwO8MMEJ2vp0VR5oh/LrVqkeUY5GtuKv4Uyxcgtl1mRkRU14o?=
- =?us-ascii?Q?cQKD5Gx9i5kkMBFN728+GCgLN3r4/FeiERqQVqFj2pkm3OnvXwoOk1bR3ctH?=
- =?us-ascii?Q?mWUr3dm5D2B9ddVLD765qfhbWCetk5zqkM41w5x0odunl9vjGIdvD+rPNuOR?=
- =?us-ascii?Q?A7D8Sf7xN8/6OhfldnWb2TPkOPQo6tL/1XakiTIN3cE4QxESL2BPD1bs11Pv?=
- =?us-ascii?Q?rDTdsvvd8cJ4N31Ar2swFdWVSdg+c2ZsxZfTCNtpNq9zouF6Jj/rfKMOydZD?=
- =?us-ascii?Q?XoXcdOBaTmSNuSLTSAfW68lz/Kyq/fvulgFJz8FyylZVLQb6OTPpPB7ZINz0?=
- =?us-ascii?Q?ADj0eZZGEsqwGyhRN8bO06m5etdIRPhGfFwfiWoCfJFCPTrrIwE7B9rMJsOb?=
- =?us-ascii?Q?Lk2YCX0Pgjfm+XEyzOYeCpoSuqkLwoI694iZldHbTBYI9e/MzHeeTkFUxRBt?=
- =?us-ascii?Q?8qq1AuUKVfiNCd/Y6sbdfaIwG4k+/2BGLIPuopTmbEvbgueJ/3HyPOQHKnBJ?=
- =?us-ascii?Q?eFiPK0SPCcVz3QCVu0sdhVny0jPnc5s56f5ESKtadLvD8oNg9wlRtwiQIsKL?=
- =?us-ascii?Q?0erRSX2mNqw4YIjYcyQMQkLQuwpgMa5a1f+b1JoHO7QjgtUmJLpYpBJSWlCU?=
- =?us-ascii?Q?tb3+OzrFAa8J97xuA8XaYgRa18BrFsCa0DazboNJUpmmqyu48Fc/LzEiSjCG?=
- =?us-ascii?Q?jZ1HlViVzUsvryLD2KKXYXeBe9t9MOF+c3q3QYgb/GbfstpOPjy0nzJDtzSF?=
- =?us-ascii?Q?9iIflEeS/vSGaNunP5MBswdFiNqjsSv4P5bLA099fBh0Uju4r7UB6UC780Tg?=
- =?us-ascii?Q?d+ULQfJKp4NhFaQ1c5aFKiXFDV5NyXBO9uViTaLlS56pyaWMROEjwfbWxNip?=
- =?us-ascii?Q?VLlDcd3mcwVNoq1mPiU5qn+dzb18VPEgPLIyG6+iBEHFAgzC6yaAfbNgHmQB?=
- =?us-ascii?Q?GrFNUMiY3pN2fR0l6/OGidpn0yUQtCil83fGScHyv3kCbZqqp3GwUYUXRkqn?=
- =?us-ascii?Q?uefKzflsZXroy5bGYH69JQdm1wAIg83UkW89nEkZCYB3yrt1XxLc472kyTdR?=
- =?us-ascii?Q?aStkwRNLaW7D1yfKjqoRWBsewGWd63DtKGZCU/cdfa3sZBfZDwuEuw6nbL06?=
- =?us-ascii?Q?BjeamQExXAbcIMUuKH0zBm2rCJ5JQxwRvVWSasGEe4EmOfUyUNML1FvIn3xW?=
- =?us-ascii?Q?zAlpbq8fug=3D=3D?=
-X-OriginatorOrg: Nvidia.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: c84d5a39-6ffb-4726-9798-08da24a2a06a
-X-MS-Exchange-CrossTenant-AuthSource: MN2PR12MB4192.namprd12.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 22 Apr 2022 20:56:52.3946
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: LraedenmxSI/WHtDUsG/RkFTn5baIwGiFDC7VK63dHPKFBEM8SoSnRpEehPT9F8b
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM5PR1201MB0058
-X-Spam-Status: No, score=-1.7 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FORGED_SPF_HELO,
-        RCVD_IN_DNSWL_NONE,RCVD_IN_MSPIKE_H2,SPF_HELO_PASS,SPF_NONE
-        autolearn=no autolearn_force=no version=3.4.6
+In-Reply-To: <20220422024653.2199489-9-quan@os.amperecomputing.com>
+X-Spam-Status: No, score=-7.7 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_HI,
+        RCVD_IN_MSPIKE_H3,RCVD_IN_MSPIKE_WL,SPF_HELO_NONE,SPF_NONE
+        autolearn=ham autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Fri, Apr 22, 2022 at 08:22:32AM +0200, Christoph Hellwig wrote:
-> Nit: why do some of these patches that don't touch the mdev code
-> mdev in the subject?
+Hi Quan,
 
-I consider these APIs to be 'mdev apis' because only mdev drivers
-should call them.
+I love your patch! Perhaps something to improve:
 
-Jason
+[auto build test WARNING on char-misc/char-misc-testing]
+[also build test WARNING on groeck-staging/hwmon-next lee-mfd/for-mfd-next v5.18-rc3 next-20220422]
+[If your patch is applied to the wrong git tree, kindly drop us a note.
+And when submitting patch, we suggest to use '--base' as documented in
+https://git-scm.com/docs/git-format-patch]
+
+url:    https://github.com/intel-lab-lkp/linux/commits/Quan-Nguyen/Add-Ampere-s-Altra-SMPro-MFD-and-its-child-drivers/20220422-105732
+base:   https://git.kernel.org/pub/scm/linux/kernel/git/gregkh/char-misc.git c50c29a806113614098efd8da9fd7b48d605ba45
+config: arm-randconfig-r004-20220422 (https://download.01.org/0day-ci/archive/20220423/202204230554.4528TqPu-lkp@intel.com/config)
+compiler: clang version 15.0.0 (https://github.com/llvm/llvm-project 5bd87350a5ae429baf8f373cb226a57b62f87280)
+reproduce (this is a W=1 build):
+        wget https://raw.githubusercontent.com/intel/lkp-tests/master/sbin/make.cross -O ~/bin/make.cross
+        chmod +x ~/bin/make.cross
+        # install arm cross compiling tool for clang build
+        # apt-get install binutils-arm-linux-gnueabi
+        # https://github.com/intel-lab-lkp/linux/commit/09ec873f0dd4611cb2df0150923d8906b9c5b2d1
+        git remote add linux-review https://github.com/intel-lab-lkp/linux
+        git fetch --no-tags linux-review Quan-Nguyen/Add-Ampere-s-Altra-SMPro-MFD-and-its-child-drivers/20220422-105732
+        git checkout 09ec873f0dd4611cb2df0150923d8906b9c5b2d1
+        # save the config file
+        mkdir build_dir && cp config build_dir/.config
+        COMPILER_INSTALL_PATH=$HOME/0day COMPILER=clang make.cross W=1 O=build_dir ARCH=arm SHELL=/bin/bash arch/arm/mach-at91/ drivers/hwmon/
+
+If you fix the issue, kindly add following tag as appropriate
+Reported-by: kernel test robot <lkp@intel.com>
+
+All warnings (new ones prefixed by >>):
+
+>> drivers/hwmon/smpro-hwmon.c:376:3: warning: unannotated fall-through between switch labels [-Wimplicit-fallthrough]
+                   default:
+                   ^
+   drivers/hwmon/smpro-hwmon.c:376:3: note: insert 'break;' to avoid fall-through
+                   default:
+                   ^
+                   break; 
+   1 warning generated.
+
+
+vim +376 drivers/hwmon/smpro-hwmon.c
+
+e1354080fc83378 Quan Nguyen 2022-04-22  359  
+e1354080fc83378 Quan Nguyen 2022-04-22  360  static umode_t smpro_is_visible(const void *data, enum hwmon_sensor_types type,
+e1354080fc83378 Quan Nguyen 2022-04-22  361  				u32 attr, int channel)
+e1354080fc83378 Quan Nguyen 2022-04-22  362  {
+e1354080fc83378 Quan Nguyen 2022-04-22  363  	const struct smpro_hwmon *hwmon = data;
+e1354080fc83378 Quan Nguyen 2022-04-22  364  	unsigned int value;
+e1354080fc83378 Quan Nguyen 2022-04-22  365  	int ret;
+e1354080fc83378 Quan Nguyen 2022-04-22  366  
+e1354080fc83378 Quan Nguyen 2022-04-22  367  	switch (type) {
+e1354080fc83378 Quan Nguyen 2022-04-22  368  	case hwmon_temp:
+e1354080fc83378 Quan Nguyen 2022-04-22  369  		switch (attr) {
+e1354080fc83378 Quan Nguyen 2022-04-22  370  		case hwmon_temp_input:
+e1354080fc83378 Quan Nguyen 2022-04-22  371  		case hwmon_temp_label:
+e1354080fc83378 Quan Nguyen 2022-04-22  372  		case hwmon_temp_crit:
+e1354080fc83378 Quan Nguyen 2022-04-22  373  			ret = regmap_read(hwmon->regmap, temperature[channel].reg, &value);
+e1354080fc83378 Quan Nguyen 2022-04-22  374  			if (ret || value == 0xFFFF)
+e1354080fc83378 Quan Nguyen 2022-04-22  375  				return 0;
+e1354080fc83378 Quan Nguyen 2022-04-22 @376  		default:
+e1354080fc83378 Quan Nguyen 2022-04-22  377  			break;
+e1354080fc83378 Quan Nguyen 2022-04-22  378  		}
+e1354080fc83378 Quan Nguyen 2022-04-22  379  		break;
+e1354080fc83378 Quan Nguyen 2022-04-22  380  	default:
+e1354080fc83378 Quan Nguyen 2022-04-22  381  		break;
+e1354080fc83378 Quan Nguyen 2022-04-22  382  	}
+e1354080fc83378 Quan Nguyen 2022-04-22  383  
+e1354080fc83378 Quan Nguyen 2022-04-22  384  	return 0444;
+e1354080fc83378 Quan Nguyen 2022-04-22  385  }
+e1354080fc83378 Quan Nguyen 2022-04-22  386  
+
+-- 
+0-DAY CI Kernel Test Service
+https://01.org/lkp
