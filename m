@@ -2,116 +2,185 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id B093250C168
-	for <lists+linux-doc@lfdr.de>; Sat, 23 Apr 2022 00:06:40 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 94F3250C224
+	for <lists+linux-doc@lfdr.de>; Sat, 23 Apr 2022 00:07:47 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S231778AbiDVWJL (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Fri, 22 Apr 2022 18:09:11 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:37348 "EHLO
+        id S232093AbiDVWKM (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Fri, 22 Apr 2022 18:10:12 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:41568 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S232380AbiDVWIO (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Fri, 22 Apr 2022 18:08:14 -0400
-Received: from alexa-out-sd-01.qualcomm.com (alexa-out-sd-01.qualcomm.com [199.106.114.38])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 049F12C6E05;
-        Fri, 22 Apr 2022 13:54:37 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-  d=quicinc.com; i=@quicinc.com; q=dns/txt; s=qcdkim;
-  t=1650660877; x=1682196877;
+        with ESMTP id S231624AbiDVWIx (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Fri, 22 Apr 2022 18:08:53 -0400
+Received: from mga01.intel.com (mga01.intel.com [192.55.52.88])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 986172D8233;
+        Fri, 22 Apr 2022 13:56:24 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1650660984; x=1682196984;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=G4z9WMGmzn5R8PACI1EDOWSQ9HwBuIwz18XwcrjNmJ0=;
-  b=mWARJDqWM6+0BoB7IhpG02582jjwpwAWrvBTP++d6kDLP7t7M8THnB76
-   g9K4gje8poAvzzphzYmz3JoIRmjeoJVxNnk+lbOX7ZTDV09a8HB2TjyUo
-   FjCof7KqHOXJVtqFbKFBtI3uckFzsfptnpq0x6ZdhGjuRwVqVKBLzUs4H
-   4=;
-Received: from unknown (HELO ironmsg02-sd.qualcomm.com) ([10.53.140.142])
-  by alexa-out-sd-01.qualcomm.com with ESMTP; 22 Apr 2022 12:14:37 -0700
-X-QCInternal: smtphost
-Received: from nasanex01c.na.qualcomm.com ([10.47.97.222])
-  by ironmsg02-sd.qualcomm.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 22 Apr 2022 12:14:36 -0700
-Received: from nalasex01a.na.qualcomm.com (10.47.209.196) by
- nasanex01c.na.qualcomm.com (10.47.97.222) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.986.22; Fri, 22 Apr 2022 12:14:36 -0700
-Received: from hu-amelende-lv.qualcomm.com (10.49.16.6) by
- nalasex01a.na.qualcomm.com (10.47.209.196) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.986.22; Fri, 22 Apr 2022 12:14:36 -0700
-From:   Anjelique Melendez <quic_amelende@quicinc.com>
-To:     <dmitry.torokhov@gmail.com>, <corbet@lwn.net>, <sre@kernel.org>,
-        <robh+dt@kernel.org>
-CC:     <linux-input@vger.kernel.org>, <linux-kernel@vger.kernel.org>,
-        <linux-arm-msm@vger.kernel.org>, <bjorn.andersson@linaro.org>,
-        <swboyd@chromium.org>, <linux-doc@vger.kernel.org>,
-        <linux-pm@vger.kernel.org>, <devicetree@vger.kernel.org>,
-        David Collins <collinsd@codeaurora.org>,
-        Anjelique Melendez <quic_amelende@quicinc.com>
-Subject: [PATCH v6 5/5] input: misc: pm8941-pwrkey: simulate missed key press events
-Date:   Fri, 22 Apr 2022 12:12:43 -0700
-Message-ID: <20220422191239.6271-6-quic_amelende@quicinc.com>
+  bh=66e0gas27WRp3ksBUhkcYZ1nbpEm7fWfloenmE7L+68=;
+  b=LMKDHn56W5K8CLLS6Zff5bGIBoehGgIEGh3c0nGku6wu2T1PRgwDR8UX
+   2cn/oEbRFYAWAUKUAj0e95bzSj/yhh13LIsqoIlVJDtcRd7vzk2I/ZXUY
+   OhG/gJU2uHgOLUSFalQgMPEpQayqsQgfH5todljgnbqQ+lHW0BrNoELpC
+   vpf3u8qcu2RauwnqwmPFFgimvCrJD+qUxd90HXL8nsU79cBtp9E7Vjkw6
+   0YAxXwVoOzSexaWZRLuXQ/hhTJDa4aJ7GkJOfxel7YawZLAp0tHCmXsUt
+   7fHlWnDnixPy9SrHTiH6RF9AniDm9i7orgqD1f30XPp/OkvYNUIeez5jI
+   g==;
+X-IronPort-AV: E=McAfee;i="6400,9594,10324"; a="289897434"
+X-IronPort-AV: E=Sophos;i="5.90,282,1643702400"; 
+   d="scan'208";a="289897434"
+Received: from orsmga003.jf.intel.com ([10.7.209.27])
+  by fmsmga101.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 22 Apr 2022 13:02:26 -0700
+X-IronPort-AV: E=Sophos;i="5.90,282,1643702400"; 
+   d="scan'208";a="511719312"
+Received: from agluck-desk3.sc.intel.com ([172.25.222.78])
+  by orsmga003-auth.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 22 Apr 2022 13:02:25 -0700
+From:   Tony Luck <tony.luck@intel.com>
+To:     hdegoede@redhat.com, markgross@kernel.org
+Cc:     tglx@linutronix.de, mingo@redhat.com, bp@alien8.de,
+        dave.hansen@linux.intel.com, x86@kernel.org, hpa@zytor.com,
+        corbet@lwn.net, gregkh@linuxfoundation.org,
+        andriy.shevchenko@linux.intel.com, jithu.joseph@intel.com,
+        ashok.raj@intel.com, tony.luck@intel.com, rostedt@goodmis.org,
+        dan.j.williams@intel.com, linux-kernel@vger.kernel.org,
+        linux-doc@vger.kernel.org, platform-driver-x86@vger.kernel.org,
+        patches@lists.linux.dev, ravi.v.shankar@intel.com
+Subject: [PATCH v4 00/10] Introduce In Field Scan driver
+Date:   Fri, 22 Apr 2022 13:02:09 -0700
+Message-Id: <20220422200219.2843823-1-tony.luck@intel.com>
 X-Mailer: git-send-email 2.35.1
-In-Reply-To: <20220422191239.6271-1-quic_amelende@quicinc.com>
-References: <20220422191239.6271-1-quic_amelende@quicinc.com>
+In-Reply-To: <20220419163859.2228874-1-tony.luck@intel.com>
+References: <20220419163859.2228874-1-tony.luck@intel.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Originating-IP: [10.49.16.6]
-X-ClientProxiedBy: nalasex01a.na.qualcomm.com (10.47.209.196) To
- nalasex01a.na.qualcomm.com (10.47.209.196)
-X-Spam-Status: No, score=-4.4 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_MED,SPF_HELO_NONE,
-        SPF_PASS autolearn=ham autolearn_force=no version=3.4.6
+X-Spam-Status: No, score=-7.7 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_HI,
+        RCVD_IN_MSPIKE_H3,RCVD_IN_MSPIKE_WL,SPF_HELO_NONE,SPF_NONE
+        autolearn=ham autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-From: David Collins <collinsd@codeaurora.org>
+TL;DR this driver loads scan test files that can check whether silicon
+in a CPU core is still running correctly. It is expected that these tests
+would be run several times per day to catch problems as silicon ages.
 
-The status of the keys connected to the KPDPWR_N and RESIN_N pins
-is identified by reading corresponding bits in the interrupt real
-time status register.  If the status has changed by the time that
-the interrupt is handled then a press event will be missed.
+Changes since v3:
 
-Maintain a last known status variable to find unbalanced release
-events and simulate press events for each accordingly.
+Thomas Gleixner:
+----------------
+1) intel_collect_cpu_info_early() ... function name doesn't make sense
+   in context of this driver
 
-Signed-off-by: David Collins <collinsd@codeaurora.org>
-Signed-off-by: Anjelique Melendez <quic_amelende@quicinc.com>
----
- drivers/input/misc/pm8941-pwrkey.c | 11 +++++++++++
- 1 file changed, 11 insertions(+)
+   True: Dropped the "_early" suffix from the name.
 
-diff --git a/drivers/input/misc/pm8941-pwrkey.c b/drivers/input/misc/pm8941-pwrkey.c
-index 881943ab4d55..3519152759dd 100644
---- a/drivers/input/misc/pm8941-pwrkey.c
-+++ b/drivers/input/misc/pm8941-pwrkey.c
-@@ -76,6 +76,7 @@ struct pm8941_pwrkey {
- 	u32 code;
- 	u32 sw_debounce_time_us;
- 	ktime_t sw_debounce_end_time;
-+	bool last_status;
- 	const struct pm8941_data *data;
- };
- 
-@@ -162,6 +163,16 @@ static irqreturn_t pm8941_pwrkey_irq(int irq, void *_data)
- 		pwrkey->sw_debounce_end_time = ktime_add_us(ktime_get(),
- 						pwrkey->sw_debounce_time_us);
- 
-+	/*
-+	 * Simulate a press event in case a release event occurred without a
-+	 * corresponding press event.
-+	 */
-+	if (!pwrkey->last_status && !sts) {
-+		input_report_key(pwrkey->input, pwrkey->code, 1);
-+		input_sync(pwrkey->input);
-+	}
-+	pwrkey->last_status = sts;
-+
- 	input_report_key(pwrkey->input, pwrkey->code, sts);
- 	input_sync(pwrkey->input);
- 
+Greg Kroah-Hartman:
+-------------------
+1) "Ick, why?" and "pmem.c should not be used as a good example of anything"
+   and "Why not just use a misc device?"
+
+   Now using a misc device.
+
+2) "So even if everything fails, you succeed?"
+
+   This was w.r.t. the "pmem"-like driver, which is completely gone in
+   v4. New driver succeeds if any of the test-types enumerate as present
+   on the system. Fails with -ENODEV if no test types found.
+
+3) "sysfs documentation belongs in Documentation/ABI/"
+
+   See patch 10 of this series.
+
+4) "And why not just include this whole thing in the driver itself and suck
+   the documentation out of that?  No need to have a separate file."
+
+   Dropped Documentation/x86/ifs.rst from v4. People should be able to
+   figure out how to use it from the ABI docs for the sysfs files. If
+   that turns out to be wrong, we can revisit.
+
+5) "int load_ifs_binary(struct device *dev)
+    Shouldn't all of your global symbols start with "ifs_"?  Your other ones
+    seem to, what went wrong here?
+    Also, how about "ifs_load_firmware()" makes more sense."
+
+    Changed name to ifs_load_firmware()
+
+6) "static bool ifs_image_sanity_check(struct device *dev, void *data)
+    u8 *data?"  and
+   "if (!ifs_image_sanity_check(dev, (void *)fw->data)) {
+    It's not a void pointer, it's a pointer to u8.  Why cast it away?"
+
+   Changed the top of that call stack to cast to "(struct microcode_header_intel *)
+   which is what the lower level functions all want.
+
+7) "if (!sysfs_streq(buf, "1"))
+   kstrtobool()?
+
+   Changed from sysfs_streq() to kstrtobool()
+
+8) "ATTRIBUTE_GROUPS()?"
+
+   Now using this macro.
+
+Steven Rostedt:
+---------------
+1) "TP_PROTO(union ifs_scan activate, union ifs_status status),
+
+   Really, you want to pass the structure in by value, so that we have two
+   copies? One to get to this function and then one to write to the ring
+   buffer?"
+
+   Discussion on list resolved because these "pass by value" objects are
+   just wrappers around a u64. Passing pointers wouldn't make any real
+   difference. No code change.
+
+Jithu Joseph (7):
+  x86/microcode/intel: Expose collect_cpu_info_early() for IFS
+  platform/x86/intel/ifs: Read IFS firmware image
+  platform/x86/intel/ifs: Check IFS Image sanity
+  platform/x86/intel/ifs: Authenticate and copy to secured memory
+  platform/x86/intel/ifs: Add scan test support
+  platform/x86/intel/ifs: Add IFS sysfs interface
+  platform/x86/intel/ifs: add ABI documentation for IFS
+
+Tony Luck (3):
+  x86/msr-index: Define INTEGRITY_CAPABILITIES MSR
+  platform/x86/intel/ifs: Add stub driver for In-Field Scan
+  trace: platform/x86/intel/ifs: Add trace point to track Intel IFS
+    operations
+
+ .../ABI/testing/sysfs-platform-intel-ifs      |  39 ++
+ MAINTAINERS                                   |   8 +
+ arch/x86/include/asm/cpu.h                    |  18 +
+ arch/x86/include/asm/msr-index.h              |   7 +
+ arch/x86/kernel/cpu/intel.c                   |  32 ++
+ arch/x86/kernel/cpu/microcode/intel.c         |  59 +---
+ drivers/platform/x86/intel/Kconfig            |   1 +
+ drivers/platform/x86/intel/Makefile           |   1 +
+ drivers/platform/x86/intel/ifs/Kconfig        |  13 +
+ drivers/platform/x86/intel/ifs/Makefile       |   3 +
+ drivers/platform/x86/intel/ifs/core.c         |  97 +++++
+ drivers/platform/x86/intel/ifs/ifs.h          | 123 +++++++
+ drivers/platform/x86/intel/ifs/load.c         | 262 ++++++++++++++
+ drivers/platform/x86/intel/ifs/runtest.c      | 332 ++++++++++++++++++
+ drivers/platform/x86/intel/ifs/sysfs.c        | 147 ++++++++
+ include/trace/events/intel_ifs.h              |  38 ++
+ 16 files changed, 1128 insertions(+), 52 deletions(-)
+ create mode 100644 Documentation/ABI/testing/sysfs-platform-intel-ifs
+ create mode 100644 drivers/platform/x86/intel/ifs/Kconfig
+ create mode 100644 drivers/platform/x86/intel/ifs/Makefile
+ create mode 100644 drivers/platform/x86/intel/ifs/core.c
+ create mode 100644 drivers/platform/x86/intel/ifs/ifs.h
+ create mode 100644 drivers/platform/x86/intel/ifs/load.c
+ create mode 100644 drivers/platform/x86/intel/ifs/runtest.c
+ create mode 100644 drivers/platform/x86/intel/ifs/sysfs.c
+ create mode 100644 include/trace/events/intel_ifs.h
+
+
+base-commit: b2d229d4ddb17db541098b83524d901257e93845
 -- 
 2.35.1
 
