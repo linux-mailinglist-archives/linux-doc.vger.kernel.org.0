@@ -2,45 +2,76 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id B33A850C47E
-	for <lists+linux-doc@lfdr.de>; Sat, 23 Apr 2022 01:12:51 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 0A66350C3BB
+	for <lists+linux-doc@lfdr.de>; Sat, 23 Apr 2022 01:11:20 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S232974AbiDVWdV (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Fri, 22 Apr 2022 18:33:21 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:57028 "EHLO
+        id S233396AbiDVWia (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Fri, 22 Apr 2022 18:38:30 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:57866 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S233936AbiDVWdA (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Fri, 22 Apr 2022 18:33:00 -0400
-Received: from foss.arm.com (foss.arm.com [217.140.110.172])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTP id F3496128CC9;
-        Fri, 22 Apr 2022 14:26:18 -0700 (PDT)
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
-        by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 8E05C1FB;
-        Fri, 22 Apr 2022 14:26:18 -0700 (PDT)
-Received: from [10.57.80.98] (unknown [10.57.80.98])
-        by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id C4EE13F73B;
-        Fri, 22 Apr 2022 14:26:15 -0700 (PDT)
-Message-ID: <595a738e-583a-d2da-b724-a627ff91918a@arm.com>
-Date:   Fri, 22 Apr 2022 22:26:10 +0100
-MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (Windows NT 10.0; rv:91.0) Gecko/20100101
- Thunderbird/91.8.1
-Subject: Re: [PATCH] Documentation: x86: rework IOMMU documentation
-Content-Language: en-GB
-To:     Alex Deucher <alexander.deucher@amd.com>,
-        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
-        corbet@lwn.net, hpa@zytor.com, x86@kernel.org,
-        dave.hansen@linux.intel.com, bp@alien8.de, mingo@redhat.com,
-        tglx@linutronix.de, joro@8bytes.org, Suravee.Suthikulpanit@amd.com,
-        will@kernel.org, iommu@lists.linux-foundation.org,
-        Vasant.Hegde@amd.com
-References: <20220422200607.627754-1-alexander.deucher@amd.com>
-From:   Robin Murphy <robin.murphy@arm.com>
-In-Reply-To: <20220422200607.627754-1-alexander.deucher@amd.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-Spam-Status: No, score=-8.1 required=5.0 tests=BAYES_00,NICE_REPLY_A,
-        RCVD_IN_DNSWL_HI,SPF_HELO_NONE,SPF_PASS autolearn=ham
+        with ESMTP id S233449AbiDVWh2 (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Fri, 22 Apr 2022 18:37:28 -0400
+Received: from mail-yb1-xb4a.google.com (mail-yb1-xb4a.google.com [IPv6:2607:f8b0:4864:20::b4a])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 78B281F3138
+        for <linux-doc@vger.kernel.org>; Fri, 22 Apr 2022 14:29:51 -0700 (PDT)
+Received: by mail-yb1-xb4a.google.com with SMTP id a16-20020a056902057000b00641c83f82f5so8169221ybt.22
+        for <linux-doc@vger.kernel.org>; Fri, 22 Apr 2022 14:29:51 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=google.com; s=20210112;
+        h=date:message-id:mime-version:subject:from:to:cc;
+        bh=2OUrHBVQ2XGsiWEMmpN9lcaXOoCh5x5IHeSwakaqCjU=;
+        b=Aow8LWdbHQ8mE+wjvovuTbsPF39TiJA6sPYxg2JQZd+23m8l/+XB1F9qkMvdVXNRg0
+         fZev5Etdz1q0hIsgyZWbSaFZjTBdJ9VWCFBRU8eBVfHaxsBOGqI7cDhN5oo9gC413a3m
+         gvWZRS9e7nI30010ze8OFrC8V0LO6LXC6C5UwdqfIs2kLN7U21jZtH7KzWi2ief0rAaS
+         CYQdE1MI7oRVde8cp8DeJ4sP2q24P5vdBoqq4mORARm3WuCFCIS7zNqsMlQPsYyrhUDe
+         LO3euRkIUxqJygFfIefkCW2M4IxKVAvFPsRkNRhJwmmkIG9+Oudn+R7bw4c5wsDDt67i
+         rj5w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:date:message-id:mime-version:subject:from:to:cc;
+        bh=2OUrHBVQ2XGsiWEMmpN9lcaXOoCh5x5IHeSwakaqCjU=;
+        b=MznujPU5m6DKYK7DXxds5A6oqkZj5MvWYQ+BqYRR8SaCDyIt/LjxdHCq3nxSp5CwfD
+         Z94jkI1p7WlfivpIOaxQhYMhUkoKp6DIcwI0WFS1A4F5VPI4FGEvheFx4LN/cmG91Wfn
+         8B6YaLoUSDD4HYJWOdJpVxXWCOPxGrlRKOWM9bPJ4w7X1ESahZaOujyZMnwcL6sqGV3W
+         hH8r3FN/nfinkbnADG9naQZGxvJh0+fwEujupM2F4l8+dLapm2G58puyljhb+nj2XMs+
+         pIe5dWRBbXT1FuojmZZJiEzDRVPR1DeAooAsIgia0YLgES1LniTX1IG9Ls4q83WEkeLV
+         RDVg==
+X-Gm-Message-State: AOAM530odV6ztBBQbm2GE1wqGm1BG2FUA7mjGQt3t2LLxKZZKRJA/XEY
+        4tQ2SaxHxO1Pj8NO+yrWlBcLtnaizu7CNeAhzvUd
+X-Google-Smtp-Source: ABdhPJzN20+x39HHCgsQ8s+XetICyuwHBA/K5CIlhrR9l07xTY2TvqCOCgmubuPwmhK7ht8/vTRA3nNCJmwDMnx0uVbs
+X-Received: from ajr0.svl.corp.google.com ([2620:15c:2cd:203:7ba6:20ac:a8f7:1dbd])
+ (user=axelrasmussen job=sendgmr) by 2002:a25:9f90:0:b0:624:521e:d4a5 with
+ SMTP id u16-20020a259f90000000b00624521ed4a5mr6505440ybq.230.1650662990723;
+ Fri, 22 Apr 2022 14:29:50 -0700 (PDT)
+Date:   Fri, 22 Apr 2022 14:29:39 -0700
+Message-Id: <20220422212945.2227722-1-axelrasmussen@google.com>
+Mime-Version: 1.0
+X-Mailer: git-send-email 2.36.0.rc2.479.g8af0fa9b8e-goog
+Subject: [PATCH v2 0/6] userfaultfd: add /dev/userfaultfd for fine grained
+ access control
+From:   Axel Rasmussen <axelrasmussen@google.com>
+To:     Alexander Viro <viro@zeniv.linux.org.uk>,
+        Andrew Morton <akpm@linux-foundation.org>,
+        Charan Teja Reddy <charante@codeaurora.org>,
+        Dave Hansen <dave.hansen@linux.intel.com>,
+        "Dmitry V . Levin" <ldv@altlinux.org>,
+        Gleb Fotengauer-Malinovskiy <glebfm@altlinux.org>,
+        Hugh Dickins <hughd@google.com>, Jan Kara <jack@suse.cz>,
+        Jonathan Corbet <corbet@lwn.net>,
+        Mel Gorman <mgorman@techsingularity.net>,
+        Mike Kravetz <mike.kravetz@oracle.com>,
+        Mike Rapoport <rppt@kernel.org>, Nadav Amit <namit@vmware.com>,
+        Peter Xu <peterx@redhat.com>, Shuah Khan <shuah@kernel.org>,
+        Suren Baghdasaryan <surenb@google.com>,
+        Vlastimil Babka <vbabka@suse.cz>, zhangyi <yi.zhang@huawei.com>
+Cc:     Axel Rasmussen <axelrasmussen@google.com>,
+        linux-doc@vger.kernel.org, linux-fsdevel@vger.kernel.org,
+        linux-kernel@vger.kernel.org, linux-mm@kvack.org,
+        linux-kselftest@vger.kernel.org
+Content-Type: text/plain; charset="UTF-8"
+X-Spam-Status: No, score=-9.6 required=5.0 tests=BAYES_00,DKIMWL_WL_MED,
+        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_NONE,
+        SPF_HELO_NONE,SPF_PASS,USER_IN_DEF_DKIM_WL autolearn=unavailable
         autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
@@ -48,315 +79,39 @@ Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On 2022-04-22 21:06, Alex Deucher wrote:
-> Add preliminary documentation for AMD IOMMU and combine
-> with the existing Intel IOMMU documentation and clean
-> up and modernize some of the existing documentation to
-> align with the current state of the kernel.
+This series is based on torvalds/master, but additionally the run_vmtests.sh
+changes assume my refactor [1] has been applied first.
 
-FWIW,
+The series is split up like so:
+- Patch 1 is a simple fixup which we should take in any case (even by itself).
+- Patches 2-4 add the feature, basic support for it to the selftest, and docs.
+- Patches 5-6 make the selftest configurable, so you can test one or the other
+  instead of always both. If we decide this is overcomplicated, we could just
+  drop these two patches and take the rest of the series.
 
-Reviewed-by: Robin Murphy <robin.murphy@arm.com>
+[1]: https://patchwork.kernel.org/project/linux-mm/patch/20220421224928.1848230-1-axelrasmussen@google.com/
 
-> Signed-off-by: Alex Deucher <alexander.deucher@amd.com>
-> ---
-> 
-> V2: Incorporate feedback from Robin to clarify IOMMU vs DMA engine (e.g.,
->      a device) and document proper DMA API.  Also correct the fact that
->      the AMD IOMMU is not limited to managing PCI devices.
-> v3: Fix spelling and rework text as suggested by Vasant
-> v4: Combine Intel and AMD documents into a single document as suggested
->      by Dave Hansen
-> v5: Clarify that keywords are related to ACPI, grammatical fixes
-> v6: Make more stuff common based on feedback from Robin
-> 
->   Documentation/x86/index.rst       |   2 +-
->   Documentation/x86/intel-iommu.rst | 115 ------------------------
->   Documentation/x86/iommu.rst       | 143 ++++++++++++++++++++++++++++++
->   3 files changed, 144 insertions(+), 116 deletions(-)
->   delete mode 100644 Documentation/x86/intel-iommu.rst
->   create mode 100644 Documentation/x86/iommu.rst
-> 
-> diff --git a/Documentation/x86/index.rst b/Documentation/x86/index.rst
-> index f498f1d36cd3..6f8409fe0674 100644
-> --- a/Documentation/x86/index.rst
-> +++ b/Documentation/x86/index.rst
-> @@ -21,7 +21,7 @@ x86-specific Documentation
->      tlb
->      mtrr
->      pat
-> -   intel-iommu
-> +   iommu
->      intel_txt
->      amd-memory-encryption
->      pti
-> diff --git a/Documentation/x86/intel-iommu.rst b/Documentation/x86/intel-iommu.rst
-> deleted file mode 100644
-> index 099f13d51d5f..000000000000
-> --- a/Documentation/x86/intel-iommu.rst
-> +++ /dev/null
-> @@ -1,115 +0,0 @@
-> -===================
-> -Linux IOMMU Support
-> -===================
-> -
-> -The architecture spec can be obtained from the below location.
-> -
-> -http://www.intel.com/content/dam/www/public/us/en/documents/product-specifications/vt-directed-io-spec.pdf
-> -
-> -This guide gives a quick cheat sheet for some basic understanding.
-> -
-> -Some Keywords
-> -
-> -- DMAR - DMA remapping
-> -- DRHD - DMA Remapping Hardware Unit Definition
-> -- RMRR - Reserved memory Region Reporting Structure
-> -- ZLR  - Zero length reads from PCI devices
-> -- IOVA - IO Virtual address.
-> -
-> -Basic stuff
-> ------------
-> -
-> -ACPI enumerates and lists the different DMA engines in the platform, and
-> -device scope relationships between PCI devices and which DMA engine  controls
-> -them.
-> -
-> -What is RMRR?
-> --------------
-> -
-> -There are some devices the BIOS controls, for e.g USB devices to perform
-> -PS2 emulation. The regions of memory used for these devices are marked
-> -reserved in the e820 map. When we turn on DMA translation, DMA to those
-> -regions will fail. Hence BIOS uses RMRR to specify these regions along with
-> -devices that need to access these regions. OS is expected to setup
-> -unity mappings for these regions for these devices to access these regions.
-> -
-> -How is IOVA generated?
-> -----------------------
-> -
-> -Well behaved drivers call pci_map_*() calls before sending command to device
-> -that needs to perform DMA. Once DMA is completed and mapping is no longer
-> -required, device performs a pci_unmap_*() calls to unmap the region.
-> -
-> -The Intel IOMMU driver allocates a virtual address per domain. Each PCIE
-> -device has its own domain (hence protection). Devices under p2p bridges
-> -share the virtual address with all devices under the p2p bridge due to
-> -transaction id aliasing for p2p bridges.
-> -
-> -IOVA generation is pretty generic. We used the same technique as vmalloc()
-> -but these are not global address spaces, but separate for each domain.
-> -Different DMA engines may support different number of domains.
-> -
-> -We also allocate guard pages with each mapping, so we can attempt to catch
-> -any overflow that might happen.
-> -
-> -
-> -Graphics Problems?
-> -------------------
-> -If you encounter issues with graphics devices, you can try adding
-> -option intel_iommu=igfx_off to turn off the integrated graphics engine.
-> -If this fixes anything, please ensure you file a bug reporting the problem.
-> -
-> -Some exceptions to IOVA
-> ------------------------
-> -Interrupt ranges are not address translated, (0xfee00000 - 0xfeefffff).
-> -The same is true for peer to peer transactions. Hence we reserve the
-> -address from PCI MMIO ranges so they are not allocated for IOVA addresses.
-> -
-> -
-> -Fault reporting
-> ----------------
-> -When errors are reported, the DMA engine signals via an interrupt. The fault
-> -reason and device that caused it with fault reason is printed on console.
-> -
-> -See below for sample.
-> -
-> -
-> -Boot Message Sample
-> --------------------
-> -
-> -Something like this gets printed indicating presence of DMAR tables
-> -in ACPI.
-> -
-> -ACPI: DMAR (v001 A M I  OEMDMAR  0x00000001 MSFT 0x00000097) @ 0x000000007f5b5ef0
-> -
-> -When DMAR is being processed and initialized by ACPI, prints DMAR locations
-> -and any RMRR's processed::
-> -
-> -	ACPI DMAR:Host address width 36
-> -	ACPI DMAR:DRHD (flags: 0x00000000)base: 0x00000000fed90000
-> -	ACPI DMAR:DRHD (flags: 0x00000000)base: 0x00000000fed91000
-> -	ACPI DMAR:DRHD (flags: 0x00000001)base: 0x00000000fed93000
-> -	ACPI DMAR:RMRR base: 0x00000000000ed000 end: 0x00000000000effff
-> -	ACPI DMAR:RMRR base: 0x000000007f600000 end: 0x000000007fffffff
-> -
-> -When DMAR is enabled for use, you will notice..
-> -
-> -PCI-DMA: Using DMAR IOMMU
-> --------------------------
-> -
-> -Fault reporting
-> -^^^^^^^^^^^^^^^
-> -
-> -::
-> -
-> -	DMAR:[DMA Write] Request device [00:02.0] fault addr 6df084000
-> -	DMAR:[fault reason 05] PTE Write access is not set
-> -	DMAR:[DMA Write] Request device [00:02.0] fault addr 6df084000
-> -	DMAR:[fault reason 05] PTE Write access is not set
-> -
-> -TBD
-> -----
-> -
-> -- For compatibility testing, could use unity map domain for all devices, just
-> -  provide a 1-1 for all useful memory under a single domain for all devices.
-> -- API for paravirt ops for abstracting functionality for VMM folks.
-> diff --git a/Documentation/x86/iommu.rst b/Documentation/x86/iommu.rst
-> new file mode 100644
-> index 000000000000..ed87d76a38d5
-> --- /dev/null
-> +++ b/Documentation/x86/iommu.rst
-> @@ -0,0 +1,143 @@
-> +=================
-> +x86 IOMMU Support
-> +=================
-> +
-> +The architecture specs can be obtained from the below locations.
-> +
-> +- Intel: http://www.intel.com/content/dam/www/public/us/en/documents/product-specifications/vt-directed-io-spec.pdf
-> +- AMD: https://www.amd.com/system/files/TechDocs/48882_IOMMU.pdf
-> +
-> +This guide gives a quick cheat sheet for some basic understanding.
-> +
-> +Basic stuff
-> +-----------
-> +
-> +ACPI enumerates and lists the different IOMMUs on the platform, and
-> +device scope relationships between devices and which IOMMU controls
-> +them.
-> +
-> +Some ACPI Keywords:
-> +
-> +- DMAR - Intel DMA Remapping table
-> +- DRHD - Intel DMA Remapping Hardware Unit Definition
-> +- RMRR - Intel Reserved Memory Region Reporting Structure
-> +- IVRS - AMD I/O Virtualization Reporting Structure
-> +- IVDB - AMD I/O Virtualization Definition Block
-> +- IVHD - AMD I/O Virtualization Hardware Definition
-> +
-> +What is Intel RMRR?
-> +^^^^^^^^^^^^^^^^^^^
-> +
-> +There are some devices the BIOS controls, for e.g USB devices to perform
-> +PS2 emulation. The regions of memory used for these devices are marked
-> +reserved in the e820 map. When we turn on DMA translation, DMA to those
-> +regions will fail. Hence BIOS uses RMRR to specify these regions along with
-> +devices that need to access these regions. OS is expected to setup
-> +unity mappings for these regions for these devices to access these regions.
-> +
-> +What is AMD IVRS?
-> +^^^^^^^^^^^^^^^^^
-> +
-> +The architecture defines an ACPI-compatible data structure called an I/O
-> +Virtualization Reporting Structure (IVRS) that is used to convey information
-> +related to I/O virtualization to system software.  The IVRS describes the
-> +configuration and capabilities of the IOMMUs contained in the platform as
-> +well as information about the devices that each IOMMU virtualizes.
-> +
-> +The IVRS provides information about the following:
-> +
-> +- IOMMUs present in the platform including their capabilities and proper configuration
-> +- System I/O topology relevant to each IOMMU
-> +- Peripheral devices that cannot be otherwise enumerated
-> +- Memory regions used by SMI/SMM, platform firmware, and platform hardware. These are generally exclusion ranges to be configured by system software.
-> +
-> +How is an I/O Virtual Address (IOVA) generated?
-> +-----------------------------------------------
-> +
-> +Well behaved drivers call dma_map_*() calls before sending command to device
-> +that needs to perform DMA. Once DMA is completed and mapping is no longer
-> +required, driver performs dma_unmap_*() calls to unmap the region.
-> +
-> +Some exceptions to IOVAs
-> +------------------------
-> +
-> +Interrupt ranges are not address translated, (0xfee00000 - 0xfeefffff).
-> +The same is true for peer to peer transactions. Hence we reserve the
-> +address from PCI MMIO ranges so they are not allocated for IOVA addresses.
-> +
-> +Graphics Problems?
-> +------------------
-> +
-> +If you encounter issues with integrated graphics devices, you can try
-> +adding the option "iommu.passthrough=1", or the equivalent "iommu=pt",
-> +to the kernel command line to use a 1:1 mapping for the IOMMU in
-> +general.  On Intel you can also try "intel_iommu=igfx_off" to turn off
-> +translation specifically for the integrated graphics engine only.  If
-> +this fixes anything, please ensure you file a bug reporting the problem.
-> +
-> +Fault reporting
-> +---------------
-> +When errors are reported, the IOMMU signals via an interrupt. The fault
-> +reason and device that caused it is printed on the console.
-> +
-> +
-> +Kernel Log Samples
-> +------------------
-> +
-> +Intel Boot Messages
-> +^^^^^^^^^^^^^^^^^^^
-> +
-> +Something like this gets printed indicating presence of DMAR tables
-> +in ACPI:
-> +
-> +::
-> +
-> +	ACPI: DMAR (v001 A M I  OEMDMAR  0x00000001 MSFT 0x00000097) @ 0x000000007f5b5ef0
-> +
-> +When DMAR is being processed and initialized by ACPI, prints DMAR locations
-> +and any RMRR's processed:
-> +
-> +::
-> +
-> +	ACPI DMAR:Host address width 36
-> +	ACPI DMAR:DRHD (flags: 0x00000000)base: 0x00000000fed90000
-> +	ACPI DMAR:DRHD (flags: 0x00000000)base: 0x00000000fed91000
-> +	ACPI DMAR:DRHD (flags: 0x00000001)base: 0x00000000fed93000
-> +	ACPI DMAR:RMRR base: 0x00000000000ed000 end: 0x00000000000effff
-> +	ACPI DMAR:RMRR base: 0x000000007f600000 end: 0x000000007fffffff
-> +
-> +When DMAR is enabled for use, you will notice:
-> +
-> +::
-> +
-> +	PCI-DMA: Using DMAR IOMMU
-> +
-> +Intel Fault reporting
-> +^^^^^^^^^^^^^^^^^^^^^
-> +
-> +::
-> +
-> +	DMAR:[DMA Write] Request device [00:02.0] fault addr 6df084000
-> +	DMAR:[fault reason 05] PTE Write access is not set
-> +	DMAR:[DMA Write] Request device [00:02.0] fault addr 6df084000
-> +	DMAR:[fault reason 05] PTE Write access is not set
-> +
-> +AMD Boot Messages
-> +^^^^^^^^^^^^^^^^^
-> +
-> +Something like this gets printed indicating presence of the IOMMU:
-> +
-> +::
-> +
-> +	AMD-Vi: Found IOMMU cap 0x40
-> +	AMD-Vi: Extended features (0x4f77ef22294ada): PPR NX GT IA GA PC GA_vAPIC
-> +	AMD-Vi: Interrupt remapping enabled
-> +	AMD-Vi: Virtual APIC enabled
-> +
-> +AMD Fault reporting
-> +^^^^^^^^^^^^^^^^^^^
-> +
-> +::
-> +
-> +	AMD-Vi: Event logged [IO_PAGE_FAULT domain=0x0007 address=0xffffc02000 flags=0x0000]
-> +	AMD-Vi: Event logged [IO_PAGE_FAULT device=07:00.0 domain=0x0007 address=0xffffc02000 flags=0x0000]
+Changelog:
+v1->v2:
+  - Add documentation update.
+  - Test *both* userfaultfd(2) and /dev/userfaultfd via the selftest.
+
+Axel Rasmussen (6):
+  selftests: vm: add hugetlb_shared userfaultfd test to run_vmtests.sh
+  userfaultfd: add /dev/userfaultfd for fine grained access control
+  userfaultfd: selftests: modify selftest to use /dev/userfaultfd
+  userfaultfd: update documentation to describe /dev/userfaultfd
+  userfaultfd: selftests: make /dev/userfaultfd testing configurable
+  selftests: vm: add /dev/userfaultfd test cases to run_vmtests.sh
+
+ Documentation/admin-guide/mm/userfaultfd.rst | 38 +++++++++-
+ Documentation/admin-guide/sysctl/vm.rst      |  3 +
+ fs/userfaultfd.c                             | 79 ++++++++++++++++----
+ include/uapi/linux/userfaultfd.h             |  4 +
+ tools/testing/selftests/vm/run_vmtests.sh    | 11 ++-
+ tools/testing/selftests/vm/userfaultfd.c     | 60 +++++++++++++--
+ 6 files changed, 170 insertions(+), 25 deletions(-)
+
+--
+2.36.0.rc2.479.g8af0fa9b8e-goog
+
