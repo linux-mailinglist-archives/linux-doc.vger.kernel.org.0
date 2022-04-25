@@ -2,322 +2,140 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id A153C50E62C
-	for <lists+linux-doc@lfdr.de>; Mon, 25 Apr 2022 18:51:39 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id F3B5750E910
+	for <lists+linux-doc@lfdr.de>; Mon, 25 Apr 2022 21:02:53 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S241056AbiDYQyS (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 25 Apr 2022 12:54:18 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:51890 "EHLO
+        id S244780AbiDYTEH (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 25 Apr 2022 15:04:07 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:47768 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S243606AbiDYQyR (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Mon, 25 Apr 2022 12:54:17 -0400
-Received: from mga05.intel.com (mga05.intel.com [192.55.52.43])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id BE08A1A042;
-        Mon, 25 Apr 2022 09:51:12 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1650905472; x=1682441472;
-  h=date:from:to:cc:subject:message-id:references:
-   mime-version:content-transfer-encoding:in-reply-to;
-  bh=sNT4x+GZpx5jtw0CJ7/oLIIw/S8KoYk0ZT6jquEq14Q=;
-  b=mDk/QCs5kOr4Sub3BlOs4mfbxZfxivm+6grZykV9yrF4vAz99y/Q6nlR
-   xvaaNqVyforYioxCh3BWDdW2vWSWQg1KuwC5DG3WXmZm6U5zFgffnYVnw
-   70C8MP2c0Uw5ZBas0lMewUJ4RK8ENbCIHDAsrihAqnxh61Jk5m6f48gpG
-   nd/Gyuder5n+YYIBo02cxUONsD+dugJ9b6l8gzjI5/88wNcjs+Xsdyj2Z
-   3FOivgVTgojdMMi/7S6OFGV6h2GrKMI9puCYfUkm4i178Sd48cW6NKGcE
-   v6Al50rOExGg37br6TE5V5hSlrJuWY9bdI3yRLklaffbl/58sZkw5b/bA
-   g==;
-X-IronPort-AV: E=McAfee;i="6400,9594,10328"; a="351749907"
-X-IronPort-AV: E=Sophos;i="5.90,289,1643702400"; 
-   d="scan'208";a="351749907"
-Received: from orsmga008.jf.intel.com ([10.7.209.65])
-  by fmsmga105.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 25 Apr 2022 09:51:12 -0700
-X-IronPort-AV: E=Sophos;i="5.90,289,1643702400"; 
-   d="scan'208";a="579375156"
-Received: from kruparel-mobl1.amr.corp.intel.com (HELO localhost) ([10.213.188.223])
-  by orsmga008-auth.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 25 Apr 2022 09:51:11 -0700
-Date:   Mon, 25 Apr 2022 09:51:10 -0700
-From:   Ira Weiny <ira.weiny@intel.com>
-To:     "Fabio M. De Francesco" <fmdefrancesco@gmail.com>
-Cc:     Andrew Morton <akpm@linux-foundation.org>,
-        Catalin Marinas <catalin.marinas@arm.com>,
-        "Matthew Wilcox (Oracle)" <willy@infradead.org>,
-        Will Deacon <will@kernel.org>,
-        Peter Collingbourne <pcc@google.com>,
-        Vlastimil Babka <vbabka@suse.cz>,
-        Sebastian Andrzej Siewior <bigeasy@linutronix.de>,
-        linux-kernel@vger.kernel.org, Jonathan Corbet <corbet@lwn.net>,
-        linux-doc@vger.kernel.org, outreachy@lists.linux.dev,
-        Thomas Gleixner <tglx@linutronix.de>,
-        Peter Zijlstra <peterz@infradead.org>
-Subject: Re: [PATCH 4/4] Documentation/vm: Rework "Temporary Virtual Mappings"
-Message-ID: <YmbRfjGi12P4eX5F@iweiny-desk3>
-References: <20220421180200.16901-1-fmdefrancesco@gmail.com>
- <20220421180200.16901-5-fmdefrancesco@gmail.com>
- <YmXyhH7wAJo274WB@iweiny-desk3>
- <1894872.PYKUYFuaPT@leap>
-MIME-Version: 1.0
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <1894872.PYKUYFuaPT@leap>
-X-Spam-Status: No, score=-5.0 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_MED,
-        SPF_HELO_NONE,SPF_NONE autolearn=ham autolearn_force=no version=3.4.6
+        with ESMTP id S244788AbiDYTEC (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Mon, 25 Apr 2022 15:04:02 -0400
+Received: from mail-pl1-x64a.google.com (mail-pl1-x64a.google.com [IPv6:2607:f8b0:4864:20::64a])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id C3B97AFAFE
+        for <linux-doc@vger.kernel.org>; Mon, 25 Apr 2022 12:00:50 -0700 (PDT)
+Received: by mail-pl1-x64a.google.com with SMTP id j21-20020a170902c3d500b0015cecdddb3dso4263049plj.21
+        for <linux-doc@vger.kernel.org>; Mon, 25 Apr 2022 12:00:50 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=google.com; s=20210112;
+        h=date:message-id:mime-version:subject:from:to:cc;
+        bh=u7aSCooaSdm5AbeQgc4mEIZKOx9WN8oAB22VArgUr9o=;
+        b=SuyUCmC+8fnn1/O7RvexP4Bun5cSxBx1sd6O/1H7oKjQcRlUzBc7Bt5knel7INSyCT
+         TE/6ByM9b+hsj1G0tr2mL+zLSAwDzapaydUgTsEV402eJbk6MFsRXuR2Zs7wSIl1kB3L
+         kM1IJRVsDfkrGPtIyCOk2w0Dcm2Ui7PibJAyNe5F2X4o2o3XViG/Mb3Gb5qUL3O65dss
+         oa10bPUcqXV571PY4lkn6ZsjfPx4Gr5+vTIcS9Ja1j6OtRizQTClkmTwHXynPTok2zix
+         xUXMgzdz/Su53W1QXZRAn/l8NCJFbP5egoirBvhNqKzR/LvG2ktSdhYieYmOtOJnaE5h
+         N+Fw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:date:message-id:mime-version:subject:from:to:cc;
+        bh=u7aSCooaSdm5AbeQgc4mEIZKOx9WN8oAB22VArgUr9o=;
+        b=qx6CQKoFdhRJND1KbnHI+T3KvpBiOr3A+lEb+Myxhj2QY+CP4LR43T4FDYlG5717tm
+         zG0daCw8y6iDIVilGeCVIQ8fxHm1TzO9bOSsyeu5z72FhfRiuxfddfFDciML5A70q+aB
+         QcOD3jOxbpr+cxbEQUzHxetnIPPsoA3RdpIIjKdGQivWl4Hi20ZgEMdgJ56yt/1Gx2TG
+         WnYsbcKoTdn9JjNB6Kzug9akf2OuQQ4lGQJgXV3hqcwdk/pSMjYrgSnQQBOn929ot6mF
+         FGmB9TrqLyfaCvX51ZCp5rwx06IdBorfJcCriPzqdxi/pmsjHrbgG5odxqJKREB7+e3F
+         V22A==
+X-Gm-Message-State: AOAM531YYHy1fvWSPPN49vM4q3ENaI/Sgjqm9fnqBSFMuMP6EU5pu2/D
+        o7flBoZG3kUEtO36j2pn3XhHUsTPwvqRZrqO
+X-Google-Smtp-Source: ABdhPJyC6Btrh9g9zSX3rXPfqbFSX9w9P0umwQPU2xZn6+TTPWH6+X7xS5z3iAFd4B9xmvUavECuvuXybuhg3bvR
+X-Received: from yosry.c.googlers.com ([fda3:e722:ac3:cc00:7f:e700:c0a8:2327])
+ (user=yosryahmed job=sendgmr) by 2002:a17:90a:bb8f:b0:1d9:650e:10f5 with SMTP
+ id v15-20020a17090abb8f00b001d9650e10f5mr8800254pjr.148.1650913250098; Mon,
+ 25 Apr 2022 12:00:50 -0700 (PDT)
+Date:   Mon, 25 Apr 2022 19:00:36 +0000
+Message-Id: <20220425190040.2475377-1-yosryahmed@google.com>
+Mime-Version: 1.0
+X-Mailer: git-send-email 2.36.0.rc2.479.g8af0fa9b8e-goog
+Subject: [PATCH v5 0/4] memcg: introduce per-memcg proactive reclaim
+From:   Yosry Ahmed <yosryahmed@google.com>
+To:     Johannes Weiner <hannes@cmpxchg.org>,
+        Michal Hocko <mhocko@kernel.org>,
+        Shakeel Butt <shakeelb@google.com>,
+        Andrew Morton <akpm@linux-foundation.org>,
+        Roman Gushchin <roman.gushchin@linux.dev>
+Cc:     David Rientjes <rientjes@google.com>, Tejun Heo <tj@kernel.org>,
+        Zefan Li <lizefan.x@bytedance.com>,
+        Jonathan Corbet <corbet@lwn.net>,
+        Shuah Khan <shuah@kernel.org>, Yu Zhao <yuzhao@google.com>,
+        Dave Hansen <dave.hansen@linux.intel.com>,
+        Wei Xu <weixugc@google.com>, Greg Thelen <gthelen@google.com>,
+        Chen Wandun <chenwandun@huawei.com>,
+        Vaibhav Jain <vaibhav@linux.ibm.com>,
+        "=?UTF-8?q?Michal=20Koutn=C3=BD?=" <mkoutny@suse.com>,
+        Tim Chen <tim.c.chen@linux.intel.com>, cgroups@vger.kernel.org,
+        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
+        linux-mm@kvack.org, linux-kselftest@vger.kernel.org,
+        Yosry Ahmed <yosryahmed@google.com>
+Content-Type: text/plain; charset="UTF-8"
+X-Spam-Status: No, score=-9.6 required=5.0 tests=BAYES_00,DKIMWL_WL_MED,
+        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_NONE,
+        SPF_HELO_NONE,SPF_PASS,USER_IN_DEF_DKIM_WL autolearn=unavailable
+        autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Mon, Apr 25, 2022 at 03:42:46AM +0200, Fabio M. De Francesco wrote:
-> On lunedì 25 aprile 2022 02:59:48 CEST Ira Weiny wrote:
-> > On Thu, Apr 21, 2022 at 08:02:00PM +0200, Fabio M. De Francesco wrote:
-> > > Extend and rework the "Temporary Virtual Mappings" section of the 
-> highmem.rst
-> > > documentation.
-> > > 
-> > > Despite the local kmaps were introduced by Thomas Gleixner in October 
-> 2020,
-> > > documentation was still missing information about them. These additions 
-> rely
-> > > largely on Gleixner's patches, Jonathan Corbet's LWN articles, comments 
-> by
-> > > Ira Weiny and Matthew Wilcox, and in-code comments from
-> > > ./include/linux/highmem.h.
-> > > 
-> > > 1) Add a paragraph to document kmap_local_page().
-> > > 2) Reorder the list of functions by decreasing order of preference of
-> > > use.
-> > > 3) Rework part of the kmap() entry in list.
-> > > 
-> > > Cc: Jonathan Corbet <corbet@lwn.net>
-> > > Cc: Thomas Gleixner <tglx@linutronix.de>
-> > > Cc: Ira Weiny <ira.weiny@intel.com>
-> > > Cc: Matthew Wilcox <willy@infradead.org>
-> > > Cc: Peter Zijlstra <peterz@infradead.org>
-> > > Signed-off-by: Fabio M. De Francesco <fmdefrancesco@gmail.com>
-> > > ---
-> > >  Documentation/vm/highmem.rst | 71 ++++++++++++++++++++++++++++++------
-> > >  1 file changed, 60 insertions(+), 11 deletions(-)
-> > > 
-> > > diff --git a/Documentation/vm/highmem.rst b/Documentation/vm/
-> highmem.rst
-> > > index e05bf5524174..960f61e7a552 100644
-> > > --- a/Documentation/vm/highmem.rst
-> > > +++ b/Documentation/vm/highmem.rst
-> > > @@ -50,26 +50,75 @@ space when they use mm context tags.
-> > >  Temporary Virtual Mappings
-> > >  ==========================
-> > >  
-> > > -The kernel contains several ways of creating temporary mappings:
-> > > +The kernel contains several ways of creating temporary mappings. The 
-> following
-> > > +list shows them in order of preference of use.
-> > >  
-> > > -* vmap().  This can be used to make a long duration mapping of 
-> multiple
-> > > -  physical pages into a contiguous virtual space.  It needs global
-> > > -  synchronization to unmap.
-> > > +* kmap_local_page().  This function is used to require short term 
-> mappings.
-> > > +  It can be invoked from any context (including interrupts) but the 
-> mappings
-> > > +  can only be used in the context which acquired them.
-> > > +
-> > > +  This function should be preferred, where feasible, over all the 
-> others.
-> > >  
-> > > -* kmap().  This permits a short duration mapping of a single page.  It 
-> needs
-> > > -  global synchronization, but is amortized somewhat.  It is also prone 
-> to
-> > > -  deadlocks when using in a nested fashion, and so it is not 
-> recommended for
-> > > -  new code.
-> > > +  These mappings are per thread, CPU local (i.e., migration from one 
-> CPU to
-> > > +  another is disabled - this is why they are called "local"), but they 
-> don't
-> > > +  disable preemption. It's valid to take pagefaults in a local kmap 
-> region,
-> > > +  unless the context in which the local mapping is acquired does not 
-> allow
-> > > +  it for other reasons.
-> > > +
-> > > +  It is assumed that kmap_local_page() always returns the virtual 
-> address
-> > 
-> > kmap_local_page() does return a kernel virtual address.  Why 'assume' 
-> this?
-> > 
-> > Do you mean it returns an address in the direct map?
-> > 
-> > > +  of the mapping, therefore they won't ever fail.
-> > 
-> > I don't think that returning a virtual address has anything to do with 
-> the
-> > assumption they will not fail.
-> > 
-> > Why do you say this?
-> 
-> Oh, sorry! I didn't mean to say this. What I wrote is _not_ what I meant. 
-> My intention was to say the same that you may read below about 
-> k[un]map_atomic().
-> 
-> This sentence should have been:
-> 
-> + It always returns a valid virtual address. It is assumed that
-> + k[un]map_local() won't ever fail.
-> 
-> Is this rewording correct?
-> 
-> It's not my first time I make these kinds of silly mistakes when copy-
-> pasting lines and then rework or merge with other text that was already 
-> there. Recently I've made a couple of these kinds of mistakes.
-> 
-> I'd better read twice (maybe thrice) what I write before sending :(
+This patch series adds a memory.reclaim proactive reclaim interface.
+The rationale behind the interface and how it works are in the first
+patch.
 
-NP  That is part of the reason we have reviews.
+---
 
-> 
-> > 
-> > > +
-> > > +  If a task holding local kmaps is preempted, the maps are removed on 
-> context
-> > > +  switch and restored when the task comes back on the CPU. As the maps 
-> are
-> > > +  strictly CPU local, it is guaranteed that the task stays on the CPU 
-> and
-> > > +  that the CPU cannot be unplugged until the local kmaps are released.
-> > > +
-> > > +  Nesting kmap_local_page() and kmap_atomic() mappings is allowed to a 
-> certain
-> > > +  extent (up to KMAP_TYPE_NR) but their invocations have to be 
-> strictly ordered
-> > > +  because the map implementation is stack based.
-> > 
-> > I think I would reference the kmap_local_page()
-> 
-> I suppose you are talking about the kdocs comments in code. If so, please 
-> remember that the kmap_local_page() kdocs have already been included in  
-> highmem.rst.
+Changes in V5:
+- Fixed comment formating and added Co-developed-by in patch 1.
+- Modified selftest to work if swap is enabled or not, and retry
+  multiple times to wait for background allocation before failing
+  with a clear message.
 
-Yes exactly.
+Changes in V4:
+mm/memcontrol.c:
+- Return -EINTR on signal_pending().
+- On the final retry, drain percpu lru caches hoping that it might
+  introduce some evictable pages for reclaim.
+- Simplified the retry loop as suggested by Dan Schatzberg.
 
-> 
-> Am I misunderstanding what you write?
+selftests:
+- Always return -errno on failure from cg_write() (whether open() or
+  write() fail), also update cg_read() and read_text() to return -errno
+  as well for consistency. Also make sure to correctly check that the
+  whole buffer was written in cg_write().
+- Added a maximum number of retries for the reclaim selftest.
 
-I was just suggesting that the above could add.
+Changes in V3:
+- Fix cg_write() (in patch 2) to properly return -1 if open() fails
+  and not fail if len == errno.
+- Remove debug printf() in patch 3.
 
-'See kmal_local_page() kdoc for ordering details.'
+Changes in V2:
+- Add the interface to root as well.
+- Added a selftest.
+- Documented the interface as a nested-keyed interface, which makes
+  adding optional arguments in the future easier (see doc updates in the
+  first patch).
+- Modified the commit message to reflect changes and added a timeout
+  argument as a suggested possible extension
+- Return -EAGAIN if the kernel fails to reclaim the full requested
+  amount.
 
-To make sure that people understand those details and you don't have to rewrite
-the kdoc stuff here.
+---
 
-> 
-> > for more details on the
-> > ordering because there have been some conversions I've done which were
-> > complicated by this.
-> > 
-> > >  
-> > >  * kmap_atomic().  This permits a very short duration mapping of a 
-> single
-> > >    page.  Since the mapping is restricted to the CPU that issued it, it
-> > >    performs well, but the issuing task is therefore required to stay on 
-> that
-> > >    CPU until it has finished, lest some other task displace its 
-> mappings.
-> > >  
-> > > -  kmap_atomic() may also be used by interrupt contexts, since it is 
-> does not
-> > > -  sleep and the caller may not sleep until after kunmap_atomic() is 
-> called.
-> > > +  kmap_atomic() may also be used by interrupt contexts, since it does 
-> not
-> > > +  sleep and the callers too may not sleep until after kunmap_atomic() 
-> is
-> > > +  called.
-> > > +
-> > > +  Each call of kmap_atomic() in the kernel creates a non-preemptible 
-> section
-> > > +  and disable pagefaults. This could be a source of unwanted latency, 
-> so it
-> > > +  should be only used if it is absolutely required, otherwise 
-> kmap_local_page()
-> > > +  should be used where it is feasible.
-> > >  
-> > > -  It may be assumed that k[un]map_atomic() won't fail.
-> > > +  It is assumed that k[un]map_atomic() won't fail.
-> > > +
-> > > +* kmap().  This should be used to make short duration mapping of a 
-> single
-> > > +  page with no restrictions on preemption or migration. It comes with 
-> an
-> > > +  overhead as mapping space is restricted and protected by a global 
-> lock
-> > > +  for synchronization. When mapping is no more needed, the address 
-> that
-> >                                          ^^^^^^^^
-> > 					 no longer
-> 
-> Yes, correct. I'll fix it.
-> 
-> > > +  the page was mapped to must be released with kunmap().
-> > > +
-> > > +  Mapping changes must be propagated across all the CPUs. kmap() also
-> > > +  requires global TLB invalidation when the kmap's pool wraps and it 
-> might
-> > > +  block when the mapping space is fully utilized until a slot becomes
-> > > +  available. Therefore, kmap() is only callable from preemptible 
-> context.
-> > > +
-> > > +  All the above work is necessary if a mapping must last for a 
-> relatively
-> > > +  long time but the bulk of high-memory mappings in the kernel are
-> > > +  short-lived and only used in one place. This means that the cost of
-> > > +  kmap() is mostly wasted in such cases. kmap() was not intended for 
-> long
-> > > +  term mappings but it has morphed in that direction and its use is
-> > > +  strongly discouraged in newer code and the set of the preceding 
-> functions
-> > > +  should be preferred.
-> > 
-> > Nice!
-> 
-> Now that I have your reviews for all the four patches of this series I'll 
-> send next version on Monday.
-> 
-> Thanks you so much,
+Shakeel Butt (1):
+  memcg: introduce per-memcg reclaim interface
 
-Thank you!
-Ira
+Yosry Ahmed (3):
+  selftests: cgroup: return -errno from cg_read()/cg_write() on failure
+  selftests: cgroup: fix alloc_anon_noexit() instantly freeing memory
+  selftests: cgroup: add a selftest for memory.reclaim
 
-> 
-> Fabio
-> 
-> > 
-> > Ira
-> > 
-> > > +
-> > > +  On 64-bit systems, calls to kmap_local_page(), kmap_atomic() and 
-> kmap() have
-> > > +  no real work to do because a 64-bit address space is more than 
-> sufficient to
-> > > +  address all the physical memory whose pages are permanently mapped.
-> > > +
-> > > +* vmap().  This can be used to make a long duration mapping of 
-> multiple
-> > > +  physical pages into a contiguous virtual space.  It needs global
-> > > +  synchronization to unmap.
-> > >  
-> > >  
-> > >  Cost of Temporary Mappings
-> > > -- 
-> > > 2.34.1
-> > > 
-> > 
-> 
-> 
-> 
-> 
+ Documentation/admin-guide/cgroup-v2.rst       |  21 ++++
+ mm/memcontrol.c                               |  45 +++++++
+ tools/testing/selftests/cgroup/cgroup_util.c  |  44 +++----
+ .../selftests/cgroup/test_memcontrol.c        | 114 +++++++++++++++++-
+ 4 files changed, 197 insertions(+), 27 deletions(-)
+
+-- 
+2.36.0.rc2.479.g8af0fa9b8e-goog
+
