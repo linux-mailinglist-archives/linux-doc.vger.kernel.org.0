@@ -2,202 +2,143 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 966E451219E
-	for <lists+linux-doc@lfdr.de>; Wed, 27 Apr 2022 20:49:33 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id BB48C512221
+	for <lists+linux-doc@lfdr.de>; Wed, 27 Apr 2022 21:06:10 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S229887AbiD0Swk (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 27 Apr 2022 14:52:40 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:46048 "EHLO
+        id S231555AbiD0TJU (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 27 Apr 2022 15:09:20 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:40350 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S229927AbiD0Sw2 (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Wed, 27 Apr 2022 14:52:28 -0400
-Received: from mail-ej1-x62c.google.com (mail-ej1-x62c.google.com [IPv6:2a00:1450:4864:20::62c])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id C23F0B42CA;
-        Wed, 27 Apr 2022 11:38:37 -0700 (PDT)
-Received: by mail-ej1-x62c.google.com with SMTP id y3so5094493ejo.12;
-        Wed, 27 Apr 2022 11:38:37 -0700 (PDT)
+        with ESMTP id S233727AbiD0TJF (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Wed, 27 Apr 2022 15:09:05 -0400
+Received: from mail-ej1-x635.google.com (mail-ej1-x635.google.com [IPv6:2a00:1450:4864:20::635])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 8DF4769CFE
+        for <linux-doc@vger.kernel.org>; Wed, 27 Apr 2022 11:57:38 -0700 (PDT)
+Received: by mail-ej1-x635.google.com with SMTP id bv19so5226444ejb.6
+        for <linux-doc@vger.kernel.org>; Wed, 27 Apr 2022 11:57:38 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=from:to:cc:subject:date:message-id:in-reply-to:references
-         :mime-version:content-transfer-encoding;
-        bh=jOs08eZRk6ExS199wzRva9ul3oRppHhYhG8H+SRVTNs=;
-        b=AMCnfbxGjjdKlTzyhbozRm+aS3brrBzQsgur9pRnfMnqBvu/SuIbid8Crrkl+UpJ2A
-         3vqPNbLrcej51RTvsy/6grOFJ2gpJvYXxUhJoioSGBxUpZVmn9LWKugWlsUoVUyLb9PN
-         SeI78ZtISIfEOKQbRTMJolDxr7IeTuYjWX7SOfMU4sTFchUkfO156gbilKnrvXtDOFZC
-         bKWawtwNT4XqEnuQc7pJBNQjP3ZO303Nv2Ox4a51AmYwU27kQzAF/oC8t4y5WtTm4F2t
-         Mlusn2zDvW1bCViW3PJGgln2upWw+xF0B1Y3j+uoV9viNLa0i/7zunE/6Yp0xtOcZI1P
-         Mvmg==
+        d=linaro.org; s=google;
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=iPKi8PgGQaBnzyHIXBRWRUTqjsQoxp2zAwkTWoaTAuc=;
+        b=GZs2Ap7YssDTDUzMi9Tmwfvp52es0XpGnz/uyDvPKjQsmCEEr/oCIDLLx+CfQbWjhx
+         PESpWsgxHMdYHi5A3U6qfQPYCQOpfxgBAiljS4p0GYzJDLAg5tnlzQq49HNBIIlbfcho
+         0sEXEDb0Kq7bJc4Ryi4nh6VifDGAm7PQebMPlX9c49SC4O0g7QtnzERU0tsyY7K4KmyR
+         u90eageJ8I8XauO5IW5a6CpngCi+kU0hYYHDkFd0bQ+n3ApcZUBdtLIk8uI9hAhTdCv9
+         WqzXupQfiMIqaz8lq8p288+7itiSFKawnRin5Tb1s9Z7V+9q/ih/L3YO0HZ2PWVk9SML
+         n9+w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-         :references:mime-version:content-transfer-encoding;
-        bh=jOs08eZRk6ExS199wzRva9ul3oRppHhYhG8H+SRVTNs=;
-        b=PERUKU09fT7TOgt3brI7PuzXfLo3w+4IqsT0hEg1unHrWCJ7YfFEIyaYLcRD14NIy9
-         GGv8WCybgvCnlI0V/s3CTxbNBpXLIg5pj9NXtLaMoTX3XfCI3SXF3PbZfbccxywv6q8G
-         +Q6zT9mMuUWJmgT67/BWFjvWnfVoOo4/nTAsxpZSUQYdUxGGYAdUeSHuFNL32xVlE5LF
-         u3uOP3M+8AAnuCTMfeRBu8WxDYlMtY6H9/gf6RcoBtemEyLV83H3wCKMg3s8Fr3u+itl
-         LytYIgnczJ9u1ygjrSKV6bx3gAO3IBbz9z8o6Fgz2j0qNm+PJPG57OnJFBAk44b6l0ys
-         CErQ==
-X-Gm-Message-State: AOAM532SpGzKesu/VRVGv9ziMb/PPnNWSIWCLW0rjDsviJyD71pozyeD
-        IDkU1wZKf+6S/pNZsCpwVCw=
-X-Google-Smtp-Source: ABdhPJwWDatxEfRatj8lLwPfJQ47Zd8rjxiQLgCmNfAWGsGt89ymZa2VnfWy1gE6hzBSiMls3Z9HOw==
-X-Received: by 2002:a17:907:3e2a:b0:6f3:aa0c:ab94 with SMTP id hp42-20020a1709073e2a00b006f3aa0cab94mr11398613ejc.23.1651084716314;
-        Wed, 27 Apr 2022 11:38:36 -0700 (PDT)
-Received: from localhost.localdomain (host-79-50-86-254.retail.telecomitalia.it. [79.50.86.254])
-        by smtp.gmail.com with ESMTPSA id ig8-20020a1709072e0800b006f38f2e9ebesm4691667ejc.64.2022.04.27.11.38.33
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=iPKi8PgGQaBnzyHIXBRWRUTqjsQoxp2zAwkTWoaTAuc=;
+        b=jwp47kAs+V8ldc5yGu8jVefB3rDAoPm13D8RA6jFWBPqbzOzHKDqsjqekFJz6Nxvgy
+         nZMS/uj9g5UP2nZd+hHmpMHrQC5D5IjuF8HgfnJo+qEIQ1PziVAIFTMmQ7/zj0O980Vf
+         Ru/oUZg0+29E9L1oDfx24i0oo9Q6CTvJF9wQlSBztEMtoqcVypJlzQ/sEBf+5LGQa+pX
+         OTmKqbnio2DclGlgNxSy5ONTqhZMMZA2iZiBDTWq3T28Agg3hVvyoQC9CVJaQedEmKH8
+         GIrZb5RjmTG3rgnWs8BGhnkiIV4ymzyUTsrt0QcjKrEvM1VXNOkgsIJNRTPkwcXTGf/E
+         b6DA==
+X-Gm-Message-State: AOAM533jra5nV3UTgRPE1Xu/SoBRbNwVGzlRCUVvo4tuEkzRAw3DmoCP
+        eTuUnYF8X+HhwG6TppimK7eP2bLzaN9Ehg==
+X-Google-Smtp-Source: ABdhPJzfkdw3+HaFRXiY3ueNL3+pwS9ImdeHsOucq24QuQGFw4LxzzUQh62Tb0G3YV6tOTE5oga+mQ==
+X-Received: by 2002:a17:906:ece3:b0:6f3:da10:138a with SMTP id qt3-20020a170906ece300b006f3da10138amr266656ejb.438.1651085856857;
+        Wed, 27 Apr 2022 11:57:36 -0700 (PDT)
+Received: from localhost.localdomain (xdsl-188-155-176-92.adslplus.ch. [188.155.176.92])
+        by smtp.gmail.com with ESMTPSA id n10-20020a170906378a00b006f3cd3e7b94sm1348563ejc.213.2022.04.27.11.57.35
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 27 Apr 2022 11:38:34 -0700 (PDT)
-From:   "Fabio M. De Francesco" <fmdefrancesco@gmail.com>
-To:     Ira Weiny <ira.weiny@intel.com>,
-        Andrew Morton <akpm@linux-foundation.org>,
-        Catalin Marinas <catalin.marinas@arm.com>,
-        "Matthew Wilcox (Oracle)" <willy@infradead.org>,
-        Will Deacon <will@kernel.org>,
-        Peter Collingbourne <pcc@google.com>,
-        Vlastimil Babka <vbabka@suse.cz>,
-        Sebastian Andrzej Siewior <bigeasy@linutronix.de>,
-        linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org,
-        outreachy@lists.linux.dev
-Cc:     "Fabio M. De Francesco" <fmdefrancesco@gmail.com>,
-        Jonathan Corbet <corbet@lwn.net>,
-        Thomas Gleixner <tglx@linutronix.de>,
-        Peter Zijlstra <peterz@infradead.org>
-Subject: [PATCH v3 4/4] Documentation/vm: Rework "Temporary Virtual Mappings" section
-Date:   Wed, 27 Apr 2022 20:38:21 +0200
-Message-Id: <20220427183821.1979-5-fmdefrancesco@gmail.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20220427183821.1979-1-fmdefrancesco@gmail.com>
-References: <20220427183821.1979-1-fmdefrancesco@gmail.com>
+        Wed, 27 Apr 2022 11:57:36 -0700 (PDT)
+From:   Krzysztof Kozlowski <krzysztof.kozlowski@linaro.org>
+To:     Jonathan Corbet <corbet@lwn.net>, linux-doc@vger.kernel.org,
+        linux-kernel@vger.kernel.org
+Cc:     Krzysztof Kozlowski <krzysztof.kozlowski@linaro.org>
+Subject: [PATCH] Documentation/process: use scripts/get_maintainer.pl on patches
+Date:   Wed, 27 Apr 2022 20:56:45 +0200
+Message-Id: <20220427185645.677039-1-krzysztof.kozlowski@linaro.org>
+X-Mailer: git-send-email 2.32.0
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 X-Spam-Status: No, score=-2.1 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_FROM,
-        RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,SPF_PASS autolearn=ham
-        autolearn_force=no version=3.4.6
+        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_NONE,
+        SPF_HELO_NONE,SPF_PASS autolearn=unavailable autolearn_force=no
+        version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Extend and rework the "Temporary Virtual Mappings" section of the highmem.rst
-documentation.
+Explain that, when collecting list of people to Cc the patch,
+scripts/get_maintainer.pl should be used on patches, not on the
+directories.  The behavior is quite different, because with "-f" on
+a directory, the maintainers of individual files will not be shown.
 
-Despite the local kmaps were introduced by Thomas Gleixner in October 2020,
-documentation was still missing information about them. These additions rely
-largely on Gleixner's patches, Jonathan Corbet's LWN articles, comments by
-Ira Weiny and Matthew Wilcox, and in-code comments from highmem.h.
+Signed-off-by: Krzysztof Kozlowski <krzysztof.kozlowski@linaro.org>
 
-1) Add a paragraph to document kmap_local_page().
-2) Reorder the list of functions by decreasing order of preference of
-use.
-3) Rework part of the kmap() entry in list.
-
-Cc: Jonathan Corbet <corbet@lwn.net>
-Cc: Thomas Gleixner <tglx@linutronix.de>
-Cc: Sebastian Andrzej Siewior <bigeasy@linutronix.de>
-Cc: Matthew Wilcox <willy@infradead.org>
-Cc: Peter Zijlstra <peterz@infradead.org>
-Suggested-by: Ira Weiny <ira.weiny@intel.com>
-Signed-off-by: Fabio M. De Francesco <fmdefrancesco@gmail.com>
 ---
- Documentation/vm/highmem.rst | 74 ++++++++++++++++++++++++++++++------
- 1 file changed, 63 insertions(+), 11 deletions(-)
 
-diff --git a/Documentation/vm/highmem.rst b/Documentation/vm/highmem.rst
-index e05bf5524174..c8aff448612b 100644
---- a/Documentation/vm/highmem.rst
-+++ b/Documentation/vm/highmem.rst
-@@ -50,26 +50,78 @@ space when they use mm context tags.
- Temporary Virtual Mappings
- ==========================
+It seems using the script on patches is not obvious and it already
+caused some misunderstandings.
+---
+ Documentation/doc-guide/contributing.rst     | 5 +++--
+ Documentation/process/3.Early-stage.rst      | 9 +++++----
+ Documentation/process/submitting-patches.rst | 7 ++++---
+ 3 files changed, 12 insertions(+), 9 deletions(-)
+
+diff --git a/Documentation/doc-guide/contributing.rst b/Documentation/doc-guide/contributing.rst
+index 207fd93d7c80..d4793826ad9a 100644
+--- a/Documentation/doc-guide/contributing.rst
++++ b/Documentation/doc-guide/contributing.rst
+@@ -79,8 +79,9 @@ simplistic idea of what C comment blocks look like.  This problem had been
+ present since that comment was added in 2016 — a full four years.  Fixing
+ it was a matter of adding the missing asterisks.  A quick look at the
+ history for that file showed what the normal format for subject lines is,
+-and ``scripts/get_maintainer.pl`` told me who should receive it.  The
+-resulting patch looked like this::
++and ``scripts/get_maintainer.pl`` told me who should receive it (pass paths to
++your patches as arguments to scripts/get_maintainer.pl).  The resulting patch
++looked like this::
  
--The kernel contains several ways of creating temporary mappings:
-+The kernel contains several ways of creating temporary mappings. The following
-+list shows them in order of preference of use.
+   [PATCH] PM / devfreq: Fix two malformed kerneldoc comments
  
--* vmap().  This can be used to make a long duration mapping of multiple
--  physical pages into a contiguous virtual space.  It needs global
--  synchronization to unmap.
-+* kmap_local_page().  This function is used to require short term mappings.
-+  It can be invoked from any context (including interrupts) but the mappings
-+  can only be used in the context which acquired them.
-+
-+  This function should be preferred, where feasible, over all the others.
+diff --git a/Documentation/process/3.Early-stage.rst b/Documentation/process/3.Early-stage.rst
+index 6bfd60d77d1a..894a920041c6 100644
+--- a/Documentation/process/3.Early-stage.rst
++++ b/Documentation/process/3.Early-stage.rst
+@@ -154,10 +154,11 @@ that the kernel developers have added a script to ease the process:
+ This script will return the current maintainer(s) for a given file or
+ directory when given the "-f" option.  If passed a patch on the
+ command line, it will list the maintainers who should probably receive
+-copies of the patch.  There are a number of options regulating how hard
+-get_maintainer.pl will search for maintainers; please be careful about
+-using the more aggressive options as you may end up including developers
+-who have no real interest in the code you are modifying.
++copies of the patch.  This is the preferred way (unlike "-f" option) to get the
++list of people to Cc for your patches.  There are a number of options
++regulating how hard get_maintainer.pl will search for maintainers; please be
++careful about using the more aggressive options as you may end up including
++developers who have no real interest in the code you are modifying.
  
--* kmap().  This permits a short duration mapping of a single page.  It needs
--  global synchronization, but is amortized somewhat.  It is also prone to
--  deadlocks when using in a nested fashion, and so it is not recommended for
--  new code.
-+  These mappings are thread-local and CPU-local (i.e., migration from one CPU
-+  to another is disabled - this is why they are called "local"), but they don't
-+  disable preemption. It's valid to take pagefaults in a local kmap region,
-+  unless the context in which the local mapping is acquired does not allow it
-+  for other reasons.
-+
-+  kmap_local_page() always returns a valid virtual address and it is assumed
-+  that kunmap_local() will never fail.
-+
-+  If a task holding local kmaps is preempted, the maps are removed on context
-+  switch and restored when the task comes back on the CPU. The maps are
-+  strictly thread-local and CPU-local, therefore it is guaranteed that the
-+  task stays on the CPU and the CPU cannot be unplugged until the local kmaps
-+  are released.
-+
-+  Nesting kmap_local_page() and kmap_atomic() mappings is allowed to a certain
-+  extent (up to KMAP_TYPE_NR) but their invocations have to be strictly ordered
-+  because the map implementation is stack based. See kmap_local_page () kdocs
-+  (included in the "Functions" section) for details on how to manage nested
-+  mappings.
+ If all else fails, talking to Andrew Morton can be an effective way to
+ track down a maintainer for a specific piece of code.
+diff --git a/Documentation/process/submitting-patches.rst b/Documentation/process/submitting-patches.rst
+index 9bb4e8c0f635..1708b66c4672 100644
+--- a/Documentation/process/submitting-patches.rst
++++ b/Documentation/process/submitting-patches.rst
+@@ -227,9 +227,10 @@ Select the recipients for your patch
+ You should always copy the appropriate subsystem maintainer(s) on any patch
+ to code that they maintain; look through the MAINTAINERS file and the
+ source code revision history to see who those maintainers are.  The
+-script scripts/get_maintainer.pl can be very useful at this step.  If you
+-cannot find a maintainer for the subsystem you are working on, Andrew
+-Morton (akpm@linux-foundation.org) serves as a maintainer of last resort.
++script scripts/get_maintainer.pl can be very useful at this step (pass paths to
++your patches as arguments to scripts/get_maintainer.pl).  If you cannot find a
++maintainer for the subsystem you are working on, Andrew Morton
++(akpm@linux-foundation.org) serves as a maintainer of last resort.
  
- * kmap_atomic().  This permits a very short duration mapping of a single
-   page.  Since the mapping is restricted to the CPU that issued it, it
-   performs well, but the issuing task is therefore required to stay on that
-   CPU until it has finished, lest some other task displace its mappings.
- 
--  kmap_atomic() may also be used by interrupt contexts, since it is does not
--  sleep and the caller may not sleep until after kunmap_atomic() is called.
-+  kmap_atomic() may also be used by interrupt contexts, since it does not
-+  sleep and the callers too may not sleep until after kunmap_atomic() is
-+  called.
-+
-+  Each call of kmap_atomic() in the kernel creates a non-preemptible section
-+  and disable pagefaults. This could be a source of unwanted latency, so it
-+  should be only used if it is absolutely required, otherwise kmap_local_page()
-+  should be used where it is feasible.
- 
--  It may be assumed that k[un]map_atomic() won't fail.
-+  It is assumed that k[un]map_atomic() won't fail.
-+
-+* kmap().  This should be used to make short duration mapping of a single
-+  page with no restrictions on preemption or migration. It comes with an
-+  overhead as mapping space is restricted and protected by a global lock
-+  for synchronization. When mapping is no longer needed, the address that
-+  the page was mapped to must be released with kunmap().
-+
-+  Mapping changes must be propagated across all the CPUs. kmap() also
-+  requires global TLB invalidation when the kmap's pool wraps and it might
-+  block when the mapping space is fully utilized until a slot becomes
-+  available. Therefore, kmap() is only callable from preemptible context.
-+
-+  All the above work is necessary if a mapping must last for a relatively
-+  long time but the bulk of high-memory mappings in the kernel are
-+  short-lived and only used in one place. This means that the cost of
-+  kmap() is mostly wasted in such cases. kmap() was not intended for long
-+  term mappings but it has morphed in that direction and its use is
-+  strongly discouraged in newer code and the set of the preceding functions
-+  should be preferred.
-+
-+  On 64-bit systems, calls to kmap_local_page(), kmap_atomic() and kmap() have
-+  no real work to do because a 64-bit address space is more than sufficient to
-+  address all the physical memory whose pages are permanently mapped.
-+
-+* vmap().  This can be used to make a long duration mapping of multiple
-+  physical pages into a contiguous virtual space.  It needs global
-+  synchronization to unmap.
- 
- 
- Cost of Temporary Mappings
+ You should also normally choose at least one mailing list to receive a copy
+ of your patch set.  linux-kernel@vger.kernel.org should be used by default
 -- 
-2.34.1
+2.32.0
 
