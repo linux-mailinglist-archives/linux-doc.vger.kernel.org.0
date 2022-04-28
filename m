@@ -2,88 +2,136 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 88A21513862
-	for <lists+linux-doc@lfdr.de>; Thu, 28 Apr 2022 17:30:49 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id B3F7D51388C
+	for <lists+linux-doc@lfdr.de>; Thu, 28 Apr 2022 17:39:11 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S231469AbiD1Pdd (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 28 Apr 2022 11:33:33 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:54066 "EHLO
+        id S1349265AbiD1PmT (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 28 Apr 2022 11:42:19 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:49086 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S234220AbiD1Pda (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Thu, 28 Apr 2022 11:33:30 -0400
-Received: from ams.source.kernel.org (ams.source.kernel.org [IPv6:2604:1380:4601:e00::1])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id D8D26E0A8;
-        Thu, 28 Apr 2022 08:30:14 -0700 (PDT)
-Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
-        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
-        (No client certificate requested)
-        by ams.source.kernel.org (Postfix) with ESMTPS id 95474B82E4F;
-        Thu, 28 Apr 2022 15:30:13 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPS id 31AEFC385AA;
-        Thu, 28 Apr 2022 15:30:12 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-        s=k20201202; t=1651159812;
-        bh=T+WZ741ROL6RC6V663uGNmJr88+g1OnBpfCrdEBCD0Q=;
-        h=Subject:From:Date:References:In-Reply-To:To:Cc:From;
-        b=fOt2pYzdJAA91dl2eWxmBnMYmvoCyC52GrMib/VTgrtNBgD0Eu7cprNCpM7MxhEwY
-         5piIM0rnXDc2agyzdojvnuSQZD9G9LmFVs4Er6pXtw4XefaSqCvCzWaa9TsVm1Ixcs
-         vUYfxqXALDc8TiMpgfir75UP7P9aoesJIB66x6+OG8+HSECpPrHhattciLpB4YmYMx
-         nLh6KGtyixWffn8EHk+ljTZ3ZSM4XH/acGTen0KV1NarT9/7Cr2g9VIjcAUTiUsAe8
-         +eRod0Or2k9kDklwHtHPfYLoY0NHO/34jPUwaOPD/+Rmgqf7f0v1OjsPCOZpJAw9PT
-         YfHtzK5w1putw==
-Received: from aws-us-west-2-korg-oddjob-1.ci.codeaurora.org (localhost.localdomain [127.0.0.1])
-        by aws-us-west-2-korg-oddjob-1.ci.codeaurora.org (Postfix) with ESMTP id 135FDE8DD85;
-        Thu, 28 Apr 2022 15:30:12 +0000 (UTC)
-Content-Type: text/plain; charset="utf-8"
+        with ESMTP id S234156AbiD1PmP (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Thu, 28 Apr 2022 11:42:15 -0400
+Received: from mga07.intel.com (mga07.intel.com [134.134.136.100])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 76C2BB36A8;
+        Thu, 28 Apr 2022 08:39:00 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1651160340; x=1682696340;
+  h=from:to:cc:subject:date:message-id:in-reply-to:
+   references:mime-version:content-transfer-encoding;
+  bh=KNI6TywIBrtMzHC0wppg8qEsX62tIPxK1F8eBPhI0zQ=;
+  b=dU1rfjwBhowKSTxgfK2GGMcLq1DR672uXCi1OWcuaovgUhshA1FnNOis
+   Rh+/WqMoD4REES5oIsTezc7RHKYhPebGI+3GNG0h7kxJ78dOwBfX3e4D9
+   mLeZbyB8VX7wyQ/M3wyMnvPuj9K1wpkNLbvv8OMKpXVa4dhbsUfCZOl8N
+   qxjrPV8cMDlZoxVofL9D1FbyhxRweIbd8gBpi0qgATyuwxdJs44m+/qUe
+   TvGRLe6X82j4iKhY2Uxr3YvnNDNGmVoyskBRw+Wa+9GCA+EVSXgDUJf1b
+   nRroj9FmVBItAsY02gjlVuryNcShvXVvAoINxwA47iABm/OxwE1WeQPTO
+   A==;
+X-IronPort-AV: E=McAfee;i="6400,9594,10331"; a="329271639"
+X-IronPort-AV: E=Sophos;i="5.91,295,1647327600"; 
+   d="scan'208";a="329271639"
+Received: from orsmga007.jf.intel.com ([10.7.209.58])
+  by orsmga105.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 28 Apr 2022 08:39:00 -0700
+X-IronPort-AV: E=Sophos;i="5.91,295,1647327600"; 
+   d="scan'208";a="559734311"
+Received: from agluck-desk3.sc.intel.com ([172.25.222.78])
+  by orsmga007-auth.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 28 Apr 2022 08:38:59 -0700
+From:   Tony Luck <tony.luck@intel.com>
+To:     hdegoede@redhat.com, markgross@kernel.org
+Cc:     tglx@linutronix.de, mingo@redhat.com, bp@alien8.de,
+        dave.hansen@linux.intel.com, x86@kernel.org, hpa@zytor.com,
+        corbet@lwn.net, gregkh@linuxfoundation.org,
+        andriy.shevchenko@linux.intel.com, jithu.joseph@intel.com,
+        ashok.raj@intel.com, tony.luck@intel.com, rostedt@goodmis.org,
+        dan.j.williams@intel.com, linux-kernel@vger.kernel.org,
+        linux-doc@vger.kernel.org, platform-driver-x86@vger.kernel.org,
+        patches@lists.linux.dev, ravi.v.shankar@intel.com
+Subject: [PATCH v5 00/10] Introduce In Field Scan driver
+Date:   Thu, 28 Apr 2022 08:38:39 -0700
+Message-Id: <20220428153849.295779-1-tony.luck@intel.com>
+X-Mailer: git-send-email 2.35.1
+In-Reply-To: <20220422200219.2843823-1-tony.luck@intel.com>
+References: <20220422200219.2843823-1-tony.luck@intel.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Subject: Re: [PATCH bpf-next v2 0/3] bpf, docs: Fix typos in instruction-set.rst
-From:   patchwork-bot+netdevbpf@kernel.org
-Message-Id: <165115981207.8186.1086744167638703650.git-patchwork-notify@kernel.org>
-Date:   Thu, 28 Apr 2022 15:30:12 +0000
-References: <1651139754-4838-1-git-send-email-yangtiezhu@loongson.cn>
-In-Reply-To: <1651139754-4838-1-git-send-email-yangtiezhu@loongson.cn>
-To:     Tiezhu Yang <yangtiezhu@loongson.cn>
-Cc:     ast@kernel.org, daniel@iogearbox.net, andrii@kernel.org,
-        corbet@lwn.net, netdev@vger.kernel.org, bpf@vger.kernel.org,
-        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org
-X-Spam-Status: No, score=-7.7 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_HI,
-        SPF_HELO_NONE,SPF_PASS autolearn=ham autolearn_force=no version=3.4.6
+X-Spam-Status: No, score=-5.0 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_MED,
+        SPF_HELO_NONE,SPF_NONE autolearn=ham autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Hello:
+Hopefully this is close enough to done to begin discussion on which
+maintainer tree will take this series.
 
-This series was applied to bpf/bpf-next.git (master)
-by Daniel Borkmann <daniel@iogearbox.net>:
+Choices:
+1) Hans/Mark take it into the platform-drivers tree
+   Needs an Ack from x86 maintainers on parts 1 & 2
+2) X86 maintainers take it into TIP
+   Needs Ack from Hans/Mark on parts 2-10
 
-On Thu, 28 Apr 2022 17:55:51 +0800 you wrote:
-> v2:
->   -- update the commit message of patch #2
->   -- add new patch #3
-> 
-> Tiezhu Yang (3):
->   bpf, docs: Remove duplicated word "instructions"
->   bpf, docs: BPF_FROM_BE exists as alias for BPF_TO_BE
->   bpf, docs: Fix typo "respetively" to "respectively"
-> 
-> [...]
+TL;DR this driver loads scan test files that can check whether silicon
+in a CPU core is still running correctly. It is expected that these tests
+would be run several times per day to catch problems as silicon ages.
 
-Here is the summary with links:
-  - [bpf-next,v2,1/3] bpf, docs: Remove duplicated word "instructions"
-    https://git.kernel.org/bpf/bpf-next/c/67b97e584232
-  - [bpf-next,v2,2/3] bpf, docs: BPF_FROM_BE exists as alias for BPF_TO_BE
-    https://git.kernel.org/bpf/bpf-next/c/c821d80bb890
-  - [bpf-next,v2,3/3] bpf, docs: Fix typo "respetively" to "respectively"
-    https://git.kernel.org/bpf/bpf-next/c/9a9a90ca1327
+Changes since v4:
 
-You are awesome, thank you!
+Greg Kroah-Hartman
+------------------
+ "Cute way to do this, but I don't see you ever have any more devices
+ added to this list in this series."
+
+ Removed the enum, arrays, loops, and count of test types discovered.
+ Now just check for enumeration of the single test type that is being
+ deployed on Sapphire Rapids.
+
+
+Jithu Joseph (7):
+  x86/microcode/intel: Expose collect_cpu_info_early() for IFS
+  platform/x86/intel/ifs: Read IFS firmware image
+  platform/x86/intel/ifs: Check IFS Image sanity
+  platform/x86/intel/ifs: Authenticate and copy to secured memory
+  platform/x86/intel/ifs: Add scan test support
+  platform/x86/intel/ifs: Add IFS sysfs interface
+  platform/x86/intel/ifs: add ABI documentation for IFS
+
+Tony Luck (3):
+  x86/msr-index: Define INTEGRITY_CAPABILITIES MSR
+  platform/x86/intel/ifs: Add stub driver for In-Field Scan
+  trace: platform/x86/intel/ifs: Add trace point to track Intel IFS
+    operations
+
+ .../ABI/testing/sysfs-platform-intel-ifs      |  39 ++
+ MAINTAINERS                                   |   8 +
+ arch/x86/include/asm/cpu.h                    |  18 +
+ arch/x86/include/asm/msr-index.h              |   7 +
+ arch/x86/kernel/cpu/intel.c                   |  32 ++
+ arch/x86/kernel/cpu/microcode/intel.c         |  59 +---
+ drivers/platform/x86/intel/Kconfig            |   1 +
+ drivers/platform/x86/intel/Makefile           |   1 +
+ drivers/platform/x86/intel/ifs/Kconfig        |  13 +
+ drivers/platform/x86/intel/ifs/Makefile       |   3 +
+ drivers/platform/x86/intel/ifs/core.c         |  80 +++++
+ drivers/platform/x86/intel/ifs/ifs.h          | 123 +++++++
+ drivers/platform/x86/intel/ifs/load.c         | 262 ++++++++++++++
+ drivers/platform/x86/intel/ifs/runtest.c      | 332 ++++++++++++++++++
+ drivers/platform/x86/intel/ifs/sysfs.c        | 147 ++++++++
+ include/trace/events/intel_ifs.h              |  38 ++
+ 16 files changed, 1111 insertions(+), 52 deletions(-)
+ create mode 100644 Documentation/ABI/testing/sysfs-platform-intel-ifs
+ create mode 100644 drivers/platform/x86/intel/ifs/Kconfig
+ create mode 100644 drivers/platform/x86/intel/ifs/Makefile
+ create mode 100644 drivers/platform/x86/intel/ifs/core.c
+ create mode 100644 drivers/platform/x86/intel/ifs/ifs.h
+ create mode 100644 drivers/platform/x86/intel/ifs/load.c
+ create mode 100644 drivers/platform/x86/intel/ifs/runtest.c
+ create mode 100644 drivers/platform/x86/intel/ifs/sysfs.c
+ create mode 100644 include/trace/events/intel_ifs.h
+
+
+base-commit: af2d861d4cd2a4da5137f795ee3509e6f944a25b
 -- 
-Deet-doot-dot, I am a bot.
-https://korg.docs.kernel.org/patchwork/pwbot.html
-
+2.35.1
 
