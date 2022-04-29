@@ -2,51 +2,51 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id D1FBA514AA0
-	for <lists+linux-doc@lfdr.de>; Fri, 29 Apr 2022 15:37:17 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 37414514AA2
+	for <lists+linux-doc@lfdr.de>; Fri, 29 Apr 2022 15:37:56 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1359808AbiD2Nkc (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Fri, 29 Apr 2022 09:40:32 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:53676 "EHLO
+        id S1359844AbiD2Nkq (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Fri, 29 Apr 2022 09:40:46 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:53908 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1359863AbiD2Nk3 (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Fri, 29 Apr 2022 09:40:29 -0400
-Received: from mail-pj1-x1031.google.com (mail-pj1-x1031.google.com [IPv6:2607:f8b0:4864:20::1031])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id DDBC2CB03C
-        for <linux-doc@vger.kernel.org>; Fri, 29 Apr 2022 06:37:09 -0700 (PDT)
-Received: by mail-pj1-x1031.google.com with SMTP id cx11-20020a17090afd8b00b001d9fe5965b3so8606027pjb.3
-        for <linux-doc@vger.kernel.org>; Fri, 29 Apr 2022 06:37:09 -0700 (PDT)
+        with ESMTP id S1359812AbiD2Nkd (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Fri, 29 Apr 2022 09:40:33 -0400
+Received: from mail-pg1-x534.google.com (mail-pg1-x534.google.com [IPv6:2607:f8b0:4864:20::534])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 8A8D0CB006
+        for <linux-doc@vger.kernel.org>; Fri, 29 Apr 2022 06:37:15 -0700 (PDT)
+Received: by mail-pg1-x534.google.com with SMTP id 7so2669553pga.12
+        for <linux-doc@vger.kernel.org>; Fri, 29 Apr 2022 06:37:15 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=bytedance-com.20210112.gappssmtp.com; s=20210112;
         h=from:to:cc:subject:date:message-id:in-reply-to:references
          :mime-version:content-transfer-encoding;
-        bh=DGl50d69T/46DVPYmj2DL1x7ncKmmZ54JyK/lw6nQrc=;
-        b=ARePECzUIuI/o7LaJ6U30K3W4hzXRsvLwyPDJjZN5Ir39F24/V1LJiWa1QSu1EMnH5
-         A1GdbC0XtJEshbkbFIKnlj/USWQUZJ1ZbMvKe6cExn1vdQNp2EvKrmONYlgc4UfzDqDN
-         NPrE/d77mWvSMe8t+Pj6PUpwZJtO1lp6YSqboATYrrZ7UX43LUsVHKLtdYbl0QShre5S
-         KTKyDJkzYVYEsW858cbU/F6b9nm45sIAiNbvtYGtEbXr8MjkUHvyh6vh9G95S67sc/Qd
-         5bayvVPY/1MQqIcZ8qKIQkAnNN6I1m7O69zc83csx5Wy9gJ5vcWF0bOjLvSmoOPA1ADx
-         MHpQ==
+        bh=Ti47oOTvJFCNXT5uBN/QcWBt/mztyaSPv2YCzaUIEks=;
+        b=3g9d4G3AVSSQh+94A2C6QzQqKt1PRF8js91ZL0nJcPA3Z2pqrsS736awrXrhB5qPNL
+         sUEJ1N/4NDvBYvnmd6ICC5/nmqG4YbNK2tVYSwte7tSPMcq+itTorKQlC5NV96S78vve
+         49KHlqBtvfS6ikyeLIE98STuW16ozIxTWc4DS49i0ZPiYyllxwnGRYZcxC6V30CKju9o
+         CL9fjfO7XWQ7Yvc9MmOIn0mD/1tlgEEmvZfM2zZieTtyLlokUilgkaABmZykB1TcatHq
+         pjHEGHSkjNa+P+/dvoKyd/UP7gMxeI4LAtJltzdrP0xKNx+P2UQhK6u7RqFWZSdZOLE4
+         X8LA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
          :references:mime-version:content-transfer-encoding;
-        bh=DGl50d69T/46DVPYmj2DL1x7ncKmmZ54JyK/lw6nQrc=;
-        b=1sXPhVTDa4DIV52pKWTIcmcX9WlzuZYWPIV1tn+kGGGhP6xzWOGXvIKUlSMEHvJmcn
-         J5t0/TMMhgZa8fb1ygNHu45otxJOP8BWM0yPFLKRVfi389Fno438K+l6fHPRd0KiBa6n
-         uKIeIjDQgs0JgXSgnBzm4FBsMlmtlGUcwz87ayY7IKpw6RhQpfcwEV+gR5wz6HMAcxPO
-         o2b8QS/YrKdCRMpXzcBIrQYaJX/PSdQyBgK5BC+CIQW2uGKahBbxWgHlkIkeKj5Qaiiw
-         n12QCFUPu4eN28dbqyjiI1AS+7p+vuCvykODC+CEbxVS2MiU85uPDvuqMImY5e8d9UYx
-         a/NQ==
-X-Gm-Message-State: AOAM533ZRYkuvkCzX9N9YNQRaeTuLH/VHU5FjRhv2IRCxUFumSibSyvA
-        s/KGRSwDIdCO9hjf8q96p6R+ZQ==
-X-Google-Smtp-Source: ABdhPJwkDEFr/eSiIXsECiLskFgBvhXhvx+Ht6goriTOJRM12m+x++WpdKjE8bfOm4QcHnGGrKiSMQ==
-X-Received: by 2002:a17:90b:380e:b0:1da:2943:b975 with SMTP id mq14-20020a17090b380e00b001da2943b975mr4006350pjb.42.1651239429455;
-        Fri, 29 Apr 2022 06:37:09 -0700 (PDT)
+        bh=Ti47oOTvJFCNXT5uBN/QcWBt/mztyaSPv2YCzaUIEks=;
+        b=RcwNnZ+rdur4AmtZaMsE90xKb/66T8fMPySzHEnsOrrezQJV910N9dZ+FokRyV0WTg
+         OyQjfedgaRSiM6U8z294Yb1+gx6YymJzbGzOnkL5PHM3gaVPDRne7uu0+NebblDmyPdd
+         zsmCPW78NQnZgnzvOkd4Kz+8zRaRhysijf7iKyDy9OHaOgg+4T/OHNHdhSq46l34wPpM
+         2tDskQgKjbalxIy71WZIrYFWDgbjFweMFGPgkUkN9epj0pAjQktCV0CT8B9WK3AIKiJ7
+         n9UdTcrBXHpFKs0EWHgFopdKIkABOSXv/ifqCjxJwb9C1Fokcuus2GjziYLZj96/s1hD
+         DTrQ==
+X-Gm-Message-State: AOAM533dBuJGm7hht3dJLENyABODEcL8eAOBLdmrzcHq0BNatkB1J5y/
+        3RD1FREb1jeQsrOnakD0zIS/rw==
+X-Google-Smtp-Source: ABdhPJxMIKA/P0RDHv9STrZjiOvbOSFfoH4N5N3pT1umtFqilIbIuxsCtayDjWtKg053GReSSR2iXA==
+X-Received: by 2002:a65:4006:0:b0:3aa:1cb6:e2f8 with SMTP id f6-20020a654006000000b003aa1cb6e2f8mr32435549pgp.274.1651239435027;
+        Fri, 29 Apr 2022 06:37:15 -0700 (PDT)
 Received: from localhost.localdomain ([139.177.225.240])
-        by smtp.gmail.com with ESMTPSA id m8-20020a17090a414800b001d81a30c437sm10681977pjg.50.2022.04.29.06.37.04
+        by smtp.gmail.com with ESMTPSA id m8-20020a17090a414800b001d81a30c437sm10681977pjg.50.2022.04.29.06.37.09
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 29 Apr 2022 06:37:08 -0700 (PDT)
+        Fri, 29 Apr 2022 06:37:14 -0700 (PDT)
 From:   Qi Zheng <zhengqi.arch@bytedance.com>
 To:     akpm@linux-foundation.org, tglx@linutronix.de,
         kirill.shutemov@linux.intel.com, mika.penttila@nextfour.com,
@@ -55,145 +55,106 @@ To:     akpm@linux-foundation.org, tglx@linutronix.de,
 Cc:     linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
         linux-mm@kvack.org, songmuchun@bytedance.com,
         zhouchengming@bytedance.com, Qi Zheng <zhengqi.arch@bytedance.com>
-Subject: [RFC PATCH 09/18] pte_ref: add pte_tryget() and {__,}pte_put() helper
-Date:   Fri, 29 Apr 2022 21:35:43 +0800
-Message-Id: <20220429133552.33768-10-zhengqi.arch@bytedance.com>
+Subject: [RFC PATCH 10/18] mm: add pte_tryget_map{_lock}() helper
+Date:   Fri, 29 Apr 2022 21:35:44 +0800
+Message-Id: <20220429133552.33768-11-zhengqi.arch@bytedance.com>
 X-Mailer: git-send-email 2.24.3 (Apple Git-128)
 In-Reply-To: <20220429133552.33768-1-zhengqi.arch@bytedance.com>
 References: <20220429133552.33768-1-zhengqi.arch@bytedance.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-        DKIM_VALID,RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,SPF_PASS autolearn=ham
-        autolearn_force=no version=3.4.6
+        DKIM_VALID,RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,SPF_PASS
+        autolearn=unavailable autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-The user PTE page table page may be freed when the last
-percpu_ref is dropped. So we need to try to get its
-percpu_ref before accessing the PTE page to prevent it
-form being freed during the access process.
+Now, we usually use pte_offset_map{_lock}() to get the pte_t pointer
+before accessing the PTE page table page. After adding the
+FREE_USER_PTE, we also need to call the pte_tryget() before calling
+pte_offset_map{_lock}(), which is used to try to get the reference
+count of the PTE to prevent the PTE page table page from being freed
+during the access process.
 
-This patch adds pte_tryget() and {__,}pte_put() to help us
-to get and put the percpu_ref of user PTE page table pages.
+This patch adds pte_tryget_map{_lock}() to help us to do that. A
+return value of NULL indicates that we failed to get the percpu_ref,
+and there is a concurrent thread that is releasing this PTE (or has
+already been released). It needs to be treated as the case of pte_none().
 
 Signed-off-by: Qi Zheng <zhengqi.arch@bytedance.com>
 ---
- include/linux/pte_ref.h | 23 ++++++++++++++++
- mm/pte_ref.c            | 58 +++++++++++++++++++++++++++++++++++++++++
- 2 files changed, 81 insertions(+)
+ include/linux/pgtable.h | 37 +++++++++++++++++++++++++++++++++++--
+ 1 file changed, 35 insertions(+), 2 deletions(-)
 
-diff --git a/include/linux/pte_ref.h b/include/linux/pte_ref.h
-index d3963a151ca5..bfe620038699 100644
---- a/include/linux/pte_ref.h
-+++ b/include/linux/pte_ref.h
-@@ -12,6 +12,10 @@
+diff --git a/include/linux/pgtable.h b/include/linux/pgtable.h
+index d1218cb1013e..6f205fee6348 100644
+--- a/include/linux/pgtable.h
++++ b/include/linux/pgtable.h
+@@ -228,6 +228,8 @@ static inline spinlock_t *pud_lock(struct mm_struct *mm, pud_t *pud)
+ 	return ptl;
+ }
  
- bool pte_ref_init(pgtable_t pte);
- void pte_ref_free(pgtable_t pte);
-+void free_user_pte(struct mm_struct *mm, pmd_t *pmd, unsigned long addr);
-+bool pte_tryget(struct mm_struct *mm, pmd_t *pmd, unsigned long addr);
-+void __pte_put(pgtable_t page);
-+void pte_put(pte_t *ptep);
- 
- #else /* !CONFIG_FREE_USER_PTE */
- 
-@@ -24,6 +28,25 @@ static inline void pte_ref_free(pgtable_t pte)
++#include <linux/pte_ref.h>
++
+ #ifndef pte_offset_kernel
+ static inline pte_t *pte_offset_kernel(pmd_t *pmd, unsigned long address)
  {
- }
+@@ -240,12 +242,38 @@ static inline pte_t *pte_offset_kernel(pmd_t *pmd, unsigned long address)
+ #define pte_offset_map(dir, address)				\
+ 	((pte_t *)kmap_atomic(pmd_page(*(dir))) +		\
+ 	 pte_index((address)))
+-#define pte_unmap(pte) kunmap_atomic((pte))
++#define __pte_unmap(pte) kunmap_atomic((pte))
+ #else
+ #define pte_offset_map(dir, address)	pte_offset_kernel((dir), (address))
+-#define pte_unmap(pte) ((void)(pte))	/* NOP */
++#define __pte_unmap(pte) ((void)(pte))	/* NOP */
+ #endif
  
-+static inline void free_user_pte(struct mm_struct *mm, pmd_t *pmd,
-+				 unsigned long addr)
-+{
-+}
++#define pte_tryget_map(mm, pmd, address)		\
++({							\
++	pte_t *__pte = NULL;				\
++	if (pte_tryget(mm, pmd, address))		\
++		__pte = pte_offset_map(pmd, address);	\
++	__pte;						\
++})
 +
-+static inline bool pte_tryget(struct mm_struct *mm, pmd_t *pmd,
-+			      unsigned long addr)
-+{
-+	return true;
-+}
++#define pte_unmap(pte)	do {				\
++	pte_put(pte);					\
++	__pte_unmap(pte);				\
++} while (0)
 +
-+static inline void __pte_put(pgtable_t page)
-+{
-+}
++#define pte_tryget_map_lock(mm, pmd, address, ptlp)	\
++({							\
++	spinlock_t *__ptl = NULL;			\
++	pte_t *__pte = NULL;				\
++	if (pte_tryget(mm, pmd, address)) {		\
++		__ptl = pte_lockptr(mm, pmd);		\
++		__pte = pte_offset_map(pmd, address);	\
++		*(ptlp) = __ptl;			\
++		spin_lock(__ptl);			\
++	}						\
++	__pte;						\
++})
 +
-+static inline void pte_put(pte_t *ptep)
-+{
-+}
-+
- #endif /* CONFIG_FREE_USER_PTE */
+ #define pte_offset_map_lock(mm, pmd, address, ptlp)	\
+ ({							\
+ 	spinlock_t *__ptl = pte_lockptr(mm, pmd);	\
+@@ -260,6 +288,11 @@ static inline pte_t *pte_offset_kernel(pmd_t *pmd, unsigned long address)
+ 	pte_unmap(pte);					\
+ } while (0)
  
- #endif /* _LINUX_PTE_REF_H */
-diff --git a/mm/pte_ref.c b/mm/pte_ref.c
-index 52e31be00de4..5b382445561e 100644
---- a/mm/pte_ref.c
-+++ b/mm/pte_ref.c
-@@ -44,4 +44,62 @@ void pte_ref_free(pgtable_t pte)
- 	kfree(ref);
- }
- 
-+void free_user_pte(struct mm_struct *mm, pmd_t *pmd, unsigned long addr) {}
++#define __pte_unmap_unlock(pte, ptl)	do {		\
++	spin_unlock(ptl);				\
++	__pte_unmap(pte);				\
++} while (0)
 +
-+/*
-+ * pte_tryget - try to get the pte_ref of the user PTE page table page
-+ * @mm: pointer the target address space
-+ * @pmd: pointer to a PMD.
-+ * @addr: virtual address associated with pmd.
-+ *
-+ * Return: true if getting the pte_ref succeeded. And false otherwise.
-+ *
-+ * Before accessing the user PTE page table, we need to hold a refcount to
-+ * protect against the concurrent release of the PTE page table.
-+ * But we will fail in the following case:
-+ * 	- The content mapped in @pmd is not a PTE page
-+ * 	- The pte_ref is zero, it may be reclaimed
-+ */
-+bool pte_tryget(struct mm_struct *mm, pmd_t *pmd, unsigned long addr)
-+{
-+	bool retval = true;
-+	pmd_t pmdval;
-+	pgtable_t pte;
-+
-+	rcu_read_lock();
-+	pmdval = READ_ONCE(*pmd);
-+	pte = pmd_pgtable(pmdval);
-+	if (unlikely(pmd_none(pmdval) || pmd_leaf(pmdval))) {
-+		retval = false;
-+	} else if (!percpu_ref_tryget(pte->pte_ref)) {
-+		rcu_read_unlock();
-+		/*
-+		 * Also do free_user_pte() here to prevent missed reclaim due
-+		 * to race condition.
-+		 */
-+		free_user_pte(mm, pmd, addr & PMD_MASK);
-+		return false;
-+	}
-+	rcu_read_unlock();
-+
-+	return retval;
-+}
-+
-+void __pte_put(pgtable_t page)
-+{
-+	percpu_ref_put(page->pte_ref);
-+}
-+
-+void pte_put(pte_t *ptep)
-+{
-+	pgtable_t page;
-+
-+	if (pte_huge(*ptep))
-+		return;
-+
-+	page = pte_to_page(ptep);
-+	__pte_put(page);
-+}
-+EXPORT_SYMBOL(pte_put);
-+
- #endif /* CONFIG_FREE_USER_PTE */
+ /* Find an entry in the second-level page table.. */
+ #ifndef pmd_offset
+ static inline pmd_t *pmd_offset(pud_t *pud, unsigned long address)
 -- 
 2.20.1
 
