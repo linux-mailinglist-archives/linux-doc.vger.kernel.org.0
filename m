@@ -2,207 +2,150 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 7FAC151B396
-	for <lists+linux-doc@lfdr.de>; Thu,  5 May 2022 01:38:17 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 0930151B38A
+	for <lists+linux-doc@lfdr.de>; Thu,  5 May 2022 01:35:02 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S239327AbiEDXhw (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 4 May 2022 19:37:52 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:41816 "EHLO
+        id S231305AbiEDXgC (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 4 May 2022 19:36:02 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:43342 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1382913AbiEDXZO (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Wed, 4 May 2022 19:25:14 -0400
-Received: from mail-pj1-x1035.google.com (mail-pj1-x1035.google.com [IPv6:2607:f8b0:4864:20::1035])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 5AAA94EA17
-        for <linux-doc@vger.kernel.org>; Wed,  4 May 2022 16:21:36 -0700 (PDT)
-Received: by mail-pj1-x1035.google.com with SMTP id iq10so2607342pjb.0
-        for <linux-doc@vger.kernel.org>; Wed, 04 May 2022 16:21:36 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=chromium.org; s=google;
-        h=from:to:cc:subject:date:message-id:in-reply-to:references
-         :mime-version:content-transfer-encoding;
-        bh=oSCDp+BlWHOAe2tqoHinPSSzUxabaz3SWirbYWgZ7iE=;
-        b=AK96nFD2jq9As8QRqe4ZZgrKB3muSxd4UKPDu0PiPgxZCEkF09YM3a/lbxSE2Aolhc
-         8/11YUs8xGSuIa13K4FNjPmrXP32NRaFX2/fqhw5ycNjYisg1PBFJZiM4dKkwgF7l4SI
-         8V/qwibG9N2Kolpq0e2PDsUZD0WN7jb8AqoT4=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-         :references:mime-version:content-transfer-encoding;
-        bh=oSCDp+BlWHOAe2tqoHinPSSzUxabaz3SWirbYWgZ7iE=;
-        b=bmkpQ+SncDVJYjCb5CjEpCod+rDc5zNatz4YWfgu2a8UjiSdYdfCwX95saKG6n4nvK
-         jHuYKOVr0M4TSuphzwVOURui3X2KkiUQFAikR/ltQtaReCthT+/ppohzylpl+kyp1j2W
-         o9adwFamEr+9jZLjp2sVaL8nRFcGv+nwi3XOI4yc6sWHLzLrT9hOR/dMvVxxe/sgW4oP
-         1z8LR4Wx7v7T469fTVmuU/E5rvcEx1QZlZTi6f+8ZH/+PY9gm2eT/vEumRiL4nD7crH3
-         fvaG81GIyQYEpqmt9UGBS5BYvss2pHfykVsyDOK3+N0N9EdHVYoVCmK8RKEw/49TpR5O
-         VO3w==
-X-Gm-Message-State: AOAM531tgv/FSMPJgFJYpNaplr7lkAY8rzAug2reW+X7GpCWRPvpoUT0
-        sW2cJZQH1kbKKNzdvvH+bfUj9Q==
-X-Google-Smtp-Source: ABdhPJyWCNX/I16qyW4fvcathhxcuAgJ0GjSbW0c5vLuKr3I6Bnp2rIZfhNKLxSoEtDyFcQM2HOpmw==
-X-Received: by 2002:a17:902:7e01:b0:15e:caea:d6 with SMTP id b1-20020a1709027e0100b0015ecaea00d6mr4372912plm.33.1651706495884;
-        Wed, 04 May 2022 16:21:35 -0700 (PDT)
-Received: from evgreen-glaptop.lan ([98.47.98.87])
-        by smtp.gmail.com with ESMTPSA id q12-20020a170902f78c00b0015e8d4eb2d6sm1901pln.288.2022.05.04.16.21.34
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 04 May 2022 16:21:35 -0700 (PDT)
-From:   Evan Green <evgreen@chromium.org>
-To:     linux-kernel@vger.kernel.org
-Cc:     Matthew Garrett <mgarrett@aurora.tech>, dlunev@google.com,
-        zohar@linux.ibm.com, jejb@linux.ibm.com,
-        linux-integrity@vger.kernel.org, corbet@lwn.net, rjw@rjwysocki.net,
-        gwendal@chromium.org, jarkko@kernel.org, linux-pm@vger.kernel.org,
-        Matthew Garrett <matthewgarrett@google.com>,
-        Matthew Garrett <mjg59@google.com>,
-        Evan Green <evgreen@chromium.org>,
-        David Howells <dhowells@redhat.com>,
-        James Morris <jmorris@namei.org>,
-        "Serge E. Hallyn" <serge@hallyn.com>, keyrings@vger.kernel.org,
-        linux-doc@vger.kernel.org, linux-security-module@vger.kernel.org
-Subject: [PATCH 04/10] security: keys: trusted: Allow storage of PCR values in creation data
-Date:   Wed,  4 May 2022 16:20:56 -0700
-Message-Id: <20220504161439.4.I32591db064b6cdc91850d777f363c9d05c985b39@changeid>
-X-Mailer: git-send-email 2.31.0
-In-Reply-To: <20220504232102.469959-1-evgreen@chromium.org>
-References: <20220504232102.469959-1-evgreen@chromium.org>
+        with ESMTP id S1380101AbiEDX13 (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Wed, 4 May 2022 19:27:29 -0400
+Received: from vps0.lunn.ch (vps0.lunn.ch [185.16.172.187])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id D9E5B50B13;
+        Wed,  4 May 2022 16:23:47 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=lunn.ch;
+        s=20171124; h=In-Reply-To:Content-Disposition:Content-Type:MIME-Version:
+        References:Message-ID:Subject:Cc:To:From:Date:From:Sender:Reply-To:Subject:
+        Date:Message-ID:To:Cc:MIME-Version:Content-Type:Content-Transfer-Encoding:
+        Content-ID:Content-Description:Content-Disposition:In-Reply-To:References;
+        bh=z9csiruEF5xbbCJV5LeYL29FmqJAFdz3ZoLv9sjrHrQ=; b=5CK4fQnwZ5a6lvAHhinEALRp/t
+        S43cRzuf6hgQWYVQ1BaliQev7dwRrINVXjS9k+S65XNd2DhoSZjUjVh6M0lYbL2rWbXbKyl4E4ZNw
+        Y/iJ8VeRoPwZISh+iABX3W3HfrLNqZu1Ezh6T+/J3kmh7ySGtSurUk+ZN+Ff/NWcyW/U=;
+Received: from andrew by vps0.lunn.ch with local (Exim 4.94.2)
+        (envelope-from <andrew@lunn.ch>)
+        id 1nmOLI-001HGB-8v; Thu, 05 May 2022 01:23:36 +0200
+Date:   Thu, 5 May 2022 01:23:36 +0200
+From:   Andrew Lunn <andrew@lunn.ch>
+To:     Ansuel Smith <ansuelsmth@gmail.com>
+Cc:     Vivien Didelot <vivien.didelot@gmail.com>,
+        Florian Fainelli <f.fainelli@gmail.com>,
+        Vladimir Oltean <olteanv@gmail.com>,
+        "David S. Miller" <davem@davemloft.net>,
+        Jakub Kicinski <kuba@kernel.org>,
+        Paolo Abeni <pabeni@redhat.com>,
+        Rob Herring <robh+dt@kernel.org>,
+        Krzysztof Kozlowski <krzk+dt@kernel.org>,
+        Jonathan Corbet <corbet@lwn.net>, Pavel Machek <pavel@ucw.cz>,
+        John Crispin <john@phrozen.org>, netdev@vger.kernel.org,
+        devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
+        linux-doc@vger.kernel.org, linux-leds@vger.kernel.org
+Subject: Re: [RFC PATCH v6 02/11] leds: add function to configure hardware
+ controlled LED
+Message-ID: <YnMK+EZDQXSGDXM1@lunn.ch>
+References: <20220503151633.18760-1-ansuelsmth@gmail.com>
+ <20220503151633.18760-3-ansuelsmth@gmail.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Spam-Status: No, score=-2.7 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_NONE,
-        SPF_HELO_NONE,SPF_PASS,T_SCC_BODY_TEXT_LINE autolearn=unavailable
-        autolearn_force=no version=3.4.6
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20220503151633.18760-3-ansuelsmth@gmail.com>
+X-Spam-Status: No, score=-2.1 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,SPF_HELO_PASS,SPF_PASS,
+        T_SCC_BODY_TEXT_LINE autolearn=ham autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-From: Matthew Garrett <matthewgarrett@google.com>
+> +In SUPPORTED hw_control_configure() should return 0 or 1 if the LED driver supports the
+> +requested blink mode (flags) or not.
 
-When TPMs generate keys, they can also generate some information
-describing the state of the PCRs at creation time. This data can then
-later be certified by the TPM, allowing verification of the PCR values.
-This allows us to determine the state of the system at the time a key
-was generated. Add an additional argument to the trusted key creation
-options, allowing the user to provide the set of PCRs that should have
-their values incorporated into the creation data.
+-EOPNOTSUPP might be clearer.
 
-From: Matthew Garrett <mjg59@google.com>
-Signed-off-by: Matthew Garrett <mjg59@google.com>
 
-Signed-off-by: Evan Green <evgreen@chromium.org>
----
-Matthew's original version of this patch is at:
-https://patchwork.kernel.org/patch/12096503/
+> +In ZERO hw_control_configure() should return 0 with success operation or error.
+> +
+> +The unsigned long flag is specific to the trigger and change across them. It's in the LED
+> +driver interest know how to elaborate this flag and to declare support for a
+> +particular trigger. For this exact reason explicit support for the specific
+> +trigger is mandatory or the driver returns -EOPNOTSUPP if asked to enter offload mode
+> +with a not supported trigger.
+> +If the driver returns -EOPNOTSUPP on hw_control_configure(), the trigger activation will
+> +fail as the driver doesn't support that specific offload trigger or doesn't know
+> +how to handle the provided flags.
+> +
+>  Known Issues
+>  ============
+>  
+> diff --git a/include/linux/leds.h b/include/linux/leds.h
+> index 09ff1dc6f48d..b5aad67fecfb 100644
+> --- a/include/linux/leds.h
+> +++ b/include/linux/leds.h
+> @@ -73,6 +73,16 @@ enum led_blink_modes {
+>  	SOFTWARE_HARDWARE_CONTROLLED,
+>  };
+>  
+> +#ifdef CONFIG_LEDS_HARDWARE_CONTROL
+> +enum blink_mode_cmd {
+> +	BLINK_MODE_ENABLE, /* Enable the hardware blink mode */
+> +	BLINK_MODE_DISABLE, /* Disable the hardware blink mode */
+> +	BLINK_MODE_READ, /* Read the status of the hardware blink mode */
+> +	BLINK_MODE_SUPPORTED, /* Ask the driver if the hardware blink mode is supported */
+> +	BLINK_MODE_ZERO, /* Disable any hardware blink active */
+> +};
+> +#endif
 
- .../security/keys/trusted-encrypted.rst       |  4 +++
- include/keys/trusted-type.h                   |  1 +
- security/keys/trusted-keys/trusted_tpm1.c     |  9 +++++++
- security/keys/trusted-keys/trusted_tpm2.c     | 25 +++++++++++++++++--
- 4 files changed, 37 insertions(+), 2 deletions(-)
+Skip the #ifdef. The enum itself takes no space if never used, and it
+makes the driver simpler if they always exist.
 
-diff --git a/Documentation/security/keys/trusted-encrypted.rst b/Documentation/security/keys/trusted-encrypted.rst
-index f614dad7de12f9..7215b067bf128f 100644
---- a/Documentation/security/keys/trusted-encrypted.rst
-+++ b/Documentation/security/keys/trusted-encrypted.rst
-@@ -170,6 +170,10 @@ Usage::
-        policyhandle= handle to an authorization policy session that defines the
-                      same policy and with the same hash algorithm as was used to
-                      seal the key.
-+       creationpcrs= hex integer representing the set of PCR values to be
-+                     included in the PCR creation data. The bit corresponding
-+		     to each PCR should be 1 to be included, 0 to be ignored.
-+		     TPM2 only.
- 
- "keyctl print" returns an ascii hex copy of the sealed key, which is in standard
- TPM_STORED_DATA format.  The key length for new keys are always in bytes.
-diff --git a/include/keys/trusted-type.h b/include/keys/trusted-type.h
-index 8a793ae1ad9f70..b3ac4afe8ba987 100644
---- a/include/keys/trusted-type.h
-+++ b/include/keys/trusted-type.h
-@@ -54,6 +54,7 @@ struct trusted_key_options {
- 	uint32_t policydigest_len;
- 	unsigned char policydigest[MAX_DIGEST_SIZE];
- 	uint32_t policyhandle;
-+	uint32_t creation_pcrs;
- };
- 
- struct trusted_key_ops {
-diff --git a/security/keys/trusted-keys/trusted_tpm1.c b/security/keys/trusted-keys/trusted_tpm1.c
-index aa108bea6739b3..2975827c01bec0 100644
---- a/security/keys/trusted-keys/trusted_tpm1.c
-+++ b/security/keys/trusted-keys/trusted_tpm1.c
-@@ -713,6 +713,7 @@ enum {
- 	Opt_hash,
- 	Opt_policydigest,
- 	Opt_policyhandle,
-+	Opt_creationpcrs,
- };
- 
- static const match_table_t key_tokens = {
-@@ -725,6 +726,7 @@ static const match_table_t key_tokens = {
- 	{Opt_hash, "hash=%s"},
- 	{Opt_policydigest, "policydigest=%s"},
- 	{Opt_policyhandle, "policyhandle=%s"},
-+	{Opt_creationpcrs, "creationpcrs=%s"},
- 	{Opt_err, NULL}
- };
- 
-@@ -858,6 +860,13 @@ static int getoptions(char *c, struct trusted_key_payload *pay,
- 				return -EINVAL;
- 			opt->policyhandle = handle;
- 			break;
-+		case Opt_creationpcrs:
-+			if (!tpm2)
-+				return -EINVAL;
-+			res = kstrtoint(args[0].from, 16, &opt->creation_pcrs);
-+			if (res < 0)
-+				return -EINVAL;
-+			break;
- 		default:
- 			return -EINVAL;
- 		}
-diff --git a/security/keys/trusted-keys/trusted_tpm2.c b/security/keys/trusted-keys/trusted_tpm2.c
-index 296a00f872ba40..b7ddb78e644d17 100644
---- a/security/keys/trusted-keys/trusted_tpm2.c
-+++ b/security/keys/trusted-keys/trusted_tpm2.c
-@@ -290,7 +290,7 @@ int tpm2_seal_trusted(struct tpm_chip *chip,
- 	struct tpm_buf buf;
- 	u32 hash;
- 	u32 flags;
--	int i;
-+	int i, j;
- 	int rc;
- 
- 	for (i = 0; i < ARRAY_SIZE(tpm2_hash_map); i++) {
-@@ -359,7 +359,28 @@ int tpm2_seal_trusted(struct tpm_chip *chip,
- 	tpm_buf_append_u16(&buf, 0);
- 
- 	/* creation PCR */
--	tpm_buf_append_u32(&buf, 0);
-+	if (options->creation_pcrs) {
-+		/* One bank */
-+		tpm_buf_append_u32(&buf, 1);
-+		/* Which bank to use */
-+		tpm_buf_append_u16(&buf, hash);
-+		/* Length of the PCR bitmask */
-+		tpm_buf_append_u8(&buf, 3);
-+		/* PCR bitmask */
-+		for (i = 0; i < 3; i++) {
-+			char tmp = 0;
-+
-+			for (j = 0; j < 8; j++) {
-+				char bit = (i * 8) + j;
-+
-+				if (options->creation_pcrs & (1 << bit))
-+					tmp |= (1 << j);
-+			}
-+			tpm_buf_append_u8(&buf, tmp);
-+		}
-+	} else {
-+		tpm_buf_append_u32(&buf, 0);
-+	}
- 
- 	if (buf.flags & TPM_BUF_OVERFLOW) {
- 		rc = -E2BIG;
--- 
-2.31.0
+> +
+>  struct led_classdev {
+>  	const char		*name;
+>  	unsigned int brightness;
+> @@ -185,6 +195,17 @@ struct led_classdev {
+>  	 * the old status but that is not mandatory and also putting it off is accepted.
+>  	 */
+>  	int			(*hw_control_stop)(struct led_classdev *led_cdev);
+> +	/* This will be used to configure the various blink modes LED support in hardware
+> +	 * mode.
+> +	 * The LED driver require to support the active trigger and will elaborate the
+> +	 * unsigned long flag and do the operation based on the provided cmd.
+> +	 * Current operation are enable,disable,supported and status.
+> +	 * A trigger will use this to enable or disable the asked blink mode, check the
+> +	 * status of the blink mode or ask if the blink mode can run in hardware mode.
+> +	 */
+> +	int			(*hw_control_configure)(struct led_classdev *led_cdev,
+> +							unsigned long flag,
+> +							enum blink_mode_cmd cmd);
+>  #endif
+>  #endif
+>  
+> @@ -454,6 +475,24 @@ static inline void *led_get_trigger_data(struct led_classdev *led_cdev)
+>  	return led_cdev->trigger_data;
+>  }
+>  
+> +#ifdef CONFIG_LEDS_HARDWARE_CONTROL
+> +static inline bool led_trigger_blink_mode_is_supported(struct led_classdev *led_cdev,
+> +						       unsigned long flag)
+> +{
+> +	int ret;
+> +
+> +	/* Sanity check: make sure led support hw mode */
+> +	if (led_cdev->blink_mode == SOFTWARE_CONTROLLED)
+> +		return false;
+> +
+> +	ret = led_cdev->hw_control_configure(led_cdev, flag, BLINK_MODE_SUPPORTED);
+> +	if (ret > 0)
+> +		return true;
+> +
+> +	return false;
+> +}
+> +#endif
 
+Please add a version which returns false when
+CONFIG_LEDS_HARDWARE_CONTROL is disabled.
+
+Does this actually need to be an inline function?
+
+     Andrew
