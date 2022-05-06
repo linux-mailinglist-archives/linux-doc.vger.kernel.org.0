@@ -2,129 +2,82 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 1735651CED5
-	for <lists+linux-doc@lfdr.de>; Fri,  6 May 2022 04:16:52 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 2E54851CF0E
+	for <lists+linux-doc@lfdr.de>; Fri,  6 May 2022 04:48:11 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1387988AbiEFBog (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 5 May 2022 21:44:36 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:33622 "EHLO
+        id S1343679AbiEFCvu (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 5 May 2022 22:51:50 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:56796 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1388005AbiEFBoa (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Thu, 5 May 2022 21:44:30 -0400
-Received: from mga09.intel.com (mga09.intel.com [134.134.136.24])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 131E75DBEC;
-        Thu,  5 May 2022 18:40:49 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1651801249; x=1683337249;
-  h=from:to:cc:subject:date:message-id:in-reply-to:
-   references:mime-version:content-transfer-encoding;
-  bh=Y6AdNcL23AXH/PwccmO/lGBoL6djloRm+NY0sn6Dk+I=;
-  b=jOgsvdFOLIODfxTXzMlTi7oi18OBWd7nGL/6tdSw/GvHxEG3eTxmgns+
-   OjLkbHRtxJU16Myy1d+t2/gCylqUfKufMC1TN88lJrsb73pjqO/FYHo1Q
-   WMv8796DIVz+buuTEN58Ai43pYZbK1KtZ6AdsKth46EZCox7qu13rVEDB
-   bZOjz1SAkxwVnm8C8DCw7Scn8Cre+lMsFIbvA4GNlvj+HdiJTEhr4Acmr
-   DT9e0yw5JXjHyoP9uGqMFMTXH2hVmQJf4/6VD3hy5g8DNyD5re/3CAh0U
-   SFDOeV45tDFek5AMkPVgaEfn6ddo27ZmTJOTFCC/m7ZpN4TiG/6XWwHVx
-   A==;
-X-IronPort-AV: E=McAfee;i="6400,9594,10338"; a="267915785"
-X-IronPort-AV: E=Sophos;i="5.91,203,1647327600"; 
-   d="scan'208";a="267915785"
-Received: from orsmga006.jf.intel.com ([10.7.209.51])
-  by orsmga102.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 05 May 2022 18:40:48 -0700
-X-IronPort-AV: E=Sophos;i="5.91,203,1647327600"; 
-   d="scan'208";a="537645062"
-Received: from agluck-desk3.sc.intel.com ([172.25.222.78])
-  by orsmga006-auth.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 05 May 2022 18:40:48 -0700
-From:   Tony Luck <tony.luck@intel.com>
-To:     hdegoede@redhat.com, markgross@kernel.org
-Cc:     tglx@linutronix.de, mingo@redhat.com, bp@alien8.de,
-        dave.hansen@linux.intel.com, x86@kernel.org, hpa@zytor.com,
-        corbet@lwn.net, gregkh@linuxfoundation.org,
-        andriy.shevchenko@linux.intel.com, jithu.joseph@intel.com,
-        ashok.raj@intel.com, tony.luck@intel.com, rostedt@goodmis.org,
-        dan.j.williams@intel.com, linux-kernel@vger.kernel.org,
-        linux-doc@vger.kernel.org, platform-driver-x86@vger.kernel.org,
-        patches@lists.linux.dev, ravi.v.shankar@intel.com
-Subject: [PATCH v6 11/11] platform/x86/intel/ifs: add ABI documentation for IFS
-Date:   Thu,  5 May 2022 18:40:35 -0700
-Message-Id: <20220506014035.1173578-12-tony.luck@intel.com>
-X-Mailer: git-send-email 2.35.1
-In-Reply-To: <20220506014035.1173578-1-tony.luck@intel.com>
-References: <20220428153849.295779-1-tony.luck@intel.com>
- <20220506014035.1173578-1-tony.luck@intel.com>
+        with ESMTP id S234479AbiEFCvt (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Thu, 5 May 2022 22:51:49 -0400
+Received: from mail-pj1-x102a.google.com (mail-pj1-x102a.google.com [IPv6:2607:f8b0:4864:20::102a])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id C368B5C759;
+        Thu,  5 May 2022 19:48:06 -0700 (PDT)
+Received: by mail-pj1-x102a.google.com with SMTP id z5-20020a17090a468500b001d2bc2743c4so5762250pjf.0;
+        Thu, 05 May 2022 19:48:06 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112;
+        h=message-id:date:from:to:cc:subject:references:mime-version
+         :content-disposition:in-reply-to;
+        bh=Qn/FCRe6ikmZ0D8cIGMrAu399NCLzjkcF3KaCfh8Y1E=;
+        b=L5AvtlXeOQQkbwm6vwDrjMEl6yCbiYfJVNA8TcZ/0gEuNErk10gQ6z96wdVQzHpiGB
+         V+OlpckKUQeIETl/K4IIChdxgr5jTKVqBH+QaYiTbdnEsTGp1tgRIiETqG+yrL3duKvh
+         WEZjFMPJ1dzAQPV2k1wkCnSUInUTWKGReIEwoI2QrjaUcI9k3xNpkB4TqWt6TtSBhW4t
+         nZAgHsifUPZHgBikQr2cgzLR0cCCbz7S4RUfORt08d+23/wFqP3ecqlh8oqcif5s7bvQ
+         v/u5jdz5TFGAziUs5P5dVzRwsuaAxhbO+Mw48lSPwwSER5TPyQX31l7H43lvgzojxbQw
+         MSdA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:message-id:date:from:to:cc:subject:references
+         :mime-version:content-disposition:in-reply-to;
+        bh=Qn/FCRe6ikmZ0D8cIGMrAu399NCLzjkcF3KaCfh8Y1E=;
+        b=Y59mrqk1+7pBBsTFy2V+yU7cwU2l0lwgca71VRfZEfwrKAI37Q7c+JtmtycYkWSjKc
+         kCoG2YaOPMOXFQ3r1wJcGIMmhtTA0orT7Zy3wP8061OmoCKM9k5QbICDkX6yWHUsnFib
+         NuYVksCMXvcslrvszzLbzEsIER7m7MlvqxLN3LYtTgVvKLspF6lDQJoMM+A2TFFCGKVu
+         S9sFhtG3Twe5mkTdvu+NQbyQHCSIwTq74Hvl089jsuV1D/JWPLXwHXff5xPF6EvOkuaE
+         jiwIFGKXf77p+awlfywO32eNeqwlNtOJtgC5oZYGv5kp8HeDm7fHz5ivfowOykE9yyBv
+         3VTg==
+X-Gm-Message-State: AOAM5333WM2DuYLLYJfyrpoIMv48OB9+sL4aYPfhkmfqClUAMRfXH4+o
+        jSydTJSG9n7Ml0+2M8jGfFM=
+X-Google-Smtp-Source: ABdhPJyKuJaQFpqa+4PgRSDgRF97xmDyaGXAxo/h2UIXy5cO6Z+WNXNIe39wnZNhpRal5o00w+OE0A==
+X-Received: by 2002:a17:90a:4d04:b0:1d9:3f18:f4dd with SMTP id c4-20020a17090a4d0400b001d93f18f4ddmr1595685pjg.111.1651805286294;
+        Thu, 05 May 2022 19:48:06 -0700 (PDT)
+Received: from localhost ([193.203.214.57])
+        by smtp.gmail.com with ESMTPSA id e30-20020a631e1e000000b003c14af5060asm2020165pge.34.2022.05.05.19.48.05
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 05 May 2022 19:48:05 -0700 (PDT)
+Message-ID: <62748c65.1c69fb81.2aa2d.4a7b@mx.google.com>
+X-Google-Original-Message-ID: <20220506024804.GA356087@cgel.zte@gmail.com>
+Date:   Fri, 6 May 2022 02:48:04 +0000
+From:   CGEL <cgel.zte@gmail.com>
+To:     akpm@linux-foundation.org
+Cc:     akpm@linux-foundation.org, david@redhat.com,
+        kbuild-all@lists.01.org, corbet@lwn.net, bsingharora@gmail.com,
+        mike.kravetz@oracle.com, yang.yang29@zte.com.cn,
+        sfr@canb.auug.org.au, thomas.orgis@uni-hamburg.de,
+        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
+        linux-mm@kvack.org
+Subject: Re: [PATCH] delayacct: track delays from write-protect copy
+References: <20220408103708.2495882-1-yang.yang29@zte.com.cn>
+ <202204082220.1w5xTsNt-lkp@intel.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Spam-Status: No, score=-5.0 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_MED,
-        RCVD_IN_MSPIKE_H3,RCVD_IN_MSPIKE_WL,SPF_HELO_NONE,SPF_NONE,
-        T_SCC_BODY_TEXT_LINE autolearn=ham autolearn_force=no version=3.4.6
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <202204082220.1w5xTsNt-lkp@intel.com>
+X-Spam-Status: No, score=-0.7 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_FROM,
+        RCVD_IN_DNSWL_NONE,SCC_BODY_URI_ONLY,SPF_HELO_NONE,SPF_PASS,
+        T_SCC_BODY_TEXT_LINE autolearn=no autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-From: Jithu Joseph <jithu.joseph@intel.com>
-
-Add the sysfs attributes in ABI/testing for In-Field Scan.
-
-Reviewed-by: Dan Williams <dan.j.williams@intel.com>
-Signed-off-by: Jithu Joseph <jithu.joseph@intel.com>
-Co-developed-by: Tony Luck <tony.luck@intel.com>
-Signed-off-by: Tony Luck <tony.luck@intel.com>
-Acked-by: Hans de Goede <hdegoede@redhat.com>
-Reviewed-off-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
----
- .../ABI/testing/sysfs-platform-intel-ifs      | 39 +++++++++++++++++++
- 1 file changed, 39 insertions(+)
- create mode 100644 Documentation/ABI/testing/sysfs-platform-intel-ifs
-
-diff --git a/Documentation/ABI/testing/sysfs-platform-intel-ifs b/Documentation/ABI/testing/sysfs-platform-intel-ifs
-new file mode 100644
-index 000000000000..486d6d2ff8a0
---- /dev/null
-+++ b/Documentation/ABI/testing/sysfs-platform-intel-ifs
-@@ -0,0 +1,39 @@
-+What:		/sys/devices/virtual/misc/intel_ifs_<N>/run_test
-+Date:		April 21 2022
-+KernelVersion:	5.19
-+Contact:	"Jithu Joseph" <jithu.joseph@intel.com>
-+Description:	Write <cpu#> to trigger IFS test for one online core.
-+		Note that the test is per core. The cpu# can be
-+		for any thread on the core. Running on one thread
-+		completes the test for the core containing that thread.
-+		Example: to test the core containing cpu5: echo 5 >
-+		/sys/devices/platform/intel_ifs.<N>/run_test
-+
-+What:		/sys/devices/virtual/misc/intel_ifs_<N>/status
-+Date:		April 21 2022
-+KernelVersion:	5.19
-+Contact:	"Jithu Joseph" <jithu.joseph@intel.com>
-+Description:	The status of the last test. It can be one of "pass", "fail"
-+		or "untested".
-+
-+What:		/sys/devices/virtual/misc/intel_ifs_<N>/details
-+Date:		April 21 2022
-+KernelVersion:	5.19
-+Contact:	"Jithu Joseph" <jithu.joseph@intel.com>
-+Description:	Additional information regarding the last test. The details file reports
-+		the hex value of the SCAN_STATUS MSR. Note that the error_code field
-+		may contain driver defined software code not defined in the Intel SDM.
-+
-+What:		/sys/devices/virtual/misc/intel_ifs_<N>/image_version
-+Date:		April 21 2022
-+KernelVersion:	5.19
-+Contact:	"Jithu Joseph" <jithu.joseph@intel.com>
-+Description:	Version (hexadecimal) of loaded IFS binary image. If no scan image
-+		is loaded reports "none".
-+
-+What:		/sys/devices/virtual/misc/intel_ifs_<N>/reload
-+Date:		April 21 2022
-+KernelVersion:	5.19
-+Contact:	"Jithu Joseph" <jithu.joseph@intel.com>
-+Description:	Write "1" (or "y" or "Y") to reload the IFS image from
-+		/lib/firmware/intel/ifs/ff-mm-ss.scan.
--- 
-2.35.1
-
+Hi
+    I found this patch is first merged into linux-next, and dropped silently
+without sending any mail. Could you please tell the reason? Thanks!
+    It was merged by this:
+    https://lore.kernel.org/all/20220409031312.583D3C385A4@smtp.kernel.org/
+  
