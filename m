@@ -2,80 +2,77 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 2064C51D6D3
-	for <lists+linux-doc@lfdr.de>; Fri,  6 May 2022 13:39:50 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 7741651D706
+	for <lists+linux-doc@lfdr.de>; Fri,  6 May 2022 13:47:09 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1391428AbiEFLna (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Fri, 6 May 2022 07:43:30 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:41244 "EHLO
+        id S1388001AbiEFLut (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Fri, 6 May 2022 07:50:49 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:48480 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1391424AbiEFLn3 (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Fri, 6 May 2022 07:43:29 -0400
-Received: from us-smtp-delivery-74.mimecast.com (us-smtp-delivery-74.mimecast.com [170.10.129.74])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTP id 34BFA5E76E
-        for <linux-doc@vger.kernel.org>; Fri,  6 May 2022 04:39:47 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-        s=mimecast20190719; t=1651837186;
-        h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-         to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-         in-reply-to:in-reply-to:references:references;
-        bh=OcB6fBENu4U2sOdYXIyYqxCfjv8pZ5CyuZGdAtWdXiA=;
-        b=i5mNztq16pUhD0oqg0I5WUZDHCkBmHSLjFLVRdtP5BTpXSyBFZOQKA5I2ndCqsrqcPcdmc
-        Ody8SqwuKo05jaJ5ENmqRqenPwuTNX1mYxa7B71sJTSsag5sfV+ndx24qmdOeoun92HwGA
-        3oYsjZEdxp3HH76OrjLcQvA/2ZKE31E=
-Received: from mimecast-mx02.redhat.com (mimecast-mx02.redhat.com
- [66.187.233.88]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- us-mta-271-uUHXo2N0O4iTn2v3Yo6D1A-1; Fri, 06 May 2022 07:39:43 -0400
-X-MC-Unique: uUHXo2N0O4iTn2v3Yo6D1A-1
-Received: from smtp.corp.redhat.com (int-mx09.intmail.prod.int.rdu2.redhat.com [10.11.54.9])
-        (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
-        (No client certificate requested)
-        by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 067A3858F14;
-        Fri,  6 May 2022 11:39:42 +0000 (UTC)
-Received: from localhost (ovpn-13-105.pek2.redhat.com [10.72.13.105])
-        by smtp.corp.redhat.com (Postfix) with ESMTPS id D80E1454A5D;
-        Fri,  6 May 2022 11:39:39 +0000 (UTC)
-Date:   Fri, 6 May 2022 19:39:36 +0800
-From:   Baoquan He <bhe@redhat.com>
-To:     Catalin Marinas <catalin.marinas@arm.com>
-Cc:     "Leizhen (ThunderTown)" <thunder.leizhen@huawei.com>,
-        Thomas Gleixner <tglx@linutronix.de>,
-        Ingo Molnar <mingo@redhat.com>, Borislav Petkov <bp@alien8.de>,
-        x86@kernel.org, "H . Peter Anvin" <hpa@zytor.com>,
-        linux-kernel@vger.kernel.org, Dave Young <dyoung@redhat.com>,
-        Vivek Goyal <vgoyal@redhat.com>,
-        Eric Biederman <ebiederm@xmission.com>,
-        kexec@lists.infradead.org, Will Deacon <will@kernel.org>,
-        linux-arm-kernel@lists.infradead.org,
-        Rob Herring <robh+dt@kernel.org>,
-        Frank Rowand <frowand.list@gmail.com>,
-        devicetree@vger.kernel.org, Jonathan Corbet <corbet@lwn.net>,
-        linux-doc@vger.kernel.org, Randy Dunlap <rdunlap@infradead.org>,
-        Feng Zhou <zhoufeng.zf@bytedance.com>,
-        Kefeng Wang <wangkefeng.wang@huawei.com>,
-        Chen Zhou <dingguo.cz@antgroup.com>,
-        John Donnelly <John.p.donnelly@oracle.com>,
-        Dave Kleikamp <dave.kleikamp@oracle.com>
-Subject: Re: [PATCH v22 5/9] arm64: kdump: Reimplement crashkernel=X
-Message-ID: <YnUI+PagSCZ/DnkL@MiWiFi-R3L-srv>
-References: <YmlphvZVMsGfFksp@arm.com>
- <YmoMvV1wzHT5V1aw@MiWiFi-R3L-srv>
- <YmoPhvkXQFZQOcIO@MiWiFi-R3L-srv>
- <3fc41a94-4247-40f3-14e7-f11e3001ec33@huawei.com>
- <YmtaiJhwIgP6m2Sk@MiWiFi-R3L-srv>
- <a9c736a0-f2b3-5b8a-94d9-80742ccd2700@huawei.com>
- <23e2dcf4-4e9a-5298-d5d8-8761b0bbbe21@huawei.com>
- <YnGmCwaWkvCrJoU2@arm.com>
- <YnM9w69l5dbE+k15@MiWiFi-R3L-srv>
- <YnPdIvOktZBQYLjg@arm.com>
+        with ESMTP id S1391497AbiEFLuq (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Fri, 6 May 2022 07:50:46 -0400
+Received: from mout.kundenserver.de (mout.kundenserver.de [212.227.126.131])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id B07D734B89
+        for <linux-doc@vger.kernel.org>; Fri,  6 May 2022 04:47:03 -0700 (PDT)
+Received: from mail-yw1-f170.google.com ([209.85.128.170]) by
+ mrelayeu.kundenserver.de (mreue010 [213.165.67.97]) with ESMTPSA (Nemesis) id
+ 1M7aqD-1njNRn3nA5-0086j6; Fri, 06 May 2022 13:41:55 +0200
+Received: by mail-yw1-f170.google.com with SMTP id 00721157ae682-2f7d19cac0bso77892637b3.13;
+        Fri, 06 May 2022 04:41:54 -0700 (PDT)
+X-Gm-Message-State: AOAM531Sjh7Q45UDmZ/dNzvtvCSOV36srmPmVSs1ZzLT/GQ/8p7NsjAU
+        gZeYQxQPAejOjygOBOJnNyoZuWeMWkbGlVwPzx4=
+X-Google-Smtp-Source: ABdhPJywspxQxLYUg/eOOLFrgtyTJ05Ld5wI7gPuDubfD9OWObUtSEcGtfhDxXCtuquUvGM12QufsEjCeeQ7Z/PAEvg=
+X-Received: by 2002:a81:2305:0:b0:2f7:dadb:2162 with SMTP id
+ j5-20020a812305000000b002f7dadb2162mr2092280ywj.42.1651837313474; Fri, 06 May
+ 2022 04:41:53 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <YnPdIvOktZBQYLjg@arm.com>
-X-Scanned-By: MIMEDefang 2.85 on 10.11.54.9
-X-Spam-Status: No, score=-3.4 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_LOW,
+References: <20220430090518.3127980-1-chenhuacai@loongson.cn>
+ <20220430090518.3127980-21-chenhuacai@loongson.cn> <CAK8P3a2SPTLLrZtSz0LT0LqMpq4SKCScD4vLvr+DJn+u5W_CdA@mail.gmail.com>
+ <CAMj1kXEDpJwLDD4ZGLwzdo1KcJG_90iD9MnBVamCK06YKF7BdA@mail.gmail.com>
+ <CAAhV-H4eR5YvhABp9L4FBmofWwH+XM3V_nOjatQTV_M7Gihs7g@mail.gmail.com>
+ <CAMj1kXFD8_CuijJFgQbrxvY4MVBLmKQKFKmYhD1NBFLn3v=+FQ@mail.gmail.com> <a6afaa3f-cb9f-2086-0e02-5ec21ba535d4@xen0n.name>
+In-Reply-To: <a6afaa3f-cb9f-2086-0e02-5ec21ba535d4@xen0n.name>
+From:   Arnd Bergmann <arnd@arndb.de>
+Date:   Fri, 6 May 2022 13:41:36 +0200
+X-Gmail-Original-Message-ID: <CAK8P3a0xuh1aAM7iwE-jiBbR-OOF5YVfhmU0Nygbpviso3tmbQ@mail.gmail.com>
+Message-ID: <CAK8P3a0xuh1aAM7iwE-jiBbR-OOF5YVfhmU0Nygbpviso3tmbQ@mail.gmail.com>
+Subject: Re: [PATCH V9 20/24] LoongArch: Add efistub booting support
+To:     WANG Xuerui <kernel@xen0n.name>
+Cc:     Ard Biesheuvel <ardb@kernel.org>,
+        Huacai Chen <chenhuacai@gmail.com>,
+        Arnd Bergmann <arnd@arndb.de>,
+        Huacai Chen <chenhuacai@loongson.cn>,
+        Andy Lutomirski <luto@kernel.org>,
+        Thomas Gleixner <tglx@linutronix.de>,
+        Peter Zijlstra <peterz@infradead.org>,
+        Andrew Morton <akpm@linux-foundation.org>,
+        David Airlie <airlied@linux.ie>,
+        Jonathan Corbet <corbet@lwn.net>,
+        Linus Torvalds <torvalds@linux-foundation.org>,
+        linux-arch <linux-arch@vger.kernel.org>,
+        "open list:DOCUMENTATION" <linux-doc@vger.kernel.org>,
+        Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
+        Xuefeng Li <lixuefeng@loongson.cn>,
+        Yanteng Si <siyanteng@loongson.cn>,
+        Guo Ren <guoren@kernel.org>,
+        Jiaxun Yang <jiaxun.yang@flygoat.com>
+Content-Type: text/plain; charset="UTF-8"
+X-Provags-ID: V03:K1:3kKuw8Z9zKIZX8wYjoygIzYKmuNhyVykuNFk32CspPPPKzWZaZ/
+ vZz7HsCc6h4T+l8r2NDeBOt0mALrlv0pJNaEPm0fbFc5DN0Ec7tlLl6RBAmffvmFvZ4jqhY
+ ep3CKqyWVhpaOBxUfAN1ajsW0ByffWC/0uw1JFwQSZDdMwUOJ5tTjyALIe2YfdXT6xdJtSL
+ hvQAIVNpZGylF2FsfVT7A==
+X-UI-Out-Filterresults: notjunk:1;V03:K0:gCA8+3q0tqc=:i/+b4dST89yjeyyyYu6ygC
+ 29McRUsC4yZ9b7dNqMthMUJKnoRxrxy84N7ylzyIP2h8hwso/eUMZtC4z5MVqH6hQoaadpiEC
+ XLbM1rfNDWr6NISC3wxBN857GqbaMhYPl4UL/F46moWkXgkG0XO+LqsLJ0fUQ98GlCiCiVKjL
+ T/lnurGAWW7AVUsycnZbeR4MNFU12R0iCH4ijVhRQm7m69SeDcmknzI+zeUL69Dg49ghfgb5J
+ YyUVqgC60RkMiJMoV9AUvYwRdA81uziVAh5UT3Z8HpeUdPUd5yZ4s88yFcu93ZvJvzqYWZxP3
+ UwmKCJp/Lwr3nIstwEbugdPqE3MuPTjkiavXC1npV268U383jeqaw7HOpnXfTGtViUEEqMs/K
+ XOtz4b/e1vVHfkI0FiwY4/DQk29tOJCJHFvNrnCm7wEB48N3JgXrfpLvUC30wlGwybheqbyT3
+ sCvAOC0hq2AG2Luesk60Y4jM4GVsx9CRa/squklpka4sTlKPHs9KCgDPtRd62XOi/g4r/o8IP
+ kMsiDqrN3TTYjQaAIQuf7VQ1Wuzg7OrzC2JLeT8oFDTHWj8qclDMGhe827uOxYzn6lFdUXDvB
+ HTwR2nRw4xWLE84RsT2e62TkeJnpQiaRJDanW5s6mTOFqlujL8uiHBnGvaGw3Vdp9mTtPeuRA
+ w8gBPxJ/X7JvA3DlP6BHskK8FbkdsgrnR5BPOGEq0s2Qi1VyOOsYjQPpGN5JeA+fvRhw=
+X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_NONE,
         SPF_HELO_NONE,SPF_NONE,T_SCC_BODY_TEXT_LINE autolearn=unavailable
         autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
@@ -84,91 +81,38 @@ Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On 05/05/22 at 03:20pm, Catalin Marinas wrote:
-> On Thu, May 05, 2022 at 11:00:19AM +0800, Baoquan He wrote:
-> > On 05/03/22 at 11:00pm, Catalin Marinas wrote:
-> > > So, to recap, IIUC you are fine with:
-> > > 
-> > > 	crashkernel=Y		- allocate within ZONE_DMA with fallback
-> > > 				  above with a default in ZONE_DMA (like
-> > > 				  x86, 256M or swiotlb size)
-> > 
-> >         Ack to this one.
-> > 
-> > 
-> > > 	crashkernel=Y,high	- allocate from above ZONE_DMA
-> > 
-> >         Not exactly. If there's only ZONE_DMA, crashkernel,high will
-> >         be reserved in ZONE_DMA, and crashkernel,low will be ignored.
-> >         Other than this, ack.
-> 
-> Yes, that's fine.
-> 
-> > > 	crashkernel=Y,low	- allocate within ZONE_DMA
-> > 
-> >         Ack to this one.
-> > > 
-> > > 'crashkernel' overrides the high and low while the latter two can be
-> > > passed independently.
-> > 
-> >         crashkernel=,high can be passed independently, then a crashkernel=,low
-> >         is needed implicitly. If people don't want crashkernel=,low
-> >         explicitly, crashkernel=0,low need be specified.
-> 
-> I find this complicating the interface. I don't know the background to
-> the x86 implementation but we diverge already on arm64 since we talk
-> about ZONE_DMA rather than 4G limit (though for most platforms these
-> would be the same).
-> 
-> I guess we could restate the difference between crashkernel= and
-> crashkernel=,high as the hint to go for allocation above ZONE_DMA first.
+On Fri, May 6, 2022 at 1:26 PM WANG Xuerui <kernel@xen0n.name> wrote:
+> On 5/6/22 16:14, Ard Biesheuvel wrote:
 
-Yes, rethinking about this, we can make a straightforward and simpler
-crashkernel=,high|,low on arm64, namely asking for user to clearly
-specify them.
+> Or is there compatibility at all?
+>
+> It turns out that this port is already incompatible with shipped
+> systems, in other ways, at least since the March revision or so.
 
-During maintenance of crashkernel= parameter in our distros, we found
-crashkernel=xM is used mostly since most of systems can be satisfied
-with 256M or a little more for kdump. While on some big end servers,
-1G or more crashkernel memory is needed. In this case, crashkernel=,high
-is taken. We don't want to reserve so much low memory during system
-running while just waiting in case rare crash happened. crashkernel=,high
-is rarely used, so making it simple and not so flexible is not so bad.
-We can improve it later with justification.
+I think we can treat user space compatibility separately from firmware
+compatibility.
 
-> 
-> >         An independent crashkernel=,low makes no sense. Crashkernel=,low
-> >         should be paird with crashkernel=,high.
-> 
-> You could argue that crashkernel=,low gives the current crashkernel=
-> behaviour, i.e. either all within ZONE_DMA or fail to allocate. So it
-> may have some value on its own.
+> So, in effect, this port is starting from scratch, and taking the chance
+> to fix early mistakes and oversights all over; hence my opinion is,
+> better do the Right Thing (tm) and give the generic codepath a chance.
+>
+> For the Loongson devs: at least, declare the struct boot_params flow
+> deprecated from day one, then work to eliminate it from future products,
+> if you really don't want to delay merging even further (it's already
+> unlikely to land in 5.19, given the discussion happening in LKML [3]).
+> It's not embarrassing to admit mistakes; we all make mistakes, and
+> what's important is to learn from them so we don't collectively repeat
+> ourselves.
 
-Yes, crashkernel=,low has the same behaviour as the current crashkernel=
-if we decide not to add fallback mechanism to it. The purpose of
-crahskernel=,low is to assist crashkernel=,high to get kdump kernel
-boot up with satisfing DMA allocation. While allowing independent
-crashkernel=,low will add it another mission, limiting crashkernel only
-reserved in low memory. Up to now, we don't see the need for that.
+Agreed. I think there can be limited compatibility support for old
+firmware though, at least to help with the migration: As long as
+the interface between grub and linux has a proper definition following
+the normal UEFI standard, there can be both a modern grub
+that is booted using the same protocol and a backwards-compatible
+grub that can be booted from existing firmware and that is able
+to boot the kernel.
 
-> 
-> >         My personal opinion according to the existed senmantics on x86.
-> >         Otherwise, the guidance of crashkernel= |,high|,low reservation
-> >         will be complicated to write.
-> 
-> It's more that I find the current semantics unnecessarily confusing. But
-> even reading the x86_64 text it's not that clear. For example the
-> default low allocation for crashkernel= and crashkernel=,high is only
-> mentioned in the crashkernel=,low description.
+The compatibility version of grub can be retired after the firmware
+itself is able to speak the normal boot protocol.
 
-Yeah, we can improve those document if insufficiency is found.
-
-By the way, with my observation, crashkernel= with fallback meet
-99% of our needs. If people really need more than 512M memory or more,
-then please consider crashkernel=,high. Basically on servers, low memory
-is limited, while high memory is very big.
-
-So I agree with you that we can make it step by step, firstly adding
-basic crashkernel=,high and ,low support. We can add those complicated
-cases later. 
-
+       Arnd
