@@ -2,120 +2,97 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 3209D51DF74
-	for <lists+linux-doc@lfdr.de>; Fri,  6 May 2022 21:06:41 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 8A43E51E0AF
+	for <lists+linux-doc@lfdr.de>; Fri,  6 May 2022 23:06:19 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1354931AbiEFTKW (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Fri, 6 May 2022 15:10:22 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:48864 "EHLO
+        id S1444166AbiEFVJ4 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Fri, 6 May 2022 17:09:56 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:34298 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S245289AbiEFTKV (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Fri, 6 May 2022 15:10:21 -0400
-Received: from galois.linutronix.de (Galois.linutronix.de [IPv6:2a0a:51c0:0:12e:550::1])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id CC262FD1A;
-        Fri,  6 May 2022 12:06:34 -0700 (PDT)
-From:   Thomas Gleixner <tglx@linutronix.de>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linutronix.de;
-        s=2020; t=1651863992;
-        h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-         to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-         in-reply-to:in-reply-to:references:references;
-        bh=wxjZwQifAYdhM0J4VQYq2cjp3Wo71QrUD1AE1URfaSg=;
-        b=vOcUd/lmDHJJL+Wjm7RLEdKcEcChnT4ZknvyLz64mOH/YEleSdhoaACEWCfVrpMZf3A2am
-        Xyd7ivGV3f4PUKlHc9Z46RGJK4DMUAkgmDEBZlybFFaob76fScq/QSdbFGudmcwauravCz
-        vOS6gK9DMgTuoGviLkslDRGocC6PWKDkn9qxcoCnBMeKj/g0sbk8LAkGdlMH/YL2PQ9UUD
-        xxd/1a/oiEv1Af2UivDg66d0eQ1XtEAIZ8ljQT9SfOwCdbCyPpdsoWol7rd2OyC3LRe1WC
-        xhs30NLrjE0Ac4eiJCcLyftkzVrZzu7TdS8Nq0nhaHAxhMNBR+0UlZvSWdD+PQ==
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=linutronix.de;
-        s=2020e; t=1651863992;
-        h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-         to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-         in-reply-to:in-reply-to:references:references;
-        bh=wxjZwQifAYdhM0J4VQYq2cjp3Wo71QrUD1AE1URfaSg=;
-        b=p8bHn1UkvG9MTT6yYjW8yIhIvMPQ05zlVK7KctnyNqRnOmtOfthHCPxamNZoKpTvMHi0N8
-        /B8gZ//KBFrmRQDg==
-To:     "Luck, Tony" <tony.luck@intel.com>
-Cc:     hdegoede@redhat.com, markgross@kernel.org, mingo@redhat.com,
-        bp@alien8.de, dave.hansen@linux.intel.com, x86@kernel.org,
-        hpa@zytor.com, corbet@lwn.net, gregkh@linuxfoundation.org,
-        andriy.shevchenko@linux.intel.com, jithu.joseph@intel.com,
-        ashok.raj@intel.com, rostedt@goodmis.org, dan.j.williams@intel.com,
-        linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org,
-        platform-driver-x86@vger.kernel.org, patches@lists.linux.dev,
-        ravi.v.shankar@intel.com
-Subject: Re: [PATCH v6 08/11] platform/x86/intel/ifs: Add scan test support
-In-Reply-To: <YnVtvJgWU5KDnGSl@agluck-desk3.sc.intel.com>
-References: <20220428153849.295779-1-tony.luck@intel.com>
- <20220506014035.1173578-1-tony.luck@intel.com>
- <20220506014035.1173578-9-tony.luck@intel.com> <87r156hjpl.ffs@tglx>
- <YnVtvJgWU5KDnGSl@agluck-desk3.sc.intel.com>
-Date:   Fri, 06 May 2022 21:06:32 +0200
-Message-ID: <87ee16h45j.ffs@tglx>
+        with ESMTP id S1444198AbiEFVJz (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Fri, 6 May 2022 17:09:55 -0400
+Received: from mail-pf1-x442.google.com (mail-pf1-x442.google.com [IPv6:2607:f8b0:4864:20::442])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id EA5EE6A06E
+        for <linux-doc@vger.kernel.org>; Fri,  6 May 2022 14:06:10 -0700 (PDT)
+Received: by mail-pf1-x442.google.com with SMTP id a11so7227472pff.1
+        for <linux-doc@vger.kernel.org>; Fri, 06 May 2022 14:06:10 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112;
+        h=mime-version:reply-to:in-reply-to:references:from:date:message-id
+         :subject:to;
+        bh=VSSUIwdzgxQxnEkB7+u7pnweyPajIQMP3nQqWYs8VX0=;
+        b=PJTSNrpddi80Uz+Djs36Qc3mS8ZiBvq5TFfPDbaTkeEqvy3oDU4TN+rHEujQKuYIB8
+         66SJV+vCiU9JRMXAO6lXaCOhiep9V0F7nNNMXkIDz3FzZxSA70ovwIMDInjPY9uDrXOM
+         NYS3DLo2POJ2mh3kn2MymGrl3NlysMU5gvicF23utfz33EjSp/U0UXk+FqXEhj3d+bFM
+         t7YM//oPotb/instdcx8nASyEqF0bHTOoykz2s+P5oIJS5Hu6Q2U4bN7V8Pw/xIC/97F
+         JtdB53LaN5PM6ZcpfTf+vQTaN33wnrGXHsqlm6G5Y9lYrEqzwo+Huqg7f6zIUYiK2m4d
+         216g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:mime-version:reply-to:in-reply-to:references
+         :from:date:message-id:subject:to;
+        bh=VSSUIwdzgxQxnEkB7+u7pnweyPajIQMP3nQqWYs8VX0=;
+        b=cn1NRuVG1MNhXHPT5AFRauwu7ADJ7DqhUjefT+t6DHlWjD5+HitaxfGTTCB2MP0j/x
+         YUzsL8U+GtT3KO+RlN/7DVGaK9hFSqnu0L/BXJRj9CfB+7w0qxitslQgMhOlaYWySQDB
+         ihBE0aWhEm62LL28ZmkML/8nVxBAsM9N0ipt4/5V4kbkV534DmWHxasjxZAuuOBkFC1D
+         vkKk/c2IOlN40uEkCN8G6K1KgtbjKv2SDOK1usFiniCfLdfjtpGmiOT2tivokxi2Bskc
+         sptqvAG4pfQBz4sRax/VD0dEuXi4vEZZbze23HtzD1wm0D9ic6CCXibLz9L9SUWnFH8k
+         0U7w==
+X-Gm-Message-State: AOAM531VejhRKcPfFs+RVEGSDRg1VuI4u/qQRo3QL7wUHHnrkQb/B3Xz
+        rnayjNzpkDJa4HXsRgsh2AjW87IhV5bEKH4QHg==
+X-Google-Smtp-Source: ABdhPJwLkAxvukvlfPdsSQWSqa7XGjVmBCKJM6w/IhcfybrGaBU2OYUf/5lBzVaJf1STq54J3YkVSIgFkFEduS4ZmDQ=
+X-Received: by 2002:a63:87c3:0:b0:3aa:fc1b:3459 with SMTP id
+ i186-20020a6387c3000000b003aafc1b3459mr4218528pge.210.1651871170520; Fri, 06
+ May 2022 14:06:10 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain
-X-Spam-Status: No, score=-4.4 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_MED,SPF_HELO_NONE,
-        SPF_PASS,T_SCC_BODY_TEXT_LINE autolearn=ham autolearn_force=no
-        version=3.4.6
+Received: by 2002:ac4:9906:0:b0:4ba:807b:b8f3 with HTTP; Fri, 6 May 2022
+ 14:06:09 -0700 (PDT)
+Reply-To: warren001buffett@gmail.com
+In-Reply-To: <CAD_xG_pvNZK6BFCW+28Xv4DE=_5rbDZXDok2BYNn9xw6Ma7iow@mail.gmail.com>
+References: <CAD_xG_pvNZK6BFCW+28Xv4DE=_5rbDZXDok2BYNn9xw6Ma7iow@mail.gmail.com>
+From:   Warren Buffett <guidayema@gmail.com>
+Date:   Fri, 6 May 2022 21:06:09 +0000
+Message-ID: <CAD_xG_q02-pCaOj2MFVgNGOykABOSsgyAVjZGtaK5-+EAZubYg@mail.gmail.com>
+Subject: Fwd: My name is Warren Buffett, an American businessman.
+To:     undisclosed-recipients:;
+Content-Type: text/plain; charset="UTF-8"
+X-Spam-Status: Yes, score=5.1 required=5.0 tests=BAYES_50,DKIM_SIGNED,
+        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_FROM,FREEMAIL_REPLYTO,
+        RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,SPF_PASS,T_SCC_BODY_TEXT_LINE,
+        UNDISC_FREEM autolearn=no autolearn_force=no version=3.4.6
+X-Spam-Report: * -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at
+        *      https://www.dnswl.org/, no trust
+        *      [2607:f8b0:4864:20:0:0:0:442 listed in]
+        [list.dnswl.org]
+        *  0.8 BAYES_50 BODY: Bayes spam probability is 40 to 60%
+        *      [score: 0.4976]
+        *  0.0 SPF_HELO_NONE SPF: HELO does not publish an SPF Record
+        *  0.0 FREEMAIL_FROM Sender email is commonly abused enduser mail
+        *      provider
+        *      [guidayema[at]gmail.com]
+        * -0.0 SPF_PASS SPF: sender matches SPF record
+        * -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+        * -0.1 DKIM_VALID_EF Message has a valid DKIM or DK signature from
+        *      envelope-from domain
+        *  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
+        *       valid
+        * -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
+        *      author's domain
+        * -0.0 T_SCC_BODY_TEXT_LINE No description available.
+        *  3.5 UNDISC_FREEM Undisclosed recipients + freemail reply-to
+        *  1.0 FREEMAIL_REPLYTO Reply-To/From or Reply-To/body contain
+        *      different freemails
+X-Spam-Level: *****
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Fri, May 06 2022 at 11:49, Luck, Tony wrote:
-> On Fri, May 06, 2022 at 03:30:30PM +0200, Thomas Gleixner wrote:
->> 1) How is that supposed to work on a system which has HT enabled in BIOS,
->>    but disabled on the kernel command line or via /sys/..../smt/control or
->>    when a HT sibling is offlined temporarily?
->> 
->>    I assume it cannot work, but I can't see anything which handles those
->>    cases.
->
-> Correct. If HT is disabled in BIOS, then there is no other thread, so
-> core tests just use a single thread.
->
-> If a logical CPU is "offline" due to Linux actions, then core test will
-> fail. In an earlier version we did attempt to detect this before trying
-> to run the test. But we didn't find a simple way to determine that a
-> core has one thread online, and another offline. Rather than a bunch of
-> code to detect an operator error it seemed better to let it run &
-> fail.
+My name is Warren Buffett, an American businessman and investor I have
+something important to discuss with you.
 
-Fair enough.
-
-> GregKH wasn't a fan of this itty bitty driver cluttering up
-> Documentation/x86. He said:
->
->    I don't know which is better, it's just that creating a whole new
->    documentation file for a single tiny driver feels very odd as it will
->    get out of date and is totally removed from the driver itself.
->
->    I'd prefer that drivers be self-contained, including the documentation,
->    as it is much more obvious what is happening with that.  Spreading stuff
->    around the tree only causes stuff to get out of sync easier.
-
-Well, I agree to some extent, but the documentation which I want to see
-is documentation for admins. I'm not sure whether we want them to search
-the code. Those are consumers of Documentation/ AFAICT.
-
-> So the documentation patch was dropped after v3. Last version here:
->
-> https://lore.kernel.org/r/20220419163859.2228874-3-tony.luck@intel.com
->
-> That doc would need pathnames updated to match the move from a platform
-> device to a virtual misc device. But otherwise seems still accurate.
->
-> Does that cover what you want from documentation for this driver
-> (wherever it gets located in the tree)? Are you looking for more?
-
-It's pretty detailed on the inner workings, but lacks a big fat warning
-for the admin vs. the impact, i.e. that it makes the core go out for
-lunch for a while, which has consequences on workloads and interrupts
-directed at that core. Plus some explanation vs. the HT (SMT=off, soft
-offline) case above. Similar to what we have e.g. for buslocks.
-
-Thanks,
-
-        tglx
-
+Mr. Warren Buffett
+warren001buffett@gmail.com
+Chief Executive Officer: Berkshire Hathaway
+aphy/Warren-Edward-Buffett
