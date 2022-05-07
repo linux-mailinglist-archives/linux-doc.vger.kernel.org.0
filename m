@@ -2,109 +2,108 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 468C951E593
-	for <lists+linux-doc@lfdr.de>; Sat,  7 May 2022 10:26:56 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 0986B51E5AF
+	for <lists+linux-doc@lfdr.de>; Sat,  7 May 2022 10:45:56 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1383693AbiEGIaj (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Sat, 7 May 2022 04:30:39 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:51840 "EHLO
+        id S1446124AbiEGItj (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Sat, 7 May 2022 04:49:39 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:34328 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1383686AbiEGIaj (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Sat, 7 May 2022 04:30:39 -0400
-Received: from mail-qk1-x72a.google.com (mail-qk1-x72a.google.com [IPv6:2607:f8b0:4864:20::72a])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id AE6A82CC86
-        for <linux-doc@vger.kernel.org>; Sat,  7 May 2022 01:26:53 -0700 (PDT)
-Received: by mail-qk1-x72a.google.com with SMTP id k8so2349732qki.8
-        for <linux-doc@vger.kernel.org>; Sat, 07 May 2022 01:26:53 -0700 (PDT)
+        with ESMTP id S1358391AbiEGIti (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Sat, 7 May 2022 04:49:38 -0400
+Received: from mail-io1-xd2f.google.com (mail-io1-xd2f.google.com [IPv6:2607:f8b0:4864:20::d2f])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 751493CFD6;
+        Sat,  7 May 2022 01:45:53 -0700 (PDT)
+Received: by mail-io1-xd2f.google.com with SMTP id c125so10388780iof.9;
+        Sat, 07 May 2022 01:45:53 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
-        h=mime-version:reply-to:from:date:message-id:subject:to;
-        bh=j6k4+uRS4RtRRD9pAYteN/2lL426z4uuqpmrOuos+wU=;
-        b=P2zRHQObZSYEGsmrrwivnQf4dreWJtMuKd6rSsP3e7xr1lhgg74Ho3S4ArvDDtPJ/g
-         AHgtR8vtupugW6iOdQGcb24Gcb2PvseBIfYUqTh98s3vugGKAoF24drlrtBGBs03PAfP
-         mB0nS8k3LGnKq1jOi2afLcWpG3zyrdk1lwnMCpe5EiDsHt838CwkW8Q0a89p03ygP4Tq
-         dFu6BpUwOm+++iK1GEQZ98dsz5aAOQKbkM6a7yv1lrFYlGqKT6BSkvyRMh73au0pLiW2
-         yd6AeznomQ36yMaKefohUt8Mnrrn5EZkr55AjpYueYGTqDmhyKn6ZTa58lhMzmROzOUZ
-         V1PQ==
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc;
+        bh=3afSRUyqURqd+oMSYddARQ8dgu6A28njYvK52vqSOHE=;
+        b=bsipmcypY4Nr9F6rxV0qF+/yrplNPZ0IzUaGSZBCHKoawh7Fip9CQSr7T9i2N0RRqw
+         iGKGF4cDgKmJ6eoHx6k0ezlu79rFPVUtTqpMoe3f6F7fT6iXT3VJHIN02m0SIWnLfzfF
+         QtRH3qHSNFE0OUI4opgLeKF/ieievW5RVFPYRS42dhcAXTy4TwANrFbcmxpOabTh4gO7
+         x63GRFN2/z+INwysjq9EKstBst8u2GfgG8WJHmpybw7iW3+LWrryu6tbRd1W47Pqa2lX
+         DtboSk8/TbzieN8V4f3XB+LTsdhXmDjt7XFb/2yZQ1u+nMvgFUH9kFQUwEvRpiaF1AE9
+         7Tsg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=x-gm-message-state:mime-version:reply-to:from:date:message-id
-         :subject:to;
-        bh=j6k4+uRS4RtRRD9pAYteN/2lL426z4uuqpmrOuos+wU=;
-        b=05ln1qQbOeyOHwJ1uVFunfOPjuzNIRU5BJPtNYEs302n2WKTHrTP4JjL0nLGsByCD/
-         wGQLdy3Z9cBuCF0XyEQgzzG+9i3Qj5GEFGpoy4lmNAhxIO50zt7MBj9CbO4L5ewT41me
-         7jkDvfbu1HwhJSBh+5/UHR+JDg0pTtKXspR0NEB8H9oeG5g0XFLG9VrbVXIzRCIyKw/y
-         HAvNITM0kYgLZZd8ArT7WAYhIvkT+EDli38yJKyg4YqMc+NV2OQMOR6/yCCWHSQZmW1q
-         IgVwAYP4H9GQxXr8XjupmxubzicYgN3X2nAhT17inbI7NNr8lTwujZ5zKoSUBbJNh+ZJ
-         LOVw==
-X-Gm-Message-State: AOAM532EugOKnQAkvMpOeUua+keWqicVY5IW2QVqJtl8y4Gv27VSZTvW
-        nWIQja7Jy2g9K4AUjL03C+SNupZBBPRTiVUwQCk=
-X-Google-Smtp-Source: ABdhPJyIzmZUE5q6UG7nnESLpIkxqtBTnJ3M4MgQnAKw2zcOMfktjXlOQN5j4SIf8MYQTJIcE0uJISPP7kOlpFYw4Rw=
-X-Received: by 2002:a37:4d4:0:b0:69f:cc67:6f89 with SMTP id
- 203-20020a3704d4000000b0069fcc676f89mr5122464qke.61.1651912012819; Sat, 07
- May 2022 01:26:52 -0700 (PDT)
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=3afSRUyqURqd+oMSYddARQ8dgu6A28njYvK52vqSOHE=;
+        b=4rHATvJ+ED6VIipoyyX1mI4eOHqXgMrE9rCNfuj0h4oANzTE5oEXzJsnAZYzocWizj
+         z/0E0fL0SbxNW+TXDnyrbnMh8bFJmhBIs4oRNyBpmduBJvBHSMtoMfmoOilztqZRy8zi
+         KauJbHphOpPUkmJUAxaWFdKKh1M1wvXQZBJVQ2pBmmtxWytUt2ZiBAYCZ7JAEYTw9AMk
+         Drgz3CExxotMhv5DnO4QlQYwk2/J9c8gHjO3jHf7d2Ksubfg23UvEBrv/fq4KlmYnkPF
+         fwXjplEghvL+31Izq9pH7ti086m03R1TVpLfyKBEV8c/Pc+pPIh4Eej1OT2dpNd+Lchl
+         ai/w==
+X-Gm-Message-State: AOAM533Q/pLcqMyWpl0MRZYLJv/fYGaGH9Yfxnl2yWOVUTnuypDobuT0
+        2w6ez+lQeJSndjJDt/4KNskTDTD2DAie5w59vuU=
+X-Google-Smtp-Source: ABdhPJzVvfTAFB1H+iKYF8/l+675Y66bzPEAl6PZoc8GS14ISO+vI49zY9FgcEZBnSnvbXQTIlqAVC8fTwYdsIaDRow=
+X-Received: by 2002:a05:6638:16cf:b0:32b:6ee7:8d7d with SMTP id
+ g15-20020a05663816cf00b0032b6ee78d7dmr3125574jat.256.1651913152910; Sat, 07
+ May 2022 01:45:52 -0700 (PDT)
 MIME-Version: 1.0
-Received: by 2002:a05:6214:a0c:0:0:0:0 with HTTP; Sat, 7 May 2022 01:26:52
- -0700 (PDT)
-Reply-To: mrs.bill.chantalone01@gmail.com
-From:   "mrs.chantal roland" <mrschantalmiller4@gmail.com>
-Date:   Sat, 7 May 2022 10:26:52 +0200
-Message-ID: <CAEdX5eYDO9N9o9YZntr8PwZgUuncsfzxy6ihpQ0yJ0wYtgO6aA@mail.gmail.com>
-Subject: hello....
-To:     undisclosed-recipients:;
+References: <20220507052451.12890-1-ojeda@kernel.org> <20220507052451.12890-19-ojeda@kernel.org>
+ <202205070114.88C59DF@keescook>
+In-Reply-To: <202205070114.88C59DF@keescook>
+From:   Miguel Ojeda <miguel.ojeda.sandonis@gmail.com>
+Date:   Sat, 7 May 2022 10:45:41 +0200
+Message-ID: <CANiq72mfUkZDpsAj6ZRWYhydzRq2F45PWOjw1V=k5zh=TX6a7A@mail.gmail.com>
+Subject: Re: [PATCH v6 18/23] docs: add Rust documentation
+To:     Kees Cook <keescook@chromium.org>
+Cc:     Miguel Ojeda <ojeda@kernel.org>,
+        Linus Torvalds <torvalds@linux-foundation.org>,
+        Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+        rust-for-linux <rust-for-linux@vger.kernel.org>,
+        linux-kernel <linux-kernel@vger.kernel.org>,
+        Jarkko Sakkinen <jarkko@kernel.org>,
+        Alex Gaynor <alex.gaynor@gmail.com>,
+        Finn Behrens <me@kloenk.de>,
+        Adam Bratschi-Kaye <ark.email@gmail.com>,
+        Wedson Almeida Filho <wedsonaf@google.com>,
+        Michael Ellerman <mpe@ellerman.id.au>,
+        Sven Van Asbroeck <thesven73@gmail.com>,
+        Wu XiangCheng <bobwxc@email.cn>, Gary Guo <gary@garyguo.net>,
+        Boris-Chengbiao Zhou <bobo1239@web.de>,
+        Yuki Okushi <jtitor@2k36.org>, Wei Liu <wei.liu@kernel.org>,
+        Daniel Xu <dxu@dxuuu.xyz>, Julian Merkle <me@jvmerkle.de>,
+        Jonathan Corbet <corbet@lwn.net>,
+        Masahiro Yamada <masahiroy@kernel.org>,
+        Michal Marek <michal.lkml@markovi.net>,
+        Nick Desaulniers <ndesaulniers@google.com>,
+        Linux Doc Mailing List <linux-doc@vger.kernel.org>,
+        Linux Kbuild mailing list <linux-kbuild@vger.kernel.org>
 Content-Type: text/plain; charset="UTF-8"
-X-Spam-Status: Yes, score=7.9 required=5.0 tests=BAYES_50,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_ENVFROM_END_DIGIT,
-        FREEMAIL_FROM,FREEMAIL_REPLYTO,FREEMAIL_REPLYTO_END_DIGIT,
-        HK_NAME_FM_MR_MRS,LOTS_OF_MONEY,MONEY_FREEMAIL_REPTO,
-        RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,SPF_PASS,T_SCC_BODY_TEXT_LINE,
-        UNDISC_FREEM,UNDISC_MONEY autolearn=no autolearn_force=no version=3.4.6
-X-Spam-Report: * -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at
-        *      https://www.dnswl.org/, no trust
-        *      [2607:f8b0:4864:20:0:0:0:72a listed in]
-        [list.dnswl.org]
-        *  0.8 BAYES_50 BODY: Bayes spam probability is 40 to 60%
-        *      [score: 0.5000]
-        *  0.2 FREEMAIL_REPLYTO_END_DIGIT Reply-To freemail username ends in
-        *      digit
-        *      [mrs.bill.chantalone01[at]gmail.com]
-        *  0.2 FREEMAIL_ENVFROM_END_DIGIT Envelope-from freemail username ends
-        *       in digit
-        *      [mrschantalmiller4[at]gmail.com]
-        *  0.0 FREEMAIL_FROM Sender email is commonly abused enduser mail
-        *      provider
-        *      [mrschantalmiller4[at]gmail.com]
-        *  0.0 SPF_HELO_NONE SPF: HELO does not publish an SPF Record
-        * -0.0 SPF_PASS SPF: sender matches SPF record
-        * -0.1 DKIM_VALID_EF Message has a valid DKIM or DK signature from
-        *      envelope-from domain
-        * -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
-        * -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
-        *      author's domain
-        *  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
-        *       valid
-        * -0.0 T_SCC_BODY_TEXT_LINE No description available.
-        *  0.0 HK_NAME_FM_MR_MRS No description available.
-        *  0.0 LOTS_OF_MONEY Huge... sums of money
-        *  3.5 UNDISC_FREEM Undisclosed recipients + freemail reply-to
-        *  0.4 MONEY_FREEMAIL_REPTO Lots of money from someone using free
-        *      email?
-        *  1.0 FREEMAIL_REPLYTO Reply-To/From or Reply-To/body contain
-        *      different freemails
-        *  1.9 UNDISC_MONEY Undisclosed recipients + money/fraud signs
-X-Spam-Level: *******
+X-Spam-Status: No, score=-2.1 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_FROM,
+        RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,SPF_PASS,T_SCC_BODY_TEXT_LINE
+        autolearn=ham autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-You have been compensated with the sum of  5 million dollars in this
-united nation the payment will be issue into atm visa  card and send
-to you from the santander bank we need your address and your
-Whatsapp number  + 1 6465853907  this my email.ID
-(  mrs.bill.chantal0101@gmail.com )  contact  me
+On Sat, May 7, 2022 at 10:15 AM Kees Cook <keescook@chromium.org> wrote:
+>
+> I like the docs! :) It'll be interesting to see how we can grow
+> cross-linking between rustdoc and kerndoc.
 
-Thanks my
+Thanks!
 
-mrs bill chantal
+For cross-referencing, my plan is to start on the Rust side by
+allowing to link C files and items (either their generated docs or the
+source file), since we do that often in the Rust docs. The goal is
+that one can just write an "intra-doc link" in Rust docs just like any
+other one, e.g.:
+
+    /// Wraps the kernel's [`struct sk_buff`].
+    #[repr(transparent)]
+    pub struct SkBuff(UnsafeCell<bindings::sk_buff>);
+
+so that it is as easy as possible to add them.
+
+Cheers,
+Miguel
