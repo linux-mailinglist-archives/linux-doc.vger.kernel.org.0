@@ -2,69 +2,106 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id D357A51F6B9
-	for <lists+linux-doc@lfdr.de>; Mon,  9 May 2022 10:42:44 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id E7D2251F8FA
+	for <lists+linux-doc@lfdr.de>; Mon,  9 May 2022 12:00:34 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S232959AbiEIIMK (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 9 May 2022 04:12:10 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:58304 "EHLO
+        id S231971AbiEIJva (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 9 May 2022 05:51:30 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:53908 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S236385AbiEIHvw (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Mon, 9 May 2022 03:51:52 -0400
-Received: from mail-pg1-x52b.google.com (mail-pg1-x52b.google.com [IPv6:2607:f8b0:4864:20::52b])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 3FF0718E23
-        for <linux-doc@vger.kernel.org>; Mon,  9 May 2022 00:48:00 -0700 (PDT)
-Received: by mail-pg1-x52b.google.com with SMTP id q76so11327526pgq.10
-        for <linux-doc@vger.kernel.org>; Mon, 09 May 2022 00:48:00 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=date:from:to:cc:subject:message-id:references:mime-version
-         :content-disposition:in-reply-to;
-        bh=mYnZGAd7FuQyJH1dHzG4ymwHNLzd07B0jtRHnz1RxL8=;
-        b=Lre8Id4MjltGcSnxfGxWoQ/hLu5n3UZjAdiPPQi/7EkrV1jhNizdjkm+bkkshS7gK/
-         vcM7MfLpR/stOX03M1N1XlqAmJHotaOk0J/0ifb41k1U4R/dckkHDUDT5LbNcgVqscxw
-         686fc7NN7EB/9Ji3cABq32cTRTz3tJTLV7h31H9gBLSGZuMKQIYaXMQJPYf0VPiRghmW
-         HAqeEKrB3xTK07giQ6BuSgk3G8DHDS5ioPWS0MXPKZycmhTBe9av43U8pagGUysMF4po
-         WuIIOeNhIK6F7L1egVcGt7Gj3KDo4epZOm+0jHDhLTGbAPnuT4l/PIzksMC2CNLO38cx
-         ogcg==
+        with ESMTP id S235704AbiEIJY5 (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Mon, 9 May 2022 05:24:57 -0400
+Received: from mail-qk1-f173.google.com (mail-qk1-f173.google.com [209.85.222.173])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id BD2EB131F22;
+        Mon,  9 May 2022 02:21:01 -0700 (PDT)
+Received: by mail-qk1-f173.google.com with SMTP id z126so10302506qkb.2;
+        Mon, 09 May 2022 02:21:01 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=x-gm-message-state:date:from:to:cc:subject:message-id:references
-         :mime-version:content-disposition:in-reply-to;
-        bh=mYnZGAd7FuQyJH1dHzG4ymwHNLzd07B0jtRHnz1RxL8=;
-        b=0d2cE0yKJ1P6j4dJOvrQQ2epAvMkib2uigazcQlUr+VJ/dQ8tbuv6kL4LCHANl5TWW
-         38BRKFB8BqXiZjjigYdzw98ecOFdHAGsn+nvOrRUAoxkbkDWtmMmt9MxAapNJinGPfVh
-         N8RWHjrCpV+3l7PJ4Hhk+/0D1ETvICLHc15l44S3YPPMg/qQl9mUThYYhPryZXFJIgDL
-         G7kK0qJOHOvxfPdL8hgFMu9xkhdcDBjUxgigZKtXyRlKgZEUuat31Un/x8fmfgTZsgR0
-         4S86uHwB5g67AfwseX9zhKVuG+dUvf4Ng1SoAW7/rSWr+hCBqB0BSxIlT5QtG/vi1Giu
-         072A==
-X-Gm-Message-State: AOAM532q16VLRVrXHMfF7J6YYdymWIYBv1XKQ589FB6euuOoDHtjl6zr
-        rur5jLx4j98kTWjgAxmSyHI=
-X-Google-Smtp-Source: ABdhPJwwAq0UnDiUjWJSFg3vEcEvF1dIXHw/F2nZq3WsOjvCEYpOsZqe2LueAqks2zEjzHkE1vSv4g==
-X-Received: by 2002:a63:4e62:0:b0:398:cb40:19b0 with SMTP id o34-20020a634e62000000b00398cb4019b0mr12365324pgl.445.1652082479857;
-        Mon, 09 May 2022 00:47:59 -0700 (PDT)
-Received: from localhost (subs03-180-214-233-79.three.co.id. [180.214.233.79])
-        by smtp.gmail.com with ESMTPSA id r125-20020a632b83000000b003aa8b87feb5sm7951056pgr.0.2022.05.09.00.47.58
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 09 May 2022 00:47:59 -0700 (PDT)
-Date:   Mon, 9 May 2022 14:47:56 +0700
-From:   Bagas Sanjaya <bagasdotme@gmail.com>
-To:     Yanteng Si <siyanteng01@gmail.com>
-Cc:     mpatocka@redhat.com, colin.king@canonical.com,
-        ross.zwisler@linux.intel.com, dan.carpenter@oracle.com,
-        dan.j.williams@intel.com, msnitzer@redhat.com, corbet@lwn.net,
-        linux-doc@vger.kernel.org, Yanteng Si <siyanteng@loongson.cn>
-Subject: Re: [PATCH] docs/admin-guide: Add the necessary blank lines to the
- writecache
-Message-ID: <YnjHLBhf6Z5u0Htx@debian.me>
-References: <20211209092223.561740-1-siyanteng@loongson.cn>
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=gMtmW3ArowZdX4IsaNSLBpR+NhLcfUq95yoUD9gi7Sw=;
+        b=RPbtzqE7rsbQATU6SraHZ5WF8sqL/dJMsdRf3VxMG2l0nyGHyJnVeR1CbqgVgiZwk7
+         K1cckVRnICC1Ttt/J+vIz1+8hg5h+QsziFaqrJmHfKRWUYjfvSxW0IPzoW30Ycvtfqbr
+         LoWndeocqBDIPgtNck0MoZHx4HjJ0lqEFa0hLFNYy4smuKdUmcfolZ1j+xDxBptDU/Xg
+         32atW/LVRs28O66Vheo+fJqFaeGiyCyp/erqy7i0uKWGKDfXR0fipzGqm+mFGBNfGzJD
+         hMAubUMZzWeB9o0I2WBUBPUPnayKzdFJJ8kjdqSbhguMF4rsQXGHwusQpvWIqaCFzdkt
+         vCZg==
+X-Gm-Message-State: AOAM532LFEsIpxM5WTRCEERrNv9b5cC8eNYIx8Qt41ds9PoaToFJYDW8
+        +Oj2xyFjFF6gi2GNnMbfvOT+878GxtTFoA==
+X-Google-Smtp-Source: ABdhPJxnCxGOKIp1bvvTmGtnVq0s0cmUaxXisxLRgd67SYcfs1XylGWC/N82+lVAr1wxirT3+vyUEA==
+X-Received: by 2002:a05:620a:4488:b0:6a0:2aab:a736 with SMTP id x8-20020a05620a448800b006a02aaba736mr11287091qkp.717.1652088060478;
+        Mon, 09 May 2022 02:21:00 -0700 (PDT)
+Received: from mail-yb1-f177.google.com (mail-yb1-f177.google.com. [209.85.219.177])
+        by smtp.gmail.com with ESMTPSA id w24-20020ac87198000000b002f39b99f697sm7235538qto.49.2022.05.09.02.20.59
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Mon, 09 May 2022 02:20:59 -0700 (PDT)
+Received: by mail-yb1-f177.google.com with SMTP id g28so23731968ybj.10;
+        Mon, 09 May 2022 02:20:59 -0700 (PDT)
+X-Received: by 2002:a25:4506:0:b0:648:cfc2:301d with SMTP id
+ s6-20020a254506000000b00648cfc2301dmr12295875yba.380.1652088059134; Mon, 09
+ May 2022 02:20:59 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20211209092223.561740-1-siyanteng@loongson.cn>
-X-Spam-Status: No, score=-0.6 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_FROM,
-        RCVD_IN_DNSWL_NONE,RCVD_IN_SORBS_WEB,SPF_HELO_NONE,SPF_PASS,
+References: <20220507125443.2766939-1-daniel.lezcano@linexp.org> <20220507125443.2766939-2-daniel.lezcano@linexp.org>
+In-Reply-To: <20220507125443.2766939-2-daniel.lezcano@linexp.org>
+From:   Geert Uytterhoeven <geert@linux-m68k.org>
+Date:   Mon, 9 May 2022 11:20:47 +0200
+X-Gmail-Original-Message-ID: <CAMuHMdXXMzR+ukK9Bm+eWhLuWOozU6n96hTcGV5xf9omQvoHCA@mail.gmail.com>
+Message-ID: <CAMuHMdXXMzR+ukK9Bm+eWhLuWOozU6n96hTcGV5xf9omQvoHCA@mail.gmail.com>
+Subject: Re: [PATCH v2 01/14] thermal/core: Change thermal_zone_ops to thermal_sensor_ops
+To:     daniel.lezcano@linexp.org
+Cc:     Daniel Lezcano <daniel.lezcano@linaro.org>,
+        "Rafael J. Wysocki" <rafael@kernel.org>,
+        Kevin Hilman <khilman@baylibre.com>,
+        Alexandre Bailon <abailon@baylibre.com>,
+        Linux PM list <linux-pm@vger.kernel.org>,
+        Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
+        Amit Kucheria <amitk@kernel.org>,
+        Zhang Rui <rui.zhang@intel.com>,
+        Jonathan Corbet <corbet@lwn.net>, Len Brown <lenb@kernel.org>,
+        Raju Rangoju <rajur@chelsio.com>,
+        "David S. Miller" <davem@davemloft.net>,
+        Jakub Kicinski <kuba@kernel.org>,
+        Paolo Abeni <pabeni@redhat.com>,
+        Ido Schimmel <idosch@nvidia.com>,
+        Petr Machata <petrm@nvidia.com>,
+        Luca Coelho <luciano.coelho@intel.com>,
+        Kalle Valo <kvalo@kernel.org>, Peter Kaestle <peter@piie.net>,
+        Hans de Goede <hdegoede@redhat.com>,
+        Mark Gross <markgross@kernel.org>,
+        Sebastian Reichel <sre@kernel.org>,
+        Miquel Raynal <miquel.raynal@bootlin.com>,
+        Support Opensource <support.opensource@diasemi.com>,
+        Shawn Guo <shawnguo@kernel.org>,
+        Sascha Hauer <s.hauer@pengutronix.de>,
+        Pengutronix Kernel Team <kernel@pengutronix.de>,
+        Fabio Estevam <festevam@gmail.com>,
+        NXP Linux Team <linux-imx@nxp.com>,
+        =?UTF-8?Q?Niklas_S=C3=B6derlund?= <niklas.soderlund@ragnatech.se>,
+        Miri Korenblit <miriam.rachel.korenblit@intel.com>,
+        Johannes Berg <johannes.berg@intel.com>,
+        Srinivas Pandruvada <srinivas.pandruvada@linux.intel.com>,
+        Sumeet Pawnikar <sumeet.r.pawnikar@intel.com>,
+        Dan Carpenter <dan.carpenter@oracle.com>,
+        Chuansheng Liu <chuansheng.liu@intel.com>,
+        Jiasheng Jiang <jiasheng@iscas.ac.cn>,
+        Antoine Tenart <atenart@kernel.org>,
+        Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
+        "open list:DOCUMENTATION" <linux-doc@vger.kernel.org>,
+        "open list:ACPI THERMAL DRIVER" <linux-acpi@vger.kernel.org>,
+        "open list:CXGB4 ETHERNET DRIVER (CXGB4)" <netdev@vger.kernel.org>,
+        "open list:INTEL WIRELESS WIFI LINK (iwlwifi)" 
+        <linux-wireless@vger.kernel.org>,
+        "open list:ACER ASPIRE ONE TEMPERATURE AND FAN DRIVER" 
+        <platform-driver-x86@vger.kernel.org>,
+        "moderated list:ARM/FREESCALE IMX / MXC ARM ARCHITECTURE" 
+        <linux-arm-kernel@lists.infradead.org>,
+        "open list:RENESAS R-CAR THERMAL DRIVERS" 
+        <linux-renesas-soc@vger.kernel.org>
+Content-Type: text/plain; charset="UTF-8"
+X-Spam-Status: No, score=-1.4 required=5.0 tests=BAYES_00,
+        FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,HEADER_FROM_DIFFERENT_DOMAINS,
+        RCVD_IN_DNSWL_NONE,RCVD_IN_MSPIKE_H2,SPF_HELO_NONE,SPF_PASS,
         T_SCC_BODY_TEXT_LINE autolearn=no autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
@@ -72,22 +109,43 @@ Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Thu, Dec 09, 2021 at 05:22:23PM +0800, Yanteng Si wrote:
-> diff --git a/Documentation/admin-guide/device-mapper/writecache.rst b/Documentation/admin-guide/device-mapper/writecache.rst
-> index 10429779a91a..6bf78b0446ac 100644
-> --- a/Documentation/admin-guide/device-mapper/writecache.rst
-> +++ b/Documentation/admin-guide/device-mapper/writecache.rst
-> @@ -20,6 +20,7 @@ Constructor parameters:
->     size)
->  5. the number of optional parameters (the parameters with an argument
->     count as two)
-> +
->  	start_sector n		(default: 0)
->  		offset from the start of cache device in 512-byte sectors
->  	high_watermark n	(default: 50)
- 
-I think the paragraph before optional parameters lists should be
-terminated with colon.
+Hi Daniel,
 
--- 
-An old man doll... just what I always wanted! - Clara
+Thanks for your patch!
+
+On Sat, May 7, 2022 at 3:03 PM Daniel Lezcano <daniel.lezcano@linexp.org> wrote:
+> A thermal zone is software abstraction of a sensor associated with
+> properties and cooling devices if any.
+>
+> The fact that we have thermal_zone and thermal_zone_ops mixed is
+> confusing and does not clearly identify the different components
+> entering in the thermal management process. A thermal zone appears to
+> be a sensor while it is not.
+>
+> In order to set the scene for multiple thermal sensors aggregated into
+> a single thermal zone. Rename the thermal_zone_ops to
+> thermal_sensor_ops, that will appear clearyl the thermal zone is not a
+
+to make it clear
+
+> sensor but an abstraction of one [or multiple] sensor(s).
+>
+> Cc: Alexandre Bailon <abailon@baylibre.com>
+> Cc: Kevin Hilman <khilman@baylibre.com>
+> Cc; Eduardo Valentin <eduval@amazon.com>
+> Signed-off-by: Daniel Lezcano <daniel.lezcano@linexp.org>
+
+>  drivers/thermal/rcar_thermal.c                            | 4 ++--
+
+Reviewed-by: Geert Uytterhoeven <geert+renesas@glider.be>
+
+Gr{oetje,eeting}s,
+
+                        Geert
+
+--
+Geert Uytterhoeven -- There's lots of Linux beyond ia32 -- geert@linux-m68k.org
+
+In personal conversations with technical people, I call myself a hacker. But
+when I'm talking to journalists I just say "programmer" or something like that.
+                                -- Linus Torvalds
