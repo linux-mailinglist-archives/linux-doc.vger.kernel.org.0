@@ -2,63 +2,72 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 74057522FE3
-	for <lists+linux-doc@lfdr.de>; Wed, 11 May 2022 11:52:15 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 17AC5522FF3
+	for <lists+linux-doc@lfdr.de>; Wed, 11 May 2022 11:54:09 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S231625AbiEKJvv (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 11 May 2022 05:51:51 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:46866 "EHLO
+        id S233444AbiEKJyH (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 11 May 2022 05:54:07 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:55756 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S238629AbiEKJvP (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Wed, 11 May 2022 05:51:15 -0400
-Received: from szxga03-in.huawei.com (szxga03-in.huawei.com [45.249.212.189])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 9191031350;
-        Wed, 11 May 2022 02:50:54 -0700 (PDT)
-Received: from dggpemm500022.china.huawei.com (unknown [172.30.72.53])
-        by szxga03-in.huawei.com (SkyGuard) with ESMTP id 4KyqmF1nTWzCsdt;
-        Wed, 11 May 2022 17:46:05 +0800 (CST)
-Received: from dggpemm500006.china.huawei.com (7.185.36.236) by
- dggpemm500022.china.huawei.com (7.185.36.162) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2375.24; Wed, 11 May 2022 17:50:52 +0800
-Received: from [10.174.178.55] (10.174.178.55) by
- dggpemm500006.china.huawei.com (7.185.36.236) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2375.24; Wed, 11 May 2022 17:50:51 +0800
-Subject: Re: [PATCH] arm64: kdump: Do not allocate crash low memory if not
- needed
-To:     Baoquan He <bhe@redhat.com>
-CC:     Dave Young <dyoung@redhat.com>, Vivek Goyal <vgoyal@redhat.com>,
-        <kexec@lists.infradead.org>, <linux-kernel@vger.kernel.org>,
-        Catalin Marinas <catalin.marinas@arm.com>,
-        Will Deacon <will@kernel.org>,
-        <linux-arm-kernel@lists.infradead.org>,
-        Jonathan Corbet <corbet@lwn.net>, <linux-doc@vger.kernel.org>,
-        "Eric W . Biederman" <ebiederm@xmission.com>,
-        Randy Dunlap <rdunlap@infradead.org>,
-        Feng Zhou <zhoufeng.zf@bytedance.com>,
-        Kefeng Wang <wangkefeng.wang@huawei.com>,
-        Chen Zhou <dingguo.cz@antgroup.com>,
-        John Donnelly <John.p.donnelly@oracle.com>,
-        "Dave Kleikamp" <dave.kleikamp@oracle.com>
-References: <20220511032033.426-1-thunder.leizhen@huawei.com>
- <Ynt8qwG9WoiW4L+o@MiWiFi-R3L-srv>
-From:   "Leizhen (ThunderTown)" <thunder.leizhen@huawei.com>
-Message-ID: <8922e61e-ab7c-6e48-ad8c-57b75156a0f2@huawei.com>
-Date:   Wed, 11 May 2022 17:50:51 +0800
-User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64; rv:60.0) Gecko/20100101
- Thunderbird/60.7.0
+        with ESMTP id S239527AbiEKJx6 (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Wed, 11 May 2022 05:53:58 -0400
+Received: from mail-pl1-x633.google.com (mail-pl1-x633.google.com [IPv6:2607:f8b0:4864:20::633])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 0F6AE64BEC;
+        Wed, 11 May 2022 02:53:00 -0700 (PDT)
+Received: by mail-pl1-x633.google.com with SMTP id d17so1424748plg.0;
+        Wed, 11 May 2022 02:53:00 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112;
+        h=message-id:date:mime-version:user-agent:subject:content-language:to
+         :cc:references:from:in-reply-to:content-transfer-encoding;
+        bh=d6SNw7JdSd6YtqFOPSVjKfAM018aUOIgVKdJnsWRVAg=;
+        b=j/zPYQHw6XkZjVsgr8yLdt96ocmxBES/LAbGknCM9omFXYneOIkEJzeFlXsnUWxCLr
+         iZ30x78kT6Boe7sJbe7xE+mLoL59YTxD/W1gNWKnGGKdvSmQnCLmnGp5gEaihZfSpEtF
+         lB7aWWfVwf/SSz1MnGLsmbsED/+pp0pXFguz44G2ylLDhpejvDQ3AGMN9VL6qqOkSjWU
+         4jGv9tDWR6Di360+9K0rgG9xBd99jrCu9qEKzUosYdTbrUyrSU2+PQ6Ga4YMZ1/rtZ1g
+         jQ7oP9mKvoxiYiCpSl7MliYs4l5FVjNOSG6uG6jNkGKHUHiHNIZTElj8G7K5u9xP29ze
+         GCdA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:message-id:date:mime-version:user-agent:subject
+         :content-language:to:cc:references:from:in-reply-to
+         :content-transfer-encoding;
+        bh=d6SNw7JdSd6YtqFOPSVjKfAM018aUOIgVKdJnsWRVAg=;
+        b=W7R/d4izVCaK+Us13m0/g36xmjx+WBuRAyM7qUVTtmiWus7EnInaiBYVrVMNQSxrOC
+         u/dl4eXhdFHtYi+5p1jd9B+f63rfcKkTye7ScLTGnmA0lDAadrtQtedN/9tJPEtAKUCl
+         Ybj/1dyd0z/RHYTlc6Hchcj8KCklHFj35bdHkV/IZoNM5GFJmG4kFJqIi4WWwGf4Cvze
+         8XgV38j1rec6kwKvOMXXVTzgz9sm3y5qK6CTVm4PPoVyNePv/94/rP87JF9AS96zQKbX
+         5WTb9k0/r+WSfWL169t9/P59Mbt3AUe/67zB48e/dzpr4wiQJBrHbwgBMAfMAFsknbUj
+         Z4zA==
+X-Gm-Message-State: AOAM530LFDUD2n3qiz5LQkvVTp+ooWIN9URA9H4W+2Bozs0K/o4FUDos
+        cjCKBPxheBTlkJH+NVTJQCU=
+X-Google-Smtp-Source: ABdhPJwKMvveyhIS3/YJMLTEUy3+hqo9uHwfupeI0+Sztae7K++crQ68YYeZlhYT5ofoy1JlqhK+zg==
+X-Received: by 2002:a17:90b:4d8b:b0:1dc:c94f:fc29 with SMTP id oj11-20020a17090b4d8b00b001dcc94ffc29mr4406702pjb.186.1652262779607;
+        Wed, 11 May 2022 02:52:59 -0700 (PDT)
+Received: from [192.168.2.225] (93.179.119.173.16clouds.com. [93.179.119.173])
+        by smtp.gmail.com with ESMTPSA id 5-20020a170902e9c500b0015e8d4eb1d5sm1320481plk.31.2022.05.11.02.52.55
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Wed, 11 May 2022 02:52:59 -0700 (PDT)
+Message-ID: <19d97a67-6941-1e78-1670-94ec4b1ce96c@gmail.com>
+Date:   Wed, 11 May 2022 17:52:51 +0800
 MIME-Version: 1.0
-In-Reply-To: <Ynt8qwG9WoiW4L+o@MiWiFi-R3L-srv>
-Content-Type: text/plain; charset="utf-8"
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
+ Thunderbird/91.8.1
+Subject: Re: [PATCH] MAINTAINERS: Become the docs/zh_CN maintainer
 Content-Language: en-US
+To:     Yanteng Si <siyanteng@loongson.cn>, corbet@lwn.net,
+        alexs@kernel.org
+Cc:     chenhuacai@kernel.org, jiaxun.yang@flygoat.com,
+        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
+        siyanteng01@gmail.com
+References: <20220511094633.2002194-1-siyanteng@loongson.cn>
+From:   Alex Shi <seakeel@gmail.com>
+In-Reply-To: <20220511094633.2002194-1-siyanteng@loongson.cn>
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-Originating-IP: [10.174.178.55]
-X-ClientProxiedBy: dggems706-chm.china.huawei.com (10.3.19.183) To
- dggpemm500006.china.huawei.com (7.185.36.236)
-X-CFilter-Loop: Reflected
-X-Spam-Status: No, score=-4.9 required=5.0 tests=BAYES_00,NICE_REPLY_A,
-        RCVD_IN_DNSWL_MED,SPF_HELO_NONE,SPF_PASS,T_SCC_BODY_TEXT_LINE
+X-Spam-Status: No, score=-2.8 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_FROM,NICE_REPLY_A,
+        RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,SPF_PASS,T_SCC_BODY_TEXT_LINE
         autolearn=ham autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
@@ -68,86 +77,30 @@ X-Mailing-List: linux-doc@vger.kernel.org
 
 
 
-On 2022/5/11 17:06, Baoquan He wrote:
-> On 05/11/22 at 11:20am, Zhen Lei wrote:
->> When "crashkernel=X,high" is specified, the specified "crashkernel=Y,low"
->> memory is not required in the following corner cases:
->> 1. If both CONFIG_ZONE_DMA and CONFIG_ZONE_DMA32 are disabled, it means
->>    that the devices can access any memory.
->> 2. If the system memory is small, the crash high memory may be allocated
->>    from the DMA zones. If that happens, there's no need to allocate
->>    another crash low memory because there's already one.
->>
->> Add condition '(crash_base >= CRASH_ADDR_LOW_MAX)' to determine whether
->> the 'high' memory is allocated above DMA zones. Note: when both
->> CONFIG_ZONE_DMA and CONFIG_ZONE_DMA32 are disabled, the entire physical
->> memory is DMA accessible, CRASH_ADDR_LOW_MAX equals 'PHYS_MASK + 1'.
->>
->> Signed-off-by: Zhen Lei <thunder.leizhen@huawei.com>
->> ---
->>  Documentation/admin-guide/kernel-parameters.txt | 5 +++--
->>  arch/arm64/mm/init.c                            | 3 ++-
->>  2 files changed, 5 insertions(+), 3 deletions(-)
->>
->> diff --git a/Documentation/admin-guide/kernel-parameters.txt b/Documentation/admin-guide/kernel-parameters.txt
->> index f6ff55840751a78..1b543c3109f4851 100644
->> --- a/Documentation/admin-guide/kernel-parameters.txt
->> +++ b/Documentation/admin-guide/kernel-parameters.txt
->> @@ -823,7 +823,7 @@
->>  			low memory is needed to make sure DMA buffers for 32-bit
->>  			devices won't run out. Kernel would try to allocate
->>  			at least 256M below 4G automatically.
->> -			This one let user to specify own low range under 4G
->> +			This one lets the user specify own low range under 4G
->                         ~ This one let users specify own low range ...
-> 
-> Other than this nitpick, LGTM
+On 5/11/22 17:46, Yanteng Si wrote:
+> It's time to become a maintainer of Chinese documentation, and Yanteng's plan
+> is to help everyone with the utmost enthusiasm and patience.
 
-This is Catalin's response a few days ago:
-Slightly more correct is "This one lets the user specify..."
-
-I didn't googled "This one lets", but I googled "It lets". I think he wrote it right.
-
-Both "the user" and "users" seem to be right.
-
+Welcome to your great commitment! :)
 
 > 
-> Acked-by: Baoquan He <bhe@redhat.com>
-> 
->>  			for second kernel instead.
->>  			0: to disable low allocation.
->>  			It will be ignored when crashkernel=X,high is not used
->> @@ -832,7 +832,8 @@
->>  			[KNL, ARM64] range in low memory.
->>  			This one lets the user specify a low range in the
->>  			DMA zone for the crash dump kernel.
->> -			It will be ignored when crashkernel=X,high is not used.
->> +			It will be ignored when crashkernel=X,high is not used
->> +			or memory reserved is located in the DMA zones.
->>  
->>  	cryptomgr.notests
->>  			[KNL] Disable crypto self-tests
->> diff --git a/arch/arm64/mm/init.c b/arch/arm64/mm/init.c
->> index 18ba66c90991ea0..ac510fb6a2c0189 100644
->> --- a/arch/arm64/mm/init.c
->> +++ b/arch/arm64/mm/init.c
->> @@ -170,7 +170,8 @@ static void __init reserve_crashkernel(void)
->>  		return;
->>  	}
->>  
->> -	if (crash_low_size && reserve_crashkernel_low(crash_low_size)) {
->> +	if ((crash_base >= CRASH_ADDR_LOW_MAX) &&
->> +	     crash_low_size && reserve_crashkernel_low(crash_low_size)) {
->>  		memblock_phys_free(crash_base, crash_size);
->>  		return;
->>  	}
->> -- 
->> 2.25.1
->>
-> 
-> .
-> 
+> Signed-off-by: Yanteng Si <siyanteng@loongson.cn>
 
--- 
-Regards,
-  Zhen Lei
+Reviewed-by: Alex Shi <alexs@kernel.org>
+
+> ---
+>  MAINTAINERS | 1 +
+>  1 file changed, 1 insertion(+)
+> 
+> diff --git a/MAINTAINERS b/MAINTAINERS
+> index e8c52d0192a6..74969c0a60ea 100644
+> --- a/MAINTAINERS
+> +++ b/MAINTAINERS
+> @@ -4619,6 +4619,7 @@ F:	Documentation/dev-tools/checkpatch.rst
+>  
+>  CHINESE DOCUMENTATION
+>  M:	Alex Shi <alexs@kernel.org>
+> +M:	Yanteng Si <siyanteng@loongson.cn>
+>  S:	Maintained
+>  F:	Documentation/translations/zh_CN/
+>  
