@@ -2,165 +2,108 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id E9B0C5227E3
-	for <lists+linux-doc@lfdr.de>; Wed, 11 May 2022 01:57:05 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 2ACAC52285B
+	for <lists+linux-doc@lfdr.de>; Wed, 11 May 2022 02:20:33 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S238610AbiEJX5C (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 10 May 2022 19:57:02 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:43520 "EHLO
+        id S235627AbiEKAUb (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 10 May 2022 20:20:31 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:54342 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S230150AbiEJX5B (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 10 May 2022 19:57:01 -0400
-Received: from mail-yb1-xb49.google.com (mail-yb1-xb49.google.com [IPv6:2607:f8b0:4864:20::b49])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 96D7620B547
-        for <linux-doc@vger.kernel.org>; Tue, 10 May 2022 16:56:59 -0700 (PDT)
-Received: by mail-yb1-xb49.google.com with SMTP id 192-20020a250cc9000000b0064a5bbea6a7so413817ybm.9
-        for <linux-doc@vger.kernel.org>; Tue, 10 May 2022 16:56:59 -0700 (PDT)
+        with ESMTP id S235364AbiEKAUa (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 10 May 2022 20:20:30 -0400
+Received: from mail-pj1-x102f.google.com (mail-pj1-x102f.google.com [IPv6:2607:f8b0:4864:20::102f])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id DA574282000
+        for <linux-doc@vger.kernel.org>; Tue, 10 May 2022 17:20:28 -0700 (PDT)
+Received: by mail-pj1-x102f.google.com with SMTP id t11-20020a17090ad50b00b001d95bf21996so3383836pju.2
+        for <linux-doc@vger.kernel.org>; Tue, 10 May 2022 17:20:28 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=google.com; s=20210112;
-        h=date:in-reply-to:message-id:mime-version:references:subject:from:to
-         :cc:content-transfer-encoding;
-        bh=4KvDBY92RR8WKuUjzgohCsuZSchRL19v0jjqGuoq0no=;
-        b=EVnDMIpZB27MCIXhHatilUnRYlxARdcdAd7PK1rHIXFEB09aYu4tovCAvBFw8cZxyT
-         gXDSSt3iUIN/1CO3fml62gvLZRGE+EMeeeLDQuSX7c4jbLENEPCC9PDIZujw5VNhH0q0
-         FNlArlRA5Ob2e7UO2kZWZMCqvsuYh5DB5yxiuRlqYM4K6p8fNfkF+nvk4AffdLlQoCVj
-         Iow7SxlzmL5Vq+/E0YXhlhfw88NjMLlc65QX53QBUS8PoggN6lNR+09aPb47Qcif87k3
-         deyEJ4awwrFwdjAObdu51OKvcIO1OpNdSGWxV/SAb3A5rkBNGUpnsa8mp82Pi0LrZ+EP
-         djEA==
+        d=schmorgal.com; s=google;
+        h=message-id:date:mime-version:user-agent:content-language:to:cc
+         :references:from:subject:in-reply-to:content-transfer-encoding;
+        bh=yekXNmBN6S2XGrUH1FRFBNDuLvVMdR8467Er++Qz778=;
+        b=bB26BxCSizFz5cuL6iAICTqnjMH04Z8ga63ZX/6juIpu8Gff/sY5FNXckEGN/xbyKV
+         UCX7Tw4S04vmXWxPI94xqoMZKVeMeYz0j43+lfdkFUR7DZ8+2I7mADi84S/wKZpCVgbB
+         EVNWCvfTjd1oYt2Y2wJBAD3SGazQeOH098dsU=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=x-gm-message-state:date:in-reply-to:message-id:mime-version
-         :references:subject:from:to:cc:content-transfer-encoding;
-        bh=4KvDBY92RR8WKuUjzgohCsuZSchRL19v0jjqGuoq0no=;
-        b=NeSwkvyROoSklq9hJeT77ObdjVzxJoSB/Gd6n+7uLTjffKuy+FWAb05WHtdYYKdUsi
-         kmlV1qabOmL2zSgB8Osy9hhXJCmVBfhtwcGPXa0zBu1veyCMJlRC6jFzN3WMI38gZsR9
-         dMonWlTgz815VcNuKGVdHsJVcAGnJAxRgm62Wx5I1FQJwc7rk0gYwhUfbNk0RF8jyvNw
-         8Za7nD+lKCRR9o55f9TPIYbIkFBMc2OYPUFW8lDJUV3QrBYSwVyTo9xta0m9Zl3lLs2Y
-         2Bf+/YrhyswGPxuSgH+YjAdDi0f+Yp+BNqQBRPVSRl5j05k85lIbhYkzwe6F4mTnhEPR
-         Zjgw==
-X-Gm-Message-State: AOAM532qnYrlfFIz3htjiYj0mAZs5Wu7E3/Nmqn3qFJjaiuEfIdWrLWP
-        oeSnWkQq4VLJoNrmt4J0Jn5TUVFMB5o5PLk=
-X-Google-Smtp-Source: ABdhPJxlqpgDpJ9NusV/EqUoq7QOEUS1bEXKFWa7Ps8sG0Rk4PPsvk4A1DFBh7AwydMPg9ury9ovxi429oUOWa4=
-X-Received: from tj.c.googlers.com ([fda3:e722:ac3:cc00:20:ed76:c0a8:53a])
- (user=tjmercier job=sendgmr) by 2002:a5b:7c4:0:b0:64b:da6:cb3b with SMTP id
- t4-20020a5b07c4000000b0064b0da6cb3bmr5590895ybq.104.1652227018683; Tue, 10
- May 2022 16:56:58 -0700 (PDT)
-Date:   Tue, 10 May 2022 23:56:45 +0000
-In-Reply-To: <20220510235653.933868-1-tjmercier@google.com>
-Message-Id: <20220510235653.933868-2-tjmercier@google.com>
-Mime-Version: 1.0
-References: <20220510235653.933868-1-tjmercier@google.com>
-X-Mailer: git-send-email 2.36.0.512.ge40c2bad7a-goog
-Subject: [PATCH v7 1/6] gpu: rfc: Proposal for a GPU cgroup controller
-From:   "T.J. Mercier" <tjmercier@google.com>
-To:     tjmercier@google.com, Tejun Heo <tj@kernel.org>,
-        Zefan Li <lizefan.x@bytedance.com>,
-        Johannes Weiner <hannes@cmpxchg.org>,
-        Jonathan Corbet <corbet@lwn.net>
-Cc:     daniel@ffwll.ch, hridya@google.com, christian.koenig@amd.com,
-        jstultz@google.com, tkjos@android.com, cmllamas@google.com,
-        surenb@google.com, kaleshsingh@google.com, Kenny.Ho@amd.com,
-        mkoutny@suse.com, skhan@linuxfoundation.org,
-        kernel-team@android.com, cgroups@vger.kernel.org,
-        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Spam-Status: No, score=-9.6 required=5.0 tests=BAYES_00,DKIMWL_WL_MED,
-        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_NONE,
-        SPF_HELO_NONE,SPF_PASS,T_SCC_BODY_TEXT_LINE,USER_IN_DEF_DKIM_WL
-        autolearn=unavailable autolearn_force=no version=3.4.6
+        h=x-gm-message-state:message-id:date:mime-version:user-agent
+         :content-language:to:cc:references:from:subject:in-reply-to
+         :content-transfer-encoding;
+        bh=yekXNmBN6S2XGrUH1FRFBNDuLvVMdR8467Er++Qz778=;
+        b=KJ9Zr9LcAfoNgKrcvzjXIYC4MnFUeWL4D07PkLimt8POG318uFszW4eewmxvfb5w5q
+         xsKfedclLq3a6wsRs/Pql3f/jiAwrJlaubNUPrrJnHw6tSpY/x8Q0BshChNkBA73rIHJ
+         /OrohkeunaYM1nwl215kjL1+10MFCKM8Q4fCr63OZE5tE7E5ZW3XE7QH5sVRyc9Ed0vn
+         2Jp20buSl++kYutvUZkCRvCJXEnxP2up0CNKWj6DhzoJ7pGhyXQfV9ecvNvJT7ZQA/oj
+         9HvpwsEKht3M1C1QzTbLoLDYjTIN/Xz6jnUDRUDLhlPsieJesIPPu9efBH3VGJLAQrOY
+         ENfw==
+X-Gm-Message-State: AOAM530DF7ThyI1YgItDmzfDeSR8+t8mw6L0Y24mVsU4r3bKV5b2J8g9
+        +C7hgxA2S4MW9Jkjl5ggXAtRYnDTPAuubefNIxY=
+X-Google-Smtp-Source: ABdhPJxZTPxMNzflE1k675Rx/EB2ZCPN+FJ6J8SJuHDgOm9kwMJxnKWSO/9qX7i2tam/o7ecoBBWvQ==
+X-Received: by 2002:a17:903:244d:b0:15e:a3a2:5a6f with SMTP id l13-20020a170903244d00b0015ea3a25a6fmr22274256pls.72.1652228428310;
+        Tue, 10 May 2022 17:20:28 -0700 (PDT)
+Received: from [192.168.1.33] ([50.45.132.243])
+        by smtp.googlemail.com with ESMTPSA id x7-20020aa784c7000000b0050dc76281f7sm123203pfn.209.2022.05.10.17.20.27
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Tue, 10 May 2022 17:20:27 -0700 (PDT)
+Message-ID: <d7076f95-b25b-3694-1ec2-9b9ff93633b7@schmorgal.com>
+Date:   Tue, 10 May 2022 17:20:25 -0700
+MIME-Version: 1.0
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:91.0) Gecko/20100101
+ Thunderbird/91.8.1
+Content-Language: en-US
+To:     Arnd Bergmann <arnd@arndb.de>
+Cc:     Jakub Kicinski <kuba@kernel.org>,
+        David Miller <davem@davemloft.net>,
+        Networking <netdev@vger.kernel.org>,
+        Paolo Abeni <pabeni@redhat.com>,
+        Eric Dumazet <edumazet@google.com>,
+        Jonathan Corbet <corbet@lwn.net>,
+        Jiapeng Chong <jiapeng.chong@linux.alibaba.com>,
+        "open list:DOCUMENTATION" <linux-doc@vger.kernel.org>
+References: <20220509150130.1047016-1-kuba@kernel.org>
+ <CAK8P3a0FVM8g0LG3_mHJ1xX3Bs9cxae8ez7b9qvGOD+aJdc8Dw@mail.gmail.com>
+ <20220509103216.180be080@kernel.org>
+ <9cac4fbd-9557-b0b8-54fa-93f0290a6fb8@schmorgal.com>
+ <CAK8P3a1AA181LqQSxnToSVx0e5wmneUsOKfmnxVMsUNh465C_Q@mail.gmail.com>
+From:   Doug Brown <doug@schmorgal.com>
+Subject: Re: [PATCH net-next] net: appletalk: remove Apple/Farallon LocalTalk
+ PC support
+In-Reply-To: <CAK8P3a1AA181LqQSxnToSVx0e5wmneUsOKfmnxVMsUNh465C_Q@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-Spam-Status: No, score=-3.0 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,NICE_REPLY_A,RCVD_IN_DNSWL_NONE,
+        SPF_HELO_NONE,SPF_PASS,T_SCC_BODY_TEXT_LINE,URIBL_BLOCKED
+        autolearn=ham autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-From: Hridya Valsaraju <hridya@google.com>
+On 5/9/2022 11:48 PM, Arnd Bergmann wrote:
+> If I understand this correct, this means we could remove all of
+> drivers/net/appletalk/ except for the CONFIG_ATALK Kconfig entry,
+> and also remove net/appletalk/dev.c and a few bits of net/appletalk
+> that reference localtalk device structures and their ioctls, right?
+Yes, I believe so. At that point, would Kconfig get moved to
+net/appletalk instead? (Just wondering out of my own curiosity!)
+> What about appletalk over PPP (phase1 probing in aarp.c) and
+> ARPHRD_LOCALTLK support in drivers/net/tun.c? Are these still
+> useful without localtalk device support?
 
-This patch adds a proposal for a new GPU cgroup controller for
-accounting/limiting GPU and GPU-related memory allocations.
-The proposed controller is based on the DRM cgroup controller[1] and
-follows the design of the RDMA cgroup controller.
+I don't feel qualified enough to answer those ones definitively, but it
+looks to me like the ARPHRD_LOCALTLK support in net/tun.c could be
+stripped out, because tun_get_addr_len only gets called on a struct
+net_device's type, and stripping out LocalTalk would make that condition
+impossible (I think?)
 
-The new cgroup controller would:
-* Allow setting per-device limits on the total size of buffers
-  allocated by device within a cgroup.
-* Expose a per-device/allocator breakdown of the buffers charged to a
-  cgroup.
+The AppleTalk over PPP stuff probably allows Linux to be an AppleTalk
+Remote Access server. I'm not aware of anyone using that capability, (or
+if it even still works) but I would consider it distinct from LocalTalk.
 
-The prototype in the following patches is only for memory accounting
-using the GPU cgroup controller and does not implement limit setting.
+I would definitely be happy to test any patches to make sure that
+EtherTalk still works with netatalk afterward!
 
-[1]: https://lore.kernel.org/amd-gfx/20210126214626.16260-1-brian.welty@int=
-el.com/
-
-Signed-off-by: Hridya Valsaraju <hridya@google.com>
-Signed-off-by: T.J. Mercier <tjmercier@google.com>
-
----
-v7 changes
-Remove comment about duplicate name rejection which is not relevant to
-cgroups users per Michal Koutn=C3=BD.
-
-v6 changes
-Move documentation into cgroup-v2.rst per Tejun Heo.
-
-v5 changes
-Drop the global GPU cgroup "total" (sum of all device totals) portion
-of the design since there is no currently known use for this per
-Tejun Heo.
-
-Update for renamed functions/variables.
-
-v3 changes
-Remove Upstreaming Plan from gpu-cgroup.rst per John Stultz.
-
-Use more common dual author commit message format per John Stultz.
----
- Documentation/admin-guide/cgroup-v2.rst | 23 +++++++++++++++++++++++
- 1 file changed, 23 insertions(+)
-
-diff --git a/Documentation/admin-guide/cgroup-v2.rst b/Documentation/admin-=
-guide/cgroup-v2.rst
-index 69d7a6983f78..2e1d26e327c7 100644
---- a/Documentation/admin-guide/cgroup-v2.rst
-+++ b/Documentation/admin-guide/cgroup-v2.rst
-@@ -2352,6 +2352,29 @@ first, and stays charged to that cgroup until that r=
-esource is freed. Migrating
- a process to a different cgroup does not move the charge to the destinatio=
-n
- cgroup where the process has moved.
-=20
-+
-+GPU
-+---
-+
-+The GPU controller accounts for device and system memory allocated by the =
-GPU
-+and related subsystems for graphics use. Resource limits are not currently
-+supported.
-+
-+GPU Interface Files
-+~~~~~~~~~~~~~~~~~~~~
-+
-+  gpu.memory.current
-+	A read-only file containing memory allocations in flat-keyed format. The =
-key
-+	is a string representing the device name. The value is the size of the me=
-mory
-+	charged to the device in bytes. The device names are globally unique.::
-+
-+	  $ cat /sys/kernel/fs/cgroup1/gpu.memory.current
-+	  dev1 4194304
-+	  dev2 104857600
-+
-+	The device name string is set by a device driver when it registers with t=
-he
-+	GPU cgroup controller to participate in resource accounting.
-+
- Others
- ------
-=20
---=20
-2.36.0.512.ge40c2bad7a-goog
+Doug
 
