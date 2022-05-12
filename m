@@ -2,65 +2,64 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 7C2E25253E0
-	for <lists+linux-doc@lfdr.de>; Thu, 12 May 2022 19:40:29 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 1CF805254EF
+	for <lists+linux-doc@lfdr.de>; Thu, 12 May 2022 20:35:10 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1357146AbiELRkQ (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 12 May 2022 13:40:16 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:43360 "EHLO
+        id S1357607AbiELSfI (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 12 May 2022 14:35:08 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:42424 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1357140AbiELRkO (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Thu, 12 May 2022 13:40:14 -0400
-Received: from mga02.intel.com (mga02.intel.com [134.134.136.20])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 029EA26C4C5;
-        Thu, 12 May 2022 10:40:13 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1652377214; x=1683913214;
-  h=from:to:cc:subject:date:message-id:in-reply-to:
-   references:mime-version:content-transfer-encoding;
-  bh=lfHOk3NbKnCzKqrFFON5C5D8NThthEjbjuQAmQX0Sco=;
-  b=iNYtBVvUHVu/lm8x6WVos/NsUubUpvWOj80OmAzEyLs26iD56KOJq+rv
-   4NNkpWIzMrzLSOIeKcUSSeMznfY7Y3hBH72ujY8tgbu3vZkbqg49GuxkV
-   s3DswyUo9QpHJa1cTxxWt+s3ZiQejO3G6Kh3TNh4ySfFhv0qOti75rb3o
-   QFyc/xkliO0IT9p5UA8qBZZvSf7n0rcxeuELxTSlzBXxGr4UlUTM/k725
-   soj/hCgV+y/0mZ+B2POK5qraJgwSH+Vd7moCW/mvLOULGwM5+P+/pfUSW
-   Iqa1tbm9B4COc7nWxok5DUuXlzuIi0P2WD1979hqY9RsLV2TjvjUOXvvG
-   A==;
-X-IronPort-AV: E=McAfee;i="6400,9594,10345"; a="257634327"
-X-IronPort-AV: E=Sophos;i="5.91,220,1647327600"; 
-   d="scan'208";a="257634327"
-Received: from orsmga006.jf.intel.com ([10.7.209.51])
-  by orsmga101.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 12 May 2022 10:39:37 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.91,220,1647327600"; 
-   d="scan'208";a="542883705"
-Received: from black.fi.intel.com ([10.237.72.28])
-  by orsmga006.jf.intel.com with ESMTP; 12 May 2022 10:39:34 -0700
-Received: by black.fi.intel.com (Postfix, from userid 1003)
-        id 6698C103; Thu, 12 May 2022 20:39:33 +0300 (EEST)
-From:   Andy Shevchenko <andriy.shevchenko@linux.intel.com>
-To:     Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
-        Marc Zyngier <maz@kernel.org>,
-        Hans de Goede <hdegoede@redhat.com>,
-        linux-gpio@vger.kernel.org, linux-doc@vger.kernel.org,
-        linux-kernel@vger.kernel.org
-Cc:     Linus Walleij <linus.walleij@linaro.org>,
-        Bartosz Golaszewski <brgl@bgdev.pl>,
-        Jonathan Corbet <corbet@lwn.net>,
-        Mika Westerberg <mika.westerberg@linux.intel.com>,
-        Andy Shevchenko <andy@kernel.org>
-Subject: [PATCH v1 5/5] pinctrl: lynxpoint: make irq_chip immutable
-Date:   Thu, 12 May 2022 20:39:21 +0300
-Message-Id: <20220512173921.8210-5-andriy.shevchenko@linux.intel.com>
-X-Mailer: git-send-email 2.35.1
-In-Reply-To: <20220512173921.8210-1-andriy.shevchenko@linux.intel.com>
-References: <20220512173921.8210-1-andriy.shevchenko@linux.intel.com>
+        with ESMTP id S1350956AbiELSfG (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Thu, 12 May 2022 14:35:06 -0400
+X-Greylist: delayed 1320 seconds by postgrey-1.37 at lindbergh.monkeyblade.net; Thu, 12 May 2022 11:35:03 PDT
+Received: from carlson.workingcode.com (carlson.workingcode.com [50.78.21.49])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 668C569487;
+        Thu, 12 May 2022 11:35:03 -0700 (PDT)
+Received: from [50.78.21.49] (carlson [50.78.21.49])
+        (authenticated bits=0)
+        by carlson.workingcode.com (8.17.0.3/8.17.0.3/SUSE Linux 0.8) with ESMTPSA id 24CIBt8t021385
+        (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NO);
+        Thu, 12 May 2022 14:11:56 -0400
+DKIM-Filter: OpenDKIM Filter v2.11.0 carlson.workingcode.com 24CIBt8t021385
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=workingcode.com;
+        s=carlson; t=1652379117;
+        bh=fRLMsd/sUWYsl3gSss7SMn/poCCV3dWb8TFq8WtRz9s=;
+        h=Date:Subject:To:Cc:References:From:In-Reply-To;
+        b=vuudb8HLwzFiPoaejTPIwz5siefmhEK7MK7mi9bUPAMgP4GbhqNhYO3oFjeTAyk3N
+         CDHjPiRFe4eN1TgPiKPzRA7Jk3EMwDXkELCU6x5wWdwdbH5tYtcONOqjl+5vrSK+Bh
+         CIAF5oQzSCLoAYTM1YiR+di9wfFOUmbddWc94AF4=
+Message-ID: <0078ff43-f9fa-1deb-b64d-170d3d93ee6f@workingcode.com>
+Date:   Thu, 12 May 2022 14:11:55 -0400
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Spam-Status: No, score=-4.9 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_EF,RCVD_IN_DNSWL_MED,
-        RCVD_IN_MSPIKE_H3,RCVD_IN_MSPIKE_WL,SPF_HELO_NONE,SPF_NONE,
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
+ Thunderbird/91.3.2
+Subject: Re: [PATCH net-next] net: appletalk: remove Apple/Farallon LocalTalk
+ PC support
+Content-Language: en-US
+To:     Arnd Bergmann <arnd@arndb.de>, Doug Brown <doug@schmorgal.com>
+Cc:     Jakub Kicinski <kuba@kernel.org>,
+        David Miller <davem@davemloft.net>,
+        Networking <netdev@vger.kernel.org>,
+        Paolo Abeni <pabeni@redhat.com>,
+        Eric Dumazet <edumazet@google.com>,
+        Jonathan Corbet <corbet@lwn.net>,
+        Jiapeng Chong <jiapeng.chong@linux.alibaba.com>,
+        "open list:DOCUMENTATION" <linux-doc@vger.kernel.org>,
+        Paul Mackerras <paulus@samba.org>, linux-ppp@vger.kernel.org
+References: <20220509150130.1047016-1-kuba@kernel.org>
+ <CAK8P3a0FVM8g0LG3_mHJ1xX3Bs9cxae8ez7b9qvGOD+aJdc8Dw@mail.gmail.com>
+ <20220509103216.180be080@kernel.org>
+ <9cac4fbd-9557-b0b8-54fa-93f0290a6fb8@schmorgal.com>
+ <CAK8P3a1AA181LqQSxnToSVx0e5wmneUsOKfmnxVMsUNh465C_Q@mail.gmail.com>
+ <d7076f95-b25b-3694-1ec2-9b9ff93633b7@schmorgal.com>
+ <CAK8P3a3Tj=aJM_-x17uw1yJ-5+DgKX6APgEaO0sa=aRBKya1XQ@mail.gmail.com>
+From:   James Carlson <carlsonj@workingcode.com>
+In-Reply-To: <CAK8P3a3Tj=aJM_-x17uw1yJ-5+DgKX6APgEaO0sa=aRBKya1XQ@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-DCC--Metrics: carlson 1102; Body=12 Fuz1=12 Fuz2=12
+X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,DKIM_INVALID,
+        DKIM_SIGNED,NICE_REPLY_A,RCVD_IN_DNSWL_MED,SPF_HELO_PASS,SPF_PASS,
         T_SCC_BODY_TEXT_LINE autolearn=ham autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
@@ -68,115 +67,45 @@ Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Since recently, the kernel is nagging about mutable irq_chips:
+On 5/11/22 04:23, Arnd Bergmann wrote:
+> indication of appletalk ever being supported there, this all looks
+> IPv4/IPv6 specific. There was support for PPP_IPX until it was
+> dropped this year (the kernel side got removed in 2018), but never
+> for PPP_AT.
+> Adding Paul Mackerras to Cc, he might know more about it.
 
-   "not an immutable chip, please consider fixing it!"
+I waited a bit before chipping in, as I think Paul would know more.
 
-Drop the unneeded copy, flag it as IRQCHIP_IMMUTABLE, add the new
-helper functions and call the appropriate gpiolib functions.
+The ATCP stuff was in at least a few vendor branches, but I don't think
+it ever made it into the main distribution. These commits seem to be
+where the (disabled by default) references to it first appeared:
 
-While at it, switch hwirq variable to use the correct type for
-the sake of consistency.
+commit 50c9469f0f683c7bf8ebad9b7f97bfc03c6a4122
+Author: Paul Mackerras <paulus@samba.org>
+Date:   Tue Mar 4 03:32:37 1997 +0000
 
-Signed-off-by: Andy Shevchenko <andriy.shevchenko@linux.intel.com>
----
- drivers/pinctrl/intel/pinctrl-lynxpoint.c | 26 ++++++++++++++---------
- 1 file changed, 16 insertions(+), 10 deletions(-)
+    add defs for appletalk
 
-diff --git a/drivers/pinctrl/intel/pinctrl-lynxpoint.c b/drivers/pinctrl/intel/pinctrl-lynxpoint.c
-index 561fa322b0b4..4fb39eb30902 100644
---- a/drivers/pinctrl/intel/pinctrl-lynxpoint.c
-+++ b/drivers/pinctrl/intel/pinctrl-lynxpoint.c
-@@ -663,7 +663,7 @@ static void lp_irq_ack(struct irq_data *d)
- {
- 	struct gpio_chip *gc = irq_data_get_irq_chip_data(d);
- 	struct intel_pinctrl *lg = gpiochip_get_data(gc);
--	u32 hwirq = irqd_to_hwirq(d);
-+	irq_hw_number_t hwirq = irqd_to_hwirq(d);
- 	void __iomem *reg = lp_gpio_reg(&lg->chip, hwirq, LP_INT_STAT);
- 	unsigned long flags;
- 
-@@ -684,10 +684,12 @@ static void lp_irq_enable(struct irq_data *d)
- {
- 	struct gpio_chip *gc = irq_data_get_irq_chip_data(d);
- 	struct intel_pinctrl *lg = gpiochip_get_data(gc);
--	u32 hwirq = irqd_to_hwirq(d);
-+	irq_hw_number_t hwirq = irqd_to_hwirq(d);
- 	void __iomem *reg = lp_gpio_reg(&lg->chip, hwirq, LP_INT_ENABLE);
- 	unsigned long flags;
- 
-+	gpiochip_enable_irq(gc, hwirq);
-+
- 	raw_spin_lock_irqsave(&lg->lock, flags);
- 	iowrite32(ioread32(reg) | BIT(hwirq % 32), reg);
- 	raw_spin_unlock_irqrestore(&lg->lock, flags);
-@@ -697,30 +699,33 @@ static void lp_irq_disable(struct irq_data *d)
- {
- 	struct gpio_chip *gc = irq_data_get_irq_chip_data(d);
- 	struct intel_pinctrl *lg = gpiochip_get_data(gc);
--	u32 hwirq = irqd_to_hwirq(d);
-+	irq_hw_number_t hwirq = irqd_to_hwirq(d);
- 	void __iomem *reg = lp_gpio_reg(&lg->chip, hwirq, LP_INT_ENABLE);
- 	unsigned long flags;
- 
- 	raw_spin_lock_irqsave(&lg->lock, flags);
- 	iowrite32(ioread32(reg) & ~BIT(hwirq % 32), reg);
- 	raw_spin_unlock_irqrestore(&lg->lock, flags);
-+
-+	gpiochip_disable_irq(gc, hwirq);
- }
- 
- static int lp_irq_set_type(struct irq_data *d, unsigned int type)
- {
- 	struct gpio_chip *gc = irq_data_get_irq_chip_data(d);
- 	struct intel_pinctrl *lg = gpiochip_get_data(gc);
--	u32 hwirq = irqd_to_hwirq(d);
--	void __iomem *reg = lp_gpio_reg(&lg->chip, hwirq, LP_CONFIG1);
-+	irq_hw_number_t hwirq = irqd_to_hwirq(d);
- 	unsigned long flags;
-+	void __iomem *reg;
- 	u32 value;
- 
--	if (hwirq >= lg->chip.ngpio)
-+	reg = lp_gpio_reg(&lg->chip, hwirq, LP_CONFIG1);
-+	if (!reg)
- 		return -EINVAL;
- 
- 	/* Fail if BIOS reserved pin for ACPI use */
- 	if (lp_gpio_acpi_use(lg, hwirq)) {
--		dev_err(lg->dev, "pin %u can't be used as IRQ\n", hwirq);
-+		dev_err(lg->dev, "pin %lu can't be used as IRQ\n", hwirq);
- 		return -EBUSY;
- 	}
- 
-@@ -755,7 +760,7 @@ static int lp_irq_set_type(struct irq_data *d, unsigned int type)
- 	return 0;
- }
- 
--static struct irq_chip lp_irqchip = {
-+static const struct irq_chip lp_irqchip = {
- 	.name = "LP-GPIO",
- 	.irq_ack = lp_irq_ack,
- 	.irq_mask = lp_irq_mask,
-@@ -763,7 +768,8 @@ static struct irq_chip lp_irqchip = {
- 	.irq_enable = lp_irq_enable,
- 	.irq_disable = lp_irq_disable,
- 	.irq_set_type = lp_irq_set_type,
--	.flags = IRQCHIP_SKIP_SET_WAKE,
-+	.flags = IRQCHIP_SKIP_SET_WAKE | IRQCHIP_IMMUTABLE,
-+	GPIOCHIP_IRQ_RESOURCE_HELPERS,
- };
- 
- static int lp_gpio_irq_init_hw(struct gpio_chip *chip)
-@@ -884,7 +890,7 @@ static int lp_gpio_probe(struct platform_device *pdev)
- 		struct gpio_irq_chip *girq;
- 
- 		girq = &gc->irq;
--		girq->chip = &lp_irqchip;
-+		gpio_irq_chip_set_chip(girq, &lp_irqchip);
- 		girq->init_hw = lp_gpio_irq_init_hw;
- 		girq->parent_handler = lp_gpio_irq_handler;
- 		girq->num_parents = 1;
+commit 01548ef15e0f41f9f6af33860fb459a7f578f004
+Author: Paul Mackerras <paulus@samba.org>
+Date:   Tue Mar 4 03:41:17 1997 +0000
+
+    connect time stuff gone to auth.c,
+    don't die on EINTR from opening tty,
+    ignore NCP packets during authentication,
+    fix recursive signal problem in kill_my_pg
+
+The disabled-by-default parts were likely support contributions for
+those other distributions. (Very likely in BSD.)
+
+I would've thought AppleTalk was completely gone by now, and I certainly
+would not be sad to see the dregs removed from pppd, but there was a
+patch release on the netatalk package just last month, so what do I know?
+
+(The only possible reason I can see to keep any ATCP bits around at all
+is to make sure we can write nice-looking log messages -- to say we're
+rejecting "AppleTalk Control Protocol" rather than "unknown 8029." But
+that'd be a very minor feature.)
+
 -- 
-2.35.1
-
+James Carlson     42.703N 71.076W FN42lq08    <carlsonj@workingcode.com>
