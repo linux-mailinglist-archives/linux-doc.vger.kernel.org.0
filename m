@@ -2,133 +2,75 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 921EE527008
-	for <lists+linux-doc@lfdr.de>; Sat, 14 May 2022 10:34:40 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id A6F02527011
+	for <lists+linux-doc@lfdr.de>; Sat, 14 May 2022 10:50:12 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S230148AbiENIej (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Sat, 14 May 2022 04:34:39 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:43192 "EHLO
+        id S229606AbiENIuK (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Sat, 14 May 2022 04:50:10 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:43412 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S230117AbiENIeh (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Sat, 14 May 2022 04:34:37 -0400
-Received: from mail-wm1-x331.google.com (mail-wm1-x331.google.com [IPv6:2a00:1450:4864:20::331])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 1A34918F
-        for <linux-doc@vger.kernel.org>; Sat, 14 May 2022 01:34:36 -0700 (PDT)
-Received: by mail-wm1-x331.google.com with SMTP id n6-20020a05600c3b8600b0039492b44ce7so5860420wms.5
-        for <linux-doc@vger.kernel.org>; Sat, 14 May 2022 01:34:36 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=google.com; s=20210112;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc;
-        bh=Wqqxn5+q5xmPpZtFRIbD60XulpYnUc5+LRYDs7jEaLY=;
-        b=BRlzdhTV9zT8+bxHgq0iD5R/JhGL/k8jAR9b7CiU8hDeCgzVWFrrjTP0aHZq5tQ8XX
-         3pYNl+Xbb81AWFyTev3K9GimQzlDxKm5/ng/W1WSUjRhKZN93OQN0hDCuANEnE1eNUL6
-         +aUzBtR+QI4bADN71NUFlQC83QglUyIurXGuydMevh73G+uVG3TYo/sIvqErTRAzb58h
-         nzGFgjXKmB/RG2aqyyKCKKFmMioLSkKXxX9GlafBjaZm1KrP7Lw/OTZCsI8ACoMpACYq
-         Rphk6LNz2/OeuYMnsUUf1WipjrlSd1VS+CWBrGJUgfc8Muq8FPXmuSTbP+VZ/Q+iIMod
-         U5zQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc;
-        bh=Wqqxn5+q5xmPpZtFRIbD60XulpYnUc5+LRYDs7jEaLY=;
-        b=DXBErIedjFKnjbNwHakQo+V3yG0QJ0znbbBmsyHYtYJEGgBSz3cjZmWzWUkPeP3vC+
-         T3m+FCWG9msBys3cBV+hkIw83ZYSjys0aUtoGnmDsE9xY/Jx3o7LCAW8SaYsIsrn+MPJ
-         dr8QQx4wwvieTgAl+JA+qIWLCjMS8QUIMJ8ZdnQrzruGzyvVFIT+BjKtKHqrOt1qBN4J
-         /IgFKPAz4N8yeIBOW+y/UnbUmFluSLByGQf74QoAmEdi8Qbs5qf8TLAhQ4wtRvbEleIO
-         qecgTpC+YyeFZqR/EIoCVKYvkG6UQ8VIGBEoWim5bEjetunMCtQXAIw3nE12M50BB9bj
-         CAnw==
-X-Gm-Message-State: AOAM531qw+0rxqdcgo0Jd8VyNuU8tlyiLQJpwagQOGoDGTJDJo2WjoZe
-        UsAng9uEWm5k826qjaCPjS3inl9dLvr3EWWwcfhSLA==
-X-Google-Smtp-Source: ABdhPJw8xpJdudoWgJ+1Jx86Q9PASwEwAJPZhccKtWf1cQJ07oWyo0/CpzTe9bNFHE+Eixp2zZJuUPINfVgMRPZ/+Bw=
-X-Received: by 2002:a05:600c:1d9f:b0:394:7a51:cb8b with SMTP id
- p31-20020a05600c1d9f00b003947a51cb8bmr8040011wms.163.1652517274539; Sat, 14
- May 2022 01:34:34 -0700 (PDT)
+        with ESMTP id S229733AbiENIuJ (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Sat, 14 May 2022 04:50:09 -0400
+Received: from loongson.cn (mail.loongson.cn [114.242.206.163])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTP id A66DD1082
+        for <linux-doc@vger.kernel.org>; Sat, 14 May 2022 01:50:06 -0700 (PDT)
+Received: from localhost.localdomain (unknown [112.20.109.92])
+        by mail.loongson.cn (Coremail) with SMTP id AQAAf9Axutg5bX9iX2oVAA--.5166S2;
+        Sat, 14 May 2022 16:50:02 +0800 (CST)
+From:   Yanteng Si <siyanteng@loongson.cn>
+To:     corbet@lwn.net, alexs@kernel.org, seakeel@gmail.com
+Cc:     Yanteng Si <siyanteng@loongson.cn>, chenhuacai@kernel.org,
+        jiaxun.yang@flygoat.com, linux-doc@vger.kernel.org,
+        siyanteng01@gmail.com
+Subject: [PATCH v2 0/2] docs/zh_CN: add page_migration and vmalloced-kernel-stacks translation
+Date:   Sat, 14 May 2022 16:51:27 +0800
+Message-Id: <cover.1652517913.git.siyanteng@loongson.cn>
+X-Mailer: git-send-email 2.27.0
 MIME-Version: 1.0
-References: <20220429043913.626647-1-davidgow@google.com> <20220513083212.3537869-3-davidgow@google.com>
- <Yn57d1e6k8uv2uQj@bombadil.infradead.org>
-In-Reply-To: <Yn57d1e6k8uv2uQj@bombadil.infradead.org>
-From:   David Gow <davidgow@google.com>
-Date:   Sat, 14 May 2022 16:34:23 +0800
-Message-ID: <CABVgOSkhr6xfgXZWW6UdbU4MpAvqsDOsqVP0THsH0gVB949HjA@mail.gmail.com>
-Subject: Re: [PATCH v3 3/3] selftest: Taint kernel when test module loaded
-To:     Luis Chamberlain <mcgrof@kernel.org>
-Cc:     Brendan Higgins <brendanhiggins@google.com>,
-        Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
-        Jonathan Corbet <corbet@lwn.net>,
-        Andrew Morton <akpm@linux-foundation.org>,
-        Kees Cook <keescook@chromium.org>,
-        Shuah Khan <skhan@linuxfoundation.org>,
-        Greg KH <gregkh@linuxfoundation.org>,
-        "Guilherme G . Piccoli" <gpiccoli@igalia.com>,
-        Sebastian Reichel <sre@kernel.org>,
-        John Ogness <john.ogness@linutronix.de>,
-        Joe Fradley <joefradley@google.com>,
-        Daniel Latypov <dlatypov@google.com>,
-        KUnit Development <kunit-dev@googlegroups.com>,
-        "open list:KERNEL SELFTEST FRAMEWORK" 
-        <linux-kselftest@vger.kernel.org>,
-        "open list:DOCUMENTATION" <linux-doc@vger.kernel.org>,
-        Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
-        Jani Nikula <jani.nikula@linux.intel.com>,
-        Lucas De Marchi <lucas.demarchi@intel.com>,
-        Aaron Tomlin <atomlin@redhat.com>,
-        linux-fsdevel@vger.kernel.org, linux-block@vger.kernel.org
-Content-Type: text/plain; charset="UTF-8"
-X-Spam-Status: No, score=-17.6 required=5.0 tests=BAYES_00,DKIMWL_WL_MED,
-        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,
-        ENV_AND_HDR_SPF_MATCH,RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,SPF_PASS,
-        T_SCC_BODY_TEXT_LINE,USER_IN_DEF_DKIM_WL,USER_IN_DEF_SPF_WL
-        autolearn=ham autolearn_force=no version=3.4.6
+Content-Transfer-Encoding: 8bit
+X-CM-TRANSID: AQAAf9Axutg5bX9iX2oVAA--.5166S2
+X-Coremail-Antispam: 1UD129KBjvdXoWruFW8JrykAFW3AFWDXFy7Wrg_yoWxKFX_Zw
+        4kJFWFyr9rtF9rKFWFkF4xXryakF4rKry8tFy5ta98W39rGrWDK34DX3Z09a98XrsrZry5
+        GrWDtr1vyrnFgjkaLaAFLSUrUUUUUb8apTn2vfkv8UJUUUU8Yxn0WfASr-VFAUDa7-sFnT
+        9fnUUIcSsGvfJTRUUUbcAFF20E14v26r4j6ryUM7CY07I20VC2zVCF04k26cxKx2IYs7xG
+        6rWj6s0DM7CIcVAFz4kK6r1j6r18M28lY4IEw2IIxxk0rwA2F7IY1VAKz4vEj48ve4kI8w
+        A2z4x0Y4vE2Ix0cI8IcVAFwI0_JFI_Gr1l84ACjcxK6xIIjxv20xvEc7CjxVAFwI0_Gr0_
+        Cr1l84ACjcxK6I8E87Iv67AKxVW8Jr0_Cr1UM28EF7xvwVC2z280aVCY1x0267AKxVW8Jr
+        0_Cr1UM2AIxVAIcxkEcVAq07x20xvEncxIr21l5I8CrVACY4xI64kE6c02F40Ex7xfMcIj
+        6xIIjxv20xvE14v26r106r15McIj6I8E87Iv67AKxVWUJVW8JwAm72CE4IkC6x0Yz7v_Jr
+        0_Gr1lF7xvr2IYc2Ij64vIr41lF7I21c0EjII2zVCS5cI20VAGYxC7MxkIecxEwVAFwVW8
+        ZwCF04k20xvY0x0EwIxGrwCFx2IqxVCFs4IE7xkEbVWUJVW8JwC20s026c02F40E14v26r
+        1j6r18MI8I3I0E7480Y4vE14v26r106r1rMI8E67AF67kF1VAFwI0_Jw0_GFylIxkGc2Ij
+        64vIr41lIxAIcVC0I7IYx2IY67AKxVWUJVWUCwCI42IY6xIIjxv20xvEc7CjxVAFwI0_Jr
+        0_Gr1lIxAIcVCF04k26cxKx2IYs7xG6rW3Jr0E3s1lIxAIcVC2z280aVAFwI0_Jr0_Gr1l
+        IxAIcVC2z280aVCY1x0267AKxVWUJVW8JbIYCTnIWIevJa73UjIFyTuYvjfUOnmRUUUUU
+X-CM-SenderInfo: pvl1t0pwhqwqxorr0wxvrqhubq/
+X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00,SPF_HELO_PASS,
+        SPF_PASS,T_SCC_BODY_TEXT_LINE autolearn=ham autolearn_force=no
+        version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Fri, May 13, 2022 at 11:38 PM Luis Chamberlain <mcgrof@kernel.org> wrote:
->
-> On Fri, May 13, 2022 at 04:32:13PM +0800, David Gow wrote:
-> > Make any kselftest test module (using the kselftest_module framework)
-> > taint the kernel with TAINT_TEST on module load.
-> >
-> > Note that several selftests use kernel modules which are not based on
-> > the kselftest_module framework, and so will not automatically taint the
-> > kernel. These modules will have to be manually modified if they should
-> > taint the kernel this way.
-> >
-> > Similarly, selftests which do not load modules into the kernel generally
-> > should not taint the kernel (or possibly should only do so on failure),
-> > as it's assumed that testing from user-space should be safe. Regardless,
-> > they can write to /proc/sys/kernel/tainted if required.
-> >
-> > Signed-off-by: David Gow <davidgow@google.com>
->
-> Not all selftest modules use KSTM_MODULE_LOADERS() so I'd like to see a
-> modpost target as well, otherwise this just covers a sliver of
-> selftests.
->
+v2:
+Resolving conflicts on next-20220513.
 
-My personal feeling is that the ideal way of solving this is actually
-to port those modules which aren't using KSTM_MODULE_LOADERS() (or
-KUnit, or some other system) to do so, or to otherwise manually tag
-them as selftests and/or make them taint the kernel.
+v1:
+Translate .../vm/page_migration.rst and .../vm/vmalloced-kernel-stacks.rst into Chinese.
 
-That being said, we can gain a bit my making the module-loading
-helpers in kselftest/module.sh manually taint the kernel with
-/proc/sys/kernel/tainted, which will catch quite a few of them (even
-if tainting from userspace before they're loaded is suboptimal).
+Yanteng Si (2):
+  docs/zh_CN: add vm page_migration translation
+  docs/zh_CN: add vm vmalloced-kernel-stacks translation
 
-I've also started experimenting with a "test" MODULE_INFO field, which
-modpost would add with the -t option. That still requires sprinkling
-MODULE_INFO() everwhere, or the '-t' option to a bunch of makefiles,
-or doing something more drastic to set it automatically for modules in
-a given directory / makefile. Or the staging thing of checking the
-directory / prefix in modpost.
+ Documentation/translations/zh_CN/vm/index.rst |   4 +-
+ .../translations/zh_CN/vm/page_migration.rst  | 229 ++++++++++++++++++
+ .../zh_CN/vm/vmalloced-kernel-stacks.rst      | 133 ++++++++++
+ 3 files changed, 364 insertions(+), 2 deletions(-)
+ create mode 100644 Documentation/translations/zh_CN/vm/page_migration.rst
+ create mode 100644 Documentation/translations/zh_CN/vm/vmalloced-kernel-stacks.rst
 
-I'll play around some more and have something to show in v4. (If we
-have a MODULE_INFO field, we should use it for KUnit modules, but we'd
-still have to taint the kernel manually for built-in tests anyway, so
-it'd be redundant...)
+-- 
+2.27.0
 
--- David
