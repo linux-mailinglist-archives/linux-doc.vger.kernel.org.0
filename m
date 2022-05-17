@@ -2,111 +2,162 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 42C4F529CC6
-	for <lists+linux-doc@lfdr.de>; Tue, 17 May 2022 10:41:57 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 6CF75529D87
+	for <lists+linux-doc@lfdr.de>; Tue, 17 May 2022 11:11:48 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S240840AbiEQIlx (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 17 May 2022 04:41:53 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:34302 "EHLO
+        id S237954AbiEQJK4 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 17 May 2022 05:10:56 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:35282 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S243751AbiEQIlw (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 17 May 2022 04:41:52 -0400
-Received: from mga17.intel.com (mga17.intel.com [192.55.52.151])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 0E4C343386;
-        Tue, 17 May 2022 01:41:51 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1652776912; x=1684312912;
-  h=from:to:cc:subject:date:message-id:mime-version:
-   content-transfer-encoding;
-  bh=re/TqJfiXB30NBiMpSKQEhgi6oL5bPlUI1K2WqBpPyI=;
-  b=FkvIYFUHXiUo8qs49/a4zPzp1LyXe46v3vEIoITARqT0bwV27quXPLG6
-   2wxcACdsyrW1Uz0Vf9pLIjt0/B2BcR+snDSnRVr0KOMlmx4OKDUuVvcZW
-   tPYoNvpyQSHJuHArusgTt1nVnS2MXq6yVLLiKkiYp1Dvyk7y3gH27cct8
-   nrxGahKNM7Ccilv+mzHHQDWW80uYQRLM7n/4vCS6+1GaAVXX0mzaiqtFx
-   yE4FgAY0RRpJ3XrYUO7RCR8sHZ/WiOyG9bvwac9QFFWEcOVyMSrHrVfHr
-   pmTdFoyWZYkClwRZYgCmq/1UqrFnjQYq6YhXFLKvrAFhjOAJZ3iaRIfrk
-   g==;
-X-IronPort-AV: E=McAfee;i="6400,9594,10349"; a="251626293"
-X-IronPort-AV: E=Sophos;i="5.91,232,1647327600"; 
-   d="scan'208";a="251626293"
-Received: from fmsmga008.fm.intel.com ([10.253.24.58])
-  by fmsmga107.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 17 May 2022 01:41:51 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.91,232,1647327600"; 
-   d="scan'208";a="626371481"
-Received: from pglc1026.png.intel.com ([172.30.19.132])
-  by fmsmga008.fm.intel.com with ESMTP; 17 May 2022 01:41:48 -0700
-From:   adrian.ho.yin.ng@intel.com
-To:     Moritz Fischer <mdf@kernel.org>, Wu Hao <hao.wu@intel.com>,
-        Xu Yilun <yilun.xu@intel.com>, Tom Rix <trix@redhat.com>,
-        Jonathan Corbet <corbet@lwn.net>
-Cc:     linux-fpga@vger.kernel.org, linux-doc@vger.kernel.org,
-        Matthew Gerlach <matthew.gerlach@intel.com>,
-        Matthew Gerlach <matthew.gerlach@linux.intel.com>
-Subject: [PATCH 3/3] add debugfs interface for fpga config complete timeout
-Date:   Tue, 17 May 2022 16:41:46 +0800
-Message-Id: <20220517084146.4510-1-adrian.ho.yin.ng@intel.com>
-X-Mailer: git-send-email 2.19.0
+        with ESMTP id S244151AbiEQJKc (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 17 May 2022 05:10:32 -0400
+Received: from szxga08-in.huawei.com (szxga08-in.huawei.com [45.249.212.255])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id DE6F94B86F;
+        Tue, 17 May 2022 02:08:47 -0700 (PDT)
+Received: from dggpemm500023.china.huawei.com (unknown [172.30.72.54])
+        by szxga08-in.huawei.com (SkyGuard) with ESMTP id 4L2Vct2Mtjz1JCB9;
+        Tue, 17 May 2022 17:07:26 +0800 (CST)
+Received: from dggpemm500002.china.huawei.com (7.185.36.229) by
+ dggpemm500023.china.huawei.com (7.185.36.83) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2375.24; Tue, 17 May 2022 17:08:46 +0800
+Received: from [10.174.178.178] (10.174.178.178) by
+ dggpemm500002.china.huawei.com (7.185.36.229) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2375.24; Tue, 17 May 2022 17:08:45 +0800
+Message-ID: <0db235d3-7aa8-7b4d-af99-c6e3364738de@huawei.com>
+Date:   Tue, 17 May 2022 17:08:45 +0800
 MIME-Version: 1.0
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:91.0) Gecko/20100101
+ Thunderbird/91.0.3
+Subject: Re: [PATCH 1/2] psi: add support for multi level pressure stall
+ trigger
+To:     Alex Shi <seakeel@gmail.com>, <linux-kernel@vger.kernel.org>,
+        <hannes@cmpxchg.org>, <surenb@google.com>, <alexs@kernel.org>,
+        <corbet@lwn.net>, <linux-doc@vger.kernel.org>
+References: <20220516033524.3130816-1-chenwandun@huawei.com>
+ <30b37eeb-e77b-882e-fc24-3367321a8ca3@gmail.com>
+From:   Chen Wandun <chenwandun@huawei.com>
+In-Reply-To: <30b37eeb-e77b-882e-fc24-3367321a8ca3@gmail.com>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
 Content-Transfer-Encoding: 8bit
-X-Spam-Status: No, score=-4.5 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_MED,
-        SPF_HELO_NONE,SPF_NONE,T_SCC_BODY_TEXT_LINE autolearn=ham
-        autolearn_force=no version=3.4.6
+X-Originating-IP: [10.174.178.178]
+X-ClientProxiedBy: dggems701-chm.china.huawei.com (10.3.19.178) To
+ dggpemm500002.china.huawei.com (7.185.36.229)
+X-CFilter-Loop: Reflected
+X-Spam-Status: No, score=-6.3 required=5.0 tests=BAYES_00,NICE_REPLY_A,
+        RCVD_IN_DNSWL_MED,SPF_HELO_NONE,SPF_PASS,T_SCC_BODY_TEXT_LINE
+        autolearn=ham autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-From: Matthew Gerlach <matthew.gerlach@intel.com>
 
-Add debugfs interface and documentation for setting the maximum
-time in microseconds for the FPGA to go to the operating
-state after the region has been programmed.
 
-Signed-off-by: Matthew Gerlach <matthew.gerlach@linux.intel.com>
----
- Documentation/fpga/debugfs.txt  | 6 ++++++
- drivers/fpga/fpga-mgr-debugfs.c | 5 +++++
- 2 files changed, 11 insertions(+)
+在 2022/5/16 14:20, Alex Shi 写道:
+>
+> On 5/16/22 11:35, Chen Wandun wrote:
+>> Nowadays, psi events are triggered when stall time exceed
+>> stall threshold, but no any different between these events.
+>>
+>> Actually, events can be divide into multi level, each level
+>> represent a different stall pressure, that is help to identify
+>> pressure information more accurately.
+>>
+>> echo "some 150000 350000 1000000" > /proc/pressure/memory would
+> This breaks the old ABI. And why you need this new function?
+We want to do different measures according to different stall levels,
 
-diff --git a/Documentation/fpga/debugfs.txt b/Documentation/fpga/debugfs.txt
-index 1b34d5460d5d..b01950f76e20 100644
---- a/Documentation/fpga/debugfs.txt
-+++ b/Documentation/fpga/debugfs.txt
-@@ -9,6 +9,12 @@ three files:
- 
-    $ echo 1 > /sys/kernel/debug/fpga_manager/fpga0/flags
- 
-+ - [RW] config_complete_timeout_us:	time out in microseconds to wait for
-+					FPGA to go to operating state after
-+					region has been programmed.
-+
-+   $ echo 4 > /sys/kernel/debug/fpga_manager/fpga0/config_complete_timeout_us
-+
-  - [RW] firmware_name:  Name of an FPGA image firmware file.  Writing initiates
-                         a complete FPGA programming cycle.  Note that the image
-                         file must be in a directory on the firmware search path
-diff --git a/drivers/fpga/fpga-mgr-debugfs.c b/drivers/fpga/fpga-mgr-debugfs.c
-index 30af59b92bf3..83b712d4eb14 100644
---- a/drivers/fpga/fpga-mgr-debugfs.c
-+++ b/drivers/fpga/fpga-mgr-debugfs.c
-@@ -153,8 +153,13 @@ void fpga_mgr_debugfs_add(struct fpga_manager *mgr)
- 			    &fpga_mgr_image_fops);
- 
- 	info = &debugfs->info;
-+
- 	debugfs_create_u32("flags", 0600, debugfs->debugfs_dir, &info->flags);
- 
-+	debugfs_create_u32("config_complete_timeout_us", 0600,
-+			   debugfs->debugfs_dir,
-+			   &info->config_complete_timeout_us);
-+
- 	mgr->debugfs = debugfs;
- }
- 
--- 
-2.26.2
+In small stall case, maybe only low level warning is needed,  In big
+
+stall case, maybe aggressive memory reclaim is needed.
+
+so it is necessary to distinguish different levels.
+>
+> Thanks
+>
+>> add [150ms, 350ms) threshold for partial memory stall measured
+>> within 1sec time window.
+>>
+>> Signed-off-by: Chen Wandun <chenwandun@huawei.com>
+>> ---
+>>   include/linux/psi_types.h |  3 ++-
+>>   kernel/sched/psi.c        | 19 +++++++++++++------
+>>   2 files changed, 15 insertions(+), 7 deletions(-)
+>>
+>> diff --git a/include/linux/psi_types.h b/include/linux/psi_types.h
+>> index c7fe7c089718..2b1393c8bf90 100644
+>> --- a/include/linux/psi_types.h
+>> +++ b/include/linux/psi_types.h
+>> @@ -119,7 +119,8 @@ struct psi_trigger {
+>>   	enum psi_states state;
+>>   
+>>   	/* User-spacified threshold in ns */
+>> -	u64 threshold;
+>> +	u64 min_threshold;
+>> +	u64 max_threshold;
+>>   
+>>   	/* List node inside triggers list */
+>>   	struct list_head node;
+>> diff --git a/kernel/sched/psi.c b/kernel/sched/psi.c
+>> index 6f9533c95b0a..17dd233b533a 100644
+>> --- a/kernel/sched/psi.c
+>> +++ b/kernel/sched/psi.c
+>> @@ -541,7 +541,7 @@ static u64 update_triggers(struct psi_group *group, u64 now)
+>>   
+>>   			/* Calculate growth since last update */
+>>   			growth = window_update(&t->win, now, total[t->state]);
+>> -			if (growth < t->threshold)
+>> +			if (growth < t->min_threshold || growth >= t->max_threshold)
+>>   				continue;
+>>   
+>>   			t->pending_event = true;
+>> @@ -1087,15 +1087,18 @@ struct psi_trigger *psi_trigger_create(struct psi_group *group,
+>>   {
+>>   	struct psi_trigger *t;
+>>   	enum psi_states state;
+>> -	u32 threshold_us;
+>> +	u32 min_threshold_us;
+>> +	u32 max_threshold_us;
+>>   	u32 window_us;
+>>   
+>>   	if (static_branch_likely(&psi_disabled))
+>>   		return ERR_PTR(-EOPNOTSUPP);
+>>   
+>> -	if (sscanf(buf, "some %u %u", &threshold_us, &window_us) == 2)
+>> +	if (sscanf(buf, "some %u %u %u", &min_threshold_us,
+>> +				&max_threshold_us, &window_us) == 3)
+>>   		state = PSI_IO_SOME + res * 2;
+>> -	else if (sscanf(buf, "full %u %u", &threshold_us, &window_us) == 2)
+>> +	else if (sscanf(buf, "full %u %u %u", &min_threshold_us,
+>> +				&max_threshold_us, &window_us) == 3)
+>>   		state = PSI_IO_FULL + res * 2;
+>>   	else
+>>   		return ERR_PTR(-EINVAL);
+>> @@ -1107,8 +1110,11 @@ struct psi_trigger *psi_trigger_create(struct psi_group *group,
+>>   		window_us > WINDOW_MAX_US)
+>>   		return ERR_PTR(-EINVAL);
+>>   
+>> +	if (min_threshold_us >= max_threshold_us)
+>> +		return ERR_PTR(-EINVAL);
+>> +
+>>   	/* Check threshold */
+>> -	if (threshold_us == 0 || threshold_us > window_us)
+>> +	if (max_threshold_us > window_us)
+>>   		return ERR_PTR(-EINVAL);
+>>   
+>>   	t = kmalloc(sizeof(*t), GFP_KERNEL);
+>> @@ -1117,7 +1123,8 @@ struct psi_trigger *psi_trigger_create(struct psi_group *group,
+>>   
+>>   	t->group = group;
+>>   	t->state = state;
+>> -	t->threshold = threshold_us * NSEC_PER_USEC;
+>> +	t->min_threshold = min_threshold_us * NSEC_PER_USEC;
+>> +	t->max_threshold = max_threshold_us * NSEC_PER_USEC;
+>>   	t->win.size = window_us * NSEC_PER_USEC;
+>>   	window_reset(&t->win, 0, 0, 0);
+>>   
+> .
 
