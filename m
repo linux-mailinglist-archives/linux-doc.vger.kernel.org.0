@@ -2,24 +2,24 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id B33AB529EF5
-	for <lists+linux-doc@lfdr.de>; Tue, 17 May 2022 12:12:07 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id ACEE1529EF2
+	for <lists+linux-doc@lfdr.de>; Tue, 17 May 2022 12:12:05 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1343749AbiEQKMB (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 17 May 2022 06:12:01 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:45688 "EHLO
+        id S237132AbiEQKL5 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 17 May 2022 06:11:57 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:47238 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1343849AbiEQKKg (ORCPT
+        with ESMTP id S1343855AbiEQKKg (ORCPT
         <rfc822;linux-doc@vger.kernel.org>); Tue, 17 May 2022 06:10:36 -0400
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTP id 8D6664B428;
-        Tue, 17 May 2022 03:09:01 -0700 (PDT)
+        by lindbergh.monkeyblade.net (Postfix) with ESMTP id 0BB404B439;
+        Tue, 17 May 2022 03:09:04 -0700 (PDT)
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
-        by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 209131042;
-        Tue, 17 May 2022 03:09:01 -0700 (PDT)
+        by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id C355D1063;
+        Tue, 17 May 2022 03:09:03 -0700 (PDT)
 Received: from e121896.warwick.arm.com (e121896.warwick.arm.com [10.32.33.49])
-        by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPA id EB6603F66F;
-        Tue, 17 May 2022 03:08:58 -0700 (PDT)
+        by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPA id B07E43F66F;
+        Tue, 17 May 2022 03:09:01 -0700 (PDT)
 From:   James Clark <james.clark@arm.com>
 To:     linux-arm-kernel@lists.infradead.org, linux-kernel@vger.kernel.org,
         linux-perf-users@vger.kernel.org, broonie@kernel.org,
@@ -31,10 +31,12 @@ Cc:     german.gomez@arm.com, leo.yan@linaro.org,
         Will Deacon <will@kernel.org>,
         Jonathan Corbet <corbet@lwn.net>,
         Mark Rutland <mark.rutland@arm.com>, linux-doc@vger.kernel.org
-Subject: [PATCH v2 0/2] perf: arm64: Kernel support for Dwarf unwinding through SVE functions
-Date:   Tue, 17 May 2022 11:07:41 +0100
-Message-Id: <20220517100743.3020667-1-james.clark@arm.com>
+Subject: [PATCH v2 1/2] perf: arm64: Add SVE vector granule register to user regs
+Date:   Tue, 17 May 2022 11:07:42 +0100
+Message-Id: <20220517100743.3020667-2-james.clark@arm.com>
 X-Mailer: git-send-email 2.28.0
+In-Reply-To: <20220517100743.3020667-1-james.clark@arm.com>
+References: <20220517100743.3020667-1-james.clark@arm.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI,
@@ -46,37 +48,116 @@ Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Changes since v1:
+Dwarf based unwinding in a function that pushes SVE registers onto
+the stack requires the unwinder to know the length of the SVE register
+to calculate the stack offsets correctly. This was added to the Arm
+specific Dwarf spec as the VG pseudo register[1].
 
-  * Add Mark's review tag
-  * Clarify in docs that it's the SVE register length
-  * Split patchset into kernel side and Perf tool changes
+Add the vector length at position 46 if it's requested by userspace and
+SVE is supported. If it's not supported then fail to open the event.
 
-When SVE registers are pushed onto the stack the VG register is required to
-unwind because the stack offsets would vary by the SVE register width at the
-time when the sample was taken.
+The vector length must be on each sample because it can be changed
+at runtime via a prctl or ptrace call. Also by adding it as a register
+rather than a separate attribute, minimal changes will be required in an
+unwinder that already indexes into the register list.
 
-These first two patches add support for sampling the VG register to the kernel
-and the docs. There is another patchset to add support to userspace perf.
+[1]: https://github.com/ARM-software/abi-aa/blob/main/aadwarf64/aadwarf64.rst
 
-A small change is also required to libunwind or libdw depending on which
-unwinder is used, and these will be published later. Without these changes Perf
-continues to work with both libraries, although the VG register is still not
-used for unwinding. 
-
-Thanks
-James
-
-James Clark (2):
-  perf: arm64: Add SVE vector granule register to user regs
-  arm64/sve: Add Perf extensions documentation
-
- Documentation/arm64/sve.rst             | 20 +++++++++++++++++
+Reviewed-by: Mark Brown <broonie@kernel.org>
+Signed-off-by: James Clark <james.clark@arm.com>
+---
  arch/arm64/include/uapi/asm/perf_regs.h |  7 +++++-
  arch/arm64/kernel/perf_regs.c           | 30 +++++++++++++++++++++++--
  drivers/perf/arm_pmu.c                  |  2 +-
- 4 files changed, 55 insertions(+), 4 deletions(-)
+ 3 files changed, 35 insertions(+), 4 deletions(-)
 
+diff --git a/arch/arm64/include/uapi/asm/perf_regs.h b/arch/arm64/include/uapi/asm/perf_regs.h
+index d54daafa89e3..fd157f46727e 100644
+--- a/arch/arm64/include/uapi/asm/perf_regs.h
++++ b/arch/arm64/include/uapi/asm/perf_regs.h
+@@ -36,6 +36,11 @@ enum perf_event_arm_regs {
+ 	PERF_REG_ARM64_LR,
+ 	PERF_REG_ARM64_SP,
+ 	PERF_REG_ARM64_PC,
+-	PERF_REG_ARM64_MAX,
++
++	/* Extended/pseudo registers */
++	PERF_REG_ARM64_VG = 46, // SVE Vector Granule
++
++	PERF_REG_ARM64_MAX = PERF_REG_ARM64_PC + 1,
++	PERF_REG_ARM64_EXTENDED_MAX = PERF_REG_ARM64_VG + 1
+ };
+ #endif /* _ASM_ARM64_PERF_REGS_H */
+diff --git a/arch/arm64/kernel/perf_regs.c b/arch/arm64/kernel/perf_regs.c
+index f6f58e6265df..b4eece3eb17d 100644
+--- a/arch/arm64/kernel/perf_regs.c
++++ b/arch/arm64/kernel/perf_regs.c
+@@ -9,9 +9,27 @@
+ #include <asm/perf_regs.h>
+ #include <asm/ptrace.h>
+ 
++static u64 perf_ext_regs_value(int idx)
++{
++	switch (idx) {
++	case PERF_REG_ARM64_VG:
++		if (WARN_ON_ONCE(!system_supports_sve()))
++			return 0;
++
++		/*
++		 * Vector granule is current length in bits of SVE registers
++		 * divided by 64.
++		 */
++		return (task_get_sve_vl(current) * 8) / 64;
++	default:
++		WARN_ON_ONCE(true);
++		return 0;
++	}
++}
++
+ u64 perf_reg_value(struct pt_regs *regs, int idx)
+ {
+-	if (WARN_ON_ONCE((u32)idx >= PERF_REG_ARM64_MAX))
++	if (WARN_ON_ONCE((u32)idx >= PERF_REG_ARM64_EXTENDED_MAX))
+ 		return 0;
+ 
+ 	/*
+@@ -51,6 +69,9 @@ u64 perf_reg_value(struct pt_regs *regs, int idx)
+ 	if ((u32)idx == PERF_REG_ARM64_PC)
+ 		return regs->pc;
+ 
++	if ((u32)idx >= PERF_REG_ARM64_MAX)
++		return perf_ext_regs_value(idx);
++
+ 	return regs->regs[idx];
+ }
+ 
+@@ -58,7 +79,12 @@ u64 perf_reg_value(struct pt_regs *regs, int idx)
+ 
+ int perf_reg_validate(u64 mask)
+ {
+-	if (!mask || mask & REG_RESERVED)
++	u64 reserved_mask = REG_RESERVED;
++
++	if (system_supports_sve())
++		reserved_mask &= ~(1ULL << PERF_REG_ARM64_VG);
++
++	if (!mask || mask & reserved_mask)
+ 		return -EINVAL;
+ 
+ 	return 0;
+diff --git a/drivers/perf/arm_pmu.c b/drivers/perf/arm_pmu.c
+index 59d3980b8ca2..3f07df5a7e95 100644
+--- a/drivers/perf/arm_pmu.c
++++ b/drivers/perf/arm_pmu.c
+@@ -894,7 +894,7 @@ static struct arm_pmu *__armpmu_alloc(gfp_t flags)
+ 		 * pmu::filter_match callback and pmu::event_init group
+ 		 * validation).
+ 		 */
+-		.capabilities	= PERF_PMU_CAP_HETEROGENEOUS_CPUS,
++		.capabilities	= PERF_PMU_CAP_HETEROGENEOUS_CPUS | PERF_PMU_CAP_EXTENDED_REGS,
+ 	};
+ 
+ 	pmu->attr_groups[ARMPMU_ATTR_GROUP_COMMON] =
 -- 
 2.28.0
 
