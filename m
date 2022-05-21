@@ -2,145 +2,117 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 8261E52F9A0
-	for <lists+linux-doc@lfdr.de>; Sat, 21 May 2022 09:25:39 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id DA9AF52F9BE
+	for <lists+linux-doc@lfdr.de>; Sat, 21 May 2022 09:38:10 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S233006AbiEUHXR (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Sat, 21 May 2022 03:23:17 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:50816 "EHLO
+        id S243352AbiEUHiJ (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Sat, 21 May 2022 03:38:09 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:55518 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S240582AbiEUHXJ (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Sat, 21 May 2022 03:23:09 -0400
-Received: from szxga02-in.huawei.com (szxga02-in.huawei.com [45.249.212.188])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id AD57A52B12;
-        Sat, 21 May 2022 00:23:04 -0700 (PDT)
-Received: from dggpemm500022.china.huawei.com (unknown [172.30.72.56])
-        by szxga02-in.huawei.com (SkyGuard) with ESMTP id 4L4w394LRczQjw5;
-        Sat, 21 May 2022 15:20:05 +0800 (CST)
-Received: from dggpemm500002.china.huawei.com (7.185.36.229) by
- dggpemm500022.china.huawei.com (7.185.36.162) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2375.24; Sat, 21 May 2022 15:23:02 +0800
-Received: from [10.174.178.178] (10.174.178.178) by
- dggpemm500002.china.huawei.com (7.185.36.229) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2375.24; Sat, 21 May 2022 15:23:02 +0800
-Message-ID: <9fc88a71-b484-c471-66cd-a4d87d8c02c4@huawei.com>
-Date:   Sat, 21 May 2022 15:23:01 +0800
+        with ESMTP id S232064AbiEUHiJ (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Sat, 21 May 2022 03:38:09 -0400
+Received: from bhuna.collabora.co.uk (bhuna.collabora.co.uk [46.235.227.227])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 95C7017D39F;
+        Sat, 21 May 2022 00:38:07 -0700 (PDT)
+Received: from [127.0.0.1] (localhost [127.0.0.1])
+        (Authenticated sender: usama.anjum)
+        with ESMTPSA id 686CC1F41DC7
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=collabora.com;
+        s=mail; t=1653118686;
+        bh=1mZ8cwoInROONWuhTnsZHEew9Oj6lZBNbHe4imfY4go=;
+        h=From:To:Cc:Subject:Date:From;
+        b=mqGEZhYRlV39fiHFvJ8f5n/bf6mcyfVdAB6AMVNSb5evx/uhtIBcmR8Qe90UbMFog
+         Ksazz3MjUkp8wZUmD7pAskomaah1mB/28ymbS8EV8JlKi9eNrsj2olW+fNtDn0E7Tp
+         M4co91yyQikyv/fGowQUZ2wwmMNI3QYsTqIXtLB8OIWXyAJYk8iSvww417K8ytP39s
+         ABG8psZ5W7kMB9KqepswkbDulrfpHW6YtDe+dxhfJ8swa4qCmEIEKxpDDJ2EIaX6sX
+         IZ4Bou3u88GlE3Ws2GxmzhnnYOXMCv2BpothIkIViCoXcwHplC1DvoC6eV0wTSHzoD
+         J8S/AWEdpNW9A==
+From:   Muhammad Usama Anjum <usama.anjum@collabora.com>
+To:     Shuah Khan <shuah@kernel.org>, Jonathan Corbet <corbet@lwn.net>
+Cc:     Muhammad Usama Anjum <usama.anjum@collabora.com>,
+        kernel@collabora.com, bagasdotme@gmail.com,
+        linux-kselftest@vger.kernel.org, linux-doc@vger.kernel.org,
+        linux-kernel@vger.kernel.org
+Subject: [PATCH v2] docs/kselftest: add more guidelines for adding new tests
+Date:   Sat, 21 May 2022 12:36:51 +0500
+Message-Id: <20220521073651.4191910-1-usama.anjum@collabora.com>
+X-Mailer: git-send-email 2.30.2
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:91.0) Gecko/20100101
- Thunderbird/91.0.3
-Subject: Re: [PATCH 1/2] psi: add support for multi level pressure stall
- trigger
-To:     Alex Shi <seakeel@gmail.com>,
-        Suren Baghdasaryan <surenb@google.com>
-CC:     LKML <linux-kernel@vger.kernel.org>,
-        Johannes Weiner <hannes@cmpxchg.org>,
-        Alex Shi <alexs@kernel.org>, Jonathan Corbet <corbet@lwn.net>,
-        "open list:DOCUMENTATION" <linux-doc@vger.kernel.org>
-References: <20220516033524.3130816-1-chenwandun@huawei.com>
- <30b37eeb-e77b-882e-fc24-3367321a8ca3@gmail.com>
- <CAJuCfpE7fBsp8ntYVeLsW7Cd0Z09OmxN75X9Az_Qco0GJrz3Wg@mail.gmail.com>
- <CAJuCfpH-BDqsft1YvGFhkbR60VC0TJgfXKRVN+80e0iqQdhxpA@mail.gmail.com>
- <3a31521f-a68a-b2a9-baae-9a458ee17033@huawei.com>
- <070fe87d-43a0-5e4f-e4c7-c44782c2c195@gmail.com>
- <CAJuCfpH1mTxe5hmzZTe+AbPFse9heenx8uhGzCXE6fAh5G8SzA@mail.gmail.com>
- <29d66a46-d141-2d02-45dd-a8931786588e@gmail.com>
-From:   Chen Wandun <chenwandun@huawei.com>
-In-Reply-To: <29d66a46-d141-2d02-45dd-a8931786588e@gmail.com>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
 Content-Transfer-Encoding: 8bit
-X-Originating-IP: [10.174.178.178]
-X-ClientProxiedBy: dggems701-chm.china.huawei.com (10.3.19.178) To
- dggpemm500002.china.huawei.com (7.185.36.229)
-X-CFilter-Loop: Reflected
-X-Spam-Status: No, score=-4.9 required=5.0 tests=BAYES_00,NICE_REPLY_A,
-        RCVD_IN_DNSWL_MED,SPF_HELO_NONE,SPF_PASS,T_SCC_BODY_TEXT_LINE
-        autolearn=ham autolearn_force=no version=3.4.6
+X-Spam-Status: No, score=-2.1 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,SPF_HELO_PASS,SPF_PASS,
+        T_SCC_BODY_TEXT_LINE,UNPARSEABLE_RELAY autolearn=ham
+        autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
+Improve and add instructions to add new tests. Add build commands to
+test before sending the new test patch.
 
+Signed-off-by: Muhammad Usama Anjum <usama.anjum@collabora.com>
+---
+Changes in v2:
+- Updated commit message
+- Removed dependence of this patch from other patch
+- Updated instructions
+---
+ Documentation/dev-tools/kselftest.rst | 27 ++++++++++++++++++++++++++-
+ 1 file changed, 26 insertions(+), 1 deletion(-)
 
-在 2022/5/19 14:15, Alex Shi 写道:
->
-> On 5/19/22 05:38, Suren Baghdasaryan wrote:
->> On Wed, May 18, 2022 at 3:29 AM Alex Shi <seakeel@gmail.com> wrote:
->>>
->>>
->>> On 5/17/22 20:46, Chen Wandun wrote:
->>>>>>> This breaks the old ABI. And why you need this new function?
->>>>>> Both great points.
->>>>> BTW, I think the additional max_threshold parameter could be
->>>>> implemented in a backward compatible way so that the old API is not
->>>>> broken:
->>>>>
->>>>> arg_count = sscanf(buf, "some %u %u %u", &min_threshold_us,  &arg2, &arg3);
->>>>> if (arg_count < 2) return ERR_PTR(-EINVAL);
->>>>> if (arg_count < 3) {
->>>>>       max_threshold_us = INT_MAX;
->>>>>       window_us = arg2;
->>>>> } else {
->>>>>       max_threshold_us = arg2;
->>>>>       window_us = arg3;
->>>>> }
->>>> OK
->>>>
->>>> Thanks.
->>>>> But again, the motivation still needs to be explained.
->>>> we want do different operation for different stall level,
->>>> just as prev email explain, multi trigger is also OK in old
->>>> ways, but it is a litter complex.
->>> In fact, I am not keen for this solution, the older and newer
->>> interface is easy to be confused by users, for some resolvable
->>> unclear issues. It's not a good idea.
->> Maybe adding the max_threshold as an optional last argument will be
->> less confusing? Smth like this:
->>
->> some/full min_threshold window_size [max_threshold]
-> It's already confused enough. :)
-which point make you confused？
-Interface suggest by Suren is compatible with current version,
-I think it is more reasonable and there is no difficuty to understand it.
-> BTW, I still don't see the strong reason for the pressure range.
-Considering this case:
-I divide pressure into multi levels, and each level corresponds to a
-hander,  I have to register multi triggers and wait for fire events,
-nowadays, these trigger is something like:
-echo “some 150000 1000000” > /proc/pressure/memory
-echo “some 350000 1000000” > /proc/pressure/memory
-echo “some 550000 1000000” > /proc/pressure/memory
-echo “some 750000 1000000” > /proc/pressure/memory
-
-In the best case, stall pressure between 150000 and 350000,
-only one trigger fire, and only one wakeup.
-
-In any other case,  multi triggers fire and multi wakeup, but it
-indeed is no need.
-
-New implement make the fire and wakeup more precise,
-userspace code will be more simple, no confusing fire event,
-no need to filter fire event anymore, maybe minor performance
-improved.
-
-Thanks.
->
->>> Also, if we do decide to add it, there should be a warning in the
->> documentation that max_threshold usage might lead to a stall being
->> missed completely. In your example:
->>
->> echo "some 150000 350000 1000000" > /proc/pressure/memory
->>
->> If there is a stall of more than 350ms within a given window, that
->> trigger will not fire at all.
-> Right.
-> And what if others propose more pressure combinations?
-> Maybe leave them to user space is more likely workable?
->
-> Thanks
-> Alex
-> .
+diff --git a/Documentation/dev-tools/kselftest.rst b/Documentation/dev-tools/kselftest.rst
+index a833ecf12fbc1..ee6467ca8293f 100644
+--- a/Documentation/dev-tools/kselftest.rst
++++ b/Documentation/dev-tools/kselftest.rst
+@@ -208,6 +208,14 @@ In general, the rules for selftests are
+ Contributing new tests (details)
+ ================================
+ 
++ * In your Makefile, use facilities from lib.mk by including it instead of
++   reinventing the wheel. Specify flags and binaries generation flags on
++   need basis before including lib.mk. ::
++
++    CFLAGS = $(KHDR_INCLUDES)
++    TEST_GEN_PROGS := close_range_test
++    include ../lib.mk
++
+  * Use TEST_GEN_XXX if such binaries or files are generated during
+    compiling.
+ 
+@@ -230,13 +238,30 @@ Contributing new tests (details)
+  * First use the headers inside the kernel source and/or git repo, and then the
+    system headers.  Headers for the kernel release as opposed to headers
+    installed by the distro on the system should be the primary focus to be able
+-   to find regressions.
++   to find regressions. Use KHDR_INCLUDES in Makefile to include headers from
++   the kernel source.
+ 
+  * If a test needs specific kernel config options enabled, add a config file in
+    the test directory to enable them.
+ 
+    e.g: tools/testing/selftests/android/config
+ 
++ * Create a .gitignore file inside test directory and add all generated objects
++   in it.
++
++ * Add new test name in TARGETS in selftests/Makefile::
++
++    TARGETS += android
++
++ * All changes should pass::
++
++    kselftest-{all,install,clean,gen_tar}
++    kselftest-{all,install,clean,gen_tar} O=abo_path
++    kselftest-{all,install,clean,gen_tar} O=rel_path
++    make -C tools/testing/selftests {all,install,clean,gen_tar}
++    make -C tools/testing/selftests {all,install,clean,gen_tar} O=abs_path
++    make -C tools/testing/selftests {all,install,clean,gen_tar} O=rel_path
++
+ Test Module
+ ===========
+ 
+-- 
+2.30.2
 
