@@ -2,84 +2,70 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id D43B4530D3B
-	for <lists+linux-doc@lfdr.de>; Mon, 23 May 2022 12:41:44 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 398E8530CBF
+	for <lists+linux-doc@lfdr.de>; Mon, 23 May 2022 12:41:00 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S233450AbiEWJhZ (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 23 May 2022 05:37:25 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:58064 "EHLO
+        id S233949AbiEWKMw (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 23 May 2022 06:12:52 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:33142 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S233414AbiEWJhM (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Mon, 23 May 2022 05:37:12 -0400
-Received: from mout.kundenserver.de (mout.kundenserver.de [212.227.126.131])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id D92A014088;
-        Mon, 23 May 2022 02:36:50 -0700 (PDT)
-Received: from mail-yb1-f182.google.com ([209.85.219.182]) by
- mrelayeu.kundenserver.de (mreue012 [213.165.67.97]) with ESMTPSA (Nemesis) id
- 1Mi4un-1nO7KQ2abR-00e77y; Mon, 23 May 2022 11:36:47 +0200
-Received: by mail-yb1-f182.google.com with SMTP id x2so24022580ybi.8;
-        Mon, 23 May 2022 02:36:47 -0700 (PDT)
-X-Gm-Message-State: AOAM531/KFI3EEEA5qJ+lfkJMawBRXrxOswi7t61JSInzPAP2Y4ubNBS
-        HCE0nnXGeHfcn12XhU2/CWNHpL2Xf3wqX+OBKSI=
-X-Google-Smtp-Source: ABdhPJxEXe06M3axoRKKPnNA61tQHMjYpX5dyVq4k6tPeRi1tB4KWQG4XjRdw9Dk8Zg5uHNGuRJXRzt1ho0pY/kHoDc=
-X-Received: by 2002:a25:31c2:0:b0:641:660f:230f with SMTP id
- x185-20020a2531c2000000b00641660f230fmr20782159ybx.472.1653298606323; Mon, 23
- May 2022 02:36:46 -0700 (PDT)
+        with ESMTP id S233915AbiEWKMu (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Mon, 23 May 2022 06:12:50 -0400
+Received: from mail-ed1-x543.google.com (mail-ed1-x543.google.com [IPv6:2a00:1450:4864:20::543])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 73F33AE48
+        for <linux-doc@vger.kernel.org>; Mon, 23 May 2022 03:12:47 -0700 (PDT)
+Received: by mail-ed1-x543.google.com with SMTP id g12so18460889edq.4
+        for <linux-doc@vger.kernel.org>; Mon, 23 May 2022 03:12:47 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=uc-cl.20210112.gappssmtp.com; s=20210112;
+        h=mime-version:reply-to:from:date:message-id:subject:to;
+        bh=z+uM7vIRKv3KK6/ogXLySxrVBPRCNjdMKIe5V0kgmw8=;
+        b=JXDGBBA7JGqlxXHyvQpaU9r1OfIG4UChBlTRgcZiFqNDPkMn2lUkVmzq7G3QvVoimG
+         QjUarawautbENaTcxz4YxjPg4mysypVybiMPe+hDyI1E7HLqTZHKPb9TrAF9eEZuABWl
+         aGyr/1wpO+qcIz9w/F0yrngVWxFR+/rnWAS61Ad3plMjgV+rkUTmEQ7e0hZbppPwg4L/
+         eMuV0I0nKMlhXrhOInmf4d/DA7m9hnpx+/gTaqLEhsmerxCwSud3Ym8rvVmV+/HMtcdv
+         AeK+kvohkv4VET64mJP720/GCURh9eqCf97bUUYPeFIkWTJI/56C4pUu739J7seVc2kG
+         d1Ng==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:mime-version:reply-to:from:date:message-id
+         :subject:to;
+        bh=z+uM7vIRKv3KK6/ogXLySxrVBPRCNjdMKIe5V0kgmw8=;
+        b=WyoYB/b0d+H6KcI7XgSgNzTraybQclI6ulXOqiYhyuipQEaXwGPcmCEM5PxRLiMue+
+         fMKAGK5NcrJeWmJo2Zn3tByd/MfjzW9ZR5tH3/OaIEgM0g0AfQqvnX+tyro84hlKJEsP
+         8/gFRtH9zxdJAIw0Kp0H24E/2c4xCMp12qEO6PJpOzfcavl5kJLGbwG7tu+8INfxHxM+
+         4VgdtfkI9x9JaaeqT19PHkkkUBIZx8e8qKP3mU2lSDTFUX1rA2OuSDupEN0c4cV6WHj8
+         berYZdssk7Ixaj8Gr3pWe8vs67+YmI4MPDYnKfdvAlLFFsfKy2UdK1lLHvLQvSEMLe71
+         a+5A==
+X-Gm-Message-State: AOAM530QwnYn+NZlGxD6tjAqIpFeNByV6S5zCXUaE0zPISoZkziSax6k
+        S29YtJEq6qSmN5Tvm5UdHrv/J2npiq8RCvfMRazScw==
+X-Google-Smtp-Source: ABdhPJwaFh7ZG1oXVDdnC5mLW0Wxa/KXRkx9vch7z0UZRums9K3SwJojO6qJ3O7IvZv5hafotBx3MIaUMqojTPrsVog=
+X-Received: by 2002:a05:6402:2752:b0:41c:b898:19a6 with SMTP id
+ z18-20020a056402275200b0041cb89819a6mr23381311edd.30.1653300765781; Mon, 23
+ May 2022 03:12:45 -0700 (PDT)
 MIME-Version: 1.0
-References: <20220523020051.141460-1-wangkefeng.wang@huawei.com> <20220523020051.141460-2-wangkefeng.wang@huawei.com>
-In-Reply-To: <20220523020051.141460-2-wangkefeng.wang@huawei.com>
-From:   Arnd Bergmann <arnd@arndb.de>
-Date:   Mon, 23 May 2022 11:36:29 +0200
-X-Gmail-Original-Message-ID: <CAK8P3a2cP8Y42C4kCbFSpkcj8cLexinLj=x9m6vvwKJxLvX7yw@mail.gmail.com>
-Message-ID: <CAK8P3a2cP8Y42C4kCbFSpkcj8cLexinLj=x9m6vvwKJxLvX7yw@mail.gmail.com>
-Subject: Re: [PATCH v3 1/2] asm-generic: Add memory barrier dma_mb()
-To:     Kefeng Wang <wangkefeng.wang@huawei.com>
-Cc:     Marco Elver <elver@google.com>,
-        Catalin Marinas <catalin.marinas@arm.com>,
-        Will Deacon <will@kernel.org>,
-        Linux ARM <linux-arm-kernel@lists.infradead.org>,
-        Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
-        Mark Rutland <mark.rutland@arm.com>,
-        Jonathan Corbet <corbet@lwn.net>,
-        "open list:DOCUMENTATION" <linux-doc@vger.kernel.org>
+Received: by 2002:a05:640c:2cc5:b0:153:d95a:3c5d with HTTP; Mon, 23 May 2022
+ 03:12:23 -0700 (PDT)
+Reply-To: stevebrucefss@gmail.com
+From:   Steve Bruce Financial Service <camila.toledo@uc.cl>
+Date:   Mon, 23 May 2022 13:12:23 +0300
+Message-ID: <CALeUmqNxzsFDTScjrKzqa+eamJo4TPbP3_nW7FuQHONsToSrwg@mail.gmail.com>
+Subject: 
+To:     undisclosed-recipients:;
 Content-Type: text/plain; charset="UTF-8"
-X-Provags-ID: V03:K1:zPIkvDMlXAm1LZNBiHMWj4e04LbhwlYvvCXzJxKLKjrwGZTDN44
- L9IrERPoIZZklGYgpf1jHh3Qs+XZMXBNkNKKnCr3YL2HOivvyU2TuqJWFKNPWn02zckMJ6Z
- 9aNQVXKy4kenpvtRzK6F26I75B+Z3fTubxfZ1yHEzPTzWNPS5MR/O4OolEqiWv66qnoPp51
- RztJQGmaAU1pEF7j9SOOg==
-X-UI-Out-Filterresults: notjunk:1;V03:K0:EDywYquYCAY=:7xx0eKix9nIC1tl7Vk6vmA
- /PRFeXYbdk20nJ+oepw3D8EAg2+2P3A9zEjFFv0oJkdT6eYxQOhY8+P5LhEinbF76XfnzSaA8
- /2zwkk5BiGXjlihUrkbIrJMsgU7cVrsNi+uotro/D4OOjXekYTlCQlhY3VtPjqPf5hizIh5of
- xdfQ+ZAcKB3paw7Qk0zNbm0faGyaorYfVpyO2r3WKUnN9NAvTR0HSYzqRBwx+Alb2Sy/684sb
- 4OfsoFq45RfHDHQ5b0VbjPjhwDeZVpYkjTwnQxvyzmUvzJsYXiKFTdDR71R8AgiDv7FD1MrlH
- QehUKUa7bjwzt0e0rW9fGr45zWgP3+HVL9crHv1EvSqTLYotX/HACuK/pr9kq1Gg5mHBOI4ov
- +EOoXRgUkH8DM1WMxlL7dAeE0MKNMR4rRd8WyvhldCVuq1Ui1peFIUA7upeJK/zJZTpQjeSm1
- ifPA8XoL4cGUEykOCfe8H3p9nybPMfA5kxInR//JyEuyBmCBD28SlNFCj7tZ+5Kwz83UX1E1+
- 7v2gZaq9h0u1tpbgvPIgjH5NeZ5m1aKk3VeTFn3c2LNt1kPjOgPm4KKXsuE4mYmps/DL1LKpP
- p1BWoTE9qqTdyl5q8oRTOy1UuXjwbZIx7+oBSbIUH66wrMf1dwN4gmChqykysdxsyf0pGt+d/
- pnu4X9feKEdJnQvlfyAbIqUbMsdNq+iOYSfO9Xpxc5zy4ySgQ4K+qYdNSTMLVzTFMoz3EqBSo
- L9yPtUm+OlxGFmdj0JLXPZ2yB+9MGCkeaPFWHA==
-X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_NONE,
-        RCVD_IN_MSPIKE_H2,SPF_HELO_NONE,SPF_NONE,T_SCC_BODY_TEXT_LINE
-        autolearn=ham autolearn_force=no version=3.4.6
+X-Spam-Status: No, score=2.9 required=5.0 tests=BAYES_50,DKIM_SIGNED,
+        DKIM_VALID,FREEMAIL_FORGED_REPLYTO,RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,
+        SPF_PASS,T_SCC_BODY_TEXT_LINE autolearn=no autolearn_force=no
+        version=3.4.6
+X-Spam-Level: **
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Mon, May 23, 2022 at 4:00 AM Kefeng Wang <wangkefeng.wang@huawei.com> wrote:
->
-> The memory barrier dma_mb() is introduced by commit a76a37777f2c
-> ("iommu/arm-smmu-v3: Ensure queue is read after updating prod pointer"),
-> which is used to ensure that prior (both reads and writes) accesses
-> to memory by a CPU are ordered w.r.t. a subsequent MMIO write, this
-> is only defined on arm64, but it is a generic memory barrier, let's
-> add dma_mb() into documentation and include/asm-generic/barrier.h.
->
-> Signed-off-by: Kefeng Wang <wangkefeng.wang@huawei.com>
-> ---
-
-I assume you plan this to get merged through the arm64 tree.
-
-Reviewed-by: Arnd Bergmann <arnd@arndb.de> # for asm-generic
+-- 
+Steve Bruce Financial Service is giving out stress-free loans to new
+applicants at a low interest rate of 2%. If interested, kindly apply
+in person via stevebrucefss@gmail.com or call +1 (815) 771-5090.
+Thanks
