@@ -2,121 +2,102 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 4C744533119
-	for <lists+linux-doc@lfdr.de>; Tue, 24 May 2022 21:02:13 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id E7917533136
+	for <lists+linux-doc@lfdr.de>; Tue, 24 May 2022 21:03:38 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S240335AbiEXTCA (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 24 May 2022 15:02:00 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:55556 "EHLO
+        id S240654AbiEXTDY (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 24 May 2022 15:03:24 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:55488 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S240984AbiEXTBP (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 24 May 2022 15:01:15 -0400
-Received: from mx0a-001b2d01.pphosted.com (mx0a-001b2d01.pphosted.com [148.163.156.1])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id E49DB9344F;
-        Tue, 24 May 2022 12:00:40 -0700 (PDT)
-Received: from pps.filterd (m0098410.ppops.net [127.0.0.1])
-        by mx0a-001b2d01.pphosted.com (8.17.1.5/8.17.1.5) with ESMTP id 24OIIiHT015021;
-        Tue, 24 May 2022 19:00:08 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ibm.com; h=from : to : cc : subject
- : date : message-id : in-reply-to : references : mime-version :
- content-transfer-encoding; s=pp1;
- bh=B91he0hy+fU6+0g/pHCLsPD5d3U8lZovlWG0ZRgG3K8=;
- b=MgHnb+S7/CFHLdH8SQ1GLASWeQzh+rG8m0npCerWDVXLcOD6rFacw3knaI98grL2yYqO
- wCBr8o/zz4GQRmHC6NgDfnRjstzvUGR23rzSqL6r92Q3O+U08WARLurzdM5dj6bqoe4S
- F/jldpwalBzagrFN7ny1Y7OPvbaiU3Eci+MMHjCHyHFcTm6HCfOAjepl9XcfyV9Iy4qJ
- A6AQqMCVEm94xK21AoCZDbFD8CWIKfK9tC+itGb4QpvWw+uEkQVBFhOLwygq1BUaX9HZ
- YxtcuY7Y5llp0JHUVVCp795T3/wsQHdve1P2tFDIEQNGEOuARwmygDu4ESbuOQdFZ31Z Sg== 
-Received: from pps.reinject (localhost [127.0.0.1])
-        by mx0a-001b2d01.pphosted.com (PPS) with ESMTPS id 3g94hggqa5-1
-        (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
-        Tue, 24 May 2022 19:00:07 +0000
-Received: from m0098410.ppops.net (m0098410.ppops.net [127.0.0.1])
-        by pps.reinject (8.17.1.5/8.17.1.5) with ESMTP id 24OImUb7031966;
-        Tue, 24 May 2022 19:00:07 GMT
-Received: from ppma02wdc.us.ibm.com (aa.5b.37a9.ip4.static.sl-reverse.com [169.55.91.170])
-        by mx0a-001b2d01.pphosted.com (PPS) with ESMTPS id 3g94hggq9c-1
-        (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
-        Tue, 24 May 2022 19:00:07 +0000
-Received: from pps.filterd (ppma02wdc.us.ibm.com [127.0.0.1])
-        by ppma02wdc.us.ibm.com (8.16.1.2/8.16.1.2) with SMTP id 24OIsADN023499;
-        Tue, 24 May 2022 19:00:06 GMT
-Received: from b03cxnp08028.gho.boulder.ibm.com (b03cxnp08028.gho.boulder.ibm.com [9.17.130.20])
-        by ppma02wdc.us.ibm.com with ESMTP id 3g93uw0hnu-1
-        (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
-        Tue, 24 May 2022 19:00:06 +0000
-Received: from b03ledav005.gho.boulder.ibm.com (b03ledav005.gho.boulder.ibm.com [9.17.130.236])
-        by b03cxnp08028.gho.boulder.ibm.com (8.14.9/8.14.9/NCO v10.0) with ESMTP id 24OJ04U642074566
-        (version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
-        Tue, 24 May 2022 19:00:05 GMT
-Received: from b03ledav005.gho.boulder.ibm.com (unknown [127.0.0.1])
-        by IMSVA (Postfix) with ESMTP id E0EB0BE05D;
-        Tue, 24 May 2022 19:00:04 +0000 (GMT)
-Received: from b03ledav005.gho.boulder.ibm.com (unknown [127.0.0.1])
-        by IMSVA (Postfix) with ESMTP id 9DD89BE054;
-        Tue, 24 May 2022 19:00:02 +0000 (GMT)
-Received: from li-c92d2ccc-254b-11b2-a85c-a700b5bfb098.ibm.com.com (unknown [9.163.3.233])
-        by b03ledav005.gho.boulder.ibm.com (Postfix) with ESMTP;
-        Tue, 24 May 2022 19:00:02 +0000 (GMT)
-From:   Matthew Rosato <mjrosato@linux.ibm.com>
-To:     linux-s390@vger.kernel.org
-Cc:     alex.williamson@redhat.com, cohuck@redhat.com,
-        schnelle@linux.ibm.com, farman@linux.ibm.com, pmorel@linux.ibm.com,
-        borntraeger@linux.ibm.com, hca@linux.ibm.com, gor@linux.ibm.com,
-        gerald.schaefer@linux.ibm.com, agordeev@linux.ibm.com,
-        svens@linux.ibm.com, frankja@linux.ibm.com, david@redhat.com,
-        imbrenda@linux.ibm.com, vneethv@linux.ibm.com,
-        oberpar@linux.ibm.com, freude@linux.ibm.com, thuth@redhat.com,
-        pasic@linux.ibm.com, pbonzini@redhat.com, corbet@lwn.net,
-        jgg@nvidia.com, kvm@vger.kernel.org, linux-kernel@vger.kernel.org,
-        linux-doc@vger.kernel.org
-Subject: [PATCH v8 22/22] MAINTAINERS: additional files related kvm s390 pci passthrough
-Date:   Tue, 24 May 2022 14:59:07 -0400
-Message-Id: <20220524185907.140285-23-mjrosato@linux.ibm.com>
-X-Mailer: git-send-email 2.27.0
-In-Reply-To: <20220524185907.140285-1-mjrosato@linux.ibm.com>
-References: <20220524185907.140285-1-mjrosato@linux.ibm.com>
+        with ESMTP id S240805AbiEXTDL (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 24 May 2022 15:03:11 -0400
+Received: from mail-wr1-x434.google.com (mail-wr1-x434.google.com [IPv6:2a00:1450:4864:20::434])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 2EE759D4F9
+        for <linux-doc@vger.kernel.org>; Tue, 24 May 2022 12:01:44 -0700 (PDT)
+Received: by mail-wr1-x434.google.com with SMTP id z15so3191473wrg.11
+        for <linux-doc@vger.kernel.org>; Tue, 24 May 2022 12:01:43 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=google.com; s=20210112;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc;
+        bh=zPoBKVvC2etY1rrj+YwE9RcWhQO3Aeb8jFG7VSlxgGE=;
+        b=eShZOTIUQ93TOWjEzr249Q2WlZgXfVBXRXVkiPqqzxHc3weu9dWI5q3Ho56xWalhYm
+         DNCo2rp9rMlgNBrK8z0XY/wW3LtOYML1vS+M+JPqvzdBIyhIp4u0EN07gBXsnOV6nri8
+         362c3np7lTLklsZKcOFMwfRRupNLAPynTYIAwR6xjCdZj/A/gIhF1Qfk1QwtUz1zpdDg
+         OwP1XDrZlsnRRXavqft/ReWGqQnEA11Wn1yavd6amKib47Nc170P/orJbWp9qtErNk/7
+         CisGNh6vWRjQoZRymrDq8S4Qa8rADzUXLl566tiu679wuf5A6NCGy//TjeVsXiZq3cdx
+         FakQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=zPoBKVvC2etY1rrj+YwE9RcWhQO3Aeb8jFG7VSlxgGE=;
+        b=moe0sQRjTgGvA9uOLC15S0sBu9Qrg1FT3YhnoYgCqbPcgpqmIF0VAfpZkAxfqdA5Y8
+         4OkVYBl2oHhWAMtuHY+9mlp4gTXxN/8RhSOEX8MzCgM8gmqtjHILWS/L3/8E41zeNw46
+         WUXdcKWcMCjLiilGYEfNRVoMQ8gw5hVdrMzsLsyrRpUCr49CRIRRteBrf1HZlVPX8kC8
+         kQtSY9bvxcn7ZbYQdtu7xWOA/pAF1AU9Q0Wv2u0xslp2iXmYd9d6Rv9cvlvliUIECtXn
+         4gxY4uniM2ZC6QBVR2U2xg9tuA5IjRV26dyoXc37bLhqykbWsTW0aIloAJ8Sm5ScdZgb
+         DW8A==
+X-Gm-Message-State: AOAM533XWFeYOdpGLBUmdmjtpvqh899a3eOSxMxBZQcSIiZEvqgA2LNN
+        b66SQHeXH4NH64hW3DIxPjwba2FZgAgd7MaAO9mrFw==
+X-Google-Smtp-Source: ABdhPJzPKmJrseAx4/O0R9Tr5Y5Yi3+iPsfVW2jq7/OFy7Iu3Ypo1SokZ9tOrFY3enB09mHuuuvffQ2Sa5Fxer4lfaM=
+X-Received: by 2002:a05:6000:1548:b0:20f:c4bb:defd with SMTP id
+ 8-20020a056000154800b0020fc4bbdefdmr15202675wry.210.1653418898448; Tue, 24
+ May 2022 12:01:38 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-TM-AS-GCONF: 00
-X-Proofpoint-GUID: vUpCW-OM52lhya483GBrf_K1glKAQC2N
-X-Proofpoint-ORIG-GUID: KkZGMcv3oVJYOb5ZwGBGmuRpqZ-OBzaJ
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.205,Aquarius:18.0.874,Hydra:6.0.486,FMLib:17.11.64.514
- definitions=2022-05-24_09,2022-05-23_01,2022-02-23_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 impostorscore=0 spamscore=0
- clxscore=1015 bulkscore=0 mlxscore=0 suspectscore=0 adultscore=0
- malwarescore=0 lowpriorityscore=0 phishscore=0 priorityscore=1501
- mlxlogscore=899 classifier=spam adjust=0 reason=mlx scancount=1
- engine=8.12.0-2204290000 definitions=main-2205240090
-X-Spam-Status: No, score=-2.0 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_EF,RCVD_IN_MSPIKE_H2,SPF_HELO_NONE,SPF_PASS,
-        T_SCC_BODY_TEXT_LINE autolearn=ham autolearn_force=no version=3.4.6
+References: <20220518223815.809858-1-vaibhav@linux.ibm.com>
+ <YoYj4sLJfGke5IGT@dhcp22.suse.cz> <87zgjcg4xs.fsf@vajain21.in.ibm.com>
+ <YodDaFVeU33bu7yQ@dhcp22.suse.cz> <CAJD7tkYwv2LDZeV2F5pxuniw7LCNjBapDCm3WuRhzwTH-jN3PA@mail.gmail.com>
+ <YozFZI2euSjWPgDb@cmpxchg.org>
+In-Reply-To: <YozFZI2euSjWPgDb@cmpxchg.org>
+From:   Yosry Ahmed <yosryahmed@google.com>
+Date:   Tue, 24 May 2022 12:01:01 -0700
+Message-ID: <CAJD7tkZxvmnrrjc4yAe5mC+SL-MZqMkn21yjetiLYyq0B=AhtA@mail.gmail.com>
+Subject: Re: [PATCH] memcg: provide reclaim stats via 'memory.reclaim'
+To:     Johannes Weiner <hannes@cmpxchg.org>
+Cc:     Michal Hocko <mhocko@suse.com>,
+        Vaibhav Jain <vaibhav@linux.ibm.com>,
+        Cgroups <cgroups@vger.kernel.org>, linux-doc@vger.kernel.org,
+        Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
+        Linux-MM <linux-mm@kvack.org>, Tejun Heo <tj@kernel.org>,
+        Zefan Li <lizefan.x@bytedance.com>,
+        Jonathan Corbet <corbet@lwn.net>,
+        Vladimir Davydov <vdavydov.dev@gmail.com>,
+        Andrew Morton <akpm@linux-foundation.org>,
+        "Aneesh Kumar K . V" <aneesh.kumar@linux.ibm.com>,
+        Shakeel Butt <shakeelb@google.com>,
+        David Rientjes <rientjes@google.com>
+Content-Type: text/plain; charset="UTF-8"
+X-Spam-Status: No, score=-17.6 required=5.0 tests=BAYES_00,DKIMWL_WL_MED,
+        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,
+        ENV_AND_HDR_SPF_MATCH,RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,SPF_PASS,
+        T_SCC_BODY_TEXT_LINE,USER_IN_DEF_DKIM_WL,USER_IN_DEF_SPF_WL
+        autolearn=ham autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Add entries from the s390 kvm subdirectory related to pci passthrough.
+On Tue, May 24, 2022 at 4:45 AM Johannes Weiner <hannes@cmpxchg.org> wrote:
+>
+> On Mon, May 23, 2022 at 03:50:34PM -0700, Yosry Ahmed wrote:
+> > I think it might be useful to have a dedicated entry in memory.stat
+> > for proactively reclaimed memory. A case where this would be useful is
+> > tuning and evaluating userspace proactive reclaimers. For instance, if
+> > a userspace agent is asking the kernel to reclaim 100M, but it could
+> > only reclaim 10M, then most probably the proactive reclaimer is not
+> > using a good methodology to figure out how much memory do we need to
+> > reclaim.
+> >
+> > IMO this is more useful, and a superset of just reading the last
+> > reclaim request status through memory.reclaim (read stat before and
+> > after).
+>
+> +1
 
-Acked-by: Christian Borntraeger <borntraeger@linux.ibm.com>
-Signed-off-by: Matthew Rosato <mjrosato@linux.ibm.com>
----
- MAINTAINERS | 1 +
- 1 file changed, 1 insertion(+)
+It might also be useful to have a breakdown of this by memory type:
+file, anon, or shrinkers.
 
-diff --git a/MAINTAINERS b/MAINTAINERS
-index e8c52d0192a6..2442ff168d93 100644
---- a/MAINTAINERS
-+++ b/MAINTAINERS
-@@ -17264,6 +17264,7 @@ M:	Eric Farman <farman@linux.ibm.com>
- L:	linux-s390@vger.kernel.org
- L:	kvm@vger.kernel.org
- S:	Supported
-+F:	arch/s390/kvm/pci*
- F:	drivers/vfio/pci/vfio_pci_zdev.c
- F:	include/uapi/linux/vfio_zdev.h
- 
--- 
-2.27.0
-
+It would also fit in nicely with a potential type=file/anon/shrinker
+argument to memory.reclaim. Thoughts on this?
