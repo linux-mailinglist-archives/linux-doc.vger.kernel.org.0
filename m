@@ -2,147 +2,107 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id B2806534437
-	for <lists+linux-doc@lfdr.de>; Wed, 25 May 2022 21:32:29 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id A874153441D
+	for <lists+linux-doc@lfdr.de>; Wed, 25 May 2022 21:16:58 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1344112AbiEYTc0 convert rfc822-to-8bit (ORCPT
-        <rfc822;lists+linux-doc@lfdr.de>); Wed, 25 May 2022 15:32:26 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:55736 "EHLO
+        id S1344424AbiEYTQ4 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 25 May 2022 15:16:56 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:48812 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S245126AbiEYTcZ (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Wed, 25 May 2022 15:32:25 -0400
-X-Greylist: delayed 600 seconds by postgrey-1.37 at lindbergh.monkeyblade.net; Wed, 25 May 2022 12:32:22 PDT
-Received: from protestant.ebb.org (protestant.ebb.org [50.56.179.12])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id C95AE12D09;
-        Wed, 25 May 2022 12:32:21 -0700 (PDT)
-Received: from localhost (unknown [216.161.86.18])
-        (Authenticated sender: bkuhn)
-        by protestant.ebb.org (Postfix) with ESMTPSA id 9D99C820B4;
-        Wed, 25 May 2022 12:14:38 -0700 (PDT)
-From:   "Bradley M. Kuhn" <bkuhn@ebb.org>
-To:     Thomas Gleixner <tglx@linutronix.de>,
-        copyleft-next@lists.fedorahosted.org
-Cc:     Luis Chamberlain <mcgrof@kernel.org>, tj@kernel.org,
-        gregkh@linuxfoundation.org, akpm@linux-foundation.org,
-        jeyu@kernel.org, shuah@kernel.org, bvanassche@acm.org,
-        dan.j.williams@intel.com, joe@perches.com, keescook@chromium.org,
-        rostedt@goodmis.org, minchan@kernel.org,
-        linux-spdx@vger.kernel.org, linux-doc@vger.kernel.org,
-        linux-block@vger.kernel.org, linux-fsdevel@vger.kernel.org,
-        linux-kselftest@vger.kernel.org, linux-kernel@vger.kernel.org,
-        Goldwyn Rodrigues <rgoldwyn@suse.com>,
-        Kuno Woudt <kuno@frob.nl>,
-        Richard Fontana <fontana@sharpeleven.org>,
-        Ciaran Farrell <Ciaran.Farrell@suse.com>,
-        Christopher De Nicolo <Christopher.DeNicolo@suse.com>,
-        Christoph Hellwig <hch@lst.de>,
-        Jonathan Corbet <corbet@lwn.net>,
-        Thorsten Leemhuis <linux@leemhuis.info>
-Subject: Re: [PATCH v9 1/6] LICENSES: Add the copyleft-next-0.3.1 license
-Organization: Opinions expressed in this email are my own and are not necessarily those of any organization with which I have an affiliation.
-References: <20211029184500.2821444-1-mcgrof@kernel.org>
-        <20211029184500.2821444-2-mcgrof@kernel.org> <87h75g0xbm.ffs@tglx>
-Face:   iVBORw0KGgoAAAANSUhEUgAAADAAAAAwBAMAAAClLOS0AAAABGdBTUEAALGPC/xhBQAAABVQ
- TFRFAAAAWjotvpiH/PHt27Sj7sq8lXFeBchlBgAAAAFiS0dEAIgFHUgAAAAJcEhZcwAACxMAAAsT
- AQCanBgAAAAHdElNRQfiCx4VFw6omMmeAAACAklEQVQ4y43UPZPbIBAGYGdu0puzQ51bI+qMdXId
- r0F1RoLrwfb+/5+QF307VVR4PDxiF14h7Xa7t3q8LJGjavj7a1euCYiZnaPnv9DF4FyMLKdXOPs4
- XM7KKzzKaF83gem+hUuF8QYUg7Fb4LEQAK1OG3hu4bbC3LpUC87+B9AMfQOg0yv0owEOK4x1+gnu
- M3yaV3jOMGxvKoXEKC9gAoabJtZYlXO8wJcb1hMHQClZgSj7cbzsY4a2vSqltIlz8nMpZnMkEmVw
- N4DtcYJo3AMPXFIMRMax/BjhOxZi2CpKKpWSZCd4C8aZ4CpzjR+Cint9WEp5H12IbbySEpHdaYVh
- OY9onf0Qq9//zDCFEW0MbFjUz7mHD1UdO4B3iErk9whdKdWVRuW5YLl5KnU2rjTBDyPmQImm5mec
- WQx7X3fBNwAzQ9kvBTKR0BwR3Bewhisn2mpkhea3BZwBcdorRlQk9QKecyZukRPeHTmuEL1FdjlJ
- tmTlvoAJPnRaMnKinNICn4QthNaKlNAlLae9sc5UODaelVh+l345u7ZMIY89GNdmWV8cIaTFlLGm
- QKLrzQykh/Aw02WsdoE2l1g7JIPdyWGFL6Hy1uJZsEjavLUXkVyeIdrbpPoXQHxDG0l68wEoW8vG
- BLI6qc2XoUEWCUI26aQfK1wypuwV7v6mtMhtgL8avOP/pBCiigAAAABJRU5ErkJggg==
-X-Disclaimer: Opinions expressed in this email are my own and are not necessarily those of any organization with which I have an affiliation.
-Date:   Wed, 25 May 2022 12:13:45 -0700
-In-Reply-To: <87h75g0xbm.ffs@tglx> (Thomas Gleixner's message of "Mon, 23 May
-        2022 23:10:37 +0200")
-Message-ID: <87y1yph1cm.fsf@ebb.org>
-User-Agent: Gnus/5.13 (Gnus v5.13) Emacs/26.1 (gnu/linux)
+        with ESMTP id S1344753AbiEYTPQ (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Wed, 25 May 2022 15:15:16 -0400
+Received: from mail-vs1-xe33.google.com (mail-vs1-xe33.google.com [IPv6:2607:f8b0:4864:20::e33])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 5EDEB25283
+        for <linux-doc@vger.kernel.org>; Wed, 25 May 2022 12:14:21 -0700 (PDT)
+Received: by mail-vs1-xe33.google.com with SMTP id j7so10323292vsp.12
+        for <linux-doc@vger.kernel.org>; Wed, 25 May 2022 12:14:21 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112;
+        h=mime-version:from:date:message-id:subject:to:cc
+         :content-transfer-encoding;
+        bh=V3ilouT9genmWgVMdUNI5P/LrIsW5jIirCBfI8vk+4c=;
+        b=hjC540glZcaHzFjgPkV2v9T35nBAxubfGmHV2S5Z/B+P1/WskUkPuxR/kr/tykIGXJ
+         2vHX5WrsppnPbjvpuqvmMPMZ9HPhhvA6S7A8/D2TyV20k45AC+OFQcfBgjy1ZJGUqTwY
+         Kgl1rXCn2iR8gqkEqpgl3HG1dCL5zHmqup6a+1HPBuY3vM506dUpg9uLoCUtXBelTIOL
+         9p46PsPPJFkPvWZzpctSIwn+MMexAueyIpXOg/yvJaPxA3+XvQCHCif/ZSfj3uNVkShU
+         qSNUOYY2dMZ+hzvbNsgf4zWR9iYU3CaY5L6LSLdLHvKZrA30M+C9Pi7D/Jh65JMSiPVR
+         70bA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:mime-version:from:date:message-id:subject:to:cc
+         :content-transfer-encoding;
+        bh=V3ilouT9genmWgVMdUNI5P/LrIsW5jIirCBfI8vk+4c=;
+        b=Iu68VShAqzrDb1kDoySSnpK/KkdituRdiYQt/7xeMZg2VzPnkdDlT57K8FmxK47yfa
+         ksl9KBibQtwzpvi9WMpAVA+vA/fA5SRmvxpMvpp6av33thT1Wwq1hJyiHuHyFy0OvjAC
+         aLwdVQgv9XQ5M1XoPdweONMEoa1hcAxzOEreLOeMvAd2BlgkBtPSgx+HrEUE9gQcru4i
+         ZkNmXr/ceqxxooK73jXhVqPYgC3RcPvhCvI9eF8UaWb+LfCHjLnm8YskdoaBzzjIkqu8
+         OPEFgzCUXwd/4LlXD6qHD04hNp5agGJADmAv4KI78/bgPgMNqQXTSqx7I9T65yX+4bPj
+         yvkg==
+X-Gm-Message-State: AOAM530yCNpYmmSXXZsprJj3Pfdjqi948RI0WXUaJxsIkOBhx7gUdzgy
+        gccCP02i7N77Vg9vxkhy71oAcC/1mMY9Qe1epkQ=
+X-Google-Smtp-Source: ABdhPJxxV3nkZSef01atFpH4/bODDRBSp3jyq4LljAdcChstn+adKk+tJho8WeMw27csFWy3/bhZqSMAIO/MOEERDNM=
+X-Received: by 2002:a67:1787:0:b0:337:d8cd:35b2 with SMTP id
+ 129-20020a671787000000b00337d8cd35b2mr3913533vsx.29.1653506060518; Wed, 25
+ May 2022 12:14:20 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: 8BIT
-X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00,SPF_HELO_NONE,
-        SPF_PASS,T_SCC_BODY_TEXT_LINE autolearn=ham autolearn_force=no
-        version=3.4.6
+Received: by 2002:a59:d484:0:b0:2bc:cae4:6d22 with HTTP; Wed, 25 May 2022
+ 12:14:20 -0700 (PDT)
+From:   Rolf Benra <olfbenra@gmail.com>
+Date:   Wed, 25 May 2022 21:14:20 +0200
+Message-ID: <CA+z==Vsj_zeky5DFNKT8Q+O=mwToTyog=vcK0XAkQQ9W4xetXw@mail.gmail.com>
+Subject: Bitte kontaktaufnahme Erforderlich !!! Please Contact Required !!!
+To:     contact@firstdiamondbk.com
+Cc:     info@firstdiamondbk.com
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Spam-Status: No, score=0.6 required=5.0 tests=BAYES_50,DKIM_SIGNED,
+        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_FROM,
+        RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,SPF_PASS,T_SCC_BODY_TEXT_LINE
+        autolearn=unavailable autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-In answering Thomas' question …
+Guten Tag,
 
-Thomas Gleixner wrote at 14:10 (PDT) on Monday:
-> If I want to remove this option, then how do I express this with a SPDX
-> license identifier?
+Ich habe mich nur gefragt, ob Sie meine vorherige E-Mail bekommen
 
-… some licensing/SPDX background is in order.  (I apologize in advance for a
-few paragraphs of license-splaining, as I know that many on this thread know
-these points already, but I suspect most only have only vague familiarity
-with this issue.)
+haben ?
 
-copyleft-next 0.3.1 reads:
->> +11. Later License Versions
->> +    The Copyleft-Next Project may release new versions of copyleft-next,
->> +    designated by a distinguishing version number ("Later Versions").
+Ich habe versucht, Sie per E-Mail zu erreichen.
 
-Many don't realize that GPL is (or was, pre-copyleft-next) unique in
-structure among copyleft licenses in that the -or-later clause of all
-licenses in the GPL family is configurable.  That yields the complex forms
-of: GPLv1-only, GPLv1-or-later, GPLv2-only, GPLv2-or-later, etc.  GPLv3 even
-added the proxy upgrade clause (— a formulation SPDX can't handle at all).
+Kommen Sie bitte schnell zu mir zur=C3=BCck, es ist sehr wichtig.
 
-Other non-trivial FOSS licenses — such as Mozilla Public License (MPL),
-Common Development and Distribution License (CDDL), and Eclipse Public
-License (EPL) (as just three examples) — all have “automatic -or-later”.
-Thus, “MPLv2.0” *always* means “MPLv2.0-or-later”, so if you use the SPDX
-moniker for that (“MPL-2.0”), it really is akin to using “GPLv2-or-later”.
-Meanwhile, there is no *actual* way to license code under “MPLv2-only” — the
-license text itself prohibits it.
+Danke
 
-All that's to say: the GPL has (historically) always been a huge FOSS
-licensing special-case because of the complex configurability of its
-“-or-later” clause.
+Rolf Benra
 
-One of the last activities I did with SPDX (in late 2017) was to help
-negotiate a solution on reworking the GPL identifiers to deal with this
-special case.  The solution was a classic political compromise — where
-*everyone* left unhappy — but that's what led to the deprecation of SPDX's
-“GPL-2.0” identifier in favor of “GPL-2.0-or-later” and “GPL-2.0-only”.
+olfbenra@gmail.com
 
-I wasn't involved with SPDX anymore when they (much later) created the
-identifier “copyleft-next-0.3.1” — but it appears it was a case of “those
-who forget the past is condemned to repeat it” — because copyleft-next's
-SPDX identifier indeed has a similarly confusing ambiguity to “GPL-2.0”:
 
-copyleft-next 0.3.1 text reads further:
->> +    Unless I explicitly remove the option of Distributing Covered Works
->> +    under Later Versions, You may Distribute Covered Works under any Later
->> +    Version.
-Thomas Gleixner noted about it at 14:10 (PDT) on Monday:
-> If I want to remove this option, then how do I express this with a SPDX
-> license identifier?  Sigh!
 
-So, this problem that Thomas notes above is definitely an error by the SPDX
-project, *just like* the one that exists for the deprecated “GPL-2.0”
-identifier.  But, that isn't copyleft-next's fault [0], nor Luis's fault.
-IMO, Luis shouldn't be punished (i.e., by being prohibited by the Linux
-project from licensing under the GPLv2-compatible terms of his choosing)
-simply because the SPDX project erred.
 
-Fortunately, the problem *is* hypothetical here because Luis has *not*
-indicated that he's licensing under “copyleft-next-0.3.1 REVOKING
-new-version-upgrade”, so it's not a problem for Luis' patch that SPDX offers
-no way to represent that licensing sub-option in copyleft-next.
 
-[0] Nevertheless, I am wondering, given that (a) opting-out-of-auto-upgrade is
-    *so* GPL-specific, and (b) the auto-upgrade opt out has caused decades
-    of pain and woe throughout the GPL-using community (and for SPDX!),
-    maybe copyleft-next should, in fact, drop that clause entirely in future
-    versions. Discussion of that is likely not of interest to most folks on
-    this wide thread, so I'll pick up that conversation more narrowly just
-    on the copyleft-next list from here …
 
- -- bkuhn
+
+----------------------------------
+
+
+
+
+Good Afternoon,
+
+I was just wondering if you got my Previous E-mail
+have ?
+
+I tried to reach you by E-mail.
+
+Please come back to me quickly, it is very Important.
+
+Thanks
+
+Rolf Benra
+
+olfbenra@gmail.com
