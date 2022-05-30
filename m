@@ -2,97 +2,154 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 3C3825384E9
-	for <lists+linux-doc@lfdr.de>; Mon, 30 May 2022 17:28:29 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id EC0985384D8
+	for <lists+linux-doc@lfdr.de>; Mon, 30 May 2022 17:26:39 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S238234AbiE3P2W (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 30 May 2022 11:28:22 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:53632 "EHLO
+        id S236913AbiE3P0h (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 30 May 2022 11:26:37 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:53624 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S236865AbiE3P2N (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Mon, 30 May 2022 11:28:13 -0400
-Received: from mail-ej1-x636.google.com (mail-ej1-x636.google.com [IPv6:2a00:1450:4864:20::636])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id AF17A5D1A0
-        for <linux-doc@vger.kernel.org>; Mon, 30 May 2022 07:31:02 -0700 (PDT)
-Received: by mail-ej1-x636.google.com with SMTP id rs12so21097155ejb.13
-        for <linux-doc@vger.kernel.org>; Mon, 30 May 2022 07:31:02 -0700 (PDT)
+        with ESMTP id S237351AbiE3P0W (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Mon, 30 May 2022 11:26:22 -0400
+Received: from mail-oa1-x2d.google.com (mail-oa1-x2d.google.com [IPv6:2001:4860:4864:20::2d])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id D79971D6874;
+        Mon, 30 May 2022 07:29:04 -0700 (PDT)
+Received: by mail-oa1-x2d.google.com with SMTP id 586e51a60fabf-f3381207a5so3277098fac.4;
+        Mon, 30 May 2022 07:29:04 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linbit-com.20210112.gappssmtp.com; s=20210112;
-        h=from:to:cc:subject:date:message-id:mime-version
+        d=gmail.com; s=20210112;
+        h=sender:message-id:date:mime-version:user-agent:subject
+         :content-language:to:cc:references:from:in-reply-to
          :content-transfer-encoding;
-        bh=gxb0twe+qIbAIHnrcybPBuiYup84dUfDETp1oytzCp0=;
-        b=H4WS9mljziw5eyuIFXU3+6nhHdVRyKDmT3xsBen8MDl7r6NHRO278MIKQgBkQP8jgn
-         HGi++TprvrWKFqHXlP009Tvw6QS1SIo/1glHgSrJhgCUzgiHcLeZOBxSdsLBAOHHwe/H
-         NxtShcZg9NpDwIKZ3BECHnJ2elEPE1IMf62HGvY9JLO1Jh7kPzxk9odBuMvwvVHpge4t
-         RUV1IZgwU0voxwULayP/Hip/gkVZUV1S0kyh6MaZmH0cbzaSWmgSCkNm9NZRZaPEwbAC
-         jSpHn6DOqEYB5mfok8wL56qwISUe38ifMMvahXb9UCUU7mnRwYfDJpkkmf2CHU+58b8R
-         cWyA==
+        bh=2lSFMu8AJJfPdS/W3hc2k3KRIjU8ajJuQgUb4Pw7x3c=;
+        b=jfCfOBiLP2/kdAxxXz19geBf1/+HDXTbktRFPNXRpM9VC1++dGWSaCPy+tlNqLB749
+         t8+8xQW8zWsBCAeu2gWLJdrWgHHi5fK0bxs8LvBaDnez87dP182GMlMxt/5meXkmkDR1
+         yvp4UzCcXsQoa6oefVlGml6/a7JWH7M1EajTARfLs4hb8Wx5oGbd0pk/ZrxcLkUvCSIU
+         3aWsZw245xNQayCszTzb/A68QFWgPqQDlxMJadkG8n26qt6cIDxmidWhHH+nxWwNQHFh
+         20tGJ9y8v422Xqr6M5/Y8f3YAJtN9Xp75PfznlnCD086dzDLM9IhpP9JMwrILGWZF8hY
+         qvhA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+        h=x-gm-message-state:sender:message-id:date:mime-version:user-agent
+         :subject:content-language:to:cc:references:from:in-reply-to
          :content-transfer-encoding;
-        bh=gxb0twe+qIbAIHnrcybPBuiYup84dUfDETp1oytzCp0=;
-        b=4IHWEDSyQKyR0JIK+8Z/XK+B6YEJhV07MGUxjpJdTj/m0jU9zsG5Ae3UQhnt2WNqCD
-         7eI0WLkMA8vba7VhyAfEi33yccKS7IeylCZePv/SX5rto+DJq+Vh6iChSymZnRO8VuTN
-         ZNnWyRBV8gGtVSAbIiOez7MuG/8Pf9Ab7HOtTXUOSJvhMZ1Zblr7ZLhwwsTMh0Gzamg0
-         vAEwjHSCEU7ms/he66XCGyG8HfZlpQwLhmWYZ4ncMI9mXj8avBFZGaGPLAxvgdqIw2Tv
-         FI+fVShKO0GoZ+9XkazhYA6L9/Myk2fqOfRumumutpakChyR17wpIKGSMLsyrjD/uHGF
-         E08w==
-X-Gm-Message-State: AOAM531mNXCPjl/Ogjt7iKEVoA4MyQWYlBmjetaGDZdtEQ6P0VHUIH70
-        n27z4oOGbzMBXl3CTToc4HnPOZ39YA0tSw==
-X-Google-Smtp-Source: ABdhPJxCeQIChG6fpum4u+wt1QXIoQ2Da23oACmOb98ISRnbM4QYipYAizc1lBmrtSkQV1+bN74kgA==
-X-Received: by 2002:a17:906:c10:b0:6f4:6c70:b00f with SMTP id s16-20020a1709060c1000b006f46c70b00fmr49415762ejf.660.1653921061110;
-        Mon, 30 May 2022 07:31:01 -0700 (PDT)
-Received: from baileys.at.linbit.com (62-99-137-214.static.upcbusiness.at. [62.99.137.214])
-        by smtp.gmail.com with ESMTPSA id s26-20020a50ab1a000000b0042dd1d3d571sm1882262edc.26.2022.05.30.07.31.00
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 30 May 2022 07:31:00 -0700 (PDT)
-From:   Joel Colledge <joel.colledge@linbit.com>
-To:     linux-doc@vger.kernel.org
-Cc:     Jonathan Corbet <corbet@lwn.net>,
-        Joel Colledge <joel.colledge@linbit.com>
-Subject: [PATCH] docs: blockdev: change title to match section content
-Date:   Mon, 30 May 2022 16:28:49 +0200
-Message-Id: <20220530142849.717-1-joel.colledge@linbit.com>
-X-Mailer: git-send-email 2.36.1
+        bh=2lSFMu8AJJfPdS/W3hc2k3KRIjU8ajJuQgUb4Pw7x3c=;
+        b=pEJ7PZ1nfcc2o+xatGC3X14+mNmKDXr1VS6F+p91d6bLWSvET+TJqlnla0JLNZmC/+
+         02inmluTGFatOQXcV+RMfPxVMErzY8cgXvzmYcCxjd/iRFCWMsqSg4vBTSgmwvkOOa8T
+         CC2cq8MrTbmT0SNW9Nkxc4iuNRacwQsX+lAhhgvetZPmw894pO8F/8CguPQWmXdc54j+
+         S8qUehOXAgXNcMKnE6/E/Z3x6p0QCMprINMuR3jRbv7mdzxxnyQYz4tA13mCy0IjV5Uw
+         rPSveYooaO8S/SFL5On/cUbB3NxXzT9MQjb2Qxr++g8ni16UDTmAf0vDeFGFQxmdYaTc
+         R3Aw==
+X-Gm-Message-State: AOAM5310cmEWJWYoellZrn0OdxfST5APR/REjmMSklAbp0yGOIFSBWOH
+        TDsXYjJAnGYRWQUlc4OmY2XaCxB3bR0=
+X-Google-Smtp-Source: ABdhPJyd9gRPscqAGiRz33kt/0FE05apM8fmY2p6n2/+2zu3Ubrq6ca8+bLG4dRT3CTyxzXG40Y5Eg==
+X-Received: by 2002:a05:6870:a11c:b0:f2:cd6e:6555 with SMTP id m28-20020a056870a11c00b000f2cd6e6555mr10237914oae.71.1653920943151;
+        Mon, 30 May 2022 07:29:03 -0700 (PDT)
+Received: from ?IPV6:2600:1700:e321:62f0:329c:23ff:fee3:9d7c? ([2600:1700:e321:62f0:329c:23ff:fee3:9d7c])
+        by smtp.gmail.com with ESMTPSA id b1-20020a9d7541000000b006061debeed4sm4928024otl.69.2022.05.30.07.29.01
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Mon, 30 May 2022 07:29:02 -0700 (PDT)
+Sender: Guenter Roeck <groeck7@gmail.com>
+Message-ID: <aa75985e-ad75-4c71-40d8-e7d23c686f58@roeck-us.net>
+Date:   Mon, 30 May 2022 07:29:00 -0700
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-        DKIM_VALID,RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,SPF_PASS,
-        T_SCC_BODY_TEXT_LINE autolearn=ham autolearn_force=no version=3.4.6
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
+ Thunderbird/91.9.1
+Subject: Re: [PATCH AUTOSEL 4.19 36/38] hwmon: Make chip parameter for
+ with_info API mandatory
+Content-Language: en-US
+To:     Sasha Levin <sashal@kernel.org>, linux-kernel@vger.kernel.org,
+        stable@vger.kernel.org
+Cc:     jdelvare@suse.com, corbet@lwn.net, linux-hwmon@vger.kernel.org,
+        linux-doc@vger.kernel.org
+References: <20220530134924.1936816-1-sashal@kernel.org>
+ <20220530134924.1936816-36-sashal@kernel.org>
+From:   Guenter Roeck <linux@roeck-us.net>
+In-Reply-To: <20220530134924.1936816-36-sashal@kernel.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-Spam-Status: No, score=-1.7 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+        DKIM_VALID,DKIM_VALID_EF,FREEMAIL_ENVFROM_END_DIGIT,
+        FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,HEADER_FROM_DIFFERENT_DOMAINS,
+        NICE_REPLY_A,RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,SPF_PASS,
+        T_SCC_BODY_TEXT_LINE autolearn=no autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-This index.rst was added in commit
-39443104c7d3 docs: blockdev: convert to ReST
+On 5/30/22 06:49, Sasha Levin wrote:
+> From: Guenter Roeck <linux@roeck-us.net>
+> 
+> [ Upstream commit ddaefa209c4ac791c1262e97c9b2d0440c8ef1d5 ]
+> 
+> Various attempts were made recently to "convert" the old
+> hwmon_device_register() API to devm_hwmon_device_register_with_info()
+> by just changing the function name without actually converting the
+> driver. Prevent this from happening by making the 'chip' parameter of
+> devm_hwmon_device_register_with_info() mandatory.
+> 
+> Signed-off-by: Guenter Roeck <linux@roeck-us.net>
+> Signed-off-by: Sasha Levin <sashal@kernel.org>
 
-It appears that the title from the RapidIO index page was copied. This
-title does not match the content of this directory. Change it to match.
+Please drop.
 
-Signed-off-by: Joel Colledge <joel.colledge@linbit.com>
----
- Documentation/admin-guide/blockdev/index.rst | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
+Guenter
 
-diff --git a/Documentation/admin-guide/blockdev/index.rst b/Documentation/admin-guide/blockdev/index.rst
-index b903cf152091..957ccf617797 100644
---- a/Documentation/admin-guide/blockdev/index.rst
-+++ b/Documentation/admin-guide/blockdev/index.rst
-@@ -1,8 +1,8 @@
- .. SPDX-License-Identifier: GPL-2.0
- 
--===========================
--The Linux RapidIO Subsystem
--===========================
-+=============
-+Block Devices
-+=============
- 
- .. toctree::
-    :maxdepth: 1
--- 
-2.36.1
+> ---
+>   Documentation/hwmon/hwmon-kernel-api.txt |  2 +-
+>   drivers/hwmon/hwmon.c                    | 16 +++++++---------
+>   2 files changed, 8 insertions(+), 10 deletions(-)
+> 
+> diff --git a/Documentation/hwmon/hwmon-kernel-api.txt b/Documentation/hwmon/hwmon-kernel-api.txt
+> index eb7a78aebb38..4981df157b04 100644
+> --- a/Documentation/hwmon/hwmon-kernel-api.txt
+> +++ b/Documentation/hwmon/hwmon-kernel-api.txt
+> @@ -71,7 +71,7 @@ hwmon_device_register_with_info is the most comprehensive and preferred means
+>   to register a hardware monitoring device. It creates the standard sysfs
+>   attributes in the hardware monitoring core, letting the driver focus on reading
+>   from and writing to the chip instead of having to bother with sysfs attributes.
+> -The parent device parameter cannot be NULL with non-NULL chip info. Its
+> +The parent device parameter as well as the chip parameter must not be NULL. Its
+>   parameters are described in more detail below.
+>   
+>   devm_hwmon_device_register_with_info is similar to
+> diff --git a/drivers/hwmon/hwmon.c b/drivers/hwmon/hwmon.c
+> index c4051a3e63c2..fb82d8ee0dd6 100644
+> --- a/drivers/hwmon/hwmon.c
+> +++ b/drivers/hwmon/hwmon.c
+> @@ -695,11 +695,12 @@ EXPORT_SYMBOL_GPL(hwmon_device_register_with_groups);
+>   
+>   /**
+>    * hwmon_device_register_with_info - register w/ hwmon
+> - * @dev: the parent device
+> - * @name: hwmon name attribute
+> - * @drvdata: driver data to attach to created device
+> - * @chip: pointer to hwmon chip information
+> + * @dev: the parent device (mandatory)
+> + * @name: hwmon name attribute (mandatory)
+> + * @drvdata: driver data to attach to created device (optional)
+> + * @chip: pointer to hwmon chip information (mandatory)
+>    * @extra_groups: pointer to list of additional non-standard attribute groups
+> + *	(optional)
+>    *
+>    * hwmon_device_unregister() must be called when the device is no
+>    * longer needed.
+> @@ -712,13 +713,10 @@ hwmon_device_register_with_info(struct device *dev, const char *name,
+>   				const struct hwmon_chip_info *chip,
+>   				const struct attribute_group **extra_groups)
+>   {
+> -	if (!name)
+> -		return ERR_PTR(-EINVAL);
+> -
+> -	if (chip && (!chip->ops || !chip->ops->is_visible || !chip->info))
+> +	if (!dev || !name || !chip)
+>   		return ERR_PTR(-EINVAL);
+>   
+> -	if (chip && !dev)
+> +	if (!chip->ops || !chip->ops->is_visible || !chip->info)
+>   		return ERR_PTR(-EINVAL);
+>   
+>   	return __hwmon_device_register(dev, name, drvdata, chip, extra_groups);
 
