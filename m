@@ -2,133 +2,74 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 6A28E53A559
-	for <lists+linux-doc@lfdr.de>; Wed,  1 Jun 2022 14:45:11 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id AA5EC53A5CA
+	for <lists+linux-doc@lfdr.de>; Wed,  1 Jun 2022 15:18:32 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1353007AbiFAMpG (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 1 Jun 2022 08:45:06 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:57370 "EHLO
+        id S1353170AbiFANSa (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 1 Jun 2022 09:18:30 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:39960 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1353091AbiFAMo7 (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Wed, 1 Jun 2022 08:44:59 -0400
-Received: from out4-smtp.messagingengine.com (out4-smtp.messagingengine.com [66.111.4.28])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 0790750052;
-        Wed,  1 Jun 2022 05:44:56 -0700 (PDT)
-Received: from compute4.internal (compute4.nyi.internal [10.202.2.44])
-        by mailout.nyi.internal (Postfix) with ESMTP id 8B90E5C0276;
-        Wed,  1 Jun 2022 08:44:53 -0400 (EDT)
-Received: from imap44 ([10.202.2.94])
-  by compute4.internal (MEProxy); Wed, 01 Jun 2022 08:44:53 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=flygoat.com; h=
-        cc:cc:content-transfer-encoding:content-type:date:date:from:from
-        :in-reply-to:in-reply-to:message-id:mime-version:references
-        :reply-to:sender:subject:subject:to:to; s=fm2; t=1654087493; x=
-        1654173893; bh=ub+c6okPZwdQLkIW5lMu7hQ1gS1h1Ff56ZsM8OV2VO4=; b=v
-        OqtjAVU8xRqiUC+PxkOe5oem6WnQC7gCDtAfL5i+pqaMu+jNIqHZz0h5YYgnvvMP
-        EiAJftkitrYwf55KHLQsj3YbS/tmMI9t56/ncBu4MZBA4bmXaAAKbz8OBYMA5xJH
-        1LXIg60eTiKCSFQiMWIsCgfupeMnRyd5o8SV+BM51Uza+hCn1JnusviUcjdq2qWK
-        Uu+VsX6Nxumj2YRqpQyAmyyH9o1jSsvx1OoU7ZMcAH0ADNHm0ckpRxpFsmgJvZbM
-        kVEyWFgOZPUsMWTph/i7Zy+MHWJkcJqrXeEdYjE1l1aYHfftXnX8oe069yoNV+Rs
-        CYyrQoqKn2Ezwg+e2TEGA==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
-        messagingengine.com; h=cc:cc:content-transfer-encoding
-        :content-type:date:date:feedback-id:feedback-id:from:from
-        :in-reply-to:in-reply-to:message-id:mime-version:references
-        :reply-to:sender:subject:subject:to:to:x-me-proxy:x-me-proxy
-        :x-me-sender:x-me-sender:x-sasl-enc; s=fm1; t=1654087493; x=
-        1654173893; bh=ub+c6okPZwdQLkIW5lMu7hQ1gS1h1Ff56ZsM8OV2VO4=; b=I
-        Fl7RJvKobbryZfYJapdV68pyUr3ygTLE/cgiNTIrYWYSljpPRRlbToJpeb9UO88Z
-        hcD+I0SDhPmT+Vzr53T4WPSoa4XBVuWU9Amr1k+J70lrZEcXYdSxv6qyX7vgsmwJ
-        IPNqJFSTO9qyUPZQ3QOx4C1rppQsbvigGLzfeyPb0psag9MSanLEzlk8X59Y1UQY
-        h7FCFr6PTtPGy0n2Bu7NK8eAFvApqDTPU7Q4OAJRsgsKSKUvr7qsp5u9kkCGe2FQ
-        LU7O8Ps/TIHF8PjB7HoSCWxv4dEhcKYhajpI0m+HJ5MgshCLhToiPG7nfilxPFgG
-        SMz2HOerunFJzADKkKbUw==
-X-ME-Sender: <xms:RF-XYv7rIKl12oTZCAX0eaJ_rYiFwT8wWqzhaomzDDG0Zzr3iiVQNw>
-    <xme:RF-XYk7LKLHLNLTSGJ__rRxbT13sONW68kyIYMI9GqC2trKB7XRwk1OWCnoSVrVG0
-    x6B4h5wQdsrOe1qbS8>
-X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvfedrledtgdehhecutefuodetggdotefrodftvf
-    curfhrohhfihhlvgemucfhrghsthforghilhdpqfgfvfdpuffrtefokffrpgfnqfghnecu
-    uegrihhlohhuthemuceftddtnecusecvtfgvtghiphhivghnthhsucdlqddutddtmdenuc
-    fjughrpefofgggkfgjfhffhffvvefutgfgsehtqhertderreejnecuhfhrohhmpedflfhi
-    rgiguhhnucgjrghnghdfuceojhhirgiguhhnrdihrghnghesfhhlhihgohgrthdrtghomh
-    eqnecuggftrfgrthhtvghrnhepudefgeeftedugeehffdtheefgfevffelfefghefhjeeu
-    geevtefhudduvdeihefgnecuvehluhhsthgvrhfuihiivgeptdenucfrrghrrghmpehmrg
-    hilhhfrhhomhepjhhirgiguhhnrdihrghnghesfhhlhihgohgrthdrtghomh
-X-ME-Proxy: <xmx:RF-XYmf8Thyw4HD_IE231ADPfsUfb6ixsfJdM5RLZn_UoX_JPI8MzQ>
-    <xmx:RF-XYgJuPUrjLjU9M2GqmA-nrlSWxww6fgod_rTRauYocyz7j7sNcQ>
-    <xmx:RF-XYjJnGS9YfkjcdheEQT5m386HJ_7mSwVoT1DVVJeuuvbAajGB6w>
-    <xmx:RV-XYk6o3dQokokW8sL6mtBNAbrltL1loa9JphRu2jvoG2qxr8_5Vw>
-Feedback-ID: ifd894703:Fastmail
-Received: by mailuser.nyi.internal (Postfix, from userid 501)
-        id D413436A006F; Wed,  1 Jun 2022 08:44:52 -0400 (EDT)
-X-Mailer: MessagingEngine.com Webmail Interface
-User-Agent: Cyrus-JMAP/3.7.0-alpha0-591-gfe6c3a2700-fm-20220427.001-gfe6c3a27
-Mime-Version: 1.0
-Message-Id: <2c21b163-9eea-4221-b92c-afe471853add@www.fastmail.com>
-In-Reply-To: <20220601100005.2989022-1-chenhuacai@loongson.cn>
-References: <20220601100005.2989022-1-chenhuacai@loongson.cn>
-Date:   Wed, 01 Jun 2022 13:44:32 +0100
-From:   "Jiaxun Yang" <jiaxun.yang@flygoat.com>
-To:     "Huacai Chen" <chenhuacai@loongson.cn>,
-        "Arnd Bergmann" <arnd@arndb.de>,
-        "Andy Lutomirski" <luto@kernel.org>,
-        "Thomas Gleixner" <tglx@linutronix.de>,
-        "Peter Zijlstra" <peterz@infradead.org>,
-        "Andrew Morton" <akpm@linux-foundation.org>,
-        "David Airlie" <airlied@linux.ie>,
-        "Jonathan Corbet" <corbet@lwn.net>,
-        "Linus Torvalds" <torvalds@linux-foundation.org>
-Cc:     linux-arch@vger.kernel.org, linux-doc@vger.kernel.org,
-        linux-kernel@vger.kernel.org, "Xuefeng Li" <lixuefeng@loongson.cn>,
-        "Yanteng Si" <siyanteng@loongson.cn>,
-        "Huacai Chen" <chenhuacai@gmail.com>,
-        "Guo Ren" <guoren@kernel.org>, "Xuerui Wang" <kernel@xen0n.name>,
-        "Stephen Rothwell" <sfr@canb.auug.org.au>
-Subject: Re: [PATCH V12 00/24] arch: Add basic LoongArch support
-Content-Type: text/plain;charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-X-Spam-Status: No, score=-2.8 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_LOW,
-        RCVD_IN_MSPIKE_H3,RCVD_IN_MSPIKE_WL,SPF_HELO_PASS,SPF_PASS,
-        T_SCC_BODY_TEXT_LINE autolearn=ham autolearn_force=no version=3.4.6
+        with ESMTP id S1353183AbiFANS3 (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Wed, 1 Jun 2022 09:18:29 -0400
+Received: from mail-lj1-x22a.google.com (mail-lj1-x22a.google.com [IPv6:2a00:1450:4864:20::22a])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id E7BD54A3DD
+        for <linux-doc@vger.kernel.org>; Wed,  1 Jun 2022 06:18:27 -0700 (PDT)
+Received: by mail-lj1-x22a.google.com with SMTP id e4so1936602ljb.13
+        for <linux-doc@vger.kernel.org>; Wed, 01 Jun 2022 06:18:27 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112;
+        h=mime-version:reply-to:from:date:message-id:subject:to;
+        bh=4IWjHL/5Vo6JeFN3XdXq446L6FUUmY7SjaH1cuJ3kmM=;
+        b=JNfWGMCqD4jqApHRcz5KfIrVqEZ0P+yDeYzl2EbpNOsbRdV3dXN/WLuhiNcbc7HAjY
+         F/bBrZjfSo3KRLtCJlaI6xTWF+o7swL4bkx2ot6Rb7PHPi93Hc1SNafYayaE2UxNA5MF
+         AruvI63X6jYUbslPtX/euhS1RXc3WlVwdqWXCEyEvQLpYci2u1ZZkd5LT2LOY0pVP/zJ
+         JICzja3ZsaB3j//6GXi8ipeVYtyDJYxMH0b79BbrA+WxFfzxKqqrjJ/yt4qQ/QyoVVsl
+         u9ckDf7uwxETK+49c4TInDkZOvyctHfil0/ShzAfgBzXXRbeb/Buri9NzHKuh6lY2W1t
+         WPBA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:mime-version:reply-to:from:date:message-id
+         :subject:to;
+        bh=4IWjHL/5Vo6JeFN3XdXq446L6FUUmY7SjaH1cuJ3kmM=;
+        b=6p+FTHKAporyACfkfahjP4wLvF35Josk6jpK9BkE5JYv7L0SQp2cYHDLs9SHpzhiRc
+         UhrSZo0fQvRnSsKLbuvY0q4B3dnalp+z7zvzV7emagUnw2p51NGY6jmwvkg+/QR2W2XP
+         uw54b8VMgcyirNX4s+SGOhjR12c1exC8BI3dsynkBCtbkpJFz7S/As4w5J2oLm3cPHy0
+         fW+D5sr2FAb17W1VR2xUVIdPaR2I8PaOUFukB/EiLVa+KnUXB0yg7K+XSawTDr2av/cl
+         ccsQ4pQVulK6aMyqymXTl8kN87n7jrdLOm/9lKx8IY1GIqDhjaahupZiK1nGp3ALp2kB
+         Pjpw==
+X-Gm-Message-State: AOAM530MFVDGl00CAPrbv55xeqrIlyleuiblDBvblqX7nwJjjCpLCfv4
+        vJN/wEWUsfukz6Kcu/dpMLsm4pkyG1guxTynwIw=
+X-Google-Smtp-Source: ABdhPJz7bpz4hE43t2izmj54AAe5IXeqm/SD2e4j41bWWX3jVvJ3UUpBfNBGpHf5rrbyjukCHA2+kfD5Y0qcHM8Nl9g=
+X-Received: by 2002:a2e:980f:0:b0:255:5d00:2386 with SMTP id
+ a15-20020a2e980f000000b002555d002386mr4879539ljj.468.1654089506197; Wed, 01
+ Jun 2022 06:18:26 -0700 (PDT)
+MIME-Version: 1.0
+Received: by 2002:ab3:6bef:0:0:0:0:0 with HTTP; Wed, 1 Jun 2022 06:18:25 -0700 (PDT)
+Reply-To: jub47823@gmail.com
+From:   Julian Bikarm <klotsijeann2019@gmail.com>
+Date:   Wed, 1 Jun 2022 06:18:25 -0700
+Message-ID: <CAFjstLyMF158FQiE-DAakHooDi+e5VONFzUYDLY-FEvqN0oMYw@mail.gmail.com>
+Subject: Please can i have your attention
+To:     undisclosed-recipients:;
+Content-Type: text/plain; charset="UTF-8"
+X-Spam-Status: No, score=4.9 required=5.0 tests=BAYES_50,DKIM_SIGNED,
+        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_ENVFROM_END_DIGIT,
+        FREEMAIL_FROM,FREEMAIL_REPLYTO,FREEMAIL_REPLYTO_END_DIGIT,
+        RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,SPF_PASS,T_SCC_BODY_TEXT_LINE,
+        UNDISC_FREEM autolearn=no autolearn_force=no version=3.4.6
+X-Spam-Level: ****
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
+Dear ,
 
+  Please can I have your attention and possibly help me for humanity's
+sake please. I am writing this message with a heavy heart filled with
+sorrows and sadness.
+Please if you can respond, i have an issue that i will be most
+grateful if you could help me deal with it please.
 
-=E5=9C=A82022=E5=B9=B46=E6=9C=881=E6=97=A5=E5=85=AD=E6=9C=88 =E4=B8=8A=E5=
-=8D=8810:59=EF=BC=8CHuacai Chen=E5=86=99=E9=81=93=EF=BC=9A
-> LoongArch is a new RISC ISA, which is a bit like MIPS or RISC-V.
-> LoongArch includes a reduced 32-bit version (LA32R), a standard 32-bit
-> version (LA32S) and a 64-bit version (LA64). LoongArch use ACPI as its
-> boot protocol LoongArch-specific interrupt controllers (similar to API=
-C)
-> are already added in the next revision of ACPI Specification (current
-> revision is 6.4).
->
-
-I=E2=80=99ve been reviewing all LA changes in past week and now I=E2=80=99=
-m giving out R-b
-for every patch I had reviewed in detail. (I don=E2=80=99t really now an=
-ything about
- mm and processes so I just leave them).
-
-I also tried to run the kernel on my machine with Huacai=E2=80=99s next =
-tree and
-Xuerui=E2=80=99s BPI patch.
-
-I watched the =E2=80=9CNew World=E2=80=9D of LoongArch grow up from scra=
-tch. And I must
-say it=E2=80=99s a epic work showing the collaboration between community=
- and Loongson
-company. Especially Xuerui who invested numerous days and nights without=
- any
-return.
-
-Thanks to all people involved.
-
-- Jiaxun
-
+Julian
