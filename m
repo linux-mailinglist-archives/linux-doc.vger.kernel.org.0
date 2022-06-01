@@ -2,148 +2,113 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id AB65E53A76B
-	for <lists+linux-doc@lfdr.de>; Wed,  1 Jun 2022 16:01:56 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id ADB6E53A93E
+	for <lists+linux-doc@lfdr.de>; Wed,  1 Jun 2022 16:34:13 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1354049AbiFAOBw (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 1 Jun 2022 10:01:52 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:51922 "EHLO
+        id S1350692AbiFAOeL (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 1 Jun 2022 10:34:11 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:34276 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1354917AbiFAOBG (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Wed, 1 Jun 2022 10:01:06 -0400
-Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 65A434E3A0;
-        Wed,  1 Jun 2022 06:57:34 -0700 (PDT)
-Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
-        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
-        (No client certificate requested)
-        by dfw.source.kernel.org (Postfix) with ESMTPS id 6D67B615B9;
-        Wed,  1 Jun 2022 13:56:48 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 9AAB2C385A5;
-        Wed,  1 Jun 2022 13:56:46 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-        s=k20201202; t=1654091807;
-        bh=fDG575ttLgWbeLrePzoV7rDswfiDL4S0LUn1GVNsufA=;
-        h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-        b=XQ3ibUjysyhYFRwV0Xdo/ZvgJW06POU12BPuSAqHblDT8U4+u+qwnk1MeWGFyuQIH
-         eJIl5oJBWB8OYelPoS2crGdR0Tz5/MjP/g5eVu/MlCTyIPQFXc7ae2IQ3zXTdqkQnU
-         CPRuI5c9RtEBKgh0cMhwkYnU3EAmCcVWOpEVuGBVkpbzn3pMXwPJt3upolw8Ov1idB
-         Z5YEhqHze6YorwWPsPw1mRIlnyFgX+owRw1kztDTCeC4FX9pkqKJNZCdiUJYvMy23R
-         WsVFnOSO+2A0oMwQjnFHeeOUyRj9baC9FkagqQukVDbz/P7A8gF/GdtM8Vx2SUBgPz
-         ruXI8LWO6YIsg==
-From:   Sasha Levin <sashal@kernel.org>
-To:     linux-kernel@vger.kernel.org, stable@vger.kernel.org
-Cc:     Takashi Iwai <tiwai@suse.de>, Sasha Levin <sashal@kernel.org>,
-        perex@perex.cz, tiwai@suse.com, corbet@lwn.net,
-        geraldogabriel@gmail.com, matteomartelli3@gmail.com, bp@suse.de,
-        alsa-devel@alsa-project.org, linux-doc@vger.kernel.org
-Subject: [PATCH AUTOSEL 5.15 13/37] ALSA: usb-audio: Add quirk bits for enabling/disabling generic implicit fb
-Date:   Wed,  1 Jun 2022 09:55:58 -0400
-Message-Id: <20220601135622.2003939-13-sashal@kernel.org>
-X-Mailer: git-send-email 2.35.1
-In-Reply-To: <20220601135622.2003939-1-sashal@kernel.org>
-References: <20220601135622.2003939-1-sashal@kernel.org>
+        with ESMTP id S242256AbiFAOeL (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Wed, 1 Jun 2022 10:34:11 -0400
+Received: from mail-pf1-x431.google.com (mail-pf1-x431.google.com [IPv6:2607:f8b0:4864:20::431])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 417F7222BA
+        for <linux-doc@vger.kernel.org>; Wed,  1 Jun 2022 07:34:10 -0700 (PDT)
+Received: by mail-pf1-x431.google.com with SMTP id b135so2137835pfb.12
+        for <linux-doc@vger.kernel.org>; Wed, 01 Jun 2022 07:34:10 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112;
+        h=message-id:date:mime-version:user-agent:content-language:to:cc:from
+         :subject:content-transfer-encoding;
+        bh=SAXgCg0st95zS3LWjriYbqgNd9aWBfHtI9hRnLmW6kI=;
+        b=ioMldlGQBPK0jr4pBdrFkyNC89s+B0FLrDcYZi/etFa4xHmHMPqWi4zej8rdvWP4rT
+         CIU8E7b0ebg+bWawo10HP01ZWKzjdiSZ/BeTYA3g7beZ3HXpqWV+DV4WMV0w3TgWhN6r
+         Go3dJvDnSmMOym3jbAARse8pPLeaLmg163egpjbbL2B2WXswyDc6M8XLKgkpmUJlIrNB
+         9XQ9mQVX286GNLdXSaQZRoyTujmv9dIUTpmhwIszVlm8sJKG/qrKt6Rz1RawrMEmkVCO
+         5G9My2PrWOblCfy3Soqt/r7C23yFw6MxDLUBnV4A2FcQW+X6b6VugUAK6b6hpe5la5n/
+         0FNg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:message-id:date:mime-version:user-agent
+         :content-language:to:cc:from:subject:content-transfer-encoding;
+        bh=SAXgCg0st95zS3LWjriYbqgNd9aWBfHtI9hRnLmW6kI=;
+        b=dJxDTJPGGTHk1rvKC0wy9ZezBuUqoovH8oqHddrEJCbvhvlzklTd3nAMIBtBQpkWEk
+         2EeTHiRxplJIhQXJzXSYpdxmD5kzzMZqutN4AFggRRyy3sxMARXS7ii5WUW20RNg0WOl
+         GQ+IP3tLZWhfvzawMWKhkx5hlVydswzzcsXf9R9HO0FPe/sK2ObAVFge7QCDQjQtbFdb
+         asfUPG1EZu5MesMtX9Gwb6foBx8ennbegv+w4oUDS6iR21IbsN1qJuTOpWgoCWczAWRs
+         bGAh8evVGoU14ObgF3XSWohHDwlaFeud/P4REC3K+wrwh+Bqwhyw4lZQ5bd/WsvDkUdc
+         dzYQ==
+X-Gm-Message-State: AOAM531UoDOuiESQwAK/TflMGZ810nTqxz2xfiQ5YpriRd3ygbggKA45
+        htR8PoPy8r5xMZLfbgH0kJ4vRolJ9G8=
+X-Google-Smtp-Source: ABdhPJxk8OsGBz/GteOZn2ROZgIo782UjFkhG76JWqm/h91cS6JANKpN4xJCdn+q4qaMa+dH9yeTGg==
+X-Received: by 2002:a63:5760:0:b0:3fc:4001:a2f2 with SMTP id h32-20020a635760000000b003fc4001a2f2mr248444pgm.34.1654094049621;
+        Wed, 01 Jun 2022 07:34:09 -0700 (PDT)
+Received: from [192.168.11.5] (KD106167171201.ppp-bb.dion.ne.jp. [106.167.171.201])
+        by smtp.gmail.com with ESMTPSA id u14-20020a170902714e00b0015e8d4eb1f9sm1666016plm.67.2022.06.01.07.34.07
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Wed, 01 Jun 2022 07:34:09 -0700 (PDT)
+Message-ID: <bd0c2ddc-2401-03cb-4526-79ca664e1cbe@gmail.com>
+Date:   Wed, 1 Jun 2022 23:34:06 +0900
 MIME-Version: 1.0
-X-stable: review
-X-Patchwork-Hint: Ignore
-Content-Transfer-Encoding: 8bit
-X-Spam-Status: No, score=-7.7 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_HI,
-        SPF_HELO_NONE,SPF_PASS,T_SCC_BODY_TEXT_LINE autolearn=ham
-        autolearn_force=no version=3.4.6
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
+ Thunderbird/91.9.1
+Content-Language: en-US
+To:     Jonathan Corbet <corbet@lwn.net>
+Cc:     linux-doc@vger.kernel.org, Akira Yokosawa <akiyks@gmail.com>
+From:   Akira Yokosawa <akiyks@gmail.com>
+Subject: [PATCH] docs/conf.py: Cope with removal of language=None in Sphinx
+ 5.0.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-Spam-Status: No, score=-2.1 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_FROM,
+        RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,SPF_PASS,T_SCC_BODY_TEXT_LINE
+        autolearn=ham autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-From: Takashi Iwai <tiwai@suse.de>
+One of the changes in Sphinx 5.0.0 [1] says [sic]:
 
-[ Upstream commit 0f1f7a6661394fe4a53db254c346d6aa2dd64397 ]
+    5.0.0 final
 
-For making easier to test, add the new quirk_flags bits 17 and 18 to
-enable and disable the generic implicit feedback mode.  The bit 17 is
-equivalent with implicit_fb=1 option, applying the generic implicit
-feedback sync mode.  OTOH, the bit 18 disables the implicit fb mode
-forcibly.
+     - #10474: language does not accept None as it value.
+       The default value of language becomes to 'en' now.
 
-Link: https://lore.kernel.org/r/20220421064101.12456-1-tiwai@suse.de
-Signed-off-by: Takashi Iwai <tiwai@suse.de>
-Signed-off-by: Sasha Levin <sashal@kernel.org>
+[1]: https://www.sphinx-doc.org/en/master/changes.html#release-5-0-0-released-may-30-2022
+
+It results in a new warning from Sphinx 5.0.0 [sic]:
+
+    WARNING: Invalid configuration value found: 'language = None'.
+    Update your configuration to a valid langauge code. Falling
+    back to 'en' (English).
+
+Silence the warning by using 'en'.
+It works with all the Sphinx versions required for building
+kernel documentation (1.7.9 or later).
+
+Signed-off-by: Akira Yokosawa <akiyks@gmail.com>
 ---
- Documentation/sound/alsa-configuration.rst | 4 +++-
- sound/usb/implicit.c                       | 5 ++++-
- sound/usb/usbaudio.h                       | 6 ++++++
- 3 files changed, 13 insertions(+), 2 deletions(-)
+ Documentation/conf.py | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/Documentation/sound/alsa-configuration.rst b/Documentation/sound/alsa-configuration.rst
-index 65f61695f561..5d093fb4896b 100644
---- a/Documentation/sound/alsa-configuration.rst
-+++ b/Documentation/sound/alsa-configuration.rst
-@@ -2237,7 +2237,7 @@ implicit_fb
-     Apply the generic implicit feedback sync mode.  When this is set
-     and the playback stream sync mode is ASYNC, the driver tries to
-     tie an adjacent ASYNC capture stream as the implicit feedback
--    source.
-+    source.  This is equivalent with quirk_flags bit 17.
- use_vmalloc
-     Use vmalloc() for allocations of the PCM buffers (default: yes).
-     For architectures with non-coherent memory like ARM or MIPS, the
-@@ -2279,6 +2279,8 @@ quirk_flags
-         * bit 14: Ignore errors for mixer access
-         * bit 15: Support generic DSD raw U32_BE format
-         * bit 16: Set up the interface at first like UAC1
-+        * bit 17: Apply the generic implicit feedback sync mode
-+        * bit 18: Don't apply implicit feedback sync mode
+diff --git a/Documentation/conf.py b/Documentation/conf.py
+index 072ee31a301d..934727e23e0e 100644
+--- a/Documentation/conf.py
++++ b/Documentation/conf.py
+@@ -161,7 +161,7 @@ finally:
+ #
+ # This is also used if you do content translation via gettext catalogs.
+ # Usually you set "language" from the command line for these cases.
+-language = None
++language = 'en'
  
- This module supports multiple devices, autoprobe and hotplugging.
- 
-diff --git a/sound/usb/implicit.c b/sound/usb/implicit.c
-index 2d444ec74202..1fd087128538 100644
---- a/sound/usb/implicit.c
-+++ b/sound/usb/implicit.c
-@@ -350,7 +350,8 @@ static int audioformat_implicit_fb_quirk(struct snd_usb_audio *chip,
- 	}
- 
- 	/* Try the generic implicit fb if available */
--	if (chip->generic_implicit_fb)
-+	if (chip->generic_implicit_fb ||
-+	    (chip->quirk_flags & QUIRK_FLAG_GENERIC_IMPLICIT_FB))
- 		return add_generic_implicit_fb(chip, fmt, alts);
- 
- 	/* No quirk */
-@@ -387,6 +388,8 @@ int snd_usb_parse_implicit_fb_quirk(struct snd_usb_audio *chip,
- 				    struct audioformat *fmt,
- 				    struct usb_host_interface *alts)
- {
-+	if (chip->quirk_flags & QUIRK_FLAG_SKIP_IMPLICIT_FB)
-+		return 0;
- 	if (fmt->endpoint & USB_DIR_IN)
- 		return audioformat_capture_quirk(chip, fmt, alts);
- 	else
-diff --git a/sound/usb/usbaudio.h b/sound/usb/usbaudio.h
-index b8359a0aa008..044cd7ab27cb 100644
---- a/sound/usb/usbaudio.h
-+++ b/sound/usb/usbaudio.h
-@@ -164,6 +164,10 @@ extern bool snd_usb_skip_validation;
-  *  Support generic DSD raw U32_BE format
-  * QUIRK_FLAG_SET_IFACE_FIRST:
-  *  Set up the interface at first like UAC1
-+ * QUIRK_FLAG_GENERIC_IMPLICIT_FB
-+ *  Apply the generic implicit feedback sync mode (same as implicit_fb=1 option)
-+ * QUIRK_FLAG_SKIP_IMPLICIT_FB
-+ *  Don't apply implicit feedback sync mode
-  */
- 
- #define QUIRK_FLAG_GET_SAMPLE_RATE	(1U << 0)
-@@ -183,5 +187,7 @@ extern bool snd_usb_skip_validation;
- #define QUIRK_FLAG_IGNORE_CTL_ERROR	(1U << 14)
- #define QUIRK_FLAG_DSD_RAW		(1U << 15)
- #define QUIRK_FLAG_SET_IFACE_FIRST	(1U << 16)
-+#define QUIRK_FLAG_GENERIC_IMPLICIT_FB	(1U << 17)
-+#define QUIRK_FLAG_SKIP_IMPLICIT_FB	(1U << 18)
- 
- #endif /* __USBAUDIO_H */
+ # There are two options for replacing |today|: either, you set today to some
+ # non-false value, then it is used:
+
+base-commit: b86f46d5ce3e7497930be931a9a9e57480f0baff
 -- 
-2.35.1
+2.25.1
 
