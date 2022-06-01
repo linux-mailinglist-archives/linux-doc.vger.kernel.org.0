@@ -2,74 +2,107 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id AA5EC53A5CA
-	for <lists+linux-doc@lfdr.de>; Wed,  1 Jun 2022 15:18:32 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id A710A53A602
+	for <lists+linux-doc@lfdr.de>; Wed,  1 Jun 2022 15:38:01 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1353170AbiFANSa (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 1 Jun 2022 09:18:30 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:39960 "EHLO
+        id S1349217AbiFANh7 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 1 Jun 2022 09:37:59 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:41112 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1353183AbiFANS3 (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Wed, 1 Jun 2022 09:18:29 -0400
-Received: from mail-lj1-x22a.google.com (mail-lj1-x22a.google.com [IPv6:2a00:1450:4864:20::22a])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id E7BD54A3DD
-        for <linux-doc@vger.kernel.org>; Wed,  1 Jun 2022 06:18:27 -0700 (PDT)
-Received: by mail-lj1-x22a.google.com with SMTP id e4so1936602ljb.13
-        for <linux-doc@vger.kernel.org>; Wed, 01 Jun 2022 06:18:27 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=mime-version:reply-to:from:date:message-id:subject:to;
-        bh=4IWjHL/5Vo6JeFN3XdXq446L6FUUmY7SjaH1cuJ3kmM=;
-        b=JNfWGMCqD4jqApHRcz5KfIrVqEZ0P+yDeYzl2EbpNOsbRdV3dXN/WLuhiNcbc7HAjY
-         F/bBrZjfSo3KRLtCJlaI6xTWF+o7swL4bkx2ot6Rb7PHPi93Hc1SNafYayaE2UxNA5MF
-         AruvI63X6jYUbslPtX/euhS1RXc3WlVwdqWXCEyEvQLpYci2u1ZZkd5LT2LOY0pVP/zJ
-         JICzja3ZsaB3j//6GXi8ipeVYtyDJYxMH0b79BbrA+WxFfzxKqqrjJ/yt4qQ/QyoVVsl
-         u9ckDf7uwxETK+49c4TInDkZOvyctHfil0/ShzAfgBzXXRbeb/Buri9NzHKuh6lY2W1t
-         WPBA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=x-gm-message-state:mime-version:reply-to:from:date:message-id
-         :subject:to;
-        bh=4IWjHL/5Vo6JeFN3XdXq446L6FUUmY7SjaH1cuJ3kmM=;
-        b=6p+FTHKAporyACfkfahjP4wLvF35Josk6jpK9BkE5JYv7L0SQp2cYHDLs9SHpzhiRc
-         UhrSZo0fQvRnSsKLbuvY0q4B3dnalp+z7zvzV7emagUnw2p51NGY6jmwvkg+/QR2W2XP
-         uw54b8VMgcyirNX4s+SGOhjR12c1exC8BI3dsynkBCtbkpJFz7S/As4w5J2oLm3cPHy0
-         fW+D5sr2FAb17W1VR2xUVIdPaR2I8PaOUFukB/EiLVa+KnUXB0yg7K+XSawTDr2av/cl
-         ccsQ4pQVulK6aMyqymXTl8kN87n7jrdLOm/9lKx8IY1GIqDhjaahupZiK1nGp3ALp2kB
-         Pjpw==
-X-Gm-Message-State: AOAM530MFVDGl00CAPrbv55xeqrIlyleuiblDBvblqX7nwJjjCpLCfv4
-        vJN/wEWUsfukz6Kcu/dpMLsm4pkyG1guxTynwIw=
-X-Google-Smtp-Source: ABdhPJz7bpz4hE43t2izmj54AAe5IXeqm/SD2e4j41bWWX3jVvJ3UUpBfNBGpHf5rrbyjukCHA2+kfD5Y0qcHM8Nl9g=
-X-Received: by 2002:a2e:980f:0:b0:255:5d00:2386 with SMTP id
- a15-20020a2e980f000000b002555d002386mr4879539ljj.468.1654089506197; Wed, 01
- Jun 2022 06:18:26 -0700 (PDT)
+        with ESMTP id S240364AbiFANh6 (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Wed, 1 Jun 2022 09:37:58 -0400
+Received: from ms.lwn.net (ms.lwn.net [45.79.88.28])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 7BEB55DBC3;
+        Wed,  1 Jun 2022 06:37:56 -0700 (PDT)
+Received: from localhost (unknown [IPv6:2601:281:8300:73::5f6])
+        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+        (No client certificate requested)
+        by ms.lwn.net (Postfix) with ESMTPSA id 9C2F7723;
+        Wed,  1 Jun 2022 13:37:55 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 ms.lwn.net 9C2F7723
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=lwn.net; s=20201203;
+        t=1654090675; bh=CCyKZaTM8cScZ+FvD4o5tkWic0mc4WYiquvF86vt/9s=;
+        h=From:To:Cc:Subject:In-Reply-To:References:Date:From;
+        b=PYnjYLYiNnXb5BtrzwaY8VjScATB8FXb0qV68vyWL3ZYAiBRYd/4hZ3kunTyeBHZ6
+         brg1zsGRX1hfURW2AUDJYJHTWZpd1DAdVsdyXBXDEMfXoh8u8vM/EUBwMACxFVRqxa
+         o9uNVwSNwLR9pYR1mp3WS0GQ6NPkQhDKzrAmKbGpien5GjZsDJ1+9HntOnnygfPJki
+         vSKZv5M4jodGaAVU6K/9orrduBQvVBUYixGM3u8S3b5y3rk56QpvC1Ptxw0Fo2GKsf
+         v/HtyTRTtA16qJTA5Vo6Rv4Csjgj1EZuxM4Ov4BF9wcKfZIGyRPZfbVqTCqNpDBkn+
+         vt3FiUYtQZP9w==
+From:   Jonathan Corbet <corbet@lwn.net>
+To:     Vegard Nossum <vegard.nossum@oracle.com>, linux-doc@vger.kernel.org
+Cc:     linux-kernel@vger.kernel.org,
+        Vegard Nossum <vegard.nossum@oracle.com>,
+        Amit Shah <aams@amazon.com>,
+        Dave Hansen <dave.hansen@linux.intel.com>,
+        David Woodhouse <dwmw@amazon.co.uk>,
+        Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+        "Gustavo A . R . Silva" <gustavoars@kernel.org>,
+        Jiri Kosina <jkosina@suse.cz>,
+        Kees Cook <keescook@chromium.org>,
+        Laura Abbott <labbott@redhat.com>,
+        Linus Torvalds <torvalds@linux-foundation.org>,
+        Mauro Carvalho Chehab <mchehab@kernel.org>,
+        Paolo Bonzini <pbonzini@redhat.com>,
+        Peter Zijlstra <peterz@infradead.org>,
+        Solar Designer <solar@openwall.com>,
+        Thomas Gleixner <tglx@linutronix.de>,
+        Thorsten Leemhuis <linux@leemhuis.info>,
+        Tyler Hicks <tyhicks@canonical.com>,
+        Will Deacon <will@kernel.org>, Willy Tarreau <w@1wt.eu>
+Subject: Re: [PATCH] Documentation/security-bugs: overhaul
+In-Reply-To: <20220531230309.9290-1-vegard.nossum@oracle.com>
+References: <20220531230309.9290-1-vegard.nossum@oracle.com>
+Date:   Wed, 01 Jun 2022 07:38:05 -0600
+Message-ID: <87ilpk5wsi.fsf@meer.lwn.net>
 MIME-Version: 1.0
-Received: by 2002:ab3:6bef:0:0:0:0:0 with HTTP; Wed, 1 Jun 2022 06:18:25 -0700 (PDT)
-Reply-To: jub47823@gmail.com
-From:   Julian Bikarm <klotsijeann2019@gmail.com>
-Date:   Wed, 1 Jun 2022 06:18:25 -0700
-Message-ID: <CAFjstLyMF158FQiE-DAakHooDi+e5VONFzUYDLY-FEvqN0oMYw@mail.gmail.com>
-Subject: Please can i have your attention
-To:     undisclosed-recipients:;
-Content-Type: text/plain; charset="UTF-8"
-X-Spam-Status: No, score=4.9 required=5.0 tests=BAYES_50,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_ENVFROM_END_DIGIT,
-        FREEMAIL_FROM,FREEMAIL_REPLYTO,FREEMAIL_REPLYTO_END_DIGIT,
-        RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,SPF_PASS,T_SCC_BODY_TEXT_LINE,
-        UNDISC_FREEM autolearn=no autolearn_force=no version=3.4.6
-X-Spam-Level: ****
+Content-Type: text/plain
+X-Spam-Status: No, score=-2.1 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_NONE,
+        SPF_HELO_NONE,SPF_PASS,T_SCC_BODY_TEXT_LINE autolearn=ham
+        autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Dear ,
+Vegard Nossum <vegard.nossum@oracle.com> writes:
 
-  Please can I have your attention and possibly help me for humanity's
-sake please. I am writing this message with a heavy heart filled with
-sorrows and sadness.
-Please if you can respond, i have an issue that i will be most
-grateful if you could help me deal with it please.
+> The current instructions for reporting security vulnerabilities in the
+> kernel are not clear enough, in particular the process of disclosure
+> and requesting CVEs, and what the roles of the different lists are and
+> how exactly to report to each of them.
+>
+> Let's give this document an overhaul. Goals are stated as a comment at
+> the top of the document itself (these will not appear in the rendered
+> document).
 
-Julian
+...but they do appear in the plain-text document, which must also be
+readable.  Thus...
+
+[...]
+
+> diff --git a/Documentation/admin-guide/security-bugs.rst b/Documentation/admin-guide/security-bugs.rst
+> index 82e29837d5898..5f37b3f1e77dc 100644
+> --- a/Documentation/admin-guide/security-bugs.rst
+> +++ b/Documentation/admin-guide/security-bugs.rst
+> @@ -1,96 +1,175 @@
+> +..
+> +    If you modify this document, please consider the following:
+> +    
+> +    1) The most important information should be at the top (preferably in
+> +    the opening paragraph). This means contacting <security@kernel.org>;
+> +    if somebody doesn't read any further than that, at least the security
+> +    team will have the report.
+
+I submit that you are breaking your own rule by putting this stuff at
+the top of the document.  I'm not really convinced that you need it at
+all - we don't normally include these sort of instructions - but if it
+has to be here I would put it at the end.
+
+[Haven't had a chance to look at the real material yet]
+
+Thanks,
+
+jon
