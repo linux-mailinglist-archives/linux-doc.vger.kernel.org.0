@@ -2,105 +2,76 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 4FFFE53AD59
-	for <lists+linux-doc@lfdr.de>; Wed,  1 Jun 2022 21:48:45 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id D77FC53AFD5
+	for <lists+linux-doc@lfdr.de>; Thu,  2 Jun 2022 00:51:24 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S229562AbiFATan (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 1 Jun 2022 15:30:43 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:54822 "EHLO
+        id S231285AbiFAVKW (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 1 Jun 2022 17:10:22 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:54130 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S229605AbiFATal (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Wed, 1 Jun 2022 15:30:41 -0400
-Received: from mail-pl1-x62e.google.com (mail-pl1-x62e.google.com [IPv6:2607:f8b0:4864:20::62e])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 2347017C6AF;
-        Wed,  1 Jun 2022 12:28:42 -0700 (PDT)
-Received: by mail-pl1-x62e.google.com with SMTP id b5so2646622plx.10;
-        Wed, 01 Jun 2022 12:28:42 -0700 (PDT)
+        with ESMTP id S231172AbiFAVJ5 (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Wed, 1 Jun 2022 17:09:57 -0400
+Received: from mail-yw1-x114a.google.com (mail-yw1-x114a.google.com [IPv6:2607:f8b0:4864:20::114a])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id C8C891147D
+        for <linux-doc@vger.kernel.org>; Wed,  1 Jun 2022 14:09:55 -0700 (PDT)
+Received: by mail-yw1-x114a.google.com with SMTP id 00721157ae682-2fb7cb07885so25481267b3.23
+        for <linux-doc@vger.kernel.org>; Wed, 01 Jun 2022 14:09:55 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc;
-        bh=MwFYe8vG1hgF//coAlXZoNBBVbmnrkPi8xOD0rdFVts=;
-        b=KF2QzfcpN134OIsXyk3kBy72OtuSNqbJHaRvlqkAGA0kbj0Phrwf5K3xBxwidYkUPG
-         bJLJl3OjKYDIu8We1CSIRj89bkJWaPAS4LgNgc+eFD3nd7lncagoR28dNSEZsF2gr+qV
-         QtTWORwt+ry+x+RIOznMukILrX1XWqyCPsIdq+3O1AVHRR9hoIAoqHnWn19+CqUU3b6e
-         ht1Yty84Qu0f1N8QPJmld5ipZgWipzdIBsyTXZe8GDxgAEzY1Ic9Sv+lJL6inUqWJ1b4
-         /IMuJbDxT8M1ogwnWI0/Uw5PL76LSXDEJF/2DnKE2lsiLYAFqovXPYhDRYUR3zXGfr6p
-         FS5g==
+        d=google.com; s=20210112;
+        h=date:message-id:mime-version:subject:from:to:cc;
+        bh=eoJzH/fmzFvACjVcvXMxe/8zwQW+mPMqokRQV/WBtz0=;
+        b=I4e1nXx9RXm7sY0HmftB536BjJPeFCp3BQy7eEqPUaXM9dJP5nxl/iX3HWy6ta8/po
+         aSntDJ87OZUR0FtlBzM4E3l1cBvHdn/FHX8nlxwNJxOL22ZrI6SfY23BjXbX1q0kvav3
+         xk9J2O1V7l+QEjeclGH2UOIg8sra7op/dGXQsjM8JyhYNakRkeSH7KTyXd9giDnge1CU
+         rclyMxF2ETuh7Oo61zDK5B5zsqJeq7XreghYR6/8bhFkca1C+bklF8YWphFZIi+G7CMp
+         yTvTw+o1tJwJeoGsNXDRp2XEs1aWOU+sdJ5VsjYnISHAHHVhMPpnN/p3IytQmXHpnaFA
+         NcGg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc;
-        bh=MwFYe8vG1hgF//coAlXZoNBBVbmnrkPi8xOD0rdFVts=;
-        b=zPueRMssRFimdoyRa0L1gvyouQmKC8WeoOEGwjcPQepp4A1fTEDFgieIrCttG6xAMc
-         q18gGVbvORL6Sx6q9tJeqm7XT8NC+Ejfsuw52GeHDZr2dlGKZCcEBA9p3P15fwsR2zpF
-         GOoHUT5ywRRSU80xyti2Dh+ealU2UAFEXFRqxdvj29hw/xhBXyzR4/A0J/LiDYGpEHpH
-         LZQz865gplPXSNVwPyk0xJxpXqAwIqCwC9yWNEmEhiwZCXTHrMHkpf6jlT5RO4jPwKVG
-         UDcxTCir8pywenKcEw+7TY0t2qMrfO6HeSNay+PHAJnueyWARjsuu6esFJpEJ9tV+vnV
-         TAyw==
-X-Gm-Message-State: AOAM531HhaUzHsZS1otP9QbrVWPzA+dWV+kDLyZeIxZJNuS9qqCOWsFR
-        H9FMzAOdEdGa2me7i1aNYdZGKYiyPrcJif+D1oE=
-X-Google-Smtp-Source: ABdhPJyDA6C5DQXioXg31Wj9TMeGFjgKh185K1zYFg2Gp28lZkR0rLJ5Az2Ahuku4Ke5Wjt3PdFq+l9pcuaeBfBBob8=
-X-Received: by 2002:a17:90b:23d8:b0:1e2:e3cb:ac08 with SMTP id
- md24-20020a17090b23d800b001e2e3cbac08mr967331pjb.35.1654111697802; Wed, 01
- Jun 2022 12:28:17 -0700 (PDT)
-MIME-Version: 1.0
-References: <Yh0+9cFyAfnsXqxI@kernel.org> <05df964f-552e-402e-981c-a8bea11c555c@www.fastmail.com>
- <YiEZyTT/UBFZd6Am@kernel.org> <CALCETrWacW8SC2tpPxQSaLtxsOXfXHueyuwLcXpNF4aG-0ZvhA@mail.gmail.com>
- <fb7d6e4da58ae77be2c6321ee3f3487485b2886c.camel@intel.com>
- <40a3500c-835a-60b0-15bf-40c6622ad013@kernel.org> <YiZVbPwlgSFnhadv@kernel.org>
- <CAMe9rOrSLPKdL2gL=yx84zrs-u6ch1AVvjk3oqUe3thR5ZD=dQ@mail.gmail.com>
- <YpYDKVjMEYVlV6Ya@kernel.org> <d0c94eed6e3c7f35b78bab3f00aadebd960ee0d8.camel@intel.com>
- <YpZEDjxSPxUfMxDZ@kernel.org> <7c637f729e14f03d0df744568800fc986542e33d.camel@intel.com>
- <CAMe9rOpctH-FQZH_5e=f17Ma7Ev0u9jiXap5bgqFyhLfsx102g@mail.gmail.com> <172310e1b8fcc78fca786f9ea7966f58dd93ff93.camel@intel.com>
-In-Reply-To: <172310e1b8fcc78fca786f9ea7966f58dd93ff93.camel@intel.com>
-From:   "H.J. Lu" <hjl.tools@gmail.com>
-Date:   Wed, 1 Jun 2022 12:27:41 -0700
-Message-ID: <CAMe9rOqwueSXjhkyPfv4+UDbBwf5jtsVjKqm_aD-htkh8k99Rg@mail.gmail.com>
-Subject: Re: [PATCH 00/35] Shadow stacks for userspace
-To:     "Edgecombe, Rick P" <rick.p.edgecombe@intel.com>
-Cc:     "bsingharora@gmail.com" <bsingharora@gmail.com>,
-        "hpa@zytor.com" <hpa@zytor.com>,
-        "Syromiatnikov, Eugene" <esyr@redhat.com>,
-        "peterz@infradead.org" <peterz@infradead.org>,
-        "rdunlap@infradead.org" <rdunlap@infradead.org>,
-        "keescook@chromium.org" <keescook@chromium.org>,
-        "0x7f454c46@gmail.com" <0x7f454c46@gmail.com>,
-        "Eranian, Stephane" <eranian@google.com>,
-        "kirill.shutemov@linux.intel.com" <kirill.shutemov@linux.intel.com>,
-        "dave.hansen@linux.intel.com" <dave.hansen@linux.intel.com>,
-        "linux-mm@kvack.org" <linux-mm@kvack.org>,
-        "adrian@lisas.de" <adrian@lisas.de>,
-        "fweimer@redhat.com" <fweimer@redhat.com>,
-        "nadav.amit@gmail.com" <nadav.amit@gmail.com>,
-        "jannh@google.com" <jannh@google.com>,
-        "avagin@gmail.com" <avagin@gmail.com>,
-        "kcc@google.com" <kcc@google.com>,
-        "linux-arch@vger.kernel.org" <linux-arch@vger.kernel.org>,
-        "pavel@ucw.cz" <pavel@ucw.cz>, "oleg@redhat.com" <oleg@redhat.com>,
-        "bp@alien8.de" <bp@alien8.de>,
-        "Lutomirski, Andy" <luto@kernel.org>,
-        "Yang, Weijiang" <weijiang.yang@intel.com>,
-        "arnd@arndb.de" <arnd@arndb.de>,
-        "Moreira, Joao" <joao.moreira@intel.com>,
-        "linux-doc@vger.kernel.org" <linux-doc@vger.kernel.org>,
-        "tglx@linutronix.de" <tglx@linutronix.de>,
-        "mike.kravetz@oracle.com" <mike.kravetz@oracle.com>,
-        "x86@kernel.org" <x86@kernel.org>,
-        "rppt@kernel.org" <rppt@kernel.org>,
-        "john.allen@amd.com" <john.allen@amd.com>,
-        "dave.martin@arm.com" <dave.martin@arm.com>,
-        "mingo@redhat.com" <mingo@redhat.com>,
-        "Hansen, Dave" <dave.hansen@intel.com>,
-        "corbet@lwn.net" <corbet@lwn.net>,
-        "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
-        "gorcunov@gmail.com" <gorcunov@gmail.com>,
-        "Shankar, Ravi V" <ravi.v.shankar@intel.com>,
-        "linux-api@vger.kernel.org" <linux-api@vger.kernel.org>
+        h=x-gm-message-state:date:message-id:mime-version:subject:from:to:cc;
+        bh=eoJzH/fmzFvACjVcvXMxe/8zwQW+mPMqokRQV/WBtz0=;
+        b=mqmX1sU0vaXX0U571U2z0VmwQ4yMsl7PCjC6Kf7XX6g42Vkl6N2avyHcxV+HhvVbd+
+         tpuwPBmw9gkwJlN/7IhDGnIOuhMGt1I2Y9nJe66Cl4PjBEjMo1pPusMwotqtzAYAakrg
+         RrIfQNo/Q34YMIYiESjrvd8zUJqa5IIdpIyFouQGqG1ZmnVuZrL9Fgu3h8cjjBat6MnM
+         n8vE5hy42f7tcwpgCDVSGty2rQzBNTQIwV1d2ScX96N55VLzk9ZFwpFVOMr7CQw9QfBa
+         nUl0iSpg4umJXmMjNMjdOKNa8GgugPFNzPlN+0uRf4HcQX+RyCFhJUCDoxsx3cn71Ij1
+         SxQA==
+X-Gm-Message-State: AOAM532M0MvQbHsBv0HKuOS9PyCBsjAA5ECxmkSeLMbwxQF0NFsEYaPw
+        52nQaIN6LgyZiEBP9YRupGurol0xOlx6Abp5HGWN
+X-Google-Smtp-Source: ABdhPJxCWt56mzfA5CD6MeujZ27HxUTABufO/zQyWKERxfd0WM6O2BB0EgrhAOZyTRsf3KYc/T1JMlERUDmdwQvdDW0w
+X-Received: from ajr0.svl.corp.google.com ([2620:15c:2cd:203:aaec:e358:9f0e:2b26])
+ (user=axelrasmussen job=sendgmr) by 2002:a81:4a02:0:b0:2fe:d277:2b47 with
+ SMTP id x2-20020a814a02000000b002fed2772b47mr1708755ywa.169.1654117794963;
+ Wed, 01 Jun 2022 14:09:54 -0700 (PDT)
+Date:   Wed,  1 Jun 2022 14:09:45 -0700
+Message-Id: <20220601210951.3916598-1-axelrasmussen@google.com>
+Mime-Version: 1.0
+X-Mailer: git-send-email 2.36.1.255.ge46751e96f-goog
+Subject: [PATCH v3 0/6] userfaultfd: add /dev/userfaultfd for fine grained
+ access control
+From:   Axel Rasmussen <axelrasmussen@google.com>
+To:     Alexander Viro <viro@zeniv.linux.org.uk>,
+        Andrew Morton <akpm@linux-foundation.org>,
+        Charan Teja Reddy <charante@codeaurora.org>,
+        Dave Hansen <dave.hansen@linux.intel.com>,
+        "Dmitry V . Levin" <ldv@altlinux.org>,
+        Gleb Fotengauer-Malinovskiy <glebfm@altlinux.org>,
+        Hugh Dickins <hughd@google.com>, Jan Kara <jack@suse.cz>,
+        Jonathan Corbet <corbet@lwn.net>,
+        Mel Gorman <mgorman@techsingularity.net>,
+        Mike Kravetz <mike.kravetz@oracle.com>,
+        Mike Rapoport <rppt@kernel.org>, Nadav Amit <namit@vmware.com>,
+        Peter Xu <peterx@redhat.com>, Shuah Khan <shuah@kernel.org>,
+        Suren Baghdasaryan <surenb@google.com>,
+        Vlastimil Babka <vbabka@suse.cz>, zhangyi <yi.zhang@huawei.com>
+Cc:     Axel Rasmussen <axelrasmussen@google.com>,
+        linux-doc@vger.kernel.org, linux-fsdevel@vger.kernel.org,
+        linux-kernel@vger.kernel.org, linux-mm@kvack.org,
+        linux-kselftest@vger.kernel.org
 Content-Type: text/plain; charset="UTF-8"
-X-Spam-Status: No, score=-2.1 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_FROM,
-        RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,SPF_PASS,T_SCC_BODY_TEXT_LINE
+X-Spam-Status: No, score=-9.6 required=5.0 tests=BAYES_00,DKIMWL_WL_MED,
+        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_NONE,
+        SPF_HELO_NONE,SPF_PASS,T_SCC_BODY_TEXT_LINE,USER_IN_DEF_DKIM_WL
         autolearn=ham autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
@@ -108,47 +79,49 @@ Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Wed, Jun 1, 2022 at 10:27 AM Edgecombe, Rick P
-<rick.p.edgecombe@intel.com> wrote:
->
-> On Tue, 2022-05-31 at 11:00 -0700, H.J. Lu wrote:
-> > > The glibc logic seems wrong to me also, because shadow stack or IBT
-> > > could be force-disabled via glibc tunables. I don't see why the elf
-> > > header bit should exclusively control the feature locking. Or why
-> > > both
-> > > should be locked if only one is in the header.
-> >
-> > glibc locks SHSTK and IBT only if they are enabled at run-time.
->
-> It's not what I saw in the code. Somehow Mike saw something different
-> as well.
+This series is based on linux-next/akpm-base.
 
-The current glibc cet branch:
+The series is split up like so:
+- Patch 1 is a simple fixup which we should take in any case (even by itself).
+- Patches 2-4 add the feature, basic support for it to the selftest, and docs.
+- Patches 5-6 make the selftest configurable, so you can test one or the other
+  instead of always both. If we decide this is overcomplicated, we could just
+  drop these two patches and take the rest of the series.
 
-https://gitlab.com/x86-glibc/glibc/-/commits/users/hjl/cet/master
+Changelog:
 
-locks only available CET features.  Since only SHSTK is available, I
-saw
+v2->v3:
+  - Rebased onto linux-next/akpm-base, in order to be based on top of the
+    run_vmtests.sh refactor which was merged previously.
+  - Picked up some Reviewed-by's.
+  - Fixed ioctl definition (_IO instead of _IOWR), and stopped using
+    compat_ptr_ioctl since it is unneeded for ioctls which don't take a pointer.
+  - Removed the "handle_kernel_faults" bool, simplifying the code. The result is
+    logically equivalent, but simpler.
+  - Fixed userfaultfd selftest so it returns KSFT_SKIP appropriately.
+  - Reworded documentation per Shuah's feedback on v2.
+  - Improved example usage for userfaultfd selftest.
 
-arch_prctl(0x3003 /* ARCH_??? */, 0x2)  = 0
+v1->v2:
+  - Add documentation update.
+  - Test *both* userfaultfd(2) and /dev/userfaultfd via the selftest.
 
-CET features are always enabled early in ld.so to allow function
-calls in the CET enabled ld.so.   ld.so always locks CET features
-even if they are disabled when the program or a dependency
-library isn't CET enabled.
+Axel Rasmussen (6):
+  selftests: vm: add hugetlb_shared userfaultfd test to run_vmtests.sh
+  userfaultfd: add /dev/userfaultfd for fine grained access control
+  userfaultfd: selftests: modify selftest to use /dev/userfaultfd
+  userfaultfd: update documentation to describe /dev/userfaultfd
+  userfaultfd: selftests: make /dev/userfaultfd testing configurable
+  selftests: vm: add /dev/userfaultfd test cases to run_vmtests.sh
 
-> >  It doesn't
-> > enable/disable/lock WRSS at the moment.  If WRSS can be enabled
-> > via arch_prctl at any time, we can't lock it.  If WRSS should be
-> > locked early,
-> > how should it be enabled in application?  Also can WRSS be enabled
-> > from a dlopened object?
->
-> I think in the past we discussed having another elf header bit that
-> behaved differently (OR vs AND).
+ Documentation/admin-guide/mm/userfaultfd.rst | 40 ++++++++++-
+ Documentation/admin-guide/sysctl/vm.rst      |  3 +
+ fs/userfaultfd.c                             | 76 ++++++++++++++++----
+ include/uapi/linux/userfaultfd.h             |  4 ++
+ tools/testing/selftests/vm/run_vmtests.sh    | 11 ++-
+ tools/testing/selftests/vm/userfaultfd.c     | 66 ++++++++++++++---
+ 6 files changed, 172 insertions(+), 28 deletions(-)
 
-We should have a complete list of use cases and design a way to
-support them.
+--
+2.36.1.255.ge46751e96f-goog
 
--- 
-H.J.
