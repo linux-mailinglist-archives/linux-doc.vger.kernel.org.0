@@ -2,89 +2,131 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 7D2D953A200
-	for <lists+linux-doc@lfdr.de>; Wed,  1 Jun 2022 12:08:55 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 75D9A53A276
+	for <lists+linux-doc@lfdr.de>; Wed,  1 Jun 2022 12:21:26 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1350714AbiFAKIu (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 1 Jun 2022 06:08:50 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:53974 "EHLO
+        id S235611AbiFAKVY (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 1 Jun 2022 06:21:24 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:45074 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1351752AbiFAKHe (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Wed, 1 Jun 2022 06:07:34 -0400
-Received: from ams.source.kernel.org (ams.source.kernel.org [145.40.68.75])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id C96D12A716;
-        Wed,  1 Jun 2022 03:06:14 -0700 (PDT)
-Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
-        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
-        (No client certificate requested)
-        by ams.source.kernel.org (Postfix) with ESMTPS id 64B28B81916;
-        Wed,  1 Jun 2022 10:06:13 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 2CE9FC385A5;
-        Wed,  1 Jun 2022 10:06:06 +0000 (UTC)
-From:   Huacai Chen <chenhuacai@loongson.cn>
-To:     Arnd Bergmann <arnd@arndb.de>, Andy Lutomirski <luto@kernel.org>,
-        Thomas Gleixner <tglx@linutronix.de>,
-        Peter Zijlstra <peterz@infradead.org>,
-        Andrew Morton <akpm@linux-foundation.org>,
-        David Airlie <airlied@linux.ie>,
+        with ESMTP id S230182AbiFAKVX (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Wed, 1 Jun 2022 06:21:23 -0400
+Received: from mga06.intel.com (mga06b.intel.com [134.134.136.31])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 189A46D955;
+        Wed,  1 Jun 2022 03:21:23 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1654078883; x=1685614883;
+  h=date:from:to:cc:subject:message-id:reply-to:references:
+   mime-version:in-reply-to;
+  bh=MPDfwkz64kDPQGnp5LEYEWHtzrsbbGi1CtkgkpVVQ9g=;
+  b=my0Teip4tC+h3shpaalEILbiEcsZvyfUzCTkEnYUqVGXPt8d1tylIeSC
+   qhwvDylj53iu1h2GlNGQnChlyIxX+ESo1w/xIu1nQYXlAlHpX2eqW7hgr
+   zGGcipkkeX9Pz4GHyWfISA4Mg9qrVGSCNGYNROK5vWlng7/W4tw2i2sw1
+   Tic7YnnuEDcfJUyiLpRHkStg+ZOgrqEsuTyt/TKklXrE2WHj+tCU/NKHw
+   A9yqMUdVKiqRH4R7p6lf8pwEpmJRK4w1bgviNvncuhqxcC6fSoOzADrSt
+   2+QAckyQe/R4cztUs5dLmiqZYU1ioFMP2R9dPNTUuGo5dCVPPOM4p6VXA
+   w==;
+X-IronPort-AV: E=McAfee;i="6400,9594,10364"; a="336197555"
+X-IronPort-AV: E=Sophos;i="5.91,266,1647327600"; 
+   d="scan'208";a="336197555"
+Received: from orsmga005.jf.intel.com ([10.7.209.41])
+  by orsmga104.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 01 Jun 2022 03:21:22 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.91,266,1647327600"; 
+   d="scan'208";a="755837829"
+Received: from chaop.bj.intel.com (HELO localhost) ([10.240.192.101])
+  by orsmga005.jf.intel.com with ESMTP; 01 Jun 2022 03:21:12 -0700
+Date:   Wed, 1 Jun 2022 18:17:47 +0800
+From:   Chao Peng <chao.p.peng@linux.intel.com>
+To:     Vishal Annapurve <vannapurve@google.com>
+Cc:     kvm@vger.kernel.org, linux-kernel@vger.kernel.org,
+        linux-mm@kvack.org, linux-fsdevel@vger.kernel.org,
+        linux-api@vger.kernel.org, linux-doc@vger.kernel.org,
+        qemu-devel@nongnu.org, Paolo Bonzini <pbonzini@redhat.com>,
         Jonathan Corbet <corbet@lwn.net>,
-        Linus Torvalds <torvalds@linux-foundation.org>
-Cc:     linux-arch@vger.kernel.org, linux-doc@vger.kernel.org,
-        linux-kernel@vger.kernel.org, Xuefeng Li <lixuefeng@loongson.cn>,
-        Yanteng Si <siyanteng@loongson.cn>,
-        Huacai Chen <chenhuacai@gmail.com>,
-        Guo Ren <guoren@kernel.org>, Xuerui Wang <kernel@xen0n.name>,
-        Jiaxun Yang <jiaxun.yang@flygoat.com>,
-        Stephen Rothwell <sfr@canb.auug.org.au>,
-        Huacai Chen <chenhuacai@loongson.cn>,
-        WANG Xuerui <git@xen0n.name>
-Subject: [PATCH V12 24/24] MAINTAINERS: Add maintainer information for LoongArch
-Date:   Wed,  1 Jun 2022 18:00:05 +0800
-Message-Id: <20220601100005.2989022-25-chenhuacai@loongson.cn>
-X-Mailer: git-send-email 2.27.0
-In-Reply-To: <20220601100005.2989022-1-chenhuacai@loongson.cn>
-References: <20220601100005.2989022-1-chenhuacai@loongson.cn>
+        Sean Christopherson <seanjc@google.com>,
+        Vitaly Kuznetsov <vkuznets@redhat.com>,
+        Wanpeng Li <wanpengli@tencent.com>,
+        Jim Mattson <jmattson@google.com>,
+        Joerg Roedel <joro@8bytes.org>,
+        Thomas Gleixner <tglx@linutronix.de>,
+        Ingo Molnar <mingo@redhat.com>, Borislav Petkov <bp@alien8.de>,
+        x86@kernel.org, "H . Peter Anvin" <hpa@zytor.com>,
+        Hugh Dickins <hughd@google.com>,
+        Jeff Layton <jlayton@kernel.org>,
+        "J . Bruce Fields" <bfields@fieldses.org>,
+        Andrew Morton <akpm@linux-foundation.org>,
+        Mike Rapoport <rppt@kernel.org>,
+        Steven Price <steven.price@arm.com>,
+        "Maciej S . Szmigiero" <mail@maciej.szmigiero.name>,
+        Vlastimil Babka <vbabka@suse.cz>,
+        Yu Zhang <yu.c.zhang@linux.intel.com>,
+        "Kirill A . Shutemov" <kirill.shutemov@linux.intel.com>,
+        Andy Lutomirski <luto@kernel.org>,
+        Jun Nakajima <jun.nakajima@intel.com>, dave.hansen@intel.com,
+        ak@linux.intel.com, david@redhat.com, aarcange@redhat.com,
+        ddutile@redhat.com, dhildenb@redhat.com,
+        Quentin Perret <qperret@google.com>,
+        Michael Roth <michael.roth@amd.com>, mhocko@suse.com
+Subject: Re: [PATCH v6 3/8] mm/memfd: Introduce MFD_INACCESSIBLE flag
+Message-ID: <20220601101747.GA1255243@chaop.bj.intel.com>
+Reply-To: Chao Peng <chao.p.peng@linux.intel.com>
+References: <20220519153713.819591-1-chao.p.peng@linux.intel.com>
+ <20220519153713.819591-4-chao.p.peng@linux.intel.com>
+ <CAGtprH8EMsPMMoOEzjRu0SMVKT0RqmkLk=n+6uXkBA6-wiRtUA@mail.gmail.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Spam-Status: No, score=-6.7 required=5.0 tests=BAYES_00,
-        HEADER_FROM_DIFFERENT_DOMAINS,RCVD_IN_DNSWL_HI,SPF_HELO_NONE,SPF_PASS,
-        T_SCC_BODY_TEXT_LINE autolearn=ham autolearn_force=no version=3.4.6
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <CAGtprH8EMsPMMoOEzjRu0SMVKT0RqmkLk=n+6uXkBA6-wiRtUA@mail.gmail.com>
+X-Spam-Status: No, score=-4.9 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_EF,RCVD_IN_DNSWL_MED,SPF_HELO_NONE,
+        SPF_NONE,T_SCC_BODY_TEXT_LINE autolearn=ham autolearn_force=no
+        version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Add the maintainer information for the LoongArch (LA or LArch for short)
-architecture.
+On Tue, May 31, 2022 at 12:15:00PM -0700, Vishal Annapurve wrote:
+> On Thu, May 19, 2022 at 8:41 AM Chao Peng <chao.p.peng@linux.intel.com> wrote:
+> >
+> > Introduce a new memfd_create() flag indicating the content of the
+> > created memfd is inaccessible from userspace through ordinary MMU
+> > access (e.g., read/write/mmap). However, the file content can be
+> > accessed via a different mechanism (e.g. KVM MMU) indirectly.
+> >
+> 
+> SEV, TDX, pkvm and software-only VMs seem to have usecases to set up
+> initial guest boot memory with the needed blobs.
+> TDX already supports a KVM IOCTL to transfer contents to private
+> memory using the TDX module but rest of the implementations will need
+> to invent
+> a way to do this.
 
-Signed-off-by: WANG Xuerui <git@xen0n.name>
-Signed-off-by: Huacai Chen <chenhuacai@loongson.cn>
----
- MAINTAINERS | 10 ++++++++++
- 1 file changed, 10 insertions(+)
+There are some discussions in https://lkml.org/lkml/2022/5/9/1292
+already. I somehow agree with Sean. TDX is using an dedicated ioctl to
+copy guest boot memory to private fd so the rest can do that similarly.
+The concern is the performance (extra memcpy) but it's trivial since the
+initial guest payload is usually optimized in size.
 
-diff --git a/MAINTAINERS b/MAINTAINERS
-index f1b4b77daa5f..3e592ea84557 100644
---- a/MAINTAINERS
-+++ b/MAINTAINERS
-@@ -11544,6 +11544,16 @@ S:	Maintained
- F:	Documentation/devicetree/bindings/display/bridge/lontium,lt8912b.yaml
- F:	drivers/gpu/drm/bridge/lontium-lt8912b.c
- 
-+LOONGARCH
-+M:	Huacai Chen <chenhuacai@kernel.org>
-+R:	WANG Xuerui <kernel@xen0n.name>
-+S:	Maintained
-+T:	git git://git.kernel.org/pub/scm/linux/kernel/git/chenhuacai/linux-loongson.git
-+F:	arch/loongarch/
-+F:	drivers/*/*loongarch*
-+F:	Documentation/loongarch/
-+F:	Documentation/translations/zh_CN/loongarch/
-+
- LSILOGIC MPT FUSION DRIVERS (FC/SAS/SPI)
- M:	Sathya Prakash <sathya.prakash@broadcom.com>
- M:	Sreekanth Reddy <sreekanth.reddy@broadcom.com>
--- 
-2.27.0
+> 
+> Is there a plan to support a common implementation for either allowing
+> initial write access from userspace to private fd or adding a KVM
+> IOCTL to transfer contents to such a file,
+> as part of this series through future revisions?
 
+Indeed, adding pre-boot private memory populating on current design
+isn't impossible, but there are still some opens, e.g. how to expose
+private fd to userspace for access, pKVM and CC usages may have
+different requirements. Before that's well-studied I would tend to not
+add that and instead use an ioctl to copy. Whether we need a generic
+ioctl or feature-specific ioctl, I don't have strong opinion here.
+Current TDX uses a feature-specific ioctl so it's not covered in this
+series.
+
+Chao
+> 
+> Regards,
+> Vishal
