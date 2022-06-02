@@ -2,80 +2,89 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id D1DB253AF9D
-	for <lists+linux-doc@lfdr.de>; Thu,  2 Jun 2022 00:51:06 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 3BDE053B220
+	for <lists+linux-doc@lfdr.de>; Thu,  2 Jun 2022 05:42:05 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S231199AbiFAVK0 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 1 Jun 2022 17:10:26 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:54940 "EHLO
+        id S233528AbiFBDbW (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 1 Jun 2022 23:31:22 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:42524 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S231328AbiFAVKK (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Wed, 1 Jun 2022 17:10:10 -0400
-Received: from mail-yw1-x114a.google.com (mail-yw1-x114a.google.com [IPv6:2607:f8b0:4864:20::114a])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id DC43B3A5C4
-        for <linux-doc@vger.kernel.org>; Wed,  1 Jun 2022 14:10:08 -0700 (PDT)
-Received: by mail-yw1-x114a.google.com with SMTP id 00721157ae682-2fb7cb07885so25485977b3.23
-        for <linux-doc@vger.kernel.org>; Wed, 01 Jun 2022 14:10:08 -0700 (PDT)
+        with ESMTP id S233598AbiFBDbV (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Wed, 1 Jun 2022 23:31:21 -0400
+Received: from mail-wm1-x335.google.com (mail-wm1-x335.google.com [IPv6:2a00:1450:4864:20::335])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 563062789BE
+        for <linux-doc@vger.kernel.org>; Wed,  1 Jun 2022 20:31:18 -0700 (PDT)
+Received: by mail-wm1-x335.google.com with SMTP id r129so1922528wmr.3
+        for <linux-doc@vger.kernel.org>; Wed, 01 Jun 2022 20:31:18 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=google.com; s=20210112;
-        h=date:in-reply-to:message-id:mime-version:references:subject:from:to
-         :cc;
-        bh=pVaTSPAQEVy2CNYXgyGERflUa1UnpxtWsRCm1+DHM0I=;
-        b=qXULVoO6+EalsRQww91BZdH4F1FPzamFzdCuD9JMQ4oNnbzdCmSxgZc20iLjfaIyu9
-         035Kh0CdYGlLPiJ25ddJxscd3BxxTLLcfX0jtZdREgFMIqn1rkbSKgkARzioTC/A8tas
-         3NuYB6L1HD4gTO/aNzJLnSQ1WaggmOx0/438qBX2iBbhumXV/RhZOiPpIoLlmk0RUXOc
-         5t/PUzmGxbJzrDGV0mbbU7bvEqDmcNEq1Djll7wqS+zFaKHHjXzOSGDGaNE/ywAEkvwF
-         T/6K/glEUQhT8dMeNTcbQNapsDUmm9zjIn4Q0zu18LpjqZK/MsywWWDJdVtwA61+vhmX
-         MMOA==
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc:content-transfer-encoding;
+        bh=NtKZM7ZzL0kZiBk9fCkTs8IIiGvurk+lCaFLvy6F9KM=;
+        b=raUrDavqbUtfHUyTsuvpI3JJKenCcbQI1C91oKXMoIo0hS6fi+YXCZvOeeg2MEQNX1
+         dJ6bd3Ce4GTPVs0QEn79KZs2VPt6QKmzQP0Nwiu/KPgJO8R4RFx7GRPptekvllGm36QP
+         H1pTmzWRB1hHlS2eYOLCpjjFjyKzuVbWEWizG0E7Rh1GH62aQKt6rMy5q1V0iSdjlXRg
+         oTlWVwC1Vm733kv5iBJpVdPKqQ7NyLd0YOcyeLw1ZfsP2dkqPLzYSAtFTezRtt9x1fyy
+         WIXyado7VheTdhisXzaAk8sUkFbrRcuVKr0JJs9M+ijZAS3yhpw2MvnhzE+WK3dWox07
+         Y6Tw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=x-gm-message-state:date:in-reply-to:message-id:mime-version
-         :references:subject:from:to:cc;
-        bh=pVaTSPAQEVy2CNYXgyGERflUa1UnpxtWsRCm1+DHM0I=;
-        b=cirKMa6KTRfKkyKMSYyVOEpUO9PMz6gfMBZgeIv82UBh+SXyi/Mh6hWMnRpAGGKLy5
-         pYJ8tLmQHM94LVVjTLv1ztUhS38T4HO/dpscAALxcQUEU9j1vPGO2mhRSnEfLFjbTujT
-         bbeg3J8bPDqPHYAEPzHFQbL3RkbJKGuttNkX+XoG1GAFy/B0u4iyTSar6GWWzmR7MhJs
-         YXklRj+sTNWqy+Ey8gblSXA+uoC+4Qsr8GO6fy76+ipCzAEFxpff97t4ZDIo2sSJtOIa
-         8HSAoLqwQ/RxHw0MaSGeNk2cV0w5f8z2qyIiFUvyvgb6K70XjWJWQ81NuINSam8xSYHx
-         x7ZA==
-X-Gm-Message-State: AOAM5311bvxQKCPKL6MZ6fkOlijLh89TRSz8/5d2uCXkaIeTVlhxQQKq
-        KkhlOWv7XzSxGc4ddpsS3F4F4tgSriR82pvr2fp2
-X-Google-Smtp-Source: ABdhPJwG95aafNsEufWgrETrVkwWcP9feuuT5hALzrFwcXkK1hca+6s5+HAso23kqRPbpApWAa16vBUbLGVvfdFw/mck
-X-Received: from ajr0.svl.corp.google.com ([2620:15c:2cd:203:aaec:e358:9f0e:2b26])
- (user=axelrasmussen job=sendgmr) by 2002:a81:6c56:0:b0:30f:a8ef:950d with
- SMTP id h83-20020a816c56000000b0030fa8ef950dmr1726046ywc.322.1654117808101;
- Wed, 01 Jun 2022 14:10:08 -0700 (PDT)
-Date:   Wed,  1 Jun 2022 14:09:51 -0700
-In-Reply-To: <20220601210951.3916598-1-axelrasmussen@google.com>
-Message-Id: <20220601210951.3916598-7-axelrasmussen@google.com>
-Mime-Version: 1.0
-References: <20220601210951.3916598-1-axelrasmussen@google.com>
-X-Mailer: git-send-email 2.36.1.255.ge46751e96f-goog
-Subject: [PATCH v3 6/6] selftests: vm: add /dev/userfaultfd test cases to run_vmtests.sh
-From:   Axel Rasmussen <axelrasmussen@google.com>
-To:     Alexander Viro <viro@zeniv.linux.org.uk>,
-        Andrew Morton <akpm@linux-foundation.org>,
-        Charan Teja Reddy <charante@codeaurora.org>,
-        Dave Hansen <dave.hansen@linux.intel.com>,
-        "Dmitry V . Levin" <ldv@altlinux.org>,
-        Gleb Fotengauer-Malinovskiy <glebfm@altlinux.org>,
-        Hugh Dickins <hughd@google.com>, Jan Kara <jack@suse.cz>,
-        Jonathan Corbet <corbet@lwn.net>,
-        Mel Gorman <mgorman@techsingularity.net>,
-        Mike Kravetz <mike.kravetz@oracle.com>,
-        Mike Rapoport <rppt@kernel.org>, Nadav Amit <namit@vmware.com>,
-        Peter Xu <peterx@redhat.com>, Shuah Khan <shuah@kernel.org>,
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc:content-transfer-encoding;
+        bh=NtKZM7ZzL0kZiBk9fCkTs8IIiGvurk+lCaFLvy6F9KM=;
+        b=1cqA7vgLvVnceevNe0dvPNR0gxiYIMDRuZxSJH5+9OOm05Xq/riZJQtRfTqTDBG9qQ
+         5eD4wHRh8JoK7JDvTTyBQEK7cfhWyZa3yAwTVSeZY/weqmKIkspawqqTVo6GZoNC/nis
+         p6iXIYYrSCcCpYSJfSGgiTni9Ak+t8eoIen9XkYSPRaCTmnWsg5ifk5mgoH/AgT2V3Nb
+         xmCP+ZR95m5Hq0AJcCCryrsWi3VREFwQ4hrDZ/RdZjuJpetG1R3vdfGNz3UdA0sA4ri9
+         sxi3WRM50bx7WsPkq7UnTlhSEe1OvvbjY3Mg65AkRUc4ysOcvPGq/RLYjUmPCsMuzUSf
+         8J+g==
+X-Gm-Message-State: AOAM530wlIYNDpiGOBlDuD5fpLcVj7siZVjBCKheh990umvQucx1XAb7
+        jpgDFczZyYEAu+HirxIVGV9iwkpUZMY2fo+n8ihRIg==
+X-Google-Smtp-Source: ABdhPJwr9ksMbCqrYTe/BLeOa2HUtPjrOYz7Ly9AqSwbBXJ4IHGSxO1O40n+EYK78Sm55YfS5gAcIIlyabDnSvyGU9g=
+X-Received: by 2002:a05:600c:3547:b0:39c:1606:17c5 with SMTP id
+ i7-20020a05600c354700b0039c160617c5mr2125479wmq.61.1654140676586; Wed, 01 Jun
+ 2022 20:31:16 -0700 (PDT)
+MIME-Version: 1.0
+References: <20220531212521.1231133-1-kaleshsingh@google.com>
+ <20220531212521.1231133-3-kaleshsingh@google.com> <14f85d24-a9de-9706-32f0-30be4999c71c@oracle.com>
+ <CAC_TJveDzDaYQKmuLSkGWpnuCW+gvrqdVJqq=wbzoTRjw4OoFw@mail.gmail.com>
+ <875yll1fp1.fsf@stepbren-lnx.us.oracle.com> <4b79c2ea-dd1a-623d-e5b4-faa732c1a42d@gmail.com>
+In-Reply-To: <4b79c2ea-dd1a-623d-e5b4-faa732c1a42d@gmail.com>
+From:   Kalesh Singh <kaleshsingh@google.com>
+Date:   Wed, 1 Jun 2022 20:31:05 -0700
+Message-ID: <CAC_TJvdU=bhaeJACz70JOAL34W846Bk=EmvkXL8ccfoALJdaOQ@mail.gmail.com>
+Subject: Re: [Linaro-mm-sig] Re: [PATCH 2/2] procfs: Add 'path' to /proc/<pid>/fdinfo/
+To:     =?UTF-8?Q?Christian_K=C3=B6nig?= <ckoenig.leichtzumerken@gmail.com>,
+        Alexander Viro <viro@zeniv.linux.org.uk>
+Cc:     Stephen Brennan <stephen.s.brennan@oracle.com>,
+        Ioannis Ilkos <ilkos@google.com>,
+        "T.J. Mercier" <tjmercier@google.com>,
         Suren Baghdasaryan <surenb@google.com>,
-        Vlastimil Babka <vbabka@suse.cz>, zhangyi <yi.zhang@huawei.com>
-Cc:     Axel Rasmussen <axelrasmussen@google.com>,
-        linux-doc@vger.kernel.org, linux-fsdevel@vger.kernel.org,
-        linux-kernel@vger.kernel.org, linux-mm@kvack.org,
-        linux-kselftest@vger.kernel.org,
-        Shuah Khan <skhan@linuxfoundation.org>
+        "Cc: Android Kernel" <kernel-team@android.com>,
+        Jonathan Corbet <corbet@lwn.net>,
+        Sumit Semwal <sumit.semwal@linaro.org>,
+        =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>,
+        Andrew Morton <akpm@linux-foundation.org>,
+        David Hildenbrand <david@redhat.com>,
+        Christoph Anton Mitterer <mail@christoph.anton.mitterer.name>,
+        Johannes Weiner <hannes@cmpxchg.org>,
+        Colin Cross <ccross@google.com>,
+        Mike Rapoport <rppt@kernel.org>,
+        Paul Gortmaker <paul.gortmaker@windriver.com>,
+        Randy Dunlap <rdunlap@infradead.org>,
+        LKML <linux-kernel@vger.kernel.org>,
+        linux-fsdevel <linux-fsdevel@vger.kernel.org>,
+        "open list:DOCUMENTATION" <linux-doc@vger.kernel.org>,
+        Linux Media Mailing List <linux-media@vger.kernel.org>,
+        DRI mailing list <dri-devel@lists.freedesktop.org>,
+        "moderated list:DMA BUFFER SHARING FRAMEWORK" 
+        <linaro-mm-sig@lists.linaro.org>
 Content-Type: text/plain; charset="UTF-8"
-X-Spam-Status: No, score=-9.6 required=5.0 tests=BAYES_00,DKIMWL_WL_MED,
-        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_NONE,
-        SPF_HELO_NONE,SPF_PASS,T_SCC_BODY_TEXT_LINE,USER_IN_DEF_DKIM_WL
+Content-Transfer-Encoding: quoted-printable
+X-Spam-Status: No, score=-17.6 required=5.0 tests=BAYES_00,DKIMWL_WL_MED,
+        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,
+        ENV_AND_HDR_SPF_MATCH,RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,SPF_PASS,
+        T_SCC_BODY_TEXT_LINE,USER_IN_DEF_DKIM_WL,USER_IN_DEF_SPF_WL
         autolearn=unavailable autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
@@ -83,38 +92,244 @@ Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-This new mode was recently added to the userfaultfd selftest. We want to
-exercise both userfaultfd(2) as well as /dev/userfaultfd, so add both
-test cases to the script.
+On Wed, Jun 1, 2022 at 8:02 AM Christian K=C3=B6nig
+<ckoenig.leichtzumerken@gmail.com> wrote:
+>
+> Am 01.06.22 um 00:48 schrieb Stephen Brennan:
+> > Kalesh Singh <kaleshsingh@google.com> writes:
+> >> On Tue, May 31, 2022 at 3:07 PM Stephen Brennan
+> >> <stephen.s.brennan@oracle.com> wrote:
+> >>> On 5/31/22 14:25, Kalesh Singh wrote:
+> >>>> In order to identify the type of memory a process has pinned through
+> >>>> its open fds, add the file path to fdinfo output. This allows
+> >>>> identifying memory types based on common prefixes. e.g. "/memfd...",
+> >>>> "/dmabuf...", "/dev/ashmem...".
+> >>>>
+> >>>> Access to /proc/<pid>/fdinfo is governed by PTRACE_MODE_READ_FSCREDS
+> >>>> the same as /proc/<pid>/maps which also exposes the file path of
+> >>>> mappings; so the security permissions for accessing path is consiste=
+nt
+> >>>> with that of /proc/<pid>/maps.
+> >>> Hi Kalesh,
+> >> Hi Stephen,
+> >>
+> >> Thanks for taking a look.
+> >>
+> >>> I think I see the value in the size field, but I'm curious about path=
+,
+> >>> which is available via readlink /proc/<pid>/fd/<n>, since those are
+> >>> symlinks to the file themselves.
+> >> This could work if we are root, but the file permissions wouldn't
+> >> allow us to do the readlink on other processes otherwise. We want to
+> >> be able to capture the system state in production environments from
+> >> some trusted process with ptrace read capability.
+> > Interesting, thanks for explaining. It seems weird to have a duplicate
+> > interface for the same information but such is life.
+>
+> Yeah, the size change is really straight forward but for this one I'm
+> not 100% sure either.
 
-Reviewed-by: Shuah Khan <skhan@linuxfoundation.org>
-Signed-off-by: Axel Rasmussen <axelrasmussen@google.com>
----
- tools/testing/selftests/vm/run_vmtests.sh | 5 +++++
- 1 file changed, 5 insertions(+)
+The 2 concerns I think are:
+  1. Fun characters in the path names
+  2. If exposing the path is appropriate to begin with.
 
-diff --git a/tools/testing/selftests/vm/run_vmtests.sh b/tools/testing/selftests/vm/run_vmtests.sh
-index 7e102246dd9f..930c54eb5b4b 100755
---- a/tools/testing/selftests/vm/run_vmtests.sh
-+++ b/tools/testing/selftests/vm/run_vmtests.sh
-@@ -121,12 +121,17 @@ run_test ./gup_test -a
- run_test ./gup_test -ct -F 0x1 0 19 0x1000
- 
- run_test ./userfaultfd anon 20 16
-+run_test ./userfaultfd anon:dev 20 16
- # Hugetlb tests require source and destination huge pages. Pass in half the
- # size ($half_ufd_size_MB), which is used for *each*.
- run_test ./userfaultfd hugetlb "$half_ufd_size_MB" 32
-+run_test ./userfaultfd hugetlb:dev "$half_ufd_size_MB" 32
- run_test ./userfaultfd hugetlb_shared "$half_ufd_size_MB" 32 "$mnt"/uffd-test
- rm -f "$mnt"/uffd-test
-+run_test ./userfaultfd hugetlb_shared:dev "$half_ufd_size_MB" 32 "$mnt"/uffd-test
-+rm -f "$mnt"/uffd-test
- run_test ./userfaultfd shmem 20 16
-+run_test ./userfaultfd shmem:dev 20 16
- 
- #cleanup
- umount "$mnt"
--- 
-2.36.1.255.ge46751e96f-goog
+One way I think we can address both is to only expose the path for
+anon inodes. Then we have well-known path formats and we don't expose
+much about which files a process is accessing since these aren't real
+paths.
 
++       if (is_anon_inode(inode)) {
++               seq_puts(m, "path:\t");
++               seq_file_path(m, file, "\n");
++               seq_putc(m, '\n');
++       }
+
+Interested to hear thoughts on it.
+
+>
+> Probably best to ping some core fs developer before going further with it=
+.
+
+linux-fsdevel is cc'd here. Adding Al Vrio as well. Please let me know
+if there are other parties I should include.
+
+>
+> BTW: Any preferred branch to push this upstream? If not I can take it
+> through drm-misc-next.
+
+No other dependencies for this, so drm-misc-next is good.
+
+Thanks,
+Kalesh
+
+>
+> Regards,
+> Christian.
+>
+> >
+> >>> File paths can contain fun characters like newlines or colons, which
+> >>> could make parsing out filenames in this text file... fun. How would =
+your
+> >>> userspace parsing logic handle "/home/stephen/filename\nsize:\t4096"?=
+ The
+> >>> readlink(2) API makes that easy already.
+> >> I think since we have escaped the "\n" (seq_file_path(m, file, "\n")),
+> > I really should have read through that function before commenting,
+> > thanks for teaching me something new :)
+> >
+> > Stephen
+> >
+> >> then user space might parse this line like:
+> >>
+> >> if (strncmp(line, "path:\t", 6) =3D=3D 0)
+> >>          char* path =3D line + 6;
+> >>
+> >>
+> >> Thanks,
+> >> Kalesh
+> >>
+> >>> Is the goal avoiding races (e.g. file descriptor 3 is closed and reop=
+ened
+> >>> to a different path between reading fdinfo and stating the fd)?
+> >>>
+> >>> Stephen
+> >>>
+> >>>> Signed-off-by: Kalesh Singh <kaleshsingh@google.com>
+> >>>> ---
+> >>>>
+> >>>> Changes from rfc:
+> >>>>    - Split adding 'size' and 'path' into a separate patches, per Chr=
+istian
+> >>>>    - Fix indentation (use tabs) in documentaion, per Randy
+> >>>>
+> >>>>   Documentation/filesystems/proc.rst | 14 ++++++++++++--
+> >>>>   fs/proc/fd.c                       |  4 ++++
+> >>>>   2 files changed, 16 insertions(+), 2 deletions(-)
+> >>>>
+> >>>> diff --git a/Documentation/filesystems/proc.rst b/Documentation/file=
+systems/proc.rst
+> >>>> index 779c05528e87..591f12d30d97 100644
+> >>>> --- a/Documentation/filesystems/proc.rst
+> >>>> +++ b/Documentation/filesystems/proc.rst
+> >>>> @@ -1886,14 +1886,16 @@ if precise results are needed.
+> >>>>   3.8  /proc/<pid>/fdinfo/<fd> - Information about opened file
+> >>>>   ---------------------------------------------------------------
+> >>>>   This file provides information associated with an opened file. The=
+ regular
+> >>>> -files have at least five fields -- 'pos', 'flags', 'mnt_id', 'ino',=
+ and 'size'.
+> >>>> +files have at least six fields -- 'pos', 'flags', 'mnt_id', 'ino', =
+'size',
+> >>>> +and 'path'.
+> >>>>
+> >>>>   The 'pos' represents the current offset of the opened file in deci=
+mal
+> >>>>   form [see lseek(2) for details], 'flags' denotes the octal O_xxx m=
+ask the
+> >>>>   file has been created with [see open(2) for details] and 'mnt_id' =
+represents
+> >>>>   mount ID of the file system containing the opened file [see 3.5
+> >>>>   /proc/<pid>/mountinfo for details]. 'ino' represents the inode num=
+ber of
+> >>>> -the file, and 'size' represents the size of the file in bytes.
+> >>>> +the file, 'size' represents the size of the file in bytes, and 'pat=
+h'
+> >>>> +represents the file path.
+> >>>>
+> >>>>   A typical output is::
+> >>>>
+> >>>> @@ -1902,6 +1904,7 @@ A typical output is::
+> >>>>        mnt_id: 19
+> >>>>        ino:    63107
+> >>>>        size:   0
+> >>>> +     path:   /dev/null
+> >>>>
+> >>>>   All locks associated with a file descriptor are shown in its fdinf=
+o too::
+> >>>>
+> >>>> @@ -1920,6 +1923,7 @@ Eventfd files
+> >>>>        mnt_id: 9
+> >>>>        ino:    63107
+> >>>>        size:   0
+> >>>> +     path:   anon_inode:[eventfd]
+> >>>>        eventfd-count:  5a
+> >>>>
+> >>>>   where 'eventfd-count' is hex value of a counter.
+> >>>> @@ -1934,6 +1938,7 @@ Signalfd files
+> >>>>        mnt_id: 9
+> >>>>        ino:    63107
+> >>>>        size:   0
+> >>>> +     path:   anon_inode:[signalfd]
+> >>>>        sigmask:        0000000000000200
+> >>>>
+> >>>>   where 'sigmask' is hex value of the signal mask associated
+> >>>> @@ -1949,6 +1954,7 @@ Epoll files
+> >>>>        mnt_id: 9
+> >>>>        ino:    63107
+> >>>>        size:   0
+> >>>> +     path:   anon_inode:[eventpoll]
+> >>>>        tfd:        5 events:       1d data: ffffffffffffffff pos:0 i=
+no:61af sdev:7
+> >>>>
+> >>>>   where 'tfd' is a target file descriptor number in decimal form,
+> >>>> @@ -1968,6 +1974,7 @@ For inotify files the format is the following:=
+:
+> >>>>        mnt_id: 9
+> >>>>        ino:    63107
+> >>>>        size:   0
+> >>>> +     path:   anon_inode:inotify
+> >>>>        inotify wd:3 ino:9e7e sdev:800013 mask:800afce ignored_mask:0=
+ fhandle-bytes:8 fhandle-type:1 f_handle:7e9e0000640d1b6d
+> >>>>
+> >>>>   where 'wd' is a watch descriptor in decimal form, i.e. a target fi=
+le
+> >>>> @@ -1992,6 +1999,7 @@ For fanotify files the format is::
+> >>>>        mnt_id: 9
+> >>>>        ino:    63107
+> >>>>        size:   0
+> >>>> +     path:   anon_inode:[fanotify]
+> >>>>        fanotify flags:10 event-flags:0
+> >>>>        fanotify mnt_id:12 mflags:40 mask:38 ignored_mask:40000003
+> >>>>        fanotify ino:4f969 sdev:800013 mflags:0 mask:3b ignored_mask:=
+40000000 fhandle-bytes:8 fhandle-type:1 f_handle:69f90400c275b5b4
+> >>>> @@ -2018,6 +2026,7 @@ Timerfd files
+> >>>>        mnt_id: 9
+> >>>>        ino:    63107
+> >>>>        size:   0
+> >>>> +     path:   anon_inode:[timerfd]
+> >>>>        clockid: 0
+> >>>>        ticks: 0
+> >>>>        settime flags: 01
+> >>>> @@ -2042,6 +2051,7 @@ DMA Buffer files
+> >>>>        mnt_id: 9
+> >>>>        ino:    63107
+> >>>>        size:   32768
+> >>>> +     path:   /dmabuf:
+> >>>>        count:  2
+> >>>>        exp_name:  system-heap
+> >>>>
+> >>>> diff --git a/fs/proc/fd.c b/fs/proc/fd.c
+> >>>> index 464bc3f55759..8889a8ba09d4 100644
+> >>>> --- a/fs/proc/fd.c
+> >>>> +++ b/fs/proc/fd.c
+> >>>> @@ -60,6 +60,10 @@ static int seq_show(struct seq_file *m, void *v)
+> >>>>        seq_printf(m, "ino:\t%lu\n", file_inode(file)->i_ino);
+> >>>>        seq_printf(m, "size:\t%lli\n", (long long)file_inode(file)->i=
+_size);
+> >>>>
+> >>>> +     seq_puts(m, "path:\t");
+> >>>> +     seq_file_path(m, file, "\n");
+> >>>> +     seq_putc(m, '\n');
+> >>>> +
+> >>>>        /* show_fd_locks() never deferences files so a stale value is=
+ safe */
+> >>>>        show_fd_locks(m, file, files);
+> >>>>        if (seq_has_overflowed(m))
+> >>> --
+> >>> To unsubscribe from this group and stop receiving emails from it, sen=
+d an email to kernel-team+unsubscribe@android.com.
+> >>>
+> > _______________________________________________
+> > Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
+> > To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
+>
