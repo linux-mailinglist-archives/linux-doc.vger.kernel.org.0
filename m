@@ -2,75 +2,96 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 1DA4E53B882
-	for <lists+linux-doc@lfdr.de>; Thu,  2 Jun 2022 14:01:18 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id AA68853B998
+	for <lists+linux-doc@lfdr.de>; Thu,  2 Jun 2022 15:24:50 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S230285AbiFBMBJ (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 2 Jun 2022 08:01:09 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:38814 "EHLO
+        id S231922AbiFBNYt (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 2 Jun 2022 09:24:49 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:59524 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S233369AbiFBMBE (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Thu, 2 Jun 2022 08:01:04 -0400
-Received: from mail-pg1-x52a.google.com (mail-pg1-x52a.google.com [IPv6:2607:f8b0:4864:20::52a])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 677106CF5E
-        for <linux-doc@vger.kernel.org>; Thu,  2 Jun 2022 05:01:01 -0700 (PDT)
-Received: by mail-pg1-x52a.google.com with SMTP id d129so4565041pgc.9
-        for <linux-doc@vger.kernel.org>; Thu, 02 Jun 2022 05:01:01 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=mime-version:reply-to:from:date:message-id:subject:to;
-        bh=4IWjHL/5Vo6JeFN3XdXq446L6FUUmY7SjaH1cuJ3kmM=;
-        b=Z0GNLGOQlQiVCTn0GSzIMExA6LQSF964HsiNo0/GkCcgyoVikpFVgb3SgNI6IocpoK
-         18QirK0BMjGIPFByKBkJpk9YYl3o5GKcvvu37zWBDiIrEbPiUigOnBBRfhFAFZlogr0Z
-         q24uOPLTo4hgWQS580Sc+lKFapzmj7HG0W6Zn/PMGzWM2+H+7A9QwUG9V8O4K3LC8NCM
-         Du/oS4Ix9agXfU5hMcQcnfZaWNK2rfBZvkCmQalC3Gcqj59VVg9DJbgGdf/sEWDy/Ykh
-         Tklnz9RB2rIMl/hMxN9Y0c1ulH3rEy+lCMyfzHOYMmKcrBUjFlmI/wzDGFp23mVxofLt
-         Ic6Q==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=x-gm-message-state:mime-version:reply-to:from:date:message-id
-         :subject:to;
-        bh=4IWjHL/5Vo6JeFN3XdXq446L6FUUmY7SjaH1cuJ3kmM=;
-        b=iyJpU9G/ZqyY9LQzwxWDJ1JTd/csg05CAeLp8P2/X7ugrLZpB8De0wli2iNwQdvgrv
-         o933UXKgsnkyDWZ7wY6bYzTeXPcTgxHBKkQaSMVOWs0tCi6ACcSePq74WZq6GWTWoPXg
-         a8bBIR1De1gi/770Z+/0Cb4bG4KoP5x3pOnatrCxjDXNEohWW6VhtrlgDJtTTRHvu6ZV
-         Vjyaw1zjnQxkhO64HD9bZXu67KmyzA4MUsBLujlDWTCAUbDc5sPpfn7EVRgfrC8vXU9g
-         4NNC6BeIQFE9NK7rz93JVlNnxwSaRdgmfz6V6oUpBVIVNv7iHooMxIifj1imYS1qdhtk
-         ntMA==
-X-Gm-Message-State: AOAM533Eu45FvUcPH3F6Bly3AOh8RExG36P+/6MfFYizH4GP9tcMRaDg
-        8QD2NwWzUjcB4tfhQri6GHOIZIf5bNhNr226P5s=
-X-Google-Smtp-Source: ABdhPJwdSQDf750AkGLNra4aP67+c78Cn7v5xBdGA8WYFq1b7NwHKp+APY5aD6SUMxYKyqPhE11PGhanDJn5K5gjdQI=
-X-Received: by 2002:a05:6a00:a01:b0:51b:51d8:3c2a with SMTP id
- p1-20020a056a000a0100b0051b51d83c2amr4886763pfh.68.1654171260883; Thu, 02 Jun
- 2022 05:01:00 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 2002:a05:6a20:be1d:b0:82:5e75:b37c with HTTP; Thu, 2 Jun 2022
- 05:00:59 -0700 (PDT)
-Reply-To: jub47823@gmail.com
-From:   Julian Bikram <kodjoadannou123@gmail.com>
-Date:   Thu, 2 Jun 2022 05:00:59 -0700
-Message-ID: <CAOtKoZ8bsyr6zRMfTHWmV5RcLTrD82WEbCWgfdNaiQDTV4fhdA@mail.gmail.com>
-Subject: Please can i have your attention
-To:     undisclosed-recipients:;
-Content-Type: text/plain; charset="UTF-8"
-X-Spam-Status: No, score=4.8 required=5.0 tests=BAYES_50,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_ENVFROM_END_DIGIT,
-        FREEMAIL_FROM,FREEMAIL_REPLYTO,FREEMAIL_REPLYTO_END_DIGIT,
-        RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,SPF_PASS,T_SCC_BODY_TEXT_LINE,
-        UNDISC_FREEM autolearn=no autolearn_force=no version=3.4.6
-X-Spam-Level: ****
+        with ESMTP id S231722AbiFBNYs (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Thu, 2 Jun 2022 09:24:48 -0400
+Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 4BF952823EE;
+        Thu,  2 Jun 2022 06:24:47 -0700 (PDT)
+Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
+        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+        (No client certificate requested)
+        by dfw.source.kernel.org (Postfix) with ESMTPS id CEDD561798;
+        Thu,  2 Jun 2022 13:24:46 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 20811C385A5;
+        Thu,  2 Jun 2022 13:24:46 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+        s=k20201202; t=1654176286;
+        bh=fU4izTnniSuUqS/AHA9JhXVh4+iVt0aMQ71RhD/773M=;
+        h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
+        b=bUg/mcCiV5FK9/E2qFI9zZBXVx2sxT9ajAaHYWJEh5nXArYefrel6BoM94XoH3hKn
+         i6grwgpxQ7SBqjCoxYXepaMgSyVIRexRunaAo6p0ABWUkT363GQyqgMoUzuhFzP6uX
+         z7BibL7o7/pdUNisxUpnji9GjBaKKFx+l9TzaOB6/C37O9+zh5CG4fNGvkijegl5Bt
+         oYY+BQNx3G7lu/N3wSXAoaHjjvjo+QGb44f4+9Hwrn4BlyovUCvDQuxs0pVKthnQwt
+         M55OTLv470/TfORBbB2O1UG2/kjbVxnhNefa+RcQ6igOxLbf8BvuOapqU0V2ibyFpa
+         BXmkhyv2Dn1Nw==
+Received: from sofa.misterjones.org ([185.219.108.64] helo=wait-a-minute.misterjones.org)
+        by disco-boy.misterjones.org with esmtpsa  (TLS1.3) tls TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384
+        (Exim 4.94.2)
+        (envelope-from <maz@kernel.org>)
+        id 1nwkod-00FClK-Iy; Thu, 02 Jun 2022 14:24:43 +0100
+Date:   Thu, 02 Jun 2022 14:24:37 +0100
+Message-ID: <87zgivkxka.wl-maz@kernel.org>
+From:   Marc Zyngier <maz@kernel.org>
+To:     Huacai Chen <chenhuacai@loongson.cn>
+Cc:     Arnd Bergmann <arnd@arndb.de>, Andy Lutomirski <luto@kernel.org>,
+        Thomas Gleixner <tglx@linutronix.de>,
+        Peter Zijlstra <peterz@infradead.org>,
+        Andrew Morton <akpm@linux-foundation.org>,
+        David Airlie <airlied@linux.ie>,
+        Jonathan Corbet <corbet@lwn.net>,
+        Linus Torvalds <torvalds@linux-foundation.org>,
+        linux-arch@vger.kernel.org, linux-doc@vger.kernel.org,
+        linux-kernel@vger.kernel.org, Xuefeng Li <lixuefeng@loongson.cn>,
+        Yanteng Si <siyanteng@loongson.cn>,
+        Huacai Chen <chenhuacai@gmail.com>,
+        Guo Ren <guoren@kernel.org>, Xuerui Wang <kernel@xen0n.name>,
+        Jiaxun Yang <jiaxun.yang@flygoat.com>,
+        Stephen Rothwell <sfr@canb.auug.org.au>,
+        WANG Xuerui <git@xen0n.name>
+Subject: Re: [PATCH V14 02/24] irqchip/loongson-liointc: Fix build error for LoongArch
+In-Reply-To: <20220602115141.3962749-3-chenhuacai@loongson.cn>
+References: <20220602115141.3962749-1-chenhuacai@loongson.cn>
+        <20220602115141.3962749-3-chenhuacai@loongson.cn>
+User-Agent: Wanderlust/2.15.9 (Almost Unreal) SEMI-EPG/1.14.7 (Harue)
+ FLIM-LB/1.14.9 (=?UTF-8?B?R29qxY0=?=) APEL-LB/10.8 EasyPG/1.0.0 Emacs/27.1
+ (x86_64-pc-linux-gnu) MULE/6.0 (HANACHIRUSATO)
+MIME-Version: 1.0 (generated by SEMI-EPG 1.14.7 - "Harue")
+Content-Type: text/plain; charset=US-ASCII
+X-SA-Exim-Connect-IP: 185.219.108.64
+X-SA-Exim-Rcpt-To: chenhuacai@loongson.cn, arnd@arndb.de, luto@kernel.org, tglx@linutronix.de, peterz@infradead.org, akpm@linux-foundation.org, airlied@linux.ie, corbet@lwn.net, torvalds@linux-foundation.org, linux-arch@vger.kernel.org, linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org, lixuefeng@loongson.cn, siyanteng@loongson.cn, chenhuacai@gmail.com, guoren@kernel.org, kernel@xen0n.name, jiaxun.yang@flygoat.com, sfr@canb.auug.org.au, git@xen0n.name
+X-SA-Exim-Mail-From: maz@kernel.org
+X-SA-Exim-Scanned: No (on disco-boy.misterjones.org); SAEximRunCond expanded to false
+X-Spam-Status: No, score=-7.7 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_HI,
+        SPF_HELO_NONE,SPF_PASS,T_SCC_BODY_TEXT_LINE autolearn=ham
+        autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Dear ,
+On Thu, 02 Jun 2022 12:51:19 +0100,
+Huacai Chen <chenhuacai@loongson.cn> wrote:
+> 
+> liointc driver is shared by MIPS and LoongArch, this patch adjust the
+> code to fix build error for LoongArch.
+> 
+> Cc: Marc Zyngier <maz@kernel.org>
+> Reviewed-by: WANG Xuerui <git@xen0n.name>
+> Reviewed-by: Jiaxun Yang <jiaxun.yang@flygoat.com>
+> Signed-off-by: Huacai Chen <chenhuacai@loongson.cn>
 
-  Please can I have your attention and possibly help me for humanity's
-sake please. I am writing this message with a heavy heart filled with
-sorrows and sadness.
-Please if you can respond, i have an issue that i will be most
-grateful if you could help me deal with it please.
+Acked-by: Marc Zyngier <maz@kernel.org>
 
-Julian
+	M.
+
+-- 
+Without deviation from the norm, progress is not possible.
