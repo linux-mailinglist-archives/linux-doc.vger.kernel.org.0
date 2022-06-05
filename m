@@ -2,113 +2,107 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id AC25053DB0C
-	for <lists+linux-doc@lfdr.de>; Sun,  5 Jun 2022 11:40:14 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 016D453DD45
+	for <lists+linux-doc@lfdr.de>; Sun,  5 Jun 2022 19:03:41 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1345740AbiFEJkM (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Sun, 5 Jun 2022 05:40:12 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:57468 "EHLO
+        id S1351375AbiFERDj (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Sun, 5 Jun 2022 13:03:39 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:54402 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S245219AbiFEJkJ (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Sun, 5 Jun 2022 05:40:09 -0400
-Received: from mail-pl1-x62c.google.com (mail-pl1-x62c.google.com [IPv6:2607:f8b0:4864:20::62c])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 10C274D637;
-        Sun,  5 Jun 2022 02:40:08 -0700 (PDT)
-Received: by mail-pl1-x62c.google.com with SMTP id s12so10055213plp.0;
-        Sun, 05 Jun 2022 02:40:08 -0700 (PDT)
+        with ESMTP id S1351366AbiFERDd (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Sun, 5 Jun 2022 13:03:33 -0400
+Received: from mail-pf1-x442.google.com (mail-pf1-x442.google.com [IPv6:2607:f8b0:4864:20::442])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 7F46738D88
+        for <linux-doc@vger.kernel.org>; Sun,  5 Jun 2022 10:03:32 -0700 (PDT)
+Received: by mail-pf1-x442.google.com with SMTP id b135so10974580pfb.12
+        for <linux-doc@vger.kernel.org>; Sun, 05 Jun 2022 10:03:32 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
-        h=message-id:date:mime-version:user-agent:subject:content-language:to
-         :cc:references:from:in-reply-to:content-transfer-encoding;
-        bh=pA78VroF9WPZrSnfSVpCOb6xs8kbWqUSkVd+dTFpkE8=;
-        b=AX8tCS/bv0ghkCoUwzqdtUczLZhpSL1RZROKTaYjn15yKnmpxKI83KvB4PR2dIGqrf
-         UymfNMy3kQXC6qvhS0X+yWig1TkHKm8AEelDuVP10LwMdgN3HR+GUuUOefzKj+jU2cOm
-         W07hR1cZ8YHTs+U+Ki/lxf0YHcNMEPv5zG5WunT5yW7tBlU5BYf2f9ecLt/6umys0QnT
-         t39wzplIBSbE/l/dTkGpIEUykyZ6n2Ev+lqOF8SVKPJRzV6fA3vJQysxEXA8EuVZRrR2
-         MBDRl+kJwTgPqtY1FdRkyVFaodGF6DyifNPVejEIw539wy9BRbl5kz7NkMQvHxU6b8l2
-         IKig==
+        h=mime-version:reply-to:from:date:message-id:subject:to;
+        bh=f/UilSAxG+uYZGr2O0WgxBidGfjIL+/pLfI/yMfN0No=;
+        b=hSpDJqtqjIUDhIDn559KINFcTy2HhQmirAYyWIp3u4ggpeVN2w7gy/y5Cj/x6Jv1Rm
+         3Vw38ilIuCdqDxEzvGbGkpVVHpneP7ehulNWpJvcgspEs2MOYfHae1wQUsEglaDUU6Jx
+         eCUR2bY2hjRrGXzw7FaQXVRiIf8Tjivkdz9CLen/DWKGGBqxe8+bF4GKSRJMAXJ+/0dT
+         LBP/Gb0RaJK4Fv9qd+/OX3RGtWQ4MOqR/g0FOJ8XE9V3K74fbxBkYECCkt6X5nTxKkRE
+         2CC3AhpNt77CJu7L5+PLxU+8mtL6cjQ8Yu3C/GnX/DhfWGxy8TCeWh+PsAEIxF8qe4M8
+         bMhA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=x-gm-message-state:message-id:date:mime-version:user-agent:subject
-         :content-language:to:cc:references:from:in-reply-to
-         :content-transfer-encoding;
-        bh=pA78VroF9WPZrSnfSVpCOb6xs8kbWqUSkVd+dTFpkE8=;
-        b=B4lzinzSkTNZYcErT1x+W/aEFAbrcQ7LE8e4WhKtzhdjVC+KEMiVfFwn5DIlBdkrRW
-         eG8xJw2aU1ifIp4wpxZLfbiiJgM4dSgt/6QhqFtuenNqKsnrxEhHzup54DriZTD8HaHY
-         xH5LXM4XIkLfo2YPZTv0aztkumR5JT8wYJnUGz7PcLcxZIi8oFWVue6ugmY3706o2DS3
-         FFuTDzN9jGv/9nrJqBo94MsXm5A6R+5m6bXzqdizcDL7tT5iyp1wX7iAfPajx1+Xz1V+
-         XXZegv7cNHhUq1OAv2zcuftI1ufNqiHrTx03KTDPpasfzY3TnPX14H31rdzTrXe+aEbu
-         nGwg==
-X-Gm-Message-State: AOAM530UDkFlNTiMxsQARVO4hCW5CXpZjd7RdsCGFZL/lh2vZfpjgItM
-        Go+cGd0HhPFqDMkY2coZ8E4fynna74A=
-X-Google-Smtp-Source: ABdhPJz185UhvLjGwS3QxpUQdOrj5N8HeYobXdOeUqqOWRBP/yAcQ0sNXhqdw/OsOdF1vCw48Lplzg==
-X-Received: by 2002:a17:90b:314a:b0:1e8:5362:5620 with SMTP id ip10-20020a17090b314a00b001e853625620mr7582214pjb.9.1654422006103;
-        Sun, 05 Jun 2022 02:40:06 -0700 (PDT)
-Received: from [192.168.43.80] (subs03-180-214-233-21.three.co.id. [180.214.233.21])
-        by smtp.gmail.com with ESMTPSA id i13-20020a170902c94d00b0016362da9a03sm8415725pla.245.2022.06.05.02.40.03
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Sun, 05 Jun 2022 02:40:05 -0700 (PDT)
-Message-ID: <dea883bb-8938-5b07-0a13-92e8029414e8@gmail.com>
-Date:   Sun, 5 Jun 2022 16:40:02 +0700
+        h=x-gm-message-state:mime-version:reply-to:from:date:message-id
+         :subject:to;
+        bh=f/UilSAxG+uYZGr2O0WgxBidGfjIL+/pLfI/yMfN0No=;
+        b=jetzFn5ytJ0XQlEm5n2OTqC5zMuqxLyNwklpNxVxJAO/uhXHfvnkO5pGdTmwE5ZEKP
+         7+5fvBgsQWImdbJvy9P+DWJ1d+bWTsItfkTtvtknLRQc0m1qLO/EuHbuAhs/s8CJ+eSp
+         ZitWP5VGnDDJlHrPGWMBl3Wly3ubtBuoZLgSF5JqDaeeUOmXIe4Ve33Ay1r4XOnxDQEv
+         DXqHzGr5mp5AyHiYerxs+aWPiikPbkrwVJF3fBiJRyteEmGv1uVN5xsrhmcpEMEg1py1
+         jczFgJfQx0qrkTLvg4szjDB9hcc4M5tsuXHl3ZnLujA8gTJcaEAIHAA7yo/mRbtXD15q
+         x7vQ==
+X-Gm-Message-State: AOAM531d1UN+zDIdBkISg98/2FsxeCUAOLt0INW9mrO63unGhIZ92LwT
+        N8dvNF6AH+bqCz/TGxIvfKHoa3B3LiqyR+3e9is=
+X-Google-Smtp-Source: ABdhPJw+XN20VGOdWAHvNGqVeL0L/d9oOW4Kbj6jMRt6NwHVGy5SVcm85zzwHc5gWu3n0A7ppS48lU0lSi39n2e3DSA=
+X-Received: by 2002:a63:d44:0:b0:3fa:e913:6640 with SMTP id
+ 4-20020a630d44000000b003fae9136640mr17269746pgn.551.1654448612065; Sun, 05
+ Jun 2022 10:03:32 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.9.1
-Subject: Re: [PATCH] docs: usb: fix literal block marker in usbmon
- verification example
-Content-Language: en-US
-To:     Justin Swartz <justin.swartz@risingedge.co.za>
-Cc:     Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
-        Jonathan Corbet <corbet@lwn.net>, linux-usb@vger.kernel.org,
-        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org
-References: <20220604155431.23246-1-justin.swartz@risingedge.co.za>
- <5f00819a-cd52-a2c7-77de-28a4649c33dd@gmail.com>
- <f2943c036e1dd403052dcbd09ac4eeae@risingedge.co.za>
-From:   Bagas Sanjaya <bagasdotme@gmail.com>
-In-Reply-To: <f2943c036e1dd403052dcbd09ac4eeae@risingedge.co.za>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-Spam-Status: No, score=-1.8 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_FROM,NICE_REPLY_A,
-        RCVD_IN_DNSWL_NONE,RCVD_IN_SORBS_WEB,SPF_HELO_NONE,SPF_PASS,
-        T_SCC_BODY_TEXT_LINE autolearn=ham autolearn_force=no version=3.4.6
+Received: by 2002:a17:90a:a082:0:0:0:0 with HTTP; Sun, 5 Jun 2022 10:03:31
+ -0700 (PDT)
+Reply-To: profdorothyinvestment@gmail.com
+From:   "Hon. Francisco " <franciscojinvestmentss@gmail.com>
+Date:   Sun, 5 Jun 2022 10:03:31 -0700
+Message-ID: <CALMQtE-xG=cKug8k97SUkrJcJRn3+YJ6JNFkJUBEnBkg-uPDuw@mail.gmail.com>
+Subject: 
+To:     undisclosed-recipients:;
+Content-Type: text/plain; charset="UTF-8"
+X-Spam-Status: Yes, score=6.6 required=5.0 tests=BAYES_50,DKIM_SIGNED,
+        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_FROM,FREEMAIL_REPLYTO,
+        LOTS_OF_MONEY,MONEY_FREEMAIL_REPTO,RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,
+        SPF_PASS,T_SCC_BODY_TEXT_LINE,UNDISC_FREEM,UNDISC_MONEY autolearn=no
+        autolearn_force=no version=3.4.6
+X-Spam-Report: * -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at
+        *      https://www.dnswl.org/, no trust
+        *      [2607:f8b0:4864:20:0:0:0:442 listed in]
+        [list.dnswl.org]
+        *  0.8 BAYES_50 BODY: Bayes spam probability is 40 to 60%
+        *      [score: 0.5000]
+        *  0.0 FREEMAIL_FROM Sender email is commonly abused enduser mail
+        *      provider
+        *      [franciscojinvestmentss[at]gmail.com]
+        * -0.0 SPF_PASS SPF: sender matches SPF record
+        *  0.0 SPF_HELO_NONE SPF: HELO does not publish an SPF Record
+        *  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
+        *       valid
+        * -0.1 DKIM_VALID_EF Message has a valid DKIM or DK signature from
+        *      envelope-from domain
+        * -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
+        *      author's domain
+        * -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+        *  0.0 LOTS_OF_MONEY Huge... sums of money
+        * -0.0 T_SCC_BODY_TEXT_LINE No description available.
+        *  2.3 UNDISC_FREEM Undisclosed recipients + freemail reply-to
+        *  1.0 FREEMAIL_REPLYTO Reply-To/From or Reply-To/body contain
+        *      different freemails
+        *  2.0 MONEY_FREEMAIL_REPTO Lots of money from someone using free
+        *      email?
+        *  0.6 UNDISC_MONEY Undisclosed recipients + money/fraud signs
+X-Spam-Level: ******
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On 6/5/22 15:58, Justin Swartz wrote:
-> On 2022-06-05 10:39, Bagas Sanjaya wrote:
->> On 6/4/22 22:54, Justin Swartz wrote:
->>> The "Verify that bus sockets are present" example was not properly
->>> formatted due to a typo in the literal block marker.
->>>
->>
->> Missing second colon?
-> 
-> That is correct.
-> 
-> 
->>> -Verify that bus sockets are present:
->>> +Verify that bus sockets are present::
->>>
->>>      # ls /sys/kernel/debug/usb/usbmon
->>>      0s  0u  1s  1t  1u  2s  2t  2u  3s  3t  3u  4s  4t  4u
->>
->> Otherwise, the literal block rendered correctly.
-> 
-> The block is not rendered correctly without the second colon.
-> See: https://docs.kernel.org/usb/usbmon.html
-
-Thanks for the explanation.
-
-I mean that for the literal block part, it renders correctly with
-the second colon (which this patch is about), so the documentation
-error is fixed (although not reported by Sphinx when performing
-htmldocs build).
-
-So for this patch, I gave
-Reviewed-by: Bagas Sanjaya <bagasdotme@gmail.com>
-
 -- 
-An old man doll... just what I always wanted! - Clara
+URGENT LOAN IS NOW AVAILABLE
+
+Hello, I'm here to testify of how i got my real estate business loan
+from PROF. MRS.DOROTHY JEAN INVESTMENTS
+(profdorothyinvestment@gmail.com) I don't know if you are in need of
+an urgent loan to pay bills, start business or build a house, they
+offer all kinds of loan Ranging from $5,000.00USD to $2,000,000.00USD
+with a low interest rate of 2% and loan duration of 1 to 33 years to
+pay back the loan secure and unsecured. Are you losing sleep at nights
+worrying how to get a Legit Loan Lender?
+MRS.DOROTHY JEAN holds all of the information about how to obtain
+money quickly and painlessly without cost/stress via Contacts
+Call/Text +1(315)256-0479
+Email profdorothyinvestment@gmail.com
