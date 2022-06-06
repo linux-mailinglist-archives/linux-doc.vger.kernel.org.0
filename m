@@ -2,105 +2,135 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 39C8553E9E4
-	for <lists+linux-doc@lfdr.de>; Mon,  6 Jun 2022 19:08:53 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id CC6BE53EC99
+	for <lists+linux-doc@lfdr.de>; Mon,  6 Jun 2022 19:10:18 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S241014AbiFFPlN (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 6 Jun 2022 11:41:13 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:41198 "EHLO
+        id S241056AbiFFPoR (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 6 Jun 2022 11:44:17 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:55982 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S240994AbiFFPlM (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Mon, 6 Jun 2022 11:41:12 -0400
-Received: from mail-ej1-x62a.google.com (mail-ej1-x62a.google.com [IPv6:2a00:1450:4864:20::62a])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 6C331E78
-        for <linux-doc@vger.kernel.org>; Mon,  6 Jun 2022 08:41:10 -0700 (PDT)
-Received: by mail-ej1-x62a.google.com with SMTP id gl15so15869809ejb.4
-        for <linux-doc@vger.kernel.org>; Mon, 06 Jun 2022 08:41:10 -0700 (PDT)
+        with ESMTP id S241059AbiFFPoQ (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Mon, 6 Jun 2022 11:44:16 -0400
+Received: from mail-oo1-xc2d.google.com (mail-oo1-xc2d.google.com [IPv6:2607:f8b0:4864:20::c2d])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 8C6FECC15D;
+        Mon,  6 Jun 2022 08:44:15 -0700 (PDT)
+Received: by mail-oo1-xc2d.google.com with SMTP id ay16-20020a056820151000b0041b71517844so958763oob.4;
+        Mon, 06 Jun 2022 08:44:15 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google;
-        h=message-id:date:mime-version:user-agent:subject:content-language:to
-         :cc:references:from:in-reply-to:content-transfer-encoding;
-        bh=5bsP623yeVUhI4X2qyWKm7xhZAZBEQqTrR3MfihqiO0=;
-        b=pGV3u32GEBOhd7TPDnOWLKJ9oLJuUOxDipMCgJt3EuoZ1rarvWVYq8oK+EU5doKOjK
-         SjmxM35Rzb1UHksLLMUZC4DYfUe6w8HvXhq0YtIZ23J8rixxB6XuOgLghu9cBT3X7v+5
-         8CKA9/yAOJtmExGP8T4abFpaA3PaM3BnjfL2ukfBwdBbz7233FZ2pQAgim1oO1u4diFw
-         Dnf3lFRkKT93piQWB7AwqEXehvglKXOTwbtf2OtFQ4WNsFBDbscEbx8lE2uQE2D7ANLE
-         Aeq7piv2zqJSmwRp4PA+HAoVDcvxcdfbrtP0VaTbP7qHmqDopLuXdRpnHi+IPAgVaH8Y
-         Tqlw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=x-gm-message-state:message-id:date:mime-version:user-agent:subject
+        d=gmail.com; s=20210112;
+        h=sender:message-id:date:mime-version:user-agent:subject
          :content-language:to:cc:references:from:in-reply-to
          :content-transfer-encoding;
-        bh=5bsP623yeVUhI4X2qyWKm7xhZAZBEQqTrR3MfihqiO0=;
-        b=MdiKPisdeDsinz37RActLD8c9nBN8cT+lhHHhaGM4xPyoJB3J2miOMBrxCnBiBN8X+
-         JzfT7rYMAaQlcB6Qp7kT10Phnbv5y0IiefMQWgqku9PO0aTPECMYM1kkjTIjeEjLD8P3
-         1XBib3SyWeajj2DEw6foBU3VD7sY7fqUyKbHflVveR+7JKe0IRGVZx4m4qjabm6MNTqP
-         ug1eExAW8oH6WHMPDDfs6vcHZQzAXcqPpyW4K27oxYM5SJt/fjXkBD1He1YxnFR3Sr1U
-         s2pockxRHnv3cFMBz1zXNHzhJTf+RAmGKvAU/131hcIOyri/+3wStndoASyAklXf0lOZ
-         nMcA==
-X-Gm-Message-State: AOAM5325NxG9WTwMVrAazR9mNNh+bwbG73m77XyoxyspTYdHBu4T1fgY
-        1qGHezVhuPsB+It/MNfTfYBW+w==
-X-Google-Smtp-Source: ABdhPJxPmR5o/ptnO48/LLqqFHYgHv9f2kSvvBI4oOyV4SSHNtCri883LtJ4arOlCN8+RLxPMr+1YQ==
-X-Received: by 2002:a17:906:5959:b0:710:c2e8:79f3 with SMTP id g25-20020a170906595900b00710c2e879f3mr11652199ejr.489.1654530069008;
-        Mon, 06 Jun 2022 08:41:09 -0700 (PDT)
-Received: from [192.168.0.181] (xdsl-188-155-176-92.adslplus.ch. [188.155.176.92])
-        by smtp.gmail.com with ESMTPSA id n16-20020aa7c790000000b0042bced44061sm8728646eds.10.2022.06.06.08.41.07
+        bh=1Dyxrxglk8UzaHWlu8Ip8w2vSs7l7OGlq6jwwOsQ960=;
+        b=BwrNGtzgFqc5GBs+deBOcDtRAxLlmSKd/PBfifxCqtEON0K0Xetx9idzSHIQMwV5SA
+         9f2Lh+l8E89eWdqBoG0wndpJIL4MrXW9B2Z0988Ek2KK4sF5EGuuyAq7HZD0Ne+AbimE
+         TGNYT2BK0SktuwFMDQip7/3ArorHNXsQ8yuWySv1otJ8/qyNvpJFPgCcDTeyh864sVq2
+         pezAVQqrB9W5SXgH36eWHugxjPI8TZTv1DBDpYyrqYQtjH202Y//b+rcc6ABMSaFiOMf
+         ndiybo/ZM8ybLw47HKBm7WsJk1HwxEB1xnxOEWc3TAD7Aao8nS5QOyvldisyxMopaGZ1
+         0IUQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:sender:message-id:date:mime-version:user-agent
+         :subject:content-language:to:cc:references:from:in-reply-to
+         :content-transfer-encoding;
+        bh=1Dyxrxglk8UzaHWlu8Ip8w2vSs7l7OGlq6jwwOsQ960=;
+        b=YbO5WgRttcIfuy2Bv8noKDYE6981tpEhEjrKjiFhsJMKHfhp5bq+gq/JtbzdRZjiZw
+         HRGxiD/J1MciCb3OqnRNWXFyy04cdKUOTt7H4Br7pEOVkQ730ojiqVkUWYyhlZ7ryqpj
+         jjh2+TgS+5kw6Bje0jP0Tv3afsP4PMJGQuepYkXuqEtOVIkbUqGV5ZL2cNZLrBVdNwUf
+         PcYWgXPhjSRzufdoLfSbp3oBtnMwXXMfcWUQANR4sfrTWdaGcjIw7HR6IWGDr6ES4Xkq
+         jyeIzyrf8XRrC3A2+REaANYf//VZQncdlhtlOWmjXS9FeKdsdFpOWYxDadEBtSz7QrLk
+         4ItQ==
+X-Gm-Message-State: AOAM532u87Q1gIsH0w2ZUHS8uzpWABiAKMQ/vX/uMT9KbWN1GXcPsu5L
+        58kY5pJ/3aAqyJwlsPJNXaE=
+X-Google-Smtp-Source: ABdhPJy1zCj2ZN6ndVK4A6V4NXnjLvRe27BQH9UEBJSslBjosstbd4cuAI508h2hMmqaKojcUerFng==
+X-Received: by 2002:a4a:4f16:0:b0:41b:6f0e:4acc with SMTP id c22-20020a4a4f16000000b0041b6f0e4accmr4734194oob.33.1654530254919;
+        Mon, 06 Jun 2022 08:44:14 -0700 (PDT)
+Received: from ?IPV6:2600:1700:e321:62f0:329c:23ff:fee3:9d7c? ([2600:1700:e321:62f0:329c:23ff:fee3:9d7c])
+        by smtp.gmail.com with ESMTPSA id m4-20020a9d6084000000b0060b1f3924c3sm8318726otj.44.2022.06.06.08.44.12
         (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Mon, 06 Jun 2022 08:41:08 -0700 (PDT)
-Message-ID: <5fe2246f-97db-e7b0-a72e-c8c5ff6b2abe@linaro.org>
-Date:   Mon, 6 Jun 2022 17:41:07 +0200
+        Mon, 06 Jun 2022 08:44:14 -0700 (PDT)
+Sender: Guenter Roeck <groeck7@gmail.com>
+Message-ID: <451ad3f1-e365-e136-fa1b-c7bb0b05a15f@roeck-us.net>
+Date:   Mon, 6 Jun 2022 08:44:11 -0700
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.10.0
-Subject: Re: [PATCH 06/23] dt-bindings: mmc: exynos-dw-mshc: update
- samsung,pinctrl.yaml reference
+ Thunderbird/91.9.1
+Subject: Re: [PATCH 03/23] dt-bindings: arm: update vexpress-config.yaml
+ references
 Content-Language: en-US
 To:     Mauro Carvalho Chehab <mchehab@kernel.org>,
         Linux Doc Mailing List <linux-doc@vger.kernel.org>,
         Jonathan Corbet <corbet@lwn.net>
 Cc:     Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
-        Alim Akhtar <alim.akhtar@samsung.com>,
+        Andre Przywara <andre.przywara@arm.com>,
+        Jean Delvare <jdelvare@suse.com>,
         Krzysztof Kozlowski <krzysztof.kozlowski+dt@linaro.org>,
-        Linus Walleij <linus.walleij@linaro.org>,
-        Rob Herring <robh+dt@kernel.org>,
-        Sam Protsenko <semen.protsenko@linaro.org>,
-        Ulf Hansson <ulf.hansson@linaro.org>,
-        devicetree@vger.kernel.org, linux-arm-kernel@lists.infradead.org,
-        linux-kernel@vger.kernel.org, linux-mmc@vger.kernel.org,
-        linux-samsung-soc@vger.kernel.org
+        Liam Girdwood <lgirdwood@gmail.com>,
+        Mark Brown <broonie@kernel.org>,
+        Rob Herring <robh+dt@kernel.org>, devicetree@vger.kernel.org,
+        linux-hwmon@vger.kernel.org, linux-kernel@vger.kernel.org
 References: <cover.1654529011.git.mchehab@kernel.org>
- <5c937793dd7aec30da4964b39561072ae184f89b.1654529011.git.mchehab@kernel.org>
-From:   Krzysztof Kozlowski <krzysztof.kozlowski@linaro.org>
-In-Reply-To: <5c937793dd7aec30da4964b39561072ae184f89b.1654529011.git.mchehab@kernel.org>
-Content-Type: text/plain; charset=UTF-8
+ <7020edd9e183652249fc95bf61a1055cc342a4dc.1654529011.git.mchehab@kernel.org>
+From:   Guenter Roeck <linux@roeck-us.net>
+In-Reply-To: <7020edd9e183652249fc95bf61a1055cc342a4dc.1654529011.git.mchehab@kernel.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-Spam-Status: No, score=-5.0 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,NICE_REPLY_A,RCVD_IN_DNSWL_NONE,
-        SPF_HELO_NONE,SPF_PASS,T_SCC_BODY_TEXT_LINE autolearn=unavailable
-        autolearn_force=no version=3.4.6
+X-Spam-Status: No, score=-4.1 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+        DKIM_VALID,DKIM_VALID_EF,FREEMAIL_ENVFROM_END_DIGIT,
+        FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,HEADER_FROM_DIFFERENT_DOMAINS,
+        NICE_REPLY_A,RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,SPF_PASS,
+        T_SCC_BODY_TEXT_LINE autolearn=ham autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On 06/06/2022 17:25, Mauro Carvalho Chehab wrote:
-> Changeset af030d83da1d ("dt-bindings: pinctrl: samsung: convert to dtschema")
-> renamed: bindings/pinctrl/samsung-pinctrl.txt
-> to: bindings/pinctrl/samsung-pinctrl.yaml, splitting it into multiple
-> files.
+On 6/6/22 08:25, Mauro Carvalho Chehab wrote:
+> Changeset 7e8339b5162f ("dt-bindings: arm: convert vexpress-config to DT schema")
+> renamed: Documentation/devicetree/bindings/arm/vexpress-sysreg.txt
+> to: Documentation/devicetree/bindings/arm/vexpress-config.yaml.
 > 
-> Update exynos-dw-mshc.txt accordingly.
+> Update the cross-references accordingly.
 > 
-> Fixes: af030d83da1d ("dt-bindings: pinctrl: samsung: convert to dtschema")
+> Fixes: 7e8339b5162f ("dt-bindings: arm: convert vexpress-config to DT schema")
 > Signed-off-by: Mauro Carvalho Chehab <mchehab@kernel.org>
 
-Commit is okay, but you can also drop it entirely because entire part
-will be removed with:
-https://lore.kernel.org/all/20220605163710.144210-4-krzysztof.kozlowski@linaro.org/
+Acked-by: Guenter Roeck <linux@roeck-us.net>
 
+> ---
+> 
+> To avoid mailbombing on a large number of people, only mailing lists were C/C on the cover.
+> See [PATCH 00/23] at: https://lore.kernel.org/all/cover.1654529011.git.mchehab@kernel.org/
+> 
+>   Documentation/devicetree/bindings/hwmon/vexpress.txt     | 2 +-
+>   Documentation/devicetree/bindings/regulator/vexpress.txt | 2 +-
+>   2 files changed, 2 insertions(+), 2 deletions(-)
+> 
+> diff --git a/Documentation/devicetree/bindings/hwmon/vexpress.txt b/Documentation/devicetree/bindings/hwmon/vexpress.txt
+> index 9c27ed694bbb..4a4df4ffc460 100644
+> --- a/Documentation/devicetree/bindings/hwmon/vexpress.txt
+> +++ b/Documentation/devicetree/bindings/hwmon/vexpress.txt
+> @@ -9,7 +9,7 @@ Requires node properties:
+>   	"arm,vexpress-power"
+>   	"arm,vexpress-energy"
+>   - "arm,vexpress-sysreg,func" when controlled via vexpress-sysreg
+> -  (see Documentation/devicetree/bindings/arm/vexpress-sysreg.txt
+> +  (see Documentation/devicetree/bindings/arm/vexpress-config.yaml
+>     for more details)
+>   
+>   Optional node properties:
+> diff --git a/Documentation/devicetree/bindings/regulator/vexpress.txt b/Documentation/devicetree/bindings/regulator/vexpress.txt
+> index d775f72487aa..1c2e92c7831e 100644
+> --- a/Documentation/devicetree/bindings/regulator/vexpress.txt
+> +++ b/Documentation/devicetree/bindings/regulator/vexpress.txt
+> @@ -4,7 +4,7 @@ Versatile Express voltage regulators
+>   Requires node properties:
+>   - "compatible" value: "arm,vexpress-volt"
+>   - "arm,vexpress-sysreg,func" when controlled via vexpress-sysreg
+> -  (see Documentation/devicetree/bindings/arm/vexpress-sysreg.txt
+> +  (see Documentation/devicetree/bindings/arm/vexpress-config.yaml
+>     for more details)
+>   
+>   Required regulator properties:
 
-
-Best regards,
-Krzysztof
