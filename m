@@ -2,148 +2,155 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 621EB53EB0D
-	for <lists+linux-doc@lfdr.de>; Mon,  6 Jun 2022 19:09:28 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 980EE53E9B8
+	for <lists+linux-doc@lfdr.de>; Mon,  6 Jun 2022 19:08:48 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S240099AbiFFPIm (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 6 Jun 2022 11:08:42 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:52102 "EHLO
+        id S240705AbiFFP0S (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 6 Jun 2022 11:26:18 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:46068 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S240093AbiFFPIk (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Mon, 6 Jun 2022 11:08:40 -0400
-Received: from 1wt.eu (wtarreau.pck.nerim.net [62.212.114.60])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTP id 5184DC687F;
-        Mon,  6 Jun 2022 08:08:37 -0700 (PDT)
-Received: (from willy@localhost)
-        by pcw.home.local (8.15.2/8.15.2/Submit) id 256F72xB004867;
-        Mon, 6 Jun 2022 17:07:02 +0200
-Date:   Mon, 6 Jun 2022 17:07:02 +0200
-From:   Willy Tarreau <w@1wt.eu>
-To:     Vegard Nossum <vegard.nossum@oracle.com>
-Cc:     Jonathan Corbet <corbet@lwn.net>, linux-doc@vger.kernel.org,
-        linux-kernel@vger.kernel.org, Amit Shah <aams@amazon.com>,
+        with ESMTP id S240584AbiFFPZw (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Mon, 6 Jun 2022 11:25:52 -0400
+Received: from dfw.source.kernel.org (dfw.source.kernel.org [IPv6:2604:1380:4641:c500::1])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 6BADE1CD350;
+        Mon,  6 Jun 2022 08:25:51 -0700 (PDT)
+Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
+        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+        (No client certificate requested)
+        by dfw.source.kernel.org (Postfix) with ESMTPS id 97A6761532;
+        Mon,  6 Jun 2022 15:25:50 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 0F9A7C341DE;
+        Mon,  6 Jun 2022 15:25:49 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+        s=k20201202; t=1654529149;
+        bh=JJt0IO+HD16nKaMzBkekejjxzH6zJTBr5QCuFRGczGE=;
+        h=From:To:Cc:Subject:Date:From;
+        b=FQvjxVAjYkRkMlnXeUbGK/ffXS9EGiIGJB6czmy41m7BUi+gGlw+X1Vu+xVWhr8kL
+         VZmd7RutDKDJkQ6+PNC2k4EBuWcMiwehnWLeUgcaztEFymFfTpyADom9iKEZ2r0U6R
+         8QTKxcO8tqR2nN17KQ7uaYrNw3fG0aG82GOK9/YW0npuVqsyv4lNhNtBEPuUTmVVIT
+         XOE4wPosVqLjYqBNBMuGPxA5PXF0QCAYswfnxGdyJu5zTk6VkYY/y8ZNnVzT895FLj
+         P6YX/uUQeJAT8yJ01In++Ksk7XfTNpL0aA6OZ6qjgQfLIhLB4De2E2AivHQOnNJprR
+         rbUcjc+xUJibQ==
+Received: from mchehab by mail.kernel.org with local (Exim 4.95)
+        (envelope-from <mchehab@kernel.org>)
+        id 1nyEby-0012On-0x;
+        Mon, 06 Jun 2022 16:25:46 +0100
+From:   Mauro Carvalho Chehab <mchehab@kernel.org>
+To:     Linux Doc Mailing List <linux-doc@vger.kernel.org>,
+        Jonathan Corbet <corbet@lwn.net>
+Cc:     Mauro Carvalho Chehab <mchehab@kernel.org>,
+        Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
+        linux-kernel@vger.kernel.org, "H. Peter Anvin" <hpa@zytor.com>,
+        "Rafael J. Wysocki" <rafael@kernel.org>,
+        Alim Akhtar <alim.akhtar@samsung.com>,
+        Borislav Petkov <bp@alien8.de>,
+        Broadcom internal kernel review list 
+        <bcm-kernel-feedback-list@broadcom.com>,
         Dave Hansen <dave.hansen@linux.intel.com>,
-        David Woodhouse <dwmw@amazon.co.uk>,
-        Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
-        "Gustavo A . R . Silva" <gustavoars@kernel.org>,
-        Jiri Kosina <jkosina@suse.cz>,
-        Kees Cook <keescook@chromium.org>,
-        Laura Abbott <labbott@redhat.com>,
-        Linus Torvalds <torvalds@linux-foundation.org>,
-        Mauro Carvalho Chehab <mchehab@kernel.org>,
-        Paolo Bonzini <pbonzini@redhat.com>,
-        Peter Zijlstra <peterz@infradead.org>,
-        Solar Designer <solar@openwall.com>,
+        Federico Vaga <federico.vaga@vaga.pv.it>,
+        Geert Uytterhoeven <geert@linux-m68k.org>,
+        Guenter Roeck <linux@roeck-us.net>,
+        Ingo Molnar <mingo@redhat.com>,
+        Jarkko Sakkinen <jarkko@kernel.org>,
+        Jean Delvare <jdelvare@suse.com>,
+        Krzysztof Kozlowski <krzysztof.kozlowski+dt@linaro.org>,
+        Linus Walleij <linus.walleij@linaro.org>,
+        Markus Mayer <mmayer@broadcom.com>,
+        Rob Herring <robh+dt@kernel.org>,
         Thomas Gleixner <tglx@linutronix.de>,
-        Thorsten Leemhuis <linux@leemhuis.info>,
-        Tyler Hicks <tyhicks@canonical.com>,
-        Will Deacon <will@kernel.org>
-Subject: Re: [PATCH] Documentation/security-bugs: overhaul
-Message-ID: <20220606150702.GA4838@1wt.eu>
-References: <20220531230309.9290-1-vegard.nossum@oracle.com>
- <20220601031254.GB26318@1wt.eu>
- <42200c3e-fb39-ddab-3d68-5dfb5eb89451@oracle.com>
- <20220603064924.GC29741@1wt.eu>
- <303283d9-5f1c-8bc7-6286-ce284de012a8@oracle.com>
+        Ulf Hansson <ulf.hansson@linaro.org>,
+        Viresh Kumar <viresh.kumar@linaro.org>,
+        alsa-devel@alsa-project.org, devicetree@vger.kernel.org,
+        keyrings@vger.kernel.org, kvm@vger.kernel.org,
+        linux-arm-kernel@lists.infradead.org, linux-cachefs@redhat.com,
+        linux-gpio@vger.kernel.org, linux-hwmon@vger.kernel.org,
+        linux-m68k@lists.linux-m68k.org, linux-mmc@vger.kernel.org,
+        linux-phy@lists.infradead.org, linux-pm@vger.kernel.org,
+        linux-samsung-soc@vger.kernel.org, linux-usb@vger.kernel.org,
+        x86@kernel.org
+Subject: [PATCH 00/23] Update Documentation/ cross-references
+Date:   Mon,  6 Jun 2022 16:25:22 +0100
+Message-Id: <cover.1654529011.git.mchehab@kernel.org>
+X-Mailer: git-send-email 2.36.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <303283d9-5f1c-8bc7-6286-ce284de012a8@oracle.com>
-User-Agent: Mutt/1.10.1 (2018-07-13)
-X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00,SPF_HELO_PASS,
-        SPF_PASS,T_SCC_BODY_TEXT_LINE autolearn=ham autolearn_force=no
-        version=3.4.6
+Content-Transfer-Encoding: 8bit
+X-Spam-Status: No, score=-8.3 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_HI,
+        SPF_HELO_NONE,SPF_PASS,T_SCC_BODY_TEXT_LINE autolearn=ham
+        autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Hi Vegard,
+Hi John,
 
-On Mon, Jun 06, 2022 at 04:21:40PM +0200, Vegard Nossum wrote:
-> I think this points to a bigger problem, but not with CVEs being held up
-> as trophies. There's already a huge monetary incentive to find bugs and
-> sell them as 0-days so IMHO we _should_ be encouraging people to find
-> bugs and either fix or report them, whether privately or publicly. If
-> having CVEs helps with that, that ought to be a good thing...
+There were a number of DT binding conversions and other docs change that
+were not updated. Address them, in order to keep the cross-references on
+a sane state.
 
-Yes I'm fine with this approach, provided that we encourage the reporters
-to figure by themselves where to report them. In my opinion, what only
-refers to very old hardware, to anything that's not built by default,
-that requires code change to prove the problem, or that is only
-theoretical ought not be sent to a closed list. The purpose of closed
-lists is to deal with emergencies, issues that could put users in trouble
-if they were disclosed before a fix is merged.
+Patch series is against v5.19-rc1 (and applies cleanly on the top of
+today's -next).
 
-> If you think a reported issue is not security-relevant, can you not
-> simply ask/encourage the reporter to make a public post instead?
+Mauro Carvalho Chehab (23):
+  dt-bindings: mfd: bd9571mwv: update rohm,bd9571mwv.yaml reference
+  dt-bindings: interrupt-controller: update brcm,l2-intc.yaml reference
+  dt-bindings: arm: update vexpress-config.yaml references
+  dt-bindings: reset: update st,stih407-powerdown.yaml references
+  dt-bindings: mfd: rk808: update rockchip,rk808.yaml reference
+  dt-bindings: mmc: exynos-dw-mshc: update samsung,pinctrl.yaml
+    reference
+  docs: netdev: update maintainer-netdev.rst reference
+  docs: filesystems: update netfs-api.rst reference
+  Documentation: update watch_queue.rst references
+  Documentation: KVM: update s390-pv.rst reference
+  Documentation: KVM: update amd-memory-encryption.rst references
+  Documentation: KVM: update msr.rst reference
+  Documentation: KVM: update s390-diag.rst reference
+  MAINTAINERS: update arm,hdlcd.yaml reference
+  MAINTAINERS: update arm,komeda.yaml reference
+  MAINTAINERS: update arm,malidp.yaml reference
+  MAINTAINERS: update cortina,gemini-ethernet.yaml reference
+  MAINTAINERS: update dongwoon,dw9807-vcm.yaml reference
+  MAINTAINERS: update maxim,max77693.yaml reference
+  MAINTAINERS: update snps,axs10x-reset.yaml reference
+  objtool: update objtool.txt references
+  ASoC: wm8731: update wlf,wm8731.yaml reference
+  arch: m68k: q40: README: drop references to IDE driver
 
-We regularly do, but it's important also not to send a cold shower to
-the person who already prepared their work and report in a direction
-that they thought was the most suitable one, just to learn the hard
-way that what they found was not that important.
+ .../ABI/testing/sysfs-driver-bd9571mwv-regulator   |  2 +-
+ Documentation/admin-guide/kernel-parameters.txt    |  2 +-
+ .../bindings/cpufreq/brcm,stb-avs-cpu-freq.txt     |  2 +-
+ .../devicetree/bindings/hwmon/vexpress.txt         |  2 +-
+ .../devicetree/bindings/mmc/exynos-dw-mshc.txt     |  2 +-
+ .../devicetree/bindings/phy/phy-stih407-usb.txt    |  2 +-
+ .../devicetree/bindings/pinctrl/pinctrl-rk805.txt  |  2 +-
+ .../devicetree/bindings/regulator/vexpress.txt     |  2 +-
+ .../bindings/sound/atmel-sam9x5-wm8731-audio.txt   |  2 +-
+ Documentation/devicetree/bindings/usb/dwc3-st.txt  |  2 +-
+ Documentation/devicetree/bindings/usb/ehci-st.txt  |  2 +-
+ Documentation/devicetree/bindings/usb/ohci-st.txt  |  2 +-
+ Documentation/security/keys/core.rst               |  2 +-
+ Documentation/security/secrets/coco.rst            |  2 +-
+ .../translations/it_IT/networking/netdev-FAQ.rst   |  2 +-
+ Documentation/virt/kvm/api.rst                     |  4 ++--
+ Documentation/virt/kvm/s390/s390-pv-boot.rst       |  2 +-
+ Documentation/virt/kvm/x86/hypercalls.rst          |  2 +-
+ Documentation/x86/orc-unwinder.rst                 |  2 +-
+ MAINTAINERS                                        | 14 +++++++-------
+ arch/m68k/q40/README                               |  4 +---
+ include/linux/fscache.h                            |  2 +-
+ include/linux/objtool.h                            |  2 +-
+ include/linux/watch_queue.h                        |  2 +-
+ init/Kconfig                                       |  2 +-
+ kernel/watch_queue.c                               |  2 +-
+ lib/Kconfig.debug                                  |  2 +-
+ tools/include/linux/objtool.h                      |  2 +-
+ tools/objtool/check.c                              |  2 +-
+ 29 files changed, 36 insertions(+), 38 deletions(-)
 
-> If the security team is swamped with legitimate, security-relevant
-> reports, then that sounds like an issue with manpower and/or
-> organization. In my (admittedly limited) experience, Linus tends to be
-> one of the first to reply, so maybe having a designated person or group
-> to triage issues (maybe in a rota system) before engaging the rest of
-> the team could take some of the pressure off?
+-- 
+2.36.1
 
-Actually all of the members are expected to respond. I personally
-consider it as a failure when Linus has to respond to a message that
-stayed there for a while. And it does happen quite a bit, yes. I guess
-that often none of us feels like we're knowledgeable on a particular
-report.
 
-> > As such I think that we could mention something along:
-> > 
-> >   Upon reporters' request in case a forthcoming presentation of the issue
-> >   is planned, it may occasionally be accepted to temporarily keep out some
-> >   of the detailed impacts of the issue, however the security team reserves
-> >   the right to publicize these details if no other publication happens in
-> >   a reasonable time frame or as soon as the fixes are found to cause a
-> >   regression.
-> > 
-> > Because quite frankly, not being able to explain exactly why a patch is
-> > done this way and not slightly differently is not acceptable.
-> 
-> This unfortunately directly contradicts the current policy as stated:
-> 
-> "All other information submitted to the security list and any followup
-> discussions of the report are treated confidentially even after the
-> embargo has been lifted, in perpetuity."
-
-IMHO there's a big difference between disclosing confidential information
-(which we never do) and explaining what makes a bug have a security
-impact. The purpose of the commit message is to serve as arguments to
-defend the commit's presence in the tree. Most of the info must be there,
-except what's not needed to understand the bug (e.g. exploitation method).
-Then the rest of the details ought to be disclosed fast enough for the
-commit to be defended. Of course the context where the issue was discovered
-has to remain confidential.
-
-> So again, unless there's a clear consensus to change this, I wouldn't be
-> comfortable making the change now.
-
-Yeah I'm fine with this of course, but I wanted to take the opportunity
-of your discussion to bring these concerns since they're also about the
-instructions in the doc.
-
-> If I could make a different suggestion (which is in the same spirit as
-> the rewrite, actually), the security team could encourage the reporter
-> to report to linux-distros once there is a patch or the patch is public
-> -- that way, it's: 1) not on the security team to disclose anything, 2)
-> distros get a heads up on the patch, and 3) everybody gets to know about
-> the security impact of the bug when it is eventually posted to
-> oss-security within 1-2 weeks.
-
-Maybe that could work, let's keep thinking about this.
-
-> Thanks for your comments/explanations, it certainly helps to have more
-> perspective.
-
-You're welcome. We're all in the same boat :-)
-
-Willy
