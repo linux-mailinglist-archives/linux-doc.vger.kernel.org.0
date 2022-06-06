@@ -2,50 +2,50 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id D5A8753EB3E
-	for <lists+linux-doc@lfdr.de>; Mon,  6 Jun 2022 19:09:32 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 7DA1B53EC97
+	for <lists+linux-doc@lfdr.de>; Mon,  6 Jun 2022 19:10:18 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S240738AbiFFP0V (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 6 Jun 2022 11:26:21 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:46450 "EHLO
+        id S240625AbiFFPZz (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 6 Jun 2022 11:25:55 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:46000 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S240630AbiFFPZz (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Mon, 6 Jun 2022 11:25:55 -0400
-Received: from ams.source.kernel.org (ams.source.kernel.org [145.40.68.75])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 4EAE427EBC9;
-        Mon,  6 Jun 2022 08:25:54 -0700 (PDT)
+        with ESMTP id S240565AbiFFPZv (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Mon, 6 Jun 2022 11:25:51 -0400
+Received: from dfw.source.kernel.org (dfw.source.kernel.org [IPv6:2604:1380:4641:c500::1])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id AB4751CD340;
+        Mon,  6 Jun 2022 08:25:50 -0700 (PDT)
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
         (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
         (No client certificate requested)
-        by ams.source.kernel.org (Postfix) with ESMTPS id 8EBD2B81AC0;
-        Mon,  6 Jun 2022 15:25:51 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id F3F44C341D3;
+        by dfw.source.kernel.org (Postfix) with ESMTPS id 1835261519;
+        Mon,  6 Jun 2022 15:25:50 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id E7BA9C341CA;
         Mon,  6 Jun 2022 15:25:48 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
         s=k20201202; t=1654529149;
-        bh=VN1Fhxv3NChNyRcDGXrZz/owsXumLTufKW8uyhjLG1k=;
+        bh=HX77o3GbP6StQGsmQNWtxrZSPmAY70fcGW/50iB60UM=;
         h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-        b=eW8JzV9+YELrmoS98gF/BoBErSuC3U+PbTu6kE8Nhoc1pqVC0uyC+nkJ0BoP1QLfx
-         IINmpniOx4BRG/01X0eIFK/NGMPDTPxm8MWFggm1VTXALogWnO1zqxls4y0fuZZIuD
-         2Qs7ldGLiC/NUA7p3irgXPcnyk9VP9zPjQer8Zv8cj5PjHxa/A7/qU3o5fZ6x83hvG
-         U+WEjy7hoyMHVnuOrPDjnp3VxAHy3DFy61cGD3Ld1czPdCsBFyErguAxzgltVgBcDN
-         nssoZ2WRhkzHs7MupjkRYLFa2AfO9aHxEJWyNPYo5m8pBJPnI5w3dLZ6ntMVzY6J/V
-         7PplLihP+gjRQ==
+        b=s9/yhptvDXGC62EWjCN9/23AE9//q71Xm8NvXmnBg+QHhBfORkclu0uFVDhhDrOmv
+         vVRudrbYG0KpPqaKG3pSovGItwyqpIz4gAwxRwS/EMUOHz0+GGt3feFL93pM2MWf0g
+         5aVmu7XR7MpRMn7+pkRO5dnib/Fapm94XG7tEvTcacoJqinocJdlG6T8vL7OoG89YE
+         6TZ12UTAuVqrgjPUWURnPlwWBXA1HADxidBq54xvJhttueY7wQn27dYU+zrNjo+M0o
+         f6MQ/P1oWpXLa1iCW/LbG8+vJN6DQt/sQWY2jZeLKg4L3FnAwfqs1rb0Klx15H1pQx
+         eBmI2stxwjv1A==
 Received: from mchehab by mail.kernel.org with local (Exim 4.95)
         (envelope-from <mchehab@kernel.org>)
-        id 1nyEby-0012Pl-CR;
+        id 1nyEby-0012Pp-Cy;
         Mon, 06 Jun 2022 16:25:46 +0100
 From:   Mauro Carvalho Chehab <mchehab@kernel.org>
 To:     Linux Doc Mailing List <linux-doc@vger.kernel.org>,
         Jonathan Corbet <corbet@lwn.net>
 Cc:     Mauro Carvalho Chehab <mchehab@kernel.org>,
         "Mauro Carvalho Chehab" <mchehab+huawei@kernel.org>,
-        Corentin Labbe <clabbe@baylibre.com>,
-        Linus Walleij <linus.walleij@linaro.org>,
-        Rob Herring <robh@kernel.org>, linux-kernel@vger.kernel.org
-Subject: [PATCH 17/23] MAINTAINERS: update cortina,gemini-ethernet.yaml reference
-Date:   Mon,  6 Jun 2022 16:25:39 +0100
-Message-Id: <d27b5d508fb757147b720bf573ce5a2e3fc5920e.1654529011.git.mchehab@kernel.org>
+        Krzysztof Kozlowski <krzysztof.kozlowski@linaro.org>,
+        Sakari Ailus <sakari.ailus@linux.intel.com>,
+        linux-kernel@vger.kernel.org
+Subject: [PATCH 18/23] MAINTAINERS: update dongwoon,dw9807-vcm.yaml reference
+Date:   Mon,  6 Jun 2022 16:25:40 +0100
+Message-Id: <89f11772dd4afe9700d6cbbb3da8749eb98b396a.1654529011.git.mchehab@kernel.org>
 X-Mailer: git-send-email 2.36.1
 In-Reply-To: <cover.1654529011.git.mchehab@kernel.org>
 References: <cover.1654529011.git.mchehab@kernel.org>
@@ -61,13 +61,13 @@ Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Changeset 208b65f7b5cc ("dt-bindings: net: convert net/cortina,gemini-ethernet to yaml")
-renamed: Documentation/devicetree/bindings/net/cortina,gemini-ethernet.txt
-to: Documentation/devicetree/bindings/net/cortina,gemini-ethernet.yaml.
+Changeset a1f4626b282d ("media: dt-bindings: Convert Dongwoon dw9807-vcm bindings to json-schema")
+renamed: Documentation/devicetree/bindings/media/i2c/dongwoon,dw9807-vcm.txt
+to: Documentation/devicetree/bindings/media/i2c/dongwoon,dw9807-vcm.yaml.
 
 Update its cross-reference accordingly.
 
-Fixes: 208b65f7b5cc ("dt-bindings: net: convert net/cortina,gemini-ethernet to yaml")
+Fixes: a1f4626b282d ("media: dt-bindings: Convert Dongwoon dw9807-vcm bindings to json-schema")
 Signed-off-by: Mauro Carvalho Chehab <mchehab@kernel.org>
 ---
 
@@ -78,18 +78,18 @@ See [PATCH 00/23] at: https://lore.kernel.org/all/cover.1654529011.git.mchehab@k
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/MAINTAINERS b/MAINTAINERS
-index 91b3ed8ef420..e122b6946063 100644
+index e122b6946063..a11aa7ebb6af 100644
 --- a/MAINTAINERS
 +++ b/MAINTAINERS
-@@ -2009,7 +2009,7 @@ L:	linux-arm-kernel@lists.infradead.org (moderated for non-subscribers)
+@@ -6078,7 +6078,7 @@ M:	Sakari Ailus <sakari.ailus@linux.intel.com>
+ L:	linux-media@vger.kernel.org
  S:	Maintained
- T:	git git://github.com/ulli-kroll/linux.git
- F:	Documentation/devicetree/bindings/arm/gemini.yaml
--F:	Documentation/devicetree/bindings/net/cortina,gemini-ethernet.txt
-+F:	Documentation/devicetree/bindings/net/cortina,gemini-ethernet.yaml
- F:	Documentation/devicetree/bindings/pinctrl/cortina,gemini-pinctrl.txt
- F:	Documentation/devicetree/bindings/rtc/faraday,ftrtc010.yaml
- F:	arch/arm/boot/dts/gemini*
+ T:	git git://linuxtv.org/media_tree.git
+-F:	Documentation/devicetree/bindings/media/i2c/dongwoon,dw9807-vcm.txt
++F:	Documentation/devicetree/bindings/media/i2c/dongwoon,dw9807-vcm.yaml
+ F:	drivers/media/i2c/dw9807-vcm.c
+ 
+ DOUBLETALK DRIVER
 -- 
 2.36.1
 
