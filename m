@@ -2,239 +2,131 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 968BB53F916
-	for <lists+linux-doc@lfdr.de>; Tue,  7 Jun 2022 11:07:45 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 9BE5053F99A
+	for <lists+linux-doc@lfdr.de>; Tue,  7 Jun 2022 11:28:11 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S236859AbiFGJHj (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 7 Jun 2022 05:07:39 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:45380 "EHLO
+        id S239456AbiFGJ2K (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 7 Jun 2022 05:28:10 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:41004 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S237225AbiFGJHg (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 7 Jun 2022 05:07:36 -0400
-Received: from dfw.source.kernel.org (dfw.source.kernel.org [IPv6:2604:1380:4641:c500::1])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 2A3206005E;
-        Tue,  7 Jun 2022 02:07:35 -0700 (PDT)
-Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
-        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
-        (No client certificate requested)
-        by dfw.source.kernel.org (Postfix) with ESMTPS id A721260A55;
-        Tue,  7 Jun 2022 09:07:34 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 68392C385A5;
-        Tue,  7 Jun 2022 09:07:30 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-        s=k20201202; t=1654592854;
-        bh=oy94gBKclPiSri9iMSjQIooenS5qZDCAuitKuHsxNOo=;
-        h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-        b=ZzBmvUn+fG4lGAvIz4wMYcplKFGUdvZFb1+Gj1SX+HehCyaHuI281+tZNwt69ldLe
-         q2gjrFCn4cfnJHiovIdkVXuVmZF7wCjfy8FQoHPmZaA5W05HHm7NHr4SHuYz059ma9
-         MhbT/J8rtJTRhvoCSX8vmo3fY8H9x0DOzok4QZoJUDOeX3tQcg+igGe7x1GeaQL5v0
-         iH8Jefmh2+Y395HEc9oagBh0tqNzlUFzbVFFAUr9mnIjcWtubs3enzuNKb5Y9BKl8E
-         muQVE5Q5ABUs5+LFh1dkmnuVJG5LCud2TZ+t/Gk0Ab/BJeY4Nqc0tDbnQwyPI4LlYd
-         IseQ6nh5lY+cQ==
-Date:   Tue, 7 Jun 2022 10:07:26 +0100
-From:   Will Deacon <will@kernel.org>
-To:     Vegard Nossum <vegard.nossum@oracle.com>
-Cc:     Jonathan Corbet <corbet@lwn.net>, linux-doc@vger.kernel.org,
-        linux-kernel@vger.kernel.org, Amit Shah <aams@amazon.com>,
-        Dave Hansen <dave.hansen@linux.intel.com>,
-        David Woodhouse <dwmw@amazon.co.uk>,
-        Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
-        "Gustavo A . R . Silva" <gustavoars@kernel.org>,
-        Jiri Kosina <jkosina@suse.cz>,
-        Kees Cook <keescook@chromium.org>,
-        Laura Abbott <labbott@kernel.org>,
-        Linus Torvalds <torvalds@linux-foundation.org>,
-        Mauro Carvalho Chehab <mchehab@kernel.org>,
-        Paolo Bonzini <pbonzini@redhat.com>,
-        Peter Zijlstra <peterz@infradead.org>,
-        Solar Designer <solar@openwall.com>,
-        Thomas Gleixner <tglx@linutronix.de>,
-        Thorsten Leemhuis <linux@leemhuis.info>,
-        Tyler Hicks <tyhicks@linux.microsoft.com>,
-        Willy Tarreau <w@1wt.eu>
-Subject: Re: [PATCH v2] Documentation/security-bugs: overhaul
-Message-ID: <20220607090726.GB32282@willie-the-truck>
-References: <20220606194850.26122-1-vegard.nossum@oracle.com>
+        with ESMTP id S239442AbiFGJ2E (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 7 Jun 2022 05:28:04 -0400
+Received: from mail-ot1-x32c.google.com (mail-ot1-x32c.google.com [IPv6:2607:f8b0:4864:20::32c])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 7C50A473B3
+        for <linux-doc@vger.kernel.org>; Tue,  7 Jun 2022 02:28:01 -0700 (PDT)
+Received: by mail-ot1-x32c.google.com with SMTP id r14-20020a056830418e00b0060b8da9ff75so12504707otu.11
+        for <linux-doc@vger.kernel.org>; Tue, 07 Jun 2022 02:28:01 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112;
+        h=mime-version:reply-to:from:date:message-id:subject:to
+         :content-transfer-encoding;
+        bh=ohM259uqobJqtM7gttWurWj7P+4iDfPJquHax95olDY=;
+        b=gujHBVxqWIlmngbJHwwatlrY6K2BhXGLJOXKENebOL4hOCXVjvoa+7rQ+wCwOuo7nz
+         8e28HbaszMFtjrNu2xJwHUtJo1p0vWs5cPK29M2FpYQX1yrDGputAW1tF1NfmP59wawm
+         4ciGU9SnxDgRMb84mTOs96+/9zN97uENfqj9/+eZfuG77h5pSaMszmbmnWOwi9m+gNzd
+         5NtwsZACk2ULSP0cRt0MdNUxBuwzIbCfzmloCBb/Ue1QhCyZ8f6GEgrTXVIY7durHnKk
+         UWQF6j7yHnTlxlvI9xCgSzii4NusQH9ADfpyzQwiF9b+OrCBSH3adFs9TwqclNBk9aQF
+         O14A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:mime-version:reply-to:from:date:message-id
+         :subject:to:content-transfer-encoding;
+        bh=ohM259uqobJqtM7gttWurWj7P+4iDfPJquHax95olDY=;
+        b=e2PC5ykmYI2qvgIGn480yQydPOIHGWIoRQpZtr6/cqitUh3BFnimZJ02zDk+wtoG//
+         vGz62s4Gni95tpPRjHWw8OfVPY0mnQ6oiUND5oKfPPllVgJFbrL9Sb8QZOBdbVQosdBO
+         xz+E+SUCYbv6iW8dc0R1Fd2rC1GyBr8aw5IP1mTCx6zvm+1GBjuseBNJ1jt9DgdCC3d4
+         8IUqGwiBHxgkoK0g/4yo6KnyxDyOUC/21NJgDD2I11VAv5FlhaO+ZVbU56aU+Lzo61HI
+         FTA1pn2E8C/ykNLZPwWIsF8+1Ckt5lRwO8x2uUN9A9C4LZTgQeWjBk2o2Uy5P0an4gyd
+         pWjw==
+X-Gm-Message-State: AOAM530q9/SKLx7j4tiIrl/M2WwxBPld3N7/7QX07Ktr8pEmRzNd35Vv
+        oH5TyW3iGCYmUq2HXp7wiC28jUHrwEbCzdYg8Yk=
+X-Google-Smtp-Source: ABdhPJxTYNOyqQTj+pRtv7B26L++zgaw4oyR9fAzq9Xjy/qi86fDOL5mMOdKcDA6Petw4QZgBH7CHdeaexgYk1On3ls=
+X-Received: by 2002:a05:6830:919:b0:60a:fe63:e321 with SMTP id
+ v25-20020a056830091900b0060afe63e321mr11494607ott.227.1654594080399; Tue, 07
+ Jun 2022 02:28:00 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20220606194850.26122-1-vegard.nossum@oracle.com>
-User-Agent: Mutt/1.10.1 (2018-07-13)
-X-Spam-Status: No, score=-8.3 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_HI,
-        SPF_HELO_NONE,SPF_PASS,T_SCC_BODY_TEXT_LINE autolearn=ham
+Received: by 2002:a05:6358:99a5:b0:a2:a1fa:9308 with HTTP; Tue, 7 Jun 2022
+ 02:28:00 -0700 (PDT)
+Reply-To: robertbaileys_spende@aol.com
+From:   Robert Baileys <mercymiji.j@gmail.com>
+Date:   Tue, 7 Jun 2022 11:28:00 +0200
+Message-ID: <CAAD1zOZ9bCDqBnjmbC3dQfgC=P2zTqAS=TP3q5qK5TFB5=Q9dQ@mail.gmail.com>
+Subject: 
+To:     undisclosed-recipients:;
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Spam-Status: Yes, score=6.5 required=5.0 tests=BAYES_50,DKIM_SIGNED,
+        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_FROM,FREEMAIL_REPLYTO,
+        LOTS_OF_MONEY,MONEY_FREEMAIL_REPTO,RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,
+        SPF_PASS,T_SCC_BODY_TEXT_LINE,UNDISC_FREEM,UNDISC_MONEY autolearn=no
         autolearn_force=no version=3.4.6
+X-Spam-Report: * -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at
+        *      https://www.dnswl.org/, no trust
+        *      [2607:f8b0:4864:20:0:0:0:32c listed in]
+        [list.dnswl.org]
+        *  0.8 BAYES_50 BODY: Bayes spam probability is 40 to 60%
+        *      [score: 0.5000]
+        * -0.0 SPF_PASS SPF: sender matches SPF record
+        *  0.0 FREEMAIL_FROM Sender email is commonly abused enduser mail
+        *      provider
+        *      [mercymiji.j[at]gmail.com]
+        *  0.0 SPF_HELO_NONE SPF: HELO does not publish an SPF Record
+        * -0.1 DKIM_VALID_EF Message has a valid DKIM or DK signature from
+        *      envelope-from domain
+        * -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
+        *      author's domain
+        * -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+        *  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
+        *       valid
+        *  0.0 LOTS_OF_MONEY Huge... sums of money
+        * -0.0 T_SCC_BODY_TEXT_LINE No description available.
+        *  2.3 UNDISC_FREEM Undisclosed recipients + freemail reply-to
+        *  2.0 MONEY_FREEMAIL_REPTO Lots of money from someone using free
+        *      email?
+        *  1.0 FREEMAIL_REPLYTO Reply-To/From or Reply-To/body contain
+        *      different freemails
+        *  0.6 UNDISC_MONEY Undisclosed recipients + money/fraud signs
+X-Spam-Level: ******
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Hi,
+--=20
+Hallo, lieber Beg=C3=BCnstigter,
 
-On Mon, Jun 06, 2022 at 09:48:50PM +0200, Vegard Nossum wrote:
-> The current instructions for reporting security vulnerabilities in the
-> kernel are not clear enough, in particular the process of disclosure
-> and requesting CVEs, and what the roles of the different lists are and
-> how exactly to report to each of them.
-> 
-> Let's give this document an overhaul. Goals are stated as a comment at
-> the bottom of the document; these will not appear in the rendered HTML
-> document.
-> 
-> v2: address feedback from Willy Tarreau and Jonathan Corbet
-> 
-> Link: https://seclists.org/oss-sec/2022/q2/133
-> Cc: Amit Shah <aams@amazon.com>
-> Cc: Dave Hansen <dave.hansen@linux.intel.com>
-> Cc: David Woodhouse <dwmw@amazon.co.uk>
-> Cc: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
-> Cc: Gustavo A. R. Silva <gustavoars@kernel.org>
-> Cc: Jiri Kosina <jkosina@suse.cz>
-> Cc: Jonathan Corbet <corbet@lwn.net>
-> Cc: Kees Cook <keescook@chromium.org>
-> Cc: Laura Abbott <labbott@kernel.org>
-> Cc: Linus Torvalds <torvalds@linux-foundation.org>
-> Cc: Mauro Carvalho Chehab <mchehab@kernel.org>
-> Cc: Paolo Bonzini <pbonzini@redhat.com>
-> Cc: Peter Zijlstra <peterz@infradead.org>
-> Cc: Solar Designer <solar@openwall.com>
-> Cc: Thomas Gleixner <tglx@linutronix.de>
-> Cc: Thorsten Leemhuis <linux@leemhuis.info>
-> Cc: Tyler Hicks <tyhicks@linux.microsoft.com>
-> Cc: Will Deacon <will@kernel.org>
-> Cc: Willy Tarreau <w@1wt.eu>
-> Signed-off-by: Vegard Nossum <vegard.nossum@oracle.com>
-> ---
->  Documentation/admin-guide/security-bugs.rst | 252 +++++++++++++-------
->  1 file changed, 167 insertions(+), 85 deletions(-)
-> 
-> v1 thread:
-> https://lore.kernel.org/all/20220531230309.9290-1-vegard.nossum@oracle.com/T/#u
-> 
-> Updated rendered HTML:
-> https://vegard.github.io/security/Documentation/output/admin-guide/security-bugs-v2.html
-> 
-> diff --git a/Documentation/admin-guide/security-bugs.rst b/Documentation/admin-guide/security-bugs.rst
-> index 82e29837d5898..c63eeb1e89ffd 100644
-> --- a/Documentation/admin-guide/security-bugs.rst
-> +++ b/Documentation/admin-guide/security-bugs.rst
-> @@ -1,96 +1,178 @@
-> +
->  .. _securitybugs:
->  
-> -Security bugs
-> -=============
-> +Reporting security bugs
-> +=======================
->  
->  Linux kernel developers take security very seriously.  As such, we'd
->  like to know when a security bug is found so that it can be fixed and
->  disclosed as quickly as possible.  Please report security bugs to the
-> -Linux kernel security team.
-> -
-> -Contact
-> --------
-> -
-> -The Linux kernel security team can be contacted by email at
-> -<security@kernel.org>.  This is a private list of security officers
-> -who will help verify the bug report and develop and release a fix.
-> -If you already have a fix, please include it with your report, as
-> -that can speed up the process considerably.  It is possible that the
-> -security team will bring in extra help from area maintainers to
-> -understand and fix the security vulnerability.
-> -
-> -As it is with any bug, the more information provided the easier it
-> -will be to diagnose and fix.  Please review the procedure outlined in
-> -'Documentation/admin-guide/reporting-issues.rst' if you are unclear about what
-> -information is helpful.  Any exploit code is very helpful and will not
-> -be released without consent from the reporter unless it has already been
-> -made public.
-> -
-> -Please send plain text emails without attachments where possible.
-> -It is much harder to have a context-quoted discussion about a complex
-> -issue if all the details are hidden away in attachments.  Think of it like a
-> -:doc:`regular patch submission <../process/submitting-patches>`
-> -(even if you don't have a patch yet): describe the problem and impact, list
-> +Linux kernel security team at security@kernel.org, henceforth "the
-> +security list". This is a closed list of trusted developers who will
-> +help verify the bug report and develop a patch in case none was already
-> +proposed.
-> +
-> +While the security list is closed, the security team may bring in
-> +extra help from the relevant maintainers to understand and fix the
-> +security vulnerability.
-> +
-> +Note that the main interest of the kernel security list is in getting
-> +bugs fixed and getting patches reviewed, tested, and merged; CVE
-> +assignment, disclosure to distributions, and public disclosure happen
-> +on different lists with different people, as described below.
-> +
-> +Here is a quick overview of the various lists:
-> +
-> + =============================== ===== =================== ===============
-> + List address                    Open? Purpose             Members
-> + =============================== ===== =================== ===============
-> + security@kernel.org                no | Reporting         Trusted kernel
-> +                                       | Patch development developers
-> + ------------------------------- ----- ------------------- ---------------
-> + linux-distros@vs.openwall.org      no | Coordination      Distribution
-> +                                       | CVE assignment    representatives
-> +                                       | Backporting
-> +                                       | Testing
-> + ------------------------------- ----- ------------------- ---------------
-> + oss-security@lists.openwall.com   yes | Disclosure        General public
-> + =============================== ===== =================== ===============
-> +
-> +The following sections give a step-by-step guide to reporting and
-> +disclosure.
-> +
-> +Contacting the security list
-> +----------------------------
-> +
-> +As it is with any bug, the more information provided the easier it will
-> +be to diagnose and fix; please review the procedure outlined in
-> +Documentation/admin-guide/reporting-issues.rst if you are unclear about
-> +what information is helpful. Any exploit code is very helpful and will
-> +not be released without consent from the reporter unless it has already
-> +been made public. Reporters are encouraged to propose patches, participate
-> +in the discussions of a fix, and test patches.
-> +
-> +The security team does not assign CVEs, nor does it require them
-> +for reports or fixes. CVEs may be requested when the issue is reported to
-> +the linux-distros list.
-> +
-> +**Disclosure.** The security list strongly prefers to have patches posted
-> +for review and testing on public mailing lists and and merged into the
+Sie haben diese E-Mail von der Robert Bailey Foundation erhalten. Ich
+bin ein pensionierter Regierungsangestellter aus Harlem und ein
+Powerball-Lotterie-Jackpot-Gewinner von 343,8 Millionen Dollar. Ich
+bin der gr=C3=B6=C3=9Fte Jackpot-Gewinner in der Geschichte der New York Lo=
+ttery
+in Amerika. Ich habe diesen Wettbewerb am 27. Oktober 2018 gewonnen
+und m=C3=B6chte Ihnen mitteilen, dass Google in Kooperation mit Microsoft
+Ihre "E-Mail-Adresse" f=C3=BCr meine Anfrage hat und diese 3.000.000,00
+Millionen Euro kosten wird. Ich spende diese 3 Millionen Euro an Sie,
+um auch Wohlt=C3=A4tigkeitsorganisationen und armen Menschen in Ihrer
+Gemeinde zu helfen, damit wir die Welt zu einem besseren Ort f=C3=BCr alle
+machen k=C3=B6nnen. Bitte besuchen Sie die folgende Website f=C3=BCr weiter=
+e
+Informationen, damit Sie diesen 3 Mio. EUR Ausgaben nicht skeptisch
+gegen=C3=BCberstehen.
+https://nypost.com/2018/11/14/meet-the-winner-of-the-biggest-lottery-jackpo=
+t-in-new-york-history/Sie
+Weitere Best=C3=A4tigungen kann ich auch auf meinem Youtube suchen:
+https://www.youtube.com/watch?v=3DH5vT18Ysavc
+Bitte antworten Sie mir per E-Mail (robertbaileys_spende@aol.com).
+Sie m=C3=BCssen diese E-Mail sofort beantworten, damit die =C3=BCberweisend=
+e
+Bank mit dem Erhalt dieser Spende in H=C3=B6he von 3.000.000,00 Millionen
+Euro beginnen kann.
+Bitte kontaktieren Sie die untenstehende E-Mail-Adresse f=C3=BCr weitere
+Informationen, damit Sie diese Spende von der =C3=BCberweisenden Bank
+erhalten k=C3=B6nnen. E-Mail: robertbaileys_spende@aol.com
 
-typo: "and and"
+Gr=C3=BC=C3=9Fe,
+Robert Bailey
+* * * * * * * * * * * * * * * *
 
-> +appropriate public git repository as soon as they become available.
-> +However, in exceptional cases, you or an affected party may request that
-> +the patch be withheld for some days; as a rule, the maximum is 7 days.
-> +Only in truly exceptional cases will the security list consider deferring
-> +the publication of a fix beyond this, and the only valid reason for doing
-> +so would be to accommodate the logistics of QA and large scale rollouts
-> +that require release coordination.
-
-I think there's a semantic change here, and I tend to feel that these sort
-of changes would be much easier to review if the semantic changes were done
-separately from the reformatting or the addition of entirely new sections.
-As it stands, the whole doc is effectively being replaced, but what we
-currently have has been tweaked over the years (often as a result of
-spirited debate) and I'm keen not to open up some of the issues we had
-previously if at all possible.
-
-Case in point: the new text above removes both the mention of "calendar
-days" which is a useful disambiguation as well as removing the "extension
-to 14 calendar days" which is a useful upper bound. Why are you removing
-these?
-
-You have also removed use of the term "robust fix", which I think was
-useful. That is, security@ isn't going to post a broken patch to the public
-list just because it's been available for 7 days; that period should only
-begin (if it is even needed) once the fix is ready to go.
-
-Thanks,
-
-Will
+Powerball-Jackpot-Gewinner
+E-Mail: robertbaileys_spende@aol.com
