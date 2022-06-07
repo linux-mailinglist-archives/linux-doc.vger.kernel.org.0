@@ -2,131 +2,97 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 9BE5053F99A
-	for <lists+linux-doc@lfdr.de>; Tue,  7 Jun 2022 11:28:11 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id C655553F9E4
+	for <lists+linux-doc@lfdr.de>; Tue,  7 Jun 2022 11:35:43 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S239456AbiFGJ2K (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 7 Jun 2022 05:28:10 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:41004 "EHLO
+        id S232947AbiFGJfk (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 7 Jun 2022 05:35:40 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:36456 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S239442AbiFGJ2E (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 7 Jun 2022 05:28:04 -0400
-Received: from mail-ot1-x32c.google.com (mail-ot1-x32c.google.com [IPv6:2607:f8b0:4864:20::32c])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 7C50A473B3
-        for <linux-doc@vger.kernel.org>; Tue,  7 Jun 2022 02:28:01 -0700 (PDT)
-Received: by mail-ot1-x32c.google.com with SMTP id r14-20020a056830418e00b0060b8da9ff75so12504707otu.11
-        for <linux-doc@vger.kernel.org>; Tue, 07 Jun 2022 02:28:01 -0700 (PDT)
+        with ESMTP id S239764AbiFGJfT (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 7 Jun 2022 05:35:19 -0400
+Received: from mail-pj1-x1032.google.com (mail-pj1-x1032.google.com [IPv6:2607:f8b0:4864:20::1032])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 0E26BE64D7;
+        Tue,  7 Jun 2022 02:35:16 -0700 (PDT)
+Received: by mail-pj1-x1032.google.com with SMTP id w13-20020a17090a780d00b001e8961b355dso3125270pjk.5;
+        Tue, 07 Jun 2022 02:35:16 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
-        h=mime-version:reply-to:from:date:message-id:subject:to
-         :content-transfer-encoding;
-        bh=ohM259uqobJqtM7gttWurWj7P+4iDfPJquHax95olDY=;
-        b=gujHBVxqWIlmngbJHwwatlrY6K2BhXGLJOXKENebOL4hOCXVjvoa+7rQ+wCwOuo7nz
-         8e28HbaszMFtjrNu2xJwHUtJo1p0vWs5cPK29M2FpYQX1yrDGputAW1tF1NfmP59wawm
-         4ciGU9SnxDgRMb84mTOs96+/9zN97uENfqj9/+eZfuG77h5pSaMszmbmnWOwi9m+gNzd
-         5NtwsZACk2ULSP0cRt0MdNUxBuwzIbCfzmloCBb/Ue1QhCyZ8f6GEgrTXVIY7durHnKk
-         UWQF6j7yHnTlxlvI9xCgSzii4NusQH9ADfpyzQwiF9b+OrCBSH3adFs9TwqclNBk9aQF
-         O14A==
+        h=date:from:to:cc:subject:message-id:references:mime-version
+         :content-disposition:in-reply-to;
+        bh=/7EAFJgdonloPk0n/CJ/zciAeZ6ggjWIIfAJFu04Kc4=;
+        b=S1qC8HOeFifIMvVV7Ym8+VedrgGuml+FLWbRZJtWYWp2ddutmxt1jZh9nW1uaFdcP9
+         96r3gzbtnk3ex+h3r7BfV2K5VchL8Tx8o6sjpOAGg4EetIWYaBltqJDH29yt82KhuX6o
+         N2gDEoVoKxGdXYw3GzlLTGTrv/D0yHGWcEV7QJPYASc3ccnGoVXNYLQTs378SsxriSRy
+         VtvDsgfIMSF7B9piY1LNyOe4wK8iokWcZ5ZK/PgewvtfSxFqMgNm9YW+z9WJzsMEflT9
+         hJif8d/zv3kDz7ETAE75U+2euTntkYJA8WGiCfh9k/Iq8CPyd8Kdb5fB+UiZdb3p4fu5
+         9zZg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=x-gm-message-state:mime-version:reply-to:from:date:message-id
-         :subject:to:content-transfer-encoding;
-        bh=ohM259uqobJqtM7gttWurWj7P+4iDfPJquHax95olDY=;
-        b=e2PC5ykmYI2qvgIGn480yQydPOIHGWIoRQpZtr6/cqitUh3BFnimZJ02zDk+wtoG//
-         vGz62s4Gni95tpPRjHWw8OfVPY0mnQ6oiUND5oKfPPllVgJFbrL9Sb8QZOBdbVQosdBO
-         xz+E+SUCYbv6iW8dc0R1Fd2rC1GyBr8aw5IP1mTCx6zvm+1GBjuseBNJ1jt9DgdCC3d4
-         8IUqGwiBHxgkoK0g/4yo6KnyxDyOUC/21NJgDD2I11VAv5FlhaO+ZVbU56aU+Lzo61HI
-         FTA1pn2E8C/ykNLZPwWIsF8+1Ckt5lRwO8x2uUN9A9C4LZTgQeWjBk2o2Uy5P0an4gyd
-         pWjw==
-X-Gm-Message-State: AOAM530q9/SKLx7j4tiIrl/M2WwxBPld3N7/7QX07Ktr8pEmRzNd35Vv
-        oH5TyW3iGCYmUq2HXp7wiC28jUHrwEbCzdYg8Yk=
-X-Google-Smtp-Source: ABdhPJxTYNOyqQTj+pRtv7B26L++zgaw4oyR9fAzq9Xjy/qi86fDOL5mMOdKcDA6Petw4QZgBH7CHdeaexgYk1On3ls=
-X-Received: by 2002:a05:6830:919:b0:60a:fe63:e321 with SMTP id
- v25-20020a056830091900b0060afe63e321mr11494607ott.227.1654594080399; Tue, 07
- Jun 2022 02:28:00 -0700 (PDT)
+        h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+         :mime-version:content-disposition:in-reply-to;
+        bh=/7EAFJgdonloPk0n/CJ/zciAeZ6ggjWIIfAJFu04Kc4=;
+        b=4DzfbDfBj11UgnKVmli5fzswFKrvbhvm/y931u+hyTi3TIAk8tb9OgFTsiuYnC9GcC
+         l1etp8OYGrBxDo1iHbbW0chwtDRlDwY4rPlcEqmGcB4Yakq3kwpErc14dnwHqhYUs70R
+         UzLMWAnYmqhicJq7vxwb4lwJTtndMDivC80QEWZ95MSpsFnQGs4S1hFRVnOKILAL0Whq
+         YkfI3tsmDD2TA0ZgjDaRRuYxD2pjG5BgS+ApqdrZN2lEaL26oj2/PelUr8PmyKzKsaYH
+         zDgQJn//DyDayqXh4z19V8nPwMM87SGsmC3ue87Rd4QqAosQxDzSPDDhW6xyQvDxg9KK
+         IcJw==
+X-Gm-Message-State: AOAM533EMk5piFz8zPU1nVH3OWRsOAJFtXsv8SjrjXmRhfi+0eEZNu5k
+        jC0X1L03ZZvVPPXQK67kG3WQIWj3+lg=
+X-Google-Smtp-Source: ABdhPJz6KP2YgSIRKs2hKh8e1UIylOlLROEWvw7Unv2OlluDBrIgSrrDYuWMc7+eJZ2wZ4C1CPEdUw==
+X-Received: by 2002:a17:90a:2c0c:b0:1ea:14c0:f0ca with SMTP id m12-20020a17090a2c0c00b001ea14c0f0camr169736pjd.143.1654594515102;
+        Tue, 07 Jun 2022 02:35:15 -0700 (PDT)
+Received: from localhost (subs28-116-206-12-32.three.co.id. [116.206.12.32])
+        by smtp.gmail.com with ESMTPSA id jg15-20020a17090326cf00b001640594376dsm12017207plb.183.2022.06.07.02.35.13
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 07 Jun 2022 02:35:14 -0700 (PDT)
+Date:   Tue, 7 Jun 2022 16:35:11 +0700
+From:   Bagas Sanjaya <bagasdotme@gmail.com>
+To:     Stephen Rothwell <sfr@canb.auug.org.au>
+Cc:     Guenter Roeck <linux@roeck-us.net>,
+        Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
+        Linux Next Mailing List <linux-next@vger.kernel.org>,
+        linux-doc@vger.kernel.org
+Subject: Re: linux-next: build warnings after merge of the hwmon-staging tree
+Message-ID: <Yp8bz4Yo45Bq4VfR@debian.me>
+References: <20220607142301.3eb8a53c@canb.auug.org.au>
 MIME-Version: 1.0
-Received: by 2002:a05:6358:99a5:b0:a2:a1fa:9308 with HTTP; Tue, 7 Jun 2022
- 02:28:00 -0700 (PDT)
-Reply-To: robertbaileys_spende@aol.com
-From:   Robert Baileys <mercymiji.j@gmail.com>
-Date:   Tue, 7 Jun 2022 11:28:00 +0200
-Message-ID: <CAAD1zOZ9bCDqBnjmbC3dQfgC=P2zTqAS=TP3q5qK5TFB5=Q9dQ@mail.gmail.com>
-Subject: 
-To:     undisclosed-recipients:;
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Spam-Status: Yes, score=6.5 required=5.0 tests=BAYES_50,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_FROM,FREEMAIL_REPLYTO,
-        LOTS_OF_MONEY,MONEY_FREEMAIL_REPTO,RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,
-        SPF_PASS,T_SCC_BODY_TEXT_LINE,UNDISC_FREEM,UNDISC_MONEY autolearn=no
-        autolearn_force=no version=3.4.6
-X-Spam-Report: * -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at
-        *      https://www.dnswl.org/, no trust
-        *      [2607:f8b0:4864:20:0:0:0:32c listed in]
-        [list.dnswl.org]
-        *  0.8 BAYES_50 BODY: Bayes spam probability is 40 to 60%
-        *      [score: 0.5000]
-        * -0.0 SPF_PASS SPF: sender matches SPF record
-        *  0.0 FREEMAIL_FROM Sender email is commonly abused enduser mail
-        *      provider
-        *      [mercymiji.j[at]gmail.com]
-        *  0.0 SPF_HELO_NONE SPF: HELO does not publish an SPF Record
-        * -0.1 DKIM_VALID_EF Message has a valid DKIM or DK signature from
-        *      envelope-from domain
-        * -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
-        *      author's domain
-        * -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
-        *  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
-        *       valid
-        *  0.0 LOTS_OF_MONEY Huge... sums of money
-        * -0.0 T_SCC_BODY_TEXT_LINE No description available.
-        *  2.3 UNDISC_FREEM Undisclosed recipients + freemail reply-to
-        *  2.0 MONEY_FREEMAIL_REPTO Lots of money from someone using free
-        *      email?
-        *  1.0 FREEMAIL_REPLYTO Reply-To/From or Reply-To/body contain
-        *      different freemails
-        *  0.6 UNDISC_MONEY Undisclosed recipients + money/fraud signs
-X-Spam-Level: ******
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+In-Reply-To: <20220607142301.3eb8a53c@canb.auug.org.au>
+X-Spam-Status: No, score=-2.1 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_FROM,
+        RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,SPF_PASS,T_SCC_BODY_TEXT_LINE
+        autolearn=ham autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
---=20
-Hallo, lieber Beg=C3=BCnstigter,
+On Tue, Jun 07, 2022 at 02:23:01PM +1000, Stephen Rothwell wrote:
+> Hi all,
+> 
+> After merging the hwmon-staging tree, today's linux-next build (htmldocs)
+> produced these warnings:
+> 
+> Documentation/hwmon/lm90.rst:493: WARNING: Bullet list ends without a blank line; unexpected unindent.
+> Documentation/hwmon/lm90.rst:494: WARNING: Bullet list ends without a blank line; unexpected unindent.
+> 
+> Introduced by commit
+> 
+>   7dd47c2603aa ("hwmon: (lm90) Support MAX1617 and LM84")
+>
 
-Sie haben diese E-Mail von der Robert Bailey Foundation erhalten. Ich
-bin ein pensionierter Regierungsangestellter aus Harlem und ein
-Powerball-Lotterie-Jackpot-Gewinner von 343,8 Millionen Dollar. Ich
-bin der gr=C3=B6=C3=9Fte Jackpot-Gewinner in der Geschichte der New York Lo=
-ttery
-in Amerika. Ich habe diesen Wettbewerb am 27. Oktober 2018 gewonnen
-und m=C3=B6chte Ihnen mitteilen, dass Google in Kooperation mit Microsoft
-Ihre "E-Mail-Adresse" f=C3=BCr meine Anfrage hat und diese 3.000.000,00
-Millionen Euro kosten wird. Ich spende diese 3 Millionen Euro an Sie,
-um auch Wohlt=C3=A4tigkeitsorganisationen und armen Menschen in Ihrer
-Gemeinde zu helfen, damit wir die Welt zu einem besseren Ort f=C3=BCr alle
-machen k=C3=B6nnen. Bitte besuchen Sie die folgende Website f=C3=BCr weiter=
-e
-Informationen, damit Sie diesen 3 Mio. EUR Ausgaben nicht skeptisch
-gegen=C3=BCberstehen.
-https://nypost.com/2018/11/14/meet-the-winner-of-the-biggest-lottery-jackpo=
-t-in-new-york-history/Sie
-Weitere Best=C3=A4tigungen kann ich auch auf meinem Youtube suchen:
-https://www.youtube.com/watch?v=3DH5vT18Ysavc
-Bitte antworten Sie mir per E-Mail (robertbaileys_spende@aol.com).
-Sie m=C3=BCssen diese E-Mail sofort beantworten, damit die =C3=BCberweisend=
-e
-Bank mit dem Erhalt dieser Spende in H=C3=B6he von 3.000.000,00 Millionen
-Euro beginnen kann.
-Bitte kontaktieren Sie die untenstehende E-Mail-Adresse f=C3=BCr weitere
-Informationen, damit Sie diese Spende von der =C3=BCberweisenden Bank
-erhalten k=C3=B6nnen. E-Mail: robertbaileys_spende@aol.com
+Hi Stephen,
 
-Gr=C3=BC=C3=9Fe,
-Robert Bailey
-* * * * * * * * * * * * * * * *
+These warnings above doesn't appear when doing htmldocs build using
+Sphinx installed from pip on my system.
 
-Powerball-Jackpot-Gewinner
-E-Mail: robertbaileys_spende@aol.com
+Cc-ing linux-doc list.
+
+Thanks.
+
+-- 
+An old man doll... just what I always wanted! - Clara
