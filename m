@@ -2,146 +2,146 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 1BDD353F9F5
-	for <lists+linux-doc@lfdr.de>; Tue,  7 Jun 2022 11:37:21 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id C668153F94D
+	for <lists+linux-doc@lfdr.de>; Tue,  7 Jun 2022 11:16:55 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S239776AbiFGJhS (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 7 Jun 2022 05:37:18 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:38902 "EHLO
+        id S239207AbiFGJQw (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 7 Jun 2022 05:16:52 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:41642 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S239767AbiFGJhR (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 7 Jun 2022 05:37:17 -0400
-Received: from mail-pl1-x635.google.com (mail-pl1-x635.google.com [IPv6:2607:f8b0:4864:20::635])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id BB1822C5;
-        Tue,  7 Jun 2022 02:37:10 -0700 (PDT)
-Received: by mail-pl1-x635.google.com with SMTP id d22so14348098plr.9;
-        Tue, 07 Jun 2022 02:37:10 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=date:from:to:cc:subject:message-id:references:mime-version
-         :content-disposition:in-reply-to;
-        bh=Gxs0+aWvYM3LWxC7EUUZ0v49Q04+LWa6qfJ61uUqW8g=;
-        b=itMtcieRDU81frhTBFtGjbAXgvv62YzbLl8XRi7v/gXGpy/tIM3BYjMKK5ECQAfPOB
-         03sfW6r2inxS0tC9t3Wd4oKlafJW5M8VyVTCvYWhod8n9gfgXGYVl9s5pPVMbQL4DBga
-         0P385VzeZYDMhyCAnwfSEL2Bbsvd4ONTAuvIQadPIQzTToZJhmKSdNMJpM9A0r2SRd5b
-         T2EKmwPlNaetQrQ1WTfXGWXiTrO0SGXherfMFEzyZ/TjQAcchxEynd2Q8OyjN5isFrxz
-         imO6VmrkTIwFvVIMsytoqp64ejZOj6LQ512hzOFbBh4c1ODe2iGYwqNLa3LqzBtT1Oys
-         l1iA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=x-gm-message-state:date:from:to:cc:subject:message-id:references
-         :mime-version:content-disposition:in-reply-to;
-        bh=Gxs0+aWvYM3LWxC7EUUZ0v49Q04+LWa6qfJ61uUqW8g=;
-        b=f9NvTc5GVf/CXvSi6pIr12gGpDLqHJw0d4XXm6793L24amxcW5WjIopKamomt/OsPW
-         s6Pz8LExlZI+EhSzcI4yqrhjts3BITZWwm9icEiJU7kjp5uXO8GzTjvTQTKW2dNnbKKm
-         CVX+XP6sSx93zRxM0UTx5o4V54n4wJsehUd9ddrn7d1UgSsp1gQHf2epUG/3SaxsFjj7
-         YXwCOLh0suarzvVe/JEa0Ato+Q1Kw3br/wiXIzseWfrFtVXTpyA2gzoYF0jeFVBi/zDi
-         f8kQ+IUrVuJT5Ft7cC6hqEVuTLUTmSBILjreAlD9XKizG4aX6Ti1dlj8/f6hP0uV6ABa
-         jXLw==
-X-Gm-Message-State: AOAM532m4rgEEKfz1MH6UDBaZr7VODHPGoqcO7+tv2mDd+/5Le/yMWxK
-        oFN6V9FfL/KmKIMSpnZ0A85kGZ3eONg=
-X-Google-Smtp-Source: ABdhPJxraJAaBzAWGKH5jd/RrR8C7QJhzYi9X0l8/MFx2nfDP7LAo4FI4dWrWi/EW0pd0RtCLb81VA==
-X-Received: by 2002:a17:90b:503:b0:1e2:f129:5135 with SMTP id r3-20020a17090b050300b001e2f1295135mr31179593pjz.22.1654594630407;
-        Tue, 07 Jun 2022 02:37:10 -0700 (PDT)
-Received: from localhost (subs28-116-206-12-32.three.co.id. [116.206.12.32])
-        by smtp.gmail.com with ESMTPSA id f6-20020a170902ab8600b0015e8d4eb25fsm11971380plr.169.2022.06.07.02.37.09
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 07 Jun 2022 02:37:09 -0700 (PDT)
-Date:   Tue, 7 Jun 2022 16:37:07 +0700
-From:   Bagas Sanjaya <bagasdotme@gmail.com>
-To:     Stephen Rothwell <sfr@canb.auug.org.au>
-Cc:     Guenter Roeck <linux@roeck-us.net>,
-        Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
-        Linux Next Mailing List <linux-next@vger.kernel.org>,
-        linux-doc@vger.kernel.org
-Subject: Re: linux-next: build warnings after merge of the hwmon-staging tree
-Message-ID: <Yp8cQ1BcDXuZ9Cv4@debian.me>
-References: <20220607141958.1e31971d@canb.auug.org.au>
+        with ESMTP id S239182AbiFGJQr (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 7 Jun 2022 05:16:47 -0400
+Received: from szxga02-in.huawei.com (szxga02-in.huawei.com [45.249.212.188])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 2F3EDB0D00;
+        Tue,  7 Jun 2022 02:16:44 -0700 (PDT)
+Received: from dggpemm500023.china.huawei.com (unknown [172.30.72.53])
+        by szxga02-in.huawei.com (SkyGuard) with ESMTP id 4LHPmC185MzRp5T;
+        Tue,  7 Jun 2022 17:13:31 +0800 (CST)
+Received: from dggpemm500014.china.huawei.com (7.185.36.153) by
+ dggpemm500023.china.huawei.com (7.185.36.83) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2375.24; Tue, 7 Jun 2022 17:16:42 +0800
+Received: from localhost.localdomain (10.175.112.125) by
+ dggpemm500014.china.huawei.com (7.185.36.153) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2375.24; Tue, 7 Jun 2022 17:16:40 +0800
+From:   Wupeng Ma <mawupeng1@huawei.com>
+To:     <corbet@lwn.net>, <will@kernel.org>, <ardb@kernel.org>,
+        <catalin.marinas@arm.com>
+CC:     <tglx@linutronix.de>, <mingo@redhat.com>, <bp@alien8.de>,
+        <dave.hansen@linux.intel.com>, <x86@kernel.org>, <hpa@zytor.com>,
+        <dvhart@infradead.org>, <andy@infradead.org>, <rppt@kernel.org>,
+        <akpm@linux-foundation.org>, <paul.walmsley@sifive.com>,
+        <palmer@dabbelt.com>, <aou@eecs.berkeley.edu>,
+        <paulmck@kernel.org>, <keescook@chromium.org>,
+        <songmuchun@bytedance.com>, <rdunlap@infradead.org>,
+        <damien.lemoal@opensource.wdc.com>, <swboyd@chromium.org>,
+        <wei.liu@kernel.org>, <robin.murphy@arm.com>, <david@redhat.com>,
+        <mawupeng1@huawei.com>, <anshuman.khandual@arm.com>,
+        <thunder.leizhen@huawei.com>, <wangkefeng.wang@huawei.com>,
+        <gpiccoli@igalia.com>, <chenhuacai@kernel.org>,
+        <geert@linux-m68k.org>, <chenzhou10@huawei.com>,
+        <vijayb@linux.microsoft.com>, <linux-doc@vger.kernel.org>,
+        <linux-kernel@vger.kernel.org>,
+        <linux-arm-kernel@lists.infradead.org>,
+        <linux-efi@vger.kernel.org>, <platform-driver-x86@vger.kernel.org>,
+        <linux-mm@kvack.org>, <linux-riscv@lists.infradead.org>
+Subject: [PATCH v3 0/6] introduce mirrored memory support for arm64
+Date:   Tue, 7 Jun 2022 17:37:59 +0800
+Message-ID: <20220607093805.1354256-1-mawupeng1@huawei.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-In-Reply-To: <20220607141958.1e31971d@canb.auug.org.au>
-X-Spam-Status: No, score=-2.1 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_FROM,
-        RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,SPF_PASS,T_SCC_BODY_TEXT_LINE
-        autolearn=ham autolearn_force=no version=3.4.6
+Content-Transfer-Encoding: 7BIT
+Content-Type:   text/plain; charset=US-ASCII
+X-Originating-IP: [10.175.112.125]
+X-ClientProxiedBy: dggems705-chm.china.huawei.com (10.3.19.182) To
+ dggpemm500014.china.huawei.com (7.185.36.153)
+X-CFilter-Loop: Reflected
+X-Spam-Status: No, score=-4.2 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_MED,
+        SPF_HELO_NONE,SPF_PASS,T_SCC_BODY_TEXT_LINE autolearn=ham
+        autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Tue, Jun 07, 2022 at 02:19:58PM +1000, Stephen Rothwell wrote:
-> Hi all,
-> 
-> After merging the hwmon-staging tree, today's linux-next build (htmldocs)
-> produced these warnings:
-> 
-> Documentation/hwmon/lt7182s.rst:2: WARNING: Explicit markup ends without a blank line; unexpected unindent.
-> Documentation/hwmon/lt7182s.rst:75: WARNING: Malformed table.
-> Text in column margin in table line 33.
-> 
-> ======================  ====================================
-> curr[1-2]_label         "iin[12]"
-> curr[1-2]_input         Measured input current
-> curr[1-2]_max           Maximum input current
-> curr[1-2]_max_alarm     Current high alarm
-> 
-> curr[3-4]_label         "iout[1-2]"
-> curr[3-4]_input         Measured output current
-> curr[3-4]_highest       Highest measured output current
-> curr[3-4]_max           Maximum output current
-> curr[3-4]_max_alarm     Output current high alarm
-> 
-> in[1-2]_label           "vin[12]"
-> in[1-2]_input           Measured input voltage
-> in[1-2]_highest         Highest measured input voltage
-> in[1-2]_crit            Critical maximum input voltage
-> in[1-2]_crit_alarm      Input voltage critical high alarm
-> in[1-2]_min             Minimum input voltage
-> in[1-2]_min_alarm       Input voltage low alarm
-> in[1-2]_rated_min       Rated minimum input voltage
-> in[1-2]_rated_max       Rated maximum input voltage
-> in1_reset_history       Write to reset history for all attributes
-> 
-> in[3-5]_label           "vmon[1-3]"
-> in[3-5]_input           Measured voltage on ITH1/ITH2/EXTVCC pins
->                         Only available if enabled with MFR_ADC_CONTROL_LT7182S
->                         command.
-> 
-> in[3-4|6-7]_label       "vout[1-2]"
-> in[3-4|6-7]_input       Measured output voltage
-> in[3-4|6-7]_highest     Highest measured output voltage
-> in[3-4|6-7]_lcrit       Critical minimum output voltage
-> in[3-4|6-7]_lcrit_alarm Output voltage critical low alarm
-> in[3-4|6-7]_min         Minimum output voltage
-> in[3-4|6-7]_max_alarm   Output voltage low alarm
-> in[3-4|6-7]_max         Maximum output voltage
-> in[3-4|6-7]_max_alarm   Output voltage high alarm
-> in[3-4|6-7]_crit        Critical maximum output voltage
-> in[3-4|6-7]_crit_alarm  Output voltage critical high alarm
-> 
-> power[1-2]_label        "pout[1-2]"
-> power[1-2]_input        Measured output power
-> 
-> temp1_input             Measured temperature
-> temp1_crit              Critical high temperature
-> temp1_crit_alarm        Chip temperature critical high alarm
-> temp1_max               Maximum temperature
-> temp1_max_alarm         Chip temperature high alarm
-> ======================  ====================================
-> 
-> Introduced by commit
-> 
->   3d6bcaa21fbd ("hwmon: (pmbus) Add support for Analog Devices LT7182S")
-> 
+From: Ma Wupeng <mawupeng1@huawei.com>
 
-Hi Stephen,
+Commit b05b9f5f9dcf ("x86, mirror: x86 enabling - find mirrored memory ranges")
+introduced mirrored memory support for x86. This support rely on UEFI to
+report mirrored memory address ranges.  See UEFI 2.5 spec pages 157-158:
 
-The warning above doesn't appear when doing htmldocs build using Sphinx
-installed from pip on my system.
+  http://www.uefi.org/sites/default/files/resources/UEFI%202_5.pdf
 
-Cc-ing linux-doc list.
+Memory mirroring is a technique used to separate memory into two separate
+channels, usually on a memory device, like a server. In memory mirroring,
+one channel is copied to another to create redundancy. This method makes
+input/output (I/O) registers and memory appear with more than one address
+range because the same physical byte is accessible at more than one
+address. Using memory mirroring, higher memory reliability and a higher
+level of memory consolidation are possible.
+
+These EFI memory regions have various attributes, and the "mirrored"
+attribute is one of them. The physical memory region whose descriptors
+in EFI memory map has EFI_MEMORY_MORE_RELIABLE attribute (bit: 16) are
+mirrored. The address range mirroring feature of the kernel arranges such
+mirrored regions into normal zones and other regions into movable zones.
+
+Arm64 can support this too. So mirrored memory support is added to support
+arm64.
+
+The main purpose of this patch set is to introduce mirrored support for
+arm64 and we have already fixed the problems we had which is shown in
+patch #5 to patch #8 and try to bring total isolation in patch #9 which
+will disable mirror feature if kernelcore is not specified.
+
+In order to test this support in arm64:
+- patch this patch set
+- add kernelcore=mirror in kernel parameter
+- start you kernel
+
+Patch #1-#2 introduce mirrored memory support form arm64.
+Patch #3-#5 fix some bugs for arm64 if memory reliable is enabled.
+Patch #6 disable mirror feature if kernelcore is not specified.
+
+Thanks to Ard Biesheuvel's hard work [1], now kernel will perfer mirrored
+memory if kaslr is enabled.
+
+[1] https://lore.kernel.org/linux-arm-kernel/CAMj1kXEPVEzMgOM4+Yj6PxHA-jFuDOAUdDJSiSxy_XaP4P7LSw@mail.gmail.com/T/
+
+Changelog since v2:
+- remove efi_fake_mem support
+- remove Commit ("remove some redundant code in ia64 efi_init") since
+  efi_print_memmap() is not public
+- add mirror flag back on initrd memory
+
+Changelog since v1:
+- update changelog in cover letter
+- use PHYS_PFN in patch #7
+
+Ma Wupeng (6):
+  efi: Make efi_find_mirror() public
+  arm64/mirror: arm64 enabling - find mirrored memory ranges
+  mm: Ratelimited mirrored memory related warning messages
+  mm: Demote warning message in vmemmap_verify() to debug level
+  mm: Add mirror flag back on initrd memory
+  efi: Disable mirror feature if kernelcore is not specified
+
+ .../admin-guide/kernel-parameters.txt         |  2 +-
+ arch/arm64/kernel/setup.c                     |  1 +
+ arch/arm64/mm/init.c                          |  9 +++++++
+ arch/x86/include/asm/efi.h                    |  4 ---
+ arch/x86/platform/efi/efi.c                   | 23 ----------------
+ drivers/firmware/efi/efi.c                    | 26 +++++++++++++++++++
+ include/linux/efi.h                           |  3 +++
+ include/linux/memblock.h                      |  1 +
+ include/linux/mm.h                            |  2 ++
+ mm/memblock.c                                 | 24 +++++++++++++++--
+ mm/page_alloc.c                               |  2 +-
+ mm/sparse-vmemmap.c                           |  2 +-
+ 12 files changed, 67 insertions(+), 32 deletions(-)
 
 -- 
-An old man doll... just what I always wanted! - Clara
+2.25.1
+
