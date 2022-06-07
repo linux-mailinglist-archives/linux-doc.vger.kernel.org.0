@@ -2,58 +2,59 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id F2225541908
-	for <lists+linux-doc@lfdr.de>; Tue,  7 Jun 2022 23:19:40 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 9281B541B72
+	for <lists+linux-doc@lfdr.de>; Tue,  7 Jun 2022 23:47:27 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1378228AbiFGVTW (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 7 Jun 2022 17:19:22 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:54690 "EHLO
+        id S1381538AbiFGVrS (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 7 Jun 2022 17:47:18 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:36858 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1352999AbiFGVS7 (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 7 Jun 2022 17:18:59 -0400
-Received: from mail-vs1-xe29.google.com (mail-vs1-xe29.google.com [IPv6:2607:f8b0:4864:20::e29])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id A254D224113
-        for <linux-doc@vger.kernel.org>; Tue,  7 Jun 2022 11:59:22 -0700 (PDT)
-Received: by mail-vs1-xe29.google.com with SMTP id q14so17522576vsr.12
-        for <linux-doc@vger.kernel.org>; Tue, 07 Jun 2022 11:59:22 -0700 (PDT)
+        with ESMTP id S1382110AbiFGVqd (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 7 Jun 2022 17:46:33 -0400
+Received: from mail-ua1-x930.google.com (mail-ua1-x930.google.com [IPv6:2607:f8b0:4864:20::930])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id B1014214812
+        for <linux-doc@vger.kernel.org>; Tue,  7 Jun 2022 12:07:48 -0700 (PDT)
+Received: by mail-ua1-x930.google.com with SMTP id o8so6145197uap.6
+        for <linux-doc@vger.kernel.org>; Tue, 07 Jun 2022 12:07:48 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=google.com; s=20210112;
         h=mime-version:references:in-reply-to:from:date:message-id:subject:to
          :cc;
-        bh=9Elzb0WSXIXlROa5Ne/fkFdeuavdNhknMmaOlUejDTY=;
-        b=Cv0f7VDXY7aEPKcXAgnBc/m7gn4KcwOMCSs6PnP0SNIDWWYURJ50n1BCOckHKyAo4L
-         osssjroBU4blBT4uRm44yv1fi6oI2L3ujbMxK0o1i7oGhzuJEZHYVRVpCkNRjU/hFtxf
-         Ifer0vvxCoOUoY1v9kjyMENImilrTTM4fAy0Btq15FrFxyPHCeK2B0D84LFU8iZVCbEM
-         TH8Id7ZOemPx6JqSCTpgYaMPAPVA73HfyKXhphSlNjINHTMX+uRZzLvngc5H22ab9HNY
-         8jkBwlmf+zLp0DZxf4DQWE1GgEnOF/mife+Vv/Z4dmejaQyeRkI9GPk+3cw2UFYny78M
-         GbTQ==
+        bh=s58JyYfxjJZK+xBks84yqht9lKqAP2iTqEYGVHfv2fA=;
+        b=UniKPp2fwri4mGTTugBIeQ1NZBedToPyxhulFcbp+XWVAnwR5PUv5ooePbH/zWikdq
+         6FaFxdOB4iEIsUrcTX9Qm4jCxkNTtmM6YKlPmKISkWBzbViQ2rTzilpDo+Iz9nowKLFJ
+         WmejIqLXPDwqBVm9B+sGT+TwXPzscXlYaRIvkFA7RNeTqNgz7kP6U+d+Mi1FDaQt+MrA
+         UiCKot2InqF/Xaqatw80AlYd7gtH10a85bDH2ZXIa0NKfAVKksTZaxf1/l+Yk1jbOveM
+         MIAHxHTJmYsEMuYg4W58T1eg1cbE513Klo79bfZpVLgYtgZuYtoWI37VAmFSLRKiTWYb
+         8MHQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=x-gm-message-state:mime-version:references:in-reply-to:from:date
          :message-id:subject:to:cc;
-        bh=9Elzb0WSXIXlROa5Ne/fkFdeuavdNhknMmaOlUejDTY=;
-        b=XZ4ecdqF0TPEdBY3Ild71Fv7mXzPPIjIRc0nA2IKD4vSKd2JNMtLxOPCiLa7o53hnF
-         mLIx+7zQ7ZH0x+CostP4ZE4y0XesFGNhDdIhbnSIzWDTINo0G+8sx9+zQocz9a9OYwQ+
-         uvy8pRnCFM0ol7leX2hnLDfbKJ8Na+oCeAUZHVrBXrZSqJaVpLz2W/qB0dtCtzSIv5w3
-         eicppscZ86qMnvoobVVl9CnjECxyiRXyOFLPFo57BmOa8K67qElE2QcIVCbbI46LMR0s
-         yQhKBAPbOi72QKynCfmOaCULOjQQ0gVHtOAteTccOd/Oc3cOSQtGu0tGMv4tx926aATR
-         6WQw==
-X-Gm-Message-State: AOAM532bixGW5MIEdDCK2qGiAAX0ow7fdJcEY31GWlkmUbjGJJ/DG5W/
-        aL8K3TiX7SzK+F/2aiRu/wJ/jHvA5+O/ZkmwX85Rjw==
-X-Google-Smtp-Source: ABdhPJwItyNg+JlCejjmtMRo2UgKL6vqnWouemHIBZUAlTzMQTqGRbdROMZliSDf1VNw1QrtZay3uVygVctsRUZw5Ew=
-X-Received: by 2002:a67:f3d0:0:b0:34b:b52d:d676 with SMTP id
- j16-20020a67f3d0000000b0034bb52dd676mr6382966vsn.6.1654628358760; Tue, 07 Jun
- 2022 11:59:18 -0700 (PDT)
+        bh=s58JyYfxjJZK+xBks84yqht9lKqAP2iTqEYGVHfv2fA=;
+        b=AE2cvCdWMTfoJluRRBj+P4IWUI0mdo55f/du9KwtA8O3AaFSKYy4hKMCAT6DA1fcza
+         w1W89Y2qDQ897kyysjNbu47ZWYu+73j3yInInJHCPe9YpKAeN5VoUXdolPd/Be3XctVW
+         Od7Uz91vHeA/tzUQSNgbOlwP1NSgOTgmcV+M6vrdf95xNACTsDF9PfDTtFkwuO2hbchc
+         TVlssKYWtZLLRCXvdrl1/QYVH75kAlSxPhZpH6GeLQwensZTpEXJzGXMW+SJXlSgRu6g
+         fxPi7ryb/QFnVTGUYRdO8ms9TJfivFj3ParSDsDlzGR6o3TScUIslK378wIVB+i0j0dM
+         y5pw==
+X-Gm-Message-State: AOAM531ueQ2N2oxJttg1j67AlUxWUgZqvL2xQ91jc9FnA6za838i6gBh
+        hqrFEF6dGxmZIPtiHNWMVqhN8lKvD58wHd4EmvlKYw==
+X-Google-Smtp-Source: ABdhPJzS0mtcx5OOOAWXsJb2eTSprTdFF5fKfwZ/5n8eY041PP99y8PgkVi5+GKdcmJEaZnwyH4Uqru8wQ1EJ+a7ziU=
+X-Received: by 2002:ab0:2008:0:b0:352:2b3a:6bce with SMTP id
+ v8-20020ab02008000000b003522b3a6bcemr37171732uak.19.1654628867656; Tue, 07
+ Jun 2022 12:07:47 -0700 (PDT)
 MIME-Version: 1.0
 References: <20220518014632.922072-1-yuzhao@google.com> <20220518014632.922072-8-yuzhao@google.com>
- <CAGsJ_4yboZEY9OfyujPxBa_AEuGM3OAq5y_L9gvzSMUv70BxeQ@mail.gmail.com>
-In-Reply-To: <CAGsJ_4yboZEY9OfyujPxBa_AEuGM3OAq5y_L9gvzSMUv70BxeQ@mail.gmail.com>
+ <CAGsJ_4yboZEY9OfyujPxBa_AEuGM3OAq5y_L9gvzSMUv70BxeQ@mail.gmail.com> <CAGsJ_4w3S_8Kaw2GyB3hg7b4N_D+6yBO7D6qmgxD9Fqz3_dhAg@mail.gmail.com>
+In-Reply-To: <CAGsJ_4w3S_8Kaw2GyB3hg7b4N_D+6yBO7D6qmgxD9Fqz3_dhAg@mail.gmail.com>
 From:   Yu Zhao <yuzhao@google.com>
-Date:   Tue, 7 Jun 2022 12:58:42 -0600
-Message-ID: <CAOUHufYwhcWZFdkaJ9qsNoFMUxPOEd+CFzDtYwWdpSGWBbjPgw@mail.gmail.com>
+Date:   Tue, 7 Jun 2022 13:07:11 -0600
+Message-ID: <CAOUHufbi7h6siHdnhsAEiXaCoNrUs9bUnEihYouE4CNMt-Zd_w@mail.gmail.com>
 Subject: Re: [PATCH v11 07/14] mm: multi-gen LRU: exploit locality in rmap
 To:     Barry Song <21cnbao@gmail.com>
-Cc:     Andrew Morton <akpm@linux-foundation.org>,
+Cc:     Will Deacon <will@kernel.org>,
+        Andrew Morton <akpm@linux-foundation.org>,
         Linux-MM <linux-mm@kvack.org>, Andi Kleen <ak@linux.intel.com>,
         Aneesh Kumar <aneesh.kumar@linux.ibm.com>,
         Catalin Marinas <catalin.marinas@arm.com>,
@@ -69,7 +70,6 @@ Cc:     Andrew Morton <akpm@linux-foundation.org>,
         Mike Rapoport <rppt@kernel.org>,
         Peter Zijlstra <peterz@infradead.org>,
         Tejun Heo <tj@kernel.org>, Vlastimil Babka <vbabka@suse.cz>,
-        Will Deacon <will@kernel.org>,
         LAK <linux-arm-kernel@lists.infradead.org>,
         Linux Doc Mailing List <linux-doc@vger.kernel.org>,
         LKML <linux-kernel@vger.kernel.org>, x86 <x86@kernel.org>,
@@ -85,7 +85,7 @@ Cc:     Andrew Morton <akpm@linux-foundation.org>,
         Konstantin Kharlamov <Hi-Angel@yandex.ru>,
         Shuang Zhai <szhai2@cs.rochester.edu>,
         Sofia Trinh <sofia.trinh@edi.works>,
-        Vaibhav Jain <vaibhav@linux.ibm.com>
+        Vaibhav Jain <vaibhav@linux.ibm.com>, huzhanyuan@oppo.com
 Content-Type: text/plain; charset="UTF-8"
 X-Spam-Status: No, score=-17.6 required=5.0 tests=BAYES_00,DKIMWL_WL_MED,
         DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,
@@ -98,89 +98,57 @@ Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Mon, Jun 6, 2022 at 3:25 AM Barry Song <21cnbao@gmail.com> wrote:
+On Tue, Jun 7, 2022 at 1:37 AM Barry Song <21cnbao@gmail.com> wrote:
 >
-> On Wed, May 18, 2022 at 4:49 PM Yu Zhao <yuzhao@google.com> wrote:
+> On Mon, Jun 6, 2022 at 9:25 PM Barry Song <21cnbao@gmail.com> wrote:
+> >
+> > On Wed, May 18, 2022 at 4:49 PM Yu Zhao <yuzhao@google.com> wrote:
 
 ...
 
-> > @@ -821,6 +822,12 @@ static bool folio_referenced_one(struct folio *folio,
-> >                 }
+> I can't really explain why we are getting a random app/java vm crash in monkey
+> test by using ptep_test_and_clear_young() only in lru_gen_look_around() on an
+> armv8-a machine without hardware PTE young support.
+>
+> Moving to  ptep_clear_flush_young() in look_around can make the random
+> hang disappear according to zhanyuan(Cc-ed).
+
+This sounds too familiar -- let me ask again: was the following commit
+included during the test?
+
+  07509e10dcc7 arm64: pgtable: Fix pte_accessible()
+
+If not, it will cause exactly the problem you described. And what
+about this one?
+
+  e914d8f00391 mm: fix unexpected zeroed page mapping with zram swap
+
+Missing it also causes userspace memory corruption on Android, i.e.,
+random app crashes.
+
+> On x86, ptep_clear_flush_young() is exactly ptep_test_and_clear_young()
+> after
+>  'commit b13b1d2d8692 ("x86/mm: In the PTE swapout page reclaim case clear
+> the accessed bit instead of flushing the TLB")'
+>
+> But on arm64, they are different. according to Will's comments in this
+> thread which
+> tried to make arm64 same with x86,
+> https://www.mail-archive.com/linux-kernel@vger.kernel.org/msg1793881.html
+>
+> "
+> This is blindly copied from x86 and isn't true for us: we don't invalidate
+> the TLB on context switch. That means our window for keeping the stale
+> entries around is potentially much bigger and might not be a great idea.
+>
+> If we roll a TLB invalidation routine without the trailing DSB, what sort of
+> performance does that get you?
+> "
+> We shouldn't think ptep_clear_flush_young() is safe enough in LRU to
+> clear PTE young? Any comments from Will?
+>
 > >
-> >                 if (pvmw.pte) {
-> > +                       if (lru_gen_enabled() && pte_young(*pvmw.pte) &&
-> > +                           !(vma->vm_flags & (VM_SEQ_READ | VM_RAND_READ))) {
-> > +                               lru_gen_look_around(&pvmw);
-> > +                               referenced++;
-> > +                       }
-> > +
-> >                         if (ptep_clear_flush_young_notify(vma, address,
->
-> Hello, Yu.
-> look_around() is calling ptep_test_and_clear_young(pvmw->vma, addr, pte + i)
-> only without flush and notify. for flush, there is a tlb operation for arm64:
-> static inline int ptep_clear_flush_young(struct vm_area_struct *vma,
->                                          unsigned long address, pte_t *ptep)
-> {
->         int young = ptep_test_and_clear_young(vma, address, ptep);
->
->         if (young) {
->                 /*
->                  * We can elide the trailing DSB here since the worst that can
->                  * happen is that a CPU continues to use the young entry in its
->                  * TLB and we mistakenly reclaim the associated page. The
->                  * window for such an event is bounded by the next
->                  * context-switch, which provides a DSB to complete the TLB
->                  * invalidation.
->                  */
->                 flush_tlb_page_nosync(vma, address);
->         }
->
->         return young;
-> }
->
-> Does it mean the current kernel is over cautious?
+> > btw, lru_gen_look_around() has already included 'address', are we doing
+> > pte check for 'address' twice here?
 
-Hi Barry,
-
-This is up to individual archs. For x86, ptep_clear_flush_young() is
-ptep_test_and_clear_young(). For arm64, I'd say yes, based on Figure 1
-of Navarro, Juan, et al. "Practical, transparent operating system
-support for superpages." [1].
-
-int ptep_clear_flush_young(struct vm_area_struct *vma,
-                           unsigned long address, pte_t *ptep)
-{
-        /*
-         * On x86 CPUs, clearing the accessed bit without a TLB flush
-         * doesn't cause data corruption. [ It could cause incorrect
-         * page aging and the (mistaken) reclaim of hot pages, but the
-         * chance of that should be relatively low. ]
-         *
-         * So as a performance optimization don't flush the TLB when
-         * clearing the accessed bit, it will eventually be flushed by
-         * a context switch or a VM operation anyway. [ In the rare
-         * event of it not getting flushed for a long time the delay
-         * shouldn't really matter because there's no real memory
-         * pressure for swapout to react to. ]
-         */
-        return ptep_test_and_clear_young(vma, address, ptep);
-}
-
-[1] https://www.usenix.org/legacy/events/osdi02/tech/full_papers/navarro/navarro.pdf
-
-> is it
-> safe to call ptep_test_and_clear_young() only?
-
-Yes. Though the h/w A-bit is designed to allow OSes to skip TLB
-flushes when unmapping, the Linux kernel doesn't do this.
-
-> btw, lru_gen_look_around() has already included 'address', are we doing
-> pte check for 'address' twice here?
-
-Yes for host MMU but no KVM MMU. ptep_clear_flush_young_notify() goes
-into the MMU notifier. We don't use the _notify variant in
-lru_gen_look_around() because GPA space generally exhibits no memory
-locality.
-
-Thanks.
+Explained in the previous reply. Hope that clarifies things.
