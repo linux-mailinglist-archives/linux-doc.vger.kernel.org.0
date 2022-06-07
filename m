@@ -2,94 +2,203 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id A5F9E541EB8
-	for <lists+linux-doc@lfdr.de>; Wed,  8 Jun 2022 00:33:36 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 3D6C154256A
+	for <lists+linux-doc@lfdr.de>; Wed,  8 Jun 2022 08:54:54 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1381173AbiFGWdW (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 7 Jun 2022 18:33:22 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:43358 "EHLO
+        id S236190AbiFHBCs (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 7 Jun 2022 21:02:48 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:52908 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1381172AbiFGWcT (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 7 Jun 2022 18:32:19 -0400
-Received: from mail-qt1-f171.google.com (mail-qt1-f171.google.com [209.85.160.171])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id BC81B201A5;
-        Tue,  7 Jun 2022 12:25:22 -0700 (PDT)
-Received: by mail-qt1-f171.google.com with SMTP id p8so13369694qtx.9;
-        Tue, 07 Jun 2022 12:25:22 -0700 (PDT)
+        with ESMTP id S1453568AbiFGXPi (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 7 Jun 2022 19:15:38 -0400
+Received: from mail-vs1-xe2a.google.com (mail-vs1-xe2a.google.com [IPv6:2607:f8b0:4864:20::e2a])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 92086248562
+        for <linux-doc@vger.kernel.org>; Tue,  7 Jun 2022 14:07:43 -0700 (PDT)
+Received: by mail-vs1-xe2a.google.com with SMTP id n4so8944201vsm.6
+        for <linux-doc@vger.kernel.org>; Tue, 07 Jun 2022 14:07:43 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=google.com; s=20210112;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc;
+        bh=BgxQ0h6I958Y2GI2JoqVGW/OESE9fxrXKfh9ZN0Zq08=;
+        b=oKoX3EKP+If3Pg3CSsiIzp7MdgwGoVt1eWuoV8GtnXDvuCJWY+M7wmLS8sygJpkjaK
+         iOAb0QC3WVE1pARsV9XTNGUaZNsCEia7M1Y1OMdqEzCr2DXhR1x2R0fjgls2GHghq0DJ
+         kmV9VrpihV+4mk7fDF1AIBg06e8OMvXc5a6mzwLGlAFIx2PS+fPJA4xnLb/RNoCfe/qz
+         5sLk3qDe0vNhpDymnq40eNUHcQXuLAYm2G/O3hH9F58tM1JmX/d7h9aWfcX3LmHxBJIg
+         ulq8z9he5xJHfSCzWyqQiUlWhK6wtsKlDnmt21fI11y8OSoQVCEq2KhLU5sFa9gV6pa0
+         7+zg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=x-gm-message-state:mime-version:references:in-reply-to:from:date
          :message-id:subject:to:cc;
-        bh=uBxZMfLmxooTlhIsANMOdaw7k3DLxucyW3hJMGAkzw8=;
-        b=GxgUQqLjRfKADsbmeWRGZc+NkCa5HHiHR7gfskTEvypoM1S55g/IwDpxoPowJki43K
-         BBZdoA3+qKceSL0UHVjILR7BLa3pzCFk16jEfIow1lHB/AYyA1LQle2hLHJuy1b1o8za
-         hXMxiVq3spsQ7VlL9AoqyVTSwhDtcD7dpu5kqHLPphFk0GcBYZlYQZschK0YZd4hbcR6
-         OIzGNL9YFT81xBmNRRbeI6S6ZsHqhPZKcbSFOaefOC2Th8EgpeZKCgszskFzQZz0Ts/u
-         T8lUm4b1qFcKcDq/5IqiKhk7SKXInNIwDs8dd+0WA6Hh+WqE4wfHdLF8/9+VAkk6I7lL
-         fUxQ==
-X-Gm-Message-State: AOAM5304Y3tq6Map/COFMRiTjDe2oTt3PF3IjloXkLF7jXKI/aaEpkjT
-        gocQJPPgYgx6T+CZh4oZnaaIUYUKR3/wSg==
-X-Google-Smtp-Source: ABdhPJzBPO3Z/iRat8MaMhx7WmlB6aiDML7Y6+EzvsxDCY/7ToS8zfyqUyVQZA5hQABmz0Pi4r5jAw==
-X-Received: by 2002:ac8:5b87:0:b0:2f8:ab4:a050 with SMTP id a7-20020ac85b87000000b002f80ab4a050mr24743447qta.183.1654629921471;
-        Tue, 07 Jun 2022 12:25:21 -0700 (PDT)
-Received: from mail-yb1-f180.google.com (mail-yb1-f180.google.com. [209.85.219.180])
-        by smtp.gmail.com with ESMTPSA id cc17-20020a05622a411100b00304ef50af9fsm3896005qtb.2.2022.06.07.12.25.20
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Tue, 07 Jun 2022 12:25:21 -0700 (PDT)
-Received: by mail-yb1-f180.google.com with SMTP id a30so14008101ybj.3;
-        Tue, 07 Jun 2022 12:25:20 -0700 (PDT)
-X-Received: by 2002:a25:d748:0:b0:65c:6b00:55af with SMTP id
- o69-20020a25d748000000b0065c6b0055afmr30535822ybg.365.1654629920488; Tue, 07
- Jun 2022 12:25:20 -0700 (PDT)
+        bh=BgxQ0h6I958Y2GI2JoqVGW/OESE9fxrXKfh9ZN0Zq08=;
+        b=a66c8WvmxIrxgJgSO8F/jLEtTc8THsxtSZUNc+OnX1PSAb++G5rMScMCsXizIN4kZ8
+         bRjCloBf3EWnytcH+MqeG0zBgWACwNobjqOzTjkANjcME1XqcxRgPgyx7LywEu1OL4Ol
+         o6LrAmztPJmUJOBijvIHWly2aft9M+KSGKD82FNgseu8h4s5d5NCvbCsxVvmJq6ZEFT+
+         fcT/j3VqUZtG+OvcYu+1cmHHyo/cZ+slzWzTFSG2OQO9wtEc7JbJSVksmewf8TKIDTKP
+         T/oiBf6k5473RzzDulZT0jxvvE49e3Xo48pdJJdP6KtS3W9pMcFIAbOF3NwpsaMdCT3z
+         m5BQ==
+X-Gm-Message-State: AOAM531fYecHIKOUwMvAQ92tckSIbp4JDNPT7+kSWqBzK7loKpNRX1Qm
+        VWVDFrPBcddonUnvkb/fwq1HGzual232mUH0ey6XkAHoYT3FoNXj
+X-Google-Smtp-Source: ABdhPJyjqcySNrRwXkeaEuBGNMG5NFNqHbpYoFwoZhrkb2oGCeTEFoqKeluO9Bya5UCEshSWAgyv3unWIgN/r4anB6o=
+X-Received: by 2002:a67:f3d0:0:b0:34b:b52d:d676 with SMTP id
+ j16-20020a67f3d0000000b0034bb52dd676mr6635528vsn.6.1654636053943; Tue, 07 Jun
+ 2022 14:07:33 -0700 (PDT)
 MIME-Version: 1.0
-References: <cover.1654529011.git.mchehab@kernel.org> <1906a4d935eab57c10ce09358eae02175ce4abb7.1654529011.git.mchehab@kernel.org>
-In-Reply-To: <1906a4d935eab57c10ce09358eae02175ce4abb7.1654529011.git.mchehab@kernel.org>
-From:   Geert Uytterhoeven <geert@linux-m68k.org>
-Date:   Tue, 7 Jun 2022 21:25:09 +0200
-X-Gmail-Original-Message-ID: <CAMuHMdXeO5emvLMpMOBygfHeBE+knzceVNPbigYka0bjxxx=zw@mail.gmail.com>
-Message-ID: <CAMuHMdXeO5emvLMpMOBygfHeBE+knzceVNPbigYka0bjxxx=zw@mail.gmail.com>
-Subject: Re: [PATCH 01/23] dt-bindings: mfd: bd9571mwv: update
- rohm,bd9571mwv.yaml reference
-To:     Mauro Carvalho Chehab <mchehab@kernel.org>
-Cc:     Linux Doc Mailing List <linux-doc@vger.kernel.org>,
+References: <20220518014632.922072-1-yuzhao@google.com> <20220518014632.922072-8-yuzhao@google.com>
+ <CAGsJ_4yboZEY9OfyujPxBa_AEuGM3OAq5y_L9gvzSMUv70BxeQ@mail.gmail.com>
+ <CAGsJ_4w3S_8Kaw2GyB3hg7b4N_D+6yBO7D6qmgxD9Fqz3_dhAg@mail.gmail.com>
+ <20220607102135.GA32448@willie-the-truck> <CAGsJ_4zGEdHDv0ObZ-5y8sFKLO7Y6ZjTsZFs0KvdLwA_-iGJ5A@mail.gmail.com>
+ <20220607104358.GA32583@willie-the-truck>
+In-Reply-To: <20220607104358.GA32583@willie-the-truck>
+From:   Yu Zhao <yuzhao@google.com>
+Date:   Tue, 7 Jun 2022 15:06:57 -0600
+Message-ID: <CAOUHufZh46A2hh_fn-8vVBDi_621rgbZq64_afDt8VxrzqJz1g@mail.gmail.com>
+Subject: Re: [PATCH v11 07/14] mm: multi-gen LRU: exploit locality in rmap
+To:     Will Deacon <will@kernel.org>
+Cc:     Barry Song <21cnbao@gmail.com>,
+        Andrew Morton <akpm@linux-foundation.org>,
+        Linux-MM <linux-mm@kvack.org>, Andi Kleen <ak@linux.intel.com>,
+        Aneesh Kumar <aneesh.kumar@linux.ibm.com>,
+        Catalin Marinas <catalin.marinas@arm.com>,
+        Dave Hansen <dave.hansen@linux.intel.com>,
+        Hillf Danton <hdanton@sina.com>, Jens Axboe <axboe@kernel.dk>,
+        Johannes Weiner <hannes@cmpxchg.org>,
         Jonathan Corbet <corbet@lwn.net>,
-        Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
-        Geert Uytterhoeven <geert+renesas@glider.be>,
-        Lee Jones <lee.jones@linaro.org>,
-        Matti Vaittinen <matti.vaittinen@fi.rohmeurope.com>,
-        Rob Herring <robh@kernel.org>,
-        Linux Kernel Mailing List <linux-kernel@vger.kernel.org>
+        Linus Torvalds <torvalds@linux-foundation.org>,
+        Matthew Wilcox <willy@infradead.org>,
+        Mel Gorman <mgorman@suse.de>,
+        Michael Larabel <Michael@michaellarabel.com>,
+        Michal Hocko <mhocko@kernel.org>,
+        Mike Rapoport <rppt@kernel.org>,
+        Peter Zijlstra <peterz@infradead.org>,
+        Tejun Heo <tj@kernel.org>, Vlastimil Babka <vbabka@suse.cz>,
+        LAK <linux-arm-kernel@lists.infradead.org>,
+        Linux Doc Mailing List <linux-doc@vger.kernel.org>,
+        LKML <linux-kernel@vger.kernel.org>, x86 <x86@kernel.org>,
+        Kernel Page Reclaim v2 <page-reclaim@google.com>,
+        Brian Geffon <bgeffon@google.com>,
+        Jan Alexander Steffens <heftig@archlinux.org>,
+        Oleksandr Natalenko <oleksandr@natalenko.name>,
+        Steven Barrett <steven@liquorix.net>,
+        Suleiman Souhlal <suleiman@google.com>,
+        Daniel Byrne <djbyrne@mtu.edu>,
+        Donald Carr <d@chaos-reins.com>,
+        =?UTF-8?Q?Holger_Hoffst=C3=A4tte?= <holger@applied-asynchrony.com>,
+        Konstantin Kharlamov <Hi-Angel@yandex.ru>,
+        Shuang Zhai <szhai2@cs.rochester.edu>,
+        Sofia Trinh <sofia.trinh@edi.works>,
+        Vaibhav Jain <vaibhav@linux.ibm.com>, huzhanyuan@oppo.com
 Content-Type: text/plain; charset="UTF-8"
-X-Spam-Status: No, score=-1.4 required=5.0 tests=BAYES_00,
-        FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,HEADER_FROM_DIFFERENT_DOMAINS,
-        RCVD_IN_DNSWL_NONE,RCVD_IN_MSPIKE_H2,SPF_HELO_NONE,SPF_PASS,
-        T_SCC_BODY_TEXT_LINE autolearn=no autolearn_force=no version=3.4.6
+X-Spam-Status: No, score=-17.6 required=5.0 tests=BAYES_00,DKIMWL_WL_MED,
+        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,
+        ENV_AND_HDR_SPF_MATCH,RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,SPF_PASS,
+        T_SCC_BODY_TEXT_LINE,USER_IN_DEF_DKIM_WL,USER_IN_DEF_SPF_WL
+        autolearn=unavailable autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Mon, Jun 6, 2022 at 5:25 PM Mauro Carvalho Chehab <mchehab@kernel.org> wrote:
-> Changeset 983b62975e90 ("dt-bindings: mfd: bd9571mwv: Convert to json-schema")
-> renamed: Documentation/devicetree/bindings/mfd/bd9571mwv.txt
-> to: Documentation/devicetree/bindings/mfd/rohm,bd9571mwv.yaml.
+On Tue, Jun 7, 2022 at 4:44 AM Will Deacon <will@kernel.org> wrote:
 >
-> Update its cross-reference accordingly.
+> On Tue, Jun 07, 2022 at 10:37:46AM +1200, Barry Song wrote:
+> > On Tue, Jun 7, 2022 at 10:21 PM Will Deacon <will@kernel.org> wrote:
+> > > On Tue, Jun 07, 2022 at 07:37:10PM +1200, Barry Song wrote:
+> > > > I can't really explain why we are getting a random app/java vm crash in monkey
+> > > > test by using ptep_test_and_clear_young() only in lru_gen_look_around() on an
+> > > > armv8-a machine without hardware PTE young support.
+> > > >
+> > > > Moving to  ptep_clear_flush_young() in look_around can make the random
+> > > > hang disappear according to zhanyuan(Cc-ed).
+> > > >
+> > > > On x86, ptep_clear_flush_young() is exactly ptep_test_and_clear_young()
+> > > > after
+> > > >  'commit b13b1d2d8692 ("x86/mm: In the PTE swapout page reclaim case clear
+> > > > the accessed bit instead of flushing the TLB")'
+> > > >
+> > > > But on arm64, they are different. according to Will's comments in this
+> > > > thread which
+> > > > tried to make arm64 same with x86,
+> > > > https://www.mail-archive.com/linux-kernel@vger.kernel.org/msg1793881.html
+> > > >
+> > > > "
+> > > > This is blindly copied from x86 and isn't true for us: we don't invalidate
+> > > > the TLB on context switch. That means our window for keeping the stale
+> > > > entries around is potentially much bigger and might not be a great idea.
+> > > >
+> > > > If we roll a TLB invalidation routine without the trailing DSB, what sort of
+> > > > performance does that get you?
+> > > > "
+> > > > We shouldn't think ptep_clear_flush_young() is safe enough in LRU to
+> > > > clear PTE young? Any comments from Will?
+> > >
+> > > Given that this issue is specific to the multi-gen LRU work, I think Yu is
+> > > the best person to comment. However, looking quickly at your analysis above,
+> > > I wonder if the code is relying on this sequence:
+> > >
+> > >
+> > >         ptep_test_and_clear_young(vma, address, ptep);
+> > >         ptep_clear_flush_young(vma, address, ptep);
+> > >
+> > >
+> > > to invalidate the TLB. On arm64, that won't be the case, as the invalidation
+> > > in ptep_clear_flush_young() is predicated on the pte being young (and this
+> > > patches the generic implementation in mm/pgtable-generic.c. In fact, that
+> > > second function call is always going to be a no-op unless the pte became
+> > > young again in the middle.
+> >
+> > thanks for your reply, sorry for failing to let you understand my question.
+> > my question is actually as below,
+> > right now  lru_gen_look_around() is using ptep_test_and_clear_young()
+> > only without flush to clear pte for a couple of pages including the specific
+> > address:
+> > void lru_gen_look_around(struct page_vma_mapped_walk *pvmw)
+> > {
+> >        ...
+> >
+> >        for (i = 0, addr = start; addr != end; i++, addr += PAGE_SIZE) {
+> >                ...
+> >
+> >                if (!ptep_test_and_clear_young(pvmw->vma, addr, pte + i))
+> >                        continue;
+> >
+> >                ...
+> > }
+> >
+> > I wonder if it is safe to arm64. Do we need to move to ptep_clear_flush_young()
+> > in the loop?
 >
-> Fixes: 983b62975e90 ("dt-bindings: mfd: bd9571mwv: Convert to json-schema")
-> Signed-off-by: Mauro Carvalho Chehab <mchehab@kernel.org>
+> I don't know what this code is doing, so Yu is the best person to answer
+> that. There's nothing inherently dangerous about eliding the TLB
+> maintenance; it really depends on the guarantees needed by the caller.
 
-Mea culpa
-Reviewed-by: Geert Uytterhoeven <geert+renesas@glider.be>
+Ack.
 
-Gr{oetje,eeting}s,
+> However, the snippet you posted from folio_referenced_one():
+>
+>  |                  if (pvmw.pte) {
+>  |  +                       if (lru_gen_enabled() && pte_young(*pvmw.pte) &&
+>  |  +                           !(vma->vm_flags & (VM_SEQ_READ | VM_RAND_READ))) {
+>  |  +                               lru_gen_look_around(&pvmw);
+>  |  +                               referenced++;
+>  |  +                       }
+>  |  +
+>  |                          if (ptep_clear_flush_young_notify(vma, address,
+>
+>
+> Does seem to call lru_gen_look_around() *and*
+> ptep_clear_flush_young_notify(), which is what prompted my question as it
+> looks pretty suspicious to me.
 
-                        Geert
+The _notify varint reaches into the MMU notifier --
+lru_gen_look_around() doesn't do that because GPA space generally has
+no locality. I hope this explains why both.
 
---
-Geert Uytterhoeven -- There's lots of Linux beyond ia32 -- geert@linux-m68k.org
-
-In personal conversations with technical people, I call myself a hacker. But
-when I'm talking to journalists I just say "programmer" or something like that.
-                                -- Linus Torvalds
+As to why the code is organized this way -- it depends on the point of
+view. Mine is that lru_gen_look_around() is an add-on, since its logic
+is independent/separable from ptep_clear_flush_young_notify(). We can
+make lru_gen_look_around() include ptep_clear_flush_young_notify(),
+but that would make the code functionally interwinted, which is bad
+for my taste.
