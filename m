@@ -2,54 +2,99 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id DCCC5542EC4
-	for <lists+linux-doc@lfdr.de>; Wed,  8 Jun 2022 13:09:37 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 56226543128
+	for <lists+linux-doc@lfdr.de>; Wed,  8 Jun 2022 15:16:46 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S237830AbiFHLIu (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 8 Jun 2022 07:08:50 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:55304 "EHLO
+        id S239923AbiFHNQA (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 8 Jun 2022 09:16:00 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:43020 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S237982AbiFHLIb (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Wed, 8 Jun 2022 07:08:31 -0400
-Received: from loongson.cn (mail.loongson.cn [114.242.206.163])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTP id ED77D20C6D4
-        for <linux-doc@vger.kernel.org>; Wed,  8 Jun 2022 04:08:27 -0700 (PDT)
-Received: from localhost.localdomain (unknown [223.64.16.213])
-        by mail.loongson.cn (Coremail) with SMTP id AQAAf9Dx308mg6BixnEtAA--.6094S4;
-        Wed, 08 Jun 2022 19:08:25 +0800 (CST)
-From:   Binbin Zhou <zhoubinbin@loongson.cn>
-To:     alexs@kernel.org, siyanteng@loongson.cn
-Cc:     corbet@lwn.net, chenhuacai@loongson.cn, bobwxc@email.cn,
-        linux-doc@vger.kernel.org, Binbin Zhou <zhoubinbin@loongson.cn>
-Subject: [PATCH V2 2/2] docs/zh_CN: riscv: Update the translation of vm-layout.rst to 5.19-rc1
-Date:   Wed,  8 Jun 2022 19:08:21 +0800
-Message-Id: <10cd6a241a0266d1d19ee5f0b2177d7d14d17ed2.1654685338.git.zhoubinbin@loongson.cn>
-X-Mailer: git-send-email 2.20.1
-In-Reply-To: <cover.1654685338.git.zhoubinbin@loongson.cn>
-References: <cover.1654685338.git.zhoubinbin@loongson.cn>
+        with ESMTP id S239852AbiFHNP6 (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Wed, 8 Jun 2022 09:15:58 -0400
+Received: from mx0a-001b2d01.pphosted.com (mx0b-001b2d01.pphosted.com [148.163.158.5])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 1DDD6220C5;
+        Wed,  8 Jun 2022 06:15:57 -0700 (PDT)
+Received: from pps.filterd (m0098419.ppops.net [127.0.0.1])
+        by mx0b-001b2d01.pphosted.com (8.17.1.5/8.17.1.5) with ESMTP id 258CFwq2017941;
+        Wed, 8 Jun 2022 13:15:52 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ibm.com; h=message-id : date :
+ mime-version : subject : to : cc : references : from : in-reply-to :
+ content-type : content-transfer-encoding; s=pp1;
+ bh=yxIq4JKxKZh9YG+pXpusvvjdP7ynYnDFZXORb16tXik=;
+ b=lIOhuNeYHniLCDjW9Tl9xLm4qL1QohBVqgdnbvDZ+4sKavNZXgA+1KUk47bR+qR5+pFb
+ Gnmg/HIT1xjqE814MDZSEgl7rY+iDMAgIgEAePjD/tvmETke/gZf67MwK/5yNHuz5FzB
+ XOQKznqYQJgjEDBnUe35kQlTS9BcbIPfF+7SX7j07+eW0XyP1egJLiBI1RpbqyhO5F7c
+ yCQT9Rz7GlheYZgISgm7WKMloatmfo3FhVeZk8gub5FwdzqfXqr/9r/P6bbaWgxCUQ4S
+ 1dGHnxOpkPHYvYlQSyuoWQ+ROM8MmMfVRYLYPpzW1AgFAMdrfCh859hDt8G0mXz/eueS VQ== 
+Received: from pps.reinject (localhost [127.0.0.1])
+        by mx0b-001b2d01.pphosted.com (PPS) with ESMTPS id 3gjum699yd-1
+        (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+        Wed, 08 Jun 2022 13:15:52 +0000
+Received: from m0098419.ppops.net (m0098419.ppops.net [127.0.0.1])
+        by pps.reinject (8.17.1.5/8.17.1.5) with ESMTP id 258CGn13019849;
+        Wed, 8 Jun 2022 13:15:52 GMT
+Received: from ppma02dal.us.ibm.com (a.bd.3ea9.ip4.static.sl-reverse.com [169.62.189.10])
+        by mx0b-001b2d01.pphosted.com (PPS) with ESMTPS id 3gjum699y2-1
+        (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+        Wed, 08 Jun 2022 13:15:51 +0000
+Received: from pps.filterd (ppma02dal.us.ibm.com [127.0.0.1])
+        by ppma02dal.us.ibm.com (8.16.1.2/8.16.1.2) with SMTP id 258D5Nrr006325;
+        Wed, 8 Jun 2022 13:15:51 GMT
+Received: from b03cxnp07028.gho.boulder.ibm.com (b03cxnp07028.gho.boulder.ibm.com [9.17.130.15])
+        by ppma02dal.us.ibm.com with ESMTP id 3gfy1at693-1
+        (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+        Wed, 08 Jun 2022 13:15:51 +0000
+Received: from b03ledav005.gho.boulder.ibm.com (b03ledav005.gho.boulder.ibm.com [9.17.130.236])
+        by b03cxnp07028.gho.boulder.ibm.com (8.14.9/8.14.9/NCO v10.0) with ESMTP id 258DFnZx32244096
+        (version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+        Wed, 8 Jun 2022 13:15:49 GMT
+Received: from b03ledav005.gho.boulder.ibm.com (unknown [127.0.0.1])
+        by IMSVA (Postfix) with ESMTP id B5539BE051;
+        Wed,  8 Jun 2022 13:15:49 +0000 (GMT)
+Received: from b03ledav005.gho.boulder.ibm.com (unknown [127.0.0.1])
+        by IMSVA (Postfix) with ESMTP id AC503BE04F;
+        Wed,  8 Jun 2022 13:15:47 +0000 (GMT)
+Received: from [9.163.20.188] (unknown [9.163.20.188])
+        by b03ledav005.gho.boulder.ibm.com (Postfix) with ESMTP;
+        Wed,  8 Jun 2022 13:15:47 +0000 (GMT)
+Message-ID: <ac5cd90a-c92b-1bad-fbec-d1ca6287e826@linux.ibm.com>
+Date:   Wed, 8 Jun 2022 09:15:46 -0400
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
+ Thunderbird/91.9.0
+Subject: Re: [PATCH v9 10/21] vfio/pci: introduce CONFIG_VFIO_PCI_ZDEV_KVM
+Content-Language: en-US
+To:     Thomas Huth <thuth@redhat.com>, linux-s390@vger.kernel.org
+Cc:     alex.williamson@redhat.com, cohuck@redhat.com,
+        schnelle@linux.ibm.com, farman@linux.ibm.com, pmorel@linux.ibm.com,
+        borntraeger@linux.ibm.com, hca@linux.ibm.com, gor@linux.ibm.com,
+        gerald.schaefer@linux.ibm.com, agordeev@linux.ibm.com,
+        svens@linux.ibm.com, frankja@linux.ibm.com, david@redhat.com,
+        imbrenda@linux.ibm.com, vneethv@linux.ibm.com,
+        oberpar@linux.ibm.com, freude@linux.ibm.com, pasic@linux.ibm.com,
+        pbonzini@redhat.com, corbet@lwn.net, jgg@nvidia.com,
+        kvm@vger.kernel.org, linux-kernel@vger.kernel.org,
+        linux-doc@vger.kernel.org
+References: <20220606203325.110625-1-mjrosato@linux.ibm.com>
+ <20220606203325.110625-11-mjrosato@linux.ibm.com>
+ <025699e6-b870-2648-d4a4-ffbc5fff22e8@redhat.com>
+From:   Matthew Rosato <mjrosato@linux.ibm.com>
+In-Reply-To: <025699e6-b870-2648-d4a4-ffbc5fff22e8@redhat.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-X-CM-TRANSID: AQAAf9Dx308mg6BixnEtAA--.6094S4
-X-Coremail-Antispam: 1UD129KBjvJXoWxWw47Kry5ZFyUJFyfCrWfKrg_yoW5Kr15pr
-        1DJryxGr48JryUJw1UJry5tr1UAr18Aa1UJr1rJr1UJryUGr1UJr1UJry5Jr1DGr15Ar17
-        Jr1DGrWUtr1UJw7anT9S1TB71UUUUjUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
-        9KBjDU0xBIdaVrnRJUUUQa14x267AKxVW5JVWrJwAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
-        rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2048vs2IY020E87I2jVAFwI0_Jryl82xGYIkIc2
-        x26xkF7I0E14v26r4j6ryUM28lY4IEw2IIxxk0rwA2F7IY1VAKz4vEj48ve4kI8wA2z4x0
-        Y4vE2Ix0cI8IcVAFwI0_Gr0_Xr1l84ACjcxK6xIIjxv20xvEc7CjxVAFwI0_Gr0_Cr1l84
-        ACjcxK6I8E87Iv67AKxVW0oVCq3wA2z4x0Y4vEx4A2jsIEc7CjxVAFwI0_GcCE3s1ln4kS
-        14v26r1Y6r17M2AIxVAIcxkEcVAq07x20xvEncxIr21l5I8CrVACY4xI64kE6c02F40Ex7
-        xfMcIj6xIIjxv20xvE14v26r1j6r18McIj6I8E87Iv67AKxVW8JVWxJwAm72CE4IkC6x0Y
-        z7v_Jr0_Gr1lF7xvr2IYc2Ij64vIr41lF7I21c0EjII2zVCS5cI20VAGYxC7MxkF7I0En4
-        kS14v26r126r1DMxkIecxEwVAFwVW8KwCF04k20xvY0x0EwIxGrwCFx2IqxVCFs4IE7xkE
-        bVWUJVW8JwCFI7km07C267AKxVWUXVWUAwC20s026c02F40E14v26r1j6r18MI8I3I0E74
-        80Y4vE14v26r106r1rMI8E67AF67kF1VAFwI0_JF0_Jw1lIxkGc2Ij64vIr41lIxAIcVC0
-        I7IYx2IY67AKxVWUJVWUCwCI42IY6xIIjxv20xvEc7CjxVAFwI0_Gr0_Cr1lIxAIcVCF04
-        k26cxKx2IYs7xG6r1j6r1xMIIF0xvEx4A2jsIE14v26r4j6F4UMIIF0xvEx4A2jsIEc7Cj
-        xVAFwI0_Gr0_Gr1UYxBIdaVFxhVjvjDU0xZFpf9x0pRTSoAUUUUU=
-X-CM-SenderInfo: p2kr3uplqex0o6or00hjvr0hdfq/
-X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00,SPF_HELO_PASS,
+X-TM-AS-GCONF: 00
+X-Proofpoint-GUID: v-6SOwnMCNAsHTL-AduCL7y1U5-h_YeS
+X-Proofpoint-ORIG-GUID: 8HuHCNlCigvg6ddKUBqWfahKcMburMh-
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.205,Aquarius:18.0.874,Hydra:6.0.517,FMLib:17.11.64.514
+ definitions=2022-06-08_04,2022-06-07_02,2022-02-23_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 clxscore=1015 phishscore=0
+ mlxlogscore=999 spamscore=0 bulkscore=0 priorityscore=1501 suspectscore=0
+ mlxscore=0 impostorscore=0 malwarescore=0 lowpriorityscore=0 adultscore=0
+ classifier=spam adjust=0 reason=mlx scancount=1 engine=8.12.0-2204290000
+ definitions=main-2206080056
+X-Spam-Status: No, score=-3.2 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+        DKIM_VALID,DKIM_VALID_EF,NICE_REPLY_A,RCVD_IN_MSPIKE_H2,SPF_HELO_NONE,
         SPF_PASS,T_SCC_BODY_TEXT_LINE autolearn=ham autolearn_force=no
         version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
@@ -58,66 +103,69 @@ Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Synchronous translation from upstream commit 9d19f2b5256e
-("Documentation: riscv: Add sv48 description to VM layout")
+On 6/8/22 2:19 AM, Thomas Huth wrote:
+> On 06/06/2022 22.33, Matthew Rosato wrote:
+>> The current contents of vfio-pci-zdev are today only useful in a KVM
+>> environment; let's tie everything currently under vfio-pci-zdev to
+>> this Kconfig statement and require KVM in this case, reducing complexity
+>> (e.g. symbol lookups).
+>>
+>> Signed-off-by: Matthew Rosato <mjrosato@linux.ibm.com>
+>> ---
+>>   drivers/vfio/pci/Kconfig      | 11 +++++++++++
+>>   drivers/vfio/pci/Makefile     |  2 +-
+>>   include/linux/vfio_pci_core.h |  2 +-
+>>   3 files changed, 13 insertions(+), 2 deletions(-)
+>>
+>> diff --git a/drivers/vfio/pci/Kconfig b/drivers/vfio/pci/Kconfig
+>> index 4da1914425e1..f9d0c908e738 100644
+>> --- a/drivers/vfio/pci/Kconfig
+>> +++ b/drivers/vfio/pci/Kconfig
+>> @@ -44,6 +44,17 @@ config VFIO_PCI_IGD
+>>         To enable Intel IGD assignment through vfio-pci, say Y.
+>>   endif
+>> +config VFIO_PCI_ZDEV_KVM
+>> +    bool "VFIO PCI extensions for s390x KVM passthrough"
+>> +    depends on S390 && KVM
+>> +    default y
+>> +    help
+>> +      Support s390x-specific extensions to enable support for 
+>> enhancements
+>> +      to KVM passthrough capabilities, such as interpretive execution of
+>> +      zPCI instructions.
+>> +
+>> +      To enable s390x KVM vfio-pci extensions, say Y.
+> 
+> Is it still possible to disable CONFIG_VFIO_PCI_ZDEV_KVM ? Looking at 
+> the later patches (e.g. 20/21 where you call kvm_s390_pci_zpci_op() from 
+> kvm-s390.c), it rather seems to me that it currently cannot be disabled 
+> independently (as long as KVM is enabled).
 
-Signed-off-by: Binbin Zhou <zhoubinbin@loongson.cn>
----
- .../translations/zh_CN/riscv/vm-layout.rst    | 37 +++++++++++++++++++
- 1 file changed, 37 insertions(+)
+Yes, you can build with, for example, CONFIG_VFIO_PCI_ZDEV_KVM=n and 
+CONFIG_KVM=m -- I tested it again just now.  The result is kvm and 
+vfio-pci are built and vfio-pci works, but none of the vfio-pci-zdev 
+extensions are available (including zPCI interpretation).
 
-diff --git a/Documentation/translations/zh_CN/riscv/vm-layout.rst b/Documentation/translations/zh_CN/riscv/vm-layout.rst
-index 585cb89317a3..91884e2dfff8 100644
---- a/Documentation/translations/zh_CN/riscv/vm-layout.rst
-+++ b/Documentation/translations/zh_CN/riscv/vm-layout.rst
-@@ -6,6 +6,7 @@
- :翻译:
- 
-  司延腾 Yanteng Si <siyanteng@loongson.cn>
-+        Binbin Zhou <zhoubinbin@loongson.cn>
- 
- ============================
- RISC-V Linux上的虚拟内存布局
-@@ -65,3 +66,39 @@ RISC-V Linux Kernel SV39
-    ffffffff00000000 |   -4    GB | ffffffff7fffffff |    2 GB | modules, BPF
-    ffffffff80000000 |   -2    GB | ffffffffffffffff |    2 GB | kernel
-   __________________|____________|__________________|_________|____________________________________________________________
-+
-+
-+RISC-V Linux Kernel SV48
-+------------------------
-+
-+::
-+
-+ ========================================================================================================================
-+      开始地址       |   偏移      |     结束地址      |  大小    | 虚拟内存区域描述
-+ ========================================================================================================================
-+                    |            |                  |         |
-+   0000000000000000 |    0       | 00007fffffffffff |  128 TB | 用户空间虚拟内存，每个内存管理器不同
-+  __________________|____________|__________________|_________|___________________________________________________________
-+                    |            |                  |         |
-+   0000800000000000 | +128    TB | ffff7fffffffffff | ~16M TB | ... 巨大的、几乎64位宽的直到内核映射的-128TB地方
-+                    |            |                  |         |     开始偏移的非经典虚拟内存地址空洞。
-+                    |            |                  |         |
-+  __________________|____________|__________________|_________|___________________________________________________________
-+                                                              |
-+                                                              | 内核空间的虚拟内存，在所有进程之间共享:
-+  ____________________________________________________________|___________________________________________________________
-+                    |            |                  |         |
-+   ffff8d7ffee00000 |  -114.5 TB | ffff8d7ffeffffff |    2 MB | fixmap
-+   ffff8d7fff000000 |  -114.5 TB | ffff8d7fffffffff |   16 MB | PCI io
-+   ffff8d8000000000 |  -114.5 TB | ffff8f7fffffffff |    2 TB | vmemmap
-+   ffff8f8000000000 |  -112.5 TB | ffffaf7fffffffff |   32 TB | vmalloc/ioremap space
-+   ffffaf8000000000 |  -80.5  TB | ffffef7fffffffff |   64 TB | 直接映射所有物理内存
-+   ffffef8000000000 |  -16.5  TB | fffffffeffffffff | 16.5 TB | kasan
-+  __________________|____________|__________________|_________|____________________________________________________________
-+                                                              |
-+                                                              | 从此处开始，与39-bit布局相同：
-+  ____________________________________________________________|____________________________________________________________
-+                    |            |                  |         |
-+   ffffffff00000000 |   -4    GB | ffffffff7fffffff |    2 GB | modules, BPF
-+   ffffffff80000000 |   -2    GB | ffffffffffffffff |    2 GB | kernel
-+  __________________|____________|__________________|_________|____________________________________________________________
--- 
-2.20.1
+This is accomplished via the placement of some IS_ENABLED checks.  Some 
+calls (e.g. AEN init) are fenced by 
+IS_ENABLED(CONFIG_VFIO_PCI_ZDEV_KVM).  There are also some areas that 
+are fenced off via a call to kvm_s390_pci_interp_allowed() which also 
+includes an IS_ENABLED check along with checks for facility and cpu id.
+
+Using patch 20 as an example, KVM_CAP_S390_ZPCI_OP will always be 
+reported as unavailable to userspace if CONFIG_VFIO_PCI_ZDEV_KVM=n due 
+to the call to kvm_s390_pci_interp_allowed().  If userspace sends us the 
+ioctl anyway, we will return -EINVAL because there is again a 
+IS_ENABLED(CONFIG_VFIO_PCI_ZDEV_KVM) check before we read the ioctl args 
+from userspace.
+
+> 
+> So if you want to make this selectable by the user, I think you have to 
+> put some more #ifdefs in the following patches.
+> But if this was not meant to be selectable by the user, I think it 
+> should not get a help text and rather be selected by the KVM switch in 
+> arch/s390/kvm/Kconfig instead of having a "default y".
+> 
+>   Thomas
+> 
 
