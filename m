@@ -2,426 +2,612 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 3DCB4543BCE
-	for <lists+linux-doc@lfdr.de>; Wed,  8 Jun 2022 20:55:33 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 33694543BEE
+	for <lists+linux-doc@lfdr.de>; Wed,  8 Jun 2022 21:01:50 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S232850AbiFHSz2 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 8 Jun 2022 14:55:28 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:51366 "EHLO
+        id S233832AbiFHTBr (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 8 Jun 2022 15:01:47 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:51528 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S232700AbiFHSzW (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Wed, 8 Jun 2022 14:55:22 -0400
-Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.133.124])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTP id A5FCFFE622
-        for <linux-doc@vger.kernel.org>; Wed,  8 Jun 2022 11:55:19 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-        s=mimecast20190719; t=1654714518;
-        h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-         to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-         content-transfer-encoding:content-transfer-encoding;
-        bh=abRjllu/MyfASe6azFb9CaVijW10O/mJJvktDxulCkE=;
-        b=XRy2QjVGEgtChXee3woB6+KSG90OGf4Xlvia8fjqbf61clZfBMRRigpv16r0coaBlZN0/r
-        yBYOzjZL1wKwdB9KIsbIqAsusGk3YyV/JAlQcSO+Ij8LEJ4svhEf1oMrY4dCnOjODykDoZ
-        4OoTgUU1pHHfdk0V4jMcVUWZa4YfHFM=
-Received: from mimecast-mx02.redhat.com (mx3-rdu2.redhat.com
- [66.187.233.73]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- us-mta-536-h8pmmRqRO52jdrOsUdygNA-1; Wed, 08 Jun 2022 14:55:15 -0400
-X-MC-Unique: h8pmmRqRO52jdrOsUdygNA-1
-Received: from smtp.corp.redhat.com (int-mx07.intmail.prod.int.rdu2.redhat.com [10.11.54.7])
-        (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
-        (No client certificate requested)
-        by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 9C0B32999B56;
-        Wed,  8 Jun 2022 18:55:14 +0000 (UTC)
-Received: from [172.30.41.16] (unknown [10.22.35.67])
-        by smtp.corp.redhat.com (Postfix) with ESMTP id 8CCD21415102;
-        Wed,  8 Jun 2022 18:55:13 +0000 (UTC)
-Subject: [PATCH] vfio: de-extern-ify function prototypes
-From:   Alex Williamson <alex.williamson@redhat.com>
-To:     alex.williamson@redhat.com
-Cc:     kwankhede@nvidia.com, farman@linux.ibm.com, mjrosato@linux.ibm.com,
-        pasic@linux.ibm.com, diana.craciun@oss.nxp.com, cohuck@redhat.com,
-        eric.auger@redhat.com, kvm@vger.kernel.org,
-        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
-        linux-s390@vger.kernel.org, jgg@nvidia.com, yishaih@nvidia.com,
-        hch@lst.de
-Date:   Wed, 08 Jun 2022 12:55:13 -0600
-Message-ID: <165471414407.203056.474032786990662279.stgit@omen>
-User-Agent: StGit/1.5.dev2+g9ce680a52bd9
+        with ESMTP id S230126AbiFHTBq (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Wed, 8 Jun 2022 15:01:46 -0400
+Received: from linux.microsoft.com (linux.microsoft.com [13.77.154.182])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTP id 2EA4F644C;
+        Wed,  8 Jun 2022 12:01:44 -0700 (PDT)
+Received: from linuxonhyperv3.guj3yctzbm1etfxqx2vob5hsef.xx.internal.cloudapp.net (linux.microsoft.com [13.77.154.182])
+        by linux.microsoft.com (Postfix) with ESMTPSA id BF05F20BE626;
+        Wed,  8 Jun 2022 12:01:43 -0700 (PDT)
+DKIM-Filter: OpenDKIM Filter v2.11.0 linux.microsoft.com BF05F20BE626
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linux.microsoft.com;
+        s=default; t=1654714903;
+        bh=NYCsUJkuOE9DQil3YSnJJ1tvgdJy8Ehg8KLtyONiSu4=;
+        h=From:To:Cc:Subject:Date:From;
+        b=I3HVXxw9b/vJ1NVbnWxrQFcCJUD9ubSW452/GFz2eiPXSHGXCZIwkGqGp18VhgiqU
+         fqFbeAZpt6QumowYJZVlhx6VEHHKZsxHTv5MNYznuZRwZbpf8h3Pfsk5HeS3FydrpZ
+         kOOvZEk2jrBESAMnqjNdJmhumQeVPxuICB+2Hr0I=
+From:   Deven Bowers <deven.desai@linux.microsoft.com>
+To:     corbet@lwn.net, zohar@linux.ibm.com, jmorris@namei.org,
+        serge@hallyn.com, tytso@mit.edu, ebiggers@kernel.org,
+        axboe@kernel.dk, agk@redhat.com, snitzer@kernel.org,
+        eparis@redhat.com, paul@paul-moore.com
+Cc:     linux-doc@vger.kernel.org, linux-integrity@vger.kernel.org,
+        linux-security-module@vger.kernel.org,
+        linux-fscrypt@vger.kernel.org, linux-block@vger.kernel.org,
+        dm-devel@redhat.com, linux-audit@redhat.com,
+        roberto.sassu@huawei.com, linux-kernel@vger.kernel.org
+Subject: [RFC PATCH v8 00/17] Integrity Policy Enforcement LSM (IPE)
+Date:   Wed,  8 Jun 2022 12:01:12 -0700
+Message-Id: <1654714889-26728-1-git-send-email-deven.desai@linux.microsoft.com>
+X-Mailer: git-send-email 1.8.3.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-Scanned-By: MIMEDefang 2.85 on 10.11.54.7
-X-Spam-Status: No, score=-3.3 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_NONE,
-        SPF_HELO_NONE,SPF_NONE,T_SCC_BODY_TEXT_LINE autolearn=unavailable
-        autolearn_force=no version=3.4.6
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+X-Spam-Status: No, score=-19.8 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+        DKIM_VALID,DKIM_VALID_AU,ENV_AND_HDR_SPF_MATCH,RCVD_IN_DNSWL_MED,
+        SPF_HELO_PASS,SPF_PASS,T_SCC_BODY_TEXT_LINE,USER_IN_DEF_DKIM_WL,
+        USER_IN_DEF_SPF_WL autolearn=ham autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-The use of 'extern' in function prototypes has been disrecommended in
-the kernel coding style for several years now, remove them from all vfio
-related files so contributors no longer need to decide between style and
-consistency.
+Overview:
+---------
 
-Signed-off-by: Alex Williamson <alex.williamson@redhat.com>
----
+IPE is a Linux Security Module which takes a complimentary approach to
+access control. Whereas existing mandatory access control mechanisms
+base their decisions on labels and paths, IPE instead determines
+whether or not an operation should be allowed based on immutable
+security properties of the system component the operation is being
+performed on.
 
-A patch in the same vein was proposed about a year ago, but tied to an ill
-fated series and forgotten.  Now that we're at the beginning of a new
-development cycle, I'd like to propose kicking off the v5.20 vfio next
-branch with this patch and would kindly ask anyone with pending respins or
-significant conflicts to rebase on top of this patch.  Thanks!
+IPE itself does not mandate how the security property should be
+evaluated, but relies on an extensible set of external property providers
+to evaluate the component. IPE makes its decision based on reference
+values for the selected properties, specified in the IPE policy.
 
- Documentation/driver-api/vfio-mediated-device.rst |   10 ++-
- drivers/s390/cio/vfio_ccw_cp.h                    |   12 ++--
- drivers/s390/cio/vfio_ccw_private.h               |    6 +-
- drivers/vfio/fsl-mc/vfio_fsl_mc_private.h         |    2 -
- drivers/vfio/platform/vfio_platform_private.h     |   21 +++---
- include/linux/vfio.h                              |   70 ++++++++++-----------
- include/linux/vfio_pci_core.h                     |   65 ++++++++++----------
- 7 files changed, 91 insertions(+), 95 deletions(-)
+The reference values represent the value that the policy writer and the
+local system administrator (based on the policy signature) trust for the
+system to accomplish the desired tasks.
 
-diff --git a/Documentation/driver-api/vfio-mediated-device.rst b/Documentation/driver-api/vfio-mediated-device.rst
-index eded8719180f..1c57815619fd 100644
---- a/Documentation/driver-api/vfio-mediated-device.rst
-+++ b/Documentation/driver-api/vfio-mediated-device.rst
-@@ -114,11 +114,11 @@ to register and unregister itself with the core driver:
- 
- * Register::
- 
--    extern int  mdev_register_driver(struct mdev_driver *drv);
-+    int mdev_register_driver(struct mdev_driver *drv);
- 
- * Unregister::
- 
--    extern void mdev_unregister_driver(struct mdev_driver *drv);
-+    void mdev_unregister_driver(struct mdev_driver *drv);
- 
- The mediated bus driver's probe function should create a vfio_device on top of
- the mdev_device and connect it to an appropriate implementation of
-@@ -127,8 +127,8 @@ vfio_device_ops.
- When a driver wants to add the GUID creation sysfs to an existing device it has
- probe'd to then it should call::
- 
--	extern int  mdev_register_device(struct device *dev,
--	                                 struct mdev_driver *mdev_driver);
-+    int mdev_register_device(struct device *dev,
-+                             struct mdev_driver *mdev_driver);
- 
- This will provide the 'mdev_supported_types/XX/create' files which can then be
- used to trigger the creation of a mdev_device. The created mdev_device will be
-@@ -136,7 +136,7 @@ attached to the specified driver.
- 
- When the driver needs to remove itself it calls::
- 
--	extern void mdev_unregister_device(struct device *dev);
-+    void mdev_unregister_device(struct device *dev);
- 
- Which will unbind and destroy all the created mdevs and remove the sysfs files.
- 
-diff --git a/drivers/s390/cio/vfio_ccw_cp.h b/drivers/s390/cio/vfio_ccw_cp.h
-index e4c436199b4c..3194d887e08e 100644
---- a/drivers/s390/cio/vfio_ccw_cp.h
-+++ b/drivers/s390/cio/vfio_ccw_cp.h
-@@ -41,11 +41,11 @@ struct channel_program {
- 	struct ccw1 *guest_cp;
- };
- 
--extern int cp_init(struct channel_program *cp, union orb *orb);
--extern void cp_free(struct channel_program *cp);
--extern int cp_prefetch(struct channel_program *cp);
--extern union orb *cp_get_orb(struct channel_program *cp, u32 intparm, u8 lpm);
--extern void cp_update_scsw(struct channel_program *cp, union scsw *scsw);
--extern bool cp_iova_pinned(struct channel_program *cp, u64 iova);
-+int cp_init(struct channel_program *cp, union orb *orb);
-+void cp_free(struct channel_program *cp);
-+int cp_prefetch(struct channel_program *cp);
-+union orb *cp_get_orb(struct channel_program *cp, u32 intparm, u8 lpm);
-+void cp_update_scsw(struct channel_program *cp, union scsw *scsw);
-+bool cp_iova_pinned(struct channel_program *cp, u64 iova);
- 
- #endif
-diff --git a/drivers/s390/cio/vfio_ccw_private.h b/drivers/s390/cio/vfio_ccw_private.h
-index 7272eb788612..b7163bac8cc7 100644
---- a/drivers/s390/cio/vfio_ccw_private.h
-+++ b/drivers/s390/cio/vfio_ccw_private.h
-@@ -119,10 +119,10 @@ struct vfio_ccw_private {
- 	struct work_struct	crw_work;
- } __aligned(8);
- 
--extern int vfio_ccw_mdev_reg(struct subchannel *sch);
--extern void vfio_ccw_mdev_unreg(struct subchannel *sch);
-+int vfio_ccw_mdev_reg(struct subchannel *sch);
-+void vfio_ccw_mdev_unreg(struct subchannel *sch);
- 
--extern int vfio_ccw_sch_quiesce(struct subchannel *sch);
-+int vfio_ccw_sch_quiesce(struct subchannel *sch);
- 
- extern struct mdev_driver vfio_ccw_mdev_driver;
- 
-diff --git a/drivers/vfio/fsl-mc/vfio_fsl_mc_private.h b/drivers/vfio/fsl-mc/vfio_fsl_mc_private.h
-index 4ad63ececb91..7a29f572f93d 100644
---- a/drivers/vfio/fsl-mc/vfio_fsl_mc_private.h
-+++ b/drivers/vfio/fsl-mc/vfio_fsl_mc_private.h
-@@ -39,7 +39,7 @@ struct vfio_fsl_mc_device {
- 	struct vfio_fsl_mc_irq      *mc_irqs;
- };
- 
--extern int vfio_fsl_mc_set_irqs_ioctl(struct vfio_fsl_mc_device *vdev,
-+int vfio_fsl_mc_set_irqs_ioctl(struct vfio_fsl_mc_device *vdev,
- 			       u32 flags, unsigned int index,
- 			       unsigned int start, unsigned int count,
- 			       void *data);
-diff --git a/drivers/vfio/platform/vfio_platform_private.h b/drivers/vfio/platform/vfio_platform_private.h
-index 520d2a8e8375..691b43f4b2b2 100644
---- a/drivers/vfio/platform/vfio_platform_private.h
-+++ b/drivers/vfio/platform/vfio_platform_private.h
-@@ -78,21 +78,20 @@ struct vfio_platform_reset_node {
- 	vfio_platform_reset_fn_t of_reset;
- };
- 
--extern int vfio_platform_probe_common(struct vfio_platform_device *vdev,
--				      struct device *dev);
-+int vfio_platform_probe_common(struct vfio_platform_device *vdev,
-+			       struct device *dev);
- void vfio_platform_remove_common(struct vfio_platform_device *vdev);
- 
--extern int vfio_platform_irq_init(struct vfio_platform_device *vdev);
--extern void vfio_platform_irq_cleanup(struct vfio_platform_device *vdev);
-+int vfio_platform_irq_init(struct vfio_platform_device *vdev);
-+void vfio_platform_irq_cleanup(struct vfio_platform_device *vdev);
- 
--extern int vfio_platform_set_irqs_ioctl(struct vfio_platform_device *vdev,
--					uint32_t flags, unsigned index,
--					unsigned start, unsigned count,
--					void *data);
-+int vfio_platform_set_irqs_ioctl(struct vfio_platform_device *vdev,
-+				 uint32_t flags, unsigned index,
-+				 unsigned start, unsigned count, void *data);
- 
--extern void __vfio_platform_register_reset(struct vfio_platform_reset_node *n);
--extern void vfio_platform_unregister_reset(const char *compat,
--					   vfio_platform_reset_fn_t fn);
-+void __vfio_platform_register_reset(struct vfio_platform_reset_node *n);
-+void vfio_platform_unregister_reset(const char *compat,
-+				    vfio_platform_reset_fn_t fn);
- #define vfio_platform_register_reset(__compat, __reset)		\
- static struct vfio_platform_reset_node __reset ## _node = {	\
- 	.owner = THIS_MODULE,					\
-diff --git a/include/linux/vfio.h b/include/linux/vfio.h
-index aa888cc51757..49580fa2073a 100644
---- a/include/linux/vfio.h
-+++ b/include/linux/vfio.h
-@@ -140,19 +140,19 @@ int vfio_mig_get_next_state(struct vfio_device *device,
- /*
-  * External user API
-  */
--extern struct iommu_group *vfio_file_iommu_group(struct file *file);
--extern bool vfio_file_enforced_coherent(struct file *file);
--extern void vfio_file_set_kvm(struct file *file, struct kvm *kvm);
--extern bool vfio_file_has_dev(struct file *file, struct vfio_device *device);
-+struct iommu_group *vfio_file_iommu_group(struct file *file);
-+bool vfio_file_enforced_coherent(struct file *file);
-+void vfio_file_set_kvm(struct file *file, struct kvm *kvm);
-+bool vfio_file_has_dev(struct file *file, struct vfio_device *device);
- 
- #define VFIO_PIN_PAGES_MAX_ENTRIES	(PAGE_SIZE/sizeof(unsigned long))
- 
--extern int vfio_pin_pages(struct vfio_device *device, unsigned long *user_pfn,
--			  int npage, int prot, unsigned long *phys_pfn);
--extern int vfio_unpin_pages(struct vfio_device *device, unsigned long *user_pfn,
--			    int npage);
--extern int vfio_dma_rw(struct vfio_device *device, dma_addr_t user_iova,
--		       void *data, size_t len, bool write);
-+int vfio_pin_pages(struct vfio_device *device, unsigned long *user_pfn,
-+		   int npage, int prot, unsigned long *phys_pfn);
-+int vfio_unpin_pages(struct vfio_device *device, unsigned long *user_pfn,
-+		     int npage);
-+int vfio_dma_rw(struct vfio_device *device, dma_addr_t user_iova,
-+		void *data, size_t len, bool write);
- 
- /* each type has independent events */
- enum vfio_notify_type {
-@@ -162,13 +162,13 @@ enum vfio_notify_type {
- /* events for VFIO_IOMMU_NOTIFY */
- #define VFIO_IOMMU_NOTIFY_DMA_UNMAP	BIT(0)
- 
--extern int vfio_register_notifier(struct vfio_device *device,
--				  enum vfio_notify_type type,
--				  unsigned long *required_events,
--				  struct notifier_block *nb);
--extern int vfio_unregister_notifier(struct vfio_device *device,
--				    enum vfio_notify_type type,
--				    struct notifier_block *nb);
-+int vfio_register_notifier(struct vfio_device *device,
-+			   enum vfio_notify_type type,
-+			   unsigned long *required_events,
-+			   struct notifier_block *nb);
-+int vfio_unregister_notifier(struct vfio_device *device,
-+			     enum vfio_notify_type type,
-+			     struct notifier_block *nb);
- 
- 
- /*
-@@ -178,25 +178,24 @@ struct vfio_info_cap {
- 	struct vfio_info_cap_header *buf;
- 	size_t size;
- };
--extern struct vfio_info_cap_header *vfio_info_cap_add(
--		struct vfio_info_cap *caps, size_t size, u16 id, u16 version);
--extern void vfio_info_cap_shift(struct vfio_info_cap *caps, size_t offset);
-+struct vfio_info_cap_header *vfio_info_cap_add(struct vfio_info_cap *caps,
-+					       size_t size, u16 id,
-+					       u16 version);
-+void vfio_info_cap_shift(struct vfio_info_cap *caps, size_t offset);
- 
--extern int vfio_info_add_capability(struct vfio_info_cap *caps,
--				    struct vfio_info_cap_header *cap,
--				    size_t size);
-+int vfio_info_add_capability(struct vfio_info_cap *caps,
-+			     struct vfio_info_cap_header *cap, size_t size);
- 
--extern int vfio_set_irqs_validate_and_prepare(struct vfio_irq_set *hdr,
--					      int num_irqs, int max_irq_type,
--					      size_t *data_size);
-+int vfio_set_irqs_validate_and_prepare(struct vfio_irq_set *hdr,
-+				       int num_irqs, int max_irq_type,
-+				       size_t *data_size);
- 
- struct pci_dev;
- #if IS_ENABLED(CONFIG_VFIO_SPAPR_EEH)
--extern void vfio_spapr_pci_eeh_open(struct pci_dev *pdev);
--extern void vfio_spapr_pci_eeh_release(struct pci_dev *pdev);
--extern long vfio_spapr_iommu_eeh_ioctl(struct iommu_group *group,
--				       unsigned int cmd,
--				       unsigned long arg);
-+void vfio_spapr_pci_eeh_open(struct pci_dev *pdev);
-+void vfio_spapr_pci_eeh_release(struct pci_dev *pdev);
-+long vfio_spapr_iommu_eeh_ioctl(struct iommu_group *group, unsigned int cmd,
-+				unsigned long arg);
- #else
- static inline void vfio_spapr_pci_eeh_open(struct pci_dev *pdev)
- {
-@@ -230,10 +229,9 @@ struct virqfd {
- 	struct virqfd		**pvirqfd;
- };
- 
--extern int vfio_virqfd_enable(void *opaque,
--			      int (*handler)(void *, void *),
--			      void (*thread)(void *, void *),
--			      void *data, struct virqfd **pvirqfd, int fd);
--extern void vfio_virqfd_disable(struct virqfd **pvirqfd);
-+int vfio_virqfd_enable(void *opaque, int (*handler)(void *, void *),
-+		       void (*thread)(void *, void *), void *data,
-+		       struct virqfd **pvirqfd, int fd);
-+void vfio_virqfd_disable(struct virqfd **pvirqfd);
- 
- #endif /* VFIO_H */
-diff --git a/include/linux/vfio_pci_core.h b/include/linux/vfio_pci_core.h
-index 23c176d4b073..22de2bce6394 100644
---- a/include/linux/vfio_pci_core.h
-+++ b/include/linux/vfio_pci_core.h
-@@ -147,23 +147,23 @@ struct vfio_pci_core_device {
- #define is_irq_none(vdev) (!(is_intx(vdev) || is_msi(vdev) || is_msix(vdev)))
- #define irq_is(vdev, type) (vdev->irq_type == type)
- 
--extern void vfio_pci_intx_mask(struct vfio_pci_core_device *vdev);
--extern void vfio_pci_intx_unmask(struct vfio_pci_core_device *vdev);
-+void vfio_pci_intx_mask(struct vfio_pci_core_device *vdev);
-+void vfio_pci_intx_unmask(struct vfio_pci_core_device *vdev);
- 
--extern int vfio_pci_set_irqs_ioctl(struct vfio_pci_core_device *vdev,
--				   uint32_t flags, unsigned index,
--				   unsigned start, unsigned count, void *data);
-+int vfio_pci_set_irqs_ioctl(struct vfio_pci_core_device *vdev,
-+			    uint32_t flags, unsigned index,
-+			    unsigned start, unsigned count, void *data);
- 
--extern ssize_t vfio_pci_config_rw(struct vfio_pci_core_device *vdev,
--				  char __user *buf, size_t count,
--				  loff_t *ppos, bool iswrite);
-+ssize_t vfio_pci_config_rw(struct vfio_pci_core_device *vdev,
-+			   char __user *buf, size_t count,
-+			   loff_t *ppos, bool iswrite);
- 
--extern ssize_t vfio_pci_bar_rw(struct vfio_pci_core_device *vdev, char __user *buf,
--			       size_t count, loff_t *ppos, bool iswrite);
-+ssize_t vfio_pci_bar_rw(struct vfio_pci_core_device *vdev, char __user *buf,
-+			size_t count, loff_t *ppos, bool iswrite);
- 
- #ifdef CONFIG_VFIO_PCI_VGA
--extern ssize_t vfio_pci_vga_rw(struct vfio_pci_core_device *vdev, char __user *buf,
--			       size_t count, loff_t *ppos, bool iswrite);
-+ssize_t vfio_pci_vga_rw(struct vfio_pci_core_device *vdev, char __user *buf,
-+			size_t count, loff_t *ppos, bool iswrite);
- #else
- static inline ssize_t vfio_pci_vga_rw(struct vfio_pci_core_device *vdev,
- 				      char __user *buf, size_t count,
-@@ -173,32 +173,31 @@ static inline ssize_t vfio_pci_vga_rw(struct vfio_pci_core_device *vdev,
- }
- #endif
- 
--extern long vfio_pci_ioeventfd(struct vfio_pci_core_device *vdev, loff_t offset,
--			       uint64_t data, int count, int fd);
-+long vfio_pci_ioeventfd(struct vfio_pci_core_device *vdev, loff_t offset,
-+			uint64_t data, int count, int fd);
- 
--extern int vfio_pci_init_perm_bits(void);
--extern void vfio_pci_uninit_perm_bits(void);
-+int vfio_pci_init_perm_bits(void);
-+void vfio_pci_uninit_perm_bits(void);
- 
--extern int vfio_config_init(struct vfio_pci_core_device *vdev);
--extern void vfio_config_free(struct vfio_pci_core_device *vdev);
-+int vfio_config_init(struct vfio_pci_core_device *vdev);
-+void vfio_config_free(struct vfio_pci_core_device *vdev);
- 
--extern int vfio_pci_register_dev_region(struct vfio_pci_core_device *vdev,
--					unsigned int type, unsigned int subtype,
--					const struct vfio_pci_regops *ops,
--					size_t size, u32 flags, void *data);
-+int vfio_pci_register_dev_region(struct vfio_pci_core_device *vdev,
-+				 unsigned int type, unsigned int subtype,
-+				 const struct vfio_pci_regops *ops,
-+				 size_t size, u32 flags, void *data);
- 
--extern int vfio_pci_set_power_state(struct vfio_pci_core_device *vdev,
--				    pci_power_t state);
-+int vfio_pci_set_power_state(struct vfio_pci_core_device *vdev,
-+			     pci_power_t state);
- 
--extern bool __vfio_pci_memory_enabled(struct vfio_pci_core_device *vdev);
--extern void vfio_pci_zap_and_down_write_memory_lock(struct vfio_pci_core_device
--						    *vdev);
--extern u16 vfio_pci_memory_lock_and_enable(struct vfio_pci_core_device *vdev);
--extern void vfio_pci_memory_unlock_and_restore(struct vfio_pci_core_device *vdev,
--					       u16 cmd);
-+bool __vfio_pci_memory_enabled(struct vfio_pci_core_device *vdev);
-+void vfio_pci_zap_and_down_write_memory_lock(struct vfio_pci_core_device *vdev);
-+u16 vfio_pci_memory_lock_and_enable(struct vfio_pci_core_device *vdev);
-+void vfio_pci_memory_unlock_and_restore(struct vfio_pci_core_device *vdev,
-+					u16 cmd);
- 
- #ifdef CONFIG_VFIO_PCI_IGD
--extern int vfio_pci_igd_init(struct vfio_pci_core_device *vdev);
-+int vfio_pci_igd_init(struct vfio_pci_core_device *vdev);
- #else
- static inline int vfio_pci_igd_init(struct vfio_pci_core_device *vdev)
- {
-@@ -207,8 +206,8 @@ static inline int vfio_pci_igd_init(struct vfio_pci_core_device *vdev)
- #endif
- 
- #ifdef CONFIG_S390
--extern int vfio_pci_info_zdev_add_caps(struct vfio_pci_core_device *vdev,
--				       struct vfio_info_cap *caps);
-+int vfio_pci_info_zdev_add_caps(struct vfio_pci_core_device *vdev,
-+				struct vfio_info_cap *caps);
- #else
- static inline int vfio_pci_info_zdev_add_caps(struct vfio_pci_core_device *vdev,
- 					      struct vfio_info_cap *caps)
+One such provider is for example dm-verity, which is able to represent
+the integrity property of a partition (its immutable state) with a digest.
 
+IPE is compiled under CONFIG_SECURITY_IPE.
 
+Use Cases
+---------
+
+IPE works best in fixed-function devices: Devices in which their purpose
+is clearly defined and not supposed to be changed (e.g. network firewall
+device in a data center, an IoT device, etcetera), where all software and
+configuration is built and provisioned by the system owner.
+
+IPE is a long-way off for use in general-purpose computing: the Linux
+community as a whole tends to follow a decentralized trust model,
+known as the web of trust, which IPE has no support for as of yet.
+
+There are exceptions, to this general-purpose computing rule; however,
+such as the scenario, wherein Linux distribution vendors trust only
+their own keys - in this case, IPE can be used to enforce the trust
+reqiurement.
+
+IPE, instead of supporting web of trust, supports PKI, which generally
+designates a set of entities that provide a measure absolute trust.
+Commonly used in embedded systems, 
+
+Additionally, while most packages are signed today, the files inside
+the packages (for instance, the executables), tend to be unsigned. This
+makes it difficult to utilize IPE in systems where a package manager is
+expected to be functional, without major changes to the package manager
+and ecosystem behind it.
+
+DIGLIM[1] is a system that when combined with IPE, could be used to
+enable general purpose computing scenarios.
+
+Policy:
+-------
+
+IPE policy is a plain-text policy composed of multiple statements
+over several lines. There is one required line, at the top of the
+policy, indicating the policy name, and the policy version, for
+instance:
+
+  policy_name="Ex Policy" policy_version=0.0.0
+
+The policy version indicates the current version of the policy (NOT the
+policy syntax version). This is used to prevent roll-back of policy to
+potentially insecure previous versions of the policy.
+
+The next portion of IPE policy, are rules. Rules are formed by key=value
+pairs, known as properties. IPE rules require two keys: "action", which
+determines what IPE does when it encounters a match against the policy
+ and "op", which determines when that rule should be evaluated.
+
+Thus, a minimal rule is:
+
+  op=EXECUTE action=ALLOW
+
+This example will allow any execution. Additional properties are used to
+restrict attributes about the files being evaluated. These properties are
+intended to be deterministic attributes that are resident in the kernel.
+Available properties for IPE described in the documentation patch of this
+series.
+
+A rule is required to have the "op" property as the first token of a rule,
+and the "action" as the last token of the rule. Rules are evaluated
+top-to-bottom. As a result, any revocation rules, or denies should be
+placed early in the file to ensure that these rules are evaluated before
+a rule with "action=ALLOW" is hit.
+
+Any unknown syntax in IPE policy will result in a fatal error to parse
+the policy. User mode can interrogate the kernel to understand what
+properties and the associated versions through the securityfs node,
+$securityfs/ipe/config, which will return a string of form:
+
+  key1=version1
+  key2=version2
+  .
+  .
+  .
+  keyN=versionN
+
+User-mode should correlate these versions with the supported values
+identified in the documentation to determine whether a policy should
+be accepted by the system without actually trying to deploy the policy.
+
+Additionally, a DEFAULT operation must be set for all understood
+operations within IPE. For policies to remain completely forwards
+compatible, it is recommended that users add a "DEFAULT action=ALLOW"
+and override the defaults on a per-operation basis.
+
+For more information about the policy syntax, see the kernel
+documentation page.
+
+Early Usermode Protection:
+--------------------------
+
+IPE can be provided with a policy at startup to load and enforce.
+This is intended to be a minimal policy to get the system to a state
+where userland is setup and ready to receive commands, at which
+point a policy can be deployed via securityfs. This "boot policy" can be
+specified via the config, SECURITY_IPE_BOOT_POLICY, which accepts a path
+to a plain-text version of the IPE policy to apply. This policy will be
+compiled into the kernel. If not specified, IPE will be disabled until a
+policy is deployed and activated through the method above.
+
+Policy Examples:
+----------------
+
+Allow all:
+
+  policy_name="Allow All" policy_version=0.0.0
+  DEFAULT action=ALLOW
+
+Allow only initial superblock:
+
+  policy_name="Allow All Initial SB" policy_version=0.0.0
+  DEFAULT action=DENY
+
+  op=EXECUTE boot_verified=TRUE action=ALLOW
+
+Allow any signed dm-verity volume and the initial superblock:
+
+  policy_name="AllowSignedAndInitial" policy_version=0.0.0
+  DEFAULT action=DENY
+
+  op=EXECUTE boot_verified=TRUE action=ALLOW
+  op=EXECUTE dmverity_signature=TRUE action=ALLOW
+
+Prohibit execution from a specific dm-verity volume, while allowing
+all signed volumes and the initial superblock:
+
+  policy_name="ProhibitSingleVolume" policy_version=0.0.0
+  DEFAULT action=DENY
+
+  op=EXECUTE dmverity_roothash=sha256:401fcec5944823ae12f62726e8184407a5fa9599783f030dec146938 action=DENY
+  op=EXECUTE boot_verified=TRUE action=ALLOW
+  op=EXECUTE dmverity_signature=TRUE action=ALLOW
+
+Allow only a specific dm-verity volume:
+
+  policy_name="AllowSpecific" policy_version=0.0.0
+  DEFAULT action=DENY
+
+  op=EXECUTE dmverity_roothash=sha256:401fcec5944823ae12f62726e8184407a5fa9599783f030dec146938 action=ALLOW
+
+Deploying Policies:
+-------------------
+
+First sign a plain text policy, with a certificate that is present in
+the SYSTEM_TRUSTED_KEYRING of your test machine. Through openssl, the
+signing can be done via:
+
+  openssl smime -sign -in "$MY_POLICY" -signer "$MY_CERTIFICATE" \
+    -inkey "$MY_PRIVATE_KEY" -outform der -noattr -nodetach \
+    -out "$MY_POLICY.p7s"
+
+Then, simply cat the file into the IPE's "new_policy" securityfs node:
+
+  cat "$MY_POLICY.p7s" > /sys/kernel/security/ipe/new_policy
+
+The policy should now be present under the policies/ subdirectory, under
+its "policy_name" attribute.
+
+The policy is now present in the kernel and can be marked as active,
+via the securityfs node:
+
+  echo 1 > "/sys/kernel/security/ipe/$MY_POLICY_NAME/active"
+
+This will now mark the policy as active and the system will be enforcing
+$MY_POLICY_NAME.
+
+There is one requirement when marking a policy as active, the policy_version
+attribute must either increase, or remain the same as the currently running
+policy.
+
+Policies can be updated via:
+
+  cat "$MY_UPDATED_POLICY.p7s" > \
+    "/sys/kernel/security/ipe/policies/$MY_POLICY_NAME/update"
+
+Additionally, policies can be deleted via the "delete" securityfs
+node. Simply write "1" to the corresponding node in the policy folder:
+
+  echo 1 > "/sys/kernel/security/ipe/policies/$MY_POLICY_NAME/delete"
+
+There is only one requirement to delete policies, the policy being
+deleted must not be the active policy.
+
+NOTE: Any securityfs write to IPE's nodes will require CAP_MAC_ADMIN.
+
+Integrations:
+-------------
+
+This patch series adds support for fsverity via digest and signature
+(fsverity_signature and fsverity_digest), dm-verity by digest and
+signature (dmverity_signature and dmverity_roothash), and trust for
+the initramfs (boot_verified).
+
+Please see the documentation patch for more information about the
+integrations available.
+
+Testing:
+--------
+
+KUnit Tests are available. Recommended kunitconfig:
+
+    CONFIG_KUNIT=y
+    CONFIG_SECURITY=y
+    CONFIG_SECURITYFS=y
+    CONFIG_PKCS7_MESSAGE_PARSER=y
+    CONFIG_SYSTEM_DATA_VERIFICATION=y
+    CONFIG_FS_VERITY=y
+    CONFIG_FS_VERITY_BUILTIN_SIGNATURES=y
+    CONFIG_BLOCK=y
+    CONFIG_MD=y
+    CONFIG_BLK_DEV_DM=y
+    CONFIG_DM_VERITY=y
+    CONFIG_DM_VERITY_VERIFY_ROOTHASH_SIG=y
+
+    CONFIG_SECURITY_IPE=y
+    CONFIG_SECURITY_IPE_KUNIT_TEST=y
+    CONFIG_IPE_PROP_BOOT_VERIFIED=y
+    CONFIG_IPE_PROP_DM_VERITY_SIGNATURE=y
+    CONFIG_IPE_PROP_DM_VERITY_ROOTHASH=y
+    CONFIG_IPE_PROP_FS_VERITY_SIGNATURE=y
+    CONFIG_IPE_PROP_FS_VERITY_DIGEST=y
+
+Simply run:
+
+    make ARCH=um mrproper 
+    ./tools/testing/kunit/kunit.py run --kunitconfig <path/to/config>
+
+And the tests will execute and report the result. For more indepth testing,
+it will require you to create and mount a dm-verity volume or fs-verity
+enabled file.
+
+Documentation:
+--------------
+
+There is both documentation available on github at
+https://microsoft.github.io/ipe, and Documentation in this patch series,
+to be added in-tree.
+
+Known Gaps:
+-----------
+
+IPE has two known gaps:
+
+1. IPE cannot verify the integrity of anonymous executable memory, such as
+  the trampolines created by gcc closures and libffi (<3.4.2), or JIT'd code.
+  Unfortunately, as this is dynamically generated code, there is no way
+  for IPE to ensure the integrity of this code to form a trust basis. In all
+  cases, the return result for these operations will be whatever the admin
+  configures the DEFAULT action for "EXECUTE".
+
+2. IPE cannot verify the integrity of interpreted languages' programs when
+  these scripts invoked via ``<interpreter> <file>``. This is because the
+  way interpreters execute these files, the scripts themselves are not
+  evaluated as executable code through one of IPE's hooks. Interpreters
+  can be enlightened to the usage of IPE by trying to mmap a file into
+  executable memory (+X), after opening the file and responding to the
+  error code appropriately. This also applies to included files, or high
+  value files, such as configuration files of critical system components.
+
+Appendix:
+---------
+
+A. IPE Github Repository: https://github.com/microsoft/ipe
+B. IPE Users' Guide: Documentation/admin-guide/LSM/ipe.rst
+
+References:
+-----------
+
+1: https://lore.kernel.org/bpf/4d6932e96d774227b42721d9f645ba51@huawei.com/T/
+
+FAQ:
+----
+
+Q: What is the difference between IMA and IPE?
+
+A: See the documentation patch for more on this topic. 
+
+Previous Postings
+-----------------
+
+v1: https://patchwork.kernel.org/project/linux-security-module/list/?series=267061&archive=both
+v2: https://patchwork.kernel.org/project/linux-security-module/list/?series=267169&archive=both
+v3: https://patchwork.kernel.org/project/linux-security-module/list/?series=271685&archive=both
+v4: https://patchwork.kernel.org/project/linux-security-module/list/?series=320403&archive=both
+v5: https://patchwork.kernel.org/project/linux-security-module/list/?series=325703&archive=both
+v6: https://patchwork.kernel.org/project/linux-security-module/list/?series=326359&archive=both
+v7: https://patchwork.kernel.org/project/linux-security-module/list/?series=562971&archive=both
+
+Changelog:
+----------
+
+v2:
+  Split the second patch of the previous series into two.
+  Minor corrections in the cover-letter and documentation
+  comments regarding CAP_MAC_ADMIN checks in IPE.
+
+v3:
+  Address various comments by Jann Horn. Highlights:
+    Switch various audit allocators to GFP_KERNEL.
+    Utilize rcu_access_pointer() in various locations.
+    Strip out the caching system for properties
+    Strip comments from headers
+    Move functions around in patches
+    Remove kernel command line parameters
+    Reconcile the race condition on the delete node for policy by
+      expanding the policy critical section.
+
+  Address a few comments by Jonathan Corbet around the documentation
+    pages for IPE.
+
+  Fix an issue with the initialization of IPE policy with a "-0"
+    version, caused by not initializing the hlist entries before
+    freeing.
+
+v4:
+  Address a concern around IPE's behavior with unknown syntax.
+    Specifically, make any unknown syntax a fatal error instead of a
+    warning, as suggested by Mickaël Salaün.
+  Introduce a new securityfs node, $securityfs/ipe/property_config,
+    which provides a listing of what properties are enabled by the
+    kernel and their versions. This allows usermode to predict what
+    policies should be allowed.
+  Strip some comments from c files that I missed.
+  Clarify some documentation comments around 'boot_verified'.
+    While this currently does not functionally change the property
+    itself, the distinction is important when IPE can enforce verified
+    reads. Additionally, 'KERNEL_READ' was omitted from the documentation.
+    This has been corrected.
+  Change SecurityFS and SHA1 to a reverse dependency.
+  Update the cover-letter with the updated behavior of unknown syntax.
+  Remove all sysctls, making an equivalent function in securityfs.
+  Rework the active/delete mechanism to be a node under the policy in
+    $securityfs/ipe/policies.
+  The kernel command line parameters ipe.enforce and ipe.success_audit
+    have returned as this functionality is no longer exposed through
+    sysfs.
+
+v5:
+  Correct some grammatical errors reported by Randy Dunlap.
+  Fix some warnings reported by kernel test bot.
+  Change convention around security_bdev_setsecurity. -ENOSYS
+    is now expected if an LSM does not implement a particular @name,
+    as suggested by Casey Schaufler.
+  Minor string corrections related to the move from sysfs to securityfs
+  Correct a spelling of an #ifdef for the permissive argument.
+  Add the kernel parameters re-added to the documentation.
+  Fix a minor bug where the mode being audited on permissive switch
+    was the original mode, not the mode being swapped to.
+  Cleanup doc comments, fix some whitespace alignment issues.
+
+v6:
+  Change if statement condition in security_bdev_setsecurity to be
+    more concise, as suggested by Casey Schaufler and Al Viro
+  Drop the 6th patch in the series, "dm-verity move signature check..."
+    due to numerous issues, and it ultimately providing no real value.
+  Fix the patch tree - the previous iteration appears to have been in a
+    torn state (patches 8+9 were merged). This has since been corrected.
+
+v7:
+  * Reword cover letter to more accurate convey IPE's purpose
+    and latest updates.
+  * Refactor series to:
+      1. Support a context structure, enabling:
+          1. Easier Testing via KUNIT
+          2. A better architecture for future designs
+      2. Make parser code cleaner
+  * Move patch 01/12 to [14/16] of the series
+  * Split up patch 02/12 into four parts:
+      1. context creation [01/16]
+      2. audit [07/16]
+      3. evaluation loop [03/16]
+      4. access control hooks [05/16]
+      5. permissive mode [08/16]
+  * Split up patch 03/12 into two parts:
+      1. parser [02/16]
+      2. userspace interface [04/16]
+  * Reword and refactor patch 04/12 to [09/16]
+  * Squash patch 05/12, 07/12, 09/12 to [10/16]
+  * Squash patch 08/12, 10/12 to [11/16]
+  * Change audit records to MAC region (14XX) from Integrity region (18XX)
+  * Add FSVerity Support
+  * Interface changes:
+      1. "raw" was renamed to "pkcs7" and made read only
+      2. "raw"'s write functionality (update a policy) moved to "update"
+      3. introduced "version", "policy_name" nodes.
+      4. "content" renamed to "policy"
+      5. The boot policy can now be updated like any other policy.
+  * Add additional developer-level documentation
+  * Update admin-guide docs to reflect changes.
+  * Kunit tests
+  * Dropped CONFIG_SECURITY_IPE_PERMISSIVE_SWITCH - functionality can
+    easily come later with a small patch.
+  * Use partition0 for block_device for dm-verity patch
+
+v8:
+  * Add changelog information to individual commits
+  * A large number of changes to the audit patch.
+  * split fs/ & security/ changes to two separate patches.
+  * split block/, security/ & drivers/md/ changes to separate patches.
+  * Add some historical context to what lead to the creation of IPE
+    in the documentation patch.
+  * Cover-letter changes suggested by Roberto Sassu.
+
+Deven Bowers (15):
+  security: add ipe lsm & initial context creation
+  ipe: add policy parser
+  ipe: add evaluation loop
+  ipe: add userspace interface
+  ipe: add LSM hooks on execution and kernel read
+  uapi|audit: add ipe audit message definitions
+  ipe: add auditing support
+  ipe: add permissive toggle
+  ipe: introduce 'boot_verified' as a trust provider
+  block|security: add LSM blob to block_device
+  dm-verity: consume root hash digest and signature data via LSM hook
+  ipe: add support for dm-verity as a trust provider
+  scripts: add boot policy generation program
+  ipe: kunit tests
+  documentation: add ipe documentation
+
+Fan Wu (2):
+  fsverity: consume builtin signature via LSM hook
+  ipe: enable support for fs-verity as a trust provider
+
+ Documentation/admin-guide/LSM/index.rst       |    1 +
+ Documentation/admin-guide/LSM/ipe.rst         |  739 ++++++++++++
+ .../admin-guide/kernel-parameters.txt         |   12 +
+ Documentation/security/index.rst              |    1 +
+ Documentation/security/ipe.rst                |  559 +++++++++
+ MAINTAINERS                                   |    9 +
+ block/bdev.c                                  |    7 +
+ drivers/md/dm-verity-target.c                 |   25 +-
+ drivers/md/dm-verity-verify-sig.c             |   16 +-
+ drivers/md/dm-verity-verify-sig.h             |   10 +-
+ fs/verity/fsverity_private.h                  |    2 +-
+ fs/verity/open.c                              |   13 +-
+ fs/verity/signature.c                         |    1 +
+ include/asm-generic/vmlinux.lds.h             |   16 +
+ include/linux/blk_types.h                     |    1 +
+ include/linux/dm-verity.h                     |   19 +
+ include/linux/fsverity.h                      |    2 +
+ include/linux/lsm_hook_defs.h                 |    5 +
+ include/linux/lsm_hooks.h                     |   12 +
+ include/linux/security.h                      |   22 +
+ include/uapi/linux/audit.h                    |    1 +
+ scripts/Makefile                              |    1 +
+ scripts/ipe/Makefile                          |    2 +
+ scripts/ipe/polgen/.gitignore                 |    1 +
+ scripts/ipe/polgen/Makefile                   |    6 +
+ scripts/ipe/polgen/polgen.c                   |  145 +++
+ security/Kconfig                              |   11 +-
+ security/Makefile                             |    1 +
+ security/ipe/.gitignore                       |    1 +
+ security/ipe/Kconfig                          |  101 ++
+ security/ipe/Makefile                         |   37 +
+ security/ipe/audit.c                          |  227 ++++
+ security/ipe/audit.h                          |   39 +
+ security/ipe/ctx.c                            |  368 ++++++
+ security/ipe/ctx.h                            |   43 +
+ security/ipe/ctx_test.c                       |  718 ++++++++++++
+ security/ipe/eval.c                           |  240 ++++
+ security/ipe/eval.h                           |   52 +
+ security/ipe/fs.c                             |  340 ++++++
+ security/ipe/fs.h                             |   13 +
+ security/ipe/hooks.c                          |  298 +++++
+ security/ipe/hooks.h                          |   45 +
+ security/ipe/ipe.c                            |  159 +++
+ security/ipe/ipe.h                            |   28 +
+ security/ipe/ipe_parser.h                     |   59 +
+ security/ipe/modules.c                        |  272 +++++
+ security/ipe/modules.h                        |   17 +
+ security/ipe/modules/Kconfig                  |   66 ++
+ security/ipe/modules/Makefile                 |   12 +
+ security/ipe/modules/boot_verified.c          |   26 +
+ security/ipe/modules/dmverity_roothash.c      |   31 +
+ security/ipe/modules/dmverity_signature.c     |   26 +
+ security/ipe/modules/fsverity_digest.c        |   39 +
+ security/ipe/modules/fsverity_signature.c     |   34 +
+ security/ipe/modules/ipe_module.h             |   46 +
+ security/ipe/parsers.c                        |  143 +++
+ security/ipe/parsers/Makefile                 |   12 +
+ security/ipe/parsers/default.c                |  106 ++
+ security/ipe/parsers/policy_header.c          |  126 ++
+ security/ipe/policy.c                         | 1037 +++++++++++++++++
+ security/ipe/policy.h                         |  113 ++
+ security/ipe/policy_parser_tests.c            |  313 +++++
+ security/ipe/policyfs.c                       |  528 +++++++++
+ security/security.c                           |   70 ++
+ 64 files changed, 7409 insertions(+), 16 deletions(-)
+ create mode 100644 Documentation/admin-guide/LSM/ipe.rst
+ create mode 100644 Documentation/security/ipe.rst
+ create mode 100644 include/linux/dm-verity.h
+ create mode 100644 scripts/ipe/Makefile
+ create mode 100644 scripts/ipe/polgen/.gitignore
+ create mode 100644 scripts/ipe/polgen/Makefile
+ create mode 100644 scripts/ipe/polgen/polgen.c
+ create mode 100644 security/ipe/.gitignore
+ create mode 100644 security/ipe/Kconfig
+ create mode 100644 security/ipe/Makefile
+ create mode 100644 security/ipe/audit.c
+ create mode 100644 security/ipe/audit.h
+ create mode 100644 security/ipe/ctx.c
+ create mode 100644 security/ipe/ctx.h
+ create mode 100644 security/ipe/ctx_test.c
+ create mode 100644 security/ipe/eval.c
+ create mode 100644 security/ipe/eval.h
+ create mode 100644 security/ipe/fs.c
+ create mode 100644 security/ipe/fs.h
+ create mode 100644 security/ipe/hooks.c
+ create mode 100644 security/ipe/hooks.h
+ create mode 100644 security/ipe/ipe.c
+ create mode 100644 security/ipe/ipe.h
+ create mode 100644 security/ipe/ipe_parser.h
+ create mode 100644 security/ipe/modules.c
+ create mode 100644 security/ipe/modules.h
+ create mode 100644 security/ipe/modules/Kconfig
+ create mode 100644 security/ipe/modules/Makefile
+ create mode 100644 security/ipe/modules/boot_verified.c
+ create mode 100644 security/ipe/modules/dmverity_roothash.c
+ create mode 100644 security/ipe/modules/dmverity_signature.c
+ create mode 100644 security/ipe/modules/fsverity_digest.c
+ create mode 100644 security/ipe/modules/fsverity_signature.c
+ create mode 100644 security/ipe/modules/ipe_module.h
+ create mode 100644 security/ipe/parsers.c
+ create mode 100644 security/ipe/parsers/Makefile
+ create mode 100644 security/ipe/parsers/default.c
+ create mode 100644 security/ipe/parsers/policy_header.c
+ create mode 100644 security/ipe/policy.c
+ create mode 100644 security/ipe/policy.h
+ create mode 100644 security/ipe/policy_parser_tests.c
+ create mode 100644 security/ipe/policyfs.c
+
+--
+2.25.1
