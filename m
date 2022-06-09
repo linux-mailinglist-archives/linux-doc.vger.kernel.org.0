@@ -2,183 +2,94 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 306EB544D96
-	for <lists+linux-doc@lfdr.de>; Thu,  9 Jun 2022 15:26:37 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id B79B9544D93
+	for <lists+linux-doc@lfdr.de>; Thu,  9 Jun 2022 15:26:11 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S236224AbiFIN0f (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 9 Jun 2022 09:26:35 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:56570 "EHLO
+        id S245483AbiFINZm (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 9 Jun 2022 09:25:42 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:51960 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S234891AbiFIN0e (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Thu, 9 Jun 2022 09:26:34 -0400
-Received: from mail-pj1-x1031.google.com (mail-pj1-x1031.google.com [IPv6:2607:f8b0:4864:20::1031])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id BAAFD33EA2;
-        Thu,  9 Jun 2022 06:26:32 -0700 (PDT)
-Received: by mail-pj1-x1031.google.com with SMTP id u12-20020a17090a1d4c00b001df78c7c209so26685261pju.1;
-        Thu, 09 Jun 2022 06:26:32 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=message-id:date:mime-version:user-agent:subject:content-language:to
-         :cc:references:from:in-reply-to:content-transfer-encoding;
-        bh=ShDYdI8cJz4eKhe2LZx3gBgV6zn8fmqFJsqslddaRT8=;
-        b=BmuptZ+PRTXtGSlYMIwn2u4mFKTReW1Z/1FJI7LJxsf7Mn1VfFfgPde7zSZ3/NhjI0
-         tf0v4Fk7UXtADlco79KE74hB6yRX6jpQ/bligG8DxftDoIXNaeA2zNGijJ0pGoS2JKVS
-         tMt3IpcyoLV2TpfogRpU8oRpapPDlmK9Gu9og4dLA+9yj1H3VNtbjfAOk6+pxtUJncwb
-         owzN3z4QDuYHd+yel95cYYtep89BA4XSFZVBof4GFtXJaklaoGe5BLM6jzLInlR64PED
-         /sKcz/dkuYhMvAZ9yYyOrulq26yz8MILI4PMV87OVCqdrgKnSeXNPqzoO/NFQPzLSLIm
-         KNRA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=x-gm-message-state:message-id:date:mime-version:user-agent:subject
-         :content-language:to:cc:references:from:in-reply-to
-         :content-transfer-encoding;
-        bh=ShDYdI8cJz4eKhe2LZx3gBgV6zn8fmqFJsqslddaRT8=;
-        b=mK7ewL16s4E4P/eL8nSR8jqGFDE/QFQEBE9HaXWtmqXB9DuvwMkkKSDrMcYPgKT7kB
-         FmFEpEsVc2AjFayxt6VzkJ9RJK34zG5+RGXlJJA9Oxk71yxqWZ41zp1LxqHHZ/Dntl/K
-         V/CQaPk/2GVXCL2KmWLTJeMq8EY5LBTaJHJsYxILbsQfJYKt9rGWr+/jT4Zw09/6UxTK
-         Eihp4r1kjrEoY7+DtfQ2oHRbLG/kfWGsghSNHLd3tDstUnDT2+zW9lYB2sqHMBmG9ZxG
-         Km82Qw1GagNI1jVS4p4RwqRw7l2tBmdmJ3VR47ajQLjH5GjqkHHFHMQVWVNQtI48h84j
-         gMtA==
-X-Gm-Message-State: AOAM531gKDRxLPta7wlKNbxPyZoUp3xz2QNLnz+mIfPSVxPLNyAavglK
-        ITtqUl0dWNRIANhxIsLMTa0=
-X-Google-Smtp-Source: ABdhPJxPz16UeP1BW5ZLa39ojvoPfNniXTPAI605fb6GHDhmj91YhA0rItyFO3mIoMbFouKiVZwGjA==
-X-Received: by 2002:a17:90a:778c:b0:1df:56a5:8474 with SMTP id v12-20020a17090a778c00b001df56a58474mr3505689pjk.63.1654781191888;
-        Thu, 09 Jun 2022 06:26:31 -0700 (PDT)
-Received: from [192.168.11.5] (KD106167171201.ppp-bb.dion.ne.jp. [106.167.171.201])
-        by smtp.gmail.com with ESMTPSA id i19-20020a17090320d300b00163f8ddf160sm16745441plb.161.2022.06.09.06.26.29
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Thu, 09 Jun 2022 06:26:30 -0700 (PDT)
-Message-ID: <732154bc-aa35-2326-2b64-87b6c4dd02e7@gmail.com>
-Date:   Thu, 9 Jun 2022 22:26:27 +0900
+        with ESMTP id S245380AbiFINZk (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Thu, 9 Jun 2022 09:25:40 -0400
+Received: from loongson.cn (mail.loongson.cn [114.242.206.163])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTP id 37F10F3F8C
+        for <linux-doc@vger.kernel.org>; Thu,  9 Jun 2022 06:25:38 -0700 (PDT)
+Received: from localhost.localdomain (unknown [112.20.112.55])
+        by mail.loongson.cn (Coremail) with SMTP id AQAAf9Dxf0zM9KFiSWk0AA--.696S2;
+        Thu, 09 Jun 2022 21:25:33 +0800 (CST)
+From:   Yanteng Si <siyanteng@loongson.cn>
+To:     corbet@lwn.net, alexs@kernel.org, bobwxc@email.cn,
+        seakeel@gmail.com
+Cc:     Yanteng Si <siyanteng@loongson.cn>, chenhuacai@kernel.org,
+        jiaxun.yang@flygoat.com, linux-doc@vger.kernel.org,
+        siyanteng01@gmail.com, zhoubinbin@loongson.cn
+Subject: [PATCH 0/3] docs/zh_CN: Update the translation of vm to 5.19-rc1
+Date:   Thu,  9 Jun 2022 21:27:17 +0800
+Message-Id: <cover.1654780922.git.siyanteng@loongson.cn>
+X-Mailer: git-send-email 2.27.0
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.9.1
-Subject: [RFC PATCH 3/5] docs/doc-guide: Update guidelines for title
- adornments
-Content-Language: en-US
-To:     Jonathan Corbet <corbet@lwn.net>, linux-doc@vger.kernel.org
-Cc:     Mauro Carvalho Chehab <mchehab@kernel.org>,
-        "Maciej W. Rozycki" <macro@orcam.me.uk>,
-        Miguel Ojeda <ojeda@kernel.org>, linux-kernel@vger.kernel.org,
-        Akira Yokosawa <akiyks@gmail.com>
-References: <dccb5233-7f4f-1be6-d1f4-bbe9f42f88e0@gmail.com>
-From:   Akira Yokosawa <akiyks@gmail.com>
-In-Reply-To: <dccb5233-7f4f-1be6-d1f4-bbe9f42f88e0@gmail.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-Spam-Status: No, score=-2.1 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_FROM,
-        RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,SPF_PASS,T_SCC_BODY_TEXT_LINE,
-        URIBL_BLOCKED autolearn=ham autolearn_force=no version=3.4.6
+Content-Transfer-Encoding: 8bit
+X-CM-TRANSID: AQAAf9Dxf0zM9KFiSWk0AA--.696S2
+X-Coremail-Antispam: 1UD129KBjvJXoW7Cw4Utry5ury7CFyDCw48WFg_yoW8Zw1xpa
+        s2kryfW3WxA3ZxCw4xGa18Cr18Aa4xWa15Gr12qwnaqrs7tr4rtrZ8tr9Fga9aqry8AF15
+        Xr4FkF4UW34jkFJanT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+        9KBjDU0xBIdaVrnRJUUUvC14x267AKxVW8JVW5JwAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
+        rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2ocxC64kIII0Yj41l84x0c7CEw4AK67xGY2AK02
+        1l84ACjcxK6xIIjxv20xvE14v26r4j6ryUM28EF7xvwVC0I7IYx2IY6xkF7I0E14v26F4j
+        6r4UJwA2z4x0Y4vEx4A2jsIE14v26rxl6s0DM28EF7xvwVC2z280aVCY1x0267AKxVW0oV
+        Cq3wAS0I0E0xvYzxvE52x082IY62kv0487Mc02F40EFcxC0VAKzVAqx4xG6I80ewAv7VC0
+        I7IYx2IY67AKxVWUJVWUGwAv7VC2z280aVAFwI0_Jr0_Gr1lOx8S6xCaFVCjc4AY6r1j6r
+        4UM4x0Y48IcxkI7VAKI48JM4x0x7Aq67IIx4CEVc8vx2IErcIFxwACI402YVCY1x02628v
+        n2kIc2xKxwCY02Avz4vE14v_Xr4l42xK82IYc2Ij64vIr41l4I8I3I0E4IkC6x0Yz7v_Jr
+        0_Gr1lx2IqxVAqx4xG67AKxVWUJVWUGwC20s026x8GjcxK67AKxVWUGVWUWwC2zVAF1VAY
+        17CE14v26r1q6r43MIIYrxkI7VAKI48JMIIF0xvE2Ix0cI8IcVAFwI0_Jr0_JF4lIxAIcV
+        C0I7IYx2IY6xkF7I0E14v26r1j6r4UMIIF0xvE42xK8VAvwI8IcIk0rVWrZr1j6s0DMIIF
+        0xvEx4A2jsIE14v26r1j6r4UMIIF0xvEx4A2jsIEc7CjxVAFwI0_Jr0_GrUvcSsGvfC2Kf
+        nxnUUI43ZEXa7VUjHGQDUUUUU==
+X-CM-SenderInfo: pvl1t0pwhqwqxorr0wxvrqhubq/
+X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00,SPF_HELO_PASS,
+        SPF_PASS,T_SCC_BODY_TEXT_LINE autolearn=ham autolearn_force=no
+        version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Existing guidelines predate the sub-directory wise document
-management.
+Update .../zh_CN/vm/* to 5.19-rc1.
 
-Update the guidelines to reflect the current state of affairs.
+Yanteng Si (3):
+  docs/zh_CN: Update the translation of highmem to 5.19-rc1
+  docs/zh_CN: Update the translation of page_owner to 5.19-rc1
+  docs/zh_CN: Update the translation of vm index to 5.19-rc1
 
-Signed-off-by: Akira Yokosawa <akiyks@gmail.com>
-Cc: Miguel Ojeda <ojeda@kernel.org>
----
- Documentation/doc-guide/sphinx.rst | 66 +++++++++++++++++++++++-------
- 1 file changed, 52 insertions(+), 14 deletions(-)
+ .../translations/zh_CN/vm/bootmem.rst         | 13 ++++
+ .../translations/zh_CN/vm/highmem.rst         | 77 +++++++++++--------
+ Documentation/translations/zh_CN/vm/index.rst | 39 ++++++++--
+ Documentation/translations/zh_CN/vm/oom.rst   | 13 ++++
+ .../translations/zh_CN/vm/page_allocation.rst | 13 ++++
+ .../translations/zh_CN/vm/page_cache.rst      | 13 ++++
+ .../translations/zh_CN/vm/page_owner.rst      | 70 +++++++++++++++--
+ .../translations/zh_CN/vm/page_reclaim.rst    | 13 ++++
+ .../translations/zh_CN/vm/page_tables.rst     | 13 ++++
+ .../translations/zh_CN/vm/physical_memory.rst | 13 ++++
+ .../translations/zh_CN/vm/process_addrs.rst   | 13 ++++
+ Documentation/translations/zh_CN/vm/shmfs.rst | 13 ++++
+ Documentation/translations/zh_CN/vm/swap.rst  | 13 ++++
+ .../translations/zh_CN/vm/vmalloc.rst         | 13 ++++
+ 14 files changed, 282 insertions(+), 47 deletions(-)
+ create mode 100644 Documentation/translations/zh_CN/vm/bootmem.rst
+ create mode 100644 Documentation/translations/zh_CN/vm/oom.rst
+ create mode 100644 Documentation/translations/zh_CN/vm/page_allocation.rst
+ create mode 100644 Documentation/translations/zh_CN/vm/page_cache.rst
+ create mode 100644 Documentation/translations/zh_CN/vm/page_reclaim.rst
+ create mode 100644 Documentation/translations/zh_CN/vm/page_tables.rst
+ create mode 100644 Documentation/translations/zh_CN/vm/physical_memory.rst
+ create mode 100644 Documentation/translations/zh_CN/vm/process_addrs.rst
+ create mode 100644 Documentation/translations/zh_CN/vm/shmfs.rst
+ create mode 100644 Documentation/translations/zh_CN/vm/swap.rst
+ create mode 100644 Documentation/translations/zh_CN/vm/vmalloc.rst
 
-diff --git a/Documentation/doc-guide/sphinx.rst b/Documentation/doc-guide/sphinx.rst
-index efcccab68286..f257c4785607 100644
---- a/Documentation/doc-guide/sphinx.rst
-+++ b/Documentation/doc-guide/sphinx.rst
-@@ -202,34 +202,72 @@ Here are some specific guidelines for the kernel documentation:
- * Also update the content, not just the formatting, when converting
-   documentation.
- 
--* Please stick to this order of heading adornments:
-+* Please stick to this relative order of section title adornments:
- 
--  1. ``=`` with overline for document title::
-+  1. ``=`` with overline for 1st level titles::
- 
--       ==============
--       Document title
--       ==============
-+       ===============
-+       1st level title
-+       ===============
- 
--  2. ``=`` for chapters::
-+  2. ``=`` for 2nd level titles::
- 
--       Chapters
--       ========
-+       2nd level title
-+       ===============
- 
--  3. ``-`` for sections::
-+  3. ``-`` for 3rd level titles::
- 
--       Section
--       -------
-+       3rd level title
-+       ---------------
- 
--  4. ``~`` for subsections::
-+  4. ``~`` for 4th level titles::
- 
--       Subsection
--       ~~~~~~~~~~
-+       4th level title
-+       ~~~~~~~~~~~~~~~
- 
-   Although RST doesn't mandate a specific order ("Rather than imposing a fixed
-   number and order of section title adornment styles, the order enforced will be
-   the order as encountered."), having the higher levels the same overall makes
-   it easier to follow the documents.
- 
-+  .. note::
-+    - It is not easy to tell the levels (chapter, section, etc.) of title
-+      adornments in a particular .rst file.  A title that appears first in
-+      a .rst file can be at any level of document, chapter, section, or
-+      subsection (or deeper) depending on the file's inclusion depth.
-+
-+    - The RST language does not have an explicit means to specify a "document
-+      title".  Quote from the RST documentation\ [#rstdoc]_ with minor edit:
-+
-+	*Specifically, there is no way to indicate a document title and
-+	subtitle explicitly in reStructuredText.  Instead, a lone top-level
-+	section title can be treated as the document title.*
-+
-+      In the kernel documentation processing, the first title in a top-level
-+      ``index.rst`` can be considered the document title.  In HTML, as each
-+      .html output has its source .rst file, the title which happens to come
-+      first is used as the title of the resulting HTML page.
-+      Alternatively, it is possible to specify a page title by using the
-+      directive "title".\ [#rstdirtitle]_
-+
-+    - There may be a 2nd or 3rd level adornment at the first title in a .rst
-+      file.  This usage is often seen in .rst files that are derived and
-+      split from a larger .rst file.  It is sufficient if relative order is
-+      preserved.
-+
-+    .. [#rstdoc] https://docutils.sourceforge.io/docs/ref/rst/restructuredtext.html#document
-+    .. [#rstdirtitle] https://docutils.sourceforge.io/docs/ref/rst/directives.html#metadata-document-title
-+
-+  .. warning::
-+    For existing documents, manually updating title adornments just to meet
-+    these guidelines is not recommended.  Such changes can be error-prone and
-+    may break section hierarchy without being caught by reviewers.  They may
-+    be justified if done in conjunction with a section reorganization or
-+    similar.
-+
-+    It would be appreciated if adjustment of those adornments could be
-+    automated in some way.
-+
- * For inserting fixed width text blocks (for code examples, use case
-   examples, etc.), use ``::`` for anything that doesn't really benefit
-   from syntax highlighting, especially short snippets. Use
 -- 
-2.25.1
-
+2.27.0
 
