@@ -2,91 +2,116 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 777FE545187
-	for <lists+linux-doc@lfdr.de>; Thu,  9 Jun 2022 18:05:56 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 7F7A054523C
+	for <lists+linux-doc@lfdr.de>; Thu,  9 Jun 2022 18:45:02 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S241867AbiFIQFz (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 9 Jun 2022 12:05:55 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:40094 "EHLO
+        id S242129AbiFIQpB (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 9 Jun 2022 12:45:01 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:50748 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S231679AbiFIQFy (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Thu, 9 Jun 2022 12:05:54 -0400
-Received: from mx0a-001b2d01.pphosted.com (mx0b-001b2d01.pphosted.com [148.163.158.5])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id A789613892A;
-        Thu,  9 Jun 2022 09:05:52 -0700 (PDT)
-Received: from pps.filterd (m0098416.ppops.net [127.0.0.1])
-        by mx0b-001b2d01.pphosted.com (8.17.1.5/8.17.1.5) with ESMTP id 259Fxcj0011420;
-        Thu, 9 Jun 2022 16:05:46 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ibm.com; h=message-id : subject :
- from : to : cc : date : in-reply-to : references : content-type :
- mime-version : content-transfer-encoding; s=pp1;
- bh=Ionq+1sLp9BiqhJLVZfsLskBCazoUK6xUpZm2BAiiJs=;
- b=plbCagQ/zx31MtTPKxukRN0Kcx+h2aD1bkjjG6dMf79H3tvKPQ4nKwKNx7I4zsOCA8aZ
- TbiWDi4W2bzgQHHZTy87AEhsrs3YUu2EXP+T3lqMqT0jCK/i0GibHwkmQP9AYO71EqCY
- wT7wE+qYXNwGLjZsTS5LF2CJTGpxA3S5ecSHGTQuEBL/uWtiUH78Vdb3wUVuSWxn4B5p
- XuYei405S3rxjyDrhXC2l1P3I6OuC7olPeBPI0Rv8h0nqtzRy33l+3OFHLjlF4aUonGb
- jUYdTyyE1cIpd99EdAKi5EGAppCeoynWrFNBn0vvNvFS8WCTC6A+EnJpnDkkL+/zTcsQ 6g== 
-Received: from pps.reinject (localhost [127.0.0.1])
-        by mx0b-001b2d01.pphosted.com (PPS) with ESMTPS id 3gkm07r3r4-1
-        (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
-        Thu, 09 Jun 2022 16:05:45 +0000
-Received: from m0098416.ppops.net (m0098416.ppops.net [127.0.0.1])
-        by pps.reinject (8.17.1.5/8.17.1.5) with ESMTP id 259G5BoF029443;
-        Thu, 9 Jun 2022 16:05:45 GMT
-Received: from ppma04dal.us.ibm.com (7a.29.35a9.ip4.static.sl-reverse.com [169.53.41.122])
-        by mx0b-001b2d01.pphosted.com (PPS) with ESMTPS id 3gkm07r3qq-1
-        (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
-        Thu, 09 Jun 2022 16:05:45 +0000
-Received: from pps.filterd (ppma04dal.us.ibm.com [127.0.0.1])
-        by ppma04dal.us.ibm.com (8.16.1.2/8.16.1.2) with SMTP id 259G5LMX011146;
-        Thu, 9 Jun 2022 16:05:44 GMT
-Received: from b03cxnp08025.gho.boulder.ibm.com (b03cxnp08025.gho.boulder.ibm.com [9.17.130.17])
-        by ppma04dal.us.ibm.com with ESMTP id 3gfy1akvcb-1
-        (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
-        Thu, 09 Jun 2022 16:05:44 +0000
-Received: from b03ledav002.gho.boulder.ibm.com (b03ledav002.gho.boulder.ibm.com [9.17.130.233])
-        by b03cxnp08025.gho.boulder.ibm.com (8.14.9/8.14.9/NCO v10.0) with ESMTP id 259G5gmL36372842
-        (version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
-        Thu, 9 Jun 2022 16:05:42 GMT
-Received: from b03ledav002.gho.boulder.ibm.com (unknown [127.0.0.1])
-        by IMSVA (Postfix) with ESMTP id 5F63C136051;
-        Thu,  9 Jun 2022 16:05:42 +0000 (GMT)
-Received: from b03ledav002.gho.boulder.ibm.com (unknown [127.0.0.1])
-        by IMSVA (Postfix) with ESMTP id EF8BA136059;
-        Thu,  9 Jun 2022 16:05:40 +0000 (GMT)
-Received: from farman-thinkpad-t470p (unknown [9.211.94.47])
-        by b03ledav002.gho.boulder.ibm.com (Postfix) with ESMTP;
-        Thu,  9 Jun 2022 16:05:40 +0000 (GMT)
-Message-ID: <9001ce801360e3ed1482e15b5e8ec0cccc26ad64.camel@linux.ibm.com>
-Subject: Re: [PATCH] vfio: de-extern-ify function prototypes
-From:   Eric Farman <farman@linux.ibm.com>
-To:     Alex Williamson <alex.williamson@redhat.com>
-Cc:     kwankhede@nvidia.com, mjrosato@linux.ibm.com, pasic@linux.ibm.com,
-        diana.craciun@oss.nxp.com, cohuck@redhat.com,
-        eric.auger@redhat.com, kvm@vger.kernel.org,
-        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
-        linux-s390@vger.kernel.org, jgg@nvidia.com, yishaih@nvidia.com,
-        hch@lst.de
-Date:   Thu, 09 Jun 2022 12:05:39 -0400
-In-Reply-To: <165471414407.203056.474032786990662279.stgit@omen>
-References: <165471414407.203056.474032786990662279.stgit@omen>
-Content-Type: text/plain; charset="UTF-8"
-X-Mailer: Evolution 3.28.5 (3.28.5-18.el8) 
-Mime-Version: 1.0
-Content-Transfer-Encoding: 7bit
-X-TM-AS-GCONF: 00
-X-Proofpoint-ORIG-GUID: QLnhjnmaaH_QFQA6-xW0JnUtRe2hOXGP
-X-Proofpoint-GUID: 0sTcPT-982aElfTBdzLAGsYK3SwzNkGb
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.205,Aquarius:18.0.874,Hydra:6.0.517,FMLib:17.11.64.514
- definitions=2022-06-09_12,2022-06-09_01,2022-02-23_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 lowpriorityscore=0
- spamscore=0 malwarescore=0 priorityscore=1501 bulkscore=0 mlxscore=0
- suspectscore=0 clxscore=1011 mlxlogscore=999 adultscore=0 phishscore=0
- impostorscore=0 classifier=spam adjust=0 reason=mlx scancount=1
- engine=8.12.0-2204290000 definitions=main-2206090062
-X-Spam-Status: No, score=-2.0 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_EF,RCVD_IN_MSPIKE_H2,SPF_HELO_NONE,SPF_PASS,
+        with ESMTP id S243674AbiFIQo7 (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Thu, 9 Jun 2022 12:44:59 -0400
+Received: from NAM10-BN7-obe.outbound.protection.outlook.com (mail-bn7nam10on2123.outbound.protection.outlook.com [40.107.92.123])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 6712C17ED12
+        for <linux-doc@vger.kernel.org>; Thu,  9 Jun 2022 09:44:58 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=IhjZlamOaicfFXo/FZj16/IbLI40zBeH4fWMG8qyI6jDYOezOgiqii2z0jDRZanBrdRKnapEW2k7FSP7hr4wynjjPjICD1V33qiKfLFz6NlR2iHj/hY2q3nSKpZPgRtCdSkLEFPM7/txnrY48PR+cgRpOxkLTuGuXA1yet5SyispnDh+fGF2phoiPDLo7+zm4cjOuxKBn0UFZzQlLZmuM6x9BeQnvYdIvrFNkr7DHrBj5xGOA+wpJoGAjCQVgyh/rnWi7zgAeRc18Ata/5byeSYpoxYdwh6GzGofa7AxqCVq9QCIYpxwTlEOjeHFhfpFlMWCqERFknUsR61kZUsRkg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=SZblUiTPhrnEekaS7sCHt+aZzRJujNUOi/XSeD/cZ38=;
+ b=FVe7ARq0cSPbqaeqgE9t9e0TOhRI4DeeLcTkkCjDGc237oYuL40Y9Z6i5JqglSv2IaE9PzVS7pZA44lBu9ucInlqR7Dg7NS34TCuL+N5uIRE2agKymWjHbySrpnBUb6iwFZCkkbGUSjndb24Iv+MzdEQ39iKzj3p1KeOBeaHPcHPMRIiITtfKEDHZvupluM2iaIGmMjV4hSghAcKN8yiB5aQRXJ7yPKAQ7RMzM0i0YNeMyhAtuWE0bWDHOUMV4ZHdggsjzOIIvLBDo6mI2tkPPIil2VSefgwCkMP7y6GfbVWocKlksou0mxbmufzQ2S9NsZxCW7+zyZmkZm6ElEokw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=corigine.com; dmarc=pass action=none header.from=corigine.com;
+ dkim=pass header.d=corigine.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=corigine.onmicrosoft.com; s=selector2-corigine-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=SZblUiTPhrnEekaS7sCHt+aZzRJujNUOi/XSeD/cZ38=;
+ b=CphrhZz9HvEuFYeFe5VK2Ok7IbH5mSCSHk7PgJw6OAE1U9vcpp1WQhxcJusuhNkl8QCHsxsjhP9ZKTFbMBB17N5Pow5/KKGPGB9ibaL0Et5lnZ9Mg+1+/eUTnkchwrBVr8BJZz3pRHikRXFvW5L2iu4gLOR59H5IwAdg9fDVyls=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=corigine.com;
+Received: from PH0PR13MB4842.namprd13.prod.outlook.com (2603:10b6:510:78::6)
+ by SJ0PR13MB5499.namprd13.prod.outlook.com (2603:10b6:a03:425::5) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5332.11; Thu, 9 Jun
+ 2022 16:44:55 +0000
+Received: from PH0PR13MB4842.namprd13.prod.outlook.com
+ ([fe80::b18b:5e90:6805:a8fa]) by PH0PR13MB4842.namprd13.prod.outlook.com
+ ([fe80::b18b:5e90:6805:a8fa%8]) with mapi id 15.20.5332.011; Thu, 9 Jun 2022
+ 16:44:55 +0000
+Date:   Thu, 9 Jun 2022 18:44:50 +0200
+From:   Simon Horman <simon.horman@corigine.com>
+To:     Jonathan Corbet <corbet@lwn.net>
+Cc:     Linus Walleij <linus.walleij@linaro.org>,
+        linux-doc@vger.kernel.org, linux-arm-kernel@lists.infradead.org,
+        oss-drivers@corigine.com
+Subject: Re: [PATCH] docs: arm: tcm: Fix typo in description of TCM and MMU
+ usage
+Message-ID: <YqIjgt0Df2JYlmpF@corigine.com>
+References: <20220603112729.222398-1-simon.horman@corigine.com>
+ <87fskd4yiq.fsf@meer.lwn.net>
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <87fskd4yiq.fsf@meer.lwn.net>
+X-ClientProxiedBy: AM9P193CA0019.EURP193.PROD.OUTLOOK.COM
+ (2603:10a6:20b:21e::24) To PH0PR13MB4842.namprd13.prod.outlook.com
+ (2603:10b6:510:78::6)
+MIME-Version: 1.0
+X-MS-PublicTrafficType: Email
+X-MS-Office365-Filtering-Correlation-Id: 8cc21cbf-eb50-4031-22f4-08da4a3761ff
+X-MS-TrafficTypeDiagnostic: SJ0PR13MB5499:EE_
+X-Microsoft-Antispam-PRVS: <SJ0PR13MB5499782BD12E5D3C3C8DACD1E8A79@SJ0PR13MB5499.namprd13.prod.outlook.com>
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: jJHc0pGKyNq2mm0MYQ8V2c/hrsP3P9kSl73V9KYJWrTjNj3XC4IZ7+dMKY9Q/vKGJF0MugvOrSLEcCH/ZNp0218dKH1Ta4NPznQJ4kzLJhBJvhlisxzpsVzRmwtFkrafJEUQHxcZqUJDQAQDnvtQX1KuFGP0i/SL5W47dsFh7kFXckTMOy1+5xbSBKUyaz80hB39Tgb0uqLkUHyJlhcpEmVrO0wX8yoeihGnoEaFUTeDXYTpTunjkluKjH97QsmqnlY14fdIOwE+BQwSF6EY+NdCc3MJymlkXQBpR/TErhQ7I4m7dCNeJgMCrh8rABi80FPW5Iuz78SrrFqF3B34rCYOvBjLsfpwU8HwhZ1NoJjw4xw51vpuWP4MtwpVA5o8wt2Nl0J60bTMyp+0771eDlrSRlCNfjrQ9oDibqDtC1rcsXjVYVNBAlwnqpReE2gGmhM0lMk2Jky9MES7IAV8JQ/cr7eDTP8MBUrpVzEtHEYOX2ol11Q0Z2/B0trkWCclMWNWo0EUd7Nr6XDt+IWW5CibRj+CjontcTJIrUQ/Wqeq89MPOzBcsC0qqVP4yJVk7hHT0Hjf28cUbOmEBk9t/a6oy2ZNeofKXdEN4ksrDZYcgujygxN/J2L9jlNpPdDK6bRQGRQ5MF4HsdUF3vVWfg==
+X-Forefront-Antispam-Report: CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:PH0PR13MB4842.namprd13.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230001)(4636009)(346002)(366004)(396003)(136003)(39840400004)(44832011)(6512007)(6486002)(66476007)(66946007)(66556008)(8936002)(316002)(8676002)(4326008)(6506007)(86362001)(508600001)(38100700002)(5660300002)(52116002)(2906002)(83380400001)(107886003)(6666004)(2616005)(41300700001)(6916009)(36756003)(186003);DIR:OUT;SFP:1102;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 2
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?uCttNq6W8k+D/DwF7vj7vFf+Fg0G0eXiBvwVSbjX67Kg/eYf1nv8xfAWslh7?=
+ =?us-ascii?Q?AxU3REPWQfhenz1+WckNlJV9rxOJugagQO7Qzoww63Gbfv3zza1cLWA1xbqH?=
+ =?us-ascii?Q?VKedMe2gAc2obk9+UnNLtj9Awkcdf5GU/WhzXgPQDWwXkIe70UPEDbHqRnFy?=
+ =?us-ascii?Q?ltaROTKKs/qzXSmO69SiIn6IupxR0ryqGs8IpVOdOfKVJEOl3EM7J+9QGJ04?=
+ =?us-ascii?Q?7eQpLdkk/JJU2YlvNHF4ec3vL49X1OOdZ40xD8PNbGiP/c415J5iv2y5dZyH?=
+ =?us-ascii?Q?D08atcmUTFnI0yRi4BZ8kL1CCjCWoHQ10ZijPlEMCGTCRKaOGMcrp+Q+hoCn?=
+ =?us-ascii?Q?c5kOEgu+VYYFTBQrQ/r5Lx9G7fa0pctYN/4OOs8th2HxJ3skzBvqvK8tude7?=
+ =?us-ascii?Q?tK9zYvkAg3ZyDWqdYk/rehQ80hTq+0DrbwQSRDVzeoEwL8xMJKM8S/ALZ9r/?=
+ =?us-ascii?Q?9qRZ+VKj5C4mkGOr6pUF44O2N9HZjWihp1vOfAm2j3kBEjOKXe7zrFmNjtjv?=
+ =?us-ascii?Q?+KdeFYc+UH/tNsXruou9KqFBp5lsazU+6Smrz+99XsI/6ffuBWOR7ly/fSLl?=
+ =?us-ascii?Q?829mXhRp6jTzxIzqz/TsbDYUbSiuSmQZnEUHDgD6BGuoxXGj8RV5Asu7Bk0q?=
+ =?us-ascii?Q?BZnLWF0IYM3zlKAp4D+xrxtMKyi/w9D3EHBS4V0xiChBFxWM4vsyYgoFncsI?=
+ =?us-ascii?Q?c+ggzBq+fg8nTkIs4QTlps81vykIDx6zDyv/V54JRdj/kxzHBtqv0ifbqz0S?=
+ =?us-ascii?Q?x3jX2e1GNeScjig0a6Gm57Zpw6CbvoSGk6PvrzXMsESXP4bStbPO9vbtwKTk?=
+ =?us-ascii?Q?UaFfaJtzpYxKH+kFjPvRGI+GjmzG8MkGpI9q0u2i9cprghawmgI+/dTROLaB?=
+ =?us-ascii?Q?H8GJZMGOyrKwHG5Qi76bpQpjb5q43MZ4xMZHy3YUmX1Ixdmuy/m91W6O5uAB?=
+ =?us-ascii?Q?O5go7fj1spgqZFwjtH2bVm7tBCpbsuVENvwiNdOVjnZMYU9OxwBkqaRTB6TT?=
+ =?us-ascii?Q?s2fbGMccgoA9r4XjW4K48cjHeBTlTFUmNvezk0xFp3g6NhYzadgz6KofuuFe?=
+ =?us-ascii?Q?6ZYU33k+2DdvOhaLHN2M78SFYwzMTO2jVzIt9Jh/ncKzsqMU2XhoIq2jmJUM?=
+ =?us-ascii?Q?0E9YR/UnnQtX3NR3Eh/VcvNVLMqfve65KPzNve3SVPvvEYlwc8HA7uBcKr+x?=
+ =?us-ascii?Q?duBAp2hiBBNYhM4LC2MrZrZBboYERrThZSpbhKh1bzXr4j9rANPltRkZAIh8?=
+ =?us-ascii?Q?mTfjy2lc7oOClTio16iFmOI8vMQSye0lnwVn71dDlYLJ8fpRwAF+IfDyKlLK?=
+ =?us-ascii?Q?UDlcMeiMKaa9J9h6nZjjfV/MZ34MXukdZbynUhdfn69z7gaz9wQPpMPds2Lf?=
+ =?us-ascii?Q?K027p2JIbHtihXqJ62M7IdoZqZMLp8zkVsuGrq+gHVo+8B0wPaLFTknW0HOZ?=
+ =?us-ascii?Q?1Kp1+wcEzAsPsC7llzeSodpsfBxTNguCM3i3vArADwUQLJ+nI51OV3MDMIjy?=
+ =?us-ascii?Q?5gZrAYUXfl9McbGbEzSvBEg2nXYF78+xAxBZId7CW0Gox7pcqq/UBUSCIe5m?=
+ =?us-ascii?Q?11L+yVwqVtlhpYUZet62JlI8iTgp94T0q5TjdCtaKUrvVCA3Tt6XaUPe12ud?=
+ =?us-ascii?Q?tfeqWFnJseWdBjZ+Z9XW09K2sWHvFayEiGGfSP96O/HfT5m/ltQoJsgZKo3a?=
+ =?us-ascii?Q?v+t5rLwgGGkRBCjU4k2bvWK+w0DclT0cflECn0THBK6dxvUP4z8JoI0NJ8lq?=
+ =?us-ascii?Q?zEABIX11KFa2jw3wtzRgUYBp6kbLEVAHHpBSB7BY8nIrSp4maJkT1nFBSdWm?=
+X-MS-Exchange-AntiSpam-MessageData-1: +l+bSeU76FSG8EPyKkhcfpfiSRcOzhmGs4w=
+X-OriginatorOrg: corigine.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 8cc21cbf-eb50-4031-22f4-08da4a3761ff
+X-MS-Exchange-CrossTenant-AuthSource: PH0PR13MB4842.namprd13.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 09 Jun 2022 16:44:55.5519
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: fe128f2c-073b-4c20-818e-7246a585940c
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: Y++XvGWEkAZBpIqzCoe3Lt+XLKpwrWHzi9HY8C+v964BKvdEDDF4or8wgh46FTQzmK0tdnkzzuopsr/2Jx8omyumLB+/gAxeBr6i1BPG5Ug=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ0PR13MB5499
+X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+        DKIM_VALID,RCVD_IN_DNSWL_NONE,RCVD_IN_MSPIKE_H2,SPF_HELO_PASS,SPF_PASS,
         T_SCC_BODY_TEXT_LINE autolearn=ham autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
@@ -94,454 +119,48 @@ Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Wed, 2022-06-08 at 12:55 -0600, Alex Williamson wrote:
-> The use of 'extern' in function prototypes has been disrecommended in
-> the kernel coding style for several years now, remove them from all
-> vfio
-> related files so contributors no longer need to decide between style
-> and
-> consistency.
+On Thu, Jun 09, 2022 at 10:01:01AM -0600, Jonathan Corbet wrote:
+> Simon Horman <simon.horman@corigine.com> writes:
 > 
-> Signed-off-by: Alex Williamson <alex.williamson@redhat.com>
+> > Correct a typo in the description of interaction between
+> > the TCM and MMU.
+> >
+> > Found by inspection.
+> >
+> > Signed-off-by: Louis Peens <louis.peens@corigine.com>
+> > Signed-off-by: Simon Horman <simon.horman@corigine.com>
+> 
+> Here too I have to ask: what does this signoff chain mean?  If two
+> developers were needed for a single-character typo fix, then a
+> Co-developed-by line is appropriate.  If you are forwarding a patch from
+> Louis, then a From: line to get the authorship right is indicated ... ?
 
-Reviewed-by: Eric Farman <farman@linux.ibm.com>
+Hi Jon,
 
-> ---
-> 
-> A patch in the same vein was proposed about a year ago, but tied to
-> an ill
-> fated series and forgotten.  Now that we're at the beginning of a new
-> development cycle, I'd like to propose kicking off the v5.20 vfio
-> next
-> branch with this patch and would kindly ask anyone with pending
-> respins or
-> significant conflicts to rebase on top of this patch.  Thanks!
-> 
->  Documentation/driver-api/vfio-mediated-device.rst |   10 ++-
->  drivers/s390/cio/vfio_ccw_cp.h                    |   12 ++--
->  drivers/s390/cio/vfio_ccw_private.h               |    6 +-
->  drivers/vfio/fsl-mc/vfio_fsl_mc_private.h         |    2 -
->  drivers/vfio/platform/vfio_platform_private.h     |   21 +++---
->  include/linux/vfio.h                              |   70 ++++++++++-
-> ----------
->  include/linux/vfio_pci_core.h                     |   65 ++++++++++-
-> ---------
->  7 files changed, 91 insertions(+), 95 deletions(-)
-> 
-> diff --git a/Documentation/driver-api/vfio-mediated-device.rst
-> b/Documentation/driver-api/vfio-mediated-device.rst
-> index eded8719180f..1c57815619fd 100644
-> --- a/Documentation/driver-api/vfio-mediated-device.rst
-> +++ b/Documentation/driver-api/vfio-mediated-device.rst
-> @@ -114,11 +114,11 @@ to register and unregister itself with the core
-> driver:
->  
->  * Register::
->  
-> -    extern int  mdev_register_driver(struct mdev_driver *drv);
-> +    int mdev_register_driver(struct mdev_driver *drv);
->  
->  * Unregister::
->  
-> -    extern void mdev_unregister_driver(struct mdev_driver *drv);
-> +    void mdev_unregister_driver(struct mdev_driver *drv);
->  
->  The mediated bus driver's probe function should create a vfio_device
-> on top of
->  the mdev_device and connect it to an appropriate implementation of
-> @@ -127,8 +127,8 @@ vfio_device_ops.
->  When a driver wants to add the GUID creation sysfs to an existing
-> device it has
->  probe'd to then it should call::
->  
-> -	extern int  mdev_register_device(struct device *dev,
-> -	                                 struct mdev_driver
-> *mdev_driver);
-> +    int mdev_register_device(struct device *dev,
-> +                             struct mdev_driver *mdev_driver);
->  
->  This will provide the 'mdev_supported_types/XX/create' files which
-> can then be
->  used to trigger the creation of a mdev_device. The created
-> mdev_device will be
-> @@ -136,7 +136,7 @@ attached to the specified driver.
->  
->  When the driver needs to remove itself it calls::
->  
-> -	extern void mdev_unregister_device(struct device *dev);
-> +    void mdev_unregister_device(struct device *dev);
->  
->  Which will unbind and destroy all the created mdevs and remove the
-> sysfs files.
->  
-> diff --git a/drivers/s390/cio/vfio_ccw_cp.h
-> b/drivers/s390/cio/vfio_ccw_cp.h
-> index e4c436199b4c..3194d887e08e 100644
-> --- a/drivers/s390/cio/vfio_ccw_cp.h
-> +++ b/drivers/s390/cio/vfio_ccw_cp.h
-> @@ -41,11 +41,11 @@ struct channel_program {
->  	struct ccw1 *guest_cp;
->  };
->  
-> -extern int cp_init(struct channel_program *cp, union orb *orb);
-> -extern void cp_free(struct channel_program *cp);
-> -extern int cp_prefetch(struct channel_program *cp);
-> -extern union orb *cp_get_orb(struct channel_program *cp, u32
-> intparm, u8 lpm);
-> -extern void cp_update_scsw(struct channel_program *cp, union scsw
-> *scsw);
-> -extern bool cp_iova_pinned(struct channel_program *cp, u64 iova);
-> +int cp_init(struct channel_program *cp, union orb *orb);
-> +void cp_free(struct channel_program *cp);
-> +int cp_prefetch(struct channel_program *cp);
-> +union orb *cp_get_orb(struct channel_program *cp, u32 intparm, u8
-> lpm);
-> +void cp_update_scsw(struct channel_program *cp, union scsw *scsw);
-> +bool cp_iova_pinned(struct channel_program *cp, u64 iova);
->  
->  #endif
-> diff --git a/drivers/s390/cio/vfio_ccw_private.h
-> b/drivers/s390/cio/vfio_ccw_private.h
-> index 7272eb788612..b7163bac8cc7 100644
-> --- a/drivers/s390/cio/vfio_ccw_private.h
-> +++ b/drivers/s390/cio/vfio_ccw_private.h
-> @@ -119,10 +119,10 @@ struct vfio_ccw_private {
->  	struct work_struct	crw_work;
->  } __aligned(8);
->  
-> -extern int vfio_ccw_mdev_reg(struct subchannel *sch);
-> -extern void vfio_ccw_mdev_unreg(struct subchannel *sch);
-> +int vfio_ccw_mdev_reg(struct subchannel *sch);
-> +void vfio_ccw_mdev_unreg(struct subchannel *sch);
->  
-> -extern int vfio_ccw_sch_quiesce(struct subchannel *sch);
-> +int vfio_ccw_sch_quiesce(struct subchannel *sch);
->  
->  extern struct mdev_driver vfio_ccw_mdev_driver;
->  
-> diff --git a/drivers/vfio/fsl-mc/vfio_fsl_mc_private.h
-> b/drivers/vfio/fsl-mc/vfio_fsl_mc_private.h
-> index 4ad63ececb91..7a29f572f93d 100644
-> --- a/drivers/vfio/fsl-mc/vfio_fsl_mc_private.h
-> +++ b/drivers/vfio/fsl-mc/vfio_fsl_mc_private.h
-> @@ -39,7 +39,7 @@ struct vfio_fsl_mc_device {
->  	struct vfio_fsl_mc_irq      *mc_irqs;
->  };
->  
-> -extern int vfio_fsl_mc_set_irqs_ioctl(struct vfio_fsl_mc_device
-> *vdev,
-> +int vfio_fsl_mc_set_irqs_ioctl(struct vfio_fsl_mc_device *vdev,
->  			       u32 flags, unsigned int index,
->  			       unsigned int start, unsigned int count,
->  			       void *data);
-> diff --git a/drivers/vfio/platform/vfio_platform_private.h
-> b/drivers/vfio/platform/vfio_platform_private.h
-> index 520d2a8e8375..691b43f4b2b2 100644
-> --- a/drivers/vfio/platform/vfio_platform_private.h
-> +++ b/drivers/vfio/platform/vfio_platform_private.h
-> @@ -78,21 +78,20 @@ struct vfio_platform_reset_node {
->  	vfio_platform_reset_fn_t of_reset;
->  };
->  
-> -extern int vfio_platform_probe_common(struct vfio_platform_device
-> *vdev,
-> -				      struct device *dev);
-> +int vfio_platform_probe_common(struct vfio_platform_device *vdev,
-> +			       struct device *dev);
->  void vfio_platform_remove_common(struct vfio_platform_device *vdev);
->  
-> -extern int vfio_platform_irq_init(struct vfio_platform_device
-> *vdev);
-> -extern void vfio_platform_irq_cleanup(struct vfio_platform_device
-> *vdev);
-> +int vfio_platform_irq_init(struct vfio_platform_device *vdev);
-> +void vfio_platform_irq_cleanup(struct vfio_platform_device *vdev);
->  
-> -extern int vfio_platform_set_irqs_ioctl(struct vfio_platform_device
-> *vdev,
-> -					uint32_t flags, unsigned index,
-> -					unsigned start, unsigned count,
-> -					void *data);
-> +int vfio_platform_set_irqs_ioctl(struct vfio_platform_device *vdev,
-> +				 uint32_t flags, unsigned index,
-> +				 unsigned start, unsigned count, void
-> *data);
->  
-> -extern void __vfio_platform_register_reset(struct
-> vfio_platform_reset_node *n);
-> -extern void vfio_platform_unregister_reset(const char *compat,
-> -					   vfio_platform_reset_fn_t
-> fn);
-> +void __vfio_platform_register_reset(struct vfio_platform_reset_node
-> *n);
-> +void vfio_platform_unregister_reset(const char *compat,
-> +				    vfio_platform_reset_fn_t fn);
->  #define vfio_platform_register_reset(__compat, __reset)		
-> \
->  static struct vfio_platform_reset_node __reset ## _node = {	\
->  	.owner = THIS_MODULE,					\
-> diff --git a/include/linux/vfio.h b/include/linux/vfio.h
-> index aa888cc51757..49580fa2073a 100644
-> --- a/include/linux/vfio.h
-> +++ b/include/linux/vfio.h
-> @@ -140,19 +140,19 @@ int vfio_mig_get_next_state(struct vfio_device
-> *device,
->  /*
->   * External user API
->   */
-> -extern struct iommu_group *vfio_file_iommu_group(struct file *file);
-> -extern bool vfio_file_enforced_coherent(struct file *file);
-> -extern void vfio_file_set_kvm(struct file *file, struct kvm *kvm);
-> -extern bool vfio_file_has_dev(struct file *file, struct vfio_device
-> *device);
-> +struct iommu_group *vfio_file_iommu_group(struct file *file);
-> +bool vfio_file_enforced_coherent(struct file *file);
-> +void vfio_file_set_kvm(struct file *file, struct kvm *kvm);
-> +bool vfio_file_has_dev(struct file *file, struct vfio_device
-> *device);
->  
->  #define VFIO_PIN_PAGES_MAX_ENTRIES	(PAGE_SIZE/sizeof(unsigned
-> long))
->  
-> -extern int vfio_pin_pages(struct vfio_device *device, unsigned long
-> *user_pfn,
-> -			  int npage, int prot, unsigned long
-> *phys_pfn);
-> -extern int vfio_unpin_pages(struct vfio_device *device, unsigned
-> long *user_pfn,
-> -			    int npage);
-> -extern int vfio_dma_rw(struct vfio_device *device, dma_addr_t
-> user_iova,
-> -		       void *data, size_t len, bool write);
-> +int vfio_pin_pages(struct vfio_device *device, unsigned long
-> *user_pfn,
-> +		   int npage, int prot, unsigned long *phys_pfn);
-> +int vfio_unpin_pages(struct vfio_device *device, unsigned long
-> *user_pfn,
-> +		     int npage);
-> +int vfio_dma_rw(struct vfio_device *device, dma_addr_t user_iova,
-> +		void *data, size_t len, bool write);
->  
->  /* each type has independent events */
->  enum vfio_notify_type {
-> @@ -162,13 +162,13 @@ enum vfio_notify_type {
->  /* events for VFIO_IOMMU_NOTIFY */
->  #define VFIO_IOMMU_NOTIFY_DMA_UNMAP	BIT(0)
->  
-> -extern int vfio_register_notifier(struct vfio_device *device,
-> -				  enum vfio_notify_type type,
-> -				  unsigned long *required_events,
-> -				  struct notifier_block *nb);
-> -extern int vfio_unregister_notifier(struct vfio_device *device,
-> -				    enum vfio_notify_type type,
-> -				    struct notifier_block *nb);
-> +int vfio_register_notifier(struct vfio_device *device,
-> +			   enum vfio_notify_type type,
-> +			   unsigned long *required_events,
-> +			   struct notifier_block *nb);
-> +int vfio_unregister_notifier(struct vfio_device *device,
-> +			     enum vfio_notify_type type,
-> +			     struct notifier_block *nb);
->  
->  
->  /*
-> @@ -178,25 +178,24 @@ struct vfio_info_cap {
->  	struct vfio_info_cap_header *buf;
->  	size_t size;
->  };
-> -extern struct vfio_info_cap_header *vfio_info_cap_add(
-> -		struct vfio_info_cap *caps, size_t size, u16 id, u16
-> version);
-> -extern void vfio_info_cap_shift(struct vfio_info_cap *caps, size_t
-> offset);
-> +struct vfio_info_cap_header *vfio_info_cap_add(struct vfio_info_cap
-> *caps,
-> +					       size_t size, u16 id,
-> +					       u16 version);
-> +void vfio_info_cap_shift(struct vfio_info_cap *caps, size_t offset);
->  
-> -extern int vfio_info_add_capability(struct vfio_info_cap *caps,
-> -				    struct vfio_info_cap_header *cap,
-> -				    size_t size);
-> +int vfio_info_add_capability(struct vfio_info_cap *caps,
-> +			     struct vfio_info_cap_header *cap, size_t
-> size);
->  
-> -extern int vfio_set_irqs_validate_and_prepare(struct vfio_irq_set
-> *hdr,
-> -					      int num_irqs, int
-> max_irq_type,
-> -					      size_t *data_size);
-> +int vfio_set_irqs_validate_and_prepare(struct vfio_irq_set *hdr,
-> +				       int num_irqs, int max_irq_type,
-> +				       size_t *data_size);
->  
->  struct pci_dev;
->  #if IS_ENABLED(CONFIG_VFIO_SPAPR_EEH)
-> -extern void vfio_spapr_pci_eeh_open(struct pci_dev *pdev);
-> -extern void vfio_spapr_pci_eeh_release(struct pci_dev *pdev);
-> -extern long vfio_spapr_iommu_eeh_ioctl(struct iommu_group *group,
-> -				       unsigned int cmd,
-> -				       unsigned long arg);
-> +void vfio_spapr_pci_eeh_open(struct pci_dev *pdev);
-> +void vfio_spapr_pci_eeh_release(struct pci_dev *pdev);
-> +long vfio_spapr_iommu_eeh_ioctl(struct iommu_group *group, unsigned
-> int cmd,
-> +				unsigned long arg);
->  #else
->  static inline void vfio_spapr_pci_eeh_open(struct pci_dev *pdev)
->  {
-> @@ -230,10 +229,9 @@ struct virqfd {
->  	struct virqfd		**pvirqfd;
->  };
->  
-> -extern int vfio_virqfd_enable(void *opaque,
-> -			      int (*handler)(void *, void *),
-> -			      void (*thread)(void *, void *),
-> -			      void *data, struct virqfd **pvirqfd, int
-> fd);
-> -extern void vfio_virqfd_disable(struct virqfd **pvirqfd);
-> +int vfio_virqfd_enable(void *opaque, int (*handler)(void *, void *),
-> +		       void (*thread)(void *, void *), void *data,
-> +		       struct virqfd **pvirqfd, int fd);
-> +void vfio_virqfd_disable(struct virqfd **pvirqfd);
->  
->  #endif /* VFIO_H */
-> diff --git a/include/linux/vfio_pci_core.h
-> b/include/linux/vfio_pci_core.h
-> index 23c176d4b073..22de2bce6394 100644
-> --- a/include/linux/vfio_pci_core.h
-> +++ b/include/linux/vfio_pci_core.h
-> @@ -147,23 +147,23 @@ struct vfio_pci_core_device {
->  #define is_irq_none(vdev) (!(is_intx(vdev) || is_msi(vdev) ||
-> is_msix(vdev)))
->  #define irq_is(vdev, type) (vdev->irq_type == type)
->  
-> -extern void vfio_pci_intx_mask(struct vfio_pci_core_device *vdev);
-> -extern void vfio_pci_intx_unmask(struct vfio_pci_core_device *vdev);
-> +void vfio_pci_intx_mask(struct vfio_pci_core_device *vdev);
-> +void vfio_pci_intx_unmask(struct vfio_pci_core_device *vdev);
->  
-> -extern int vfio_pci_set_irqs_ioctl(struct vfio_pci_core_device
-> *vdev,
-> -				   uint32_t flags, unsigned index,
-> -				   unsigned start, unsigned count, void
-> *data);
-> +int vfio_pci_set_irqs_ioctl(struct vfio_pci_core_device *vdev,
-> +			    uint32_t flags, unsigned index,
-> +			    unsigned start, unsigned count, void
-> *data);
->  
-> -extern ssize_t vfio_pci_config_rw(struct vfio_pci_core_device *vdev,
-> -				  char __user *buf, size_t count,
-> -				  loff_t *ppos, bool iswrite);
-> +ssize_t vfio_pci_config_rw(struct vfio_pci_core_device *vdev,
-> +			   char __user *buf, size_t count,
-> +			   loff_t *ppos, bool iswrite);
->  
-> -extern ssize_t vfio_pci_bar_rw(struct vfio_pci_core_device *vdev,
-> char __user *buf,
-> -			       size_t count, loff_t *ppos, bool
-> iswrite);
-> +ssize_t vfio_pci_bar_rw(struct vfio_pci_core_device *vdev, char
-> __user *buf,
-> +			size_t count, loff_t *ppos, bool iswrite);
->  
->  #ifdef CONFIG_VFIO_PCI_VGA
-> -extern ssize_t vfio_pci_vga_rw(struct vfio_pci_core_device *vdev,
-> char __user *buf,
-> -			       size_t count, loff_t *ppos, bool
-> iswrite);
-> +ssize_t vfio_pci_vga_rw(struct vfio_pci_core_device *vdev, char
-> __user *buf,
-> +			size_t count, loff_t *ppos, bool iswrite);
->  #else
->  static inline ssize_t vfio_pci_vga_rw(struct vfio_pci_core_device
-> *vdev,
->  				      char __user *buf, size_t count,
-> @@ -173,32 +173,31 @@ static inline ssize_t vfio_pci_vga_rw(struct
-> vfio_pci_core_device *vdev,
->  }
->  #endif
->  
-> -extern long vfio_pci_ioeventfd(struct vfio_pci_core_device *vdev,
-> loff_t offset,
-> -			       uint64_t data, int count, int fd);
-> +long vfio_pci_ioeventfd(struct vfio_pci_core_device *vdev, loff_t
-> offset,
-> +			uint64_t data, int count, int fd);
->  
-> -extern int vfio_pci_init_perm_bits(void);
-> -extern void vfio_pci_uninit_perm_bits(void);
-> +int vfio_pci_init_perm_bits(void);
-> +void vfio_pci_uninit_perm_bits(void);
->  
-> -extern int vfio_config_init(struct vfio_pci_core_device *vdev);
-> -extern void vfio_config_free(struct vfio_pci_core_device *vdev);
-> +int vfio_config_init(struct vfio_pci_core_device *vdev);
-> +void vfio_config_free(struct vfio_pci_core_device *vdev);
->  
-> -extern int vfio_pci_register_dev_region(struct vfio_pci_core_device
-> *vdev,
-> -					unsigned int type, unsigned int
-> subtype,
-> -					const struct vfio_pci_regops
-> *ops,
-> -					size_t size, u32 flags, void
-> *data);
-> +int vfio_pci_register_dev_region(struct vfio_pci_core_device *vdev,
-> +				 unsigned int type, unsigned int
-> subtype,
-> +				 const struct vfio_pci_regops *ops,
-> +				 size_t size, u32 flags, void *data);
->  
-> -extern int vfio_pci_set_power_state(struct vfio_pci_core_device
-> *vdev,
-> -				    pci_power_t state);
-> +int vfio_pci_set_power_state(struct vfio_pci_core_device *vdev,
-> +			     pci_power_t state);
->  
-> -extern bool __vfio_pci_memory_enabled(struct vfio_pci_core_device
-> *vdev);
-> -extern void vfio_pci_zap_and_down_write_memory_lock(struct
-> vfio_pci_core_device
-> -						    *vdev);
-> -extern u16 vfio_pci_memory_lock_and_enable(struct
-> vfio_pci_core_device *vdev);
-> -extern void vfio_pci_memory_unlock_and_restore(struct
-> vfio_pci_core_device *vdev,
-> -					       u16 cmd);
-> +bool __vfio_pci_memory_enabled(struct vfio_pci_core_device *vdev);
-> +void vfio_pci_zap_and_down_write_memory_lock(struct
-> vfio_pci_core_device *vdev);
-> +u16 vfio_pci_memory_lock_and_enable(struct vfio_pci_core_device
-> *vdev);
-> +void vfio_pci_memory_unlock_and_restore(struct vfio_pci_core_device
-> *vdev,
-> +					u16 cmd);
->  
->  #ifdef CONFIG_VFIO_PCI_IGD
-> -extern int vfio_pci_igd_init(struct vfio_pci_core_device *vdev);
-> +int vfio_pci_igd_init(struct vfio_pci_core_device *vdev);
->  #else
->  static inline int vfio_pci_igd_init(struct vfio_pci_core_device
-> *vdev)
->  {
-> @@ -207,8 +206,8 @@ static inline int vfio_pci_igd_init(struct
-> vfio_pci_core_device *vdev)
->  #endif
->  
->  #ifdef CONFIG_S390
-> -extern int vfio_pci_info_zdev_add_caps(struct vfio_pci_core_device
-> *vdev,
-> -				       struct vfio_info_cap *caps);
-> +int vfio_pci_info_zdev_add_caps(struct vfio_pci_core_device *vdev,
-> +				struct vfio_info_cap *caps);
->  #else
->  static inline int vfio_pci_info_zdev_add_caps(struct
-> vfio_pci_core_device *vdev,
->  					      struct vfio_info_cap
-> *caps)
-> 
-> 
+The patch was created by me.
 
+Due to internal processes a release by a colleague is provided, that is the
+purpose of Louis's sign off (overkill in this case, I agree).
+
+If Louis's sign-off is not necessary from your perspective then I'm happy
+for you to drop it or for my to repost the patch without it.
+
+> >  Documentation/arm/tcm.rst | 2 +-
+> >  1 file changed, 1 insertion(+), 1 deletion(-)
+> >
+> > diff --git a/Documentation/arm/tcm.rst b/Documentation/arm/tcm.rst
+> > index b256f9783883..1dc6c39220f9 100644
+> > --- a/Documentation/arm/tcm.rst
+> > +++ b/Documentation/arm/tcm.rst
+> > @@ -34,7 +34,7 @@ CPU so it is usually wise not to overlap any physical RAM with
+> >  the TCM.
+> >  
+> >  The TCM memory can then be remapped to another address again using
+> > -the MMU, but notice that the TCM if often used in situations where
+> > +the MMU, but notice that the TCM is often used in situations where
+> >  the MMU is turned off. To avoid confusion the current Linux
+> >  implementation will map the TCM 1 to 1 from physical to virtual
+> 
+> Thanks,
+> 
+> jon
