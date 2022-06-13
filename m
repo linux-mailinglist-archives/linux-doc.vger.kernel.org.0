@@ -2,162 +2,149 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 88FA154819A
-	for <lists+linux-doc@lfdr.de>; Mon, 13 Jun 2022 10:28:18 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 0DC8A548127
+	for <lists+linux-doc@lfdr.de>; Mon, 13 Jun 2022 10:02:47 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S238134AbiFMIUB (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 13 Jun 2022 04:20:01 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:51540 "EHLO
+        id S232215AbiFMIAh (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 13 Jun 2022 04:00:37 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:46050 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S233189AbiFMIUA (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Mon, 13 Jun 2022 04:20:00 -0400
-Received: from conuserg-08.nifty.com (conuserg-08.nifty.com [210.131.2.75])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 08E9C1EAE5;
-        Mon, 13 Jun 2022 01:19:58 -0700 (PDT)
-Received: from grover.sesame (133-32-177-133.west.xps.vectant.ne.jp [133.32.177.133]) (authenticated)
-        by conuserg-08.nifty.com with ESMTP id 25D8Hqcs011074;
-        Mon, 13 Jun 2022 17:17:52 +0900
-DKIM-Filter: OpenDKIM Filter v2.10.3 conuserg-08.nifty.com 25D8Hqcs011074
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nifty.com;
-        s=dec2015msa; t=1655108273;
-        bh=CmhbukpBhZs7hao25rQlICLG+Ns0/87DXmi5jDvd2iE=;
-        h=From:To:Cc:Subject:Date:From;
-        b=hBKp+jS9P7HmrcT7zp7l6kQNJUNh88ugzYtEluVI0KDn7TlAkLIDc8ju3Mi1RuIeH
-         N5S8Z6ThORDDGC/9XFYl+0Zod6QhGHMSD7Ds4vB+DnLevHTpIi8lZcB6NtoxMxRfbX
-         bTCLu7klIZirLYKtICeNotC+RVxKTvmM+qAH2v7jrhz5zjVquH0z4tSbw+U510lBrN
-         oh5JlCQJy7sMEamM1ncpm4+yIe8e/puiVt2+HU+ka2BNfHM9hZY2hio62Oy2Ir1vVO
-         UwKckHWfho3ccbl9oir28ZefJYO1uSj4xgWcjC4wI3buDWwwhHoYScccyxw7eWa4K2
-         IFrRwCAKfKCZg==
-X-Nifty-SrcIP: [133.32.177.133]
-From:   Masahiro Yamada <masahiroy@kernel.org>
-To:     Luis Chamberlain <mcgrof@kernel.org>, linux-modules@vger.kernel.org
-Cc:     Josh Poimboeuf <jpoimboe@kernel.org>,
-        Jiri Kosina <jikos@kernel.org>,
-        Miroslav Benes <mbenes@suse.cz>,
-        Petr Mladek <pmladek@suse.com>,
-        Joe Lawrence <joe.lawrence@redhat.com>,
-        live-patching@vger.kernel.org,
-        Masahiro Yamada <masahiroy@kernel.org>,
-        Alex Shi <alexs@kernel.org>,
-        Federico Vaga <federico.vaga@vaga.pv.it>,
-        Jonathan Corbet <corbet@lwn.net>,
-        Matthias Maennich <maennich@google.com>,
-        Yanteng Si <siyanteng@loongson.cn>, linux-doc@vger.kernel.org,
-        linux-kernel@vger.kernel.org
-Subject: [PATCH] doc: module: update file references
-Date:   Mon, 13 Jun 2022 17:17:40 +0900
-Message-Id: <20220613081741.1699713-1-masahiroy@kernel.org>
-X-Mailer: git-send-email 2.32.0
+        with ESMTP id S232426AbiFMIAb (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Mon, 13 Jun 2022 04:00:31 -0400
+Received: from szxga01-in.huawei.com (szxga01-in.huawei.com [45.249.212.187])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 1991465CD;
+        Mon, 13 Jun 2022 01:00:29 -0700 (PDT)
+Received: from dggpemm500023.china.huawei.com (unknown [172.30.72.53])
+        by szxga01-in.huawei.com (SkyGuard) with ESMTP id 4LM3qt6nPZzjXZ3;
+        Mon, 13 Jun 2022 15:59:22 +0800 (CST)
+Received: from dggpemm500014.china.huawei.com (7.185.36.153) by
+ dggpemm500023.china.huawei.com (7.185.36.83) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2375.24; Mon, 13 Jun 2022 16:00:25 +0800
+Received: from localhost.localdomain (10.175.112.125) by
+ dggpemm500014.china.huawei.com (7.185.36.153) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2375.24; Mon, 13 Jun 2022 16:00:24 +0800
+From:   Wupeng Ma <mawupeng1@huawei.com>
+To:     <corbet@lwn.net>, <will@kernel.org>, <ardb@kernel.org>,
+        <catalin.marinas@arm.com>
+CC:     <tglx@linutronix.de>, <mingo@redhat.com>, <bp@alien8.de>,
+        <dave.hansen@linux.intel.com>, <x86@kernel.org>, <hpa@zytor.com>,
+        <dvhart@infradead.org>, <andy@infradead.org>, <rppt@kernel.org>,
+        <akpm@linux-foundation.org>, <paul.walmsley@sifive.com>,
+        <palmer@dabbelt.com>, <aou@eecs.berkeley.edu>,
+        <paulmck@kernel.org>, <keescook@chromium.org>,
+        <songmuchun@bytedance.com>, <rdunlap@infradead.org>,
+        <damien.lemoal@opensource.wdc.com>, <swboyd@chromium.org>,
+        <wei.liu@kernel.org>, <robin.murphy@arm.com>, <david@redhat.com>,
+        <mawupeng1@huawei.com>, <anshuman.khandual@arm.com>,
+        <thunder.leizhen@huawei.com>, <wangkefeng.wang@huawei.com>,
+        <gpiccoli@igalia.com>, <chenhuacai@kernel.org>,
+        <geert@linux-m68k.org>, <vijayb@linux.microsoft.com>,
+        <linux-doc@vger.kernel.org>, <linux-kernel@vger.kernel.org>,
+        <linux-arm-kernel@lists.infradead.org>,
+        <linux-efi@vger.kernel.org>, <platform-driver-x86@vger.kernel.org>,
+        <linux-mm@kvack.org>, <linux-riscv@lists.infradead.org>
+Subject: [PATCH v4 0/6] introduce mirrored memory support for arm64
+Date:   Mon, 13 Jun 2022 16:21:41 +0800
+Message-ID: <20220613082147.183145-1-mawupeng1@huawei.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-Spam-Status: No, score=-1.2 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-        DKIM_VALID,RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,SPF_SOFTFAIL,
-        T_SCC_BODY_TEXT_LINE autolearn=no autolearn_force=no version=3.4.6
+Content-Transfer-Encoding: 7BIT
+Content-Type:   text/plain; charset=US-ASCII
+X-Originating-IP: [10.175.112.125]
+X-ClientProxiedBy: dggems702-chm.china.huawei.com (10.3.19.179) To
+ dggpemm500014.china.huawei.com (7.185.36.153)
+X-CFilter-Loop: Reflected
+X-Spam-Status: No, score=-4.2 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_MED,
+        SPF_HELO_NONE,SPF_PASS,T_SCC_BODY_TEXT_LINE autolearn=ham
+        autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Adjust documents to the file moves made by commit cfc1d277891e ("module:
-Move all into module/").
+From: Ma Wupeng <mawupeng1@huawei.com>
 
-Signed-off-by: Masahiro Yamada <masahiroy@kernel.org>
----
+Commit b05b9f5f9dcf ("x86, mirror: x86 enabling - find mirrored memory ranges")
+introduced mirrored memory support for x86. This support rely on UEFI to
+report mirrored memory address ranges.  See UEFI 2.5 spec pages 157-158:
 
-I did not touch
+  http://www.uefi.org/sites/default/files/resources/UEFI%202_5.pdf
 
-  Documentation/translations/zh_CN/core-api/kernel-api.rst
+Memory mirroring is a technique used to separate memory into two separate
+channels, usually on a memory device, like a server. In memory mirroring,
+one channel is copied to another to create redundancy. This method makes
+input/output (I/O) registers and memory appear with more than one address
+range because the same physical byte is accessible at more than one
+address. Using memory mirroring, higher memory reliability and a higher
+level of memory consolidation are possible.
 
-because I cannot modify it.
+These EFI memory regions have various attributes, and the "mirrored"
+attribute is one of them. The physical memory region whose descriptors
+in EFI memory map has EFI_MEMORY_MORE_RELIABLE attribute (bit: 16) are
+mirrored. The address range mirroring feature of the kernel arranges such
+mirrored regions into normal zones and other regions into movable zones.
 
- Documentation/core-api/kernel-api.rst                  |  2 +-
- Documentation/core-api/symbol-namespaces.rst           |  4 ++--
- Documentation/livepatch/module-elf-format.rst          | 10 +++++-----
- .../translations/it_IT/core-api/symbol-namespaces.rst  |  6 +++---
- .../translations/zh_CN/core-api/symbol-namespaces.rst  |  2 +-
- 5 files changed, 12 insertions(+), 12 deletions(-)
+Arm64 can support this too. So mirrored memory support is added to support
+arm64.
 
-diff --git a/Documentation/core-api/kernel-api.rst b/Documentation/core-api/kernel-api.rst
-index d6b3f94b9f1f..0793c400d4b0 100644
---- a/Documentation/core-api/kernel-api.rst
-+++ b/Documentation/core-api/kernel-api.rst
-@@ -223,7 +223,7 @@ Module Loading
- Inter Module support
- --------------------
- 
--Refer to the file kernel/module.c for more information.
-+Refer to the files in kernel/module/ for more information.
- 
- Hardware Interfaces
- ===================
-diff --git a/Documentation/core-api/symbol-namespaces.rst b/Documentation/core-api/symbol-namespaces.rst
-index 5ad9e0abe42c..12e4aecdae94 100644
---- a/Documentation/core-api/symbol-namespaces.rst
-+++ b/Documentation/core-api/symbol-namespaces.rst
-@@ -51,8 +51,8 @@ namespace ``USB_STORAGE``, use::
- The corresponding ksymtab entry struct ``kernel_symbol`` will have the member
- ``namespace`` set accordingly. A symbol that is exported without a namespace will
- refer to ``NULL``. There is no default namespace if none is defined. ``modpost``
--and kernel/module.c make use the namespace at build time or module load time,
--respectively.
-+and kernel/module/main.c make use the namespace at build time or module load
-+time, respectively.
- 
- 2.2 Using the DEFAULT_SYMBOL_NAMESPACE define
- =============================================
-diff --git a/Documentation/livepatch/module-elf-format.rst b/Documentation/livepatch/module-elf-format.rst
-index dbe9b400e39f..7347638895a0 100644
---- a/Documentation/livepatch/module-elf-format.rst
-+++ b/Documentation/livepatch/module-elf-format.rst
-@@ -210,11 +210,11 @@ module->symtab.
- =====================================
- Normally, a stripped down copy of a module's symbol table (containing only
- "core" symbols) is made available through module->symtab (See layout_symtab()
--in kernel/module.c). For livepatch modules, the symbol table copied into memory
--on module load must be exactly the same as the symbol table produced when the
--patch module was compiled. This is because the relocations in each livepatch
--relocation section refer to their respective symbols with their symbol indices,
--and the original symbol indices (and thus the symtab ordering) must be
-+in kernel/module/kallsyms.c). For livepatch modules, the symbol table copied
-+into memory on module load must be exactly the same as the symbol table produced
-+when the patch module was compiled. This is because the relocations in each
-+livepatch relocation section refer to their respective symbols with their symbol
-+indices, and the original symbol indices (and thus the symtab ordering) must be
- preserved in order for apply_relocate_add() to find the right symbol.
- 
- For example, take this particular rela from a livepatch module:::
-diff --git a/Documentation/translations/it_IT/core-api/symbol-namespaces.rst b/Documentation/translations/it_IT/core-api/symbol-namespaces.rst
-index 42f5d04e38ec..0f6898860d6d 100644
---- a/Documentation/translations/it_IT/core-api/symbol-namespaces.rst
-+++ b/Documentation/translations/it_IT/core-api/symbol-namespaces.rst
-@@ -50,9 +50,9 @@ Di conseguenza, nella tabella dei simboli del kernel ci sarà una voce
- rappresentata dalla struttura ``kernel_symbol`` che avrà il campo
- ``namespace`` (spazio dei nomi) impostato. Un simbolo esportato senza uno spazio
- dei nomi avrà questo campo impostato a ``NULL``. Non esiste uno spazio dei nomi
--di base. Il programma ``modpost`` e il codice in kernel/module.c usano lo spazio
--dei nomi, rispettivamente, durante la compilazione e durante il caricamento
--di un modulo.
-+di base. Il programma ``modpost`` e il codice in kernel/module/main.c usano lo
-+spazio dei nomi, rispettivamente, durante la compilazione e durante il
-+caricamento di un modulo.
- 
- 2.2 Usare il simbolo di preprocessore DEFAULT_SYMBOL_NAMESPACE
- ==============================================================
-diff --git a/Documentation/translations/zh_CN/core-api/symbol-namespaces.rst b/Documentation/translations/zh_CN/core-api/symbol-namespaces.rst
-index 6abf7ed534ca..bb16f0611046 100644
---- a/Documentation/translations/zh_CN/core-api/symbol-namespaces.rst
-+++ b/Documentation/translations/zh_CN/core-api/symbol-namespaces.rst
-@@ -52,7 +52,7 @@
- 
- 相应的 ksymtab 条目结构体 ``kernel_symbol`` 将有相应的成员 ``命名空间`` 集。
- 导出时未指明命名空间的符号将指向 ``NULL`` 。如果没有定义命名空间，则默认没有。
--``modpost`` 和kernel/module.c分别在构建时或模块加载时使用名称空间。
-+``modpost`` 和kernel/module/main.c分别在构建时或模块加载时使用名称空间。
- 
- 2.2 使用DEFAULT_SYMBOL_NAMESPACE定义
- ====================================
+The main purpose of this patch set is to introduce mirrored support for
+arm64 and we have already fixed the problems we had which is shown in
+patch #5 to patch #8 and try to bring total isolation in patch #9 which
+will disable mirror feature if kernelcore is not specified.
+
+In order to test this support in arm64:
+- patch this patch set
+- add kernelcore=mirror in kernel parameter
+- start you kernel
+
+Patch #1-#2 introduce mirrored memory support form arm64.
+Patch #3-#5 fix some bugs for arm64 if memory reliable is enabled.
+Patch #6 disable mirror feature if kernelcore is not specified.
+
+Thanks to Ard Biesheuvel's hard work [1], now kernel will perfer mirrored
+memory if kaslr is enabled.
+
+[1] https://lore.kernel.org/linux-arm-kernel/CAMj1kXEPVEzMgOM4+Yj6PxHA-jFuDOAUdDJSiSxy_XaP4P7LSw@mail.gmail.com/T/
+
+Changelog since v3:
+- limit warning message in vmemmap_verify via pr_warn_once()
+- only clear memblock_nomap flags rather than bring the mirrored flag back
+- disable mirrored feature in memblock_mark_mirror()
+
+Changelog since v2:
+- remove efi_fake_mem support
+- remove Commit ("remove some redundant code in ia64 efi_init") since
+  efi_print_memmap() is not public
+- add mirror flag back on initrd memory
+
+Changelog since v1:
+- update changelog in cover letter
+- use PHYS_PFN in patch #7
+
+Ma Wupeng (6):
+  efi: Make efi_find_mirror() public
+  arm64/mirror: arm64 enabling - find mirrored memory ranges
+  mm: Ratelimited mirrored memory related warning messages
+  mm: Limit warning message in vmemmap_verify() to once
+  mm: Only remove nomap flag for initrd
+  memblock: Disable mirror feature if kernelcore is not specified
+
+ .../admin-guide/kernel-parameters.txt         |  2 +-
+ arch/arm64/kernel/setup.c                     |  1 +
+ arch/arm64/mm/init.c                          |  2 +-
+ arch/x86/include/asm/efi.h                    |  4 ----
+ arch/x86/platform/efi/efi.c                   | 23 -------------------
+ drivers/firmware/efi/efi.c                    | 23 +++++++++++++++++++
+ include/linux/efi.h                           |  3 +++
+ mm/internal.h                                 |  2 ++
+ mm/memblock.c                                 |  7 ++++--
+ mm/page_alloc.c                               |  2 +-
+ mm/sparse-vmemmap.c                           |  2 +-
+ 11 files changed, 38 insertions(+), 33 deletions(-)
+
 -- 
-2.32.0
+2.25.1
 
