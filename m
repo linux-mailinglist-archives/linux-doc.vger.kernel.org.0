@@ -2,63 +2,117 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 576E5548697
-	for <lists+linux-doc@lfdr.de>; Mon, 13 Jun 2022 17:57:16 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 1AA4C5497FA
+	for <lists+linux-doc@lfdr.de>; Mon, 13 Jun 2022 18:36:35 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S244395AbiFMPhN (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 13 Jun 2022 11:37:13 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:52620 "EHLO
+        id S1351465AbiFMLJq (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 13 Jun 2022 07:09:46 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:45516 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S238575AbiFMPgr (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Mon, 13 Jun 2022 11:36:47 -0400
-Received: from email.cn (m218-153.88.com [110.43.218.153])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 58BA45F49
-        for <linux-doc@vger.kernel.org>; Mon, 13 Jun 2022 06:09:53 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=email.cn;
-        s=dkim; h=Date:From:To; bh=TYscY/mQPzLGWAWK7h0BiuyJnRK4Q5LM4GHib
-        Br6zLY=; b=cLjH2EJ19NXxGat9O3S5jqLnedZQescTii++cCRR1bhuKOEwupaRJ
-        S/+4+Na64g0t4WJq77i9xkPvbyxymTkt0HqSJj7dyyIgYgjfXD/dBILZnLr6NudS
-        HCbCfgYQ7STZ08w4ZNeMGkegZufTJYrPYUFQU1KlkNfben+NNXsmnI=
-Received: from bobwxc.mipc (unknown [120.242.69.242])
-        by v_coremail2-frontend-2 (Coremail) with SMTP id GiKnCgCHLxQMN6dikWoEAA--.14573S2;
-        Mon, 13 Jun 2022 21:09:34 +0800 (CST)
-Date:   Mon, 13 Jun 2022 21:09:32 +0800
-From:   "Wu X.C." <bobwxc@email.cn>
-To:     Yanteng Si <siyanteng@loongson.cn>
-Cc:     corbet@lwn.net, alexs@kernel.org, seakeel@gmail.com,
-        chenhuacai@kernel.org, jiaxun.yang@flygoat.com,
-        linux-doc@vger.kernel.org, siyanteng01@gmail.com,
-        zhoubinbin@loongson.cn
-Subject: Re: [PATCH v2 1/3] docs/zh_CN: Update the translation of highmem to
- 5.19-rc1
-Message-ID: <Yqc3DMR7lIGxyAwB@bobwxc.mipc>
-References: <cover.1655094814.git.siyanteng@loongson.cn>
- <044c20a3a8717868bfdf409d56ba485b367c0c1a.1655094814.git.siyanteng@loongson.cn>
-MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
+        with ESMTP id S1351704AbiFMLHl (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Mon, 13 Jun 2022 07:07:41 -0400
+Received: from NAM11-BN8-obe.outbound.protection.outlook.com (mail-bn8nam11on2079.outbound.protection.outlook.com [40.107.236.79])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 7DF053389F
+        for <linux-doc@vger.kernel.org>; Mon, 13 Jun 2022 03:35:12 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=VyFl4jXFEqpPrGWs0F0xfrvDWD0GkeLNmUMRykwvY/NUUzGcYciBbS9bZ/4ISX9Sw7JdtPVfHY5pRNQUBADjAHHTh+R7M4sW1h01osF/ndPYg2e5IN2o/JA2JIc2YiRHUOOVaPUU3lbnnNMHxGslWa9/c8XwyJSDvjAxWiDx5lhKJre7H5LDpvci99gKNQOpz3G2Jv3F5Hd0Aw2j1CYaAShxhuENjd30KqkgNrwAk8ASYMYIpcChG3xCuB+E+FlIaYBU0E9JUG8s5w3aX6tPOQR+PtQn1LgRS6yaQrHuEhwTPHaBYcji1KksKE2O1hQRe/pRuGiEI8V7aZdTQm811A==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=l8hKt6DeS08PRyJyMw0u1aDM47+JgmYVZ6cyEFlaooU=;
+ b=H+ixmA0UXbXpV2Zml6U5z3H1pf4hZOzyeCZoRhW140eoX6nlSW+L5auPoBZMXCd/t4y11dO2LMXBK76MztlXzBMd9x7+9vT+yxmDnN9d+PVvOZfBpecvWLNuxadkpnBzVDC9mXA1zf+He6DLUz8x0OPNOW8JPNWn/sJn0C9+a1T1os9m5lNu3RXSSSIKOFaQ7tBG2Zdh7QlkGFzUIe2+yVJnit7tTsq5buSugbQmE++nCGHaK1/QVXJJ/SkXqLljj8C7WPLN/4fahoKzZTjDvXe4Z+lSAY61H33LhXwkJCWZaJkVdYINAmORUqoCfs8m7UK1oUpwsxEUwfJK6YXdwg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=nvidia.com; dmarc=pass action=none header.from=nvidia.com;
+ dkim=pass header.d=nvidia.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
+ s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=l8hKt6DeS08PRyJyMw0u1aDM47+JgmYVZ6cyEFlaooU=;
+ b=Y3T1wWjzBWGGkWmGcP+ABY0oD9UzPf46nw0X5+Y5Yw11coOkWcTBeBjIjF4jGNOMd69el1A+BuTjnJbd5uLABUseeiBH6GHh7+gh9pSDils0Pli5wUi3POO2NiPB8jGfOWIz1V5H+pZ0quJBuovYmmzqq4kSP3ckgmDk/Swtu6IWbo6pSRvLBt7/jWbB6q9eDsKsLwtBir3YEBRp79V7IwvAnccP6bMr9kmf1+Rjwm9jCMB3kMkM9B60Y+rdrNxvNV0zs3OT7PrswrTHsp69uFaJ3gMQye3uxwMn8HQ78+5xlFuFkXUX4wPqjh3RHH3n8V/N6aGtsaNIJG0Q+nxcUw==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=nvidia.com;
+Received: from DM8PR12MB5413.namprd12.prod.outlook.com (2603:10b6:8:3b::8) by
+ MN2PR12MB4992.namprd12.prod.outlook.com (2603:10b6:208:3c::22) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.5332.14; Mon, 13 Jun 2022 10:35:03 +0000
+Received: from DM8PR12MB5413.namprd12.prod.outlook.com
+ ([fe80::599e:e8c6:16b5:2f9c]) by DM8PR12MB5413.namprd12.prod.outlook.com
+ ([fe80::599e:e8c6:16b5:2f9c%8]) with mapi id 15.20.5332.020; Mon, 13 Jun 2022
+ 10:35:03 +0000
+Date:   Mon, 13 Jun 2022 12:34:58 +0200
+From:   Thierry Reding <treding@nvidia.com>
+To:     Jonathan Corbet <corbet@lwn.net>
+Cc:     Dipen Patel <dipenp@nvidia.com>, linux-doc@vger.kernel.org
+Subject: Re: [PATCH] docs: Move the HTE documentation to driver-api/
+Message-ID: <YqcS0uPivDgpYqz+@orome>
+References: <87a6apj1do.fsf@meer.lwn.net>
+ <985966be-b7a1-c208-0775-d1cb4ff072cd@nvidia.com>
+ <87sfod4zsz.fsf@meer.lwn.net>
+Content-Type: multipart/signed; micalg=pgp-sha256;
+        protocol="application/pgp-signature"; boundary="DPBj7z0ikcrA3PTF"
 Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <044c20a3a8717868bfdf409d56ba485b367c0c1a.1655094814.git.siyanteng@loongson.cn>
-X-CM-TRANSID: GiKnCgCHLxQMN6dikWoEAA--.14573S2
-X-Coremail-Antispam: 1UD129KBjvJXoW3AFy8tF4UKryxXrW5ZFyrJFb_yoW3JFW7pF
-        97ur93Kw4a934jvrWDKr129w1rJrWUGay8K3yUJas7Wr95tF9xt3W7tF4UW3WfX3s7ArWf
-        ArWUW393Ar1jvwUanT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
-        9KBjDU0xBIdaVrnRJUUUgFb7Iv0xC_Cr1lb4IE77IF4wAFc2x0x2IEx4CE42xK8VAvwI8I
-        cIk0rVWrJVCq3wA2ocxC64kIII0Yj41l84x0c7CEw4AK67xGY2AK021l84ACjcxK6xIIjx
-        v20xvE14v26r1j6r1xM28EF7xvwVC0I7IYx2IY6xkF7I0E14v26r4j6F4UM28EF7xvwVC2
-        z280aVAFwI0_GcCE3s1l84ACjcxK6I8E87Iv6xkF7I0E14v26F4UJVW0owAS0I0E0xvYzx
-        vE52x082IY62kv0487Mc02F40EFcxC0VAKzVAqx4xG6I80ewAv7VCjz48v1sIEY20_Cr1U
-        Jr1lOx8S6xCaFVCjc4AY6r1j6r4UM4x0Y48IcVAKI48JMxkIecxEwVAFwVW5GwCF04k20x
-        vY0x0EwIxGrwCF04k20xvE74AGY7Cv6cx26F4UJr1UMxC20s026xCaFVCjc4AY6r1j6r4U
-        MI8I3I0E5I8CrVAFwI0_Jr0_Jr4lx2IqxVCjr7xvwVAFwI0_JrI_JrWlx4CE17CEb7AF67
-        AKxVWUtVW8ZwCIc40Y0x0EwIxGrwCI42IY6xIIjxv20xvE14v26r1j6r1xMIIF0xvE2Ix0
-        cI8IcVCY1x0267AKxVWUJVW8JwCI42IY6xAIw20EY4v20xvaj40_Jr0_JF4lIxAIcVC2z2
-        80aVAFwI0_Jr0_Gr1lIxAIcVC2z280aVCY1x0267AKxVWUJVW8JbIYCTnIWIevJa73UjIF
-        yTuYvjxU1_MaUUUUU
-X-Originating-IP: [120.242.69.242]
-X-CM-SenderInfo: pere453f6hztlloou0/
-X-Spam-Status: No, score=-2.1 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,SPF_HELO_PASS,SPF_PASS,
+In-Reply-To: <87sfod4zsz.fsf@meer.lwn.net>
+X-NVConfidentiality: public
+User-Agent: Mutt/2.2.4 (c3baa83e) (2022-04-30)
+X-ClientProxiedBy: AS8PR04CA0174.eurprd04.prod.outlook.com
+ (2603:10a6:20b:331::29) To DM8PR12MB5413.namprd12.prod.outlook.com
+ (2603:10b6:8:3b::8)
+MIME-Version: 1.0
+X-MS-PublicTrafficType: Email
+X-MS-Office365-Filtering-Correlation-Id: 48d7b07a-2a65-4bb5-22ce-08da4d286036
+X-MS-TrafficTypeDiagnostic: MN2PR12MB4992:EE_
+X-Microsoft-Antispam-PRVS: <MN2PR12MB4992A0BD1C2E4582FF8CC0A0CFAB9@MN2PR12MB4992.namprd12.prod.outlook.com>
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: 29UDNqN7nJsMy3hqBDSPqXpOLSyGkivdCXtyayISu+DcEufMy74WGU+msIzNKL4SDyIB1NoMVkDRNUZIzWyrDNQO59yEzFcjy1PE9ERcRkKk1Ojazv4gZdIyZSGCDKEHhZAdQPas1mLpM1uJHq4WD6hR1e9ySxiikng1bFhC9cp0sx2C+WuqkB2LEnNcJcyQyiO7OfFbyzxIQD2n3z0zXpHw8rA1lZehdH3cgW2I8OG5GsVymfJoSrABkkAyY6PqBlOS+sOU0rQ3TfPbgbJMAWZEuaSfofS8bBhgTSIgJUAwrET1SpFfWI8eDzaMCyRhE9zyDtm7aLR0ejx6Pb9UFmDFLHp14dLVA/OmEHLJ1BkuYEdMZ0aAyYEHJWs/J4VRVUMIsIrd9ayw/G9mTjfynsf1BAsLH2CoVZuZLV1tpRpV0ZHKGxs3rxVlFVJVC7yYjY/ceupC2HinmjCYRzb4tAgJz4z5w1/qc+pgCK6KRLClWLXB7HuiYGgvyAzWU6O43Mr1BGY6eC7Ch+d6FWSR5r1Ot3Ej1Z2sxlt7aA1eg1r9G5R58p8luAwsJlORYZu2s2TAEtF86A7TDr17NXmx13Lonnlj1W48TT0ceCXGTfQ34dmVA+nrWMwvYo2LcCetP7WcQDOQn4xky23XpTGTj8o4HFC+1ls//n561pAClnIQDTl5HEsLNl2Ob4uNYKgEkjipvswaHJo3Ntzqg+qzLQ==
+X-Forefront-Antispam-Report: CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DM8PR12MB5413.namprd12.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230016)(4636009)(7916004)(366004)(6506007)(53546011)(2906002)(44144004)(6486002)(66946007)(9686003)(6512007)(6666004)(5660300002)(316002)(508600001)(6916009)(83380400001)(38100700002)(33716001)(186003)(86362001)(4326008)(66556008)(66476007)(8936002)(21480400003)(8676002)(2700100001);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 2
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?PAF5tnoFef6rVrspCBU4WsvPDNlVmxewixZ0nlUYVYwS3EAg2zFbNiadmUcd?=
+ =?us-ascii?Q?TS45gNnCT0K4BvFhNy0o7BJA4cCKbM9pcbULX2dLEMVsXx6e7ULggqxbpv12?=
+ =?us-ascii?Q?Bai4af2Lf5PJx6Q43yQ3ynND2CpSQ+/2vCqG1tiviE9FKbv2Z2o4BrIIo6/Z?=
+ =?us-ascii?Q?8/q5KeEy2NqYqVY6mYCrxSeuu+rW6KjiBuYM8lhCHCkHsUdVHiHF8Hh/6QKW?=
+ =?us-ascii?Q?sEtI2GKM5j2AtIsEIJPJgliwSUI9SmRochZwJnSAHitfWMPS215pujKUkVQL?=
+ =?us-ascii?Q?bOWV4QmoXDIQR34aM98BigDswwiuGas7nKu7YlBj4UCORluWyLst0jA7U3mG?=
+ =?us-ascii?Q?cnoa5kGWQ1HFOhBOrG1Ypyg2l1ShrH/8RyNxozlOIXqRA252iNmxCTmt5F4O?=
+ =?us-ascii?Q?ZuVr19NjbveT+fIPIC0q5I+FvAXrZLwYsr7+blWN3NgSAfynUac5L36HfM1w?=
+ =?us-ascii?Q?FB7jdqEHjP0+1pXMGt2d9tjZRbFrDjliVgN+IYIC1d2SfU8VtYXbzjNkC/73?=
+ =?us-ascii?Q?AleNwHqOGRLPBapugt9LlddDQcgSNqfpmdEtoHfSCyXFyv6L98ZpAobFsmsG?=
+ =?us-ascii?Q?IncYrOc53B2/jz6QfEwheCnCCGdrCShZpStJ0PsGRNuqH2uy1OE9T71o9FWb?=
+ =?us-ascii?Q?VhFcOu8Qp5YNW5F851pA046GpswP92L+MxboNA5XEqsquuJ8vFFFEWVKVwDj?=
+ =?us-ascii?Q?GtgdAuyOx33JOAtP/OKda5exttrP4CZgfRvhd3LvfiQR+KGIjheZZBRWeBjr?=
+ =?us-ascii?Q?Au/XfNebc+VlyaKSD+YcvqsBeogmTJtc64JhBg5Qva/fEC42BSJuyC6BWl6c?=
+ =?us-ascii?Q?+SQuW8r/lz7e5GYuNRJhSIoJsG/9bN8YZaxRDA7YcAzx91EDQuXHaPnAvlu0?=
+ =?us-ascii?Q?80pomN6Uzq5A0CLTMDU0FgjwadgzopASAK3AGRAuoQFitEqF+TLFv+OhObxy?=
+ =?us-ascii?Q?Ky1/+lApHwdIORB1cg9dxHKrsSiUWZOv84KI1JTYJe16VtMMJSVcncfOeOiL?=
+ =?us-ascii?Q?G3yh02GNgisojSmNaiWjU236J92RAmy1S/9uIYnGr0PNFj0CtaE6yxMdMmJM?=
+ =?us-ascii?Q?uAx2Xyc6pB0CwOioVwNve5GhdIYJPtci3YbeZ+IbK3R6+jGG6dBMqXz4khQQ?=
+ =?us-ascii?Q?Q+2VJerrjZslWBkI0nZJ1/muzBNZU5ltr6uWQGaNTfzsUgonf79VGhcflT1X?=
+ =?us-ascii?Q?6Mm+iv8XvpzwREJHAvUtK94yErX9TKMY9XGQJ5r+lHKwSfB6dBhqL9IVLZgf?=
+ =?us-ascii?Q?ELwt09rrVhpF12SkxvKp3LWr7htKewHe/27G76HT4oSKaL/TFqRUKg7STj9m?=
+ =?us-ascii?Q?TjMJ5b4tWhTJjcgmIL1qYq5FDFjrrcyssjEX10rqGDRMeMMbMDx4vTQcjbX6?=
+ =?us-ascii?Q?BXPp1dWbR8InahTpC9tCnxRXNk4qnIS4kN26yGs0OYyLSFGodh7uGgri5i8K?=
+ =?us-ascii?Q?OXpu/i8JspULpAwGbmTVPv/Jt6ckJ9EWVPckEOYKlMGVNjYZN0YwYuChknE1?=
+ =?us-ascii?Q?O3GeNHyyu6o4lvojVb7Kr6chYo1kP34RhmDju+kvUY7nU4mgaOn8x0emjPzB?=
+ =?us-ascii?Q?veWoRXiWJRgto58F6N8GG9vSecvWVO7e6i4e8wAcUphvOhl05lerr6ps2eLI?=
+ =?us-ascii?Q?J7biLq+ceG0mIgq3VSMZp2MnXxyungRuwCkDPkZciPlLP9HRGoU9+m0kyrcb?=
+ =?us-ascii?Q?QvIstVm04UXVg9FVneWkqtCcynlRNxCy/VVXW1z/ewd8An0pKiU4M5vQOfYk?=
+ =?us-ascii?Q?zyPOJnRuGa0akoW/bG5RN39tYgWTA77oNucKT9BkgExC5JscZW4KLRJRGRKd?=
+X-MS-Exchange-AntiSpam-MessageData-1: cQRDPYSzl+dZuw==
+X-OriginatorOrg: Nvidia.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 48d7b07a-2a65-4bb5-22ce-08da4d286036
+X-MS-Exchange-CrossTenant-AuthSource: DM8PR12MB5413.namprd12.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 13 Jun 2022 10:35:03.6256
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: CQlom4TWj4U9Rs3guX1IfUdQS6g79/NUgkbZDVw0a9Uiukmgts/QkSeBbyA7i/gDDfLDC9qCO9gkVRg92wjGqg==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: MN2PR12MB4992
+X-Spam-Status: No, score=-2.3 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FORGED_SPF_HELO,
+        RCVD_IN_DNSWL_NONE,RCVD_IN_MSPIKE_H2,SPF_HELO_PASS,SPF_NONE,
         T_SCC_BODY_TEXT_LINE autolearn=ham autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
@@ -66,127 +120,46 @@ Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Mon, Jun 13, 2022 at 01:03:40PM +0800, Yanteng Si wrote:
-> update to commit 110bf7a52307 ("Documentation/vm: rework
-> "Temporary Virtual Mappings" section")
-> 
-> Signed-off-by: Yanteng Si <siyanteng@loongson.cn>
+--DPBj7z0ikcrA3PTF
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Reviewed-by: Wu XiangCheng <bobwxc@email.cn>
+On Thu, Jun 09, 2022 at 09:33:16AM -0600, Jonathan Corbet wrote:
+> Dipen Patel <dipenp@nvidia.com> writes:
+>=20
+> > Acked-by: Dipen Patel <dipenp@nvidia.com>
+> >
+> > On 6/6/22 7:46 AM, Jonathan Corbet wrote:
+> >> The hardware timestamp engine documentation is driver API material, and
+> >> really belongs in the driver-API book; move it there.
+>=20
+> Thanks...I'll push this through the docs tree unless I hear an
+> objection.
 
-Thanks!
+Fine with me. We can coordinate if other documentation related updates
+surface that may conflict with these.
 
-> ---
->  .../translations/zh_CN/vm/highmem.rst         | 77 +++++++++++--------
->  1 file changed, 43 insertions(+), 34 deletions(-)
-> 
-> diff --git a/Documentation/translations/zh_CN/vm/highmem.rst b/Documentation/translations/zh_CN/vm/highmem.rst
-> index 018838e58c3e..200321774646 100644
-> --- a/Documentation/translations/zh_CN/vm/highmem.rst
-> +++ b/Documentation/translations/zh_CN/vm/highmem.rst
-> @@ -50,55 +50,55 @@
->  临时虚拟映射
->  ============
->  
-> -内核包含几种创建临时映射的方法。:
-> +内核包含几种创建临时映射的方法。下面的列表按照使用的优先顺序显示了它们。
->  
-> -* vmap().  这可以用来将多个物理页长期映射到一个连续的虚拟空间。它需要synchronization
-> -  来解除映射。
-> +* kmap_local_page()。这个函数是用来要求短期映射的。它可以从任何上下文（包括中断）中调用，
-> +  但是映射只能在获取它们的上下文中使用。
->  
-> -* kmap().  这允许对单个页面进行短期映射。它需要synchronization，但在一定程度上被摊销。
-> -  当以嵌套方式使用时，它也很容易出现死锁，因此不建议在新代码中使用它。
-> +  在可行的情况下，这个函数应该比其他所有的函数优先使用。
->  
-> -* kmap_atomic().  这允许对单个页面进行非常短的时间映射。由于映射被限制在发布它的CPU上，
-> -  它表现得很好，但发布任务因此被要求留在该CPU上直到它完成，以免其他任务取代它的映射。
-> -
-> -  kmap_atomic() 也可以由中断上下文使用，因为它不睡眠，而且调用者可能在调用kunmap_atomic()
-> -  之后才睡眠。
-> -
-> -  可以假设k[un]map_atomic()不会失败。
-> +  这些映射是线程本地和CPU本地的，这意味着映射只能从这个线程中访问，并且当映射处于活动状
-> +  态时，该线程与CPU绑定。即使线程被抢占了（因为抢占永远不会被函数禁用），CPU也不能通过
-> +  CPU-hotplug从系统中拔出，直到映射被处理掉。
->  
-> +  在本地的kmap区域中采取pagefaults是有效的，除非获取本地映射的上下文由于其他原因不允许
-> +  这样做。
->  
-> -使用kmap_atomic
-> -===============
-> +  kmap_local_page()总是返回一个有效的虚拟地址，并且假定kunmap_local()不会失败。
->  
-> -何时何地使用 kmap_atomic() 是很直接的。当代码想要访问一个可能从高内存（见__GFP_HIGHMEM）
-> -分配的页面的内容时，例如在页缓存中的页面，就会使用它。该API有两个函数，它们的使用方式与
-> -下面类似::
-> +  嵌套kmap_local_page()和kmap_atomic()映射在一定程度上是允许的（最多到KMAP_TYPE_NR），
-> +  但是它们的调用必须严格排序，因为映射的实现是基于堆栈的。关于如何管理嵌套映射的细节，
-> +  请参见kmap_local_page() kdocs（包含在 "函数 "部分）。
->  
-> -	/* 找到感兴趣的页面。 */
-> -	struct page *page = find_get_page(mapping, offset);
-> -
-> -	/* 获得对该页内容的访问权。 */
-> -	void *vaddr = kmap_atomic(page);
-> +* kmap_atomic().  这允许对单个页面进行非常短的时间映射。由于映射被限制在发布它的CPU上，
-> +  它表现得很好，但发布的任务因此被要求留在该CPU上直到它完成，以免其他任务取代它的映射。
->  
-> -	/* 对该页的内容做一些处理。 */
-> -	memset(vaddr, 0, PAGE_SIZE);
-> +  kmap_atomic()也可以被中断上下文使用，因为它不睡眠，调用者也可能在调用kunmap_atomic()
-> +  后才睡眠。
->  
-> -	/* 解除该页面的映射。 */
-> -	kunmap_atomic(vaddr);
-> +  内核中对kmap_atomic()的每次调用都会创建一个不可抢占的段，并禁用缺页异常。这可能是
-> +  未预期延迟的来源之一。因此用户应该选择kmap_local_page()而不是kmap_atomic()。
->  
-> -注意，kunmap_atomic()调用的是kmap_atomic()调用的结果而不是参数。
-> +  假设k[un]map_atomic()不会失败。
->  
-> -如果你需要映射两个页面，因为你想从一个页面复制到另一个页面，你需要保持kmap_atomic调用严
-> -格嵌套，如::
-> +* kmap()。这应该被用来对单个页面进行短时间的映射，对抢占或迁移没有限制。它会带来开销，
-> +  因为映射空间是受限制的，并且受到全局锁的保护，以实现同步。当不再需要映射时，必须用
-> +  kunmap()释放该页被映射的地址。
->  
-> -	vaddr1 = kmap_atomic(page1);
-> -	vaddr2 = kmap_atomic(page2);
-> +  映射变化必须广播到所有CPU（核）上，kmap()还需要在kmap的池被回绕（TLB项用光了，需要从第
-> +   一项复用）时进行全局TLB无效化，当映射空间被完全利用时，它可能会阻塞，直到有一个可用的
-> +   槽出现。因此，kmap()只能从可抢占的上下文中调用。
->  
-> -	memcpy(vaddr1, vaddr2, PAGE_SIZE);
-> +  如果一个映射必须持续相对较长的时间，上述所有的工作都是必要的，但是内核中大部分的
-> +  高内存映射都是短暂的，而且只在一个地方使用。这意味着在这种情况下，kmap()的成本大
-> +  多被浪费了。kmap()并不是为长期映射而设计的，但是它已经朝着这个方向发展了，在较新
-> +  的代码中强烈不鼓励使用它，前面的函数集应该是首选。
->  
-> -	kunmap_atomic(vaddr2);
-> -	kunmap_atomic(vaddr1);
-> +  在64位系统中，调用kmap_local_page()、kmap_atomic()和kmap()没有实际作用，因为64位
-> +  地址空间足以永久映射所有物理内存页面。
->  
-> +* vmap()。这可以用来将多个物理页长期映射到一个连续的虚拟空间。它需要全局同步来解除
-> +  映射。
->  
->  临时映射的成本
->  ==============
-> @@ -126,3 +126,12 @@ i386 PAE
->  
->  一般的建议是，你不要在32位机器上使用超过8GiB的空间--尽管更多的空间可能对你和你的工作
->  量有用，但你几乎是靠你自己--不要指望内核开发者真的会很关心事情的进展情况。
-> +
-> +函数
-> +====
-> +
-> +该API在以下内核代码中:
-> +
-> +include/linux/highmem.h
-> +
-> +include/linux/highmem-internal.h
-> -- 
-> 2.27.0
+Thierry
 
+--DPBj7z0ikcrA3PTF
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAABCAAdFiEEiOrDCAFJzPfAjcif3SOs138+s6EFAmKnEtIACgkQ3SOs138+
+s6EVwhAAgwuXsxA9qkjcICoyGvnfZjpce+4fOBlzY1pC4pmiO40zUs0A9pDqFtj9
+ZZi9qkziaM6C1wxcsmeZOkHoT1j9J4eGS6IzBTXHJxmZaF95o6J8tyf8X2EHBCuY
+62lwCegfS2lDScJifY6a1etEXoU2D5pJVFyC6XzkIfswUfW9+R9d53sekqIduNSK
+lgZBgzKy0GRT7p1zV+GVlo77bBAwr3qrCLJ3xoToeX2YUN2cDTRHgnu20Kpo0lla
++xITHsHJ0gc9so4E1aUhUmju8WpZZsFEgScH08CDoI5LOr3QPS39k4sLk7Rh7wVh
+IUU+KifS04Yufy5a7za4rDlwoCQZL4VURDg7QwNWhY++J0yi9ZjI3jrVVZ1UNkON
+0XboOqOgT65T1R1QnaHYW7P0FVbGD1ET3IPnlLmjtClVo+MyDfwm77gHh1/o6fSs
+4xiP98ajO0RMWZZpGcRICIpWYNU6gAjtD5nDXC8QfLKcS3GfN3FpYb0qM9DX6vTm
+ID/8ocV9Dhzgrf2V1bDN8yfuYyJD63Y5mZqxZdcjlxwjbNx0w0KV/moaD7fK3ly1
+vd3vhMoIVRZuwS9W5gE1gligf1eMma2JY+aNW+wKsxeGdLOfXCi71P8ba827oCwF
+5MF1rH7Ne3M0lgbp4RsCLnMCGB+8SgkIKZwlw+P1qcdAgx1EKuo=
+=OHHi
+-----END PGP SIGNATURE-----
+
+--DPBj7z0ikcrA3PTF--
