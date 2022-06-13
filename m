@@ -2,101 +2,100 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 4D3BC5481A0
-	for <lists+linux-doc@lfdr.de>; Mon, 13 Jun 2022 10:28:20 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 3241C5481A9
+	for <lists+linux-doc@lfdr.de>; Mon, 13 Jun 2022 10:28:23 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S238814AbiFMIFG (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 13 Jun 2022 04:05:06 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:55526 "EHLO
+        id S239386AbiFMILd (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 13 Jun 2022 04:11:33 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:36192 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S239550AbiFMIEy (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Mon, 13 Jun 2022 04:04:54 -0400
-Received: from smtp-out2.suse.de (smtp-out2.suse.de [195.135.220.29])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id BB5431E3C4;
-        Mon, 13 Jun 2022 01:04:49 -0700 (PDT)
-Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
-        (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-         key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
-        (No client certificate requested)
-        by smtp-out2.suse.de (Postfix) with ESMTPS id 770591FAC3;
-        Mon, 13 Jun 2022 08:04:48 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
-        t=1655107488; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-         mime-version:mime-version:content-type:content-type:
-         in-reply-to:in-reply-to:references:references;
-        bh=y60ZvMkZEvWsM3Un0BjgZp3hCBuh4mCFqBODWskoeZE=;
-        b=akD1NQrPb8kShRnk5+EHe9Cr91LqOhi0QO71GuaEYHpEmW49+LoonALIapZr511qIZPLtq
-        5K/x6DMxM+ZVP6WWM+45emQFsHMbb9xPma3VpqdrtcjOfkUSAQDyXTF1Q+r3dsdJ1rkrQb
-        xo2AJdWVATN3YMr+padQdfhNAuXYTJI=
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
-        s=susede2_ed25519; t=1655107488;
-        h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-         mime-version:mime-version:content-type:content-type:
-         in-reply-to:in-reply-to:references:references;
-        bh=y60ZvMkZEvWsM3Un0BjgZp3hCBuh4mCFqBODWskoeZE=;
-        b=wVCJhQJLX4rfg077cikqvO4E2WMFayaLWJVwyDa69Hq5geO6iYcXP8dsl3raNUwY8GAfMm
-        Se+tuBPW96J9fFCA==
-Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
-        (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-         key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
-        (No client certificate requested)
-        by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id C19A613443;
-        Mon, 13 Jun 2022 08:04:47 +0000 (UTC)
-Received: from dovecot-director2.suse.de ([192.168.254.65])
-        by imap2.suse-dmz.suse.de with ESMTPSA
-        id WA+SLJ/vpmJeIAAAMHmgww
-        (envelope-from <osalvador@suse.de>); Mon, 13 Jun 2022 08:04:47 +0000
-Date:   Mon, 13 Jun 2022 10:04:46 +0200
-From:   Oscar Salvador <osalvador@suse.de>
-To:     Muchun Song <songmuchun@bytedance.com>
-Cc:     mike.kravetz@oracle.com, david@redhat.com,
-        akpm@linux-foundation.org, corbet@lwn.net, linux-mm@kvack.org,
-        linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org,
+        with ESMTP id S239615AbiFMILJ (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Mon, 13 Jun 2022 04:11:09 -0400
+Received: from szxga02-in.huawei.com (szxga02-in.huawei.com [45.249.212.188])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 02DAF1E3EB;
+        Mon, 13 Jun 2022 01:11:09 -0700 (PDT)
+Received: from dggpemm500024.china.huawei.com (unknown [172.30.72.53])
+        by szxga02-in.huawei.com (SkyGuard) with ESMTP id 4LM41f4W8fzRhyq;
+        Mon, 13 Jun 2022 16:07:50 +0800 (CST)
+Received: from dggpemm500006.china.huawei.com (7.185.36.236) by
+ dggpemm500024.china.huawei.com (7.185.36.203) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2375.24; Mon, 13 Jun 2022 16:11:01 +0800
+Received: from thunder-town.china.huawei.com (10.174.178.55) by
+ dggpemm500006.china.huawei.com (7.185.36.236) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2375.24; Mon, 13 Jun 2022 16:11:00 +0800
+From:   Zhen Lei <thunder.leizhen@huawei.com>
+To:     Thomas Gleixner <tglx@linutronix.de>,
+        Ingo Molnar <mingo@redhat.com>, Borislav Petkov <bp@alien8.de>,
+        <x86@kernel.org>, "H . Peter Anvin" <hpa@zytor.com>,
+        Eric Biederman <ebiederm@xmission.com>,
+        Rob Herring <robh+dt@kernel.org>,
+        Frank Rowand <frowand.list@gmail.com>,
+        <devicetree@vger.kernel.org>, Dave Young <dyoung@redhat.com>,
+        Baoquan He <bhe@redhat.com>, Vivek Goyal <vgoyal@redhat.com>,
+        <kexec@lists.infradead.org>, <linux-kernel@vger.kernel.org>,
         Catalin Marinas <catalin.marinas@arm.com>,
         Will Deacon <will@kernel.org>,
-        Anshuman Khandual <anshuman.khandual@arm.com>
-Subject: Re: [PATCH 1/6] mm: hugetlb_vmemmap: delete
- hugetlb_optimize_vmemmap_enabled()
-Message-ID: <Yqbvno7vM5knoh6u@localhost.localdomain>
-References: <20220613063512.17540-1-songmuchun@bytedance.com>
- <20220613063512.17540-2-songmuchun@bytedance.com>
+        <linux-arm-kernel@lists.infradead.org>,
+        Jonathan Corbet <corbet@lwn.net>, <linux-doc@vger.kernel.org>
+CC:     Zhen Lei <thunder.leizhen@huawei.com>,
+        Randy Dunlap <rdunlap@infradead.org>,
+        Feng Zhou <zhoufeng.zf@bytedance.com>,
+        Kefeng Wang <wangkefeng.wang@huawei.com>,
+        Chen Zhou <dingguo.cz@antgroup.com>,
+        "John Donnelly" <John.p.donnelly@oracle.com>,
+        Dave Kleikamp <dave.kleikamp@oracle.com>
+Subject: [PATCH 0/5] arm64: kdump: Function supplement and performance optimization
+Date:   Mon, 13 Jun 2022 16:09:27 +0800
+Message-ID: <20220613080932.663-1-thunder.leizhen@huawei.com>
+X-Mailer: git-send-email 2.26.0.windows.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20220613063512.17540-2-songmuchun@bytedance.com>
-X-Spam-Status: No, score=-4.4 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_MED,SPF_HELO_NONE,
-        SPF_PASS,T_SCC_BODY_TEXT_LINE autolearn=ham autolearn_force=no
-        version=3.4.6
+Content-Transfer-Encoding: 7BIT
+Content-Type:   text/plain; charset=US-ASCII
+X-Originating-IP: [10.174.178.55]
+X-ClientProxiedBy: dggems704-chm.china.huawei.com (10.3.19.181) To
+ dggpemm500006.china.huawei.com (7.185.36.236)
+X-CFilter-Loop: Reflected
+X-Spam-Status: No, score=-4.2 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_MED,
+        SPF_HELO_NONE,SPF_PASS,T_SCC_BODY_TEXT_LINE autolearn=ham
+        autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Mon, Jun 13, 2022 at 02:35:07PM +0800, Muchun Song wrote:
-> The name hugetlb_optimize_vmemmap_enabled() a bit confusing as it tests
-> two conditions (enabled and pages in use).  Instead of coming up to
-> an appropriate name, we could just delete it.  There is already a
-> discussion about deleting it in thread [1].
-> 
-> There is only one user of hugetlb_optimize_vmemmap_enabled() outside of
-> hugetlb_vmemmap, that is flush_dcache_page() in arch/arm64/mm/flush.c.
-> However, it does not need to call hugetlb_optimize_vmemmap_enabled()
-> in flush_dcache_page() since HugeTLB pages are always fully mapped and
-> only head page will be set PG_dcache_clean meaning only head page's flag
-> may need to be cleared (see commit cf5a501d985b).  So it is easy to
-> remove hugetlb_optimize_vmemmap_enabled().
-> 
-> Link: https://lore.kernel.org/all/c77c61c8-8a5a-87e8-db89-d04d8aaab4cc@oracle.com/ [1]
-> Signed-off-by: Muchun Song <songmuchun@bytedance.com>
-> Cc: Catalin Marinas <catalin.marinas@arm.com>
-> Cc: Will Deacon <will@kernel.org>
-> Cc: Anshuman Khandual <anshuman.khandual@arm.com>
+After the basic functions of "support reserving crashkernel above 4G on arm64
+kdump"(see https://lkml.org/lkml/2022/5/6/428) are implemented, we still have
+three features to be improved.
+1. When crashkernel=X,high is specified but crashkernel=Y,low is not specified,
+   the default crash low memory size is provided.
+2. For crashkernel=X without '@offset', if the low memory fails to be allocated,
+   fall back to reserve region from high memory(above DMA zones).
+3. If crashkernel=X,high is used, page mapping is performed only for the crash
+   high memory, and block mapping is still used for other linear address spaces.
+   Compared to the previous version:
+   (1) For crashkernel=X[@offset], the memory above 4G is not changed to block
+       mapping, leave it to the next time.
+   (2) The implementation method is modified. Now the implementation is simpler
+       and clearer.
 
-Reviewed-by: Oscar Salvador <osalvador@suse.de>
+Zhen Lei (5):
+  arm64: kdump: Provide default size when crashkernel=Y,low is not
+    specified
+  arm64: kdump: Support crashkernel=X fall back to reserve region above
+    DMA zones
+  arm64: kdump: Remove some redundant checks in map_mem()
+  arm64: kdump: Decide when to reserve crash memory in
+    reserve_crashkernel()
+  arm64: kdump: Don't defer the reservation of crash high memory
 
+ .../admin-guide/kernel-parameters.txt         |  10 +-
+ arch/arm64/mm/init.c                          | 109 ++++++++++++++++--
+ arch/arm64/mm/mmu.c                           |  25 ++--
+ 3 files changed, 112 insertions(+), 32 deletions(-)
 
 -- 
-Oscar Salvador
-SUSE Labs
+2.25.1
+
