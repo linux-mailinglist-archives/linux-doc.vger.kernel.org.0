@@ -2,410 +2,99 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 553F254919B
-	for <lists+linux-doc@lfdr.de>; Mon, 13 Jun 2022 18:28:47 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 1D99D548877
+	for <lists+linux-doc@lfdr.de>; Mon, 13 Jun 2022 18:01:54 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S231992AbiFMPhH (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 13 Jun 2022 11:37:07 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:52608 "EHLO
+        id S243396AbiFMPot (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 13 Jun 2022 11:44:49 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:58722 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S235736AbiFMPgp (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Mon, 13 Jun 2022 11:36:45 -0400
-Received: from email.cn (m218-153.88.com [110.43.218.153])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id DF55B765E
-        for <linux-doc@vger.kernel.org>; Mon, 13 Jun 2022 06:09:52 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=email.cn;
-        s=dkim; h=Date:From:To; bh=cTKQCLawKvMVnKikDoSzcbnMdNWBXAh39LyBC
-        s1RjU0=; b=lKr1XSL/f6NbbdYkvjGIrMk9L+GtTzKDFKT+UgpGlDRmTfSB+qnUg
-        EUga2TPvIFLolt2lOoea8fyO9d55oqFNWSAE3wJ+DD+fIbDNl8ExVmwQap2ViNCv
-        +u6pjxm9ZsbA84u9133VqO9vpNV4pO/6oHzFu8hNwQtwoFOY5ITZag=
-Received: from bobwxc.mipc (unknown [120.242.69.242])
-        by v_coremail2-frontend-2 (Coremail) with SMTP id GiKnCgBX_xMVN6dimGoEAA--.14690S2;
-        Mon, 13 Jun 2022 21:09:42 +0800 (CST)
-Date:   Mon, 13 Jun 2022 21:09:41 +0800
-From:   "Wu X.C." <bobwxc@email.cn>
-To:     Yanteng Si <siyanteng@loongson.cn>
-Cc:     corbet@lwn.net, alexs@kernel.org, seakeel@gmail.com,
-        chenhuacai@kernel.org, jiaxun.yang@flygoat.com,
-        linux-doc@vger.kernel.org, siyanteng01@gmail.com,
-        zhoubinbin@loongson.cn
-Subject: Re: [PATCH v2 3/3] docs/zh_CN: Update the translation of vm index to
- 5.19-rc1
-Message-ID: <Yqc3FZTg2sQinLAp@bobwxc.mipc>
-References: <cover.1655094814.git.siyanteng@loongson.cn>
- <9f458a7be9ef3b9eea3d7bba4e97fc962f6a061e.1655094814.git.siyanteng@loongson.cn>
+        with ESMTP id S1351282AbiFMPoM (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Mon, 13 Jun 2022 11:44:12 -0400
+Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.129.124])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTP id A930E60D1
+        for <linux-doc@vger.kernel.org>; Mon, 13 Jun 2022 06:19:08 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+        s=mimecast20190719; t=1655126347;
+        h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+         to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+         content-transfer-encoding:content-transfer-encoding:
+         in-reply-to:in-reply-to:references:references;
+        bh=f5Lm2wWyGosZM6z8k7SEF9qOMpYtGM8nzWGhua6hIYw=;
+        b=BP2ZWsMY9mQgmW/B+MzU/roppvLwmjoqdrxfizDlBLkZ/bLKb0YkmIqgbpZSqyE79d30Bz
+        ioBErVgLiYJziZaoxfQcUAE/Mu/m81UK0PUUmiwjt+q7KK8ansVGFxV7P8e8QWWr59nRbD
+        t3D/3J+eoRwd/Ena6JAZjbMfVxemy2A=
+Received: from mimecast-mx02.redhat.com (mx3-rdu2.redhat.com
+ [66.187.233.73]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ us-mta-569--wfr7ystMWKUEgkXXr7izQ-1; Mon, 13 Jun 2022 09:19:04 -0400
+X-MC-Unique: -wfr7ystMWKUEgkXXr7izQ-1
+Received: from smtp.corp.redhat.com (int-mx04.intmail.prod.int.rdu2.redhat.com [10.11.54.4])
+        (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+        (No client certificate requested)
+        by mimecast-mx02.redhat.com (Postfix) with ESMTPS id B9B8B28224F2;
+        Mon, 13 Jun 2022 13:18:56 +0000 (UTC)
+Received: from [10.18.17.215] (dhcp-17-215.bos.redhat.com [10.18.17.215])
+        by smtp.corp.redhat.com (Postfix) with ESMTP id 0BF2F2026D64;
+        Mon, 13 Jun 2022 13:18:56 +0000 (UTC)
+Message-ID: <8d7ddb5a-0d0b-3f2e-e049-900360e95fc6@redhat.com>
+Date:   Mon, 13 Jun 2022 09:18:55 -0400
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <9f458a7be9ef3b9eea3d7bba4e97fc962f6a061e.1655094814.git.siyanteng@loongson.cn>
-X-CM-TRANSID: GiKnCgBX_xMVN6dimGoEAA--.14690S2
-X-Coremail-Antispam: 1UD129KBjvJXoW3KFWkZw43Gr4rAF45XrW8Zwb_yoWkWrWkpF
-        ykKryfWa1xJ345C34xGw1UKF18AF4xua1UGr1IqwnY9rsrtr4vyrsFyryDKa93Wry0yFWU
-        XFs5KFWj9ryjk3DanT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
-        9KBjDU0xBIdaVrnRJUUUg2b7Iv0xC_Cr1lb4IE77IF4wAFc2x0x2IEx4CE42xK8VAvwI8I
-        cIk0rVWrJVCq3wA2ocxC64kIII0Yj41l84x0c7CEw4AK67xGY2AK021l84ACjcxK6xIIjx
-        v20xvE14v26r1I6r4UM28EF7xvwVC0I7IYx2IY6xkF7I0E14v26r4j6F4UM28EF7xvwVC2
-        z280aVAFwI0_GcCE3s1l84ACjcxK6I8E87Iv6xkF7I0E14v26F4UJVW0owAS0I0E0xvYzx
-        vE52x082IY62kv0487Mc02F40EFcxC0VAKzVAqx4xG6I80ewAv7VCjz48v1sIEY20_Cr1U
-        Jr1lOx8S6xCaFVCjc4AY6r1j6r4UM4x0Y48IcVAKI48JMxkIecxEwVAFwVW5GwCF04k20x
-        vY0x0EwIxGrwCF04k20xvE74AGY7Cv6cx26F4UJr1UMxC20s026xCaFVCjc4AY6r1j6r4U
-        MI8I3I0E5I8CrVAFwI0_Jr0_Jr4lx2IqxVCjr7xvwVAFwI0_JrI_JrWlx4CE17CEb7AF67
-        AKxVWUtVW8ZwCIc40Y0x0EwIxGrwCI42IY6xIIjxv20xvE14v26r1j6r1xMIIF0xvE2Ix0
-        cI8IcVCY1x0267AKxVW8JVWxJwCI42IY6xAIw20EY4v20xvaj40_Jr0_JF4lIxAIcVC2z2
-        80aVAFwI0_Jr0_Gr1lIxAIcVC2z280aVCY1x0267AKxVW8JVW8JrUvcSsGvfC2KfnxnUUI
-        43ZEXa7IUURwZ7UUUUU==
-X-Originating-IP: [120.242.69.242]
-X-CM-SenderInfo: pere453f6hztlloou0/
-X-Spam-Status: No, score=-2.1 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,SPF_HELO_PASS,SPF_PASS,
-        T_SCC_BODY_TEXT_LINE autolearn=ham autolearn_force=no version=3.4.6
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
+ Thunderbird/91.9.0
+Subject: Re: [PATCH v11 7/8] cgroup/cpuset: Update description of
+ cpuset.cpus.partition in cgroup-v2.rst
+Content-Language: en-US
+To:     Tejun Heo <tj@kernel.org>
+Cc:     Zefan Li <lizefan.x@bytedance.com>,
+        Johannes Weiner <hannes@cmpxchg.org>,
+        Jonathan Corbet <corbet@lwn.net>,
+        Shuah Khan <shuah@kernel.org>, cgroups@vger.kernel.org,
+        linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org,
+        linux-kselftest@vger.kernel.org,
+        Andrew Morton <akpm@linux-foundation.org>,
+        Roman Gushchin <guro@fb.com>, Phil Auld <pauld@redhat.com>,
+        Peter Zijlstra <peterz@infradead.org>,
+        Juri Lelli <juri.lelli@redhat.com>,
+        Frederic Weisbecker <frederic@kernel.org>,
+        Marcelo Tosatti <mtosatti@redhat.com>,
+        =?UTF-8?Q?Michal_Koutn=c3=bd?= <mkoutny@suse.com>
+References: <20220510153413.400020-1-longman@redhat.com>
+ <20220510153413.400020-8-longman@redhat.com>
+ <YqYnQ4U4t6j/3UaL@slm.duckdns.org>
+ <404171dc-0da3-21f2-5003-9718f875e967@redhat.com>
+ <YqarMyNo9oHxhZFh@slm.duckdns.org>
+From:   Waiman Long <longman@redhat.com>
+In-Reply-To: <YqarMyNo9oHxhZFh@slm.duckdns.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-Scanned-By: MIMEDefang 2.78 on 10.11.54.4
+X-Spam-Status: No, score=-4.5 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,NICE_REPLY_A,
+        RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,SPF_NONE,T_SCC_BODY_TEXT_LINE
+        autolearn=unavailable autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Mon, Jun 13, 2022 at 01:03:42PM +0800, Yanteng Si wrote:
-> update to commit 481cc97349d6 ("mm,doc: Add new
-> documentation structure")
-> 
-> Signed-off-by: Yanteng Si <siyanteng@loongson.cn>
+On 6/12/22 23:12, Tejun Heo wrote:
+> Hello,
+>
+> On Sun, Jun 12, 2022 at 11:02:38PM -0400, Waiman Long wrote:
+>> That is the behavior enforced by setting the CPU_EXCLUSIVE bit in cgroup v1.
+>> I haven't explicitly change it to make it different in cgroup v2. The major
+>> reason is that I don't want change to one cpuset to affect a sibling
+>> partition as it may make the code more complicate to validate if a partition
+>> is valid.
+> If at all possible, I'd really like to avoid situations where a parent can't
+> withdraw resources due to something that a descendant does.
 
-Reviewed-by: Wu XiangCheng <bobwxc@email.cn>
+No, it doesn't affect parent at all. It just limit whats the siblings 
+can do due to their mutual constraint. If this is what the confusion is 
+about, I will try to reword the doc text.
 
-Thanks!
-
-> ---
->  .../translations/zh_CN/vm/bootmem.rst         | 14 +++++++
->  Documentation/translations/zh_CN/vm/index.rst | 37 +++++++++++++++----
->  Documentation/translations/zh_CN/vm/oom.rst   | 14 +++++++
->  .../translations/zh_CN/vm/page_allocation.rst | 14 +++++++
->  .../translations/zh_CN/vm/page_cache.rst      | 14 +++++++
->  .../translations/zh_CN/vm/page_reclaim.rst    | 14 +++++++
->  .../translations/zh_CN/vm/page_tables.rst     | 14 +++++++
->  .../translations/zh_CN/vm/physical_memory.rst | 14 +++++++
->  .../translations/zh_CN/vm/process_addrs.rst   | 14 +++++++
->  Documentation/translations/zh_CN/vm/shmfs.rst | 14 +++++++
->  Documentation/translations/zh_CN/vm/slab.rst  | 14 +++++++
->  Documentation/translations/zh_CN/vm/swap.rst  | 14 +++++++
->  .../translations/zh_CN/vm/vmalloc.rst         | 14 +++++++
->  13 files changed, 198 insertions(+), 7 deletions(-)
->  create mode 100644 Documentation/translations/zh_CN/vm/bootmem.rst
->  create mode 100644 Documentation/translations/zh_CN/vm/oom.rst
->  create mode 100644 Documentation/translations/zh_CN/vm/page_allocation.rst
->  create mode 100644 Documentation/translations/zh_CN/vm/page_cache.rst
->  create mode 100644 Documentation/translations/zh_CN/vm/page_reclaim.rst
->  create mode 100644 Documentation/translations/zh_CN/vm/page_tables.rst
->  create mode 100644 Documentation/translations/zh_CN/vm/physical_memory.rst
->  create mode 100644 Documentation/translations/zh_CN/vm/process_addrs.rst
->  create mode 100644 Documentation/translations/zh_CN/vm/shmfs.rst
->  create mode 100644 Documentation/translations/zh_CN/vm/slab.rst
->  create mode 100644 Documentation/translations/zh_CN/vm/swap.rst
->  create mode 100644 Documentation/translations/zh_CN/vm/vmalloc.rst
-> 
-> diff --git a/Documentation/translations/zh_CN/vm/bootmem.rst b/Documentation/translations/zh_CN/vm/bootmem.rst
-> new file mode 100644
-> index 000000000000..8f8fa82281f1
-> --- /dev/null
-> +++ b/Documentation/translations/zh_CN/vm/bootmem.rst
-> @@ -0,0 +1,14 @@
-> +.. SPDX-License-Identifier: GPL-2.0
-> +.. include:: ../disclaimer-zh_CN.rst
-> +
-> +:Original: Documentation/vm/bootmem.rst
-> +
-> +:翻译:
-> +
-> + 司延腾 Yanteng Si <siyanteng@loongson.cn>
-> +
-> +:校译:
-> +
-> +========
-> +启动内存
-> +========
-> diff --git a/Documentation/translations/zh_CN/vm/index.rst b/Documentation/translations/zh_CN/vm/index.rst
-> index a1c6d529b6ff..a02929bb0d31 100644
-> --- a/Documentation/translations/zh_CN/vm/index.rst
-> +++ b/Documentation/translations/zh_CN/vm/index.rst
-> @@ -12,11 +12,36 @@
->  Linux内存管理文档
->  =================
->  
-> -这是一个关于Linux内存管理（mm）子系统内部的文档集，其中有不同层次的细节，包括注释
-> -和邮件列表的回复，用于阐述数据结构和算法的基本情况。如果你正在寻找关于简单分配内存的建
-> -议，请参阅(Documentation/translations/zh_CN/core-api/memory-allocation.rst)。
-> -对于控制和调整指南，请参阅(Documentation/admin-guide/mm/index)。
-> -TODO:待引用文档集被翻译完毕后请及时修改此处）
-> +这是一份关于了解Linux的内存管理子系统的指南。如果你正在寻找关于简单分配内存的
-> +建议，请参阅内存分配指南
-> +(Documentation/translations/zh_CN/core-api/memory-allocation.rst)。
-> +关于控制和调整的指南，请看管理指南
-> +(Documentation/translations/zh_CN/admin-guide/mm/index.rst)。
-> +
-> +
-> +.. toctree::
-> +   :maxdepth: 1
-> +
-> +   physical_memory
-> +   page_tables
-> +   process_addrs
-> +   bootmem
-> +   page_allocation
-> +   vmalloc
-> +   slab
-> +   highmem
-> +   page_reclaim
-> +   swap
-> +   page_cache
-> +   shmfs
-> +   oom
-> +
-> +遗留文档
-> +========
-> +
-> +这是一个关于Linux内存管理（MM）子系统内部的旧文档的集合，其中有不同层次的细节，
-> +包括注释和邮件列表的回复，用于阐述数据结构和算法的描述。它应该被很好地整合到上述
-> +结构化的文档中，如果它已经完成了它的使命，可以删除。
->  
->  .. toctree::
->     :maxdepth: 1
-> @@ -25,7 +50,6 @@ TODO:待引用文档集被翻译完毕后请及时修改此处）
->     balance
->     damon/index
->     free_page_reporting
-> -   highmem
->     ksm
->     frontswap
->     hmm
-> @@ -48,7 +72,6 @@ TODOLIST:
->  * free_page_reporting
->  * hugetlbfs_reserv
->  * page_migration
-> -* slub
->  * transhuge
->  * unevictable-lru
->  * vmalloced-kernel-stacks
-> diff --git a/Documentation/translations/zh_CN/vm/oom.rst b/Documentation/translations/zh_CN/vm/oom.rst
-> new file mode 100644
-> index 000000000000..633b02d79f24
-> --- /dev/null
-> +++ b/Documentation/translations/zh_CN/vm/oom.rst
-> @@ -0,0 +1,14 @@
-> +.. SPDX-License-Identifier: GPL-2.0
-> +.. include:: ../disclaimer-zh_CN.rst
-> +
-> +:Original: Documentation/vm/oom.rst
-> +
-> +:翻译:
-> +
-> + 司延腾 Yanteng Si <siyanteng@loongson.cn>
-> +
-> +:校译:
-> +
-> +============
-> +内存不足处理
-> +============
-> diff --git a/Documentation/translations/zh_CN/vm/page_allocation.rst b/Documentation/translations/zh_CN/vm/page_allocation.rst
-> new file mode 100644
-> index 000000000000..3d5b2743d96a
-> --- /dev/null
-> +++ b/Documentation/translations/zh_CN/vm/page_allocation.rst
-> @@ -0,0 +1,14 @@
-> +.. SPDX-License-Identifier: GPL-2.0
-> +.. include:: ../disclaimer-zh_CN.rst
-> +
-> +:Original: Documentation/vm/page_allocation.rst
-> +
-> +:翻译:
-> +
-> + 司延腾 Yanteng Si <siyanteng@loongson.cn>
-> +
-> +:校译:
-> +
-> +========
-> +页面分配
-> +========
-> diff --git a/Documentation/translations/zh_CN/vm/page_cache.rst b/Documentation/translations/zh_CN/vm/page_cache.rst
-> new file mode 100644
-> index 000000000000..b0c9c72ccde8
-> --- /dev/null
-> +++ b/Documentation/translations/zh_CN/vm/page_cache.rst
-> @@ -0,0 +1,14 @@
-> +.. SPDX-License-Identifier: GPL-2.0
-> +.. include:: ../disclaimer-zh_CN.rst
-> +
-> +:Original: Documentation/vm/page_cache.rst
-> +
-> +:翻译:
-> +
-> + 司延腾 Yanteng Si <siyanteng@loongson.cn>
-> +
-> +:校译:
-> +
-> +========
-> +页面缓存
-> +========
-> diff --git a/Documentation/translations/zh_CN/vm/page_reclaim.rst b/Documentation/translations/zh_CN/vm/page_reclaim.rst
-> new file mode 100644
-> index 000000000000..83275afc07bf
-> --- /dev/null
-> +++ b/Documentation/translations/zh_CN/vm/page_reclaim.rst
-> @@ -0,0 +1,14 @@
-> +.. SPDX-License-Identifier: GPL-2.0
-> +.. include:: ../disclaimer-zh_CN.rst
-> +
-> +:Original: Documentation/vm/page_reclaim.rst
-> +
-> +:翻译:
-> +
-> + 司延腾 Yanteng Si <siyanteng@loongson.cn>
-> +
-> +:校译:
-> +
-> +========
-> +页面回收
-> +========
-> diff --git a/Documentation/translations/zh_CN/vm/page_tables.rst b/Documentation/translations/zh_CN/vm/page_tables.rst
-> new file mode 100644
-> index 000000000000..b525d8f0438c
-> --- /dev/null
-> +++ b/Documentation/translations/zh_CN/vm/page_tables.rst
-> @@ -0,0 +1,14 @@
-> +.. SPDX-License-Identifier: GPL-2.0
-> +.. include:: ../disclaimer-zh_CN.rst
-> +
-> +:Original: Documentation/vm/page_tables.rst
-> +
-> +:翻译:
-> +
-> + 司延腾 Yanteng Si <siyanteng@loongson.cn>
-> +
-> +:校译:
-> +
-> +====
-> +页表
-> +====
-> diff --git a/Documentation/translations/zh_CN/vm/physical_memory.rst b/Documentation/translations/zh_CN/vm/physical_memory.rst
-> new file mode 100644
-> index 000000000000..129962d496ce
-> --- /dev/null
-> +++ b/Documentation/translations/zh_CN/vm/physical_memory.rst
-> @@ -0,0 +1,14 @@
-> +.. SPDX-License-Identifier: GPL-2.0
-> +.. include:: ../disclaimer-zh_CN.rst
-> +
-> +:Original: Documentation/vm/physical_memory.rst
-> +
-> +:翻译:
-> +
-> + 司延腾 Yanteng Si <siyanteng@loongson.cn>
-> +
-> +:校译:
-> +
-> +========
-> +物理内存
-> +========
-> diff --git a/Documentation/translations/zh_CN/vm/process_addrs.rst b/Documentation/translations/zh_CN/vm/process_addrs.rst
-> new file mode 100644
-> index 000000000000..c1319938101b
-> --- /dev/null
-> +++ b/Documentation/translations/zh_CN/vm/process_addrs.rst
-> @@ -0,0 +1,14 @@
-> +.. SPDX-License-Identifier: GPL-2.0
-> +.. include:: ../disclaimer-zh_CN.rst
-> +
-> +:Original: Documentation/vm/process_addrs.rst
-> +
-> +:翻译:
-> +
-> + 司延腾 Yanteng Si <siyanteng@loongson.cn>
-> +
-> +:校译:
-> +
-> +========
-> +进程地址
-> +========
-> diff --git a/Documentation/translations/zh_CN/vm/shmfs.rst b/Documentation/translations/zh_CN/vm/shmfs.rst
-> new file mode 100644
-> index 000000000000..2987939f5e25
-> --- /dev/null
-> +++ b/Documentation/translations/zh_CN/vm/shmfs.rst
-> @@ -0,0 +1,14 @@
-> +.. SPDX-License-Identifier: GPL-2.0
-> +.. include:: ../disclaimer-zh_CN.rst
-> +
-> +:Original: Documentation/vm/shmfs.rst
-> +
-> +:翻译:
-> +
-> + 司延腾 Yanteng Si <siyanteng@loongson.cn>
-> +
-> +:校译:
-> +
-> +================
-> +共享内存文件系统
-> +================
-> diff --git a/Documentation/translations/zh_CN/vm/slab.rst b/Documentation/translations/zh_CN/vm/slab.rst
-> new file mode 100644
-> index 000000000000..0af77c8612b8
-> --- /dev/null
-> +++ b/Documentation/translations/zh_CN/vm/slab.rst
-> @@ -0,0 +1,14 @@
-> +.. SPDX-License-Identifier: GPL-2.0
-> +.. include:: ../disclaimer-zh_CN.rst
-> +
-> +:Original: Documentation/vm/slab.rst
-> +
-> +:翻译:
-> +
-> + 司延腾 Yanteng Si <siyanteng@loongson.cn>
-> +
-> +:校译:
-> +
-> +========
-> +Slab分配
-> +========
-> diff --git a/Documentation/translations/zh_CN/vm/swap.rst b/Documentation/translations/zh_CN/vm/swap.rst
-> new file mode 100644
-> index 000000000000..1c1a3e61a80c
-> --- /dev/null
-> +++ b/Documentation/translations/zh_CN/vm/swap.rst
-> @@ -0,0 +1,14 @@
-> +.. SPDX-License-Identifier: GPL-2.0
-> +.. include:: ../disclaimer-zh_CN.rst
-> +
-> +:Original: Documentation/vm/swap.rst
-> +
-> +:翻译:
-> +
-> + 司延腾 Yanteng Si <siyanteng@loongson.cn>
-> +
-> +:校译:
-> +
-> +========
-> +交换内存
-> +========
-> diff --git a/Documentation/translations/zh_CN/vm/vmalloc.rst b/Documentation/translations/zh_CN/vm/vmalloc.rst
-> new file mode 100644
-> index 000000000000..d65ed70642c9
-> --- /dev/null
-> +++ b/Documentation/translations/zh_CN/vm/vmalloc.rst
-> @@ -0,0 +1,14 @@
-> +.. SPDX-License-Identifier: GPL-2.0
-> +.. include:: ../disclaimer-zh_CN.rst
-> +
-> +:Original: Documentation/vm/vmalloc.rst
-> +
-> +:翻译:
-> +
-> + 司延腾 Yanteng Si <siyanteng@loongson.cn>
-> +
-> +:校译:
-> +
-> +================
-> +连续虚拟内存分配
-> +================
-> -- 
-> 2.27.0
+Cheers,
+Longman
 
