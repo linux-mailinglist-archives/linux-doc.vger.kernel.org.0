@@ -2,201 +2,113 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 5B77554AAF1
-	for <lists+linux-doc@lfdr.de>; Tue, 14 Jun 2022 09:49:12 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 096BD54AC64
+	for <lists+linux-doc@lfdr.de>; Tue, 14 Jun 2022 10:49:19 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1354869AbiFNHtG (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 14 Jun 2022 03:49:06 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:38278 "EHLO
+        id S1355803AbiFNIsR (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 14 Jun 2022 04:48:17 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:48458 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1354832AbiFNHtD (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 14 Jun 2022 03:49:03 -0400
-Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.133.124])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTP id DA8333E5D7
-        for <linux-doc@vger.kernel.org>; Tue, 14 Jun 2022 00:49:01 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-        s=mimecast20190719; t=1655192941;
-        h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-         to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-         content-transfer-encoding:content-transfer-encoding:
-         in-reply-to:in-reply-to:references:references;
-        bh=p+wrdfuMBKazwT1cY4RvGcWmJDzmwuDS6uqWLtKiUfE=;
-        b=SHOlycRuNAZ9ieuFWvRrwE9FyWRvNqdFP8x3lxblRYzvps0uTC/qMbFGwA9wYkcVTwpe1m
-        te4JoBA4WosO0VVAZwuvZlR+KJCAv4VRai8LXj85Ieec9ssBaDciQcn6JM9Cm5iUVQqMNw
-        5YyjyZV/CuvTM72EYYgGc1hycNqyyj0=
-Received: from mimecast-mx02.redhat.com (mimecast-mx02.redhat.com
- [66.187.233.88]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- us-mta-528-4fwtt90OOBmlDGWDtDQvWg-1; Tue, 14 Jun 2022 03:48:55 -0400
-X-MC-Unique: 4fwtt90OOBmlDGWDtDQvWg-1
-Received: from smtp.corp.redhat.com (int-mx10.intmail.prod.int.rdu2.redhat.com [10.11.54.10])
-        (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
-        (No client certificate requested)
-        by mimecast-mx02.redhat.com (Postfix) with ESMTPS id AF52A8041BD;
-        Tue, 14 Jun 2022 07:48:54 +0000 (UTC)
-Received: from [10.39.194.250] (unknown [10.39.194.250])
-        by smtp.corp.redhat.com (Postfix) with ESMTP id 1D770492C3B;
-        Tue, 14 Jun 2022 07:48:52 +0000 (UTC)
-Message-ID: <9bc97629-8680-75f3-7cca-c6029a9235fa@redhat.com>
-Date:   Tue, 14 Jun 2022 09:48:52 +0200
-MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.8.0
-Subject: Re: [PATCH v2 00/12] platform/surface: aggregator: Add support for
- client hot-removal
-Content-Language: en-US
-To:     Hans de Goede <hdegoede@redhat.com>,
-        Maximilian Luz <luzmaximilian@gmail.com>,
-        Jiri Kosina <jikos@kernel.org>,
-        Sebastian Reichel <sre@kernel.org>
-Cc:     Mark Gross <markgross@kernel.org>,
+        with ESMTP id S1355865AbiFNIrJ (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 14 Jun 2022 04:47:09 -0400
+Received: from mail-pj1-x102c.google.com (mail-pj1-x102c.google.com [IPv6:2607:f8b0:4864:20::102c])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 437EE44A20;
+        Tue, 14 Jun 2022 01:47:08 -0700 (PDT)
+Received: by mail-pj1-x102c.google.com with SMTP id v11-20020a17090a4ecb00b001e2c5b837ccso11139312pjl.3;
+        Tue, 14 Jun 2022 01:47:08 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112;
+        h=from:to:cc:subject:date:message-id:in-reply-to:references
+         :mime-version:content-transfer-encoding;
+        bh=EntQmblUAdy6HR5OkX3ZttgJaoB68on9RXGKibxpzLU=;
+        b=jfo5hdK/2DWPVT1N+BbJklo1XAaKZTDglASGXP1TElxpubp011j8p2SaBoLRPZd9ly
+         QLuAHv2+ENIkuvIijwt4XLhodqEDC2F2Nd7Bkp0N0xAumQWXXwI5Zxbpx0QHf5MD6nAN
+         fD+4QJFEzr7m6bFmH3NiAiV2I7oVqmQBEO5+MRAa+IY9EogcchjPL1B+nxLAsv7NF526
+         zOwtFqHtyazzOBoUSXm5lm8GLH8Njr1ev7HxjZQqBYaRgAxDnB1xY6ZKyUEPq8oHDwMD
+         BGRXWpc8RrfeuycCnsIAN73HkzDvLbsh5ss/ZYjYLpSOgqNGkcvD3oX3fCo2E8Xm1lIm
+         4JwA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+         :references:mime-version:content-transfer-encoding;
+        bh=EntQmblUAdy6HR5OkX3ZttgJaoB68on9RXGKibxpzLU=;
+        b=LkmOuzlSuTzEExx8/HZvoQn/Vy9MapVEbJCGQ5+IDGXv4BCRRAMJ8mR8vdOrSPMfUr
+         hHoilpzkqLeEUlNE4nu9AV50sDu/9+OXMLlw/goIpAe+/B+FoK6c2/mSNHrPHd5LJvwC
+         o6f5cAFkuWKtIc7xYyvq37aI/X6hWZzgu6aR6ogLWVwc0aTJtqfJMAtfTs5ZtVQYUtkK
+         w09tgWEWWQSEBP28Hzups0B3/UhL4nE6KZ+YOWMuVTQW+QZSGVTC33MsfiBoVMPOhNHZ
+         XaVjBIeUPPw/TtHk1ZAXYP+uyYBen7kRVIYjtkZhFSJPzEwKCx4Qe84pP17pLs5oZzIQ
+         vSsA==
+X-Gm-Message-State: AOAM531XYUy5dZ8ClY87c7fUpVhXPZEqT9e8kscQvwq+X7tV8WwwITP/
+        TGduBy6awNi6rJpx/TSP3dCYzT4UxJs=
+X-Google-Smtp-Source: ABdhPJwKmt6r6V9ps0nGuI2DJWluBPG4fDDZW5mVMQExOJ7Sv+tuv4XRvrEVZYanjmWiuXBlFyQ6Kw==
+X-Received: by 2002:a17:903:11c6:b0:167:90e5:59ac with SMTP id q6-20020a17090311c600b0016790e559acmr3193741plh.143.1655196427261;
+        Tue, 14 Jun 2022 01:47:07 -0700 (PDT)
+Received: from debian.me (subs32-116-206-28-37.three.co.id. [116.206.28.37])
+        by smtp.gmail.com with ESMTPSA id a5-20020a17090a008500b001e325b9a809sm8828724pja.38.2022.06.14.01.47.04
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 14 Jun 2022 01:47:06 -0700 (PDT)
+From:   Bagas Sanjaya <bagasdotme@gmail.com>
+To:     linux-doc@vger.kernel.org
+Cc:     Bagas Sanjaya <bagasdotme@gmail.com>,
+        Stephen Rothwell <sfr@canb.auug.org.au>,
         Jonathan Corbet <corbet@lwn.net>,
-        platform-driver-x86@vger.kernel.org, linux-input@vger.kernel.org,
-        linux-pm@vger.kernel.org, linux-doc@vger.kernel.org
-References: <20220527023447.2460025-1-luzmaximilian@gmail.com>
- <23f92ec3-a739-6ee7-10f9-f66b17ae6088@redhat.com>
-From:   Benjamin Tissoires <benjamin.tissoires@redhat.com>
-In-Reply-To: <23f92ec3-a739-6ee7-10f9-f66b17ae6088@redhat.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-Scanned-By: MIMEDefang 2.85 on 10.11.54.10
-X-Spam-Status: No, score=-5.2 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,NICE_REPLY_A,
-        RCVD_IN_DNSWL_LOW,SPF_HELO_NONE,SPF_NONE,T_SCC_BODY_TEXT_LINE
-        autolearn=unavailable autolearn_force=no version=3.4.6
+        Allison Randal <allison@lohutok.net>,
+        Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+        Thomas Gleixner <tglx@linutronix.de>,
+        linux-kernel@vger.kernel.org
+Subject: [PATCH] Documentation: samsung-s3c24xx: Add blank line after SPDX directive
+Date:   Tue, 14 Jun 2022 15:46:58 +0700
+Message-Id: <20220614084658.509389-1-bagasdotme@gmail.com>
+X-Mailer: git-send-email 2.36.0
+In-Reply-To: <20220614164506.6afd65a6@canb.auug.org.au>
+References: <20220614164506.6afd65a6@canb.auug.org.au>
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
+X-Spam-Status: No, score=-0.6 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_FROM,
+        RCVD_IN_DNSWL_NONE,RCVD_IN_SORBS_WEB,SPF_HELO_NONE,SPF_PASS,
+        T_SCC_BODY_TEXT_LINE autolearn=no autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On 6/13/22 17:27, Hans de Goede wrote:
-> Hi,
-> 
-> On 5/27/22 04:34, Maximilian Luz wrote:
->> Summary:
->>
->>    Add support for the HID type cover input devices on the Pro 8 and all
->>    requirements for that.
->>
->>
->> Blurb from v1:
->>
->>    This series adds support for the type cover of the Surface Pro 8. On
->>    the Pro 8, the type cover is (unlike on previous generations) handled
->>    via the Surface System Aggregator Module (SSAM). As the type cover is
->>    detachable, care needs to be taken and the respective SSAM (HID)
->>    client devices need to be properly removed when detached and
->>    re-initialized when attached.
->>    
->>    Therefore, this series does three things:
->>    
->>     1. Improve hot-removal support for SSAM client devices. When
->>        hot-removing clients, subsequent communication may time out.
->>    
->>        In the worst case, this can lead to problems when devices are
->>        detached and re-attached quickly, before we can remove their
->>        respective kernel representations. This can then lead to devices
->>        being in an uninitialized state, preventing, for example, touchpad
->>        gestures from working properly as the required HID feature report
->>        has not been sent.
->>    
->>        Therefore, handle hot-removal of devices more gracefully by
->>        avoiding communication once it has been detected and ensure that
->>        devices are actually removed.
->>     
->>     2. Generify SSAM subsystem hubs and add a KIP hub. On the Surface Pro
->>        8, the KIP subsystem (only that abbreviation is known) is
->>        responsible for managing type-cover devices. This hub acts as the
->>        controller for device removal similar to the BAS (detachable base)
->>        subsystem hub on the Surface Book 3 (therefore we can share most
->>        of the code between them).
->>    
->>     3. Add the (HID) type-cover clients of the Surface Pro 8 to the
->>        aggregator registry.
->>
->>
->> Changes in v2:
->>
->>   - Introduce "platform/surface: aggregator: Allow is_ssam_device() to be
->>     used when CONFIG_SURFACE_AGGREGATOR_BUS is disabled" to fix an
->>     undefined reference  build issue when CONFIG_SURFACE_AGGREGATOR_BUS
->>     is disabled.
->>
->>   - Make SSAM hub device UIDs consistent.
->>      - Introduce "platform/surface: aggregator_registry: Change device ID
->>        for base hub" to make association between hub and subsystem target
->>        category more obvious.
->>      - Change hub device ID for KIP subsystem hub to be consistent with
->>        the id of the already existing BAS hub.
-> 
-> Thank you for your patch-series, I've applied the series to my
-> review-hans branch:
-> https://git.kernel.org/pub/scm/linux/kernel/git/pdx86/platform-drivers-x86.git/log/?h=review-hans
-> 
-> Once I've run some tests on this branch the patches there will be
-> added to the platform-drivers-x86/for-next branch and eventually
-> will be included in the pdx86 pull-request to Linus for the next
-> merge-window.
-> 
-> Jiri, Benjamin, note I've also taken the one small(ish) HID patch
-> which is a part of this series, despite it lacking an Ack from
-> either of you. I hope this is ok, if not let me know.
+After merging spdx tree for linux-next testing, Stephen Rothwell reported
+htmldocs warning:
 
-Sorry I am well behind on my patch processing.
+Documentation/arm/samsung-s3c24xx/cpufreq.rst:2: WARNING: Explicit markup ends without a blank line; unexpected unindent.
 
-The patch is simple enough and if you reviewed the rest, that is fine by me.
+It is due to missing blank line separator between SPDX directive and
+page title.
 
-Just for the archives:
-For the HID part
-Acked-by: Benjamin Tissoires <benjamin.tisssoires@redhat.com>
+Add the blank line to fix the warning.
 
-(no need to force push your branch unless you think it's really 
-important to have my ack).
+Link: https://lore.kernel.org/linux-next/20220614164506.6afd65a6@canb.auug.org.au/
+Fixes: b7bc1c9e5b04da ("treewide: Replace GPLv2 boilerplate/reference with SPDX - gpl-2.0_147.RULE")
+Reported-by: Stephen Rothwell <sfr@canb.auug.org.au>
+Cc: Jonathan Corbet <corbet@lwn.net>
+Cc: Allison Randal <allison@lohutok.net>
+Cc: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+Cc: Thomas Gleixner <tglx@linutronix.de>
+Cc: linux-kernel@vger.kernel.org
+Signed-off-by: Bagas Sanjaya <bagasdotme@gmail.com>
+---
+ Documentation/arm/samsung-s3c24xx/cpufreq.rst | 1 +
+ 1 file changed, 1 insertion(+)
 
-Cheers,
-Benjamin
+diff --git a/Documentation/arm/samsung-s3c24xx/cpufreq.rst b/Documentation/arm/samsung-s3c24xx/cpufreq.rst
+index ed19ce1a462921..cd22697cf60660 100644
+--- a/Documentation/arm/samsung-s3c24xx/cpufreq.rst
++++ b/Documentation/arm/samsung-s3c24xx/cpufreq.rst
+@@ -1,4 +1,5 @@
+ .. SPDX-License-Identifier: GPL-2.0-only
++
+ =======================
+ S3C24XX CPUfreq support
+ =======================
 
-> 
-> Regards,
-> 
-> Hans
-> 
-> 
-> 
-> 
->> Maximilian Luz (12):
->>    platform/surface: aggregator: Allow is_ssam_device() to be used when
->>      CONFIG_SURFACE_AGGREGATOR_BUS is disabled
->>    platform/surface: aggregator: Allow devices to be marked as
->>      hot-removed
->>    platform/surface: aggregator: Allow notifiers to avoid communication
->>      on unregistering
->>    platform/surface: aggregator_registry: Use client device wrappers for
->>      notifier registration
->>    power/supply: surface_charger: Use client device wrappers for notifier
->>      registration
->>    power/supply: surface_battery: Use client device wrappers for notifier
->>      registration
->>    HID: surface-hid: Add support for hot-removal
->>    platform/surface: aggregator: Add comment for KIP subsystem category
->>    platform/surface: aggregator_registry: Generify subsystem hub
->>      functionality
->>    platform/surface: aggregator_registry: Change device ID for base hub
->>    platform/surface: aggregator_registry: Add KIP device hub
->>    platform/surface: aggregator_registry: Add support for keyboard cover
->>      on Surface Pro 8
->>
->>   .../driver-api/surface_aggregator/client.rst  |   6 +-
->>   drivers/hid/surface-hid/surface_hid_core.c    |  38 +-
->>   .../platform/surface/aggregator/controller.c  |  53 ++-
->>   .../surface/surface_aggregator_registry.c     | 403 +++++++++++++-----
->>   drivers/power/supply/surface_battery.c        |   4 +-
->>   drivers/power/supply/surface_charger.c        |   4 +-
->>   include/linux/surface_aggregator/controller.h |  24 +-
->>   include/linux/surface_aggregator/device.h     | 125 +++++-
->>   include/linux/surface_aggregator/serial_hub.h |   2 +-
->>   9 files changed, 513 insertions(+), 146 deletions(-)
->>
-> 
+base-commit: 35d872b9ea5b3ad784d7479ea728dcb688df2db7
+-- 
+An old man doll... just what I always wanted! - Clara
 
