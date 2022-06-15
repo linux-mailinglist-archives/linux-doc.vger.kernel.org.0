@@ -2,112 +2,131 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 10DEB54C492
-	for <lists+linux-doc@lfdr.de>; Wed, 15 Jun 2022 11:25:11 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id B661F54C495
+	for <lists+linux-doc@lfdr.de>; Wed, 15 Jun 2022 11:25:25 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S242217AbiFOJYq (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 15 Jun 2022 05:24:46 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:37360 "EHLO
+        id S241813AbiFOJZY (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 15 Jun 2022 05:25:24 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:37828 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S241256AbiFOJYp (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Wed, 15 Jun 2022 05:24:45 -0400
-Received: from loongson.cn (mail.loongson.cn [114.242.206.163])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTP id 30C0A15821
-        for <linux-doc@vger.kernel.org>; Wed, 15 Jun 2022 02:24:44 -0700 (PDT)
-Received: from localhost.localdomain (unknown [223.64.16.213])
-        by mail.loongson.cn (Coremail) with SMTP id AQAAf9DxT95RpalikHZDAA--.6185S9;
-        Wed, 15 Jun 2022 17:24:42 +0800 (CST)
-From:   Binbin Zhou <zhoubinbin@loongson.cn>
-To:     alexs@kernel.org, siyanteng@loongson.cn
-Cc:     corbet@lwn.net, chenhuacai@loongson.cn, bobwxc@email.cn,
-        linux-doc@vger.kernel.org, Binbin Zhou <zhoubinbin@loongson.cn>
-Subject: [PATCH 7/9] docs/zh_CN: core-api: Update the translation of printk-format.rst to 5.19-rc2
-Date:   Wed, 15 Jun 2022 17:24:30 +0800
-Message-Id: <ebfda3a43afbfb5dd0186a6e68e080dd933a4883.1655258291.git.zhoubinbin@loongson.cn>
-X-Mailer: git-send-email 2.20.1
-In-Reply-To: <cover.1655258291.git.zhoubinbin@loongson.cn>
-References: <cover.1655258291.git.zhoubinbin@loongson.cn>
+        with ESMTP id S243896AbiFOJZY (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Wed, 15 Jun 2022 05:25:24 -0400
+Received: from mail-pg1-x52f.google.com (mail-pg1-x52f.google.com [IPv6:2607:f8b0:4864:20::52f])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 3B04315801
+        for <linux-doc@vger.kernel.org>; Wed, 15 Jun 2022 02:25:23 -0700 (PDT)
+Received: by mail-pg1-x52f.google.com with SMTP id g186so10877818pgc.1
+        for <linux-doc@vger.kernel.org>; Wed, 15 Jun 2022 02:25:23 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=linaro.org; s=google;
+        h=date:from:to:cc:subject:message-id:references:mime-version
+         :content-disposition:in-reply-to;
+        bh=QD1mf5DnBqcLEVOFoiWBRR1QBiCXzXfoEa1RUQMHEbg=;
+        b=gmVSCn46TlF8cm8ao3weZQ1dQ+919xti8x+JNTqvEbhjNEFZdvPMGRwZbobjNM3xbf
+         uC1/HxtqLlOGh00UA96fBXAz35WiunpTXGZzV5kQH/ocYMckFGEggHTjUPX+MI/pZmOc
+         0Nyfs4DBuxMJLPDFXQUFccwTvxRzbEGEEK+TKSrcCe+eTJmjpPY47aruJ1kRn/cku3kK
+         luPIiVacfBtMMAvwPdeNm4mBL5eFXYP++g0eRxmGW7FuPJI23ZPCpYI5ypPiJCZkOwWa
+         9BR0ntAlHQ+6Q4rk86UEoZfkZ/Qds91d142Z3ertz6dMEcCU9As+k+oOuPVQSa+tI6ap
+         YaWg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+         :mime-version:content-disposition:in-reply-to;
+        bh=QD1mf5DnBqcLEVOFoiWBRR1QBiCXzXfoEa1RUQMHEbg=;
+        b=kNhLKxAGBWtlp/hESTb5y17p0OETGibckKxLtZcUXN0xZgsOxyszKnQwQodJJAutKp
+         EnXskOpkDA5AjeSdqSz4/bf8nGeUOo06+OA+1wOGe3A+mLkQhSgPNqFZwftQ/0Q5KDbX
+         4r82lT97SYm1BDzsxFp1m87SBcCjxEaSRecVTpwCqcmBrYAT/rdGNpNntkgze6GghxQd
+         pvz4imHFTNCpUA6i7pIbIi4Adx/YBLK4XRR6kIxzGqstzALItlYGJydXBaKCHz+m9fX3
+         5k9VHnKxGPu5TR2L2PX0OOnlrwCudo13GD8FcCH0LoOR2fkMPek+0XiiF2zzG8yYAr/X
+         V3zg==
+X-Gm-Message-State: AOAM532shH+1EJtP1PFAG5l915n36N2fCFhrETbFlVOeMNP+L1UWHEvy
+        1yOOwVpz/VWW2y52FLiGNTeDmQ==
+X-Google-Smtp-Source: ABdhPJy/EMp63lY79wavrcwsuOIlryAFSfAtHCajQFGqGhcTul+yPCkHJc1P94NUfLJmE8bfCaxLrA==
+X-Received: by 2002:a63:6c4a:0:b0:3fe:2813:b1d with SMTP id h71-20020a636c4a000000b003fe28130b1dmr8063133pgc.613.1655285122694;
+        Wed, 15 Jun 2022 02:25:22 -0700 (PDT)
+Received: from localhost ([122.162.234.2])
+        by smtp.gmail.com with ESMTPSA id v2-20020a17090a778200b001ea90dada74sm1231965pjk.12.2022.06.15.02.25.21
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 15 Jun 2022 02:25:21 -0700 (PDT)
+Date:   Wed, 15 Jun 2022 14:55:19 +0530
+From:   Viresh Kumar <viresh.kumar@linaro.org>
+To:     Juergen Gross <jgross@suse.com>
+Cc:     xen-devel@lists.xenproject.org, linux-doc@vger.kernel.org,
+        linux-kernel@vger.kernel.org, Jonathan Corbet <corbet@lwn.net>,
+        Stefano Stabellini <sstabellini@kernel.org>,
+        Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>
+Subject: Re: [PATCH] xen: don't require virtio with grants for non-PV guests
+Message-ID: <20220615092519.5677clabobheziet@vireshk-i7>
+References: <20220615084835.27113-1-jgross@suse.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-CM-TRANSID: AQAAf9DxT95RpalikHZDAA--.6185S9
-X-Coremail-Antispam: 1UD129KBjvJXoW7KryktryfKw15tw4xKw47twb_yoW8WF4rpF
-        y2k34Iga1kGF1jvrs3XryUKr15GFykCa1q9a9rXwn2vFn3K348trsxtr9aqrWfGFyIyFW2
-        qwsIyFWDuF15C3DanT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
-        9KBjDU0xBIdaVrnRJUUUPK14x267AKxVWrJVCq3wAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
-        rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2048vs2IY020E87I2jVAFwI0_JF0E3s1l82xGYI
-        kIc2x26xkF7I0E14v26ryj6s0DM28lY4IEw2IIxxk0rwA2F7IY1VAKz4vEj48ve4kI8wA2
-        z4x0Y4vE2Ix0cI8IcVAFwI0_Ar0_tr1l84ACjcxK6xIIjxv20xvEc7CjxVAFwI0_Gr1j6F
-        4UJwA2z4x0Y4vEx4A2jsIE14v26F4UJVW0owA2z4x0Y4vEx4A2jsIEc7CjxVAFwI0_GcCE
-        3s1le2I262IYc4CY6c8Ij28IcVAaY2xG8wAqx4xG64xvF2IEw4CE5I8CrVC2j2WlYx0E2I
-        x0cI8IcVAFwI0_Jr0_Jr4lYx0Ex4A2jsIE14v26r1j6r4UMcvjeVCFs4IE7xkEbVWUJVW8
-        JwACjcxG0xvY0x0EwIxGrwACjI8F5VA0II8E6IAqYI8I648v4I1lc2xSY4AK67AK6r4fMx
-        AIw28IcxkI7VAKI48JMxC20s026xCaFVCjc4AY6r1j6r4UMxCIbckI1I0E14v26r126r1D
-        MI8I3I0E5I8CrVAFwI0_Jr0_Jr4lx2IqxVCjr7xvwVAFwI0_JrI_JrWlx4CE17CEb7AF67
-        AKxVWUAVWUtwCIc40Y0x0EwIxGrwCI42IY6xIIjxv20xvE14v26r1I6r4UMIIF0xvE2Ix0
-        cI8IcVCY1x0267AKxVWxJVW8Jr1lIxAIcVCF04k26cxKx2IYs7xG6r1j6r1xMIIF0xvEx4
-        A2jsIE14v26r4j6F4UMIIF0xvEx4A2jsIEc7CjxVAFwI0_Gr0_Gr1UYxBIdaVFxhVjvjDU
-        0xZFpf9x0JUfl19UUUUU=
-X-CM-SenderInfo: p2kr3uplqex0o6or00hjvr0hdfq/
-X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00,SPF_HELO_PASS,
-        SPF_PASS,T_SCC_BODY_TEXT_LINE autolearn=ham autolearn_force=no
-        version=3.4.6
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20220615084835.27113-1-jgross@suse.com>
+X-Spam-Status: No, score=-2.1 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_NONE,
+        SPF_HELO_NONE,SPF_PASS,T_SCC_BODY_TEXT_LINE autolearn=ham
+        autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Synchronous translation from the following commits(Latest in front):
+On 15-06-22, 10:48, Juergen Gross wrote:
+> Commit fa1f57421e0b ("xen/virtio: Enable restricted memory access using
+> Xen grant mappings") introduced a new requirement for using virtio
+> devices: the backend now needs to support the VIRTIO_F_ACCESS_PLATFORM
+> feature.
+> 
+> This is an undue requirement for non-PV guests, as those can be operated
+> with existing backends without any problem, as long as those backends
+> are running in dom0.
+> 
+> Per default allow virtio devices without grant support for non-PV
+> guests.
+> 
+> The setting can be overridden by using the new "xen_virtio_grant"
+> command line parameter.
+> 
+> Add a new config item to always force use of grants for virtio.
+> 
+> Fixes: fa1f57421e0b ("xen/virtio: Enable restricted memory access using Xen grant mappings")
+> Signed-off-by: Juergen Gross <jgross@suse.com>
+> ---
+>  .../admin-guide/kernel-parameters.txt         |  6 +++++
+>  drivers/xen/Kconfig                           |  9 ++++++++
+>  drivers/xen/grant-dma-ops.c                   | 22 +++++++++++++++++++
+>  include/xen/xen.h                             | 12 +++++-----
+>  4 files changed, 42 insertions(+), 7 deletions(-)
 
-[1]: commit 2fbf5241a561("vsprintf: add new `%pA` format specifier")
+Thanks for the quick fix.
 
-[2]: commit 6a7ca80f4033("vsprintf: Update %pGp documentation
-     about that it prints hex value")
+With CONFIG_DEBUG_SECTION_MISMATCH=y, this generates a warning.
 
-Signed-off-by: Binbin Zhou <zhoubinbin@loongson.cn>
----
- .../translations/zh_CN/core-api/printk-formats.rst  | 13 ++++++++++++-
- 1 file changed, 12 insertions(+), 1 deletion(-)
+WARNING: modpost: vmlinux.o(.text+0x7a8270): Section mismatch in reference from the function xen_set_restricted_virtio_memory_access() to the variable .init.data:xen_virtio_grants
+The function xen_set_restricted_virtio_memory_access() references
+the variable __initdata xen_virtio_grants.
+This is often because xen_set_restricted_virtio_memory_access lacks a __initdata
+annotation or the annotation of xen_virtio_grants is wrong.
 
-diff --git a/Documentation/translations/zh_CN/core-api/printk-formats.rst b/Documentation/translations/zh_CN/core-api/printk-formats.rst
-index ce39c788cf5a..78561c35e528 100644
---- a/Documentation/translations/zh_CN/core-api/printk-formats.rst
-+++ b/Documentation/translations/zh_CN/core-api/printk-formats.rst
-@@ -5,6 +5,7 @@
- :翻译:
- 
-  司延腾 Yanteng Si <siyanteng@loongson.cn>
-+ 周彬彬 Binbin Zhou <zhoubinbin@loongson.cn>
- 
- .. _cn_printk-formats.rst:
- 
-@@ -548,7 +549,7 @@ nodemask_pr_args()来方便打印cpumask和nodemask。
- 
- ::
- 
--	%pGp	referenced|uptodate|lru|active|private|node=0|zone=2|lastcpupid=0x1fffff
-+	%pGp	0x17ffffc0002036(referenced|uptodate|lru|active|private|node=0|zone=2|lastcpupid=0x1fffff)
- 	%pGg	GFP_USER|GFP_DMA32|GFP_NOWARN
- 	%pGv	read|exec|mayread|maywrite|mayexec|denywrite
- 
-@@ -589,6 +590,16 @@ V4L2和DRM FourCC代码(像素格式)
- 	%p4cc	Y10  little-endian (0x20303159)
- 	%p4cc	NV12 big-endian (0xb231564e)
- 
-+Rust
-+----
-+
-+::
-+
-+       %pA
-+
-+仅用于Rust代码格式化``core::fmt::Arguments``。
-+不能用于C语言。
-+
- 谢谢
- ====
- 
+This can be fixed by:
+
+diff --git a/drivers/xen/grant-dma-ops.c b/drivers/xen/grant-dma-ops.c
+index d1fae789dfad..1099097b4515 100644
+--- a/drivers/xen/grant-dma-ops.c
++++ b/drivers/xen/grant-dma-ops.c
+@@ -42,7 +42,7 @@ static __init int parse_use_grants(char *arg)
+ }
+ early_param("xen_virtio_grant", parse_use_grants);
+
+-void xen_set_restricted_virtio_memory_access(void)
++void __init xen_set_restricted_virtio_memory_access(void)
+ {
+        if (IS_ENABLED(CONFIG_XEN_VIRTIO_FORCE_GRANT) || xen_virtio_grants ||
+            (!xen_virtio_grants_set && xen_pv_domain()))
+
+With that:
+
+Tested-by: Viresh Kumar <viresh.kumar@linaro.org>
+
 -- 
-2.20.1
-
+viresh
