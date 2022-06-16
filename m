@@ -2,57 +2,65 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 43C6A54DC12
-	for <lists+linux-doc@lfdr.de>; Thu, 16 Jun 2022 09:44:09 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id A3E8054DC33
+	for <lists+linux-doc@lfdr.de>; Thu, 16 Jun 2022 09:54:07 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S230347AbiFPHnr (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 16 Jun 2022 03:43:47 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:36672 "EHLO
+        id S1359288AbiFPHyF (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 16 Jun 2022 03:54:05 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:43892 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1359643AbiFPHno (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Thu, 16 Jun 2022 03:43:44 -0400
-Received: from loongson.cn (mail.loongson.cn [114.242.206.163])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTP id A08765D189
-        for <linux-doc@vger.kernel.org>; Thu, 16 Jun 2022 00:43:43 -0700 (PDT)
-Received: from localhost.localdomain (unknown [112.20.110.105])
-        by mail.loongson.cn (Coremail) with SMTP id AQAAf9Dxr08o36pipIVFAA--.8884S5;
-        Thu, 16 Jun 2022 15:43:39 +0800 (CST)
-From:   Yanteng Si <siyanteng@loongson.cn>
-To:     alexs@kernel.org, bobwxc@email.cn, seakeel@gmail.com
-Cc:     Yanteng Si <siyanteng@loongson.cn>, corbet@lwn.net,
-        chenhuacai@kernel.org, jiaxun.yang@flygoat.com,
-        linux-doc@vger.kernel.org, siyanteng01@gmail.com,
-        zhoubinbin@loongson.cn
-Subject: [PATCH v3 3/3] docs/zh_CN: Update the translation of vm index to 5.19-rc1
-Date:   Thu, 16 Jun 2022 15:44:58 +0800
-Message-Id: <35d10864fb9b57bf288d4efa5642f93a60079029.1655362610.git.siyanteng@loongson.cn>
-X-Mailer: git-send-email 2.27.0
-In-Reply-To: <cover.1655362610.git.siyanteng@loongson.cn>
-References: <cover.1655362610.git.siyanteng@loongson.cn>
+        with ESMTP id S1359398AbiFPHyE (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Thu, 16 Jun 2022 03:54:04 -0400
+Received: from mga07.intel.com (mga07.intel.com [134.134.136.100])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 069B558E44;
+        Thu, 16 Jun 2022 00:54:03 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1655366043; x=1686902043;
+  h=date:from:to:cc:subject:in-reply-to:message-id:
+   references:mime-version:content-id;
+  bh=eVrD4xANVA1qmWE7aHLjyWwagcA1Yxkv/BMYL/OgcAk=;
+  b=Q9iUx2tDrqqwKmipEwswTd7RSnNb4zFKqL/JVZUSoQLsLfz154okByel
+   vZuY26G8lyUO9OzlHv3kf499jwNfD4GgCbRoq9fIl1QEd7+TeunMdBIIt
+   P8ft/XcyrT45sneZGdoeirVUKrdpLR05LroyOAZqdFSogZ971iaYm3chE
+   pQI+6dIWMQDuYxhiQaZri58tWRfGlSo1GjHaBsC+crfJLqsFwPN3sCwpP
+   xNTWc04euJ17ZdcXd8atts2/rdr6LEieen0Cb0449KoCe6I7jaqqcap+e
+   D1ObzZNNRddq4jAQHky02adEiIENqDTll6sJ/HXSaOHQydlzgPdTC70dC
+   Q==;
+X-IronPort-AV: E=McAfee;i="6400,9594,10379"; a="343150292"
+X-IronPort-AV: E=Sophos;i="5.91,304,1647327600"; 
+   d="scan'208";a="343150292"
+Received: from fmsmga008.fm.intel.com ([10.253.24.58])
+  by orsmga105.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 16 Jun 2022 00:54:02 -0700
+X-IronPort-AV: E=Sophos;i="5.91,304,1647327600"; 
+   d="scan'208";a="641423577"
+Received: from mngueron-mobl1.amr.corp.intel.com ([10.252.60.248])
+  by fmsmga008-auth.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 16 Jun 2022 00:53:58 -0700
+Date:   Thu, 16 Jun 2022 10:53:56 +0300 (EEST)
+From:   =?ISO-8859-15?Q?Ilpo_J=E4rvinen?= <ilpo.jarvinen@linux.intel.com>
+To:     Jiri Slaby <jirislaby@kernel.org>,
+        Andy Shevchenko <andriy.shevchenko@linux.intel.com>
+cc:     linux-serial <linux-serial@vger.kernel.org>,
+        Greg KH <gregkh@linuxfoundation.org>,
+        Jonathan Corbet <corbet@lwn.net>,
+        Arnd Bergmann <arnd@arndb.de>, linux-doc@vger.kernel.org,
+        LKML <linux-kernel@vger.kernel.org>, linux-arch@vger.kernel.org,
+        Lukas Wunner <lukas@wunner.de>,
+        =?ISO-8859-15?Q?Uwe_Kleine-K=F6nig?= 
+        <u.kleine-koenig@pengutronix.de>,
+        Lino Sanfilippo <LinoSanfilippo@gmx.de>,
+        linux-api@vger.kernel.org
+Subject: Re: [PATCH v7 5/6] serial: Support for RS-485 multipoint addresses
+In-Reply-To: <c0996d75-070e-21e6-eb51-a10a358dbb46@kernel.org>
+Message-ID: <accefd7-6fbf-b1f1-f467-5eaab0dac051@linux.intel.com>
+References: <20220615124829.34516-1-ilpo.jarvinen@linux.intel.com> <20220615124829.34516-6-ilpo.jarvinen@linux.intel.com> <Yqno+b/+W2RP8rnh@smile.fi.intel.com> <ae5c2e50-1a19-7a8f-7dbf-d7ef84128be6@linux.intel.com>
+ <c0996d75-070e-21e6-eb51-a10a358dbb46@kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-CM-TRANSID: AQAAf9Dxr08o36pipIVFAA--.8884S5
-X-Coremail-Antispam: 1UD129KBjvJXoWxZFyxtry8Jr18Ww4UKr13twb_yoW5GF4fpr
-        nrGryfK3ZrJ3W3u34fG347CF4rGF4xWwsrWFWjgwnY9rsrtrW0yr4qyr1jga4xWryfZay8
-        XFWayr1kury2y37anT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
-        9KBjDU0xBIdaVrnRJUUUPC14x267AKxVWrJVCq3wAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
-        rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2048vs2IY020E87I2jVAFwI0_JrWl82xGYIkIc2
-        x26xkF7I0E14v26ryj6s0DM28lY4IEw2IIxxk0rwA2F7IY1VAKz4vEj48ve4kI8wA2z4x0
-        Y4vE2Ix0cI8IcVAFwI0_Xr0_Ar1l84ACjcxK6xIIjxv20xvEc7CjxVAFwI0_Gr1j6F4UJw
-        A2z4x0Y4vEx4A2jsIE14v26F4UJVW0owA2z4x0Y4vEx4A2jsIEc7CjxVAFwI0_GcCE3s1l
-        e2I262IYc4CY6c8Ij28IcVAaY2xG8wAqx4xG64xvF2IEw4CE5I8CrVC2j2WlYx0E2Ix0cI
-        8IcVAFwI0_Jr0_Jr4lYx0Ex4A2jsIE14v26r1j6r4UMcvjeVCFs4IE7xkEbVWUJVW8JwAC
-        jcxG0xvY0x0EwIxGrwACjI8F5VA0II8E6IAqYI8I648v4I1lFIxGxcIEc7CjxVA2Y2ka0x
-        kIwI1lc2xSY4AK67AK6r4xMxAIw28IcxkI7VAKI48JMxC20s026xCaFVCjc4AY6r1j6r4U
-        MI8I3I0E5I8CrVAFwI0_Jr0_Jr4lx2IqxVCjr7xvwVAFwI0_JrI_JrWlx4CE17CEb7AF67
-        AKxVWUtVW8ZwCIc40Y0x0EwIxGrwCI42IY6xIIjxv20xvE14v26r1j6r1xMIIF0xvE2Ix0
-        cI8IcVCY1x0267AKxVW8JVWxJwCI42IY6xAIw20EY4v20xvaj40_Jr0_JF4lIxAIcVC2z2
-        80aVAFwI0_Jr0_Gr1lIxAIcVC2z280aVCY1x0267AKxVW8JVW8JrUvcSsGvfC2KfnxnUUI
-        43ZEXa7VUbfgA5UUUUU==
-X-CM-SenderInfo: pvl1t0pwhqwqxorr0wxvrqhubq/
-X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00,SPF_HELO_PASS,
-        SPF_PASS,T_SCC_BODY_TEXT_LINE autolearn=ham autolearn_force=no
+Content-Type: multipart/mixed; BOUNDARY="8323329-963945969-1655365386=:1693"
+Content-ID: <7d41d27a-51c6-841d-b65b-8d75c7e6a73@linux.intel.com>
+X-Spam-Status: No, score=-4.9 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_EF,RCVD_IN_DNSWL_MED,SPF_HELO_NONE,
+        SPF_NONE,T_SCC_BODY_TEXT_LINE autolearn=ham autolearn_force=no
         version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
@@ -60,76 +68,101 @@ Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-update to commit 481cc97349d6 ("mm,doc: Add new
-documentation structure")
+  This message is in MIME format.  The first part should be readable text,
+  while the remaining parts are likely unreadable without MIME-aware tools.
 
-Note: There are some empty files that do not need to be updated for now,
-they are:
+--8323329-963945969-1655365386=:1693
+Content-Type: text/plain; CHARSET=ISO-8859-15
+Content-Transfer-Encoding: 8BIT
+Content-ID: <dc1423b6-d575-966b-f087-4525e26fcc5f@linux.intel.com>
 
-bootmem,
-oom,
-page_allocation,
-page_cache,
-page_reclaim,
-page_tables,
-physical_memory
-process_addrs,
-shmfs,
-slab,
-vmalloc,
-swap.
+On Thu, 16 Jun 2022, Jiri Slaby wrote:
 
-Signed-off-by: Yanteng Si <siyanteng@loongson.cn>
-Reviewed-by: Wu XiangCheng <bobwxc@email.cn>
----
- Documentation/translations/zh_CN/vm/index.rst | 27 ++++++++++++++-----
- 1 file changed, 21 insertions(+), 6 deletions(-)
+> On 16. 06. 22, 7:04, Ilpo J�rvinen wrote:
+> > On Wed, 15 Jun 2022, Andy Shevchenko wrote:
+> > 
+> > > On Wed, Jun 15, 2022 at 03:48:28PM +0300, Ilpo J�rvinen wrote:
+> > > > Add support for RS-485 multipoint addressing using 9th bit [*]. The
+> > > > addressing mode is configured through .rs485_config().
+> > > > 
+> > > > ADDRB in termios indicates 9th bit addressing mode is enabled. In this
+> > > > mode, 9th bit is used to indicate an address (byte) within the
+> > > > communication line. ADDRB can only be enabled/disabled through
+> > > > .rs485_config() that is also responsible for setting the destination and
+> > > > receiver (filter) addresses.
+> > > > 
+> > > > [*] Technically, RS485 is just an electronic spec and does not itself
+> > > > specify the 9th bit addressing mode but 9th bit seems at least
+> > > > "semi-standard" way to do addressing with RS485.
+> > > > 
+> > > > Cc: Arnd Bergmann <arnd@arndb.de>
+> > > > Cc: Jonathan Corbet <corbet@lwn.net>
+> > > > Cc: linux-api@vger.kernel.org
+> > > > Cc: linux-doc@vger.kernel.org
+> > > > Cc: linux-kernel@vger.kernel.org
+> > > > Cc: linux-arch@vger.kernel.org
+> > > 
+> > > Hmm... In order to reduce commit messages you can move these Cc:s after
+> > > the
+> > > cutter line ('---').
+> > 
+> > Ok, although the toolchain I use didn't support preserving --- content
+> > so I had to create hack to preserve them, hopefully nothing backfires due
+> > to the hack. :-)
+> > 
+> > > > -	__u32	padding[5];		/* Memory is cheap, new structs
+> > > > -					   are a royal PITA .. */
+> > > > +	__u8	addr_recv;
+> > > > +	__u8	addr_dest;
+> > > > +	__u8	padding[2 + 4 * sizeof(__u32)];		/* Memory is cheap,
+> > > > new structs
+> > > > +							 * are a royal PITA ..
+> > > > */
+> > > 
+> > > I'm not sure it's an equivalent. I would leave u32 members  untouched, so
+> > > something like
+> > > 
+> > > 	__u8	addr_recv;
+> > > 	__u8	addr_dest;
+> > > 	__u8	padding0[2];		/* Memory is cheap, new structs
+> > > 	__u32	padding1[4];		 * are a royal PITA .. */
+> > > 
+> > > And repeating about `pahole` tool which may be useful here to check for
+> > > ABI
+> > > potential changes.
+> > 
+> > I cannot take __u32 padding[] away like that, this is an uapi header.
+> 
+> Yeah, but it's padding after all. I would personally break it for example as
+> Andy suggests (if pahole shows no differences in size on both 32/64 bit) and
+> wait if something breaks. To be honest, I'd not expect anyone to touch it. And
+> if someone does, we would fix it somehow and they should too...
 
-diff --git a/Documentation/translations/zh_CN/vm/index.rst b/Documentation/translations/zh_CN/vm/index.rst
-index a1c6d529b6ff..e02976f438ab 100644
---- a/Documentation/translations/zh_CN/vm/index.rst
-+++ b/Documentation/translations/zh_CN/vm/index.rst
-@@ -12,11 +12,27 @@
- Linux内存管理文档
- =================
- 
--这是一个关于Linux内存管理（mm）子系统内部的文档集，其中有不同层次的细节，包括注释
--和邮件列表的回复，用于阐述数据结构和算法的基本情况。如果你正在寻找关于简单分配内存的建
--议，请参阅(Documentation/translations/zh_CN/core-api/memory-allocation.rst)。
--对于控制和调整指南，请参阅(Documentation/admin-guide/mm/index)。
--TODO:待引用文档集被翻译完毕后请及时修改此处）
-+这是一份关于了解Linux的内存管理子系统的指南。如果你正在寻找关于简单分配内存的
-+建议，请参阅内存分配指南
-+(Documentation/translations/zh_CN/core-api/memory-allocation.rst)。
-+关于控制和调整的指南，请看管理指南
-+(Documentation/translations/zh_CN/admin-guide/mm/index.rst)。
-+
-+
-+.. toctree::
-+   :maxdepth: 1
-+
-+   highmem
-+
-+该处剩余文档待原始文档有内容后翻译。
-+
-+
-+遗留文档
-+========
-+
-+这是一个关于Linux内存管理（MM）子系统内部的旧文档的集合，其中有不同层次的细节，
-+包括注释和邮件列表的回复，用于阐述数据结构和算法的描述。它应该被很好地整合到上述
-+结构化的文档中，如果它已经完成了它的使命，可以删除。
- 
- .. toctree::
-    :maxdepth: 1
-@@ -25,7 +41,6 @@ TODO:待引用文档集被翻译完毕后请及时修改此处）
-    balance
-    damon/index
-    free_page_reporting
--   highmem
-    ksm
-    frontswap
-    hmm
+I realized there are plenty of anonymous unions already in include/uapi/ 
+so I think I can keep padding[5] too:
+
+        union {
+                /* v1 */
+                __u32   padding[5];             /* Memory is cheap, new structs are a pain */
+
+                /* v2 (adds addressing mode fields) */
+                struct {
+                        __u8    addr_recv;
+                        __u8    addr_dest;
+                        __u8    padding0[2];
+                        __u32   padding1[4];
+                };
+        };
+
+I'll just skip manual pahole step and add a few BUILD_BUG_ON()s and use 
+our build bot to do a quick check over all archs it builds for, that gives 
+much better confidence on it being ok:
+
+	BUILD_BUG_ON(((&rs485.delay_rts_after_send) + 1) != &rs485.padding[0]);
+	BUILD_BUG_ON(&rs485.padding[1] != &rs485.padding1[0]);
+	BUILD_BUG_ON(sizeof(rs485) != ((u8 *)(&rs485.padding[4]) - ((u8 *)&rs485.flags) + sizeof(__u32)));
+
+
 -- 
-2.27.0
-
+ i.
+--8323329-963945969-1655365386=:1693--
