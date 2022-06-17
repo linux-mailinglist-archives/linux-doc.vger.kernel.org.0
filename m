@@ -2,129 +2,68 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 1D5BD54F602
-	for <lists+linux-doc@lfdr.de>; Fri, 17 Jun 2022 12:56:06 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 8BDD454F63F
+	for <lists+linux-doc@lfdr.de>; Fri, 17 Jun 2022 13:05:30 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1381161AbiFQK4E (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Fri, 17 Jun 2022 06:56:04 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:52050 "EHLO
+        id S235218AbiFQLF3 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Fri, 17 Jun 2022 07:05:29 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:33826 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1380887AbiFQK4C (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Fri, 17 Jun 2022 06:56:02 -0400
-Received: from loongson.cn (mail.loongson.cn [114.242.206.163])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTP id 83B226B7D3
-        for <linux-doc@vger.kernel.org>; Fri, 17 Jun 2022 03:56:00 -0700 (PDT)
-Received: from localhost.localdomain (unknown [112.20.110.105])
-        by mail.loongson.cn (Coremail) with SMTP id AQAAf9Dxb062Xaxi1GBIAA--.27263S4;
-        Fri, 17 Jun 2022 18:55:54 +0800 (CST)
-From:   Yanteng Si <siyanteng@loongson.cn>
-To:     chenhuacai@kernel.org, alexs@kernel.org, bobwxc@email.cn,
-        seakeel@gmail.com
-Cc:     Yanteng Si <siyanteng@loongson.cn>, corbet@lwn.net,
-        kernel@xen0n.name, jiaxun.yang@flygoat.com,
-        linux-doc@vger.kernel.org, siyanteng01@gmail.com,
-        loongarch@lists.linux.dev
-Subject: [PATCH v3 2/2] docs/zh_CN/LoongArch: Fix notes rendering by using reST directives
-Date:   Fri, 17 Jun 2022 18:57:28 +0800
-Message-Id: <8d19ae5a324c7dc6210535348cea557c8832815f.1655463225.git.siyanteng@loongson.cn>
-X-Mailer: git-send-email 2.27.0
-In-Reply-To: <cover.1655463225.git.siyanteng@loongson.cn>
-References: <cover.1655463225.git.siyanteng@loongson.cn>
+        with ESMTP id S235808AbiFQLFX (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Fri, 17 Jun 2022 07:05:23 -0400
+Received: from mail-lj1-x241.google.com (mail-lj1-x241.google.com [IPv6:2a00:1450:4864:20::241])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id EAA766C540
+        for <linux-doc@vger.kernel.org>; Fri, 17 Jun 2022 04:05:20 -0700 (PDT)
+Received: by mail-lj1-x241.google.com with SMTP id r24so4370758ljn.2
+        for <linux-doc@vger.kernel.org>; Fri, 17 Jun 2022 04:05:20 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112;
+        h=mime-version:reply-to:from:date:message-id:subject:to;
+        bh=Jh3M8LDovYWs/mBJiVJoI/DS8xun0EDDqspVSX/swmY=;
+        b=ROHIKr0gNV0WC7apLWhcODm7zYSh3/6QUaqKgcbqbXOFI/uMh4hBQ6upcXGxwiJ/ea
+         hPqiLPa2R9eebMHPFiGqh717Dccn4ka2s0/KvMCi/TOwQO3a/c3sY5KkVJ2eYk4YrHGB
+         042fDvxCKFqQTFh8tJLxUistHAqWAj3uWRZfbehzk0ha/KNmgulrGBoEBI1W4xOE/df/
+         7+/OdWN+jIy3DDYtc7mfY7HfgP2rdLdgE8cXdNjGGwBXQ9Rl7wjy2agUMEbsuzP8u/gu
+         rysIOmQ/OIRWs3aV+f3ZvobniLdzuqcAB1J0lawu7yzgxXysY3Rnqgubj2t/PUtc71Iz
+         JTig==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:mime-version:reply-to:from:date:message-id
+         :subject:to;
+        bh=Jh3M8LDovYWs/mBJiVJoI/DS8xun0EDDqspVSX/swmY=;
+        b=S4BK4oVQ9ORCLbcW7hvjfaO1FDFImWPMwi3LXls/64CPyb/VCoib8CcHMx7zq+gYov
+         d88Wy6byYfMFe1P99QeXHZ7xsSvAgte+Wftkfz/99wYphhwFIeSN2mmIxlu+cpB0oajC
+         Fu6wE8gudJh38PXsssRsEnDjoo3GQwhucjVZK8ITi52Qcw7YM5iOj+BNFTbZbzERIKlY
+         c/TiUqdbfDWTgl81tQ3mOvRHC31giY2gMeXbFPYlg4RinkqVCemc6CZ44RY0b195EmnE
+         T6TrSWZqfHh0Dgp43wRTq48V73uTfXlRISK8W0F+DzgyV8aGaARZr5l1S9UqkCNwawGH
+         2ggg==
+X-Gm-Message-State: AJIora9mJG7HUfb7OvYDRna0llyKOfbPkXb3PuIi2HHAnb1TLPMz4S5x
+        M7UaiMt49Dur6kqUnAJj6JDlKtH8aIZUhXerM8w=
+X-Google-Smtp-Source: AGRyM1ueVXADqwQwX8wE6PBVnerb12awQRHEPMxhUZjdWtzw6oZXVUlciqHvp862TZcd+uRdXPJg8PFxtv7H1ZnQkLw=
+X-Received: by 2002:a05:651c:1549:b0:258:4386:f6a2 with SMTP id
+ y9-20020a05651c154900b002584386f6a2mr4641118ljp.527.1655463919194; Fri, 17
+ Jun 2022 04:05:19 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-CM-TRANSID: AQAAf9Dxb062Xaxi1GBIAA--.27263S4
-X-Coremail-Antispam: 1UD129KBjvJXoWxGw48XF4xXFW8Ar1xJw48tFb_yoWruF1fpa
-        s2kr93KF1DA347Jr4kCF1UCa1xGF1xuanFkFWrK3WkJrnrZrn5Kr18tF9rXFW3GrySyFZY
-        vr4rKw4kZr1YkwUanT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
-        9KBjDU0xBIdaVrnRJUUUPC14x267AKxVWrJVCq3wAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
-        rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2048vs2IY020E87I2jVAFwI0_Jryl82xGYIkIc2
-        x26xkF7I0E14v26ryj6s0DM28lY4IEw2IIxxk0rwA2F7IY1VAKz4vEj48ve4kI8wA2z4x0
-        Y4vE2Ix0cI8IcVAFwI0_Ar0_tr1l84ACjcxK6xIIjxv20xvEc7CjxVAFwI0_Gr1j6F4UJw
-        A2z4x0Y4vEx4A2jsIE14v26rxl6s0DM28EF7xvwVC2z280aVCY1x0267AKxVW0oVCq3wAS
-        0I0E0xvYzxvE52x082IY62kv0487Mc02F40EFcxC0VAKzVAqx4xG6I80ewAv7VC0I7IYx2
-        IY67AKxVWUJVWUGwAv7VC2z280aVAFwI0_Gr0_Cr1lOx8S6xCaFVCjc4AY6r1j6r4UM4x0
-        Y48IcxkI7VAKI48JM4x0x7Aq67IIx4CEVc8vx2IErcIFxwACI402YVCY1x02628vn2kIc2
-        xKxwCY02Avz4vE14v_Gw1l42xK82IYc2Ij64vIr41l4I8I3I0E4IkC6x0Yz7v_Jr0_Gr1l
-        x2IqxVAqx4xG67AKxVWUJVWUGwC20s026x8GjcxK67AKxVWUGVWUWwC2zVAF1VAY17CE14
-        v26r1q6r43MIIYrxkI7VAKI48JMIIF0xvE2Ix0cI8IcVAFwI0_Jr0_JF4lIxAIcVC0I7IY
-        x2IY6xkF7I0E14v26r4j6F4UMIIF0xvE42xK8VAvwI8IcIk0rVWUJVWUCwCI42IY6I8E87
-        Iv67AKxVW8JVWxJwCI42IY6I8E87Iv6xkF7I0E14v26r4UJVWxJrUvcSsGvfC2KfnxnUUI
-        43ZEXa7VUjE_MDUUUUU==
-X-CM-SenderInfo: pvl1t0pwhqwqxorr0wxvrqhubq/
-X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00,SPF_HELO_PASS,
-        SPF_PASS,T_SCC_BODY_TEXT_LINE autolearn=ham autolearn_force=no
+Received: by 2002:ab3:680f:0:0:0:0:0 with HTTP; Fri, 17 Jun 2022 04:05:18
+ -0700 (PDT)
+Reply-To: sj7209917@gmail.com
+From:   Joseph smith <maelyskpeta@gmail.com>
+Date:   Fri, 17 Jun 2022 04:05:18 -0700
+Message-ID: <CACKGxpzUX=q9UbG9foKmEBftVUzUrBi0ih16YJngNh+fZyW+dA@mail.gmail.com>
+Subject: 
+To:     undisclosed-recipients:;
+Content-Type: text/plain; charset="UTF-8"
+X-Spam-Status: No, score=4.0 required=5.0 tests=BAYES_50,DKIM_SIGNED,
+        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_FROM,FREEMAIL_REPLYTO,
+        FREEMAIL_REPLYTO_END_DIGIT,RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,SPF_PASS,
+        T_SCC_BODY_TEXT_LINE,UNDISC_FREEM autolearn=no autolearn_force=no
         version=3.4.6
+X-Spam-Level: ****
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-"Note" is an admonition, but it doesn't render
-correctly, let's fix it by using reST directives.
-
-Fixes: f23b22599f8e ("Documentation/zh_CN: Add basic LoongArch documentations")
-Signed-off-by: Yanteng Si <siyanteng@loongson.cn>
----
- .../translations/zh_CN/loongarch/introduction.rst  | 14 ++++++++------
- .../zh_CN/loongarch/irq-chip-model.rst             | 14 ++++++++------
- 2 files changed, 16 insertions(+), 12 deletions(-)
-
-diff --git a/Documentation/translations/zh_CN/loongarch/introduction.rst b/Documentation/translations/zh_CN/loongarch/introduction.rst
-index e31a1a928c48..11686ee0caeb 100644
---- a/Documentation/translations/zh_CN/loongarch/introduction.rst
-+++ b/Documentation/translations/zh_CN/loongarch/introduction.rst
-@@ -46,10 +46,11 @@ LA64中每个寄存器为64位宽。 ``$r0`` 的内容总是固定为0，而其
- ``$r23``-``$r31`` ``$s0``-``$s8`` 静态寄存器          是
- ================= =============== =================== ==========
- 
--注意：``$r21``寄存器在ELF psABI中保留未使用，但是在Linux内核用于保存每CPU
--变量基地址。该寄存器没有ABI命名，不过在内核中称为``$u0``。在一些遗留代码
--中有时可能见到``$v0``和``$v1``，它们是``$a0``和``$a1``的别名，属于已经废弃
--的用法。
-+.. note::
-+    注意： ``$r21`` 寄存器在ELF psABI中保留未使用，但是在Linux内核用于保
-+    存每CPU变量基地址。该寄存器没有ABI命名，不过在内核中称为 ``$u0`` 。在
-+    一些遗留代码中有时可能见到 ``$v0`` 和 ``$v1`` ，它们是 ``$a0`` 和
-+    ``$a1`` 的别名，属于已经废弃的用法。
- 
- 浮点寄存器
- ----------
-@@ -68,8 +69,9 @@ LA64中每个寄存器为64位宽。 ``$r0`` 的内容总是固定为0，而其
- ``$f24``-``$f31`` ``$fs0``-``$fs7``  静态寄存器          是
- ================= ================== =================== ==========
- 
--注意：在一些遗留代码中有时可能见到 ``$v0`` 和 ``$v1`` ，它们是 ``$a0``
--和 ``$a1`` 的别名，属于已经废弃的用法。
-+.. note::
-+    注意：在一些遗留代码中有时可能见到 ``$v0`` 和 ``$v1`` ，它们是
-+    ``$a0`` 和 ``$a1`` 的别名，属于已经废弃的用法。
- 
- 
- 向量寄存器
-diff --git a/Documentation/translations/zh_CN/loongarch/irq-chip-model.rst b/Documentation/translations/zh_CN/loongarch/irq-chip-model.rst
-index 2a4c3ad38be4..fb5d23b49ed5 100644
---- a/Documentation/translations/zh_CN/loongarch/irq-chip-model.rst
-+++ b/Documentation/translations/zh_CN/loongarch/irq-chip-model.rst
-@@ -147,9 +147,11 @@ PCH-LPC::
- 
-   https://github.com/loongson/LoongArch-Documentation/releases/latest/download/Loongson-7A1000-usermanual-2.00-EN.pdf (英文版)
- 
--注：CPUINTC即《龙芯架构参考手册卷一》第7.4节所描述的CSR.ECFG/CSR.ESTAT寄存器及其中断
--控制逻辑；LIOINTC即《龙芯3A5000处理器使用手册》第11.1节所描述的“传统I/O中断”；EIOINTC
--即《龙芯3A5000处理器使用手册》第11.2节所描述的“扩展I/O中断”；HTVECINTC即《龙芯3A5000
--处理器使用手册》第14.3节所描述的“HyperTransport中断”；PCH-PIC/PCH-MSI即《龙芯7A1000桥
--片用户手册》第5章所描述的“中断控制器”；PCH-LPC即《龙芯7A1000桥片用户手册》第24.3节所
--描述的“LPC中断”。
-+.. note::
-+    - CPUINTC：即《龙芯架构参考手册卷一》第7.4节所描述的CSR.ECFG/CSR.ESTAT寄存器及其
-+      中断控制逻辑；
-+    - LIOINTC：即《龙芯3A5000处理器使用手册》第11.1节所描述的“传统I/O中断”；
-+    - EIOINTC：即《龙芯3A5000处理器使用手册》第11.2节所描述的“扩展I/O中断”；
-+    - HTVECINTC：即《龙芯3A5000处理器使用手册》第14.3节所描述的“HyperTransport中断”；
-+    - PCH-PIC/PCH-MSI：即《龙芯7A1000桥片用户手册》第5章所描述的“中断控制器”；
-+    - PCH-LPC：即《龙芯7A1000桥片用户手册》第24.3节所描述的“LPC中断”。
--- 
-2.27.0
-
+Hi   are you available to  speak now
+Thanks
