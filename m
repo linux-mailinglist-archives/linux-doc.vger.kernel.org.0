@@ -2,25 +2,26 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 5DA77553F5D
-	for <lists+linux-doc@lfdr.de>; Wed, 22 Jun 2022 02:14:26 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id A4E1F553F77
+	for <lists+linux-doc@lfdr.de>; Wed, 22 Jun 2022 02:24:04 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S232348AbiFVAOY convert rfc822-to-8bit (ORCPT
-        <rfc822;lists+linux-doc@lfdr.de>); Tue, 21 Jun 2022 20:14:24 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:32862 "EHLO
+        id S1354302AbiFVAYC convert rfc822-to-8bit (ORCPT
+        <rfc822;lists+linux-doc@lfdr.de>); Tue, 21 Jun 2022 20:24:02 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:38528 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S230342AbiFVAOX (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 21 Jun 2022 20:14:23 -0400
+        with ESMTP id S232257AbiFVAYB (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 21 Jun 2022 20:24:01 -0400
+X-Greylist: delayed 7290 seconds by postgrey-1.37 at lindbergh.monkeyblade.net; Tue, 21 Jun 2022 17:24:00 PDT
 Received: from mailgateway.xchanging.com (mail9.xchanging.com [213.219.10.34])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 6788919C28;
-        Tue, 21 Jun 2022 17:14:22 -0700 (PDT)
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id C9FC712A8A;
+        Tue, 21 Jun 2022 17:24:00 -0700 (PDT)
 Received: from pps.filterd (ACTXTSPRDPFTV05.xchanginghosting.com [127.0.0.1])
-        by ACTXTSPRDPFTV05.xchanginghosting.com (8.16.1.2/8.16.1.2) with SMTP id 25M09aRi013779;
-        Wed, 22 Jun 2022 01:14:06 +0100
+        by ACTXTSPRDPFTV05.xchanginghosting.com (8.16.1.2/8.16.1.2) with SMTP id 25M0K7Kr009753;
+        Wed, 22 Jun 2022 01:23:56 +0100
 Received: from [91.103.252.181] ([10.146.3.241])
-        by ACTXTSPRDPFTV05.xchanginghosting.com with ESMTP id 3gufw640sy-10
+        by ACTXTSPRDPFTV05.xchanginghosting.com with ESMTP id 3gufw643b8-13
         (version=TLSv1 cipher=AES256-SHA bits=256 verify=NOT);
-        Wed, 22 Jun 2022 01:14:05 +0100
+        Wed, 22 Jun 2022 01:23:56 +0100
 Content-Type: text/plain; charset="iso-8859-1"
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8BIT
@@ -28,11 +29,11 @@ Content-Description: Mail message body
 Subject: RE
 To:     Recipients <p.nataraj@xchanging.com>
 From:   "Mr Elisabeth" <p.nataraj@xchanging.com>
-Date:   Tue, 21 Jun 2022 17:13:56 -0700
+Date:   Tue, 21 Jun 2022 17:23:51 -0700
 Reply-To: mariaelisabethschaeffler505@gmail.com
-Message-ID: <3gufw640sy-10@ACTXTSPRDPFTV05.xchanginghosting.com>
-X-Proofpoint-GUID: Qpd5cxPxialm_SMip1WCmveTvv8eueYG
-X-Proofpoint-ORIG-GUID: Qpd5cxPxialm_SMip1WCmveTvv8eueYG
+Message-ID: <3gufw643b8-13@ACTXTSPRDPFTV05.xchanginghosting.com>
+X-Proofpoint-GUID: 8ACgL59UEEH9fbVjPtbOtvmTPecJ2jxn
+X-Proofpoint-ORIG-GUID: 8ACgL59UEEH9fbVjPtbOtvmTPecJ2jxn
 X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.517,18.0.883
  definitions=2022-06-21_11:2022-06-21,2022-06-21 signatures=0
 X-Proofpoint-Spam-Reason: safe
@@ -46,14 +47,14 @@ X-Spam-Report: * -2.3 RCVD_IN_DNSWL_MED RBL: Sender listed at https://www.dnswl.
         *      [213.219.10.34 listed in list.dnswl.org]
         *  0.8 BAYES_50 BODY: Bayes spam probability is 40 to 60%
         *      [score: 0.5000]
-        *  1.3 RCVD_IN_VALIDITY_RPBL RBL: Relay in Validity RPBL,
-        *      https://senderscore.org/blocklistlookup/
-        *      [213.219.10.34 listed in bl.score.senderscore.com]
         *  0.0 SPF_HELO_NONE SPF: HELO does not publish an SPF Record
         *  0.2 FREEMAIL_REPLYTO_END_DIGIT Reply-To freemail username ends in
         *      digit
         *      [mariaelisabethschaeffler505[at]gmail.com]
         * -0.0 SPF_PASS SPF: sender matches SPF record
+        *  1.3 RCVD_IN_VALIDITY_RPBL RBL: Relay in Validity RPBL,
+        *      https://senderscore.org/blocklistlookup/
+        *      [213.219.10.34 listed in bl.score.senderscore.com]
         *  3.0 NIXSPAM_IXHASH http://www.nixspam.org/
         *  0.3 HK_NAME_MR_MRS No description available.
         *  0.0 RCVD_IN_MSPIKE_BL Mailspike blocklisted
