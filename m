@@ -2,81 +2,246 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 7195955406B
-	for <lists+linux-doc@lfdr.de>; Wed, 22 Jun 2022 04:14:42 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id EE35F5540EB
+	for <lists+linux-doc@lfdr.de>; Wed, 22 Jun 2022 05:31:30 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S231814AbiFVCOj (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 21 Jun 2022 22:14:39 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:40054 "EHLO
+        id S1356528AbiFVDb2 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 21 Jun 2022 23:31:28 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:49854 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S229734AbiFVCOj (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 21 Jun 2022 22:14:39 -0400
-Received: from desiato.infradead.org (desiato.infradead.org [IPv6:2001:8b0:10b:1:d65d:64ff:fe57:4e05])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 07D612B19A;
-        Tue, 21 Jun 2022 19:14:38 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-        d=infradead.org; s=desiato.20200630; h=Content-Transfer-Encoding:Content-Type
-        :In-Reply-To:From:References:Cc:To:Subject:MIME-Version:Date:Message-ID:
-        Sender:Reply-To:Content-ID:Content-Description;
-        bh=ORveCGym512RighQmyJ26uQ7Z38tEMS5jxlZdRzFA0Q=; b=Q7LfXcfM66qM2ZE6ZtDOCsVX9e
-        kMsBRa3Z3eceP8zsLvQg40WnFWBHhJQ6yxgoxnBy5WZTQVppD/4GxA/Kfu56zw6VZXCHH9MQmhQ75
-        TKDpfFYuTRTNtimXzdV4nwHmTDgFecSjLdynmneJsID+G1JByy83Y562K4jUhBO7SYjRymx9J5CTI
-        ceRuscfMK9Jvpog2Xi36ira6n1gF1Vdt7LHxe8g8sl/dxW1hk7keL33aNKMbKncWwxNbrjM7Wd8x9
-        ZMoBo0HluFzzqPppIgYBOeUotvAICwenA7LXtaFDCTfrpLp1aotWJLXU2aBdzLlI7N7P4JVRBpq+Z
-        iSYb03CQ==;
-Received: from [2601:1c0:6280:3f0::6c43]
-        by desiato.infradead.org with esmtpsa (Exim 4.94.2 #2 (Red Hat Linux))
-        id 1o3pmh-00AnHm-9p; Wed, 22 Jun 2022 02:09:20 +0000
-Message-ID: <862ed496-921f-b21e-48e8-123422b33b4a@infradead.org>
-Date:   Tue, 21 Jun 2022 19:06:50 -0700
+        with ESMTP id S1356516AbiFVDb0 (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 21 Jun 2022 23:31:26 -0400
+Received: from mail-pg1-x531.google.com (mail-pg1-x531.google.com [IPv6:2607:f8b0:4864:20::531])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 8FCAB33A0A
+        for <linux-doc@vger.kernel.org>; Tue, 21 Jun 2022 20:31:25 -0700 (PDT)
+Received: by mail-pg1-x531.google.com with SMTP id q140so14914605pgq.6
+        for <linux-doc@vger.kernel.org>; Tue, 21 Jun 2022 20:31:25 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=bytedance-com.20210112.gappssmtp.com; s=20210112;
+        h=date:from:to:cc:subject:message-id:references:mime-version
+         :content-disposition:in-reply-to;
+        bh=zIckZjx7nBE8+LrtkYIITkN+RjWFo0BrzsFyrHjWsuE=;
+        b=HR2ehh1THOUQ/7sVD3IxlsNn5X9iiusHdkvQi2v7mCXaSiOlWuubLTsBInnuZSMIV1
+         yyrPoOAP2Ojg4Swx91s1XU/1zn/eLXNS8RszKuPDGFC8Iy92YzlnXAxGZOZR7QoG0sak
+         7M2SFRlLE3VXFhvX6AL9tDSdfz1SVkR6ozIAbwvGN6mXDiBDFtpnB0e1h4PXCUfpyaRx
+         Yhdv5wCO8sko56NAT6PKlZFhgDksALXFs3i3B5fU5SUnV9PjVtQvJkk00GU+tcuQYfJo
+         5VOUrjb0Gl+GWLXK46LHl20wuH6c/vfxp0U7E7RUTtvHxQL3Cvv9uxzcA3Wd9Iv1winU
+         V90A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+         :mime-version:content-disposition:in-reply-to;
+        bh=zIckZjx7nBE8+LrtkYIITkN+RjWFo0BrzsFyrHjWsuE=;
+        b=aziwLE/ujmRbwj0Pxqrz679dWhsbMUeYw2M0Vx++wmC+UI/Zqw5MKmABNxVCgoW4mj
+         F7nILJkV9eI8HPoPGhWVn2sftW8ohfrsG3jzn1qHU14Y3W5DS6G018o1ULyC6BxKXWJF
+         j7RuWUMtUyQHhpKc9Rb6XClyiXNLlgnWh2BRWeCPEyx7vwAjHFt51znJJQmQJCcZEMRG
+         d9ETGlq9yEZvCVWqudKtl6eoltQXBsTjJ4jFOJ4ySFNZ+pLNseuhbNZfYpgZ7PnxLrUh
+         Q+espTSz2IOJmPvVrBxCjTlbF2ImoHpS6aJ+Vtac6fjWVyWu86FqDL5EVGhAjTwUUlBR
+         WT3A==
+X-Gm-Message-State: AJIora97utggMbU56O2MQfd1Zn+qytw9M+Tg9614MIxqbU66lL3zWu0Z
+        9aEL5ngdOlF57KG3Rcgtmra9ZA==
+X-Google-Smtp-Source: AGRyM1t0+4a7W1b88iaY0mq5xGeMqBK/vj1Q19dBpqEycB3mZ15nOpLahQdSlpV+QlmyxdO9MwebXA==
+X-Received: by 2002:a63:8341:0:b0:40d:268f:d8ed with SMTP id h62-20020a638341000000b0040d268fd8edmr1145053pge.232.1655868685123;
+        Tue, 21 Jun 2022 20:31:25 -0700 (PDT)
+Received: from localhost ([2404:9dc0:cd01::13])
+        by smtp.gmail.com with ESMTPSA id t20-20020a17090a951400b001d903861194sm13194409pjo.30.2022.06.21.20.31.24
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 21 Jun 2022 20:31:24 -0700 (PDT)
+Date:   Wed, 22 Jun 2022 11:31:21 +0800
+From:   Muchun Song <songmuchun@bytedance.com>
+To:     Andrew Morton <akpm@linux-foundation.org>
+Cc:     corbet@lwn.net, david@redhat.com, mike.kravetz@oracle.com,
+        osalvador@suse.de, paulmck@kernel.org, linux-doc@vger.kernel.org,
+        linux-kernel@vger.kernel.org, linux-mm@kvack.org,
+        duanxiongchun@bytedance.com, smuchun@gmail.com
+Subject: Re: [PATCH v5 0/2] make hugetlb_optimize_vmemmap compatible with
+ memmap_on_memory
+Message-ID: <YrKNCRHg6PCXzg3K@FVFYT0MHHV2J.usts.net>
+References: <20220620110616.12056-1-songmuchun@bytedance.com>
+ <20220621135313.ae6fbc28338f1220328694f7@linux-foundation.org>
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.10.0
-Subject: Re: [PATCH v2] sched: RT bandwidth interface for cgroup unified
- hierarchy
-Content-Language: en-US
-To:     Chengming Zhou <zhouchengming@bytedance.com>, mingo@redhat.com,
-        peterz@infradead.org, juri.lelli@redhat.com,
-        vincent.guittot@linaro.org, dietmar.eggemann@arm.com,
-        rostedt@goodmis.org, bsegall@google.com, tj@kernel.org,
-        lizefan.x@bytedance.com, hannes@cmpxchg.org, corbet@lwn.net
-Cc:     cgroups@vger.kernel.org, linux-doc@vger.kernel.org,
-        linux-kernel@vger.kernel.org
-References: <20220622015557.7497-1-zhouchengming@bytedance.com>
-From:   Randy Dunlap <rdunlap@infradead.org>
-In-Reply-To: <20220622015557.7497-1-zhouchengming@bytedance.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-Spam-Status: No, score=-4.4 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,NICE_REPLY_A,RCVD_IN_DNSWL_MED,
-        SPF_HELO_NONE,SPF_NONE,T_SCC_BODY_TEXT_LINE autolearn=ham
-        autolearn_force=no version=3.4.6
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20220621135313.ae6fbc28338f1220328694f7@linux-foundation.org>
+X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+        DKIM_VALID,RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,SPF_PASS,
+        T_SCC_BODY_TEXT_LINE autolearn=ham autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-
-
-On 6/21/22 18:55, Chengming Zhou wrote:
-> We need to run RT threads in cgroup unified hierarchy, but we can't
-> since the default rt_bandwidth.rt_runtime of non-root task_group is 0
-> and we haven't interface to update it.
+On Tue, Jun 21, 2022 at 01:53:13PM -0700, Andrew Morton wrote:
+> On Mon, 20 Jun 2022 19:06:14 +0800 Muchun Song <songmuchun@bytedance.com> wrote:
 > 
-> This patch add RT bandwidth interface "cpu.max.rt" and update the
-> documentation accordingly.
+> > This series makes hugetlb_optimize_vmemmap compatible with memmap_on_memory
+> > and is based on mm-stable.  The reason refers to the patch 2's commit log.
+> > 
+> > v5:
+> >  - Replace enum to defines per David.
+> >  - Walk vmemmap page tables to avoid false-positive.
 > 
-> Signed-off-by: Chengming Zhou<zhouchengming@bytedance.com>
-> ---
-> v2:
->   - minor fix for documentation per Randy's review. Thanks.
+> I can't see this second change in the v3->v5 deltas? 
+> 
 
-Documentation changes look good. Thanks.
+My changlog is not clear, Let me clarify it here.
 
+v3: Drop a section flag SECTION_CANNOT_OPTIMIZE_VMEMMAP and introduce a page
+    flag PageVmemmapSelfHosted to make both parameters compatible.
+v4: Fix compiling error when !CONFIG_MEMORY_HOTPLUG and a bug when memory block
+    spans multiple sections.
+v5: Fix a bug which PageVmemmapSelfHosted() check can be false-positive.
+
+Thanks.
+
+> From: Muchun Song <songmuchun@bytedance.com>
+> Subject: mm-memory_hotplug-enumerate-all-supported-section-flags-v5
+> Date: Mon, 20 Jun 2022 19:06:15 +0800
+> 
+> replace enum with defines per David
+>  
+> Link: https://lkml.kernel.org/r/20220620110616.12056-2-songmuchun@bytedance.com
+> Signed-off-by: Muchun Song <songmuchun@bytedance.com>
+> Signed-off-by: Andrew Morton <akpm@linux-foundation.org>
 > ---
->   Documentation/admin-guide/cgroup-v2.rst | 13 +++++++++++
->   kernel/sched/core.c                     | 31 +++++++++++++++++++++++++
->   kernel/sched/rt.c                       |  2 +-
->   kernel/sched/sched.h                    |  1 +
->   4 files changed, 46 insertions(+), 1 deletion(-)
+> 
+>  include/linux/mmzone.h |   13 +++++--------
+>  1 file changed, 5 insertions(+), 8 deletions(-)
+> 
+> --- a/include/linux/mmzone.h~mm-memory_hotplug-enumerate-all-supported-section-flags-v5
+> +++ a/include/linux/mmzone.h
+> @@ -1439,16 +1439,13 @@ enum {
+>  	SECTION_MAP_LAST_BIT,
+>  };
+>  
+> -enum {
+> -	SECTION_MARKED_PRESENT		= BIT(SECTION_MARKED_PRESENT_BIT),
+> -	SECTION_HAS_MEM_MAP		= BIT(SECTION_HAS_MEM_MAP_BIT),
+> -	SECTION_IS_ONLINE		= BIT(SECTION_IS_ONLINE_BIT),
+> -	SECTION_IS_EARLY		= BIT(SECTION_IS_EARLY_BIT),
+> +#define SECTION_MARKED_PRESENT		BIT(SECTION_MARKED_PRESENT_BIT)
+> +#define SECTION_HAS_MEM_MAP		BIT(SECTION_HAS_MEM_MAP_BIT)
+> +#define SECTION_IS_ONLINE		BIT(SECTION_IS_ONLINE_BIT)
+> +#define SECTION_IS_EARLY		BIT(SECTION_IS_EARLY_BIT)
+>  #ifdef CONFIG_ZONE_DEVICE
+> -	SECTION_TAINT_ZONE_DEVICE	= BIT(SECTION_TAINT_ZONE_DEVICE_BIT),
+> +#define SECTION_TAINT_ZONE_DEVICE	BIT(SECTION_TAINT_ZONE_DEVICE_BIT)
+>  #endif
+> -};
+> -
+>  #define SECTION_MAP_MASK		(~(BIT(SECTION_MAP_LAST_BIT) - 1))
+>  #define SECTION_NID_SHIFT		SECTION_MAP_LAST_BIT
+>  
+> _
+> 
+> 
+> 
+> 
+> From: Muchun Song <songmuchun@bytedance.com>
+> Subject: mm-memory_hotplug-make-hugetlb_optimize_vmemmap-compatible-with-memmap_on_memory-v5
+> Date: Mon, 20 Jun 2022 19:06:16 +0800
+> 
+> walk vmemmap page tables to avoid false-positive
+> 
+> Link: https://lkml.kernel.org/r/20220620110616.12056-3-songmuchun@bytedance.com
+> Signed-off-by: Muchun Song <songmuchun@bytedance.com>
+> Co-developed-by: Oscar Salvador <osalvador@suse.de>
+> Signed-off-by: Oscar Salvador <osalvador@suse.de>
+> Signed-off-by: Andrew Morton <akpm@linux-foundation.org>
+> ---
+> 
+>  mm/hugetlb_vmemmap.c |   69 ++++++++++++++++++++++++++---------------
+>  1 file changed, 44 insertions(+), 25 deletions(-)
+> 
+> --- a/mm/hugetlb_vmemmap.c~mm-memory_hotplug-make-hugetlb_optimize_vmemmap-compatible-with-memmap_on_memory-v5
+> +++ a/mm/hugetlb_vmemmap.c
+> @@ -10,6 +10,7 @@
+>   */
+>  #define pr_fmt(fmt)	"HugeTLB: " fmt
+>  
+> +#include <linux/memory.h>
+>  #include "hugetlb_vmemmap.h"
+>  
+>  /*
+> @@ -99,34 +100,52 @@ int hugetlb_vmemmap_alloc(struct hstate
+>  static unsigned int vmemmap_optimizable_pages(struct hstate *h,
+>  					      struct page *head)
+>  {
+> -	struct mem_section *ms;
+> -	struct page *vmemmap_page;
+> -	unsigned long pfn = page_to_pfn(head);
+> -
+>  	if (READ_ONCE(vmemmap_optimize_mode) == VMEMMAP_OPTIMIZE_OFF)
+>  		return 0;
+>  
+> -	ms = __pfn_to_section(pfn);
+> -	vmemmap_page = sparse_decode_mem_map(ms->section_mem_map,
+> -					     pfn_to_section_nr(pfn));
+> -	/*
+> -	 * Only the vmemmap pages' vmemmap may be marked as VmemmapSelfHosted.
+> -	 *
+> -	 * Due to HugeTLB alignment requirements, and the vmemmap pages being
+> -	 * at the start of the hotplugged memory region. Checking any vmemmap
+> -	 * page's vmemmap is fine.
+> -	 *
+> -	 * [      hotplugged memory     ]
+> -	 * [ vmemmap ][  usable memory  ]
+> -	 *   ^   |      |            |
+> -	 *   +---+      |            |
+> -	 *     ^        |            |
+> -	 *     +--------+            |
+> -	 *         ^                 |
+> -	 *         +-----------------+
+> -	 */
+> -	if (PageVmemmapSelfHosted(vmemmap_page))
+> -		return 0;
+> +	if (IS_ENABLED(CONFIG_MEMORY_HOTPLUG)) {
+> +		pmd_t *pmdp, pmd;
+> +		struct page *vmemmap_page;
+> +		unsigned long vaddr = (unsigned long)head;
+> +
+> +		/*
+> +		 * Only the vmemmap page's vmemmap page can be self-hosted.
+> +		 * Walking the page tables to find the backing page of the
+> +		 * vmemmap page.
+> +		 */
+> +		pmdp = pmd_off_k(vaddr);
+> +		/*
+> +		 * The READ_ONCE() is used to stabilize *pmdp in a register or
+> +		 * on the stack so that it will stop changing under the code.
+> +		 * The only concurrent operation where it can be changed is
+> +		 * split_vmemmap_huge_pmd() (*pmdp will be stable after this
+> +		 * operation).
+> +		 */
+> +		pmd = READ_ONCE(*pmdp);
+> +		if (pmd_leaf(pmd))
+> +			vmemmap_page = pmd_page(pmd) + pte_index(vaddr);
+> +		else
+> +			vmemmap_page = pte_page(*pte_offset_kernel(pmdp, vaddr));
+> +		/*
+> +		 * Due to HugeTLB alignment requirements and the vmemmap pages
+> +		 * being at the start of the hotplugged memory region in
+> +		 * memory_hotplug.memmap_on_memory case. Checking any vmemmap
+> +		 * page's vmemmap page if it is marked as VmemmapSelfHosted is
+> +		 * sufficient.
+> +		 *
+> +		 * [                  hotplugged memory                  ]
+> +		 * [        section        ][...][        section        ]
+> +		 * [ vmemmap ][              usable memory               ]
+> +		 *   ^   |     |                                        |
+> +		 *   +---+     |                                        |
+> +		 *     ^       |                                        |
+> +		 *     +-------+                                        |
+> +		 *          ^                                           |
+> +		 *          +-------------------------------------------+
+> +		 */
+> +		if (PageVmemmapSelfHosted(vmemmap_page))
+> +			return 0;
+> +	}
+>  
+>  	return hugetlb_optimize_vmemmap_pages(h);
+>  }
+> _
+> 
+> 
