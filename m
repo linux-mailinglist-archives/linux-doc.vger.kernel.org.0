@@ -2,92 +2,153 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id AC771557FE4
-	for <lists+linux-doc@lfdr.de>; Thu, 23 Jun 2022 18:33:59 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 8E98E55801E
+	for <lists+linux-doc@lfdr.de>; Thu, 23 Jun 2022 18:42:33 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S232331AbiFWQd6 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 23 Jun 2022 12:33:58 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:36246 "EHLO
+        id S232012AbiFWQm1 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 23 Jun 2022 12:42:27 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:43620 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S232152AbiFWQdz (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Thu, 23 Jun 2022 12:33:55 -0400
-Received: from mail.pr-group.ru (mail.pr-group.ru [178.18.215.3])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 9CA803ED34;
-        Thu, 23 Jun 2022 09:33:49 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-        d=metrotek.ru; s=mail;
-        h=from:subject:date:message-id:to:cc:mime-version:content-transfer-encoding:
-         in-reply-to:references;
-        bh=OrLn5Q0sfM7eS9qpF9n9MlSilXyC6AzkezqdHXRJHJE=;
-        b=HMXkuQzmBJltpRycYMkr0E2fO2qrfHxFHB574gcF0X9QJo9EwXeoIZohMT06yGFX1MgLRyHOVbdSZ
-         cuxt1jLaBOmiVFlff/jdN3icYhdW0EVWF+eoRRuwTQ1w9UzU5TpYlIUeUto+dsTO5qsRrtKsztvn7F
-         FVLWpik2JRVSCKpDhtCH5h5Kxtva/yFGGp/2zOeFXMWb9Y5c//fzioG95vgNUgYXUnXjafQeDBVFxN
-         rCvuT6he/VVCepxoO9jpahbB0h+Uf3sUXnAfHMX/7HvQZmLcitpG7hM6QnpglikLuyneM9a1ADLu/s
-         BghAcXmwDjJFMf77qo284cDpHxnjsKw==
-X-Kerio-Anti-Spam:  Build: [Engines: 2.16.3.1424, Stamp: 3], Multi: [Enabled, t: (0.000009,0.005981)], BW: [Enabled, t: (0.000020,0.000001)], RTDA: [Enabled, t: (0.073463), Hit: No, Details: v2.40.0; Id: 15.52k0dd.1g68mj0lp.emrc; mclb], total: 0(700)
-X-Spam-Status: No, score=-2.1 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,SPF_HELO_NONE,SPF_PASS,
-        T_SCC_BODY_TEXT_LINE autolearn=ham autolearn_force=no version=3.4.6
-X-Spam-Level: 
-X-Footer: bWV0cm90ZWsucnU=
-Received: from h-e2.ddg ([85.143.252.66])
-        (authenticated user i.bornyakov@metrotek.ru)
-        by mail.pr-group.ru with ESMTPSA
-        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256 bits));
-        Thu, 23 Jun 2022 19:33:38 +0300
-From:   Ivan Bornyakov <i.bornyakov@metrotek.ru>
-To:     mdf@kernel.org, hao.wu@intel.com, yilun.xu@intel.com,
-        trix@redhat.com, corbet@lwn.net
-Cc:     Ivan Bornyakov <i.bornyakov@metrotek.ru>,
-        conor.dooley@microchip.com, robh+dt@kernel.org,
-        krzysztof.kozlowski+dt@linaro.org, linux-fpga@vger.kernel.org,
-        linux-doc@vger.kernel.org, devicetree@vger.kernel.org,
-        linux-kernel@vger.kernel.org, system@metrotek.ru
-Subject: [PATCH v22 5/5] MAINTAINERS: add Microchip PolarFire FPGA drivers entry
-Date:   Thu, 23 Jun 2022 19:32:48 +0300
-Message-Id: <20220623163248.3672-6-i.bornyakov@metrotek.ru>
-X-Mailer: git-send-email 2.36.1
-In-Reply-To: <20220623163248.3672-1-i.bornyakov@metrotek.ru>
-References: <20220623163248.3672-1-i.bornyakov@metrotek.ru>
+        with ESMTP id S232245AbiFWQmM (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Thu, 23 Jun 2022 12:42:12 -0400
+Received: from ams.source.kernel.org (ams.source.kernel.org [145.40.68.75])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id B08DD4925B;
+        Thu, 23 Jun 2022 09:42:11 -0700 (PDT)
+Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
+        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+        (No client certificate requested)
+        by ams.source.kernel.org (Postfix) with ESMTPS id 63436B82488;
+        Thu, 23 Jun 2022 16:42:10 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 24836C3411B;
+        Thu, 23 Jun 2022 16:42:00 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+        s=k20201202; t=1656002529;
+        bh=O1Z6UxVXZFs09xPqqQhhlSwoeIGwkaDbXBSQz7fNh1c=;
+        h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+        b=N9rMhkT0nvkRSev4tITmZo6OeLr5YTufc7RwR1ErdDA9NR/h+iLI+p7lJ3C7v8Qq9
+         /MvupL506VpFUNr0nxk8AFs2Kn+yiklC3WMqHBfmLj9xQ3TPFn9GR6acd5AZfvqkSg
+         G4pqrIRFEKFOm2wxniViy+2cy675GyP43iTjI8OXeqonsQ6oy5Od7ucLLRyHo/xAK4
+         nzdphtKwlpvaKpj7yCO0/x3Z/yDNdFf4zsa8wbAAPcZchmuBh1goP11+6bbrZoQbnp
+         GXIL62g+34lcvW6NXDUIAbCbKlB0NlCBPjkFm1aNPSUFsaocJOczDHeud0KImge5i2
+         qlBu6D7s+/xkQ==
+Message-ID: <850ef2bc-f70d-afb2-a12f-8cc4c795dac8@kernel.org>
+Date:   Thu, 23 Jun 2022 11:41:56 -0500
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
+ Thunderbird/91.10.0
+Subject: Re: [PATCH V4 00/20] The Runtime Verification (RV) interface
+Content-Language: en-US
+To:     Song Liu <song@kernel.org>
+Cc:     Steven Rostedt <rostedt@goodmis.org>,
+        Wim Van Sebroeck <wim@linux-watchdog.org>,
+        Guenter Roeck <linux@roeck-us.net>,
+        Jonathan Corbet <corbet@lwn.net>,
+        Ingo Molnar <mingo@redhat.com>,
+        Thomas Gleixner <tglx@linutronix.de>,
+        Peter Zijlstra <peterz@infradead.org>,
+        Will Deacon <will@kernel.org>,
+        Catalin Marinas <catalin.marinas@arm.com>,
+        Marco Elver <elver@google.com>,
+        Dmitry Vyukov <dvyukov@google.com>,
+        "Paul E. McKenney" <paulmck@kernel.org>,
+        Shuah Khan <skhan@linuxfoundation.org>,
+        Gabriele Paoloni <gpaoloni@redhat.com>,
+        Juri Lelli <juri.lelli@redhat.com>,
+        Clark Williams <williams@redhat.com>,
+        Linux Doc Mailing List <linux-doc@vger.kernel.org>,
+        open list <linux-kernel@vger.kernel.org>,
+        linux-trace-devel <linux-trace-devel@vger.kernel.org>
+References: <cover.1655368610.git.bristot@kernel.org>
+ <CAPhsuW4eDhVs2iu0y40LiFyKweJ+3d82-748kavGg5KXWsRuZg@mail.gmail.com>
+From:   Daniel Bristot de Oliveira <bristot@kernel.org>
+In-Reply-To: <CAPhsuW4eDhVs2iu0y40LiFyKweJ+3d82-748kavGg5KXWsRuZg@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-Spam-Status: No, score=-7.7 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,NICE_REPLY_A,
+        RCVD_IN_DNSWL_HI,SPF_HELO_NONE,SPF_PASS,T_SCC_BODY_TEXT_LINE
+        autolearn=ham autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Add MAINTAINERS entry for the newly added Microchip PolarFire (MPF) FPGA
-manager. Add myself as a reviewer and Conor Dooley as a maintainer.
+On 6/22/22 09:24, Song Liu wrote:
+> This is interesting work!
+> 
+> I applied the series on top of commit 78ca55889a549a9a194c6ec666836329b774ab6d
+> in upstream. Then, I got some compile/link error for CONFIG_RV_MON_WIP and
+> CONFIG_RV_MON_SAFE_WTD. I was able to compile the kernel with these two
+> configs disabled.
 
-Suggested-by: Conor Dooley <conor.dooley@microchip.com>
-Signed-off-by: Ivan Bornyakov <i.bornyakov@metrotek.ru>
-Acked-by: Conor Dooley <conor.dooley@microchip.com>
-Acked-by: Xu Yilun <yilun.xu@intel.com>
----
- MAINTAINERS | 8 ++++++++
- 1 file changed, 8 insertions(+)
+I rebased the code and... it compiled. Maybe it was missing some
+config options that I forgot to set as "depends on" in the Kconfig.
 
-diff --git a/MAINTAINERS b/MAINTAINERS
-index cd7a70782aaa..74df3812b37f 100644
---- a/MAINTAINERS
-+++ b/MAINTAINERS
-@@ -7895,6 +7895,14 @@ S:	Maintained
- F:	Documentation/ABI/testing/sysfs-driver-intel-m10-bmc-sec-update
- F:	drivers/fpga/intel-m10-bmc-sec-update.c
- 
-+MICROCHIP POLARFIRE FPGA DRIVERS
-+M:	Conor Dooley <conor.dooley@microchip.com>
-+R:	Ivan Bornyakov <i.bornyakov@metrotek.ru>
-+L:	linux-fpga@vger.kernel.org
-+S:	Supported
-+F:	Documentation/devicetree/bindings/fpga/microchip,mpf-spi-fpga-mgr.yaml
-+F:	drivers/fpga/microchip-spi.c
-+
- FPU EMULATOR
- M:	Bill Metzenthen <billm@melbpc.org.au>
- S:	Maintained
--- 
-2.36.1
+Can you check if it was the same problem automatically reported?
 
+Any further information here would help. I will revisit this.
+
+However, I hit the some issue with monitors/wwnr/enabled :
+> 
+>     [root@eth50-1 ~]# cd /sys/kernel/debug/tracing/rv/
+>     [root@eth50-1 rv]# cat available_monitors
+>     wwnr
+>     [root@eth50-1 rv]# echo wwnr > enabled_monitors
+>     [root@eth50-1 rv]# cd monitors/
+>     [root@eth50-1 monitors]# cd wwnr/
+>     [root@eth50-1 wwnr]# ls
+>     desc  enable  reactors
+>     [root@eth50-1 wwnr]# cat enable
+>     1
+>     [root@eth50-1 wwnr]# echo 0 > enable   <<< hangs
+> 
+> The last echo command hangs forever on a qemu vm. I haven't figured out why
+> this happens though.
+
+I could reproduce it. It is an error in the return code of monitor_enable_write_data(),
+I fixed it locally (return retval ? retval : count; // needs more test), and
+will add it to the next version. Thanks!
+
+> I also have a more general question: can we do RV with BPF and simplify the
+> work? AFAICT, the idea of RV is to maintain a state machine based on events.
+> If something unexpected happens, call the reactor.
+> 
+> IIUC, BPF has most of these building blocks ready for use. With BPF, we
+> can ship many RV monitors without much kernel changes.
+
+I am aware of bpftrace and bpf + libbpf, and I have a PoC tool doing most of the
+work I do in C/kernel in C/bpf.
+
+From the cover letter:
+
+"Things kept for a second moment (after this patchset):
+[...]
+	- dot2bpf"
+
+The point is that there are use-cases in which the users need the code in 
+C. One of those is the work being done in the Linux Foundation Elisa group.
+There will be more formalism, like timed automata... which will require
+infra-structure that is easily accessible in C... including synchronization,
+and reactors that are available only in C on "per use-cases" basis - for
+example on embedded devices.
+
+On the other hand, there is ongoing research on asynchronous RV in which
+I am only using BPF on the instrumentation side, for more complex formalism
+running the processing in user-space (but for a different use-case,
+with different timing and logical properties).
+
+I see C and BPF (and rust?...) as complementary tools that I can use, and
+we will have them all :-).
+
+In this first series, I am adding the DA monitor in the kernel (motivated
+by Elisa), and the basic kernel interface. After that, I will add the dot2bpf
+for the cases in which BPF is a viable option... other formalism... other
+extensions from Elisa... and so on... collecting these methods in a single
+place.
+
+-- Daniel
+
+> Thanks,
+> Song
 
