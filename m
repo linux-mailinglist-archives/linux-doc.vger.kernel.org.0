@@ -2,77 +2,82 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 8D965558994
-	for <lists+linux-doc@lfdr.de>; Thu, 23 Jun 2022 21:51:22 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id E3BA8558955
+	for <lists+linux-doc@lfdr.de>; Thu, 23 Jun 2022 21:41:59 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S230092AbiFWTvR (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 23 Jun 2022 15:51:17 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:52292 "EHLO
+        id S230436AbiFWTls (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 23 Jun 2022 15:41:48 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:36862 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S229547AbiFWTvQ (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Thu, 23 Jun 2022 15:51:16 -0400
-X-Greylist: delayed 3597 seconds by postgrey-1.37 at lindbergh.monkeyblade.net; Thu, 23 Jun 2022 12:51:15 PDT
-Received: from mail.zytor.com (terminus.zytor.com [198.137.202.136])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 533CB1E7;
-        Thu, 23 Jun 2022 12:51:15 -0700 (PDT)
-Received: from [127.0.0.1] ([73.223.250.219])
-        (authenticated bits=0)
-        by mail.zytor.com (8.17.1/8.15.2) with ESMTPSA id 25NIMqIa1294203
-        (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NO);
-        Thu, 23 Jun 2022 11:22:52 -0700
-DKIM-Filter: OpenDKIM Filter v2.11.0 mail.zytor.com 25NIMqIa1294203
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=zytor.com;
-        s=2022060401; t=1656008574;
-        bh=yPR8n8gQ6dVLtX830iKeJU5ojINLZInrepZE/uEszNU=;
-        h=Date:From:To:CC:Subject:In-Reply-To:References:From;
-        b=er7qtRymZfIxZTCmBzdiQOaT9sgecnfHHau1qec/d4ZsNGp1S4IbzlkDm4wm2DzyD
-         RcffhT2oLnHYmNbDQJKdr+8JDECqsW7mBl6QPIfENIGnsD4Cip/YkKWVWfgsXN59BN
-         BZ2VQuXZnu2MwPrxSMpYXRfKaLRQDNuF6iVfLyq/tB8SSt4bdIezjsoh+oO8rhmieU
-         dDvX+Gup28nAvZFrgFOsOzlsKUB6nbTnltY1xlPbI2f6FK73oHFFAzph6QJWYDFLYk
-         Adg4LCSNbEuBI4uEGEBQGmjStLROs6fCVh7A3LiyZVhbpHfanTbzG7ANa2iSENnC6d
-         FJX9mkpSn6gig==
-Date:   Thu, 23 Jun 2022 11:22:52 -0700
-From:   "H. Peter Anvin" <hpa@zytor.com>
-To:     Dave Hansen <dave.hansen@intel.com>, lizhe.67@bytedance.com,
-        tglx@linutronix.de, mingo@redhat.com, bp@alien8.de,
-        dave.hansen@linux.intel.com, x86@kernel.org
-CC:     lizefan.x@bytedance.com, linux-doc@vger.kernel.org,
-        linux-kernel@vger.kernel.org
-Subject: =?US-ASCII?Q?Re=3A_=5BRFC=5D_memmap=3A_introduce_cmdline_param?= =?US-ASCII?Q?eter_=22memmap=3Dnn=5BKMG=5D=24=22_without_start_addr?=
-User-Agent: K-9 Mail for Android
-In-Reply-To: <de2500c4-fce4-31dc-29bc-aa3007027eb9@intel.com>
-References: <20220623062402.12392-1-lizhe.67@bytedance.com> <de2500c4-fce4-31dc-29bc-aa3007027eb9@intel.com>
-Message-ID: <0EA9CBD4-D083-4546-BFAC-9C3A97420E5B@zytor.com>
+        with ESMTP id S229806AbiFWTlJ (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Thu, 23 Jun 2022 15:41:09 -0400
+Received: from ams.source.kernel.org (ams.source.kernel.org [145.40.68.75])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id A466650E2A;
+        Thu, 23 Jun 2022 12:32:19 -0700 (PDT)
+Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
+        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+        (No client certificate requested)
+        by ams.source.kernel.org (Postfix) with ESMTPS id 4CE5CB82164;
+        Thu, 23 Jun 2022 19:32:18 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id E62F4C341C7;
+        Thu, 23 Jun 2022 19:32:14 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+        s=k20201202; t=1656012737;
+        bh=7dpmsiu6uUrLA3URVq1PDlJfMCtSg8LYc+vJxyRfneg=;
+        h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
+        b=QlEa6e5TNPlfLdQ2DDKkAlvKzIcKtBC6pufySUatYo/ZRty0NIlrauDXU5B0JeqYv
+         PmV5dTHtpE01MISMix1ILc5GdTFaCekgO28YXgr0KIXSNMwDqT4r8Wy3SPhT+FRXl9
+         65rQcD1nA9FXHaNh1l01BL1qFhTvrZ/OJ6D8k2LaLW4nzSiS0iEC8eRmMm+4iBNZWz
+         p1U5RYlF6MbWO3wVV25qVUuUWFxGycHpvMjTY+chC1p9D/331AUuJQA6dM2AhHrYYq
+         4dsQ9ScmwtkCuaBfUgU61OeZRM1arsp6ejFG3jOaDsnr2oM9uM9Ht0t3jdNw7oLADv
+         Yey8winmA2Jag==
+From:   Will Deacon <will@kernel.org>
+To:     elver@google.com, Jonathan Corbet <corbet@lwn.net>,
+        linux-kernel@vger.kernel.org,
+        Kefeng Wang <wangkefeng.wang@huawei.com>, mark.rutland@arm.com,
+        catalin.marinas@arm.com, linux-arm-kernel@lists.infradead.org
+Cc:     kernel-team@android.com, Will Deacon <will@kernel.org>,
+        arnd@arndb.de, linux-doc@vger.kernel.org
+Subject: Re: [PATCH v4 0/2] arm64: Fix kcsan test_barrier fail and panic
+Date:   Thu, 23 Jun 2022 20:31:43 +0100
+Message-Id: <165600569929.3001194.1449584909652898648.b4-ty@kernel.org>
+X-Mailer: git-send-email 2.20.1
+In-Reply-To: <20220523113126.171714-1-wangkefeng.wang@huawei.com>
+References: <20220523113126.171714-1-wangkefeng.wang@huawei.com>
 MIME-Version: 1.0
-Content-Type: text/plain;
- charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-X-Spam-Status: No, score=-2.1 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,SPF_HELO_PASS,SPF_PASS,
-        T_SCC_BODY_TEXT_LINE autolearn=ham autolearn_force=no version=3.4.6
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
+X-Spam-Status: No, score=-7.7 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_HI,
+        SPF_HELO_NONE,SPF_PASS,T_SCC_BODY_TEXT_LINE autolearn=ham
+        autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On June 23, 2022 7:06:36 AM PDT, Dave Hansen <dave=2Ehansen@intel=2Ecom> wr=
-ote:
->On 6/22/22 23:24, lizhe=2E67@bytedance=2Ecom wrote:
->> In our scenario, we need reserve or alloc large continous memory like
->> 256M in machine which have different memory specification at just
->> boot phase for a user land process=2E
->
->Just marking the memory reserved doesn't do any good by itself=2E  There
->must be some *other* kernel code to find this reserved area and make it
->available to userspace=2E
->
->It seems kinda silly to add this to the kernel without also adding the
->other half of the solution=2E  Plus, we don't really even know what this
->is for=2E  Are there other, better solutions?  I certainly can't offer an=
-y
->because this changelog did not provide a full picture of the problem
->this solves=2E
+On Mon, 23 May 2022 19:31:24 +0800, Kefeng Wang wrote:
+> Fix selftest and kcsan_test() module fail when KCSAN_STRICT
+> and KCSAN_WEAK_MEMORY enabled on ARM64.
+> 
+> v4:
+> - Use 2 spaces after a sentence-ending '.', suggested by Marco
+> - Collect Ack/Review
+> 
+> [...]
 
-Don't we already have a large contiguous physical memory allocator for thi=
-s reason (misdesigned hardware?)
+Applied to arm64 (for-next/kcsan), thanks!
+
+[1/2] asm-generic: Add memory barrier dma_mb()
+      https://git.kernel.org/arm64/c/ed59dfd9509d
+[2/2] arm64: kcsan: Support detecting more missing memory barriers
+      https://git.kernel.org/arm64/c/4d09caec2fab
+
+Cheers,
+-- 
+Will
+
+https://fixes.arm64.dev
+https://next.arm64.dev
+https://will.arm64.dev
