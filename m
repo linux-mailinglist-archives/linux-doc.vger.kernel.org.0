@@ -2,111 +2,116 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 9180655AB3B
-	for <lists+linux-doc@lfdr.de>; Sat, 25 Jun 2022 17:13:17 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id D789755AB9A
+	for <lists+linux-doc@lfdr.de>; Sat, 25 Jun 2022 18:39:55 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S233042AbiFYPMH (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Sat, 25 Jun 2022 11:12:07 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:42254 "EHLO
+        id S232979AbiFYQiU (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Sat, 25 Jun 2022 12:38:20 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:57654 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S232952AbiFYPMG (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Sat, 25 Jun 2022 11:12:06 -0400
-Received: from bombadil.infradead.org (bombadil.infradead.org [IPv6:2607:7c80:54:3::133])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id C77A613EA6;
-        Sat, 25 Jun 2022 08:12:04 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-        d=infradead.org; s=bombadil.20210309; h=Content-Transfer-Encoding:
-        Content-Type:In-Reply-To:From:References:Cc:To:Subject:MIME-Version:Date:
-        Message-ID:Sender:Reply-To:Content-ID:Content-Description;
-        bh=dKTkwKojcLQzO4HZicW5lV577VlQCVPv8wgQNnjwa2A=; b=UeTQSq521AV81Bphy5XLseEV/S
-        au3XmyaHmrSDSIcqBAB9k/VajVy3z12inr3Hs+20Z++0uKGvRH7dpnbg3d0E/oXzAnyvL7CaTwF5C
-        9JXf8hk8mmJRiB2q7iWWMo/CXbEkVAT0IJee3MntbrOhHnTN4u5z4EHzjVcrsNcBTXSEGaHavK5C9
-        d6R74bzIyG0APru5yLJnTkJLmgQgRliRwSsoDZvI8EtA85zrMizNkNmHV3HnLgkos92wxSRREtgoX
-        4qv8phY72ve9CD4euWtfoaYdzMGQh52z0ZUZhfbqVMeGMbymTLq07TqlPCDcIrGPKPsdngymJoy11
-        +2xrRa2g==;
-Received: from [2601:1c0:6280:3f0::aa0b]
-        by bombadil.infradead.org with esmtpsa (Exim 4.94.2 #2 (Red Hat Linux))
-        id 1o57S6-006UD6-8t; Sat, 25 Jun 2022 15:12:02 +0000
-Message-ID: <4c403239-3c71-4ab9-2168-f7e9d77008b2@infradead.org>
-Date:   Sat, 25 Jun 2022 08:12:00 -0700
+        with ESMTP id S232172AbiFYQiU (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Sat, 25 Jun 2022 12:38:20 -0400
+X-Greylist: delayed 2400 seconds by postgrey-1.37 at lindbergh.monkeyblade.net; Sat, 25 Jun 2022 09:38:18 PDT
+Received: from 4.mo583.mail-out.ovh.net (4.mo583.mail-out.ovh.net [178.33.111.247])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 6D25B13D5A
+        for <linux-doc@vger.kernel.org>; Sat, 25 Jun 2022 09:38:18 -0700 (PDT)
+Received: from player760.ha.ovh.net (unknown [10.108.16.91])
+        by mo583.mail-out.ovh.net (Postfix) with ESMTP id B8B3E239F2
+        for <linux-doc@vger.kernel.org>; Sat, 25 Jun 2022 15:22:56 +0000 (UTC)
+Received: from sk2.org (82-65-25-201.subs.proxad.net [82.65.25.201])
+        (Authenticated sender: steve@sk2.org)
+        by player760.ha.ovh.net (Postfix) with ESMTPSA id 114742BF81CAC;
+        Sat, 25 Jun 2022 15:22:52 +0000 (UTC)
+Authentication-Results: garm.ovh; auth=pass (GARM-100R003f7620af6-7b52-4906-bc6a-9af872b4aa46,
+                    6AC0142EC25AD3FE2D0BC2776DBD8C4E282FD61D) smtp.auth=steve@sk2.org
+X-OVh-ClientIp: 82.65.25.201
+Date:   Sat, 25 Jun 2022 17:22:45 +0200
+From:   Stephen Kitt <steve@sk2.org>
+To:     Jonathan Corbet <corbet@lwn.net>
+Cc:     linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org
+Subject: Re: [PATCH] docs: admin-guide/sysctl: escape % symbols
+Message-ID: <20220625172245.15d0ae7b@heffalump.sk2.org>
+In-Reply-To: <871qvd6fq2.fsf@meer.lwn.net>
+References: <20220624110230.595740-1-steve@sk2.org>
+        <871qvd6fq2.fsf@meer.lwn.net>
+X-Mailer: Claws Mail 3.17.8 (GTK+ 2.24.33; x86_64-pc-linux-gnu)
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.10.0
-Subject: Re: [PATCH] Documentation: kunit: eliminate code-block warnings
-Content-Language: en-US
-To:     Jonathan Corbet <corbet@lwn.net>, linux-kernel@vger.kernel.org
-Cc:     Brendan Higgins <brendanhiggins@google.com>,
-        linux-kselftest@vger.kernel.org, kunit-dev@googlegroups.com,
-        linux-doc@vger.kernel.org, Harinder Singh <sharinder@google.com>,
-        Tim Bird <tim.bird@sony.com>
-References: <20220401024707.10550-1-rdunlap@infradead.org>
- <87fsjt50c8.fsf@meer.lwn.net>
-From:   Randy Dunlap <rdunlap@infradead.org>
-In-Reply-To: <87fsjt50c8.fsf@meer.lwn.net>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-Spam-Status: No, score=-2.1 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,NICE_REPLY_A,RCVD_IN_DNSWL_NONE,
-        SPF_HELO_NONE,SPF_NONE,T_SCC_BODY_TEXT_LINE autolearn=ham
-        autolearn_force=no version=3.4.6
+Content-Type: multipart/signed; boundary="Sig_/Pe0R7RzTtKL/6ALA3/RL0CV";
+ protocol="application/pgp-signature"; micalg=pgp-sha512
+X-Ovh-Tracer-Id: 2904821760775325318
+X-VR-SPAMSTATE: OK
+X-VR-SPAMSCORE: -100
+X-VR-SPAMCAUSE: gggruggvucftvghtrhhoucdtuddrgedvfedrudeguddgkeelucetufdoteggodetrfdotffvucfrrhhofhhilhgvmecuqfggjfdpvefjgfevmfevgfenuceurghilhhouhhtmecuhedttdenucesvcftvggtihhpihgvnhhtshculddquddttddmnecujfgurhepfffhvfevuffkjghfofggtgesghdtreerredtvdenucfhrhhomhepufhtvghphhgvnhcumfhithhtuceoshhtvghvvgesshhkvddrohhrgheqnecuggftrfgrthhtvghrnhepfeffgefhgfeuueeffeejieefieefgfefffethfdtudegvdejueelhffhfeegjeeinecukfhppedtrddtrddtrddtpdekvddrieehrddvhedrvddtudenucevlhhushhtvghrufhiiigvpedtnecurfgrrhgrmhepmhhouggvpehsmhhtphhouhhtpdhhvghlohepphhlrgihvghrjeeitddrhhgrrdhovhhhrdhnvghtpdhinhgvtheptddrtddrtddrtddpmhgrihhlfhhrohhmpehsthgvvhgvsehskhdvrdhorhhgpdhnsggprhgtphhtthhopedupdhrtghpthhtoheplhhinhhugidqughotgesvhhgvghrrdhkvghrnhgvlhdrohhrghdpoffvtefjohhsthepmhhoheekfe
+X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_NONE,
+        RCVD_IN_MSPIKE_H3,RCVD_IN_MSPIKE_WL,SPF_HELO_NONE,SPF_PASS,
+        T_SCC_BODY_TEXT_LINE autolearn=unavailable autolearn_force=no
+        version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
+--Sig_/Pe0R7RzTtKL/6ALA3/RL0CV
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: quoted-printable
 
+On Fri, 24 Jun 2022 13:09:25 -0600, Jonathan Corbet <corbet@lwn.net> wrote:
+> Stephen Kitt <steve@sk2.org> writes:
+> > % symbols need to be escaped to render correctly here, do so.
+> >
+> > Signed-off-by: Stephen Kitt <steve@sk2.org>
+> > ---
+> >  Documentation/admin-guide/sysctl/kernel.rst | 4 ++--
+> >  1 file changed, 2 insertions(+), 2 deletions(-)
+> >
+> > diff --git a/Documentation/admin-guide/sysctl/kernel.rst
+> > b/Documentation/admin-guide/sysctl/kernel.rst index
+> > ddccd1077462..079a51ed88a9 100644 ---
+> > a/Documentation/admin-guide/sysctl/kernel.rst +++
+> > b/Documentation/admin-guide/sysctl/kernel.rst @@ -38,8 +38,8 @@ acct
+> > =20
+> >  If BSD-style process accounting is enabled these values control
+> >  its behaviour. If free space on filesystem where the log lives
+> > -goes below ``lowwater``% accounting suspends. If free space gets
+> > -above ``highwater``% accounting resumes. ``frequency`` determines
+> > +goes below ``lowwater``\% accounting suspends. If free space gets
+> > +above ``highwater``\% accounting resumes. ``frequency`` determines
+> >  how often do we check the amount of free space (value is in
+> >  seconds). Default: =20
+>=20
+> Interesting...I had to go digging into why this is, because "%" isn't
+> really special for RST.  The real problem is that ``literal`` markup
+> needs to have word separators around it, and the recommended solution is
+> to use "\ " instead.
+>=20
+> So I'll apply this, but tweak the changelog and add the extra spaces.
 
-On 6/24/22 12:27, Jonathan Corbet wrote:
-> Randy Dunlap <rdunlap@infradead.org> writes:
-> 
->> Fix Sphinx complaints about code-block directive missing an argument.
->> For start.rst, add "none" since that is already heavily used in that
->> file. For run_wrapper.rst, use the simpler "::" literal block instead.
-> 
-> [Sorry that this fell through the cracks; I'm never quite sure who is
-> going to handle kunit patches]
-> 
->> dev-tools/kunit/start.rst:83: WARNING: Error in "code-block" directive:
->> 1 argument(s) required, 0 supplied.
->>
->> dev-tools/kunit/run_wrapper.rst:17: WARNING: Error in "code-block" directive:
->> 1 argument(s) required, 0 supplied.
-> 
-> So which version of Sphinx are you using?  The language argument became
-> optional in 2.0, so you'd need to be running something pretty ancient to
-> see this.
-> 
-> Ah, I see 1.8.5 in your later message...how wedded are you to that
-> version?
+Ah yes, thanks for looking into this!
 
-It's what ships with OpenSuse Leap 15.3, which I have been using for quite
-a long time.
+Regards,
 
-I see that there is now OpenSuse Leap 15.4, so I could upgrade to that,
-but I don't know what version on Sphinx it uses.
+Stephen
 
-> Ostensibly we support back to 1.7, so I guess we should stick by its
-> rules.  But the better solution, I think, is to raise our minimum
-> version; I think I'll look into that shortly.
-> 
+--Sig_/Pe0R7RzTtKL/6ALA3/RL0CV
+Content-Type: application/pgp-signature
+Content-Description: OpenPGP digital signature
 
->>  
->>  Run command:
->>  
->> -.. code-block::
->> +::
-> 
-> A much nicer fix for these would have been just:
-> 
->   Run command::
+-----BEGIN PGP SIGNATURE-----
 
-Yeah, that is nicer.
+iQIzBAEBCgAdFiEEnPVX/hPLkMoq7x0ggNMC9Yhtg5wFAmK3KEUACgkQgNMC9Yht
+g5z18Q/9ERonRuANlr+e7Zjg4opVcYZC+lOypAfauXJvP6DGiXqF4bOOgUezE7ns
+EGtHKyKm2HWIwnrdu1WdkHl5RcLsGLrcBRrTWSEqABXauv0zHSM8cdqNosfBaz/g
+WgZA41bc7VzBL/70gjwPXqV9OYS/03Vq+TLPznQ/mw0PEdFIQTaR+7Y9AL61r1Tw
+NUNkNMb65jPmyeNDdAhLXtvRn3JHibEPAq9kpc4QNejCN/1Yu2Q0OPxeEppEUXZA
+1JRGttDrRjAxMeWYiSJc9iaVc20qLMdcy79mugBbd5vGqVzPBT0Je4sEkHrTJvtn
+8oP+sr77/nCiGp8ZrzqJEszdJUd/SclMz8MiDQvq/ls023feuGwUm5wdX6WY2k2r
+aPIdH2JPG7h6b2Rh2SEtF7um4KB3pbQr+wqj2PlYOSV7x20lSwCpZ5rOWgpn6FhI
+UMdbeYDZKN0ptpd0gOuwvgk5E3G5mFzovRTE0QbNRiI906Xw1ceiR1qlzfHKtgec
+8pygx+p/nftHWg7Zsg/KckA3iS8F/64nsJ+e1Q1Y4dnjZI+jUxiij3IGO8Njqe+t
+963mF+/GdecjtObLsgX2b46Wl1GCMCzXSlTULrzLrSL6wr3d/5pqohI/wJRzsPSd
+qJpWgAYlEWMvRi/dbubIBHJ2hF8xjhEonVthUbrb4UiZYJvdtqs=
+=ADlL
+-----END PGP SIGNATURE-----
 
-> 
-> Oh well, I've applied it.
-
-thanks.
-
--- 
-~Randy
+--Sig_/Pe0R7RzTtKL/6ALA3/RL0CV--
