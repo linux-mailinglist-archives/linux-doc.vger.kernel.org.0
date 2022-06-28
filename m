@@ -2,91 +2,112 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 62B2C55D232
-	for <lists+linux-doc@lfdr.de>; Tue, 28 Jun 2022 15:10:32 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 55CC255C212
+	for <lists+linux-doc@lfdr.de>; Tue, 28 Jun 2022 14:46:05 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1344436AbiF1JrT (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 28 Jun 2022 05:47:19 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:39388 "EHLO
+        id S1344601AbiF1JtY (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 28 Jun 2022 05:49:24 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:39852 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S242161AbiF1JrD (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 28 Jun 2022 05:47:03 -0400
-Received: from ams.source.kernel.org (ams.source.kernel.org [IPv6:2604:1380:4601:e00::1])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 8066525E80;
-        Tue, 28 Jun 2022 02:46:36 -0700 (PDT)
-Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
-        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
-        (No client certificate requested)
-        by ams.source.kernel.org (Postfix) with ESMTPS id C39C4B81D9B;
-        Tue, 28 Jun 2022 09:46:32 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 6CBCDC341E7;
-        Tue, 28 Jun 2022 09:46:30 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-        s=k20201202; t=1656409590;
-        bh=31LxezsefKWZxd2OhNR0VkL1vX8zivhz/ovRCJXS1V8=;
-        h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-        b=gx5qWDseQpempDJEgIyEp6tY0x8uPqoKAF6nAL+ChrVCh33s5wvQuhSiIWcWHyG0N
-         YWI+xRKJBFgONvz3tMBF074eCzeDTciulZR7MGMuTj07STlXze6fcq0WdOZg+g+cdr
-         Vxaq4L3TyoMXXj0CiYbB255haA97E+JIQLiH0HkrjJwBB3ZJLt6bTBS0ok/FgEHozg
-         f9UtpHP19mqsah7nLxN4AtDISWQPMBDPwpVKmQ9hBCg7TcUtkwxABS6OHi1NMVH1jl
-         Ai5XD3MXgspBGGbSKrXzb2Yls4d6aXnEaXGPn6kkZZnHTOV1p1XNDFvTy2qq04oK7j
-         c17OAh4XOSArQ==
-Received: from mchehab by mail.kernel.org with local (Exim 4.95)
-        (envelope-from <mchehab@kernel.org>)
-        id 1o67ng-005HFx-23;
-        Tue, 28 Jun 2022 10:46:28 +0100
-From:   Mauro Carvalho Chehab <mchehab@kernel.org>
-To:     Linux Doc Mailing List <linux-doc@vger.kernel.org>
-Cc:     Mauro Carvalho Chehab <mchehab@kernel.org>,
-        "Jonathan Corbet" <corbet@lwn.net>,
-        "Mauro Carvalho Chehab" <mchehab+huawei@kernel.org>,
-        Felipe Balbi <balbi@kernel.org>,
-        Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
-        linux-kernel@vger.kernel.org, linux-usb@vger.kernel.org
-Subject: [PATCH 22/22] usb: dwc3: gadget: fix a kernel-doc warning
-Date:   Tue, 28 Jun 2022 10:46:26 +0100
-Message-Id: <bd599a18cea45c57d91c69d3e30d8b1e8ea69dd1.1656409369.git.mchehab@kernel.org>
-X-Mailer: git-send-email 2.36.1
-In-Reply-To: <cover.1656409369.git.mchehab@kernel.org>
-References: <cover.1656409369.git.mchehab@kernel.org>
+        with ESMTP id S1344581AbiF1Js7 (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 28 Jun 2022 05:48:59 -0400
+Received: from mail-yb1-xb30.google.com (mail-yb1-xb30.google.com [IPv6:2607:f8b0:4864:20::b30])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 799682BB3D
+        for <linux-doc@vger.kernel.org>; Tue, 28 Jun 2022 02:48:47 -0700 (PDT)
+Received: by mail-yb1-xb30.google.com with SMTP id d5so21295751yba.5
+        for <linux-doc@vger.kernel.org>; Tue, 28 Jun 2022 02:48:47 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=google.com; s=20210112;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc;
+        bh=nnzSecJwwLdHdpah55TWOev8stQAWT9vGpRIkDipvhw=;
+        b=I7H7zqGdOfwwpsDfe9uF8VojqU+qtuDQRgt7FtGBoFlVFCSJN9YFG+1NWGSiIuox8S
+         W+KTN+aOhO/ktobsqKb4feN5yBBDNx0wm/w13zu9GE1MpTeJ9BkKCl/bKqoxTj+butyG
+         02/IG1kxsMpY40YD0RA6epXortCUPMP7sMFf2G2KAsGaM15F0G20pAiOcgk96rxpR8ke
+         4UAfgPRBQGXYCKfOAsUeqXv2EnFCWpyg0H2uCQj9u81Sa+kwI5qveTjwZLSeOF0LEPCz
+         orDz4fOkku7jaCsorv9stb6v1uGkuYXGTaB+8k6Pjso/QtNIucekoLsh+TNJkKdQ3yXO
+         +FxQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=nnzSecJwwLdHdpah55TWOev8stQAWT9vGpRIkDipvhw=;
+        b=4ybTxltr+GfmbJV7lGBENPNHi4wYKijSNUcj+xMyLjmt/Ov1IoYFWAY2cEGZcKaBio
+         C4l0l6zS6THUZu9sGt/zj1CKZoOVwsZG3w/FnnnHa0DgiZbu3AGaGda/SZhqgC5htxAL
+         EbmaqtqXpc8otYt8QnCL/pCUMATQSB5hwP9TtSUlv73t5wjXOoA+NHXmuHzMIbYrIXdA
+         AFFu2iYdy50zC344HB7hYCgsGOJysh3v7Ad53j5XCmt3PTkYaQLIrAFGHBCoosIZaKG6
+         xBepeL0tKdWFnYuKvt0wfMCQxL0tg9XIsu5+ExckC0wYW1TO994A3AWfa7pN5f3SDmCC
+         GKBA==
+X-Gm-Message-State: AJIora9KKGzjbjhL++eQkwL2gLTWfqlgDrdUgDJnaT8GSetDyavSWDvd
+        4GzioWjo6vZ7cWyhkZfNS1zUp6J3VEFlyaswG3WTSCPb5REZ+g==
+X-Google-Smtp-Source: AGRyM1vPz47fcquk2IzBhzy+bTY7luIs+lRfkEnNwxblxcyPcZABp99gUxefsLLFGaLceF6zmZkkxVh4KZO10IEsTiQ=
+X-Received: by 2002:a05:6902:152:b0:66c:e116:6a7 with SMTP id
+ p18-20020a056902015200b0066ce11606a7mr8598779ybh.533.1656409726603; Tue, 28
+ Jun 2022 02:48:46 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Spam-Status: No, score=-7.5 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_HI,
-        SPF_HELO_NONE,SPF_PASS,T_SCC_BODY_TEXT_LINE autolearn=ham
-        autolearn_force=no version=3.4.6
+References: <cover.1656409369.git.mchehab@kernel.org> <687a2e724020d135bc7dfef0ec9010a00ecc0a3a.1656409369.git.mchehab@kernel.org>
+In-Reply-To: <687a2e724020d135bc7dfef0ec9010a00ecc0a3a.1656409369.git.mchehab@kernel.org>
+From:   Marco Elver <elver@google.com>
+Date:   Tue, 28 Jun 2022 11:48:10 +0200
+Message-ID: <CANpmjNPbHYKJqFB-qNjPWsLQyk3fWrqfU3qob_E-8KMLrzpCQQ@mail.gmail.com>
+Subject: Re: [PATCH 14/22] kfence: fix a kernel-doc parameter
+To:     Mauro Carvalho Chehab <mchehab@kernel.org>
+Cc:     Linux Doc Mailing List <linux-doc@vger.kernel.org>,
+        =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>,
+        Jonathan Corbet <corbet@lwn.net>,
+        Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
+        Alexander Potapenko <glider@google.com>,
+        Dmitry Vyukov <dvyukov@google.com>,
+        Sumit Semwal <sumit.semwal@linaro.org>,
+        dri-devel@lists.freedesktop.org, kasan-dev@googlegroups.com,
+        linaro-mm-sig@lists.linaro.org, linux-kernel@vger.kernel.org,
+        linux-media@vger.kernel.org
+Content-Type: text/plain; charset="UTF-8"
+X-Spam-Status: No, score=-17.6 required=5.0 tests=BAYES_00,DKIMWL_WL_MED,
+        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,
+        ENV_AND_HDR_SPF_MATCH,RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,SPF_PASS,
+        T_SCC_BODY_TEXT_LINE,USER_IN_DEF_DKIM_WL,USER_IN_DEF_SPF_WL
+        autolearn=unavailable autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-The multiplier parameter of dwc3_gadget_calc_tx_fifo_size() was
-not documented:
+On Tue, 28 Jun 2022 at 11:46, Mauro Carvalho Chehab <mchehab@kernel.org> wrote:
+>
+> The kernel-doc markup is missing the slab pointer description:
+>
+>         include/linux/kfence.h:221: warning: Function parameter or member 'slab' not described in '__kfence_obj_info'
+>
+> Document it.
+>
+> Signed-off-by: Mauro Carvalho Chehab <mchehab@kernel.org>
 
-	drivers/usb/dwc3/gadget.c:675: warning: Function parameter or member 'mult' not described in 'dwc3_gadget_calc_tx_fifo_size'
+Reviewed-by: Marco Elver <elver@google.com>
 
-Signed-off-by: Mauro Carvalho Chehab <mchehab@kernel.org>
----
+Thank you.
 
-To avoid mailbombing on a large number of people, only mailing lists were C/C on the cover.
-See [PATCH 00/22] at: https://lore.kernel.org/all/cover.1656409369.git.mchehab@kernel.org/
-
- drivers/usb/dwc3/gadget.c | 1 +
- 1 file changed, 1 insertion(+)
-
-diff --git a/drivers/usb/dwc3/gadget.c b/drivers/usb/dwc3/gadget.c
-index 8716bece1072..a944c7a6c83a 100644
---- a/drivers/usb/dwc3/gadget.c
-+++ b/drivers/usb/dwc3/gadget.c
-@@ -657,6 +657,7 @@ static int dwc3_gadget_set_ep_config(struct dwc3_ep *dep, unsigned int action)
- /**
-  * dwc3_gadget_calc_tx_fifo_size - calculates the txfifo size value
-  * @dwc: pointer to the DWC3 context
-+ * @mult: multiplier to be used when calculating the fifo_size
-  *
-  * Calculates the size value based on the equation below:
-  *
--- 
-2.36.1
-
+> ---
+>
+> To avoid mailbombing on a large number of people, only mailing lists were C/C on the cover.
+> See [PATCH 00/22] at: https://lore.kernel.org/all/cover.1656409369.git.mchehab@kernel.org/
+>
+>  include/linux/kfence.h | 1 +
+>  1 file changed, 1 insertion(+)
+>
+> diff --git a/include/linux/kfence.h b/include/linux/kfence.h
+> index 726857a4b680..9c242f4e9fab 100644
+> --- a/include/linux/kfence.h
+> +++ b/include/linux/kfence.h
+> @@ -210,6 +210,7 @@ struct kmem_obj_info;
+>   * __kfence_obj_info() - fill kmem_obj_info struct
+>   * @kpp: kmem_obj_info to be filled
+>   * @object: the object
+> + * @slab: pointer to slab
+>   *
+>   * Return:
+>   * * false - not a KFENCE object
+> --
+> 2.36.1
+>
