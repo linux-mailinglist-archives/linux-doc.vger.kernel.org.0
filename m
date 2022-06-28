@@ -2,138 +2,233 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id D1F6255D6ED
-	for <lists+linux-doc@lfdr.de>; Tue, 28 Jun 2022 15:17:37 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 205B155D5A0
+	for <lists+linux-doc@lfdr.de>; Tue, 28 Jun 2022 15:15:42 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S244894AbiF1JOf (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 28 Jun 2022 05:14:35 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:42196 "EHLO
+        id S1344088AbiF1J0R (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 28 Jun 2022 05:26:17 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:51190 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S245172AbiF1JOc (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 28 Jun 2022 05:14:32 -0400
-Received: from esa4.hgst.iphmx.com (esa4.hgst.iphmx.com [216.71.154.42])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 23A0F101E6
-        for <linux-doc@vger.kernel.org>; Tue, 28 Jun 2022 02:14:32 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
-  t=1656407672; x=1687943672;
-  h=message-id:date:mime-version:subject:to:cc:references:
-   from:in-reply-to:content-transfer-encoding;
-  bh=m7ZvDnvdd5GvaUmk2CDtIh9qIt0xOE1YKhnPo7clhXk=;
-  b=pEdfKLMZ/m0Rtqr1DBaKi1JebCkMoXyOYwBadxXpARPRUEuX7ykBp+m9
-   c0t5GlV1W5vHGRqhmKBZEbmzKjbGU31rjZZSXD3cm8S5MWsauogiChEkc
-   7wZ4EIJci/wDZTMBJBOZm0/g3K8+R3LI5ju39gbgjzW3Oe8CawgVtPp4q
-   jasLs69SrURed2mJ1uWH7g1QNIbWceTMFNkfunmnllMT5EA1KTCkrKXHw
-   RwalAeqSeV93PvQ2vlDmClV9jOtcgyV28jGtw80CpZpmsvkoFAUeJRAGU
-   vhX76gJXeBmKgj9MpdImjGWcz5XSRPp9n7SViVIbralVaew2cv5podQKQ
-   w==;
-X-IronPort-AV: E=Sophos;i="5.92,227,1650902400"; 
-   d="scan'208";a="202954161"
-Received: from uls-op-cesaip02.wdc.com (HELO uls-op-cesaep02.wdc.com) ([199.255.45.15])
-  by ob1.hgst.iphmx.com with ESMTP; 28 Jun 2022 17:14:30 +0800
-IronPort-SDR: SINv91uVpyxKnok9WYR6xYSEQQPBaEkmYJSQjaL6QCPkIGx7RpEFiVAkWocROZ2dlhIvp8h1t9
- XToGMTFVJ0CsmXcbdpW85W3JiSEQLqK2K90+qBzYtls13OuqvQGgRFi00GmY6aCf4AN+/2uDkn
- CTnwSYGuUbTxr5HVLMQDniOFPIWfPy9A2Id7aM4HIwFTxyMNphgEuhW7sK1Q5lR6xwpoieP1iJ
- VoEWgZ7WNiaOAHY7GQlwSS1KjoJp2tOCkD9cD8zg+S7K2VbGoLX7QI4HC55mK9VwKTxL4ypd6H
- qlPYkeTPGc8R8ppOwjKYP58d
-Received: from uls-op-cesaip01.wdc.com ([10.248.3.36])
-  by uls-op-cesaep02.wdc.com with ESMTP/TLS/ECDHE-RSA-AES128-GCM-SHA256; 28 Jun 2022 01:32:10 -0700
-IronPort-SDR: gym4xqt3FBfJczl0Sl9hRZvJJ0qPsY4VTZsHQboZVTxITHAH7BLesoI5YgtfJklVeXrYt0H/CZ
- epcK7grR6m6h+JXwUhtx84jBDmzcsZ4mrX0u24naDoO5a+OdnP3JlG+VF6LJfTvzUVADHpatIA
- KKVH/j7BCBv2QwZiPSbwJDLjOSdM6LMe9No3ooq5Yv0Uy2488qJnsBeUf+XzYqIhUpMSw3Mvz2
- nb3emFBVvoULBhDxA8ogCrZq7sdKGYgEFUIaLzjN4MZRGTLNGWTZyaSIvwE1stfqX4X7EAq51G
- CIM=
-WDCIronportException: Internal
-Received: from usg-ed-osssrv.wdc.com ([10.3.10.180])
-  by uls-op-cesaip01.wdc.com with ESMTP/TLS/ECDHE-RSA-AES128-GCM-SHA256; 28 Jun 2022 02:14:30 -0700
-Received: from usg-ed-osssrv.wdc.com (usg-ed-osssrv.wdc.com [127.0.0.1])
-        by usg-ed-osssrv.wdc.com (Postfix) with ESMTP id 4LXJnd5Dr3z1Rws0
-        for <linux-doc@vger.kernel.org>; Tue, 28 Jun 2022 02:14:29 -0700 (PDT)
-Authentication-Results: usg-ed-osssrv.wdc.com (amavisd-new); dkim=pass
-        reason="pass (just generated, assumed good)"
-        header.d=opensource.wdc.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=
-        opensource.wdc.com; h=content-transfer-encoding:content-type
-        :in-reply-to:organization:from:references:to:content-language
-        :subject:user-agent:mime-version:date:message-id; s=dkim; t=
-        1656407668; x=1658999669; bh=m7ZvDnvdd5GvaUmk2CDtIh9qIt0xOE1YKhn
-        Po7clhXk=; b=fonT/uY7iPNzTi3ZQtgIXYc1C2nSzN3i9+X+P29x59EXxdjpUaE
-        D6Sw7APsvVE7Jg/+qJ3kMMxTcurmh9i+TVhHbGhJOJHMxgsVRnjqDQ1hHH61ZDqE
-        olMV5nY6BxIQ1v9956RDQxPObZ2iTz2PB/L6jp5SiKoL8osveKfZyeBhOPF/S9aJ
-        jsAP0UCOZbVBVpaL/SH/3Fp2zaozwb71DqJw2OtzEaNPTQ+2FqtHqb9jGZFACewu
-        iitZYNmam4gs7SQk8cQeJAOAwRB285P2k62pEWk7Nwsf7zHcyXaSq33gUYGFIqjc
-        C5muLk3LwxS2tb70g9gT5bewj0wNJ57IKOw==
-X-Virus-Scanned: amavisd-new at usg-ed-osssrv.wdc.com
-Received: from usg-ed-osssrv.wdc.com ([127.0.0.1])
-        by usg-ed-osssrv.wdc.com (usg-ed-osssrv.wdc.com [127.0.0.1]) (amavisd-new, port 10026)
-        with ESMTP id VL7sZJxROr3M for <linux-doc@vger.kernel.org>;
-        Tue, 28 Jun 2022 02:14:28 -0700 (PDT)
-Received: from [10.225.163.99] (unknown [10.225.163.99])
-        by usg-ed-osssrv.wdc.com (Postfix) with ESMTPSA id 4LXJnZ4JQfz1RtVk;
-        Tue, 28 Jun 2022 02:14:26 -0700 (PDT)
-Message-ID: <ba59a0da-a982-e3eb-1cb7-6e60f80fd319@opensource.wdc.com>
-Date:   Tue, 28 Jun 2022 18:14:25 +0900
-MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.10.0
-Subject: Re: [PATCH v4 5/5] libata-scsi: Cap ata_device->max_sectors according
- to shost->max_sectors
-Content-Language: en-US
-To:     John Garry <john.garry@huawei.com>, joro@8bytes.org,
-        will@kernel.org, jejb@linux.ibm.com, martin.petersen@oracle.com,
-        hch@lst.de, m.szyprowski@samsung.com, robin.murphy@arm.com
-Cc:     linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
-        linux-ide@vger.kernel.org, iommu@lists.linux-foundation.org,
-        iommu@lists.linux.dev, linux-scsi@vger.kernel.org,
-        linuxarm@huawei.com
-References: <1656343521-62897-1-git-send-email-john.garry@huawei.com>
- <1656343521-62897-6-git-send-email-john.garry@huawei.com>
- <b69c6112-98b7-3890-9d11-bb321a7c877a@opensource.wdc.com>
- <6619638c-52e8-cb67-c56c-9c9d38c18161@huawei.com>
-From:   Damien Le Moal <damien.lemoal@opensource.wdc.com>
-Organization: Western Digital Research
-In-Reply-To: <6619638c-52e8-cb67-c56c-9c9d38c18161@huawei.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-Spam-Status: No, score=-4.4 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,NICE_REPLY_A,RCVD_IN_DNSWL_MED,
-        SPF_HELO_PASS,SPF_PASS,T_SCC_BODY_TEXT_LINE autolearn=unavailable
+        with ESMTP id S229807AbiF1J0Q (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 28 Jun 2022 05:26:16 -0400
+X-Greylist: delayed 551 seconds by postgrey-1.37 at lindbergh.monkeyblade.net; Tue, 28 Jun 2022 02:26:12 PDT
+Received: from mx.kolabnow.com (mx.kolabnow.com [212.103.80.153])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id EB064F1C;
+        Tue, 28 Jun 2022 02:26:12 -0700 (PDT)
+Received: from localhost (unknown [127.0.0.1])
+        by mx.kolabnow.com (Postfix) with ESMTP id 234401578;
+        Tue, 28 Jun 2022 11:16:58 +0200 (CEST)
+Authentication-Results: ext-mx-out001.mykolab.com (amavisd-new);
+        dkim=pass (4096-bit key) reason="pass (just generated, assumed good)"
+        header.d=kolabnow.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kolabnow.com; h=
+        in-reply-to:content-transfer-encoding:content-disposition
+        :content-type:content-type:mime-version:references:message-id
+        :subject:subject:from:from:date:date:received:received:received;
+         s=dkim20160331; t=1656407817; x=1658222218; bh=RIkRffI1aOt9aTQA
+        qThSaSDKmYghWKPv5goHGRh30Mw=; b=sXswAtnrY7wi579FJ2ayqkwU0/9WjKSX
+        2STY25wdeFJ9Hofx3++gzDNbV6Wi9EbLKp5dQp0g+K78F7kVwKr3gk6QgDvcJD1X
+        aBL9beDLypQRqQoXbcVC03mJQ749qcHPt8S6BDVglsN/9EX+jYs3s0ZR+Os484VC
+        QjRYY6D9BdDOc59XxbY+88gmylbHmL7sbtBEgZbJnEcifeZyhP/xOwN78N9l13iU
+        D/bprQPWIruuPjIm2HmHvxRdEfWhLS/wF2ImZ0+uX6KjiaDkX1rYhbTOq2nECCG9
+        X/5RoAD+Aour8Q2MW724UbKlzcaqk16Bn0JLbJwb/+ON3n0KvGyrGWSFFLDz91nA
+        q2KIC8mTvysUylyeSTfpa1Ben//PtdEz+ag7LFf5/CPICQ6tQ/87C6WdoB1JdI4e
+        hpE9czf5iBwkXsWUsxHYLYO9RKXajlrOy+L2Wbwz9MkjuCRK8aiFZz2Bz7rOPyQX
+        FAy1S4DKD/8jPtNRkxpyeeJ+4wnQOP8fLuF+jQHYiCDIUqXznMfcUVc/vKF416fV
+        mW7rG4ZGLtFs4GxSWU0pX8DvtvJ4hulvwiFwstCNL+vmx7QJCYzEgg+aT9QVO6Q4
+        xno+sp2112kRUC33YzrDwNblrbBEyyHEatWa0F0S0QR/WfQLDaIFKL88zVkbF5jU
+        vwP8PQfwG5o=
+X-Virus-Scanned: amavisd-new at mykolab.com
+X-Spam-Score: -1.899
+X-Spam-Level: 
+X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+        DKIM_VALID,SPF_HELO_NONE,SPF_PASS,T_SCC_BODY_TEXT_LINE autolearn=ham
         autolearn_force=no version=3.4.6
+Received: from mx.kolabnow.com ([127.0.0.1])
+        by localhost (ext-mx-out001.mykolab.com [127.0.0.1]) (amavisd-new, port 10024)
+        with ESMTP id WJ3Rig7sth7S; Tue, 28 Jun 2022 11:16:57 +0200 (CEST)
+Received: from int-mx003.mykolab.com (unknown [10.9.13.3])
+        by mx.kolabnow.com (Postfix) with ESMTPS id CA5921575;
+        Tue, 28 Jun 2022 11:16:55 +0200 (CEST)
+Received: from ext-subm002.mykolab.com (unknown [10.9.6.2])
+        by int-mx003.mykolab.com (Postfix) with ESMTPS id 2477D2E4E;
+        Tue, 28 Jun 2022 11:16:52 +0200 (CEST)
+Date:   Tue, 28 Jun 2022 11:16:47 +0200
+From:   Federico Vaga <federico.vaga@vaga.pv.it>
+To:     Lukas Bulwahn <lukas.bulwahn@gmail.com>
+Cc:     Jonathan Corbet <corbet@lwn.net>, Alex Shi <alexs@kernel.org>,
+        Yanteng Si <siyanteng@loongson.cn>,
+        Hu Haowen <src.res@email.cn>, linux-doc@vger.kernel.org,
+        linux-doc-tw-discuss@lists.sourceforge.net,
+        Jean Delvare <jdelvare@suse.com>,
+        Guenter Roeck <linux@roeck-us.net>,
+        linux-hwmon@vger.kernel.org, kernel-janitors@vger.kernel.org,
+        linux-kernel@vger.kernel.org
+Subject: Re: [RFC PATCH 07/11] docs: it_IT: align to submitting-drivers
+ removal
+Message-ID: <20220628091647.xf5cygybqemwprgb@numero86.vaga.pv.it>
+References: <20220627151819.22694-1-lukas.bulwahn@gmail.com>
+ <20220627151819.22694-8-lukas.bulwahn@gmail.com>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <20220627151819.22694-8-lukas.bulwahn@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On 6/28/22 16:54, John Garry wrote:
-> On 28/06/2022 00:24, Damien Le Moal wrote:
->> On 6/28/22 00:25, John Garry wrote:
->>> ATA devices (struct ata_device) have a max_sectors field which is
->>> configured internally in libata. This is then used to (re)configure the
->>> associated sdev request queue max_sectors value from how it is earlier set
->>> in __scsi_init_queue(). In __scsi_init_queue() the max_sectors value is set
->>> according to shost limits, which includes host DMA mapping limits.
->>>
->>> Cap the ata_device max_sectors according to shost->max_sectors to respect
->>> this shost limit.
->>>
->>> Signed-off-by: John Garry<john.garry@huawei.com>
->>> Acked-by: Damien Le Moal<damien.lemoal@opensource.wdc.com>
->> Nit: please change the patch title to "ata: libata-scsi: Cap ..."
->>
-> 
-> ok, but it's going to be an even longer title :)
-> 
-> BTW, this patch has no real dependency on the rest of the series, so 
-> could be taken separately if you prefer.
+On Mon, Jun 27, 2022 at 05:18:15PM +0200, Lukas Bulwahn wrote:
+>Adjust the Italian translation to the removal of submitting-drivers in the
+>English kernel documentation.
+>
+>Signed-off-by: Lukas Bulwahn <lukas.bulwahn@gmail.com>
+>---
+> .../it_IT/kernel-hacking/hacking.rst             |  3 +--
+> .../translations/it_IT/process/5.Posting.rst     |  5 ++---
+> .../translations/it_IT/process/8.Conclusion.rst  |  3 +--
+> .../translations/it_IT/process/howto.rst         |  3 +--
+> .../translations/it_IT/process/index.rst         |  1 -
+> .../it_IT/process/submitting-drivers.rst         | 16 ----------------
+> .../it_IT/process/submitting-patches.rst         |  6 ++----
+> 7 files changed, 7 insertions(+), 30 deletions(-)
+> delete mode 100644 Documentation/translations/it_IT/process/submitting-drivers.rst
+>
+>diff --git a/Documentation/translations/it_IT/kernel-hacking/hacking.rst b/Documentation/translations/it_IT/kernel-hacking/hacking.rst
+>index d5c521327f6a..4bec4669cf48 100644
+>--- a/Documentation/translations/it_IT/kernel-hacking/hacking.rst
+>+++ b/Documentation/translations/it_IT/kernel-hacking/hacking.rst
+>@@ -795,8 +795,7 @@ anche per avere patch pulite, c'è del lavoro amministrativo da fare:
+>    di un semplice impegno su una parte del codice.
+>
+> -  Infine, non dimenticatevi di leggere
+>-   ``Documentation/process/submitting-patches.rst`` e possibilmente anche
+>-   ``Documentation/process/submitting-drivers.rst``.
+>+   ``Documentation/process/submitting-patches.rst``.
+>
+> Trucchetti del kernel
+> =====================
+>diff --git a/Documentation/translations/it_IT/process/5.Posting.rst b/Documentation/translations/it_IT/process/5.Posting.rst
+>index 1476d51eb5e5..a036f38fc82e 100644
+>--- a/Documentation/translations/it_IT/process/5.Posting.rst
+>+++ b/Documentation/translations/it_IT/process/5.Posting.rst
+>@@ -16,9 +16,8 @@ e di procedure per la pubblicazione delle patch; seguirle renderà la vita
+> più facile a tutti quanti.  Questo documento cercherà di coprire questi
+> argomenti con un ragionevole livello di dettaglio; più informazioni possono
+> essere trovare nella cartella 'Documentation', nei file
+>-:ref:`translations/it_IT/process/submitting-patches.rst <it_submittingpatches>`,
+>-:ref:`translations/it_IT/process/submitting-drivers.rst <it_submittingdrivers>`, e
+>-:ref:`translations/it_IT/process/submit-checklist.rst <it_submitchecklist>`.
+>+:ref:`translations/it_IT/process/submitting-patches.rst <it_submittingpatches>`
+>+e :ref:`translations/it_IT/process/submit-checklist.rst <it_submitchecklist>`.
 
-Sure, you can send it separately. Adding it through the scsi tree is fine too.
+Fixing plural. The final correct statement must be:
 
-> 
-> Thanks,
-> John
+nel file :ref:`translations/it_IT/process/submitting-patches.rst <it_submittingpatches>`.
 
+Notice 'nei file' -> 'nel file'
+
+
+>
+>
+> Quando pubblicarle
+>diff --git a/Documentation/translations/it_IT/process/8.Conclusion.rst b/Documentation/translations/it_IT/process/8.Conclusion.rst
+>index 039bfc5a4108..efaad6c7702c 100644
+>--- a/Documentation/translations/it_IT/process/8.Conclusion.rst
+>+++ b/Documentation/translations/it_IT/process/8.Conclusion.rst
+>@@ -13,8 +13,7 @@ e argomenti correlati. Primo tra questi sarà sempre la cartella Documentation
+> che si trova nei sorgenti kernel.
+>
+> Il file :ref:`process/howto.rst <it_process_howto>` è un punto di partenza
+>-importante; :ref:`process/submitting-patches.rst <it_submittingpatches>` e
+>-:ref:`process/submitting-drivers.rst <it_submittingdrivers>` sono
+>+importante; :ref:`process/submitting-patches.rst <it_submittingpatches>` sono
+> anch'essi qualcosa che tutti gli sviluppatori del kernel dovrebbero leggere.
+
+Fixing plural. the final correct statement must be:
+
+:ref:`process/submitting-patches.rst <it_submittingpatches>` è anch'esso
+qualcosa che tutti gli sviluppatori del kernel dovrebbero leggere.
+
+Notice "sono anch'essi" -> "è anch'esso"
+
+
+> Molte API interne al kernel sono documentate utilizzando il meccanismo
+> kerneldoc; "make htmldocs" o "make pdfdocs" possono essere usati per generare
+>diff --git a/Documentation/translations/it_IT/process/howto.rst b/Documentation/translations/it_IT/process/howto.rst
+>index 9554368a2ae2..16ad5622d549 100644
+>--- a/Documentation/translations/it_IT/process/howto.rst
+>+++ b/Documentation/translations/it_IT/process/howto.rst
+>@@ -109,8 +109,7 @@ Di seguito una lista di file che sono presenti nei sorgente del kernel e che
+>     accetteranno patch solo se queste osserveranno tali regole, e molte
+>     persone revisioneranno il codice solo se scritto nello stile appropriato.
+>
+>-  :ref:`Documentation/translations/it_IT/process/submitting-patches.rst <it_submittingpatches>` e
+>-  :ref:`Documentation/translations/it_IT/process/submitting-drivers.rst <it_submittingdrivers>`
+>+  :ref:`Documentation/translations/it_IT/process/submitting-patches.rst <it_submittingpatches>`
+>
+>     Questo file descrive dettagliatamente come creare ed inviare una patch
+>     con successo, includendo (ma non solo questo):
+>diff --git a/Documentation/translations/it_IT/process/index.rst b/Documentation/translations/it_IT/process/index.rst
+>index c4c867132c88..b223b70a4a95 100644
+>--- a/Documentation/translations/it_IT/process/index.rst
+>+++ b/Documentation/translations/it_IT/process/index.rst
+>@@ -41,7 +41,6 @@ degli sviluppatori:
+>    :maxdepth: 1
+>
+>    changes
+>-   submitting-drivers
+>    stable-api-nonsense
+>    management-style
+>    stable-kernel-rules
+>diff --git a/Documentation/translations/it_IT/process/submitting-drivers.rst b/Documentation/translations/it_IT/process/submitting-drivers.rst
+>deleted file mode 100644
+>index dadd77e47613..000000000000
+>--- a/Documentation/translations/it_IT/process/submitting-drivers.rst
+>+++ /dev/null
+>@@ -1,16 +0,0 @@
+>-.. include:: ../disclaimer-ita.rst
+>-
+>-:Original: :ref:`Documentation/process/submitting-drivers.rst <submittingdrivers>`
+>-:Translator: Federico Vaga <federico.vaga@vaga.pv.it>
+>-
+>-.. _it_submittingdrivers:
+>-
+>-Sottomettere driver per il kernel Linux
+>-=======================================
+>-
+>-.. note::
+>-
+>-   Questo documento è vecchio e negli ultimi anni non è stato più aggiornato;
+>-   dovrebbe essere aggiornato, o forse meglio, rimosso.  La maggior parte di
+>-   quello che viene detto qui può essere trovato anche negli altri documenti
+>-   dedicati allo sviluppo.  Per questo motivo il documento non verrà tradotto.
+>diff --git a/Documentation/translations/it_IT/process/submitting-patches.rst b/Documentation/translations/it_IT/process/submitting-patches.rst
+>index 4fb5b3aa306d..f117ee0a36e2 100644
+>--- a/Documentation/translations/it_IT/process/submitting-patches.rst
+>+++ b/Documentation/translations/it_IT/process/submitting-patches.rst
+>@@ -18,10 +18,8 @@ Questo documento contiene un vasto numero di suggerimenti concisi. Per maggiori
+> dettagli su come funziona il processo di sviluppo del kernel leggete
+> Documentation/translations/it_IT/process/development-process.rst. Leggete anche
+> Documentation/translations/it_IT/process/submit-checklist.rst per una lista di
+>-punti da verificare prima di inviare del codice. Se state inviando un driver,
+>-allora leggete anche
+>-Documentation/translations/it_IT/process/submitting-drivers.rst; per delle patch
+>-relative alle associazioni per Device Tree leggete
+>+punti da verificare prima di inviare del codice.
+>+Per delle patch relative alle associazioni per Device Tree leggete
+> Documentation/translations/it_IT/process/submitting-patches.rst.
+
+I see here what you mentioned in the cover. Yes the path should point elsewhere.
+I will send a patch for it.
+
+> Questa documentazione assume che sappiate usare ``git`` per preparare le patch.
+>-- 
+>2.17.1
+>
 
 -- 
-Damien Le Moal
-Western Digital Research
+~ - ~ - ~ - ~
+Federico Vaga
