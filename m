@@ -2,102 +2,70 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 0824856213A
-	for <lists+linux-doc@lfdr.de>; Thu, 30 Jun 2022 19:27:45 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id CE549562154
+	for <lists+linux-doc@lfdr.de>; Thu, 30 Jun 2022 19:34:23 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S233100AbiF3R0o (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 30 Jun 2022 13:26:44 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:50336 "EHLO
+        id S236458AbiF3Rdv (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 30 Jun 2022 13:33:51 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:58062 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S232771AbiF3R0o (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Thu, 30 Jun 2022 13:26:44 -0400
-Received: from ms.lwn.net (ms.lwn.net [45.79.88.28])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id D6E4B3E5FD;
-        Thu, 30 Jun 2022 10:26:43 -0700 (PDT)
+        with ESMTP id S236453AbiF3Rdu (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Thu, 30 Jun 2022 13:33:50 -0400
+Received: from ms.lwn.net (ms.lwn.net [IPv6:2600:3c01:e000:3a1::42])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 9CD023ED02
+        for <linux-doc@vger.kernel.org>; Thu, 30 Jun 2022 10:33:49 -0700 (PDT)
 Received: from localhost (unknown [IPv6:2601:281:8300:73::5f6])
         (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
         (No client certificate requested)
-        by ms.lwn.net (Postfix) with ESMTPSA id 3DF194B7;
-        Thu, 30 Jun 2022 17:26:43 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 ms.lwn.net 3DF194B7
+        by ms.lwn.net (Postfix) with ESMTPSA id 331DD4B7;
+        Thu, 30 Jun 2022 17:33:49 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 ms.lwn.net 331DD4B7
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=lwn.net; s=20201203;
-        t=1656610003; bh=ei+caOvlg/2HIJ6D0lCC+JmQefKHErSrMXRIWXCQdbE=;
+        t=1656610429; bh=PAz95RVHDrQdNi+jh1vNYk/XoJCvy181Mtlx2c7tsHM=;
         h=From:To:Cc:Subject:In-Reply-To:References:Date:From;
-        b=jHNm3o3pk7EiO4OrBrWRB7786IghQ2dk2tbsU9B16XhyTn3vTWOnzzmV1vavgpN2f
-         9ntM0ufTApzemzX5rObg2X9VE685rLMXuMcfIzUpGt9PLiwSJlEskA9Ak/fQI+v9Aa
-         sJgrXl68rvlWlr+ox157+ZpKRVRgc2XFRm0KgJmaaAPf8O81O/Gui8VYOwJSWikHbi
-         nDDs9MqCgs0oM5T7c+fr47d/oxeWcS2igAHoQu/pwjYa+VevP5RExMt3+bDLgHsaL0
-         cALqRXPij2k3HkVEri+xJivdHATF7a5Ft9CRXU9eP/GP2UkkyoWrcc03AsCq+UIF55
-         5wCSxrfwtpI8g==
+        b=LnuczBREn9t0o1Wl5S5RNULEivR+qlK6iEjCAWgiXiTFGC1DvFq8A4x4wXH9700Lp
+         FGhEuSFpuYycVE4fl8A/1WCA5Yrvbelk0jolGjb2b6ycwAHELU+S5OGgxWIq/ZEpd7
+         Eu7jyTfOTA5LfZGf2BB5UdYZGmPdFEwG+5tTfyubsdwlHTmakVVmqDVZLekzlPFD/y
+         SiU3flxtkHRp7cs+Ro0y7ODO0NkN4k7uqvKfcEkN+g32puvoITB7laIrOef+i8MpdC
+         /CyNSNXgEy32rg5ZzhDpxtmRgw2cd1cC1uCu8OaG9ZxqabzAfV/fMgCskiyGhnlXE2
+         BGQCEMBzoANEQ==
 From:   Jonathan Corbet <corbet@lwn.net>
-To:     Lukas Bulwahn <lukas.bulwahn@gmail.com>,
-        Federico Vaga <federico.vaga@vaga.pv.it>,
-        Alex Shi <alexs@kernel.org>,
-        Yanteng Si <siyanteng@loongson.cn>,
-        Hu Haowen <src.res@email.cn>, linux-doc@vger.kernel.org,
-        linux-doc-tw-discuss@lists.sourceforge.net
-Cc:     Jean Delvare <jdelvare@suse.com>,
-        Guenter Roeck <linux@roeck-us.net>,
-        linux-hwmon@vger.kernel.org, kernel-janitors@vger.kernel.org,
-        linux-kernel@vger.kernel.org,
-        Lukas Bulwahn <lukas.bulwahn@gmail.com>
-Subject: Re: [RFC PATCH 00/11] docs: remove submitting-drivers.rst
-In-Reply-To: <20220627151819.22694-1-lukas.bulwahn@gmail.com>
-References: <20220627151819.22694-1-lukas.bulwahn@gmail.com>
-Date:   Thu, 30 Jun 2022 11:26:42 -0600
-Message-ID: <87y1xenju5.fsf@meer.lwn.net>
+To:     yizhou.tang@shopee.com, siyanteng@loongson.cn, alexs@kernel.org,
+        seakeel@gmail.com
+Cc:     linux-doc@vger.kernel.org, robin.lubin@shopee.com, huangh@sea.com,
+        bobwxc@email.cn, Tang Yizhou <yizhou.tang@shopee.com>
+Subject: Re: [PATCH v2 0/2] Add mutex-design Chinese translation
+In-Reply-To: <20220629013240.65386-1-yizhou.tang@shopee.com>
+References: <20220629013240.65386-1-yizhou.tang@shopee.com>
+Date:   Thu, 30 Jun 2022 11:33:48 -0600
+Message-ID: <87tu82njib.fsf@meer.lwn.net>
 MIME-Version: 1.0
 Content-Type: text/plain
 X-Spam-Status: No, score=-2.1 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_NONE,
-        SPF_HELO_NONE,SPF_PASS,T_SCC_BODY_TEXT_LINE autolearn=ham
-        autolearn_force=no version=3.4.6
+        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,SPF_HELO_NONE,SPF_PASS,
+        T_SCC_BODY_TEXT_LINE autolearn=ham autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Lukas Bulwahn <lukas.bulwahn@gmail.com> writes:
+yizhou.tang@shopee.com writes:
 
-> Dear Jonathan, dear Federico, dear Alex, dear Yanteng, dear Hu,
+> From: Tang Yizhou <yizhou.tang@shopee.com>
 >
-> Here is an attempt to delete submitting-drivers with some improvements
-> and clean-up in other documentation places to convince ourselves that
-> nothing valuable is lost when deleting this checklist.
-
-I am totally in favor of doing this; that document has not served any
-real purpose for a long time.  Resend with the translation tweaks and
-such, and I'll happily apply it.
-
-> As future work---with this one submitting checklist gone---I see the harder
-> follow-up task to synchronize and clean up the various submission hints/
-> guidelines/checklists in the remaining kernel documentation that partly
-> overlap and differ in detail, their structure (unstructured, unordered
-> lists vs. sections and subsections) and their state of being outdated:
+> v2:
+> Take Alex's advice and pick his Reviewed-by tag.
 >
->   Documentation/process/submit-checklist.rst
->   Documentation/process/submitting-patches.rst
->   MAINTAINERS#Tips for patch submitters
+> Tang Yizhou (2):
+>   docs/zh_CN: Show the Chinese translation of spinlocks
+>   docs/zh_CN: Add mutex-design Chinese translation
 >
-> My next task at hand is to read through all three documents, figure out
-> what still applies and what is outdated, determine a good common structure
-> for all three documents, include cross-links and make them to some extent
-> follow a clear consistent policy. E.g., one document is a more detailed
-> description of everything mentioned in the short list of another document.
-> I will try to work through that in the next months or motivate and guide
-> some colleague or mentee to work together with me on that.
+>  .../translations/zh_CN/locking/index.rst      |   5 +-
+>  .../zh_CN/locking/mutex-design.rst            | 145 ++++++++++++++++++
+>  2 files changed, 148 insertions(+), 2 deletions(-)
+>  create mode 100644 Documentation/translations/zh_CN/locking/mutex-design.rst
 
-This seems like a good exercise as well.  I think the MAINTAINERS text
-should go away entirely, that's not really an appropriate place for it.
-submit-checklist.rst hasn't seen any real attention for some time; I'm
-not sure how useful it really is.
-
-What I would *really* like is a version of submitting-patches.rst that
-is not a "War and Peace" sort of reading experience.  That is a lot for
-somebody to get through before they can send their first patch...but
-it's not easy to make it shorter without losing important stuff.
-
-Thanks,
+Series applied, thanks.
 
 jon
