@@ -2,70 +2,63 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id CE549562154
-	for <lists+linux-doc@lfdr.de>; Thu, 30 Jun 2022 19:34:23 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id BDFAB562160
+	for <lists+linux-doc@lfdr.de>; Thu, 30 Jun 2022 19:37:54 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S236458AbiF3Rdv (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 30 Jun 2022 13:33:51 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:58062 "EHLO
+        id S232971AbiF3Rhi (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 30 Jun 2022 13:37:38 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:32830 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S236453AbiF3Rdu (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Thu, 30 Jun 2022 13:33:50 -0400
-Received: from ms.lwn.net (ms.lwn.net [IPv6:2600:3c01:e000:3a1::42])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 9CD023ED02
-        for <linux-doc@vger.kernel.org>; Thu, 30 Jun 2022 10:33:49 -0700 (PDT)
+        with ESMTP id S236536AbiF3Rhh (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Thu, 30 Jun 2022 13:37:37 -0400
+Received: from ms.lwn.net (ms.lwn.net [45.79.88.28])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id EDA233FD92;
+        Thu, 30 Jun 2022 10:37:36 -0700 (PDT)
 Received: from localhost (unknown [IPv6:2601:281:8300:73::5f6])
         (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
         (No client certificate requested)
-        by ms.lwn.net (Postfix) with ESMTPSA id 331DD4B7;
-        Thu, 30 Jun 2022 17:33:49 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 ms.lwn.net 331DD4B7
+        by ms.lwn.net (Postfix) with ESMTPSA id 9CBA44B7;
+        Thu, 30 Jun 2022 17:37:36 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 ms.lwn.net 9CBA44B7
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=lwn.net; s=20201203;
-        t=1656610429; bh=PAz95RVHDrQdNi+jh1vNYk/XoJCvy181Mtlx2c7tsHM=;
+        t=1656610656; bh=+LbHLvKEiiEc8pj4i9ditdVLj0AsUDpF6czmKDRAGAQ=;
         h=From:To:Cc:Subject:In-Reply-To:References:Date:From;
-        b=LnuczBREn9t0o1Wl5S5RNULEivR+qlK6iEjCAWgiXiTFGC1DvFq8A4x4wXH9700Lp
-         FGhEuSFpuYycVE4fl8A/1WCA5Yrvbelk0jolGjb2b6ycwAHELU+S5OGgxWIq/ZEpd7
-         Eu7jyTfOTA5LfZGf2BB5UdYZGmPdFEwG+5tTfyubsdwlHTmakVVmqDVZLekzlPFD/y
-         SiU3flxtkHRp7cs+Ro0y7ODO0NkN4k7uqvKfcEkN+g32puvoITB7laIrOef+i8MpdC
-         /CyNSNXgEy32rg5ZzhDpxtmRgw2cd1cC1uCu8OaG9ZxqabzAfV/fMgCskiyGhnlXE2
-         BGQCEMBzoANEQ==
+        b=ERFEf+hW4cBKgwZDsBfjGL1+pMPjSmjGy3n4+MMUybl0YPcR9mdt0i4Pfh/rdtzsK
+         LXcN6qfiEKibZTLo0ApKZxP5wvduy+2n1tBkKVFCxCiD+1qy4JM8qW+dKTk0pqv83m
+         iR/RE0MArmMNaB6RzHzqIHQEpzQMSGYPgvksSgr8nfvanui/XiGxOMfL0ZVQwiPhUm
+         ERjvy1NdBOucCtkzB0eLfy83X1ZIVpdvgOY5lzC5rfGRPzZFVj0016MeJvcXpPJU3C
+         +fQpxF0Jigtm6sDt44GZ92PLBNxiORwD+Fb7Xf+wnifXdSSbJxlQaXNgcb59dlwoQR
+         MctSHX7LQJx+w==
 From:   Jonathan Corbet <corbet@lwn.net>
-To:     yizhou.tang@shopee.com, siyanteng@loongson.cn, alexs@kernel.org,
-        seakeel@gmail.com
-Cc:     linux-doc@vger.kernel.org, robin.lubin@shopee.com, huangh@sea.com,
-        bobwxc@email.cn, Tang Yizhou <yizhou.tang@shopee.com>
-Subject: Re: [PATCH v2 0/2] Add mutex-design Chinese translation
-In-Reply-To: <20220629013240.65386-1-yizhou.tang@shopee.com>
-References: <20220629013240.65386-1-yizhou.tang@shopee.com>
-Date:   Thu, 30 Jun 2022 11:33:48 -0600
-Message-ID: <87tu82njib.fsf@meer.lwn.net>
+To:     Federico Vaga <federico.vaga@vaga.pv.it>
+Cc:     linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
+        Federico Vaga <federico.vaga@vaga.pv.it>
+Subject: Re: [PATCH] doc:it_IT: align Italian documentation
+In-Reply-To: <20220628111603.603357-1-federico.vaga@vaga.pv.it>
+References: <20220628111603.603357-1-federico.vaga@vaga.pv.it>
+Date:   Thu, 30 Jun 2022 11:37:36 -0600
+Message-ID: <87pmiqnjbz.fsf@meer.lwn.net>
 MIME-Version: 1.0
 Content-Type: text/plain
 X-Spam-Status: No, score=-2.1 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,SPF_HELO_NONE,SPF_PASS,
-        T_SCC_BODY_TEXT_LINE autolearn=ham autolearn_force=no version=3.4.6
+        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_NONE,
+        SPF_HELO_NONE,SPF_PASS,T_SCC_BODY_TEXT_LINE autolearn=ham
+        autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-yizhou.tang@shopee.com writes:
+Federico Vaga <federico.vaga@vaga.pv.it> writes:
 
-> From: Tang Yizhou <yizhou.tang@shopee.com>
+> Translation for the following patches
 >
-> v2:
-> Take Alex's advice and pick his Reviewed-by tag.
->
-> Tang Yizhou (2):
->   docs/zh_CN: Show the Chinese translation of spinlocks
->   docs/zh_CN: Add mutex-design Chinese translation
->
->  .../translations/zh_CN/locking/index.rst      |   5 +-
->  .../zh_CN/locking/mutex-design.rst            | 145 ++++++++++++++++++
->  2 files changed, 148 insertions(+), 2 deletions(-)
->  create mode 100644 Documentation/translations/zh_CN/locking/mutex-design.rst
+> commit df05c0e9496c ("Documentation: Raise the minimum supported version of LLVM to 11.0.0")
+> commit 333b11e541fe ("Documentation: Add minimum pahole version")
+> commit 6d6a8d6a4ed0 ("docs: Update Sphinx requirements")
+> [...]
 
-Series applied, thanks.
+Applied, thanks.
 
 jon
