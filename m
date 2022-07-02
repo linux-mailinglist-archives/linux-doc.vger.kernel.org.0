@@ -2,59 +2,56 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 8BAC6563F3B
-	for <lists+linux-doc@lfdr.de>; Sat,  2 Jul 2022 11:24:53 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 97351563F62
+	for <lists+linux-doc@lfdr.de>; Sat,  2 Jul 2022 12:11:40 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S230155AbiGBJYt (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Sat, 2 Jul 2022 05:24:49 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:41936 "EHLO
+        id S232240AbiGBKLi (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Sat, 2 Jul 2022 06:11:38 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:37180 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S229446AbiGBJYt (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Sat, 2 Jul 2022 05:24:49 -0400
-Received: from mga12.intel.com (mga12.intel.com [192.55.52.136])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id CF49313D0E;
-        Sat,  2 Jul 2022 02:24:48 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1656753888; x=1688289888;
-  h=date:from:to:cc:subject:message-id:mime-version;
-  bh=ZvCBqILuhQc+PA91u5tYAtzmTbr5oRh9lNn3MY3bA4I=;
-  b=YpHDGG90SgD1yZIRHieITDsK8LfEsxpG0+WZKHL3NvSTfb9VSalc/mKe
-   YrAWDvejney0q7Yr2rTnWXuMH2dTcPpgKR1fFr4kfFrPjJYrDzLo6vFLs
-   dt3O+GXpR4ax6QTs3DtYfgVvkhDVlAcPkScGIdz62eEYrkaXiMyjwWx6A
-   6a2aiAMvAVNuzhpgkQdOR6MWh98hcINnMwk8eELPdyNJqDivEwv+8lgmn
-   lja8y7PL2V1BqRmtR0j8XuC2snLBo0LuOgcn6SLVHJOYyEkYtPkGR+lAX
-   7dzBgkHSSS/KK73u2pNl7gFIhS86Se3AHUoV8f8oypW67Owi28o2xIa86
-   g==;
-X-IronPort-AV: E=McAfee;i="6400,9594,10395"; a="262608312"
-X-IronPort-AV: E=Sophos;i="5.92,239,1650956400"; 
-   d="scan'208";a="262608312"
-Received: from orsmga003.jf.intel.com ([10.7.209.27])
-  by fmsmga106.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 02 Jul 2022 02:24:48 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.92,239,1650956400"; 
-   d="scan'208";a="541966077"
-Received: from lkp-server01.sh.intel.com (HELO 68b931ab7ac1) ([10.239.97.150])
-  by orsmga003.jf.intel.com with ESMTP; 02 Jul 2022 02:24:46 -0700
-Received: from kbuild by 68b931ab7ac1 with local (Exim 4.95)
-        (envelope-from <lkp@intel.com>)
-        id 1o7ZMs-000F5z-81;
-        Sat, 02 Jul 2022 09:24:46 +0000
-Date:   Sat, 2 Jul 2022 17:23:50 +0800
-From:   kernel test robot <lkp@intel.com>
-To:     Gwendal Grignou <gwendal@chromium.org>
-Cc:     kbuild-all@lists.01.org, linux-kernel@vger.kernel.org,
-        Jonathan Cameron <Jonathan.Cameron@huawei.com>,
-        Stephen Boyd <swboyd@chromium.org>, linux-doc@vger.kernel.org
-Subject: htmldocs: Documentation/ABI/testing/sysfs-bus-iio-sx9324:2: WARNING:
- Unexpected indentation.
-Message-ID: <202207021703.lEW6FLT1-lkp@intel.com>
+        with ESMTP id S231882AbiGBKLh (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Sat, 2 Jul 2022 06:11:37 -0400
+Received: from dfw.source.kernel.org (dfw.source.kernel.org [IPv6:2604:1380:4641:c500::1])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 7D8D418B2D;
+        Sat,  2 Jul 2022 03:11:36 -0700 (PDT)
+Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
+        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+        (No client certificate requested)
+        by dfw.source.kernel.org (Postfix) with ESMTPS id 8396F60BBF;
+        Sat,  2 Jul 2022 10:11:35 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id BCD37C385A5;
+        Sat,  2 Jul 2022 10:11:34 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+        s=k20201202; t=1656756694;
+        bh=2cPnueYfcyPLeWd1Vx9za0f/VkxYofU2dhMu+bNUAP4=;
+        h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
+        b=Iy/R/QTjg/Xw8RZ0M2F4IFIYYzB8jLqQe+kQ7RGpm5KX2RMNp2CDtqGNHMaWKOEDp
+         sbAkRDv0ZVUoAsm+mDFLc5IEl4/RomYXe06lRm2ZS6QK7lxo55pjgbPjK+1jLxjH8T
+         dgQrlU7wUshZZ8quhKVa+zK1qTYiuzdcGqY8nx8HvPFmM47s5fD32BE4RJ2jqM8clf
+         X/BAk/4W9nstbwbVXAjkbHJ6vOXU6/6KciPdHmNvvRtEH92cRrNECy+VvzG51zKA3+
+         a1PZmGCCumW6kY4EHnvtyxIBGmKznijza3UgC7A7SQWZcPX0/v6VrLQVNI9LEeGavG
+         zeIN0UU2iUl2Q==
+Received: from mchehab by mail.kernel.org with local (Exim 4.95)
+        (envelope-from <mchehab@kernel.org>)
+        id 1o7a67-007cMa-Kr;
+        Sat, 02 Jul 2022 11:11:31 +0100
+From:   Mauro Carvalho Chehab <mchehab@kernel.org>
+To:     Linux Doc Mailing List <linux-doc@vger.kernel.org>
+Cc:     Mauro Carvalho Chehab <mchehab@kernel.org>,
+        Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
+        linux-kernel@vger.kernel.org, Jonathan Corbet <corbet@lwn.net>,
+        ksummit-discuss@lists.linuxfoundation.org
+Subject: [PATCH v2 0/5] Address some issues with sphinx detection
+Date:   Sat,  2 Jul 2022 11:11:24 +0100
+Message-Id: <cover.1656756450.git.mchehab@kernel.org>
+X-Mailer: git-send-email 2.36.1
+In-Reply-To: <CAHk-=wjYBONGGhiQu2iTP6zWu8y2a4=ii4byoomf6N77-pJNeA@mail.gmail.com>
+References: <CAHk-=wjYBONGGhiQu2iTP6zWu8y2a4=ii4byoomf6N77-pJNeA@mail.gmail.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-X-Spam-Status: No, score=-4.8 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_MED,
-        SPF_HELO_PASS,SPF_NONE,T_SCC_BODY_TEXT_LINE autolearn=ham
+Content-Transfer-Encoding: 8bit
+X-Spam-Status: No, score=-7.5 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_HI,
+        SPF_HELO_NONE,SPF_PASS,T_SCC_BODY_TEXT_LINE autolearn=ham
         autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
@@ -62,23 +59,55 @@ Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-tree:   https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git master
-head:   089866061428ec9bf67221247c936792078c41a4
-commit: 4c18a890dff8d95ca234d184773910383a978d45 iio:proximity:sx9324: Add SX9324 support
-date:   5 months ago
-reproduce: make htmldocs
+Checking if Sphinx is available and read to run is tricky, and may involve
+installing several packages for the document build to happen.
 
-If you fix the issue, kindly add following tag where applicable
-Reported-by: kernel test robot <lkp@intel.com>
+There are two options to install Sphinx:
 
-All warnings (new ones prefixed by >>):
+	- via distro-provided packages;
+	- via pip, using virtualenv/venv.
 
->> Documentation/ABI/testing/sysfs-bus-iio-sx9324:2: WARNING: Unexpected indentation.
+Some recent discussions showed a couple of misleading instructions.
 
-vim +2 Documentation/ABI/testing/sysfs-bus-iio-sx9324
+This series improves the Sphinx detection by:
 
-   > 2	Date:		November 2021
+- Fixing the logich with checks if a past venv is working and recommend
+  just enabling it instead of installing a new venv;
+- Detect if sphinx-build stopped working on a venv. This may happen during
+  distribution updates;
+- Move the PDF minimal version to be later, in order for it to be printed only
+  after finishing the Sphinx version check;
+
+Additionally, as now the Sphinx provided on almost all modern distros are
+above the minimal required version, place instructions about how to install
+Sphinx from the distro-provided packages after placing the instructions for
+installing it via venv.
+
+This will hopefully help to have more developers checking documentation
+builds with
+
+	make htmldocs
+
+---
+
+v2:
+- Fix some issues at the logic that was recommending installing via
+  distro-package manager;
+- Add a notice about Sphinx 3.0+ false-positive warnings due to a
+  Sphinx bug. People using a version different than the recommended
+  one should know about that.
+
+Mauro Carvalho Chehab (5):
+  scripts: sphinx-pre-install: fix venv version check logic
+  scripts: sphinx-pre-install: report broken venv
+  scripts: sphinx-pre-install: check for PDF min version later on
+  scripts: sphinx-pre-install: provide both venv and package installs
+  scripts: sphinx-pre-install: place a warning for Sphinx >= 3.0
+
+ scripts/sphinx-pre-install | 90 +++++++++++++++++++++++++++++---------
+ 1 file changed, 69 insertions(+), 21 deletions(-)
 
 -- 
-0-DAY CI Kernel Test Service
-https://01.org/lkp
+2.36.1
+
+
