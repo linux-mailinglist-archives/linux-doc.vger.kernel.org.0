@@ -2,82 +2,73 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 1ECED565E1A
-	for <lists+linux-doc@lfdr.de>; Mon,  4 Jul 2022 21:39:53 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 36A20565E1E
+	for <lists+linux-doc@lfdr.de>; Mon,  4 Jul 2022 21:46:21 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S229733AbiGDTjv (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 4 Jul 2022 15:39:51 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:46754 "EHLO
+        id S230035AbiGDTqT (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 4 Jul 2022 15:46:19 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:49342 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S229674AbiGDTjv (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Mon, 4 Jul 2022 15:39:51 -0400
-Received: from mga03.intel.com (mga03.intel.com [134.134.136.65])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 83E4DE00F;
-        Mon,  4 Jul 2022 12:39:50 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1656963590; x=1688499590;
-  h=date:from:to:cc:subject:message-id:mime-version;
-  bh=uXUWM4ZCmmyqWVnwBc+JZKXlVfuCIgdCR3FN6nzesaQ=;
-  b=AbdP3PqFdoer2Pm9sYYNBS4fTfg8LAK4QnuuNjEynNI/Cp1GadKslm7C
-   WGsFIoffpa1O8+6ghULMadQQB6olXZAtuRy9ZHinFXihUoG3GHs5ioBEL
-   QUG54/jXyc5uADbFdjTRoq8Ttql6plcjO88qjqlSKkgFFM8e+iw/23/yk
-   K7ajdEsbPnuYLHM+6kODPoTQSGe3/MzSaZ01yjN0tUymKjyG1VHuBSAZv
-   FvstUUwGO26xoAnN+n2Vk3ovu+K1PK5Gvs/AJ1pWW6jY4DBtj7mIIOCk8
-   pnZy3w234U4BmVtj1PIE+iqZFy+BQl9xaoAU7rQheo0ZNXRm6XwGQAuJQ
-   w==;
-X-IronPort-AV: E=McAfee;i="6400,9594,10398"; a="284298622"
-X-IronPort-AV: E=Sophos;i="5.92,243,1650956400"; 
-   d="scan'208";a="284298622"
-Received: from fmsmga005.fm.intel.com ([10.253.24.32])
-  by orsmga103.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 04 Jul 2022 12:39:50 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.92,243,1650956400"; 
-   d="scan'208";a="919452883"
-Received: from lkp-server01.sh.intel.com (HELO 68b931ab7ac1) ([10.239.97.150])
-  by fmsmga005.fm.intel.com with ESMTP; 04 Jul 2022 12:39:48 -0700
-Received: from kbuild by 68b931ab7ac1 with local (Exim 4.95)
-        (envelope-from <lkp@intel.com>)
-        id 1o8Rv9-000I7r-PO;
-        Mon, 04 Jul 2022 19:39:47 +0000
-Date:   Tue, 5 Jul 2022 03:39:07 +0800
-From:   kernel test robot <lkp@intel.com>
-To:     Paul Kocialkowski <paul.kocialkowski@bootlin.com>
-Cc:     kbuild-all@lists.01.org, linux-kernel@vger.kernel.org,
-        Michael Grzeschik <m.grzeschik@pengutronix.de>,
-        linux-doc@vger.kernel.org
-Subject: [mgr:v5.19/topic/rk3568-vepu-h264-stateless-bootlin 2/4] htmldocs:
- Documentation/output/videodev2.h.rst:6: WARNING: undefined label:
- v4l2-ctrl-type-h264-encode-params (if the link has no caption the label must
- precede a section header)
-Message-ID: <202207050300.unCEGUNs-lkp@intel.com>
+        with ESMTP id S229473AbiGDTqT (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Mon, 4 Jul 2022 15:46:19 -0400
+Received: from mail-ej1-x630.google.com (mail-ej1-x630.google.com [IPv6:2a00:1450:4864:20::630])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 478AF65E8
+        for <linux-doc@vger.kernel.org>; Mon,  4 Jul 2022 12:46:18 -0700 (PDT)
+Received: by mail-ej1-x630.google.com with SMTP id fw3so18221073ejc.10
+        for <linux-doc@vger.kernel.org>; Mon, 04 Jul 2022 12:46:18 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112;
+        h=mime-version:reply-to:from:date:message-id:subject:to;
+        bh=AOuJfDK+0QwtZ/uvgMV5qrF7D2aVWD/S//Bu+xTDlNs=;
+        b=FIRv3UU5x6aGHh6XHF/MxNMUq7O7y45naJA+lWT+jRREvASG5ghj99dTxOEPX8P37x
+         aOCotVY7iz07t32LS5CqO6RkRjZrmOlIb9b5HBtn4a864NNygHXCoxave2Z/Ga7oVth3
+         5JEzBSWmBPMzrydpeGp+J9WEoexoCM/ymAHlmOcs/BPtth4ZpIoTP9vbJBF5SEiWEVvB
+         RDTmoDO6ILkQe8Niyt8A3dEY/IcCLYlQjOu6Zam/bR2WdhOvqiY6X1bKvAI91aGX772w
+         orB0FUeovaPyLc9iDyxaN53QSXxM1sH48qLt+hDcM9qbzpId9KuTpv+KMByqilpPHRv5
+         4Lvg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:mime-version:reply-to:from:date:message-id
+         :subject:to;
+        bh=AOuJfDK+0QwtZ/uvgMV5qrF7D2aVWD/S//Bu+xTDlNs=;
+        b=3NJ+tT4bHdQDw7br3oWqrKRzGfw0/npdwBaLo3Bx5QzVE26uydq+y9gRbnnaTJ7e8+
+         /WylTCbzO3rW+Ue4VM4Fl8nC29qHR/1idt0oXG4ztX02/ycgL4CKOE3xEnw2pHScvQtS
+         j08NwQpwSTInAJw3MbXWzM0eB4ePWGgUPcoPTVxU0v5lbiKqAsSImTxVTXJaHBRzcTmX
+         wTz52zAM/TlPgeQPYzkdLXxeHn1cwVJc2mQ+VF1NhEUyYWJwTw7cBYIE5DWHAyaffGHN
+         OdYNKA+wuNhhMHLOQdurH06z+m5t1WaprEuA2C2aY0T7U3e/STzJmSZwn9mZ2xvuLBd2
+         J+7g==
+X-Gm-Message-State: AJIora9AeoNH23AS74MrroDIoO40Jv4QRWVorIkGLngHPFjHs+KZU3Gg
+        LEYsWs0jZJzeX2CglYz6mGlP3chqF34zIIoP7Ww=
+X-Google-Smtp-Source: AGRyM1sXvW+A05uQcF07KYSHuRoEfQeGeqjDhq2BwQeMq6p1o8/B93qGaTpx83IbwGwFuE3suEICS1gBDPlbp5mKXGw=
+X-Received: by 2002:a17:907:2815:b0:72a:4eda:a35f with SMTP id
+ eb21-20020a170907281500b0072a4edaa35fmr27024206ejc.636.1656963976709; Mon, 04
+ Jul 2022 12:46:16 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-X-Spam-Status: No, score=-5.1 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_MED,
-        SPF_HELO_NONE,SPF_NONE,T_SCC_BODY_TEXT_LINE autolearn=ham
-        autolearn_force=no version=3.4.6
+Received: by 2002:a05:6400:3283:0:0:0:0 with HTTP; Mon, 4 Jul 2022 12:46:16
+ -0700 (PDT)
+Reply-To: nikkifenton79@gmail.com
+From:   Nikki Fenton <fdd97917@gmail.com>
+Date:   Mon, 4 Jul 2022 21:46:16 +0200
+Message-ID: <CAPLfORARcEbr9s=C8r8f-efeEKvasMfS=ukskq6Lw4NSzwEWCQ@mail.gmail.com>
+Subject: Please Read
+To:     undisclosed-recipients:;
+Content-Type: text/plain; charset="UTF-8"
+X-Spam-Status: No, score=4.9 required=5.0 tests=BAYES_50,DKIM_SIGNED,
+        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_ENVFROM_END_DIGIT,
+        FREEMAIL_FROM,FREEMAIL_REPLYTO,FREEMAIL_REPLYTO_END_DIGIT,
+        RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,SPF_PASS,T_SCC_BODY_TEXT_LINE,
+        UNDISC_FREEM autolearn=no autolearn_force=no version=3.4.6
+X-Spam-Level: ****
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-tree:   https://git.pengutronix.de/git/mgr/linux v5.19/topic/rk3568-vepu-h264-stateless-bootlin
-head:   11fcd09bf7cbe84c3e2e322142e3aff59c5c8402
-commit: ec2b92670100c6bd075ca859bc3392b5b913be27 [2/4] media: Introduce Hantro V4L2 H.264 stateless encoding API
-reproduce: make htmldocs
+Hello,
+I viewed your profile on Linkedin regarding a proposal that has
+something in common with you, reply for more details on my private
+email:nikkifenton79@gmail.com
 
-If you fix the issue, kindly add following tag where applicable
-Reported-by: kernel test robot <lkp@intel.com>
-
-All warnings (new ones prefixed by >>):
-
->> Documentation/output/videodev2.h.rst:6: WARNING: undefined label: v4l2-ctrl-type-h264-encode-params (if the link has no caption the label must precede a section header)
->> Documentation/output/videodev2.h.rst:6: WARNING: undefined label: v4l2-ctrl-type-h264-encode-rc (if the link has no caption the label must precede a section header)
->> Documentation/output/videodev2.h.rst:6: WARNING: undefined label: v4l2-ctrl-type-h264-encode-feedback (if the link has no caption the label must precede a section header)
-
--- 
-0-DAY CI Kernel Test Service
-https://01.org/lkp
+Nikki Fenton,
+nikkifenton79@gmail.com
