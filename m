@@ -2,69 +2,67 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 509E7565143
-	for <lists+linux-doc@lfdr.de>; Mon,  4 Jul 2022 11:49:38 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 5740E5652E7
+	for <lists+linux-doc@lfdr.de>; Mon,  4 Jul 2022 13:00:24 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S232902AbiGDJtg (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 4 Jul 2022 05:49:36 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:43532 "EHLO
+        id S234153AbiGDLAP (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 4 Jul 2022 07:00:15 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:50480 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S232644AbiGDJtg (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Mon, 4 Jul 2022 05:49:36 -0400
-Received: from mail-yb1-xb29.google.com (mail-yb1-xb29.google.com [IPv6:2607:f8b0:4864:20::b29])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 2081E2AD9;
-        Mon,  4 Jul 2022 02:49:35 -0700 (PDT)
-Received: by mail-yb1-xb29.google.com with SMTP id l144so3426422ybl.5;
-        Mon, 04 Jul 2022 02:49:35 -0700 (PDT)
+        with ESMTP id S234054AbiGDLAL (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Mon, 4 Jul 2022 07:00:11 -0400
+Received: from mail-wr1-x42d.google.com (mail-wr1-x42d.google.com [IPv6:2a00:1450:4864:20::42d])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id B866AFD35;
+        Mon,  4 Jul 2022 04:00:06 -0700 (PDT)
+Received: by mail-wr1-x42d.google.com with SMTP id n4so5537773wru.11;
+        Mon, 04 Jul 2022 04:00:06 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc:content-transfer-encoding;
-        bh=upxJ9MJ8gsVDlXDiuKX4+gbfevRMZmGiVadxBV+kpe8=;
-        b=qpHNh54MzgRw/unTs6ylIG6lsq0QzcEUzvY+KsDq+HVjI7Jeoy22/FDGFzk62XnWZq
-         pRXixYTwJaB2+72PZyhVEebJnEgQK/wovb6AB3Qi8YwUZ5x0mh8p+F8eUK9TIH/DeH+o
-         051TXq25MjKoz+zRqzBHqD9mZr/dYcVtzBjSGnXvYaejkZRfekks6tiRn33g6s1VMf6z
-         nHPP2a+YQ+/ZL6Vzaa3wntbjRl6pfO1dqTWZRUstwgyLbHozFt2CPubQ85gm5KNW5ech
-         yCRwCdu3KbbXoyjmYFxijPOj0lACMBnzlgB5rZrJ5qpxDXc+203vzEhNV5erIntoBmKf
-         zyOw==
+        h=from:to:cc:subject:in-reply-to:date:message-id:references
+         :user-agent:mime-version;
+        bh=r9fNXfRbdc5ZvafBNWErX1+dlYsQ8FGynZjrFEqrCDQ=;
+        b=koOZfNAI6ls9HxqrNk434Buyi99oDW4VmsitHN2ksndpIv7RD0r/YfluDefsYGrvbD
+         sbPymTzb6RH5knV5s633xhz7IXea+K6RkyAk6Mmv7mxAJoK/zgOwM/ZkLm1uXHBRJkBw
+         IZ6e9kH59lneH6EiZECXQ5lyOMpH5OEhp9R/5hA3PDuGLLC/xBHBTg6a6oQ0huxYrc+6
+         EnD6brQtBZm3nIATVcia/nhn2Eqozh/SF/J2jTNB8LtbFv7+a4xRCAuow0263sNE0haS
+         Nrx8fWFlcBTzR87I8BU7Mw8xdUWSyfSUxYQE6Ug9B/g8SjOzMSzM38LODOKzBFZFtRV1
+         Vmkw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc:content-transfer-encoding;
-        bh=upxJ9MJ8gsVDlXDiuKX4+gbfevRMZmGiVadxBV+kpe8=;
-        b=76a2vQSYnG7xor+x2mYihYess3dvlwTVaZXUmpj7lnuLnl+R/gFxiJQPQmH4+xfmAA
-         Az1Vdq2MybC7G8M+crPPYkGow9Ool+CsV/oUQxCkAE6Z6zFY6urUwUZDXIuV6xx6glBL
-         I5+MKV1WtgEqM1iqaI3lrE9B9RMIFkXvl6znyq2m0fx8vmYFGM9XSRdqTYJM40ureIsQ
-         bXrs/o6CApMqKUIedzNucWKxQQWLMIyEUlRZ4G2NSwcQAev9UZpe8PeuX/qqWWGHvJpg
-         B46f3zG1SDNWE2+cLDz/3o/o1mymd7Ejj9L5gO5zYJd3SEO7zfNI0aGyRUZfBeIaGiIf
-         JR5w==
-X-Gm-Message-State: AJIora+fo9uladoZgWkKib6U+AuHC6aSuqA5zyRrexej4x6wjvVYYoTa
-        FHyXQ9XRlfWR79xQvM9oA666vEICQe/nImQ5gNo=
-X-Google-Smtp-Source: AGRyM1uuTnlo8UbsTNpCu9w7y6Imn3pGteU2AlhpEORjfZffq++K3qlqc72uL681GfWtLoni83k3M/c8Qd4oL79LzwE=
-X-Received: by 2002:a25:5809:0:b0:66c:8709:3611 with SMTP id
- m9-20020a255809000000b0066c87093611mr28080763ybb.608.1656928174292; Mon, 04
- Jul 2022 02:49:34 -0700 (PDT)
+        h=x-gm-message-state:from:to:cc:subject:in-reply-to:date:message-id
+         :references:user-agent:mime-version;
+        bh=r9fNXfRbdc5ZvafBNWErX1+dlYsQ8FGynZjrFEqrCDQ=;
+        b=vpXH4NEOyu3SmzJruYrsu74n2lebVWDn4uFzDSvIP/mvlNl3340k+yDSLY2fHolRI/
+         Ao2sc6j33zYsf8na80ld2joieqHk5Ycx2pUnI9JADq1NjA2f8hIZYCvo7Qg09qJTLyPq
+         T7ldyRbyuL0IOYtAcL7chJ8RTD/xdve3IPCJe8ip9rf6Yd69h7xvtw6aPmweq4jc7xSV
+         5EnoscL6Kwz+eW0tfTbs6tfdACj43QdoXxIDgW+Hkt+ItSQya+he8wmPzNM9DoZDKhim
+         LFBMogpiTFW+75R34ufvBAIZjsorlF/N6Bac/eH5WQ1VUp6tPaBTIx4RaYXHBVK/CCgO
+         Je5w==
+X-Gm-Message-State: AJIora/fh6uLm2ZFRs5GGaDyGQ+vp8nDG3Eqx0GMhSUSnAflUXFBiyws
+        Rn9iJJxx30+DQhL5W8J2Oz2sdGnJ7vvDOtr/
+X-Google-Smtp-Source: AGRyM1uSWRYUuIs7wmTBAvcy8FFXqoXJcNXmPIIzYyY5nnuyuKjoFBhWtTDW2jdv08Ck95bpv+EJ+w==
+X-Received: by 2002:adf:dc0d:0:b0:21d:ea5:710f with SMTP id t13-20020adfdc0d000000b0021d0ea5710fmr26441065wri.48.1656932404965;
+        Mon, 04 Jul 2022 04:00:04 -0700 (PDT)
+Received: from imac ([2a02:8010:60a0:0:dc4:4125:ca49:32b7])
+        by smtp.gmail.com with ESMTPSA id u15-20020a5d434f000000b0021b970a68f9sm30163025wrr.26.2022.07.04.04.00.03
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 04 Jul 2022 04:00:04 -0700 (PDT)
+From:   Donald Hunter <donald.hunter@gmail.com>
+To:     Dave Tucker <dave@dtucker.co.uk>
+Cc:     bpf@vger.kernel.org, corbet@lwn.net, ast@kernel.org,
+        daniel@iogearbox.net, andrii@kernel.org, kafai@fb.com,
+        songliubraving@fb.com, john.fastabend@gmail.com,
+        kpsingh@kernel.org, linux-doc@vger.kernel.org
+Subject: Re: [PATCH v4 bpf-next 2/2] bpf, docs: document BPF_MAP_TYPE_ARRAY
+In-Reply-To: <ca8a57db17da57f403b029c14ba4f0b89774d361.1656590177.git.dave@dtucker.co.uk>
+        (Dave Tucker's message of "Thu, 30 Jun 2022 13:04:09 +0100")
+Date:   Mon, 04 Jul 2022 11:39:53 +0100
+Message-ID: <m2y1x940w6.fsf@gmail.com>
+References: <cover.1656590177.git.dave@dtucker.co.uk>
+        <ca8a57db17da57f403b029c14ba4f0b89774d361.1656590177.git.dave@dtucker.co.uk>
+User-Agent: Gnus/5.13 (Gnus v5.13) Emacs/28.1 (darwin)
 MIME-Version: 1.0
-References: <20220627151819.22694-1-lukas.bulwahn@gmail.com>
- <20220627151819.22694-8-lukas.bulwahn@gmail.com> <20220628091647.xf5cygybqemwprgb@numero86.vaga.pv.it>
-In-Reply-To: <20220628091647.xf5cygybqemwprgb@numero86.vaga.pv.it>
-From:   Lukas Bulwahn <lukas.bulwahn@gmail.com>
-Date:   Mon, 4 Jul 2022 11:49:23 +0200
-Message-ID: <CAKXUXMzAzT6c=Atwbnif0MQg50B9UpG6_rV65_OvkaJPTzaPcw@mail.gmail.com>
-Subject: Re: [RFC PATCH 07/11] docs: it_IT: align to submitting-drivers removal
-To:     Federico Vaga <federico.vaga@vaga.pv.it>
-Cc:     Jonathan Corbet <corbet@lwn.net>, Alex Shi <alexs@kernel.org>,
-        Yanteng Si <siyanteng@loongson.cn>,
-        Hu Haowen <src.res@email.cn>,
-        "open list:DOCUMENTATION" <linux-doc@vger.kernel.org>,
-        linux-doc-tw-discuss@lists.sourceforge.net,
-        Jean Delvare <jdelvare@suse.com>,
-        Guenter Roeck <linux@roeck-us.net>,
-        linux-hwmon@vger.kernel.org,
-        kernel-janitors <kernel-janitors@vger.kernel.org>,
-        Linux Kernel Mailing List <linux-kernel@vger.kernel.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain
 X-Spam-Status: No, score=-2.1 required=5.0 tests=BAYES_00,DKIM_SIGNED,
         DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_FROM,
         RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,SPF_PASS,T_SCC_BODY_TEXT_LINE
@@ -75,81 +73,24 @@ Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Tue, Jun 28, 2022 at 11:16 AM Federico Vaga <federico.vaga@vaga.pv.it> w=
-rote:
->
-> On Mon, Jun 27, 2022 at 05:18:15PM +0200, Lukas Bulwahn wrote:
-> >Adjust the Italian translation to the removal of submitting-drivers in t=
-he
-> >English kernel documentation.
-> >
-> >Signed-off-by: Lukas Bulwahn <lukas.bulwahn@gmail.com>
-> >---
-> > .../it_IT/kernel-hacking/hacking.rst             |  3 +--
-> > .../translations/it_IT/process/5.Posting.rst     |  5 ++---
-> > .../translations/it_IT/process/8.Conclusion.rst  |  3 +--
-> > .../translations/it_IT/process/howto.rst         |  3 +--
-> > .../translations/it_IT/process/index.rst         |  1 -
-> > .../it_IT/process/submitting-drivers.rst         | 16 ----------------
-> > .../it_IT/process/submitting-patches.rst         |  6 ++----
-> > 7 files changed, 7 insertions(+), 30 deletions(-)
-> > delete mode 100644 Documentation/translations/it_IT/process/submitting-=
-drivers.rst
-> >
-> >diff --git a/Documentation/translations/it_IT/kernel-hacking/hacking.rst=
- b/Documentation/translations/it_IT/kernel-hacking/hacking.rst
-> >index d5c521327f6a..4bec4669cf48 100644
-> >--- a/Documentation/translations/it_IT/kernel-hacking/hacking.rst
-> >+++ b/Documentation/translations/it_IT/kernel-hacking/hacking.rst
-> >@@ -795,8 +795,7 @@ anche per avere patch pulite, c'=C3=A8 del lavoro am=
-ministrativo da fare:
-> >    di un semplice impegno su una parte del codice.
-> >
-> > -  Infine, non dimenticatevi di leggere
-> >-   ``Documentation/process/submitting-patches.rst`` e possibilmente anc=
-he
-> >-   ``Documentation/process/submitting-drivers.rst``.
-> >+   ``Documentation/process/submitting-patches.rst``.
-> >
-> > Trucchetti del kernel
-> > =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-> >diff --git a/Documentation/translations/it_IT/process/5.Posting.rst b/Do=
-cumentation/translations/it_IT/process/5.Posting.rst
-> >index 1476d51eb5e5..a036f38fc82e 100644
-> >--- a/Documentation/translations/it_IT/process/5.Posting.rst
-> >+++ b/Documentation/translations/it_IT/process/5.Posting.rst
-> >@@ -16,9 +16,8 @@ e di procedure per la pubblicazione delle patch; segui=
-rle render=C3=A0 la vita
-> > pi=C3=B9 facile a tutti quanti.  Questo documento cercher=C3=A0 di copr=
-ire questi
-> > argomenti con un ragionevole livello di dettaglio; pi=C3=B9 informazion=
-i possono
-> > essere trovare nella cartella 'Documentation', nei file
-> >-:ref:`translations/it_IT/process/submitting-patches.rst <it_submittingp=
-atches>`,
-> >-:ref:`translations/it_IT/process/submitting-drivers.rst <it_submittingd=
-rivers>`, e
-> >-:ref:`translations/it_IT/process/submit-checklist.rst <it_submitcheckli=
-st>`.
-> >+:ref:`translations/it_IT/process/submitting-patches.rst <it_submittingp=
-atches>`
-> >+e :ref:`translations/it_IT/process/submit-checklist.rst <it_submitcheck=
-list>`.
->
-> Fixing plural. The final correct statement must be:
->
-> nel file :ref:`translations/it_IT/process/submitting-patches.rst <it_subm=
-ittingpatches>`.
->
-> Notice 'nei file' -> 'nel file'
->
->
+Dave Tucker <dave@dtucker.co.uk> writes:
 
-Are you sure about this proposed change here? In my patch, I just
-changed the enumeration from three objects (submittingpatches,
-submittingdrivers, submitchecklist) to two objects (submittingpatches,
-submitchecklist).
+> +Since Kernel 5.4, memory mapping may be enabled for ``BPF_MAP_TYPE_ARRAY`` by
 
-So, it should stay plural, right?
+It looks to be 5.5 according to bootlin:
 
-Lukas
+https://elixir.bootlin.com/linux/v5.4.203/A/ident/BPF_F_MMAPABLE
+https://elixir.bootlin.com/linux/v5.5/A/ident/BPF_F_MMAPABLE
+
+> +Array elements can also be added using the ``bpf_map_update_elem()`` helper or
+> +libbpf API.
+> +
+> +Since the array is of constant size, ``bpf_map_delete_elem()`` is not supported.
+> +To clear an array element, you may use ``bpf_map_update_eleme()`` to insert a
+> +zero value to that index.
+
+Typo in bpf_map_update_elem().
+
+Thanks!
+--
+Donald Hunter
