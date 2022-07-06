@@ -2,105 +2,97 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 78BEA568800
-	for <lists+linux-doc@lfdr.de>; Wed,  6 Jul 2022 14:12:53 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id D65DE5687D1
+	for <lists+linux-doc@lfdr.de>; Wed,  6 Jul 2022 14:10:31 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S233609AbiGFML7 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 6 Jul 2022 08:11:59 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:45824 "EHLO
+        id S232915AbiGFMKT (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 6 Jul 2022 08:10:19 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:44346 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S233610AbiGFMLj (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Wed, 6 Jul 2022 08:11:39 -0400
-Received: from frasgout.his.huawei.com (frasgout.his.huawei.com [185.176.79.56])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 4C8152A424;
-        Wed,  6 Jul 2022 05:11:30 -0700 (PDT)
-Received: from fraeml735-chm.china.huawei.com (unknown [172.18.147.200])
-        by frasgout.his.huawei.com (SkyGuard) with ESMTP id 4LdJFH458gz686xt;
-        Wed,  6 Jul 2022 20:07:15 +0800 (CST)
-Received: from lhreml724-chm.china.huawei.com (10.201.108.75) by
- fraeml735-chm.china.huawei.com (10.206.15.216) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2375.24; Wed, 6 Jul 2022 14:11:28 +0200
-Received: from localhost.localdomain (10.69.192.58) by
- lhreml724-chm.china.huawei.com (10.201.108.75) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2375.24; Wed, 6 Jul 2022 13:11:22 +0100
-From:   John Garry <john.garry@huawei.com>
-To:     <axboe@kernel.dk>, <damien.lemoal@opensource.wdc.com>,
-        <bvanassche@acm.org>, <hch@lst.de>, <jejb@linux.ibm.com>,
-        <martin.petersen@oracle.com>, <hare@suse.de>, <satishkh@cisco.com>,
-        <sebaddel@cisco.com>, <kartilak@cisco.com>
-CC:     <linux-doc@vger.kernel.org>, <linux-rdma@vger.kernel.org>,
-        <linux-mmc@vger.kernel.org>, <linux-nvme@lists.infradead.org>,
-        <linux-s390@vger.kernel.org>, <linux-scsi@vger.kernel.org>,
-        <mpi3mr-linuxdrv.pdl@broadcom.com>, <linux-block@vger.kernel.org>,
-        <linux-kernel@vger.kernel.org>, <nbd@other.debian.org>,
-        John Garry <john.garry@huawei.com>
-Subject: [PATCH v3 6/6] blk-mq: Drop local variable for reserved tag
-Date:   Wed, 6 Jul 2022 20:03:54 +0800
-Message-ID: <1657109034-206040-7-git-send-email-john.garry@huawei.com>
-X-Mailer: git-send-email 2.8.1
-In-Reply-To: <1657109034-206040-1-git-send-email-john.garry@huawei.com>
-References: <1657109034-206040-1-git-send-email-john.garry@huawei.com>
+        with ESMTP id S232378AbiGFMKS (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Wed, 6 Jul 2022 08:10:18 -0400
+Received: from ams.source.kernel.org (ams.source.kernel.org [145.40.68.75])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id DDA7F25589;
+        Wed,  6 Jul 2022 05:10:17 -0700 (PDT)
+Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
+        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+        (No client certificate requested)
+        by ams.source.kernel.org (Postfix) with ESMTPS id 88A66B81CA6;
+        Wed,  6 Jul 2022 12:10:16 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPS id 41A30C341CA;
+        Wed,  6 Jul 2022 12:10:15 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+        s=k20201202; t=1657109415;
+        bh=Fh74RXkBxb5qR+VbTaZWkzrhg2eyH/wAqBl/LYQyt0A=;
+        h=Subject:From:Date:References:In-Reply-To:To:Cc:From;
+        b=c/1vkV/vpUlOMm7VrCDesvLhKVWm6TWzb1lIdab4ZpPubyUfcrGNIpHoAEymG40uh
+         DaGUfoBuEmReKSCRCtDgG52No3ouquJvhanoMKm8yasIo1cgRt5oHGw68ESNvTnhgm
+         Mj8LwYi05+qsPffq07RvJofSPir+K1EAUwWyxxAWk6/PfciMXwj5a8ON0OvPuxFNyc
+         2MSmQ6yIptxQXjRCiwmICxS8tvEAUE+d2Z6EugVzLrPqZMFgaJBd+PF0VCnEAg8fgi
+         1dBnxQzXNlLMDhjxqYoiwElgmHlukOe4aXq/labCzhxwTOHEYRo7mMYVRwzOALsbPW
+         0dSQmDfwx3aOA==
+Received: from aws-us-west-2-korg-oddjob-1.ci.codeaurora.org (localhost.localdomain [127.0.0.1])
+        by aws-us-west-2-korg-oddjob-1.ci.codeaurora.org (Postfix) with ESMTP id 1BA2CE45BDC;
+        Wed,  6 Jul 2022 12:10:15 +0000 (UTC)
+Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
-Content-Type: text/plain
-X-Originating-IP: [10.69.192.58]
-X-ClientProxiedBy: dggems706-chm.china.huawei.com (10.3.19.183) To
- lhreml724-chm.china.huawei.com (10.201.108.75)
-X-CFilter-Loop: Reflected
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_LOW,
-        RCVD_IN_MSPIKE_H2,SPF_HELO_NONE,SPF_PASS,T_SCC_BODY_TEXT_LINE
-        autolearn=ham autolearn_force=no version=3.4.6
+Content-Transfer-Encoding: 8bit
+Subject: Re: [PATCH net-next 0/5] tls: rx: nopad and backlog flushing
+From:   patchwork-bot+netdevbpf@kernel.org
+Message-Id: <165710941510.29479.16431508550562245023.git-patchwork-notify@kernel.org>
+Date:   Wed, 06 Jul 2022 12:10:15 +0000
+References: <20220705235926.1035407-1-kuba@kernel.org>
+In-Reply-To: <20220705235926.1035407-1-kuba@kernel.org>
+To:     Jakub Kicinski <kuba@kernel.org>
+Cc:     davem@davemloft.net, netdev@vger.kernel.org, edumazet@google.com,
+        pabeni@redhat.com, john.fastabend@gmail.com, borisp@nvidia.com,
+        linux-doc@vger.kernel.org, linux-kselftest@vger.kernel.org,
+        maximmi@nvidia.com
+X-Spam-Status: No, score=-7.8 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_HI,
+        SPF_HELO_NONE,SPF_PASS,T_SCC_BODY_TEXT_LINE autolearn=ham
+        autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-The local variable is now only referenced once so drop it.
+Hello:
 
-Signed-off-by: John Garry <john.garry@huawei.com>
-Reviewed-by: Bart Van Assche <bvanassche@acm.org>
-Reviewed-by: Martin K. Petersen <martin.petersen@oracle.com>
----
- block/blk-mq-tag.c | 6 ++----
- 1 file changed, 2 insertions(+), 4 deletions(-)
+This series was applied to netdev/net-next.git (master)
+by David S. Miller <davem@davemloft.net>:
 
-diff --git a/block/blk-mq-tag.c b/block/blk-mq-tag.c
-index 4e9b8ec55bda..8e3b36d1cb57 100644
---- a/block/blk-mq-tag.c
-+++ b/block/blk-mq-tag.c
-@@ -262,7 +262,6 @@ static bool bt_iter(struct sbitmap *bitmap, unsigned int bitnr, void *data)
- 	struct blk_mq_hw_ctx *hctx = iter_data->hctx;
- 	struct request_queue *q = iter_data->q;
- 	struct blk_mq_tag_set *set = q->tag_set;
--	bool reserved = iter_data->reserved;
- 	struct blk_mq_tags *tags;
- 	struct request *rq;
- 	bool ret = true;
-@@ -272,7 +271,7 @@ static bool bt_iter(struct sbitmap *bitmap, unsigned int bitnr, void *data)
- 	else
- 		tags = hctx->tags;
- 
--	if (!reserved)
-+	if (!iter_data->reserved)
- 		bitnr += tags->nr_reserved_tags;
- 	/*
- 	 * We can hit rq == NULL here, because the tagging functions
-@@ -333,12 +332,11 @@ static bool bt_tags_iter(struct sbitmap *bitmap, unsigned int bitnr, void *data)
- {
- 	struct bt_tags_iter_data *iter_data = data;
- 	struct blk_mq_tags *tags = iter_data->tags;
--	bool reserved = iter_data->flags & BT_TAG_ITER_RESERVED;
- 	struct request *rq;
- 	bool ret = true;
- 	bool iter_static_rqs = !!(iter_data->flags & BT_TAG_ITER_STATIC_RQS);
- 
--	if (!reserved)
-+	if (!(iter_data->flags & BT_TAG_ITER_RESERVED))
- 		bitnr += tags->nr_reserved_tags;
- 
- 	/*
+On Tue,  5 Jul 2022 16:59:21 -0700 you wrote:
+> This small series contains the two changes I've been working
+> towards in the previous ~50 patches a couple of months ago.
+> 
+> The first major change is the optional "nopad" optimization.
+> Currently TLS 1.3 Rx performs quite poorly because it does
+> not support the "zero-copy" or rather direct decrypt to a user
+> space buffer. Because of TLS 1.3 record padding we don't
+> know if a record contains data or a control message until
+> we decrypt it. Most records will contain data, tho, so the
+> optimization is to try the decryption hoping its data and
+> retry if it wasn't.
+> 
+> [...]
+
+Here is the summary with links:
+  - [net-next,1/5] tls: rx: don't include tail size in data_len
+    https://git.kernel.org/netdev/net-next/c/603380f54f83
+  - [net-next,2/5] tls: rx: support optimistic decrypt to user buffer with TLS 1.3
+    https://git.kernel.org/netdev/net-next/c/ce61327ce989
+  - [net-next,3/5] tls: rx: add sockopt for enabling optimistic decrypt with TLS 1.3
+    https://git.kernel.org/netdev/net-next/c/88527790c079
+  - [net-next,4/5] selftests: tls: add selftest variant for pad
+    https://git.kernel.org/netdev/net-next/c/f36068a20256
+  - [net-next,5/5] tls: rx: periodically flush socket backlog
+    https://git.kernel.org/netdev/net-next/c/c46b01839f7a
+
+You are awesome, thank you!
 -- 
-2.35.3
+Deet-doot-dot, I am a bot.
+https://korg.docs.kernel.org/patchwork/pwbot.html
+
 
