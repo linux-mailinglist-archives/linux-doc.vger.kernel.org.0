@@ -2,97 +2,100 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id D65DE5687D1
-	for <lists+linux-doc@lfdr.de>; Wed,  6 Jul 2022 14:10:31 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id E426C56886D
+	for <lists+linux-doc@lfdr.de>; Wed,  6 Jul 2022 14:34:52 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S232915AbiGFMKT (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 6 Jul 2022 08:10:19 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:44346 "EHLO
+        id S233087AbiGFMen (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 6 Jul 2022 08:34:43 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:39364 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S232378AbiGFMKS (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Wed, 6 Jul 2022 08:10:18 -0400
-Received: from ams.source.kernel.org (ams.source.kernel.org [145.40.68.75])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id DDA7F25589;
-        Wed,  6 Jul 2022 05:10:17 -0700 (PDT)
-Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
-        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
-        (No client certificate requested)
-        by ams.source.kernel.org (Postfix) with ESMTPS id 88A66B81CA6;
-        Wed,  6 Jul 2022 12:10:16 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPS id 41A30C341CA;
-        Wed,  6 Jul 2022 12:10:15 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-        s=k20201202; t=1657109415;
-        bh=Fh74RXkBxb5qR+VbTaZWkzrhg2eyH/wAqBl/LYQyt0A=;
-        h=Subject:From:Date:References:In-Reply-To:To:Cc:From;
-        b=c/1vkV/vpUlOMm7VrCDesvLhKVWm6TWzb1lIdab4ZpPubyUfcrGNIpHoAEymG40uh
-         DaGUfoBuEmReKSCRCtDgG52No3ouquJvhanoMKm8yasIo1cgRt5oHGw68ESNvTnhgm
-         Mj8LwYi05+qsPffq07RvJofSPir+K1EAUwWyxxAWk6/PfciMXwj5a8ON0OvPuxFNyc
-         2MSmQ6yIptxQXjRCiwmICxS8tvEAUE+d2Z6EugVzLrPqZMFgaJBd+PF0VCnEAg8fgi
-         1dBnxQzXNlLMDhjxqYoiwElgmHlukOe4aXq/labCzhxwTOHEYRo7mMYVRwzOALsbPW
-         0dSQmDfwx3aOA==
-Received: from aws-us-west-2-korg-oddjob-1.ci.codeaurora.org (localhost.localdomain [127.0.0.1])
-        by aws-us-west-2-korg-oddjob-1.ci.codeaurora.org (Postfix) with ESMTP id 1BA2CE45BDC;
-        Wed,  6 Jul 2022 12:10:15 +0000 (UTC)
-Content-Type: text/plain; charset="utf-8"
+        with ESMTP id S231330AbiGFMem (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Wed, 6 Jul 2022 08:34:42 -0400
+Received: from mail-pj1-x102f.google.com (mail-pj1-x102f.google.com [IPv6:2607:f8b0:4864:20::102f])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 1170917053
+        for <linux-doc@vger.kernel.org>; Wed,  6 Jul 2022 05:34:41 -0700 (PDT)
+Received: by mail-pj1-x102f.google.com with SMTP id j1-20020a17090aeb0100b001ef777a7befso6804389pjz.0
+        for <linux-doc@vger.kernel.org>; Wed, 06 Jul 2022 05:34:41 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=kernel-dk.20210112.gappssmtp.com; s=20210112;
+        h=from:to:cc:in-reply-to:references:subject:message-id:date
+         :mime-version:content-transfer-encoding;
+        bh=hW2431492sCVZamN/p5cUoH7v2KxbwYiYFtMhbuxSSs=;
+        b=aO/ZC+U5LATGWzsMenvtODpWhcejLQ4DmRLha/4SFn11Wf8DcIrFk1B5B3fP0AvXUg
+         F1PUOqzt04jGHL+kW42wdhfxoatgfieaCaFTjTsg/0aPS0d1NSqzbVAWUr48FwKbi2kk
+         bNQBektjLeeE1K2U1dLcbw68C5O909m3ltoYOt5psp5Gsf6ooUgQxbp7vtkJxaFCNVLq
+         JB5JDSboVX7gNuCr6BqOEB2T1vnXsuL9FxkeVt6f0+RSoxgWygebchQshMWMnbZdv7Xg
+         QtsTjaAJP4QGjnj40SClqvGtAh7oHGQx9EV2mY92w7wDa5vthlOb4om9GVvEhy9g8Ujc
+         ZNag==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:from:to:cc:in-reply-to:references:subject
+         :message-id:date:mime-version:content-transfer-encoding;
+        bh=hW2431492sCVZamN/p5cUoH7v2KxbwYiYFtMhbuxSSs=;
+        b=5yoo+MfzwXM0f1VwblH/Ku97J6yBpD+xtmypZwvBqlUss7MXTeVAKY5cEVrnsAlClw
+         0CprPSNxvWbKYbxIDMCU5pL5DfKVWVAgI/nr6nm4dKsueXywOTov5jqGtJsDt61ir8Wd
+         GNKkg9+LjrQZsmXTXvDgW1PBxtgYBjKZ9/vWU5nJmHxwlwgJkY/ydcRmAwPTv2Hk534f
+         0nwBsCFWXTzEVKXc2w2ocf5boG8U9aE5MQN0Rl5QWtfI+1jnd0dxPGAETDUA8/AjjceV
+         vLmqjApM0zDbTrlkLk4ALGnR1zELeL5HstP/f8b/8y4H3xny/cLTkGva2896c8wDViLs
+         UoWg==
+X-Gm-Message-State: AJIora9dOXhHhm5W4Xt8YqUuhJxrEx4fEz3evSHHtJ/EXnkEhuCeV1ET
+        L6JViFG0T6keCacsBEqOg9r3sA==
+X-Google-Smtp-Source: AGRyM1szJSqnPFX6luEMhyzzQ0Aeywhddc3vVY3+ZKqUe4ppobSQfJg1kQYfqyNYWH89tB/Ll0NihQ==
+X-Received: by 2002:a17:902:ab42:b0:16c:66d:c44d with SMTP id ij2-20020a170902ab4200b0016c066dc44dmr1314197plb.125.1657110880402;
+        Wed, 06 Jul 2022 05:34:40 -0700 (PDT)
+Received: from [127.0.1.1] ([198.8.77.157])
+        by smtp.gmail.com with ESMTPSA id 84-20020a621957000000b005289cade5b0sm2634560pfz.124.2022.07.06.05.34.38
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 06 Jul 2022 05:34:39 -0700 (PDT)
+From:   Jens Axboe <axboe@kernel.dk>
+To:     jejb@linux.ibm.com, hare@suse.de, kartilak@cisco.com,
+        Christoph Hellwig <hch@lst.de>, martin.petersen@oracle.com,
+        satishkh@cisco.com, sebaddel@cisco.com,
+        damien.lemoal@opensource.wdc.com, john.garry@huawei.com,
+        bvanassche@acm.org
+Cc:     linux-nvme@lists.infradead.org, nbd@other.debian.org,
+        linux-scsi@vger.kernel.org, linux-s390@vger.kernel.org,
+        linux-block@vger.kernel.org, mpi3mr-linuxdrv.pdl@broadcom.com,
+        linux-mmc@vger.kernel.org, linux-doc@vger.kernel.org,
+        linux-rdma@vger.kernel.org, linux-kernel@vger.kernel.org
+In-Reply-To: <1657109034-206040-1-git-send-email-john.garry@huawei.com>
+References: <1657109034-206040-1-git-send-email-john.garry@huawei.com>
+Subject: Re: [PATCH v3 0/6] blk-mq: Add a flag for reserved requests series
+Message-Id: <165711087866.291548.18135186803736478100.b4-ty@kernel.dk>
+Date:   Wed, 06 Jul 2022 06:34:38 -0600
 MIME-Version: 1.0
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
-Subject: Re: [PATCH net-next 0/5] tls: rx: nopad and backlog flushing
-From:   patchwork-bot+netdevbpf@kernel.org
-Message-Id: <165710941510.29479.16431508550562245023.git-patchwork-notify@kernel.org>
-Date:   Wed, 06 Jul 2022 12:10:15 +0000
-References: <20220705235926.1035407-1-kuba@kernel.org>
-In-Reply-To: <20220705235926.1035407-1-kuba@kernel.org>
-To:     Jakub Kicinski <kuba@kernel.org>
-Cc:     davem@davemloft.net, netdev@vger.kernel.org, edumazet@google.com,
-        pabeni@redhat.com, john.fastabend@gmail.com, borisp@nvidia.com,
-        linux-doc@vger.kernel.org, linux-kselftest@vger.kernel.org,
-        maximmi@nvidia.com
-X-Spam-Status: No, score=-7.8 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_HI,
-        SPF_HELO_NONE,SPF_PASS,T_SCC_BODY_TEXT_LINE autolearn=ham
-        autolearn_force=no version=3.4.6
+X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+        DKIM_VALID,RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,SPF_PASS,
+        T_SCC_BODY_TEXT_LINE autolearn=ham autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Hello:
-
-This series was applied to netdev/net-next.git (master)
-by David S. Miller <davem@davemloft.net>:
-
-On Tue,  5 Jul 2022 16:59:21 -0700 you wrote:
-> This small series contains the two changes I've been working
-> towards in the previous ~50 patches a couple of months ago.
+On Wed, 6 Jul 2022 20:03:48 +0800, John Garry wrote:
+> Can you please consider this series? Thanks
 > 
-> The first major change is the optional "nopad" optimization.
-> Currently TLS 1.3 Rx performs quite poorly because it does
-> not support the "zero-copy" or rather direct decrypt to a user
-> space buffer. Because of TLS 1.3 record padding we don't
-> know if a record contains data or a control message until
-> we decrypt it. Most records will contain data, tho, so the
-> optimization is to try the decryption hoping its data and
-> retry if it wasn't.
-> 
-> [...]
 
-Here is the summary with links:
-  - [net-next,1/5] tls: rx: don't include tail size in data_len
-    https://git.kernel.org/netdev/net-next/c/603380f54f83
-  - [net-next,2/5] tls: rx: support optimistic decrypt to user buffer with TLS 1.3
-    https://git.kernel.org/netdev/net-next/c/ce61327ce989
-  - [net-next,3/5] tls: rx: add sockopt for enabling optimistic decrypt with TLS 1.3
-    https://git.kernel.org/netdev/net-next/c/88527790c079
-  - [net-next,4/5] selftests: tls: add selftest variant for pad
-    https://git.kernel.org/netdev/net-next/c/f36068a20256
-  - [net-next,5/5] tls: rx: periodically flush socket backlog
-    https://git.kernel.org/netdev/net-next/c/c46b01839f7a
+Applied, thanks!
 
-You are awesome, thank you!
+[1/6] scsi: core: Remove reserved request time-out handling
+      commit: deef1be18e3fc62ddf04fb3e5e8ff6a301693dcc
+[2/6] blk-mq: Add a flag for reserved requests
+      commit: 99e48cd6855e9535488e3c90d65edd46c6e6fc1b
+[3/6] blk-mq: Drop blk_mq_ops.timeout 'reserved' arg
+      commit: 9bdb4833dd399cbff82cc20893f52bdec66a9eca
+[4/6] scsi: fnic: Drop reserved request handling
+      commit: 1263c1929fb8c375494666ec6d1bac838ff02c25
+[5/6] blk-mq: Drop 'reserved' arg of busy_tag_iter_fn
+      commit: 2dd6532e9591f201e7571b30915db807603ab924
+[6/6] blk-mq: Drop local variable for reserved tag
+      commit: 4cf6e6c0106bf6e6d034fa6043b4428ac2f267fc
+
+Best regards,
 -- 
-Deet-doot-dot, I am a bot.
-https://korg.docs.kernel.org/patchwork/pwbot.html
+Jens Axboe
 
 
