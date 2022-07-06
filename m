@@ -2,131 +2,103 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id DB2F8567B02
-	for <lists+linux-doc@lfdr.de>; Wed,  6 Jul 2022 01:59:50 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id DAAE1567B24
+	for <lists+linux-doc@lfdr.de>; Wed,  6 Jul 2022 02:45:22 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S230507AbiGEX7j (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 5 Jul 2022 19:59:39 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:54020 "EHLO
+        id S229485AbiGFApU (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 5 Jul 2022 20:45:20 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:44004 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S230484AbiGEX7i (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 5 Jul 2022 19:59:38 -0400
-Received: from dfw.source.kernel.org (dfw.source.kernel.org [IPv6:2604:1380:4641:c500::1])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id A7DAB183AD;
-        Tue,  5 Jul 2022 16:59:37 -0700 (PDT)
-Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
-        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
-        (No client certificate requested)
-        by dfw.source.kernel.org (Postfix) with ESMTPS id 456CA61196;
-        Tue,  5 Jul 2022 23:59:37 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id BBDECC341D1;
-        Tue,  5 Jul 2022 23:59:36 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-        s=k20201202; t=1657065577;
-        bh=C32Cn5loiON0F7czPEkArPlWf1v6YWueU3OQ7k4g/ms=;
-        h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-        b=a20SWPQaGHEfFOAKcjStygR5nLVDigWPQgBYnb7ep+N7hCamfpCFcWFZMHvBicf5q
-         W0x0t2m6E95/i3WJEJWaS12eevvytFbedMdYYjjQWUt1tlGX8hppbBRpwIioAR8OJK
-         EuOFIjBL/rHHwfOjzN/79HNBuKusI9JVxLNk1+5+y5caHj/gAMU+O0JEJLnuPHq+c1
-         wyuQNtkx7KsipLk0eNliKQWrGuo2eExTktkl9EwDcvMWp5YIaUq5SCVOhXyVirkpmJ
-         ObXJgp99Ww0wi+Ij14koqcgrrvN3P/qQrxPdJvERnvyeUq1+sLcwuC36nzNIsezkKX
-         zfthKtO+5Rv7A==
-From:   Jakub Kicinski <kuba@kernel.org>
-To:     davem@davemloft.net
-Cc:     netdev@vger.kernel.org, edumazet@google.com, pabeni@redhat.com,
-        john.fastabend@gmail.com, borisp@nvidia.com,
-        linux-doc@vger.kernel.org, linux-kselftest@vger.kernel.org,
-        maximmi@nvidia.com, Jakub Kicinski <kuba@kernel.org>
-Subject: [PATCH net-next 5/5] tls: rx: periodically flush socket backlog
-Date:   Tue,  5 Jul 2022 16:59:26 -0700
-Message-Id: <20220705235926.1035407-6-kuba@kernel.org>
-X-Mailer: git-send-email 2.36.1
-In-Reply-To: <20220705235926.1035407-1-kuba@kernel.org>
-References: <20220705235926.1035407-1-kuba@kernel.org>
+        with ESMTP id S229453AbiGFApT (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 5 Jul 2022 20:45:19 -0400
+Received: from violet.fr.zoreil.com (violet.fr.zoreil.com [IPv6:2001:4b98:dc0:41:216:3eff:fe56:8398])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 687ADF5A9;
+        Tue,  5 Jul 2022 17:45:18 -0700 (PDT)
+Received: from violet.fr.zoreil.com ([127.0.0.1])
+        by violet.fr.zoreil.com (8.17.1/8.17.1) with ESMTP id 2660iZre1151378;
+        Wed, 6 Jul 2022 02:44:35 +0200
+DKIM-Filter: OpenDKIM Filter v2.11.0 violet.fr.zoreil.com 2660iZre1151378
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fr.zoreil.com;
+        s=v20220413; t=1657068277;
+        bh=L3rpRa/OQsVNNMpzp6zZcQ0qKXpRrb4CMt3rn5fYKVc=;
+        h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+        b=iJemqI1qm3u4WVF2yCt1Eof/HGtC/b8ekXQJBCZYAFb8IshZZPiN8uszWzLjt5Wgd
+         WJDgyHaYuNV8xXfCEXIhNh1Y1RAvzDF+YHQgw0aFrgnhoM2CpUo/TATOuKuLKvHEeg
+         wZh2a63Zddl4ijOOfIbHcUYIwZk4awlAT2f06Xx4=
+Received: (from romieu@localhost)
+        by violet.fr.zoreil.com (8.17.1/8.17.1/Submit) id 2660iXJt1151376;
+        Wed, 6 Jul 2022 02:44:33 +0200
+Date:   Wed, 6 Jul 2022 02:44:33 +0200
+From:   Francois Romieu <romieu@fr.zoreil.com>
+To:     Stephen Hemminger <stephen@networkplumber.org>
+Cc:     Jakub Kicinski <kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>,
+        davem@davemloft.net, netdev@vger.kernel.org, edumazet@google.com,
+        corbet@lwn.net, jdmason@kudzu.us, vburru@marvell.com,
+        jiawenwu@trustnetic.com, linux-doc@vger.kernel.org
+Subject: Re: [PATCH net-next] eth: remove neterion/vxge
+Message-ID: <YsTa8QzSn/kMr5kk@electric-eye.fr.zoreil.com>
+References: <20220701044234.706229-1-kuba@kernel.org>
+ <Yr8rC9jXtoFbUIQ+@electric-eye.fr.zoreil.com>
+ <20220701144010.5ae54364@kernel.org>
+ <cbd7e14b3496229497ae49edbb68c04d4c1d7449.camel@redhat.com>
+ <20220705110634.4a66389a@kernel.org>
+ <20220705112713.644cf3b4@hermes.local>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Spam-Status: No, score=-7.8 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_HI,
-        SPF_HELO_NONE,SPF_PASS,T_SCC_BODY_TEXT_LINE autolearn=ham
-        autolearn_force=no version=3.4.6
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20220705112713.644cf3b4@hermes.local>
+X-Organisation: Land of Sunshine Inc.
+X-Spam-Status: No, score=-2.0 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+        DKIM_VALID,DKIM_VALID_AU,SPF_HELO_PASS,SPF_PASS,T_SCC_BODY_TEXT_LINE
+        autolearn=ham autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-We continuously hold the socket lock during large reads and writes.
-This may inflate RTT and negatively impact TCP performance.
-Flush the backlog periodically. I tried to pick a flush period (128kB)
-which gives significant benefit but the max Bps rate is not yet visibly
-impacted.
+Stephen Hemminger <stephen@networkplumber.org> :
+> On Tue, 5 Jul 2022 11:06:34 -0700
+> Jakub Kicinski <kuba@kernel.org> wrote:
+> > On Tue, 05 Jul 2022 08:17:24 +0200 Paolo Abeni wrote:
+> > > On Fri, 2022-07-01 at 14:40 -0700, Jakub Kicinski wrote:  
+> > > > 100%, I really wish something like that existed. I have a vague memory
+> > > > of Fedora or some other distro collecting HW data. Maybe it died because
+> > > > of privacy issues?    
+> > > 
+> > > AFAICS that database still exists and is active:
+> > > 
+> > > https://linux-hardware.org/?view=search&vendor=neterion&d=AllRC
+> > > 
+> > > It shows no usage at all for the relevant vendor.
+> > > 
+> > > On the flip side, it looks like the data points come mostly/exclusively
+> > > from desktop systems, not very relevant in this specific case.  
+> > 
+> > GTK! There is a whole bunch of old Mellanox NICs reported so I think
+> > there is _some_ server coverage. I'm leaning towards applying the patch.
 
-Signed-off-by: Jakub Kicinski <kuba@kernel.org>
----
- net/core/sock.c  |  1 +
- net/tls/tls_sw.c | 23 +++++++++++++++++++++++
- 2 files changed, 24 insertions(+)
+There are 1182 servers per
+https://linux-hardware.org/?view=computers&type=Server
 
-diff --git a/net/core/sock.c b/net/core/sock.c
-index 92a0296ccb18..4cb957d934a2 100644
---- a/net/core/sock.c
-+++ b/net/core/sock.c
-@@ -2870,6 +2870,7 @@ void __sk_flush_backlog(struct sock *sk)
- 	__release_sock(sk);
- 	spin_unlock_bh(&sk->sk_lock.slock);
- }
-+EXPORT_SYMBOL_GPL(__sk_flush_backlog);
- 
- /**
-  * sk_wait_data - wait for data to arrive at sk_receive_queue
-diff --git a/net/tls/tls_sw.c b/net/tls/tls_sw.c
-index 7592b6519953..79043bc3da39 100644
---- a/net/tls/tls_sw.c
-+++ b/net/tls/tls_sw.c
-@@ -1738,6 +1738,24 @@ static int process_rx_list(struct tls_sw_context_rx *ctx,
- 	return copied ? : err;
- }
- 
-+static void
-+tls_read_flush_backlog(struct sock *sk, struct tls_prot_info *prot,
-+		       size_t len_left, size_t decrypted, ssize_t done,
-+		       size_t *flushed_at)
-+{
-+	size_t max_rec;
-+
-+	if (len_left <= decrypted)
-+		return;
-+
-+	max_rec = prot->overhead_size - prot->tail_size + TLS_MAX_PAYLOAD_SIZE;
-+	if (done - *flushed_at < SZ_128K && tcp_inq(sk) > max_rec)
-+		return;
-+
-+	*flushed_at = done;
-+	sk_flush_backlog(sk);
-+}
-+
- int tls_sw_recvmsg(struct sock *sk,
- 		   struct msghdr *msg,
- 		   size_t len,
-@@ -1750,6 +1768,7 @@ int tls_sw_recvmsg(struct sock *sk,
- 	struct sk_psock *psock;
- 	unsigned char control = 0;
- 	ssize_t decrypted = 0;
-+	size_t flushed_at = 0;
- 	struct strp_msg *rxm;
- 	struct tls_msg *tlm;
- 	struct sk_buff *skb;
-@@ -1839,6 +1858,10 @@ int tls_sw_recvmsg(struct sock *sk,
- 		if (err <= 0)
- 			goto recv_end;
- 
-+		/* periodically flush backlog, and feed strparser */
-+		tls_read_flush_backlog(sk, prot, len, to_decrypt,
-+				       decrypted + copied, &flushed_at);
-+
- 		ctx->recv_pkt = NULL;
- 		__strp_unpause(&ctx->strp);
- 		__skb_queue_tail(&ctx->rx_list, skb);
+> Looks like S2IO became Neterion and then was acquired by Exar in 2010.
+> Then MaxLinear acquired Exar in 2017.
+> Looks like they dropped out of NIC business and only do switches??
+
+Maxlinear keeps some archive material around:
+https://www.maxlinear.com/Files/Documents/X3100Linux_GeneralInfo-FAQ.pdf
+
+A search on linux-hardware with S2io vendor id from above (17d5) does
+not find any part.
+
+Patches aside, MARC does not find recent vxge material.
+
+The driver is stable and the systems wherein it is used are (too) stable
+as well. See for instance:
+
+https://bugzilla.redhat.com/buglist.cgi?bug_status=__all__&content=vxge
+
+Active maintenance seems useless.
+
 -- 
-2.36.1
-
+Ueimor
