@@ -2,75 +2,111 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 8202356C67C
-	for <lists+linux-doc@lfdr.de>; Sat,  9 Jul 2022 05:41:58 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id F204456C690
+	for <lists+linux-doc@lfdr.de>; Sat,  9 Jul 2022 06:21:23 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S229455AbiGIDl5 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Fri, 8 Jul 2022 23:41:57 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:35790 "EHLO
+        id S229471AbiGIEVV (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Sat, 9 Jul 2022 00:21:21 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:53284 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S229436AbiGIDl4 (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Fri, 8 Jul 2022 23:41:56 -0400
-Received: from dfw.source.kernel.org (dfw.source.kernel.org [IPv6:2604:1380:4641:c500::1])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id B8B7B820D9;
-        Fri,  8 Jul 2022 20:41:55 -0700 (PDT)
-Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
-        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
-        (No client certificate requested)
-        by dfw.source.kernel.org (Postfix) with ESMTPS id 51EF46273C;
-        Sat,  9 Jul 2022 03:41:55 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 4410BC341C0;
-        Sat,  9 Jul 2022 03:41:54 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-        s=k20201202; t=1657338114;
-        bh=JFaD4EhWcIg0SjtZJljxbEn4FacUlXxE34nZHrfBjrg=;
-        h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
-        b=kKiqxNcJLXQlr63Of5uWK6Xq3IpBPkknAcTRstoLKIfD+2ufUhWNixIA40Gr+4Zs+
-         7J/OM/coxOD1ZLa4p9QXjByCBbVyIsySgE7O98sIJz1MyQQ3kfljq2qOh6VgJ4l73z
-         QoqlVLxbC5nJqlrhkJBA9RC2EftBT6R5siKeKVUSHBFfB2SH3aEImhR9bHDh3Jv4rz
-         8I/JEFcx++gdpuWPc6z/PN4bF/r//kHfBJHUrLqPlJEf2qnZl9slgISsp2B/ZVyxp5
-         8s/klcKnAvSMOQqXUiOFmlDEW0APXlqzkv/6Ww2uBgEWV16YCXwKs6IybBxgVpL8fQ
-         zQedhzJRckqgA==
-Date:   Fri, 8 Jul 2022 20:41:53 -0700
-From:   Jakub Kicinski <kuba@kernel.org>
-To:     Jonathan Toppins <jtoppins@redhat.com>
-Cc:     netdev@vger.kernel.org, razor@blackwall.org,
-        Long Xin <lxin@redhat.com>,
-        Jay Vosburgh <j.vosburgh@gmail.com>,
-        Veaceslav Falico <vfalico@gmail.com>,
-        Andy Gospodarek <andy@greyhouse.net>,
-        "David S. Miller" <davem@davemloft.net>,
-        Eric Dumazet <edumazet@google.com>,
-        Paolo Abeni <pabeni@redhat.com>,
-        Jonathan Corbet <corbet@lwn.net>, linux-doc@vger.kernel.org,
-        linux-kernel@vger.kernel.org, bpf@vger.kernel.org
-Subject: Re: [PATCH net-next v4 1/2] bond: add mac filter option for
- balance-xor
-Message-ID: <20220708204153.0a4ce4ab@kernel.org>
-In-Reply-To: <1755bbaad9c3792ce22b8fa4906bb6051968f29e.1657302266.git.jtoppins@redhat.com>
-References: <1755bbaad9c3792ce22b8fa4906bb6051968f29e.1657302266.git.jtoppins@redhat.com>
+        with ESMTP id S229509AbiGIEVT (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Sat, 9 Jul 2022 00:21:19 -0400
+Received: from mail-pl1-x630.google.com (mail-pl1-x630.google.com [IPv6:2607:f8b0:4864:20::630])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 07549459B7;
+        Fri,  8 Jul 2022 21:21:18 -0700 (PDT)
+Received: by mail-pl1-x630.google.com with SMTP id r1so359172plo.10;
+        Fri, 08 Jul 2022 21:21:18 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112;
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=RWwGLeTWyw9jKzSZsmjhlLKaDKWP550W214VN7zaysw=;
+        b=WYCo2fGaWwnu45w6tRjJ6orAAOOBTC+PlmRl3imZXqQa9mCSiZlY/e0oxaD7uksVck
+         8y2SqgzBb/5pi76/0TfZtYlKGPm/JSL1MzS6BpvChVObmw/DR4kvMZ6PTMPZxn7LffdR
+         oSO573w838kuNVOE+1SXIV87pxZarwuwbnbremt32hO/EcCcSyk9+Nmfg8EO9N/MH1FR
+         uRqBNlnwRyBZJE2xEVqJ+SoeZWVMyAZoEtH/Kc/GcZVL/96HYP/BV/LwHP2kX49UEfQB
+         YWhknYAb1Nc2AeahsEPPpyIUKRtPbO/5LYcpzzlSWwwvnaJWnQGvFzm03JBIvVTk4/N0
+         GtoA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=RWwGLeTWyw9jKzSZsmjhlLKaDKWP550W214VN7zaysw=;
+        b=JINplhMW0f7dn7Q8MGxE0RZs/BIynmTZdJT/DK99RmhGgu1074WCBuze3YwDp/N0uc
+         uEE5IE8RgUYEuP/5BSrphoX2qGGCahyUykGNeRj/kqEol1vHkuPEzE5NJn5Ho/mQoD1s
+         uEzWJARjbAuwJtbxWEQvXh+OlJmVJB3KJGf2QKIW/CyQSEdb/YVD+QnuJMhAXrqWJr16
+         Rj+ctAQFu/rEPdI6YI7mtFeOPyjdx7NlyxJsmriUggoAXZXnc63drKmho6b2fq5HPBXZ
+         A+V1aBNV+PORW+UZHJUmPn4/RMGlz53Se2qYkLLmeavgGwnZlvVauFRfY7hcyAgzEg87
+         d8Fw==
+X-Gm-Message-State: AJIora9rKH8zX+BeoRpCpZUKtBN/LB4mgH488hBXOmkL6NfuKPkMM6nK
+        Yrs2/SQHeObfJmBVoK3hT3o=
+X-Google-Smtp-Source: AGRyM1vdNLFydRZUS8daU18hpg7XwZBDgQfVQARuB1Ic9Vad468l62USBxyyQxpG31K74dVZh8naiA==
+X-Received: by 2002:a17:903:31c9:b0:16c:3024:69c4 with SMTP id v9-20020a17090331c900b0016c302469c4mr2273129ple.81.1657340477548;
+        Fri, 08 Jul 2022 21:21:17 -0700 (PDT)
+Received: from debian.me (subs02-180-214-232-88.three.co.id. [180.214.232.88])
+        by smtp.gmail.com with ESMTPSA id j14-20020a170903024e00b0016bf10203d9sm335655plh.144.2022.07.08.21.21.14
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Fri, 08 Jul 2022 21:21:15 -0700 (PDT)
+Received: by debian.me (Postfix, from userid 1000)
+        id 7B2ED1039B6; Sat,  9 Jul 2022 11:21:10 +0700 (WIB)
+From:   Bagas Sanjaya <bagasdotme@gmail.com>
+To:     linux-doc@vger.kernel.org
+Cc:     Paolo Bonzini <pbonzini@redhat.com>,
+        Jonathan Corbet <corbet@lwn.net>,
+        Thomas Gleixner <tglx@linutronix.de>,
+        Ingo Molnar <mingo@redhat.com>, Borislav Petkov <bp@alien8.de>,
+        Dave Hansen <dave.hansen@linux.intel.com>,
+        "H. Peter Anvin" <hpa@zytor.com>,
+        Isaku Yamahata <isaku.yamahata@intel.com>,
+        Kai Huang <kai.huang@intel.com>, x86@kernel.org,
+        kvm@vger.kernel.org, linux-kernel@vger.kernel.org,
+        Bagas Sanjaya <bagasdotme@gmail.com>
+Subject: [PATCH 00/12] Documentation: tdx: documentation fixes
+Date:   Sat,  9 Jul 2022 11:20:26 +0700
+Message-Id: <20220709042037.21903-1-bagasdotme@gmail.com>
+X-Mailer: git-send-email 2.37.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: 7bit
-X-Spam-Status: No, score=-7.8 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_HI,
-        SPF_HELO_NONE,SPF_PASS,T_SCC_BODY_TEXT_LINE autolearn=ham
-        autolearn_force=no version=3.4.6
+Content-Transfer-Encoding: 8bit
+X-Spam-Status: No, score=-0.6 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_FROM,
+        RCVD_IN_DNSWL_NONE,RCVD_IN_SORBS_WEB,SPF_HELO_NONE,SPF_PASS,
+        T_SCC_BODY_TEXT_LINE autolearn=no autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Fri,  8 Jul 2022 14:41:56 -0400 Jonathan Toppins wrote:
-> Implement a MAC filter that prevents duplicate frame delivery when
-> handling BUM traffic. This attempts to partially replicate OvS SLB
-> Bonding[1] like functionality without requiring significant change
-> in the Linux bridging code.
+Here is the documentation fixes for KVM TDX feature tree ([1]). There
+are 58 new warnings reported when making htmldocs, which are fixed.
 
-You can't post the user space patches in the same series, patchwork
-will think they are supposed to be applied to the same tree. Post them
-separately please, they'll land on the list next to each other if you
-send them at the same time, that's good enough.
+[1]: https://github.com/intel/tdx/tree/kvm-upstream
 
-https://www.kernel.org/doc/html/latest/process/maintainer-netdev.html#how-do-i-post-corresponding-changes-to-user-space-components
+Bagas Sanjaya (12):
+  Documentation: kvm: Pad bullet lists with blank line
+  Documentation: kvm: tdx: Use appropriate subbullet marker
+  Documentation: kvm: tdx: Add footnote markers
+  Documentation: kvm: tdx: Use bullet list for public kvm trees
+  Documentation: kvm: tdx: title typofix
+  Documentation: kvm: tdx-tdp-mmu: Add blank line padding for lists
+  Documentation: kvm: tdx-tdp-mmu: Use literal code block for EPT
+    violation diagrams
+  Documentation: kvm: tdx-tdp-mmu: Properly format nested list for EPT
+    state machine
+  Documentation: kvm: tdx-tdp-mmu: Add blank line padding to lists in
+    concurrent sections
+  Documentation: x86: Enclose TDX initialization code inside code block
+  Documentation: x86: Use literal code block for TDX dmesg output
+  Documentation: kvm: Add TDX documentation to KVM table of contents
+
+ Documentation/virt/kvm/index.rst       |   4 +
+ Documentation/virt/kvm/intel-tdx.rst   | 114 ++++++++++----
+ Documentation/virt/kvm/tdx-tdp-mmu.rst | 198 ++++++++++++++++---------
+ Documentation/x86/tdx.rst              |  32 ++--
+ 4 files changed, 229 insertions(+), 119 deletions(-)
+
+
+base-commit: 7af4efe32638544aecb58ed7365d0ef2ea6f85ea
+-- 
+An old man doll... just what I always wanted! - Clara
+
