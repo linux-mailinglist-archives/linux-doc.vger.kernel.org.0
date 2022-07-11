@@ -2,47 +2,66 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 03E035707A7
-	for <lists+linux-doc@lfdr.de>; Mon, 11 Jul 2022 17:51:14 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 167745707DD
+	for <lists+linux-doc@lfdr.de>; Mon, 11 Jul 2022 18:05:18 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S231543AbiGKPvG (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 11 Jul 2022 11:51:06 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:44234 "EHLO
+        id S229663AbiGKQFQ (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 11 Jul 2022 12:05:16 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:56202 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S231549AbiGKPu7 (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Mon, 11 Jul 2022 11:50:59 -0400
-Received: from andre.telenet-ops.be (andre.telenet-ops.be [IPv6:2a02:1800:120:4::f00:15])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id A6C7877A54
-        for <linux-doc@vger.kernel.org>; Mon, 11 Jul 2022 08:50:40 -0700 (PDT)
-Received: from ramsan.of.borg ([84.195.186.194])
-        by andre.telenet-ops.be with bizsmtp
-        id trqe2700J4C55Sk01rqe5Y; Mon, 11 Jul 2022 17:50:38 +0200
-Received: from rox.of.borg ([192.168.97.57])
-        by ramsan.of.borg with esmtps  (TLS1.3) tls TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384
-        (Exim 4.93)
-        (envelope-from <geert@linux-m68k.org>)
-        id 1oAvgD-0036xI-Rt; Mon, 11 Jul 2022 17:50:37 +0200
-Received: from geert by rox.of.borg with local (Exim 4.93)
-        (envelope-from <geert@linux-m68k.org>)
-        id 1oAvgD-006siC-6A; Mon, 11 Jul 2022 17:50:37 +0200
-From:   Geert Uytterhoeven <geert@linux-m68k.org>
-To:     Helge Deller <deller@gmx.de>
-Cc:     Michael Schmitz <schmitzmic@gmail.com>,
-        Jonathan Corbet <corbet@lwn.net>, linux-fbdev@vger.kernel.org,
-        linux-doc@vger.kernel.org, dri-devel@lists.freedesktop.org,
-        linux-m68k@vger.kernel.org, linux-kernel@vger.kernel.org,
-        Geert Uytterhoeven <geert@linux-m68k.org>
-Subject: [PATCH 10/10] [RFC] video: fbdev: atari: Remove backward bug-compatibility
-Date:   Mon, 11 Jul 2022 17:50:34 +0200
-Message-Id: <52d52566a80bfd00acdcfc28a24799d3fbf638f6.1657554353.git.geert@linux-m68k.org>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <cover.1657554353.git.geert@linux-m68k.org>
-References: <cover.1657554353.git.geert@linux-m68k.org>
+        with ESMTP id S229616AbiGKQFO (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Mon, 11 Jul 2022 12:05:14 -0400
+Received: from mga05.intel.com (mga05.intel.com [192.55.52.43])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id AF2D252E4B;
+        Mon, 11 Jul 2022 09:05:13 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1657555513; x=1689091513;
+  h=date:from:to:cc:subject:message-id:references:
+   mime-version:in-reply-to;
+  bh=tFeOnXMKVHMBMYuxU1nhFxhl70jRU9J1wY/OcsOGdUw=;
+  b=b3sEiSDYtyMA3S9P5phK216FZ16yKhibIdvjqMWNy/a7E9q/5+n+nrdU
+   9i3Cet6DEs07xoht4OYTqnAh7uLegMClVhKZZofAkvMUx4V8XikV7nQCk
+   dYKHX1t8snypXaPs9ZHdR/HXgowSkJrJ9hfZE3bfFLje4dao0iAp193zV
+   mg195P0o8pj4VKYBTM3hMa0GiLJUW45nGJDxC5r8kEq+JCai09RtCa9fT
+   BGkENWQFGrA6EbLJfmtpWkAM4G/VvtTn88M+oVWTePKs+9LdxYSf4PifF
+   TWxV8bC8Kv0cwkVmAz4KfeOTR+gSCTNQDws2FNVpHdKOl9b55CtfY4CbE
+   Q==;
+X-IronPort-AV: E=McAfee;i="6400,9594,10405"; a="371008022"
+X-IronPort-AV: E=Sophos;i="5.92,263,1650956400"; 
+   d="scan'208";a="371008022"
+Received: from orsmga007.jf.intel.com ([10.7.209.58])
+  by fmsmga105.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 11 Jul 2022 09:05:13 -0700
+X-IronPort-AV: E=Sophos;i="5.92,263,1650956400"; 
+   d="scan'208";a="592301209"
+Received: from silpixa00400314.ir.intel.com (HELO silpixa00400314) ([10.237.222.76])
+  by orsmga007-auth.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 11 Jul 2022 09:05:09 -0700
+Date:   Mon, 11 Jul 2022 17:05:01 +0100
+From:   Giovanni Cabiddu <giovanni.cabiddu@intel.com>
+To:     lkp@intel.com, Vlad Dronov <vdronov@redhat.com>,
+        Herbert Xu <herbert@gondor.apana.org.au>
+Cc:     kbuild-all@lists.01.org,
+        GNU/Weeb Mailing List <gwml@vger.gnuweeb.org>,
+        LKML <linux-kernel@vger.kernel.org>,
+        Tomasz Kowallik <tomaszx.kowalik@intel.com>,
+        Adam Guerin <adam.guerin@intel.com>,
+        Fiona Trahe <fiona.trahe@intel.com>,
+        Wojciech Ziemba <wojciech.ziemba@intel.com>,
+        linux-doc@vger.kernel.org
+Subject: [PATCH] crypto: qat - fix indentation in ABI documentation
+Message-ID: <YsxJnq32lAJIRSET@silpixa00400314>
+References: <202207090803.TEGI95qw-lkp@intel.com>
+ <YsvuJsjxEjp/LHZa@silpixa00400314>
+ <CAMusb+QfUZwq+JRkUrOLGO7mQLZbg_ueFVo2_PTSiSRiq7BoEA@mail.gmail.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_LOW,
-        SPF_HELO_NONE,SPF_NONE,T_SCC_BODY_TEXT_LINE autolearn=unavailable
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <CAMusb+QfUZwq+JRkUrOLGO7mQLZbg_ueFVo2_PTSiSRiq7BoEA@mail.gmail.com>
+Organization: Intel Research and Development Ireland Ltd - Co. Reg. #308263 -
+ Collinstown Industrial Park, Leixlip, County Kildare - Ireland
+X-Spam-Status: No, score=-5.0 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_MED,
+        SPF_HELO_NONE,SPF_NONE,T_SCC_BODY_TEXT_LINE autolearn=ham
         autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
@@ -50,44 +69,110 @@ Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-As of v2.1.0, falcon_decode_var() contains a quirk to fix a rounding
-error, as explained by Günther Kelleter on Fri, 30 Aug 1996:
+On Mon, Jul 11, 2022 at 02:35:07PM +0200, Vlad Dronov wrote:
+> Hi,
+> 
+> On Mon, Jul 11, 2022 at 11:32 AM Giovanni Cabiddu
+> <giovanni.cabiddu@intel.com> wrote:
+> >
+> > On Sat, Jul 09, 2022 at 08:23:35AM +0800, kernel test robot wrote:
+> ...skip...
+> > > >> Documentation/ABI/testing/sysfs-driver-qat:24: WARNING: Unexpected indentation.
+> > >
+> > > vim +24 Documentation/ABI/testing/sysfs-driver-qat
+> > >
+> > >   > 24        Date:           June 2022
+> > I'm not able to spot what the issue is. Any suggestions?
+> 
+> Same here. I do not see what issue the test robot is reporting.
+I found what the issue is. It seems Sphinx doesn't like the extra
+indentation in the sections.
 
-    This diff removes the now obsolete Falcon video option "pwrsave", and
-    fixes a rounding error that is triggered by the resolution switching X
-    server (those who use the pixel clock value 39722 in their /etc/fb.modes
-    should change it to 39721).
+----8<----
 
-However, this causes the modified video mode returned by
-falcon_decode_var() to not match the video mode returned by
-falcon_encode_var().  Fix this by dropping the quirk.
+From: Giovanni Cabiddu <giovanni.cabiddu@intel.com>
+Date: Mon, 11 Jul 2022 16:18:43 +0100
+Subject: [PATCH] crypto: qat - fix indentation in ABI documentation
+Organization: Intel Research and Development Ireland Ltd - Co. Reg. #308263 - Collinstown Industrial Park, Leixlip, County Kildare - Ireland
 
-Unfortunately /etc/fb.modes in fbset was never updated, so the
-"640x480-60" mode still contains the wrong pixclock.
-Hence this change may introduce a regression.
+Change the indentation in the file sysfs-driver-qat to resolve the
+following warning when generating documentation with `make htmldocs`:
 
-Signed-off-by: Geert Uytterhoeven <geert@linux-m68k.org>
+    Documentation/ABI/testing/sysfs-driver-qat:24: WARNING: Unexpected indentation.
+
+Fixes: d4cfb144f605 ("crypto: qat - expose device config through sysfs for 4xxx")
+Reported-by: kernel test robot <lkp@intel.com>
+Signed-off-by: Giovanni Cabiddu <giovanni.cabiddu@intel.com>
 ---
-Any comments?
----
- drivers/video/fbdev/atafb.c | 4 ----
- 1 file changed, 4 deletions(-)
+ Documentation/ABI/testing/sysfs-driver-qat | 38 ++++++++++------------
+ 1 file changed, 17 insertions(+), 21 deletions(-)
 
-diff --git a/drivers/video/fbdev/atafb.c b/drivers/video/fbdev/atafb.c
-index e8b178e732e2c785..2bc4089865e60ac2 100644
---- a/drivers/video/fbdev/atafb.c
-+++ b/drivers/video/fbdev/atafb.c
-@@ -1008,10 +1008,6 @@ static int falcon_decode_var(struct fb_var_screeninfo *var,
- 	else if (yres_virtual < yres)
- 		yres_virtual = yres;
+diff --git a/Documentation/ABI/testing/sysfs-driver-qat b/Documentation/ABI/testing/sysfs-driver-qat
+index a600531e9562..741d97fa5ae1 100644
+--- a/Documentation/ABI/testing/sysfs-driver-qat
++++ b/Documentation/ABI/testing/sysfs-driver-qat
+@@ -8,12 +8,12 @@ Description:	Reports the current state of the QAT device and allows to
+ 		This attribute is RW.
  
--	/* backward bug-compatibility */
--	if (var->pixclock > 1)
--		var->pixclock -= 1;
--
- 	par->hw.falcon.line_width = bpp * xres / 16;
- 	par->hw.falcon.line_offset = bpp * (xres_virtual - xres) / 16;
+ 		Returned values:
+-			up: the device is up and running
+-			down: the device is down
++		up: the device is up and running
++		down: the device is down
  
+ 		Allowed values:
+-			up: initialize and start the device
+-			down: stop the device and bring it down
++		up: initialize and start the device
++		down: stop the device and bring it down
+ 
+ 		It is possible to transition the device from up to down only
+ 		if the device is up and vice versa.
+@@ -30,16 +30,12 @@ Description:	Reports the current configuration of the QAT device and allows
+ 		This attribute is RW.
+ 
+ 		Returned values:
+-			sym;asym:	the device is configured for running
+-					crypto services
+-			dc:		the device is configured for running
+-					compression services
++		sym;asym:  the device is configured for running crypto services
++		dc:        the device is configured for running compression services
+ 
+ 		Allowed values:
+-			sym;asym:	configure the device for running
+-					crypto services
+-			dc:		configure the device for running
+-					compression services
++		sym;asym:  configure the device for running crypto services
++		dc:        configure the device for running compression services
+ 
+ 		It is possible to set the configuration only if the device
+ 		is in the `down` state (see /sys/bus/pci/devices/<BDF>/qat/state)
+@@ -47,14 +43,14 @@ Description:	Reports the current configuration of the QAT device and allows
+ 		The following example shows how to change the configuration of
+ 		a device configured for running crypto services in order to
+ 		run data compression:
+-			# cat /sys/bus/pci/devices/<BDF>/qat/state
+-			up
+-			# cat /sys/bus/pci/devices/<BDF>/qat/cfg_services
+-			sym;asym
+-			# echo down > /sys/bus/pci/devices/<BDF>/qat/state
+-			# echo dc > /sys/bus/pci/devices/<BDF>/qat/cfg_services
+-			# echo up > /sys/bus/pci/devices/<BDF>/qat/state
+-			# cat /sys/bus/pci/devices/<BDF>/qat/cfg_services
+-			dc
++		# cat /sys/bus/pci/devices/<BDF>/qat/state
++		up
++		# cat /sys/bus/pci/devices/<BDF>/qat/cfg_services
++		sym;asym
++		# echo down > /sys/bus/pci/devices/<BDF>/qat/state
++		# echo dc > /sys/bus/pci/devices/<BDF>/qat/cfg_services
++		# echo up > /sys/bus/pci/devices/<BDF>/qat/state
++		# cat /sys/bus/pci/devices/<BDF>/qat/cfg_services
++		dc
+ 
+ 		This attribute is only available for qat_4xxx devices.
 -- 
-2.25.1
+2.36.1
 
