@@ -2,60 +2,57 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id EE0F257264A
-	for <lists+linux-doc@lfdr.de>; Tue, 12 Jul 2022 21:47:14 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id E75675726D5
+	for <lists+linux-doc@lfdr.de>; Tue, 12 Jul 2022 21:58:13 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S234769AbiGLTrC (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 12 Jul 2022 15:47:02 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:56680 "EHLO
+        id S233908AbiGLT6B (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 12 Jul 2022 15:58:01 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:40362 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S235038AbiGLTqV (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 12 Jul 2022 15:46:21 -0400
-Received: from mga11.intel.com (mga11.intel.com [192.55.52.93])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id D5129B9D96;
-        Tue, 12 Jul 2022 12:37:49 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1657654669; x=1689190669;
-  h=date:from:to:cc:subject:in-reply-to:message-id:
-   references:mime-version;
-  bh=WsyqKtSXlQhISKt9B4kKgJBG7bo1PNaIJP2Wls34YBY=;
-  b=YWDY+uiRyi5v9/62iX9qPH/tkeF9OuLbYwLNK4Y8g/0GHtBe/YxyHgL6
-   NlWs5oJUQvZPsoUd7sKCmlIzTMiQX4xqMUhZU9ZOkf7N0CNco/EJ5wP0o
-   CcjKTFXXrMyjFToWBpmKoR72OJ2xuEm+xl8CxygXkkkcwdWQrPvS4OmrG
-   5wsBSl22EKvkgZ4l7Itu3V0sc7w/VGD8SRnaC2BaU6FWOx7Gvb+NpNoCs
-   4/fw4Z6CCfMxOYjeWu9fHSg47uJxKKcglEd0A8cVGRV5/mjNAAlKuyxDU
-   zLr0FsFuNSTZuSp0qz5TSRBs0Ipm4ohV8Igu7rGLOJIHbDSX6Es3kfZQZ
-   g==;
-X-IronPort-AV: E=McAfee;i="6400,9594,10406"; a="282579342"
-X-IronPort-AV: E=Sophos;i="5.92,266,1650956400"; 
-   d="scan'208";a="282579342"
-Received: from fmsmga005.fm.intel.com ([10.253.24.32])
-  by fmsmga102.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 12 Jul 2022 12:37:49 -0700
-X-IronPort-AV: E=Sophos;i="5.92,266,1650956400"; 
-   d="scan'208";a="922336550"
-Received: from rhweight-wrk1.ra.intel.com ([137.102.106.43])
-  by fmsmga005-auth.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 12 Jul 2022 12:37:48 -0700
-Date:   Tue, 12 Jul 2022 12:37:38 -0700 (PDT)
-From:   matthew.gerlach@linux.intel.com
-X-X-Sender: mgerlach@rhweight-WRK1
-To:     Marco Pagani <marpagan@redhat.com>
-cc:     basheer.ahmed.muddebihal@intel.com, corbet@lwn.net,
-        hao.wu@intel.com, linux-doc@vger.kernel.org,
-        linux-fpga@vger.kernel.org, linux-kernel@vger.kernel.org,
-        mdf@kernel.org, russell.h.weight@intel.com,
-        tianfei.zhang@intel.com, trix@redhat.com, yilun.xu@intel.com
-Subject: Re: [PATCH v3 2/2] fpga: dfl-pci: Add IDs for Intel N6000, N6001
- and C6100 cards
-In-Reply-To: <23a5d310-7d5e-a8ee-bd66-b80505e0553e@redhat.com>
-Message-ID: <alpine.DEB.2.22.394.2207121237230.579035@rhweight-WRK1>
-References: <20220707150549.265621-3-matthew.gerlach@linux.intel.com> <23a5d310-7d5e-a8ee-bd66-b80505e0553e@redhat.com>
-User-Agent: Alpine 2.22 (DEB 394 2020-01-19)
+        with ESMTP id S233875AbiGLT57 (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 12 Jul 2022 15:57:59 -0400
+Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id A2B30E59;
+        Tue, 12 Jul 2022 12:57:57 -0700 (PDT)
+Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
+        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+        (No client certificate requested)
+        by dfw.source.kernel.org (Postfix) with ESMTPS id 3D35D619E9;
+        Tue, 12 Jul 2022 19:57:57 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 5C12EC3411E;
+        Tue, 12 Jul 2022 19:57:56 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+        s=k20201202; t=1657655876;
+        bh=YJoRqyJy3qiIn78UeNVjkHQRPeIz+c/iaaoaMAVpK84=;
+        h=Date:From:To:Cc:Subject:In-Reply-To:From;
+        b=P3y8BQAYziE60EfNr9XOgE8zBOjSpqtOu2EhXuMdNyH6GC313kO7bhBPRXqbQkU+V
+         ufF9T4/lDqGnCrfSpA2+ym/U+mP+a/i1rcFLlcQteJ8C/No8l+XucO+mmw3mxP8n27
+         vDEfcd3cUobtGND5kXpbkzXUItXEcmAatZatTvUcWpTZt4BjyOt9BPSKSR82wcfrPQ
+         YMPHNrE1piiYTICazESrv3EavycvvF2CauIW02blun7Y3oPLo7cBSMkofPip0BRips
+         PO+KBj1ei3MGXhF08kUblyy6bhsE0YNQx9P1DC6IEJHyoel/k2kqXczFzRqfVtCFN5
+         lX8zmmiEKm/lw==
+Date:   Tue, 12 Jul 2022 14:57:54 -0500
+From:   Bjorn Helgaas <helgaas@kernel.org>
+To:     Mauro Carvalho Chehab <mchehab@kernel.org>
+Cc:     Linux Doc Mailing List <linux-doc@vger.kernel.org>,
+        Jonathan Corbet <corbet@lwn.net>,
+        Krzysztof =?utf-8?Q?Wilczy=C5=84ski?= <kw@linux.com>,
+        Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
+        Bjorn Helgaas <bhelgaas@google.com>,
+        Kishon Vijay Abraham I <kishon@ti.com>,
+        Lorenzo Pieralisi <lpieralisi@kernel.org>,
+        linux-kernel@vger.kernel.org, linux-pci@vger.kernel.org,
+        Jon Mason <jdmason@kudzu.us>, Frank Li <Frank.Li@nxp.com>
+Subject: Re: [PATCH 04/12] docs: PCI: pci-vntb-function.rst: Properly include
+ ascii artwork
+Message-ID: <20220712195754.GA790963@bhelgaas>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII; format=flowed
-X-Spam-Status: No, score=-7.6 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_EF,RCVD_IN_DNSWL_HI,SPF_HELO_NONE,
-        SPF_NONE,T_SCC_BODY_TEXT_LINE,UPPERCASE_50_75 autolearn=ham
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <9eeaa329cc4fa64829ff0bdaf8f10e68f7283ac7.1656759989.git.mchehab@kernel.org>
+X-Spam-Status: No, score=-7.7 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_HI,
+        SPF_HELO_NONE,SPF_PASS,T_SCC_BODY_TEXT_LINE autolearn=ham
         autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
@@ -63,76 +60,40 @@ Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
+[+cc Jon, Frank]
 
+On Sat, Jul 02, 2022 at 12:07:36PM +0100, Mauro Carvalho Chehab wrote:
+> Adjust identation and add a "::" in order to properly mark the
+> ascii artwork as a code block, fixing this warning:
+> 
+> 	Documentation/PCI/endpoint/pci-vntb-function.rst:82: WARNING: Unexpected indentation.
+> 
+> Signed-off-by: Mauro Carvalho Chehab <mchehab@kernel.org>
 
-On Tue, 12 Jul 2022, Marco Pagani wrote:
+The series that adds this doc appears to be being merged via Jon
+(cc'd).
 
-> On 2022-07-07 17:05, matthew.gerlach@linux.intel.com wrote:
->> From: Matthew Gerlach <matthew.gerlach@linux.intel.com>
->>
->> Add pci_dev_table entries supporting the Intel N6000, N6001
->> and C6100 cards to the dfl-pci driver.
->>
->> Signed-off-by: Matthew Gerlach <matthew.gerlach@linux.intel.com>
->> Signed-off-by: Tianfei Zhang <tianfei.zhang@intel.com>
->
-> Tested-by: Marco Pagani <marpagan@redhat.com>
-
-Thanks for testing.
-
-Matthew
->
->> ---
->> v3: added necessary subdevice ids
->>     removed 'drivers: ' from title
->>
->> v2: changed names from INTEL_OFS to INTEL_DFL
->> ---
->>  drivers/fpga/dfl-pci.c | 19 +++++++++++++++++++
->>  1 file changed, 19 insertions(+)
->>
->> diff --git a/drivers/fpga/dfl-pci.c b/drivers/fpga/dfl-pci.c
->> index fd1fa55c9113..94eabdf1d2f7 100644
->> --- a/drivers/fpga/dfl-pci.c
->> +++ b/drivers/fpga/dfl-pci.c
->> @@ -77,12 +77,19 @@ static void cci_pci_free_irq(struct pci_dev *pcidev)
->>  #define PCIE_DEVICE_ID_INTEL_PAC_D5005		0x0B2B
->>  #define PCIE_DEVICE_ID_SILICOM_PAC_N5010	0x1000
->>  #define PCIE_DEVICE_ID_SILICOM_PAC_N5011	0x1001
->> +#define PCIE_DEVICE_ID_INTEL_DFL		0xbcce
->>
->>  /* VF Device */
->>  #define PCIE_DEVICE_ID_VF_INT_5_X		0xBCBF
->>  #define PCIE_DEVICE_ID_VF_INT_6_X		0xBCC1
->>  #define PCIE_DEVICE_ID_VF_DSC_1_X		0x09C5
->>  #define PCIE_DEVICE_ID_INTEL_PAC_D5005_VF	0x0B2C
->> +#define PCIE_DEVICE_ID_INTEL_DFL_VF		0xbccf
->> +
->> +/* PCI Subdevice ID */
->> +#define PCIE_SUBDEVICE_ID_INTEL_N6000		0x1770
->> +#define PCIE_SUBDEVICE_ID_INTEL_N6001		0x1771
->> +#define PCIE_SUBDEVICE_ID_INTEL_C6100		0x17d4
->>
->>  static struct pci_device_id cci_pcie_id_tbl[] = {
->>  	{PCI_DEVICE(PCI_VENDOR_ID_INTEL, PCIE_DEVICE_ID_PF_INT_5_X),},
->> @@ -96,6 +103,18 @@ static struct pci_device_id cci_pcie_id_tbl[] = {
->>  	{PCI_DEVICE(PCI_VENDOR_ID_INTEL, PCIE_DEVICE_ID_INTEL_PAC_D5005_VF),},
->>  	{PCI_DEVICE(PCI_VENDOR_ID_SILICOM_DENMARK, PCIE_DEVICE_ID_SILICOM_PAC_N5010),},
->>  	{PCI_DEVICE(PCI_VENDOR_ID_SILICOM_DENMARK, PCIE_DEVICE_ID_SILICOM_PAC_N5011),},
->> +	{PCI_DEVICE_SUB(PCI_VENDOR_ID_INTEL, PCIE_DEVICE_ID_INTEL_DFL,
->> +			PCI_VENDOR_ID_INTEL, PCIE_SUBDEVICE_ID_INTEL_N6000),},
->> +	{PCI_DEVICE_SUB(PCI_VENDOR_ID_INTEL, PCIE_DEVICE_ID_INTEL_DFL_VF,
->> +			PCI_VENDOR_ID_INTEL, PCIE_SUBDEVICE_ID_INTEL_N6000),},
->> +	{PCI_DEVICE_SUB(PCI_VENDOR_ID_INTEL, PCIE_DEVICE_ID_INTEL_DFL,
->> +			PCI_VENDOR_ID_INTEL, PCIE_SUBDEVICE_ID_INTEL_N6001),},
->> +	{PCI_DEVICE_SUB(PCI_VENDOR_ID_INTEL, PCIE_DEVICE_ID_INTEL_DFL_VF,
->> +			PCI_VENDOR_ID_INTEL, PCIE_SUBDEVICE_ID_INTEL_N6001),},
->> +	{PCI_DEVICE_SUB(PCI_VENDOR_ID_INTEL, PCIE_DEVICE_ID_INTEL_DFL,
->> +			PCI_VENDOR_ID_INTEL, PCIE_SUBDEVICE_ID_INTEL_C6100),},
->> +	{PCI_DEVICE_SUB(PCI_VENDOR_ID_INTEL, PCIE_DEVICE_ID_INTEL_DFL_VF,
->> +			PCI_VENDOR_ID_INTEL, PCIE_SUBDEVICE_ID_INTEL_C6100),},
->>  	{0,}
->>  };
->>  MODULE_DEVICE_TABLE(pci, cci_pcie_id_tbl);
->
->
+> ---
+> 
+> To avoid mailbombing on a large number of people, only mailing lists were C/C on the cover.
+> See [PATCH 00/12] at: https://lore.kernel.org/all/cover.1656759988.git.mchehab@kernel.org/
+> 
+>  Documentation/PCI/endpoint/pci-vntb-function.rst | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+> 
+> diff --git a/Documentation/PCI/endpoint/pci-vntb-function.rst b/Documentation/PCI/endpoint/pci-vntb-function.rst
+> index cad8013e8839..7b2ac70e2c57 100644
+> --- a/Documentation/PCI/endpoint/pci-vntb-function.rst
+> +++ b/Documentation/PCI/endpoint/pci-vntb-function.rst
+> @@ -58,7 +58,7 @@ It is same as PCI NTB Function driver
+>  Scratchpad Registers:
+>  ---------------------
+>  
+> -  It is appended after Config region.
+> +It is appended after Config region::
+>  
+>    +--------------------------------------------------+ Base
+>    |                                                  |
+> -- 
+> 2.36.1
+> 
