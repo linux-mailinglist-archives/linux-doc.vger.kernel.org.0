@@ -2,99 +2,114 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 526E95712CD
-	for <lists+linux-doc@lfdr.de>; Tue, 12 Jul 2022 09:10:40 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 5C844571446
+	for <lists+linux-doc@lfdr.de>; Tue, 12 Jul 2022 10:19:44 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S230232AbiGLHKi (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 12 Jul 2022 03:10:38 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:50356 "EHLO
+        id S232636AbiGLITm (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 12 Jul 2022 04:19:42 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:49908 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S229782AbiGLHKi (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 12 Jul 2022 03:10:38 -0400
-Received: from mail-vs1-xe30.google.com (mail-vs1-xe30.google.com [IPv6:2607:f8b0:4864:20::e30])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 5B2A12AE2D
-        for <linux-doc@vger.kernel.org>; Tue, 12 Jul 2022 00:10:35 -0700 (PDT)
-Received: by mail-vs1-xe30.google.com with SMTP id t127so6993103vsb.8
-        for <linux-doc@vger.kernel.org>; Tue, 12 Jul 2022 00:10:35 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=mime-version:sender:from:date:message-id:subject:to;
-        bh=VaLdCxxT6H+yQ21ljsJJCI0JVFTWEh1IT2eBGtm6sxQ=;
-        b=AYbH/BwwR/3nG5HJ416AGTRe5B1p9pKYSMLF43KI7zJrYd0V1KA/nd5aL4DIJ4NDHX
-         T6Pfr4UMzEbzrO/vZVaHr/dHPVzg9EnIIrKPwgJnLzrNADT9tx0JyPgjLC+Q49D5g35X
-         LG7xVZ6lD93a9M1xrmbJCrNOqBUv88bzsjkIp2ZYp2mjeB8G9DxSserW6FzcfpXobwfa
-         GCv+8uSilJ7xpnUYArhN+MCkp5DcSIXYcpQaOSD0ciGLLLc02wXUJT3gEvdEZlMUenhC
-         FOZzyY2gGUylUVyxKcVudwHKSMWt6Zp1dh9+74iOQFWAbOQC+jwIewY6PwgrSZcHjmb7
-         zRDw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=x-gm-message-state:mime-version:sender:from:date:message-id:subject
-         :to;
-        bh=VaLdCxxT6H+yQ21ljsJJCI0JVFTWEh1IT2eBGtm6sxQ=;
-        b=t27/80z9AQd+giimKfSutvA0pob2BQGDPKfHYgx+fjHeHoukx0mt/MkkhiNW5jonFi
-         4p4CAstUzZiZ18JAiNnQqH/jJfmoqeOAHrINyOIcleMuCqZqAPLV2GauKkb6fnWTt8C3
-         qJwMmPxXzreznvoQEOYENmqEjhs3IlbFSbimNk9QECSi/F7hkj4Pjtc35M1r6OMv5R2c
-         pwnf3e2rpZf2XREhge0+zkRHXvcX6e4yU6JfrdhLQr3Ora6m0cY4x6aKvvnvf8t2Q5gp
-         75Jv1R1dcAAeaOuc2X2UBtDJWkSLKXY/9s1shTYm+FPPxxNLXcpX+Ewr7uA9GCgNT2ZS
-         Vs2A==
-X-Gm-Message-State: AJIora+4kR09SJOQja4ij27rEGwfnt/9NcSx40Y7oOhcKbHBDV/FX6E6
-        pCC6U36vuRVr7TAWWwzNoUo4B3Wj0TPkDAVF9ck=
-X-Google-Smtp-Source: AGRyM1uyqUPWVt14j7dYrXfyaORAMsp3Hlvjb5JcHaVQ3ByVlPyBjvKYn1pbNYlxVIuQwFZc4r7qrbjOmsJB780qqcg=
-X-Received: by 2002:a05:6102:b16:b0:357:5533:ded4 with SMTP id
- b22-20020a0561020b1600b003575533ded4mr3789788vst.36.1657609833809; Tue, 12
- Jul 2022 00:10:33 -0700 (PDT)
+        with ESMTP id S232276AbiGLITl (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 12 Jul 2022 04:19:41 -0400
+Received: from mout.gmx.net (mout.gmx.net [212.227.15.15])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 6792DA239A;
+        Tue, 12 Jul 2022 01:19:40 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=gmx.net;
+        s=badeba3b8450; t=1657613970;
+        bh=RZ/EJL3btc+F2hOcvq6PS/02fzcVymHrhmlsl8ctjeY=;
+        h=X-UI-Sender-Class:Date:Subject:To:Cc:References:From:In-Reply-To;
+        b=ZKKgHdk4YaFMgbMsNvVaXiLVHZksVveStccelbYwLSAO1e60A3khV/PVh8Fyic56X
+         KSPUwZaRxPi0sQ4Sf4NJfzBa2Dq3rWeKxNuzDQP7FxyzXS/bKOHakYMaYeLaPQJ9F9
+         xIMoioRu8swxC4Edn1/oCg67AVuoNgG4idDOwRFE=
+X-UI-Sender-Class: 01bb95c1-4bf8-414a-932a-4f6e2808ef9c
+Received: from [192.168.20.60] ([92.116.185.115]) by mail.gmx.net (mrgmx005
+ [212.227.17.190]) with ESMTPSA (Nemesis) id 1M4JmN-1oAu8J1HJh-000MJo; Tue, 12
+ Jul 2022 10:19:30 +0200
+Message-ID: <6e1095c7-5a7b-c71d-7d67-321214106126@gmx.de>
+Date:   Tue, 12 Jul 2022 10:18:53 +0200
 MIME-Version: 1.0
-Sender: ahaijout@gmail.com
-Received: by 2002:a05:612c:210a:b0:2c9:f309:ea94 with HTTP; Tue, 12 Jul 2022
- 00:10:33 -0700 (PDT)
-From:   "Mrs. Aisha Gaddafi" <aishagaddaf95@gmail.com>
-Date:   Tue, 12 Jul 2022 00:10:33 -0700
-X-Google-Sender-Auth: z835C80p2D4HsBLOpCKxpoRzhqM
-Message-ID: <CAOCce-wkkp4MEzTqqWnYKNZNeYSb2pdFu_MZg7tSnhPpvQgcPg@mail.gmail.com>
-Subject: hello
-To:     undisclosed-recipients:;
-Content-Type: text/plain; charset="UTF-8"
-X-Spam-Status: Yes, score=6.7 required=5.0 tests=BAYES_60,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_FROM,FREEMAIL_REPLY,
-        LOTS_OF_MONEY,NA_DOLLARS,RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,SPF_PASS,
-        T_HK_NAME_FM_MR_MRS,T_SCC_BODY_TEXT_LINE,UNDISC_MONEY autolearn=no
-        autolearn_force=no version=3.4.6
-X-Spam-Report: * -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at
-        *      https://www.dnswl.org/, no trust
-        *      [2607:f8b0:4864:20:0:0:0:e30 listed in]
-        [list.dnswl.org]
-        *  1.5 BAYES_60 BODY: Bayes spam probability is 60 to 80%
-        *      [score: 0.7460]
-        *  0.0 FREEMAIL_FROM Sender email is commonly abused enduser mail
-        *      provider
-        *      [aishagaddaf95[at]gmail.com]
-        * -0.0 SPF_PASS SPF: sender matches SPF record
-        *  0.0 SPF_HELO_NONE SPF: HELO does not publish an SPF Record
-        *  1.5 NA_DOLLARS BODY: Talks about a million North American dollars
-        * -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
-        *      author's domain
-        *  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
-        *       valid
-        * -0.1 DKIM_VALID_EF Message has a valid DKIM or DK signature from
-        *      envelope-from domain
-        * -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
-        *  0.0 T_HK_NAME_FM_MR_MRS No description available.
-        * -0.0 T_SCC_BODY_TEXT_LINE No description available.
-        *  0.0 LOTS_OF_MONEY Huge... sums of money
-        *  1.0 FREEMAIL_REPLY From and body contain different freemails
-        *  2.9 UNDISC_MONEY Undisclosed recipients + money/fraud signs
-X-Spam-Level: ******
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
+ Thunderbird/91.11.0
+Subject: Re: [PATCH 00/10] video: fbdev: atari: Miscellaneous fixes and
+ cleanups
+Content-Language: en-US
+To:     Geert Uytterhoeven <geert@linux-m68k.org>
+Cc:     Michael Schmitz <schmitzmic@gmail.com>,
+        Jonathan Corbet <corbet@lwn.net>, linux-fbdev@vger.kernel.org,
+        linux-doc@vger.kernel.org, dri-devel@lists.freedesktop.org,
+        linux-m68k@vger.kernel.org, linux-kernel@vger.kernel.org
+References: <cover.1657554353.git.geert@linux-m68k.org>
+From:   Helge Deller <deller@gmx.de>
+In-Reply-To: <cover.1657554353.git.geert@linux-m68k.org>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:y6OTXSI/vDD0Tc+MGb9ohXJ9PmVo6065zAfD2JiW8O6WIvwH4b+
+ qyV6iWgCcllYv3nDjW391uFKSwN/tSYAjMmG0DEyUgfMhp/mt8CcPUC32UsqUzmrI6NDW39
+ ZjZ/YJXukVlZwLU1QQoZEjlhycryINuOzFlQD+1RIxgd8iSXwFw9iO+so/ZOoLJNdDNrIAk
+ QTEiETWTcvvApQkisUssg==
+X-UI-Out-Filterresults: notjunk:1;V03:K0:Gaa+xL1Kbec=:MZVxjw3JJRvAEL1HmzeYQF
+ utKKkEXMIWs6985XNF4x510rfnNbKU8K9TGo9ckn4IMZnUadKi6nSOdTv/ZeZSMJQB1W46mM7
+ +BL3IBgDiaVdLCtMHqwNDIDnktQVZYrELG5mbVx1XMw7lwe7vxZiW1Ag2cOIyL/it9VXSx3ua
+ iXXM4iV1ZaSgAASszGPJaGZnoEGjbunL7nGouTxF66/NdjXMacDg/zpNnxKv8uf6hlk9Y9PSi
+ XTVMxKq+JWHp9oIvcRjk0p5B2hHtsY/x6R7BBpHnYsvjegqRiVDOqxsxWlE65miJNwvNkHQlc
+ ss97i/JIrtmQ14X2LBFl532JjhFy8LPS8qBEq/FzbKRFthdhzVxbNvYbrBaj6+p0yI8umhTrp
+ Te/tEn7VrBqx5zy/k8DYALlKlRXzyeADo5W2EK/0B29aBmz4hw3lmk1HkjWlF/GqWF2Z6k1vH
+ sQtkCLAFVeftwSQBi3bcm6BhMwta8jU8T5SO/3fH/mXeu/dBzyMrtg14w1M4BrSvYIbyH0Num
+ vwbAhdagvvStKtrpkrwHI51jfWe2seSykqJYikkmSUgVGMQNtTI1uiCzzaigfIqMHaxxKCjdV
+ 8E+j5joAD3CDi7vjSFkHfDZ0KLVM+cQVmvmvzCkow6K6PkGtc+9vJH4GSuDpg5iJm829R3kPZ
+ Fc6UE/g8Wfs8Dvd3t322tunBsVABi1oWKm3lbvpPvAADomTfqGIN7Emar0bFTQMgPKhb44ekN
+ UdMnC2jeCe+XXJnrGmIXCNPgvg+vOmP1AhzMNTSzZPMLT/jSkZB4y3wtr/bl9GKPnsrT8Lh9z
+ ZWZjnFQxnbIep8AJL+YGTaN+Q7RN8snv16uhieEMbVXVQSLEfdKfVyk/RI+9ER6/mhwcmrvmX
+ z7nUN+5YKBEE9e4e9cTTH7lhrdm4D3m2Bcxk6dZIha6L4UdpWKM7HMw5YXUJVU1qJGiX9T2cz
+ siEmGeZe8Wnl/IYuJrt0/zj2/S/6/JqLnpvcWfk/mcHvvz5ntig9ejp5zlc3yLRZfbYqaJmdk
+ Yw/C+7hdm1N71OeCS2n8tP8/TOPMlFpTwcNvIsPkRdgrBDQo83kx1UF0hXWIERyXMOMRSyWYT
+ 9+uXkXiv/g8KAfP5XkEFClBFJgdRlQ0t7hQKTE8XOSn/GZX5TPZYSQxPA==
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+        DKIM_VALID,FREEMAIL_FROM,NICE_REPLY_A,RCVD_IN_DNSWL_LOW,
+        RCVD_IN_MSPIKE_H2,SPF_HELO_NONE,SPF_PASS,T_SCC_BODY_TEXT_LINE
+        autolearn=ham autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
--- 
-Please i need your kind Assistance. I will be very glad if you can assist
-me to receive this sum of ( $8.5 Million US dollars.) into your bank
-account, my name is  princess mercy i am 21years,i need who will help
-me save  this fund,
-i lost my father and only brother,
-Please contact me through my private email:(princessmercy68@yahoo.com),
- for more information
+On 7/11/22 17:50, Geert Uytterhoeven wrote:
+> 	Hi all,
+>
+> This patch series contains miscellaneous fixes and cleanups for the
+> Atari frame buffer device driver, which were identified while working on
+> the Atari DRM driver.
+>
+> Most of them have been tested on ARAnyM, and should be safe to apply,
+
+I've applied patches 1-9 to fbdev for-next git tree....
+
+> except perhaps for the last one, which is marked RFC.
+
+... and would like to see some thoughts/feedback from others on this one .=
+..
+
+Thanks,
+Helge
+
+>
+> Thanks for your comments!
+>
+> Geert Uytterhoeven (10):
+>   video: fbdev: atari: Simplify atafb_pan_display()
+>   video: fbdev: atari: Remove bogus FB_VMODE_YWRAP flags
+>   video: fbdev: atari: Fix inverse handling
+>   video: fbdev: atari: Fix ext_setcolreg()
+>   video: fbdev: atari: Remove unneeded casts from void *
+>   video: fbdev: atari: Remove unneeded casts to void *
+>   video: fbdev: atari: Fix TT High video mode vertical refresh
+>   video: fbdev: atari: Fix VGA modes
+>   video: fbdev: atari: Remove unused definitions and variables
+>   [RFC] video: fbdev: atari: Remove backward bug-compatibility
+>
+>  Documentation/m68k/kernel-options.rst |   4 +-
+>  drivers/video/fbdev/atafb.c           | 101 +++++++-------------------
+>  2 files changed, 29 insertions(+), 76 deletions(-)
+>
+
