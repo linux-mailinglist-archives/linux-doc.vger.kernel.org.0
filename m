@@ -2,153 +2,105 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id A5BD85731B3
-	for <lists+linux-doc@lfdr.de>; Wed, 13 Jul 2022 10:57:29 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 93A60573309
+	for <lists+linux-doc@lfdr.de>; Wed, 13 Jul 2022 11:41:57 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S235933AbiGMI52 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 13 Jul 2022 04:57:28 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:38496 "EHLO
+        id S235791AbiGMJl4 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 13 Jul 2022 05:41:56 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:59982 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S235843AbiGMI5R (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Wed, 13 Jul 2022 04:57:17 -0400
-Received: from mail-pf1-x42a.google.com (mail-pf1-x42a.google.com [IPv6:2607:f8b0:4864:20::42a])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 7213CEE1DA;
-        Wed, 13 Jul 2022 01:57:15 -0700 (PDT)
-Received: by mail-pf1-x42a.google.com with SMTP id d10so9673033pfd.9;
-        Wed, 13 Jul 2022 01:57:15 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=from:to:cc:subject:date:message-id:in-reply-to:references
-         :mime-version:content-transfer-encoding;
-        bh=TceMcUV+/l4WL/aDjeSG/t8FqTVXmRKi59JDreDyO4Y=;
-        b=YR/UIXngdQpbtO47p/B49pkTwIduq8++/5exxY/5NLK1C4BARqLnsubk4tY1++NqEO
-         ls+3wm0B21K6RIKR0/nBtyN7pGpL8T3LT2DmDuR/R6VkoZpEDwUQSv9qkAgqZ9APiIBI
-         /87jaCS63a2eQ//jGmiUocWT2cNVEIowHg/FJCYc+pG1HtrDp9MHC5vB972LJPz1eWds
-         2pbgGZVKV8kmpZ40Oq0/2oEn3h+eeiYMenyrh4upNTZJiYYAA2oSJQvuxG3l0QmfsmIs
-         vH4aNPePyNgeBAfTLT2rnKtcGb5evoKbMTWbJx8fnQM/p/9YVjkROnIg3tZaxalurIQx
-         3DfQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-         :references:mime-version:content-transfer-encoding;
-        bh=TceMcUV+/l4WL/aDjeSG/t8FqTVXmRKi59JDreDyO4Y=;
-        b=LwuIsgw2sq1zISF7Tw83Obhe7tmfmSp8H1xyvSFxm1RIDBxQgGjybVPTBglcau67HR
-         G3nTnU0D+ooXYfhm8Fc38VoIL3sxQr5M7fkPPvj/EfDPH1Kwa100IhWiBJtwxhivrIfT
-         FJOwRyTIIenZ82pv+ygM5gsKKKe7YLf1Yv34pwUqYBG+o5NxghGvU5hG7IEYJ5reGYfb
-         eqGIA+MhMYfVfqRlzauKAx6pCnguydBusNf8qY5HND+SiMMMigIQcqJPCzg4Fndw7Ujl
-         KOdjXxriS19uELGAWddB4EzosOAe9+hElZr5RwaKZr6aGcM537n7auyuKuqHU15zhIUv
-         gpcw==
-X-Gm-Message-State: AJIora9uOALxWbtB6rFe/+d3mY8sdFWazUaF1Y+/9azDo0p9Em4b08j3
-        ikgAT0EeyzHfVkMF3EBR68Ywb/8lmor8Qg==
-X-Google-Smtp-Source: AGRyM1tsu1SxBk9EPNd+2+dGJgv7KO2elKPTAjyLJ2yuTvRLc4nOy0gSj01drJXgpzr9DvVr6YOkkw==
-X-Received: by 2002:a63:1a4c:0:b0:416:1821:733d with SMTP id a12-20020a631a4c000000b004161821733dmr2088509pgm.444.1657702634761;
-        Wed, 13 Jul 2022 01:57:14 -0700 (PDT)
-Received: from debian.me (subs09a-223-255-225-69.three.co.id. [223.255.225.69])
-        by smtp.gmail.com with ESMTPSA id r2-20020a170902e3c200b0016c0eb202a5sm8202527ple.225.2022.07.13.01.57.14
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 13 Jul 2022 01:57:14 -0700 (PDT)
-Received: by debian.me (Postfix, from userid 1000)
-        id 8A5DC103975; Wed, 13 Jul 2022 15:57:11 +0700 (WIB)
-From:   Bagas Sanjaya <bagasdotme@gmail.com>
-To:     linux-doc@vger.kernel.org, linux-next@vger.kernel.org
-Cc:     Bagas Sanjaya <bagasdotme@gmail.com>,
-        Giovanni Cabiddu <giovanni.cabiddu@intel.com>,
-        Adam Guerin <adam.guerin@intel.com>,
-        Tomasz Kowallik <tomaszx.kowalik@intel.com>,
-        Wojciech Ziemba <wojciech.ziemba@intel.com>,
-        Fiona Trahe <fiona.trahe@intel.com>,
-        linux-crypto@vger.kernel.org, linux-kernel@vger.kernel.org
-Subject: [PATCH RESEND v2 2/2] Documentation: qat: rewrite description
-Date:   Wed, 13 Jul 2022 15:56:28 +0700
-Message-Id: <20220713085627.175604-3-bagasdotme@gmail.com>
-X-Mailer: git-send-email 2.37.0
-In-Reply-To: <20220713085627.175604-1-bagasdotme@gmail.com>
-References: <20220713085627.175604-1-bagasdotme@gmail.com>
+        with ESMTP id S234469AbiGMJlz (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Wed, 13 Jul 2022 05:41:55 -0400
+Received: from wp530.webpack.hosteurope.de (wp530.webpack.hosteurope.de [IPv6:2a01:488:42:1000:50ed:8234::])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 61D50F5D64;
+        Wed, 13 Jul 2022 02:41:53 -0700 (PDT)
+Received: from [2a02:8108:963f:de38:eca4:7d19:f9a2:22c5]; authenticated
+        by wp530.webpack.hosteurope.de running ExIM with esmtpsa (TLS1.3:ECDHE_RSA_AES_128_GCM_SHA256:128)
+        id 1oBYsQ-00012W-A6; Wed, 13 Jul 2022 11:41:50 +0200
+Message-ID: <1dc0ab09-2cfd-a310-d1da-ef7d3cc47a71@leemhuis.info>
+Date:   Wed, 13 Jul 2022 11:41:49 +0200
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Spam-Status: No, score=-0.6 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_FROM,
-        RCVD_IN_DNSWL_NONE,RCVD_IN_SORBS_WEB,SPF_HELO_NONE,SPF_PASS,
-        T_SCC_BODY_TEXT_LINE autolearn=no autolearn_force=no version=3.4.6
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
+ Thunderbird/91.11.0
+Content-Language: en-US
+To:     Lukas Bulwahn <lukas.bulwahn@gmail.com>,
+        Jonathan Corbet <corbet@lwn.net>,
+        "open list:DOCUMENTATION" <linux-doc@vger.kernel.org>
+Cc:     Linux Kernel Mailing List <linux-kernel@vger.kernel.org>
+References: <CAKXUXMy2WfsRj+nJuNCV4bPNYTvDySLOq3HgpK+gWJSpWS81Kg@mail.gmail.com>
+From:   Thorsten Leemhuis <linux@leemhuis.info>
+Subject: Re: Update "If something goes wrong" in
+ Documentation/admin-guide/README.rst
+In-Reply-To: <CAKXUXMy2WfsRj+nJuNCV4bPNYTvDySLOq3HgpK+gWJSpWS81Kg@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-bounce-key: webpack.hosteurope.de;linux@leemhuis.info;1657705313;f44ca44f;
+X-HE-SMSGID: 1oBYsQ-00012W-A6
+X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00,NICE_REPLY_A,
+        SPF_HELO_NONE,SPF_PASS,T_SCC_BODY_TEXT_LINE autolearn=ham
+        autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-The sysfs description contains redundancy on returned and allowed values
-list, due to the described sysfs is read-write. Rewrite.
+Hi! Lukas, thx for bringing this up.
 
-Acked-by: Giovanni Cabiddu <giovanni.cabiddu@intel.com>
-Cc: Adam Guerin <adam.guerin@intel.com>
-Cc: Tomasz Kowallik <tomaszx.kowalik@intel.com>
-Cc: Giovanni Cabiddu <giovanni.cabiddu@intel.com>
-Cc: Wojciech Ziemba <wojciech.ziemba@intel.com>
-Cc: Fiona Trahe <fiona.trahe@intel.com>
-Cc: linux-crypto@vger.kernel.org
-Cc: linux-kernel@vger.kernel.org
-Signed-off-by: Bagas Sanjaya <bagasdotme@gmail.com>
----
- Documentation/ABI/testing/sysfs-driver-qat | 34 +++++++---------------
- 1 file changed, 11 insertions(+), 23 deletions(-)
+On 13.07.22 09:26, Lukas Bulwahn wrote:
+>
+> During some other unrelated clean-up work, I stumbled upon the section
+> 'If something goes wrong' in Documentation/admin-guide/README.rst
+> (https://www.kernel.org/doc/html/latest/admin-guide/README.html).
+> README.rst is---as it seems---the intended first summary page of the
+> documentation for any user of the kernel (the kernel's release notes
+> document).
+> 
+> The section 'If something goes wrong' describes what to do when
+> encountering a bug and how to report it. The second sentence in that
+> section is especially historic and probably just discouraging for most
+> bug reporters ( ..."the second best thing is to mail them to me
+> (torvalds@linux-foundation.org)"...).
 
-diff --git a/Documentation/ABI/testing/sysfs-driver-qat b/Documentation/ABI/testing/sysfs-driver-qat
-index 43e081ec22cc4a..185f81a2aab360 100644
---- a/Documentation/ABI/testing/sysfs-driver-qat
-+++ b/Documentation/ABI/testing/sysfs-driver-qat
-@@ -2,18 +2,14 @@ What:		/sys/bus/pci/devices/<BDF>/qat/state
- Date:		June 2022
- KernelVersion:	5.20
- Contact:	qat-linux@intel.com
--Description:	Reports the current state of the QAT device and allows to
--		change it.
-+Description:	(RW) Reports the current state of the QAT device. Write to
-+		the file to start or stop the device.
- 
--		This attribute is RW.
-+		The values are:
- 
--		Returned values:
--			up: the device is up and running
--			down: the device is down
-+		* up: the device is up and running
-+		* down: the device is down
- 
--		Allowed values:
--			up: initialize and start the device
--			down: stop the device and bring it down
- 
- 		It is possible to transition the device from up to down only
- 		if the device is up and vice versa.
-@@ -24,22 +20,14 @@ What:		/sys/bus/pci/devices/<BDF>/qat/cfg_services
- Date:		June 2022
- KernelVersion:	5.20
- Contact:	qat-linux@intel.com
--Description:	Reports the current configuration of the QAT device and allows
--		to change it.
-+Description:	(RW) Reports the current configuration of the QAT device.
-+		Write to the file to change the configured services.
- 
--		This attribute is RW.
-+		The values are:
- 
--		Returned values:
--			sym;asym:	the device is configured for running
--					crypto services
--			dc:		the device is configured for running
--					compression services
--
--		Allowed values:
--			sym;asym:	configure the device for running
--					crypto services
--			dc:		configure the device for running
--					compression services
-+		* sym;asym: the device is configured for running crypto
-+		  services
-+		* dc: the device is configured for running compression services
- 
- 		It is possible to set the configuration only if the device
- 		is in the `down` state (see /sys/bus/pci/devices/<BDF>/qat/state)
--- 
-An old man doll... just what I always wanted! - Clara
+Ha, yeah, guess so :-D
 
+> Some random user (potentially
+> even unknown to the community) sending an email to Linus is most
+> probably the last best thing to do and is most likely just ignored,
+> right?
+
+I'd say it depends on the report and would guess Linus in quite a few
+cases will act on it if the report at least somewhat good -- or about
+something important, like a bisected regression.
+
+> Probably this section in README.rst needs a rewrite (summarizing
+> Thorsten's reporting-issues.rst, or just copying the summary from
+> there) and should then refer to reporting-issues.rst for more details.
+
+Well, any new summary sounds a bit like 'similar code paths for doing
+the same thing'. Sometimes that is necessary when coding, but often it's
+best avoided for known reasons. I think it's not that different for docs.
+
+Maybe just copying the "short guide" from the top of
+reporting-issues.rst might be the most elegant solution for README.rst
+while adding the link your mentioned (maybe while adding a comment to
+reporting-issues.rst saying something like 'if you update this section,
+update the copy over there, too'). But I'm not sure myself right now if
+that's really the best way forward; maybe a few modifications might be
+good here. Let's see what Jonathan says.
+
+Note, the section in README.rst you mentioned also contains a few
+aspects that reporting-issues.rst despite it's size doesn't cover. :-/
+But some of that stuff looks outdated anyway.
+
+> Thorsten, do you have time to prepare a change to that document that
+> gives a short summary on how to report potential issues and
+> regressions? Otherwise, I will happily put that on my todo list and
+> probably can suggest some RFC patch in a week or two.
+
+Then go for it. Normally I'd be interested, but I'm short on time
+currently, as I'm working a lot on bugzilla integration for regzbot,
+have a vacation coming up, and need to prepare talks for two conferences
+(Kernel Summit and Open Source Summit).
+
+Ciao, Thorsten
