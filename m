@@ -2,171 +2,207 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 184835744B0
-	for <lists+linux-doc@lfdr.de>; Thu, 14 Jul 2022 07:52:03 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id D0B225745FE
+	for <lists+linux-doc@lfdr.de>; Thu, 14 Jul 2022 09:47:08 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S230024AbiGNFwB (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 14 Jul 2022 01:52:01 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:53598 "EHLO
+        id S237389AbiGNHrD (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 14 Jul 2022 03:47:03 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:42918 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S229453AbiGNFv7 (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Thu, 14 Jul 2022 01:51:59 -0400
-Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 028A62C647;
-        Wed, 13 Jul 2022 22:51:55 -0700 (PDT)
-Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
-        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
-        (No client certificate requested)
-        by dfw.source.kernel.org (Postfix) with ESMTPS id 5F5B260AC9;
-        Thu, 14 Jul 2022 05:51:55 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id A13CEC34115;
-        Thu, 14 Jul 2022 05:51:53 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-        s=k20201202; t=1657777914;
-        bh=oZ1DJE7ta+TUY0AU//gHvCymqStsXCfYx+hYKLfuHOY=;
-        h=From:To:Cc:Subject:Date:From;
-        b=ps6wHldfexq3aa+HAQROT1TeK3jSv9gLC233ourNb/0JnopdnnU+MKILLJotWC1bt
-         WvSZh8PPQvcCVPFD9Go7mqWIuvQSXsMdgtAazOJ0MtIeWC6ku7XJFmsu4WGgUTWYJS
-         8/uNGVTbsJ9NTyWfVjZ7+QAnMAlotgmpGVUJtvTUT92MM+Z6rPp6pDcwO8hNB59G/6
-         ZSgcW4jYqP7k/CRln2YcLNy3v4ibkLqOY8b7u+elne9b9oaIDMT71RwLJvFustfJ6z
-         +YX9Y5uGlsvBqZj0Inp9ydkwwKoXfb/EYXVtoMDRJ0KXq2edB9yUqu0qH5EbVdiAmf
-         QcGRX++CReYUQ==
-From:   alexs@kernel.org
-Cc:     Alex Shi <alexs@kernel.org>, Jonathan Corbet <corbet@lwn.net>,
-        Andrew Morton <akpm@linux-foundation.org>,
-        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org
-Subject: [PATCH] doc/vm: move overcommit-accounting doc to admin-guide
-Date:   Thu, 14 Jul 2022 13:51:42 +0800
-Message-Id: <20220714055142.214728-1-alexs@kernel.org>
-X-Mailer: git-send-email 2.25.1
+        with ESMTP id S234625AbiGNHq7 (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Thu, 14 Jul 2022 03:46:59 -0400
+Received: from out2.migadu.com (out2.migadu.com [188.165.223.204])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id BBAD337196;
+        Thu, 14 Jul 2022 00:46:57 -0700 (PDT)
+Date:   Thu, 14 Jul 2022 15:46:45 +0800
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linux.dev; s=key1;
+        t=1657784816;
+        h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+         to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+         in-reply-to:in-reply-to:references:references;
+        bh=1TJviPunlwH7RxQV4jVLO1pPXI9F2og9+lwfZ75k6+g=;
+        b=OKMxJzzUX/eSiaPlxOT6jOv1GE3aUntvTUhYa/zLy2CJbOPuL7nAwGJXJ8p5NWffeqB118
+        YTbQyjLtSsm/NH6anB6VLWIOm/CcVlhhocIHHlNwmTBehCgatSEn1F4yO/M8UNl/aXO16n
+        reyCtQJBf8EZKXDfUHbKAMrUCx3bEwQ=
+X-Report-Abuse: Please report any abuse attempt to abuse@migadu.com and include these headers.
+From:   Tao Zhou <tao.zhou@linux.dev>
+To:     Daniel Bristot de Oliveira <bristot@kernel.org>
+Cc:     Steven Rostedt <rostedt@goodmis.org>,
+        Wim Van Sebroeck <wim@linux-watchdog.org>,
+        Guenter Roeck <linux@roeck-us.net>,
+        Jonathan Corbet <corbet@lwn.net>,
+        Ingo Molnar <mingo@redhat.com>,
+        Thomas Gleixner <tglx@linutronix.de>,
+        Peter Zijlstra <peterz@infradead.org>,
+        Will Deacon <will@kernel.org>,
+        Catalin Marinas <catalin.marinas@arm.com>,
+        Marco Elver <elver@google.com>,
+        Dmitry Vyukov <dvyukov@google.com>,
+        "Paul E. McKenney" <paulmck@kernel.org>,
+        Shuah Khan <skhan@linuxfoundation.org>,
+        Gabriele Paoloni <gpaoloni@redhat.com>,
+        Juri Lelli <juri.lelli@redhat.com>,
+        Clark Williams <williams@redhat.com>,
+        Randy Dunlap <rdunlap@infradead.org>,
+        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
+        linux-trace-devel@vger.kernel.org, Tao Zhou <tao.zhou@linux.dev>
+Subject: Re: [PATCH V5 01/16] rv: Add Runtime Verification (RV) interface
+Message-ID: <Ys/J5fLaojYeiVzL@geo.homenetwork>
+References: <cover.1657745645.git.bristot@kernel.org>
+ <442b03c687c298b25c79aa5a16ec7fb2aef0f2c9.1657745645.git.bristot@kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-Spam-Status: No, score=-7.7 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_HI,
-        SPF_HELO_NONE,SPF_PASS,T_SCC_BODY_TEXT_LINE autolearn=ham
-        autolearn_force=no version=3.4.6
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <442b03c687c298b25c79aa5a16ec7fb2aef0f2c9.1657745645.git.bristot@kernel.org>
+X-Migadu-Flow: FLOW_OUT
+X-Migadu-Auth-User: linux.dev
+X-Spam-Status: No, score=-2.1 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,SPF_HELO_PASS,SPF_PASS,
+        T_SCC_BODY_TEXT_LINE autolearn=ham autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
-To:     unlisted-recipients:; (no To-header on input)
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-From: Alex Shi <alexs@kernel.org>
+On Wed, Jul 13, 2022 at 11:17:17PM +0200,
+Daniel Bristot de Oliveira <bristot@kernel.org> wrote:
 
-Since the contents is mainly focus on a sysctl vm.overcommit_memory,
-it's more suitable for admin-guide dir instead of vm/ dir.
+[...]
 
-Signed-off-by: Alex Shi <alexs@kernel.org>
-Cc: Jonathan Corbet <corbet@lwn.net>
-Cc: Andrew Morton <akpm@linux-foundation.org>
-Cc: linux-doc@vger.kernel.org
-Cc: linux-kernel@vger.kernel.org
----
- Documentation/admin-guide/mm/index.rst                          | 1 +
- Documentation/{vm => admin-guide/mm}/overcommit-accounting.rst  | 0
- Documentation/admin-guide/sysctl/vm.rst                         | 2 +-
- Documentation/filesystems/proc.rst                              | 2 +-
- Documentation/translations/zh_CN/admin-guide/mm/index.rst       | 1 +
- .../zh_CN/{vm => admin-guide/mm}/overcommit-accounting.rst      | 2 +-
- Documentation/translations/zh_CN/vm/index.rst                   | 1 -
- Documentation/vm/index.rst                                      | 1 -
- 8 files changed, 5 insertions(+), 5 deletions(-)
- rename Documentation/{vm => admin-guide/mm}/overcommit-accounting.rst (100%)
- rename Documentation/translations/zh_CN/{vm => admin-guide/mm}/overcommit-accounting.rst (97%)
+> +void put_task_monitor_slot(int slot)
+> +{
+> +	lockdep_assert_held(&rv_interface_lock);
+> +
+> +	if (slot < 0 || slot > RV_PER_TASK_MONITORS) {
 
-diff --git a/Documentation/admin-guide/mm/index.rst b/Documentation/admin-guide/mm/index.rst
-index c21b5823f126..b92de39a53d3 100644
---- a/Documentation/admin-guide/mm/index.rst
-+++ b/Documentation/admin-guide/mm/index.rst
-@@ -35,6 +35,7 @@ the Linux memory management.
-    nommu-mmap
-    numa_memory_policy
-    numaperf
-+   overcommit-accounting
-    pagemap
-    soft-dirty
-    swap_numa
-diff --git a/Documentation/vm/overcommit-accounting.rst b/Documentation/admin-guide/mm/overcommit-accounting.rst
-similarity index 100%
-rename from Documentation/vm/overcommit-accounting.rst
-rename to Documentation/admin-guide/mm/overcommit-accounting.rst
-diff --git a/Documentation/admin-guide/sysctl/vm.rst b/Documentation/admin-guide/sysctl/vm.rst
-index 5c9aa171a0d3..4344006ae764 100644
---- a/Documentation/admin-guide/sysctl/vm.rst
-+++ b/Documentation/admin-guide/sysctl/vm.rst
-@@ -760,7 +760,7 @@ and don't use much of it.
- 
- The default value is 0.
- 
--See Documentation/vm/overcommit-accounting.rst and
-+See Documentation/admin-guide/mm/overcommit-accounting.rst and
- mm/util.c::__vm_enough_memory() for more information.
- 
- 
-diff --git a/Documentation/filesystems/proc.rst b/Documentation/filesystems/proc.rst
-index 1bc91fb8c321..ff2f42772975 100644
---- a/Documentation/filesystems/proc.rst
-+++ b/Documentation/filesystems/proc.rst
-@@ -1109,7 +1109,7 @@ CommitLimit
-               yield a CommitLimit of 7.3G.
- 
-               For more details, see the memory overcommit documentation
--              in vm/overcommit-accounting.
-+              in admin-guide/mm/overcommit-accounting.
- Committed_AS
-               The amount of memory presently allocated on the system.
-               The committed memory is a sum of all of the memory which
-diff --git a/Documentation/translations/zh_CN/admin-guide/mm/index.rst b/Documentation/translations/zh_CN/admin-guide/mm/index.rst
-index 702271c5b683..7304924d8131 100644
---- a/Documentation/translations/zh_CN/admin-guide/mm/index.rst
-+++ b/Documentation/translations/zh_CN/admin-guide/mm/index.rst
-@@ -31,6 +31,7 @@ Linux内存管理有它自己的术语，如果你还不熟悉它，请考虑阅
- 
-    damon/index
-    ksm
-+   overcommit-accounting
- 
- Todolist:
- * concepts
-diff --git a/Documentation/translations/zh_CN/vm/overcommit-accounting.rst b/Documentation/translations/zh_CN/admin-guide/mm/overcommit-accounting.rst
-similarity index 97%
-rename from Documentation/translations/zh_CN/vm/overcommit-accounting.rst
-rename to Documentation/translations/zh_CN/admin-guide/mm/overcommit-accounting.rst
-index 8765cb118f24..04b6067d711d 100644
---- a/Documentation/translations/zh_CN/vm/overcommit-accounting.rst
-+++ b/Documentation/translations/zh_CN/admin-guide/mm/overcommit-accounting.rst
-@@ -1,4 +1,4 @@
--:Original: Documentation/vm/overcommit-accounting.rst
-+:Original: Documentation/admin-guide/mm/overcommit-accounting.rst
- 
- :翻译:
- 
-diff --git a/Documentation/translations/zh_CN/vm/index.rst b/Documentation/translations/zh_CN/vm/index.rst
-index a1c6d529b6ff..00762b5cb174 100644
---- a/Documentation/translations/zh_CN/vm/index.rst
-+++ b/Documentation/translations/zh_CN/vm/index.rst
-@@ -34,7 +34,6 @@ TODO:待引用文档集被翻译完毕后请及时修改此处）
-    memory-model
-    mmu_notifier
-    numa
--   overcommit-accounting
-    page_frags
-    page_owner
-    page_table_check
-diff --git a/Documentation/vm/index.rst b/Documentation/vm/index.rst
-index 575ccd40e30c..e5ba30c89552 100644
---- a/Documentation/vm/index.rst
-+++ b/Documentation/vm/index.rst
-@@ -52,7 +52,6 @@ above structured documentation, or deleted if it has served its purpose.
-    memory-model
-    mmu_notifier
-    numa
--   overcommit-accounting
-    page_migration
-    page_frags
-    page_owner
--- 
-2.25.1
+slot is the array index that should be 0 here. The up bound is not bigger
+than 0 because the element of array now is RV_PER_TASK_MONITORS. 
 
+So up bound check is 'slot > RV_PER_TASK_MONITORS-1'.
+
+[...]
+
+> +/*
+> + * interface for enabling/disabling a monitor.
+> + */
+> +static ssize_t monitor_enable_write_data(struct file *filp, const char __user *user_buf,
+> +					 size_t count, loff_t *ppos)
+> +{
+> +	struct rv_monitor_def *mdef = filp->private_data;
+> +	int retval;
+> +	bool val;
+> +
+> +	retval = kstrtobool_from_user(user_buf, count, &val);
+> +	if (retval)
+> +		return retval;
+> +
+> +	retval = count;
+> +
+> +	mutex_lock(&rv_interface_lock);
+> +
+> +	if (val)
+> +		retval = enable_monitor(mdef);
+> +	else
+> +		retval = disable_monitor(mdef);
+> +
+> +	mutex_unlock(&rv_interface_lock);
+> +
+> +	return retval ? retval : count;
+
+Feel that this can be written `return retval ? : count;`
+
+[...]
+
+> +static void *enabled_monitors_start(struct seq_file *m, loff_t *pos)
+> +{
+> +	struct rv_monitor_def *m_def;
+> +	loff_t l;
+> +
+> +	mutex_lock(&rv_interface_lock);
+> +
+> +	if (list_empty(&rv_monitors_list))
+> +		return NULL;
+> +
+> +	m_def = list_entry(&rv_monitors_list, struct rv_monitor_def, list);
+> +
+> +	for (l = 0; l <= *pos; ) {
+> +		m_def = enabled_monitors_next(m, m_def, &l);
+> +		if (!m_def)
+> +			break;
+
+Is this check is inversed. enabled_monitors_start() will stop at first
+enabled monitor, then enabled_monitors_next() do loop to next. Check
+like the above, enabled_monitors_start() will loop to the last monitor.
+But I doubt myself I do not mention/see it. Sorry for these.
+
+the check is:
+
+  if (m_def)
+     break;
+
+[...]
+
+> +static ssize_t
+> +enabled_monitors_write(struct file *filp, const char __user *user_buf,
+> +		      size_t count, loff_t *ppos)
+> +{
+> +	char buff[MAX_RV_MONITOR_NAME_SIZE + 2];
+> +	struct rv_monitor_def *mdef;
+> +	int retval = -EINVAL;
+> +	bool enable = true;
+> +	char *ptr = buff;
+> +	int len;
+> +
+> +	if (count < 1 || count > MAX_RV_MONITOR_NAME_SIZE + 2)
+
+@count would not include '\0'. That the max val of @count is
+MAX_RV_MONITOR_NAME_SIZE+1. So the up bound check of @count is
+`count > MAX_RV_MONITOR_NAME_SIZE + 1`.
+
+Thanks,
+Tao
+> +		return -EINVAL;
+> +
+> +	memset(buff, 0, sizeof(buff));
+> +
+> +	retval = simple_write_to_buffer(buff, sizeof(buff) - 1, ppos, user_buf, count);
+> +	if (!retval)
+> +		return -EFAULT;
+> +
+> +	ptr = strim(buff);
+> +
+> +	if (ptr[0] == '!') {
+> +		enable = false;
+> +		ptr++;
+> +	}
+> +
+> +	len = strlen(ptr);
+> +	if (!len)
+> +		return count;
+> +
+> +	mutex_lock(&rv_interface_lock);
+> +
+> +	retval = -EINVAL;
+> +
+> +	list_for_each_entry(mdef, &rv_monitors_list, list) {
+> +		if (strcmp(ptr, mdef->monitor->name) != 0)
+> +			continue;
+> +
+> +		/*
+> +		 * Monitor found!
+> +		 */
+> +		if (enable)
+> +			retval = enable_monitor(mdef);
+> +		else
+> +			retval = disable_monitor(mdef);
+> +
+> +		if (!retval)
+> +			retval = count;
+> +
+> +		break;
+> +	}
+> +
+> +	mutex_unlock(&rv_interface_lock);
+> +	return retval;
+> +}
