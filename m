@@ -2,207 +2,93 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id D0B225745FE
-	for <lists+linux-doc@lfdr.de>; Thu, 14 Jul 2022 09:47:08 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 5A6415747F2
+	for <lists+linux-doc@lfdr.de>; Thu, 14 Jul 2022 11:12:07 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S237389AbiGNHrD (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 14 Jul 2022 03:47:03 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:42918 "EHLO
+        id S231264AbiGNJMF (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 14 Jul 2022 05:12:05 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:33046 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S234625AbiGNHq7 (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Thu, 14 Jul 2022 03:46:59 -0400
-Received: from out2.migadu.com (out2.migadu.com [188.165.223.204])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id BBAD337196;
-        Thu, 14 Jul 2022 00:46:57 -0700 (PDT)
-Date:   Thu, 14 Jul 2022 15:46:45 +0800
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linux.dev; s=key1;
-        t=1657784816;
-        h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-         to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-         in-reply-to:in-reply-to:references:references;
-        bh=1TJviPunlwH7RxQV4jVLO1pPXI9F2og9+lwfZ75k6+g=;
-        b=OKMxJzzUX/eSiaPlxOT6jOv1GE3aUntvTUhYa/zLy2CJbOPuL7nAwGJXJ8p5NWffeqB118
-        YTbQyjLtSsm/NH6anB6VLWIOm/CcVlhhocIHHlNwmTBehCgatSEn1F4yO/M8UNl/aXO16n
-        reyCtQJBf8EZKXDfUHbKAMrUCx3bEwQ=
-X-Report-Abuse: Please report any abuse attempt to abuse@migadu.com and include these headers.
-From:   Tao Zhou <tao.zhou@linux.dev>
-To:     Daniel Bristot de Oliveira <bristot@kernel.org>
-Cc:     Steven Rostedt <rostedt@goodmis.org>,
-        Wim Van Sebroeck <wim@linux-watchdog.org>,
-        Guenter Roeck <linux@roeck-us.net>,
-        Jonathan Corbet <corbet@lwn.net>,
-        Ingo Molnar <mingo@redhat.com>,
-        Thomas Gleixner <tglx@linutronix.de>,
-        Peter Zijlstra <peterz@infradead.org>,
-        Will Deacon <will@kernel.org>,
-        Catalin Marinas <catalin.marinas@arm.com>,
-        Marco Elver <elver@google.com>,
-        Dmitry Vyukov <dvyukov@google.com>,
-        "Paul E. McKenney" <paulmck@kernel.org>,
-        Shuah Khan <skhan@linuxfoundation.org>,
-        Gabriele Paoloni <gpaoloni@redhat.com>,
-        Juri Lelli <juri.lelli@redhat.com>,
-        Clark Williams <williams@redhat.com>,
-        Randy Dunlap <rdunlap@infradead.org>,
-        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
-        linux-trace-devel@vger.kernel.org, Tao Zhou <tao.zhou@linux.dev>
-Subject: Re: [PATCH V5 01/16] rv: Add Runtime Verification (RV) interface
-Message-ID: <Ys/J5fLaojYeiVzL@geo.homenetwork>
-References: <cover.1657745645.git.bristot@kernel.org>
- <442b03c687c298b25c79aa5a16ec7fb2aef0f2c9.1657745645.git.bristot@kernel.org>
+        with ESMTP id S237690AbiGNJLt (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Thu, 14 Jul 2022 05:11:49 -0400
+X-Greylist: delayed 2399 seconds by postgrey-1.37 at lindbergh.monkeyblade.net; Thu, 14 Jul 2022 02:11:48 PDT
+Received: from sinsgout.his.huawei.com (sinsgout.his.huawei.com [119.8.179.247])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 2A2FB22B34;
+        Thu, 14 Jul 2022 02:11:48 -0700 (PDT)
+Received: from sinmsgout03.his.huawei.com (unknown [172.28.115.130])
+        by sinsgout.his.huawei.com (SkyGuard) with ESMTP id 4Lk6CX1llBz3Z9D9;
+        Thu, 14 Jul 2022 15:52:24 +0800 (CST)
+Received: from fraeml706-chm.china.huawei.com (unknown [172.18.156.208])
+        by sinmsgout03.his.huawei.com (SkyGuard) with ESMTP id 4Lk6B94QXHz9xGQ7;
+        Thu, 14 Jul 2022 15:51:13 +0800 (CST)
+Received: from lhreml724-chm.china.huawei.com (10.201.108.75) by
+ fraeml706-chm.china.huawei.com (10.206.15.55) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id
+ 15.1.2375.24; Thu, 14 Jul 2022 09:52:14 +0200
+Received: from [10.126.173.191] (10.126.173.191) by
+ lhreml724-chm.china.huawei.com (10.201.108.75) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2375.24; Thu, 14 Jul 2022 08:52:13 +0100
+Message-ID: <8a9d9c72-65c1-cb7d-80d7-4ac2b65871fe@huawei.com>
+Date:   Thu, 14 Jul 2022 08:52:15 +0100
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <442b03c687c298b25c79aa5a16ec7fb2aef0f2c9.1657745645.git.bristot@kernel.org>
-X-Migadu-Flow: FLOW_OUT
-X-Migadu-Auth-User: linux.dev
-X-Spam-Status: No, score=-2.1 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,SPF_HELO_PASS,SPF_PASS,
-        T_SCC_BODY_TEXT_LINE autolearn=ham autolearn_force=no version=3.4.6
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:91.0) Gecko/20100101
+ Thunderbird/91.6.1
+Subject: Re: [PATCH v5 0/5] DMA mapping changes for SCSI core
+To:     "Martin K. Petersen" <martin.petersen@oracle.com>
+CC:     Christoph Hellwig <hch@lst.de>, <damien.lemoal@opensource.wdc.com>,
+        <joro@8bytes.org>, <will@kernel.org>, <jejb@linux.ibm.com>,
+        <m.szyprowski@samsung.com>, <robin.murphy@arm.com>,
+        <linux-doc@vger.kernel.org>, <linux-kernel@vger.kernel.org>,
+        <linux-ide@vger.kernel.org>, <iommu@lists.linux-foundation.org>,
+        <iommu@lists.linux.dev>, <linux-scsi@vger.kernel.org>,
+        <linuxarm@huawei.com>
+References: <1656590892-42307-1-git-send-email-john.garry@huawei.com>
+ <b5f80062-e8ef-9597-1b0c-393140950dfb@huawei.com>
+ <20220706134447.GA23753@lst.de> <yq1y1x47jgn.fsf@ca-mkp.ca.oracle.com>
+ <5fd4814a-81b1-0e71-58e0-57a747eb684e@huawei.com>
+ <yq135f4xul0.fsf@ca-mkp.ca.oracle.com>
+From:   John Garry <john.garry@huawei.com>
+In-Reply-To: <yq135f4xul0.fsf@ca-mkp.ca.oracle.com>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 8bit
+X-Originating-IP: [10.126.173.191]
+X-ClientProxiedBy: lhreml725-chm.china.huawei.com (10.201.108.76) To
+ lhreml724-chm.china.huawei.com (10.201.108.75)
+X-CFilter-Loop: Reflected
+X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00,NICE_REPLY_A,
+        SPF_HELO_NONE,SPF_PASS,T_SCC_BODY_TEXT_LINE autolearn=ham
+        autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Wed, Jul 13, 2022 at 11:17:17PM +0200,
-Daniel Bristot de Oliveira <bristot@kernel.org> wrote:
+On 14/07/2022 04:10, Martin K. Petersen wrote:
 
-[...]
+Hi Martin,
 
-> +void put_task_monitor_slot(int slot)
-> +{
-> +	lockdep_assert_held(&rv_interface_lock);
-> +
-> +	if (slot < 0 || slot > RV_PER_TASK_MONITORS) {
+>> So I set max hw sectors at this ‘opt’ mapping size to ensure that we
+>> get no mappings which exceed this size. Indeed, I think max sectors is
+>> 128Kb today for my host, which would be same as dma_opt_mapping_size()
+>> value with an IOMMU enabled. And I find that only a small % of request
+>> size may exceed this 128kb size, but it still has a big performance
+>> impact.
+> The purpose of the soft limit is to pick the appropriate I/O size
+> (i.e. for best performance). The purpose of the hard limit is to ensure
+> we don't submit something the hardware can't handle or describe.
+> 
+> IOW, the hard limit is not about performance at all. The hard limit is
+> mainly relevant for things that are way bigger than anything we'd issue
+> as regular filesystem I/O such as multi-megabyte firmware images, etc.
+> 
+> It's perfectly fine for firmware download performance to be
+> "suboptimal". What is typically more important in that scenario is that
+> the firmware image makes it inside a single I/O.
 
-slot is the array index that should be 0 here. The up bound is not bigger
-than 0 because the element of array now is RV_PER_TASK_MONITORS. 
-
-So up bound check is 'slot > RV_PER_TASK_MONITORS-1'.
-
-[...]
-
-> +/*
-> + * interface for enabling/disabling a monitor.
-> + */
-> +static ssize_t monitor_enable_write_data(struct file *filp, const char __user *user_buf,
-> +					 size_t count, loff_t *ppos)
-> +{
-> +	struct rv_monitor_def *mdef = filp->private_data;
-> +	int retval;
-> +	bool val;
-> +
-> +	retval = kstrtobool_from_user(user_buf, count, &val);
-> +	if (retval)
-> +		return retval;
-> +
-> +	retval = count;
-> +
-> +	mutex_lock(&rv_interface_lock);
-> +
-> +	if (val)
-> +		retval = enable_monitor(mdef);
-> +	else
-> +		retval = disable_monitor(mdef);
-> +
-> +	mutex_unlock(&rv_interface_lock);
-> +
-> +	return retval ? retval : count;
-
-Feel that this can be written `return retval ? : count;`
-
-[...]
-
-> +static void *enabled_monitors_start(struct seq_file *m, loff_t *pos)
-> +{
-> +	struct rv_monitor_def *m_def;
-> +	loff_t l;
-> +
-> +	mutex_lock(&rv_interface_lock);
-> +
-> +	if (list_empty(&rv_monitors_list))
-> +		return NULL;
-> +
-> +	m_def = list_entry(&rv_monitors_list, struct rv_monitor_def, list);
-> +
-> +	for (l = 0; l <= *pos; ) {
-> +		m_def = enabled_monitors_next(m, m_def, &l);
-> +		if (!m_def)
-> +			break;
-
-Is this check is inversed. enabled_monitors_start() will stop at first
-enabled monitor, then enabled_monitors_next() do loop to next. Check
-like the above, enabled_monitors_start() will loop to the last monitor.
-But I doubt myself I do not mention/see it. Sorry for these.
-
-the check is:
-
-  if (m_def)
-     break;
-
-[...]
-
-> +static ssize_t
-> +enabled_monitors_write(struct file *filp, const char __user *user_buf,
-> +		      size_t count, loff_t *ppos)
-> +{
-> +	char buff[MAX_RV_MONITOR_NAME_SIZE + 2];
-> +	struct rv_monitor_def *mdef;
-> +	int retval = -EINVAL;
-> +	bool enable = true;
-> +	char *ptr = buff;
-> +	int len;
-> +
-> +	if (count < 1 || count > MAX_RV_MONITOR_NAME_SIZE + 2)
-
-@count would not include '\0'. That the max val of @count is
-MAX_RV_MONITOR_NAME_SIZE+1. So the up bound check of @count is
-`count > MAX_RV_MONITOR_NAME_SIZE + 1`.
+OK, fine. I've improved the next version such that the DMA mapping opt 
+limit only affects the max_sectors default.
 
 Thanks,
-Tao
-> +		return -EINVAL;
-> +
-> +	memset(buff, 0, sizeof(buff));
-> +
-> +	retval = simple_write_to_buffer(buff, sizeof(buff) - 1, ppos, user_buf, count);
-> +	if (!retval)
-> +		return -EFAULT;
-> +
-> +	ptr = strim(buff);
-> +
-> +	if (ptr[0] == '!') {
-> +		enable = false;
-> +		ptr++;
-> +	}
-> +
-> +	len = strlen(ptr);
-> +	if (!len)
-> +		return count;
-> +
-> +	mutex_lock(&rv_interface_lock);
-> +
-> +	retval = -EINVAL;
-> +
-> +	list_for_each_entry(mdef, &rv_monitors_list, list) {
-> +		if (strcmp(ptr, mdef->monitor->name) != 0)
-> +			continue;
-> +
-> +		/*
-> +		 * Monitor found!
-> +		 */
-> +		if (enable)
-> +			retval = enable_monitor(mdef);
-> +		else
-> +			retval = disable_monitor(mdef);
-> +
-> +		if (!retval)
-> +			retval = count;
-> +
-> +		break;
-> +	}
-> +
-> +	mutex_unlock(&rv_interface_lock);
-> +	return retval;
-> +}
+John
