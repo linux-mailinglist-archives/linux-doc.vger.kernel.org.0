@@ -2,132 +2,97 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 8123A5746BC
-	for <lists+linux-doc@lfdr.de>; Thu, 14 Jul 2022 10:29:34 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 04FFB574717
+	for <lists+linux-doc@lfdr.de>; Thu, 14 Jul 2022 10:37:47 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S234909AbiGNI3c (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 14 Jul 2022 04:29:32 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:54140 "EHLO
+        id S237030AbiGNIhZ (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 14 Jul 2022 04:37:25 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:60818 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S234904AbiGNI3b (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Thu, 14 Jul 2022 04:29:31 -0400
-Received: from mx0a-001b2d01.pphosted.com (mx0a-001b2d01.pphosted.com [148.163.156.1])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 46FC21276C;
-        Thu, 14 Jul 2022 01:29:31 -0700 (PDT)
-Received: from pps.filterd (m0098410.ppops.net [127.0.0.1])
-        by mx0a-001b2d01.pphosted.com (8.17.1.5/8.17.1.5) with ESMTP id 26E7oGNj027583;
-        Thu, 14 Jul 2022 08:29:30 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ibm.com; h=message-id : date :
- mime-version : subject : to : cc : references : from : in-reply-to :
- content-type : content-transfer-encoding; s=pp1;
- bh=3jQ61/O3RHNvo+Uxn3UXtV6mB8X3oEHqZVGcKkyjFmM=;
- b=DkGoOQEd4Pjna7gj+9ooUVf+ax7155DiMy4BXWLq00tzPAhqWCgm3+9w++fENqs/Ye/q
- sAyV7hrMQ6V0xfRyRf7NRoaVLx0T1ErReoSw0OdQRb5qQEFqhz/cpk5B2pb8LmhzjRyg
- Qo9QjW9G67OlOXxIO6zpmPnwcopfU+bn0Zy5CwF/MXx7WNjI2GpC9xutxG9BpPg3jaEI
- Od3ZMjtGF/4CjVwERz6lZ9b+zehSRZ3k/qjf+f4fEoVmaS+/W0ZSEt8YF8nkAwne8bCH
- xwqAhDvSHzeJ7vPL1Tj0itVqCL/NDycRWIUO3tQeJ3VhqcYhQY7G6eFPTIISrkVdhJ8v tQ== 
-Received: from pps.reinject (localhost [127.0.0.1])
-        by mx0a-001b2d01.pphosted.com (PPS) with ESMTPS id 3haf3m13ja-1
-        (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
-        Thu, 14 Jul 2022 08:29:30 +0000
-Received: from m0098410.ppops.net (m0098410.ppops.net [127.0.0.1])
-        by pps.reinject (8.17.1.5/8.17.1.5) with ESMTP id 26E7q4XI031870;
-        Thu, 14 Jul 2022 08:29:30 GMT
-Received: from ppma04dal.us.ibm.com (7a.29.35a9.ip4.static.sl-reverse.com [169.53.41.122])
-        by mx0a-001b2d01.pphosted.com (PPS) with ESMTPS id 3haf3m13j4-1
-        (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
-        Thu, 14 Jul 2022 08:29:29 +0000
-Received: from pps.filterd (ppma04dal.us.ibm.com [127.0.0.1])
-        by ppma04dal.us.ibm.com (8.16.1.2/8.16.1.2) with SMTP id 26E8KBRN026528;
-        Thu, 14 Jul 2022 08:29:29 GMT
-Received: from b03cxnp08028.gho.boulder.ibm.com (b03cxnp08028.gho.boulder.ibm.com [9.17.130.20])
-        by ppma04dal.us.ibm.com with ESMTP id 3h9e04vtvh-1
-        (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
-        Thu, 14 Jul 2022 08:29:29 +0000
-Received: from b03ledav006.gho.boulder.ibm.com (b03ledav006.gho.boulder.ibm.com [9.17.130.237])
-        by b03cxnp08028.gho.boulder.ibm.com (8.14.9/8.14.9/NCO v10.0) with ESMTP id 26E8TRwp29032822
-        (version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
-        Thu, 14 Jul 2022 08:29:28 GMT
-Received: from b03ledav006.gho.boulder.ibm.com (unknown [127.0.0.1])
-        by IMSVA (Postfix) with ESMTP id D6D76C6057;
-        Thu, 14 Jul 2022 08:29:27 +0000 (GMT)
-Received: from b03ledav006.gho.boulder.ibm.com (unknown [127.0.0.1])
-        by IMSVA (Postfix) with ESMTP id 466AAC6063;
-        Thu, 14 Jul 2022 08:29:26 +0000 (GMT)
-Received: from [9.65.197.138] (unknown [9.65.197.138])
-        by b03ledav006.gho.boulder.ibm.com (Postfix) with ESMTP;
-        Thu, 14 Jul 2022 08:29:25 +0000 (GMT)
-Message-ID: <d3984f3d-4e28-61fc-879c-ca38b7daa779@linux.ibm.com>
-Date:   Thu, 14 Jul 2022 11:29:09 +0300
+        with ESMTP id S237121AbiGNIhE (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Thu, 14 Jul 2022 04:37:04 -0400
+Received: from mail-ed1-x52a.google.com (mail-ed1-x52a.google.com [IPv6:2a00:1450:4864:20::52a])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 348F13ED74
+        for <linux-doc@vger.kernel.org>; Thu, 14 Jul 2022 01:37:02 -0700 (PDT)
+Received: by mail-ed1-x52a.google.com with SMTP id y8so1482421eda.3
+        for <linux-doc@vger.kernel.org>; Thu, 14 Jul 2022 01:37:01 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112;
+        h=mime-version:reply-to:from:date:message-id:subject:to;
+        bh=H3bGT1ZyGPu3PRQJlJHyQI9TvTjBPuNSyHjFOzNfiP0=;
+        b=XrPG1uZaQRn1UCA0WJJ2pmJQ1csZW3HabgB7E+QXuACfRhko5FjAocWwoGAFMQM+4K
+         maoBv4gTZQXqu9EJzYUg27HWYGn7H4ps8X1YfFKAamIhhLSUESO1F6QG9mJgGHe0KMpr
+         yS6EmWRT7znGhWAi5CHDysnG1OxosqIxRYFf098GB0Xs4T6zMcBwQ+Ijt6ciUPeVVUwm
+         NwEO+Wz1v4Oa+mBtHNRupxuLErGpDho6oqFPRIm2MU+57eHEreDtv9TWX6BBq17KbV3w
+         UCTpqQeOnk576xhvUmMdcgTy5b4PgstjqS11/4Py/0diTc9tD3MngzVuJ3uMtq9Qr/CL
+         qkvw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:mime-version:reply-to:from:date:message-id
+         :subject:to;
+        bh=H3bGT1ZyGPu3PRQJlJHyQI9TvTjBPuNSyHjFOzNfiP0=;
+        b=oK8A6XbLge5h5QrSXNwSXyGb4Odj5tjZkqhvDp/8BXDFdNsKo5guRsckC1i25YbmAZ
+         tKLZZ+JSdsQWYh3Q1vkX8T0Rj4PycOX0Q84pV/6RqkrM9hDgCYItrFChDK6axp3RVEii
+         lb8toYO3f9CsQGrccB7eO71oQ9maC28ei8Va32mDkvumAIqlylvQlW5/pIqxPhui3OQz
+         WO1mMRFVs2VlMsX8kr46BIBrxeDUV/or1mJXf5UWpupYGxYKXxxneZS5vk6ooFTi8SCy
+         Chl+V8ZQByPWcYPborXQiAitkE0aro4uE9tw9smi7SGpWf9LmYLDGrg9U0ZLl5RFwDIx
+         ubHg==
+X-Gm-Message-State: AJIora8I6vhhqzL+CHgX4iER+bdPFViCTa5sLjHe78ZBX9xpLqlogpJF
+        wReZy04I6lORudfz8VEy3mYPHUffTMWx6SfXYlv8wJZOp95KAg==
+X-Google-Smtp-Source: AGRyM1u3j4Kh8ROf600mZ9n+2mzPHZx1NFVtrSntlSiwIK2NP6HVto6IIpM3hlWxyt39lgmrdSwWdCXGiGrSzCPb6JE=
+X-Received: by 2002:a05:6512:3d27:b0:489:e623:f244 with SMTP id
+ d39-20020a0565123d2700b00489e623f244mr4930609lfv.236.1657787809582; Thu, 14
+ Jul 2022 01:36:49 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:91.0) Gecko/20100101
- Thunderbird/91.11.0
-Subject: Re: [PATCH] Documentation: siphash: Fix typo in the name of
- offsetofend macro
-Content-Language: en-US
-To:     Jonathan Corbet <corbet@lwn.net>,
-        "Jason A. Donenfeld" <Jason@zx2c4.com>
-Cc:     linux-doc@vger.kernel.org, Eric Biggers <ebiggers@google.com>,
-        linux-kernel@vger.kernel.org
-References: <20220712104455.1408150-1-dovmurik@linux.ibm.com>
- <87fsj6bhwb.fsf@meer.lwn.net> <Ys13bqGuPYBUGg3O@zx2c4.com>
- <87fsj44w9h.fsf@meer.lwn.net>
-From:   Dov Murik <dovmurik@linux.ibm.com>
-In-Reply-To: <87fsj44w9h.fsf@meer.lwn.net>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-TM-AS-GCONF: 00
-X-Proofpoint-ORIG-GUID: Hkqn6I2Qm3Ate44xNBFbuyoEWjdELzow
-X-Proofpoint-GUID: 7_QH3cuDFgZZUbM0gwZm0ZMGbaVWd2TG
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.205,Aquarius:18.0.883,Hydra:6.0.517,FMLib:17.11.122.1
- definitions=2022-07-14_06,2022-07-13_03,2022-06-22_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 spamscore=0 phishscore=0
- bulkscore=0 clxscore=1011 lowpriorityscore=0 malwarescore=0 suspectscore=0
- mlxscore=0 mlxlogscore=728 priorityscore=1501 impostorscore=0 adultscore=0
- classifier=spam adjust=0 reason=mlx scancount=1 engine=8.12.0-2206140000
- definitions=main-2207140033
-X-Spam-Status: No, score=-2.0 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_EF,NICE_REPLY_A,RCVD_IN_MSPIKE_H2,SPF_HELO_NONE,
-        SPF_PASS,T_SCC_BODY_TEXT_LINE autolearn=ham autolearn_force=no
-        version=3.4.6
+Received: by 2002:a2e:9041:0:0:0:0:0 with HTTP; Thu, 14 Jul 2022 01:36:48
+ -0700 (PDT)
+Reply-To: abdwabbomaddahm@gmail.com
+From:   Abdwabbo Maddah <abdwabbomaddah746@gmail.com>
+Date:   Thu, 14 Jul 2022 09:36:48 +0100
+Message-ID: <CAFC-3ifKFkAVLmD=8z4VAKFLX0pV+_h5OJ=Ks62m+0uk+DimKQ@mail.gmail.com>
+Subject: Get back to me... URGENT
+To:     undisclosed-recipients:;
+Content-Type: text/plain; charset="UTF-8"
+X-Spam-Status: Yes, score=5.0 required=5.0 tests=BAYES_50,DKIM_SIGNED,
+        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_ENVFROM_END_DIGIT,
+        FREEMAIL_FROM,FREEMAIL_REPLYTO,RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,
+        SPF_PASS,T_SCC_BODY_TEXT_LINE,UNDISC_FREEM autolearn=no
+        autolearn_force=no version=3.4.6
+X-Spam-Report: * -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at
+        *      https://www.dnswl.org/, no trust
+        *      [2a00:1450:4864:20:0:0:0:52a listed in]
+        [list.dnswl.org]
+        *  0.8 BAYES_50 BODY: Bayes spam probability is 40 to 60%
+        *      [score: 0.4900]
+        *  0.0 FREEMAIL_FROM Sender email is commonly abused enduser mail
+        *      provider
+        *      [abdwabbomaddah746[at]gmail.com]
+        *  0.2 FREEMAIL_ENVFROM_END_DIGIT Envelope-from freemail username ends
+        *       in digit
+        *      [abdwabbomaddah746[at]gmail.com]
+        * -0.0 SPF_PASS SPF: sender matches SPF record
+        *  0.0 SPF_HELO_NONE SPF: HELO does not publish an SPF Record
+        * -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
+        *      author's domain
+        *  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
+        *       valid
+        * -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+        * -0.1 DKIM_VALID_EF Message has a valid DKIM or DK signature from
+        *      envelope-from domain
+        * -0.0 T_SCC_BODY_TEXT_LINE No description available.
+        *  3.2 UNDISC_FREEM Undisclosed recipients + freemail reply-to
+        *  1.0 FREEMAIL_REPLYTO Reply-To/From or Reply-To/body contain
+        *      different freemails
+X-Spam-Level: *****
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-
-
-On 13/07/2022 23:01, Jonathan Corbet wrote:
-> "Jason A. Donenfeld" <Jason@zx2c4.com> writes:
-> 
->> Hi Jon,
->>
->> On Tue, Jul 12, 2022 at 07:05:40AM -0600, Jonathan Corbet wrote:
->>> Dov Murik <dovmurik@linux.ibm.com> writes:
->>>
->>>> The siphash documentation misspelled "offsetendof" instead of
->>>> "offsetofend".
->>>>
->>>> Fixes: 2c956a60778cbb ("siphash: add cryptographically secure PRF")
->>>
->>> When you send a patch with a Fixes tag it's always a good idea to CC the
->>> author of the patch being fixed.  Adding Jason...let me know if you'd
->>> like me to grab this.
->>
->> Thanks for CC'ing me. Sure, feel free to take this:
->>
->>     Acked-by: Jason A. Donenfeld <Jason@zx2c4.com>
-> 
-> Applied, thanks.
-
-Thank you Jon.
-
-I'll try to remember your tip about CC the author of the Fixes tag.
-
--Dov
-
-
-> 
-> jon
+-- 
+Dear,
+I had sent you a mail but i don't think you received it that's why am
+writing you again.It is important you get back to me as soon as you
+can.
+Abd-Wabbo Maddah
