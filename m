@@ -2,77 +2,65 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 996BA57577A
-	for <lists+linux-doc@lfdr.de>; Fri, 15 Jul 2022 00:15:36 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id B7A9357579C
+	for <lists+linux-doc@lfdr.de>; Fri, 15 Jul 2022 00:26:43 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S229448AbiGNWPY (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 14 Jul 2022 18:15:24 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:35722 "EHLO
+        id S239841AbiGNW0n (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 14 Jul 2022 18:26:43 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:43330 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S241042AbiGNWPX (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Thu, 14 Jul 2022 18:15:23 -0400
-Received: from mail-oa1-x34.google.com (mail-oa1-x34.google.com [IPv6:2001:4860:4864:20::34])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id E2E524B0C1;
-        Thu, 14 Jul 2022 15:15:22 -0700 (PDT)
-Received: by mail-oa1-x34.google.com with SMTP id 586e51a60fabf-10c8e8d973eso4197684fac.5;
-        Thu, 14 Jul 2022 15:15:22 -0700 (PDT)
+        with ESMTP id S238023AbiGNW0m (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Thu, 14 Jul 2022 18:26:42 -0400
+Received: from mail-wr1-x42a.google.com (mail-wr1-x42a.google.com [IPv6:2a00:1450:4864:20::42a])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 1DECD71BD3;
+        Thu, 14 Jul 2022 15:26:41 -0700 (PDT)
+Received: by mail-wr1-x42a.google.com with SMTP id v16so4360969wrd.13;
+        Thu, 14 Jul 2022 15:26:41 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
-        h=date:from:to:subject:message-id:references:mime-version
-         :content-disposition:in-reply-to;
-        bh=ng3/X4PelThqjSHpCTGPAN/BVGWWlZ6hoIZsJJT4v7Y=;
-        b=F58ZWzw58v3u/Ep11tkIsNCLmim7u4IKUrhmGA4BSfnvT85un5c2mitiW4qVkQ5mXb
-         wwOafM1aLO3EfDaRiLDDeUUEoHdetODhpnK9ui4uHAvjC/QxEH2WkMSdFW2NykuDtP7i
-         YAOhLfXAsAacUoVrhR/XlZU//q/V4qja3+w+1Y8eLQYvJXG+z7VKwV3j8KKgevogjGwG
-         pyIzA2YqaL8jVUPQRLGfUqaDQLzW98UGjAzY6iqFjJb4tCoXTRITsEBJkM+o+cPIaT3m
-         hQdn11+HugzDnU3pmHrQQBMoeYkQjlTV/EA522n6EjPlIKx72kcDOuPWfYvQKkz75LP1
-         9QPA==
+        h=from:to:cc:subject:in-reply-to:date:message-id:references
+         :user-agent:mime-version;
+        bh=f/f3T6jUqJ0Mvhpwmg1y16GyMNRqXtSKIrAiD1EFjtg=;
+        b=qhieuNl3hKqRlVd70V/SrlenwctmlPx0DR8cRjSktE2mig3MvdXgUtJPOrH+PsbfnJ
+         LyfmWgCakixjRzR4kKuQq3pe1h2b/Ld5htqsweRDiXBBx+8hYbIYGYyFyOmN+rvBuB7S
+         qSATHlPJAn/e8ECe9uG11R/a5Mo16xIRbrQ/7YX+dGCsYyIt+RYHJR2Ft/aBtZ3TUyh/
+         Ybd78QYtOUK7NRBBLtHJ6/QrdURnsih+7HqmYqwgcRs0cfoGpWCatkxLaAMuK8D0nywQ
+         1KvdcC4UL93KbDdoSakpzzplPlTV+dJ7gEG6luK2yqW/XMYKU7RwA66N6xFGRnnrbU3p
+         Hwjw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=x-gm-message-state:date:from:to:subject:message-id:references
-         :mime-version:content-disposition:in-reply-to;
-        bh=ng3/X4PelThqjSHpCTGPAN/BVGWWlZ6hoIZsJJT4v7Y=;
-        b=ZkNUUarAlMvppbPzILrZkD5+Xtf2dZUa5OelN44j1tSitOTl5FfktPMKrL1bS8sNfH
-         ViA0QXLoet+h2LlHSa5Tp9geMmqXvYvAK0ntM5BevjtDfosfuZU6IfzZGKDnF+jBCnrq
-         dBn6JFmhf/R6qugJdVtqORu81kD5S9ZxN+bVWeAXrboa7TIyfoNV0ZNQ7pFLS3oov/q2
-         9rVJAfbJKx9JHtL47uA/xepZZVhUFFOphovWBkc4BDVv9qS7mTXKS/C9567s2ZTwrOtg
-         fB6ovd6Qo6H5kl+UGIWfvXbwEjgUikhHFYZQ6lluoRQTKl3AWxl1DUNa+Zi4xvavD/x+
-         qZSg==
-X-Gm-Message-State: AJIora/21HmqtiFGaOa2u2MSyYzLHn4pE3Cbjc40WM6TXaQWWfsfNGup
-        0DRzCURSejFcwyv0xZPlRConCtDpyVHo6w==
-X-Google-Smtp-Source: AGRyM1vVXmOV/Fn33yqyYL2kv3owKqaXip641o/zmVhcrSArz5/BWplK7y5pW+xjNvqdrJrqqnZyOg==
-X-Received: by 2002:a05:6870:c353:b0:101:e7e4:9388 with SMTP id e19-20020a056870c35300b00101e7e49388mr5579381oak.45.1657836922071;
-        Thu, 14 Jul 2022 15:15:22 -0700 (PDT)
-Received: from localhost ([12.97.180.36])
-        by smtp.gmail.com with ESMTPSA id w21-20020a9d5a95000000b0061c68a35fdfsm1192880oth.9.2022.07.14.15.15.21
+        h=x-gm-message-state:from:to:cc:subject:in-reply-to:date:message-id
+         :references:user-agent:mime-version;
+        bh=f/f3T6jUqJ0Mvhpwmg1y16GyMNRqXtSKIrAiD1EFjtg=;
+        b=hT0MB6KD5/NhsDaDUDsgEB1a6ae2RoZIVWbGLhn9iZbTQc5m/uxYsdnEdIOEZNCd9v
+         //LW5TcE1ACoPeJqW8FqpDYy0Xxm4RZMMGMAY5yy5JDbMoIwhNZVPxnhTSGJwA94wH7W
+         FENEJzDmSDmmDino1VLO28NuLmGGy6OD+JoHya+5b/2R3VN9Dw15sZQUoKqRB7RI32R1
+         fhMsAEiC9ec9BRT1/awAs1h5HMj/a5f6wAPWIhuPdNfNMSvgUqeVEZ+VXMcjhT1YTMkm
+         kF1icUS4TlyW1zarkrNYO9iVlzRq81gfs2SmF29N22+xXM9zeuTJnBi64KR5lBcj/3tX
+         w4vA==
+X-Gm-Message-State: AJIora/YUpTpHg9Olc1kWraG3Fq2PVXWRGpZWBwk+jlA1w2WHhihT9pD
+        rjrw1P/xgDq7gZrzKQED06U=
+X-Google-Smtp-Source: AGRyM1vr58d/HoZjvLczDkWjVBVTrPC+nAbTIjxSRYaGzphc8WuitomVAG98+H8KhPuggMs+IBQVEQ==
+X-Received: by 2002:a5d:6504:0:b0:21d:7376:6411 with SMTP id x4-20020a5d6504000000b0021d73766411mr9949513wru.512.1657837599666;
+        Thu, 14 Jul 2022 15:26:39 -0700 (PDT)
+Received: from imac ([2a02:8010:60a0:0:7cd7:ddd5:b3c7:3e26])
+        by smtp.gmail.com with ESMTPSA id m6-20020a7bcb86000000b003a2d6f26babsm3177376wmi.3.2022.07.14.15.26.38
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 14 Jul 2022 15:15:21 -0700 (PDT)
-Date:   Thu, 14 Jul 2022 15:15:20 -0700
-From:   Yury Norov <yury.norov@gmail.com>
-To:     linux-kernel@vger.kernel.org,
-        Andrew Morton <akpm@linux-foundation.org>,
-        Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
-        David Howells <dhowells@redhat.com>,
-        Ingo Molnar <mingo@kernel.org>,
-        Geert Uytterhoeven <geert@linux-m68k.org>,
-        Jonathan Corbet <corbet@lwn.net>,
-        "Kirill A . Shutemov" <kirill.shutemov@linux.intel.com>,
-        Matthew Wilcox <willy@infradead.org>,
-        NeilBrown <neilb@suse.de>,
-        Rasmus Villemoes <linux@rasmusvillemoes.dk>,
-        Russell King <linux@armlinux.org.uk>,
-        Vlastimil Babka <vbabka@suse.cz>,
-        William Kucharski <william.kucharski@oracle.com>,
-        linux-doc@vger.kernel.org, linux-arm-kernel@lists.infradead.org,
-        linux-mm@kvack.org
-Subject: Re: [PATCH v2 00/10] lib: cleanup bitmap-related headers
-Message-ID: <YtCVeOGLiQ4gNPSf@yury-laptop>
-References: <20220706174253.4175492-1-yury.norov@gmail.com>
- <CAAH8bW-OcdzetthsBanbkObVQxF1J6CiyBBnab=VXd2wcj517Q@mail.gmail.com>
+        Thu, 14 Jul 2022 15:26:39 -0700 (PDT)
+From:   Donald Hunter <donald.hunter@gmail.com>
+To:     sdf@google.com
+Cc:     bpf@vger.kernel.org, linux-doc@vger.kernel.org,
+        Jonathan Corbet <corbet@lwn.net>
+Subject: Re: [PATCH] bpf, docs: document BPF_MAP_TYPE_HASH and variants
+In-Reply-To: <Ys9VhwanEB/T8/Ue@google.com> (sdf@google.com's message of "Wed,
+        13 Jul 2022 16:30:15 -0700")
+Date:   Thu, 14 Jul 2022 23:20:23 +0100
+Message-ID: <m2y1wv2v6g.fsf@gmail.com>
+References: <20220713211612.84782-1-donald.hunter@gmail.com>
+        <Ys9VhwanEB/T8/Ue@google.com>
+User-Agent: Gnus/5.13 (Gnus v5.13) Emacs/28.1 (darwin)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <CAAH8bW-OcdzetthsBanbkObVQxF1J6CiyBBnab=VXd2wcj517Q@mail.gmail.com>
+Content-Type: text/plain
 X-Spam-Status: No, score=-2.1 required=5.0 tests=BAYES_00,DKIM_SIGNED,
         DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_FROM,
         RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,SPF_PASS,T_SCC_BODY_TEXT_LINE
@@ -83,30 +71,118 @@ Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Tue, Jul 12, 2022 at 09:28:21AM -0700, Yury Norov wrote:
-> On Wed, Jul 6, 2022 at 10:42 AM Yury Norov <yury.norov@gmail.com> wrote:
-> >
-> > This series unifies declarations of bitmap-related functions and aligns
-> > return types with values that actually returned. Also, it moves one-liner
-> > wrappers around cpumask functions into headers, so that compiler has a
-> > chance to optimize better.
-> >
-> > With this series, GCC 11.2 for ARM64 with kernel v5.19-rc4:
-> > add/remove: 15/7 grow/shrink: 461/164 up/down: 14844/-4580 (10264)
-> >
-> > This +10K didn't surprise me because  modern compilers are more aggressive
-> > in inlining, loop unrolling, and other techniques that increase size of
-> > the image.
-> >
-> > v1: https://lore.kernel.org/linux-mm/YsAzU3g2QpgmIGre@smile.fi.intel.com/T/
-> > v2: - Align whitespaces in headers;
-> >     - Make bitmap_weight() unsigned long consistently;
-> >     - Pick 2 patches from Ingo's sched/headers series [1] that split
-> >       linux/gfp.h, and drop my similar patch for it.
-> 
-> Ping?
+sdf@google.com writes:
+>> +``BPF_MAP_TYPE_HASH`` and ``BPF_MAP_TYPE_PERCPU_HASH`` provide general
+>> +purpose hash map storage. Both the key and the value can be structs,
+>> +allowing for composite keys and values. The maximum number of entries is
+>> +defined in max_entries and is limited to 2^32. The kernel is responsible
+>
+> Do we really need to mention 2^32 limit here? It really depends on
+> the key/value sizes, right?
+>
+> Instead, might be worth talking about how/when this memory is allocated and
+> mention BPF_F_NO_PREALLOC?
 
-OK, I realize that it's not the very entertaining thing to review a
-headers cleanup.
+Good suggestion. I'll incorporate this into v2.
 
-Adding this into -next because there's no negative feedback (he-he).
+>> +.. c:function::
+>> +   long bpf_map_update_elem(struct bpf_map *map, const void *key, const  void *value, u60
+>> flags)
+>
+> s/u60/u64/
+
+Good catch, thanks.
+
+>> +Kernel
+>> +------
+>> +
+>> +.. code-block:: c
+>> +
+>> +    #include <linux/bpf.h>
+>> +    #include <bpf/bpf_helpers.h>
+>> +
+>> +    struct key {
+>> +        __u32 srcip;
+>> +    };
+>> +
+>> +    struct value {
+>> +        __u64 packets;
+>> +        __u64 bytes;
+>> +    };
+>> +
+>> +    struct {
+>> +            __uint(type, BPF_MAP_TYPE_LRU_HASH);
+>> +            __uint(max_entries, 32);
+>> +            __type(key, struct key);
+>> +            __type(value, struct value);
+>> +    } packet_stats SEC(".maps");
+>> +
+>> +    static inline void count_by_srcip(__u32 srcip, int bytes)
+>> +    {
+>> +            struct key key = {
+>> +                    .srcip = srcip
+>> +            };
+>> +            struct value *value = bpf_map_lookup_elem(&packet_stats,  &key);
+>> +            if (value) {
+>> +                    __sync_fetch_and_add(&value->packets, 1);
+>> +                    __sync_fetch_and_add(&value->bytes, bytes);
+>> +            } else {
+>> +                    struct value newval = { 1, bytes };
+>> +                    bpf_map_update_elem(&packet_stats, &key, &newval,  BPF_NOEXIST);
+>> +            }
+>> +    }
+>> +
+>> +Userspace
+>> +---------
+>> +
+>> +.. code-block:: c
+>> +
+>> +    #include <bpf/libbpf.h>
+>> +    #include <bpf/bpf.h>
+>> +
+>> +    static void print_values(int map_fd)
+>> +    {
+>> +            struct key *cur_key = NULL;
+>> +            struct key next_key;
+>> +            int next;
+>> +            do {
+>> +                    next = bpf_map_get_next_key(stats_fd, cur_key,  &next_key);
+>> +                    if (next == -ENOENT)
+>> +                            break;
+>> +                    if (next < 0) {
+>> +                            fprintf(stderr, "bpf_map_get_next_key %d  returned %s\n",
+>> stats_fd, strerror(-next));
+>> +                            break;
+>> +                    }
+>> +
+>> +                    struct in_addr src_addr = {
+>> +                            .s_addr = next_key.srcip
+>> +                    };
+>> +                    char *src_ip = inet_ntoa(src_addr);
+>> +
+>> +                    struct value value;
+>> +                    int ret = bpf_map_lookup_elem(stats_fd, &next_key,  &value);
+>> +                    if (ret < 0) {
+>> +                            fprintf(stderr, "Failed to lookup elem with  key %s: %s\n",
+>> src_ip, strerror(-ret));
+>> +                            break;
+>> +                    }
+>> +                    printf("%s: %lld packets, %lld bytes\n", src_ip,  value.packets,
+>> value.bytes);
+>> +                    cur_key = &next_key;
+>> +            } while (next == 0);
+>> +    }
+>
+> Instead of adding c code, maybe add pointers to specific file within
+> tools/testing/selftests/bpf/progs ? That's what we've done for
+> prog_cgroup_sockopt; the actual tests are a bit more maintained than
+> the doc :-)
+
+I tried to cut the examples to the minimum that was still complete
+enough to show use in context. Happy to try cutting the examples down to
+a sequence of shorter snippets and and links to samples/bpf and
+tools/testing/selftests/bpf/progs. I'll need to reference samples/bpf
+because there are no bpf_map_get_next_key examples in
+tools/testing/selftests/bpf/progs.
+
+Donald.
