@@ -2,256 +2,442 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 88319577AE0
-	for <lists+linux-doc@lfdr.de>; Mon, 18 Jul 2022 08:22:09 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 372EE577B3F
+	for <lists+linux-doc@lfdr.de>; Mon, 18 Jul 2022 08:38:44 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S232882AbiGRGV3 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 18 Jul 2022 02:21:29 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:42060 "EHLO
+        id S233550AbiGRGin (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 18 Jul 2022 02:38:43 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:53998 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S233276AbiGRGVO (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Mon, 18 Jul 2022 02:21:14 -0400
-Received: from mail-pj1-x1035.google.com (mail-pj1-x1035.google.com [IPv6:2607:f8b0:4864:20::1035])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 0C9C413F07
-        for <linux-doc@vger.kernel.org>; Sun, 17 Jul 2022 23:21:14 -0700 (PDT)
-Received: by mail-pj1-x1035.google.com with SMTP id fz10so10827910pjb.2
-        for <linux-doc@vger.kernel.org>; Sun, 17 Jul 2022 23:21:14 -0700 (PDT)
+        with ESMTP id S233527AbiGRGim (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Mon, 18 Jul 2022 02:38:42 -0400
+Received: from mail-io1-xd2b.google.com (mail-io1-xd2b.google.com [IPv6:2607:f8b0:4864:20::d2b])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 51AB5165A0
+        for <linux-doc@vger.kernel.org>; Sun, 17 Jul 2022 23:38:41 -0700 (PDT)
+Received: by mail-io1-xd2b.google.com with SMTP id x64so186127iof.1
+        for <linux-doc@vger.kernel.org>; Sun, 17 Jul 2022 23:38:41 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=broadcom.com; s=google;
-        h=from:to:cc:subject:date:message-id:in-reply-to:references;
-        bh=IOWsuRJwk4U659/cUTlr1FWLrpT+1Vq5zPUxw4nt2ys=;
-        b=NcwCCiGU+LOFORVW4WN/bbwG3PIDhn+S5UIpZqHpD5peFQKXDFNmbVNriUVXuIJ4F7
-         5448YwNbjn/QHMm/MezslK4VBXVyERQGb7wvFCUdrOmLeiaQ+WgTcqfMvKw083fJG5eM
-         Nb+S4a7Sypr77SbVHAElp82WP4dOc/orYhhz4=
+        d=gmail.com; s=20210112;
+        h=from:to:cc:subject:date:message-id:in-reply-to:references
+         :mime-version:content-transfer-encoding;
+        bh=7rhud6KiWPK9Rg3r2XKY9MM0hek8TuHbkddrs1VaWHY=;
+        b=E1UWZHQhYpnF05lJPCZPs518kYSieCwOrMeOeNFK2zz8yAiEYTE5xXETteyJBMkfcA
+         j//+kGxyjZl0ZIbXxilfZVT7exAQGU01Q3wH0j+Mmkx1QQto1BScd9DR3luyCj/s87BR
+         aR9y1EIav/Yig7Ezw2qPrE+vgBDcUV8mcs7mqAT+eK4aIj7jAjwCslcUkG2/dfkbU3dm
+         zSqS0oh8ApHYv/f4trBfof+StDEDBQaExYyvFsL3BbZTVd2nZ7Symnd5IHQQ/YWpISig
+         3jfulJv9hDHScIH1wbCqJa9pAsIz0G7T78YOhaQoj6srnaf+/S7djta08pPbn2h/0xiK
+         VNwg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-         :references;
-        bh=IOWsuRJwk4U659/cUTlr1FWLrpT+1Vq5zPUxw4nt2ys=;
-        b=wmIDImXknLvm1+7SnLbuFo8mkpZbO69bFrggNHmM7nxUjTInxsy+cvE4TfftO0sqxB
-         2JGf4k/x45UI8ahkvt3szDZho30LBG3QyBUmkf5KMs7nEgNZ3LqrxJOPxCRTix3d8wlc
-         p7AMahrAtpcZJGGFYy+scvkVGPyQdUZTz8my2ovhLMRdHoXE0WbOd8M+f5+cmZGEPaGn
-         WvGYAPS1u/AWgqum98Jvuv/H+lq+dXpWt1JRRSTb6WWxPSRKyGgA1OCW3BXjBzJAzc+t
-         kQEj3o3NVICX+nxiAFzlCpvP4tvofDJ1IgPKFUrZG0ZKO3JlkhYNW/qylAWVzS58Jois
-         wWRw==
-X-Gm-Message-State: AJIora+qep6+EKjahv821HM2kxhXkqiVNZBphHMDt9SXejU2UjAP/Jde
-        CY7yi69Gdx4l8mgOonZXEix45w==
-X-Google-Smtp-Source: AGRyM1tFH8gRwx2TENSO+/lHYipZeB/ObN8QCw5ZygwkTjP8pO52wmkBDoJVMpfOC6oJS/hXw4nrgw==
-X-Received: by 2002:a17:903:2483:b0:16c:dfcf:38e8 with SMTP id p3-20020a170903248300b0016cdfcf38e8mr9767888plw.43.1658125273214;
-        Sun, 17 Jul 2022 23:21:13 -0700 (PDT)
-Received: from rahul_yocto_ubuntu18.ibn.broadcom.net ([192.19.234.250])
-        by smtp.gmail.com with ESMTPSA id h22-20020a170902f7d600b0016c4fe627eesm8360164plw.241.2022.07.17.23.21.08
+         :references:mime-version:content-transfer-encoding;
+        bh=7rhud6KiWPK9Rg3r2XKY9MM0hek8TuHbkddrs1VaWHY=;
+        b=TZ8ve2KUTr0Ps5gVxkpWgq0MD6gtLwmr421F106VVPnLd4hLP7PkSeo3hsF7bNwp+O
+         bBfXSS2ET/nfs9zpsz9jhDvF/+CM6AfE1GfL8c8glOIAAB2s3vpo6RumqlhcbDy+OsCn
+         L9+QJp+nlEDMdbI3p3u8sjzyIAmdceOKDZ+2mXSd54112CF6nGYG23DrMZry3HLwPdXU
+         cQ96VxftWZ27QVSds34WGOfpA3uI9Cl/NM5vy8Zq29bSnY23colzSnqguTlgJeyHXfLh
+         nu2BL97VBNfADzZ3ZNvDAZIKdFae+BhpEeqD8AP5c+LRB8o9qP0wc2t2yQsTg5TE/njD
+         habw==
+X-Gm-Message-State: AJIora+gBhTyLN21ywhgTeuQOt+3KaQklYqdtQFzfCgI3hzz6HbZVSt6
+        /7hYgD9LpYvUvGeGQf8cgiftcL/RBVU=
+X-Google-Smtp-Source: AGRyM1u3gcsyJSmQf3gZqr/jiybtthilOebJxN/AKCid2Bz8ZRRmH2BuQZrmfH+7JtAkM4mb9lgPQQ==
+X-Received: by 2002:a05:6638:150b:b0:341:6ac2:acc4 with SMTP id b11-20020a056638150b00b003416ac2acc4mr2263307jat.111.1658126320575;
+        Sun, 17 Jul 2022 23:38:40 -0700 (PDT)
+Received: from frodo.. (c-73-78-62-130.hsd1.co.comcast.net. [73.78.62.130])
+        by smtp.googlemail.com with ESMTPSA id o12-20020a92a80c000000b002dcd35bb030sm2342604ilh.74.2022.07.17.23.38.39
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 17 Jul 2022 23:21:12 -0700 (PDT)
-From:   Vikas Gupta <vikas.gupta@broadcom.com>
-To:     jiri@nvidia.com, kuba@kernel.org
-Cc:     netdev@vger.kernel.org, linux-kernel@vger.kernel.org,
-        davem@davemloft.net, dsahern@kernel.org,
-        stephen@networkplumber.org, edumazet@google.com, pabeni@redhat.com,
-        ast@kernel.org, leon@kernel.org, linux-doc@vger.kernel.org,
-        corbet@lwn.net, michael.chan@broadcom.com,
-        andrew.gospodarek@broadcom.com,
-        Vikas Gupta <vikas.gupta@broadcom.com>
-Subject: [PATCH net-next v3 3/3] bnxt_en: implement callbacks for devlink selftests
-Date:   Mon, 18 Jul 2022 11:50:32 +0530
-Message-Id: <20220718062032.22426-4-vikas.gupta@broadcom.com>
-X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20220718062032.22426-1-vikas.gupta@broadcom.com>
-References: <0220707182950.29348-1-vikas.gupta@broadcom.com>
- <20220718062032.22426-1-vikas.gupta@broadcom.com>
-Content-Type: multipart/signed; protocol="application/pkcs7-signature"; micalg=sha-256;
-        boundary="000000000000f02eed05e40e5fa2"
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,
-        MIME_HEADER_CTYPE_ONLY,RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,SPF_NONE,
-        T_TVD_MIME_NO_HEADERS autolearn=ham autolearn_force=no version=3.4.6
+        Sun, 17 Jul 2022 23:38:40 -0700 (PDT)
+From:   Jim Cromie <jim.cromie@gmail.com>
+To:     jbaron@akamai.com
+Cc:     intel-gfx@lists.freedesktop.org, nouveau@lists.freedesktop.org,
+        dri-devel@lists.freedesktop.org, amd-gfx@lists.freedesktop.org,
+        Jim Cromie <jim.cromie@gmail.com>, linux-doc@vger.kernel.org
+Subject: [PATCH v3 19/41] doc-dyndbg: edit dynamic-debug-howto for brevity, audience
+Date:   Mon, 18 Jul 2022 00:36:03 -0600
+Message-Id: <20220718063641.9179-20-jim.cromie@gmail.com>
+X-Mailer: git-send-email 2.36.1
+In-Reply-To: <20220718063641.9179-1-jim.cromie@gmail.com>
+References: <20220718063641.9179-1-jim.cromie@gmail.com>
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
+X-Spam-Status: No, score=-2.1 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_FROM,
+        RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,SPF_PASS autolearn=ham
+        autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
---000000000000f02eed05e40e5fa2
+Rework/modernize docs:
 
-Add callbacks
-=============
-.selftest_check: returns true for flash selftest.
-.selftest_run: runs a flash selftest.
+ - use /proc/dynamic_debug/control in examples
+   its *always* there (when dyndbg is config'd), even when <debugfs> is not.
+   drop <debugfs> talk, its a distraction here.
 
-Signed-off-by: Vikas Gupta <vikas.gupta@broadcom.com>
-Reviewed-by: Michael Chan <michael.chan@broadcom.com>
-Reviewed-by: Andy Gospodarek <andrew.gospodarek@broadcom.com>
+ - read before write. Viewing before Controlling.
+   control file as Catalog.
+
+ - focus on use by a system administrator
+   add an alias to make examples more readable
+   drop grep-101 lessons, admins know this.
+
+ - use init/main.c as 1st example, thread it thru doc where useful.
+   everybodys kernel boots, runs these.
+
+ - add *prdbg* api section
+   to the bottom of the file, its for developers more than admins.
+   move list of api functions there.
+
+ - simplify - drop extra words, phrases, sentences.
+
+ - add "decorator" flags line to unify "prefix", trim fmlt descriptions
+
+CC: linux-doc@vger.kernel.org
+Signed-off-by: Jim Cromie <jim.cromie@gmail.com>
 ---
- .../net/ethernet/broadcom/bnxt/bnxt_devlink.c | 60 +++++++++++++++++++
- 1 file changed, 60 insertions(+)
+ .../admin-guide/dynamic-debug-howto.rst       | 238 +++++++++---------
+ 1 file changed, 120 insertions(+), 118 deletions(-)
 
-diff --git a/drivers/net/ethernet/broadcom/bnxt/bnxt_devlink.c b/drivers/net/ethernet/broadcom/bnxt/bnxt_devlink.c
-index 6b3d4f4c2a75..927cf368d856 100644
---- a/drivers/net/ethernet/broadcom/bnxt/bnxt_devlink.c
-+++ b/drivers/net/ethernet/broadcom/bnxt/bnxt_devlink.c
-@@ -20,6 +20,8 @@
- #include "bnxt_ulp.h"
- #include "bnxt_ptp.h"
- #include "bnxt_coredump.h"
-+#include "bnxt_nvm_defs.h"
-+#include "bnxt_ethtool.h"
+diff --git a/Documentation/admin-guide/dynamic-debug-howto.rst b/Documentation/admin-guide/dynamic-debug-howto.rst
+index d8954ab05c7b..cdf1da69e43c 100644
+--- a/Documentation/admin-guide/dynamic-debug-howto.rst
++++ b/Documentation/admin-guide/dynamic-debug-howto.rst
+@@ -5,30 +5,19 @@ Dynamic debug
+ Introduction
+ ============
  
- static void __bnxt_fw_recover(struct bnxt *bp)
- {
-@@ -610,6 +612,62 @@ static int bnxt_dl_reload_up(struct devlink *dl, enum devlink_reload_action acti
- 	return rc;
- }
+-This document describes how to use the dynamic debug (dyndbg) feature.
++Dynamic debug allows you to dynamically enable/disable kernel
++debug-print code to obtain additional kernel information.
  
-+static bool bnxt_nvm_test(struct bnxt *bp, struct netlink_ext_ack *extack)
-+{
-+	u32 datalen;
-+	u16 index;
-+	u8 *buf;
-+
-+	if (bnxt_find_nvram_item(bp->dev, BNX_DIR_TYPE_VPD,
-+				 BNX_DIR_ORDINAL_FIRST, BNX_DIR_EXT_NONE,
-+				 &index, NULL, &datalen) || !datalen) {
-+		NL_SET_ERR_MSG_MOD(extack, "nvm test vpd entry error");
-+		return false;
-+	}
-+
-+	buf = kzalloc(datalen, GFP_KERNEL);
-+	if (!buf) {
-+		NL_SET_ERR_MSG_MOD(extack, "insufficient memory for nvm test");
-+		return false;
-+	}
-+
-+	if (bnxt_get_nvram_item(bp->dev, index, 0, datalen, buf)) {
-+		NL_SET_ERR_MSG_MOD(extack, "nvm test vpd read error");
-+		goto err;
-+	}
-+
-+	if (bnxt_flash_nvram(bp->dev, BNX_DIR_TYPE_VPD, BNX_DIR_ORDINAL_FIRST,
-+			     BNX_DIR_EXT_NONE, 0, 0, buf, datalen)) {
-+		NL_SET_ERR_MSG_MOD(extack, "nvm test vpd write error");
-+		goto err;
-+	}
-+
-+	return true;
-+
-+err:
-+	kfree(buf);
-+	return false;
-+}
-+
-+static bool bnxt_dl_selftest_check(struct devlink *dl, int test_id,
-+				   struct netlink_ext_ack *extack)
-+{
-+	return (test_id == DEVLINK_SELFTEST_ATTR_FLASH);
-+}
-+
-+static u8 bnxt_dl_selftest_run(struct devlink *dl, int test_id,
-+			       struct netlink_ext_ack *extack)
-+{
-+	struct bnxt *bp = bnxt_get_bp_from_dl(dl);
-+
-+	if (test_id == DEVLINK_SELFTEST_ATTR_FLASH) {
-+		return (bnxt_nvm_test(bp, extack) ? DEVLINK_SELFTEST_PASS :
-+						    DEVLINK_SELFTEST_FAIL);
-+	}
-+
-+	return DEVLINK_SELFTEST_SKIP;
-+}
-+
- static const struct devlink_ops bnxt_dl_ops = {
- #ifdef CONFIG_BNXT_SRIOV
- 	.eswitch_mode_set = bnxt_dl_eswitch_mode_set,
-@@ -622,6 +680,8 @@ static const struct devlink_ops bnxt_dl_ops = {
- 	.reload_limits	  = BIT(DEVLINK_RELOAD_LIMIT_NO_RESET),
- 	.reload_down	  = bnxt_dl_reload_down,
- 	.reload_up	  = bnxt_dl_reload_up,
-+	.selftest_check	  = bnxt_dl_selftest_check,
-+	.selftest_run	  = bnxt_dl_selftest_run,
- };
+-Dynamic debug is designed to allow you to dynamically enable/disable
+-kernel code to obtain additional kernel information.  Currently, if
+-``CONFIG_DYNAMIC_DEBUG`` is set, then all ``pr_debug()``/``dev_dbg()`` and
+-``print_hex_dump_debug()``/``print_hex_dump_bytes()`` calls can be dynamically
+-enabled per-callsite.
++If ``/proc/dynamic_debug/control`` exists, your kernel has dynamic debug.
++You'll need root access (sudo su) to use this.
  
- static const struct devlink_ops bnxt_vf_dl_ops;
+-If you do not want to enable dynamic debug globally (i.e. in some embedded
+-system), you may set ``CONFIG_DYNAMIC_DEBUG_CORE`` as basic support of dynamic
+-debug and add ``ccflags := -DDYNAMIC_DEBUG_MODULE`` into the Makefile of any
+-modules which you'd like to dynamically debug later.
+-
+-If ``CONFIG_DYNAMIC_DEBUG`` is not set, ``print_hex_dump_debug()`` is just
+-shortcut for ``print_hex_dump(KERN_DEBUG)``.
+-
+-For ``print_hex_dump_debug()``/``print_hex_dump_bytes()``, format string is
+-its ``prefix_str`` argument, if it is constant string; or ``hexdump``
+-in case ``prefix_str`` is built dynamically.
++Dynamic debug provides:
+ 
+-Dynamic debug has even more useful features:
++ * a Catalog of all *prdbgs* in your kernel.
++   ``cat /proc/dynamic_debug/control`` to see them.
+ 
+- * Simple query language allows turning on and off debugging
+-   statements by matching any combination of 0 or 1 of:
++ * a Simple query/command language to alter *prdbgs* by selecting on
++   any combination of 0 or 1 of:
+ 
+    - source filename
+    - function name
+@@ -37,107 +26,88 @@ Dynamic debug has even more useful features:
+    - format string
+    - class name (as known/declared by each module)
+ 
+- * Provides a debugfs control file: ``<debugfs>/dynamic_debug/control``
+-   which can be read to display the complete list of known debug
+-   statements, to help guide you
+-
+-Controlling dynamic debug Behaviour
+-===================================
+-
+-The behaviour of ``pr_debug()``/``dev_dbg()`` are controlled via writing to a
+-control file in the 'debugfs' filesystem. Thus, you must first mount
+-the debugfs filesystem, in order to make use of this feature.
+-Subsequently, we refer to the control file as:
+-``<debugfs>/dynamic_debug/control``. For example, if you want to enable
+-printing from source file ``svcsock.c``, line 1603 you simply do::
+-
+-  nullarbor:~ # echo 'file svcsock.c line 1603 +p' >
+-				<debugfs>/dynamic_debug/control
+-
+-If you make a mistake with the syntax, the write will fail thus::
+-
+-  nullarbor:~ # echo 'file svcsock.c wtf 1 +p' >
+-				<debugfs>/dynamic_debug/control
+-  -bash: echo: write error: Invalid argument
+-
+-Note, for systems without 'debugfs' enabled, the control file can be
+-found in ``/proc/dynamic_debug/control``.
+-
+ Viewing Dynamic Debug Behaviour
+ ===============================
+ 
+-You can view the currently configured behaviour of all the debug
+-statements via::
++You can view the currently configured behaviour in the *prdbg* catalog:
+ 
+-  nullarbor:~ # cat <debugfs>/dynamic_debug/control
++  :#> head -n7 /proc/dynamic_debug/control
+   # filename:lineno [module]function flags format
+-  net/sunrpc/svc_rdma.c:323 [svcxprt_rdma]svc_rdma_cleanup =_ "SVCRDMA Module Removed, deregister RPC RDMA transport\012"
+-  net/sunrpc/svc_rdma.c:341 [svcxprt_rdma]svc_rdma_init =_ "\011max_inline       : %d\012"
+-  net/sunrpc/svc_rdma.c:340 [svcxprt_rdma]svc_rdma_init =_ "\011sq_depth         : %d\012"
+-  net/sunrpc/svc_rdma.c:338 [svcxprt_rdma]svc_rdma_init =_ "\011max_requests     : %d\012"
+-  ...
++  init/main.c:1179 [main]initcall_blacklist =_ "blacklisting initcall %s\012
++  init/main.c:1218 [main]initcall_blacklisted =_ "initcall %s blacklisted\012"
++  init/main.c:1424 [main]run_init_process =_ "  with arguments:\012"
++  init/main.c:1426 [main]run_init_process =_ "    %s\012"
++  init/main.c:1427 [main]run_init_process =_ "  with environment:\012"
++  init/main.c:1429 [main]run_init_process =_ "    %s\012"
+ 
++The 3rd space-delimited column shows the current flags, preceded by
++a ``=`` for easy use with grep/cut. ``=p`` shows enabled callsites.
+ 
+-You can also apply standard Unix text manipulation filters to this
+-data, e.g.::
++Controlling dynamic debug Behaviour
++===================================
+ 
+-  nullarbor:~ # grep -i rdma <debugfs>/dynamic_debug/control  | wc -l
+-  62
++The behaviour of *prdbg* sites are controlled by writing
++query/commands to the control file.  Example::
+ 
+-  nullarbor:~ # grep -i tcp <debugfs>/dynamic_debug/control | wc -l
+-  42
++  # grease the interface
++  :#> alias ddcmd='echo $* > /proc/dynamic_debug/control'
+ 
+-The third column shows the currently enabled flags for each debug
+-statement callsite (see below for definitions of the flags).  The
+-default value, with no flags enabled, is ``=_``.  So you can view all
+-the debug statement callsites with any non-default flags::
++  :#> ddcmd '-p; module main func run* +p'
++  :#> grep =p /proc/dynamic_debug/control
++  init/main.c:1424 [main]run_init_process =p "  with arguments:\012"
++  init/main.c:1426 [main]run_init_process =p "    %s\012"
++  init/main.c:1427 [main]run_init_process =p "  with environment:\012"
++  init/main.c:1429 [main]run_init_process =p "    %s\012"
+ 
+-  nullarbor:~ # awk '$3 != "=_"' <debugfs>/dynamic_debug/control
+-  # filename:lineno [module]function flags format
+-  net/sunrpc/svcsock.c:1603 [sunrpc]svc_send p "svc_process: st_sendto returned %d\012"
++Error messages go to console/syslog:
++
++  :#> ddcmd mode foo +p
++  dyndbg: unknown keyword "mode"
++  dyndbg: query parse failed
++  bash: echo: write error: Invalid argument
++
++If debugfs is also enabled and mounted, ``dynamic_debug/control`` is
++also under the mount-dir, typically ``/sys/kernel/debug/``.
+ 
+ Command Language Reference
+ ==========================
+ 
+-At the lexical level, a command comprises a sequence of words separated
++At the basic lexical level, a command is a sequence of words separated
+ by spaces or tabs.  So these are all equivalent::
+ 
+-  nullarbor:~ # echo -n 'file svcsock.c line 1603 +p' >
+-				<debugfs>/dynamic_debug/control
+-  nullarbor:~ # echo -n '  file   svcsock.c     line  1603 +p  ' >
+-				<debugfs>/dynamic_debug/control
+-  nullarbor:~ # echo -n 'file svcsock.c line 1603 +p' >
+-				<debugfs>/dynamic_debug/control
++  :#> ddcmd file svcsock.c line 1603 +p
++  :#> ddcmd "file svcsock.c line 1603 +p"
++  :#> ddcmd '  file   svcsock.c     line  1603 +p  '
+ 
+ Command submissions are bounded by a write() system call.
+ Multiple commands can be written together, separated by ``;`` or ``\n``::
+ 
+-  ~# echo "func pnpacpi_get_resources +p; func pnp_assign_mem +p" \
+-     > <debugfs>/dynamic_debug/control
++  :#> ddcmd "func pnpacpi_get_resources +p; func pnp_assign_mem +p"
++  :#> ddcmd <<"EOC"
++  func pnpacpi_get_resources +p
++  func pnp_assign_mem +p
++  EOC
++  :#> cat query-batch-file > /proc/dynamic_debug/control
+ 
+-If your query set is big, you can batch them too::
++You can also use wildcards in each query term. The match rule supports
++``*`` (matches zero or more characters) and ``?`` (matches exactly one
++character). For example, you can match all usb drivers::
+ 
+-  ~# cat query-batch-file > <debugfs>/dynamic_debug/control
++  :#> ddcmd file "drivers/usb/*" +p	# "" to suppress shell expansion
+ 
+-Another way is to use wildcards. The match rule supports ``*`` (matches
+-zero or more characters) and ``?`` (matches exactly one character). For
+-example, you can match all usb drivers::
+-
+-  ~# echo "file drivers/usb/* +p" > <debugfs>/dynamic_debug/control
+-
+-At the syntactical level, a command comprises a sequence of match
+-specifications, followed by a flags change specification::
++Syntactically, a command is pairs of keyword values, followed by a
++flags change or setting::
+ 
+   command ::= match-spec* flags-spec
+ 
+-The match-spec's are used to choose a subset of the known pr_debug()
+-callsites to which to apply the flags-spec.  Think of them as a query
+-with implicit ANDs between each pair.  Note that an empty list of
+-match-specs will select all debug statement callsites.
++The match-spec's select *prdbgs* from the catalog, upon which to apply
++the flags-spec, all constraints are ANDed together.  An absent keyword
++is the same as keyword "*".
++
+ 
+-A match specification comprises a keyword, which controls the
+-attribute of the callsite to be compared, and a value to compare
+-against.  Possible keywords are:::
++A match specification is a keyword, which selects the attribute of
++the callsite to be compared, and a value to compare against.  Possible
++keywords are:::
+ 
+   match-spec ::= 'func' string |
+ 		 'file' string |
+@@ -213,6 +183,7 @@ class
+ 
+ 	class DRM_UT_KMS	# a DRM.debug category
+ 	class JUNK		# silent non-match
++	// class TLD_*		# NOTICE: no wildcard in class names
+ 
+ line
+     The given line number or range of line numbers is compared
+@@ -239,17 +210,16 @@ of the characters::
+ The flags are::
+ 
+   p    enables the pr_debug() callsite.
+-  f    Include the function name in the printed message
+-  l    Include line number in the printed message
+-  m    Include module name in the printed message
+-  t    Include thread ID in messages not generated from interrupt context
+-  _    No flags are set. (Or'd with others on input)
++  _    enables no flags.
+ 
+-For ``print_hex_dump_debug()`` and ``print_hex_dump_bytes()``, only ``p`` flag
+-have meaning, other flags ignored.
++  Decorator flags add to the message-prefix, in order:
++  t    Include thread ID, or <intr>
++  m    Include module name
++  f    Include the function name
++  l    Include line number
+ 
+-For display, the flags are preceded by ``=``
+-(mnemonic: what the flags are currently equal to).
++For ``print_hex_dump_debug()`` and ``print_hex_dump_bytes()``, only
++the ``p`` flag has meaning, other flags are ignored.
+ 
+ Note the regexp ``^[-+=][flmpt_]+$`` matches a flags specification.
+ To clear all flags at once, use ``=_`` or ``-flmpt``.
+@@ -324,7 +294,7 @@ For ``CONFIG_DYNAMIC_DEBUG`` kernels, any settings given at boot-time (or
+ enabled by ``-DDEBUG`` flag during compilation) can be disabled later via
+ the debugfs interface if the debug messages are no longer needed::
+ 
+-   echo "module module_name -p" > <debugfs>/dynamic_debug/control
++   echo "module module_name -p" > /proc/dynamic_debug/control
+ 
+ Examples
+ ========
+@@ -332,37 +302,31 @@ Examples
+ ::
+ 
+   // enable the message at line 1603 of file svcsock.c
+-  nullarbor:~ # echo -n 'file svcsock.c line 1603 +p' >
+-				<debugfs>/dynamic_debug/control
++  :#> ddcmd 'file svcsock.c line 1603 +p'
+ 
+   // enable all the messages in file svcsock.c
+-  nullarbor:~ # echo -n 'file svcsock.c +p' >
+-				<debugfs>/dynamic_debug/control
++  :#> ddcmd 'file svcsock.c +p'
+ 
+   // enable all the messages in the NFS server module
+-  nullarbor:~ # echo -n 'module nfsd +p' >
+-				<debugfs>/dynamic_debug/control
++  :#> ddcmd 'module nfsd +p'
+ 
+   // enable all 12 messages in the function svc_process()
+-  nullarbor:~ # echo -n 'func svc_process +p' >
+-				<debugfs>/dynamic_debug/control
++  :#> ddcmd 'func svc_process +p'
+ 
+   // disable all 12 messages in the function svc_process()
+-  nullarbor:~ # echo -n 'func svc_process -p' >
+-				<debugfs>/dynamic_debug/control
++  :#> ddcmd 'func svc_process -p'
+ 
+   // enable messages for NFS calls READ, READLINK, READDIR and READDIR+.
+-  nullarbor:~ # echo -n 'format "nfsd: READ" +p' >
+-				<debugfs>/dynamic_debug/control
++  :#> ddcmd 'format "nfsd: READ" +p'
+ 
+   // enable messages in files of which the paths include string "usb"
+-  nullarbor:~ # echo -n 'file *usb* +p' > <debugfs>/dynamic_debug/control
++  :#> ddcmd 'file *usb* +p' > /proc/dynamic_debug/control
+ 
+   // enable all messages
+-  nullarbor:~ # echo -n '+p' > <debugfs>/dynamic_debug/control
++  :#> ddcmd '+p' > /proc/dynamic_debug/control
+ 
+   // add module, function to all enabled messages
+-  nullarbor:~ # echo -n '+mf' > <debugfs>/dynamic_debug/control
++  :#> ddcmd '+mf' > /proc/dynamic_debug/control
+ 
+   // boot-args example, with newlines and comments for readability
+   Kernel command line: ...
+@@ -375,3 +339,41 @@ Examples
+     dyndbg="file init/* +p #cmt ; func parse_one +p"
+     // enable pr_debugs in 2 functions in a module loaded later
+     pc87360.dyndbg="func pc87360_init_device +p; func pc87360_find +p"
++
++Kernel Configuration
++====================
++
++Dynamic Debug is enabled via kernel config items:
++
++  CONFIG_DYNAMIC_DEBUG=y	# build catalog, enables CORE
++  CONFIG_DYNAMIC_DEBUG_CORE=y	# enable mechanics only, skip catalog
++
++Fedora's distro-kernel has both, and has 7250 *prdbgs*.  Each callsite
++record uses 56 bytes, so the impact on memory is non-trivial.
++
++If you do not want to enable dynamic debug globally (i.e. in some embedded
++system), you may set ``CONFIG_DYNAMIC_DEBUG_CORE`` as basic support of dynamic
++debug and add ``ccflags := -DDYNAMIC_DEBUG_MODULE`` into the Makefile of any
++modules which you'd like to dynamically debug later.
++
++
++Kernel *prdbg* API
++==================
++
++The following functions are cataloged and controllable when dynamic
++debug is enabled::
++
++  pr_debug()
++  dev_dbg()
++  print_hex_dump_debug()
++  print_hex_dump_bytes()
++
++Otherwise, they are off by default; ``ccflags += -DDEBUG`` or
++``#define DEBUG`` in a source file will enable them appropriately.
++
++If ``CONFIG_DYNAMIC_DEBUG`` is not set, ``print_hex_dump_debug()`` is
++just a shortcut for ``print_hex_dump(KERN_DEBUG)``.
++
++For ``print_hex_dump_debug()``/``print_hex_dump_bytes()``, format string is
++its ``prefix_str`` argument, if it is constant string; or ``hexdump``
++in case ``prefix_str`` is built dynamically.
 -- 
-2.31.1
+2.36.1
 
-
---000000000000f02eed05e40e5fa2
-Content-Type: application/pkcs7-signature; name="smime.p7s"
-Content-Transfer-Encoding: base64
-Content-Disposition: attachment; filename="smime.p7s"
-Content-Description: S/MIME Cryptographic Signature
-
-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
-I7qKxvF8Yo7eGTnHRTa99J+6yTd88AKVuhM5TEhpC8cS7qvrQXJje+Uing2xWC4FH76LEWIFH0Pt
-x8C1WoCU0ClXHU/XfzH2mYrFANBSCeP1Co6QdEfRAgMBAAGjggHZMIIB1TAOBgNVHQ8BAf8EBAMC
-BaAwgaMGCCsGAQUFBwEBBIGWMIGTME4GCCsGAQUFBzAChkJodHRwOi8vc2VjdXJlLmdsb2JhbHNp
-Z24uY29tL2NhY2VydC9nc2djY3IzcGVyc29uYWxzaWduMmNhMjAyMC5jcnQwQQYIKwYBBQUHMAGG
-NWh0dHA6Ly9vY3NwLmdsb2JhbHNpZ24uY29tL2dzZ2NjcjNwZXJzb25hbHNpZ24yY2EyMDIwME0G
-A1UdIARGMEQwQgYKKwYBBAGgMgEoCjA0MDIGCCsGAQUFBwIBFiZodHRwczovL3d3dy5nbG9iYWxz
-aWduLmNvbS9yZXBvc2l0b3J5LzAJBgNVHRMEAjAAMEkGA1UdHwRCMEAwPqA8oDqGOGh0dHA6Ly9j
-cmwuZ2xvYmFsc2lnbi5jb20vZ3NnY2NyM3BlcnNvbmFsc2lnbjJjYTIwMjAuY3JsMCMGA1UdEQQc
-MBqBGHZpa2FzLmd1cHRhQGJyb2FkY29tLmNvbTATBgNVHSUEDDAKBggrBgEFBQcDBDAfBgNVHSME
-GDAWgBSWM9HmWBdbNHWKgVZk1b5I3qGPzzAdBgNVHQ4EFgQUUc6J11rH3s6PyZQ0zIVZHIuP20Yw
-DQYJKoZIhvcNAQELBQADggEBALvCjXn9gy9a2nU/Ey0nphGZefIP33ggiyuKnmqwBt7Wk/uDHIIc
-kkIlqtTbo0x0PqphS9A23CxCDjKqZq2WN34fL5MMW83nrK0vqnPloCaxy9/6yuLbottBY4STNuvA
-mQ//Whh+PE+DZadqiDbxXbos3IH8AeFXH4A1zIqIrc0Um2/CSD/T6pvu9QrchtvemfP0z/f1Bk+8
-QbQ4ARVP93WV1I13US69evWXw+mOv9VnejShU9PMcDK203xjXbBOi9Hm+fthrWfwIyGoC5aEf7vd
-PKkEDt4VZ9RbudZU/c3N8+kURaHNtrvu2K+mQs5w/AF7HYZThqmOzQJnvMRjuL8xggJtMIICaQIB
-ATBrMFsxCzAJBgNVBAYTAkJFMRkwFwYDVQQKExBHbG9iYWxTaWduIG52LXNhMTEwLwYDVQQDEyhH
-bG9iYWxTaWduIEdDQyBSMyBQZXJzb25hbFNpZ24gMiBDQSAyMDIwAgwYjepatB64S625eswwDQYJ
-YIZIAWUDBAIBBQCggdQwLwYJKoZIhvcNAQkEMSIEILnF94BrX4QbDy6JoUKYQyT1p/qvWlu0d27U
-I5aBpvTbMBgGCSqGSIb3DQEJAzELBgkqhkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTIyMDcxODA2
-MjExM1owaQYJKoZIhvcNAQkPMVwwWjALBglghkgBZQMEASowCwYJYIZIAWUDBAEWMAsGCWCGSAFl
-AwQBAjAKBggqhkiG9w0DBzALBgkqhkiG9w0BAQowCwYJKoZIhvcNAQEHMAsGCWCGSAFlAwQCATAN
-BgkqhkiG9w0BAQEFAASCAQBD043xUqB+3lFhSbnprB4Bk5PIxCZFmyx+hzdNb7iVFtuTeIzk857A
-HJ88LFfQSEuA1kPF0vHmSLiIJHW5ntaOAM/b44QZMT77x0WgXc7jSC0oRDZURH/bvao/peI1CK3H
-Nr11OhotZDqVx6TTIWtXkRWC4pB6RhuOZLVwSyEOPXQrJ2vGcjYAJOqLIm7laDciHZqHSDj9Fuey
-SkkkZ1VIreApvnc3lnUPD+hxD7AHWLwSxBuDrk2yihXQvwg70fx2gaHkevORJE9qpM0rX5VjnkeY
-VFv7O2277Iy+/4FbjJTK4zlMpOGiKDgv6RhC5O8TEz9TqfDxD2WJDmEsVHtD
---000000000000f02eed05e40e5fa2--
