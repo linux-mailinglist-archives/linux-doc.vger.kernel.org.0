@@ -2,102 +2,78 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id C3FCE5788B8
-	for <lists+linux-doc@lfdr.de>; Mon, 18 Jul 2022 19:46:56 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 721205789FC
+	for <lists+linux-doc@lfdr.de>; Mon, 18 Jul 2022 21:01:12 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S235297AbiGRRqz (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 18 Jul 2022 13:46:55 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:33050 "EHLO
+        id S234353AbiGRTBK (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 18 Jul 2022 15:01:10 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:55024 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S235241AbiGRRqy (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Mon, 18 Jul 2022 13:46:54 -0400
-Received: from ams.source.kernel.org (ams.source.kernel.org [145.40.68.75])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 8AC8B2C648;
-        Mon, 18 Jul 2022 10:46:53 -0700 (PDT)
-Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
-        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
-        (No client certificate requested)
-        by ams.source.kernel.org (Postfix) with ESMTPS id 3014DB81658;
-        Mon, 18 Jul 2022 17:46:52 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id DE9E2C341C0;
-        Mon, 18 Jul 2022 17:46:47 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-        s=k20201202; t=1658166410;
-        bh=fJhXHjK4iR4PrXajXTvrNgHrH8Xm1UQQa3ldL5pU8Q8=;
-        h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
-        b=DB8w1PxX6sE2Jqdygs6y9Yra55MUcXmY2BOHTZcAw0DKG02aC1cEIry13uVVG+RV5
-         J8RQ/OKz7vypxp6so9gWssYqpA8ROtWd5a+rAed/SpsZeAVCmSwIUQ6RSiBpMlIn0Z
-         suW6eJfhov5tckaw8Z4hOytHN+r9T+6K9MEuc2uxXaXw9j31QcH+STlPtSqCl/uGf+
-         ag8WEniN/ywrb3G4bXyO0sinsDM4ZofO1O1zuA7aUxiyFrmVOsAL4HYhGXjEdMvheZ
-         Q73/UmZArebfTzc4IrUKtoeFSy6hb3+VikVr7scxUGMWYsnNvKL40dCKzQ/o9xuzud
-         kpNCNEzPxT+Pg==
-Date:   Mon, 18 Jul 2022 18:56:45 +0100
-From:   Jonathan Cameron <jic23@kernel.org>
-To:     Bagas Sanjaya <bagasdotme@gmail.com>
-Cc:     Akira Yokosawa <akiyks@gmail.com>,
-        Gwendal Grignou <gwendal@chromium.org>,
-        Jonathan Cameron <Jonathan.Cameron@huawei.com>,
-        kbuild-all@lists.01.org, linux-kernel@vger.kernel.org,
-        Stephen Boyd <swboyd@chromium.org>, linux-doc@vger.kernel.org,
-        Mauro Carvalho Chehab <mchehab@kernel.org>,
-        kernel test robot <lkp@intel.com>, linux-iio@vger.kernel.org
-Subject: Re: [PATCH] iio: proximity: sx9324: add empty line in front of
- bullet list
-Message-ID: <20220718185645.0a0ecd84@jic23-huawei>
-In-Reply-To: <YsFl9YoSn2YUDHAk@debian.me>
-References: <202207021703.lEW6FLT1-lkp@intel.com>
-        <85c5fe48-90fd-6ad6-72d8-a3e7929f23e4@gmail.com>
-        <abcaa4f5-7a9b-56b5-c11a-a88fef9d1e0a@gmail.com>
-        <YsFl9YoSn2YUDHAk@debian.me>
-X-Mailer: Claws Mail 4.1.0 (GTK 3.24.34; x86_64-pc-linux-gnu)
+        with ESMTP id S234127AbiGRTBI (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Mon, 18 Jul 2022 15:01:08 -0400
+Received: from mail-yw1-x1130.google.com (mail-yw1-x1130.google.com [IPv6:2607:f8b0:4864:20::1130])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id F32A82B274
+        for <linux-doc@vger.kernel.org>; Mon, 18 Jul 2022 12:01:06 -0700 (PDT)
+Received: by mail-yw1-x1130.google.com with SMTP id 00721157ae682-31c86fe1dddso117874837b3.1
+        for <linux-doc@vger.kernel.org>; Mon, 18 Jul 2022 12:01:06 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112;
+        h=mime-version:reply-to:from:date:message-id:subject:to;
+        bh=h0ZslgqQ94UM3iGDYCZGEx8ZwvbYHY5ZrQARiO/Kpbc=;
+        b=IQXHlBQ3jHSYUTt89EYBBYMpS/rXYtHBaNUJ6e2ZzB07/ETpvOJM0/ZijryokIEfDh
+         oJG0jiachEiIldTcksV5XzU+dy3csOVeMrzVRYAIpdf4PUrGYfI/KNNvcLIWjvmc8oHa
+         yWKlPWKnOFkuEw2Mq2CzZYpqcRK9kJ+LygeUXE0izxh4s3I+nauj1w40rP+480vJCi+X
+         rAPSoEvo8wXV23cydMjOZnuzBivYToT/OwjRuq1iqX/8Isb8Rqougy46FnOdoQuh9Z/u
+         z7xKihQATs9EIIDqpmGAQl/2n//vpMk3ZDpLHQioaLk/1hVBrL4som/CgeyT77yPFwbn
+         VU6A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:mime-version:reply-to:from:date:message-id
+         :subject:to;
+        bh=h0ZslgqQ94UM3iGDYCZGEx8ZwvbYHY5ZrQARiO/Kpbc=;
+        b=gjpsSCe+82yypSf+DkqVou14pR2CJ/pxL2X9lpkowd0Wrkwjj8fPNcI5lqAfP+e0y8
+         vhLcXe1fHloI1U+SbIntyts5r22f7ACcoiZpu1r1bdFmKolQDDkGM2S0H5PH5np6QR9d
+         FChIN1WbgCBAeYBJNCLzB2u3p9v5tDAIgVCfOwvX22EkvWPEWnGyumExU4wqUicS2EwH
+         l9rpWJZDQtwbyVynRA+2SlX8iUsywD33CyF9oMc73vY74CappAf+majaHcZppxFjQpq0
+         1wAUO+IPQPnlHUlgR+6muanx0spYd07nOQLvdtmGmDkC+FIoW+Cw7l3XeAhKo1jc6ish
+         gnxg==
+X-Gm-Message-State: AJIora8E8gaMH1M6lWsu20Y8tvZwoD0LBrxYTHREB+AuZYZNCtgpvAOm
+        /GhxqQn18TrAbqxIw/HHe1R3rYTDsDP4sIcIXlo=
+X-Google-Smtp-Source: AGRyM1sOF4caZ/Mzb7i1HwUB8dyXYAmjf9y+Pd1nVHRKiUHeMR6opOrMc10oZNu5DLkN2HS0cpkKNGEh0T+MU99Jmes=
+X-Received: by 2002:a81:5747:0:b0:31d:1bb8:65b7 with SMTP id
+ l68-20020a815747000000b0031d1bb865b7mr30830046ywb.168.1658170865217; Mon, 18
+ Jul 2022 12:01:05 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: 7bit
-X-Spam-Status: No, score=-7.8 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_HI,
-        SPF_HELO_NONE,SPF_PASS autolearn=ham autolearn_force=no version=3.4.6
+Received: by 2002:a05:6919:4004:b0:cc:50ff:b3d8 with HTTP; Mon, 18 Jul 2022
+ 12:01:04 -0700 (PDT)
+Reply-To: lilywilliam989@gmail.com
+From:   Lily William <sgtalberts@gmail.com>
+Date:   Mon, 18 Jul 2022 11:01:04 -0800
+Message-ID: <CALPTejMFgL0Bg7jCKa7j+5KxVv_jnSM4ZPq-QhHCiUpG_ZswsQ@mail.gmail.com>
+Subject: Hi Dear,
+To:     undisclosed-recipients:;
+Content-Type: text/plain; charset="UTF-8"
+X-Spam-Status: No, score=4.9 required=5.0 tests=BAYES_50,DKIM_SIGNED,
+        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_FROM,FREEMAIL_REPLYTO,
+        FREEMAIL_REPLYTO_END_DIGIT,RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,SPF_PASS,
+        UNDISC_FREEM autolearn=no autolearn_force=no version=3.4.6
+X-Spam-Level: ****
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Sun, 3 Jul 2022 16:48:37 +0700
-Bagas Sanjaya <bagasdotme@gmail.com> wrote:
+Hi Dear,
 
-> On Sun, Jul 03, 2022 at 01:27:47PM +0900, Akira Yokosawa wrote:
-> > "make htmldocs" emits a warning of:
-> > 
-> >     Documentation/ABI/testing/sysfs-bus-iio-sx9324:2: WARNING: Unexpected indentation.
-> > 
-> > This is due to a missing empty line in front of the bullet list.
-> > Fix it.
-> > 
-> > Note: The line count of 2 in the warning is not exact in this case.
-> > 
-> > Signed-off-by: Akira Yokosawa <akiyks@gmail.com>
-> > Fixes: 4c18a890dff8 ("iio:proximity:sx9324: Add SX9324 support")
-> > Link: https://lore.kernel.org/r/202207021703.lEW6FLT1-lkp@intel.com/
-> > Reported-by: kernel test robot <lkp@intel.com>
-> > Cc: Gwendal Grignou <gwendal@chromium.org>
-> > Cc: Stephen Boyd <swboyd@chromium.org>
-> > Cc: Jonathan Cameron <Jonathan.Cameron@huawei.com>  
-> 
-> Applying this on top of Mauro's fixes [1], no warnings. Thanks.
-> 
-> So I think Sphinx was pointing the culprit at the wrong location, since
-> the problem isn't lie on the field, but rather on the list.
-> 
-> Mauro, can you please pick this up?
-> 
-> [1]: https://lore.kernel.org/linux-doc/cover.1656759988.git.mchehab@kernel.org/
-> 
-> Reviewed-by: Bagas Sanjaya <bagasdotme@gmail.com>
-> 
+My name is Dr Lily William from the United States.I am a French and
+American nationality (dual) living in the U.S and sometimes in France
+for Work Purpose.
 
-I've picked it up via the iio tree.  If Mauro has it as well, git will
-sort it out for us.
+I hope you consider my friend request. I will share some of my pics
+and more details about myself when I get your response.
 
-Thanks,
+Thanks
 
-Jonathan
+With love
+Lily
