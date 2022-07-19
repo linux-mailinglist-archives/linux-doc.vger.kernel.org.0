@@ -2,183 +2,100 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id CA43C579C68
-	for <lists+linux-doc@lfdr.de>; Tue, 19 Jul 2022 14:40:09 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 50D7457A017
+	for <lists+linux-doc@lfdr.de>; Tue, 19 Jul 2022 15:52:37 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S238307AbiGSMkB (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 19 Jul 2022 08:40:01 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:50164 "EHLO
+        id S231549AbiGSNwg (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 19 Jul 2022 09:52:36 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:56840 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S240659AbiGSMi0 (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 19 Jul 2022 08:38:26 -0400
-Received: from mx1.riseup.net (mx1.riseup.net [198.252.153.129])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id B9E6B1096;
-        Tue, 19 Jul 2022 05:15:05 -0700 (PDT)
-Received: from fews1.riseup.net (fews1-pn.riseup.net [10.0.1.83])
-        (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-         key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256
-         client-signature RSA-PSS (2048 bits) client-digest SHA256)
-        (Client CN "mail.riseup.net", Issuer "R3" (not verified))
-        by mx1.riseup.net (Postfix) with ESMTPS id 4LnHg40tP6zDr1t;
-        Tue, 19 Jul 2022 12:08:48 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=riseup.net; s=squak;
-        t=1658232528; bh=Z13t3JOfWBRbGEZspQFZUoMZr2VJ7vNKr43KVUMXLlc=;
-        h=Date:Subject:To:References:From:In-Reply-To:From;
-        b=pWm379O8WhBzqWzedY4Y/sJ+9XR6AK7oaYUmBneLjkVB81aPy/H70yCPZOC5SJ0Hv
-         Atkc9JXBhwY4VYE0689smXDfL2jDJEx8v/1u2btFfQR6TZ4EEvA24vO+gKOnPb1wqq
-         8xGkCeG/v1nUQR7vdXQq4Pe5JUMKYHdMtkHl+GF4=
-X-Riseup-User-ID: CC50CB2FC9280A4B27EC4D83902A937600070A38BFC170A4ECC504A879609B86
-Received: from [127.0.0.1] (localhost [127.0.0.1])
-         by fews1.riseup.net (Postfix) with ESMTPSA id 4LnHg12K6Nz5vW6;
-        Tue, 19 Jul 2022 12:08:45 +0000 (UTC)
-Message-ID: <8e0ad6ee-2542-1049-6106-b5dcc44ec164@riseup.net>
-Date:   Tue, 19 Jul 2022 09:08:41 -0300
+        with ESMTP id S237169AbiGSNwX (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 19 Jul 2022 09:52:23 -0400
+Received: from loongson.cn (mail.loongson.cn [114.242.206.163])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTP id 3062C114161
+        for <linux-doc@vger.kernel.org>; Tue, 19 Jul 2022 06:04:29 -0700 (PDT)
+Received: from localhost.localdomain (unknown [112.20.110.136])
+        by mail.loongson.cn (Coremail) with SMTP id AQAAf9Axn+LYq9ZiM4QoAA--.11347S2;
+        Tue, 19 Jul 2022 21:04:25 +0800 (CST)
+From:   Binbin Zhou <zhoubinbin@loongson.cn>
+To:     alexs@kernel.org, siyanteng@loongson.cn
+Cc:     corbet@lwn.net, chenhuacai@loongson.cn, bobwxc@email.cn,
+        linux-doc@vger.kernel.org, Binbin Zhou <zhoubinbin@loongson.cn>
+Subject: [PATCH v2 0/4] docs/zh_CN: core-api: Add some translations for the "Data structures" section(Part 1)
+Date:   Tue, 19 Jul 2022 21:04:14 +0800
+Message-Id: <cover.1658196777.git.zhoubinbin@loongson.cn>
+X-Mailer: git-send-email 2.20.1
 MIME-Version: 1.0
-Subject: Re: [PATCH] Documentation: kunit: Add CLI args for kunit_tool
-Content-Language: en-US
-To:     Sadiya Kazi <sadiyakazi@google.com>, brendanhiggins@google.com,
-        davidgow@google.com, skhan@linuxfoundation.org, corbet@lwn.net,
-        linux-kselftest@vger.kernel.org, kunit-dev@googlegroups.com,
-        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org
-References: <20220719092214.995965-1-sadiyakazi@google.com>
-From:   =?UTF-8?Q?Ma=c3=adra_Canal?= <mairacanal@riseup.net>
-In-Reply-To: <20220719092214.995965-1-sadiyakazi@google.com>
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-Spam-Status: No, score=-2.8 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_LOW,
-        RCVD_IN_MSPIKE_H3,RCVD_IN_MSPIKE_WL,SPF_HELO_PASS,SPF_PASS
-        autolearn=ham autolearn_force=no version=3.4.6
+X-CM-TRANSID: AQAAf9Axn+LYq9ZiM4QoAA--.11347S2
+X-Coremail-Antispam: 1UD129KBjvJXoW7ZFW3ZF1DJF13ZrykWry7trb_yoW8CFWUpF
+        4akr1fJ3WDAFyxCrs3Wry7WFy5JFWfW3s0gws7Xw1SvrWrAayFvrs0yrya9ayxJryvgFyr
+        Zrs3KrWDu34jyrJanT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+        9KBjDU0xBIdaVrnRJUUUkq14x267AKxVW8JVW5JwAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
+        rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2ocxC64kIII0Yj41l84x0c7CEw4AK67xGY2AK02
+        1l84ACjcxK6xIIjxv20xvE14v26ryj6F1UM28EF7xvwVC0I7IYx2IY6xkF7I0E14v26F4j
+        6r4UJwA2z4x0Y4vEx4A2jsIE14v26rxl6s0DM28EF7xvwVC2z280aVCY1x0267AKxVW0oV
+        Cq3wAS0I0E0xvYzxvE52x082IY62kv0487Mc02F40EFcxC0VAKzVAqx4xG6I80ewAv7VC0
+        I7IYx2IY67AKxVWUJVWUGwAv7VC2z280aVAFwI0_Jr0_Gr1lOx8S6xCaFVCjc4AY6r1j6r
+        4UM4x0Y48IcxkI7VAKI48JM4x0x7Aq67IIx4CEVc8vx2IErcIFxwCY02Avz4vE14v_Xr4l
+        42xK82IYc2Ij64vIr41l4I8I3I0E4IkC6x0Yz7v_Jr0_Gr1lx2IqxVAqx4xG67AKxVWUJV
+        WUGwC20s026x8GjcxK67AKxVWUGVWUWwC2zVAF1VAY17CE14v26r126r1DMIIYrxkI7VAK
+        I48JMIIF0xvE2Ix0cI8IcVAFwI0_Jr0_JF4lIxAIcVC0I7IYx2IY6xkF7I0E14v26r1j6r
+        4UMIIF0xvE42xK8VAvwI8IcIk0rVWrZr1j6s0DMIIF0xvEx4A2jsIE14v26r1j6r4UMIIF
+        0xvEx4A2jsIEc7CjxVAFwI0_Jr0_GrUvcSsGvfC2KfnxnUUI43ZEXa7VUjHGQDUUUUU==
+X-CM-SenderInfo: p2kr3uplqex0o6or00hjvr0hdfq/
+X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00,SPF_HELO_PASS,
+        SPF_PASS autolearn=ham autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On 7/19/22 06:22, 'Sadiya Kazi' via KUnit Development wrote:
-> Run_wrapper.rst was missing some command line arguments. Added
-> additional args in the file. Included all initial review comments.
-> 
-> Signed-off-by: Sadiya Kazi <sadiyakazi@google.com>
-> ---
->  Documentation/dev-tools/kunit/run_wrapper.rst | 48 +++++++++++++++++++
->  1 file changed, 48 insertions(+)
-> 
-> diff --git a/Documentation/dev-tools/kunit/run_wrapper.rst b/Documentation/dev-tools/kunit/run_wrapper.rst
-> index 5e560f2c5fca..91f5dda36e83 100644
-> --- a/Documentation/dev-tools/kunit/run_wrapper.rst
-> +++ b/Documentation/dev-tools/kunit/run_wrapper.rst
-> @@ -257,3 +257,51 @@ command line arguments:
->              added or modified. Instead, enable all tests
->              which have satisfied dependencies by adding
->              ``CONFIG_KUNIT_ALL_TESTS=y`` to your ``.kunitconfig``.
-> +- ``--kunitconfig``: Specifies the path to the ``.kunitconfig`` file.
-> +  This Kconfig fragment enables KUnit tests. The "/.kunitconfig" gets
-> +  appended to the path specified. For example, If a directory path "lib/kunit"
-You might want to change it for a lower-case "if", like: "For example,
-if a directory path "lib/kunit"".
+Hi all:
 
-> +  is given, the complete path will be "lib/kunit/.kunitconfig".
+I have translated all the docs for section "Data structures and low-level utilities"
+of the core-api, and I plan to split them into two patchset submissions.
 
-This explanation may imply that if I pass `--kunitconfig
-lib/kunit/.kunitconfig` it wouldn't work, as "/.kunitconfig" is always
-appended to the path. But this is not true, both `--kunitconfig
-lib/kunit/.kunitconfig` and `--kunitconfig lib/kunit` are valid options.
+This patchset contains the following files:
 
-> +
-> +- ``--kconfig_add``: Specifies additional configuration options to be
-> +  appended to the ``.kunitconfig`` file. For example, ``CONFIG_KASAN=y``.
+idr.rst
+circular-buffers.rst
+generic-radix-tree.rst
+packing.rst
 
-You could expand this example to:
-```
-./tools/testing/kunit/kunit.py run --kconfig_add CONFIG_KASAN=y
-```
+For more details, please see TODOLIST in core-api/index.rst.
 
-> +
-> +- ``--arch``: Runs tests with the specified architecture. The architecture
+Thanks.
 
-"Runs tests on the specified architecture."
+Changes since v1:
+1. Rebase patchset on jc/docs-next.
+2. Take the advices of Xiangcheng and Yanteng, thanks.
 
-> +  specified must match the string passed to the ARCH make parameter.
+Details:
+https://lore.kernel.org/all/6904a35b-6425-36af-66a0-ecd0a222a15f@loongson.cn/
+https://lore.kernel.org/all/35121f9b-4dd7-4114-9242-caf2dcfa8f9c@loongson.cn/
+https://lore.kernel.org/all/86118122-2885-78e3-677e-b3a6ca47a20c@loongson.cn/
+https://lore.kernel.org/all/YtKy+z+iSA6D8r9m@bobwxc.mipc/
+https://lore.kernel.org/all/YtLF2g8fQdi4%2FaKQ@bobwxc.mipc/
 
-ARCH is not a "make parameter", ARCH is a environment variable.
-Therefor, ARCH is not "passed to make", as it a environment variable on
-the shell. Check the ARCH documentation [1].
+Binbin Zhou (4):
+  docs/zh_CN: core-api: Add idr Chinese translation
+  docs/zh_CN: core-api: Add circular-buffers Chinese translation
+  docs/zh_CN: core-api: Add generic-radix-tree Chinese translation
+  docs/zh_CN: core-api: Add packing Chinese translation
 
-> +  For example, i386, x86_64, arm, um, etc. Non-UML architectures run on QEMU.
-> +  Default to 'um'.
-> +
-> +- ``--cross_compile``: Specifies the Kbuild toolchain. It passes the
-> +  same argument as passed to the ``CROSS_COMPILE`` variable used by> +  Kbuild. This will be the prefix for the toolchain
-> +  binaries such as GCC. For example:
-> +
-> +  - ``sparc64-linux-gnu`` if we have the sparc toolchain installed on
-> +    our system.
-> +
-> +  - ``$HOME/toolchains/microblaze/gcc-9.2.0-nolibc/microblaze-linux/bin/microblaze-linux``
-> +    if we have downloaded the microblaze toolchain from the 0-day
-> +    website to a specified path in our home directory called toolchains.
+ .../zh_CN/core-api/circular-buffers.rst       | 209 ++++++++++++++++++
+ .../zh_CN/core-api/generic-radix-tree.rst     |  23 ++
+ .../translations/zh_CN/core-api/idr.rst       |  77 +++++++
+ .../translations/zh_CN/core-api/index.rst     |   8 +-
+ .../translations/zh_CN/core-api/packing.rst   | 159 +++++++++++++
+ 5 files changed, 472 insertions(+), 4 deletions(-)
+ create mode 100644 Documentation/translations/zh_CN/core-api/circular-buffers.rst
+ create mode 100644 Documentation/translations/zh_CN/core-api/generic-radix-tree.rst
+ create mode 100644 Documentation/translations/zh_CN/core-api/idr.rst
+ create mode 100644 Documentation/translations/zh_CN/core-api/packing.rst
 
-This is a copy of the explanation on [2]. You may want to delete the
-previous explanation or change this one.
+-- 
+2.20.1
 
-> +
-> +- ``--qemu_config``: Specifies the path to the file containing a
-
-"Specifies the path to a file containing a"
-
-> +  custom qemu architecture definition. This should be a python file
-> +  containing a QemuArchParams object.
-
-"containing a `QemuArchParams` object."
-
-The qemu_config has also a pretty good documentation on [2].
-
-> +
-> +- ``--qemu_args``: Specifies additional QEMU arguments, for example, "-smp 8".
-> +
-> +- ``--jobs``: Specifies the number of jobs (commands) to run simultaneously.
-> +  By default, this is set to the number of cores on your system.
-
-This CLI argument is already explained on [3]. You may want to delete
-the previous explanation or change this one.
-
-> +
-> +- ``--timeout``: Specifies the maximum number of seconds allowed for all tests to run.
-> +  This does not include the time taken to build the tests.
-
-Same here.
-
-> +
-> +- ``--kernel_args``: Specifies the kernel command-line arguments. Might be repeated.
-> +
-> +- ``--run_isolated``: If set, boots the kernel for each individual suite/test.
-> +  This is useful for debugging a non-hermetic test, one that
-> +  might pass/fail based on what ran before it.
-> +
-> +- ``--raw_output``: If set, generates unformatted output from kernel.
-> +  If set to ``--raw_output=kunit``, filters to just KUnit output.
-
-This command line argument is already explain on the Parse Test Results
-section [4].
-
-> +
-> +- ``--json``: If set, it stores the test results in a JSON format and prints to stdout or
-
-"If set, it stores the test results in a JSON format and prints it to
-`stdout` or"
-
-> +  saves to a file if a filename is specified.
-
-It's great to see new documentation for KUnit!
-
-[1] https://docs.kernel.org/kbuild/kbuild.html#arch
-[2]
-https://docs.kernel.org/dev-tools/kunit/run_wrapper.html#run-tests-on-qemu
-[3]
-https://docs.kernel.org/dev-tools/kunit/run_wrapper.html#run-tests-with-kunit-tool
-[4]
-https://docs.kernel.org/dev-tools/kunit/run_wrapper.html#parse-test-results
-
-Best Regards,
-- Maíra Canal
