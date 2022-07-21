@@ -2,188 +2,114 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 2779F57D54B
-	for <lists+linux-doc@lfdr.de>; Thu, 21 Jul 2022 22:57:52 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 2B78F57D564
+	for <lists+linux-doc@lfdr.de>; Thu, 21 Jul 2022 23:02:28 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S230349AbiGUU5u (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 21 Jul 2022 16:57:50 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:47674 "EHLO
+        id S233583AbiGUVCV (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 21 Jul 2022 17:02:21 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:51702 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S229613AbiGUU5t (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Thu, 21 Jul 2022 16:57:49 -0400
-Received: from mga09.intel.com (mga09.intel.com [134.134.136.24])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id C75F08FD74;
-        Thu, 21 Jul 2022 13:57:48 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1658437068; x=1689973068;
-  h=message-id:date:subject:to:cc:references:from:
-   in-reply-to:content-transfer-encoding:mime-version;
-  bh=YD0yWRs2rO/Kd/l5RnQK88XGS5b5cmQSj2+xUQTJL44=;
-  b=dvRz4agquSEi5aijMP6TpxfiZmwcB7UyUoFMW38vdi2PyhMAHZf1JzvC
-   dNcoqSmuLKCYi2rd+JAl3YrYKY8FBMSLikdjVkq3Otu2t/IXrqkKwltLT
-   ZJot5m2LL5YtPumKm8DAmcVvuEJBLxnbXjfoQ1Hf0dQeeGIkAob27P+Ro
-   vKdCfSiU6HPuplRKGwKyhYcZ4FIOY4NWAvRCoV3yeHIXex0IXaWw5UY5H
-   r/1vH4T+Ugjwru5ByLvQdoW1xEoJXFM0WHk3sZiau+pJssxodaHkhpxpf
-   bYK2q+8eds5YZ66QlovSlFUEJcW7Q8k1GWNAP57BMD/SoGmzrgkRj/Nii
-   A==;
-X-IronPort-AV: E=McAfee;i="6400,9594,10415"; a="287923763"
-X-IronPort-AV: E=Sophos;i="5.93,183,1654585200"; 
-   d="scan'208";a="287923763"
-Received: from fmsmga005.fm.intel.com ([10.253.24.32])
-  by orsmga102.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 21 Jul 2022 13:57:48 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.93,183,1654585200"; 
-   d="scan'208";a="925810903"
-Received: from fmsmsx602.amr.corp.intel.com ([10.18.126.82])
-  by fmsmga005.fm.intel.com with ESMTP; 21 Jul 2022 13:57:48 -0700
-Received: from fmsmsx607.amr.corp.intel.com (10.18.126.87) by
- fmsmsx602.amr.corp.intel.com (10.18.126.82) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2375.28; Thu, 21 Jul 2022 13:57:47 -0700
-Received: from fmsmsx611.amr.corp.intel.com (10.18.126.91) by
- fmsmsx607.amr.corp.intel.com (10.18.126.87) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2375.28; Thu, 21 Jul 2022 13:57:47 -0700
-Received: from fmsedg601.ED.cps.intel.com (10.1.192.135) by
- fmsmsx611.amr.corp.intel.com (10.18.126.91) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2375.28 via Frontend Transport; Thu, 21 Jul 2022 13:57:47 -0700
-Received: from NAM12-BN8-obe.outbound.protection.outlook.com (104.47.55.170)
- by edgegateway.intel.com (192.55.55.70) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.1.2308.27; Thu, 21 Jul 2022 13:57:46 -0700
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=HzHofOpM0LaN3+zMOhuq3xvyzI7kkbaoo0J5c4rD/05PkxdaKl/kLMUEVSA+xP8tFCUl31duuil640aj2GQ2BWMM5MmyQ2QbXP8ShzezVZaTfRGt47fPY3ChCPCGiE0O51po/WaZ/YuG7XvgAQ6GDqTBx7X3Ux0I6OQQ8arkkzD1vPtnvbAMELFA56mk0CgjFapGVMP96bJUGQD9D4nro1SRddwOFeUKl5ehcgN+lw7Ryl5Q+C4AlYE7rhV282iaQqpHxZD11lcVy1/CU5QyJWTmCSGEnjqJE8jvq6GBexXRgfZIVXKDLvXEWjI2JhOoBWh+SRWS3lA1XDIVTg7fJA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=A7jNaj2QP/OOehhlBU9NM+yDkSP74iTPrn8k6yUauF8=;
- b=gHZ6VBTD0BR44ZPqxKnKt0WgEH0NvHEyWN+HHrF8yznT3D6Xmxdxz2/5YOeZ7HBj4BTgz377mPW43RihEVkR39ZDbxxszLjQ3htIHYBv87vzE1F4Mnatim1soLQ0TVbrsdUKbHjPxZJ61d+KyxgIVy7lCTdAhJiEGB2B0GbnsdM+5B/1cnGcxW/E+SItQ+QHXXsJGf/IVZ9NbbjtQk4G6C8bKTrU5TcNuGaM3v8f2AeGefucCTuxAwGa6bRm+L+8y6cTCzd5uuaaNaieYEIPQvgCaKjCx91zUs4mukZTjfHb1aTIrQ/fmyp4hwWdzRB/ECU2538t52dzHeGbgsW0CQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=intel.com; dmarc=pass action=none header.from=intel.com;
- dkim=pass header.d=intel.com; arc=none
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=intel.com;
-Received: from PH0PR11MB4855.namprd11.prod.outlook.com (2603:10b6:510:41::12)
- by BY5PR11MB3973.namprd11.prod.outlook.com (2603:10b6:a03:185::29) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5458.19; Thu, 21 Jul
- 2022 20:57:44 +0000
-Received: from PH0PR11MB4855.namprd11.prod.outlook.com
- ([fe80::95a9:2d1d:b36e:4319]) by PH0PR11MB4855.namprd11.prod.outlook.com
- ([fe80::95a9:2d1d:b36e:4319%6]) with mapi id 15.20.5458.019; Thu, 21 Jul 2022
- 20:57:44 +0000
-Message-ID: <cd56a293-6353-c57a-56c7-adb5b3052848@intel.com>
-Date:   Thu, 21 Jul 2022 13:57:42 -0700
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:91.0) Gecko/20100101
- Thunderbird/91.11.0
-Subject: Re: [PATCH v3 0/2] x86: AMX enabling example with new constants
-Content-Language: en-CA
-To:     "Luck, Tony" <tony.luck@intel.com>,
-        "Hansen, Dave" <dave.hansen@intel.com>,
-        "Brown, Len" <len.brown@intel.com>,
-        "Wysocki, Rafael J" <rafael.j.wysocki@intel.com>,
-        "Chatre, Reinette" <reinette.chatre@intel.com>,
-        "Williams, Dan J" <dan.j.williams@intel.com>
-CC:     "bagasdotme@gmail.com" <bagasdotme@gmail.com>,
-        "corbet@lwn.net" <corbet@lwn.net>,
-        "linux-doc@vger.kernel.org" <linux-doc@vger.kernel.org>,
-        "linux-man@vger.kernel.org" <linux-man@vger.kernel.org>,
-        "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>
-References: <20220711171347.27309-1-chang.seok.bae@intel.com>
- <SJ1PR11MB6083E042762320A642D1FC5AFC919@SJ1PR11MB6083.namprd11.prod.outlook.com>
-From:   "Chang S. Bae" <chang.seok.bae@intel.com>
-In-Reply-To: <SJ1PR11MB6083E042762320A642D1FC5AFC919@SJ1PR11MB6083.namprd11.prod.outlook.com>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: BY3PR05CA0048.namprd05.prod.outlook.com
- (2603:10b6:a03:39b::23) To PH0PR11MB4855.namprd11.prod.outlook.com
- (2603:10b6:510:41::12)
+        with ESMTP id S232975AbiGUVCS (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Thu, 21 Jul 2022 17:02:18 -0400
+Received: from mail-wm1-x332.google.com (mail-wm1-x332.google.com [IPv6:2a00:1450:4864:20::332])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id C5FD98FD5D;
+        Thu, 21 Jul 2022 14:02:16 -0700 (PDT)
+Received: by mail-wm1-x332.google.com with SMTP id p26-20020a1c545a000000b003a2fb7c1274so4066743wmi.1;
+        Thu, 21 Jul 2022 14:02:16 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112;
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=LUbqQkNcEA47t5z4D+rB9SkmqQ7VO2bp8iPexMuATqU=;
+        b=OP+empOPZ1RB4JBaGjSPYztBbLFE4gQ/UMeL0BSMHnxPLK3k0KrYPjtb07qeYQxxJv
+         XqQg8H7RuS7Scu1YTs0X0D+eJLso0hzu+0R5UpPGLKaLWO1MM7gplZKvSRZC2LNcR06U
+         80Y+yOXRAgZvfBU2OTjZiz8xGAtZeG1vmJsROmrx35GfjE1ch48IjYQbQRyxGZ6haYgJ
+         5GllGV4ItT92kO+9PVZf2AlXC0SsddoIVN4+Oak/14A3dEunFBoIwo8FJBPftKR0l20s
+         pNfU5j5SeVss4s1WnlNRFvNLCHY/gyeCpwxSUsSKqHcUx9carxxFyyEdLp93fy2iQwmR
+         6yjw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=LUbqQkNcEA47t5z4D+rB9SkmqQ7VO2bp8iPexMuATqU=;
+        b=PccAqZkRBt7z4d/qF/csg2w5PjzKCVJuOlulI9xD++eKipJnADrx2Y1NvJ55rwQDeR
+         StFiSLLnq5KYDtOs7h6pMlY4vKpivOffkJmpuJPEok21XNScgsyOa5WjcwmyI1G64lfV
+         psra8a8SXZxb/9pQ0XCJ+VVHlfqSNm8lS5SWeVPOtX+6sovr6ZCxZ1WrxKR6hHc91Ipe
+         eSkppWezIaIpV8KvOV5bfY9FpKIprpNRHNT3hvG6QC/lQDbI+8b2TtBhGVxhscLbnPj/
+         ukYHE6qyat6uOkTCpXUcUJzYI0NzPTYvojSSIWEj4ETtXAh7VP2HJPB1pcIZh+hxo8WY
+         QNDg==
+X-Gm-Message-State: AJIora+E414LjJ8UbGNsQruxz7hTTIixYSCIZevqxtJo64X+1SlyhAtq
+        A/VbaVJKuKLhHh/4Gytc6X4=
+X-Google-Smtp-Source: AGRyM1uP6Bx8g4K9CRYbsg9B23+EhG+3Brx44lVLjS+PZZ+KB82TJ8d8YOOK80DoXNHzV34OYmYkog==
+X-Received: by 2002:a05:600c:601b:b0:3a3:21a2:8bcd with SMTP id az27-20020a05600c601b00b003a321a28bcdmr35141wmb.80.1658437335162;
+        Thu, 21 Jul 2022 14:02:15 -0700 (PDT)
+Received: from localhost.localdomain (host-95-235-102-55.retail.telecomitalia.it. [95.235.102.55])
+        by smtp.gmail.com with ESMTPSA id d12-20020adffbcc000000b0021b8c554196sm2884383wrs.29.2022.07.21.14.02.12
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 21 Jul 2022 14:02:13 -0700 (PDT)
+From:   "Fabio M. De Francesco" <fmdefrancesco@gmail.com>
+To:     Ira Weiny <ira.weiny@intel.com>,
+        Andrew Morton <akpm@linux-foundation.org>,
+        Catalin Marinas <catalin.marinas@arm.com>,
+        "Matthew Wilcox (Oracle)" <willy@infradead.org>,
+        Will Deacon <will@kernel.org>,
+        Peter Collingbourne <pcc@google.com>,
+        Vlastimil Babka <vbabka@suse.cz>,
+        Sebastian Andrzej Siewior <bigeasy@linutronix.de>,
+        Jonathan Corbet <corbet@lwn.net>, linux-kernel@vger.kernel.org,
+        linux-doc@vger.kernel.org
+Cc:     "Fabio M. De Francesco" <fmdefrancesco@gmail.com>,
+        Mike Rapoport <rppt@linux.ibm.com>,
+        Thomas Gleixner <tglx@linutronix.de>
+Subject: [PATCH 0/7] highmem: Extend kmap_local_page() documentation 
+Date:   Thu, 21 Jul 2022 23:01:59 +0200
+Message-Id: <20220721210206.13774-1-fmdefrancesco@gmail.com>
+X-Mailer: git-send-email 2.37.1
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: 0feef772-65cf-470d-7f23-08da6b5ba8a0
-X-MS-TrafficTypeDiagnostic: BY5PR11MB3973:EE_
-X-LD-Processed: 46c98d88-e344-4ed4-8496-4ed7712e255d,ExtAddr
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: KPHzob8QOPLs70cgCYEzrzkwRiOrHd1g+UL377P8Z0aVMfRWlVa5074yxoelIdAApZa68Mo7qHpe9l8ZhF1l09o9onQQt77hQJkXrLjQjrii0xFOzYzpkqfz+nA585DKN1+aoeEQV6ZtZ15vgkNcD4q6+i7vAdui/iPt7JmOvJpL8+RH+hLNe9jfl8BOG2q7lpVCxRmjERLcJubtnQMytyRPKjVMUZriBq42e5MiShA8mxNwA2+GB/IP47lyRvjZl0+uobydAnl1xRNWxE6RG+zJkRyUyY3tRq9Q8WW1JgTTM3e6NitfBg3GQP49GxkZ2t6AFhNF3Uo/b5D46D4ou5MbCGj62rNdI68Pi+h6DntOwFrXkYtzArQ8jo5+LjQgAQsEXTiS6/Iee9qz8yRT44TApMfi83W2TKlQNVvqC2ZID9sSVIlboNtzmfl2oKhZ9UiwIvxn16JRR40mj7FFL8b6dTx7O6HPbwxRSa9PMiILNSWvlmChqNBNGmvpLiC7MOthmV9Lr0/dltpBWQXIyu8Qz8DwwJSWSOPipQDQXRc6IkmpO5g66ECXbc6OBe7ie8AL7Hq8GebLPNiqOBOfY25aM+ntTHRoYE6lCbdbmPNmqTCPeF8lRlLbkWeUJO2X48HFbh/WTm6N64kr9eYm0nobtd7pz47lr17ALks9VsqgNFqqGJ5cwcJMnDQx2EOZS0G5VrhAG/B5PoulPkpD2SVeRlzN/UalZJxV4jCTCmvusik0z1p1y2dKvV93g8cSa+Hea1jjBXmxsmnWdVgrEVnyVHB7gSSTurkesDnzMK+FMhGv9UQ/1p7WvrAxpOT9xpgyk5Gr9RFrzEDC6rUyCQ6KgKEvzIR+BpAQgI1JZHl0AoIKdio6pMS5BjuKm20w
-X-Forefront-Antispam-Report: CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:PH0PR11MB4855.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230016)(376002)(39860400002)(366004)(346002)(396003)(136003)(31686004)(82960400001)(86362001)(31696002)(921005)(38100700002)(36756003)(83380400001)(186003)(2616005)(966005)(6486002)(6506007)(26005)(6512007)(4744005)(2906002)(53546011)(110136005)(54906003)(66476007)(41300700001)(6636002)(316002)(66946007)(8936002)(66556008)(8676002)(4326008)(478600001)(5660300002)(45980500001)(43740500002);DIR:OUT;SFP:1102;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?azVoT28rYkdzbzlEMmY1emc2ZmRYaFUvRUVEVXdJMmViSTRYQlVKMFZPSUFB?=
- =?utf-8?B?Rm1HMktadlA0L0J6dmpXWU1MTys3ckxEWEI5SjNUUU9GWFFMY0dHYWhmOVdy?=
- =?utf-8?B?RHI2d2Yrc1BFVW0wMmljRkIwZERiZ3l2UFZjdTdjaVBaNEdrMlE2K2VXcTlR?=
- =?utf-8?B?aVpBSVBJRnFMNWs1Q0xkeDJYRFEwdXBuZ2NYWlllaWpsckNndWxFNTlzMnIy?=
- =?utf-8?B?S2FvbldnWVdiQlZucENMTm9WS0l2UWNjbytwQ0pmdjZ3a0czc2tVVVNhdWRZ?=
- =?utf-8?B?c1BwT3Q4SldnSWRyZlI2dHE3ZEp5d1Jjb1FDMDFkNE1uT1pJL2d2TEs1OVRj?=
- =?utf-8?B?cDJFZlRXZXNiZzQwalpNdmlTNXVhdTRYQTVwcXZQNHRWVkRRcGpPS0ZvcDVw?=
- =?utf-8?B?b2g0cE1CdG5kcG1xQnJ3UEtJbVc1MWtpTC9RWmtMcFQ3NWtwd053bVd5QXow?=
- =?utf-8?B?ZHJVRVQxNjRvWWpnbCtaV3Rrc1ZxaXpjOU9tTkhhWElVTERNeWt6a3JDcFN2?=
- =?utf-8?B?QWhzMkY4U1ZVMlp0NHR1bkY4QlRYMFJmdzkyVFBRaGRvQXk1TjhCeTVGdmgv?=
- =?utf-8?B?N2JwR1lLMC9IdnFsQ2FzY1dYaXFiNUtZaG1oenNjYWJiNU5OMi9GRlRITmpU?=
- =?utf-8?B?NUxCeDExQU9Ob3VEejUwc2c1UDArbnFNOEVQVjhLM2FHL1l4Y25yd3RmVWRN?=
- =?utf-8?B?RlVGSFRRVDQ1NzNaYjBFNC9HOGNLTmRBOWQrK2xzU2N3MkxaaFRhbVNJR1hK?=
- =?utf-8?B?aTVoS3FEWjdGcTE2d0VuR25vWTI2UWwzYWZmQ014VlFGNGh3dGF5Nm9uYnJ4?=
- =?utf-8?B?WmlTSEg0ZUFmNnkvY1dOTk5NSlJSRkhUV0ZnN3dxV3ZTQmNEU1JTOGJtNDg0?=
- =?utf-8?B?RmFpUU16Vk5JdHFUUnh2T0pxVTY1UXJoK1RrOUM0TnZXVURSZlM4WUdpbUlL?=
- =?utf-8?B?L1VPVDZWTmNmMEtlOGtjcklMempvaU94bWhZNzcxRUJoTE0wUWNqVklaODRz?=
- =?utf-8?B?TlNyOW5PVGk1bmh4eERCUGxpQlBuRVdhNllXYXliMCtzTGhBOTRGNDV6VDh6?=
- =?utf-8?B?SjlmUHl0ZEF1ek5YVlFISWpxV0x6YzB3T1pNa1V0MDNhSWRUWEFCTzVVV1U4?=
- =?utf-8?B?N1Zxc2lMZmJrc2dKZ00zZUVxUnU2K0NVdVR5djl6Y3U1OXlZK2dOSnlaV3Jl?=
- =?utf-8?B?c3BneUFNdTB5QkpNQm0yM1VubitmdlF4ZzNKWXhGanVVYTk2UXdteVlUY2VL?=
- =?utf-8?B?TThXZ1MxNHI2d3F3YTROMVIxTE1mTWJFOUR1MndXYTh3bG1rSVFTYUF2aUNS?=
- =?utf-8?B?MWtOdTVHdmlackg0a3FCSzR4eWF3RzRTZ0VpSVpPSzJzZzFrM2JwL2dvcmhp?=
- =?utf-8?B?OEN0RGd0T3A5UXVBMUtOM2tHdXdUUXNjUlRZUHdyeGRETk9XRFpFdmVEU0lJ?=
- =?utf-8?B?TFNRUWRtOGJ2MldyYy9UTW83TDAwYmJFZk1WVGM3RVIraXJqVk9zQ3M5am04?=
- =?utf-8?B?OFp1L0ZxUTRKN0diRDJSOGhxano2US8wNUNwZmFMcVVjZGJ0Zm1RSWVGVnpE?=
- =?utf-8?B?TUZIOG5KdUtRdVRZTjVJRkhuYktIYVM4ZWhkbWFpcmd5MUZzSlBaRTdOQUJN?=
- =?utf-8?B?WFN0UjJhakFwTEx3Q3oveXhtTXNhNjl6YlJsSm5aL0poT2xkQ1NEVFZYbEZ0?=
- =?utf-8?B?VXJZU2o3Tkh2dEZ0OW1hMGJZZ0pBYTA1U1dYUzQvZThzR3Z0TG5icGp4RTlV?=
- =?utf-8?B?SGNKQ3lZdHRXSC81SDl5QmZBMkxXK0dMVVkrZUpwMGpDNEh2N0V4clNPeWhj?=
- =?utf-8?B?TzFmbE4vWlhtV3FWTkZpV0FwTy9nY0hOYzBTWndBZnUzSlRYamhiTEVoT083?=
- =?utf-8?B?SXQzS1hDZU0vZm1WMXRZQ29XOTZzV2pVYzNUQ2FjVklkcUtDYTB4eXplbE4r?=
- =?utf-8?B?WWE1V1ROenBGVG5ZNDIybk9POGxzVENSZXVhWnhzNDByWU9ISUpHRDEzalRJ?=
- =?utf-8?B?cHZqdzdtQ0djME9tK3JmTlRZN1diZTMraGxTUnJUaExxbDNOejlsaDA0d1dO?=
- =?utf-8?B?YkxjZFZxV0ZEL2ZJWE1VSTYrLzl3c2NjMSsyd3I1MlZmWlZPcERSUFlZYjZx?=
- =?utf-8?B?d3dyMk55SWMxaTBVZ0Y5RTZvWUN0T0RhWXY0ZnpsZGtKNk1RRmx1RFhHd2ZS?=
- =?utf-8?B?bnc9PQ==?=
-X-MS-Exchange-CrossTenant-Network-Message-Id: 0feef772-65cf-470d-7f23-08da6b5ba8a0
-X-MS-Exchange-CrossTenant-AuthSource: PH0PR11MB4855.namprd11.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 21 Jul 2022 20:57:44.3195
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 46c98d88-e344-4ed4-8496-4ed7712e255d
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: MTkSnNNOFw62YHbLtQXBamgLTluUkRxL+T8eGKVXRmOY+WxqexiIyyYPV448XxKPEr6wzLzABsL7rlCAt7QiAUzrHLTc014EY8zpWyL3E0U=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: BY5PR11MB3973
-X-OriginatorOrg: intel.com
-X-Spam-Status: No, score=-5.1 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,NICE_REPLY_A,
-        RCVD_IN_DNSWL_MED,RCVD_IN_MSPIKE_H3,RCVD_IN_MSPIKE_WL,SPF_HELO_NONE,
-        SPF_NONE autolearn=ham autolearn_force=no version=3.4.6
+Content-Transfer-Encoding: 8bit
+X-Spam-Status: No, score=-2.1 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_FROM,
+        RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,SPF_PASS autolearn=ham
+        autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On 7/21/2022 1:53 PM, Luck, Tony wrote:
->> The arch_prctl(2) manual page [2] is missing these new options. Perhaps,
->> the man-page update follows up along with this.
-> 
-> This isn't the right process to get a manual page updated.
-> 
-> See:
-> 
-> https://www.kernel.org/doc/man-pages/contributing.html
-> 
-> then log a bug, write a patch, and submit it to add the AMX options.
+The Highmem's interface is evolving and the current documentation does not
+reflect the intended uses of each of the calls. Furthermore, after a
+recent series of reworks, the differences of the calls can still be
+confusing and may lead to the expanded use of calls which are deprecated.
 
-Indeed. I didn't intend this series to initiate the process to update 
-the man page. Instead, I wanted to establish the kernel doc before 
-starting it. But it looks like not super clear, sorry.
+This series is the second round of changes towards an enhanced
+documentation of the Highmem's interface; at this stage the patches are
+only focused to kmap_local_page().
 
-Thanks,
-Chang
+In addition it also contains some minor clean ups.
+
+Cc: Andrew Morton <akpm@linux-foundation.org>
+Cc: Matthew Wilcox (Oracle) <willy@infradead.org>
+Cc: Mike Rapoport <rppt@linux.ibm.com>
+Cc: Sebastian Andrzej Siewior <bigeasy@linutronix.de>
+Cc: Thomas Gleixner <tglx@linutronix.de>
+Suggested-by: Ira Weiny <ira.weiny@intel.com>
+Signed-off-by: Fabio M. De Francesco <fmdefrancesco@gmail.com>
+
+Fabio M. De Francesco (7):
+  highmem: Remove unneeded spaces in kmap_local_page() kdocs
+  highmem: Specify that kmap_local_page() is callable from interrupts
+  Documentation/mm: Don't kmap*() pages which can't come from HIGHMEM
+  Documentation/mm: Avoid invalid use of addresses from
+    kmap_local_page()
+  Documentation/mm: Prefer kmap_local_page() and avoid kmap()
+  highmem: Delete a sentence from kmap_local_page() kdocs
+  Documentation/mm: Add details about kmap_local_page() and preemption
+
+ Documentation/vm/highmem.rst | 31 +++++++++++++++++++++++++++----
+ include/linux/highmem.h      |  7 +++----
+ 2 files changed, 30 insertions(+), 8 deletions(-)
+
+-- 
+2.37.1
+
