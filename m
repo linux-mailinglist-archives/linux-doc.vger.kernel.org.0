@@ -2,155 +2,106 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id B7BAA57DCBF
-	for <lists+linux-doc@lfdr.de>; Fri, 22 Jul 2022 10:47:52 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id E0C6857DCD0
+	for <lists+linux-doc@lfdr.de>; Fri, 22 Jul 2022 10:50:49 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S232590AbiGVIqj (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Fri, 22 Jul 2022 04:46:39 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:42416 "EHLO
+        id S235002AbiGVIuc (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Fri, 22 Jul 2022 04:50:32 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:48884 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S235003AbiGVIqX (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Fri, 22 Jul 2022 04:46:23 -0400
-Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.129.124])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTP id 59C229FE34
-        for <linux-doc@vger.kernel.org>; Fri, 22 Jul 2022 01:46:08 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-        s=mimecast20190719; t=1658479567;
-        h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-         to:to:cc:cc:mime-version:mime-version:
-         content-transfer-encoding:content-transfer-encoding:
-         in-reply-to:in-reply-to:references:references;
-        bh=RSXimuUd+71j8JzSdjJ27yBRxj8T4NPAJaqSzLdyIx8=;
-        b=YRTE23413sJ1NgvWddh00IIzEoJcyRhHvQ6mzWlD+X0a+Oa7/A1LJs9lBvJG+y9P1lcmUl
-        v6YhEUGMIxTcmwWg667YKdyYyv3PudlQchYvZpaJQau/532QNAYHOt1T3aTJZDZ2IeRe2F
-        7cmmmoh2CzV3Bdhf6d/QNo0MUs1/u+c=
-Received: from mimecast-mx02.redhat.com (mx3-rdu2.redhat.com
- [66.187.233.73]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- us-mta-657-QBEJYLHdNXuKeJd-ALmdnQ-1; Fri, 22 Jul 2022 04:46:03 -0400
-X-MC-Unique: QBEJYLHdNXuKeJd-ALmdnQ-1
-Received: from smtp.corp.redhat.com (int-mx01.intmail.prod.int.rdu2.redhat.com [10.11.54.1])
-        (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
-        (No client certificate requested)
-        by mimecast-mx02.redhat.com (Postfix) with ESMTPS id B101A3C1014E;
-        Fri, 22 Jul 2022 08:46:02 +0000 (UTC)
-Received: from plouf.redhat.com (unknown [10.39.194.200])
-        by smtp.corp.redhat.com (Postfix) with ESMTP id 420A340CFD0A;
-        Fri, 22 Jul 2022 08:45:59 +0000 (UTC)
-From:   Benjamin Tissoires <benjamin.tissoires@redhat.com>
-To:     Greg KH <gregkh@linuxfoundation.org>,
-        Jiri Kosina <jikos@kernel.org>,
-        Alexei Starovoitov <ast@kernel.org>,
-        Daniel Borkmann <daniel@iogearbox.net>,
-        Andrii Nakryiko <andrii@kernel.org>,
-        Martin KaFai Lau <kafai@fb.com>,
-        Song Liu <songliubraving@fb.com>, Yonghong Song <yhs@fb.com>,
-        Kumar Kartikeya Dwivedi <memxor@gmail.com>,
-        John Fastabend <john.fastabend@gmail.com>,
-        KP Singh <kpsingh@kernel.org>, Shuah Khan <shuah@kernel.org>,
-        Dave Marchevsky <davemarchevsky@fb.com>,
-        Joe Stringer <joe@cilium.io>, Jonathan Corbet <corbet@lwn.net>
-Cc:     Tero Kristo <tero.kristo@linux.intel.com>,
-        linux-kernel@vger.kernel.org, linux-input@vger.kernel.org,
-        netdev@vger.kernel.org, bpf@vger.kernel.org,
-        linux-kselftest@vger.kernel.org, linux-doc@vger.kernel.org,
-        Benjamin Tissoires <benjamin.tissoires@redhat.com>
-Subject: [PATCH bpf-next v8 02/24] bpf/verifier: allow kfunc to read user provided context
-Date:   Fri, 22 Jul 2022 10:45:56 +0200
-Message-Id: <20220722084556.1342406-1-benjamin.tissoires@redhat.com>
-In-Reply-To: <20220721153625.1282007-3-benjamin.tissoires@redhat.com>
-References: <20220721153625.1282007-3-benjamin.tissoires@redhat.com>
+        with ESMTP id S234785AbiGVIub (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Fri, 22 Jul 2022 04:50:31 -0400
+Received: from mail-pg1-x529.google.com (mail-pg1-x529.google.com [IPv6:2607:f8b0:4864:20::529])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id E6ACA21241;
+        Fri, 22 Jul 2022 01:50:30 -0700 (PDT)
+Received: by mail-pg1-x529.google.com with SMTP id f65so3882949pgc.12;
+        Fri, 22 Jul 2022 01:50:30 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112;
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=1zGY0EXAaXQ+D8hequJI3ImESjKlfXSgshYgeHZe/nM=;
+        b=RI8ihRBDPebahs9PUDIqNYR7E7I+kJbknc2A8FVQMgB+P9c1vNE5LThfv641xmDm2B
+         HkDuOfylWouR7+oCvIGy1wSrsdZD03DO961g0lnFmIPRkQTNinthv15OOB2ybpF8Lm1c
+         s0198ttdOK99r7X4VCHnXiJi8hTdTfrGuYExpZSQAZrzJVa89EoJ5CvQVdZbe1n+X5Wm
+         qyulq0yPEaIwiYI+qhUqEL1oDGKnS6D3y9PX1QN942iLszGMeVuj6z6aipJYTZK+qTjj
+         ekOfwFYzFutL6S7xY+vuQGEl6cwlb+NQaUj4jpSR7tkC80bMmVtH6oTtSKUf2Yz05c27
+         6AWw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=1zGY0EXAaXQ+D8hequJI3ImESjKlfXSgshYgeHZe/nM=;
+        b=MSFCsezpAoNTD/5pYjMumshY4AgUpf3kn63wnL1+6dzXnLr0nZa7VBsofFKDNqW2r9
+         GjZ1Fgx4YL3NUAyTOp1SzCQ6e3IetUPUs/71OiXw9eIh9Zbxglz/mBzehA532W/2SXwN
+         1hgArMR+3Z5hGJecgPvgtGrCL5FozPKw3BusG6+RanM54owCpc5NdZC4n/9dcZogGfjF
+         f2XAldguLbkGI1Ub6Xxx4Z5toMLc7QVxhi1dKnVKK9m0p8F8fXQ0wHtva/WIdutGvknp
+         ygRD7EM3+NL4BCD1ZRtSh1pukMBWAp3q9BmFbu8kuXEVbITKtDBKuPBMQy/cdESvhoGB
+         9QTw==
+X-Gm-Message-State: AJIora8habRSp7If1Pnk8oyzDBvRnT37aAcZ1TfNXim7KTPxeK36tynX
+        Py9T8ep++kUIvH1f56KEYSY=
+X-Google-Smtp-Source: AGRyM1t9IwkGIEkdbuMN5EJsIH776t47ap0HBwKQPSqDE+9kdCorey9HPDwdlsww8N0OJRCh7SDDnw==
+X-Received: by 2002:a62:16ce:0:b0:528:c4c7:972f with SMTP id 197-20020a6216ce000000b00528c4c7972fmr2375812pfw.55.1658479830384;
+        Fri, 22 Jul 2022 01:50:30 -0700 (PDT)
+Received: from debian.me (subs03-180-214-233-91.three.co.id. [180.214.233.91])
+        by smtp.gmail.com with ESMTPSA id a11-20020a170902b58b00b0016c1e006b63sm3102172pls.64.2022.07.22.01.50.29
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Fri, 22 Jul 2022 01:50:29 -0700 (PDT)
+Received: by debian.me (Postfix, from userid 1000)
+        id 3EC2A104984; Fri, 22 Jul 2022 15:50:22 +0700 (WIB)
+From:   Bagas Sanjaya <bagasdotme@gmail.com>
+To:     linux-doc@vger.kernel.org
+Cc:     Heiko Carstens <hca@linux.ibm.com>,
+        Vasily Gorbik <gor@linux.ibm.com>,
+        Alexander Gordeev <agordeev@linux.ibm.com>,
+        Christian Borntraeger <borntraeger@linux.ibm.com>,
+        Sven Schnelle <svens@linux.ibm.com>,
+        Jonathan Corbet <corbet@lwn.net>,
+        Halil Pasic <pasic@linux.ibm.com>,
+        Tony Krowiak <akrowiak@linux.ibm.com>,
+        Jason Herne <jjherne@linux.ibm.com>,
+        linux-s390@vger.kernel.org, linux-kernel@vger.kernel.org,
+        Bagas Sanjaya <bagasdotme@gmail.com>
+Subject: [PATCH 0/8] Documentation: s390: documentation fixes for vfio_ap driver
+Date:   Fri, 22 Jul 2022 15:49:39 +0700
+Message-Id: <20220722084946.22965-1-bagasdotme@gmail.com>
+X-Mailer: git-send-email 2.37.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Scanned-By: MIMEDefang 2.84 on 10.11.54.1
-X-Spam-Status: No, score=-3.5 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_LOW,
-        SPF_HELO_NONE,SPF_NONE autolearn=ham autolearn_force=no version=3.4.6
+X-Spam-Status: No, score=-0.6 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_FROM,
+        RCVD_IN_DNSWL_NONE,RCVD_IN_SORBS_WEB,SPF_HELO_NONE,SPF_PASS
+        autolearn=no autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-When a kfunc was trying to access data from context in a syscall eBPF
-program, the verifier was rejecting the call.
-This is because the syscall context is not known at compile time, and
-so we need to check this when actually accessing it.
+Here is documentation fixes for vfio_ap driver, as recently reported in
+linux-next.
 
-Check for the valid memory access and allow such situation to happen.
+This series is based on next-20220721.
 
-Acked-by: Kumar Kartikeya Dwivedi <memxor@gmail.com>
-Signed-off-by: Benjamin Tissoires <benjamin.tissoires@redhat.com>
+Bagas Sanjaya (8):
+  Documentation: s390: Use note directive for changing mask note
+  Documentation: s390: use note directive for remaining notes
+  Documentation: s390: sync heading underlines
+  Documentation: s390: use code blocks for virsh and qemu output
+  Documentation: s390: use code block for structs
+  Documentation: s390: escape *kvm->arch.crypto.pqap_hook pointer inside
+    inline code
+  Documentation: s390: extend underline for matrix devices lock
+  Documentation: s390: add vfio-ap-locking documentation to table of
+    contents index
 
----
+ Documentation/s390/index.rst           |   1 +
+ Documentation/s390/vfio-ap-locking.rst |  68 +++++-----
+ Documentation/s390/vfio-ap.rst         | 164 ++++++++++++++-----------
+ 3 files changed, 132 insertions(+), 101 deletions(-)
 
-changes in v8:
-- fixup comment
-- return -EACCESS instead of -EINVAL for consistency
 
-changes in v7:
-- renamed access_t into atype
-- allow zero-byte read
-- check_mem_access() to the correct offset/size
-
-new in v6
----
- kernel/bpf/verifier.c | 21 +++++++++++++++++++++
- 1 file changed, 21 insertions(+)
-
-diff --git a/kernel/bpf/verifier.c b/kernel/bpf/verifier.c
-index 7c1e056624f9..c807c5d7085a 100644
---- a/kernel/bpf/verifier.c
-+++ b/kernel/bpf/verifier.c
-@@ -248,6 +248,7 @@ struct bpf_call_arg_meta {
- 	struct bpf_map *map_ptr;
- 	bool raw_mode;
- 	bool pkt_access;
-+	bool is_kfunc;
- 	u8 release_regno;
- 	int regno;
- 	int access_size;
-@@ -5170,6 +5171,7 @@ static int check_helper_mem_access(struct bpf_verifier_env *env, int regno,
- 				   struct bpf_call_arg_meta *meta)
- {
- 	struct bpf_reg_state *regs = cur_regs(env), *reg = &regs[regno];
-+	enum bpf_prog_type prog_type = resolve_prog_type(env->prog);
- 	u32 *max_access;
- 
- 	switch (base_type(reg->type)) {
-@@ -5223,6 +5225,24 @@ static int check_helper_mem_access(struct bpf_verifier_env *env, int regno,
- 				env,
- 				regno, reg->off, access_size,
- 				zero_size_allowed, ACCESS_HELPER, meta);
-+	case PTR_TO_CTX:
-+		/* in case of a kfunc called in a program of type SYSCALL, the context is
-+		 * user supplied, so not computed statically.
-+		 * Dynamically check it now
-+		 */
-+		if (prog_type == BPF_PROG_TYPE_SYSCALL && meta && meta->is_kfunc) {
-+			enum bpf_access_type atype = meta->raw_mode ? BPF_WRITE : BPF_READ;
-+			int offset = access_size - 1;
-+
-+			/* Allow zero-byte read from PTR_TO_CTX */
-+			if (access_size == 0)
-+				return zero_size_allowed ? 0 : -EACCES;
-+
-+			return check_mem_access(env, env->insn_idx, regno, offset, BPF_B,
-+						atype, -1, false);
-+		}
-+
-+		fallthrough;
- 	default: /* scalar_value or invalid ptr */
- 		/* Allow zero-byte read from NULL, regardless of pointer type */
- 		if (zero_size_allowed && access_size == 0 &&
-@@ -5335,6 +5355,7 @@ int check_kfunc_mem_size_reg(struct bpf_verifier_env *env, struct bpf_reg_state
- 	WARN_ON_ONCE(regno < BPF_REG_2 || regno > BPF_REG_5);
- 
- 	memset(&meta, 0, sizeof(meta));
-+	meta.is_kfunc = true;
- 
- 	if (may_be_null) {
- 		saved_reg = *mem_reg;
+base-commit: a3fd3ca134d9485a0f9a7bdcffd7f8bae27f79d3
 -- 
-2.36.1
+An old man doll... just what I always wanted! - Clara
 
