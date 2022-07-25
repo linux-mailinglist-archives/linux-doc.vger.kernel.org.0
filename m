@@ -2,131 +2,89 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 9D92A57FBE3
-	for <lists+linux-doc@lfdr.de>; Mon, 25 Jul 2022 10:58:26 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id CF66D57FC3D
+	for <lists+linux-doc@lfdr.de>; Mon, 25 Jul 2022 11:20:34 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S234278AbiGYI6Y (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 25 Jul 2022 04:58:24 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:42212 "EHLO
+        id S234456AbiGYJUc (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 25 Jul 2022 05:20:32 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:59304 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S230177AbiGYI6X (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Mon, 25 Jul 2022 04:58:23 -0400
-Received: from mail-pl1-x62c.google.com (mail-pl1-x62c.google.com [IPv6:2607:f8b0:4864:20::62c])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 6C85AFDB;
-        Mon, 25 Jul 2022 01:58:21 -0700 (PDT)
-Received: by mail-pl1-x62c.google.com with SMTP id y15so9793443plp.10;
-        Mon, 25 Jul 2022 01:58:21 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=in-reply-to:content-disposition:mime-version:references:message-id
-         :subject:cc:to:from:date:from:to:cc;
-        bh=shwf/ZtiVJnvPZWHxnuYE0ISBPmDCrahbQbLNftmDFM=;
-        b=CkV1cZno9YGzTmLbeNidquqMj03d/icBOtSPSNDSDFGJFib/moEmO5AnYcNGgDkFZ2
-         WYQt3Xtvpr3Tiwzfby7nzXsCA4zrPvx5zcQTF3tDY5NBYNNjPz0sAeuVMdii9va62ssq
-         jDVqg/tESj3bVduulDXTJ+NAOgB6Z7H7RnN8dRG/jE+LyE6l/gs3k9ICpM/5VQ38I9pO
-         gSWi0DdSBFCyUJi4WgzsPx0QczISQrsRaciIhCLkgN1e1SUYcjH1HK1ho9KZuNM1yCyK
-         iH9plxelVRxS35xc89WdOy+IgYqWss3fRgLrvpyDeu3LAdXXfDmfIVexs3CyujzXwjVE
-         R0WA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=in-reply-to:content-disposition:mime-version:references:message-id
-         :subject:cc:to:from:date:x-gm-message-state:from:to:cc;
-        bh=shwf/ZtiVJnvPZWHxnuYE0ISBPmDCrahbQbLNftmDFM=;
-        b=BzD9hEUXj8gnBkj//YbU6rgeXIzb2+Keldw8VMDg3AfoNz1CSmUpYsexRBRS3UVwLE
-         IpHnrB4cENLLPYX951lh6ApG5Rp+9QGcJy2yv4KKtKDxZKGn/yHy0oZDS1GwI/bt010R
-         0bb9CFXMLoraXTQngpV8rFW2SwYv+cLH+B1nG/KyPjExwtqO1wgCTSlWffp4sVpcmjgu
-         ZjZX6/EphxBLBROEQRbOqJb/Byi1SnFb3Ka4itB8ryVWVUZNdf1f2SNl/9335D+nWItV
-         kbYZ0y+oW0sc3txQhqtQbsfJbWp9iXWmoTH85TQhAneJrHOX2iGBtfWpLCoer62PQZOP
-         3gcg==
-X-Gm-Message-State: AJIora9CQIFx20zUhifddegGHWjlCbeVkRI0E1T5d674QiYyWzaYZcOh
-        jsjOtwLTMl5+DVVD+W4Eijs=
-X-Google-Smtp-Source: AGRyM1tc/EXSEE4DsdivoNyAzDfy9GtqMEsS8v4emW33dXRa/YCFvSFHsQxyYstWK5KoNjJxwZWQ6Q==
-X-Received: by 2002:a17:90a:4e05:b0:1ec:8de4:1dd5 with SMTP id n5-20020a17090a4e0500b001ec8de41dd5mr13038394pjh.242.1658739500927;
-        Mon, 25 Jul 2022 01:58:20 -0700 (PDT)
-Received: from debian.me (subs32-116-206-28-39.three.co.id. [116.206.28.39])
-        by smtp.gmail.com with ESMTPSA id k62-20020a17090a14c400b001f218ddd5e2sm10428560pja.32.2022.07.25.01.58.20
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 25 Jul 2022 01:58:20 -0700 (PDT)
-Received: by debian.me (Postfix, from userid 1000)
-        id 0092D104BA3; Mon, 25 Jul 2022 15:58:16 +0700 (WIB)
-Date:   Mon, 25 Jul 2022 15:58:16 +0700
-From:   Bagas Sanjaya <bagasdotme@gmail.com>
-To:     Sadiya Kazi <sadiyakazi@google.com>
-Cc:     brendanhiggins@google.com, davidgow@google.com,
-        skhan@linuxfoundation.org, corbet@lwn.net, mairacanal@riseup.net,
-        linux-kselftest@vger.kernel.org, kunit-dev@googlegroups.com,
-        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org
-Subject: Re: [PATCH v3] Documentation: kunit: Add CLI args for kunit_tool
-Message-ID: <Yt5bKOfUms4e5PWu@debian.me>
-References: <20220724184758.1723925-1-sadiyakazi@google.com>
+        with ESMTP id S234054AbiGYJUb (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Mon, 25 Jul 2022 05:20:31 -0400
+Received: from loongson.cn (mail.loongson.cn [114.242.206.163])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTP id 102AA62C2
+        for <linux-doc@vger.kernel.org>; Mon, 25 Jul 2022 02:20:28 -0700 (PDT)
+Received: from localhost.localdomain (unknown [112.20.110.136])
+        by mail.loongson.cn (Coremail) with SMTP id AQAAf9Dxb9JPYN5igls2AA--.13314S2;
+        Mon, 25 Jul 2022 17:20:17 +0800 (CST)
+From:   Yanteng Si <siyanteng@loongson.cn>
+To:     alexs@kernel.org, bobwxc@email.cn, seakeel@gmail.com
+Cc:     Yanteng Si <siyanteng@loongson.cn>, corbet@lwn.net,
+        chenhuacai@kernel.org, jiaxun.yang@flygoat.com,
+        linux-doc@vger.kernel.org, siyanteng01@gmail.com,
+        zhoubinbin@loongson.cn, yizhou.tang@shopee.com,
+        wanjiabing@vivo.com, leoyang.li@nxp.com, src.res@email.cn
+Subject: [PATCH 0/8] Docs/zh_CN: Update some translation to 5.19-rc8
+Date:   Mon, 25 Jul 2022 17:20:45 +0800
+Message-Id: <cover.1658740151.git.siyanteng@loongson.cn>
+X-Mailer: git-send-email 2.31.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-In-Reply-To: <20220724184758.1723925-1-sadiyakazi@google.com>
-X-Spam-Status: No, score=-0.6 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_FROM,
-        RCVD_IN_DNSWL_NONE,RCVD_IN_SORBS_WEB,SPF_HELO_NONE,SPF_PASS
-        autolearn=no autolearn_force=no version=3.4.6
+Content-Transfer-Encoding: 8bit
+X-CM-TRANSID: AQAAf9Dxb9JPYN5igls2AA--.13314S2
+X-Coremail-Antispam: 1UD129KBjvdXoWrKr13Wry8JFW3XFykAr48tFb_yoWkArc_ua
+        4kZanrAwsrXryftr4xWr13uw4rCayjg34UtFs8ta98Gws8Gr4DZF1UXFsYgF45WFsxAFW7
+        GrWxWr1Svr1SgjkaLaAFLSUrUUUUUb8apTn2vfkv8UJUUUU8Yxn0WfASr-VFAUDa7-sFnT
+        9fnUUIcSsGvfJTRUUUbVkFF20E14v26r4j6ryUM7CY07I20VC2zVCF04k26cxKx2IYs7xG
+        6rWj6s0DM7CIcVAFz4kK6r1j6r18M28lY4IEw2IIxxk0rwA2F7IY1VAKz4vEj48ve4kI8w
+        A2z4x0Y4vE2Ix0cI8IcVAFwI0_Xr0_Ar1l84ACjcxK6xIIjxv20xvEc7CjxVAFwI0_Gr0_
+        Cr1l84ACjcxK6I8E87Iv67AKxVWxJr0_GcWl84ACjcxK6I8E87Iv6xkF7I0E14v26rxl6s
+        0DM2AIxVAIcxkEcVAq07x20xvEncxIr21l5I8CrVACY4xI64kE6c02F40Ex7xfMcIj6xII
+        jxv20xvE14v26r1j6r18McIj6I8E87Iv67AKxVWUJVW8JwAm72CE4IkC6x0Yz7v_Jr0_Gr
+        1lF7xvr2IYc2Ij64vIr41lF7I21c0EjII2zVCS5cI20VAGYxC7M4IIrI8v6xkF7I0E8cxa
+        n2IY04v7MxkIecxEwVAFwVW8uwCF04k20xvY0x0EwIxGrwCFx2IqxVCFs4IE7xkEbVWUJV
+        W8JwC20s026c02F40E14v26r1j6r18MI8I3I0E7480Y4vE14v26r106r1rMI8E67AF67kF
+        1VAFwI0_Jw0_GFylIxkGc2Ij64vIr41lIxAIcVC0I7IYx2IY67AKxVWUJVWUCwCI42IY6x
+        IIjxv20xvEc7CjxVAFwI0_Gr0_Cr1lIxAIcVCF04k26cxKx2IYs7xG6rW3Jr0E3s1lIxAI
+        cVC2z280aVAFwI0_Jr0_Gr1lIxAIcVC2z280aVCY1x0267AKxVW8JVW8JrUvcSsGvfC2Kf
+        nxnUUI43ZEXa7VUjMmh5UUUUU==
+X-CM-SenderInfo: pvl1t0pwhqwqxorr0wxvrqhubq/
+X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00,SPF_HELO_PASS,
+        SPF_PASS autolearn=ham autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Sun, Jul 24, 2022 at 06:47:59PM +0000, Sadiya Kazi wrote:
-> Run_wrapper.rst was missing some command line arguments. Added
-> additional args in the file.
-> 
-Hi Sadiya,
+Update the following Chinese documents to 5.19-rc8:
 
-The patch description looks awkward. Better say:
-"Many kunit_tool common command line arguments are missing from the
-documentation. Document them."
+iio
+dev-tools
+mm/damon
+PCI
+scheduler
 
 
-> +- ``--kconfig_add``: Specifies additional configuration options to be
-> +  appended to the ``.kunitconfig`` file. For example:
-> +  .. code-block::
-> +	./tools/testing/kunit/kunit.py run --kconfig_add CONFIG_KASAN=y
-> +
+Yanteng Si (8):
+  Docs/zh_CN: Update the translation of iio_configfs to 5.19-rc8
+  Docs/zh_CN: Update the translation of kasan to 5.19-rc8
+  Docs/zh_CN: Update the translation of sparse to 5.19-rc8
+  Docs/zh_CN: Update the translation of testing-overview to 5.19-rc8
+  Docs/zh_CN: Update the translation of usage to 5.19-rc8
+  Docs/zh_CN: Update the translation of pci-iov-howto to 5.19-rc8
+  Docs/zh_CN: Update the translation of pci to 5.19-rc8
+  Docs/zh_CN: Update the translation of sched-stats to 5.19-rc8
 
-Above generated new warning:
-
-Documentation/dev-tools/kunit/run_wrapper.rst:262: WARNING: Unexpected indentation.
-
-I have applied the fixup:
-
----- >8 ----
-
-From cd4cf7c5bb2a7bfe3b006d7859e84de0814d7af4 Mon Sep 17 00:00:00 2001
-From: Bagas Sanjaya <bagasdotme@gmail.com>
-Date: Mon, 25 Jul 2022 15:54:24 +0700
-Subject: [PATCH] fixup for "Documentation: kunit: Add CLI args for kunit_tool"
-
-Pad --kconfig_add code block with blank line
-
-Signed-off-by: Bagas Sanjaya <bagasdotme@gmail.com>
----
- Documentation/dev-tools/kunit/run_wrapper.rst | 2 ++
- 1 file changed, 2 insertions(+)
-
-diff --git a/Documentation/dev-tools/kunit/run_wrapper.rst b/Documentation/dev-tools/kunit/run_wrapper.rst
-index 479d16d1f17d60..d19a1b0d58595b 100644
---- a/Documentation/dev-tools/kunit/run_wrapper.rst
-+++ b/Documentation/dev-tools/kunit/run_wrapper.rst
-@@ -258,7 +258,9 @@ command line arguments:
- 
- - ``--kconfig_add``: Specifies additional configuration options to be
-   appended to the ``.kunitconfig`` file. For example:
-+
-   .. code-block::
-+
- 	./tools/testing/kunit/kunit.py run --kconfig_add CONFIG_KASAN=y
- 
- - ``--arch``: Runs tests on the specified architecture. The architecture
--- 
-
-Thanks.
+ .../translations/zh_CN/PCI/pci-iov-howto.rst  |   7 +-
+ Documentation/translations/zh_CN/PCI/pci.rst  |   6 +-
+ .../zh_CN/admin-guide/mm/damon/usage.rst      |   2 +
+ .../translations/zh_CN/dev-tools/kasan.rst    | 117 ++++++++++++------
+ .../translations/zh_CN/dev-tools/sparse.rst   |   2 +
+ .../zh_CN/dev-tools/testing-overview.rst      |  25 ++++
+ .../translations/zh_CN/iio/iio_configfs.rst   |  12 +-
+ .../zh_CN/scheduler/sched-stats.rst           |   8 +-
+ 8 files changed, 123 insertions(+), 56 deletions(-)
 
 -- 
-An old man doll... just what I always wanted! - Clara
+2.31.1
+
