@@ -2,241 +2,73 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id B7E945803F7
-	for <lists+linux-doc@lfdr.de>; Mon, 25 Jul 2022 20:26:09 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 5606758040D
+	for <lists+linux-doc@lfdr.de>; Mon, 25 Jul 2022 20:33:43 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S229753AbiGYS0I (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 25 Jul 2022 14:26:08 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:41634 "EHLO
+        id S230455AbiGYSdm (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 25 Jul 2022 14:33:42 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:46956 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S232561AbiGYS0H (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Mon, 25 Jul 2022 14:26:07 -0400
-Received: from mail-qk1-x72e.google.com (mail-qk1-x72e.google.com [IPv6:2607:f8b0:4864:20::72e])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 052345FEE
-        for <linux-doc@vger.kernel.org>; Mon, 25 Jul 2022 11:26:05 -0700 (PDT)
-Received: by mail-qk1-x72e.google.com with SMTP id c3so9366217qko.1
-        for <linux-doc@vger.kernel.org>; Mon, 25 Jul 2022 11:26:04 -0700 (PDT)
+        with ESMTP id S230445AbiGYSdl (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Mon, 25 Jul 2022 14:33:41 -0400
+Received: from mail-lj1-x241.google.com (mail-lj1-x241.google.com [IPv6:2a00:1450:4864:20::241])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id A2B861ADAD
+        for <linux-doc@vger.kernel.org>; Mon, 25 Jul 2022 11:33:37 -0700 (PDT)
+Received: by mail-lj1-x241.google.com with SMTP id m9so14103226ljp.9
+        for <linux-doc@vger.kernel.org>; Mon, 25 Jul 2022 11:33:37 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=cmpxchg-org.20210112.gappssmtp.com; s=20210112;
-        h=date:from:to:cc:subject:message-id:references:mime-version
-         :content-disposition:in-reply-to;
-        bh=SJ5ATteDCNi/4BY4PNgsMgCW15cD92wrz0tkARQ7vKY=;
-        b=5Il4a5zJ8mZ7Jsn+zAu4/T22MYYX/u7qfLg1Hhhzz0CR+QXMWP33kGSYR882OgzOpj
-         OVKFcnRluW7I3M2Boby0n7KYmrHRJY9hbe2IthGoVb8QE8dqPRn0yL2jlgwpnww/JzAi
-         9ZCF4+UJ4cKy5QQNJTPy8INVEWIGwPK9fti7YVVatWk2z38K0SHkYiN6o8odYEpivsuC
-         46zLsxTLQaeMxELrYNDQviXs4I482h4Abw+SPw4NfqjinXzzGFF49XmksFoLrWWwfJqz
-         GPIouRxslZ70CAnHJKQRcyU5sQztNc/x4Uc3Ji0+iaFoOXtPdUwJO6PVQ43mUJ1f+Qgu
-         Dc4g==
+        d=gmail.com; s=20210112;
+        h=mime-version:reply-to:from:date:message-id:subject:to
+         :content-transfer-encoding;
+        bh=pgYBaH+00C0C/FNyLnHdtJ9SvrXPwaYLflV2FNVydgY=;
+        b=K0RiXvWznMenQsDZYy3FsU/7iVfXxWb+Ixqor6Ez0hoAMipkS6SO3OHp81+0ff3aCK
+         oBvqUio4yjmv8eaggYAApT8feRf+t5MMSuhBUO6eqbe2zBJiEhyr/KVUMcZZ0T7UV8/1
+         xQIMGXhDDW0dxJdFTDLTBXV+tZzl1ZCBtSIoJKCnXTVeep7hhStD7z33ZxIkleSiDbl+
+         d4piTuMOM3/3c2tlM6eQ5zbXQOPVbZfUDBnrG2qRwhEvC3juiR2lT/VPPIZrQT0NeBDj
+         1ppa4NAgHt11ybmRyCB72QZBwOnEeezehN9coV5AcJ1iCLiBIorlQHQYL3VTorszSsVH
+         vi/A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=x-gm-message-state:date:from:to:cc:subject:message-id:references
-         :mime-version:content-disposition:in-reply-to;
-        bh=SJ5ATteDCNi/4BY4PNgsMgCW15cD92wrz0tkARQ7vKY=;
-        b=aqT32AkRhtIvH7kVQMCl3J9WN5oEtlh9GnF0H7IEiy5b/0SeVAgXTMTCdrBGDE+OEF
-         K4htPpc3FGuBIGu3sY7+yqob12teeYVTXWTYhMB3WIvpHMEbMFsuZ2HhZcK7/YWw8okY
-         B3bl9iMTteBov9RA9Ab1prPVpxTAkIWSRsfOT21NkMDbG6Bk8qQ2PeWWIVMoS/VfxI1m
-         AyU+gwkHZ19rDUBqfP06hb61GcCyRD0KjGjAlGVkb3jn8vH5ELCDHFXirK6DiQm2Utue
-         I5U4HAIw7muimlsByD9vzLf7ATcKTxhA9RPCk6BokMf/D1L6h/4gC5KVoTvJFzX+G/m0
-         ptCw==
-X-Gm-Message-State: AJIora/gH3VhwNWI1XXw6bCxxbzzX+r4MaVymdFk5htzzYwOn6cFsNn3
-        koxVT7eDMPsLQO3lARRlftSiIw==
-X-Google-Smtp-Source: AGRyM1uTbBMqG1BBBhxK8bht1t4dDpel1BDmUmM/Bbft6w+1tQQNObfPJpb1/O+P5QI/qbOpdjwsMw==
-X-Received: by 2002:a05:620a:1478:b0:6b5:e085:9c03 with SMTP id j24-20020a05620a147800b006b5e0859c03mr10127245qkl.550.1658773564133;
-        Mon, 25 Jul 2022 11:26:04 -0700 (PDT)
-Received: from localhost ([2620:10d:c091:480::1:994f])
-        by smtp.gmail.com with ESMTPSA id c7-20020a05622a058700b0031f0cfc5645sm8255859qtb.28.2022.07.25.11.26.03
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 25 Jul 2022 11:26:03 -0700 (PDT)
-Date:   Mon, 25 Jul 2022 14:26:02 -0400
-From:   Johannes Weiner <hannes@cmpxchg.org>
-To:     Chengming Zhou <zhouchengming@bytedance.com>
-Cc:     surenb@google.com, mingo@redhat.com, peterz@infradead.org,
-        tj@kernel.org, corbet@lwn.net, akpm@linux-foundation.org,
-        rdunlap@infradead.org, linux-doc@vger.kernel.org,
-        linux-kernel@vger.kernel.org, songmuchun@bytedance.com,
-        cgroups@vger.kernel.org
-Subject: Re: [PATCH 9/9] sched/psi: add PSI_IRQ to track IRQ/SOFTIRQ pressure
-Message-ID: <Yt7gOhbqYzIKyhfv@cmpxchg.org>
-References: <20220721040439.2651-1-zhouchengming@bytedance.com>
- <20220721040439.2651-10-zhouchengming@bytedance.com>
+        h=x-gm-message-state:mime-version:reply-to:from:date:message-id
+         :subject:to:content-transfer-encoding;
+        bh=pgYBaH+00C0C/FNyLnHdtJ9SvrXPwaYLflV2FNVydgY=;
+        b=MQXpbRNiNNB45OSrErpwRWdE86K9MCUI3vfJXDweOy2XwPKDu9k83yBJQROKt//fQb
+         0VM9RiaSaxab8zwB0HZDsYEDyZiSset9XtyUKwA3aLHM9mQxYgSmhv999JAwgS2wSbMI
+         LVeuGH6VAcxcF2758YPyDzk/jETBj2FrmXjizet1HhQqxoWrRb5h8MeIFnG/R4e5fNR+
+         FQSaemX+2dry0S0W6Wbtkgdv9HurRsCVWuXFfhWoFmMwfdluZJhLsqOUMJIF2pp3fJ6e
+         R71xFswus9NEE0ljbcbvfjfcTZ00LB+LW5yWKA2egZplchTR2nISx6fliQPuDzC3JLpz
+         2Tqg==
+X-Gm-Message-State: AJIora/Xd0zvSXZr0DA4hz2oY3DXdA24NVR+HnFPDngAbGabzWpeAIWu
+        SvXiXHUQ2yhBuY+mQycFuA4DvXf5EbhuxLGsuiM=
+X-Google-Smtp-Source: AGRyM1uhpqe07uwwcxJiIJK2j9TApguDOxsokR3VUmJv2Uu/tH0u8qlziTKpNWX8IK84bPGsQiWSVuNtuYlVd+exBFI=
+X-Received: by 2002:a2e:b70a:0:b0:25e:673:fb65 with SMTP id
+ j10-20020a2eb70a000000b0025e0673fb65mr2528245ljo.236.1658774015984; Mon, 25
+ Jul 2022 11:33:35 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20220721040439.2651-10-zhouchengming@bytedance.com>
-X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-        DKIM_VALID,RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,SPF_PASS autolearn=ham
-        autolearn_force=no version=3.4.6
+Received: by 2002:a05:6504:b85:0:0:0:0 with HTTP; Mon, 25 Jul 2022 11:33:35
+ -0700 (PDT)
+Reply-To: tescobank093.de@gmail.com
+From:   Tesco Bank <magdalenedavid091@gmail.com>
+Date:   Mon, 25 Jul 2022 19:33:35 +0100
+Message-ID: <CAAeMwZ9mpLxMhSPuovbni2fVddx3ssnQZOGaj9ShJ41B2ZS=9A@mail.gmail.com>
+Subject: 
+To:     undisclosed-recipients:;
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Spam-Status: No, score=4.9 required=5.0 tests=BAYES_50,DKIM_SIGNED,
+        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_ENVFROM_END_DIGIT,
+        FREEMAIL_FROM,FREEMAIL_REPLYTO,RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,
+        SPF_PASS,UNDISC_FREEM autolearn=no autolearn_force=no version=3.4.6
+X-Spam-Level: ****
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Thu, Jul 21, 2022 at 12:04:39PM +0800, Chengming Zhou wrote:
-> Now PSI already tracked workload pressure stall information for
-> CPU, memory and IO. Apart from these, IRQ/SOFTIRQ could have
-> obvious impact on some workload productivity, such as web service
-> workload.
-> 
-> When CONFIG_IRQ_TIME_ACCOUNTING, we can get IRQ/SOFTIRQ delta time
-> from update_rq_clock_task(), in which we can record that delta
-> to CPU curr task's cgroups as PSI_IRQ_FULL status.
->
-> Note we don't use PSI_IRQ_SOME since IRQ/SOFTIRQ always happen in
-> the current task on the CPU, make nothing productive could run
-> even if it were runnable, so we only use PSI_IRQ_FULL.
-
-That sounds reasonable.
-
-> For performance impact consideration, this is enabled by default when
-> CONFIG_IRQ_TIME_ACCOUNTING, but can be disabled by kernel cmdline
-> parameter "psi_irq=".
-
-If there isn't a concrete usecase already, let's not add another
-commandline parameter for now.
-
-> @@ -63,9 +64,11 @@ enum psi_states {
->  	PSI_MEM_FULL,
->  	PSI_CPU_SOME,
->  	PSI_CPU_FULL,
-> +	PSI_IRQ_SOME,
-> +	PSI_IRQ_FULL,
->  	/* Only per-CPU, to weigh the CPU in the global average: */
->  	PSI_NONIDLE,
-> -	NR_PSI_STATES = 7,
-> +	NR_PSI_STATES = 9,
->  };
-
-Unfortunately, this grows the psi state touched by the scheduler into
-a second cacheline. :( Please reclaim space first.
-
-I think we can remove the NR_CPU task count, which frees up one
-u32. Something like the below diff should work (untested!)
-
-And you should be able to remove PSI_IRQ_SOME, since it's not used
-anyway. Then we'd be good to go.
-
-diff --git a/include/linux/psi_types.h b/include/linux/psi_types.h
-index c7fe7c089718..31dc76e2d8ea 100644
---- a/include/linux/psi_types.h
-+++ b/include/linux/psi_types.h
-@@ -15,13 +15,6 @@ enum psi_task_count {
- 	NR_IOWAIT,
- 	NR_MEMSTALL,
- 	NR_RUNNING,
--	/*
--	 * This can't have values other than 0 or 1 and could be
--	 * implemented as a bit flag. But for now we still have room
--	 * in the first cacheline of psi_group_cpu, and this way we
--	 * don't have to special case any state tracking for it.
--	 */
--	NR_ONCPU,
- 	/*
- 	 * For IO and CPU stalls the presence of running/oncpu tasks
- 	 * in the domain means a partial rather than a full stall.
-@@ -39,9 +32,11 @@ enum psi_task_count {
- #define TSK_IOWAIT	(1 << NR_IOWAIT)
- #define TSK_MEMSTALL	(1 << NR_MEMSTALL)
- #define TSK_RUNNING	(1 << NR_RUNNING)
--#define TSK_ONCPU	(1 << NR_ONCPU)
- #define TSK_MEMSTALL_RUNNING	(1 << NR_MEMSTALL_RUNNING)
- 
-+/* Only one task can be scheduled, no corresponding task count */
-+#define TSK_ONCPU	(1 << NR_PSI_TASK_COUNTS)
-+
- /* Resources that workloads could be stalled on */
- enum psi_res {
- 	PSI_IO,
-diff --git a/kernel/sched/psi.c b/kernel/sched/psi.c
-index a4fa3aadfcba..232e1dbfad46 100644
---- a/kernel/sched/psi.c
-+++ b/kernel/sched/psi.c
-@@ -215,7 +215,7 @@ void __init psi_init(void)
- 	group_init(&psi_system);
- }
- 
--static bool test_state(unsigned int *tasks, enum psi_states state)
-+static bool test_state(unsigned int *tasks, enum psi_states state, bool oncpu)
- {
- 	switch (state) {
- 	case PSI_IO_SOME:
-@@ -228,9 +228,9 @@ static bool test_state(unsigned int *tasks, enum psi_states state)
- 		return unlikely(tasks[NR_MEMSTALL] &&
- 			tasks[NR_RUNNING] == tasks[NR_MEMSTALL_RUNNING]);
- 	case PSI_CPU_SOME:
--		return unlikely(tasks[NR_RUNNING] > tasks[NR_ONCPU]);
-+		return unlikely(tasks[NR_RUNNING] > oncpu);
- 	case PSI_CPU_FULL:
--		return unlikely(tasks[NR_RUNNING] && !tasks[NR_ONCPU]);
-+		return unlikely(tasks[NR_RUNNING] && !oncpu);
- 	case PSI_NONIDLE:
- 		return tasks[NR_IOWAIT] || tasks[NR_MEMSTALL] ||
- 			tasks[NR_RUNNING];
-@@ -692,9 +692,9 @@ static void psi_group_change(struct psi_group *group, int cpu,
- 			     bool wake_clock)
- {
- 	struct psi_group_cpu *groupc;
--	u32 state_mask = 0;
- 	unsigned int t, m;
- 	enum psi_states s;
-+	u32 state_mask;
- 
- 	groupc = per_cpu_ptr(group->pcpu, cpu);
- 
-@@ -710,6 +710,26 @@ static void psi_group_change(struct psi_group *group, int cpu,
- 
- 	record_times(groupc, now);
- 
-+	/*
-+	 * Start with TSK_ONCPU, which doesn't have a corresponding
-+	 * task count - it's just a boolean flag directly encoded in
-+	 * the state mask. Clear, set, or carry the current state if
-+	 * no changes are requested.
-+	 */
-+	if (clear & TSK_ONCPU) {
-+		state_mask = 0;
-+		clear &= ~TSK_ONCPU;
-+	} else if (set & TSK_ONCPU) {
-+		state_mask = TSK_ONCPU;
-+		set &= ~TSK_ONCPU;
-+	} else {
-+		state_mask = groupc->state_mask & TSK_ONCPU;
-+	}
-+
-+	/*
-+	 * The rest of the state mask is calculated based on the task
-+	 * counts. Update those first, then construct the mask.
-+	 */
- 	for (t = 0, m = clear; m; m &= ~(1 << t), t++) {
- 		if (!(m & (1 << t)))
- 			continue;
-@@ -729,9 +749,8 @@ static void psi_group_change(struct psi_group *group, int cpu,
- 		if (set & (1 << t))
- 			groupc->tasks[t]++;
- 
--	/* Calculate state mask representing active states */
- 	for (s = 0; s < NR_PSI_STATES; s++) {
--		if (test_state(groupc->tasks, s))
-+		if (test_state(groupc->tasks, s, state_mask & TSK_ONCPU))
- 			state_mask |= (1 << s);
- 	}
- 
-@@ -743,7 +762,7 @@ static void psi_group_change(struct psi_group *group, int cpu,
- 	 * task in a cgroup is in_memstall, the corresponding groupc
- 	 * on that cpu is in PSI_MEM_FULL state.
- 	 */
--	if (unlikely(groupc->tasks[NR_ONCPU] && cpu_curr(cpu)->in_memstall))
-+	if (unlikely((state_mask & TSK_ONCPU) && cpu_curr(cpu)->in_memstall))
- 		state_mask |= (1 << PSI_MEM_FULL);
- 
- 	groupc->state_mask = state_mask;
-@@ -847,7 +866,8 @@ void psi_task_switch(struct task_struct *prev, struct task_struct *next,
- 		iter = NULL;
- 		while ((group = iterate_groups(next, &iter))) {
- 			if (identical_state &&
--			    per_cpu_ptr(group->pcpu, cpu)->tasks[NR_ONCPU]) {
-+			    (per_cpu_ptr(group->pcpu, cpu)->state_mask &
-+			     TSK_ONCPU)) {
- 				common = group;
- 				break;
- 			}
+--=20
+Ben=C3=B6tigen Sie heute dringend einen Kredit, um eine Investition zu
+t=C3=A4tigen? Ein neues Unternehmen gr=C3=BCnden oder Rechnungen bezahlen? =
+Und
+uns auf Wunsch in Raten zur=C3=BCckzahlen? Wir bieten Kredite zu einem sehr
+niedrigen Zinssatz. Wie viel Kredit m=C3=B6chten Sie???
