@@ -2,63 +2,58 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 9DCD158172B
-	for <lists+linux-doc@lfdr.de>; Tue, 26 Jul 2022 18:20:24 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id C087A581750
+	for <lists+linux-doc@lfdr.de>; Tue, 26 Jul 2022 18:22:50 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S229815AbiGZQUW (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 26 Jul 2022 12:20:22 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:35610 "EHLO
+        id S239411AbiGZQWs (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 26 Jul 2022 12:22:48 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:38048 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S239222AbiGZQUU (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 26 Jul 2022 12:20:20 -0400
-Received: from email.cn (m218-171.88.com [110.43.218.171])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 983DE271C
-        for <linux-doc@vger.kernel.org>; Tue, 26 Jul 2022 09:20:15 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=email.cn;
-        s=dkim; h=Date:From:To; bh=kLjI5/AxDNrCF1b2N8KQOA+ZYYY8uMEmsklNZ
-        rNmdb8=; b=JC3sGGYPdv6wQXvUvO+ewrX8X/AP87QKj4CsbUuVK7gTDJT3GN88j
-        PuHePdHR1G8hXjkCKtklvRwvizhAS/iTcl4toFQevGafd72r5Xe2/VgWPW9Xj6T/
-        scOFBZ1k7qBb3OMM5BBVAz3jMgTa129s+2SZeGhFpZnRteIyoYEPHc=
-Received: from bobwxc.mipc (unknown [120.242.71.147])
-        by v_coremail2-frontend-1 (Coremail) with SMTP id LCKnCgDnl2QlFOBi2AtCAA--.25934S2;
-        Wed, 27 Jul 2022 00:19:51 +0800 (CST)
-Date:   Wed, 27 Jul 2022 00:19:47 +0800
-From:   Wu XiangCheng <bobwxc@email.cn>
-To:     Yanteng Si <siyanteng@loongson.cn>
-Cc:     alexs@kernel.org, seakeel@gmail.com, corbet@lwn.net,
-        chenhuacai@kernel.org, jiaxun.yang@flygoat.com,
-        linux-doc@vger.kernel.org, siyanteng01@gmail.com,
-        zhoubinbin@loongson.cn, yizhou.tang@shopee.com,
-        wanjiabing@vivo.com, leoyang.li@nxp.com, src.res@email.cn
-Subject: Re: [PATCH 7/8] Docs/zh_CN: Update the translation of pci to 5.19-rc8
-Message-ID: <YuAFKsr6Gimu5LDg@bobwxc.mipc>
-References: <cover.1658740151.git.siyanteng@loongson.cn>
- <d6b56714f443f13fed9ed6618fb0788fe7d3caaa.1658740151.git.siyanteng@loongson.cn>
+        with ESMTP id S239405AbiGZQWp (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 26 Jul 2022 12:22:45 -0400
+Received: from ams.source.kernel.org (ams.source.kernel.org [IPv6:2604:1380:4601:e00::1])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 08D76275E7;
+        Tue, 26 Jul 2022 09:22:43 -0700 (PDT)
+Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
+        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+        (No client certificate requested)
+        by ams.source.kernel.org (Postfix) with ESMTPS id 795C7B81895;
+        Tue, 26 Jul 2022 16:22:42 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id E7824C433D6;
+        Tue, 26 Jul 2022 16:22:38 +0000 (UTC)
+Date:   Tue, 26 Jul 2022 12:22:37 -0400
+From:   Steven Rostedt <rostedt@goodmis.org>
+To:     Daniel Bristot de Oliveira <bristot@kernel.org>
+Cc:     Wim Van Sebroeck <wim@linux-watchdog.org>,
+        Guenter Roeck <linux@roeck-us.net>,
+        Jonathan Corbet <corbet@lwn.net>,
+        Ingo Molnar <mingo@redhat.com>,
+        Thomas Gleixner <tglx@linutronix.de>,
+        Peter Zijlstra <peterz@infradead.org>,
+        Will Deacon <will@kernel.org>,
+        Catalin Marinas <catalin.marinas@arm.com>,
+        Marco Elver <elver@google.com>,
+        Dmitry Vyukov <dvyukov@google.com>,
+        "Paul E. McKenney" <paulmck@kernel.org>,
+        Shuah Khan <skhan@linuxfoundation.org>,
+        Gabriele Paoloni <gpaoloni@redhat.com>,
+        Juri Lelli <juri.lelli@redhat.com>,
+        Clark Williams <williams@redhat.com>,
+        Tao Zhou <tao.zhou@linux.dev>,
+        Randy Dunlap <rdunlap@infradead.org>,
+        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
+        linux-trace-devel@vger.kernel.org
+Subject: Re: [PATCH V7 01/16] rv: Add Runtime Verification (RV) interface
+Message-ID: <20220726122237.44386359@gandalf.local.home>
+In-Reply-To: <2aa3b18239f170ba23263f18d166d08634ed65dd.1658778484.git.bristot@kernel.org>
+References: <cover.1658778484.git.bristot@kernel.org>
+        <2aa3b18239f170ba23263f18d166d08634ed65dd.1658778484.git.bristot@kernel.org>
+X-Mailer: Claws Mail 3.17.8 (GTK+ 2.24.33; x86_64-pc-linux-gnu)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <d6b56714f443f13fed9ed6618fb0788fe7d3caaa.1658740151.git.siyanteng@loongson.cn>
-X-CM-TRANSID: LCKnCgDnl2QlFOBi2AtCAA--.25934S2
-X-Coremail-Antispam: 1UD129KBjvJXoW7Kr17JFWDWry5WryUZr13urg_yoW8KF1fpr
-        Z7Wa4xGa12v3WIgwnY9rW8Xr1xWa9I9F1UCr4Ut3ZxJw1vq3ykAw1YyF12gFyxXryIvFWI
-        qan2kryYvryxZr7anT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
-        9KBjDU0xBIdaVrnRJUUUyvb7Iv0xC_Zr1lb4IE77IF4wAFc2x0x2IEx4CE42xK8VAvwI8I
-        cIk0rVWrJVCq3wA2ocxC64kIII0Yj41l84x0c7CEw4AK67xGY2AK021l84ACjcxK6xIIjx
-        v20xvE14v26F1j6w1UM28EF7xvwVC0I7IYx2IY6xkF7I0E14v26r4j6F4UM28EF7xvwVC2
-        z280aVAFwI0_Cr0_Gr1UM28EF7xvwVC2z280aVCY1x0267AKxVW8JVW8Jr1le2I262IYc4
-        CY6c8Ij28IcVAaY2xG8wAqx4xG64xvF2IEw4CE5I8CrVC2j2WlYx0E74AGY7Cv6cx26F4U
-        Jr1UMcvjeVCFs4IE7xkEbVWUJVW8JwACjcxG0xvEwIxGrwACI402YVCY1x02628vn2kIc2
-        xKxwCY02Avz4vE14v_JwCF04k20xvY0x0EwIxGrwCF04k20xvE74AGY7Cv6cx26F4UJr1U
-        MxC20s026xCaFVCjc4AY6r1j6r4UMI8I3I0E5I8CrVAFwI0_Jr0_Jr4lx2IqxVCjr7xvwV
-        AFwI0_JrI_JrWlx4CE17CEb7AF67AKxVWUtVW8ZwCIc40Y0x0EwIxGrwCI42IY6xIIjxv2
-        0xvE14v26r1j6r1xMIIF0xvE2Ix0cI8IcVCY1x0267AKxVW8JVWxJwCI42IY6xAIw20EY4
-        v20xvaj40_Jr0_JF4lIxAIcVC2z280aVAFwI0_Jr0_Gr1lIxAIcVC2z280aVCY1x0267AK
-        xVW8JVW8JrUvcSsGvfC2KfnxnUUI43ZEXa7IUbHGQDUUUUU==
-X-Originating-IP: [120.242.71.147]
-X-CM-SenderInfo: pere453f6hztlloou0/
-X-Spam-Status: No, score=-2.1 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,SPF_HELO_PASS,SPF_PASS
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 7bit
+X-Spam-Status: No, score=-6.7 required=5.0 tests=BAYES_00,
+        HEADER_FROM_DIFFERENT_DOMAINS,RCVD_IN_DNSWL_HI,SPF_HELO_NONE,SPF_PASS
         autolearn=ham autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
@@ -66,45 +61,342 @@ Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Mon, Jul 25, 2022 at 05:24:35PM +0800, Yanteng Si wrote:
-> Update to commit f21949c14968 ("PCI/doc:Update
-> obsolete pci_set_dma_mask() references")
-> 
-> 05b0ebd06ae6 ("PCI/doc: cleanup references to
-> the legacy PCI DMA API")
-> 
-> Signed-off-by: Yanteng Si <siyanteng@loongson.cn>
+On Mon, 25 Jul 2022 22:11:13 +0200
+Daniel Bristot de Oliveira <bristot@kernel.org> wrote:
 
-Reviewed-by: Wu XiangCheng <bobwxc@email.cn>
 
-Thanks,
-	Wu
+> +/**
+> + * rv_disable_monitor - disable a given runtime monitor
+> + *
+> + * Returns 0 on success.
+> + */
+> +int rv_disable_monitor(struct rv_monitor_def *mdef)
+> +{
+> +	int enabled;
+> +
+> +	enabled = __rv_disable_monitor(mdef);
+> +
 
-> ---
->  Documentation/translations/zh_CN/PCI/pci.rst | 6 +++---
->  1 file changed, 3 insertions(+), 3 deletions(-)
-> 
-> diff --git a/Documentation/translations/zh_CN/PCI/pci.rst b/Documentation/translations/zh_CN/PCI/pci.rst
-> index 520707787256..83c2a41d38d3 100644
-> --- a/Documentation/translations/zh_CN/PCI/pci.rst
-> +++ b/Documentation/translations/zh_CN/PCI/pci.rst
-> @@ -255,13 +255,13 @@ pci_set_master()将通过设置PCI_COMMAND寄存器中的总线主控位来启
->  
->  虽然所有的驱动程序都应该明确指出PCI总线主控的DMA功能（如32位或64位），但对于流式
->  数据来说，具有超过32位总线主站功能的设备需要驱动程序通过调用带有适当参数的
-> -``pci_set_dma_mask()`` 来“注册”这种功能。一般来说，在系统RAM高于4G物理地址的情
-> +``dma_set_mask()`` 来“注册”这种功能。一般来说，在系统RAM高于4G物理地址的情
->  况下，这允许更有效的DMA。
->  
-> -所有PCI-X和PCIe兼容设备的驱动程序必须调用 ``pci_set_dma_mask()`` ，因为它们
-> +所有PCI-X和PCIe兼容设备的驱动程序必须调用 ``dma_set_mask()`` ，因为它们
->  是64位DMA设备。
->  
-> -同样，如果设备可以通过调用 ``pci_set_consistent_dma_mask()`` 直接寻址到
-> +同样，如果设备可以通过调用 ``dma_set_coherent_mask()`` 直接寻址到
->  4G物理地址以上的系统RAM中的“一致性内存”，那么驱动程序也必须“注册”这种功能。同
->  样，这包括所有PCI-X和PCIe兼容设备的驱动程序。许多64位“PCI”设备（在PCI-X之前）
->  和一些PCI-X设备对有效载荷（“流式”）数据具有64位DMA功能，但对控制（“一致性”）数
-> -- 
-> 2.31.1
+Does this function need to be holding any locks when called?
 
+Because it is not static, and that means something can call it without
+locks. If needed, you need to add a lockdep_assert() helper.
+
+> +	if (enabled) {
+> +		/*
+> +		 * Wait for the execution of all previous events.
+> +		 */
+> +		tracepoint_synchronize_unregister();
+> +	}
+> +
+> +	return 0;
+> +}
+> +
+> +/**
+> + * rv_enable_monitor - enable a given runtime monitor
+> + *
+> + * Returns 0 on success, error otherwise.
+> + */
+> +int rv_enable_monitor(struct rv_monitor_def *mdef)
+> +{
+> +	int retval;
+> +
+> +	if (mdef->monitor->enabled)
+> +		return 0;
+> +
+> +	retval = mdef->monitor->enable();
+> +
+> +	if (!retval)
+> +		mdef->monitor->enabled = 1;
+> +
+> +	return retval;
+> +}
+> +
+> +/*
+> + * interface for enabling/disabling a monitor.
+> + */
+> +static ssize_t monitor_enable_write_data(struct file *filp, const char __user *user_buf,
+> +					 size_t count, loff_t *ppos)
+> +{
+> +	struct rv_monitor_def *mdef = filp->private_data;
+> +	int retval;
+> +	bool val;
+> +
+> +	retval = kstrtobool_from_user(user_buf, count, &val);
+> +	if (retval)
+> +		return retval;
+> +
+> +	retval = count;
+> +
+> +	mutex_lock(&rv_interface_lock);
+> +
+> +	if (val)
+> +		retval = rv_enable_monitor(mdef);
+> +	else
+> +		retval = rv_disable_monitor(mdef);
+> +
+> +	mutex_unlock(&rv_interface_lock);
+> +
+> +	return retval ? : count;
+> +}
+> +
+
+[..]
+
+> +
+> +/*
+> + * enabled_monitors interface.
+> + */
+> +static void disable_all_monitors(void)
+> +{
+> +	struct rv_monitor_def *mdef;
+> +	int enabled = 0;
+> +
+> +	mutex_lock(&rv_interface_lock);
+> +
+> +	list_for_each_entry(mdef, &rv_monitors_list, list)
+> +		enabled += __rv_disable_monitor(mdef);
+> +
+> +	if (enabled) {
+> +		/*
+> +		 * Wait for the execution of all current events.
+> +		 */
+
+And do we really need to hold the locks when calling the synchronization?
+
+I think we only care if the caller sees a synchronized view of changes, the
+locks will help synchronize the internal code.
+
+> +		tracepoint_synchronize_unregister();
+> +	}
+> +
+> +	mutex_unlock(&rv_interface_lock);
+> +}
+> +
+
+[..]
+
+> +/**
+> + * rv_monitoring_on - checks if monitoring is on
+> + *
+> + * Returns 1 if on, 0 otherwise.
+> + */
+> +bool rv_monitoring_on(void)
+> +{
+> +	/* monitoring_on */
+
+You need a better comment than that.
+
+What is this synchronizing?
+
+> +	smp_rmb();
+> +	return READ_ONCE(monitoring_on);
+> +}
+> +
+> +/*
+> + * monitoring_on general switcher.
+> + */
+> +static ssize_t monitoring_on_read_data(struct file *filp, char __user *user_buf,
+> +				       size_t count, loff_t *ppos)
+> +{
+> +	const char *buff;
+> +
+> +	buff = rv_monitoring_on() ? "1\n" : "0\n";
+> +
+> +	return simple_read_from_buffer(user_buf, count, ppos, buff, strlen(buff) + 1);
+> +}
+> +
+> +static void turn_monitoring_off(void)
+> +{
+> +	WRITE_ONCE(monitoring_on, false);
+> +	/* monitoring_on */
+
+Same here.
+
+> +	smp_wmb();
+> +}
+> +
+> +static void reset_all_monitors(void)
+> +{
+> +	struct rv_monitor_def *mdef;
+> +
+> +	list_for_each_entry(mdef, &rv_monitors_list, list) {
+> +		if (mdef->monitor->enabled)
+> +			mdef->monitor->reset();
+> +	}
+> +}
+> +
+> +static void turn_monitoring_on(void)
+> +{
+> +	reset_all_monitors();
+
+Why does this reset all monitors but turn_monitoring_off() does not?
+
+You should keep that out.
+
+> +	WRITE_ONCE(monitoring_on, true);
+> +	/* monitoring_on */
+> +	smp_wmb();
+> +}
+> +
+> +static ssize_t monitoring_on_write_data(struct file *filp, const char __user *user_buf,
+> +					size_t count, loff_t *ppos)
+> +{
+> +	int retval;
+> +	bool val;
+> +
+> +	retval = kstrtobool_from_user(user_buf, count, &val);
+> +	if (retval)
+> +		return retval;
+> +
+> +	mutex_lock(&rv_interface_lock);
+> +
+> +	if (val)
+> +		turn_monitoring_on();
+> +	else
+> +		turn_monitoring_off();
+> +
+> +	/*
+> +	 * Wait for the execution of all current events to notice
+> +	 * the change before returning to user-space.
+> +	 */
+> +	tracepoint_synchronize_unregister();
+
+Again, I think we want this outside the lock.
+
+> +
+> +	mutex_unlock(&rv_interface_lock);
+> +
+> +	return count;
+> +}
+> +
+> +static const struct file_operations monitoring_on_fops = {
+> +	.open   = simple_open,
+> +	.llseek = no_llseek,
+> +	.write  = monitoring_on_write_data,
+> +	.read   = monitoring_on_read_data,
+> +};
+> +
+> +static void destroy_monitor_dir(struct rv_monitor_def *mdef)
+> +{
+> +	rv_remove(mdef->root_d);
+> +}
+> +
+> +/**
+> + * rv_register_monitor - register a rv monitor.
+> + * @monitor:    The rv_monitor to be registered.
+> + *
+> + * Returns 0 if successful, error otherwise.
+> + */
+> +int rv_register_monitor(struct rv_monitor *monitor)
+> +{
+> +	struct rv_monitor_def *r;
+> +	int retval = 0;
+> +
+> +	if (strlen(monitor->name) >= MAX_RV_MONITOR_NAME_SIZE) {
+> +		pr_info("Monitor %s has a name longer than %d\n", monitor->name,
+> +			MAX_RV_MONITOR_NAME_SIZE);
+> +		return -1;
+> +	}
+> +
+> +	mutex_lock(&rv_interface_lock);
+> +
+> +	list_for_each_entry(r, &rv_monitors_list, list) {
+> +		if (strcmp(monitor->name, r->monitor->name) == 0) {
+> +			pr_info("Monitor %s is already registered\n", monitor->name);
+> +			retval = -1;
+> +			goto out_unlock;
+> +		}
+> +	}
+> +
+> +	r = kzalloc(sizeof(struct rv_monitor_def), GFP_KERNEL);
+> +	if (!r) {
+> +		retval = -ENOMEM;
+> +		goto out_unlock;
+> +	}
+> +
+> +	r->monitor = monitor;
+> +
+> +	retval = create_monitor_dir(r);
+> +	if (retval) {
+> +		kfree(r);
+> +		goto out_unlock;
+> +	}
+> +
+> +	list_add_tail(&r->list, &rv_monitors_list);
+> +
+> +out_unlock:
+> +	mutex_unlock(&rv_interface_lock);
+> +	return retval;
+> +}
+> +
+> +/**
+> + * rv_unregister_monitor - unregister a rv monitor.
+> + * @monitor:    The rv_monitor to be unregistered.
+> + *
+> + * Returns 0 if successful, error otherwise.
+> + */
+> +int rv_unregister_monitor(struct rv_monitor *monitor)
+> +{
+> +	struct rv_monitor_def *ptr, *next;
+> +
+> +	mutex_lock(&rv_interface_lock);
+> +
+> +	list_for_each_entry_safe(ptr, next, &rv_monitors_list, list) {
+> +		if (strcmp(monitor->name, ptr->monitor->name) == 0) {
+> +			rv_disable_monitor(ptr);
+> +			list_del(&ptr->list);
+> +			destroy_monitor_dir(ptr);
+> +		}
+> +	}
+> +
+> +	mutex_unlock(&rv_interface_lock);
+> +	return 0;
+> +}
+> +
+> +int __init rv_init_interface(void)
+> +{
+> +	struct dentry *tmp;
+> +
+> +	rv_root.root_dir = rv_create_dir("rv", NULL);
+> +	if (!rv_root.root_dir)
+> +		goto out_err;
+> +
+> +	rv_root.monitors_dir = rv_create_dir("monitors", rv_root.root_dir);
+> +	if (!rv_root.monitors_dir)
+> +		goto out_err;
+> +
+> +	tmp = rv_create_file("available_monitors", RV_MODE_READ, rv_root.root_dir, NULL,
+> +			     &available_monitors_ops);
+> +	if (!tmp)
+> +		goto out_err;
+> +
+> +	tmp = rv_create_file("enabled_monitors", RV_MODE_WRITE, rv_root.root_dir, NULL,
+> +			     &enabled_monitors_ops);
+> +	if (!tmp)
+> +		goto out_err;
+> +
+> +	tmp = rv_create_file("monitoring_on", RV_MODE_WRITE, rv_root.root_dir, NULL,
+> +			     &monitoring_on_fops);
+> +	if (!tmp)
+> +		goto out_err;
+> +
+
+This should call "turn_monitoriing_on()" instead of open coding it,
+especially since it includes a memory barrier (another reason to not
+reset the monitors in that function.
+
+-- Steve
+
+
+> +	WRITE_ONCE(monitoring_on, true);
+> +	/* monitoring_on */
+> +	smp_wmb();
+> +
+> +	return 0;
+> +
+> +out_err:
+> +	rv_remove(rv_root.root_dir);
+> +	printk(KERN_ERR "RV: Error while creating the RV interface\n");
+> +	return 1;
+> +}
