@@ -2,64 +2,72 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 699935815FA
-	for <lists+linux-doc@lfdr.de>; Tue, 26 Jul 2022 17:06:36 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id B118D58172E
+	for <lists+linux-doc@lfdr.de>; Tue, 26 Jul 2022 18:20:48 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S239515AbiGZPGc (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 26 Jul 2022 11:06:32 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:39780 "EHLO
+        id S239222AbiGZQUr (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 26 Jul 2022 12:20:47 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:35840 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S239502AbiGZPGb (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 26 Jul 2022 11:06:31 -0400
-Received: from email.cn (m218-153.88.com [110.43.218.153])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id ABE6210FEC
-        for <linux-doc@vger.kernel.org>; Tue, 26 Jul 2022 08:06:27 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=email.cn;
-        s=dkim; h=Date:From:To; bh=/ZqJi1toepBVp5SIIKaOCT58f3wKbnuv+0u7o
-        Rzhf7w=; b=k/9JBDTQ1b1avrr/X5RGAXIOnJtWOedj+8NIKggdMmAK5Re9w1YGC
-        NwLqmarfdr82vTwJFd1X2XJpiyqFfN6RklnvCf6vfbwzGYdj9RUPOnJddX15pkzl
-        af65fcfh7CcbM+ePNxMXGV2j4jQhaUnKH2ys1vctslgY53ZndnpvSo=
-Received: from bobwxc.mipc (unknown [120.242.71.147])
-        by v_coremail2-frontend-2 (Coremail) with SMTP id GiKnCgAnzxPYAuBiewBiAA--.45525S2;
-        Tue, 26 Jul 2022 23:06:02 +0800 (CST)
-Date:   Tue, 26 Jul 2022 23:06:00 +0800
-From:   Wu XiangCheng <bobwxc@email.cn>
-To:     Yanteng Si <siyanteng@loongson.cn>
-Cc:     alexs@kernel.org, seakeel@gmail.com, corbet@lwn.net,
-        chenhuacai@kernel.org, jiaxun.yang@flygoat.com,
-        linux-doc@vger.kernel.org, siyanteng01@gmail.com,
-        zhoubinbin@loongson.cn, yizhou.tang@shopee.com,
-        wanjiabing@vivo.com, leoyang.li@nxp.com, src.res@email.cn
-Subject: Re: [PATCH 8/8] Docs/zh_CN: Update the translation of sched-stats to
- 5.19-rc8
-Message-ID: <YuAC2JmisthCIb7U@bobwxc.mipc>
-References: <cover.1658740151.git.siyanteng@loongson.cn>
- <d46c5dfb2b6a138ba418b04f41f5bd73ebd7248d.1658740151.git.siyanteng@loongson.cn>
+        with ESMTP id S229831AbiGZQUq (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 26 Jul 2022 12:20:46 -0400
+Received: from madras.collabora.co.uk (madras.collabora.co.uk [46.235.227.172])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 231121CB39;
+        Tue, 26 Jul 2022 09:20:45 -0700 (PDT)
+Received: from localhost.localdomain (unknown [203.135.47.243])
+        (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+         key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+        (No client certificate requested)
+        (Authenticated sender: usama.anjum)
+        by madras.collabora.co.uk (Postfix) with ESMTPSA id 93E386601AA5;
+        Tue, 26 Jul 2022 17:20:33 +0100 (BST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=collabora.com;
+        s=mail; t=1658852443;
+        bh=Q8yKS/CE9WeaVU/KjkLDiu1+P/03f/c90M8YsCixowU=;
+        h=From:To:Cc:Subject:Date:From;
+        b=cgN22QmV02XkyYXSex/PVpjIAgeSTJ3OarhCz60EXZZSIFtH4Ry66m5tQhPibiNlx
+         ejgKdT6EuGerVmVtrcDtxz065YEw9n4vz/5f3G9wrhBym7pKH4ZrPC5hXxzrpdS0pD
+         Y1+Vx0AtG6jvdTF6VVfdadQR7EtGSZILqK0V8oACG7CF3mgz8xIOtBNM/lDziTLvNw
+         E2FHA8881Ts8ak3YP5z5ZQ9lUe1hCTA0nD7zL0NiTzkQF93DaE+LH7271nX/Vt45Ro
+         BW5l2/BzT/sJwUwaL4wlymWvcrdPd3yhj65fBxc2bnIgd0LIBoQZGDjVsTEDnPsr+q
+         M4e19wsh2sZ3g==
+From:   Muhammad Usama Anjum <usama.anjum@collabora.com>
+To:     Jonathan Corbet <corbet@lwn.net>,
+        Andy Lutomirski <luto@kernel.org>,
+        Thomas Gleixner <tglx@linutronix.de>,
+        Ingo Molnar <mingo@redhat.com>, Borislav Petkov <bp@alien8.de>,
+        Dave Hansen <dave.hansen@linux.intel.com>,
+        x86@kernel.org (maintainer:X86 ARCHITECTURE (32-BIT AND 64-BIT)),
+        "H. Peter Anvin" <hpa@zytor.com>, Arnd Bergmann <arnd@arndb.de>,
+        Andrew Morton <akpm@linux-foundation.org>,
+        Peter Zijlstra <peterz@infradead.org>,
+        Arnaldo Carvalho de Melo <acme@kernel.org>,
+        Mark Rutland <mark.rutland@arm.com>,
+        Alexander Shishkin <alexander.shishkin@linux.intel.com>,
+        Jiri Olsa <jolsa@kernel.org>,
+        Namhyung Kim <namhyung@kernel.org>,
+        Shuah Khan <shuah@kernel.org>,
+        linux-doc@vger.kernel.org (open list:DOCUMENTATION),
+        linux-kernel@vger.kernel.org (open list),
+        linux-fsdevel@vger.kernel.org (open list:PROC FILESYSTEM),
+        linux-api@vger.kernel.org (open list:ABI/API),
+        linux-arch@vger.kernel.org (open list:GENERIC INCLUDE/ASM HEADER FILES),
+        linux-mm@kvack.org (open list:MEMORY MANAGEMENT),
+        linux-perf-users@vger.kernel.org (open list:PERFORMANCE EVENTS
+        SUBSYSTEM),
+        linux-kselftest@vger.kernel.org (open list:KERNEL SELFTEST FRAMEWORK),
+        krisman@collabora.com
+Cc:     Muhammad Usama Anjum <usama.anjum@collabora.com>,
+        kernel@collabora.com
+Subject: [PATCH 0/5] Add process_memwatch syscall
+Date:   Tue, 26 Jul 2022 21:18:49 +0500
+Message-Id: <20220726161854.276359-1-usama.anjum@collabora.com>
+X-Mailer: git-send-email 2.30.2
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-In-Reply-To: <d46c5dfb2b6a138ba418b04f41f5bd73ebd7248d.1658740151.git.siyanteng@loongson.cn>
-X-CM-TRANSID: GiKnCgAnzxPYAuBiewBiAA--.45525S2
-X-Coremail-Antispam: 1UD129KBjvJXoW7CryxKr1fZFWxWw4xuFyUZFb_yoW8ZrW8pr
-        9rWr4xGr18AF90kwn2gw15GFW8GF47Aw4Utr1DZa4Yqr93tF4IgFyjkF98XFW2grWrZF9I
-        qa9Yga47u3yjyrDanT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
-        9KBjDU0xBIdaVrnRJUUUymb7Iv0xC_Cr1lb4IE77IF4wAFc2x0x2IEx4CE42xK8VAvwI8I
-        cIk0rVWrJVCq3wA2ocxC64kIII0Yj41l84x0c7CEw4AK67xGY2AK021l84ACjcxK6xIIjx
-        v20xvE14v26r1I6r4UM28EF7xvwVC0I7IYx2IY6xkF7I0E14v26r4j6F4UM28EF7xvwVC2
-        z280aVAFwI0_GcCE3s1l84ACjcxK6I8E87Iv6xkF7I0E14v26r4UJVWxJr1le2I262IYc4
-        CY6c8Ij28IcVAaY2xG8wAqx4xG64xvF2IEw4CE5I8CrVC2j2WlYx0E74AGY7Cv6cx26F4U
-        Jr1UMcvjeVCFs4IE7xkEbVWUJVW8JwACjcxG0xvEwIxGrwACI402YVCY1x02628vn2kIc2
-        xKxwCY02Avz4vE14v_XrWl42xK82IYc2Ij64vIr41l42xK82IY6x8ErcxFaVAv8VWxJr1U
-        JwCFx2IqxVCFs4IE7xkEbVWUJVW8JwC20s026c02F40E14v26r1j6r18MI8I3I0E7480Y4
-        vE14v26r106r1rMI8E67AF67kF1VAFwI0_Jw0_GFylIxkGc2Ij64vIr41lIxAIcVC0I7IY
-        x2IY67AKxVWUJVWUCwCI42IY6xIIjxv20xvEc7CjxVAFwI0_Gr0_Cr1lIxAIcVCF04k26c
-        xKx2IYs7xG6r1j6r1xMIIF0xvEx4A2jsIE14v26r1j6r4UMIIF0xvEx4A2jsIEc7CjxVAF
-        wI0_Gr0_Gr1UYxBIdaVFxhVjvjDU0xZFpf9x07U2Ap5UUUUU=
-X-Originating-IP: [120.242.71.147]
-X-CM-SenderInfo: pere453f6hztlloou0/
 X-Spam-Status: No, score=-2.1 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,SPF_HELO_PASS,SPF_PASS
+        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,SPF_HELO_NONE,SPF_PASS
         autolearn=ham autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
@@ -67,50 +75,98 @@ Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Mon, Jul 25, 2022 at 05:24:47PM +0800, Yanteng Si wrote:
-> Update to commit 6c757e9f55f0 ("docs/scheduler:
-> fix unit error")
-> 
-> ddb21d27a6a5 ("docs/scheduler: Change unit of
-> cpu_time and rq_time to nanoseconds")
-> 
-> Signed-off-by: Yanteng Si <siyanteng@loongson.cn>
+Hello,
 
-Reviewed-by: Wu XiangCheng <bobwxc@email.cn>
+This patch series implements a new syscall, process_memwatch. Currently,
+only the support to watch soft-dirty PTE bit is added. This syscall is
+generic to watch the memory of the process. There is enough room to add
+more operations like this to watch memory in the future.
 
-Thanks,
-	Wu
+Soft-dirty PTE bit of the memory pages can be viewed by using pagemap
+procfs file. The soft-dirty PTE bit for the memory in a process can be
+cleared by writing to the clear_refs file. This series adds features that
+weren't possible through the Proc FS interface.
+- There is no atomic get soft-dirty PTE bit status and clear operation
+  possible.
+- The soft-dirty PTE bit of only a part of memory cannot be cleared.
 
-> ---
->  .../translations/zh_CN/scheduler/sched-stats.rst          | 8 ++++----
->  1 file changed, 4 insertions(+), 4 deletions(-)
-> 
-> diff --git a/Documentation/translations/zh_CN/scheduler/sched-stats.rst b/Documentation/translations/zh_CN/scheduler/sched-stats.rst
-> index 1c68c3d1c283..c5e0be663837 100644
-> --- a/Documentation/translations/zh_CN/scheduler/sched-stats.rst
-> +++ b/Documentation/translations/zh_CN/scheduler/sched-stats.rst
-> @@ -57,8 +57,8 @@ cpu<N> 1 2 3 4 5 6 7 8 9
->  
->  接下来的三个统计数据描述了调度延迟：
->  
-> -     7) 本处理器运行任务的总时间，单位是jiffies
-> -     8) 本处理器任务等待运行的时间，单位是jiffies
-> +     7) 本处理器运行任务的总时间，单位是纳秒
-> +     8) 本处理器任务等待运行的时间，单位是纳秒
->       9) 本CPU运行了#个时间片
->  
->  域统计数据
-> @@ -146,8 +146,8 @@ domain<N> <cpumask> 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23
->  schedstats还添加了一个新的/proc/<pid>/schedstat文件，来提供一些进程级的
->  相同信息。这个文件中，有三个字段与该进程相关：
->  
-> -     1) 在CPU上运行花费的时间
-> -     2) 在运行队列上等待的时间
-> +     1) 在CPU上运行花费的时间(单位是纳秒)
-> +     2) 在运行队列上等待的时间(单位是纳秒)
->       3) 在CPU上运行了#个时间片
->  
->  可以很容易地编写一个程序，利用这些额外的字段来报告一个特定的进程或一组进程在
-> -- 
-> 2.31.1
+Historically, soft-dirty PTE bit tracking has been used in the CRIU
+project. The Proc FS interface is enough for that as I think the process
+is frozen. We have the use case where we need to track the soft-dirty
+PTE bit for running processes. We need this tracking and clear mechanism
+of a region of memory while the process is running to emulate the
+getWriteWatch() syscall of Windows. This syscall is used by games to keep
+track of dirty pages and keep processing only the dirty pages. This
+syscall can be used by the CRIU project and other applications which
+require soft-dirty PTE bit information.
+
+As in the current kernel there is no way to clear a part of memory (instead
+of clearing the Soft-Dirty bits for the entire processi) and get+clear
+operation cannot be performed atomically, there are other methods to mimic
+this information entirely in userspace with poor performance:
+- The mprotect syscall and SIGSEGV handler for bookkeeping
+- The userfaultfd syscall with the handler for bookkeeping
+
+        long process_memwatch(int pidfd, unsigned long start, int len,
+                              unsigned int flags, void *vec, int vec_len);
+
+This syscall can be used by the CRIU project and other applications which
+require soft-dirty PTE bit information. The following operations are
+supported in this syscall:
+- Get the pages that are soft-dirty.
+- Clear the pages which are soft-dirty.
+- The optional flag to ignore the VM_SOFTDIRTY and only track per page
+soft-dirty PTE bit
+
+There are two decisions which have been taken about how to get the output
+from the syscall.
+- Return offsets of the pages from the start in the vec
+- Stop execution when vec is filled with dirty pages
+These two arguments doesn't follow the mincore() philosophy where the
+output array corresponds to the address range in one to one fashion, hence
+the output buffer length isn't passed and only a flag is set if the page
+is present. This makes mincore() easy to use with less control. We are
+passing the size of the output array and putting return data consecutively
+which is offset of dirty pages from the start. The user can convert these
+offsets back into the dirty page addresses easily. Suppose, the user want
+to get first 10 dirty pages from a total memory of 100 pages. He'll
+allocate output buffer of size 10 and process_memwatch() syscall will
+abort after finding the 10 pages. This behaviour is needed to support
+Windows' getWriteWatch(). The behaviour like mincore() can be achieved by
+passing output buffer of 100 size. This interface can be used for any
+desired behaviour.
+
+Regards,
+Muhammad Usama Anjum
+
+Muhammad Usama Anjum (5):
+  fs/proc/task_mmu: make functions global to be used in other files
+  mm: Implement process_memwatch syscall
+  mm: wire up process_memwatch syscall for x86
+  selftests: vm: add process_memwatch syscall tests
+  mm: add process_memwatch syscall documentation
+
+ Documentation/admin-guide/mm/soft-dirty.rst   |  48 +-
+ arch/x86/entry/syscalls/syscall_32.tbl        |   1 +
+ arch/x86/entry/syscalls/syscall_64.tbl        |   1 +
+ fs/proc/task_mmu.c                            |  84 +--
+ include/linux/mm_inline.h                     |  99 +++
+ include/linux/syscalls.h                      |   3 +-
+ include/uapi/asm-generic/unistd.h             |   5 +-
+ include/uapi/linux/memwatch.h                 |  12 +
+ kernel/sys_ni.c                               |   1 +
+ mm/Makefile                                   |   2 +-
+ mm/memwatch.c                                 | 285 ++++++++
+ tools/include/uapi/asm-generic/unistd.h       |   5 +-
+ .../arch/x86/entry/syscalls/syscall_64.tbl    |   1 +
+ tools/testing/selftests/vm/.gitignore         |   1 +
+ tools/testing/selftests/vm/Makefile           |   2 +
+ tools/testing/selftests/vm/memwatch_test.c    | 635 ++++++++++++++++++
+ 16 files changed, 1098 insertions(+), 87 deletions(-)
+ create mode 100644 include/uapi/linux/memwatch.h
+ create mode 100644 mm/memwatch.c
+ create mode 100644 tools/testing/selftests/vm/memwatch_test.c
+
+-- 
+2.30.2
 
