@@ -2,21 +2,21 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 2651758380F
-	for <lists+linux-doc@lfdr.de>; Thu, 28 Jul 2022 07:05:44 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 7B8FA583813
+	for <lists+linux-doc@lfdr.de>; Thu, 28 Jul 2022 07:07:26 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S229761AbiG1FFm (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 28 Jul 2022 01:05:42 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:43634 "EHLO
+        id S229811AbiG1FHZ (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 28 Jul 2022 01:07:25 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:44058 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S229538AbiG1FFl (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Thu, 28 Jul 2022 01:05:41 -0400
+        with ESMTP id S229637AbiG1FHY (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Thu, 28 Jul 2022 01:07:24 -0400
 Received: from loongson.cn (mail.loongson.cn [114.242.206.163])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTP id C286D2019B
-        for <linux-doc@vger.kernel.org>; Wed, 27 Jul 2022 22:05:39 -0700 (PDT)
+        by lindbergh.monkeyblade.net (Postfix) with ESMTP id 9ADD942AF6
+        for <linux-doc@vger.kernel.org>; Wed, 27 Jul 2022 22:07:23 -0700 (PDT)
 Received: from localhost.localdomain (unknown [112.20.110.136])
-        by mail.loongson.cn (Coremail) with SMTP id AQAAf9DxT+MZGeJiBDk+AA--.39258S5;
-        Thu, 28 Jul 2022 13:05:32 +0800 (CST)
+        by mail.loongson.cn (Coremail) with SMTP id AQAAf9AxWeCCGeJiBTo+AA--.41718S2;
+        Thu, 28 Jul 2022 13:07:15 +0800 (CST)
 From:   Yanteng Si <siyanteng@loongson.cn>
 To:     alexs@kernel.org, bobwxc@email.cn, seakeel@gmail.com
 Cc:     Yanteng Si <siyanteng@loongson.cn>, corbet@lwn.net,
@@ -24,35 +24,34 @@ Cc:     Yanteng Si <siyanteng@loongson.cn>, corbet@lwn.net,
         linux-doc@vger.kernel.org, siyanteng01@gmail.com,
         zhoubinbin@loongson.cn, yizhou.tang@shopee.com,
         wanjiabing@vivo.com, leoyang.li@nxp.com, src.res@email.cn
-Subject: [PATCH v2 3/8] Docs/zh_CN: Update the translation of sparse to 5.19-rc8
-Date:   Thu, 28 Jul 2022 13:05:58 +0800
-Message-Id: <2ecdf7ddc8644e9031e4e2af947b97d63ab046f0.1658983157.git.siyanteng@loongson.cn>
+Subject: [PATCH v2 4/8] Docs/zh_CN: Update the translation of testing-overview to 5.19-rc8
+Date:   Thu, 28 Jul 2022 13:07:48 +0800
+Message-Id: <b9911916446f858fe95e4d4bfeaecdab14bc0b6a.1658983157.git.siyanteng@loongson.cn>
 X-Mailer: git-send-email 2.31.1
 In-Reply-To: <cover.1658983157.git.siyanteng@loongson.cn>
 References: <cover.1658983157.git.siyanteng@loongson.cn>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-CM-TRANSID: AQAAf9DxT+MZGeJiBDk+AA--.39258S5
-X-Coremail-Antispam: 1UD129KBjvdXoW7Jr45Cw4rXw17CF43Gw4Uurg_yoWDXFc_Cw
-        s2qF4vyF13tryxWF4rCr1rZr4xZF4fKry8ursav398Gws8CFZxG3Wvg3ZYvF4UWF47ur1Y
-        ka97Zr1FvrnrJjkaLaAFLSUrUUUUUb8apTn2vfkv8UJUUUU8Yxn0WfASr-VFAUDa7-sFnT
-        9fnUUIcSsGvfJTRUUUbyAFF20E14v26rWj6s0DM7CY07I20VC2zVCF04k26cxKx2IYs7xG
-        6rWj6s0DM7CIcVAFz4kK6r1j6r18M28IrcIa0xkI8VA2jI8067AKxVWUWwA2048vs2IY02
-        0Ec7CjxVAFwI0_Xr0E3s1l8cAvFVAK0II2c7xJM28CjxkF64kEwVA0rcxSw2x7M28EF7xv
-        wVC0I7IYx2IY67AKxVW8JVW5JwA2z4x0Y4vE2Ix0cI8IcVCY1x0267AKxVWxJVW8Jr1l84
-        ACjcxK6I8E87Iv67AKxVW8Jr0_Cr1UM28EF7xvwVC2z280aVCY1x0267AKxVWxJr0_GcWl
-        e2I262IYc4CY6c8Ij28IcVAaY2xG8wAqx4xG64xvF2IEw4CE5I8CrVC2j2WlYx0E2Ix0cI
-        8IcVAFwI0_Jr0_Jr4lYx0Ex4A2jsIE14v26r1j6r4UMcvjeVCFs4IE7xkEbVWUJVW8JwAC
-        jcxG0xvY0x0EwIxGrwACjI8F5VA0II8E6IAqYI8I648v4I1lFIxGxcIEc7CjxVA2Y2ka0x
-        kIwI1lc2xSY4AK67AK6r4rMxAIw28IcxkI7VAKI48JMxC20s026xCaFVCjc4AY6r1j6r4U
-        MI8I3I0E5I8CrVAFwI0_Jr0_Jr4lx2IqxVCjr7xvwVAFwI0_JrI_JrWlx4CE17CEb7AF67
-        AKxVWUtVW8ZwCIc40Y0x0EwIxGrwCI42IY6xIIjxv20xvE14v26r1j6r1xMIIF0xvE2Ix0
-        cI8IcVCY1x0267AKxVWxJVW8Jr1lIxAIcVCF04k26cxKx2IYs7xG6r1j6r1xMIIF0xvEx4
-        A2jsIE14v26r1j6r4UMIIF0xvEx4A2jsIEc7CjxVAFwI0_Gr0_Gr1UYxBIdaVFxhVjvjDU
-        0xZFpf9x0JUBq2NUUUUU=
+X-CM-TRANSID: AQAAf9AxWeCCGeJiBTo+AA--.41718S2
+X-Coremail-Antispam: 1UD129KBjvJXoWxWry5Xw1rWw47KryxtF47urg_yoW5Ww18pF
+        ZFk3s3KF129r17G34IkFyDZryrCF97Zw13KF9rG3WSvr18JF4kKrsrt34vqa9rWryfAFya
+        vFWrWrW09w12kFDanT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+        9KBjDU0xBIdaVrnRJUUU9014x267AKxVW8JVW5JwAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
+        rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2ocxC64kIII0Yj41l84x0c7CEw4AK67xGY2AK02
+        1l84ACjcxK6xIIjxv20xvE14v26r4j6ryUM28EF7xvwVC0I7IYx2IY6xkF7I0E14v26F4j
+        6r4UJwA2z4x0Y4vEx4A2jsIE14v26r4UJVWxJr1l84ACjcxK6I8E87Iv6xkF7I0E14v26F
+        4UJVW0owAS0I0E0xvYzxvE52x082IY62kv0487Mc02F40EFcxC0VAKzVAqx4xG6I80ewAv
+        7VC0I7IYx2IY67AKxVWUGVWUXwAv7VC2z280aVAFwI0_Jr0_Gr1lOx8S6xCaFVCjc4AY6r
+        1j6r4UM4x0Y48IcxkI7VAKI48JM4x0x7Aq67IIx4CEVc8vx2IErcIFxwACI402YVCY1x02
+        628vn2kIc2xKxwCY02Avz4vE14v_GrWl42xK82IYc2Ij64vIr41l4I8I3I0E4IkC6x0Yz7
+        v_Jr0_Gr1lx2IqxVAqx4xG67AKxVWUJVWUGwC20s026x8GjcxK67AKxVWUGVWUWwC2zVAF
+        1VAY17CE14v26r1q6r43MIIYrxkI7VAKI48JMIIF0xvE2Ix0cI8IcVAFwI0_Jr0_JF4lIx
+        AIcVC0I7IYx2IY6xkF7I0E14v26F4j6r4UJwCI42IY6xAIw20EY4v20xvaj40_Zr0_Wr1U
+        MIIF0xvEx4A2jsIE14v26r1j6r4UMIIF0xvEx4A2jsIEc7CjxVAFwI0_Gr0_Gr1UYxBIda
+        VFxhVjvjDU0xZFpf9x0JUGZXrUUUUU=
 X-CM-SenderInfo: pvl1t0pwhqwqxorr0wxvrqhubq/
-X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00,SPF_HELO_PASS,
+X-Spam-Status: No, score=-0.5 required=5.0 tests=BAYES_05,SPF_HELO_PASS,
         SPF_PASS autolearn=ham autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
@@ -60,26 +59,48 @@ Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Update to commit179fd6ba3bac ("Documentation/sparse:
- add hints about __CHECKER__")
+Update to commit 12379401c000 ("Documentation: dev-tools:
+Add a section for static analysis tools")
 
 Signed-off-by: Yanteng Si <siyanteng@loongson.cn>
 Reviewed-by: Alex Shi <alexs@kernel.org>
 ---
- Documentation/translations/zh_CN/dev-tools/sparse.rst | 2 ++
- 1 file changed, 2 insertions(+)
+ .../zh_CN/dev-tools/testing-overview.rst      | 25 +++++++++++++++++++
+ 1 file changed, 25 insertions(+)
 
-diff --git a/Documentation/translations/zh_CN/dev-tools/sparse.rst b/Documentation/translations/zh_CN/dev-tools/sparse.rst
-index 556282437aad..0664c634bc4f 100644
---- a/Documentation/translations/zh_CN/dev-tools/sparse.rst
-+++ b/Documentation/translations/zh_CN/dev-tools/sparse.rst
-@@ -106,3 +106,5 @@ __releases  - 指定的锁在函数进入时被持有，但在退出时不被持
+diff --git a/Documentation/translations/zh_CN/dev-tools/testing-overview.rst b/Documentation/translations/zh_CN/dev-tools/testing-overview.rst
+index b7a1d13da6c6..d6f2c65ed511 100644
+--- a/Documentation/translations/zh_CN/dev-tools/testing-overview.rst
++++ b/Documentation/translations/zh_CN/dev-tools/testing-overview.rst
+@@ -107,3 +107,28 @@ Documentation/dev-tools/kcov.rst 是能够构建在内核之中，用于在每
+ 之后你就能确保这些错误在测试过程中都不会发生了。
  
- make 的可选变量 CHECKFLAGS 可以用来向 sparse 工具传递参数。编译系统会自
- 动向 sparse 工具传递 -Wbitwise 参数。
+ 一些工具与KUnit和kselftest集成，并且在检测到问题时会自动打断测试。
 +
-+注意sparse定义了__CHECKER__预处理器符号。
-\ No newline at end of file
++静态分析工具
++============
++
++除了测试运行中的内核，我们还可以使用**静态分析**工具直接分析内核的源代
++码（**在编译时**）。内核中常用的工具允许人们检查整个源代码树或其中的特
++定文件。它们使得在开发过程中更容易发现和修复问题。
++
++ Sparse可以通过执行类型检查、锁检查、值范围检查来帮助测试内核，此外还
++ 可以在检查代码时报告各种错误和警告。关于如何使用它的细节，请参阅
++ Documentation/translations/zh_CN/dev-tools/sparse.rst。
++
++ Smatch扩展了Sparse，并提供了对编程逻辑错误的额外检查，如开关语句中
++ 缺少断点，错误检查中未使用的返回值，忘记在错误路径的返回中设置错误代
++ 码等。Smatch也有针对更严重问题的测试，如整数溢出、空指针解除引用和内
++ 存泄漏。见项目页面http://smatch.sourceforge.net/。
++
++ Coccinelle是我们可以使用的另一个静态分析器。Coccinelle经常被用来
++ 帮助源代码的重构和并行演化，但它也可以帮助避免常见代码模式中出现的某
++ 些错误。可用的测试类型包括API测试、内核迭代器的正确使用测试、自由操
++ 作的合理性检查、锁定行为的分析，以及已知的有助于保持内核使用一致性的
++ 进一步测试。详情请见Documentation/dev-tools/coccinelle.rst。
++
++ 不过要注意的是，静态分析工具存在**假阳性**的问题。在试图修复错误和警
++ 告之前，需要仔细评估它们。
 -- 
 2.31.1
 
