@@ -2,86 +2,106 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 4D766586D7C
-	for <lists+linux-doc@lfdr.de>; Mon,  1 Aug 2022 17:16:21 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 20030586DDD
+	for <lists+linux-doc@lfdr.de>; Mon,  1 Aug 2022 17:37:07 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S231317AbiHAPQT (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 1 Aug 2022 11:16:19 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:50868 "EHLO
+        id S232251AbiHAPhE (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 1 Aug 2022 11:37:04 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:40406 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S231444AbiHAPQR (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Mon, 1 Aug 2022 11:16:17 -0400
-Received: from mail-il1-f179.google.com (mail-il1-f179.google.com [209.85.166.179])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id D69AD10FF8;
-        Mon,  1 Aug 2022 08:16:16 -0700 (PDT)
-Received: by mail-il1-f179.google.com with SMTP id s16so2013982ilp.3;
-        Mon, 01 Aug 2022 08:16:16 -0700 (PDT)
+        with ESMTP id S232557AbiHAPhA (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Mon, 1 Aug 2022 11:37:00 -0400
+Received: from mail-lj1-x243.google.com (mail-lj1-x243.google.com [IPv6:2a00:1450:4864:20::243])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 632F82A27C
+        for <linux-doc@vger.kernel.org>; Mon,  1 Aug 2022 08:36:57 -0700 (PDT)
+Received: by mail-lj1-x243.google.com with SMTP id bx38so2866064ljb.10
+        for <linux-doc@vger.kernel.org>; Mon, 01 Aug 2022 08:36:57 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112;
+        h=mime-version:from:date:message-id:subject:to;
+        bh=q9Slei3vdZHf3BWZhWjxjnYHcSiTDd6lLLw5COAJJH4=;
+        b=UKcP1FDF09nj1k3uYCs67Q7ZyiUIjGtO/8/Bj2O390UgRgAJaQbdj4bNFv73NHa6D2
+         iYDxlXmYJBF3bZ+BbTGm686z3m5B8jXpwu0YmqjPCoKHCXX42ltrt2aAmH4sQv+ccJN+
+         OHyZ31OJTJwijh8OV8oO5eWh1/bM4pqSqK2uyo052aPr6eVSdk1CVQkx424vXYMEZQTj
+         HsS77Ky28UOjl0KpgsmMPfvxGbLfejaevmoaRlv0kRAHXIpr67GF1/t31ULjMlw9VGDc
+         NI+pGTJBLZwknk3P787XURm2/kBy3STaEpJiGhVmWsgdrf7IgJXaPWV7ssfsuJ7alB0a
+         /1Uw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=in-reply-to:content-disposition:mime-version:references:message-id
-         :subject:cc:to:from:date:x-gm-message-state:from:to:cc;
-        bh=HOzPqmgULZoG1/y97IP7LGvfzYRQUc7XYUea7CGLp8U=;
-        b=YAvN+t2HBbzsvdIjZDeT1ZpwzLcB4Jd3YTv3N1PbPqg/krzPmKqZbqKY+eqkaNjF3f
-         5z+DOO/4m9v2+vzKdw07TV6p5kt99Sd4sZk4+FbHk6OQ/rW7hTqVoTRazq+vKosmMo6b
-         fGA8OpcYnY6Q59dUkljiHyJh2Vovzc1pRzMz0JQErFiAlYQOzear54F8Qrs8uq+okjDa
-         RoNS4jOiUGXFzvOEd0fVERGQBxfkpEMsX2TEwoSRR1wNAHfW5CQyfdnKHxE/ye7w0mpZ
-         Rn7h4vJZZa/ukH+pa4xbFvZ0pOo4kDeMP2dtIxfFISm1jByxywGmcqMASRjkbmnNPEOy
-         bK8Q==
-X-Gm-Message-State: AJIora/MJyExVKkN8p9GBoCxxU9TSiL2rcK/r+L3qID+NRfPzltYOt5B
-        zgS0JBlKjm2bXYlB7XzTh3kH8G/3tg==
-X-Google-Smtp-Source: AGRyM1tBT8uzEoN/IPycG1TaNi4r8WsAWJy+p/L9JRkw66xWTFSVYLTTw/cSKPf2yP4onj4R6IzOZw==
-X-Received: by 2002:a05:6e02:1847:b0:2dd:18c7:51c3 with SMTP id b7-20020a056e02184700b002dd18c751c3mr6610384ilv.29.1659366975972;
-        Mon, 01 Aug 2022 08:16:15 -0700 (PDT)
-Received: from robh.at.kernel.org ([64.188.179.248])
-        by smtp.gmail.com with ESMTPSA id g10-20020a05660226ca00b0067bcbb0d258sm5779349ioo.46.2022.08.01.08.16.15
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 01 Aug 2022 08:16:15 -0700 (PDT)
-Received: (nullmailer pid 1035626 invoked by uid 1000);
-        Mon, 01 Aug 2022 15:16:14 -0000
-Date:   Mon, 1 Aug 2022 09:16:14 -0600
-From:   Rob Herring <robh@kernel.org>
-To:     Randy Dunlap <rdunlap@infradead.org>
-Cc:     linux-doc@vger.kernel.org, devicetree@vger.kernel.org,
-        Rob Herring <robh+dt@kernel.org>, linux-kernel@vger.kernel.org,
-        Jonathan Corbet <corbet@lwn.net>,
-        Krzysztof Kozlowski <krzysztof.kozlowski+dt@linaro.org>
-Subject: Re: [PATCH] devicetree/bindings: correct possessive "its" typos
-Message-ID: <20220801151614.GA1031441-robh@kernel.org>
-References: <20220801025221.30563-1-rdunlap@infradead.org>
+        h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
+        bh=q9Slei3vdZHf3BWZhWjxjnYHcSiTDd6lLLw5COAJJH4=;
+        b=mhgFozu88NDwYNYd57Z4QW7exco3GyWMUvF6L0t0+MVcBErJMf3d/1nPRntBAVY0z7
+         lzc0A8RQ6dJ1p2+jMyirtZNe6X2wqSMORjMOtqEBbv5o7rBFDlee9/+5CYrcPHyay/xm
+         TQ2ZmQdwreW+69u2cK/IiBGrivPAa59QzLLPJESC9x8uqi/oeNdZhjaCNiz2zCOc9H1I
+         mxPuq62WwlHrYvAvAjnlEhjSyozp8v3XXJUHxpYILfqJlf1GElfcLdaazIuZzjTibe/O
+         o/0FZ+N/HD/GO/Le7kyULm6YurgHH2GDhkjyIrVBrtrujnkBzJOPSpBuKiU9VufOBQJo
+         36pg==
+X-Gm-Message-State: AJIora/yH78HTXeVyxWyaZ5Zisdg5ZrHsGDYOJlnR38TVe6mqSVTZ1jg
+        hGoEjqBYaEL8TiiapZ1/v+WYzFV5ToZeEHUNs5Y=
+X-Google-Smtp-Source: AGRyM1vmE9FJ4oaYsT2Hr55xmADsiyPljwE7zY7KjJ0BGtCDobMH8efpf5FFXcSqHPDNiB3EqFhLCRIlfACfnG64NOA=
+X-Received: by 2002:a2e:be90:0:b0:25e:1496:a0b8 with SMTP id
+ a16-20020a2ebe90000000b0025e1496a0b8mr5475533ljr.194.1659368215756; Mon, 01
+ Aug 2022 08:36:55 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20220801025221.30563-1-rdunlap@infradead.org>
-X-Spam-Status: No, score=-1.2 required=5.0 tests=BAYES_00,
-        FREEMAIL_ENVFROM_END_DIGIT,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
-        HEADER_FROM_DIFFERENT_DOMAINS,RCVD_IN_DNSWL_NONE,RCVD_IN_MSPIKE_H2,
-        SPF_HELO_NONE,SPF_PASS autolearn=no autolearn_force=no version=3.4.6
+Received: by 2002:aa6:cb52:0:b0:1fa:aaed:e6d9 with HTTP; Mon, 1 Aug 2022
+ 08:36:55 -0700 (PDT)
+From:   Bright Gawayn <gben68387@gmail.com>
+Date:   Mon, 1 Aug 2022 21:06:55 +0530
+Message-ID: <CAG1+V0zQ=FhBLNLT__co7DHJWC=eYBw480NBDxjx-Za_ZVMuzw@mail.gmail.com>
+Subject: Lucrative business proposal very urgent!
+To:     undisclosed-recipients:;
+Content-Type: text/plain; charset="UTF-8"
+X-Spam-Status: Yes, score=6.9 required=5.0 tests=ADVANCE_FEE_3_NEW,BAYES_50,
+        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,
+        FREEMAIL_ENVFROM_END_DIGIT,FREEMAIL_FROM,RCVD_IN_DNSWL_NONE,
+        SPF_HELO_NONE,SPF_PASS,UNDISC_MONEY autolearn=no autolearn_force=no
+        version=3.4.6
+X-Spam-Report: * -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at
+        *      https://www.dnswl.org/, no trust
+        *      [2a00:1450:4864:20:0:0:0:243 listed in]
+        [list.dnswl.org]
+        *  0.8 BAYES_50 BODY: Bayes spam probability is 40 to 60%
+        *      [score: 0.5003]
+        *  0.0 SPF_HELO_NONE SPF: HELO does not publish an SPF Record
+        *  0.0 FREEMAIL_FROM Sender email is commonly abused enduser mail
+        *      provider
+        *      [gben68387[at]gmail.com]
+        *  0.2 FREEMAIL_ENVFROM_END_DIGIT Envelope-from freemail username ends
+        *       in digit
+        *      [gben68387[at]gmail.com]
+        * -0.0 SPF_PASS SPF: sender matches SPF record
+        * -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
+        *      author's domain
+        * -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+        * -0.1 DKIM_VALID_EF Message has a valid DKIM or DK signature from
+        *      envelope-from domain
+        *  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
+        *       valid
+        *  3.5 ADVANCE_FEE_3_NEW Appears to be advance fee fraud (Nigerian
+        *      419)
+        *  2.5 UNDISC_MONEY Undisclosed recipients + money/fraud signs
+X-Spam-Level: ******
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Sun, 31 Jul 2022 19:52:21 -0700, Randy Dunlap wrote:
-> Correct all uses of "it's" that are meant to be possessive "its".
-> 
-> Signed-off-by: Randy Dunlap <rdunlap@infradead.org>
-> Cc: Jonathan Corbet <corbet@lwn.net>
-> Cc: Rob Herring <robh+dt@kernel.org>
-> Cc: Krzysztof Kozlowski <krzysztof.kozlowski+dt@linaro.org>
-> Cc: devicetree@vger.kernel.org
-> ---
->  Documentation/devicetree/bindings/clock/st/st,flexgen.txt        |    2 +-
->  Documentation/devicetree/bindings/clock/ti/dra7-atl.txt          |    2 +-
->  Documentation/devicetree/bindings/hwmon/adt7475.yaml             |    2 +-
->  Documentation/devicetree/bindings/input/touchscreen/ektf2127.txt |    2 +-
->  Documentation/devicetree/bindings/mfd/rohm,bd71815-pmic.yaml     |    2 +-
->  Documentation/devicetree/bindings/mips/lantiq/rcu.txt            |    2 +-
->  Documentation/devicetree/bindings/net/altera_tse.txt             |    2 +-
->  Documentation/devicetree/bindings/net/cpsw.txt                   |    2 +-
->  Documentation/devicetree/bindings/powerpc/fsl/mpc5200.txt        |    2 +-
->  Documentation/devicetree/bindings/soc/qcom/qcom,aoss-qmp.yaml    |    2 +-
->  Documentation/devicetree/bindings/sound/da9055.txt               |    2 +-
->  11 files changed, 11 insertions(+), 11 deletions(-)
+Hello dear My name is Mr Bright Gawayn,  It's my pleasure to contact you today.
 
-Its a great fix. Applied, thanks!
+We use a certain raw material in our pharmaceutical firm for the
+manufacture of animal vaccines and many more.
+
+My intention is to give you the new contact information of the local
+manufacturer of this raw material in India and every details regarding
+how to supply the material to my company if you're interested, my
+company pays in advance for this material.
+
+Due to some reasons, which I will explain in my next email, I cannot
+procure this material and supply it to my company myself due to the
+fact that I am a staff in the company.
+
+Please get back to me as soon as possible for full detail if you are interested.
+
+Thanks and regards
+Bright.
