@@ -2,68 +2,114 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 76F8358663E
-	for <lists+linux-doc@lfdr.de>; Mon,  1 Aug 2022 10:20:50 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 9534D586672
+	for <lists+linux-doc@lfdr.de>; Mon,  1 Aug 2022 10:37:18 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S230030AbiHAIUp (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 1 Aug 2022 04:20:45 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:38312 "EHLO
+        id S229689AbiHAIhQ convert rfc822-to-8bit (ORCPT
+        <rfc822;lists+linux-doc@lfdr.de>); Mon, 1 Aug 2022 04:37:16 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:48734 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S230089AbiHAIUj (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Mon, 1 Aug 2022 04:20:39 -0400
-Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.133.124])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTP id 881982870E
-        for <linux-doc@vger.kernel.org>; Mon,  1 Aug 2022 01:20:38 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-        s=mimecast20190719; t=1659342037;
-        h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-         to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-         in-reply-to:in-reply-to:references:references;
-        bh=pJH07x8QvE4r/0Wcvdf2EaLzPedOQZnkWNurVPoZ0fI=;
-        b=Bl1/G+MQfJHeYJjvnoZ9GM6VKpcnFq+bAI2Tr9rmEUGywxWAn3TftofWdF4fFdi2y2ykwZ
-        vb51IIWU/y0jwz3uDL0jlgVqUkLIureqsBpu0ORapVwGaDJ15SAwO43A6SR7Po2rIoRybw
-        k/3l1D79ygXS56/5TAdzZD8HVpVAVAk=
-Received: from mimecast-mx02.redhat.com (mx3-rdu2.redhat.com
- [66.187.233.73]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- us-mta-398-wsEDCQC2NEKteI_g3du0kQ-1; Mon, 01 Aug 2022 04:20:32 -0400
-X-MC-Unique: wsEDCQC2NEKteI_g3du0kQ-1
-Received: from smtp.corp.redhat.com (int-mx10.intmail.prod.int.rdu2.redhat.com [10.11.54.10])
-        (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
-        (No client certificate requested)
-        by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 9434B1C14488;
-        Mon,  1 Aug 2022 08:20:31 +0000 (UTC)
-Received: from localhost (ovpn-12-103.pek2.redhat.com [10.72.12.103])
-        by smtp.corp.redhat.com (Postfix) with ESMTPS id 10BDE492C3B;
-        Mon,  1 Aug 2022 08:20:29 +0000 (UTC)
-Date:   Mon, 1 Aug 2022 16:20:25 +0800
-From:   Baoquan He <bhe@redhat.com>
-To:     Zhen Lei <thunder.leizhen@huawei.com>
-Cc:     Dave Young <dyoung@redhat.com>, Vivek Goyal <vgoyal@redhat.com>,
-        kexec@lists.infradead.org, linux-kernel@vger.kernel.org,
-        Catalin Marinas <catalin.marinas@arm.com>,
-        Will Deacon <will@kernel.org>,
-        linux-arm-kernel@lists.infradead.org,
-        Jonathan Corbet <corbet@lwn.net>, linux-doc@vger.kernel.org,
-        "Eric W . Biederman" <ebiederm@xmission.com>,
-        Randy Dunlap <rdunlap@infradead.org>,
-        Feng Zhou <zhoufeng.zf@bytedance.com>,
-        Kefeng Wang <wangkefeng.wang@huawei.com>,
-        Chen Zhou <dingguo.cz@antgroup.com>,
-        John Donnelly <John.p.donnelly@oracle.com>,
-        Dave Kleikamp <dave.kleikamp@oracle.com>
-Subject: Re: [PATCH v3 0/2] arm64: kdump: Function supplement and performance
- optimization
-Message-ID: <YueMyUqannVg7l9v@MiWiFi-R3L-srv>
-References: <20220711090319.1604-1-thunder.leizhen@huawei.com>
+        with ESMTP id S229978AbiHAIhP (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Mon, 1 Aug 2022 04:37:15 -0400
+Received: from eu-smtp-delivery-151.mimecast.com (eu-smtp-delivery-151.mimecast.com [185.58.85.151])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTP id 283942ED4F
+        for <linux-doc@vger.kernel.org>; Mon,  1 Aug 2022 01:37:13 -0700 (PDT)
+Received: from AcuMS.aculab.com (156.67.243.121 [156.67.243.121]) by
+ relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384) id
+ uk-mta-60-CksiPPRtPA6w1mXQckakNQ-1; Mon, 01 Aug 2022 09:37:09 +0100
+X-MC-Unique: CksiPPRtPA6w1mXQckakNQ-1
+Received: from AcuMS.Aculab.com (fd9f:af1c:a25b:0:994c:f5c2:35d6:9b65) by
+ AcuMS.aculab.com (fd9f:af1c:a25b:0:994c:f5c2:35d6:9b65) with Microsoft SMTP
+ Server (TLS) id 15.0.1497.36; Mon, 1 Aug 2022 09:37:04 +0100
+Received: from AcuMS.Aculab.com ([fe80::994c:f5c2:35d6:9b65]) by
+ AcuMS.aculab.com ([fe80::994c:f5c2:35d6:9b65%12]) with mapi id
+ 15.00.1497.036; Mon, 1 Aug 2022 09:37:04 +0100
+From:   David Laight <David.Laight@ACULAB.COM>
+To:     'Stephen Hemminger' <stephen@networkplumber.org>,
+        "netdev@vger.kernel.org" <netdev@vger.kernel.org>
+CC:     Jonathan Corbet <corbet@lwn.net>,
+        "David S. Miller" <davem@davemloft.net>,
+        Eric Dumazet <edumazet@google.com>,
+        Jakub Kicinski <kuba@kernel.org>,
+        "Paolo Abeni" <pabeni@redhat.com>,
+        Thomas Bogendoerfer <tsbogend@alpha.franken.de>,
+        Michael Ellerman <mpe@ellerman.id.au>,
+        Benjamin Herrenschmidt <benh@kernel.crashing.org>,
+        Paul Mackerras <paulus@samba.org>,
+        "Pablo Neira Ayuso" <pablo@netfilter.org>,
+        Jozsef Kadlecsik <kadlec@netfilter.org>,
+        "Florian Westphal" <fw@strlen.de>, Borislav Petkov <bp@suse.de>,
+        "Paul E. McKenney" <paulmck@kernel.org>,
+        Kees Cook <keescook@chromium.org>,
+        Peter Zijlstra <peterz@infradead.org>,
+        Andrew Morton <akpm@linux-foundation.org>,
+        "Randy Dunlap" <rdunlap@infradead.org>,
+        Damien Le Moal <damien.lemoal@opensource.wdc.com>,
+        Xin Long <lucien.xin@gmail.com>,
+        "Akhmat Karakotov" <hmukos@yandex-team.ru>,
+        Antoine Tenart <atenart@kernel.org>,
+        "Hans de Goede" <hdegoede@redhat.com>,
+        Juergen Gross <jgross@suse.com>, Jens Axboe <axboe@kernel.dk>,
+        Xie Yongji <xieyongji@bytedance.com>,
+        Chen Yu <yu.c.chen@intel.com>,
+        William Breathitt Gray <vilhelm.gray@gmail.com>,
+        "Suma Hegde" <suma.hegde@amd.com>,
+        =?iso-8859-1?Q?Pali_Roh=E1r?= <pali@kernel.org>,
+        Jeff Layton <jlayton@kernel.org>,
+        Chuck Lever <chuck.lever@oracle.com>,
+        "Arnd Bergmann" <arnd@arndb.de>,
+        Alexandre Ghiti <alexandre.ghiti@canonical.com>,
+        Scott Wood <oss@buserror.net>,
+        Paul Gortmaker <paul.gortmaker@windriver.com>,
+        Nikolay Aleksandrov <razor@blackwall.org>,
+        Sebastian Andrzej Siewior <bigeasy@linutronix.de>,
+        Menglong Dong <imagedong@tencent.com>,
+        Petr Machata <petrm@nvidia.com>,
+        Daniel Borkmann <daniel@iogearbox.net>,
+        David Ahern <dsahern@kernel.org>,
+        Roopa Prabhu <roopa@nvidia.com>,
+        Yajun Deng <yajun.deng@linux.dev>,
+        Yuwei Wang <wangyuweihx@gmail.com>,
+        Shakeel Butt <shakeelb@google.com>,
+        Soheil Hassas Yeganeh <soheil@google.com>,
+        "Kuniyuki Iwashima" <kuniyu@amazon.com>,
+        Marc Kleine-Budde <mkl@pengutronix.de>,
+        "Stefano Garzarella" <sgarzare@redhat.com>,
+        Alexei Starovoitov <ast@kernel.org>,
+        "Wang Qing" <wangqing@vivo.com>, Yu Zhe <yuzhe@nfschina.com>,
+        Benjamin Poirier <bpoirier@nvidia.com>,
+        Victor Erminpour <victor.erminpour@oracle.com>,
+        "GONG, Ruiqi" <gongruiqi1@huawei.com>,
+        "open list:DOCUMENTATION" <linux-doc@vger.kernel.org>,
+        open list <linux-kernel@vger.kernel.org>,
+        "open list:MIPS" <linux-mips@vger.kernel.org>,
+        "open list:LINUX FOR POWERPC (32-BIT AND 64-BIT)" 
+        <linuxppc-dev@lists.ozlabs.org>,
+        "open list:NETFILTER" <netfilter-devel@vger.kernel.org>,
+        "open list:NETFILTER" <coreteam@netfilter.org>
+Subject: RE: [RFC] Remove DECNET support from kernel
+Thread-Topic: [RFC] Remove DECNET support from kernel
+Thread-Index: AQHYpREB8DXx1AZd/0ac5Son0/agPK2ZuBOg
+Date:   Mon, 1 Aug 2022 08:37:03 +0000
+Message-ID: <c43f221d8e824cd2bf9746596423befc@AcuMS.aculab.com>
+References: <20220731190646.97039-1-stephen@networkplumber.org>
+In-Reply-To: <20220731190646.97039-1-stephen@networkplumber.org>
+Accept-Language: en-GB, en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-ms-exchange-transport-fromentityheader: Hosted
+x-originating-ip: [10.202.205.107]
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20220711090319.1604-1-thunder.leizhen@huawei.com>
-X-Scanned-By: MIMEDefang 2.85 on 10.11.54.10
-X-Spam-Status: No, score=-2.7 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_NONE,
-        SPF_HELO_NONE,SPF_NONE autolearn=unavailable autolearn_force=no
+Authentication-Results: relay.mimecast.com;
+        auth=pass smtp.auth=C51A453 smtp.mailfrom=david.laight@aculab.com
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: aculab.com
+Content-Language: en-US
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8BIT
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_LOW,
+        SPF_HELO_NONE,SPF_PASS autolearn=unavailable autolearn_force=no
         version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
@@ -71,59 +117,30 @@ Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Hi Catalin,
+From: Stephen Hemminger
+> Sent: 31 July 2022 20:06
+> To: netdev@vger.kernel.org
+> 
+> Decnet is an obsolete network protocol that receives more attention
+> from kernel janitors than users. It belongs in computer protocol
+> history museum not in Linux kernel.
+> 
+> It has been Orphaned in kernel since 2010.
+> And the documentation link on Sourceforge says it is abandoned there.
 
-On 07/11/22 at 05:03pm, Zhen Lei wrote:
-> v2 --> v3:
-> 1. Discard patch 3 in v2, a cleanup patch.
-> 
-> v1 --> v2:
-> 1. Update the commit message of Patch 1, explicitly indicates that "crashkernel=X,high"
->    is specified but "crashkernel=Y,low" is not specified.
-> 2. Drop Patch 4-5. Currently, focus on function integrity, performance optimization
->    will be considered in later versions.
-> 3. Patch 3 is not mandatory, it's just a cleanup now, although it is a must for patch 4-5.
->    But to avoid subsequent duplication of effort, I'm glad it was accepted.
-> 
-> 
-> v1:
-> After the basic functions of "support reserving crashkernel above 4G on arm64
-> kdump"(see https://lkml.org/lkml/2022/5/6/428) are implemented, we still have
-> three features to be improved.
-> 1. When crashkernel=X,high is specified but crashkernel=Y,low is not specified,
->    the default crash low memory size is provided.
-> 2. For crashkernel=X without '@offset', if the low memory fails to be allocated,
->    fall back to reserve region from high memory(above DMA zones).
-> 3. If crashkernel=X,high is used, page mapping is performed only for the crash
->    high memory, and block mapping is still used for other linear address spaces.
->    Compared to the previous version:
->    (1) For crashkernel=X[@offset], the memory above 4G is not changed to block
->        mapping, leave it to the next time.
->    (2) The implementation method is modified. Now the implementation is simpler
->        and clearer.
+It was pretty much obsolete when I was writing ethernet drivers
+in the early 1990's.
+Sort of surprising support ever got into Linux in the first place!
 
-Do you have plan to pick this series so that it can be taken into 5.20
-rc-1~3?
+Remember it requires the ethernet MAC address be set to a
+locally assigned value that is the machine's 'node number'.
 
-We have back ported the basic crashkernel=high, low, support into our
-distros and have taken wide testing on arm64 servers, need this patchset
-to back port for more testing. 
+Does this remove some/most/all of the [gs]et_sockopt() calls
+where the length is ignored/
 
-Thanks
-Baoquan
+	David
 
-> 
-> Zhen Lei (2):
->   arm64: kdump: Provide default size when crashkernel=Y,low is not
->     specified
->   arm64: kdump: Support crashkernel=X fall back to reserve region above
->     DMA zones
-> 
->  .../admin-guide/kernel-parameters.txt         | 10 ++-----
->  arch/arm64/mm/init.c                          | 28 +++++++++++++++++--
->  2 files changed, 28 insertions(+), 10 deletions(-)
-> 
-> -- 
-> 2.25.1
-> 
+-
+Registered Address Lakeside, Bramley Road, Mount Farm, Milton Keynes, MK1 1PT, UK
+Registration No: 1397386 (Wales)
 
