@@ -2,78 +2,110 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 69530586667
-	for <lists+linux-doc@lfdr.de>; Mon,  1 Aug 2022 10:34:33 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 88578586845
+	for <lists+linux-doc@lfdr.de>; Mon,  1 Aug 2022 13:38:53 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S230146AbiHAIeb (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 1 Aug 2022 04:34:31 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:46644 "EHLO
+        id S230192AbiHALiv (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 1 Aug 2022 07:38:51 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:53246 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S229727AbiHAIea (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Mon, 1 Aug 2022 04:34:30 -0400
-Received: from szxga03-in.huawei.com (szxga03-in.huawei.com [45.249.212.189])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id B3AA026D6;
-        Mon,  1 Aug 2022 01:34:29 -0700 (PDT)
-Received: from canpemm500009.china.huawei.com (unknown [172.30.72.55])
-        by szxga03-in.huawei.com (SkyGuard) with ESMTP id 4LxBGH2LZDzGpHj;
-        Mon,  1 Aug 2022 16:33:11 +0800 (CST)
-Received: from huawei.com (10.67.174.191) by canpemm500009.china.huawei.com
- (7.192.105.203) with Microsoft SMTP Server (version=TLS1_2,
+        with ESMTP id S229903AbiHALiv (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Mon, 1 Aug 2022 07:38:51 -0400
+Received: from szxga02-in.huawei.com (szxga02-in.huawei.com [45.249.212.188])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 06AED31928;
+        Mon,  1 Aug 2022 04:38:50 -0700 (PDT)
+Received: from dggpemm500024.china.huawei.com (unknown [172.30.72.53])
+        by szxga02-in.huawei.com (SkyGuard) with ESMTP id 4LxGKM6tWSzlW4H;
+        Mon,  1 Aug 2022 19:36:07 +0800 (CST)
+Received: from dggpemm500018.china.huawei.com (7.185.36.111) by
+ dggpemm500024.china.huawei.com (7.185.36.203) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2375.24; Mon, 1 Aug 2022 19:38:48 +0800
+Received: from huawei.com (10.174.176.191) by dggpemm500018.china.huawei.com
+ (7.185.36.111) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2375.24; Mon, 1 Aug
- 2022 16:34:26 +0800
-From:   Li Hua <hucool.lihua@huawei.com>
-To:     <akpm@linux-foundation.org>, <mail@christoph.anton.mitterer.name>,
-        <hannes@cmpxchg.org>, <kaleshsingh@google.com>,
-        <shy828301@gmail.com>, <rppt@kernel.org>,
-        <paul.gortmaker@windriver.co>
-CC:     <linux-kernel@vger.kernel.org>, <linux-fsdevel@vger.kernel.org>,
-        <linux-doc@vger.kernel.org>
-Subject: [PATCH -next] Documentation/filesystems/proc.rst: Change the document about cputime
-Date:   Tue, 2 Aug 2022 06:30:46 +0800
-Message-ID: <20220801223046.35178-1-hucool.lihua@huawei.com>
-X-Mailer: git-send-email 2.17.1
+ 2022 19:38:47 +0800
+From:   l00581214 <liutie4@huawei.com>
+To:     <jstultz@google.com>, <tglx@linutronix.de>, <sboyd@kernel.org>
+CC:     <linux-doc@vger.kernel.org>, <linux-kernel@vger.kernel.org>,
+        <hewenliang4@huawei.com>, <linfeilong@huawei.com>
+Subject: [PATCH] clocksource: Resolve some coding specification issues about spaces
+Date:   Mon, 1 Aug 2022 19:38:44 +0800
+Message-ID: <20220801113844.982-1-liutie4@huawei.com>
+X-Mailer: git-send-email 2.28.0.windows.1
 MIME-Version: 1.0
-Content-Type: text/plain
-X-Originating-IP: [10.67.174.191]
-X-ClientProxiedBy: dggems704-chm.china.huawei.com (10.3.19.181) To
- canpemm500009.china.huawei.com (7.192.105.203)
+Content-Transfer-Encoding: 7BIT
+Content-Type:   text/plain; charset=US-ASCII
+X-Originating-IP: [10.174.176.191]
+X-ClientProxiedBy: dggems705-chm.china.huawei.com (10.3.19.182) To
+ dggpemm500018.china.huawei.com (7.185.36.111)
 X-CFilter-Loop: Reflected
-X-Spam-Status: No, score=-1.0 required=5.0 tests=BAYES_00,DATE_IN_FUTURE_12_24,
-        RCVD_IN_DNSWL_MED,SPF_HELO_NONE,SPF_PASS autolearn=no
-        autolearn_force=no version=3.4.6
+X-Spam-Status: No, score=-4.2 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_MED,
+        SPF_HELO_NONE,SPF_PASS autolearn=ham autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Because the values of utime, stime, and delta are temporarily
-written to cpustat in kcpustat_cpu_fetch_vtime. Therefore, there are two
-problems read from /proc/stat:
-1. The value read the second time may be less than the first time.
-2. When there are many tasks, the statistics are not imprecise when utime
-and stime do not exceed one tick.
+From: Tie Liu <liutie4@huawei.com>
 
-Signed-off-by: Li Hua <hucool.lihua@huawei.com>
+When I read the code, I noticed that some spaces were not used in accordance with current encoding specifications, so I tried to modify them.
+
+Signed-off-by: Liu Tie <liutie4@huawei.com>
 ---
- Documentation/filesystems/proc.rst | 4 ++++
- 1 file changed, 4 insertions(+)
+ kernel/time/clocksource.c | 10 +++++-----
+ 1 file changed, 5 insertions(+), 5 deletions(-)
 
-diff --git a/Documentation/filesystems/proc.rst b/Documentation/filesystems/proc.rst
-index 47e95dbc820d..b6625e83c994 100644
---- a/Documentation/filesystems/proc.rst
-+++ b/Documentation/filesystems/proc.rst
-@@ -1459,6 +1459,10 @@ second).  The meanings of the columns are as follows, from left to right:
- - user: normal processes executing in user mode
- - nice: niced processes executing in user mode
- - system: processes executing in kernel mode
-+  The amount of time reading from /proc/stat is not reliable, because the value
-+  of utime, stime, and delta are temporarily written to cpustat in
-+  kcpustat_cpu_fetch_vtime().
-+
- - idle: twiddling thumbs
- - iowait: In a word, iowait stands for waiting for I/O to complete. But there
-   are several problems:
+diff --git a/kernel/time/clocksource.c b/kernel/time/clocksource.c
+index cee5da1e5..46b738696 100644
+--- a/kernel/time/clocksource.c
++++ b/kernel/time/clocksource.c
+@@ -47,7 +47,7 @@ void
+ clocks_calc_mult_shift(u32 *mult, u32 *shift, u32 from, u32 to, u32 maxsec)
+ {
+ 	u64 tmp;
+-	u32 sft, sftacc= 32;
++	u32 sft, sftacc = 32;
+ 
+ 	/*
+ 	 * Calculate the shift factor which is limiting the conversion
+@@ -55,7 +55,7 @@ clocks_calc_mult_shift(u32 *mult, u32 *shift, u32 from, u32 to, u32 maxsec)
+ 	 */
+ 	tmp = ((u64)maxsec * from) >> 32;
+ 	while (tmp) {
+-		tmp >>=1;
++		tmp >>= 1;
+ 		sftacc--;
+ 	}
+ 
+@@ -863,7 +863,7 @@ static u32 clocksource_max_adjustment(struct clocksource *cs)
+ 	 * We won't try to correct for more than 11% adjustments (110,000 ppm),
+ 	 */
+ 	ret = (u64)cs->mult * 11;
+-	do_div(ret,100);
++	do_div(ret, 100);
+ 	return (u32)ret;
+ }
+ 
+@@ -1446,7 +1446,7 @@ device_initcall(init_clocksource_sysfs);
+  * Takes a clocksource= boot argument and uses it
+  * as the clocksource override name.
+  */
+-static int __init boot_override_clocksource(char* str)
++static int __init boot_override_clocksource(char *str)
+ {
+ 	mutex_lock(&clocksource_mutex);
+ 	if (str)
+@@ -1464,7 +1464,7 @@ __setup("clocksource=", boot_override_clocksource);
+  * DEPRECATED! Takes a clock= boot argument and uses it
+  * as the clocksource override name
+  */
+-static int __init boot_override_clock(char* str)
++static int __init boot_override_clock(char *str)
+ {
+ 	if (!strcmp(str, "pmtmr")) {
+ 		pr_warn("clock=pmtmr is deprecated - use clocksource=acpi_pm\n");
 -- 
-2.17.1
+2.27.0
 
