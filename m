@@ -2,109 +2,121 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id C13D9589284
-	for <lists+linux-doc@lfdr.de>; Wed,  3 Aug 2022 20:58:53 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 52A4E5892A9
+	for <lists+linux-doc@lfdr.de>; Wed,  3 Aug 2022 21:22:23 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S237313AbiHCS6v (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 3 Aug 2022 14:58:51 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:43718 "EHLO
+        id S238144AbiHCTWW (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 3 Aug 2022 15:22:22 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:57926 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S236751AbiHCS6v (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Wed, 3 Aug 2022 14:58:51 -0400
-Received: from mail-lf1-x12a.google.com (mail-lf1-x12a.google.com [IPv6:2a00:1450:4864:20::12a])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 325EA33A0E
-        for <linux-doc@vger.kernel.org>; Wed,  3 Aug 2022 11:58:50 -0700 (PDT)
-Received: by mail-lf1-x12a.google.com with SMTP id a9so14896892lfm.12
-        for <linux-doc@vger.kernel.org>; Wed, 03 Aug 2022 11:58:50 -0700 (PDT)
+        with ESMTP id S236148AbiHCTWU (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Wed, 3 Aug 2022 15:22:20 -0400
+Received: from mail-qv1-xf29.google.com (mail-qv1-xf29.google.com [IPv6:2607:f8b0:4864:20::f29])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id C97313E767
+        for <linux-doc@vger.kernel.org>; Wed,  3 Aug 2022 12:22:18 -0700 (PDT)
+Received: by mail-qv1-xf29.google.com with SMTP id i4so13634456qvv.7
+        for <linux-doc@vger.kernel.org>; Wed, 03 Aug 2022 12:22:18 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=to:subject:message-id:date:from:sender:mime-version:from:to:cc;
-        bh=s8kzBR6yD3t8l+oWCIcSa7x4TVSX+N2XH3VFOQBZHG8=;
-        b=agJwWzotke0VoAXYv2/dmdzDqMNt8NSBB8eknluo26LL93yjIF/AzWlFlq/1w4zewQ
-         L1jU7qxIl7fMZknrFASSOvxS0Z2BhJU40MEC++F2GsCNTbBb9fgBnJUznikM6rNOw4SH
-         EA6xHDor8upEgfxkI4O8GZ3j1znFuhG9RsWehAvWDrJCWRyIxztGg7CdoHuq8TCRAjwx
-         +GhHVICKpXK8Z01RtoJ409Na5LZSoa+7I88ZR6eGL+1Z5xlpqQDzz39FZpQwRKLDjBfq
-         gupwPHWNtan5v6t0VKhHfrm/XqRLzIMHzWsphhrn0DGvqQ34tfBK9111ggnZtlYQILbh
-         AOlQ==
+        d=cmpxchg-org.20210112.gappssmtp.com; s=20210112;
+        h=in-reply-to:content-disposition:mime-version:references:message-id
+         :subject:cc:to:from:date:from:to:cc;
+        bh=c0anUqpP2C7sKweDNx6tz5eeeYeeCajDunQoGL7Ybz0=;
+        b=nLaoCQbdkBOJTfuCR3nvXQ6rGDdylxjmz1jZ8Tm+nJhB6uRVEzkJe9J4YvGiaLZJIB
+         eWPFrU1LaDhgB2s2lw2eeu9wk/emPqRLAABUjCEPpahzxkyec1saBHzutYUk9LjwCn1W
+         NDD4glL0si9CYF94gTQapu1l/uknEiTgOX1JK7P0ZfPvWAntrY41DosPltyCmtNzocQd
+         u0y+VnjfLoLyPQNDeLJGLo35kTLX8U7m3Md4z4tb8wRmVQCEoDIBm+JIZRe1M2hFceis
+         Nk7XsPtsik05vCUxaU21b6nk/4AzADB2kCAMEgmcUghE3x5ypb3WJtPKnhrzaNTK6OU0
+         cJHA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=to:subject:message-id:date:from:sender:mime-version
-         :x-gm-message-state:from:to:cc;
-        bh=s8kzBR6yD3t8l+oWCIcSa7x4TVSX+N2XH3VFOQBZHG8=;
-        b=gOvJZ6+9YD5eg19VKcwLsleIrGRQxNAWzDNM1UQ6LvklOnSNIwVukyCIQIdlYg44rn
-         B7aP/XAZAz91zhVXv0OK6Jw1erKMl2jXP0W+TgMPjVrzohE//t0+7jXSN9qwgI0p4nAq
-         V04UaoGQWuSXRcde9NCY8aRmBtYudoQ8jqqZcwFfKKrurKze9Q4rviEzimY23Q8bZzS/
-         sYIK/f/8O+hhA99JZ68sYbTIn51zPNsGgCKhGTgADpw4I6z128S3QopXCOT8VyqLHsZt
-         UDgKo0KOt+pyeNUNkPbrcmZ7ktcUbVOOPi5ZBVag1aHFCts0I2tuVgZ/hrrNlPr6nSxk
-         ZILw==
-X-Gm-Message-State: ACgBeo0cAQ05uCLFxymg3hDqHO8rdJW3btPe2ZrXNuIOF7M1MRKLw/lC
-        aveXFkfGkJBzg/brFevpDCBBGSNYUs82SAtNoVc=
-X-Google-Smtp-Source: AA6agR5QDBuJGCETNSKpHTyhiSd1XL2t/mnj8D3IbmrnGbicjGtR1znn5ZlG/V7wIrOaVjAAtldhGkns4HHBoyVhKjE=
-X-Received: by 2002:a19:6407:0:b0:48b:1959:8576 with SMTP id
- y7-20020a196407000000b0048b19598576mr1747683lfb.244.1659553128077; Wed, 03
- Aug 2022 11:58:48 -0700 (PDT)
+        h=in-reply-to:content-disposition:mime-version:references:message-id
+         :subject:cc:to:from:date:x-gm-message-state:from:to:cc;
+        bh=c0anUqpP2C7sKweDNx6tz5eeeYeeCajDunQoGL7Ybz0=;
+        b=GjS18hhShMjOxw7N5w8PlA4yUZ9wG1j9gLioEE6HAukPVE+eEzm2/vLob0ZlGKh5d0
+         UzlL/AZ+X4ds1bvfuFTM3FogJvYgCW3sgiGK41Y+jO6rY24RzC35nWTC9EacmmZSb6DZ
+         q/6E4y54tH6EWUJg0mSODLdEp2K1IUT0nqvn2Na6/bcSQ2cTn0/Bp0lV/bUnEeXreu9F
+         PMRZcZN586IKtK2beQXPIAUGnMyI8Qkm4bpTEbMz4Cv6QdjtI8RYTLP0JCP6DZWhRU12
+         qKOUi7XpwRNZ4WrxtZpKZBWrWPySH3eq58hI9M6n0S9sZ0G0jHKdc3foS3zecIQganYb
+         HwKg==
+X-Gm-Message-State: ACgBeo1Wl8Clsbr9qcNLN+vjiaTpaSU9bNFal98S5eCP+vXlWLz21i+H
+        PbHABD524fZEuBHITTsDDGYSkQ==
+X-Google-Smtp-Source: AA6agR4TkWrYPxjKmcUZ27Y4WmzwJ9slM6j/RDvOC1vEiV2I9GNQ5PtUVSvJJX3BnrPwhRyC6MYmEQ==
+X-Received: by 2002:ad4:5f0a:0:b0:474:8978:9a9f with SMTP id fo10-20020ad45f0a000000b0047489789a9fmr23754893qvb.71.1659554538002;
+        Wed, 03 Aug 2022 12:22:18 -0700 (PDT)
+Received: from localhost ([2620:10d:c091:480::a0f2])
+        by smtp.gmail.com with ESMTPSA id bm7-20020a05620a198700b006b629f86244sm13216262qkb.50.2022.08.03.12.22.17
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 03 Aug 2022 12:22:17 -0700 (PDT)
+Date:   Wed, 3 Aug 2022 15:22:16 -0400
+From:   Johannes Weiner <hannes@cmpxchg.org>
+To:     Tejun Heo <tj@kernel.org>
+Cc:     Chengming Zhou <zhouchengming@bytedance.com>, surenb@google.com,
+        mingo@redhat.com, peterz@infradead.org, corbet@lwn.net,
+        akpm@linux-foundation.org, rdunlap@infradead.org,
+        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
+        songmuchun@bytedance.com, cgroups@vger.kernel.org
+Subject: Re: [PATCH 8/9] sched/psi: add kernel cmdline parameter
+ psi_inner_cgroup
+Message-ID: <YurK6MXdJPrV2VYS@cmpxchg.org>
+References: <20220721040439.2651-1-zhouchengming@bytedance.com>
+ <20220721040439.2651-9-zhouchengming@bytedance.com>
+ <Yt7KQc0nnOypB2b2@cmpxchg.org>
+ <YuAqWprKd6NsWs7C@slm.duckdns.org>
+ <5a3410d6-428d-9ad1-3e5a-01ca805ceeeb@bytedance.com>
+ <Yuq3Q6Y9dRnjjcPt@slm.duckdns.org>
 MIME-Version: 1.0
-Sender: richardharrisonn30@gmail.com
-Received: by 2002:ac2:4f8b:0:0:0:0:0 with HTTP; Wed, 3 Aug 2022 11:58:47 -0700 (PDT)
-From:   Sophia Erick <sdltdkggl3455@gmail.com>
-Date:   Wed, 3 Aug 2022 20:58:47 +0200
-X-Google-Sender-Auth: gSMCYLEbO-2ql6bKO-OI5GSFjHA
-Message-ID: <CAPauVpuf7fd0QV6TVuKZDhYx38Mg+TLDvU3G0C-3pz9h3kz8Kw@mail.gmail.com>
-Subject: HELLO
-To:     undisclosed-recipients:;
-Content-Type: text/plain; charset="UTF-8"
-X-Spam-Status: Yes, score=5.3 required=5.0 tests=BAYES_60,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_ENVFROM_END_DIGIT,
-        FREEMAIL_FROM,FROM_LOCAL_NOVOWEL,HK_RANDOM_FROM,LOTS_OF_MONEY,
-        RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,SPF_PASS,T_MONEY_PERCENT,UNDISC_MONEY
-        autolearn=no autolearn_force=no version=3.4.6
-X-Spam-Report: * -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at
-        *      https://www.dnswl.org/, no trust
-        *      [2a00:1450:4864:20:0:0:0:12a listed in]
-        [list.dnswl.org]
-        *  1.5 BAYES_60 BODY: Bayes spam probability is 60 to 80%
-        *      [score: 0.6026]
-        *  1.0 HK_RANDOM_FROM From username looks random
-        *  0.5 FROM_LOCAL_NOVOWEL From: localpart has series of non-vowel
-        *      letters
-        *  0.0 SPF_HELO_NONE SPF: HELO does not publish an SPF Record
-        * -0.0 SPF_PASS SPF: sender matches SPF record
-        *  0.0 FREEMAIL_FROM Sender email is commonly abused enduser mail
-        *      provider
-        *      [sdltdkggl3455[at]gmail.com]
-        *  0.2 FREEMAIL_ENVFROM_END_DIGIT Envelope-from freemail username ends
-        *       in digit
-        *      [richardharrisonn30[at]gmail.com]
-        *  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
-        *       valid
-        * -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
-        * -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
-        *      author's domain
-        * -0.1 DKIM_VALID_EF Message has a valid DKIM or DK signature from
-        *      envelope-from domain
-        *  0.0 LOTS_OF_MONEY Huge... sums of money
-        *  0.0 T_MONEY_PERCENT X% of a lot of money for you
-        *  2.3 UNDISC_MONEY Undisclosed recipients + money/fraud signs
-X-Spam-Level: *****
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <Yuq3Q6Y9dRnjjcPt@slm.duckdns.org>
+X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+        DKIM_VALID,RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,SPF_PASS autolearn=ham
+        autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Hello ,
+On Wed, Aug 03, 2022 at 07:58:27AM -1000, Tejun Heo wrote:
+> Hello,
+> 
+> On Wed, Aug 03, 2022 at 08:17:22PM +0800, Chengming Zhou wrote:
+> > > Assuming the above isn't wrong, if we can figure out how we can re-enable
+> > > it, which is more difficult as the counters need to be resynchronized with
+> > > the current state, that'd be ideal. Then, we can just allow each cgroup to
+> > > enable / disable PSI reporting dynamically as they see fit.
+> > 
+> > This method is more fine-grained but more difficult like you said above.
+> > I think it may meet most needs to disable PSI stats in intermediate cgroups?
+> 
+> So, I'm not necessarily against implementing something easier but we at
+> least wanna get the interface right, so that if we decide to do the full
+> thing later we can easily expand on the existing interface. ie. let's please
+> not be too hacky. I don't think it'd be that difficult to implement
+> per-cgroup disable-only operation that we can later expand to allow
+> re-enabling, right?
 
-It is my pleasure to communicate with you, I know that this message
-will be a surprise to you my name is Mrs. Sophia Erick, I am diagnosed
-with ovarian cancer which my doctor have confirmed that I have only
-some weeks to live so I have decided you handover the sum of( Eleven
-Million Dollars) in my account to you for help of the orphanage homes
-and the needy once
+It should be relatively straight-forward to disable and re-enable
+state aggregation, time tracking, averaging on a per-cgroup level, if
+we can live with losing history from while it was disabled. I.e. the
+avgs will restart from 0, total= will have gaps - should be okay, IMO.
 
-Please   kindly reply me here as soon as possible to enable me give
-you more information but before handing over my details to you please
-assure me that you will only take 30%  of the money and share the rest
-to the poor orphanage home and the needy once, thank you am waiting to
-hear from you
+Where it gets trickier is also stopping the tracking of task counts in
+a cgroup. For re-enabling afterwards, we'd have to freeze scheduler
+and cgroup state and find all tasks of interest across all CPUs for
+the given cgroup to recreate the counts. I'm not quite sure whether
+that's feasible, and if so, whether it's worth the savings.
 
-Mrs Sophia Erick.
+It might be good to benchmark the two disabling steps independently.
+Maybe stopping aggregation while keeping task counts is good enough,
+and we can commit to a disable/re-enable interface from the start.
+
+Or maybe it's all in the cachelines and iteration, and stopping the
+aggregation while still writing task counts isn't saving much. In that
+case we'd have to look closer at reconstructing task counts, to see if
+later re-enabling is actually a practical option or whether a one-off
+kill switch is more realistic.
+
+Chengming, can you experiment with disabling: record_times(), the
+test_state() loop and state_mask construction, and the averaging
+worker - while keeping the groupc->tasks updates?
