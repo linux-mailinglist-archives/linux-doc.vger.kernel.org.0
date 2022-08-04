@@ -2,76 +2,76 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 27E335898CE
-	for <lists+linux-doc@lfdr.de>; Thu,  4 Aug 2022 09:55:21 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 78E6A5898DD
+	for <lists+linux-doc@lfdr.de>; Thu,  4 Aug 2022 09:57:30 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S239363AbiHDHzT (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 4 Aug 2022 03:55:19 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:42208 "EHLO
+        id S236826AbiHDH53 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 4 Aug 2022 03:57:29 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:45704 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S239348AbiHDHzN (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Thu, 4 Aug 2022 03:55:13 -0400
-Received: from mail-pg1-x531.google.com (mail-pg1-x531.google.com [IPv6:2607:f8b0:4864:20::531])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 09072D93;
-        Thu,  4 Aug 2022 00:55:12 -0700 (PDT)
-Received: by mail-pg1-x531.google.com with SMTP id f11so17260341pgj.7;
-        Thu, 04 Aug 2022 00:55:12 -0700 (PDT)
+        with ESMTP id S231965AbiHDH52 (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Thu, 4 Aug 2022 03:57:28 -0400
+Received: from mail-pj1-x1033.google.com (mail-pj1-x1033.google.com [IPv6:2607:f8b0:4864:20::1033])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 99C0C6335;
+        Thu,  4 Aug 2022 00:57:27 -0700 (PDT)
+Received: by mail-pj1-x1033.google.com with SMTP id d65-20020a17090a6f4700b001f303a97b14so4737352pjk.1;
+        Thu, 04 Aug 2022 00:57:27 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc;
-        bh=wznkIL6qfpYzFMspwCeJlJB1nlJHNIimvzTogvlqPjs=;
-        b=EQfeXpQQ+Gxh0+9HaNXsT19uegX3KHWon6EzK8Q1KqNAxiGxPnLG0y2FiKkndJc5xF
-         exIIKjHRGPjtkV2FL3UXEqEbxBI2ESeMoy9s2gddJ3KyokGEeFqC+PEgwa6sROz7e6q6
-         4NOw6sknsMRjxjheq2etEc5kfb3MDkL48XTJj7rqhpfdimLxcV3YPd+N4n37Slid8bV7
-         +nL2Gxv4fc+fJ6G0bFIpJQNaUVXNvQIUpBkJk01m9kSznQzdDZN5c1UxrDM8fmSePnKu
-         7Z8X1yUyT+5CuFYfg4HUwf283LL0zUDqUVpkSY7WozZMzefl9RE1Ypoip+1IEQ8BfnVc
-         UBcg==
+        h=content-transfer-encoding:in-reply-to:from:references:cc:to
+         :content-language:subject:user-agent:mime-version:date:message-id
+         :from:to:cc;
+        bh=B5ShB1FMDcSOC6vlt1FTAf9Cnw9dE9FUOP5cnHnXKSM=;
+        b=dF7Gh8AP5VyjFSoJdF1MJbwvdrvHEMNkvPD/rUMzqukFyNPcn1/uOevoOE4U12cg7W
+         5iY3/nrYqcWvf/MliZj9CRAUA8aP2ajxz6AyVD+MHSv+D+QR09mEnEl6yUmqC5qSCvzQ
+         K80g5WdczDXsi2JnA/f0Kq4CM3LFIUfXL4KjnSRO2PJlfqus7ZXiaSKtz9XGgsS6hEki
+         nnSAF1HyoMxKGSDKI7RuXyOA0LNQUZvaj0Aco+rlOSMbAJf3aYTziRsRqeXBjSs4clEf
+         t2foOiQkj/93mM9McEEmRgkV+mMxSqgpehDzt6MLjU/4G+fSKSoFF+iDGE0r3vMPwt/Z
+         uWlA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc;
-        bh=wznkIL6qfpYzFMspwCeJlJB1nlJHNIimvzTogvlqPjs=;
-        b=sMKG6NoxWIPi1hUXlcBLlz/y80dzOFOR/c8SjYM1rLzoR1m/XVBEN+0ZPfU4ZTZUmT
-         p/T9l+E0ayTrjKz3wOA+10xBzST2vr7CDS3LSztaOF96GtZRdCXApexzBNh1+2OEEAIf
-         U0qr/t/IkYZ5R/p3zwoni0I0KhZlmGXbL+ycpIAbI+CNOfWMG2Rt/PdFt/alC5Jcs8YN
-         Y5KuvocTi2Sn1xGUJG4I6MridFqlzH78YN/0Lhmyk0QQfCJcRm+5C0Q/I64xAZdyU/ER
-         3xNIjxcLoJ3Xal384XW1Om734W8XNMzgIKhNIV5msXFHDPZQK4LfS0ki+kYoEVkXG0rq
-         HIfQ==
-X-Gm-Message-State: ACgBeo3tFwUiA7wZvmhnE7Aih/ouGvb1BT/CHF2DEeZcV3dcpjGwAZ2j
-        mBwsqAz523iXDYYdWJOgnpU=
-X-Google-Smtp-Source: AA6agR59WXR8HB1Fzh7rCwEA4pDHCxPXITi8cwSZjha7oKGw7AT6H5VKbOxGfJ0sYXJ6Xd/2pFUnAw==
-X-Received: by 2002:a05:6a00:1343:b0:52e:61b1:4a9f with SMTP id k3-20020a056a00134300b0052e61b14a9fmr793141pfu.6.1659599711410;
-        Thu, 04 Aug 2022 00:55:11 -0700 (PDT)
-Received: from debian.me (subs02-180-214-232-23.three.co.id. [180.214.232.23])
-        by smtp.gmail.com with ESMTPSA id a6-20020a170902710600b0016f02fceff4sm232053pll.57.2022.08.04.00.55.10
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 04 Aug 2022 00:55:10 -0700 (PDT)
-Received: by debian.me (Postfix, from userid 1000)
-        id 4ACEF103BFE; Thu,  4 Aug 2022 14:55:05 +0700 (WIB)
-From:   Bagas Sanjaya <bagasdotme@gmail.com>
-To:     linux-doc@vger.kernel.org, linux-cxl@vger.kernel.org,
-        linux-next@vger.kernel.org
-Cc:     linux-kernel@vger.kernel.org, Jonathan Corbet <corbet@lwn.net>,
-        Alison Schofield <alison.schofield@intel.com>,
-        Vishal Verma <vishal.l.verma@intel.com>,
-        Ira Weiny <ira.weiny@intel.com>,
-        Ben Widawsky <bwidawsk@kernel.org>,
-        Dan Williams <dan.j.williams@intel.com>,
-        Jonathan Cameron <Jonathan.Cameron@huawei.com>,
-        Bagas Sanjaya <bagasdotme@gmail.com>
-Subject: [PATCH 3/3] Documentation: cxl: remove dangling kernel-doc reference
-Date:   Thu,  4 Aug 2022 14:54:48 +0700
-Message-Id: <20220804075448.98241-4-bagasdotme@gmail.com>
-X-Mailer: git-send-email 2.37.1
-In-Reply-To: <20220804075448.98241-1-bagasdotme@gmail.com>
-References: <20220804075448.98241-1-bagasdotme@gmail.com>
+        h=content-transfer-encoding:in-reply-to:from:references:cc:to
+         :content-language:subject:user-agent:mime-version:date:message-id
+         :x-gm-message-state:from:to:cc;
+        bh=B5ShB1FMDcSOC6vlt1FTAf9Cnw9dE9FUOP5cnHnXKSM=;
+        b=H0ompg0SZt1t+lYY7U2dDnX2hVycXKkD/MRRmv7NUcmQZ6Zz6DMXJFqzIYmoQn2u1N
+         LeIexmEwUVxIF7M+xtlL2Av7khEoJJojigB0POxf6/67d1dWGr/69OgUM/ysEU+VNdNV
+         LLFqnvAK4XMfDoczb98e6elDJVblCqVNN5/OqpyEsbFJeHDGFDAzVnHbRHf3paD5K3F+
+         QlXDkuF2YZikmWYf1IAKe4gvo84bZkqE+H6f+Z5WA/uze5QaeOTX1S6y5X+7j3HrOYBu
+         vivdKBvqYkbgyass0Jl3TAQWlhXzqa2phcycH55Pu7rgXbo8QhVA7DR1Td0U1iIb/4my
+         0Ssg==
+X-Gm-Message-State: ACgBeo1kKlZa9Qelbdsc2RIFqJW76Sk+Mif0Q147BGPglFnOZqHfrrCx
+        qfhqGSACnKH0la5ZSrQWcng=
+X-Google-Smtp-Source: AA6agR4K9kXEsbApykItiq/orOgQ5vrCLFndla99LPDrlpkl5KA7WpFIQqoV2qRJ9IwsmkO08uSrTg==
+X-Received: by 2002:a17:90b:3b85:b0:1f4:f595:b0fe with SMTP id pc5-20020a17090b3b8500b001f4f595b0femr9025186pjb.61.1659599847121;
+        Thu, 04 Aug 2022 00:57:27 -0700 (PDT)
+Received: from [192.168.43.80] (subs02-180-214-232-23.three.co.id. [180.214.232.23])
+        by smtp.gmail.com with ESMTPSA id h7-20020a170902f54700b0016db1b67fb9sm147421plf.224.2022.08.04.00.57.23
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Thu, 04 Aug 2022 00:57:26 -0700 (PDT)
+Message-ID: <ed2de577-416d-24a7-a780-846a0ccac87a@gmail.com>
+Date:   Thu, 4 Aug 2022 14:57:21 +0700
 MIME-Version: 1.0
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1131; i=bagasdotme@gmail.com; h=from:subject; bh=blM3WPeKk4vfg8s8TUxTvxY5mz7mY5WMx84fxwCOq3E=; b=owGbwMvMwCn83935mHOB8QHG02pJDEmvqz0KfDb0sE19OcHfy9nwe/z6f6G+bHYPdR1m2DpZ/TsU znS2YyoLgzAng6yYIsubyt1iHB9WHu0P/p4JM4eVCWQIAxenAExkYQhjna71Sq1luoFpu9dMc4oV9j Lz+vrlxayDIbteHj0wz+G5efp/3R7HiyH7V+k8uGZgOotFmbGh/d/vWzXxRhICoX8nLfoSZPzqZKaP u5rcGsa6MlXGrTs3/5zz+t3vvQ1Sqzi3T1vaGWQEAA==
-X-Developer-Key: i=bagasdotme@gmail.com; a=openpgp; fpr=EC79BB1608F0A9C58F53F769FF4743C6437033C0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
+ Thunderbird/91.11.0
+Subject: Re: [PATCH v2 10/10] Documentation/x86: Update resctrl_ui.rst for new
+ features
+Content-Language: en-US
+To:     babu.moger@amd.com
+Cc:     fenghua.yu@intel.com, reinette.chatre@intel.com,
+        tglx@linutronix.de, mingo@redhat.com, bp@alien8.de,
+        eranian@google.com, dave.hansen@linux.intel.com, x86@kernel.org,
+        hpa@zytor.com, corbet@lwn.net, linux-kernel@vger.kernel.org,
+        linux-doc@vger.kernel.org
+References: <165938717220.724959.10931629283087443782.stgit@bmoger-ubuntu>
+ <165938740360.724959.7059659465268246182.stgit@bmoger-ubuntu>
+ <YunwoDwcy7GZoKXA@debian.me> <0c3721ba-b564-733a-16d5-5150d2b7a885@amd.com>
+From:   Bagas Sanjaya <bagasdotme@gmail.com>
+In-Reply-To: <0c3721ba-b564-733a-16d5-5150d2b7a885@amd.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 X-Spam-Status: No, score=-0.6 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_FROM,
+        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_FROM,NICE_REPLY_A,
         RCVD_IN_DNSWL_NONE,RCVD_IN_SORBS_WEB,SPF_HELO_NONE,SPF_PASS
         autolearn=no autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
@@ -80,35 +80,11 @@ Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Sphinx reported kernel-doc failure warning, pointing to non-existent
-drivers/cxl/region.h (which doesn't also exist throughout repo history):
+On 8/3/22 22:59, Moger, Babu wrote:
+>> When building this documentation, I get new warnings:
+> Is there a command I can use to build? That would be helpful next time.
 
-WARNING: kernel-doc './scripts/kernel-doc -rst -enable-lineno -sphinx-version 2.4.4 -no-doc-sections ./drivers/cxl/region.h' failed with return code 1
+Use `make htmldocs`.
 
-Above cause error message to be displayed on htmldocs output.
-
-Delete the reference.
-
-Fixes: 779dd20cfb56c5 ("cxl/region: Add region creation support")
-Signed-off-by: Bagas Sanjaya <bagasdotme@gmail.com>
----
- Documentation/driver-api/cxl/memory-devices.rst | 3 ---
- 1 file changed, 3 deletions(-)
-
-diff --git a/Documentation/driver-api/cxl/memory-devices.rst b/Documentation/driver-api/cxl/memory-devices.rst
-index 66ddc58a21b159..5149ecdc53c796 100644
---- a/Documentation/driver-api/cxl/memory-devices.rst
-+++ b/Documentation/driver-api/cxl/memory-devices.rst
-@@ -364,9 +364,6 @@ CXL Core
- 
- CXL Regions
- -----------
--.. kernel-doc:: drivers/cxl/region.h
--   :identifiers:
--
- .. kernel-doc:: drivers/cxl/core/region.c
-    :doc: cxl core region
- 
 -- 
 An old man doll... just what I always wanted! - Clara
-
