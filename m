@@ -2,72 +2,71 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id BB911589610
-	for <lists+linux-doc@lfdr.de>; Thu,  4 Aug 2022 04:20:41 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 0F32A589640
+	for <lists+linux-doc@lfdr.de>; Thu,  4 Aug 2022 04:46:18 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S238914AbiHDCUj (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 3 Aug 2022 22:20:39 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:49016 "EHLO
+        id S231201AbiHDCqR (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 3 Aug 2022 22:46:17 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:39872 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S239016AbiHDCUS (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Wed, 3 Aug 2022 22:20:18 -0400
-Received: from mail-pj1-x1032.google.com (mail-pj1-x1032.google.com [IPv6:2607:f8b0:4864:20::1032])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 6100361117;
-        Wed,  3 Aug 2022 19:18:32 -0700 (PDT)
-Received: by mail-pj1-x1032.google.com with SMTP id 15-20020a17090a098f00b001f305b453feso3861460pjo.1;
-        Wed, 03 Aug 2022 19:18:32 -0700 (PDT)
+        with ESMTP id S231136AbiHDCqQ (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Wed, 3 Aug 2022 22:46:16 -0400
+Received: from mail-pj1-x1029.google.com (mail-pj1-x1029.google.com [IPv6:2607:f8b0:4864:20::1029])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 05C1B1EC48
+        for <linux-doc@vger.kernel.org>; Wed,  3 Aug 2022 19:46:16 -0700 (PDT)
+Received: by mail-pj1-x1029.google.com with SMTP id o5-20020a17090a3d4500b001ef76490983so4119302pjf.2
+        for <linux-doc@vger.kernel.org>; Wed, 03 Aug 2022 19:46:16 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
-        h=content-transfer-encoding:in-reply-to:from:references:cc:to
-         :content-language:subject:user-agent:mime-version:date:message-id
-         :from:to:cc;
-        bh=1dsYc5CCG9nBj+rwfi2DNCDwXt8IjUaLCNS+n83XUDY=;
-        b=YgmSq8oWeAz+cQHVwYA7934UN/e/erwNkvrnNnaXVoLMGsIUxpUGx2sHDVRtMXL0Y8
-         VUEGXN2D92C7TfNQ87s9YS0G5apme5vjhrlToMaF2qx8aRC2B46LwwOih5icuoHNgc7x
-         jm3qsYdVxWS8pOAcrI/79KbzYdH5CliWfVYFTuFcHXZi1bEdZUWdTrDkru6JO4JvJBXk
-         XhGuWyRXe4Zz5qLf/6eidQLncbrSWvNkXbMtnEIyYgzVKQQTy4326FpqWL9OoJvKTpva
-         6JJVKmIedYmG8MmMIScKgBOiQ+J+8oELEdf5sNmSAlLhkfw4FuHJnvO4jUnhwpORVk0d
-         eUSQ==
+        h=in-reply-to:content-transfer-encoding:content-disposition
+         :mime-version:references:message-id:subject:cc:to:from:date:from:to
+         :cc;
+        bh=hGKRP8UNqcFPNg5a90gkDBGnc7uWYMhavYlP8ulyk5g=;
+        b=DCwqhPxH3RcRKSAKMhtQd3g0vdiM14pKukNoEg32wWOGKj81X6nfx+CvOZeobM/z/f
+         pUUUI//JaLmrtGUdJxA6L6OYd7kvw4dGbJKdzt/O+U72c8Q3KNeKgMTHMS74b296gk0S
+         rJMbheJ329y1Qy82CI+E01OYRa3x4pE1y5zWaaeVMW4pmt7JbxjU5PwNOBdZ1J8bLghl
+         6SdRY7VZjYwZPYqKfpm0Zcbtidq5K/Xy7CB8vEPzsp1Mn69kyUo/1iv5bC/6JCy7Wgoh
+         G1LZLTw23hAiyu5m1DL98jnfS/lUCKmRWyMJI3tS2Z/DWivL9p7dpY9MBTQx5qVy0Vip
+         tesw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=content-transfer-encoding:in-reply-to:from:references:cc:to
-         :content-language:subject:user-agent:mime-version:date:message-id
+        h=in-reply-to:content-transfer-encoding:content-disposition
+         :mime-version:references:message-id:subject:cc:to:from:date
          :x-gm-message-state:from:to:cc;
-        bh=1dsYc5CCG9nBj+rwfi2DNCDwXt8IjUaLCNS+n83XUDY=;
-        b=bVB1L9aS6Q/iWtWmPrWIQDJaNhq2HF2MH4eRaYPmwra7b2kw9UiHqAtPwCSvAb2EN4
-         HTFGMuE9IJquQ5SCCoIX1XxRnMsUNKL7dyzlXgQEP72QW8Gk3Mg3qcrS6OalEaOYiD2U
-         HIzJZb4qG9BAVrVbZ6kuRvq8gwXzYxlvu689C+neEAdnCzIEa9V9qDIrxUl/T24sEne9
-         SzlB8BPKckGbBR2V7OljqG/pmqqgoRDOGLLdw5wfyAP1RcRbiMCdUOINUOHBl/Cx3JIT
-         Ls5CIu3T2vmtEKeCz8a15oaJWI6AR3UYCwjQZzdKXOksteEiK7CwD/vuoXZvs8S0eSE1
-         GPRg==
-X-Gm-Message-State: ACgBeo3n8kzHtU7vD7J2DczEhmJ+Ri6UQuxq7kPJs735WQKtzlmRuiNb
-        3DqjHGcaal1gU9pv4UPUU7Q=
-X-Google-Smtp-Source: AA6agR4ZyAwkqOmwDBIOTcfsNUAteDufXkFgihVuncQD+861YXQPlsEFAkRWZ6+vDvSK9KhQJHTrWw==
-X-Received: by 2002:a17:902:e884:b0:16d:87b2:657d with SMTP id w4-20020a170902e88400b0016d87b2657dmr29256131plg.2.1659579511663;
-        Wed, 03 Aug 2022 19:18:31 -0700 (PDT)
-Received: from [192.168.43.80] (subs03-180-214-233-2.three.co.id. [180.214.233.2])
-        by smtp.gmail.com with ESMTPSA id j9-20020a17090a31c900b001ef7c7564fdsm2316855pjf.21.2022.08.03.19.18.28
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Wed, 03 Aug 2022 19:18:31 -0700 (PDT)
-Message-ID: <4503fbf0-aeda-8e85-432a-8808f7312152@gmail.com>
-Date:   Thu, 4 Aug 2022 09:18:26 +0700
-MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.11.0
-Subject: Re: [PATCH] PCI: fix the invalid aer-inject git tree
-Content-Language: en-US
-To:     Huang Shijie <shijie@os.amperecomputing.com>, bhelgaas@google.com
-Cc:     patches@amperecomputing.com, zwang@amperecomputing.com,
-        darren@os.amperecomputing.com, corbet@lwn.net,
-        yangyicong@hisilicon.com, linux-pci@vger.kernel.org,
-        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org
-References: <20220804094755.1885603-1-shijie@os.amperecomputing.com>
+        bh=hGKRP8UNqcFPNg5a90gkDBGnc7uWYMhavYlP8ulyk5g=;
+        b=2Y5aIFjtzSfKLS1/OvUNBchOe87oPmseoz2dgwp3gH4Ke3eL1qzcxj3NpLHEQ72qfy
+         0s251ZgGWZjnCqNbabN4zhtuiOqZJHS4JpYu1im14NyBpDVNnH2zZRot5Mnjefch0oAz
+         m7ay7+4EWweZesHQ3Q7cHJYtwiyOXTuftVa8H8lVdOH7D0ciKSY6Jum7RH27L/cgn/US
+         mQugUKyTwho9qSxFjiNJkp8oC1VQzkNJGbHXIIgroOZpwAyDF8fCRu7qx9ZNuU/bhbcH
+         B4sZ8XgxDrPxhEmfypvh6st3ScdEnOQv5FrUAwL216hwcE+x8xaPZbNqNxFdCboovozQ
+         eX0w==
+X-Gm-Message-State: ACgBeo0wQNNJjZOko+rC45W8uKcx2rEHoMOHMfaO4nQCHQzi7gncv2Oq
+        ODA25TiGQeXt1QrRIm/WIty/jAMIwJw=
+X-Google-Smtp-Source: AA6agR6gyvBgMJmAWJ8IQRXSSeh6NIpBbMSqiRTQgrAPAia0Zzsqo/Zc0EMg9DQoTQejRWduA3QT0w==
+X-Received: by 2002:a17:902:780e:b0:16d:ae4a:eed3 with SMTP id p14-20020a170902780e00b0016dae4aeed3mr29315829pll.129.1659581175405;
+        Wed, 03 Aug 2022 19:46:15 -0700 (PDT)
+Received: from debian.me (subs03-180-214-233-2.three.co.id. [180.214.233.2])
+        by smtp.gmail.com with ESMTPSA id b3-20020a170902bd4300b0016e8178aa9csm2639935plx.210.2022.08.03.19.46.14
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 03 Aug 2022 19:46:14 -0700 (PDT)
+Received: by debian.me (Postfix, from userid 1000)
+        id 1123210381F; Thu,  4 Aug 2022 09:46:10 +0700 (WIB)
+Date:   Thu, 4 Aug 2022 09:46:10 +0700
 From:   Bagas Sanjaya <bagasdotme@gmail.com>
-In-Reply-To: <20220804094755.1885603-1-shijie@os.amperecomputing.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+To:     Ricardo =?utf-8?Q?Ca=C3=B1uelo?= <ricardo.canuelo@collabora.com>
+Cc:     linux-doc@vger.kernel.org,
+        virtualization@lists.linux-foundation.org, mst@redhat.com,
+        jasowang@redhat.com, kernel@collabora.com
+Subject: Re: [PATCH] docs: driver-api: virtio: virtio on Linux
+Message-ID: <Yusy8hX02IsYPEbr@debian.me>
+References: <20220802124222.3563378-1-ricardo.canuelo@collabora.com>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <20220802124222.3563378-1-ricardo.canuelo@collabora.com>
 X-Spam-Status: No, score=-0.6 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_FROM,NICE_REPLY_A,
+        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_FROM,
         RCVD_IN_DNSWL_NONE,RCVD_IN_SORBS_WEB,SPF_HELO_NONE,SPF_PASS
         autolearn=no autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
@@ -76,24 +75,16 @@ Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On 8/4/22 16:47, Huang Shijie wrote:
-> The old tree is invalid now, fix it with the right git tree:
->     https://git.kernel.org/pub/scm/linux/kernel/git/gong.chen/aer-inject.git
+On Tue, Aug 02, 2022 at 02:42:22PM +0200, Ricardo Cañuelo wrote:
+> Basic doc about Virtio on Linux and a short tutorial on Virtio drivers.
+> Minor fixes to existing virtio kerneldocs.
 > 
-<snip>
-> -	     https://git.kernel.org/cgit/linux/kernel/git/gong.chen/aer-inject.git/
-> +            https://git.kernel.org/pub/scm/linux/kernel/git/gong.chen/aer-inject.git/
-<snip>
-> - *   https://git.kernel.org/cgit/linux/kernel/git/gong.chen/aer-inject.git/
-> + *   https://git.kernel.org/pub/scm/linux/kernel/git/gong.chen/aer-inject.git/
->   *
->   * Copyright 2009 Intel Corporation.
->   *     Huang Ying <ying.huang@intel.com>
+> Signed-off-by: Ricardo Cañuelo <ricardo.canuelo@collabora.com>
 
-This is essentially s:cgit:pub/scm:.
+The documentation (htmldocs) with this patch builds successfully without
+new warnings.
 
-Better wording is "The aer-inject tree have been moved to <new location>.
-Update the link."
+Reviewed-by: Bagas Sanjaya <bagasdotme@gmail.com>
 
 -- 
 An old man doll... just what I always wanted! - Clara
