@@ -2,74 +2,67 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 828C9589F23
-	for <lists+linux-doc@lfdr.de>; Thu,  4 Aug 2022 18:10:19 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 9F7D9589F17
+	for <lists+linux-doc@lfdr.de>; Thu,  4 Aug 2022 18:06:47 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S234481AbiHDQKR (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 4 Aug 2022 12:10:17 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:33012 "EHLO
+        id S233963AbiHDQGq (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 4 Aug 2022 12:06:46 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:58568 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S234494AbiHDQKQ (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Thu, 4 Aug 2022 12:10:16 -0400
-Received: from mail-ej1-x62f.google.com (mail-ej1-x62f.google.com [IPv6:2a00:1450:4864:20::62f])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 78902E07;
-        Thu,  4 Aug 2022 09:10:14 -0700 (PDT)
-Received: by mail-ej1-x62f.google.com with SMTP id j8so118993ejx.9;
-        Thu, 04 Aug 2022 09:10:14 -0700 (PDT)
+        with ESMTP id S233472AbiHDQGp (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Thu, 4 Aug 2022 12:06:45 -0400
+Received: from mail-lf1-x12b.google.com (mail-lf1-x12b.google.com [IPv6:2a00:1450:4864:20::12b])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 73C081144C;
+        Thu,  4 Aug 2022 09:06:43 -0700 (PDT)
+Received: by mail-lf1-x12b.google.com with SMTP id z25so31513461lfr.2;
+        Thu, 04 Aug 2022 09:06:43 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
-        h=date:from:to:cc:subject:message-id:references:mime-version
-         :content-disposition:content-transfer-encoding:in-reply-to;
-        bh=LpzN6/8VML3eXmBMdJ8lJV7yB/qMpEBzyelbQWPVaHI=;
-        b=JVNLM63FFCeWhStk+UNkPrxRpCxWGdqEE1AV3Kg9hb+nOBvk4Nj6O3QGv+mHc+fudn
-         p4lHOQ30pG3zBC0fQVhE6b3O6k0R87qRoFE1bi0b/zSiSvKQcqqkBOo1jYV6CwQ0P2Bj
-         UIHEEKlIz07AijULYGFpk6D4uiMhHp0Ka6h15EjByF+MASW3lH+5AJClBrjlaEt+zhGY
-         fz3mEB305zcVE3/QPbDQKI3ZQm1wTwFsV8oRlfTOHkN0ekXorRrdphDpxP42oqcEUr+H
-         Yf4iMI/whjB4NJ5Vtz36zXhByXxtaZVWi8qBcda1Rn+Iv5xOWjJV5AiD2Ynk3cn9L9la
-         sDeg==
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=av5XyveaXOq4lfomx4NUPXmNERnCNgpBk1zL7MxIgKM=;
+        b=KdDxlVX9eeujoZBA/QigecGC24OzEXH5SX+b21lS2em+5kL/Ha5I6KrPrF6JnXfmg/
+         JqLVDILml+PhxVU+gW7jvA8gX+rLVSsmgFY5kiK8M+VTvUuKe15x/2+yk2eUuMb465FB
+         QjOrvYc7OPpSslGjLa95tSrzbrw0sCb9e0lbMTmXmdo58UTSJjl5zInoIN0cNdj8d+ZF
+         IQct6LFmMOmwiKF7OZhd7v2NJSN6I71OTBdC5IwdA32CDmDQ5dLBtbpctiTNg9lbE6lY
+         wkS/SOxOposJpLkXgb8a+XWFYHkGxIMiDjsY7FkP+CsBa2YfDjXiibeskcLFVmS2B5LX
+         //Uw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=x-gm-message-state:date:from:to:cc:subject:message-id:references
-         :mime-version:content-disposition:content-transfer-encoding
-         :in-reply-to;
-        bh=LpzN6/8VML3eXmBMdJ8lJV7yB/qMpEBzyelbQWPVaHI=;
-        b=xytnSL4dUz+9t1gVaaQNaruFvGoDK7B3w0F7lepesciUWG3ER/Kaj0XMfdNNBSeuQU
-         0kIqleBfSaT+PlFZgx8z/w1atJtfUXrVhRMhT25zeNOtWtmSvTCmYY3xtvsh+oZt5iFI
-         hIFQoWlcdKVpsnr7U9ofwawq411P51pgxsstgtu/5EB7qO0s8GjU0vrPTVStg8gienDN
-         dIycWndDhnjHytTOTznK25N0Tj+soVfCvGXy/iPdHcSOkEDfOkKHwnu6dPOVstIzk8TQ
-         GmEuGBpMvFzbvQt0/ZeHjb5fzB2rRFYPbg0qGhsEEkeL6noYa8n1xukSzRLgs3TbOopB
-         1BKA==
-X-Gm-Message-State: ACgBeo2yWfjzLl3M71N4a7v1OdzSmZsO+ujVWmbny2UqkNGASi5ArPhc
-        pTl92K2vuRKnBRw8PF4Wx2U=
-X-Google-Smtp-Source: AA6agR6eZ726TRa+v1E5si8RuGP1qKkywRmoBb3bexTGJftPD5lDyWiEOpCCPGPQoAx4dCK2BgwMcg==
-X-Received: by 2002:a17:907:72c6:b0:72f:b01:2723 with SMTP id du6-20020a17090772c600b0072f0b012723mr1943653ejc.439.1659629412744;
-        Thu, 04 Aug 2022 09:10:12 -0700 (PDT)
-Received: from nuc ([2a02:168:633b:1:1e69:7aff:fe05:97e6])
-        by smtp.gmail.com with ESMTPSA id t5-20020aa7db05000000b0043b986751a7sm856014eds.41.2022.08.04.09.10.05
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=av5XyveaXOq4lfomx4NUPXmNERnCNgpBk1zL7MxIgKM=;
+        b=joRAVpZHXvhvkfOM0/ovSV3g2XZZDkqt/jw6KkRqEHDP0Cwj+Ifbje57P/CI621RS5
+         vDVRaECJh/+9JrVPSHXeCpII45JIaRAuWreh4fEUyqf3wJkIS2JF0r8w8w0xx6oEnZqJ
+         e9NhP1eqxHf3anpxfGii/2qhBctKHaoiiuopNZnMqmLiIwP1W4fBO8g6AF/MkiP7zL59
+         kEvkBw5GA1CvW5DJqFtJ3RL4nmo3GeK5S1cNcY8VOjmBjajZgq0YibH+iCNvEvgt86Z0
+         HA68jDg5vH2KKbGXiShaE7Vm0g91drZsY5TvgsHPuJTY6KYBvk7T0nv2iUU6sjua3Vrw
+         6VFg==
+X-Gm-Message-State: ACgBeo1QJyHS14vaspqZk3fxK35CqseOTOB/tliDsI2sE8LaLucVWxze
+        a8DEhhp2Gxc90l0CqvPh5AN9lgOYm0E=
+X-Google-Smtp-Source: AA6agR5uXiYr9kll8tPdI85wq1Y9lyDG85wQn/SozQL1ZxlpylEa7x0zWS9JTQMpG6HbxCU+mORgSA==
+X-Received: by 2002:ac2:51af:0:b0:48a:f341:21a1 with SMTP id f15-20020ac251af000000b0048af34121a1mr864311lfk.625.1659629201496;
+        Thu, 04 Aug 2022 09:06:41 -0700 (PDT)
+Received: from localhost.localdomain (82-209-154-112.cust.bredband2.com. [82.209.154.112])
+        by smtp.gmail.com with ESMTPSA id h4-20020a2eb0e4000000b0025e2b567434sm169804ljl.9.2022.08.04.09.06.39
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 04 Aug 2022 09:10:08 -0700 (PDT)
-Date:   Thu, 4 Aug 2022 18:10:04 +0200
-From:   =?iso-8859-1?Q?G=FCnther?= Noack <gnoack3000@gmail.com>
-To:     =?iso-8859-1?Q?Micka=EBl_Sala=FCn?= <mic@digikod.net>
-Cc:     linux-security-module@vger.kernel.org,
-        linux-fsdevel@vger.kernel.org,
-        Konstantin Meskhidze <konstantin.meskhidze@huawei.com>,
-        "open list:DOCUMENTATION" <linux-doc@vger.kernel.org>,
-        "Alejandro Colomar (man-pages)" <alx.manpages@gmail.com>
-Subject: Re: [PATCH 0/2] landlock: truncate(2) support
-Message-ID: <YuvvXI5Y2azqiQyU@nuc>
-References: <20220707200612.132705-1-gnoack3000@gmail.com>
- <dbb0cd04-72a8-b014-b442-a85075314464@digikod.net>
- <YsqihF0387fBeiVa@nuc>
- <b7ee2d01-2e33-bf9c-3b56-b649e2fde0fb@digikod.net>
+        Thu, 04 Aug 2022 09:06:40 -0700 (PDT)
+From:   Marcus Folkesson <marcus.folkesson@gmail.com>
+To:     Jonathan Corbet <corbet@lwn.net>,
+        Marcus Folkesson <marcus.folkesson@gmail.com>,
+        Jiri Kosina <jikos@kernel.org>,
+        Benjamin Tissoires <benjamin.tissoires@redhat.com>
+Cc:     linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
+        linux-input@vger.kernel.org
+Subject: [PATCH 1/2] HID: Add driver for RC Simulator Controllers
+Date:   Thu,  4 Aug 2022 18:10:40 +0200
+Message-Id: <20220804161041.4147310-1-marcus.folkesson@gmail.com>
+X-Mailer: git-send-email 2.37.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
-In-Reply-To: <b7ee2d01-2e33-bf9c-3b56-b649e2fde0fb@digikod.net>
-X-Spam-Status: No, score=-1.8 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_ENVFROM_END_DIGIT,
-        FREEMAIL_FROM,RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,SPF_PASS autolearn=ham
+X-Spam-Status: No, score=-2.1 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_FROM,
+        RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,SPF_PASS autolearn=ham
         autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
@@ -77,207 +70,556 @@ Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Fri, Jul 29, 2022 at 01:58:17PM +0200, Mickaël Salaün wrote:
->
-> On 10/07/2022 11:57, Günther Noack wrote:
-> > Hello Mickaël!
-> >
-> > Thank you for the fast feedback! I'm looking into your comments from
-> > this mail and the rest of the thread and am working on an updated
-> > patch set.
-> >
-> > On Fri, Jul 08, 2022 at 01:16:29PM +0200, Mickaël Salaün wrote:
-> > > Hi Günther, this looks good!
-> > >
-> > > Added linux-fsdevel@vger.kernel.org
-> > >
-> > > On 07/07/2022 22:06, Günther Noack wrote:
-> > > > The goal of these patches is to work towards a more complete coverage
-> > > > of file system operations that are restrictable with Landlock.
-> > > >
-> > > > The known set of currently unsupported file system operations in
-> > > > Landlock is described at [1]. Out of the operations listed there,
-> > > > truncate is the only one that modifies file contents, so these patches
-> > > > should make it possible to prevent the direct modification of file
-> > > > contents with Landlock.
-> > > >
-> > > > The patch introduces the truncate(2) restriction feature as an
-> > > > additional bit in the access_mask_t bitmap, in line with the existing
-> > > > supported operations.
-> > > >
-> > > > Apart from Landlock, the truncate(2) and ftruncate(2) family of system
-> > > > calls can also be restricted using seccomp-bpf, but it is a
-> > > > complicated mechanism (requires BPF, requires keeping up-to-date
-> > > > syscall lists) and it also is not configurable by file hierarchy, as
-> > > > Landlock is. The simplicity and flexibility of the Landlock approach
-> > > > makes it worthwhile adding.
-> > > >
-> > > > I am aware that the documentation and samples/landlock/sandboxer.c
-> > > > tool still need corresponding updates; I'm hoping to get some early
-> > > > feedback this way.
-> > > Yes, that's a good approach.
-> > >
-> > > Extending the sandboxer should be straightforward, you can just extend the
-> > > scope of LL_FS_RW, taking into account the system Landlock ABI because there
-> > > is no "contract" for this sample.
-> >
-> > Sounds good, I'll extend the sample tool like this for the updated patch set.
-> >
-> > (On the side, as you know from the discussion on the go-landlock
-> > library, I have some suspicion that the "best effort"
-> > backwards-compatibility approach in the sample tool is not the right
-> > one for the "refer" right, but that might be better suited for a
-> > separate patch. Maybe it'll be simpler to just not support a
-> > best-effort downgrade in the sample tool.)
->
-> Please share your though about the "refer" right.
+Several RC Simulator Controllers are HID compliant with similar
+interface.
 
-The sample tool implements a "best effort" approach by removing the
-access rights from all bitmasks passed to the kernel -- but this means
-different things for the refer right than it does for other rights
-like truncate:
+Add support for these controllers:
+ - Phoenix RC (HID variant)
+ - Car VRC2.0
+ - Real Flight G5/G6/G7
+ - Aero Fly, FMS
+ - OrangeRX FrSky
 
-* In the case of truncate, removing the truncate right from the
-  handled rights means that truncate *will* be permitted after
-  enforcement.
+Signed-off-by: Marcus Folkesson <marcus.folkesson@gmail.com>
+---
+ Documentation/hid/index.rst |   1 +
+ Documentation/hid/rcsim.rst | 142 ++++++++++++++++
+ drivers/hid/Kconfig         |  11 ++
+ drivers/hid/Makefile        |   1 +
+ drivers/hid/hid-ids.h       |   5 +
+ drivers/hid/hid-rcsim.c     | 315 ++++++++++++++++++++++++++++++++++++
+ 6 files changed, 475 insertions(+)
+ create mode 100644 Documentation/hid/rcsim.rst
+ create mode 100644 drivers/hid/hid-rcsim.c
 
-* In the case of "refer", removing the refer right from the handled
-  rights means that the "refer" operations *will not* be permitted
-  after enforcement.
+diff --git a/Documentation/hid/index.rst b/Documentation/hid/index.rst
+index e50f513c579c..e5813d264f37 100644
+--- a/Documentation/hid/index.rst
++++ b/Documentation/hid/index.rst
+@@ -17,3 +17,4 @@ Human Interface Devices (HID)
+    hid-alps
+    intel-ish-hid
+    amd-sfh-hid
++   rcsim
+diff --git a/Documentation/hid/rcsim.rst b/Documentation/hid/rcsim.rst
+new file mode 100644
+index 000000000000..1a031f7189cb
+--- /dev/null
++++ b/Documentation/hid/rcsim.rst
+@@ -0,0 +1,142 @@
++.. SPDX-License-Identifier: GPL-2.0
++
++=================================
++rcsim - RC Simulator Controllers
++=================================
++
++:Author: Marcus Folkesson <marcus.folkesson@gmail.com>
++
++This driver let you use your own RC controller plugged
++into your computer using an HID compatible USB dongle.
++
++There are several HID compatible USB dongles from different
++vendors. The driver currently supports:
++
++- Phoenix RC (HID variant) (8ch)
++- Car VRC2.0 (2ch)
++- Real Flight G5/G6/G7 (6ch)
++- Aero Fly, FMS (8ch)
++- OrangeRX FrSky (6ch)
++
++Many RC controllers is able to configure which stick goes to which channel.
++This is also configurable in most simulators, so a matching is not necessary.
++
++Supported dongles
++==================
++
++PhoenixRC
++----------
++
++The PhoenixRC has one HID compatible variant which is supported by this driver.
++The controller has support for 8 analog channels.
++
++The driver is generating the following input event for on channels:
++
+++---------+----------------+
++| Channel |      Event     |
+++=========+================+
++|     1   |  ABS_Y         |
+++---------+----------------+
++|     2   |  ABS_X         |
+++---------+----------------+
++|     3   |  ABS_RY        |
+++---------+----------------+
++|     4   |  ABS_RX        |
+++---------+----------------+
++|     5   |  ABS_RUDDER    |
+++---------+----------------+
++|     6   |  ABS_THROTTLE  |
+++---------+----------------+
++|     7   |  ABS_Z         |
+++---------+----------------+
++|     8   |  ABS_RZ        |
+++---------+----------------+
++
++VRC2.0
++----------
++VRC2.0 is a controller for RC Cars.
++The controller has support for 2 analog channels.
++
++The driver is generating the following input event for on channels:
++
+++---------+----------------+
++| Channel |      Event     |
+++=========+================+
++|     1   |  ABS_GAS       |
+++---------+----------------+
++|     2   |  ABS_WHEEL     |
+++---------+----------------+
++
++RealFlight
++----------
++
++This driver supports Realflight G4-G7 and above
++The controller has support for 4 analog channels and two buttons.
++
++The driver is generating the following input event for on channels:
++
+++---------+----------------+
++| Channel |      Event     |
+++=========+================+
++|     1   |  ABS_Y         |
+++---------+----------------+
++|     2   |  ABS_X         |
+++---------+----------------+
++|     3   |  ABS_RY        |
+++---------+----------------+
++|     4   |  ABS_RX        |
+++---------+----------------+
++|     5   |  BTN_A         |
+++---------+----------------+
++|     6   |  BTN_B         |
+++---------+----------------+
++
++XTR+G2+FMS Controllers
++--------------------------------
++
++The controllers has support for 8 analog channels.
++
++The driver is generating the following input event for on channels:
++
+++---------+----------------+
++| Channel |      Event     |
+++=========+================+
++|     1   |  ABS_Y         |
+++---------+----------------+
++|     2   |  ABS_X         |
+++---------+----------------+
++|     3   |  ABS_RY        |
+++---------+----------------+
++|     4   |  ABS_RX        |
+++---------+----------------+
++|     5   |  ABS_RUDDER    |
+++---------+----------------+
++|     6   |  ABS_THROTTLE  |
+++---------+----------------+
++|     7   |  ABS_Z         |
+++---------+----------------+
++|     8   |  ABS_RZ        |
+++---------+----------------+
++
++OrangeRX
++----------
++
++The controllers has support for 6 analog channels.
++
++The driver is generating the following input event for on channels:
++
+++---------+----------------+
++| Channel |      Event     |
+++=========+================+
++|     1   |  ABS_Y         |
+++---------+----------------+
++|     2   |  ABS_X         |
+++---------+----------------+
++|     3   |  ABS_RY        |
+++---------+----------------+
++|     4   |  ABS_RX        |
+++---------+----------------+
++|     5   |  ABS_RUDDER    |
+++---------+----------------+
++|     6   |  ABS_THROTTLE  |
+++---------+----------------+
+diff --git a/drivers/hid/Kconfig b/drivers/hid/Kconfig
+index 70da5931082f..d8313d36086c 100644
+--- a/drivers/hid/Kconfig
++++ b/drivers/hid/Kconfig
+@@ -957,6 +957,17 @@ config HID_RAZER
+ 	Support for Razer devices that are not fully compliant with the
+ 	HID standard.
+ 
++config HID_RCSIM
++	tristate "RC Simulator Controllers"
++	depends on HID
++	help
++	Support for several HID compatible RC Simulator Controllers including
++         - Phoenix RC
++         - Car VRC2.0
++         - Real Flight
++         - Aero Fly, FMS
++         - OrangeRX FrSky
++
+ config HID_PRIMAX
+ 	tristate "Primax non-fully HID-compliant devices"
+ 	depends on HID
+diff --git a/drivers/hid/Makefile b/drivers/hid/Makefile
+index cac2cbe26d11..85d50ab352ee 100644
+--- a/drivers/hid/Makefile
++++ b/drivers/hid/Makefile
+@@ -102,6 +102,7 @@ obj-$(CONFIG_HID_PLANTRONICS)	+= hid-plantronics.o
+ obj-$(CONFIG_HID_PLAYSTATION)	+= hid-playstation.o
+ obj-$(CONFIG_HID_PRIMAX)	+= hid-primax.o
+ obj-$(CONFIG_HID_RAZER)	+= hid-razer.o
++obj-$(CONFIG_HID_RCSIM)	+= hid-rcsim.o
+ obj-$(CONFIG_HID_REDRAGON)	+= hid-redragon.o
+ obj-$(CONFIG_HID_RETRODE)	+= hid-retrode.o
+ obj-$(CONFIG_HID_ROCCAT)	+= hid-roccat.o hid-roccat-common.o \
+diff --git a/drivers/hid/hid-ids.h b/drivers/hid/hid-ids.h
+index d9eb676abe96..baf5f74d5bed 100644
+--- a/drivers/hid/hid-ids.h
++++ b/drivers/hid/hid-ids.h
+@@ -1381,6 +1381,11 @@
+ 
+ #define USB_VENDOR_ID_MULTIPLE_1781	0x1781
+ #define USB_DEVICE_ID_RAPHNET_4NES4SNES_OLD	0x0a9d
++#define USB_DEVICE_ID_PHOENIXRC	0x0898
++#define USB_DEVICE_ID_REALFLIGHT	0x0e56
++
++#define USB_VENDOR_ID_DIPLING	0x0B9B
++#define USB_DEVICE_ID_DIPLING_RCCONTROLLER	0x4012
+ 
+ #define USB_VENDOR_ID_DRACAL_RAPHNET	0x289b
+ #define USB_DEVICE_ID_RAPHNET_2NES2SNES	0x0002
+diff --git a/drivers/hid/hid-rcsim.c b/drivers/hid/hid-rcsim.c
+new file mode 100644
+index 000000000000..0f214cb5816a
+--- /dev/null
++++ b/drivers/hid/hid-rcsim.c
+@@ -0,0 +1,315 @@
++// SPDX-License-Identifier: GPL-2.0-only
++/*
++ * Driver for several HID compatible RC Simulator Controllers.
++ * Currently supported controllers are:
++ *
++ * - Phoenix RC (HID variant) (8ch)
++ * - Car VRC2.0 (2ch)
++ * - Real Flight G5/G6/G7 (6ch)
++ * - Aero Fly, FMS (8ch)
++ * - OrangeRX FrSky (6ch)
++ *
++ * Copyright (C) 2022 Marcus Folkesson <marcus.folkesson@gmail.com>
++ */
++
++#include <linux/bitfield.h>
++#include <linux/device.h>
++#include <linux/input.h>
++#include <linux/hid.h>
++#include <linux/module.h>
++#include <linux/usb.h>
++
++#include "hid-ids.h"
++
++/*
++ * Some of these VID/PID are probably "borrowed", so keep them locally and
++ * do not populate hid-ids.h with those.
++ */
++
++/* PHOENIXRC Controlloer (HID variant) */
++#define PHOENIXRC_VID	(USB_VENDOR_ID_MULTIPLE_1781)
++#define PHOENIXRC_PID	(USB_DEVICE_ID_PHOENIXRC)
++#define PHOENIXRC_DSIZE	(8)
++
++/* VRC2 Controlloer */
++#define VRC2_VID	(0x07c0)
++#define VRC2_PID	(0x1125)
++#define VRC2_DSIZE	(7)
++
++/* Realflight G4-&7 and Above Controller */
++#define REALFLIGHT_VID	(USB_VENDOR_ID_MULTIPLE_1781)
++#define REALFLIGHT_PID	(USB_DEVICE_ID_REALFLIGHT)
++#define REALFLIGHT_DSIZE	(8)
++
++#define REALFLIGHT_BTN_A	BIT(0)
++#define REALFLIGHT_BTN_B	BIT(1)
++
++/* XTR+G2+FMS Controller */
++#define XTRG2FMS_VID	(USB_VENDOR_ID_DIPLING)
++#define XTRG2FMS_PID	(USB_DEVICE_ID_DIPLING_RCCONTROLLER)
++#define XTRG2FMS_DSIZE	(8)
++
++#define XTRG2FMS_X_HI	GENMASK(3, 2)
++#define XTRG2FMS_Y_HI	GENMASK(1, 0)
++#define XTRG2FMS_RX_HI	GENMASK(7, 6)
++#define XTRG2FMS_RY_HI	GENMASK(5, 4)
++#define XTRG2FMS_ALT1_HI	GENMASK(3, 2)
++#define XTRG2FMS_ALT2_HI	GENMASK(1, 0)
++
++/* OrangeRX FrSky */
++#define ORANGERX_VID	(0x0451)
++#define ORANGERX_PID	(0x16a5)
++#define ORANGERX_DSIZE	(8)
++
++enum rcsim_controller {
++	PHOENIXRC,
++	VRC2,
++	REALFLIGHT,
++	XTRG2FMS,
++	ORANGERX
++};
++
++struct rcsim_priv {
++	struct hid_device *hdev;
++	struct input_dev *input;
++	enum rcsim_controller controller;
++	u8 alt;
++};
++
++static int rcsim_open(struct input_dev *dev)
++{
++	struct rcsim_priv *priv = input_get_drvdata(dev);
++
++	return hid_hw_open(priv->hdev);
++}
++
++static void rcsim_close(struct input_dev *dev)
++{
++	struct rcsim_priv *priv = input_get_drvdata(dev);
++
++	hid_hw_close(priv->hdev);
++}
++
++static int rcsim_setup_input(struct rcsim_priv *priv)
++{
++	struct input_dev *input;
++
++	input = devm_input_allocate_device(&priv->hdev->dev);
++	if (!input)
++		return -ENOMEM;
++
++	input->id.bustype = priv->hdev->bus;
++	input->id.vendor  = priv->hdev->vendor;
++	input->id.product = priv->hdev->product;
++	input->id.version = priv->hdev->bus;
++	input->phys = priv->hdev->phys;
++	input->uniq = priv->hdev->uniq;
++	input->open = rcsim_open;
++	input->close = rcsim_close;
++
++	input_set_drvdata(input, priv);
++
++	switch (priv->controller) {
++	case PHOENIXRC:
++		input_set_abs_params(input, ABS_X, 0, 255, 0, 0);
++		input_set_abs_params(input, ABS_Y, 0, 255, 0, 0);
++		input_set_abs_params(input, ABS_RX, 0, 255, 0, 0);
++		input_set_abs_params(input, ABS_RY, 0, 255, 0, 0);
++		input_set_abs_params(input, ABS_Z, 0, 255, 0, 0);
++		input_set_abs_params(input, ABS_RZ, 0, 255, 0, 0);
++		input_set_abs_params(input, ABS_RUDDER, 0, 255, 0, 0);
++		input_set_abs_params(input, ABS_THROTTLE, 0, 255, 0, 0);
++		input->name = "RC Simuator Controller PhoenixRC";
++		break;
++	case VRC2:
++		input_set_abs_params(input, ABS_GAS, 0, 2048, 0, 0);
++		input_set_abs_params(input, ABS_WHEEL, 0, 2048, 0, 0);
++		input->name = "RC Simuator Controller VRC2.0";
++		break;
++	case REALFLIGHT:
++		input_set_abs_params(input, ABS_X, 0, 1024, 0, 0);
++		input_set_abs_params(input, ABS_Y, 0, 1024, 0, 0);
++		input_set_abs_params(input, ABS_RX, 0, 1024, 0, 0);
++		input_set_abs_params(input, ABS_RY, 0, 1024, 0, 0);
++		input_set_capability(input, EV_KEY, BTN_A);
++		input_set_capability(input, EV_KEY, BTN_B);
++		input->name = "RC Simuator Controller Realflight";
++		break;
++	case XTRG2FMS:
++		input_set_abs_params(input, ABS_X, 0, 1024, 0, 0);
++		input_set_abs_params(input, ABS_Y, 0, 1024, 0, 0);
++		input_set_abs_params(input, ABS_RX, 0, 1024, 0, 0);
++		input_set_abs_params(input, ABS_RY, 0, 1024, 0, 0);
++		input_set_abs_params(input, ABS_Z, 0, 1024, 0, 0);
++		input_set_abs_params(input, ABS_RZ, 0, 1024, 0, 0);
++		input_set_abs_params(input, ABS_RUDDER, 0, 1024, 0, 0);
++		input_set_abs_params(input, ABS_THROTTLE, 0, 1024, 0, 0);
++		input->name = "RC Simuator Controller AeroFly, FMS";
++		priv->alt = 0;
++		break;
++	case ORANGERX:
++		input_set_abs_params(input, ABS_X, 0, 255, 0, 0);
++		input_set_abs_params(input, ABS_Y, 0, 255, 0, 0);
++		input_set_abs_params(input, ABS_RX, 0, 255, 0, 0);
++		input_set_abs_params(input, ABS_RY, 0, 255, 0, 0);
++		input_set_abs_params(input, ABS_RUDDER, 0, 255, 0, 0);
++		input_set_abs_params(input, ABS_THROTTLE, 0, 255, 0, 0);
++		input->name = "RC Simuator Controller OrangeRX FrSky";
++		break;
++	};
++
++	priv->input = input;
++	return input_register_device(priv->input);
++}
++
++static int rcsim_raw_event(struct hid_device *hdev,
++			       struct hid_report *report,
++			       u8 *raw_data, int size)
++{
++	struct rcsim_priv *priv = hid_get_drvdata(hdev);
++	u16 value;
++
++	switch (priv->controller) {
++	case PHOENIXRC:
++		if (size != PHOENIXRC_DSIZE)
++			break;
++
++		/* X, RX, Y and RY, RUDDER and THROTTLE are sent every time */
++		input_report_abs(priv->input, ABS_X, raw_data[2]);
++		input_report_abs(priv->input, ABS_Y, raw_data[0]);
++		input_report_abs(priv->input, ABS_RX, raw_data[4]);
++		input_report_abs(priv->input, ABS_RY, raw_data[3]);
++		input_report_abs(priv->input, ABS_RUDDER, raw_data[5]);
++		input_report_abs(priv->input, ABS_THROTTLE, raw_data[6]);
++
++		/* Z and RZ are sent every other time */
++		if (priv->alt)
++			input_report_abs(priv->input, ABS_Z, raw_data[7]);
++		else
++			input_report_abs(priv->input, ABS_RZ, raw_data[7]);
++
++		priv->alt ^= 1;
++		break;
++	case VRC2:
++		if (size != VRC2_DSIZE)
++			break;
++		value = (raw_data[1] << 8 | raw_data[0]) & GENMASK(10, 0);
++		input_report_abs(priv->input, ABS_GAS, value);
++		value = (raw_data[3] << 8 | raw_data[2]) & GENMASK(10, 0);
++		input_report_abs(priv->input, ABS_WHEEL, value);
++		break;
++	case REALFLIGHT:
++		if (size != REALFLIGHT_DSIZE)
++			break;
++		input_report_abs(priv->input, ABS_X, raw_data[2]);
++		input_report_abs(priv->input, ABS_Y, raw_data[1]);
++		input_report_abs(priv->input, ABS_RX, raw_data[5]);
++		input_report_abs(priv->input, ABS_RY, raw_data[3]);
++		input_report_abs(priv->input, ABS_MISC, raw_data[4]);
++		input_report_key(priv->input, BTN_A,
++				raw_data[7] & REALFLIGHT_BTN_A);
++		input_report_key(priv->input, BTN_B,
++				raw_data[7] & REALFLIGHT_BTN_B);
++		break;
++	case XTRG2FMS:
++		if (size != XTRG2FMS_DSIZE)
++			break;
++
++		/* X, RX, Y and RY are sent every time */
++		value = FIELD_GET(XTRG2FMS_X_HI, raw_data[3]);
++		value = (value << 8) | raw_data[1];
++		input_report_abs(priv->input, ABS_X, value);
++
++		value = FIELD_GET(XTRG2FMS_Y_HI, raw_data[3]);
++		value = (value << 8) | raw_data[2];
++		input_report_abs(priv->input, ABS_Y, value);
++
++		value = FIELD_GET(XTRG2FMS_RX_HI, raw_data[3]);
++		value = (value << 8) | raw_data[0];
++		input_report_abs(priv->input, ABS_RX, value);
++
++		value = FIELD_GET(XTRG2FMS_RY_HI, raw_data[3]);
++		value = (value << 8) | raw_data[4];
++		input_report_abs(priv->input, ABS_RY, value);
++
++		/* Z, RZ, RUDDER and THROTTLE are sent every other time */
++		value = FIELD_GET(XTRG2FMS_ALT1_HI, raw_data[7]);
++		value = (value << 8) | raw_data[6];
++		if (priv->alt)
++			input_report_abs(priv->input, ABS_Z, value);
++		else
++			input_report_abs(priv->input, ABS_RUDDER, value);
++
++		value = FIELD_GET(XTRG2FMS_ALT2_HI, raw_data[7]);
++		value = (value << 8) | raw_data[5];
++		if (priv->alt)
++			input_report_abs(priv->input, ABS_RZ, value);
++		else
++			input_report_abs(priv->input, ABS_THROTTLE, value);
++
++		priv->alt ^= 1;
++		break;
++	case ORANGERX:
++		if (size != ORANGERX_DSIZE)
++			break;
++		input_report_abs(priv->input, ABS_X, raw_data[0]);
++		input_report_abs(priv->input, ABS_Y, raw_data[2]);
++		input_report_abs(priv->input, ABS_RX, raw_data[3]);
++		input_report_abs(priv->input, ABS_RY, raw_data[1]);
++		input_report_abs(priv->input, ABS_RUDDER, raw_data[5]);
++		input_report_abs(priv->input, ABS_THROTTLE, raw_data[6]);
++		break;
++	};
++
++	input_sync(priv->input);
++	return 0;
++}
++
++static int rcsim_probe(struct hid_device *hdev, const struct hid_device_id *id)
++{
++	struct device *dev = &hdev->dev;
++	struct rcsim_priv *priv;
++	int ret;
++
++	if (!hid_is_using_ll_driver(hdev, &usb_hid_driver))
++		return -ENODEV;
++
++	ret = hid_parse(hdev);
++	if (ret)
++		return ret;
++
++	priv = devm_kzalloc(dev, sizeof(*priv), GFP_KERNEL);
++	if (!priv)
++		return -ENOMEM;
++
++	priv->hdev = hdev;
++	priv->controller = id->driver_data;
++	hid_set_drvdata(hdev, priv);
++
++	ret = rcsim_setup_input(priv);
++	if (ret)
++		return ret;
++
++	return hid_hw_start(hdev, HID_CONNECT_HIDRAW);
++}
++
++static const struct hid_device_id rcsim_devices[] = {
++	{ HID_USB_DEVICE(PHOENIXRC_VID, PHOENIXRC_PID), .driver_data = PHOENIXRC },
++	{ HID_USB_DEVICE(VRC2_VID, VRC2_PID), .driver_data = VRC2 },
++	{ HID_USB_DEVICE(REALFLIGHT_VID, REALFLIGHT_PID), .driver_data = REALFLIGHT },
++	{ HID_USB_DEVICE(XTRG2FMS_VID, XTRG2FMS_PID), .driver_data = XTRG2FMS },
++	{ HID_USB_DEVICE(ORANGERX_VID, ORANGERX_PID), .driver_data = ORANGERX },
++	{ /* Sentinel */ }
++};
++MODULE_DEVICE_TABLE(hid, rcsim_devices);
++
++static struct hid_driver rcsim_driver = {
++	.name = "rcsim",
++	.id_table = rcsim_devices,
++	.probe = rcsim_probe,
++	.raw_event = rcsim_raw_event,
++};
++module_hid_driver(rcsim_driver);
++
++MODULE_AUTHOR("Marcus Folkesson <marcus.folkesson@gmail.com>");
++MODULE_LICENSE("GPL");
+-- 
+2.37.1
 
-Consequently, the approach of downgrading these needs to be different.
-
-If the caller *asks* for the "refer" right to be permitted for a file
-hierarchy, this cannot be done with Landlock ABI v1. Therefore, the
-"best effort" downgrade will have to fall back to "doing nothing".
-
-I've described this previously in this document:
-https://docs.google.com/document/d/1SkFpl_Xxyl4E6G2uYIlzL0gY2PFo-Nl8ikblLvnpvlU/edit
-
-Admittedly, this line of reasoning is more relevant to the proper
-Landlock libraries than it is to the sample tool. However, the sample
-tool is the place that people look at to understand the API... maybe
-there should at least be a comment about it.
-
-But as I said, this problem existed before the truncate patch already,
-so it's probably best discussed separately; I'm happy to send a
-separate patch if you agree with this line of reasoning.
-
->
->
-> >
-> > > You'll need to remove the warning about truncate(2) in the documentation,
-> > > and maybe to move it to the "previous limitations" section, with the
-> > > LANDLOCK_ACCESS_TRUNCATE doc pointing to it. I think it would be nice to
-> > > extend the LANDLOCK_ACCESS_FS_WRITE documentation to point to
-> > > LANDLOCK_ACCESS_FS_TRUNCATE because this distinction could be disturbing for
-> > > users. Indeed, all inode-based LSMs (SELinux and Smack) deny such action if
-> > > the inode is not writable (with the inode_permission check), which is not
-> > > the case for path-based LSMs (AppArmor and Tomoyo).
-> >
-> > This makes a lot of sense, I'll work on the documentation to point this out.
-> >
-> > I suspect that for many common use cases, the
-> > LANDLOCK_ACCESS_FS_TRUNCATE right will anyway only be used together
-> > with LANDLOCK_ACCESS_FS_FILE_WRITE in practice. (See below for more
-> > detail.)
->
-> Agree
->
->
-> >
-> > > While we may question whether a dedicated access right should be added for
-> > > the Landlock use case, two arguments are in favor of this approach:
-> > > - For compatibility reasons, the kernel must follow the semantic of a
-> > > specific Landlock ABI, otherwise it could break user space. We could still
-> > > backport this patch and merge it with the ABI 1 and treat it as a bug, but
-> > > the initial version of Landlock was meant to be an MVP, hence this lack of
-> > > access right.
-> > > - There is a specific access right for Capsicum (CAP_FTRUNCATE) that could
-> > > makes more sense in the future.
-> > >
-> > > Following the Capsicum semantic, I think it would be a good idea to also
-> > > check for the O_TRUNC open flag:
-> > > https://www.freebsd.org/cgi/man.cgi?query=rights
-> >
-> > open() with O_TRUNC was indeed a case I had not thought about - thanks
-> > for pointing it out.
-> >
-> > I started adding some tests for it, and found to my surprise that
-> > open() *is* already checking security_path_truncate() when it is
-> > truncating files. So there is a chance that we can get away without a
-> > special check for O_TRUNC in the security_file_open hook.
-> >
-> > The exact semantics might be slightly different to Capsicum though -
-> > in particular, the creat() call (= open with O_TRUNC|O_CREAT|O_WRONLY)
-> > will require the Landlock truncate right when it's overwriting an
-> > existing regular file, but it will not require the Landlock truncate
-> > right when it's creating a new file.
->
-> Is the creat() check really different from what is done by Capsicum?
-
-TBH, I'm not sure, it might also do the same thing. I don't have a
-FreeBSD machine at hand and am not familiar with Capsicum in detail.
-Let me know if you think we should go to the effort of ensuring the
-compatibility down to that level.
-
-> > I'm not fully sure how this is done in Capsicum. I assume that the
-> > Comparison with Capsicum is mostly for inspiration, but there is no
-> > goal of being fully compatible with that model?
->
-> I think Landlock has all the technical requirements to implement a
-> Capsicum-like on Linux: unprivileged access control (which implies scoped
-> access control, policies composition, only new restrictions, nesting,
-> dedicated syscalls…). The main difference with the actual Landlock
-> sandboxing would be that restrictions would apply to all processes doing
-> actions on a specific kind of file descriptor (i.e. capability). Instead of
-> checking the current thread's domain, Landlock could check the "file
-> descriptor's domain". We're definitely not there yet but let's keep this in
-> mind. ;)
-
-Acknowledged.
-
->
->
-> >
-> > The creat() behaviour is non-intuitive from userspace, I think:
-> > creat() is a pretty common way to create new files, and it might come
-> > as a surprise to people that this can require the truncate right,
-> > because:
-> >
-> > - The function creat() doesn't have "truncate" in its name, and you
-> >    might be tempted to think that the LANDLOCK_ACCESS_FS_MAKE_REG is
-> >    sufficient for calling it.
-> >
-> > - Users can work around the need for the truncate right by unlinking
-> >    the existing regular file with the same name and creating a new one.
-> >    So for the most common use case (where users do not care about the
-> >    file's inode identity or race conditions), it is surprising that
-> >    the truncate right is required.
->
-> These are useful information to put in the documentation. Explaining why it
-> is required should help users. From my point of view, the logic behind is
-> that replacing a file modifies its content (i.e. shrink it to zero), while
-> unlinking a file doesn't change its content but makes it unreachable
-> (removes it) from a directory (and it might not be deleted if linked
-> elsewhere).
-
-Added it to the documentation with some rewording.
-
->
->
-> >
-> > Summarizing this, I also think that the truncate right needs to be a
-> > separate flag, even if just for backwards compatibility reasons.
-> >
-> > But at the same time, I suspect that in practice, the truncate right
-> > will probably have to usually go together with the file_write right,
-> > so that the very common creat() use case (and possibly others) does
-> > not yield surprising behaviour.
->
-> Agree. User space libraries might (and probably should) have a different
-> interface than the raw syscalls. The Landlock syscalls are meant to provide
-> a flexible interface for different use cases. We should keep in mind that
-> the goal of libraries is to help developers. ;)
-
---
