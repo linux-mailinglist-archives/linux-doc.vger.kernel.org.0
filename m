@@ -2,139 +2,236 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 9B4B458B596
-	for <lists+linux-doc@lfdr.de>; Sat,  6 Aug 2022 14:40:55 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 8E47B58B66C
+	for <lists+linux-doc@lfdr.de>; Sat,  6 Aug 2022 17:25:27 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S230064AbiHFMky (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Sat, 6 Aug 2022 08:40:54 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:53828 "EHLO
+        id S232628AbiHFPZY (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Sat, 6 Aug 2022 11:25:24 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:46766 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S229853AbiHFMky (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Sat, 6 Aug 2022 08:40:54 -0400
-Received: from mail-pg1-x52d.google.com (mail-pg1-x52d.google.com [IPv6:2607:f8b0:4864:20::52d])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id CFD66637C;
-        Sat,  6 Aug 2022 05:40:52 -0700 (PDT)
-Received: by mail-pg1-x52d.google.com with SMTP id bh13so4785906pgb.4;
-        Sat, 06 Aug 2022 05:40:52 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=in-reply-to:content-disposition:mime-version:references:message-id
-         :subject:cc:to:from:date:from:to:cc;
-        bh=o6pt3V1ha9yMo8oPh0RhSV7A5lQkFUBOGwSJxIjKq5Y=;
-        b=K3zZNGyQzBOJGo9GHJ77B64dvtlpK4HGVReHiflBNDRpOjaH5sqOdA8CSpHY5CKTyf
-         jMxciE0uAHt180KJ/Y+huKoZL4LmZDsa6WkKOyCwoxB/ThJX4uVJEg7ZTShFI/az0Ar2
-         z7gP6VTnSFHOO3nyj7PfGi5h2pn3jkcI30MOA4gJBLa6ZPkeSr1jNi+ni+/957EXpVKE
-         8cMH0A3oIzRK5Ii74+i2xFTbbdfg/VV4lJGKX03EHlP6Q0ikAumdp8EVEn0EXa//V+ro
-         7vXPHclNzVW+zRBDjtu+d19HsGrRLP2TD974QnRupiahEXDmXn0SLRi8PGivCy1jVQMg
-         wXwg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=in-reply-to:content-disposition:mime-version:references:message-id
-         :subject:cc:to:from:date:x-gm-message-state:from:to:cc;
-        bh=o6pt3V1ha9yMo8oPh0RhSV7A5lQkFUBOGwSJxIjKq5Y=;
-        b=MuBhcaN1sy6pV/Eqib90wu6mq4X9exrknzIt6r/5Lboiv/kWeTUoRcoyQwzic31Lrt
-         +hRxKMynQUo2hhRN/6CmIG6Q97xtJnLfdhkSOCy+zhFgryoJjiNATBV5PhpOI/y/J7Ye
-         5n+FvHt3dfM0oH/Nyb+IVKk8dKxsM+kQ0TcjziQig4ZbZTRhpcoBh1pgYI/MPxec4A4e
-         iNAKydSf1obiV6qHyXlNqWhlnd9zQ3ZOATd/Iz4JL9+/vQFSUU0GrIly5DKUDuUEaj2K
-         TDjGcvflPA8yKlCSFvtRQ1QJul0OJ6/b0+bHp/3kjTpmC8XRNxmvNWOW4CAmn7hx9C2K
-         8fxw==
-X-Gm-Message-State: ACgBeo3sRzCO6lBRQ0AuiwzbcMO4UVNsNYzN068b67bvwKA1jAT2fWWl
-        JrbkAnNyrVe+HlHRTN1MmHA=
-X-Google-Smtp-Source: AA6agR4HVXRr5ozE4MZULCJYLmm+yzEtIzOb6rNsc6/YEix1fRqJBoSHmvvrRwFlh1pZPSou+4rtrw==
-X-Received: by 2002:a63:d555:0:b0:41b:ca49:54c3 with SMTP id v21-20020a63d555000000b0041bca4954c3mr9091265pgi.360.1659789652285;
-        Sat, 06 Aug 2022 05:40:52 -0700 (PDT)
-Received: from debian.me (subs02-180-214-232-10.three.co.id. [180.214.232.10])
-        by smtp.gmail.com with ESMTPSA id r19-20020a634413000000b0040c9df2b060sm3072702pga.30.2022.08.06.05.40.50
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 06 Aug 2022 05:40:51 -0700 (PDT)
-Received: by debian.me (Postfix, from userid 1000)
-        id 80D7A103B77; Sat,  6 Aug 2022 19:40:46 +0700 (WIB)
-Date:   Sat, 6 Aug 2022 19:40:46 +0700
-From:   Bagas Sanjaya <bagasdotme@gmail.com>
-To:     Jim Cromie <jim.cromie@gmail.com>
-Cc:     linux-kernel@vger.kernel.org, jbaron@akamai.com,
-        gregkh@linuxfoundation.org, dri-devel@lists.freedesktop.org,
-        amd-gfx@lists.freedesktop.org, intel-gvt-dev@lists.freedesktop.org,
-        intel-gfx@lists.freedesktop.org,
-        linux-arm-kernel@lists.infradead.org,
-        linux-arm-msm@vger.kernel.org, daniel.vetter@ffwll.ch,
-        seanpaul@chromium.org, robdclark@gmail.com,
-        linux-doc@vger.kernel.org
-Subject: Re: [PATCH v5 19/33] doc-dyndbg: edit dynamic-debug-howto for
- brevity, audience
-Message-ID: <Yu5hTr6qcLwiPRNp@debian.me>
-References: <20220805215355.3509287-1-jim.cromie@gmail.com>
- <20220805215355.3509287-20-jim.cromie@gmail.com>
+        with ESMTP id S231604AbiHFPZX (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Sat, 6 Aug 2022 11:25:23 -0400
+Received: from mga06.intel.com (mga06b.intel.com [134.134.136.31])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 837979FEA;
+        Sat,  6 Aug 2022 08:25:22 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1659799522; x=1691335522;
+  h=from:to:cc:subject:date:message-id:mime-version:
+   content-transfer-encoding;
+  bh=yeMrOGaLj7UiZ3aSAIAl9Iu73Rv0eEWT/0hnU9WSJMI=;
+  b=eoW+a3M8jCwTF/zon9zMNufyDi1pzg5HyZMKPLXwYYC7iEfpv8feFeUx
+   pe6WkQT9xcpF3Cwvww1tx5FZmcsLu6rszGQj+WB3GKocV/oXXhkjFsHlD
+   5AJ/aFvhHjFhbv51qJWkASK5WZdrZRAR7NYM0sUHszcKGVKgh/QC2Lofs
+   lwfsjQLizLdQ65lcu+JpjYuppQ7dLd5OxA02qnM4OkGOPnRKOTVurQ4JD
+   CvgTOvASoRgQB17FPu3aGaZo6pQZTrBMI9ATgr9iVnUcNPIBmZNu0j1vD
+   s4CFHm3P/Nv9IoasOdgIj7pAVlDVeI8juT37q4TmaEM2i+sABHQFWOeaw
+   w==;
+X-IronPort-AV: E=McAfee;i="6400,9594,10431"; a="352098533"
+X-IronPort-AV: E=Sophos;i="5.93,217,1654585200"; 
+   d="scan'208";a="352098533"
+Received: from orsmga007.jf.intel.com ([10.7.209.58])
+  by orsmga104.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 06 Aug 2022 08:25:22 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.93,217,1654585200"; 
+   d="scan'208";a="600652376"
+Received: from black.fi.intel.com ([10.237.72.28])
+  by orsmga007.jf.intel.com with ESMTP; 06 Aug 2022 08:25:19 -0700
+Received: by black.fi.intel.com (Postfix, from userid 1003)
+        id 9F31617D5; Sat,  6 Aug 2022 18:25:30 +0300 (EEST)
+From:   Andy Shevchenko <andriy.shevchenko@linux.intel.com>
+To:     Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
+        =?UTF-8?q?Uwe=20Kleine-K=C3=B6nig?= 
+        <u.kleine-koenig@pengutronix.de>,
+        Guenter Roeck <linux@roeck-us.net>, linux-doc@vger.kernel.org,
+        linux-kernel@vger.kernel.org, linux-pwm@vger.kernel.org,
+        linux-hwmon@vger.kernel.org
+Cc:     Jonathan Corbet <corbet@lwn.net>,
+        Thierry Reding <thierry.reding@gmail.com>,
+        Jean Delvare <jdelvare@suse.com>,
+        Bartlomiej Zolnierkiewicz <b.zolnierkie@samsung.com>
+Subject: [PATCH v1 1/3] hwmon: (pwm-fan) Make use of device properties
+Date:   Sat,  6 Aug 2022 18:25:15 +0300
+Message-Id: <20220806152517.78159-1-andriy.shevchenko@linux.intel.com>
+X-Mailer: git-send-email 2.35.1
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha384;
-        protocol="application/pgp-signature"; boundary="zCnbKQzWNc0slIHJ"
-Content-Disposition: inline
-In-Reply-To: <20220805215355.3509287-20-jim.cromie@gmail.com>
-X-Spam-Status: No, score=-0.6 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_FROM,
-        RCVD_IN_DNSWL_NONE,RCVD_IN_SORBS_WEB,SPF_HELO_NONE,SPF_PASS,
-        T_SCC_BODY_TEXT_LINE autolearn=no autolearn_force=no version=3.4.6
+Content-Transfer-Encoding: 8bit
+X-Spam-Status: No, score=-4.9 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_EF,RCVD_IN_DNSWL_MED,SPF_HELO_NONE,
+        SPF_NONE,T_SCC_BODY_TEXT_LINE autolearn=ham autolearn_force=no
+        version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
+Convert the module to be property provider agnostic and allow
+it to be used on non-OF platforms.
 
---zCnbKQzWNc0slIHJ
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Add mod_devicetable.h include.
 
-On Fri, Aug 05, 2022 at 03:53:41PM -0600, Jim Cromie wrote:
-> Rework/modernize docs:
->=20
->  - use /proc/dynamic_debug/control in examples
->    its *always* there (when dyndbg is config'd), even when <debugfs> is n=
-ot.
->    drop <debugfs> talk, its a distraction here.
->=20
->  - alias ddcmd=3D'echo $* > /proc/dynamic_debug/control
->    focus on args: declutter, hide boilerplate, make pwd independent.
->=20
->  - swap sections: Viewing before Controlling. control file as Catalog.
->=20
->  - focus on use by a system administrator
->    add an alias to make examples more readable
->    drop grep-101 lessons, admins know this.
->=20
->  - use init/main.c as 1st example, thread it thru doc where useful.
->    everybodys kernel boots, runs these.
->=20
->  - add *prdbg* api section
->    to the bottom of the file, its for developers more than admins.
->    move list of api functions there.
->=20
->  - simplify - drop extra words, phrases, sentences.
->=20
->  - add "decorator" flags line to unify "prefix", trim fmlt descriptions
->=20
-> CC: linux-doc@vger.kernel.org
-> Signed-off-by: Jim Cromie <jim.cromie@gmail.com>
->=20
+Signed-off-by: Andy Shevchenko <andriy.shevchenko@linux.intel.com>
+---
+ drivers/hwmon/Kconfig   |  2 +-
+ drivers/hwmon/pwm-fan.c | 50 +++++++++++++++++++++--------------------
+ 2 files changed, 27 insertions(+), 25 deletions(-)
 
-The documentation LGTM (no new warnings).
+diff --git a/drivers/hwmon/Kconfig b/drivers/hwmon/Kconfig
+index e70d9614bec2..58912a5c5de8 100644
+--- a/drivers/hwmon/Kconfig
++++ b/drivers/hwmon/Kconfig
+@@ -1613,7 +1613,7 @@ source "drivers/hwmon/pmbus/Kconfig"
+ 
+ config SENSORS_PWM_FAN
+ 	tristate "PWM fan"
+-	depends on (PWM && OF) || COMPILE_TEST
++	depends on PWM || COMPILE_TEST
+ 	depends on THERMAL || THERMAL=n
+ 	help
+ 	  If you say yes here you get support for fans connected to PWM lines.
+diff --git a/drivers/hwmon/pwm-fan.c b/drivers/hwmon/pwm-fan.c
+index 6c08551d8d14..9ce9f2543861 100644
+--- a/drivers/hwmon/pwm-fan.c
++++ b/drivers/hwmon/pwm-fan.c
+@@ -9,10 +9,11 @@
+ 
+ #include <linux/hwmon.h>
+ #include <linux/interrupt.h>
++#include <linux/mod_devicetable.h>
+ #include <linux/module.h>
+ #include <linux/mutex.h>
+-#include <linux/of.h>
+ #include <linux/platform_device.h>
++#include <linux/property.h>
+ #include <linux/pwm.h>
+ #include <linux/regulator/consumer.h>
+ #include <linux/sysfs.h>
+@@ -25,7 +26,6 @@ struct pwm_fan_tach {
+ 	int irq;
+ 	atomic_t pulses;
+ 	unsigned int rpm;
+-	u8 pulses_per_revolution;
+ };
+ 
+ struct pwm_fan_ctx {
+@@ -36,6 +36,7 @@ struct pwm_fan_ctx {
+ 
+ 	int tach_count;
+ 	struct pwm_fan_tach *tachs;
++	u32 *pulses_per_revolution;
+ 	ktime_t sample_start;
+ 	struct timer_list rpm_timer;
+ 
+@@ -73,7 +74,7 @@ static void sample_timer(struct timer_list *t)
+ 			pulses = atomic_read(&tach->pulses);
+ 			atomic_sub(pulses, &tach->pulses);
+ 			tach->rpm = (unsigned int)(pulses * 1000 * 60) /
+-				(tach->pulses_per_revolution * delta);
++				(ctx->pulses_per_revolution[i] * delta);
+ 		}
+ 
+ 		ctx->sample_start = ktime_get();
+@@ -229,16 +230,14 @@ static const struct thermal_cooling_device_ops pwm_fan_cooling_ops = {
+ 	.set_cur_state = pwm_fan_set_cur_state,
+ };
+ 
+-static int pwm_fan_of_get_cooling_data(struct device *dev,
+-				       struct pwm_fan_ctx *ctx)
++static int pwm_fan_get_cooling_data(struct device *dev, struct pwm_fan_ctx *ctx)
+ {
+-	struct device_node *np = dev->of_node;
+ 	int num, i, ret;
+ 
+-	if (!of_find_property(np, "cooling-levels", NULL))
++	if (!device_property_present(dev, "cooling-levels"))
+ 		return 0;
+ 
+-	ret = of_property_count_u32_elems(np, "cooling-levels");
++	ret = device_property_count_u32(dev, "cooling-levels");
+ 	if (ret <= 0) {
+ 		dev_err(dev, "Wrong data!\n");
+ 		return ret ? : -EINVAL;
+@@ -250,8 +249,8 @@ static int pwm_fan_of_get_cooling_data(struct device *dev,
+ 	if (!ctx->pwm_fan_cooling_levels)
+ 		return -ENOMEM;
+ 
+-	ret = of_property_read_u32_array(np, "cooling-levels",
+-					 ctx->pwm_fan_cooling_levels, num);
++	ret = device_property_read_u32_array(dev, "cooling-levels",
++					     ctx->pwm_fan_cooling_levels, num);
+ 	if (ret) {
+ 		dev_err(dev, "Property 'cooling-levels' cannot be read!\n");
+ 		return ret;
+@@ -302,7 +301,7 @@ static int pwm_fan_probe(struct platform_device *pdev)
+ 
+ 	mutex_init(&ctx->lock);
+ 
+-	ctx->pwm = devm_of_pwm_get(dev, dev->of_node, NULL);
++	ctx->pwm = devm_pwm_get(dev, NULL);
+ 	if (IS_ERR(ctx->pwm))
+ 		return dev_err_probe(dev, PTR_ERR(ctx->pwm), "Could not get PWM\n");
+ 
+@@ -370,6 +369,20 @@ static int pwm_fan_probe(struct platform_device *pdev)
+ 		if (!fan_channel_config)
+ 			return -ENOMEM;
+ 		ctx->fan_channel.config = fan_channel_config;
++
++		ctx->pulses_per_revolution = devm_kmalloc_array(dev,
++								ctx->tach_count,
++								sizeof(*ctx->pulses_per_revolution),
++								GFP_KERNEL);
++		if (!ctx->pulses_per_revolution)
++			return -ENOMEM;
++
++		/* Setup default pulses per revolution */
++		memset32(ctx->pulses_per_revolution, 2, ctx->tach_count);
++
++		device_property_read_u32_array(dev, "pulses-per-revolution",
++					       ctx->pulses_per_revolution,
++					       ctx->tach_count);
+ 	}
+ 
+ 	channels = devm_kcalloc(dev, channel_count + 1,
+@@ -381,7 +394,6 @@ static int pwm_fan_probe(struct platform_device *pdev)
+ 
+ 	for (i = 0; i < ctx->tach_count; i++) {
+ 		struct pwm_fan_tach *tach = &ctx->tachs[i];
+-		u32 ppr = 2;
+ 
+ 		tach->irq = platform_get_irq(pdev, i);
+ 		if (tach->irq == -EPROBE_DEFER)
+@@ -397,20 +409,10 @@ static int pwm_fan_probe(struct platform_device *pdev)
+ 			}
+ 		}
+ 
+-		of_property_read_u32_index(dev->of_node,
+-					   "pulses-per-revolution",
+-					   i,
+-					   &ppr);
+-		tach->pulses_per_revolution = ppr;
+-		if (!tach->pulses_per_revolution) {
+-			dev_err(dev, "pulses-per-revolution can't be zero.\n");
+-			return -EINVAL;
+-		}
+-
+ 		fan_channel_config[i] = HWMON_F_INPUT;
+ 
+ 		dev_dbg(dev, "tach%d: irq=%d, pulses_per_revolution=%d\n",
+-			i, tach->irq, tach->pulses_per_revolution);
++			i, tach->irq, ctx->pulses_per_revolution[i]);
+ 	}
+ 
+ 	if (ctx->tach_count > 0) {
+@@ -430,7 +432,7 @@ static int pwm_fan_probe(struct platform_device *pdev)
+ 		return PTR_ERR(hwmon);
+ 	}
+ 
+-	ret = pwm_fan_of_get_cooling_data(dev, ctx);
++	ret = pwm_fan_get_cooling_data(dev, ctx);
+ 	if (ret)
+ 		return ret;
+ 
+-- 
+2.35.1
 
-Reviewed-by: Bagas Sanjaya <bagasdotme@gmail.com>
-
---=20
-An old man doll... just what I always wanted! - Clara
-
---zCnbKQzWNc0slIHJ
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iJUEABMJAB0WIQTsebsWCPCpxY9T92n/R0PGQ3AzwAUCYu5hNQAKCRD/R0PGQ3Az
-wGuzAYDy/O8VqIX4dB6ItFwNHJm1rs7Qg4OuYgYbKFvhP69MPdWx64MR4soFNSUx
-y/x/+HABgNTyMUR8QKMtJnT6K443IFX7iqf6bs05/IbT4PqLQjZXkpc+PQBWALvU
-6LjFercp5g==
-=Aeer
------END PGP SIGNATURE-----
-
---zCnbKQzWNc0slIHJ--
