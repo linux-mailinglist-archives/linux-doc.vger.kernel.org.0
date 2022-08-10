@@ -2,102 +2,179 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id D281A58E8A1
-	for <lists+linux-doc@lfdr.de>; Wed, 10 Aug 2022 10:24:13 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 4A0E058E8FF
+	for <lists+linux-doc@lfdr.de>; Wed, 10 Aug 2022 10:45:22 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S231495AbiHJIYM (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 10 Aug 2022 04:24:12 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:44226 "EHLO
+        id S231744AbiHJIpT (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 10 Aug 2022 04:45:19 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:40888 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S229806AbiHJIYL (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Wed, 10 Aug 2022 04:24:11 -0400
-Received: from mail-pj1-x1034.google.com (mail-pj1-x1034.google.com [IPv6:2607:f8b0:4864:20::1034])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id EC4F784EF6;
-        Wed, 10 Aug 2022 01:24:10 -0700 (PDT)
-Received: by mail-pj1-x1034.google.com with SMTP id w11-20020a17090a380b00b001f73f75a1feso1442247pjb.2;
-        Wed, 10 Aug 2022 01:24:10 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=content-transfer-encoding:in-reply-to:from:references:cc:to
-         :content-language:subject:user-agent:mime-version:date:message-id
-         :from:to:cc;
-        bh=272ESQ/TJvqbzmGNO1DYDFezOW0N15ikyzzMmugZCto=;
-        b=WkaQJO8c/tULKBCQUDfuoZCFVuf54swglpgYEJK+1F3jbd6T0VihyN7M/a7Ife9RQt
-         B7jVJRPGbqWxzE5L/yVhV/BSmNuOBJL7ZIa2okoFhVllXC4UtaZkoQL19aoYdi4O3gP+
-         7zQ3Yv0bEQRX6Ar2LtXIVW4XA7pN4Ytd54ucjxXbpjqzQzzIG2A+J2519uwDKgH0/CoS
-         shqT/udJiWJGeI4AtAwer5+yqqKlYVYW/fKuKS92Mjbw3e2RIGf9qLDqfiBj3qFgknYf
-         awbYZ6ZZlmr/o8ejnHRE08c6sFD6XWEdueniDElZVopSVCKYWa+CvJ4hzaigkQM4f+MA
-         74lg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=content-transfer-encoding:in-reply-to:from:references:cc:to
-         :content-language:subject:user-agent:mime-version:date:message-id
-         :x-gm-message-state:from:to:cc;
-        bh=272ESQ/TJvqbzmGNO1DYDFezOW0N15ikyzzMmugZCto=;
-        b=MWQmAjh5ZxdCa5T6riB46no+4Xct7/hQ3nGKikIuQ+ALiuQANTwZa+GAB2bGV1BBxL
-         1nNG78Z+ngEsYN2q/lgS0jH8cG0Ju3qjZ7BeBpEuhkYQuzm0pZxwsZk1BrQUFEpmDyQi
-         IEtnRhSs8MunKASH66BWyTj0y3eBfNB7PibaYC06NgdAb9OHMTwlQc8yphTt9T9/Mmn5
-         nJvmL0W7tHXEYb5Mw/s+NOCyKc9pwZ76HcpMh7i2AkjF+EDLhLv9jXCOVu38QhsRnHNv
-         YRrer1vLh+fTOaOmpA/lH3IRuDjOtLZotlUh1yL3WouUplcaI+vS41rUw+P+y4f0bqPr
-         gnng==
-X-Gm-Message-State: ACgBeo3/ITUmmCRNRfwYTU/p7J8q0N7X48dlzoeNt/npnPh0HB6F8BPU
-        pt32BN67MwZ2ZezREK4osbw=
-X-Google-Smtp-Source: AA6agR6L85XV08Ih5UkNK28Uw9lgBbUEouKsbNuBsA4K2xUuQRnf6FWyam9M19d1L8Mb6aNl0wsLdw==
-X-Received: by 2002:a17:902:e752:b0:16e:f6c2:3739 with SMTP id p18-20020a170902e75200b0016ef6c23739mr26813693plf.123.1660119850447;
-        Wed, 10 Aug 2022 01:24:10 -0700 (PDT)
-Received: from [192.168.43.80] (subs02-180-214-232-30.three.co.id. [180.214.232.30])
-        by smtp.gmail.com with ESMTPSA id g27-20020aa796bb000000b00525496442ccsm1239818pfk.216.2022.08.10.01.24.07
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Wed, 10 Aug 2022 01:24:10 -0700 (PDT)
-Message-ID: <bcc9e248-5df3-f4d2-13cb-1ea63b355978@gmail.com>
-Date:   Wed, 10 Aug 2022 15:24:04 +0700
+        with ESMTP id S230104AbiHJIpT (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Wed, 10 Aug 2022 04:45:19 -0400
+Received: from madras.collabora.co.uk (madras.collabora.co.uk [IPv6:2a00:1098:0:82:1000:25:2eeb:e5ab])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id E44221ADA5;
+        Wed, 10 Aug 2022 01:45:16 -0700 (PDT)
+Received: from [192.168.10.7] (unknown [39.45.206.166])
+        (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
+         key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+        (No client certificate requested)
+        (Authenticated sender: usama.anjum)
+        by madras.collabora.co.uk (Postfix) with ESMTPSA id 7B0486601BE2;
+        Wed, 10 Aug 2022 09:45:06 +0100 (BST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=collabora.com;
+        s=mail; t=1660121114;
+        bh=1473869Iv8iu6o+SiEUIxAN5ZWzArP8lHuuYZHC8TEQ=;
+        h=Date:Cc:Subject:To:References:From:In-Reply-To:From;
+        b=VOT3kbYiY90iOsNmwjPKDRcrnhA+Nq+dHr2wUdQ3dp9YXfPoB45lsModbPKyApHkC
+         FqBlOolHNZDE+WjJGbgYXMW9exPj0qxxJb+ixSAn890nshpejAJA9F3VE931As8+sK
+         x6005gi8H2dMEftgItMtJpNFHI5E0rwISEYaEmkXVeTFZsMdGLpUv/fZqScFXLHSxt
+         PrF69uDmhxQOiOzlllAlwWiKiu/Fnpy2Sm4c8YBdhu2x/lEV3arOPAJ+3fOIT9prrM
+         lCuNUMzEy2M93qUld/dgvNQf3T9IPenUsGD5zceoYOZ52JX0DIPo7GXaVwqTNv8Pbd
+         48dFgrtPO/2BQ==
+Message-ID: <a5122af2-90e2-39c5-2d6a-57a4ab8d8f24@collabora.com>
+Date:   Wed, 10 Aug 2022 13:45:00 +0500
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.12.0
-Subject: Re: [PATCH 5.19] Documentation: ext4: fix cell spacing of table
- heading on blockmap table
+ Thunderbird/91.11.0
+Cc:     usama.anjum@collabora.com, kernel@collabora.com
+Subject: Re: [PATCH 0/5] Add process_memwatch syscall
 Content-Language: en-US
-To:     Theodore Ts'o <tytso@mit.edu>,
-        "Darrick J. Wong" <djwong@kernel.org>
-Cc:     linux-doc@vger.kernel.org, stable@kernel.org,
-        Andreas Dilger <adilger.kernel@dilger.ca>,
-        Jonathan Corbet <corbet@lwn.net>,
-        Wang Jianjian <wangjianjian3@huawei.com>,
-        linux-ext4@vger.kernel.org, linux-kernel@vger.kernel.org
-References: <20220809080827.108363-1-bagasdotme@gmail.com>
- <YvJ3JPFQfzbhph89@magnolia> <YvKggkBKw/jUb+SP@mit.edu>
-From:   Bagas Sanjaya <bagasdotme@gmail.com>
-In-Reply-To: <YvKggkBKw/jUb+SP@mit.edu>
+To:     Jonathan Corbet <corbet@lwn.net>,
+        Andy Lutomirski <luto@kernel.org>,
+        Thomas Gleixner <tglx@linutronix.de>,
+        Ingo Molnar <mingo@redhat.com>, Borislav Petkov <bp@alien8.de>,
+        Dave Hansen <dave.hansen@linux.intel.com>,
+        "maintainer:X86 ARCHITECTURE (32-BIT AND 64-BIT)" <x86@kernel.org>,
+        "H. Peter Anvin" <hpa@zytor.com>, Arnd Bergmann <arnd@arndb.de>,
+        Andrew Morton <akpm@linux-foundation.org>,
+        Peter Zijlstra <peterz@infradead.org>,
+        Arnaldo Carvalho de Melo <acme@kernel.org>,
+        Mark Rutland <mark.rutland@arm.com>,
+        Alexander Shishkin <alexander.shishkin@linux.intel.com>,
+        Jiri Olsa <jolsa@kernel.org>,
+        Namhyung Kim <namhyung@kernel.org>,
+        Shuah Khan <shuah@kernel.org>,
+        "open list:DOCUMENTATION" <linux-doc@vger.kernel.org>,
+        open list <linux-kernel@vger.kernel.org>,
+        "open list:PROC FILESYSTEM" <linux-fsdevel@vger.kernel.org>,
+        "open list:ABI/API" <linux-api@vger.kernel.org>,
+        "open list:GENERIC INCLUDE/ASM HEADER FILES" 
+        <linux-arch@vger.kernel.org>,
+        "open list:MEMORY MANAGEMENT" <linux-mm@kvack.org>,
+        "open list:PERFORMANCE EVENTS SUBSYSTEM" 
+        <linux-perf-users@vger.kernel.org>,
+        "open list:KERNEL SELFTEST FRAMEWORK" 
+        <linux-kselftest@vger.kernel.org>, krisman@collabora.com
+References: <20220726161854.276359-1-usama.anjum@collabora.com>
+From:   Muhammad Usama Anjum <usama.anjum@collabora.com>
+In-Reply-To: <20220726161854.276359-1-usama.anjum@collabora.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-Spam-Status: No, score=-0.6 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_FROM,NICE_REPLY_A,
-        RCVD_IN_DNSWL_NONE,RCVD_IN_SORBS_WEB,SPF_HELO_NONE,SPF_PASS,
-        T_SCC_BODY_TEXT_LINE autolearn=no autolearn_force=no version=3.4.6
+X-Spam-Status: No, score=-2.1 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,NICE_REPLY_A,SPF_HELO_NONE,
+        SPF_PASS,T_SCC_BODY_TEXT_LINE autolearn=ham autolearn_force=no
+        version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On 8/10/22 00:59, Theodore Ts'o wrote:
-> Begas,
+On 7/26/22 9:18 PM, Muhammad Usama Anjum wrote:
+> Hello,
 > 
-> You sent me a patch to address this and it's fixed upstream, landing
-> in Linus's tree after 5.19 release during the current merge window.
-> It's cc'ed to stable@kernel.org, so it's not necessary for you to send
-> it to stable@ as a separate patch.
+> This patch series implements a new syscall, process_memwatch. Currently,
+> only the support to watch soft-dirty PTE bit is added. This syscall is
+> generic to watch the memory of the process. There is enough room to add
+> more operations like this to watch memory in the future.
 > 
-> This upstream commit is 442ec1e5bb7c ("Documentation: ext4: fix cell
-> spacing of table heading on blockmap table").
+> Soft-dirty PTE bit of the memory pages can be viewed by using pagemap
+> procfs file. The soft-dirty PTE bit for the memory in a process can be
+> cleared by writing to the clear_refs file. This series adds features that
+> weren't possible through the Proc FS interface.
+> - There is no atomic get soft-dirty PTE bit status and clear operation
+>   possible.
+> - The soft-dirty PTE bit of only a part of memory cannot be cleared.
 > 
-> 					- Ted
+> Historically, soft-dirty PTE bit tracking has been used in the CRIU
+> project. The Proc FS interface is enough for that as I think the process
+> is frozen. We have the use case where we need to track the soft-dirty
+> PTE bit for running processes. We need this tracking and clear mechanism
+> of a region of memory while the process is running to emulate the
+> getWriteWatch() syscall of Windows. This syscall is used by games to keep
+> track of dirty pages and keep processing only the dirty pages. This
+> syscall can be used by the CRIU project and other applications which
+> require soft-dirty PTE bit information.
+> 
+> As in the current kernel there is no way to clear a part of memory (instead
+> of clearing the Soft-Dirty bits for the entire processi) and get+clear
+> operation cannot be performed atomically, there are other methods to mimic
+> this information entirely in userspace with poor performance:
+> - The mprotect syscall and SIGSEGV handler for bookkeeping
+> - The userfaultfd syscall with the handler for bookkeeping
+> 
+>         long process_memwatch(int pidfd, unsigned long start, int len,
+>                               unsigned int flags, void *vec, int vec_len);
+Any thoughts?
 
-Hi Ted, thanks for reminding me.
-
-As stated earlier, I was wonder why 442ec1e5bb7c is applied as 6.0 merge
-window material, although the problem had been identified in 5.19 release
-cycle.
+> 
+> This syscall can be used by the CRIU project and other applications which
+> require soft-dirty PTE bit information. The following operations are
+> supported in this syscall:
+> - Get the pages that are soft-dirty.
+> - Clear the pages which are soft-dirty.
+> - The optional flag to ignore the VM_SOFTDIRTY and only track per page
+> soft-dirty PTE bit
+> 
+> There are two decisions which have been taken about how to get the output
+> from the syscall.
+> - Return offsets of the pages from the start in the vec
+> - Stop execution when vec is filled with dirty pages
+> These two arguments doesn't follow the mincore() philosophy where the
+> output array corresponds to the address range in one to one fashion, hence
+> the output buffer length isn't passed and only a flag is set if the page
+> is present. This makes mincore() easy to use with less control. We are
+> passing the size of the output array and putting return data consecutively
+> which is offset of dirty pages from the start. The user can convert these
+> offsets back into the dirty page addresses easily. Suppose, the user want
+> to get first 10 dirty pages from a total memory of 100 pages. He'll
+> allocate output buffer of size 10 and process_memwatch() syscall will
+> abort after finding the 10 pages. This behaviour is needed to support
+> Windows' getWriteWatch(). The behaviour like mincore() can be achieved by
+> passing output buffer of 100 size. This interface can be used for any
+> desired behaviour.
+> 
+> Regards,
+> Muhammad Usama Anjum
+> 
+> Muhammad Usama Anjum (5):
+>   fs/proc/task_mmu: make functions global to be used in other files
+>   mm: Implement process_memwatch syscall
+>   mm: wire up process_memwatch syscall for x86
+>   selftests: vm: add process_memwatch syscall tests
+>   mm: add process_memwatch syscall documentation
+> 
+>  Documentation/admin-guide/mm/soft-dirty.rst   |  48 +-
+>  arch/x86/entry/syscalls/syscall_32.tbl        |   1 +
+>  arch/x86/entry/syscalls/syscall_64.tbl        |   1 +
+>  fs/proc/task_mmu.c                            |  84 +--
+>  include/linux/mm_inline.h                     |  99 +++
+>  include/linux/syscalls.h                      |   3 +-
+>  include/uapi/asm-generic/unistd.h             |   5 +-
+>  include/uapi/linux/memwatch.h                 |  12 +
+>  kernel/sys_ni.c                               |   1 +
+>  mm/Makefile                                   |   2 +-
+>  mm/memwatch.c                                 | 285 ++++++++
+>  tools/include/uapi/asm-generic/unistd.h       |   5 +-
+>  .../arch/x86/entry/syscalls/syscall_64.tbl    |   1 +
+>  tools/testing/selftests/vm/.gitignore         |   1 +
+>  tools/testing/selftests/vm/Makefile           |   2 +
+>  tools/testing/selftests/vm/memwatch_test.c    | 635 ++++++++++++++++++
+>  16 files changed, 1098 insertions(+), 87 deletions(-)
+>  create mode 100644 include/uapi/linux/memwatch.h
+>  create mode 100644 mm/memwatch.c
+>  create mode 100644 tools/testing/selftests/vm/memwatch_test.c
+> 
 
 -- 
-An old man doll... just what I always wanted! - Clara
+Muhammad Usama Anjum
