@@ -2,236 +2,132 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 5EAC058F5D1
-	for <lists+linux-doc@lfdr.de>; Thu, 11 Aug 2022 04:23:31 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 2316058F605
+	for <lists+linux-doc@lfdr.de>; Thu, 11 Aug 2022 04:54:40 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S233748AbiHKCXW (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 10 Aug 2022 22:23:22 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:44470 "EHLO
+        id S233819AbiHKCyd (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 10 Aug 2022 22:54:33 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:38884 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S233739AbiHKCXQ (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Wed, 10 Aug 2022 22:23:16 -0400
-Received: from ams.source.kernel.org (ams.source.kernel.org [145.40.68.75])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id AC22D8FD5B;
-        Wed, 10 Aug 2022 19:23:15 -0700 (PDT)
-Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
-        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
-        (No client certificate requested)
-        by ams.source.kernel.org (Postfix) with ESMTPS id 57580B81EFE;
-        Thu, 11 Aug 2022 02:23:14 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 94A41C43142;
-        Thu, 11 Aug 2022 02:23:12 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-        s=k20201202; t=1660184593;
-        bh=WIS3juFBNIkI4YzCJrQnWAowOP677MxK2UsLnwMjaaw=;
-        h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-        b=HTCWJwkz4PvadOEiVCJyncRvDAr5dFMEVqfvzkx+9HkY9aOslxIY5bVKCAw1aCeRD
-         sIcRNPLFYhoYEAXkWYxzr1b0eLD3M8DZFCo+y0LK0hiZEKjALVVjK2FnwWUq2NAY3w
-         8CnMgxBSPjPIdCCBuEuiayPGUB7C1hveg1YyKNmtbAhMdQtE4ewZmCnRM2lyFsa94F
-         KkZ4vhVSd7CeBuE/HqrYvXu7J9EQHaXobOp1fC90McOrgRi5hpQw5+XOom+HMGmo2J
-         2ng7oup4ZcVGOaznJFyH/4AZb1V22CpcEtEnWD+BttWrTreR7UopJ2AwmDAjkK9xCc
-         Ajwgo2mGggBuw==
-From:   Jakub Kicinski <kuba@kernel.org>
-To:     netdev@vger.kernel.org, davem@davemloft.net, edumazet@google.com,
-        pabeni@redhat.com
-Cc:     sdf@google.com, jacob.e.keller@intel.com, vadfed@fb.com,
-        johannes@sipsolutions.net, jiri@resnulli.us, dsahern@kernel.org,
-        stephen@networkplumber.org, fw@strlen.de,
-        linux-doc@vger.kernel.org, Jakub Kicinski <kuba@kernel.org>
-Subject: [RFC net-next 4/4] ynl: add a sample user for ethtool
-Date:   Wed, 10 Aug 2022 19:23:04 -0700
-Message-Id: <20220811022304.583300-5-kuba@kernel.org>
-X-Mailer: git-send-email 2.37.1
-In-Reply-To: <20220811022304.583300-1-kuba@kernel.org>
-References: <20220811022304.583300-1-kuba@kernel.org>
+        with ESMTP id S233821AbiHKCyc (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Wed, 10 Aug 2022 22:54:32 -0400
+Received: from out199-6.us.a.mail.aliyun.com (out199-6.us.a.mail.aliyun.com [47.90.199.6])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 918BB883EC;
+        Wed, 10 Aug 2022 19:54:30 -0700 (PDT)
+X-Alimail-AntiSpam: AC=PASS;BC=-1|-1;BR=01201311R171e4;CH=green;DM=||false|;DS=||;FP=0|-1|-1|-1|0|-1|-1|-1;HT=ay29a033018046056;MF=xianting.tian@linux.alibaba.com;NM=1;PH=DS;RN=23;SR=0;TI=SMTPD_---0VLxOlmu_1660186462;
+Received: from B-LB6YLVDL-0141.local(mailfrom:xianting.tian@linux.alibaba.com fp:SMTPD_---0VLxOlmu_1660186462)
+          by smtp.aliyun-inc.com;
+          Thu, 11 Aug 2022 10:54:23 +0800
+Subject: Re: [PATCH V5 0/6] RISC-V fixups to work with crash tool
+To:     Conor.Dooley@microchip.com, paul.walmsley@sifive.com,
+        palmer@dabbelt.com, aou@eecs.berkeley.edu, anup@brainfault.org,
+        heiko@sntech.de, guoren@kernel.org, mick@ics.forth.gr,
+        alexandre.ghiti@canonical.com, bhe@redhat.com, vgoyal@redhat.com,
+        dyoung@redhat.com, corbet@lwn.net
+Cc:     kexec@lists.infradead.org, linux-doc@vger.kernel.org,
+        linux-riscv@lists.infradead.org, linux-kernel@vger.kernel.org,
+        crash-utility@redhat.com, huanyi.xj@alibaba-inc.com,
+        heinrich.schuchardt@canonical.com, k-hagio-ab@nec.com,
+        hschauhan@nulltrace.org, yixun.lan@gmail.com
+References: <20220802121818.2201268-1-xianting.tian@linux.alibaba.com>
+ <b79ab47e-a1e2-eb21-0611-bcbc8b7802c5@linux.alibaba.com>
+ <b3184653-7ef4-eec3-9ef6-a8449fe24323@microchip.com>
+From:   Xianting Tian <xianting.tian@linux.alibaba.com>
+Message-ID: <5afbd9b6-37c5-8a8d-6fdf-bca721ebd25e@linux.alibaba.com>
+Date:   Thu, 11 Aug 2022 10:54:22 +0800
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:78.0)
+ Gecko/20100101 Thunderbird/78.14.0
 MIME-Version: 1.0
+In-Reply-To: <b3184653-7ef4-eec3-9ef6-a8449fe24323@microchip.com>
+Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Transfer-Encoding: 8bit
-X-Spam-Status: No, score=-7.7 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_HI,
-        SPF_HELO_NONE,SPF_PASS,T_SCC_BODY_TEXT_LINE autolearn=ham
-        autolearn_force=no version=3.4.6
+X-Spam-Status: No, score=-9.9 required=5.0 tests=BAYES_00,
+        ENV_AND_HDR_SPF_MATCH,NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,
+        T_SCC_BODY_TEXT_LINE,UNPARSEABLE_RELAY,USER_IN_DEF_SPF_WL
+        autolearn=ham autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-A sample schema describing ethtool channels and a script showing
-that it works. The script is called like this:
 
- ./tools/net/ynl/samples/ethtool.py \
-    --spec Documentation/netlink/bindings/ethtool.yaml \
-    --device eth0
+在 2022/8/10 上午5:24, Conor.Dooley@microchip.com 写道:
+> On 09/08/2022 07:58, Xianting Tian wrote:
+>> Hi Palmer
+>>
+>> Could you please help review this patch set?  thanks.
+> Hey Xianting,
+>
+> Obviously I am not Palmer, but I left some comments on the
+> patchset. Sorry for the delay in getting back onto you on your
+> latest version, I got confused as to which versions I had reviewed.
 
-I have schemas for genetlink, FOU and the proposed DPLL subsystem,
-to validate that the concept has wide applicability, but ethtool
-feels like the best demo of the 4.
+You ever reviewed this version patch set,
 
-Signed-off-by: Jakub Kicinski <kuba@kernel.org>
----
- Documentation/netlink/bindings/ethtool.yaml | 115 ++++++++++++++++++++
- tools/net/ynl/samples/ethtool.py            |  30 +++++
- 2 files changed, 145 insertions(+)
- create mode 100644 Documentation/netlink/bindings/ethtool.yaml
- create mode 100755 tools/net/ynl/samples/ethtool.py
+https://lore.kernel.org/lkml/20220725014539.1037627-1-xianting.tian@linux.alibaba.com/ 
+<https://lore.kernel.org/lkml/20220725014539.1037627-1-xianting.tian@linux.alibaba.com/>
 
-diff --git a/Documentation/netlink/bindings/ethtool.yaml b/Documentation/netlink/bindings/ethtool.yaml
-new file mode 100644
-index 000000000000..b4540d60b4b3
---- /dev/null
-+++ b/Documentation/netlink/bindings/ethtool.yaml
-@@ -0,0 +1,115 @@
-+# SPDX-License-Identifier: BSD-3-Clause
-+
-+name: ethtool
-+
-+description: |
-+  Ethernet device configuration interface.
-+
-+attr-cnt-suffix: CNT
-+
-+attribute-spaces:
-+  -
-+    name: header
-+    name-prefix: ETHTOOL_A_HEADER_
-+    attributes:
-+      -
-+        name: dev_index
-+        val: 1
-+        type: u32
-+      -
-+        name: dev_name
-+        type: nul-string
-+        len: ALTIFNAMSIZ - 1
-+      -
-+        name: flags
-+        type: u32
-+  -
-+    name: channels
-+    name-prefix: ETHTOOL_A_CHANNELS_
-+    attributes:
-+      -
-+        name: header
-+        val: 1
-+        type: nest
-+        nested-attributes: header
-+      -
-+        name: rx_max
-+        type: u32
-+      -
-+        name: tx_max
-+        type: u32
-+      -
-+        name: other_max
-+        type: u32
-+      -
-+        name: combined_max
-+        type: u32
-+      -
-+        name: rx_count
-+        type: u32
-+      -
-+        name: tx_count
-+        type: u32
-+      -
-+        name: other_count
-+        type: u32
-+      -
-+        name: combined_count
-+        type: u32
-+
-+headers:
-+  user: linux/if.h
-+  uapi: linux/ethtool_netlink.h
-+
-+operations:
-+  name-prefix: ETHTOOL_MSG_
-+  async-prefix: ETHTOOL_MSG_
-+  list:
-+    -
-+      name: channels_get
-+      val: 17
-+      description: Get current and max supported number of channels.
-+      attribute-space: channels
-+      do:
-+        request:
-+          attributes:
-+            - header
-+        reply: &channel_reply
-+          attributes:
-+            - header
-+            - rx_max
-+            - tx_max
-+            - other_max
-+            - combined_max
-+            - rx_count
-+            - tx_count
-+            - other_count
-+            - combined_count
-+      dump:
-+        reply: *channel_reply
-+
-+    -
-+      name: channels_ntf
-+      description: Notification for device changing its number of channels.
-+      notify: channels_get
-+      mcgrp: monitor
-+
-+    -
-+      name: channels_set
-+      description: Set number of channels.
-+      attribute-space: channels
-+      do:
-+        request:
-+          attributes:
-+            - header
-+            - rx_count
-+            - tx_count
-+            - other_count
-+            - combined_count
-+
-+mcast-groups:
-+  name-prefix: ETHTOOL_MCGRP_
-+  name-suffix: _NAME
-+  list:
-+    -
-+      name: monitor
-diff --git a/tools/net/ynl/samples/ethtool.py b/tools/net/ynl/samples/ethtool.py
-new file mode 100755
-index 000000000000..63c8e29f8e5d
---- /dev/null
-+++ b/tools/net/ynl/samples/ethtool.py
-@@ -0,0 +1,30 @@
-+#!/usr/bin/env python
-+# SPDX-License-Identifier: BSD-3-Clause
-+
-+import argparse
-+
-+from ynl import YnlFamily
-+
-+
-+def main():
-+    parser = argparse.ArgumentParser(description='YNL ethtool sample')
-+    parser.add_argument('--spec', dest='spec', type=str, required=True)
-+    parser.add_argument('--schema', dest='schema', type=str)
-+    parser.add_argument('--device', dest='dev_name', type=str)
-+    parser.add_argument('--ifindex', dest='ifindex', type=str)
-+    args = parser.parse_args()
-+
-+    ynl = YnlFamily(args.spec)
-+
-+    if args.dev_name:
-+        channels = ynl.channels_get({'header': {'dev_name': args.dev_name}})
-+    elif args.ifindex:
-+        channels = ynl.channels_get({'header': {'dev_index': args.ifindex}})
-+    else:
-+        return
-+    print('Netlink responded with:')
-+    print(channels)
-+
-+
-+if __name__ == "__main__":
-+    main()
--- 
-2.37.1
-
+>
+> Conor.
+>
+>>   
+>> Crash-utility patch set is ready(acked by HAGIO KAZUHITO), now waiting the kernel patch set merged firstly.
+>>
+>> 在 2022/8/2 下午8:18, Xianting Tian 写道:
+>>> I ever sent the patch 1 in the link:
+>>> https://patchwork.kernel.org/project/linux-riscv/patch/20220708073150.352830-3-xianting.tian@linux.alibaba.com/
+>>> And patch 2,3 in the link:
+>>> https://patchwork.kernel.org/project/linux-riscv/patch/20220714113300.367854-2-xianting.tian@linux.alibaba.com/
+>>> https://patchwork.kernel.org/project/linux-riscv/patch/20220714113300.367854-3-xianting.tian@linux.alibaba.com/
+>>>
+>>> This patch set just put these patches together, and with three new patch 4, 5, 6.
+>>> these six patches are the fixups for machine_kexec, kernel mode PC for vmcore
+>>> and improvements for vmcoreinfo, memory layout dump and fixup chedule out issue
+>>> in machine_crash_shutdown().
+>>>
+>>> The main changes in the six patchs as below,
+>>> Patch 1: use __smp_processor_id() instead of smp_processor_id() to cleanup
+>>>            the console prints.
+>>> Patch 2: Add VM layout, va bits, ram base to vmcoreinfo, which can simplify
+>>>            the development of crash tool as ARM64 already did
+>>>            (arch/arm64/kernel/crash_core.c).
+>>> Patch 3: Add modules to virtual kernel memory layout dump.
+>>> Patch 4: Fixup to get correct kernel mode PC for vmcore.
+>>> Patch 5: Updates vmcoreinfo.rst.
+>>> Patch 6: Fixup schedule out issue in machine_crash_shutdown()
+>>>
+>>> With these six patches(patch 2 is must), crash tool can work well to analyze
+>>> a vmcore. The patches for crash tool for RISCV64 is in the link:
+>>> https://lore.kernel.org/linux-riscv/20220801043040.2003264-1-xianting.tian@linux.alibaba.com/
+>>>
+>>> ------
+>>> Changes v1 -> v2:
+>>>    1, remove the patch "Add a fast call path of crash_kexec()" from this series
+>>>    of patches, as it already applied to riscv git.
+>>>    https://git.kernel.org/pub/scm/linux/kernel/git/riscv/linux.git/commit/?h=for-next&id=3f1901110a89b0e2e13adb2ac8d1a7102879ea98
+>>>    2, add 'Reviewed-by' based on the comments of v1.
+>>> Changes v2 -> v3:
+>>>    use "riscv" instead of "riscv64" in patch 5 subject line.
+>>> Changes v3 -> v4:
+>>>    use "riscv" instead of "riscv64" in the summary of patch 5 subject line.
+>>> Changes v4 -> v5:
+>>>    add a new patch "RISC-V: Fixup schedule out issue in machine_crash_shutdown()"
+>>>
+>>> Xianting Tian (6):
+>>>     RISC-V: use __smp_processor_id() instead of smp_processor_id()
+>>>     RISC-V: Add arch_crash_save_vmcoreinfo support
+>>>     riscv: Add modules to virtual kernel memory layout dump
+>>>     RISC-V: Fixup getting correct current pc
+>>>     riscv: crash_core: Export kernel vm layout, phys_ram_base
+>>>     RISC-V: Fixup schedule out issue in machine_crash_shutdown()
+>>>
+>>>    .../admin-guide/kdump/vmcoreinfo.rst          | 31 +++++++++++++++++++
+>>>    arch/riscv/kernel/Makefile                    |  1 +
+>>>    arch/riscv/kernel/crash_core.c                | 29 +++++++++++++++++
+>>>    arch/riscv/kernel/crash_save_regs.S           |  2 +-
+>>>    arch/riscv/kernel/machine_kexec.c             | 28 ++++++++++++++---
+>>>    arch/riscv/mm/init.c                          |  4 +++
+>>>    6 files changed, 89 insertions(+), 6 deletions(-)
+>>>    create mode 100644 arch/riscv/kernel/crash_core.c
+>>>
