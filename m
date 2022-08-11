@@ -2,81 +2,100 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id EDC0458FD42
-	for <lists+linux-doc@lfdr.de>; Thu, 11 Aug 2022 15:19:28 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 9EF7B58FD5A
+	for <lists+linux-doc@lfdr.de>; Thu, 11 Aug 2022 15:27:17 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S235020AbiHKNT1 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 11 Aug 2022 09:19:27 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:60226 "EHLO
+        id S234066AbiHKN1P (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 11 Aug 2022 09:27:15 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:38562 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S234050AbiHKNT0 (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Thu, 11 Aug 2022 09:19:26 -0400
-Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.133.124])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTP id D9AB481680
-        for <linux-doc@vger.kernel.org>; Thu, 11 Aug 2022 06:19:25 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-        s=mimecast20190719; t=1660223964;
-        h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-         to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-         content-transfer-encoding:content-transfer-encoding:
-         in-reply-to:in-reply-to:references:references;
-        bh=p0uKFDfXP8UK2kv9F4U2RkkSlS76ekQt9UIZaGMUKKM=;
-        b=Uafey8io5mM7CDaXm4CAF5bY4+Nhbsx4+0sbBmgpnjpDEouZIEXj5JaudBeFqJt0xLndbk
-        MgjGBkH/6OkecBI6AHZmB5q/eppM0XJ6Mk48dcs1SOBlenMx9a01FGsb6z6imJ9Tc35QD3
-        hAIw/Apf0HmekzFknqngKt4YpKWtUbM=
-Received: from mimecast-mx02.redhat.com (mx3-rdu2.redhat.com
- [66.187.233.73]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- us-mta-62-jASUlZ3DM8WAWgojT95a5Q-1; Thu, 11 Aug 2022 09:19:23 -0400
-X-MC-Unique: jASUlZ3DM8WAWgojT95a5Q-1
-Received: from smtp.corp.redhat.com (int-mx06.intmail.prod.int.rdu2.redhat.com [10.11.54.6])
-        (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
-        (No client certificate requested)
-        by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 1E7BA3C01DA8;
-        Thu, 11 Aug 2022 13:19:23 +0000 (UTC)
-Received: from localhost (unknown [10.39.193.95])
-        by smtp.corp.redhat.com (Postfix) with ESMTPS id C70132166B26;
-        Thu, 11 Aug 2022 13:19:22 +0000 (UTC)
-From:   Cornelia Huck <cohuck@redhat.com>
-To:     Ricardo =?utf-8?Q?Ca=C3=B1uelo?= <ricardo.canuelo@collabora.com>,
-        linux-doc@vger.kernel.org
-Cc:     virtualization@lists.linux-foundation.org, mst@redhat.com,
-        jasowang@redhat.com, kernel@collabora.com, bagasdotme@gmail.com
-Subject: Re: [PATCH v4 1/2] virtio: kerneldocs fixes and enhancements
-In-Reply-To: <20220810094004.1250-2-ricardo.canuelo@collabora.com>
-Organization: Red Hat GmbH
-References: <20220810094004.1250-1-ricardo.canuelo@collabora.com>
- <20220810094004.1250-2-ricardo.canuelo@collabora.com>
-User-Agent: Notmuch/0.36 (https://notmuchmail.org)
-Date:   Thu, 11 Aug 2022 15:19:21 +0200
-Message-ID: <87fsi2dijq.fsf@redhat.com>
+        with ESMTP id S234394AbiHKN1P (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Thu, 11 Aug 2022 09:27:15 -0400
+Received: from mail-pf1-x431.google.com (mail-pf1-x431.google.com [IPv6:2607:f8b0:4864:20::431])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 9C752868AA;
+        Thu, 11 Aug 2022 06:27:14 -0700 (PDT)
+Received: by mail-pf1-x431.google.com with SMTP id k14so14451940pfh.0;
+        Thu, 11 Aug 2022 06:27:14 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112;
+        h=content-transfer-encoding:in-reply-to:from:references:cc:to
+         :content-language:subject:user-agent:mime-version:date:message-id
+         :from:to:cc;
+        bh=cnf/MAxWiWhTvww3StaIlwbuuIs/IrBQv9ORD2Fnzb8=;
+        b=hhPtoXRk4+PMkZG0gZrNZYrmTu9yA5qnBlJW/2XP1icOeQdYBgKVgkMbHgOpOKC57a
+         fc/S6afY1H/glfIdPydeAvLShJHuTnYm58U0zvqTKxx4wi6lWk98E4Pg0+2hjd9P/GPg
+         i5R5cAmbRMUyTI8diaSBjd6o90JhNnWjlOuTi+k9x9W27uMu8ibnrboZIunXU2w4xYtt
+         uebnfFQBZJELurcjq5g+4gCgW/r5rqUp2RW7oWtVDrz0iqDCauBtgPOuPS6q4WjpWmMO
+         m4Z7PyO5A7R8KtrQobFQ0BstZLgzzW0Zhd9FepB7/OfA0ywYwdtBdM3UUUIsgitDlpiN
+         K9tw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=content-transfer-encoding:in-reply-to:from:references:cc:to
+         :content-language:subject:user-agent:mime-version:date:message-id
+         :x-gm-message-state:from:to:cc;
+        bh=cnf/MAxWiWhTvww3StaIlwbuuIs/IrBQv9ORD2Fnzb8=;
+        b=6eTC8qlJ+bxKz7F9re0kvVr+PsWx/2EqnnZOIFKb5WPpsfJzLjCMZtI4U3ZxtwnsuZ
+         Ea6/YkKryz3jMzqYPXrSEkZzVdz7i5VuHLBdVQOckJa7zMFTUaQkXXqomIoJZP4F/j6B
+         SThONhsDG4raogJcnn6GdOyFLEZrvHCG8mAdLVd+1IjpTur7n4nswMYvbnfJp8S+5CuH
+         EWAXwscV3rw0obQlkFMq5CUHopw9Ax+pxn8l/8JHyO69ci1B0PVMUSPzoLY4+GcFa+5K
+         sdPNVXSIgzoo8ucfdihrjlPf2TTDa5qubae9umrFtcQfQTriJ0CanguGE+SDVIdINKSQ
+         fQ7w==
+X-Gm-Message-State: ACgBeo3KwGSQcbB8u/ohNGC26FSDYTpRNUTGh63lhhwsnnyHpFrOC29I
+        SoG2gXZMKqK62XonqoGUAVY=
+X-Google-Smtp-Source: AA6agR5HAInDscx1ZEMqvtifjzDB5GvCTp7d9zggxvQzL5N6SNN9kA68Z6Wvry9fG8i2/7CjEkGCOw==
+X-Received: by 2002:a63:8a42:0:b0:41b:dddd:b81f with SMTP id y63-20020a638a42000000b0041bddddb81fmr26717842pgd.229.1660224434107;
+        Thu, 11 Aug 2022 06:27:14 -0700 (PDT)
+Received: from [192.168.43.80] (subs32-116-206-28-16.three.co.id. [116.206.28.16])
+        by smtp.gmail.com with ESMTPSA id x130-20020a628688000000b0052dd9dbe291sm3972954pfd.105.2022.08.11.06.27.08
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Thu, 11 Aug 2022 06:27:13 -0700 (PDT)
+Message-ID: <f2336f93-53b4-b031-9e1c-67b6d1470f64@gmail.com>
+Date:   Thu, 11 Aug 2022 20:27:05 +0700
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-X-Scanned-By: MIMEDefang 2.78 on 10.11.54.6
-X-Spam-Status: No, score=-2.7 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_NONE,
-        SPF_HELO_NONE,SPF_NONE,T_SCC_BODY_TEXT_LINE autolearn=ham
-        autolearn_force=no version=3.4.6
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
+ Thunderbird/91.12.0
+Subject: Re: [PATCH V6 6/6] Documentation: kdump: describe VMCOREINFO export
+ for RISCV64
+Content-Language: en-US
+To:     Xianting Tian <xianting.tian@linux.alibaba.com>,
+        paul.walmsley@sifive.com, palmer@dabbelt.com,
+        aou@eecs.berkeley.edu, anup@brainfault.org, heiko@sntech.de,
+        guoren@kernel.org, mick@ics.forth.gr,
+        alexandre.ghiti@canonical.com, bhe@redhat.com, vgoyal@redhat.com,
+        dyoung@redhat.com, corbet@lwn.net, Conor.Dooley@microchip.com
+Cc:     kexec@lists.infradead.org, linux-doc@vger.kernel.org,
+        linux-riscv@lists.infradead.org, linux-kernel@vger.kernel.org,
+        crash-utility@redhat.com, heinrich.schuchardt@canonical.com,
+        k-hagio-ab@nec.com, hschauhan@nulltrace.org, yixun.lan@gmail.com
+References: <20220811074150.3020189-1-xianting.tian@linux.alibaba.com>
+ <20220811074150.3020189-7-xianting.tian@linux.alibaba.com>
+From:   Bagas Sanjaya <bagasdotme@gmail.com>
+In-Reply-To: <20220811074150.3020189-7-xianting.tian@linux.alibaba.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-Spam-Status: No, score=-0.6 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_FROM,NICE_REPLY_A,
+        RCVD_IN_DNSWL_NONE,RCVD_IN_SORBS_WEB,SPF_HELO_NONE,SPF_PASS,
+        T_SCC_BODY_TEXT_LINE autolearn=no autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Wed, Aug 10 2022, Ricardo Ca=C3=B1uelo <ricardo.canuelo@collabora.com> w=
-rote:
+On 8/11/22 14:41, Xianting Tian wrote:
+> The following interrelated definitions and ranges are needed by the kdump
+> crash tool, they are exported by "arch/riscv/kernel/crash_core.c":
+>     VA_BITS, PAGE_OFFSET, phys_ram_base
+>     MODULES_VADDR ~ MODULES_END,
+>     VMALLOC_START ~ VMALLOC_END,
+>     VMEMMAP_START ~ VMEMMAP_END
+>     KASAN_SHADOW_START ~ KASAN_SHADOW_END,
+>     KERNEL_LINK_ADDR ~ ADDRESS_SPACE_END
+> 
+> This patch just add the description of VMCOREINFO export for RISCV64.
+> 
+Better say "Document these RISCV64 exports above".
 
-> Fix variable names in some kerneldocs, naming in others.
-> Add kerneldocs for struct vring_desc and vring_interrupt.
->
-> Signed-off-by: Ricardo Ca=C3=B1uelo <ricardo.canuelo@collabora.com>
-> ---
->  drivers/virtio/virtio_ring.c     |  8 ++++++++
->  include/linux/virtio.h           |  6 +++---
->  include/linux/virtio_config.h    |  6 +++---
->  include/uapi/linux/virtio_ring.h | 16 +++++++++++-----
->  4 files changed, 25 insertions(+), 11 deletions(-)
-
-Reviewed-by: Cornelia Huck <cohuck@redhat.com>
-
+-- 
+An old man doll... just what I always wanted! - Clara
