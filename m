@@ -2,107 +2,123 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 6B62458FEAF
-	for <lists+linux-doc@lfdr.de>; Thu, 11 Aug 2022 17:02:00 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id B82C1590062
+	for <lists+linux-doc@lfdr.de>; Thu, 11 Aug 2022 17:43:32 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S235421AbiHKPB6 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 11 Aug 2022 11:01:58 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:48050 "EHLO
+        id S235991AbiHKPll (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 11 Aug 2022 11:41:41 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:43262 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S235400AbiHKPB5 (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Thu, 11 Aug 2022 11:01:57 -0400
-Received: from mail-pj1-x102b.google.com (mail-pj1-x102b.google.com [IPv6:2607:f8b0:4864:20::102b])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id D0AC12496B
-        for <linux-doc@vger.kernel.org>; Thu, 11 Aug 2022 08:01:55 -0700 (PDT)
-Received: by mail-pj1-x102b.google.com with SMTP id w11-20020a17090a380b00b001f73f75a1feso5662467pjb.2
-        for <linux-doc@vger.kernel.org>; Thu, 11 Aug 2022 08:01:55 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=networkplumber-org.20210112.gappssmtp.com; s=20210112;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:subject:cc:to:from:date:from:to:cc;
-        bh=b+I9NMlIRung0ufXGv5JJYJHMEd2asoQjtUh3VvCjOo=;
-        b=RsXRGLyz3v67s4s/1e5ATDfo68S4Xk2SHhr+boOlz0EVUz3dvqm2+eR8LsCBwDEIYq
-         Ye03Xq23h47OacFO07cDrnOoDp5KTFsXRiKah1kp61l5ZbF89KFcUq1gi2bQLCXNu2NV
-         3J/SoGeLJYo8/JLXLaRAeNOin/PFr2ft+RMz9qH9a9tb7UZ9d+mtHj/dRJhTW4RYxsD0
-         K9sGe902y0wKU06SYRDZASP6mUQpGvr7tOmYLosL0ket9E4CfOWoYRUoiqgHkvqBTgue
-         40Ad8dfW2rbHvBhGvVDfs7ju2/4FRWJvJkIL6zF0EOrLBgevb+YNDq7vef5TDOi+aKTz
-         UTrA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:subject:cc:to:from:date:x-gm-message-state:from:to:cc;
-        bh=b+I9NMlIRung0ufXGv5JJYJHMEd2asoQjtUh3VvCjOo=;
-        b=SHNwPibO5Ahp8rcaWekJ+DHmxyKi1ocmcfVMTdN5+utd/Bq36UAwNf5uxTEIt02S95
-         Dzo+wlgYFXJ472TdD1+TRBJk4qbl/rV4FLcAhzw3xhLMsXH1D7+F3Jrlgoz+DZuqnVJ7
-         P/cr+ZQOkIbPPjXgwl9K87HobAPuwdKnbJmvt6xYOobQV7jpEkIhqwRX+dcbsJo9Y7oQ
-         zycFw/9IM9BI8wdmgdKTzrEByrrs1tTvAPDFNGoccOJS4JsR2MvNc4jvSwn8hS4kFaWR
-         3sWamBXNOVqm/57JFLFIvbBA/GueMU7SgTSLiT76ppsjqvxAvQUDaGfTStgtNOWVc3S5
-         x/3A==
-X-Gm-Message-State: ACgBeo0hG+8KVYZGOEICPtEg/FbGUsZ9pU5ZTrPvJNQCv9nG2okIK5g8
-        t1ngKU1bEJ0d5lsZjlIgIximcA==
-X-Google-Smtp-Source: AA6agR64EfyJdGX5MHuLzxCea37dFu9L83/U4i7RWaogx7X22t58SWaQilMkRBxdvbHOFHBPNxpExQ==
-X-Received: by 2002:a17:902:e885:b0:16f:8f52:c93a with SMTP id w5-20020a170902e88500b0016f8f52c93amr29076787plg.140.1660230115342;
-        Thu, 11 Aug 2022 08:01:55 -0700 (PDT)
-Received: from hermes.local (204-195-120-218.wavecable.com. [204.195.120.218])
-        by smtp.gmail.com with ESMTPSA id v3-20020a654603000000b0041a6c2436c7sm11739042pgq.82.2022.08.11.08.01.54
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 11 Aug 2022 08:01:55 -0700 (PDT)
-Date:   Thu, 11 Aug 2022 08:01:52 -0700
-From:   Stephen Hemminger <stephen@networkplumber.org>
-To:     Jakub Kicinski <kuba@kernel.org>
-Cc:     netdev@vger.kernel.org, davem@davemloft.net, edumazet@google.com,
-        pabeni@redhat.com, sdf@google.com, jacob.e.keller@intel.com,
-        vadfed@fb.com, johannes@sipsolutions.net, jiri@resnulli.us,
-        dsahern@kernel.org, fw@strlen.de, linux-doc@vger.kernel.org
-Subject: Re: [RFC net-next 0/4] ynl: YAML netlink protocol descriptions
-Message-ID: <20220811080152.2dbd82c2@hermes.local>
-In-Reply-To: <20220810214701.46565016@kernel.org>
-References: <20220811022304.583300-1-kuba@kernel.org>
-        <20220810211534.0e529a06@hermes.local>
-        <20220810214701.46565016@kernel.org>
+        with ESMTP id S236302AbiHKPkg (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Thu, 11 Aug 2022 11:40:36 -0400
+Received: from sin.source.kernel.org (sin.source.kernel.org [145.40.73.55])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id C6A26832EE;
+        Thu, 11 Aug 2022 08:36:14 -0700 (PDT)
+Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
+        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+        (No client certificate requested)
+        by sin.source.kernel.org (Postfix) with ESMTPS id 0C259CE223C;
+        Thu, 11 Aug 2022 15:36:13 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 92B76C433D6;
+        Thu, 11 Aug 2022 15:36:10 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+        s=k20201202; t=1660232171;
+        bh=qsShld15yanExGZz6tj+YI1xZMgoDwaENHBqd2mx4bU=;
+        h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
+        b=cNcphdIWAXT6nB9wNAJsYoUHgHVt1MefuabHLfxkfhrw/sFEl4ZLBaKY3AoFZ03Re
+         jNOjUzJGanUK4FD7+xgNU7zXYAQcih+CgovFXqFDiG96GLShQsreEKnS0z/cFwRih2
+         dHV0CCwxy+pVLUuBkysoKi5RkgucPD4GQ89qcyUkFLe0umlmLExUGaqOcjAfE4F1/Y
+         zZls0lo6AL1C6K0RUBpjUgrBRNjGmkJkkvskq1QYpf3vW2dJxmcei55uFLEY3X/xF9
+         3JJ+8jvddfuPipdM90NjxQpUbuepAQn6GfaZl2anEE9drFZTYrj6Bjrdw9+qa5NEuF
+         fRM8/nJXYXuGg==
+From:   Sasha Levin <sashal@kernel.org>
+To:     linux-kernel@vger.kernel.org, stable@vger.kernel.org
+Cc:     Mauro Carvalho Chehab <mchehab@kernel.org>,
+        Jonathan Corbet <corbet@lwn.net>,
+        Sasha Levin <sashal@kernel.org>, linux-doc@vger.kernel.org
+Subject: [PATCH AUTOSEL 5.19 063/105] scripts: sphinx-pre-install: fix venv version check logic
+Date:   Thu, 11 Aug 2022 11:27:47 -0400
+Message-Id: <20220811152851.1520029-63-sashal@kernel.org>
+X-Mailer: git-send-email 2.35.1
+In-Reply-To: <20220811152851.1520029-1-sashal@kernel.org>
+References: <20220811152851.1520029-1-sashal@kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: 7bit
-X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-        DKIM_VALID,RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,SPF_PASS,
-        T_SCC_BODY_TEXT_LINE autolearn=ham autolearn_force=no version=3.4.6
+X-stable: review
+X-Patchwork-Hint: Ignore
+Content-Transfer-Encoding: 8bit
+X-Spam-Status: No, score=-7.7 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_HI,
+        SPF_HELO_NONE,SPF_PASS,T_SCC_BODY_TEXT_LINE autolearn=ham
+        autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Wed, 10 Aug 2022 21:47:01 -0700
-Jakub Kicinski <kuba@kernel.org> wrote:
+From: Mauro Carvalho Chehab <mchehab@kernel.org>
 
-> On Wed, 10 Aug 2022 21:15:34 -0700 Stephen Hemminger wrote:
-> > Would rather this be part of iproute2 rather than requiring it
-> > to be maintained separately and part of the kernel tree.  
-> 
-> I don't understand what you're trying to say. What is "this", 
-> what is "separate" from what?
+[ Upstream commit 7c2d45a347c7933cbe0efff14fe96adeb13fd761 ]
 
-I am saying that ynl could live as a standalone project or as
-part of the iproute2 tools collection.
+The logic which checks if the venv version is good enough
+but was not activated is broken: it is checking against
+the wrong val, making it to recommend to re-create a venv
+every time. Fix it.
 
-> 
-> Did I fall victim of the "if the cover letter is too long nobody
-> actually reads it" problem? Or am I simply too tired to parse?
-> 
-> iproute2 is welcome to use the protocol descriptions like any other
-> user space, but I'm intending to codegen kernel code based on the YAML:
+Signed-off-by: Mauro Carvalho Chehab <mchehab@kernel.org>
+Link: https://lore.kernel.org/r/afe01b7863fd655986d84ace8948f3d7aede796d.1656756450.git.mchehab@kernel.org
+Signed-off-by: Jonathan Corbet <corbet@lwn.net>
+Signed-off-by: Sasha Levin <sashal@kernel.org>
+---
+ scripts/sphinx-pre-install | 10 +++++++---
+ 1 file changed, 7 insertions(+), 3 deletions(-)
 
-Ok, that makes sense then. I was hoping that user configuration
-of network devices could be done with YAML. But probably that is
-best left networkd, netplan, and others.
+diff --git a/scripts/sphinx-pre-install b/scripts/sphinx-pre-install
+index f126ecbb0494..ae8c49734899 100755
+--- a/scripts/sphinx-pre-install
++++ b/scripts/sphinx-pre-install
+@@ -741,7 +741,7 @@ sub recommend_sphinx_upgrade()
+ 
+ 	# Get the highest version from sphinx_*/bin/sphinx-build and the
+ 	# corresponding command to activate the venv/virtenv
+-	$activate_cmd = get_virtenv();
++	($activate_cmd, $venv_ver) = get_virtenv();
+ 
+ 	# Store the highest version from Sphinx existing virtualenvs
+ 	if (($activate_cmd ne "") && ($venv_ver gt $cur_version)) {
+@@ -759,10 +759,14 @@ sub recommend_sphinx_upgrade()
+ 	# Either there are already a virtual env or a new one should be created
+ 	$need_pip = 1;
+ 
++	return if (!$latest_avail_ver);
++
+ 	# Return if the reason is due to an upgrade or not
+ 	if ($latest_avail_ver lt $rec_version) {
+ 		$rec_sphinx_upgrade = 1;
+ 	}
++
++	return $latest_avail_ver;
+ }
+ 
+ #
+@@ -820,7 +824,7 @@ sub recommend_sphinx_version($)
+ 	}
+ 
+ 	# Suggest newer versions if current ones are too old
+-	if ($latest_avail_ver && $cur_version ge $min_version) {
++	if ($latest_avail_ver && $latest_avail_ver ge $min_version) {
+ 		# If there's a good enough version, ask the user to enable it
+ 		if ($latest_avail_ver ge $rec_version) {
+ 			printf "\nNeed to activate Sphinx (version $latest_avail_ver) on virtualenv with:\n";
+@@ -897,7 +901,7 @@ sub check_needs()
+ 		}
+ 	}
+ 
+-	recommend_sphinx_upgrade();
++	my $venv_ver = recommend_sphinx_upgrade();
+ 
+ 	my $virtualenv_cmd;
+ 
+-- 
+2.35.1
 
-
-> >> On the kernel side the YAML spec can be used to generate:
-> >>  - the C uAPI header
-> >>  - documentation of the protocol as a ReST file
-> >>  - policy tables for input attribute validation
-> >>  - operation tables  
-> 
-> So how can it not be in the kernel tree?
-
-As code generator then sure.
