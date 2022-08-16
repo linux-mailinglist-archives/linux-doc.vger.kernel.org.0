@@ -2,111 +2,106 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 2F24F595783
-	for <lists+linux-doc@lfdr.de>; Tue, 16 Aug 2022 12:07:33 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id D0FB75958C6
+	for <lists+linux-doc@lfdr.de>; Tue, 16 Aug 2022 12:46:24 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S234275AbiHPKH1 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 16 Aug 2022 06:07:27 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:59188 "EHLO
+        id S235030AbiHPKpO (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 16 Aug 2022 06:45:14 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:59666 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S234264AbiHPKHC (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 16 Aug 2022 06:07:02 -0400
-Received: from mga14.intel.com (mga14.intel.com [192.55.52.115])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id EA01975399;
-        Tue, 16 Aug 2022 01:44:11 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1660639451; x=1692175451;
-  h=date:from:to:cc:subject:message-id:mime-version;
-  bh=utA9ZYYdfIzqRA7D5VhDGQl155B+SJSPa8zrvZsBoyo=;
-  b=W3X4oA0n//X/JB6no7U5QVmmgcnB9EciEP7whI6w4+mH+vP+pYS4yy91
-   5Ny1jQHp/KyxH2YDkOOlj3aAt6ByvbGRMlUs0NjZCbeXuUf7SgNggjml/
-   0DtrILzcxt1amq5eCaPsRG+U1bZ3svNhYt8THAYmZShzFYxB4L5STbtNR
-   q1OpoL03owXC43jmeyqq4hdRRilt6u86sQwIuGFBXnajam59tsWb2IXRb
-   BxBCHx7kjasZkkwOJ3MPf6mfgQbGY3ntAcfK/f1yUVheMRqjj/UrvBFQs
-   +FnCI3PQw4sxzYw3q8av1losN9oSviw1IRMC6K5Vn0RZXnIxwYouilgR8
-   Q==;
-X-IronPort-AV: E=McAfee;i="6400,9594,10440"; a="292161431"
-X-IronPort-AV: E=Sophos;i="5.93,240,1654585200"; 
-   d="scan'208";a="292161431"
-Received: from fmsmga008.fm.intel.com ([10.253.24.58])
-  by fmsmga103.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 16 Aug 2022 01:44:11 -0700
-X-IronPort-AV: E=Sophos;i="5.93,240,1654585200"; 
-   d="scan'208";a="667018321"
-Received: from rongch2-desk.sh.intel.com (HELO localhost) ([10.239.159.175])
-  by fmsmga008-auth.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 16 Aug 2022 01:44:09 -0700
-Date:   Tue, 16 Aug 2022 16:44:07 +0800
-From:   kernel test robot <rong.a.chen@intel.com>
-To:     Ashok Raj <ashok.raj@intel.com>
-Cc:     kbuild-all@lists.01.org, linux-kernel@vger.kernel.org,
-        x86@kernel.org, Borislav Petkov <bp@suse.de>,
+        with ESMTP id S234804AbiHPKo6 (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 16 Aug 2022 06:44:58 -0400
+Received: from relay.virtuozzo.com (relay.virtuozzo.com [130.117.225.111])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id A3AA43AE44;
+        Tue, 16 Aug 2022 02:54:44 -0700 (PDT)
+Received: from dev011.ch-qa.sw.ru ([172.29.1.16])
+        by relay.virtuozzo.com with esmtp (Exim 4.95)
+        (envelope-from <alexander.atanasov@virtuozzo.com>)
+        id 1oNt3q-00FxfB-Qg;
+        Tue, 16 Aug 2022 11:41:45 +0200
+From:   Alexander Atanasov <alexander.atanasov@virtuozzo.com>
+To:     Jonathan Corbet <corbet@lwn.net>
+Cc:     kernel@openvz.org,
+        Alexander Atanasov <alexander.atanasov@virtuozzo.com>,
+        linux-kernel@vger.kernel.org, linux-fsdevel@vger.kernel.org,
         linux-doc@vger.kernel.org
-Subject: [tip:x86/microcode 1/2] htmldocs:
- Documentation/admin-guide/tainted-kernels.rst:143: WARNING: Block quote ends
- without a blank line; unexpected unindent.
-Message-ID: <YvtY15K5lzCW9EmI@rongch2-desk2>
+Subject: [PATCH v2 3/4] Display inflated memory to users
+Date:   Tue, 16 Aug 2022 12:41:16 +0300
+Message-Id: <20220816094117.3144881-4-alexander.atanasov@virtuozzo.com>
+X-Mailer: git-send-email 2.31.1
+In-Reply-To: <20220816094117.3144881-1-alexander.atanasov@virtuozzo.com>
+References: <20220816094117.3144881-1-alexander.atanasov@virtuozzo.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-X-Spam-Status: No, score=-6.1 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,HEXHASH_WORD,
-        RCVD_IN_DNSWL_HI,SPF_HELO_NONE,SPF_NONE,T_SCC_BODY_TEXT_LINE
-        autolearn=ham autolearn_force=no version=3.4.6
+Content-Transfer-Encoding: 8bit
+X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00,SPF_HELO_NONE,
+        SPF_NONE,T_SCC_BODY_TEXT_LINE autolearn=ham autolearn_force=no
+        version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-tree:   https://git.kernel.org/pub/scm/linux/kernel/git/tip/tip.git x86/microcode
-head:   71da8a554f25713964a919311c324e5a32f08239
-commit: 35da8ad78e9b1a25d95a281966c439da1ef9a98a [1/2] x86/microcode: Document the whole late loading problem
-reproduce: make htmldocs
+Add InflatedTotal and InflatedFree to /proc/meminfo
 
-If you fix the issue, kindly add following tag where applicable
-Reported-by: kernel test robot <lkp@intel.com>
+Signed-off-by: Alexander Atanasov <alexander.atanasov@virtuozzo.com>
+---
+ Documentation/filesystems/proc.rst |  6 ++++++
+ fs/proc/meminfo.c                  | 10 ++++++++++
+ 2 files changed, 16 insertions(+)
 
-All warnings (new ones prefixed by >>):
-
->> Documentation/admin-guide/tainted-kernels.rst:143: WARNING: Block quote ends without a blank line; unexpected unindent.
-
-vim +143 Documentation/admin-guide/tainted-kernels.rst
-
-896dd323abbf6a Thorsten Leemhuis         2019-01-08  111  
-896dd323abbf6a Thorsten Leemhuis         2019-01-08  112   0)  ``G`` if all modules loaded have a GPL or compatible license, ``P`` if
-337c188dff4a85 Mauro Carvalho Chehab     2016-11-07  113       any proprietary module has been loaded.  Modules without a
-337c188dff4a85 Mauro Carvalho Chehab     2016-11-07  114       MODULE_LICENSE or with a MODULE_LICENSE that is not recognised by
-337c188dff4a85 Mauro Carvalho Chehab     2016-11-07  115       insmod as GPL compatible are assumed to be proprietary.
-337c188dff4a85 Mauro Carvalho Chehab     2016-11-07  116  
-896dd323abbf6a Thorsten Leemhuis         2019-01-08  117   1)  ``F`` if any module was force loaded by ``insmod -f``, ``' '`` if all
-337c188dff4a85 Mauro Carvalho Chehab     2016-11-07  118       modules were loaded normally.
-337c188dff4a85 Mauro Carvalho Chehab     2016-11-07  119  
-547f574fd9d5e3 Mathieu Chouquet-Stringer 2020-12-02  120   2)  ``S`` if the kernel is running on a processor or system that is out of
-547f574fd9d5e3 Mathieu Chouquet-Stringer 2020-12-02  121       specification: hardware has been put into an unsupported configuration,
-547f574fd9d5e3 Mathieu Chouquet-Stringer 2020-12-02  122       therefore proper execution cannot be guaranteed.
-547f574fd9d5e3 Mathieu Chouquet-Stringer 2020-12-02  123       Kernel will be tainted if, for example:
-547f574fd9d5e3 Mathieu Chouquet-Stringer 2020-12-02  124  
-547f574fd9d5e3 Mathieu Chouquet-Stringer 2020-12-02  125       - on x86: PAE is forced through forcepae on intel CPUs (such as Pentium M)
-547f574fd9d5e3 Mathieu Chouquet-Stringer 2020-12-02  126         which do not report PAE but may have a functional implementation, an SMP
-547f574fd9d5e3 Mathieu Chouquet-Stringer 2020-12-02  127         kernel is running on non officially capable SMP Athlon CPUs, MSRs are
-547f574fd9d5e3 Mathieu Chouquet-Stringer 2020-12-02  128         being poked at from userspace.
-547f574fd9d5e3 Mathieu Chouquet-Stringer 2020-12-02  129       - on arm: kernel running on certain CPUs (such as Keystone 2) without
-547f574fd9d5e3 Mathieu Chouquet-Stringer 2020-12-02  130         having certain kernel features enabled.
-547f574fd9d5e3 Mathieu Chouquet-Stringer 2020-12-02  131       - on arm64: there are mismatched hardware features between CPUs, the
-547f574fd9d5e3 Mathieu Chouquet-Stringer 2020-12-02  132         bootloader has booted CPUs in different modes.
-547f574fd9d5e3 Mathieu Chouquet-Stringer 2020-12-02  133       - certain drivers are being used on non supported architectures (such as
-547f574fd9d5e3 Mathieu Chouquet-Stringer 2020-12-02  134         scsi/snic on something else than x86_64, scsi/ips on non
-547f574fd9d5e3 Mathieu Chouquet-Stringer 2020-12-02  135         x86/x86_64/itanium, have broken firmware settings for the
-547f574fd9d5e3 Mathieu Chouquet-Stringer 2020-12-02  136         irqchip/irq-gic on arm64 ...).
-35da8ad78e9b1a Ashok Raj                 2022-08-13  137       - x86/x86_64: Microcode late loading is dangerous and will result in
-35da8ad78e9b1a Ashok Raj                 2022-08-13  138         tainting the kernel. It requires that all CPUs rendezvous to make sure
-35da8ad78e9b1a Ashok Raj                 2022-08-13  139         the update happens when the system is as quiescent as possible. However,
-35da8ad78e9b1a Ashok Raj                 2022-08-13  140         a higher priority MCE/SMI/NMI can move control flow away from that
-35da8ad78e9b1a Ashok Raj                 2022-08-13  141         rendezvous and interrupt the update, which can be detrimental to the
-35da8ad78e9b1a Ashok Raj                 2022-08-13  142         machine.
-35da8ad78e9b1a Ashok Raj                 2022-08-13 @143  e
-
+diff --git a/Documentation/filesystems/proc.rst b/Documentation/filesystems/proc.rst
+index e7aafc82be99..690e1b90ffee 100644
+--- a/Documentation/filesystems/proc.rst
++++ b/Documentation/filesystems/proc.rst
+@@ -991,6 +991,8 @@ Example output. You may not have all of these fields.
+     VmallocUsed:       40444 kB
+     VmallocChunk:          0 kB
+     Percpu:            29312 kB
++    InflatedTotal:   2097152 kB
++    InflatedFree:          0 kB
+     HardwareCorrupted:     0 kB
+     AnonHugePages:   4149248 kB
+     ShmemHugePages:        0 kB
+@@ -1138,6 +1140,10 @@ VmallocChunk
+ Percpu
+               Memory allocated to the percpu allocator used to back percpu
+               allocations. This stat excludes the cost of metadata.
++InflatedTotal and InflatedFree
++               Amount of memory that is inflated by the balloon driver.
++               Due to differences among the drivers inflated memory
++               is subtracted from TotalRam or from MemFree.
+ HardwareCorrupted
+               The amount of RAM/memory in KB, the kernel identifies as
+               corrupted.
+diff --git a/fs/proc/meminfo.c b/fs/proc/meminfo.c
+index 6e89f0e2fd20..f72af204151a 100644
+--- a/fs/proc/meminfo.c
++++ b/fs/proc/meminfo.c
+@@ -16,6 +16,9 @@
+ #ifdef CONFIG_CMA
+ #include <linux/cma.h>
+ #endif
++#ifdef CONFIG_MEMORY_BALLOON
++#include <linux/balloon_common.h>
++#endif
+ #include <asm/page.h>
+ #include "internal.h"
+ 
+@@ -153,6 +156,13 @@ static int meminfo_proc_show(struct seq_file *m, void *v)
+ 		    global_zone_page_state(NR_FREE_CMA_PAGES));
+ #endif
+ 
++#ifdef CONFIG_MEMORY_BALLOON
++	seq_printf(m,  "InflatedTotal:  %8ld kB\n",
++		atomic_long_read(&mem_balloon_inflated_total_kb));
++	seq_printf(m,  "InflatedFree:   %8ld kB\n",
++		atomic_long_read(&mem_balloon_inflated_free_kb));
++#endif
++
+ 	hugetlb_report_meminfo(m);
+ 
+ 	arch_report_meminfo(m);
 -- 
-0-DAY CI Kernel Test Service
-https://01.org/lkp
+2.31.1
 
