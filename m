@@ -2,77 +2,80 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 910AA59573E
-	for <lists+linux-doc@lfdr.de>; Tue, 16 Aug 2022 11:56:47 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 12D1959583B
+	for <lists+linux-doc@lfdr.de>; Tue, 16 Aug 2022 12:31:02 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S234116AbiHPJ4Q (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 16 Aug 2022 05:56:16 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:49534 "EHLO
+        id S234500AbiHPKa5 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 16 Aug 2022 06:30:57 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:47014 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S234218AbiHPJz0 (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 16 Aug 2022 05:55:26 -0400
-Received: from frasgout.his.huawei.com (frasgout.his.huawei.com [185.176.79.56])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 6640C86FC5;
-        Tue, 16 Aug 2022 01:40:17 -0700 (PDT)
-Received: from fraeml709-chm.china.huawei.com (unknown [172.18.147.207])
-        by frasgout.his.huawei.com (SkyGuard) with ESMTP id 4M6Pf11nsMz688pK;
-        Tue, 16 Aug 2022 16:37:13 +0800 (CST)
-Received: from fraeml714-chm.china.huawei.com (10.206.15.33) by
- fraeml709-chm.china.huawei.com (10.206.15.37) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2375.24; Tue, 16 Aug 2022 10:40:14 +0200
-Received: from fraeml714-chm.china.huawei.com ([10.206.15.33]) by
- fraeml714-chm.china.huawei.com ([10.206.15.33]) with mapi id 15.01.2375.024;
- Tue, 16 Aug 2022 10:40:14 +0200
-From:   Roberto Sassu <roberto.sassu@huawei.com>
-To:     KP Singh <kpsingh@kernel.org>
-CC:     "ast@kernel.org" <ast@kernel.org>,
-        "daniel@iogearbox.net" <daniel@iogearbox.net>,
-        "andrii@kernel.org" <andrii@kernel.org>,
-        "martin.lau@linux.dev" <martin.lau@linux.dev>,
-        "song@kernel.org" <song@kernel.org>, "yhs@fb.com" <yhs@fb.com>,
-        "john.fastabend@gmail.com" <john.fastabend@gmail.com>,
-        "sdf@google.com" <sdf@google.com>,
-        "haoluo@google.com" <haoluo@google.com>,
-        "jolsa@kernel.org" <jolsa@kernel.org>,
-        "corbet@lwn.net" <corbet@lwn.net>,
-        "dhowells@redhat.com" <dhowells@redhat.com>,
-        "jarkko@kernel.org" <jarkko@kernel.org>,
-        "rostedt@goodmis.org" <rostedt@goodmis.org>,
-        "mingo@redhat.com" <mingo@redhat.com>,
-        "paul@paul-moore.com" <paul@paul-moore.com>,
-        "jmorris@namei.org" <jmorris@namei.org>,
-        "serge@hallyn.com" <serge@hallyn.com>,
-        "shuah@kernel.org" <shuah@kernel.org>,
-        "bpf@vger.kernel.org" <bpf@vger.kernel.org>,
-        "linux-doc@vger.kernel.org" <linux-doc@vger.kernel.org>,
-        "keyrings@vger.kernel.org" <keyrings@vger.kernel.org>,
-        "linux-security-module@vger.kernel.org" 
-        <linux-security-module@vger.kernel.org>,
-        "linux-kselftest@vger.kernel.org" <linux-kselftest@vger.kernel.org>,
-        "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>
-Subject: RE: [PATCH v10 5/9] bpf: Add bpf_lookup_*_key() and bpf_key_put()
- kfuncs
-Thread-Topic: [PATCH v10 5/9] bpf: Add bpf_lookup_*_key() and bpf_key_put()
- kfuncs
-Thread-Index: AQHYrNrI3xbltKneMkianwQkzvowha2qT5IAgADB09A=
-Date:   Tue, 16 Aug 2022 08:40:14 +0000
-Message-ID: <7278db1e90de4c7bb669449e897d1946@huawei.com>
-References: <20220810165932.2143413-1-roberto.sassu@huawei.com>
- <20220810165932.2143413-6-roberto.sassu@huawei.com>
- <CACYkzJ718fr2TsvX0JPhTRiMQH8=HwaxLShrETLvrhPUy2p8OQ@mail.gmail.com>
-In-Reply-To: <CACYkzJ718fr2TsvX0JPhTRiMQH8=HwaxLShrETLvrhPUy2p8OQ@mail.gmail.com>
-Accept-Language: en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [10.221.98.153]
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+        with ESMTP id S234698AbiHPKa0 (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 16 Aug 2022 06:30:26 -0400
+Received: from mout.kundenserver.de (mout.kundenserver.de [212.227.126.135])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id E20D984EF6;
+        Tue, 16 Aug 2022 01:16:22 -0700 (PDT)
+Received: from mail-ej1-f41.google.com ([209.85.218.41]) by
+ mrelayeu.kundenserver.de (mreue009 [213.165.67.97]) with ESMTPSA (Nemesis) id
+ 1MuDPh-1nVmG00fXh-00ucal; Tue, 16 Aug 2022 10:16:21 +0200
+Received: by mail-ej1-f41.google.com with SMTP id a7so17567241ejp.2;
+        Tue, 16 Aug 2022 01:16:21 -0700 (PDT)
+X-Gm-Message-State: ACgBeo33ceRETs9/Jye2QbXxzU5AEAna2/4O5cDeSTf88pRW+k587zJF
+        RQYlmByLPR1eD1q8YbKGd7/q3DHxJT/QjiHV0e0=
+X-Google-Smtp-Source: AA6agR6iJ0nwhhROioKsW3KiCcnkE21PLtVwi8+SbpiQ4ZkczWhJ8i5DpkLee3nWEvIKF41nGXZNZm3jeBE6JuFII7g=
+X-Received: by 2002:a17:906:8a67:b0:738:7bcd:dca1 with SMTP id
+ hy7-20020a1709068a6700b007387bcddca1mr1923189ejc.547.1660637780770; Tue, 16
+ Aug 2022 01:16:20 -0700 (PDT)
 MIME-Version: 1.0
-X-CFilter-Loop: Reflected
-X-Spam-Status: No, score=-4.2 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_MED,
-        RCVD_IN_MSPIKE_H2,SPF_HELO_NONE,SPF_PASS,T_SCC_BODY_TEXT_LINE
+References: <20220816070311.89186-1-marcan@marcan.st>
+In-Reply-To: <20220816070311.89186-1-marcan@marcan.st>
+From:   Arnd Bergmann <arnd@arndb.de>
+Date:   Tue, 16 Aug 2022 10:16:04 +0200
+X-Gmail-Original-Message-ID: <CAK8P3a03pfrPzjnx1tB5z0HcKnY=JL=y+F8PMQDpc=Bavs3UCA@mail.gmail.com>
+Message-ID: <CAK8P3a03pfrPzjnx1tB5z0HcKnY=JL=y+F8PMQDpc=Bavs3UCA@mail.gmail.com>
+Subject: Re: [PATCH] locking/atomic: Make test_and_*_bit() ordered on failure
+To:     Hector Martin <marcan@marcan.st>
+Cc:     Will Deacon <will@kernel.org>,
+        Peter Zijlstra <peterz@infradead.org>,
+        Arnd Bergmann <arnd@arndb.de>, Ingo Molnar <mingo@kernel.org>,
+        Alan Stern <stern@rowland.harvard.edu>,
+        Andrea Parri <parri.andrea@gmail.com>,
+        Boqun Feng <boqun.feng@gmail.com>,
+        Nicholas Piggin <npiggin@gmail.com>,
+        David Howells <dhowells@redhat.com>,
+        Jade Alglave <j.alglave@ucl.ac.uk>,
+        Luc Maranget <luc.maranget@inria.fr>,
+        "Paul E. McKenney" <paulmck@kernel.org>,
+        Akira Yokosawa <akiyks@gmail.com>,
+        Daniel Lustig <dlustig@nvidia.com>,
+        Joel Fernandes <joel@joelfernandes.org>,
+        Mark Rutland <mark.rutland@arm.com>,
+        Jonathan Corbet <corbet@lwn.net>, Tejun Heo <tj@kernel.org>,
+        jirislaby@kernel.org, Marc Zyngier <maz@kernel.org>,
+        Catalin Marinas <catalin.marinas@arm.com>,
+        Oliver Neukum <oneukum@suse.com>,
+        Linus Torvalds <torvalds@linux-foundation.org>,
+        linux-kernel@vger.kernel.org, linux-arch@vger.kernel.org,
+        linux-doc@vger.kernel.org, linux-arm-kernel@lists.infradead.org,
+        Asahi Linux <asahi@lists.linux.dev>, stable@vger.kernel.org
+Content-Type: text/plain; charset="UTF-8"
+X-Provags-ID: V03:K1:Jg5mkr7l+zrNyfFzBvs5i1+/l2UlfgBGsjuyilNfjoCAl7e0vIK
+ TicO0qiEDijREu19FTd6lsJ/xG/qL+EIpVuiumbZd62aIFx2OXh1gQ+2geNFdBVwvelIaws
+ U/qaLsKuC7aXaYHFXRmlVqfYYgxXkdSQJQ1VV3jTdwC81L27G6FvdY7TSzor0+xh/J7PEDb
+ qG4zsEw7nQqMDQnoYIF+Q==
+X-UI-Out-Filterresults: notjunk:1;V03:K0:0YAPTbXMD6Q=:Cpy3XZMvFH2GhcX0VVyvOx
+ 0YzlCxR6gGq9Pz3C5g7UZVwFHunn/VyMHkyx8i8pVxdcNhLTiZhcOSq/VKk3uS69cn8rThieC
+ 191ZejESr8C3yo26hkMLJcrOk6z9Vo7EeTMVzPT1SrhFNJeg029pH9llcmlNznfIfSq2l/yIi
+ n70ffHRZBUVLLcRASCGyf6Ht2a1xAvBCw+wtxUjILb324Hqr1BY9nDl2Xhb4YcnD4rhHUmnvd
+ CBPw8M17qfmdxtn7bSaRbZ2gXnGca/UQLP9Arj4y0Rc4Yq1ZCdEsOum560JZuBd4IH5HWkw2d
+ aPrVpwDiOYHnxK2tKkQOIf6N1TeXIP/RuU3RGT2B6itpK1tCO1VFRa4r/75bQYTtPGLPsY5wE
+ 9BC2YTZVmza2ADitrSTrAO6yCOE7sAepV6ZIg+KmGB+v5uJhhicb7OoTQ9/AWTW/vPCO6qvjS
+ Gc8VBh9rDEoGHZF0SBxY5w+AEPmdykpWxbn1iYKASCGStVasZHrKR/JpV7ldQ1gRmImc0yNYw
+ Ch51lpl7AeGzkZwYOZrXSR4OWKc5bPxjw/tliWPkeHuyhdZH59NvYSqE9ZJ7/JRazAOgMS5HN
+ j5ohyglFYFGM5PB7pLegV6Ze4tuhGTmZp5/WCMLXciq8C6sSZQqLEjYC63qBIQ6OagxNpPDed
+ a1kSkcKSdgzGaBKyW/yTu32BNgyFTKIsdH4C8Jj8TzyD5WZoU/astR6yZN6UyZw8WfXyFt0rl
+ gNh0wPeo7rDK6GMzLvZt8KlWzdZLv/GwAUZCJw==
+X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_NONE,
+        RCVD_IN_MSPIKE_H2,SPF_HELO_NONE,SPF_NONE,T_SCC_BODY_TEXT_LINE
         autolearn=ham autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
@@ -80,14 +83,40 @@ Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-PiBGcm9tOiBLUCBTaW5naCBbbWFpbHRvOmtwc2luZ2hAa2VybmVsLm9yZ10NCj4gU2VudDogRnJp
-ZGF5LCBBdWd1c3QgMTIsIDIwMjIgMjo1MCBBTQ0KDQpbLi4uXQ0KDQo+ID4gKy8qKg0KPiA+ICsg
-KiBicGZfa2V5X3B1dCAtIGRlY3JlbWVudCBrZXkgcmVmZXJlbmNlIGNvdW50IGlmIGtleSBpcyB2
-YWxpZCBhbmQgZnJlZQ0KPiBicGZfa2V5DQo+ID4gKyAqIEBia2V5OiBicGZfa2V5IHN0cnVjdHVy
-ZQ0KPiA+ICsgKg0KPiA+ICsgKiBEZWNyZW1lbnQgdGhlIHJlZmVyZW5jZSBjb3VudCBvZiB0aGUg
-a2V5IGluc2lkZSAqYmtleSosIGlmIHRoZSBwb2ludGVyDQo+ID4gKyAqIGlzIHZhbGlkLCBhbmQg
-ZnJlZSAqYmtleSouDQo+ID4gKyAqLw0KPiANCj4gVGhpcyBpcyBtb3JlIG9mIGEgc3R5bGUgdGhp
-bmcgYnV0IHlvdXIgY29tbWVudCBsaXRlcmFsbHkgZGVzY3JpYmVzIHRoZQ0KPiBzbWFsbCBmdW5j
-dGlvbg0KPiBiZWxvdy4gRG8gd2UgcmVhbGx5IG5lZWQgdGhpcz8NCg0KVGhhbmtzIGZvciB0aGUg
-cmV2aWV3LCBLUC4gSnVzdCBrZXB0IHRoaXMsIHRvIGZvbGxvdyB0aGUgc3R5bGUgb2Yga2VybmVs
-DQpkb2N1bWVudGF0aW9uIGZvciBmdW5jdGlvbnMuDQoNClJvYmVydG8NCg==
+On Tue, Aug 16, 2022 at 9:03 AM Hector Martin <marcan@marcan.st> wrote:
+>
+> These operations are documented as always ordered in
+> include/asm-generic/bitops/instrumented-atomic.h, and producer-consumer
+> type use cases where one side needs to ensure a flag is left pending
+> after some shared data was updated rely on this ordering, even in the
+> failure case.
+>
+> This is the case with the workqueue code, which currently suffers from a
+> reproducible ordering violation on Apple M1 platforms (which are
+> notoriously out-of-order) that ends up causing the TTY layer to fail to
+> deliver data to userspace properly under the right conditions. This
+> change fixes that bug.
+>
+> Change the documentation to restrict the "no order on failure" story to
+> the _lock() variant (for which it makes sense), and remove the
+> early-exit from the generic implementation, which is what causes the
+> missing barrier semantics in that case. Without this, the remaining
+> atomic op is fully ordered (including on ARM64 LSE, as of recent
+> versions of the architecture spec).
+>
+> Suggested-by: Linus Torvalds <torvalds@linux-foundation.org>
+> Cc: stable@vger.kernel.org
+> Fixes: e986a0d6cb36 ("locking/atomics, asm-generic/bitops/atomic.h: Rewrite using atomic_*() APIs")
+> Fixes: 61e02392d3c7 ("locking/atomic/bitops: Document and clarify ordering semantics for failed test_and_{}_bit()")
+> Signed-off-by: Hector Martin <marcan@marcan.st>
+> ---
+>  Documentation/atomic_bitops.txt     | 2 +-
+>  include/asm-generic/bitops/atomic.h | 6 ------
+
+I double-checked all the architecture specific implementations to ensure
+that the asm-generic one is the only one that needs the fix.
+
+I assume this gets merged through the locking tree or that Linus picks it up
+directly, not through my asm-generic tree.
+
+Reviewed-by: Arnd Bergmann <arnd@arndb.de>
