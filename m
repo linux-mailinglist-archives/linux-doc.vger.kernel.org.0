@@ -2,127 +2,69 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 3561559828C
-	for <lists+linux-doc@lfdr.de>; Thu, 18 Aug 2022 13:55:23 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id AFE57598327
+	for <lists+linux-doc@lfdr.de>; Thu, 18 Aug 2022 14:28:49 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S244326AbiHRLyk (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 18 Aug 2022 07:54:40 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:43838 "EHLO
+        id S244240AbiHRM2c (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 18 Aug 2022 08:28:32 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:52518 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S244197AbiHRLyi (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Thu, 18 Aug 2022 07:54:38 -0400
-Received: from ams.source.kernel.org (ams.source.kernel.org [145.40.68.75])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 702CB7F12D;
-        Thu, 18 Aug 2022 04:54:36 -0700 (PDT)
-Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
-        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
-        (No client certificate requested)
-        by ams.source.kernel.org (Postfix) with ESMTPS id 22C1EB8203A;
-        Thu, 18 Aug 2022 11:54:35 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 5EB17C433C1;
-        Thu, 18 Aug 2022 11:54:26 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-        s=k20201202; t=1660823673;
-        bh=OOp4XCPaOSFAdQWQdL7x7S/vwQa/o7fKz+ynmdHyLg4=;
-        h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-        b=DV2MuYBkRWWKa0Rs0voJoSLDxQUKzzOSYe//JgzHbHdSieYD7vWcHpu2Q8LoPSaI3
-         FnZqOspjyW2rNi6V6qpw1SQK2+fwaxpAGvK2k4+LSD9O3ZLiUXeoCq1F54Jjv3OeOF
-         NYuTsRPKmmWPX6JVM3bvHxW6aOcu6+OoZgK9EhnW/YuvhBAMoICkRcaP0kJBFre+Dm
-         JMxHe1yocZDaGtIZwU2vsmxf55iLt12gUUG2tjGMk5a7ko/bARUZAV7vcn5ZTVqOja
-         21TqUfUXsYqq0IH+tl6Opvtn5sB38Fu5rm0QFGx7bKdL0fLyrkFSOyysCuQRPZCgdU
-         IeQpBLkC3FoHA==
-Date:   Thu, 18 Aug 2022 12:54:22 +0100
-From:   Mark Brown <broonie@kernel.org>
-To:     Matti Vaittinen <mazziesaccount@gmail.com>
-Cc:     Matti Vaittinen <matti.vaittinen@fi.rohmeurope.com>,
-        dri-devel@lists.freedesktop.org,
-        Johan Hovold <johan+linaro@kernel.org>,
-        Neil Armstrong <narmstrong@baylibre.com>,
-        Lars-Peter Clausen <lars@metafoo.de>,
-        Kevin Hilman <khilman@baylibre.com>,
-        linux-kernel@vger.kernel.org, Daniel Vetter <daniel@ffwll.ch>,
-        linux-amlogic@lists.infradead.org,
-        Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
-        linux-doc@vger.kernel.org,
-        Laurent Pinchart <Laurent.pinchart@ideasonboard.com>,
-        Jonathan Cameron <jic23@kernel.org>,
-        Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
-        Liam Girdwood <lgirdwood@gmail.com>,
-        Michael Hennerich <Michael.Hennerich@analog.com>,
-        Miaoqian Lin <linmq006@gmail.com>,
-        linux-arm-kernel@lists.infradead.org,
-        Alexandru Tachici <alexandru.tachici@analog.com>,
-        Jerome Brunet <jbrunet@baylibre.com>,
-        Andrzej Hajda <andrzej.hajda@intel.com>,
-        Jonathan Corbet <corbet@lwn.net>,
-        Guenter Roeck <linux@roeck-us.net>,
-        Jonas Karlman <jonas@kwiboo.se>,
-        Stephen Boyd <sboyd@kernel.org>,
-        Lorenzo Bianconi <lorenzo@kernel.org>,
-        Michael Turquette <mturquette@baylibre.com>,
-        Jernej Skrabec <jernej.skrabec@gmail.com>,
-        Martin Blumenstingl <martin.blumenstingl@googlemail.com>,
-        Jean Delvare <jdelvare@suse.com>,
-        Alexandru Ardelean <aardelean@deviqon.com>,
-        linux-hwmon@vger.kernel.org, linux-clk@vger.kernel.org,
-        Nuno =?iso-8859-1?Q?S=E1?= <nuno.sa@analog.com>,
-        Robert Foss <robert.foss@linaro.org>,
-        Aswath Govindraju <a-govindraju@ti.com>,
-        David Airlie <airlied@linux.ie>, linux-iio@vger.kernel.org
-Subject: Re: (subset) [PATCH v2 0/7] Devm helpers for regulator get and enable
-Message-ID: <Yv4obo9MUw+Lc+nr@sirena.org.uk>
-References: <cover.1660292316.git.mazziesaccount@gmail.com>
- <166057828406.697572.228317501909350108.b4-ty@kernel.org>
- <52d307d7-04f2-89fd-ff4b-9a6c0d247350@gmail.com>
+        with ESMTP id S244673AbiHRM22 (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Thu, 18 Aug 2022 08:28:28 -0400
+X-Greylist: delayed 1830 seconds by postgrey-1.37 at lindbergh.monkeyblade.net; Thu, 18 Aug 2022 05:28:17 PDT
+Received: from delivery.e-purifier.com (delivery.e-purifier.com [197.234.175.133])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 10CF29FC0;
+        Thu, 18 Aug 2022 05:28:16 -0700 (PDT)
+Authentication-Results: delivery.e-purifier.com;
+        spf=pass (e-purifier.com: domain of shandud@telkomsa.net designates 105.224.1.22 as permitted sender) smtp.mailfrom=shandud@telkomsa.net;
+Received: from zmmtaout1.telkomsa.net ([105.224.1.22])
+        by delivery.e-purifier.com  with ESMTP id 27IBuiqY021649-27IBuiqa021649
+        (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NO);
+        Thu, 18 Aug 2022 13:56:45 +0200
+Received: from localhost (localhost [127.0.0.1])
+        by zmmtaout1.telkomsa.net (Postfix) with ESMTP id 8501C40C97;
+        Thu, 18 Aug 2022 13:56:41 +0200 (SAST)
+Received: from zmmtaout1.telkomsa.net ([127.0.0.1])
+        by localhost (zmmtaout1.telkomsa.net [127.0.0.1]) (amavisd-new, port 10032)
+        with ESMTP id Uf5_VPouWiAE; Thu, 18 Aug 2022 13:56:40 +0200 (SAST)
+Received: from localhost (localhost [127.0.0.1])
+        by zmmtaout1.telkomsa.net (Postfix) with ESMTP id BCA1D43574;
+        Thu, 18 Aug 2022 13:56:39 +0200 (SAST)
+X-Virus-Scanned: amavisd-new at zmmtaout1.telkomsa.net
+Received: from zmmtaout1.telkomsa.net ([127.0.0.1])
+        by localhost (zmmtaout1.telkomsa.net [127.0.0.1]) (amavisd-new, port 10026)
+        with ESMTP id k99u89ZNWg6u; Thu, 18 Aug 2022 13:56:39 +0200 (SAST)
+Received: from zmstore6.telkomsa.net (unknown [105.224.1.35])
+        by zmmtaout1.telkomsa.net (Postfix) with ESMTP id 6B51140BF9;
+        Thu, 18 Aug 2022 13:56:19 +0200 (SAST)
+Date:   Thu, 18 Aug 2022 13:56:19 +0200 (SAST)
+From:   shandud@telkomsa.net
+Message-ID: <295667432.5597905.1660823779355.JavaMail.zimbra@telkomsa.net>
+Subject: Your Urgent Responds Is Highly Needed
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
-        protocol="application/pgp-signature"; boundary="MKmYY9GsmMLl3nVC"
-Content-Disposition: inline
-In-Reply-To: <52d307d7-04f2-89fd-ff4b-9a6c0d247350@gmail.com>
-X-Cookie: Logic is the chastity belt of the mind!
-X-Spam-Status: No, score=-7.1 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_HI,
-        SPF_HELO_NONE,SPF_PASS,T_SCC_BODY_TEXT_LINE autolearn=ham
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: 7bit
+X-Originating-IP: [185.174.159.18]
+X-Mailer: Zimbra 8.8.15_GA_4372 (zclient/8.8.15_GA_4372)
+Thread-Index: 2k8tG4stwGUeSn2s1DC9XfsNTgJfbg==
+Thread-Topic: Your Urgent Responds Is Highly Needed
+X-FE-Last-Public-Client-IP: 105.224.1.22
+X-FE-Policy-ID: 5:3:2:SYSTEM
+X-Spam-Status: No, score=1.8 required=5.0 tests=BAYES_50,MISSING_HEADERS,
+        SPF_HELO_NONE,T_SCC_BODY_TEXT_LINE,T_SPF_TEMPERROR autolearn=no
         autolearn_force=no version=3.4.6
+X-Spam-Level: *
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
+To:     unlisted-recipients:; (no To-header on input)
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
+Good Day,
 
---MKmYY9GsmMLl3nVC
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+I hope my message meets you well! I'm contacting you regarding a proposal that has something in common with your profile on linkdin, kindly contact me as urgent as possible for more details on my private email here: nikkifenton79@gmail.com
 
-On Thu, Aug 18, 2022 at 02:33:53PM +0300, Matti Vaittinen wrote:
-> On 8/15/22 18:44, Mark Brown wrote:
-
-> > [2/7] regulator: Add devm helpers for get and enable
-> >        (no commit info)
-
-> I was planning to send out the v3 (where IIO patches are no longer squashed
-> into one). I didn't spot the above mentioned patch 2/7 from
-> regulator/for-next. I'd just like to get confirmation the 2/7 was not merged
-> even though it's mentioned in this mail before re-spinning the series with
-> it.
-
-It's not there yet (that's the "no commit info"), but it is queued for
-today.
-
---MKmYY9GsmMLl3nVC
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQEzBAABCgAdFiEEreZoqmdXGLWf4p/qJNaLcl1Uh9AFAmL+KG4ACgkQJNaLcl1U
-h9ChKgf+MqQYNLGgZ/WEAylHrK/Uzrw+LnjUXAyMBb/vZjdl3DVYOv+/LtcGpk2B
-vMl+H2cT2aA3eF56DroX4dIyRauM8a7w9PNeqKCTRYzdeJ91Vp1q0gOUIbKHxfmu
-LJkxtl3b2n7/O7J+OrJ1HljR3z2JxBD4lmqH4+vKKMNwPIh0fn5GAbg8/O2M0yv5
-NEJYI6TxlO4FG1bncptZI3H7tlGjV+MAYgemtJlJnLkpiS3OaOfTS6QeDAtgI0QE
-oU6UoQtU2ZSP0W/dlLys3zAGz2wI7/vlprZAeabP2UyUWDIRlRN8GjTI/YkwClpr
-VsgNrCyAZbv1afHLckm3stj8/Czk8Q==
-=mvEp
------END PGP SIGNATURE-----
-
---MKmYY9GsmMLl3nVC--
+Regards,
+Nikki Fenton
+nikkifenton79@gmail.com
