@@ -2,103 +2,197 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 5A642598B01
-	for <lists+linux-doc@lfdr.de>; Thu, 18 Aug 2022 20:20:59 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 85472598C27
+	for <lists+linux-doc@lfdr.de>; Thu, 18 Aug 2022 20:56:17 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S233693AbiHRSUw (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 18 Aug 2022 14:20:52 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:55852 "EHLO
+        id S243002AbiHRS4D (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 18 Aug 2022 14:56:03 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:53136 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S231651AbiHRSUv (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Thu, 18 Aug 2022 14:20:51 -0400
-Received: from mga06.intel.com (mga06b.intel.com [134.134.136.31])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 0C23ACE306;
-        Thu, 18 Aug 2022 11:20:51 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1660846851; x=1692382851;
-  h=date:from:to:cc:subject:message-id:references:
-   mime-version:in-reply-to;
-  bh=ULlY3fpvctgrPTNh/dIyRvXpP5N6EgQSL6XrK00sqzY=;
-  b=hvou1AxCNquka03XZa2GztBXvLyI00wmt3bCfLRd/nLeHuZWSEZtQOPc
-   XUbAuxosHHH/MVAm8RqNi/+8kv6XeGgj3A2lHJbibJzkCo1IcpeuTc2Hz
-   EIS72gwmi5LzQfw62rr/hRwuI2FtvpTrvjnvMxqPDQNQzQoppayQnwMf4
-   nQ6DHDAMJaa654orhG300XbXf3UreMxGrOv0IHLzL90KvMI7cQFm5bthH
-   iuP/amk62gqMYfqEgejNOMU3ZGjIsEGoerXeKyojzinyHfngXPfhECDYe
-   JX+MqAKXUQI9AnrKu496Ye9jIXO2irMKW8E/w7GaDOpjAQasuDOuxxW2z
-   w==;
-X-IronPort-AV: E=McAfee;i="6500,9779,10443"; a="354573989"
-X-IronPort-AV: E=Sophos;i="5.93,247,1654585200"; 
-   d="scan'208";a="354573989"
-Received: from orsmga003.jf.intel.com ([10.7.209.27])
-  by orsmga104.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 18 Aug 2022 11:20:50 -0700
-X-IronPort-AV: E=Sophos;i="5.93,247,1654585200"; 
-   d="scan'208";a="558638429"
-Received: from rvmiele-mobl1.amr.corp.intel.com (HELO desk) ([10.209.23.54])
-  by orsmga003-auth.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 18 Aug 2022 11:20:50 -0700
-Date:   Thu, 18 Aug 2022 11:20:48 -0700
-From:   Pawan Gupta <pawan.kumar.gupta@linux.intel.com>
-To:     Borislav Petkov <bp@alien8.de>
-Cc:     Jonathan Corbet <corbet@lwn.net>,
-        Thomas Gleixner <tglx@linutronix.de>,
-        Ingo Molnar <mingo@redhat.com>,
-        Dave Hansen <dave.hansen@linux.intel.com>, x86@kernel.org,
-        "H. Peter Anvin" <hpa@zytor.com>, linux-doc@vger.kernel.org,
-        linux-kernel@vger.kernel.org, tony.luck@intel.com,
-        antonio.gomez.iglesias@linux.intel.com,
-        Daniel Sneddon <daniel.sneddon@linux.intel.com>,
-        andrew.cooper3@citrix.com, Josh Poimboeuf <jpoimboe@kernel.org>
-Subject: Re: [PATCH v2] x86/bugs: Add "unknown" reporting for MMIO Stale Data
-Message-ID: <20220818182048.lsgtc52g6va376v2@desk>
-References: <79d2455c75bdbad4e68a3843fe1c1e67826008e6.1659562129.git.pawan.kumar.gupta@linux.intel.com>
- <Yv4PmGS98IDZ7ujH@zn.tnic>
+        with ESMTP id S230250AbiHRS4A (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Thu, 18 Aug 2022 14:56:00 -0400
+Received: from mail-il1-x135.google.com (mail-il1-x135.google.com [IPv6:2607:f8b0:4864:20::135])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 8FF12BFAA6
+        for <linux-doc@vger.kernel.org>; Thu, 18 Aug 2022 11:55:59 -0700 (PDT)
+Received: by mail-il1-x135.google.com with SMTP id z8so1286947ile.0
+        for <linux-doc@vger.kernel.org>; Thu, 18 Aug 2022 11:55:59 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=joelfernandes.org; s=google;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:from:to:cc;
+        bh=o9IqWqTExqfvAFZ3y/aPtmNVxALGEdclMGoLQukyCMs=;
+        b=UpgEzYK8fvk/arvCh/WKzNm+H/ueOgS7/lFGRNPT7ffAwaZk7iLif5Ej4qyizteQM/
+         jGOyzZ/shwlzi+uBcSvJjlcO6hxfCTDOZwa7TGYutJ3eXUqzHkzBUQbVEwynj1fnXhmQ
+         v9haHLPPuushmrmvU2QJ2eIFgPDdb6R30w4K8=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:x-gm-message-state:from:to:cc;
+        bh=o9IqWqTExqfvAFZ3y/aPtmNVxALGEdclMGoLQukyCMs=;
+        b=ttGlfCd5KIHvQmAXgOoG4tyUxNZUo8L0s4cFzgvAwBh/FJfC7T1caXhApzmRe1OQmm
+         ZPyV9SbULz7aV2H3xUo3ZAsZdmtzLGxFZpTbVw/5jX/wRN1UeORHr/OQ2aTvmaScp7jV
+         9HSMgqyiCpvu1eZQYzzUwul86E1k2knQoFGk2GCw/OkUDTpsIw3WcAlEKCx3ecvzNZTa
+         1wg64kXOT+dwpCG1clVzgSaFhp0e/ES6koj1XWMzX+DMXSRLBHev6f08mgiFMAzo2/ga
+         uJLRb+qZ4NZdXOL0sNVCwH0Nvwi7TQM7xcZ6MTDsv2ZupTXEYCqxuLhMwaFRu7x6SG6w
+         mTdA==
+X-Gm-Message-State: ACgBeo0qrfgumxHLySiZTF/9NeHutZvh4tzMjlJS2h9Sf+OgdWhn32BQ
+        BK1MSK8mUzJzcGxSWuGC8nAc4x9lmmG5FTxg4cgITw==
+X-Google-Smtp-Source: AA6agR4DrI/Jhj5BsFj/OILFnVRNJfDhmvWXyKUgfnFsK76LWPDPerPHF3jneiEap7xzxQhz/8yowLU6hRy0PRVt8Ks=
+X-Received: by 2002:a05:6e02:1c84:b0:2e5:b635:c6bd with SMTP id
+ w4-20020a056e021c8400b002e5b635c6bdmr2088909ill.190.1660848958971; Thu, 18
+ Aug 2022 11:55:58 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <Yv4PmGS98IDZ7ujH@zn.tnic>
-X-Spam-Status: No, score=-4.3 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_EF,RCVD_IN_DNSWL_MED,SPF_HELO_NONE,
-        SPF_NONE,T_SCC_BODY_TEXT_LINE,URIBL_BLOCKED autolearn=ham
-        autolearn_force=no version=3.4.6
+References: <20220628145552.349839-1-xiehuan09@gmail.com> <20220628145552.349839-5-xiehuan09@gmail.com>
+ <Yv5gkKnufS7CUq9A@google.com> <CAEr6+ED7UovW1BbrK4s5tCRrTrfkESpa4m3VO4a4PBAY9nK_JA@mail.gmail.com>
+ <CAEXW_YQAFVJRe9mUnR1HAXvYDiQ3jCwrKhO52t8O=bxb_qSCzQ@mail.gmail.com> <CAEr6+EBC3MfqGZQ8zqLhr6P1VFkU2Hs9JsM-mqGBXWKLcAXkAA@mail.gmail.com>
+In-Reply-To: <CAEr6+EBC3MfqGZQ8zqLhr6P1VFkU2Hs9JsM-mqGBXWKLcAXkAA@mail.gmail.com>
+From:   Joel Fernandes <joel@joelfernandes.org>
+Date:   Thu, 18 Aug 2022 14:55:47 -0400
+Message-ID: <CAEXW_YTJGbGWZkmCndVqXaM=N_6ZuvmcxDrcgTaHjCEMyvXeuQ@mail.gmail.com>
+Subject: Re: [PATCH v14 4/4] Documentation: trace/objtrace: Add documentation
+ for objtrace
+To:     Jeff Xie <xiehuan09@gmail.com>
+Cc:     Steven Rostedt <rostedt@goodmis.org>,
+        Ingo Molnar <mingo@redhat.com>,
+        Masami Hiramatsu <mhiramat@kernel.org>,
+        Tom Zanussi <zanussi@kernel.org>,
+        LKML <linux-kernel@vger.kernel.org>, chensong_2000@189.cn,
+        Jonathan Corbet <corbet@lwn.net>,
+        Bagas Sanjaya <bagasdotme@gmail.com>,
+        "open list:DOCUMENTATION" <linux-doc@vger.kernel.org>
+Content-Type: text/plain; charset="UTF-8"
+X-Spam-Status: No, score=-2.1 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_NONE,
+        SPF_HELO_NONE,SPF_PASS,T_SCC_BODY_TEXT_LINE,URIBL_BLOCKED
+        autolearn=ham autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Thu, Aug 18, 2022 at 12:08:24PM +0200, Borislav Petkov wrote:
-> On Wed, Aug 03, 2022 at 02:41:32PM -0700, Pawan Gupta wrote:
-> > diff --git a/arch/x86/kernel/cpu/bugs.c b/arch/x86/kernel/cpu/bugs.c
-> > index 6761668100b9..fe3f7e762b80 100644
-> > --- a/arch/x86/kernel/cpu/bugs.c
-> > +++ b/arch/x86/kernel/cpu/bugs.c
-> > @@ -433,7 +433,8 @@ static void __init mmio_select_mitigation(void)
-> >  	u64 ia32_cap;
-> >  
-> >  	if (!boot_cpu_has_bug(X86_BUG_MMIO_STALE_DATA) ||
-> > -	    cpu_mitigations_off()) {
-> > +	     boot_cpu_has_bug(X86_BUG_MMIO_UNKNOWN) ||
-> > +	     cpu_mitigations_off()) {
-> >  		mmio_mitigation = MMIO_MITIGATION_OFF;
-> >  		return;
-> >  	}
-> 
-> Needs also:
-> 
-> diff --git a/arch/x86/kernel/cpu/bugs.c b/arch/x86/kernel/cpu/bugs.c
-> index d08c5589fa59..da7c361f47e0 100644
-> --- a/arch/x86/kernel/cpu/bugs.c
-> +++ b/arch/x86/kernel/cpu/bugs.c
-> @@ -539,6 +539,8 @@ static void __init md_clear_update_mitigation(void)
->  		pr_info("TAA: %s\n", taa_strings[taa_mitigation]);
->  	if (boot_cpu_has_bug(X86_BUG_MMIO_STALE_DATA))
->  		pr_info("MMIO Stale Data: %s\n", mmio_strings[mmio_mitigation]);
-> +	else if (boot_cpu_has_bug(X86_BUG_MMIO_UNKNOWN))
-> +		pr_info("MMIO Stale Data: Unknown: No mitigations\n");
->  }
->  
->  static void __init md_clear_select_mitigation(void)
-> 
-> I've added it.
+On Thu, Aug 18, 2022 at 1:34 PM Jeff Xie <xiehuan09@gmail.com> wrote:
+>
+> Hi Joel,
+>
+> On Fri, Aug 19, 2022 at 1:05 AM Joel Fernandes <joel@joelfernandes.org> wrote:
+> >
+> > On Thu, Aug 18, 2022 at 12:38 PM Jeff Xie <xiehuan09@gmail.com> wrote:
+> > >
+> > > Hi Joel,
+> > >
+> > > Thank you for your review.
+> > >
+> > > On Thu, Aug 18, 2022 at 11:53 PM Joel Fernandes <joel@joelfernandes.org> wrote:
+> > > >
+> > > > On Tue, Jun 28, 2022 at 10:55:52PM +0800, Jeff Xie wrote:
+> > > > > Add documentation explaining how to use objtrace trigger to get the value
+> > > > > of the object.
+> > > > >
+> > > > > Cc: Jonathan Corbet <corbet@lwn.net>
+> > > > > Cc: Bagas Sanjaya <bagasdotme@gmail.com>
+> > > > > Cc: linux-doc@vger.kernel.org
+> > > > > Signed-off-by: Jeff Xie <xiehuan09@gmail.com>
+> > > > > Reviewed-by: Masami Hiramatsu (Google) <mhiramat@kernel.org>
+> > > > > ---
+> > > > > Changelog:
+> > > > > v14:
+> > > > > - make documentation more readable and fix literal code block by Bagas Sanjaya
+> > > > >
+> > > > >  Documentation/trace/events.rst | 87 ++++++++++++++++++++++++++++++++++
+> > > > >  1 file changed, 87 insertions(+)
+> > > > >
+> > > > > diff --git a/Documentation/trace/events.rst b/Documentation/trace/events.rst
+> > > > > index c47f381d0c00..c15f1d25d4a0 100644
+> > > > > --- a/Documentation/trace/events.rst
+> > > > > +++ b/Documentation/trace/events.rst
+> > > > > @@ -546,6 +546,93 @@ The following commands are supported:
+> > > > >
+> > > > >    See Documentation/trace/histogram.rst for details and examples.
+> > > > >
+> > > > > +- objtrace
+> > > > > +
+> > > > > +  This command provides a way to get the value of any object, The object
+> > > > > +  can be obtained from the dynamic event (kprobe_event/uprobe_event) or the
+> > > > > +  static event (tracepoint).
+> > > > > +
+> > > > > +  Usage:
+> > > > > +  When using the kprobe event, by only need to set the objtrace (a new
+> > > > > +  trigger), we can get the value of object that is set by kprobe event.
+> > > > > +
+> > > > > +  For example, for the function bio_add_page():
+> > > > > +
+> > > > > +  .. code-block:: c
+> > > > > +
+> > > > > +     int bio_add_page(struct bio *bio, struct page *page,
+> > > > > +                   unsigned int len, unsigned int offset)
+> > > > > +
+> > > > > +  Firstly, we can set the base of the object as first parameter (arg1) to
+> > > > > +  to the function:
+> > > > > +
+> > > > > +  .. code-block::
+> > > > > +
+> > > > > +     # echo 'p bio_add_page arg1=$arg1' > ./kprobe_events
+> > > > > +
+> > > > > +  Secondly, we can get the value dynamically based on the object:
+> > > > > +
+> > > > > +  .. code-block::
+> > > > > +
+> > > > > +     find the offset of the bi_size in struct bio:
+> > > > > +     $ gdb vmlinux
+> > > > > +     (gdb) p &(((struct bio *)0)->bi_iter.bi_size)
+> > > > > +     $1 = (unsigned int *) 0x28
+> > > > > +
+> > > > > +     # echo 'objtrace:add:arg1,0x28:u32:1 if comm == "cat"' > ./events/kprobes/ \
+> > > > > +       p_bio_add_page_0/trigger
+> > > > > +
+> > > > > +     # cd /sys/kernel/debug/tracing/
+> > > > > +     # echo 'p bio_add_page arg1=$arg1' > ./kprobe_events
+> > > > > +     # echo 'objtrace:add:arg1,0x28:u32:1 if comm == "cat"' > ./events/kprobes/p_bio_add_page_0/trigger
+> > > >
+> > > > No offense but this documentation is not well written and hard to read.
+> > > >
+> > > > Admittedly though I am just casually browsing through, so apologies.
+> > > >
+> > > > So basically, 0x28 is the offset of the u32 within the bio, that you want to
+> > > > track down, as it passes through functions?
+> > >
+> > > Yes, Not only track the bio, but also get a value with an offset of
+> > > 0x28 relative to the bio.
+> >
+> > Right.
+> >
+> > > >
+> > > > The example is good, but I suggest breakdown each of the commands separated
+> > > > by ':' and document those as well.
+> > >
+> > > I don't know how to explain it in more detail, maybe need to be
+> > > familiar with kprobe event and trigger in advance ;-)
+> >
+> > That's not a strong argument IMO.
+> >
+> > Shouldn't it be super easy to add the following to the documentation
+> > since you already mentioned it in the commit log? Or am I missing
+> > something?
+> >
+> > Syntax:
+> >         objtrace:add:obj[,offset][:type][:count][if <filter>]
+>
+> I'am so sorry, I misunderstood you, I thought it needed to be
+> explained every word like this, e.g.
+> objtrace:
+>     ...
+> add:
+>     ...
+> ...
+>
+> Thanks,  I will add the above syntax in the next version.
+>
 
-Thanks
+Yeah no problem, I am also OK with that being a follow-up patch
+instead of the series if it matches with Steven's review timing
+better.
+
+Thanks,
+
+ - Joel
