@@ -2,104 +2,103 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 11355599B00
-	for <lists+linux-doc@lfdr.de>; Fri, 19 Aug 2022 13:31:47 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 75B4F599B6A
+	for <lists+linux-doc@lfdr.de>; Fri, 19 Aug 2022 14:03:58 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1348285AbiHSL2q (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Fri, 19 Aug 2022 07:28:46 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:33956 "EHLO
+        id S1348804AbiHSMBo (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Fri, 19 Aug 2022 08:01:44 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:48634 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1348241AbiHSL2p (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Fri, 19 Aug 2022 07:28:45 -0400
-Received: from mx1.riseup.net (mx1.riseup.net [198.252.153.129])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 8BFB5B514B;
-        Fri, 19 Aug 2022 04:28:44 -0700 (PDT)
-Received: from fews1.riseup.net (fews1-pn.riseup.net [10.0.1.83])
-        (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-         key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256
-         client-signature RSA-PSS (2048 bits) client-digest SHA256)
-        (Client CN "mail.riseup.net", Issuer "R3" (not verified))
-        by mx1.riseup.net (Postfix) with ESMTPS id 4M8KJW631TzDrR3;
-        Fri, 19 Aug 2022 11:28:43 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=riseup.net; s=squak;
-        t=1660908524; bh=HtTFlUxYhMXKADnhF9mXs30RyZIzn/W5VJYsvu6FAWY=;
-        h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
-        b=oNE1KfuQvtHc6iPUUoq7FSpjOkKEPrc/+RR6cYSgcJxHZ9z8/8ccbHuB+sKb98nqQ
-         aoYWA88GUFWtbXCLjG4psT0qZVNooAuaAOMK4D4UxqvFwhz1DbNC0wRWgEhZKObksV
-         TxaV7riL7BmM91aLXMkes37L28oiNzpYdwxIrnpw=
-X-Riseup-User-ID: 0F8265F3B5B153B0BB085616B6910490B77EA1389FDF561D07126609569FEFE3
-Received: from [127.0.0.1] (localhost [127.0.0.1])
-         by fews1.riseup.net (Postfix) with ESMTPSA id 4M8KJR1sMPz5vQt;
-        Fri, 19 Aug 2022 11:28:38 +0000 (UTC)
-Message-ID: <ff728926-22e4-e65b-ee94-2ed958c92993@riseup.net>
-Date:   Fri, 19 Aug 2022 08:28:36 -0300
+        with ESMTP id S1348778AbiHSMBh (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Fri, 19 Aug 2022 08:01:37 -0400
+Received: from metis.ext.pengutronix.de (metis.ext.pengutronix.de [IPv6:2001:67c:670:201:290:27ff:fe1d:cc33])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 68EEEE3C20
+        for <linux-doc@vger.kernel.org>; Fri, 19 Aug 2022 05:01:36 -0700 (PDT)
+Received: from drehscheibe.grey.stw.pengutronix.de ([2a0a:edc0:0:c01:1d::a2])
+        by metis.ext.pengutronix.de with esmtps (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256)
+        (Exim 4.92)
+        (envelope-from <ore@pengutronix.de>)
+        id 1oP0ge-0007mf-NM; Fri, 19 Aug 2022 14:01:16 +0200
+Received: from [2a0a:edc0:0:1101:1d::ac] (helo=dude04.red.stw.pengutronix.de)
+        by drehscheibe.grey.stw.pengutronix.de with esmtp (Exim 4.94.2)
+        (envelope-from <ore@pengutronix.de>)
+        id 1oP0gc-000hbR-72; Fri, 19 Aug 2022 14:01:14 +0200
+Received: from ore by dude04.red.stw.pengutronix.de with local (Exim 4.94.2)
+        (envelope-from <ore@pengutronix.de>)
+        id 1oP0ga-00GBaU-7C; Fri, 19 Aug 2022 14:01:12 +0200
+From:   Oleksij Rempel <o.rempel@pengutronix.de>
+To:     Andrew Lunn <andrew@lunn.ch>,
+        Heiner Kallweit <hkallweit1@gmail.com>,
+        "David S. Miller" <davem@davemloft.net>,
+        Eric Dumazet <edumazet@google.com>,
+        Jakub Kicinski <kuba@kernel.org>,
+        Paolo Abeni <pabeni@redhat.com>,
+        Russell King <linux@armlinux.org.uk>,
+        Rob Herring <robh+dt@kernel.org>,
+        Krzysztof Kozlowski <krzysztof.kozlowski+dt@linaro.org>,
+        Jonathan Corbet <corbet@lwn.net>
+Cc:     Oleksij Rempel <o.rempel@pengutronix.de>, kernel@pengutronix.de,
+        linux-kernel@vger.kernel.org, netdev@vger.kernel.org,
+        devicetree@vger.kernel.org, linux-doc@vger.kernel.org,
+        David Jander <david@protonic.nl>
+Subject: [PATCH net-next v1 0/7] add generic PSE support 
+Date:   Fri, 19 Aug 2022 14:01:02 +0200
+Message-Id: <20220819120109.3857571-1-o.rempel@pengutronix.de>
+X-Mailer: git-send-email 2.30.2
 MIME-Version: 1.0
-Subject: Re: [PATCH 5/8] Documentation: KUnit: add intro to the
- getting-started page
-Content-Language: en-US
-To:     Tales Aparecida <tales.aparecida@gmail.com>,
-        Sadiya Kazi <sadiyakazi@google.com>
-Cc:     linux-kernel@vger.kernel.org, kunit-dev@googlegroups.com,
-        linux-doc@vger.kernel.org, linux-kselftest@vger.kernel.org,
-        davidgow@google.com, corbet@lwn.net, brendan.higgins@linux.dev,
-        Trevor Woerner <twoerner@gmail.com>, siqueirajordao@riseup.net,
-        mwen@igalia.com, andrealmeid@riseup.net,
-        Isabella Basso <isabbasso@riseup.net>, magalilemes00@gmail.com
-References: <20220819053234.241501-1-tales.aparecida@gmail.com>
- <20220819053234.241501-6-tales.aparecida@gmail.com>
-From:   =?UTF-8?Q?Ma=c3=adra_Canal?= <mairacanal@riseup.net>
-In-Reply-To: <20220819053234.241501-6-tales.aparecida@gmail.com>
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-Spam-Status: No, score=-2.8 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_LOW,
-        RCVD_IN_MSPIKE_H3,RCVD_IN_MSPIKE_WL,SPF_HELO_PASS,SPF_PASS,
-        T_SCC_BODY_TEXT_LINE autolearn=ham autolearn_force=no version=3.4.6
+X-SA-Exim-Connect-IP: 2a0a:edc0:0:c01:1d::a2
+X-SA-Exim-Mail-From: ore@pengutronix.de
+X-SA-Exim-Scanned: No (on metis.ext.pengutronix.de); SAEximRunCond expanded to false
+X-PTX-Original-Recipient: linux-doc@vger.kernel.org
+X-Spam-Status: No, score=-4.2 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_MED,
+        SPF_HELO_NONE,SPF_PASS,T_SCC_BODY_TEXT_LINE autolearn=unavailable
+        autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Hi Tales
+Add generic support for the Ethernet Power Sourcing Equipment.
 
-On 8/19/22 02:32, Tales Aparecida wrote:
-> Describe the objective of the Getting Started page, which should be a
-> brief and beginner-friendly walkthrough for running and writing tests,
-> showing the reader where to find detailed instructions in other pages.
-> 
-> Signed-off-by: Tales Aparecida <tales.aparecida@gmail.com>
-> ---
->  Documentation/dev-tools/kunit/start.rst | 5 +++++
->  1 file changed, 5 insertions(+)
-> 
-> diff --git a/Documentation/dev-tools/kunit/start.rst b/Documentation/dev-tools/kunit/start.rst
-> index f0ec64207bd3..3855402a5b3e 100644
-> --- a/Documentation/dev-tools/kunit/start.rst
-> +++ b/Documentation/dev-tools/kunit/start.rst
-> @@ -4,6 +4,11 @@
->  Getting Started
->  ===============
->  
-> +This page contains an overview about the kunit_tool and Kunit framework,
-> +teaching how to run existent tests and then how to write a simple test-case,
-> +and covering common problems users face when using Kunit for the first time.
-> +It is recommended that the reader had compiled the Kernel at least once before.
+Oleksij Rempel (7):
+  dt-bindings: net: pse-dt: add bindings for generic PSE controller
+  dt-bindings: net: phy: add PoDL PSE property
+  net: add framework to support Ethernet PSE and PDs devices
+  net: pse-pd: add generic PSE driver
+  net: mdiobus: fwnode_mdiobus_register_phy() rework error handling
+  net: mdiobus: search for PSE nodes by parsing PHY nodes.
+  ethtool: add interface to interact with Ethernet Power Equipment
 
-Some grammar nits:
-- s/an overview about/an overview of
-- s/Kunit/KUnit for consistency
-- s/existent/existing
-- s/covering/covers
+ .../devicetree/bindings/net/ethernet-phy.yaml |   6 +
+ .../bindings/net/pse-pd/generic-pse.yaml      |  40 ++
+ Documentation/networking/ethtool-netlink.rst  |  60 +++
+ drivers/net/Kconfig                           |   2 +
+ drivers/net/Makefile                          |   1 +
+ drivers/net/mdio/fwnode_mdio.c                |  58 ++-
+ drivers/net/phy/phy_device.c                  |   2 +
+ drivers/net/pse-pd/Kconfig                    |  22 +
+ drivers/net/pse-pd/Makefile                   |   6 +
+ drivers/net/pse-pd/pse-core.c                 | 387 ++++++++++++++++++
+ drivers/net/pse-pd/pse_generic.c              | 146 +++++++
+ include/linux/phy.h                           |   2 +
+ include/linux/pse-pd/pse.h                    | 134 ++++++
+ include/uapi/linux/ethtool.h                  |  50 +++
+ include/uapi/linux/ethtool_netlink.h          |  17 +
+ net/ethtool/Makefile                          |   3 +-
+ net/ethtool/netlink.c                         |  19 +
+ net/ethtool/netlink.h                         |   4 +
+ net/ethtool/pse-pd.c                          | 194 +++++++++
+ 19 files changed, 1141 insertions(+), 12 deletions(-)
+ create mode 100644 Documentation/devicetree/bindings/net/pse-pd/generic-pse.yaml
+ create mode 100644 drivers/net/pse-pd/Kconfig
+ create mode 100644 drivers/net/pse-pd/Makefile
+ create mode 100644 drivers/net/pse-pd/pse-core.c
+ create mode 100644 drivers/net/pse-pd/pse_generic.c
+ create mode 100644 include/linux/pse-pd/pse.h
+ create mode 100644 net/ethtool/pse-pd.c
 
-Other than this small nits,
+-- 
+2.30.2
 
-Reviewed-by: Maíra Canal <mairacanal@riseup.net>
-
-Best Regards,
-- Maíra Canal
-
-> +
->  Installing Dependencies
->  =======================
->  KUnit has the same dependencies as the Linux kernel. As long as you can
