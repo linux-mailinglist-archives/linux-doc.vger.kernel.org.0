@@ -2,98 +2,108 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 0888359949F
-	for <lists+linux-doc@lfdr.de>; Fri, 19 Aug 2022 07:43:05 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 6F441599558
+	for <lists+linux-doc@lfdr.de>; Fri, 19 Aug 2022 08:33:05 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1346474AbiHSFdU (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Fri, 19 Aug 2022 01:33:20 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:51736 "EHLO
+        id S241578AbiHSG2y (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Fri, 19 Aug 2022 02:28:54 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:46754 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1346464AbiHSFdS (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Fri, 19 Aug 2022 01:33:18 -0400
-Received: from mail-vs1-xe2a.google.com (mail-vs1-xe2a.google.com [IPv6:2607:f8b0:4864:20::e2a])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 7E06612A9E;
-        Thu, 18 Aug 2022 22:33:17 -0700 (PDT)
-Received: by mail-vs1-xe2a.google.com with SMTP id l7so3274472vsc.0;
-        Thu, 18 Aug 2022 22:33:17 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc;
-        bh=PJWZ+ww9nWKSQKWZ24nwvV/pHbapUiWjpSIQxLnH82U=;
-        b=jHmkDZoi5mmEoeqCUl50yLnOI0A0M/wRgcOqhvDai8m5bne/mm/ZvWe4sqXYuoN/+o
-         JtLb5eKPOPgV7s6wLUcSUszmbegvR9oKNZ8m1wbAXdqQn9nAz3ed/GeC1eOLRLzTHQx9
-         XBPJpuQNqGzm/RSpdavJmGYf2SGEEhTCi08G5FYkibnMOc390ErQi/C+MGhpFMYApGNa
-         Lu5EdbMYzYZe/2gEIiKWbgE0f7k5IAJC5nF97j1Voo2KPpg7y9N0smceGoO8s+IRtLvf
-         ENdRWoZ0uwNvdHIZykwr+cnyWaYV9Wj8kYNQyAOKeMY6HvZg2zWWPzWCK0nrIyhXwr8g
-         HcLQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc;
-        bh=PJWZ+ww9nWKSQKWZ24nwvV/pHbapUiWjpSIQxLnH82U=;
-        b=w5n3z6pX5HeU5l6aI1tNykGmvscBA8rNSgvx7vRWclazo04fvsZ+PB+MZAIoL/yDnG
-         4YM0RoObcaBKK0H1J3zCrF0D2rsv8HrlJVgoB+QlJXraohVNcwmCcxpm0fO6wmhtx/Wx
-         RTC//zS0QQgXA+/KN8pQ/7QUoTDfk19aNc5+ijtYdKWPQzFzmiIeMXFpdMAWcJF/LcCg
-         TPjoz/cRG3cEKqjt3OZYGbgahjZsVwAxHSpJL0CzUIzYDIFuT/CzHnXE4UfG7DFDnb26
-         dvrGO/kZ9sUQMHgcKi0Xx56dsG/0xe8DmKTVqgzTCOr6D7E1/E//YMfrUf3hz5U5K8n/
-         z00g==
-X-Gm-Message-State: ACgBeo0GsFsbmHp2j0CenROsJquV8gpGrOkSoF61VFh4zamCQStUNPE0
-        H3ugUj8+jcR7s/2bxqZSy8svvQvHHFAxUg==
-X-Google-Smtp-Source: AA6agR55cZ0M/b99d5Dw/K0cMaGSOr2xQ4g6dkAG1k71T4VyLWjdcHDEGp0R8f2+Ealgju6EgV4IcA==
-X-Received: by 2002:a05:6102:497:b0:388:d95e:771b with SMTP id n23-20020a056102049700b00388d95e771bmr2229227vsa.44.1660887196472;
-        Thu, 18 Aug 2022 22:33:16 -0700 (PDT)
-Received: from localhost.localdomain ([2804:14c:4c2:8202::1001])
-        by smtp.gmail.com with ESMTPSA id w85-20020a1f9458000000b0037d0cd81996sm1999286vkd.37.2022.08.18.22.33.12
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 18 Aug 2022 22:33:16 -0700 (PDT)
-From:   Tales Aparecida <tales.aparecida@gmail.com>
-To:     Sadiya Kazi <sadiyakazi@google.com>, keescook@chromium.org
-Cc:     linux-kernel@vger.kernel.org, kunit-dev@googlegroups.com,
-        linux-doc@vger.kernel.org, linux-kselftest@vger.kernel.org,
-        davidgow@google.com, corbet@lwn.net, brendan.higgins@linux.dev,
-        Trevor Woerner <twoerner@gmail.com>, siqueirajordao@riseup.net,
-        mwen@igalia.com, andrealmeid@riseup.net, mairacanal@riseup.net,
-        Isabella Basso <isabbasso@riseup.net>, magalilemes00@gmail.com,
-        tales.aparecida@gmail.com, linux-hardening@vger.kernel.org
-Subject: [PATCH 8/8] lib: stackinit: update reference to kunit-tool
-Date:   Fri, 19 Aug 2022 02:32:34 -0300
-Message-Id: <20220819053234.241501-9-tales.aparecida@gmail.com>
-X-Mailer: git-send-email 2.37.1
-In-Reply-To: <20220819053234.241501-1-tales.aparecida@gmail.com>
-References: <20220819053234.241501-1-tales.aparecida@gmail.com>
+        with ESMTP id S243435AbiHSG2w (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Fri, 19 Aug 2022 02:28:52 -0400
+Received: from loongson.cn (mail.loongson.cn [114.242.206.163])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTP id ACA6057271
+        for <linux-doc@vger.kernel.org>; Thu, 18 Aug 2022 23:28:50 -0700 (PDT)
+Received: from localhost.localdomain (unknown [112.20.110.237])
+        by localhost.localdomain (Coremail) with SMTP id AQAAf8DxBOKaLf9iHXUEAA--.22726S2;
+        Fri, 19 Aug 2022 14:28:42 +0800 (CST)
+From:   Binbin Zhou <zhoubinbin@loongson.cn>
+To:     alexs@kernel.org, siyanteng@loongson.cn
+Cc:     corbet@lwn.net, chenhuacai@loongson.cn, bobwxc@email.cn,
+        linux-doc@vger.kernel.org, Binbin Zhou <zhoubinbin@loongson.cn>
+Subject: [PATCH V3 0/4] docs/zh_CN: core-api: Add some translations for the "Data structures" section(Part 1)
+Date:   Fri, 19 Aug 2022 14:28:36 +0800
+Message-Id: <cover.1660881950.git.zhoubinbin@loongson.cn>
+X-Mailer: git-send-email 2.31.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Spam-Status: No, score=-2.1 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_FROM,
-        RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,SPF_PASS,T_SCC_BODY_TEXT_LINE
-        autolearn=ham autolearn_force=no version=3.4.6
+X-CM-TRANSID: AQAAf8DxBOKaLf9iHXUEAA--.22726S2
+X-Coremail-Antispam: 1UD129KBjvJXoW7ZFW3ZF1DJF13ZrykWry7trb_yoW8uFW8pF
+        4akw1fJ3WDAFyxCrs3Wry7uFyUJFWfW3s0gws7Xw1Svr4rAFW0vrs0yrya93yxJryvgF1r
+        Zrs3KrWDu34jyrJanT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+        9KBjDU0xBIdaVrnRJUUUkq14x267AKxVW8JVW5JwAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
+        rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2ocxC64kIII0Yj41l84x0c7CEw4AK67xGY2AK02
+        1l84ACjcxK6xIIjxv20xvE14v26ryj6F1UM28EF7xvwVC0I7IYx2IY6xkF7I0E14v26F4j
+        6r4UJwA2z4x0Y4vEx4A2jsIE14v26F4UJVW0owA2z4x0Y4vEx4A2jsIEc7CjxVAFwI0_Gc
+        CE3s1le2I262IYc4CY6c8Ij28IcVAaY2xG8wAqx4xG64xvF2IEw4CE5I8CrVC2j2WlYx0E
+        2Ix0cI8IcVAFwI0_Jr0_Jr4lYx0Ex4A2jsIE14v26r1j6r4UMcvjeVCFs4IE7xkEbVWUJV
+        W8JwACjcxG0xvY0x0EwIxGrwACjI8F5VA0II8E6IAqYI8I648v4I1lc2xSY4AK67AK6r47
+        MxAIw28IcxkI7VAKI48JMxC20s026xCaFVCjc4AY6r1j6r4UMI8I3I0E5I8CrVAFwI0_Jr
+        0_Jr4lx2IqxVCjr7xvwVAFwI0_JrI_JrWlx4CE17CEb7AF67AKxVWUAVWUtwCIc40Y0x0E
+        wIxGrwCI42IY6xIIjxv20xvE14v26r1j6r1xMIIF0xvE2Ix0cI8IcVCY1x0267AKxVWUJV
+        W8JwCI42IY6xAIw20EY4v20xvaj40_Jr0_JF4lIxAIcVC2z280aVAFwI0_Jr0_Gr1lIxAI
+        cVC2z280aVCY1x0267AKxVW8JVW8JrUvcSsGvfC2KfnxnUUI43ZEXa7VUjHUDJUUUUU==
+X-CM-SenderInfo: p2kr3uplqex0o6or00hjvr0hdfq/
+X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00,SPF_HELO_PASS,
+        SPF_PASS,T_SCC_BODY_TEXT_LINE autolearn=ham autolearn_force=no
+        version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Replace URL with an updated path to the full Documentation page
+Hi all:
 
-Signed-off-by: Tales Aparecida <tales.aparecida@gmail.com>
----
- lib/stackinit_kunit.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+I have translated all the docs for section "Data structures and low-level utilities"
+of the core-api, and I plan to split them into two patchset submissions.
 
-diff --git a/lib/stackinit_kunit.c b/lib/stackinit_kunit.c
-index 35c69aa425b2..4591d6cf5e01 100644
---- a/lib/stackinit_kunit.c
-+++ b/lib/stackinit_kunit.c
-@@ -3,7 +3,7 @@
-  * Test cases for compiler-based stack variable zeroing via
-  * -ftrivial-auto-var-init={zero,pattern} or CONFIG_GCC_PLUGIN_STRUCTLEAK*.
-  * For example, see:
-- * https://www.kernel.org/doc/html/latest/dev-tools/kunit/kunit-tool.html#configuring-building-and-running-tests
-+ * "Running tests with kunit_tool" at Documentation/dev-tools/kunit/start.rst
-  *	./tools/testing/kunit/kunit.py run stackinit [--raw_output] \
-  *		--make_option LLVM=1 \
-  *		--kconfig_add CONFIG_INIT_STACK_ALL_ZERO=y
+This patchset contains the following files:
+
+idr.rst
+circular-buffers.rst
+generic-radix-tree.rst
+packing.rst
+
+For more details, please see TODOLIST in core-api/index.rst.
+
+Thanks.
+
+Changes since v2:
+1. Rebase patchset on jc/docs-next.
+2. Take Alex's advices about circular-buffers.rst, thanks.
+
+Details:
+https://lore.kernel.org/all/CAJy-AmkZFxNPL52M6Yuxu9prgdPSxkaO-FUs=tfY7ZB=YHoR1w@mail.gmail.com/
+
+Changes since v1:
+1. Rebase patchset on jc/docs-next.
+2. Take the advices of Xiangcheng and Yanteng, thanks.
+
+Details:
+https://lore.kernel.org/all/6904a35b-6425-36af-66a0-ecd0a222a15f@loongson.cn/
+https://lore.kernel.org/all/35121f9b-4dd7-4114-9242-caf2dcfa8f9c@loongson.cn/
+https://lore.kernel.org/all/86118122-2885-78e3-677e-b3a6ca47a20c@loongson.cn/
+https://lore.kernel.org/all/YtKy+z+iSA6D8r9m@bobwxc.mipc/
+https://lore.kernel.org/all/YtLF2g8fQdi4%2FaKQ@bobwxc.mipc/
+
+Binbin Zhou (4):
+  docs/zh_CN: core-api: Add idr Chinese translation
+  docs/zh_CN: core-api: Add circular-buffers Chinese translation
+  docs/zh_CN: core-api: Add generic-radix-tree Chinese translation
+  docs/zh_CN: core-api: Add packing Chinese translation
+
+ .../zh_CN/core-api/circular-buffers.rst       | 210 ++++++++++++++++++
+ .../zh_CN/core-api/generic-radix-tree.rst     |  23 ++
+ .../translations/zh_CN/core-api/idr.rst       |  80 +++++++
+ .../translations/zh_CN/core-api/index.rst     |   8 +-
+ .../translations/zh_CN/core-api/packing.rst   | 160 +++++++++++++
+ 5 files changed, 477 insertions(+), 4 deletions(-)
+ create mode 100644 Documentation/translations/zh_CN/core-api/circular-buffers.rst
+ create mode 100644 Documentation/translations/zh_CN/core-api/generic-radix-tree.rst
+ create mode 100644 Documentation/translations/zh_CN/core-api/idr.rst
+ create mode 100644 Documentation/translations/zh_CN/core-api/packing.rst
+
 -- 
-2.37.1
+2.31.1
 
