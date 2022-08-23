@@ -2,105 +2,117 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 5BF7759EA70
-	for <lists+linux-doc@lfdr.de>; Tue, 23 Aug 2022 20:03:00 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id CBC2B59EA94
+	for <lists+linux-doc@lfdr.de>; Tue, 23 Aug 2022 20:11:29 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S232741AbiHWSCt (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 23 Aug 2022 14:02:49 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:55108 "EHLO
+        id S230501AbiHWSKv (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 23 Aug 2022 14:10:51 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:54420 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S231183AbiHWSBE (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 23 Aug 2022 14:01:04 -0400
-Received: from foss.arm.com (foss.arm.com [217.140.110.172])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTP id 12250DCFE8;
-        Tue, 23 Aug 2022 09:07:13 -0700 (PDT)
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
-        by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 876A21424;
-        Tue, 23 Aug 2022 09:07:16 -0700 (PDT)
-Received: from e121896.arm.com (unknown [10.57.14.228])
-        by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPA id B00BE3F718;
-        Tue, 23 Aug 2022 09:07:10 -0700 (PDT)
-From:   James Clark <james.clark@arm.com>
-To:     suzuki.poulose@arm.com, coresight@lists.linaro.org,
-        mathieu.poirier@linaro.org
-Cc:     mike.leach@linaro.org, leo.yan@linaro.org,
-        linux-kernel@vger.kernel.org, german.gomez@arm.com,
-        James Clark <james.clark@arm.com>,
-        Jonathan Corbet <corbet@lwn.net>,
-        Catalin Marinas <catalin.marinas@arm.com>,
-        Will Deacon <will@kernel.org>,
-        Alexander Shishkin <alexander.shishkin@linux.intel.com>,
-        linux-arm-kernel@lists.infradead.org, linux-doc@vger.kernel.org
-Subject: [PATCH v3 2/2] coresight: etm4x: docs: Add documentation for 'ts_source' sysfs interface
-Date:   Tue, 23 Aug 2022 17:06:50 +0100
-Message-Id: <20220823160650.455823-3-james.clark@arm.com>
-X-Mailer: git-send-email 2.28.0
-In-Reply-To: <20220823160650.455823-1-james.clark@arm.com>
-References: <20220823160650.455823-1-james.clark@arm.com>
+        with ESMTP id S233725AbiHWSK2 (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 23 Aug 2022 14:10:28 -0400
+Received: from mail-pg1-x536.google.com (mail-pg1-x536.google.com [IPv6:2607:f8b0:4864:20::536])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 8E3A3659D7;
+        Tue, 23 Aug 2022 09:20:23 -0700 (PDT)
+Received: by mail-pg1-x536.google.com with SMTP id l64so12729008pge.0;
+        Tue, 23 Aug 2022 09:20:23 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112;
+        h=in-reply-to:content-disposition:mime-version:references:message-id
+         :subject:cc:to:from:date:sender:from:to:cc;
+        bh=MkchlG+vC7eeExntyPywB6o/N2CwihE3Mv9oTg/XCfA=;
+        b=XxzpYtA2pnvxm7jj/aZsB1ovGYgGFFOxiJHjtvxhSaQ2REDVDoCQIjB/GtHH3oVwse
+         NbSR71cHM3UNRFgLwyej9TpI0L9rWYkF3KkrxZ2C2kw/EhuAh1C8pna4IXsnCDF3BF2V
+         8IhM33IU1xrqLpTtcYD8/GGzjVMCaXX2XEfzTFIJp+wjFzbfTmxY37Dv4svHZMG0+KEo
+         aRjhTxwWgpoysJLCODS4LSRitnpLJHVgILVZtGtASuPTh6vMwSzxhp5+JZNm5nJ5IYCo
+         b3Dy8XSRPGHhnsPawF9cGPvUjeBwgKkMqHXYvYuy4cvIN6PNJjDppSYfrn2gz9H3zm6h
+         9Uyg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=in-reply-to:content-disposition:mime-version:references:message-id
+         :subject:cc:to:from:date:sender:x-gm-message-state:from:to:cc;
+        bh=MkchlG+vC7eeExntyPywB6o/N2CwihE3Mv9oTg/XCfA=;
+        b=EpQxwuYkO6H1Ov9BejHnLRtDiWaXH08YPEf6DEYt4Ihc8mGCkn9iFPQXw7IuqMiTE+
+         53TC+bwoqqS47kWfDYoqMi5eiNdgtk+V6aHVqNBgsL1MSBIuXkSkqmTjqHV2IihCw8oV
+         hSnWFQXZlvldnUHwBes4VOGj/1xE0oJ4okmeyqSwOSPOypAOzhvlG+40Rk0824YmvyHl
+         1MkQQ/kkRz/HkhQ1LTocje5+ZlhrNMecQpxa/9afJWrfdFCpCD/j4Ex76zvR6gclroeP
+         pqvctdpSM2hzu9+wQvaZQhRwp+yoUrCmPoq0tbxiE7EJXzoyemT3CShB6xFujyDbzaWB
+         ensA==
+X-Gm-Message-State: ACgBeo10+z7Ke1MtBXU9L1W+sD371L/6+5ho6rt5ziK2UKRW1fMWezOS
+        rROXm3g+bW+Hu3D7ojQnZGU=
+X-Google-Smtp-Source: AA6agR4cW34xCWONe1DFQhmDIqb/ilOQuYVa7OvNWr8Tj8a5MCNIZ+ylQxDsXgma0bv+PadMQYQ2jA==
+X-Received: by 2002:a63:131c:0:b0:427:7f15:470f with SMTP id i28-20020a63131c000000b004277f15470fmr21682374pgl.232.1661271622771;
+        Tue, 23 Aug 2022 09:20:22 -0700 (PDT)
+Received: from localhost (2603-800c-1a02-1bae-a7fa-157f-969a-4cde.res6.spectrum.com. [2603:800c:1a02:1bae:a7fa:157f:969a:4cde])
+        by smtp.gmail.com with ESMTPSA id d135-20020a621d8d000000b0052d4b0d0c74sm11029697pfd.70.2022.08.23.09.20.21
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 23 Aug 2022 09:20:22 -0700 (PDT)
+Sender: Tejun Heo <htejun@gmail.com>
+Date:   Tue, 23 Aug 2022 06:20:20 -1000
+From:   Tejun Heo <tj@kernel.org>
+To:     Johannes Weiner <hannes@cmpxchg.org>
+Cc:     Chengming Zhou <zhouchengming@bytedance.com>,
+        Michal =?iso-8859-1?Q?Koutn=FD?= <mkoutny@suse.com>,
+        corbet@lwn.net, surenb@google.com, mingo@redhat.com,
+        peterz@infradead.org, vincent.guittot@linaro.org,
+        dietmar.eggemann@arm.com, rostedt@goodmis.org, bsegall@google.com,
+        cgroups@vger.kernel.org, linux-doc@vger.kernel.org,
+        linux-kernel@vger.kernel.org, songmuchun@bytedance.com
+Subject: Re: [PATCH v2 09/10] sched/psi: per-cgroup PSI stats
+ disable/re-enable interface
+Message-ID: <YwT+RDZyszAQ/Vro@slm.duckdns.org>
+References: <20220808110341.15799-1-zhouchengming@bytedance.com>
+ <20220808110341.15799-10-zhouchengming@bytedance.com>
+ <YvKd6dezPM6UxfD/@slm.duckdns.org>
+ <fcd0bd39-3049-a279-23e6-a6c02b4680a7@bytedance.com>
+ <b89155d3-9315-fefc-408b-4cf538360a1c@bytedance.com>
+ <YvPN07UlaPFAdlet@cmpxchg.org>
+ <20220815132343.GA22640@blackbody.suse.cz>
+ <9d1997a4-9278-07bd-7f57-952306b28b14@bytedance.com>
+ <YwTz32VWuZeLHOHe@cmpxchg.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI,
-        SPF_HELO_NONE,SPF_NONE,T_SCC_BODY_TEXT_LINE autolearn=ham
-        autolearn_force=no version=3.4.6
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <YwTz32VWuZeLHOHe@cmpxchg.org>
+X-Spam-Status: No, score=-1.5 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+        DKIM_VALID,DKIM_VALID_EF,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
+        HEADER_FROM_DIFFERENT_DOMAINS,RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,
+        SPF_PASS,T_SCC_BODY_TEXT_LINE autolearn=no autolearn_force=no
+        version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-From: German Gomez <german.gomez@arm.com>
+Hello,
 
-Sync sysfs documentation pages to include the new ts_source (timestamp
-source) interface.
+On Tue, Aug 23, 2022 at 11:35:59AM -0400, Johannes Weiner wrote:
+> Re 1: I agree. If desired in the future we can make the default
+> configurable. Kconfig, mount option, what have you. cgroup.pressure
+> will work fine as a name regardless of what the default is.
 
-Signed-off-by: German Gomez <german.gomez@arm.com>
-Signed-off-by: James Clark <james.clark@arm.com>
----
- .../ABI/testing/sysfs-bus-coresight-devices-etm4x  |  8 ++++++++
- .../trace/coresight/coresight-etm4x-reference.rst  | 14 ++++++++++++++
- 2 files changed, 22 insertions(+)
+Given that there's already cgroup_disable=pressure for cases which want it
+fully disabled, I'm not sure we'd need to add more complex disabling
+options. The only difference that'd make is for users who are configuring
+cgroups manually which is pretty rare and it'd create a clear downside of
+increasing confusion as the base assumption becomes dynamic. So, I think the
+current default-on with opting-out is and will be just fine.
 
-diff --git a/Documentation/ABI/testing/sysfs-bus-coresight-devices-etm4x b/Documentation/ABI/testing/sysfs-bus-coresight-devices-etm4x
-index 8e53a32f8150..08b1964f27d3 100644
---- a/Documentation/ABI/testing/sysfs-bus-coresight-devices-etm4x
-+++ b/Documentation/ABI/testing/sysfs-bus-coresight-devices-etm4x
-@@ -516,3 +516,11 @@ Contact:	Mathieu Poirier <mathieu.poirier@linaro.org>
- Description:	(Read) Returns the number of special conditional P1 right-hand keys
- 		that the trace unit can use (0x194).  The value is taken
- 		directly from the HW.
-+
-+What:		/sys/bus/coresight/devices/etm<N>/ts_source
-+Date:		October 2022
-+KernelVersion:	6.1
-+Contact:	Mathieu Poirier <mathieu.poirier@linaro.org> or Suzuki K Poulose <suzuki.poulose@arm.com>
-+Description:	(Read) When FEAT_TRF is implemented, value of TRFCR_ELx.TS used for
-+		trace session. Otherwise -1 indicates an unknown time source. Check
-+		trcidr0.tssize to see if a global timestamp is available.
-diff --git a/Documentation/trace/coresight/coresight-etm4x-reference.rst b/Documentation/trace/coresight/coresight-etm4x-reference.rst
-index fb7578fd9372..70e34b8c81c1 100644
---- a/Documentation/trace/coresight/coresight-etm4x-reference.rst
-+++ b/Documentation/trace/coresight/coresight-etm4x-reference.rst
-@@ -71,6 +71,20 @@
- 
- ----
- 
-+:File:            ``ts_source`` (ro)
-+:Trace Registers: None.
-+:Notes:
-+    When FEAT_TRF is implemented, value of TRFCR_ELx.TS used for trace session. Otherwise -1
-+    indicates an unknown time source. Check trcidr0.tssize to see if a global timestamp is
-+    available.
-+
-+:Example:
-+    ``$> cat ts_source``
-+
-+    ``$> 1``
-+
-+----
-+
- :File:            ``addr_idx`` (rw)
- :Trace Registers: None.
- :Notes:
+> Re 2: Not all consumers of the pressure metrics create trigger. I
+> would argue that few do. So it isn't the best signal to decide on
+> whether aggregation should occur. And yes, it's further complicated by
+> the triggers being written to the very pressure files. If we don't
+> hide them, we have to come up with another way to mark them as stale,
+> lest they confuse the heck out of users. Without breaking format...
+> 
+> So IMO, default-enable, "cgroup.pressure" as a name, and hiding the
+> pressure files should be good for now while allowing to make the
+> default configurable down the line.
+
+Sounds great.
+
+Thanks.
+
 -- 
-2.28.0
-
+tejun
