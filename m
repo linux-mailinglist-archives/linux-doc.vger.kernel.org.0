@@ -2,280 +2,86 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 309C859D35C
-	for <lists+linux-doc@lfdr.de>; Tue, 23 Aug 2022 10:22:32 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id F30EC59DBFE
+	for <lists+linux-doc@lfdr.de>; Tue, 23 Aug 2022 14:22:47 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S241459AbiHWILn (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 23 Aug 2022 04:11:43 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:58754 "EHLO
+        id S1350811AbiHWLKS (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 23 Aug 2022 07:10:18 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:50782 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S241973AbiHWIKX (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 23 Aug 2022 04:10:23 -0400
-Received: from mail-lf1-x12d.google.com (mail-lf1-x12d.google.com [IPv6:2a00:1450:4864:20::12d])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id E1EC967CB7
-        for <linux-doc@vger.kernel.org>; Tue, 23 Aug 2022 01:06:48 -0700 (PDT)
-Received: by mail-lf1-x12d.google.com with SMTP id bt10so5625564lfb.1
-        for <linux-doc@vger.kernel.org>; Tue, 23 Aug 2022 01:06:48 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google;
-        h=content-transfer-encoding:in-reply-to:from:references:cc:to
-         :content-language:subject:user-agent:mime-version:date:message-id
-         :from:to:cc;
-        bh=IrN2O0F09wpaKsQU5Sw22ZwxnMPs2BdFDbis2fNQW1w=;
-        b=u5vLv6mdAr27Q4MJkcoQtIyp8eLF/BcvfOwr3yKZ6XniFst3SdMsRZlJTt/ePBo3Zf
-         Veh/z5etGN6Q3hqbHMs6vpSFufhXLeQiyzBT6tSJ7evRHIhxw3m4EdQ65IEJ5Ugnzui5
-         sutDFPdCKEvfpY/quD1ZVWaDuFnFLfpcVL2CJe1PcK0qDx22rJ8/SGZHYsHp0qtC8Fzl
-         71/dhe78rwwIgs2xg53fqtEgWYiNkDohHDviZIL3PWRESAiRN64NrWFXBZ3PS/BJFogR
-         wvEH5G1yRIld+zhT9oxYM1FMI/uAxDu44zkeTQFrqYq8R2ewMpt6WfSm3m906eZtnwJf
-         GSVg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=content-transfer-encoding:in-reply-to:from:references:cc:to
-         :content-language:subject:user-agent:mime-version:date:message-id
-         :x-gm-message-state:from:to:cc;
-        bh=IrN2O0F09wpaKsQU5Sw22ZwxnMPs2BdFDbis2fNQW1w=;
-        b=vVpb6ql193V4HPZl8JywlQBUXppR4+EuDRltT9wZ5G3PfU5YUw/lQs1DgPWbn3ubE6
-         OcAmYouFGQf1g5LDgzSpPVtlxrNRlGUuUDI0lrnSBzSkSvmhheFgNUzsKvEGuM4XTHhc
-         ciK96cV9Afm0FhV/8W+PubskxtM9Kt7X4ze+Mn87Fm0OmKKKI+ocpBXnoUvZCa/YSXEQ
-         VHg4ffI3oSnDAL+IuKee+BA4wbtA3IR47q5QegvIs19KbWZF9NHmqTRcLRvkJffuG2Ug
-         jITyg0k4TFpOeweqYjpq95YT7oCuaoNPPKT0ZW8OwiLHF7DerqCgD72p6wlueQpvLKuB
-         /lVg==
-X-Gm-Message-State: ACgBeo2sey1pUw9EhFiFMgO5wVI/Eh31UdWsajXBjspneHIzBc9oODxa
-        Ta3wcTDjOEBzza92AcJTKm3u6g==
-X-Google-Smtp-Source: AA6agR4qDwT8FFXck8mCt0tj/NGXEsi4Uxa/50WRbBu3xqi8DdCX+KVJwwxakS8M8WKjVsaAjaitMg==
-X-Received: by 2002:ac2:4e0f:0:b0:48b:7a5f:91c8 with SMTP id e15-20020ac24e0f000000b0048b7a5f91c8mr8748241lfr.430.1661242006895;
-        Tue, 23 Aug 2022 01:06:46 -0700 (PDT)
-Received: from [192.168.1.211] ([37.153.55.125])
-        by smtp.gmail.com with ESMTPSA id f10-20020a05651c02ca00b0025e6a3556ffsm595967ljo.22.2022.08.23.01.06.46
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Tue, 23 Aug 2022 01:06:46 -0700 (PDT)
-Message-ID: <9f802d58-e4d8-ddb7-d5a3-dd9408336379@linaro.org>
-Date:   Tue, 23 Aug 2022 11:06:45 +0300
+        with ESMTP id S1356937AbiHWLJj (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 23 Aug 2022 07:09:39 -0400
+Received: from mslow1.mail.gandi.net (mslow1.mail.gandi.net [IPv6:2001:4b98:dc4:8::240])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTP id 6ED7587697
+        for <linux-doc@vger.kernel.org>; Tue, 23 Aug 2022 02:16:37 -0700 (PDT)
+Received: from relay6-d.mail.gandi.net (unknown [IPv6:2001:4b98:dc4:8::226])
+        by mslow1.mail.gandi.net (Postfix) with ESMTP id 87DF1C0732;
+        Tue, 23 Aug 2022 08:35:26 +0000 (UTC)
+Received: from booty (unknown [77.244.183.192])
+        (Authenticated sender: luca.ceresoli@bootlin.com)
+        by mail.gandi.net (Postfix) with ESMTPSA id 5F52DC000A;
+        Tue, 23 Aug 2022 08:34:02 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=gm1;
+        t=1661243643;
+        h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+         to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+         content-transfer-encoding:content-transfer-encoding:
+         in-reply-to:in-reply-to:references:references;
+        bh=D9E0UhmB4IGyBAfhDmQBffQboxHt0fdw9tb81qz3IyY=;
+        b=UVo6Te/TryI77O+Fu64mjRwl4J2NAo4CVfBGyEo4QUjsSfIyBqMxbsvA81U32afl6dNXqX
+        9gPvL1gV2eieNePOw6aTlla1OiNLarx93c4O5uCiUNPA6TzvtW2HqDdokl5ybT3MztAoq2
+        Y+Juy4Zd3CXQgg0gbeY6Rf+NpJPAzB3Bm3T1PbxuLa0/542BuX00uRxgut3EYHmRMDWOJb
+        PcEyj0kh/L+BnAqhCivkdpiz9K19fXV3yEWaruuKUlXxqSKOd5X4PBmyLvtA3CLEaR6pQC
+        XtGKJer+LaiDa26+PV693oDzU3eSQOXgOSYyxRQbsSinZQv3I5TJy77+F+D1Ew==
+Date:   Tue, 23 Aug 2022 10:33:59 +0200
+From:   Luca Ceresoli <luca.ceresoli@bootlin.com>
+To:     Bagas Sanjaya <bagasdotme@gmail.com>
+Cc:     linux-doc@vger.kernel.org, linux-i2c@vger.kernel.org,
+        Wolfram Sang <wsa@kernel.org>, Peter Rosin <peda@axentia.se>,
+        linux-kernel@vger.kernel.org
+Subject: Re: [PATCH v2 3/3] docs: i2c: i2c-topology: fix typo
+Message-ID: <20220823103359.1462755e@booty>
+In-Reply-To: <78a90d0a-e0ba-0189-aa84-4ce2952e33f3@gmail.com>
+References: <20220822091050.47099-1-luca.ceresoli@bootlin.com>
+        <20220822091050.47099-4-luca.ceresoli@bootlin.com>
+        <78a90d0a-e0ba-0189-aa84-4ce2952e33f3@gmail.com>
+Organization: Bootlin
+X-Mailer: Claws Mail 4.0.0 (GTK+ 3.24.33; x86_64-pc-linux-gnu)
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.1.2
-Subject: Re: [PATCH v3 06/12] virt: gunyah: Add sysfs nodes
-Content-Language: en-GB
-To:     Elliot Berman <quic_eberman@quicinc.com>,
-        Bjorn Andersson <bjorn.andersson@linaro.org>
-Cc:     Murali Nalajala <quic_mnalajal@quicinc.com>,
-        Trilok Soni <quic_tsoni@quicinc.com>,
-        Srivatsa Vaddagiri <quic_svaddagi@quicinc.com>,
-        Carl van Schaik <quic_cvanscha@quicinc.com>,
-        Andy Gross <agross@kernel.org>,
-        linux-arm-kernel@lists.infradead.org,
-        Mark Rutland <mark.rutland@arm.com>,
-        Lorenzo Pieralisi <lorenzo.pieralisi@arm.com>,
-        Sudeep Holla <sudeep.holla@arm.com>,
-        Marc Zyngier <maz@kernel.org>,
-        Rob Herring <robh+dt@kernel.org>,
-        Krzysztof Kozlowski <krzysztof.kozlowski+dt@linaro.org>,
-        Jonathan Corbet <corbet@lwn.net>,
-        Will Deacon <will@kernel.org>,
-        Catalin Marinas <catalin.marinas@arm.com>,
-        devicetree@vger.kernel.org, linux-doc@vger.kernel.org,
-        linux-arm-msm@vger.kernel.org
-References: <20220811214107.1074343-1-quic_eberman@quicinc.com>
- <20220811214107.1074343-7-quic_eberman@quicinc.com>
-From:   Dmitry Baryshkov <dmitry.baryshkov@linaro.org>
-In-Reply-To: <20220811214107.1074343-7-quic_eberman@quicinc.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Type: text/plain; charset=US-ASCII
 Content-Transfer-Encoding: 7bit
 X-Spam-Status: No, score=-2.1 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,NICE_REPLY_A,RCVD_IN_DNSWL_NONE,
-        SPF_HELO_NONE,SPF_PASS,T_SCC_BODY_TEXT_LINE autolearn=ham
-        autolearn_force=no version=3.4.6
+        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,SPF_HELO_NONE,SPF_PASS,
+        T_SCC_BODY_TEXT_LINE autolearn=ham autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On 12/08/2022 00:41, Elliot Berman wrote:
-> Add /sys/hypervisor support when detecting that Linux is running in a
-> Gunyah environment. Export the version of Gunyah which is reported via
-> the hyp_identify hypercall.
+Hi Bagas,
+
+On Mon, 22 Aug 2022 20:40:56 +0700
+Bagas Sanjaya <bagasdotme@gmail.com> wrote:
+
+> On 8/22/22 16:10, luca.ceresoli@bootlin.com wrote:
+> > From: Luca Ceresoli <luca.ceresoli@bootlin.com>
+> > 
+> > "intension" should have probably been "intention", however "intent" seems
+> > even better.
+> > 
+> > Reported-by: Bagas Sanjaya <bagasdotme@gmail.com>
+> > Signed-off-by: Luca Ceresoli <luca.ceresoli@bootlin.com>
+> >   
 > 
-> Signed-off-by: Elliot Berman <quic_eberman@quicinc.com>
-> ---
->   .../ABI/testing/sysfs-hypervisor-gunyah       | 23 +++++
->   MAINTAINERS                                   |  1 +
->   drivers/virt/Makefile                         |  1 +
->   drivers/virt/gunyah/Makefile                  |  2 +
->   drivers/virt/gunyah/sysfs.c                   | 87 +++++++++++++++++++
->   5 files changed, 114 insertions(+)
->   create mode 100644 Documentation/ABI/testing/sysfs-hypervisor-gunyah
->   create mode 100644 drivers/virt/gunyah/Makefile
->   create mode 100644 drivers/virt/gunyah/sysfs.c
-> 
-> diff --git a/Documentation/ABI/testing/sysfs-hypervisor-gunyah b/Documentation/ABI/testing/sysfs-hypervisor-gunyah
-> new file mode 100644
-> index 000000000000..219465783a9e
-> --- /dev/null
-> +++ b/Documentation/ABI/testing/sysfs-hypervisor-gunyah
-> @@ -0,0 +1,23 @@
-> +What:		/sys/hypervisor/type
-> +Date:		August 2022
-> +KernelVersion:	6.0
-> +Contact:	linux-arm-msm@vger.kernel.org
-> +Description:	If running under Gunyah:
-> +		Type of hypervisor:
-> +		"gunyah": Gunyah hypervisor
+> The typo error is introduced in [2/3], so it makes sense to squash this
+> to the errored patch.
 
-Note, you do not need the 'type'. You already have it in form of 
-/sys/hypervisor/gunyah dir. If the VM is running under another type of 
-hypervisor, there will be a different directory for hypervisor files.
-
-> +
-> +What:		/sys/hypervisor/gunyah/api
-> +Date:		August 2022
-> +KernelVersion:	6.0
-> +Contact:	linux-arm-msm@vger.kernel.org
-> +Description:	If running under Gunyah:
-> +		The Gunyah API version.
-
-Please provide examples here.
-
-> +
-> +What:		/sys/hypervisor/gunyah/variant
-> +Date:		August 2022
-> +KernelVersion:	6.0
-> +Contact:	linux-arm-msm@vger.kernel.org
-> +Description:	If running under Gunyah:
-> +		The Gunyah variant (build) version.
-> +		The open source build of Gunyah will report "81".
-> +		The Qualcomm build of Gunyah will report "72".
-
-Are these numbers fixed in stone? What if some other random company adds 
-another variant of the Gunyah? What if the open source build is updated 
-at some point?
-
-> diff --git a/MAINTAINERS b/MAINTAINERS
-> index f5d5ebb62701..c774bbcdb348 100644
-> --- a/MAINTAINERS
-> +++ b/MAINTAINERS
-> @@ -8739,6 +8739,7 @@ M:	Elliot Berman <quic_eberman@quicinc.com>
->   M:	Murali Nalajala <quic_mnalajal@quicinc.com>
->   L:	linux-arm-msm@vger.kernel.org
->   S:	Supported
-> +F:	Documentation/ABI/testing/sysfs-hypervisor-gunyah
->   F:	Documentation/devicetree/bindings/firmware/gunyah-hypervisor.yaml
->   F:	Documentation/virt/gunyah/
->   F:	arch/arm64/gunyah/
-> diff --git a/drivers/virt/Makefile b/drivers/virt/Makefile
-> index 093674e05c40..5cd759f60122 100644
-> --- a/drivers/virt/Makefile
-> +++ b/drivers/virt/Makefile
-> @@ -9,5 +9,6 @@ obj-y				+= vboxguest/
->   
->   obj-$(CONFIG_NITRO_ENCLAVES)	+= nitro_enclaves/
->   obj-$(CONFIG_ACRN_HSM)		+= acrn/
-> +obj-$(CONFIG_GUNYAH)		+= gunyah/
->   obj-$(CONFIG_EFI_SECRET)	+= coco/efi_secret/
->   obj-$(CONFIG_SEV_GUEST)		+= coco/sev-guest/
-> diff --git a/drivers/virt/gunyah/Makefile b/drivers/virt/gunyah/Makefile
-> new file mode 100644
-> index 000000000000..e15f16c17142
-> --- /dev/null
-> +++ b/drivers/virt/gunyah/Makefile
-> @@ -0,0 +1,2 @@
-> +gunyah-y += sysfs.o
-> +obj-$(CONFIG_GUNYAH) += gunyah.o
-> diff --git a/drivers/virt/gunyah/sysfs.c b/drivers/virt/gunyah/sysfs.c
-> new file mode 100644
-> index 000000000000..9de700fdbfcb
-> --- /dev/null
-> +++ b/drivers/virt/gunyah/sysfs.c
-> @@ -0,0 +1,87 @@
-> +// SPDX-License-Identifier: GPL-2.0-only
-> +/*
-> + * Copyright (c) 2022 Qualcomm Innovation Center, Inc. All rights reserved.
-> + */
-> +
-> +#define pr_fmt(fmt) "gunyah: " fmt
-> +
-> +#include <linux/kobject.h>
-> +#include <linux/module.h>
-> +#include <linux/printk.h>
-> +#include <linux/init.h>
-> +#include <asm-generic/gunyah.h>
-> +
-> +static struct gh_hypercall_hyp_identify_resp gunyah_api;
-> +
-> +static ssize_t type_show(struct kobject *kobj, struct kobj_attribute *attr, char *buffer)
-> +{
-> +	return sysfs_emit(buffer, "gunyah\n");
-> +}
-> +static struct kobj_attribute type_attr = __ATTR_RO(type);
-> +
-> +static ssize_t api_show(struct kobject *kobj, struct kobj_attribute *attr, char *buffer)
-> +{
-> +	return sysfs_emit(buffer, "%d\n", (int)GH_API_INFO_API_VERSION(gunyah_api.api_info));
-> +}
-> +static struct kobj_attribute api_attr = __ATTR_RO(api);
-> +
-> +static ssize_t variant_show(struct kobject *kobj, struct kobj_attribute *attr, char *buffer)
-> +{
-> +	return sysfs_emit(buffer, "%d\n", (int)GH_API_INFO_VARIANT(gunyah_api.api_info));
-> +}
-> +static struct kobj_attribute variant_attr = __ATTR_RO(variant);
-> +
-> +static struct attribute *gunyah_attrs[] = {
-> +	&api_attr.attr,
-> +	&variant_attr.attr,
-> +	NULL
-> +};
-> +
-> +static const struct attribute_group gunyah_group = {
-> +	.name = "gunyah",
-> +	.attrs = gunyah_attrs,
-> +};
-> +
-> +static int __init gunyah_init(void)
-> +{
-> +	int ret;
-> +	u32 uid[4];
-> +
-> +	gh_hypercall_get_uid(uid);
-> +
-> +	if (!(gh_uid_matches(GUNYAH, uid) || gh_uid_matches(QC_HYP, uid)))
-> +		return 0;
-> +
-> +	gh_hypercall_hyp_identify(&gunyah_api);
-> +
-> +	if (GH_API_INFO_API_VERSION(gunyah_api.api_info) != 1) {
-> +		pr_warn("Unrecognized gunyah version: %llu. Currently supported: 1\n",
-> +			GH_API_INFO_API_VERSION(gunyah_api.api_info));
-> +		return 0;
-> +	}
-> +
-> +	pr_notice("Running under Gunyah hypervisor %llx/v%lld\n",
-> +		  GH_API_INFO_VARIANT(gunyah_api.api_info),
-> +		  GH_API_INFO_API_VERSION(gunyah_api.api_info));
-> +
-> +	ret = sysfs_create_file(hypervisor_kobj, &type_attr.attr);
-> +	if (ret)
-> +		return ret;
-> +
-> +	ret = sysfs_create_group(hypervisor_kobj, &gunyah_group);
-> +	if (ret)
-> +		sysfs_remove_file(hypervisor_kobj, &type_attr.attr);
-> +
-> +	return ret;
-> +}
-> +module_init(gunyah_init);
-> +
-> +static void __exit gunyah_exit(void)
-> +{
-> +	sysfs_remove_group(hypervisor_kobj, &gunyah_group);
-> +	sysfs_remove_file(hypervisor_kobj, &type_attr.attr);
-> +}
-> +module_exit(gunyah_exit);
-> +
-> +MODULE_LICENSE("GPL");
-> +MODULE_DESCRIPTION("Gunyah Hypervisor Driver");
+Patch 2 just reformats the text. "intension" was there before patch 2
+and got unmodified. But if it is useful I can send a v3 with the typo
+fix in patch 1 and the other two patches following.
 
 -- 
-With best wishes
-Dmitry
-
+Luca Ceresoli, Bootlin
+Embedded Linux and Kernel engineering
+https://bootlin.com
