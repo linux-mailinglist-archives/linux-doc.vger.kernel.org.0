@@ -2,296 +2,228 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 304F359E72A
-	for <lists+linux-doc@lfdr.de>; Tue, 23 Aug 2022 18:26:27 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 728E959E813
+	for <lists+linux-doc@lfdr.de>; Tue, 23 Aug 2022 18:56:40 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S243647AbiHWQ0R (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 23 Aug 2022 12:26:17 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:42182 "EHLO
+        id S245390AbiHWQyc (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 23 Aug 2022 12:54:32 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:46904 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S245182AbiHWQZu (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 23 Aug 2022 12:25:50 -0400
-Received: from szxga08-in.huawei.com (szxga08-in.huawei.com [45.249.212.255])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id AC3D4164B36;
-        Tue, 23 Aug 2022 05:50:32 -0700 (PDT)
-Received: from dggpeml500023.china.huawei.com (unknown [172.30.72.53])
-        by szxga08-in.huawei.com (SkyGuard) with ESMTP id 4MBps20q55z1N7K9;
-        Tue, 23 Aug 2022 20:47:02 +0800 (CST)
-Received: from [10.67.110.112] (10.67.110.112) by
- dggpeml500023.china.huawei.com (7.185.36.114) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2375.24; Tue, 23 Aug 2022 20:50:30 +0800
-Subject: Re: [PATCH -next 2/5] landlock: add chmod and chown support
-To:     =?UTF-8?Q?Micka=c3=abl_Sala=c3=bcn?= <mic@digikod.net>,
-        =?UTF-8?Q?G=c3=bcnther_Noack?= <gnoack3000@gmail.com>
-CC:     <paul@paul-moore.com>, <jmorris@namei.org>, <serge@hallyn.com>,
-        <shuah@kernel.org>, <corbet@lwn.net>,
-        <linux-security-module@vger.kernel.org>,
-        <linux-kernel@vger.kernel.org>, <linux-kselftest@vger.kernel.org>,
-        <linux-doc@vger.kernel.org>
-References: <20220822114701.26975-1-xiujianfeng@huawei.com>
- <20220822114701.26975-3-xiujianfeng@huawei.com> <YwPKG3G9PlStYPkz@nuc>
- <5873455f-fff9-618c-25b1-8b6a4ec94368@digikod.net>
-From:   xiujianfeng <xiujianfeng@huawei.com>
-Message-ID: <6d6edd60-5ed7-0f5d-d641-75e006c0e60e@huawei.com>
-Date:   Tue, 23 Aug 2022 20:50:30 +0800
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:78.0) Gecko/20100101
- Thunderbird/78.9.1
+        with ESMTP id S245461AbiHWQyH (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 23 Aug 2022 12:54:07 -0400
+Received: from mail-wr1-x429.google.com (mail-wr1-x429.google.com [IPv6:2a00:1450:4864:20::429])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 1D96D134904;
+        Tue, 23 Aug 2022 06:22:58 -0700 (PDT)
+Received: by mail-wr1-x429.google.com with SMTP id u14so16979292wrq.9;
+        Tue, 23 Aug 2022 06:22:58 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc;
+        bh=GfXTxlj3CGiZoSTXh5Xk1RxK1PDeJcnOOY0/EAwNICQ=;
+        b=OnCCH8Q+hvA+4yfvt0G7Ccp2mKh7ihOVxSghP0rV+aZ/lX6DRPkftJSwpq3ptFIr/F
+         /jV1/7JMrVV02niB7wsnYxIRNnTdF1vBhdhuf0HeFE6bEp4fww2M5WMNueUjVssr1O8I
+         nOfk9JkFmL75AapIp9d08pLWarCgYjZ6R6sgC1EoIz42mtDsgDkXFBBp9+Ro0a/+PBb7
+         oVuDhR5I2rotRjxnKHQ6rVoEiIUmC5587rktKCxTa46TMQZGwtsj6hxyyO4H//fxIBNz
+         Kco/zPmrEDL2edPaaZa5xhy6kcX6sAjU53nkSx5cT8yb75ytmmtjH6nHbR5C8TULmECm
+         8nww==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc;
+        bh=GfXTxlj3CGiZoSTXh5Xk1RxK1PDeJcnOOY0/EAwNICQ=;
+        b=SAQzJn8vMGTefjmAUCoQOIW+CHdk4kKuCD+2x4h9c9+FiOEEP/12w3N60rcE7p5G1D
+         hUx5fyVG0Yv2Hpwn2LIV5LYMLAKLNRrQunwPou/3MIVkuqyM3QCNKltPMH569yi+2Hpj
+         ppHH+t0EjGilZTCzCY7Q0MQ+F/d+A5F+U2O5UDocFC5GhFE5cdeDi0g95PzHzhthK9lP
+         JTgoqM+85bugOyMcST1CxYRfwz9dynxJvHd15DET5ZULPaK2n73Az5mAZhg6LPE0zldW
+         mgY/x5PZNiD4MjKXX7RvFGub719GuQub6f2NjgGykgjG1a6T3OpYLyfgxgCUu5rHiIc4
+         SK3Q==
+X-Gm-Message-State: ACgBeo1x2dQEG3WvwtRxPQS6zxrLGog4my+/aaTYpuCXQvFUuFiYApKl
+        VM/e4H06y9jx1dWjQPMfFGKVTDtg6kS2sA==
+X-Google-Smtp-Source: AA6agR7wvYKMFgaz1ALfRuJ6hgCFJRhgD1g1SoJPosvmNuoVWSs1N5CnHG2cTGeRq/LzdLR6940VsA==
+X-Received: by 2002:adf:ff84:0:b0:225:5880:c0c8 with SMTP id j4-20020adfff84000000b002255880c0c8mr5844585wrr.9.1661260976011;
+        Tue, 23 Aug 2022 06:22:56 -0700 (PDT)
+Received: from imac.redhat.com ([88.97.103.74])
+        by smtp.gmail.com with ESMTPSA id n7-20020a5d4207000000b002253fd19a6asm13099338wrq.18.2022.08.23.06.22.55
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 23 Aug 2022 06:22:55 -0700 (PDT)
+From:   Donald Hunter <donald.hunter@gmail.com>
+To:     bpf@vger.kernel.org, linux-doc@vger.kernel.org,
+        Jonathan Corbet <corbet@lwn.net>
+Cc:     Donald Hunter <donald.hunter@gmail.com>
+Subject: [PATCH bpf-next] Add table of BPF program types to docs
+Date:   Tue, 23 Aug 2022 14:22:36 +0100
+Message-Id: <20220823132236.65122-1-donald.hunter@gmail.com>
+X-Mailer: git-send-email 2.35.1
 MIME-Version: 1.0
-In-Reply-To: <5873455f-fff9-618c-25b1-8b6a4ec94368@digikod.net>
-Content-Type: text/plain; charset="utf-8"; format=flowed
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-Originating-IP: [10.67.110.112]
-X-ClientProxiedBy: dggems701-chm.china.huawei.com (10.3.19.178) To
- dggpeml500023.china.huawei.com (7.185.36.114)
-X-CFilter-Loop: Reflected
-X-Spam-Status: No, score=-4.2 required=5.0 tests=BAYES_00,NICE_REPLY_A,
-        RCVD_IN_DNSWL_MED,SPF_HELO_NONE,SPF_PASS,T_SCC_BODY_TEXT_LINE
-        autolearn=ham autolearn_force=no version=3.4.6
+X-Spam-Status: No, score=-2.1 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_FROM,
+        RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,SPF_PASS,T_SCC_BODY_TEXT_LINE,
+        UPPERCASE_50_75 autolearn=no autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
+Extend the BPF program types documentation with a table of
+program types, attach points and ELF section names.
 
+The program_types.csv file is generated from tools/lib/bpf/libbpf.c
+and a script is included for regenerating the .csv file.
 
-在 2022/8/23 5:07, Mickaël Salaün 写道:
-> 
-> On 22/08/2022 20:25, Günther Noack wrote:
->> Hi!
->>
->> Thanks for sending this patch set! :)
->>
->> On Mon, Aug 22, 2022 at 07:46:58PM +0800, Xiu Jianfeng wrote:
->>> Add two flags LANDLOCK_ACCESS_FS_CHMOD and LANDLOCK_ACCESS_FS_CHOWN to
->>> support restriction to chmod(2) and chown(2) with landlock.
->>>
->>> Also change the landlock ABI version from 3 to 4.
->>>
->>> Signed-off-by: Xiu Jianfeng <xiujianfeng@huawei.com>
->>> ---
->>>   include/uapi/linux/landlock.h                |  8 ++++++--
->>>   security/landlock/fs.c                       | 16 +++++++++++++++-
->>>   security/landlock/limits.h                   |  2 +-
->>>   security/landlock/syscalls.c                 |  2 +-
->>>   tools/testing/selftests/landlock/base_test.c |  2 +-
->>>   tools/testing/selftests/landlock/fs_test.c   |  6 ++++--
->>>   6 files changed, 28 insertions(+), 8 deletions(-)
->>>
->>> diff --git a/include/uapi/linux/landlock.h 
->>> b/include/uapi/linux/landlock.h
->>> index 735b1fe8326e..5ce633c92722 100644
->>> --- a/include/uapi/linux/landlock.h
->>> +++ b/include/uapi/linux/landlock.h
->>> @@ -141,13 +141,15 @@ struct landlock_path_beneath_attr {
->>>    *   directory) parent.  Otherwise, such actions are denied with 
->>> errno set to
->>>    *   EACCES.  The EACCES errno prevails over EXDEV to let user space
->>>    *   efficiently deal with an unrecoverable error.
->>> + * - %LANDLOCK_ACCESS_FS_CHMOD: Change the file mode bits of a file.
->>> + * - %LANDLOCK_ACCESS_FS_CHOWN: Change the owner and/or group of a 
->>> file.
-> 
-> This section talk about "access rights that only apply to the content of 
-> a directory, not the directory itself", which is not correct (see 
-> LANDLOCK_ACCESS_FS_READ_DIR). I'd like these access rights to remain 
-> here but this kernel patch and the related tests need some changes.
-> 
-> What about a LANDLOCK_ACCESS_FS_CHGRP? I'm not sure if we need to 
-> differentiate these actions or not, but we need arguments to choose.
-> 
-> 
->>>    *
->>>    * .. warning::
->>>    *
->>>    *   It is currently not possible to restrict some file-related 
->>> actions
->>>    *   accessible through these syscall families: :manpage:`chdir(2)`,
->>> - *   :manpage:`stat(2)`, :manpage:`flock(2)`, :manpage:`chmod(2)`,
->>> - *   :manpage:`chown(2)`, :manpage:`setxattr(2)`, :manpage:`utime(2)`,
->>> + *   :manpage:`stat(2)`, :manpage:`flock(2)`,
->>> + *   :manpage:`setxattr(2)`, :manpage:`utime(2)`,
->>
->> *formatting nit*
->> We could fill up the full line width here
->>
->>>    *   :manpage:`ioctl(2)`, :manpage:`fcntl(2)`, :manpage:`access(2)`.
->>>    *   Future Landlock evolutions will enable to restrict them.
->>>    */
->>> @@ -167,6 +169,8 @@ struct landlock_path_beneath_attr {
->>>   #define LANDLOCK_ACCESS_FS_MAKE_SYM            (1ULL << 12)
->>>   #define LANDLOCK_ACCESS_FS_REFER            (1ULL << 13)
->>>   #define LANDLOCK_ACCESS_FS_TRUNCATE            (1ULL << 14)
->>> +#define LANDLOCK_ACCESS_FS_CHMOD            (1ULL << 15)
->>> +#define LANDLOCK_ACCESS_FS_CHOWN            (1ULL << 16)
->>>   /* clang-format on */
->>>
->>>   #endif /* _UAPI_LINUX_LANDLOCK_H */
->>> diff --git a/security/landlock/fs.c b/security/landlock/fs.c
->>> index c57f581a9cd5..c25d5f89c8be 100644
->>> --- a/security/landlock/fs.c
->>> +++ b/security/landlock/fs.c
->>> @@ -147,7 +147,9 @@ static struct landlock_object 
->>> *get_inode_object(struct inode *const inode)
->>>       LANDLOCK_ACCESS_FS_EXECUTE | \
->>>       LANDLOCK_ACCESS_FS_WRITE_FILE | \
->>>       LANDLOCK_ACCESS_FS_READ_FILE | \
->>> -    LANDLOCK_ACCESS_FS_TRUNCATE)
->>> +    LANDLOCK_ACCESS_FS_TRUNCATE | \
->>> +    LANDLOCK_ACCESS_FS_CHMOD | \
->>> +    LANDLOCK_ACCESS_FS_CHOWN)
->>>   /* clang-format on */
->>>
->>>   /*
->>> @@ -1146,6 +1148,16 @@ static int hook_path_truncate(const struct 
->>> path *const path)
->>>       return current_check_access_path(path, 
->>> LANDLOCK_ACCESS_FS_TRUNCATE);
->>>   }
->>>
->>> +static int hook_path_chmod(const struct path *const dir, umode_t mode)
-> 
-> This is not a "dir" but a "path".
-> 
-> 
->>> +{
->>> +    return current_check_access_path(dir, LANDLOCK_ACCESS_FS_CHMOD);
->>> +}
->>> +
->>> +static int hook_path_chown(const struct path *const dir, kuid_t uid, 
->>> kgid_t gid)
-> 
-> Same here.
-> 
-> 
->>> +{
->>> +    return current_check_access_path(dir, LANDLOCK_ACCESS_FS_CHOWN);
->>> +}
->>
->> One implication of this approach is that the chown+chmod right on a
->> directory's contents are always going together with the same rights on
->> the directory itself.
->>
->> For example, if you grant chmod+chown access rights for "datadir/",
->> the command "chmod 0600 datadir/file1" will work, but so will the
->> command "chmod 0600 datadir". But the approach of checking just the
->> parent directory's rights is also inflexible if you think through the
->> kinds of rights you can grant with it. (It would also not be possible
->> to grant chmod+chown on individual files.)
-> 
-> Good point. For an initial chmod/chown/chgrp access right, I'd prefer to 
-> be able to set these access rights on a directory but only for its 
-> content, not the directory itself. I think it is much safer and should 
-> be enough for the majority of use cases, but let me know if I'm missing 
-> something. I'm not sure being able to change the root directory access 
-> rights may be a good idea anyway (even for containers). ;)
-> 
-> A path_beneath rule enables to identify a file hierarchy (i.e. the 
-> content of a directory), not to make modifications visible outside of 
-> the directory identifying the hierarchy (hence the "parent_fd" field), 
-> which would be the case with the current chmod/chown access rights.
-> 
-> 
->>
->> Do you have any thoughts on how to resolve this if this flexibility
->> might be needed?
->>
->> I wonder whether the right way to resolve this would be to give users
->> a way to make that distinction at the level of landlock_add_rule(),
->> with an API like this (note the additional flag):
->>
->>    err = landlock_add_rule(ruleset_fd, LANDLOCK_RULE_PATH_BENEATH,
->>                            &path_beneath, LANDLOCK_STRICTLY_BENEATH);
->>                                           ^^^^^^^^^^^^^^^^^^^^^^^^^
->>
->> Multiple calls of landlock_add_rule() on the same file are already
->> today joining the requested access rights, so it would be possible to
->> mix-and-match "strict beneath" with "beneath" rights on the same
->> directory, and it would work in the same way for other access rights
->> as well.
-> 
-> This kind of option is interesting. For now, some access rights are kind 
-> of "doubled" to enable to differentiate between a file and a directory 
-> (i.e. READ_DIR/READ_FILE, REMOVE_DIR/REMOVE_FILE, WRITE_FILE/MAKE_*) 
-> when it may be useful, but this is different.
-> 
-> I think this "strictly beneath" behavior should be the default, which is 
-> currently the case.
-> 
-> 
->>
->> To be clear: I'm proposing this approach not because I think it should
->> be part of this patch set, but because it would be good to have a way
->> forward if that kind of flexibility is needed in the future.
->>
->> Does that seem reasonable?
-> 
-> This is the kind of questions that made such access rights not 
-> appropriate for the initial version of Landlock. But we should talk 
-> about that now.
+I have not integrated the script into the doc build but if that
+is desirable then please suggest the preferred way to do so.
 
-Hi Günther and Mickaël,
+Signed-off-by: Donald Hunter <donald.hunter@gmail.com>
+---
+ Documentation/bpf/program_types.csv | 82 +++++++++++++++++++++++++++++
+ Documentation/bpf/programs.rst      | 15 ++++++
+ scripts/gen-bpf-progtypes.sh        | 21 ++++++++
+ 3 files changed, 118 insertions(+)
+ create mode 100644 Documentation/bpf/program_types.csv
+ create mode 100755 scripts/gen-bpf-progtypes.sh
 
-Thanks for your comments, so I think the conclusion here is that we have 
-to make sure that in this patchset chown/chmod access rights can be set 
-on a directory only for its content, not the directory itself, right? 
-any good idea about how to implement this? :)
+diff --git a/Documentation/bpf/program_types.csv b/Documentation/bpf/program_types.csv
+new file mode 100644
+index 000000000000..adec046b0bde
+--- /dev/null
++++ b/Documentation/bpf/program_types.csv
+@@ -0,0 +1,82 @@
++Program Type,Attach Type,ELF Section Name,Sleepable
++``BPF_PROG_TYPE_SOCKET_FILTER``,,``socket``,
++``BPF_PROG_TYPE_SK_REUSEPORT``,``BPF_SK_REUSEPORT_SELECT_OR_MIGRATE``,``sk_reuseport/migrate``,
++``BPF_PROG_TYPE_SK_REUSEPORT``,``BPF_SK_REUSEPORT_SELECT``,``sk_reuseport``,
++``BPF_PROG_TYPE_KPROBE``,,``kprobe+``,
++``BPF_PROG_TYPE_KPROBE``,,``uprobe+``,
++``BPF_PROG_TYPE_KPROBE``,,``uprobe.s+``,Yes
++``BPF_PROG_TYPE_KPROBE``,,``kretprobe+``,
++``BPF_PROG_TYPE_KPROBE``,,``uretprobe+``,
++``BPF_PROG_TYPE_KPROBE``,,``uretprobe.s+``,Yes
++``BPF_PROG_TYPE_KPROBE``,``BPF_TRACE_KPROBE_MULTI``,``kprobe.multi+``,
++``BPF_PROG_TYPE_KPROBE``,``BPF_TRACE_KPROBE_MULTI``,``kretprobe.multi+``,
++``BPF_PROG_TYPE_KPROBE``,,``ksyscall+``,
++``BPF_PROG_TYPE_KPROBE``,,``kretsyscall+``,
++``BPF_PROG_TYPE_KPROBE``,,``usdt+``,
++``BPF_PROG_TYPE_SCHED_CLS``,,``tc``,
++``BPF_PROG_TYPE_SCHED_CLS``,,``classifier``,
++``BPF_PROG_TYPE_SCHED_ACT``,,``action``,
++``BPF_PROG_TYPE_TRACEPOINT``,,``tracepoint+``,
++``BPF_PROG_TYPE_TRACEPOINT``,,``tp+``,
++``BPF_PROG_TYPE_RAW_TRACEPOINT``,,``raw_tracepoint+``,
++``BPF_PROG_TYPE_RAW_TRACEPOINT``,,``raw_tp+``,
++``BPF_PROG_TYPE_RAW_TRACEPOINT_WRITABLE``,,``raw_tracepoint.w+``,
++``BPF_PROG_TYPE_RAW_TRACEPOINT_WRITABLE``,,``raw_tp.w+``,
++``BPF_PROG_TYPE_TRACING``,``BPF_TRACE_RAW_TP``,``tp_btf+``,
++``BPF_PROG_TYPE_TRACING``,``BPF_TRACE_FENTRY``,``fentry+``,
++``BPF_PROG_TYPE_TRACING``,``BPF_MODIFY_RETURN``,``fmod_ret+``,
++``BPF_PROG_TYPE_TRACING``,``BPF_TRACE_FEXIT``,``fexit+``,
++``BPF_PROG_TYPE_TRACING``,``BPF_TRACE_FENTRY``,``fentry.s+``,Yes
++``BPF_PROG_TYPE_TRACING``,``BPF_MODIFY_RETURN``,``fmod_ret.s+``,Yes
++``BPF_PROG_TYPE_TRACING``,``BPF_TRACE_FEXIT``,``fexit.s+``,Yes
++``BPF_PROG_TYPE_EXT``,,``freplace+``,
++``BPF_PROG_TYPE_LSM``,``BPF_LSM_MAC``,``lsm+``,
++``BPF_PROG_TYPE_LSM``,``BPF_LSM_MAC``,``lsm.s+``,Yes
++``BPF_PROG_TYPE_LSM``,``BPF_LSM_CGROUP``,``lsm_cgroup+``,
++``BPF_PROG_TYPE_TRACING``,``BPF_TRACE_ITER``,``iter+``,
++``BPF_PROG_TYPE_TRACING``,``BPF_TRACE_ITER``,``iter.s+``,Yes
++``BPF_PROG_TYPE_SYSCALL``,,``syscall``,Yes
++``BPF_PROG_TYPE_XDP``,``BPF_XDP_DEVMAP``,``xdp.frags/devmap``,
++``BPF_PROG_TYPE_XDP``,``BPF_XDP_DEVMAP``,``xdp/devmap``,
++``BPF_PROG_TYPE_XDP``,``BPF_XDP_CPUMAP``,``xdp.frags/cpumap``,
++``BPF_PROG_TYPE_XDP``,``BPF_XDP_CPUMAP``,``xdp/cpumap``,
++``BPF_PROG_TYPE_XDP``,``BPF_XDP``,``xdp.frags``,
++``BPF_PROG_TYPE_XDP``,``BPF_XDP``,``xdp``,
++``BPF_PROG_TYPE_PERF_EVENT``,,``perf_event``,
++``BPF_PROG_TYPE_LWT_IN``,,``lwt_in``,
++``BPF_PROG_TYPE_LWT_OUT``,,``lwt_out``,
++``BPF_PROG_TYPE_LWT_XMIT``,,``lwt_xmit``,
++``BPF_PROG_TYPE_LWT_SEG6LOCAL``,,``lwt_seg6local``,
++``BPF_PROG_TYPE_SOCK_OPS``,``BPF_CGROUP_SOCK_OPS``,``sockops``,
++``BPF_PROG_TYPE_SK_SKB``,``BPF_SK_SKB_STREAM_PARSER``,``sk_skb/stream_parser``,
++``BPF_PROG_TYPE_SK_SKB``,``BPF_SK_SKB_STREAM_VERDICT``,``sk_skb/stream_verdict``,
++``BPF_PROG_TYPE_SK_SKB``,,``sk_skb``,
++``BPF_PROG_TYPE_SK_MSG``,``BPF_SK_MSG_VERDICT``,``sk_msg``,
++``BPF_PROG_TYPE_LIRC_MODE2``,``BPF_LIRC_MODE2``,``lirc_mode2``,
++``BPF_PROG_TYPE_FLOW_DISSECTOR``,``BPF_FLOW_DISSECTOR``,``flow_dissector``,
++``BPF_PROG_TYPE_CGROUP_SKB``,``BPF_CGROUP_INET_INGRESS``,``cgroup_skb/ingress``,
++``BPF_PROG_TYPE_CGROUP_SKB``,``BPF_CGROUP_INET_EGRESS``,``cgroup_skb/egress``,
++``BPF_PROG_TYPE_CGROUP_SKB``,,``cgroup/skb``,
++``BPF_PROG_TYPE_CGROUP_SOCK``,``BPF_CGROUP_INET_SOCK_CREATE``,``cgroup/sock_create``,
++``BPF_PROG_TYPE_CGROUP_SOCK``,``BPF_CGROUP_INET_SOCK_RELEASE``,``cgroup/sock_release``,
++``BPF_PROG_TYPE_CGROUP_SOCK``,``BPF_CGROUP_INET_SOCK_CREATE``,``cgroup/sock``,
++``BPF_PROG_TYPE_CGROUP_SOCK``,``BPF_CGROUP_INET4_POST_BIND``,``cgroup/post_bind4``,
++``BPF_PROG_TYPE_CGROUP_SOCK``,``BPF_CGROUP_INET6_POST_BIND``,``cgroup/post_bind6``,
++``BPF_PROG_TYPE_CGROUP_SOCK_ADDR``,``BPF_CGROUP_INET4_BIND``,``cgroup/bind4``,
++``BPF_PROG_TYPE_CGROUP_SOCK_ADDR``,``BPF_CGROUP_INET6_BIND``,``cgroup/bind6``,
++``BPF_PROG_TYPE_CGROUP_SOCK_ADDR``,``BPF_CGROUP_INET4_CONNECT``,``cgroup/connect4``,
++``BPF_PROG_TYPE_CGROUP_SOCK_ADDR``,``BPF_CGROUP_INET6_CONNECT``,``cgroup/connect6``,
++``BPF_PROG_TYPE_CGROUP_SOCK_ADDR``,``BPF_CGROUP_UDP4_SENDMSG``,``cgroup/sendmsg4``,
++``BPF_PROG_TYPE_CGROUP_SOCK_ADDR``,``BPF_CGROUP_UDP6_SENDMSG``,``cgroup/sendmsg6``,
++``BPF_PROG_TYPE_CGROUP_SOCK_ADDR``,``BPF_CGROUP_UDP4_RECVMSG``,``cgroup/recvmsg4``,
++``BPF_PROG_TYPE_CGROUP_SOCK_ADDR``,``BPF_CGROUP_UDP6_RECVMSG``,``cgroup/recvmsg6``,
++``BPF_PROG_TYPE_CGROUP_SOCK_ADDR``,``BPF_CGROUP_INET4_GETPEERNAME``,``cgroup/getpeername4``,
++``BPF_PROG_TYPE_CGROUP_SOCK_ADDR``,``BPF_CGROUP_INET6_GETPEERNAME``,``cgroup/getpeername6``,
++``BPF_PROG_TYPE_CGROUP_SOCK_ADDR``,``BPF_CGROUP_INET4_GETSOCKNAME``,``cgroup/getsockname4``,
++``BPF_PROG_TYPE_CGROUP_SOCK_ADDR``,``BPF_CGROUP_INET6_GETSOCKNAME``,``cgroup/getsockname6``,
++``BPF_PROG_TYPE_CGROUP_SYSCTL``,``BPF_CGROUP_SYSCTL``,``cgroup/sysctl``,
++``BPF_PROG_TYPE_CGROUP_SOCKOPT``,``BPF_CGROUP_GETSOCKOPT``,``cgroup/getsockopt``,
++``BPF_PROG_TYPE_CGROUP_SOCKOPT``,``BPF_CGROUP_SETSOCKOPT``,``cgroup/setsockopt``,
++``BPF_PROG_TYPE_CGROUP_DEVICE``,``BPF_CGROUP_DEVICE``,``cgroup/dev``,
++``BPF_PROG_TYPE_STRUCT_OPS``,,``struct_ops+``,
++``BPF_PROG_TYPE_SK_LOOKUP``,``BPF_SK_LOOKUP``,``sk_lookup``,
+diff --git a/Documentation/bpf/programs.rst b/Documentation/bpf/programs.rst
+index 620eb667ac7a..71448fe0b955 100644
+--- a/Documentation/bpf/programs.rst
++++ b/Documentation/bpf/programs.rst
+@@ -7,3 +7,18 @@ Program Types
+    :glob:
+ 
+    prog_*
++
++Program Types and libbpf
++========================
++
++The table below lists the program types, their attach types where relevant and the ELF section
++names supported by libbpf for them. The ELF section names follow these rules:
++
++- ``type`` is an exact match, e.g. ``SEC("socket")``
++- ``type+`` means it can be either exact ``SEC("type")`` or well-formed ``SEC("type/extras")``
++  with a ‘``/``’ separator, e.g. ``SEC("tracepoint/syscalls/sys_enter_open")``
++
++.. csv-table:: Program Types and Their ELF Section Names
++   :file: program_types.csv
++   :widths: 40 30 20 10
++   :header-rows: 1
+diff --git a/scripts/gen-bpf-progtypes.sh b/scripts/gen-bpf-progtypes.sh
+new file mode 100755
+index 000000000000..fb9650bd5c1b
+--- /dev/null
++++ b/scripts/gen-bpf-progtypes.sh
+@@ -0,0 +1,21 @@
++#!/bin/bash
++# SPDX-License-Identifier: GPL-2.0-only
++#
++# Copyright (C) Red Hat.
++#
++# Generate a .csv table of BPF program types
++
++if ! [ -d "tools/lib/bpf" -a -d "Documentation" ]; then
++    echo "Run from top level of kernel tree"
++    exit 1
++fi
++
++awk -F'[",[:space:]]+' \
++    'BEGIN { print "Program Type,Attach Type,ELF Section Name,Sleepable" }
++    /SEC_DEF\(\"/ && !/SEC_DEPRECATED/ {
++    type = "``BPF_PROG_TYPE_" $4 "``"
++    attach = index($5, "0") ? "" : "``" $5 "``";
++    section = "``" $3 "``"
++    sleepable = index($0, "SEC_SLEEPABLE") ? "Yes" : "";
++    print type "," attach "," section "," sleepable }' \
++tools/lib/bpf/libbpf.c > Documentation/bpf/program_types.csv
+-- 
+2.35.1
 
-> 
-> 
->>
->>> +
->>>   /* File hooks */
->>>
->>>   static inline access_mask_t get_file_access(const struct file 
->>> *const file)
->>> @@ -1199,6 +1211,8 @@ static struct security_hook_list 
->>> landlock_hooks[] __lsm_ro_after_init = {
->>>       LSM_HOOK_INIT(path_unlink, hook_path_unlink),
->>>       LSM_HOOK_INIT(path_rmdir, hook_path_rmdir),
->>>       LSM_HOOK_INIT(path_truncate, hook_path_truncate),
->>> +    LSM_HOOK_INIT(path_chmod, hook_path_chmod),
->>> +    LSM_HOOK_INIT(path_chown, hook_path_chown),
->>>
->>>       LSM_HOOK_INIT(file_open, hook_file_open),
->>>   };
->>> diff --git a/security/landlock/limits.h b/security/landlock/limits.h
->>> index 82288f0e9e5e..08858da7fb4f 100644
->>> --- a/security/landlock/limits.h
->>> +++ b/security/landlock/limits.h
->>> @@ -18,7 +18,7 @@
->>>   #define LANDLOCK_MAX_NUM_LAYERS        16
->>>   #define LANDLOCK_MAX_NUM_RULES        U32_MAX
->>>
->>> -#define LANDLOCK_LAST_ACCESS_FS        LANDLOCK_ACCESS_FS_TRUNCATE
->>> +#define LANDLOCK_LAST_ACCESS_FS        LANDLOCK_ACCESS_FS_CHOWN
->>>   #define LANDLOCK_MASK_ACCESS_FS        ((LANDLOCK_LAST_ACCESS_FS << 
->>> 1) - 1)
->>>   #define LANDLOCK_NUM_ACCESS_FS        
->>> __const_hweight64(LANDLOCK_MASK_ACCESS_FS)
->>>
->>> diff --git a/security/landlock/syscalls.c b/security/landlock/syscalls.c
->>> index f4d6fc7ed17f..469e0e11735c 100644
->>> --- a/security/landlock/syscalls.c
->>> +++ b/security/landlock/syscalls.c
->>> @@ -129,7 +129,7 @@ static const struct file_operations ruleset_fops = {
->>>       .write = fop_dummy_write,
->>>   };
->>>
->>> -#define LANDLOCK_ABI_VERSION 3
->>> +#define LANDLOCK_ABI_VERSION 4
->>
->> ABI version 3 has not made it into a stable kernel yet; I wonder
->> whether it wouldn't be easier to just bundle the truncate, chmod and
->> chown rights as part of ABI version 3 (assuming that the patches make
->> it into a stable release together)?
->>
->> Mickaël, do you have an opinion on this?
-> 
-> I'll make sure to only have one ABI version bump per kernel release, but 
-> it is OK to bump it for this patch series in case it is not ready for 
-> the next merge window. I'll change it if required when merging into my 
-> tree. It is easier to change the code to decrease the version, so please 
-> keep it as is. ;)
-> .
