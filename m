@@ -2,146 +2,94 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 6B28959D316
-	for <lists+linux-doc@lfdr.de>; Tue, 23 Aug 2022 10:06:33 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id E579E59D453
+	for <lists+linux-doc@lfdr.de>; Tue, 23 Aug 2022 10:24:19 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S241513AbiHWICH (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 23 Aug 2022 04:02:07 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:47712 "EHLO
+        id S241633AbiHWILo (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 23 Aug 2022 04:11:44 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:58048 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S241498AbiHWICC (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 23 Aug 2022 04:02:02 -0400
-Received: from mail-lf1-x133.google.com (mail-lf1-x133.google.com [IPv6:2a00:1450:4864:20::133])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 02991659D0
-        for <linux-doc@vger.kernel.org>; Tue, 23 Aug 2022 01:02:01 -0700 (PDT)
-Received: by mail-lf1-x133.google.com with SMTP id bt10so5610930lfb.1
-        for <linux-doc@vger.kernel.org>; Tue, 23 Aug 2022 01:02:00 -0700 (PDT)
+        with ESMTP id S241520AbiHWIJ3 (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 23 Aug 2022 04:09:29 -0400
+Received: from mail-oa1-x34.google.com (mail-oa1-x34.google.com [IPv6:2001:4860:4864:20::34])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 41CDD6744A;
+        Tue, 23 Aug 2022 01:06:20 -0700 (PDT)
+Received: by mail-oa1-x34.google.com with SMTP id 586e51a60fabf-11cab7d7e0fso14731655fac.6;
+        Tue, 23 Aug 2022 01:06:19 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google;
-        h=content-transfer-encoding:in-reply-to:from:references:cc:to
-         :content-language:subject:user-agent:mime-version:date:message-id
-         :from:to:cc;
-        bh=8kwr9P28nyS277cPNviJmCpAD2kCcWxhxSzytfmAPPM=;
-        b=w078FvPgjksE9hvIJJNqXO0fZOAECTh9CtTuGSZAeYhHCaqpxGSpbz2PgWnggrNcWT
-         I4Qc0Q8Omjjc7DSrc9iVOIjGYGKkDKWfzHq3mIDQ6haFAQT0ZDWo2vO7uwYmrS8vpirY
-         nN5ojr7F3sPVUI+9Eg3iV7No/w/WeD1YnTIbZO0AbKwaKJD539jGiXtAn3sf5JDcpAuK
-         4aOaPG3qfTbvstFc79trU81O6vyyYmyUSokORniJ5AhIrDPUhXw351nzDEzsh/gi7PKB
-         1UoTW2C0GS6qh/yn2H/N0m91dDhYGRiYzPUGKz2sZL1lGk9zvDcXHbc35ajiRu8exr+k
-         HTog==
+        d=gmail.com; s=20210112;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:from:to:cc;
+        bh=3DUNim7WTmzHmRObYLAWDZd3QPXFrzWMAVJ6u950fVw=;
+        b=PEfKzVZ9zdDK7xpYNrTaOE8LDRrYuccID4DJC18ZZ1dOGcM/PFel+HYpWII3aKbIeF
+         DWC52FU81Nk6KSpVp4uhLoJusR/zqCu0JxHLuRXzPlJVYhVVh7+wgUCecv/5N6zsniIx
+         QvDxhVIuMs/EghKCfi/T39Sz+o9TQQaQXXA9k7Mo5jS0wfJcezhj4E8fkG3R75mS/MOr
+         n1ULmf4rkLai8G/6SCv55h0BGAWvJH87B0IvIdLCJ0EyM22FH8AIfJndotB+YyGD0hRS
+         K9As7UA+MPl9h+9Fa89Ygw7FFNqg7YRIl6gspf3za/PHuxAI/xFLO81HxY/QSBj4UIEM
+         Wz0g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=content-transfer-encoding:in-reply-to:from:references:cc:to
-         :content-language:subject:user-agent:mime-version:date:message-id
-         :x-gm-message-state:from:to:cc;
-        bh=8kwr9P28nyS277cPNviJmCpAD2kCcWxhxSzytfmAPPM=;
-        b=sqTvTzKyCFdYpS4bhh6Z3ozwhyK/DEODpxJEVIZNk2s0pPipfc3b2nnhqteNodEW3T
-         znZpCOOg2aITcP5eVMXkX+/UGsejuewxzA9+mR44GY2l5SSBTwvoVCED+ZeRyk5boQ2y
-         7acFPrBoYcrnUOIcZKl7Tv2LQECo0FR+6U+2Ryf3plLGJHAPxuY5tTsNSWU+iOjAYRmu
-         35UV3hMvkG1WLd5bJc2Eld1vXVAmqrOLgDa6eBE5x3gPZdXsMmn5PWNZNkJdEDT6rv2o
-         +SpNzTKjsWbRPC4PevwpVMsTpWt/FK25P8IGRwxdzDGyDggNkq3+lNLVeLu2qTYW4vri
-         uu1Q==
-X-Gm-Message-State: ACgBeo2C3zcYnM0QB1S1lQamqB73DYSoRvJHSetfe4wadDxDR1h/yBPk
-        5mH905a/dDmiAeShxaJXmj9MyA==
-X-Google-Smtp-Source: AA6agR4T2ojtqAekhhO+3PeLF3Y3+5fUDILfCCYgVbuo6QADnkEMSZKuBSpzAARDk3onZwpZatyNKQ==
-X-Received: by 2002:ac2:4c4c:0:b0:492:bc29:e328 with SMTP id o12-20020ac24c4c000000b00492bc29e328mr7660710lfk.386.1661241719288;
-        Tue, 23 Aug 2022 01:01:59 -0700 (PDT)
-Received: from [192.168.1.211] ([37.153.55.125])
-        by smtp.gmail.com with ESMTPSA id n8-20020a05651203e800b0048b13d0b896sm679256lfq.141.2022.08.23.01.01.58
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Tue, 23 Aug 2022 01:01:58 -0700 (PDT)
-Message-ID: <d3b435ec-fa47-9ed2-de65-e5e0a6cf7b05@linaro.org>
-Date:   Tue, 23 Aug 2022 11:01:58 +0300
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:x-gm-message-state:from:to:cc;
+        bh=3DUNim7WTmzHmRObYLAWDZd3QPXFrzWMAVJ6u950fVw=;
+        b=DslT6HfCfSaOk48qI7tcWj4PNM9/7IgIoeeO/qb6lNZJ+ebQYIWpUfPCRvez5SmBXb
+         7gr3sLdyTh8NI4ZPw1BzOqAWv3pfuvkMBu+ydXvcB1v1zcy/7afK+iudz6xeIBOeLEDW
+         m+f5C76bj4UxuDBo8pawGIzBVhrjclvLHZQWlXJ54rbV2JvTdr7LsMZcuGEHqtcF/Zz6
+         6pcHAj2ev+VcK/SvCopjWqjpLsf4GvIp7HVgE/rLOEQj1tfLJQSwpyMeB8jidKYCii3e
+         j8Lm4Uj46Hs7dCA75eCOS23RuOQAYRyj+SJP/fxY6EnyruCQyf1cL+kCev/7fkEVNo9u
+         k9tg==
+X-Gm-Message-State: ACgBeo1HSHF2dhSfK8T4F0yjlEpuWuoZH0So18F5GAHpoKr+lBjGeHsd
+        X0Sh4gKlbWJP68+v30CU6F0LuAAplLNcreI4GL+lVlv7
+X-Google-Smtp-Source: AA6agR7u0uAvaNIkWvMT1B9z9RQ3S+vI04sURkMJs02g+rhl0HQ6KWE6yptMMcC6zUNNTZ6gciyBV1GEw8LrC624xeM=
+X-Received: by 2002:a05:6870:8912:b0:11b:a59c:f533 with SMTP id
+ i18-20020a056870891200b0011ba59cf533mr894982oao.220.1661241979113; Tue, 23
+ Aug 2022 01:06:19 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.1.2
-Subject: Re: [PATCH v2 00/11] Drivers for gunyah hypervisor
-Content-Language: en-GB
-To:     Elliot Berman <quic_eberman@quicinc.com>,
-        Bjorn Andersson <bjorn.andersson@linaro.org>
-Cc:     Murali Nalajala <quic_mnalajal@quicinc.com>,
-        Trilok Soni <quic_tsoni@quicinc.com>,
-        Srivatsa Vaddagiri <quic_svaddagi@quicinc.com>,
-        Carl van Schaik <quic_cvanscha@quicinc.com>,
-        Andy Gross <agross@kernel.org>,
-        linux-arm-kernel@lists.infradead.org,
-        Lorenzo Pieralisi <lorenzo.pieralisi@arm.com>,
-        Sudeep Holla <sudeep.holla@arm.com>,
-        Marc Zyngier <maz@kernel.org>,
-        Rob Herring <robh+dt@kernel.org>,
-        Krzysztof Kozlowski <krzysztof.kozlowski+dt@linaro.org>,
+References: <202208221854.8ASrzjKa-lkp@intel.com> <20220823030056.123709-1-bagasdotme@gmail.com>
+In-Reply-To: <20220823030056.123709-1-bagasdotme@gmail.com>
+From:   Sergey Ryazanov <ryazanov.s.a@gmail.com>
+Date:   Tue, 23 Aug 2022 11:06:08 +0300
+Message-ID: <CAHNKnsRUJzRGJ+muGfYAW-5EM91_j9AK-WTeV9pBZeXjH6L_6g@mail.gmail.com>
+Subject: Re: [PATCH] mips: pci: remove extraneous asterisk from top level
+ comment of ar2315 PCI driver
+To:     Bagas Sanjaya <bagasdotme@gmail.com>
+Cc:     linux-doc@vger.kernel.org, linux-mips@vger.kernel.org,
+        open list <linux-kernel@vger.kernel.org>,
+        Thomas Bogendoerfer <tsbogend@alpha.franken.de>,
+        Rikard Falkeborn <rikard.falkeborn@gmail.com>,
+        Ralf Baechle <ralf@linux-mips.org>,
         Jonathan Corbet <corbet@lwn.net>,
-        Will Deacon <will@kernel.org>,
-        Catalin Marinas <catalin.marinas@arm.com>,
-        devicetree@vger.kernel.org, linux-doc@vger.kernel.org,
-        linux-arm-msm@vger.kernel.org
-References: <20220801211240.597859-1-quic_eberman@quicinc.com>
- <50230652-c1ae-4ce2-907c-9bdc6b827f8e@linaro.org>
- <62073cb8-0211-3b49-11cb-aceea6df0845@quicinc.com>
-From:   Dmitry Baryshkov <dmitry.baryshkov@linaro.org>
-In-Reply-To: <62073cb8-0211-3b49-11cb-aceea6df0845@quicinc.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+        Aditya Srivastava <yashsri421@gmail.com>,
+        kernel test robot <lkp@intel.com>, stable@vger.kernel.org
+Content-Type: text/plain; charset="UTF-8"
 X-Spam-Status: No, score=-2.1 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,NICE_REPLY_A,RCVD_IN_DNSWL_NONE,
-        SPF_HELO_NONE,SPF_PASS,T_SCC_BODY_TEXT_LINE autolearn=unavailable
-        autolearn_force=no version=3.4.6
+        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_FROM,
+        RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,SPF_PASS,T_SCC_BODY_TEXT_LINE
+        autolearn=ham autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On 09/08/2022 02:38, Elliot Berman wrote:
-> 
-> 
-> On 8/2/2022 2:24 AM, Dmitry Baryshkov wrote:
->> I might be completely wrong about this, but if my in-mind picture of 
->> Gunyah is correct, I'd have implemented the gunyah core subsytem as 
->> mailbox provider, RM as a separate platform driver consuming these 
->> mailboxes and in turn being a remoteproc driver, and consoles as 
->> remoteproc subdevices. >
-> 
-> The mailbox framework can only fit with message queues and not doorbells 
-> or vCPUs. The mailbox framework also relies on the mailbox being defined 
-> in the devicetree. RM is an exceptional case in that it is described in 
-> the devicetree. Message queues for other VMs would be dynamically 
-> created at runtime as/when that VM is created. Thus, the client of the 
-> message queue would need to "own" both the controller and client ends of 
-> the mailbox.
+On Tue, Aug 23, 2022 at 6:01 AM Bagas Sanjaya <bagasdotme@gmail.com> wrote:
+>
+> kernel test robot reported kernel-doc warning:
+>
+> arch/mips/pci/pci-ar2315.c:6: warning: This comment starts with '/**', but isn't a kernel-doc comment. Refer Documentation/doc-guide/kernel-doc.rst
+>     * Both AR2315 and AR2316 chips have PCI interface unit, which supports DMA
+>
+> The warning above is caused by an extraneous asterisk on the top level
+> (description) comment of pci-ar2315.c, for which the comment is confused as
+> kernel-doc comment instead.
+>
+> Remove the asterisk.
+>
+> Link: https://lore.kernel.org/linux-doc/202208221854.8ASrzjKa-lkp@intel.com/
+> Fixes: 3ed7a2a702dc0f ("MIPS: ath25: add AR2315 PCI host controller driver")
+> Fixes: 3e58e839150db0 ("scripts: kernel-doc: add warning for comment not following kernel-doc syntax")
+> Reported-by: kernel test robot <lkp@intel.com>
+> Cc: stable@vger.kernel.org # v5.15, v5.19
+> Signed-off-by: Bagas Sanjaya <bagasdotme@gmail.com>
 
-I'd still suggest using the mailbox API for the doorbells. You do not 
-have to implement the txdone, if I'm not mistaken.
-
-> 
-> RM is not loaded or managed by Linux, so I don't think remoteproc 
-> framework provides us any code re-use except for the subdevices code. 
-> Remoteproc is much larger framework than just the subdevices code, so I 
-> don't think it fits well overall.
-> 
->> I can assume that at some point you would like to use Gunyah to boot 
->> secondary VMs from the primary VM by calling into RM, etc.
->> Most probably at this moment a VM would be allocated other bells, 
->> message queues, etc. If this assumption is correct, them the VM can 
->> become a separate device (remoteproc?) in the Linux device tree.
->>
->> I might be wrong in any of the assumptions above. Please feel free to 
->> correct me. We can then think about a better API for your usecase.
->>
-> 
-> We don't want to limit VM configuration to the devicetree as this limits 
-> the number and kinds of VMs that can be launched to build time. I'm not 
-> sure if you might have seen an early presentation of Gunyah at Linaro? 
-> In the early days of Gunyah, we had static configuration of VMs and many 
-> properties of the VMs were described in the devicetree. We are moving 
-> away from static configuration of VMs as much as possible.
-
-ack, this is correct.
-
-> 
-> [1]: https://chromium.googlesource.com/chromiumos/platform/crosvm
-> 
-
--- 
-With best wishes
-Dmitry
-
+Acked-by: Sergey Ryazanov <ryazanov.s.a@gmail.com>
