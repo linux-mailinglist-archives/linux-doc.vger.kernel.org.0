@@ -2,112 +2,116 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 3B6C759F7A2
-	for <lists+linux-doc@lfdr.de>; Wed, 24 Aug 2022 12:27:08 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id B721659F7D0
+	for <lists+linux-doc@lfdr.de>; Wed, 24 Aug 2022 12:32:45 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S235695AbiHXK1B (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 24 Aug 2022 06:27:01 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:38848 "EHLO
+        id S236101AbiHXKcn (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 24 Aug 2022 06:32:43 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:49932 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S236653AbiHXK0n (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Wed, 24 Aug 2022 06:26:43 -0400
-Received: from mail-wr1-x432.google.com (mail-wr1-x432.google.com [IPv6:2a00:1450:4864:20::432])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 513AD80B75;
-        Wed, 24 Aug 2022 03:25:35 -0700 (PDT)
-Received: by mail-wr1-x432.google.com with SMTP id k9so20211435wri.0;
-        Wed, 24 Aug 2022 03:25:35 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=mime-version:user-agent:references:message-id:date:in-reply-to
-         :subject:cc:to:from:from:to:cc;
-        bh=eKQZ/ehv1MwWOxO6OkjgFxZ52KEITsygp+TljaaBnnk=;
-        b=GSDHHAF86YGL1reVUTRrqe+R35sB4YmjMRUrm+/6Qi9YrvBJi2QNjNXD07sw00O4RH
-         83bdXmCGKoGUdIJ0/+HaM/UCQujcjDdn+H6Zz6u4qxufyOW+iNikAMDnprMYEfznr0lh
-         9sXxVtg5Cu9nXnNj0cVD9wYFmG/Pg8Ll4zRAPcljrCpjdlOmCxTnuwbRbbygs909t5+T
-         lkCmMeaTKd7fBWyZItZfTVWj1waF/XkDWaBJlWzEdQNYS4M6kDwBqB+uJwsBiktyrXS+
-         MaLpV3ZWuI2iyvltar4GtzDNJJwmWbHxVGuPLp15ghmtSi7kMuWOC7ZEK4ZyiFo2NnQ9
-         CjRQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=mime-version:user-agent:references:message-id:date:in-reply-to
-         :subject:cc:to:from:x-gm-message-state:from:to:cc;
-        bh=eKQZ/ehv1MwWOxO6OkjgFxZ52KEITsygp+TljaaBnnk=;
-        b=4/YMugYbA/y6vQ0UlBENQv/zOMuYqbqRFlnZLnxjBOWhIz6JMhUhz5EDRP+W1zT4z4
-         OZbCCH8/eyCS2LLtADkJsbrmtPa5bJDaJlLSAj/gUPdeIH60rrth04hTL9AjgRj6VYE8
-         lqXSI1z0V10/cAZBBseUX/sCr6q6djto6Mj38YeV6JSETY0UnH2GfBkTTcjAvPbmy3xZ
-         U60poV4oSA0VIsG4AQAr0JJnsbR5Kr5f4IN5osbWNhqSzH56wPSLiEzzq00miDfHIzy1
-         9OKGkhzN4XNmnPmdmjhvimHGTG5r3wHS9RERHc8KX5uHQ1mv9f5IFGYouKgKcPDEMo1Q
-         gwGg==
-X-Gm-Message-State: ACgBeo3kWXKAzt6Xnm9Kx/TJlajf7urMLZoKB+3dYJqwSrajtuT8rpVq
-        7cXCyrElxJpg4YaHdAsn2zk=
-X-Google-Smtp-Source: AA6agR46/A44ZFx6NCeOYijK+sSh5+yYxjWCQL7ynSDaeXLOQ9PqUEl6pUGtpxulEz4AaRRTWgBqXA==
-X-Received: by 2002:a5d:4f82:0:b0:225:32c6:7e59 with SMTP id d2-20020a5d4f82000000b0022532c67e59mr14249968wru.366.1661336733519;
-        Wed, 24 Aug 2022 03:25:33 -0700 (PDT)
-Received: from imac ([2a02:8010:60a0:0:55a7:d3:b36c:e4f1])
-        by smtp.gmail.com with ESMTPSA id n39-20020a05600c502700b003a60bc8ae8fsm1538773wmr.21.2022.08.24.03.25.32
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 24 Aug 2022 03:25:32 -0700 (PDT)
-From:   Donald Hunter <donald.hunter@gmail.com>
-To:     Andrii Nakryiko <andrii.nakryiko@gmail.com>
-Cc:     bpf@vger.kernel.org, linux-doc@vger.kernel.org,
+        with ESMTP id S229542AbiHXKcn (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Wed, 24 Aug 2022 06:32:43 -0400
+Received: from mga06.intel.com (mga06b.intel.com [134.134.136.31])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id D9CD47E814;
+        Wed, 24 Aug 2022 03:32:41 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1661337162; x=1692873162;
+  h=date:from:to:cc:subject:message-id:reply-to:references:
+   mime-version:in-reply-to;
+  bh=UArt2EM4pE0fPWswCENdaTr2KP04kl+6xHjnd6dPVIs=;
+  b=bDfsMatcpT388oU11xyWAASlre+w97FZBiFfg51ZzsSv6cC0/ToF/AHP
+   OoZok09KnuFtaKo0TyexRNMW6/agwVevHpesQftxLvx+Dk0TfvdqpJu8T
+   QBTqYP8SOiyqr6KLW7iSjyyZIQyR8q5k9ajFYyibiJpVOLFLvmgOr4Y9G
+   T+86G6sNp71SLPb35k8kQ7lAu33U+6KTf9zAGyiobZfghiSvQHCj/6j/C
+   6Y+lIkiqt/JiR+hme32jJ4iDiveGjQreUxh3RFxdPABnFKflDoqPJSpgN
+   VY92WzUcq8w6vIIVyM+8Y+dBEYXTmFzkFXHYXMWDsuPw9ffdeFeCWwnH4
+   g==;
+X-IronPort-AV: E=McAfee;i="6500,9779,10448"; a="355658596"
+X-IronPort-AV: E=Sophos;i="5.93,260,1654585200"; 
+   d="scan'208";a="355658596"
+Received: from orsmga007.jf.intel.com ([10.7.209.58])
+  by orsmga104.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 24 Aug 2022 03:32:41 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.93,260,1654585200"; 
+   d="scan'208";a="605987428"
+Received: from chaop.bj.intel.com (HELO localhost) ([10.240.193.75])
+  by orsmga007.jf.intel.com with ESMTP; 24 Aug 2022 03:32:31 -0700
+Date:   Wed, 24 Aug 2022 18:27:48 +0800
+From:   Chao Peng <chao.p.peng@linux.intel.com>
+To:     Matthew Wilcox <willy@infradead.org>
+Cc:     Hugh Dickins <hughd@google.com>,
+        "Kirill A . Shutemov" <kirill.shutemov@linux.intel.com>,
+        kvm@vger.kernel.org, linux-kernel@vger.kernel.org,
+        linux-mm@kvack.org, linux-fsdevel@vger.kernel.org,
+        linux-api@vger.kernel.org, linux-doc@vger.kernel.org,
+        qemu-devel@nongnu.org, linux-kselftest@vger.kernel.org,
+        Paolo Bonzini <pbonzini@redhat.com>,
         Jonathan Corbet <corbet@lwn.net>,
-        grantseltzer <grantseltzer@gmail.com>
-Subject: Re: [PATCH bpf-next] Add table of BPF program types to docs
-In-Reply-To: <CAEf4BzaujwgDXm+05MuGr_ouAseGGFg50Cxb83hHeWHX7bCk6A@mail.gmail.com>
-        (Andrii Nakryiko's message of "Tue, 23 Aug 2022 15:53:36 -0700")
-Date:   Wed, 24 Aug 2022 11:24:41 +0100
-Message-ID: <m2fshmym52.fsf@gmail.com>
-References: <20220823132236.65122-1-donald.hunter@gmail.com>
-        <CAEf4BzaujwgDXm+05MuGr_ouAseGGFg50Cxb83hHeWHX7bCk6A@mail.gmail.com>
-User-Agent: Gnus/5.13 (Gnus v5.13) Emacs/28.1 (darwin)
+        Sean Christopherson <seanjc@google.com>,
+        Vitaly Kuznetsov <vkuznets@redhat.com>,
+        Wanpeng Li <wanpengli@tencent.com>,
+        Jim Mattson <jmattson@google.com>,
+        Joerg Roedel <joro@8bytes.org>,
+        Thomas Gleixner <tglx@linutronix.de>,
+        Ingo Molnar <mingo@redhat.com>, Borislav Petkov <bp@alien8.de>,
+        x86@kernel.org, "H . Peter Anvin" <hpa@zytor.com>,
+        Jeff Layton <jlayton@kernel.org>,
+        "J . Bruce Fields" <bfields@fieldses.org>,
+        Andrew Morton <akpm@linux-foundation.org>,
+        Shuah Khan <shuah@kernel.org>, Mike Rapoport <rppt@kernel.org>,
+        Steven Price <steven.price@arm.com>,
+        "Maciej S . Szmigiero" <mail@maciej.szmigiero.name>,
+        Vlastimil Babka <vbabka@suse.cz>,
+        Vishal Annapurve <vannapurve@google.com>,
+        Yu Zhang <yu.c.zhang@linux.intel.com>, luto@kernel.org,
+        jun.nakajima@intel.com, dave.hansen@intel.com, ak@linux.intel.com,
+        david@redhat.com, aarcange@redhat.com, ddutile@redhat.com,
+        dhildenb@redhat.com, Quentin Perret <qperret@google.com>,
+        Michael Roth <michael.roth@amd.com>, mhocko@suse.com,
+        Muchun Song <songmuchun@bytedance.com>,
+        "Gupta, Pankaj" <pankaj.gupta@amd.com>
+Subject: Re: [PATCH v7 00/14] KVM: mm: fd-based approach for supporting KVM
+ guest private memory
+Message-ID: <20220824102748.GB1385482@chaop.bj.intel.com>
+Reply-To: Chao Peng <chao.p.peng@linux.intel.com>
+References: <20220706082016.2603916-1-chao.p.peng@linux.intel.com>
+ <ff5c5b97-acdf-9745-ebe5-c6609dd6322e@google.com>
+ <20220818132421.6xmjqduempmxnnu2@box>
+ <c6ccbb96-5849-2e2f-3b49-4ea711af525d@google.com>
+ <YwIIoFJrKPBXaRDW@casper.infradead.org>
 MIME-Version: 1.0
-Content-Type: text/plain
-X-Spam-Status: No, score=-2.1 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_FROM,
-        RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,SPF_PASS,T_SCC_BODY_TEXT_LINE
-        autolearn=ham autolearn_force=no version=3.4.6
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <YwIIoFJrKPBXaRDW@casper.infradead.org>
+X-Spam-Status: No, score=-4.3 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_EF,RCVD_IN_DNSWL_MED,SPF_HELO_NONE,
+        SPF_NONE,T_SCC_BODY_TEXT_LINE,URIBL_BLOCKED autolearn=ham
+        autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Andrii Nakryiko <andrii.nakryiko@gmail.com> writes:
+On Sun, Aug 21, 2022 at 11:27:44AM +0100, Matthew Wilcox wrote:
+> On Thu, Aug 18, 2022 at 08:00:41PM -0700, Hugh Dickins wrote:
+> > tmpfs and hugetlbfs and page cache are designed around sharing memory:
+> > TDX is designed around absolutely not sharing memory; and the further
+> > uses which Sean foresees appear not to need it as page cache either.
+> > 
+> > Except perhaps for page migration reasons.  It's somewhat incidental,  
+> > but of course page migration knows how to migrate page cache, so
+> > masquerading as page cache will give a short cut to page migration,
+> > when page migration becomes at all possible.
+> 
+> I haven't read the patch series, and I'm not taking a position one way
+> or the other on whether this is better implemented as a shmem addition
+> or a shim that asks shmem for memory.  Page migration can be done for
+> driver memory by using PageMovable.  I just rewrote how it works, so
+> the details are top of my mind at the moment if anyone wants something
+> explained.  Commit 68f2736a8583 is the key one to look at.
 
-> On Tue, Aug 23, 2022 at 9:56 AM Donald Hunter <donald.hunter@gmail.com> wrote:
->>
->> Extend the BPF program types documentation with a table of
->> program types, attach points and ELF section names.
->>
->> The program_types.csv file is generated from tools/lib/bpf/libbpf.c
->> and a script is included for regenerating the .csv file.
->>
->> I have not integrated the script into the doc build but if that
->> is desirable then please suggest the preferred way to do so.
->>
->> Signed-off-by: Donald Hunter <donald.hunter@gmail.com>
->> ---
->
-> It does seem cleaner to generate this .csv during docs build, instead
-> of having to manually regenerate it all the time? Should we also put
-> it under Documentation/bpf/libbpf/ as it's libbpf-specific? Having it
-> under libbpf subdir would also make it simpler to expose it in libbpf
-> docs at libbpf.readthedocs.io/
+Thanks Matthew. That is helpful to understand the current code.
 
-Agreed about generating the .csv as part of the doc build. I will look
-at adding it to the docs Makefile.
-
-I'm happy to put it in Documentation/bpf/libbpf and link to it from
-Documentation/bpf/programs.rst.
-
-> We can probably also establish some special comment format next to
-> SEC_DEF() to specify the format of those "extras", I think it would be
-> useful for users. WDYT?
-
-Yes this would be a useful addition. Are the extras always for
-auto-attach? If so, then I can add that to the rules.
-
-I'd prefer to modify the existing ELF section name column to replace '+'
-with extras since the table is already wide.
-
-> CC'ing Grant as well, who worked on building libbpf docs.
+Chao
