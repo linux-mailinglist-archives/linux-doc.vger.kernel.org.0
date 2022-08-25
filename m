@@ -2,294 +2,114 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id B031E5A111A
-	for <lists+linux-doc@lfdr.de>; Thu, 25 Aug 2022 14:54:02 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 903D95A1148
+	for <lists+linux-doc@lfdr.de>; Thu, 25 Aug 2022 14:59:39 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S234565AbiHYMx5 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 25 Aug 2022 08:53:57 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:51206 "EHLO
+        id S237432AbiHYM7i (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 25 Aug 2022 08:59:38 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:33102 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S230196AbiHYMx4 (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Thu, 25 Aug 2022 08:53:56 -0400
-Received: from loongson.cn (mail.loongson.cn [114.242.206.163])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTP id BE09D58080
-        for <linux-doc@vger.kernel.org>; Thu, 25 Aug 2022 05:53:54 -0700 (PDT)
-Received: from localhost.localdomain (unknown [112.20.110.237])
-        by localhost.localdomain (Coremail) with SMTP id AQAAf8Bx32vScAdjy8cJAA--.38198S5;
-        Thu, 25 Aug 2022 20:53:46 +0800 (CST)
-From:   Yanteng Si <siyanteng@loongson.cn>
-To:     alexs@kernel.org, bobwxc@email.cn, seakeel@gmail.com
-Cc:     Yanteng Si <siyanteng@loongson.cn>, corbet@lwn.net,
-        chenhuacai@kernel.org, jiaxun.yang@flygoat.com,
-        linux-doc@vger.kernel.org, siyanteng01@gmail.com,
-        xiyou.wangcong@gmail.com, hidave.darkstar@gmail.com,
-        tekkamanninja@gmail.com, leoyang.li@nxp.com, src.res@email.cn,
-        linux-doc-tw-discuss@lists.sourceforge.net
-Subject: [PATCH v1 3/3] docs/zh_TW: Remove oops-tracing
-Date:   Thu, 25 Aug 2022 20:53:27 +0800
-Message-Id: <0d22733cea474b0a3784f8de6b4bc4841fbaba77.1661431365.git.siyanteng@loongson.cn>
-X-Mailer: git-send-email 2.31.1
-In-Reply-To: <cover.1661431365.git.siyanteng@loongson.cn>
-References: <cover.1661431365.git.siyanteng@loongson.cn>
+        with ESMTP id S233371AbiHYM7h (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Thu, 25 Aug 2022 08:59:37 -0400
+Received: from mail-pj1-x1034.google.com (mail-pj1-x1034.google.com [IPv6:2607:f8b0:4864:20::1034])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 8516780359;
+        Thu, 25 Aug 2022 05:59:36 -0700 (PDT)
+Received: by mail-pj1-x1034.google.com with SMTP id pm13so11354177pjb.5;
+        Thu, 25 Aug 2022 05:59:36 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112;
+        h=in-reply-to:content-disposition:mime-version:references:message-id
+         :subject:cc:to:from:date:sender:from:to:cc;
+        bh=fuV1/GtLLcy/AQjBr18YmMzftopLTKIBrNKhv7I2M5c=;
+        b=YAqmG4HvxJr7GnXVclo3JMlq5xBaR4Xm9rsuri+6mx80quxwBoID0NqYnUu7NEV14r
+         83jeez4vRYhP4AcSHIFem2aBZgV/ISciwlvMiexXtM8i5kVeZZMFDAOyzYTYJJL+y6vS
+         miDjo2yFLYFUFvb/6ayo+ps6+lTK+4iGQCb/eQadlMa9RMoJBPN/w217k/wQRoMTI7Yc
+         /7HDazTbGJIb5E1+4ZamiQzxPU4QW3hd0YZzDUiofzGvbF/MTewOHBJWYOcPCTe2WAPy
+         K3sHNRTLFEs6fKRSmOtuM9139+dMt0Ek5rtvulftUw96R8o96nm6oe2qNsXm/pI/Fy2c
+         4bkw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=in-reply-to:content-disposition:mime-version:references:message-id
+         :subject:cc:to:from:date:sender:x-gm-message-state:from:to:cc;
+        bh=fuV1/GtLLcy/AQjBr18YmMzftopLTKIBrNKhv7I2M5c=;
+        b=o8jmzqII70DeqTYKeY88Cl+Q7bAj58O1Zlwl61v5Qyiy+d5r3DdokDLBqc2YKTrPiK
+         s/TdqlErZ3ZDULYkE02I/CWZ1ZKGgt6jD7GhTSuG6bTDEMCE19L8VBvUv/0pzmNKxK93
+         fbpddtGgFHzNRnxk4ZbU9tAX5n4u8j7peSFPo+JOpMhIWuUQPR+uRf76wU/Dd4LRIAdJ
+         wAt94mr7ETcffG37pQ183PI3Z9XMntTF0nJf4Ez/qkDiCtJvEjiL8V3o+qwhPBlICOzK
+         O3o01MMuZFwMTPKb3vzTqp34O+iVxQIBfMlpWcI+HZk1xEQP0HqVoy/rUrR2axYtaLQW
+         ekDQ==
+X-Gm-Message-State: ACgBeo0g7I2mB27bEzrv0oEBZ/YB+4Sv4uBmGuQl3ydUdlSz1qjVORwg
+        68l9mK+ulU2wnYixa6s008E=
+X-Google-Smtp-Source: AA6agR4M87k7KNtoIVI/9CYTSX7xIP/qLSIYpclytwjiIfTBHZNKYBsoiNa/0l21SqiqYByzOkv14A==
+X-Received: by 2002:a17:90b:4b47:b0:1f7:2e06:5752 with SMTP id mi7-20020a17090b4b4700b001f72e065752mr4614124pjb.187.1661432375792;
+        Thu, 25 Aug 2022 05:59:35 -0700 (PDT)
+Received: from server.roeck-us.net ([2600:1700:e321:62f0:329c:23ff:fee3:9d7c])
+        by smtp.gmail.com with ESMTPSA id y1-20020a17090322c100b0016dbb878f8asm14762140plg.82.2022.08.25.05.59.33
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 25 Aug 2022 05:59:34 -0700 (PDT)
+Sender: Guenter Roeck <groeck7@gmail.com>
+Date:   Thu, 25 Aug 2022 05:59:32 -0700
+From:   Guenter Roeck <linux@roeck-us.net>
+To:     Duke Du <dukedu83@gmail.com>
+Cc:     jdelvare@suse.com, corbet@lwn.net, linux-hwmon@vger.kernel.org,
+        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
+        fran.hsu@quantatw.com, charles.hsu@quantatw.com,
+        george.hung@quantatw.com, duke.du@quantatw.com
+Subject: Re: [PATCH v3] hwmon: Add driver for the TEXAS TPS546D24 Buck
+ Converter.
+Message-ID: <20220825125932.GA598991@roeck-us.net>
+References: <1660878283-9512-1-git-send-email-Duke.Du@quantatw.com>
+ <20220819133458.GC3108215@roeck-us.net>
+ <CAJqQiD39b=n-Lsza_YUPQR2jm49a3ZLxT-x7eYUv=yhD4fiDJQ@mail.gmail.com>
+ <20220824105027.GA13261@roeck-us.net>
+ <CAJqQiD2+6jo3h5Ymd2e7Th634gBZgijBxp5xRHB=h7-__8N0uQ@mail.gmail.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-CM-TRANSID: AQAAf8Bx32vScAdjy8cJAA--.38198S5
-X-Coremail-Antispam: 1UD129KBjvAXoWfGFW3Ww43KF4kWw15JFy5Jwb_yoW8GFW8Ao
-        Z3uF17Ar4kCF17GrW5GF4UJFW5Jr17AFyxArs5JryUGr1jva4UAr1Dt34UCrWayr4Yqwnx
-        JFW5KFy3t3W5Ar9rn29KB7ZKAUJUUUUU529EdanIXcx71UUUUU7v73VFW2AGmfu7bjvjm3
-        AaLaJ3UjIYCTnIWjp_UUUOF7AC8VAFwI0_Wr0E3s1l1xkIjI8I6I8E6xAIw20EY4v20xva
-        j40_Wr0E3s1l1IIY67AEw4v_Jr0_Jr4l82xGYIkIc2x26280x7IE14v26r1rM28IrcIa0x
-        kI8VCY1x0267AKxVW5JVCq3wA2ocxC64kIII0Yj41l84x0c7CEw4AK67xGY2AK021l84AC
-        jcxK6xIIjxv20xvE14v26ryj6F1UM28EF7xvwVC0I7IYx2IY6xkF7I0E14v26r4UJVWxJr
-        1l84ACjcxK6I8E87Iv67AKxVW0oVCq3wA2z4x0Y4vEx4A2jsIEc7CjxVAFwI0_GcCE3s1l
-        e2I262IYc4CY6c8Ij28IcVAaY2xG8wAqx4xG64xvF2IEw4CE5I8CrVC2j2WlYx0E2Ix0cI
-        8IcVAFwI0_Jr0_Jr4lYx0Ex4A2jsIE14v26r1j6r4UMcvjeVCFs4IE7xkEbVWUJVW8JwAC
-        jcxG0xvY0x0EwIxGrwACjI8F5VA0II8E6IAqYI8I648v4I1lFIxGxcIEc7CjxVA2Y2ka0x
-        kIwI1lc2xSY4AK67AK6ryUMxAIw28IcxkI7VAKI48JMxC20s026xCaFVCjc4AY6r1j6r4U
-        MI8I3I0E5I8CrVAFwI0_Jr0_Jr4lx2IqxVCjr7xvwVAFwI0_JrI_JrWlx4CE17CEb7AF67
-        AKxVWUtVW8ZwCIc40Y0x0EwIxGrwCI42IY6xIIjxv20xvE14v26r1j6r1xMIIF0xvE2Ix0
-        cI8IcVCY1x0267AKxVWxJVW8Jr1lIxAIcVCF04k26cxKx2IYs7xG6r1j6r1xMIIF0xvEx4
-        A2jsIE14v26r1j6r4UMIIF0xvEx4A2jsIEc7CjxVAFwI0_Gr0_Gr1UYxBIdaVFxhVjvjDU
-        0xZFpf9x0JUDrc-UUUUU=
-X-CM-SenderInfo: pvl1t0pwhqwqxorr0wxvrqhubq/
-X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00,SPF_HELO_PASS,
-        SPF_PASS,T_SCC_BODY_TEXT_LINE autolearn=ham autolearn_force=no
-        version=3.4.6
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <CAJqQiD2+6jo3h5Ymd2e7Th634gBZgijBxp5xRHB=h7-__8N0uQ@mail.gmail.com>
+X-Spam-Status: No, score=-1.3 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+        DKIM_VALID,DKIM_VALID_EF,FREEMAIL_ENVFROM_END_DIGIT,
+        FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,HEADER_FROM_DIFFERENT_DOMAINS,
+        RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,SPF_PASS,T_SCC_BODY_TEXT_LINE
+        autolearn=no autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-The English version of oops-tracing has been
-refactored and has been translated into Chinese.
-Let's remove them.
+On Thu, Aug 25, 2022 at 07:22:34PM +0800, Duke Du wrote:
+> > >
+> > > When the vout mode bit 7 is set, we update vout mode and clear bit 7
+> > > in the driver probe function, this operation is the same as changing
+> > > the reported value of PMBUS_VOUT_MODE ?
+> >
+> > Absolutely not. When changing the bit in the register, the chip operation
+> > mode changes, and the associated values (VOUT*) change from relative
+> > to absolute mode. When changing the value reported by the chip, nothing
+> > changes from the chip side, it still operates in relative mode, and all
+> > VOUT* registers are set to relative mode.
+> >
+> > Guenter
+> >
+> Got it, thanks for your reply !!
+> 
+> Another question, If we don't need to change the mode from relative to absolute
+> mode, could we just change the PMBus core to determine vout mode with only
+> bit 5 and 6 ?
+> And clearing the bit 7 in the driver (tps546d24.c) probe function
+> would not be needed, right ?
+> 
+Sorry, you lost me. The problem is that the chip supports relative mode,
+and that the PMBus core doesn't. We can not just ignore bit 7 of vout mode;
+that would result in bad data for all vout limit attributes since the PMBus
+core (currently) only supports absolute mode. We could add support for
+relative mode to the PMBus core, but that would be a major effort.
+This is why I suggested to change the chip mode to absolute mode in the
+tps546d24 driver. If you don't want to do that, you'll have to implement
+relative mode support in the PMBus core. I'll be happy to review patches,
+but you'll have to implement and test it since I have neither the time
+nor the necessary hardware to do it myself.
 
-Signed-off-by: Yanteng Si <siyanteng@loongson.cn>
----
- .../translations/zh_TW/oops-tracing.txt       | 212 ------------------
- 1 file changed, 212 deletions(-)
- delete mode 100644 Documentation/translations/zh_TW/oops-tracing.txt
-
-diff --git a/Documentation/translations/zh_TW/oops-tracing.txt b/Documentation/translations/zh_TW/oops-tracing.txt
-deleted file mode 100644
-index be8e59f2abaf..000000000000
---- a/Documentation/translations/zh_TW/oops-tracing.txt
-+++ /dev/null
-@@ -1,212 +0,0 @@
--Chinese translated version of Documentation/admin-guide/bug-hunting.rst
--
--If you have any comment or update to the content, please contact the
--original document maintainer directly.  However, if you have a problem
--communicating in English you can also ask the Chinese maintainer for
--help.  Contact the Chinese maintainer if this translation is outdated
--or if there is a problem with the translation.
--
--Traditional Chinese maintainer:  Hu Haowen <src.res@email.cn>
-----------------------------------------------------------------------
--Documentation/admin-guide/bug-hunting.rst 的繁體中文版翻譯
--
--如果想評論或更新本文的內容，請直接聯繫原文檔的維護者。如果你使用英文
--交流有困難的話，也可以向繁體中文版維護者求助。如果本翻譯更新不及時或
--者翻譯存在問題，請聯繫繁體中文版維護者。
--
--繁體中文版維護者： 胡皓文 Hu Haowen <src.res@email.cn>
--繁體中文版翻譯者： 胡皓文 Hu Haowen <src.res@email.cn>
--繁體中文版校譯者： 胡皓文 Hu Haowen <src.res@email.cn>
--
--以下爲正文
-----------------------------------------------------------------------
--
--注意： ksymoops 在2.6中是沒有用的。 請以原有格式使用Oops(來自dmesg，等等)。
--忽略任何這樣那樣關於「解碼Oops」或者「通過ksymoops運行」的文檔。 如果你貼出運行過
--ksymoops的來自2.6的Oops，人們只會讓你重貼一次。
--
--快速總結
---------------
--
--發現Oops並發送給看似相關的內核領域的維護者。別太擔心對不上號。如果你不確定就發給
--和你所做的事情相關的代碼的負責人。 如果可重現試著描述怎樣重構。 那甚至比oops更有
--價值。
--
--如果你對於發送給誰一無所知， 發給linux-kernel@vger.kernel.org。感謝你幫助Linux
--儘可能地穩定。
--
--Oops在哪裡?
------------------------
--
--通常Oops文本由klogd從內核緩衝區里讀取並傳給syslogd，由syslogd寫到syslog文件中，
--典型地是/var/log/messages(依賴於/etc/syslog.conf)。有時klogd崩潰了,這種情況下你
--能夠運行dmesg > file來從內核緩衝區中讀取數據並保存下來。 否則你可以
--cat /proc/kmsg > file， 然而你必須介入中止傳輸， kmsg是一個「永不結束的文件」。如
--果機器崩潰壞到你不能輸入命令或者磁碟不可用那麼你有三種選擇:-
--
--（1） 手抄屏幕上的文本待機器重啓後再輸入計算機。 麻煩但如果沒有針對崩潰的準備，
--這是僅有的選擇。 另外，你可以用數位相機把屏幕拍下來-不太好，但比沒有強。 如果信
--息滾動到了終端的上面，你會發現以高分辯率啓動（比如，vga=791）會讓你讀到更多的文
--本。（注意：這需要vesafb，所以對『早期』的oops沒有幫助）
--
--（2）用串口終端啓動（請參看Documentation/admin-guide/serial-console.rst），運行一個null
--modem到另一台機器並用你喜歡的通訊工具獲取輸出。Minicom工作地很好。
--
--（3）使用Kdump（請參看Documentation/admin-guide/kdump/kdump.rst），
--使用在Documentation/admin-guide/kdump/gdbmacros.txt中定義的dmesg gdb宏，從舊的內存中提取內核
--環形緩衝區。
--
--完整信息
------------------
--
--注意：以下來自於Linus的郵件適用於2.4內核。 我因爲歷史原因保留了它，並且因爲其中
--一些信息仍然適用。 特別注意的是，請忽略任何ksymoops的引用。
--
--From: Linus Torvalds <torvalds@osdl.org>
--
--怎樣跟蹤Oops.. [原發到linux-kernel的一封郵件]
--
--主要的竅門是有五年和這些煩人的oops消息打交道的經驗;-)
--
--實際上，你有辦法使它更簡單。我有兩個不同的方法：
--
--	gdb /usr/src/linux/vmlinux
--	gdb> disassemble <offending_function>
--
--那是發現問題的簡單辦法，至少如果bug報告做的好的情況下（象這個一樣-運行ksymoops
--得到oops發生的函數及函數內的偏移）。
--
--哦，如果報告發生的內核以相同的編譯器和相似的配置編譯它會有幫助的。
--
--另一件要做的事是反彙編bug報告的「Code」部分：ksymoops也會用正確的工具來做這件事，
--但如果沒有那些工具你可以寫一個傻程序：
--
--	char str[] = "\xXX\xXX\xXX...";
--	main(){}
--
--並用gcc -g編譯它然後執行「disassemble str」（XX部分是由Oops報告的值-你可以僅剪切
--粘貼並用「\x」替換空格-我就是這麼做的，因爲我懶得寫程序自動做這一切）。
--
--另外，你可以用scripts/decodecode這個shell腳本。它的使用方法是：
--decodecode < oops.txt
--
--「Code」之後的十六進位字節可能（在某些架構上）有一些當前指令之前的指令字節以及
--當前和之後的指令字節
--
--Code: f9 0f 8d f9 00 00 00 8d 42 0c e8 dd 26 11 c7 a1 60 ea 2b f9 8b 50 08 a1
--64 ea 2b f9 8d 34 82 8b 1e 85 db 74 6d 8b 15 60 ea 2b f9 <8b> 43 04 39 42 54
--7e 04 40 89 42 54 8b 43 04 3b 05 00 f6 52 c0
--
--最後，如果你想知道代碼來自哪裡，你可以：
--
--	cd /usr/src/linux
--	make fs/buffer.s 	# 或任何產生BUG的文件
--
--然後你會比gdb反彙編更清楚的知道發生了什麼。
--
--現在，問題是把你所擁有的所有數據結合起來：C源碼（關於它應該怎樣的一般知識），
--彙編代碼及其反彙編得到的代碼（另外還有從「oops」消息得到的寄存器狀態-對了解毀壞的
--指針有用，而且當你有了彙編代碼你也能拿其它的寄存器和任何它們對應的C表達式做匹配
--）。
--
--實際上，你僅需看看哪裡不匹配（這個例子是「Code」反彙編和編譯器生成的代碼不匹配）。
--然後你須要找出爲什麼不匹配。通常很簡單-你看到代碼使用了空指針然後你看代碼想知道
--空指針是怎麼出現的，還有檢查它是否合法..
--
--現在，如果明白這是一項耗時的工作而且需要一丁點兒的專心，沒錯。這就是我爲什麼大多
--只是忽略那些沒有符號表信息的崩潰報告的原因：簡單的說太難查找了（我有一些
--程序用於在內核代碼段中搜索特定的模式，而且有時我也已經能找出那些崩潰的地方，但是
--僅僅是找出正確的序列也確實需要相當紮實的內核知識）
--
--_有時_會發生這種情況，我僅看到崩潰中的反彙編代碼序列， 然後我馬上就明白問題出在
--哪裡。這時我才意識到自己幹這個工作已經太長時間了;-)
--
--		Linus
--
--
-----------------------------------------------------------------------------
--關於Oops跟蹤的註解：
--
--爲了幫助Linus和其它內核開發者，klogd納入了大量的支持來處理保護錯誤。爲了擁有對
--地址解析的完整支持至少應該使用1.3-pl3的sysklogd包。
--
--當保護錯誤發生時，klogd守護進程自動把內核日誌信息中的重要地址翻譯成它們相應的符
--號。
--
--klogd執行兩種類型的地址解析。首先是靜態翻譯其次是動態翻譯。靜態翻譯和ksymoops
--一樣使用System.map文件。爲了做靜態翻譯klogd守護進程必須在初始化時能找到system
--map文件。關於klogd怎樣搜索map文件請參看klogd手冊頁。
--
--動態地址翻譯在使用內核可裝載模塊時很重要。 因爲內核模塊的內存是從內核動態內存池
--里分配的，所以不管是模塊開始位置還是模塊中函數和符號的位置都不是固定的。
--
--內核支持允許程序決定裝載哪些模塊和它們在內存中位置的系統調用。使用這些系統調用
--klogd守護進程生成一張符號表用於調試發生在可裝載模塊中的保護錯誤。
--
--至少klogd會提供產生保護錯誤的模塊名。還可有額外的符號信息供可裝載模塊開發者選擇
--以從模塊中輸出符號信息。
--
--因爲內核模塊環境可能是動態的，所以必須有一種機制當模塊環境發生改變時來通知klogd
--守護進程。 有一些可用的命令行選項允許klogd向當前執行中的守護進程發送信號，告知符
--號信息應該被刷新了。 更多信息請參看klogd手冊頁。
--
--sysklogd發布時包含一個補丁修改了modules-2.0.0包，無論何時一個模塊裝載或者卸載都
--會自動向klogd發送信號。打上這個補丁提供了必要的對調試發生於內核可裝載模塊的保護
--錯誤的無縫支持。
--
--以下是被klogd處理過的發生在可裝載模塊中的一個保護錯誤例子：
-----------------------------------------------------------------------------
--Aug 29 09:51:01 blizard kernel: Unable to handle kernel paging request at virtual address f15e97cc
--Aug 29 09:51:01 blizard kernel: current->tss.cr3 = 0062d000, %cr3 = 0062d000
--Aug 29 09:51:01 blizard kernel: *pde = 00000000
--Aug 29 09:51:01 blizard kernel: Oops: 0002
--Aug 29 09:51:01 blizard kernel: CPU:    0
--Aug 29 09:51:01 blizard kernel: EIP:    0010:[oops:_oops+16/3868]
--Aug 29 09:51:01 blizard kernel: EFLAGS: 00010212
--Aug 29 09:51:01 blizard kernel: eax: 315e97cc   ebx: 003a6f80   ecx: 001be77b   edx: 00237c0c
--Aug 29 09:51:01 blizard kernel: esi: 00000000   edi: bffffdb3   ebp: 00589f90   esp: 00589f8c
--Aug 29 09:51:01 blizard kernel: ds: 0018   es: 0018   fs: 002b   gs: 002b   ss: 0018
--Aug 29 09:51:01 blizard kernel: Process oops_test (pid: 3374, process nr: 21, stackpage=00589000)
--Aug 29 09:51:01 blizard kernel: Stack: 315e97cc 00589f98 0100b0b4 bffffed4 0012e38e 00240c64 003a6f80 00000001
--Aug 29 09:51:01 blizard kernel:        00000000 00237810 bfffff00 0010a7fa 00000003 00000001 00000000 bfffff00
--Aug 29 09:51:01 blizard kernel:        bffffdb3 bffffed4 ffffffda 0000002b 0007002b 0000002b 0000002b 00000036
--Aug 29 09:51:01 blizard kernel: Call Trace: [oops:_oops_ioctl+48/80] [_sys_ioctl+254/272] [_system_call+82/128]
--Aug 29 09:51:01 blizard kernel: Code: c7 00 05 00 00 00 eb 08 90 90 90 90 90 90 90 90 89 ec 5d c3
-----------------------------------------------------------------------------
--
--Dr. G.W. Wettstein           Oncology Research Div. Computing Facility
--Roger Maris Cancer Center    INTERNET: greg@wind.rmcc.com
--820 4th St. N.
--Fargo, ND  58122
--Phone: 701-234-7556
--
--
-----------------------------------------------------------------------------
--受汙染的內核
--
--一些oops報告在程序記數器之後包含字符串'Tainted: '。這表明內核已經被一些東西給汙
--染了。 該字符串之後緊跟著一系列的位置敏感的字符，每個代表一個特定的汙染值。
--
--  1：'G'如果所有裝載的模塊都有GPL或相容的許可證，'P'如果裝載了任何的專有模塊。
--沒有模塊MODULE_LICENSE或者帶有insmod認爲是與GPL不相容的的MODULE_LICENSE的模塊被
--認定是專有的。
--
--  2：'F'如果有任何通過「insmod -f」被強制裝載的模塊，' '如果所有模塊都被正常裝載。
--
--  3：'S'如果oops發生在SMP內核中，運行於沒有證明安全運行多處理器的硬體。 當前這種
--情況僅限於幾種不支持SMP的速龍處理器。
--
--  4：'R'如果模塊通過「insmod -f」被強制裝載，' '如果所有模塊都被正常裝載。
--
--  5：'M'如果任何處理器報告了機器檢查異常，' '如果沒有發生機器檢查異常。
--
--  6：'B'如果頁釋放函數發現了一個錯誤的頁引用或者一些非預期的頁標誌。
--
--  7：'U'如果用戶或者用戶應用程式特別請求設置汙染標誌，否則' '。
--
--  8：'D'如果內核剛剛死掉，比如有OOPS或者BUG。
--
--使用'Tainted: '字符串的主要原因是要告訴內核調試者，這是否是一個乾淨的內核亦或發
--生了任何的不正常的事。汙染是永久的：即使出錯的模塊已經被卸載了，汙染值仍然存在，
--以表明內核不再值得信任。
--
--- 
-2.31.1
-
+Thanks,
+Guenter
