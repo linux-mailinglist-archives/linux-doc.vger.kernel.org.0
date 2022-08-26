@@ -2,140 +2,91 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 474C25A1ED3
-	for <lists+linux-doc@lfdr.de>; Fri, 26 Aug 2022 04:30:56 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id A9AD25A1F1A
+	for <lists+linux-doc@lfdr.de>; Fri, 26 Aug 2022 04:48:19 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S239526AbiHZCax (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 25 Aug 2022 22:30:53 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:56312 "EHLO
+        id S235832AbiHZCsS (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 25 Aug 2022 22:48:18 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:60544 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S244795AbiHZCaw (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Thu, 25 Aug 2022 22:30:52 -0400
-Received: from mail-pf1-x431.google.com (mail-pf1-x431.google.com [IPv6:2607:f8b0:4864:20::431])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id DBA45DDA;
-        Thu, 25 Aug 2022 19:30:50 -0700 (PDT)
-Received: by mail-pf1-x431.google.com with SMTP id 199so244578pfz.2;
-        Thu, 25 Aug 2022 19:30:50 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=in-reply-to:content-disposition:mime-version:references:message-id
-         :subject:cc:to:from:date:from:to:cc;
-        bh=w4E8yIskNGkMMeeV03IGlzvK42z2oKDk+ZFn+fHYqrY=;
-        b=nGZY7mzWQ49s6QQ2qpJXLRxVQzVFX1GLw+mfVE4qGnqtj0mYnpx8T1E2CPT0edmU+Q
-         BWbbQncV4g/BvEmO2YAQc2zcimhoeGSfKjLb6BfM81ZV7Zz/4bXG4Ye7u9xUrEAwolF6
-         R9iMbA5T91p8G4aDtHv1UlXZFF3DfVz/0dCJeDQatiLz5NQ1L5TZCXJdvJ8HDor6SIqu
-         iBU7C9oOF6QL8YvmYMxflfTgyR1sJL5cVuJX8PX8uNg9661DN76Npv1CC/SJGm1e7rAA
-         6r4YfzoVavvdED4/J/TnRsem9XEcMkWgSaVQmj4fNDWOsYC0J9dw4y2W0KTbHMPPKEbz
-         prIw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=in-reply-to:content-disposition:mime-version:references:message-id
-         :subject:cc:to:from:date:x-gm-message-state:from:to:cc;
-        bh=w4E8yIskNGkMMeeV03IGlzvK42z2oKDk+ZFn+fHYqrY=;
-        b=blKhJIaxZqZJP9CLP6pxW9eYHaN7RP19Sm5unJe09XLb6/R87f3OXHyZbOsPdSWmW9
-         MrPvVZeE77uwHmVcUjaTDgUvbAAj3oFf6rbJTGJMLwp+og+KCL5znCDtsGAe5wXUzmUf
-         qtRet+6kN9NT0fGbMV565FETrLjevazvP2IHmTWf7iWEGVILKrWWuuIXq3CRwF95fSLr
-         XnnjcNFXWeRd0TwESJGQzNvJEl+8GPdGjL9za5L6FwQYQOpFDrReYj02sbv8gXXsj+0V
-         C7hdAI/tNbop1ltq4v3qgX+8JekfhE5F2Qfs/n9wYwxKVE856m801olpW40zq+bLxmB9
-         tBWw==
-X-Gm-Message-State: ACgBeo0sr9teAk8RMv0htNAVI7kyR3sriSAYbeyRL23SsIWhQA0JLiJL
-        syyUPD+fF6GmpUEFJqFZk0c=
-X-Google-Smtp-Source: AA6agR5i/T5TG0YSwpfnDjBusYRHCNmmzS3L6WjPqmluVXdtIpYKNn9IhcVtDEhkJ1O3XoKyt68V9g==
-X-Received: by 2002:a05:6a00:ccf:b0:536:63ad:25d1 with SMTP id b15-20020a056a000ccf00b0053663ad25d1mr1776300pfv.56.1661481050406;
-        Thu, 25 Aug 2022 19:30:50 -0700 (PDT)
-Received: from debian.me (subs03-180-214-233-18.three.co.id. [180.214.233.18])
-        by smtp.gmail.com with ESMTPSA id w10-20020aa7954a000000b00536fc93b569sm336558pfq.200.2022.08.25.19.30.49
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 25 Aug 2022 19:30:49 -0700 (PDT)
-Received: by debian.me (Postfix, from userid 1000)
-        id 416561039CC; Fri, 26 Aug 2022 09:30:46 +0700 (WIB)
-Date:   Fri, 26 Aug 2022 09:30:46 +0700
-From:   Bagas Sanjaya <bagasdotme@gmail.com>
-To:     Jonathan Corbet <corbet@lwn.net>
-Cc:     Yixuan Cao <caoyixuan2019@email.szu.edu.cn>,
-        akpm@linux-foundation.org, yejiajian2018@email.szu.edu.cn,
-        skhan@linuxfoundation.org, akiyks@gmail.com, rppt@kernel.org,
-        zhangyinan2019@email.szu.edu.cn, linux-doc@vger.kernel.org,
-        linux-kernel@vger.kernel.org
-Subject: Re: [PATCH] Documentation/mm/page_owner.rst: update experimental data
-Message-ID: <YwgwVsKYLUq0kbMo@debian.me>
-References: <20220825172934.4344-1-caoyixuan2019@email.szu.edu.cn>
- <87ilmgyz34.fsf@meer.lwn.net>
+        with ESMTP id S229536AbiHZCsQ (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Thu, 25 Aug 2022 22:48:16 -0400
+Received: from bombadil.infradead.org (bombadil.infradead.org [IPv6:2607:7c80:54:3::133])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 0ADAFA3D79;
+        Thu, 25 Aug 2022 19:48:16 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+        d=infradead.org; s=bombadil.20210309; h=Content-Transfer-Encoding:
+        Content-Type:In-Reply-To:From:References:Cc:To:Subject:MIME-Version:Date:
+        Message-ID:Sender:Reply-To:Content-ID:Content-Description;
+        bh=KrBgq4HD/icun5bFiHHIUQ6IjONVJ/rxTezt7YCnkJE=; b=rGM/UuEBB9L8aI2AUVk+gK2KDP
+        fKxnby64zNrqUPb9aKaMfaS7cuuLc+lcTb06Lp8ySc8Vk6/eQFezTahu31Rj544mnXY54mYmNceUr
+        ToOTtf4bTziGm77ZUOaOtUzudaP/nprEk4/QNk6+TjGOBYkniPvBz4KV8My/62pnfwDkBJgq1Tm+R
+        qOfblZEqiokIpz/hyr5GFpeffd8O7SlMmBm+VXU/i0+6YaJUtQpp81mLwVcrQahbTghA4hpsQZDOV
+        lSLKH77yESrNAHC3i6ZOHGaBMgSn8cqhq4WczqKBqF8In3ZxMsV87K0kVmYT7dB1Agh1rwPzsHZSG
+        GU6qIVyA==;
+Received: from [2601:1c0:6280:3f0::a6b3]
+        by bombadil.infradead.org with esmtpsa (Exim 4.94.2 #2 (Red Hat Linux))
+        id 1oRPOG-005OOu-0q; Fri, 26 Aug 2022 02:48:12 +0000
+Message-ID: <795c6785-e13e-5322-15b3-60ee2ec24197@infradead.org>
+Date:   Thu, 25 Aug 2022 19:48:10 -0700
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha256;
-        protocol="application/pgp-signature"; boundary="vxJg0Yu+kIIQU9hP"
-Content-Disposition: inline
-In-Reply-To: <87ilmgyz34.fsf@meer.lwn.net>
-X-Spam-Status: No, score=-0.6 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_FROM,
-        RCVD_IN_DNSWL_NONE,RCVD_IN_SORBS_WEB,SPF_HELO_NONE,SPF_PASS,
-        T_SCC_BODY_TEXT_LINE autolearn=no autolearn_force=no version=3.4.6
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.1.2
+Subject: Re: [PATCH linux-next] admin-guide: cgroup: fix a typo in description
+Content-Language: en-US
+To:     cgel.zte@gmail.com, tj@kernel.org
+Cc:     lizefan.x@bytedance.com, hannes@cmpxchg.org, corbet@lwn.net,
+        cgroups@vger.kernel.org, linux-doc@vger.kernel.org,
+        linux-kernel@vger.kernel.org,
+        lufengchang <lu.fengchang@zte.com.cn>,
+        Zeal Robot <zealci@zte.com.cn>
+References: <20220826020552.239407-1-lu.fengchang@zte.com.cn>
+From:   Randy Dunlap <rdunlap@infradead.org>
+In-Reply-To: <20220826020552.239407-1-lu.fengchang@zte.com.cn>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-Spam-Status: No, score=-2.8 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,NICE_REPLY_A,RCVD_IN_DNSWL_LOW,
+        SPF_HELO_NONE,SPF_NONE,T_SCC_BODY_TEXT_LINE autolearn=ham
+        autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
+Hi,
 
---vxJg0Yu+kIIQU9hP
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On 8/25/22 19:05, cgel.zte@gmail.com wrote:
+> From: lufengchang <lu.fengchang@zte.com.cn>
+> 
+> Reported-by: Zeal Robot <zealci@zte.com.cn>
+> Signed-off-by: lufengchang <lu.fengchang@zte.com.cn>
 
-On Thu, Aug 25, 2022 at 12:09:35PM -0600, Jonathan Corbet wrote:
-> >  - Without page owner::
-> > =20
-> >     text    data     bss     dec     hex filename
-> > -   48392   2333     644   51369    c8a9 mm/page_alloc.o
-> > +   58581   3166     652   62399    f3bf mm/page_alloc.o
-> > =20
-> >  - With page owner::
-> > =20
-> >     text    data     bss     dec     hex filename
-> > -   48800   2445     644   51889    cab1 mm/page_alloc.o
-> > -   6662     108      29    6799    1a8f mm/page_owner.o
-> > -   1025       8       8    1041     411 mm/page_ext.o
-> > +   59085   3294     652   63031    f637 mm/page_alloc.o
-> > +   7464     125      28    7617    1dc1 mm/page_owner.o
-> > +   1396      32       8    1436     59c mm/page_ext.o
-> > =20
-> > -Although, roughly, 8 KB code is added in total, page_alloc.o increase =
-by
-> > -520 bytes and less than half of it is in hotpath. Building the kernel =
-with
-> > +Although, roughly, 9 KB code is added in total, page_alloc.o increase =
-by
-> > +632 bytes and less than half of it is in hotpath. Building the kernel =
-with
-> >  page owner and turning it on if needed would be great option to debug
-> >  kernel memory problem.
->=20
-> This seems like a fine patch...but I do have to wonder if it really
-> makes sense to maintain this information, which will surely be subject
-> to frequent change.  Perhaps the whole thing is better replaced with a
-> line saying that enabling page owner adds ~9KB?
->=20
+Are you sure that it's a typo?
 
-The size figure above is from size(1) from binutils, for which the
-command is run (maybe) against vmlinux.
+https://en.wikipedia.org/wiki/If_and_only_if
 
-So I would like to say "Enabling page owner increases vmlinux size by
-several kilobytes."
+"iff" is commonly used (in math/technical literature)
+to mean "if and only if".
 
-Thanks.
+> ---
+>  Documentation/admin-guide/cgroup-v1/cgroups.rst | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+> 
+> diff --git a/Documentation/admin-guide/cgroup-v1/cgroups.rst b/Documentation/admin-guide/cgroup-v1/cgroups.rst
+> index b0688011ed06..fa747466e304 100644
+> --- a/Documentation/admin-guide/cgroup-v1/cgroups.rst
+> +++ b/Documentation/admin-guide/cgroup-v1/cgroups.rst
+> @@ -573,7 +573,7 @@ cgroup_for_each_descendant_pre() for details.
+>  ``void css_offline(struct cgroup *cgrp);``
+>  (cgroup_mutex held by caller)
+>  
+> -This is the counterpart of css_online() and called iff css_online()
+> +This is the counterpart of css_online() and called if css_online()
+>  has succeeded on @cgrp. This signifies the beginning of the end of
+>  @cgrp. @cgrp is being removed and the subsystem should start dropping
+>  all references it's holding on @cgrp. When all references are dropped,
 
---=20
-An old man doll... just what I always wanted! - Clara
-
---vxJg0Yu+kIIQU9hP
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABYIAB0WIQSSYQ6Cy7oyFNCHrUH2uYlJVVFOowUCYwgwUQAKCRD2uYlJVVFO
-o7uFAQCf7bu827yq5x9ny9c+LlKFv0l46wV2PWq4kJhF5m6qdQEA2hfbdTF9ZcuX
-rGwwYDz1OzPqml6oVW7JJN9HoIT27gI=
-=ru9H
------END PGP SIGNATURE-----
-
---vxJg0Yu+kIIQU9hP--
+-- 
+~Randy
