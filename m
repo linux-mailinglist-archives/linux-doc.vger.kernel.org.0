@@ -2,137 +2,108 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 4D39F5A348F
-	for <lists+linux-doc@lfdr.de>; Sat, 27 Aug 2022 06:38:49 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id E53A75A34B5
+	for <lists+linux-doc@lfdr.de>; Sat, 27 Aug 2022 07:11:12 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S230499AbiH0EiY (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Sat, 27 Aug 2022 00:38:24 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:51610 "EHLO
+        id S1345274AbiH0FLG (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Sat, 27 Aug 2022 01:11:06 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:58880 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S229983AbiH0EiX (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Sat, 27 Aug 2022 00:38:23 -0400
-Received: from mail-pj1-x1036.google.com (mail-pj1-x1036.google.com [IPv6:2607:f8b0:4864:20::1036])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id A1550A5C74;
-        Fri, 26 Aug 2022 21:38:22 -0700 (PDT)
-Received: by mail-pj1-x1036.google.com with SMTP id h11-20020a17090a470b00b001fbc5ba5224so3760007pjg.2;
-        Fri, 26 Aug 2022 21:38:22 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=content-transfer-encoding:in-reply-to:from:references:cc:to
-         :content-language:subject:user-agent:mime-version:date:message-id
-         :from:to:cc;
-        bh=dEKV5G+5ehJFpFZg02Cmb2rWjLpf+O2SqBExv52ariU=;
-        b=Qm5CZzfYjx1rG2MQoIuxH5kLzDOkH6d0+L/CY2JeQNGo7vL9F9gYBJNreUOEBO7n3p
-         oA+GaUWNg1Oqf+qhs4fXMsGx2Zd+14oQc4M71rgHMuKXJ5Mm0FlbFMltw8vlL9YxLO2C
-         UenvfPRTP/fafcTZbAw4p82nkVwmS8RO6F2iy8RoLJkJBrPCqs5QuwI5o2e5BiIlbYdB
-         Hz54WG+Kz4eg/+VPPBzQX8mBklbNVe6oImi7S7+1xj4xpY+d5yd9f6xqWYop85Z0BRhd
-         9O/V3Y6dLGLZMHgEX2Xzug92bwBZbEP9fkR5gU802xmkEDCR+xsmyNxO3CRUmdmA6oeZ
-         6f0A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=content-transfer-encoding:in-reply-to:from:references:cc:to
-         :content-language:subject:user-agent:mime-version:date:message-id
-         :x-gm-message-state:from:to:cc;
-        bh=dEKV5G+5ehJFpFZg02Cmb2rWjLpf+O2SqBExv52ariU=;
-        b=LSxtkgONVzceIm59TJYzd+g1rM6LQt7qVbA5EnAFj0EGxN0ikG0S2Tp4KxzAYlCYVC
-         /C8c4XWt1XoVlUe15nerQ1ImGX61hAAvq2zCsh9pAa+0eIl72ZFPYk/Tw8rmwZC9bvUB
-         39Uv7wY9BxiOh0jMlOw1mbO1uNKnrOc0JAzWujCt7dfSrp0PAhAXfsRrZRmOq2zytJYV
-         lypf7rNoc6zut13qN50NDTlW9/MKmGm27BC/aISwCw3jnMrtqdeQqlhLm5jzEOEuMsP8
-         mXE481i9wOi2oJNI/eH5mKrS+XzzGOEGf9J5+OV3Xmt7TmyOsuTopylVVE2C3OC0/K+i
-         h0ig==
-X-Gm-Message-State: ACgBeo0VVLGtxVKQIQ2FFkmTZZcCyfbY3EZR/QYAG5bL+f4b23ENlrB1
-        aeS37HkmvDl/A0Fo8wO+LiwlCae14Zk=
-X-Google-Smtp-Source: AA6agR5j9KW+vtffhmUCKZgWhAvVslJ9WVNEtrvHaJty4Vcy7Mxt+MATA+HJ9dfwqD8Heay1Fib9Pg==
-X-Received: by 2002:a17:902:8606:b0:172:fecc:88d with SMTP id f6-20020a170902860600b00172fecc088dmr6662648plo.129.1661575102157;
-        Fri, 26 Aug 2022 21:38:22 -0700 (PDT)
-Received: from [192.168.11.9] (KD106167171201.ppp-bb.dion.ne.jp. [106.167.171.201])
-        by smtp.gmail.com with ESMTPSA id p23-20020a17090a0e5700b001f56315f9efsm2487472pja.32.2022.08.26.21.38.19
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Fri, 26 Aug 2022 21:38:21 -0700 (PDT)
-Message-ID: <5a582b2b-d51c-a062-36b2-19479cf68fab@gmail.com>
-Date:   Sat, 27 Aug 2022 13:38:17 +0900
+        with ESMTP id S1345226AbiH0FLE (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Sat, 27 Aug 2022 01:11:04 -0400
+Received: from metis.ext.pengutronix.de (metis.ext.pengutronix.de [IPv6:2001:67c:670:201:290:27ff:fe1d:cc33])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 1C342DF4D7
+        for <linux-doc@vger.kernel.org>; Fri, 26 Aug 2022 22:11:03 -0700 (PDT)
+Received: from drehscheibe.grey.stw.pengutronix.de ([2a0a:edc0:0:c01:1d::a2])
+        by metis.ext.pengutronix.de with esmtps (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256)
+        (Exim 4.92)
+        (envelope-from <ore@pengutronix.de>)
+        id 1oRo5i-00025q-SM; Sat, 27 Aug 2022 07:10:43 +0200
+Received: from [2a0a:edc0:0:1101:1d::ac] (helo=dude04.red.stw.pengutronix.de)
+        by drehscheibe.grey.stw.pengutronix.de with esmtp (Exim 4.94.2)
+        (envelope-from <ore@pengutronix.de>)
+        id 1oRo5f-002E5F-Ix; Sat, 27 Aug 2022 07:10:39 +0200
+Received: from ore by dude04.red.stw.pengutronix.de with local (Exim 4.94.2)
+        (envelope-from <ore@pengutronix.de>)
+        id 1oRo5e-00GNW3-7E; Sat, 27 Aug 2022 07:10:38 +0200
+From:   Oleksij Rempel <o.rempel@pengutronix.de>
+To:     Andrew Lunn <andrew@lunn.ch>,
+        Heiner Kallweit <hkallweit1@gmail.com>,
+        "David S. Miller" <davem@davemloft.net>,
+        Eric Dumazet <edumazet@google.com>,
+        Jakub Kicinski <kuba@kernel.org>,
+        Paolo Abeni <pabeni@redhat.com>,
+        Russell King <linux@armlinux.org.uk>,
+        Rob Herring <robh+dt@kernel.org>,
+        Krzysztof Kozlowski <krzysztof.kozlowski+dt@linaro.org>,
+        Jonathan Corbet <corbet@lwn.net>
+Cc:     Oleksij Rempel <o.rempel@pengutronix.de>, kernel@pengutronix.de,
+        linux-kernel@vger.kernel.org, netdev@vger.kernel.org,
+        devicetree@vger.kernel.org, linux-doc@vger.kernel.org,
+        David Jander <david@protonic.nl>,
+        Luka Perkov <luka.perkov@sartura.hr>,
+        Robert Marko <robert.marko@sartura.hr>
+Subject: [PATCH net-next v3 0/7] add generic PSE support 
+Date:   Sat, 27 Aug 2022 07:10:26 +0200
+Message-Id: <20220827051033.3903585-1-o.rempel@pengutronix.de>
+X-Mailer: git-send-email 2.30.2
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.11.0
-Subject: [PATCH v3 2/2] docs/conf.py: Respect env variable SPHINX_IMGMATH
-Content-Language: en-US
-To:     Jonathan Corbet <corbet@lwn.net>,
-        Mauro Carvalho Chehab <mchehab@kernel.org>
-Cc:     linux-doc@vger.kernel.org,
-        Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
-        linux-kernel@vger.kernel.org, Akira Yokosawa <akiyks@gmail.com>
-References: <9b8ff6d7-e97a-c03f-7d46-4b80ae3cf196@gmail.com>
-From:   Akira Yokosawa <akiyks@gmail.com>
-In-Reply-To: <9b8ff6d7-e97a-c03f-7d46-4b80ae3cf196@gmail.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-Spam-Status: No, score=-2.1 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_FROM,
-        RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,SPF_PASS,T_SCC_BODY_TEXT_LINE
-        autolearn=ham autolearn_force=no version=3.4.6
+Content-Transfer-Encoding: 8bit
+X-SA-Exim-Connect-IP: 2a0a:edc0:0:c01:1d::a2
+X-SA-Exim-Mail-From: ore@pengutronix.de
+X-SA-Exim-Scanned: No (on metis.ext.pengutronix.de); SAEximRunCond expanded to false
+X-PTX-Original-Recipient: linux-doc@vger.kernel.org
+X-Spam-Status: No, score=-4.2 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_MED,
+        SPF_HELO_NONE,SPF_PASS,T_SCC_BODY_TEXT_LINE autolearn=unavailable
+        autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On some distros with coarse-grained packaging policy, dvipng is
-installed along with latex.  In such cases, math rendering will
-use imgmath by default.  It is possible to override the choice by
-specifying the option string of "-D html_math_renderer='mathjax'"
-to sphinx-build (Sphinx >= 1.8).
+Add generic support for the Ethernet Power Sourcing Equipment.
 
-To provide developers an easier-to-use knob, add code for an env
-variable "SPHINX_IMGMATH" which overrides the automatic choice
-of math renderer for html docs.
+changes are listed within patches.
 
-    SPHINX_IMGMATH=yes : Load imgmath even if dvipng is not found
-    SPHINX_IMGMATH=no  : Don't load imgmath (fall back to mathjax)
+Oleksij Rempel (7):
+  dt-bindings: net: pse-dt: add bindings for generic PSE controller
+  dt-bindings: net: phy: add PoDL PSE property
+  net: add framework to support Ethernet PSE and PDs devices
+  net: mdiobus: fwnode_mdiobus_register_phy() rework error handling
+  net: mdiobus: search for PSE nodes by parsing PHY nodes.
+  ethtool: add interface to interact with Ethernet Power Equipment
+  net: pse-pd: add generic PSE driver
 
-Signed-off-by: Akira Yokosawa <akiyks@gmail.com>
-Acked-by: Mauro Carvalho Chehab <mchehab@kernel.org>
----
-Changes since v2:
- - Emit warning on unknown setting of SPHINX_IMGMATH.
+ .../devicetree/bindings/net/ethernet-phy.yaml |   5 +
+ .../bindings/net/pse-pd/generic-pse.yaml      |  95 +++++
+ Documentation/networking/ethtool-netlink.rst  |  58 +++
+ drivers/net/Kconfig                           |   2 +
+ drivers/net/Makefile                          |   1 +
+ drivers/net/mdio/fwnode_mdio.c                |  55 ++-
+ drivers/net/phy/phy_device.c                  |   2 +
+ drivers/net/pse-pd/Kconfig                    |  22 ++
+ drivers/net/pse-pd/Makefile                   |   6 +
+ drivers/net/pse-pd/pse_core.c                 | 363 ++++++++++++++++++
+ drivers/net/pse-pd/pse_generic.c              | 148 +++++++
+ include/linux/phy.h                           |   2 +
+ include/linux/pse-pd/pse.h                    | 155 ++++++++
+ include/uapi/linux/ethtool.h                  |  45 +++
+ include/uapi/linux/ethtool_netlink.h          |  17 +
+ net/ethtool/Makefile                          |   3 +-
+ net/ethtool/common.h                          |   1 +
+ net/ethtool/netlink.c                         |  19 +
+ net/ethtool/netlink.h                         |   4 +
+ net/ethtool/pse-pd.c                          | 176 +++++++++
+ 20 files changed, 1167 insertions(+), 12 deletions(-)
+ create mode 100644 Documentation/devicetree/bindings/net/pse-pd/generic-pse.yaml
+ create mode 100644 drivers/net/pse-pd/Kconfig
+ create mode 100644 drivers/net/pse-pd/Makefile
+ create mode 100644 drivers/net/pse-pd/pse_core.c
+ create mode 100644 drivers/net/pse-pd/pse_generic.c
+ create mode 100644 include/linux/pse-pd/pse.h
+ create mode 100644 net/ethtool/pse-pd.c
 
-Changes since v1:
- - No logical changes.
- - Renames:
-     LOAD_IMGMATH -> SPHINX_IMGMATH (Mauro),
-     opt_load_imgmath -> env_sphinx_imgmath.
- - Acked-by from Mauro.
---
- Documentation/conf.py | 16 ++++++++++++++--
- 1 file changed, 14 insertions(+), 2 deletions(-)
-
-diff --git a/Documentation/conf.py b/Documentation/conf.py
-index c4aaedd96220..9678a8215457 100644
---- a/Documentation/conf.py
-+++ b/Documentation/conf.py
-@@ -124,8 +124,20 @@ autosectionlabel_maxdepth = 2
- # mathjax is the default math renderer since Sphinx 1.8.
- have_latex =  have_command('latex')
- have_dvipng = have_command('dvipng')
--load_imgmath = ((have_latex and have_dvipng)
--                or (major == 1 and minor < 8)
-+load_imgmath = have_latex and have_dvipng
-+
-+# Respect SPHINX_IMGMATH (for html docs only)
-+if 'SPHINX_IMGMATH' in os.environ:
-+    env_sphinx_imgmath = os.environ['SPHINX_IMGMATH']
-+    if 'yes' in env_sphinx_imgmath:
-+        load_imgmath = True
-+    elif 'no' in env_sphinx_imgmath:
-+        load_imgmath = False
-+    else:
-+        sys.stderr.write("Unknown env SPHINX_IMGMATH=%s ignored.\n" % env_sphinx_imgmath)
-+
-+# Always load imgmath for Sphinx <1.8 or for epub docs
-+load_imgmath = (load_imgmath or (major == 1 and minor < 8)
-                 or 'epub' in sys.argv)
- 
- if load_imgmath:
 -- 
-2.25.1
-
+2.30.2
 
