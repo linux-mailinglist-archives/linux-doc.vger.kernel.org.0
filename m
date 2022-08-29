@@ -2,211 +2,217 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 043505A51F6
-	for <lists+linux-doc@lfdr.de>; Mon, 29 Aug 2022 18:38:09 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 1E5A65A5121
+	for <lists+linux-doc@lfdr.de>; Mon, 29 Aug 2022 18:11:42 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S230468AbiH2QiF (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 29 Aug 2022 12:38:05 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:51974 "EHLO
+        id S229509AbiH2QLk (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 29 Aug 2022 12:11:40 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:58888 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S229798AbiH2QiE (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Mon, 29 Aug 2022 12:38:04 -0400
-Received: from mga11.intel.com (mga11.intel.com [192.55.52.93])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 97A6972FE0;
-        Mon, 29 Aug 2022 09:38:02 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1661791082; x=1693327082;
-  h=date:from:to:cc:subject:message-id:reply-to:references:
-   mime-version:in-reply-to;
-  bh=ojePtwk4DKFWlMS7jqKVqTyPcBJTssA2BelkXh7kDvA=;
-  b=TODmqxL+ugZzu/9Hj1Kb16QMKfbUmiMnxgxJR/lzs8HOeh5wiQ0jSoDs
-   ew5gaspK3Sg8oRa+hfN79dMFW6EXBGHio0cHIxfO7sgBATppvFw3rtMO1
-   IKiL0ewzTJ5KjFcPtQ10fS674TDXk3lM21EHGB0EzGI1K5D+TS6xXD2yC
-   8BDxqdzYuSdj9HIeKlHCD3KN3FSQhjr2OH2IkTSGdPJjWBgs9YXx9rAEc
-   sNgIEVNw3Np+LeiSIU/JYy5+ZcxUY71gUwrXqsnB5x76EfWnjrt7GbYbM
-   UJ9DlZJ8FKNyem4MZ7PQ83y1nPFQ9VAkZJKnBDVjbnRzFwwFzJ63myDXY
-   A==;
-X-IronPort-AV: E=McAfee;i="6500,9779,10454"; a="292501808"
-X-IronPort-AV: E=Sophos;i="5.93,272,1654585200"; 
-   d="scan'208";a="292501808"
-Received: from orsmga008.jf.intel.com ([10.7.209.65])
-  by fmsmga102.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 29 Aug 2022 08:23:22 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.93,272,1654585200"; 
-   d="scan'208";a="640972615"
-Received: from chaop.bj.intel.com (HELO localhost) ([10.240.193.75])
-  by orsmga008.jf.intel.com with ESMTP; 29 Aug 2022 08:23:11 -0700
-Date:   Mon, 29 Aug 2022 23:18:30 +0800
-From:   Chao Peng <chao.p.peng@linux.intel.com>
-To:     Fuad Tabba <tabba@google.com>
-Cc:     kvm@vger.kernel.org, linux-kernel@vger.kernel.org,
-        linux-mm@kvack.org, linux-fsdevel@vger.kernel.org,
-        linux-api@vger.kernel.org, linux-doc@vger.kernel.org,
-        qemu-devel@nongnu.org, linux-kselftest@vger.kernel.org,
-        Paolo Bonzini <pbonzini@redhat.com>,
-        Jonathan Corbet <corbet@lwn.net>,
-        Sean Christopherson <seanjc@google.com>,
-        Vitaly Kuznetsov <vkuznets@redhat.com>,
-        Wanpeng Li <wanpengli@tencent.com>,
-        Jim Mattson <jmattson@google.com>,
-        Joerg Roedel <joro@8bytes.org>,
-        Thomas Gleixner <tglx@linutronix.de>,
-        Ingo Molnar <mingo@redhat.com>, Borislav Petkov <bp@alien8.de>,
-        x86@kernel.org, "H . Peter Anvin" <hpa@zytor.com>,
-        Hugh Dickins <hughd@google.com>,
-        Jeff Layton <jlayton@kernel.org>,
-        "J . Bruce Fields" <bfields@fieldses.org>,
-        Andrew Morton <akpm@linux-foundation.org>,
-        Shuah Khan <shuah@kernel.org>, Mike Rapoport <rppt@kernel.org>,
-        Steven Price <steven.price@arm.com>,
-        "Maciej S . Szmigiero" <mail@maciej.szmigiero.name>,
-        Vlastimil Babka <vbabka@suse.cz>,
-        Vishal Annapurve <vannapurve@google.com>,
-        Yu Zhang <yu.c.zhang@linux.intel.com>,
-        "Kirill A . Shutemov" <kirill.shutemov@linux.intel.com>,
-        luto@kernel.org, jun.nakajima@intel.com, dave.hansen@intel.com,
-        ak@linux.intel.com, david@redhat.com, aarcange@redhat.com,
-        ddutile@redhat.com, dhildenb@redhat.com,
-        Quentin Perret <qperret@google.com>,
-        Michael Roth <michael.roth@amd.com>, mhocko@suse.com,
-        Muchun Song <songmuchun@bytedance.com>
-Subject: Re: [PATCH v7 01/14] mm: Add F_SEAL_AUTO_ALLOCATE seal to memfd
-Message-ID: <20220829151830.GC1586678@chaop.bj.intel.com>
-Reply-To: Chao Peng <chao.p.peng@linux.intel.com>
-References: <20220706082016.2603916-1-chao.p.peng@linux.intel.com>
- <20220706082016.2603916-2-chao.p.peng@linux.intel.com>
- <CA+EHjTzRcEQcZRJixBa=fBXd4=-oZK=unmBLwBAFVixCPfY-dQ@mail.gmail.com>
+        with ESMTP id S229491AbiH2QLj (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Mon, 29 Aug 2022 12:11:39 -0400
+Received: from mail-pf1-x429.google.com (mail-pf1-x429.google.com [IPv6:2607:f8b0:4864:20::429])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 8EBBC7AC27;
+        Mon, 29 Aug 2022 09:11:37 -0700 (PDT)
+Received: by mail-pf1-x429.google.com with SMTP id 142so8641251pfu.10;
+        Mon, 29 Aug 2022 09:11:37 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112;
+        h=in-reply-to:content-disposition:mime-version:references:message-id
+         :subject:cc:to:from:date:sender:from:to:cc;
+        bh=ZLJprdSF7B9VmDv96y32lbC/nxnuJtlLWqkvWQJI7GM=;
+        b=QNoZpQoksuaTayMbMPSS3WlcUO5QtSSqmsHxgSUZ65MnrVcKCcxL6MKypW/+cwyXni
+         2+Ovg7HruU//xwKfY1FLHjMrN1SAYBJ+Dt3RIA/DzwhtlAUTfIOQSN7vbCCeNxqhj5X6
+         tNgMymMaB4Br9JUZB65cYaxzLfzXbdIUIWcMzOL7QQbfClprpG9BCTxw8Kn+BWUMQNOE
+         4WKpXmY8ZVi1rQcqu+rngsayxfqe+68g/znOhSzbR7GVs5/R+JeBZiOkNdrucnpg2crb
+         wIbyR4P8uD18rrtj6FSPiyw2gaXOOaFAHrqUTobKhBe9CoBmJNpomdIFM0mtgMaTuPuI
+         /gfw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=in-reply-to:content-disposition:mime-version:references:message-id
+         :subject:cc:to:from:date:sender:x-gm-message-state:from:to:cc;
+        bh=ZLJprdSF7B9VmDv96y32lbC/nxnuJtlLWqkvWQJI7GM=;
+        b=PY9tbUsqrerOoSFcD2S4feR35QK1e+1ThJefbj3smBHPeAbAMJmi8Qr9pC7P0OGh8Q
+         IM+I7GjMQkfbB24BLjJie7p+fg2/eGEnIAm/D+skKRq5YZC5HjQnFBoxjODrPmHb/GPz
+         AhI+skcbGbRqhDfh6iDxyMjuJg+766nV8KLhYlSZFtp4pMML16bRfakTfpWLnX6jdKDh
+         m/L0dNpsiYR3gHpg8IsD7w9zFvbUQjhpsX25EXGMDeBtUMbgTPiDL6krU2xevh6dNmlk
+         3MzcewfKpFS1rm+mM3hv7U9N0sz4E7ePUnUM/3v2HgcY4PiSYkF+25AjZGiusg7Tl9yv
+         yp4A==
+X-Gm-Message-State: ACgBeo1/hPQs5Z2RGOnnE2qaJuexxtXGwk9w8FnL5TTQ5rDBJLQIar3X
+        U6M4A9Wo0by2Y1Gw4NTZXX8=
+X-Google-Smtp-Source: AA6agR7Ue+C+yLLKp7/pE8ChoOX6D+a1sm8YZkdo4UfIDyMYoqHe0yfr71HJxLEPtJENEwOfQfub0g==
+X-Received: by 2002:a63:4621:0:b0:429:f162:555e with SMTP id t33-20020a634621000000b00429f162555emr14299561pga.63.1661789497044;
+        Mon, 29 Aug 2022 09:11:37 -0700 (PDT)
+Received: from server.roeck-us.net ([2600:1700:e321:62f0:329c:23ff:fee3:9d7c])
+        by smtp.gmail.com with ESMTPSA id p66-20020a625b45000000b0052e5bb18a41sm7384266pfb.58.2022.08.29.09.11.35
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 29 Aug 2022 09:11:36 -0700 (PDT)
+Sender: Guenter Roeck <groeck7@gmail.com>
+Date:   Mon, 29 Aug 2022 09:11:35 -0700
+From:   Guenter Roeck <linux@roeck-us.net>
+To:     Justin Ledford <justinledford@google.com>
+Cc:     Jean Delvare <jdelvare@suse.com>, Jonathan Corbet <corbet@lwn.net>,
+        linux-hwmon@vger.kernel.org, linux-doc@vger.kernel.org,
+        linux-kernel@vger.kernel.org
+Subject: Re: [PATCH] hwmon: (max31790) add fanN_enable
+Message-ID: <20220829161135.GB1320973@roeck-us.net>
+References: <20220829024351.2415147-1-justinledford@google.com>
+ <20220829132017.GA3039965@roeck-us.net>
+ <CAHCvCEcGvrS=3p2Whj0Cmx9sx+aSzX2097LahQ=f3eRCCAN_bA@mail.gmail.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <CA+EHjTzRcEQcZRJixBa=fBXd4=-oZK=unmBLwBAFVixCPfY-dQ@mail.gmail.com>
-X-Spam-Status: No, score=-7.0 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_EF,RCVD_IN_DNSWL_HI,SPF_HELO_NONE,
-        SPF_NONE,T_SCC_BODY_TEXT_LINE autolearn=ham autolearn_force=no
-        version=3.4.6
+In-Reply-To: <CAHCvCEcGvrS=3p2Whj0Cmx9sx+aSzX2097LahQ=f3eRCCAN_bA@mail.gmail.com>
+X-Spam-Status: No, score=-1.3 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+        DKIM_VALID,DKIM_VALID_EF,FREEMAIL_ENVFROM_END_DIGIT,
+        FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,HEADER_FROM_DIFFERENT_DOMAINS,
+        RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,SPF_PASS,T_SCC_BODY_TEXT_LINE
+        autolearn=no autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Fri, Aug 26, 2022 at 04:19:32PM +0100, Fuad Tabba wrote:
-> Hi Chao,
+On Mon, Aug 29, 2022 at 08:09:21AM -0700, Justin Ledford wrote:
+> The tach input isn't enabled in the device by default. So the only way
+> to start using the fan input sensors is to set the regulator mode
+> through the driver to RPM mode and then back to whatever mode you
+> actually want to use. The I2C interface to the device doesn't couple
+> the tach input to the regulator mode so I don't think it makes sense
+> for the driver to do this either.
 > 
-> On Wed, Jul 6, 2022 at 9:25 AM Chao Peng <chao.p.peng@linux.intel.com> wrote:
-> >
-> > Normally, a write to unallocated space of a file or the hole of a sparse
-> > file automatically causes space allocation, for memfd, this equals to
-> > memory allocation. This new seal prevents such automatically allocating,
-> > either this is from a direct write() or a write on the previously
-> > mmap-ed area. The seal does not prevent fallocate() so an explicit
-> > fallocate() can still cause allocating and can be used to reserve
-> > memory.
-> >
-> > This is used to prevent unintentional allocation from userspace on a
-> > stray or careless write and any intentional allocation should use an
-> > explicit fallocate(). One of the main usecases is to avoid memory double
-> > allocation for confidential computing usage where we use two memfds to
-> > back guest memory and at a single point only one memfd is alive and we
-> > want to prevent memory allocation for the other memfd which may have
-> > been mmap-ed previously. More discussion can be found at:
-> >
-> >   https://lkml.org/lkml/2022/6/14/1255
-> >
-> > Suggested-by: Sean Christopherson <seanjc@google.com>
-> > Signed-off-by: Chao Peng <chao.p.peng@linux.intel.com>
-> > ---
-> >  include/uapi/linux/fcntl.h |  1 +
-> >  mm/memfd.c                 |  3 ++-
-> >  mm/shmem.c                 | 16 ++++++++++++++--
-> >  3 files changed, 17 insertions(+), 3 deletions(-)
-> >
-> > diff --git a/include/uapi/linux/fcntl.h b/include/uapi/linux/fcntl.h
-> > index 2f86b2ad6d7e..98bdabc8e309 100644
-> > --- a/include/uapi/linux/fcntl.h
-> > +++ b/include/uapi/linux/fcntl.h
-> > @@ -43,6 +43,7 @@
-> >  #define F_SEAL_GROW    0x0004  /* prevent file from growing */
-> >  #define F_SEAL_WRITE   0x0008  /* prevent writes */
-> >  #define F_SEAL_FUTURE_WRITE    0x0010  /* prevent future writes while mapped */
-> > +#define F_SEAL_AUTO_ALLOCATE   0x0020  /* prevent allocation for writes */
-> 
-> I think this should also be added to tools/include/uapi/linux/fcntl.h
+Please don't top-post.
 
-Yes, thanks.
+The above does not answer my question why fan_config[] wound need to
+be updated repeatedly.
 
-Chao
-> 
-> Cheers,
-> /fuad
-> 
-> 
-> >  /* (1U << 31) is reserved for signed error codes */
+Guenter
+
+> On Mon, Aug 29, 2022 at 6:20 AM Guenter Roeck <linux@roeck-us.net> wrote:
 > >
-> >  /*
-> > diff --git a/mm/memfd.c b/mm/memfd.c
-> > index 08f5f8304746..2afd898798e4 100644
-> > --- a/mm/memfd.c
-> > +++ b/mm/memfd.c
-> > @@ -150,7 +150,8 @@ static unsigned int *memfd_file_seals_ptr(struct file *file)
-> >                      F_SEAL_SHRINK | \
-> >                      F_SEAL_GROW | \
-> >                      F_SEAL_WRITE | \
-> > -                    F_SEAL_FUTURE_WRITE)
-> > +                    F_SEAL_FUTURE_WRITE | \
-> > +                    F_SEAL_AUTO_ALLOCATE)
+> > On Mon, Aug 29, 2022 at 02:43:51AM +0000, Justin Ledford wrote:
+> > > The MAX31790 has a tach input enable bit in each fan's configuration
+> > > register. This is only enabled by the driver if RPM mode is selected,
+> > > but the driver doesn't provide a way to independently enable tachometer
+> > > input regardless of the regulator mode.
+> > >
+> > > By adding the fanN_enable sysfs files, we can decouple the tach input
+> > > from the regulator mode. Also update the documentation.
+> > >
+> > > Signed-off-by: Justin Ledford <justinledford@google.com>
+> > > ---
+> > >  Documentation/hwmon/max31790.rst |  1 +
+> > >  drivers/hwmon/max31790.c         | 44 +++++++++++++++++++++++++++-----
+> > >  2 files changed, 38 insertions(+), 7 deletions(-)
+> > >
+> > > diff --git a/Documentation/hwmon/max31790.rst b/Documentation/hwmon/max31790.rst
+> > > index 7b097c3b9b90..33c5c7330efc 100644
+> > > --- a/Documentation/hwmon/max31790.rst
+> > > +++ b/Documentation/hwmon/max31790.rst
+> > > @@ -38,6 +38,7 @@ Sysfs entries
+> > >  fan[1-12]_input    RO  fan tachometer speed in RPM
+> > >  fan[1-12]_fault    RO  fan experienced fault
+> > >  fan[1-6]_target    RW  desired fan speed in RPM
+> > > +fan[1-6]_enable    RW  enable or disable the tachometer input
+> > >  pwm[1-6]_enable    RW  regulator mode, 0=disabled (duty cycle=0%), 1=manual mode, 2=rpm mode
+> > >  pwm[1-6]           RW  read: current pwm duty cycle,
+> > >                         write: target pwm duty cycle (0-255)
+> > > diff --git a/drivers/hwmon/max31790.c b/drivers/hwmon/max31790.c
+> > > index 7e9362f6dc29..3ae02be4b41e 100644
+> > > --- a/drivers/hwmon/max31790.c
+> > > +++ b/drivers/hwmon/max31790.c
+> > > @@ -118,6 +118,12 @@ static struct max31790_data *max31790_update_device(struct device *dev)
+> > >                                       goto abort;
+> > >                               data->target_count[i] = rv;
+> > >                       }
+> > > +
+> > > +                     rv = i2c_smbus_read_byte_data(client,
+> > > +                                     MAX31790_REG_FAN_CONFIG(i));
+> > > +                     if (rv < 0)
+> > > +                             goto abort;
+> > > +                     data->fan_config[i] = rv;
 > >
-> >  static int memfd_add_seals(struct file *file, unsigned int seals)
-> >  {
-> > diff --git a/mm/shmem.c b/mm/shmem.c
-> > index a6f565308133..6c8aef15a17d 100644
-> > --- a/mm/shmem.c
-> > +++ b/mm/shmem.c
-> > @@ -2051,6 +2051,8 @@ static vm_fault_t shmem_fault(struct vm_fault *vmf)
-> >         struct vm_area_struct *vma = vmf->vma;
-> >         struct inode *inode = file_inode(vma->vm_file);
-> >         gfp_t gfp = mapping_gfp_mask(inode->i_mapping);
-> > +       struct shmem_inode_info *info = SHMEM_I(inode);
-> > +       enum sgp_type sgp;
-> >         int err;
-> >         vm_fault_t ret = VM_FAULT_LOCKED;
+> > Why is this needed ?
 > >
-> > @@ -2113,7 +2115,12 @@ static vm_fault_t shmem_fault(struct vm_fault *vmf)
-> >                 spin_unlock(&inode->i_lock);
-> >         }
+> > Guenter
 > >
-> > -       err = shmem_getpage_gfp(inode, vmf->pgoff, &vmf->page, SGP_CACHE,
-> > +       if (unlikely(info->seals & F_SEAL_AUTO_ALLOCATE))
-> > +               sgp = SGP_NOALLOC;
-> > +       else
-> > +               sgp = SGP_CACHE;
-> > +
-> > +       err = shmem_getpage_gfp(inode, vmf->pgoff, &vmf->page, sgp,
-> >                                   gfp, vma, vmf, &ret);
-> >         if (err)
-> >                 return vmf_error(err);
-> > @@ -2459,6 +2466,7 @@ shmem_write_begin(struct file *file, struct address_space *mapping,
-> >         struct inode *inode = mapping->host;
-> >         struct shmem_inode_info *info = SHMEM_I(inode);
-> >         pgoff_t index = pos >> PAGE_SHIFT;
-> > +       enum sgp_type sgp;
-> >         int ret = 0;
-> >
-> >         /* i_rwsem is held by caller */
-> > @@ -2470,7 +2478,11 @@ shmem_write_begin(struct file *file, struct address_space *mapping,
-> >                         return -EPERM;
-> >         }
-> >
-> > -       ret = shmem_getpage(inode, index, pagep, SGP_WRITE);
-> > +       if (unlikely(info->seals & F_SEAL_AUTO_ALLOCATE))
-> > +               sgp = SGP_NOALLOC;
-> > +       else
-> > +               sgp = SGP_WRITE;
-> > +       ret = shmem_getpage(inode, index, pagep, sgp);
-> >
-> >         if (ret)
-> >                 return ret;
-> > --
-> > 2.25.1
-> >
+> > >               }
+> > >
+> > >               data->last_updated = jiffies;
+> > > @@ -202,6 +208,9 @@ static int max31790_read_fan(struct device *dev, u32 attr, int channel,
+> > >               }
+> > >               mutex_unlock(&data->update_lock);
+> > >               return 0;
+> > > +     case hwmon_fan_enable:
+> > > +             *val = !!(data->fan_config[channel] & MAX31790_FAN_CFG_TACH_INPUT_EN);
+> > > +             return 0;
+> > >       default:
+> > >               return -EOPNOTSUPP;
+> > >       }
+> > > @@ -214,7 +223,7 @@ static int max31790_write_fan(struct device *dev, u32 attr, int channel,
+> > >       struct i2c_client *client = data->client;
+> > >       int target_count;
+> > >       int err = 0;
+> > > -     u8 bits;
+> > > +     u8 bits, fan_config;
+> > >       int sr;
+> > >
+> > >       mutex_lock(&data->update_lock);
+> > > @@ -243,6 +252,23 @@ static int max31790_write_fan(struct device *dev, u32 attr, int channel,
+> > >                                       MAX31790_REG_TARGET_COUNT(channel),
+> > >                                       data->target_count[channel]);
+> > >               break;
+> > > +     case hwmon_fan_enable:
+> > > +             fan_config = data->fan_config[channel];
+> > > +             if (val == 0) {
+> > > +                     fan_config &= ~MAX31790_FAN_CFG_TACH_INPUT_EN;
+> > > +             } else if (val == 1) {
+> > > +                     fan_config |= MAX31790_FAN_CFG_TACH_INPUT_EN;
+> > > +             } else {
+> > > +                     err = -EINVAL;
+> > > +                     break;
+> > > +             }
+> > > +             if (fan_config != data->fan_config[channel]) {
+> > > +                     err = i2c_smbus_write_byte_data(client, MAX31790_REG_FAN_CONFIG(channel),
+> > > +                                                     fan_config);
+> > > +                     if (!err)
+> > > +                             data->fan_config[channel] = fan_config;
+> > > +             }
+> > > +             break;
+> > >       default:
+> > >               err = -EOPNOTSUPP;
+> > >               break;
+> > > @@ -270,6 +296,10 @@ static umode_t max31790_fan_is_visible(const void *_data, u32 attr, int channel)
+> > >                   !(fan_config & MAX31790_FAN_CFG_TACH_INPUT))
+> > >                       return 0644;
+> > >               return 0;
+> > > +     case hwmon_fan_enable:
+> > > +             if (channel < NR_CHANNEL)
+> > > +                     return 0644;
+> > > +             return 0;
+> > >       default:
+> > >               return 0;
+> > >       }
+> > > @@ -423,12 +453,12 @@ static umode_t max31790_is_visible(const void *data,
+> > >
+> > >  static const struct hwmon_channel_info *max31790_info[] = {
+> > >       HWMON_CHANNEL_INFO(fan,
+> > > -                        HWMON_F_INPUT | HWMON_F_TARGET | HWMON_F_FAULT,
+> > > -                        HWMON_F_INPUT | HWMON_F_TARGET | HWMON_F_FAULT,
+> > > -                        HWMON_F_INPUT | HWMON_F_TARGET | HWMON_F_FAULT,
+> > > -                        HWMON_F_INPUT | HWMON_F_TARGET | HWMON_F_FAULT,
+> > > -                        HWMON_F_INPUT | HWMON_F_TARGET | HWMON_F_FAULT,
+> > > -                        HWMON_F_INPUT | HWMON_F_TARGET | HWMON_F_FAULT,
+> > > +                        HWMON_F_INPUT | HWMON_F_TARGET | HWMON_F_FAULT | HWMON_F_ENABLE,
+> > > +                        HWMON_F_INPUT | HWMON_F_TARGET | HWMON_F_FAULT | HWMON_F_ENABLE,
+> > > +                        HWMON_F_INPUT | HWMON_F_TARGET | HWMON_F_FAULT | HWMON_F_ENABLE,
+> > > +                        HWMON_F_INPUT | HWMON_F_TARGET | HWMON_F_FAULT | HWMON_F_ENABLE,
+> > > +                        HWMON_F_INPUT | HWMON_F_TARGET | HWMON_F_FAULT | HWMON_F_ENABLE,
+> > > +                        HWMON_F_INPUT | HWMON_F_TARGET | HWMON_F_FAULT | HWMON_F_ENABLE,
+> > >                          HWMON_F_INPUT | HWMON_F_FAULT,
+> > >                          HWMON_F_INPUT | HWMON_F_FAULT,
+> > >                          HWMON_F_INPUT | HWMON_F_FAULT,
+> > > --
+> > > 2.37.2.672.g94769d06f0-goog
+> > >
