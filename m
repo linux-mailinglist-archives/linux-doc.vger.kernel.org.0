@@ -2,211 +2,168 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id AFC335A50C2
-	for <lists+linux-doc@lfdr.de>; Mon, 29 Aug 2022 17:54:25 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 33A7E5A50D6
+	for <lists+linux-doc@lfdr.de>; Mon, 29 Aug 2022 17:59:45 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S230153AbiH2PyY (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 29 Aug 2022 11:54:24 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:59920 "EHLO
+        id S229635AbiH2P7n (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 29 Aug 2022 11:59:43 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:38804 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S230154AbiH2PyX (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Mon, 29 Aug 2022 11:54:23 -0400
-Received: from NAM10-BN7-obe.outbound.protection.outlook.com (mail-bn7nam10on2090.outbound.protection.outlook.com [40.107.92.90])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id A6FB497B19;
-        Mon, 29 Aug 2022 08:54:19 -0700 (PDT)
+        with ESMTP id S229486AbiH2P7m (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Mon, 29 Aug 2022 11:59:42 -0400
+Received: from NAM02-SN1-obe.outbound.protection.outlook.com (mail-sn1anam02on2071.outbound.protection.outlook.com [40.107.96.71])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 64F5597B19;
+        Mon, 29 Aug 2022 08:59:41 -0700 (PDT)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=CWV3UH04DahhL2WIrGi35+ux2+7fq+VLCt8tljjTcbMrvc/DTDkUf4/4F0qIxQaVx1EyMbJ2RlHhn5k+vKscONgzqfdW2jd28ZAw3JKokAkUhw5xeBkZrfDgKSSOs775ulO0rlCV9YH1RMMlzsEaA8jjk4m9XECGCHdNNgff7UttFtVZi3KsQ9y6L/ci6yGGheZimLnw+89dzxz9CtUVYrfxkaObVxAgR4vKDZccAjCQxv1gy1ljB9lLEiz2+GlKylZNtFWAL3TzA4tN/NxwKMRP+vg7vvgD6aORY6vOJfPxqhB0zqbfuRkLdlYStqdZYZd9KsxHaxNEzUvCFCPLkA==
+ b=edlGcgDrmC3XMZ/CeXOCNOxhGEqj/Gsw0XM5Uu5t4/uMfWJ7cZVCaAfkqrpNV5dON44GEdVDPPmXgBJHzf4H8nfRuHIwkEdjSFcKiTWypcwgX+eLHD70iSWC4nkGo86fewNGz+zwDg9c8+KQ0qj7L4pQ6DA5BryHkc+zizraOudasrW/6TeAflf0j71RfEhKkhwqCWdVRNijLmK6sS6MFuBzuQhDXbRsqDPE3otCV3oaI/wc2DvWkFFTds1z6i3tEDmupuYox55LRDLBnApUDgN6VcEBx6b2hSvFYTH6asXFJwr7uCrTdWLyYg3TEKTXCVfHFiS1+vqPfGSmypprJQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=gPx0F3VoRRc6Wt9CRUuOEfwkYIVhfAWfXq+Yg9U5Ju0=;
- b=iNHDRidWutgE7aGNw4CmNSjpfFRm2ut6gkPgv/fhVzU1v3Lc9KUWTr2EgTMgYBRuqLTCA+LynebCfRe6PpFxXzsth33D5WW4r1R6big2vC+Ly0RMkWxjAPxl+DwVqbqzwgoXMStyRABbD4JuuSxwV0t2182TEutCo9bGzX+LrLSCum0lSM9eJ8hXbCzogdGu4wBzy3h1pWKjm8HcHNReone0ELcIiPlAbJZimwQ6BIeKh36wuy2YpwFQxpaLlZtJrMkos5Tng+YwnrjgHFr6wSNV9MjaJotT5G18FWrl47S6TfUNOiIIKC1cjSTifPUWoX2U7U0T88cX1/WESHDWdw==
+ bh=DM7yaYW/eClJS9YfGzXtfkljYAyNS+SRRPd3pYmVb20=;
+ b=Kv3L2dcEjzYAD6SO6+51mMtzLm0fT4xzTdh41slws5TGMgJXFMB5RTZhgVkbXM/H89fiQtySQQ4BJZmJVEdUSMQKugF+fGKWFtqUo7H11DoshcOY29uEKJe3td2EzSdmZKJX0F+m0WdD4hZD4brOuuggSkdsB5AtgYY3yvM9P79zS5jGNW/3ZpC5l7P6Q+i8JTek7tOnUHEddCrxaloQOpMIhiBw/+zJEhnm9XR+/uyfQZpSyTq9WMCTq0pcl4kwwr7x2yBUy+XokPdFQ8pp5DWDuAq54Q4loCUhPY4uQHFMbENqYVGjC3BATw9tw5PhztoOa/YG3SOpUhBwd2ox6Q==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=corigine.com; dmarc=pass action=none header.from=corigine.com;
- dkim=pass header.d=corigine.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=corigine.onmicrosoft.com; s=selector2-corigine-onmicrosoft-com;
+ smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
+ header.d=amd.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=gPx0F3VoRRc6Wt9CRUuOEfwkYIVhfAWfXq+Yg9U5Ju0=;
- b=kIzppg7SQJvlcCNHebGVUcguhz16vSjuku4y0SyUfH9GatWX3mvV4OHFM5V6SyjhrSssgEZMdcR1kYjUkEUPDXRTSAYpdav5p5g3pb4CvGG3W+RzOQQpiSPFwaMGRjUKhp5tz5I0+f+PRZWytMZ9D0bGrcsDSAWI+d7ERfWf5N8=
+ bh=DM7yaYW/eClJS9YfGzXtfkljYAyNS+SRRPd3pYmVb20=;
+ b=VBlCKMjB5U3iFXtmBbp7VIBgrOfyUYidkJDL6gglKxohM57d/6MUwSSahbD8ObnKr1YZu38WglWcDuj+/sNZst5307WWNFaoipxMOu61BTcFezrY7uNyetWUDokNOoAW+UtdYkZ0O4tcNcc4DUFecSbfx8Roa8NaWjTu1sEtebg=
 Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=corigine.com;
-Received: from DM6PR13MB4431.namprd13.prod.outlook.com (2603:10b6:5:1bb::21)
- by CH2PR13MB3605.namprd13.prod.outlook.com (2603:10b6:610:2c::25) with
+ header.d=none;dmarc=none action=none header.from=amd.com;
+Received: from BN8PR12MB3108.namprd12.prod.outlook.com (2603:10b6:408:40::20)
+ by SJ0PR12MB5611.namprd12.prod.outlook.com (2603:10b6:a03:426::17) with
  Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5588.10; Mon, 29 Aug
- 2022 15:54:15 +0000
-Received: from DM6PR13MB4431.namprd13.prod.outlook.com
- ([fe80::2944:20ba:ee80:b9c7]) by DM6PR13MB4431.namprd13.prod.outlook.com
- ([fe80::2944:20ba:ee80:b9c7%3]) with mapi id 15.20.5588.010; Mon, 29 Aug 2022
- 15:54:15 +0000
-From:   =?UTF-8?q?Niklas=20S=C3=B6derlund?= <niklas.soderlund@corigine.com>
-To:     Dwaipayan Ray <dwaipayanray1@gmail.com>,
-        Lukas Bulwahn <lukas.bulwahn@gmail.com>,
-        Joe Perches <joe@perches.com>,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5566.21; Mon, 29 Aug
+ 2022 15:59:39 +0000
+Received: from BN8PR12MB3108.namprd12.prod.outlook.com
+ ([fe80::8cb2:3d2f:c63e:be2]) by BN8PR12MB3108.namprd12.prod.outlook.com
+ ([fe80::8cb2:3d2f:c63e:be2%5]) with mapi id 15.20.5566.021; Mon, 29 Aug 2022
+ 15:59:39 +0000
+Date:   Mon, 29 Aug 2022 15:59:28 +0000
+From:   Yazen Ghannam <yazen.ghannam@amd.com>
+To:     Borislav Petkov <bp@alien8.de>
+Cc:     "Elliott, Robert (Servers)" <elliott@hpe.com>,
+        Jia He <justin.he@arm.com>, Len Brown <lenb@kernel.org>,
+        James Morse <james.morse@arm.com>,
+        Tony Luck <tony.luck@intel.com>,
+        Mauro Carvalho Chehab <mchehab@kernel.org>,
+        Robert Richter <rric@kernel.org>,
+        Robert Moore <robert.moore@intel.com>,
+        Qiuxu Zhuo <qiuxu.zhuo@intel.com>,
         Jonathan Corbet <corbet@lwn.net>,
-        Andy Whitcroft <apw@canonical.com>, linux-doc@vger.kernel.org,
-        linux-kernel@vger.kernel.org
-Cc:     oss-drivers@corigine.com,
-        =?UTF-8?q?Niklas=20S=C3=B6derlund?= <niklas.soderlund@corigine.com>,
-        Simon Horman <simon.horman@corigine.com>,
-        Louis Peens <louis.peens@corigine.com>
-Subject: [PATCH] checkpatch: warn for non-standard fixes tag style
-Date:   Mon, 29 Aug 2022 17:53:58 +0200
-Message-Id: <20220829155358.2546732-1-niklas.soderlund@corigine.com>
-X-Mailer: git-send-email 2.37.2
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-ClientProxiedBy: AM6PR04CA0063.eurprd04.prod.outlook.com
- (2603:10a6:20b:f0::40) To DM6PR13MB4431.namprd13.prod.outlook.com
- (2603:10b6:5:1bb::21)
+        Jan Luebbe <jlu@pengutronix.de>,
+        Khuong Dinh <khuong@os.amperecomputing.com>,
+        "Kani, Toshi" <toshi.kani@hpe.com>,
+        Ard Biesheuvel <ardb@kernel.org>,
+        "linux-acpi@vger.kernel.org" <linux-acpi@vger.kernel.org>,
+        "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
+        "linux-edac@vger.kernel.org" <linux-edac@vger.kernel.org>,
+        "devel@acpica.org" <devel@acpica.org>,
+        "Rafael J . Wysocki" <rafael@kernel.org>,
+        Shuai Xue <xueshuai@linux.alibaba.com>,
+        Jarkko Sakkinen <jarkko@kernel.org>,
+        "linux-efi@vger.kernel.org" <linux-efi@vger.kernel.org>,
+        "nd@arm.com" <nd@arm.com>, "Paul E. McKenney" <paulmck@kernel.org>,
+        Andrew Morton <akpm@linux-foundation.org>,
+        Neeraj Upadhyay <quic_neeraju@quicinc.com>,
+        Randy Dunlap <rdunlap@infradead.org>,
+        Damien Le Moal <damien.lemoal@opensource.wdc.com>,
+        Muchun Song <songmuchun@bytedance.com>,
+        "linux-doc@vger.kernel.org" <linux-doc@vger.kernel.org>,
+        "stable@kernel.org" <stable@kernel.org>
+Subject: Re: [RESEND PATCH v3 3/9] EDAC/ghes: Make ghes_edac a proper module
+ to remove the dependency on ghes
+Message-ID: <YwziYFGWyEe2/kIp@yaz-fattaah>
+References: <20220822154048.188253-1-justin.he@arm.com>
+ <20220822154048.188253-4-justin.he@arm.com>
+ <MW5PR84MB1842F7107770654C46CB0311AB759@MW5PR84MB1842.NAMPRD84.PROD.OUTLOOK.COM>
+ <YwmqKPaYtgTS4xYT@zn.tnic>
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <YwmqKPaYtgTS4xYT@zn.tnic>
+X-ClientProxiedBy: CH0PR03CA0299.namprd03.prod.outlook.com
+ (2603:10b6:610:e6::34) To BN8PR12MB3108.namprd12.prod.outlook.com
+ (2603:10b6:408:40::20)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: dc920175-50e8-438e-e23a-08da89d6b95b
-X-MS-TrafficTypeDiagnostic: CH2PR13MB3605:EE_
+X-MS-Office365-Filtering-Correlation-Id: 360cc3d5-5c34-4002-a638-08da89d77a2e
+X-MS-TrafficTypeDiagnostic: SJ0PR12MB5611:EE_
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: QufVHZ4fxIu0SJXaERvZUeKPayJywCLGvEVIdXTHX5VEAzTbuCYPmcgkDPx8r95tMMN1ZYFlVqIoKAEZoZz1HKPupTWhkNTHoonsMmcZlhsGyQUKLcTWBaXkEhnnBXgvPTl7Nnlx6LRMYCofYaqJLbm0W2Y272K03sVaFIJrtejAhgcqEQnwEt06Obo8w570HMVj0HCvvAh2IxPkJSUhdeHxWNrSWgyy3t7mUUs03nR/0DlmHUEEJNSqKBFtJpQw+SID4Mdnd8B3Tl0UlDuknY+MayPilq0NFuoCKSVW2VEd7wbY58iQRC67Pfkhl8aWuhU4vLQXtpU23vvIW0a1+5599J/vd9htjIZWSwkQ7vs89tZkSouM/4+2BP/y25qMAiau8bLjkekB+0L6zhKf96EpToNrI/LY9UcMw6bTY/uZntYAFe6Yf2uxTdB6l5Q6O2lNTId3DEVUavwx9DHwU0RztslDaCHnZbblO6772jKKk+52g7JkoZ/q5mWjZDcMvbdWuoXtFqpADT6pjNltyO8yqrtczT1Tib60OKfE282mowyD/8g5JdjxtlZEdZ0QJRJezR+1k5WH35SIvXrO/pGEhwsKVuCCgPiCpK8qDXaAj7Vf9Apibffenhwt+JssakZYkTE+diUSwqJRcosPsa4Mh2hymF+zucDpOIw8cFUDbMDisajjD2IY7RitFCsfUsTpJLpwmUnzI6I662byowV/HavKu27unmM+WzlcianNZ+HdObXNV+QDff92xv+9w6sjagCYkKZi6or4DpyN6KzxYbP/16DmYPrYLfR5xa/CTj5QcEV4PpocDElTAiRIy2eKryQsfPHdRetaRw0mhA==
-X-Forefront-Antispam-Report: CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DM6PR13MB4431.namprd13.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230016)(4636009)(39830400003)(136003)(346002)(366004)(376002)(396003)(86362001)(8676002)(110136005)(66946007)(66556008)(66476007)(54906003)(4326008)(966005)(316002)(6486002)(5660300002)(8936002)(478600001)(41300700001)(36756003)(38350700002)(6506007)(2616005)(52116002)(6512007)(2906002)(26005)(6666004)(38100700002)(107886003)(83380400001)(66574015)(186003)(1076003);DIR:OUT;SFP:1102;
+X-Microsoft-Antispam-Message-Info: voq359ETNnMX3I/8MsdqnJJsKhtDKoXCOH5PO+l21UCfTkalgkkG6o3NpsFrHzTWY0Pf58fEjEi+iV29l/sxHx8UOROUCrU+9yGDPSOYq6CFdGry0Y1BPdQPP4UHYHkg48KkQFe7B8bR9w6wLUQRnKLupwKSQtd/d+H1/aUxOKK9zA1CxQxiGGXfls5RWkXAWL7keQhW55iwFuywDTNjoGJljwTFzhCQs0irgD2BxA+rdUgAIWG98Jym+Jo4znQF99XcTavWVz7mV8Fn64rTXMHjeDTCtSa5CtzjSEyYJP40ycz6mnVHhNvR3GBQpEJ9ucvm1vT6N29tEQIUGRQY64HuqxzMBmnCkjku5ccvPUmam5YxKDXtzoXTkSqDyMN1iHjbuZeBa3JtsHZ/At0dWJA7r9dOwtxCKoq/WmNkvwsK3AYdo716B8FLESUlBoep4b08kgAi54bituu6PAoe5SFKY2z6tG89XwleMsTv0CMzSgO4goqLsnoDjhHXEj8JuLjOZm8PDbVtETvWBBySi4xuVqmgGPXVkcVMD8HZiCc+n4dG4l36t4UTr1oanpRY4y0QnOwYfjx9Dm9LwhLsHTMOtKEN0hRF8HZdbduH1E90SbpMuJw2wkKmrbeHw+F5vNYjnk38gautQ/LpnGS4DbiM5mPAT1rsJl7hMLOSJig5GGKfODaDv0NXf3RWi5lwO3o5jfD2v9EhC2gT66W08g==
+X-Forefront-Antispam-Report: CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BN8PR12MB3108.namprd12.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230016)(7916004)(4636009)(376002)(39860400002)(346002)(136003)(366004)(396003)(5660300002)(26005)(6512007)(9686003)(38100700002)(41300700001)(44832011)(7406005)(6666004)(4744005)(7416002)(478600001)(86362001)(8936002)(8676002)(4326008)(66476007)(2906002)(6486002)(6506007)(66946007)(66556008)(316002)(54906003)(186003)(6916009)(33716001);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?UWFoVXlIalNYMXAvdlhnbVcwQnFrUTAwZVk5Y1RyVnVIaUtEeWlUc3BoZS8y?=
- =?utf-8?B?MTRlZjdJcU84MURVRmRyYjRsRENwOUxuMktMbkFleTMzcCtuNVVsdmszbFgx?=
- =?utf-8?B?QUd2MnNqS1VwMU01Z3MvNkVVTEVodUdibVpxSHlTRVNmRzZzODVrNFhhMDJU?=
- =?utf-8?B?VHZVa05BUEFxa3lBZ0duQU9uZVVVbzlNaDFkbzNCaGZHdmpKMnRzcU9IdjhQ?=
- =?utf-8?B?K1ZwbWVKVHNvTDlPNXZaeWhMem0vY3kwOFY2c1BXbSs4RFN0VmhSV1dObTV0?=
- =?utf-8?B?dTdCMFNUY0ozMU5CSmQ2d0p5YlFhck91ZytDcWNRd24zV25Zc29KLzRDYkpB?=
- =?utf-8?B?VWNvZmIyMGVxL1hSeU5iVS9jY2VZN1ducTRXa3AySGpGK2t0dmxSVGRRdjBQ?=
- =?utf-8?B?ZnVlZnpnNExMQnVjaEJVMkZXYnNudXNkbElrcVdkRWFPRmR0b2xnMW52TEFP?=
- =?utf-8?B?RVd0YXRLbXZpKy9RM2pqRXQ4UUxOalNFSWhxNG85T3ZJd1Z3MkR4TTlPTVFs?=
- =?utf-8?B?bDhjYzA1RFV4Q0VaNWJreW9YbmI0NG5pR2J6MG4vMVV5WGJ6TVRqRjc2TWll?=
- =?utf-8?B?ekUyZXhxTm9jVUR3TFJZWHVJK1VmRCtKRmN3WS80S1g2UXVWU1hOTGZqYzZD?=
- =?utf-8?B?VXdRd29Jb2hmeU4wd1pNUEwvNFZCSDBlbHoxMjBPVCtkWlFLZXV4K1FMTlZi?=
- =?utf-8?B?SEFVTVZqN1NRd3RRRFNWeWpLbnhIUVBPVCtDUkFWaU5vWFBOaWJia1J6b3Jm?=
- =?utf-8?B?T1hOZ0RJS2RtM01YQkFOWG9rNWNuRXR2YmZiVUxzSGorRnRtRmNzTmpYYlB1?=
- =?utf-8?B?cTJkaG5DZkxOcFBaSEhJSGpYUmJaRnpRdlE0VnFSdFN4eE9hR1ROQTRDV0Nk?=
- =?utf-8?B?cFMzb3M4OHFTcVEveXdVUlQ5bDJLb0JETU1yT3VZV3VESHdmREdCS0ZueXV5?=
- =?utf-8?B?ZUh2TzMyd0tCa05Bd1VZRFZjcDlxRjlPWGkrdkFWUjdiUUhaNis3ZXJuK0g3?=
- =?utf-8?B?RktrU0RBWVhnTURtMDJDcmIvZ3JYQ2RKTWIwbmlZUXlMZXlaWGhOVEtXbjU0?=
- =?utf-8?B?MEhFeFE0MHNOenkzblFLYnh0Y2hweXVMNDI0Y3VOYk1PdWcwYXB3U1UwSGxn?=
- =?utf-8?B?RjMrWk5RWTNnUmVXVGd0clRHNlVvVXhwc0UzRldTb0Uvcmt6dzRjRzFyQXpj?=
- =?utf-8?B?OEJSc3NBMDczQzFOSG1HNlQ0b1RzMUhNcDJkNTVDVkhhOERqUXZyNkZZTkJp?=
- =?utf-8?B?eUJpSkR1bk5NV2tic2VUYWZrVk1EUytHNi9IVWM2Y2xSQ25WRHIyTHcxNWdM?=
- =?utf-8?B?L2I1TDdIbWM4VHlyZXI3R3hhM0VXSVo5SE9hRU1CbGcvYmR1eEN4a0JpaWNZ?=
- =?utf-8?B?SmM0S2JMU3UvNU1zU3lkQURlSmNoZkg4RWtEUjdudkpXd08zSEFZbHBoOTR0?=
- =?utf-8?B?N2Zhck5WZ0pocDd1R1ZBWWxRSWQ2YW5FMTVLems5TkxqeXp4M29wWmhqUzBI?=
- =?utf-8?B?ZWhyZmJrM3VQMWRvVmFsd1kydVBuSHRkZkYzMFRBOVVRZTdSN2ZxTy8wUnN6?=
- =?utf-8?B?a3lmQU9GUDFiK3hDSTBKLzBnRlVMVXorR2ZMSkFCaUtuUzhhbFZwZW9OcXBS?=
- =?utf-8?B?RUxGRjIwV3pNU3B5Z1poRC83Y3h3cnJvZCt5WEV1OTNnSUZlWEptTGhlSGZs?=
- =?utf-8?B?TmRyOXZ0K3hCWVB4bTlEdVZvakFWcEd6RUFYL2FMVThmTDk4NmZXa0t4SjVY?=
- =?utf-8?B?YUZNeVVVZnhRRFBKM3ZTcXlFSmxCOG91TUpTUmt1NUtVWmMwWHdsVkRZclYw?=
- =?utf-8?B?SEVzaXc1b2pmdEZtU1ZEa0d1a2dZZ21vUGpmck9PUXhpbTVwT2dhdDNORFYx?=
- =?utf-8?B?bXZJM1JjOGlKNHArOEU4QURUd2ZlR2FrQWtQcnVqNS92Qk9tRGI0WXI5UTVS?=
- =?utf-8?B?RTFSNG9yVDFpRlQ1Y01OOTFrY3FWdzBvbHNaTHlKcncwVkxhbXVETC9lWFRn?=
- =?utf-8?B?QWxzM2k0U2JCOTAwS09mejVVZ284VWRnbnlkNDNiTEh1QmlHS2xIYVpva1hy?=
- =?utf-8?B?V1JWU3VXNmdLVGVqbkhEMWxZTUdqNDUwNnlxYUpOb2NWVVpyRTJZSnlNMHZL?=
- =?utf-8?B?VFY4RVN0T3lvVjF5MSthckVNSXYrNVl6K2VJaG9ONTBKODdyOE9oNEFjczVE?=
- =?utf-8?B?alE9PQ==?=
-X-OriginatorOrg: corigine.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: dc920175-50e8-438e-e23a-08da89d6b95b
-X-MS-Exchange-CrossTenant-AuthSource: DM6PR13MB4431.namprd13.prod.outlook.com
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?F4vXOe6VyaXa2GYKkA2uqy9qEPgHUB8sZ8lHlXfO3rmY3H9Vg0n/3aICAUwr?=
+ =?us-ascii?Q?rwDuqr8ULAfLQQ396A3tMkFsfdBD//ANxCiBfMP8o6Z3Sdovm6BPjzlqwmUK?=
+ =?us-ascii?Q?TCd8angQQfhXyIbnRzXd2HYWQERxCiiNCXZJfMheuey4UtxpPZ5FsdQ1b18L?=
+ =?us-ascii?Q?EmOSbGi1XOQiCb6XPDnBd+RHLyuoswf8hEmxKDDPGDxXfz8vw7tOLySXF9pE?=
+ =?us-ascii?Q?1lbXT5FP4IM9jVN8qu/aSE4BmWrQytGiqnkY3uRhbMPFkxm9ENVm8UHlZtn8?=
+ =?us-ascii?Q?eYZKda+hyuIqzPmJKMsq1z38M+WKJjXWEZ9D5OHikrxrAMKjuB5qvKROrG6t?=
+ =?us-ascii?Q?8TTjHIdB2eY2kHYQyj7T9LOGKmyiV4cSTVLQJZaOSR25402dNrP7tGzlTIIL?=
+ =?us-ascii?Q?og1lzkLwC2K7ZAeVaBEe5tuGmIbkqu4GtsDQFV+pdI288ChSq2JR664NOGV0?=
+ =?us-ascii?Q?+qiJg5zg2TG+stSrEl8+nj6gLhhGgf527iEQEyggWX3QnMwMWJrzWwNxRHD3?=
+ =?us-ascii?Q?DYhxyigN+4+zWzm5KhEQxqVs8njFtLT2mqivaVUz7oWfOo/WXkcot2mKgVG/?=
+ =?us-ascii?Q?PxKOXzoOh2BAgGOAjFEe+Ld4boKLI937hAgqMIhzEKdGK4gy79A6UEvBZ+tg?=
+ =?us-ascii?Q?2BCUH0XIvklM8B91PpKcwKaRB6bOs+SFZYLJkY/uhjYunv1MbhrPVVpSaLXZ?=
+ =?us-ascii?Q?QwPT28to+lGbytgnR/dn6mOkjyiVoLyrRwkI8QE52weNYssbSKBPNmEWhRIj?=
+ =?us-ascii?Q?jZ5yCkPqGOWoQfZJf/h9Xc1IfAk6Om5bSjAPmMz5AfG7wvbxgSWW4ffCGSe7?=
+ =?us-ascii?Q?DEfY6/2w7KBJ7tvtOBS/kdlr0cbjvIQbXkOGku/hwfZ731N37jbKJCHj5672?=
+ =?us-ascii?Q?nQ68qJZZrHDJIr/3icDAFZOpWFiweBIZZWfiREGpolsDc0Q9nxD6ezSZnRCr?=
+ =?us-ascii?Q?rM+4kmu2a78MJH/zUlDTNjSOt7xeADhOF3fwyLSJlEdUxTvUwJ4wpbhFJfpY?=
+ =?us-ascii?Q?Xi1VXfluI66zmQWYcDs0W3tP9kOKjFL95sv0LdU98RmTHRrTWrnmIG4mLgkO?=
+ =?us-ascii?Q?WkBKnBmiXdrRfzOe8AuJv/F4nLS6BHSOakk5KZv3gNEzeOVgdBMsT9WYs4zn?=
+ =?us-ascii?Q?Y/5vMEDnGNayqDD/UmrYasYwivThD3gAKhgULer2RCw4QHRo1qefAY7hb9t1?=
+ =?us-ascii?Q?d9fsFnTYyZDyUXk4haa2g9oBI4cwL3udfIvQSoLUaXoy+Rt9lZw5fxZUMLBZ?=
+ =?us-ascii?Q?fBFu8BSqquLP3LFetb9spTz5wXccDQ4EZu5lMer89vx56wXws8tcrf1R9OMs?=
+ =?us-ascii?Q?mS6y1emcE14XumXZc0cy9jD56VajdsixG1nhG+5trzCVMRlFe2GIVyROrpD2?=
+ =?us-ascii?Q?xlcFJmb/TJB+rSIaxygbRkBN0IwTrc1XMW8QMYYEOdM6vCIaP3EiayFpQTVQ?=
+ =?us-ascii?Q?ounGH6oP7sJ/Dd2EZSoGnOYKWGpjmxC6Z3Ct2JK7PIElMHY4+4FYD+Ncp/UQ?=
+ =?us-ascii?Q?TCORnCbLYkoKJFn+9OVCokRJi3Xrpc79n1Moc2+PjCjWdh+6n2QW0w7dqFbJ?=
+ =?us-ascii?Q?Q/prCrwGYKxZECSp6oLnogy7xMGgOg+ZGI9GucJd?=
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 360cc3d5-5c34-4002-a638-08da89d77a2e
+X-MS-Exchange-CrossTenant-AuthSource: BN8PR12MB3108.namprd12.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 29 Aug 2022 15:54:15.3253
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 29 Aug 2022 15:59:38.9072
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: fe128f2c-073b-4c20-818e-7246a585940c
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: EotWf5x9gvek1PczoXnKjtBdSyf1GDiQYQDT2E9LMuvVEK/TfpZoQu63GFAQKzEwO2fQXOYWos+g/2aVYZy0zCjaEtLEuRH8YDYL/EOaCM0=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: CH2PR13MB3605
-X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-        DKIM_VALID,RCVD_IN_DNSWL_NONE,RCVD_IN_MSPIKE_H2,SPF_HELO_PASS,SPF_PASS,
-        T_SCC_BODY_TEXT_LINE autolearn=ham autolearn_force=no version=3.4.6
+X-MS-Exchange-CrossTenant-UserPrincipalName: F+a48sw9zUVAGV/2Q1b4pdZtMWiHu+HIXxcpKcOrhVdwN5lCpu/FvWm6PVe3UWpKOtpI/FvuOa15UKkVuhQQbA==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ0PR12MB5611
+X-Spam-Status: No, score=-2.1 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_NONE,
+        RCVD_IN_MSPIKE_H2,SPF_HELO_PASS,SPF_PASS,T_SCC_BODY_TEXT_LINE
+        autolearn=ham autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Add a warning for fixes tags that does not fall in line with the
-standards specified by the community.
+On Sat, Aug 27, 2022 at 07:22:48AM +0200, Borislav Petkov wrote:
+> On Fri, Aug 26, 2022 at 10:42:13PM +0000, Elliott, Robert (Servers) wrote:
+> > 4. In the help text for each module that looks for GHES and refuses to load 
+> > (e.g., EDAC_AMD64), add a sentence:
+> > 
+> >   This module does not load on a system supporting ACPI GHES.
+> 
+> It is not "system supporting ACPI GHES." - it is on a system which is
+> *known* to have a more or less tested GHES implementation. The notoriety
+> of firmware RAS brokenness is well known.
+> 
+> So please stop this - there's a world outside HP BIOS.
+> 
+> None of this is needed for this patchset.
+>
 
-Signed-off-by: Niklas Söderlund <niklas.soderlund@corigine.com>
-Reviewed-by: Simon Horman <simon.horman@corigine.com>
-Reviewed-by: Louis Peens <louis.peens@corigine.com>
----
- Documentation/dev-tools/checkpatch.rst |  6 ++++
- scripts/checkpatch.pl                  | 41 ++++++++++++++++++++++++++
- 2 files changed, 47 insertions(+)
+GHES can be used for more than just memory errors. There are platforms where
+memory errors are handled through the OS MCA, and PCIe AER errors are handled
+through the FW, for example.
 
-diff --git a/Documentation/dev-tools/checkpatch.rst b/Documentation/dev-tools/checkpatch.rst
-index b52452bc2963..8164f362a2fc 100644
---- a/Documentation/dev-tools/checkpatch.rst
-+++ b/Documentation/dev-tools/checkpatch.rst
-@@ -612,6 +612,12 @@ Commit message
- 
-     See: https://www.kernel.org/doc/html/latest/process/submitting-patches.html#describe-your-changes
- 
-+  **BAD_FIXES_TAG**
-+    The fixes line does not fall in line with the standards specified by the
-+    community.
-+
-+    See: https://www.kernel.org/doc/html/latest/process/submitting-patches.html#describe-your-changes
-+
- 
- Comparison style
- ----------------
-diff --git a/scripts/checkpatch.pl b/scripts/checkpatch.pl
-index 79e759aac543..9b8cdc582fb5 100755
---- a/scripts/checkpatch.pl
-+++ b/scripts/checkpatch.pl
-@@ -3140,6 +3140,47 @@ sub process {
- 			}
- 		}
- 
-+# Check Fixes: styles is correct
-+		if (!$in_header_lines && $line =~ /^fixes:/i) {
-+			my $orig_commit = "";
-+			my $id = "0123456789ab";
-+			my $title = "commit title";
-+			my $tag_case = 1;
-+			my $tag_space = 1;
-+			my $id_length = 1;
-+			my $id_case = 1;
-+			my $title_has_quotes = 0;
-+
-+			if ($line =~ /(fixes:)\s+([0-9a-f]{5,})\s+($balanced_parens)/i) {
-+				my $tag = $1;
-+				$orig_commit = $2;
-+				$title = $3;
-+
-+				$tag_case = 0 if $tag eq "Fixes:";
-+				$tag_space = 0 if ($line =~ /^fixes: [0-9a-f]{5,} ($balanced_parens)/i);
-+
-+				$id_length = 0 if ($orig_commit =~ /^[0-9a-f]{12}$/i);
-+				$id_case = 0 if ($orig_commit !~ /[A-F]/);
-+
-+				# Always strip leading/trailing parens then double quotes if existing
-+				$title = substr($title, 1, -1);
-+				if ($title =~ /^".*"$/) {
-+					$title = substr($title, 1, -1);
-+					$title_has_quotes = 1;
-+				}
-+			}
-+
-+			($id, $title) = git_commit_info($orig_commit, $id,
-+							$title);
-+
-+			if ($tag_case || $tag_space || $id_length || $id_case ||
-+			    !$title_has_quotes) {
-+				WARN("BAD_FIXES_TAG",
-+				     "Please use correct Fixes: style 'Fixes: <12 chars of sha1> (\"<title line>\")' - ie: 'Fixes: $id (\"$title\")'\n" . $herecurr);
-+
-+			}
-+		}
-+
- # Check email subject for common tools that don't need to be mentioned
- 		if ($in_header_lines &&
- 		    $line =~ /^Subject:.*\b(?:checkpatch|sparse|smatch)\b[^:]/i) {
--- 
-2.37.2
+Is the HPE Server platform guaranteed to always provide memory errors through
+GHES regardless of CPU vendor/architecture?
 
+Thanks,
+Yazen
