@@ -2,53 +2,73 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id A9F9B5A5F0D
-	for <lists+linux-doc@lfdr.de>; Tue, 30 Aug 2022 11:18:06 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id A43005A5E70
+	for <lists+linux-doc@lfdr.de>; Tue, 30 Aug 2022 10:45:20 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S231322AbiH3JRx (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 30 Aug 2022 05:17:53 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:48924 "EHLO
+        id S231407AbiH3IpR (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 30 Aug 2022 04:45:17 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:54932 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S229747AbiH3JRw (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 30 Aug 2022 05:17:52 -0400
-X-Greylist: delayed 2655 seconds by postgrey-1.37 at lindbergh.monkeyblade.net; Tue, 30 Aug 2022 02:17:49 PDT
-Received: from mail.gnudd.com (mail.gnudd.com [93.91.132.248])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id D217CD2E95;
-        Tue, 30 Aug 2022 02:17:49 -0700 (PDT)
-Received: from rubini by mail.gnudd.com with local (Exim 4.94.2)
-        (envelope-from <rubini@arcana.gnudd.com>)
-        id 1oSwgE-0003Bx-Nf; Tue, 30 Aug 2022 10:33:06 +0200
-Date:   Tue, 30 Aug 2022 10:33:06 +0200
-From:   Alessandro Rubini <rubini@gnudd.com>
-To:     ciminaghi@gnudd.com
-Cc:     arnd@arndb.de, christophe.leroy@csgroup.eu,
-        linus.walleij@linaro.org, gnurou@gmail.com, acourbot@nvidia.com,
-        brgl@bgdev.pl, corbet@lwn.net, linux@armlinux.org.uk,
-        tglx@linutronix.de, mingo@redhat.com, bp@alien8.de,
-        dave.hansen@linux.intel.com, x86@kernel.org, hpa@zytor.com,
-        linux-gpio@vger.kernel.org, linux-doc@vger.kernel.org,
-        linux-kernel@vger.kernel.org, linux-arm-kernel@lists.infradead.org,
-        linux-arch@vger.kernel.org
-Subject: Re: [PATCH] gpio: Allow user to customise maximum number of GPIOs
-Message-ID: <Yw3LQjhZWmZaU2N1@arcana.i.gnudd.com>
+        with ESMTP id S231663AbiH3IpL (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 30 Aug 2022 04:45:11 -0400
+Received: from mga04.intel.com (mga04.intel.com [192.55.52.120])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 39FB5BC2C;
+        Tue, 30 Aug 2022 01:45:06 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1661849109; x=1693385109;
+  h=date:from:to:cc:subject:in-reply-to:message-id:
+   references:mime-version;
+  bh=Td5i70jCRkECHM6VGo1f2VVW8QLL7NTNnHGfBf6NaC4=;
+  b=BXI7PJABRzqBeRYQpOnut8Na5NM/qYmLjxlC0u/fu/3I/CV5K0v5HBui
+   igJf6K+zgcRlrYIBOQZkw/ydzQLSDFqRagPk+Abd5c1+JHiIkyGHHJuxw
+   OG0Um4kAfpkXo9Vuyk5yk3FAI3DA5uruEvghXrDpOl36Sq9rRO3CknQrK
+   XMShlV7IQHL/YoMFwO6yeeu6RazW27OQwYvzhwzTGAbAWglvjr7+TB9i/
+   MEZBgsbu+KW98gpgcqVNDKOCTFDJC8wkMoWqiIkjXQw5RU15/qY04kZ0S
+   Y9p3VlS1zNSUD+y0C3lbe5+SuCcGs1/XgYFd6sJKjMMseX3lonJ2RdvAM
+   g==;
+X-IronPort-AV: E=McAfee;i="6500,9779,10454"; a="293865500"
+X-IronPort-AV: E=Sophos;i="5.93,274,1654585200"; 
+   d="scan'208";a="293865500"
+Received: from fmsmga008.fm.intel.com ([10.253.24.58])
+  by fmsmga104.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 30 Aug 2022 01:45:06 -0700
+X-IronPort-AV: E=Sophos;i="5.93,274,1654585200"; 
+   d="scan'208";a="672760099"
+Received: from arnesgom-mobl.ger.corp.intel.com ([10.252.54.235])
+  by fmsmga008-auth.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 30 Aug 2022 01:45:00 -0700
+Date:   Tue, 30 Aug 2022 11:44:59 +0300 (EEST)
+From:   =?ISO-8859-15?Q?Ilpo_J=E4rvinen?= <ilpo.jarvinen@linux.intel.com>
+To:     Jiri Slaby <jirislaby@kernel.org>
+cc:     Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+        linux-serial <linux-serial@vger.kernel.org>,
+        Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
+        Jonathan Corbet <corbet@lwn.net>,
+        Vladimir Zapolskiy <vz@mleia.com>,
+        Russell King <linux@armlinux.org.uk>,
+        Richard Genoud <richard.genoud@gmail.com>,
+        Nicolas Ferre <nicolas.ferre@microchip.com>,
+        Alexandre Belloni <alexandre.belloni@bootlin.com>,
+        Claudiu Beznea <claudiu.beznea@microchip.com>,
+        Shawn Guo <shawnguo@kernel.org>,
+        Sascha Hauer <s.hauer@pengutronix.de>,
+        Pengutronix Kernel Team <kernel@pengutronix.de>,
+        Fabio Estevam <festevam@gmail.com>,
+        NXP Linux Team <linux-imx@nxp.com>,
+        Maxime Coquelin <mcoquelin.stm32@gmail.com>,
+        Alexandre Torgue <alexandre.torgue@foss.st.com>,
+        linux-doc@vger.kernel.org, LKML <linux-kernel@vger.kernel.org>,
+        linux-arm-kernel@lists.infradead.org,
+        linux-stm32@st-md-mailman.stormreply.com,
+        Lino Sanfilippo <LinoSanfilippo@gmx.de>
+Subject: Re: [PATCH v2 4/4] serial: Add kserial_rs485 to avoid wasted space
+ due to .padding
+In-Reply-To: <1068ad37-d80c-6e63-6cd9-6ecf6c256d46@kernel.org>
+Message-ID: <eb2ba117-6b94-16dd-8e28-9e66f23e8dea@linux.intel.com>
+References: <20220830072956.3630-1-ilpo.jarvinen@linux.intel.com> <20220830072956.3630-5-ilpo.jarvinen@linux.intel.com> <1068ad37-d80c-6e63-6cd9-6ecf6c256d46@kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Organization: GnuDD, Device Drivers, Embedded Systems, Courses
-Sender: rubini@gnudd.com
-In-Reply-To: <Yw3DKCuDoPkCaqxE@arcana.i.gnudd.com>
-References: <Yw3DKCuDoPkCaqxE@arcana.i.gnudd.com>
-  <CAK8P3a0j-54_OkXC7x3NSNaHhwJ+9umNgbpsrPxUB4dwewK63A@mail.gmail.com>
-  <CACRpkda0+iy8H0YmyowSDn8RbYgnVbC1k+o5F67inXg4Qb934Q@mail.gmail.com>
-  <CAK8P3a0uuJ_z8wmNmQTW_qPNqzz7XoxZdHgqbzmK+ydtjraeHg@mail.gmail.com>
-  <CACRpkdb5ow4hD3td6agCuKWvuxptm5AV4rsCrcxNStNdXnBzrA@mail.gmail.com>
-  <87f2ff4c-3426-201c-df86-2d06d3587a20@csgroup.eu>
-  <CACRpkdYizQhiJXzXNHg7TXUVHzhkwXHFN5+e58kH4udGm1ziEA@mail.gmail.com>
-  <f76dbc49-526f-6dc7-2ef1-558baea5848b@csgroup.eu>
-  <CACRpkdZpwdP+1VitohznqRfhFGcLT2f+sQnmsRWwMBB3bobwAw@mail.gmail.com>
-  <515364a9-33a1-fafa-fdce-dc7dbd5bb7fb@csgroup.eu>
-  <CAK8P3a36qbRW8hd+1Uhi88kh+-KTjDMT-Zr8Jq9h_G3zQLfzgw@mail.gmail.com>
-X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00,SPF_HELO_NONE,
+Content-Type: multipart/mixed; boundary="8323329-1910140727-1661849107=:1864"
+X-Spam-Status: No, score=-4.3 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_EF,RCVD_IN_DNSWL_MED,SPF_HELO_NONE,
         SPF_NONE,T_SCC_BODY_TEXT_LINE autolearn=ham autolearn_force=no
         version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
@@ -57,22 +77,58 @@ Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Thanks davide for the good explanation
-(and the link the the old email I forgot about)
+  This message is in MIME format.  The first part should be readable text,
+  while the remaining parts are likely unreadable without MIME-aware tools.
 
-> tl;dr: sta2x11 support can be removed.
+--8323329-1910140727-1661849107=:1864
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8BIT
 
-Confirmed.
+On Tue, 30 Aug 2022, Jiri Slaby wrote:
 
-The point here is that we talked with the vendor. They are still using
-the device (with some extra internal patches), but new development at
-kernel level is stopped.
+> On 30. 08. 22, 9:29, Ilpo Järvinen wrote:
+> > --- a/include/linux/serial_core.h
+> > +++ b/include/linux/serial_core.h
+> > @@ -31,6 +31,29 @@ struct serial_struct;
+> ...
+> > + * Must match with struct serial_rs485 in include/uapi/linux/serial.h
+> > excluding
+> > + * the padding.
+> 
+> Have you considered BUILD_BUG_ON() checks with few offset_of()s to enforce the
+> above?
 
-Since the device is not currently available to the general public,
-it's ok to save the maintaining efforts.
+It's all enforced at the end of serial_core.c already. Would you perhaps 
+prefer I'd put them elsewhere or is it fine as is?
 
-I can submit patch[es] next week or ack removal if somebody submits
-them earlier.
+/*
+ * Compile-time asserts for struct kserial_rs485 and struct serial_rs485 equality
+ * (except padding).
+ */
+static_assert(offsetof(struct kserial_rs485, flags) ==
+              offsetof(struct serial_rs485, flags));
+static_assert(offsetof(struct kserial_rs485, delay_rts_before_send) ==
+              offsetof(struct serial_rs485, delay_rts_before_send));
+static_assert(offsetof(struct kserial_rs485, delay_rts_after_send) ==
+              offsetof(struct serial_rs485, delay_rts_after_send));
+static_assert(offsetof(struct kserial_rs485, addr_recv) ==
+              offsetof(struct serial_rs485, addr_recv));
+static_assert(offsetof(struct kserial_rs485, addr_dest) ==
+              offsetof(struct serial_rs485, addr_dest));
+static_assert(sizeof(struct kserial_rs485) <= sizeof(struct serial_rs485));
 
-thanks
-/alessandro
+
+-- 
+ i.
+
+> > +struct kserial_rs485 {
+> > +	__u32	flags;
+> > +	__u32	delay_rts_before_send;
+> > +	__u32	delay_rts_after_send;
+> > +	struct {
+> > +		__u8    addr_recv;
+> > +		__u8    addr_dest;
+> > +	};
+> > +};
+
+--8323329-1910140727-1661849107=:1864--
