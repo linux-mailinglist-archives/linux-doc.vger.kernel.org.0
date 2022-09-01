@@ -2,59 +2,80 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id E470E5A9A33
-	for <lists+linux-doc@lfdr.de>; Thu,  1 Sep 2022 16:27:11 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 132195A9AE0
+	for <lists+linux-doc@lfdr.de>; Thu,  1 Sep 2022 16:51:21 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S234693AbiIAOYJ (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 1 Sep 2022 10:24:09 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:49268 "EHLO
+        id S233849AbiIAOuz (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 1 Sep 2022 10:50:55 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:60056 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S234790AbiIAOXo (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Thu, 1 Sep 2022 10:23:44 -0400
-Received: from mail-yb1-xb2b.google.com (mail-yb1-xb2b.google.com [IPv6:2607:f8b0:4864:20::b2b])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 0FFAB7697A;
-        Thu,  1 Sep 2022 07:23:18 -0700 (PDT)
-Received: by mail-yb1-xb2b.google.com with SMTP id p204so8816594yba.3;
-        Thu, 01 Sep 2022 07:23:18 -0700 (PDT)
+        with ESMTP id S233918AbiIAOuv (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Thu, 1 Sep 2022 10:50:51 -0400
+Received: from mail-wm1-x32a.google.com (mail-wm1-x32a.google.com [IPv6:2a00:1450:4864:20::32a])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 56F984AD72;
+        Thu,  1 Sep 2022 07:50:43 -0700 (PDT)
+Received: by mail-wm1-x32a.google.com with SMTP id n17-20020a05600c501100b003a84bf9b68bso1616714wmr.3;
+        Thu, 01 Sep 2022 07:50:43 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:from:to:cc:subject:date;
-        bh=yjsiVQepq35EGTK84629jF2eYJo/jmeOJnE+I0lw51U=;
-        b=ZZDXAY8mRNBsgqhlnI69ATec9eNCrkYjTjm2kbQe51apRDVr60N0C4aQ1LfTfGjZPG
-         GxrvhMscreJS2TgZ7hiOEdR5xQqXJT7ODJCE6O7j3sxZaE63ATsi59xSi5cdybabJV14
-         o3fPD1Qy2oHwZVK3Zi8MNb9n4HXwpwoTT/Q2JSP4VuKzraxhznqIsXeMVEcFS8+W+MGw
-         pIVYCt7tnymXSDcUhdrp2r/evzF7DJrgDhWc80h0NuR1XeeXJ+QI7xRdSZ4ChIJwtS2y
-         MlpcR48eauVXUYOWqUqW/0KginnB4ORDkB+BSIiH/AecgS6SQEvGVPTNrhcAiZWfGddT
-         lWRQ==
+        h=user-agent:in-reply-to:content-disposition:mime-version:references
+         :message-id:subject:cc:to:from:date:from:to:cc:subject:date;
+        bh=+ZP6o1gBBlBVeWAFEqgtYPLn6+d3r7xqEVeih0fyUso=;
+        b=iFrD1NozxA6YVu/pF75I5AvknHZH0pFYr0Ht2CqUidAoEzNuE45O8UivGswS3F+2MO
+         tI+GAGT4gXRqxaJpTMNjUivI7L77XgfmnnqwhkJ50GCb3FuakSkrZoL75xX6mzwfjWTQ
+         P/HRjyOYZIcBL0/qfDmABdX/0BxlNqU0FAtQkEqfMMHYCSxGdm9rLlcmYLe43pg1cc7h
+         WrC5+1ddVMQ9PANwg4bP8KGiX8+1J0Fmr2cT8nvimFiL4wA+FXtebFDs3LAPQm9aJinE
+         6jSG5eD0hBWEMBn/s/r8tyiGdnqNkHVGxoIib3crCA772KUd1huXzl5Inl1JdlR9HJbC
+         L+vw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:x-gm-message-state:from:to:cc:subject:date;
-        bh=yjsiVQepq35EGTK84629jF2eYJo/jmeOJnE+I0lw51U=;
-        b=l9vrxolZerpx35v4jkGMEKvKOx74YqXcyE6WCmsgUFmFwPw3b1UToWQNetWBLfwQFw
-         sThg8Yg71wzGh57o1jnpvXZ6hm4Cm2yAqtHxScukFYY20MCWEjdz2CYStlX8Oy9DJ3CX
-         c+IqXwSEAKRfN4NHARFlI0rT0+b2wm36WYqVeQtOznVQNoGYi0lphn6ei22y2oicEmiF
-         b6iDz7uAVkuWReVtX/TyzHTuIlP3faEu58uLyEv4LhxcH1Cx2hx5qRlHobu72wYiKa80
-         mvJ3CXs/EbwcDuNhj7byq/RB2TdDYb4mgAXC0cCbelTN9a/EEiznVrSNCCDWLLYApMn3
-         D9Rw==
-X-Gm-Message-State: ACgBeo0uxdmoviLj6tk22W4Y2sCbIslVnfk5NuhCqV127pGsnurobDIB
-        4GWCW29tSP8Cr0NjHqr2DQEIP7B9cGYN1Bbd6ow=
-X-Google-Smtp-Source: AA6agR5uTWiMTt7m10PFuJKf70QYxNEnmXqFR0fAnz57Kjx4J9qqQajusRpMBVAfZOkrYxVPaaiHDQrOBkB1DRFMahA=
-X-Received: by 2002:a25:afc6:0:b0:695:8a28:1dc6 with SMTP id
- d6-20020a25afc6000000b006958a281dc6mr18836213ybj.500.1662042197300; Thu, 01
- Sep 2022 07:23:17 -0700 (PDT)
+        h=user-agent:in-reply-to:content-disposition:mime-version:references
+         :message-id:subject:cc:to:from:date:x-gm-message-state:from:to:cc
+         :subject:date;
+        bh=+ZP6o1gBBlBVeWAFEqgtYPLn6+d3r7xqEVeih0fyUso=;
+        b=LTvxVjBE9I89pKPLnne1PQzDDrh6PBRwoqlQHFtgIle6f8eloSErGTCFrxEjaOUnBy
+         tDZNLXeJF5GSD/0LUvPdxJIYzDno20Q8MQqCd3GGXZWPhgs5kmAGfWxgp4+sBa8RjAc+
+         IZU/aKro+UThCt+5CFPJroeofKdOcWWXh+44UbwW9K8jdWYo+p7yjkQ7f7JuWuTfo2ED
+         AHpK8haaUF3TdCR/KwCvcLMneVT3LiErcrh230EQf0jXq+fJ2mrz5yKizNpFsGPphrNE
+         lZnsHMfSZLyum97xci8XPh3qtWEeQtMqiYbZpZ+mQvCoGsSxQ1ngi3zP2zYsEU37Ig8v
+         aYFA==
+X-Gm-Message-State: ACgBeo0230T5eL5XTwSiiRKmlVadv2TxpBdxc98ZGcNBa5ummNY1b5NJ
+        Djy0Kxvd+Mh6b7G1suiGalY=
+X-Google-Smtp-Source: AA6agR6QGHgUJ6JL78VmA9OekXr5ZRCUaKHcp8uzSaCgosq6wKYvw6oMjyK6sGuqR3194MMhIKcKkw==
+X-Received: by 2002:a05:600c:3790:b0:3a5:435d:b2d3 with SMTP id o16-20020a05600c379000b003a5435db2d3mr5611084wmr.134.1662043841499;
+        Thu, 01 Sep 2022 07:50:41 -0700 (PDT)
+Received: from debian ([89.238.191.199])
+        by smtp.gmail.com with ESMTPSA id r21-20020adfa155000000b0022585f6679dsm14872979wrr.106.2022.09.01.07.50.26
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 01 Sep 2022 07:50:41 -0700 (PDT)
+Date:   Thu, 1 Sep 2022 16:48:47 +0200
+From:   Richard Gobert <richardbgobert@gmail.com>
+To:     Eric Dumazet <edumazet@google.com>
+Cc:     David Miller <davem@davemloft.net>,
+        Jakub Kicinski <kuba@kernel.org>,
+        Paolo Abeni <pabeni@redhat.com>,
+        Jonathan Corbet <corbet@lwn.net>,
+        Hideaki YOSHIFUJI <yoshfuji@linux-ipv6.org>,
+        David Ahern <dsahern@kernel.org>,
+        Alexander Aring <alex.aring@gmail.com>,
+        Stefan Schmidt <stefan@datenfreihafen.org>,
+        Pablo Neira Ayuso <pablo@netfilter.org>,
+        Jozsef Kadlecsik <kadlec@netfilter.org>,
+        Florian Westphal <fw@strlen.de>,
+        Martin KaFai Lau <kafai@fb.com>,
+        netdev <netdev@vger.kernel.org>,
+        "open list:DOCUMENTATION" <linux-doc@vger.kernel.org>,
+        LKML <linux-kernel@vger.kernel.org>, linux-wpan@vger.kernel.org,
+        netfilter-devel@vger.kernel.org, coreteam@netfilter.org
+Subject: Re: [PATCH 2/4] net-next: ip6: fetch inetpeer in ip6frag_init
+Message-ID: <20220901144810.GA31767@debian>
+References: <20220829114600.GA2374@debian>
+ <CANn89iLH4nDuOHS-0AzYBYOz4f3byZndKXG3_VefVxUbujJZNg@mail.gmail.com>
 MIME-Version: 1.0
-References: <20220829065239.4531-1-lf32.dev@gmail.com> <87wnarnf4k.fsf@meer.lwn.net>
-In-Reply-To: <87wnarnf4k.fsf@meer.lwn.net>
-From:   lf32 dev <lf32.dev@gmail.com>
-Date:   Thu, 1 Sep 2022 19:53:06 +0530
-Message-ID: <CAOUyfw00gGT=wFBZ9O3fZdzQ8hkgjUL37F__rpuZH+9=WwjOBQ@mail.gmail.com>
-Subject: Re: [PATCH] Delete duplicate words from kernel docs
-To:     Jonathan Corbet <corbet@lwn.net>,
-        Shuah Khan <skhan@linuxfoundation.org>
-Cc:     linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <CANn89iLH4nDuOHS-0AzYBYOz4f3byZndKXG3_VefVxUbujJZNg@mail.gmail.com>
+User-Agent: Mutt/1.10.1 (2018-07-13)
 X-Spam-Status: No, score=-2.1 required=5.0 tests=BAYES_00,DKIM_SIGNED,
         DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_FROM,
         RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,SPF_PASS,T_SCC_BODY_TEXT_LINE
@@ -65,26 +86,13 @@ Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Awesome, thanks for merging this!
+On Mon, Aug 29, 2022 at 03:20:54PM -0700, Eric Dumazet wrote:
+> Sorry, this is adding yet another bottleneck, and will make DDOS
+> attacks based on fragments more effective.
+> 
+> Whole concept of 'peers' based on IPv6 addresses is rather weak, as
+> hosts with IPv6 can easily
+> get millions of different 'addresses'.
 
-On Mon, Aug 29, 2022 at 10:47 PM Jonathan Corbet <corbet@lwn.net> wrote:
->
-> Akhil Raj <lf32.dev@gmail.com> writes:
->
-> > I have deleted duplicate words like
-> >
-> > to, guest, trace, when, we
-> >
-> > Signed-off-by: Akhil Raj <lf32.dev@gmail.com>
-> > ---
-> >  Documentation/RCU/checklist.rst         | 2 +-
-> >  Documentation/RCU/lockdep.rst           | 2 +-
-> >  Documentation/bpf/instruction-set.rst   | 2 +-
-> >  Documentation/trace/histogram.rst       | 2 +-
-> >  Documentation/trace/timerlat-tracer.rst | 2 +-
-> >  Documentation/virt/kvm/x86/mmu.rst      | 2 +-
-> >  6 files changed, 6 insertions(+), 6 deletions(-)
->
-> Applied, thanks,
->
-> jon
+I understand the problem with the implementation. Since peers don't 
+carry much weight in IPv6, this patch can be dropped.
