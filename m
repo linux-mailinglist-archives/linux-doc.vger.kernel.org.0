@@ -2,49 +2,94 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id E1E605AB200
-	for <lists+linux-doc@lfdr.de>; Fri,  2 Sep 2022 15:47:40 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id A05805AB1A6
+	for <lists+linux-doc@lfdr.de>; Fri,  2 Sep 2022 15:37:53 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S238085AbiIBNrb (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Fri, 2 Sep 2022 09:47:31 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:50790 "EHLO
+        id S236780AbiIBNhw (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Fri, 2 Sep 2022 09:37:52 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:51028 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S237956AbiIBNrQ (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Fri, 2 Sep 2022 09:47:16 -0400
-Received: from out1.migadu.com (out1.migadu.com [IPv6:2001:41d0:2:863f::])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 5CB94A6C32
-        for <linux-doc@vger.kernel.org>; Fri,  2 Sep 2022 06:22:35 -0700 (PDT)
-Date:   Fri, 2 Sep 2022 20:56:15 +0800
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linux.dev; s=key1;
-        t=1662123398;
+        with ESMTP id S237411AbiIBNhD (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Fri, 2 Sep 2022 09:37:03 -0400
+Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.133.124])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id E1761F7B28
+        for <linux-doc@vger.kernel.org>; Fri,  2 Sep 2022 06:16:02 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+        s=mimecast20190719; t=1662124500;
         h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
          to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-         content-transfer-encoding:content-transfer-encoding:
          in-reply-to:in-reply-to:references:references;
-        bh=NU0T4jkqXK1GA+sw+LS7fvIgrHGZV2kbK32JJbNiTDc=;
-        b=fJY+b0DuHL6vlz7NZgjgfbLqesZ41ak+2ob5fl3EulVdJF6flS7fZd/GlVlQyjva2DF3mo
-        XjXSQfPVc33/MJWgh/kR6taeMTuYgR2ZL1HXsHugByHElqNSJvPt1juM7QNeF4nMUC0t57
-        nAujQBxoAoBu0iJJT0SAInRQA7+Kl8k=
-X-Report-Abuse: Please report any abuse attempt to abuse@migadu.com and include these headers.
-From:   Wu XiangCheng <wu.xiangcheng@linux.dev>
-To:     Yanteng Si <siyanteng@loongson.cn>
-Cc:     alexs@kernel.org, bobwxc@email.cn, seakeel@gmail.com,
-        corbet@lwn.net, chenhuacai@kernel.org, jiaxun.yang@flygoat.com,
-        linux-doc@vger.kernel.org, siyanteng01@gmail.com
-Subject: Re: [PATCH v1 1/5] docs/zh_CN: add PCI acpi-info translation
-Message-ID: <YxH9b+m8iRn/GRH2@bobwxc.mipc>
-References: <cover.1662022757.git.siyanteng@loongson.cn>
- <b872e46c98551f94bdae4a8a5f3ed328b9070bd4.1662022757.git.siyanteng@loongson.cn>
+        bh=10S2baNmGpvfbB3rWC8TV3GU8jc51um5+NmqwLplTxA=;
+        b=bbnPFkQtBv7JPymZRoXwdz+lQun4uZkFf1l8XQ+jUrHqg/S9evJ3dug7DJQHZiIC3TJX6S
+        NyPeGnqV+DigYEU2R97h4tgNaql/URtrnUPzwVHVo81JSgIIQ4dbF4xOF15MRtv50O/yis
+        ZUfo3Ouuwm8J89Rl0zLozX9BHs/BpDg=
+Received: from mail-pl1-f197.google.com (mail-pl1-f197.google.com
+ [209.85.214.197]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_128_GCM_SHA256) id
+ us-mta-306-iRc7c65JMsmO9vciXBmG-g-1; Fri, 02 Sep 2022 09:11:50 -0400
+X-MC-Unique: iRc7c65JMsmO9vciXBmG-g-1
+Received: by mail-pl1-f197.google.com with SMTP id n1-20020a170902d2c100b0017520dd4a0eso1270643plc.8
+        for <linux-doc@vger.kernel.org>; Fri, 02 Sep 2022 06:11:50 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:x-gm-message-state:from:to:cc:subject:date;
+        bh=10S2baNmGpvfbB3rWC8TV3GU8jc51um5+NmqwLplTxA=;
+        b=yBPgrHnrEmuO+GsGXmRs+BI1hoRHCOKgxGSNYTEDs1z2zFrVXdUYXAaK0org8KOQEd
+         8hrNTBT8du5uLwRbf807Cla1V+Ivq0kkMTWzEWvpgnOAKDOQmLFMnz8GhplTUxItndWO
+         pOa7WUSt9wYJlmLhd6HwGh164ErcedKhPAEoW3j9lGRtwHf/KjjFu93N0O6fd7ZCJWH0
+         16dQC2I5884HGXirFxjnQo88oL4nyPiidV5aHGzZa/1HVN5RN7eXp+i3mbNDsiYeNlh+
+         1oQS5MkjQ45gQudb611ij33lpL3lRB50VH725NQe/jTLNbc3x9svJaVNuG48N3qtWewA
+         Hj8Q==
+X-Gm-Message-State: ACgBeo3zk8eZOkxF9Qe3snoaRPk3KUGRa6xXRb4CmqLuXkxBNWUdx2fO
+        fcxHXIcxtjrNGZE7NfkNWdliKZPY4qRlEdJJ6POwFGFO24oJIqRIdtGRdX482EQo30aJIaGBLXw
+        ER209P7Sii8/cGZR4IpCbwQcHwOsn7szkZ7Wr
+X-Received: by 2002:a17:902:b58a:b0:16e:f91a:486b with SMTP id a10-20020a170902b58a00b0016ef91a486bmr36558487pls.119.1662124309710;
+        Fri, 02 Sep 2022 06:11:49 -0700 (PDT)
+X-Google-Smtp-Source: AA6agR72EpfhkEK4ko7qYW4nPa0blgG/78lQfqmeZeVLgOOiuWSw4Fu8+YGj6zLNMt/u79Hm3xPofVjqghC/L9D7cM4=
+X-Received: by 2002:a17:902:b58a:b0:16e:f91a:486b with SMTP id
+ a10-20020a170902b58a00b0016ef91a486bmr36558475pls.119.1662124309461; Fri, 02
+ Sep 2022 06:11:49 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <b872e46c98551f94bdae4a8a5f3ed328b9070bd4.1662022757.git.siyanteng@loongson.cn>
-X-Migadu-Flow: FLOW_OUT
-X-Migadu-Auth-User: linux.dev
-X-Spam-Status: No, score=-2.1 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_NONE,
-        SPF_HELO_PASS,SPF_PASS,T_SCC_BODY_TEXT_LINE autolearn=ham
+References: <20220824134055.1328882-1-benjamin.tissoires@redhat.com>
+ <20220824134055.1328882-2-benjamin.tissoires@redhat.com> <CAADnVQKgkFpLh_URJn6qCiAONteA1dwZHd6=4cZn15g1JCAPag@mail.gmail.com>
+ <CAP01T75ec_T0M6DU=JE2tfNsWRZuPSMu_7JHA7ZoOBw5eDh1Bg@mail.gmail.com>
+ <CAO-hwJLd9wXx+ppccBYPKZDymO0sk++Nt2E3-R97PY7LbfJfTg@mail.gmail.com>
+ <CAADnVQK8dS+2KbWsqktvxoNKhHtdD5UPiaWVfNu=ESdn_OHpgQ@mail.gmail.com>
+ <CAO-hwJK9uHTWCg3_6jrPF6UKiamkNfj=cuH5mHauoLX+0udV9w@mail.gmail.com>
+ <CAADnVQLuL045Sxdvh8kfcNkmD55+Wz8fHU3RtH+oQyOgePU5Pw@mail.gmail.com>
+ <CAO-hwJJJJRtoq2uTXRKCck6QSH8SFDSTpHmvTyOieczY7bdm8g@mail.gmail.com> <CAP01T77SJyiDxv0A++_mNw7JZ-Mzh4B1FAM6zLiP6n75MNY0uQ@mail.gmail.com>
+In-Reply-To: <CAP01T77SJyiDxv0A++_mNw7JZ-Mzh4B1FAM6zLiP6n75MNY0uQ@mail.gmail.com>
+From:   Benjamin Tissoires <benjamin.tissoires@redhat.com>
+Date:   Fri, 2 Sep 2022 15:11:38 +0200
+Message-ID: <CAO-hwJLbbB0Abw3d4pJPnYTAzQNdtgBTpuNz4zVUTFXCbZEEbQ@mail.gmail.com>
+Subject: Re: [PATCH bpf-next v9 01/23] bpf/verifier: allow all functions to
+ read user provided context
+To:     Kumar Kartikeya Dwivedi <memxor@gmail.com>
+Cc:     Alexei Starovoitov <alexei.starovoitov@gmail.com>,
+        Greg KH <gregkh@linuxfoundation.org>,
+        Jiri Kosina <jikos@kernel.org>,
+        Alexei Starovoitov <ast@kernel.org>,
+        Daniel Borkmann <daniel@iogearbox.net>,
+        Andrii Nakryiko <andrii@kernel.org>,
+        Martin KaFai Lau <kafai@fb.com>,
+        Song Liu <songliubraving@fb.com>, Yonghong Song <yhs@fb.com>,
+        John Fastabend <john.fastabend@gmail.com>,
+        KP Singh <kpsingh@kernel.org>, Shuah Khan <shuah@kernel.org>,
+        Dave Marchevsky <davemarchevsky@fb.com>,
+        Joe Stringer <joe@cilium.io>, Jonathan Corbet <corbet@lwn.net>,
+        Tero Kristo <tero.kristo@linux.intel.com>,
+        LKML <linux-kernel@vger.kernel.org>,
+        "open list:HID CORE LAYER" <linux-input@vger.kernel.org>,
+        Network Development <netdev@vger.kernel.org>,
+        bpf <bpf@vger.kernel.org>,
+        "open list:KERNEL SELFTEST FRAMEWORK" 
+        <linux-kselftest@vger.kernel.org>,
+        "open list:DOCUMENTATION" <linux-doc@vger.kernel.org>
+Content-Type: text/plain; charset="UTF-8"
+X-Spam-Status: No, score=-2.1 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_NONE,
+        SPF_HELO_NONE,SPF_NONE,T_SCC_BODY_TEXT_LINE autolearn=unavailable
         autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
@@ -52,236 +97,39 @@ Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-2022-09-01 (四) 19:15:42 +0800 Yanteng Si 曰：
-> Translate .../PCI/acpi-info.rst into Chinese.
-> Add PCI into .../zh_CN/index.rst.
-> 
-> Signed-off-by: Yanteng Si <siyanteng@loongson.cn>
-> ---
->  .../translations/zh_CN/PCI/acpi-info.rst      | 139 ++++++++++++++++++
->  .../translations/zh_CN/PCI/index.rst          |  13 +-
->  Documentation/translations/zh_CN/index.rst    |   2 +-
->  3 files changed, 145 insertions(+), 9 deletions(-)
->  create mode 100644 Documentation/translations/zh_CN/PCI/acpi-info.rst
-> 
-> diff --git a/Documentation/translations/zh_CN/PCI/acpi-info.rst b/Documentation/translations/zh_CN/PCI/acpi-info.rst
-> new file mode 100644
-> index 000000000000..74405a0360dc
-> --- /dev/null
-> +++ b/Documentation/translations/zh_CN/PCI/acpi-info.rst
-@@ -0,0 +1,24 @@
-> +.. SPDX-License-Identifier: GPL-2.0
-> +.. include:: ../disclaimer-zh_CN.rst
-> +
-> +:Original: Documentation/PCI/acpi-info.rst
-> +
-> +:翻译:
-> +
-> + 司延腾 Yanteng Si <siyanteng@loongson.cn>
-> +
-> +:校译:
-> +
-> +
-> +=====================
-> +PCI主桥的ACPI注意事项
-> +=====================
-> +
-> +一般的规则是，ACPI命名空间应该描述操作系统可能使用的所有东西，除非有其他方法让操作系
-> +统找到它[1, 2]。
-> +
-> +例如，没有标准的硬件机制来枚举PCI主桥，所以ACPI命名空间必须描述每个主桥、访问它
-> +下面的PCI配置空间的方法、主桥转发到PCI的地址空间窗口（使用_CRS）以及传统的INTx
-> +中断的路由（使用_PRT）。
-> +
-> +PCI设备，在主桥下面，通常不需要通过ACPI描述。操作系统可以通过标准的PCI枚举机制来
+On Fri, Sep 2, 2022 at 5:50 AM Kumar Kartikeya Dwivedi <memxor@gmail.com> wrote:
+>
+> On Thu, 1 Sept 2022 at 18:48, Benjamin Tissoires
+> <benjamin.tissoires@redhat.com> wrote:
+> >
+> > [...]
+> > If the above is correct, then yes, it would make sense to me to have 2
+> > distinct functions: one to check for the args types only (does the
+> > function definition in the problem matches BTF), and one to check for
+> > its use.
+> > Behind the scenes, btf_check_subprog_arg_match() calls
+> > btf_check_func_arg_match() which is the one function with entangled
+> > arguments type checking and actually assessing that the values
+> > provided are correct.
+> >
+> > I can try to split that  btf_check_func_arg_match() into 2 distinct
+> > functions, though I am not sure I'll get it right.
+>
+> FYI, I've already split them into separate functions in my tree
+> because it had become super ugly at this point with all the new
+> support and I refactored it to add the linked list helpers support
+> using kfuncs (which requires some special handling for the args), so I
+> think you can just leave it with a "processing_call" check in for your
+> series for now.
+>
 
-在主桥下面的PCI设备
+great, thanks a lot.
+Actually, writing the patch today with the "processing_call" was
+really easy now that I have turned the problem in my head a lot
+yesterday.
 
-> +发现它们，使用配置访问来发现和识别设备，并读取和测量它们的BAR。然而，如果ACPI为它们
-> +提供电源管理或热插拔功能，或者如果设备有INTx中断，由平台中断控制器连接，需要一个_PRT
+I am about to send v10 with the reviews addressed.
 
-设备有由平台中断控制器连接的INTx中断
-
-> +来描述这些连接，这种情况下ACPI可以描述PCI设备。
-> +
-> +ACPI资源描述是通过ACPI命名空间中设备的_CRS对象完成的[2]。_CRS就像一个通用的PCI BAR：
-> +操作系统可以读取_CRS并找出正在消耗的资源，即使它没有该设备的驱动程序[3]。这一点很重要，
-> +因为它意味着一个旧的操作系统可以正确地工作，即使是在操作系统不知道的新设备的系统上。新设
-> +备可能什么都不做，但操作系统至少可以确保没有资源与它们冲突。
-> +
-> +像MCFG、HPET、ECDT等静态表，不是保留地址空间的机制。静态表是在操作系统在启动初期且在它
-> +能够解析ACPI命名空间之前需要知道的东西。如果定义了一个新的表，即使旧的操作系统忽略了这
-> +个表，它也需要正常运行。_CRS允许这样做，因为它是通用的，可以被旧的操作系统解析；而静态表
-> +则不允许。
-> +
-> +如果操作系统要管理一个通过ACPI描述的不可发现的设备，该设备将有一个特定的_HID/_CID，操
-> +作系统将其告诉与之绑定的驱动程序，并且_CRS告诉操作系统和驱动程序该设备的寄存器在哪里。
-
-以告诉操作系统与之绑定的驱动程序
-
-> +
-> +PCI主桥是PNP0A03或PNP0A08设备。它们的_CRS应该描述它们所消耗的所有地址空间。这包括它
-> +们转发到PCI总线上的所有窗口，以及不转发到PCI的主桥本身的寄存器。主桥的寄存器包括次要/下
-> +级总线寄存器，决定了桥下面的总线范围，窗口寄存器描述了桥洞，等等。这些都是设备相关的，非
-> +架构相关的东西，所以PNP0A03/PNP0A08驱动可以管理它们的唯一方法是通过_PRS/_CRS/_SRS，
-> +它包含了特定于设备的细节。主桥寄存器也包括ECAM空间，因为它是由主桥消耗的。
-> +
-
-以下6段，检查多余的空格
-
-> +ACPI 定义了一个 Consumer/Producer 位来区分桥寄存器（“Consumer”下文译作消费者）和
-> +桥洞（“Producer”下文译作生产者）[4, 5]，但是早期的 BIOS 没有正确使用这个位。其结果
-> +是，目前的ACPI规范只为扩展地址空间描述符定义了消费者/生产者；在旧的QWord/Word/Word地
-> +址空间描述符中，该位应该被忽略。因此，操作系统必须假定所有的QWord/Word/Word描述符都是
-> +窗口。
-> +
-> +在增加扩展地址空间描述符之前，消费者/生产者的失败意味着没有办法描述PNP0A03/PNP0A08设
-> +备本身的桥寄存器。解决办法是在 PNP0C02 捕捉器中描述桥寄存器（包括 ECAM 空间）[6]。
-> +除了 ECAM 之外，桥寄存器空间反正是特定于设备的，所以通用的 PNP0A03/PNP0A08 驱动程
-> +序 (pci_root.c) 没有必要了解它。
-> +
-> +新的架构应该能够在 PNP0A03 设备中使用“消费者”扩展地址空间描述符，用于桥寄存器，包括
-> +ECAM，尽管对 [6] 的严格解释可能禁止这样做。旧的 x86 和 ia64 内核假定所有的地址空间
-> +描述符，包括“消费者”扩展地址空间的描述符，都是窗口，所以在这些架构上以这种方式描述桥寄
-> +存器是不安全的。
-> +
-> +PNP0C02 “主板”设备基本上是万能的。除了“不要将这些资源用于其他用途”之外，没有其他的编
-> +程模型。因此，PNP0C02 _CRS应该声明ACPI命名空间中(1)没有被_CRS声明的任何其他设备对
-> +象的地址空间，(2)不应该被OS分配给其他东西。
-> +
-> +除非有一个标准的固件接口用于配置访问，例如ia64 SAL接口[7], 否则PCIe规范要求使用增强
-> +型配置访问方法（ECAM）。主桥消耗ECAM内存地址空间并将内存访问转换为PCI配置访问。该规范
-> +定义了ECAM地址空间的布局和功能；只有地址空间的基础是特定于设备的。ACPI操作系统从静态
-> +MCFG表或PNP0A03设备中的_CBA方法中了解基础地址。
-> +
-> +MCFG表必须描述非热插拔主桥的ECAM空间[8]。由于MCFG是一个静态表，不能通过热插拔更新，
-> +PNP0A03设备中的_CBA方法描述了可热插拔主桥的ECAM空间[9]。请注意，对于 MCFG 和 _CBA，
-> +基址总是对应于总线 0，即使桥器下面的总线范围（通过 _CRS 报告）不从 0 开始。
-> +
-> +
-> +[1] ACPI 6.2, sec 6.1:
-> +    对于任何在非枚举类型的总线上的设备（例如，ISA总线），OSPM会枚举设备的标识符，ACPI
-> +    系统固件必须为每个设备提供一个_HID对象...以使OSPM能够做到这一点。
-> +
-> +[2] ACPI 6.2, sec 3.7:
-> +    操作系统枚举主板设备时，只需通过读取ACPI命名空间来寻找具有硬件ID的设备。
-> +
-> +    ACPI枚举的每个设备都包括ACPI命名空间中ACPI定义的对象，该对象报告设备可能占用的硬
-> +    件资源[_PRS]，报告设备当前使用的资源[_CRS]的对象，以及配置这些资源的对象[_SRS]。
-> +    这些信息被即插即用操作系统（OSPM）用来配置设备。
-> +
-> +[3] ACPI 6.2, sec 6.2:
-> +    OSPM使用设备配置对象来配置通过ACPI列举的设备的硬件资源。设备配置对象提供了关于当前
-> +    和可能的资源需求的信息，共享资源之间的关系，以及配置硬件资源的方法。
-> +
-> +    当OSPM枚举一个设备时，它调用_PRS来确定该设备的资源需求。它也可以调用_CRS来找到该设
-> +    备的当前资源设置。利用这些信息，即插即用系统决定设备应该消耗什么资源，并通过调用设备
-> +    的_SRS控制方法来设置这些资源。
-> +
-> +    在ACPI中，设备可以消耗资源（例如，传统的键盘），提供资源（例如，一个专有的PCI桥），
-> +    或者两者都做。除非另有规定，设备的资源被假定为来自设备层次结构中设备上方最近的匹配资
-> +    源。
-> +
-> +[4] ACPI 6.2, sec 6.4.3.5.1, 2, 3, 4:
-> +    QWord/DWord/Word 地址空间描述符 (.1, .2, .3)
-> +      常规标志: Bit [0] 被忽略。
-> +
-> +    扩展地址空间描述符 (.4)
-> +      常规标志: Bit [0] 消费者/生产者:
-> +
-> +        * 1 – 这个设备消费这个资源
-> +        * 0 – 该设备生产和消费该资源
-> +
-> +[5] ACPI 6.2, sec 19.6.43:
-> +    ResourceUsage指定内存范围是由这个设备（ResourceConsumer）消费还是传递给子设备
-> +    （ResourceProducer）。如果没有指定，那么就假定是ResourceConsumer。
-> +
-> +[6] PCI Firmware 3.2, sec 4.1.2:
-> +    如果操作系统不能原生的懂得保留MMCFG区域，MMCFG区域必须由固件保留。在MCFG表中或通
-> +    过_CBA方法（见第4.1.3节）报告的地址范围必须通过声明主板资源来保留。对于大多数系统，
-> +    主板资源将出现在ACPI命名空间的根部（在_SB下），在一个节点的_HID为EISAID（PNP0C0
-> +    2），在这种情况下的资源不应该要求在根PCI总线的_CRS。这些资源可以选择在Int15 E820
-> +    或EFIGetMemoryMap中作为保留内存返回，但必须始终通过ACPI作为主板资源报告。
-> +
-> +[7] PCI Express 4.0, sec 7.2.2:
-> +    对于PC兼容的系统，或者没有实现允许访问配置空间的处理器架构特定固件接口标准的系统，需
-> +    要使用本节中定义的ECAM。
-> +
-> +[8] PCI Firmware 3.2, sec 4.1.2:
-> +    MCFG表是一个ACPI表，用于沟通的基础地址对应的非热的可移动的PCI段组范围内的PCI段组在
-> +    启动时提供给操作系统。这对PC兼容系统来说是必需的。
-> +
-> +    MCFG表仅用于通信的基地址对应的PCI段组可用的系统在启动。
-
-MCFG表仅用于沟通在启动时系统可用的PCI段组对应的基址。
-
-> +
-> +[9] PCI Firmware 3.2, sec 4.1.3:
-> +    _CBA (Memory mapped Configuration Base Address) 控制方法是一个可选的ACPI对
-> +    象，用于返回热插拔主桥的64位内存映射的配置基址。_CBA 返回的基址是与处理器相关的地址。
-> +    _CBA 控制方法被评估为一个整数。
-> +
-> +    这个控制方法出现在主桥对象下。当_CBA方法出现在一个活动的主桥对象下时，操作系统会评
-> +    估这个结构，以确定内存映射的配置基址，对应于_CRS方法中指定的总线编号范围的PCI段组。
-> +    一个包含_CBA方法的ACPI命名空间对象也必须包含一个相应的_SEG方法。
-> diff --git a/Documentation/translations/zh_CN/PCI/index.rst b/Documentation/translations/zh_CN/PCI/index.rst
-> index 16acb2bd9b58..cbeb33c34a98 100644
-> --- a/Documentation/translations/zh_CN/PCI/index.rst
-> +++ b/Documentation/translations/zh_CN/PCI/index.rst
-> @@ -10,9 +10,6 @@
->  :校译:
->  
->  
-> -
-> -.. _cn_PCI_index.rst:
-> -
->  ===================
->  Linux PCI总线子系统
->  ===================
-> @@ -26,12 +23,12 @@ Linux PCI总线子系统
->     pci-iov-howto
->     msi-howto
->     sysfs-pci
-> +   acpi-info
->  
->  
->  Todolist:
->  
-> -   acpi-info
-> -   pci-error-recovery
-> -   pcieaer-howto
-> -   endpoint/index
-> -   boot-interrupts
-> +* pci-error-recovery
-> +* pcieaer-howto
-> +* endpoint/index
-> +* boot-interrupts
-> diff --git a/Documentation/translations/zh_CN/index.rst b/Documentation/translations/zh_CN/index.rst
-> index 4f04367a4c5e..2fc60e60feb4 100644
-> --- a/Documentation/translations/zh_CN/index.rst
-> +++ b/Documentation/translations/zh_CN/index.rst
-> @@ -121,6 +121,7 @@ TODOList:
->     scheduler/index
->     mm/index
->     peci/index
-> +   PCI/index
->  
->  TODOList:
->  
-> @@ -148,7 +149,6 @@ TODOList:
->  * crypto/index
->  * bpf/index
->  * usb/index
-> -* PCI/index
->  * scsi/index
->  * misc-devices/index
->  * mhi/index
-> -- 
-> 2.31.1
-> 
-
-Thanks,
-
--- 
-Wu XiangCheng	0x32684A40BCA7AEA7
+Cheers,
+Benjamin
 
