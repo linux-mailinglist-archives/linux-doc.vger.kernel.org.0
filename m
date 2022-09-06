@@ -2,152 +2,131 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 97D2C5AE274
-	for <lists+linux-doc@lfdr.de>; Tue,  6 Sep 2022 10:27:33 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 059BF5AE380
+	for <lists+linux-doc@lfdr.de>; Tue,  6 Sep 2022 10:53:29 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S233784AbiIFI1c (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 6 Sep 2022 04:27:32 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:51352 "EHLO
+        id S233044AbiIFIx0 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 6 Sep 2022 04:53:26 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:48898 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S233147AbiIFI1a (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 6 Sep 2022 04:27:30 -0400
-Received: from loongson.cn (mail.loongson.cn [114.242.206.163])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTP id D72A96F551
-        for <linux-doc@vger.kernel.org>; Tue,  6 Sep 2022 01:27:28 -0700 (PDT)
-Received: from localhost.localdomain (unknown [112.20.112.163])
-        by localhost.localdomain (Coremail) with SMTP id AQAAf8Bx5OFpBBdjpJMSAA--.10497S7;
-        Tue, 06 Sep 2022 16:27:25 +0800 (CST)
-From:   Yanteng Si <siyanteng@loongson.cn>
-To:     alexs@kernel.org, bobwxc@email.cn, seakeel@gmail.com
-Cc:     Yanteng Si <siyanteng@loongson.cn>, corbet@lwn.net,
-        chenhuacai@kernel.org, jiaxun.yang@flygoat.com,
-        linux-doc@vger.kernel.org, siyanteng01@gmail.com
-Subject: [PATCH v2 5/5] docs/zh_CN: add dt kernel-api translation
-Date:   Tue,  6 Sep 2022 16:26:51 +0800
-Message-Id: <35fd1b5801d7191e078937908008115f8949aac3.1662449105.git.siyanteng@loongson.cn>
-X-Mailer: git-send-email 2.31.1
-In-Reply-To: <cover.1662449105.git.siyanteng@loongson.cn>
-References: <cover.1662449105.git.siyanteng@loongson.cn>
+        with ESMTP id S231502AbiIFIx0 (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 6 Sep 2022 04:53:26 -0400
+Received: from szxga02-in.huawei.com (szxga02-in.huawei.com [45.249.212.188])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 4D67395B5;
+        Tue,  6 Sep 2022 01:53:23 -0700 (PDT)
+Received: from canpemm500009.china.huawei.com (unknown [172.30.72.53])
+        by szxga02-in.huawei.com (SkyGuard) with ESMTP id 4MMJwq2Zl9zmVCj;
+        Tue,  6 Sep 2022 16:49:47 +0800 (CST)
+Received: from [10.67.102.169] (10.67.102.169) by
+ canpemm500009.china.huawei.com (7.192.105.203) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2375.24; Tue, 6 Sep 2022 16:53:20 +0800
+CC:     <corbet@lwn.net>, <peterz@infradead.org>, <arnd@arndb.de>,
+        <linux-kernel@vger.kernel.org>, <darren@os.amperecomputing.com>,
+        <yangyicong@hisilicon.com>, <huzhanyuan@oppo.com>,
+        <lipeifeng@oppo.com>, <zhangshiming@oppo.com>, <guojian@oppo.com>,
+        <realmz6@gmail.com>, <linux-mips@vger.kernel.org>,
+        <openrisc@lists.librecores.org>, <linuxppc-dev@lists.ozlabs.org>,
+        <linux-riscv@lists.infradead.org>, <linux-s390@vger.kernel.org>,
+        Barry Song <21cnbao@gmail.com>, <wangkefeng.wang@huawei.com>,
+        <xhao@linux.alibaba.com>, <prime.zeng@hisilicon.com>,
+        <anshuman.khandual@arm.com>
+Subject: Re: [PATCH v3 0/4] mm: arm64: bring up BATCHED_UNMAP_TLB_FLUSH
+From:   Yicong Yang <yangyicong@huawei.com>
+To:     <akpm@linux-foundation.org>, <linux-mm@kvack.org>,
+        <linux-arm-kernel@lists.infradead.org>, <x86@kernel.org>,
+        <catalin.marinas@arm.com>, <will@kernel.org>,
+        <linux-doc@vger.kernel.org>
+References: <20220822082120.8347-1-yangyicong@huawei.com>
+Message-ID: <34762b48-3da4-4f2e-64a7-68a44f21d4fd@huawei.com>
+Date:   Tue, 6 Sep 2022 16:53:20 +0800
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:78.0) Gecko/20100101
+ Thunderbird/78.5.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-CM-TRANSID: AQAAf8Bx5OFpBBdjpJMSAA--.10497S7
-X-Coremail-Antispam: 1UD129KBjvJXoW7tFyxGr1kuFy8JFWkuF17Jrb_yoW8uw48pF
-        9akryxGF1fury7u3yxWF48CFy3J3Wfuw45KFyxtwnagr1YyFyrtr1jqrykKasrGry0kFWU
-        WFWUKrWjk3Wqyr7anT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
-        9KBjDU0xBIdaVrnRJUUUBG14x267AKxVWrJVCq3wAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
-        rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2048vs2IY020E87I2jVAFwI0_JF0E3s1l82xGYI
-        kIc2x26xkF7I0E14v26ryj6s0DM28lY4IEw2IIxxk0rwA2F7IY1VAKz4vEj48ve4kI8wA2
-        z4x0Y4vE2Ix0cI8IcVAFwI0_Xr0_Ar1l84ACjcxK6xIIjxv20xvEc7CjxVAFwI0_Gr1j6F
-        4UJwA2z4x0Y4vEx4A2jsIE14v26F4UJVW0owA2z4x0Y4vEx4A2jsIEc7CjxVAFwI0_GcCE
-        3s1le2I262IYc4CY6c8Ij28IcVAaY2xG8wAqx4xG64xvF2IEw4CE5I8CrVC2j2WlYx0E2I
-        x0cI8IcVAFwI0_Jr0_Jr4lYx0Ex4A2jsIE14v26r1j6r4UMcvjeVCFs4IE7xkEbVWUJVW8
-        JwACjcxG0xvY0x0EwIxGrwACjI8F5VA0II8E6IAqYI8I648v4I1lc2xSY4AK67AK6r43Mx
-        AIw28IcxkI7VAKI48JMxC20s026xCaFVCjc4AY6r1j6r4UMI8I3I0E5I8CrVAFwI0_Jr0_
-        Jr4lx2IqxVCjr7xvwVAFwI0_JrI_JrWlx4CE17CEb7AF67AKxVWUtVW8ZwCIc40Y0x0EwI
-        xGrwCI42IY6xIIjxv20xvE14v26r1I6r4UMIIF0xvE2Ix0cI8IcVCY1x0267AKxVWxJVW8
-        Jr1lIxAIcVCF04k26cxKx2IYs7xG6r1j6r1xMIIF0xvEx4A2jsIE14v26r1j6r4UMIIF0x
-        vEx4A2jsIEc7CjxVAFwI0_Gr0_Gr1UYxBIdaVFxhVjvjDU0xZFpf9x0JUfhLnUUUUU=
-X-CM-SenderInfo: pvl1t0pwhqwqxorr0wxvrqhubq/
-X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00,SPF_HELO_PASS,
-        SPF_PASS,T_SCC_BODY_TEXT_LINE autolearn=ham autolearn_force=no
-        version=3.4.6
+In-Reply-To: <20220822082120.8347-1-yangyicong@huawei.com>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-Originating-IP: [10.67.102.169]
+X-ClientProxiedBy: dggems706-chm.china.huawei.com (10.3.19.183) To
+ canpemm500009.china.huawei.com (7.192.105.203)
+X-CFilter-Loop: Reflected
+X-Spam-Status: No, score=-6.0 required=5.0 tests=BAYES_00,NICE_REPLY_A,
+        RCVD_IN_DNSWL_MED,SPF_HELO_NONE,SPF_PASS,T_SCC_BODY_TEXT_LINE
+        autolearn=ham autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Translte .../devicetree/kernel-api.rst into Chinese.
+Hi mm and arm64 maintainers,
 
-Signed-off-by: Yanteng Si <siyanteng@loongson.cn>
-Reviewed-by: Alex Shi <alexs@kernel.org>
----
- .../translations/zh_CN/devicetree/index.rst   |  5 +-
- .../zh_CN/devicetree/kernel-api.rst           | 58 +++++++++++++++++++
- 2 files changed, 59 insertions(+), 4 deletions(-)
- create mode 100644 Documentation/translations/zh_CN/devicetree/kernel-api.rst
+a gentle ping for this..
 
-diff --git a/Documentation/translations/zh_CN/devicetree/index.rst b/Documentation/translations/zh_CN/devicetree/index.rst
-index 9d95d2629b38..7451dbfdd3e5 100644
---- a/Documentation/translations/zh_CN/devicetree/index.rst
-+++ b/Documentation/translations/zh_CN/devicetree/index.rst
-@@ -24,10 +24,7 @@ Open Firmware 和 Devicetree
- 
-    usage-model
-    of_unittest
--
--Todolist:
--
--*   kernel-api
-+   kernel-api
- 
- Devicetree Overlays
- ===================
-diff --git a/Documentation/translations/zh_CN/devicetree/kernel-api.rst b/Documentation/translations/zh_CN/devicetree/kernel-api.rst
-new file mode 100644
-index 000000000000..6aa3b685494e
---- /dev/null
-+++ b/Documentation/translations/zh_CN/devicetree/kernel-api.rst
-@@ -0,0 +1,58 @@
-+.. SPDX-License-Identifier: GPL-2.0
-+.. include:: ../disclaimer-zh_CN.rst
-+
-+:Original: Documentation/Devicetree/kernel-api.rst
-+
-+:翻译:
-+
-+ 司延腾 Yanteng Si <siyanteng@loongson.cn>
-+
-+:校译:
-+
-+
-+=================
-+内核中的设备树API
-+=================
-+
-+核心函数
-+--------
-+
-+该API在以下内核代码中:
-+
-+drivers/of/base.c
-+
-+include/linux/of.h
-+
-+drivers/of/property.c
-+
-+include/linux/of_graph.h
-+
-+drivers/of/address.c
-+
-+drivers/of/irq.c
-+
-+drivers/of/fdt.c
-+
-+驱动模型函数
-+------------
-+
-+该API在以下内核代码中:
-+
-+include/linux/of_device.h
-+
-+drivers/of/device.c
-+
-+include/linux/of_platform.h
-+
-+drivers/of/platform.c
-+
-+覆盖和动态DT函数
-+----------------
-+
-+该API在以下内核代码中:
-+
-+drivers/of/resolver.c
-+
-+drivers/of/dynamic.c
-+
-+drivers/of/overlay.c
--- 
-2.31.1
+Thanks.
 
+On 2022/8/22 16:21, Yicong Yang wrote:
+> From: Yicong Yang <yangyicong@hisilicon.com>
+> 
+> Though ARM64 has the hardware to do tlb shootdown, the hardware
+> broadcasting is not free.
+> A simplest micro benchmark shows even on snapdragon 888 with only
+> 8 cores, the overhead for ptep_clear_flush is huge even for paging
+> out one page mapped by only one process:
+> 5.36%  a.out    [kernel.kallsyms]  [k] ptep_clear_flush
+> 
+> While pages are mapped by multiple processes or HW has more CPUs,
+> the cost should become even higher due to the bad scalability of
+> tlb shootdown.
+> 
+> The same benchmark can result in 16.99% CPU consumption on ARM64
+> server with around 100 cores according to Yicong's test on patch
+> 4/4.
+> 
+> This patchset leverages the existing BATCHED_UNMAP_TLB_FLUSH by
+> 1. only send tlbi instructions in the first stage -
+> 	arch_tlbbatch_add_mm()
+> 2. wait for the completion of tlbi by dsb while doing tlbbatch
+> 	sync in arch_tlbbatch_flush()
+> My testing on snapdragon shows the overhead of ptep_clear_flush
+> is removed by the patchset. The micro benchmark becomes 5% faster
+> even for one page mapped by single process on snapdragon 888.
+> 
+> -v3:
+> 1. Declare arch's tlbbatch defer support by arch_tlbbatch_should_defer() instead
+>    of ARCH_HAS_MM_CPUMASK, per Barry and Kefeng
+> 2. Add Tested-by from Xin Hao
+> Link: https://lore.kernel.org/linux-mm/20220711034615.482895-1-21cnbao@gmail.com/
+> 
+> -v2:
+> 1. Collected Yicong's test result on kunpeng920 ARM64 server;
+> 2. Removed the redundant vma parameter in arch_tlbbatch_add_mm()
+>    according to the comments of Peter Zijlstra and Dave Hansen
+> 3. Added ARCH_HAS_MM_CPUMASK rather than checking if mm_cpumask
+>    is empty according to the comments of Nadav Amit
+> 
+> Thanks, Peter, Dave and Nadav for your testing or reviewing
+> , and comments.
+> 
+> -v1:
+> https://lore.kernel.org/lkml/20220707125242.425242-1-21cnbao@gmail.com/
+> 
+> Anshuman Khandual (1):
+>   mm/tlbbatch: Introduce arch_tlbbatch_should_defer()
+> 
+> Barry Song (3):
+>   Revert "Documentation/features: mark BATCHED_UNMAP_TLB_FLUSH doesn't
+>     apply to ARM64"
+>   mm: rmap: Extend tlbbatch APIs to fit new platforms
+>   arm64: support batched/deferred tlb shootdown during page reclamation
+> 
+>  Documentation/features/arch-support.txt       |  1 -
+>  .../features/vm/TLB/arch-support.txt          |  2 +-
+>  arch/arm64/Kconfig                            |  1 +
+>  arch/arm64/include/asm/tlbbatch.h             | 12 ++++++++
+>  arch/arm64/include/asm/tlbflush.h             | 28 +++++++++++++++++--
+>  arch/x86/include/asm/tlbflush.h               | 15 +++++++++-
+>  mm/rmap.c                                     | 19 +++++--------
+>  7 files changed, 61 insertions(+), 17 deletions(-)
+>  create mode 100644 arch/arm64/include/asm/tlbbatch.h
+> 
