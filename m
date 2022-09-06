@@ -2,232 +2,161 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 2DAE95AF531
-	for <lists+linux-doc@lfdr.de>; Tue,  6 Sep 2022 22:00:39 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 104B45AF54A
+	for <lists+linux-doc@lfdr.de>; Tue,  6 Sep 2022 22:05:06 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S230519AbiIFUAL (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 6 Sep 2022 16:00:11 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:57434 "EHLO
+        id S231216AbiIFUE3 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 6 Sep 2022 16:04:29 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:46116 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S231626AbiIFT7d (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 6 Sep 2022 15:59:33 -0400
-Received: from mga02.intel.com (mga02.intel.com [134.134.136.20])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id E5157BD141;
-        Tue,  6 Sep 2022 12:56:08 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1662494169; x=1694030169;
-  h=date:from:to:cc:subject:message-id:in-reply-to:
-   references:mime-version:content-transfer-encoding;
-  bh=vL/YDbBtpAt9jdjtaY4Sr1ZSqPRuhmV3B7r6AYlC4uw=;
-  b=UodM1Py0XsVbpV99MM71DHZ7wzDvHXLpLETsU8M6bbckNIivRGV/q7cq
-   9igSYmOXJ8fCWUTbvx6t6Zc7+9wP2W1P70uqes2T0JA2kZNNyTwvJ/i4H
-   u45G2pPjE1v6jqcGyhLl0UWOK7JsqQcBpr5Zb79Tl0/oeMvB+LCbZXtR8
-   r6x9Jwb4Zb6a7DzunUr6Otzq8GmtUapMffx9XkL5vfEyGaF0/Ld34xb3b
-   6t1ZzWE2RAKecpJGHDDjpx5yBATQeCINxpKSLaYzBO5sIgVIxFmu7w1dq
-   Y41u5+jd5wVuN36/F/biC0/ehn7uE7HeWn0AFj9E7E7nrfL8nOvZyi5pi
-   A==;
-X-IronPort-AV: E=McAfee;i="6500,9779,10462"; a="283687054"
-X-IronPort-AV: E=Sophos;i="5.93,294,1654585200"; 
-   d="scan'208";a="283687054"
-Received: from fmsmga006.fm.intel.com ([10.253.24.20])
-  by orsmga101.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 06 Sep 2022 12:52:26 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.93,294,1654585200"; 
-   d="scan'208";a="859375126"
-Received: from linux.intel.com ([10.54.29.200])
-  by fmsmga006.fm.intel.com with ESMTP; 06 Sep 2022 12:52:26 -0700
-Received: from maurocar-mobl2 (maurocar-mobl2.ger.corp.intel.com [10.252.44.186])
-        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
-        (No client certificate requested)
-        by linux.intel.com (Postfix) with ESMTPS id 9517C580890;
-        Tue,  6 Sep 2022 12:52:23 -0700 (PDT)
-Date:   Tue, 6 Sep 2022 21:47:43 +0200
-From:   Mauro Carvalho Chehab <mauro.chehab@linux.intel.com>
-To:     Rodrigo Vivi <rodrigo.vivi@intel.com>
-Cc:     Mauro Carvalho Chehab <mchehab@kernel.org>,
-        linux-doc@vger.kernel.org, David Airlie <airlied@linux.ie>,
-        intel-gfx@lists.freedesktop.org, Jonathan Corbet <corbet@lwn.net>,
-        linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org,
-        Maxime Ripard <mripard@kernel.org>,
-        Thomas Zimmermann <tzimmermann@suse.de>
-Subject: Re: [Intel-gfx] [PATCH v2 38/39] drm/i915: add descriptions for
- some RPM macros at intel_gt_pm.h
-Message-ID: <20220906214735.20faebfb@maurocar-mobl2>
-In-Reply-To: <YvIy9o2dHkB1gAr6@intel.com>
-References: <cover.1657699522.git.mchehab@kernel.org>
-        <37e3b9aac85f1d08c0a53bae86680d504308bf67.1657699522.git.mchehab@kernel.org>
-        <YvIy9o2dHkB1gAr6@intel.com>
-X-Mailer: Claws Mail 4.1.0 (GTK 3.24.34; x86_64-redhat-linux-gnu)
+        with ESMTP id S231372AbiIFUD7 (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 6 Sep 2022 16:03:59 -0400
+Received: from linux.microsoft.com (linux.microsoft.com [13.77.154.182])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTP id 7C0FD13E20;
+        Tue,  6 Sep 2022 12:59:39 -0700 (PDT)
+Received: from pwmachine.numericable.fr (85-170-34-72.rev.numericable.fr [85.170.34.72])
+        by linux.microsoft.com (Postfix) with ESMTPSA id 75B6B2049BAE;
+        Tue,  6 Sep 2022 12:58:07 -0700 (PDT)
+DKIM-Filter: OpenDKIM Filter v2.11.0 linux.microsoft.com 75B6B2049BAE
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linux.microsoft.com;
+        s=default; t=1662494291;
+        bh=Lgwyo8Ll4+9QdK81IgZHqZgwpIfKReyUkVrwZ38RZ/g=;
+        h=From:To:Cc:Subject:Date:From;
+        b=nGUfhT1FwKDLYsJ/h/Ti7q5o0kYXfbMN+89/95xvNzhZ/rtKBNnt3IX/eX+TvuKDt
+         31GSY8fFtsRsRLw1O4nL6lTrYFhJKOq8uQqo5l8ERPFEWN4QJFddO7Xsc5xcCB9RS6
+         3pAVIUm6K/+SrNUm3X4yNIjGkP7YE5WAq+A4E9eQ=
+From:   Francis Laniel <flaniel@linux.microsoft.com>
+To:     bpf@vger.kernel.org
+Cc:     Francis Laniel <flaniel@linux.microsoft.com>,
+        Alexei Starovoitov <ast@kernel.org>,
+        Daniel Borkmann <daniel@iogearbox.net>,
+        Andrii Nakryiko <andrii@kernel.org>,
+        Martin KaFai Lau <martin.lau@linux.dev>,
+        Song Liu <song@kernel.org>, Yonghong Song <yhs@fb.com>,
+        John Fastabend <john.fastabend@gmail.com>,
+        KP Singh <kpsingh@kernel.org>,
+        Stanislav Fomichev <sdf@google.com>,
+        Hao Luo <haoluo@google.com>, Jiri Olsa <jolsa@kernel.org>,
+        Jonathan Corbet <corbet@lwn.net>,
+        Mykola Lysenko <mykolal@fb.com>, Shuah Khan <shuah@kernel.org>,
+        Joanne Koong <joannelkoong@gmail.com>,
+        Lorenzo Bianconi <lorenzo@kernel.org>,
+        Dave Marchevsky <davemarchevsky@fb.com>,
+        Maxim Mikityanskiy <maximmi@nvidia.com>,
+        Geliang Tang <geliang.tang@suse.com>,
+        "Naveen N. Rao" <naveen.n.rao@linux.vnet.ibm.com>,
+        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
+        linux-kselftest@vger.kernel.org
+Subject: [RFC PATCH v2 0/5] Make BPF ring buffer overwritable
+Date:   Tue,  6 Sep 2022 21:56:41 +0200
+Message-Id: <20220906195656.33021-1-flaniel@linux.microsoft.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: 7bit
-X-Spam-Status: No, score=-4.3 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_EF,RCVD_IN_DNSWL_MED,
-        RCVD_IN_MSPIKE_H3,RCVD_IN_MSPIKE_WL,SPF_HELO_NONE,SPF_NONE,
-        T_SCC_BODY_TEXT_LINE autolearn=ham autolearn_force=no version=3.4.6
+Content-Transfer-Encoding: 8bit
+X-Spam-Status: No, score=-19.8 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+        DKIM_VALID,DKIM_VALID_AU,ENV_AND_HDR_SPF_MATCH,RCVD_IN_DNSWL_MED,
+        SPF_HELO_PASS,SPF_PASS,T_SCC_BODY_TEXT_LINE,USER_IN_DEF_DKIM_WL,
+        USER_IN_DEF_SPF_WL autolearn=ham autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Tue, 9 Aug 2022 06:12:06 -0400
-Rodrigo Vivi <rodrigo.vivi@intel.com> wrote:
-
-> On Wed, Jul 13, 2022 at 09:12:26AM +0100, Mauro Carvalho Chehab wrote:
-> > The intel_gt_pm.h file contains some convenient macros to be used
-> > in GT code in order to get/put runtime PM references and for
-> > checking them.
-> > 
-> > Add descriptions based on the ones at intel_wakeref.h and
-> > intel_runtime_pm.c.
-> > 
-> > Signed-off-by: Mauro Carvalho Chehab <mchehab@kernel.org>
-> > ---
-> > 
-> > To avoid mailbombing on a large number of people, only mailing lists were C/C on the cover.
-> > See [PATCH v2 00/39] at: https://lore.kernel.org/all/cover.1657699522.git.mchehab@kernel.org/
-> > 
-> >  Documentation/gpu/i915.rst            |  2 +
-> >  drivers/gpu/drm/i915/gt/intel_gt_pm.h | 62 +++++++++++++++++++++++++++
-> >  2 files changed, 64 insertions(+)
-> > 
-> > diff --git a/Documentation/gpu/i915.rst b/Documentation/gpu/i915.rst
-> > index 6bb50edc6d79..9862d504df4d 100644
-> > --- a/Documentation/gpu/i915.rst
-> > +++ b/Documentation/gpu/i915.rst
-> > @@ -709,6 +709,8 @@ Table Manager (TTM)
-> >  
-> >  .. kernel-doc:: drivers/gpu/drm/i915/gem/i915_gem_ttm_move.c
-> >  
-> > +.. kernel-doc:: drivers/gpu/drm/i915/gt/intel_gt_pm.h  
-> 
-> I don't believe this is the right placement for this.
-
-I'll add it then at:
-
-	Other GT functionality
-
-Section.
-
-Regards,
-Mauro
+Hi.
 
 
-> 
-> the rest lgtm
-> 
-> > +
-> >  Graphics Execution Manager (GEM)
-> >  --------------------------------
-> >  
-> > diff --git a/drivers/gpu/drm/i915/gt/intel_gt_pm.h b/drivers/gpu/drm/i915/gt/intel_gt_pm.h
-> > index bc898df7a48c..a8ea6846980a 100644
-> > --- a/drivers/gpu/drm/i915/gt/intel_gt_pm.h
-> > +++ b/drivers/gpu/drm/i915/gt/intel_gt_pm.h
-> > @@ -11,21 +11,57 @@
-> >  #include "intel_gt_types.h"
-> >  #include "intel_wakeref.h"
-> >  
-> > +/**
-> > + * intel_gt_pm_is_awake: Query whether the runtime PM is awake held
-> > + *
-> > + * @gt: pointer to the graphics engine
-> > + *
-> > + * Returns: true if a runtime pm reference is currently held and the GT is
-> > + * awake.
-> > + */
-> >  static inline bool intel_gt_pm_is_awake(const struct intel_gt *gt)
-> >  {
-> >  	return intel_wakeref_is_active(&gt->wakeref);
-> >  }
-> >  
-> > +/**
-> > + * intel_gt_pm_get: grab a runtime PM reference ensuring that GT is powered up
-> > + * @gt: pointer to the graphics engine
-> > + *
-> > + * Any runtime pm reference obtained by this function must have a symmetric
-> > + * call to intel_gt_pm_put() to release the reference again.
-> > + *
-> > + * Note that this is allowed to fail, in which case the runtime-pm wakeref
-> > + * will be released and the acquisition unwound.
-> > + */
-> >  static inline void intel_gt_pm_get(struct intel_gt *gt)
-> >  {
-> >  	intel_wakeref_get(&gt->wakeref);
-> >  }
-> >  
-> > +/**
-> > + * __intel_gt_pm_get: Acquire the runtime PM reference again
-> > + * @gt: pointer to the graphics engine which contains the wakeref
-> > + *
-> > + * Increment the PM reference counter, only valid if it is already held by
-> > + * the caller.
-> > + *
-> > + * See intel_gt_pm_get().
-> > + */
-> >  static inline void __intel_gt_pm_get(struct intel_gt *gt)
-> >  {
-> >  	__intel_wakeref_get(&gt->wakeref);
-> >  }
-> >  
-> > +/**
-> > + * intel_gt_pm_get_if_awake: Acquire the runtime PM reference if active
-> > + * @gt: pointer to the graphics engine which contains the PM reference
-> > + *
-> > + * Acquire a hold on the PM reference, but only if the GT is already
-> > + * active.
-> > + *
-> > + * Returns: true if the wakeref was acquired, false otherwise.
-> > + */
-> >  static inline bool intel_gt_pm_get_if_awake(struct intel_gt *gt)
-> >  {
-> >  	return intel_wakeref_get_if_active(&gt->wakeref);
-> > @@ -36,6 +72,14 @@ static inline void intel_gt_pm_might_get(struct intel_gt *gt)
-> >  	intel_wakeref_might_get(&gt->wakeref);
-> >  }
-> >  
-> > +/**
-> > + * intel_gt_pm_put: Release the runtime PM reference
-> > + * @gt: pointer to the graphics engine which contains the PM reference
-> > + *
-> > + * Release our hold on the runtime PM for GT.
-> > + *
-> > + * It might power down the GT right away if this is the last reference.
-> > + */
-> >  static inline void intel_gt_pm_put(struct intel_gt *gt)
-> >  {
-> >  	intel_wakeref_put(&gt->wakeref);
-> > @@ -51,10 +95,28 @@ static inline void intel_gt_pm_might_put(struct intel_gt *gt)
-> >  	intel_wakeref_might_put(&gt->wakeref);
-> >  }
-> >  
-> > +/**
-> > + * with_intel_gt_pm - get a GT reference ensuring that GT is powered up,
-> > + *	run some code and then put the reference away.
-> > + *
-> > + * @gt: pointer to the gt
-> > + * @tmp: pointer to a temporary wakeref.
-> > + */
-> >  #define with_intel_gt_pm(gt, tmp) \
-> >  	for (tmp = 1, intel_gt_pm_get(gt); tmp; \
-> >  	     intel_gt_pm_put(gt), tmp = 0)
-> >  
-> > +/**
-> > + * intel_gt_pm_wait_for_idle: Wait until the runtime PM reference is idle
-> > + * @gt: pointer to the graphics engine which contains the PM reference
-> > + *
-> > + * Wait for the earlier asynchronous release of the runtime PM reference. Note
-> > + * this will wait for any third party as well, so make sure you only wait
-> > + * when you have control over the GT runtime PM and trust no one else is
-> > + * acquiring it.
-> > + *
-> > + * Return: 0 on success, error code if killed.
-> > + */
-> >  static inline int intel_gt_pm_wait_for_idle(struct intel_gt *gt)
-> >  {
-> >  	return intel_wakeref_wait_for_idle(&gt->wakeref);
-> > -- 
-> > 2.36.1
-> >   
+First, I hope you are fine and the same for your relatives.
+
+Normally, when BPF ring buffer are full, producers cannot write anymore and
+need to wait for consumer to get some data.
+As a consequence, calling bpf_ringbuf_reserve() from eBPF code returns NULL.
+
+This contribution adds a new flag to make BPF ring buffer overwritable.
+Perf ring buffers already implement an option to be overwritable. In order to
+avoid data corruption, the data is written backward, see
+commit 9ecda41acb97 ("perf/core: Add ::write_backward attribute to perf event").
+This patch series re-uses the same idea from perf ring buffers but in BPF ring
+buffers.
+So, calling bpf_ringbuf_reserve() on an overwritable BPF ring buffer never
+returns NULL.
+As a consequence, oldest data will be overwritten by the newest so consumer will
+loose data.
+
+Overwritable ring buffers are useful in BPF programs that are permanently
+enabled but rarely read, only on-demand, for example in case of a user request
+to investigate problems. We would like to use this in the Traceloop project [1].
+
+The self test added in this series was tested and validated in a VM:
+you@vm# ./share/linux/tools/testing/selftests/bpf/test_progs -t ringbuf_over
+Can't find bpf_testmod.ko kernel module: -2
+WARNING! Selftests relying on bpf_testmod.ko will be skipped.
+#135     ringbuf_over_writable:OK
+Summary: 1/0 PASSED, 0 SKIPPED, 0 FAILED
+
+You can also test the libbpf implementation by using the last patch of this
+series which should be applied to iovisor/bcc:
+you@home$ cd /path/to/iovisor/bcc
+you@home$ git am -3 v2-0005-for-test-purpose-only-Add-toy-to-play-with-BPF-ri.patch
+you@home$ cd /path/to/linux/tools/lib/bpf
+you@home$ make -j$(nproc)
+you@home$ cp libbpf.a /path/to/iovisor/bcc/libbpf-tools/.output
+you@home$ cd /path/to/iovisor/bcc/libbpf-tools/
+you@home$ make -j toy
+# Start your VM and copy toy executable inside it.
+root@vm-amd64:~# ./share/toy &
+[1] 287
+root@vm-amd64:~# for i in {1..16}; do ls > /dev/null; done
+16
+15
+14
+13
+12
+11
+10
+9
+root@vm-amd64:~# ls > /dev/null && ls > /dev/null
+18
+17
+
+As you can see, the first eight events are overwritten.
+
+If you see any way to improve this contribution, feel free to share.
+
+Changes since:
+ v1:
+  * Made producers write backward like perf ring buffer, so it permits avoiding
+  memory corruption.
+  * Added libbpf implementation to consume all events available.
+  * Added selftest.
+  * Added documentation.
+
+Francis Laniel (5):
+  bpf: Make ring buffer overwritable.
+  selftests: Add BPF overwritable ring buffer self tests.
+  docs/bpf: Add documentation for overwritable ring buffer.
+  libbpf: Add implementation to consume overwritable BPF ring buffer.
+  for test purpose only: Add toy to play with BPF ring.
+
+ ...-only-Add-toy-to-play-with-BPF-ring-.patch | 147 ++++++++++++++++
+ Documentation/bpf/ringbuf.rst                 |  18 +-
+ include/uapi/linux/bpf.h                      |   3 +
+ kernel/bpf/ringbuf.c                          |  43 +++--
+ tools/include/uapi/linux/bpf.h                |   3 +
+ tools/lib/bpf/ringbuf.c                       | 106 ++++++++++++
+ tools/testing/selftests/bpf/Makefile          |   5 +-
+ .../bpf/prog_tests/ringbuf_overwritable.c     | 158 ++++++++++++++++++
+ .../bpf/progs/test_ringbuf_overwritable.c     |  61 +++++++
+ 9 files changed, 531 insertions(+), 13 deletions(-)
+ create mode 100644 0001-for-test-purpose-only-Add-toy-to-play-with-BPF-ring-.patch
+ create mode 100644 tools/testing/selftests/bpf/prog_tests/ringbuf_overwritable.c
+ create mode 100644 tools/testing/selftests/bpf/progs/test_ringbuf_overwritable.c
+
+
+Best regards and thank you in advance.
+---
+[1] https://github.com/kinvolk/traceloop
+Traceloop was presented at LPC 2020 (https://lpc.events/event/7/contributions/667/)
+--
+2.25.1
+
