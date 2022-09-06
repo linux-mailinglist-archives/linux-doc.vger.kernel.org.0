@@ -2,94 +2,79 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id B672C5AE5EF
-	for <lists+linux-doc@lfdr.de>; Tue,  6 Sep 2022 12:53:27 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id E4E965AE630
+	for <lists+linux-doc@lfdr.de>; Tue,  6 Sep 2022 13:06:56 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S234140AbiIFKwx (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 6 Sep 2022 06:52:53 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:48440 "EHLO
+        id S239530AbiIFLGz (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 6 Sep 2022 07:06:55 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:49452 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S239681AbiIFKw0 (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 6 Sep 2022 06:52:26 -0400
-Received: from mail-wm1-x329.google.com (mail-wm1-x329.google.com [IPv6:2a00:1450:4864:20::329])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id E4E547C52A;
-        Tue,  6 Sep 2022 03:50:58 -0700 (PDT)
-Received: by mail-wm1-x329.google.com with SMTP id z14-20020a7bc7ce000000b003a5db0388a8so7896579wmk.1;
-        Tue, 06 Sep 2022 03:50:58 -0700 (PDT)
+        with ESMTP id S239159AbiIFLGz (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 6 Sep 2022 07:06:55 -0400
+Received: from mail-qt1-x835.google.com (mail-qt1-x835.google.com [IPv6:2607:f8b0:4864:20::835])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 29539786E4
+        for <linux-doc@vger.kernel.org>; Tue,  6 Sep 2022 04:06:54 -0700 (PDT)
+Received: by mail-qt1-x835.google.com with SMTP id cb8so7728893qtb.0
+        for <linux-doc@vger.kernel.org>; Tue, 06 Sep 2022 04:06:54 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
-        h=mime-version:user-agent:references:message-id:date:in-reply-to
-         :subject:cc:to:from:from:to:cc:subject:date;
-        bh=b1zh3Myo6jU2fqhvORGPXUCfBSeS9QtYiYf8N35O2G8=;
-        b=BCOPqG0yChofOoj0r9oHxKJbYuhNfnuLxdUdm4eBHhojDQ2/p2F6Oe+P1CerRJwt4/
-         O1xjMkpEGjCZz6ig+13Jawcyekt2YZ0+PBNDeMisA1Lz40Q6l2dR1skFMlpplAGBKZPk
-         V9TIM0nranK9ozI5eVZr8Y2E2xVGDiMpois9P+AZue3xDJhyandWfW0fEeD1pyoxH8z4
-         1KQ2cTdqDFBLg+T+C2xDnuVbsbzuib6Ne2tt9Wp2yNYrYhq/AxSw1eDaTEpkJWJ62ztx
-         x5qJ5+a0PqG6OS/Lj4bKc1qI1ZoV/58xjjWWB0YTgb5fDqPqGMsAvIyG7+wpH3efHOjP
-         ATJA==
+        h=content-transfer-encoding:to:subject:message-id:date:from:reply-to
+         :mime-version:from:to:cc:subject:date;
+        bh=Joy2lmFe0zs6MtiO1UVKRPSegeL9o6Ktpk4o3deqn9Q=;
+        b=S0i0l6ncQwwScXI/ed0fd19U70LYPW67w5rcA/h97ZL614JvO50deD2qUPcf9lui1p
+         1N78PWyBFf0V04YlpsRyUVriHCpsHNuyyh4DUDouuv+/YlyzZsJqxTkEzqKZ0fu5u0aX
+         2yqa3LkbmZjF7WW+aFOFFnDzjH/3phmPRqPT5GRRCdA97gfLF8su0tCkphPt/WbjArTT
+         6HWlF0dCAZ46+kzUXmuvaRloOBxHhmxgURGJVPmybxCW5BVtpCPUkwDXTtjo9ZfJqRVj
+         5lgO2GtNbRsUDOlG0Dc1aiVsSPWZfl8LzTuyF03G00YCqzKJ633fi5blAvTbHSrm09m4
+         Z6qA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=mime-version:user-agent:references:message-id:date:in-reply-to
-         :subject:cc:to:from:x-gm-message-state:from:to:cc:subject:date;
-        bh=b1zh3Myo6jU2fqhvORGPXUCfBSeS9QtYiYf8N35O2G8=;
-        b=sxHcSffQkcp+6GJH6MSXGIos9IPF6nGLMqlO7i8eyTFDzou0BEOy9EgRoNQbhYyJPl
-         y0ClFcIBXm2SPRatKV+roVSuHjxfDRqjc5n3J4j/RyVorVAwq7Fu5RpMGhKCwLbtJyOk
-         YlPCcvvP8sWsskGCo/sYhziDg8/8eAKD/VGP7l7Uox8MG3lRJj1HNIDq072hFW1OLiBT
-         lDxrEi3nXTPEv/lmCuGzw+ojyXtiD8ZSHM7tSSLi8TwYba1X+WDGVaIr2OKepmMGkUGW
-         CCvdK0dsnVQ+JuJWp0hUMS/yDdIiTIfuukjuJ2cu19bwuEToH5k9pyPMxF5TFV/j/KLc
-         e/Dg==
-X-Gm-Message-State: ACgBeo3d6NU1cPAz5zvek5bAcVJwby/6zW0I5HMR0OPme1s6/FTIZSZ5
-        JBX5VbydrlvFRjvURXRiths=
-X-Google-Smtp-Source: AA6agR7H+Ae4hheQrM5Be9dOg7JU2kpa1pWsVb2R/E4T4iMLEPoqt6gYIa7fUtYa7zp/8lwVctmsXA==
-X-Received: by 2002:a05:600c:4e8b:b0:3a5:f5bf:9c5a with SMTP id f11-20020a05600c4e8b00b003a5f5bf9c5amr13639171wmq.85.1662461457391;
-        Tue, 06 Sep 2022 03:50:57 -0700 (PDT)
-Received: from imac ([88.97.103.74])
-        by smtp.gmail.com with ESMTPSA id h23-20020a05600c2cb700b003a2f2bb72d5sm25353742wmc.45.2022.09.06.03.50.56
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 06 Sep 2022 03:50:56 -0700 (PDT)
-From:   Donald Hunter <donald.hunter@gmail.com>
-To:     Jani Nikula <jani.nikula@linux.intel.com>
-Cc:     bpf@vger.kernel.org, linux-doc@vger.kernel.org,
-        Jonathan Corbet <corbet@lwn.net>,
-        Andrii Nakryiko <andrii.nakryiko@gmail.com>
-Subject: Re: [PATCH bpf-next v3 2/2] Add table of BPF program types to
- libbpf docs
-In-Reply-To: <875yi5dbpw.fsf@intel.com> (Jani Nikula's message of "Fri, 02 Sep
-        2022 18:42:35 +0300")
-Date:   Tue, 06 Sep 2022 11:49:25 +0100
-Message-ID: <m2czc86ami.fsf@gmail.com>
-References: <20220829091500.24115-1-donald.hunter@gmail.com>
-        <20220829091500.24115-3-donald.hunter@gmail.com>
-        <875yi5dbpw.fsf@intel.com>
-User-Agent: Gnus/5.13 (Gnus v5.13) Emacs/28.1 (darwin)
+        h=content-transfer-encoding:to:subject:message-id:date:from:reply-to
+         :mime-version:x-gm-message-state:from:to:cc:subject:date;
+        bh=Joy2lmFe0zs6MtiO1UVKRPSegeL9o6Ktpk4o3deqn9Q=;
+        b=STLmfJX8DXDXP0Ofs645m4S0efW10s1MM8ZDg+hhElsCXnJPeVYlA+xwGHHxJXQRbU
+         8eB+WMv0TD0QN4YRmk3UL/vQgOzVqi/2ydglNNFqWbKwP5lAMZBkWjP0FRC0ByFjTXFv
+         Coxc2YqJbhNG9nSuuPpz5WTrFTA6zkPx8fhhUFfpsrf3GVguF0lPPkd8ohoSqGnsO6cw
+         gzNs/pRfQ+180q2xykn1zhGpEjabXx2l1ZoDr/AMwZSCRSuWb7pizbcIsrqRtJwo4KVI
+         0zyYfoKavRPxformTd6CJXKH/TmQwtDqoiXCl4HY4PM4KT8B2QY+mQnSIj7Fqa7sdKHO
+         rkXQ==
+X-Gm-Message-State: ACgBeo2jhPjDm4dFW1ZUuKU5EFs3lzATNzMlk4jgD8xLFcW/k+5BrVSu
+        Gvs7CNg2FFl7IhOdpE3yQXsf8QWBahNhWjihGJo=
+X-Google-Smtp-Source: AA6agR4Clh4Klr29+JrwVcuvMoNuRZn1eO0gbwn01NuZjMHBToB0Fh+elA4z3NcvBx+VcjydpUjF+3L15vHKa1/DZlU=
+X-Received: by 2002:ac8:5f09:0:b0:343:67b3:96f5 with SMTP id
+ x9-20020ac85f09000000b0034367b396f5mr43452129qta.470.1662462413112; Tue, 06
+ Sep 2022 04:06:53 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain
-X-Spam-Status: No, score=-2.1 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_FROM,
-        RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,SPF_PASS,T_SCC_BODY_TEXT_LINE
-        autolearn=ham autolearn_force=no version=3.4.6
+Received: by 2002:a67:dd12:0:0:0:0:0 with HTTP; Tue, 6 Sep 2022 04:06:28 -0700 (PDT)
+Reply-To: golsonfinancial@gmail.com
+From:   OLSON FINANCIAL GROUP <imarich13@gmail.com>
+Date:   Tue, 6 Sep 2022 04:06:28 -0700
+Message-ID: <CAL3u=ZJuQgNShZE3h-344edzXv6bMeM_pgxa_3j+enZ+QhuQYQ@mail.gmail.com>
+Subject: 
+To:     undisclosed-recipients:;
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Spam-Status: No, score=4.9 required=5.0 tests=BAYES_50,DKIM_SIGNED,
+        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_ENVFROM_END_DIGIT,
+        FREEMAIL_FROM,FREEMAIL_REPLYTO,RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,
+        SPF_PASS,T_SCC_BODY_TEXT_LINE,UNDISC_FREEM autolearn=no
+        autolearn_force=no version=3.4.6
+X-Spam-Level: ****
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Jani Nikula <jani.nikula@linux.intel.com> writes:
-
-> On Mon, 29 Aug 2022, Donald Hunter <donald.hunter@gmail.com> wrote:
->> Extend the libbpf documentation with a table of program types,
->> attach points and ELF section names. This table uses data from
->> program_types.csv which is generated from tools/lib/bpf/libbpf.c
->> during the documentation build.
->
-> Oh, would be nice to turn all of these into proper but simple Sphinx
-> extensions that take the deps into account in the Sphinx build
-> process. And, of course, would be pure python instead of a combo of
-> Make, shell, and awk.
->
-> That's one of the reasons we chose Sphinx originally, to be able to
-> write Sphinx extensions and avoid complicated pipelines.
-
-I could look at this as a followup patch since I would need to learn how
-to write Sphinx extensions first. It seems that it will require a new
-reST directive, is that right?
+--=20
+h Gr=C3=BC=C3=9Fe
+Ben=C3=B6tigen Sie dringend einen Kredit, um ein Haus oder ein Auto zu
+kaufen? oder ben=C3=B6tigen Sie ein Gesch=C3=A4fts- oder Privatdarlehen, um=
+ zu
+investieren? ein neues Gesch=C3=A4ft er=C3=B6ffnen, Rechnungen bezahlen? Un=
+d
+zahlen Sie uns die Installationen zur=C3=BCck? Wir sind ein zertifiziertes
+Finanzunternehmen. Wir bieten Privatpersonen und Unternehmen Kredite
+an. Wir bieten zuverl=C3=A4ssige Kredite zu einem sehr niedrigen Zinssatz
+von 2 %. F=C3=BCr mehr Informationen
+mailen Sie uns an: golsonfinancial@gmail.com....
