@@ -2,101 +2,91 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id F27815B306C
-	for <lists+linux-doc@lfdr.de>; Fri,  9 Sep 2022 09:46:34 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 8B73D5B30C9
+	for <lists+linux-doc@lfdr.de>; Fri,  9 Sep 2022 09:50:54 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S231372AbiIIHjS (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Fri, 9 Sep 2022 03:39:18 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:39120 "EHLO
+        id S231840AbiIIHun (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Fri, 9 Sep 2022 03:50:43 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:44356 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S231656AbiIIHiS (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Fri, 9 Sep 2022 03:38:18 -0400
-Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id CBF0C11B031;
-        Fri,  9 Sep 2022 00:35:57 -0700 (PDT)
-Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
-        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+        with ESMTP id S231867AbiIIHuQ (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Fri, 9 Sep 2022 03:50:16 -0400
+Received: from smtp-out1.suse.de (smtp-out1.suse.de [195.135.220.28])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 631EE1395B9;
+        Fri,  9 Sep 2022 00:45:54 -0700 (PDT)
+Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
+        (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+         key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
         (No client certificate requested)
-        by dfw.source.kernel.org (Postfix) with ESMTPS id 115E561ED3;
-        Fri,  9 Sep 2022 07:35:02 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 73D5BC43140;
-        Fri,  9 Sep 2022 07:35:01 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-        s=k20201202; t=1662708901;
-        bh=9fXBrTMJ1wXXR0UrdCCLpV7JpHoOhB0DFcPSM5RzJGE=;
-        h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-        b=BPX44/kJhMGXyeX8jeg/B9rw3SMukb3f5M9SvlDX9Xdjr0PGhg2YO/rd0rrJPrjdf
-         MHjNF5zUFycId8EgEphiYrLRlmCgnftn+1o74S70IJ63p2S4ZUxCnh2iDZ9XEbSYjp
-         AN8bbyOhwNybXuXo3y08iFs2DgOQ1v+nGQgAEnRYWnru+CRtl8tsgEm+1mV15l5wId
-         Z3vqrLREoV0TJyt4c2o3kAA7X59qq3GUO4jOcxTzs2zK+4iHbw/y4YRWXC+OyjqyUK
-         T2OIc+CGO+Bao7BwaGVgt9gsq6k8WJVyMZPPwWyM/gKcYUDZeJf0b9Cy+4ogbxToR4
-         wNrKJoj9+boXQ==
-Received: from mchehab by mail.kernel.org with local (Exim 4.95)
-        (envelope-from <mchehab@kernel.org>)
-        id 1oWYXH-007FHv-Mh;
-        Fri, 09 Sep 2022 09:34:47 +0200
-From:   Mauro Carvalho Chehab <mchehab@kernel.org>
-Cc:     Mauro Carvalho Chehab <mchehab@kernel.org>,
-        "Rodrigo Vivi" <rodrigo.vivi@intel.com>,
-        Daniel Vetter <daniel@ffwll.ch>,
-        David Airlie <airlied@linux.ie>,
-        Jani Nikula <jani.nikula@linux.intel.com>,
+        by smtp-out1.suse.de (Postfix) with ESMTPS id 89B0422918;
+        Fri,  9 Sep 2022 07:37:29 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
+        t=1662709049; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+         mime-version:mime-version:content-type:content-type:
+         in-reply-to:in-reply-to:references:references;
+        bh=WXTY9+MF108rC5N0qRIMHJTyEWfCXxraJ9r3p5CaavA=;
+        b=PAsRjY//6ci6tMdc1AbSkVT1/NENOZTJAYbDmM/NGwbPB9Ex8BRJjtAD3qTEQgwNmwS7Sp
+        85xLjm5S2Qb4Z+PRXwoYxHh3r/+n8crnkzaGqIGc0GZBNa68JFMKROU+hfksQTD0opQHMq
+        YMn/VvNQEOBRlZW1X6lJKPVJc1wShuE=
+Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
+        (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+         key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
+        (No client certificate requested)
+        by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id 682F813A93;
+        Fri,  9 Sep 2022 07:37:29 +0000 (UTC)
+Received: from dovecot-director2.suse.de ([192.168.254.65])
+        by imap2.suse-dmz.suse.de with ESMTPSA
+        id bdCnFzntGmO+MwAAMHmgww
+        (envelope-from <mhocko@suse.com>); Fri, 09 Sep 2022 07:37:29 +0000
+Date:   Fri, 9 Sep 2022 09:37:28 +0200
+From:   Michal Hocko <mhocko@suse.com>
+To:     Andrew Morton <akpm@linux-foundation.org>
+Cc:     Liu Shixin <liushixin2@huawei.com>,
         Jonathan Corbet <corbet@lwn.net>,
-        Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
-        Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
-        Maxime Ripard <mripard@kernel.org>,
-        Thomas Zimmermann <tzimmermann@suse.de>,
-        Tvrtko Ursulin <tvrtko.ursulin@linux.intel.com>,
-        dri-devel@lists.freedesktop.org, intel-gfx@lists.freedesktop.org,
-        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org
-Subject: [PATCH v3 36/37] drm/i915: add GuC functions to the documentation
-Date:   Fri,  9 Sep 2022 09:34:43 +0200
-Message-Id: <c65f75ea7aee177a2df93add4138240cf2f529da.1662708705.git.mchehab@kernel.org>
-X-Mailer: git-send-email 2.37.3
-In-Reply-To: <cover.1662708705.git.mchehab@kernel.org>
-References: <cover.1662708705.git.mchehab@kernel.org>
+        Johannes Weiner <hannes@cmpxchg.org>,
+        Roman Gushchin <roman.gushchin@linux.dev>,
+        Shakeel Butt <shakeelb@google.com>,
+        Muchun Song <songmuchun@bytedance.com>,
+        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
+        cgroups@vger.kernel.org, linux-mm@kvack.org,
+        Kefeng Wang <wangkefeng.wang@huawei.com>
+Subject: Re: [PATCH] mm/memcontrol: use kstrtobool for swapaccount param
+ parsing
+Message-ID: <YxrtODqHhdEkW2Lx@dhcp22.suse.cz>
+References: <20220908083452.2844125-1-liushixin2@huawei.com>
+ <20220908150248.85fff32bf275844f0927a856@linux-foundation.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Spam-Status: No, score=-7.1 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_HI,
-        SPF_HELO_NONE,SPF_PASS,T_SCC_BODY_TEXT_LINE autolearn=ham
-        autolearn_force=no version=3.4.6
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20220908150248.85fff32bf275844f0927a856@linux-foundation.org>
+X-Spam-Status: No, score=-4.4 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_MED,SPF_HELO_NONE,
+        SPF_PASS,T_SCC_BODY_TEXT_LINE autolearn=ham autolearn_force=no
+        version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
-To:     unlisted-recipients:; (no To-header on input)
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Currently, functions inside GuC aren't presented as part of the
-GuC documentation.
+On Thu 08-09-22 15:02:48, Andrew Morton wrote:
+> On Thu, 8 Sep 2022 16:34:52 +0800 Liu Shixin <liushixin2@huawei.com> wrote:
+> 
+> > --- a/mm/swap_cgroup.c
+> > +++ b/mm/swap_cgroup.c
+> > @@ -194,7 +194,7 @@ int swap_cgroup_swapon(int type, unsigned long max_pages)
+> >  	return 0;
+> >  nomem:
+> >  	pr_info("couldn't allocate enough memory for swap_cgroup\n");
+> > -	pr_info("swap_cgroup can be disabled by swapaccount=0 boot option\n");
+> > +	pr_info("swap_cgroup can be disabled by swapaccount=[oO][Ff]/N/n/0 boot option\n");
+> 
+> I'm not sure this really needed changing.  "=0" was OK and the message
+> now looks rather silly.
 
-Add them.
+Agreed. While swapaccount=0 is clear the extended form, even if correct,
+might just confuse some admins.
 
-Reviewed-by: Rodrigo Vivi <rodrigo.vivi@intel.com>
-Signed-off-by: Mauro Carvalho Chehab <mchehab@kernel.org>
----
-
-To avoid mailbombing on a large number of people, only mailing lists were C/C on the cover.
-See [PATCH v3 00/37] at: https://lore.kernel.org/all/cover.1662708705.git.mchehab@kernel.org/
-
- Documentation/gpu/i915.rst | 3 +++
- 1 file changed, 3 insertions(+)
-
-diff --git a/Documentation/gpu/i915.rst b/Documentation/gpu/i915.rst
-index 59c532fe0332..b71e9720a1ac 100644
---- a/Documentation/gpu/i915.rst
-+++ b/Documentation/gpu/i915.rst
-@@ -759,6 +759,9 @@ GuC
- 
- .. kernel-doc:: drivers/gpu/drm/i915/gt/uc/intel_guc.h
- 
-+.. kernel-doc:: drivers/gpu/drm/i915/gt/uc/intel_guc.c
-+   :internal:
-+
- .. kernel-doc:: drivers/gpu/drm/i915/gt/uc/abi/guc_actions_slpc_abi.h
- 
- .. kernel-doc:: drivers/gpu/drm/i915/gt/uc/intel_guc_ads.c
 -- 
-2.37.3
-
+Michal Hocko
+SUSE Labs
