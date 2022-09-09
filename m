@@ -2,54 +2,151 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 2F3755B316C
-	for <lists+linux-doc@lfdr.de>; Fri,  9 Sep 2022 10:15:05 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 247C65B32FE
+	for <lists+linux-doc@lfdr.de>; Fri,  9 Sep 2022 11:13:03 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S231431AbiIIINa (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Fri, 9 Sep 2022 04:13:30 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:52728 "EHLO
+        id S231827AbiIIJHM (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Fri, 9 Sep 2022 05:07:12 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:38378 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S231462AbiIIIN3 (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Fri, 9 Sep 2022 04:13:29 -0400
-Received: from szxga02-in.huawei.com (szxga02-in.huawei.com [45.249.212.188])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 0610DB6D61;
-        Fri,  9 Sep 2022 01:13:28 -0700 (PDT)
-Received: from dggpemm500021.china.huawei.com (unknown [172.30.72.55])
-        by szxga02-in.huawei.com (SkyGuard) with ESMTP id 4MP7tG5TxYzZcn0;
-        Fri,  9 Sep 2022 16:08:54 +0800 (CST)
-Received: from dggpemm100009.china.huawei.com (7.185.36.113) by
- dggpemm500021.china.huawei.com (7.185.36.109) with Microsoft SMTP Server
+        with ESMTP id S231553AbiIIJHA (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Fri, 9 Sep 2022 05:07:00 -0400
+Received: from mga05.intel.com (mga05.intel.com [192.55.52.43])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id B1C594D4D7;
+        Fri,  9 Sep 2022 02:06:55 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1662714415; x=1694250415;
+  h=date:from:to:cc:subject:message-id:references:
+   in-reply-to:mime-version;
+  bh=GQIB7Wz0ukQHXM8EFrVU9mgAGovQqkPwjoPrmwh3jXM=;
+  b=jKQpPE2wGrkw9jBFBHAFnw9ZJ8xiho9GSBZT2BRbvmf440rJF2zgUS2i
+   GQx1rNGLp6NwtY5hj6X4AYoTVwDApgGZAPMlQeESMfmmnwYwBCaYzpOW5
+   UY5Zb0KucQVxAILJG5pa5vgot3yLluuipWyF57pVEU2tfUtXn/KgghsIA
+   2zdmEsrTT5I6QGH9zp4QXprGjBMHNQonKlJOIMYjQAXBvxh7NovPWKmA/
+   JD9zM6amMWcNN1MLze3hSD1IRLX8kaG0kaxf5fEpLqhFsR3bp+bGNZwE6
+   1aLIl8I7Dk7c3G8SrUxR3/JSXt9c3/cLSvFMFOWqjAfbLvoIK8sCMj4fQ
+   Q==;
+X-IronPort-AV: E=McAfee;i="6500,9779,10464"; a="383727626"
+X-IronPort-AV: E=Sophos;i="5.93,302,1654585200"; 
+   d="scan'208";a="383727626"
+Received: from orsmga003.jf.intel.com ([10.7.209.27])
+  by fmsmga105.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 09 Sep 2022 02:06:54 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.93,302,1654585200"; 
+   d="scan'208";a="566302470"
+Received: from orsmsx602.amr.corp.intel.com ([10.22.229.15])
+  by orsmga003.jf.intel.com with ESMTP; 09 Sep 2022 02:06:54 -0700
+Received: from orsmsx611.amr.corp.intel.com (10.22.229.24) by
+ ORSMSX602.amr.corp.intel.com (10.22.229.15) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2375.24; Fri, 9 Sep 2022 16:13:26 +0800
-Received: from huawei.com (10.175.113.32) by dggpemm100009.china.huawei.com
- (7.185.36.113) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2375.24; Fri, 9 Sep
- 2022 16:13:25 +0800
-From:   Liu Shixin <liushixin2@huawei.com>
-To:     Jonathan Corbet <corbet@lwn.net>,
-        Johannes Weiner <hannes@cmpxchg.org>,
-        Michal Hocko <mhocko@kernel.org>,
-        Roman Gushchin <roman.gushchin@linux.dev>,
-        Shakeel Butt <shakeelb@google.com>,
-        Muchun Song <songmuchun@bytedance.com>,
-        Andrew Morton <akpm@linux-foundation.org>
-CC:     <linux-doc@vger.kernel.org>, <linux-kernel@vger.kernel.org>,
-        <cgroups@vger.kernel.org>, <linux-mm@kvack.org>,
-        Liu Shixin <liushixin2@huawei.com>,
-        Kefeng Wang <wangkefeng.wang@huawei.com>
-Subject: [PATCH v2] mm/memcontrol: use kstrtobool for swapaccount param parsing
-Date:   Fri, 9 Sep 2022 16:46:47 +0800
-Message-ID: <20220909084647.3598299-1-liushixin2@huawei.com>
-X-Mailer: git-send-email 2.25.1
+ 15.1.2375.31; Fri, 9 Sep 2022 02:06:53 -0700
+Received: from orsmsx608.amr.corp.intel.com (10.22.229.21) by
+ ORSMSX611.amr.corp.intel.com (10.22.229.24) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2375.31; Fri, 9 Sep 2022 02:06:53 -0700
+Received: from orsedg603.ED.cps.intel.com (10.7.248.4) by
+ orsmsx608.amr.corp.intel.com (10.22.229.21) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2375.31 via Frontend Transport; Fri, 9 Sep 2022 02:06:53 -0700
+Received: from NAM12-BN8-obe.outbound.protection.outlook.com (104.47.55.173)
+ by edgegateway.intel.com (134.134.137.100) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.1.2375.31; Fri, 9 Sep 2022 02:06:52 -0700
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=eJaFZtluWe+dOG+OjaZhC+sGrLfj6Pap212+0Vm3kSv46ezvdy5uCCdrK3/uKeaHrs6SaPztdWjDjauRgParZhxPYs5AcJla+fLeH/BHBs6IWkD5uNLvr629NeqWBXxXb8eUuUTSEMnLyRjZhykVrmdVPaicNgqMBKYG1FxwE7IseWPn1jQBpmZ5Y+9sfEYl8DoPJ6fLeJQ2CRvWWUeXgV3UKbaru91w9tOdM26689Se6vXiQzY7mo8iboiQ5F85Ea7cS6BHrGi3wyVklyL7GYDP30NkiBUCE+txk08L9x+57US2DYuHBjqe/we1jixJnGxUqdEjuen7jNgIwT9iTA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=1Wbk/mn2Tlk9e8vxdPAm3UdiFhnDb/a3i97O0sj6r0o=;
+ b=kyFuZ+b4D34e0XvrpaAIgWWl639caUxiAlpwOntftBAz5NZ5pqJHjlwxMOI5a1vQNGAmxBvrwKPNmxLR8HXMTS+XB0WlRmG8l2aFxBFEf0SZ+Q1SRnqvoThlyCAgeaEAW9gDxzjb5K4nz6TcKrgjc9VKfuhbc3e+kwllvvcKY2e7B12/KdemkcbyQ+d9h8UjZfk4WBNYvBG1BLeS5cX8XlfUSh4+AQy29Rtotkvr3cmaPnQcBzZtrAOlPm7j0eYol5ihuAmejgTe3aAeTNkCu5iGRjzxX1RBfdVTZNa6OK3LTlXNJl9VSpC5bfKci30HmNEDdwdbCx0WDfJNB70IUQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=intel.com; dmarc=pass action=none header.from=intel.com;
+ dkim=pass header.d=intel.com; arc=none
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=intel.com;
+Received: from MN0PR11MB6059.namprd11.prod.outlook.com (2603:10b6:208:377::9)
+ by BL1PR11MB5956.namprd11.prod.outlook.com (2603:10b6:208:387::11) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5612.14; Fri, 9 Sep
+ 2022 09:06:51 +0000
+Received: from MN0PR11MB6059.namprd11.prod.outlook.com
+ ([fe80::7ce8:1e4e:20d4:6bd4]) by MN0PR11MB6059.namprd11.prod.outlook.com
+ ([fe80::7ce8:1e4e:20d4:6bd4%9]) with mapi id 15.20.5588.016; Fri, 9 Sep 2022
+ 09:06:51 +0000
+Date:   Fri, 9 Sep 2022 05:06:46 -0400
+From:   Rodrigo Vivi <rodrigo.vivi@intel.com>
+To:     Mauro Carvalho Chehab <mchehab@kernel.org>
+CC:     Thomas Zimmermann <tzimmermann@suse.de>,
+        Jonathan Corbet <corbet@lwn.net>,
+        David Airlie <airlied@linux.ie>,
+        <dri-devel@lists.freedesktop.org>, <linux-kernel@vger.kernel.org>,
+        <linux-doc@vger.kernel.org>, Maxime Ripard <mripard@kernel.org>,
+        Daniel Vetter <daniel@ffwll.ch>,
+        <intel-gfx@lists.freedesktop.org>
+Subject: Re: [Intel-gfx] [PATCH v3 27/37] docs: gpu: i915.rst: gt: add more
+ kernel-doc markups
+Message-ID: <YxsCJjdN0eJncD1a@intel.com>
+References: <cover.1662708705.git.mchehab@kernel.org>
+ <6d31414391976615b5c1818cafba066132c24e85.1662708705.git.mchehab@kernel.org>
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
+In-Reply-To: <6d31414391976615b5c1818cafba066132c24e85.1662708705.git.mchehab@kernel.org>
+X-ClientProxiedBy: BY5PR03CA0005.namprd03.prod.outlook.com
+ (2603:10b6:a03:1e0::15) To MN0PR11MB6059.namprd11.prod.outlook.com
+ (2603:10b6:208:377::9)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 7BIT
-Content-Type:   text/plain; charset=US-ASCII
-X-Originating-IP: [10.175.113.32]
-X-ClientProxiedBy: dggems706-chm.china.huawei.com (10.3.19.183) To
- dggpemm100009.china.huawei.com (7.185.36.113)
-X-CFilter-Loop: Reflected
-X-Spam-Status: No, score=-4.2 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_MED,
-        SPF_HELO_NONE,SPF_PASS,T_SCC_BODY_TEXT_LINE autolearn=ham
+X-MS-PublicTrafficType: Email
+X-MS-Office365-Filtering-Correlation-Id: bc9ff8c5-e225-4a31-8d8e-08da9242a1de
+X-MS-TrafficTypeDiagnostic: BL1PR11MB5956:EE_
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: Ia6k1N8QTNdJeK83MFf/jll1Tw8DMiHUC2whcUeqo0LI4P5saxA1GCm4k9zpH/eAOGAvkOdBBOuBY7B6zzSgztjlEL8ARG5rXsYuyKtJw+0vwan0Gl4UkE7uTr8alEg2hZnqmgsMx187dpd9xdBrrYdkvsrzG/kj9mekcMO3nByvci/QsQOtYG3ozzQ1oyOaUFfRtYZ2QImn1MQZrM0zNg5VCQ2QDIM5XtabJzZGme2JRWKA+EL28jZnIYGUBbG5KrNmHrNvMJGRPh/A6rJZgrpcUz1bCC3xarkrGoCFwzn+LYJK04mmEzCagKhmir7O3dlq5Xq1sMslR8S2VAGJMVq9TmzETk1iqsU9L0l/Zjf3CTcpTwM59elJPvc7cYaLiA45Qu82f1cr5NS0iXGE5FZzLnDU4E6mKDEy72DjwRCCIas6HKZsyxDS/1OEWrmsUG4j49Dt+MjpGrh/3ZZ+JNCFix+shERuUAyB9nBu6xwPgSMao1KDH/88k/Ji3HegGavWbGygCqCUY3nndn+YBwNGbkWAhditQHKHFk8fYJcI8mP6niQTa+eopilhOsKT3SHc3JVHZTtpPEaeD0ogK6K1A5NwjoCYViZZiVYp3ObOzSGeVjWv6GhcIQcnRF3UUIa9GchMn9+9DN7I2s4SeNX8l6PQBwjOECjdXmuoJ1klhcKBudHgiSYwWvGtQpuLCV/oNUTsanT8sm9o+axGNpUQ110KpaE06/mirpKiu3I=
+X-Forefront-Antispam-Report: CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:MN0PR11MB6059.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230016)(396003)(346002)(136003)(39860400002)(366004)(376002)(26005)(82960400001)(38100700002)(316002)(6916009)(54906003)(4326008)(8676002)(5660300002)(44832011)(8936002)(7416002)(66476007)(2906002)(66946007)(66556008)(2616005)(6486002)(186003)(966005)(41300700001)(83380400001)(6666004)(478600001)(6506007)(86362001)(6512007)(36756003);DIR:OUT;SFP:1102;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?+dlEawvtUSPLsj0Giqp28jv/PLhZAXPo8r8zFj7ZNkAuNlsBT6MJG6kgevbf?=
+ =?us-ascii?Q?7LvzMHXgbn7YJVoUVXjnVlxCCBvOMVnfdZ6B45Ner3L9ryCM9dSFf0PE1FQs?=
+ =?us-ascii?Q?T+ozOaUwZEdbewjWn/haWDY77tXyY+7xFawNBwJIGzTE8UKsv6BrZKMJnwKI?=
+ =?us-ascii?Q?kQnBrsq+NQA6DEw3XlItquDFj7u9IVctVTjfTHJHbIYtyhAjGdnpQP3O7N8M?=
+ =?us-ascii?Q?ynH+30iLGqyoZi4P2r4kgUozIrwHo4jm9tRUkd6aoKiRiPxBPHunXKzJ42EJ?=
+ =?us-ascii?Q?USHUtoGCn0pr67yqmTeUBUoHUxk1E0HcNRKKkQP+cOG69NZsoii0XgfHd323?=
+ =?us-ascii?Q?59HPrH9H4CDO9je+sEGCtGVzwArRAnInZ4kb2+WrYYO7Dp9/jgzkkv/248zF?=
+ =?us-ascii?Q?79de1oj0iNAa/085RIvHiLF+TwJlS8eOV20+yF1dsEhEarUosVrpY+qy+6+E?=
+ =?us-ascii?Q?sqmG9MegCbkpuaHEdGZlu6sXqVcDzlUjOE7Lu611/H0YLeWGMCHWRndFCFA1?=
+ =?us-ascii?Q?RHJLmobiS5XeqX/VRtxwRXCms/2dFAc/ewKKbvwJMSQ2CpkO8byw03Lvt0ds?=
+ =?us-ascii?Q?xMXTgWXGKu14S8IPPTKLGyITcLxAyEGWBChNQguERtLlg6ekyT52qWqjSaQ7?=
+ =?us-ascii?Q?fE8ux3T69ajHt074Y4VCe4XS+NA+LwP4JS3jqEYiSca5L/dZtafWeRgYGHe9?=
+ =?us-ascii?Q?TFAsZGLqI4zr0vjnvp9VoOG6iC7DYinKACw7FWg2M4PoRftoq0d7ougnu7Cs?=
+ =?us-ascii?Q?TbypLvUEl7C4yQkyQalVTEmHO3gNoXDHTQAvU9D0F9+XG3wq+hmmidsmBp+u?=
+ =?us-ascii?Q?dhg0WM2Zt2FHVvdc9/5NxyDt8MsF2EIgveCDQF9sQzDjacWSY5bn0I+8/qQq?=
+ =?us-ascii?Q?j3wfgbrI8gTkvI9kRrPFSeeSDni1vdMW+HubVKRZugkVf3jEsCr65T42cvdR?=
+ =?us-ascii?Q?vTiEYW4N8fwoZDBonjBW8LnblJKlmarDv0Q+LnyusFt4/1bpMAbx2v5qlPy7?=
+ =?us-ascii?Q?7CGeaHaykSD4y/dgF8wJljS8ZzWm0hewz2l7h/joAslYy6w/MGvVC6WXKCZ2?=
+ =?us-ascii?Q?KaAgkT/Y5qM3TXSE7XJL0nQBgYboWN54ls83UUr62lYFhqjStOs5OaMn59ji?=
+ =?us-ascii?Q?62tYsvqiidYH4vHHJ045iatV54sEvyNrMWjqWW+v5+vmUJ9MGSjAX55UIg7N?=
+ =?us-ascii?Q?jpemDKfSBek/9nWFmLOxpKj1P3I2WDEbsLciAlTrHT1FbmQm+tdH1Sf0Gkkk?=
+ =?us-ascii?Q?39FAecVHaCeL/BzfyO/5O61PK33lWz3JgJypyWicvKyRyDK90O/FcKZDmCzD?=
+ =?us-ascii?Q?+z4vXrAq/m18Ga0XDGnBEd9cq8EchJYlq0qf2UySmzhu4YuPr+3cp6n5qSJQ?=
+ =?us-ascii?Q?JANmf2gD7ImR1zj2lE0UIn6Xyz7ECYwK0Jd4n5QxA2KccH2GajPk9/l95xQO?=
+ =?us-ascii?Q?CBIvWVeEvyFpvGhg1JwxU5TKd4D2xrzGPg1wjnTr+d+wuDcojJryvPQKqtvf?=
+ =?us-ascii?Q?PZeHXXM2iIwCjWA6oSKuWzLkoIiVAO/w/R7ksUM6px3ji5qw7fwrlTnXD5nv?=
+ =?us-ascii?Q?rWleeu+Da/Pklbm/OcFvoPIfN7/y2ZrryxW8FU+u9xr4MXXwUqY+zOkrKr97?=
+ =?us-ascii?Q?0g=3D=3D?=
+X-MS-Exchange-CrossTenant-Network-Message-Id: bc9ff8c5-e225-4a31-8d8e-08da9242a1de
+X-MS-Exchange-CrossTenant-AuthSource: MN0PR11MB6059.namprd11.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 09 Sep 2022 09:06:50.9747
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 46c98d88-e344-4ed4-8496-4ed7712e255d
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: LsCXCCP0sVJCVfZgsMrFMTYiRpAWTNsQWdCK/P07KmxIWZfZDjtGaCJqelpMnhT5uOhGOXXDfpwRqcve0h6YmA==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: BL1PR11MB5956
+X-OriginatorOrg: intel.com
+X-Spam-Status: No, score=-4.4 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_MED,
+        SPF_HELO_NONE,SPF_NONE,T_SCC_BODY_TEXT_LINE autolearn=ham
         autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
@@ -57,53 +154,92 @@ Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Use kstrtobool which is more powerful to handle all kinds of parameters
-like 'Yy1Nn0' or [oO][NnFf] for "on" and "off".
+On Fri, Sep 09, 2022 at 09:34:34AM +0200, Mauro Carvalho Chehab wrote:
+> There are several documented GT kAPI that aren't currently part
+> of the docs. Add them, as this allows identifying issues with
+> badly-formatted tags.
+>
 
-Signed-off-by: Liu Shixin <liushixin2@huawei.com>
----
- Documentation/admin-guide/kernel-parameters.txt | 7 ++++---
- mm/memcontrol.c                                 | 8 ++++----
- 2 files changed, 8 insertions(+), 7 deletions(-)
+In i915's commits we usually add a version history here
+to indicate what changed from the previous submission,
+something like
 
-diff --git a/Documentation/admin-guide/kernel-parameters.txt b/Documentation/admin-guide/kernel-parameters.txt
-index 2434c6729f1c..5f8531e39bc9 100644
---- a/Documentation/admin-guide/kernel-parameters.txt
-+++ b/Documentation/admin-guide/kernel-parameters.txt
-@@ -6037,10 +6037,11 @@
- 			Execution Facility on pSeries.
- 
- 	swapaccount=	[KNL]
--			Format: [0|1]
-+			Format: { [oO][Nn]/Y/y/1 | [oO][Ff]/N/n/0 }
- 			Enable accounting of swap in memory resource
--			controller if no parameter or 1 is given or disable
--			it if 0 is given (See Documentation/admin-guide/cgroup-v1/memory.rst)
-+			controller if no parameter or [oO][Nn]/Y/y/1 is given
-+			or disable it if [oO][Ff]/N/n/0 is given
-+			(See Documentation/admin-guide/cgroup-v1/memory.rst)
- 
- 	swiotlb=	[ARM,IA-64,PPC,MIPS,X86]
- 			Format: { <int> [,<int>] | force | noforce }
-diff --git a/mm/memcontrol.c b/mm/memcontrol.c
-index 0a1a8a846870..5511c0c120d9 100644
---- a/mm/memcontrol.c
-+++ b/mm/memcontrol.c
-@@ -7434,10 +7434,10 @@ bool mem_cgroup_swap_full(struct folio *folio)
- 
- static int __init setup_swap_account(char *s)
- {
--	if (!strcmp(s, "1"))
--		cgroup_memory_noswap = false;
--	else if (!strcmp(s, "0"))
--		cgroup_memory_noswap = true;
-+	bool res;
-+
-+	if (!kstrtobool(s, &res))
-+		cgroup_memory_noswap = !res;
- 	return 1;
- }
- __setup("swapaccount=", setup_swap_account);
--- 
-2.25.1
+v2: re-organizing the blocks to group gtt stuff.
 
+that helps reviewers to know if their change requested was
+addressed or not.
+
+but anyways:
+
+Reviewed-by: Rodrigo Vivi <rodrigo.vivi@intel.com>
+
+> Signed-off-by: Mauro Carvalho Chehab <mchehab@kernel.org>
+> ---
+> 
+> To avoid mailbombing on a large number of people, only mailing lists were C/C on the cover.
+> See [PATCH v3 00/37] at: https://lore.kernel.org/all/cover.1662708705.git.mchehab@kernel.org/
+> 
+>  Documentation/gpu/i915.rst | 40 +++++++++++++++++++++++++++++++++++++-
+>  1 file changed, 39 insertions(+), 1 deletion(-)
+> 
+> diff --git a/Documentation/gpu/i915.rst b/Documentation/gpu/i915.rst
+> index 2ad7941a79f2..b668f36fb0a3 100644
+> --- a/Documentation/gpu/i915.rst
+> +++ b/Documentation/gpu/i915.rst
+> @@ -149,7 +149,6 @@ Misc display functions
+>  
+>  .. kernel-doc:: drivers/gpu/drm/i915/display/skl_scaler.c
+>  
+> -
+>  Plane Configuration
+>  -------------------
+>  
+> @@ -308,6 +307,45 @@ Multicast/Replicated (MCR) Registers
+>  .. kernel-doc:: drivers/gpu/drm/i915/gt/intel_gt_mcr.c
+>     :internal:
+>  
+> +GT engine
+> +---------
+> +
+> +.. kernel-doc:: drivers/gpu/drm/i915/gt/intel_engine_types.h
+> +
+> +.. kernel-doc:: drivers/gpu/drm/i915/gt/intel_engine_cs.c
+> +
+> +.. kernel-doc:: drivers/gpu/drm/i915/gt/intel_engine_pm.c
+> +
+> +Graphics Translation Tables
+> +---------------------------
+> +
+> +.. kernel-doc:: drivers/gpu/drm/i915/gt/intel_ggtt.c
+> +
+> +.. kernel-doc:: drivers/gpu/drm/i915/gt/intel_gtt.c
+> +
+> +.. kernel-doc:: drivers/gpu/drm/i915/gt/intel_gtt.h
+> +
+> +Other GT functionality
+> +----------------------
+> +
+> +.. kernel-doc:: drivers/gpu/drm/i915/gt/intel_context.h
+> +
+> +.. kernel-doc:: drivers/gpu/drm/i915/gt/intel_gsc.h
+> +
+> +.. kernel-doc:: drivers/gpu/drm/i915/gt/intel_migrate.c
+> +
+> +.. kernel-doc:: drivers/gpu/drm/i915/gt/intel_mocs.h
+> +
+> +.. kernel-doc:: drivers/gpu/drm/i915/gt/intel_rc6.c
+> +
+> +.. kernel-doc:: drivers/gpu/drm/i915/gt/intel_reset.c
+> +
+> +.. kernel-doc:: drivers/gpu/drm/i915/gt/intel_rps_types.h
+> +
+> +.. kernel-doc:: drivers/gpu/drm/i915/gt/intel_rps.c
+> +
+> +.. kernel-doc:: drivers/gpu/drm/i915/gt/intel_sseu.c
+> +
+>  Memory Management and Command Submission
+>  ========================================
+>  
+> -- 
+> 2.37.3
+> 
