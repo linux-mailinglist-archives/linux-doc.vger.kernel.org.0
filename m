@@ -2,47 +2,47 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 50A215B49D0
-	for <lists+linux-doc@lfdr.de>; Sat, 10 Sep 2022 23:24:20 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id E3ED35B4A4F
+	for <lists+linux-doc@lfdr.de>; Sat, 10 Sep 2022 23:37:18 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S230139AbiIJVYQ (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Sat, 10 Sep 2022 17:24:16 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:44592 "EHLO
+        id S230321AbiIJVhQ (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Sat, 10 Sep 2022 17:37:16 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:48108 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S230443AbiIJVXM (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Sat, 10 Sep 2022 17:23:12 -0400
-Received: from dfw.source.kernel.org (dfw.source.kernel.org [IPv6:2604:1380:4641:c500::1])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id C71C151A00;
-        Sat, 10 Sep 2022 14:19:05 -0700 (PDT)
+        with ESMTP id S230365AbiIJVgv (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Sat, 10 Sep 2022 17:36:51 -0400
+Received: from ams.source.kernel.org (ams.source.kernel.org [IPv6:2604:1380:4601:e00::1])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id A8CBA27167;
+        Sat, 10 Sep 2022 14:31:00 -0700 (PDT)
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
         (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
         (No client certificate requested)
-        by dfw.source.kernel.org (Postfix) with ESMTPS id 3AABF60B4D;
-        Sat, 10 Sep 2022 21:18:52 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id C9AAEC433D6;
-        Sat, 10 Sep 2022 21:18:50 +0000 (UTC)
+        by ams.source.kernel.org (Postfix) with ESMTPS id CE492B80954;
+        Sat, 10 Sep 2022 21:19:17 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 92BE0C433D7;
+        Sat, 10 Sep 2022 21:19:15 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-        s=k20201202; t=1662844731;
+        s=k20201202; t=1662844756;
         bh=de0UWzH2KUXwSSVq/hNoyyVgaNRZRqOmYE7O8y8s+Gs=;
         h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-        b=BfJbLAsKgAZ/7k0qpZW1C6dIkQL2EbBCX36HZhMNdOVMTYzTa0BFms+4IshAbSdra
-         b8OMbKmvB82ysHIlP1t+vlVCMFTvJ0Nxeuv+FxkCihEldMn7iL4/z6uUM/o0Ezb2nS
-         PhPMpQ2KEA9AFpGP5YJUxuxCeIMeT2E/2BYQ93L1BEGoKpNQnX/i3rU+BjlEGvjf/M
-         /moY89RLl/qC4ZT4W8CP/P1Vdy/aULrV8nj3PoOjVR09ukF/8GI2YqWbSdI7uc5d9H
-         KKa6x154vz03Y4M2T9K6ZiWFBwtlAoQ7A1cDFFjPk2t6W1YI/Tgxvtu0au1yWMo7yL
-         zNphPVyjwIEmw==
+        b=lLmBLD4cfhfBHi3kIvfB7ETjSi5oun8eaG5ROaMTftQhF5gTx1jpczueZf+SiCni0
+         ej+OsziGhbG+IqmwOlZTHkKu46o/JoeXPPkj/5t9Jnby6bjG9DUAvAf5lRuZVHFCqJ
+         9CoQGqgwV0VJIqYYMH60DI39NQ+sbxRG/Z/lu41qmSNCl3fZL3xXJ3U0NmctGIqyaW
+         LC7lQDkyrCwh4V0XsoKKdUQ8Nb7gyvQjGCuuLX+YtEX/HnvD7S0ZkDV2lSL9QO5oX+
+         836fjogQ8viucVFYebOP7yKNCOh2+mjtUt5r/Zg8WGfX9+2fmYBUVnfl5v3e/LK15M
+         1yw2MRXm7IYHQ==
 From:   Sasha Levin <sashal@kernel.org>
 To:     linux-kernel@vger.kernel.org, stable@vger.kernel.org
 Cc:     Greg Tulli <greg.iforce@gmail.com>,
         Dmitry Torokhov <dmitry.torokhov@gmail.com>,
         Sasha Levin <sashal@kernel.org>, corbet@lwn.net,
         linux-input@vger.kernel.org, linux-doc@vger.kernel.org
-Subject: [PATCH AUTOSEL 5.10 09/14] Input: iforce - add support for Boeder Force Feedback Wheel
-Date:   Sat, 10 Sep 2022 17:18:27 -0400
-Message-Id: <20220910211832.70579-9-sashal@kernel.org>
+Subject: [PATCH AUTOSEL 5.4 06/10] Input: iforce - add support for Boeder Force Feedback Wheel
+Date:   Sat, 10 Sep 2022 17:18:57 -0400
+Message-Id: <20220910211901.70760-6-sashal@kernel.org>
 X-Mailer: git-send-email 2.35.1
-In-Reply-To: <20220910211832.70579-1-sashal@kernel.org>
-References: <20220910211832.70579-1-sashal@kernel.org>
+In-Reply-To: <20220910211901.70760-1-sashal@kernel.org>
+References: <20220910211901.70760-1-sashal@kernel.org>
 MIME-Version: 1.0
 X-stable: review
 X-Patchwork-Hint: Ignore
