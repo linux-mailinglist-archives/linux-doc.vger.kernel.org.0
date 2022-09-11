@@ -2,117 +2,126 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 0FDFE5B4D1B
-	for <lists+linux-doc@lfdr.de>; Sun, 11 Sep 2022 11:59:43 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 579BC5B4D25
+	for <lists+linux-doc@lfdr.de>; Sun, 11 Sep 2022 12:06:55 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S230001AbiIKJ7k (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Sun, 11 Sep 2022 05:59:40 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:57414 "EHLO
+        id S229976AbiIKKGw (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Sun, 11 Sep 2022 06:06:52 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:39006 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S229977AbiIKJ7i (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Sun, 11 Sep 2022 05:59:38 -0400
-Received: from mail-qt1-x82d.google.com (mail-qt1-x82d.google.com [IPv6:2607:f8b0:4864:20::82d])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 5D50A10D8
-        for <linux-doc@vger.kernel.org>; Sun, 11 Sep 2022 02:59:32 -0700 (PDT)
-Received: by mail-qt1-x82d.google.com with SMTP id s18so1351031qtx.6
-        for <linux-doc@vger.kernel.org>; Sun, 11 Sep 2022 02:59:32 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=soleen.com; s=google;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:to:from:from:to:cc:subject:date;
-        bh=XLM1m2iZcSFN7zEYtkuHYYcYmZjAkeATO8o3pAdAyoQ=;
-        b=dK8IGsH1J6j5irLf37g7ieCD4ck/MOLB0cramE5RrrjgdpHHVF5mw5wd2s75b3a94l
-         2XA1exMylYG3mBaBY4drslL3G2Wr58g/tKZyaR96Rjny+antzG4vSdeJU2jjsZgJbOwh
-         l1rarVtoxM8hJuVE4cMZGXQFYRc3sAcijxxs4gqKwGwmOjAgw2SLhZ4+S7KCauil99p5
-         lwRlQBl5+O38nc8RwZA0hjvs3NWijTbLtlasFVm0u2mY3vvH3iQsqjw6uxhf8vZkmj3U
-         6E5zxQdKtcdl1TOzLfLHVK9qZEpQFtXtJmdpxEwvF3ur9Pyt/REZjxQzTHQFILIPhjA9
-         IK1A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:to:from:x-gm-message-state:from:to:cc
-         :subject:date;
-        bh=XLM1m2iZcSFN7zEYtkuHYYcYmZjAkeATO8o3pAdAyoQ=;
-        b=zNH0lIfbq6HntVdEb502t/ji97Fq94EKum8XlVJBSW3xsGIeDCheX9Ipfys5xJULUP
-         Jolxtvro+GpjwiGmtm28NkGFTf1rp1ngvh6QzlbwshFrePCDKZECkQpeTVGI0GMRwrEg
-         64TtnfzSQ1x+YNe/2kh7q7Zq1rrmleU3rjizIrcO7FvY0YApQMbEGzQyK62/upN3uZfF
-         T2o8MKfk4MvKNRe1Lm8BlZmWUHLSx8dUYeiUWhfBfPOZ6zXSngzR/Zz8ivtWs4G/dkPX
-         IXcwkUWw7FhW/4MJreur4YqPbQEPcDZdILo9TKj7czMbfcOn64pr1Wm6t3fefcy9s1hC
-         b3iA==
-X-Gm-Message-State: ACgBeo2KXTP78iSgQfqSSOO/owPbaCdpkp1WqjnThtn8Jxj5S4SLfLKk
-        b/Pyxz+iAE2dGHvjjtR5xdK2Z/i78n4nr7BZC8jyJw==
-X-Google-Smtp-Source: AA6agR6jAmuFf2yJvMnDJ68B5wtvIomz7XM30r86b++gsxlkrxwEhuDJSX45o24EeDA83ZFIOnD1zQ==
-X-Received: by 2002:a05:622a:6027:b0:343:5691:93de with SMTP id he39-20020a05622a602700b00343569193demr19278780qtb.165.1662890371433;
-        Sun, 11 Sep 2022 02:59:31 -0700 (PDT)
-Received: from soleen.c.googlers.com.com (240.157.150.34.bc.googleusercontent.com. [34.150.157.240])
-        by smtp.gmail.com with ESMTPSA id y29-20020a37f61d000000b006cbd60c14c9sm4625233qkj.35.2022.09.11.02.59.30
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 11 Sep 2022 02:59:30 -0700 (PDT)
-From:   Pasha Tatashin <pasha.tatashin@soleen.com>
-To:     pasha.tatashin@soleen.com, akpm@linux-foundation.org,
-        corbet@lwn.net, linux-mm@kvack.org, linux-doc@vger.kernel.org,
-        linux-kernel@vger.kernel.org, rick.p.edgecombe@intel.com
-Subject: [PATCH 3/3] doc/vm: add information about page_table_check=panic
-Date:   Sun, 11 Sep 2022 09:59:23 +0000
-Message-Id: <20220911095923.3614387-4-pasha.tatashin@soleen.com>
-X-Mailer: git-send-email 2.37.2.789.g6183377224-goog
-In-Reply-To: <20220911095923.3614387-1-pasha.tatashin@soleen.com>
-References: <20220911095923.3614387-1-pasha.tatashin@soleen.com>
+        with ESMTP id S229771AbiIKKGw (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Sun, 11 Sep 2022 06:06:52 -0400
+Received: from mga01.intel.com (mga01.intel.com [192.55.52.88])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 1704013D7D;
+        Sun, 11 Sep 2022 03:06:51 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1662890811; x=1694426811;
+  h=date:from:to:cc:subject:message-id:references:
+   mime-version:in-reply-to;
+  bh=COoydWrhxx4yHmAPhCBCqR8wvWQLCV4m7CypWvSwh8w=;
+  b=d44lBWsFEfjgphwKGO7PfMVrzesBd1LZt5LIJ6qnTCcYcX0ut81SSd+b
+   6CaU5fbEwGLbFjr4GOLKJAxtcCvdVj1zriaNTnaWMaBWSIKVBPtUxArwO
+   EcBXVaO/lroMRTzLFscFkEmuV9NbxG+pXxeaZIBrWGzW41Uh5JaRiqXx5
+   3O3Uhm9OAppnXmDjO4nqBw9zebfVOPFCjgROqfWeZagsPyTTwqg+AxDQQ
+   LoMHNxJTUpOh9XrOMLs10ln82NA12pVTY0w3NfglpbVGCmm1pIp+cqm4r
+   eE4HJOkQFt8Gd7zxGf1XEhgVzv/sNrP3AnMqmmsv47po6qRc1Q74aVGC7
+   Q==;
+X-IronPort-AV: E=McAfee;i="6500,9779,10466"; a="323936195"
+X-IronPort-AV: E=Sophos;i="5.93,307,1654585200"; 
+   d="scan'208";a="323936195"
+Received: from fmsmga008.fm.intel.com ([10.253.24.58])
+  by fmsmga101.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 11 Sep 2022 03:06:50 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.93,307,1654585200"; 
+   d="scan'208";a="677732462"
+Received: from yilunxu-optiplex-7050.sh.intel.com (HELO localhost) ([10.239.159.165])
+  by fmsmga008.fm.intel.com with ESMTP; 11 Sep 2022 03:06:46 -0700
+Date:   Sun, 11 Sep 2022 17:57:15 +0800
+From:   Xu Yilun <yilun.xu@intel.com>
+To:     matthew.gerlach@linux.intel.com
+Cc:     hao.wu@intel.com, russell.h.weight@intel.com,
+        basheer.ahmed.muddebihal@intel.com, trix@redhat.com,
+        mdf@kernel.org, linux-fpga@vger.kernel.org,
+        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
+        tianfei.zhang@intel.com, corbet@lwn.net,
+        gregkh@linuxfoundation.org, linux-serial@vger.kernel.org,
+        jirislaby@kernel.org, geert+renesas@glider.be,
+        andriy.shevchenko@linux.intel.com,
+        niklas.soderlund+renesas@ragnatech.se, phil.edworthy@renesas.com,
+        macro@orcam.me.uk, johan@kernel.org, lukas@wunner.de
+Subject: Re: [PATCH v1 1/5] Documentation: fpga: dfl: Add documentation for
+ DFHv1
+Message-ID: <Yx2w+yl9SFFx0Qtx@yilunxu-OptiPlex-7050>
+References: <20220906190426.3139760-1-matthew.gerlach@linux.intel.com>
+ <20220906190426.3139760-2-matthew.gerlach@linux.intel.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Spam-Status: No, score=-2.1 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_NONE,
-        SPF_HELO_NONE,SPF_PASS,T_SCC_BODY_TEXT_LINE autolearn=ham
-        autolearn_force=no version=3.4.6
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20220906190426.3139760-2-matthew.gerlach@linux.intel.com>
+X-Spam-Status: No, score=-7.1 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_HI,
+        RCVD_IN_MSPIKE_H3,RCVD_IN_MSPIKE_WL,SPF_HELO_NONE,SPF_NONE,
+        T_SCC_BODY_TEXT_LINE autolearn=ham autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-The default behavior of page table check was changed from panicking
-kernel to printing a warning.
+On 2022-09-06 at 12:04:22 -0700, matthew.gerlach@linux.intel.com wrote:
+> From: Matthew Gerlach <matthew.gerlach@linux.intel.com>
+> 
+> Add documentation describing the extentions provided by Version
+> 1 of the Device Feature Header (DFHv1).
+> 
+> Signed-off-by: Matthew Gerlach <matthew.gerlach@linux.intel.com>
+> ---
+>  Documentation/fpga/dfl.rst | 24 ++++++++++++++++++++++++
+>  1 file changed, 24 insertions(+)
+> 
+> diff --git a/Documentation/fpga/dfl.rst b/Documentation/fpga/dfl.rst
+> index 15b670926084..31699b89781e 100644
+> --- a/Documentation/fpga/dfl.rst
+> +++ b/Documentation/fpga/dfl.rst
+> @@ -561,6 +561,30 @@ new DFL feature via UIO direct access, its feature id should be added to the
+>  driver's id_table.
+>  
+>  
+> +Extending the Device Feature Header - DFHv1
+> +===========================================
+> +The current 8 bytes of the Device Feature Header, hereafter referred to as
+> +to DFHv0, provide very little opportunity for the hardware to describe itself
+> +to software. Version 1 of the Device Feature Header (DFHv1) is being introduced
+> +to provide increased flexibility and extensibility to hardware designs using
+> +Device Feature Lists.  The list below describes some of the goals behind the
+> +changes in DFHv1:
+> +
+> +* Provide a standardized mechanism for features to describe
+> +  parameters/capabilities to software.
+> +* Standardize the use of a GUID for all DFHv1 types.
+> +* Decouple the location of the DFH from the register space of the feature itself.
+> +
+> +Modeled after PCI Capabilities, DFHv1 Parameters provide a mechanism to associate
+> +a list of parameter values to a particular feature.
+> +
+> +With DFHv0, not all features types contained a GUID.  DFHv1 makes the GUILD standard
+> +across all types.
+> +
+> +With DFHv0, the register map of a given feature is located immediately following
+> +the DFHv0 in the memory space.  With DFHv1, the location of the feature register
+> +map can be specified as an offset to the DFHv1 or as an absolute address.
 
-Add a note how to still panic the kernel when error is detected.
+Could you make a table or diagram to describe the data structure layout of DFHv1
+extention.
 
-Signed-off-by: Pasha Tatashin <pasha.tatashin@soleen.com>
----
- Documentation/mm/page_table_check.rst | 16 +++++++++-------
- 1 file changed, 9 insertions(+), 7 deletions(-)
+Thanks,
+Yilun
 
-diff --git a/Documentation/mm/page_table_check.rst b/Documentation/mm/page_table_check.rst
-index 1a09472f10a3..9306cd75647c 100644
---- a/Documentation/mm/page_table_check.rst
-+++ b/Documentation/mm/page_table_check.rst
-@@ -16,13 +16,13 @@ Page table check performs extra verifications at the time when new pages become
- accessible from the userspace by getting their page table entries (PTEs PMDs
- etc.) added into the table.
- 
--In case of detected corruption, the kernel is crashed. There is a small
--performance and memory overhead associated with the page table check. Therefore,
--it is disabled by default, but can be optionally enabled on systems where the
--extra hardening outweighs the performance costs. Also, because page table check
--is synchronous, it can help with debugging double map memory corruption issues,
--by crashing kernel at the time wrong mapping occurs instead of later which is
--often the case with memory corruptions bugs.
-+In case of detected corruption, a warning is printed or kernel is crashed. There
-+is a small performance and memory overhead associated with the page table check.
-+Therefore, it is disabled by default, but can be optionally enabled on systems
-+where the extra hardening outweighs the performance costs. Also, because page
-+table check is synchronous, it can help with debugging double map memory
-+corruption issues, by crashing kernel at the time wrong mapping occurs instead
-+of later which is often the case with memory corruptions bugs.
- 
- Double mapping detection logic
- ==============================
-@@ -52,5 +52,7 @@ Build kernel with:
- 
- - Boot with 'page_table_check=on' kernel parameter.
- 
-+- Boot with 'page_table_check=panic' in order to panic when error is detected.
-+
- Optionally, build kernel with PAGE_TABLE_CHECK_ENFORCED in order to have page
- table support without extra kernel parameter.
--- 
-2.37.2.789.g6183377224-goog
-
+> +
+>  Open discussion
+>  ===============
+>  FME driver exports one ioctl (DFL_FPGA_FME_PORT_PR) for partial reconfiguration
+> -- 
+> 2.25.1
+> 
