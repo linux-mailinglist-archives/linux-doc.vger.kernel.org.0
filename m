@@ -2,88 +2,70 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 3B1C95B6EA7
-	for <lists+linux-doc@lfdr.de>; Tue, 13 Sep 2022 15:55:30 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id EEE695B6EC8
+	for <lists+linux-doc@lfdr.de>; Tue, 13 Sep 2022 16:02:39 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S231871AbiIMNz2 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 13 Sep 2022 09:55:28 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:35836 "EHLO
+        id S232380AbiIMOCi (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 13 Sep 2022 10:02:38 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:43740 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S230346AbiIMNz1 (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 13 Sep 2022 09:55:27 -0400
-X-Greylist: delayed 31443 seconds by postgrey-1.37 at lindbergh.monkeyblade.net; Tue, 13 Sep 2022 06:55:24 PDT
-Received: from out162-62-57-64.mail.qq.com (out162-62-57-64.mail.qq.com [162.62.57.64])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id B20743F33A;
-        Tue, 13 Sep 2022 06:55:24 -0700 (PDT)
+        with ESMTP id S232381AbiIMOCh (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 13 Sep 2022 10:02:37 -0400
+Received: from out162-62-57-87.mail.qq.com (out162-62-57-87.mail.qq.com [162.62.57.87])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 4569A52089;
+        Tue, 13 Sep 2022 07:02:34 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foxmail.com;
-        s=s201512; t=1663077320;
-        bh=Du8wN4JKWt53EVdfv30oFoUsZKvKuMkH4lwXQ9KG1r0=;
+        s=s201512; t=1663077751;
+        bh=O1z3l50xIaYRroOo+hnaK6L/EtOU7idyMtJpMw+/BwI=;
         h=From:To:Cc:Subject:Date:In-Reply-To:References;
-        b=g1ZyglXZGPpH/GmkZGEz0SDr3Yhe/2jVIs3fNmZXzXibYWA9IsEaUpqib4+IFiQbF
-         lvKt+xH2iVLFXW/Qhsrc6n295//nSnN22VL62zYaqYlQ198obXj69js9nNKZKTtvSb
-         ASv9OFoXkly5nCDW/v47CM/22/UYX1jmXpvI8WjQ=
+        b=MUu0OO1rfXql6B84I4hTiT5lRNr4t5xfOEY0Ot8sB9wBk24YmRJKnkdCXFMsI/j3F
+         ySFEGUvX3jhu6RmJlC50OOOc0ZeBAz+c62SJ2BpMi7DJecBY096TdHDysSX9/bS2qx
+         BbwgNXSpOrdbl1rUlhOGHSSJVZGFyJmqNUVZMjbQ=
 Received: from localhost.localdomain ([111.199.187.40])
-        by newxmesmtplogicsvrsza5.qq.com (NewEsmtp) with SMTP
-        id DCE86EA6; Tue, 13 Sep 2022 21:55:14 +0800
-X-QQ-mid: xmsmtpt1663077314tn9ukr4ek
-Message-ID: <tencent_43596D97142AB4AFFDA36A8813061442FF08@qq.com>
-X-QQ-XMAILINFO: MYcyYH/A/+tCKcVtE3+KkR3m4ZW8CXQOS+du6L93aNvz9PpBGvhHcn6loEKyiK
-         pnmTjVf1ImvfC7VPnwiNdfRB5E4r2DcH23tza9ccYiI19n3bK2B/5hG00tbftiSVqyokRmBPm/5y
-         etVN3fiqE2A78YELDtObOdbPn5wJ9Q9fylg2gqfGTrVvZ3hsEUwK0KRTjcvp6V54hO1N9ryISwAA
-         sRv5sSL/K6BdDJWVfU1mk60HxKEDlVKYBuX33QxyOy6T8zZG9ceaT/C5omwvzOqAFPMxI5nRRIZ9
-         yg73d85KhfJEiOHWCyZBppFwSXmqLxeO9/cxUti7DE9naebiNokyOoS+C2N6gPLYc78PV4m2apJg
-         XaGb76nZiiEUXY+8Jm3CVIpi7ZhVNDU7mAXrr236d5d9h3mNIlZYGGNx6S00rjmmUUo+nvhi2tnw
-         02403xyhBFLEwv4tf2853ZUvBk57CQu4kUAeDbmGUnNemDmChdHSXelSdjEq0SxXDUOEc3cSa1iG
-         f+z7hjCKbNhoVyLg+OJ0obNRwUOXP16dxZAauyHZfQkASbWlGj/yCk+vrkRom/mgTqU56w3CyCHn
-         O1ND9n0DNbdcXnxFp45MXsj258g9vlm/Zhj30jKD7H9l+Jp+SFwgeGwbIhwS+2jqRviY1sFsu+z7
-         NVUZIv7P0IB7n1yHvidb5ojItSdnGAKgMnPya4AFxpSUfMFhIy4mF6WehL53HKrmbeIp2u6fJwN9
-         MPtY3slp4JxlaZP408XdOQcSNGW/ODbfqTLb5+WKh/CvSlvFnZTxdttef+MJ0YWipG8ObcOv81m9
-         nnfQ6audrRsjDamUJUtKILWqbeJGA4pnC9z5k51f3oK6huWv7stlOuBowphH9o1/pLIclaHVsaGc
-         c+GPxMSnFjm+X4hPqr4FS1L/1yduxNgD5RYP7euAdofjTQiOuoeieQK0Lq1BroqPctKW4mbuvmyM
-         Q3UdKRigF6kPSCyxbh6apGzGySm/yEYizJ3Lx+2mYnZF2krsp7PfCP7ErtVOnGPeBfsHC6fLo=
+        by newxmesmtplogicsvrsza31.qq.com (NewEsmtp) with SMTP
+        id 9B21E83; Tue, 13 Sep 2022 22:02:27 +0800
+X-QQ-mid: xmsmtpt1663077747tlwp82smi
+Message-ID: <tencent_DE0CDA85E4B2F02FD3547C5E0746E3109909@qq.com>
+X-QQ-XMAILINFO: OC704IrkdJt62SQ4r8Yi3WTXGA3h47FQ6UsElMlGE0Rpncl8274I3TBlTvo5Fk
+         ldigeJyfqLpJDUjBKg1+wBwhYihnWwPGW5w5zzM8WCaF1324NV59K1LNbEE0OvQ/79x/DV/ft6qK
+         1WAwkh3RqwV+qPpuIUrtD0qqC1zUUgD/u9V7jm6qcqvFahjt98gnzuUsT62lVolTs3deURvKGe2L
+         NPdR3wALVZPi8GCzTIAiKHqIm1lqyry43hE7wAC4PFKTpWQpCQSKh9bWbFL6AQkWjENjVsSzbsM+
+         ZpzwOzHYQICUVhhdRqualixtlWjDZSMGlodOy3gKgzJRmshECAaTZE+tPk6ydPsaLdPw5+fjPM6P
+         LF4u0XA16vpwiN0p6UemetVDAAZv8RLtdBO+7xOkQup9h4ICij3b6w7eAiq9qeWdF6NpQSoVfN/n
+         uSalOJLomM3zDNvrA7eUKjhgGVHHTWhPgIV6mUNb5Qoy7hTjDtoQq2G0m0w5uR55RPrJGqBOeXDs
+         SZiU5veOSJEa/6m1e4QlazWOoTZw76LEfgsw99rXrEuvmDj9EvCFOJmOdE/XqNIllQ6miK+qtOOi
+         9JY7HWVCZRkZOsdKt/dkVLiLzLCnqToB4VxW9c+ggGcEYwwuR6x8BEAW4IW/AXrjuVYIUt62kOn1
+         38/afvE2i8wRrRp47+wsMyMNthC9/52vYAyQWCKfW08Dlv1iey2ryAvV4fjVLjrBFlhVCntWZLj5
+         2Rx40UvsdiT0n9cziT/oUoO4UZgaG9AqTORir+RGupmKnNEE929Trqk7UsMI1H3uDIlQkEQfMQjr
+         k2FDL7zc0gY6cfTsZ1hDdZKsn3dCtMkXCu0B7Afr2gLY4j445vMLiKYxyTxQvIhgvUsFrbXPjkE+
+         Q89VhQqaJ/D8no7GomiJlL+ef9vyFkwt7LacLUVXJoDnoRTwR8+IbddQIju0tFmG+PFVnJ323qAq
+         3hyDT3klcJzuLOdpUZW/WtWqFgdopECGremmixqRy05kFNbEM6EE9gDnLefIy5
 From:   Rong Tao <rtoax@foxmail.com>
-To:     krzysztof.kozlowski@linaro.org
+To:     bagasdotme@gmail.com
 Cc:     corbet@lwn.net, erik@kryo.se, jkosina@suse.cz,
-        konstantin@linuxfoundation.org, linux-doc@vger.kernel.org,
-        linux-kernel@vger.kernel.org, linux@leemhuis.info, lkp@intel.com,
-        ojeda@kernel.org, rdunlap@infradead.org, rtoax@foxmail.com,
-        tglx@linutronix.de, Rong Tao <rongtao@cestc.cn>
-Subject: lkp report WARNING: Title underline too short.
-Date:   Tue, 13 Sep 2022 21:55:13 +0800
-X-OQ-MSGID: <20220913135513.16735-1-rtoax@foxmail.com>
+        konstantin@linuxfoundation.org, krzysztof.kozlowski@linaro.org,
+        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
+        linux@leemhuis.info, lkp@intel.com, ojeda@kernel.org,
+        rdunlap@infradead.org, rtoax@foxmail.com, tglx@linutronix.de
+Subject: Re: Re: [PATCH] Documentation: process/submitting-patches: misspelling "mesages"
+Date:   Tue, 13 Sep 2022 22:02:26 +0800
+X-OQ-MSGID: <20220913140226.17692-1-rtoax@foxmail.com>
 X-Mailer: git-send-email 2.31.1
-In-Reply-To: <cc102d14-77a8-f97d-60c1-f0918656905f@linaro.org>
-References: <cc102d14-77a8-f97d-60c1-f0918656905f@linaro.org>
+In-Reply-To: <7862b646-9214-3f0c-54d4-6183157f2c2a@gmail.com>
+References: <7862b646-9214-3f0c-54d4-6183157f2c2a@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Spam-Status: No, score=0.8 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+X-Spam-Status: No, score=3.3 required=5.0 tests=BAYES_00,DKIM_SIGNED,
         DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_FROM,
         HELO_DYNAMIC_IPADDR,RCVD_IN_DNSWL_NONE,RCVD_IN_MSPIKE_H2,RDNS_DYNAMIC,
-        SPF_HELO_NONE,SPF_PASS,T_SCC_BODY_TEXT_LINE autolearn=no
+        SORTED_RECIPS,SPF_HELO_NONE,SPF_PASS,T_SCC_BODY_TEXT_LINE autolearn=no
         autolearn_force=no version=3.4.6
+X-Spam-Level: ***
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-From: Rong Tao <rongtao@cestc.cn>
-
-Hi, thanks for your reply!
-
-https://lore.kernel.org/lkml/202209100436.Ud19XNGq-lkp@intel.com/
-
-The doc submitting-patches.rst has a WARNING 'Title underline too short'
-
-before:
-
- Backtraces in commit messages
- ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-after fix the warning:
-
- Backtraces in commit messages
- ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-add a '^' in the end.
-
+Hi, thanks for your reply! This is indeed [PATCH v2],
+not familiar with the use of send-email before.
