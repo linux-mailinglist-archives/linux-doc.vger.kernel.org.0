@@ -2,95 +2,219 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id CF6AD5B6729
-	for <lists+linux-doc@lfdr.de>; Tue, 13 Sep 2022 07:12:30 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id DE14F5B680D
+	for <lists+linux-doc@lfdr.de>; Tue, 13 Sep 2022 08:41:22 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S229804AbiIMFM3 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 13 Sep 2022 01:12:29 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:48814 "EHLO
+        id S230171AbiIMGlV (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 13 Sep 2022 02:41:21 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:35278 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S229611AbiIMFM2 (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 13 Sep 2022 01:12:28 -0400
-Received: from out162-62-57-252.mail.qq.com (out162-62-57-252.mail.qq.com [162.62.57.252])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 282333F308;
-        Mon, 12 Sep 2022 22:12:25 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foxmail.com;
-        s=s201512; t=1663045942;
-        bh=un3wW3Q9eJYQrOv+2NY7IIUwgvKVP+G0a31QQZrKJkU=;
-        h=From:To:Cc:Subject:Date;
-        b=FBiv6sCpNLmHpHXq8xbV6pH90LWp/M/a8boyBw5Y9OoOAGceAYwOZ28sKEbkJNR4U
-         DUw6hFLDRTrQYLui3N2WSDWAGaLDHhvpOyndnGmvD+/Jckae/jocRCbVZUHpOL0pAP
-         zmtdg8Dj+RueqdppgOuPOOFWqi9yAbeYj8oCtG8g=
-Received: from localhost.localdomain ([39.156.73.13])
-        by newxmesmtplogicsvrsza31.qq.com (NewEsmtp) with SMTP
-        id 2CC2C414; Tue, 13 Sep 2022 13:11:12 +0800
-X-QQ-mid: xmsmtpt1663045872t8pn9uxoj
-Message-ID: <tencent_6A928C02229619E8099167DD5CCAA8D8BF0A@qq.com>
-X-QQ-XMAILINFO: NkHKfw09D6j8jAfGuQjgM9SdmnY8NmYi/2THULIh0pWbMJaLKqKXq7iOyeHbXL
-         5WCpD3+z9Z3kyKAEAqXwEjQtTb0tKKJrc884luO0ZGq81WiRxkSW+TVzl86P/NCWhGxi5vQbYYPT
-         EyD9yWQOT2ZRGYlkAtCXhbly+5kWtZucToSv25OE4dWVDH9FKMXmF+6wj+/SUSfsCyPsUo+he0F+
-         0IRM/88Q12N15eFzPNpL5qFoof/pAT2k+gzECMrHd+MC4ZVMM076TQP7fGHBtzHNZz2trszmi7dU
-         lAW2C9p24vaAbijSBG768Ip5oL5mDHk2KbqqXP7riXX8mYmXBWbR9lLeknv/M3DbeOYkEkq1inGN
-         DEAenckYI7A2u9oML3XTNwl3WiWE9dEeT+CFfnn9hG2R4I5gsQhfTi2FZZIXA6xsNI9Jf/W6oLki
-         iSYUDb5F+1rAVAu8B4I4PRhJJyAE8/AHBVgf3rZ4NO1xjftlbOq3GrXjoW1EppVgVRt8Xw01f0XR
-         WtPTcSItJQ2pFxmLQ/GYYsggu0d4SPiEZW5f2gsWdteAzcBZksjSrR6PSQtGphprknHRHiz+S95M
-         cKmWo2+hxG78ow+/gkGV8oW3of8IxI07ZtDS1oQiMcRvUyQOqVzFjPk9M4GPg98pfImTRgg6IBPn
-         N9GqWcLehDP+qyzveiaCk9hdaVZRWST35TtyqVq70xFpf1xA1yWMPlsmgxOBg3nCgqZRYEA+lbXj
-         vhjwKIG2mNEhTX2xi8wW/rCNb3L7kSI4pa1ADFAyEEX47gL8Q9x8l0jp1Ki9JatLXx1nwYZ37h8C
-         dgbpP4Bpv7na5c1ie9gNrd7FnYeAmId8Kd0rrQs5A/zakSUq+mapXbLjrQxtrPCN9LlGKQRTJHzw
-         klo4auqhTggn1gwN+Qp5BGQZeiZW3XUrvVhy15qhP0K5WauWcFb1NBfy4uHd9gE9fazKuI0MDpfQ
-         UOqb/GqFZKLzlmdS0zHAaRQ2txwYeG2DUkizZMq1FERQ9oGvSbIA==
-From:   Rong Tao <rtoax@foxmail.com>
-To:     corbet@lwn.net
-Cc:     Rong Tao <rtoax@foxmail.com>, kernel test robot <lkp@intel.com>,
-        Thomas Gleixner <tglx@linutronix.de>,
-        Konstantin Ryabitsev <konstantin@linuxfoundation.org>,
-        Randy Dunlap <rdunlap@infradead.org>,
-        Thorsten Leemhuis <linux@leemhuis.info>,
-        Krzysztof Kozlowski <krzysztof.kozlowski@linaro.org>,
-        Erik Ekman <erik@kryo.se>, Jiri Kosina <jkosina@suse.cz>,
-        Miguel Ojeda <ojeda@kernel.org>, linux-doc@vger.kernel.org,
-        linux-kernel@vger.kernel.org
-Subject: [PATCH] Documentation: process/submitting-patches: misspelling "mesages"
-Date:   Tue, 13 Sep 2022 13:11:09 +0800
-X-OQ-MSGID: <20220913051110.10737-1-rtoax@foxmail.com>
-X-Mailer: git-send-email 2.31.1
+        with ESMTP id S230374AbiIMGlU (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 13 Sep 2022 02:41:20 -0400
+Received: from mail-oa1-x33.google.com (mail-oa1-x33.google.com [IPv6:2001:4860:4864:20::33])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 8CFC352FDE;
+        Mon, 12 Sep 2022 23:41:18 -0700 (PDT)
+Received: by mail-oa1-x33.google.com with SMTP id 586e51a60fabf-12b542cb1d3so19820731fac.13;
+        Mon, 12 Sep 2022 23:41:18 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date;
+        bh=6OFVncho9CWE/7b6Ak6mA3hXTMv6MBI1r90JjAcxY3U=;
+        b=ZSMbJTrgUXaM3OPACB7qDY21W74tCNW+uTxAPFlof/2gE86A2+jsfVv3HHdo0WwQeE
+         Uv4dHRAdm8sxBcsu4rzvuUCYwR//L0CqK4AtNG6+12d+sr5oVQNQzAgHwsqoi483lXAe
+         HnAS4FRKDlEfCd78fcWOx1w1L9F+RwBFdbREqcZwxtNsH2N1X2T21lpUPhjMbHV6LzXT
+         DQxuCsoKuvly1MHS8DbEtKpNTI2IiAkKExgE4JQOt5hF6ZniAA+iECJJO8lT6AlnJJvG
+         ra+SLUm0hxJSCSdgtaa6mLJBwkp0FCotfMDzMYG67sgFaNs4VaxvX6VsagDqbdBeXdFN
+         Fv1w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+         :subject:date;
+        bh=6OFVncho9CWE/7b6Ak6mA3hXTMv6MBI1r90JjAcxY3U=;
+        b=7BGy/4tcxLwW4Tm9rRotTUjLdhD/CokGSDugOycHehLkVw6vKKOJ+FDAsH0jgtfJSa
+         Snv243xTHd2s9QbWazbZtkzDqf9iST1Cf/1pi4VehNPwIiSMNBF9cg3UIYGbDpxcl1Zb
+         Gah3Ny6C/tJCymKVNhNdYtBFj4JpZmkx466wreRdeMhblHiAnYdiowIyx6PQxC8YWV/U
+         oXNtaIWHgUock/A/sPFOmXmgThgByXg0ZSqMVol66F9Z8IOyHQ1z8ukD+2HTDwDaG5+M
+         +jxrUdRbzZXaPAOVYPgJcOTokwg/C0fsJa3yD0IM5+opOMsiZ0IhAQKf5z3FfdbbRbM3
+         tQLw==
+X-Gm-Message-State: ACgBeo3rSamMsR8gXJu2alfX5pC54m+wcGqa3R+NgKKZ8RJ33sJubIkI
+        rcLYxW4cWXkBNcT/ekYTP6pSir5FdCxqbzmK4UjAFuy+u/0=
+X-Google-Smtp-Source: AA6agR7mvRq+QoTvT/Ynf9AJXfGXosxtGuG7DrU7dxVEwBaLcSV0gVemC53VszT1hP10zmX0R8MwW2OU6ipZCkxVluM=
+X-Received: by 2002:a05:6808:1412:b0:342:ff44:6e5d with SMTP id
+ w18-20020a056808141200b00342ff446e5dmr937736oiv.160.1663051277691; Mon, 12
+ Sep 2022 23:41:17 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Spam-Status: No, score=0.8 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_FROM,
-        HELO_DYNAMIC_IPADDR,RCVD_IN_DNSWL_NONE,RCVD_IN_MSPIKE_H2,RDNS_DYNAMIC,
-        SPF_HELO_NONE,SPF_PASS,T_SCC_BODY_TEXT_LINE autolearn=no
-        autolearn_force=no version=3.4.6
+References: <20220910083835.2219239-1-niklas.soderlund@corigine.com> <7b2159922e989b1a5d5a3662fddb3c5ee2a97761.camel@toradex.com>
+In-Reply-To: <7b2159922e989b1a5d5a3662fddb3c5ee2a97761.camel@toradex.com>
+From:   Dwaipayan Ray <dwaipayanray1@gmail.com>
+Date:   Tue, 13 Sep 2022 12:11:06 +0530
+Message-ID: <CABJPP5CjgkOf9=uv4cqjaiOgN6iiXAy7k_RZkhTXPT_vs+Ke4g@mail.gmail.com>
+Subject: Re: [PATCH v6] checkpatch: warn for non-standard fixes tag style
+To:     Philippe Schenker <philippe.schenker@toradex.com>
+Cc:     "corbet@lwn.net" <corbet@lwn.net>,
+        "sfr@canb.auug.org.au" <sfr@canb.auug.org.au>,
+        "niklas.soderlund@corigine.com" <niklas.soderlund@corigine.com>,
+        "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
+        "linux-doc@vger.kernel.org" <linux-doc@vger.kernel.org>,
+        "joe@perches.com" <joe@perches.com>,
+        "lukas.bulwahn@gmail.com" <lukas.bulwahn@gmail.com>,
+        "apw@canonical.com" <apw@canonical.com>,
+        "louis.peens@corigine.com" <louis.peens@corigine.com>,
+        "simon.horman@corigine.com" <simon.horman@corigine.com>,
+        "oss-drivers@corigine.com" <oss-drivers@corigine.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_ENVFROM_END_DIGIT,
+        FREEMAIL_FROM,RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,SPF_PASS,
+        T_SCC_BODY_TEXT_LINE autolearn=ham autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Fix spelling mistakes, "mesages" should be spelled "messages".
+On Sun, Sep 11, 2022 at 9:08 PM Philippe Schenker
+<philippe.schenker@toradex.com> wrote:
+>
+> On Sat, 2022-09-10 at 10:38 +0200, Niklas S=C3=B6derlund wrote:
+> > Add a warning for fixes tags that does not fall in line with the
+> > standards specified by the community.
+> >
+> > Signed-off-by: Niklas S=C3=B6derlund <niklas.soderlund@corigine.com>
+> > Reviewed-by: Simon Horman <simon.horman@corigine.com>
+> > Reviewed-by: Louis Peens <louis.peens@corigine.com>
+>
+> Reviewed-by: Philippe Schenker <philippe.schenker@toradex.com>
+>
 
-Signed-off-by: Rong Tao <rtoax@foxmail.com>
-Reported-by: kernel test robot <lkp@intel.com>
----
- Documentation/process/submitting-patches.rst | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+For the documentation part,
+Acked-by: Dwaipayan Ray <dwaipayanray1@gmail.com>
 
-diff --git a/Documentation/process/submitting-patches.rst b/Documentation/process/submitting-patches.rst
-index be49d8f2601b..7dc94555417d 100644
---- a/Documentation/process/submitting-patches.rst
-+++ b/Documentation/process/submitting-patches.rst
-@@ -715,8 +715,8 @@ references.
- 
- .. _backtraces:
- 
--Backtraces in commit mesages
--^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-+Backtraces in commit messages
-+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
- 
- Backtraces help document the call chain leading to a problem. However,
- not all backtraces are helpful. For example, early boot call chains are
--- 
-2.31.1
+Thanks.
 
+> > ---
+> > * Changes since v5
+> > - Add support for --fix option for checkpatch.pl.
+> >
+> > * Changes since v4
+> > - Extend test to cover lines with whitespace before the fixes: tag,
+> > e.g.
+> >   match check on /^\s*fixes:?/i.
+> >
+> > * Changes since v3
+> > - Add test that title in tag match title of commit referenced by sha1.
+> >
+> > * Changes since v2
+> > - Change the pattern to match on 'fixes:?' to catch more malformed
+> >   tags.
+> >
+> > * Changes since v1
+> > - Update the documentation wording and add mention one cause of the
+> >   message can be that email program splits the tag over multiple
+> > lines.
+> > ---
+> >  Documentation/dev-tools/checkpatch.rst |  8 +++++
+> >  scripts/checkpatch.pl                  | 43
+> > ++++++++++++++++++++++++++
+> >  2 files changed, 51 insertions(+)
+> >
+> > diff --git a/Documentation/dev-tools/checkpatch.rst
+> > b/Documentation/dev-tools/checkpatch.rst
+> > index b52452bc2963..8c8456a3bd18 100644
+> > --- a/Documentation/dev-tools/checkpatch.rst
+> > +++ b/Documentation/dev-tools/checkpatch.rst
+> > @@ -612,6 +612,14 @@ Commit message
+> >
+> >      See:
+> > https://www.kernel.org/doc/html/latest/process/submitting-patches.html#=
+describe-your-changes
+> >
+> > +  **BAD_FIXES_TAG**
+> > +    The Fixes: tag is malformed or does not fall in line with the
+> > standards
+> > +    specified by the community. This can occur if the tag have been
+> > split into
+> > +    multiple lines (e.g., when pasted in email program with word
+> > wrapping
+> > +    enabled).
+> > +
+> > +    See:
+> > https://www.kernel.org/doc/html/latest/process/submitting-patches.html#=
+describe-your-changes
+> > +
+> >
+> >  Comparison style
+> >  ----------------
+> > diff --git a/scripts/checkpatch.pl b/scripts/checkpatch.pl
+> > index 79e759aac543..77f577535fc3 100755
+> > --- a/scripts/checkpatch.pl
+> > +++ b/scripts/checkpatch.pl
+> > @@ -3140,6 +3140,49 @@ sub process {
+> >                         }
+> >                 }
+> >
+> > +# Check Fixes: styles is correct
+> > +               if (!$in_header_lines && $line =3D~ /^\s*fixes:?/i) {
+> > +                       my $orig_commit =3D "";
+> > +                       my $id =3D "0123456789ab";
+> > +                       my $title =3D "commit title";
+> > +                       my $tag_case =3D 1;
+> > +                       my $tag_space =3D 1;
+> > +                       my $id_length =3D 1;
+> > +                       my $id_case =3D 1;
+> > +                       my $title_has_quotes =3D 0;
+> > +
+> > +                       if ($line =3D~ /(\s*fixes:?)\s+([0-9a-
+> > f]{5,})\s+($balanced_parens)/i) {
+> > +                               my $tag =3D $1;
+> > +                               $orig_commit =3D $2;
+> > +                               $title =3D $3;
+> > +
+> > +                               $tag_case =3D 0 if $tag eq "Fixes:";
+> > +                               $tag_space =3D 0 if ($line =3D~ /^fixes=
+:?
+> > [0-9a-f]{5,} ($balanced_parens)/i);
+> > +
+> > +                               $id_length =3D 0 if ($orig_commit =3D~
+> > /^[0-9a-f]{12}$/i);
+> > +                               $id_case =3D 0 if ($orig_commit !~ /[A-
+> > F]/);
+> > +
+> > +                               # Always strip leading/trailing parens
+> > then double quotes if existing
+> > +                               $title =3D substr($title, 1, -1);
+> > +                               if ($title =3D~ /^".*"$/) {
+> > +                                       $title =3D substr($title, 1, -
+> > 1);
+> > +                                       $title_has_quotes =3D 1;
+> > +                               }
+> > +                       }
+> > +
+> > +                       my ($cid, $ctitle) =3D
+> > git_commit_info($orig_commit, $id,
+> > +                                                            $title);
+> > +
+> > +                       if ($ctitle ne $title || $tag_case ||
+> > $tag_space ||
+> > +                           $id_length || $id_case ||
+> > !$title_has_quotes) {
+> > +                               if (WARN("BAD_FIXES_TAG",
+> > +                                    "Please use correct Fixes: style
+> > 'Fixes: <12 chars of sha1> (\"<title line>\")' - ie: 'Fixes: $cid
+> > (\"$ctitle\")'\n" . $herecurr) &&
+> > +                                   $fix) {
+> > +                                       $fixed[$fixlinenr] =3D "Fixes:
+> > $cid (\"$ctitle\")";
+> > +                               }
+> > +                       }
+> > +               }
+> > +
+> >  # Check email subject for common tools that don't need to be
+> > mentioned
+> >                 if ($in_header_lines &&
+> >                     $line =3D~
+> > /^Subject:.*\b(?:checkpatch|sparse|smatch)\b[^:]/i) {
+>
