@@ -2,174 +2,325 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 76B0B5B9CC8
-	for <lists+linux-doc@lfdr.de>; Thu, 15 Sep 2022 16:18:21 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id E812F5B9D47
+	for <lists+linux-doc@lfdr.de>; Thu, 15 Sep 2022 16:35:11 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S229809AbiIOOSU (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 15 Sep 2022 10:18:20 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:49866 "EHLO
+        id S230259AbiIOOfE (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 15 Sep 2022 10:35:04 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:49320 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S229695AbiIOOST (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Thu, 15 Sep 2022 10:18:19 -0400
-Received: from NAM10-DM6-obe.outbound.protection.outlook.com (mail-dm6nam10on2064.outbound.protection.outlook.com [40.107.93.64])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id C558B5756B;
-        Thu, 15 Sep 2022 07:18:17 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=mhw8l4wzTj5hK0ten3hZ91AMdPqa3N8wuFz+l5+KMUDt9hFJZYFgREX05N8pvwGqx9DUIlP7DmZRtTm6aZSi6HumLTz0aHI74bHFfqoUfseyJmCJ1XO4HsdulmSxz8Yp018u8aqHOYQ/AJwdJCc51xIOYACFobBRt/nUzutBxjDOEDkY2JQrMnGI0NTj1UXZ5zETNmyBvpmqbsTJiO9LaYSYEVG5lvzPLhdOJtCz6l0QIQH+PsvNyncE3Eyli1+uWwWNbEMuqcaNifl4j3hmn4/3vofWiQbX27kpJ+BtvJeFGvV47PlvNGIuYCZbkNKG9jt9MJLxu1zjhuosYgL+9Q==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=/PTtfh2WqJrjUDO/yi+uESM0WQ/Sp0zHf+EoR0D07u8=;
- b=B4u1CpiseNYIHQy92A8nYSTYp9fltX8xHXNjSrpo/dMnpYMLOPhH0rmhPG0YcMw1G6VODToBL+zD+vBblnvZgS3213+1RzQHoEGNR6AZJiCftTqPe6R03UGqFTNM6r5M7ixFXpfW/5Eh/KRb7xDaR4KSF3rpfiLwJxD/FYmZKmmEm/GV+unWYq7yEA2x8wr5xitY04VqJySnXO+c4Mz7USGVJHx4gwDyXc89FjWIDWcj0tTaLrnrFKs/tHOuudb13OmrcnMx+83uq0ZWfv7GYY28VDFjKj3TncORR0wHVxF9sCvcmojjLIQgdI0Q0PHedNFoNGw2/rgM72fj8IWS3A==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=nvidia.com; dmarc=pass action=none header.from=nvidia.com;
- dkim=pass header.d=nvidia.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
- s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=/PTtfh2WqJrjUDO/yi+uESM0WQ/Sp0zHf+EoR0D07u8=;
- b=EQDVk1RR/7gUV4J/XcGnZHOtt8+q8iHmGeFpZtCQsG4EDrnyrBfUVe7CF3mEFKdt6DuUTz6YAGCb/WuC0rE2f/QCiIBxbFjzLaBME2EVxNJ3m0LQT7bsdIPckNNZx/sXk2InMQcLaKECTtp6KDz1ScNz1sMzu0G9Vue6YF2mvrsZlhqzyp2xlWJ5kfdwiuw0s75JEfpAv8rM5MufAa62hw/gN0jAI03mRizJKG/PI+F8YjsayExoiNfo6JtSwYQfnf0MNRIFeUU0EvY3BArmjVRTSBKtfOZ4c+o3953rBkGVsiEpmCL91abIA2ZiUgjinrI7JhEtoADpszqnWbZ3ow==
-Received: from PH0PR12MB5481.namprd12.prod.outlook.com (2603:10b6:510:d4::15)
- by SA1PR12MB6727.namprd12.prod.outlook.com (2603:10b6:806:256::13) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5612.20; Thu, 15 Sep
- 2022 14:18:16 +0000
-Received: from PH0PR12MB5481.namprd12.prod.outlook.com
- ([fe80::1429:e3e9:dc54:ba98]) by PH0PR12MB5481.namprd12.prod.outlook.com
- ([fe80::1429:e3e9:dc54:ba98%9]) with mapi id 15.20.5612.022; Thu, 15 Sep 2022
- 14:18:15 +0000
-From:   Parav Pandit <parav@nvidia.com>
-To:     Arnd Bergmann <arnd@arndb.de>,
-        "stern@rowland.harvard.edu" <stern@rowland.harvard.edu>,
-        "parri.andrea@gmail.com" <parri.andrea@gmail.com>,
-        Will Deacon <will@kernel.org>,
-        Peter Zijlstra <peterz@infradead.org>,
-        "boqun.feng@gmail.com" <boqun.feng@gmail.com>,
-        Nicholas Piggin <npiggin@gmail.com>,
-        "dhowells@redhat.com" <dhowells@redhat.com>,
-        "j.alglave@ucl.ac.uk" <j.alglave@ucl.ac.uk>,
-        "luc.maranget@inria.fr" <luc.maranget@inria.fr>,
-        "Paul E. McKenney" <paulmck@kernel.org>,
-        "akiyks@gmail.com" <akiyks@gmail.com>,
-        Dan Lustig <dlustig@nvidia.com>,
-        "joel@joelfernandes.org" <joel@joelfernandes.org>,
+        with ESMTP id S230143AbiIOOen (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Thu, 15 Sep 2022 10:34:43 -0400
+Received: from mga12.intel.com (mga12.intel.com [192.55.52.136])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id DE30FFD;
+        Thu, 15 Sep 2022 07:34:26 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1663252466; x=1694788466;
+  h=from:to:cc:subject:date:message-id:mime-version:
+   content-transfer-encoding;
+  bh=ki7gTNXhfVnHCe1rkeDjQttXYp0nJgWH1gx/Z4CHDjQ=;
+  b=GXmNn3RT3+We2A/ezm6DRntz7gUpPsOjMwxxdsWK8CKSsCj6vcZRP+dk
+   YyoLIfPt/arxXLsvAsryYYzLB4TQvRz0QPaqvUlaUixtvxiQbleKE7a85
+   pqdpL7SLekpe30vCbI8ksAFWimszHq2i9gQFMkQ4tYsIO3MrDmPfFJwKV
+   vnaeUgvuecPlJHJfQ5qXtBpDiaNQBdrEo/3TVutwTKWG9oKBtDPAEdqnJ
+   eoBF4vVEJrgW+z5CsHtQ3BnemSBNZxTPcAY98EnXekS8Z9pO+fI5MLESZ
+   SPuN9nBXbtvag6A1XuFIsVm0x24pEdU4gTmOvgAjtcUo9cSFMRQ9+Npxd
+   g==;
+X-IronPort-AV: E=McAfee;i="6500,9779,10470"; a="278458275"
+X-IronPort-AV: E=Sophos;i="5.93,318,1654585200"; 
+   d="scan'208";a="278458275"
+Received: from fmsmga005.fm.intel.com ([10.253.24.32])
+  by fmsmga106.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 15 Sep 2022 07:34:02 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.93,318,1654585200"; 
+   d="scan'208";a="945976865"
+Received: from chaop.bj.intel.com ([10.240.193.75])
+  by fmsmga005.fm.intel.com with ESMTP; 15 Sep 2022 07:33:52 -0700
+From:   Chao Peng <chao.p.peng@linux.intel.com>
+To:     kvm@vger.kernel.org, linux-kernel@vger.kernel.org,
+        linux-mm@kvack.org, linux-fsdevel@vger.kernel.org,
+        linux-api@vger.kernel.org, linux-doc@vger.kernel.org,
+        qemu-devel@nongnu.org
+Cc:     Paolo Bonzini <pbonzini@redhat.com>,
         Jonathan Corbet <corbet@lwn.net>,
-        "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
-        Linux-Arch <linux-arch@vger.kernel.org>,
-        "linux-doc@vger.kernel.org" <linux-doc@vger.kernel.org>
-Subject: RE: [PATCH] locking/memory-barriers.txt: Improve documentation for
- writel() usage
-Thread-Topic: [PATCH] locking/memory-barriers.txt: Improve documentation for
- writel() usage
-Thread-Index: AQHYyMA9YvMyHkwA3EyvMDv7VnmV1K3gbnaAgAAIXgA=
-Date:   Thu, 15 Sep 2022 14:18:15 +0000
-Message-ID: <PH0PR12MB5481192DB7B5C6E19683D514DC499@PH0PR12MB5481.namprd12.prod.outlook.com>
-References: <20220915050106.650813-1-parav@nvidia.com>
- <96457b14-e196-4f29-be9a-7fa25ac805d9@www.fastmail.com>
-In-Reply-To: <96457b14-e196-4f29-be9a-7fa25ac805d9@www.fastmail.com>
-Accept-Language: en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-authentication-results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=nvidia.com;
-x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: PH0PR12MB5481:EE_|SA1PR12MB6727:EE_
-x-ms-office365-filtering-correlation-id: 9c33f1e7-4004-4c49-15c8-08da97252194
-x-ms-exchange-senderadcheck: 1
-x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam: BCL:0;
-x-microsoft-antispam-message-info: 0hZA2al4zLAzsbA9oZo+vEWTCrKqd8/UQVDgMPn5fprSzySP/6b019lFY71rKtYxEeZGcXKY1I8Cu7D9or6ST2NMD2eKDsSykxZaj/5q50AwQUxDx6GOxTtmIlDRevzb8NhMBoYTRU5BHzg+/9MieRt9MW8g1UH/3Absn3ktrUraf6rVX0yaQ5aHnNJw13gPj5loqbsjtOGOOu6SX2q5ydG1zW6DtR+2/hz7EVbPxj3j5O/y+r+Sv4GMuqC8bHQMvyMveQfUf/mPEewn5TXneVoFoNFQnslwrdyjafN7qd90VAE5Uw060RXtA7c5pl0O9wsCXrKEinPGbPjIQHO7idEfpK/34/+5BEJ6LwqB0aKpCp+UjwHU0hLYd5RgheJ+MWieOVznivbKHi9bTkdmXjiquEdJAb0JLsZOlQhin6LaLLsGQv4EbycUwWsxAXz1DExtk2STti97ogv/dqimP9tvaX4wmyvQAEmo/DPoDY3PpnKNxetTCZh6zgRFK5j25Zem/3e7dGPjOIuRPdmsAMXDiAv57I9ZT6e9g/2iK0DB+qFs30edpNL/J1yQyCFIVvtuyyMFCZg1dPVVSBzsYmKPurReP0GjWF3M/isHlgunjaZ7aju/7FG3RGvRF4lI8M+8zC+EVtEdgxFQs9uMH9GHe/qrZygt8RrWD+ijC6mdIAG4KQ3Xwk82reOzv+cP0NvK7r6s9+sB8R42ORB/Sz/F00VanrQcHwZbr1wDBL7Gl54n9ygfcIH1iojGs9hPeWnc6SfJvxCAl9EInQKriscRhNF7DSRsXzwixxmFMy4Trj49VyOZmZWyQWDRv4Ufmgp9oX4Jy1a83Ws6wIzojMDDQbIU0brBx4KdYDGwwudUinijv/XongetWYDhhTBBhVCPrH9RQqRnC/9ZW7OQeIn/46yBHgkPOdxafcekV78=
-x-forefront-antispam-report: CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:PH0PR12MB5481.namprd12.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230022)(4636009)(136003)(396003)(376002)(346002)(39860400002)(366004)(451199015)(7416002)(5660300002)(38100700002)(122000001)(966005)(8676002)(921005)(7696005)(66556008)(64756008)(9686003)(71200400001)(8936002)(38070700005)(66946007)(76116006)(52536014)(478600001)(6506007)(316002)(83380400001)(186003)(66476007)(86362001)(55016003)(110136005)(41300700001)(33656002)(2906002)(26005)(66446008);DIR:OUT;SFP:1101;
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0: =?us-ascii?Q?Ibt43f1gkSpaGW/djU/XnB4sQ+Wy4coJU4YIXMGrvtVikEXYB12nZxkgF35Y?=
- =?us-ascii?Q?qalHc2Z+JeUfZzV0PFlB+KHpIZZzbgZJBJJZ/evC7RKPVgVTN4bauLPrOtFj?=
- =?us-ascii?Q?GvCNzBEWhdNzvQh+eikN8XFWniEfRmngOV4M1hQ87wQ5uIHJbnFiM1YpIB0Q?=
- =?us-ascii?Q?GkLeDzRhFBbR7EThS6mI38VD5Asvn5S25salhvsLdxmYZ5fuE+MdjJQOUFur?=
- =?us-ascii?Q?oT+6XoTBevYLt1fiJx5MaSRB3O4jZbw80RBYcm9eSCK6jCmz4/xj33x29ft3?=
- =?us-ascii?Q?Kc0S4Qu98wjeMWgB3d2QlY+Qlz5ozIPLVgpNX1j9w+brH9JSRalcB17P5xoc?=
- =?us-ascii?Q?+eZlbgGdv55X7hP3FIi8WMUtiGg9QTW7d7djYN5yXxoHN2pkPZR8Nl48taCr?=
- =?us-ascii?Q?HJXdcyf6CRyNGxLnuxnDd67kJMI6S0k2L2OC/8iPh/9gLiYLJZUHSyHWlpjO?=
- =?us-ascii?Q?r+RbiIS4YEk0Kv0F3uuiYD7vjBBw5qTZyX/5JJRtoVMoRay8GAMlQSVI9l1o?=
- =?us-ascii?Q?CxH3qSzovbFjhBPhlg4VIDjPzhyu9GgK9HGwRRD46RFz74iy6Q1qavxS2sqY?=
- =?us-ascii?Q?RSkUNvJ2ahbXXjHw6OnHJyFQueCPi52QU61R0zCWuEdwuSiFJPcmn239nTm1?=
- =?us-ascii?Q?A72PR4EeUzU+fyfWeI7molOCXr2QybbQ5njRpiWu2T5+bxMZbjSIvK1LQnxu?=
- =?us-ascii?Q?4YijEz2C0Am7ra7otlhryBc/4EZia7MED9UhuppfnaD5Fga8WCaOzUNx5rgn?=
- =?us-ascii?Q?42d14nry4PYagz58J5om6sKy9gTDpGlZ1s5YjSHDp1LajxxRxeptfb8xup3t?=
- =?us-ascii?Q?7Xa4tD1q6moqlCRvVdBA5zWQjLam0CzgYJKI/QoMGUE9DV4fioih8wFB1gwM?=
- =?us-ascii?Q?PdkxpOMFM11ZHXicLxmO24BCWUkqSMLT1Wlrz6o7ckjuZ66CnIv68rFWgOp2?=
- =?us-ascii?Q?GJ7SINcvXc7B9HeHXCOWcg/cN1woerXiWfcrAyx3Slf5WUTMQmhymkvoFvKZ?=
- =?us-ascii?Q?G3UiNnE4P75wZo0bKLMgfNpZ0KkBzO54LBSkBpEN0RFsRHXPUCAIfaOC+/KD?=
- =?us-ascii?Q?cp5Rj/IhhJuBzyAKtlJMTa05V3DQDWiewV/W6Vak+jFUpEHkpfr7MDNaOksU?=
- =?us-ascii?Q?DrxlekGNXqpj89a1TsNCV+59Xg1VO9BtCzYceWB8x1T4cfjkPd43MX/0MiIZ?=
- =?us-ascii?Q?9UOzlvlYz8Llv8MXYLR58op/l06yrbWZC3NfF2mH/76a8TAaSX3gYHcneFPC?=
- =?us-ascii?Q?atbErGs938i54jwRNT+MmVcCd19wDDgPBLMnyPvVUsziRO4HyOBAn2djTO8R?=
- =?us-ascii?Q?FkKPYGnghhSHwOighLzthxZcSobt9THmphDH3xDIxInJr4KlUeBATNENoh+q?=
- =?us-ascii?Q?hQRj1ubsl9gAUlXRTmanDesJnCLGlxOIXY4ewnlBFUvf2Azy8ns80+4Kc89J?=
- =?us-ascii?Q?VMGbrGJ5i7kipSdU/yLSOyCYDqvDrInuLZ8EfTqs9zj0jr+atMi3sTtoNPnQ?=
- =?us-ascii?Q?XX4ScyM5VTSiWFyZIgvCnZISKDRO/wNdw3O4z+OMRgWyqMVD9uDsJDE9i1z7?=
- =?us-ascii?Q?HBzCFSs0aC5uTHRIGQ4=3D?=
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+        Sean Christopherson <seanjc@google.com>,
+        Vitaly Kuznetsov <vkuznets@redhat.com>,
+        Wanpeng Li <wanpengli@tencent.com>,
+        Jim Mattson <jmattson@google.com>,
+        Joerg Roedel <joro@8bytes.org>,
+        Thomas Gleixner <tglx@linutronix.de>,
+        Ingo Molnar <mingo@redhat.com>, Borislav Petkov <bp@alien8.de>,
+        x86@kernel.org, "H . Peter Anvin" <hpa@zytor.com>,
+        Hugh Dickins <hughd@google.com>,
+        Jeff Layton <jlayton@kernel.org>,
+        "J . Bruce Fields" <bfields@fieldses.org>,
+        Andrew Morton <akpm@linux-foundation.org>,
+        Shuah Khan <shuah@kernel.org>, Mike Rapoport <rppt@kernel.org>,
+        Steven Price <steven.price@arm.com>,
+        "Maciej S . Szmigiero" <mail@maciej.szmigiero.name>,
+        Vlastimil Babka <vbabka@suse.cz>,
+        Vishal Annapurve <vannapurve@google.com>,
+        Yu Zhang <yu.c.zhang@linux.intel.com>,
+        Chao Peng <chao.p.peng@linux.intel.com>,
+        "Kirill A . Shutemov" <kirill.shutemov@linux.intel.com>,
+        luto@kernel.org, jun.nakajima@intel.com, dave.hansen@intel.com,
+        ak@linux.intel.com, david@redhat.com, aarcange@redhat.com,
+        ddutile@redhat.com, dhildenb@redhat.com,
+        Quentin Perret <qperret@google.com>,
+        Michael Roth <michael.roth@amd.com>, mhocko@suse.com,
+        Muchun Song <songmuchun@bytedance.com>, wei.w.wang@intel.com
+Subject: [PATCH v8 0/8] KVM: mm: fd-based approach for supporting KVM
+Date:   Thu, 15 Sep 2022 22:29:05 +0800
+Message-Id: <20220915142913.2213336-1-chao.p.peng@linux.intel.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-X-OriginatorOrg: Nvidia.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: PH0PR12MB5481.namprd12.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 9c33f1e7-4004-4c49-15c8-08da97252194
-X-MS-Exchange-CrossTenant-originalarrivaltime: 15 Sep 2022 14:18:15.8814
- (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: 43083d15-7273-40c1-b7db-39efd9ccc17a
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: YwOJM9lbTeta4dUkQ4dTVTV15pXcbML9ziBgSCxWqnJJWmThGtSNyIP/KuKPFwmBtFe+R1XroKVqFlqpK+bM9w==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SA1PR12MB6727
-X-Spam-Status: No, score=-1.1 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FORGED_SPF_HELO,
-        RCVD_IN_DNSWL_NONE,RCVD_IN_MSPIKE_H2,SPF_HELO_PASS,SPF_NONE
-        autolearn=no autolearn_force=no version=3.4.6
+Content-Transfer-Encoding: 8bit
+X-Spam-Status: No, score=-4.3 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_EF,RCVD_IN_DNSWL_MED,SPF_HELO_PASS,
+        SPF_NONE autolearn=ham autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-> From: Arnd Bergmann <arnd@arndb.de>
-> Sent: Thursday, September 15, 2022 8:38 AM
->=20
-> On Thu, Sep 15, 2022, at 7:01 AM, Parav Pandit wrote:
-> > The cited commit [1] describes that when using writel(), explcit wmb()
-> > is not needed. However, it should have said that dma_wmb() is not
-> > needed.
->=20
-> Are you sure? As I understand it, the dma_wmb() only serializes a set of
-> memory accesses, but does not serialized against an MMIO access, which
-> depending on the CPU architecture may require a different type of barrier=
-.
->=20
-> E.g. on arm, writel() uses __iowmb(), which like wmb() is defined as "dsb=
-(x);
-> arm_heavy_mb();", while dma_wmb() is a "dmb(oshst)".
+This patch series implements KVM guest private memory for confidential
+computing scenarios like Intel TDX[1]. If a TDX host accesses
+TDX-protected guest memory, machine check can happen which can further
+crash the running host system, this is terrible for multi-tenant
+configurations. The host accesses include those from KVM userspace like
+QEMU. This series addresses KVM userspace induced crash by introducing
+new mm and KVM interfaces so KVM userspace can still manage guest memory
+via a fd-based approach, but it can never access the guest memory
+content.
 
-You are right, on arm heavy barrier dsb() is needed, while on arm64, dmb(os=
-hst) is sufficient.
+The patch series touches both core mm and KVM code. I appreciate
+Andrew/Hugh and Paolo/Sean can review and pick these patches. Any other
+reviews are always welcome.
+  - 01: mm change, target for mm tree
+  - 02-08: KVM change, target for KVM tree
 
-So more accurate documentation is to say that=20
-'when using writel() a prior IO barrier is not needed ...'
+Given KVM is the only current user for the mm part, I have chatted with
+Paolo and he is OK to merge the mm change through KVM tree, but
+reviewed-by/acked-by is still expected from the mm people.
 
-How about that?
+The patches have been verified in Intel TDX environment, but Vishal has
+done an excellent work on the selftests[4] which are dedicated for this
+series, making it possible to test this series without innovative
+hardware and fancy steps of building a VM environment. See Test section
+below for more info.
 
-It started with my cleanup efforts to two drivers [1] and [2] that had diff=
-iculty in using writel() on 32-bit system, and it ended up open coding writ=
-el() as wmb() + mlx5_write64().
+Comparing to previous version, this version redesigned mm part code and
+excluded F_SEAL_AUTO_ALLOCATE and man page changes from this series. See
+Changelog section below for more info.
 
-I am cleaning up the repetitive pattern of,=20
-wmb();
-mlx5_write64()
 
-Before I fix drivers, I thought to improve the documentation that I can fol=
-low. :)
+Introduction
+============
+KVM userspace being able to crash the host is horrible. Under current
+KVM architecture, all guest memory is inherently accessible from KVM
+userspace and is exposed to the mentioned crash issue. The goal of this
+series is to provide a solution to align mm and KVM, on a userspace
+inaccessible approach of exposing guest memory. 
 
-[1] https://elixir.bootlin.com/linux/latest/source/drivers/infiniband/hw/ml=
-x5/wr.c#L1042
-[2] https://elixir.bootlin.com/linux/latest/source/drivers/net/ethernet/mel=
-lanox/mlx5/core/en/txrx.h#L226
+Normally, KVM populates secondary page table (e.g. EPT) by using a host
+virtual address (hva) from core mm page table (e.g. x86 userspace page
+table). This requires guest memory being mmaped into KVM userspace, but
+this is also the source where the mentioned crash issue can happen. In
+theory, apart from those 'shared' memory for device emulation etc, guest
+memory doesn't have to be mmaped into KVM userspace.
+
+This series introduces fd-based guest memory which will not be mmaped
+into KVM userspace. KVM populates secondary page table by using a
+fd/offset pair backed by a memory file system. The fd can be created
+from a supported memory filesystem like tmpfs/hugetlbfs and KVM can
+directly interact with them with newly introduced in-kernel interface,
+therefore remove the KVM userspace from the path of accessing/mmaping
+the guest memory. 
+
+Kirill had a patch [2] to address the same issue in a different way. It
+tracks guest encrypted memory at the 'struct page' level and relies on
+HWPOISON to reject the userspace access. The patch has been discussed in
+several online and offline threads and resulted in a design document [3]
+which is also the original proposal for this series. Later this patch
+series evolved as more comments received in community but the major
+concepts in [3] still hold true so recommend reading.
+
+The patch series may also be useful for other usages, for example, pure
+software approach may use it to harden itself against unintentional
+access to guest memory. This series is designed with these usages in
+mind but doesn't have code directly support them and extension might be
+needed.
+
+
+mm change
+=========
+Introduces a new userspace MFD_INACCESSIBLE flag for memfd_create() so
+that the memory fd created with this flag cannot read(), write() or
+mmap() etc via normal MMU operations and the only way to use it is
+passing it to a third kernel module like KVM and relying on it to
+access the fd through the newly added inaccessible_memfd kernel
+interface. The inaccessible_memfd interface bridges the memory file
+subsystems (e.g.tmpfs/hugetlbfs) and their users (KVM in this case) and
+provides bi-directional communication between them. 
+
+
+KVM change
+==========
+Extends the KVM memslot to provide guest private (encrypted) memory from
+a fd. With this extension, a single memslot can maintain both private
+memory through private fd (private_fd/private_offset) and shared
+(unencrypted) memory through userspace mmaped host virtual address
+(userspace_addr). For a particular guest page, the corresponding page in
+KVM memslot can be only either private or shared and only one of the
+shared/private parts of the memslot is visible to guest.
+
+Introduces new KVM_EXIT_MEMORY_FAULT exit to allow userspace to get the
+chance on decision-making for shared <-> private memory conversion. The
+exit can be an implicit conversion in KVM page fault handler or an
+explicit conversion from guest OS.
+
+Extends existing SEV ioctls KVM_MEMORY_ENCRYPT_{UN,}REG_REGION to
+convert a guest page between private <-> shared. The data saved in these
+ioctls tells the truth whether a guest page is private or shared and
+this information will be used in KVM page fault handler to decide
+whether the private or the shared part of the memslot is visible to
+guest.
+
+
+Test
+====
+Ran two kinds of tests:
+  - Selftests [4] from Vishal and VM boot tests in non-TDX environment
+    Code also in below repo: https://github.com/chao-p/linux/tree/privmem-v8
+
+  - Functional tests in TDX capable environment
+    Tested the new functionalities in TDX environment. Code repos:
+    Linux: https://github.com/chao-p/linux/tree/privmem-v8-tdx
+    QEMU: https://github.com/chao-p/qemu/tree/privmem-v8
+
+    An example QEMU command line for TDX test:
+    -object tdx-guest,id=tdx,debug=off,sept-ve-disable=off \
+    -machine confidential-guest-support=tdx \
+    -object memory-backend-memfd-private,id=ram1,size=${mem} \
+    -machine memory-backend=ram1
+
+
+TODO
+====
+  - Page accounting and limiting for encrypted memory
+  - hugetlbfs support
+
+
+Changelog
+=========
+v8:
+  - mm: redesign mm part by introducing a shim layer(inaccessible_memfd)
+    in memfd to avoid touch the memory file systems directly.
+  - mm: exclude F_SEAL_AUTO_ALLOCATE as it is for shared memory and
+    cause confusion in this series, will send out separately.
+  - doc: exclude the man page change, it's not kernel patch and will
+    send out separately.
+  - KVM: adapt to use the new mm inaccessible_memfd interface.
+  - KVM: update lpage_info when setting mem_attr_array to support
+    large page.
+  - KVM: change from xa_store_range to xa_store for mem_attr_array due
+    to xa_store_range overrides all entries which is not intended
+    behavior for us.
+  - KVM: refine the mmu_invalidate_retry_gfn mechanism for private page.
+  - KVM: reorganize KVM_MEMORY_ENCRYPT_{UN,}REG_REGION and private page
+    handling code suggested by Sean.
+v7:
+  - mm: introduce F_SEAL_AUTO_ALLOCATE to avoid double allocation.
+  - KVM: use KVM_MEMORY_ENCRYPT_{UN,}REG_REGION to record
+    private/shared info.
+  - KVM: use similar sync mechanism between zap/page fault paths as
+    mmu_notifier for memfile_notifier based invalidation.
+v6:
+  - mm: introduce MEMFILE_F_* flags into memfile_node to allow checking
+    feature consistence among all memfile_notifier users and get rid of
+    internal flags like SHM_F_INACCESSIBLE.
+  - mm: make pfn_ops callbacks being members of memfile_backing_store
+    and then refer to it directly in memfile_notifier.
+  - mm: remove backing store unregister.
+  - mm: remove RLIMIT_MEMLOCK based memory accounting and limiting.
+  - KVM: reorganize patch sequence for page fault handling and private
+    memory enabling.
+v5:
+  - Add man page for MFD_INACCESSIBLE flag and improve KVM API do for
+    the new memslot extensions.
+  - mm: introduce memfile_{un}register_backing_store to allow memory
+    backing store to register/unregister it from memfile_notifier.
+  - mm: remove F_SEAL_INACCESSIBLE, use in-kernel flag
+    (SHM_F_INACCESSIBLE for shmem) instead. 
+  - mm: add memory accounting and limiting (RLIMIT_MEMLOCK based) for
+    MFD_INACCESSIBLE memory.
+  - KVM: remove the overlap check for mapping the same file+offset into
+    multiple gfns due to perf consideration, warned in document.
+v4:
+  - mm: rename memfd_ops to memfile_notifier and separate it from
+    memfd.c to standalone memfile-notifier.c.
+  - KVM: move pfn_ops to per-memslot scope from per-vm scope and allow
+    registering multiple memslots to the same memory backing store.
+  - KVM: add a 'kvm' reference in memslot so that we can recover kvm in
+    memfile_notifier handlers.
+  - KVM: add 'private_' prefix for the new fields in memslot.
+  - KVM: reshape the 'type' to 'flag' for kvm_memory_exit
+v3:
+  - Remove 'RFC' prefix.
+  - Fix race condition between memfile_notifier handlers and kvm destroy.
+  - mm: introduce MFD_INACCESSIBLE flag for memfd_create() to force
+    setting F_SEAL_INACCESSIBLE when the fd is created.
+  - KVM: add the shared part of the memslot back to make private/shared
+    pages live in one memslot.
+
+Reference
+=========
+[1] Intel TDX:
+https://www.intel.com/content/www/us/en/developer/articles/technical/intel-trust-domain-extensions.html
+[2] Kirill's implementation:
+https://lore.kernel.org/all/20210416154106.23721-1-kirill.shutemov@linux.intel.com/T/ 
+[3] Original design proposal:
+https://lore.kernel.org/all/20210824005248.200037-1-seanjc@google.com/  
+[4] Selftest:
+https://lore.kernel.org/all/20220819174659.2427983-1-vannapurve@google.com/ 
+
+
+Chao Peng (7):
+  KVM: Extend the memslot to support fd-based private memory
+  KVM: Add KVM_EXIT_MEMORY_FAULT exit
+  KVM: Use gfn instead of hva for mmu_notifier_retry
+  KVM: Register/unregister the guest private memory regions
+  KVM: Update lpage info when private/shared memory are mixed
+  KVM: Handle page fault for private memory
+  KVM: Enable and expose KVM_MEM_PRIVATE
+
+Kirill A. Shutemov (1):
+  mm/memfd: Introduce userspace inaccessible memfd
+
+ Documentation/virt/kvm/api.rst  |  78 +++++++--
+ arch/x86/include/asm/kvm_host.h |   9 +
+ arch/x86/kvm/Kconfig            |   1 +
+ arch/x86/kvm/mmu.h              |   2 -
+ arch/x86/kvm/mmu/mmu.c          | 175 +++++++++++++++++++-
+ arch/x86/kvm/mmu/mmu_internal.h |  18 ++
+ arch/x86/kvm/mmu/mmutrace.h     |   1 +
+ arch/x86/kvm/x86.c              |   4 +-
+ include/linux/kvm_host.h        |  86 ++++++++--
+ include/linux/memfd.h           |  24 +++
+ include/uapi/linux/kvm.h        |  37 +++++
+ include/uapi/linux/magic.h      |   1 +
+ include/uapi/linux/memfd.h      |   1 +
+ mm/Makefile                     |   2 +-
+ mm/memfd.c                      |  25 ++-
+ mm/memfd_inaccessible.c         | 219 +++++++++++++++++++++++++
+ virt/kvm/Kconfig                |   3 +
+ virt/kvm/kvm_main.c             | 282 +++++++++++++++++++++++++++++---
+ 18 files changed, 912 insertions(+), 56 deletions(-)
+ create mode 100644 mm/memfd_inaccessible.c
+
+base-commit: 372d07084593dc7a399bf9bee815711b1fb1bcf2
+-- 
+2.25.1
+
