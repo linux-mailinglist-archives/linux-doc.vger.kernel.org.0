@@ -2,329 +2,169 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 60BC45B9D6D
-	for <lists+linux-doc@lfdr.de>; Thu, 15 Sep 2022 16:37:17 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 912325B9D26
+	for <lists+linux-doc@lfdr.de>; Thu, 15 Sep 2022 16:31:59 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S230265AbiIOOhJ (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 15 Sep 2022 10:37:09 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:49438 "EHLO
+        id S229741AbiIOObv (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 15 Sep 2022 10:31:51 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:46898 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S230284AbiIOOgL (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Thu, 15 Sep 2022 10:36:11 -0400
-Received: from mga01.intel.com (mga01.intel.com [192.55.52.88])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 173E18E99E;
-        Thu, 15 Sep 2022 07:35:22 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1663252522; x=1694788522;
-  h=from:to:cc:subject:date:message-id:in-reply-to:
-   references:mime-version:content-transfer-encoding;
-  bh=vo7O6JJ0Mt3TYlCfYDqCaXE1DrArKMV3xwA8EiMd43o=;
-  b=OLX6Axf8QPt+uSHKOshOu9SvVvcsS0lIs6kvvOx+1phxunBhOuT1hcqv
-   7RO6Bvf8KSWsNCqBa0W9nLTGu9udBxT0bKQ2DIPvTtRaZ+obko/ZIcXl1
-   WbH8TBjHN8fmYFmtZf/hyo7o8P9lZdOQGnhKoTowvIyK4+0whn3Noy3C/
-   brhn3Zcu2WxUm0wGKXmVzuuQrapHyqdo8EVA5xcHl4gs4wvkQVb4xw2jT
-   MrAe6HZqPeTOS1oo6o3YcuTA7ueuWN+AXgZ6GJOkgMJ3IenJhRamvL0kp
-   CzN0Se/IeHA3gLvA6X5ALVAnX68AqE+qrcXIO3mCHp/yjEFlK1w8KOBYd
-   w==;
-X-IronPort-AV: E=McAfee;i="6500,9779,10470"; a="324992275"
-X-IronPort-AV: E=Sophos;i="5.93,318,1654585200"; 
-   d="scan'208";a="324992275"
-Received: from fmsmga005.fm.intel.com ([10.253.24.32])
-  by fmsmga101.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 15 Sep 2022 07:35:21 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.93,318,1654585200"; 
-   d="scan'208";a="945977274"
-Received: from chaop.bj.intel.com ([10.240.193.75])
-  by fmsmga005.fm.intel.com with ESMTP; 15 Sep 2022 07:35:11 -0700
-From:   Chao Peng <chao.p.peng@linux.intel.com>
-To:     kvm@vger.kernel.org, linux-kernel@vger.kernel.org,
-        linux-mm@kvack.org, linux-fsdevel@vger.kernel.org,
-        linux-api@vger.kernel.org, linux-doc@vger.kernel.org,
-        qemu-devel@nongnu.org
-Cc:     Paolo Bonzini <pbonzini@redhat.com>,
-        Jonathan Corbet <corbet@lwn.net>,
-        Sean Christopherson <seanjc@google.com>,
-        Vitaly Kuznetsov <vkuznets@redhat.com>,
-        Wanpeng Li <wanpengli@tencent.com>,
-        Jim Mattson <jmattson@google.com>,
-        Joerg Roedel <joro@8bytes.org>,
-        Thomas Gleixner <tglx@linutronix.de>,
-        Ingo Molnar <mingo@redhat.com>, Borislav Petkov <bp@alien8.de>,
-        x86@kernel.org, "H . Peter Anvin" <hpa@zytor.com>,
-        Hugh Dickins <hughd@google.com>,
-        Jeff Layton <jlayton@kernel.org>,
-        "J . Bruce Fields" <bfields@fieldses.org>,
+        with ESMTP id S229695AbiIOObu (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Thu, 15 Sep 2022 10:31:50 -0400
+Received: from na01-obe.outbound.protection.outlook.com (mail-centralusazon11013011.outbound.protection.outlook.com [52.101.64.11])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 306E88E4DD;
+        Thu, 15 Sep 2022 07:31:48 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=OHeyFDBD+AItx7PhTsSNX0O9s8yFr5IWkj28k8PjvC/Kt/FYIXqh5vctYF/ak0wHljtoZEII2RLXHcPHHRWRak/EWjN9f12Sru/qkFYCczF+A8xDJO6EaaVf6ChEDl/9Ll4rXxK0OhTSQtqAklDRYSsi/X2WlNboO29H8gGxs6eEYKKcwO1SE254v3JcJGvUpGyxrHmdt8tEncZopa1hzAqKEQFsxVCuwKFOEPJyIN4DEyHs4Xok3CgkUvfP8vDBq5BktZ6D/p0TalxLfeGLOxeMFqCNg8hRkCyW7YvQvOz3vANY9CL3ZFKaWs4JIld6Rg04AOI7nCHHD3tMpgfYZw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=PU9/jwik2S/Ca1+WTB2qizOF8aMDF1VlWAbarjk4we0=;
+ b=JC+pr+Uzy7/ELQbWpY99or9qfnCPUTRQh7XwpR5tqLhqqcbLwuLAaSKIszzF56K/ONoaF3+t8I6fmzsa9NACt3gWRWDAtMr5rvFvctF+b1Xs6VgKSXzc2/0sNbezN8Edwrlhaq0zDFmAvyDwhjtCbE+O1EfWbKevaQU7nDjksMJCdm8jtijaYxbFttRmIq0xtq4ePo52VQnbJHCwVoesmaFY6swTuWG85tzFYKvvfB5eEPjBuvfBhcoRbFQlE06AHOf12/macKsRe3x5W/zPw3E/fVDwGbDPT+87hWFy3MNSNgT5U3C5GkfevmIzX8Pd8psg4eHfXt0Ksy16EbcPvQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=vmware.com; dmarc=pass action=none header.from=vmware.com;
+ dkim=pass header.d=vmware.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vmware.com;
+ s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=PU9/jwik2S/Ca1+WTB2qizOF8aMDF1VlWAbarjk4we0=;
+ b=2GCtkOnCc7AytbbpZx53V0W+EN0rP6m/PTG5eO0d18eNU0lR7S681UUQRNqiH9cIOyTLprtmvfoJ6nH0PfhAbLEY9RpWNZyWL+MgAmPj3fsFvB2YQK0LGD/goefq4/YHe+4Q/LDavlmRNfa7G+18HpRJb6LfqZMujRcWBXrm4qI=
+Received: from BY3PR05MB8531.namprd05.prod.outlook.com (2603:10b6:a03:3ce::6)
+ by BY5PR05MB6931.namprd05.prod.outlook.com (2603:10b6:a03:1c3::15) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5632.4; Thu, 15 Sep
+ 2022 14:31:45 +0000
+Received: from BY3PR05MB8531.namprd05.prod.outlook.com
+ ([fe80::e46:a7cf:acd:c835]) by BY3PR05MB8531.namprd05.prod.outlook.com
+ ([fe80::e46:a7cf:acd:c835%2]) with mapi id 15.20.5632.012; Thu, 15 Sep 2022
+ 14:31:45 +0000
+From:   Nadav Amit <namit@vmware.com>
+To:     Barry Song <21cnbao@gmail.com>
+CC:     Anshuman Khandual <anshuman.khandual@arm.com>,
+        Yicong Yang <yangyicong@huawei.com>,
         Andrew Morton <akpm@linux-foundation.org>,
-        Shuah Khan <shuah@kernel.org>, Mike Rapoport <rppt@kernel.org>,
-        Steven Price <steven.price@arm.com>,
-        "Maciej S . Szmigiero" <mail@maciej.szmigiero.name>,
-        Vlastimil Babka <vbabka@suse.cz>,
-        Vishal Annapurve <vannapurve@google.com>,
-        Yu Zhang <yu.c.zhang@linux.intel.com>,
-        Chao Peng <chao.p.peng@linux.intel.com>,
-        "Kirill A . Shutemov" <kirill.shutemov@linux.intel.com>,
-        luto@kernel.org, jun.nakajima@intel.com, dave.hansen@intel.com,
-        ak@linux.intel.com, david@redhat.com, aarcange@redhat.com,
-        ddutile@redhat.com, dhildenb@redhat.com,
-        Quentin Perret <qperret@google.com>,
-        Michael Roth <michael.roth@amd.com>, mhocko@suse.com,
-        Muchun Song <songmuchun@bytedance.com>, wei.w.wang@intel.com
-Subject: [PATCH v8 8/8] KVM: Enable and expose KVM_MEM_PRIVATE
-Date:   Thu, 15 Sep 2022 22:29:13 +0800
-Message-Id: <20220915142913.2213336-9-chao.p.peng@linux.intel.com>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20220915142913.2213336-1-chao.p.peng@linux.intel.com>
-References: <20220915142913.2213336-1-chao.p.peng@linux.intel.com>
+        Linux MM <linux-mm@kvack.org>,
+        "linux-arm-kernel@lists.infradead.org" 
+        <linux-arm-kernel@lists.infradead.org>,
+        "x86@kernel.org" <x86@kernel.org>,
+        "catalin.marinas@arm.com" <catalin.marinas@arm.com>,
+        Will Deacon <will@kernel.org>,
+        "linux-doc@vger.kernel.org" <linux-doc@vger.kernel.org>,
+        "corbet@lwn.net" <corbet@lwn.net>,
+        "peterz@infradead.org" <peterz@infradead.org>,
+        "arnd@arndb.de" <arnd@arndb.de>,
+        "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
+        "darren@os.amperecomputing.com" <darren@os.amperecomputing.com>,
+        "yangyicong@hisilicon.com" <yangyicong@hisilicon.com>,
+        "huzhanyuan@oppo.com" <huzhanyuan@oppo.com>,
+        "lipeifeng@oppo.com" <lipeifeng@oppo.com>,
+        "zhangshiming@oppo.com" <zhangshiming@oppo.com>,
+        "guojian@oppo.com" <guojian@oppo.com>,
+        "realmz6@gmail.com" <realmz6@gmail.com>,
+        "linux-mips@vger.kernel.org" <linux-mips@vger.kernel.org>,
+        "openrisc@lists.librecores.org" <openrisc@lists.librecores.org>,
+        "linuxppc-dev@lists.ozlabs.org" <linuxppc-dev@lists.ozlabs.org>,
+        "linux-riscv@lists.infradead.org" <linux-riscv@lists.infradead.org>,
+        "linux-s390@vger.kernel.org" <linux-s390@vger.kernel.org>,
+        "wangkefeng.wang@huawei.com" <wangkefeng.wang@huawei.com>,
+        "xhao@linux.alibaba.com" <xhao@linux.alibaba.com>,
+        "prime.zeng@hisilicon.com" <prime.zeng@hisilicon.com>,
+        Barry Song <v-songbaohua@oppo.com>,
+        Mel Gorman <mgorman@suse.de>
+Subject: Re: [PATCH v3 4/4] arm64: support batched/deferred tlb shootdown
+ during page reclamation
+Thread-Topic: [PATCH v3 4/4] arm64: support batched/deferred tlb shootdown
+ during page reclamation
+Thread-Index: AQHYtgB7WHPVSXtcQ0CQkErpE23BFq3WrNAAgAADEgCACXcNAIAACaCAgACDMQA=
+Date:   Thu, 15 Sep 2022 14:31:45 +0000
+Message-ID: <2AB9EC05-16B4-46F8-B716-53941C1C9A50@vmware.com>
+References: <20220822082120.8347-1-yangyicong@huawei.com>
+ <20220822082120.8347-5-yangyicong@huawei.com>
+ <1e8642d5-0e2d-5747-d0d2-5aa0817ea4af@arm.com>
+ <CAGsJ_4xD4m-szM1Cm4N5ZRCODGC0fbW+BLBhy8g6+eK=aHPQNw@mail.gmail.com>
+ <1125554b-c183-23c4-5516-95b918a761cc@arm.com>
+ <CAGsJ_4zkRv7RYCB2SC0uydMSQWfwXs3-nkjxMoR7wgn2nt43gA@mail.gmail.com>
+In-Reply-To: <CAGsJ_4zkRv7RYCB2SC0uydMSQWfwXs3-nkjxMoR7wgn2nt43gA@mail.gmail.com>
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-mailer: Apple Mail (2.3696.120.41.1.1)
+authentication-results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=vmware.com;
+x-ms-publictraffictype: Email
+x-ms-traffictypediagnostic: BY3PR05MB8531:EE_|BY5PR05MB6931:EE_
+x-ms-office365-filtering-correlation-id: 2fd87c49-7d2f-4c91-f73c-08da97270419
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
+x-microsoft-antispam: BCL:0;
+x-microsoft-antispam-message-info: p/l/a3ULHbnWmI8p16l5x7McwxcbPykOMk7prk6v6JcpaK6U6zTgijBlq6f0oHQlN7mdizkKVDaZvPHry/xJwCmp5CkwMKbB6ius44BxgXY45+MG9mhMcnWhRKcFT6adS7tUshiwvR2KPHur6mkZFP0n72ribLma8c6qF4s4dX4mSlkVG+Fe4Ado/AqPiViCiRWRxjtTag2pkqPOZQUj0i3eqncbyB0wTucXwtDqava6oUuuQL4YxI16Pzz1OBABPK6ViF7An5HRFM4Xgn/g65AvGd3G6lXf1aOPQKLc7B0F+wP6X1mJNZX26mkllo+Qa2ogM9UScGvERBrc4JiWNgq3+UFcQZdFiKra9FXsH6EVDS12Rcr1QANGpRmHoqAFWp/WPuHFMKMqJx1+qbqSaAVTp+adwiiHfwvmCYLliQDOhqcof8fuyOedUqxn/ruytw/syPL7OmdTwdo5Un99EcaKKB6zLPoi9rmjZzC50lN+sG/Tzcuo9qT0iXg/f1P9/6AYDPMpCMvp3OKfbm9GKTFvElOYSaM9FO0EA8Z4W89IRANO48u/Uw0nqOUjTdlTEx+EggVCQjEhyg6OQpqlJJatWBvLO5dLN75KknRoGUP9XPKr6VHPPj5WWks1ABYl3g9qza10OS8bLoKFbFcm2slYZU34q/dKEQzpIDgXlJtG/o2yUARD6121/o0m0s16281UlOf+k+5mdVFGzHsSksEqtmqb8ynmcvwiWbIXZmOBDTL4e4Y0QD4SCiMPe/J7z3o4b0Vcqwr6OHAogRHebVFIVGRs/37PRjLJGSGUzCiYEG0QU9NVIqD14MPwlRZjjQhYJqDBA5Vu2ooBjoad8VIpPwyF7j5J+hHTn4JX33U=
+x-forefront-antispam-report: CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BY3PR05MB8531.namprd05.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230022)(4636009)(366004)(136003)(376002)(39860400002)(396003)(346002)(451199015)(38100700002)(66446008)(53546011)(26005)(66556008)(41300700001)(2616005)(7416002)(186003)(8676002)(122000001)(54906003)(6916009)(316002)(6506007)(4744005)(6486002)(64756008)(2906002)(66476007)(76116006)(4326008)(8936002)(478600001)(5660300002)(66946007)(7406005)(86362001)(6512007)(33656002)(71200400001)(38070700005)(36756003)(45980500001);DIR:OUT;SFP:1101;
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0: =?us-ascii?Q?d8Pv7Cy3K+TOApWdCapKdbFvTEWoMZymv8TKkx7s5RofwTab/ZyPN+qsPvbW?=
+ =?us-ascii?Q?mifE0bd5OiG7/Bk3aMOasgq2djUQmFMQejZLguAQVk2o4pRTPFAz2sEH/0cB?=
+ =?us-ascii?Q?1vl7BgiQDSOgCgzCh2eFj5uiJhdWU2i4IVYJWE7zY6EqO3kh5xu2cZdSFukD?=
+ =?us-ascii?Q?UUhPtMBP5CDoNVJgOrhKkGUOCl5QU/OLvXfHJAQaeJ58DVHN79fCpqZVlw9z?=
+ =?us-ascii?Q?qS46Col+GUCPFfCMJm+bJKqmGYXq1l4xvUOm711jHMcTs49DMk8/hJgXfLXm?=
+ =?us-ascii?Q?5Xwod9AsI47BZhaXtwZcsQHBiE6rLJfSqGufKD9boWiGtJJOAdiFmSbJBHyR?=
+ =?us-ascii?Q?VVMVvH1eQg9RQiIjQTSj8Jqc5DdQ2FF3iNo+V9TOBZY6YzRcBTdhKxVAFU0k?=
+ =?us-ascii?Q?yT0BWO4wmJTPCWxkalDkJFE6TNj87iqRRNFDxCQ+7K9cleZusu4IPRt/UGI8?=
+ =?us-ascii?Q?VGejVAHg4GvrqV3R+y7CQS4+IADCMT4iVENz/rHG1CEBZp2FLxFZt8+LlsCt?=
+ =?us-ascii?Q?4wZyW03ioYjzQ7q+OSMxROrBcAQRylljUEvD+p8X5XOiusyeiRuykOn7Ho1y?=
+ =?us-ascii?Q?Xh3UfGbhQMTzSIbRImpnFTGV2YIkyJPWuAZzCGtyy932Mj6vnc3530sAZa1J?=
+ =?us-ascii?Q?X7zdqsH/qbMXz6GLcE/FDMLEPWqnfkbHo6e6Oqk2f7LhjK10Y5U+WS8im+PK?=
+ =?us-ascii?Q?qceBFhEnnuyCuIX74uivOn//RZ+PNooCJknceL0kzXOJy8u4Yq5ZPXhxjJtb?=
+ =?us-ascii?Q?ryjaLO4sPnyzMwg9jxVvcyrkGdf7KJxbeqEdze1koupIOfp0s+KZV6NBaTmK?=
+ =?us-ascii?Q?EcxO9CijBzpI59ymKQIwGO7KWUZ+EExYkQZOLWOHI9N9q7s49MTt2pKQ2BKA?=
+ =?us-ascii?Q?o5F11pmnpFQskPGSJH0eT5Nmk0grwC+WeR4da28JyyUjzo8su2IkS73tUpBu?=
+ =?us-ascii?Q?2cE3bArUC4lLs005xDd0yLsTaNeMQ3m6CXP4I4dA2fRBoWxAyGk4kQITmNE7?=
+ =?us-ascii?Q?MtZIUR8IKQJt2oFFjplg1dV9K0my+sAosB851BcGtOLO2AQZwzTGpUISaN2O?=
+ =?us-ascii?Q?WdlrJaZolHZxFbzGUyZuDQRWuIzkLR05WoFHmfW/DwoosVrbIjzWLrHWZvrb?=
+ =?us-ascii?Q?rlKbPSy5tNTb6supuoGLED6eWWVox8Jc86qVqpyEZyGqK5QbxgOxI41BPgCA?=
+ =?us-ascii?Q?dPsf6F28gumgJaqWn5+Bc/rRvrRc0KMhAuO8UBocKPp+UfrHcoJUpnEZO0im?=
+ =?us-ascii?Q?av4a6Qw8caN+SHtJPc0yqzCbrkD9jlxQDrR75Qp77N6N/poL6sQtnyem58l1?=
+ =?us-ascii?Q?s3pxGtlvzAaajxxA8PmPmKoSopf+yDjNIL6dB+jGvdq3gCGQk3U/HfHZeHVh?=
+ =?us-ascii?Q?0dihMDbRqHZoGdOZmlc6A4266tTiJQRPBQ/Eda9m1p+ICVfrETipkBhg9dON?=
+ =?us-ascii?Q?Uay+go5mAl8aQW9nmxo6ahbraHZ6t+8AyCEupOPqB7pKuZFxZ1CnckKAUAeu?=
+ =?us-ascii?Q?bmX+m8YkjZvqeP4R0/Vc+grXrzs6gKwrWTYD+j1u1SLu32pZfyOiRE+pX6cY?=
+ =?us-ascii?Q?07ZXzBjydMmplwjTgUcYcvvg4IzYMy4ZE2grc2lP?=
+Content-Type: text/plain; charset="us-ascii"
+Content-ID: <011A480CEE0FA44B9996ADE03C86ECEA@namprd05.prod.outlook.com>
+Content-Transfer-Encoding: quoted-printable
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Spam-Status: No, score=-7.0 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_EF,RCVD_IN_DNSWL_HI,
-        RCVD_IN_MSPIKE_H3,RCVD_IN_MSPIKE_WL,SPF_HELO_NONE,SPF_NONE
-        autolearn=ham autolearn_force=no version=3.4.6
+X-OriginatorOrg: vmware.com
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: BY5PR05MB6931
+X-Spam-Status: No, score=-1.1 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FORGED_SPF_HELO,
+        RCVD_IN_DNSWL_NONE,RCVD_IN_MSPIKE_H2,SPF_HELO_PASS,SPF_NONE
+        autolearn=no autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Expose KVM_MEM_PRIVATE and memslot fields private_fd/offset to
-userspace. KVM will register/unregister private memslot to fd-based
-memory backing store and response to invalidation event from
-inaccessible_notifier to zap the existing memory mappings in the
-secondary page table.
 
-Whether KVM_MEM_PRIVATE is actually exposed to userspace is determined
-by architecture code which can turn on it by overriding the default
-kvm_arch_has_private_mem().
 
-A 'kvm' reference is added in memslot structure since in
-inaccessible_notifier callback we can only obtain a memslot reference
-but 'kvm' is needed to do the zapping.
+> On Sep 14, 2022, at 11:42 PM, Barry Song <21cnbao@gmail.com> wrote:
+>=20
+>>=20
+>> The very idea behind TLB deferral is the opportunity it (might) provide
+>> to accumulate address ranges and cpu masks so that individual TLB flush
+>> can be replaced with a more cost effective range based TLB flush. Hence
+>> I guess unless address range or cpumask based cost effective TLB flush
+>> is available, deferral does not improve the unmap performance as much.
+>=20
+>=20
+> After sending tlbi, if we wait for the completion of tlbi, we have to get=
+ Ack
+> from all cpus in the system, tlbi is not scalable. The point here is that=
+ we
+> avoid waiting for each individual TLBi. Alternatively, they are batched. =
+If
+> you read the benchmark in the commit log, you can find the great decline
+> in the cost to swap out a page.
 
-Co-developed-by: Yu Zhang <yu.c.zhang@linux.intel.com>
-Signed-off-by: Yu Zhang <yu.c.zhang@linux.intel.com>
-Signed-off-by: Chao Peng <chao.p.peng@linux.intel.com>
----
- include/linux/kvm_host.h |   1 +
- virt/kvm/kvm_main.c      | 116 +++++++++++++++++++++++++++++++++++++--
- 2 files changed, 111 insertions(+), 6 deletions(-)
-
-diff --git a/include/linux/kvm_host.h b/include/linux/kvm_host.h
-index b9906cdf468b..cb4eefac709c 100644
---- a/include/linux/kvm_host.h
-+++ b/include/linux/kvm_host.h
-@@ -589,6 +589,7 @@ struct kvm_memory_slot {
- 	struct file *private_file;
- 	loff_t private_offset;
- 	struct inaccessible_notifier notifier;
-+	struct kvm *kvm;
- };
- 
- static inline bool kvm_slot_can_be_private(const struct kvm_memory_slot *slot)
-diff --git a/virt/kvm/kvm_main.c b/virt/kvm/kvm_main.c
-index 97d893f7482c..87e239d35b96 100644
---- a/virt/kvm/kvm_main.c
-+++ b/virt/kvm/kvm_main.c
-@@ -983,6 +983,57 @@ static int kvm_vm_ioctl_set_mem_attr(struct kvm *kvm, gpa_t gpa, gpa_t size,
- 		xa_erase(&kvm->mem_attr_array, index);
- 	return r;
- }
-+
-+static void kvm_private_notifier_invalidate(struct inaccessible_notifier *notifier,
-+					    pgoff_t start, pgoff_t end)
-+{
-+	struct kvm_memory_slot *slot = container_of(notifier,
-+						    struct kvm_memory_slot,
-+						    notifier);
-+	unsigned long base_pgoff = slot->private_offset >> PAGE_SHIFT;
-+	gfn_t start_gfn = slot->base_gfn;
-+	gfn_t end_gfn = slot->base_gfn + slot->npages;
-+
-+
-+	if (start > base_pgoff)
-+		start_gfn = slot->base_gfn + start - base_pgoff;
-+
-+	if (end < base_pgoff + slot->npages)
-+		end_gfn = slot->base_gfn + end - base_pgoff;
-+
-+	if (start_gfn >= end_gfn)
-+		return;
-+
-+	kvm_zap_gfn_range(slot->kvm, start_gfn, end_gfn);
-+}
-+
-+static struct inaccessible_notifier_ops kvm_private_notifier_ops = {
-+	.invalidate = kvm_private_notifier_invalidate,
-+};
-+
-+static inline void kvm_private_mem_register(struct kvm_memory_slot *slot)
-+{
-+	slot->notifier.ops = &kvm_private_notifier_ops;
-+	inaccessible_register_notifier(slot->private_file, &slot->notifier);
-+}
-+
-+static inline void kvm_private_mem_unregister(struct kvm_memory_slot *slot)
-+{
-+	inaccessible_unregister_notifier(slot->private_file, &slot->notifier);
-+}
-+
-+#else /* !CONFIG_HAVE_KVM_PRIVATE_MEM */
-+
-+static inline void kvm_private_mem_register(struct kvm_memory_slot *slot)
-+{
-+	WARN_ON_ONCE(1);
-+}
-+
-+static inline void kvm_private_mem_unregister(struct kvm_memory_slot *slot)
-+{
-+	WARN_ON_ONCE(1);
-+}
-+
- #endif /* CONFIG_HAVE_KVM_PRIVATE_MEM */
- 
- #ifdef CONFIG_HAVE_KVM_PM_NOTIFIER
-@@ -1029,6 +1080,11 @@ static void kvm_destroy_dirty_bitmap(struct kvm_memory_slot *memslot)
- /* This does not remove the slot from struct kvm_memslots data structures */
- static void kvm_free_memslot(struct kvm *kvm, struct kvm_memory_slot *slot)
- {
-+	if (slot->flags & KVM_MEM_PRIVATE) {
-+		kvm_private_mem_unregister(slot);
-+		fput(slot->private_file);
-+	}
-+
- 	kvm_destroy_dirty_bitmap(slot);
- 
- 	kvm_arch_free_memslot(kvm, slot);
-@@ -1600,10 +1656,16 @@ bool __weak kvm_arch_has_private_mem(struct kvm *kvm)
- 	return false;
- }
- 
--static int check_memory_region_flags(const struct kvm_user_mem_region *mem)
-+static int check_memory_region_flags(struct kvm *kvm,
-+				     const struct kvm_user_mem_region *mem)
- {
- 	u32 valid_flags = KVM_MEM_LOG_DIRTY_PAGES;
- 
-+#ifdef CONFIG_HAVE_KVM_PRIVATE_MEM
-+	if (kvm_arch_has_private_mem(kvm))
-+		valid_flags |= KVM_MEM_PRIVATE;
-+#endif
-+
- #ifdef __KVM_HAVE_READONLY_MEM
- 	valid_flags |= KVM_MEM_READONLY;
- #endif
-@@ -1679,6 +1741,9 @@ static int kvm_prepare_memory_region(struct kvm *kvm,
- {
- 	int r;
- 
-+	if (change == KVM_MR_CREATE && new->flags & KVM_MEM_PRIVATE)
-+		kvm_private_mem_register(new);
-+
- 	/*
- 	 * If dirty logging is disabled, nullify the bitmap; the old bitmap
- 	 * will be freed on "commit".  If logging is enabled in both old and
-@@ -1707,6 +1772,9 @@ static int kvm_prepare_memory_region(struct kvm *kvm,
- 	if (r && new && new->dirty_bitmap && (!old || !old->dirty_bitmap))
- 		kvm_destroy_dirty_bitmap(new);
- 
-+	if (r && change == KVM_MR_CREATE && new->flags & KVM_MEM_PRIVATE)
-+		kvm_private_mem_unregister(new);
-+
- 	return r;
- }
- 
-@@ -2004,7 +2072,7 @@ int __kvm_set_memory_region(struct kvm *kvm,
- 	int as_id, id;
- 	int r;
- 
--	r = check_memory_region_flags(mem);
-+	r = check_memory_region_flags(kvm, mem);
- 	if (r)
- 		return r;
- 
-@@ -2023,6 +2091,10 @@ int __kvm_set_memory_region(struct kvm *kvm,
- 	     !access_ok((void __user *)(unsigned long)mem->userspace_addr,
- 			mem->memory_size))
- 		return -EINVAL;
-+	if (mem->flags & KVM_MEM_PRIVATE &&
-+		(mem->private_offset & (PAGE_SIZE - 1) ||
-+		 mem->private_offset > U64_MAX - mem->memory_size))
-+		return -EINVAL;
- 	if (as_id >= KVM_ADDRESS_SPACE_NUM || id >= KVM_MEM_SLOTS_NUM)
- 		return -EINVAL;
- 	if (mem->guest_phys_addr + mem->memory_size < mem->guest_phys_addr)
-@@ -2061,6 +2133,9 @@ int __kvm_set_memory_region(struct kvm *kvm,
- 		if ((kvm->nr_memslot_pages + npages) < kvm->nr_memslot_pages)
- 			return -EINVAL;
- 	} else { /* Modify an existing slot. */
-+		/* Private memslots are immutable, they can only be deleted. */
-+		if (mem->flags & KVM_MEM_PRIVATE)
-+			return -EINVAL;
- 		if ((mem->userspace_addr != old->userspace_addr) ||
- 		    (npages != old->npages) ||
- 		    ((mem->flags ^ old->flags) & KVM_MEM_READONLY))
-@@ -2089,10 +2164,27 @@ int __kvm_set_memory_region(struct kvm *kvm,
- 	new->npages = npages;
- 	new->flags = mem->flags;
- 	new->userspace_addr = mem->userspace_addr;
-+	if (mem->flags & KVM_MEM_PRIVATE) {
-+		new->private_file = fget(mem->private_fd);
-+		if (!new->private_file) {
-+			r = -EINVAL;
-+			goto out;
-+		}
-+		new->private_offset = mem->private_offset;
-+	}
-+
-+	new->kvm = kvm;
- 
- 	r = kvm_set_memslot(kvm, old, new, change);
- 	if (r)
--		kfree(new);
-+		goto out;
-+
-+	return 0;
-+
-+out:
-+	if (new->private_file)
-+		fput(new->private_file);
-+	kfree(new);
- 	return r;
- }
- EXPORT_SYMBOL_GPL(__kvm_set_memory_region);
-@@ -4747,16 +4839,28 @@ static long kvm_vm_ioctl(struct file *filp,
- 	}
- 	case KVM_SET_USER_MEMORY_REGION: {
- 		struct kvm_user_mem_region mem;
--		unsigned long size = sizeof(struct kvm_userspace_memory_region);
-+		unsigned int flags_offset = offsetof(typeof(mem), flags);
-+		unsigned long size;
-+		u32 flags;
- 
- 		kvm_sanity_check_user_mem_region_alias();
- 
-+		memset(&mem, 0, sizeof(mem));
-+
- 		r = -EFAULT;
--		if (copy_from_user(&mem, argp, size);
-+		if (get_user(flags, (u32 __user *)(argp + flags_offset)))
-+			goto out;
-+
-+		if (flags & KVM_MEM_PRIVATE)
-+			size = sizeof(struct kvm_userspace_memory_region_ext);
-+		else
-+			size = sizeof(struct kvm_userspace_memory_region);
-+
-+		if (copy_from_user(&mem, argp, size))
- 			goto out;
- 
- 		r = -EINVAL;
--		if (mem.flags & KVM_MEM_PRIVATE)
-+		if ((flags ^ mem.flags) & KVM_MEM_PRIVATE)
- 			goto out;
- 
- 		r = kvm_vm_ioctl_set_memory_region(kvm, &mem);
--- 
-2.25.1
+Just a minor correction: arch_tlbbatch_flush() does not collect ranges.
+On x86 it only accumulate CPU mask.
 
