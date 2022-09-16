@@ -2,108 +2,79 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 753065BA9CE
-	for <lists+linux-doc@lfdr.de>; Fri, 16 Sep 2022 12:00:28 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 70E0D5BA9C5
+	for <lists+linux-doc@lfdr.de>; Fri, 16 Sep 2022 11:56:43 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S229648AbiIPJ7R (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Fri, 16 Sep 2022 05:59:17 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:45908 "EHLO
+        id S229821AbiIPJzP (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Fri, 16 Sep 2022 05:55:15 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:41258 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S230238AbiIPJ7P (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Fri, 16 Sep 2022 05:59:15 -0400
-Received: from mga01.intel.com (mga01.intel.com [192.55.52.88])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id CC0D8AA4D9;
-        Fri, 16 Sep 2022 02:59:13 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1663322353; x=1694858353;
-  h=date:from:to:cc:subject:message-id:reply-to:references:
-   mime-version:in-reply-to;
-  bh=+GGngsOt+mHhqh1Zhh4O/6JETM5+xIHPKtlncj1KbqA=;
-  b=jCk6G/BbCxqBSmqRYtWMEGvZ3X4Rcvi2rc7Rc1TuMfkOZBoLIuAQYXjd
-   pj9VK+SQ197Gqm+34E4mB2lBeJxWnI4kVyAOaluo3qcFVZ+zGgVVJPtwx
-   2WbXyXeVSxs5aRB8YY96VBintdJkvDPw3+HWTd3DLMzEUKTkd+Ezu8Dbj
-   g6+S3k0G+1wkn+Rv6JUAHW9NOjEvestgc11oK8Y/r+/Au3IrWOsNCSNFp
-   g8P/K7UDQ6m78sDkJHdhzVNl5uzBfRWGrzH7c4WBPRmilWSGmtilC88Ne
-   35GKh+OgpgRM+wRQt1XHC6m5NxaFmiOhNsW5/NsbTggKPpXIxErJl91hn
-   A==;
-X-IronPort-AV: E=McAfee;i="6500,9779,10471"; a="325230069"
-X-IronPort-AV: E=Sophos;i="5.93,320,1654585200"; 
-   d="scan'208";a="325230069"
-Received: from fmsmga007.fm.intel.com ([10.253.24.52])
-  by fmsmga101.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 16 Sep 2022 02:59:13 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.93,320,1654585200"; 
-   d="scan'208";a="620036737"
-Received: from chaop.bj.intel.com (HELO localhost) ([10.240.193.75])
-  by fmsmga007.fm.intel.com with ESMTP; 16 Sep 2022 02:59:03 -0700
-Date:   Fri, 16 Sep 2022 17:54:24 +0800
-From:   Chao Peng <chao.p.peng@linux.intel.com>
-To:     Bagas Sanjaya <bagasdotme@gmail.com>
-Cc:     kvm@vger.kernel.org, linux-kernel@vger.kernel.org,
-        linux-mm@kvack.org, linux-fsdevel@vger.kernel.org,
-        linux-api@vger.kernel.org, linux-doc@vger.kernel.org,
-        qemu-devel@nongnu.org, Paolo Bonzini <pbonzini@redhat.com>,
-        Jonathan Corbet <corbet@lwn.net>,
-        Sean Christopherson <seanjc@google.com>,
-        Vitaly Kuznetsov <vkuznets@redhat.com>,
-        Wanpeng Li <wanpengli@tencent.com>,
-        Jim Mattson <jmattson@google.com>,
-        Joerg Roedel <joro@8bytes.org>,
-        Thomas Gleixner <tglx@linutronix.de>,
-        Ingo Molnar <mingo@redhat.com>, Borislav Petkov <bp@alien8.de>,
-        x86@kernel.org, "H . Peter Anvin" <hpa@zytor.com>,
-        Hugh Dickins <hughd@google.com>,
-        Jeff Layton <jlayton@kernel.org>,
-        "J . Bruce Fields" <bfields@fieldses.org>,
-        Andrew Morton <akpm@linux-foundation.org>,
-        Shuah Khan <shuah@kernel.org>, Mike Rapoport <rppt@kernel.org>,
-        Steven Price <steven.price@arm.com>,
-        "Maciej S . Szmigiero" <mail@maciej.szmigiero.name>,
-        Vlastimil Babka <vbabka@suse.cz>,
-        Vishal Annapurve <vannapurve@google.com>,
-        Yu Zhang <yu.c.zhang@linux.intel.com>,
-        "Kirill A . Shutemov" <kirill.shutemov@linux.intel.com>,
-        luto@kernel.org, jun.nakajima@intel.com, dave.hansen@intel.com,
-        ak@linux.intel.com, david@redhat.com, aarcange@redhat.com,
-        ddutile@redhat.com, dhildenb@redhat.com,
-        Quentin Perret <qperret@google.com>,
-        Michael Roth <michael.roth@amd.com>, mhocko@suse.com,
-        Muchun Song <songmuchun@bytedance.com>, wei.w.wang@intel.com
-Subject: Re: [PATCH v8 3/8] KVM: Add KVM_EXIT_MEMORY_FAULT exit
-Message-ID: <20220916095424.GB2261402@chaop.bj.intel.com>
-Reply-To: Chao Peng <chao.p.peng@linux.intel.com>
-References: <20220915142913.2213336-1-chao.p.peng@linux.intel.com>
- <20220915142913.2213336-4-chao.p.peng@linux.intel.com>
- <YyQ/PHZHkDSgjH/v@debian.me>
-MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <YyQ/PHZHkDSgjH/v@debian.me>
-X-Spam-Status: No, score=-7.0 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_EF,RCVD_IN_DNSWL_HI,
-        RCVD_IN_MSPIKE_H3,RCVD_IN_MSPIKE_WL,SPF_HELO_NONE,SPF_NONE
-        autolearn=ham autolearn_force=no version=3.4.6
+        with ESMTP id S229635AbiIPJzP (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Fri, 16 Sep 2022 05:55:15 -0400
+Received: from loongson.cn (mail.loongson.cn [114.242.206.163])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTP id BF3385D106;
+        Fri, 16 Sep 2022 02:55:12 -0700 (PDT)
+Received: from linux.localdomain (unknown [113.200.148.30])
+        by localhost.localdomain (Coremail) with SMTP id AQAAf8Bx5OH7RyRjbBYbAA--.38315S2;
+        Fri, 16 Sep 2022 17:55:07 +0800 (CST)
+From:   Tiezhu Yang <yangtiezhu@loongson.cn>
+To:     Steven Rostedt <rostedt@goodmis.org>,
+        Masami Hiramatsu <mhiramat@kernel.org>,
+        Jonathan Corbet <corbet@lwn.net>
+Cc:     linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org
+Subject: [PATCH] docs, kprobes: Fix the wrong location of Kprobes
+Date:   Fri, 16 Sep 2022 17:55:06 +0800
+Message-Id: <1663322106-12178-1-git-send-email-yangtiezhu@loongson.cn>
+X-Mailer: git-send-email 2.1.0
+X-CM-TRANSID: AQAAf8Bx5OH7RyRjbBYbAA--.38315S2
+X-Coremail-Antispam: 1UD129KBjvdXoW7XrWfXry7JrWkCw1DWF18uFg_yoWDuFX_Aw
+        4qqa95J3yjqrWUur43JF4fXF4xZ3WS9Fy8Ar4qqr4UKw12qw4xJan5GFWDZFWrGay7ur1a
+        vFZ7ZrnxXFZFqjkaLaAFLSUrUUUUUb8apTn2vfkv8UJUUUU8Yxn0WfASr-VFAUDa7-sFnT
+        9fnUUIcSsGvfJTRUUUb7AYjsxI4VW3JwAYFVCjjxCrM7AC8VAFwI0_Jr0_Gr1l1xkIjI8I
+        6I8E6xAIw20EY4v20xvaj40_Wr0E3s1l1IIY67AEw4v_Jr0_Jr4l8cAvFVAK0II2c7xJM2
+        8CjxkF64kEwVA0rcxSw2x7M28EF7xvwVC0I7IYx2IY67AKxVW7JVWDJwA2z4x0Y4vE2Ix0
+        cI8IcVCY1x0267AKxVWxJVW8Jr1l84ACjcxK6I8E87Iv67AKxVW0oVCq3wA2z4x0Y4vEx4
+        A2jsIEc7CjxVAFwI0_GcCE3s1le2I262IYc4CY6c8Ij28IcVAaY2xG8wAqx4xG64xvF2IE
+        w4CE5I8CrVC2j2WlYx0E2Ix0cI8IcVAFwI0_Jrv_JF1lYx0Ex4A2jsIE14v26F4j6r4UJw
+        Am72CE4IkC6x0Yz7v_Jr0_Gr1lF7xvr2IYc2Ij64vIr41lc2xSY4AK67AK6r4fMxAIw28I
+        cxkI7VAKI48JMxC20s026xCaFVCjc4AY6r1j6r4UMI8I3I0E5I8CrVAFwI0_Jr0_Jr4lx2
+        IqxVCjr7xvwVAFwI0_JrI_JrWlx4CE17CEb7AF67AKxVWUAVWUtwCIc40Y0x0EwIxGrwCI
+        42IY6xIIjxv20xvE14v26r1j6r1xMIIF0xvE2Ix0cI8IcVCY1x0267AKxVWUJVW8JwCI42
+        IY6xAIw20EY4v20xvaj40_Jr0_JF4lIxAIcVC2z280aVAFwI0_Jr0_Gr1lIxAIcVC2z280
+        aVCY1x0267AKxVW8JVW8JrUvcSsGvfC2KfnxnUUI43ZEXa7IU8J8n5UUUUU==
+X-CM-SenderInfo: p1dqw3xlh2x3gn0dqz5rrqw2lrqou0/
+X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00,SPF_HELO_PASS,
+        SPF_PASS autolearn=ham autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Fri, Sep 16, 2022 at 04:17:48PM +0700, Bagas Sanjaya wrote:
-> On Thu, Sep 15, 2022 at 10:29:08PM +0800, Chao Peng wrote:
-> > + - KVM_MEMORY_EXIT_FLAG_PRIVATE - indicates the memory error is caused by
-> > +   private memory access when the bit is set otherwise the memory error is
-> > +   caused by shared memory access when the bit is clear.
-> 
-> s/set otherwise/set. Otherwise,
+After commit 22471e1313f2 ("kconfig: use a menu in arch/Kconfig to reduce
+clutter"), the location of Kprobes is under "General architecture-dependent
+options" rather than "General setup".
 
-Thanks.
+Signed-off-by: Tiezhu Yang <yangtiezhu@loongson.cn>
+---
+ Documentation/trace/kprobes.rst | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-> 
-> Thanks.
-> 
-> -- 
-> An old man doll... just what I always wanted! - Clara
-
+diff --git a/Documentation/trace/kprobes.rst b/Documentation/trace/kprobes.rst
+index f318bce..48cf778 100644
+--- a/Documentation/trace/kprobes.rst
++++ b/Documentation/trace/kprobes.rst
+@@ -328,8 +328,8 @@ Configuring Kprobes
+ ===================
+ 
+ When configuring the kernel using make menuconfig/xconfig/oldconfig,
+-ensure that CONFIG_KPROBES is set to "y". Under "General setup", look
+-for "Kprobes".
++ensure that CONFIG_KPROBES is set to "y", look for "Kprobes" under
++"General architecture-dependent options".
+ 
+ So that you can load and unload Kprobes-based instrumentation modules,
+ make sure "Loadable module support" (CONFIG_MODULES) and "Module
+-- 
+2.1.0
 
