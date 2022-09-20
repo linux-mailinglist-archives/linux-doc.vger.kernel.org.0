@@ -2,132 +2,121 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 2F74F5BE569
-	for <lists+linux-doc@lfdr.de>; Tue, 20 Sep 2022 14:14:12 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 72DB55BE5A0
+	for <lists+linux-doc@lfdr.de>; Tue, 20 Sep 2022 14:23:20 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S230122AbiITMOK (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 20 Sep 2022 08:14:10 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:50034 "EHLO
+        id S230474AbiITMXT (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 20 Sep 2022 08:23:19 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:35188 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S229920AbiITMOJ (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 20 Sep 2022 08:14:09 -0400
-Received: from relay.virtuozzo.com (relay.virtuozzo.com [130.117.225.111])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 392576B67B;
-        Tue, 20 Sep 2022 05:14:08 -0700 (PDT)
-Received: from dev011.ch-qa.sw.ru ([172.29.1.16])
-        by relay.virtuozzo.com with esmtp (Exim 4.95)
-        (envelope-from <alexander.atanasov@virtuozzo.com>)
-        id 1oac55-004fqT-6p;
-        Tue, 20 Sep 2022 14:12:39 +0200
-From:   Alexander Atanasov <alexander.atanasov@virtuozzo.com>
-To:     Jonathan Corbet <corbet@lwn.net>, Christoph Lameter <cl@linux.com>,
-        Pekka Enberg <penberg@kernel.org>,
-        David Rientjes <rientjes@google.com>,
-        Joonsoo Kim <iamjoonsoo.kim@lge.com>,
+        with ESMTP id S230469AbiITMXS (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 20 Sep 2022 08:23:18 -0400
+Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.133.124])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 561DF74CE9
+        for <linux-doc@vger.kernel.org>; Tue, 20 Sep 2022 05:23:17 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+        s=mimecast20190719; t=1663676596;
+        h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+         to:to:cc:cc:mime-version:mime-version:
+         content-transfer-encoding:content-transfer-encoding;
+        bh=Elnu7bpANXPrM1PE7lHq91CUKuXWmTGmVUjcxfcQtwA=;
+        b=OBveevzxjxixgRn21cJSilTOtBa89PXfZWy3vv5rkETQXOA2Gjck0m/pk2of/3Bhm9PftR
+        qwI8mdsM8OGJGs6W68o1x8A+gzsG30I9NXHdvzKk2hWl8zafzVb0DugYiyj2cChm+ZF/3Q
+        EXCD7GGYmT3dXrP/D17axlJr/Imgbf0=
+Received: from mimecast-mx02.redhat.com (mimecast-mx02.redhat.com
+ [66.187.233.88]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ us-mta-632-w7ie62AuMA2p2FaXb2QrxA-1; Tue, 20 Sep 2022 08:23:09 -0400
+X-MC-Unique: w7ie62AuMA2p2FaXb2QrxA-1
+Received: from smtp.corp.redhat.com (int-mx08.intmail.prod.int.rdu2.redhat.com [10.11.54.8])
+        (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+        (No client certificate requested)
+        by mimecast-mx02.redhat.com (Postfix) with ESMTPS id C4924862FE0;
+        Tue, 20 Sep 2022 12:23:08 +0000 (UTC)
+Received: from t480s.redhat.com (unknown [10.39.195.16])
+        by smtp.corp.redhat.com (Postfix) with ESMTP id 016C9C15BBC;
+        Tue, 20 Sep 2022 12:23:03 +0000 (UTC)
+From:   David Hildenbrand <david@redhat.com>
+To:     linux-kernel@vger.kernel.org
+Cc:     linux-mm@kvack.org, linux-doc@vger.kernel.org,
+        linuxppc-dev@lists.ozlabs.org,
+        David Hildenbrand <david@redhat.com>,
+        Linus Torvalds <torvalds@linux-foundation.org>,
         Andrew Morton <akpm@linux-foundation.org>,
-        Vlastimil Babka <vbabka@suse.cz>,
-        Roman Gushchin <roman.gushchin@linux.dev>,
-        Hyeonggon Yoo <42.hyeyoo@gmail.com>
-Cc:     kernel@openvz.org,
-        Alexander Atanasov <alexander.atanasov@virtuozzo.com>,
-        Kees Cook <keescook@chromium.org>,
-        Roman Gushchin <guro@fb.com>, Jann Horn <jannh@google.com>,
-        Vijayanand Jitta <vjitta@codeaurora.org>,
-        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
-        linux-mm@kvack.org
-Subject: [PATCH v2] mm: Make failslab writable again
-Date:   Tue, 20 Sep 2022 15:11:11 +0300
-Message-Id: <20220920121111.1792905-1-alexander.atanasov@virtuozzo.com>
-X-Mailer: git-send-email 2.31.1
+        Ingo Molnar <mingo@kernel.org>,
+        David Laight <David.Laight@ACULAB.COM>,
+        Jonathan Corbet <corbet@lwn.net>,
+        Andy Whitcroft <apw@canonical.com>,
+        Joe Perches <joe@perches.com>,
+        Dwaipayan Ray <dwaipayanray1@gmail.com>,
+        Lukas Bulwahn <lukas.bulwahn@gmail.com>,
+        Baoquan He <bhe@redhat.com>, Vivek Goyal <vgoyal@redhat.com>,
+        Dave Young <dyoung@redhat.com>,
+        Jani Nikula <jani.nikula@linux.intel.com>,
+        Michael Ellerman <mpe@ellerman.id.au>,
+        Nicholas Piggin <npiggin@gmail.com>,
+        Christophe Leroy <christophe.leroy@csgroup.eu>
+Subject: [PATCH v1 0/3] coding-style.rst: document BUG() and WARN() rules
+Date:   Tue, 20 Sep 2022 14:22:59 +0200
+Message-Id: <20220920122302.99195-1-david@redhat.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00,SPF_HELO_NONE,
-        SPF_NONE autolearn=ham autolearn_force=no version=3.4.6
+X-Scanned-By: MIMEDefang 3.1 on 10.11.54.8
+X-Spam-Status: No, score=-2.8 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_LOW,
+        SPF_HELO_NONE,SPF_NONE autolearn=unavailable autolearn_force=no
+        version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-In (060807f841ac mm, slub: make remaining slub_debug related attributes
-read-only) failslab was made read-only.
-I think it became a collateral victim to the two other options for which
-the reasons are perfectly valid.
-Here is why:
- - sanity_checks and trace are slab internal debug options,
-   failslab is used for fault injection.
- - for fault injections, which by presumption are random, it
-   does not matter if it is not set atomically. And you need to
-   set atleast one more option to trigger fault injection.
- - in a testing scenario you may need to change it at runtime
-   example: module loading - you test all allocations limited
-   by the space option. Then you move to test only your module's
-   own slabs.
- - when set by command line flags it effectively disables all
-   cache merges.
+As it seems to be rather unclear if/when to use BUG(), BUG_ON(),
+VM_BUG_ON(), WARN_ON_ONCE(), ... let's try to document the result of a
+recent discussion.
 
-Cc: Vlastimil Babka <vbabka@suse.cz>
+Details can be found in patch #1.
+
+RFC -> v1:
+* "coding-style.rst: document BUG() and WARN() rules ("do not crash the
+   kernel")"
+ -> Rephrase/extend according to John
+ -> Add some details regarding the use of panic()
+* powerpc/prom_init: drop PROM_BUG()
+ -> Added
+* "checkpatch: warn on usage of VM_BUG_ON() and other BUG variants"
+ -> Warn on more variants
+
+
+Cc: Linus Torvalds <torvalds@linux-foundation.org>
 Cc: Andrew Morton <akpm@linux-foundation.org>
-Cc: Kees Cook <keescook@chromium.org>
-Cc: Roman Gushchin <guro@fb.com>
-Cc: Christoph Lameter <cl@linux.com>
-Cc: Jann Horn <jannh@google.com>
-Cc: Vijayanand Jitta <vjitta@codeaurora.org>
-Cc: David Rientjes <rientjes@google.com>
-Cc: Joonsoo Kim <iamjoonsoo.kim@lge.com>
-Cc: Pekka Enberg <penberg@kernel.org>
-Link: http://lkml.kernel.org/r/20200610163135.17364-5-vbabka@suse.cz
+Cc: Ingo Molnar <mingo@kernel.org>
+Cc: David Laight <David.Laight@ACULAB.COM>
+Cc: Jonathan Corbet <corbet@lwn.net>
+Cc: Andy Whitcroft <apw@canonical.com>
+Cc: Joe Perches <joe@perches.com>
+Cc: Dwaipayan Ray <dwaipayanray1@gmail.com>
+Cc: Lukas Bulwahn <lukas.bulwahn@gmail.com>
+Cc: Baoquan He <bhe@redhat.com>
+Cc: Vivek Goyal <vgoyal@redhat.com>
+Cc: Dave Young <dyoung@redhat.com>
+Cc: Jani Nikula <jani.nikula@linux.intel.com>
+Cc: Michael Ellerman <mpe@ellerman.id.au>
+Cc: Nicholas Piggin <npiggin@gmail.com>
+Cc: Christophe Leroy <christophe.leroy@csgroup.eu>
 
-Signed-off-by: Alexander Atanasov <alexander.atanasov@virtuozzo.com>
----
- Documentation/mm/slub.rst |  2 ++
- mm/slub.c                 | 16 +++++++++++++++-
- 2 files changed, 17 insertions(+), 1 deletion(-)
+David Hildenbrand (3):
+  coding-style.rst: document BUG() and WARN() rules ("do not crash the
+    kernel")
+  powerpc/prom_init: drop PROM_BUG()
+  checkpatch: warn on usage of VM_BUG_ON() and other BUG variants
 
-V1->V2: Fixed commit message. Flags are set using WRITE_ONCE.
+ Documentation/process/coding-style.rst | 61 ++++++++++++++++++++++++++
+ arch/powerpc/kernel/prom_init.c        |  6 ---
+ scripts/checkpatch.pl                  |  6 +--
+ 3 files changed, 64 insertions(+), 9 deletions(-)
 
-diff --git a/Documentation/mm/slub.rst b/Documentation/mm/slub.rst
-index 43063ade737a..86837073a39e 100644
---- a/Documentation/mm/slub.rst
-+++ b/Documentation/mm/slub.rst
-@@ -116,6 +116,8 @@ options from the ``slub_debug`` parameter translate to the following files::
- 	T	trace
- 	A	failslab
- 
-+failslab file is writable, so writing 1 or 0 will enable or disable
-+the option at runtime. Write returns -EINVAL if cache is an alias.
- Careful with tracing: It may spew out lots of information and never stop if
- used on the wrong slab.
- 
-diff --git a/mm/slub.c b/mm/slub.c
-index 862dbd9af4f5..57cf18936526 100644
---- a/mm/slub.c
-+++ b/mm/slub.c
-@@ -5617,7 +5617,21 @@ static ssize_t failslab_show(struct kmem_cache *s, char *buf)
- {
- 	return sysfs_emit(buf, "%d\n", !!(s->flags & SLAB_FAILSLAB));
- }
--SLAB_ATTR_RO(failslab);
-+
-+static ssize_t failslab_store(struct kmem_cache *s, const char *buf,
-+				size_t length)
-+{
-+	if (s->refcount > 1)
-+		return -EINVAL;
-+
-+	if (buf[0] == '1')
-+		WRITE_ONCE(s->flags, s->flags | SLAB_FAILSLAB);
-+	else
-+		WRITE_ONCE(s->flags, s->flags & ~SLAB_FAILSLAB);
-+
-+	return length;
-+}
-+SLAB_ATTR(failslab);
- #endif
- 
- static ssize_t shrink_show(struct kmem_cache *s, char *buf)
-
-base-commit: 80e78fcce86de0288793a0ef0f6acf37656ee4cf
 -- 
-2.31.1
+2.37.3
 
