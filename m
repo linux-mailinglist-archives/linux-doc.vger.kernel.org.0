@@ -2,59 +2,75 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 04FFD5E562E
-	for <lists+linux-doc@lfdr.de>; Thu, 22 Sep 2022 00:19:46 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 1E6B05E5868
+	for <lists+linux-doc@lfdr.de>; Thu, 22 Sep 2022 04:13:19 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S230210AbiIUWTo (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 21 Sep 2022 18:19:44 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:33358 "EHLO
+        id S230416AbiIVCNR (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 21 Sep 2022 22:13:17 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:41752 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S229929AbiIUWTm (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Wed, 21 Sep 2022 18:19:42 -0400
-Received: from mail.sconnect.com.au (mail.sconnect.com.au [103.101.168.198])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 9F106DEAB;
-        Wed, 21 Sep 2022 15:19:37 -0700 (PDT)
-Received: from localhost (localhost [127.0.0.1])
-        by mail.sconnect.com.au (Postfix) with ESMTP id 773AB295CB8E;
-        Thu, 22 Sep 2022 07:18:14 +1000 (AEST)
-Received: from mail.sconnect.com.au ([127.0.0.1])
-        by localhost (mail.sconnect.com.au [127.0.0.1]) (amavisd-new, port 10032)
-        with ESMTP id mGamyfgGCqMs; Thu, 22 Sep 2022 07:18:14 +1000 (AEST)
-Received: from localhost (localhost [127.0.0.1])
-        by mail.sconnect.com.au (Postfix) with ESMTP id 780CA295C737;
-        Thu, 22 Sep 2022 07:18:12 +1000 (AEST)
-DKIM-Filter: OpenDKIM Filter v2.10.3 mail.sconnect.com.au 780CA295C737
+        with ESMTP id S230391AbiIVCNQ (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Wed, 21 Sep 2022 22:13:16 -0400
+Received: from mail-pl1-x629.google.com (mail-pl1-x629.google.com [IPv6:2607:f8b0:4864:20::629])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 062419AF86
+        for <linux-doc@vger.kernel.org>; Wed, 21 Sep 2022 19:13:15 -0700 (PDT)
+Received: by mail-pl1-x629.google.com with SMTP id jm5so6458106plb.13
+        for <linux-doc@vger.kernel.org>; Wed, 21 Sep 2022 19:13:15 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=mail.sconnect.com.au; s=39ABBFB6-EEE4-11E8-B0D6-3EF6B7190DB6;
-        t=1663795092; bh=W/GvARc04ZPnD4B8eWYWtrSTF+TiaPBWKYHrLaGTP34=;
-        h=MIME-Version:To:From:Date:Message-Id;
-        b=bMtdFrCgwRvDUVG9hW5rBiPxTHHhifc8D6+YExXx9uZUV2YvETfjRE+m3RbEFD45p
-         jIM+vcqE7/KuYctvQd0uK8z1kbvvJn8vM/6ouHi5/ZRjP3Zi4/Ijxhr5ZuMvy9ySrU
-         3XiMK1IVVlpEouep1GZJ8tqwTILf3OyR9sv74pP1FB8pOREQ8GvG5Nyi3ohbpCEmUn
-         TkoKUoVQCplUlCDoS+67JZX001W3RouCQNgRw3B52rLsRy5srfaSGxEPr1f1qmzng9
-         e8e/9fLy6a6ByIILPFCkbh7IUaZWXUi/rOoAoUJGFtOefolgHm9+8Edom3KSZVV8C6
-         0nZNJfQANr8Fg==
-X-Virus-Scanned: amavisd-new at mail.sconnect.com.au
-Received: from mail.sconnect.com.au ([127.0.0.1])
-        by localhost (mail.sconnect.com.au [127.0.0.1]) (amavisd-new, port 10026)
-        with ESMTP id ZcA6EV8NPSr4; Thu, 22 Sep 2022 07:18:12 +1000 (AEST)
-Received: from [46.148.40.140] (unknown [46.148.40.140])
-        by mail.sconnect.com.au (Postfix) with ESMTPA id 3DB0F295CCE7;
-        Thu, 22 Sep 2022 07:18:04 +1000 (AEST)
-Content-Type: text/plain; charset="iso-8859-1"
+        d=gmail.com; s=20210112;
+        h=content-transfer-encoding:in-reply-to:from:references:cc:to
+         :content-language:subject:user-agent:mime-version:date:message-id
+         :from:to:cc:subject:date;
+        bh=5JuEdZib93/mRGmpoSVPHNyLaJxdh8tRUlgzrtp9wVc=;
+        b=cVOfxQTOxFRzzqtXS5x+p0l1YYT70GWE5aTURbU48eFqUMnq2JVJuU9tPEi9BAlq3R
+         tEdKBKSo8gc5/xJsRtlUy2AJLqn6nK84zSmmaQhgaFPw2nMFyL+MCwnsRR6xHf/nvhMk
+         wz2hIl5HwSDRZOIpNW469kTVdOT7VGqfPc1a2ZGhCUQz1IYVLH0TpRva4JNRvOqJcwix
+         Z4pq1lf9HvL34xodo0WGeKHk9Ps2c3+N4+DrIO92uPDgSXgiwgDtMpZnBMxye8AR5tSr
+         RerrxhWUgrhYhr6epdrSeqIJDhnHKfdU4mCmSg0rMeaXEakG+Cfpq1xLUEZmGgKkXBdI
+         uRJQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=content-transfer-encoding:in-reply-to:from:references:cc:to
+         :content-language:subject:user-agent:mime-version:date:message-id
+         :x-gm-message-state:from:to:cc:subject:date;
+        bh=5JuEdZib93/mRGmpoSVPHNyLaJxdh8tRUlgzrtp9wVc=;
+        b=Y2IXZHIbIc1ZkUgDTJPFOFHWa3RoteZTLrkkypfAL5zjaaQGm/KxPELkef0FmBk29p
+         pHaMvIPIAC1hqY1K9skV9YXEl0GxTXU2XZ+OIJPnqI2jiBEezjiJ5Pb7IxoH18i/opbE
+         2eHCNd9dxm1Gcl1lBHfE4TnFNMgeYJhszkqFFtEtiGUoNt5h6YhIVXMeRHQR020MrDhQ
+         OtFm7TDyFqZbzrwWIMz8c1LVwBgG/C07qr4GMCPOSPUflRW684UimhGdgD79Ru3W3R4B
+         NqSEKa92rB8GfhddvHA+/QlHSz/o46xxqiU6d8XoGXVg2NyYmHX08fIV4nmDt8TAlAai
+         8f5w==
+X-Gm-Message-State: ACrzQf1uqRpJ1LySfyYKW4VkpuklKOfkqPPugIz1nBx7uC5Qb/DhdlzD
+        srd2cOtt1ZnL/+zclScurysH1u2LLJU=
+X-Google-Smtp-Source: AMsMyM7q56jRcwvN33ZgC5FPtyQEKIvF/lQ3+p3FBthXnmlvmYohqiIc9J+ZCQx7TQUflplrvClmGg==
+X-Received: by 2002:a17:902:720b:b0:178:83e9:11ec with SMTP id ba11-20020a170902720b00b0017883e911ecmr1016436plb.34.1663812794540;
+        Wed, 21 Sep 2022 19:13:14 -0700 (PDT)
+Received: from [192.168.43.80] (subs28-116-206-12-54.three.co.id. [116.206.12.54])
+        by smtp.gmail.com with ESMTPSA id bg18-20020a056a02011200b00434feb1841dsm2490646pgb.66.2022.09.21.19.13.11
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Wed, 21 Sep 2022 19:13:13 -0700 (PDT)
+Message-ID: <81cae8f1-67e9-37ba-4bfd-566c877944ca@gmail.com>
+Date:   Thu, 22 Sep 2022 09:13:08 +0700
 MIME-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
-Content-Description: Mail message body
-Subject: PFC Loan
-To:     Recipients <Panola@mail.sconnect.com.au>
-From:   Panola@mail.sconnect.com.au, Finance@mail.sconnect.com.au,
-        dean@mail.sconnect.com.au
-Date:   Wed, 21 Sep 2022 14:17:56 -0700
-Reply-To: mbk@panolateam.com
-Message-Id: <20220921211805.3DB0F295CCE7@mail.sconnect.com.au>
-X-Spam-Status: No, score=0.7 required=5.0 tests=BAYES_50,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_AU,RCVD_IN_MSPIKE_BL,RCVD_IN_MSPIKE_ZBI,
-        SPF_HELO_PASS,SPF_PASS,T_PDS_TO_EQ_FROM_NAME autolearn=ham
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
+ Thunderbird/91.13.0
+Subject: Re: [PATCH RESEND] Documentation: kprobetrace: Improve readability
+Content-Language: en-US
+To:     Jonathan Corbet <corbet@lwn.net>,
+        Yoann Congal <yoann.congal@smile.fr>, linux-doc@vger.kernel.org
+Cc:     Masami Hiramatsu <mhiramat@kernel.org>,
+        Steven Rostedt <rostedt@goodmis.org>,
+        Andrew Morton <akpm@linux-foundation.org>,
+        Linux-MM <linux-mm@kvack.org>
+References: <20220915153358.813993-1-yoann.congal@smile.fr>
+ <87r104tr6o.fsf@meer.lwn.net>
+From:   Bagas Sanjaya <bagasdotme@gmail.com>
+In-Reply-To: <87r104tr6o.fsf@meer.lwn.net>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-Spam-Status: No, score=-5.8 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_FROM,NICE_REPLY_A,
+        RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,SPF_PASS autolearn=ham
         autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
@@ -62,25 +78,30 @@ Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-We offer flexible loans and funding for various projects bypassing the usua=
-l rigorous procedures without any upfront fee. This Funding program allows =
-a client to enjoy low interest payback for as low as 2% per annum for a per=
-iod of 1-30 years and a six months grace period.
- =
+On 9/22/22 03:20, Jonathan Corbet wrote:
+> Yoann Congal <yoann.congal@smile.fr> writes:
+> 
+>> Improve readability of kprobetrace documentation by adding markup
+>> (mainly code snippets), fixing some typos and splitting some paragraphs.
+>>
+>> Signed-off-by: Yoann Congal <yoann.congal@smile.fr>
+>> ---
+>>  Documentation/trace/kprobetrace.rst | 128 ++++++++++++++--------------
+>>  1 file changed, 66 insertions(+), 62 deletions(-)
+> 
+> A couple of comments here.
+> 
+> - There's enough in this patch that I think one of the relevant
+>   maintainers should have a look.  MAINTAINERS is silent on who is
+>   responsible for this file, so I've CC'd a couple of likely suspects.
+> 
 
-We Offer: -
-* Project Financing
-* Business Loan
-* Personal Loan
- =
+Hi jon,
 
-Should you be interested in any of our financial options, please do not hes=
-itate to contact us for more information. Loan processing and financing tak=
-es about 8 working days from the day you submit your loan application. Repl=
-y for more information: mail@panolafinancecompany.com
- =
+I think this is Andrew Morton is also likely candidate for reviewing this
+(maintainer of last resort). CC'ing him and linux-mm people.
 
-With kind regards,
-Your Sales Team
-Contact Info:
-E-mail: mbk@panolateam.com
+Thanks.
+
+-- 
+An old man doll... just what I always wanted! - Clara
