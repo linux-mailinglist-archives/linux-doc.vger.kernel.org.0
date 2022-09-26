@@ -2,117 +2,102 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id D60605EAB11
-	for <lists+linux-doc@lfdr.de>; Mon, 26 Sep 2022 17:31:04 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 4AFA95EAA8F
+	for <lists+linux-doc@lfdr.de>; Mon, 26 Sep 2022 17:22:57 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S236237AbiIZPbB (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 26 Sep 2022 11:31:01 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:45714 "EHLO
+        id S236490AbiIZPWp (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 26 Sep 2022 11:22:45 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:47194 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S236526AbiIZP0j (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Mon, 26 Sep 2022 11:26:39 -0400
-Received: from mga04.intel.com (mga04.intel.com [192.55.52.120])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 99A495F10C;
-        Mon, 26 Sep 2022 07:12:02 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1664201522; x=1695737522;
-  h=date:from:to:cc:subject:message-id:reply-to:references:
-   mime-version:in-reply-to;
-  bh=3K99V46lahR/2OM+AWPRnQqkJGlMh+2oIpwQe2KYPck=;
-  b=Y6LnGx9c7yhH6Kp5vJc7Bd4doIoXc6CqLfAopx/aEQvikW1sBo4IxWPm
-   WeVc6choXalmBnTGqmH0yA/RYq8b/PLxGYs1fEsxVpoUE420yXNvOAWQD
-   Rw9Ru8IQ1m3leH2qco3MXnizcjTituW5JUcmoY0O8qzF+OsMdh7JfMCYE
-   WZ9y0bkqQLaEpdjvAw539SSgG63iVolOUFemXs57+5n4ypvx8HaaROwvy
-   QvNSW/jEae1YRk2Qbk4LmsoNijfVCIcJofvgRp+ERCkAe1MLqZIWzoTNi
-   hykujIAqT9a/w0Zwh/uV40pWc7h5URwCbZLbXE1uqleCty9FC6jnjUQWw
-   w==;
-X-IronPort-AV: E=McAfee;i="6500,9779,10482"; a="299760274"
-X-IronPort-AV: E=Sophos;i="5.93,346,1654585200"; 
-   d="scan'208";a="299760274"
-Received: from orsmga008.jf.intel.com ([10.7.209.65])
-  by fmsmga104.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 26 Sep 2022 07:12:01 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=McAfee;i="6500,9779,10482"; a="651841295"
-X-IronPort-AV: E=Sophos;i="5.93,346,1654585200"; 
-   d="scan'208";a="651841295"
-Received: from chaop.bj.intel.com (HELO localhost) ([10.240.193.75])
-  by orsmga008.jf.intel.com with ESMTP; 26 Sep 2022 07:11:51 -0700
-Date:   Mon, 26 Sep 2022 22:07:15 +0800
-From:   Chao Peng <chao.p.peng@linux.intel.com>
-To:     Fuad Tabba <tabba@google.com>
-Cc:     kvm@vger.kernel.org, linux-kernel@vger.kernel.org,
-        linux-mm@kvack.org, linux-fsdevel@vger.kernel.org,
-        linux-api@vger.kernel.org, linux-doc@vger.kernel.org,
-        qemu-devel@nongnu.org, Paolo Bonzini <pbonzini@redhat.com>,
-        Jonathan Corbet <corbet@lwn.net>,
-        Sean Christopherson <seanjc@google.com>,
-        Vitaly Kuznetsov <vkuznets@redhat.com>,
-        Wanpeng Li <wanpengli@tencent.com>,
-        Jim Mattson <jmattson@google.com>,
-        Joerg Roedel <joro@8bytes.org>,
-        Thomas Gleixner <tglx@linutronix.de>,
-        Ingo Molnar <mingo@redhat.com>, Borislav Petkov <bp@alien8.de>,
-        x86@kernel.org, "H . Peter Anvin" <hpa@zytor.com>,
-        Hugh Dickins <hughd@google.com>,
-        Jeff Layton <jlayton@kernel.org>,
-        "J . Bruce Fields" <bfields@fieldses.org>,
-        Andrew Morton <akpm@linux-foundation.org>,
-        Shuah Khan <shuah@kernel.org>, Mike Rapoport <rppt@kernel.org>,
-        Steven Price <steven.price@arm.com>,
-        "Maciej S . Szmigiero" <mail@maciej.szmigiero.name>,
-        Vlastimil Babka <vbabka@suse.cz>,
-        Vishal Annapurve <vannapurve@google.com>,
-        Yu Zhang <yu.c.zhang@linux.intel.com>,
-        "Kirill A . Shutemov" <kirill.shutemov@linux.intel.com>,
-        luto@kernel.org, jun.nakajima@intel.com, dave.hansen@intel.com,
-        ak@linux.intel.com, david@redhat.com, aarcange@redhat.com,
-        ddutile@redhat.com, dhildenb@redhat.com,
-        Quentin Perret <qperret@google.com>,
-        Michael Roth <michael.roth@amd.com>, mhocko@suse.com,
-        Muchun Song <songmuchun@bytedance.com>, wei.w.wang@intel.com
-Subject: Re: [PATCH v8 5/8] KVM: Register/unregister the guest private memory
- regions
-Message-ID: <20220926140715.GB2658254@chaop.bj.intel.com>
-Reply-To: Chao Peng <chao.p.peng@linux.intel.com>
-References: <20220915142913.2213336-1-chao.p.peng@linux.intel.com>
- <20220915142913.2213336-6-chao.p.peng@linux.intel.com>
- <CA+EHjTx+GVpGavzMQQOispT-oUk5cSyssedYJ00=GdnCtEQO6A@mail.gmail.com>
+        with ESMTP id S236304AbiIZPWP (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Mon, 26 Sep 2022 11:22:15 -0400
+Received: from smtp-out2.suse.de (smtp-out2.suse.de [195.135.220.29])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id EA9A085AA3;
+        Mon, 26 Sep 2022 07:08:45 -0700 (PDT)
+Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
+        (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+         key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
+        (No client certificate requested)
+        by smtp-out2.suse.de (Postfix) with ESMTPS id A1B451F8A4;
+        Mon, 26 Sep 2022 14:08:44 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
+        t=1664201324; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+         mime-version:mime-version:content-type:content-type:
+         in-reply-to:in-reply-to:references:references;
+        bh=j600WWM/VHOKFyO6Qxlx/kgR3oXfjp923FSo/xkqVEo=;
+        b=qYELV+5U/XVCqd6kESY7/gFf387nX8FJynNLNsM3BnQWoIagPjdK7IGMl1iFWBzlOeod/9
+        M1vErEEHSaNoJznOOokLM0fFnbd14vY3PPtZBsc8IA1yQoFtKLWmI/Hf/eAmHB51DKO0VC
+        DxEY0i3ZHBXuoKoEq2kjQHBHUTb3XZs=
+Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
+        (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+         key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
+        (No client certificate requested)
+        by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id 7F18A139BD;
+        Mon, 26 Sep 2022 14:08:44 +0000 (UTC)
+Received: from dovecot-director2.suse.de ([192.168.254.65])
+        by imap2.suse-dmz.suse.de with ESMTPSA
+        id cuHOGWyyMWPMAQAAMHmgww
+        (envelope-from <mhocko@suse.com>); Mon, 26 Sep 2022 14:08:44 +0000
+Date:   Mon, 26 Sep 2022 16:08:43 +0200
+From:   Michal Hocko <mhocko@suse.com>
+To:     Zhongkun He <hezhongkun.hzk@bytedance.com>
+Cc:     corbet@lwn.net, akpm@linux-foundation.org, linux-mm@kvack.org,
+        linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org,
+        wuyun.abel@bytedance.com
+Subject: Re: [External] Re: [RFC] proc: Add a new isolated
+ /proc/pid/mempolicy type.
+Message-ID: <YzGya2Q3iuWS2WdM@dhcp22.suse.cz>
+References: <20220926091033.340-1-hezhongkun.hzk@bytedance.com>
+ <YzF3aaLvEvFhTQa3@dhcp22.suse.cz>
+ <24b20953-eca9-eef7-8e60-301080a17d2d@bytedance.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <CA+EHjTx+GVpGavzMQQOispT-oUk5cSyssedYJ00=GdnCtEQO6A@mail.gmail.com>
-X-Spam-Status: No, score=-4.4 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_EF,RCVD_IN_DNSWL_MED,SPF_HELO_NONE,
-        SPF_NONE autolearn=ham autolearn_force=no version=3.4.6
+In-Reply-To: <24b20953-eca9-eef7-8e60-301080a17d2d@bytedance.com>
+X-Spam-Status: No, score=-4.3 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_MED,SPF_HELO_NONE,
+        SPF_PASS,URIBL_SBL_A autolearn=ham autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Mon, Sep 26, 2022 at 11:36:34AM +0100, Fuad Tabba wrote:
-...
-
-> > diff --git a/include/linux/kvm_host.h b/include/linux/kvm_host.h
-> > index 2125b50f6345..d65690cae80b 100644
-> > --- a/include/linux/kvm_host.h
-> > +++ b/include/linux/kvm_host.h
-> > @@ -260,6 +260,15 @@ bool kvm_test_age_gfn(struct kvm *kvm, struct kvm_gfn_range *range);
-> >  bool kvm_set_spte_gfn(struct kvm *kvm, struct kvm_gfn_range *range);
-> >  #endif
-> >
-> > +#ifdef __KVM_HAVE_ZAP_GFN_RANGE
-> > +void kvm_zap_gfn_range(struct kvm *kvm, gfn_t gfn_start, gfn_t gfn_end);
-> > +#else
-> > +static inline void kvm_zap_gfn_range(struct kvm *kvm, gfn_t gfn_start
-> > +                                                     gfn_t gfn_end)
+On Mon 26-09-22 20:53:19, Zhongkun He wrote:
+> > [Cc linux-api - please do so for any patches making/updating
+> > kernel<->user interfaces]
+> > 
+> > 
+> > On Mon 26-09-22 17:10:33, hezhongkun wrote:
+> > > From: Zhongkun He <hezhongkun.hzk@bytedance.com>
+> > > 
+> > > /proc/pid/mempolicy can be used to check and adjust the userspace task's
+> > > mempolicy dynamically.In many case, the application and the control plane
+> > > are two separate systems. When the application is created, it doesn't know
+> > > how to use memory, and it doesn't care. The control plane will decide the
+> > > memory usage policy based on different reasons.In that case, we can
+> > > dynamically adjust the mempolicy using /proc/pid/mempolicy interface.
+> > 
+> > Is there any reason to make it procfs interface rather than pidfd one?
 > 
-> Missing a comma after gfn_start.
-
-Good catch, thanks!
-Chao
+> Hi michal,  thanks for your reply.
 > 
-> Cheers,
-> /fuad
+> I just think that it is easy to display and adjust the mempolicy using
+> procfs. But it may not be suitable, I will send a pidfd_set_mempolicy patch
+> later.
 
+proc interface has many usability issues. That is why pidfd has been
+introduced. So I would rather go with the pidfd interface than repeating
+old proc API mistakes.
+
+> Btw.in order to add per-thread-group mempolicy, is it possible to add
+> mempolicy in mm_struct?
+
+I dunno. This would make the mempolicy interface even more confusing.
+Per mm behavior makes a lot of sense but we already do have per-thread
+semantic so I would stick to it rather than introducing a new semantic.
+
+Why is this really important?
+-- 
+Michal Hocko
+SUSE Labs
