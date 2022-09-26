@@ -2,71 +2,141 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id B36135EAA12
-	for <lists+linux-doc@lfdr.de>; Mon, 26 Sep 2022 17:17:11 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 4B2875EAAD4
+	for <lists+linux-doc@lfdr.de>; Mon, 26 Sep 2022 17:25:22 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S235971AbiIZPRI (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 26 Sep 2022 11:17:08 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:33556 "EHLO
+        id S236565AbiIZPZT (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 26 Sep 2022 11:25:19 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:49376 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S235708AbiIZPQi (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Mon, 26 Sep 2022 11:16:38 -0400
-Received: from mail-vs1-xe41.google.com (mail-vs1-xe41.google.com [IPv6:2607:f8b0:4864:20::e41])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id B6BBE1004
-        for <linux-doc@vger.kernel.org>; Mon, 26 Sep 2022 07:02:27 -0700 (PDT)
-Received: by mail-vs1-xe41.google.com with SMTP id j7so6587580vsr.13
-        for <linux-doc@vger.kernel.org>; Mon, 26 Sep 2022 07:02:27 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=content-transfer-encoding:to:subject:message-id:date:from:reply-to
-         :mime-version:from:to:cc:subject:date;
-        bh=W2hJLXZEpV+2eqAKMNoZcDhofs3a0fuyhAGVXRo+6bw=;
-        b=J/uVON7XeKHt/uIk/3sGrIwVVB1drRcHOUIQzfTwNKusVKZ1zr6k8R71BUcQ1GFO0b
-         Tgsw/bSm4xD/cvML/KzYiu/hfCl8+12m7pJ7NFss23fwZZR4f4AJoYPpZoepetP5lprh
-         xMlG130zgiMLu7NLeXzdRxIZz8KPxNFrtsXfom8HOGsT8s8wP1ccAT5XTwp+l1fPVSJy
-         OLxT2eeg4d8pCctrlMpVN/3ha3vwv5YJBmo02rZHMXCV13IK5uOGWf9M8MQ4BJSPXraT
-         jHbLJvOdT1OJEBnYUc8uzA4g2CuoX+/RK10qJSaSN8AZQhvcNcAk6DGH9z3ZCJZRT9xN
-         rdnw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=content-transfer-encoding:to:subject:message-id:date:from:reply-to
-         :mime-version:x-gm-message-state:from:to:cc:subject:date;
-        bh=W2hJLXZEpV+2eqAKMNoZcDhofs3a0fuyhAGVXRo+6bw=;
-        b=unJWq8plybIphRHG5fXC/57QpNyud6xjPRR8rpDWQ0CAQutk/1rb6lDxsT7EUwEAnk
-         8Qdfv9KW78QwXRcZrAOUJZUkZxQavJcrKJJl6yiGM+cjw1K2X9n7egPCfoVWNXQfBAYA
-         eUGvHxbyxnGBU08gm/6xd9MeCZVRYUPpeBGYVGoX8l2xOJOC4NYKmMtySb5ImuvWcWzk
-         RlEC7epgYcKB/XC3Sm+Q50bYg2d2vP1mBlSCn2wRl0+Pz28NRYhMZg4rpBqLbvOxsgSr
-         x3ESPESQYO5c+LxHmZSr4PKlmJRCNTO8nJIT26kxUUwmni+NXZlTYKq8HtV0AaIdY+sm
-         iabQ==
-X-Gm-Message-State: ACrzQf08DP2MTdTG1OMDHVa08dfTcgupkn4NRyoy6yS/isvqFdh6cJh1
-        4DB+0+Si2G10R6c5Q+dvRQhgBfXAVPHMmYvEKEI=
-X-Google-Smtp-Source: AMsMyM6LDOv3tIluzEztat/U56qp8FhupfMkFVh7HZyCZQzMgrdEuBfyN0p8SOJme5sveTwhmTPdTm64LKjryUaNOg0=
-X-Received: by 2002:a05:6102:2f6:b0:398:5094:f748 with SMTP id
- j22-20020a05610202f600b003985094f748mr8008218vsj.50.1664200946884; Mon, 26
- Sep 2022 07:02:26 -0700 (PDT)
+        with ESMTP id S236689AbiIZPYC (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Mon, 26 Sep 2022 11:24:02 -0400
+Received: from mga07.intel.com (mga07.intel.com [134.134.136.100])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 2B8A71E3D1;
+        Mon, 26 Sep 2022 07:09:47 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1664201389; x=1695737389;
+  h=date:from:to:cc:subject:message-id:reply-to:references:
+   mime-version:in-reply-to;
+  bh=kLBWR5qEV1U14bOBHrdj86S+fx8bShjKVx0oSvRe47k=;
+  b=iSJSXIFxmEPPzzhQPc8Aq8o5dPkLSD+Nk04JxvzeMf0ETHkKRtT0A/XG
+   Gm9rZW/FMCZ9Mk/wygBAcheoEHj3qBZnldcy+azn0woWxgMdAQsZwKvO8
+   MLi9TTLwzijWvRScze04ZMZURRt5yGnWOpePaxRSApG18DSY5qNmBWohP
+   qtNWnL9ywD6dZAw6KOnYG9tp1vYxaZqYryWbuEpULNd8Vm0TT52/ny4Rh
+   sNB/QJF3GHrOVNqyv+j0j8bxw5rEh5EGvEZ0j/dNWIlPx0lECYVzHB/1+
+   4YZlCpZzAPVkRG0nE+b6wfOh2nWNllXsxaRm0C1IVSsJfFvLQHuvUksCJ
+   Q==;
+X-IronPort-AV: E=McAfee;i="6500,9779,10482"; a="365068855"
+X-IronPort-AV: E=Sophos;i="5.93,346,1654585200"; 
+   d="scan'208";a="365068855"
+Received: from orsmga008.jf.intel.com ([10.7.209.65])
+  by orsmga105.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 26 Sep 2022 07:09:38 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=McAfee;i="6500,9779,10482"; a="651840417"
+X-IronPort-AV: E=Sophos;i="5.93,346,1654585200"; 
+   d="scan'208";a="651840417"
+Received: from chaop.bj.intel.com (HELO localhost) ([10.240.193.75])
+  by orsmga008.jf.intel.com with ESMTP; 26 Sep 2022 07:09:28 -0700
+Date:   Mon, 26 Sep 2022 22:04:51 +0800
+From:   Chao Peng <chao.p.peng@linux.intel.com>
+To:     Fuad Tabba <tabba@google.com>
+Cc:     kvm@vger.kernel.org, linux-kernel@vger.kernel.org,
+        linux-mm@kvack.org, linux-fsdevel@vger.kernel.org,
+        linux-api@vger.kernel.org, linux-doc@vger.kernel.org,
+        qemu-devel@nongnu.org, Paolo Bonzini <pbonzini@redhat.com>,
+        Jonathan Corbet <corbet@lwn.net>,
+        Sean Christopherson <seanjc@google.com>,
+        Vitaly Kuznetsov <vkuznets@redhat.com>,
+        Wanpeng Li <wanpengli@tencent.com>,
+        Jim Mattson <jmattson@google.com>,
+        Joerg Roedel <joro@8bytes.org>,
+        Thomas Gleixner <tglx@linutronix.de>,
+        Ingo Molnar <mingo@redhat.com>, Borislav Petkov <bp@alien8.de>,
+        x86@kernel.org, "H . Peter Anvin" <hpa@zytor.com>,
+        Hugh Dickins <hughd@google.com>,
+        Jeff Layton <jlayton@kernel.org>,
+        "J . Bruce Fields" <bfields@fieldses.org>,
+        Andrew Morton <akpm@linux-foundation.org>,
+        Shuah Khan <shuah@kernel.org>, Mike Rapoport <rppt@kernel.org>,
+        Steven Price <steven.price@arm.com>,
+        "Maciej S . Szmigiero" <mail@maciej.szmigiero.name>,
+        Vlastimil Babka <vbabka@suse.cz>,
+        Vishal Annapurve <vannapurve@google.com>,
+        Yu Zhang <yu.c.zhang@linux.intel.com>,
+        "Kirill A . Shutemov" <kirill.shutemov@linux.intel.com>,
+        luto@kernel.org, jun.nakajima@intel.com, dave.hansen@intel.com,
+        ak@linux.intel.com, david@redhat.com, aarcange@redhat.com,
+        ddutile@redhat.com, dhildenb@redhat.com,
+        Quentin Perret <qperret@google.com>,
+        Michael Roth <michael.roth@amd.com>, mhocko@suse.com,
+        Muchun Song <songmuchun@bytedance.com>, wei.w.wang@intel.com
+Subject: Re: [PATCH v8 2/8] KVM: Extend the memslot to support fd-based
+ private memory
+Message-ID: <20220926140451.GA2658254@chaop.bj.intel.com>
+Reply-To: Chao Peng <chao.p.peng@linux.intel.com>
+References: <20220915142913.2213336-1-chao.p.peng@linux.intel.com>
+ <20220915142913.2213336-3-chao.p.peng@linux.intel.com>
+ <CA+EHjTzHTaDaAKEMjFHzXLBgUS4bMfnppzO==KeDGpyUKO0fCw@mail.gmail.com>
 MIME-Version: 1.0
-Received: by 2002:a59:8199:0:b0:2f6:3de5:9c4a with HTTP; Mon, 26 Sep 2022
- 07:02:26 -0700 (PDT)
-Reply-To: stefanopessia8766@hotmail.com
-From:   Stefano Pessina <nasteexogeele@gmail.com>
-Date:   Mon, 26 Sep 2022 17:02:26 +0300
-Message-ID: <CAGiQzK6yx0+HUyG=J0gnzxE8L8Nbm5j0QdFKcMLMb0JaWzjXDg@mail.gmail.com>
-Subject: 
-To:     undisclosed-recipients:;
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Spam-Status: No, score=4.9 required=5.0 tests=BAYES_50,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_FROM,FREEMAIL_REPLYTO,
-        FREEMAIL_REPLYTO_END_DIGIT,RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,SPF_PASS,
-        UNDISC_FREEM autolearn=no autolearn_force=no version=3.4.6
-X-Spam-Level: ****
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <CA+EHjTzHTaDaAKEMjFHzXLBgUS4bMfnppzO==KeDGpyUKO0fCw@mail.gmail.com>
+X-Spam-Status: No, score=-4.4 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_EF,RCVD_IN_DNSWL_MED,SPF_HELO_NONE,
+        SPF_NONE autolearn=ham autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
---=20
-Kwot=C4=99 500 000 $ przekaza=C5=82 Pa=C5=84stwu STEFANO PESSINA. Uprzejmie=
- wr=C3=B3=C4=87 po
-wi=C4=99cej informacji przez stefanopessia8766@hotmail.com
+On Mon, Sep 26, 2022 at 11:26:45AM +0100, Fuad Tabba wrote:
+...
+
+> > +
+> > +- KVM_MEM_PRIVATE can be set to indicate a new slot has private memory backed by
+> > +  a file descirptor(fd) and the content of the private memory is invisible to
+> 
+> s/descirptor/descriptor
+
+Thanks.
+
+...
+
+>  static long kvm_vm_ioctl(struct file *filp,
+> >                            unsigned int ioctl, unsigned long arg)
+> >  {
+> > @@ -4645,14 +4672,20 @@ static long kvm_vm_ioctl(struct file *filp,
+> >                 break;
+> >         }
+> >         case KVM_SET_USER_MEMORY_REGION: {
+> > -               struct kvm_userspace_memory_region kvm_userspace_mem;
+> > +               struct kvm_user_mem_region mem;
+> > +               unsigned long size = sizeof(struct kvm_userspace_memory_region);
+> 
+> nit: should this be sizeof(struct mem)? That's more similar to the
+> existing code and makes it dependent on the size of mem regardless of
+> possible changes to its type in the future.
+
+Unluckily no, the size we need copy_from_user() depends on the flags,
+e.g. without KVM_MEM_PRIVATE, we can't safely copy that big size since
+the 'extended' part may not even exist.
+
+> 
+> > +
+> > +               kvm_sanity_check_user_mem_region_alias();
+> >
+> >                 r = -EFAULT;
+> > -               if (copy_from_user(&kvm_userspace_mem, argp,
+> > -                                               sizeof(kvm_userspace_mem)))
+> > +               if (copy_from_user(&mem, argp, size);
+> 
+> It gets fixed in a future patch, but the ; should be a ).
+
+Good catch, thanks!
+
+Chao
+> 
+> Cheers,
+> /fuad
