@@ -2,162 +2,71 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 84C315EBB6F
-	for <lists+linux-doc@lfdr.de>; Tue, 27 Sep 2022 09:27:00 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id EBB035EBBAE
+	for <lists+linux-doc@lfdr.de>; Tue, 27 Sep 2022 09:37:44 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S229870AbiI0H05 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 27 Sep 2022 03:26:57 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:36610 "EHLO
+        id S230442AbiI0Hhm (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 27 Sep 2022 03:37:42 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:55608 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S229698AbiI0H0z (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 27 Sep 2022 03:26:55 -0400
-Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.133.124])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 4DDB9580B4
-        for <linux-doc@vger.kernel.org>; Tue, 27 Sep 2022 00:26:54 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-        s=mimecast20190719; t=1664263613;
-        h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-         to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-         content-transfer-encoding:content-transfer-encoding:
-         in-reply-to:in-reply-to:references:references;
-        bh=W9ODtW5t5SdFcjBY6SIxecQUGUZ3KwRU79qXAI2vn/s=;
-        b=dzURaDbBgymZPN9QPrmHvtfJY+fRwkjHb0mJYNQasY1wYGbKsSQKmSGn6CHwx9u6dWHVE+
-        tgJUL0twsbsqyyGWrCHzhymhJl4AQWYBwGOZvSGGGvGTNtlq9bib+eya9HqzakWSiJp4D9
-        ev6ZoUG+aD3b2qqkOJyd9rvK1vXTaVY=
-Received: from mail-wr1-f71.google.com (mail-wr1-f71.google.com
- [209.85.221.71]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_128_GCM_SHA256) id
- us-mta-568-Sq8JamAxMUqj_bTy5FoT1A-1; Tue, 27 Sep 2022 03:26:44 -0400
-X-MC-Unique: Sq8JamAxMUqj_bTy5FoT1A-1
-Received: by mail-wr1-f71.google.com with SMTP id g15-20020adfbc8f000000b0022a4510a491so1863077wrh.12
-        for <linux-doc@vger.kernel.org>; Tue, 27 Sep 2022 00:26:43 -0700 (PDT)
+        with ESMTP id S230116AbiI0Hhe (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 27 Sep 2022 03:37:34 -0400
+Received: from mail-pf1-x433.google.com (mail-pf1-x433.google.com [IPv6:2607:f8b0:4864:20::433])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 0786769F4D
+        for <linux-doc@vger.kernel.org>; Tue, 27 Sep 2022 00:37:31 -0700 (PDT)
+Received: by mail-pf1-x433.google.com with SMTP id e68so8975924pfe.1
+        for <linux-doc@vger.kernel.org>; Tue, 27 Sep 2022 00:37:31 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112;
+        h=content-transfer-encoding:to:subject:message-id:date:from:reply-to
+         :mime-version:from:to:cc:subject:date;
+        bh=W2hJLXZEpV+2eqAKMNoZcDhofs3a0fuyhAGVXRo+6bw=;
+        b=HV2aiRfB7j2HuSCGbeaG8xWOrbAAAfT66diyqRtVCxff5bV/waDkXk80TCe8Agw+HR
+         n8iRedjkAZtjUPXhN5LOz1gwEyW3phDWstVjIxIy6tcfXb1IaRsaFu3kIRXlvpIrEObO
+         0zTpda8yukRNAjkYVffy5vLVqyv+YjLVM7aOvAaf2zfRAT6FTLz5IJeuM2jGHPlTP1uH
+         oHdpwUlwF9uKKijdalFx1H1XOxwJDB7fq7n0qjLXiQVlLRgvdhKo0boPDRUh7Yw0gC8w
+         qUNy9mQyGufeXvMY1HWmAJ6yt6xOcLZvnuE4UbI0AtEYgG3lNW1iblk+yYDqz4nQQ2oD
+         ewIQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=content-transfer-encoding:in-reply-to:subject:organization:from
-         :content-language:references:cc:to:user-agent:mime-version:date
-         :message-id:x-gm-message-state:from:to:cc:subject:date;
-        bh=W9ODtW5t5SdFcjBY6SIxecQUGUZ3KwRU79qXAI2vn/s=;
-        b=0Gp+HPdkziY6FaAwUNCU6nGy/1lzexwszC8U9fg9xbRiCYvMlXnx+JeJKVnvwMcen3
-         fiWWrUJ9HiloWQZ7cvQrlAe94uCD2TSsycfrHr0X7q5712x6nfnn7WnT+mfFv5C1wJSm
-         bHswjDAAEYH57zFcVsyCyaBhJNzngAW6rIDmPY+DYJc1yRRlCooWXjqlXJImjoytZUU2
-         KTUzA40LOR1qEoigsBl9cwL9sGi6aQGPVL3emDrlBhclKvBpORswbA11IsgcAFABMhFs
-         FiU/JqauRzbDjO9B5QyjHoq2u6aZX3AINNvyyv5HE1AqspJTCNiURChxPkfkd1Vd7DD5
-         aulg==
-X-Gm-Message-State: ACrzQf3nhwR+pbQXcLqVZXuhLvVwt9+uFXuOoKqsxKe8RLDzt+Z9IyMh
-        qayYQy6NJsEkHLT4ujCqJyR9npqPkCE+zD2EINCA5aK57EF/paFnWR2QbIGghPLEcrJb0Xm3Mjl
-        ahwsAQSKS1Kwj3AvhrKpE
-X-Received: by 2002:a05:600c:19cc:b0:3b4:adca:a821 with SMTP id u12-20020a05600c19cc00b003b4adcaa821mr1501642wmq.37.1664263602892;
-        Tue, 27 Sep 2022 00:26:42 -0700 (PDT)
-X-Google-Smtp-Source: AMsMyM5/u7dRyYkitd+pZfI4fWVynEDAa14tDXYouDfpjUugWODzpdBq08pRSKrBR8ZnTmXtzQFY8g==
-X-Received: by 2002:a05:600c:19cc:b0:3b4:adca:a821 with SMTP id u12-20020a05600c19cc00b003b4adcaa821mr1501630wmq.37.1664263602593;
-        Tue, 27 Sep 2022 00:26:42 -0700 (PDT)
-Received: from ?IPV6:2003:cb:c705:ff00:9ec2:6ff6:11a1:3e80? (p200300cbc705ff009ec26ff611a13e80.dip0.t-ipconnect.de. [2003:cb:c705:ff00:9ec2:6ff6:11a1:3e80])
-        by smtp.gmail.com with ESMTPSA id jb6-20020a05600c54e600b003a5537bb2besm885860wmb.25.2022.09.27.00.26.41
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Tue, 27 Sep 2022 00:26:42 -0700 (PDT)
-Message-ID: <5b62011e-e41c-ffb8-68f6-80e55925498c@redhat.com>
-Date:   Tue, 27 Sep 2022 09:26:40 +0200
+        h=content-transfer-encoding:to:subject:message-id:date:from:reply-to
+         :mime-version:x-gm-message-state:from:to:cc:subject:date;
+        bh=W2hJLXZEpV+2eqAKMNoZcDhofs3a0fuyhAGVXRo+6bw=;
+        b=oHOoYIlUzLdT5NEK0hGdzftIXuLJElJgaWUZlGjAw143eTh27mqvWnQ1q2PwKqvFei
+         WLsBnQiHA7CheQTpSoUZi4MXlK45lYLmH3cdIrN4Z2m5rwsYBCu7BZrHRuChHga7tx1K
+         Y3wVVVjACpDpOZmcJvfbAhkYUF0WAXzoWj/P6MEFPAiOcQVonQQ/w/6GbDj4qJF6rGyq
+         LVbL5AsAZCWHUuv+RKVd6QXT+tBvYW4rve87lyK9qluU9qYbupeuXxAXBVc/YeBNarSd
+         ModtE7Igg5vVvlE/nE8pqvAOPDB4ZwFqxaDfkNBI/q7EXBVGm6T0JrGzBgHDVVoUHa45
+         sX9Q==
+X-Gm-Message-State: ACrzQf2crEZQnt/SFDBFEIVhkOBNaascDCmzcR7w/+sBazU0frGLf3uP
+        nhScqf7UTCauDWXS/DO6S6xTbDusN0gPyAt1Lyc=
+X-Google-Smtp-Source: AMsMyM7c7wgd9OzrVTQ5mWvrzUBWwUWYdREQJQ3w3wQcWpJsQT5nlfVk3cr+S8oMWcwXLcrXHnc3Hy6DA1ypgXBrkcY=
+X-Received: by 2002:a05:6a00:1951:b0:54d:a413:7c68 with SMTP id
+ s17-20020a056a00195100b0054da4137c68mr27952396pfk.10.1664264250512; Tue, 27
+ Sep 2022 00:37:30 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.3.0
-To:     Zhao Gongyi <zhaogongyi@huawei.com>, linux-doc@vger.kernel.org,
-        linux-kernel@vger.kernel.org, linux-mm@kvack.org,
-        linux-kselftest@vger.kernel.org
-Cc:     akinobu.mita@gmail.com, corbet@lwn.net, osalvador@suse.de,
-        shuah@kernel.org
-References: <20220927032851.128174-1-zhaogongyi@huawei.com>
- <20220927032851.128174-2-zhaogongyi@huawei.com>
-Content-Language: en-US
-From:   David Hildenbrand <david@redhat.com>
-Organization: Red Hat
-Subject: Re: [PATCH -next v4 1/3] selftests/memory-hotplug: Add checking after
- online or offline
-In-Reply-To: <20220927032851.128174-2-zhaogongyi@huawei.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-Spam-Status: No, score=-4.5 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,NICE_REPLY_A,
-        RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,SPF_NONE autolearn=unavailable
-        autolearn_force=no version=3.4.6
+Received: by 2002:a05:7300:189c:b0:6f:2236:258 with HTTP; Tue, 27 Sep 2022
+ 00:37:29 -0700 (PDT)
+Reply-To: stefanopessia8766@hotmail.com
+From:   Stefano Pessina <georgekadatsa@gmail.com>
+Date:   Tue, 27 Sep 2022 10:37:29 +0300
+Message-ID: <CA++jw3ZGw8_chr4U3BVwdzKHa9t=ctL_47Nt-3UAPnfQ2ASrtw@mail.gmail.com>
+Subject: 
+To:     undisclosed-recipients:;
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Spam-Status: No, score=4.1 required=5.0 tests=BAYES_40,DKIM_SIGNED,
+        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_FROM,FREEMAIL_REPLYTO,
+        FREEMAIL_REPLYTO_END_DIGIT,RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,SPF_PASS,
+        UNDISC_FREEM autolearn=no autolearn_force=no version=3.4.6
+X-Spam-Level: ****
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On 27.09.22 05:28, Zhao Gongyi wrote:
-> Add checking for online_memory_expect_success()/
-> offline_memory_expect_success()/offline_memory_expect_fail(), or
-> the test would exit 0 although the functions return 1.
-> 
-> Signed-off-by: Zhao Gongyi <zhaogongyi@huawei.com>
-> ---
->   .../selftests/memory-hotplug/mem-on-off-test.sh      | 12 +++++++++---
->   1 file changed, 9 insertions(+), 3 deletions(-)
-> 
-> diff --git a/tools/testing/selftests/memory-hotplug/mem-on-off-test.sh b/tools/testing/selftests/memory-hotplug/mem-on-off-test.sh
-> index 46a97f318f58..1d87611a7d52 100755
-> --- a/tools/testing/selftests/memory-hotplug/mem-on-off-test.sh
-> +++ b/tools/testing/selftests/memory-hotplug/mem-on-off-test.sh
-> @@ -266,7 +266,9 @@ done
->   #
->   echo $error > $NOTIFIER_ERR_INJECT_DIR/actions/MEM_GOING_ONLINE/error
->   for memory in `hotpluggable_offline_memory`; do
-> -	online_memory_expect_fail $memory
-> +	if ! online_memory_expect_fail $memory; then
-> +		retval=1
-> +	fi
->   done
-> 
->   #
-> @@ -274,7 +276,9 @@ done
->   #
->   echo 0 > $NOTIFIER_ERR_INJECT_DIR/actions/MEM_GOING_ONLINE/error
->   for memory in `hotpluggable_offline_memory`; do
-> -	online_memory_expect_success $memory
-> +	if ! online_memory_expect_success $memory; then
-> +		retval=1
-> +	fi
->   done
-> 
->   #
-> @@ -283,7 +287,9 @@ done
->   echo $error > $NOTIFIER_ERR_INJECT_DIR/actions/MEM_GOING_OFFLINE/error
->   for memory in `hotpluggable_online_memory`; do
->   	if [ $((RANDOM % 100)) -lt $ratio ]; then
-> -		offline_memory_expect_fail $memory
-> +		if ! offline_memory_expect_fail $memory; then
-> +			retval=1
-> +		fi
->   	fi
-
-
-LGTM
-
-Reviewed-by: David Hildenbrand <david@redhat.com>
-
-
-I am questioning the stability of the offlining test, though.
-Offlining a random memory block can fail easily, because "->removable" is not
-expressive:
-
-# tools/testing/selftests/memory-hotplug/mem-on-off-test.sh
-Test scope: 2% hotplug memory
-          online all hot-pluggable memory in offline state:
-                  SKIPPED - no hot-pluggable memory in offline state
-          offline 2% hot-pluggable memory in online state
-          trying to offline 2 out of 96 memory block(s):
-online->offline memory0
-tools/testing/selftests/memory-hotplug/mem-on-off-test.sh: line 78: echo: write error: Invalid argument
-offline_memory_expect_success 0: unexpected fail
-online->offline memory10
-online->offline memory11
-
-
-I guess this test will almost always fail nowadays.
-
--- 
-Thanks,
-
-David / dhildenb
-
+--=20
+Kwot=C4=99 500 000 $ przekaza=C5=82 Pa=C5=84stwu STEFANO PESSINA. Uprzejmie=
+ wr=C3=B3=C4=87 po
+wi=C4=99cej informacji przez stefanopessia8766@hotmail.com
