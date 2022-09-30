@@ -2,46 +2,67 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id F33255F09FC
-	for <lists+linux-doc@lfdr.de>; Fri, 30 Sep 2022 13:21:46 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 7E4665F0B4B
+	for <lists+linux-doc@lfdr.de>; Fri, 30 Sep 2022 14:07:02 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S232383AbiI3LVo (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Fri, 30 Sep 2022 07:21:44 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:34924 "EHLO
+        id S231445AbiI3MGi (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Fri, 30 Sep 2022 08:06:38 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:41862 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S230425AbiI3LVB (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Fri, 30 Sep 2022 07:21:01 -0400
-Received: from szxga01-in.huawei.com (szxga01-in.huawei.com [45.249.212.187])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 6D3912722
-        for <linux-doc@vger.kernel.org>; Fri, 30 Sep 2022 04:09:35 -0700 (PDT)
-Received: from dggpemm500020.china.huawei.com (unknown [172.30.72.56])
-        by szxga01-in.huawei.com (SkyGuard) with ESMTP id 4Mf6qb173fzpVNq;
-        Fri, 30 Sep 2022 19:06:35 +0800 (CST)
-Received: from dggpemm500007.china.huawei.com (7.185.36.183) by
- dggpemm500020.china.huawei.com (7.185.36.49) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2375.31; Fri, 30 Sep 2022 19:09:33 +0800
-Received: from huawei.com (10.175.103.91) by dggpemm500007.china.huawei.com
- (7.185.36.183) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2375.31; Fri, 30 Sep
- 2022 19:09:33 +0800
-From:   Yang Yingliang <yangyingliang@huawei.com>
-To:     <linux-doc@vger.kernel.org>
-CC:     <corbet@lwn.net>, <yangyingliang@huawei.com>
-Subject: [PATCH -next 8/8] Documentation: devres: add missing IIO helpers
-Date:   Fri, 30 Sep 2022 19:25:34 +0800
-Message-ID: <20220930112534.861221-9-yangyingliang@huawei.com>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20220930112534.861221-1-yangyingliang@huawei.com>
-References: <20220930112534.861221-1-yangyingliang@huawei.com>
+        with ESMTP id S231408AbiI3MGh (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Fri, 30 Sep 2022 08:06:37 -0400
+Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id BE6B8137445;
+        Fri, 30 Sep 2022 05:06:33 -0700 (PDT)
+Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
+        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+        (No client certificate requested)
+        by dfw.source.kernel.org (Postfix) with ESMTPS id 5B59562312;
+        Fri, 30 Sep 2022 12:06:33 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 3F1F7C43470;
+        Fri, 30 Sep 2022 12:06:32 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=linuxfoundation.org;
+        s=korg; t=1664539592;
+        bh=S0mIJgFJM3dB0uXkyvoEXDo0PcaqtEvOtb8hBS/fxbY=;
+        h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+        b=heTjtm23rTZZUFi4PzjAN4DjWv/LUcSl0Yx3aXcuL+YSVPcRR7i/k72s5IUjC2MNV
+         d8et357QAxsU5Hjn26cXoms6XPU26b/l8qxlrge1FBciyMHeZjHG4UHRzW7QRoJ11S
+         M2T881APkkOAXWsSjLR2wNJwRhJSbmTolvBZQPWc=
+Date:   Fri, 30 Sep 2022 14:06:30 +0200
+From:   Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+To:     Elliot Berman <quic_eberman@quicinc.com>
+Cc:     Bjorn Andersson <quic_bjorande@quicinc.com>,
+        Murali Nalajala <quic_mnalajal@quicinc.com>,
+        Trilok Soni <quic_tsoni@quicinc.com>,
+        Srivatsa Vaddagiri <quic_svaddagi@quicinc.com>,
+        Carl van Schaik <quic_cvanscha@quicinc.com>,
+        Andy Gross <agross@kernel.org>,
+        Dmitry Baryshkov <dmitry.baryshkov@linaro.org>,
+        Jassi Brar <jassisinghbrar@gmail.com>,
+        linux-arm-kernel@lists.infradead.org,
+        Mark Rutland <mark.rutland@arm.com>,
+        Lorenzo Pieralisi <lorenzo.pieralisi@arm.com>,
+        Sudeep Holla <sudeep.holla@arm.com>,
+        Marc Zyngier <maz@kernel.org>,
+        Rob Herring <robh+dt@kernel.org>,
+        Krzysztof Kozlowski <krzysztof.kozlowski+dt@linaro.org>,
+        Jonathan Corbet <corbet@lwn.net>,
+        Will Deacon <will@kernel.org>,
+        Catalin Marinas <catalin.marinas@arm.com>,
+        Arnd Bergmann <arnd@arndb.de>, devicetree@vger.kernel.org,
+        linux-doc@vger.kernel.org, linux-arm-msm@vger.kernel.org,
+        linux-kernel@vger.kernel.org
+Subject: Re: [PATCH v4 10/14] gunyah: sysfs: Add node to describe supported
+ features
+Message-ID: <YzbbxuInZwILaflH@kroah.com>
+References: <20220928195633.2348848-1-quic_eberman@quicinc.com>
+ <20220928195633.2348848-11-quic_eberman@quicinc.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 7BIT
-Content-Type:   text/plain; charset=US-ASCII
-X-Originating-IP: [10.175.103.91]
-X-ClientProxiedBy: dggems703-chm.china.huawei.com (10.3.19.180) To
- dggpemm500007.china.huawei.com (7.185.36.183)
-X-CFilter-Loop: Reflected
-X-Spam-Status: No, score=-4.2 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_MED,
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20220928195633.2348848-11-quic_eberman@quicinc.com>
+X-Spam-Status: No, score=-7.2 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_HI,
         SPF_HELO_NONE,SPF_PASS autolearn=ham autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
@@ -49,46 +70,46 @@ Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Add some missing device-managed helpers of iio to devres.rst.
+On Wed, Sep 28, 2022 at 12:56:29PM -0700, Elliot Berman wrote:
+> Add a sysfs node to list the features that the Gunyah hypervisor and
+> Linux supports. For now, Linux support cspace (capability IDs) and
+> message queues, so only report those..
+> 
+> Signed-off-by: Elliot Berman <quic_eberman@quicinc.com>
+> ---
+>  Documentation/ABI/testing/sysfs-hypervisor-gunyah | 15 +++++++++++++++
+>  drivers/virt/gunyah/sysfs.c                       | 15 +++++++++++++++
+>  2 files changed, 30 insertions(+)
+> 
+> diff --git a/Documentation/ABI/testing/sysfs-hypervisor-gunyah b/Documentation/ABI/testing/sysfs-hypervisor-gunyah
+> index 7d74e74e9edd..6d0cde30355a 100644
+> --- a/Documentation/ABI/testing/sysfs-hypervisor-gunyah
+> +++ b/Documentation/ABI/testing/sysfs-hypervisor-gunyah
+> @@ -1,3 +1,18 @@
+> +What:		/sys/hypervisor/gunyah/features
+> +Date:		October 2022
+> +KernelVersion:	6.1
+> +Contact:	linux-arm-msm@vger.kernel.org
+> +Description:	If running under Gunyah:
+> +		Space separated list of features supported by Linux and Gunyah:
+> +		"cspace": Gunyah devices
+> +		"doorbell": Sending/receiving virtual interrupts via Gunyah doorbells
+> +		"message-queue": Sending/receiving messages via Gunyah message queues
+> +		"vic": Interrupt lending
+> +		"vpm": Virtual platform management
+> +		"vcpu": Virtual CPU management
+> +		"memextent": Memory lending/management
+> +		"trace": Gunyah hypervisor tracing
 
-devm_iio_kfifo_buffer_setup_ext() is introduced by commit 0a21526bc1d4 ("iio:
-kfifo: add devm_iio_triggered_buffer_setup_ext variant").
+Please no.  Why do you really need this type of list?  What hypervisor
+will NOT have them all present already?  Who will use this file and what
+will it be used for?
 
-devm_iio_triggered_buffer_setup_ext() is introduced by commit 5164c7889857 ("iio:
-triggered-buffer: add {devm_}iio_triggered_buffer_setup_ext variants").
+sysfs files should just be 1 value and not need to be parsed.  Yes, we
+have lists of features at times, but really, you need a very very good
+reason why this is the only way this information can be exposed and who
+is going to use it in order to be able to have this accepted.
 
-devm_iio_hw_consumer_alloc() is introduced by b688c18d3006 ("IIO: hw_consumer:
-add devm_iio_hw_consumer_alloc").
+thanks,
 
-devm_fwnode_iio_channel_get_by_name() is introduced by commit 1e64b9c5f9a0 ("iio:
-inkern: move to fwnode properties")
-
-Signed-off-by: Yang Yingliang <yangyingliang@huawei.com>
----
- Documentation/driver-api/driver-model/devres.rst | 4 ++++
- 1 file changed, 4 insertions(+)
-
-diff --git a/Documentation/driver-api/driver-model/devres.rst b/Documentation/driver-api/driver-model/devres.rst
-index 16558c6cf702..4daa9d14e527 100644
---- a/Documentation/driver-api/driver-model/devres.rst
-+++ b/Documentation/driver-api/driver-model/devres.rst
-@@ -287,12 +287,16 @@ IIO
-   devm_iio_device_register()
-   devm_iio_dmaengine_buffer_setup()
-   devm_iio_kfifo_buffer_setup()
-+  devm_iio_kfifo_buffer_setup_ext()
-   devm_iio_map_array_register()
-   devm_iio_triggered_buffer_setup()
-+  devm_iio_triggered_buffer_setup_ext()
-   devm_iio_trigger_alloc()
-   devm_iio_trigger_register()
-   devm_iio_channel_get()
-   devm_iio_channel_get_all()
-+  devm_iio_hw_consumer_alloc()
-+  devm_fwnode_iio_channel_get_by_name()
- 
- INPUT
-   devm_input_allocate_device()
--- 
-2.25.1
-
+greg k-h
