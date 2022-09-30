@@ -2,61 +2,68 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id C713C5F0AC2
-	for <lists+linux-doc@lfdr.de>; Fri, 30 Sep 2022 13:40:25 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 468A45F09F0
+	for <lists+linux-doc@lfdr.de>; Fri, 30 Sep 2022 13:21:35 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S231765AbiI3LkT (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Fri, 30 Sep 2022 07:40:19 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:36762 "EHLO
+        id S231276AbiI3LV3 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Fri, 30 Sep 2022 07:21:29 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:39008 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S231776AbiI3Ljy (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Fri, 30 Sep 2022 07:39:54 -0400
-X-Greylist: delayed 3347 seconds by postgrey-1.37 at lindbergh.monkeyblade.net; Fri, 30 Sep 2022 04:32:02 PDT
-Received: from 6.mo575.mail-out.ovh.net (6.mo575.mail-out.ovh.net [46.105.63.100])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 7CBEA166482
-        for <linux-doc@vger.kernel.org>; Fri, 30 Sep 2022 04:32:01 -0700 (PDT)
-Received: from player761.ha.ovh.net (unknown [10.109.156.77])
-        by mo575.mail-out.ovh.net (Postfix) with ESMTP id D1E7F2570A
-        for <linux-doc@vger.kernel.org>; Fri, 30 Sep 2022 10:35:15 +0000 (UTC)
-Received: from RCM-web10.webmail.mail.ovh.net (82-65-25-201.subs.proxad.net [82.65.25.201])
-        (Authenticated sender: steve@sk2.org)
-        by player761.ha.ovh.net (Postfix) with ESMTPSA id 9A26B2F2FF57A;
-        Fri, 30 Sep 2022 10:35:11 +0000 (UTC)
+        with ESMTP id S231284AbiI3LU4 (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Fri, 30 Sep 2022 07:20:56 -0400
+Received: from szxga01-in.huawei.com (szxga01-in.huawei.com [45.249.212.187])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id D5F32CC6
+        for <linux-doc@vger.kernel.org>; Fri, 30 Sep 2022 04:09:32 -0700 (PDT)
+Received: from dggpemm500023.china.huawei.com (unknown [172.30.72.54])
+        by szxga01-in.huawei.com (SkyGuard) with ESMTP id 4Mf6nz4XS5zlXQw;
+        Fri, 30 Sep 2022 19:05:11 +0800 (CST)
+Received: from dggpemm500007.china.huawei.com (7.185.36.183) by
+ dggpemm500023.china.huawei.com (7.185.36.83) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2375.31; Fri, 30 Sep 2022 19:09:30 +0800
+Received: from huawei.com (10.175.103.91) by dggpemm500007.china.huawei.com
+ (7.185.36.183) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2375.31; Fri, 30 Sep
+ 2022 19:09:30 +0800
+From:   Yang Yingliang <yangyingliang@huawei.com>
+To:     <linux-doc@vger.kernel.org>
+CC:     <corbet@lwn.net>, <yangyingliang@huawei.com>
+Subject: [PATCH -next 0/8] add some missing devm_* functions
+Date:   Fri, 30 Sep 2022 19:25:26 +0800
+Message-ID: <20220930112534.861221-1-yangyingliang@huawei.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-Date:   Fri, 30 Sep 2022 12:35:11 +0200
-From:   Stephen Kitt <steve@sk2.org>
-To:     Jonathan Corbet <corbet@lwn.net>
-Cc:     linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
-        linux-fsdevel@vger.kernel.org
-Subject: Re: [PATCH v2 0/5] Update the sysctl/fs documentation
-In-Reply-To: <20220930102937.135841-1-steve@sk2.org>
-References: <20220930102937.135841-1-steve@sk2.org>
-User-Agent: Roundcube Webmail/1.4.13
-Message-ID: <002664f794c712a55223abeb67316765@sk2.org>
-X-Sender: steve@sk2.org
-X-Originating-IP: 82.65.25.201
-X-Webmail-UserID: steve@sk2.org
-Content-Type: text/plain; charset=UTF-8;
- format=flowed
-Content-Transfer-Encoding: 8bit
-X-Ovh-Tracer-Id: 14295269643360175750
-X-VR-SPAMSTATE: OK
-X-VR-SPAMSCORE: -100
-X-VR-SPAMCAUSE: gggruggvucftvghtrhhoucdtuddrgedvfedrfeehvddgvdelucetufdoteggodetrfdotffvucfrrhhofhhilhgvmecuqfggjfdpvefjgfevmfevgfenuceurghilhhouhhtmecuhedttdenucesvcftvggtihhpihgvnhhtshculddquddttddmnecujfgurhepggffhffvvefujghffgfkgihitgfgsehtkehjtddtreejnecuhfhrohhmpefuthgvphhhvghnucfmihhtthcuoehsthgvvhgvsehskhdvrdhorhhgqeenucggtffrrghtthgvrhhnpeekhefgkeejieejgfevjeduveejkeegffdvtdejhffhteehvedtvdejjedvueeikeenucfkpheptddrtddrtddrtddpkedvrdeihedrvdehrddvtddunecuvehluhhsthgvrhfuihiivgeptdenucfrrghrrghmpehmohguvgepshhmthhpohhuthdphhgvlhhopehplhgrhigvrhejiedurdhhrgdrohhvhhdrnhgvthdpihhnvghtpedtrddtrddtrddtpdhmrghilhhfrhhomhepshhtvghvvgesshhkvddrohhrghdpnhgspghrtghpthhtohepuddprhgtphhtthhopehlihhnuhigqdguohgtsehvghgvrhdrkhgvrhhnvghlrdhorhhgpdfovfetjfhoshhtpehmohehjeeh
-X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_NONE,
-        SPF_HELO_NONE,SPF_PASS autolearn=unavailable autolearn_force=no
-        version=3.4.6
+Content-Transfer-Encoding: 7BIT
+Content-Type:   text/plain; charset=US-ASCII
+X-Originating-IP: [10.175.103.91]
+X-ClientProxiedBy: dggems703-chm.china.huawei.com (10.3.19.180) To
+ dggpemm500007.china.huawei.com (7.185.36.183)
+X-CFilter-Loop: Reflected
+X-Spam-Status: No, score=-4.2 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_MED,
+        SPF_HELO_NONE,SPF_PASS autolearn=ham autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Le 30/09/2022 12:29, Stephen Kitt a écrit :
-> Changes since v2:
+This patchset adds some missing devm_* functions which are
+introduced by earlier commits.
 
-Aargh, changes since v1 of course.
+Yang Yingliang (8):
+  Documentation: devres: add missing devm_acpi_dma_controller_free()
+    helper
+  Documentation: devres: add missing REGULATOR helper
+  Documentation: devres: add missing PWM helper
+  Documentation: devres: add missing PHY helpers
+  Documentation: devres: add missing MEM helper
+  Documentation: devres: add missing I2C helper
+  Documentation: devres: add missing LED helpers
+  Documentation: devres: add missing IIO helpers
 
-Regards,
+ Documentation/driver-api/driver-model/devres.rst | 14 ++++++++++++++
+ 1 file changed, 14 insertions(+)
 
-Stephen
+-- 
+2.25.1
+
