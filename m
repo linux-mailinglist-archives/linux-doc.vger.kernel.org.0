@@ -2,23 +2,23 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id B3FA75F09F9
-	for <lists+linux-doc@lfdr.de>; Fri, 30 Sep 2022 13:21:37 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id C2FF85F09F2
+	for <lists+linux-doc@lfdr.de>; Fri, 30 Sep 2022 13:21:35 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S231441AbiI3LVe (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Fri, 30 Sep 2022 07:21:34 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:58308 "EHLO
+        id S231284AbiI3LVa (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Fri, 30 Sep 2022 07:21:30 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:32844 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S231464AbiI3LU7 (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Fri, 30 Sep 2022 07:20:59 -0400
-Received: from szxga02-in.huawei.com (szxga02-in.huawei.com [45.249.212.188])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 6D8EA26DA
-        for <linux-doc@vger.kernel.org>; Fri, 30 Sep 2022 04:09:34 -0700 (PDT)
-Received: from dggpemm500021.china.huawei.com (unknown [172.30.72.57])
-        by szxga02-in.huawei.com (SkyGuard) with ESMTP id 4Mf6pB2hnrzWh7Q;
-        Fri, 30 Sep 2022 19:05:22 +0800 (CST)
+        with ESMTP id S231319AbiI3LU4 (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Fri, 30 Sep 2022 07:20:56 -0400
+Received: from szxga01-in.huawei.com (szxga01-in.huawei.com [45.249.212.187])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id BBD87D5C
+        for <linux-doc@vger.kernel.org>; Fri, 30 Sep 2022 04:09:33 -0700 (PDT)
+Received: from dggpemm500020.china.huawei.com (unknown [172.30.72.56])
+        by szxga01-in.huawei.com (SkyGuard) with ESMTP id 4Mf6p04qjvzlXSd;
+        Fri, 30 Sep 2022 19:05:12 +0800 (CST)
 Received: from dggpemm500007.china.huawei.com (7.185.36.183) by
- dggpemm500021.china.huawei.com (7.185.36.109) with Microsoft SMTP Server
+ dggpemm500020.china.huawei.com (7.185.36.49) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
  15.1.2375.31; Fri, 30 Sep 2022 19:09:31 +0800
 Received: from huawei.com (10.175.103.91) by dggpemm500007.china.huawei.com
@@ -28,9 +28,9 @@ Received: from huawei.com (10.175.103.91) by dggpemm500007.china.huawei.com
 From:   Yang Yingliang <yangyingliang@huawei.com>
 To:     <linux-doc@vger.kernel.org>
 CC:     <corbet@lwn.net>, <yangyingliang@huawei.com>
-Subject: [PATCH -next 2/8] Documentation: devres: add missing REGULATOR helper
-Date:   Fri, 30 Sep 2022 19:25:28 +0800
-Message-ID: <20220930112534.861221-3-yangyingliang@huawei.com>
+Subject: [PATCH -next 3/8] Documentation: devres: add missing PWM helper
+Date:   Fri, 30 Sep 2022 19:25:29 +0800
+Message-ID: <20220930112534.861221-4-yangyingliang@huawei.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20220930112534.861221-1-yangyingliang@huawei.com>
 References: <20220930112534.861221-1-yangyingliang@huawei.com>
@@ -49,9 +49,9 @@ Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Add missing devm_regulator_bulk_get_const() to devres.rst, it's introduced
-by commit 1de452a0edda ("regulator: core: Allow drivers to define their init
-data as const").
+Add missing devm_pwmchip_add() to devres.rst. It's introduced by
+commit bcda91bf86c1 ("pwm: Add a device-managed function to add
+PWM chips").
 
 Signed-off-by: Yang Yingliang <yangyingliang@huawei.com>
 ---
@@ -59,17 +59,17 @@ Signed-off-by: Yang Yingliang <yangyingliang@huawei.com>
  1 file changed, 1 insertion(+)
 
 diff --git a/Documentation/driver-api/driver-model/devres.rst b/Documentation/driver-api/driver-model/devres.rst
-index 72c835c3e533..aa5bb844e53d 100644
+index aa5bb844e53d..8a06c8fd8007 100644
 --- a/Documentation/driver-api/driver-model/devres.rst
 +++ b/Documentation/driver-api/driver-model/devres.rst
-@@ -407,6 +407,7 @@ PWM
- REGULATOR
-   devm_regulator_bulk_register_supply_alias()
-   devm_regulator_bulk_get()
-+  devm_regulator_bulk_get_const()
-   devm_regulator_bulk_get_enable()
-   devm_regulator_bulk_put()
-   devm_regulator_get()
+@@ -401,6 +401,7 @@ POWER
+   devm_reboot_mode_unregister()
+ 
+ PWM
++  devm_pwmchip_add()
+   devm_pwm_get()
+   devm_fwnode_pwm_get()
+ 
 -- 
 2.25.1
 
