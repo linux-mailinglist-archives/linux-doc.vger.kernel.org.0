@@ -2,140 +2,188 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id E53D45F3109
-	for <lists+linux-doc@lfdr.de>; Mon,  3 Oct 2022 15:18:50 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 747755F3160
+	for <lists+linux-doc@lfdr.de>; Mon,  3 Oct 2022 15:40:21 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S229696AbiJCNSs (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 3 Oct 2022 09:18:48 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:44858 "EHLO
+        id S229904AbiJCNkT (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 3 Oct 2022 09:40:19 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:57890 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S230157AbiJCNSm (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Mon, 3 Oct 2022 09:18:42 -0400
-Received: from mail-qt1-x842.google.com (mail-qt1-x842.google.com [IPv6:2607:f8b0:4864:20::842])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 19161215
-        for <linux-doc@vger.kernel.org>; Mon,  3 Oct 2022 06:18:41 -0700 (PDT)
-Received: by mail-qt1-x842.google.com with SMTP id r20so6272253qtn.12
-        for <linux-doc@vger.kernel.org>; Mon, 03 Oct 2022 06:18:41 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=content-transfer-encoding:to:subject:message-id:date:from:reply-to
-         :mime-version:from:to:cc:subject:date;
-        bh=rmkGPy6VmDRy6+8kEWq+V0Sst7xyvToKWWddQt+Ywl8=;
-        b=iW5uKWBxuCtsAdpYgGijZrAyLPSpHdgW1pkVjY4DMmrP3SEt0ZnpR+YYFaQMq7nJw+
-         GORU8xOHBMC/l3T6TMVVYWyPbzBvVKq7p3xSC7UpEK3CdPJorMj20kNVh6l3/Oac7Jme
-         JewFDphYm030Nz5MmAmoNCw6N4Onk/bFvpJ4MbH0YuLbqq1TabwKfqHFkIZmhiP9TCi7
-         V02wIhtXj9HgOanmwlyC5SHXNT822wOu874ZGcsb8uqeX53GaVHwXw13HGjeuiyByU8w
-         NlatEXHLf+aL1MvalKRU80Un70O9KYyKgen9A4CL+bW4Zw9c4r46j20ZAfAzuEU/l812
-         vEKA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=content-transfer-encoding:to:subject:message-id:date:from:reply-to
-         :mime-version:x-gm-message-state:from:to:cc:subject:date;
-        bh=rmkGPy6VmDRy6+8kEWq+V0Sst7xyvToKWWddQt+Ywl8=;
-        b=pg4EF2HDhCcLc8dcaYU4rOHt8xMi4srP0A7wE38U/DfJnplNOYPR4ZIOzdf+L7N+e9
-         +V6UEoGwHSCP9IMz4HXTsFk0ZvEX3T5EPyhBlqeDruH6bSCwcF1YgZo6WTqcSpL/tEPB
-         kkol8eVdx+1Sxe8pZe2v6NFQF51ANOZ8ShjjO/4Ye6WdBaExvQGvEe7MV15BmhR5act4
-         Pp1RE3q6r88ltjyPxOX8hh2AR28Y2HS9Rvrf+e66af5D4Or53kVbsDOAooZSzzxm605/
-         vLQ9jqwe26aFoAfA2CH8Fa3K0IFuDscY7x434su5nX4gMwKhUv93k0O7KMf0/1aXyuqz
-         1UAw==
-X-Gm-Message-State: ACrzQf1vLwwk78ldH33lNvbz5fRXUeSGh3SsC9yyTP12+WBdqxuOkGNb
-        ELSyt/QSiG3QL1A/s8zh7s6qrNia+07h4A8oaQs=
-X-Google-Smtp-Source: AMsMyM7LyjDmcTv49GdCNHRjngLUgzzo78oCzl05kmnsoV76U7GOqcmxSjx2X9r2y0TtdC5DBiRTcEEni9qkFjsDrxQ=
-X-Received: by 2002:a05:622a:1391:b0:35d:fb0:d830 with SMTP id
- o17-20020a05622a139100b0035d0fb0d830mr15446793qtk.607.1664803120249; Mon, 03
- Oct 2022 06:18:40 -0700 (PDT)
+        with ESMTP id S229864AbiJCNkS (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Mon, 3 Oct 2022 09:40:18 -0400
+Received: from mga17.intel.com (mga17.intel.com [192.55.52.151])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 520202936D;
+        Mon,  3 Oct 2022 06:40:17 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1664804417; x=1696340417;
+  h=date:from:to:cc:subject:message-id:references:
+   mime-version:in-reply-to;
+  bh=+5qCpWO+BAGW3ExOyW3chioNW0LHy3lT3j4pg7MiQnQ=;
+  b=OOOksX1axHfX1SVR+j4lORPLuVLsK7iwzxqWdv6ApHo38UIGUD5DsgI6
+   DS2UKQPzmtIpOjKtBynm0y8ig/SQbmU7Voq4AYonpgFjt4o5A4RWs5vgw
+   L20DqmmJTRMDC69VHNVL1L6pp0eJUcPEqJUD7grm0rc7fKw66j/lhfBew
+   srJqETT1T9DSAIkxJg7jpDzfzvuPpRoTDvYGg1G5eH7xnwygVFNP+bXnB
+   LPFi11WXwovj+EFuXoG9m466JpNm5HC44ySawY09MNBqcqHgCbNksPoCS
+   u6vUxznHfEnbBGEESA+gwkhNmRlcKyyVFvkibI/JkpMmX7J2DoEzkYkyj
+   Q==;
+X-IronPort-AV: E=McAfee;i="6500,9779,10489"; a="283003462"
+X-IronPort-AV: E=Sophos;i="5.93,365,1654585200"; 
+   d="scan'208";a="283003462"
+Received: from fmsmga005.fm.intel.com ([10.253.24.32])
+  by fmsmga107.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 03 Oct 2022 06:40:16 -0700
+X-IronPort-AV: E=McAfee;i="6500,9779,10489"; a="952343480"
+X-IronPort-AV: E=Sophos;i="5.93,365,1654585200"; 
+   d="scan'208";a="952343480"
+Received: from bandrei-mobl.ger.corp.intel.com (HELO box.shutemov.name) ([10.252.37.219])
+  by fmsmga005-auth.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 03 Oct 2022 06:40:08 -0700
+Received: by box.shutemov.name (Postfix, from userid 1000)
+        id 7FA5C104CE4; Mon,  3 Oct 2022 16:40:06 +0300 (+03)
+Date:   Mon, 3 Oct 2022 16:40:06 +0300
+From:   "Kirill A . Shutemov" <kirill.shutemov@linux.intel.com>
+To:     Rick Edgecombe <rick.p.edgecombe@intel.com>
+Cc:     x86@kernel.org, "H . Peter Anvin" <hpa@zytor.com>,
+        Thomas Gleixner <tglx@linutronix.de>,
+        Ingo Molnar <mingo@redhat.com>, linux-kernel@vger.kernel.org,
+        linux-doc@vger.kernel.org, linux-mm@kvack.org,
+        linux-arch@vger.kernel.org, linux-api@vger.kernel.org,
+        Arnd Bergmann <arnd@arndb.de>,
+        Andy Lutomirski <luto@kernel.org>,
+        Balbir Singh <bsingharora@gmail.com>,
+        Borislav Petkov <bp@alien8.de>,
+        Cyrill Gorcunov <gorcunov@gmail.com>,
+        Dave Hansen <dave.hansen@linux.intel.com>,
+        Eugene Syromiatnikov <esyr@redhat.com>,
+        Florian Weimer <fweimer@redhat.com>,
+        "H . J . Lu" <hjl.tools@gmail.com>, Jann Horn <jannh@google.com>,
+        Jonathan Corbet <corbet@lwn.net>,
+        Kees Cook <keescook@chromium.org>,
+        Mike Kravetz <mike.kravetz@oracle.com>,
+        Nadav Amit <nadav.amit@gmail.com>,
+        Oleg Nesterov <oleg@redhat.com>, Pavel Machek <pavel@ucw.cz>,
+        Peter Zijlstra <peterz@infradead.org>,
+        Randy Dunlap <rdunlap@infradead.org>,
+        "Ravi V . Shankar" <ravi.v.shankar@intel.com>,
+        Weijiang Yang <weijiang.yang@intel.com>,
+        joao.moreira@intel.com, John Allen <john.allen@amd.com>,
+        kcc@google.com, eranian@google.com, rppt@kernel.org,
+        jamorris@linux.microsoft.com, dethoma@microsoft.com,
+        Yu-cheng Yu <yu-cheng.yu@intel.com>
+Subject: Re: [PATCH v2 02/39] x86/cet/shstk: Add Kconfig option for Shadow
+ Stack
+Message-ID: <20221003134006.yoye7dvywuec6bco@box.shutemov.name>
+References: <20220929222936.14584-1-rick.p.edgecombe@intel.com>
+ <20220929222936.14584-3-rick.p.edgecombe@intel.com>
 MIME-Version: 1.0
-Received: by 2002:ad4:5aa2:0:0:0:0:0 with HTTP; Mon, 3 Oct 2022 06:18:39 -0700 (PDT)
-Reply-To: donaldphilip801@gmail.com
-From:   James Williame <jameswilliame730@gmail.com>
-Date:   Mon, 3 Oct 2022 06:18:39 -0700
-Message-ID: <CAJN_m4cMR=GvKNbM4bv+ov7ko7uS65n9xa6Hvw1nw5hpzfw40w@mail.gmail.com>
-Subject: ATM CARD
-To:     undisclosed-recipients:;
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Spam-Status: Yes, score=5.2 required=5.0 tests=BAYES_50,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_ENVFROM_END_DIGIT,
-        FREEMAIL_FROM,FREEMAIL_REPLYTO,FREEMAIL_REPLYTO_END_DIGIT,
-        RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,SPF_PASS,UNDISC_FREEM autolearn=no
-        autolearn_force=no version=3.4.6
-X-Spam-Report: * -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at
-        *      https://www.dnswl.org/, no trust
-        *      [2607:f8b0:4864:20:0:0:0:842 listed in]
-        [list.dnswl.org]
-        *  0.8 BAYES_50 BODY: Bayes spam probability is 40 to 60%
-        *      [score: 0.4816]
-        * -0.0 SPF_PASS SPF: sender matches SPF record
-        *  0.2 FREEMAIL_ENVFROM_END_DIGIT Envelope-from freemail username ends
-        *       in digit
-        *      [jameswilliame730[at]gmail.com]
-        *  0.0 SPF_HELO_NONE SPF: HELO does not publish an SPF Record
-        *  0.0 FREEMAIL_FROM Sender email is commonly abused enduser mail
-        *      provider
-        *      [jameswilliame730[at]gmail.com]
-        *  0.2 FREEMAIL_REPLYTO_END_DIGIT Reply-To freemail username ends in
-        *      digit
-        *      [donaldphilip801[at]gmail.com]
-        * -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
-        *      author's domain
-        * -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
-        *  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
-        *       valid
-        * -0.1 DKIM_VALID_EF Message has a valid DKIM or DK signature from
-        *      envelope-from domain
-        *  3.1 UNDISC_FREEM Undisclosed recipients + freemail reply-to
-        *  1.0 FREEMAIL_REPLYTO Reply-To/From or Reply-To/body contain
-        *      different freemails
-X-Spam-Level: *****
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20220929222936.14584-3-rick.p.edgecombe@intel.com>
+X-Spam-Status: No, score=-4.3 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_EF,RCVD_IN_DNSWL_MED,SPF_HELO_NONE,
+        SPF_NONE autolearn=ham autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Drah=C3=BD p=C5=99=C3=ADteli
+On Thu, Sep 29, 2022 at 03:28:59PM -0700, Rick Edgecombe wrote:
+> From: Yu-cheng Yu <yu-cheng.yu@intel.com>
+> 
+> Shadow Stack provides protection against function return address
+> corruption. It is active when the processor supports it, the kernel has
+> CONFIG_X86_SHADOW_STACK enabled, and the application is built for the
+> feature. This is only implemented for the 64-bit kernel. When it is
+> enabled, legacy non-Shadow Stack applications continue to work, but without
+> protection.
+> 
+> Signed-off-by: Yu-cheng Yu <yu-cheng.yu@intel.com>
+> Co-developed-by: Rick Edgecombe <rick.p.edgecombe@intel.com>
+> Signed-off-by: Rick Edgecombe <rick.p.edgecombe@intel.com>
+> Cc: Kees Cook <keescook@chromium.org>
+> 
+> ---
+> 
+> v2:
+>  - Remove already wrong kernel size increase info (tlgx)
+>  - Change prompt to remove "Intel" (tglx)
+>  - Update line about what CPUs are supported (Dave)
+> 
+> Yu-cheng v25:
+>  - Remove X86_CET and use X86_SHADOW_STACK directly.
+> 
+> Yu-cheng v24:
+>  - Update for the splitting X86_CET to X86_SHADOW_STACK and X86_IBT.
+> 
+>  arch/x86/Kconfig           | 18 ++++++++++++++++++
+>  arch/x86/Kconfig.assembler |  5 +++++
+>  2 files changed, 23 insertions(+)
+> 
+> diff --git a/arch/x86/Kconfig b/arch/x86/Kconfig
+> index f9920f1341c8..b68eb75887b8 100644
+> --- a/arch/x86/Kconfig
+> +++ b/arch/x86/Kconfig
+> @@ -26,6 +26,7 @@ config X86_64
+>  	depends on 64BIT
+>  	# Options that are inherently 64-bit kernel only:
+>  	select ARCH_HAS_GIGANTIC_PAGE
+> +	select ARCH_HAS_SHADOW_STACK
+>  	select ARCH_SUPPORTS_INT128 if CC_HAS_INT128
+>  	select ARCH_USE_CMPXCHG_LOCKREF
+>  	select HAVE_ARCH_SOFT_DIRTY
+> @@ -1936,6 +1937,23 @@ config X86_SGX
+>  
+>  	  If unsure, say N.
+>  
+> +config ARCH_HAS_SHADOW_STACK
+> +	def_bool n
 
-Jak se dnes m=C3=A1=C5=A1? Mysl=C3=ADm, =C5=BEe od na=C5=A1=C3=AD posledn=
-=C3=AD komunikace uplynula
-dlouh=C3=A1 doba. Ka=C5=BEdop=C3=A1dn=C4=9B v=C3=A1s znovu kontaktuji ohled=
-n=C4=9B na=C5=A1=C3=AD p=C5=99edchoz=C3=AD
-transakce, kter=C3=A1 s v=C3=A1mi nebyla =C3=BAsp=C4=9B=C5=A1n=C4=9B dokon=
-=C4=8Dena. Bylo ne=C5=A1=C5=A5astn=C3=A9, =C5=BEe
-va=C5=A1e partnerstv=C3=AD se mnou nedok=C3=A1zalo dokon=C4=8Dit p=C5=99evo=
-d fondu. Nev=C3=ADm,
-mo=C5=BEn=C3=A1 kv=C5=AFli velk=C3=A9mu tlaku jste nuceni ztratit z=C3=A1je=
-m o transakci.
+Hm. Shouldn't ARCH_HAS_SHADOW_STACK definition be in arch/Kconfig, not
+under arch/x86?
 
-V ka=C5=BEd=C3=A9m p=C5=99=C3=ADpad=C4=9B jsem r=C3=A1d, =C5=BEe v=C3=A1s m=
-ohu informovat o m=C3=A9m =C3=BAsp=C4=9Bchu p=C5=99i
-p=C5=99evodu fondu ve spolupr=C3=A1ci s nov=C3=BDm partnerem z Venezuely. M=
-oment=C3=A1ln=C4=9B
-jsem ve Venezuele kv=C5=AFli investici. Nezapomn=C4=9Bl jsem v=C5=A1ak na v=
-a=C5=A1e minul=C3=A9
-snahy a pokusy pomoci mi p=C5=99i p=C5=99evodu fondu, p=C5=99esto=C5=BEe js=
-me nemohli
-dosp=C4=9Bt ke konkr=C3=A9tn=C3=ADmu z=C3=A1v=C4=9Bru. Jako ocen=C4=9Bn=C3=
-=AD va=C5=A1=C3=AD snahy mi pom=C3=A1hat jsme
-se j=C3=A1 a m=C5=AFj nov=C3=BD partner rozhodli, =C5=BEe v=C3=A1m vynahrad=
-=C3=ADme 850 000,00 $,
-abyste s n=C3=A1mi mohli za=C5=BE=C3=ADt radost a =C5=A1t=C4=9Bst=C3=AD.
+Also, I think "def_bool n" has the same meaning as just "bool", no?
 
-Nechal jsem va=C5=A1i kartu s kompenza=C4=8Dn=C3=ADm v=C3=ADzem u sv=C3=A9 =
-sekret=C3=A1=C5=99ky, aby mi
-pomohla ji poslat. Nyn=C3=AD kontaktujte mou sekret=C3=A1=C5=99ku v Togu, j=
-menuje se
-pan=C3=AD Donald Philip a jej=C3=AD e-mail je: < donaldphilip801@gmail.com =
->.
-=C5=98ekn=C4=9Bte j=C3=AD, aby v=C3=A1m poslala kartu s v=C3=ADzem do banko=
-matu v hodnot=C4=9B 850
-000,00 $. V tuto chv=C3=ADli jsem zde ve Venezuele velmi zanepr=C3=A1zdn=C4=
-=9Bn kv=C5=AFli
-investi=C4=8Dn=C3=ADm projekt=C5=AFm, kter=C3=A9 j=C3=A1 a nov=C3=BD partne=
-r m=C3=A1me po ruce. Rychle se
-spojte s pan=C3=AD Donald Philipovou a =C5=99ekn=C4=9Bte j=C3=AD, kam v=C3=
-=A1m m=C3=A1 poslat
-kompenza=C4=8Dn=C3=AD v=C3=ADzovou kartu. Kartu v=C3=A1m bez prodlen=C3=AD =
-za=C5=A1le. P=C5=99eji v=C3=A1m
-hodn=C4=9B =C5=A1t=C4=9Bst=C3=AD ve v=C5=A1ech va=C5=A1ich snah=C3=A1ch.
+> +
+> +config X86_SHADOW_STACK
+> +	prompt "X86 Shadow Stack"
+> +	def_bool n
 
-james williame
+Maybe just
+
+	bool "X86 Shadow Stack"
+
+?
+
+> +	depends on ARCH_HAS_SHADOW_STACK
+> +	select ARCH_USES_HIGH_VMA_FLAGS
+> +	help
+> +	  Shadow Stack protection is a hardware feature that detects function
+> +	  return address corruption. Today the kernel's support is limited to
+> +	  virtualizing it in KVM guests.
+> +
+> +	  CPUs supporting shadow stacks were first released in 2020.
+> +
+> +	  If unsure, say N.
+> +
+>  config EFI
+>  	bool "EFI runtime service support"
+>  	depends on ACPI
+> diff --git a/arch/x86/Kconfig.assembler b/arch/x86/Kconfig.assembler
+> index 26b8c08e2fc4..00c79dd93651 100644
+> --- a/arch/x86/Kconfig.assembler
+> +++ b/arch/x86/Kconfig.assembler
+> @@ -19,3 +19,8 @@ config AS_TPAUSE
+>  	def_bool $(as-instr,tpause %ecx)
+>  	help
+>  	  Supported by binutils >= 2.31.1 and LLVM integrated assembler >= V7
+> +
+> +config AS_WRUSS
+> +	def_bool $(as-instr,wrussq %rax$(comma)(%rbx))
+> +	help
+> +	  Supported by binutils >= 2.31 and LLVM integrated assembler
+> -- 
+> 2.17.1
+> 
+
+-- 
+  Kiryl Shutsemau / Kirill A. Shutemov
