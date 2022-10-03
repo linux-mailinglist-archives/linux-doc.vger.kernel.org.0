@@ -2,273 +2,206 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id DF3E65F28BB
-	for <lists+linux-doc@lfdr.de>; Mon,  3 Oct 2022 08:52:44 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id C7DE05F28E7
+	for <lists+linux-doc@lfdr.de>; Mon,  3 Oct 2022 09:01:21 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S229469AbiJCGwo (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 3 Oct 2022 02:52:44 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:38010 "EHLO
+        id S229710AbiJCHBP (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 3 Oct 2022 03:01:15 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:56994 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S229693AbiJCGwj (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Mon, 3 Oct 2022 02:52:39 -0400
-Received: from metis.ext.pengutronix.de (metis.ext.pengutronix.de [IPv6:2001:67c:670:201:290:27ff:fe1d:cc33])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 758D93EA7E
-        for <linux-doc@vger.kernel.org>; Sun,  2 Oct 2022 23:52:28 -0700 (PDT)
-Received: from drehscheibe.grey.stw.pengutronix.de ([2a0a:edc0:0:c01:1d::a2])
-        by metis.ext.pengutronix.de with esmtps (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256)
-        (Exim 4.92)
-        (envelope-from <ore@pengutronix.de>)
-        id 1ofFJ9-0000yo-GS; Mon, 03 Oct 2022 08:52:07 +0200
-Received: from [2a0a:edc0:0:1101:1d::ac] (helo=dude04.red.stw.pengutronix.de)
-        by drehscheibe.grey.stw.pengutronix.de with esmtp (Exim 4.94.2)
-        (envelope-from <ore@pengutronix.de>)
-        id 1ofFJ8-004K5V-Au; Mon, 03 Oct 2022 08:52:04 +0200
-Received: from ore by dude04.red.stw.pengutronix.de with local (Exim 4.94.2)
-        (envelope-from <ore@pengutronix.de>)
-        id 1ofFJ5-00GJlO-HV; Mon, 03 Oct 2022 08:52:03 +0200
-From:   Oleksij Rempel <o.rempel@pengutronix.de>
-To:     Andrew Lunn <andrew@lunn.ch>,
-        Heiner Kallweit <hkallweit1@gmail.com>,
-        "David S. Miller" <davem@davemloft.net>,
-        Eric Dumazet <edumazet@google.com>,
-        Jakub Kicinski <kuba@kernel.org>,
-        Paolo Abeni <pabeni@redhat.com>,
-        Russell King <linux@armlinux.org.uk>,
+        with ESMTP id S229657AbiJCHBH (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Mon, 3 Oct 2022 03:01:07 -0400
+Received: from mail-wr1-f51.google.com (mail-wr1-f51.google.com [209.85.221.51])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 7AAFC183AB;
+        Mon,  3 Oct 2022 00:01:04 -0700 (PDT)
+Received: by mail-wr1-f51.google.com with SMTP id bv17so6306353wrb.10;
+        Mon, 03 Oct 2022 00:01:04 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=content-transfer-encoding:in-reply-to:from:references:cc:to
+         :content-language:subject:user-agent:mime-version:date:message-id
+         :x-gm-message-state:from:to:cc:subject:date;
+        bh=QZxEh5TlGS++zfFKZtN1bwu8VZwicVL3B9zKI6Kxkv4=;
+        b=3KSwQDeOnUibGP+tiAG5QhpPMcVZWgJmL2d/3Gx5HTmzObOm1htIMIENHQJG8d+nWp
+         mjNM4eKn+39aemRSi47S6xOyWrqdmxtFS8cum5vFN49LhxXM8dt4RqgKHM9/B5i5Ox32
+         89KDTuXcAFy5IHMD5W1iq/LAOWVsbdKodqlBviXnSBhgWnUKfHsbIx19TzMzJRnjZsv/
+         Y4ZHFmmztXwlTmKSHfC6adf7cKlV6K2CVJr7TUMzCH5P2BOrs+5WwILJqfuSolvSZ47n
+         BG3NLbx7+oAcX1+m3q5Q9TQ69fOwBz2rdEHIoxT231n486juzdsls/uIZChg1VZJMrGC
+         X8Wg==
+X-Gm-Message-State: ACrzQf3efDUFizHa0/GYS5lyimUQW4WjW4hIP5cHbuqwbpuhenTvrkjS
+        k4/e/CaxMgbVE+ajLO6pacL6c92qCkqnvg==
+X-Google-Smtp-Source: AMsMyM7oTmPD9TmDJpCJLB5vx4Vxbpy4WraurpF7b0hIVCUMh3x/LYxkMeo2Z1XcyBUM3+J1f7gZ4w==
+X-Received: by 2002:a5d:6484:0:b0:22e:3456:37fa with SMTP id o4-20020a5d6484000000b0022e345637famr3710653wri.203.1664780462955;
+        Mon, 03 Oct 2022 00:01:02 -0700 (PDT)
+Received: from ?IPV6:2a0b:e7c0:0:107::70f? ([2a0b:e7c0:0:107::70f])
+        by smtp.gmail.com with ESMTPSA id fc9-20020a05600c524900b003b31c560a0csm11376995wmb.12.2022.10.03.00.01.01
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Mon, 03 Oct 2022 00:01:02 -0700 (PDT)
+Message-ID: <bbde3488-be49-371d-3de3-89e759d639f4@kernel.org>
+Date:   Mon, 3 Oct 2022 09:01:00 +0200
+MIME-Version: 1.0
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.3.0
+Subject: Re: [PATCH v4 14/14] tty: gunyah: Add tty console driver for RM
+ Console Services
+Content-Language: en-US
+To:     Elliot Berman <quic_eberman@quicinc.com>,
+        Bjorn Andersson <quic_bjorande@quicinc.com>,
+        Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+Cc:     Murali Nalajala <quic_mnalajal@quicinc.com>,
+        Trilok Soni <quic_tsoni@quicinc.com>,
+        Srivatsa Vaddagiri <quic_svaddagi@quicinc.com>,
+        Carl van Schaik <quic_cvanscha@quicinc.com>,
+        Andy Gross <agross@kernel.org>,
+        Dmitry Baryshkov <dmitry.baryshkov@linaro.org>,
+        Jassi Brar <jassisinghbrar@gmail.com>,
+        linux-arm-kernel@lists.infradead.org,
+        Mark Rutland <mark.rutland@arm.com>,
+        Lorenzo Pieralisi <lorenzo.pieralisi@arm.com>,
+        Sudeep Holla <sudeep.holla@arm.com>,
+        Marc Zyngier <maz@kernel.org>,
         Rob Herring <robh+dt@kernel.org>,
         Krzysztof Kozlowski <krzysztof.kozlowski+dt@linaro.org>,
-        Jonathan Corbet <corbet@lwn.net>
-Cc:     Oleksij Rempel <o.rempel@pengutronix.de>, kernel@pengutronix.de,
-        linux-kernel@vger.kernel.org, netdev@vger.kernel.org,
-        devicetree@vger.kernel.org, linux-doc@vger.kernel.org,
-        David Jander <david@protonic.nl>,
-        Luka Perkov <luka.perkov@sartura.hr>,
-        Robert Marko <robert.marko@sartura.hr>
-Subject: [PATCH net-next v8 7/7] net: pse-pd: add regulator based PSE driver
-Date:   Mon,  3 Oct 2022 08:52:02 +0200
-Message-Id: <20221003065202.3889095-8-o.rempel@pengutronix.de>
-X-Mailer: git-send-email 2.30.2
-In-Reply-To: <20221003065202.3889095-1-o.rempel@pengutronix.de>
-References: <20221003065202.3889095-1-o.rempel@pengutronix.de>
-MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-SA-Exim-Connect-IP: 2a0a:edc0:0:c01:1d::a2
-X-SA-Exim-Mail-From: ore@pengutronix.de
-X-SA-Exim-Scanned: No (on metis.ext.pengutronix.de); SAEximRunCond expanded to false
-X-PTX-Original-Recipient: linux-doc@vger.kernel.org
-X-Spam-Status: No, score=-4.2 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_MED,
-        SPF_HELO_NONE,SPF_PASS autolearn=unavailable autolearn_force=no
-        version=3.4.6
+        Jonathan Corbet <corbet@lwn.net>,
+        Will Deacon <will@kernel.org>,
+        Catalin Marinas <catalin.marinas@arm.com>,
+        Arnd Bergmann <arnd@arndb.de>, devicetree@vger.kernel.org,
+        linux-doc@vger.kernel.org, linux-arm-msm@vger.kernel.org,
+        linux-kernel@vger.kernel.org
+References: <20220928195633.2348848-1-quic_eberman@quicinc.com>
+ <20220928195633.2348848-15-quic_eberman@quicinc.com>
+From:   Jiri Slaby <jirislaby@kernel.org>
+In-Reply-To: <20220928195633.2348848-15-quic_eberman@quicinc.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-Spam-Status: No, score=-2.5 required=5.0 tests=BAYES_00,
+        FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,HEADER_FROM_DIFFERENT_DOMAINS,
+        NICE_REPLY_A,RCVD_IN_DNSWL_NONE,RCVD_IN_MSPIKE_H2,SPF_HELO_NONE,
+        SPF_PASS autolearn=ham autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Add generic, regulator based PSE driver to support simple Power Sourcing
-Equipment without automatic classification support.
+On 28. 09. 22, 21:56, Elliot Berman wrote:
+> --- /dev/null
+> +++ b/drivers/tty/gunyah_tty.c
+> @@ -0,0 +1,409 @@
+> +// SPDX-License-Identifier: GPL-2.0-only
+> +/*
+> + * Copyright (c) 2022 Qualcomm Innovation Center, Inc. All rights reserved.
+> + */
+> +
+> +#define pr_fmt(fmt) "gh_rsc_mgr_console: " fmt
+> +
+> +#include <linux/gunyah_rsc_mgr.h>
+> +#include <linux/auxiliary_bus.h>
+> +#include <linux/workqueue.h>
+> +#include <linux/spinlock.h>
+> +#include <linux/tty_flip.h>
+> +#include <linux/console.h>
+> +#include <linux/module.h>
+> +#include <linux/kfifo.h>
+> +#include <linux/kref.h>
+> +#include <linux/slab.h>
+> +#include <linux/tty.h>
 
-This driver was tested on 10Bast-T1L switch with regulator based PoDL PSE.
+Sort alphabetically, please. Not by inv. xmas tree.
 
-Signed-off-by: Oleksij Rempel <o.rempel@pengutronix.de>
-Reviewed-by: Andrew Lunn <andrew@lunn.ch>
----
-changes v5:
-- use dev_err_probe on devm_regulator_get_exclusive() error
-- add __maybe_unused to the of_device_id
-changes v4:
-- rename to pse_regulator
-changes v2:
-- add regulator_enable test to the probe
-- migrate to the new PSE ethtool API
----
- drivers/net/pse-pd/Kconfig         |  11 +++
- drivers/net/pse-pd/Makefile        |   2 +
- drivers/net/pse-pd/pse_regulator.c | 147 +++++++++++++++++++++++++++++
- 3 files changed, 160 insertions(+)
- create mode 100644 drivers/net/pse-pd/pse_regulator.c
+> +/*
+> + * The Linux TTY code does not support dynamic addition of tty derived devices so we need to know
+> + * how many tty devices we might need when space is allocated for the tty device. Since VMs might be
+> + * added/removed dynamically, we need to make sure we have enough allocated.
+> + */
+> +#define RSC_MGR_TTY_ADAPTERS		16
+> +
+> +/* # of payload bytes that can fit in a 1-fragment CONSOLE_WRITE message */
+> +#define RM_CONS_WRITE_MSG_SIZE	((1 * (GH_MSGQ_MAX_MSG_SIZE - 8)) - 4)
 
-diff --git a/drivers/net/pse-pd/Kconfig b/drivers/net/pse-pd/Kconfig
-index 49c7f0bcff52..73d163704068 100644
---- a/drivers/net/pse-pd/Kconfig
-+++ b/drivers/net/pse-pd/Kconfig
-@@ -9,3 +9,14 @@ menuconfig PSE_CONTROLLER
- 	  Generic Power Sourcing Equipment Controller support.
- 
- 	  If unsure, say no.
-+
-+if PSE_CONTROLLER
-+
-+config PSE_REGULATOR
-+	tristate "Regulator based PSE controller"
-+	help
-+	  This module provides support for simple regulator based Ethernet Power
-+	  Sourcing Equipment without automatic classification support. For
-+	  example for basic implementation of PoDL (802.3bu) specification.
-+
-+endif
-diff --git a/drivers/net/pse-pd/Makefile b/drivers/net/pse-pd/Makefile
-index cfa780c7801d..1b8aa4c70f0b 100644
---- a/drivers/net/pse-pd/Makefile
-+++ b/drivers/net/pse-pd/Makefile
-@@ -2,3 +2,5 @@
- # Makefile for Linux PSE drivers
- 
- obj-$(CONFIG_PSE_CONTROLLER) += pse_core.o
-+
-+obj-$(CONFIG_PSE_REGULATOR) += pse_regulator.o
-diff --git a/drivers/net/pse-pd/pse_regulator.c b/drivers/net/pse-pd/pse_regulator.c
-new file mode 100644
-index 000000000000..e2bf8306ca90
---- /dev/null
-+++ b/drivers/net/pse-pd/pse_regulator.c
-@@ -0,0 +1,147 @@
-+// SPDX-License-Identifier: GPL-2.0-only
-+//
-+// Driver for the regulator based Ethernet Power Sourcing Equipment, without
-+// auto classification support.
-+//
-+// Copyright (c) 2022 Pengutronix, Oleksij Rempel <kernel@pengutronix.de>
-+//
-+
-+#include <linux/module.h>
-+#include <linux/of.h>
-+#include <linux/platform_device.h>
-+#include <linux/pse-pd/pse.h>
-+#include <linux/regulator/consumer.h>
-+
-+struct pse_reg_priv {
-+	struct pse_controller_dev pcdev;
-+	struct regulator *ps; /*power source */
-+	enum ethtool_podl_pse_admin_state admin_state;
-+};
-+
-+static struct pse_reg_priv *to_pse_reg(struct pse_controller_dev *pcdev)
-+{
-+	return container_of(pcdev, struct pse_reg_priv, pcdev);
-+}
-+
-+static int
-+pse_reg_ethtool_set_config(struct pse_controller_dev *pcdev, unsigned long id,
-+			   struct netlink_ext_ack *extack,
-+			   const struct pse_control_config *config)
-+{
-+	struct pse_reg_priv *priv = to_pse_reg(pcdev);
-+	int ret;
-+
-+	if (priv->admin_state == config->admin_cotrol)
-+		return 0;
-+
-+	switch (config->admin_cotrol) {
-+	case ETHTOOL_PODL_PSE_ADMIN_STATE_ENABLED:
-+		ret = regulator_enable(priv->ps);
-+		break;
-+	case ETHTOOL_PODL_PSE_ADMIN_STATE_DISABLED:
-+		ret = regulator_disable(priv->ps);
-+		break;
-+	default:
-+		dev_err(pcdev->dev, "Unknown admin state %i\n",
-+			config->admin_cotrol);
-+		ret = -ENOTSUPP;
-+	}
-+
-+	if (ret)
-+		return ret;
-+
-+	priv->admin_state = config->admin_cotrol;
-+
-+	return 0;
-+}
-+
-+static int
-+pse_reg_ethtool_get_status(struct pse_controller_dev *pcdev, unsigned long id,
-+			   struct netlink_ext_ack *extack,
-+			   struct pse_control_status *status)
-+{
-+	struct pse_reg_priv *priv = to_pse_reg(pcdev);
-+	int ret;
-+
-+	ret = regulator_is_enabled(priv->ps);
-+	if (ret < 0)
-+		return ret;
-+
-+	if (!ret)
-+		status->podl_pw_status = ETHTOOL_PODL_PSE_PW_D_STATUS_DISABLED;
-+	else
-+		status->podl_pw_status =
-+			ETHTOOL_PODL_PSE_PW_D_STATUS_DELIVERING;
-+
-+	status->podl_admin_state = priv->admin_state;
-+
-+	return 0;
-+}
-+
-+static const struct pse_controller_ops pse_reg_ops = {
-+	.ethtool_get_status = pse_reg_ethtool_get_status,
-+	.ethtool_set_config = pse_reg_ethtool_set_config,
-+};
-+
-+static int
-+pse_reg_probe(struct platform_device *pdev)
-+{
-+	struct device *dev = &pdev->dev;
-+	struct pse_reg_priv *priv;
-+	int ret;
-+
-+	priv = devm_kzalloc(&pdev->dev, sizeof(*priv), GFP_KERNEL);
-+	if (!priv)
-+		return -ENOMEM;
-+
-+	if (!pdev->dev.of_node)
-+		return -ENOENT;
-+
-+	priv->ps = devm_regulator_get_exclusive(dev, "pse");
-+	if (IS_ERR(priv->ps))
-+		return dev_err_probe(dev, PTR_ERR(priv->ps),
-+				     "failed to get PSE regulator.\n");
-+
-+	platform_set_drvdata(pdev, priv);
-+
-+	ret = regulator_is_enabled(priv->ps);
-+	if (ret < 0)
-+		return ret;
-+
-+	if (ret)
-+		priv->admin_state = ETHTOOL_PODL_PSE_ADMIN_STATE_ENABLED;
-+	else
-+		priv->admin_state = ETHTOOL_PODL_PSE_ADMIN_STATE_DISABLED;
-+
-+	priv->pcdev.owner = THIS_MODULE;
-+	priv->pcdev.ops = &pse_reg_ops;
-+	priv->pcdev.dev = dev;
-+	ret = devm_pse_controller_register(dev, &priv->pcdev);
-+	if (ret) {
-+		dev_err(dev, "failed to register PSE controller (%pe)\n",
-+			ERR_PTR(ret));
-+		return ret;
-+	}
-+
-+	return 0;
-+}
-+
-+static const __maybe_unused struct of_device_id pse_reg_of_match[] = {
-+	{ .compatible = "podl-pse-regulator", },
-+	{ },
-+};
-+MODULE_DEVICE_TABLE(of, pse_reg_of_match);
-+
-+static struct platform_driver pse_reg_driver = {
-+	.probe		= pse_reg_probe,
-+	.driver		= {
-+		.name		= "PSE regulator",
-+		.of_match_table = of_match_ptr(pse_reg_of_match),
-+	},
-+};
-+module_platform_driver(pse_reg_driver);
-+
-+MODULE_AUTHOR("Oleksij Rempel <kernel@pengutronix.de>");
-+MODULE_DESCRIPTION("regulator based Ethernet Power Sourcing Equipment");
-+MODULE_LICENSE("GPL v2");
-+MODULE_ALIAS("platform:pse-regulator");
+"1 *" is kind of superfluous.
+
+"- 8 - 4" -- it's too many magic constants in here. Define macros for them.
+
+> +struct rm_cons_port {
+> +	struct tty_port port;
+> +	u16 vmid;
+> +	bool open;
+> +	unsigned int index;
+> +
+> +	DECLARE_KFIFO(put_fifo, char, 1024);
+
+Why is tty_port::xmit_fifo not enough?
+
+> +	spinlock_t fifo_lock;
+> +	struct work_struct put_work;
+> +
+> +	struct rm_cons_data *cons_data;
+> +};
+> +
+> +struct rm_cons_data {
+> +	struct tty_driver *tty_driver;
+
+It looks weird to have a driver per console/device.
+
+> +	struct device *dev;
+> +
+> +	spinlock_t ports_lock;
+> +	struct rm_cons_port *ports[RSC_MGR_TTY_ADAPTERS];
+> +
+> +	struct notifier_block rsc_mgr_notif;
+> +	struct console console;
+> +};
+> +
+> +static void put_work_fn(struct work_struct *ws)
+> +{
+> +	char buf[RM_CONS_WRITE_MSG_SIZE];
+
+Ugh, is this 1024-12? Do not do this on stack!
+
+> +	int count, ret;
+> +	struct rm_cons_port *port = container_of(ws, struct rm_cons_port, put_work);
+> +
+> +	while (!kfifo_is_empty(&port->put_fifo)) {
+> +		count = kfifo_out_spinlocked(&port->put_fifo, buf, sizeof(buf), &port->fifo_lock);
+> +		if (count <= 0)
+> +			continue;
+
+This does not make much sense. 1) kfifo_is_empty() is not locked; 2) 
+it's overly complicated. It can be, IMO:
+while (1) {
+   count = kfifo_out_spinlocked();
+   if (!count)
+     break;
+
+
+> +static int rsc_mgr_console_notif(struct notifier_block *nb, unsigned long cmd, void *data)
+> +{
+> +	int count, i;
+
+Not unsigned?
+
+> +	struct rm_cons_port *rm_port = NULL;
+> +	struct tty_port *tty_port = NULL;
+> +	struct rm_cons_data *cons_data = container_of(nb, struct rm_cons_data, rsc_mgr_notif);
+> +	const struct gh_rm_notification *notif = data;
+> +	struct gh_rm_notif_vm_console_chars const * const msg = notif->buff;
+
+Interesting mix of inconsistencies. Once you start with const, once you 
+place it after struct. Please make it consistent (start with const).
+
+ANd here, you should apply inv. xmas tree sorting.
+
+> +
+> +	if (cmd != GH_RM_NOTIF_VM_CONSOLE_CHARS ||
+> +		notif->size < sizeof(*msg))
+> +		return NOTIFY_DONE;
+
+Weird indentation. notif->size should start with either 4 spaces less or 
+one more tab.
+
+regards,
 -- 
-2.30.2
+js
+suse labs
 
