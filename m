@@ -2,156 +2,116 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id D35A55F6205
-	for <lists+linux-doc@lfdr.de>; Thu,  6 Oct 2022 09:49:37 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 5F8F25F6319
+	for <lists+linux-doc@lfdr.de>; Thu,  6 Oct 2022 10:55:45 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S229500AbiJFHtf (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 6 Oct 2022 03:49:35 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:52656 "EHLO
+        id S230209AbiJFIzn convert rfc822-to-8bit (ORCPT
+        <rfc822;lists+linux-doc@lfdr.de>); Thu, 6 Oct 2022 04:55:43 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:60056 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S229814AbiJFHs3 (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Thu, 6 Oct 2022 03:48:29 -0400
-Received: from NAM10-MW2-obe.outbound.protection.outlook.com (mail-mw2nam10on2109.outbound.protection.outlook.com [40.107.94.109])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id B4EE89080B;
-        Thu,  6 Oct 2022 00:48:11 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=S+10ZXUll4SjG9fDrHbsWT1bdCl+jyCjT3Te20youuzAr1xuXH7t/cZkVsUatT0dqZ7I+rverfXwjtiNaOlLcbxksSo1Q33wuLNu+1lQm6ae5Lzg2+wJ8EniEXnYvHBXN6hTZD7basn/mLggq7+d8OGN6s1erRbwAwgZxPvDu57+IfUYvuu9SIm7M2kWQkM18Gh4thPcSr3j4hgpt+FXr3vISrAd8NPU6T19FhjEFoxd6i4bgjURwhjIEW7KpUYX6jgmS/+q2nQMeIbokcN5N6Xkefj5c1HELB4oHXqhhvRvPDccjleRsPPccA9c0/AYuB8R6UydhNwl3z9jfWcL1g==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=5DQFJF337pgpSJluhEWzNyLHDgStlyO3EmJtGJvKVRw=;
- b=HBESnR1diNEiVeSZnjjSyGseCSwWV5jYGDZkFNOSKTMcztzRmStYTfBEyLTOn0YrXOvK/tzKFRxxxPjrOe689c22WxLx7sG+vVXZvC3PkBnV+h7+egZwNbVBoukzaro7eROq1fE9kdmymHeAJkxAi/qzMSiIQQ0+DtFf/WifKx0qUrtAgxd/XAveJVC1b+r3+xYgA+A5qa6Jk+nIWVqMXlfqttw7+iTSwZdAXjhcS7q/oFjaxhRapEJ2ObFlh38DQWmW0SgSPa8kY8S86QyMuKYJK+gd1BKJlsS6n2JTP2E9W2dTGS4yD30sHGEqc6iUeIIbU482IQxEF3fF/NSz/Q==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=os.amperecomputing.com; dmarc=pass action=none
- header.from=os.amperecomputing.com; dkim=pass
- header.d=os.amperecomputing.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=os.amperecomputing.com; s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=5DQFJF337pgpSJluhEWzNyLHDgStlyO3EmJtGJvKVRw=;
- b=ank3adlqPzyDNEHsR1WENjmajKaq/ns/xlncx9vSd1w6atFYgGUEI/eCymISoRdt27R6PU7K+utxWMhFq92EjWObCo0sBtnBVTOw5K4k/cGt9ZkzkLj+5lgkFanCjq/6XVuKyt2C68fJww4oGzsR4ez+orCKS7JfcAAQMvQiNcs=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=os.amperecomputing.com;
-Received: from SJ0PR01MB7282.prod.exchangelabs.com (2603:10b6:a03:3f2::24) by
- BY5PR01MB5796.prod.exchangelabs.com (2603:10b6:a03:1be::33) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.5654.20; Thu, 6 Oct 2022 07:48:07 +0000
-Received: from SJ0PR01MB7282.prod.exchangelabs.com
- ([fe80::7d50:e907:8e2e:1ff0]) by SJ0PR01MB7282.prod.exchangelabs.com
- ([fe80::7d50:e907:8e2e:1ff0%3]) with mapi id 15.20.5676.032; Thu, 6 Oct 2022
- 07:48:07 +0000
-Message-ID: <c4b4875d-99d6-fbc8-1b5a-26d090b5bad1@os.amperecomputing.com>
-Date:   Thu, 6 Oct 2022 14:47:55 +0700
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:102.0)
- Gecko/20100101 Thunderbird/102.3.0
-Subject: Re: [PATCH v9 1/9] hwmon: smpro: Add Ampere's Altra smpro-hwmon
- driver
-Content-Language: en-CA
-To:     Bagas Sanjaya <bagasdotme@gmail.com>, macro@orcam.me.uk,
-        Lee Jones <lee@kernel.org>, Rob Herring <robh+dt@kernel.org>,
-        Krzysztof Kozlowski <krzysztof.kozlowski+dt@linaro.org>,
-        Jean Delvare <jdelvare@suse.com>,
-        Guenter Roeck <linux@roeck-us.net>,
-        Jonathan Corbet <corbet@lwn.net>,
-        Derek Kiernan <derek.kiernan@xilinx.com>,
-        Dragan Cvetic <dragan.cvetic@xilinx.com>,
-        Arnd Bergmann <arnd@arndb.de>,
-        Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
-        Thu Nguyen <thu@os.amperecomputing.com>,
-        linux-kernel@vger.kernel.org, devicetree@vger.kernel.org,
-        linux-hwmon@vger.kernel.org, linux-doc@vger.kernel.org,
-        OpenBMC Maillist <openbmc@lists.ozlabs.org>,
-        Open Source Submission <patches@amperecomputing.com>
-Cc:     Phong Vo <phong@os.amperecomputing.com>,
-        thang@os.amperecomputing.com
-References: <20220929094321.770125-1-quan@os.amperecomputing.com>
- <20220929094321.770125-2-quan@os.amperecomputing.com>
- <594c4afe-17f7-8670-d5ba-ebdeca6a4b47@gmail.com>
-From:   Quan Nguyen <quan@os.amperecomputing.com>
-In-Reply-To: <594c4afe-17f7-8670-d5ba-ebdeca6a4b47@gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: SGBP274CA0010.SGPP274.PROD.OUTLOOK.COM (2603:1096:4:b0::22)
- To SJ0PR01MB7282.prod.exchangelabs.com (2603:10b6:a03:3f2::24)
+        with ESMTP id S229844AbiJFIzn (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Thu, 6 Oct 2022 04:55:43 -0400
+X-Greylist: delayed 1199 seconds by postgrey-1.37 at lindbergh.monkeyblade.net; Thu, 06 Oct 2022 01:55:39 PDT
+Received: from ouvsmtp1.octopuce.fr (ouvsmtp1.octopuce.fr [194.36.166.50])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 0ACE795E40;
+        Thu,  6 Oct 2022 01:55:39 -0700 (PDT)
+Received: from panel.vitry.ouvaton.coop (unknown [194.36.166.20])
+        by ouvsmtp1.octopuce.fr (Postfix) with ESMTPS id 7717D173;
+        Thu,  6 Oct 2022 10:17:18 +0200 (CEST)
+Received: from sm.ouvaton.coop (ouvadm.octopuce.fr [194.36.166.2])
+        by panel.vitry.ouvaton.coop (Postfix) with ESMTPSA id 376215E16F9;
+        Thu,  6 Oct 2022 10:17:18 +0200 (CEST)
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SJ0PR01MB7282:EE_|BY5PR01MB5796:EE_
-X-MS-Office365-Filtering-Correlation-Id: a3f45a64-0727-48cc-19f5-08daa76f1b3e
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: z/7JGEEfm5E7NcDDLXwcjc1yD95HSY2Qxhex6DrWgRD06dS+jHEJ6odiDTJWzj/YkDaL7xzQpAhq8lp+pmCfq2Omu/R9OQ4LuSbA/vhfYERCXewZNTGFww4wJ1dvTwLjUkkJUYvK7d1v5a/f0MdzYYq+MykVLBnvYPkDYt5tIvi+2RG2Z+xcpG5uW4BOj/c1c6MNJEXF83gkn0KQhu+3GTkG1GJJmtotYNqLaUSTX8COVAqRtrZWs/lRvBTdY3fjQHbKumY1aoL6cEGbEFq05p6bwuHH/z7uCvDDY33LmqL31EcugsBYjESJIszhCqGvI+6I3hK2il/++F0/mfoV93ZiZzZWDcxBkA5c2REsYL/3a2rN7D5fxubDbu3wOAYQ6xs7hFFroJALYThf5cejDoH24RvgHfDnMdy+uUZMCS1h3JeMzH0vNNzyOMc4An+Bfd+PJnVGL4JaC9U8AcEpz+lr05NmtRHVhuVrnjMMRHBlI3Xb6i+MnsDgw1z+a3lhczw8dFTHyxOYEagb7Wf23hF5p/RHer49iuQSeWiBIOhzCOL37GXZ+KzUUy+NQGS5IGtpgKfeUJyf8dkYRvQOyeKSnhaZlmtvL8SPBdCxiQYkW0W+q8onMdfFlwDbEFQEYBVW4ZnUiPs8lpwCvTMnmhpUbEPgwI0mUCJA4JPahfPhufiIvU1c2CGVykDMORR8k+AQZLsnnduzUh4P/g/OCndcBV3kH3bGtN0sq9touXzw7Zryh8jFYzsirRDJWBdBuko7/kj8Pk+xunglk/EnSBIkS8GpcQGhXJYdB7TZR1NV6TVi8+vGVCS4JXFirR+G
-X-Forefront-Antispam-Report: CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:SJ0PR01MB7282.prod.exchangelabs.com;PTR:;CAT:NONE;SFS:(13230022)(4636009)(136003)(346002)(396003)(39850400004)(376002)(366004)(451199015)(38350700002)(31686004)(186003)(478600001)(38100700002)(6486002)(31696002)(921005)(7416002)(4744005)(83380400001)(66556008)(41300700001)(316002)(110136005)(66476007)(2616005)(8676002)(6666004)(107886003)(86362001)(6512007)(8936002)(26005)(5660300002)(53546011)(66946007)(52116002)(4326008)(6506007)(2906002)(43740500002);DIR:OUT;SFP:1102;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?MTNudEliSDRtUU05RlVCM1g4bzlaM2tESHgwVjFOWTI1Z2hLRDNKSE1aWE5x?=
- =?utf-8?B?SnJ4RzVBZ1MrOThBZyszWDJwakFqcmd4WW1NZkYvbGlRQ1JZMHBVWWJLeTM3?=
- =?utf-8?B?WEE5OXN0WkdScmtRUGh5UktaaGtRYS92cGU0UnFONlBtcU5GaWFkZGxRbE5n?=
- =?utf-8?B?TEFJL0NSQ1FPOFU3SmdEZTBiVWFFZUR3Y3Iwb2ptbURkY0V5b2tZVXpidzZp?=
- =?utf-8?B?RTN1Z1B0aFA2bjZQeW5CTnhLdjlka2FMWHhsaEVIQ0MrelBOR0pzR3N5OHdk?=
- =?utf-8?B?MTk3bDFhMlRUTkpXWWJWQTZCSHQzcDZrY3hPYkg3NzdhYTZxK1kyUWVOSkpt?=
- =?utf-8?B?YTZROGkvZWVCRnZYb3I1bTNZdmd6Vk9idmkwOXFWY1BESnhTWlhpdHl2UEJH?=
- =?utf-8?B?bVltNG5UMytEN2ExQ2JWZ3BvdFd0TTh1QTdQQlU3MTlIeTZOdTRBRkVuTVdt?=
- =?utf-8?B?a1FwMHVFcUFhVW1GKzJPais0RG1vQUtOTFlYa2krL0tNUTJNTms4dGRLUkRh?=
- =?utf-8?B?emJsZ0dPM09KV2xTQ1pWaDZDMG45R0YrTU4xcWVDNHUxT0RhQUJHWTkvZEdU?=
- =?utf-8?B?NTdnTVhCYmFjVG1BSDdJa2FLaW1OVFZEdnhoRFI1Qk5Wc3lQL3ZWWWYwRTlT?=
- =?utf-8?B?Wm45Rnh2QkRJakk1R0lCSkZyWElCaFpjK1dhcEM2azlYQjBZU052dXJNQ1pX?=
- =?utf-8?B?U0crL1E5ak9wTmNLMlMyZk8zaWc5NGtLN3g4emRxQkdCUThHbUNSRk54ckph?=
- =?utf-8?B?Yk4wYXFMOEl6aTc1YVMxMk5oSWRqeVRWVDB0UmJvdnJWUDgyRldac1I4NFNH?=
- =?utf-8?B?VFExSXNSZURrMVppTVUvVU10N2kxcXMxb2RyQ1pnLzJTM2pLanJ6eTAzLzN2?=
- =?utf-8?B?dEhEa20remdaR2h4RzM2Y2RSSVlnd2dveXA1SjZNZ0lWT28zdm9GanJOMzli?=
- =?utf-8?B?VEU1Zlh3V3MrMmcrdXJiRjNpeWZkRmxINGhaZmZvY0QyWnIwVngzRW5WbXpX?=
- =?utf-8?B?dnhRKzh6RHFSRHF4am5qU3d4dGJEZHR2dVorRStBcXZjR0hCaGlKWUJ5TnI1?=
- =?utf-8?B?SkhzenBBMlpwT09mYm5oV0p5dTd6TE15ZTBITE9NRXUzTjlKVlpMR1JkVWR2?=
- =?utf-8?B?ZWJzQ01oZUR1NklFcndhN3laY0ZRcFN0b0cySzR0REVQWHM3bUw4OHl1a3ZT?=
- =?utf-8?B?Ny9pKytJYlYyR1BkbEFSQjk3OVRRcGRucTVkZDZPd3ZoeUExUWtPL2FBVWNJ?=
- =?utf-8?B?SWVEelBERUtnYlFEdmVxWU5MRE11dGdqSEREeUg0RzJJNVBmaEd6NzRvMXc3?=
- =?utf-8?B?L0plSmhPTmJvV1dSYkNJWXdHMmhZTmh6OFlnK0JhYXovSkx3WmhHcjRRdnlB?=
- =?utf-8?B?dGRJREFWdlBqaE5IUGgwUHQ5c0ZZV2NMZTduMzR3ak52d2VnYWJMM1IyWjRP?=
- =?utf-8?B?MDQyclBsb1ZnUWh6MThNNEZTN1dIL1N2L1RVZk1QWWdWd0huWG40MHdkYUlx?=
- =?utf-8?B?M2VXSGxnSkc1TEdvdjZ5WTg5aXdsVTlIV3RSbHQ4SmZucE9PVno1L1lqVnJI?=
- =?utf-8?B?WGlaekIvaUZpMmk1MW01K05kdW9GL3ROUmhWVzUzTE01S1NLREsxeE1SYVV0?=
- =?utf-8?B?MUtXN3paaWhUbVJEdi9GcVRtUU84dE5tOE8wOWJPKzVYWkQwczVKZ0RGeDZj?=
- =?utf-8?B?TU9ydHh5UWNwSE1LTzdGNDRKekR4Zm1oWUh5ODNWWkFheFdUdGc1L2Nzd3di?=
- =?utf-8?B?NmJOa3FZRS9mMU10U2U0VEVEakEyTXBNRHF3TFVjZkdjeWhCVWg3YWVJQnhD?=
- =?utf-8?B?emFLVG9SNGpKRVZLOHJvbkFIMjc1cTR0SGptMXp0ejQ3UFlPY3BoSTkxYThH?=
- =?utf-8?B?cFhhRk5ORkJPN1lIT0JsTWtrTmlLdkJVSGx4TGYzdFRUcXhIZ3kvWnpUYnIy?=
- =?utf-8?B?ZHFxblpZUWQ2clNHYXc2QzRRR2ZWb0hacm9JcWdzNHRDOTVPTmdjQ2F6Mkcv?=
- =?utf-8?B?MkhsdkNLZ04xb05tVjlyL3haRmx5V0lneUViL0o1bmR4Z2ZJTEhGTVY3UlQ3?=
- =?utf-8?B?anRxYkZCcHpmYkJNdjJWb09FUDQ2cWxJbXdRbmt1RUJQVnREV1BTN2lEMGpz?=
- =?utf-8?B?bjBxOXFMeHZYMS9PbGRva3pGUC9aZmRQL2h5Tk9qbVpiZy9RSW8rNzNER3A1?=
- =?utf-8?Q?v3fpzlkxcqKzU50szOLlexE=3D?=
-X-OriginatorOrg: os.amperecomputing.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: a3f45a64-0727-48cc-19f5-08daa76f1b3e
-X-MS-Exchange-CrossTenant-AuthSource: SJ0PR01MB7282.prod.exchangelabs.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 06 Oct 2022 07:48:07.0214
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 3bc2b170-fd94-476d-b0ce-4229bdc904a7
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: l3nmv18q+KB/kSN4VbF45i4Tkoq7zrjhaOqSEkoOAO7gZOYXNisPrA+iVGaDciVlZOCPu4+hvn3m0h7LgEyYcriNVRYiJTtPEkzOPPqq1fU=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: BY5PR01MB5796
-X-Spam-Status: No, score=-3.4 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_AU,NICE_REPLY_A,RCVD_IN_DNSWL_NONE,
-        RCVD_IN_MSPIKE_H2,SPF_HELO_PASS,SPF_PASS autolearn=ham
-        autolearn_force=no version=3.4.6
+Date:   Thu, 06 Oct 2022 08:17:18 +0000
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8BIT
+From:   "Yann Droneaud" <ydroneaud@opteya.com>
+Message-ID: <125581881ad4aa85b2dadfe0d7338af9901caa03@opteya.com>
+Subject: Re: [PATCH v1 0/5] treewide cleanup of random integer usage
+To:     "Jason A. Donenfeld" <Jason@zx2c4.com>
+Cc:     "Jason A. Donenfeld" <Jason@zx2c4.com>,
+        linux-crypto@vger.kernel.org, linux-doc@vger.kernel.org,
+        kernel-janitors@vger.kernel.org,
+        "Julia Lawall" <Julia.Lawall@inria.fr>,
+        "Nicolas Palix" <nicolas.palix@imag.fr>, linux-api@vger.kernel.org,
+        linux-kernel@vger.kernel.org
+In-Reply-To: <20221005214844.2699-1-Jason@zx2c4.com>
+References: <20221005214844.2699-1-Jason@zx2c4.com>
+X-Originating-IP: 10.0.20.16
+X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00,SPF_HELO_PASS,
+        SPF_PASS autolearn=ham autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
+Hi,
 
+6 octobre 2022 à 04:51 "Jason A. Donenfeld" a écrit:
 
-On 01/10/2022 19:59, Bagas Sanjaya wrote:
-> On 9/29/22 16:43, Quan Nguyen wrote:
->> This commit adds support for Ampere SMpro hwmon driver. This driver
->> supports accessing various CPU sensors provided by the SMpro co-processor
->> including temperature, power, voltages, and current.
->>
 > 
-> s/This commit adds/Add/
+> This is a five part treewide cleanup of random integer handling. The
+> rules for random integers are:
+> 
+> - If you want a secure or an insecure random u64, use get_random_u64().
+> - If you want a secure or an insecure random u32, use get_random_u32().
+>  * The old function prandom_u32() has been deprecated for a while now
+>  and is just a wrapper around get_random_u32().
+> - If you want a secure or an insecure random u16, use get_random_u16().
+> - If you want a secure or an insecure random u8, use get_random_u8().
+> - If you want secure or insecure random bytes, use get_random_bytes().
+>  * The old function prandom_bytes() has been deprecated for a while now
+>  and has long been a wrapper around get_random_bytes().
+> - If you want a non-uniform random u32, u16, or u8 bounded by a certain
+>  open interval maximum, use prandom_u32_max().
+>  * I say "non-uniform", because it doesn't do any rejection sampling or
+>  divisions. Hence, it stays within the prandom_* namespace.
+> 
+> These rules ought to be applied uniformly, so that we can clean up the
+> deprecated functions, and earn the benefits of using the modern
+> functions. In particular, in addition to the boring substitutions, this
+> patchset accomplishes a few nice effects:
+> 
+> - By using prandom_u32_max() with an upper-bound that the compiler can
+>  prove at compile-time is ≤65536 or ≤256, internally get_random_u16()
+>  or get_random_u8() is used, which wastes fewer batched random bytes,
+>  and hence has higher throughput.
+> 
+> - By using prandom_u32_max() instead of %, when the upper-bound is not a
+>  constant, division is still avoided, because prandom_u32_max() uses
+>  a faster multiplication-based trick instead.
+> 
+> - By using get_random_u16() or get_random_u8() in cases where the return
+>  value is intended to indeed be a u16 or a u8, we waste fewer batched
+>  random bytes, and hence have higher throughput.
+> 
+> So, based on those rules and benefits from following them, this patchset
+> breaks down into the following five steps:
+> 
+> 1) Replace `prandom_u32() % max` and variants thereof with
+>  prandom_u32_max(max).
+> 
+> 2) Replace `(type)get_random_u32()` and variants thereof with
+>  get_random_u16() or get_random_u8(). I took the pains to actually
+>  look and see what every lvalue type was across the entire tree.
+> 
+> 3) Replace remaining deprecated uses of prandom_u32() with
+>  get_random_u32(). 
+> 
+> 4) Replace remaining deprecated uses of prandom_bytes() with
+>  get_random_bytes().
+> 
+> 5) Remove the deprecated and now-unused prandom_u32() and
+>  prandom_bytes() inline wrapper functions.
 > 
 
-Thanks Bagas and will fix in next version.
-- Quan
+Did you use some coccinelle patches ? Or other semantic patch tool ?
+
+Maybe we could introduce some coccinelle patch to ensure future get_random_u{16,32,64} usages be checked and patched to use the best fit.
+
+Regards.
+
+-- 
+Yann Droneaud
+OPTEYA
