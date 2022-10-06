@@ -2,76 +2,198 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id AC8E55F6983
-	for <lists+linux-doc@lfdr.de>; Thu,  6 Oct 2022 16:22:54 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id B1A3B5F6A17
+	for <lists+linux-doc@lfdr.de>; Thu,  6 Oct 2022 16:56:28 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S231334AbiJFOWv (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 6 Oct 2022 10:22:51 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:38330 "EHLO
+        id S231474AbiJFO40 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 6 Oct 2022 10:56:26 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:43836 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S229633AbiJFOWr (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Thu, 6 Oct 2022 10:22:47 -0400
-Received: from mail-pf1-x431.google.com (mail-pf1-x431.google.com [IPv6:2607:f8b0:4864:20::431])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 58C311902B;
-        Thu,  6 Oct 2022 07:22:46 -0700 (PDT)
-Received: by mail-pf1-x431.google.com with SMTP id w2so2246034pfb.0;
-        Thu, 06 Oct 2022 07:22:46 -0700 (PDT)
+        with ESMTP id S229575AbiJFO4Y (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Thu, 6 Oct 2022 10:56:24 -0400
+Received: from mx0a-00069f02.pphosted.com (mx0a-00069f02.pphosted.com [205.220.165.32])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id EDEB6A99E1;
+        Thu,  6 Oct 2022 07:56:22 -0700 (PDT)
+Received: from pps.filterd (m0246629.ppops.net [127.0.0.1])
+        by mx0b-00069f02.pphosted.com (8.17.1.5/8.17.1.5) with ESMTP id 296EjMmj020766;
+        Thu, 6 Oct 2022 14:55:48 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=oracle.com; h=message-id : date :
+ subject : to : cc : references : from : in-reply-to : content-type :
+ content-transfer-encoding : mime-version; s=corp-2022-7-12;
+ bh=AI3bbti9W0+s2bugJPTuRZcGPuQ/sAjY0/x4HQ0utaw=;
+ b=VjxqYVFoouQjyRVmHFYDKuEj1mWlykFM9G2tjDHpdxYKsD67tLBA1DghKJpvVRrPadhV
+ e3cMxz0ft7BQQoByvviMZb0mknsylubsO77WIs/KI2C+01FCTP2c16dEjZGLJHQt+Mqc
+ 79DMU0zEbd3AYaQWS02Z6/H49bFGmtGblSudhNlfuks0BwQOOJjYNzmpcrsR/bIKmaRc
+ kSHTT5idGz/mHrS4WBqLEBmGWEaIPoFO0/yaTnw7klNhLGYhzPyY3qHbRDP78EH9aVA9
+ cRDjOsonThXQushYDRwzOfm+72W7bArwAm+EJFYwSL5AtVhxzT9L/moOWBqydjvI13ZO 9Q== 
+Received: from iadpaimrmta02.imrmtpd1.prodappiadaev1.oraclevcn.com (iadpaimrmta02.appoci.oracle.com [147.154.18.20])
+        by mx0b-00069f02.pphosted.com (PPS) with ESMTPS id 3jxdeach88-1
+        (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+        Thu, 06 Oct 2022 14:55:47 +0000
+Received: from pps.filterd (iadpaimrmta02.imrmtpd1.prodappiadaev1.oraclevcn.com [127.0.0.1])
+        by iadpaimrmta02.imrmtpd1.prodappiadaev1.oraclevcn.com (8.17.1.5/8.17.1.5) with ESMTP id 296CxjOp020829;
+        Thu, 6 Oct 2022 14:55:45 GMT
+Received: from nam12-bn8-obe.outbound.protection.outlook.com (mail-bn8nam12lp2176.outbound.protection.outlook.com [104.47.55.176])
+        by iadpaimrmta02.imrmtpd1.prodappiadaev1.oraclevcn.com (PPS) with ESMTPS id 3jxc0672ya-1
+        (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+        Thu, 06 Oct 2022 14:55:45 +0000
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=bThySvaPV44ghNvPh4KHZFBhu+2PzZOzfe6cU+RlQABhpMG5tRZbZLP3dl+5tsJLlOq7YzUwf9nwCHh0hsc7yZgWY2qGzPY3AzxB5abu/CoVTbO3N3KGxskh4V7CWyJJrb6q4Hxdpxqz4GLBBLUkO9UYEqgnbB2kE2iQ1MZX/KNL99rZ4i6Bwhp8k4Xxx6B60kO50yvDM40K8jtcQoR8vPQFfcM7gNF93s+jnTUDPcrb0xG7bZQR5Was1YiKU89rK1xnFWz1OH/0k6ThDUPNZr54RQ0lbOgyaBa47f2YL3+mk3kI+UCw4pacRbEMLIu9qOLkkUVUVVxRIT0/a9ttBg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=AI3bbti9W0+s2bugJPTuRZcGPuQ/sAjY0/x4HQ0utaw=;
+ b=j2XmqKpizDxcL94wacO7rgMKE20O7jCsOA82lpaPQS6mlgJdJtrj/R4TxF2IJsseUmqOs1MTFNR5L8ejISSE8qLwL7SEBA/yGGayeFeKhnLEl4FBZonKvLZYvmB3Pshk/MIEY6dm0wUwDWAjNrDvwxRsSr87vRdpZ+fYYhMoJFIuYgjgLfpj9Pkmgl5afVlP0SFFS652prqCvN9W7p/0ba40+WX+0kDCZStcMYmXPmKFRIq2SpBxOGZzR9OqklCXa/vEvGylziAZ3EweI3PBIXn+XvLNkzfxV+gSwgQUrX916gXDCCocpiYtlufe0/4eLgbLsV17kMTXnHVzr2UONQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=oracle.com; dmarc=pass action=none header.from=oracle.com;
+ dkim=pass header.d=oracle.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=content-transfer-encoding:in-reply-to:content-language:references
-         :cc:to:subject:from:user-agent:mime-version:date:message-id:from:to
-         :cc:subject:date;
-        bh=sRZSFwWJNhbEpFN+oXFfGXrnIdIcpCTTM+wG7N94QsI=;
-        b=JRQuch3kUXVGtr5W9/EyWPjULMYe/bFi0Q8dovUbPZEwmlGHC7o2YgsOujBWPlTTB/
-         Q/kn4LdHe4tvPCRKMb9WJ66cIthuKEQEOVNDTiVcPpshxQMQ1OcTJN/6ATitOhZ9DO/c
-         YOfAwpcnCCEIIYxBXlRXk5hkCt5ODpwzC3kDdT9xqooMM8tQ7i0MfPmOgyQiqselXiFU
-         3/rFC45MFc9gWZFxLcGWZDoQ/dZGduFweeRJndmCCs7v0pgt8eagh6oxSjq0wjrb2l/V
-         i3CuHXgfv9xMJhpCE0GYeRd8EAz9TBGDl1+91DpcnL8maRtnp8VyxIvb14f8QDwvbVLJ
-         6DiA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=content-transfer-encoding:in-reply-to:content-language:references
-         :cc:to:subject:from:user-agent:mime-version:date:message-id
-         :x-gm-message-state:from:to:cc:subject:date;
-        bh=sRZSFwWJNhbEpFN+oXFfGXrnIdIcpCTTM+wG7N94QsI=;
-        b=iTx8JwBr0IciVmh/2LAju3tgM9Lek6t5IjgxKgAapEAfPzahfeLPBctCh2U4txU9PE
-         pnonLRd56Q5nvIkBzAPEKb1vhliwKEDBGv2QP2F142CNIcjZ1EXh3jYifAnX3bMHyI27
-         httmX0MRmAnO3C3JMddifbxu6XH7sKE4dmzXwxXJ3hCODrDCO55AfBW08JOT8tQ2LaLl
-         zDXLGCjJDgs7CCdvkIVQ1ymQIpEYHyWR92pDhWGR+X0IyC5rzmi3alkSO7UxQyCCVZYd
-         p8+2XyDbmQXniuWBM8+uF6XqvyyZhvn2aPdTX7e2NZAebYi2BkMaERcYpVWa2ie5oj4M
-         sYRg==
-X-Gm-Message-State: ACrzQf38b7MHVqkMOL8ePewFdN+Vk3bYNV1+fPZuq0ziFShzcf4dJQzj
-        5iygOhyhd4IRbx57h8Nh2vM=
-X-Google-Smtp-Source: AMsMyM46Xdt/3q5bCq/DPIqf4SAmVBng++4iAU9zfGH+Eb2KLuKPINgSKRdZtbyaYxc8tHRO4dar+Q==
-X-Received: by 2002:aa7:8e8c:0:b0:562:a549:efc5 with SMTP id a12-20020aa78e8c000000b00562a549efc5mr394615pfr.20.1665066165360;
-        Thu, 06 Oct 2022 07:22:45 -0700 (PDT)
-Received: from [192.168.11.9] (KD106167171201.ppp-bb.dion.ne.jp. [106.167.171.201])
-        by smtp.gmail.com with ESMTPSA id x9-20020a63cc09000000b0043a0de69c94sm1938529pgf.14.2022.10.06.07.22.42
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Thu, 06 Oct 2022 07:22:44 -0700 (PDT)
-Message-ID: <e5cafa5a-ec09-2e37-a7d1-8bedadfe7bd7@gmail.com>
-Date:   Thu, 6 Oct 2022 23:22:35 +0900
-MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.2.2
-From:   Akira Yokosawa <akiyks@gmail.com>
-Subject: Re: [PATCH v5 1/1] Documentation/process: Be more explicit about who
- to mail on patch submission
-To:     Bryan O'Donoghue <bryan.odonoghue@linaro.org>
-Cc:     linux-kernel@vger.kernel.org, corbet@lwn.net, linux@leemhuis.info,
-        konstantin@linuxfoundation.org, krzysztof.kozlowski@linaro.org,
-        linux-doc@vger.kernel.org, joe@perches.com
-References: <20221004124858.640349-1-bryan.odonoghue@linaro.org>
- <20221004124858.640349-2-bryan.odonoghue@linaro.org>
- <0a154bd0-f380-19ae-00df-5d73c1dc7c8b@gmail.com>
- <42f15689-d1ad-2be8-5fed-8f72d82402dc@linaro.org>
+ d=oracle.onmicrosoft.com; s=selector2-oracle-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=AI3bbti9W0+s2bugJPTuRZcGPuQ/sAjY0/x4HQ0utaw=;
+ b=skwWd5GGMBUFd51xrFmeg4xLKXEvINh+fr/LlYPuQVEfIOBDt3SVNTOUHkGLNPauPp3PhuhIZd6PiN9MRMv3HR6pesG6ys6kBaoojFRgV2dZPs+Htpg5mCmiP2LHhW/e2XdieAuuRRUR893lWfm9wowi+FZ4ONJKeoVyI8npHKM=
+Received: from CO1PR10MB4722.namprd10.prod.outlook.com (2603:10b6:303:9e::12)
+ by DM6PR10MB4154.namprd10.prod.outlook.com (2603:10b6:5:21f::13) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5676.28; Thu, 6 Oct
+ 2022 14:55:43 +0000
+Received: from CO1PR10MB4722.namprd10.prod.outlook.com
+ ([fe80::3f0a:50da:af84:7a35]) by CO1PR10MB4722.namprd10.prod.outlook.com
+ ([fe80::3f0a:50da:af84:7a35%8]) with mapi id 15.20.5676.036; Thu, 6 Oct 2022
+ 14:55:43 +0000
+Message-ID: <1d89e2cb-de26-0f85-7a2a-f68599a1b143@oracle.com>
+Date:   Thu, 6 Oct 2022 09:55:35 -0500
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:91.0)
+ Gecko/20100101 Thunderbird/91.13.0
+Subject: Re: [PATCH v3 0/2] arm64: kdump: Function supplement and performance
+ optimization
 Content-Language: en-US
-In-Reply-To: <42f15689-d1ad-2be8-5fed-8f72d82402dc@linaro.org>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
-X-Spam-Status: No, score=-3.5 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_FROM,NICE_REPLY_A,
-        RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,SPF_PASS autolearn=ham
+To:     "Leizhen (ThunderTown)" <thunder.leizhen@huawei.com>,
+        Baoquan He <bhe@redhat.com>
+Cc:     Dave Young <dyoung@redhat.com>, Vivek Goyal <vgoyal@redhat.com>,
+        kexec@lists.infradead.org, linux-kernel@vger.kernel.org,
+        Catalin Marinas <catalin.marinas@arm.com>,
+        Will Deacon <will@kernel.org>,
+        linux-arm-kernel@lists.infradead.org,
+        Jonathan Corbet <corbet@lwn.net>, linux-doc@vger.kernel.org,
+        "Eric W . Biederman" <ebiederm@xmission.com>,
+        Randy Dunlap <rdunlap@infradead.org>,
+        Feng Zhou <zhoufeng.zf@bytedance.com>,
+        Kefeng Wang <wangkefeng.wang@huawei.com>,
+        Chen Zhou <dingguo.cz@antgroup.com>,
+        Dave Kleikamp <dave.kleikamp@oracle.com>,
+        John Donnelly <john.p.donnelly@oracle.com>,
+        "samasth.norway.ananda" <samasth.norway.ananda@oracle.com>
+References: <20220711090319.1604-1-thunder.leizhen@huawei.com>
+ <YueMyUqannVg7l9v@MiWiFi-R3L-srv>
+ <a80c2b7e-a510-8e45-1f3c-7e2ddf79bc37@huawei.com>
+From:   john.p.donnelly@oracle.com
+In-Reply-To: <a80c2b7e-a510-8e45-1f3c-7e2ddf79bc37@huawei.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: SN6PR2101CA0023.namprd21.prod.outlook.com
+ (2603:10b6:805:106::33) To CO1PR10MB4722.namprd10.prod.outlook.com
+ (2603:10b6:303:9e::12)
+MIME-Version: 1.0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: CO1PR10MB4722:EE_|DM6PR10MB4154:EE_
+X-MS-Office365-Filtering-Correlation-Id: 2147a200-e094-4b58-ea28-08daa7aad7b4
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: WfVFs3k+Q4v96LOU0pIfagM7PR+tKFLBoNNlU/ieSaaoamKP16+AVEzr7hhtY8dSOaRgprNaoiYvN+Qt54bUF3GW9M4v3Ktq8Ina2ZoTznAzMabKibChZSpqQF135FZkQFkV9T4kuaFwBYon6AbUe8ucN6iwHodMo8rn/drkfy8/DpLzPnXO4bOvKmceU6Ra6/9JGdG3hBfG213EJUSmstKhyZczsof0AFLpIyJ/8KzexDPDizCwF8TCp0Qr8DVkkpWPAzY4MYf7lbKnXzi2X+aB+MTGt4UFr2uMA7GchT5GRTl4UYx8oqgqvDAk813GTKsDGMynrAsUVUG9uRh3D7iFNPIfhHeYudNe2LMXAfDL0zHN6N7WVhBd+5wwT2A9wEy+jkqByY1R6SHyrPSacJVcs6PF8ZSAEdPTH8ZhtGhFFRU+YNrWj0Lh8C/d+NPDk0PQJxijr+p8zpdjT2MVn1pvYSRDlgsPIYpAnTEFaHjANvuy+7JIdVvqJQYUh/HdABN3OfpwcCnuMULxsrHt27Oe5LulEcbWi2GrfBNCQDEFZLx0AbySzOtcwMF9Fw48Ip1sNkP0UcDlm2tyidz+aMFD9JyeGe9F8y4u3ihktB+qoSilBhuC3RPI1dRRS4B6Vm1OfXO0UZa6ET0yB3PfEfyhMSWHRU9WTprB1YX3DFhgXSb9RjFqqKV7KmEHgSmCbVahwxbdgD57Odp4I+mQ2gfZ0+QlQEXf7qyYpeT20ANxz1CzfyYYbTGyKmG8rDnpASW7sLi/mU+T/xRqvgqThwsqd4D9M6E97RRCR4aq3hM=
+X-Forefront-Antispam-Report: CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:CO1PR10MB4722.namprd10.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230022)(136003)(39860400002)(346002)(396003)(366004)(376002)(451199015)(31686004)(31696002)(36756003)(2616005)(86362001)(8676002)(38100700002)(26005)(2906002)(186003)(6506007)(8936002)(110136005)(6512007)(5660300002)(107886003)(54906003)(6486002)(9686003)(6666004)(966005)(53546011)(66556008)(83380400001)(478600001)(66476007)(66946007)(316002)(4326008)(41300700001)(7416002)(43740500002);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?bk1zMDlFb3NCQnFDUG1vS05FUEZiR3ByWFJjN09OaktiejJqVFlEeTBvdi9n?=
+ =?utf-8?B?Y253YVEzTDUvSFQyRGVpaFU3UHVadVI5VWR2Z0hSd0p6cFp1aHZSNGxXRHJp?=
+ =?utf-8?B?RmpXM0JKR01weURRZUVCMW1pc3pYWUN4YWF4VXNGalJiUmRaQlRza2FQNG13?=
+ =?utf-8?B?Z1NDTDFaQjdQUTY1anhyMGV2VnQ3d3lNUGlGSWpiNmhYU2NMdUNxaWV3RGFN?=
+ =?utf-8?B?Q3JXMytQTUh1TjYzM1Q1NDcwUks2UkgweVk3SVNqcDRWN2hGc1NXL3pVY29W?=
+ =?utf-8?B?a3lMTXZlVnNzQklVbDNhSjF2eTVFWmYzenVCL210NkY4VkxmTnpMRVhGaDBh?=
+ =?utf-8?B?QjVabkRUekJnRDhIcUo3dmY5clZzRmZ6YWJZbnA5VHZQL1pNdDlRRVhiSFBK?=
+ =?utf-8?B?TEtDcEV4TUJJNW52a2ZpaFBSaWR6YTRwK0U0dWI2eW1sU1lVTkp1MUhVRE16?=
+ =?utf-8?B?K0hYbXpvbytMb0ZCejRsUDFTaWt0em5NbExxeFBRSE1nZkgrRGQ2OG5BTjhF?=
+ =?utf-8?B?TWhKSFNlTEFYcVFhUGNwZjlNeWRmeWl6b3cvSUVjbzZOb2lQeUlJUU02WWJ0?=
+ =?utf-8?B?MDJYWk0wSTlCZTBKZEUyQlFMRE96VXREMVdkRU9TOGlZR2V0U2xRR2pwZDBB?=
+ =?utf-8?B?b2REQ0NZelVMYlBmUXRSVXBrSmlCdFdsNUs4MkdTcWdkQVZqUFUya2wxNzFz?=
+ =?utf-8?B?c0F4QVp0VkczWUpZTWJhNVR2blROU2svTERMMVVWanpDZHhaTEk1UzZTL1lX?=
+ =?utf-8?B?TXFUVVZEa1RSYWhSdlZjYkRpYjdhTnk2TEJsYWpwQSt4cFhTQWxrcWRWdFFz?=
+ =?utf-8?B?ckpQcVNWM3IydVVJNWRUcEdjZ2JVRVh6T2VZR1NCRGFkSkJ2QnJMMkdsZ3Rs?=
+ =?utf-8?B?azJ3RUoxcWJ2YzdvWXErSk1qR3ZGTUxFcVlZWlVCd1FwNzZyRTBlejNaN1NM?=
+ =?utf-8?B?d1l0WWQzOVVhMlpZekMyc0VSckJaSi9TNGs3YTdrL0g3TW40OXh5MURxN29W?=
+ =?utf-8?B?c1RsZTNIdFJFZVJ5dkp0RUJZOXdGN3YxdWREaENZNGJ0N3l2VERMWC92a2ZC?=
+ =?utf-8?B?dzdlaUNiVnF3bUQxVU5MdStHZHY3V2poYmkxUzRubXVTR2RlZDRldC9TeG9p?=
+ =?utf-8?B?NjJKc09Ib0dVY2JINEk2RmVnNmdua08wUzNabVJVRTIvNUE2NzZ4cGhhMHdj?=
+ =?utf-8?B?Qm1BbVNXZ3VVY1ZpUDhVNDB4U3BhK0tzVUxjMHFGYUIwbE9XYWI5cG1iQ01U?=
+ =?utf-8?B?ZVMzdEt1TkVnN0daajZlVkdMdU0rSEloTGVlZUxBWDdqVE12bHBFQktvNkYz?=
+ =?utf-8?B?aXpnNnJTRi9TQlRUVmZXOGZzVGZHV05uZG55V3ErWlhqSzRFZDVuVU1OcHp5?=
+ =?utf-8?B?am5iOUpjOWdEdFA5Um9Nc2s0QXBEZWw5M1hpdXRmK1FLbHl1ZWcxUzYycUFN?=
+ =?utf-8?B?QXpEUzczWXdmb1VEN0R4WXYreEt5Tm5lQmZqK3FzL2MwcFZ1WVZGSDRzRWJv?=
+ =?utf-8?B?ZDZQOTV0WXBxRUFUUlR6WS95dENZaTFSME85SHNSVnluYSt4dmRVMEdNa3Bz?=
+ =?utf-8?B?Z0NQQjZ5NFcyNVJaWXpvV0NrNWtjODY5UURWamQzM3ltdEMzeTNPMUs3bGRx?=
+ =?utf-8?B?MlQxTG1mY0FLc0xpNGZVTDZlbUNReUpRR3hyZkNCdU9WcHVzNzZZZTA3bks5?=
+ =?utf-8?B?ZXJqWUI1eXdIc2ZYVTNZMmxYMU4xRHV2eVFoTmE5UkdHZ0pJa01NUEFsOEdv?=
+ =?utf-8?B?YWxxWHlwdWp3citXWmhtZ00rU3hwdU9jT0lZanFieTBQcldHRVZ4V1VJY1Ny?=
+ =?utf-8?B?NlBDRTlxbE5VanVuZ2ZRdFlnSWZHWnZHbFJ2SmswNG0xVHpibjV6T0w4WVky?=
+ =?utf-8?B?cmJSNWdTU1lwMHNDUkdvZXVCVEg4RVBHbVU4OTIyNWRyTmoxa0hxOTVabHB5?=
+ =?utf-8?B?emdNckx5YklEcUo1d2d6WEhJem9Da1VySW9KUnVkeVFvYVpoWUpZVUNCQ2ll?=
+ =?utf-8?B?OW1JM2lDL09RVWlxOVp6VHdGMGxuT05id1RDYVpjVXZJTDNkMDdCNlc1b1RD?=
+ =?utf-8?B?S3BZRWwvZERnQ2theWRLL2F4K2tnK3c5NjNVbXAvTG1UWE9tTjl5ZkhhL3hZ?=
+ =?utf-8?B?d1NpMlpSaUdWcm93Y1V5ZWJJMDRsa0lGSEtONkUzTnJNMGd4WWhUakVzZzhO?=
+ =?utf-8?B?L1E9PQ==?=
+X-MS-Exchange-AntiSpam-ExternalHop-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-ExternalHop-MessageData-0: =?utf-8?B?enpjQm44eDF2cDVZZzRQeHFKYTR1QkptcEdEUHhXWXNzRVA1S01SbmZ0TENz?=
+ =?utf-8?B?bEt0b1o5OEI3R2NjUmNrYVUwbHE4VWtDUng2aHQ1d0p3SG0xTG53SXlRNUdy?=
+ =?utf-8?B?UzJVTGNmUWY4dUJRc1dzK3F6WGNFMlhPeWVoY0hNYTNIRURnYXUvV1gxelNU?=
+ =?utf-8?B?MWExZ3k0QU5OaGhyTklGVjBYYVJuSGY1T0hRdDRqMEFiUHJuNERqaTI3NUdY?=
+ =?utf-8?B?ZUhEWXF1NjB1OVJuSTFaTmRnZlVOUlA1SXhpM0pYa3Y1MnF2VFpHMUQxb09x?=
+ =?utf-8?B?d2JvWGMrUjlLeGdTSWx4c0h5eFRudHhyVzVFeERBeDl4c1c0eGM0VmtDS3NF?=
+ =?utf-8?B?UWd2SVpKRitHTzRtRWpmSm1oR1dtUERRekZ2Zkt3L2VJcVVxZWF3ZjI2bDNJ?=
+ =?utf-8?B?YmtLN3F2OEM0QUtyQjBPSk5OWGhEUTJuVHlPdk82VzdubFdGVHEwSWxFaEph?=
+ =?utf-8?B?MTNrTFBnbEZzYnltc2JSdG9aSVBVOEpoeE9hSkwzOFVib2ZWV3ArU001eFcw?=
+ =?utf-8?B?bHJaYlp0K3ZkSVA1WlZyemYwZ3Z2QzFwbUpUZ3p0T0ZsUnBDYW92ODJPU1F2?=
+ =?utf-8?B?OGJPMi9iVlhVS3ArbFpIYnJxcFBoRHpmeTljeG8weWdQRFA5SkZvOExuS21k?=
+ =?utf-8?B?WnptdllhMGlvMTdIZk5vb0FtS2ZUWTVnOVkzc2tQUitpOTgvWnJXU0xyVHNt?=
+ =?utf-8?B?ZE5US1ZvT2pSY2ZTbWtjQWk1MXY2MjRJQmZuSFg4SThDTHlkdjNteXVyQ0NO?=
+ =?utf-8?B?cnZoSkZMV2xGK2xOMU91OFQ2b0d4citRdGNmWFZYb0VsTG1BY3ZQZWRPa2x4?=
+ =?utf-8?B?R1JjRWRzRDNrVTJ0eno5ZFZaL2RqUXIrNDJYY0pCSGpiTGg4WTQwQXl1VWlq?=
+ =?utf-8?B?ZHB5N2xPdlo5bk51b1FMc0pMdE9SYlM0QmlQOWxPcS9wOTFoRXpPZmVXR1Yx?=
+ =?utf-8?B?UnFOV0V5Vm1wSFZid1Ridm0rVDhHa2pBc3R6bmEvQVNLMm44RXV0aG5tTitE?=
+ =?utf-8?B?UkJ2SFQySUtXYkJESCtVcndQMG55aTJRaDgrZ0ZEMEs0TFhuWGVSV2dCNDlN?=
+ =?utf-8?B?T05GWEZVRUR1b0JQUkdzSUgyMUFUemxoSWd0UEU3eXYwcktucG1ZQktiRFlk?=
+ =?utf-8?B?N1dueEF6ZzcxZ2xvQnE3aWprZFhjUjdHQzl5VEJ3aHBlQU81SDVqU2NJNVFa?=
+ =?utf-8?B?ZWViT2hvMlBVOHpPdm93Uit6dXIyZUY3ajEyOE85MVhqQ0pSTndJTGVmT0dE?=
+ =?utf-8?B?TnZwNnRuMms1WlN1QXFWYVNFMUgvbmNISUFTelhheDBURGF2eWNVYzhZOXpy?=
+ =?utf-8?B?QmYveXNNc1VGWFBBSHBaQVYrVW8yR1h5Mmh2Ty81UGZKOWczekNDRGxZZ3BK?=
+ =?utf-8?B?SzdJVExWUms0NENaQ2duOGd1UUljZ1hndlNFeDhaOUpTVFNDR3pVeVZRLzZQ?=
+ =?utf-8?B?eTBQbFdoVXFhcG83OFhHL3FILzRwOEZSUWVhR2hXY2hQeW1qalZUVWE2Skky?=
+ =?utf-8?B?UGlMY2NqRmFjYWJEZ25oTzMzNjZjYmk2VjIzYWtPU2tzaVMvYjRuMlJpMkpz?=
+ =?utf-8?B?WVV1ZnJDR3hLZUJtWVovTjZIcmI1TlZxZkhjTktHRllaQ2ZlaDZMbFk0V09E?=
+ =?utf-8?B?UWw2citPSERyYkV2RWpkSEIzci9hUzZOWXZkS1U2SXJ2akdXYndDT01YRXFE?=
+ =?utf-8?B?NzJHZXVRTUhYMXA0UmRGNVpuemIzT2lNSklBRE03R3AxM0hFM1Z1b01RPT0=?=
+X-OriginatorOrg: oracle.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 2147a200-e094-4b58-ea28-08daa7aad7b4
+X-MS-Exchange-CrossTenant-AuthSource: CO1PR10MB4722.namprd10.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 06 Oct 2022 14:55:43.4395
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 4e2c6054-71cb-48f1-bd6c-3a9705aca71b
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: eBWTEJbVRMZv5IRD0UveecP/LRCj2v6nP7fQIwYBL4M8LfzZV+y+IOa8HshTbBI4uVMXS1DZ4LZxhSJD17oo47BZVQL9V29bpY0E+2Jk4DE=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM6PR10MB4154
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.205,Aquarius:18.0.895,Hydra:6.0.528,FMLib:17.11.122.1
+ definitions=2022-10-06_03,2022-10-06_02,2022-06-22_01
+X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 malwarescore=0 phishscore=0 bulkscore=0
+ suspectscore=0 mlxlogscore=999 mlxscore=0 spamscore=0 adultscore=0
+ classifier=spam adjust=0 reason=mlx scancount=1 engine=8.12.0-2209130000
+ definitions=main-2210060086
+X-Proofpoint-GUID: ETxwtZkvFegN5S-vDqw5yG55o23YidjD
+X-Proofpoint-ORIG-GUID: ETxwtZkvFegN5S-vDqw5yG55o23YidjD
+X-Spam-Status: No, score=-4.2 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,NICE_REPLY_A,RCVD_IN_DNSWL_LOW,
+        RCVD_IN_MSPIKE_H2,SPF_HELO_NONE,SPF_NONE autolearn=ham
         autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
@@ -79,206 +201,91 @@ Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Tue, 4 Oct 2022 17:27:06 +0100, Bryan O'Donoghue wrote:
-> On 04/10/2022 16:17, Akira Yokosawa wrote:
->> Hi Bryan,
+On 8/1/22 9:47 PM, Leizhen (ThunderTown) wrote:
+> 
+> 
+> On 2022/8/1 16:20, Baoquan He wrote:
+>> Hi Catalin,
 >>
->> I'll be silent on the word choice of "supporter" for the time being. :=
--)
->>
->> On Tue,=C2=A0 4 Oct 2022 13:48:58 +0100, Bryan O'Donoghue wrote:
->>> Recently when submitting a yaml change I found that I had omitted the=
-
->>> maintainer whose tree the change needed to go through.
+>> On 07/11/22 at 05:03pm, Zhen Lei wrote:
+>>> v2 --> v3:
+>>> 1. Discard patch 3 in v2, a cleanup patch.
 >>>
->>> The reason for that is the path in MAINTAINERS is marked as Supported=
- not
->>> Maintained. Reading MAINTAINERS we see quote:
+>>> v1 --> v2:
+>>> 1. Update the commit message of Patch 1, explicitly indicates that "crashkernel=X,high"
+>>>     is specified but "crashkernel=Y,low" is not specified.
+>>> 2. Drop Patch 4-5. Currently, focus on function integrity, performance optimization
+>>>     will be considered in later versions.
+>>> 3. Patch 3 is not mandatory, it's just a cleanup now, although it is a must for patch 4-5.
+>>>     But to avoid subsequent duplication of effort, I'm glad it was accepted.
 >>>
->>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 Su=
-pported:=C2=A0=C2=A0 Someone is actually paid to look after this.
->>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 Ma=
-intained:=C2=A0 Someone actually looks after it.
 >>>
->>> The current submitting-patches.rst only says to mail maintainers thou=
-gh not
->>> supporters. Discussing further on the list the suggestion was made to=
- state
->>> that the following are the right addresses to mail:
+>>> v1:
+>>> After the basic functions of "support reserving crashkernel above 4G on arm64
+>>> kdump"(see https://urldefense.com/v3/__https://lkml.org/lkml/2022/5/6/428__;!!ACWV5N9M2RV99hQ!ORBFa4UAmMss_79nuwu1kpW3D-mTela240vFo0FXOuV9QpGWy7Fp2H81ZjLPOuaufAQC_XBFEFGjAqs5njfGS6Rd4dZLhaez$ ) are implemented, we still have
+>>> three features to be improved.
+>>> 1. When crashkernel=X,high is specified but crashkernel=Y,low is not specified,
+>>>     the default crash low memory size is provided.
+>>> 2. For crashkernel=X without '@offset', if the low memory fails to be allocated,
+>>>     fall back to reserve region from high memory(above DMA zones).
+>>> 3. If crashkernel=X,high is used, page mapping is performed only for the crash
+>>>     high memory, and block mapping is still used for other linear address spaces.
+>>>     Compared to the previous version:
+>>>     (1) For crashkernel=X[@offset], the memory above 4G is not changed to block
+>>>         mapping, leave it to the next time.
+>>>     (2) The implementation method is modified. Now the implementation is simpler
+>>>         and clearer.
+>>
+>> Do you have plan to pick this series so that it can be taken into 5.20
+>> rc-1~3?
+> 
+> Hi, Catalin:
+>    Only function reserve_crashkernel() is modified in these two patches. The core
+> process of the arm64 architecture is not affected. I remember you suggested that
+> arm64 and x86 share the same kdump code, so these two subfeatures are needed.
+> Maybe we can lay the foundation first for the people who build the road. Unifying
+> the external interfaces of kdump on arm64 and x86 does not seem to hurt.
+> 
+> 
+>>
+>> We have back ported the basic crashkernel=high, low, support into our
+>> distros and have taken wide testing on arm64 servers, need this patchset
+>> to back port for more testing.
+>>
+>> Thanks
+>> Baoquan
+>>
 >>>
->>> - Maintainers
->>> - Supporters
->>> - Reviewers
->>> - Dedicated lists
->>> - LKML as a fallback when there is no dedicated list
+>>> Zhen Lei (2):
+>>>    arm64: kdump: Provide default size when crashkernel=Y,low is not
+>>>      specified
+>>>    arm64: kdump: Support crashkernel=X fall back to reserve region above
+>>>      DMA zones
 >>>
->>> Add in a two sentences to capture that statement.
+>>>   .../admin-guide/kernel-parameters.txt         | 10 ++-----
+>>>   arch/arm64/mm/init.c                          | 28 +++++++++++++++++--
+>>>   2 files changed, 28 insertions(+), 10 deletions(-)
 >>>
->>> Signed-off-by: Bryan O'Donoghue <bryan.odonoghue@linaro.org>
->>> ---
->>> =C2=A0 Documentation/process/submitting-patches.rst | 7 +++++--
->>> =C2=A0 1 file changed, 5 insertions(+), 2 deletions(-)
+>>> -- 
+>>> 2.25.1
 >>>
->>> diff --git a/Documentation/process/submitting-patches.rst b/Documenta=
-tion/process/submitting-patches.rst
->>> index be49d8f2601b4..90fda3367a405 100644
->>> --- a/Documentation/process/submitting-patches.rst
->>> +++ b/Documentation/process/submitting-patches.rst
->>> @@ -227,8 +227,11 @@ You should always copy the appropriate subsystem=
- maintainer(s) on any patch
->>> =C2=A0 to code that they maintain; look through the MAINTAINERS file =
-and the
->>> =C2=A0 source code revision history to see who those maintainers are.=
-=C2=A0 The
->>> =C2=A0 script scripts/get_maintainer.pl can be very useful at this st=
-ep (pass paths to
->>> -your patches as arguments to scripts/get_maintainer.pl).=C2=A0 If yo=
-u cannot find a
->>> -maintainer for the subsystem you are working on, Andrew Morton
->>> +your patches as arguments to scripts/get_maintainer.pl).=C2=A0 In th=
-e output of
->>> +get_maintainer.pl the recommendation is to mail every maintainer, su=
-pporter,
->>> +reviewer and dedicated mailing list. If get_maintainer doesn't indic=
-ate a
->>> +dedicated mailing list linux-kernel@vger.kernel.org should be includ=
-ed. If you
->>> +cannot find a maintainer for the subsystem you are working on, Andre=
-w Morton
->>> =C2=A0 (akpm@linux-foundation.org) serves as a maintainer of last res=
-ort.
->>> =C2=A0 =C2=A0 You should also normally choose at least one mailing li=
-st to receive a copy
 >>
->> Quoting subsequent paragraph:
+>> .
 >>
->> =C2=A0=C2=A0 You should also normally choose at least one mailing list=
- to receive a copy
->> =C2=A0=C2=A0 of your patch set.=C2=A0 linux-kernel@vger.kernel.org sho=
-uld be used by default
->> =C2=A0=C2=A0 for all patches, but the volume on that list has caused a=
- number of
->> =C2=A0=C2=A0 developers to tune it out.=C2=A0 Look in the MAINTAINERS =
-file for a
->> =C2=A0=C2=A0 subsystem-specific list; your patch will probably get mor=
-e attention there.
->> =C2=A0=C2=A0 Please do not spam unrelated lists, though.
->>
->> The paragraph you updated mentions the maintainers (as persons) to
->> send patches.
->>
->> The subsequent paragraph talks about mailing lists.
->>
->> After this patch is applied, they look mostly redundant except for
->> an important difference. In your patch, Cc: LKML is recommended only
->> when a subsystem-specific list can not be found. In the subsequent
->> paragraph, LKML is recommended to be Cc'd by default, in addition
->> to subsystem-specific lists. Does my interpretation wrong?
->=20
-> Yes I take your point.
->=20
-> It is probably wiser to drop "dedicated" from the sentence.
->=20
->> Doesn't the subsequent paragraph (quoted above) work for you?
->=20
-> Not especially. I think it is a super-semantic distinction but,
-> the word "normally" implies there is also an abnormal case.
->=20
-> "Always" would be a better world than "normally"
-Then I think "normally" is the suitable choice because the choice
-of recipients is highly dependent of the nature of patches as well
-as the subsystem in question.
+> 
+Hi ,
 
-For example, when submitting an "obviously correct" patch, my list
-of CCs could be just:
+What is the progress of this series ?
 
-   Cc: Main maintainer of the subsystem in question
-   Cc: subsystem-specific list
-   Cc: LKML
+Without this patch set we are seeing  larger crashkernel=896M failures 
+on Arm  with Linux-6.0.rc7.  This larger value is needed for
+iSCSI booted systems with certain network adapters.
 
-, because I can expect the main maintainer would apply it without
-any need of someone else's review, and I don't want to spam other
-maintainers/reviewers.
 
-On the other hand, when submitting a fix of a regression, my list
-of CCs would be:
+Thank you,
+John.
 
-   Cc: Author of the offending commit
-   Cc: Reviewer A who gave a Reported-by: tag to the offending commit
-   ...
-   Cc: Maintainer B who is in the Signed-off-by chain of the offending co=
-mmit
-   Cc: Maintainer C who is also in the Signed-off-by chain
-   ...
-   Cc: Main Maintainer of the subsystem in question
-   Cc: subsystem-specific list
-   Cc: LKML
 
-When submitting a new version of a patch, in addition to the above,
 
-   Cc: Developer D who commented in earlier version(s) of the patch
-   Cc: Developer E who commented in earlier version(s) of the patch
-   ...
 
-To be clear, I don't use get_maintainer.pl so much for patches to
-subsystems I have experience with.
-I sometimes try it for unfamiliar area of kernel source tree to know
-which subsystem it belongs to.
 
-I'm not sure if this scheme works if I need to submit a patch
-to devicetree/media/... where organization of subsystems is complex.
-
-As for submitting-patches.rst, although the expected audience is
-inexperienced in submitting patches, it would be safe assume
-
->=20
->> If it does, you don't need to mention mail lists in your change.
->> Otherwise, you also need to tweak/remove the subsequent paragraph.
->>
->> Thoughts?
->=20
-> The sentence I'm posting here pertains to the output of "get_maintainer=
-".
-> I think there is value in having a concise statement to say "take
-> the output of get_maintainer and do X"
->=20
-> I also think having a paragraph that says "you must always send
-> to at least one mailing list" is both direct and true.
-You might like to be told so, I'd like to know possible options
-I can choose.
-
->=20
-> You are not _required_ to run get_maintainer to submit a patch,
-> it is simply _suggested_ so in my view the output of get_maintainer
-> doesn't negate the statement that you must mail at least one public
-> mailing list.
-You lost me already.
-Running get_maintainer is optional, but I must always obey its
-suggestion? Huh?
-
-I'm beginning to agree what Jon commented when he applied Krzysztof's pat=
-ch [1]:
-
-    I worry about trying to cram every detail into these documents; it's =
-not
-    as if their length isn't intimidating already.  But I've gone ahead a=
-nd
-    applied this, thanks.
-
-[1]: https://lore.kernel.org/all/87ee12cq2j.fsf@meer.lwn.net/
-
-Bryan, what you are trying here is going to worry Jon further.
-I believe this introductory document needs to be kept as concise as
-possible.
-
-Documentation on get_maintainer.pl can go elsewhere, and can be as
-lengthy as you'd like.
-
-I think I'm not going to do any more review of this kind of change.
-
-Bye.
-
-Akira
->=20
-> ---
-> bod
