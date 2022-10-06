@@ -2,116 +2,158 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 5F8F25F6319
-	for <lists+linux-doc@lfdr.de>; Thu,  6 Oct 2022 10:55:45 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 424C65F62AA
+	for <lists+linux-doc@lfdr.de>; Thu,  6 Oct 2022 10:30:29 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S230209AbiJFIzn convert rfc822-to-8bit (ORCPT
-        <rfc822;lists+linux-doc@lfdr.de>); Thu, 6 Oct 2022 04:55:43 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:60056 "EHLO
+        id S230137AbiJFIa1 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 6 Oct 2022 04:30:27 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:43170 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S229844AbiJFIzn (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Thu, 6 Oct 2022 04:55:43 -0400
-X-Greylist: delayed 1199 seconds by postgrey-1.37 at lindbergh.monkeyblade.net; Thu, 06 Oct 2022 01:55:39 PDT
-Received: from ouvsmtp1.octopuce.fr (ouvsmtp1.octopuce.fr [194.36.166.50])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 0ACE795E40;
-        Thu,  6 Oct 2022 01:55:39 -0700 (PDT)
-Received: from panel.vitry.ouvaton.coop (unknown [194.36.166.20])
-        by ouvsmtp1.octopuce.fr (Postfix) with ESMTPS id 7717D173;
-        Thu,  6 Oct 2022 10:17:18 +0200 (CEST)
-Received: from sm.ouvaton.coop (ouvadm.octopuce.fr [194.36.166.2])
-        by panel.vitry.ouvaton.coop (Postfix) with ESMTPSA id 376215E16F9;
-        Thu,  6 Oct 2022 10:17:18 +0200 (CEST)
-MIME-Version: 1.0
-Date:   Thu, 06 Oct 2022 08:17:18 +0000
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 8BIT
-From:   "Yann Droneaud" <ydroneaud@opteya.com>
-Message-ID: <125581881ad4aa85b2dadfe0d7338af9901caa03@opteya.com>
-Subject: Re: [PATCH v1 0/5] treewide cleanup of random integer usage
-To:     "Jason A. Donenfeld" <Jason@zx2c4.com>
-Cc:     "Jason A. Donenfeld" <Jason@zx2c4.com>,
-        linux-crypto@vger.kernel.org, linux-doc@vger.kernel.org,
-        kernel-janitors@vger.kernel.org,
-        "Julia Lawall" <Julia.Lawall@inria.fr>,
-        "Nicolas Palix" <nicolas.palix@imag.fr>, linux-api@vger.kernel.org,
+        with ESMTP id S230225AbiJFIaW (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Thu, 6 Oct 2022 04:30:22 -0400
+Received: from mga09.intel.com (mga09.intel.com [134.134.136.24])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id CA373167DE;
+        Thu,  6 Oct 2022 01:30:18 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1665045020; x=1696581020;
+  h=from:to:cc:subject:in-reply-to:references:date:
+   message-id:mime-version;
+  bh=p145ntU9QNRXpDPuVN87WcpkTwAW9lcMxG8ANKDfxXI=;
+  b=U8qFFTBVXDp9gcpV5oF7gsIGjE8BRaKodiT7vCvT5Vaw1NX0YHAmwXgw
+   DVxG2tpObCDboNjROJXATrrjABwPSNHuc1frRWSeOMzwGXcV9W9GEs+4c
+   jW5Ff354e/TvCv/7hKb5pjzrxsBXlW31pwygdi3Z275gUMjd4MRDz6IGy
+   CN06DUwUie9HGRQf3An+fFoErpa0Ijhn7VuuWUeZbsU1wxw3oXNBy8Z/5
+   /hMFI9PTcHeZVWFugaeMPmKkHpaCN2x8jzvwx0rF4R+2iJiVQyRVE1A/N
+   akERyPQyRdqUyVzvVNwDFJV+i3ZDga/FPXsdPGiD13EX0QPy+BDKNf00z
+   g==;
+X-IronPort-AV: E=McAfee;i="6500,9779,10491"; a="304377611"
+X-IronPort-AV: E=Sophos;i="5.95,163,1661842800"; 
+   d="scan'208";a="304377611"
+Received: from orsmga003.jf.intel.com ([10.7.209.27])
+  by orsmga102.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 06 Oct 2022 01:29:43 -0700
+X-IronPort-AV: E=McAfee;i="6500,9779,10491"; a="575742350"
+X-IronPort-AV: E=Sophos;i="5.95,163,1661842800"; 
+   d="scan'208";a="575742350"
+Received: from pkastovs-mobl.ger.corp.intel.com (HELO localhost) ([10.252.61.167])
+  by orsmga003-auth.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 06 Oct 2022 01:29:41 -0700
+From:   Jani Nikula <jani.nikula@linux.intel.com>
+To:     Mauro Carvalho Chehab <mchehab@kernel.org>
+Cc:     Jonathan Corbet <corbet@lwn.net>, linux-doc@vger.kernel.org,
         linux-kernel@vger.kernel.org
-In-Reply-To: <20221005214844.2699-1-Jason@zx2c4.com>
-References: <20221005214844.2699-1-Jason@zx2c4.com>
-X-Originating-IP: 10.0.20.16
-X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00,SPF_HELO_PASS,
-        SPF_PASS autolearn=ham autolearn_force=no version=3.4.6
+Subject: Re: [PATCH 5/5] docs: improve the HTML formatting of kerneldoc
+ comments
+In-Reply-To: <20221006065329.787c2592@sal.lan>
+Organization: Intel Finland Oy - BIC 0357606-4 - Westendinkatu 7, 02160 Espoo
+References: <20221004201222.281845-1-corbet@lwn.net>
+ <20221004201222.281845-6-corbet@lwn.net> <87r0zmqkao.fsf@intel.com>
+ <20221006065329.787c2592@sal.lan>
+Date:   Thu, 06 Oct 2022 11:29:40 +0300
+Message-ID: <875ygxqrrf.fsf@intel.com>
+MIME-Version: 1.0
+Content-Type: text/plain
+X-Spam-Status: No, score=-4.3 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_EF,RCVD_IN_DNSWL_MED,
+        RCVD_IN_MSPIKE_H3,RCVD_IN_MSPIKE_WL,SPF_HELO_NONE,SPF_NONE
+        autolearn=ham autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Hi,
+On Thu, 06 Oct 2022, Mauro Carvalho Chehab <mchehab@kernel.org> wrote:
+> Em Wed, 05 Oct 2022 19:58:39 +0300
+> Jani Nikula <jani.nikula@linux.intel.com> escreveu:
+>
+>> On Tue, 04 Oct 2022, Jonathan Corbet <corbet@lwn.net> wrote:
+>> > Make a few changes to cause functions documented by kerneldoc to stand out
+>> > better in the rendered documentation.  Specifically, change kernel-doc to
+>> > put the description section into a ".. container::" section, then add a bit
+>> > of CSS to indent that section relative to the function prototype (or struct
+>> > or enum definition).  Tweak a few other CSS parameters while in the
+>> > neighborhood to improve the formatting.  
+>> 
+>> Way back I tried to keep the formatting changes minimal to avoid opening
+>> that particular can of worms along with the rest of the Sphinx
+>> transition.
+>> 
+>> But I do wonder if people find value in repeating e.g. the struct
+>> definitions in the documentation. I'd argue the rendered documentation
+>> is more for an overview, and if you need to know the exact details,
+>> you'll be in the editor typing code and you can look up the actual
+>> definition in source. Having the definition feels maybe a bit excessive.
+>
+> I have split thoughts regards to it. The advantage of having the
+> struct definition there is to allow checking the type of each argument,
+> which is useful. It also provide a way to double-check if the parser
+> is dealing well with the argument, but, on the counter-side, the
+> type printed by kernel-doc may not be identical to what's inside the
+> Kernel, on some special cases, as the parse logic for arguments is
+> complex. The same applies on functions and macros.
 
-6 octobre 2022 à 04:51 "Jason A. Donenfeld" a écrit:
+Two alternatives to removing it come to mind:
 
-> 
-> This is a five part treewide cleanup of random integer handling. The
-> rules for random integers are:
-> 
-> - If you want a secure or an insecure random u64, use get_random_u64().
-> - If you want a secure or an insecure random u32, use get_random_u32().
->  * The old function prandom_u32() has been deprecated for a while now
->  and is just a wrapper around get_random_u32().
-> - If you want a secure or an insecure random u16, use get_random_u16().
-> - If you want a secure or an insecure random u8, use get_random_u8().
-> - If you want secure or insecure random bytes, use get_random_bytes().
->  * The old function prandom_bytes() has been deprecated for a while now
->  and has long been a wrapper around get_random_bytes().
-> - If you want a non-uniform random u32, u16, or u8 bounded by a certain
->  open interval maximum, use prandom_u32_max().
->  * I say "non-uniform", because it doesn't do any rejection sampling or
->  divisions. Hence, it stays within the prandom_* namespace.
-> 
-> These rules ought to be applied uniformly, so that we can clean up the
-> deprecated functions, and earn the benefits of using the modern
-> functions. In particular, in addition to the boring substitutions, this
-> patchset accomplishes a few nice effects:
-> 
-> - By using prandom_u32_max() with an upper-bound that the compiler can
->  prove at compile-time is ≤65536 or ≤256, internally get_random_u16()
->  or get_random_u8() is used, which wastes fewer batched random bytes,
->  and hence has higher throughput.
-> 
-> - By using prandom_u32_max() instead of %, when the upper-bound is not a
->  constant, division is still avoided, because prandom_u32_max() uses
->  a faster multiplication-based trick instead.
-> 
-> - By using get_random_u16() or get_random_u8() in cases where the return
->  value is intended to indeed be a u16 or a u8, we waste fewer batched
->  random bytes, and hence have higher throughput.
-> 
-> So, based on those rules and benefits from following them, this patchset
-> breaks down into the following five steps:
-> 
-> 1) Replace `prandom_u32() % max` and variants thereof with
->  prandom_u32_max(max).
-> 
-> 2) Replace `(type)get_random_u32()` and variants thereof with
->  get_random_u16() or get_random_u8(). I took the pains to actually
->  look and see what every lvalue type was across the entire tree.
-> 
-> 3) Replace remaining deprecated uses of prandom_u32() with
->  get_random_u32(). 
-> 
-> 4) Replace remaining deprecated uses of prandom_bytes() with
->  get_random_bytes().
-> 
-> 5) Remove the deprecated and now-unused prandom_u32() and
->  prandom_bytes() inline wrapper functions.
-> 
+- Generating links to git.kernel.org at right version, file and line.
 
-Did you use some coccinelle patches ? Or other semantic patch tool ?
+- A collapsible (and collapsed by default) code box. I think this needs
+  html/css hacking, not possible in Sphinx out of the box.
 
-Maybe we could introduce some coccinelle patch to ensure future get_random_u{16,32,64} usages be checked and patched to use the best fit.
+>> 
+>> We also don't use Sphinx C Domain's ".. c:member::" for struct/union
+>> members, 
+>
+> I'm wondering how much extra build time this would impact ;-)
+> If the impact is not huge, I'm in favor of using it.
+>
+>> or ".. c:enumerator::" for enumeration contants. 
+>
+> This one can be more problematic, as it could break existing
+> cross-references.
 
-Regards.
+Certainly.
+
+>
+>> They provide arguably nicer rendering out of the box than our stuff.
+>
+> Agreed.
+>
+>> The Sphinx way to do parameter lists would be field lists i.e. ":param
+>> foo: description". Ditto for return values ":return: description". (Not
+>> saying we should convert the comments, but kernel-doc the script could
+>> emit those.)
+>> 
+>> Perhaps we'd be better off going towards Sphinx standard usage than
+>> tweaking our own thing?
+>> 
+>> I'm afraid I don't have the time to work on this. Talk is cheap and all
+>> that. My two cents.
+>> 
+>> Anyway, here are some examples how this might look like: [1].
+>> 
+>> 
+>> BR,
+>> Jani.
+>> 
+>> 
+>> 
+>> [1] https://hawkmoth.readthedocs.io/en/latest/examples.html
+>
+> It reminds that we're currently lacking a  way to describe non-macro
+> #defines. In special for bit-based defines, it would be nice to have
+> a good way to document them, without needing to convert defines into 
+> enums.
+
+ITYM simple or non-function-like macros. Sphinx supports ".. macro::"
+for that nowadays, but don't know since what version. That's what I use
+in Hawkmoth, and ".. function::" for macros with args.
+
+BR,
+Jani.
+
+>
+> Regards,
+> Mauro
 
 -- 
-Yann Droneaud
-OPTEYA
+Jani Nikula, Intel Open Source Graphics Center
