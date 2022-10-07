@@ -2,92 +2,105 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 9DC2F5F7B2D
-	for <lists+linux-doc@lfdr.de>; Fri,  7 Oct 2022 18:08:53 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id D6EB75F7B59
+	for <lists+linux-doc@lfdr.de>; Fri,  7 Oct 2022 18:23:42 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S229852AbiJGQIv (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Fri, 7 Oct 2022 12:08:51 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:52976 "EHLO
+        id S229507AbiJGQXj (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Fri, 7 Oct 2022 12:23:39 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:49628 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S229704AbiJGQIu (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Fri, 7 Oct 2022 12:08:50 -0400
-Received: from mail-wr1-x429.google.com (mail-wr1-x429.google.com [IPv6:2a00:1450:4864:20::429])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 82904114DC9;
-        Fri,  7 Oct 2022 09:08:49 -0700 (PDT)
-Received: by mail-wr1-x429.google.com with SMTP id j16so7978323wrh.5;
-        Fri, 07 Oct 2022 09:08:49 -0700 (PDT)
+        with ESMTP id S229950AbiJGQXg (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Fri, 7 Oct 2022 12:23:36 -0400
+Received: from mail-pl1-x629.google.com (mail-pl1-x629.google.com [IPv6:2607:f8b0:4864:20::629])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 835C3102531
+        for <linux-doc@vger.kernel.org>; Fri,  7 Oct 2022 09:23:33 -0700 (PDT)
+Received: by mail-pl1-x629.google.com with SMTP id f23so4986514plr.6
+        for <linux-doc@vger.kernel.org>; Fri, 07 Oct 2022 09:23:33 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
-        h=mime-version:user-agent:references:message-id:date:in-reply-to
-         :subject:cc:to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=HDSNhZ4Sfk5K4RF7zJw4ZOJbQhRl9dsVaLFuDO2S9ZI=;
-        b=bxGpn72DZjAT1zrodZHvxysfLGbJVnYR1DwthBl/sqnKJVBCsQ36bEqkGwZYqEIDkR
-         CMf+vlF5Iw3zRC2b04ZkpKhq5kH3mmbgAI/x1Jr/6PoRlFMAaJ7hc9gkj3Nk8FnVEhjJ
-         F0GzK1pqfArUlA6NvGKIdjimBOA/vZGA4wIWBel5jgisjf+zXhYr72OM9SMF1sxN6Np0
-         30FkAvtDwRe1Nov52z3fnU6FaQjV8exL+7EyEpaoH9PiBw3o/bz16bgli3xuFrx44V1N
-         jnaHumfCTImyEmjCfZPQtrU1Q5IFred2c08l6U9Ghgx6YY2fJVjryduz3++oHknU3FU0
-         cTAQ==
+        h=to:subject:message-id:date:from:reply-to:mime-version:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=eVKfZA3SwiGf8qlPzooH70x5W9OPocalRMd2pDz1Njs=;
+        b=p2/iQy2rmgnIEXndt1c2isSc528d1W0zf8zkAfgqNNIl5UA0prvbJAsSh7vGwFQM/0
+         4bR6mo4ZdZ8xl1o1XciNISLkeYTSgYbfTvjTDDOwlrNZuZ/5X/kU9bgmcnPUEC3n0r8c
+         GusLDh2umCN6OKQqwHZQApqruIhHANWWSGXx9J68P+SuOpjXsdK21rgSL3Rk0gTtzdgA
+         9VciZozMJ6WZqF5PHv7zRUiuVReKM2VcGq6PUlnDv+QmsVHlb0wrAihiuy9rn1cHNWSJ
+         BskEWzzqJ4s3Umuv6V6W51Ea0YGoeCtlS33EayGiVwGjl0ixsOvfxvZec4OgHHeZ94D+
+         ZTvA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=mime-version:user-agent:references:message-id:date:in-reply-to
-         :subject:cc:to:from:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=HDSNhZ4Sfk5K4RF7zJw4ZOJbQhRl9dsVaLFuDO2S9ZI=;
-        b=RCHN8AkWu5QPX93XffxStM+88RmvfLrztvSKjgirzUpUlJzTLd1fZ9VYrIiI2NvHSB
-         Zr/syCKhG5ZfGrwRNnmg3bGxXX1WLAosj/IkQy4D/S0MinJohv11Xh1BbSgCNEb6bHB+
-         z2TWa8GAg2Eh5Sh0uTYZZQMURshTumWTelVJomoe+HG4ftW3+0tPzBNkBN56PLl445GX
-         luVxRjbwDKmgWmYDKvuO+yntkjQL0JEJjKTESu8jU1T5F22T+vQcfZuUwRaUJs/FC+kI
-         QvD9gTiymy2BwypZ/jNQQ1zT2upSv8F8VOA3H41pNignGd4y0DOPqKJO7NlwQ3HY90xy
-         oGiw==
-X-Gm-Message-State: ACrzQf3/0QvyMi9FOuPO9UR26a2Urw0EkkFlu/+Hbr9h6XlGHp5ePtZ6
-        pA6GL1PlhisElf9pdsjgDcc=
-X-Google-Smtp-Source: AMsMyM6axC1ZKtHZq9J068r/wXG3/9hqe5RUm+1KFmFgbusyaMgPb5sFsSGHWsvutbOPVzGJ4rRfNA==
-X-Received: by 2002:adf:e310:0:b0:22c:c50f:46c8 with SMTP id b16-20020adfe310000000b0022cc50f46c8mr3748524wrj.231.1665158927953;
-        Fri, 07 Oct 2022 09:08:47 -0700 (PDT)
-Received: from imac ([88.97.103.74])
-        by smtp.gmail.com with ESMTPSA id i9-20020a5d5229000000b0022cd59331b2sm2449297wra.95.2022.10.07.09.08.46
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 07 Oct 2022 09:08:47 -0700 (PDT)
-From:   Donald Hunter <donald.hunter@gmail.com>
-To:     Daniel Borkmann <daniel@iogearbox.net>
-Cc:     Jiri Olsa <olsajiri@gmail.com>, bpf@vger.kernel.org,
-        linux-doc@vger.kernel.org, dave@dtucker.co.uk,
-        Alexei Starovoitov <ast@kernel.org>
-Subject: Re: [PATCH bpf-next v6 1/1] bpf, docs: document BPF_MAP_TYPE_ARRAY
-In-Reply-To: <4b2cc38f-7ea8-56ad-30b3-af91553028ec@iogearbox.net> (Daniel
-        Borkmann's message of "Fri, 7 Oct 2022 16:54:29 +0200")
-Date:   Fri, 07 Oct 2022 17:07:53 +0100
-Message-ID: <m2fsfzborq.fsf@gmail.com>
-References: <20221005104634.66406-1-donald.hunter@gmail.com>
-        <20221005104634.66406-2-donald.hunter@gmail.com>
-        <Yz69qfI7ZkJPrUt7@krava>
-        <4b2cc38f-7ea8-56ad-30b3-af91553028ec@iogearbox.net>
-User-Agent: Gnus/5.13 (Gnus v5.13) Emacs/28.2 (darwin)
+        h=to:subject:message-id:date:from:reply-to:mime-version
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=eVKfZA3SwiGf8qlPzooH70x5W9OPocalRMd2pDz1Njs=;
+        b=aUHbUaOC9kqQWBhaPwfI2gSa/hLtYC4IaejX2WOnN58KQmWpvS4wXLOIlFQ8xYVMry
+         mcrSv3Hhss+ugeYXS9zbtXXycdi9F2sA5g/uDeQR9b+B37kBw8bw+Bs7iyBgJh9Gebm5
+         Lrm5WOMyOia6XgZ/anYeYAyKehddnMtk5SoiHuqyIoaz44ajlp6ePp6FSZUhe31LFqnG
+         MtDS8K2RKQtpKuzJFe0o3IMOYtI+WZE7mHCV/6soiJdUOviOMkmNpi6XlD5MDZlxB2kz
+         Lkw8sfuMS7eib22WBQ1a5kjzTaCVwjFwQxLKpfL5wol10ulj5ak+bbQTaFpDohPHkt6a
+         mVvA==
+X-Gm-Message-State: ACrzQf2p98SDyK1Z7gO7cM597c8744jkMdNwjtTjmfXZIxhLCoW8rAo9
+        Nfcr9n4zW1kZgi4eLSaIkPdB/IIgiDG6DmTiKco=
+X-Google-Smtp-Source: AMsMyM4aNBOg2ixK2Ti0iz9E/9RVTENMJ07GV2dAkCNAb+dyKVlrCjBfxPMdCqWIQ4OR+51pVLKtY9y3EHVDJ1tA6vw=
+X-Received: by 2002:a17:90b:4d0c:b0:20b:c983:2d85 with SMTP id
+ mw12-20020a17090b4d0c00b0020bc9832d85mr3153480pjb.45.1665159811878; Fri, 07
+ Oct 2022 09:23:31 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain
-X-Spam-Status: No, score=-2.1 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_FROM,
-        RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,SPF_PASS autolearn=ham
-        autolearn_force=no version=3.4.6
+Received: by 2002:a05:7022:10e:b0:45:df8d:92fb with HTTP; Fri, 7 Oct 2022
+ 09:23:31 -0700 (PDT)
+Reply-To: mrs.feleciajonathan001@gmail.com
+From:   "Mrs.Felecia Jonathan" <salifdene5@gmail.com>
+Date:   Fri, 7 Oct 2022 09:23:31 -0700
+Message-ID: <CAC0oiJZaJ6zkQTCyu5MfoaAN_pdJQvFjhWBTDQVyRWNJ1WW1sQ@mail.gmail.com>
+Subject: HI
+To:     undisclosed-recipients:;
+Content-Type: text/plain; charset="UTF-8"
+X-Spam-Status: Yes, score=5.2 required=5.0 tests=BAYES_50,DKIM_SIGNED,
+        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_ENVFROM_END_DIGIT,
+        FREEMAIL_FROM,FREEMAIL_REPLYTO,FREEMAIL_REPLYTO_END_DIGIT,
+        RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,SPF_PASS,T_HK_NAME_FM_MR_MRS,
+        UNDISC_FREEM autolearn=no autolearn_force=no version=3.4.6
+X-Spam-Report: * -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at
+        *      https://www.dnswl.org/, no trust
+        *      [2607:f8b0:4864:20:0:0:0:629 listed in]
+        [list.dnswl.org]
+        *  0.8 BAYES_50 BODY: Bayes spam probability is 40 to 60%
+        *      [score: 0.5001]
+        *  0.0 FREEMAIL_FROM Sender email is commonly abused enduser mail
+        *      provider
+        *      [salifdene5[at]gmail.com]
+        * -0.0 SPF_PASS SPF: sender matches SPF record
+        *  0.2 FREEMAIL_ENVFROM_END_DIGIT Envelope-from freemail username ends
+        *       in digit
+        *      [salifdene5[at]gmail.com]
+        *  0.2 FREEMAIL_REPLYTO_END_DIGIT Reply-To freemail username ends in
+        *      digit
+        *      [mrs.feleciajonathan001[at]gmail.com]
+        *  0.0 SPF_HELO_NONE SPF: HELO does not publish an SPF Record
+        * -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
+        *      author's domain
+        *  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
+        *       valid
+        * -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+        * -0.1 DKIM_VALID_EF Message has a valid DKIM or DK signature from
+        *      envelope-from domain
+        *  0.0 T_HK_NAME_FM_MR_MRS No description available.
+        *  3.1 UNDISC_FREEM Undisclosed recipients + freemail reply-to
+        *  1.0 FREEMAIL_REPLYTO Reply-To/From or Reply-To/body contain
+        *      different freemails
+X-Spam-Level: *****
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Daniel Borkmann <daniel@iogearbox.net> writes:
+ Am a dying woman here in the hospital, i was diagnose as a Cancer
+patient over  2 Years ago. I am A business woman how
+dealing with Gold Exportation.I Am from Us California
+I have a charitable and unfufilment
 
-> On 10/6/22 1:36 PM, Jiri Olsa wrote:
->> I recently hit 32k size limit for per-cpu map value.. it seems to be
->> size limit for generic per cpu allocation, but would be great to have
->> it confirmed by somebody who knows mm better ;-)
->
-> Yes, for percpu the max is PCPU_MIN_UNIT_SIZE which is 32k, see mm/percpu.c +1756.
-> In many cases it's implementation specific, so it probably does not make too much
-> sense to state limits like 2^32, or at least it should say that its theoretical/uapi
-> limit and actual limits may be implementation/config specific.
-
-Yes, good point. I will just drop the 2^32 bit. Same issue was
-raised by Stanislav Fomichev for BPF_MAP_TYPE_HASH here:
-
-https://patchwork.kernel.org/project/netdevbpf/patch/20220713211612.84782-1-donald.hunter@gmail.com/#24936386
+project that am about to handover to you, if you are interested please
+Reply
+hope to hear from you.
+Regard
+Mrs. Felecia Jonathan
