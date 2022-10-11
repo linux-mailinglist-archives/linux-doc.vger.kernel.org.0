@@ -2,94 +2,102 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 7634B5FADF7
-	for <lists+linux-doc@lfdr.de>; Tue, 11 Oct 2022 10:05:17 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 17E2D5FAE71
+	for <lists+linux-doc@lfdr.de>; Tue, 11 Oct 2022 10:31:07 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S229436AbiJKIFO (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 11 Oct 2022 04:05:14 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:50312 "EHLO
+        id S229464AbiJKIbG (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 11 Oct 2022 04:31:06 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:48100 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S229710AbiJKIFM (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 11 Oct 2022 04:05:12 -0400
-Received: from desiato.infradead.org (desiato.infradead.org [IPv6:2001:8b0:10b:1:d65d:64ff:fe57:4e05])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 6F5904D276;
-        Tue, 11 Oct 2022 01:05:11 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-        d=infradead.org; s=desiato.20200630; h=In-Reply-To:Content-Type:MIME-Version:
-        References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
-        Content-Transfer-Encoding:Content-ID:Content-Description;
-        bh=u50EcsTI9Wk9/nFFcEKJjzHJXjNQpjwE8MEPj/c61bk=; b=jRN7B6Bjxy2MH05q0VSH4fvQvY
-        +TydedfMaV9P6yrvHLi8GPvH4QZqoYXkd0Nu2oZ4lFt2wsdeLOhD6zhyxXHFDg0mjdlmn01cqTeeu
-        KcPMPeOeWFcSILoeKQ61er9iX3EIBXx1gDLuAcu/WeCW634UldSWDwlzIYeGUAiNC6BcGc/gYgHVO
-        ykcKWqOtKkIbA+aYGKQRqzXaINp2SoQO6GNlbGVAGQ2mHB7m8oFFsVdDMmqvYUYEwswJ7V6YeCYlu
-        SWG5BbfQxgPLGVdnp9qp+wQUeQhCYsgrELuKqMkXPb6VIKu9RZHUj+9EpXekIiUE5A6rhA53FIdZH
-        tRibQBQw==;
-Received: from j130084.upc-j.chello.nl ([24.132.130.84] helo=noisy.programming.kicks-ass.net)
-        by desiato.infradead.org with esmtpsa (Exim 4.94.2 #2 (Red Hat Linux))
-        id 1oiAFo-002Wc3-Tn; Tue, 11 Oct 2022 08:04:45 +0000
-Received: from hirez.programming.kicks-ass.net (hirez.programming.kicks-ass.net [192.168.1.225])
-        (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-         key-exchange X25519 server-signature RSA-PSS (4096 bits))
-        (Client did not present a certificate)
-        by noisy.programming.kicks-ass.net (Postfix) with ESMTPS id D982D3001CB;
-        Tue, 11 Oct 2022 10:04:43 +0200 (CEST)
-Received: by hirez.programming.kicks-ass.net (Postfix, from userid 1000)
-        id BF85020D7E1AB; Tue, 11 Oct 2022 10:04:43 +0200 (CEST)
-Date:   Tue, 11 Oct 2022 10:04:43 +0200
-From:   Peter Zijlstra <peterz@infradead.org>
-To:     Sami Tolvanen <samitolvanen@google.com>
-Cc:     Miguel Ojeda <ojeda@kernel.org>,
-        Linus Torvalds <torvalds@linux-foundation.org>,
-        Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
-        rust-for-linux@vger.kernel.org, linux-kernel@vger.kernel.org,
-        linux-fsdevel@vger.kernel.org, patches@lists.linux.dev,
-        Jarkko Sakkinen <jarkko@kernel.org>,
-        Kees Cook <keescook@chromium.org>,
-        Alex Gaynor <alex.gaynor@gmail.com>,
-        Wedson Almeida Filho <wedsonaf@google.com>,
-        David Gow <davidgow@google.com>,
-        Boqun Feng <boqun.feng@gmail.com>, Gary Guo <gary@garyguo.net>,
-        =?iso-8859-1?Q?Bj=F6rn?= Roy Baron <bjorn3_gh@protonmail.com>,
-        Jonathan Corbet <corbet@lwn.net>,
-        Thomas Gleixner <tglx@linutronix.de>,
-        Ingo Molnar <mingo@redhat.com>, Borislav Petkov <bp@alien8.de>,
-        Dave Hansen <dave.hansen@linux.intel.com>, x86@kernel.org,
-        "H. Peter Anvin" <hpa@zytor.com>, linux-doc@vger.kernel.org
-Subject: Re: [PATCH v10 25/27] x86: enable initial Rust support
-Message-ID: <Y0Ujm6a6bV3+FWM3@hirez.programming.kicks-ass.net>
-References: <20220927131518.30000-1-ojeda@kernel.org>
- <20220927131518.30000-26-ojeda@kernel.org>
- <Y0BfN1BdVCWssvEu@hirez.programming.kicks-ass.net>
- <CABCJKuenkHXtbWOLZ0_isGewxd19qkM7OcLeE2NzM6dSkXS4mQ@mail.gmail.com>
+        with ESMTP id S229513AbiJKIbE (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 11 Oct 2022 04:31:04 -0400
+Received: from mail-pf1-x431.google.com (mail-pf1-x431.google.com [IPv6:2607:f8b0:4864:20::431])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 1D73583208
+        for <linux-doc@vger.kernel.org>; Tue, 11 Oct 2022 01:31:03 -0700 (PDT)
+Received: by mail-pf1-x431.google.com with SMTP id y1so5740683pfr.3
+        for <linux-doc@vger.kernel.org>; Tue, 11 Oct 2022 01:31:03 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112;
+        h=content-transfer-encoding:in-reply-to:from:content-language
+         :references:cc:to:subject:user-agent:mime-version:date:message-id
+         :from:to:cc:subject:date:message-id:reply-to;
+        bh=GaiSvknCdEAvKQe10hQBBoRlm/BNNMqTFVxB8WvhNGg=;
+        b=ICD/a8CmvouQgm/gCbxCPrSVQwxsHIWR6w+i0KOoDZmGNFGtP+7FbAfxWdQbhcgWdq
+         ZGpLA+cM2BkNSTb1Mv9Nt4+ZUj1swoKsCfR4yMYanTxdgNkBPO2Pytgz3wAJzUlQw7RK
+         JsgSnQ+z3OXfx7bEkpHpqNFWBcw7oTO9LybEObGbAVkq4y4Hz8rtDZlYsgrlBZB2Wd2Z
+         u+PsZ6mC82iJnEYNWurlm8wjQovahyL4OwW86wEPy4c3+RQW33kjbvoz6hTJ1H8ebyUg
+         42ge+QzcoaRVjHvX4VDDwc2YCGoC9FbY6DZEA2N9mB/u3qbdH7zZ4jc86cbPIAJpPQdr
+         vV4w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=content-transfer-encoding:in-reply-to:from:content-language
+         :references:cc:to:subject:user-agent:mime-version:date:message-id
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=GaiSvknCdEAvKQe10hQBBoRlm/BNNMqTFVxB8WvhNGg=;
+        b=YVGXhMYQ0ZvkgVsD5EXZ4UcZTNVpzVScJ8eoiWnbQl8h0xxcBrqprGO5UXvXowjD7B
+         6UZhCyTr1UaR181b2E3SszMEj0ZqkQoKraeBZVpV0dRZHSGlUVL6kZ5o2H6L8MxXskZp
+         LJ/qknytO+8LLdekfTprAWGIjVdj2nV2sAhPNJmTiD6W4bsOjawXM/I2VT//riIW0Dsi
+         hWgQPjdSUcnFaVsFLxiW2DeTy5TgnsZzYZxaoAdC/WrB+5+doPuEdu0nX/FMKzZDadvM
+         7zyukEG9/O/S6l0u+Emgyt/FnoNG7flXvy02B79onEfbvMPhYGSQvWqSg0iVle8Nu/qN
+         MH6A==
+X-Gm-Message-State: ACrzQf3Mcgoj5hQGDQ/qdj6Ucu+MBuFgs5KxiDw5mrVz9Bx6fCqcJsuE
+        kMVII386Eit6Dc5RRCVP0OwiADKsFcA=
+X-Google-Smtp-Source: AMsMyM63vo7XNRrdeYeiiNo+D1avBefj0cjZbN+cNKrlz+UVWCAreS4WMcPqBtPSvDqNr20Yvi2c+w==
+X-Received: by 2002:a63:4850:0:b0:45d:6ee6:1c18 with SMTP id x16-20020a634850000000b0045d6ee61c18mr20665209pgk.255.1665477062574;
+        Tue, 11 Oct 2022 01:31:02 -0700 (PDT)
+Received: from [192.168.43.80] (subs03-180-214-233-84.three.co.id. [180.214.233.84])
+        by smtp.gmail.com with ESMTPSA id v3-20020a17090ad58300b00209a12b3879sm7137326pju.37.2022.10.11.01.30.59
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Tue, 11 Oct 2022 01:31:02 -0700 (PDT)
+Message-ID: <11fe18cb-61a8-2682-6e2f-116c8bdd4f0a@gmail.com>
+Date:   Tue, 11 Oct 2022 15:30:57 +0700
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <CABCJKuenkHXtbWOLZ0_isGewxd19qkM7OcLeE2NzM6dSkXS4mQ@mail.gmail.com>
-X-Spam-Status: No, score=-4.4 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_MED,SPF_HELO_NONE,
-        SPF_NONE autolearn=ham autolearn_force=no version=3.4.6
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.3.2
+Subject: Re: [RESEND PATCH v5 1/1] docs: driver-api: virtio: virtio on Linux
+To:     Cornelia Huck <cohuck@redhat.com>,
+        "Michael S. Tsirkin" <mst@redhat.com>
+Cc:     =?UTF-8?Q?Ricardo_Ca=c3=b1uelo?= <ricardo.canuelo@collabora.com>,
+        linux-doc@vger.kernel.org, corbet@lwn.net,
+        virtualization@lists.linux-foundation.org, jasowang@redhat.com,
+        kernel@collabora.com
+References: <20221010064359.1324353-1-ricardo.canuelo@collabora.com>
+ <20221010064359.1324353-2-ricardo.canuelo@collabora.com>
+ <Y0QYTq7KW9C731s0@debian.me> <877d17n699.fsf@redhat.com>
+ <20221010130951-mutt-send-email-mst@kernel.org> <8735buetuu.fsf@redhat.com>
+ <9732990d-f362-fd38-4855-48f226da94a8@gmail.com> <87zge2dc6y.fsf@redhat.com>
+Content-Language: en-US
+From:   Bagas Sanjaya <bagasdotme@gmail.com>
+In-Reply-To: <87zge2dc6y.fsf@redhat.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-Spam-Status: No, score=-3.5 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_FROM,NICE_REPLY_A,
+        RCVD_IN_DNSWL_NONE,RCVD_IN_SORBS_WEB,SPF_HELO_NONE,SPF_PASS
+        autolearn=ham autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Mon, Oct 10, 2022 at 04:15:33PM -0700, Sami Tolvanen wrote:
-> On Fri, Oct 7, 2022 at 10:18 AM Peter Zijlstra <peterz@infradead.org> wrote:
-> >
-> > On Tue, Sep 27, 2022 at 03:14:56PM +0200, Miguel Ojeda wrote:
-> > > Note that only x86_64 is covered and not all features nor mitigations
-> > > are handled, but it is enough as a starting point and showcases
-> > > the basics needed to add Rust support for a new architecture.
-> >
-> > Does it fail the build if required options are missing? Specifically are
-> > things like kCFI and IBT enabled? Silently not handling those will
-> > result in an unbootable image.
+On 10/11/22 14:57, Cornelia Huck wrote:
+>> IMO, we can link to current spec version and update it as newer version
+>> becomes public; without adding "check for later version" comment note.
 > 
-> Rust supports IBT with -Z cf-protection=branch, but I don't see this
-> option being enabled in the kernel yet. Cross-language CFI is going to
-> require a lot more work though because the type systems are not quite
-> compatible:
+> Is it really that important to update? Unless the virtio innards change
+> radically, looking at an older version is likely to be sufficient.
+> 
+> ["We should update it" is likely to become "Oh, we should have updated
+> it some time ago" IME :)]
+> 
 
-Right; so where does that leave us? Are we going to force disable rust
-when kCFI is selected ?
+Oh, I mean it's OK to use older spec version as long as the kernel
+implements that version. If we someday decides to bump implementation
+version, the documentation should reflect that.
+
+Thanks.
+
+-- 
+An old man doll... just what I always wanted! - Clara
+
