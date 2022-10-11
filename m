@@ -2,37 +2,55 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id B5EA55FAC4F
-	for <lists+linux-doc@lfdr.de>; Tue, 11 Oct 2022 08:12:44 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id CF5D85FACB2
+	for <lists+linux-doc@lfdr.de>; Tue, 11 Oct 2022 08:23:40 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S229552AbiJKGMm (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 11 Oct 2022 02:12:42 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:33016 "EHLO
+        id S229767AbiJKGXb (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 11 Oct 2022 02:23:31 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:52006 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S229484AbiJKGMl (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 11 Oct 2022 02:12:41 -0400
-Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 0642D46D9F;
-        Mon, 10 Oct 2022 23:12:39 -0700 (PDT)
-Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
-        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
-        (No client certificate requested)
-        by dfw.source.kernel.org (Postfix) with ESMTPS id 6E1A5610F4;
-        Tue, 11 Oct 2022 06:12:39 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 5229CC433C1;
-        Tue, 11 Oct 2022 06:12:38 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=linuxfoundation.org;
-        s=korg; t=1665468758;
-        bh=Ae6IjMS4Ec5euaDJykUWdGTe4JqhT1q+WOE58vseVdU=;
-        h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-        b=uDuLkvVPKI/uwLy5mWPQ6svVSYpIIKSlkIg2UhbmwLouim6Ig8h4KeDidCu1ObR9T
-         LEwYCVOKC+Rvi6MkN6Q2uDpSnRc0XoMEatLj2BgYIOGRr6vNgjkWEVy2hXPeOzH9Z3
-         EmCXTXZhbl218Pmb+BkNgQJdSK9X2gjAtTwXDgMw=
-Date:   Tue, 11 Oct 2022 08:13:21 +0200
-From:   Greg Kroah-Hartman <gregkh@linuxfoundation.org>
-To:     Elliot Berman <quic_eberman@quicinc.com>
-Cc:     Bjorn Andersson <quic_bjorande@quicinc.com>,
-        Murali Nalajala <quic_mnalajal@quicinc.com>,
+        with ESMTP id S229982AbiJKGXH (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 11 Oct 2022 02:23:07 -0400
+Received: from mail-wr1-f43.google.com (mail-wr1-f43.google.com [209.85.221.43])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 3411288DF8;
+        Mon, 10 Oct 2022 23:22:32 -0700 (PDT)
+Received: by mail-wr1-f43.google.com with SMTP id j16so19972362wrh.5;
+        Mon, 10 Oct 2022 23:22:31 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=content-transfer-encoding:in-reply-to:from:references:cc:to
+         :content-language:subject:user-agent:mime-version:date:message-id
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=tUmVSog6DafYW00ovmcYQ82S07flTbx/yM+Khtpjc6Q=;
+        b=fogBWlSF+F66RMFv6uxgnCTx/XL8mKg6cQwVPd6ZFpBUuM9oQrydY+6+jZmmy7JLaF
+         FKQVyZLaQ0B8pM+2mn17QX7IOBTVmGYJ/QA/d6SvnQkr/xxjn8VpxttT/x0HdAmDedQE
+         Tz7mwtl2i4avpVsHNvZSMjtYKidgjpMMng2kpKXAb8jpMyPhGBRxf+t1jw3enDW8I5Jq
+         Qurc7ZWFxssjh5adJ419g4+8pV9vFDxQqxv9+NCuaiBD9RQW1DD/D1x31K8gMTvi58ZU
+         6Q/32GEQl9X+zV8zk1kqal6fdIwgEoeqIgP9WH4PrjJbR1vt+TuL85fWuWhjFc2aEQiN
+         iuCA==
+X-Gm-Message-State: ACrzQf0gh+zvVyvkNj9G7mKqMEP8z+cpQ9H/LfyNzfxpLftLqL9RI9D/
+        9aICjNMb+fbXJMcbBa5C2gU=
+X-Google-Smtp-Source: AMsMyM7YsvlisljG56rl4mKbWpZ8mWhhcw6Yxtv533MdMmZZxuLe54/n0F/l5XBSXRmdo4e+D8PzGw==
+X-Received: by 2002:a5d:588c:0:b0:231:891c:6fc1 with SMTP id n12-20020a5d588c000000b00231891c6fc1mr522132wrf.25.1665469325767;
+        Mon, 10 Oct 2022 23:22:05 -0700 (PDT)
+Received: from ?IPV6:2a0b:e7c0:0:107::70f? ([2a0b:e7c0:0:107::70f])
+        by smtp.gmail.com with ESMTPSA id p17-20020a5d4591000000b0022e32f4c06asm10301834wrq.11.2022.10.10.23.22.04
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Mon, 10 Oct 2022 23:22:05 -0700 (PDT)
+Message-ID: <2b6804ff-5386-06bd-7c01-4e1cd4ad23f3@kernel.org>
+Date:   Tue, 11 Oct 2022 08:22:03 +0200
+MIME-Version: 1.0
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.3.1
+Subject: Re: [PATCH v5 5/13] virt: gunyah: Add hypercalls to identify Gunyah
+Content-Language: en-US
+To:     Elliot Berman <quic_eberman@quicinc.com>,
+        Bjorn Andersson <quic_bjorande@quicinc.com>,
+        Mark Rutland <mark.rutland@arm.com>,
+        Lorenzo Pieralisi <lorenzo.pieralisi@arm.com>,
+        Sudeep Holla <sudeep.holla@arm.com>,
+        Arnd Bergmann <arnd@arndb.de>
+Cc:     Murali Nalajala <quic_mnalajal@quicinc.com>,
         Trilok Soni <quic_tsoni@quicinc.com>,
         Srivatsa Vaddagiri <quic_svaddagi@quicinc.com>,
         Carl van Schaik <quic_cvanscha@quicinc.com>,
@@ -41,172 +59,89 @@ Cc:     Bjorn Andersson <quic_bjorande@quicinc.com>,
         Dmitry Baryshkov <dmitry.baryshkov@linaro.org>,
         Jassi Brar <jassisinghbrar@gmail.com>,
         linux-arm-kernel@lists.infradead.org,
-        Mark Rutland <mark.rutland@arm.com>,
-        Lorenzo Pieralisi <lorenzo.pieralisi@arm.com>,
-        Sudeep Holla <sudeep.holla@arm.com>,
         Marc Zyngier <maz@kernel.org>,
         Rob Herring <robh+dt@kernel.org>,
         Krzysztof Kozlowski <krzysztof.kozlowski+dt@linaro.org>,
         Jonathan Corbet <corbet@lwn.net>,
         Will Deacon <will@kernel.org>,
         Catalin Marinas <catalin.marinas@arm.com>,
-        Arnd Bergmann <arnd@arndb.de>, devicetree@vger.kernel.org,
-        linux-doc@vger.kernel.org, linux-arm-msm@vger.kernel.org,
-        linux-kernel@vger.kernel.org
-Subject: Re: [PATCH v5 06/13] virt: gunyah: Identify hypervisor version
-Message-ID: <Y0UJgcc0+AEbHTIM@kroah.com>
+        Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+        devicetree@vger.kernel.org, linux-doc@vger.kernel.org,
+        linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org
 References: <20221011000840.289033-1-quic_eberman@quicinc.com>
- <20221011000840.289033-7-quic_eberman@quicinc.com>
-MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20221011000840.289033-7-quic_eberman@quicinc.com>
-X-Spam-Status: No, score=-7.1 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_HI,
-        SPF_HELO_NONE,SPF_PASS autolearn=ham autolearn_force=no version=3.4.6
+ <20221011000840.289033-6-quic_eberman@quicinc.com>
+From:   Jiri Slaby <jirislaby@kernel.org>
+In-Reply-To: <20221011000840.289033-6-quic_eberman@quicinc.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-Spam-Status: No, score=-3.4 required=5.0 tests=BAYES_00,
+        FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,HEADER_FROM_DIFFERENT_DOMAINS,
+        NICE_REPLY_A,RCVD_IN_DNSWL_NONE,RCVD_IN_MSPIKE_H2,SPF_HELO_NONE,
+        SPF_PASS autolearn=ham autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Mon, Oct 10, 2022 at 05:08:33PM -0700, Elliot Berman wrote:
-> Export the version of Gunyah which is reported via the hyp_identify
-> hypercall. Increments of the major API version indicate possibly
-> backwards incompatible changes. Export the hypervisor identity so that
-> Gunyah drivers can act according to the major API version.
+On 11. 10. 22, 2:08, Elliot Berman wrote:
+> Add hypercalls to identify when Linux is running a virtual machine under
+> Gunyah.
 > 
-> Signed-off-by: Elliot Berman <quic_eberman@quicinc.com>
-> ---
->  MAINTAINERS                  |  1 +
->  drivers/virt/Makefile        |  1 +
->  drivers/virt/gunyah/Makefile |  2 ++
->  drivers/virt/gunyah/gunyah.c | 41 ++++++++++++++++++++++++++++++++++++
->  include/asm-generic/gunyah.h |  3 +++
->  5 files changed, 48 insertions(+)
->  create mode 100644 drivers/virt/gunyah/Makefile
->  create mode 100644 drivers/virt/gunyah/gunyah.c
+> There are two calls to help identify Gunyah:
 > 
-> diff --git a/MAINTAINERS b/MAINTAINERS
-> index ed2bc98c3818..c5458aeec023 100644
-> --- a/MAINTAINERS
-> +++ b/MAINTAINERS
-> @@ -8884,6 +8884,7 @@ M:	Elliot Berman <quic_eberman@quicinc.com>
->  M:	Murali Nalajala <quic_mnalajal@quicinc.com>
->  L:	linux-arm-msm@vger.kernel.org
->  S:	Supported
-> +F:	Documentation/ABI/testing/sysfs-hypervisor-gunyah
-
-That file is not in this patch :(
-
->  F:	Documentation/devicetree/bindings/firmware/gunyah-hypervisor.yaml
->  F:	Documentation/virt/gunyah/
->  F:	arch/arm64/gunyah/
-> diff --git a/drivers/virt/Makefile b/drivers/virt/Makefile
-> index 093674e05c40..10b87f934730 100644
-> --- a/drivers/virt/Makefile
-> +++ b/drivers/virt/Makefile
-> @@ -11,3 +11,4 @@ obj-$(CONFIG_NITRO_ENCLAVES)	+= nitro_enclaves/
->  obj-$(CONFIG_ACRN_HSM)		+= acrn/
->  obj-$(CONFIG_EFI_SECRET)	+= coco/efi_secret/
->  obj-$(CONFIG_SEV_GUEST)		+= coco/sev-guest/
-> +obj-$(CONFIG_GUNYAH)		+= gunyah/
-> diff --git a/drivers/virt/gunyah/Makefile b/drivers/virt/gunyah/Makefile
-> new file mode 100644
-> index 000000000000..dc081e2dc02b
+> 1. gh_hypercall_get_uid() returns a UID when running under a Gunyah
+>     hypervisor.
+> 2. gh_hypercall_hyp_identify() returns build information and a set of
+>     feature flags that are supported by Gunyah.
+...
 > --- /dev/null
-> +++ b/drivers/virt/gunyah/Makefile
-> @@ -0,0 +1,2 @@
-> +gunyah-y += gunyah.o
-> +obj-$(CONFIG_GUNYAH) += gunyah.o
-> diff --git a/drivers/virt/gunyah/gunyah.c b/drivers/virt/gunyah/gunyah.c
-> new file mode 100644
-> index 000000000000..2893a56f3dfc
-> --- /dev/null
-> +++ b/drivers/virt/gunyah/gunyah.c
-> @@ -0,0 +1,41 @@
-> +// SPDX-License-Identifier: GPL-2.0-only
-> +/*
-> + * Copyright (c) 2022 Qualcomm Innovation Center, Inc. All rights reserved.
+> +++ b/arch/arm64/gunyah/hypercall.c
+> @@ -0,0 +1,71 @@
+...
+> +/**
+> + * gh_hypercall_get_uid() - Returns a UID when running under a Gunyah hypervisor.
+> + * @uid: An array of 4 u32's (u32 uid[4];)
+> + *
+> + * The UID will be either QC_HYP_UID or GUNYAH_UID defined in include/asm-generic/gunyah.h.
+> + * QC_HYP_UID is returned on platforms using Qualcomm's version of Gunyah.
+> + * GUNYAH_UID is returned on platforms using open source version of Gunyah.
+> + * If the uid is not one of the above two UIDs, then it is assumed that the hypervisor or firmware
+> + * is not Gunyah.
 > + */
-> +
-> +#define pr_fmt(fmt) "gunyah: " fmt
-> +
-> +#include <linux/module.h>
-> +#include <linux/printk.h>
-> +#include <linux/init.h>
-> +#include <asm-generic/gunyah.h>
-> +
-> +struct gh_hypercall_hyp_identify_resp gunyah_api;
-> +EXPORT_SYMBOL(gunyah_api);
+> +void gh_hypercall_get_uid(u32 *uid)
 
-EXPORT_SYMBOL_GPL()?  I have to ask.
+So why this isn't u32 uid[4], or u32 uid[static 4] to aid the compiler 
+(and limit users)?
 
-But why is it exported at all?  No one is using it in this patch.
-
-> +
-> +static int __init gunyah_init(void)
 > +{
-> +	u32 uid[4];
+> +	struct arm_smccc_res res;
 > +
-> +	gh_hypercall_get_uid(uid);
+> +	arm_smccc_1_1_hvc(GH_HYPERCALL_CALL_UID, &res);
 > +
-> +	if (!(gh_uid_matches(GUNYAH, uid) || gh_uid_matches(QC_HYP, uid)))
-> +		return 0;
-
-Why return success if this is not true?  Shouldn't you return an error
-and fail to load?
-
-> +
-> +	gh_hypercall_hyp_identify(&gunyah_api);
-> +
-> +	pr_info("Running under Gunyah hypervisor %llx/v%lld\n",
-> +		  GH_API_INFO_VARIANT(gunyah_api.api_info),
-> +		  GH_API_INFO_API_VERSION(gunyah_api.api_info));
-> +
-> +	return 0;
+> +	uid[0] = res.a0;
+> +	uid[1] = res.a1;
+> +	uid[2] = res.a2;
+> +	uid[3] = res.a3;
 > +}
-> +arch_initcall(gunyah_init);
-> +
-> +static void __exit gunyah_exit(void)
-> +{
-> +}
-> +module_exit(gunyah_exit);
+> +EXPORT_SYMBOL_GPL(gh_hypercall_get_uid);
 
-Why do you need a module_exit() call?
+...
 
-> +
-> +MODULE_LICENSE("GPL");
-> +MODULE_DESCRIPTION("Gunyah Hypervisor Driver");
-
-What will cause this module to be properly automatically loaded?  I do
-not see that happening here at all.
-
-> diff --git a/include/asm-generic/gunyah.h b/include/asm-generic/gunyah.h
-> index 86eb59e203ef..8f9d4c649ba8 100644
 > --- a/include/asm-generic/gunyah.h
 > +++ b/include/asm-generic/gunyah.h
-> @@ -85,6 +85,8 @@ static inline int gh_remap_error(int gh_error)
->  	((uid)[0] == prefix ## _UID0 && (uid)[1] == prefix ## _UID1 && \
->  	 (uid)[2] == prefix ## _UID2 && (uid)[3] == prefix ## _UID3)
->  
-> +#define GUNYAH_API_V1			1
+> @@ -71,4 +71,40 @@ static inline int gh_remap_error(int gh_error)
+...
+> +#define GH_API_INFO_API_VERSION(x)	(((x) >> 0) & 0x3fff)
+> +#define GH_API_INFO_BIG_ENDIAN(x)	(((x) >> 14) & 1)
+> +#define GH_API_INFO_IS_64BIT(x)		(((x) >> 15) & 1)
+> +#define GH_API_INFO_VARIANT(x)		(((x) >> 56) & 0xff)
 
-You do not use this define anywhere in this patch.
+Use GET_FIELD()?
 
+regards,
+-- 
+-- 
+js
+suse labs
 
-> +
->  #define GH_API_INFO_API_VERSION(x)	(((x) >> 0) & 0x3fff)
->  #define GH_API_INFO_BIG_ENDIAN(x)	(((x) >> 14) & 1)
->  #define GH_API_INFO_IS_64BIT(x)		(((x) >> 15) & 1)
-> @@ -103,6 +105,7 @@ struct gh_hypercall_hyp_identify_resp {
->  	u64 api_info;
->  	u64 flags[3];
->  };
-> +extern struct gh_hypercall_hyp_identify_resp gunyah_api;
-
-Again, not used.
-
-thanks,
-
-greg k-h
