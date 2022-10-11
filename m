@@ -2,407 +2,106 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 8C0E45FB4C3
-	for <lists+linux-doc@lfdr.de>; Tue, 11 Oct 2022 16:40:27 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id EB81C5FB793
+	for <lists+linux-doc@lfdr.de>; Tue, 11 Oct 2022 17:43:32 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S229839AbiJKOkZ (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 11 Oct 2022 10:40:25 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:42106 "EHLO
+        id S229803AbiJKPnb (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 11 Oct 2022 11:43:31 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:57722 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S229846AbiJKOkS (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 11 Oct 2022 10:40:18 -0400
-Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.133.124])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id E0BD01902E
-        for <linux-doc@vger.kernel.org>; Tue, 11 Oct 2022 07:40:16 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-        s=mimecast20190719; t=1665499216;
-        h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-         to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+        with ESMTP id S229780AbiJKPnK (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 11 Oct 2022 11:43:10 -0400
+Received: from smtp-out1.suse.de (smtp-out1.suse.de [IPv6:2001:67c:2178:6::1c])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 8E9EFC4DBF;
+        Tue, 11 Oct 2022 08:32:45 -0700 (PDT)
+Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
+        (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+         key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
+        (No client certificate requested)
+        by smtp-out1.suse.de (Postfix) with ESMTPS id 5636B33D70;
+        Tue, 11 Oct 2022 14:57:49 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
+        t=1665500269; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+         mime-version:mime-version:content-type:content-type:
          in-reply-to:in-reply-to:references:references;
-        bh=uZ3v4pjnJDIojWEqppu2PN3XNMeuVy2PS0+WLzDvoJY=;
-        b=TO3OlsZCTzN5CEF7C+6NGAYIek4gyzffQz1ZXnglE09vhCJVKrgjUf0FRe2say/cTSb8J9
-        3EPBqIJ2QmQ0Rz4LVUTrjRbzA9H5ZohurT77ysL7tVgqfdLYfqvSdmwkCjwTAJnPeNANjj
-        3gtGwkhL+HATt38cZ9FUfdYt0Z67Cu0=
-Received: from mail-ed1-f71.google.com (mail-ed1-f71.google.com
- [209.85.208.71]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_128_GCM_SHA256) id
- us-mta-644-NBsr12Y9OaS06gce9NevdQ-1; Tue, 11 Oct 2022 10:40:07 -0400
-X-MC-Unique: NBsr12Y9OaS06gce9NevdQ-1
-Received: by mail-ed1-f71.google.com with SMTP id s17-20020a056402521100b0045bfaaab697so5137095edd.1
-        for <linux-doc@vger.kernel.org>; Tue, 11 Oct 2022 07:40:07 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
-         :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=uZ3v4pjnJDIojWEqppu2PN3XNMeuVy2PS0+WLzDvoJY=;
-        b=BkUe1IPUMoyQ3TneA/70xpK0OTFIiAO9z2SHnlkA1EU7NVYWrdgkq9102XL1/iSI61
-         rAIJBsvKmLvwAgKzEUkZinVDdsFCnfjYFeS9Gx3yT5wMLQNVyInTd5yX8t8c+CC1kTnH
-         fc0YslH4yt1sLyOvFzH9Bcb+AwxRLW21jA2oQfKvdhLfGZVh5EOlycvLS95V+/Bv7niK
-         WVy/WEmMhRyHgdzN8Hk8Lpv9Q+j8jUOQVZhbsfKqflNnqD25oAg6jGtnuaK/2AkRiUsF
-         71OJdMDtqPeZB7BcFGnhwk+I+QztXBrjyvCDfk+ZuU+YB3wovTjNNBZoA5FCbQQxBgts
-         buyQ==
-X-Gm-Message-State: ACrzQf1bBr2ySYzkl5h4nWSoWhQFlhT5jVGGqXHBsvfOVsK/IAVFel9J
-        G5rj38ocDi0KCVWNLpf1ZZze8B2dTdNfEtzYLhb7Ulsnzg3wB8m7mVYNmEHEEdv+mEXTzAWEd5H
-        9XoBZwqWkfjue0XasM5Bq
-X-Received: by 2002:a17:906:5d0f:b0:78d:1bed:890f with SMTP id g15-20020a1709065d0f00b0078d1bed890fmr19408338ejt.594.1665499203383;
-        Tue, 11 Oct 2022 07:40:03 -0700 (PDT)
-X-Google-Smtp-Source: AMsMyM7F2pHhFMErZLqiL3W/dHKt2lypGiwTU6kTF0fZvUbidfvcUAgdSzaTi516qR3wQRBC7ixilA==
-X-Received: by 2002:a17:906:5d0f:b0:78d:1bed:890f with SMTP id g15-20020a1709065d0f00b0078d1bed890fmr19408271ejt.594.1665499202266;
-        Tue, 11 Oct 2022 07:40:02 -0700 (PDT)
-Received: from alrua-x1.borgediget.toke.dk ([2a0c:4d80:42:443::2])
-        by smtp.gmail.com with ESMTPSA id dn22-20020a05640222f600b00451319a43dasm9451073edb.2.2022.10.11.07.40.00
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 11 Oct 2022 07:40:01 -0700 (PDT)
-Received: by alrua-x1.borgediget.toke.dk (Postfix, from userid 1000)
-        id 7808A682D16; Tue, 11 Oct 2022 16:40:00 +0200 (CEST)
-From:   Toke =?utf-8?Q?H=C3=B8iland-J=C3=B8rgensen?= <toke@redhat.com>
-To:     mtahhan@redhat.com, bpf@vger.kernel.org, linux-doc@vger.kernel.org
-Cc:     Maryam Tahhan <mtahhan@redhat.com>
-Subject: Re: [PATCH v1 1/1] doc: BPF_MAP_TYPE_DEVMAP, BPF_MAP_TYPE_DEVMAP_HASH
-In-Reply-To: <20221011090846.752622-2-mtahhan@redhat.com>
-References: <20221011090846.752622-1-mtahhan@redhat.com>
- <20221011090846.752622-2-mtahhan@redhat.com>
-X-Clacks-Overhead: GNU Terry Pratchett
-Date:   Tue, 11 Oct 2022 16:40:00 +0200
-Message-ID: <878rlmqv9b.fsf@toke.dk>
+        bh=uq2eyzBPhkHR87loB7Swe6vfT9JewwGCA0YfCXRfsuI=;
+        b=jMVi+AsLr/wUxc5+USNsrnM9R6R2/FnU9ZHuL0emC3HbOW/FolepsIBMqNV7lHo+DPP0rx
+        0ZphIu82iivF9WLhRY+M4s78H1w/vbYz+QXIu3/LiN13KzNw9B7rWlOmQkFE/mkPfMKEbN
+        bT9o4QyIPXLovgr3RSu/+prVPmLWu6k=
+Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
+        (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+         key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
+        (No client certificate requested)
+        by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id 2F56A139ED;
+        Tue, 11 Oct 2022 14:57:49 +0000 (UTC)
+Received: from dovecot-director2.suse.de ([192.168.254.65])
+        by imap2.suse-dmz.suse.de with ESMTPSA
+        id hBE9Cm2ERWNOSAAAMHmgww
+        (envelope-from <mhocko@suse.com>); Tue, 11 Oct 2022 14:57:49 +0000
+Date:   Tue, 11 Oct 2022 16:57:48 +0200
+From:   Michal Hocko <mhocko@suse.com>
+To:     Zhongkun He <hezhongkun.hzk@bytedance.com>
+Cc:     corbet@lwn.net, akpm@linux-foundation.org, linux-mm@kvack.org,
+        linux-kernel@vger.kernel.org, linux-api@vger.kernel.org,
+        linux-doc@vger.kernel.org, wuyun.abel@bytedance.com
+Subject: Re: [RFC] mm: add new syscall pidfd_set_mempolicy()
+Message-ID: <Y0WEbCqJHjnqsg8n@dhcp22.suse.cz>
+References: <20221010094842.4123037-1-hezhongkun.hzk@bytedance.com>
 MIME-Version: 1.0
-Content-Type: text/plain
-X-Spam-Status: No, score=-2.1 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_NONE,
-        SPF_HELO_NONE,SPF_NONE autolearn=unavailable autolearn_force=no
-        version=3.4.6
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20221010094842.4123037-1-hezhongkun.hzk@bytedance.com>
+X-Spam-Status: No, score=-2.8 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_LOW,SPF_HELO_NONE,
+        SPF_PASS autolearn=ham autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-mtahhan@redhat.com writes:
+On Mon 10-10-22 17:48:42, Zhongkun He wrote:
+> There is usecase that System Management Software(SMS) want to give a
+> memory policy to other processes to make better use of memory.
+> 
+> The information about how to use memory is not known to the app.
+> Instead, it is known to the userspace daemon(SMS), and that daemon
+> will decide the memory usage policy based on different factors.
 
-> From: Maryam Tahhan <mtahhan@redhat.com>
->
-> Add documentation for BPF_MAP_TYPE_DEVMAP and
-> BPF_MAP_TYPE_DEVMAP_HASH including kernel version
-> introduced, usage and examples.
+Please add some explanation why the cpuset interface is not usable for
+that usecase.
 
-Thanks for doing this! Some comments below.
+> To solve the issue, this patch introduces a new syscall
+> pidfd_set_mempolicy(2).  it sets the NUMA memory policy of the thread
+> specified in pidfd.
+> 
+> In current process context there is no locking because only the process
+> accesses its own memory policy, so task_work is used in
+> pidfd_set_mempolicy() to update the mempolicy of the process specified
+> in pidfd, avoid using locks and race conditions.
 
->
-> Signed-off-by: Maryam Tahhan <mtahhan@redhat.com>
-> ---
->  Documentation/bpf/map_devmap.rst | 231 +++++++++++++++++++++++++++++++
->  1 file changed, 231 insertions(+)
->  create mode 100644 Documentation/bpf/map_devmap.rst
->
-> diff --git a/Documentation/bpf/map_devmap.rst b/Documentation/bpf/map_devmap.rst
-> new file mode 100644
-> index 000000000000..ecd2b7b951cc
-> --- /dev/null
-> +++ b/Documentation/bpf/map_devmap.rst
-> @@ -0,0 +1,231 @@
-> +.. SPDX-License-Identifier: GPL-2.0-only
-> +.. Copyright (C) 2022 Red Hat, Inc.
-> +
-> +=================================================
-> +BPF_MAP_TYPE_DEVMAP and BPF_MAP_TYPE_DEVMAP_HASH
-> +=================================================
-> +
-> +.. note::
-> +   - ``BPF_MAP_TYPE_DEVMAP`` was introduced in kernel version 4.14
-> +   - ``BPF_MAP_TYPE_DEVMAP_HASH`` was introduced in kernel version 5.4
-> +
-> +``BPF_MAP_TYPE_DEVMAP`` is a BPF map, primarily used as a backend map for the XDP
-> +BPF helper call ``bpf_redirect_map()``. It's backed by an array that uses the key as
-> +the index to lookup a reference to a net device. The user provides <``key``/ ``ifindex``>
-> +pairs to update the map with new net devices.
+Why cannot you alter kernel_set_mempolicy (and do_set_mempolicy) to
+accept a task rather than operate on current?
 
-The TYPE_DEVMAP also takes the bpf_devmap_val struct as its value, not
-just key/ifindex (as is indeed also noted below). Maybe it's better to
-just collapse the description of the two into one paragraph noting that
-they only differ in the "sparseness" of keys?
+I have to really say that I dislike the task_work approach because it
+detaches the syscall from the actual operation and the caller simply
+doesn't know when the operation has been completed.
+> 
+> The API is as follows,
+> 
+> 		long pidfd_set_mempolicy(int pidfd, int mode,
+>                                      const unsigned long __user *nmask,
+>                                      unsigned long maxnode,
+>                                      unsigned int flags);
+> 
+> Set's the [pidfd] task's "task/process memory policy". The pidfd argument
+> is a PID file descriptor (see pidfd_open(2) man page) that specifies the
+> process to which the mempolicy is to be applied. The flags argument is
+> reserved for future use; currently, this argument must be specified as 0.
+> Please see the set_mempolicy(2) man page for more details about
+> other's arguments.
 
-> +``BPF_MAP_TYPE_DEVMAP_HASH`` is also a backend map for ``bpf_redirect_map()``.
-> +It's backed by a hash table that uses the ``ifindex`` as the key to lookup a reference
-> +to a net device. As it's a hash map, it allows for densely packing the net devices
-> +(compared with the sparsely packed ``BPF_MAP_TYPE_DEVMAP``).
-
-Should we note that the packing comes at the cost of a hash of the key
-when looking up?
-
-> The user provides
-> +<``key``/ ``struct bpf_devmap_val``> pairs to update the map with new net devices.
-> +
-> +The setup and packet enqueue/send code is shared between the two types of
-> +devmap; only the lookup and insertion is different.
-> +
-> +XDP_REDIRECT
-> +============
-> +
-> +XDP_REDIRECT works by a three-step process, implemented as follows:
-> +
-> +1. The ``bpf_redirect()`` and ``bpf_redirect_map()`` helpers will lookup the
-> +   target of the redirect and store it (along with some other metadata) in a
-> +   per-CPU ``struct bpf_redirect_info``. This is where the maps above come into
-> +   play.
-> +
-> +2. When the program returns the ``XDP_REDIRECT`` return code, the driver will
-> +   call ``xdp_do_redirect()`` which will use the information in ``struct
-> +   bpf_redirect_info`` to actually enqueue the frame into a map type-specific
-> +   bulk queue structure.
-> +
-> +3. Before exiting its NAPI poll loop, the driver will call ``xdp_do_flush()``,
-> +   which will flush all the different bulk queues, thus completing the
-> +   redirect.
-
-This is supposed to be user-facing documentation right (i.e., to be read
-by BPF program authors not kernel programmers)? If so, maybe this is a
-tad bit too much detail. I feel it's fine to explain the three-step
-process and bulk queueing, but the function and data structure names are
-maybe superfluous details?
-
-> +Pointers to the map entries will be kept around for this whole sequence of
-> +steps, protected by RCU. However, there is no top-level ``rcu_read_lock()`` in
-> +the core code; instead, the RCU protection relies on everything happening
-> +inside a single NAPI poll sequence, which means it's between a pair of calls
-> +to ``local_bh_disable()`` / ``local_bh_enable()``.
-> +
-> +The map entries are marked as ``__rcu`` and the map code makes sure to dereference
-> +those pointers with ``rcu_dereference_check()`` in a way that works for both
-> +sections that to hold an ``rcu_read_lock()`` and sections that are called from
-> +NAPI without a separate ``rcu_read_lock()``. The code below does not use RCU
-> +annotations, but relies on those in the map code.
-
-This is *definitely* too much detail for user-facing documentation.
-
-> +.. note::
-> +    ``XDP_REDIRECT`` is not fully supported yet for xdp frags since not all XDP
-> +    capable drivers can map a non-linear ``xdp_frame`` in ``ndo_xdp_xmit``.
-
-It's not really "fully supported" for non-frags either (i.e., it still
-depends on driver support). So maybe expand this to say something like
-"not all drivers support transmitting frames after a redirect, and for
-those that do, not all of them support non-linear frames"? Do we explain
-anywhere what a non-linear frame is, BTW?
-
-
-> +Usage
-> +=====
-> +
-> +.. c:function::
-> +   long bpf_map_update_elem(struct bpf_map *map, const void *key, const void *value, u64 flags)
-
-Feels a bit weird to include these (generic) helpers into a document on
-the specific map type? Shouldn't they be documented separately (and the
-map type just document the value type)?
-
-> + Net device entries can be added or updated using the ``bpf_map_update_elem()``
-> + helper. This helper replaces existing elements atomically. The ``flags``
-> + parameter can be used to control the update behaviour:
-
-Should probably specify that updates can only be done from userspace
-(not from a BPF program)?
-
-> +
-> + - ``BPF_ANY`` will create a new element or update an existing element
-> + - ``BPF_NOEXIST`` will create a new element only if one did not already
-> +   exist
-> + - ``BPF_EXIST`` will update an existing element
-> +
-> + ``bpf_map_update_elem()`` returns 0 on success, or negative error in
-> + case of failure.
-> +
-> + The value parameter is of type ``struct bpf_devmap_val``:
-
-It's either a bpf_devmap_val struct or just an ifindex (for backwards
-compatibility reasons).
-
-> +
-> + .. code-block:: c
-> +
-> +    struct bpf_devmap_val {
-> +        __u32 ifindex;   /* device index */
-> +        union {
-> +            int   fd;  /* prog fd on map write */
-> +            __u32 id;  /* prog id on map read */
-> +        } bpf_prog;
-> +    };
-> +
-> + DEVMAPs can associate a program with a device entry by adding a ``bpf_prog.fd``
-> + to ``struct bpf_devmap_val``. Programs are run after ``XDP_REDIRECT`` and have
-> + access to both Rx device and Tx device. The  program associated with the ``fd``
-> + must have type XDP with expected attach type ``xdp_devmap``.
-> + When a program is associated with a device index, the program is run on an
-> + ``XDP_REDIRECT`` and before the buffer is added to the per-cpu queue. Examples
-> + of how to attach/use xdp_devmap progs can be found in the kernel selftests:
-> +
-> + - test_xdp_with_devmap_helpers_
-> + - xdp_devmap_attach_
-> +
-> +.. _xdp_devmap_attach: https://github.com/torvalds/linux/blob/master/tools/testing/selftests/bpf/prog_tests/xdp_devmap_attach.c
-> +.. _test_xdp_with_devmap_helpers: https://github.com/torvalds/linux/blob/master/tools/testing/selftests/bpf/progs/test_xdp_with_devmap_helpers.c
-> +
-> +.. c:function::
-> +   void *bpf_map_lookup_elem(struct bpf_map *map, const void *key)
-> +
-> + net device entries can be retrieved using the ``bpf_map_lookup_elem()``
-> + helper. This helper returns a pointer to the value associated with ``key``, or
-> + ``NULL`` if no entry was found.
-> +
-> +.. c:function::
-> +   long bpf_map_delete_elem(struct bpf_map *map, const void *key)
-> +
-> + net device entries can be deleted using the ``bpf_map_delete_elem()``
-> + helper. This helper will return 0 on success, or negative error in case of
-> + failure.
-> +
-> +.. c:function::
-> +     long bpf_redirect_map(struct bpf_map *map, u32 key, u64 flags)
-
-This helper makes a bit more sense to have documented here, but I also
-feels like it would make more sense to document thew hole redirect
-facility in one place, along with all the different map types (i.e.,
-also XSK and CPUMAP)?
-
-> + Redirect the packet to the endpoint referenced by map at index
-> ``key``.
-
-s/map/``map``/ ?
-
-> + For ``BPF_MAP_TYPE_DEVMAP`` and ``BPF_MAP_TYPE_DEVMAP_HASH`` this map contains
-> + references to net devices (for forwarding packets through other ports).
-> +
-> + The lower two bits of *flags* are used as the return code if the map lookup
-> + fails. This is so that the return value can be one of the XDP program return
-> + codes up to ``XDP_TX``, as chosen by the caller. The higher bits of ``flags``
-> + can be set to ``BPF_F_BROADCAST`` or ``BPF_F_EXCLUDE_INGRESS`` as defined
-> + below.
-> +
-> + With ``BPF_F_BROADCAST`` the packet will be broadcast to all the interfaces
-> + in the map, with ``BPF_F_EXCLUDE_INGRESS`` the ingress interface will be excluded
-> + from the broadcast.
-> +
-> + This helper will return ``XDP_REDIRECT`` on success, or the value of the two
-> + lower bits of the *flags* argument if the map lookup fails.
->
-> +Examples
-> +========
-> +
-> +Kernel BPF
-> +----------
-> +
-> +The following code snippet shows how to declare a ``BPF_MAP_TYPE_DEVMAP``
-> +called tx_port.
-> +
-> +.. code-block:: c
-> +
-> +    struct {
-> +        __uint(type, BPF_MAP_TYPE_DEVMAP);
-> +        __uint(key_size, sizeof(int));
-> +        __uint(value_size, sizeof(int));
-
-I think we generally use '__u32' not 'int' as the key and value types;
-also, should this use the '__type(key, __u32)' syntax instead of __uint(key_size..)?
-
-> +        __uint(max_entries, 256);
-> +    } tx_port SEC(".maps");
-> +
-> +The following code snippet shows how to declare a ``BPF_MAP_TYPE_DEVMAP_HASH``
-> +called forward_map.
-> +
-> +.. code-block:: c
-> +
-> +    struct {
-> +        __uint(type, BPF_MAP_TYPE_DEVMAP_HASH);
-> +        __uint(key_size, sizeof(int));
-> +        __uint(value_size, sizeof(struct bpf_devmap_val));
-> +        __uint(max_entries, 32);
-> +    } forward_map SEC(".maps");
-
-As above, and maybe point out that this one is deliberately using the
-struct value while the other isn't?
-
-> +The following code snippet shows a simple xdp_redirect_map program.
-> +
-> +.. code-block:: c
-> +
-> +    SEC("xdp")
-> +    int xdp_redirect_map_func(struct xdp_md *ctx)
-> +    {
-> +        void *data_end = (void *)(long)ctx->data_end;
-> +        void *data = (void *)(long)ctx->data;
-
-Why define the data pointers if they're not used?
-
-> +        int action = XDP_PASS;
-
-Why is this defined as a variable, and why is it initialised (it will
-always be overridden below)?
-
-> +        int index = ctx->ingress_ifindex;
-
-Should probably explain that this works in concert with the userspace
-code to index the devmap on ingress ifindex, yielding a fixed
-destination port for each ingress ifindex?
-
-> +
-> +        action = bpf_redirect_map(&tx_port, index, BPF_F_BROADCAST | BPF_F_EXCLUDE_INGRESS);
-> +
-> +    out:
-
-Unused label?
-
-> +        return action;
-> +    }
-> +
-> +
-> +User space
-> +----------
-> +
-> +The following code snippet shows how to update a devmap called ``tx_port``.
-> +
-> +.. code-block:: c
-> +
-> +    int update_devmap(int ifindex, int redirect_ifindex)
-> +    {
-> +        int ret = -1;
-> +
-> +        ret = bpf_map_update_elem(bpf_map__fd(tx_port), &ifindex, &redirect_ifindex, 0);
-> +        if (ret < 0) {
-> +            fprintf(stderr, "Failed to update devmap_ value: %s\n",
-> +                strerror(errno));
-> +        }
-> +
-> +        return ret;
-> +    }
-> +
-> +The following code snippet shows how to update a hash_devmap called ``forward_map``.
-> +
-> +.. code-block:: c
-> +
-> +    int update_devmap(int ifindex, int redirect_ifindex)
-> +    {
-> +        struct bpf_devmap_val devmap_val;
-
-This should be zero-initialised; maybe just initialise as { .ifindex =
-redirect_ifindex }; ?
-
-> +        int ret = -1;
-> +
-> +        devmap_val.ifindex = redirect_ifindex;
-> +        ret = bpf_map_update_elem(bpf_map__fd(forward_map), &ifindex, &devmap_val, 0);
-> +        if (ret < 0) {
-> +            fprintf(stderr, "Failed to update devmap_ value: %s\n",
-> +                strerror(errno));
-> +        }
-> +        return ret;
-> +    }
-> +
-> +References
-> +===========
-> +
-> +- https://lwn.net/Articles/728146/
-> +- https://git.kernel.org/pub/scm/linux/kernel/git/bpf/bpf-next.git/commit/?id=6f9d451ab1a33728adb72d7ff66a7b374d665176
-> +- https://elixir.bootlin.com/linux/latest/source/net/core/filter.c#L4106
-> -- 
-> 2.35.3
-
+Please also describe the security model.
+-- 
+Michal Hocko
+SUSE Labs
