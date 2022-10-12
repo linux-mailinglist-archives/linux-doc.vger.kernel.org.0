@@ -2,113 +2,136 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 1E8C15FC8CB
-	for <lists+linux-doc@lfdr.de>; Wed, 12 Oct 2022 18:00:09 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 5355D5FC925
+	for <lists+linux-doc@lfdr.de>; Wed, 12 Oct 2022 18:23:18 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S230032AbiJLQAH (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 12 Oct 2022 12:00:07 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:39086 "EHLO
+        id S229964AbiJLQXQ (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 12 Oct 2022 12:23:16 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:54168 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S229620AbiJLQAA (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Wed, 12 Oct 2022 12:00:00 -0400
-Received: from mga14.intel.com (mga14.intel.com [192.55.52.115])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 53A341A83A;
-        Wed, 12 Oct 2022 08:59:57 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1665590397; x=1697126397;
-  h=message-id:date:mime-version:subject:to:cc:references:
-   from:in-reply-to:content-transfer-encoding;
-  bh=x+Vvi8HGhrn79pVpDuauzqv2LPYrdQbCpKoSgkWyCaQ=;
-  b=N7H43qoXTLbxJSfPjHM4NCPeS1rlSqKT03ZpBOZfCc1HCUKHpvN2S7Lc
-   /LWM+V7kffocXoUn8fZCkc0Z7cVyGwDk/Qmaal8Bqzu04A3nbtWoinE6P
-   69fKUtdPsCQA6HW+mZJa17pRGrRd3fUTd+w0ZgxhPDX0PxFXkjyKwO86+
-   V3kK5xp/YaluMUOKgQcpyz1jxamEzBO0mqSyx6ybe7FnAYp3w9cvJ1S/Z
-   63o7Kad+a/GYCNvcEdllfimxNhzEr5FA95UOHelCKBzmqmvyilpYSImZx
-   yz98Lw1AdjlaJFeIZ6hcwx2bnHKijetXcPTFBoa2eOwoNU8cSozsmEXUS
-   Q==;
-X-IronPort-AV: E=McAfee;i="6500,9779,10498"; a="304818430"
-X-IronPort-AV: E=Sophos;i="5.95,179,1661842800"; 
-   d="scan'208";a="304818430"
-Received: from fmsmga004.fm.intel.com ([10.253.24.48])
-  by fmsmga103.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 12 Oct 2022 08:59:56 -0700
-X-IronPort-AV: E=McAfee;i="6500,9779,10498"; a="695522374"
-X-IronPort-AV: E=Sophos;i="5.95,179,1661842800"; 
-   d="scan'208";a="695522374"
-Received: from mpatter1-mobl.amr.corp.intel.com (HELO [10.209.53.34]) ([10.209.53.34])
-  by fmsmga004-auth.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 12 Oct 2022 08:59:51 -0700
-Message-ID: <e3c3d68d-ce99-a70a-1026-0ba99520ae57@intel.com>
-Date:   Wed, 12 Oct 2022 08:59:51 -0700
+        with ESMTP id S230016AbiJLQXJ (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Wed, 12 Oct 2022 12:23:09 -0400
+Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 886E9F41A5;
+        Wed, 12 Oct 2022 09:22:48 -0700 (PDT)
+Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
+        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+        (No client certificate requested)
+        by dfw.source.kernel.org (Postfix) with ESMTPS id AE4426153D;
+        Wed, 12 Oct 2022 16:22:47 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 92F2FC433D7;
+        Wed, 12 Oct 2022 16:22:46 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=linuxfoundation.org;
+        s=korg; t=1665591767;
+        bh=UjNgOOyW8/JL74ooqVzEOOqGR0npOCxfJs6SbJ73/wI=;
+        h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+        b=l46iHQyNjBQ6EU86JIYM2uyZ18tQwF/6wGiGuRSEzRyPeOOiJday862Gc4rb6DLWs
+         VZiLZ0oE286XiZ9XGG8TvG0FWkLm+BkFQPeIH206m/CCWU5i8m13MNF9ICuNxNz7fw
+         /NVgy9W5SpN3W6kWvx/8RIojMjHSjfAdBJWw5EyQ=
+Date:   Wed, 12 Oct 2022 18:23:31 +0200
+From:   Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+To:     Sathyanarayanan Kuppuswamy 
+        <sathyanarayanan.kuppuswamy@linux.intel.com>
+Cc:     Borislav Petkov <bp@alien8.de>,
+        Thomas Gleixner <tglx@linutronix.de>,
+        Ingo Molnar <mingo@redhat.com>,
+        Dave Hansen <dave.hansen@linux.intel.com>, x86@kernel.org,
+        Shuah Khan <shuah@kernel.org>,
+        Jonathan Corbet <corbet@lwn.net>,
+        "H . Peter Anvin" <hpa@zytor.com>,
+        "Kirill A . Shutemov" <kirill.shutemov@linux.intel.com>,
+        Tony Luck <tony.luck@intel.com>,
+        Kai Huang <kai.huang@intel.com>,
+        Wander Lairson Costa <wander@redhat.com>,
+        Isaku Yamahata <isaku.yamahata@gmail.com>,
+        marcelo.cerri@canonical.com, tim.gardner@canonical.com,
+        khalid.elmously@canonical.com, philip.cox@canonical.com,
+        linux-kernel@vger.kernel.org, linux-kselftest@vger.kernel.org,
+        linux-doc@vger.kernel.org
+Subject: Re: [PATCH v14 1/3] x86/tdx: Make __tdx_module_call() usable in
+ driver module
+Message-ID: <Y0bqA8+Xi1kLchxh@kroah.com>
+References: <20220928215535.26527-1-sathyanarayanan.kuppuswamy@linux.intel.com>
+ <20220928215535.26527-2-sathyanarayanan.kuppuswamy@linux.intel.com>
+ <Y0aUb3n7ouaeAt2a@zn.tnic>
+ <acc212d6-782b-a398-825a-212849beba00@linux.intel.com>
+ <Y0bOtzlrkKzHmQVZ@zn.tnic>
+ <6759025f-fc08-74f0-efd7-2331110dec0c@linux.intel.com>
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.11.0
-Subject: Re: [PATCH v2 01/39] Documentation/x86: Add CET description
-Content-Language: en-US
-To:     Florian Weimer <fweimer@redhat.com>,
-        "Edgecombe, Rick P" <rick.p.edgecombe@intel.com>
-Cc:     "bsingharora@gmail.com" <bsingharora@gmail.com>,
-        "hpa@zytor.com" <hpa@zytor.com>,
-        "Syromiatnikov, Eugene" <esyr@redhat.com>,
-        "peterz@infradead.org" <peterz@infradead.org>,
-        "rdunlap@infradead.org" <rdunlap@infradead.org>,
-        "keescook@chromium.org" <keescook@chromium.org>,
-        "Yu, Yu-cheng" <yu-cheng.yu@intel.com>,
-        "dave.hansen@linux.intel.com" <dave.hansen@linux.intel.com>,
-        "kirill.shutemov@linux.intel.com" <kirill.shutemov@linux.intel.com>,
-        "Eranian, Stephane" <eranian@google.com>,
-        "linux-mm@kvack.org" <linux-mm@kvack.org>,
-        "nadav.amit@gmail.com" <nadav.amit@gmail.com>,
-        "jannh@google.com" <jannh@google.com>,
-        "dethoma@microsoft.com" <dethoma@microsoft.com>,
-        "linux-arch@vger.kernel.org" <linux-arch@vger.kernel.org>,
-        "kcc@google.com" <kcc@google.com>, "bp@alien8.de" <bp@alien8.de>,
-        "oleg@redhat.com" <oleg@redhat.com>,
-        "hjl.tools@gmail.com" <hjl.tools@gmail.com>,
-        "Yang, Weijiang" <weijiang.yang@intel.com>,
-        "Lutomirski, Andy" <luto@kernel.org>,
-        "pavel@ucw.cz" <pavel@ucw.cz>, "arnd@arndb.de" <arnd@arndb.de>,
-        "Moreira, Joao" <joao.moreira@intel.com>,
-        "tglx@linutronix.de" <tglx@linutronix.de>,
-        "mike.kravetz@oracle.com" <mike.kravetz@oracle.com>,
-        "x86@kernel.org" <x86@kernel.org>,
-        "linux-doc@vger.kernel.org" <linux-doc@vger.kernel.org>,
-        "jamorris@linux.microsoft.com" <jamorris@linux.microsoft.com>,
-        "john.allen@amd.com" <john.allen@amd.com>,
-        "rppt@kernel.org" <rppt@kernel.org>,
-        "mingo@redhat.com" <mingo@redhat.com>,
-        "Shankar, Ravi V" <ravi.v.shankar@intel.com>,
-        "corbet@lwn.net" <corbet@lwn.net>,
-        "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
-        "linux-api@vger.kernel.org" <linux-api@vger.kernel.org>,
-        "gorcunov@gmail.com" <gorcunov@gmail.com>
-References: <20220929222936.14584-1-rick.p.edgecombe@intel.com>
- <20220929222936.14584-2-rick.p.edgecombe@intel.com>
- <87ilkr27nv.fsf@oldenburg.str.redhat.com>
- <62481017bc02b35587dd520ed446a011641aa390.camel@intel.com>
- <87v8opz0me.fsf@oldenburg.str.redhat.com>
-From:   Dave Hansen <dave.hansen@intel.com>
-In-Reply-To: <87v8opz0me.fsf@oldenburg.str.redhat.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-Spam-Status: No, score=-7.6 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,NICE_REPLY_A,
-        RCVD_IN_DNSWL_HI,SPF_HELO_NONE,SPF_NONE autolearn=ham
-        autolearn_force=no version=3.4.6
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <6759025f-fc08-74f0-efd7-2331110dec0c@linux.intel.com>
+X-Spam-Status: No, score=-7.1 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_HI,
+        SPF_HELO_NONE,SPF_PASS autolearn=ham autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On 10/12/22 05:29, Florian Weimer wrote:
->> What did you think of the proposal to disable existing binaries and
->> start from scratch? Elaborated in the coverletter in the section
->> "Compatibility of Existing Binaries/Enabling Interface".
-> The ABI was finalized around four years ago, and we have shipped several
-> Fedora and Red Hat Enterprise Linux versions with it.  Other
-> distributions did as well.  It's a bit late to make changes now, and
-> certainly not for such trivialities. 
+On Wed, Oct 12, 2022 at 08:44:04AM -0700, Sathyanarayanan Kuppuswamy wrote:
+> 
+> 
+> On 10/12/22 7:27 AM, Borislav Petkov wrote:
+> > On Wed, Oct 12, 2022 at 06:35:56AM -0700, Sathyanarayanan Kuppuswamy wrote:
+> >> So we should create a new wrapper for this use case or use
+> > 
+> > Yes, you got it - a new wrapper pls.
+> 
+> Ok. I will add a new wrapper to get the TDREPORT. 
+> 
+> +/*
+> 
+> + * Add a wrapper for TDG.MR.REPORT TDCALL. It is used in TDX guest
+> 
+> + * driver module to get the TDREPORT.
+> 
+> + */
+> 
+> +long tdx_mcall_get_report(void *reportdata, void *tdreport, u8 subtype)
 
-Just to be clear: You're saying that a user/kernel ABI was "finalized"
-by glibc shipping the user side of it, before there being an upstream
-kernel implementation?
+Why "long"?
+
+Why void *?  Don't you have real types for these?
+
+
+
+> 
+> +{
+> 
+> +       if (subtype || !reportdata || !tdreport)
+> 
+> +               return -EINVAL;
+
+How could that happen if you control all callers?
+
+
+
+> 
+> +
+> 
+> +       /*
+> 
+> +        * Generate TDREPORT using "TDG.MR.REPORT" TDCALL.
+> 
+> +        *
+> 
+> +        * Get the TDREPORT using REPORTDATA as input. Refer to
+> 
+> +        * section 22.3.3 TDG.MR.REPORT leaf in the TDX Module 1.0
+> 
+> +        * specification for detailed information.
+> 
+> +        */
+> 
+> +       return __tdx_module_call(TDX_GET_REPORT, virt_to_phys(tdreport),
+> 
+> +                       virt_to_phys(reportdata), subtype, 0, NULL);
+
+If you check for NULL, why are you not validating that these are valid
+pointers as well?  You can't have it both ways.
+
+thanks,
+
+greg k-h
