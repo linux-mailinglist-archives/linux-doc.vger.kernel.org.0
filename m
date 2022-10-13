@@ -1,118 +1,100 @@
 Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 9952D5FD7ED
-	for <lists+linux-doc@lfdr.de>; Thu, 13 Oct 2022 12:47:25 +0200 (CEST)
+Received: from out1.vger.email (unknown [IPv6:2620:137:e000::1:20])
+	by mail.lfdr.de (Postfix) with ESMTP id 48D985FD7AB
+	for <lists+linux-doc@lfdr.de>; Thu, 13 Oct 2022 12:16:08 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S229519AbiJMKrY (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 13 Oct 2022 06:47:24 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:36448 "EHLO
+        id S229646AbiJMKQH (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 13 Oct 2022 06:16:07 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:40326 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S229577AbiJMKrW (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Thu, 13 Oct 2022 06:47:22 -0400
+        with ESMTP id S229604AbiJMKQF (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Thu, 13 Oct 2022 06:16:05 -0400
 Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.129.124])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 672E0103DBD
-        for <linux-doc@vger.kernel.org>; Thu, 13 Oct 2022 03:47:21 -0700 (PDT)
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 7B23EF6C21
+        for <linux-doc@vger.kernel.org>; Thu, 13 Oct 2022 03:16:04 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-        s=mimecast20190719; t=1665658040;
+        s=mimecast20190719; t=1665656163;
         h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-         to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-         in-reply-to:in-reply-to:references:references;
-        bh=q6GB/B4JNp1TxbUrS+fPKO1tu1+KnvBnyZ+rYl22l5I=;
-        b=TKDUHZk6IUiIzIgbYgn4LppUp6vvVzKm2YtTIz0WEpGC1J5S6fQ0ZVb4w/59FDbn8RTGMJ
-        l+KaBgcQlORpK7G2zHkkq/bpSl+EBi9gGvKh7lvq7cjhENtHtg/8qBbWMs6aV+5siL+0r9
-        CtIL1H2DxTct+9oXjERGjsf9T3mEhTU=
-Received: from mimecast-mx02.redhat.com (mx3-rdu2.redhat.com
- [66.187.233.73]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- us-mta-241-yo6PH1nlNbie3fsaqQq5hw-1; Thu, 13 Oct 2022 06:47:17 -0400
-X-MC-Unique: yo6PH1nlNbie3fsaqQq5hw-1
-Received: from smtp.corp.redhat.com (int-mx04.intmail.prod.int.rdu2.redhat.com [10.11.54.4])
-        (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
-        (No client certificate requested)
-        by mimecast-mx02.redhat.com (Postfix) with ESMTPS id DD5181C05EAD;
-        Thu, 13 Oct 2022 10:46:50 +0000 (UTC)
-Received: from localhost (ovpn-12-120.pek2.redhat.com [10.72.12.120])
-        by smtp.corp.redhat.com (Postfix) with ESMTPS id C2C712011568;
-        Thu, 13 Oct 2022 10:46:39 +0000 (UTC)
-Date:   Thu, 13 Oct 2022 18:46:35 +0800
-From:   Baoquan He <bhe@redhat.com>
-To:     john.p.donnelly@oracle.com,
-        Catalin Marinas <catalin.marinas@arm.com>,
-        Will Deacon <will@kernel.org>
-Cc:     "Leizhen (ThunderTown)" <thunder.leizhen@huawei.com>,
-        Dave Young <dyoung@redhat.com>,
-        Vivek Goyal <vgoyal@redhat.com>, kexec@lists.infradead.org,
-        linux-kernel@vger.kernel.org, linux-arm-kernel@lists.infradead.org,
-        Jonathan Corbet <corbet@lwn.net>, linux-doc@vger.kernel.org,
-        "Eric W . Biederman" <ebiederm@xmission.com>,
-        Randy Dunlap <rdunlap@infradead.org>,
-        Feng Zhou <zhoufeng.zf@bytedance.com>,
-        Kefeng Wang <wangkefeng.wang@huawei.com>,
-        Chen Zhou <dingguo.cz@antgroup.com>,
-        Dave Kleikamp <dave.kleikamp@oracle.com>,
-        "samasth.norway.ananda" <samasth.norway.ananda@oracle.com>
-Subject: Re: [PATCH v3 0/2] arm64: kdump: Function supplement and performance
- optimization
-Message-ID: <Y0fsi4+T6k/OO0hx@MiWiFi-R3L-srv>
-References: <20220711090319.1604-1-thunder.leizhen@huawei.com>
- <YueMyUqannVg7l9v@MiWiFi-R3L-srv>
- <a80c2b7e-a510-8e45-1f3c-7e2ddf79bc37@huawei.com>
- <1d89e2cb-de26-0f85-7a2a-f68599a1b143@oracle.com>
+         to:to:cc:cc:mime-version:mime-version:
+         content-transfer-encoding:content-transfer-encoding;
+        bh=h1cObQ2s1xR5ZeaqLWVHbxy0BrP3z3LZ2+yRklnqRvk=;
+        b=f5ozFY0r7fH7k+EZwgjCge4nR8Fo8rYY8O2xL9VLkJ1N8el9XmFV8ACNwAYIHmttU1Ztfr
+        fw+Scm1pNjOeByw7J+wWeG4t2ClrGlx9LlFq7k78lv/HjXWOjNTGZRM0aUSP4xf5NdUBgZ
+        Mv2D1byFtt/RxjYtKo8GSCsAymaiLRo=
+Received: from mail-oo1-f70.google.com (mail-oo1-f70.google.com
+ [209.85.161.70]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_128_GCM_SHA256) id
+ us-mta-621-wsbiwGBWMLOHZUCW9S7q-Q-1; Thu, 13 Oct 2022 06:16:01 -0400
+X-MC-Unique: wsbiwGBWMLOHZUCW9S7q-Q-1
+Received: by mail-oo1-f70.google.com with SMTP id q19-20020a056820029300b00476b35bd302so770624ood.22
+        for <linux-doc@vger.kernel.org>; Thu, 13 Oct 2022 03:16:01 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=h1cObQ2s1xR5ZeaqLWVHbxy0BrP3z3LZ2+yRklnqRvk=;
+        b=OlglnRbH55cBDW7/q7r79rNviBhyV4UfLsdqoceamG2Tzd7sSgvJ885ba5jnRhkPNA
+         8LsW/9yEx4OnCrUsAfWnWvgc7OqHpq5VXpOZ9eyeMqj9mqBKHtMmRJKnFUautoUKxOQF
+         ngVViYWuxfJu6zNaY8BRQ7zFIn5tYZrP60rGuRK1i6rQj40+03modgQgQ7u++QirwCAe
+         xic3iifQ8w8rrCrNEmFy/yxPGOmMCwEF3GNU440Z35XQlpP+pDSp+NRXs1okJUE+lL+R
+         gwXcx8yygotGjmYkjmR2Blo+F9BhZXUX9uH0qSo4ERsxlYI/yN7Xu9mflyQNkwEYmog6
+         p7zg==
+X-Gm-Message-State: ACrzQf3xUIAAZCxNsB3f9jh/D/tdz5ebDlLSSKCwSMJtzP+gIiOlgNGT
+        mRoz+BShruhKFfj+VEmdfytcvN2lFTvW0nloB/FtzaZeR0bpJe3QmdEzV5gVR7MHm/hw/Eo+ZBo
+        r6BfBPCisIxXI6a6U6NY4
+X-Received: by 2002:a05:6808:1513:b0:354:f6d6:2015 with SMTP id u19-20020a056808151300b00354f6d62015mr2173378oiw.18.1665656159176;
+        Thu, 13 Oct 2022 03:15:59 -0700 (PDT)
+X-Google-Smtp-Source: AMsMyM5Wlx3426Um6Yto4xX93+FqYjwG4/Vl5PILgVndKDc7GhdaqOhvp5FTBE7avNS0UTRrE2wFGw==
+X-Received: by 2002:a05:6808:1513:b0:354:f6d6:2015 with SMTP id u19-20020a056808151300b00354f6d62015mr2173373oiw.18.1665656158992;
+        Thu, 13 Oct 2022 03:15:58 -0700 (PDT)
+Received: from nfvsdn-06.testing.baremetal.edge-sites.net (nat-pool-232-132.redhat.com. [66.187.232.132])
+        by smtp.gmail.com with ESMTPSA id f187-20020aca38c4000000b00354732338desm5034605oia.17.2022.10.13.03.15.58
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 13 Oct 2022 03:15:58 -0700 (PDT)
+From:   mtahhan@redhat.com
+To:     bpf@vger.kernel.org, linux-doc@vger.kernel.org
+Cc:     Maryam Tahhan <mtahhan@redhat.com>
+Subject: [PATCH bpf-next v2 0/1] doc: DEVMAPs and XDP_REDIRECT
+Date:   Thu, 13 Oct 2022 07:11:28 -0400
+Message-Id: <20221013111129.401325-1-mtahhan@redhat.com>
+X-Mailer: git-send-email 2.35.3
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <1d89e2cb-de26-0f85-7a2a-f68599a1b143@oracle.com>
-X-Scanned-By: MIMEDefang 3.1 on 10.11.54.4
+Content-Transfer-Encoding: 8bit
 X-Spam-Status: No, score=-2.8 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
         DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_LOW,
-        SPF_HELO_NONE,SPF_NONE autolearn=ham autolearn_force=no version=3.4.6
+        SPF_HELO_NONE,SPF_NONE autolearn=unavailable autolearn_force=no
+        version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On 10/06/22 at 09:55am, john.p.donnelly@oracle.com wrote:
-> On 8/1/22 9:47 PM, Leizhen (ThunderTown) wrote:
-......
-> > > Do you have plan to pick this series so that it can be taken into 5.20
-> > > rc-1~3?
-> > 
-> > Hi, Catalin:
-> >    Only function reserve_crashkernel() is modified in these two patches. The core
-> > process of the arm64 architecture is not affected. I remember you suggested that
-> > arm64 and x86 share the same kdump code, so these two subfeatures are needed.
-> > Maybe we can lay the foundation first for the people who build the road. Unifying
-> > the external interfaces of kdump on arm64 and x86 does not seem to hurt.
-> > 
-> > 
-> > > 
-> > > We have back ported the basic crashkernel=high, low, support into our
-> > > distros and have taken wide testing on arm64 servers, need this patchset
-> > > to back port for more testing.
-> > > 
-> > 
-> Hi ,
-> 
-> What is the progress of this series ?
-> 
-> Without this patch set we are seeing  larger crashkernel=896M failures on
-> Arm  with Linux-6.0.rc7.  This larger value is needed for
-> iSCSI booted systems with certain network adapters.
+From: Maryam Tahhan <mtahhan@redhat.com>
 
-This change is located in arch/arm64 folder, I have pinged arm64
-maintainer to consider merging this patchset. Not sure if they are
-still thinking, or ignore this.
+Add documentation for BPF_MAP_TYPE_DEVMAP and
+BPF_MAP_TYPE_DEVMAP_HASH including kernel version
+introduced, usage and examples.
 
-Hi Catalin, Will,
+Add documentation that describes XDP_REDIRECT. 
 
-Ping again!
+v1->v2:
+- Separate xdp_redirect documentation to its own file.
+- Clean up and simplify examples and usage function descriptions.
 
-Do you have plan to accept this patchset? It's very important for
-crashkernel setting on arm64 with a simple and default syntax.
+Maryam Tahhan (1):
+  doc: DEVMAPs and XDP_REDIRECT
 
-Thanks
-Baoquan
+ Documentation/bpf/index.rst      |   1 +
+ Documentation/bpf/map_devmap.rst | 192 +++++++++++++++++++++++++++++++
+ Documentation/bpf/redirect.rst   |  46 ++++++++
+ 3 files changed, 239 insertions(+)
+ create mode 100644 Documentation/bpf/map_devmap.rst
+ create mode 100644 Documentation/bpf/redirect.rst
+
+-- 
+2.35.3
 
