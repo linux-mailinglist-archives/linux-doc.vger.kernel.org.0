@@ -1,120 +1,69 @@
 Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id D04CA5FD72F
-	for <lists+linux-doc@lfdr.de>; Thu, 13 Oct 2022 11:38:25 +0200 (CEST)
+Received: from out1.vger.email (unknown [IPv6:2620:137:e000::1:20])
+	by mail.lfdr.de (Postfix) with ESMTP id 6A7DB5FD7B1
+	for <lists+linux-doc@lfdr.de>; Thu, 13 Oct 2022 12:17:05 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S229454AbiJMJiY (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 13 Oct 2022 05:38:24 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:38584 "EHLO
+        id S229651AbiJMKRE (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 13 Oct 2022 06:17:04 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:40894 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S229627AbiJMJiS (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Thu, 13 Oct 2022 05:38:18 -0400
-Received: from loongson.cn (mail.loongson.cn [114.242.206.163])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTP id 95C7A13D62F;
-        Thu, 13 Oct 2022 02:38:14 -0700 (PDT)
-Received: from localhost.localdomain (unknown [223.106.24.89])
-        by localhost.localdomain (Coremail) with SMTP id AQAAf8DxReJ+3EdjJu0sAA--.30337S2;
-        Thu, 13 Oct 2022 17:38:07 +0800 (CST)
-From:   Yanteng Si <siyanteng@loongson.cn>
-To:     alexs@kernel.org, seakeel@gmail.com
-Cc:     Yanteng Si <siyanteng@loongson.cn>, corbet@lwn.net,
-        ojeda@kernel.org, boqun.feng@gmail.com, wedsonaf@gmail.com,
-        gary@garyguo.net, bjorn3_gh@protonmail.com,
-        rust-for-linux@vger.kernel.org, bobwxc@email.cn,
-        wu.xiangcheng@linux.dev, chenhuacai@kernel.org,
-        jiaxun.yang@flygoat.com, linux-doc@vger.kernel.org,
-        siyanteng01@gmail.com
-Subject: [PATCH v1 5/5] docs/zh_CN: Add rust/arch-support Chinese translation
-Date:   Thu, 13 Oct 2022 17:36:35 +0800
-Message-Id: <a7e68f6ae3642ef3fcc78fdd84702e48fffb1a7c.1665650266.git.siyanteng@loongson.cn>
-X-Mailer: git-send-email 2.31.1
-In-Reply-To: <cover.1665650266.git.siyanteng@loongson.cn>
-References: <cover.1665650266.git.siyanteng@loongson.cn>
+        with ESMTP id S229618AbiJMKRD (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Thu, 13 Oct 2022 06:17:03 -0400
+Received: from Chamillionaire.breakpoint.cc (Chamillionaire.breakpoint.cc [IPv6:2a0a:51c0:0:12e:520::1])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id ED085F6C22;
+        Thu, 13 Oct 2022 03:17:00 -0700 (PDT)
+Received: from fw by Chamillionaire.breakpoint.cc with local (Exim 4.92)
+        (envelope-from <fw@strlen.de>)
+        id 1oivGV-00028B-QF; Thu, 13 Oct 2022 12:16:35 +0200
+Date:   Thu, 13 Oct 2022 12:16:35 +0200
+From:   Florian Westphal <fw@strlen.de>
+To:     Rolf Eike Beer <eike-kernel@sf-tec.de>
+Cc:     linux-kernel@vger.kernel.org, patches@lists.linux.dev,
+        "Jason A. Donenfeld" <Jason@zx2c4.com>,
+        Andrew Morton <akpm@linux-foundation.org>,
+        Florian Westphal <fw@strlen.de>,
+        Herbert Xu <herbert@gondor.apana.org.au>,
+        Thomas Graf <tgraf@suug.ch>, kasan-dev@googlegroups.com,
+        Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+        kernel-janitors@vger.kernel.org,
+        linux-arm-kernel@lists.infradead.org, linux-block@vger.kernel.org,
+        linux-crypto@vger.kernel.org, linux-doc@vger.kernel.org,
+        linux-fsdevel@vger.kernel.org, linux-media@vger.kernel.org,
+        linux-mips@vger.kernel.org, linux-mm@kvack.org,
+        linux-mmc@vger.kernel.org, linux-mtd@lists.infradead.org,
+        linux-nvme@lists.infradead.org, linux-parisc@vger.kernel.org,
+        linux-rdma@vger.kernel.org, linux-s390@vger.kernel.org,
+        linux-um@lists.infradead.org, linux-usb@vger.kernel.org,
+        linux-wireless@vger.kernel.org, linuxppc-dev@lists.ozlabs.org,
+        loongarch@lists.linux.dev, netdev@vger.kernel.org,
+        sparclinux@vger.kernel.org, x86@kernel.org
+Subject: Re: [PATCH v6 5/7] treewide: use get_random_u32() when possible
+Message-ID: <20221013101635.GB11818@breakpoint.cc>
+References: <20221010230613.1076905-1-Jason@zx2c4.com>
+ <20221010230613.1076905-6-Jason@zx2c4.com>
+ <3026360.ZldQQBzMgz@eto.sf-tec.de>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-CM-TRANSID: AQAAf8DxReJ+3EdjJu0sAA--.30337S2
-X-Coremail-Antispam: 1UD129KBjvJXoW7KFy7Zr1DKF1DWr4fXr45GFg_yoW8tF1xp3
-        WqkryfG3W5Jryjkr4xGF1UJF4UGF18Gw1UJr1xGwn8Xr4kJF1UJr4Utr98tw17Cr48AFW5
-        Xr40kryUCr1UAr7anT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
-        9KBjDU0xBIdaVrnRJUUUvK14x267AKxVW8JVW5JwAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
-        rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2ocxC64kIII0Yj41l84x0c7CEw4AK67xGY2AK02
-        1l84ACjcxK6xIIjxv20xvE14v26F1j6w1UM28EF7xvwVC0I7IYx2IY6xkF7I0E14v26r4U
-        JVWxJr1l84ACjcxK6I8E87Iv67AKxVW0oVCq3wA2z4x0Y4vEx4A2jsIEc7CjxVAFwI0_Gc
-        CE3s1le2I262IYc4CY6c8Ij28IcVAaY2xG8wAqx4xG64xvF2IEw4CE5I8CrVC2j2WlYx0E
-        2Ix0cI8IcVAFwI0_Jrv_JF1lYx0Ex4A2jsIE14v26r1j6r4UMcvjeVCFs4IE7xkEbVWUJV
-        W8JwACjcxG0xvY0x0EwIxGrwACjI8F5VA0II8E6IAqYI8I648v4I1lFIxGxcIEc7CjxVA2
-        Y2ka0xkIwI1lc2xSY4AK67AK6r4fMxAIw28IcxkI7VAKI48JMxC20s026xCaFVCjc4AY6r
-        1j6r4UMI8I3I0E5I8CrVAFwI0_Jr0_Jr4lx2IqxVCjr7xvwVAFwI0_JrI_JrWlx4CE17CE
-        b7AF67AKxVW8ZVWrXwCIc40Y0x0EwIxGrwCI42IY6xIIjxv20xvE14v26r1I6r4UMIIF0x
-        vE2Ix0cI8IcVCY1x0267AKxVWxJVW8Jr1lIxAIcVCF04k26cxKx2IYs7xG6r1j6r1xMIIF
-        0xvEx4A2jsIE14v26r1j6r4UMIIF0xvEx4A2jsIEc7CjxVAFwI0_Gr0_Gr1UYxBIdaVFxh
-        VjvjDU0xZFpf9x0JUqLvtUUUUU=
-X-CM-SenderInfo: pvl1t0pwhqwqxorr0wxvrqhubq/
-X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00,SPF_HELO_PASS,
-        SPF_PASS autolearn=ham autolearn_force=no version=3.4.6
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <3026360.ZldQQBzMgz@eto.sf-tec.de>
+User-Agent: Mutt/1.10.1 (2018-07-13)
+X-Spam-Status: No, score=-4.2 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_MED,
+        SPF_HELO_PASS,SPF_PASS autolearn=ham autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Translate .../rust/arch-support.rst into Chinese.
+Rolf Eike Beer <eike-kernel@sf-tec.de> wrote:
+> Florian, can you comment and maybe fix it?
 
-Signed-off-by: Yanteng Si <siyanteng@loongson.cn>
----
- .../translations/zh_CN/rust/arch-support.rst  | 23 +++++++++++++++++++
- .../translations/zh_CN/rust/index.rst         |  5 +---
- 2 files changed, 24 insertions(+), 4 deletions(-)
- create mode 100644 Documentation/translations/zh_CN/rust/arch-support.rst
+Can't comment, do not remember -- this was 5 years ago.
 
-diff --git a/Documentation/translations/zh_CN/rust/arch-support.rst b/Documentation/translations/zh_CN/rust/arch-support.rst
-new file mode 100644
-index 000000000000..f8e3e7b8afe5
---- /dev/null
-+++ b/Documentation/translations/zh_CN/rust/arch-support.rst
-@@ -0,0 +1,23 @@
-+.. SPDX-License-Identifier: GPL-2.0
-+.. include:: ../disclaimer-zh_CN.rst
-+
-+:Original: Documentation/rust/arch-support.rst
-+
-+:翻译:
-+
-+ 司延腾 Yanteng Si <siyanteng@loongson.cn>
-+
-+架构支持
-+========
-+
-+目前，Rust编译器（``rustc``）使用LLVM进行代码生成，这限制了可以支持的目标架构。此外，对
-+使用LLVM/Clang构建内核的支持也有所不同（请参见使用Clang/LLVM构建Linux）。这种支持对于
-+使用 ``libclang`` 的bindgen来说是必需的。
-+
-+下面是目前可以工作的架构的一般总结。支持程度与 ``MAINTAINERS`` 文件中的``S`` 值相对应:
-+
-+============  ================  ==============================================
-+架构          支持水平          限制因素
-+============  ================  ==============================================
-+``x86``       Maintained        只有 ``x86_64``
-+============  ================  ==============================================
-diff --git a/Documentation/translations/zh_CN/rust/index.rst b/Documentation/translations/zh_CN/rust/index.rst
-index c5507ad488a1..b01f887e7167 100644
---- a/Documentation/translations/zh_CN/rust/index.rst
-+++ b/Documentation/translations/zh_CN/rust/index.rst
-@@ -18,10 +18,7 @@ Rust
-     quick-start
-     general-information
-     coding-guidelines
--
--TODOList:
--
--*    arch-support
-+    arch-support
- 
- .. only::  subproject and html
- 
--- 
-2.31.1
+> Or you wanted to move the variable before the loop and keep the random state
+> between the loops and only reseed when all '1' bits have been consumed.
 
+Probably.  No clue, best to NOT change it to not block Jasons series and
+then just simplify this and remove all the useless shifts.
