@@ -2,103 +2,107 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 4E2035FDAF7
-	for <lists+linux-doc@lfdr.de>; Thu, 13 Oct 2022 15:36:07 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id DCD3E5FDB3F
+	for <lists+linux-doc@lfdr.de>; Thu, 13 Oct 2022 15:42:49 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S229775AbiJMNgD (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 13 Oct 2022 09:36:03 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:49758 "EHLO
+        id S229976AbiJMNms (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 13 Oct 2022 09:42:48 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:37536 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S229733AbiJMNf6 (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Thu, 13 Oct 2022 09:35:58 -0400
-Received: from ms.lwn.net (ms.lwn.net [45.79.88.28])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 668DDB8C1D;
-        Thu, 13 Oct 2022 06:35:46 -0700 (PDT)
-Received: from localhost (unknown [IPv6:2601:281:8300:73:8b7:7001:c8aa:b65f])
-        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
-        (No client certificate requested)
-        by ms.lwn.net (Postfix) with ESMTPSA id 260ED7F9;
-        Thu, 13 Oct 2022 13:35:45 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 ms.lwn.net 260ED7F9
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=lwn.net; s=20201203;
-        t=1665668145; bh=gfYhNJG+ASRdf/168GtPQechsmW64l6yj4+IKgpNJqw=;
-        h=From:To:Cc:Subject:In-Reply-To:References:Date:From;
-        b=LpkICErC1A/s79gQ/tFwYbTEN/BvC8liud5rFqz2p5Yr6Ow43WuvZVqDurZBGZyr9
-         QoT3lfizYsUTrgmoeg78iukky6KdoyF+WYuW4pfwIgGuA1r4qS+WHZZfPkRCqCc4hG
-         lNpUg91OFavpYctJqRdng/HR23Gzsujg9bWs+oH1fyGygMV8yum3X/1otyJYSYMhOM
-         0v+bctEJUeXS/BpEwiPo54m1r7cAAAe1zhIsppEXrazeumpNDNA+86g7MDO/U+Ztp3
-         DiIypArAJMBcI0vs00jWzkvFhUAZONcEvAQdb3LyXz49/oMKlpIvpsy4kQqm2Skdi+
-         lcBOzujkR5Bhg==
-From:   Jonathan Corbet <corbet@lwn.net>
-To:     sndanailov@wired4ever.net
-Cc:     rdunlap@infradead.org, linux-doc@vger.kernel.org,
-        linux-kernel@vger.kernel.org,
-        Sotir Danailov <sndanailov@wired4ever.net>
-Subject: Re: [PATCH] doc: process: add privacy warning when using some SMTP
- servers
-In-Reply-To: <20221013123115.17419-1-sndanailov@wired4ever.net>
-References: <20221013123115.17419-1-sndanailov@wired4ever.net>
-Date:   Thu, 13 Oct 2022 07:35:44 -0600
-Message-ID: <8735brkfrj.fsf@meer.lwn.net>
+        with ESMTP id S229989AbiJMNmn (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Thu, 13 Oct 2022 09:42:43 -0400
+Received: from mail-pj1-x1030.google.com (mail-pj1-x1030.google.com [IPv6:2607:f8b0:4864:20::1030])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id CEC02114DE0
+        for <linux-doc@vger.kernel.org>; Thu, 13 Oct 2022 06:42:37 -0700 (PDT)
+Received: by mail-pj1-x1030.google.com with SMTP id 70so2008107pjo.4
+        for <linux-doc@vger.kernel.org>; Thu, 13 Oct 2022 06:42:37 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=bytedance-com.20210112.gappssmtp.com; s=20210112;
+        h=content-transfer-encoding:in-reply-to:from:references:cc:to:subject
+         :user-agent:mime-version:date:message-id:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=NOLoQjm6lEWHmulfqFpQ7MDS9fPvqNaIDPSIxB0GFo8=;
+        b=AvHPQ5/wcBFLkRUYUUmEVMR4gBWtumKwj8eJQTXJ6itkibd81unu/Z4MZdHkHxmlv2
+         moQQBzzXt4AybwebklULodcvG7oheLdkbNh4CoEDNi0c1l8rb5fxynNbIshI9zHNWQNj
+         KLhmeb+LxE53o8VjCLGoaOvA0ihmkRPh0P1vrfU+pNA9QBOjgFJW4FC+zNUFnm1C8Tld
+         2thzHhVW1H5No+n518ILMuXmeOv4ETfBFX/i9kpNFCEC5n9xBh7GScNuVKaRAwVU56hc
+         0UZ1CaCCrjsl3aYFT6Z8Fruo3zs4xovnP1oL93Q0oGyVYjeBZr+wBFFFp9UZrgb6va/G
+         Wudw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=content-transfer-encoding:in-reply-to:from:references:cc:to:subject
+         :user-agent:mime-version:date:message-id:x-gm-message-state:from:to
+         :cc:subject:date:message-id:reply-to;
+        bh=NOLoQjm6lEWHmulfqFpQ7MDS9fPvqNaIDPSIxB0GFo8=;
+        b=dsUp8j7c8soT4oBuwTzIRTDWphyXmo+s41mmt+H9VMxfr81I26FAP8zXKkJW20lgaW
+         /abfbJ2aVXurH/dzpvzQRjRFnHfEe/7AAo8NyrDCXtSazYAJlqwnqOPXflBGRPt7LIXN
+         tJqbbpiClmiJ6OHSzlvg3NG+CdwhTLCeKrd5/W5nyJV3W9+uyzW+l2IaTAr6e01UE7SA
+         m+EMms99OBwzJgxuNc+fhlqYPLpcjx2BQ4YJylqrlSNMHNS9avPBpfk84Dxmj7FHWpqq
+         X6v7fQSpNIOw9ks8HaVZhFdFST8vO/v9R12iLxyyUoX11anPqDp+LQTZOtdA58uZjxkt
+         WSMg==
+X-Gm-Message-State: ACrzQf0VQrjuOIDAbuEXW0e8bh3tCJBBtyWPctDL2TxMaz1L67qDlVce
+        w/u3Nv8j+UMN/5A01D83SzQxKw==
+X-Google-Smtp-Source: AMsMyM6FkIPSzrfH5vm5egxoGzAlEomfBe9Ic3Qi2U3S4jqkZ9v4n/W5IbztJfqkilvpnPObUtKyvg==
+X-Received: by 2002:a17:90a:bd91:b0:20d:2add:96a4 with SMTP id z17-20020a17090abd9100b0020d2add96a4mr11384510pjr.195.1665668556405;
+        Thu, 13 Oct 2022 06:42:36 -0700 (PDT)
+Received: from [10.4.223.70] ([139.177.225.240])
+        by smtp.gmail.com with ESMTPSA id i66-20020a626d45000000b00562a71d719fsm1974504pfc.155.2022.10.13.06.42.33
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Thu, 13 Oct 2022 06:42:36 -0700 (PDT)
+Message-ID: <a401c9a3-026c-9695-d339-24347965cd20@bytedance.com>
+Date:   Thu, 13 Oct 2022 21:42:30 +0800
 MIME-Version: 1.0
-Content-Type: text/plain
-X-Spam-Status: No, score=-2.1 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_NONE,
-        SPF_HELO_NONE,SPF_PASS autolearn=ham autolearn_force=no version=3.4.6
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
+ Thunderbird/102.3.2
+Subject: Re: [External] Re: [RFC] mm: add new syscall pidfd_set_mempolicy()
+To:     Michal Hocko <mhocko@suse.com>
+Cc:     corbet@lwn.net, akpm@linux-foundation.org, linux-mm@kvack.org,
+        linux-kernel@vger.kernel.org, linux-api@vger.kernel.org,
+        linux-doc@vger.kernel.org, wuyun.abel@bytedance.com
+References: <20221010094842.4123037-1-hezhongkun.hzk@bytedance.com>
+ <Y0WEbCqJHjnqsg8n@dhcp22.suse.cz>
+ <582cf257-bc0d-c96e-e72e-9164cff4fce1@bytedance.com>
+ <Y0aCiYMQ4liL2azT@dhcp22.suse.cz>
+ <a0421769-c2b9-d59a-0358-3cc84b2cb2bd@bytedance.com>
+ <Y0avztF7QU8P/OoB@dhcp22.suse.cz>
+ <e825a27a-646b-9723-f774-947501c04ec2@bytedance.com>
+ <Y0f17v1c3aAszlbk@dhcp22.suse.cz>
+ <db41c662-19ce-fc1a-21ba-38ecda7d09c8@bytedance.com>
+ <Y0gP9i8KZKt4/EcG@dhcp22.suse.cz>
+From:   Zhongkun He <hezhongkun.hzk@bytedance.com>
+In-Reply-To: <Y0gP9i8KZKt4/EcG@dhcp22.suse.cz>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-Spam-Status: No, score=-3.1 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+        DKIM_VALID,NICE_REPLY_A,RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,SPF_PASS
+        autolearn=unavailable autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-sndanailov@wired4ever.net writes:
+> On Thu 13-10-22 20:50:48, Zhongkun He wrote:
+>>>> Hi Michal
+>>>>
+>>>> Could we try to change the MPOL_F_SHARED flag to MPOL_F_STATIC to
+>>>> mark static mempolicy which cannot be freed, and mpol_needs_cond_ref
+>>>> can use MPOL_F_STATIC to avoid freeing  the static mempolicy.
+>>>
+>>> Wouldn't it make more sense to get rid of a different treatment and
+>>> treat all memory policies the same way?
+>>
+>> I found a case, not sure if it makes sense. If there is no policy
+>> in task->mempolicy, the use of atomic_{inc,dec} can be skiped
+>> according  to MPOL_F_STATIC. Atomic_{inc,dec} in hot path may reduces
+>> performance.
+> 
+> I would start with a simple conversion and do any potential
+> optimizations on top of that based on actual numbers. Maybe we can
+> special case default_policy to avoid reference counting a default (no
+> policy case). A simple check for pol == &default_policy should be
+> negligible.
 
-> From: Sotir Danailov <sndanailov@wired4ever.net>
->
-> Warn the user about "Received" headers and how some
-> SMTP servers use them by attaching the user's IP addresses,
-> when using some email clients. Add suggestion on how to
-> test this behavior and how to avoid it.
->
-> Signed-off-by: Sotir Danailov <sndanailov@wired4ever.net>
-> ---
->  Documentation/process/email-clients.rst | 21 +++++++++++++++++++++
->  1 file changed, 21 insertions(+)
->
-> diff --git a/Documentation/process/email-clients.rst b/Documentation/process/email-clients.rst
-> index fc2c46f3f82d..9c49f9b33fdb 100644
-> --- a/Documentation/process/email-clients.rst
-> +++ b/Documentation/process/email-clients.rst
-> @@ -350,3 +350,24 @@ although tab2space problem can be solved with external editor.
->  
->  Another problem is that Gmail will base64-encode any message that has a
->  non-ASCII character. That includes things like European names.
-> +
-> +Privacy/Security
-> +----------------
-> +
-> +Keep in mind, that even if you're using a working email client, the SMTP
-> +server might have configurations you don't like.
-> +
-> +For example, if you decide to use the Gmail SMTP server with the Thunderbird
-> +client, the server will add your private and public IPs into "Received"
-> +headers, which are attached to all of your sent emails. This is done
-> +to avoid spam and to check where in the routing path an error might have
-> +occurred. Gmail's web GUI client doesn't add your IPs, because it's sent from
-> +Google's servers directly, not an external machine. Unfortunately the web
-> +client is not good for sending patches. You can check if your IPs are present
-> +in the headers by reading the raw email source.
-> +
-> +If you do not wish this behavior, you need to find a provider which doesn't
-> +do it or configure and host a SMTP server yourself.
-> +
-> +If you're concerned, always first send an email to yourself, read the email
-> +source and if you see no issues, continue to the mailing lists!
+Got it, thanks for your reply and suggestions.
 
-So this seems to be just a description of how email works - the Received
-headers always show the path through the net.  Is this really something
-that we need to cover in the kernel docs?
 
-Thanks,
-
-jon
