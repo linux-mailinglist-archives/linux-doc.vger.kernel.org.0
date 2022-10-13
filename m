@@ -2,92 +2,116 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 452FA5FE17A
-	for <lists+linux-doc@lfdr.de>; Thu, 13 Oct 2022 20:40:28 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 9D7D95FE209
+	for <lists+linux-doc@lfdr.de>; Thu, 13 Oct 2022 20:51:37 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S229894AbiJMSkY (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 13 Oct 2022 14:40:24 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:43538 "EHLO
+        id S229737AbiJMSvf (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 13 Oct 2022 14:51:35 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:49300 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S229821AbiJMSjv (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Thu, 13 Oct 2022 14:39:51 -0400
-Received: from mail-qt1-f177.google.com (mail-qt1-f177.google.com [209.85.160.177])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 524E7CBFEA;
-        Thu, 13 Oct 2022 11:37:49 -0700 (PDT)
-Received: by mail-qt1-f177.google.com with SMTP id h15so2283454qtu.2;
-        Thu, 13 Oct 2022 11:37:49 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=CZmvxazc2sXXNdPho7QU50pFfOmoWil5WJIRMNVjEqw=;
-        b=2y7Tj4TdF4OVWkIvv1oU5YVa2okYkUNOucAgqK+mvA0PdBomdmEcfRpNNOd1xYDBKT
-         jQ++U+nXf4JJ7WDU83qFW3sxnhyEcB2/ZJP6V+P8ssymJ8sFEPZqVJgn1e3LLjle77PH
-         QXFnfvBbCajf6xbvhQtVzZ1lqtNi33H/DBwMidSw1/gH+O7wbfEbwqA4Fzt9nrG2ESaH
-         IvvEYIn0GXwRSBnAz/Yoi195eGIttaPIkH80Kntw4KeYPH17aPhAbobJGUWz/8Tyai3i
-         1LFXCDYWUHlVy/TTErZh57eE7hOh03T/PSFi9QvNza0M9kFRb/WHLUN3wW31D6QRrYee
-         I14g==
-X-Gm-Message-State: ACrzQf1ADNnko6UtqMFPhdDWrBmQC2leS0NsXBWysnbooIMzn29laa1M
-        xbtnPyGmMHRMsPRLy/1ZbFxwemPZ0zs2WPXUCnzI40pW
-X-Google-Smtp-Source: AMsMyM6N+rqJd383wNo0tTFwOWxlQOUXB+NdPnp+xo591oKu26Yb32t9/qC65lbULR/MeM3lMDHuw+Bkc7qA6i6cb8w=
-X-Received: by 2002:a05:620a:468c:b0:6ec:5c7f:8a3d with SMTP id
- bq12-20020a05620a468c00b006ec5c7f8a3dmr978896qkb.285.1665686194490; Thu, 13
- Oct 2022 11:36:34 -0700 (PDT)
+        with ESMTP id S231927AbiJMSvK (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Thu, 13 Oct 2022 14:51:10 -0400
+Received: from NAM11-CO1-obe.outbound.protection.outlook.com (mail-co1nam11on2057.outbound.protection.outlook.com [40.107.220.57])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 17D2B40E2D;
+        Thu, 13 Oct 2022 11:49:27 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=UCCPFck972/LWiSwHP9ee0dOuKKIg22BPvalwSIeAmEDX4ov63SDZ+e+drPpuv7xX4qqLdOzeBzQRPXrDmYUr+pt4U/E24GKOlBQjeBGWPW1L0cUQvxOIGVHx9E5BxORhdCQyXKZKt4YPY3Zx4eZ4WpMjFDX7Y/3DeYjpEbM+QL+One2vH1DXumNLu4uoMJome4s3ETskA2YcnBcHmmekDFSD0x9VpvE3XlFgyXluZZ/k4x1WefFzFvCAw7nceamtdXuBp59VdwXHuzkug26qMzdLa70ZygG5+vdQth45//Gh6wZlk2tzTf8UytMTdglNkcC5sxy16Kk8Rx9cm5AUg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=6fQhXxV7ZyPHiodi6MSm8RH6inUL+zXQhWxMgej6LU8=;
+ b=FFG9vkTAnwzKaX11cEzIBU2qNGALO7nY8VkMyZrJxRVmM3FRraXj1+DNe/k2KInuSDePOu7qc0VpQ49BSJLc8WVVDHQvr5+wgCOrrok/B8M5PeQAVQm3QVTZpkdGCNQDqqB4OjXqdV4Wj9j1S3RaJl8n/6E6aq5bBsGdZMcJ/gykDgws6KO3JSG+R8IeKoFrHYi//cJUJTaATAuVbHfJY+excrQYUFTExTwoSIB2rwaccPRnw3aICVarKFnausY8gNEFoeplzyWU4vVBmRCwrdvFpXGDcKMQZeukerh/znvqd9NA66p6+EQcsqROM1oHIeenv4PrAsUOJneVralPtA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=lwn.net smtp.mailfrom=amd.com; dmarc=pass
+ (p=quarantine sp=quarantine pct=100) action=none header.from=amd.com;
+ dkim=none (message not signed); arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=6fQhXxV7ZyPHiodi6MSm8RH6inUL+zXQhWxMgej6LU8=;
+ b=htgu1oSvdqN5nlZNNpX6S3406dghvmGRi2Wito2ESaFjnxLdhTgIscDZbhQTrZ3gRjzkOSeA6Qbi06espmmB0EuQsdMFNAxCXUGV+qLPyn3ygiOIdwf86h4ZamvW4Z/JcaO3hdcIgRvZx8gfZZ82CBPkt5ObjSxnh+Xh3BIpxpg=
+Received: from DS7PR06CA0035.namprd06.prod.outlook.com (2603:10b6:8:54::9) by
+ SA0PR12MB4509.namprd12.prod.outlook.com (2603:10b6:806:9e::16) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.5709.22; Thu, 13 Oct 2022 18:48:18 +0000
+Received: from DM6NAM11FT003.eop-nam11.prod.protection.outlook.com
+ (2603:10b6:8:54:cafe::6e) by DS7PR06CA0035.outlook.office365.com
+ (2603:10b6:8:54::9) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5709.22 via Frontend
+ Transport; Thu, 13 Oct 2022 18:48:18 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
+ smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
+Received: from SATLEXMB04.amd.com (165.204.84.17) by
+ DM6NAM11FT003.mail.protection.outlook.com (10.13.173.162) with Microsoft SMTP
+ Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.20.5723.20 via Frontend Transport; Thu, 13 Oct 2022 18:48:18 +0000
+Received: from SATLEXMB05.amd.com (10.181.40.146) by SATLEXMB04.amd.com
+ (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2375.28; Thu, 13 Oct
+ 2022 13:48:17 -0500
+Received: from SATLEXMB03.amd.com (10.181.40.144) by SATLEXMB05.amd.com
+ (10.181.40.146) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2375.28; Thu, 13 Oct
+ 2022 13:48:17 -0500
+Received: from iron-maiden.amd.com (10.180.168.240) by SATLEXMB03.amd.com
+ (10.181.40.144) with Microsoft SMTP Server id 15.1.2375.28 via Frontend
+ Transport; Thu, 13 Oct 2022 13:48:17 -0500
+From:   Carlos Bilbao <carlos.bilbao@amd.com>
+To:     <corbet@lwn.net>
+CC:     <linux-doc@vger.kernel.org>, <linux-kernel@vger.kernel.org>,
+        <carlos.bilbao@amd.com>, <bilbao@vt.edu>, <ojeda@kernel.org>
+Subject: [PATCH 0/2] Documentation: Start Spanish translation and include HOWTO
+Date:   Thu, 13 Oct 2022 13:48:14 -0500
+Message-ID: <20221013184816.354278-1-carlos.bilbao@amd.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-References: <20221011122600.620690-1-bagasdotme@gmail.com>
-In-Reply-To: <20221011122600.620690-1-bagasdotme@gmail.com>
-From:   "Rafael J. Wysocki" <rafael@kernel.org>
-Date:   Thu, 13 Oct 2022 20:36:23 +0200
-Message-ID: <CAJZ5v0jCX=+XwWRwyVv+VxHQHR2buRNLH5Fw19pR4mVpzi95bQ@mail.gmail.com>
-Subject: Re: [PATCH] Documentation: ACPI: Prune DSDT override documentation
- from index
-To:     Bagas Sanjaya <bagasdotme@gmail.com>
-Cc:     linux-doc@vger.kernel.org, linux-acpi@vger.kernel.org,
-        linux-kernel@vger.kernel.org, Jonathan Corbet <corbet@lwn.net>,
-        "Rafael J. Wysocki" <rafael.j.wysocki@intel.com>
-Content-Type: text/plain; charset="UTF-8"
-X-Spam-Status: No, score=-1.4 required=5.0 tests=BAYES_00,
-        FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,HEADER_FROM_DIFFERENT_DOMAINS,
-        RCVD_IN_DNSWL_NONE,RCVD_IN_MSPIKE_H3,RCVD_IN_MSPIKE_WL,SPF_HELO_NONE,
-        SPF_PASS autolearn=no autolearn_force=no version=3.4.6
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: DM6NAM11FT003:EE_|SA0PR12MB4509:EE_
+X-MS-Office365-Filtering-Correlation-Id: 6adacc23-d1d5-4e9c-9c70-08daad4b7e69
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: ozRjzOAh8ATjQ5Go11CuF41ZaLW3kRmX5UrWeOliyF4Zp+kO8QF2+2zwnHZCy6d8tLTfvsqQyaWBiIzRCJ15L7cMZl1R+/hDfhTeEL9XnJ+nE2p0KpFI35ZRi6IrlF/4CDMCM2OkcZ+j0mUeyjjElFkJYmZR9r6kveze8066WOrZ/F+4NSxGiXF68L3gEOaVNtQkCzPO9w15elZK1bAITC3e27R+P7tx/9/JPhG7Qlw1OUDNfAphWVlEauGwvn0qPG5rgNOvO21AtA2HfIK2B9eA8/BzZmpCFtRoMvu/nirkJPbYJ64kcWchNsIzcKHiFmw6r1KpVAcdBtw8bTw1LF65ut2Cj2y5tbD1KfCpx5HVTOQQ+7F8o2ylT0dwcASOZThJEJyFAfwPcJFDv9PW2AVlb4l8TimKxORggXRp8PBCrKjDoYmXi/OYXUWIuxA4Pu3nLX4v9e4LmCX8UgOKrCar9VToSw4rW0a+dzo6JcaRoB7zwaeiHprbMweUeZ9ZjstzD0jBrUIjINyYM+i4aGvQNxHyGG030LZQxx2dkmNllt4LBfLIBzqm2bEnPrz48LiQWzAyKc076DLcq3jQIJo5YhMSfMCpocob2guVdohlezciATRlWsEnL2s2ZQ67hNSmFdhCf+LbyZPVkwdgMcMw+MhJJulArQcpEkSUp6iLPdnbGLHOAK+bK1r5v/KFq8Z+VhnKWWmzqmHOntjCqrErzBH01+nzv/k3aJJ0ZvDN4KpoUV3puYtHuWjKc7rgl0bHnEaEihdRUSVBT4Js2nHUIuQi0goMgSlJ87yTVbNZ/kvnadRi1WiYXwApXr/8469NkpgRc/MSEazKm+XYNq+fU5tMQ1pX1eek2RXHOSg=
+X-Forefront-Antispam-Report: CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB04.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230022)(4636009)(376002)(136003)(39860400002)(346002)(396003)(451199015)(40470700004)(36840700001)(46966006)(86362001)(36860700001)(1076003)(40460700003)(2616005)(6916009)(36756003)(336012)(54906003)(186003)(47076005)(316002)(426003)(6666004)(26005)(2906002)(7696005)(4744005)(82310400005)(40480700001)(478600001)(44832011)(5660300002)(41300700001)(8936002)(8676002)(4326008)(82740400003)(356005)(81166007)(70206006)(70586007)(36900700001);DIR:OUT;SFP:1101;
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 13 Oct 2022 18:48:18.0568
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 6adacc23-d1d5-4e9c-9c70-08daad4b7e69
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[SATLEXMB04.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource: DM6NAM11FT003.eop-nam11.prod.protection.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SA0PR12MB4509
+X-Spam-Status: No, score=-2.1 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_NONE,
+        RCVD_IN_MSPIKE_H2,SPF_HELO_PASS,SPF_PASS autolearn=ham
+        autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Tue, Oct 11, 2022 at 2:26 PM Bagas Sanjaya <bagasdotme@gmail.com> wrote:
->
-> Commit d206cef03c4827 ("ACPI: docs: Drop useless DSDT override documentation")
-> removes useless DSDT override documentation. However, the commit forgets
-> to prune the documentation entry from table of contents of ACPI admin
-> guide documentation, hence triggers Sphinx warning:
->
-> Documentation/admin-guide/acpi/index.rst:8: WARNING: toctree contains reference to nonexisting document 'admin-guide/acpi/dsdt-override'
->
-> Prune the entry to fix the warning.
->
-> Fixes: d206cef03c4827 ("ACPI: docs: Drop useless DSDT override documentation")
-> Signed-off-by: Bagas Sanjaya <bagasdotme@gmail.com>
-> ---
->  Documentation/admin-guide/acpi/index.rst | 1 -
->  1 file changed, 1 deletion(-)
->
-> diff --git a/Documentation/admin-guide/acpi/index.rst b/Documentation/admin-guide/acpi/index.rst
-> index 71277689ad97f4..b078fdb8f4c934 100644
-> --- a/Documentation/admin-guide/acpi/index.rst
-> +++ b/Documentation/admin-guide/acpi/index.rst
-> @@ -9,7 +9,6 @@ the Linux ACPI support.
->     :maxdepth: 1
->
->     initrd_table_override
-> -   dsdt-override
->     ssdt-overlays
->     cppc_sysfs
->     fan_performance_states
->
-> base-commit: 27bc50fc90647bbf7b734c3fc306a5e61350da53
-> --
+Spanish is the second most spoken language in the world. This patch set
+starts the process of translating critical kernel documentation into the
+Spanish language.
 
-Applied as 6.1-rc material, thanks!
+Carlos Bilbao (2):
+  Documentation: Start translations to Spanish
+  Documentation: Add HOWTO Spanish translation into rst based build system
+
+ Documentation/translations/index.rst          |   1 +
+ .../translations/sp_SP/disclaimer-sp.rst      |   6 +
+ Documentation/translations/sp_SP/howto.rst    | 619 ++++++++++++++++++
+ Documentation/translations/sp_SP/index.rst    |  80 +++
+ 4 files changed, 706 insertions(+)
+ create mode 100644 Documentation/translations/sp_SP/disclaimer-sp.rst
+ create mode 100644 Documentation/translations/sp_SP/howto.rst
+ create mode 100644 Documentation/translations/sp_SP/index.rst
