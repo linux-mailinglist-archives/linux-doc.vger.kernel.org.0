@@ -2,106 +2,80 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id AE7D35FEECD
-	for <lists+linux-doc@lfdr.de>; Fri, 14 Oct 2022 15:42:11 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 200F45FEED6
+	for <lists+linux-doc@lfdr.de>; Fri, 14 Oct 2022 15:44:29 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S229748AbiJNNmJ (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Fri, 14 Oct 2022 09:42:09 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:36396 "EHLO
+        id S229873AbiJNNo1 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Fri, 14 Oct 2022 09:44:27 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:39034 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S229754AbiJNNmH (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Fri, 14 Oct 2022 09:42:07 -0400
-Received: from out30-131.freemail.mail.aliyun.com (out30-131.freemail.mail.aliyun.com [115.124.30.131])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 470B0286EE;
-        Fri, 14 Oct 2022 06:42:05 -0700 (PDT)
-X-Alimail-AntiSpam: AC=PASS;BC=-1|-1;BR=01201311R131e4;CH=green;DM=||false|;DS=||;FP=0|-1|-1|-1|0|-1|-1|-1;HT=ay29a033018045192;MF=xianting.tian@linux.alibaba.com;NM=1;PH=DS;RN=24;SR=0;TI=SMTPD_---0VS82WcB_1665754918;
-Received: from localhost.localdomain(mailfrom:xianting.tian@linux.alibaba.com fp:SMTPD_---0VS82WcB_1665754918)
+        with ESMTP id S229887AbiJNNoY (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Fri, 14 Oct 2022 09:44:24 -0400
+Received: from out30-57.freemail.mail.aliyun.com (out30-57.freemail.mail.aliyun.com [115.124.30.57])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id DE1C11CFC73;
+        Fri, 14 Oct 2022 06:44:18 -0700 (PDT)
+X-Alimail-AntiSpam: AC=PASS;BC=-1|-1;BR=01201311R191e4;CH=green;DM=||false|;DS=||;FP=0|-1|-1|-1|0|-1|-1|-1;HT=ay29a033018045192;MF=xianting.tian@linux.alibaba.com;NM=1;PH=DS;RN=24;SR=0;TI=SMTPD_---0VS88kYV_1665755050;
+Received: from 30.39.198.88(mailfrom:xianting.tian@linux.alibaba.com fp:SMTPD_---0VS88kYV_1665755050)
           by smtp.aliyun-inc.com;
-          Fri, 14 Oct 2022 21:41:59 +0800
-From:   Xianting Tian <xianting.tian@linux.alibaba.com>
-To:     paul.walmsley@sifive.com, palmer@dabbelt.com,
+          Fri, 14 Oct 2022 21:44:12 +0800
+Message-ID: <cda77a7f-470d-21eb-f5ec-dac004b32bc5@linux.alibaba.com>
+Date:   Fri, 14 Oct 2022 21:44:09 +0800
+MIME-Version: 1.0
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:91.0)
+ Gecko/20100101 Thunderbird/91.12.0
+Subject: Re: [PATCH 2/2] Documentation: kdump: describe VMCOREINFO export for
+ RISCV64
+To:     Bagas Sanjaya <bagasdotme@gmail.com>,
+        Conor Dooley <conor@kernel.org>
+Cc:     paul.walmsley@sifive.com, palmer@dabbelt.com,
         aou@eecs.berkeley.edu, anup@brainfault.org, heiko@sntech.de,
         guoren@kernel.org, mick@ics.forth.gr,
         alexandre.ghiti@canonical.com, bhe@redhat.com, vgoyal@redhat.com,
         dyoung@redhat.com, corbet@lwn.net, Conor.Dooley@microchip.com,
-        bagasdotme@gmail.com
-Cc:     kexec@lists.infradead.org, linux-doc@vger.kernel.org,
+        kexec@lists.infradead.org, linux-doc@vger.kernel.org,
         linux-riscv@lists.infradead.org, linux-kernel@vger.kernel.org,
         crash-utility@redhat.com, heinrich.schuchardt@canonical.com,
-        k-hagio-ab@nec.com, hschauhan@nulltrace.org, yixun.lan@gmail.com,
-        Xianting Tian <xianting.tian@linux.alibaba.com>
-Subject: [PATCH V2 2/2] Documentation: kdump: describe VMCOREINFO export for RISCV64
-Date:   Fri, 14 Oct 2022 21:41:39 +0800
-Message-Id: <20221014134139.5151-3-xianting.tian@linux.alibaba.com>
-X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20221014134139.5151-1-xianting.tian@linux.alibaba.com>
-References: <20221014134139.5151-1-xianting.tian@linux.alibaba.com>
-X-Spam-Status: No, score=-9.9 required=5.0 tests=BAYES_00,
-        ENV_AND_HDR_SPF_MATCH,RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,SPF_PASS,
-        UNPARSEABLE_RELAY,USER_IN_DEF_SPF_WL autolearn=ham autolearn_force=no
-        version=3.4.6
+        k-hagio-ab@nec.com, hschauhan@nulltrace.org, yixun.lan@gmail.com
+References: <20221014074810.4471-1-xianting.tian@linux.alibaba.com>
+ <20221014074810.4471-3-xianting.tian@linux.alibaba.com>
+ <Y0ldrJ91ac0um3++@debian.me> <Y0lfuixXue4k4poY@spud>
+ <7353e949-17cc-ed8e-7e98-b3f3e0840623@gmail.com>
+From:   Xianting Tian <xianting.tian@linux.alibaba.com>
+In-Reply-To: <7353e949-17cc-ed8e-7e98-b3f3e0840623@gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-Spam-Status: No, score=-12.8 required=5.0 tests=BAYES_00,
+        ENV_AND_HDR_SPF_MATCH,NICE_REPLY_A,RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,
+        SPF_PASS,UNPARSEABLE_RELAY,USER_IN_DEF_SPF_WL autolearn=ham
+        autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-The following interrelated definitions and ranges are needed by the kdump
-crash tool, they are exported by "arch/riscv/kernel/crash_core.c":
-    VA_BITS,
-    PAGE_OFFSET,
-    phys_ram_base,
-    MODULES_VADDR ~ MODULES_END,
-    VMALLOC_START ~ VMALLOC_END,
-    VMEMMAP_START ~ VMEMMAP_END,
-    KASAN_SHADOW_START ~ KASAN_SHADOW_END,
-    KERNEL_LINK_ADDR ~ ADDRESS_SPACE_END
 
-Document these RISCV64 exports above.
+在 2022/10/14 下午9:23, Bagas Sanjaya 写道:
+> On 10/14/22 20:10, Conor Dooley wrote:
+>> Without whitespace highlighting, your change threw me for a sec.. But
+>> yeah, having the overline is inconsistent with other headings in the
+>> doc.
+>>
+>> What I wanted to ask about was the linelength as I don't know anything
+>> about rst. Is it possible to avoid having the ~150 character line or is
+>> that a necessary evil?
+>>
+> I think the section describes correct range exports; however since there
+> are many such ranges with distinct purposes, it is better to split the
+> section into multiple sections describing each range.
+>
+> If we go without splitting, the 150-character header is necessary (I don't
+> know how to split the header text line without trigger any warnings).
 
-Signed-off-by: Xianting Tian <xianting.tian@linux.alibaba.com>
----
- .../admin-guide/kdump/vmcoreinfo.rst          | 30 +++++++++++++++++++
- 1 file changed, 30 insertions(+)
+thanks, I send V2 patch, please help review.
 
-diff --git a/Documentation/admin-guide/kdump/vmcoreinfo.rst b/Documentation/admin-guide/kdump/vmcoreinfo.rst
-index 6726f439958c..8e2e164cf3db 100644
---- a/Documentation/admin-guide/kdump/vmcoreinfo.rst
-+++ b/Documentation/admin-guide/kdump/vmcoreinfo.rst
-@@ -595,3 +595,33 @@ X2TLB
- -----
- 
- Indicates whether the crashed kernel enabled SH extended mode.
-+
-+RISCV64
-+=======
-+
-+VA_BITS
-+-------
-+
-+The maximum number of bits for virtual addresses. Used to compute the
-+virtual memory ranges.
-+
-+PAGE_OFFSET
-+-----------
-+
-+Indicates the virtual kernel start address of direct-mapped RAM region.
-+
-+phys_ram_base
-+-------------
-+
-+Indicates the start physical RAM address.
-+
-+MODULES_VADDR|MODULES_END|VMALLOC_START|VMALLOC_END|VMEMMAP_START|VMEMMAP_END|KASAN_SHADOW_START|KASAN_SHADOW_END|KERNEL_LINK_ADDR|ADDRESS_SPACE_END
-+----------------------------------------------------------------------------------------------------------------------------------------------------
-+
-+Used to get the correct ranges:
-+
-+  * MODULES_VADDR ~ MODULES_END : Kernel module space.
-+  * VMALLOC_START ~ VMALLOC_END : vmalloc() / ioremap() space.
-+  * VMEMMAP_START ~ VMEMMAP_END : vmemmap region, used for struct page array.
-+  * KASAN_SHADOW_START ~ KASAN_SHADOW_END : kasan shadow space.
-+  * KERNEL_LINK_ADDR ~ ADDRESS_SPACE_END : Kernel link and BPF space.
--- 
-2.17.1
+https://lkml.org/lkml/2022/10/14/447
 
+>
+> Thanks.
+>
