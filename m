@@ -2,61 +2,58 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 734745FE8D7
-	for <lists+linux-doc@lfdr.de>; Fri, 14 Oct 2022 08:19:55 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id A155C5FE937
+	for <lists+linux-doc@lfdr.de>; Fri, 14 Oct 2022 09:08:00 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S229585AbiJNGTx (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Fri, 14 Oct 2022 02:19:53 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:58940 "EHLO
+        id S229722AbiJNHH6 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Fri, 14 Oct 2022 03:07:58 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:42980 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S229830AbiJNGTb (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Fri, 14 Oct 2022 02:19:31 -0400
-Received: from mga04.intel.com (mga04.intel.com [192.55.52.120])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 3928117405;
-        Thu, 13 Oct 2022 23:17:58 -0700 (PDT)
+        with ESMTP id S229800AbiJNHH5 (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Fri, 14 Oct 2022 03:07:57 -0400
+Received: from mga17.intel.com (mga17.intel.com [192.55.52.151])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id C211915A30A;
+        Fri, 14 Oct 2022 00:07:54 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
   d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1665728279; x=1697264279;
-  h=date:from:to:cc:subject:message-id:references:
-   mime-version:content-transfer-encoding:in-reply-to;
-  bh=i1oki68Dx+LCPAjypu5a4V4r28I0L5vR1Ogpba9U3Gs=;
-  b=GmyqVaPwIvb9Ret1c/KuLatDGVEwIcArPeo1m0uvY0tpZiNiIi/3q4fE
-   hrFInfuaqOid7NlodxgP4w9xIyfDmpNM58T0IKt0MWXwHrUeE/r/YOGmt
-   0WMMvrMMmSVtqjqnoEYu3HN8af6urUOdHYIGG1yEapk6Alq9uMACBepeT
-   aZHnFdMR9wMMoYAX2mLWXehFJnJHbsdb3chv67cF7+fBenv0EkDi3kUHU
-   zGbs/gk5LF421jbuovfo92sxxPeE8gCFjpenYhQM2A02OHwjxkCz8hMX6
-   Bodjv4CBTDvNCip8+t8h/c9qQsyNSmJoUYPVwsyFKLOyr3JD64DuLVVlr
+  t=1665731274; x=1697267274;
+  h=date:from:to:cc:subject:message-id:mime-version;
+  bh=eGcg2/tKjkUtjcQeVvcYk3nr8zhkVnInY6FOVemx7Zk=;
+  b=T0WtK/VfxlPO567lCUgqvlGXMxhTCkQBEN3EgePPARsT/T5+EN/4GtD9
+   BAHCHz1WZB0U7E117n0etKfQMKzJQm8mWb1D1IfQvqJQryjVfxMsTKUbg
+   NqcKEjsCNPdwawgOxG6wLS6XKUYMUfHdXxNXje4c07Z9o8n79FDRALk+r
+   dmRa7Zh111D7xCP7xZrk+cixMsY79Q59nJF0F8ULsjnAlr3U3BX0EFQjs
+   M6W3eq7pL2TZIvggALxqX2yxt4CrcSqN3+NV3lO/4xxkOFRsTBOdALCbS
+   uTBZK46FCmKe8v9VaNP7Q8d2YSWaxRarQ+cnHmrwI6G0fAGXAYqO4BC74
    g==;
-X-IronPort-AV: E=McAfee;i="6500,9779,10499"; a="304038150"
+X-IronPort-AV: E=McAfee;i="6500,9779,10499"; a="285691303"
 X-IronPort-AV: E=Sophos;i="5.95,182,1661842800"; 
-   d="scan'208";a="304038150"
-Received: from fmsmga005.fm.intel.com ([10.253.24.32])
-  by fmsmga104.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 13 Oct 2022 23:17:09 -0700
+   d="scan'208";a="285691303"
+Received: from fmsmga004.fm.intel.com ([10.253.24.48])
+  by fmsmga107.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 14 Oct 2022 00:07:54 -0700
 X-ExtLoop1: 1
-X-IronPort-AV: E=McAfee;i="6500,9779,10499"; a="956469695"
+X-IronPort-AV: E=McAfee;i="6500,9779,10499"; a="696204366"
 X-IronPort-AV: E=Sophos;i="5.95,182,1661842800"; 
-   d="scan'208";a="956469695"
+   d="scan'208";a="696204366"
 Received: from lkp-server01.sh.intel.com (HELO 2af0a69ca4e0) ([10.239.97.150])
-  by fmsmga005.fm.intel.com with ESMTP; 13 Oct 2022 23:17:07 -0700
+  by fmsmga004.fm.intel.com with ESMTP; 14 Oct 2022 00:07:52 -0700
 Received: from kbuild by 2af0a69ca4e0 with local (Exim 4.96)
         (envelope-from <lkp@intel.com>)
-        id 1ojE0J-0006AI-06;
-        Fri, 14 Oct 2022 06:17:07 +0000
-Date:   Fri, 14 Oct 2022 14:16:34 +0800
+        id 1ojEnP-0006E1-29;
+        Fri, 14 Oct 2022 07:07:51 +0000
+Date:   Fri, 14 Oct 2022 15:07:15 +0800
 From:   kernel test robot <lkp@intel.com>
-To:     Carlos Bilbao <carlos.bilbao@amd.com>, corbet@lwn.net
-Cc:     kbuild-all@lists.01.org, linux-doc@vger.kernel.org,
-        linux-kernel@vger.kernel.org, carlos.bilbao@amd.com, bilbao@vt.edu,
-        ojeda@kernel.org
-Subject: Re: [PATCH 2/2] Documentation: Add HOWTO Spanish translation into
- rst based build system
-Message-ID: <202210141348.7UGXRUp8-lkp@intel.com>
-References: <20221013184816.354278-3-carlos.bilbao@amd.com>
+To:     Palmer Dabbelt <palmer@rivosinc.com>
+Cc:     kbuild-all@lists.01.org, Ammar Faizi <ammarfaizi2@gnuweeb.org>,
+        GNU/Weeb Mailing List <gwml@vger.gnuweeb.org>,
+        linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org
+Subject: [ammarfaizi2-block:palmer/linux/riscv-hwprobe-v1 1/5] htmldocs:
+ Documentation/riscv/hwprobe.rst:29: WARNING: Field list ends without a blank
+ line; unexpected unindent.
+Message-ID: <202210141520.745Fy66I-lkp@intel.com>
 MIME-Version: 1.0
-Content-Type: multipart/mixed; boundary="nDbCUNWFe7+3bSJn"
+Content-Type: multipart/mixed; boundary="xQvge4wKZQueh2H3"
 Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <20221013184816.354278-3-carlos.bilbao@amd.com>
 X-Spam-Status: No, score=-4.4 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
         DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_MED,
         SPF_HELO_NONE,SPF_NONE,UPPERCASE_50_75 autolearn=ham
@@ -68,28 +65,18 @@ List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
 
---nDbCUNWFe7+3bSJn
-Content-Type: text/plain; charset=iso-8859-1
+--xQvge4wKZQueh2H3
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
 
-Hi Carlos,
-
-I love your patch! Perhaps something to improve:
-
-[auto build test WARNING on lwn/docs-next]
-[also build test WARNING on linus/master v6.0 next-20221014]
-[If your patch is applied to the wrong git tree, kindly drop us a note.
-And when submitting patch, we suggest to use '--base' as documented in
-https://git-scm.com/docs/git-format-patch#_base_tree_information]
-
-url:    https://github.com/intel-lab-lkp/linux/commits/Carlos-Bilbao/Documentation-Start-Spanish-translation-and-include-HOWTO/20221014-025417
-base:   git://git.lwn.net/linux.git docs-next
+tree:   https://github.com/ammarfaizi2/linux-block palmer/linux/riscv-hwprobe-v1
+head:   ea6ba33fae4f9ca9d13f457ea2ccc8dd9f99d367
+commit: e90cd87a013cc1d11ef869a8871ba45268ec4212 [1/5] RISC-V: Add a syscall for HW probing
 reproduce:
-        # https://github.com/intel-lab-lkp/linux/commit/85ae76004fce3a5a202bd65a506b9b8cac1b5e32
-        git remote add linux-review https://github.com/intel-lab-lkp/linux
-        git fetch --no-tags linux-review Carlos-Bilbao/Documentation-Start-Spanish-translation-and-include-HOWTO/20221014-025417
-        git checkout 85ae76004fce3a5a202bd65a506b9b8cac1b5e32
+        # https://github.com/ammarfaizi2/linux-block/commit/e90cd87a013cc1d11ef869a8871ba45268ec4212
+        git remote add ammarfaizi2-block https://github.com/ammarfaizi2/linux-block
+        git fetch --no-tags ammarfaizi2-block palmer/linux/riscv-hwprobe-v1
+        git checkout e90cd87a013cc1d11ef869a8871ba45268ec4212
         make menuconfig
         # enable CONFIG_COMPILE_TEST, CONFIG_WARN_MISSING_DOCUMENTS, CONFIG_WARN_ABI_ERRORS
         make htmldocs
@@ -99,118 +86,19 @@ If you fix the issue, kindly add following tag where applicable
 
 All warnings (new ones prefixed by >>):
 
->> Documentation/translations/sp_SP/howto.rst:186: WARNING: Title underline too short.
->> Documentation/translations/sp_SP/howto.rst:276: WARNING: Inline emphasis start-string without end-string.
->> Documentation/translations/sp_SP/howto.rst:277: WARNING: Block quote ends without a blank line; unexpected unindent.
->> Documentation/translations/sp_SP/howto.rst:560: WARNING: Bullet list ends without a blank line; unexpected unindent.
+>> Documentation/riscv/hwprobe.rst:29: WARNING: Field list ends without a blank line; unexpected unindent.
 
-vim +186 Documentation/translations/sp_SP/howto.rst
+vim +29 Documentation/riscv/hwprobe.rst
 
-   181	
-   182		make latexdocs
-   183		make epubdocs
-   184	
-   185	Convertirse en un/a desarrollador/a de kernel
- > 186	-------------------------------------------
-   187	
-   188	Si no sabe nada sobre el desarrollo del kernel de Linux, debería consultar
-   189	el proyecto Linux KernelNewbies:
-   190	
-   191		https://kernelnewbies.org
-   192	
-   193	Consiste en una útil lista de correo donde puede preguntar casi cualquier
-   194	tipo de pregunta básica de desarrollo del kernel (asegúrese de buscar en
-   195	los archivos primero, antes de preguntar algo que ya ha sido respondido en
-   196	el pasado.) También tiene un canal IRC que puede usar para hacer preguntas
-   197	en en tiempo real, y una gran cantidad de documentación útil que es útil
-   198	para ir aprendiendo sobre el desarrollo del kernel de Linux.
-   199	
-   200	El sitio web tiene información básica sobre la organización del código,
-   201	subsistemas, y proyectos actuales (tanto dentro como fuera del árbol).
-   202	También describe alguna información logística básica, como cómo compilar
-   203	un kernel y aplicar un parche.
-   204	
-   205	Si no sabe por dónde quiere empezar, pero quieres buscar alguna tarea que
-   206	comenzar a hacer para unirse a la comunidad de desarrollo del kernel,
-   207	acuda al proyecto Linux Kernel Janitor:
-   208	
-   209		https://kernelnewbies.org/KernelJanitors
-   210	
-   211	Es un gran lugar para comenzar. Describe una lista de problemas
-   212	relativamente simples que deben limpiarse y corregirse dentro del codigo
-   213	fuente del kernel de Linux árbol de fuentes. Trabajando con los
-   214	desarrolladores a cargo de este proyecto, aprenderá los conceptos básicos
-   215	para incluir su parche en el árbol del kernel de Linux, y posiblemente
-   216	descubrir en la dirección en que trabajar a continuación, si no tiene ya
-   217	una idea.
-   218	
-   219	Antes de realizar cualquier modificación real al código del kernel de
-   220	Linux, es imperativo entender cómo funciona el código en cuestión. Para
-   221	este propósito, nada es mejor que leerlo directamente (lo más complicado
-   222	está bien comentado), tal vez incluso con la ayuda de herramientas
-   223	especializadas. Una de esas herramientas que se recomienda especialmente
-   224	es el proyecto Linux Cross-Reference, que es capaz de presentar el código
-   225	fuente en un formato de página web indexada y autorreferencial. Una
-   226	excelente puesta al día del repositorio del código del kernel se puede
-   227	encontrar en:
-   228	
-   229		https://elixir.bootlin.com/
-   230	
-   231	El proceso de desarrollo
-   232	------------------------
-   233	
-   234	El proceso de desarrollo del kernel de Linux consiste actualmente de
-   235	diferentes "branches" (ramas) con muchos distintos subsistemas específicos
-   236	a cada una de ellas. Las diferentes ramas son:
-   237	
-   238	  - El código principal de Linus (mainline tree)
-   239	  - Varios árboles estables con múltiples major numbers
-   240	  - Subsistemas específicos
-   241	  - linux-next, para integración y testing
-   242	
-   243	Mainline tree (Árbol principal)
-   244	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-   245	
-   246	El mainline tree es mantenido por Linus Torvalds, y puede encontrarse en
-   247	https://kernel.org o en su repo.  El proceso de desarrollo es el siguiente:
-   248	
-   249	  - Tan pronto como se lanza un nuevo kernel, se abre una ventana de dos
-   250	    semanas, durante este período de tiempo, los maintainers pueden enviar
-   251	    grandes modificaciones a Linus, por lo general los parches que ya se
-   252	    han incluido en el linux-next durante unas semanas. La forma preferida
-   253	    de enviar grandes cambios es usando git (la herramienta de
-   254	    administración de codigo fuente del kernel, más información al respecto
-   255	    en https://git-scm.com/), pero los parches simples también son validos.
-   256	  - Después de dos semanas, se lanza un kernel -rc1 y la atención se centra
-   257	    en hacer que el kernel nuevo lo más estable ("solido") posible. La
-   258	    mayoría de los parches en este punto debe arreglar una regresión. Los
-   259	    errores que siempre han existido no son regresiones, por lo tanto, solo
-   260	    envíe este tipo de correcciones si son importantes. Tenga en cuenta que
-   261	    se podría aceptar un controlador (o sistema de archivos) completamente
-   262	    nuevo después de -rc1 porque no hay riesgo de causar regresiones con
-   263	    tal cambio, siempre y cuando el cambio sea autónomo y no afecte áreas
-   264	    fuera del código que se está agregando. git se puede usar para enviar
-   265	    parches a Linus después de que se lance -rc1, pero los parches también
-   266	    deben ser enviado a una lista de correo pública para su revisión.
-   267	  - Se lanza un nuevo -rc cada vez que Linus considera que el árbol git
-   268	    actual esta en un estado razonablemente sano y adecuado para la prueba.
-   269	    La meta es lanzar un nuevo kernel -rc cada semana.
-   270	  - El proceso continúa hasta que el kernel se considera "listo", y esto
-   271	    puede durar alrededor de 6 semanas.
-   272	
-   273	Vale la pena mencionar lo que Andrew Morton escribió en las listas de
-   274	correo del kernel de Linux, sobre lanzamientos del kernel (traducido):
-   275	
- > 276		*"Nadie sabe cuándo se publicara un nuevo kernel, porque esto sucede
- > 277	    de acuerdo con el estado de bugs (error) percibido, no de acuerdo con
-   278	    una línea temporal preconcebida."*
-   279	
+    27	
+    28	* :RISCV_HWPROBE_KEY_MVENDORID:: Contains the value of :mvendorid:, as per the
+  > 29	  ISA specifications.
 
 -- 
 0-DAY CI Kernel Test Service
 https://01.org/lkp
 
---nDbCUNWFe7+3bSJn
+--xQvge4wKZQueh2H3
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: attachment; filename=config
 
@@ -1828,4 +1716,4 @@ CONFIG_WARN_MISSING_DOCUMENTS=y
 CONFIG_WARN_ABI_ERRORS=y
 # end of Kernel hacking
 
---nDbCUNWFe7+3bSJn--
+--xQvge4wKZQueh2H3--
