@@ -2,207 +2,160 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 77B7C6008EE
-	for <lists+linux-doc@lfdr.de>; Mon, 17 Oct 2022 10:43:50 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 343C76009E2
+	for <lists+linux-doc@lfdr.de>; Mon, 17 Oct 2022 11:05:11 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S229592AbiJQInr (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 17 Oct 2022 04:43:47 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:36508 "EHLO
+        id S230495AbiJQJFJ (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 17 Oct 2022 05:05:09 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:44770 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S229822AbiJQInq (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Mon, 17 Oct 2022 04:43:46 -0400
-Received: from mail-lj1-x235.google.com (mail-lj1-x235.google.com [IPv6:2a00:1450:4864:20::235])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id D6ECE2AC7F
-        for <linux-doc@vger.kernel.org>; Mon, 17 Oct 2022 01:43:43 -0700 (PDT)
-Received: by mail-lj1-x235.google.com with SMTP id a6so13082111ljq.5
-        for <linux-doc@vger.kernel.org>; Mon, 17 Oct 2022 01:43:43 -0700 (PDT)
+        with ESMTP id S230470AbiJQJFH (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Mon, 17 Oct 2022 05:05:07 -0400
+Received: from mail-vs1-xe2f.google.com (mail-vs1-xe2f.google.com [IPv6:2607:f8b0:4864:20::e2f])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id D0EA739133
+        for <linux-doc@vger.kernel.org>; Mon, 17 Oct 2022 02:05:04 -0700 (PDT)
+Received: by mail-vs1-xe2f.google.com with SMTP id k6so10843389vsp.0
+        for <linux-doc@vger.kernel.org>; Mon, 17 Oct 2022 02:05:04 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google;
-        h=content-transfer-encoding:in-reply-to:from:references:cc:to
-         :content-language:subject:user-agent:mime-version:date:message-id
-         :from:to:cc:subject:date:message-id:reply-to;
-        bh=p23jnQNQ6JC6/vxi7zw6GQkHOBG7ZpOlqxBcqeLSsBY=;
-        b=erUNPQmYvqeKh2VbLgBzmizyrnnZC2uQQTGooV4d9SzFHe9PhjXSJP+wx5Q4CsmwAL
-         +L5CkOJnS3sj/u3GC/TAuVjX6bahwzPV/EBPP6DWTEG0zccaEgZHk6uVyfiv8AKjeM/q
-         vdSySjT5io0djVS8dfVGbB5+8ySG2LPhe8zTlFl/nX7UqcqmrUnqM7cImm5BIfSxyaj+
-         OvVBpsAruCn5QZRqcU4h6vQ2cZp/kpoHmDRKodWilfkX6yEuk3Q37L5ILLLKk1GlbBSA
-         dRlEliqqiKHeoLj/BV0q3AnXs2w44pDtYeBV+THjAuYw7phP9D+b7apSaYStTEEjKwsB
-         AxMw==
+        d=bgdev-pl.20210112.gappssmtp.com; s=20210112;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=y08BEzM6DYxdnl2qnEG/br3gYbPALZULbaElMWZPm6A=;
+        b=owqU7fm1s2j12IEDft/JDsVc22SaszQ8Nr/Jqw+665feERL9Pgle2zBej1aIuf9MfK
+         bQiAHpB+/KdA+86G3/NAY/mNQjPMexqiwL62j3U0y3MbvBJ5BQlmegskGxKn7uDdJjSR
+         xmOt/N/TqXsAaryinyTWWPY3X2zpMCQVlD6leE8JRbl+k0bdzff6p7xU42oqNO44xE90
+         aRy8MKjnDY+XH33Ut4mEvoaC+OfyX6sPbNLIK1OIPVYr4bbxBMDyxDFgWaI07gCEwh4+
+         1BnqiXXedgdCaKJmrqc4e5MwJyQwzFluDReccwc3+ncM7Kx4blWXvUAAvvoIZrxcjmxs
+         5Ctg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=content-transfer-encoding:in-reply-to:from:references:cc:to
-         :content-language:subject:user-agent:mime-version:date:message-id
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=p23jnQNQ6JC6/vxi7zw6GQkHOBG7ZpOlqxBcqeLSsBY=;
-        b=U1RLKIyDswN4lxrAGBUjI0SJ5ksFMSj/excJjhOXYaRjRV+UsHfSNsUF1698PrGCYz
-         U6QN6uxkbmJMv5w3qqkSjIb8vNBQXHxliUpyXTtE6A5TFw6HQdg5JqPfcHeLt/1A1uJF
-         +qpTlzKRiva8D0o/okbfWvfRfZTK99x5LdXv1SaWiUKllFkO5FZyaPF1kigyGfAIS4eR
-         4E9/7p+ryF/BHk1G/wlzbQ/mXM5aMcOPhuoOUJEzRuQCVohGM6Ru9ao860fuCLrANQa6
-         It3xk5TryIYg5D5ZfhJHaTq00E/ndwkf/bSZhtKeRnWyGYpm4gleJNHwh8NLK76asMjH
-         CnSA==
-X-Gm-Message-State: ACrzQf2a4rGNAo41e1kSl4ubV/UqamUrz6Zhi2Cv49cMXAHkiG2BMx94
-        UGXVNqHnTvBhcuC3b4n2kRF3pA==
-X-Google-Smtp-Source: AMsMyM4+l6WqvfUjCX8XWsHsk6YAn7bdpDsUTToKjUg99qgXfKxK1XzYx4rgrLg29QGkKJDql77plw==
-X-Received: by 2002:a05:651c:983:b0:26c:1c6b:8473 with SMTP id b3-20020a05651c098300b0026c1c6b8473mr3478239ljq.341.1665996222210;
-        Mon, 17 Oct 2022 01:43:42 -0700 (PDT)
-Received: from [10.10.15.130] ([192.130.178.91])
-        by smtp.gmail.com with ESMTPSA id r3-20020a2ea383000000b0026faf7bfa62sm1404744lje.76.2022.10.17.01.43.41
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Mon, 17 Oct 2022 01:43:41 -0700 (PDT)
-Message-ID: <a4a8557e-3fe7-356c-9434-01263f6d9771@linaro.org>
-Date:   Mon, 17 Oct 2022 11:43:41 +0300
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=y08BEzM6DYxdnl2qnEG/br3gYbPALZULbaElMWZPm6A=;
+        b=8ED1QwPvUg7CV0ZQ3P+MsnssEvX6TgWLWvYdvVo1htfYUTWTyMr9XGEDF0dfcvbpky
+         rN9rdvyXNXKGpsftCau8nkRe2gYQQSpWdjTbbZpoku/DFNRhKX93JB6+2gmWzv5Y1FGZ
+         aAm++Q8vVbHo1UW6CaoHymMWxNtCrtuK/1wPCEfksqK1AhRxSlEVUX2pJYzQxddVK75o
+         3gK4zufJUpSKn8cxtGxFIdYHObJOVbefz1QuCJlTCrlqSL4yoOcDMze0hc0CUfTeEmrw
+         pwKvwKaPgWreOrqcS6DbfTkixRSBz73rgg9wXhn8YoXTpbMl9NVuZGLiJn/eBqTgW8de
+         j6cA==
+X-Gm-Message-State: ACrzQf3CyndRNlKNcU5rfYTGI568HUFELd8TDXn773v0rtG9oPzhsOcq
+        PIiXnvwSfHG5nJHhEZXeCaptnrdpbRB0v77ImOB5rw==
+X-Google-Smtp-Source: AMsMyM5H7wjhZ2SfnPL+DgBR4vQWcXymrvWDmK0+/tG6rD0Ctq0lVpYpH41QUP9UKOzDFcuWrlXSz6JRhwihdhHs9r8=
+X-Received: by 2002:a67:ac09:0:b0:39a:eab8:a3a6 with SMTP id
+ v9-20020a67ac09000000b0039aeab8a3a6mr3689598vse.9.1665997502795; Mon, 17 Oct
+ 2022 02:05:02 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.3.2
-Subject: Re: [PATCH v5 09/13] mailbox: Add Gunyah message queue mailbox
-Content-Language: en-GB
-To:     Elliot Berman <quic_eberman@quicinc.com>,
-        Bjorn Andersson <quic_bjorande@quicinc.com>,
-        Jassi Brar <jassisinghbrar@gmail.com>
-Cc:     Murali Nalajala <quic_mnalajal@quicinc.com>,
-        Trilok Soni <quic_tsoni@quicinc.com>,
-        Srivatsa Vaddagiri <quic_svaddagi@quicinc.com>,
-        Carl van Schaik <quic_cvanscha@quicinc.com>,
-        Prakruthi Deepak Heragu <quic_pheragu@quicinc.com>,
-        Andy Gross <agross@kernel.org>,
-        linux-arm-kernel@lists.infradead.org,
-        Mark Rutland <mark.rutland@arm.com>,
-        Lorenzo Pieralisi <lorenzo.pieralisi@arm.com>,
-        Sudeep Holla <sudeep.holla@arm.com>,
-        Marc Zyngier <maz@kernel.org>,
-        Rob Herring <robh+dt@kernel.org>,
-        Krzysztof Kozlowski <krzysztof.kozlowski+dt@linaro.org>,
+References: <cover.1662116601.git.christophe.leroy@csgroup.eu>
+ <CAMRc=MehcpT84-ucLbYmdVTAjT86bNb9NEfV6npCmPZHqbsArw@mail.gmail.com>
+ <b348a306-3043-4ccc-9067-81759ab29143@www.fastmail.com> <CACRpkdbazHcUassRMqZ2oHmama3nWEZ3U3bB-y-3dmo3jgFPWg@mail.gmail.com>
+ <a7cb856c-8a3f-4737-ae9e-b75c306ad88e@www.fastmail.com> <da8e0775-7d3e-d6fa-e1ff-395769d35614@csgroup.eu>
+ <CAMRc=MdNnUS72cSARv8dAVUsujkUM9jyjutJsty9o+=LOkOefg@mail.gmail.com>
+In-Reply-To: <CAMRc=MdNnUS72cSARv8dAVUsujkUM9jyjutJsty9o+=LOkOefg@mail.gmail.com>
+From:   Bartosz Golaszewski <brgl@bgdev.pl>
+Date:   Mon, 17 Oct 2022 11:04:51 +0200
+Message-ID: <CAMRc=MeZUap-h=NZm1L0BfN2=ms6VeOJA+05HPyLq_hE8kVuEQ@mail.gmail.com>
+Subject: Re: [PATCH v2 0/9] gpio: Get rid of ARCH_NR_GPIOS (v2)
+To:     Christophe Leroy <christophe.leroy@csgroup.eu>
+Cc:     Arnd Bergmann <arnd@arndb.de>,
+        Linus Walleij <linus.walleij@linaro.org>,
+        Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
+        Geert Uytterhoeven <geert+renesas@glider.be>,
+        Keerthy <j-keerthy@ti.com>, Russell King <linux@armlinux.org.uk>,
         Jonathan Corbet <corbet@lwn.net>,
-        Will Deacon <will@kernel.org>,
+        Thomas Gleixner <tglx@linutronix.de>,
+        Ingo Molnar <mingo@redhat.com>, Borislav Petkov <bp@alien8.de>,
+        Dave Hansen <dave.hansen@linux.intel.com>,
+        "H. Peter Anvin" <hpa@zytor.com>,
         Catalin Marinas <catalin.marinas@arm.com>,
-        Arnd Bergmann <arnd@arndb.de>,
-        Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
-        devicetree@vger.kernel.org, linux-doc@vger.kernel.org,
-        linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org
-References: <20221011000840.289033-1-quic_eberman@quicinc.com>
- <20221011000840.289033-10-quic_eberman@quicinc.com>
- <38a62751-799d-67ff-68d8-2946f2308e59@linaro.org>
- <c6c32b15-e32e-4362-00fc-e6710dca2546@quicinc.com>
-From:   Dmitry Baryshkov <dmitry.baryshkov@linaro.org>
-In-Reply-To: <c6c32b15-e32e-4362-00fc-e6710dca2546@quicinc.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-Spam-Status: No, score=-2.1 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,NICE_REPLY_A,RCVD_IN_DNSWL_NONE,
-        SPF_HELO_NONE,SPF_PASS autolearn=unavailable autolearn_force=no
-        version=3.4.6
+        Will Deacon <will@kernel.org>,
+        Davide Ciminaghi <ciminaghi@gnudd.com>,
+        Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
+        "open list:GPIO SUBSYSTEM" <linux-gpio@vger.kernel.org>,
+        Linux ARM <linux-arm-kernel@lists.infradead.org>,
+        Linux-Arch <linux-arch@vger.kernel.org>,
+        linux-doc <linux-doc@vger.kernel.org>,
+        "x86@kernel.org" <x86@kernel.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+        DKIM_VALID,RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,SPF_NONE
+        autolearn=unavailable autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On 14/10/2022 01:32, Elliot Berman wrote:
-> 
-> 
-> On 10/12/2022 2:47 PM, Dmitry Baryshkov wrote:
->> On 11/10/2022 03:08, Elliot Berman wrote:
->>> +
->>> +static irqreturn_t gh_msgq_tx_irq_handler(int irq, void *data)
->>> +{
->>> +    struct gunyah_msgq *msgq = data;
->>> +
->>> +    mbox_chan_txdone(gunyah_msgq_chan(msgq), 0);
->>> +
->>> +    return IRQ_HANDLED;
->>> +}
->>> +
->>> +static void gh_msgq_txdone_tasklet(unsigned long data)
->>> +{
->>> +    struct gunyah_msgq *msgq = (struct gunyah_msgq *)data;
->>> +
->>> +    mbox_chan_txdone(gunyah_msgq_chan(msgq), msgq->last_status);
->>
->> I don't quite get this. Why do you need both an IRQ and a tasklet?
->>
-> 
-> I've now tweaked the code comments now as well to explain a bit better.
-> 
-> Gunyah tells us in the hypercall itself whether the message queue is 
-> full. Once the the message queue is full, Gunyah will let us know when 
-> reader starts draining the queue and we can start adding more messages 
-> via the tx_irq.
-> 
-> One point to note: the last message to be sent into the message queue 
-> that makes the queue full can be detected. The hypercall reports that 
-> the message was sent (GH_ERROR_OK) and the "ready" return value is 
-> false. In its current form, the msgq mailbox driver should never make a 
-> send hypercall and get GH_ERROR_MSGQUEUE_FULL because the driver 
-> properly track when the message queue is full.
-> 
-> When mailbox driver reports txdone, the implication is that more 
-> messages can be sent (not just that the message was transmitted). In 
-> typical operation, the msgq mailbox driver can immediately report that 
-> the message was sent and no tx_irq happens because the hypercall returns 
-> GH_ERROR_OK and ready=true. The mailbox framework doesn't allow txdone 
-> directly from the send_data callback. To work around that, Jassi 
-> recommended we use tasklet [1]. In the "atypical" case where message 
-> queue becomes full, we get GH_ERROR_OK and ready=false. In that case, we 
-> don't report txdone right away with the tasklet and instead wait for the 
-> tx_irq to know when more messages can be sent.
+On Fri, Oct 14, 2022 at 4:22 PM Bartosz Golaszewski <brgl@bgdev.pl> wrote:
+>
+> On Fri, Oct 14, 2022 at 4:13 PM Christophe Leroy
+> <christophe.leroy@csgroup.eu> wrote:
+> >
+> > Hi Linus,
+> >
+> > Le 14/09/2022 =C3=A0 15:03, Arnd Bergmann a =C3=A9crit :
+> > > On Wed, Sep 14, 2022, at 2:38 PM, Linus Walleij wrote:
+> > >> On Wed, Sep 7, 2022 at 12:15 PM Arnd Bergmann <arnd@arndb.de> wrote:
+> > >>>>>   drivers/gpio/gpio-sta2x11.c              | 411 ----------------=
+-------
+> > >> (...)
+> > >>> sta2x11 is an x86 driver, so not my area, but I think it would be
+> > >>> best to kill off the entire platform rather than just its gpio
+> > >>> driver, since everything needs to work together and it's clearly
+> > >>> not functional at the moment.
+> > >>>
+> > >>> $ git grep -l STA2X11
+> > >>> Documentation/admin-guide/media/pci-cardlist.rst
+> > >>> arch/x86/Kconfig
+> > >>> arch/x86/include/asm/sta2x11.h
+> > >>> arch/x86/pci/Makefile
+> > >>> arch/x86/pci/sta2x11-fixup.c
+> > >>> drivers/ata/ahci.c
+> > >>> drivers/gpio/Kconfig
+> > >>> drivers/gpio/Makefile
+> > >>> drivers/gpio/gpio-sta2x11.c
+> > >>> drivers/i2c/busses/Kconfig
+> > >>> drivers/media/pci/Makefile
+> > >>> drivers/media/pci/sta2x11/Kconfig
+> > >>> drivers/media/pci/sta2x11/Makefile
+> > >>> drivers/media/pci/sta2x11/sta2x11_vip.c
+> > >>> drivers/media/pci/sta2x11/sta2x11_vip.h
+> > >>> drivers/mfd/Kconfig
+> > >>> drivers/mfd/Makefile
+> > >>> drivers/mfd/sta2x11-mfd.c
+> > >>> include/linux/mfd/sta2x11-mfd.h
+> > >>>
+> > >>> Removing the other sta2x11 bits (mfd, media, x86) should
+> > >>> probably be done through the respective tree, but it would
+> > >>> be good not to forget those.
+> > >>
+> > >> Andy is pretty much default x86 platform device maintainer, maybe
+> > >> he can ACK or brief us on what he knows about the status of
+> > >> STA2x11?
+> > >
+> > > I think the explanation given by Davide and Alessandro
+> > > was rather detailed already:
+> > >
+> > > https://lore.kernel.org/lkml/Yw3LQjhZWmZaU2N1@arcana.i.gnudd.com/
+> > > https://lore.kernel.org/lkml/Yw3DKCuDoPkCaqxE@arcana.i.gnudd.com/
+> > >
+> >
+> > I can't see this series in neither linus tree nor linux-next.
+> >
+> > Following the ACK from Andy + the above explanations from Arnd, do you
+> > plan to merge this series anytime soon ?
+> >
+> > Do you need anything more from me ?
+> >
+> > Thanks
+> > Christophe
+>
+> I will take it after v6.1-rc1 is tagged.
+>
+> Bart
 
-Can we please get some sort of this information into the comments in the 
-source file?
+Now queued.
 
-> 
-> [1]: Tasklet works because send_data is called from mailbox framework 
-> with interrupts disabled. Once interrupts are re-enabled, the txdone is 
-> allowed to happen which is also when tasklet runs.
-> 
->>> +
->>> +    /**
->>> +     * EAGAIN: message didn't send.
->>> +     * ret = 1: message sent, but now the message queue is full and 
->>> we can't send any more msgs.
->>> +     * Either way, don't report that this message is done.
->>> +     */
->>> +    if (ret == -EAGAIN || ret == 1)
->>> +        return ret;
->>
->> '1' doesn't seem to be a valid return code for _send_data.
->>
->> Also it would be logical to return any error here, not just -EAGAIN.
->>
-> 
-> 
-> If I return error to mailbox framework, then the message is stuck: 
-> clients don't know that there was some underlying transport failure. It 
-> would be retried if the client sends another message, but there is no 
-> guarantee that either retrying later would work (what would have 
-> changed?) nor that client would send another message to trigger retry. 
-> If the message is malformed or message queue not correctly set up, 
-> client would never know. Client should be told that the message wasn't 
-> sent.
-
-I see. msg_submit() doesn't propagate the error.
-
-> 
-> 
->>> +int gunyah_msgq_init(struct device *parent, struct gunyah_msgq 
->>> *msgq, struct mbox_client *cl,
->>> +             struct gunyah_resource *tx_ghrsc, struct 
->>> gunyah_resource *rx_ghrsc)
->>
->> Are the message queues allocated/created dynamically or statically? If 
->> the later is true, please use devm_request(_threaded)_irq and 
->> devm_kzalloc.
->>
-> 
-> With the exception of resource manager, message queues are created 
-> dynamically.
-> 
-> P.S. Thanks for all the other suggestions in this and the other patches, 
-> I've applied them.
-> 
-> Thanks,
-> Elliot
-
--- 
-With best wishes
-Dmitry
-
+Bart
