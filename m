@@ -2,73 +2,94 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 235F460094D
-	for <lists+linux-doc@lfdr.de>; Mon, 17 Oct 2022 10:53:15 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 75CBB600C1B
+	for <lists+linux-doc@lfdr.de>; Mon, 17 Oct 2022 12:16:30 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S230354AbiJQIxN (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 17 Oct 2022 04:53:13 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:58866 "EHLO
+        id S230098AbiJQKP6 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 17 Oct 2022 06:15:58 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:55522 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S230379AbiJQIw6 (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Mon, 17 Oct 2022 04:52:58 -0400
-Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.133.124])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 92CBCDF2F
-        for <linux-doc@vger.kernel.org>; Mon, 17 Oct 2022 01:52:38 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-        s=mimecast20190719; t=1665996757;
-        h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-         to:to:cc:cc:mime-version:mime-version:
-         content-transfer-encoding:content-transfer-encoding:
-         in-reply-to:in-reply-to:references:references;
-        bh=E8OMF1kfCQL6TSAt19kE2+qhktCG0TKWCuZL2Wdn5gU=;
-        b=DU7iqRkMRSxPIUEZLI88lB6xTCjrYoWy0MOBBey1KLDUVpvlaP2FOG475Rwf3FuhilYjKs
-        Mqu4M78sJEcABpBthiOHIo5ayMIBcedt+kx/zwTc2m3uKE03zTBb+JpZmTgxX51b75D28T
-        hU80Edgl+I9xxeF7hU8SQOP3RZoi7AE=
-Received: from mail-qk1-f198.google.com (mail-qk1-f198.google.com
- [209.85.222.198]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_128_GCM_SHA256) id
- us-mta-440-v2SB9u-NO5-W5UQkuXo20Q-1; Mon, 17 Oct 2022 04:52:36 -0400
-X-MC-Unique: v2SB9u-NO5-W5UQkuXo20Q-1
-Received: by mail-qk1-f198.google.com with SMTP id az32-20020a05620a172000b006ee8ae138a7so9008011qkb.4
-        for <linux-doc@vger.kernel.org>; Mon, 17 Oct 2022 01:52:36 -0700 (PDT)
+        with ESMTP id S230495AbiJQKPv (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Mon, 17 Oct 2022 06:15:51 -0400
+Received: from mail-ej1-x633.google.com (mail-ej1-x633.google.com [IPv6:2a00:1450:4864:20::633])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 8677B46D88
+        for <linux-doc@vger.kernel.org>; Mon, 17 Oct 2022 03:15:50 -0700 (PDT)
+Received: by mail-ej1-x633.google.com with SMTP id r17so23738345eja.7
+        for <linux-doc@vger.kernel.org>; Mon, 17 Oct 2022 03:15:50 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=google.com; s=20210112;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:from:to:cc:subject:date:message-id:reply-to;
+        bh=FcjnuXRaDiwRJahvKb8RBCSyzSGwOC5LjhLUGe1uDng=;
+        b=hyvfh2EkmGJkje0pk/QxmrMK3wu58HezXpCWZTir75qkSbdgybYs5f9BdEJQ8VRxZo
+         y6aRpYY6PJTNs0keePmRwtJhkNJD/XdF8OsFUhWZ+UwwjrnzDoAYIKRkdVUgvJixyXjW
+         nD/o6Eqw8u2mx1XAbOWJsbL1mUmxxl7uY7YrsW4c+w0aEXLsr3iTAgFzKFCcXNq9JWeD
+         DtktHswPI1Ib69o/b5Xw5PWUIeu21lJtPIx06bfk/qBH1eUXTV/osa+5ULa0LTre2WLP
+         s1m1famLesITF3XC4ZTWNGzXqcgELAkbqC6CXhHknsOgV91Knx2CcUJjk+K6FMwFZKrp
+         i0nw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=E8OMF1kfCQL6TSAt19kE2+qhktCG0TKWCuZL2Wdn5gU=;
-        b=Wf710QQIgnXkHlPuSMQxYONbiNTfSY5jifgc6c3hQyrpzWKIu0utPsc3+mJtLdL6xC
-         1X3/LLD2ULAfYtblW5QG/aCfOsPT0CqhlHfS8CnX0eC1MU3myRH9Ae8IJ43BU8Nlnck9
-         +FTzsvrzbyD/kyCaCSW0LWep4zXADWbscGeYB9kb/o2ScnltO1x0SUn4wP37ICUSrU+D
-         Qg7hnPea0NhBvIIjIifIygp/JFhZSrtt9t0DA9yWRq24SX0W41gkLaxSbm9uu4RnrFCQ
-         6cNs4F4IZf0MTGuj6l7nRsB/BV5uqDsM7gcU/0S2Qs8yTGwfafx6QhYLzu+mVoTY93AJ
-         Uf7A==
-X-Gm-Message-State: ACrzQf1l7jcbqeJTy93S9efcSZuePKoiYSmp3o+fqZo/q/BMalIperxl
-        AtpXH3fq5L5mHvxxxuxIbzFkiANt5vwiX+Gl+foT8p8QDWbNBRRzRruK+h3ELAxOvcVjj5IT//0
-        qGOA7OPFJdF/PhOtRGEm/
-X-Received: by 2002:a05:620a:4311:b0:6d2:6870:c51c with SMTP id u17-20020a05620a431100b006d26870c51cmr6869971qko.566.1665996755505;
-        Mon, 17 Oct 2022 01:52:35 -0700 (PDT)
-X-Google-Smtp-Source: AMsMyM7VlXtMfA6ydXcgr7c3NSYtetj1r8iYgZrHhC8LYDHToIHRIQYdbiqrHx6ZXc+vmu0tN8pmQA==
-X-Received: by 2002:a05:620a:4311:b0:6d2:6870:c51c with SMTP id u17-20020a05620a431100b006d26870c51cmr6869962qko.566.1665996755165;
-        Mon, 17 Oct 2022 01:52:35 -0700 (PDT)
-Received: from nfvsdn-06.testing.baremetal.edge-sites.net (nat-pool-232-132.redhat.com. [66.187.232.132])
-        by smtp.gmail.com with ESMTPSA id a20-20020a05622a065400b0039853b7b771sm7571591qtb.80.2022.10.17.01.52.34
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 17 Oct 2022 01:52:34 -0700 (PDT)
-From:   mtahhan@redhat.com
-To:     bpf@vger.kernel.org, linux-doc@vger.kernel.org
-Cc:     Maryam Tahhan <mtahhan@redhat.com>
-Subject: [PATCH bpf-next v3 1/1] doc: DEVMAPs and XDP_REDIRECT
-Date:   Mon, 17 Oct 2022 05:47:53 -0400
-Message-Id: <20221017094753.1564273-2-mtahhan@redhat.com>
-X-Mailer: git-send-email 2.35.3
-In-Reply-To: <20221017094753.1564273-1-mtahhan@redhat.com>
-References: <20221017094753.1564273-1-mtahhan@redhat.com>
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=FcjnuXRaDiwRJahvKb8RBCSyzSGwOC5LjhLUGe1uDng=;
+        b=Yw1cGCWVrUi6Yfnxc4oxB5toUxbpYrLuioBM6fcUARzIi5rE4OlaShtulpMfLZxnsZ
+         5MAIlCo3cPf7TvkfobiRJmyr70Vb+i/oj5jMQ3GPor/A4acgRg6dzIq9FGSyUl9HN1Lq
+         gRx4te7rcaCp9am/UDwJYUbfJEx44CwIjGl9pdih7R8QT005mQ0lb4DtOZTYCYkGe5Cs
+         yU7QYZbIfehU6HEkMDDTqSJQMWxP9GnXzXHo6KmSLDLOsZali1D2qYjP/6STfmfNGIo3
+         /P4XBBoIJoyBPoRdDKg7zN0gGPozyeax0U8rjJB2K1wNjBI7CqZn4fUS9/FHhb8sCW6e
+         ePWQ==
+X-Gm-Message-State: ACrzQf39GX3HUnJ/M9DmJD0LS71Cpj1i6KDRrGDa21HCL84ZEntvHIMz
+        AImLTuQdUAuw8wI7txxnPEBCZwgKgqym3oyxbC7TXFMuJtVdSg==
+X-Google-Smtp-Source: AMsMyM5H+U3jrxyNNUs6l1VKxbOPrLqVbM8TSFTJ1Nj0WQRe3+Q8Gepb86AIPBI4Du2SI+pEA/5+OnPmPbAp2YR5khI=
+X-Received: by 2002:a2e:bd12:0:b0:264:7373:3668 with SMTP id
+ n18-20020a2ebd12000000b0026473733668mr3490403ljq.18.1666001738408; Mon, 17
+ Oct 2022 03:15:38 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Spam-Status: No, score=-2.4 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_NONE,
-        RCVD_IN_MSPIKE_H2,SPF_HELO_NONE,SPF_NONE autolearn=ham
+References: <20220915142913.2213336-1-chao.p.peng@linux.intel.com>
+ <20220915142913.2213336-6-chao.p.peng@linux.intel.com> <CA+EHjTxukqBfaN6D+rPOiX83zkGknHEQ16J0k6GQSdL_-e9C6g@mail.gmail.com>
+ <20221012023516.GA3218049@chaop.bj.intel.com>
+In-Reply-To: <20221012023516.GA3218049@chaop.bj.intel.com>
+From:   Fuad Tabba <tabba@google.com>
+Date:   Mon, 17 Oct 2022 11:15:02 +0100
+Message-ID: <CA+EHjTyGyGL+ox81=jdtoHERtHPV=P7wJub=3j7chdijyq-AgA@mail.gmail.com>
+Subject: Re: [PATCH v8 5/8] KVM: Register/unregister the guest private memory regions
+To:     Chao Peng <chao.p.peng@linux.intel.com>
+Cc:     kvm@vger.kernel.org, linux-kernel@vger.kernel.org,
+        linux-mm@kvack.org, linux-fsdevel@vger.kernel.org,
+        linux-api@vger.kernel.org, linux-doc@vger.kernel.org,
+        qemu-devel@nongnu.org, Paolo Bonzini <pbonzini@redhat.com>,
+        Jonathan Corbet <corbet@lwn.net>,
+        Sean Christopherson <seanjc@google.com>,
+        Vitaly Kuznetsov <vkuznets@redhat.com>,
+        Wanpeng Li <wanpengli@tencent.com>,
+        Jim Mattson <jmattson@google.com>,
+        Joerg Roedel <joro@8bytes.org>,
+        Thomas Gleixner <tglx@linutronix.de>,
+        Ingo Molnar <mingo@redhat.com>, Borislav Petkov <bp@alien8.de>,
+        x86@kernel.org, "H . Peter Anvin" <hpa@zytor.com>,
+        Hugh Dickins <hughd@google.com>,
+        Jeff Layton <jlayton@kernel.org>,
+        "J . Bruce Fields" <bfields@fieldses.org>,
+        Andrew Morton <akpm@linux-foundation.org>,
+        Shuah Khan <shuah@kernel.org>, Mike Rapoport <rppt@kernel.org>,
+        Steven Price <steven.price@arm.com>,
+        "Maciej S . Szmigiero" <mail@maciej.szmigiero.name>,
+        Vlastimil Babka <vbabka@suse.cz>,
+        Vishal Annapurve <vannapurve@google.com>,
+        Yu Zhang <yu.c.zhang@linux.intel.com>,
+        "Kirill A . Shutemov" <kirill.shutemov@linux.intel.com>,
+        luto@kernel.org, jun.nakajima@intel.com, dave.hansen@intel.com,
+        ak@linux.intel.com, david@redhat.com, aarcange@redhat.com,
+        ddutile@redhat.com, dhildenb@redhat.com,
+        Quentin Perret <qperret@google.com>,
+        Michael Roth <michael.roth@amd.com>, mhocko@suse.com,
+        Muchun Song <songmuchun@bytedance.com>, wei.w.wang@intel.com
+Content-Type: text/plain; charset="UTF-8"
+X-Spam-Status: No, score=-17.6 required=5.0 tests=BAYES_00,DKIMWL_WL_MED,
+        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,
+        ENV_AND_HDR_SPF_MATCH,RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,SPF_PASS,
+        USER_IN_DEF_DKIM_WL,USER_IN_DEF_SPF_WL autolearn=unavailable
         autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
@@ -76,282 +97,155 @@ Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-From: Maryam Tahhan <mtahhan@redhat.com>
+Hi,
 
-Add documentation for BPF_MAP_TYPE_DEVMAP and
-BPF_MAP_TYPE_DEVMAP_HASH including kernel version
-introduced, usage and examples.
+> > > +#ifdef CONFIG_HAVE_KVM_PRIVATE_MEM
+> > > +#define KVM_MEM_ATTR_SHARED    0x0001
+> > > +static int kvm_vm_ioctl_set_mem_attr(struct kvm *kvm, gpa_t gpa, gpa_t size,
+> > > +                                    bool is_private)
+> > > +{
+> >
+> > I wonder if this ioctl should be implemented as an arch-specific
+> > ioctl. In this patch it performs some actions that pKVM might not need
+> > or might want to do differently.
+>
+> I think it's doable. We can provide the mem_attr_array kind thing in
+> common code and let arch code decide to use it or not. Currently
+> mem_attr_array is defined in the struct kvm, if those bytes are
+> unnecessary for pKVM it can even be moved to arch definition, but that
+> also loses the potential code sharing for confidential usages in other
+> non-architectures, e.g. if ARM also supports such usage. Or it can be
+> provided through a different CONFIG_ instead of
+> CONFIG_HAVE_KVM_PRIVATE_MEM.
 
-Add documentation that describes XDP_REDIRECT.
+This sounds good. Thank you.
 
-Signed-off-by: Maryam Tahhan <mtahhan@redhat.com>
----
- Documentation/bpf/index.rst      |   1 +
- Documentation/bpf/map_devmap.rst | 189 +++++++++++++++++++++++++++++++
- Documentation/bpf/redirect.rst   |  46 ++++++++
- 3 files changed, 236 insertions(+)
- create mode 100644 Documentation/bpf/map_devmap.rst
- create mode 100644 Documentation/bpf/redirect.rst
 
-diff --git a/Documentation/bpf/index.rst b/Documentation/bpf/index.rst
-index 1b50de1983ee..1088d44634d6 100644
---- a/Documentation/bpf/index.rst
-+++ b/Documentation/bpf/index.rst
-@@ -29,6 +29,7 @@ that goes into great technical depth about the BPF Architecture.
-    clang-notes
-    linux-notes
-    other
-+   redirect
- 
- .. only::  subproject and html
- 
-diff --git a/Documentation/bpf/map_devmap.rst b/Documentation/bpf/map_devmap.rst
-new file mode 100644
-index 000000000000..57997cb2b619
---- /dev/null
-+++ b/Documentation/bpf/map_devmap.rst
-@@ -0,0 +1,189 @@
-+.. SPDX-License-Identifier: GPL-2.0-only
-+.. Copyright (C) 2022 Red Hat, Inc.
-+
-+=================================================
-+BPF_MAP_TYPE_DEVMAP and BPF_MAP_TYPE_DEVMAP_HASH
-+=================================================
-+
-+.. note::
-+   - ``BPF_MAP_TYPE_DEVMAP`` was introduced in kernel version 4.14
-+   - ``BPF_MAP_TYPE_DEVMAP_HASH`` was introduced in kernel version 5.4
-+
-+``BPF_MAP_TYPE_DEVMAP`` and ``BPF_MAP_TYPE_DEVMAP_HASH`` are BPF maps primarily
-+used as backend maps for the XDP BPF helper call ``bpf_redirect_map()``.
-+``BPF_MAP_TYPE_DEVMAP`` is backed by an array that uses the key as
-+the index to lookup a reference to a net device. While ``BPF_MAP_TYPE_DEVMAP_HASH``
-+is backed by a hash table that uses the ``ifindex`` as the key to lookup a reference
-+to a net device. The user provides either <``key``/ ``ifindex``> or
-+<``key``/ ``struct bpf_devmap_val``> pairs to update the maps with new net devices.
-+
-+.. note::
-+    While ``BPF_MAP_TYPE_DEVMAP_HASH`` allows for densely packing the net devices
-+    it comes at the cost of a hash of the key when performing a look up.
-+
-+The setup and packet enqueue/send code is shared between the two types of
-+devmap; only the lookup and insertion is different.
-+
-+Usage
-+=====
-+
-+.. c:function::
-+   long bpf_map_update_elem(struct bpf_map *map, const void *key, const void *value, u64 flags)
-+
-+ Net device entries can be added or updated using the ``bpf_map_update_elem()``
-+ helper. This helper replaces existing elements atomically. The ``value`` parameter
-+ can be ``struct bpf_devmap_val`` or a simple ``int ifindex`` for backwards
-+ compatibility.
-+
-+.. note::
-+    The maps can only be updated from user space and not from a BPF program.
-+
-+.. code-block:: c
-+
-+    struct bpf_devmap_val {
-+        __u32 ifindex;   /* device index */
-+        union {
-+            int   fd;  /* prog fd on map write */
-+            __u32 id;  /* prog id on map read */
-+        } bpf_prog;
-+    };
-+
-+DEVMAPs can associate a program with a device entry by adding a ``bpf_prog.fd``
-+to ``struct bpf_devmap_val``. Programs are run after ``XDP_REDIRECT`` and have
-+access to both Rx device and Tx device. The  program associated with the ``fd``
-+must have type XDP with expected attach type ``xdp_devmap``.
-+When a program is associated with a device index, the program is run on an
-+``XDP_REDIRECT`` and before the buffer is added to the per-cpu queue. Examples
-+of how to attach/use xdp_devmap progs can be found in the kernel selftests:
-+
-+- <kernel_src_path>/tools/testing/selftests/bpf/prog_tests/xdp_devmap_attach.c
-+- <kernel_src_path>/tools/testing/selftests/bpf/progs/test_xdp_with_devmap_helpers.c
-+
-+.. c:function::
-+   void *bpf_map_lookup_elem(struct bpf_map *map, const void *key)
-+
-+net device entries can be retrieved using the ``bpf_map_lookup_elem()``
-+helper.
-+
-+.. c:function::
-+   long bpf_map_delete_elem(struct bpf_map *map, const void *key)
-+
-+net device entries can be deleted using the ``bpf_map_delete_elem()``
-+helper. This helper will return 0 on success, or negative error in case of
-+failure.
-+
-+.. c:function::
-+     long bpf_redirect_map(struct bpf_map *map, u32 key, u64 flags)
-+
-+Redirect the packet to the endpoint referenced by ``map`` at index ``key``.
-+For ``BPF_MAP_TYPE_DEVMAP`` and ``BPF_MAP_TYPE_DEVMAP_HASH`` this map contains
-+references to net devices (for forwarding packets through other ports).
-+
-+The lower two bits of *flags* are used as the return code if the map lookup
-+fails. This is so that the return value can be one of the XDP program return
-+codes up to ``XDP_TX``, as chosen by the caller. The higher bits of ``flags``
-+can be set to ``BPF_F_BROADCAST`` or ``BPF_F_EXCLUDE_INGRESS`` as defined
-+below.
-+
-+With ``BPF_F_BROADCAST`` the packet will be broadcast to all the interfaces
-+in the map, with ``BPF_F_EXCLUDE_INGRESS`` the ingress interface will be excluded
-+from the broadcast.
-+
-+This helper will return ``XDP_REDIRECT`` on success, or the value of the two
-+lower bits of the *flags* argument if the map lookup fails.
-+
-+More information about redirection can be found :doc:`redirect`
-+
-+Examples
-+========
-+
-+Kernel BPF
-+----------
-+
-+The following code snippet shows how to declare a ``BPF_MAP_TYPE_DEVMAP``
-+called tx_port.
-+
-+.. code-block:: c
-+
-+    struct {
-+        __uint(type, BPF_MAP_TYPE_DEVMAP);
-+        __type(key, __u32);
-+        __type(value, __u32);
-+        __uint(max_entries, 256);
-+    } tx_port SEC(".maps");
-+
-+The following code snippet shows how to declare a ``BPF_MAP_TYPE_DEVMAP_HASH``
-+called forward_map.
-+
-+.. code-block:: c
-+
-+    struct {
-+        __uint(type, BPF_MAP_TYPE_DEVMAP_HASH);
-+        __type(key, __u32);
-+        __type(value, struct bpf_devmap_val);
-+        __uint(max_entries, 32);
-+    } forward_map SEC(".maps");
-+
-+.. note::
-+
-+    The value type in the DEVMAP above is a ``struct bpf_devmap_val``
-+
-+The following code snippet shows a simple xdp_redirect_map program. This program
-+would work with a user space program that populates the devmap ``tx_port`` based
-+on ingress ifindexes. The BPF program (below) is redirecting packets using the
-+ingress ifindex as the ``key``.
-+
-+.. code-block:: c
-+
-+    SEC("xdp")
-+    int xdp_redirect_map_func(struct xdp_md *ctx)
-+    {
-+        int index = ctx->ingress_ifindex;
-+
-+        return bpf_redirect_map(&tx_port, index, BPF_F_BROADCAST | BPF_F_EXCLUDE_INGRESS);
-+    }
-+
-+
-+User space
-+----------
-+
-+The following code snippet shows how to update a devmap called ``tx_port``.
-+
-+.. code-block:: c
-+
-+    int update_devmap(int ifindex, int redirect_ifindex)
-+    {
-+        int ret = -1;
-+
-+        ret = bpf_map_update_elem(bpf_map__fd(tx_port), &ifindex, &redirect_ifindex, 0);
-+        if (ret < 0) {
-+            fprintf(stderr, "Failed to update devmap_ value: %s\n",
-+                strerror(errno));
-+        }
-+
-+        return ret;
-+    }
-+
-+The following code snippet shows how to update a hash_devmap called ``forward_map``.
-+
-+.. code-block:: c
-+
-+    int update_devmap(int ifindex, int redirect_ifindex)
-+    {
-+        struct bpf_devmap_val devmap_val = { .ifindex = redirect_ifindex };
-+        int ret = -1;
-+
-+        ret = bpf_map_update_elem(bpf_map__fd(forward_map), &ifindex, &devmap_val, 0);
-+        if (ret < 0) {
-+            fprintf(stderr, "Failed to update devmap_ value: %s\n",
-+                strerror(errno));
-+        }
-+        return ret;
-+    }
-+
-+References
-+===========
-+
-+- https://lwn.net/Articles/728146/
-+- https://git.kernel.org/pub/scm/linux/kernel/git/bpf/bpf-next.git/commit/?id=6f9d451ab1a33728adb72d7ff66a7b374d665176
-+- https://elixir.bootlin.com/linux/latest/source/net/core/filter.c#L4106
-diff --git a/Documentation/bpf/redirect.rst b/Documentation/bpf/redirect.rst
-new file mode 100644
-index 000000000000..5a0377a67ff0
---- /dev/null
-+++ b/Documentation/bpf/redirect.rst
-@@ -0,0 +1,46 @@
-+.. SPDX-License-Identifier: GPL-2.0-only
-+.. Copyright (C) 2022 Red Hat, Inc.
-+
-+============
-+XDP_REDIRECT
-+============
-+
-+XDP_REDIRECT works by a three-step process, implemented as follows:
-+
-+1. The ``bpf_redirect()`` and ``bpf_redirect_map()`` helpers will lookup the
-+   target of the redirect and store it (along with some other metadata) in a
-+   per-CPU ``struct bpf_redirect_info``. This is where the maps above come into
-+   play.
-+
-+2. When the program returns the ``XDP_REDIRECT`` return code, the driver will
-+   call ``xdp_do_redirect()`` which will use the information in ``struct
-+   bpf_redirect_info`` to actually enqueue the frame into a map type-specific
-+   bulk queue structure.
-+
-+3. Before exiting its NAPI poll loop, the driver will call ``xdp_do_flush()``,
-+   which will flush all the different bulk queues, thus completing the
-+   redirect.
-+
-+Pointers to the map entries will be kept around for this whole sequence of
-+steps, protected by RCU. However, there is no top-level ``rcu_read_lock()`` in
-+the core code; instead, the RCU protection relies on everything happening
-+inside a single NAPI poll sequence.
-+
-+.. note::
-+    Not all drivers support transmitting frames after a redirect, and for
-+    those that do, not all of them support non-linear frames. Non-linear xdp
-+    bufs/frames are bufs/frames that contain more than one fragment.
-+
-+XDP_REDIRECT works with the following map types:
-+
-+- BPF_MAP_TYPE_DEVMAP
-+- BPF_MAP_TYPE_DEVMAP_HASH
-+- BPF_MAP_TYPE_CPUMAP
-+- BPF_MAP_TYPE_XSKMAP
-+
-+For more information on these maps, please see the specific map documentation.
-+
-+References
-+===========
-+
-+- https://elixir.bootlin.com/linux/latest/source/net/core/filter.c#L4106
--- 
-2.35.3
+/fuad
 
+> Thanks,
+> Chao
+> >
+> > pKVM tracks the sharing status in the stage-2 page table's software
+> > bits, so it can avoid the overhead of using mem_attr_array.
+> >
+> > Also, this ioctl calls kvm_zap_gfn_range(), as does the invalidation
+> > notifier (introduced in patch 8). For pKVM, the kind of zapping (or
+> > the information conveyed to the hypervisor) might need to be different
+> > depending on the cause; whether it's invalidation or change of sharing
+> > status.
+>
+> >
+> > Thanks,
+> > /fuad
+> >
+> >
+> > > +       gfn_t start, end;
+> > > +       unsigned long index;
+> > > +       void *entry;
+> > > +       int r;
+> > > +
+> > > +       if (size == 0 || gpa + size < gpa)
+> > > +               return -EINVAL;
+> > > +       if (gpa & (PAGE_SIZE - 1) || size & (PAGE_SIZE - 1))
+> > > +               return -EINVAL;
+> > > +
+> > > +       start = gpa >> PAGE_SHIFT;
+> > > +       end = (gpa + size - 1 + PAGE_SIZE) >> PAGE_SHIFT;
+> > > +
+> > > +       /*
+> > > +        * Guest memory defaults to private, kvm->mem_attr_array only stores
+> > > +        * shared memory.
+> > > +        */
+> > > +       entry = is_private ? NULL : xa_mk_value(KVM_MEM_ATTR_SHARED);
+> > > +
+> > > +       for (index = start; index < end; index++) {
+> > > +               r = xa_err(xa_store(&kvm->mem_attr_array, index, entry,
+> > > +                                   GFP_KERNEL_ACCOUNT));
+> > > +               if (r)
+> > > +                       goto err;
+> > > +       }
+> > > +
+> > > +       kvm_zap_gfn_range(kvm, start, end);
+> > > +
+> > > +       return r;
+> > > +err:
+> > > +       for (; index > start; index--)
+> > > +               xa_erase(&kvm->mem_attr_array, index);
+> > > +       return r;
+> > > +}
+> > > +#endif /* CONFIG_HAVE_KVM_PRIVATE_MEM */
+> > > +
+> > >  #ifdef CONFIG_HAVE_KVM_PM_NOTIFIER
+> > >  static int kvm_pm_notifier_call(struct notifier_block *bl,
+> > >                                 unsigned long state,
+> > > @@ -1165,6 +1206,9 @@ static struct kvm *kvm_create_vm(unsigned long type, const char *fdname)
+> > >         spin_lock_init(&kvm->mn_invalidate_lock);
+> > >         rcuwait_init(&kvm->mn_memslots_update_rcuwait);
+> > >         xa_init(&kvm->vcpu_array);
+> > > +#ifdef CONFIG_HAVE_KVM_PRIVATE_MEM
+> > > +       xa_init(&kvm->mem_attr_array);
+> > > +#endif
+> > >
+> > >         INIT_LIST_HEAD(&kvm->gpc_list);
+> > >         spin_lock_init(&kvm->gpc_lock);
+> > > @@ -1338,6 +1382,9 @@ static void kvm_destroy_vm(struct kvm *kvm)
+> > >                 kvm_free_memslots(kvm, &kvm->__memslots[i][0]);
+> > >                 kvm_free_memslots(kvm, &kvm->__memslots[i][1]);
+> > >         }
+> > > +#ifdef CONFIG_HAVE_KVM_PRIVATE_MEM
+> > > +       xa_destroy(&kvm->mem_attr_array);
+> > > +#endif
+> > >         cleanup_srcu_struct(&kvm->irq_srcu);
+> > >         cleanup_srcu_struct(&kvm->srcu);
+> > >         kvm_arch_free_vm(kvm);
+> > > @@ -1541,6 +1588,11 @@ static void kvm_replace_memslot(struct kvm *kvm,
+> > >         }
+> > >  }
+> > >
+> > > +bool __weak kvm_arch_has_private_mem(struct kvm *kvm)
+> > > +{
+> > > +       return false;
+> > > +}
+> > > +
+> > >  static int check_memory_region_flags(const struct kvm_user_mem_region *mem)
+> > >  {
+> > >         u32 valid_flags = KVM_MEM_LOG_DIRTY_PAGES;
+> > > @@ -4703,6 +4755,24 @@ static long kvm_vm_ioctl(struct file *filp,
+> > >                 r = kvm_vm_ioctl_set_memory_region(kvm, &mem);
+> > >                 break;
+> > >         }
+> > > +#ifdef CONFIG_HAVE_KVM_PRIVATE_MEM
+> > > +       case KVM_MEMORY_ENCRYPT_REG_REGION:
+> > > +       case KVM_MEMORY_ENCRYPT_UNREG_REGION: {
+> > > +               struct kvm_enc_region region;
+> > > +               bool set = ioctl == KVM_MEMORY_ENCRYPT_REG_REGION;
+> > > +
+> > > +               if (!kvm_arch_has_private_mem(kvm))
+> > > +                       goto arch_vm_ioctl;
+> > > +
+> > > +               r = -EFAULT;
+> > > +               if (copy_from_user(&region, argp, sizeof(region)))
+> > > +                       goto out;
+> > > +
+> > > +               r = kvm_vm_ioctl_set_mem_attr(kvm, region.addr,
+> > > +                                             region.size, set);
+> > > +               break;
+> > > +       }
+> > > +#endif
+> > >         case KVM_GET_DIRTY_LOG: {
+> > >                 struct kvm_dirty_log log;
+> > >
+> > > @@ -4856,6 +4926,9 @@ static long kvm_vm_ioctl(struct file *filp,
+> > >                 r = kvm_vm_ioctl_get_stats_fd(kvm);
+> > >                 break;
+> > >         default:
+> > > +#ifdef CONFIG_HAVE_KVM_PRIVATE_MEM
+> > > +arch_vm_ioctl:
+> > > +#endif
+> > >                 r = kvm_arch_vm_ioctl(filp, ioctl, arg);
+> > >         }
+> > >  out:
+> > > --
+> > > 2.25.1
+> > >
