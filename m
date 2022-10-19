@@ -2,216 +2,122 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 398696040D4
-	for <lists+linux-doc@lfdr.de>; Wed, 19 Oct 2022 12:23:40 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 5EC346042C1
+	for <lists+linux-doc@lfdr.de>; Wed, 19 Oct 2022 13:10:21 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S230164AbiJSKXh (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 19 Oct 2022 06:23:37 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:41886 "EHLO
+        id S233075AbiJSLKK (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 19 Oct 2022 07:10:10 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:44438 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S230009AbiJSKW7 (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Wed, 19 Oct 2022 06:22:59 -0400
-Received: from smtp-out1.suse.de (smtp-out1.suse.de [IPv6:2001:67c:2178:6::1c])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 27E65C8950;
-        Wed, 19 Oct 2022 03:02:34 -0700 (PDT)
-Received: from relay2.suse.de (relay2.suse.de [149.44.160.134])
-        by smtp-out1.suse.de (Postfix) with ESMTP id CF34633924;
-        Wed, 19 Oct 2022 10:00:25 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-        t=1666173625; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-         mime-version:mime-version:content-type:content-type:
-         in-reply-to:in-reply-to:references:references;
-        bh=iR8uS4Gx4LUrjoOa7cKkotplZsy+7+DUm7VXca8j8Vk=;
-        b=qk52itcPxIK0JYJIi3Lrj54e+dtHIlQeHi6ZYF0FDwxWlMQhelJJNQhmNUS1f86htn1Xka
-        3pgdL7jeDWGAv/Xsx519Lwgtk5IQgrsiiCt87uyBNDUZYcXKpnvAr+ZVrDQofc7P5ldqj4
-        6qPVodH8VgXZUIZ4NmbL7RdzPT2GDiM=
-Received: from suse.cz (unknown [10.100.201.202])
-        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
-        (No client certificate requested)
-        by relay2.suse.de (Postfix) with ESMTPS id 3E4AF2C142;
-        Wed, 19 Oct 2022 10:00:24 +0000 (UTC)
-Date:   Wed, 19 Oct 2022 12:00:23 +0200
-From:   Petr Mladek <pmladek@suse.com>
-To:     Russell King <rmk+kernel@armlinux.org.uk>
-Cc:     Arnd Bergmann <arnd@arndb.de>, Lee Jones <lee@kernel.org>,
-        Linus Walleij <linus.walleij@linaro.org>,
-        Alyssa Rosenzweig <alyssa@rosenzweig.io>,
-        Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
-        asahi@lists.linux.dev, Bartosz Golaszewski <brgl@bgdev.pl>,
-        devicetree@vger.kernel.org, Hector Martin <marcan@marcan.st>,
-        Jonathan Corbet <corbet@lwn.net>,
-        Krzysztof Kozlowski <krzysztof.kozlowski+dt@linaro.org>,
-        linux-arm-kernel@lists.infradead.org, linux-doc@vger.kernel.org,
-        linux-gpio@vger.kernel.org,
-        Rasmus Villemoes <linux@rasmusvillemoes.dk>,
-        Rob Herring <robh+dt@kernel.org>,
-        Sergey Senozhatsky <senozhatsky@chromium.org>,
-        Steven Rostedt <rostedt@goodmis.org>,
-        Sven Peter <sven@svenpeter.dev>
-Subject: Re: [PATCH 4/7] lib/vsprintf: Add support for generic FOURCCs by
- extending %p4cc
-Message-ID: <Y0/Kt9CW5vYcxHhK@alley>
-References: <YxdInl2qzQWM+3bs@shell.armlinux.org.uk>
- <E1oVYUS-005CmS-IA@rmk-PC.armlinux.org.uk>
-MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <E1oVYUS-005CmS-IA@rmk-PC.armlinux.org.uk>
-X-Spam-Status: No, score=-2.8 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_LOW,SPF_HELO_NONE,
-        SPF_PASS autolearn=ham autolearn_force=no version=3.4.6
+        with ESMTP id S234758AbiJSLJK (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Wed, 19 Oct 2022 07:09:10 -0400
+Received: from out30-56.freemail.mail.aliyun.com (out30-56.freemail.mail.aliyun.com [115.124.30.56])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 97B4817FD5D;
+        Wed, 19 Oct 2022 03:37:59 -0700 (PDT)
+X-Alimail-AntiSpam: AC=PASS;BC=-1|-1;BR=01201311R111e4;CH=green;DM=||false|;DS=||;FP=0|-1|-1|-1|0|-1|-1|-1;HT=ay29a033018046059;MF=xianting.tian@linux.alibaba.com;NM=1;PH=DS;RN=25;SR=0;TI=SMTPD_---0VSaNssl_1666175795;
+Received: from localhost.localdomain(mailfrom:xianting.tian@linux.alibaba.com fp:SMTPD_---0VSaNssl_1666175795)
+          by smtp.aliyun-inc.com;
+          Wed, 19 Oct 2022 18:36:36 +0800
+From:   Xianting Tian <xianting.tian@linux.alibaba.com>
+To:     paul.walmsley@sifive.com, palmer@dabbelt.com,
+        aou@eecs.berkeley.edu, anup@brainfault.org, heiko@sntech.de,
+        guoren@kernel.org, mick@ics.forth.gr,
+        alexandre.ghiti@canonical.com, bhe@redhat.com, vgoyal@redhat.com,
+        dyoung@redhat.com, corbet@lwn.net, Conor.Dooley@microchip.com,
+        bagasdotme@gmail.com, k-hagio-ab@nec.com, lijiang@redhat.com
+Cc:     kexec@lists.infradead.org, linux-doc@vger.kernel.org,
+        linux-riscv@lists.infradead.org, linux-kernel@vger.kernel.org,
+        crash-utility@redhat.com, heinrich.schuchardt@canonical.com,
+        hschauhan@nulltrace.org, yixun.lan@gmail.com,
+        Xianting Tian <xianting.tian@linux.alibaba.com>
+Subject: [PATCH V4 1/2] RISC-V: Add arch_crash_save_vmcoreinfo support
+Date:   Wed, 19 Oct 2022 18:36:22 +0800
+Message-Id: <20221019103623.7008-2-xianting.tian@linux.alibaba.com>
+X-Mailer: git-send-email 2.17.1
+In-Reply-To: <20221019103623.7008-1-xianting.tian@linux.alibaba.com>
+References: <20221019103623.7008-1-xianting.tian@linux.alibaba.com>
+X-Spam-Status: No, score=-9.9 required=5.0 tests=BAYES_00,
+        ENV_AND_HDR_SPF_MATCH,RCVD_IN_DNSWL_NONE,RCVD_IN_MSPIKE_H2,
+        SPF_HELO_NONE,SPF_PASS,UNPARSEABLE_RELAY,USER_IN_DEF_SPF_WL
+        autolearn=ham autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Tue 2022-09-06 14:19:44, Russell King wrote:
-> From: Hector Martin <marcan@marcan.st>
-> 
-> %p4cc is designed for DRM/V4L2 FOURCCs with their specific quirks, but
-> it's useful to be able to print generic 4-character codes formatted as
-> an integer. Extend it to add format specifiers for printing generic
-> 32-bit FOURCCs with various endian semantics:
-> 
-> %p4ch   Host-endian
-> %p4cl	Little-endian
-> %p4cb	Big-endian
-> %p4cr	Reverse-endian
-> 
-> The endianness determines how bytes are interpreted as a u32, and the
-> FOURCC is then always printed MSByte-first (this is the opposite of
-> V4L/DRM FOURCCs). This covers most practical cases, e.g. %p4cr would
-> allow printing LSByte-first FOURCCs stored in host endian order
-> (other than the hex form being in character order, not the integer
-> value).
-> 
-> --- a/Documentation/core-api/printk-formats.rst
-> +++ b/Documentation/core-api/printk-formats.rst
-> @@ -625,6 +625,38 @@ Passed by reference.
->  	%p4cc	Y10  little-endian (0x20303159)
->  	%p4cc	NV12 big-endian (0xb231564e)
->  
-> +Generic FourCC code
-> +-------------------
-> +
-> +::
-> +	%p4c[hnbl]	gP00 (0x67503030)
-> +
-> +Print a generic FourCC code, as both ASCII characters and its numerical
-> +value as hexadecimal.
-> +
-> +The additional ``h``, ``r``, ``b``, and ``l`` specifiers are used to specify
-> +host, reversed, big or little endian order data respectively. Host endian
-> +order means the data is interpreted as a 32-bit integer and the most
-> +significant byte is printed first; that is, the character code as printed
-> +matches the byte order stored in memory on big-endian systems, and is reversed
-> +on little-endian systems.
-> +
-> +Passed by reference.
-> +
-> +Examples for a little-endian machine, given &(u32)0x67503030::
-> +
-> +	%p4ch	gP00 (0x67503030)
-> +	%p4cl	gP00 (0x67503030)
-> +	%p4cb	00Pg (0x30305067)
-> +	%p4cr	00Pg (0x30305067)
+Add arch_crash_save_vmcoreinfo(), which exports VM layout(MODULES, VMALLOC,
+VMEMMAP ranges and KERNEL_LINK_ADDR), va bits and ram base for vmcore.
 
-Nit: I would prefer to keep the same order (h,r,b,l) everywhere.
+Default pagetable levels and PAGE_OFFSET aren't same for different kernel
+version as below. For pagetable levels, it sets sv57 by default and falls
+back to setting sv48 at boot time if sv57 is not supported by the hardware.
 
-     I guess that you wanted to show exactly the same results next
-     to each other. But it is not the case on big-endian anyway.
+For ram base, the default value is 0x80200000 for qemu riscv64 env and,
+for example, is 0x200000 on the XuanTie 910 CPU.
 
-> +
-> +Examples for a big-endian machine, given &(u32)0x67503030::
-> +
-> +	%p4ch	gP00 (0x67503030)
-> +	%p4cl	00Pg (0x30305067)
-> +	%p4cb	gP00 (0x67503030)
-> +	%p4cr	00Pg (0x30305067)
+ * Linux Kernel 5.18 ~
+ *      PGTABLE_LEVELS = 5
+ *      PAGE_OFFSET = 0xff60000000000000
+ * Linux Kernel 5.17 ~
+ *      PGTABLE_LEVELS = 4
+ *      PAGE_OFFSET = 0xffffaf8000000000
+ * Linux Kernel 4.19 ~
+ *      PGTABLE_LEVELS = 3
+ *      PAGE_OFFSET = 0xffffffe000000000
 
-Same here.
+Since these configurations change from time to time and version to version,
+it is preferable to export them via vmcoreinfo than to change the crash's
+code frequently, it can simplify the development of crash tool.
 
-> +
->  Thanks
->  ======
->  
-> diff --git a/lib/vsprintf.c b/lib/vsprintf.c
-> index 3c1853a9d1c0..31707499f90f 100644
-> --- a/lib/vsprintf.c
-> +++ b/lib/vsprintf.c
-> @@ -1757,27 +1757,50 @@ char *fourcc_string(char *buf, char *end, const u32 *fourcc,
->  	char output[sizeof("0123 little-endian (0x01234567)")];
->  	char *p = output;
->  	unsigned int i;
-> +	bool pix_fmt = false;
+Signed-off-by: Xianting Tian <xianting.tian@linux.alibaba.com>
+---
+ arch/riscv/kernel/Makefile     |  1 +
+ arch/riscv/kernel/crash_core.c | 23 +++++++++++++++++++++++
+ 2 files changed, 24 insertions(+)
+ create mode 100644 arch/riscv/kernel/crash_core.c
 
-Nit: I would prefer "pixel_fmt". I am not a graphics guy and wondered
-     what "pix" did stands for ;-)
+diff --git a/arch/riscv/kernel/Makefile b/arch/riscv/kernel/Makefile
+index db6e4b1294ba..4cf303a779ab 100644
+--- a/arch/riscv/kernel/Makefile
++++ b/arch/riscv/kernel/Makefile
+@@ -81,6 +81,7 @@ obj-$(CONFIG_KGDB)		+= kgdb.o
+ obj-$(CONFIG_KEXEC_CORE)	+= kexec_relocate.o crash_save_regs.o machine_kexec.o
+ obj-$(CONFIG_KEXEC_FILE)	+= elf_kexec.o machine_kexec_file.o
+ obj-$(CONFIG_CRASH_DUMP)	+= crash_dump.o
++obj-$(CONFIG_CRASH_CORE)	+= crash_core.o
+ 
+ obj-$(CONFIG_JUMP_LABEL)	+= jump_label.o
+ 
+diff --git a/arch/riscv/kernel/crash_core.c b/arch/riscv/kernel/crash_core.c
+new file mode 100644
+index 000000000000..3e889d0ed7bd
+--- /dev/null
++++ b/arch/riscv/kernel/crash_core.c
+@@ -0,0 +1,23 @@
++// SPDX-License-Identifier: GPL-2.0-only
++
++#include <linux/crash_core.h>
++#include <linux/pagemap.h>
++
++void arch_crash_save_vmcoreinfo(void)
++{
++	VMCOREINFO_NUMBER(VA_BITS);
++	VMCOREINFO_NUMBER(phys_ram_base);
++
++	vmcoreinfo_append_str("NUMBER(PAGE_OFFSET)=0x%lx\n", PAGE_OFFSET);
++	vmcoreinfo_append_str("NUMBER(VMALLOC_START)=0x%lx\n", VMALLOC_START);
++	vmcoreinfo_append_str("NUMBER(VMALLOC_END)=0x%lx\n", VMALLOC_END);
++	vmcoreinfo_append_str("NUMBER(VMEMMAP_START)=0x%lx\n", VMEMMAP_START);
++	vmcoreinfo_append_str("NUMBER(VMEMMAP_END)=0x%lx\n", VMEMMAP_END);
++#ifdef CONFIG_64BIT
++	vmcoreinfo_append_str("NUMBER(MODULES_VADDR)=0x%lx\n", MODULES_VADDR);
++	vmcoreinfo_append_str("NUMBER(MODULES_END)=0x%lx\n", MODULES_END);
++#endif
++
++	if (IS_ENABLED(CONFIG_64BIT))
++		vmcoreinfo_append_str("NUMBER(KERNEL_LINK_ADDR)=0x%lx\n", KERNEL_LINK_ADDR);
++}
+-- 
+2.17.1
 
->  	u32 orig, val;
->  
-> -	if (fmt[1] != 'c' || fmt[2] != 'c')
-> +	if (fmt[1] != 'c')
->  		return error_string(buf, end, "(%p4?)", spec);
->  
->  	if (check_pointer(&buf, end, fourcc, spec))
->  		return buf;
->  
->  	orig = get_unaligned(fourcc);
-> -	val = orig & ~BIT(31);
-> +	switch (fmt[2]) {
-> +	case 'h':
-> +		val = orig;
-> +		break;
-> +	case 'r':
-> +		val = orig = swab32(orig);
-> +		break;
-> +	case 'l':
-> +		val = orig = le32_to_cpu(orig);
-> +		break;
-> +	case 'b':
-> +		val = orig = be32_to_cpu(orig);
-> +		break;
-> +	case 'c':
-> +		/* Pixel formats are printed LSB-first */
-> +		val = swab32(orig & ~BIT(31));
-> +		pix_fmt = true;
-> +		break;
-> +	default:
-> +		return error_string(buf, end, "(%p4?)", spec);
-> +	}
->  
->  	for (i = 0; i < sizeof(u32); i++) {
-> -		unsigned char c = val >> (i * 8);
-> +		unsigned char c = val >> ((3 - i) * 8);
-
-This hardcodes '3' but the for-cycle uses i < sizeof(u32).
-We should be consistent.
-
-A solution would be:
-
-	int i;
-
-	for (i = sizeof(u32); --i >= 0;) {
-		unsigned char c = val >> (i * 8);
-
-
->  		/* Print non-control ASCII characters as-is, dot otherwise */
->  		*p++ = isascii(c) && isprint(c) ? c : '.';
->  	}
->  
-> -	*p++ = ' ';
-> -	strcpy(p, orig & BIT(31) ? "big-endian" : "little-endian");
-> -	p += strlen(p);
-> +	if (pix_fmt) {
-> +		*p++ = ' ';
-> +		strcpy(p, orig & BIT(31) ? "big-endian" : "little-endian");
-> +		p += strlen(p);
-> +	}
->  
->  	*p++ = ' ';
->  	*p++ = '(';
-
-Best Regards,
-Petr
