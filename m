@@ -2,71 +2,183 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id DCC60604279
-	for <lists+linux-doc@lfdr.de>; Wed, 19 Oct 2022 13:05:19 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 11EFF604455
+	for <lists+linux-doc@lfdr.de>; Wed, 19 Oct 2022 14:02:07 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S231989AbiJSLFR (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 19 Oct 2022 07:05:17 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:48482 "EHLO
+        id S229840AbiJSMCD (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 19 Oct 2022 08:02:03 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:36204 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S234528AbiJSLDl (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Wed, 19 Oct 2022 07:03:41 -0400
-Received: from out0.migadu.com (out0.migadu.com [IPv6:2001:41d0:2:267::])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id E53E86113A;
-        Wed, 19 Oct 2022 03:32:50 -0700 (PDT)
-Date:   Wed, 19 Oct 2022 16:58:36 +0800
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linux.dev; s=key1;
-        t=1666169932;
-        h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-         to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-         content-transfer-encoding:content-transfer-encoding:
-         in-reply-to:in-reply-to:references:references;
-        bh=BaRL+rjTJsmOJb/VyyXV+tNvfFHDLLSD+t7SWsuJOyc=;
-        b=etBwW3ffferd/8DWFXSEAx0VUG+1A7KFvDsM53SyN8Lb8S+QRRdHk+HxkL1Ggs7dmMIDgz
-        KZdzjxqmZw9rSlINpUXdCiNNiqUucXDLqu8TKQfBYPuvgHPWXn6o6AAzdsriRHK0PRCuBE
-        3y9zbsIwMZerUekIaddPratNZYz71e4=
-X-Report-Abuse: Please report any abuse attempt to abuse@migadu.com and include these headers.
-From:   Wu XiangCheng <wu.xiangcheng@linux.dev>
-To:     Yanteng Si <siyanteng@loongson.cn>
-Cc:     alexs@kernel.org, seakeel@gmail.com, corbet@lwn.net,
-        ojeda@kernel.org, boqun.feng@gmail.com, wedsonaf@gmail.com,
-        gary@garyguo.net, bjorn3_gh@protonmail.com,
-        rust-for-linux@vger.kernel.org, bobwxc@email.cn,
-        chenhuacai@kernel.org, jiaxun.yang@flygoat.com,
-        linux-doc@vger.kernel.org, siyanteng01@gmail.com
-Subject: Re: [PATCH v2 3/5] docs/zh_CN: Add rust/general-information Chinese
- translation
-Message-ID: <Y0+8PHe2tXp9/sHX@bobwxc.mipc>
-References: <cover.1666097959.git.siyanteng@loongson.cn>
- <59496aa23862c41051836de1121a2fcf2a5f1bc5.1666097959.git.siyanteng@loongson.cn>
+        with ESMTP id S231681AbiJSMBj (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Wed, 19 Oct 2022 08:01:39 -0400
+Received: from mail-pf1-x42c.google.com (mail-pf1-x42c.google.com [IPv6:2607:f8b0:4864:20::42c])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 2EEBD42E57
+        for <linux-doc@vger.kernel.org>; Wed, 19 Oct 2022 04:38:43 -0700 (PDT)
+Received: by mail-pf1-x42c.google.com with SMTP id m6so16996308pfb.0
+        for <linux-doc@vger.kernel.org>; Wed, 19 Oct 2022 04:38:43 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=bytedance-com.20210112.gappssmtp.com; s=20210112;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=lctdt7xKU2W5w8gZ0ZmMK8o6iNtjlEm1kVR6gDr/Tqs=;
+        b=azz7whhIofhV6dNq+IvcUJPAUjbCNfvl3vKJyPjW72wvWGyw6jPg/RkDpwHAbCv3W9
+         94AnUE69DuI7RM7xKmSYYooKJpF5y/N8mX2vGj4N5BGTM8LkQSI2lq+RrsvMv+4HE0PK
+         5WR3deCHsMafGs7KLtXai79FiSkJjtKLr3lTapM3hALcVr0S8/eG72ZDZbhfXk2WKqwJ
+         hVkomDg6F8zd3d5N0fltw4sn1YLzVwu+Z7udqrLY0Mj0s53vNEq1xo5r+8rZ2IGoVus9
+         txu7TDUHmcflBVcTFAoglOSpL1Xv3XFf8K96Qva2ybjItMKC4TmwHS2xnRyPkK1DPICQ
+         WvCg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=lctdt7xKU2W5w8gZ0ZmMK8o6iNtjlEm1kVR6gDr/Tqs=;
+        b=AX92krYZ1GuNVllCEhhHICJHUEp/lLI0xqft6TWLuA+T6BtlLiv32sNeowC5pIbWTB
+         kRHxvWYI0XHfegUCsrBV+hvE+yvmifR2bR21dZnuq9wr6YSjB+9zJX8/PRclF+S1vbYC
+         EJFyAjJjpqAsftRapYLsQQSynAFNg6zG/a2bUNMTz5AEsUOKk4+1S87ORaUCSBSW+d6/
+         a7DICFK3sSYHBOkbbaLY4n1TKnCF7x3qAQ7yzo/B2r/1Q13KA2kDkENQC9HtNrLbS8Q2
+         rPrFGb+YWeMiDrUK9E67OCaJmqGb4oa1+wXZJaznkLZhJbJDsbKcMOfv8MWj4ejjtljq
+         NlQg==
+X-Gm-Message-State: ACrzQf1LorsPjlfgZ9v5Ij4ss0qvplP+vH9EZDlt6ZnSFHj+0We2gfKw
+        NM+lL5d0hg1kl6j3IoDqSak3WvPhTRspIA==
+X-Google-Smtp-Source: AMsMyM58iub7ESHfa48FrgnOmzaMcWvkgwmAW8caBAentKFSof8Duq0VF1bxr5JfnFXxxIIBSFqH5A==
+X-Received: by 2002:a65:62c7:0:b0:463:9c67:5fe2 with SMTP id m7-20020a6562c7000000b004639c675fe2mr6419990pgv.443.1666171791791;
+        Wed, 19 Oct 2022 02:29:51 -0700 (PDT)
+Received: from C02FG34NMD6R.bytedance.net ([139.177.225.247])
+        by smtp.gmail.com with ESMTPSA id x1-20020a170902ec8100b0017da2798025sm10364877plg.295.2022.10.19.02.29.47
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 19 Oct 2022 02:29:51 -0700 (PDT)
+From:   Albert Huang <huangjie.albert@bytedance.com>
+To:     mike.kravetz@oracle.com
+Cc:     "huangjie.albert" <huangjie.albert@bytedance.com>,
+        Jonathan Corbet <corbet@lwn.net>,
+        Muchun Song <songmuchun@bytedance.com>,
+        Andrew Morton <akpm@linux-foundation.org>,
+        "Aneesh Kumar K.V" <aneesh.kumar@linux.ibm.com>,
+        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
+        linux-mm@kvack.org
+Subject: [PATCH v2] mm: hugetlb: support for shared memory policy
+Date:   Wed, 19 Oct 2022 17:29:25 +0800
+Message-Id: <20221019092928.44146-1-huangjie.albert@bytedance.com>
+X-Mailer: git-send-email 2.37.0 (Apple Git-136)
+In-Reply-To: <Y0mUt84TctGP3BtT@monkey>
+References: <Y0mUt84TctGP3BtT@monkey>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-In-Reply-To: <59496aa23862c41051836de1121a2fcf2a5f1bc5.1666097959.git.siyanteng@loongson.cn>
-X-Migadu-Flow: FLOW_OUT
-X-Spam-Status: No, score=-2.8 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_LOW,SPF_HELO_PASS,
-        SPF_PASS autolearn=ham autolearn_force=no version=3.4.6
+X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+        DKIM_VALID,RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,SPF_PASS
+        autolearn=unavailable autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-2022-10-18 (二) 21:04:23 +0800 Yanteng Si 曰：
-> Translate .../rust/general-information.rst into Chinese.
-> 
-> Signed-off-by: Yanteng Si <siyanteng@loongson.cn>
+From: "huangjie.albert" <huangjie.albert@bytedance.com>
 
-Reviewed-by: Wu XiangCheng <bobwxc@email.cn>
+implement get/set_policy for hugetlb_vm_ops to support the shared policy
+This ensures that the mempolicy of all processes sharing this huge page
+file is consistent.
 
-> ---
->  .../zh_CN/rust/general-information.rst        | 75 +++++++++++++++++++
->  .../translations/zh_CN/rust/index.rst         |  2 +-
->  2 files changed, 76 insertions(+), 1 deletion(-)
->  create mode 100644 Documentation/translations/zh_CN/rust/general-information.rst
+In some scenarios where huge pages are shared:
+if we need to limit the memory usage of vm within node0, so I set qemu's
+mempilciy bind to node0, but if there is a process (such as virtiofsd)
+shared memory with the vm, in this case. If the page fault is triggered
+by virtiofsd, the allocated memory may go to node1 which depends on
+virtiofsd. Although we can use the memory prealloc provided by qemu to
+avoid this issue, but this method will significantly increase the
+creation time of the vm(a few seconds, depending on memory size).
 
+after we hooked up hugetlb_vm_ops(set/get_policy):
+both the shared memory segments created by shmget() with SHM_HUGETLB flag
+and the mmap(MAP_SHARED|MAP_HUGETLB), also support shared policy.
+
+v1->v2:
+1、hugetlb share the memory policy when the vma with the VM_SHARED flag.
+2、update the documentation.
+
+Signed-off-by: huangjie.albert <huangjie.albert@bytedance.com>
+---
+ .../admin-guide/mm/numa_memory_policy.rst     | 20 +++++++++------
+ mm/hugetlb.c                                  | 25 +++++++++++++++++++
+ 2 files changed, 37 insertions(+), 8 deletions(-)
+
+diff --git a/Documentation/admin-guide/mm/numa_memory_policy.rst b/Documentation/admin-guide/mm/numa_memory_policy.rst
+index 5a6afecbb0d0..5672a6c2d2ef 100644
+--- a/Documentation/admin-guide/mm/numa_memory_policy.rst
++++ b/Documentation/admin-guide/mm/numa_memory_policy.rst
+@@ -133,14 +133,18 @@ Shared Policy
+ 	the object share the policy, and all pages allocated for the
+ 	shared object, by any task, will obey the shared policy.
+ 
+-	As of 2.6.22, only shared memory segments, created by shmget() or
+-	mmap(MAP_ANONYMOUS|MAP_SHARED), support shared policy.  When shared
+-	policy support was added to Linux, the associated data structures were
+-	added to hugetlbfs shmem segments.  At the time, hugetlbfs did not
+-	support allocation at fault time--a.k.a lazy allocation--so hugetlbfs
+-	shmem segments were never "hooked up" to the shared policy support.
+-	Although hugetlbfs segments now support lazy allocation, their support
+-	for shared policy has not been completed.
++	As of 2.6.22, only shared memory segments, created by shmget() without
++	SHM_HUGETLB flag or mmap(MAP_ANONYMOUS|MAP_SHARED) without MAP_HUGETLB
++	flag, support shared policy. When shared policy support was added to Linux,
++	the associated data structures were added to hugetlbfs shmem segments.
++	At the time, hugetlbfs did not support allocation at fault time--a.k.a
++	lazy allocation--so hugetlbfs shmem segments were never "hooked up" to
++	the shared policy support. Although hugetlbfs segments now support lazy
++	allocation, their support for shared policy has not been completed.
++
++	after we hooked up hugetlb_vm_ops(set/get_policy):
++	both the shared memory segments created by shmget() with SHM_HUGETLB flag
++	and mmap(MAP_SHARED|MAP_HUGETLB), also support shared policy.
+ 
+ 	As mentioned above in :ref:`VMA policies <vma_policy>` section,
+ 	allocations of page cache pages for regular files mmap()ed
+diff --git a/mm/hugetlb.c b/mm/hugetlb.c
+index 87d875e5e0a9..fc7038931832 100644
+--- a/mm/hugetlb.c
++++ b/mm/hugetlb.c
+@@ -4632,6 +4632,27 @@ static vm_fault_t hugetlb_vm_op_fault(struct vm_fault *vmf)
+ 	return 0;
+ }
+ 
++#ifdef CONFIG_NUMA
++int hugetlb_vm_op_set_policy(struct vm_area_struct *vma, struct mempolicy *mpol)
++{
++	struct inode *inode = file_inode(vma->vm_file);
++
++	if (!(vma->vm_flags & VM_SHARED))
++		return 0;
++
++	return mpol_set_shared_policy(&HUGETLBFS_I(inode)->policy, vma, mpol);
++}
++
++struct mempolicy *hugetlb_vm_op_get_policy(struct vm_area_struct *vma, unsigned long addr)
++{
++	struct inode *inode = file_inode(vma->vm_file);
++	pgoff_t index;
++
++	index = ((addr - vma->vm_start) >> PAGE_SHIFT) + vma->vm_pgoff;
++	return mpol_shared_policy_lookup(&HUGETLBFS_I(inode)->policy, index);
++}
++#endif
++
+ /*
+  * When a new function is introduced to vm_operations_struct and added
+  * to hugetlb_vm_ops, please consider adding the function to shm_vm_ops.
+@@ -4645,6 +4666,10 @@ const struct vm_operations_struct hugetlb_vm_ops = {
+ 	.close = hugetlb_vm_op_close,
+ 	.may_split = hugetlb_vm_op_split,
+ 	.pagesize = hugetlb_vm_op_pagesize,
++#ifdef CONFIG_NUMA
++	.set_policy = hugetlb_vm_op_set_policy,
++	.get_policy = hugetlb_vm_op_get_policy,
++#endif
+ };
+ 
+ static pte_t make_huge_pte(struct vm_area_struct *vma, struct page *page,
 -- 
-Wu XiangCheng	0x32684A40BCA7AEA7
+2.37.0 (Apple Git-136)
 
