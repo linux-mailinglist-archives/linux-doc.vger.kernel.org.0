@@ -2,199 +2,216 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id D998260432C
-	for <lists+linux-doc@lfdr.de>; Wed, 19 Oct 2022 13:29:43 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 398696040D4
+	for <lists+linux-doc@lfdr.de>; Wed, 19 Oct 2022 12:23:40 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S232114AbiJSL3l (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 19 Oct 2022 07:29:41 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:34492 "EHLO
+        id S230164AbiJSKXh (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 19 Oct 2022 06:23:37 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:41886 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S233269AbiJSL3Y (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Wed, 19 Oct 2022 07:29:24 -0400
-Received: from relay.virtuozzo.com (relay.virtuozzo.com [130.117.225.111])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 07BE316C211;
-        Wed, 19 Oct 2022 04:03:32 -0700 (PDT)
-Received: from dev011.ch-qa.sw.ru ([172.29.1.16])
-        by relay.virtuozzo.com with esmtp (Exim 4.95)
-        (envelope-from <alexander.atanasov@virtuozzo.com>)
-        id 1ol5li-00B8K8-3z;
-        Wed, 19 Oct 2022 11:56:36 +0200
-From:   Alexander Atanasov <alexander.atanasov@virtuozzo.com>
-To:     Jonathan Corbet <corbet@lwn.net>
-Cc:     kernel@openvz.org,
-        Alexander Atanasov <alexander.atanasov@virtuozzo.com>,
-        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org
-Subject: [RFC PATCH v5 8/8] documentation: create a document about how balloon drivers operate
-Date:   Wed, 19 Oct 2022 12:56:20 +0300
-Message-Id: <20221019095620.124909-9-alexander.atanasov@virtuozzo.com>
-X-Mailer: git-send-email 2.31.1
-In-Reply-To: <20221019095620.124909-1-alexander.atanasov@virtuozzo.com>
-References: <20221019095620.124909-1-alexander.atanasov@virtuozzo.com>
+        with ESMTP id S230009AbiJSKW7 (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Wed, 19 Oct 2022 06:22:59 -0400
+Received: from smtp-out1.suse.de (smtp-out1.suse.de [IPv6:2001:67c:2178:6::1c])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 27E65C8950;
+        Wed, 19 Oct 2022 03:02:34 -0700 (PDT)
+Received: from relay2.suse.de (relay2.suse.de [149.44.160.134])
+        by smtp-out1.suse.de (Postfix) with ESMTP id CF34633924;
+        Wed, 19 Oct 2022 10:00:25 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
+        t=1666173625; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+         mime-version:mime-version:content-type:content-type:
+         in-reply-to:in-reply-to:references:references;
+        bh=iR8uS4Gx4LUrjoOa7cKkotplZsy+7+DUm7VXca8j8Vk=;
+        b=qk52itcPxIK0JYJIi3Lrj54e+dtHIlQeHi6ZYF0FDwxWlMQhelJJNQhmNUS1f86htn1Xka
+        3pgdL7jeDWGAv/Xsx519Lwgtk5IQgrsiiCt87uyBNDUZYcXKpnvAr+ZVrDQofc7P5ldqj4
+        6qPVodH8VgXZUIZ4NmbL7RdzPT2GDiM=
+Received: from suse.cz (unknown [10.100.201.202])
+        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+        (No client certificate requested)
+        by relay2.suse.de (Postfix) with ESMTPS id 3E4AF2C142;
+        Wed, 19 Oct 2022 10:00:24 +0000 (UTC)
+Date:   Wed, 19 Oct 2022 12:00:23 +0200
+From:   Petr Mladek <pmladek@suse.com>
+To:     Russell King <rmk+kernel@armlinux.org.uk>
+Cc:     Arnd Bergmann <arnd@arndb.de>, Lee Jones <lee@kernel.org>,
+        Linus Walleij <linus.walleij@linaro.org>,
+        Alyssa Rosenzweig <alyssa@rosenzweig.io>,
+        Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
+        asahi@lists.linux.dev, Bartosz Golaszewski <brgl@bgdev.pl>,
+        devicetree@vger.kernel.org, Hector Martin <marcan@marcan.st>,
+        Jonathan Corbet <corbet@lwn.net>,
+        Krzysztof Kozlowski <krzysztof.kozlowski+dt@linaro.org>,
+        linux-arm-kernel@lists.infradead.org, linux-doc@vger.kernel.org,
+        linux-gpio@vger.kernel.org,
+        Rasmus Villemoes <linux@rasmusvillemoes.dk>,
+        Rob Herring <robh+dt@kernel.org>,
+        Sergey Senozhatsky <senozhatsky@chromium.org>,
+        Steven Rostedt <rostedt@goodmis.org>,
+        Sven Peter <sven@svenpeter.dev>
+Subject: Re: [PATCH 4/7] lib/vsprintf: Add support for generic FOURCCs by
+ extending %p4cc
+Message-ID: <Y0/Kt9CW5vYcxHhK@alley>
+References: <YxdInl2qzQWM+3bs@shell.armlinux.org.uk>
+ <E1oVYUS-005CmS-IA@rmk-PC.armlinux.org.uk>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00,SPF_HELO_NONE,
-        SPF_NONE autolearn=ham autolearn_force=no version=3.4.6
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <E1oVYUS-005CmS-IA@rmk-PC.armlinux.org.uk>
+X-Spam-Status: No, score=-2.8 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_LOW,SPF_HELO_NONE,
+        SPF_PASS autolearn=ham autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Describe ballooning and how it works. Explain the two values
-and why they are there.
-Point the places where a user can see more balloon information and
-how each driver operates.
+On Tue 2022-09-06 14:19:44, Russell King wrote:
+> From: Hector Martin <marcan@marcan.st>
+> 
+> %p4cc is designed for DRM/V4L2 FOURCCs with their specific quirks, but
+> it's useful to be able to print generic 4-character codes formatted as
+> an integer. Extend it to add format specifiers for printing generic
+> 32-bit FOURCCs with various endian semantics:
+> 
+> %p4ch   Host-endian
+> %p4cl	Little-endian
+> %p4cb	Big-endian
+> %p4cr	Reverse-endian
+> 
+> The endianness determines how bytes are interpreted as a u32, and the
+> FOURCC is then always printed MSByte-first (this is the opposite of
+> V4L/DRM FOURCCs). This covers most practical cases, e.g. %p4cr would
+> allow printing LSByte-first FOURCCs stored in host endian order
+> (other than the hex form being in character order, not the integer
+> value).
+> 
+> --- a/Documentation/core-api/printk-formats.rst
+> +++ b/Documentation/core-api/printk-formats.rst
+> @@ -625,6 +625,38 @@ Passed by reference.
+>  	%p4cc	Y10  little-endian (0x20303159)
+>  	%p4cc	NV12 big-endian (0xb231564e)
+>  
+> +Generic FourCC code
+> +-------------------
+> +
+> +::
+> +	%p4c[hnbl]	gP00 (0x67503030)
+> +
+> +Print a generic FourCC code, as both ASCII characters and its numerical
+> +value as hexadecimal.
+> +
+> +The additional ``h``, ``r``, ``b``, and ``l`` specifiers are used to specify
+> +host, reversed, big or little endian order data respectively. Host endian
+> +order means the data is interpreted as a 32-bit integer and the most
+> +significant byte is printed first; that is, the character code as printed
+> +matches the byte order stored in memory on big-endian systems, and is reversed
+> +on little-endian systems.
+> +
+> +Passed by reference.
+> +
+> +Examples for a little-endian machine, given &(u32)0x67503030::
+> +
+> +	%p4ch	gP00 (0x67503030)
+> +	%p4cl	gP00 (0x67503030)
+> +	%p4cb	00Pg (0x30305067)
+> +	%p4cr	00Pg (0x30305067)
 
-Signed-off-by: Alexander Atanasov <alexander.atanasov@virtuozzo.com>
----
- Documentation/mm/balloon.rst | 138 +++++++++++++++++++++++++++++++++++
- 1 file changed, 138 insertions(+)
- create mode 100644 Documentation/mm/balloon.rst
+Nit: I would prefer to keep the same order (h,r,b,l) everywhere.
 
-diff --git a/Documentation/mm/balloon.rst b/Documentation/mm/balloon.rst
-new file mode 100644
-index 000000000000..9fe9e7b228de
---- /dev/null
-+++ b/Documentation/mm/balloon.rst
-@@ -0,0 +1,138 @@
-+===========================================
-+Balloon: usage information visible by guest
-+===========================================
-+Background:
-+===========
-+The ballooning mechanism allows VM guests to reduce their memory size
-+(thus relinquishing memory to the Host) and to increase it back (thus
-+taking back memory from the Host).
-+During OOM guest issues or guest low-performance issues
-+investigations it is important to know if the Host has grabbed some of the
-+Guest memory via the ballooning mechanism.
-+
-+Implementation description:
-+===========================
-+/proc/meminfo::
-+
-+  InflatedTotal:   2097152 kB
-+  InflatedFree:          0 kB
-+
-+The difference comes from the way drivers account for inflated memory:
-+ - Drivers that call adjust_managed_page_count InflateTotal
-+ - Drivers that do NOT call adjust_managed_page_count InflateFree
-+
-+ * It is possible for one driver to operate in both modes depending on config options.
-+
-+
-+The balloon statistics are also printed by show_mem() function, which
-+is called on OOM condition or Alt+SysRQ+m is pressed.
-+The show_mem() string is similar to /proc/meminfo and it is like::
-+
-+  Balloon InflatedTotal:XXXkB InflatedFree:YYYkB
-+
-+Additional balloon information is available via debugfs:
-+ - KVM          features file: /sys/devices/pci\*/\*/virtio\*/features
-+ - Hyper-V balloon guest file: /sys/kernel/debug/hv-balloon
-+ - VMware  balloon guest file: /sys/kernel/debug/vmmemctl
-+
-+KVM balloon
-+-----------
-+The ballooning is implemented via virtio balloon device.
-+Depending on the options the ballooned memory is accounted for in two ways:
-+
-+1. If deflate on OOM is enabled - ballooned memory is accounted as used.
-+2. If deflate on OOM is not enabled - ballooned memory is subtracted
-+   from total RAM.
-+
-+Q: How to check if "deflate on OOM" feature is enabled?
-+A: Check balloon "features" file content.
-+To decipher balloon bits are defined in include/uapi/linux/virtio_balloon.h
-+Currently "deflate on OOM" feature is stored in the 2nd bit::
-+  #define VIRTIO_BALLOON_F_DEFLATE_ON_OOM 2 /* Deflate balloon on OOM */
-+Examples::
-+
-+  Without deflate on OOM:
-+  # cat /sys/devices/pci0000:00/0000:00:03.0/virtio0/features
-+  0100000000000000000000000000110010000000000000000000000000000000
-+  With deflate on OOM:
-+  # cat /sys/devices/pci0000:00/0000:00:03.0/virtio0/features
-+  0110000000000000000000000000110010000000000000000000000000000000
-+How to find virtio balloon device among other virtio devices?
-+(check if the "virtio_balloon" module is loaded)::
-+  # ls -l /sys/bus/virtio/drivers/virtio_balloon/virtio*
-+    /sys/bus/virtio/drivers/virtio_balloon/virtio3 ->
-+        ../../../../devices/pci0000:00/0000:00:07.0/virtio3
-+
-+To check virtio_balloon features::
-+
-+  # cat /sys/bus/virtio/drivers/virtio_balloon/virtio*/features
-+  0110000000000000000000000000110010000000000000000000000000000000
-+Balloon guest statistics output example::
-+
-+  # cat /sys/kernel/debug/virtio-balloon
-+  InflatedTotal: 0 kB
-+  InflatedFree: 0 kB
-+
-+- If "InflatedTotal" is not zero, it means the "deflate on OOM" feature is
-+  **not** set and the provided amount of memory is subtracted from the total RAM
-+  inside the Guest.
-+- If "InflatedFree" is not zero, it means "deflate on OOM" feature is set and
-+  the provided amount of memory is accounted as "used" inside the Guest.
-+- Both "InflatedTotal" and "InflatedFree" cannot be non-zero at the same time.
-+
-+Hyper-V balloon
-+---------------
-+Balloon guest statistics output example::
-+
-+  # cat /sys/kernel/debug/hv-balloon
-+  host_version : 2.0                // Hyper-V version the Guest is running under
-+  capabilities : enabled hot_add
-+  state : 1 (Initialized)
-+  page_size : 4096
-+  pages_added : 0                   // pages that are hot_add-ed to the Guest
-+  pages_onlined : 0                 // pages that are added and then put online
-+                                    // as available/used
-+  pages_ballooned_out : 0           // pages the Host have taken back
-+  vm_pages_commited : 795365        // total pages used by the Guest userspace
-+  total_pages_commited : 977790     // total pages used by the Guest user+kernel
-+  max_dynamic_page_count: 268435456 // maximum pages the Guest can have added
-+                                    // via hot_add
-+Hyper-V balloon driver changes the total RAM size reported by the Guest,
-+thus the "InflatedTotal" counter will be non-zero in memory statistic
-+reported during OOM or upon Alt+SysRQ+m.
-+
-+VMWare balloon
-+---------------
-+Balloon guest statistics output example::
-+
-+  # cat /sys/kernel/debug/vmmemctl
-+  balloon capabilities: 0x1e
-+  used capabilities: 0x6
-+  is resetting: n
-+  target: 0 pages
-+  current: 0 pages
-+  rateSleepAlloc: 2048 pages/sec
-+  timer: 118
-+  doorbell: 0
-+  start: 1 ( 0 failed)
-+  guestType: 1 ( 0 failed)
-+  2m-lock: 0 ( 0 failed)
-+  lock: 0 ( 0 failed)
-+  2m-unlock: 0 ( 0 failed)
-+  unlock: 0 ( 0 failed)
-+  target: 118 ( 0 failed)
-+  prim2mAlloc: 0 ( 0 failed)
-+  primNoSleepAlloc: 0 ( 0 failed)
-+  primCanSleepAlloc: 0 ( 0 failed)
-+  prim2mFree: 0
-+  primFree: 0
-+  err2mAlloc: 0
-+  errAlloc: 0
-+  err2mFree: 0
-+  errFree: 0
-+  doorbellSet: 0
-+  doorbellUnset: 1
-+
-+VMware balloon driver makes ballooned pages accounted as "used" in the
-+Guest OS thus the "InflatedFree" counter will be non-zero in memory
-+the statistic reported during OOM or upon Alt+SysRQ+m.
--- 
-2.31.1
+     I guess that you wanted to show exactly the same results next
+     to each other. But it is not the case on big-endian anyway.
 
+> +
+> +Examples for a big-endian machine, given &(u32)0x67503030::
+> +
+> +	%p4ch	gP00 (0x67503030)
+> +	%p4cl	00Pg (0x30305067)
+> +	%p4cb	gP00 (0x67503030)
+> +	%p4cr	00Pg (0x30305067)
+
+Same here.
+
+> +
+>  Thanks
+>  ======
+>  
+> diff --git a/lib/vsprintf.c b/lib/vsprintf.c
+> index 3c1853a9d1c0..31707499f90f 100644
+> --- a/lib/vsprintf.c
+> +++ b/lib/vsprintf.c
+> @@ -1757,27 +1757,50 @@ char *fourcc_string(char *buf, char *end, const u32 *fourcc,
+>  	char output[sizeof("0123 little-endian (0x01234567)")];
+>  	char *p = output;
+>  	unsigned int i;
+> +	bool pix_fmt = false;
+
+Nit: I would prefer "pixel_fmt". I am not a graphics guy and wondered
+     what "pix" did stands for ;-)
+
+>  	u32 orig, val;
+>  
+> -	if (fmt[1] != 'c' || fmt[2] != 'c')
+> +	if (fmt[1] != 'c')
+>  		return error_string(buf, end, "(%p4?)", spec);
+>  
+>  	if (check_pointer(&buf, end, fourcc, spec))
+>  		return buf;
+>  
+>  	orig = get_unaligned(fourcc);
+> -	val = orig & ~BIT(31);
+> +	switch (fmt[2]) {
+> +	case 'h':
+> +		val = orig;
+> +		break;
+> +	case 'r':
+> +		val = orig = swab32(orig);
+> +		break;
+> +	case 'l':
+> +		val = orig = le32_to_cpu(orig);
+> +		break;
+> +	case 'b':
+> +		val = orig = be32_to_cpu(orig);
+> +		break;
+> +	case 'c':
+> +		/* Pixel formats are printed LSB-first */
+> +		val = swab32(orig & ~BIT(31));
+> +		pix_fmt = true;
+> +		break;
+> +	default:
+> +		return error_string(buf, end, "(%p4?)", spec);
+> +	}
+>  
+>  	for (i = 0; i < sizeof(u32); i++) {
+> -		unsigned char c = val >> (i * 8);
+> +		unsigned char c = val >> ((3 - i) * 8);
+
+This hardcodes '3' but the for-cycle uses i < sizeof(u32).
+We should be consistent.
+
+A solution would be:
+
+	int i;
+
+	for (i = sizeof(u32); --i >= 0;) {
+		unsigned char c = val >> (i * 8);
+
+
+>  		/* Print non-control ASCII characters as-is, dot otherwise */
+>  		*p++ = isascii(c) && isprint(c) ? c : '.';
+>  	}
+>  
+> -	*p++ = ' ';
+> -	strcpy(p, orig & BIT(31) ? "big-endian" : "little-endian");
+> -	p += strlen(p);
+> +	if (pix_fmt) {
+> +		*p++ = ' ';
+> +		strcpy(p, orig & BIT(31) ? "big-endian" : "little-endian");
+> +		p += strlen(p);
+> +	}
+>  
+>  	*p++ = ' ';
+>  	*p++ = '(';
+
+Best Regards,
+Petr
