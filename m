@@ -2,18 +2,18 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 4E7F560713C
-	for <lists+linux-doc@lfdr.de>; Fri, 21 Oct 2022 09:37:29 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 5B90860713A
+	for <lists+linux-doc@lfdr.de>; Fri, 21 Oct 2022 09:37:13 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S229565AbiJUHh1 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Fri, 21 Oct 2022 03:37:27 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:50040 "EHLO
+        id S229476AbiJUHhM (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Fri, 21 Oct 2022 03:37:12 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:49840 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S229610AbiJUHhY (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Fri, 21 Oct 2022 03:37:24 -0400
+        with ESMTP id S229616AbiJUHhL (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Fri, 21 Oct 2022 03:37:11 -0400
 Received: from loongson.cn (mail.loongson.cn [114.242.206.163])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTP id 8828C248C9F;
-        Fri, 21 Oct 2022 00:37:21 -0700 (PDT)
+        by lindbergh.monkeyblade.net (Postfix) with ESMTP id 6E19023920F;
+        Fri, 21 Oct 2022 00:37:08 -0700 (PDT)
 Received: from loongson.cn (unknown [112.20.109.239])
         by gateway (Coremail) with SMTP id _____8Dx_7eN91FjcUYBAA--.4058S3;
         Fri, 21 Oct 2022 09:36:13 +0800 (CST)
