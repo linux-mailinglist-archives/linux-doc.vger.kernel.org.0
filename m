@@ -2,92 +2,105 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 6EB5460769B
-	for <lists+linux-doc@lfdr.de>; Fri, 21 Oct 2022 13:57:36 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 1147D6075FE
+	for <lists+linux-doc@lfdr.de>; Fri, 21 Oct 2022 13:21:03 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S229833AbiJUL5d (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Fri, 21 Oct 2022 07:57:33 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:51976 "EHLO
+        id S230177AbiJULVC (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Fri, 21 Oct 2022 07:21:02 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:60042 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S230203AbiJUL5a (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Fri, 21 Oct 2022 07:57:30 -0400
-Received: from mga06.intel.com (mga06b.intel.com [134.134.136.31])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id C66BC263951
-        for <linux-doc@vger.kernel.org>; Fri, 21 Oct 2022 04:57:29 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1666353449; x=1697889449;
-  h=message-id:date:mime-version:subject:from:to:cc:
-   references:in-reply-to:content-transfer-encoding;
-  bh=/S5sbckmBratQj0/GUalMmZBADiH48Uig1Bx5YjGDE0=;
-  b=FpO/bPHq1uqizHLlNJGuTK3Bpc+Uy15mJXQ3D4fWwCSpzwKXCBa+ZhMu
-   k+pcpH4CbCPbls/8WY4YvOvKe1uDwtvMxNsksWj/J92rlQ9EQwZVWrT0j
-   rGm3LOuPI5abmIoojHd1zCgzv5whVoNmFIT/3efMigYmeVjXHNCOtPiQp
-   woiBF3P0WKK/DXCke6s6QsVbajwI1cMxJRS9MbkfR0W8C9ylgfgIgdRrX
-   q8jSeY+hjkW/u8PtCcrZIyUKaGKIc92m2+0qctqcVmcwimEA2HW5Eujud
-   JRfRErCEWvUT/YSxBRQ7aVwEqGQRvJOvw0cFYM1Dh7Zzm6bDeW6/r7iKG
-   g==;
-X-IronPort-AV: E=McAfee;i="6500,9779,10506"; a="369033706"
-X-IronPort-AV: E=Sophos;i="5.95,200,1661842800"; 
-   d="scan'208";a="369033706"
-Received: from fmsmga001.fm.intel.com ([10.253.24.23])
-  by orsmga104.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 21 Oct 2022 04:57:28 -0700
-X-IronPort-AV: E=McAfee;i="6500,9779,10506"; a="773010716"
-X-IronPort-AV: E=Sophos;i="5.95,200,1661842800"; 
-   d="scan'208";a="773010716"
-Received: from mkwapuli-mobl.ger.corp.intel.com (HELO [10.213.29.238]) ([10.213.29.238])
-  by fmsmga001-auth.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 21 Oct 2022 04:57:23 -0700
-Message-ID: <babed2a4-5d8d-1c2b-d8f3-7db123bf134b@linux.intel.com>
-Date:   Fri, 21 Oct 2022 13:57:20 +0200
+        with ESMTP id S230286AbiJULVA (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Fri, 21 Oct 2022 07:21:00 -0400
+Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.129.124])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 70FE02514CD
+        for <linux-doc@vger.kernel.org>; Fri, 21 Oct 2022 04:20:58 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+        s=mimecast20190719; t=1666351257;
+        h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+         to:to:cc:cc:mime-version:mime-version:
+         content-transfer-encoding:content-transfer-encoding;
+        bh=ReqbEj8BqOln93pvlV1AGFFDODx76Z1OSm0u26Ew1ZQ=;
+        b=cMNXdQ+BkWKetQYFXwBVUphIPg+Ps3dSutsaZ91R0FCvSgA+bEBocTaQC5KUWvaUG4ha7j
+        V74ZpkYW0kVklAfv+IyQj3XoMJL2SrqaxWVVnW0/elQsnq5a0fMMKaP6oNLifcu/alx6ua
+        ZwkQzd02fT/qS7Y83uubEy9xv23NHg4=
+Received: from mail-qv1-f71.google.com (mail-qv1-f71.google.com
+ [209.85.219.71]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_128_GCM_SHA256) id
+ us-mta-609-iKGkDXl-P0GCmlJ7M0cDmw-1; Fri, 21 Oct 2022 07:20:49 -0400
+X-MC-Unique: iKGkDXl-P0GCmlJ7M0cDmw-1
+Received: by mail-qv1-f71.google.com with SMTP id ny15-20020a056214398f00b004b9152f4b53so2102667qvb.17
+        for <linux-doc@vger.kernel.org>; Fri, 21 Oct 2022 04:20:49 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=ReqbEj8BqOln93pvlV1AGFFDODx76Z1OSm0u26Ew1ZQ=;
+        b=Xanvt/+rqYwu4jPH6xEBw9jucaNaDEe0teaIPrpzT4AfHNUQbp3zIqS9dJrcH/PqKd
+         mX9km7IXaz2v9N2Vky3PrUEaSmARUxy62OhnnYLB9TIxla49VAuKsgbrf8lfRMz/J8+W
+         yBjLZiv+6EUQG11qAREnbU4bqh6JagGyxzmBt/sRxIWb9KaZynFm7uUMwzIo74vSx8dw
+         +kCJX8/mr5AlFJ7SlD9p+qXiaZLi9I+F1uod1MbkCHvkt0WZ0nxFq7mOhjHV1SKbo6ll
+         YI4U4U5RKsvvlL+yaHGJHEw1aSaY3k4TSMIuAgXoaUd9wxcOaiGcnQ5AeFNZWOKD32Nd
+         Xb/Q==
+X-Gm-Message-State: ACrzQf2OwXEt4r8Pvy9qq/hI6UgnXGL4a2QgzVV70a5oHN+MY2b+SbaZ
+        1HlyuSFWyPdwrYVraXPtDHLb2KYBXMRhhV5+hZJXvQ33M5yhNKkK6zczB/3VDY4R1LT046NPwdr
+        jhgc4t4UNeTitwoli2cJA
+X-Received: by 2002:a05:620a:16d5:b0:6ec:52ab:e8bd with SMTP id a21-20020a05620a16d500b006ec52abe8bdmr12849026qkn.424.1666351248716;
+        Fri, 21 Oct 2022 04:20:48 -0700 (PDT)
+X-Google-Smtp-Source: AMsMyM6P8dlyWGTrZobZd3w5ieHLYuNRCnqoDjXom734aeT3HyS1kvD7hNbry43KHSZ1JgSdyY/NOw==
+X-Received: by 2002:a05:620a:16d5:b0:6ec:52ab:e8bd with SMTP id a21-20020a05620a16d500b006ec52abe8bdmr12849007qkn.424.1666351248493;
+        Fri, 21 Oct 2022 04:20:48 -0700 (PDT)
+Received: from nfvsdn-06.testing.baremetal.edge-sites.net (nat-pool-232-132.redhat.com. [66.187.232.132])
+        by smtp.gmail.com with ESMTPSA id c25-20020ac81119000000b003996aa171b9sm7766604qtj.97.2022.10.21.04.20.46
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Fri, 21 Oct 2022 04:20:47 -0700 (PDT)
+From:   mtahhan@redhat.com
+To:     bpf@vger.kernel.org, linux-doc@vger.kernel.org
+Cc:     Maryam Tahhan <mtahhan@redhat.com>
+Subject: [PATCH bpf-next v3 0/1] doc: DEVMAPs and XDP_REDIRECT 
+Date:   Fri, 21 Oct 2022 08:15:56 -0400
+Message-Id: <20221021121557.3486894-1-mtahhan@redhat.com>
+X-Mailer: git-send-email 2.35.3
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
- Thunderbird/102.3.3
-Subject: Re: [PATCH v5 07/10] gna: add GNA_COMPUTE ioctl
-Content-Language: en-US
-From:   Maciej Kwapulinski <maciej.kwapulinski@linux.intel.com>
-To:     Linus Walleij <linus.walleij@linaro.org>
-Cc:     Daniel Vetter <daniel@ffwll.ch>,
-        Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
-        Maxime Ripard <mripard@kernel.org>,
-        Thomas Zimmermann <tzimmermann@suse.de>,
-        Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
-        Arnd Bergmann <arnd@arndb.de>,
-        Jonathan Corbet <corbet@lwn.net>,
-        Derek Kiernan <derek.kiernan@xilinx.com>,
-        Dragan Cvetic <dragan.cvetic@xilinx.com>,
-        Andy Shevchenko <andy.shevchenko@gmail.com>,
-        Olof Johansson <olof@lixom.net>,
-        dri-devel@lists.freedesktop.org, linux-doc@vger.kernel.org,
-        Tomasz Jankowski <tomasz1.jankowski@intel.com>,
-        Mikolaj Grzybowski <mikolajx.grzybowski@intel.com>,
-        Anisha Dattatraya Kulkarni 
-        <anisha.dattatraya.kulkarni@intel.com>,
-        Jianxun Zhang <jianxun.zhang@linux.intel.com>
-References: <20221020175334.1820519-1-maciej.kwapulinski@linux.intel.com>
- <20221020175334.1820519-8-maciej.kwapulinski@linux.intel.com>
- <CACRpkdYDYUEx-hWNrUB5cXbH_2oXzRYc2pwn=4u5mivGn14eVw@mail.gmail.com>
- <f72f1d2d-b0cc-6130-05d6-4ec5f5c9d914@linux.intel.com>
-In-Reply-To: <f72f1d2d-b0cc-6130-05d6-4ec5f5c9d914@linux.intel.com>
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-Spam-Status: No, score=-4.5 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_EF,NICE_REPLY_A,RCVD_IN_DNSWL_MED,
-        SPF_HELO_NONE,SPF_NONE,URIBL_BLOCKED autolearn=ham autolearn_force=no
-        version=3.4.6
+X-Spam-Status: No, score=-2.3 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_NONE,
+        RCVD_IN_MSPIKE_H2,SPF_HELO_NONE,SPF_NONE autolearn=unavailable
+        autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
+From: Maryam Tahhan <mtahhan@redhat.com>
 
-On 10/21/2022 1:52 PM, Maciej Kwapulinski wrote:
-> On 10/21/2022 11:30 AM, Linus Walleij wrote:
->> Hi Maciej,
-> Hi Walleij
+Add documentation for BPF_MAP_TYPE_DEVMAP and
+BPF_MAP_TYPE_DEVMAP_HASH including kernel version
+introduced, usage and examples.
 
-oo sorry,  hi Linus
+Add documentation that describes XDP_REDIRECT. 
 
-I should say
+v2->v3:
+- Update examples in DEVMAPs documentation for broadcast scenario.
+- Update key reference for BPF_MAP_TYPE_DEVMAP_HASH (doesn't have to be
+  ifindex).
+- Remove information re xdp_redirect internals.
 
+v1->v2:
+- Separate xdp_redirect documentation to its own file.
+- Clean up and simplify examples and usage function descriptions.
+
+Maryam Tahhan (1):
+  doc: DEVMAPs and XDP_REDIRECT
+
+ Documentation/bpf/index.rst      |   1 +
+ Documentation/bpf/map_devmap.rst | 208 +++++++++++++++++++++++++++++++
+ Documentation/bpf/redirect.rst   |  41 ++++++
+ 3 files changed, 250 insertions(+)
+ create mode 100644 Documentation/bpf/map_devmap.rst
+ create mode 100644 Documentation/bpf/redirect.rst
+
+-- 
+2.35.3
 
