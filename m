@@ -2,123 +2,106 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 8F3CF607D12
-	for <lists+linux-doc@lfdr.de>; Fri, 21 Oct 2022 18:57:26 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id C0E80607BB2
+	for <lists+linux-doc@lfdr.de>; Fri, 21 Oct 2022 18:04:18 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S229832AbiJUQ5Z (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Fri, 21 Oct 2022 12:57:25 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:54004 "EHLO
+        id S230203AbiJUQER (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Fri, 21 Oct 2022 12:04:17 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:34530 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S230272AbiJUQ5G (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Fri, 21 Oct 2022 12:57:06 -0400
-Received: from fanzine2.igalia.com (fanzine.igalia.com [178.60.130.6])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id B3D72290699;
-        Fri, 21 Oct 2022 09:56:52 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=igalia.com;
-        s=20170329; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:
-        References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
-        Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
-        Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
-        List-Subscribe:List-Post:List-Owner:List-Archive;
-        bh=Pzedf8xUwKOln81ZTWxbSMHMJwx3UBJjVHtdKN+dquE=; b=PSqL5obtPZNUSphXW+bDu7qUsv
-        aFRhXzW0sAuFpn241dUXZav8iCQY1kuqC7gNN+x/vLxS0XKJKogjE+KxjG1SITNzvVYyssgYoTmXK
-        hZn4gcQTk5ZsebJ41dJIwEns1LclHialE6zySbWO7fZ6BplVG5u3SVuqtS3jvLSBACygjl1XR1ZQX
-        xh4ommYHirqoUgdwzQB8t1mrc3cSJgnmupZRuxYQV4oZH2WWwZkqxgPJ+zNjlUQc6XDwW8S2SYPp+
-        slsVeMvrWzE0H1Oa7PobRn0Dg2q/msokW55028EfB2NI1aai1feHINwR2NlOh+T1sa872LPZ6fiml
-        GbTk/uiQ==;
-Received: from [179.113.159.85] (helo=[192.168.1.60])
-        by fanzine2.igalia.com with esmtpsa 
-        (Cipher TLS1.3:ECDHE_X25519__RSA_PSS_RSAE_SHA256__AES_128_GCM:128) (Exim)
-        id 1olvJz-002xu8-Ac; Fri, 21 Oct 2022 18:56:35 +0200
-Message-ID: <04954335-ff3f-d418-3e23-c463a9e47f0c@igalia.com>
-Date:   Fri, 21 Oct 2022 13:56:27 -0300
+        with ESMTP id S230148AbiJUQEQ (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Fri, 21 Oct 2022 12:04:16 -0400
+Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.133.124])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 30CD7274595
+        for <linux-doc@vger.kernel.org>; Fri, 21 Oct 2022 09:04:13 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+        s=mimecast20190719; t=1666368251;
+        h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+         to:to:cc:cc:mime-version:mime-version:
+         content-transfer-encoding:content-transfer-encoding;
+        bh=17geT16pG35VTrdYqV5tA3g6Cj90L+YxvyM0AjY26TQ=;
+        b=cWXqlc8oSHnhD8q+7GTTVqY9vuaSjnW9NV6VaquSICPBz0xHLYuiXq9UjMumC5QvGwKWXa
+        T+AksAKJSGrEy6x74Mj4glSFI5E3q03SFQ95/G7OSqHaVpGVzota/PFAMhfI04uqvn9nVc
+        s3ixGpVQrAwJ5sWUZglLXKu7bz7eTXQ=
+Received: from mail-qv1-f70.google.com (mail-qv1-f70.google.com
+ [209.85.219.70]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_128_GCM_SHA256) id
+ us-mta-604-1B0UQ1bdOpCsqSL8__37ww-1; Fri, 21 Oct 2022 12:04:10 -0400
+X-MC-Unique: 1B0UQ1bdOpCsqSL8__37ww-1
+Received: by mail-qv1-f70.google.com with SMTP id ma6-20020a0562145b0600b004b49a5037aeso2542567qvb.18
+        for <linux-doc@vger.kernel.org>; Fri, 21 Oct 2022 09:04:10 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=17geT16pG35VTrdYqV5tA3g6Cj90L+YxvyM0AjY26TQ=;
+        b=hD0tMKoNwWFaYKYhuBYjozIQjKzJ7WqoUxjjE8JO08jqVMPh2abjGZ5aZIPPyRTyTH
+         DmKeOzLUmY2z+MDd3fDqgizAhvRRFMkECk8J49U98W/DzpGlFn237GMWoFIcpp9yFz0U
+         udWsA5V1tMQL2Cw1e4aC8UgH61ZcYZTE1nWrzaPqUJv0PEySyj2Yb/Rl+LC6ovs3i6gd
+         CLrSIljPSJy7dUf3+lIyaPqYgMDgFi8Nleb8rFr/DoNyi5IByqILJolERz7kt0O8KDSq
+         R2q3hivxMLjVL9d5nu0vNAKEtv5QM2P1ZxPLkXFolktdNN0wTtLqVquiy29bdKOhP8m+
+         n72w==
+X-Gm-Message-State: ACrzQf32+VE2Z2GFv4IEYOcvz159+rMU8sDBqv4CZ+z/dms1QZw23Vr8
+        6A4iKyLvVnNehrjaJIUnMRuzPQnZy3eFWtToYrf6ZEtKpwvWlJDAcs+JInsMM6mC6t6yLnCbnin
+        u9qdUyk1JkynQv7li89+P
+X-Received: by 2002:a05:620a:2414:b0:6ee:d0c5:b3ad with SMTP id d20-20020a05620a241400b006eed0c5b3admr14003967qkn.613.1666368250037;
+        Fri, 21 Oct 2022 09:04:10 -0700 (PDT)
+X-Google-Smtp-Source: AMsMyM6pELEP9EfuC3UNQ/G1TIANQewXbb7hKJRjTjdUXiNxvYiQXnDmDhOls8IIpnlQmwzpvCa9nQ==
+X-Received: by 2002:a05:620a:2414:b0:6ee:d0c5:b3ad with SMTP id d20-20020a05620a241400b006eed0c5b3admr14003940qkn.613.1666368249809;
+        Fri, 21 Oct 2022 09:04:09 -0700 (PDT)
+Received: from nfvsdn-06.testing.baremetal.edge-sites.net (nat-pool-232-132.redhat.com. [66.187.232.132])
+        by smtp.gmail.com with ESMTPSA id br22-20020a05622a1e1600b0039cb5c9dbacsm8088849qtb.22.2022.10.21.09.04.09
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Fri, 21 Oct 2022 09:04:09 -0700 (PDT)
+From:   mtahhan@redhat.com
+To:     bpf@vger.kernel.org, linux-doc@vger.kernel.org
+Cc:     Maryam Tahhan <mtahhan@redhat.com>
+Subject: [PATCH bpf-next v4 0/1] doc: DEVMAPs and XDP_REDIRECT
+Date:   Fri, 21 Oct 2022 12:59:18 -0400
+Message-Id: <20221021165919.509652-1-mtahhan@redhat.com>
+X-Mailer: git-send-email 2.35.3
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.3.2
-Subject: Re: [PATCH V2] x86/split_lock: Add sysctl to control the misery mode
-Content-Language: en-US
-To:     x86@kernel.org, tglx@linutronix.de, dave.hansen@linux.intel.com
-Cc:     linux-kernel@vger.kernel.org, mingo@redhat.com, bp@alien8.de,
-        hpa@zytor.com, luto@kernel.org, corbet@lwn.net,
-        linux-doc@vger.kernel.org, kernel-dev@igalia.com,
-        kernel@gpiccoli.net, Andre Almeida <andrealmeid@igalia.com>,
-        Fenghua Yu <fenghua.yu@intel.com>,
-        Joshua Ashton <joshua@froggi.es>,
-        Melissa Wen <mwen@igalia.com>,
-        Paul Gofman <pgofman@codeweavers.com>,
-        Pavel Machek <pavel@denx.de>,
-        Pierre-Loup Griffais <pgriffais@valvesoftware.com>,
-        Tony Luck <tony.luck@intel.com>,
-        Zebediah Figura <zfigura@codeweavers.com>,
-        Bagas Sanjaya <bagasdotme@gmail.com>
-References: <20221014180506.211592-1-gpiccoli@igalia.com>
-From:   "Guilherme G. Piccoli" <gpiccoli@igalia.com>
-In-Reply-To: <20221014180506.211592-1-gpiccoli@igalia.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-Spam-Status: No, score=-2.1 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,NICE_REPLY_A,SPF_HELO_NONE,
-        SPF_PASS,URIBL_BLOCKED autolearn=ham autolearn_force=no version=3.4.6
+Content-Transfer-Encoding: 8bit
+X-Spam-Status: No, score=-2.3 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_NONE,
+        RCVD_IN_MSPIKE_H2,SPF_HELO_NONE,SPF_NONE autolearn=unavailable
+        autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On 14/10/2022 15:05, Guilherme G. Piccoli wrote:
-> Commit b041b525dab9 ("x86/split_lock: Make life miserable for split lockers")
-> changed the way the split lock detector works when in "warn" mode;
-> basically, not only it shows the warn message, but also intentionally
-> introduces a slowdown (through sleeping plus serialization mechanism)
-> on such task. Based on discussions in [0], seems the warning alone
-> wasn't enough motivation for userspace developers to fix their
-> applications.
-> 
-> Happens that originally the proposal in [0] was to add a new mode
-> which would warns + slowdown the "split locking" task, keeping the
-> old warn mode untouched. In the end, that idea was discarded and
-> the regular/default "warn" mode now slowdowns the applications. This
-> is quite aggressive with regards proprietary/legacy programs that
-> basically are unable to properly run in kernel with this change.
-> While is understandable that a malicious application could try a DoS
-> by split locking, it seems unacceptable to regress old/proprietary
-> userspace programs through a default configuration that previously
-> worked. An example of such breakage was reported in [1].
-> 
-> So let's add a sysctl to allow controlling the "misery mode" behavior,
-> as per Thomas suggestion on [2]. This way, users running legacy and/or
-> proprietary software are allowed to still execute them with a decent
-> performance while still observe the warning messages on kernel log.
-> 
-> [0] https://lore.kernel.org/lkml/20220217012721.9694-1-tony.luck@intel.com/
-> 
-> [1] https://github.com/doitsujin/dxvk/issues/2938
-> 
-> [2] https://lore.kernel.org/lkml/87pmf4bter.ffs@tglx/
-> 
-> Fixes: b041b525dab9 ("x86/split_lock: Make life miserable for split lockers")
-> Cc: Andre Almeida <andrealmeid@igalia.com>
-> Cc: Fenghua Yu <fenghua.yu@intel.com>
-> Cc: Joshua Ashton <joshua@froggi.es>
-> Cc: Melissa Wen <mwen@igalia.com>
-> Cc: Paul Gofman <pgofman@codeweavers.com>
-> Cc: Pavel Machek <pavel@denx.de>
-> Cc: Pierre-Loup Griffais <pgriffais@valvesoftware.com>
-> Cc: Tony Luck <tony.luck@intel.com>
-> Cc: Zebediah Figura <zfigura@codeweavers.com>
-> Suggested-by: Thomas Gleixner <tglx@linutronix.de>
-> Signed-off-by: Guilherme G. Piccoli <gpiccoli@igalia.com>
-> ---
+From: Maryam Tahhan <mtahhan@redhat.com>
 
-Hi Dave / Thomas, do you think this version is good enough?
+Add documentation for BPF_MAP_TYPE_DEVMAP and
+BPF_MAP_TYPE_DEVMAP_HASH including kernel version
+introduced, usage and examples.
 
-If so, would be possible to pick it still in the v6.1-rc cycle, since it
-is a fix?
+Add documentation that describes XDP_REDIRECT.
 
-What about the documentation improvements from Bagas, should I re-send
-(V3) with that, or would you pick them when merging?
+v3->v4:
+- Prepend supported map section for XDP_REDIRECT documentation.
 
-Thanks in advance,
+v2->v3:
+- Fixed indentations in usage section to exclude non note text.
+- Replace links to selftest with actual paths.
 
+v1->v2:
+- Separate xdp_redirect documentation to its own file.
+- Clean up and simplify examples and usage function descriptions.
 
-Guilherme
+Maryam Tahhan (1):
+  doc: DEVMAPs and XDP_REDIRECT
+
+ Documentation/bpf/index.rst      |   1 +
+ Documentation/bpf/map_devmap.rst | 205 +++++++++++++++++++++++++++++++
+ Documentation/bpf/redirect.rst   |  46 +++++++
+ 3 files changed, 252 insertions(+)
+ create mode 100644 Documentation/bpf/map_devmap.rst
+ create mode 100644 Documentation/bpf/redirect.rst
+
+-- 
+2.35.3
+
