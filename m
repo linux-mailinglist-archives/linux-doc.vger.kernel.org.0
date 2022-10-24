@@ -2,53 +2,53 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id CEEB360A27A
-	for <lists+linux-doc@lfdr.de>; Mon, 24 Oct 2022 13:44:52 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id F105660A3B3
+	for <lists+linux-doc@lfdr.de>; Mon, 24 Oct 2022 14:00:11 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S229716AbiJXLoq (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 24 Oct 2022 07:44:46 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:43424 "EHLO
+        id S232192AbiJXMAH (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 24 Oct 2022 08:00:07 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:46550 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S231602AbiJXLoH (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Mon, 24 Oct 2022 07:44:07 -0400
-Received: from mail-oa1-x33.google.com (mail-oa1-x33.google.com [IPv6:2001:4860:4864:20::33])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id E94C210B63
-        for <linux-doc@vger.kernel.org>; Mon, 24 Oct 2022 04:41:15 -0700 (PDT)
-Received: by mail-oa1-x33.google.com with SMTP id 586e51a60fabf-13ae8117023so11480686fac.9
-        for <linux-doc@vger.kernel.org>; Mon, 24 Oct 2022 04:41:15 -0700 (PDT)
+        with ESMTP id S232649AbiJXL71 (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Mon, 24 Oct 2022 07:59:27 -0400
+Received: from mail-oa1-x2c.google.com (mail-oa1-x2c.google.com [IPv6:2001:4860:4864:20::2c])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id EB6787655C
+        for <linux-doc@vger.kernel.org>; Mon, 24 Oct 2022 04:48:33 -0700 (PDT)
+Received: by mail-oa1-x2c.google.com with SMTP id 586e51a60fabf-13b6c1c89bdso5635795fac.13
+        for <linux-doc@vger.kernel.org>; Mon, 24 Oct 2022 04:48:33 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=daynix-com.20210112.gappssmtp.com; s=20210112;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=aZbgIVSQ8XgPbVH9Q8Dsp65eLaVcafrOLYAAqQNA3Ms=;
-        b=svkp4e3b3SUT9ftxU+ZLPImVGkrLdjZmAyL4NTDy8zBkyhJo1e5stHvrAz9NnYp+CP
-         AJCGi7A9ny35dbEocVhIsAphKsiD9jZ63/JsrAZueG69IuE95V0TJ6aCnZ+DlNNn13Lm
-         831reFgJM1LtLUpK9rtNkyvUYZDd26w6QRWfhKIvwmBIQcQJmYTS+V4i6U7+Z4Lpc4d3
-         s0vv4ZqyrCx4Ys2lKyq0BeBUhRZCS490rmEtluTEKpS152uos0ylqsE7d3kzUq0kQqND
-         becInYrHn+JiAKLdk4p+qnOcD5r2SuDSv8VLrjEkovHL0yMYiNLipQex+iGsarVfust+
-         Uvsg==
+        bh=UAzZQL5seIJutOYUjJgcTz5SIcJNiVaULVY/vxMxJ7M=;
+        b=bWAkfym/IuAYQQDsk1OCfdE9w9yWPE3crZCufatlU3uyFhSD2FLPPyi4EZX0XKPNNN
+         TsT1Mn93d8yM/JN1r6KstPaSr0v2lhHNLAttfYUvsrYDknwH7khxwfUrEhoUBDF6QNvT
+         2AoTMSr1l1S7qOR5wF4oY1dCDKpWYBJ8RPjoWCYtuPhEghyQHHePilHd/NADV54vZIGq
+         6rdvlz9HJM3z9wu+pJUiXEGORc6v7pwvQYHXmPP9HS48eXejuQAX3z/RDPWeO6o44bSX
+         c9msf1NsRp6QE7dLwlbW0UvYtPhluL4+JoPCees4u24dLHSpN6Uh4AbxJOiXkAJfcDlq
+         GsGQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=aZbgIVSQ8XgPbVH9Q8Dsp65eLaVcafrOLYAAqQNA3Ms=;
-        b=dCP8+q/cwQaFTVYrCGBD/1vkJcwnTY/ZFy9gMwwxkf9d5qPZJN8be6h5fx9ktjYMO5
-         VudKVP8213VmncJrzcEhj1ynNfhfCIFYWI4eEkOd9kDBSx8xiarj00ppTaFPGfPzp32m
-         mS4x68o3fHEc03QQjKwxLZcLHLeHAntsTXRPb9E35BJiibb3juvZdH/GAiR2LdfPzgEL
-         PDIsUleNk6VM5I08qXvKoBhOBI9GNklnlaR6T3akjaXMRLpNDpAb8yp2yBCH1xeVrbs8
-         A8ruE8hpjiqXGh5KAoRv3BnktVr+n+GPRxeIpVoQDoAw6AKTjAxmLHh9w6ww6KXUlSsj
-         Sf8A==
-X-Gm-Message-State: ACrzQf21O6rzDKbx48dgeG89/Vk+TOTGuNOLMZ0Ci+OblUQNUNj2i3k1
-        71GokNMzZYBm5GRATTlu7ZGqKpiwFAoF4Byy
-X-Google-Smtp-Source: AMsMyM4RUBGzO3rLlIoesY9MV9xSVNvjZ7XRsAYwgRf2MzR+vsTZOlvX93IbLwXDaavbHv/ooxaUtA==
-X-Received: by 2002:a17:90a:6405:b0:203:6eaa:4999 with SMTP id g5-20020a17090a640500b002036eaa4999mr73460182pjj.8.1666611484014;
-        Mon, 24 Oct 2022 04:38:04 -0700 (PDT)
+        bh=UAzZQL5seIJutOYUjJgcTz5SIcJNiVaULVY/vxMxJ7M=;
+        b=5n6HIyfPU52k2fE3ErPMVlJWx0KEfN47Z2gBNUwDpRAcBv/f8TXj+mMJjHiiVbHfA+
+         HiDRMO/SRANhwO17L3hC8tLHd+GOImK87zXQRZYKdFT0tJSAaoEEOyswvKSPoYEmOEcb
+         OtQ6LmQnlDz+LR6siBGBOpHWgll3YJyndZJBPCuj9Nc+KbHDbZ5Mh9Ekp/MxI1N8vhsQ
+         WSgtLj6MztwbTUBLUNzfsWLxnwOaauqhNitTg/SDVpPMhDHI9LEer18Rvk1Nov0sVxwU
+         r5MO6FbEXs2lOkY0n5WpXzNOlXKphwYhU0F7G4IzB+LDoLHmfeaE2Llk+87tdk3BmhaV
+         QDeA==
+X-Gm-Message-State: ACrzQf2lZvKWJBfNg1UJcDYiZTg+dvktW8NLg5KHbCNPEX7xz8pTCyMD
+        G8+LtRFWhWiNarQIJNH9CoSrHmfeJ9l8I6Ql
+X-Google-Smtp-Source: AMsMyM518/+LX9D2Z710rX+ZGWrNfx22tav+R9okHqn5RhyI0izm5Jqv1jyaCGbAfBxBtougO+lAKQ==
+X-Received: by 2002:a17:90b:4b8f:b0:213:95f:9515 with SMTP id lr15-20020a17090b4b8f00b00213095f9515mr6350162pjb.82.1666611500759;
+        Mon, 24 Oct 2022 04:38:20 -0700 (PDT)
 Received: from fedora.flets-east.jp ([2400:4050:c360:8200:8ae8:3c4:c0da:7419])
-        by smtp.gmail.com with ESMTPSA id b8-20020a170903228800b001830ed575c3sm19475075plh.117.2022.10.24.04.37.55
+        by smtp.gmail.com with ESMTPSA id b8-20020a170903228800b001830ed575c3sm19475075plh.117.2022.10.24.04.38.12
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 24 Oct 2022 04:38:03 -0700 (PDT)
+        Mon, 24 Oct 2022 04:38:20 -0700 (PDT)
 From:   Akihiko Odaki <akihiko.odaki@daynix.com>
 Cc:     David Airlie <airlied@gmail.com>, Daniel Vetter <daniel@ffwll.ch>,
         Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
@@ -87,9 +87,9 @@ Cc:     David Airlie <airlied@gmail.com>, Daniel Vetter <daniel@ffwll.ch>,
         acpi4asus-user@lists.sourceforge.net,
         ibm-acpi-devel@lists.sourceforge.net, linux-fbdev@vger.kernel.org,
         devel@acpica.org, Akihiko Odaki <akihiko.odaki@daynix.com>
-Subject: [PATCH 17/22] platform/x86: thinkpad_acpi: Use acpi_video_get_backlight_types()
-Date:   Mon, 24 Oct 2022 20:35:08 +0900
-Message-Id: <20221024113513.5205-18-akihiko.odaki@daynix.com>
+Subject: [PATCH 19/22] platform/x86: dell-laptop: Use acpi_video_get_backlight_types()
+Date:   Mon, 24 Oct 2022 20:35:10 +0900
+Message-Id: <20221024113513.5205-20-akihiko.odaki@daynix.com>
 X-Mailer: git-send-email 2.37.3
 In-Reply-To: <20221024113513.5205-1-akihiko.odaki@daynix.com>
 References: <20221024113513.5205-1-akihiko.odaki@daynix.com>
@@ -109,31 +109,22 @@ acpi_video_get_backlight_type() is now deprecated.
 
 Signed-off-by: Akihiko Odaki <akihiko.odaki@daynix.com>
 ---
- drivers/platform/x86/thinkpad_acpi.c | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ drivers/platform/x86/dell/dell-laptop.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/drivers/platform/x86/thinkpad_acpi.c b/drivers/platform/x86/thinkpad_acpi.c
-index 6a823b850a77..d756d2ce54d1 100644
---- a/drivers/platform/x86/thinkpad_acpi.c
-+++ b/drivers/platform/x86/thinkpad_acpi.c
-@@ -3547,7 +3547,7 @@ static int __init hotkey_init(struct ibm_init_struct *iibm)
- 	/* Do not issue duplicate brightness change events to
- 	 * userspace. tpacpi_detect_brightness_capabilities() must have
- 	 * been called before this point  */
--	if (acpi_video_get_backlight_type() != acpi_backlight_vendor) {
-+	if (!(acpi_video_get_backlight_types() & ACPI_BACKLIGHT_VENDOR)) {
- 		pr_info("This ThinkPad has standard ACPI backlight brightness control, supported by the ACPI video driver\n");
- 		pr_notice("Disabling thinkpad-acpi brightness events by default...\n");
- 
-@@ -6983,7 +6983,7 @@ static int __init brightness_init(struct ibm_init_struct *iibm)
- 		return -ENODEV;
+diff --git a/drivers/platform/x86/dell/dell-laptop.c b/drivers/platform/x86/dell/dell-laptop.c
+index e92c3ad06d69..9cfffbe2bd95 100644
+--- a/drivers/platform/x86/dell/dell-laptop.c
++++ b/drivers/platform/x86/dell/dell-laptop.c
+@@ -2230,7 +2230,7 @@ static int __init dell_init(void)
+ 		micmute_led_registered = true;
  	}
  
--	if (acpi_video_get_backlight_type() != acpi_backlight_vendor) {
-+	if (!(acpi_video_get_backlight_types() & ACPI_BACKLIGHT_VENDOR)) {
- 		if (brightness_enable > 1) {
- 			pr_info("Standard ACPI backlight interface available, not loading native one\n");
- 			return -ENODEV;
+-	if (acpi_video_get_backlight_type() != acpi_backlight_vendor)
++	if (!(acpi_video_get_backlight_types() & ACPI_BACKLIGHT_VENDOR))
+ 		return 0;
+ 
+ 	token = dell_smbios_find_token(BRIGHTNESS_TOKEN);
 -- 
 2.37.3
 
