@@ -2,376 +2,266 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 0F6D660B173
-	for <lists+linux-doc@lfdr.de>; Mon, 24 Oct 2022 18:25:17 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id DA1FB60B35F
+	for <lists+linux-doc@lfdr.de>; Mon, 24 Oct 2022 19:05:33 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S230483AbiJXQZP (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 24 Oct 2022 12:25:15 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:56712 "EHLO
+        id S233418AbiJXRF3 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 24 Oct 2022 13:05:29 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:37024 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S234100AbiJXQXh (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Mon, 24 Oct 2022 12:23:37 -0400
-Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.129.124])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 69263140CC
-        for <linux-doc@vger.kernel.org>; Mon, 24 Oct 2022 08:09:43 -0700 (PDT)
+        with ESMTP id S235229AbiJXRES (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Mon, 24 Oct 2022 13:04:18 -0400
+Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.133.124])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id A88548E713
+        for <linux-doc@vger.kernel.org>; Mon, 24 Oct 2022 08:40:10 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-        s=mimecast20190719; t=1666624051;
+        s=mimecast20190719; t=1666625892;
         h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
          to:to:cc:cc:mime-version:mime-version:content-type:content-type:
          content-transfer-encoding:content-transfer-encoding:
          in-reply-to:in-reply-to:references:references;
-        bh=hcc9Sl5VWnSbLa3wj196AJrJmz0s6R/mrqufXCIozGw=;
-        b=ACroi9fuCBUIv02FG0OC5Cx+zIkLCYrpy+0kJQD0K2g0qB0mQqRbeF0QXJU1Vz9yty8mbW
-        BuLMu/6R1Zk79eisT8eOeP0yz7xtFmkCysjd/g+e+aw5QEwk+/Ggl6s2ZbwTw/PpCLeWjU
-        SJK6dzcq8/kqH+bmM9zRgryhTmxvA+E=
-Received: from mail-qt1-f197.google.com (mail-qt1-f197.google.com
- [209.85.160.197]) by relay.mimecast.com with ESMTP with STARTTLS
+        bh=bZe1w3EPaVA+CN/q+Lt0jOZyvsYbOMnl65HsFpxBLe8=;
+        b=NouWvSjZknluReJuka33au5kpr5SW1C4Ognfh8h1UV6VnPCBkRKmxIPx/91ub8UixzMiCL
+        p5XAlSDgfzEpJYfuOQjB+IoiO6fWOYG7XvnoTUacCiFkNSvLyM1a89Q92Igs3Bz0keIibq
+        ZV7XX2f6DVuP9dIT1KwFFfhWXV6Gquo=
+Received: from mail-ed1-f71.google.com (mail-ed1-f71.google.com
+ [209.85.208.71]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.3, cipher=TLS_AES_128_GCM_SHA256) id
- us-mta-120-kyIpSHW8OWqMzVJPXU0cIQ-1; Mon, 24 Oct 2022 07:48:41 -0400
-X-MC-Unique: kyIpSHW8OWqMzVJPXU0cIQ-1
-Received: by mail-qt1-f197.google.com with SMTP id d25-20020ac847d9000000b0039d0dd90182so6897824qtr.3
-        for <linux-doc@vger.kernel.org>; Mon, 24 Oct 2022 04:48:41 -0700 (PDT)
+ us-mta-362-T5943xBFPpuwKdeI7wrlvQ-1; Mon, 24 Oct 2022 09:21:29 -0400
+X-MC-Unique: T5943xBFPpuwKdeI7wrlvQ-1
+Received: by mail-ed1-f71.google.com with SMTP id w17-20020a056402269100b00461e28a75ccso1915899edd.8
+        for <linux-doc@vger.kernel.org>; Mon, 24 Oct 2022 06:21:29 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=hcc9Sl5VWnSbLa3wj196AJrJmz0s6R/mrqufXCIozGw=;
-        b=ZfiVMc+v3tbooxxLK3VAN92L9bKoEXCEPv0tp9HGnlh9pdR7zXDPh66WfaJgcTyXBU
-         CZwYBtobOKwl280Bzf8a3ftkZP9VmKXQ8rTxa4a3W4swP9PN/YtvbdGQis2oM7je1wLb
-         1W1MBytvtUXfaNX7GePQn7jNqmXnAgxQJ22pd+98fiiaKGb+ADlZmCqSUuvKCeSXYpDg
-         mgt/4tN33TGSZ/ebgkIvo798Lk4LBi/frQa6bqwM75gKU9oQ2CRFbKOdMI/bSADN3r74
-         vOuLjtC6mpFcsD5/7kSUFEL5qPAdAQzClwytuSrdcCD9lGdPtozyDnhLHAZzCJ4uTz7/
-         daYg==
-X-Gm-Message-State: ACrzQf0qrXUfOvTOrw8Wu9iHUTQP7CrUoeOJ/4fIYhKeMtCdu9SLu3BU
-        LrhjkdUKTTKm+1UxkeDunOHiylFI+CGuVNMmpumc7gzYIKuPgNOjnyz6uMHNW+ASk9Pvxw9yPK+
-        hKKuNm7LWCo9HTc0c2zj7
-X-Received: by 2002:a05:622a:8cf:b0:39c:dc9b:b3d4 with SMTP id i15-20020a05622a08cf00b0039cdc9bb3d4mr27187072qte.41.1666612121181;
-        Mon, 24 Oct 2022 04:48:41 -0700 (PDT)
-X-Google-Smtp-Source: AMsMyM4wWNlbK8kiLw+TCAOwXLHhnIqkGp9iFae8JoBf4IYnBsVj9PLSY0/ko1X91ulVAffKrMrmmw==
-X-Received: by 2002:a05:622a:8cf:b0:39c:dc9b:b3d4 with SMTP id i15-20020a05622a08cf00b0039cdc9bb3d4mr27187052qte.41.1666612120847;
-        Mon, 24 Oct 2022 04:48:40 -0700 (PDT)
-Received: from nfvsdn-06.testing.baremetal.edge-sites.net (nat-pool-232-132.redhat.com. [66.187.232.132])
-        by smtp.gmail.com with ESMTPSA id m15-20020a05620a13af00b006ee949b8051sm14653564qki.51.2022.10.24.04.48.40
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 24 Oct 2022 04:48:40 -0700 (PDT)
-From:   mtahhan@redhat.com
-To:     bpf@vger.kernel.org, linux-doc@vger.kernel.org
-Cc:     Maryam Tahhan <mtahhan@redhat.com>,
-        =?UTF-8?q?Toke=20H=C3=B8iland-J=C3=B8rgensen?= <toke@redhat.com>,
-        Donald Hunter <donald.hunter@gmail.com>,
-        Bagas Sanjaya <bagasdotme@gmail.com>
-Subject: [PATCH bpf-next v5 1/1] doc: DEVMAPs and XDP_REDIRECT
-Date:   Mon, 24 Oct 2022 08:43:41 -0400
-Message-Id: <20221024124341.2157865-2-mtahhan@redhat.com>
-X-Mailer: git-send-email 2.35.3
-In-Reply-To: <20221024124341.2157865-1-mtahhan@redhat.com>
-References: <20221024124341.2157865-1-mtahhan@redhat.com>
+        h=content-transfer-encoding:in-reply-to:from:references:cc:to
+         :content-language:subject:user-agent:mime-version:date:message-id
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=bZe1w3EPaVA+CN/q+Lt0jOZyvsYbOMnl65HsFpxBLe8=;
+        b=OtqgxutW4UuyELfGQlxGak1DqdmjclGI9Zrz8nMuUareP2j3NRSVHbfWDhUhq5G8Ah
+         fStmPpL02pHqyuqPApaqcdLkgrsY/9LlX2+0HAshJWxiPhYGlYQPGhCi/pT04gz0mU3U
+         kWW9IyodbWJ0iuYYU8Igtqxv5n33fE0DNFiVLMFI+Jhz/V9L+AhEUGlhzjCWbagyVfcK
+         yr4plwbC6ghKj7HgLL6vB5K4uczjJ45ZxlqRNotVBfqAWedBBspENoRl2RJ7PmKoHAKr
+         THW4jT5YjNE3YhCoDWcsEWLpw6VfFE3xEqz0FwATrzKggRdZSxVpi9pRWyVMd/wfMk86
+         0l/Q==
+X-Gm-Message-State: ACrzQf1Dg7Rg9fZYqB3KHbQIbL3nnL6tvJj2jdV1s5QQ9RxIHKnwTdQS
+        Unf1OZr2Z2tp3+911phxRxsVt9iNYtXYSyoUWZJC2PVqpJ1ALUkrlHQMZg+K1f/owUQAKX3RlL2
+        sVDhCGo8NMm52P8c7D/2v
+X-Received: by 2002:a17:907:7627:b0:78d:b6f5:9f15 with SMTP id jy7-20020a170907762700b0078db6f59f15mr27908057ejc.149.1666617688157;
+        Mon, 24 Oct 2022 06:21:28 -0700 (PDT)
+X-Google-Smtp-Source: AMsMyM5eVoX3Zdsw3dT2G3BRaFLKO7Cw6SDF7Gj5r0DB42X2PLxNRQiYtexmaaMeTBVnA50ta6oFDw==
+X-Received: by 2002:a17:907:7627:b0:78d:b6f5:9f15 with SMTP id jy7-20020a170907762700b0078db6f59f15mr27908007ejc.149.1666617687840;
+        Mon, 24 Oct 2022 06:21:27 -0700 (PDT)
+Received: from [10.40.98.142] ([78.108.130.194])
+        by smtp.gmail.com with ESMTPSA id l17-20020a1709060cd100b00783c545544fsm15509207ejh.215.2022.10.24.06.21.26
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Mon, 24 Oct 2022 06:21:27 -0700 (PDT)
+Message-ID: <60672af8-05d2-113c-12b9-d635608be0dd@redhat.com>
+Date:   Mon, 24 Oct 2022 15:21:25 +0200
 MIME-Version: 1.0
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.3.1
+Subject: Re: [PATCH 00/22] Fallback to native backlight
+Content-Language: en-US
+To:     Akihiko Odaki <akihiko.odaki@daynix.com>
+Cc:     David Airlie <airlied@gmail.com>, Daniel Vetter <daniel@ffwll.ch>,
+        Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+        Maxime Ripard <mripard@kernel.org>,
+        Thomas Zimmermann <tzimmermann@suse.de>,
+        Jonathan Corbet <corbet@lwn.net>,
+        "Rafael J. Wysocki" <rafael@kernel.org>,
+        Len Brown <lenb@kernel.org>,
+        Jani Nikula <jani.nikula@linux.intel.com>,
+        Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
+        Rodrigo Vivi <rodrigo.vivi@intel.com>,
+        Tvrtko Ursulin <tvrtko.ursulin@linux.intel.com>,
+        "Lee, Chun-Yi" <jlee@suse.com>, Mark Gross <markgross@kernel.org>,
+        Corentin Chary <corentin.chary@gmail.com>,
+        Cezary Jackiewicz <cezary.jackiewicz@gmail.com>,
+        Matthew Garrett <mjg59@srcf.ucam.org>,
+        =?UTF-8?Q?Pali_Roh=c3=a1r?= <pali@kernel.org>,
+        Jonathan Woithe <jwoithe@just42.net>,
+        Ike Panhc <ike.pan@canonical.com>,
+        Daniel Dadap <ddadap@nvidia.com>,
+        Kenneth Chan <kenneth.t.chan@gmail.com>,
+        Mattia Dongili <malattia@linux.it>,
+        Henrique de Moraes Holschuh <hmh@hmh.eng.br>,
+        Azael Avalos <coproscefalo@gmail.com>,
+        Lee Jones <lee@kernel.org>,
+        Daniel Thompson <daniel.thompson@linaro.org>,
+        Jingoo Han <jingoohan1@gmail.com>,
+        Helge Deller <deller@gmx.de>,
+        Robert Moore <robert.moore@intel.com>,
+        dri-devel@lists.freedesktop.org, linux-doc@vger.kernel.org,
+        linux-kernel@vger.kernel.org, linux-acpi@vger.kernel.org,
+        intel-gfx@lists.freedesktop.org,
+        platform-driver-x86@vger.kernel.org,
+        acpi4asus-user@lists.sourceforge.net,
+        ibm-acpi-devel@lists.sourceforge.net, linux-fbdev@vger.kernel.org,
+        devel@acpica.org
+References: <20221024113513.5205-1-akihiko.odaki@daynix.com>
+ <746e5cc6-516f-8f69-9d4b-8fe237de8fd6@redhat.com>
+ <edec5950-cec8-b647-ccb1-ba48f9b3bbb0@daynix.com>
+From:   Hans de Goede <hdegoede@redhat.com>
+In-Reply-To: <edec5950-cec8-b647-ccb1-ba48f9b3bbb0@daynix.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_NONE,
-        SPF_HELO_NONE,SPF_NONE autolearn=ham autolearn_force=no version=3.4.6
+        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,NICE_REPLY_A,
+        RCVD_IN_DNSWL_NONE,RCVD_IN_MSPIKE_H2,SPF_HELO_NONE,SPF_NONE
+        autolearn=unavailable autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-From: Maryam Tahhan <mtahhan@redhat.com>
+Hi,
 
-Add documentation for BPF_MAP_TYPE_DEVMAP and
-BPF_MAP_TYPE_DEVMAP_HASH including kernel version
-introduced, usage and examples.
+On 10/24/22 14:58, Akihiko Odaki wrote:
+> On 2022/10/24 20:53, Hans de Goede wrote:
+>> Hi Akihiko,
+>>
+>> On 10/24/22 13:34, Akihiko Odaki wrote:
+>>> Commit 2600bfa3df99 ("ACPI: video: Add acpi_video_backlight_use_native()
+>>> helper") and following commits made native backlight unavailable if
+>>> CONFIG_ACPI_VIDEO is set and the backlight feature of ACPI video is
+>>> unavailable, which broke the backlight functionality on Lenovo ThinkPad
+>>> C13 Yoga Chromebook. Allow to fall back to native backlight in such
+>>> cases.
+>>
+>> I appreciate your work on this, but what this in essence does is
+>> it allows 2 backlight drivers (vendor + native) to get registered
+>> for the same panel again. While the whole goal of the backlight refactor
+>> series landing in 6.1 was to make it so that there always is only
+>> *1* backlight device registered instead of (possibly) registering
+>> multiple and letting userspace figure it out. It is also important
+>> to only always have 1 backlight device per panel for further
+>> upcoming changes.
+>>
+>> So nack for this solution, sorry.
+>>
+>> I am aware that this breaks backlight control on some Chromebooks,
+>> this was already reported and I wrote a long reply explaining why
+>> things are done the way they are done now and also suggesting
+>> 2 possible (much simpler) fixes, see:
+>> https://lore.kernel.org/linux-acpi/42a5f2c9-a1dc-8fc0-7334-fe6c390ecfbb@redhat.com/
+>>
+>> Unfortunately the reported has not followed-up on this and
+>> I don't have the hardware to test this myself.
+>>
+>> Can you please try implementing 1 of the fixes suggested there
+>> and then submit that upstream ?
+>>
+>> Regards,
+>>
+>> Hans
+>>
+> 
+> Hi Hans,
+> 
+> Thanks for reviewing and letting me know the prior attempt.
+> 
+> In this case, there is only a native backlight device and no vendor backlight device so the duplication of backlight devices does not happen. I think it is better to handle such a case without quirks.
 
-Add documentation that describes XDP_REDIRECT.
+Adding a single heuristic for all chromebooks is something completely different
+then adding per model quirks which indeed ideally should be avoided (but this
+is not always possible).
 
-Signed-off-by: Maryam Tahhan <mtahhan@redhat.com>
-Reviewed-by: Toke Høiland-Jørgensen <toke@redhat.com>
-Reviewed-by: Donald Hunter <donald.hunter@gmail.com>
-Reviewed-by: Bagas Sanjaya <bagasdotme@gmail.com>
-Acked-by: Toke Høiland-Jørgensen <toke@redhat.com>
----
- Documentation/bpf/index.rst      |   1 +
- Documentation/bpf/map_devmap.rst | 203 +++++++++++++++++++++++++++++++
- Documentation/bpf/redirect.rst   |  45 +++++++
- 3 files changed, 249 insertions(+)
- create mode 100644 Documentation/bpf/map_devmap.rst
- create mode 100644 Documentation/bpf/redirect.rst
+> I understand it is still questionable to cover the case by allowing duplication when both of a vendor backlight device and native one. To explain my understanding and reasoning for *not* trying to apply the de-duplication rule to the vendor/native combination, let me first describe that the de-duplication which happens in acpi_video_get_backlight_type() is a heuristics and limited.
+> 
+> As the background of acpi_video_get_backlight_type(), there is an assumption that it should be common that both of the firmware, implementing ACPI, and the kernel have code to drive backlight. In the case, the more reliable one should be picked instead of using both, and that is what the statements in `if (video_caps & ACPI_VIDEO_BACKLIGHT)` does.
+> 
+> However, the method has two limitations:
+> 1. It does not cover the case where two backlight devices with the same type exist.
 
-diff --git a/Documentation/bpf/index.rst b/Documentation/bpf/index.rst
-index 1b50de1983ee..1088d44634d6 100644
---- a/Documentation/bpf/index.rst
-+++ b/Documentation/bpf/index.rst
-@@ -29,6 +29,7 @@ that goes into great technical depth about the BPF Architecture.
-    clang-notes
-    linux-notes
-    other
-+   redirect
- 
- .. only::  subproject and html
- 
-diff --git a/Documentation/bpf/map_devmap.rst b/Documentation/bpf/map_devmap.rst
-new file mode 100644
-index 000000000000..1c6025ea5fdc
---- /dev/null
-+++ b/Documentation/bpf/map_devmap.rst
-@@ -0,0 +1,203 @@
-+.. SPDX-License-Identifier: GPL-2.0-only
-+.. Copyright (C) 2022 Red Hat, Inc.
-+
-+=================================================
-+BPF_MAP_TYPE_DEVMAP and BPF_MAP_TYPE_DEVMAP_HASH
-+=================================================
-+
-+.. note::
-+   - ``BPF_MAP_TYPE_DEVMAP`` was introduced in kernel version 4.14
-+   - ``BPF_MAP_TYPE_DEVMAP_HASH`` was introduced in kernel version 5.4
-+
-+``BPF_MAP_TYPE_DEVMAP`` and ``BPF_MAP_TYPE_DEVMAP_HASH`` are BPF maps primarily
-+used as backend maps for the XDP BPF helper call ``bpf_redirect_map()``.
-+``BPF_MAP_TYPE_DEVMAP`` is backed by an array that uses the key as
-+the index to lookup a reference to a net device. While ``BPF_MAP_TYPE_DEVMAP_HASH``
-+is backed by a hash table that uses a key to lookup a reference to a net device.
-+The user provides either <``key``/ ``ifindex``> or <``key``/ ``struct bpf_devmap_val``>
-+pairs to update the maps with new net devices.
-+
-+.. note::
-+    - The key to a hash map doesn't have to be an ``ifindex``.
-+    - While ``BPF_MAP_TYPE_DEVMAP_HASH`` allows for densely packing the net devices
-+      it comes at the cost of a hash of the key when performing a look up.
-+
-+The setup and packet enqueue/send code is shared between the two types of
-+devmap; only the lookup and insertion is different.
-+
-+Usage
-+=====
-+
-+.. c:function::
-+   long bpf_map_update_elem(struct bpf_map *map, const void *key, const void *value, u64 flags)
-+
-+ Net device entries can be added or updated using the ``bpf_map_update_elem()``
-+ helper. This helper replaces existing elements atomically. The ``value`` parameter
-+ can be ``struct bpf_devmap_val`` or a simple ``int ifindex`` for backwards
-+ compatibility.
-+
-+.. note::
-+    The maps can only be updated from user space and not from a BPF program.
-+
-+.. code-block:: c
-+
-+    struct bpf_devmap_val {
-+        __u32 ifindex;   /* device index */
-+        union {
-+            int   fd;  /* prog fd on map write */
-+            __u32 id;  /* prog id on map read */
-+        } bpf_prog;
-+    };
-+
-+DEVMAPs can associate a program with a device entry by adding a ``bpf_prog.fd``
-+to ``struct bpf_devmap_val``. Programs are run after ``XDP_REDIRECT`` and have
-+access to both Rx device and Tx device. The  program associated with the ``fd``
-+must have type XDP with expected attach type ``xdp_devmap``.
-+When a program is associated with a device index, the program is run on an
-+``XDP_REDIRECT`` and before the buffer is added to the per-cpu queue. Examples
-+of how to attach/use xdp_devmap progs can be found in the kernel selftests:
-+
-+- ``tools/testing/selftests/bpf/prog_tests/xdp_devmap_attach.c``
-+- ``tools/testing/selftests/bpf/progs/test_xdp_with_devmap_helpers.c``
-+
-+.. c:function::
-+   void *bpf_map_lookup_elem(struct bpf_map *map, const void *key)
-+
-+net device entries can be retrieved using the ``bpf_map_lookup_elem()``
-+helper.
-+
-+.. c:function::
-+   long bpf_map_delete_elem(struct bpf_map *map, const void *key)
-+
-+net device entries can be deleted using the ``bpf_map_delete_elem()``
-+helper. This helper will return 0 on success, or negative error in case of
-+failure.
-+
-+.. c:function::
-+     long bpf_redirect_map(struct bpf_map *map, u32 key, u64 flags)
-+
-+Redirect the packet to the endpoint referenced by ``map`` at index ``key``.
-+For ``BPF_MAP_TYPE_DEVMAP`` and ``BPF_MAP_TYPE_DEVMAP_HASH`` this map contains
-+references to net devices (for forwarding packets through other ports).
-+
-+The lower two bits of *flags* are used as the return code if the map lookup
-+fails. This is so that the return value can be one of the XDP program return
-+codes up to ``XDP_TX``, as chosen by the caller. The higher bits of ``flags``
-+can be set to ``BPF_F_BROADCAST`` or ``BPF_F_EXCLUDE_INGRESS`` as defined
-+below.
-+
-+With ``BPF_F_BROADCAST`` the packet will be broadcast to all the interfaces
-+in the map, with ``BPF_F_EXCLUDE_INGRESS`` the ingress interface will be excluded
-+from the broadcast.
-+
-+.. note::
-+    The key is ignored if BPF_F_BROADCAST is set.
-+
-+This helper will return ``XDP_REDIRECT`` on success, or the value of the two
-+lower bits of the *flags* argument if the map lookup fails.
-+
-+More information about redirection can be found :doc:`redirect`
-+
-+Examples
-+========
-+
-+Kernel BPF
-+----------
-+
-+The following code snippet shows how to declare a ``BPF_MAP_TYPE_DEVMAP``
-+called tx_port.
-+
-+.. code-block:: c
-+
-+    struct {
-+        __uint(type, BPF_MAP_TYPE_DEVMAP);
-+        __type(key, __u32);
-+        __type(value, __u32);
-+        __uint(max_entries, 256);
-+    } tx_port SEC(".maps");
-+
-+The following code snippet shows how to declare a ``BPF_MAP_TYPE_DEVMAP_HASH``
-+called forward_map.
-+
-+.. code-block:: c
-+
-+    struct {
-+        __uint(type, BPF_MAP_TYPE_DEVMAP_HASH);
-+        __type(key, __u32);
-+        __type(value, struct bpf_devmap_val);
-+        __uint(max_entries, 32);
-+    } forward_map SEC(".maps");
-+
-+.. note::
-+
-+    The value type in the DEVMAP above is a ``struct bpf_devmap_val``
-+
-+The following code snippet shows a simple xdp_redirect_map program. This program
-+would work with a user space program that populates the devmap ``forward_map`` based
-+on ingress ifindexes. The BPF program (below) is redirecting packets using the
-+ingress ``ifindex`` as the ``key``.
-+
-+.. code-block:: c
-+
-+    SEC("xdp")
-+    int xdp_redirect_map_func(struct xdp_md *ctx)
-+    {
-+        int index = ctx->ingress_ifindex;
-+
-+        return bpf_redirect_map(&forward_map, index, 0);
-+    }
-+
-+The following code snippet shows a BPF program that is broadcasting packets to
-+all the interfaces in the ``tx_port`` devmap.
-+
-+.. code-block:: c
-+
-+    SEC("xdp")
-+    int xdp_redirect_map_func(struct xdp_md *ctx)
-+    {
-+        return bpf_redirect_map(&tx_port, 0, BPF_F_BROADCAST | BPF_F_EXCLUDE_INGRESS);
-+    }
-+
-+User space
-+----------
-+
-+The following code snippet shows how to update a devmap called ``tx_port``.
-+
-+.. code-block:: c
-+
-+    int update_devmap(int ifindex, int redirect_ifindex)
-+    {
-+        int ret = -1;
-+
-+        ret = bpf_map_update_elem(bpf_map__fd(tx_port), &ifindex, &redirect_ifindex, 0);
-+        if (ret < 0) {
-+            fprintf(stderr, "Failed to update devmap_ value: %s\n",
-+                strerror(errno));
-+        }
-+
-+        return ret;
-+    }
-+
-+The following code snippet shows how to update a hash_devmap called ``forward_map``.
-+
-+.. code-block:: c
-+
-+    int update_devmap(int ifindex, int redirect_ifindex)
-+    {
-+        struct bpf_devmap_val devmap_val = { .ifindex = redirect_ifindex };
-+        int ret = -1;
-+
-+        ret = bpf_map_update_elem(bpf_map__fd(forward_map), &ifindex, &devmap_val, 0);
-+        if (ret < 0) {
-+            fprintf(stderr, "Failed to update devmap_ value: %s\n",
-+                strerror(errno));
-+        }
-+        return ret;
-+    }
-+
-+References
-+===========
-+
-+- https://lwn.net/Articles/728146/
-+- https://git.kernel.org/pub/scm/linux/kernel/git/bpf/bpf-next.git/commit/?id=6f9d451ab1a33728adb72d7ff66a7b374d665176
-+- https://elixir.bootlin.com/linux/latest/source/net/core/filter.c#L4106
-diff --git a/Documentation/bpf/redirect.rst b/Documentation/bpf/redirect.rst
-new file mode 100644
-index 000000000000..ff49a0698707
---- /dev/null
-+++ b/Documentation/bpf/redirect.rst
-@@ -0,0 +1,45 @@
-+.. SPDX-License-Identifier: GPL-2.0-only
-+.. Copyright (C) 2022 Red Hat, Inc.
-+
-+============
-+XDP_REDIRECT
-+============
-+Supported maps
-+--------------
-+
-+XDP_REDIRECT works with the following map types:
-+
-+- ``BPF_MAP_TYPE_DEVMAP``
-+- ``BPF_MAP_TYPE_DEVMAP_HASH``
-+- ``BPF_MAP_TYPE_CPUMAP``
-+- ``BPF_MAP_TYPE_XSKMAP``
-+
-+For more information on these maps, please see the specific map documentation.
-+
-+Process
-+-------
-+
-+XDP_REDIRECT is a three-step process, implemented as follows:
-+
-+1. The ``bpf_redirect()`` and ``bpf_redirect_map()`` helpers will lookup the
-+   target of the redirect (from the supported map types) and store it (along with
-+   some other metadata) in a per-CPU ``struct bpf_redirect_info``.
-+
-+2. When the program returns the ``XDP_REDIRECT`` return code, the driver will
-+   call ``xdp_do_redirect()`` which will use the information in ``struct
-+   bpf_redirect_info`` to actually enqueue the frame into a map type-specific
-+   bulk queue structure.
-+
-+3. Before exiting its NAPI poll loop, the driver will call ``xdp_do_flush()``,
-+   which will flush all the different bulk queues, thus completing the
-+   redirect.
-+
-+.. note::
-+    Not all drivers support transmitting frames after a redirect, and for
-+    those that do, not all of them support non-linear frames. Non-linear xdp
-+    bufs/frames are bufs/frames that contain more than one fragment.
-+
-+References
-+===========
-+
-+- https://elixir.bootlin.com/linux/latest/source/net/core/filter.c#L4106
--- 
-2.35.3
+This only happens when there are 2 panels; or 2 gpus driving a single panel
+which are both special cases where we actually want 2 backlight devices.
+
+> 2. The underlying assumption does not apply to vendor/native combination.
+> 
+> Regarding the second limitation, I don't even understand the difference between vendor and native. My guess is that a vendor backlight device uses vendor-specific ACPI interface, and a native one directly uses hardware registers. If my guess is correct, the difference between vendor and native does not imply that both of them are likely to exist at the same time. As the conclusion, there is no more motivation to try to de-duplicate the vendor/native combination than to try to de-duplicate combination of devices with a single type.
+> 
+> Of course, it is better if we could also avoid registering two devices with one type for one physical device. Possibly we can do so by providing a parameter to indicate that it is for the same "internal" backlight to devm_backlight_device_register(), and let the function check for the duplication. However, this rule may be too restrict, or may have problems I missed.
+> 
+> Based on the discussion above, we can deduce three possibilities:
+> a. There is no reason to distinguish vendor and native in this case, and we can stick to my current proposal.
+> b. There is a valid reason to distinguish vendor and native, and we can adopt the same strategy that already adopted for ACPI video/vendor combination.
+> c. We can implement de-duplication in devm_backlight_device_register().
+> d. The other possible options are not worth, and we can just implement quirks specific to Chromebook/coreboot.
+> 
+> In case b, it should be noted that vendor and native backlight device do not require ACPI video, and CONFIG_ACPI_VIDEO may not be enabled. In the case, the de-duplication needs to be implemented in backlight class device.
+
+I have been working on the ACPI/x86 backlight detection code since 2015, please trust
+me when I say that allowing both vendor + native backlight devices at the same time
+is a bad idea.
+
+I'm currently in direct contact with the ChromeOS team about fixing the Chromebook
+backlight issue introduced in 6.1-rc1.
+
+If you wan to help, please read:
+
+https://lore.kernel.org/linux-acpi/42a5f2c9-a1dc-8fc0-7334-fe6c390ecfbb@redhat.com/
+
+And try implementing 1 if the 2 solutions suggested there.
+
+Regards,
+
+Hans
+
+
+
+>>> Akihiko Odaki (22):
+>>>    drm/i915/opregion: Improve backlight request condition
+>>>    ACPI: video: Introduce acpi_video_get_backlight_types()
+>>>    LoongArch: Use acpi_video_get_backlight_types()
+>>>    platform/x86: acer-wmi: Use acpi_video_get_backlight_types()
+>>>    platform/x86: asus-laptop: Use acpi_video_get_backlight_types()
+>>>    platform/x86: asus-wmi: Use acpi_video_get_backlight_types()
+>>>    platform/x86: compal-laptop: Use acpi_video_get_backlight_types()
+>>>    platform/x86: eeepc-laptop: Use acpi_video_get_backlight_types()
+>>>    platform/x86: fujitsu-laptop: Use acpi_video_get_backlight_types()
+>>>    platform/x86: ideapad-laptop: Use acpi_video_get_backlight_types()
+>>>    platform/x86: msi-laptop: Use acpi_video_get_backlight_types()
+>>>    platform/x86: msi-wmi: Use acpi_video_get_backlight_types()
+>>>    platform/x86: nvidia-wmi-ec-backlight: Use
+>>>      acpi_video_get_backlight_types()
+>>>    platform/x86: panasonic-laptop: Use acpi_video_get_backlight_types()
+>>>    platform/x86: samsung-laptop: Use acpi_video_get_backlight_types()
+>>>    platform/x86: sony-laptop: Use acpi_video_get_backlight_types()
+>>>    platform/x86: thinkpad_acpi: Use acpi_video_get_backlight_types()
+>>>    platform/x86: toshiba_acpi: Use acpi_video_get_backlight_types()
+>>>    platform/x86: dell-laptop: Use acpi_video_get_backlight_types()
+>>>    platform/x86: intel_oaktrail: Use acpi_video_get_backlight_types()
+>>>    ACPI: video: Remove acpi_video_get_backlight_type()
+>>>    ACPI: video: Fallback to native backlight
+>>>
+>>>   Documentation/gpu/todo.rst                    |  8 +--
+>>>   drivers/acpi/acpi_video.c                     |  2 +-
+>>>   drivers/acpi/video_detect.c                   | 54 ++++++++++---------
+>>>   drivers/gpu/drm/i915/display/intel_opregion.c |  3 +-
+>>>   drivers/platform/loongarch/loongson-laptop.c  |  4 +-
+>>>   drivers/platform/x86/acer-wmi.c               |  2 +-
+>>>   drivers/platform/x86/asus-laptop.c            |  2 +-
+>>>   drivers/platform/x86/asus-wmi.c               |  4 +-
+>>>   drivers/platform/x86/compal-laptop.c          |  2 +-
+>>>   drivers/platform/x86/dell/dell-laptop.c       |  2 +-
+>>>   drivers/platform/x86/eeepc-laptop.c           |  2 +-
+>>>   drivers/platform/x86/fujitsu-laptop.c         |  4 +-
+>>>   drivers/platform/x86/ideapad-laptop.c         |  2 +-
+>>>   drivers/platform/x86/intel/oaktrail.c         |  2 +-
+>>>   drivers/platform/x86/msi-laptop.c             |  2 +-
+>>>   drivers/platform/x86/msi-wmi.c                |  2 +-
+>>>   .../platform/x86/nvidia-wmi-ec-backlight.c    |  2 +-
+>>>   drivers/platform/x86/panasonic-laptop.c       |  2 +-
+>>>   drivers/platform/x86/samsung-laptop.c         |  2 +-
+>>>   drivers/platform/x86/sony-laptop.c            |  2 +-
+>>>   drivers/platform/x86/thinkpad_acpi.c          |  4 +-
+>>>   drivers/platform/x86/toshiba_acpi.c           |  2 +-
+>>>   drivers/video/backlight/backlight.c           | 18 +++++++
+>>>   include/acpi/video.h                          | 21 ++++----
+>>>   include/linux/backlight.h                     |  1 +
+>>>   25 files changed, 85 insertions(+), 66 deletions(-)
+>>>
+>>
+> 
 
