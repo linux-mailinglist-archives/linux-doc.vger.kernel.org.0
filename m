@@ -2,118 +2,111 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id E277260AE85
-	for <lists+linux-doc@lfdr.de>; Mon, 24 Oct 2022 17:06:26 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 3D65360ADA3
+	for <lists+linux-doc@lfdr.de>; Mon, 24 Oct 2022 16:30:37 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S231872AbiJXPGY (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 24 Oct 2022 11:06:24 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:41106 "EHLO
+        id S235392AbiJXOaf (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 24 Oct 2022 10:30:35 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:56160 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S231135AbiJXPGG (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Mon, 24 Oct 2022 11:06:06 -0400
-Received: from mail-qt1-x82c.google.com (mail-qt1-x82c.google.com [IPv6:2607:f8b0:4864:20::82c])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id BA35C14C53A
-        for <linux-doc@vger.kernel.org>; Mon, 24 Oct 2022 06:42:51 -0700 (PDT)
-Received: by mail-qt1-x82c.google.com with SMTP id a24so5578624qto.10
-        for <linux-doc@vger.kernel.org>; Mon, 24 Oct 2022 06:42:51 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google;
-        h=content-transfer-encoding:in-reply-to:from:references:cc:to
-         :content-language:subject:user-agent:mime-version:date:message-id
-         :from:to:cc:subject:date:message-id:reply-to;
-        bh=kVYj3QCBceIQ1q0wupJzLP0eSYUUbr2KRyu/kK2/7zc=;
-        b=G0DWAFKOqyqQFdFIXlj6kLBpRnL5JYzlLp0E6WVy4pls3/6j1AeLtxzxBZ+jhLV++/
-         PxHwC8uWse4I21Ym1lUCctWJicItZ9iEVOYX8Zcr9KIfD34MRXA+/Po28atn5QAX6ZNy
-         k0v0iZYVXFg+8BTYHuXTpqhOYFcbX2bEFUF5ZlIPXjXBnibhTJnVqr8Xf0zyHHEoUwMk
-         BuPuwWFDZdb7LxzX9D/z4tHwdMqfwK8ojwOnJJ9APk1xpHu9coKLCb2z+3XGXdrbx4gD
-         6cS65pGdMJEyUJ+/nb33LGpxrL9SaqhVoD30uprXtaUUNXFTopDYnugtpAsxcLkQNqcU
-         qAuA==
+        with ESMTP id S237311AbiJXO3n (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Mon, 24 Oct 2022 10:29:43 -0400
+Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.129.124])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 35495D7E03
+        for <linux-doc@vger.kernel.org>; Mon, 24 Oct 2022 06:03:29 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+        s=mimecast20190719; t=1666616521;
+        h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+         to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+         in-reply-to:in-reply-to:references:references;
+        bh=trlf8J9SEf2L59s+RkYAnLixFP1fn9n6wg9XCVdSXj8=;
+        b=hSpHhZDbjUPIAwLxXQbIxhJvzgKd2O+PXDVGQPxkcpK117TcvQ4Wc/Kes0cauqfgoPCHKY
+        lFvr2uvInvwJpxduW3ESswGCb2BcCNMMYS+hrZX/eBt0OJ5hsAVYdGBZtTv7/phfhRROLg
+        FZ6EWhMMvsuCRSit0/U+TlNr6R6gYwo=
+Received: from mail-pj1-f69.google.com (mail-pj1-f69.google.com
+ [209.85.216.69]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_128_GCM_SHA256) id
+ us-mta-668-448OUmCpMVKQDYpgvjBn_g-1; Mon, 24 Oct 2022 08:58:05 -0400
+X-MC-Unique: 448OUmCpMVKQDYpgvjBn_g-1
+Received: by mail-pj1-f69.google.com with SMTP id om10-20020a17090b3a8a00b002108b078ab1so8762989pjb.9
+        for <linux-doc@vger.kernel.org>; Mon, 24 Oct 2022 05:58:05 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=content-transfer-encoding:in-reply-to:from:references:cc:to
-         :content-language:subject:user-agent:mime-version:date:message-id
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=kVYj3QCBceIQ1q0wupJzLP0eSYUUbr2KRyu/kK2/7zc=;
-        b=MD4QEqP82SuxNGsRduPu59+qjPRJ+iWn3G9Vpd1ryo9eJiW1q7zJe8jJ7jIhd2iNwZ
-         mRrCscjC6dwynPeYclb2Fot57V9rjwxG6GKQKvVdOQ3I1T4m2wVuEeqbSNPWB5yhILte
-         ARn/gyAAw/Mnrr14eKuSORXz9YkzxeAK4Z0jzwnRJdnAlicRclQ7KMatSyRb9Wd8yM+I
-         G0OOMFUSOs3x064DZ3heOuGcjy4yaGnTLtP29tsUdBwL+rKgBQTEIqk6KToD6x5RdRDp
-         T/MuzxfBm7GjDtDoWtAlO0On/VSVN07Ob1NyalzDj6nLaZ/QFyCJPtZXw8yFdLyZByHO
-         QFpg==
-X-Gm-Message-State: ACrzQf2cH5HiaHWQfUHjByJvePQ090p1eL/CFQcrh1kxpeqmVZoDLGsX
-        vr0IQUILI5P0+tdDbfsmMjZiOKYCgRvLSw==
-X-Google-Smtp-Source: AMsMyM6WG2RrPBdlHGOnuUF5Zn/OxURzRJxpLn8hbsfkyCG52+3lz7p0PbPJNXd2mLDYhFv1n98JaA==
-X-Received: by 2002:a05:620a:22cc:b0:6ee:3e43:ac40 with SMTP id o12-20020a05620a22cc00b006ee3e43ac40mr22841775qki.454.1666614323567;
-        Mon, 24 Oct 2022 05:25:23 -0700 (PDT)
-Received: from [192.168.1.8] ([64.57.193.93])
-        by smtp.gmail.com with ESMTPSA id f4-20020ac84984000000b00398426e706fsm12571885qtq.65.2022.10.24.05.25.21
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Mon, 24 Oct 2022 05:25:23 -0700 (PDT)
-Message-ID: <41060ee4-0103-3c09-632b-81af396c0a06@linaro.org>
-Date:   Mon, 24 Oct 2022 08:25:20 -0400
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=trlf8J9SEf2L59s+RkYAnLixFP1fn9n6wg9XCVdSXj8=;
+        b=nxah1boBeDpn4QP8l7swaA87XZMGlZmJl0DNyn/7UIg1hzcxlTmrf5opU8tN2ok/jI
+         Dpz3xFUr0lwuK/MYHIFpbmbASrU3NC5PPlrlEb/7V7/TNfTjnRPwlFyMZLpaXL6MF0m6
+         D/Sv/5U/dVNreQ50syM58e1YeRYw2nea8RtdDmHuUR6pMspseRMR+6IVB6gOyHk9IaFP
+         i/I70rHwUkqJPzzg6JV5TQduOSzq/9pV4s55JoUfF81T8aADtzzvLpUSoo4f1VVZ2Yie
+         QXButmeSpmr/lp0ijem3UQDW92iS6Mw98MGsfeV9QL3wUdWKsORHl0OHKnCyBn6NQI5S
+         pv5g==
+X-Gm-Message-State: ACrzQf26zpacOE8NCc8z131a2j5jnVE2rX+W3qmQpm4k/dK3FDOjzG1r
+        L52RDBdswW5ZcnrhEvAQ27XyNCLMhevI/R2omaexsc+lNIh86u8eZj9A5EFDDoE7nwa9gT9egEK
+        Z7hYxlIcPotmARZqnQ8iDMSaiYmE7oJwei1Lp
+X-Received: by 2002:aa7:8895:0:b0:565:e8b7:8494 with SMTP id z21-20020aa78895000000b00565e8b78494mr33933481pfe.82.1666616284941;
+        Mon, 24 Oct 2022 05:58:04 -0700 (PDT)
+X-Google-Smtp-Source: AMsMyM6ATKwMjs8fR874pMc+dAGC/SR7UmEe44jSAvTRPQT9j1GVtVWmlm5v8nZMryXEA7LvlnBtw+wBsTve+EXGjdg=
+X-Received: by 2002:aa7:8895:0:b0:565:e8b7:8494 with SMTP id
+ z21-20020aa78895000000b00565e8b78494mr33933461pfe.82.1666616284691; Mon, 24
+ Oct 2022 05:58:04 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.4.0
-Subject: Re: [PATCH 01/21] ARM: s3c: remove all s3c24xx support
-Content-Language: en-US
-To:     Arnd Bergmann <arnd@kernel.org>,
-        linux-arm-kernel@lists.infradead.org
-Cc:     linux-kernel@vger.kernel.org, Ben Dooks <ben-linux@fluff.org>,
-        Simtec Linux Team <linux@simtec.co.uk>,
-        Arnd Bergmann <arnd@arndb.de>,
-        Arnaud Patard <arnaud.patard@rtp-net.org>,
-        Christer Weinigel <christer@weinigel.se>,
-        Guillaume GOURAT <guillaume.gourat@nexvision.tv>,
-        Heiko Stuebner <heiko@sntech.de>,
-        openmoko-kernel@lists.openmoko.org,
+References: <20221020045828.2354731-1-sathyanarayanan.kuppuswamy@linux.intel.com>
+ <20221020045828.2354731-3-sathyanarayanan.kuppuswamy@linux.intel.com>
+ <Y1De4IyAB6n2qs4V@kroah.com> <34ef18d6-69f8-853a-d1ba-7023822e17ff@linux.intel.com>
+ <Y1Iimg0WItgIGq6/@kroah.com> <c09184e3-ac15-b230-6dea-d6718f6f0ab0@linux.intel.com>
+In-Reply-To: <c09184e3-ac15-b230-6dea-d6718f6f0ab0@linux.intel.com>
+From:   Wander Lairson Costa <wander@redhat.com>
+Date:   Mon, 24 Oct 2022 09:57:53 -0300
+Message-ID: <CAAq0SU=w-upGGstmQgTh63zGqLZnEy1OpF+9FwAjSWMuyYyXTg@mail.gmail.com>
+Subject: Re: [PATCH v15 2/3] virt: Add TDX guest driver
+To:     Sathyanarayanan Kuppuswamy 
+        <sathyanarayanan.kuppuswamy@linux.intel.com>
+Cc:     Borislav Petkov <bp@alien8.de>,
+        Thomas Gleixner <tglx@linutronix.de>,
+        Ingo Molnar <mingo@redhat.com>,
+        Dave Hansen <dave.hansen@linux.intel.com>, x86@kernel.org,
+        Shuah Khan <shuah@kernel.org>,
         Jonathan Corbet <corbet@lwn.net>,
-        Alim Akhtar <alim.akhtar@samsung.com>,
-        Olof Johansson <olof@lixom.net>, soc@kernel.org,
-        Rob Herring <robh+dt@kernel.org>,
-        Sylwester Nawrocki <s.nawrocki@samsung.com>,
-        Tomasz Figa <tomasz.figa@gmail.com>,
-        Chanwoo Choi <cw00.choi@samsung.com>,
-        Michael Turquette <mturquette@baylibre.com>,
-        Stephen Boyd <sboyd@kernel.org>, linux-doc@vger.kernel.org,
-        linux-samsung-soc@vger.kernel.org, devicetree@vger.kernel.org,
-        linux-stm32@st-md-mailman.stormreply.com, linux-clk@vger.kernel.org
-References: <20221021202254.4142411-1-arnd@kernel.org>
- <20221021203329.4143397-1-arnd@kernel.org>
-From:   Krzysztof Kozlowski <krzysztof.kozlowski@linaro.org>
-In-Reply-To: <20221021203329.4143397-1-arnd@kernel.org>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-Spam-Status: No, score=-2.1 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,NICE_REPLY_A,RCVD_IN_DNSWL_NONE,
-        SPF_HELO_NONE,SPF_PASS autolearn=unavailable autolearn_force=no
-        version=3.4.6
+        "H . Peter Anvin" <hpa@zytor.com>,
+        "Kirill A . Shutemov" <kirill.shutemov@linux.intel.com>,
+        Tony Luck <tony.luck@intel.com>,
+        Kai Huang <kai.huang@intel.com>,
+        Isaku Yamahata <isaku.yamahata@gmail.com>,
+        marcelo.cerri@canonical.com, tim.gardner@canonical.com,
+        khalid.elmously@canonical.com, philip.cox@canonical.com,
+        linux-kernel@vger.kernel.org, linux-kselftest@vger.kernel.org,
+        linux-doc@vger.kernel.org,
+        Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+Content-Type: text/plain; charset="UTF-8"
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_NONE,
+        RCVD_IN_MSPIKE_H2,SPF_HELO_NONE,SPF_NONE autolearn=ham
+        autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On 21/10/2022 16:27, Arnd Bergmann wrote:
-> From: Arnd Bergmann <arnd@arndb.de>
-> 
-> The platform was deprecated in commit 6a5e69c7ddea ("ARM: s3c: mark
-> as deprecated and schedule removal") and can be removed. This includes
-> all files that are exclusively for s3c24xx and not shared with s3c64xx,
-> as well as the glue logic in Kconfig and the maintainer file entries.
-> 
-> Cc: Arnaud Patard <arnaud.patard@rtp-net.org>
-> Cc: Ben Dooks <ben-linux@fluff.org>
-> Cc: Christer Weinigel <christer@weinigel.se>
-> Cc: Guillaume GOURAT <guillaume.gourat@nexvision.tv>
-> Cc: Heiko Stuebner <heiko@sntech.de>
-> Cc: Simtec Linux Team <linux@simtec.co.uk>
-> Cc: openmoko-kernel@lists.openmoko.org
-> Signed-off-by: Arnd Bergmann <arnd@arndb.de>
-> ---
+On Sun, Oct 23, 2022 at 1:13 PM Sathyanarayanan Kuppuswamy
+<sathyanarayanan.kuppuswamy@linux.intel.com> wrote:
+>
+>
+>
+> On 10/20/22 9:39 PM, Greg Kroah-Hartman wrote:
+> >>> You are allowing userspace to spam the kernel logs, please do not do
+> >>> that.
+> >> Added it to help userspace understand the reason for the failure (only for
+> >> the cases like request param issues and TDCALL failure). Boris recommended
+> >> adding it in the previous review.
+> > Again, you just created a vector for userspace to spam the kernel log.
+> > No kernel driver should ever do that.
+> >
+>
+> Brois, any comments? Do you also agree?
+>
 
-
-Acked-by: Krzysztof Kozlowski <krzysztof.kozlowski@linaro.org>
-
-Best regards,
-Krzysztof
+Maybe dev_err_once() does the job?
 
