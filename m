@@ -2,156 +2,319 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 4366E60B3F9
-	for <lists+linux-doc@lfdr.de>; Mon, 24 Oct 2022 19:23:25 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 4FD4E60B185
+	for <lists+linux-doc@lfdr.de>; Mon, 24 Oct 2022 18:27:04 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S232363AbiJXRXX (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 24 Oct 2022 13:23:23 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:41130 "EHLO
+        id S233977AbiJXQ1B (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 24 Oct 2022 12:27:01 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:59142 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S232569AbiJXRXD (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Mon, 24 Oct 2022 13:23:03 -0400
-Received: from mga17.intel.com (mga17.intel.com [192.55.52.151])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 2930B10D695;
-        Mon, 24 Oct 2022 08:58:08 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1666627090; x=1698163090;
-  h=date:from:to:cc:subject:in-reply-to:message-id:
-   references:mime-version;
-  bh=KF8Fkwnt0swwTeTSQoG35DuMH7urFi84yTD7/k3447s=;
-  b=iWcf2MUMOWojkBMgaMng4oDsQaCoa4ey+XKqlKbxAMVfkMf+T64lJbQd
-   w/x95mYR5gWyqnZxHASCkARdEz5jIeAEwyqc65fkb+qK++twUZIe3Clgk
-   CmPpruVORq6oqDWCHqgt2csSRza/a59A/YFZ9HIs44UZ74fbIWubsj6iQ
-   IB1lqQBS1A39oOSo4OCRiumrTE0aKCtusMMq8kA4g7LVNJEfVFArHR0bS
-   o2AflkoayInpGluuQetlhYhWpjXhoC/YHOB+cw5sCnFotN58nA9TSl8b6
-   QVsQmMdyRwy58+vSon45wK+2Uohol+G0jkQp/9RfTu7TfROZvUXEc+SVg
-   Q==;
-X-IronPort-AV: E=McAfee;i="6500,9779,10510"; a="287840235"
-X-IronPort-AV: E=Sophos;i="5.95,209,1661842800"; 
-   d="scan'208";a="287840235"
-Received: from fmsmga001.fm.intel.com ([10.253.24.23])
-  by fmsmga107.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 24 Oct 2022 08:09:18 -0700
-X-IronPort-AV: E=McAfee;i="6500,9779,10510"; a="773850887"
-X-IronPort-AV: E=Sophos;i="5.95,209,1661842800"; 
-   d="scan'208";a="773850887"
-Received: from rhweight-wrk1.ra.intel.com ([137.102.106.139])
-  by fmsmga001-auth.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 24 Oct 2022 08:09:17 -0700
-Date:   Mon, 24 Oct 2022 08:09:34 -0700 (PDT)
-From:   matthew.gerlach@linux.intel.com
-X-X-Sender: mgerlach@rhweight-WRK1
-To:     =?ISO-8859-15?Q?Ilpo_J=E4rvinen?= <ilpo.jarvinen@linux.intel.com>
-cc:     hao.wu@intel.com, yilun.xu@intel.com, russell.h.weight@intel.com,
-        basheer.ahmed.muddebihal@intel.com, trix@redhat.com,
-        mdf@kernel.org, linux-fpga@vger.kernel.org,
-        linux-doc@vger.kernel.org, LKML <linux-kernel@vger.kernel.org>,
-        tianfei.zhang@intel.com, corbet@lwn.net,
-        Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
-        linux-serial <linux-serial@vger.kernel.org>,
-        Jiri Slaby <jirislaby@kernel.org>, geert+renesas@glider.be,
-        Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
-        niklas.soderlund+renesas@ragnatech.se, macro@orcam.me.uk,
-        johan@kernel.org, Lukas Wunner <lukas@wunner.de>,
-        marpagan@redhat.com
-Subject: Re: [PATCH v4 3/4] fpga: dfl: add basic support DFHv1
-In-Reply-To: <97f6047-e364-8ae7-195c-4cf33c4b3ec7@linux.intel.com>
-Message-ID: <alpine.DEB.2.22.394.2210240808400.2070724@rhweight-WRK1>
-References: <20221020212610.697729-1-matthew.gerlach@linux.intel.com> <20221020212610.697729-4-matthew.gerlach@linux.intel.com> <97f6047-e364-8ae7-195c-4cf33c4b3ec7@linux.intel.com>
-User-Agent: Alpine 2.22 (DEB 394 2020-01-19)
+        with ESMTP id S232355AbiJXQ0b (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Mon, 24 Oct 2022 12:26:31 -0400
+Received: from mail-ed1-x533.google.com (mail-ed1-x533.google.com [IPv6:2a00:1450:4864:20::533])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id DDFBF3FED4;
+        Mon, 24 Oct 2022 08:13:09 -0700 (PDT)
+Received: by mail-ed1-x533.google.com with SMTP id b12so32316897edd.6;
+        Mon, 24 Oct 2022 08:13:09 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=XVIwiwHdQYve1RsKM3+xpHDgfR6/MEyqerk49LTO2rU=;
+        b=VFCzTH9AZFAIayeiJSbGhiW27l0eahy4ulx+qe4ZCLgmbOHfzaWIceLy1klv5Q7fb1
+         6PSsywNgcKqWuzRWw19Ppo4lAXF7jtwOz19bTo3HXsXMk3UuxtBP9eflr5V29WdJG0Lc
+         +Y84Svo+gGM7QMfa30YIlyTcWNLpVx+CA0wjDrUd5q2vzJD6fHJ2urkgUP85y0ZF6aKl
+         CoK2TwakeH74Dy9/6vMyax2HguhiS8gXyYmLnD/EJyToOYACZCrfJ87gtsafa21YZhiI
+         vJHX3ba+CxFuzne50oc1mM4Hz/0c9VbcV/Yi8bSlNIT8/oo6M5dO8hoJMVGsMDOwqKkq
+         hsKw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=XVIwiwHdQYve1RsKM3+xpHDgfR6/MEyqerk49LTO2rU=;
+        b=MhhbBNKn+8e9JYbrbiZP/kMaZV0GeZv1EfupLJ2v93daG/dOfuFmatWpd5lYgO8lxj
+         Bp45h8p8f25cQrO0UG+OeggYIYdehB7fMz8eKXX9YNspuxajh+kIoN/RyHLTv2c6ZQMx
+         aWVjLX5oZNbEyDLDHRL6vlDthAVj5S4bhKivFANV6P7bDOXg3Q4lIPf/NXWHCCzyERbq
+         k3B5I4grUBCW3wlYuptVjx596Bn9/eMQvMqvQJ0qmPTjQz4QMWOMtcVq+Yt/vyMx0KM4
+         UmA3q0/hgfov1/NnOE1i4jq3IIAzmK7hxTApCm9b9eTUQy/b34trIwbxrosyNy7u2Ut/
+         Tbrw==
+X-Gm-Message-State: ACrzQf3JhJTXKyCPGT++lEYLkMHT4Dy3saUdlunNGw9h7+58AwPgkGy9
+        Tj78k1SWgavuPhxRo8rCXa+gXlRvkQiOehfF
+X-Google-Smtp-Source: AMsMyM5JBdj1+0i2Cg0f55rWGBTeiCdojCmdEoBX7Ue//Q0gd0IqvGxAntCeaMbaQvMAUbrs9sacKw==
+X-Received: by 2002:aa7:c6c8:0:b0:460:e19b:ec12 with SMTP id b8-20020aa7c6c8000000b00460e19bec12mr20720191eds.209.1666624250735;
+        Mon, 24 Oct 2022 08:10:50 -0700 (PDT)
+Received: from fedora.. ([87.116.164.153])
+        by smtp.gmail.com with ESMTPSA id fj20-20020a0564022b9400b004618f2127d2sm12437edb.57.2022.10.24.08.10.49
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 24 Oct 2022 08:10:50 -0700 (PDT)
+From:   Aleksa Savic <savicaleksa83@gmail.com>
+To:     linux-hwmon@vger.kernel.org
+Cc:     leonard.anderweit@gmail.com,
+        Aleksa Savic <savicaleksa83@gmail.com>,
+        Jack Doan <me@jackdoan.com>, Jean Delvare <jdelvare@suse.com>,
+        Guenter Roeck <linux@roeck-us.net>,
+        Jonathan Corbet <corbet@lwn.net>, linux-doc@vger.kernel.org,
+        linux-kernel@vger.kernel.org
+Subject: [PATCH v2] hwmon: (aquacomputer_d5next) Add support for temperature sensor offsets
+Date:   Mon, 24 Oct 2022 17:10:39 +0200
+Message-Id: <20221024151039.7222-1-savicaleksa83@gmail.com>
+X-Mailer: git-send-email 2.37.3
 MIME-Version: 1.0
-Content-Type: multipart/mixed; boundary="8323328-2044127639-1666624175=:2070724"
-X-Spam-Status: No, score=-4.8 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_EF,RCVD_IN_DNSWL_MED,SPF_HELO_NONE,
-        SPF_NONE autolearn=ham autolearn_force=no version=3.4.6
+Content-Transfer-Encoding: 8bit
+X-Spam-Status: No, score=-1.8 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_ENVFROM_END_DIGIT,
+        FREEMAIL_FROM,RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,SPF_PASS autolearn=ham
+        autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-  This message is in MIME format.  The first part should be readable text,
-  while the remaining parts are likely unreadable without MIME-aware tools.
+Add support for reading and writing temperature sensor offsets
+on the Aquacomputer D5 Next, Farbwerk 360, Octo and Quadro,
+for which the needed offsets are known. Implemented by
+Leonard Anderweit [1].
 
---8323328-2044127639-1666624175=:2070724
-Content-Type: text/plain; charset=ISO-8859-15; format=flowed
-Content-Transfer-Encoding: 8BIT
+[1] https://github.com/aleksamagicka/aquacomputer_d5next-hwmon/pull/22
 
+Originally-from: Leonard Anderweit <leonard.anderweit@gmail.com>
+Signed-off-by: Aleksa Savic <savicaleksa83@gmail.com>
+---
+Changes in v2:
+- Removed unnecessary init to 0
+- Reformatted lines to avoid line splits
+---
+ Documentation/hwmon/aquacomputer_d5next.rst |  1 +
+ drivers/hwmon/aquacomputer_d5next.c         | 88 +++++++++++++++++----
+ 2 files changed, 75 insertions(+), 14 deletions(-)
 
+diff --git a/Documentation/hwmon/aquacomputer_d5next.rst b/Documentation/hwmon/aquacomputer_d5next.rst
+index e238533b5fe0..15226346434d 100644
+--- a/Documentation/hwmon/aquacomputer_d5next.rst
++++ b/Documentation/hwmon/aquacomputer_d5next.rst
+@@ -62,6 +62,7 @@ Sysfs entries
+ 
+ ================ ==============================================================
+ temp[1-20]_input Physical/virtual temperature sensors (in millidegrees Celsius)
++temp[1-4]_offset Temperature sensor correction offset (in millidegrees Celsius)
+ fan[1-8]_input   Pump/fan speed (in RPM) / Flow speed (in dL/h)
+ power[1-8]_input Pump/fan power (in micro Watts)
+ in[0-7]_input    Pump/fan voltage (in milli Volts)
+diff --git a/drivers/hwmon/aquacomputer_d5next.c b/drivers/hwmon/aquacomputer_d5next.c
+index c51a2678f0eb..608f57f59cf9 100644
+--- a/drivers/hwmon/aquacomputer_d5next.c
++++ b/drivers/hwmon/aquacomputer_d5next.c
+@@ -80,6 +80,7 @@ static u8 secondary_ctrl_report[] = {
+ #define D5NEXT_5V_VOLTAGE		0x39
+ #define D5NEXT_12V_VOLTAGE		0x37
+ #define D5NEXT_CTRL_REPORT_SIZE		0x329
++#define D5NEXT_TEMP_CTRL_OFFSET		0x2D
+ static u8 d5next_sensor_fan_offsets[] = { D5NEXT_PUMP_OFFSET, D5NEXT_FAN_OFFSET };
+ 
+ /* Pump and fan speed registers in D5 Next control report (from 0-100%) */
+@@ -94,6 +95,8 @@ static u16 d5next_ctrl_fan_offsets[] = { 0x97, 0x42 };
+ #define FARBWERK360_SENSOR_START		0x32
+ #define FARBWERK360_NUM_VIRTUAL_SENSORS		16
+ #define FARBWERK360_VIRTUAL_SENSORS_START	0x3a
++#define FARBWERK360_CTRL_REPORT_SIZE		0x682
++#define FARBWERK360_TEMP_CTRL_OFFSET		0x8
+ 
+ /* Register offsets for the Octo fan controller */
+ #define OCTO_POWER_CYCLES		0x18
+@@ -103,6 +106,7 @@ static u16 d5next_ctrl_fan_offsets[] = { 0x97, 0x42 };
+ #define OCTO_NUM_VIRTUAL_SENSORS	16
+ #define OCTO_VIRTUAL_SENSORS_START	0x45
+ #define OCTO_CTRL_REPORT_SIZE		0x65F
++#define OCTO_TEMP_CTRL_OFFSET		0xA
+ static u8 octo_sensor_fan_offsets[] = { 0x7D, 0x8A, 0x97, 0xA4, 0xB1, 0xBE, 0xCB, 0xD8 };
+ 
+ /* Fan speed registers in Octo control report (from 0-100%) */
+@@ -117,6 +121,7 @@ static u16 octo_ctrl_fan_offsets[] = { 0x5B, 0xB0, 0x105, 0x15A, 0x1AF, 0x204, 0
+ #define QUADRO_VIRTUAL_SENSORS_START	0x3c
+ #define QUADRO_CTRL_REPORT_SIZE		0x3c1
+ #define QUADRO_FLOW_SENSOR_OFFSET	0x6e
++#define QUADRO_TEMP_CTRL_OFFSET		0xA
+ static u8 quadro_sensor_fan_offsets[] = { 0x70, 0x7D, 0x8A, 0x97 };
+ 
+ /* Fan speed registers in Quadro control report (from 0-100%) */
+@@ -282,6 +287,7 @@ struct aqc_data {
+ 	int temp_sensor_start_offset;
+ 	int num_virtual_temp_sensors;
+ 	int virtual_temp_sensor_start_offset;
++	u16 temp_ctrl_offset;
+ 	u16 power_cycle_count_offset;
+ 	u8 flow_sensor_offset;
+ 
+@@ -365,8 +371,8 @@ static int aqc_send_ctrl_data(struct aqc_data *priv)
+ 	return ret;
+ }
+ 
+-/* Refreshes the control buffer and returns value at offset */
+-static int aqc_get_ctrl_val(struct aqc_data *priv, int offset)
++/* Refreshes the control buffer and stores value at offset in val */
++static int aqc_get_ctrl_val(struct aqc_data *priv, int offset, long *val)
+ {
+ 	int ret;
+ 
+@@ -376,7 +382,7 @@ static int aqc_get_ctrl_val(struct aqc_data *priv, int offset)
+ 	if (ret < 0)
+ 		goto unlock_and_return;
+ 
+-	ret = get_unaligned_be16(priv->buffer + offset);
++	*val = (s16)get_unaligned_be16(priv->buffer + offset);
+ 
+ unlock_and_return:
+ 	mutex_unlock(&priv->mutex);
+@@ -393,7 +399,7 @@ static int aqc_set_ctrl_val(struct aqc_data *priv, int offset, long val)
+ 	if (ret < 0)
+ 		goto unlock_and_return;
+ 
+-	put_unaligned_be16((u16)val, priv->buffer + offset);
++	put_unaligned_be16((s16)val, priv->buffer + offset);
+ 
+ 	ret = aqc_send_ctrl_data(priv);
+ 
+@@ -408,8 +414,28 @@ static umode_t aqc_is_visible(const void *data, enum hwmon_sensor_types type, u3
+ 
+ 	switch (type) {
+ 	case hwmon_temp:
++		if (channel < priv->num_temp_sensors) {
++			switch (attr) {
++			case hwmon_temp_label:
++			case hwmon_temp_input:
++				return 0444;
++			case hwmon_temp_offset:
++				if (priv->temp_ctrl_offset != 0)
++					return 0644;
++				break;
++			default:
++				break;
++			}
++		}
++
+ 		if (channel < priv->num_temp_sensors + priv->num_virtual_temp_sensors)
+-			return 0444;
++			switch (attr) {
++			case hwmon_temp_label:
++			case hwmon_temp_input:
++				return 0444;
++			default:
++				break;
++			}
+ 		break;
+ 	case hwmon_pwm:
+ 		if (priv->fan_ctrl_offsets && channel < priv->num_fans) {
+@@ -492,10 +518,25 @@ static int aqc_read(struct device *dev, enum hwmon_sensor_types type, u32 attr,
+ 
+ 	switch (type) {
+ 	case hwmon_temp:
+-		if (priv->temp_input[channel] == -ENODATA)
+-			return -ENODATA;
++		switch (attr) {
++		case hwmon_temp_input:
++			if (priv->temp_input[channel] == -ENODATA)
++				return -ENODATA;
++
++			*val = priv->temp_input[channel];
++			break;
++		case hwmon_temp_offset:
++			ret =
++			    aqc_get_ctrl_val(priv, priv->temp_ctrl_offset +
++					     channel * AQC_TEMP_SENSOR_SIZE, val);
++			if (ret < 0)
++				return ret;
+ 
+-		*val = priv->temp_input[channel];
++			*val *= 10;
++			break;
++		default:
++			break;
++		}
+ 		break;
+ 	case hwmon_fan:
+ 		*val = priv->speed_input[channel];
+@@ -505,7 +546,7 @@ static int aqc_read(struct device *dev, enum hwmon_sensor_types type, u32 attr,
+ 		break;
+ 	case hwmon_pwm:
+ 		if (priv->fan_ctrl_offsets) {
+-			ret = aqc_get_ctrl_val(priv, priv->fan_ctrl_offsets[channel]);
++			ret = aqc_get_ctrl_val(priv, priv->fan_ctrl_offsets[channel], val);
+ 			if (ret < 0)
+ 				return ret;
+ 
+@@ -563,6 +604,21 @@ static int aqc_write(struct device *dev, enum hwmon_sensor_types type, u32 attr,
+ 	struct aqc_data *priv = dev_get_drvdata(dev);
+ 
+ 	switch (type) {
++	case hwmon_temp:
++		switch (attr) {
++		case hwmon_temp_offset:
++			/* Limit temp offset to +/- 15K as in the official software */
++			val = clamp_val(val, -15000, 15000) / 10;
++			ret =
++			    aqc_set_ctrl_val(priv, priv->temp_ctrl_offset +
++					     channel * AQC_TEMP_SENSOR_SIZE, val);
++			if (ret < 0)
++				return ret;
++			break;
++		default:
++			return -EOPNOTSUPP;
++		}
++		break;
+ 	case hwmon_pwm:
+ 		switch (attr) {
+ 		case hwmon_pwm_input:
+@@ -597,10 +653,10 @@ static const struct hwmon_ops aqc_hwmon_ops = {
+ 
+ static const struct hwmon_channel_info *aqc_info[] = {
+ 	HWMON_CHANNEL_INFO(temp,
+-			   HWMON_T_INPUT | HWMON_T_LABEL,
+-			   HWMON_T_INPUT | HWMON_T_LABEL,
+-			   HWMON_T_INPUT | HWMON_T_LABEL,
+-			   HWMON_T_INPUT | HWMON_T_LABEL,
++			   HWMON_T_INPUT | HWMON_T_LABEL | HWMON_T_OFFSET,
++			   HWMON_T_INPUT | HWMON_T_LABEL | HWMON_T_OFFSET,
++			   HWMON_T_INPUT | HWMON_T_LABEL | HWMON_T_OFFSET,
++			   HWMON_T_INPUT | HWMON_T_LABEL | HWMON_T_OFFSET,
+ 			   HWMON_T_INPUT | HWMON_T_LABEL,
+ 			   HWMON_T_INPUT | HWMON_T_LABEL,
+ 			   HWMON_T_INPUT | HWMON_T_LABEL,
+@@ -853,6 +909,7 @@ static int aqc_probe(struct hid_device *hdev, const struct hid_device_id *id)
+ 		priv->virtual_temp_sensor_start_offset = D5NEXT_VIRTUAL_SENSORS_START;
+ 		priv->power_cycle_count_offset = D5NEXT_POWER_CYCLES;
+ 		priv->buffer_size = D5NEXT_CTRL_REPORT_SIZE;
++		priv->temp_ctrl_offset = D5NEXT_TEMP_CTRL_OFFSET;
+ 
+ 		priv->temp_label = label_d5next_temp;
+ 		priv->virtual_temp_label = label_virtual_temp_sensors;
+@@ -877,7 +934,8 @@ static int aqc_probe(struct hid_device *hdev, const struct hid_device_id *id)
+ 		priv->temp_sensor_start_offset = FARBWERK360_SENSOR_START;
+ 		priv->num_virtual_temp_sensors = FARBWERK360_NUM_VIRTUAL_SENSORS;
+ 		priv->virtual_temp_sensor_start_offset = FARBWERK360_VIRTUAL_SENSORS_START;
+-
++		priv->buffer_size = FARBWERK360_CTRL_REPORT_SIZE;
++		priv->temp_ctrl_offset = FARBWERK360_TEMP_CTRL_OFFSET;
+ 		priv->temp_label = label_temp_sensors;
+ 		priv->virtual_temp_label = label_virtual_temp_sensors;
+ 		break;
+@@ -893,6 +951,7 @@ static int aqc_probe(struct hid_device *hdev, const struct hid_device_id *id)
+ 		priv->virtual_temp_sensor_start_offset = OCTO_VIRTUAL_SENSORS_START;
+ 		priv->power_cycle_count_offset = OCTO_POWER_CYCLES;
+ 		priv->buffer_size = OCTO_CTRL_REPORT_SIZE;
++		priv->temp_ctrl_offset = OCTO_TEMP_CTRL_OFFSET;
+ 
+ 		priv->temp_label = label_temp_sensors;
+ 		priv->virtual_temp_label = label_virtual_temp_sensors;
+@@ -914,6 +973,7 @@ static int aqc_probe(struct hid_device *hdev, const struct hid_device_id *id)
+ 		priv->power_cycle_count_offset = QUADRO_POWER_CYCLES;
+ 		priv->buffer_size = QUADRO_CTRL_REPORT_SIZE;
+ 		priv->flow_sensor_offset = QUADRO_FLOW_SENSOR_OFFSET;
++		priv->temp_ctrl_offset = QUADRO_TEMP_CTRL_OFFSET;
+ 
+ 		priv->temp_label = label_temp_sensors;
+ 		priv->virtual_temp_label = label_virtual_temp_sensors;
+-- 
+2.37.3
 
-On Fri, 21 Oct 2022, Ilpo Järvinen wrote:
-
-> On Thu, 20 Oct 2022, matthew.gerlach@linux.intel.com wrote:
->
->> From: Matthew Gerlach <matthew.gerlach@linux.intel.com>
->>
->> Add generic support for MSI-X interrupts for DFL devices.
->>
->> The location of a feature's registers is explicitly
->> described in DFHv1 and can be relative to the base of the DFHv1
->> or an absolute address.  Parse the location and pass the information
->> to DFL driver.
->>
->> Signed-off-by: Matthew Gerlach <matthew.gerlach@linux.intel.com>
->> ---
->> v4: s/MSIX/MSI_X
->>     move kernel doc to implementation
->>     use structure assignment
->>     fix decode of absolute address
->>     clean up comment in parse_feature_irqs
->>     remove use of csr_res
->>
->> v3: remove unneeded blank line
->>     use clearer variable name
->>     pass finfo into parse_feature_irqs()
->>     refactor code for better indentation
->>     use switch statement for irq parsing
->>     squash in code parsing register location
->>
->> v2: fix kernel doc
->>     clarify use of DFH_VERSION field
->> ---
->
->> +static int dfh_get_psize(void __iomem *dfh_base, resource_size_t max)
->> +{
->> +	int size = 0;
->> +	u64 v, next;
->> +
->> +	if (!FIELD_GET(DFHv1_CSR_SIZE_GRP_HAS_PARAMS,
->> +		       readq(dfh_base + DFHv1_CSR_SIZE_GRP)))
->> +		return 0;
->> +
->> +	while (size + DFHv1_PARAM_HDR < max) {
->> +		v = readq(dfh_base + DFHv1_PARAM_HDR + size);
->> +
->> +		next = FIELD_GET(DFHv1_PARAM_HDR_NEXT_OFFSET, v);
->> +		if (!(next & ~DFHv1_PARAM_HDR_NEXT_MASK))
->
-> In general, try to not use inverse logic for defining masks. However here,
-> just change DFHv1_PARAM_HDR_NEXT_OFFSET to not include any extra bits
-> (no rsvd nor eop) and you no longer need this extra masking.
-
-I agree that defining the fields better and using FIELD_GET would make 
-this code cleaner.
-
->
->> +			return -EINVAL;
->> +
->> +		size += next & ~DFHv1_PARAM_HDR_NEXT_MASK;
->
-> ...Then you can drop this anding too.
->
->> +
->> +		if (next & DFHv1_PARAM_HDR_NEXT_EOL)
->
-> Your docs say EOP, but here you use EOL.
-
-Thanks for catching the inconsistency.
-
->
-> Change DFHv1_PARAM_HDR_NEXT_EOL such that this is extracted directly from
-> v.
->
-> -- 
-> i.
->
---8323328-2044127639-1666624175=:2070724--
