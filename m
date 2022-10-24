@@ -2,143 +2,134 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 867B260B50A
-	for <lists+linux-doc@lfdr.de>; Mon, 24 Oct 2022 20:12:21 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 88BE160B52A
+	for <lists+linux-doc@lfdr.de>; Mon, 24 Oct 2022 20:13:18 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S231699AbiJXSMT (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 24 Oct 2022 14:12:19 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:50176 "EHLO
+        id S231494AbiJXSND (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 24 Oct 2022 14:13:03 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:58756 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S231805AbiJXSMC (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Mon, 24 Oct 2022 14:12:02 -0400
-Received: from wnew4-smtp.messagingengine.com (wnew4-smtp.messagingengine.com [64.147.123.18])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 0E4B626C44E;
-        Mon, 24 Oct 2022 09:53:44 -0700 (PDT)
-Received: from compute3.internal (compute3.nyi.internal [10.202.2.43])
-        by mailnew.west.internal (Postfix) with ESMTP id 382C32B066F1;
-        Mon, 24 Oct 2022 10:27:54 -0400 (EDT)
-Received: from imap51 ([10.202.2.101])
-  by compute3.internal (MEProxy); Mon, 24 Oct 2022 10:27:56 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=arndb.de; h=cc
-        :cc:content-transfer-encoding:content-type:date:date:from:from
-        :in-reply-to:in-reply-to:message-id:mime-version:references
-        :reply-to:sender:subject:subject:to:to; s=fm2; t=1666621673; x=
-        1666628873; bh=j5Xmm1hIOnDXfjVvOH1nBH2jD1dezyQFcZOvqExQy/Q=; b=R
-        FOCrFIiTxT4VVyc9mEDQdkEn+wGl6bgl85vYTnOHs9SmkuBXihbN449jNzacB8jI
-        rTTZjSbMHEkOE6lva8OK7H+tWMs7X8EpOfrjmtb6/oVOGDu9QbZ0yoFBmwCcqV/f
-        OY2S9hiS5k+xnEniFrSzWv69cVnlbB0lhSbJ9CqHWVp9ya8AIfEqbYesbuFRq9Qd
-        PSVVASHWixWTm4BTrueGRqrr2qoyHEcyvUm2O9mtgTacw1X/e4TGUOI7spwRF4k8
-        NrLH6dKrsa3XnjqeccrXYuGDRxoUwvp7+h9Ls1LReoWuxJMTQSMuUwY2jFO3D+Jm
-        dHiTM/iSZCKnRNoHbTlJQ==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
-        messagingengine.com; h=cc:cc:content-transfer-encoding
-        :content-type:date:date:feedback-id:feedback-id:from:from
-        :in-reply-to:in-reply-to:message-id:mime-version:references
-        :reply-to:sender:subject:subject:to:to:x-me-proxy:x-me-proxy
-        :x-me-sender:x-me-sender:x-sasl-enc; s=fm3; t=1666621673; x=
-        1666628873; bh=j5Xmm1hIOnDXfjVvOH1nBH2jD1dezyQFcZOvqExQy/Q=; b=j
-        bQ9YG0M5QUfhAMC5KcxlBfNv3OPZ3dcPqvAHDAkHJFJBtkG/oKiHEgB/CGkfd5D4
-        4WXIXCvh3vM6V7jLlWzrMUTV4Fpaa7SNUDAMOjP9/s26EtfpqJpXHuJvjncEf/Hb
-        l2A1rrOSEilHAzFog8P4c885b26rzqZmcbf/q5PoNykrPcDsbeuOwk+rlSf/XLVe
-        pO9o+yifsE2IWF0Wd9xtiS41jAXVVz31C3ZyF1314cL/e+AOiNL9MtukAPZEZ2j8
-        gZbNNP84mt+QmazljsROIuA11JsXMnAQOzsIvfqse5ElLjsQWYAznhJvSftlDiy8
-        UDnTIRgLvHwK0iMEY12aQ==
-X-ME-Sender: <xms:6KBWY_gwmdA9MhV8F7kI-IAT6RjoV8UyoY8vJd_im8nzMhPr-w5SEg>
-    <xme:6KBWY8DFzu_H1NXJNLoNcdftX0Fccg83xmP1gZ_Oo0PjdmKShBDqthVvsAPur-jjx
-    nKKucVvJWn2dHOfBYM>
-X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvfedrgedtgedgjedvucetufdoteggodetrfdotf
-    fvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdfqfgfvpdfurfetoffkrfgpnffqhgen
-    uceurghilhhouhhtmecufedttdenucesvcftvggtihhpihgvnhhtshculddquddttddmne
-    cujfgurhepofgfggfkjghffffhvfevufgtgfesthhqredtreerjeenucfhrhhomhepfdet
-    rhhnugcuuegvrhhgmhgrnhhnfdcuoegrrhhnugesrghrnhgusgdruggvqeenucggtffrrg
-    htthgvrhhnpefgkeeuleegieeghfduudeltdekfeffjeeuleehleefudettddtgfevueef
-    feeigeenucffohhmrghinhepkhgvrhhnvghlrdhorhhgnecuvehluhhsthgvrhfuihiivg
-    eptdenucfrrghrrghmpehmrghilhhfrhhomheprghrnhgusegrrhhnuggsrdguvg
-X-ME-Proxy: <xmx:6KBWY_EKFaUSxfmbFq4u45xHq3kzkmlHX7APZxOrmpX4NKAPPIVhLw>
-    <xmx:6KBWY8Sa2YoRcKoTYZV4cAVrgo3XWvtPHJE_rauldYzUHnGUJcpV8g>
-    <xmx:6KBWY8zBpoCDaeX7eS6StOnrb6kSgFjb8QNDCQkjBv4w_fjHvPPK9g>
-    <xmx:6aBWY7iVKZZZeLJhXB65ARrCr06Q6ReuiHPabu10swOp_0SKXFR2BwSFrZk>
-Feedback-ID: i56a14606:Fastmail
-Received: by mailuser.nyi.internal (Postfix, from userid 501)
-        id F38B1B60086; Mon, 24 Oct 2022 10:27:51 -0400 (EDT)
-X-Mailer: MessagingEngine.com Webmail Interface
-User-Agent: Cyrus-JMAP/3.7.0-alpha0-1047-g9e4af4ada4-fm-20221005.001-g9e4af4ad
-Mime-Version: 1.0
-Message-Id: <8d6ddb0d-98be-4c4d-9523-f024c339c8d0@app.fastmail.com>
-In-Reply-To: <2204103.iZASKD2KPV@diego>
-References: <20221021202254.4142411-1-arnd@kernel.org>
- <20221021203329.4143397-1-arnd@kernel.org> <2204103.iZASKD2KPV@diego>
-Date:   Mon, 24 Oct 2022 16:27:31 +0200
-From:   "Arnd Bergmann" <arnd@arndb.de>
-To:     =?UTF-8?Q?Heiko_St=C3=BCbner?= <heiko@sntech.de>,
-        linux-arm-kernel@lists.infradead.org,
-        "Krzysztof Kozlowski" <krzysztof.kozlowski@linaro.org>,
-        "Arnd Bergmann" <arnd@kernel.org>
-Cc:     linux-kernel@vger.kernel.org, "Ben Dooks" <ben-linux@fluff.org>,
-        "Simtec Linux Team" <linux@simtec.co.uk>,
-        "Arnaud Patard" <arnaud.patard@rtp-net.org>,
-        "Christer Weinigel" <christer@weinigel.se>,
-        "Guillaume GOURAT" <guillaume.gourat@nexvision.tv>,
-        openmoko-kernel@lists.openmoko.org,
-        "Jonathan Corbet" <corbet@lwn.net>,
-        "Alim Akhtar" <alim.akhtar@samsung.com>,
-        "Olof Johansson" <olof@lixom.net>, soc@kernel.org,
-        "Rob Herring" <robh+dt@kernel.org>,
-        "Sylwester Nawrocki" <s.nawrocki@samsung.com>,
-        "Tomasz Figa" <tomasz.figa@gmail.com>,
-        "Chanwoo Choi" <cw00.choi@samsung.com>,
-        "Michael Turquette" <mturquette@baylibre.com>,
-        "Stephen Boyd" <sboyd@kernel.org>, linux-doc@vger.kernel.org,
-        linux-samsung-soc@vger.kernel.org, devicetree@vger.kernel.org,
-        linux-stm32@st-md-mailman.stormreply.com, linux-clk@vger.kernel.org
-Subject: Re: [PATCH 01/21] ARM: s3c: remove all s3c24xx support
-Content-Type: text/plain;charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-X-Spam-Status: No, score=-2.4 required=5.0 tests=BAYES_00,DKIM_INVALID,
-        DKIM_SIGNED,RCVD_IN_DNSWL_LOW,SPF_HELO_PASS,SPF_PASS autolearn=ham
-        autolearn_force=no version=3.4.6
+        with ESMTP id S231936AbiJXSMW (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Mon, 24 Oct 2022 14:12:22 -0400
+Received: from mga18.intel.com (mga18.intel.com [134.134.136.126])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 461B757E17;
+        Mon, 24 Oct 2022 09:54:17 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1666630459; x=1698166459;
+  h=date:from:to:cc:subject:message-id:references:
+   mime-version:in-reply-to;
+  bh=f12+hDSs2xhh9+cgFUHAQwPz5EdOX4nrGTxSpB9xto8=;
+  b=Lx4O7B4HXPSw6eCOX6fxKVKroy/kLcxL2hy81b68CBxeeJRyLCmgMCfL
+   +GmcUQtQfNoaO0aKDUWtL30YejrZoBatDCS3PeFJE4DrVZy75n4meLb3V
+   lTd9rYHhJuaupDbeWYGNYIRyNXZj3pq47viEZfMgcU99FnPK0/qZgfmIi
+   gspbcVr59orDB9o72YPvLlrDzWGOkCq17RmNQJRAMNg2/pBM0j0LNOMfA
+   bj+i/Q+CUyf8nP7jn5Mf5krunxQliQkthbAZqVw/QMtNgTnCY5KYq20Fa
+   rnUMOQajJskrGGHNEtBU+aDreoW/sfo7JqEpyO72zuy8iUIvlJ76mj0/t
+   A==;
+X-IronPort-AV: E=McAfee;i="6500,9779,10510"; a="290739879"
+X-IronPort-AV: E=Sophos;i="5.95,209,1661842800"; 
+   d="scan'208";a="290739879"
+Received: from orsmga002.jf.intel.com ([10.7.209.21])
+  by orsmga106.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 24 Oct 2022 07:59:41 -0700
+X-IronPort-AV: E=McAfee;i="6500,9779,10510"; a="631284461"
+X-IronPort-AV: E=Sophos;i="5.95,209,1661842800"; 
+   d="scan'208";a="631284461"
+Received: from unisar-mobl.ger.corp.intel.com (HELO box.shutemov.name) ([10.249.38.228])
+  by orsmga002-auth.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 24 Oct 2022 07:59:30 -0700
+Received: by box.shutemov.name (Postfix, from userid 1000)
+        id 381A7104D5C; Mon, 24 Oct 2022 17:59:28 +0300 (+03)
+Date:   Mon, 24 Oct 2022 17:59:28 +0300
+From:   "Kirill A . Shutemov" <kirill.shutemov@linux.intel.com>
+To:     Sean Christopherson <seanjc@google.com>
+Cc:     Chao Peng <chao.p.peng@linux.intel.com>,
+        Vishal Annapurve <vannapurve@google.com>, kvm@vger.kernel.org,
+        linux-kernel@vger.kernel.org, linux-mm@kvack.org,
+        linux-fsdevel@vger.kernel.org, linux-api@vger.kernel.org,
+        linux-doc@vger.kernel.org, qemu-devel@nongnu.org,
+        Paolo Bonzini <pbonzini@redhat.com>,
+        Jonathan Corbet <corbet@lwn.net>,
+        Vitaly Kuznetsov <vkuznets@redhat.com>,
+        Wanpeng Li <wanpengli@tencent.com>,
+        Jim Mattson <jmattson@google.com>,
+        Joerg Roedel <joro@8bytes.org>,
+        Thomas Gleixner <tglx@linutronix.de>,
+        Ingo Molnar <mingo@redhat.com>, Borislav Petkov <bp@alien8.de>,
+        x86@kernel.org, "H . Peter Anvin" <hpa@zytor.com>,
+        Hugh Dickins <hughd@google.com>,
+        Jeff Layton <jlayton@kernel.org>,
+        "J . Bruce Fields" <bfields@fieldses.org>,
+        Andrew Morton <akpm@linux-foundation.org>,
+        Shuah Khan <shuah@kernel.org>, Mike Rapoport <rppt@kernel.org>,
+        Steven Price <steven.price@arm.com>,
+        "Maciej S . Szmigiero" <mail@maciej.szmigiero.name>,
+        Vlastimil Babka <vbabka@suse.cz>,
+        Yu Zhang <yu.c.zhang@linux.intel.com>, luto@kernel.org,
+        jun.nakajima@intel.com, dave.hansen@intel.com, ak@linux.intel.com,
+        david@redhat.com, aarcange@redhat.com, ddutile@redhat.com,
+        dhildenb@redhat.com, Quentin Perret <qperret@google.com>,
+        Michael Roth <michael.roth@amd.com>, mhocko@suse.com,
+        Muchun Song <songmuchun@bytedance.com>, wei.w.wang@intel.com
+Subject: Re: [PATCH v8 1/8] mm/memfd: Introduce userspace inaccessible memfd
+Message-ID: <20221024145928.66uehsokp7bpa2st@box.shutemov.name>
+References: <20220915142913.2213336-1-chao.p.peng@linux.intel.com>
+ <20220915142913.2213336-2-chao.p.peng@linux.intel.com>
+ <CAGtprH_MiCxT2xSxD2UrM4M+ghL0V=XEZzEX4Fo5wQKV4fAL4w@mail.gmail.com>
+ <20221021134711.GA3607894@chaop.bj.intel.com>
+ <Y1LGRvVaWwHS+Zna@google.com>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <Y1LGRvVaWwHS+Zna@google.com>
+X-Spam-Status: No, score=-2.5 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_EF,SPF_HELO_NONE,SPF_NONE
+        autolearn=ham autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Sat, Oct 22, 2022, at 22:56, Heiko St=C3=BCbner wrote:
-> Am Freitag, 21. Oktober 2022, 22:27:34 CEST schrieb Arnd Bergmann:
->> From: Arnd Bergmann <arnd@arndb.de>
->>=20
->> The platform was deprecated in commit 6a5e69c7ddea ("ARM: s3c: mark
->> as deprecated and schedule removal") and can be removed. This includes
->> all files that are exclusively for s3c24xx and not shared with s3c64x=
-x,
->> as well as the glue logic in Kconfig and the maintainer file entries.
->>=20
->> Cc: Arnaud Patard <arnaud.patard@rtp-net.org>
->> Cc: Ben Dooks <ben-linux@fluff.org>
->> Cc: Christer Weinigel <christer@weinigel.se>
->> Cc: Guillaume GOURAT <guillaume.gourat@nexvision.tv>
->> Cc: Heiko Stuebner <heiko@sntech.de>
->> Cc: Simtec Linux Team <linux@simtec.co.uk>
->> Cc: openmoko-kernel@lists.openmoko.org
->> Signed-off-by: Arnd Bergmann <arnd@arndb.de>
->
-> So many memories of me starting out in the kernel on s3c24xx.
-> But it's no use trying to keep stuff around that nobody will likely
-> ever use again. So with a sad face
->
-> Acked-by: Heiko Stuebner <heiko@sntech.de>
->
->
-> though you might want to also include
-> 	drivers/dma/s3c24xx-dma.c
+On Fri, Oct 21, 2022 at 04:18:14PM +0000, Sean Christopherson wrote:
+> On Fri, Oct 21, 2022, Chao Peng wrote:
+> > > 
+> > > In the context of userspace inaccessible memfd, what would be a
+> > > suggested way to enforce NUMA memory policy for physical memory
+> > > allocation? mbind[1] won't work here in absence of virtual address
+> > > range.
+> > 
+> > How about set_mempolicy():
+> > https://www.man7.org/linux/man-pages/man2/set_mempolicy.2.html
+> 
+> Andy Lutomirski brought this up in an off-list discussion way back when the whole
+> private-fd thing was first being proposed.
+> 
+>   : The current Linux NUMA APIs (mbind, move_pages) work on virtual addresses.  If
+>   : we want to support them for TDX private memory, we either need TDX private
+>   : memory to have an HVA or we need file-based equivalents. Arguably we should add
+>   : fmove_pages and fbind syscalls anyway, since the current API is quite awkward
+>   : even for tools like numactl.
 
-This was in a separate patch that removes the driver:
+Yeah, we definitely have gaps in API wrt NUMA, but I don't think it be
+addressed in the initial submission.
 
-https://lore.kernel.org/linux-arm-kernel/20221021203329.4143397-14-arnd@=
-kernel.org/
+BTW, it is not regression comparing to old KVM slots, if the memory is
+backed by memfd or other file:
 
-In the first patch, I only include references to removed
-Kconfig symbols that would not make sense to split out into
-separate patches.
+MBIND(2)
+       The  specified policy will be ignored for any MAP_SHARED mappings in the
+       specified memory range.  Rather the pages will be allocated according to
+       the  memory  policy  of the thread that caused the page to be allocated.
+       Again, this may not be the thread that called mbind().
 
-    Arnd
+It is not clear how to define fbind(2) semantics, considering that multiple
+processes may compete for the same region of page cache.
+
+Should it be per-inode or per-fd? Or maybe per-range in inode/fd?
+
+fmove_pages(2) should be relatively straight forward, since it is
+best-effort and does not guarantee that the page will note be moved
+somewhare else just after return from the syscall.
+
+-- 
+  Kiryl Shutsemau / Kirill A. Shutemov
