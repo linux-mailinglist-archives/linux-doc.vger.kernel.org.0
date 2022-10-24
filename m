@@ -2,134 +2,134 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 88BE160B52A
-	for <lists+linux-doc@lfdr.de>; Mon, 24 Oct 2022 20:13:18 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id B127060B733
+	for <lists+linux-doc@lfdr.de>; Mon, 24 Oct 2022 21:21:53 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S231494AbiJXSND (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 24 Oct 2022 14:13:03 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:58756 "EHLO
+        id S229520AbiJXTVr (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 24 Oct 2022 15:21:47 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:36364 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S231936AbiJXSMW (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Mon, 24 Oct 2022 14:12:22 -0400
-Received: from mga18.intel.com (mga18.intel.com [134.134.136.126])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 461B757E17;
-        Mon, 24 Oct 2022 09:54:17 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1666630459; x=1698166459;
-  h=date:from:to:cc:subject:message-id:references:
-   mime-version:in-reply-to;
-  bh=f12+hDSs2xhh9+cgFUHAQwPz5EdOX4nrGTxSpB9xto8=;
-  b=Lx4O7B4HXPSw6eCOX6fxKVKroy/kLcxL2hy81b68CBxeeJRyLCmgMCfL
-   +GmcUQtQfNoaO0aKDUWtL30YejrZoBatDCS3PeFJE4DrVZy75n4meLb3V
-   lTd9rYHhJuaupDbeWYGNYIRyNXZj3pq47viEZfMgcU99FnPK0/qZgfmIi
-   gspbcVr59orDB9o72YPvLlrDzWGOkCq17RmNQJRAMNg2/pBM0j0LNOMfA
-   bj+i/Q+CUyf8nP7jn5Mf5krunxQliQkthbAZqVw/QMtNgTnCY5KYq20Fa
-   rnUMOQajJskrGGHNEtBU+aDreoW/sfo7JqEpyO72zuy8iUIvlJ76mj0/t
-   A==;
-X-IronPort-AV: E=McAfee;i="6500,9779,10510"; a="290739879"
-X-IronPort-AV: E=Sophos;i="5.95,209,1661842800"; 
-   d="scan'208";a="290739879"
-Received: from orsmga002.jf.intel.com ([10.7.209.21])
-  by orsmga106.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 24 Oct 2022 07:59:41 -0700
-X-IronPort-AV: E=McAfee;i="6500,9779,10510"; a="631284461"
-X-IronPort-AV: E=Sophos;i="5.95,209,1661842800"; 
-   d="scan'208";a="631284461"
-Received: from unisar-mobl.ger.corp.intel.com (HELO box.shutemov.name) ([10.249.38.228])
-  by orsmga002-auth.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 24 Oct 2022 07:59:30 -0700
-Received: by box.shutemov.name (Postfix, from userid 1000)
-        id 381A7104D5C; Mon, 24 Oct 2022 17:59:28 +0300 (+03)
-Date:   Mon, 24 Oct 2022 17:59:28 +0300
-From:   "Kirill A . Shutemov" <kirill.shutemov@linux.intel.com>
-To:     Sean Christopherson <seanjc@google.com>
-Cc:     Chao Peng <chao.p.peng@linux.intel.com>,
-        Vishal Annapurve <vannapurve@google.com>, kvm@vger.kernel.org,
-        linux-kernel@vger.kernel.org, linux-mm@kvack.org,
-        linux-fsdevel@vger.kernel.org, linux-api@vger.kernel.org,
-        linux-doc@vger.kernel.org, qemu-devel@nongnu.org,
-        Paolo Bonzini <pbonzini@redhat.com>,
-        Jonathan Corbet <corbet@lwn.net>,
-        Vitaly Kuznetsov <vkuznets@redhat.com>,
-        Wanpeng Li <wanpengli@tencent.com>,
-        Jim Mattson <jmattson@google.com>,
-        Joerg Roedel <joro@8bytes.org>,
-        Thomas Gleixner <tglx@linutronix.de>,
-        Ingo Molnar <mingo@redhat.com>, Borislav Petkov <bp@alien8.de>,
-        x86@kernel.org, "H . Peter Anvin" <hpa@zytor.com>,
-        Hugh Dickins <hughd@google.com>,
-        Jeff Layton <jlayton@kernel.org>,
-        "J . Bruce Fields" <bfields@fieldses.org>,
-        Andrew Morton <akpm@linux-foundation.org>,
-        Shuah Khan <shuah@kernel.org>, Mike Rapoport <rppt@kernel.org>,
-        Steven Price <steven.price@arm.com>,
-        "Maciej S . Szmigiero" <mail@maciej.szmigiero.name>,
-        Vlastimil Babka <vbabka@suse.cz>,
-        Yu Zhang <yu.c.zhang@linux.intel.com>, luto@kernel.org,
-        jun.nakajima@intel.com, dave.hansen@intel.com, ak@linux.intel.com,
-        david@redhat.com, aarcange@redhat.com, ddutile@redhat.com,
-        dhildenb@redhat.com, Quentin Perret <qperret@google.com>,
-        Michael Roth <michael.roth@amd.com>, mhocko@suse.com,
-        Muchun Song <songmuchun@bytedance.com>, wei.w.wang@intel.com
-Subject: Re: [PATCH v8 1/8] mm/memfd: Introduce userspace inaccessible memfd
-Message-ID: <20221024145928.66uehsokp7bpa2st@box.shutemov.name>
-References: <20220915142913.2213336-1-chao.p.peng@linux.intel.com>
- <20220915142913.2213336-2-chao.p.peng@linux.intel.com>
- <CAGtprH_MiCxT2xSxD2UrM4M+ghL0V=XEZzEX4Fo5wQKV4fAL4w@mail.gmail.com>
- <20221021134711.GA3607894@chaop.bj.intel.com>
- <Y1LGRvVaWwHS+Zna@google.com>
+        with ESMTP id S232135AbiJXTUx (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Mon, 24 Oct 2022 15:20:53 -0400
+Received: from casper.infradead.org (casper.infradead.org [IPv6:2001:8b0:10b:1236::1])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id C4D9C6FC42;
+        Mon, 24 Oct 2022 10:56:47 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+        d=infradead.org; s=casper.20170209; h=In-Reply-To:Content-Transfer-Encoding:
+        Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To:From:Date:
+        Sender:Reply-To:Content-ID:Content-Description;
+        bh=d0M8i6++Jn/HyOh+q8qf62zWar6VhxSYia86EHd5PGU=; b=MlcbCDNfDSRC0lNdZGJsr1Ijaz
+        tb8VQCaym0f+3DW39UIXqPqaJqpVbV3ZLy675FcGNxe96Y6kKGlhIx0Pquo4e+meBtzVs4tjxe4tO
+        d+qlqWzGst2paP0Bdsqt0n5VqjrLbEUDVwCt51FI+Q516IlXpAYwDLg9+qAEfVP+JKr1v+3tNRq40
+        Shw/PpZsRu1YVT5QaNevSrKt51SdSdgn+QxfrKEwPNBg3IKadfEVtwIyZN32kAdv0qrgHuHtFAbP9
+        UpSQIEYGg6U0TVCJ66ww0xEXYXKliaSFuFsknTRRJ+gxAi8E50pFfcdiG+Awp/LWm50BmBEphGMXD
+        dZ6TCXXg==;
+Received: from willy by casper.infradead.org with local (Exim 4.94.2 #2 (Red Hat Linux))
+        id 1omyx4-00FWf0-RB; Mon, 24 Oct 2022 15:01:18 +0000
+Date:   Mon, 24 Oct 2022 16:01:18 +0100
+From:   Matthew Wilcox <willy@infradead.org>
+To:     Carlos Bilbao <carlos.bilbao@amd.com>
+Cc:     Akira Yokosawa <akiyks@gmail.com>, bilbao@vt.edu, corbet@lwn.net,
+        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
+        miguel.ojeda.sandonis@gmail.com
+Subject: Re: [PATCH v2 1/2] Documentation: Start translations to Spanish
+Message-ID: <Y1aovvn7dAyo1nuW@casper.infradead.org>
+References: <20221014142454.871196-2-carlos.bilbao@amd.com>
+ <48b4a5a1-2a52-4159-699b-9db73a012892@gmail.com>
+ <Y01pkubcT7FOwCjL@casper.infradead.org>
+ <8e2a1da1-2914-b223-85b0-a769339d9c39@gmail.com>
+ <9e65ba16-68d3-8d11-c6ac-c35c29026688@amd.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
+Content-Type: text/plain; charset=utf-8
 Content-Disposition: inline
-In-Reply-To: <Y1LGRvVaWwHS+Zna@google.com>
-X-Spam-Status: No, score=-2.5 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_EF,SPF_HELO_NONE,SPF_NONE
-        autolearn=ham autolearn_force=no version=3.4.6
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <9e65ba16-68d3-8d11-c6ac-c35c29026688@amd.com>
+X-Spam-Status: No, score=-4.4 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_MED,SPF_HELO_NONE,
+        SPF_NONE autolearn=ham autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Fri, Oct 21, 2022 at 04:18:14PM +0000, Sean Christopherson wrote:
-> On Fri, Oct 21, 2022, Chao Peng wrote:
+On Mon, Oct 24, 2022 at 08:40:42AM -0500, Carlos Bilbao wrote:
+> > > I don't know what standard we're actually following.  RFC5646 suggests
+> > > simply using "es", with "es-419" for Latin America specialisation or
+> > > "es-ES" for Spain.  I don't know how much variation there is between
+> > > different Spanish dialects for technical documents; as I understand it,
+> > > it's worth supporting two dialects of Chinese, but we merrily mix &
+> > > match en_US and en_GB spellings.  Similarly, I wouldn't suggest that we
+> > > have separate translations for fr_CA, fr_CH, fr_FR, just a single 'fr'
+> > > would be fine.
 > > > 
-> > > In the context of userspace inaccessible memfd, what would be a
-> > > suggested way to enforce NUMA memory policy for physical memory
-> > > allocation? mbind[1] won't work here in absence of virtual address
-> > > range.
+> > > We do need to be careful here; people are rightfully sensitive about
+> > > being incorrectly grouped together.  If possible we should find a
+> > > standard to follow that's been defined by experts in these matters.
+> > > https://nam11.safelinks.protection.outlook.com/?url=https%3A%2F%2Fen.wikipedia.org%2Fwiki%2FIETF_language_tag&amp;data=05%7C01%7Ccarlos.bilbao%40amd.com%7C44c226d534f44b4afc1f08dab0b1893b%7C3dd8961fe4884e608e11a82d994e183d%7C0%7C0%7C638016573808784843%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C3000%7C%7C%7C&amp;sdata=3T9bPQzcj9hEuZiPkjIU%2BPCEaxAivgaNKZ2gL5m3OQA%3D&amp;reserved=0 may be a good place to
+> > > start looking.
+> > I think generic "es" is OK, especially if "es_ES" can have such a
+> > negative connotation to some. I just wanted to point out "sp_SP"
+> > looks wrong.
 > > 
-> > How about set_mempolicy():
-> > https://www.man7.org/linux/man-pages/man2/set_mempolicy.2.html
+> > Carlos, if you go the "es" way, it would be better to mention the
+> > reason of the choice in the Changelog for future reference.
+> > 
+> > Subdirectories "ja_JP", "ko_KR", and "zh_CN" were added under
+> > Documentation/ way back in 2007 (v2.6.23).
+> > 
+> > As you might see, two of the three language codes needed region
+> > distinction and they were reasonable choices at the time.
+> > 
+> >          Thanks, Akira
 > 
-> Andy Lutomirski brought this up in an off-list discussion way back when the whole
-> private-fd thing was first being proposed.
+> Answering to Akira and Matthew below. Thanks to both for valuable feedback.
 > 
->   : The current Linux NUMA APIs (mbind, move_pages) work on virtual addresses.  If
->   : we want to support them for TDX private memory, we either need TDX private
->   : memory to have an HVA or we need file-based equivalents. Arguably we should add
->   : fmove_pages and fbind syscalls anyway, since the current API is quite awkward
->   : even for tools like numactl.
+> I made the conscious choice of not using es_ES, because as mentioned, it
+> references a standard that I don’t intend to follow myself or enforce on
+> Spanish translations. es_ES is a standard that comes from “Esp”-aña (Spain,
+> the country) whereas “sp_SP” is as in "Sp"-anish, the language, not the
+> country. Regarding this, I took the liberty of adding an extra paragraph to
+> index.rs. I would translate it to English like:
+> 
+> "Many countries speak Spanish, each one with its own culture, expressions,
+> and sometimes significant grammatical differences. The translators are free
+> to use the version of Spanish which they are most comfortable with. In
+> principle, these small differences should not pose a great barrier for
+> speakers of different versions of Spanish, albeit in case of doubt, you can
+> ask the maintainers."
+> 
+> I also opted for not using es_ES due to its geographical connotations. If
+> someone from Peru, Mexico, Argentina, … submits a translation tomorrow, I
+> would review it and we would understand each other just fine. Even within
+> “Spain” there are many dialects and things change within regions. I
+> reiterate that all dialects should be allowed in this directory.
+> 
+> Fortunately for us, versions of Spanish differ much more in spoken form
+> than they do when written. This does not happen between traditional and
+> simplified Chinese.
+> 
+> On top of everything else, using locale es_ES may imply that spell checks
+> on that directory using the locale es_ES would be clean, but this is very
+> far from reality, among other things, because all the English terms we
+> inherit regarding computers. As Miguel Ojeda pointed out somewhere in this
+> thread, there are terms that is better if we do not translate, to favor
+> understanding of code/other documents.
+> 
+> I will update the corresponding commit message to clarify why we are using
+> es_ES format in this particular case.
 
-Yeah, we definitely have gaps in API wrt NUMA, but I don't think it be
-addressed in the initial submission.
+I think we're better off following BCP 47:
+https://www.rfc-editor.org/info/bcp47 rather than the libc locale format.
+That will imply renaming it_IT to simply "it", ja_JP to "ja" and
+ko_KR to "ko".  The two Chinese translations we have might be called
+"zh-Hant" and "zh-Hans", if the distinction is purely Traditional vs
+Simplified script.  If they really are region based, then they'd be
+zh-CN and zh-TW.
 
-BTW, it is not regression comparing to old KVM slots, if the memory is
-backed by memfd or other file:
+I think you're right to conflate all dialects of Spanish together, just
+as we do all dialects of English.
 
-MBIND(2)
-       The  specified policy will be ignored for any MAP_SHARED mappings in the
-       specified memory range.  Rather the pages will be allocated according to
-       the  memory  policy  of the thread that caused the page to be allocated.
-       Again, this may not be the thread that called mbind().
-
-It is not clear how to define fbind(2) semantics, considering that multiple
-processes may compete for the same region of page cache.
-
-Should it be per-inode or per-fd? Or maybe per-range in inode/fd?
-
-fmove_pages(2) should be relatively straight forward, since it is
-best-effort and does not guarantee that the page will note be moved
-somewhare else just after return from the syscall.
-
--- 
-  Kiryl Shutsemau / Kirill A. Shutemov
+Jon, this feels like policy you should be setting.  Are you on board
+with this, or do you want to retain the mandatory geography tag that
+we've been using up to now?
