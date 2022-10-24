@@ -2,127 +2,109 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 91BC860B278
-	for <lists+linux-doc@lfdr.de>; Mon, 24 Oct 2022 18:47:28 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id EC2E860B465
+	for <lists+linux-doc@lfdr.de>; Mon, 24 Oct 2022 19:41:37 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S233255AbiJXQrU (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 24 Oct 2022 12:47:20 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:35090 "EHLO
+        id S230405AbiJXRlf (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 24 Oct 2022 13:41:35 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:55312 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S234999AbiJXQqb (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Mon, 24 Oct 2022 12:46:31 -0400
-Received: from ams.source.kernel.org (ams.source.kernel.org [IPv6:2604:1380:4601:e00::1])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 528F319E931;
-        Mon, 24 Oct 2022 08:31:19 -0700 (PDT)
-Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
-        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
-        (No client certificate requested)
-        by ams.source.kernel.org (Postfix) with ESMTPS id E61DDB818F8;
-        Mon, 24 Oct 2022 12:39:46 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id EDFB3C433B5;
-        Mon, 24 Oct 2022 12:39:40 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-        s=k20201202; t=1666615185;
-        bh=Cqr4+bBL7oNYcnofbEaCz0+7Ljp5GAyhgX+SKELtivc=;
-        h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-        b=bqEaMY22acfVwNO2wynM6QjybdGs+CcFDoBsFM3cDIFU+RP3TyvzA9RsAFav3wVTu
-         fCRe1dwk2kiMRIO5Ao/IrtkhHYYGlJzWO8Pul3X1IzNMmvh+7dp2GDlSanQ5yy7kxG
-         Qupf6JuPrH7u++Wi8dsEFNu8BEJ32qaEm9C4WFQaj0f8h4n0LHxZWimIuPMwh21oqa
-         pKZ27Ct2kTlPgXe8xLjFHs7HJtN10XyF+NgZ5jpBYH6zS3mhn/M2K0LTYugV/ohsBm
-         n1xxFcHrQL/A+8paIvPns1Ve66DGcIQqGm6H9ts6ILKrjVj1N69rWXth72FsxaHBEk
-         /HIzltdBcepow==
-Date:   Mon, 24 Oct 2022 13:39:37 +0100
-From:   Lee Jones <lee@kernel.org>
-To:     Quan Nguyen <quan@os.amperecomputing.com>
-Cc:     macro@orcam.me.uk, Bagas Sanjaya <bagasdotme@gmail.com>,
-        Rob Herring <robh+dt@kernel.org>,
-        Krzysztof Kozlowski <krzysztof.kozlowski+dt@linaro.org>,
-        Jean Delvare <jdelvare@suse.com>,
-        Guenter Roeck <linux@roeck-us.net>,
-        Jonathan Corbet <corbet@lwn.net>,
-        Derek Kiernan <derek.kiernan@xilinx.com>,
-        Dragan Cvetic <dragan.cvetic@xilinx.com>,
-        Arnd Bergmann <arnd@arndb.de>,
-        Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
-        Thu Nguyen <thu@os.amperecomputing.com>,
-        linux-kernel@vger.kernel.org, devicetree@vger.kernel.org,
-        linux-hwmon@vger.kernel.org, linux-doc@vger.kernel.org,
-        OpenBMC Maillist <openbmc@lists.ozlabs.org>,
-        Open Source Submission <patches@amperecomputing.com>,
-        Phong Vo <phong@os.amperecomputing.com>,
-        thang@os.amperecomputing.com
-Subject: Re: [PATCH v9 8/9] mfd: Add Ampere's Altra SMpro MFD driver
-Message-ID: <Y1aHiaZ1OpHZIzS9@google.com>
-References: <20220929094321.770125-1-quan@os.amperecomputing.com>
- <20220929094321.770125-9-quan@os.amperecomputing.com>
+        with ESMTP id S233942AbiJXRk7 (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Mon, 24 Oct 2022 13:40:59 -0400
+Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.129.124])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id E53A5144E2D
+        for <linux-doc@vger.kernel.org>; Mon, 24 Oct 2022 09:15:58 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+        s=mimecast20190719; t=1666628049;
+        h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+         to:to:cc:cc:mime-version:mime-version:
+         content-transfer-encoding:content-transfer-encoding;
+        bh=7yug/hLUQCw7qYq1gKwXHE2PBRB1KoHvO1djMcyNbXQ=;
+        b=EdimM0u+n/PuLMQiJeGTuB8nvYPh6JVsItQnfOs7QgIz9e3HbnjkbJNYsOpIMUxBH3Ozdd
+        vIIAOpABxA+2OUcDii6Onr1JHIMddf29ukH1JTAZNiHgGNQfIIcirlWSpptYWqvEclESns
+        2YLGZtBeqYKnt86p4U4w4roP9ydO6hc=
+Received: from mail-qv1-f72.google.com (mail-qv1-f72.google.com
+ [209.85.219.72]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_128_GCM_SHA256) id
+ us-mta-580-Zmd4tcYOMl67naSzwho6OA-1; Mon, 24 Oct 2022 07:48:39 -0400
+X-MC-Unique: Zmd4tcYOMl67naSzwho6OA-1
+Received: by mail-qv1-f72.google.com with SMTP id e13-20020ad450cd000000b004bb49d98da4so3930744qvq.9
+        for <linux-doc@vger.kernel.org>; Mon, 24 Oct 2022 04:48:39 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=7yug/hLUQCw7qYq1gKwXHE2PBRB1KoHvO1djMcyNbXQ=;
+        b=XbJw3sSoz0mO5TRRJ2XqNGns12R4AeIVHjn91c38Kp5h29h4K5bRbEPE8fXEy3sFeE
+         Fma+L8AGjNPYAnVISclPwyvYrO80vnlqQZsO00QgXn5MTo/8pmbLRGZixsIkBS/2gDAa
+         vOS9ti2rxYXlWxs2PZZEL7U3B+bbmzOo5yu2d/lhYpfZhjtWzigg6UUeT9U+roblrWUT
+         YDajX7Nx40t7JjkiLpkezdpUfeYTCnGepzGYVkI3N3j1qCoJM4+4Gq/MlTs1rOPdvVjR
+         tdv1zGr/RV4dWuax6Os6sn4Jr+np/H9fX/LGRb9r8fJGQ+Aw2WOFMF8xYP4fbIQO0Shi
+         WRhw==
+X-Gm-Message-State: ACrzQf1LpqzeWzYTqwk3NxtUs2cx5VaNjJRt3wiMqBH0KjBB7oNuJmuy
+        9QsHt7Mw1eYmZ2uvNd1CNL+DvVnRHs2UzSBrBJ6metXKlZMhDOvERxxp+3HHX1z66KpbfoNjp0Z
+        GFW6V9eiXkIdbPoxo0ZGx
+X-Received: by 2002:a05:622a:1015:b0:39c:be69:bf2d with SMTP id d21-20020a05622a101500b0039cbe69bf2dmr27865540qte.85.1666612119361;
+        Mon, 24 Oct 2022 04:48:39 -0700 (PDT)
+X-Google-Smtp-Source: AMsMyM4+ASXME3U+PSmVa7jxRPX3J3GOgBErk2ndsbpTfCWuYTw+fxoM9+sZu/lt7RYI7zXlyo9vNA==
+X-Received: by 2002:a05:622a:1015:b0:39c:be69:bf2d with SMTP id d21-20020a05622a101500b0039cbe69bf2dmr27865531qte.85.1666612119158;
+        Mon, 24 Oct 2022 04:48:39 -0700 (PDT)
+Received: from nfvsdn-06.testing.baremetal.edge-sites.net (nat-pool-232-132.redhat.com. [66.187.232.132])
+        by smtp.gmail.com with ESMTPSA id m15-20020a05620a13af00b006ee949b8051sm14653564qki.51.2022.10.24.04.48.38
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 24 Oct 2022 04:48:38 -0700 (PDT)
+From:   mtahhan@redhat.com
+To:     bpf@vger.kernel.org, linux-doc@vger.kernel.org
+Cc:     Maryam Tahhan <mtahhan@redhat.com>
+Subject: [PATCH bpf-next v5 0/1] doc: DEVMAPs and XDP_REDIRECT
+Date:   Mon, 24 Oct 2022 08:43:40 -0400
+Message-Id: <20221024124341.2157865-1-mtahhan@redhat.com>
+X-Mailer: git-send-email 2.35.3
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
-In-Reply-To: <20220929094321.770125-9-quan@os.amperecomputing.com>
-X-Spam-Status: No, score=-7.6 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_HI,
-        SPF_HELO_NONE,SPF_PASS autolearn=ham autolearn_force=no version=3.4.6
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_NONE,
+        RCVD_IN_MSPIKE_H2,SPF_HELO_NONE,SPF_NONE autolearn=unavailable
+        autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Thu, 29 Sep 2022, Quan Nguyen wrote:
+From: Maryam Tahhan <mtahhan@redhat.com>
 
-> Adds Multi-function devices driver for SMpro co-processor found on the
-> Mt.Jade hardware reference platform with Ampere's Altra processor family.
-> 
-> Signed-off-by: Quan Nguyen <quan@os.amperecomputing.com>
-> ---
-> 
-> Changes in v9:
->   + Rename smpro-mfd.c to smpro-core.c                   [Lee Jones]
->   + Fix include files in alphabetical order              [Lee Jones]
->   + Add defines to avoid using magic numbers             [Lee Jones]
->   + Return -EINVAL if device does not match              [Lee Jones]
->   + Remove unneccessary comment                          [Lee Jones]
->   + Refactor error path handling in smpro_core_read/write()   [Quan]
-> 
-> Changes in v8:
->   + None
-> 
-> Changes in v7:
->   + Smpro-mfd now significant changes in compare with simple-mfd-i2c
->     driver, remove the copyright note about simple-mfd-i2c    [Quan]
->   + Install bus->read/write()  to handle multiple types of bus
->     access.                                                   [Quan]
->   + Update license to MODULE_LICENSE("GPL")                   [Quan]
->   + Add others minor refactor the code                        [Quan]
-> 
-> Changes in v6:
->   + Update license part to reflect that this driver is clone from
->   simple-mfd-i2c driver [Quan]
-> 
-> Changes in v5:
->   + Dropped the use of simple-mfd-i2c driver [Quan]
->   + Introduced drivers/mfd/smpro-mfd.c driver to instantiate
->   sub-devices. This is to avoid DT nodes without resource issue [Quan]
->   + Revised commit message [Quan]
-> 
-> Changes in v4:
->   + Add "depends on I2C" to fix build issue found by kernel test
->   robot [Guenter]
-> 
-> Changes in v3:
->   + None
-> 
-> Changes in v2:
->   + Used 'struct of_device_id's .data attribute [Lee Jones]
-> 
->  drivers/mfd/Kconfig      |  12 ++++
->  drivers/mfd/Makefile     |   1 +
->  drivers/mfd/smpro-core.c | 138 +++++++++++++++++++++++++++++++++++++++
->  3 files changed, 151 insertions(+)
->  create mode 100644 drivers/mfd/smpro-core.c
+Add documentation for BPF_MAP_TYPE_DEVMAP and
+BPF_MAP_TYPE_DEVMAP_HASH including kernel version
+introduced, usage and examples.
 
-Applied, thanks.
+Add documentation that describes XDP_REDIRECT.
+
+v4->v5:
+- Remove unused 'index' variable in example.
+
+v3->v4:
+- Prepend supported map section for XDP_REDIRECT documentation.
+
+v2->v3:
+- Fixed indentations in usage section to exclude non note text.
+- Replace links to selftest with actual paths.
+
+v1->v2:
+- Separate xdp_redirect documentation to its own file.
+- Clean up and simplify examples and usage function descriptions.
+
+Maryam Tahhan (1):
+  doc: DEVMAPs and XDP_REDIRECT
+
+ Documentation/bpf/index.rst      |   1 +
+ Documentation/bpf/map_devmap.rst | 203 +++++++++++++++++++++++++++++++
+ Documentation/bpf/redirect.rst   |  45 +++++++
+ 3 files changed, 249 insertions(+)
+ create mode 100644 Documentation/bpf/map_devmap.rst
+ create mode 100644 Documentation/bpf/redirect.rst
 
 -- 
-Lee Jones [李琼斯]
+2.35.3
+
