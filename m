@@ -2,96 +2,142 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 8972B60CF6A
-	for <lists+linux-doc@lfdr.de>; Tue, 25 Oct 2022 16:43:47 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 37C4660CFF2
+	for <lists+linux-doc@lfdr.de>; Tue, 25 Oct 2022 17:07:09 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S232694AbiJYOnp (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 25 Oct 2022 10:43:45 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:35820 "EHLO
+        id S232628AbiJYPHH (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 25 Oct 2022 11:07:07 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:34432 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S232641AbiJYOnn (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 25 Oct 2022 10:43:43 -0400
-Received: from mail-lf1-x134.google.com (mail-lf1-x134.google.com [IPv6:2a00:1450:4864:20::134])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 7FF5418F0F9
-        for <linux-doc@vger.kernel.org>; Tue, 25 Oct 2022 07:43:42 -0700 (PDT)
-Received: by mail-lf1-x134.google.com with SMTP id be13so22413485lfb.4
-        for <linux-doc@vger.kernel.org>; Tue, 25 Oct 2022 07:43:42 -0700 (PDT)
+        with ESMTP id S231638AbiJYPHG (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 25 Oct 2022 11:07:06 -0400
+Received: from mail-qk1-x729.google.com (mail-qk1-x729.google.com [IPv6:2607:f8b0:4864:20::729])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id B9F461162FE
+        for <linux-doc@vger.kernel.org>; Tue, 25 Oct 2022 08:07:04 -0700 (PDT)
+Received: by mail-qk1-x729.google.com with SMTP id j21so8218449qkk.9
+        for <linux-doc@vger.kernel.org>; Tue, 25 Oct 2022 08:07:04 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=to:subject:message-id:date:from:reply-to:mime-version:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=47DEQpj8HBSa+/TImW+5JCeuQeRkm5NMpJWZG3hSuFU=;
-        b=aPgNrYKriz2tlxwbo8vdeB9vHKXHF71ovMUPdSkwybM2sX3C9mbtEOU5Kkh+mObT1k
-         w41d5JMo1IvEfKaxJxc3J4m1+XkKFG+ThFN7N0DK0OtuxFk5eRrb0FkzOVkmoMt96x8k
-         8csXD/Znq5iaBU+8k0DQzfqlkLxcpabvaqYpEsBeFH1UC8q4LBuiTsWH/242X65159o9
-         k+wBLfB8Ctw56YvdP5vJ2sO0C6x3j0LQlE87gpXRlA/seSlE+oU1Ufq6MPxT4YA5YMs3
-         /VYpBcFxrUFlQRMBSAkZ68DawTUReI+ZW6pGlW+4kVWefY8elTIIBHsiC4Jkiz5JoWDU
-         q6iw==
+        d=fooishbar-org.20210112.gappssmtp.com; s=20210112;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=21fm5EgPKmeOayQHxWYMU7Nefc1Ipf9I7LMbzYS7TPI=;
+        b=Qao3n6VBojqDPD+nyuHaNb8aRuC3dHiWWy2AGSGIeYcnvqBmtYGQkw0ZAnJFMbgl3b
+         YXIsxmYnbPg/gkeIi50KEfyRBdnGvB7rOyE6AKwAWbos4tmP+xf33xTqrKYAFctdgjEV
+         5bJSY6/fZwHsi070+kf0Dnmrd9VA6kpKF5vcsJbaF4KkD+ujQ6HfenyTPpf4q34P817v
+         Lw/cRjg8xI19gsnwTd7/9PilD6/WIP9eNa1DtNk+gWXZdxuCJP9myXKQJQF5gbDxLWVe
+         PS22WiRQZeD4cAN67FUE74f+0buJO7v71DQP6WC4ve5q5Ibyz3V9+9DvZel0/LU50VSx
+         rUZQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=to:subject:message-id:date:from:reply-to:mime-version
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=47DEQpj8HBSa+/TImW+5JCeuQeRkm5NMpJWZG3hSuFU=;
-        b=XDmeTlqxzPoJUz0FK5ZOUYyhE41Hc6vQhUC8WszC2mfq6EsmPrhLZ4TduZ4SjUtNCv
-         /GbAyxCXpu7EGeK3i8Wcluavj/5fuQDlLi+AFFSpdzTvuBPXCNq0gKQbIbwD6hOekztf
-         Qv7fk6iEDEcpq80BUsf2By2m3q/9xwD48dFC84tFRJN317mXwXjqVyz+BN48bhqJC31h
-         bMxl253hMyKvgXzrG1mm1H9pOXu7A0EC5aU8xsAIxm7FIOaN08tSvE7BUTMj/yUxT40E
-         3JlUxPfUvmvHpHWm0NNWEl1RHCJFTEi197lXc3Dl4MfMYq34E8m67pKRgANwkUFxkrrv
-         HU4g==
-X-Gm-Message-State: ACrzQf1t1CJ9hRtKcfauLYHTUMpMpzs5lD1of/XeDIsxMbKyAOqXfiQ0
-        VFtQZCDNwzBoXNVINQmg3dC4Uxq40Dzv7+cjfmk=
-X-Google-Smtp-Source: AMsMyM5/obq8L2OqQ6lsqf7cPFwohaKnp3v1FD12TgpQdXQRu4EjkyQ4xF91F58Q0ZMof/iyskOT7OawT5YmefLfDIM=
-X-Received: by 2002:a05:6512:2342:b0:4a4:81e4:374b with SMTP id
- p2-20020a056512234200b004a481e4374bmr2583694lfu.502.1666709020762; Tue, 25
- Oct 2022 07:43:40 -0700 (PDT)
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=21fm5EgPKmeOayQHxWYMU7Nefc1Ipf9I7LMbzYS7TPI=;
+        b=Nz0YR4T/ae53MgcBYhccCQ6ACusLlrPKH9bgJjKURAv45YcDH14Ek7g9n6bjmezsS9
+         Rc3dPu3JachvOhREsvLYunbGbfSR8VgrVSrmvPT90jPOw5LwV9P8vKZFRhAPbNCJoRg9
+         aKXNt0pO9FuAVo+ugoeFkikqBa+c7ygttM0zS7qhCmil+BgiCI1/TSPUGGgEwY+nezz6
+         9eHWoge4E7kHUnEj1hW4lrshYqLeanpUWrumrMPfRCPzJlkE/UOo3clivZFWHn2dU64W
+         GdT5mfCe4wK0GYRrG8cQqUwOf32M+waSMm8vmtSTWuhEvdVRDu5B4XPzjg5SvNwXrLJf
+         OJhg==
+X-Gm-Message-State: ACrzQf2lu+zP6T5yin23No7fCx5Z6omdTWFWDUngYzBRD3v0D3s8qZR6
+        n0HHXQu/M1/1gUyBCWZTGw/PC/NRakcaQAF5XFIz2w==
+X-Google-Smtp-Source: AMsMyM5WxUziOboPsxC2N6qlers3FkCq6d6ddxCwWgeTeLHIKEFc0BoQutxorsr/ysGcAgO7sfY3nB5LJLrWXyNsPDs=
+X-Received: by 2002:a05:620a:25c8:b0:6ae:be73:86c6 with SMTP id
+ y8-20020a05620a25c800b006aebe7386c6mr25824699qko.531.1666710423705; Tue, 25
+ Oct 2022 08:07:03 -0700 (PDT)
 MIME-Version: 1.0
-Received: by 2002:ab3:1ba8:0:b0:1f6:1b25:a795 with HTTP; Tue, 25 Oct 2022
- 07:43:40 -0700 (PDT)
-Reply-To: tatianaarthur72@gmail.com
-From:   "Mrs.Tatiana Arthur" <mjude4116@gmail.com>
-Date:   Tue, 25 Oct 2022 16:43:40 +0200
-Message-ID: <CADLcUi7KxqRFt6QOPWNOckA7rYNW17zcMwGYeOhx+fi3XG=EyQ@mail.gmail.com>
-Subject: Did you receive the email I sent you?
-To:     undisclosed-recipients:;
+References: <20220829093141.45583-1-tomeu.vizoso@collabora.com>
+ <20220909141528.5090-1-tomeu.vizoso@collabora.com> <CAPj87rMYW1xZdacZ1Y0qk+D9xpqsqE+cwbQ1j1nZ7S+RKpzOoQ@mail.gmail.com>
+ <CAKMK7uGkFP1jSNQzv37PvSqvOtt1FnbfbNyYEf99WM=_2AszSw@mail.gmail.com>
+In-Reply-To: <CAKMK7uGkFP1jSNQzv37PvSqvOtt1FnbfbNyYEf99WM=_2AszSw@mail.gmail.com>
+From:   Daniel Stone <daniel@fooishbar.org>
+Date:   Tue, 25 Oct 2022 16:06:52 +0100
+Message-ID: <CAPj87rPTAhcqSnhzYPdDn93Kh9aGJtN9ZGVAYUP2Ke6w6frH5w@mail.gmail.com>
+Subject: Re: [PATCH v8] drm: Add initial ci/ subdirectory
+To:     Daniel Vetter <daniel@ffwll.ch>
+Cc:     Tomeu Vizoso <tomeu.vizoso@collabora.com>,
+        David Airlie <airlied@linux.ie>,
+        Jonathan Corbet <corbet@lwn.net>,
+        Carlo Caione <carlo@caione.org>,
+        Kevin Hilman <khilman@baylibre.com>,
+        Heiko Stuebner <heiko@sntech.de>,
+        Matthias Brugger <matthias.bgg@gmail.com>,
+        Rob Clark <robdclark@chromium.org>,
+        dri-devel@lists.freedesktop.org, linux-doc@vger.kernel.org,
+        linux-kernel@vger.kernel.org, linux-arm-kernel@lists.infradead.org,
+        linux-amlogic@lists.infradead.org,
+        linux-rockchip@lists.infradead.org,
+        linux-mediatek@lists.infradead.org, kernel@collabora.com,
+        Neil Armstrong <narmstrong@baylibre.com>,
+        Rob Clark <robdclark@gmail.com>
 Content-Type: text/plain; charset="UTF-8"
-X-Spam-Status: Yes, score=5.1 required=5.0 tests=BAYES_50,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_ENVFROM_END_DIGIT,
-        FREEMAIL_FROM,FREEMAIL_REPLYTO,FREEMAIL_REPLYTO_END_DIGIT,
-        RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,SPF_PASS,T_HK_NAME_FM_MR_MRS,
-        UNDISC_FREEM autolearn=no autolearn_force=no version=3.4.6
-X-Spam-Report: * -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at
-        *      https://www.dnswl.org/, no trust
-        *      [2a00:1450:4864:20:0:0:0:134 listed in]
-        [list.dnswl.org]
-        *  0.8 BAYES_50 BODY: Bayes spam probability is 40 to 60%
-        *      [score: 0.4936]
-        * -0.0 SPF_PASS SPF: sender matches SPF record
-        *  0.2 FREEMAIL_ENVFROM_END_DIGIT Envelope-from freemail username ends
-        *       in digit
-        *      [mjude4116[at]gmail.com]
-        *  0.2 FREEMAIL_REPLYTO_END_DIGIT Reply-To freemail username ends in
-        *      digit
-        *      [tatianaarthur72[at]gmail.com]
-        *  0.0 SPF_HELO_NONE SPF: HELO does not publish an SPF Record
-        *  0.0 FREEMAIL_FROM Sender email is commonly abused enduser mail
-        *      provider
-        *      [mjude4116[at]gmail.com]
-        * -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
-        *      author's domain
-        * -0.1 DKIM_VALID_EF Message has a valid DKIM or DK signature from
-        *      envelope-from domain
-        * -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
-        *  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
-        *       valid
-        *  0.0 T_HK_NAME_FM_MR_MRS No description available.
-        *  3.0 UNDISC_FREEM Undisclosed recipients + freemail reply-to
-        *  1.0 FREEMAIL_REPLYTO Reply-To/From or Reply-To/body contain
-        *      different freemails
-X-Spam-Level: *****
+Content-Transfer-Encoding: quoted-printable
+X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+        DKIM_VALID,RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,SPF_NONE
+        autolearn=unavailable autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
+Hi all,
 
+On Tue, 25 Oct 2022 at 08:32, Daniel Vetter <daniel@ffwll.ch> wrote:
+> On Fri, 9 Sept 2022 at 19:18, Daniel Stone <daniel@fooishbar.org> wrote:
+> > But equally - and sorry for not jumping on the IRC (?) discussion as I =
+was in the middle of other stuff when it came up - I'm don't think this is =
+the right plan.
+> >
+> > Mesa having all its CI in-tree makes sense, because merges happen rapid=
+ly to a single canonical tree. If the scripts need to be changed for whatev=
+er reason, we can merge something in under an hour and everyone immediately=
+ gets it. DRM is quite different though, given the forest of trees we have =
+and the long merge paths between them. I worry that merging the CI scripts =
+in-tree - especially for our initial attempt at it, when we're likely to ne=
+ed to make quite a lot of changes before it settles down to become a stable=
+ system that works for everyone - is shooting ourselves in the foot by limi=
+ting our flexibility.
+>
+> So the entire "we have multiple trees" is why I want at least the
+> gitlab-ci.yaml in tree, to force people to collaborate more on one
+> thing instead of everyone rolling their own fun and hacking stuff up.
+> And there's still tons of stuff outside in the separate repo, like the
+> lab status so Linus doesn't get a silly history of lab flapping.
+>
+> Also wrt "developers don't get the update right away due to
+> backmerge/pull delays", that's why integration trees like drm-tip or
+> linux-next exist. So maybe initially we should make sure the ci
+> patches go in through drm-misc, to maximize how many people see it.
+> And even for mesa it's not fully automatic, you still have the rebase
+> your branch if you picked a bad one for development (but yeah marge
+> does that if the MR is ready). If you're doing kernel development on a
+> linear tree instead of an integration tree, you're doing it very
+> wrong.
+>
+> What I think everyone agrees on is that we probably get the split
+> wrong and need to shuffle some files back&forth, and that's something
+> we need to warn Linus about I guess. But somewhere we do need a split
+> between internal and external stuff, and personally I'd like if at
+> least the pure sw testing (build and virtual stuff) could be all in
+> upstream.
+>
+> > Given that it's currently very dependent on fd.o infrastructure (publis=
+hed ci-templates, the registry, the specific-tag runners for Collabora/CrOS=
+ DUTs, etc), there isn't much of a portability gain in bringing the scripts=
+ into the tree either. It's a good goal, but not where we are today.
+>
+> I don't think there's huge chances for any non-fdo gitlab anytime
+> soon. Once we get there we might need to figure out how to standardize
+> the hw lab interfacing, and if we have all the sw targets in upstream
+> that should help with shuffling stuff around for a hypothetical LF
+> gitlab CI (or whatever it is).
+
+Yep, having talked through things on IRC, I'm happy with where we are;
+let's give it a go and find out.
+
+Acked-by: Daniel Stone <daniels@collabora.com>
+
+Cheers,
+Daniel
