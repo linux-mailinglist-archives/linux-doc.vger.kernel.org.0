@@ -2,81 +2,74 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 051BC60C7AA
-	for <lists+linux-doc@lfdr.de>; Tue, 25 Oct 2022 11:13:56 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 6897860C817
+	for <lists+linux-doc@lfdr.de>; Tue, 25 Oct 2022 11:30:41 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S229629AbiJYJNv (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 25 Oct 2022 05:13:51 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:39312 "EHLO
+        id S230285AbiJYJaj (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 25 Oct 2022 05:30:39 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:32982 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S231854AbiJYJNi (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 25 Oct 2022 05:13:38 -0400
-Received: from smtp-out2.suse.de (smtp-out2.suse.de [IPv6:2001:67c:2178:6::1d])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 8B84A17650D;
-        Tue, 25 Oct 2022 02:07:13 -0700 (PDT)
-Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
-        (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-         key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
-        (No client certificate requested)
-        by smtp-out2.suse.de (Postfix) with ESMTPS id DC3A11FDAB;
-        Tue, 25 Oct 2022 09:07:03 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.cz; s=susede2_rsa;
-        t=1666688823; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-         mime-version:mime-version:content-type:content-type:
-         content-transfer-encoding:content-transfer-encoding:
+        with ESMTP id S230301AbiJYJaU (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 25 Oct 2022 05:30:20 -0400
+Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.129.124])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 7380A288
+        for <linux-doc@vger.kernel.org>; Tue, 25 Oct 2022 02:28:57 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+        s=mimecast20190719; t=1666690136;
+        h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+         to:to:cc:cc:mime-version:mime-version:content-type:content-type:
          in-reply-to:in-reply-to:references:references;
-        bh=YetzJ42X/TiFjkjg0wNAE3EFsDAzc7c8MsipxnbCcxE=;
-        b=IkqV6NNEd0j9tEUH8n8P5TVYq8QJcf2qkkSZvtymyDkC0UHOtNJyMFPc1+Nz7jmv3G2JWK
-        3Y4SbGFuVysX2qUopbLtx8JqMj7S4N8Kred7MqPi7Lalf47QOfVbpe9q7yuK97Ts76YBD3
-        0LthdTBMm+u1MkbQEQE/azZglriD4Yk=
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.cz;
-        s=susede2_ed25519; t=1666688823;
-        h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-         mime-version:mime-version:content-type:content-type:
-         content-transfer-encoding:content-transfer-encoding:
-         in-reply-to:in-reply-to:references:references;
-        bh=YetzJ42X/TiFjkjg0wNAE3EFsDAzc7c8MsipxnbCcxE=;
-        b=bjHzj+RmUQN889rrCKhbHre+JjtU2MXgeAiJQesFc1MOfiqGUlqdHWmNFq1GxdPrI/zTV5
-        kzxoeEfEn3/pvFCg==
-Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
-        (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-         key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
-        (No client certificate requested)
-        by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id A4EBD134CA;
-        Tue, 25 Oct 2022 09:07:03 +0000 (UTC)
-Received: from dovecot-director2.suse.de ([192.168.254.65])
-        by imap2.suse-dmz.suse.de with ESMTPSA
-        id BGB8JzenV2NbNQAAMHmgww
-        (envelope-from <vbabka@suse.cz>); Tue, 25 Oct 2022 09:07:03 +0000
-Message-ID: <9cfaed63-b72f-3fc8-bdc0-c6d7b09ca782@suse.cz>
-Date:   Tue, 25 Oct 2022 11:07:03 +0200
+        bh=RfursnoLlBGyOEdmtPqPd9mzklp5b9T9ByTfP93r6Nw=;
+        b=HQF4dxkzR1Rum5YDlKfrSVJhNIbwo+tgUPgos5ZzjliEasjxC/LAN2dv+5kvlFiHD1ze+N
+        wSrCOvJ7PSPtX7AoGu32GTUnwnbVHqZcQt9XC0nT/tXxqOAY9hQb1zWJVRFBkxN4Aiansn
+        /GaTlKxp3D+/BwfJcBUwaYFcyS7aLmI=
+Received: from mail-ej1-f72.google.com (mail-ej1-f72.google.com
+ [209.85.218.72]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_128_GCM_SHA256) id
+ us-mta-317-Es_XT3uHMgin6sv6WepkbQ-1; Tue, 25 Oct 2022 05:28:53 -0400
+X-MC-Unique: Es_XT3uHMgin6sv6WepkbQ-1
+Received: by mail-ej1-f72.google.com with SMTP id ho8-20020a1709070e8800b0078db5e53032so2411282ejc.9
+        for <linux-doc@vger.kernel.org>; Tue, 25 Oct 2022 02:28:52 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
+         :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=RfursnoLlBGyOEdmtPqPd9mzklp5b9T9ByTfP93r6Nw=;
+        b=igTakl+rbIG8HWMwaNZPvjXwh7/GW8xW9v8x5xz5uYYCEFMVgOmbsKlDzf9uJATXEK
+         ei/4WUlqc/mIL9OdyA+VsPeO6YdDu+3mGrun392zSDftn48NbDk32biwFfQiI59zAIc5
+         vtceoGPs19cdPnnEJQpGvDw/KBusEZoDEASgM6Lk9lmXJRFs8PhPrqnOd4mwXWOs30Sx
+         WYWXeFrKVyEveJIwD0YS2J64LBlB2jWavao3OjdWkBIoxs+tGC2o9+47jKI46t8TKjtt
+         mWR7SwoWeDestcLK8cAUyxMqpMsNy+oet60ZWBWzi5VT0DNz4AlxIeoMExHrhGFNoc6t
+         q+LQ==
+X-Gm-Message-State: ACrzQf1efDb8aHJlKHxL0yq761MCcjJs+UeK4Dt7M9HAhRWzHbU5Hdnh
+        G7lPVOzsKcTg2u8Xh9IlnoWwl2EosIO762Y2+P+bBxFMXmttUYqATU7MfEHaezTLOpW9dMaqeh9
+        Fqq5wn0chiNszHM1P5UTv
+X-Received: by 2002:a17:906:9746:b0:798:baec:3a80 with SMTP id o6-20020a170906974600b00798baec3a80mr21623694ejy.610.1666690130657;
+        Tue, 25 Oct 2022 02:28:50 -0700 (PDT)
+X-Google-Smtp-Source: AMsMyM5VBLamY2OwDe6W9C8WKx39cpfmQP6ofe7VoJTSG7D3AZ9VEp2B50uLZMY0/fd6+Dd96ySEig==
+X-Received: by 2002:a17:906:7308:b0:78e:191e:8389 with SMTP id di8-20020a170906730800b0078e191e8389mr31715881ejc.170.1666690119238;
+        Tue, 25 Oct 2022 02:28:39 -0700 (PDT)
+Received: from alrua-x1.borgediget.toke.dk ([45.145.92.2])
+        by smtp.gmail.com with ESMTPSA id n20-20020a5099d4000000b0045ce419ecffsm1275506edb.58.2022.10.25.02.28.38
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 25 Oct 2022 02:28:38 -0700 (PDT)
+Received: by alrua-x1.borgediget.toke.dk (Postfix, from userid 1000)
+        id 83AA46EEC65; Tue, 25 Oct 2022 11:28:38 +0200 (CEST)
+From:   Toke =?utf-8?Q?H=C3=B8iland-J=C3=B8rgensen?= <toke@redhat.com>
+To:     mtahhan@redhat.com, bpf@vger.kernel.org, linux-doc@vger.kernel.org
+Cc:     Maryam Tahhan <mtahhan@redhat.com>,
+        Lorenzo Bianconi <lorenzo@kernel.org>
+Subject: Re: [PATCH bpf-next v1 1/1] docs: BPF_MAP_TYPE_CPUMAP
+In-Reply-To: <20221021093050.2711300-1-mtahhan@redhat.com>
+References: <20221021093050.2711300-1-mtahhan@redhat.com>
+X-Clacks-Overhead: GNU Terry Pratchett
+Date:   Tue, 25 Oct 2022 11:28:38 +0200
+Message-ID: <87a65kgsl5.fsf@toke.dk>
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.3.3
-Subject: Re: [PATCH v2 3/3] mm: slub: test: Use the kunit_get_current_test()
- function
-To:     David Gow <davidgow@google.com>,
-        Brendan Higgins <brendan.higgins@linux.dev>,
-        Daniel Latypov <dlatypov@google.com>,
-        Shuah Khan <skhan@linuxfoundation.org>
-Cc:     kunit-dev@googlegroups.com, linux-kselftest@vger.kernel.org,
-        linux-kernel@vger.kernel.org, Kees Cook <keescook@chromium.org>,
-        linux-doc@vger.kernel.org, linux-mm@kvack.org,
-        Oliver Glitta <glittao@gmail.com>,
-        Hyeonggon Yoo <42.hyeyoo@gmail.com>,
-        Christoph Lameter <cl@linux.com>,
-        David Rientjes <rientjes@google.com>,
-        Andrew Morton <akpm@linux-foundation.org>
-References: <20221025071907.1251820-1-davidgow@google.com>
- <20221025071907.1251820-3-davidgow@google.com>
-Content-Language: en-US
-From:   Vlastimil Babka <vbabka@suse.cz>
-In-Reply-To: <20221025071907.1251820-3-davidgow@google.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-Spam-Status: No, score=-2.1 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,NICE_REPLY_A,RCVD_IN_DNSWL_LOW,
-        SPF_HELO_NONE,SPF_SOFTFAIL,URIBL_BLOCKED autolearn=ham
+Content-Type: text/plain
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_NONE,
+        RCVD_IN_MSPIKE_H2,SPF_HELO_NONE,SPF_NONE autolearn=ham
         autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
@@ -84,89 +77,217 @@ Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On 10/25/22 09:19, David Gow wrote:
-> Use the newly-added function kunit_get_current_test() instead of
-> accessing current->kunit_test directly. This function uses a static key
-> to return more quickly when KUnit is enabled, but no tests are actively
-> running. There should therefore be a negligible performance impact to
-> enabling the slub KUnit tests.
-> 
-> Other than the performance improvement, this should be a no-op.
-> 
-> Cc: Oliver Glitta <glittao@gmail.com>
-> Cc: Hyeonggon Yoo <42.hyeyoo@gmail.com>
-> Cc: Christoph Lameter <cl@linux.com>
-> Cc: Vlastimil Babka <vbabka@suse.cz>
-> Cc: David Rientjes <rientjes@google.com>
-> Cc: Andrew Morton <akpm@linux-foundation.org>
-> Signed-off-by: David Gow <davidgow@google.com>
+mtahhan@redhat.com writes:
 
-Acked-by: Vlastimil Babka <vbabka@suse.cz>
-
+> From: Maryam Tahhan <mtahhan@redhat.com>
+>
+> Add documentation for BPF_MAP_TYPE_CPUMAP including
+> kernel version introduced, usage and examples.
+>
+> Signed-off-by: Maryam Tahhan <mtahhan@redhat.com>
+> Signed-off-by: Lorenzo Bianconi <lorenzo@kernel.org>
+> Co-developed-by: Lorenzo Bianconi <lorenzo@kernel.org>
 > ---
-> 
-> This is intended as an example use of the new function. Other users
-> (such as KASAN) will be updated separately, as there would otherwise be
-> conflicts.
-> 
-> Assuming there are no objections, we'll take this whole series via the
-> kselftest/kunit tree.
+>  Documentation/bpf/map_cpumap.rst | 166 +++++++++++++++++++++++++++++++
+>  1 file changed, 166 insertions(+)
+>  create mode 100644 Documentation/bpf/map_cpumap.rst
+>
+> diff --git a/Documentation/bpf/map_cpumap.rst b/Documentation/bpf/map_cpumap.rst
+> new file mode 100644
+> index 000000000000..63e203f5a5da
+> --- /dev/null
+> +++ b/Documentation/bpf/map_cpumap.rst
+> @@ -0,0 +1,166 @@
+> +.. SPDX-License-Identifier: GPL-2.0-only
+> +.. Copyright (C) 2022 Red Hat, Inc.
+> +
+> +===================
+> +BPF_MAP_TYPE_CPUMAP
+> +===================
+> +
+> +.. note::
+> +   - ``BPF_MAP_TYPE_CPUMAP`` was introduced in kernel version 4.15
+> +
+> +``BPF_MAP_TYPE_CPUMAP`` is primarily used as a backend map for the XDP BPF helpers
+> +``bpf_redirect_map()`` and ``XDP_REDIRECT`` action. This map type redirects raw
+> +XDP frames to another CPU.
+> +
+> +A CPUMAP is a scalability and isolation mechanism, that allows separating the driver
+> +network XDP layer, from the rest of the network stack, and assigning dedicated
+> +CPUs for this stage. An example use case for this map type is software based Receive
+> +Side Scaling (RSS) at the XDP layer.
 
-OK, please do.
+With the addition of the ability to run another XDP program on the
+target CPU, this is not quite accurate anymore. I.e., it's not about
+"separating the driver network XDP layer [sic]", it's about steering
+packets to a particular CPU and processing it there, whether by XDP or
+by the networking stack.
 
-Some possible improvements below:
+> +The CPUMAP represents the CPUs in the system indexed as the map-key, and the
+> +map-value is the config setting (per CPUMAP entry). Each CPUMAP entry has a dedicated
+> +kernel thread bound to the given CPU to represent the remote CPU execution unit.
+> +
+> +The CPUMAP entry represents a multi-producer single-consumer (MPSC) queue
+> +(implemented via ``ptr_ring`` in the kernel). The single consumer is the CPUMAP
+> +``kthread`` that can access the ``ptr_ring`` queue without taking any lock. It also
+> +tries to bulk dequeue eight xdp_frame objects, as they represent one cache line.
+> +The multi-producers can be RX IRQ line CPUs queuing up packets simultaneously for
+> +the remote CPU. To avoid queue lock contention for each producer CPU, there is a
+> +small eight-object queue to generate bulk enqueueing into the cross-CPU queue.
+> +This careful queue usage means that each cache line transfers eight frames across
+> +the CPUs.
 
-> There was no v1 of this patch. v1 of the series can be found here:
-> https://lore.kernel.org/linux-kselftest/20221021072854.333010-1-davidgow@google.com/T/#u
-> 
-> ---
->  lib/slub_kunit.c | 1 +
->  mm/slub.c        | 5 +++--
->  2 files changed, 4 insertions(+), 2 deletions(-)
-> 
-> diff --git a/lib/slub_kunit.c b/lib/slub_kunit.c
-> index 7a0564d7cb7a..8fd19c8301ad 100644
-> --- a/lib/slub_kunit.c
-> +++ b/lib/slub_kunit.c
-> @@ -1,5 +1,6 @@
->  // SPDX-License-Identifier: GPL-2.0
->  #include <kunit/test.h>
-> +#include <kunit/test-bug.h>
->  #include <linux/mm.h>
->  #include <linux/slab.h>
->  #include <linux/module.h>
-> diff --git a/mm/slub.c b/mm/slub.c
-> index 157527d7101b..15d10d250ef2 100644
-> --- a/mm/slub.c
-> +++ b/mm/slub.c
-> @@ -39,6 +39,7 @@
->  #include <linux/memcontrol.h>
->  #include <linux/random.h>
->  #include <kunit/test.h>
-> +#include <kunit/test-bug.h>
->  #include <linux/sort.h>
->  
->  #include <linux/debugfs.h>
-> @@ -603,10 +604,10 @@ static bool slab_add_kunit_errors(void)
->  {
->  	struct kunit_resource *resource;
->  
-> -	if (likely(!current->kunit_test))
-> +	if (likely(!kunit_get_current_test()))
+Cache line usage and ptr_ring details seems like a bit much detail for
+user-facing documentation. Keeping the mention of the bulking is
+probably a good idea as that is user-visible, but I'd just get rid of
+the rest...
 
-Given that kunit_get_current_test() is basically an inline
-!static_branch_unlikely(), IMHO the likely() here doesn't add anything and
-could be removed?
+> +.. note::
+> +
+> +    XDP packets getting XDP redirected to another CPU, will maximum be stored/queued
+> +    for one ``driver ->poll()`` call. Queueing the frame and the flush operation
+> +    are guaranteed to happen on same CPU. Thus, ``cpu_map_flush`` operation can deduce
+> +    via ``this_cpu_ptr()`` which queue in bpf_cpu_map_entry contains packets.
 
->  		return false;
->  
-> -	resource = kunit_find_named_resource(current->kunit_test, "slab_errors");
-> +	resource = kunit_find_named_resource(kunit_get_current_test(), "slab_errors");
+Again, implementation detail that's not really relevant to users...
 
-We just passed kunit_get_current_test() above so maybe we could just keep
-using current->kunit_test here? Seems unnecessary adding another jump label.
+> +Usage
+> +=====
+> +
+> +.. c:function::
+> +   long bpf_map_update_elem(struct bpf_map *map, const void *key, const void *value, u64 flags)
+> +
+> + CPU entries can be added or updated using the ``bpf_map_update_elem()``
+> + helper. This helper replaces existing elements atomically. The ``value`` parameter
+> + can be ``struct bpf_cpumap_val``.
+> +
+> + .. note::
+> +    The maps can only be updated from user space and not from a BPF program.
+> +
+> + .. code-block:: c
+> +
+> +    struct bpf_cpumap_val {
+> +        __u32 qsize;  /* queue size to remote target CPU */
+> +        union {
+> +            int   fd; /* prog fd on map write */
+> +            __u32 id; /* prog id on map read */
+> +        } bpf_prog;
+> +    };
+> +
+> + Starting from Linux kernel version 5.9 the CPUMAP can run a second XDP program
+> + on the remote CPU. This helps with scalability as the receive CPU should spend
+> + as few cycles as possible processing packets. The remote CPU (to which the packet is
+> + directed) can afford to spend more cycles processing the frame. For example, packets
+> + are received on a CPU to which the IRQ of the NIC RX queue is steered. This CPU
+> + is the one that initially sees the packets. This is where the XDP redirect program
+> + is executed. Because the objective is to scale the CPU usage across multiple CPUs,
+> + the eBPF program should use as few cycles as possible on this initial CPU; just
+> + enough to determine which remote CPU to send the packet to, and then move the
+> + packet to a remote CPU for continued processing. The remote CPUMAP ``kthread``
+> + receives raw XDP frame (``xdp_frame``) objects. If the frames are to be passed
+> + to the networking stack, the SKB objects are allocated by the remote CPU, and
+> + the SKBs are passed to the networking stack.
 
->  	if (!resource)
->  		return false;
->  
+I'd move this paragraph up to the description of the CPUMAP at the top.
+I think the "should" language is maybe a bit strong, users can have
+different use cases. Maybe reword to something like "using this
+functionality, an XDP program can split it's processing across multiple
+CPUs, for example by only doing minimal processing on the receiving CPU
+and deferring the rest to a different CPU".
+
+> +.. c:function::
+> +   void *bpf_map_lookup_elem(struct bpf_map *map, const void *key)
+> +
+> + CPU entries can be retrieved using the ``bpf_map_lookup_elem()``
+> + helper.
+> +
+> +.. c:function::
+> +   long bpf_map_delete_elem(struct bpf_map *map, const void *key)
+> +
+> + CPU entries can be deleted using the ``bpf_map_delete_elem()``
+> + helper. This helper will return 0 on success, or negative error in case of
+> + failure.
+> +
+> +.. c:function::
+> +     long bpf_redirect_map(struct bpf_map *map, u32 key, u64 flags)
+> +
+> + Redirect the packet to the endpoint referenced by ``map`` at index ``key``.
+> + For ``BPF_MAP_TYPE_CPUMAP`` this map contains references to CPUs.
+> +
+> + The lower two bits of *flags* are used as the return code if the map lookup
+> + fails. This is so that the return value can be one of the XDP program return
+> + codes up to ``XDP_TX``, as chosen by the caller.
+> +
+> +Examples
+> +========
+> +Kernel
+> +------
+> +
+> +The following code snippet shows how to declare a BPF_MAP_TYPE_CPUMAP called cpu_map.
+> +
+> +.. code-block:: c
+> +
+> +   struct {
+> +        __uint(type, BPF_MAP_TYPE_CPUMAP);
+> +        __type(key, u32);
+> +        __type(value, struct bpf_cpumap_val);
+> +    } cpu_map SEC(".maps");
+
+Does this work without a max_entries member?
+
+> +The following code snippet shows how to redirect packets to a remote CPU.
+> +
+> +.. code-block:: c
+> +
+> +    struct {
+> +        __uint(type, BPF_MAP_TYPE_ARRAY);
+> +        __type(key, u32);
+> +        __type(value, u32);
+> +    } cpus_available SEC(".maps"); /* Map populated by user space program as selectable redirect CPUs*/
+> +
+> +    SEC("xdp")
+> +    int  xdp_redir_cpu(struct xdp_md *ctx)
+> +    {
+> +        u32 key = bpf_get_smp_processor_id();
+> +        u32 *cpu_selected;
+> +        u32 cpu_dest = 0;
+> +
+> +        cpu_selected = bpf_map_lookup_elem(&cpus_available, &key);
+> +        if (!cpu_selected)
+> +            return XDP_ABORTED;
+> +        cpu_dest = *cpu_selected;
+> +
+> +        if (cpu_dest >= bpf_num_possible_cpus()) {
+> +            return XDP_ABORTED;
+> +        }
+> +        return bpf_redirect_map(&cpu_map, cpu_dest, 0);
+> +    }
+
+This is a bit of a weird example. It uses the current CPU index to find
+the destination CPU? So it becomes a one-to-one mapping for CPUs?
+Wouldn't a useful example generally divide out packets based on some
+property of the packet data itself?
+
+> +User Space
+> +----------
+> +
+> +The following code snippet shows how to update a CPUMAP called cpumap.
+> +
+> +.. code-block:: c
+> +
+> +    static int create_cpu_entry(__u32 cpu, struct bpf_cpumap_val *value)
+> +    {
+> +        int ret;
+> +
+> +        ret = bpf_map_update_elem(bpf_map__fd(cpu_map), &cpu, value, 0);
+> +        if (ret < 0)
+> +            fprintf(stderr, "Create CPU entry failed: %s\n", strerror(errno));
+> +
+> +        return ret;
+> +    }
+
+Is this necessary? It just shows how to call bpf_map_update_elem();
+that's pretty generic, so why not just drop it from this example?
+
+-Toke
 
