@@ -2,87 +2,50 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 5DA5A60E11C
-	for <lists+linux-doc@lfdr.de>; Wed, 26 Oct 2022 14:45:34 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id D5A2260E154
+	for <lists+linux-doc@lfdr.de>; Wed, 26 Oct 2022 14:59:06 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S233445AbiJZMpc (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 26 Oct 2022 08:45:32 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:47302 "EHLO
+        id S233964AbiJZM7F (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 26 Oct 2022 08:59:05 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:43356 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S233473AbiJZMpa (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Wed, 26 Oct 2022 08:45:30 -0400
-Received: from mga01.intel.com (mga01.intel.com [192.55.52.88])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 374508BB8A;
-        Wed, 26 Oct 2022 05:45:29 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1666788329; x=1698324329;
-  h=message-id:date:mime-version:cc:subject:to:references:
-   from:in-reply-to:content-transfer-encoding;
-  bh=ABNx+msEoxiE0Up/NA4YUsZE1sxvOirm9dovIGgVQBY=;
-  b=eH7reX7OgdEIT5Us9JYkZEdF4sVa4hzCT/kGcwmvGEpz8F9+x0h+5/jj
-   bB4YWbEJ87gOTVQDueRtYOjzOxcRKCGd99ATT0H3U9UPi5Hz2fUE6LJO9
-   uMdVxscTqtkmpzRXafPvWKoiEZQcKw43VtLYQhH8VXa3R18Xi+n9kn7Dz
-   0sO5p7IJndkH8WjkJPNBAYz/60ZBMjVokhpzOfR6Xbw2ZdB1dkWCd+Xjg
-   i+Z515Zz56T/bfDxjmsmq+ayuynOxkg3Jy0tUw0AHpNBSOyEvxavh86+K
-   taypGzJzpP7yQMWzONHvVNInx+ZYGvzHKUso5+K82aLoHP+14/3EwOftd
-   Q==;
-X-IronPort-AV: E=McAfee;i="6500,9779,10512"; a="334552548"
-X-IronPort-AV: E=Sophos;i="5.95,214,1661842800"; 
-   d="scan'208";a="334552548"
-Received: from orsmga006.jf.intel.com ([10.7.209.51])
-  by fmsmga101.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 26 Oct 2022 05:45:25 -0700
-X-IronPort-AV: E=McAfee;i="6500,9779,10512"; a="609938092"
-X-IronPort-AV: E=Sophos;i="5.95,214,1661842800"; 
-   d="scan'208";a="609938092"
-Received: from blu2-mobl3.ccr.corp.intel.com (HELO [10.254.213.188]) ([10.254.213.188])
-  by orsmga006-auth.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 26 Oct 2022 05:45:17 -0700
-Message-ID: <2bcba1f1-e142-a752-eae5-69249f5a1021@linux.intel.com>
-Date:   Wed, 26 Oct 2022 20:45:15 +0800
+        with ESMTP id S233962AbiJZM7F (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Wed, 26 Oct 2022 08:59:05 -0400
+X-Greylist: delayed 2319 seconds by postgrey-1.37 at lindbergh.monkeyblade.net; Wed, 26 Oct 2022 05:59:04 PDT
+Received: from vps0.lunn.ch (vps0.lunn.ch [156.67.10.101])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 720FFF708D;
+        Wed, 26 Oct 2022 05:59:03 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=lunn.ch;
+        s=20171124; h=In-Reply-To:Content-Disposition:Content-Type:MIME-Version:
+        References:Message-ID:Subject:Cc:To:From:Date:From:Sender:Reply-To:Subject:
+        Date:Message-ID:To:Cc:MIME-Version:Content-Type:Content-Transfer-Encoding:
+        Content-ID:Content-Description:Content-Disposition:In-Reply-To:References;
+        bh=VmW7slGrlHih0la8kVFS+GRtfhTJQ7NbG+NrGY/e2fI=; b=2V8CaKkStK9p7hGGf/GDc7y4hD
+        ptn2HtcVKpuLimf6QGkrJrJ1m9WwfA/TFwMhWSilB7Fnopl8flAFLH0Td/sWY9QaoxpUPxYx4GXTs
+        gvWwYF8K687CLK2NouX0GJlEkMoWWsRPQA45Q9gjhuyqTh4eML/DupyiHUVLDbLKicM4=;
+Received: from andrew by vps0.lunn.ch with local (Exim 4.94.2)
+        (envelope-from <andrew@lunn.ch>)
+        id 1onfyr-000clS-1Y; Wed, 26 Oct 2022 14:58:01 +0200
+Date:   Wed, 26 Oct 2022 14:58:01 +0200
+From:   Andrew Lunn <andrew@lunn.ch>
+To:     Oleksij Rempel <o.rempel@pengutronix.de>
+Cc:     Jakub Kicinski <kuba@kernel.org>, davem@davemloft.net,
+        netdev@vger.kernel.org, edumazet@google.com, pabeni@redhat.com,
+        saeedm@nvidia.com, corbet@lwn.net, michael.chan@broadcom.com,
+        huangguangbin2@huawei.com, chenhao288@hisilicon.com,
+        moshet@nvidia.com, linux@rempel-privat.de,
+        linux-doc@vger.kernel.org
+Subject: Re: [PATCH net-next] ethtool: linkstate: add a statistic for PHY
+ down events
+Message-ID: <Y1ku2QvMmQdWTa57@lunn.ch>
+References: <20221026020948.1913777-1-kuba@kernel.org>
+ <20221026074032.GF8675@pengutronix.de>
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
- Thunderbird/102.4.0
-Cc:     baolu.lu@linux.intel.com,
-        Alex Williamson <alex.williamson@redhat.com>,
-        Chaitanya Kulkarni <chaitanyak@nvidia.com>,
-        Cornelia Huck <cohuck@redhat.com>,
-        Daniel Jordan <daniel.m.jordan@oracle.com>,
-        David Gibson <david@gibson.dropbear.id.au>,
-        Eric Auger <eric.auger@redhat.com>,
-        Eric Farman <farman@linux.ibm.com>,
-        Jason Wang <jasowang@redhat.com>,
-        Jean-Philippe Brucker <jean-philippe@linaro.org>,
-        Joao Martins <joao.m.martins@oracle.com>, kvm@vger.kernel.org,
-        Matthew Rosato <mjrosato@linux.ibm.com>,
-        "Michael S. Tsirkin" <mst@redhat.com>,
-        Nicolin Chen <nicolinc@nvidia.com>,
-        Niklas Schnelle <schnelle@linux.ibm.com>,
-        Shameerali Kolothum Thodi 
-        <shameerali.kolothum.thodi@huawei.com>,
-        Yi Liu <yi.l.liu@intel.com>, Keqian Zhu <zhukeqian1@huawei.com>
-Subject: Re: [PATCH v3 01/15] iommu: Add IOMMU_CAP_ENFORCE_CACHE_COHERENCY
-Content-Language: en-US
-To:     Jason Gunthorpe <jgg@nvidia.com>, bpf@vger.kernel.org,
-        Jonathan Corbet <corbet@lwn.net>,
-        David Woodhouse <dwmw2@infradead.org>, iommu@lists.linux.dev,
-        Joerg Roedel <joro@8bytes.org>,
-        Kevin Tian <kevin.tian@intel.com>, linux-doc@vger.kernel.org,
-        linux-kselftest@vger.kernel.org, llvm@lists.linux.dev,
-        Nathan Chancellor <nathan@kernel.org>,
-        Nick Desaulniers <ndesaulniers@google.com>,
-        Miguel Ojeda <ojeda@kernel.org>,
-        Robin Murphy <robin.murphy@arm.com>,
-        Shuah Khan <shuah@kernel.org>,
-        Suravee Suthikulpanit <suravee.suthikulpanit@amd.com>,
-        Tom Rix <trix@redhat.com>, Will Deacon <will@kernel.org>
-References: <1-v3-402a7d6459de+24b-iommufd_jgg@nvidia.com>
-From:   Baolu Lu <baolu.lu@linux.intel.com>
-In-Reply-To: <1-v3-402a7d6459de+24b-iommufd_jgg@nvidia.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-Spam-Status: No, score=-7.5 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_EF,NICE_REPLY_A,RCVD_IN_DNSWL_HI,
-        RCVD_IN_MSPIKE_H3,RCVD_IN_MSPIKE_WL,SPF_HELO_NONE,SPF_NONE,
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20221026074032.GF8675@pengutronix.de>
+X-Spam-Status: No, score=-2.1 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,SPF_HELO_PASS,SPF_PASS,
         URIBL_BLOCKED autolearn=ham autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
@@ -90,17 +53,11 @@ Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On 2022/10/26 2:12, Jason Gunthorpe wrote:
-> This queries if a domain linked to a device should expect to support
-> enforce_cache_coherency() so iommufd can negotiate the rules for when a
-> domain should be shared or not.
-> 
-> For iommufd a device that declares IOMMU_CAP_ENFORCE_CACHE_COHERENCY will
-> not be attached to a domain that does not support it.
-> 
-> Signed-off-by: Jason Gunthorpe<jgg@nvidia.com>
+> What is the best way to implement it on devices without dedicated HW
+> counter? I assume in most cases only PHY driver would not real state of
+> link.
 
-Reviewed-by: Lu Baolu <baolu.lu@linux.intel.com>
+I would hook into the PHY state machine. PHY_RUNNING means the link is
+up. If it transitions to PHY_NOLINK the link has been lost.
 
-Best regards,
-baolu
+    Andrew
