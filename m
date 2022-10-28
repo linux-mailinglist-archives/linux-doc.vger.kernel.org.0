@@ -2,84 +2,96 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 72D1761110D
-	for <lists+linux-doc@lfdr.de>; Fri, 28 Oct 2022 14:20:03 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 743F461113B
+	for <lists+linux-doc@lfdr.de>; Fri, 28 Oct 2022 14:25:15 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S229721AbiJ1MUC (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Fri, 28 Oct 2022 08:20:02 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:52216 "EHLO
+        id S229755AbiJ1MZM (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Fri, 28 Oct 2022 08:25:12 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:35396 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S230025AbiJ1MT4 (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Fri, 28 Oct 2022 08:19:56 -0400
-Received: from vps0.lunn.ch (vps0.lunn.ch [156.67.10.101])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id ABA4D27B04;
-        Fri, 28 Oct 2022 05:19:55 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=lunn.ch;
-        s=20171124; h=In-Reply-To:Content-Disposition:Content-Type:MIME-Version:
-        References:Message-ID:Subject:Cc:To:From:Date:From:Sender:Reply-To:Subject:
-        Date:Message-ID:To:Cc:MIME-Version:Content-Type:Content-Transfer-Encoding:
-        Content-ID:Content-Description:Content-Disposition:In-Reply-To:References;
-        bh=i5cA5BhW3R9VDdcstHtx2JgpWOioh55YU9ezi8M+rnQ=; b=4sHhl61c1zjRaeqk5lnkUBQs6O
-        8h1AKyGW90xLhQQZLD+wYWImEY0O4K7rrs3Q5YsuGy7IsIG9ppCkaHT8DB+V7uY79Dn1T+zEUsC7T
-        HLtHa1vQt8Bv09znM5fzJJkhYNhpEV8qNuLIaoRq9Cwc1DAns2Q19UyPKtS5MYHc5NfQ=;
-Received: from andrew by vps0.lunn.ch with local (Exim 4.94.2)
-        (envelope-from <andrew@lunn.ch>)
-        id 1ooOJP-000o8E-KG; Fri, 28 Oct 2022 14:18:11 +0200
-Date:   Fri, 28 Oct 2022 14:18:11 +0200
-From:   Andrew Lunn <andrew@lunn.ch>
-To:     Jakub Kicinski <kuba@kernel.org>
-Cc:     davem@davemloft.net, netdev@vger.kernel.org, edumazet@google.com,
-        pabeni@redhat.com, corbet@lwn.net, michael.chan@broadcom.com,
-        hkallweit1@gmail.com, linux@armlinux.org.uk,
-        huangguangbin2@huawei.com, chenhao288@hisilicon.com,
-        moshet@nvidia.com, linux@rempel-privat.de,
-        linux-doc@vger.kernel.org
-Subject: Re: [PATCH net-next v2] ethtool: linkstate: add a statistic for PHY
- down events
-Message-ID: <Y1vIg8bR8NBnQ3J5@lunn.ch>
-References: <20221028012719.2702267-1-kuba@kernel.org>
+        with ESMTP id S229588AbiJ1MZK (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Fri, 28 Oct 2022 08:25:10 -0400
+Received: from loongson.cn (mail.loongson.cn [114.242.206.163])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTP id 86D5844549;
+        Fri, 28 Oct 2022 05:25:07 -0700 (PDT)
+Received: from loongson.cn (unknown [112.20.109.239])
+        by gateway (Coremail) with SMTP id _____8BxGdghyltjvBkDAA--.10030S3;
+        Fri, 28 Oct 2022 20:25:05 +0800 (CST)
+Received: from localhost.localdomain (unknown [112.20.109.239])
+        by localhost.localdomain (Coremail) with SMTP id AQAAf8BxTuAfyltjkGEGAA--.22497S2;
+        Fri, 28 Oct 2022 20:25:04 +0800 (CST)
+From:   Yanteng Si <siyanteng@loongson.cn>
+To:     alexs@kernel.org, seakeel@gmail.com
+Cc:     Yanteng Si <siyanteng@loongson.cn>, corbet@lwn.net,
+        ojeda@kernel.org, boqun.feng@gmail.com, wedsonaf@gmail.com,
+        gary@garyguo.net, bjorn3_gh@protonmail.com,
+        rust-for-linux@vger.kernel.org, bobwxc@email.cn,
+        wu.xiangcheng@linux.dev, chenhuacai@kernel.org,
+        jiaxun.yang@flygoat.com, linux-doc@vger.kernel.org,
+        siyanteng01@gmail.com
+Subject: [PATCH v3 0/5] docs/zh_CN: Add rust Chinese translation
+Date:   Fri, 28 Oct 2022 20:23:08 +0800
+Message-Id: <cover.1666959529.git.siyanteng@loongson.cn>
+X-Mailer: git-send-email 2.31.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20221028012719.2702267-1-kuba@kernel.org>
-X-Spam-Status: No, score=-2.1 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,SPF_HELO_PASS,SPF_PASS
-        autolearn=ham autolearn_force=no version=3.4.6
+Content-Transfer-Encoding: 8bit
+X-CM-TRANSID: AQAAf8BxTuAfyltjkGEGAA--.22497S2
+X-CM-SenderInfo: pvl1t0pwhqwqxorr0wxvrqhubq/
+X-Coremail-Antispam: 1Uk129KBjvJXoWxJr1xZw4DGFWxJrWUtF1DJrb_yoW8Jw1xpF
+        1UKryfG3W7AF12kw4fCF1UJF1fC3WfG3y5tw17Xwnaqrs5tF4rtrWDtr9IyayfZw48XF45
+        Xr4FkryUuw4FyrJanT9S1TB71UUUUj7qnTZGkaVYY2UrUUUUj1kv1TuYvTs0mT0YCTnIWj
+        qI5I8CrVACY4xI64kE6c02F40Ex7xfYxn0WfASr-VFAUDa7-sFnT9fnUUIcSsGvfJTRUUU
+        bfkYFVCjjxCrM7AC8VAFwI0_Jr0_Gr1l1xkIjI8I6I8E6xAIw20EY4v20xvaj40_Wr0E3s
+        1l1IIY67AEw4v_JrI_Jryl8cAvFVAK0II2c7xJM28CjxkF64kEwVA0rcxSw2x7M28EF7xv
+        wVC0I7IYx2IY67AKxVWUCVW8JwA2z4x0Y4vE2Ix0cI8IcVCY1x0267AKxVW8JVWxJwA2z4
+        x0Y4vEx4A2jsIE14v26F4UJVW0owA2z4x0Y4vEx4A2jsIEc7CjxVAFwI0_GcCE3s1ln4kS
+        14v26r126r1DM2AIxVAIcxkEcVAq07x20xvEncxIr21l57IF6xkI12xvs2x26I8E6xACxx
+        1l5I8CrVACY4xI64kE6c02F40Ex7xfMcIj6xIIjxv20xvE14v26r126r1DMcIj6I8E87Iv
+        67AKxVW8JVWxJwAm72CE4IkC6x0Yz7v_Jr0_Gr1lF7xvr2IYc2Ij64vIr41lc7CjxVAaw2
+        AFwI0_JF0_Jw1l42xK82IYc2Ij64vIr41l4I8I3I0E4IkC6x0Yz7v_Jr0_Gr1l4IxYO2xF
+        xVAFwI0_JF0_Jw1lx2IqxVAqx4xG67AKxVWUJVWUGwC20s026x8GjcxK67AKxVWUGVWUWw
+        C2zVAF1VAY17CE14v26r4a6rW5MIIYrxkI7VAKI48JMIIF0xvE2Ix0cI8IcVAFwI0_JFI_
+        Gr1lIxAIcVC0I7IYx2IY6xkF7I0E14v26r1j6r4UMIIF0xvE42xK8VAvwI8IcIk0rVWUJV
+        WUCwCI42IY6I8E87Iv67AKxVW8JVWxJwCI42IY6I8E87Iv6xkF7I0E14v26r4j6r4UJbIY
+        CTnIWIevJa73UjIFyTuYvjxU4cdbUUUUU
+X-Spam-Status: No, score=1.4 required=5.0 tests=BAYES_00,RCVD_IN_SBL_CSS,
+        SPF_HELO_PASS,SPF_PASS autolearn=no autolearn_force=no version=3.4.6
+X-Spam-Level: *
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-> @@ -67,6 +67,7 @@ static void phy_link_down(struct phy_device *phydev)
->  {
->  	phydev->phy_link_change(phydev, false);
->  	phy_led_trigger_change_speed(phydev);
-> +	WRITE_ONCE(phydev->link_down_events, phydev->link_down_events + 1);
+v3:
+* Modify some words under Gary's advice.
 
-I'm not sure the WRITE_ONCE adds much value. Many systems using PHYLIB
-are 32 bit, and i don't think WRITE_ONCE will make that 64 bit write
-atomic on 32 bit systems. And as Florian pointed out, you have bigger
-problems if you manged to overflow a u32 into a u64.
+v2:
+* Modify some words under Xiangcheng's advice.
 
-> @@ -723,6 +724,8 @@ struct phy_device {
->  
->  	int pma_extable;
->  
-> +	unsigned int link_down_events;
+v1:
+* Translate Documentation/rust/* into Chinese.
 
-And here is unsigned int, not u64? Or u32? It would be good to be
-consistent.
+Yanteng Si (5):
+  docs/zh_CN: Add rust/index Chinese translation
+  docs/zh_CN: Add rust/quick-start Chinese translation
+  docs/zh_CN: Add rust/general-information Chinese translation
+  docs/zh_CN: Add rust/coding-guidelines Chinese translation
+  docs/zh_CN: Add rust/arch-support Chinese translation
 
-> --- a/include/uapi/linux/ethtool_netlink.h
-> +++ b/include/uapi/linux/ethtool_netlink.h
-> @@ -262,6 +262,8 @@ enum {
->  	ETHTOOL_A_LINKSTATE_SQI_MAX,		/* u32 */
->  	ETHTOOL_A_LINKSTATE_EXT_STATE,		/* u8 */
->  	ETHTOOL_A_LINKSTATE_EXT_SUBSTATE,	/* u8 */
-> +	ETHTOOL_A_LINKSTATE_PAD,
-> +	ETHTOOL_A_LINKSTATE_EXT_DOWN_CNT,	/* u64 */
+ Documentation/translations/zh_CN/index.rst    |   1 +
+ .../translations/zh_CN/rust/arch-support.rst  |  23 ++
+ .../zh_CN/rust/coding-guidelines.rst          | 192 ++++++++++++++++
+ .../zh_CN/rust/general-information.rst        |  75 +++++++
+ .../translations/zh_CN/rust/index.rst         |  28 +++
+ .../translations/zh_CN/rust/quick-start.rst   | 211 ++++++++++++++++++
+ 6 files changed, 530 insertions(+)
+ create mode 100644 Documentation/translations/zh_CN/rust/arch-support.rst
+ create mode 100644 Documentation/translations/zh_CN/rust/coding-guidelines.rst
+ create mode 100644 Documentation/translations/zh_CN/rust/general-information.rst
+ create mode 100644 Documentation/translations/zh_CN/rust/index.rst
+ create mode 100644 Documentation/translations/zh_CN/rust/quick-start.rst
 
-What is the PAD for?
+-- 
+2.31.1
 
-     Andrew
