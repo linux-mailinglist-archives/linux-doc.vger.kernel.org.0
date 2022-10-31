@@ -2,65 +2,114 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id EA28F615C92
-	for <lists+linux-doc@lfdr.de>; Wed,  2 Nov 2022 07:57:52 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 5173D615D37
+	for <lists+linux-doc@lfdr.de>; Wed,  2 Nov 2022 08:58:16 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S230121AbiKBG5v (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 2 Nov 2022 02:57:51 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:52128 "EHLO
+        id S229992AbiKBH6M (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 2 Nov 2022 03:58:12 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:37078 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S230174AbiKBG5r (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Wed, 2 Nov 2022 02:57:47 -0400
-Received: from dfw.source.kernel.org (dfw.source.kernel.org [IPv6:2604:1380:4641:c500::1])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 28920264AB;
-        Tue,  1 Nov 2022 23:57:46 -0700 (PDT)
-Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
-        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
-        (No client certificate requested)
-        by dfw.source.kernel.org (Postfix) with ESMTPS id A6498617F1;
-        Wed,  2 Nov 2022 06:57:45 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id DE921C433C1;
-        Wed,  2 Nov 2022 06:57:43 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=linuxfoundation.org;
-        s=korg; t=1667372265;
-        bh=gEWC+xBGxJjmffn8DbuWfGpCgnkPgnwOhfiKmOMQ0FY=;
-        h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-        b=NCVTWBCqEovQo0LNMUjDiMtRaEuxtKzR4cGSvwqy54oW19rXM7bnysapo0wPMKIOa
-         6WDBOUCEUBdig0OBoEKBWbryBLKDBjXNmmibhWZWhXq/aJvRT0OAoqq86WAnvqDe0x
-         ccYb5KmTTvMsNWkbtG4RwT2Snd387ypz7MhDVJec=
-Date:   Wed, 2 Nov 2022 07:58:38 +0100
-From:   Greg Kroah-Hartman <gregkh@linuxfoundation.org>
-To:     Sathyanarayanan Kuppuswamy 
-        <sathyanarayanan.kuppuswamy@linux.intel.com>
-Cc:     Thomas Gleixner <tglx@linutronix.de>,
-        Ingo Molnar <mingo@redhat.com>, Borislav Petkov <bp@alien8.de>,
-        Dave Hansen <dave.hansen@linux.intel.com>, x86@kernel.org,
-        Shuah Khan <shuah@kernel.org>,
-        Jonathan Corbet <corbet@lwn.net>,
-        "H . Peter Anvin" <hpa@zytor.com>,
-        "Kirill A . Shutemov" <kirill.shutemov@linux.intel.com>,
-        Tony Luck <tony.luck@intel.com>,
-        Kai Huang <kai.huang@intel.com>,
-        Wander Lairson Costa <wander@redhat.com>,
-        Isaku Yamahata <isaku.yamahata@gmail.com>,
-        marcelo.cerri@canonical.com, tim.gardner@canonical.com,
-        khalid.elmously@canonical.com, philip.cox@canonical.com,
-        linux-kernel@vger.kernel.org, linux-kselftest@vger.kernel.org,
-        linux-doc@vger.kernel.org
-Subject: Re: [PATCH v16 2/3] virt: Add TDX guest driver
-Message-ID: <Y2IVHlt3iCcTdI3G@kroah.com>
-References: <20221028002820.3303030-1-sathyanarayanan.kuppuswamy@linux.intel.com>
- <20221028002820.3303030-3-sathyanarayanan.kuppuswamy@linux.intel.com>
- <Y1t18Aw2RbP+oj9D@kroah.com>
- <01f437c1-9330-6fb5-d692-6cd500d8adf8@linux.intel.com>
- <Y14fX1Ni1taUxtFk@kroah.com>
- <55497719-4c51-e209-dd10-0f4ee0d95ad5@linux.intel.com>
+        with ESMTP id S229516AbiKBH6K (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Wed, 2 Nov 2022 03:58:10 -0400
+X-Greylist: delayed 203 seconds by postgrey-1.37 at lindbergh.monkeyblade.net; Wed, 02 Nov 2022 00:58:08 PDT
+Received: from omta37.uswest2.a.cloudfilter.net (omta37.uswest2.a.cloudfilter.net [35.89.44.36])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 65CFB252AF;
+        Wed,  2 Nov 2022 00:58:08 -0700 (PDT)
+Received: from eig-obgw-6001a.ext.cloudfilter.net ([10.0.30.140])
+        by cmsmtp with ESMTP
+        id ppxCotPVGqEICq8WZoOBJq; Wed, 02 Nov 2022 07:50:59 +0000
+Received: from gator4166.hostgator.com ([108.167.133.22])
+        by cmsmtp with ESMTP
+        id q8WYoqJtNJzQ5q8WYoC2Gp; Wed, 02 Nov 2022 07:50:59 +0000
+X-Authority-Analysis: v=2.4 cv=MaV/Brzf c=1 sm=1 tr=0 ts=63622163
+ a=1YbLdUo/zbTtOZ3uB5T3HA==:117 a=wTog8WU66it3cfrESHnF4A==:17
+ a=dLZJa+xiwSxG16/P+YVxDGlgEgI=:19 a=IkcTkHD0fZMA:10 a=Qawa6l4ZSaYA:10
+ a=wYkD_t78qR0A:10 a=TCL3t-gOmiXOs0atSnwA:9 a=QEXdDO2ut3YA:10
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+        d=embeddedor.com; s=default; h=Content-Transfer-Encoding:Content-Type:
+        In-Reply-To:From:References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender
+        :Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:
+        Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:
+        List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
+        bh=MLjpJH6sJtG3eyLqG+16mXrzIl/XBNVKLpM3ejMi4SQ=; b=BnPGvJJflWMNqJk68ts2+Vm40U
+        vPCGZkq0B3jqkVA/xWogy8JsdvNwmlVHdDDJT93FZBt/JNV+xv+3g4GKEMhQlLXDz3UVieqIGBm9N
+        zEGGOJ8fs8Yu1ZDCAmuYkZdpnAGgq4u0OIYeujIaJ9TrnicN4ug9IpDTSD7teJN9Yrn8OeQdjHv//
+        6JTR3qJB4+zmZl6WaCb7rU3bu0hrzXm+1sxAYDFWTqmq+iWLsPisGvkNRRUwCL+Mtv7lZw5qRDRW7
+        rTS4FW9vG4Qki2PRp7bxUo4wjOHNtgSwbR/RTVQv9fqWxqTRUG04T8uCsjVD27lJb++CkzZEgu85m
+        AXg7JFbA==;
+Received: from 187-162-31-110.static.axtel.net ([187.162.31.110]:41634 helo=[192.168.15.7])
+        by gator4166.hostgator.com with esmtpsa  (TLS1.2) tls TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256
+        (Exim 4.95)
+        (envelope-from <gustavo@embeddedor.com>)
+        id 1opaOT-000xYN-EP;
+        Mon, 31 Oct 2022 14:24:22 -0500
+Message-ID: <89eca382-fca3-28f9-eac7-f855f2efb598@embeddedor.com>
+Date:   Mon, 31 Oct 2022 13:23:54 -0500
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <55497719-4c51-e209-dd10-0f4ee0d95ad5@linux.intel.com>
-X-Spam-Status: No, score=-8.2 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_HI,
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.2.2
+Subject: Re: new checkpatch flexible array test ? (was Re: [PATCH v4 12/14]
+ gunyah: rsc_mgr: Add RPC for console services)
+Content-Language: en-US
+To:     Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+        Joe Perches <joe@perches.com>,
+        "Gustavo A. R. Silva" <gustavoars@kernel.org>
+Cc:     Elliot Berman <quic_eberman@quicinc.com>,
+        Andrew Morton <akpm@linux-foundation.org>,
+        Bjorn Andersson <quic_bjorande@quicinc.com>,
+        Murali Nalajala <quic_mnalajal@quicinc.com>,
+        Trilok Soni <quic_tsoni@quicinc.com>,
+        Srivatsa Vaddagiri <quic_svaddagi@quicinc.com>,
+        Carl van Schaik <quic_cvanscha@quicinc.com>,
+        Andy Gross <agross@kernel.org>,
+        Dmitry Baryshkov <dmitry.baryshkov@linaro.org>,
+        Jassi Brar <jassisinghbrar@gmail.com>,
+        linux-arm-kernel@lists.infradead.org,
+        Mark Rutland <mark.rutland@arm.com>,
+        Lorenzo Pieralisi <lorenzo.pieralisi@arm.com>,
+        Sudeep Holla <sudeep.holla@arm.com>,
+        Marc Zyngier <maz@kernel.org>,
+        Rob Herring <robh+dt@kernel.org>,
+        Krzysztof Kozlowski <krzysztof.kozlowski+dt@linaro.org>,
+        Jonathan Corbet <corbet@lwn.net>,
+        Will Deacon <will@kernel.org>,
+        Catalin Marinas <catalin.marinas@arm.com>,
+        Arnd Bergmann <arnd@arndb.de>, devicetree@vger.kernel.org,
+        linux-doc@vger.kernel.org, linux-arm-msm@vger.kernel.org,
+        linux-kernel@vger.kernel.org
+References: <20220928195633.2348848-1-quic_eberman@quicinc.com>
+ <20220928195633.2348848-13-quic_eberman@quicinc.com>
+ <YzbfaCj9jvSUDfUg@kroah.com>
+ <c7e45416cc911290efb5ad669f4a45bdc5678f69.camel@perches.com>
+ <YzpzVfwA7NMCIyIp@kroah.com>
+ <04ade5f54bd3dc658cb8606c98b0b1fe34a97383.camel@perches.com>
+From:   "Gustavo A. R. Silva" <gustavo@embeddedor.com>
+In-Reply-To: <04ade5f54bd3dc658cb8606c98b0b1fe34a97383.camel@perches.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
+X-AntiAbuse: Primary Hostname - gator4166.hostgator.com
+X-AntiAbuse: Original Domain - vger.kernel.org
+X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
+X-AntiAbuse: Sender Address Domain - embeddedor.com
+X-BWhitelist: no
+X-Source-IP: 187.162.31.110
+X-Source-L: No
+X-Exim-ID: 1opaOT-000xYN-EP
+X-Source: 
+X-Source-Args: 
+X-Source-Dir: 
+X-Source-Sender: 187-162-31-110.static.axtel.net ([192.168.15.7]) [187.162.31.110]:41634
+X-Source-Auth: gustavo@embeddedor.com
+X-Email-Count: 0
+X-Org:  HG=hgshared;ORG=hostgator;
+X-Source-Cap: Z3V6aWRpbmU7Z3V6aWRpbmU7Z2F0b3I0MTY2Lmhvc3RnYXRvci5jb20=
+X-Local-Domain: yes
+X-CMAE-Envelope: MS4xfFfzNBKwhR3kFxUhhlT0wgwPghkc7emVB6d8R3TL0p7J8XAV+SrN3jcK5Buk1qRib4qOmwmnmWIdm6kzVT60hiSv1aEsbZX6t5JWBLkMCBc3p5dRK0A4
+ omlC12ROJnF9Q5YHLFYCOKrw07xUjZahM40febtL73U4JYao6k7ewZqwRM45oN29F3+pi3SfxNzUpfi5gF6H8CnFrBlb+iw0nSacuBFErkqzRgKZm/jxbAdj
+ A6LL5bxwCV3EzTWTSnLocveLoJQJtiOJxgfSE2V7+3WOuHk9qahFYTZb4yK/WRoQ8OkwiHBunXvO1G4GHKDBeendIQw/6a/cXFSmuqTLmTI=
+X-Spam-Status: No, score=-2.1 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,NICE_REPLY_A,RCVD_IN_MSPIKE_H2,
         SPF_HELO_NONE,SPF_PASS autolearn=ham autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
@@ -68,139 +117,81 @@ Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Tue, Nov 01, 2022 at 11:18:29PM -0700, Sathyanarayanan Kuppuswamy wrote:
-> Hi Greg,
-> 
-> On 10/29/22 11:53 PM, Greg Kroah-Hartman wrote:
-> > On Sat, Oct 29, 2022 at 04:17:39PM -0700, Sathyanarayanan Kuppuswamy wrote:
-> >> Hi Greg
-> >>
-> >> On 10/27/22 11:25 PM, Greg Kroah-Hartman wrote:
-> >>> On Thu, Oct 27, 2022 at 05:28:19PM -0700, Kuppuswamy Sathyanarayanan wrote:
-> >>
-> >>>> +
-> >>>> +static long tdx_guest_ioctl(struct file *file, unsigned int cmd,
-> >>>> +			    unsigned long arg)
-> >>>> +{
-> >>>> +	switch (cmd) {
-> >>>> +	case TDX_CMD_GET_REPORT:
-> >>>> +		return tdx_get_report((void __user *)arg);
-> >>>
-> >>> You know the type of this pointer here, why not cast it instead of
-> >>> having to cast it from void * again?
-> >>
-> >> The only place we use arg pointer is in copy_from_user() function,
-> >> which expects void __user * pointer. So why cast it as struct
-> >> tdx_report_req * here?
-> > 
-> > Because then your function will show the true type and you don't have to
-> > cast it again.
-> > 
-> >>>> +MODULE_AUTHOR("Kuppuswamy Sathyanarayanan <sathyanarayanan.kuppuswamy@linux.intel.com>");
-> >>>> +MODULE_DESCRIPTION("TDX Guest Driver");
-> >>>> +MODULE_LICENSE("GPL");
-> >>>> diff --git a/include/uapi/linux/tdx-guest.h b/include/uapi/linux/tdx-guest.h
-> >>>> new file mode 100644
-> >>>> index 000000000000..29453e6a7ced
-> >>>> --- /dev/null
-> >>>> +++ b/include/uapi/linux/tdx-guest.h
-> >>>> @@ -0,0 +1,55 @@
-> >>>> +/* SPDX-License-Identifier: GPL-2.0 WITH Linux-syscall-note */
-> >>>> +/*
-> >>>> + * Userspace interface for TDX guest driver
-> >>>> + *
-> >>>> + * Copyright (C) 2022 Intel Corporation
-> >>>> + */
-> >>>> +
-> >>>> +#ifndef _UAPI_LINUX_TDX_GUEST_H_
-> >>>> +#define _UAPI_LINUX_TDX_GUEST_H_
-> >>>> +
-> >>>> +#include <linux/ioctl.h>
-> >>>> +#include <linux/types.h>
-> >>>> +
-> >>>> +/* Length of the REPORTDATA used in TDG.MR.REPORT TDCALL */
-> >>>> +#define TDX_REPORTDATA_LEN              64
-> >>>> +
-> >>>> +/* Length of TDREPORT used in TDG.MR.REPORT TDCALL */
-> >>>> +#define TDX_REPORT_LEN                  1024
-> >>>
-> >>> As these are fixed values, why do you have to say them again in the
-> >>> structure?
-> >>
-> >> These length recommendations are provided by the TDX Module, and there is
-> >> a slight possibility that the TDX Module will increase the maximum size
-> >> of the REPORTDATA and TDREPORT in the future.
-> > 
-> > We do not write kernel code for "slight possibilities sometime in the
-> > future".
-> > 
-> >> To handle such length
-> >> changes, rather than inventing a new IOCTL for it in the future, making
-> >> the current one flexible to handle such changes seems better.
-> > 
-> > Please work through the code and see how that would really look, and
-> > what would break if you were to change that in the future (remember
-> > kernel code and userspace code is not upgraded at the same time.)
-> > 
-> >> One less ABI
-> >> to maintain is always better, right? My initial design did use fixed size
-> >> buffers like you have recommended, but later changed it as per review
-> >> suggestion to make the ABI flexible.
-> > 
-> > Again, work through and try to determine if the added complexity will
-> > really work here.
-> > 
-> > What is wrong with just adding a new ioctl if in the future, you really
-> > do need to change something?  That way you are sure that nothing will
-> > break and userspace will be finen with it.  It is not like you are
-> > forbidden to add new ioctls later, you would have to change the kernel
-> > code no matter what anyway.
-> > 
-> > Keep it simple please.
-> 
-> 
-> The following are potential solutions to the possible kernel/userspace
-> mix/match issue that may arise in the future if the acceptable reportdata
-> length, tdreport length, or subtype values change.
-> 
-> I've attempted to do a sample implementation as you have suggested to
-> check the pros and cons for both solutions. Please let me know what you
-> think. Personally I prefer solution 2, as it handles the issue you have
-> raised and also keeps the ABI flexible.
-> 
-> Solution 1:
-> ------------
-> 
-> This is based on your suggestion. I have dropped the IOCTL req members for
-> reportdata length (rpd_len), tdreport length (tdr_len) and subtype. I have
-> also used fixed size buffers to handle the current requirements.
-> 
-> Pros: Implementation is simple and clean.
-> 
-> Cons: May need to add new IOCTL for any future requirement updates.
-> 
-> Following are the ABI and IOCTL handler implementation details (Note: it
-> is not the complete code, only included required details to show how the
-> implementation looks):
 
-Naturally, I like this one :)
 
-And you can even make it go faster, with only one allocation, no need
-for 2 as your implementation did.
+On 10/3/22 00:38, Joe Perches wrote:
+> On Mon, 2022-10-03 at 07:29 +0200, Greg Kroah-Hartman wrote:
+>> On Sun, Oct 02, 2022 at 06:46:30PM -0700, Joe Perches wrote:
+>>> On Fri, 2022-09-30 at 14:22 +0200, Greg Kroah-Hartman wrote:
+>>>> On Wed, Sep 28, 2022 at 12:56:31PM -0700, Elliot Berman wrote:
+>>>>> Gunyah resource manager defines a simple API for virtual machine log
+>>>>> sharing with the console service.
+>>> []
+>>>>> diff --git a/include/linux/gunyah_rsc_mgr.h b/include/linux/gunyah_rsc_mgr.h
+>>> []
+>>>>> +struct gh_rm_notif_vm_console_chars {
+>>>>> +	u16 vmid;
+>>>>> +	u16 num_bytes;
+>>>>> +	u8 bytes[0];
+>>>>
+>>>> Please do not use [0] for new structures, otherwise we will just have to
+>>>> fix them up again as we are trying to get rid of all of these from the
+>>>> kernel. Just use "bytes[];" instead.
+>>>
+>>> Maybe a checkpatch addition like:
+>>> ---
+> []
+>>> diff --git a/scripts/checkpatch.pl b/scripts/checkpatch.pl
+> []
+>>> @@ -3948,6 +3948,17 @@ sub process {
+>>>   			}
+>>>   		}
+>>>   
+>>> +# check for zero length array declarations in likely structs
+>>> +		if ($line =~ /^\+\t($Declare\s*$Ident)\s*\[\s*0\s*\]\s*;\s*$/ &&
+>>> +		    defined $lines[$linenr] &&
+>>> +		    $lines[$linenr] =~ /^[\+ ]\}\s*(?:__\w+\s*(?:$balanced_parens)?)\s*;\s*$/) {
 
-I don't know if speed matters on this, as I don't know how fast the
-actual hardware call takes, but making only 1 allocation and removing
-all need/worries about length checking and getting that correct is
-always a good thing.
+This sounds great. We need the same for one-element arrays. :)
+Both zero-length and one-element arrays are deprecated.
 
-Simple is good, especially if it works today.
+> 
+> This should actually be:
+> 
+> 		    $lines[$linenr] =~ /^[\+ ]\}(?:\s*__\w+\s*(?:$balanced_parens)?)*\s*;\s*$/) {
 
-If you have a new message size/type in the future, great, write a new
-ioctl and all is good!
+I agree. Thanks.
 
-Test your implementations out and see what you feel good about, but
-seriously consider keeping this simple if at all possible.
+> 
+> as it was missing a * for uses like
+> 
+> 	int foo[0];
+> } __packed __aligned(4);
+> 
+> and uses without any attribute at all
+> 
+>>> +			if (WARN("FLEXIBLE_ARRAY_ZERO",
+>>> +				 "Prefer flexible length array declarations with [] over [0]\n" . $herecurr) &&
+>>> +			    $fix) {
+>>> +				$fixed[$fixlinenr] =~ s/\[\s*0\s*\]/[]/;
+>>> +			}
+>>> +		}
+>>> +
+>>>   # check for multiple consecutive blank lines
+>>>   		if ($prevline =~ /^[\+ ]\s*$/ &&
+>>>   		    $line =~ /^\+\s*$/ &&
+>>
+>> This is a question for Gustavo, who did all the work here.  Gustavo,
+>> does the above checkpatch change look good to you?
 
-thanks,
+Yep; the idea is great. :)
 
-greg k-h
+Another alternative to stop those fake flex-arrays from entering the codebase
+is to run Coccinelle scripts during linux-next builds, as suggested by Elena
+Reshetova at LSSEU a couple of months ago.
+
+However, if these can be stopped with checkpatch it'd be really helpful, as well.
+
+Thanks
+--
+Gustavo
