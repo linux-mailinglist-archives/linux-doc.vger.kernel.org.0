@@ -2,103 +2,89 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id CEBD0615387
-	for <lists+linux-doc@lfdr.de>; Tue,  1 Nov 2022 21:52:55 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 8779761543D
+	for <lists+linux-doc@lfdr.de>; Tue,  1 Nov 2022 22:27:30 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S229934AbiKAUwv (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 1 Nov 2022 16:52:51 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:48490 "EHLO
+        id S230320AbiKAV12 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 1 Nov 2022 17:27:28 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:46046 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S229819AbiKAUwo (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 1 Nov 2022 16:52:44 -0400
-Received: from mail-wm1-x32f.google.com (mail-wm1-x32f.google.com [IPv6:2a00:1450:4864:20::32f])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id E7C2418B34;
-        Tue,  1 Nov 2022 13:52:43 -0700 (PDT)
-Received: by mail-wm1-x32f.google.com with SMTP id n39-20020a05600c3ba700b003cf71011cddso1355801wms.1;
-        Tue, 01 Nov 2022 13:52:43 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=BcZrSM0NMDEUGkRu1zNxv5heHBVcDpwHzAaIVD3JgIk=;
-        b=ZS3GLTdZqJ53CpP+xPle8E1+BSh/wmgbOKPfFiRRm6QVT3RHkrzF8Dtkz+nR+SsOQN
-         IrVsiL7Aqf4FOb12Ne7xjiSN0NWtxGj3TaIP3MZktbdcA3XpB1qj3RQBq4SJjInTcGQK
-         M7ZjT4qBlpNEUq693Uhx+uhhwek7ODLtM8N4OThyZJFF+slhZBi5xRt3N68EFk5P6pcI
-         aPPDGMmNS4joo6fPiWOKW80ElZvZ59vqAJptJRy79sKhUGx+eB9mzwzucRG0UBU2Rs+d
-         a4lEg6LZcC7PXVGki45XLylwsoNjsUltJ2D8eFx1KnNneakddUWdNcU1O1CUN/hLtao3
-         vzug==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=BcZrSM0NMDEUGkRu1zNxv5heHBVcDpwHzAaIVD3JgIk=;
-        b=YdpQCyRF6X1OhL1fKc27cxfBk4CGgiKSp97NsBXa258r9Sm9CrY8klRYhZZeqBpwBn
-         bCyOGn2//QKZgK+96OxbUz/ClMYK8+jFXSVAsmkFHzP/3WzJCYJL40wITeOUdqHBCdO9
-         T3EIMVT43qNT68aJLQGUW04HSwTA7icCzD6L50LMqdQCRJ7shBaUjxJv/tIl2MDyu0Do
-         uYTim9bLuLQiu5jaTvnwIbdmnqHF462AA3KeqBEATaycCi40HZP0od5qJsvEJDZR+08G
-         DdzmeSJMuawluDzXZGiWpVZTtRj2RQSGzC8dq3EbAgFIlSBI8WvdLfaVMYNNrLlTFT1T
-         MaGA==
-X-Gm-Message-State: ACrzQf14bPTbcV+eetzIiJYvYdOiA9v4X2eghqo/blQqB+uydTt0OWEB
-        gKevTd4qDDT2fpuTUX/nlcY=
-X-Google-Smtp-Source: AMsMyM6gk8mDOEiGyHIxhwlExnrHZFmtZtZ7p7Q4ccWgyzAeOaB/W8T7TR4QdHIbV5SfLLliCpzPsQ==
-X-Received: by 2002:a05:600c:4d08:b0:3cf:674a:d3c2 with SMTP id u8-20020a05600c4d0800b003cf674ad3c2mr12728240wmp.157.1667335962502;
-        Tue, 01 Nov 2022 13:52:42 -0700 (PDT)
-Received: from hp-power-15.localdomain (mm-167-8-212-37.vitebsk.dynamic.pppoe.byfly.by. [37.212.8.167])
-        by smtp.gmail.com with ESMTPSA id jb1-20020a05600c54e100b003c6b874a0dfsm11854413wmb.14.2022.11.01.13.52.41
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 01 Nov 2022 13:52:42 -0700 (PDT)
-From:   Siarhei Volkau <lis8215@gmail.com>
-Cc:     Siarhei Volkau <lis8215@gmail.com>,
-        Linus Walleij <linus.walleij@linaro.org>,
-        Jonathan Corbet <corbet@lwn.net>, linux-gpio@vger.kernel.org,
-        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org
-Subject: [PATCH 2/2] docs/pinctrl: fix runtime pinmuxing example
-Date:   Tue,  1 Nov 2022 23:51:59 +0300
-Message-Id: <20221101205159.1468069-3-lis8215@gmail.com>
-X-Mailer: git-send-email 2.36.1
-In-Reply-To: <20221101205159.1468069-1-lis8215@gmail.com>
-References: <20221101205159.1468069-1-lis8215@gmail.com>
+        with ESMTP id S229648AbiKAV11 (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 1 Nov 2022 17:27:27 -0400
+Received: from ms.lwn.net (ms.lwn.net [IPv6:2600:3c01:e000:3a1::42])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 4A5B51054D;
+        Tue,  1 Nov 2022 14:27:26 -0700 (PDT)
+Received: from localhost (unknown [IPv6:2601:281:8300:73:8b7:7001:c8aa:b65f])
+        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+        (No client certificate requested)
+        by ms.lwn.net (Postfix) with ESMTPSA id 52041378;
+        Tue,  1 Nov 2022 21:27:25 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 ms.lwn.net 52041378
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=lwn.net; s=20201203;
+        t=1667338045; bh=Jchlhsjev47LqjgLhwBIy48aaeAwna49eQyRotaAxQg=;
+        h=From:To:Cc:Subject:In-Reply-To:References:Date:From;
+        b=FWTs4tXd2Q1IsQnOLiWhijuBsnjiFqPhZ/4RSRDH3o+ZDt6yY7SXL5dnCIo+ha9OQ
+         BLH9ugBo+brmXiqnER0nO88bS6jwug7mbmf6eCtoTQMLmAX5pPth4YWRAAVJpq9b6s
+         yAzKRNn6U+oQPSr51nRAZ91NTzobaEPQE26l/c+Yj5Xva/B4aBZ6LRHTE71XT29+SI
+         IZc0+dDDv532oD4JJCfoBhqzY0qOBjDIaaDR/P1/OAwoZE+dGiZF5qVmndgJfHACkv
+         BDUN3+TuYjXWZJu1QtZMuoy0nUUAYo7rudcEHXKbRbmBI1dKlEMBlXHj9O1V5a4CiW
+         U0zyZaul099HQ==
+From:   Jonathan Corbet <corbet@lwn.net>
+To:     Yanteng Si <siyanteng@loongson.cn>, alexs@kernel.org,
+        seakeel@gmail.com
+Cc:     Yanteng Si <siyanteng@loongson.cn>, ojeda@kernel.org,
+        boqun.feng@gmail.com, wedsonaf@gmail.com, gary@garyguo.net,
+        bjorn3_gh@protonmail.com, rust-for-linux@vger.kernel.org,
+        bobwxc@email.cn, wu.xiangcheng@linux.dev, chenhuacai@kernel.org,
+        jiaxun.yang@flygoat.com, linux-doc@vger.kernel.org,
+        siyanteng01@gmail.com
+Subject: Re: [PATCH v3 0/5] docs/zh_CN: Add rust Chinese translation
+In-Reply-To: <cover.1666959529.git.siyanteng@loongson.cn>
+References: <cover.1666959529.git.siyanteng@loongson.cn>
+Date:   Tue, 01 Nov 2022 15:27:24 -0600
+Message-ID: <871qqmz7pf.fsf@meer.lwn.net>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Spam-Status: No, score=0.7 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_ENVFROM_END_DIGIT,
-        FREEMAIL_FROM,RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,SPF_PASS,
-        SUSPICIOUS_RECIPS autolearn=no autolearn_force=no version=3.4.6
+Content-Type: text/plain
+X-Spam-Status: No, score=-2.1 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,SPF_HELO_NONE,SPF_PASS
+        autolearn=ham autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
-To:     unlisted-recipients:; (no To-header on input)
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-The example declares "struct pinctrl *p" but refers to
-"foo->p" which isn't declared in the context of the example.
+Yanteng Si <siyanteng@loongson.cn> writes:
 
-Signed-off-by: Siarhei Volkau <lis8215@gmail.com>
----
- Documentation/driver-api/pin-control.rst | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+> v3:
+> * Modify some words under Gary's advice.
+>
+> v2:
+> * Modify some words under Xiangcheng's advice.
+>
+> v1:
+> * Translate Documentation/rust/* into Chinese.
+>
+> Yanteng Si (5):
+>   docs/zh_CN: Add rust/index Chinese translation
+>   docs/zh_CN: Add rust/quick-start Chinese translation
+>   docs/zh_CN: Add rust/general-information Chinese translation
+>   docs/zh_CN: Add rust/coding-guidelines Chinese translation
+>   docs/zh_CN: Add rust/arch-support Chinese translation
+>
+>  Documentation/translations/zh_CN/index.rst    |   1 +
+>  .../translations/zh_CN/rust/arch-support.rst  |  23 ++
+>  .../zh_CN/rust/coding-guidelines.rst          | 192 ++++++++++++++++
+>  .../zh_CN/rust/general-information.rst        |  75 +++++++
+>  .../translations/zh_CN/rust/index.rst         |  28 +++
+>  .../translations/zh_CN/rust/quick-start.rst   | 211 ++++++++++++++++++
+>  6 files changed, 530 insertions(+)
+>  create mode 100644 Documentation/translations/zh_CN/rust/arch-support.rst
+>  create mode 100644 Documentation/translations/zh_CN/rust/coding-guidelines.rst
+>  create mode 100644 Documentation/translations/zh_CN/rust/general-information.rst
+>  create mode 100644 Documentation/translations/zh_CN/rust/index.rst
+>  create mode 100644 Documentation/translations/zh_CN/rust/quick-start.rst
 
-diff --git a/Documentation/driver-api/pin-control.rst b/Documentation/driver-api/pin-control.rst
-index 19a41c68d..0022e930e 100644
---- a/Documentation/driver-api/pin-control.rst
-+++ b/Documentation/driver-api/pin-control.rst
-@@ -1399,11 +1399,11 @@ on the pins defined by group B::
- 		if (IS_ERR(p))
- 			...
- 
--		s1 = pinctrl_lookup_state(foo->p, "pos-A");
-+		s1 = pinctrl_lookup_state(p, "pos-A");
- 		if (IS_ERR(s1))
- 			...
- 
--		s2 = pinctrl_lookup_state(foo->p, "pos-B");
-+		s2 = pinctrl_lookup_state(p, "pos-B");
- 		if (IS_ERR(s2))
- 			...
- 	}
--- 
-2.36.1
+Series applied, thanks.
 
+jon
