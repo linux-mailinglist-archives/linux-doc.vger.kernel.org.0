@@ -2,135 +2,99 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id A8C186162C4
-	for <lists+linux-doc@lfdr.de>; Wed,  2 Nov 2022 13:35:18 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id D6582616209
+	for <lists+linux-doc@lfdr.de>; Wed,  2 Nov 2022 12:50:41 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S229591AbiKBMfO (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 2 Nov 2022 08:35:14 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:46362 "EHLO
+        id S230298AbiKBLuk (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 2 Nov 2022 07:50:40 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:47902 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S230087AbiKBMfO (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Wed, 2 Nov 2022 08:35:14 -0400
-Received: from mail-pg1-x52e.google.com (mail-pg1-x52e.google.com [IPv6:2607:f8b0:4864:20::52e])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 954062936E;
-        Wed,  2 Nov 2022 05:35:08 -0700 (PDT)
-Received: by mail-pg1-x52e.google.com with SMTP id b62so5742993pgc.0;
-        Wed, 02 Nov 2022 05:35:08 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=in-reply-to:content-disposition:mime-version:references:message-id
-         :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
-        bh=Ytob8zx1SKLrpfmFHLBokxWlh3AKyd6aWp40MhHR3AA=;
-        b=L+WGEPxtjHZGG+0/03qhtcLzwTWa0RZvC6ENbtnYYEmGdOdqzORyCYWGHiiKGwBbZp
-         KslMkod7TDhB8M0NXP2k/nLbt9OCY3e+3cdkqW9y+YimCUIenhZoL3a6OXgPowGILUxX
-         gRjl7Jb0Ux1nGP34bMqyiSWOkaugy4IC1/m8vql7oRWtS/IoOeOQatQafP+Pg96OhfSn
-         Q7fv7twRUQVxEMmym8IOEfYsAnBx/udNvUVEpKWpif7oh5++Jt6I+7+7RvHE3v+F3O3v
-         lSCqoLRINb8GEybY6rkPROmwAkKFlBNnIaYSLWx0tZAYhd/+7HZJfiiX2URPxsihLRxE
-         3PlA==
+        with ESMTP id S230256AbiKBLuj (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Wed, 2 Nov 2022 07:50:39 -0400
+Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.129.124])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 55F111E3EE
+        for <linux-doc@vger.kernel.org>; Wed,  2 Nov 2022 04:49:40 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+        s=mimecast20190719; t=1667389779;
+        h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+         to:to:cc:cc:mime-version:mime-version:
+         content-transfer-encoding:content-transfer-encoding;
+        bh=06VWUZSI6Qm+q2bw86oGTZUBRk/gldRyN2LaxznNUAc=;
+        b=QJSj1eZNJTTzuF3FQ16UcnzUX1ZsJh3RWx3hstp9KUWOyTB8zgm4KDQh8ypr4Unahd+NaF
+        +c1i53c8QYQ4Ko8FCDjvk4UV/kgWu44dXXFwZ0Afzru1H3pjhxTx9T60toFueB7HoO3Jp6
+        4OtcYNnvWUenvRv4gpp64pVia/Ps3OQ=
+Received: from mail-qt1-f199.google.com (mail-qt1-f199.google.com
+ [209.85.160.199]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_128_GCM_SHA256) id
+ us-mta-275-lfFzr3s1NvO9VgIHCEK_CQ-1; Wed, 02 Nov 2022 07:49:38 -0400
+X-MC-Unique: lfFzr3s1NvO9VgIHCEK_CQ-1
+Received: by mail-qt1-f199.google.com with SMTP id cp8-20020a05622a420800b003a4f4f7b621so11941301qtb.6
+        for <linux-doc@vger.kernel.org>; Wed, 02 Nov 2022 04:49:38 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=in-reply-to:content-disposition:mime-version:references:message-id
-         :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=Ytob8zx1SKLrpfmFHLBokxWlh3AKyd6aWp40MhHR3AA=;
-        b=tZ8WDbgXfytWV8O1xzh4ttT03dkghL2vofQteC3l6PKETnJVBsSgI62ia3cWcKqdot
-         z653DJx3NTvRV7VsEWQA/2zhAdDW3ZiBD/T/pZum7knvAxqULno57rOo3sXQUJAHJqyX
-         z3NxwzlJShsIVT7RmbZTHXdWvDagIt2R2FtkofPGU/f3OhQxLkbOWqt3fwcryhN3PVkS
-         3X0OJzuz2aWPZ5HyFaDbssX6hU1TkT9qo99hJfHNVAQgIL0gaPw1vC8f1S5D4rG/xWTj
-         zAVwmuTYsf1X6hbOCbvnOdmseJltPW2v2XsRhyqrJCSfyz9wzZoRYAxtZPJlXCMcHTMp
-         CZSA==
-X-Gm-Message-State: ACrzQf0IjXHkHF3U644wzGI/o+xyq1B3DVZDQzvcONTKgEHQJMZNXH58
-        U19V5uUPjakY5kleW0DzzxA=
-X-Google-Smtp-Source: AMsMyM4jOx9/ITQnqPBGYtd6ydBNmq2RMw1l33fg34hHBYM3Z1Lk8t/v3pEbA7l6diIXB1ayvFtrbw==
-X-Received: by 2002:a05:6a00:1a8f:b0:56d:f7c2:959 with SMTP id e15-20020a056a001a8f00b0056df7c20959mr4269897pfv.71.1667392508049;
-        Wed, 02 Nov 2022 05:35:08 -0700 (PDT)
-Received: from debian.me (subs32-116-206-28-50.three.co.id. [116.206.28.50])
-        by smtp.gmail.com with ESMTPSA id m20-20020a6562d4000000b00462ae17a1c4sm7529521pgv.33.2022.11.02.05.35.07
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=06VWUZSI6Qm+q2bw86oGTZUBRk/gldRyN2LaxznNUAc=;
+        b=7l38hLpHlR79/n9QdFhzpSREKYwMPejvKSYQXSFWOkn2GJjGzj6wgCcbsjnmDvFSxF
+         5Fri8l1nzPY5jILPkUht/BFu0jYaRqZsX1XjBh9q5upKYNLastUJUkaDuTRWY7vWWlSn
+         tReIw1syG8a+8jqPkoIto6xc15zNBhi1Db+OSuYRC2oKdiuMQwE/NB+ojsJe4xJFdpG5
+         a/CMxfvI78d92uKVdcsN/uKSEFqg8Cl+9k/zRSSSvK7MSX7PNGs2e2Ktm2H4QbDFw3yf
+         QM5lditMphs1ylN9wVIaD/nc1QI+NtL7M2mNoLN2IF6L+WARb83Ad77xKYnv4Jl5ham5
+         uDkA==
+X-Gm-Message-State: ACrzQf2xR7dva1g1wL/C6o291QqrS7fI9fnTdcsMtEZweY1uNKHlCVVi
+        Y67AelIZxJwyqkzIKRp7yqRN86pnIucX29EYSq46veJYWPnyVERGJT29QKRmub472SAzedzMH5N
+        cIp7OVLA0Ns0rYmWPR5tP
+X-Received: by 2002:a05:622a:1e05:b0:3a5:460f:9655 with SMTP id br5-20020a05622a1e0500b003a5460f9655mr1498346qtb.471.1667389777774;
+        Wed, 02 Nov 2022 04:49:37 -0700 (PDT)
+X-Google-Smtp-Source: AMsMyM4DJxHdfEPTbBpgqYZxtb6t994NR8WH5p2zFWigdLBnpc2oW+fMr6IzeXsMdnA/biKQcgrwPA==
+X-Received: by 2002:a05:622a:1e05:b0:3a5:460f:9655 with SMTP id br5-20020a05622a1e0500b003a5460f9655mr1498334qtb.471.1667389777564;
+        Wed, 02 Nov 2022 04:49:37 -0700 (PDT)
+Received: from nfvsdn-06.testing.baremetal.edge-sites.net (nat-pool-232-132.redhat.com. [66.187.232.132])
+        by smtp.gmail.com with ESMTPSA id h6-20020a05620a400600b006ee8874f5fasm7784855qko.53.2022.11.02.04.49.36
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 02 Nov 2022 05:35:07 -0700 (PDT)
-Received: by debian.me (Postfix, from userid 1000)
-        id 01518103835; Wed,  2 Nov 2022 19:35:04 +0700 (WIB)
-Date:   Wed, 2 Nov 2022 19:35:04 +0700
-From:   Bagas Sanjaya <bagasdotme@gmail.com>
-To:     Elliot Berman <quic_eberman@quicinc.com>
-Cc:     Bjorn Andersson <quic_bjorande@quicinc.com>,
-        Jonathan Corbet <corbet@lwn.net>,
-        Murali Nalajala <quic_mnalajal@quicinc.com>,
-        Trilok Soni <quic_tsoni@quicinc.com>,
-        Srivatsa Vaddagiri <quic_svaddagi@quicinc.com>,
-        Carl van Schaik <quic_cvanscha@quicinc.com>,
-        Prakruthi Deepak Heragu <quic_pheragu@quicinc.com>,
-        Andy Gross <agross@kernel.org>,
-        Dmitry Baryshkov <dmitry.baryshkov@linaro.org>,
-        Jassi Brar <jassisinghbrar@gmail.com>,
-        linux-arm-kernel@lists.infradead.org,
-        Mark Rutland <mark.rutland@arm.com>,
-        Lorenzo Pieralisi <lorenzo.pieralisi@arm.com>,
-        Sudeep Holla <sudeep.holla@arm.com>,
-        Marc Zyngier <maz@kernel.org>,
-        Rob Herring <robh+dt@kernel.org>,
-        Krzysztof Kozlowski <krzysztof.kozlowski+dt@linaro.org>,
-        Will Deacon <will@kernel.org>,
-        Catalin Marinas <catalin.marinas@arm.com>,
-        Arnd Bergmann <arnd@arndb.de>,
-        Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
-        Srinivas Kandagatla <srinivas.kandagatla@linaro.org>,
-        Amol Maheshwari <amahesh@qti.qualcomm.com>,
-        Kalle Valo <kvalo@kernel.org>, devicetree@vger.kernel.org,
-        linux-doc@vger.kernel.org, linux-arm-msm@vger.kernel.org,
-        linux-kernel@vger.kernel.org
-Subject: Re: [PATCH v6 01/21] docs: gunyah: Introduce Gunyah Hypervisor
-Message-ID: <Y2Jj+FLcL8pYLv+q@debian.me>
-References: <20221026185846.3983888-1-quic_eberman@quicinc.com>
- <20221026185846.3983888-2-quic_eberman@quicinc.com>
+        Wed, 02 Nov 2022 04:49:37 -0700 (PDT)
+From:   mtahhan@redhat.com
+To:     bpf@vger.kernel.org, linux-doc@vger.kernel.org
+Cc:     jbrouer@redhat.com, thoiland@redhat.com,
+        Maryam Tahhan <mtahhan@redhat.com>,
+        Lorenzo Bianconi <lorenzo@kernel.org>
+Subject: [PATCH bpf-next v2 0/1] docs: BPF_MAP_TYPE_CPUMAP
+Date:   Wed,  2 Nov 2022 08:44:15 -0400
+Message-Id: <20221102124416.2820268-1-mtahhan@redhat.com>
+X-Mailer: git-send-email 2.35.3
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha256;
-        protocol="application/pgp-signature"; boundary="lcWsjmNz5hWimLOD"
-Content-Disposition: inline
-In-Reply-To: <20221026185846.3983888-2-quic_eberman@quicinc.com>
-X-Spam-Status: No, score=-0.6 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_FROM,
-        RCVD_IN_DNSWL_NONE,RCVD_IN_SORBS_WEB,SPF_HELO_NONE,SPF_PASS
-        autolearn=no autolearn_force=no version=3.4.6
+Content-Transfer-Encoding: 8bit
+X-Spam-Status: No, score=-3.1 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_NONE,
+        RCVD_IN_MSPIKE_H2,SPF_HELO_NONE,SPF_NONE autolearn=ham
+        autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
+From: Maryam Tahhan <mtahhan@redhat.com>
 
---lcWsjmNz5hWimLOD
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Add documentation for BPF_MAP_TYPE_CPUMAP including
+kernel version introduced, usage and examples.
 
-On Wed, Oct 26, 2022 at 11:58:26AM -0700, Elliot Berman wrote:
-> Gunyah is an open-source Type-1 hypervisor developed by Qualcomm. It
-> does not depend on any lower-privileged OS/kernel code for its core
-> functionality. This increases its security and can support a smaller
-> trusted computing based when compared to Type-2 hypervisors.
->=20
-> Add documentation describing the Gunyah hypervisor and the main
-> components of the Gunyah hypervisor which are of interest to Linux
-> virtualization development.
->=20
+Signed-off-by: Maryam Tahhan <mtahhan@redhat.com>
+Signed-off-by: Lorenzo Bianconi <lorenzo@kernel.org>
+Co-developed-by: Lorenzo Bianconi <lorenzo@kernel.org>
 
-LGTM, thanks.
+v2:
+- Removed TMI.
+- Updated example to use a round robin scheme.
 
-Reviewed-by: Bagas Sanjaya <bagasdotme@gmail.com>
+Maryam Tahhan (1):
+  docs: BPF_MAP_TYPE_CPUMAP
 
---=20
-An old man doll... just what I always wanted! - Clara
+ Documentation/bpf/map_cpumap.rst | 140 +++++++++++++++++++++++++++++++
+ 1 file changed, 140 insertions(+)
+ create mode 100644 Documentation/bpf/map_cpumap.rst
 
---lcWsjmNz5hWimLOD
-Content-Type: application/pgp-signature; name="signature.asc"
+-- 
+2.35.3
 
------BEGIN PGP SIGNATURE-----
-
-iHUEABYIAB0WIQSSYQ6Cy7oyFNCHrUH2uYlJVVFOowUCY2Jj9QAKCRD2uYlJVVFO
-o8iZAP9ne1/t0CSHYZJHKuMWjnNVF9v2tjatTGFij3brCK5ccgEA6ZehG9xndGC0
-Ga0PcJr9HBhqMNopmGgdNKin3IzhMAs=
-=VAEi
------END PGP SIGNATURE-----
-
---lcWsjmNz5hWimLOD--
