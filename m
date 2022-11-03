@@ -2,126 +2,74 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 15AC46173D9
-	for <lists+linux-doc@lfdr.de>; Thu,  3 Nov 2022 02:45:53 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 5C9066173EC
+	for <lists+linux-doc@lfdr.de>; Thu,  3 Nov 2022 02:58:35 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S230086AbiKCBpv (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 2 Nov 2022 21:45:51 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:45364 "EHLO
+        id S229553AbiKCB6d (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 2 Nov 2022 21:58:33 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:49140 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S229770AbiKCBpu (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Wed, 2 Nov 2022 21:45:50 -0400
-Received: from mga11.intel.com (mga11.intel.com [192.55.52.93])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 02BC412088;
-        Wed,  2 Nov 2022 18:45:50 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1667439949; x=1698975949;
-  h=date:from:to:cc:subject:message-id:references:
-   mime-version:in-reply-to;
-  bh=Sln4k5J/uP9rg3q9ZfFqzdN1uhd3yeOy4OBz6rjRhlQ=;
-  b=SRHQ4S7lW68nfJ4wGdk+OvnLleJO2qnJHr4PiSfum+y29ABf2MB+7qo2
-   VvR4XRmpOzNK1M0QMqnoxoTvmgYdEKGcUUD750tV+e76GnuN6DDE/YYhd
-   +jx6nMwxyOmZ/kqnZMz42oAk0cqkvnyq+Or9ys8UvcbJnA9CRgSbnHsIt
-   yVWiIwmYi2FwFxZxu4OyWi82Yx4hPQb8Ja4g2rNCY9WIYHspOPJ89iKm4
-   F6v09LBzgZLIEjiS063gEZ8uVbkrHXkl38ftvPal6b4VkEYD0HQcpLUN7
-   p/H3uZII5jV+1QYOxDMAu2v1ckw0C5LD4zrVw9cKy9i3ipcp77DTVTmh6
-   g==;
-X-IronPort-AV: E=McAfee;i="6500,9779,10519"; a="307177385"
-X-IronPort-AV: E=Sophos;i="5.95,235,1661842800"; 
-   d="scan'208";a="307177385"
-Received: from orsmga006.jf.intel.com ([10.7.209.51])
-  by fmsmga102.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 02 Nov 2022 18:45:49 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=McAfee;i="6500,9779,10519"; a="612462262"
-X-IronPort-AV: E=Sophos;i="5.95,235,1661842800"; 
-   d="scan'208";a="612462262"
-Received: from yilunxu-optiplex-7050.sh.intel.com (HELO localhost) ([10.239.159.165])
-  by orsmga006.jf.intel.com with ESMTP; 02 Nov 2022 18:45:45 -0700
-Date:   Thu, 3 Nov 2022 09:36:33 +0800
-From:   Xu Yilun <yilun.xu@intel.com>
-To:     matthew.gerlach@linux.intel.com
-Cc:     hao.wu@intel.com, russell.h.weight@intel.com,
-        basheer.ahmed.muddebihal@intel.com, trix@redhat.com,
-        mdf@kernel.org, linux-fpga@vger.kernel.org,
-        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
-        tianfei.zhang@intel.com, corbet@lwn.net, jirislaby@kernel.org,
-        geert+renesas@glider.be, andriy.shevchenko@linux.intel.com,
-        niklas.soderlund+renesas@ragnatech.se, macro@orcam.me.uk,
-        johan@kernel.org, lukas@wunner.de, ilpo.jarvinen@linux.intel.com,
-        marpagan@redhat.com
-Subject: Re: [PATCH v4 3/4] fpga: dfl: add basic support DFHv1
-Message-ID: <Y2MbIV5lJBgIsA4D@yilunxu-OptiPlex-7050>
-References: <20221020212610.697729-1-matthew.gerlach@linux.intel.com>
- <20221020212610.697729-4-matthew.gerlach@linux.intel.com>
- <Y10l3NkIn0gsdVZq@yilunxu-OptiPlex-7050>
- <alpine.DEB.2.22.394.2210290739540.2504975@rhweight-WRK1>
- <alpine.DEB.2.22.394.2211011520290.2767909@rhweight-WRK1>
+        with ESMTP id S230173AbiKCB6c (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Wed, 2 Nov 2022 21:58:32 -0400
+Received: from mail-yw1-x112a.google.com (mail-yw1-x112a.google.com [IPv6:2607:f8b0:4864:20::112a])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id BB26011C1B
+        for <linux-doc@vger.kernel.org>; Wed,  2 Nov 2022 18:58:29 -0700 (PDT)
+Received: by mail-yw1-x112a.google.com with SMTP id 00721157ae682-367cd2807f2so3314997b3.1
+        for <linux-doc@vger.kernel.org>; Wed, 02 Nov 2022 18:58:29 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112;
+        h=to:subject:message-id:date:from:mime-version:from:to:cc:subject
+         :date:message-id:reply-to;
+        bh=6gpw50arjJAJYutxnBYI251PZ1iO12jHMUjWqVshAjU=;
+        b=l/lMpWK59/mxYJ0uzKcU1dwz/zghIOABVMyxZ8dBz0PvXENwxIc1caZMnVDN5ph9OL
+         Eett7V1ZXGZ4tt1jmwMIkeSinZcSOGpwq31OPdu3yRYj29Cz73XCd0540pdiGY8CZQgS
+         P2xRNyFOnGJQ1QzaMe+vLYPJdNauK0bVde5tTvaJZAy+VbZtJqdNHmqLelj7JNv4WW4Y
+         r5qqqwu04bee2qvRcOoaJ9sVMrhBdnkrJ2d+k11qP5R6ToiMqAInQ2k9lOX33TFwTuEB
+         CgSCCUlcNq5BprXVI0Ykn0oIyYUBxzZZtE9w/oY2D1i5W7h5j5dvnM0aDdzip/nQ+rFw
+         2uYw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=to:subject:message-id:date:from:mime-version:x-gm-message-state
+         :from:to:cc:subject:date:message-id:reply-to;
+        bh=6gpw50arjJAJYutxnBYI251PZ1iO12jHMUjWqVshAjU=;
+        b=W2/YkAvp1nXspPKoMIKZuZtRyQCaVWgfpNnagDaT6+WUO/5L/Yd8ojh4OpMu+EiaKl
+         3NrqyMCeP27TmnzW1zabPNy9kFgxxCxkruV8die1102QwU1toaKz7MEuM6xHstUxbsB6
+         Kk5sVooN7WaiQq9ItY89uu1qBLFjiA45FcEZJfrDmWfFpwZZHOehTCX+JN/C4V+CWZ4W
+         b6F9pdzgr7CUG2yP/vWpkan+yXsGDa+rpO2dQf3UJjfQHL1NstSKS7295VacKiPkmU3T
+         tHNQ0mXjmeUCntX2hQykGwsMxEr+DJZOj8wlp+Ov3TooGJ8oXH2vH7/BhpXh0E9YFdkk
+         2ebg==
+X-Gm-Message-State: ACrzQf0+Jm4mU+OKkhVGqa/Ll9zo1JiKqZGlWyssjI5tJbqp1Kyyliya
+        CxkfMkbPtJbP8fo36efduGsO6kMBV2pRGTsI0kw=
+X-Google-Smtp-Source: AMsMyM4rR7xGUPShqh2e7n+4JTDWZX+l3kUKR6tTSUNwQ31Tded+dOHWuLN63vjUIjFLm1DF5tsGJn5L1zBRlD/ZyO4=
+X-Received: by 2002:a81:895:0:b0:36b:fa9a:beef with SMTP id
+ 143-20020a810895000000b0036bfa9abeefmr25920523ywi.310.1667440709000; Wed, 02
+ Nov 2022 18:58:29 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <alpine.DEB.2.22.394.2211011520290.2767909@rhweight-WRK1>
-X-Spam-Status: No, score=-8.1 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_HI,
-        SPF_HELO_NONE,SPF_NONE autolearn=ham autolearn_force=no version=3.4.6
+From:   Nogay Adygman <nogay.adyge@gmail.com>
+Date:   Thu, 3 Nov 2022 04:58:19 +0300
+Message-ID: <CAFUOiQbsyMMmLNkA8p_jPYVZHfnZ6feoAO1TMfcCvYA3JSNBdw@mail.gmail.com>
+Subject: rasist - kandidat (+history material)
+To:     undisclosed-recipients:;
+Content-Type: text/plain; charset="UTF-8"
+X-Spam-Status: No, score=0.6 required=5.0 tests=BAYES_50,DKIM_SIGNED,
+        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_FROM,
+        RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,SPF_PASS autolearn=ham
+        autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On 2022-11-01 at 15:37:19 -0700, matthew.gerlach@linux.intel.com wrote:
-> 
-> 
-> On Sat, 29 Oct 2022, matthew.gerlach@linux.intel.com wrote:
-> 
-> > 
-> > > 
-> > > >  	if (!finfo)
-> > > >  		return -ENOMEM;
-> > > > 
-> > > > +	if (dfh_psize > 0) {
-> > > > +		memcpy_fromio(finfo->params,
-> > > > +			      binfo->ioaddr + ofst + DFHv1_PARAM_HDR, dfh_psize);
-> > > > +		finfo->param_size = dfh_psize;
-> > > > +	}
-> > > > +
-> > > >  	finfo->fid = fid;
-> > > >  	finfo->revision = revision;
-> > > > -	finfo->mmio_res.start = binfo->start + ofst;
-> > > > -	finfo->mmio_res.end = finfo->mmio_res.start + size - 1;
-> > > > +	finfo->dfh_version = dfh_ver;
-> > > >  	finfo->mmio_res.flags = IORESOURCE_MEM;
-> > > > -	finfo->irq_base = irq_base;
-> > > > -	finfo->nr_irqs = nr_irqs;
-> > > > +	if (dfh_ver == 1) {
-> > > > +		v = readq(binfo->ioaddr + ofst + DFHv1_CSR_ADDR);
-> > > > +		if (v & DFHv1_CSR_ADDR_REL)
-> > > > +			finfo->mmio_res.start = v & ~DFHv1_CSR_ADDR_REL;
-> > > > +		else
-> > > > +			finfo->mmio_res.start = binfo->start + ofst +
-> > > > +					       FIELD_GET(DFHv1_CSR_ADDR_MASK, v);
-> > > > +
-> > > > +		v = readq(binfo->ioaddr + ofst + DFHv1_CSR_SIZE_GRP);
-> > > > +		finfo->mmio_res.end = finfo->mmio_res.start +
-> > > > +				      FIELD_GET(DFHv1_CSR_SIZE_GRP_SIZE, v) - 1;
-> > > 
-> > > So for dflv1, no feature header resource for dfl_device, is it a problem
-> > > for dfl_uio? Does userspace driver need the raw feature header?
-> > These are two very good questions.  The dfl_uio driver question is
-> > particularly relevent because user space is looking at the GUIDs.
-> > 
-> 
-> In the case of dfl_uio driver, user space will definitely want to look at
-> the feature header for the GUID and the parameters.  Since DFHv1 can have
-> the DFH header and the feature registers in non-contiguous memory locations,
-> a resource for the dfl_device will be required.  In earlier
-> revisions of this patch set, a second resource was added called csr_res
-> pointing to the feature's register while mmio_res pointed at the header.
-> Do we just need better names or do we need an array of named resources?
+https://de.wikipedia.org/wiki/Alexei_Anatoljewitsch_Nawalny
 
-Either is OK, you could also name a resource element in an array by
-struct resource:name. But my concern is still no overlapping.
+(+ no work link
+http://lezgi-yar.ru/news/navalnyj_razreshit_gej_parady_i_zapretit_lezginku_esli_stanet_mehrom/2013-08-24-1620)
 
-Thanks,
-Yilun
+https://flnka.ru/digest-analytics/5673-kto-podstavil-kreml.html
+
+aborigen nogai
+https://www.interfax-russia.ru/south-and-north-caucasus/news/vostochnye-rayony-stavropolya-nuzhdayutsya-v-pritoke-naseleniya-v-tom-chisle-za-schet-ukrainskih-bezhencev-senator
+
+interes monument
+http://zapravakbr.com/index.php/analitik/1498-madina-khakuasheva-chto-skryvayut-geroicheskie-pamyatniki
