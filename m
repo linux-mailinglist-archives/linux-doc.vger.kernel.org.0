@@ -2,356 +2,257 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 8F16C618EEA
-	for <lists+linux-doc@lfdr.de>; Fri,  4 Nov 2022 04:26:19 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id CB015619033
+	for <lists+linux-doc@lfdr.de>; Fri,  4 Nov 2022 06:48:58 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S231436AbiKDD0R (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 3 Nov 2022 23:26:17 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:58796 "EHLO
+        id S229900AbiKDFsy (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Fri, 4 Nov 2022 01:48:54 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:55654 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S231429AbiKDDZl (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Thu, 3 Nov 2022 23:25:41 -0400
-Received: from mga11.intel.com (mga11.intel.com [192.55.52.93])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id AA7105F97;
-        Thu,  3 Nov 2022 20:24:03 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1667532243; x=1699068243;
-  h=from:to:cc:subject:date:message-id:in-reply-to:
-   references:mime-version:content-transfer-encoding;
-  bh=OE0Vj26bhQ6zvQPrA5efJupC7TSaHLM/TIU+8+IvkkA=;
-  b=kmoa7AEjqSdc5p3wpjb6LzOJPglAfQ3ruBO6//wwzua/eMu3rcBmeWG8
-   th2rSmS6fBJNc6EwPe2eAJocwSO6vZpABOa2nXnhl2H3hrjVy80X9tM19
-   eqGjjjyTokEnBL69pJvGryZNhVTamugrs8MgDxv0Smbmnf5S0fqfW92Vf
-   vhLQph5q4K27tfApbj+dHaJS0V44mhWjve+Ifrj6WHpoEIUNOPH+6bhFd
-   KjzZkdTSs8EEy0LsSxgM5PoVKCAvWg/iWHlICHODlSDxcFxBnmIirqqLl
-   HIqiLKZ7pOCCrH694ze4FBGR0/kNPo5xkAKQg0QCNHQxQ3mnRoVe2x43M
-   A==;
-X-IronPort-AV: E=McAfee;i="6500,9779,10520"; a="307491948"
-X-IronPort-AV: E=Sophos;i="5.96,136,1665471600"; 
-   d="scan'208";a="307491948"
-Received: from fmsmga004.fm.intel.com ([10.253.24.48])
-  by fmsmga102.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 03 Nov 2022 20:24:03 -0700
-X-IronPort-AV: E=McAfee;i="6500,9779,10520"; a="703932023"
-X-IronPort-AV: E=Sophos;i="5.96,136,1665471600"; 
-   d="scan'208";a="703932023"
-Received: from fswhite-mobl3.amr.corp.intel.com (HELO skuppusw-desk1.amr.corp.intel.com) ([10.212.196.122])
-  by fmsmga004-auth.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 03 Nov 2022 20:24:02 -0700
-From:   Kuppuswamy Sathyanarayanan 
-        <sathyanarayanan.kuppuswamy@linux.intel.com>
-To:     Thomas Gleixner <tglx@linutronix.de>,
-        Ingo Molnar <mingo@redhat.com>, Borislav Petkov <bp@alien8.de>,
-        Dave Hansen <dave.hansen@linux.intel.com>, x86@kernel.org,
-        Shuah Khan <shuah@kernel.org>, Jonathan Corbet <corbet@lwn.net>
-Cc:     "H . Peter Anvin" <hpa@zytor.com>,
-        Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
-        Kuppuswamy Sathyanarayanan 
-        <sathyanarayanan.kuppuswamy@linux.intel.com>,
-        "Kirill A . Shutemov" <kirill.shutemov@linux.intel.com>,
-        Tony Luck <tony.luck@intel.com>,
-        Kai Huang <kai.huang@intel.com>,
-        Wander Lairson Costa <wander@redhat.com>,
-        Isaku Yamahata <isaku.yamahata@gmail.com>,
-        marcelo.cerri@canonical.com, tim.gardner@canonical.com,
-        khalid.elmously@canonical.com, philip.cox@canonical.com,
-        linux-kernel@vger.kernel.org, linux-kselftest@vger.kernel.org,
-        linux-doc@vger.kernel.org
-Subject: [PATCH v17 3/3] selftests: tdx: Test TDX attestation GetReport support
-Date:   Thu,  3 Nov 2022 20:23:55 -0700
-Message-Id: <20221104032355.227814-4-sathyanarayanan.kuppuswamy@linux.intel.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20221104032355.227814-1-sathyanarayanan.kuppuswamy@linux.intel.com>
-References: <20221104032355.227814-1-sathyanarayanan.kuppuswamy@linux.intel.com>
-MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Spam-Status: No, score=-8.0 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_EF,RCVD_IN_DNSWL_HI,SPF_HELO_NONE,
-        SPF_NONE autolearn=ham autolearn_force=no version=3.4.6
+        with ESMTP id S231150AbiKDFsu (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Fri, 4 Nov 2022 01:48:50 -0400
+Received: from ams.source.kernel.org (ams.source.kernel.org [IPv6:2604:1380:4601:e00::1])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id E3FBA28E11;
+        Thu,  3 Nov 2022 22:48:48 -0700 (PDT)
+Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
+        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+        (No client certificate requested)
+        by ams.source.kernel.org (Postfix) with ESMTPS id 460CCB82BFA;
+        Fri,  4 Nov 2022 05:48:47 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id B4911C433D6;
+        Fri,  4 Nov 2022 05:48:45 +0000 (UTC)
+Received: from rostedt by gandalf.local.home with local (Exim 4.96)
+        (envelope-from <rostedt@goodmis.org>)
+        id 1oqpZo-0070xm-08;
+        Fri, 04 Nov 2022 01:49:12 -0400
+Message-ID: <20221104054053.431922658@goodmis.org>
+User-Agent: quilt/0.66
+Date:   Fri, 04 Nov 2022 01:40:53 -0400
+From:   Steven Rostedt <rostedt@goodmis.org>
+To:     linux-kernel@vger.kernel.org
+Cc:     Linus Torvalds <torvalds@linux-foundation.org>,
+        Thomas Gleixner <tglx@linutronix.de>,
+        Stephen Boyd <sboyd@kernel.org>,
+        Guenter Roeck <linux@roeck-us.net>,
+        Anna-Maria Gleixner <anna-maria@linutronix.de>,
+        Andrew Morton <akpm@linux-foundation.org>, rcu@vger.kernel.org,
+        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
+        linux-s390@vger.kernel.org, linux-sh@vger.kernel.org,
+        linux-edac@vger.kernel.org, cgroups@vger.kernel.org,
+        linux-block@vger.kernel.org, linux-acpi@vger.kernel.org,
+        linux-atm-general@lists.sourceforge.net, netdev@vger.kernel.org,
+        linux-pm@vger.kernel.org, drbd-dev@lists.linbit.com,
+        linux-bluetooth@vger.kernel.org,
+        openipmi-developer@lists.sourceforge.net,
+        linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org,
+        linaro-mm-sig@lists.linaro.org, intel-gfx@lists.freedesktop.org,
+        linux-input@vger.kernel.org, linux-parisc@vger.kernel.org,
+        linux-leds@vger.kernel.org, intel-wired-lan@lists.osuosl.org,
+        linux-usb@vger.kernel.org, linux-wireless@vger.kernel.org,
+        linux-scsi@vger.kernel.org, linux-staging@lists.linux.dev,
+        linux-ext4@vger.kernel.org, linux-nilfs@vger.kernel.org,
+        bridge@lists.linux-foundation.org, netfilter-devel@vger.kernel.org,
+        coreteam@netfilter.org, lvs-devel@vger.kernel.org,
+        linux-afs@lists.infradead.org, linux-nfs@vger.kernel.org,
+        tipc-discussion@lists.sourceforge.net, alsa-devel@alsa-project.org
+Subject: [RFC][PATCH v3 00/33] timers: Use timer_shutdown*() before freeing timers
+X-Spam-Status: No, score=-6.7 required=5.0 tests=BAYES_00,
+        HEADER_FROM_DIFFERENT_DOMAINS,RCVD_IN_DNSWL_HI,SPF_HELO_NONE,SPF_PASS
+        autolearn=ham autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Attestation is used to verify the trustworthiness of a TDX guest.
-During the guest bring-up, the Intel TDX module measures and records
-the initial contents and configuration of the guest, and at runtime,
-guest software uses runtime measurement registers (RMTRs) to measure
-and record details related to kernel image, command line params, ACPI
-tables, initrd, etc. At guest runtime, the attestation process is used
-to attest to these measurements.
 
-The first step in the TDX attestation process is to get the TDREPORT
-data. It is a fixed size data structure generated by the TDX module
-which includes the above mentioned measurements data, a MAC ID to
-protect the integrity of the TDREPORT, and a 64-Byte of user specified
-data passed during TDREPORT request which can uniquely identify the
-TDREPORT.
+Back in April, I posted an RFC patch set to help mitigate a common issue
+where a timer gets armed just before it is freed, and when the timer
+goes off, it crashes in the timer code without any evidence of who the
+culprit was. I got side tracked and never finished up on that patch set.
+Since this type of crash is still our #1 crash we are seeing in the field,
+it has become a priority again to finish it.
 
-Intel's TDX guest driver exposes TDX_CMD_GET_REPORT IOCTL interface to
-enable guest userspace to get the TDREPORT.
+This is v3 of that patch set. Thomas Gleixner posted an untested version
+that makes timer->function NULL as the flag that it is shutdown. I took that
+code, tested it (fixed it up), added more comments, and changed the
+name to timer_shutdown_sync(). I also converted it to use WARN_ON_ONCE()
+instead of just WARN_ON() as Linus asked for.
 
-Add a kernel self test module to test this ABI and verify the validity
-of the generated TDREPORT.
+I then created a trivial coccinelle script to find where del_timer*()
+is called before being freed, and converted them all to timer_shutdown*()
+(There was a couple that still used del_timer() instead of del_timer_sync()).
 
-Reviewed-by: Tony Luck <tony.luck@intel.com>
-Reviewed-by: Mika Westerberg <mika.westerberg@linux.intel.com>
-Acked-by: Kai Huang <kai.huang@intel.com>
-Acked-by: Kirill A. Shutemov <kirill.shutemov@linux.intel.com>
-Signed-off-by: Kuppuswamy Sathyanarayanan <sathyanarayanan.kuppuswamy@linux.intel.com>
----
+I also updated DEBUG_OBJECTS_TIMERS to check from where the timer is ever
+armed, to calling of timer_shutdown_sync(), and it will trigger if a timer
+is freed in between. The current way is to only check if the timer is armed,
+but that means it only triggers if the race condition is hit, and with
+experience, it's not run on enough machines to catch all of them. By triggering
+it from the time the timer is armed to the time it is shutdown, it catches
+all potential cases even if the race condition is not hit.
 
-Changes since v16:
- * Modified the code to adapt to fixed size reportdata and tdeport
-   buffers in struct tdx_report_req.
+I went though the result of the cocinelle script, and updated the locations.
+Some locations were caught by DEBUG_OBJECTS_TIMERS as the coccinelle script
+only checked for timers being freed in the same function as the del_timer*().
 
-Changes since v15:
- * None
+Ideally, I would have the first patch go into this rc cycle, which is mostly
+non functional as it will allow the other patches to come in via the respective
+subsystems in the next merge window.
 
-Changes since v14:
- * Fixed format issue in struct comments.
- * Rebased on top of v6.1-rc1
+Changes since v2: https://lore.kernel.org/all/20221027150525.753064657@goodmis.org/
 
-Changes since v13:
- * Removed __packed from TDREPORT structs.
- * Since the guest driver is moved to drivers/virt/coco, removed
-   tools/arch/x86/include header folder usage.
- * Fixed struct comments to match kernel-doc format.
- * Fixed commit log as per review comments.
- * Fixed some format issues in the code.
+ - Talking with Thomas Gleixner, he wanted a better name space and to remove
+   the "del_" portion of the API.
 
-Changes since v12:
- * Changed #ifdef DEBUG usage with if (DEBUG).
- * Initialized reserved entries values to zero.
+ - Since there's now a shutdown interface that does not synchronize, to keep
+   it closer to del_timer() and del_timer_sync(), the API is now:
 
-Changes since v11:
- * Renamed devname with TDX_GUEST_DEVNAME.
+    timer_shutdown() - same as del_timer() but deactivates the timer.
 
-Changes since v10:
- * Replaced TD/TD Guest usage with guest or TDX guest.
- * Reworded the subject line.
+    timer_shutdown_sync() - same as del_timer_sync() but deactivates the timer.
 
-Changes since v9:
- * Copied arch/x86/include/uapi/asm/tdx.h to tools/arch/x86/include to
-   decouple header dependency between kernel source and tools dir.
- * Fixed Makefile to adapt to above change.
- * Fixed commit log and comments.
- * Added __packed to hardware structs.
+ - Added a few more locations that got converted.
 
-Changes since v8:
- * Please refer to https://lore.kernel.org/all/ \
-   20220728034420.648314-1-sathyanarayanan.kuppuswamy@linux.intel.com/
+  git://git.kernel.org/pub/scm/linux/kernel/git/rostedt/linux-trace.git
+trace/timers
 
- tools/testing/selftests/Makefile             |   1 +
- tools/testing/selftests/tdx/Makefile         |   7 +
- tools/testing/selftests/tdx/config           |   1 +
- tools/testing/selftests/tdx/tdx_guest_test.c | 163 +++++++++++++++++++
- 4 files changed, 172 insertions(+)
- create mode 100644 tools/testing/selftests/tdx/Makefile
- create mode 100644 tools/testing/selftests/tdx/config
- create mode 100644 tools/testing/selftests/tdx/tdx_guest_test.c
+Head SHA1: 25106f0bb7968b3e8c746a7853f44b51840746c3
 
-diff --git a/tools/testing/selftests/Makefile b/tools/testing/selftests/Makefile
-index 0464b2c6c1e4..f60e14d16bfd 100644
---- a/tools/testing/selftests/Makefile
-+++ b/tools/testing/selftests/Makefile
-@@ -73,6 +73,7 @@ TARGETS += sync
- TARGETS += syscall_user_dispatch
- TARGETS += sysctl
- TARGETS += tc-testing
-+TARGETS += tdx
- TARGETS += timens
- ifneq (1, $(quicktest))
- TARGETS += timers
-diff --git a/tools/testing/selftests/tdx/Makefile b/tools/testing/selftests/tdx/Makefile
-new file mode 100644
-index 000000000000..8dd43517cd55
---- /dev/null
-+++ b/tools/testing/selftests/tdx/Makefile
-@@ -0,0 +1,7 @@
-+# SPDX-License-Identifier: GPL-2.0
-+
-+CFLAGS += -O3 -Wl,-no-as-needed -Wall -static
-+
-+TEST_GEN_PROGS := tdx_guest_test
-+
-+include ../lib.mk
-diff --git a/tools/testing/selftests/tdx/config b/tools/testing/selftests/tdx/config
-new file mode 100644
-index 000000000000..aa1edc829ab6
---- /dev/null
-+++ b/tools/testing/selftests/tdx/config
-@@ -0,0 +1 @@
-+CONFIG_TDX_GUEST_DRIVER=y
-diff --git a/tools/testing/selftests/tdx/tdx_guest_test.c b/tools/testing/selftests/tdx/tdx_guest_test.c
-new file mode 100644
-index 000000000000..6f7ab667b8cc
---- /dev/null
-+++ b/tools/testing/selftests/tdx/tdx_guest_test.c
-@@ -0,0 +1,163 @@
-+// SPDX-License-Identifier: GPL-2.0
-+/*
-+ * Test TDX guest features
-+ *
-+ * Copyright (C) 2022 Intel Corporation.
-+ *
-+ * Author: Kuppuswamy Sathyanarayanan <sathyanarayanan.kuppuswamy@linux.intel.com>
-+ */
-+
-+#include <sys/ioctl.h>
-+
-+#include <errno.h>
-+#include <fcntl.h>
-+
-+#include "../kselftest_harness.h"
-+#include "../../../../include/uapi/linux/tdx-guest.h"
-+
-+#define TDX_GUEST_DEVNAME "/dev/tdx_guest"
-+#define HEX_DUMP_SIZE 8
-+#define DEBUG 0
-+
-+/**
-+ * struct tdreport_type - Type header of TDREPORT_STRUCT.
-+ * @type: Type of the TDREPORT (0 - SGX, 81 - TDX, rest are reserved)
-+ * @sub_type: Subtype of the TDREPORT (Default value is 0).
-+ * @version: TDREPORT version (Default value is 0).
-+ * @reserved: Added for future extension.
-+ *
-+ * More details can be found in TDX v1.0 module specification, sec
-+ * titled "REPORTTYPE".
-+ */
-+struct tdreport_type {
-+	__u8 type;
-+	__u8 sub_type;
-+	__u8 version;
-+	__u8 reserved;
-+};
-+
-+/**
-+ * struct reportmac - TDX guest report data, MAC and TEE hashes.
-+ * @type: TDREPORT type header.
-+ * @reserved1: Reserved for future extension.
-+ * @cpu_svn: CPU security version.
-+ * @tee_tcb_info_hash: SHA384 hash of TEE TCB INFO.
-+ * @tee_td_info_hash: SHA384 hash of TDINFO_STRUCT.
-+ * @reportdata: User defined unique data passed in TDG.MR.REPORT request.
-+ * @reserved2: Reserved for future extension.
-+ * @mac: CPU MAC ID.
-+ *
-+ * It is MAC-protected and contains hashes of the remainder of the
-+ * report structure along with user provided report data. More details can
-+ * be found in TDX v1.0 Module specification, sec titled "REPORTMACSTRUCT"
-+ */
-+struct reportmac {
-+	struct tdreport_type type;
-+	__u8 reserved1[12];
-+	__u8 cpu_svn[16];
-+	__u8 tee_tcb_info_hash[48];
-+	__u8 tee_td_info_hash[48];
-+	__u8 reportdata[64];
-+	__u8 reserved2[32];
-+	__u8 mac[32];
-+};
-+
-+/**
-+ * struct td_info - TDX guest measurements and configuration.
-+ * @attr: TDX Guest attributes (like debug, spet_disable, etc).
-+ * @xfam: Extended features allowed mask.
-+ * @mrtd: Build time measurement register.
-+ * @mrconfigid: Software-defined ID for non-owner-defined configuration
-+ *              of the guest - e.g., run-time or OS configuration.
-+ * @mrowner: Software-defined ID for the guest owner.
-+ * @mrownerconfig: Software-defined ID for owner-defined configuration of
-+ *                 the guest - e.g., specific to the workload.
-+ * @rtmr: Run time measurement registers.
-+ * @reserved: Added for future extension.
-+ *
-+ * It contains the measurements and initial configuration of the TDX guest
-+ * that was locked at initialization and a set of measurement registers
-+ * that are run-time extendable. More details can be found in TDX v1.0
-+ * Module specification, sec titled "TDINFO_STRUCT".
-+ */
-+struct td_info {
-+	__u8 attr[8];
-+	__u64 xfam;
-+	__u64 mrtd[6];
-+	__u64 mrconfigid[6];
-+	__u64 mrowner[6];
-+	__u64 mrownerconfig[6];
-+	__u64 rtmr[24];
-+	__u64 reserved[14];
-+};
-+
-+/*
-+ * struct tdreport - Output of TDCALL[TDG.MR.REPORT].
-+ * @reportmac: Mac protected header of size 256 bytes.
-+ * @tee_tcb_info: Additional attestable elements in the TCB are not
-+ *                reflected in the reportmac.
-+ * @reserved: Added for future extension.
-+ * @tdinfo: Measurements and configuration data of size 512 bytes.
-+ *
-+ * More details can be found in TDX v1.0 Module specification, sec
-+ * titled "TDREPORT_STRUCT".
-+ */
-+struct tdreport {
-+	struct reportmac reportmac;
-+	__u8 tee_tcb_info[239];
-+	__u8 reserved[17];
-+	struct td_info tdinfo;
-+};
-+
-+static void print_array_hex(const char *title, const char *prefix_str,
-+			    const void *buf, int len)
-+{
-+	int i, j, line_len, rowsize = HEX_DUMP_SIZE;
-+	const __u8 *ptr = buf;
-+
-+	printf("\t\t%s", title);
-+
-+	for (j = 0; j < len; j += rowsize) {
-+		line_len = rowsize < (len - j) ? rowsize : (len - j);
-+		printf("%s%.8x:", prefix_str, j);
-+		for (i = 0; i < line_len; i++)
-+			printf(" %.2x", ptr[j + i]);
-+		printf("\n");
-+	}
-+
-+	printf("\n");
-+}
-+
-+TEST(verify_report)
-+{
-+	struct tdx_report_req req;
-+	struct tdreport *tdreport;
-+	int devfd, i;
-+
-+	devfd = open(TDX_GUEST_DEVNAME, O_RDWR | O_SYNC);
-+	ASSERT_LT(0, devfd);
-+
-+	/* Generate sample report data */
-+	for (i = 0; i < TDX_REPORTDATA_LEN; i++)
-+		req.reportdata[i] = i;
-+
-+	/* Get TDREPORT */
-+	ASSERT_EQ(0, ioctl(devfd, TDX_CMD_GET_REPORT, &req));
-+
-+	if (DEBUG) {
-+		print_array_hex("\n\t\tTDX report data\n", "",
-+				req.reportdata, sizeof(req.reportdata));
-+
-+		print_array_hex("\n\t\tTDX tdreport data\n", "",
-+				req.tdreport, sizeof(req.tdreport));
-+	}
-+
-+	/* Make sure TDREPORT data includes the REPORTDATA passed */
-+	tdreport = (struct tdreport *)req.tdreport;
-+	ASSERT_EQ(0, memcmp(&tdreport->reportmac.reportdata[0],
-+			    req.reportdata, sizeof(req.reportdata)));
-+
-+	ASSERT_EQ(0, close(devfd));
-+}
-+
-+TEST_HARNESS_MAIN
--- 
-2.34.1
 
+Steven Rostedt (Google) (33):
+      timers: Add timer_shutdown_sync() and timer_shutdown() to be called before freeing timers
+      timers: s390/cmm: Use timer_shutdown_sync() before freeing timer
+      timers: sh: Use timer_shutdown_sync() before freeing timer
+      timers: block: Use timer_shutdown_sync() before freeing timer
+      timers: ACPI: Use timer_shutdown_sync() before freeing timer
+      timers: atm: Use timer_shutdown_sync() before freeing timer
+      timers: PM: Use timer_shutdown_sync()
+      timers: Bluetooth: Use timer_shutdown_sync() before freeing timer
+      timers: hangcheck: Use timer_shutdown_sync() before freeing timer
+      timers: ipmi: Use timer_shutdown_sync() before freeing timer
+      random: use timer_shutdown_sync() before freeing timer
+      timers: dma-buf: Use timer_shutdown_sync() before freeing timer
+      timers: drm: Use timer_shutdown_sync() before freeing timer
+      timers: HID: Use timer_shutdown_sync() before freeing timer
+      timers: Input: Use timer_shutdown_sync() before freeing timer
+      timers: mISDN: Use timer_shutdown_sync() before freeing timer
+      timers: leds: Use timer_shutdown_sync() before freeing timer
+      timers: media: Use timer_shutdown_sync() before freeing timer
+      timers: net: Use timer_shutdown_sync() before freeing timer
+      timers: usb: Use timer_shutdown_sync() before freeing timer
+      timers: cgroup: Use timer_shutdown_sync() before freeing timer
+      timers: workqueue: Use timer_shutdown_sync() before freeing timer
+      timers: nfc: pn533: Use timer_shutdown_sync() before freeing timer
+      timers: pcmcia: Use timer_shutdown_sync() before freeing timer
+      timers: scsi: Use timer_shutdown_sync() and timer_shutdown() before freeing timer
+      timers: tty: Use timer_shutdown_sync() before freeing timer
+      timers: ext4: Use timer_shutdown_sync() before freeing timer
+      timers: fs/nilfs2: Use timer_shutdown_sync() before freeing timer
+      timers: ALSA: Use timer_shutdown_sync() before freeing timer
+      timers: jbd2: Use timer_shutdown() before freeing timer
+      timers: sched/psi: Use timer_shutdown_sync() before freeing timer
+      timers: x86/mce: Use __init_timer() for resetting timers
+      timers: Expand DEBUG_OBJECTS_TIMER to check if it ever was used
+
+----
+ .../RCU/Design/Requirements/Requirements.rst       |   2 +-
+ Documentation/core-api/local_ops.rst               |   2 +-
+ Documentation/kernel-hacking/locking.rst           |   5 +
+ arch/s390/mm/cmm.c                                 |   4 +-
+ arch/sh/drivers/push-switch.c                      |   2 +-
+ arch/x86/kernel/cpu/mce/core.c                     |  14 ++-
+ block/blk-iocost.c                                 |   2 +-
+ block/blk-iolatency.c                              |   2 +-
+ block/blk-stat.c                                   |   2 +-
+ block/blk-throttle.c                               |   2 +-
+ block/kyber-iosched.c                              |   2 +-
+ drivers/acpi/apei/ghes.c                           |   2 +-
+ drivers/atm/idt77105.c                             |   4 +-
+ drivers/atm/idt77252.c                             |   4 +-
+ drivers/atm/iphase.c                               |   2 +-
+ drivers/base/power/wakeup.c                        |   7 +-
+ drivers/block/drbd/drbd_main.c                     |   2 +-
+ drivers/block/loop.c                               |   2 +-
+ drivers/block/sunvdc.c                             |   2 +-
+ drivers/bluetooth/hci_bcsp.c                       |   2 +-
+ drivers/bluetooth/hci_h5.c                         |   2 +-
+ drivers/bluetooth/hci_qca.c                        |   4 +-
+ drivers/char/hangcheck-timer.c                     |   4 +-
+ drivers/char/ipmi/ipmi_msghandler.c                |   2 +-
+ drivers/char/ipmi/ipmi_ssif.c                      |   4 +-
+ drivers/char/random.c                              |   2 +-
+ drivers/dma-buf/st-dma-fence.c                     |   2 +-
+ drivers/gpu/drm/gud/gud_pipe.c                     |   2 +-
+ drivers/gpu/drm/i915/i915_sw_fence.c               |   2 +-
+ drivers/hid/hid-wiimote-core.c                     |   2 +-
+ drivers/input/keyboard/locomokbd.c                 |   2 +-
+ drivers/input/keyboard/omap-keypad.c               |   2 +-
+ drivers/input/mouse/alps.c                         |   2 +-
+ drivers/input/serio/hil_mlc.c                      |   2 +-
+ drivers/input/serio/hp_sdc.c                       |   2 +-
+ drivers/isdn/hardware/mISDN/hfcmulti.c             |   6 +-
+ drivers/isdn/mISDN/l1oip_core.c                    |   4 +-
+ drivers/isdn/mISDN/timerdev.c                      |   4 +-
+ drivers/leds/trigger/ledtrig-activity.c            |   2 +-
+ drivers/leds/trigger/ledtrig-heartbeat.c           |   2 +-
+ drivers/leds/trigger/ledtrig-pattern.c             |   2 +-
+ drivers/leds/trigger/ledtrig-transient.c           |   2 +-
+ drivers/media/pci/ivtv/ivtv-driver.c               |   2 +-
+ drivers/media/usb/pvrusb2/pvrusb2-hdw.c            |  18 ++--
+ drivers/media/usb/s2255/s2255drv.c                 |   4 +-
+ drivers/net/ethernet/intel/i40e/i40e_main.c        |   6 +-
+ drivers/net/ethernet/marvell/sky2.c                |   2 +-
+ drivers/net/ethernet/sun/sunvnet.c                 |   2 +-
+ drivers/net/usb/sierra_net.c                       |   2 +-
+ drivers/net/wireless/intel/iwlwifi/iwl-dbg-tlv.c   |   2 +-
+ drivers/net/wireless/intersil/hostap/hostap_ap.c   |   2 +-
+ drivers/net/wireless/marvell/mwifiex/main.c        |   2 +-
+ drivers/net/wireless/microchip/wilc1000/hif.c      |   8 +-
+ drivers/nfc/pn533/pn533.c                          |   2 +-
+ drivers/nfc/pn533/uart.c                           |   2 +-
+ drivers/pcmcia/bcm63xx_pcmcia.c                    |   2 +-
+ drivers/pcmcia/electra_cf.c                        |   2 +-
+ drivers/pcmcia/omap_cf.c                           |   2 +-
+ drivers/pcmcia/pd6729.c                            |   4 +-
+ drivers/pcmcia/yenta_socket.c                      |   4 +-
+ drivers/scsi/qla2xxx/qla_edif.c                    |   4 +-
+ drivers/scsi/scsi_lib.c                            |   1 +
+ drivers/staging/media/atomisp/i2c/atomisp-lm3554.c |   2 +-
+ drivers/tty/n_gsm.c                                |   2 +-
+ drivers/tty/sysrq.c                                |   2 +-
+ drivers/usb/gadget/udc/m66592-udc.c                |   2 +-
+ drivers/usb/serial/garmin_gps.c                    |   2 +-
+ drivers/usb/serial/mos7840.c                       |   2 +-
+ fs/ext4/super.c                                    |   2 +-
+ fs/jbd2/journal.c                                  |   2 +
+ fs/nilfs2/segment.c                                |   2 +-
+ include/linux/timer.h                              | 100 +++++++++++++++++--
+ include/linux/workqueue.h                          |   4 +-
+ kernel/cgroup/cgroup.c                             |   2 +-
+ kernel/sched/psi.c                                 |   1 +
+ kernel/time/timer.c                                | 106 ++++++++++++++-------
+ kernel/workqueue.c                                 |   4 +-
+ net/802/garp.c                                     |   2 +-
+ net/802/mrp.c                                      |   2 +-
+ net/bridge/br_multicast.c                          |   6 +-
+ net/bridge/br_multicast_eht.c                      |   4 +-
+ net/core/gen_estimator.c                           |   2 +-
+ net/core/neighbour.c                               |   2 +
+ net/ipv4/inet_connection_sock.c                    |   2 +-
+ net/ipv4/inet_timewait_sock.c                      |   3 +-
+ net/ipv4/ipmr.c                                    |   2 +-
+ net/ipv6/ip6mr.c                                   |   2 +-
+ net/mac80211/mesh_pathtbl.c                        |   2 +-
+ net/netfilter/ipset/ip_set_list_set.c              |   2 +-
+ net/netfilter/ipvs/ip_vs_lblc.c                    |   2 +-
+ net/netfilter/ipvs/ip_vs_lblcr.c                   |   2 +-
+ net/netfilter/xt_LED.c                             |   2 +-
+ net/rxrpc/conn_object.c                            |   2 +-
+ net/sched/cls_flow.c                               |   2 +-
+ net/sunrpc/svc.c                                   |   2 +-
+ net/sunrpc/xprt.c                                  |   2 +-
+ net/tipc/discover.c                                |   2 +-
+ net/tipc/monitor.c                                 |   2 +-
+ sound/i2c/other/ak4117.c                           |   2 +-
+ sound/synth/emux/emux.c                            |   2 +-
+ 100 files changed, 310 insertions(+), 175 deletions(-)
