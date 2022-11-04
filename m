@@ -2,199 +2,246 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id A0DF3619018
-	for <lists+linux-doc@lfdr.de>; Fri,  4 Nov 2022 06:43:36 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 71FE16190E1
+	for <lists+linux-doc@lfdr.de>; Fri,  4 Nov 2022 07:21:17 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S229749AbiKDFnf (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Fri, 4 Nov 2022 01:43:35 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:53872 "EHLO
+        id S230064AbiKDGVP (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Fri, 4 Nov 2022 02:21:15 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:50244 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S229646AbiKDFne (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Fri, 4 Nov 2022 01:43:34 -0400
-Received: from mga18.intel.com (mga18.intel.com [134.134.136.126])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 55054DF97;
-        Thu,  3 Nov 2022 22:43:33 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1667540613; x=1699076613;
-  h=from:to:cc:subject:date:message-id:references:
-   in-reply-to:content-transfer-encoding:mime-version;
-  bh=trqSu4uttDtLId6wzhhHnXrPyjPOvJ92u2kouTvFFsc=;
-  b=jjBKBIfg57wr7ATgsrtgUhjQFP2WNnLbYrB79cVQbipXvgA313crgfJi
-   9TBNrb/mNast9AjuRGC8PcXolZN4lxwBxnpFC/ko6hOuCV+87dAcvq0Dj
-   RXGaDyih/cN73veQzGOrqN4ahUuCu/MLib+fGaUJXhyK34BzJSl+D7qhV
-   tZyLanchvTVC9OpPJoFkmedszYsZOKdfk1IsYEO+hEZ1E6oLu+J5AJpaz
-   afja/wI7fLJ4Qj7CkpxmRV0sJP9q70Iot3h/gwbHNaJG2k5QcAnUomqz5
-   KhJAzkMlG/EnuqiBfS9Cv74+jnTykTyxZCocTzd0gP8u861zPYD0Blagt
-   Q==;
-X-IronPort-AV: E=McAfee;i="6500,9779,10520"; a="293212370"
-X-IronPort-AV: E=Sophos;i="5.96,136,1665471600"; 
-   d="scan'208";a="293212370"
-Received: from fmsmga006.fm.intel.com ([10.253.24.20])
-  by orsmga106.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 03 Nov 2022 22:43:32 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=McAfee;i="6500,9779,10520"; a="880175886"
-X-IronPort-AV: E=Sophos;i="5.96,136,1665471600"; 
-   d="scan'208";a="880175886"
-Received: from fmsmsx602.amr.corp.intel.com ([10.18.126.82])
-  by fmsmga006.fm.intel.com with ESMTP; 03 Nov 2022 22:43:32 -0700
-Received: from fmsmsx610.amr.corp.intel.com (10.18.126.90) by
- fmsmsx602.amr.corp.intel.com (10.18.126.82) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2375.31; Thu, 3 Nov 2022 22:43:31 -0700
-Received: from fmsedg602.ED.cps.intel.com (10.1.192.136) by
- fmsmsx610.amr.corp.intel.com (10.18.126.90) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2375.31 via Frontend Transport; Thu, 3 Nov 2022 22:43:31 -0700
-Received: from NAM04-DM6-obe.outbound.protection.outlook.com (104.47.73.40) by
- edgegateway.intel.com (192.55.55.71) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.1.2375.31; Thu, 3 Nov 2022 22:43:31 -0700
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=JWpdZKhR26ZTUt2g3B5yc+WvztZRrGaTMm7wxTh5v9A2xcRtsJ/skyS/m/aFg0oTfBPZwjfys4TN9dmwwcTP3kAQQqR/FoKKTGl+aKa1im6lYyRWnusUhSOpVd+DUAJf+uFx/Htc00AIL0hsgv/yh0xrcmaP7qpS6ARthbSc2dwCeEf1E+aZJpFmB0WmKl71sRFC0fnqLw0vH7mOGPziSc1TtzC/WJoQ1oCRUsOt46ZoDD40uGIGg6wDQhV7oxfSGs85+m/QOZLbTVRut+yUjLVGk6kj+ZK0ltq9SHEChTx4a3svhs63L8y5P3cyZfwH+F/yHU8X6htCyaRdhRdarg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=trqSu4uttDtLId6wzhhHnXrPyjPOvJ92u2kouTvFFsc=;
- b=LvZO1AoGjgCgKH7RQEhOQflt5J99yPC6fR71Lyx5y39+Ogyj+uZZy5iW75yexzqj8fcAFq4QzbPncMaFmeigYQQA6gv+EqHP/jxnkZ+X6/v8ZmcIW+WetvPDDRIERR67vkrfRGIuCe71aO6bZCmibtrkXbpbP+jhcLsp4zCA9vLDgMY3Fxck13VN6IAN1MfeGj+/lBLpvamgc3WGYsAvDajB+Zjcurw3siUAifAnT5zN1EZ91KJ8k1arNaKMUhSBGcgDVX4GX47yg06/9jkJzAYXBqsBcbM5Txrz5pEM46JwMpUH3axG7FPh7dzAsXSbw4M4q5QfaZFLu7MQRKd1eA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=intel.com; dmarc=pass action=none header.from=intel.com;
- dkim=pass header.d=intel.com; arc=none
-Received: from BN9PR11MB5276.namprd11.prod.outlook.com (2603:10b6:408:135::18)
- by IA0PR11MB7283.namprd11.prod.outlook.com (2603:10b6:208:439::10) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5791.20; Fri, 4 Nov
- 2022 05:43:30 +0000
-Received: from BN9PR11MB5276.namprd11.prod.outlook.com
- ([fe80::737e:211a:bb53:4cd7]) by BN9PR11MB5276.namprd11.prod.outlook.com
- ([fe80::737e:211a:bb53:4cd7%5]) with mapi id 15.20.5791.022; Fri, 4 Nov 2022
- 05:43:30 +0000
-From:   "Tian, Kevin" <kevin.tian@intel.com>
-To:     Jason Gunthorpe <jgg@nvidia.com>,
-        Lu Baolu <baolu.lu@linux.intel.com>,
-        "bpf@vger.kernel.org" <bpf@vger.kernel.org>,
-        Jonathan Corbet <corbet@lwn.net>,
-        David Woodhouse <dwmw2@infradead.org>,
-        "iommu@lists.linux.dev" <iommu@lists.linux.dev>,
-        Joerg Roedel <joro@8bytes.org>,
-        "linux-doc@vger.kernel.org" <linux-doc@vger.kernel.org>,
-        "linux-kselftest@vger.kernel.org" <linux-kselftest@vger.kernel.org>,
-        "llvm@lists.linux.dev" <llvm@lists.linux.dev>,
-        Nathan Chancellor <nathan@kernel.org>,
-        Nick Desaulniers <ndesaulniers@google.com>,
-        Miguel Ojeda <ojeda@kernel.org>,
-        Robin Murphy <robin.murphy@arm.com>,
-        Shuah Khan <shuah@kernel.org>,
-        Suravee Suthikulpanit <suravee.suthikulpanit@amd.com>,
-        Tom Rix <trix@redhat.com>, Will Deacon <will@kernel.org>
-CC:     Alex Williamson <alex.williamson@redhat.com>,
-        Chaitanya Kulkarni <chaitanyak@nvidia.com>,
-        Cornelia Huck <cohuck@redhat.com>,
-        Daniel Jordan <daniel.m.jordan@oracle.com>,
-        David Gibson <david@gibson.dropbear.id.au>,
-        Eric Auger <eric.auger@redhat.com>,
-        Eric Farman <farman@linux.ibm.com>,
-        Jason Wang <jasowang@redhat.com>,
-        Jean-Philippe Brucker <jean-philippe@linaro.org>,
-        "Martins, Joao" <joao.m.martins@oracle.com>,
-        "kvm@vger.kernel.org" <kvm@vger.kernel.org>,
-        Matthew Rosato <mjrosato@linux.ibm.com>,
-        "Michael S. Tsirkin" <mst@redhat.com>,
-        Nicolin Chen <nicolinc@nvidia.com>,
-        Niklas Schnelle <schnelle@linux.ibm.com>,
-        "Shameerali Kolothum Thodi" <shameerali.kolothum.thodi@huawei.com>,
-        "Liu, Yi L" <yi.l.liu@intel.com>,
-        Keqian Zhu <zhukeqian1@huawei.com>
-Subject: RE: [PATCH v3 15/15] iommufd: Add a selftest
-Thread-Topic: [PATCH v3 15/15] iommufd: Add a selftest
-Thread-Index: AQHY6J1pXc4epOTBu0+Bzhxi63Udt64uAKiAgABLnFA=
-Date:   Fri, 4 Nov 2022 05:43:29 +0000
-Message-ID: <BN9PR11MB52769FA78CA8B7FD3DB7595E8C3B9@BN9PR11MB5276.namprd11.prod.outlook.com>
-References: <0-v3-402a7d6459de+24b-iommufd_jgg@nvidia.com>
- <15-v3-402a7d6459de+24b-iommufd_jgg@nvidia.com> <Y2RkXV+q0Q6bdTde@nvidia.com>
-In-Reply-To: <Y2RkXV+q0Q6bdTde@nvidia.com>
-Accept-Language: en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-authentication-results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=intel.com;
-x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: BN9PR11MB5276:EE_|IA0PR11MB7283:EE_
-x-ms-office365-filtering-correlation-id: f515e5a7-099c-435e-b3de-08dabe2780b9
-x-ld-processed: 46c98d88-e344-4ed4-8496-4ed7712e255d,ExtAddr
-x-ms-exchange-senderadcheck: 1
-x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam: BCL:0;
-x-microsoft-antispam-message-info: c0xilIuTZ/p5bHNvK89Hx5D0lSX4l0jmD7C5J+me8itrX/V5UnFYhxFR2TtlyJb6kTNVhOI1r1tspo4/1LppwV/Btw+Maxr4CaXbolV2xkiUJfqIFabi6Q34OxWEZU4w+xeW2Yy490NkNGwdj2JxELEiabH8zjscnhjvfSbuUum3aidAAV9rloxvkQ2rrLWi4Fdgq6AJATH5QxqeUCVr6ICGBv01qiyXAPy7uMow0FQnr0beYbUMbZbuvnY226JHv5bzor6PgBhmKlQHqt34xUVwIjJGFtzM1UbzrQRuOhrox0gEih/2Q3zh/n1sPqRqm0aD/FnMd6HCGem22x+LFqhDY97VCkTwGGX9c9wQcFDpOz3CPpsxi3n360vCR0Y4Mmt9mENm2aPRZV0iyTJZ9USRB6UzDWfAUgj7CL+f2+2LgjX22zLbEwyj2kURyQ9vIxjC/d1i6nM341sACzp5mwtaICtUC1qniedxUv+lgMioKUgnQGSxZLOSKEL20RqBvjQq8Zo85xjHj6atQ2nPGAEqPwr6wSvi1Qg/z4aKTTsDnagGtJ+R3KIqDOvRuBv5xb3CnWbkIwbxgC3/4SDP/k3wo7MGjorN32y5Q6D14kywjHLPhCA+I2j058n6cXt6268pAdRz+XATYNs8bLrZp/RI2Xu5jxvo3ptnCEw0Jj3EtHkWF3ESI6YS5sn5Wb61dKgvbQx8OU2ThF2kyyjhphr7QdlCEqjL9xemB7WgEvNGK0GuI9rKbfczht6XieAbJmLaMMPa0nK0EcJiALjvqaiMK7l0nVhWxS/ZoZG/MyE=
-x-forefront-antispam-report: CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BN9PR11MB5276.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230022)(136003)(39860400002)(396003)(346002)(366004)(376002)(451199015)(921005)(66556008)(66446008)(71200400001)(55016003)(64756008)(66946007)(6506007)(7416002)(66476007)(38070700005)(8936002)(5660300002)(52536014)(2906002)(41300700001)(110136005)(4744005)(54906003)(316002)(4326008)(76116006)(7406005)(8676002)(26005)(186003)(9686003)(83380400001)(38100700002)(33656002)(82960400001)(478600001)(7696005)(122000001)(86362001);DIR:OUT;SFP:1102;
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0: =?us-ascii?Q?LHZZcyupQoW+WnhOROgBP9dSECgZHutrR+Pg/wTjaTjsdf1DsC2ASm+WyEqR?=
- =?us-ascii?Q?qHAzA+iNEk1b1SEerE7MENUsRoIzAQJrcTfatMa5H/WI9X34LIdVw31eX3hr?=
- =?us-ascii?Q?f/RWThtnLSbdzMth9TRNI+yvPpSCgv3sIpdm6dVLRb/DhI8F6384ZJVmFIGI?=
- =?us-ascii?Q?wq+nhD6sVv40UqN1dupgpvKFw4Iwtid8lus2eXZUSPjEacxdRaDxyQonRJek?=
- =?us-ascii?Q?plLkMUaM/i9UZOeGzSEid0RLsdLzIoAxe1tVz2EsL9D0s4iw1sRm3MtW+faF?=
- =?us-ascii?Q?50ENWP6KgMhQacYEppNthUo38WlHViXSRXSxkR949sfQUMbqFUAVUdeogly+?=
- =?us-ascii?Q?H24bAMbPq85MItgmyfMQ83VSSWo+tJLF98e/Knv3Hh/M9JzA7lczi7V/JSJh?=
- =?us-ascii?Q?ClVhCZEr6LygiGPTYfPZYXDxwKRezpdHIzajZYgD8L0aPupNexOjV+dho2Kh?=
- =?us-ascii?Q?rzVj9cne41aAJ4w6xLsN4x9L4oBjt+4Tlyl6SEY0LM1fBN0AV6YIqqXZ/M+T?=
- =?us-ascii?Q?CT9XOLaR9rKcyyx4rYap/ONBsLxlmM0xw4M+U25cor61f6dZENP3T5UaJbdv?=
- =?us-ascii?Q?iZOfGiq901ItYvBos9I5RiUbiXm2JFJXj3I5j37lJZJzChse6XSNMjZOV7O0?=
- =?us-ascii?Q?hE7YDm7zBl7DaPRF5sLnqLkgpaS6DYpbbjkBRrMYC+BEf/fqKRxeuJN6iNRH?=
- =?us-ascii?Q?3CsDi1DpsxXbLA85YGcYBX3uipsMf66mqH2KxOGNPJ6Ho77wKKV7TM06UnOO?=
- =?us-ascii?Q?4dRW3dJOYt6NrX/scrukze7iPRA98LfMqxeD0k+OqHPmmXp2r7Z53/+6pMAA?=
- =?us-ascii?Q?XE1d3L2IMWoX4Ma1THKuIVng0fSzDO27mEv93CGuffJilKi33tokoYEMjR3P?=
- =?us-ascii?Q?F3dn4CKLrHHNtYkqbG0zYDSCJPbA8ZBz09MatWcDQ+82Tz+iCnFDrdJsP50S?=
- =?us-ascii?Q?SETrCSrrJFEQ65HC1Cj3b3LSOuyQnm3U2G2CyKbsIQ83yJqdqdQvPvSvERaK?=
- =?us-ascii?Q?8j9264gJM7Q8wnYEiONDLdUpBiB1HIFYvlWO+weQtqh1gq17ajaY2D5refVX?=
- =?us-ascii?Q?8ldEW7Ud7Du9I2XX8dsPLv9MQG9q+/1PRMBMKQQt1Ee3kMcGo/Tu6w0ZZdwB?=
- =?us-ascii?Q?qMx9V2QltCzaZii/Qk8JMVgPhYJza0Zkip8hDvUqiYkc4MrW+kV0wXFd0gtC?=
- =?us-ascii?Q?f0k7PfrVt8r55V0KZ6wrp7oEONiyJhCfRfuEAeYxWGX+BezXYVJcXlh7tryu?=
- =?us-ascii?Q?1V4liicT7cczChBJ0B1ZmVHmKOqVCj9kzjlvS8HzpK9DzSvET8YZXVk0yLGf?=
- =?us-ascii?Q?/RB+CaR+FwsoX0W6e3cD06vnN/ux2T7ytTwOREAtpHXUsoiR/TnnK7/kWDkE?=
- =?us-ascii?Q?3olMw7gOi5PdtII3rip4a5h5YS1V3kIYW7YDa7IhyAdzSap9qjccbMBKbn7L?=
- =?us-ascii?Q?H8ydu4Wyl+LcIUun0oTZVJSAlAGWpOkHGmqbHTdVY6pf68m/5OwHDa5sptdw?=
- =?us-ascii?Q?cZ8+ntvTPClxaNMXi73yhV0KV40JS17RltLoUus1yqBHgiYKB6uh1HTiNi7v?=
- =?us-ascii?Q?ydKvNjBbINzKRfBgpGHDUVb/iAyuhtgf6QypiWq8?=
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+        with ESMTP id S229598AbiKDGVO (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Fri, 4 Nov 2022 02:21:14 -0400
+Received: from mail-wm1-x32c.google.com (mail-wm1-x32c.google.com [IPv6:2a00:1450:4864:20::32c])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 5CA002A277
+        for <linux-doc@vger.kernel.org>; Thu,  3 Nov 2022 23:21:12 -0700 (PDT)
+Received: by mail-wm1-x32c.google.com with SMTP id c3-20020a1c3503000000b003bd21e3dd7aso4781925wma.1
+        for <linux-doc@vger.kernel.org>; Thu, 03 Nov 2022 23:21:12 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=bytedance-com.20210112.gappssmtp.com; s=20210112;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=65lTdNqrP8u73l0y8SmF+Y01vsRJT7JcdsWBrKR/ZE0=;
+        b=gjNprhE9BWQEQqlbsclp1Tfj9PVvIB+S3jhNIO835EV5qbLoBsqNy7LNAMUWHKiN0t
+         XxS4PRmxrDg2TAm3zyVuDHtAmBivy52j81Sc1BpfvoyUCS8h+8jetKGCaw7SRdrleKmy
+         KT/kYO0QdVJQP/ku7dy2xyN7nYbVC8R4NDyEhhlPtQoIrKcVnJvQ/l/NI6chguuNa1Xz
+         INDvCSqM/M5apato2zhRSgUuoe0/UJARPb+z19JIGTTr/oO+viwkkT5UZVDdCy9j+12e
+         CSYPao44S4JL2aIG0AE9wr8DyiqHf1BreMMKbcb+b1EkSEHZ/1eMlWZJ8WsupG0NANyu
+         23kw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=65lTdNqrP8u73l0y8SmF+Y01vsRJT7JcdsWBrKR/ZE0=;
+        b=8KuO5/cKUbeWqximcbxTCl2y+VMKNE8HSV8QOBYQytxkzMfEgjF1SeJrYVWqQJG5Qa
+         pT5+brlNb7SCBumtVMqei9UZg+SCOtDyXebzI+K5t5EBhJOPlV2l5CRDmFih8SMnqaHq
+         6MsH0U+fea0Jr+t2RWarZtS49iatsZzu9HtPWl2RswgVk1q64XC7Kq7zZs3kltwCsxSv
+         l938Z5D3fTCMpu5VZEL3WFIw6T0DsMIj+c+kq3tXBBMdi7VSYc2S8zrX+snSfCqeAMYD
+         zvdqsZJpIIeRzRpza+ZRhVjTbh8mwefQnj3vckMJeoC+iDz5QBQrJm4LojhpDGzDfFGk
+         NCYQ==
+X-Gm-Message-State: ACrzQf0ynhsGxKWd2XcxCqGXm67M0elcu4lCFxKBgAN8KCp3RTPS9Lkj
+        tpz5wIdbYCRc5ko+QXtQV3IRaA==
+X-Google-Smtp-Source: AMsMyM6aTQP5kPMGw4HIGximP07bbRwNCO6igOcOZs22Ff19oUZTGj53V2La5HXh9et1oEl6fpi67w==
+X-Received: by 2002:a1c:ed0e:0:b0:3cf:6b2b:f1db with SMTP id l14-20020a1ced0e000000b003cf6b2bf1dbmr19736113wmh.117.1667542870847;
+        Thu, 03 Nov 2022 23:21:10 -0700 (PDT)
+Received: from usaari01.cust.communityfibre.co.uk ([2a02:6b6a:b4d7:0:c7c:f931:dd4c:1ea6])
+        by smtp.gmail.com with ESMTPSA id w11-20020a5d608b000000b002366f9bd717sm3099924wrt.45.2022.11.03.23.21.09
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 03 Nov 2022 23:21:10 -0700 (PDT)
+From:   Usama Arif <usama.arif@bytedance.com>
+To:     linux-kernel@vger.kernel.org, linux-arm-kernel@lists.infradead.org,
+        kvmarm@lists.cs.columbia.edu, kvm@vger.kernel.org,
+        linux-doc@vger.kernel.org,
+        virtualization@lists.linux-foundation.org, linux@armlinux.org.uk,
+        yezengruan@huawei.com, catalin.marinas@arm.com, will@kernel.org,
+        maz@kernel.org, steven.price@arm.com, mark.rutland@arm.com,
+        bagasdotme@gmail.com
+Cc:     fam.zheng@bytedance.com, liangma@liangbit.com,
+        punit.agrawal@bytedance.com, Usama Arif <usama.arif@bytedance.com>
+Subject: [v2 0/6] KVM: arm64: implement vcpu_is_preempted check
+Date:   Fri,  4 Nov 2022 06:20:59 +0000
+Message-Id: <20221104062105.4119003-1-usama.arif@bytedance.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: BN9PR11MB5276.namprd11.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: f515e5a7-099c-435e-b3de-08dabe2780b9
-X-MS-Exchange-CrossTenant-originalarrivaltime: 04 Nov 2022 05:43:29.8533
- (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: 46c98d88-e344-4ed4-8496-4ed7712e255d
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: 4pLgnATjJF9MN2ZJYeOEL7BE8YdyE/cXTlGU6AgKYJEn7MLPf/EZuFw2YeYXKZGrryislrKm7vfijbOMYYo/6A==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: IA0PR11MB7283
-X-OriginatorOrg: intel.com
-X-Spam-Status: No, score=-3.1 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,SPF_HELO_NONE,
-        SPF_NONE autolearn=ham autolearn_force=no version=3.4.6
+Content-Transfer-Encoding: 8bit
+X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+        DKIM_VALID,RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,SPF_PASS
+        autolearn=unavailable autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-> From: Jason Gunthorpe <jgg@nvidia.com>
-> Sent: Friday, November 4, 2022 9:01 AM
->=20
-> The only way I can see to solve this is to hold a serializing lock
-> across iommufd_access_pin_pages() so that neither
-> iommufd_test_access_unmap() can progress until both the pin is
-> completed and the record of the pin is stored.
+This patchset adds support for vcpu_is_preempted in arm64, which allows the guest
+to check if a vcpu was scheduled out, which is useful to know incase it was
+holding a lock. vcpu_is_preempted can be used to improve
+performance in locking (see owner_on_cpu usage in mutex_spin_on_owner,
+mutex_can_spin_on_owner, rtmutex_spin_on_owner and osq_lock) and scheduling
+(see available_idle_cpu which is used in several places in kernel/sched/fair.c
+for e.g. in wake_affine to determine which CPU can run soonest):
 
-same as gvt does which maintains an internal mapping cache and
-conducts pin/unmap with cache update under the mutex protection.
+This patchset shows improvement on overcommitted hosts (vCPUs > pCPUS), as waiting
+for preempted vCPUs reduces performance.
 
->=20
-> Fortunately in the iommufd design we can hold a lock like this across
-> these calls, and in the op callback, without deadlocking. I can't
-> recall if vfio can do the same, I suspect not since I had in my mind I
-> needed to avoid that kind of locking for deadlock reasons..
+This patchset is inspired from the para_steal_clock implementation and from the
+work originally done by Zengruan Ye:
+https://lore.kernel.org/linux-arm-kernel/20191226135833.1052-1-yezengruan@huawei.com/.
 
-I think so. iiuc vfio relies on driver to ensure serialization in this scen=
-ario.
+All the results in the below experiments are done on an aws r6g.metal instance
+which has 64 pCPUs.
+
+The following table shows the index results of UnixBench running on a 128 vCPU VM
+with (6.0.0+vcpu_is_preempted) and without (6.0.0 base) the patchset.
+TestName                                6.0.0 base  6.0.0+vcpu_is_preempted    % improvement for vcpu_is_preempted
+Dhrystone 2 using register variables    187761      191274.7                   1.871368389
+Double-Precision Whetstone              96743.6     98414.4                    1.727039308
+Execl Throughput                        689.3       10426                      1412.548963
+File Copy 1024 bufsize 2000 maxblocks   549.5       3165                       475.978162
+File Copy 256 bufsize 500 maxblocks     400.7       2084.7                     420.2645371
+File Copy 4096 bufsize 8000 maxblocks   894.3       5003.2                     459.4543218
+Pipe Throughput                         76819.5     78601.5                    2.319723508
+Pipe-based Context Switching            3444.8      13414.5                    289.4130283
+Process Creation                        301.1       293.4                      -2.557289937
+Shell Scripts (1 concurrent)            1248.1      28300.6                    2167.494592
+Shell Scripts (8 concurrent)            781.2       26222.3                    3256.669227
+System Call Overhead                    3426        3729.4                     8.855808523
+
+System Benchmarks Index Score           3053        11534                      277.7923354
+
+This shows a 277% overall improvement using these patches.
+
+The biggest improvement is in the shell scripts benchmark, which forks a lot of processes.
+This acquires rwsem lock where a large chunk of time is spent in base 6.0.0 kernel.
+This can be seen from one of the callstack of the perf output of the shell
+scripts benchmark on 6.0.0 base (pseudo NMI enabled for perf numbers below):
+- 33.79% el0_svc
+   - 33.43% do_el0_svc
+      - 33.43% el0_svc_common.constprop.3
+         - 33.30% invoke_syscall
+            - 17.27% __arm64_sys_clone
+               - 17.27% __do_sys_clone
+                  - 17.26% kernel_clone
+                     - 16.73% copy_process
+                        - 11.91% dup_mm
+                           - 11.82% dup_mmap
+                              - 9.15% down_write
+                                 - 8.87% rwsem_down_write_slowpath
+                                    - 8.48% osq_lock
+
+Just under 50% of the total time in the shell script benchmarks ends up being
+spent in osq_lock in the base 6.0.0 kernel:
+  Children      Self  Command   Shared Object        Symbol
+   17.19%    10.71%  sh      [kernel.kallsyms]  [k] osq_lock
+    6.17%     4.04%  sort    [kernel.kallsyms]  [k] osq_lock
+    4.20%     2.60%  multi.  [kernel.kallsyms]  [k] osq_lock
+    3.77%     2.47%  grep    [kernel.kallsyms]  [k] osq_lock
+    3.50%     2.24%  expr    [kernel.kallsyms]  [k] osq_lock
+    3.41%     2.23%  od      [kernel.kallsyms]  [k] osq_lock
+    3.36%     2.15%  rm      [kernel.kallsyms]  [k] osq_lock
+    3.28%     2.12%  tee     [kernel.kallsyms]  [k] osq_lock
+    3.16%     2.02%  wc      [kernel.kallsyms]  [k] osq_lock
+    0.21%     0.13%  looper  [kernel.kallsyms]  [k] osq_lock
+    0.01%     0.00%  Run     [kernel.kallsyms]  [k] osq_lock
+
+and this comes down to less than 1% total with 6.0.0+vcpu_is_preempted kernel:
+  Children      Self  Command   Shared Object        Symbol
+     0.26%     0.21%  sh      [kernel.kallsyms]  [k] osq_lock
+     0.10%     0.08%  multi.  [kernel.kallsyms]  [k] osq_lock
+     0.04%     0.04%  sort    [kernel.kallsyms]  [k] osq_lock
+     0.02%     0.01%  grep    [kernel.kallsyms]  [k] osq_lock
+     0.02%     0.02%  od      [kernel.kallsyms]  [k] osq_lock
+     0.01%     0.01%  tee     [kernel.kallsyms]  [k] osq_lock
+     0.01%     0.00%  expr    [kernel.kallsyms]  [k] osq_lock
+     0.01%     0.01%  looper  [kernel.kallsyms]  [k] osq_lock
+     0.00%     0.00%  wc      [kernel.kallsyms]  [k] osq_lock
+     0.00%     0.00%  rm      [kernel.kallsyms]  [k] osq_lock
+
+To make sure, there is no change in performance when vCPUs < pCPUs, UnixBench
+was run on a 32 CPU VM. The kernel with vcpu_is_preempted implemented
+performed 0.9% better overall than base kernel, and the individual benchmarks
+were within +/-2% improvement over 6.0.0 base.
+Hence the patches have no negative affect when vCPUs < pCPUs.
+
+
+The other method discussed in https://lore.kernel.org/linux-arm-kernel/20191226135833.1052-1-yezengruan@huawei.com/
+was pv conditional yield by Marc Zyngier and Will Deacon to reduce vCPU reschedule
+if the vCPU will exit immediately.
+(https://git.kernel.org/pub/scm/linux/kernel/git/maz/arm-platforms.git/log/?h=kvm-arm64/pvcy).
+The patches were ported to 6.0.0 kernel and tested with UnixBench with a 128 vCPU VM:
+
+TestName                                6.0.0 base  6.0.0+pvcy      % improvement for pvcy
+Dhrystone 2 using register variables    187761      183128          -2.467498575
+Double-Precision Whetstone              96743.6     96645           -0.101918887
+Execl Throughput                        689.3       1019.8          47.9471928
+File Copy 1024 bufsize 2000 maxblocks   549.5       2029.7          269.3721565
+File Copy 256 bufsize 500 maxblocks     400.7       1439.4          259.2213626
+File Copy 4096 bufsize 8000 maxblocks   894.3       3434.1          283.9986582
+Pipe Throughput                         76819.5     74268.8         -3.320380893
+Pipe-based Context Switching            3444.8      5963.3          73.11019508
+Process Creation                        301.1       163.2           -45.79873796
+Shell Scripts (1 concurrent)            1248.1      1859.7          49.00248378
+Shell Scripts (8 concurrent)            781.2       1171            49.89759345
+System Call Overhead                    3426        3194.4          -6.760070053
+
+System Benchmarks Index Score           3053        4605            50.83524402
+
+pvcy shows a smaller overall improvement (50%) compared to vcpu_is_preempted (277%).
+Host side flamegraph analysis shows that ~60% of the host time when using pvcy
+is spent in kvm_handle_wfx, compared with ~1.5% when using vcpu_is_preempted,
+hence vcpu_is_preempted shows a larger improvement.
+
+It might be that pvcy can be used in combination with vcpu_is_preempted, but this
+series is to start a discussion on vcpu_is_preempted as it shows a much bigger
+improvement in performance and its much easier to review vcpu_is_preempted standalone.
+
+The respective QEMU change to test this is at
+https://github.com/uarif1/qemu/commit/2da2c2927ae8de8f03f439804a0dad9cf68501b6,
+
+Looking forward to your response!
+Thanks,
+Usama
+---
+RFC->v2
+- Fixed table and code referencing in pvlock documentation
+- Switched to using a single hypercall similar to ptp_kvm and made check
+  for has_kvm_pvlock simpler
+
+Usama Arif (6):
+  KVM: arm64: Document PV-lock interface
+  KVM: arm64: Add SMCCC paravirtualised lock calls
+  KVM: arm64: Support pvlock preempted via shared structure
+  KVM: arm64: Provide VCPU attributes for PV lock
+  KVM: arm64: Support the VCPU preemption check
+  KVM: selftests: add tests for PV time specific hypercall
+
+ Documentation/virt/kvm/arm/hypercalls.rst     |   3 +
+ Documentation/virt/kvm/arm/index.rst          |   1 +
+ Documentation/virt/kvm/arm/pvlock.rst         |  52 ++++++++
+ Documentation/virt/kvm/devices/vcpu.rst       |  25 ++++
+ arch/arm64/include/asm/kvm_host.h             |  25 ++++
+ arch/arm64/include/asm/paravirt.h             |   2 +
+ arch/arm64/include/asm/pvlock-abi.h           |  17 +++
+ arch/arm64/include/asm/spinlock.h             |  16 ++-
+ arch/arm64/include/uapi/asm/kvm.h             |   3 +
+ arch/arm64/kernel/paravirt.c                  | 112 ++++++++++++++++++
+ arch/arm64/kernel/setup.c                     |   3 +
+ arch/arm64/kvm/Makefile                       |   2 +-
+ arch/arm64/kvm/arm.c                          |   8 ++
+ arch/arm64/kvm/guest.c                        |   9 ++
+ arch/arm64/kvm/hypercalls.c                   |   8 ++
+ arch/arm64/kvm/pvlock.c                       | 100 ++++++++++++++++
+ include/linux/arm-smccc.h                     |   8 ++
+ include/linux/cpuhotplug.h                    |   1 +
+ include/uapi/linux/kvm.h                      |   2 +
+ tools/arch/arm64/include/uapi/asm/kvm.h       |   1 +
+ tools/include/linux/arm-smccc.h               |   8 ++
+ .../selftests/kvm/aarch64/hypercalls.c        |   2 +
+ 22 files changed, 406 insertions(+), 2 deletions(-)
+ create mode 100644 Documentation/virt/kvm/arm/pvlock.rst
+ create mode 100644 arch/arm64/include/asm/pvlock-abi.h
+ create mode 100644 arch/arm64/kvm/pvlock.c
+
+-- 
+2.25.1
+
