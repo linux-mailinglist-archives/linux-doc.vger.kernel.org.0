@@ -2,103 +2,128 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id D1D2261F04B
-	for <lists+linux-doc@lfdr.de>; Mon,  7 Nov 2022 11:22:04 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id D50EC61F07B
+	for <lists+linux-doc@lfdr.de>; Mon,  7 Nov 2022 11:24:40 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S231580AbiKGKWC (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 7 Nov 2022 05:22:02 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:33062 "EHLO
+        id S232025AbiKGKYd (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 7 Nov 2022 05:24:33 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:35660 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S231719AbiKGKVw (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Mon, 7 Nov 2022 05:21:52 -0500
-Received: from mail-ed1-x54a.google.com (mail-ed1-x54a.google.com [IPv6:2a00:1450:4864:20::54a])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id DBDC418E23
-        for <linux-doc@vger.kernel.org>; Mon,  7 Nov 2022 02:21:38 -0800 (PST)
-Received: by mail-ed1-x54a.google.com with SMTP id q13-20020a056402518d00b00462b0599644so8133127edd.20
-        for <linux-doc@vger.kernel.org>; Mon, 07 Nov 2022 02:21:38 -0800 (PST)
+        with ESMTP id S231961AbiKGKYS (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Mon, 7 Nov 2022 05:24:18 -0500
+Received: from mail-qv1-xf41.google.com (mail-qv1-xf41.google.com [IPv6:2607:f8b0:4864:20::f41])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 8951F18E32
+        for <linux-doc@vger.kernel.org>; Mon,  7 Nov 2022 02:24:03 -0800 (PST)
+Received: by mail-qv1-xf41.google.com with SMTP id e15so7767501qvo.4
+        for <linux-doc@vger.kernel.org>; Mon, 07 Nov 2022 02:24:03 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=google.com; s=20210112;
-        h=cc:to:from:subject:message-id:references:mime-version:in-reply-to
-         :date:from:to:cc:subject:date:message-id:reply-to;
-        bh=ihUiIO3ZLwpQKr6BgSjeEHYERb79BZdv2hX+HIlwkJI=;
-        b=L5X++DuCad+8UxHidtzd0ia2QhWMBne6T5ULMfNTvrrMHUXXqX//6iwiE924aWtDl2
-         LHjk8+PQvvWwiUAW4IM7/Jbaw9xPV3bB92LqE/4ckIEGVB9eU+8rjRaBGxYzVKh62B+3
-         pffzH8ZFW3ICBI06YUAqiRNAyj/S9rF5NbVVXaC7T9sH/bXhSk9qFdYMgedpUpqAvXiL
-         uOlBxfs1km20u40N9rIMzarYVjNpodlyESEmZHq/LZVkUhYHweZ5DLwmdEJc3n025kH6
-         sBBYgobP0SiZSy/OJEJpKNxmdbVQ3Z+k3kee+L3N6Dx/f4OR8oKfE6aMdDBEnuoU2Rps
-         i3Wg==
+        d=gmail.com; s=20210112;
+        h=content-transfer-encoding:to:subject:message-id:date:from:reply-to
+         :mime-version:from:to:cc:subject:date:message-id:reply-to;
+        bh=AOmtRIzmF5dcnWrT0j3skK83MYTC+QvduwZ6ndeN2Ks=;
+        b=Zv++OJ/ncK2pWuUWAQT+z52+cIoHK/WVJU4bVze52hunD5wDL4D5XJdl5mW2VbRjhi
+         PKA0tQ/z42/ONfUnPJoBfdYRGEG2gwiyoDRW7hecaxcg+/0t0u3g44ISFlpe+B9l1fvu
+         TmkNgtKOyak6WThRMAIvY+g5IgPZxvnz63e21BpajeaX9653GP4qpHUHyfV7BL4cSNb4
+         pCU1fNGxZBn7NlKzWZCMHMxM9LSs8sKofgpQ0FSoeb/qTDQ+CPP+tvlBe/vGQ8T8hOyn
+         vdUZr48/zTuwVxtBDF6IrOR7pT19nf73qD9i1Q8QUWEzM8dVJjwmGS+xVbVCXqFaE09J
+         SKzA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=cc:to:from:subject:message-id:references:mime-version:in-reply-to
-         :date:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=ihUiIO3ZLwpQKr6BgSjeEHYERb79BZdv2hX+HIlwkJI=;
-        b=EYufJPmGWQBy04BjtbJDNuZabq+AEYR9fgLQ/L+zhLOMXBTK3Vc9hyLxrWLDLrnxsZ
-         rvgb3wzNT4rg8TZytGKduzf/tSJieAmyrrVql4yO5iGY01ayciOVz4Ho3lYQDymiXWjG
-         3lic3DZ155rYDzwI5qRoqwPOWiI9MirAItmoKJ32HGi+mrpqRmhND2GPl5zVKtFgcu9c
-         uGHHIFulYQ9piwvE677dM3w+uRtdcqyxfL4TWTMfQO6A0neLpTCb1FsrY3OE8VcQdk++
-         To8idYLzFtMwcMZ2zsvdq78oXtBZTDyLabfAJLaNr0KL8xWIFNdP03i4jrhjg+tig8a/
-         7p7A==
-X-Gm-Message-State: ACrzQf0TzX2BtKKXFwpzLyKy2Gu8fpeMoq+1IxVdnRwmqtkZkg2TRDYf
-        VNKOXNFvBunJWKXitIvTmMk7QrE30lLXvaiX5Q==
-X-Google-Smtp-Source: AMsMyM4jq5TdocedxtCJg2krWmLr2HLqOAo0hc+LmOQKo7sUV/41w3aF32a0u2yLv+C9qrJe1WC8ojLmdAcUQOQh8Q==
-X-Received: from peternewman10.zrh.corp.google.com ([2a00:79e0:9d:6:ce1e:a203:209a:548c])
- (user=peternewman job=sendgmr) by 2002:a17:907:788:b0:741:4d1a:595d with SMTP
- id xd8-20020a170907078800b007414d1a595dmr46434575ejb.737.1667816497306; Mon,
- 07 Nov 2022 02:21:37 -0800 (PST)
-Date:   Mon,  7 Nov 2022 11:21:34 +0100
-In-Reply-To: <166759206900.3281208.11975514088019160962.stgit@bmoger-ubuntu>
-Mime-Version: 1.0
-References: <166759206900.3281208.11975514088019160962.stgit@bmoger-ubuntu>
-X-Mailer: git-send-email 2.38.1.431.g37b22c650d-goog
-Message-ID: <20221107102134.255757-1-peternewman@google.com>
-Subject: Re: [PATCH v8 10/13] x86/resctrl: Add sysfs interface to write mbm_total_bytes_config
-From:   Peter Newman <peternewman@google.com>
-To:     babu.moger@amd.com
-Cc:     akpm@linux-foundation.org, bagasdotme@gmail.com, bp@alien8.de,
-        chang.seok.bae@intel.com, corbet@lwn.net,
-        damien.lemoal@opensource.wdc.com, daniel.sneddon@linux.intel.com,
-        dave.hansen@linux.intel.com, eranian@google.com,
-        fenghua.yu@intel.com, hpa@zytor.com, james.morse@arm.com,
-        jmattson@google.com, jpoimboe@kernel.org,
-        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
-        mingo@redhat.com, paulmck@kernel.org,
-        pawan.kumar.gupta@linux.intel.com, pbonzini@redhat.com,
-        peterz@infradead.org, quic_neeraju@quicinc.com,
-        rdunlap@infradead.org, reinette.chatre@intel.com,
-        sandipan.das@amd.com, songmuchun@bytedance.com, tglx@linutronix.de,
-        tony.luck@intel.com, x86@kernel.org
+        h=content-transfer-encoding:to:subject:message-id:date:from:reply-to
+         :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=AOmtRIzmF5dcnWrT0j3skK83MYTC+QvduwZ6ndeN2Ks=;
+        b=7w4cFhQv9rU48funDbHH19fCEZClDhi7h6HdDDqZy7pF4O7jfxXV/R8GFdDnBIUppp
+         CJSUPH8dOPlHa304tEeEzbQVSg7c7wCdnUK/vpXRP4/zGl/D6CJbpYxRHt3bE+I5Mg8T
+         3G3Ni474u85SkUNmDq7jCpZ/q8qWhsgBw0Rz0+Vl4A1Rpv5PyMkygD5h+gvxLjK+sq/X
+         ukr/q0qOLOT6ztqOlSrGNEkGQyRB1gXkM969qpBLt4daRjOMA696wXhPMj8dYRGkxqb1
+         CbtgGkqNCp9p0McvtQHVt5qBTjU2gq12MFz+pe0S7HuN4a95NaAkgcFB9ewd0myvz1R0
+         BVAQ==
+X-Gm-Message-State: ACrzQf1f9V21Gk68TrqmEJNeFUd+bQwJu8uezAYyrwJANdOrtisJFcdw
+        kUF/zMr30IO9DQcXOwIPYBjUSYa/4RCnaBz5OtmxhNVIst4=
+X-Google-Smtp-Source: AMsMyM7DPjaK7bSeUBIcMTkNZUaqK+NSwCEUfp88ZZDLY5TXShnQ2+B86xH3ryBKqTyGQWW3ozA/96x60VupsK8qo34=
+X-Received: by 2002:a17:902:8a90:b0:186:b145:f5ec with SMTP id
+ p16-20020a1709028a9000b00186b145f5ecmr50774476plo.103.1667816632274; Mon, 07
+ Nov 2022 02:23:52 -0800 (PST)
+MIME-Version: 1.0
+Received: by 2002:a05:6a06:925:b0:587:19e0:c567 with HTTP; Mon, 7 Nov 2022
+ 02:23:51 -0800 (PST)
+Reply-To: contact@ammico.it
+From:   =?UTF-8?Q?Mrs=2E_Monika_Everenov=C3=A1?= <977638ib@gmail.com>
+Date:   Mon, 7 Nov 2022 11:23:51 +0100
+Message-ID: <CAHAXD+bPNCns8Ez=7iXmPLADMtJgZj3-mFTk3NMhWC-Ca1b9rw@mail.gmail.com>
+Subject: Re:
+To:     undisclosed-recipients:;
 Content-Type: text/plain; charset="UTF-8"
-X-Spam-Status: No, score=-9.6 required=5.0 tests=BAYES_00,DKIMWL_WL_MED,
-        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_NONE,
-        SPF_HELO_NONE,SPF_PASS,USER_IN_DEF_DKIM_WL autolearn=ham
+Content-Transfer-Encoding: quoted-printable
+X-Spam-Status: Yes, score=5.8 required=5.0 tests=ADVANCE_FEE_2_NEW_MONEY,
+        BAYES_20,DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,
+        FREEMAIL_FROM,FROM_STARTS_WITH_NUMS,LOTS_OF_MONEY,RCVD_IN_DNSWL_NONE,
+        SPF_HELO_NONE,SPF_PASS,T_HK_NAME_FM_MR_MRS,UNDISC_MONEY autolearn=no
         autolearn_force=no version=3.4.6
+X-Spam-Report: * -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at
+        *      https://www.dnswl.org/, no trust
+        *      [2607:f8b0:4864:20:0:0:0:f41 listed in]
+        [list.dnswl.org]
+        * -0.0 BAYES_20 BODY: Bayes spam probability is 5 to 20%
+        *      [score: 0.1486]
+        *  0.7 FROM_STARTS_WITH_NUMS From: starts with several numbers
+        *  0.0 FREEMAIL_FROM Sender email is commonly abused enduser mail
+        *      provider
+        *      [977638ib[at]gmail.com]
+        *  0.0 SPF_HELO_NONE SPF: HELO does not publish an SPF Record
+        * -0.0 SPF_PASS SPF: sender matches SPF record
+        * -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+        * -0.1 DKIM_VALID_EF Message has a valid DKIM or DK signature from
+        *      envelope-from domain
+        *  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
+        *       valid
+        * -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
+        *      author's domain
+        *  0.0 T_HK_NAME_FM_MR_MRS No description available.
+        *  0.0 LOTS_OF_MONEY Huge... sums of money
+        *  3.3 UNDISC_MONEY Undisclosed recipients + money/fraud signs
+        *  2.0 ADVANCE_FEE_2_NEW_MONEY Advance Fee fraud and lots of money
+X-Spam-Level: *****
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Hi Babu,
-
-On Fri, Nov 04, 2022 at 03:01:09PM -0500, Babu Moger wrote:
-> +	/*
-> +	 * When an Event Configuration is changed, the bandwidth counters
-> +	 * for all RMIDs and Events will be cleared by the hardware. The
-> +	 * hardware also sets MSR_IA32_QM_CTR.Unavailable (bit 62) for
-> +	 * every RMID on the next read to any event for every RMID.
-> +	 * Subsequent reads will have MSR_IA32_QM_CTR.Unavailable (bit 62)
-> +	 * cleared while it is tracked by the hardware. Clear the
-> +	 * mbm_local and mbm_total counts for all the RMIDs.
-> +	 */
-> +	memset(d->mbm_local, 0, sizeof(struct mbm_state) * r->num_rmid);
-> +	memset(d->mbm_total, 0, sizeof(struct mbm_state) * r->num_rmid);
-
-Looking around, I can't find a reader for mbm_total anymore. It looks
-like the last place it was used went away in James's recent change:
-
-https://lore.kernel.org/all/20220902154829.30399-19-james.morse@arm.com
-
-Are we supposed to be clearing arch_mbm_total now?
-
-Thanks!
--Peter
+Hei ja miten voit?
+Nimeni on rouva Evereen, l=C3=A4het=C3=A4n t=C3=A4m=C3=A4n viestin suurella=
+ toivolla
+v=C3=A4lit=C3=B6n vastaus, koska minun on teht=C3=A4v=C3=A4 uusi syd=C3=A4n=
+leikkaus
+t=C3=A4ll=C3=A4 hetkell=C3=A4 huonokuntoinen ja v=C3=A4h=C3=A4iset mahdolli=
+suudet selviyty=C3=A4.
+Mutta ennen kuin min=C3=A4
+Tee toinen vaarallinen operaatio, annan sen sinulle
+Minulla on 6 550 000 dollaria yhdysvaltalaisella pankkitilill=C3=A4
+sijoittamista, hallinnointia ja k=C3=A4ytt=C3=B6=C3=A4 varten
+voittoa hyv=C3=A4ntekev=C3=A4isyysprojektin toteuttamiseen. Tarkoitan saira=
+iden auttamista
+ja k=C3=B6yh=C3=A4t ovat viimeinen haluni maan p=C3=A4=C3=A4ll=C3=A4, sill=
+=C3=A4 minulla ei ole niit=C3=A4
+kenelt=C3=A4 perii rahaa.
+Vastaa minulle nopeasti
+terveisi=C3=A4
+Rouva Monika Evereen
+Florida, Amerikan Yhdysvallat
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D
+Hi and how are you?
+My name is Mrs. Evereen, I am sending this message with great hope for
+an immediate response, as I have to undergo heart reoperation in my
+current poor health with little chance of survival. But before I
+undertake the second dangerous operation, I will give you the
+$6,550,000 I have in my US bank account to invest well, manage and use
+the profits to run a charity project for me. I count helping the sick
+and the poor as my last wish on earth, because I have no one to
+inherit money from.
+Please give me a quick reply
+regards
+Mrs. Monika Evereen
+Florida, United States of America
