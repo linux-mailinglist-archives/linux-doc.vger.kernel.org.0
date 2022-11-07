@@ -2,128 +2,110 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id D50EC61F07B
-	for <lists+linux-doc@lfdr.de>; Mon,  7 Nov 2022 11:24:40 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 9D45261F2C9
+	for <lists+linux-doc@lfdr.de>; Mon,  7 Nov 2022 13:20:15 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S232025AbiKGKYd (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 7 Nov 2022 05:24:33 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:35660 "EHLO
+        id S232070AbiKGMUO (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 7 Nov 2022 07:20:14 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:47816 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S231961AbiKGKYS (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Mon, 7 Nov 2022 05:24:18 -0500
-Received: from mail-qv1-xf41.google.com (mail-qv1-xf41.google.com [IPv6:2607:f8b0:4864:20::f41])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 8951F18E32
-        for <linux-doc@vger.kernel.org>; Mon,  7 Nov 2022 02:24:03 -0800 (PST)
-Received: by mail-qv1-xf41.google.com with SMTP id e15so7767501qvo.4
-        for <linux-doc@vger.kernel.org>; Mon, 07 Nov 2022 02:24:03 -0800 (PST)
+        with ESMTP id S232017AbiKGMUM (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Mon, 7 Nov 2022 07:20:12 -0500
+Received: from mail-wm1-x335.google.com (mail-wm1-x335.google.com [IPv6:2a00:1450:4864:20::335])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 5971BD62;
+        Mon,  7 Nov 2022 04:20:11 -0800 (PST)
+Received: by mail-wm1-x335.google.com with SMTP id m7-20020a05600c090700b003cf8a105d9eso7017667wmp.5;
+        Mon, 07 Nov 2022 04:20:11 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
-        h=content-transfer-encoding:to:subject:message-id:date:from:reply-to
-         :mime-version:from:to:cc:subject:date:message-id:reply-to;
-        bh=AOmtRIzmF5dcnWrT0j3skK83MYTC+QvduwZ6ndeN2Ks=;
-        b=Zv++OJ/ncK2pWuUWAQT+z52+cIoHK/WVJU4bVze52hunD5wDL4D5XJdl5mW2VbRjhi
-         PKA0tQ/z42/ONfUnPJoBfdYRGEG2gwiyoDRW7hecaxcg+/0t0u3g44ISFlpe+B9l1fvu
-         TmkNgtKOyak6WThRMAIvY+g5IgPZxvnz63e21BpajeaX9653GP4qpHUHyfV7BL4cSNb4
-         pCU1fNGxZBn7NlKzWZCMHMxM9LSs8sKofgpQ0FSoeb/qTDQ+CPP+tvlBe/vGQ8T8hOyn
-         vdUZr48/zTuwVxtBDF6IrOR7pT19nf73qD9i1Q8QUWEzM8dVJjwmGS+xVbVCXqFaE09J
-         SKzA==
+        h=mime-version:user-agent:references:message-id:date:in-reply-to
+         :subject:cc:to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=xpO1ES1DT9VB2Pc2bbJXPCltOGfFXJglqqrpyjrXtK8=;
+        b=Y1LpakEB5SGdSNuJfeOjuV1WjbL536FkfPZguA1c5W2WHxopXHj89W9ZTxsgx7F8tv
+         po7pgEfTXTYT+0AJ7WAxGJwkktW2oEbHYrxct1Dlda+MVlv6L/2suzgYQHDmdnYAjY1u
+         eV89nkxa+g9NLG65nXuAfwL7dJkONH483k79jXz+m9xxz8w1Dtxn1F/hbBLD1N4yphPL
+         vqTohbjFrzcmHU9yY+gCA03ZWQe2udLqtHddPYInHw4d756CBM/zbMBlqFhLZgi/PwTs
+         Tf4g4QGDKp8X+81do68DTyC5qhUXpP+ubDUxWnfEOm3Y3/pyPmxC85dlc14Zcf0O7zSY
+         YV7w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=content-transfer-encoding:to:subject:message-id:date:from:reply-to
-         :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=AOmtRIzmF5dcnWrT0j3skK83MYTC+QvduwZ6ndeN2Ks=;
-        b=7w4cFhQv9rU48funDbHH19fCEZClDhi7h6HdDDqZy7pF4O7jfxXV/R8GFdDnBIUppp
-         CJSUPH8dOPlHa304tEeEzbQVSg7c7wCdnUK/vpXRP4/zGl/D6CJbpYxRHt3bE+I5Mg8T
-         3G3Ni474u85SkUNmDq7jCpZ/q8qWhsgBw0Rz0+Vl4A1Rpv5PyMkygD5h+gvxLjK+sq/X
-         ukr/q0qOLOT6ztqOlSrGNEkGQyRB1gXkM969qpBLt4daRjOMA696wXhPMj8dYRGkxqb1
-         CbtgGkqNCp9p0McvtQHVt5qBTjU2gq12MFz+pe0S7HuN4a95NaAkgcFB9ewd0myvz1R0
-         BVAQ==
-X-Gm-Message-State: ACrzQf1f9V21Gk68TrqmEJNeFUd+bQwJu8uezAYyrwJANdOrtisJFcdw
-        kUF/zMr30IO9DQcXOwIPYBjUSYa/4RCnaBz5OtmxhNVIst4=
-X-Google-Smtp-Source: AMsMyM7DPjaK7bSeUBIcMTkNZUaqK+NSwCEUfp88ZZDLY5TXShnQ2+B86xH3ryBKqTyGQWW3ozA/96x60VupsK8qo34=
-X-Received: by 2002:a17:902:8a90:b0:186:b145:f5ec with SMTP id
- p16-20020a1709028a9000b00186b145f5ecmr50774476plo.103.1667816632274; Mon, 07
- Nov 2022 02:23:52 -0800 (PST)
+        h=mime-version:user-agent:references:message-id:date:in-reply-to
+         :subject:cc:to:from:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=xpO1ES1DT9VB2Pc2bbJXPCltOGfFXJglqqrpyjrXtK8=;
+        b=mYdC7DBztPkQxqy9HvezqGK9skguvpytsHJC4Kmg24NRmKYINkLfVjviiC8aeatEVp
+         DrjmV6+pY73eXyKe5WM3rVdkjKIXksfg4/6PpDHk6nclGW6v47p02xzdX4/4entsRgKk
+         HVs2k13QHHZUXTAcndwWZNuCWsrZOGEwXeGNq4xV4u5b6SYt58Hnl2LNbe3e0/Zyvjgj
+         Tg4i/Zv0K1RNZgc+MDUAxZnk58umAfU17J+Ij6cOFOEqCEWXTetngnsvEbjHJdebHTtT
+         Si03obpVdTCD2Thbf0q96sBVSBFC/qnk3HIqr6KLj6wWQ20lTluur2mllP9eBbJP/wzL
+         jfjA==
+X-Gm-Message-State: ACrzQf1HBaUMv7AyXpdicfFvm5NwFjtTBN9UBgJyWPpw69jDM2s9UisP
+        jKCYrbnlR7iSkwRkmOIHnW0=
+X-Google-Smtp-Source: AMsMyM4uI0V2M+QW8ibD8ONg8BiYxQeVPVRSbIejoYJ9gjoyye/xqfEBSqmLITjKvasG04aeIOUlmA==
+X-Received: by 2002:a1c:6a17:0:b0:3cf:9d32:db2e with SMTP id f23-20020a1c6a17000000b003cf9d32db2emr9181101wmc.62.1667823609700;
+        Mon, 07 Nov 2022 04:20:09 -0800 (PST)
+Received: from imac ([2a02:8010:60a0:0:5c58:5d45:1992:a386])
+        by smtp.gmail.com with ESMTPSA id c5-20020a05600c0a4500b003b4a68645e9sm12724471wmq.34.2022.11.07.04.20.08
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 07 Nov 2022 04:20:08 -0800 (PST)
+From:   Donald Hunter <donald.hunter@gmail.com>
+To:     Andrii Nakryiko <andrii.nakryiko@gmail.com>
+Cc:     bpf@vger.kernel.org, linux-doc@vger.kernel.org,
+        Alexei Starovoitov <ast@kernel.org>,
+        Daniel Borkmann <daniel@iogearbox.net>,
+        Andrii Nakryiko <andrii@kernel.org>,
+        Jonathan Corbet <corbet@lwn.net>
+Subject: Re: [PATCH bpf-next v1] docs/bpf: Document BPF map types QUEUE and
+ STACK
+In-Reply-To: <CAEf4BzYpNd_oM6n4eW6UqF5n60xkvTarhbcyCgJSCDFtg1rm4g@mail.gmail.com>
+        (Andrii Nakryiko's message of "Fri, 4 Nov 2022 16:00:59 -0700")
+Date:   Mon, 07 Nov 2022 09:17:29 +0000
+Message-ID: <m2v8nrrumu.fsf@gmail.com>
+References: <20221104172140.19762-1-donald.hunter@gmail.com>
+        <CAEf4BzYpNd_oM6n4eW6UqF5n60xkvTarhbcyCgJSCDFtg1rm4g@mail.gmail.com>
+User-Agent: Gnus/5.13 (Gnus v5.13) Emacs/28.2 (darwin)
 MIME-Version: 1.0
-Received: by 2002:a05:6a06:925:b0:587:19e0:c567 with HTTP; Mon, 7 Nov 2022
- 02:23:51 -0800 (PST)
-Reply-To: contact@ammico.it
-From:   =?UTF-8?Q?Mrs=2E_Monika_Everenov=C3=A1?= <977638ib@gmail.com>
-Date:   Mon, 7 Nov 2022 11:23:51 +0100
-Message-ID: <CAHAXD+bPNCns8Ez=7iXmPLADMtJgZj3-mFTk3NMhWC-Ca1b9rw@mail.gmail.com>
-Subject: Re:
-To:     undisclosed-recipients:;
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Spam-Status: Yes, score=5.8 required=5.0 tests=ADVANCE_FEE_2_NEW_MONEY,
-        BAYES_20,DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,
-        FREEMAIL_FROM,FROM_STARTS_WITH_NUMS,LOTS_OF_MONEY,RCVD_IN_DNSWL_NONE,
-        SPF_HELO_NONE,SPF_PASS,T_HK_NAME_FM_MR_MRS,UNDISC_MONEY autolearn=no
+Content-Type: text/plain
+X-Spam-Status: No, score=-0.5 required=5.0 tests=BAYES_00,DATE_IN_PAST_03_06,
+        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_FROM,
+        RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,SPF_PASS autolearn=no
         autolearn_force=no version=3.4.6
-X-Spam-Report: * -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at
-        *      https://www.dnswl.org/, no trust
-        *      [2607:f8b0:4864:20:0:0:0:f41 listed in]
-        [list.dnswl.org]
-        * -0.0 BAYES_20 BODY: Bayes spam probability is 5 to 20%
-        *      [score: 0.1486]
-        *  0.7 FROM_STARTS_WITH_NUMS From: starts with several numbers
-        *  0.0 FREEMAIL_FROM Sender email is commonly abused enduser mail
-        *      provider
-        *      [977638ib[at]gmail.com]
-        *  0.0 SPF_HELO_NONE SPF: HELO does not publish an SPF Record
-        * -0.0 SPF_PASS SPF: sender matches SPF record
-        * -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
-        * -0.1 DKIM_VALID_EF Message has a valid DKIM or DK signature from
-        *      envelope-from domain
-        *  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
-        *       valid
-        * -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
-        *      author's domain
-        *  0.0 T_HK_NAME_FM_MR_MRS No description available.
-        *  0.0 LOTS_OF_MONEY Huge... sums of money
-        *  3.3 UNDISC_MONEY Undisclosed recipients + money/fraud signs
-        *  2.0 ADVANCE_FEE_2_NEW_MONEY Advance Fee fraud and lots of money
-X-Spam-Level: *****
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Hei ja miten voit?
-Nimeni on rouva Evereen, l=C3=A4het=C3=A4n t=C3=A4m=C3=A4n viestin suurella=
- toivolla
-v=C3=A4lit=C3=B6n vastaus, koska minun on teht=C3=A4v=C3=A4 uusi syd=C3=A4n=
-leikkaus
-t=C3=A4ll=C3=A4 hetkell=C3=A4 huonokuntoinen ja v=C3=A4h=C3=A4iset mahdolli=
-suudet selviyty=C3=A4.
-Mutta ennen kuin min=C3=A4
-Tee toinen vaarallinen operaatio, annan sen sinulle
-Minulla on 6 550 000 dollaria yhdysvaltalaisella pankkitilill=C3=A4
-sijoittamista, hallinnointia ja k=C3=A4ytt=C3=B6=C3=A4 varten
-voittoa hyv=C3=A4ntekev=C3=A4isyysprojektin toteuttamiseen. Tarkoitan saira=
-iden auttamista
-ja k=C3=B6yh=C3=A4t ovat viimeinen haluni maan p=C3=A4=C3=A4ll=C3=A4, sill=
-=C3=A4 minulla ei ole niit=C3=A4
-kenelt=C3=A4 perii rahaa.
-Vastaa minulle nopeasti
-terveisi=C3=A4
-Rouva Monika Evereen
-Florida, Amerikan Yhdysvallat
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D
-Hi and how are you?
-My name is Mrs. Evereen, I am sending this message with great hope for
-an immediate response, as I have to undergo heart reoperation in my
-current poor health with little chance of survival. But before I
-undertake the second dangerous operation, I will give you the
-$6,550,000 I have in my US bank account to invest well, manage and use
-the profits to run a charity project for me. I count helping the sick
-and the poor as my last wish on earth, because I have no one to
-inherit money from.
-Please give me a quick reply
-regards
-Mrs. Monika Evereen
-Florida, United States of America
+Andrii Nakryiko <andrii.nakryiko@gmail.com> writes:
+
+> On Fri, Nov 4, 2022 at 10:21 AM Donald Hunter <donald.hunter@gmail.com> wrote:
+>>
+>> +
+>> +Userspace
+>> +---------
+>> +
+>> +This snippet shows how to use libbpf to create a queue from userspace:
+>
+> I'd prefer "how to use libbpf's low-level API to create a queue".
+> Because ideally people use the declarative way shown above, which is
+> also "use libbpf to create", but is simpler and preserves all the BTF
+> type information (if map supports it).
+
+I'll incorporate this and also see if I can reword to highlight the
+preferred declarative approach.
+
+>> +
+>> +.. code-block:: c
+>> +
+>> +    int create_queue()
+>> +    {
+>> +            return bpf_map_create(BPF_MAP_TYPE_QUEUE,
+>> +                                  "sample_queue", /* name */
+>> +                                  0,              /* key size, must be zero */
+>> +                                  sizeof(__u32),  /* value size */
+>> +                                  10,             /* max entries */
+>> +                                  0);             /* create options */
+>
+> NULL, it's a pointer
+
+Good catch, thanks!
