@@ -2,66 +2,74 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 4A6A661F2CB
-	for <lists+linux-doc@lfdr.de>; Mon,  7 Nov 2022 13:20:16 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 6D13B61F22D
+	for <lists+linux-doc@lfdr.de>; Mon,  7 Nov 2022 12:48:40 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S232090AbiKGMUO (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 7 Nov 2022 07:20:14 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:47842 "EHLO
+        id S231913AbiKGLsh (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 7 Nov 2022 06:48:37 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:56346 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S232078AbiKGMUO (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Mon, 7 Nov 2022 07:20:14 -0500
-Received: from mail-wm1-x329.google.com (mail-wm1-x329.google.com [IPv6:2a00:1450:4864:20::329])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 4D1AE62DF;
-        Mon,  7 Nov 2022 04:20:13 -0800 (PST)
-Received: by mail-wm1-x329.google.com with SMTP id v7so6774466wmn.0;
-        Mon, 07 Nov 2022 04:20:13 -0800 (PST)
+        with ESMTP id S231714AbiKGLsa (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Mon, 7 Nov 2022 06:48:30 -0500
+Received: from mail-pj1-x102d.google.com (mail-pj1-x102d.google.com [IPv6:2607:f8b0:4864:20::102d])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 2E231F07;
+        Mon,  7 Nov 2022 03:48:29 -0800 (PST)
+Received: by mail-pj1-x102d.google.com with SMTP id l6so10351580pjj.0;
+        Mon, 07 Nov 2022 03:48:29 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
-        h=mime-version:user-agent:references:message-id:date:in-reply-to
-         :subject:cc:to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=BoLI3U1WVnPhAczgDn3YmTPplH4mN49yQEHTg2jEwe0=;
-        b=p5scd/zuJFtUC2MaytxT5KcwnRqUQVJAk1gLUrkS+N8dp3m5IKxk6bFuVykUDIPfnz
-         fU2S4DeBvfOgEjGoWcQ1PirSBnsdzssrQLx/LDn7pM2Xfo0tGVyOTk4YLNCumL4iBkQa
-         JovIiyd1CLQ5cQEm2lrE5n9vRn3UELWW9vIzb90A3PAJqXan/niaG8zayQmkd0KkA9l/
-         KpTO7Yp66qHRPK8MAvp5YJLNkKukhZiqaA68FAyAPbPUm80NbiMDgZ0DLx+2t3Numk5U
-         G3fb4aYSi7mA9Q43zoLVjOUTUCCiu7GrNz1xzzYwWTi8jx6G17oyAPCkFkGO1gxHh5il
-         dqQA==
+        h=content-transfer-encoding:in-reply-to:from:content-language:subject
+         :references:cc:to:user-agent:mime-version:date:message-id:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=fvr80PkwpQ6hjNpvYYW8IQLkFqmVccni+PUYRawFuvA=;
+        b=fiukTMYTyjxWsa8x4fgdJLv5PDFoiEE1XxSRatZoFKxoH7GH1RMZsCkCy2fEwy44mA
+         szrXgMAM/yMVeDAVodGIhhtL4XQU6+L0jSha7dJD0UMEfyZcnJYqAhw+5y/QlQutHlvo
+         bv96oclSReRuS4Yak/ILdzhnjThlv2fOXeNzMrIkoPTH39xEaJHLr0BeJ0nKFi18tRW3
+         F+ZszIAILyQcyG3AjjcBi4wpnUJGpRATlBNcBVdvpa+DYnxuQgAaJzBxkMAwnflYrDXu
+         TR4YA2N47q3unWbbUaoqxbqL++NRvVwBxxICbhxtXWMJpcYDpSAAIr35de7NwR26VxOV
+         Ko/A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=mime-version:user-agent:references:message-id:date:in-reply-to
-         :subject:cc:to:from:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=BoLI3U1WVnPhAczgDn3YmTPplH4mN49yQEHTg2jEwe0=;
-        b=actVxP1//dMDew8nNjyEkiyFdECEEYflkFrVkBMAMajvscoLk7UL2BSYv6y7r8myDY
-         0B6gx7hwCV4GoeiRRowwOfTsF0RzMADYKEQP0Mkw+x0OFVYFJk+LWFcHDl5rckHR6jKr
-         KKtYDOom9soWDLSUKsOJbji2f6AL6VfCf7wQdeMX5XO0tIREqyfcCqkzYvPJhRpM0Ku5
-         QJRg211O2ZgjtLV/cFGIUQlrHJRwtDz733n4mUK5t2joIe2vpWGlhXSGJuad93jvC9q7
-         Nncur/joqDeYWGkjZr1cskzvlZQjGzmy8ATv7VZp3xuJAqh5DZH/9wSY/7wBuXvkrc7V
-         C09Q==
-X-Gm-Message-State: ACrzQf1uQt7KKFEwZhW6751+pyHBJxPKzy4F+OFcxpm+NYIPKlZ0nTuI
-        AEb+OaIlpW3a85k1ncVrvbKrN/lEPEA9UA==
-X-Google-Smtp-Source: AMsMyM4eh/W2xbyCsfIom4ZVUN3r5j7HjgFgmv17tiKE5MHQcfGC0ItE97zOF8hj3oNvM+aJYzq5nA==
-X-Received: by 2002:a05:600c:1508:b0:3cf:6cc1:c3b4 with SMTP id b8-20020a05600c150800b003cf6cc1c3b4mr30216373wmg.156.1667823611258;
-        Mon, 07 Nov 2022 04:20:11 -0800 (PST)
-Received: from imac ([2a02:8010:60a0:0:5c58:5d45:1992:a386])
-        by smtp.gmail.com with ESMTPSA id v13-20020adfe28d000000b0022e3538d305sm8494058wri.117.2022.11.07.04.20.10
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 07 Nov 2022 04:20:10 -0800 (PST)
-From:   Donald Hunter <donald.hunter@gmail.com>
-To:     Andrii Nakryiko <andrii.nakryiko@gmail.com>
-Cc:     bpf@vger.kernel.org, linux-doc@vger.kernel.org
-Subject: Re: [PATCH bpf-next v1] bpf, docs: document
- BPF_MAP_TYPE_ARRAY_OF_MAPS and *_HASH_OF_MAPS
-In-Reply-To: <CAEf4BzYiSyps09esMH407WnzPvND+c56EQHeooLUF9RKcs-Y3Q@mail.gmail.com>
-        (Andrii Nakryiko's message of "Fri, 4 Nov 2022 14:26:33 -0700")
-Date:   Mon, 07 Nov 2022 11:41:49 +0000
-Message-ID: <m2r0yfrnya.fsf@gmail.com>
-References: <20221010112154.39494-1-donald.hunter@gmail.com>
-        <CAEf4BzYiSyps09esMH407WnzPvND+c56EQHeooLUF9RKcs-Y3Q@mail.gmail.com>
-User-Agent: Gnus/5.13 (Gnus v5.13) Emacs/28.2 (darwin)
+        h=content-transfer-encoding:in-reply-to:from:content-language:subject
+         :references:cc:to:user-agent:mime-version:date:message-id
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=fvr80PkwpQ6hjNpvYYW8IQLkFqmVccni+PUYRawFuvA=;
+        b=eSNfePrcie8bQJ/b5bZKlnmsOr7cEbQFPuO2tyBx/V3n4yLwBxAl20hC8f/wSUYPbs
+         YDZ64FGeM3Ux1KMj47KadXUXma431CYlCLYXB7Av43xM2b4fU/lMUE+rq0Td84jeBQKZ
+         9HjOjAIyAg9HsWWA0EAHrHT0BlFXx2VZYbO4/rSW8NPKhGQ6F2hRCV2N2I9QfamVBbAd
+         sMb5vH8HgSJ/PrbfmO9vvmeG6ZRTo6PuwumtmpI1Jhx1ZPwSDGz+wK+wHQgw1VX2KOyf
+         xLGVjzg7nx5k1EPERb9Eb2dAYb4xWR8+n2brQ6nDzg+EY3dPNZ2G5P1HzYsEAnb0hbc+
+         kfKQ==
+X-Gm-Message-State: ACrzQf2NB880NH0rLfAcOMcTmyDob3l57F7ZlE8e1XdQWMXxoLBNVJzX
+        gKvfRUWt237Rk4hs+PmRC3Q=
+X-Google-Smtp-Source: AMsMyM5V7PN2Fq+vgPQifeaOqVZZiQmGUcwKXiHgqltKBZooPx0NBJmWSu6MlCOI7pyEwVw5IkPYmQ==
+X-Received: by 2002:a17:902:ba8d:b0:187:11c7:e878 with SMTP id k13-20020a170902ba8d00b0018711c7e878mr44671991pls.67.1667821708620;
+        Mon, 07 Nov 2022 03:48:28 -0800 (PST)
+Received: from [192.168.11.9] (KD106167171201.ppp-bb.dion.ne.jp. [106.167.171.201])
+        by smtp.gmail.com with ESMTPSA id l16-20020a170903121000b00176b3c9693esm4789489plh.299.2022.11.07.03.48.24
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Mon, 07 Nov 2022 03:48:28 -0800 (PST)
+Message-ID: <af3ec8bf-310e-69ea-9d32-f7aec740b306@gmail.com>
+Date:   Mon, 7 Nov 2022 20:48:23 +0900
 MIME-Version: 1.0
-Content-Type: text/plain
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.2.2
+To:     Bagas Sanjaya <bagasdotme@gmail.com>
+Cc:     corbet@lwn.net, frederic@kernel.org, jiangshanlai@gmail.com,
+        joel@joelfernandes.org, josh@joshtriplett.org,
+        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
+        linux-next@vger.kernel.org, mathieu.desnoyers@efficios.com,
+        paulmck@kernel.org, quic_neeraju@quicinc.com, rcu@vger.kernel.org,
+        rostedt@goodmis.org, sfr@canb.auug.org.au,
+        Akira Yokosawa <akiyks@gmail.com>
+References: <Y2jWAR1QESe3OrhH@debian.me>
+Subject: [PATCH] Documentation: RCU: use code blocks with autogenerated line
+ (was: Re: linux-next: build warning after merge of the rcu tree)
+Content-Language: en-US
+From:   Akira Yokosawa <akiyks@gmail.com>
+In-Reply-To: <Y2jWAR1QESe3OrhH@debian.me>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 X-Spam-Status: No, score=-2.1 required=5.0 tests=BAYES_00,DKIM_SIGNED,
         DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_FROM,
         RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,SPF_PASS autolearn=ham
@@ -72,86 +80,42 @@ Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Andrii Nakryiko <andrii.nakryiko@gmail.com> writes:
+Hi Bagas,
 
-> On Mon, Oct 10, 2022 at 4:32 AM Donald Hunter <donald.hunter@gmail.com> wrote:
->>
->> Add documentation for the ARRAY_OF_MAPS and HASH_OF_MAPS map types,
->> including usage and examples.
->>
->> Signed-off-by: Donald Hunter <donald.hunter@gmail.com>
->> ---
->
-> subject suggestion (as it's pretty long):
->
-> bpf, docs: document BPF_MAP_TYPE_{ARRAY,HASH}_OF_MAPS
+On Mon, 7 Nov 2022 16:55:13 +0700, Bagas Sanjaya wrote:
+> On Sun, Nov 06, 2022 at 09:02:12PM -0800, Paul E. McKenney wrote:
+>> On Mon, Nov 07, 2022 at 02:26:41PM +1100, Stephen Rothwell wrote:
+>> > Hi all,
+>> > 
+>> > After merging the rcu tree, today's linux-next build (htmldocs)
+>> > produced this warning:
+>> > 
+>> > Documentation/RCU/rcubarrier.rst:205: WARNING: Literal block ends without a blank line; unexpected unindent.
+>> > 
+>> > Introduced by commit
+>> > 
+>> >   21c2e3909721 ("doc: Update rcubarrier.rst")
+>> 
+>> Huh.  I guess that numbered code samples are not supposed to have more
+>> than nine lines?  Ah well, easy to fix by going back to left-justified
+>> numbers.  I was wondering about that!
+>> 
+> 
+> I think the proper fix is just let Sphinx generates line number:
 
-Thanks for the tip. Hopefully already resolved well enough in v2+.
+That might be true if all you care about were the generated documents,
+but we need to pay attention to readers of .rst files as plain-text.
 
->> +Examples
->> +========
->> +
->> +Kernel BPF
->> +----------
->> +
->> +This snippet shows how to create an array of devmaps in a BPF program. Note that
->> +the outer array can only be modified from user space using the syscall API.
->> +
->> +.. code-block:: c
->> +
->> +    struct redirect_map {
->> +            __uint(type, BPF_MAP_TYPE_DEVMAP);
->> +            __uint(max_entries, 32);
->> +            __type(key, enum skb_drop_reason);
->> +            __type(value, __u64);
->> +    } redirect_map SEC(".maps");
->> +
->> +    struct {
->> +            __uint(type, BPF_MAP_TYPE_ARRAY_OF_MAPS);
->> +            __uint(max_entries, 2);
->> +            __uint(key_size, sizeof(int));
->> +            __uint(value_size, sizeof(int));
->> +            __array(values, struct redirect_map);
->> +    } outer_map SEC(".maps");
->> +
->
-> Let's also demonstrate libbpf's declarative way to initialize entries
-> in outer map? See progs/test_btf_map_in_map.c under selftests/bpf for
-> various examples.
+There are a bunch of references to line numbers in RCU documents.
+If explicit line numbers are removed from snippets, such readers need
+to count the lines by themselves, which doesn't sound reasonable to me.
 
-Will do, thanks!
+If you can put labels to referenced lines within code snippets, auto
+generation of line numbers might work, but as far as I know, Sphinx
+doesn't provide such a nice feature.
 
->> +This snippet shows how to lookup an outer map to retrieve an inner map.
->> +
->> +.. code-block:: c
->> +
->> +    SEC("xdp")
->> +    int redirect_by_priority(struct xdp_md *ctx) {
->> +            struct bpf_map *devmap;
->> +            int action = XDP_PASS;
->> +            int index = 0;
->> +
->> +            devmap = bpf_map_lookup_elem(&outer_arr, &index);
->> +            if (!devmap)
->> +                    return XDP_PASS;
->> +
->> +            /* use inner devmap here */
->> +
->> +            return action;
->> +    }
->> +
->> +User Space
->> +----------
->> +
->> +This snippet shows how to create an array based outer map:
->> +
->> +.. code-block:: c
->> +
->> +    int create_outer_array(int inner_fd) {
->> +            int fd;
->> +            LIBBPF_OPTS(bpf_map_create_opts, opts);
->> +            opts.inner_map_fd = inner_fd;
->
-> LIBBPF_OPTS(bpf_map_create_opts, opts, .inner_map_fd = inner_fd);
+Of course, you can prove me wrong.
 
-+1, thanks.
+          Thanks, Akira 
+
+  
