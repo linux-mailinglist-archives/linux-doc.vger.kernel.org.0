@@ -2,118 +2,105 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id ED83B620E0C
-	for <lists+linux-doc@lfdr.de>; Tue,  8 Nov 2022 12:02:53 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id BB9A9620E73
+	for <lists+linux-doc@lfdr.de>; Tue,  8 Nov 2022 12:18:31 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S233747AbiKHLCw (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 8 Nov 2022 06:02:52 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:48086 "EHLO
+        id S233910AbiKHLSa (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 8 Nov 2022 06:18:30 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:58560 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S233479AbiKHLCu (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 8 Nov 2022 06:02:50 -0500
-Received: from wout5-smtp.messagingengine.com (wout5-smtp.messagingengine.com [64.147.123.21])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 34980450B3;
-        Tue,  8 Nov 2022 03:02:49 -0800 (PST)
-Received: from compute4.internal (compute4.nyi.internal [10.202.2.44])
-        by mailout.west.internal (Postfix) with ESMTP id E87E732003D3;
-        Tue,  8 Nov 2022 06:02:44 -0500 (EST)
-Received: from mailfrontend2 ([10.202.2.163])
-  by compute4.internal (MEProxy); Tue, 08 Nov 2022 06:02:46 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
-        messagingengine.com; h=cc:cc:content-type:date:date:feedback-id
-        :feedback-id:from:from:in-reply-to:in-reply-to:message-id
-        :mime-version:references:reply-to:sender:subject:subject:to:to
-        :x-me-proxy:x-me-proxy:x-me-sender:x-me-sender:x-sasl-enc; s=
-        fm1; t=1667905364; x=1667991764; bh=nP2DN9huvRZCwj+EeirHvDaYlV3K
-        zWuv19wsVeFnYlg=; b=nPTarOnIxrW/zamDmNXsZG4ai+ApYSZmmzu+BhtbT5rw
-        mtbLXtnZ91Wsx6cYX7aQe4jZNZCZsGJC2Mla0GEjFkbCGOJ0KBcJtDMhDKwLl2qA
-        xaOoirLqqKZ47HBzkKP2M5j76dDIFWFnVqIqsP9aY5MXXANWgjOnEYn4r2NdpYtA
-        eIrKIfH3WTwPLnB+RkwhAu7gPi2pBocGLuYYuCxZ37Yy0ZkfWkf3aIyWlg2KfItI
-        fMMe5Ex/coTrt3s6VoIfzZS7AryQmV2ko/ZWtQmxKcO8hjv2Nz70dTdz6ifpHEZp
-        1rdY7PjtxERy0Q0Niv606EEZIHGhJMdtMiFBZqSRHw==
-X-ME-Sender: <xms:UzdqY1hDCSISO_-tueqlv65Y-WT_by5RX-iY4Ks0vXO6BVm1TInShQ>
-    <xme:UzdqY6DYiH1jBu5p3i9vMHEdK2-4ppT4mhYlRGf9-8zqlnPHTBDTgXN0NbEFsvbtS
-    zLCMQh0zQpRTRU>
-X-ME-Received: <xmr:UzdqY1FUxNDg1EKaGIKEFlwu8n9f0aHEgH_ktHJyHrIG3Nfq7Pts_ecTuHbXqhjLAVUYSbUIN1n-K5SXRB-pYNAEYQQ>
-X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvgedrfedtgddvfecutefuodetggdotefrodftvf
-    curfhrohhfihhlvgemucfhrghsthforghilhdpqfgfvfdpuffrtefokffrpgfnqfghnecu
-    uegrihhlohhuthemuceftddtnecusecvtfgvtghiphhivghnthhsucdlqddutddtmdenuc
-    fjughrpeffhffvvefukfhfgggtuggjsehttdertddttddvnecuhfhrohhmpefkughoucfu
-    tghhihhmmhgvlhcuoehiughoshgthhesihguohhstghhrdhorhhgqeenucggtffrrghtth
-    gvrhhnpeehhfdtjedviefffeduuddvffegteeiieeguefgudffvdfftdefheeijedthfej
-    keenucffohhmrghinhepkhgvrhhnvghlrdhorhhgnecuvehluhhsthgvrhfuihiivgeptd
-    enucfrrghrrghmpehmrghilhhfrhhomhepihguohhstghhsehiughoshgthhdrohhrgh
-X-ME-Proxy: <xmx:VDdqY6QY6IRVvS7SoRrZrc9OVQxuCMX-yqC-_VGfglqi2aj1Iptghg>
-    <xmx:VDdqYyyaaUhuHCuo7VOmKuyeUPaPEquhT5Xgch_f2n0DWNtfriLfFQ>
-    <xmx:VDdqYw7J8H6KkbKUGE7Dk_PaNtjh_YA5u9eNYUPoWMDKw7x29dzckg>
-    <xmx:VDdqY3Lw9EuSetC5HmwinjJF4KgSYqFnlwzwvtxQZtZHdjcE_Ao8bg>
-Feedback-ID: i494840e7:Fastmail
-Received: by mail.messagingengine.com (Postfix) with ESMTPA; Tue,
- 8 Nov 2022 06:02:43 -0500 (EST)
-Date:   Tue, 8 Nov 2022 13:02:38 +0200
-From:   Ido Schimmel <idosch@idosch.org>
-To:     Andy Ren <andy.ren@getcruise.com>
-Cc:     netdev@vger.kernel.org, richardbgobert@gmail.com,
-        davem@davemloft.net, wsa+renesas@sang-engineering.com,
-        edumazet@google.com, petrm@nvidia.com, kuba@kernel.org,
-        pabeni@redhat.com, corbet@lwn.net, andrew@lunn.ch,
-        dsahern@gmail.com, sthemmin@microsoft.com,
-        sridhar.samudrala@intel.com, linux-doc@vger.kernel.org,
-        linux-kernel@vger.kernel.org, roman.gushchin@linux.dev
-Subject: Re: [PATCH net-next v3] net/core: Allow live renaming when an
- interface is up
-Message-ID: <Y2o3ThYXNADKiwRT@shredder>
-References: <20221107174242.1947286-1-andy.ren@getcruise.com>
+        with ESMTP id S233850AbiKHLS2 (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 8 Nov 2022 06:18:28 -0500
+Received: from mail-io1-xd2c.google.com (mail-io1-xd2c.google.com [IPv6:2607:f8b0:4864:20::d2c])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id BD422F40
+        for <linux-doc@vger.kernel.org>; Tue,  8 Nov 2022 03:18:26 -0800 (PST)
+Received: by mail-io1-xd2c.google.com with SMTP id 63so11165201iov.8
+        for <linux-doc@vger.kernel.org>; Tue, 08 Nov 2022 03:18:26 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112;
+        h=to:subject:message-id:date:from:reply-to:mime-version:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=o1oIX0Lu3jFWZXVxNPQntM2Fj3qbMNn8z1UsbYrWkRo=;
+        b=Gd3mKmpUViv1Z1mP0FxgiIq2Z0flmoayvmnItgmPMOwfnfO7dbMVgPMHHLQqWyzA4u
+         lfEmvGbla79hSWqu/qei9kGExaoW1Rb5bNTfQZUazQPV04X/QE5ftjAj8f74HamD5xlY
+         oQfblhcLvaQMZzAR59JBC3JsOfyVYbdyjlnpMsMjjXhSXqq7arSb0HSQlx8OeL9R2OOk
+         IhdDHwbWE5DfGv4PT24RHlFa/31lxQnjzTVZVUQK1LbMJwqPPsF9Ao+zQgi8WRexrNJ7
+         O8IeUOYeRqHHasRyT3HQt4zyYQRlZ+h94b/TbrJ0XYx/5dxn/CXV556ynlIOFg8mOgph
+         tefw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=to:subject:message-id:date:from:reply-to:mime-version
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=o1oIX0Lu3jFWZXVxNPQntM2Fj3qbMNn8z1UsbYrWkRo=;
+        b=REYRuGEa83XWaTlUJoebT6w0UP7W5IXqYqtTppskh4LYvD5vkADhtQR9M4iDOB2ie7
+         xJrAgfA+mrHGT+77hYKryEiy0eqg7fn1swZV89MsPGgtybiIhbe9AOOP3pRBpLInRGXG
+         FPehX5uNlmG2XgqfAyed/iBSVnt+t6gsUFkf8Fy2WcPn8G89+H0DUimS+rvrNl7OkbKh
+         SOPddYK+UoiNsNPbQJquIGbscJZfSX6c5Ca3b6nqqIpqc1I9F0CTDq+RKL2z1wykKgfv
+         IcIBAKjFH8IZ7XgdP+hHInxL7q291z0lGfjiBPKkmbzbpPm+jJsN2MzAAPKIXJjyDPAr
+         NEcA==
+X-Gm-Message-State: ACrzQf0ErwfbmpHeKDkfsrX6vFnjIoN49M+IBnnrLEgZV8IdBfSm/9Uu
+        yVSAiyHiqleF8rMDCb2R+dj8pPsi+hke0ugekTM=
+X-Google-Smtp-Source: AMsMyM6MSt7jdLRy+pjMZbZwT/jv2EvzYN71MK8pUHDzumFlLUM+ojOYFLF9EmSiFuuNARbbB7/emApqddF973mLsRQ=
+X-Received: by 2002:a05:6602:164b:b0:6cf:bc3f:fcd5 with SMTP id
+ y11-20020a056602164b00b006cfbc3ffcd5mr30189353iow.119.1667906306133; Tue, 08
+ Nov 2022 03:18:26 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20221107174242.1947286-1-andy.ren@getcruise.com>
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-        DKIM_VALID,RCVD_IN_DNSWL_LOW,SPF_HELO_PASS,SPF_NONE autolearn=ham
+Received: by 2002:a05:6638:38a9:b0:375:4a9b:180d with HTTP; Tue, 8 Nov 2022
+ 03:18:25 -0800 (PST)
+Reply-To: mrinvest1010@gmail.com
+From:   "K. A. Mr. Kairi" <ctocik1@gmail.com>
+Date:   Tue, 8 Nov 2022 03:18:25 -0800
+Message-ID: <CAKfr4JWiisOBWHkwui6wRuzv+6yWiNVf6ZZ6x2FXoWTpVc9CjA@mail.gmail.com>
+Subject: Re: My Response..
+To:     undisclosed-recipients:;
+Content-Type: text/plain; charset="UTF-8"
+X-Spam-Status: Yes, score=5.0 required=5.0 tests=BAYES_50,DKIM_SIGNED,
+        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_ENVFROM_END_DIGIT,
+        FREEMAIL_FROM,FREEMAIL_REPLYTO,FREEMAIL_REPLYTO_END_DIGIT,
+        RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,SPF_PASS,UNDISC_FREEM autolearn=no
         autolearn_force=no version=3.4.6
+X-Spam-Report: * -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at
+        *      https://www.dnswl.org/, no trust
+        *      [2607:f8b0:4864:20:0:0:0:d2c listed in]
+        [list.dnswl.org]
+        *  0.8 BAYES_50 BODY: Bayes spam probability is 40 to 60%
+        *      [score: 0.5072]
+        *  0.2 FREEMAIL_REPLYTO_END_DIGIT Reply-To freemail username ends in
+        *      digit
+        *      [mrinvest1010[at]gmail.com]
+        *  0.0 SPF_HELO_NONE SPF: HELO does not publish an SPF Record
+        * -0.0 SPF_PASS SPF: sender matches SPF record
+        *  0.2 FREEMAIL_ENVFROM_END_DIGIT Envelope-from freemail username ends
+        *       in digit
+        *      [ctocik1[at]gmail.com]
+        *  0.0 FREEMAIL_FROM Sender email is commonly abused enduser mail
+        *      provider
+        *      [ctocik1[at]gmail.com]
+        * -0.1 DKIM_VALID_EF Message has a valid DKIM or DK signature from
+        *      envelope-from domain
+        *  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
+        *       valid
+        * -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+        * -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
+        *      author's domain
+        *  2.9 UNDISC_FREEM Undisclosed recipients + freemail reply-to
+        *  1.0 FREEMAIL_REPLYTO Reply-To/From or Reply-To/body contain
+        *      different freemails
+X-Spam-Level: *****
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Mon, Nov 07, 2022 at 09:42:42AM -0800, Andy Ren wrote:
-> Allow a network interface to be renamed when the interface
-> is up.
-> 
-> As described in the netconsole documentation [1], when netconsole is
-> used as a built-in, it will bring up the specified interface as soon as
-> possible. As a result, user space will not be able to rename the
-> interface since the kernel disallows renaming of interfaces that are
-> administratively up unless the 'IFF_LIVE_RENAME_OK' private flag was set
-> by the kernel.
-> 
-> The original solution [2] to this problem was to add a new parameter to
-> the netconsole configuration parameters that allows renaming of
-> the interface used by netconsole while it is administratively up.
-> However, during the discussion that followed, it became apparent that we
-> have no reason to keep the current restriction and instead we should
-> allow user space to rename interfaces regardless of their administrative
-> state:
-> 
-> 1. The restriction was put in place over 20 years ago when renaming was
-> only possible via IOCTL and before rtnetlink started notifying user
-> space about such changes like it does today.
-> 
-> 2. The 'IFF_LIVE_RENAME_OK' flag was added over 3 years ago in version
-> 5.2 and no regressions were reported.
-> 
-> 3. In-kernel listeners to 'NETDEV_CHANGENAME' do not seem to care about
-> the administrative state of interface.
-> 
-> Therefore, allow user space to rename running interfaces by removing the
-> restriction and the associated 'IFF_LIVE_RENAME_OK' flag. Help in
-> possible triage by emitting a message to the kernel log that an
-> interface was renamed while UP.
-> 
-> [1] https://www.kernel.org/doc/Documentation/networking/netconsole.rst
-> [2] https://lore.kernel.org/netdev/20221102002420.2613004-1-andy.ren@getcruise.com/
-> 
-> Signed-off-by: Andy Ren <andy.ren@getcruise.com>
+-- 
+Dear
 
-Reviewed-by: Ido Schimmel <idosch@nvidia.com>
+How are you with your family, I have a serious client, whom will be
+interested to invest in your country, I got your Details through the
+Investment Network and world Global Business directory.
+
+Let me know, If you are interested for more details.....
+
+Regards,
+Andrew
