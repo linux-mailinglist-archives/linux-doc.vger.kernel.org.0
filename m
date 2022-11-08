@@ -2,451 +2,274 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 0A52F6219D7
-	for <lists+linux-doc@lfdr.de>; Tue,  8 Nov 2022 17:55:09 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 7408F621A0B
+	for <lists+linux-doc@lfdr.de>; Tue,  8 Nov 2022 18:08:05 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S233979AbiKHQzH (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 8 Nov 2022 11:55:07 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:39568 "EHLO
+        id S233727AbiKHRID (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 8 Nov 2022 12:08:03 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:45144 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S233925AbiKHQzG (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 8 Nov 2022 11:55:06 -0500
-Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.133.124])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id C7BB51A826
-        for <linux-doc@vger.kernel.org>; Tue,  8 Nov 2022 08:54:16 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-        s=mimecast20190719; t=1667926456;
-        h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-         to:to:cc:cc:mime-version:mime-version:
-         content-transfer-encoding:content-transfer-encoding:
-         in-reply-to:in-reply-to:references:references;
-        bh=yT5CT3CE8cx3Cmdsmk9ITCoXgAwEgNVGTFZhVA9hU1U=;
-        b=cZK7m/qcQTZCDaKIfOGBtxq7sl4nsFuj3AUF2ANTKiatGHObNhi022uUvXKl3g2FBi1/Xm
-        tqlyg4U5S7W7OHPE/L0kN8oURlkF2hBZeQY6byoiWvjwEyuH69g+ug9KzUUrXU7mQpKBhW
-        N1XQvLSFdfeg9R3brPSsc3TtaaUi6is=
-Received: from mail-qt1-f199.google.com (mail-qt1-f199.google.com
- [209.85.160.199]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_128_GCM_SHA256) id
- us-mta-176-iVDjql3sPYaUEPUKg5Xnrw-1; Tue, 08 Nov 2022 11:54:14 -0500
-X-MC-Unique: iVDjql3sPYaUEPUKg5Xnrw-1
-Received: by mail-qt1-f199.google.com with SMTP id ew11-20020a05622a514b00b003a524196d31so10568142qtb.2
-        for <linux-doc@vger.kernel.org>; Tue, 08 Nov 2022 08:54:14 -0800 (PST)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=yT5CT3CE8cx3Cmdsmk9ITCoXgAwEgNVGTFZhVA9hU1U=;
-        b=6q+WOt6sO9op6XptakBFw69d5693Wv3GgzXTriofMeukzZSaEDh4J0QM0RPbu9AQrk
-         l92HYAmMMpsp7X05tIF2URY4TeLmkRUZZJVZywiL0rQDtjAtfi7cWni6p6RSZ2vv6ZxQ
-         u5Wq6UmtCW9ho4waohAVs/wmHbVAf3UFWRayfH4K8nnAjk+9Gds/r1a7Lygi26I6tqW4
-         XDEpt83vAOkQ8Fdm2vHswJvRcRtL7Qhj1iDE1PWkSWuYYOAYT+HhGKvlFoQA8htmfqkO
-         VHuBkj4+fEZNAJiouUrjBz5mC4ifS4qHzibYJKhnXy/lthdtLix4H4iJPXMNwMv2yZw4
-         98xw==
-X-Gm-Message-State: ACrzQf2TR+pW1lMiWhh1Iq28MtAuIDFYQDI8GRjc64DKhjZCny+o/3uG
-        KkrzhFXtgnsP9q39dEib20hHBknNZBixU3Y3PHQNaQ08jzf7YXV5R55gv29dd9JaW+rLJnyuoFj
-        vPbxk0EK2KPlF1641ff38
-X-Received: by 2002:a05:6214:19ea:b0:4bc:1388:8d7c with SMTP id q10-20020a05621419ea00b004bc13888d7cmr36370589qvc.84.1667926454257;
-        Tue, 08 Nov 2022 08:54:14 -0800 (PST)
-X-Google-Smtp-Source: AMsMyM7gflIR+WWnr2ezFkR+zPceQbz3P0QSlD23uYIniu7OIiXNyTtLDp7SN4h+TplfU/5oshzHjA==
-X-Received: by 2002:a05:6214:19ea:b0:4bc:1388:8d7c with SMTP id q10-20020a05621419ea00b004bc13888d7cmr36370567qvc.84.1667926453930;
-        Tue, 08 Nov 2022 08:54:13 -0800 (PST)
-Received: from nfvsdn-06.testing.baremetal.edge-sites.net (nat-pool-232-132.redhat.com. [66.187.232.132])
-        by smtp.gmail.com with ESMTPSA id h18-20020ac85852000000b003a57eb7f212sm7444579qth.10.2022.11.08.08.54.13
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 08 Nov 2022 08:54:13 -0800 (PST)
-From:   mtahhan@redhat.com
-To:     bpf@vger.kernel.org, linux-doc@vger.kernel.org
-Cc:     jbrouer@redhat.com, thoiland@redhat.com, donhunte@redhat.com,
-        Maryam Tahhan <mtahhan@redhat.com>
-Subject: [PATCH bpf-next v6 1/1] doc: DEVMAPs and XDP_REDIRECT
-Date:   Tue,  8 Nov 2022 12:48:33 -0500
-Message-Id: <20221108174833.1106947-2-mtahhan@redhat.com>
-X-Mailer: git-send-email 2.35.3
-In-Reply-To: <20221108174833.1106947-1-mtahhan@redhat.com>
-References: <20221108174833.1106947-1-mtahhan@redhat.com>
+        with ESMTP id S234164AbiKHRIC (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 8 Nov 2022 12:08:02 -0500
+Received: from mx0b-002e3701.pphosted.com (mx0b-002e3701.pphosted.com [148.163.143.35])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 338784874D;
+        Tue,  8 Nov 2022 09:08:01 -0800 (PST)
+Received: from pps.filterd (m0150245.ppops.net [127.0.0.1])
+        by mx0b-002e3701.pphosted.com (8.17.1.5/8.17.1.5) with ESMTP id 2A8FQ86N000855;
+        Tue, 8 Nov 2022 17:07:31 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=hpe.com; h=from : to : cc : subject
+ : date : message-id : references : in-reply-to : content-type :
+ content-transfer-encoding : mime-version; s=pps0720;
+ bh=ytIZCGjJ/R1zkcVHgVdQAa0kj1Jkc8l9xXqY1AZ+78A=;
+ b=eA2N3FkY6WMUnFo+rOOYdQMM0oHMllCPl5ZkjrLrV8mA8Edyk8Eg+GouRDbL5kKgspB6
+ aVjtbN7Uc+CLv8dPDhwJt0Uy8sHW1tULWT3hywJVj5V7H8tRqNbKQhKT8m5wbdnlGU+y
+ cgDU8nFg6iHz009NzKr0iJBmXbN6b7GSrdl9a9AbDoe1JJGpYH1J4gRkbhblBijJ71Hw
+ /8a+GCWqDtybfiprHzZOprNytxEd6DerF9wtiZDKNvVFCI0xM5qGNsR8vY07sf+Fafrj
+ oqmen0NucMITY2SBTbbOB8pjeqr5tihxVdDZJrtSA1fXcr9rKgKMvkN9GJ34wZWUerH6 ug== 
+Received: from p1lg14881.it.hpe.com (p1lg14881.it.hpe.com [16.230.97.202])
+        by mx0b-002e3701.pphosted.com (PPS) with ESMTPS id 3kqsrbh2pv-1
+        (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+        Tue, 08 Nov 2022 17:07:30 +0000
+Received: from p1wg14923.americas.hpqcorp.net (unknown [10.119.18.111])
+        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+        (No client certificate requested)
+        by p1lg14881.it.hpe.com (Postfix) with ESMTPS id 876E0803740;
+        Tue,  8 Nov 2022 17:07:29 +0000 (UTC)
+Received: from p1wg14928.americas.hpqcorp.net (10.119.18.116) by
+ p1wg14923.americas.hpqcorp.net (10.119.18.111) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.986.15; Tue, 8 Nov 2022 05:07:29 -1200
+Received: from p1wg14921.americas.hpqcorp.net (16.230.19.124) by
+ p1wg14928.americas.hpqcorp.net (10.119.18.116) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.986.15
+ via Frontend Transport; Tue, 8 Nov 2022 05:07:29 -1200
+Received: from NAM10-DM6-obe.outbound.protection.outlook.com (192.58.206.38)
+ by edge.it.hpe.com (16.230.19.124) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.986.15; Tue, 8 Nov 2022 05:07:29 -1200
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=GgHQUqRvDHN1KT9Fh6IuGe3X7dFy2NnNrF07DuhH85jLh1Fw36vzXCYpb5WzS/MJwMgzlmjtI0TvWAAo2r/EeEwNBFgITdpYqrqdeiaaMywk7LHfIIr3akqpbkovTB+iAfbDOIw71I+T9QewRB+2ux0ZoXaf6ZfNMYBKPdnaXeFUqBMbIkFDyBwWpnLRTcuzct9bAK/PSyJnOReEsxYj5LDAAyFf4HQYFpt1ULKHSptd63yBizwEzFJ+otjrOr7P4wwnCG6Lwlg0WkYbJf/4CD9jJCZL63dqDXvOt9yLSLUyPOgaBPzvupYrfvL125fkGZtBTgArrt2W/opomh4C/Q==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=ytIZCGjJ/R1zkcVHgVdQAa0kj1Jkc8l9xXqY1AZ+78A=;
+ b=DRz9iYcD4OHBrCFKUwf3ccBnsSGrdk5uRNTcnCbEH1on37dXwS6q7AiUaIN5nXxDyB5TwLZxPmpNElAsKiWc0Uro0vm/eMxYXCB6NQskSjSn9hWXHJWS8n9SoF3ilr+OUtAcoqXB+RWYYQe7DdJhlvqMt++hdifzlxVrJQtEl9tyHxFksryxQ2qNqROIhYDMdsdq7R0mBstZdHOyGn2r7+YjrpER3p23QNqu2/IPoIs3PNiyznxv4lRLOR3+8H4hdvTTb6/PMuixmUAcFsTqD7QoJ+haSWc6PePDrabnsSV8gL6HHSeIOm8EbY9l8tf7JwRXemFSPsM0GynC+0E2Kg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=hpe.com; dmarc=pass action=none header.from=hpe.com; dkim=pass
+ header.d=hpe.com; arc=none
+Received: from DM4PR84MB1927.NAMPRD84.PROD.OUTLOOK.COM (2603:10b6:8:4e::10) by
+ DM4PR84MB1494.NAMPRD84.PROD.OUTLOOK.COM (2603:10b6:8:49::17) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.5791.26; Tue, 8 Nov 2022 17:07:28 +0000
+Received: from DM4PR84MB1927.NAMPRD84.PROD.OUTLOOK.COM
+ ([fe80::7949:4505:4974:ad5f]) by DM4PR84MB1927.NAMPRD84.PROD.OUTLOOK.COM
+ ([fe80::7949:4505:4974:ad5f%6]) with mapi id 15.20.5791.027; Tue, 8 Nov 2022
+ 17:07:28 +0000
+From:   "Hawkins, Nick" <nick.hawkins@hpe.com>
+To:     Guenter Roeck <linux@roeck-us.net>
+CC:     "jdelvare@suse.com" <jdelvare@suse.com>,
+        "robh+dt@kernel.org" <robh+dt@kernel.org>,
+        "krzysztof.kozlowski+dt@linaro.org" 
+        <krzysztof.kozlowski+dt@linaro.org>,
+        "Verdun, Jean-Marie" <verdun@hpe.com>,
+        "corbet@lwn.net" <corbet@lwn.net>,
+        "linux@armlinux.org.uk" <linux@armlinux.org.uk>,
+        "linux-hwmon@vger.kernel.org" <linux-hwmon@vger.kernel.org>,
+        "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
+        "devicetree@vger.kernel.org" <devicetree@vger.kernel.org>,
+        "linux-doc@vger.kernel.org" <linux-doc@vger.kernel.org>,
+        "linux-arm-kernel@lists.infradead.org" 
+        <linux-arm-kernel@lists.infradead.org>
+Subject: RE: [PATCH v1 1/6] hwmon: (gxp-fan-ctrl) Add GXP fan controller
+Thread-Topic: [PATCH v1 1/6] hwmon: (gxp-fan-ctrl) Add GXP fan controller
+Thread-Index: AQHY8IUCr0UALtDyXEemicJgxN8JHq4vL1SAgAYIcpCAAA5QoA==
+Date:   Tue, 8 Nov 2022 17:07:28 +0000
+Message-ID: <DM4PR84MB1927932BB574CD149E1C1809883F9@DM4PR84MB1927.NAMPRD84.PROD.OUTLOOK.COM>
+References: <20221104193657.105130-1-nick.hawkins@hpe.com>
+ <20221104193657.105130-2-nick.hawkins@hpe.com>
+ <20221104200111.GA2562021@roeck-us.net>
+ <DM4PR84MB192759BA77DDC69C61E5923F883F9@DM4PR84MB1927.NAMPRD84.PROD.OUTLOOK.COM>
+In-Reply-To: <DM4PR84MB192759BA77DDC69C61E5923F883F9@DM4PR84MB1927.NAMPRD84.PROD.OUTLOOK.COM>
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-ms-publictraffictype: Email
+x-ms-traffictypediagnostic: DM4PR84MB1927:EE_|DM4PR84MB1494:EE_
+x-ms-office365-filtering-correlation-id: 4b1e7bb7-c002-494c-49ed-08dac1abb709
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
+x-microsoft-antispam: BCL:0;
+x-microsoft-antispam-message-info: gYXw6NxtCMDfIW0lK/qqwyoTapRT3APOhONfUmesTWW2qxX2W9hIoNp4aVGG5pIbf3dNJxHgy4CQsKdmY/0OXV39WFb6wMqveH5R7LjCBjWMhAG6/IQrxm5To2/AxH4v84JEdE6JfMtGNdkFWJGHXVeuCz4BSHOAnzFksiK3r6+qA8DbKEwUSvpxKG5WC0n5zQQOt/bUvojZz1fTpms1VFUrDGJ8CSSjzGxqqaMJVwKseqLn9pxiEFQ56+/tS2CcNMQl5HhDjseEQw3SUwHyewF+EKyoyJiIuuRMNbd8V52deTjHHXaosd/vOHv6OmR8WIPmDFlKtJyncsUmh2nxZVi18OkmMM7szMp+f6HqfFTe2rN2XXjFKEp4NxMw86yJ0tdHJuh9SrhdscP63B9WZl+fJXRffk9NymwHX/spM3pjWqdzye9GmePAGbl+JC4VFEUzXcqaZJtHpPby0NyubwM09YJV21Y7iws0Q7dweX5N0wzCW9ugr11UqFrPUDgcD1VyeZXi7fJt5IR5tWH9UdGDRBD3E7R0lDWx9XaFGjlodtioMxVubJWVKmFeFeQZcEAYWvNL4ApCmbzBSWw++yo/3wz0Aljxacfz4uYQzeJxrpHOb79MZ0k5KT3Zjr31ubJlSevFk/DYFQj4qI0sIa15bhapd+tW82weH0BCxDMdK2vm0ZOHEjWJRHCxGuAP2yWt/6S6oJrY/rmKlfEbHl095R5DliwXLUYaNw/+4DevqqfnQ3LhFg5tBFoFxf5TqqN4AZFQ0vMoMVtEuUYFsw==
+x-forefront-antispam-report: CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DM4PR84MB1927.NAMPRD84.PROD.OUTLOOK.COM;PTR:;CAT:NONE;SFS:(13230022)(136003)(366004)(376002)(396003)(39860400002)(346002)(451199015)(7696005)(9686003)(2940100002)(26005)(186003)(55236004)(83380400001)(122000001)(55016003)(6506007)(2906002)(7416002)(478600001)(54906003)(76116006)(5660300002)(52536014)(41300700001)(4326008)(8936002)(38100700002)(316002)(66556008)(66946007)(64756008)(66476007)(8676002)(66446008)(71200400001)(6916009)(33656002)(38070700005)(82960400001)(86362001);DIR:OUT;SFP:1102;
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0: =?us-ascii?Q?VRS5/3j+83uTZKUbqr+W3+SVuiiCpI6nA34mIXL4j01w9lbGfAIALe6FhgPm?=
+ =?us-ascii?Q?WKMz9ftBLXlHoS4pDRG51lQLfKNpiR8pzEWNmqX05D4aJJm9crzk1ujrR2fJ?=
+ =?us-ascii?Q?KD5oEZe+BcwAJRplVoaUpj6ArgpEsE7b9ny3tMGJRMwn9ai430Jgw3Szvjf4?=
+ =?us-ascii?Q?YYmJIwERi/MP3NVCIppMj7S2nXEgv57fQKkugDHB4Wt31fjn/Ql1Qu4ONbe/?=
+ =?us-ascii?Q?GRGBFnswKCXUEW0hXaJq/NV3ao+vlZa0wKfyPexvrt5TqdwKTRSX4qW73bp6?=
+ =?us-ascii?Q?6qINQB0wpSK8Dot7sSJ9PxbZG+sDrUAMJNGooepfhl+i7KvO19Ne0NhCpwVh?=
+ =?us-ascii?Q?KkOAZfCIaCFaZUTte3tvtmIVqPTnXoCkClGUDIkWSNNhyjoVlrEhFEDSpxVI?=
+ =?us-ascii?Q?mcwgI1WSs5D35SLkf1iFOYRNpopdsvolvf19HF9Dd6HzGcb+0rsQjdo47EoH?=
+ =?us-ascii?Q?XRh5+nf60Q6rVShBt8k8Y2wG/SZdRm0r3wmfvEzpRbHTH44kPcSxQYnADpvh?=
+ =?us-ascii?Q?z2nzRNJvH54z/ehdUmtuF2UGaeA+NjH/Gn3+4ELuY2ATMHUJP11MNvsloC/z?=
+ =?us-ascii?Q?8m9aJJkGWQZ7dnf9ZfufKDRc8D4c5tcD4QFuhc0DbtzGZZV6u6LbN7qEdQmx?=
+ =?us-ascii?Q?y2isRVYsK+7RJR74ACjW4lIa61SkmYHGVRERobinW+j+Owcw1BRk3uwhlGYF?=
+ =?us-ascii?Q?ijS9pW6eIl0Nl7Elh2gUqc8k+0M7gaWjyspCfOK9Vfo12ysaMmiwFkohAKDE?=
+ =?us-ascii?Q?xfxl2Tw1Gqd7LktHmWZQdU8U6JV/W1lW4umJ5rHrbSjKk3xloKSP30dA7e0N?=
+ =?us-ascii?Q?tiuV4Xf0rdWMQn3LPg99iUJG5wfeT5v8CzwGJvBLXshSmArhZ7bH3FIUJr72?=
+ =?us-ascii?Q?dPwleILQOqPIB+e5EWQDKqmO+e9SpOTYe9E59ZIXm96ZmizbpITI9vmRV3go?=
+ =?us-ascii?Q?kcqRNjZspw9wixMFm8BfqcFDBMtDMUxPlZAh1UPBFBm+CN73hOnMAnTA0ICO?=
+ =?us-ascii?Q?29Ys3rz60QJ3DcDzYdYF+ul/Xym/PiCuJSgmno7VugL2EtHURz+mqwrqvfbY?=
+ =?us-ascii?Q?GerTmsPLlSBaIpYgg5q8UsAcUWEjheEdzVq/ZR/MKfpBn5GlxjeAUXh4vSmn?=
+ =?us-ascii?Q?hZBu6oU70HY1QY/rfWKsRHyW/SuF3pu5rIE5FNZWgKnjHpSE47BJl9ldI/j4?=
+ =?us-ascii?Q?OA6pYlL8hVOSXzR38yi1oy1VLOobUfJw5yJ7lGOt9+j7bc0NxEUqwihs0aJb?=
+ =?us-ascii?Q?zdtDbb6nHZFjok9RkxPU5Lkpj0Egc8k50Hwnc7PUAnyGe+TJp35HhBpJ7Unt?=
+ =?us-ascii?Q?5Svtd9A4Okyf5v68MIUy4E6OQUOBM2AjU6k3weJLD15aFKBNj010nVukPu/W?=
+ =?us-ascii?Q?eez5DKn4PE2uB4M+XMkzrbIQZX26ACBy+dNNe4zsPk8VS/dsHuMXBRdcrMx5?=
+ =?us-ascii?Q?k/SkigiL9+fNntC/l4rUNb42z4bfY3zbKfEgOsVLmsXd2RVA5Xtx0YRyFUi5?=
+ =?us-ascii?Q?xKQQEkidmCQtfVPdBBl36uvhyJFUT2dhfcqkPEvcGuva8f9zE4Vof1Z83HRd?=
+ =?us-ascii?Q?oFqTW04Kpf0uMJBFEFMHZwro6NYF0OzU7ozjJmQd?=
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Spam-Status: No, score=-2.1 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_NONE,
-        RCVD_IN_MSPIKE_H2,SPF_HELO_NONE,SPF_NONE autolearn=ham
-        autolearn_force=no version=3.4.6
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: DM4PR84MB1927.NAMPRD84.PROD.OUTLOOK.COM
+X-MS-Exchange-CrossTenant-Network-Message-Id: 4b1e7bb7-c002-494c-49ed-08dac1abb709
+X-MS-Exchange-CrossTenant-originalarrivaltime: 08 Nov 2022 17:07:28.0441
+ (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: 105b2061-b669-4b31-92ac-24d304d195dc
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: GUKric/grM7NsAZb9DA7G7Kh3cht2I1jEvpNuyDV8H9uk0F8SjcfG5PaS1XOZ2hWvYl4NDKwUz4ZmC6Q5ZnWKA==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM4PR84MB1494
+X-OriginatorOrg: hpe.com
+X-Proofpoint-GUID: cBz9k5_MbPttnWieZ2hDZYxnHLdq4Re0
+X-Proofpoint-ORIG-GUID: cBz9k5_MbPttnWieZ2hDZYxnHLdq4Re0
+X-HPE-SCL: -1
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.219,Aquarius:18.0.895,Hydra:6.0.545,FMLib:17.11.122.1
+ definitions=2022-11-07_11,2022-11-08_01,2022-06-22_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 clxscore=1015 spamscore=0
+ phishscore=0 priorityscore=1501 suspectscore=0 adultscore=0 bulkscore=0
+ malwarescore=0 impostorscore=0 mlxscore=0 lowpriorityscore=0
+ mlxlogscore=999 classifier=spam adjust=0 reason=mlx scancount=1
+ engine=8.12.0-2210170000 definitions=main-2211080107
+X-Spam-Status: No, score=-2.8 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_LOW,
+        SPF_HELO_NONE,SPF_NONE autolearn=ham autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-From: Maryam Tahhan <mtahhan@redhat.com>
+Note: This is a resend, my email client decided to
+Change my paragraph format with 70 char lines.
+Apologies.
 
-Add documentation for BPF_MAP_TYPE_DEVMAP and
-BPF_MAP_TYPE_DEVMAP_HASH including kernel version
-introduced, usage and examples.
+Greetings Guenter,
 
-Add documentation that describes XDP_REDIRECT.
+> > +static bool fan_installed(struct device *dev, int fan) {
+> > +	struct gxp_fan_ctrl_drvdata *drvdata =3D dev_get_drvdata(dev);
+> > +	u32 trans_offset;
+> > +	u32 trans_shift;
+> > +	u32 val;
+> > +
+> > +	address_translation(drvdata->data->fan[fan].inst,
+> > +			    &trans_offset,
+> > +			    &trans_shift);
+> > +
+> > +	regmap_read(drvdata->plreg_map, trans_offset, &val);
+> > +	val =3D (val >> trans_shift) & drvdata->data->fan[fan].bit;
+> > +	if (val =3D=3D drvdata->data->fan[fan].bit)
+> > +		return 1;
+> > +	else
+> > +		return 0;
 
-Signed-off-by: Maryam Tahhan <mtahhan@redhat.com>
----
- Documentation/bpf/index.rst      |   1 +
- Documentation/bpf/map_devmap.rst | 221 +++++++++++++++++++++++++++++++
- Documentation/bpf/redirect.rst   |  81 +++++++++++
- net/core/filter.c                |   8 +-
- 4 files changed, 309 insertions(+), 2 deletions(-)
- create mode 100644 Documentation/bpf/map_devmap.rst
- create mode 100644 Documentation/bpf/redirect.rst
+>	return val =3D=3D drvdata->data->fan[fan].bit;
 
-diff --git a/Documentation/bpf/index.rst b/Documentation/bpf/index.rst
-index 1b50de1983ee..1088d44634d6 100644
---- a/Documentation/bpf/index.rst
-+++ b/Documentation/bpf/index.rst
-@@ -29,6 +29,7 @@ that goes into great technical depth about the BPF Architecture.
-    clang-notes
-    linux-notes
-    other
-+   redirect
- 
- .. only::  subproject and html
- 
-diff --git a/Documentation/bpf/map_devmap.rst b/Documentation/bpf/map_devmap.rst
-new file mode 100644
-index 000000000000..77a7a10ee1b6
---- /dev/null
-+++ b/Documentation/bpf/map_devmap.rst
-@@ -0,0 +1,221 @@
-+.. SPDX-License-Identifier: GPL-2.0-only
-+.. Copyright (C) 2022 Red Hat, Inc.
-+
-+=================================================
-+BPF_MAP_TYPE_DEVMAP and BPF_MAP_TYPE_DEVMAP_HASH
-+=================================================
-+
-+.. note::
-+   - ``BPF_MAP_TYPE_DEVMAP`` was introduced in kernel version 4.14
-+   - ``BPF_MAP_TYPE_DEVMAP_HASH`` was introduced in kernel version 5.4
-+
-+``BPF_MAP_TYPE_DEVMAP`` and ``BPF_MAP_TYPE_DEVMAP_HASH`` are BPF maps primarily
-+used as backend maps for the XDP BPF helper call ``bpf_redirect_map()``.
-+``BPF_MAP_TYPE_DEVMAP`` is backed by an array that uses the key as
-+the index to lookup a reference to a net device. While ``BPF_MAP_TYPE_DEVMAP_HASH``
-+is backed by a hash table that uses a key to lookup a reference to a net device.
-+The user provides either <``key``/ ``ifindex``> or <``key``/ ``struct bpf_devmap_val``>
-+pairs to update the maps with new net devices.
-+
-+.. note::
-+    - The key to a hash map doesn't have to be an ``ifindex``.
-+    - While ``BPF_MAP_TYPE_DEVMAP_HASH`` allows for densely packing the net devices
-+      it comes at the cost of a hash of the key when performing a look up.
-+
-+The setup and packet enqueue/send code is shared between the two types of
-+devmap; only the lookup and insertion is different.
-+
-+Usage
-+=====
-+Kernel BPF
-+----------
-+.. c:function::
-+     long bpf_redirect_map(struct bpf_map *map, u32 key, u64 flags)
-+
-+Redirect the packet to the endpoint referenced by ``map`` at index ``key``.
-+For ``BPF_MAP_TYPE_DEVMAP`` and ``BPF_MAP_TYPE_DEVMAP_HASH`` this map contains
-+references to net devices (for forwarding packets through other ports).
-+
-+The lower two bits of *flags* are used as the return code if the map lookup
-+fails. This is so that the return value can be one of the XDP program return
-+codes up to ``XDP_TX``, as chosen by the caller. The higher bits of ``flags``
-+can be set to ``BPF_F_BROADCAST`` or ``BPF_F_EXCLUDE_INGRESS`` as defined
-+below.
-+
-+With ``BPF_F_BROADCAST`` the packet will be broadcast to all the interfaces
-+in the map, with ``BPF_F_EXCLUDE_INGRESS`` the ingress interface will be excluded
-+from the broadcast.
-+
-+.. note::
-+    - The key is ignored if BPF_F_BROADCAST is set.
-+    - Multicast can also be achieved using multiple DEVMAPs.
-+
-+This helper will return ``XDP_REDIRECT`` on success, or the value of the two
-+lower bits of the ``flags`` argument if the map lookup fails.
-+
-+More information about redirection can be found :doc:`redirect`
-+
-+.. c:function::
-+   void *bpf_map_lookup_elem(struct bpf_map *map, const void *key)
-+
-+Net device entries can be retrieved using the ``bpf_map_lookup_elem()``
-+helper.
-+
-+Userspace
-+---------
-+.. note::
-+    DEVMAP entries can only be updated/deleted from user space and not
-+    from an eBPF program. Trying to call these functions from a kernel eBPF
-+    program will result in the program failing to load and a verifier warning.
-+
-+.. c:function::
-+   int bpf_map_update_elem(int fd, const void *key, const void *value, __u64 flags);
-+
-+ Net device entries can be added or updated using the ``bpf_map_update_elem()``
-+ helper. This helper replaces existing elements atomically. The ``value`` parameter
-+ can be ``struct bpf_devmap_val`` or a simple ``int ifindex`` for backwards
-+ compatibility.
-+
-+ .. code-block:: c
-+
-+    struct bpf_devmap_val {
-+        __u32 ifindex;   /* device index */
-+        union {
-+            int   fd;  /* prog fd on map write */
-+            __u32 id;  /* prog id on map read */
-+        } bpf_prog;
-+    };
-+
-+ The ``flags`` argument can be one of the following:
-+
-+  - ``BPF_ANY``: Create a new element or update an existing element.
-+  - ``BPF_NOEXIST``: Create a new element only if it did not exist.
-+  - ``BPF_EXIST``: Update an existing element.
-+
-+ DEVMAPs can associate a program with a device entry by adding a ``bpf_prog.fd``
-+ to ``struct bpf_devmap_val``. Programs are run after ``XDP_REDIRECT`` and have
-+ access to both Rx device and Tx device. The  program associated with the ``fd``
-+ must have type XDP with expected attach type ``xdp_devmap``.
-+ When a program is associated with a device index, the program is run on an
-+ ``XDP_REDIRECT`` and before the buffer is added to the per-cpu queue. Examples
-+ of how to attach/use xdp_devmap progs can be found in the kernel selftests:
-+
-+ - ``tools/testing/selftests/bpf/prog_tests/xdp_devmap_attach.c``
-+ - ``tools/testing/selftests/bpf/progs/test_xdp_with_devmap_helpers.c``
-+
-+.. c:function::
-+   int bpf_map_lookup_elem(int fd, const void *key, void *value);
-+
-+ Net device entries can be retrieved using the ``bpf_map_lookup_elem()``
-+ helper.
-+
-+.. c:function::
-+   int bpf_map_delete_elem(int fd, const void *key);
-+
-+ Net device entries can be deleted using the ``bpf_map_delete_elem()``
-+ helper. This helper will return 0 on success, or negative error in case of
-+ failure.
-+
-+Examples
-+========
-+
-+Kernel BPF
-+----------
-+
-+The following code snippet shows how to declare a ``BPF_MAP_TYPE_DEVMAP``
-+called tx_port.
-+
-+.. code-block:: c
-+
-+    struct {
-+        __uint(type, BPF_MAP_TYPE_DEVMAP);
-+        __type(key, __u32);
-+        __type(value, __u32);
-+        __uint(max_entries, 256);
-+    } tx_port SEC(".maps");
-+
-+The following code snippet shows how to declare a ``BPF_MAP_TYPE_DEVMAP_HASH``
-+called forward_map.
-+
-+.. code-block:: c
-+
-+    struct {
-+        __uint(type, BPF_MAP_TYPE_DEVMAP_HASH);
-+        __type(key, __u32);
-+        __type(value, struct bpf_devmap_val);
-+        __uint(max_entries, 32);
-+    } forward_map SEC(".maps");
-+
-+.. note::
-+
-+    The value type in the DEVMAP above is a ``struct bpf_devmap_val``
-+
-+The following code snippet shows a simple xdp_redirect_map program. This program
-+would work with a user space program that populates the devmap ``forward_map`` based
-+on ingress ifindexes. The BPF program (below) is redirecting packets using the
-+ingress ``ifindex`` as the ``key``.
-+
-+.. code-block:: c
-+
-+    SEC("xdp")
-+    int xdp_redirect_map_func(struct xdp_md *ctx)
-+    {
-+        int index = ctx->ingress_ifindex;
-+
-+        return bpf_redirect_map(&forward_map, index, 0);
-+    }
-+
-+The following code snippet shows a BPF program that is broadcasting packets to
-+all the interfaces in the ``tx_port`` devmap.
-+
-+.. code-block:: c
-+
-+    SEC("xdp")
-+    int xdp_redirect_map_func(struct xdp_md *ctx)
-+    {
-+        return bpf_redirect_map(&tx_port, 0, BPF_F_BROADCAST | BPF_F_EXCLUDE_INGRESS);
-+    }
-+
-+User space
-+----------
-+
-+The following code snippet shows how to update a devmap called ``tx_port``.
-+
-+.. code-block:: c
-+
-+    int update_devmap(int ifindex, int redirect_ifindex)
-+    {
-+        int ret = -1;
-+
-+        ret = bpf_map_update_elem(bpf_map__fd(tx_port), &ifindex, &redirect_ifindex, 0);
-+        if (ret < 0) {
-+            fprintf(stderr, "Failed to update devmap_ value: %s\n",
-+                strerror(errno));
-+        }
-+
-+        return ret;
-+    }
-+
-+The following code snippet shows how to update a hash_devmap called ``forward_map``.
-+
-+.. code-block:: c
-+
-+    int update_devmap(int ifindex, int redirect_ifindex)
-+    {
-+        struct bpf_devmap_val devmap_val = { .ifindex = redirect_ifindex };
-+        int ret = -1;
-+
-+        ret = bpf_map_update_elem(bpf_map__fd(forward_map), &ifindex, &devmap_val, 0);
-+        if (ret < 0) {
-+            fprintf(stderr, "Failed to update devmap_ value: %s\n",
-+                strerror(errno));
-+        }
-+        return ret;
-+    }
-+
-+References
-+===========
-+
-+- https://lwn.net/Articles/728146/
-+- https://git.kernel.org/pub/scm/linux/kernel/git/bpf/bpf-next.git/commit/?id=6f9d451ab1a33728adb72d7ff66a7b374d665176
-+- https://elixir.bootlin.com/linux/latest/source/net/core/filter.c#L4106
-diff --git a/Documentation/bpf/redirect.rst b/Documentation/bpf/redirect.rst
-new file mode 100644
-index 000000000000..9440a913c185
---- /dev/null
-+++ b/Documentation/bpf/redirect.rst
-@@ -0,0 +1,81 @@
-+.. SPDX-License-Identifier: GPL-2.0-only
-+.. Copyright (C) 2022 Red Hat, Inc.
-+
-+========
-+Redirect
-+========
-+XDP_REDIRECT
-+############
-+Supported maps
-+--------------
-+
-+XDP_REDIRECT works with the following map types:
-+
-+- ``BPF_MAP_TYPE_DEVMAP``
-+- ``BPF_MAP_TYPE_DEVMAP_HASH``
-+- ``BPF_MAP_TYPE_CPUMAP``
-+- ``BPF_MAP_TYPE_XSKMAP``
-+
-+For more information on these maps, please see the specific map documentation.
-+
-+Process
-+-------
-+
-+.. kernel-doc:: net/core/filter.c
-+   :doc: xdp redirect
-+
-+.. note::
-+    Not all drivers support transmitting frames after a redirect, and for
-+    those that do, not all of them support non-linear frames. Non-linear xdp
-+    bufs/frames are bufs/frames that contain more than one fragment.
-+
-+Debugging packet drops
-+----------------------
-+Silent packet drops for ``XDP_REDIRECT`` can be debugged using:
-+
-+- bpf_trace
-+- perf_record
-+
-+bpf_trace
-+^^^^^^^^^
-+The following bpftrace command can be used to capture and count all XDP tracepoints:
-+
-+.. code-block:: none
-+
-+    sudo bpftrace -e 'tracepoint:xdp:* { @cnt[probe] = count(); }'
-+    Attaching 12 probes...
-+    ^C
-+
-+    @cnt[tracepoint:xdp:mem_connect]: 18
-+    @cnt[tracepoint:xdp:mem_disconnect]: 18
-+    @cnt[tracepoint:xdp:xdp_exception]: 19605
-+    @cnt[tracepoint:xdp:xdp_devmap_xmit]: 1393604
-+    @cnt[tracepoint:xdp:xdp_redirect]: 22292200
-+
-+.. note::
-+    The various xdp tracepoints can be found in ``source/include/trace/events/xdp.h``
-+
-+The following bpftrace command can be used to extract the ``ERRNO`` being returned as
-+part of the err parameter:
-+
-+.. code-block:: none
-+
-+    sudo bpftrace -e \
-+    'tracepoint:xdp:xdp_redirect*_err {@redir_errno[-args->err] = count();}
-+    tracepoint:xdp:xdp_devmap_xmit {@devmap_errno[-args->err] = count();}'
-+
-+perf record
-+^^^^^^^^^^^
-+The perf tool also supports recording tracepoints:
-+
-+.. code-block:: none
-+
-+    perf record -a -e xdp:xdp_redirect_err \
-+        -e xdp:xdp_redirect_map_err \
-+        -e xdp:xdp_exception \
-+        -e xdp:xdp_devmap_xmit
-+
-+References
-+===========
-+
-+- https://github.com/xdp-project/xdp-tutorial/tree/master/tracing02-xdp-monitor
-diff --git a/net/core/filter.c b/net/core/filter.c
-index bb0136e7a8e4..d582cb025f4c 100644
---- a/net/core/filter.c
-+++ b/net/core/filter.c
-@@ -4104,7 +4104,10 @@ static const struct bpf_func_proto bpf_xdp_adjust_meta_proto = {
- 	.arg2_type	= ARG_ANYTHING,
- };
- 
--/* XDP_REDIRECT works by a three-step process, implemented in the functions
-+/**
-+ * DOC: xdp redirect
-+ *
-+ * XDP_REDIRECT works by a three-step process, implemented in the functions
-  * below:
-  *
-  * 1. The bpf_redirect() and bpf_redirect_map() helpers will lookup the target
-@@ -4119,7 +4122,8 @@ static const struct bpf_func_proto bpf_xdp_adjust_meta_proto = {
-  * 3. Before exiting its NAPI poll loop, the driver will call xdp_do_flush(),
-  *    which will flush all the different bulk queues, thus completing the
-  *    redirect.
-- *
-+ */
-+/*
-  * Pointers to the map entries will be kept around for this whole sequence of
-  * steps, protected by RCU. However, there is no top-level rcu_read_lock() in
-  * the core code; instead, the RCU protection relies on everything happening
--- 
-2.35.3
+> Those calculations look quite complex. Is there a public datasheet that w=
+ould enable me to understand how registers are actually assigned ?
 
+There is no public datasheet as of yet but there is work ongoing to
+create one. I will however document exactly how it is setup in hwmon.
+There is so much I/O on our board that most of the inputs and outputs
+go through an external CPLD we are interfaced with to save pins. A
+memory area in our SoC reflects some of the I/O from CPLD in bytes
+ranging from 0 to 0xff. Each byte represents information such as byte
+0x27, which on this particular platform represents the fan installation
+status of fans 0 to 7 respectively with bit 0 to 7. The byte 0x28 represent=
+s
+something else. Regmap_read/write does a word instead of a single byte
+which we are interested in so we use address_translation to keep offsets
+easier to read.
+
+> > +	} else {
+> > +		/* Power Off */
+> > +		val =3D 0;
+> > +	}
+
+> What determines power to a fan ? Should the power state be reported with =
+fanX_enable ? Or possibly the installed state ?
+
+This actually is the power state of the system, not the fan. When the
+system is off we will see a PWM value of 0xFF on the fan. The idea
+here was to report a value of 0 if the system was off.
+
+Would you like me to use fanX_enable (read only) to show it as
+disabled while the system is off ?
+From a hardware standpoint that would be accurate.
+
+> > +static const struct fan_ctrl_data g10_data =3D {
+> > +	.fan[0] =3D { .inst =3D 0x00, .fail =3D 0x02, .id =3D 0x04, .bit =3D =
+0x01 },
+> > +	.fan[1] =3D { .inst =3D 0x00, .fail =3D 0x02, .id =3D 0x04, .bit =3D =
+0x02 },
+> > +	.fan[2] =3D { .inst =3D 0x00, .fail =3D 0x02, .id =3D 0x04, .bit =3D =
+0x04 },
+> > +	.fan[3] =3D { .inst =3D 0x00, .fail =3D 0x02, .id =3D 0x04, .bit =3D =
+0x08 },
+> > +	.fan[4] =3D { .inst =3D 0x00, .fail =3D 0x02, .id =3D 0x04, .bit =3D =
+0x10 },
+> > +	.fan[5] =3D { .inst =3D 0x00, .fail =3D 0x02, .id =3D 0x04, .bit =3D =
+0x20 },
+> > +	.fan[6] =3D { .inst =3D 0x00, .fail =3D 0x02, .id =3D 0x04, .bit =3D =
+0x40 },
+> > +	.fan[7] =3D { .inst =3D 0x00, .fail =3D 0x02, .id =3D 0x04, .bit =3D =
+0x80 },
+> > +	.fan[8] =3D { .inst =3D 0x01, .fail =3D 0x03, .id =3D 0x05, .bit =3D =
+0x01 },
+> > +	.fan[9] =3D { .inst =3D 0x01, .fail =3D 0x03, .id =3D 0x05, .bit =3D =
+0x02 },
+> > +	.fan[10] =3D { .inst =3D 0x01, .fail =3D 0x03, .id =3D 0x05, .bit =3D=
+ 0x04 },
+> > +	.fan[11] =3D { .inst =3D 0x01, .fail =3D 0x03, .id =3D 0x05, .bit =3D=
+ 0x08 },
+> > +	.fan[12] =3D { .inst =3D 0x01, .fail =3D 0x03, .id =3D 0x05, .bit =3D=
+ 0x10 },
+> > +	.fan[13] =3D { .inst =3D 0x01, .fail =3D 0x03, .id =3D 0x05, .bit =3D=
+ 0x20 },
+> > +	.fan[14] =3D { .inst =3D 0x01, .fail =3D 0x03, .id =3D 0x05, .bit =3D=
+ 0x40 },
+> > +	.fan[15] =3D { .inst =3D 0x01, .fail =3D 0x03, .id =3D 0x05, .bit =3D=
+ 0x80 },
+> > +	.power_bit =3D 24,
+> > +};
+> > +
+> > +static const struct of_device_id gxp_fan_ctrl_of_match[] =3D {
+> > +	{ .compatible =3D "hpe,gxp-fan-ctrl", .data =3D &g10_data },
+
+> I don't understand the point of attaching g10_data here.
+> Why not just access it directly ? There is just one table.
+
+The reason for having this data with the of_device_id binding is that
+each platform has different byte offsets as mentioned above. We
+would like to be able to reuse the driver if possible for this. We will
+soon need g11_data that will be added here. Would a description in
+Documentation, comments and commit message allow us to keep
+this ?
+
+Thank you for your assistance and feedback with this code,
+
+-Nick Hawkins
