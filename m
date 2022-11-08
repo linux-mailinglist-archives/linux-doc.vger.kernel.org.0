@@ -2,234 +2,97 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id E9C12621267
-	for <lists+linux-doc@lfdr.de>; Tue,  8 Nov 2022 14:28:07 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id A824B62162A
+	for <lists+linux-doc@lfdr.de>; Tue,  8 Nov 2022 15:23:09 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S233997AbiKHN2G (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 8 Nov 2022 08:28:06 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:33508 "EHLO
+        id S234355AbiKHOXH (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 8 Nov 2022 09:23:07 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:58882 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S234474AbiKHN2D (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 8 Nov 2022 08:28:03 -0500
-Received: from NAM10-BN7-obe.outbound.protection.outlook.com (mail-bn7nam10on2056.outbound.protection.outlook.com [40.107.92.56])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 37BE1554FD;
-        Tue,  8 Nov 2022 05:28:01 -0800 (PST)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=WeqxVtiH8KNVMr2VLTjzxV0NTuzuNaHVt1+ZZe3tUdrp6f8Q+gndq8CFmF5qact471JLNHr6I4y2HoFBb7Dp0vaXyNkbmQJZIfenhR2AhU3p7W/VIHSPjNZ64LlotUB9VqYvjRXVlEnGGCaaJv4uTA6DQ7ECYSrBzqKtrndZ/UgzkRwc1xhf3tXqku2cOentqDym0p6FvFCnA3K670FELd622PPijM02wtthnhun27N1KmyBWVnLCWRoxWQMKDQhSqrlqHGnZmatfHVr9sxWTdDDgZtoqtn9FGbrHyv1i/qm088r6y+hvlSeyobChRfA+VSCYJ0yBmtbrTNcezEJ8g==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=anWd9qsmXPVJDhNrHatEy47iIrUfy+/8r5t/+YGNz44=;
- b=Ie9g9OAt8Vis5Vrnj4Nn0Oh+aCnBzJzdr+XXXcuNkhZWzeWxdSBJxuqB85Q8TUGc7PcHPbGOvr55GFfjJujjlZu6oBaeGmCxiD0QK132F79gaiuZxyZblLESjleZYMfIfYAYWTzg7K9BikhXUUu+oBXvTr4gPxlUwOLP4SfXSiyzOj5Opnz4H2eyz2wjjoLQA3TZnPxpg+zHWNSLUKrw7Re5vl0uYjLAhNV3xyNIQLEeKzRa4CMW12oW8L9DzDVn7NPx3I/sGu3XhLnrvt85YfVXxuHnUPP6GKDOnAUGbIkP2Mx38O3YkHSyqOdsyrOmqWM+m9mlurIsZRP6p1aqYQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=nvidia.com; dmarc=pass action=none header.from=nvidia.com;
- dkim=pass header.d=nvidia.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
- s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=anWd9qsmXPVJDhNrHatEy47iIrUfy+/8r5t/+YGNz44=;
- b=h1aKhNsbEHAmU9sn6rgFE+b/ARIimB6h8CdMFuSR/GyUVqWOXcRllAcdYNhWwriwXj3mKZqBuZPlFpItsiUCSAN9EkSoVR8FTLJlAimu872QrKucM9QfqbKwvwdyZTPbS7f+Y6Wdy5zDv+Piawnc0x6kqBEbbTtdF/+e1cxg3qxmgo3ANlSOm2V7lOj2gze8rd3V4SWv8IKUf/jmnWQtf4nUnchZNCcePWF+zlF4pVZRkK0OfHuv9oEJ0gmNuouEkou5eQmkw+iVFUhZAGN8L5EiGIcNsr0bjvQ/Mzy+VIcwyizs4nXNh2Rgg17oElHQ+no4sq3xOzGUTjAiYSh5Og==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=nvidia.com;
-Received: from LV2PR12MB5869.namprd12.prod.outlook.com (2603:10b6:408:176::16)
- by CY8PR12MB7514.namprd12.prod.outlook.com (2603:10b6:930:92::21) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5791.27; Tue, 8 Nov
- 2022 13:27:59 +0000
-Received: from LV2PR12MB5869.namprd12.prod.outlook.com
- ([fe80::7a81:a4e4:bb9c:d1de]) by LV2PR12MB5869.namprd12.prod.outlook.com
- ([fe80::7a81:a4e4:bb9c:d1de%6]) with mapi id 15.20.5791.026; Tue, 8 Nov 2022
- 13:27:59 +0000
-Date:   Tue, 8 Nov 2022 09:27:57 -0400
-From:   Jason Gunthorpe <jgg@nvidia.com>
-To:     Nicolin Chen <nicolinc@nvidia.com>
-Cc:     bpf@vger.kernel.org, Jonathan Corbet <corbet@lwn.net>,
-        David Woodhouse <dwmw2@infradead.org>, iommu@lists.linux.dev,
-        Joerg Roedel <joro@8bytes.org>,
-        Kevin Tian <kevin.tian@intel.com>, linux-doc@vger.kernel.org,
-        linux-kselftest@vger.kernel.org, llvm@lists.linux.dev,
-        Nathan Chancellor <nathan@kernel.org>,
-        Nick Desaulniers <ndesaulniers@google.com>,
-        Miguel Ojeda <ojeda@kernel.org>,
-        Robin Murphy <robin.murphy@arm.com>,
-        Shuah Khan <shuah@kernel.org>,
-        Suravee Suthikulpanit <suravee.suthikulpanit@amd.com>,
-        Tom Rix <trix@redhat.com>, Will Deacon <will@kernel.org>,
-        Alex Williamson <alex.williamson@redhat.com>,
-        Lu Baolu <baolu.lu@linux.intel.com>,
-        Chaitanya Kulkarni <chaitanyak@nvidia.com>,
-        Cornelia Huck <cohuck@redhat.com>,
-        Daniel Jordan <daniel.m.jordan@oracle.com>,
-        David Gibson <david@gibson.dropbear.id.au>,
-        Eric Auger <eric.auger@redhat.com>,
-        Eric Farman <farman@linux.ibm.com>,
-        Jason Wang <jasowang@redhat.com>,
-        Jean-Philippe Brucker <jean-philippe@linaro.org>,
-        Joao Martins <joao.m.martins@oracle.com>, kvm@vger.kernel.org,
-        Matthew Rosato <mjrosato@linux.ibm.com>,
-        "Michael S. Tsirkin" <mst@redhat.com>,
-        Niklas Schnelle <schnelle@linux.ibm.com>,
-        Shameerali Kolothum Thodi 
-        <shameerali.kolothum.thodi@huawei.com>,
-        Yi Liu <yi.l.liu@intel.com>, Keqian Zhu <zhukeqian1@huawei.com>
-Subject: Re: [PATCH v4 15/17] iommufd: Add a selftest
-Message-ID: <Y2pZXStDpLla+P1u@nvidia.com>
-References: <0-v4-0de2f6c78ed0+9d1-iommufd_jgg@nvidia.com>
- <15-v4-0de2f6c78ed0+9d1-iommufd_jgg@nvidia.com>
- <Y2ntsDi4RSLtUVKm@Asurada-Nvidia>
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <Y2ntsDi4RSLtUVKm@Asurada-Nvidia>
-X-ClientProxiedBy: MN2PR03CA0009.namprd03.prod.outlook.com
- (2603:10b6:208:23a::14) To LV2PR12MB5869.namprd12.prod.outlook.com
- (2603:10b6:408:176::16)
+        with ESMTP id S234548AbiKHOWb (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 8 Nov 2022 09:22:31 -0500
+Received: from mail-ed1-x52f.google.com (mail-ed1-x52f.google.com [IPv6:2a00:1450:4864:20::52f])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 5F618862C8
+        for <linux-doc@vger.kernel.org>; Tue,  8 Nov 2022 06:22:29 -0800 (PST)
+Received: by mail-ed1-x52f.google.com with SMTP id a67so22676148edf.12
+        for <linux-doc@vger.kernel.org>; Tue, 08 Nov 2022 06:22:29 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112;
+        h=to:subject:message-id:date:from:reply-to:mime-version:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=SzBlYeGeT15Xra75w9IZDBjQ7Da3XKSmRdlnDJDYrko=;
+        b=N3/yj2r4E3ZbKPT7xHoAySw3tne2mAoMBieWCTzZDHeC1U++ZvstcqamT4zkS53Tn+
+         MwMS+xynkKcQRzGhqONKI/yp2/XyOXD6JnPXdXu8fTRQae5acRuAE33j0AKWcPSvA+CU
+         xh4FxMndCVFxG9ST6NQEFhMw5AFca0ElhYwqUBfP7wTwDwBV5Qb7eLA/WDOU2X2642L7
+         jrkSXlkh2oLV1N/vjSDVBn++qEGqy0e2VqpcfTtMBDES/wLkoxBpJdE5vjXyNktH1lMO
+         QNsfQPjAHcOkN+1F6bY/zErfA7wl/NT0oAIElX6JB8aHzx1VnrbDzcgnJsyaRQRkka7e
+         aP5A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=to:subject:message-id:date:from:reply-to:mime-version
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=SzBlYeGeT15Xra75w9IZDBjQ7Da3XKSmRdlnDJDYrko=;
+        b=l1CDJDN7CPTPZrEk+fma1asc8LnkQa3qmlvqK7eoBSQ4NnBv2t2ah3N6THnTsxr+Dy
+         lkJC0G1BRfhNowckYrfToU0d/YIGxglQVxcdu0Bhc6T8BOxzqYNTQUvKNltco80UcZGv
+         os+EPnpb7ZsOva998aTWqdFiS+KvR9gm3rK0QSMJeREOV2iISB1QORnRF00fUt3ajEC0
+         qY/mpRnD/EXWVmM49GCGL3k/58dd6GWbm2PwsplY9xFIYMqBDTzP1D1rB5+fxBj25R12
+         w2sGRR6reyFgI8SglH4ynzqeak4+sYwNlWodvbRaokaDjklDSaLUr/0frNmYXvf4oQYV
+         63Cw==
+X-Gm-Message-State: ACrzQf1PQDnZddkBzv72mJEWfQS3FiPbWXSNlSObh+nNU6iP7Yvs6rEj
+        dxLDIgGkJ/++5DHRx0M6qWwKM/PTOTuy9iOMug8=
+X-Google-Smtp-Source: AMsMyM68bpxcTfbg6w0jLRGycKI6BmuhGndEm+PAedYUu7Qo3PHDC8RAcS55hJTFfal+cGb+F4gaDXSh9585WVk345s=
+X-Received: by 2002:aa7:c14b:0:b0:461:c47d:48cf with SMTP id
+ r11-20020aa7c14b000000b00461c47d48cfmr54286616edp.83.1667917347744; Tue, 08
+ Nov 2022 06:22:27 -0800 (PST)
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: LV2PR12MB5869:EE_|CY8PR12MB7514:EE_
-X-MS-Office365-Filtering-Correlation-Id: 02d6114e-18bd-4b18-5f67-08dac18d0d79
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: lcxSzgBPZMo2ihgPMUpvbqHH2YIZf17SMMGARXx+lKOeM4/esf1aOO248FliWfOm/10Ixr2tp6wSInO/PfTKx24VTUcdM2GXhiKaag1NNbJ0fhlGc5XdNgvtpjEDPDrQV4t3tyX+YVXsCirIrZ5AWH4hKdSCTOe23T30oKjb3J8vKksNQdYnFQK21K8jCl8bzWxPfUOvxkh33BBrbSsJ/CVcKL/aHtda+F5bDcY18tv4LGwWGkLGT0XfG31KsriGrrH2XSQ3aCtxhmfdr+tNwXG7WNXDcJGqPpw7pkq0YgPM+Fi1hnMUTqGiqCoBG4c5X/FQERj7XnhdCeACa8MfoiLYigxOmrntOHI2kYn1/7/OE2JYbjgFx2TKxmiF/dneGoFRuq5RrJ+quroH6NfLOLT7AHLojAwgeK70hcgop00xlOPzeQy1gyl0qIGZoQ7CkSwLn6rGlBGj90A22oJ4EGojvptOACwA+pY6/QDycIzJ42SlPah7uxrkwsIC7iNiZLRk9pNehW/rjgBsyNfdYz66VR0RFk3laH2AoAFNJ8uCkSU8+/vFCgH10l/TVjMJ1vbTgVjvAQZRI7qHxQSiFXFWyID/XVQHzjYmMyzhOMLGZ7/02dUnpjKZ19nNieqlNLD4I0dxvv8T3BsrvEubeJm5pvW0uGZxAbDGC5Dj53Yicuy7h5ZPTybgZovDpfIE4Yo/WveN1FKEm47PrIe7/iGu3T/tLljKWlOJJ6Ei1ShxKoiPhwjU9C8Ptj4A7Sr5
-X-Forefront-Antispam-Report: CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:LV2PR12MB5869.namprd12.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230022)(4636009)(136003)(39860400002)(376002)(366004)(346002)(396003)(451199015)(6506007)(6512007)(26005)(83380400001)(5660300002)(38100700002)(2616005)(186003)(7416002)(7406005)(2906002)(37006003)(6486002)(54906003)(6636002)(6862004)(8676002)(478600001)(4326008)(41300700001)(8936002)(66476007)(66556008)(316002)(66946007)(36756003)(86362001)(67856001);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?bfh8MgF4bou5+BGsqzIEt3qlH+4ZlK3touwtpgZtFTYnAYOaNh771byJDHqh?=
- =?us-ascii?Q?TFMVeueH8b5IsOVqh6y6AptfHriNBTALB1QdHRrV7OCwFuyFKhmzDaVZRNFN?=
- =?us-ascii?Q?oQCrqF8BqS/mqSmAUkmF6WML0v0Q0+MzfaNUjIJLL5ByuW4AAFfBAZe1Wo3s?=
- =?us-ascii?Q?b7N2rC88u9nXHLu/1/PfL+M5BPbF8GF/AMEoARmHu+SEzVcmpnjhEzyCnBAz?=
- =?us-ascii?Q?4NWTxUE53U1AA5jGbKDCdYxBuwhBtq2bVTajLfI78cMVOSCcHWIeQTqHqBbu?=
- =?us-ascii?Q?X1p247pVD37Yaz6vrbfTjHpVfGy1fk98FvKrZIEGi6izDgbfN2tsSH2EsZ4I?=
- =?us-ascii?Q?arlMxge7TsWdjclVl2t/W1Y0XPva4bfm8b1Bt/fAy9IuDszzLBXwknUWyF3h?=
- =?us-ascii?Q?RkDtbZehGYNiWzQ93nqKGVan5qd0TeQe71UhsUtZ9uHNadNZ8ErdirwEARVS?=
- =?us-ascii?Q?QUsUv3VLEsnqdwHeDuKcmc7cBKRdfh9EOGTQegQH7gRw+41Z/Vkefvy8d++K?=
- =?us-ascii?Q?Vt6WjX2z8dtuFiL5OLtVlqyXNuDm9i4TmJRmaphHidMyEj92VrMqFdLUgE2m?=
- =?us-ascii?Q?hsIpZJUNr67mdeVguId31HF6GOc39Tx+g00KUlT/kbDVYQF/KWSlLJCrG5Fx?=
- =?us-ascii?Q?/fxi5pwLKQatC7Bxy10Mp3w03aTsBotUrCTLKsid907Z/8D9ovXX7gG+QGcY?=
- =?us-ascii?Q?bcxY0E/qziccMRfT6Dmg6ZgRymcB/INLFx+yz7MYwtleqZkI/lm8d4/akrJQ?=
- =?us-ascii?Q?g7gFH4otFuwdaq8jlnRJSWEqpfsyMwwBpGndvIDU761do+eVnm7PGL1DmX9o?=
- =?us-ascii?Q?hgc1bKsYjOSmko1CJzx9abUqZZoEaR3tr0GAaSSunaosT+QjS+ctTL6Um31K?=
- =?us-ascii?Q?oWNj3+QREuSETwrfWjuBjnnlRhsGx/95Bt5ZMMVKi1ZLx2FhN1woZ0HG1dlL?=
- =?us-ascii?Q?NfGhEDKyAVfD1UxxY75oXKL0GiVWOiBi09TIfLyF/gtTNrtsKveDPUrC+t7D?=
- =?us-ascii?Q?tmtVvfTTOt0qbErTmG/VrIsf4hPa4Ll/u6R65vKXTOt/m87F4WLiZ5CcGrlc?=
- =?us-ascii?Q?WZYtuA4kMkFNuGdVafSvbI3AgzPiU0v2HZ0dgRN4/00QD6Sa/aDMte5/PLZ7?=
- =?us-ascii?Q?DUqQCO0RM1T4Vr2SjXYDyigxqg7cZakyCMs/RcNppT7snwzzOnR4hgc9ESDt?=
- =?us-ascii?Q?rR/oGSn4+QEY8BoMxr71c702FqXGtKq6kE8xt0rsScag/lXh4Uv5eXyecuNl?=
- =?us-ascii?Q?ttkaKw8hZUfcb/2qsHLnLMP9J1y2Ku8GFd0+uJSycwv2vkjT4fIU7L4b+yE5?=
- =?us-ascii?Q?hsIlbHvvmlT72srhmHsZ8CgFAuOj1apCZ188pZZzCKXqrSrO6wgtMqPH2PBH?=
- =?us-ascii?Q?qzvgKaxJKEd+uwob+WUZgamsAFjhjwCM+Qjgbfli6PdkYfzBe8EM08iaQ7DG?=
- =?us-ascii?Q?k7tRPwf/EiXtuLuASPL5pZrJaOY22qLGNRDZj8yli5N0zbo6DlfmiLCailel?=
- =?us-ascii?Q?8N4QjB2IrvmL8zpdnJ94ET+Qg3Y2I+WCjJVATadykvoGGJ4B/JXo+YcOKk8W?=
- =?us-ascii?Q?BICtTzFzyNXkwuwYZIc=3D?=
-X-OriginatorOrg: Nvidia.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 02d6114e-18bd-4b18-5f67-08dac18d0d79
-X-MS-Exchange-CrossTenant-AuthSource: LV2PR12MB5869.namprd12.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 08 Nov 2022 13:27:58.9298
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: 2SigL4fzAAIqRiSSjnto1zoiY8Gkp+FbHAxe2/jDW+H+y4mhtdWo6FoMfS/X2Z1h
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: CY8PR12MB7514
-X-Spam-Status: No, score=-1.1 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FORGED_SPF_HELO,
-        RCVD_IN_DNSWL_NONE,RCVD_IN_MSPIKE_H2,SPF_HELO_PASS,SPF_NONE
-        autolearn=no autolearn_force=no version=3.4.6
+Received: by 2002:a05:6402:3514:b0:462:e787:e7e with HTTP; Tue, 8 Nov 2022
+ 06:22:26 -0800 (PST)
+Reply-To: mr.abraham022@gmail.com
+From:   "Mr.Abraham" <davidkekeli4@gmail.com>
+Date:   Tue, 8 Nov 2022 14:22:26 +0000
+Message-ID: <CAO+ex-VsO3CDw7_PRkK5uoM9Xbwn9GifqRd=FcWc5qT3_T0qEQ@mail.gmail.com>
+Subject: Greeting
+To:     undisclosed-recipients:;
+Content-Type: text/plain; charset="UTF-8"
+X-Spam-Status: Yes, score=5.0 required=5.0 tests=BAYES_50,DKIM_SIGNED,
+        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_ENVFROM_END_DIGIT,
+        FREEMAIL_FROM,FREEMAIL_REPLYTO,FREEMAIL_REPLYTO_END_DIGIT,
+        RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,SPF_PASS,T_HK_NAME_FM_MR_MRS,
+        UNDISC_FREEM autolearn=no autolearn_force=no version=3.4.6
+X-Spam-Report: * -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at
+        *      https://www.dnswl.org/, no trust
+        *      [2a00:1450:4864:20:0:0:0:52f listed in]
+        [list.dnswl.org]
+        *  0.8 BAYES_50 BODY: Bayes spam probability is 40 to 60%
+        *      [score: 0.4887]
+        *  0.2 FREEMAIL_REPLYTO_END_DIGIT Reply-To freemail username ends in
+        *      digit
+        *      [mr.abraham022[at]gmail.com]
+        *  0.0 SPF_HELO_NONE SPF: HELO does not publish an SPF Record
+        * -0.0 SPF_PASS SPF: sender matches SPF record
+        *  0.2 FREEMAIL_ENVFROM_END_DIGIT Envelope-from freemail username ends
+        *       in digit
+        *      [davidkekeli4[at]gmail.com]
+        *  0.0 FREEMAIL_FROM Sender email is commonly abused enduser mail
+        *      provider
+        *      [davidkekeli4[at]gmail.com]
+        * -0.1 DKIM_VALID_EF Message has a valid DKIM or DK signature from
+        *      envelope-from domain
+        *  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
+        *       valid
+        * -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+        * -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
+        *      author's domain
+        *  0.0 T_HK_NAME_FM_MR_MRS No description available.
+        *  2.9 UNDISC_FREEM Undisclosed recipients + freemail reply-to
+        *  1.0 FREEMAIL_REPLYTO Reply-To/From or Reply-To/body contain
+        *      different freemails
+X-Spam-Level: *****
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Mon, Nov 07, 2022 at 09:48:32PM -0800, Nicolin Chen wrote:
-> On Mon, Nov 07, 2022 at 08:49:08PM -0400, Jason Gunthorpe wrote:
-> 
-> > diff --git a/tools/testing/selftests/iommu/iommufd.c b/tools/testing/selftests/iommu/iommufd.c
-> 
-> > +TEST_F(iommufd, cmd_length)
-> > +{
-> > +#define TEST_LENGTH(_struct, _ioctl)                                     \
-> > +	{                                                                \
-> > +		struct {                                                 \
-> > +			struct _struct cmd;                              \
-> > +			uint8_t extra;                                   \
-> > +		} cmd = { .cmd = { .size = sizeof(struct _struct) - 1 }, \
-> > +			  .extra = UINT8_MAX };                          \
-> > +		int old_errno;                                           \
-> > +		int rc;                                                  \
-> > +									 \
-> > +		EXPECT_ERRNO(EOPNOTSUPP, ioctl(self->fd, _ioctl, &cmd)); \
-> 
-> I guess it should be EINVAL corresponding to updated kernel code?
-> 
-> > +TEST_F(iommufd, cmd_ex_fail)
-> > +{
-> > +	struct {
-> > +		struct iommu_destroy cmd;
-> > +		__u64 future;
-> > +	} cmd = { .cmd = { .size = sizeof(cmd), .id = 0 } };
-> > +
-> > +	/* object id is invalid and command is longer */
-> > +	EXPECT_ERRNO(ENOENT, ioctl(self->fd, IOMMU_DESTROY, &cmd));
-> > +	/* future area is non-zero */
-> > +	cmd.future = 1;
-> > +	EXPECT_ERRNO(E2BIG, ioctl(self->fd, IOMMU_DESTROY, &cmd));
-> > +	/* Original command "works" */
-> > +	cmd.cmd.size = sizeof(cmd.cmd);
-> > +	EXPECT_ERRNO(ENOENT, ioctl(self->fd, IOMMU_DESTROY, &cmd));
-> > +	/* Short command fails */
-> > +	cmd.cmd.size = sizeof(cmd.cmd) - 1;
-> > +	EXPECT_ERRNO(EOPNOTSUPP, ioctl(self->fd, IOMMU_DESTROY, &cmd));
-> 
-> Ditto
-
-Oops, yes, I fixed these
-
-> 
-> > +TEST_HARNESS_MAIN
-> > diff --git a/tools/testing/selftests/iommu/iommufd_fail_nth.c b/tools/testing/selftests/iommu/iommufd_fail_nth.c
-> 
-> > +static void fail_nth_first(struct __test_metadata *_metadata,
-> > +			   struct fail_nth_state *nth_state)
-> > +{
-> > +	char buf[300];
-> > +
-> > +	snprintf(buf, sizeof(buf), "/proc/self/task/%u/fail-nth", gettid());
-> 
-> Not sure what's missing, I have a build error at gettid. Copying
-> a solution from tools/perf/jvmti/jvmti_agent.c file, can fix with:
-
-I think your glibc is probably old
-
-> ------------------------------
-> diff --git a/tools/testing/selftests/iommu/iommufd_fail_nth.c b/tools/testing/selftests/iommu/iommufd_fail_nth.c
-> index 99eaa9f32e0b..7704b3a754d3 100644
-> --- a/tools/testing/selftests/iommu/iommufd_fail_nth.c
-> +++ b/tools/testing/selftests/iommu/iommufd_fail_nth.c
-> @@ -19,6 +19,7 @@
->  
->  #define __EXPORTED_HEADERS__
->  #include <linux/vfio.h>
-> +#include <syscall.h> /* for gettid() */
->  
->  #include "iommufd_utils.h"
->  
-> @@ -84,6 +85,13 @@ struct fail_nth_state {
->         unsigned int iteration;
->  };
->  
-> +#ifndef HAVE_GETTID
-> +static inline pid_t gettid(void)
-> +{
-> +       return (pid_t)syscall(__NR_gettid);
-> +}
-> +#endif
-
-Ah, there is a lot of complicated makefile stuff to make this work,
-and it only works for perf/bpf not selftests
-
-It looks like there is no reason for this to need gettid, we don't use
-threads. So this can just be getpid and that is portable.
-
-Thanks,
-Jason
+My Greeting, Did you receive the letter i sent to you. Please answer me.
+Regard, Mr.Abraham
