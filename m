@@ -2,91 +2,97 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 36AA06211E4
-	for <lists+linux-doc@lfdr.de>; Tue,  8 Nov 2022 14:03:47 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id E6D5C6211EF
+	for <lists+linux-doc@lfdr.de>; Tue,  8 Nov 2022 14:05:20 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S234431AbiKHNDo (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 8 Nov 2022 08:03:44 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:45292 "EHLO
+        id S234122AbiKHNFT (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 8 Nov 2022 08:05:19 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:48948 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S234454AbiKHNDS (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 8 Nov 2022 08:03:18 -0500
-Received: from loongson.cn (mail.loongson.cn [114.242.206.163])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTP id 50BB758033;
-        Tue,  8 Nov 2022 05:03:04 -0800 (PST)
-Received: from loongson.cn (unknown [223.106.24.7])
-        by gateway (Coremail) with SMTP id _____8AxStiHU2pjflEFAA--.15477S3;
-        Tue, 08 Nov 2022 21:03:03 +0800 (CST)
-Received: from [192.168.100.127] (unknown [223.106.24.7])
-        by localhost.localdomain (Coremail) with SMTP id AQAAf8Bxj+CFU2pjxvkOAA--.41338S3;
-        Tue, 08 Nov 2022 21:03:02 +0800 (CST)
-Message-ID: <ec33b88e-7149-e15a-53cb-e7fd669dfc50@loongson.cn>
-Date:   Tue, 8 Nov 2022 21:03:01 +0800
+        with ESMTP id S234298AbiKHNFO (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 8 Nov 2022 08:05:14 -0500
+Received: from mail-oi1-x244.google.com (mail-oi1-x244.google.com [IPv6:2607:f8b0:4864:20::244])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 6537BBCA5
+        for <linux-doc@vger.kernel.org>; Tue,  8 Nov 2022 05:05:11 -0800 (PST)
+Received: by mail-oi1-x244.google.com with SMTP id t62so15397671oib.12
+        for <linux-doc@vger.kernel.org>; Tue, 08 Nov 2022 05:05:11 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112;
+        h=to:subject:message-id:date:from:reply-to:mime-version:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=SzBlYeGeT15Xra75w9IZDBjQ7Da3XKSmRdlnDJDYrko=;
+        b=D1TmwerPuu6xMrsvpSYxOrQuzatAs0NZ5R+JGL280YN+H7WL6jQP6KUbS8/30aJfq1
+         rlF4DE+xefe2BJ8FZRZZnS3IwpsGbm7XY5WAps+bNGwDP6j6dXtMi8aZgDGsAUYv6+Xk
+         Kj6PKwOhD9ORyOGqTbZ5h5EOmCxlM2C4fMLHAP7yllKpNrdHkVdiKQorNeSwDHNa3erc
+         n5rMCiYQjpi7IF8mKMV2mUm/7Rz9D0GG2yJ1bUyPfkQy0ZrTfgdYQy9eBt6n8gvyQzOl
+         RqY8xbnkQmrS8STHamFVmTeQLRqJ0mylVOJBPJl9i9dfGVsYpqfiyETUOL9jBY+cMNfi
+         U1zQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=to:subject:message-id:date:from:reply-to:mime-version
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=SzBlYeGeT15Xra75w9IZDBjQ7Da3XKSmRdlnDJDYrko=;
+        b=AN3nSwmx8yaB/9Rg+ZxcgP9AOry1CCLPgDkprnD43HF0tjTFqwkJoFF4DfHAK2OF5p
+         EvEonJSiHrZKrB36eBftb0LgWtnv7e/lYfa2RlaMh/WI4GGGik/deHahMQ87cMyi4yEP
+         1Hhip2V4e4hQMK+rHJR7jMYyqKwiuFUY5BsXGC5XkJK/xO4Zc/662lhFa5xAZ9xYlsaU
+         xHWQcFmmwtC3XbIwK1W/qL3KfDN71pvwUiFvBsVBGAlEaxz2wkSy00kiGx5hvbQXarMM
+         ucEtUOLwGpxIsWV+gpm1YhpPCHfLuRCm0m5TuyaDhR7S7uVQfdmzR0jyEgztCeLmxhOE
+         RVgA==
+X-Gm-Message-State: ANoB5plxKDk/bZD2c4kO0h5OjxW69rfnpuVGOwNnr3bVh2Kv7z9IdkQ9
+        3Ce7LdOoZeXKO9xp16YhMxJky+fSaARoGoUn3Hk=
+X-Google-Smtp-Source: AA0mqf7VxufJFINgThIW2uvWVeQUHKgMdTaClOSW66ImIlLwWTjBARMxCO83WLidDHzdDVJgiDa945xk8dRmeGmTgSc=
+X-Received: by 2002:a05:6808:10cb:b0:35a:7ec9:e972 with SMTP id
+ s11-20020a05680810cb00b0035a7ec9e972mr6978540ois.200.1667912710493; Tue, 08
+ Nov 2022 05:05:10 -0800 (PST)
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.2.2
-Subject: Re: [PATCH] docs/zh_CN: Add userspace-api/futex2 Chinese translation
-Content-Language: en-US
-To:     Wu XiangCheng <wu.xiangcheng@linux.dev>, Rui Li <me@lirui.org>
-Cc:     Alex Shi <alexs@kernel.org>, Jonathan Corbet <corbet@lwn.net>,
-        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org
-References: <20221105041741.288094-1-me@lirui.org>
- <Y2ZmJ6bFeLi+xF+a@bobwxc.mipc>
-From:   Yanteng Si <siyanteng@loongson.cn>
-In-Reply-To: <Y2ZmJ6bFeLi+xF+a@bobwxc.mipc>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-CM-TRANSID: AQAAf8Bxj+CFU2pjxvkOAA--.41338S3
-X-CM-SenderInfo: pvl1t0pwhqwqxorr0wxvrqhubq/
-X-Coremail-Antispam: 1Uk129KBjvdXoWrAF48AF17KF4rXFW3Cw1fCrg_yoWxGFg_G3
-        y0yFy09w4UJFyxGay3Aa1fGF93uF45CFn8WF1UJr9xX392ywsrJrnrXan3tF15AFsrZry5
-        Kw1DZr1ftF12qjkaLaAFLSUrUUUU8b8apTn2vfkv8UJUUUU8wcxFpf9Il3svdxBIdaVrn0
-        xqx4xG64xvF2IEw4CE5I8CrVC2j2Jv73VFW2AGmfu7bjvjm3AaLaJ3UjIYCTnIWjp_UUUY
-        W7kC6x804xWl14x267AKxVWUJVW8JwAFc2x0x2IEx4CE42xK8VAvwI8IcIk0rVWrJVCq3w
-        AFIxvE14AKwVWUXVWUAwA2ocxC64kIII0Yj41l84x0c7CEw4AK67xGY2AK021l84ACjcxK
-        6xIIjxv20xvE14v26ryj6F1UM28EF7xvwVC0I7IYx2IY6xkF7I0E14v26r4j6F4UM28EF7
-        xvwVC2z280aVAFwI0_Gr1j6F4UJwA2z4x0Y4vEx4A2jsIEc7CjxVAFwI0_Cr1j6rxdM2kK
-        e7AKxVWUXVWUAwAS0I0E0xvYzxvE52x082IY62kv0487Mc804VCY07AIYIkI8VC2zVCFFI
-        0UMc02F40EFcxC0VAKzVAqx4xG6I80ewAv7VC0I7IYx2IY67AKxVWUtVWrXwAv7VC2z280
-        aVAFwI0_Gr0_Cr1lOx8S6xCaFVCjc4AY6r1j6r4UM4x0Y48IcVAKI48JMxk0xIA0c2IEe2
-        xFo4CEbIxvr21l42xK82IYc2Ij64vIr41l4I8I3I0E4IkC6x0Yz7v_Jr0_Gr1l4IxYO2xF
-        xVAFwI0_Jrv_JF1lx2IqxVAqx4xG67AKxVWUJVWUGwC20s026x8GjcxK67AKxVWUGVWUWw
-        C2zVAF1VAY17CE14v26r126r1DMIIYrxkI7VAKI48JMIIF0xvE2Ix0cI8IcVAFwI0_JFI_
-        Gr1lIxAIcVC0I7IYx2IY6xkF7I0E14v26r4j6F4UMIIF0xvE42xK8VAvwI8IcIk0rVWUJV
-        WUCwCI42IY6I8E87Iv67AKxVWUJVW8JwCI42IY6I8E87Iv6xkF7I0E14v26r4j6r4UJbIY
-        CTnIWIevJa73UjIFyTuYvjxU4AhLUUUUU
-X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00,NICE_REPLY_A,
-        SPF_HELO_PASS,SPF_PASS autolearn=ham autolearn_force=no version=3.4.6
+Received: by 2002:a05:6840:5eaa:b0:f64:bedc:f7d1 with HTTP; Tue, 8 Nov 2022
+ 05:05:10 -0800 (PST)
+Reply-To: mr.abraham022@gmail.com
+From:   "Mr.Abraham" <davidkekeli001@gmail.com>
+Date:   Tue, 8 Nov 2022 13:05:10 +0000
+Message-ID: <CAD7994c-cVTcEv8DBZwTC0RkhDP+=6zO551npFpbCuL_jGTctg@mail.gmail.com>
+Subject: Greeting
+To:     undisclosed-recipients:;
+Content-Type: text/plain; charset="UTF-8"
+X-Spam-Status: Yes, score=5.0 required=5.0 tests=BAYES_50,DKIM_SIGNED,
+        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_ENVFROM_END_DIGIT,
+        FREEMAIL_FROM,FREEMAIL_REPLYTO,FREEMAIL_REPLYTO_END_DIGIT,
+        RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,SPF_PASS,T_HK_NAME_FM_MR_MRS,
+        UNDISC_FREEM autolearn=no autolearn_force=no version=3.4.6
+X-Spam-Report: * -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at
+        *      https://www.dnswl.org/, no trust
+        *      [2607:f8b0:4864:20:0:0:0:244 listed in]
+        [list.dnswl.org]
+        *  0.8 BAYES_50 BODY: Bayes spam probability is 40 to 60%
+        *      [score: 0.4974]
+        *  0.2 FREEMAIL_REPLYTO_END_DIGIT Reply-To freemail username ends in
+        *      digit
+        *      [mr.abraham022[at]gmail.com]
+        *  0.0 SPF_HELO_NONE SPF: HELO does not publish an SPF Record
+        * -0.0 SPF_PASS SPF: sender matches SPF record
+        *  0.2 FREEMAIL_ENVFROM_END_DIGIT Envelope-from freemail username ends
+        *       in digit
+        *      [davidkekeli001[at]gmail.com]
+        *  0.0 FREEMAIL_FROM Sender email is commonly abused enduser mail
+        *      provider
+        *      [davidkekeli001[at]gmail.com]
+        * -0.1 DKIM_VALID_EF Message has a valid DKIM or DK signature from
+        *      envelope-from domain
+        *  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
+        *       valid
+        * -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+        * -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
+        *      author's domain
+        *  0.0 T_HK_NAME_FM_MR_MRS No description available.
+        *  2.9 UNDISC_FREEM Undisclosed recipients + freemail reply-to
+        *  1.0 FREEMAIL_REPLYTO Reply-To/From or Reply-To/body contain
+        *      different freemails
+X-Spam-Level: *****
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-
-On 11/5/22 21:33, Wu XiangCheng wrote:
-> 2022-11-05 (六) 12:17:41 +0800 Rui Li 曰：
->> Translate the following documents into Chinese:
->>
->> - userspace-api/futex2.rst
->>
->> Signed-off-by: Rui Li <me@lirui.org>
-> Reviewed-by: Wu XiangCheng <bobwxc@email.cn>
-
-Reviewed-by: Yanteng Si <siyanteng@loongson.cn>
-
-
-Thanks,
-
-Yanteng
-
->
-> Thanks,
->
->> ---
->>   .../zh_CN/userspace-api/futex2.rst            | 80 +++++++++++++++++++
->>   .../zh_CN/userspace-api/index.rst             |  2 +-
->>   2 files changed, 81 insertions(+), 1 deletion(-)
->>   create mode 100644 Documentation/translations/zh_CN/userspace-api/futex2.rst
->>
-
+My Greeting, Did you receive the letter i sent to you. Please answer me.
+Regard, Mr.Abraham
