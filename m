@@ -2,152 +2,119 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 8EBAA623F85
-	for <lists+linux-doc@lfdr.de>; Thu, 10 Nov 2022 11:10:41 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 5FD66623EB5
+	for <lists+linux-doc@lfdr.de>; Thu, 10 Nov 2022 10:36:29 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S229527AbiKJKKk (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 10 Nov 2022 05:10:40 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:48504 "EHLO
+        id S229955AbiKJJg2 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 10 Nov 2022 04:36:28 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:55412 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S229505AbiKJKKj (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Thu, 10 Nov 2022 05:10:39 -0500
-Received: from loongson.cn (mail.loongson.cn [114.242.206.163])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTP id 2130C1DD
-        for <linux-doc@vger.kernel.org>; Thu, 10 Nov 2022 02:10:37 -0800 (PST)
-Received: from loongson.cn (unknown [223.106.24.7])
-        by gateway (Coremail) with SMTP id _____8CxPLYbzmxj9MkFAA--.6471S3;
-        Thu, 10 Nov 2022 18:10:35 +0800 (CST)
-Received: from [192.168.100.112] (unknown [223.106.24.7])
-        by localhost.localdomain (Coremail) with SMTP id AQAAf8Bxj+AWzmxjmS4QAA--.44162S3;
-        Thu, 10 Nov 2022 18:10:32 +0800 (CST)
-Message-ID: <18b4fdc3-792e-298f-5fa4-e2e23828fc27@loongson.cn>
-Date:   Thu, 10 Nov 2022 18:10:30 +0800
+        with ESMTP id S229969AbiKJJg0 (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Thu, 10 Nov 2022 04:36:26 -0500
+Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.133.124])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 4C1A267F7A
+        for <linux-doc@vger.kernel.org>; Thu, 10 Nov 2022 01:35:36 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+        s=mimecast20190719; t=1668072935;
+        h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+         to:to:cc:cc:mime-version:mime-version:
+         content-transfer-encoding:content-transfer-encoding;
+        bh=A8kKFFAUCTx/SqicI25Ltk8g9h3a8wHU1qN0+iZz57A=;
+        b=Ui/5saV8SKyLpLlM/347qrKd8cTFxyBLRUATxvxxYkWY3XrxbRE+oKCqTEWHfJDu+M2FQk
+        6OQu0cqC8uJovWMTqU/ARKSEIfqgIUMqyCUKM/+gf3xR5uK8Xnjw5yRuuElOduIJ7cUfId
+        CB4yyFFH9xpLUjRWY8pSfUXprmMWH58=
+Received: from mail-qk1-f199.google.com (mail-qk1-f199.google.com
+ [209.85.222.199]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_128_GCM_SHA256) id
+ us-mta-324-YkaF1_RiMZSKLAzw4w79PQ-1; Thu, 10 Nov 2022 04:35:34 -0500
+X-MC-Unique: YkaF1_RiMZSKLAzw4w79PQ-1
+Received: by mail-qk1-f199.google.com with SMTP id bs7-20020a05620a470700b006fac7447b1cso1386575qkb.17
+        for <linux-doc@vger.kernel.org>; Thu, 10 Nov 2022 01:35:34 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=A8kKFFAUCTx/SqicI25Ltk8g9h3a8wHU1qN0+iZz57A=;
+        b=Vmt3PUAqFTdJPTIYV9AosDVxsQJBJKqsaQpqCT05wptm2AYvB4YqsuQjTouWRkZIAm
+         wjQBAw4AtmSvG8tctgsk1pYHNRTYUGi0oJFZ8HtHY38SAWGdBQb7w9DkP3vJbb2pyuLw
+         yBdPoIwNE4yeaLjJShSQ5Y74WZ5jEYIyc6YDYeSAKtXXXE09xp8kj4XroMtFIteGqlNK
+         YPJRF8cpX7yuZe1l3ZQUmm4Pu8A1rtHFHW0T/BMeOxj60dEy/kD1UbRvfpYfKv8Yqmfg
+         wfIVHY8kbatdlE3XvvjJBfrTkK2PwR03mWCMzkw8lLiEt4EPj6HMMDnnbOb1HzArasfC
+         f9zA==
+X-Gm-Message-State: ACrzQf1VFyJcT15/0wjP1PQS6GNeOFVCyIxVkjOqN//wKi+D098FuF8S
+        hn3HfIVKmaYrXTZz++prDwkJZJ3hAznKnbCUeIgQg86YaEFgc4y8pcE5ET+X+sKn7gKT9smrbXA
+        oaTDw7C+onuNkGsdCSFIi
+X-Received: by 2002:a05:6214:2521:b0:4bb:7c6a:ce7b with SMTP id gg1-20020a056214252100b004bb7c6ace7bmr58574935qvb.103.1668072933644;
+        Thu, 10 Nov 2022 01:35:33 -0800 (PST)
+X-Google-Smtp-Source: AMsMyM5/yXnjFPMUWuibYEwUfj/etJ1606/crJ8YfuxR7IK9PWpea0TGnPA8MBZmvWAxykbZHayIxw==
+X-Received: by 2002:a05:6214:2521:b0:4bb:7c6a:ce7b with SMTP id gg1-20020a056214252100b004bb7c6ace7bmr58574925qvb.103.1668072933461;
+        Thu, 10 Nov 2022 01:35:33 -0800 (PST)
+Received: from nfvsdn-06.redhat.com (nat-pool-232-132.redhat.com. [66.187.232.132])
+        by smtp.gmail.com with ESMTPSA id br7-20020a05620a460700b006bbc09af9f5sm12762258qkb.101.2022.11.10.01.35.32
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 10 Nov 2022 01:35:33 -0800 (PST)
+From:   mtahhan@redhat.com
+To:     bpf@vger.kernel.org, linux-doc@vger.kernel.org
+Cc:     jbrouer@redhat.com, thoiland@redhat.com, donhunte@redhat.com,
+        yhs@meta.com, Maryam Tahhan <mtahhan@redhat.com>
+Subject: [PATCH bpf-next v7 0/1] doc: DEVMAPs and XDP_REDIRECT 
+Date:   Thu, 10 Nov 2022 05:29:49 -0500
+Message-Id: <20221110102950.2633685-1-mtahhan@redhat.com>
+X-Mailer: git-send-email 2.35.3
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.4.1
-Subject: Re: [PATCH V3 0/3] docs/zh_CN: core-api: Add some translations for
- the "Data structures" section(Part 2)
-To:     Jonathan Corbet <corbet@lwn.net>, Alex Shi <alexs@kernel.org>,
-        Yanteng Si <siyanteng@loongson.cn>,
-        Wu XiangCheng <bobwxc@email.cn>
-Cc:     linux-doc@vger.kernel.org
-References: <cover.1666689138.git.zhoubinbin@loongson.cn>
- <87sfirkgtv.fsf@meer.lwn.net> <87fserkgf1.fsf@meer.lwn.net>
-From:   Binbin Zhou <zhoubinbin@loongson.cn>
-In-Reply-To: <87fserkgf1.fsf@meer.lwn.net>
-Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-X-CM-TRANSID: AQAAf8Bxj+AWzmxjmS4QAA--.44162S3
-X-CM-SenderInfo: p2kr3uplqex0o6or00hjvr0hdfq/
-X-Coremail-Antispam: 1Uk129KBjvJXoWxCFW3Ww48Jw1UZr1Dtr48Crg_yoW5XFW3pr
-        W3K3W3Kan8GF13AwsagrnrXF1YyayxJ3yDW3ZrJw1rWFn8tF1Fyr4vkryj9rWUXr97KF1a
-        vr47tF9rua4jyrJanT9S1TB71UUUUU7qnTZGkaVYY2UrUUUUj1kv1TuYvTs0mT0YCTnIWj
-        qI5I8CrVACY4xI64kE6c02F40Ex7xfYxn0WfASr-VFAUDa7-sFnT9fnUUIcSsGvfJTRUUU
-        bI8YFVCjjxCrM7AC8VAFwI0_Jr0_Gr1l1xkIjI8I6I8E6xAIw20EY4v20xvaj40_Wr0E3s
-        1l1IIY67AEw4v_JrI_Jryl8cAvFVAK0II2c7xJM28CjxkF64kEwVA0rcxSw2x7M28EF7xv
-        wVC0I7IYx2IY67AKxVW8JVW5JwA2z4x0Y4vE2Ix0cI8IcVCY1x0267AKxVW8JVWxJwA2z4
-        x0Y4vEx4A2jsIE14v26r4UJVWxJr1l84ACjcxK6I8E87Iv6xkF7I0E14v26r4UJVWxJr1l
-        e2I262IYc4CY6c8Ij28IcVAaY2xG8wAqjxCEc2xF0cIa020Ex4CE44I27wAqx4xG64xvF2
-        IEw4CE5I8CrVC2j2WlYx0E2Ix0cI8IcVAFwI0_JrI_JrylYx0Ex4A2jsIE14v26r1j6r4U
-        McvjeVCFs4IE7xkEbVWUJVW8JwACjcxG0xvEwIxGrwCYjI0SjxkI62AI1cAE67vIY487Mx
-        AIw28IcxkI7VAKI48JMxC20s026xCaFVCjc4AY6r1j6r4UMI8I3I0E5I8CrVAFwI0_Jr0_
-        Jr4lx2IqxVCjr7xvwVAFwI0_JrI_JrWlx4CE17CEb7AF67AKxVWUAVWUtwCIc40Y0x0EwI
-        xGrwCI42IY6xIIjxv20xvE14v26r1j6r1xMIIF0xvE2Ix0cI8IcVCY1x0267AKxVWUJVW8
-        JwCI42IY6xAIw20EY4v20xvaj40_Jr0_JF4lIxAIcVC2z280aVAFwI0_Jr0_Gr1lIxAIcV
-        C2z280aVCY1x0267AKxVWUJVW8JbIYCTnIWIevJa73UjIFyTuYvjxUzZ2-UUUUU
-X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00,NICE_REPLY_A,
-        SPF_HELO_PASS,SPF_PASS autolearn=ham autolearn_force=no version=3.4.6
+X-Spam-Status: No, score=-2.1 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_NONE,
+        RCVD_IN_MSPIKE_H2,SPF_HELO_NONE,SPF_NONE autolearn=ham
+        autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
+From: Maryam Tahhan <mtahhan@redhat.com>
 
+Add documentation for BPF_MAP_TYPE_DEVMAP and
+BPF_MAP_TYPE_DEVMAP_HASH including kernel version
+introduced, usage and examples.
 
-在 2022/11/10 04:43, Jonathan Corbet 写道:
-> Jonathan Corbet <corbet@lwn.net> writes:
-> 
->> Binbin Zhou <zhoubinbin@loongson.cn> writes:
->>
->>> Hi all:
->>>
->>> Sorry, it may have been a while since the V2 patchset. Thanks to Alex
->>> for his comments.
->>>
->>> As a continuation of the previous patchset
->>> (https://lore.kernel.org/all/cover.1660881950.git.zhoubinbin@loongson.cn/),
->>> this patchset contains the Chinese translations of the remaining three files.
->>>
->>> As follows:
->>>
->>> this_cpu_ops.rst
->>> timekeeping.rst
->>> errseq.rst
->>>
->>> So far, the docs for section "Data structures and low-level utilities" of
->>> the core-api has been translated completely.
->>>
->>> Thanks.
->>>
->>> Changes since V2:
->>> - Take Alex's advices, thanks.
->>>
->>> Details:
->>> https://lore.kernel.org/all/CAJy-Am=mtZxQv2AgH+PxVLsJ8FeW1NRQV2bkLD1RRLGQLxUPgQ@mail.gmail.com/
->>>
->>> Changes since V1:
->>> - Take Xiangcheng's advices, thanks.
->>>
->>> Details:
->>> https://lore.kernel.org/all/Y0wsWoI+BXXCuRbF@bobwxc.mipc/
->>> https://lore.kernel.org/all/Y02EcgD3E0%2FlML5H@bobwxc.mipc/
->>>
->>> Binbin Zhou (3):
->>>    docs/zh_CN: core-api: Add this_cpu_ops Chinese translation
->>>    docs/zh_CN: core-api: Add timekeeping Chinese translation
->>>    docs/zh_CN: core-api: Add errseq Chinese translation
->>>
->>>   .../translations/zh_CN/core-api/errseq.rst    | 145 +++++++++
->>>   .../translations/zh_CN/core-api/index.rst     |   5 -
->>>   .../zh_CN/core-api/this_cpu_ops.rst           | 285 ++++++++++++++++++
->>>   .../zh_CN/core-api/timekeeping.rst            | 177 +++++++++++
->>>   4 files changed, 607 insertions(+), 5 deletions(-)
->>>   create mode 100644 Documentation/translations/zh_CN/core-api/errseq.rst
->>>   create mode 100644 Documentation/translations/zh_CN/core-api/this_cpu_ops.rst
->>>   create mode 100644 Documentation/translations/zh_CN/core-api/timekeeping.rst
->>
->> Applied, thanks.
-> 
-> Actually, I take that back.  I applied these at the end of October, why
-> are you sending different versions now?
-> 
-> Thanks,
-> 
-> jon
+Add documentation that describes XDP_REDIRECT.
 
-Hi jon:
+v6-v7:
+- Got rid of unnecessary initializations in examples.
 
-Sorry, this is my mistake.
+v5->v6:
+- Separate Kernel BPF and userspace functions for devmaps.
+- Include some packet/tracepoint debug info in the redirect
+  documentation.
 
-I didn't pull the latest docs-next before I sent the v3 patchset.
+v4->v5:
+- Remove unused 'index' variable in example.
 
-I didn't notice your apply email for the v2 patchset before, and Alex 
-had some different opinions about my v2 patchset, so I reorganized the 
-v3 patchset.
+v3->v4:
+- Prepend supported map section for XDP_REDIRECT documentation.
 
-Also, the v3 patchset has been delayed for some reason on my part.
+v2->v3:
+- Fixed indentations in usage section to exclude non note text.
+- Replace links to selftest with actual paths.
 
-In that case, please ignore the v3 patchset, the only differences 
-between v2 and v3 are two translations:
+v1->v2:
+- Separate xdp_redirect documentation to its own file.
+- Clean up and simplify examples and usage function descriptions.
 
-https://lore.kernel.org/all/CAJy-Am=mtZxQv2AgH+PxVLsJ8FeW1NRQV2bkLD1RRLGQLxUPgQ@mail.gmail.com/
+Maryam Tahhan (1):
+  doc: DEVMAPs and XDP_REDIRECT
 
-I will try another fix patch later.
+ Documentation/bpf/index.rst      |   1 +
+ Documentation/bpf/map_devmap.rst | 221 +++++++++++++++++++++++++++++++
+ Documentation/bpf/redirect.rst   |  82 ++++++++++++
+ net/core/filter.c                |   8 +-
+ 4 files changed, 310 insertions(+), 2 deletions(-)
+ create mode 100644 Documentation/bpf/map_devmap.rst
+ create mode 100644 Documentation/bpf/redirect.rst
 
-Sorry again, I'll pay more attention next time.
-
-Thanks.
-
-Binbin
+-- 
+2.35.3
 
