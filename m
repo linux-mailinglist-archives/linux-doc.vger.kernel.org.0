@@ -2,150 +2,195 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 9A6D5624542
-	for <lists+linux-doc@lfdr.de>; Thu, 10 Nov 2022 16:12:01 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 3A88062455B
+	for <lists+linux-doc@lfdr.de>; Thu, 10 Nov 2022 16:17:23 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S230124AbiKJPL7 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 10 Nov 2022 10:11:59 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:59978 "EHLO
+        id S229536AbiKJPRU (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 10 Nov 2022 10:17:20 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:34222 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S230247AbiKJPLz (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Thu, 10 Nov 2022 10:11:55 -0500
-Received: from casper.infradead.org (casper.infradead.org [IPv6:2001:8b0:10b:1236::1])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 89D202E6B4;
-        Thu, 10 Nov 2022 07:11:54 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-        d=infradead.org; s=casper.20170209; h=In-Reply-To:Content-Type:MIME-Version:
-        References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
-        Content-Transfer-Encoding:Content-ID:Content-Description;
-        bh=GDS8SnZZcS0SPQ3hd4JtwYFgNgfG4Z6tO5Aqk4r9P7M=; b=gLSOYkudMtjTwff6AEMIEbcIPL
-        assZcfTyw/95zMEu+tf3Nw0TdYYucmP0ADqCUX0A9Th37boVIX1bQPLE67+/Fqs8bHBXqlFFue4ii
-        wwnSLzxguQ1BTcXbRSrI9CiMdM+TeXsvpy7Xtth6T91zaKB+zJsohn7ioDLn8QcirNY9VQqLGwRqv
-        dvCGU4TcDCkQtQtLovntDH0OiXsa/ZpOkXUSElJWalDEVvJIKUf4UURsOwDI2M8cp4iXZfrqdkLMN
-        +Rq+wcOgYS7b1jebjW6Ena/n0/zQTj+Ov8kd6lMdpPS0vKQul8jkr48ixVAZIWGixPan1L0cweuAE
-        eF8pcX/A==;
-Received: from willy by casper.infradead.org with local (Exim 4.94.2 #2 (Red Hat Linux))
-        id 1ot9DX-00CA5o-Rz; Thu, 10 Nov 2022 15:11:47 +0000
-Date:   Thu, 10 Nov 2022 15:11:47 +0000
-From:   Matthew Wilcox <willy@infradead.org>
-To:     Yangtao Li <frank.li@vivo.com>
-Cc:     jaegeuk@kernel.org, chao@kernel.org, corbet@lwn.net,
-        linux-f2fs-devel@lists.sourceforge.net, linux-doc@vger.kernel.org,
-        linux-kernel@vger.kernel.org
-Subject: Re: [PATCH v2] f2fs: support fault injection for flush submission
- error
-Message-ID: <Y20Us047HVn+dPUg@casper.infradead.org>
-References: <20221110032522.64043-1-frank.li@vivo.com>
+        with ESMTP id S229533AbiKJPRT (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Thu, 10 Nov 2022 10:17:19 -0500
+Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.133.124])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id BE6101E729
+        for <linux-doc@vger.kernel.org>; Thu, 10 Nov 2022 07:16:22 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+        s=mimecast20190719; t=1668093382;
+        h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+         to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+         in-reply-to:in-reply-to:references:references;
+        bh=Tpp7Gwy/r5e/+H+feiypkA92ize6X+nNHLC4UW2XS1E=;
+        b=eSZp5a4Q6zsSOyKkFYubOCRQSvj22QDG0kt+JNhgKqXM4F+Iem2eMe2C7BnC8vTE5/hZKQ
+        MHEs1iEZ2wPjvAsvwOfY4LNAbS7D7jxf6ZMQc8GeiWJXUjJXffKuMXc5QvCGUlP6WstKrb
+        f/qkEn9An/f+7KRI+e5yCokmAIaIiZI=
+Received: from mimecast-mx02.redhat.com (mx3-rdu2.redhat.com
+ [66.187.233.73]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ us-mta-138-h28TWhiMOxGbow6m0MWXzQ-1; Thu, 10 Nov 2022 10:16:18 -0500
+X-MC-Unique: h28TWhiMOxGbow6m0MWXzQ-1
+Received: from smtp.corp.redhat.com (int-mx03.intmail.prod.int.rdu2.redhat.com [10.11.54.3])
+        (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+        (No client certificate requested)
+        by mimecast-mx02.redhat.com (Postfix) with ESMTPS id DEBA73C0F446;
+        Thu, 10 Nov 2022 15:16:17 +0000 (UTC)
+Received: from fedora (unknown [10.22.8.196])
+        by smtp.corp.redhat.com (Postfix) with SMTP id F1282112131B;
+        Thu, 10 Nov 2022 15:16:12 +0000 (UTC)
+Date:   Thu, 10 Nov 2022 12:16:11 -0300
+From:   Wander Lairson Costa <wander@redhat.com>
+To:     Kuppuswamy Sathyanarayanan 
+        <sathyanarayanan.kuppuswamy@linux.intel.com>
+Cc:     Thomas Gleixner <tglx@linutronix.de>,
+        Ingo Molnar <mingo@redhat.com>, Borislav Petkov <bp@alien8.de>,
+        Dave Hansen <dave.hansen@linux.intel.com>, x86@kernel.org,
+        Shuah Khan <shuah@kernel.org>,
+        Jonathan Corbet <corbet@lwn.net>,
+        "H . Peter Anvin" <hpa@zytor.com>,
+        Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+        "Kirill A . Shutemov" <kirill.shutemov@linux.intel.com>,
+        Tony Luck <tony.luck@intel.com>,
+        Kai Huang <kai.huang@intel.com>,
+        Isaku Yamahata <isaku.yamahata@gmail.com>,
+        marcelo.cerri@canonical.com, tim.gardner@canonical.com,
+        khalid.elmously@canonical.com, philip.cox@canonical.com,
+        linux-kernel@vger.kernel.org, linux-kselftest@vger.kernel.org,
+        linux-doc@vger.kernel.org
+Subject: Re: [PATCH v17 1/3] x86/tdx: Add a wrapper to get TDREPORT from the
+ TDX Module
+Message-ID: <20221110151611.shrdumi2t5a3obns@fedora>
+References: <20221104032355.227814-1-sathyanarayanan.kuppuswamy@linux.intel.com>
+ <20221104032355.227814-2-sathyanarayanan.kuppuswamy@linux.intel.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20221110032522.64043-1-frank.li@vivo.com>
-X-Spam-Status: No, score=-4.4 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_MED,SPF_HELO_NONE,
-        SPF_NONE autolearn=ham autolearn_force=no version=3.4.6
+In-Reply-To: <20221104032355.227814-2-sathyanarayanan.kuppuswamy@linux.intel.com>
+X-Scanned-By: MIMEDefang 3.1 on 10.11.54.3
+X-Spam-Status: No, score=-2.1 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_NONE,
+        RCVD_IN_MSPIKE_H2,SPF_HELO_NONE,SPF_NONE autolearn=unavailable
+        autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Thu, Nov 10, 2022 at 11:25:22AM +0800, Yangtao Li wrote:
-> Since we now support read, write, and discard in FAULT_INJECT,
-> let's add support for flush.
-
-But _why_?  There is a verifiable thing that didn't happen to the data
-if the read/write/discard fails.  If flush fails ... how do you know?
-What do you do?  Is this to test that the filesystem fails properly if
-the block layer or the device returns a failure?  If so, why have this
-code in each filesystem?  We should support that kind of error injection
-at the block layer, not individual filesystems.
-
-> This patch supports to inject fault into __submit_flush_wait() to
-> simulate flush cmd io error.
+On Thu, Nov 03, 2022 at 08:23:53PM -0700, Kuppuswamy Sathyanarayanan wrote:
+> To support TDX attestation, the TDX guest driver exposes an IOCTL
+> interface to allow userspace to get the TDREPORT from the TDX module
+> via TDG.MR.TDREPORT TDCALL.
 > 
-> Usage:
-> a) echo 524288 > /sys/fs/f2fs/<dev>/inject_type or
-> b) mount -o fault_type=524288 <dev> <mountpoint>
+> In order to get the TDREPORT in the TDX guest driver, instead of using
+> a low level function like __tdx_module_call(), add a
+> tdx_mcall_get_report() wrapper function to handle it.
 > 
-> Signed-off-by: Yangtao Li <frank.li@vivo.com>
+> This is a preparatory patch for adding attestation support.
+> 
+> Signed-off-by: Kuppuswamy Sathyanarayanan <sathyanarayanan.kuppuswamy@linux.intel.com>
 > ---
->  Documentation/filesystems/f2fs.rst |  1 +
->  fs/f2fs/f2fs.h                     |  1 +
->  fs/f2fs/segment.c                  | 12 +++++++++---
->  fs/f2fs/super.c                    |  1 +
->  4 files changed, 12 insertions(+), 3 deletions(-)
 > 
-> diff --git a/Documentation/filesystems/f2fs.rst b/Documentation/filesystems/f2fs.rst
-> index 6e67c5e6c7c3..316d153cc5fb 100644
-> --- a/Documentation/filesystems/f2fs.rst
-> +++ b/Documentation/filesystems/f2fs.rst
-> @@ -202,6 +202,7 @@ fault_type=%d		 Support configuring fault injection type, should be
->  			 FAULT_DQUOT_INIT	  0x000010000
->  			 FAULT_LOCK_OP		  0x000020000
->  			 FAULT_BLKADDR		  0x000040000
-> +			 FAULT_FLUSH		  0x000080000
->  			 ===================	  ===========
->  mode=%s			 Control block allocation mode which supports "adaptive"
->  			 and "lfs". In "lfs" mode, there should be no random
-> diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
-> index 04ef4cce3d7f..832baf08ecac 100644
-> --- a/fs/f2fs/f2fs.h
-> +++ b/fs/f2fs/f2fs.h
-> @@ -61,6 +61,7 @@ enum {
->  	FAULT_DQUOT_INIT,
->  	FAULT_LOCK_OP,
->  	FAULT_BLKADDR,
-> +	FAULT_FLUSH,
->  	FAULT_MAX,
->  };
+> Changes since v16
+>  * Added invalid operand error code support.
+>  * Removed subtype param in tdx_mcall_get_report().
+> 
+> Changes since v15:
+>  * None
+> 
+> Changes since v14:
+>  * Instead of exporting __tdx_module_call(), added a new wrapper.
+>  * Rebased on top of v6.1-rc1
+> 
+>  arch/x86/coco/tdx/tdx.c    | 38 ++++++++++++++++++++++++++++++++++++++
+>  arch/x86/include/asm/tdx.h |  2 ++
+>  2 files changed, 40 insertions(+)
+> 
+> diff --git a/arch/x86/coco/tdx/tdx.c b/arch/x86/coco/tdx/tdx.c
+> index 928dcf7a20d9..17cf2e9d5849 100644
+> --- a/arch/x86/coco/tdx/tdx.c
+> +++ b/arch/x86/coco/tdx/tdx.c
+> @@ -5,6 +5,8 @@
+>  #define pr_fmt(fmt)     "tdx: " fmt
 >  
-> diff --git a/fs/f2fs/segment.c b/fs/f2fs/segment.c
-> index aa4be7f25963..a4813fa33c0f 100644
-> --- a/fs/f2fs/segment.c
-> +++ b/fs/f2fs/segment.c
-> @@ -486,7 +486,13 @@ void f2fs_balance_fs_bg(struct f2fs_sb_info *sbi, bool from_bg)
->  static int __submit_flush_wait(struct f2fs_sb_info *sbi,
->  				struct block_device *bdev)
->  {
-> -	int ret = blkdev_issue_flush(bdev);
-> +	int ret;
+>  #include <linux/cpufeature.h>
+> +#include <linux/export.h>
+> +#include <linux/io.h>
+>  #include <asm/coco.h>
+>  #include <asm/tdx.h>
+>  #include <asm/vmx.h>
+> @@ -15,6 +17,7 @@
+>  /* TDX module Call Leaf IDs */
+>  #define TDX_GET_INFO			1
+>  #define TDX_GET_VEINFO			3
+> +#define TDX_GET_REPORT			4
+>  #define TDX_ACCEPT_PAGE			6
+>  
+>  /* TDX hypercall Leaf IDs */
+> @@ -34,6 +37,10 @@
+>  #define VE_GET_PORT_NUM(e)	((e) >> 16)
+>  #define VE_IS_IO_STRING(e)	((e) & BIT(4))
+>  
+> +/* TDX Module call error codes */
+> +#define TDCALL_RETURN_CODE(a)	((a) >> 32)
+> +#define TDCALL_INVALID_OPERAND	0xc0000100
 > +
-> +	if (time_to_inject(sbi, FAULT_FLUSH)) {
-> +		f2fs_show_injection_info(sbi, FAULT_FLUSH);
-> +		ret = -EIO;
-> +	} else
-> +		ret = blkdev_issue_flush(bdev);
+>  /*
+>   * Wrapper for standard use of __tdx_hypercall with no output aside from
+>   * return code.
+> @@ -98,6 +105,37 @@ static inline void tdx_module_call(u64 fn, u64 rcx, u64 rdx, u64 r8, u64 r9,
+>  		panic("TDCALL %lld failed (Buggy TDX module!)\n", fn);
+>  }
 >  
->  	trace_f2fs_issue_flush(bdev, test_opt(sbi, NOBARRIER),
->  				test_opt(sbi, FLUSH_MERGE), ret);
-> @@ -1126,13 +1132,13 @@ static int __submit_discard_cmd(struct f2fs_sb_info *sbi,
->  		if (time_to_inject(sbi, FAULT_DISCARD)) {
->  			f2fs_show_injection_info(sbi, FAULT_DISCARD);
->  			err = -EIO;
-> -			goto submit;
-> +			goto skip;
->  		}
->  		err = __blkdev_issue_discard(bdev,
->  					SECTOR_FROM_BLOCK(start),
->  					SECTOR_FROM_BLOCK(len),
->  					GFP_NOFS, &bio);
-> -submit:
-> +skip:
->  		if (err) {
->  			spin_lock_irqsave(&dc->lock, flags);
->  			if (dc->state == D_PARTIAL)
-> diff --git a/fs/f2fs/super.c b/fs/f2fs/super.c
-> index a43d8a46a6e5..3d3d22ac527b 100644
-> --- a/fs/f2fs/super.c
-> +++ b/fs/f2fs/super.c
-> @@ -62,6 +62,7 @@ const char *f2fs_fault_name[FAULT_MAX] = {
->  	[FAULT_DQUOT_INIT]	= "dquot initialize",
->  	[FAULT_LOCK_OP]		= "lock_op",
->  	[FAULT_BLKADDR]		= "invalid blkaddr",
-> +	[FAULT_FLUSH]		= "flush error",
->  };
+> +/**
+> + * tdx_mcall_get_report() - Wrapper for TDG.MR.REPORT TDCALL.
+> + * @reportdata: Address of the input buffer which contains
+> + *              user-defined REPORTDATA to be included into
+> + *              TDREPORT.
+> + * @tdreport: Address of the output buffer to store TDREPORT.
+> + *
+> + * Generate TDREPORT using "TDG.MR.REPORT" TDCALL. Refer to section
+> + * titled "TDG.MR.REPORT leaf" in the TDX Module 1.0 specification
+> + * for detailed information. It is used in the TDX guest driver
+> + * module to get the TDREPORT.
+> + *
+> + * Return 0 on success, -EINVAL for invalid operands, or -EIO on
+> + * other TDCALL failures.
+> + */
+> +int tdx_mcall_get_report(u8 *reportdata, u8 *tdreport)
+> +{
+> +	u64 ret;
+> +
+> +	ret = __tdx_module_call(TDX_GET_REPORT, virt_to_phys(tdreport),
+> +				virt_to_phys(reportdata), 0, 0, NULL);
+> +	if (ret) {
+> +		if (TDCALL_RETURN_CODE(ret) == TDCALL_INVALID_OPERAND)
+> +			return -EINVAL;
+> +		return -EIO;
+> +	}
+> +
+> +	return 0;
+> +}
+> +EXPORT_SYMBOL_GPL(tdx_mcall_get_report);
+> +
+>  static u64 get_cc_mask(void)
+>  {
+>  	struct tdx_module_output out;
+> diff --git a/arch/x86/include/asm/tdx.h b/arch/x86/include/asm/tdx.h
+> index 020c81a7c729..eef9c0b7880e 100644
+> --- a/arch/x86/include/asm/tdx.h
+> +++ b/arch/x86/include/asm/tdx.h
+> @@ -67,6 +67,8 @@ void tdx_safe_halt(void);
 >  
->  void f2fs_build_fault_attr(struct f2fs_sb_info *sbi, unsigned int rate,
+>  bool tdx_early_handle_ve(struct pt_regs *regs);
+>  
+> +int tdx_mcall_get_report(u8 *reportdata, u8 *tdreport);
+> +
+>  #else
+>  
+>  static inline void tdx_early_init(void) { };
 > -- 
-> 2.25.1
+> 2.34.1
 > 
+> 
+
+Acked-by: Wander Lairson Costa <wander@redhat.com>
+
