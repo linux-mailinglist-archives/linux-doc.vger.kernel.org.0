@@ -2,129 +2,84 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id AA992626228
-	for <lists+linux-doc@lfdr.de>; Fri, 11 Nov 2022 20:40:08 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 92FC162622C
+	for <lists+linux-doc@lfdr.de>; Fri, 11 Nov 2022 20:40:22 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S234140AbiKKTkG (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Fri, 11 Nov 2022 14:40:06 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:39148 "EHLO
+        id S234190AbiKKTkV (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Fri, 11 Nov 2022 14:40:21 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:39322 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S234137AbiKKTkF (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Fri, 11 Nov 2022 14:40:05 -0500
-Received: from mail-ed1-x52c.google.com (mail-ed1-x52c.google.com [IPv6:2a00:1450:4864:20::52c])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id ED0857BE6E;
-        Fri, 11 Nov 2022 11:40:04 -0800 (PST)
-Received: by mail-ed1-x52c.google.com with SMTP id z18so8965482edb.9;
-        Fri, 11 Nov 2022 11:40:04 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:from:to:cc:subject:date:message-id:reply-to;
-        bh=iIxp/mPo3mFGgHN1vW8WFds+pL6kSiHERkF88oy0nuY=;
-        b=C/2iAk6+kH5VzDsjr3MHHWskEU1SY8T1nf3MZY2S8UdzGSSmts9ZD8dAT1xbRpjE8p
-         TEmj6UT7y6vKt4AJICvx+cH+c/gV55UobVN1aa3jzd+TMXZD6CHyE8D8vq047tEK8fwK
-         o7MpKMtXEonNineWoLG8HuVvG7rb+T/6VSvEhGoE+XIngdO39F6WkDCG91eq/JyBYOQk
-         tnKIWgRVWYHfO/B/2E4VUXCHMe3sjOJTj1Zl0aIRBdfyDILt/Arg5eSa5L9nIVGhnR3J
-         GHpwKA5J7j+altDCNZBQwFph8aMRU/G4Lioorq3YFVP8BCOpe2VrGPDcuq9eYkFOzrY0
-         ZsVQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=iIxp/mPo3mFGgHN1vW8WFds+pL6kSiHERkF88oy0nuY=;
-        b=X9M1AxNukoYmZpdfELHaL4wcu7JQe4pbwKKGxnYcjEGd6N6l8AWykhPDACkffVjiAS
-         m/E02bjwhM8CWt7VBDTwpOuKhbh5Iq4zeqVFCB/EE+NAZa2rheYPSHKjHFhsHzeT7A0g
-         IAajBLEgNPrHw3Ou+QpPUVPs9sxINFniEGfW954emwGTD3lI1aJNTrHGjfy4pqJgA+Vc
-         U7zWIzMKeLsHgpxqPCSXw3CI6X+bIFM+qVmQg2puJt+64lWRfPaU3ZzAYC8hPcqlOXXC
-         PjjLbie8ebSIkblRdiWDgVefLcMmYgE9GFL+GesYOVOA+IMWcrTuuAL//CzEANm2yl/z
-         Dh5A==
-X-Gm-Message-State: ANoB5pkhJRWDSklhn45alzf7/gB8+d80Dghav5ujyk0eewVcRq8SPRH8
-        Wf+gxnuwJnfYNpw/eW6H46QPk8hJB6pvOLQYOIA=
-X-Google-Smtp-Source: AA0mqf7LgpBRFBqox6+gOFVvPCnk/f6pFwZ2U9GHIaWS2F/n31NX8FevklVGYBTTVjUwX42j5spgIGSbNAlYYknMjaY=
-X-Received: by 2002:a50:9512:0:b0:457:1323:1b7e with SMTP id
- u18-20020a509512000000b0045713231b7emr2736138eda.311.1668195603464; Fri, 11
- Nov 2022 11:40:03 -0800 (PST)
+        with ESMTP id S234224AbiKKTkT (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Fri, 11 Nov 2022 14:40:19 -0500
+Received: from ams.source.kernel.org (ams.source.kernel.org [IPv6:2604:1380:4601:e00::1])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 1CBCE7C8D6;
+        Fri, 11 Nov 2022 11:40:19 -0800 (PST)
+Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
+        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+        (No client certificate requested)
+        by ams.source.kernel.org (Postfix) with ESMTPS id CE3D8B827A9;
+        Fri, 11 Nov 2022 19:40:17 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPS id 50247C433C1;
+        Fri, 11 Nov 2022 19:40:16 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+        s=k20201202; t=1668195616;
+        bh=jl6LdFrqv+4TDnoTaN8guBf6tvRCL8sNT2to4vgs/us=;
+        h=Subject:From:Date:References:In-Reply-To:To:Cc:From;
+        b=UDEh8fZl/ZnGleej3x34oNsi4pLaij4CQJ36lfhEXorhvdPY125u/NXlDEpDw9vcg
+         RitZACDN350XkWQXdc6JEYBmDH8qO1yQat9CY/mwuvGcwbEPss/xmkmo9DX9DgPhXL
+         0QJcEiwTIgmRvib/A4ZcmuXb+HjUtAYTC4aDB4VcjoFhccnxBHfyJkYtdfqsxV+STN
+         N+JGBCg4RsUrepqHyUZ3/PjgNRcFX2hLkUYxQeD3bSn3niGWCEWSpMcgb/5pWgnJZW
+         E5pC+BixHNCbIDuO8JlE6wOhTUsse3Xr4cTI31Hcpdqe6G5sYcjpJrL4n3JKDau8wk
+         keJPbKIiK/aUw==
+Received: from aws-us-west-2-korg-oddjob-1.ci.codeaurora.org (localhost.localdomain [127.0.0.1])
+        by aws-us-west-2-korg-oddjob-1.ci.codeaurora.org (Postfix) with ESMTP id 32766E270EF;
+        Fri, 11 Nov 2022 19:40:16 +0000 (UTC)
+Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
-References: <20221109174604.31673-1-donald.hunter@gmail.com> <20221109174604.31673-2-donald.hunter@gmail.com>
-In-Reply-To: <20221109174604.31673-2-donald.hunter@gmail.com>
-From:   Andrii Nakryiko <andrii.nakryiko@gmail.com>
-Date:   Fri, 11 Nov 2022 11:39:51 -0800
-Message-ID: <CAEf4Bzak4A-vP=NeJheA0poiu_8fK53cvbq1EnnSHC78FB7mtQ@mail.gmail.com>
-Subject: Re: [PATCH bpf-next v10 1/1] bpf, docs: document BPF_MAP_TYPE_ARRAY
+Content-Transfer-Encoding: 8bit
+Subject: Re: [PATCH bpf-next v3] docs/bpf: Document BPF map types QUEUE and STACK
+From:   patchwork-bot+netdevbpf@kernel.org
+Message-Id: <166819561620.2662.16682077750068932473.git-patchwork-notify@kernel.org>
+Date:   Fri, 11 Nov 2022 19:40:16 +0000
+References: <20221108093314.44851-1-donald.hunter@gmail.com>
+In-Reply-To: <20221108093314.44851-1-donald.hunter@gmail.com>
 To:     Donald Hunter <donald.hunter@gmail.com>
-Cc:     bpf@vger.kernel.org, linux-doc@vger.kernel.org,
-        Alexei Starovoitov <ast@kernel.org>,
-        Daniel Borkmann <daniel@iogearbox.net>,
-        Andrii Nakryiko <andrii@kernel.org>,
-        Jonathan Corbet <corbet@lwn.net>,
-        Dave Tucker <dave@dtucker.co.uk>,
-        Maryam Tahhan <mtahhan@redhat.com>
-Content-Type: text/plain; charset="UTF-8"
-X-Spam-Status: No, score=-2.1 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_FROM,
-        RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,SPF_PASS autolearn=ham
-        autolearn_force=no version=3.4.6
+Cc:     bpf@vger.kernel.org, linux-doc@vger.kernel.org, ast@kernel.org,
+        daniel@iogearbox.net, andrii@kernel.org, corbet@lwn.net,
+        yhs@meta.com
+X-Spam-Status: No, score=-7.1 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_HI,
+        SPF_HELO_NONE,SPF_PASS autolearn=ham autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Wed, Nov 9, 2022 at 9:46 AM Donald Hunter <donald.hunter@gmail.com> wrote:
->
-> From: Dave Tucker <dave@dtucker.co.uk>
->
-> Add documentation for the BPF_MAP_TYPE_ARRAY including kernel version
-> introduced, usage and examples. Also document BPF_MAP_TYPE_PERCPU_ARRAY
-> which is similar.
->
-> Signed-off-by: Dave Tucker <dave@dtucker.co.uk>
-> Co-developed-by: Donald Hunter <donald.hunter@gmail.com>
+Hello:
+
+This patch was applied to bpf/bpf-next.git (master)
+by Andrii Nakryiko <andrii@kernel.org>:
+
+On Tue,  8 Nov 2022 09:33:14 +0000 you wrote:
+> Add documentation for BPF_MAP_TYPE_QUEUE and BPF_MAP_TYPE_STACK,
+> including usage and examples.
+> 
 > Signed-off-by: Donald Hunter <donald.hunter@gmail.com>
-> Reviewed-by: Maryam Tahhan <mtahhan@redhat.com>
 > ---
->  Documentation/bpf/map_array.rst | 250 ++++++++++++++++++++++++++++++++
->  1 file changed, 250 insertions(+)
->  create mode 100644 Documentation/bpf/map_array.rst
->
+> v2 -> v3:
+> - Add BPF_EXIST to valid flags as reported by Yonghong Song
+> - Clarify valid flags for bpf_map_push_elem
+> 
+> [...]
 
-[...]
+Here is the summary with links:
+  - [bpf-next,v3] docs/bpf: Document BPF map types QUEUE and STACK
+    https://git.kernel.org/bpf/bpf-next/c/64488ca57ab8
 
-> +This example BPF program shows how to access an array element.
-> +
-> +.. code-block:: c
-> +
-> +    int bpf_prog(struct __sk_buff *skb)
-> +    {
-> +            struct iphdr ip;
-> +            int index;
-> +            long *value;
-> +
-> +            if (bpf_skb_load_bytes(skb, ETH_HLEN, &ip, sizeof(ip)) < 0)
-> +                    return 0;
-> +
-> +            index = ip.protocol;
-> +            value = bpf_map_lookup_elem(&my_map, &index);
-> +            if (value)
-> +                    __sync_fetch_and_add(value, skb->len);
+You are awesome, thank you!
+-- 
+Deet-doot-dot, I am a bot.
+https://korg.docs.kernel.org/patchwork/pwbot.html
 
-should be &value
 
-I fixed it up and applied to bpf-next, thanks.
-
-> +
-> +            return 0;
-> +    }
-> +
-> +Userspace
-> +---------
-> +
-> +BPF_MAP_TYPE_ARRAY
-> +~~~~~~~~~~~~~~~~~~
-> +
-> +This snippet shows how to create an array, using ``bpf_map_create_opts`` to
-> +set flags.
-> +
-
-[...]
