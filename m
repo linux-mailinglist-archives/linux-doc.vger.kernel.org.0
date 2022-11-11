@@ -2,308 +2,166 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 47F1A626120
-	for <lists+linux-doc@lfdr.de>; Fri, 11 Nov 2022 19:30:11 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 01151626174
+	for <lists+linux-doc@lfdr.de>; Fri, 11 Nov 2022 19:37:50 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S234182AbiKKS3i (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Fri, 11 Nov 2022 13:29:38 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:33436 "EHLO
+        id S234293AbiKKShq (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Fri, 11 Nov 2022 13:37:46 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:37762 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S234171AbiKKS3a (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Fri, 11 Nov 2022 13:29:30 -0500
-Received: from mail-yw1-x1149.google.com (mail-yw1-x1149.google.com [IPv6:2607:f8b0:4864:20::1149])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 77F295CD05
-        for <linux-doc@vger.kernel.org>; Fri, 11 Nov 2022 10:29:29 -0800 (PST)
-Received: by mail-yw1-x1149.google.com with SMTP id 00721157ae682-360b9418f64so50460767b3.7
-        for <linux-doc@vger.kernel.org>; Fri, 11 Nov 2022 10:29:29 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=google.com; s=20210112;
-        h=cc:to:from:subject:message-id:references:mime-version:in-reply-to
-         :date:from:to:cc:subject:date:message-id:reply-to;
-        bh=r84PG1jgHBipBYlbDtpXYn0KfCJQRPPV8o0t+BC7r80=;
-        b=RTy2mC0LwDZH56aX/w5OhguMBUe0+J5NWLoqXauoT3IvbjP/GZvP1lp3Ift6APPArw
-         S0endsxM2v7avWGZ+xCuwXUGDN1LUVmi91L7dhjt+htx7KxAGxyNOFM7nD2b5cV9Gjet
-         buNVVDzwkcV0nD4TURr1q/Yb95l5qlwiHrXiN1Wa5ZSlFNtuhxnJZ+it6EZo//YgJeik
-         FE+LS07QdGQf7NGbEIgl3UI5l28xphpdu91FyM0N5oN+V6awlfOCHo16TYQtqzA0GQ7I
-         yz623pljBCpZ0pOe/hhh3r7I+V3xhKWBdS4NYzn+am8dRY/ZDPkW2jqT444VqZ7G5oFX
-         0AUw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=cc:to:from:subject:message-id:references:mime-version:in-reply-to
-         :date:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=r84PG1jgHBipBYlbDtpXYn0KfCJQRPPV8o0t+BC7r80=;
-        b=jmLxG+77h93PjMvIqv6n/MXWKCO2daDfo+0vvfZsPczW8Ygvqx0jx8NbvTQ97ZRSS1
-         sEeRS6wEIk+hgZfshFwaVkQt/wAoiONcg17Y1f9T2wxnZS1lWZJ+Hm0J9y5eRGFm2EHF
-         ykFJlOBFQZjhtlP0ZEaS1DUGfB20x2yGuj3eK01i4SOI1/5+7mC0f810rhdx3H5vgKoj
-         yIXHzGCKQd5jtTi8CMEfb2Z1VCo0CeGg3d5LMn2KRs7XiE1tqVn7Ittt92gmtPtX2xJZ
-         v5MhARzS2ZqlOQJuHOH+tcUxBKBnqDNf/inUEfqlmL34WKA7cXWktBHHdjboEzOuldCn
-         qk3g==
-X-Gm-Message-State: ACrzQf1vL1ODe574CcUkuilzqNjlU4C7tIqelUED1qGVpHjU9gCHW9uG
-        pC6CGZmaQOk1X2b7iBTtSZnWp2rL3y8TUA==
-X-Google-Smtp-Source: AMsMyM5gX6MRToLN85JAmPfGGO3zA2+D/4SmfJVxgoEu/EYsQQaI5mVzMkNQzf6jmQcMK68t0u9cNyV/pHbppg==
-X-Received: from dlatypov-spec.c.googlers.com ([fda3:e722:ac3:cc00:24:72f4:c0a8:3f35])
- (user=dlatypov job=sendgmr) by 2002:a81:5d7:0:b0:367:300a:b24a with SMTP id
- 206-20020a8105d7000000b00367300ab24amr65639713ywf.128.1668191368372; Fri, 11
- Nov 2022 10:29:28 -0800 (PST)
-Date:   Fri, 11 Nov 2022 10:29:06 -0800
-In-Reply-To: <20221111182906.1377191-1-dlatypov@google.com>
-Mime-Version: 1.0
-References: <20221111182906.1377191-1-dlatypov@google.com>
-X-Mailer: git-send-email 2.38.1.431.g37b22c650d-goog
-Message-ID: <20221111182906.1377191-3-dlatypov@google.com>
-Subject: [PATCH v3 3/3] Documentation: kunit: Remove redundant 'tips.rst' page
-From:   Daniel Latypov <dlatypov@google.com>
-To:     brendanhiggins@google.com, davidgow@google.com
-Cc:     rmoar@google.com, linux-kernel@vger.kernel.org,
-        kunit-dev@googlegroups.com, linux-kselftest@vger.kernel.org,
-        linux-doc@vger.kernel.org, skhan@linuxfoundation.org,
-        Daniel Latypov <dlatypov@google.com>,
-        Sadiya Kazi <sadiyakazi@google.com>
-Content-Type: text/plain; charset="UTF-8"
-X-Spam-Status: No, score=-9.6 required=5.0 tests=BAYES_00,DKIMWL_WL_MED,
-        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_NONE,
-        SPF_HELO_NONE,SPF_PASS,USER_IN_DEF_DKIM_WL autolearn=ham
-        autolearn_force=no version=3.4.6
+        with ESMTP id S234481AbiKKSgv (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Fri, 11 Nov 2022 13:36:51 -0500
+Received: from mga03.intel.com (mga03.intel.com [134.134.136.65])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 814C2845D8;
+        Fri, 11 Nov 2022 10:36:27 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1668191787; x=1699727787;
+  h=from:to:cc:subject:date:message-id:in-reply-to:
+   references:mime-version:content-transfer-encoding;
+  bh=k3YCP4QpTMOre6gSfvMdJZ1a5qHh/SBGDc5XHII2Kw0=;
+  b=Olxpu5x0vcSe8HBAo5ghJOeZv8316LiznvpTaLiovqgbW0Vho7EWEPJZ
+   I8N73QSBtc/ddGwU67MCMYlJXshhI9MkG6LAsw8yteYUDul6FkLIYL3UO
+   ZFDjhHchM7Wnbs1ReZ+yX0lsndcTHULnlThG3+FulM1Suiez4w+RlRj2H
+   +k6Dt2V+Jt2kBtFZQNixYy810aGEm7gUGItP77d0IJQ/XUW5YXZ5+4fRc
+   BvDLBuMyHX88VvbWS+qwNPgedXDB0m1joaAObbgWlhHoXCwa4zuYM3aRm
+   aCeh/nRBBz0RWQkAeVXH0uitOdWR071z/0vE2oUl4P7JiNSnHQdu7o0zX
+   Q==;
+X-IronPort-AV: E=McAfee;i="6500,9779,10528"; a="313447749"
+X-IronPort-AV: E=Sophos;i="5.96,157,1665471600"; 
+   d="scan'208";a="313447749"
+Received: from fmsmga007.fm.intel.com ([10.253.24.52])
+  by orsmga103.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 11 Nov 2022 10:36:26 -0800
+X-IronPort-AV: E=McAfee;i="6500,9779,10528"; a="640089475"
+X-IronPort-AV: E=Sophos;i="5.96,157,1665471600"; 
+   d="scan'208";a="640089475"
+Received: from hermesli-mobl.amr.corp.intel.com (HELO kcaccard-desk.amr.corp.intel.com) ([10.212.218.5])
+  by fmsmga007-auth.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 11 Nov 2022 10:36:25 -0800
+From:   Kristen Carlson Accardi <kristen@linux.intel.com>
+To:     jarkko@kernel.org, dave.hansen@linux.kernel.org, tj@kernel.org,
+        linux-kernel@vger.kernel.org, linux-sgx@vger.kernel.org,
+        cgroups@vger.kernel.org, Dave Hansen <dave.hansen@linux.intel.com>,
+        Thomas Gleixner <tglx@linutronix.de>,
+        Ingo Molnar <mingo@redhat.com>, Borislav Petkov <bp@alien8.de>,
+        x86@kernel.org, "H. Peter Anvin" <hpa@zytor.com>,
+        Jonathan Corbet <corbet@lwn.net>
+Cc:     zhiquan1.li@intel.com,
+        Kristen Carlson Accardi <kristen@linux.intel.com>,
+        Sean Christopherson <seanjc@google.com>,
+        linux-doc@vger.kernel.org
+Subject: [PATCH 26/26] Docs/x86/sgx: Add description for cgroup support
+Date:   Fri, 11 Nov 2022 10:35:31 -0800
+Message-Id: <20221111183532.3676646-27-kristen@linux.intel.com>
+X-Mailer: git-send-email 2.37.3
+In-Reply-To: <20221111183532.3676646-1-kristen@linux.intel.com>
+References: <20221111183532.3676646-1-kristen@linux.intel.com>
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
+X-Spam-Status: No, score=-4.3 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_EF,RCVD_IN_DNSWL_MED,SPF_HELO_NONE,
+        SPF_NONE autolearn=ham autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-From: David Gow <davidgow@google.com>
+Add initial documentation of how to regulate the distribution of
+SGX Enclave Page Cache (EPC) memory via the Miscellaneous cgroup
+controller.
 
-The contents of 'tips.rst' was mostly included in 'usage.rst' way back in
-commit 953574390634 ("Documentation: KUnit: Rework writing page to focus on writing tests"),
-but the tips page remained behind as well.
-
-The parent patches in this series fill in the gaps, so now 'tips.rst' is
-redundant.
-Therefore, delete 'tips.rst'.
-
-While I regret breaking any links to 'tips' which might exist
-externally, it's confusing to have two subtly different versions of the
-same content around.
-
-Signed-off-by: David Gow <davidgow@google.com>
-Signed-off-by: Daniel Latypov <dlatypov@google.com>
-Reviewed-by: Sadiya Kazi <sadiyakazi@google.com>
+Signed-off-by: Sean Christopherson <sean.j.christopherson@intel.com>
+Signed-off-by: Kristen Carlson Accardi <kristen@linux.intel.com>
+Cc: Sean Christopherson <seanjc@google.com>
 ---
-v1 -> v2: rebased onto some parent patches to fix the missing sections
-in usage.rst and tweaked the commit message to reflect that.
----
- Documentation/dev-tools/kunit/index.rst |   1 -
- Documentation/dev-tools/kunit/tips.rst  | 190 ------------------------
- 2 files changed, 191 deletions(-)
- delete mode 100644 Documentation/dev-tools/kunit/tips.rst
+ Documentation/x86/sgx.rst | 77 +++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 77 insertions(+)
 
-diff --git a/Documentation/dev-tools/kunit/index.rst b/Documentation/dev-tools/kunit/index.rst
-index f5d13f1d37be..d5629817cd72 100644
---- a/Documentation/dev-tools/kunit/index.rst
-+++ b/Documentation/dev-tools/kunit/index.rst
-@@ -16,7 +16,6 @@ KUnit - Linux Kernel Unit Testing
- 	api/index
- 	style
- 	faq
--	tips
- 	running_tips
- 
- This section details the kernel unit testing framework.
-diff --git a/Documentation/dev-tools/kunit/tips.rst b/Documentation/dev-tools/kunit/tips.rst
-deleted file mode 100644
-index 492d2ded2f5a..000000000000
---- a/Documentation/dev-tools/kunit/tips.rst
-+++ /dev/null
-@@ -1,190 +0,0 @@
--.. SPDX-License-Identifier: GPL-2.0
--
--============================
--Tips For Writing KUnit Tests
--============================
--
--Exiting early on failed expectations
--------------------------------------
--
--``KUNIT_EXPECT_EQ`` and friends will mark the test as failed and continue
--execution.  In some cases, it's unsafe to continue and you can use the
--``KUNIT_ASSERT`` variant to exit on failure.
--
--.. code-block:: c
--
--	void example_test_user_alloc_function(struct kunit *test)
--	{
--		void *object = alloc_some_object_for_me();
--
--		/* Make sure we got a valid pointer back. */
--		KUNIT_ASSERT_NOT_ERR_OR_NULL(test, object);
--		do_something_with_object(object);
--	}
--
--Allocating memory
-------------------
--
--Where you would use ``kzalloc``, you should prefer ``kunit_kzalloc`` instead.
--KUnit will ensure the memory is freed once the test completes.
--
--This is particularly useful since it lets you use the ``KUNIT_ASSERT_EQ``
--macros to exit early from a test without having to worry about remembering to
--call ``kfree``.
--
--Example:
--
--.. code-block:: c
--
--	void example_test_allocation(struct kunit *test)
--	{
--		char *buffer = kunit_kzalloc(test, 16, GFP_KERNEL);
--		/* Ensure allocation succeeded. */
--		KUNIT_ASSERT_NOT_ERR_OR_NULL(test, buffer);
--
--		KUNIT_ASSERT_STREQ(test, buffer, "");
--	}
--
--
--Testing static functions
--------------------------
--
--If you don't want to expose functions or variables just for testing, one option
--is to conditionally ``#include`` the test file at the end of your .c file, e.g.
--
--.. code-block:: c
--
--	/* In my_file.c */
--
--	static int do_interesting_thing();
--
--	#ifdef CONFIG_MY_KUNIT_TEST
--	#include "my_kunit_test.c"
--	#endif
--
--Injecting test-only code
--------------------------
--
--Similarly to the above, it can be useful to add test-specific logic.
--
--.. code-block:: c
--
--	/* In my_file.h */
--
--	#ifdef CONFIG_MY_KUNIT_TEST
--	/* Defined in my_kunit_test.c */
--	void test_only_hook(void);
--	#else
--	void test_only_hook(void) { }
--	#endif
--
--This test-only code can be made more useful by accessing the current kunit
--test, see below.
--
--Accessing the current test
----------------------------
--
--In some cases, you need to call test-only code from outside the test file, e.g.
--like in the example above or if you're providing a fake implementation of an
--ops struct.
--There is a ``kunit_test`` field in ``task_struct``, so you can access it via
--``current->kunit_test``.
--
--Here's a slightly in-depth example of how one could implement "mocking":
--
--.. code-block:: c
--
--	#include <linux/sched.h> /* for current */
--
--	struct test_data {
--		int foo_result;
--		int want_foo_called_with;
--	};
--
--	static int fake_foo(int arg)
--	{
--		struct kunit *test = current->kunit_test;
--		struct test_data *test_data = test->priv;
--
--		KUNIT_EXPECT_EQ(test, test_data->want_foo_called_with, arg);
--		return test_data->foo_result;
--	}
--
--	static void example_simple_test(struct kunit *test)
--	{
--		/* Assume priv is allocated in the suite's .init */
--		struct test_data *test_data = test->priv;
--
--		test_data->foo_result = 42;
--		test_data->want_foo_called_with = 1;
--
--		/* In a real test, we'd probably pass a pointer to fake_foo somewhere
--		 * like an ops struct, etc. instead of calling it directly. */
--		KUNIT_EXPECT_EQ(test, fake_foo(1), 42);
--	}
--
--
--Note: here we're able to get away with using ``test->priv``, but if you wanted
--something more flexible you could use a named ``kunit_resource``, see
--Documentation/dev-tools/kunit/api/test.rst.
--
--Failing the current test
--------------------------
--
--But sometimes, you might just want to fail the current test. In that case, we
--have ``kunit_fail_current_test(fmt, args...)`` which is defined in ``<kunit/test-bug.h>`` and
--doesn't require pulling in ``<kunit/test.h>``.
--
--E.g. say we had an option to enable some extra debug checks on some data structure:
--
--.. code-block:: c
--
--	#include <kunit/test-bug.h>
--
--	#ifdef CONFIG_EXTRA_DEBUG_CHECKS
--	static void validate_my_data(struct data *data)
--	{
--		if (is_valid(data))
--			return;
--
--		kunit_fail_current_test("data %p is invalid", data);
--
--		/* Normal, non-KUnit, error reporting code here. */
--	}
--	#else
--	static void my_debug_function(void) { }
--	#endif
--
--
--Customizing error messages
----------------------------
--
--Each of the ``KUNIT_EXPECT`` and ``KUNIT_ASSERT`` macros have a ``_MSG`` variant.
--These take a format string and arguments to provide additional context to the automatically generated error messages.
--
--.. code-block:: c
--
--	char some_str[41];
--	generate_sha1_hex_string(some_str);
--
--	/* Before. Not easy to tell why the test failed. */
--	KUNIT_EXPECT_EQ(test, strlen(some_str), 40);
--
--	/* After. Now we see the offending string. */
--	KUNIT_EXPECT_EQ_MSG(test, strlen(some_str), 40, "some_str='%s'", some_str);
--
--Alternatively, one can take full control over the error message by using ``KUNIT_FAIL()``, e.g.
--
--.. code-block:: c
--
--	/* Before */
--	KUNIT_EXPECT_EQ(test, some_setup_function(), 0);
--
--	/* After: full control over the failure message. */
--	if (some_setup_function())
--		KUNIT_FAIL(test, "Failed to setup thing for testing");
--
--Next Steps
--==========
--*   Optional: see the Documentation/dev-tools/kunit/usage.rst page for a more
--    in-depth explanation of KUnit.
+diff --git a/Documentation/x86/sgx.rst b/Documentation/x86/sgx.rst
+index 2bcbffacbed5..f6ca5594dcf2 100644
+--- a/Documentation/x86/sgx.rst
++++ b/Documentation/x86/sgx.rst
+@@ -300,3 +300,80 @@ to expected failures and handle them as follows:
+    first call.  It indicates a bug in the kernel or the userspace client
+    if any of the second round of ``SGX_IOC_VEPC_REMOVE_ALL`` calls has
+    a return code other than 0.
++
++
++Cgroup Support
++==============
++
++The "sgx_epc" resource within the Miscellaneous cgroup controller regulates
++distribution of SGX EPC memory, which is a subset of system RAM that
++is used to provide SGX-enabled applications with protected memory,
++and is otherwise inaccessible, i.e. shows up as reserved in
++/proc/iomem and cannot be read/written outside of an SGX enclave.
++
++Although current systems implement EPC by stealing memory from RAM,
++for all intents and purposes the EPC is independent from normal system
++memory, e.g. must be reserved at boot from RAM and cannot be converted
++between EPC and normal memory while the system is running.  The EPC is
++managed by the SGX subsystem and is not accounted by the memory
++controller.  Note that this is true only for EPC memory itself, i.e.
++normal memory allocations related to SGX and EPC memory, e.g. the
++backing memory for evicted EPC pages, are accounted, limited and
++protected by the memory controller.
++
++Much like normal system memory, EPC memory can be overcommitted via
++virtual memory techniques and pages can be swapped out of the EPC
++to their backing store (normal system memory allocated via shmem).
++The SGX EPC subsystem is analogous to the memory subsytem, and
++it implements limit and protection models for EPC memory.
++
++SGX EPC Interface Files
++-----------------------
++
++For a generic description of the Miscellaneous controller interface
++files, please see Documentation/admin-guide/cgroup-v2.rst
++
++All SGX EPC memory amounts are in bytes unless explicitly stated
++otherwise.  If a value which is not PAGE_SIZE aligned is written,
++the actual value used by the controller will be rounded down to
++the closest PAGE_SIZE multiple.
++
++  misc.capacity
++        A read-only flat-keyed file shown only in the root cgroup.
++        The sgx_epc resource will show the total amount of EPC
++        memory available on the platform.
++
++  misc.current
++        A read-only flat-keyed file shown in the non-root cgroups.
++        The sgx_epc resource will show the current active EPC memory
++        usage of the cgroup and its descendants. EPC pages that are
++        swapped out to backing RAM are not included in the current count.
++
++  misc.max
++        A read-write single value file which exists on non-root
++        cgroups. The sgx_epc resource will show the EPC usage
++        hard limit. The default is "max".
++
++        If a cgroup's EPC usage reaches this limit, EPC allocations,
++        e.g. for page fault handling, will be blocked until EPC can
++        be reclaimed from the cgroup.  If EPC cannot be reclaimed in
++        a timely manner, reclaim will be forced, e.g. by ignoring LRU.
++
++  misc.events
++	A read-write flat-keyed file which exists on non-root cgroups.
++	Writes to the file reset the event counters to zero.  A value
++	change in this file generates a file modified event.
++
++	  max
++		The number of times the cgroup has triggered a reclaim
++		due to its EPC usage approaching (or exceeding) its max
++		EPC boundary.
++
++Migration
++---------
++
++Once an EPC page is charged to a cgroup (during allocation), it
++remains charged to the original cgroup until the page is released
++or reclaimed.  Migrating a process to a different cgroup doesn't
++move the EPC charges that it incurred while in the previous cgroup
++to its new cgroup.
 -- 
-2.38.1.431.g37b22c650d-goog
+2.37.3
 
