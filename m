@@ -2,114 +2,161 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id E23E962823D
-	for <lists+linux-doc@lfdr.de>; Mon, 14 Nov 2022 15:19:43 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id A183E62838E
+	for <lists+linux-doc@lfdr.de>; Mon, 14 Nov 2022 16:12:12 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S236538AbiKNOTm (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 14 Nov 2022 09:19:42 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:59580 "EHLO
+        id S237124AbiKNPMK (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 14 Nov 2022 10:12:10 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:40246 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S237020AbiKNOTd (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Mon, 14 Nov 2022 09:19:33 -0500
-Received: from foss.arm.com (foss.arm.com [217.140.110.172])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTP id 8BBA72656C;
-        Mon, 14 Nov 2022 06:19:31 -0800 (PST)
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
-        by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 71CAB23A;
-        Mon, 14 Nov 2022 06:19:37 -0800 (PST)
-Received: from [192.168.0.110] (unknown [172.31.20.19])
-        by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 61C753F73D;
-        Mon, 14 Nov 2022 06:19:21 -0800 (PST)
-Message-ID: <40f1b5ad-2165-bb81-1ff5-89786373fa14@arm.com>
-Date:   Mon, 14 Nov 2022 19:49:13 +0530
+        with ESMTP id S237174AbiKNPMI (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Mon, 14 Nov 2022 10:12:08 -0500
+Received: from mail-pf1-x42a.google.com (mail-pf1-x42a.google.com [IPv6:2607:f8b0:4864:20::42a])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 048C8BC8C
+        for <linux-doc@vger.kernel.org>; Mon, 14 Nov 2022 07:12:07 -0800 (PST)
+Received: by mail-pf1-x42a.google.com with SMTP id y13so11252757pfp.7
+        for <linux-doc@vger.kernel.org>; Mon, 14 Nov 2022 07:12:06 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=bytedance-com.20210112.gappssmtp.com; s=20210112;
+        h=content-transfer-encoding:in-reply-to:from:references:cc:to:subject
+         :user-agent:mime-version:date:message-id:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=e/0liD4zfDdUwy8XG2a2Y/qRgR4CN54ZKUBk4lToHno=;
+        b=riU8FvWGPfAZqyj8WmPJvGzPQ68RHcW8+D48NwSgZ3lNAnI2AXpGhtHVf3bl6q+qZ9
+         pbhT1osj/KzHcAgUo3UPhTPY+czk+QfGN190xCV7kRBhB1/yAJpiYZOwf/LMv+Xi/cwp
+         WGJ2a1qhdA+ztabSdiNTnN9ZJFJF4npNykY/RWPvvkhMeSXFCO9HSAkD536ubLp41xwy
+         MO2VuanYlZE3CMyuc9Cg2XRIiZ7Ga0L/+i6AFFYP4N/yBB04zjtXkL8kOsIKYL2/d6n7
+         +yiWi7psl/h2Wjs4VuexYYEpW+T1uEb6l8MoZi4/YJ0oVcv0BdpGGYgDEGssuM7/kCro
+         aA0A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=content-transfer-encoding:in-reply-to:from:references:cc:to:subject
+         :user-agent:mime-version:date:message-id:x-gm-message-state:from:to
+         :cc:subject:date:message-id:reply-to;
+        bh=e/0liD4zfDdUwy8XG2a2Y/qRgR4CN54ZKUBk4lToHno=;
+        b=ihF8W1VgYzowB5WyqXa2ppEgGeZWbVORwXV0UbYOXJuMp9ZtGdA5mQ9JfsyYdLU1cO
+         oNy9noUF2QPpYC55YDSSFXXi7HjONXEsfK3l07hv28AXTQ8lWftQPSuK5RWNFJx2mnSx
+         3LrgHkul8VbgRdRv6E2zZLO5V862gtD73jEUGgjSIbmQNr6xQiJe5RFUfxE6Kd3V5WpP
+         eStaldF1iwPdUoQTTrYiqAPzuH41v+kwZ402m01+L+icvflBv4j7KTqzOR8ffZzu350h
+         hqUMAG7On3ZvJHv4nvCqNY/kCzsu+CGwxwCQGuhN3rYD87s+pYj0v/Ub1j4hkPm3HkNV
+         Cb9Q==
+X-Gm-Message-State: ANoB5pnhzHzSXyece6nejJl/3KCY+9BC6HTvUVwbcKqY/SYgaTeMtVx7
+        zfGe57J4z+kSmx8UAsKBDIUWow==
+X-Google-Smtp-Source: AA0mqf5deRRQMkg46X2uMf/zlBQAB+/Exhx4ssc553jIiUej9t4Dih0k5QiaoT6krFeU5qMYoAQI5Q==
+X-Received: by 2002:a63:d143:0:b0:45c:5a74:9a92 with SMTP id c3-20020a63d143000000b0045c5a749a92mr12351490pgj.473.1668438726461;
+        Mon, 14 Nov 2022 07:12:06 -0800 (PST)
+Received: from [10.68.76.92] ([139.177.225.229])
+        by smtp.gmail.com with ESMTPSA id 132-20020a62148a000000b0056c814a501dsm7100210pfu.10.2022.11.14.07.12.02
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Mon, 14 Nov 2022 07:12:05 -0800 (PST)
+Message-ID: <3a3b4f5b-14d1-27d8-7727-cf23da90988f@bytedance.com>
+Date:   Mon, 14 Nov 2022 23:12:00 +0800
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.2.2
-Subject: Re: [PATCH v5 2/2] arm64: support batched/deferred tlb shootdown
- during page reclamation
-Content-Language: en-US
-To:     Yicong Yang <yangyicong@huawei.com>, akpm@linux-foundation.org,
-        linux-mm@kvack.org, linux-arm-kernel@lists.infradead.org,
-        x86@kernel.org, catalin.marinas@arm.com, will@kernel.org,
-        linux-doc@vger.kernel.org
-Cc:     yangyicong@hisilicon.com, corbet@lwn.net, peterz@infradead.org,
-        arnd@arndb.de, punit.agrawal@bytedance.com,
-        linux-kernel@vger.kernel.org, darren@os.amperecomputing.com,
-        huzhanyuan@oppo.com, lipeifeng@oppo.com, zhangshiming@oppo.com,
-        guojian@oppo.com, realmz6@gmail.com, linux-mips@vger.kernel.org,
-        openrisc@lists.librecores.org, linuxppc-dev@lists.ozlabs.org,
-        linux-riscv@lists.infradead.org, linux-s390@vger.kernel.org,
-        Barry Song <21cnbao@gmail.com>, wangkefeng.wang@huawei.com,
-        xhao@linux.alibaba.com, prime.zeng@hisilicon.com,
-        Barry Song <v-songbaohua@oppo.com>,
-        Nadav Amit <namit@vmware.com>, Mel Gorman <mgorman@suse.de>
-References: <20221028081255.19157-1-yangyicong@huawei.com>
- <20221028081255.19157-3-yangyicong@huawei.com>
- <86fbdc8c-0dcb-9b8f-d843-63460d8b1d6a@arm.com>
- <9982dac0-9f2e-112a-d440-467c8e8f8aa4@huawei.com>
-From:   Anshuman Khandual <anshuman.khandual@arm.com>
-In-Reply-To: <9982dac0-9f2e-112a-d440-467c8e8f8aa4@huawei.com>
-Content-Type: text/plain; charset=UTF-8
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
+ Thunderbird/102.4.1
+Subject: Re: [External] Re: [PATCH v2] mm: add new syscall
+ pidfd_set_mempolicy().
+To:     Michal Hocko <mhocko@suse.com>
+Cc:     Andrew Morton <akpm@linux-foundation.org>, corbet@lwn.net,
+        linux-mm@kvack.org, linux-kernel@vger.kernel.org,
+        linux-api@vger.kernel.org, linux-doc@vger.kernel.org
+References: <20221111084051.2121029-1-hezhongkun.hzk@bytedance.com>
+ <20221111112732.30e1696bcd0d5b711c188a9a@linux-foundation.org>
+ <a44f794e-fe60-e261-3631-9107822d5c36@bytedance.com>
+ <Y3IqLzvduM6HqPJV@dhcp22.suse.cz>
+From:   Zhongkun He <hezhongkun.hzk@bytedance.com>
+In-Reply-To: <Y3IqLzvduM6HqPJV@dhcp22.suse.cz>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-Spam-Status: No, score=-4.2 required=5.0 tests=BAYES_00,NICE_REPLY_A,
-        RCVD_IN_DNSWL_MED,SPF_HELO_NONE,SPF_NONE autolearn=ham
-        autolearn_force=no version=3.4.6
+X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+        DKIM_VALID,NICE_REPLY_A,RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,SPF_PASS
+        autolearn=unavailable autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-
-
-On 11/14/22 14:16, Yicong Yang wrote:
-> On 2022/11/14 11:29, Anshuman Khandual wrote:
->>
->> On 10/28/22 13:42, Yicong Yang wrote:
->>> +static inline bool arch_tlbbatch_should_defer(struct mm_struct *mm)
->>> +{
->>> +	/*
->>> +	 * TLB batched flush is proved to be beneficial for systems with large
->>> +	 * number of CPUs, especially system with more than 8 CPUs. TLB shutdown
->>> +	 * is cheap on small systems which may not need this feature. So use
->>> +	 * a threshold for enabling this to avoid potential side effects on
->>> +	 * these platforms.
->>> +	 */
->>> +	if (num_online_cpus() <= CONFIG_ARM64_NR_CPUS_FOR_BATCHED_TLB)
->>> +		return false;
->>> +
->>> +#ifdef CONFIG_ARM64_WORKAROUND_REPEAT_TLBI
->>> +	if (unlikely(this_cpu_has_cap(ARM64_WORKAROUND_REPEAT_TLBI)))
->>> +		return false;
->>> +#endif
->> should_defer_flush() is immediately followed by set_tlb_ubc_flush_pending() which calls
->> arch_tlbbatch_add_mm(), triggering the actual TLBI flush via __flush_tlb_page_nosync().
->> It should be okay to check capability with this_cpu_has_cap() as the entire call chain
->> here is executed on the same cpu. But just wondering if cpus_have_const_cap() would be
->> simpler, consistent, and also cost effective ?
->>
-> ok. Checked cpus_have_const_cap() I think it matches your words.
+Sorry,michal. I dont know if my expression is accurate.
 > 
->> Regardless, a comment is needed before the #ifdef block explaining why it does not make
->> sense to defer/batch when __tlbi()/__tlbi_user() implementation will execute 'dsb(ish)'
->> between two TLBI instructions to workaround the errata.
->>
-> The workaround for the errata mentioned the affected platforms need the tlbi+dsb to be done
-> twice, so I'm not sure if we defer the final dsb will cause any problem so I think the judgement
-> here is used for safety. I have no such platform to test if it's ok to defer the last dsb.
+> We shouldn't really rely on mmap_sem for this IMO. 
 
-We should not defer TLB flush on such systems, as ensured by the above test and 'false'
-return afterwards. The only question is whether this decision should be taken at a CPU
-level (which is affected by the errata) or the whole system level.
+  Yes, We should rely on mmap_sem for vma->vm_policy,but not for
+  process context policy(task->mempolicy).
 
-What is required now
+> There is alloc_lock
+> (aka task lock) that makes sure the policy is stable so that caller can
+> atomically take a reference and hold on the policy. And we do not do
+> that consistently and this should be fixed.
 
-- Replace this_cpu_has_cap() with cpus_have_const_cap ?
-- Add the following comment before the #ifdef check
+I saw some explanations in the doc("numa_memory_policy.rst") and
+comments(mempolcy.h) why not use locks and reference in page
+allocation:
 
-/*
- * TLB flush deferral is not required on systems, which are affected with
- * ARM64_WORKAROUND_REPEAT_TLBI, as __tlbi()/__tlbi_user() implementation
- * will have two consecutive TLBI instructions with a dsb(ish) in between
- * defeating the purpose (i.e save overall 'dsb ish' cost).
- */
+In process context there is no locking because only the process accesses
+its own state.
+
+During run-time "usage" of the policy, we attempt to minimize atomic
+operations on the reference count, as this can lead to cache lines
+bouncing between cpus and NUMA nodes.  "Usage" here means one of
+the following:
+1) querying of the policy, either by the task itself [using
+the get_mempolicy() API discussed below] or by another task using
+the /proc/<pid>/numa_maps interface.
+
+2) examination of the policy to determine the policy mode and
+associated node or node lists, if any, for page allocation.
+This is considered a "hot path".  Note that for MPOL_BIND, the
+"usage" extends across the entire allocation process, which may
+sleep during page reclaimation, because the BIND policy nodemask
+is used, by reference, to filter ineligible nodes.
+
+> E.g. just looking at some
+> random places like allowed_mems_nr (relying on get_task_policy) is
+> completely lockless and some paths (like fadvise) do not use any of the
+> explicit (alloc_lock) or implicit (mmap_lock) locking. That means that
+> the task_work based approach cannot really work in this case, right?
+
+The task_work based approach (mpol_put_async()) allows mempolicy release
+to be transferred from the pidfd_set_mempolicy() context to the
+target process context.The old mempolicy droped by pidfd_set_mempolicy()
+will be freed by task_work(mpol_free_async) whenever the target task
+exit to user mode. At this point task->mempolicy will not be used,
+thus avoiding race conditions.
+
+pidfd process context:
+void mpol_put_async()
+{.....
+         init_task_work(&p->w.cb_head, "mpol_free_async");
+         if (!task_work_add(task, &p->w.cb_head, TWA_SIGNAL_NO_IPI))
+                 return;}
+
+target task:
+/* there is no lock and mempolicy may about to be freed by
+  * pidfd_set_mempolicy().
+  */
+pol = get_task_policy()
+page = __alloc_pages(..pol)
+.....
+exit_to_user_mode
+	task_work_run()
+	/* It's safe to free old mempolicy
+  	* dropped by pidfd_set_mempolicy() at this time.*/
+		mpol_free_async()
+
+> Playing more tricks will not really help long term. So while your patch
+> tries to workaround the current state of the art I do not think we
+> really want that. As stated previously, I would much rather see proper
+> reference counting instead. I thought we have agreed this would be the
+> first approach unless the resulting performance is really bad. Have you
+> concluded that to be the case? I do not see any numbers or notes in the
+> changelog.
+
+I have tried it, but I found that using task_work to release the
+old policy on the target process can solve the problem, but I'm
+not sure. My expression may not be very clear, Looking forward to
+your reply.
+
+Thanks.
+
+
