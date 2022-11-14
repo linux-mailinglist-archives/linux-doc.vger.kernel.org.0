@@ -2,169 +2,109 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 7A091627A06
-	for <lists+linux-doc@lfdr.de>; Mon, 14 Nov 2022 11:07:33 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 902BA627B21
+	for <lists+linux-doc@lfdr.de>; Mon, 14 Nov 2022 11:57:19 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S235617AbiKNKHb (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 14 Nov 2022 05:07:31 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:39128 "EHLO
+        id S235602AbiKNK5R (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 14 Nov 2022 05:57:17 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:52260 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S236453AbiKNKGh (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Mon, 14 Nov 2022 05:06:37 -0500
-Received: from ams.source.kernel.org (ams.source.kernel.org [145.40.68.75])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id CCC7CD91;
-        Mon, 14 Nov 2022 02:05:53 -0800 (PST)
-Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
-        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
-        (No client certificate requested)
-        by ams.source.kernel.org (Postfix) with ESMTPS id E8CC2B80DA9;
-        Mon, 14 Nov 2022 10:05:51 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 5F53EC433C1;
-        Mon, 14 Nov 2022 10:05:46 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-        s=k20201202; t=1668420350;
-        bh=NhbLUkVP1qgXtJ3N5nkqK7ZHPyOyPFqJ0lETMsTVYws=;
-        h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-        b=c3/xqHsgaufIAMdRP91uc5oGFKPH6u7DIAYCBEJ1ZkEeqyrESomFRzqxttQqIUY6m
-         4qh+KhN2tnUOrXjLTJiR+gz0VOTCqYxrA0JytJ3b90JwtGjRP9d/hOcCityd/ecDIT
-         LyHHHUVLTRpG2chq4+AhNkoSlQeEjio/0N2uq/qWBdyI2/JbMjhZTNK4wWTGI8TpmA
-         Hr03doA+gJ+IOgfJvZ75vgcfqKqeLj2T0taLl8D3QSh50KNgSnpy7M+nuoEF6EZOoX
-         RI8ePXZAC8s7oAw1x//Flr4Om7AX1UJS3zKbklaxR6mVAuP6U6osjYKX9fktcPw7uu
-         4KQleIGBiObug==
-Date:   Mon, 14 Nov 2022 10:05:43 +0000
-From:   Lee Jones <lee@kernel.org>
-To:     Rob Herring <robh@kernel.org>
-Cc:     "Russell King (Oracle)" <linux@armlinux.org.uk>,
-        Krzysztof Kozlowski <krzysztof.kozlowski@linaro.org>,
-        Linus Walleij <linus.walleij@linaro.org>,
-        Bartosz Golaszewski <brgl@bgdev.pl>,
-        Alyssa Rosenzweig <alyssa@rosenzweig.io>,
-        Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
-        asahi@lists.linux.dev, devicetree@vger.kernel.org,
-        Hector Martin <marcan@marcan.st>,
+        with ESMTP id S235617AbiKNK5Q (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Mon, 14 Nov 2022 05:57:16 -0500
+Received: from mail-wr1-x433.google.com (mail-wr1-x433.google.com [IPv6:2a00:1450:4864:20::433])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id F22301A207;
+        Mon, 14 Nov 2022 02:57:15 -0800 (PST)
+Received: by mail-wr1-x433.google.com with SMTP id z14so17315957wrn.7;
+        Mon, 14 Nov 2022 02:57:15 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112;
+        h=mime-version:user-agent:references:message-id:date:in-reply-to
+         :subject:cc:to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=6WjFufgdkg/OkYWcIaQRnwXicBL1zcGqAln66oAXCb8=;
+        b=IOHD6TkkM8jJW1lWBwzRJ+XOJPBdntJ3gje1DWAKn0tKNsIVypUozdO7F1tPI6XclJ
+         phOcu5JlJPmOOm9qjcuSIYnCSkBAzz56R7kMNQIY1kx/kdHvKgE8smpBHgf9BBlKNDkY
+         wZ/Q2PF/CHyrp/DfekjEqJ7DWwLaFrmnw/wyJOC50+8cjLif0HQRYPN2qZq5BTcd2oNi
+         Trxjuq4ZAuaWV/vpfvvHcNR7lUA7Dwe+N1DymWTQ7SjAycBIwY0bLE9yAWLWSRExGdNs
+         +tRnvCMSJiSakDTYAyDNtkKfA1y+vcaNaCUima1R6QyrEHPB6O3wCmkxpt5zYT7c96JQ
+         NwRQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=mime-version:user-agent:references:message-id:date:in-reply-to
+         :subject:cc:to:from:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=6WjFufgdkg/OkYWcIaQRnwXicBL1zcGqAln66oAXCb8=;
+        b=FpSn/Sdtx20kZXL5qVx+AgtnFs6qxzM5ahIrFFrMo1CIiSzvs1lxMbYPl6PVra02Dx
+         d7/25FuL2z344MagWyqBkLXlsjmyHuvxU7qkVddBt6qnmYvImNKvRJWVx129vZO1RPIo
+         e7GDAsY06Lejz+p/aoASfK91naPVTQOpwnRxdIHcfttGYXy3+h3fwkYfQ5I/+UrDY0Mu
+         6hLT1PNGKYPBYtmN2ny1Lok9HhNeItfmCX0LsEgh9SMVffE3UTatwNkdpTV6Znb10/cp
+         wb3Fm3BH4rPw0gZxb1v63sV5FE7rru4p40JMemv+63g+X9dj+IXld9/oxWi6tmOPWwBu
+         Ijxg==
+X-Gm-Message-State: ANoB5pkfCWGLnMZDBHu/3eusSIiMrrTA7RGIyJ4zTwy3JeLEJ0Oqo6hn
+        WWQF9abHesTghERgtt6g6ZU=
+X-Google-Smtp-Source: AA0mqf4WeoJGh9UpaiS0ZkbteiHw+SNHbGFL2jdaBsDx/ANXC8uS0rBqB7yo48ZbBV0/pCVspdwFPg==
+X-Received: by 2002:adf:ef8b:0:b0:236:5700:d4cb with SMTP id d11-20020adfef8b000000b002365700d4cbmr7361348wro.597.1668423434278;
+        Mon, 14 Nov 2022 02:57:14 -0800 (PST)
+Received: from imac ([2a02:8010:60a0:0:6942:6e2a:2257:aa49])
+        by smtp.gmail.com with ESMTPSA id p16-20020adfe610000000b002364c77bc96sm9276977wrm.33.2022.11.14.02.57.12
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 14 Nov 2022 02:57:13 -0800 (PST)
+From:   Donald Hunter <donald.hunter@gmail.com>
+To:     Andrii Nakryiko <andrii.nakryiko@gmail.com>
+Cc:     bpf@vger.kernel.org, linux-doc@vger.kernel.org,
+        Alexei Starovoitov <ast@kernel.org>,
+        Daniel Borkmann <daniel@iogearbox.net>,
+        Andrii Nakryiko <andrii@kernel.org>,
         Jonathan Corbet <corbet@lwn.net>,
-        Krzysztof Kozlowski <krzysztof.kozlowski+dt@linaro.org>,
-        linux-arm-kernel@lists.infradead.org, linux-doc@vger.kernel.org,
-        linux-gpio@vger.kernel.org, Petr Mladek <pmladek@suse.com>,
-        Rasmus Villemoes <linux@rasmusvillemoes.dk>,
-        Sergey Senozhatsky <senozhatsky@chromium.org>,
-        Steven Rostedt <rostedt@goodmis.org>,
-        Sven Peter <sven@svenpeter.dev>
-Subject: Re: [PATCH v3 3/7] dt-bindings: mfd: add binding for Apple Mac
- System Management Controller
-Message-ID: <Y3IS96xQhs1/Jre4@google.com>
-References: <Y2qEpgIdpRTzTQbN@shell.armlinux.org.uk>
- <E1osRXT-002mw3-JR@rmk-PC.armlinux.org.uk>
- <531d88b8-75db-1d8f-1384-b8d05594e7b3@linaro.org>
- <Y2rWp4wasbflS/0y@shell.armlinux.org.uk>
- <20221109221723.GA2948356-robh@kernel.org>
+        Dave Tucker <dave@dtucker.co.uk>,
+        Maryam Tahhan <mtahhan@redhat.com>
+Subject: Re: [PATCH bpf-next v10 1/1] bpf, docs: document BPF_MAP_TYPE_ARRAY
+In-Reply-To: <CAEf4Bzak4A-vP=NeJheA0poiu_8fK53cvbq1EnnSHC78FB7mtQ@mail.gmail.com>
+        (Andrii Nakryiko's message of "Fri, 11 Nov 2022 11:39:51 -0800")
+Date:   Mon, 14 Nov 2022 10:18:04 +0000
+Message-ID: <m24jv17sbn.fsf@gmail.com>
+References: <20221109174604.31673-1-donald.hunter@gmail.com>
+        <20221109174604.31673-2-donald.hunter@gmail.com>
+        <CAEf4Bzak4A-vP=NeJheA0poiu_8fK53cvbq1EnnSHC78FB7mtQ@mail.gmail.com>
+User-Agent: Gnus/5.13 (Gnus v5.13) Emacs/28.2 (darwin)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <20221109221723.GA2948356-robh@kernel.org>
-X-Spam-Status: No, score=-7.1 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_HI,
-        SPF_HELO_NONE,SPF_PASS autolearn=ham autolearn_force=no version=3.4.6
+Content-Type: text/plain
+X-Spam-Status: No, score=-2.1 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_FROM,
+        RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,SPF_PASS autolearn=ham
+        autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Wed, 09 Nov 2022, Rob Herring wrote:
+Andrii Nakryiko <andrii.nakryiko@gmail.com> writes:
 
-> On Tue, Nov 08, 2022 at 10:22:31PM +0000, Russell King (Oracle) wrote:
-> > On Tue, Nov 08, 2022 at 09:55:58PM +0100, Krzysztof Kozlowski wrote:
-> > > On 08/11/2022 17:33, Russell King (Oracle) wrote:
-> > > > Add a DT binding for the Apple Mac System Management Controller.
-> > > 
-> > > Drop the second, redundant "binding" from subject. It's already in prefix.
-> > 
-> > Yet another thing that's been there from the start... how many more
-> > things are you going to pick up in subsequent versions of the patch?
-> > When does this stop?
-> > 
-> > In any case, taking your comment literally,
-> > 
-> > "dt-bindings: mfd: add for Apple Mac System Management Controller"
-> > 
-> > makes no sense, so presumably you want something more than that.
-> > 
-> > In any case, I see several recent cases already merged which follow
-> > the pattern that I've used and that you've reviewed.
-> > 
-> > > > Signed-off-by: Russell King (Oracle) <rmk+kernel@armlinux.org.uk>
-> > > > ---
-> > > >  .../devicetree/bindings/mfd/apple,smc.yaml    | 67 +++++++++++++++++++
-> > > >  1 file changed, 67 insertions(+)
-> > > >  create mode 100644 Documentation/devicetree/bindings/mfd/apple,smc.yaml
-> > > > 
-> > > > diff --git a/Documentation/devicetree/bindings/mfd/apple,smc.yaml b/Documentation/devicetree/bindings/mfd/apple,smc.yaml
-> > > > new file mode 100644
-> > > > index 000000000000..014eba5a1bbc
-> > > > --- /dev/null
-> > > > +++ b/Documentation/devicetree/bindings/mfd/apple,smc.yaml
-> > > > @@ -0,0 +1,67 @@
-> > > > +# SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause)
-> > > > +%YAML 1.2
-> > > > +---
-> > > > +$id: http://devicetree.org/schemas/mfd/apple,smc.yaml#
-> > > > +$schema: http://devicetree.org/meta-schemas/core.yaml#
-> > > > +
-> > > > +title: Apple Mac System Management Controller
-> > > > +
-> > > > +maintainers:
-> > > > +  - Hector Martin <marcan@marcan.st>
-> > > > +
-> > > > +description:
-> > > > +  Apple Mac System Management Controller implements various functions
-> > > > +  such as GPIO, RTC, power, reboot.
-> > > > +
-> > > > +properties:
-> > > > +  compatible:
-> > > > +    items:
-> > > > +      - enum:
-> > > > +          - apple,t6000-smc
-> > > > +          - apple,t8103-smc
-> > > > +          - apple,t8112-smc
-> > > > +      - const: apple,smc
-> > > > +
-> > > > +  reg:
-> > > > +    items:
-> > > > +      - description: SMC area
-> > > > +      - description: SRAM area
-> > > > +
-> > > > +  reg-names:
-> > > > +    items:
-> > > > +      - const: smc
-> > > > +      - const: sram
-> > > > +
-> > > > +  mboxes:
-> > > > +    maxItems: 1
-> > > > +
-> > > > +  gpio:
-> > > > +    $ref: /schemas/gpio/gpio-macsmc.yaml
-> > > 
-> > > So this depends on other patch, so:
-> > > 1. You need mention the dependency in cover letter (nothing there),
-> > > 2. Re-order patches.
-> > > 
-> > > The GPIO cannot go separate tree and this must be explicitly communicated.
-> > 
-> > Sigh, getting an order that is sensible is really bloody difficult.
-> 
-> It's not. Sub-devices before the MFD. The only time that doesn't work is 
-> when the sub-devices put the parent MFD in their example. The solution 
-> there is don't do that. Just 1 complete example in the MFD schema and no 
-> examples in the sub-devices.
-> 
-> > I'm quite sure Lee is only going to want to apply the mfd bits. 
-> 
-> Indeed. I can't seem to make Lee care... All the schemas should really 
-> be applied together.
+> On Wed, Nov 9, 2022 at 9:46 AM Donald Hunter <donald.hunter@gmail.com> wrote:
+>>
+>> +This example BPF program shows how to access an array element.
+>> +
+>> +.. code-block:: c
+>> +
+>> +    int bpf_prog(struct __sk_buff *skb)
+>> +    {
+>> +            struct iphdr ip;
+>> +            int index;
+>> +            long *value;
+>> +
+>> +            if (bpf_skb_load_bytes(skb, ETH_HLEN, &ip, sizeof(ip)) < 0)
+>> +                    return 0;
+>> +
+>> +            index = ip.protocol;
+>> +            value = bpf_map_lookup_elem(&my_map, &index);
+>> +            if (value)
+>> +                    __sync_fetch_and_add(value, skb->len);
+>
+> should be &value
+>
+> I fixed it up and applied to bpf-next, thanks.
 
-I care about drivers.  Happy to take the set as a whole if it helps.
+I double checked and it really should be value, which is already a
+pointer.
 
--- 
-Lee Jones [李琼斯]
+Do you want me to send a patch to fix it up?
