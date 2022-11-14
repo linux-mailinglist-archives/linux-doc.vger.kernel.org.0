@@ -2,97 +2,111 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 48AF2627D01
-	for <lists+linux-doc@lfdr.de>; Mon, 14 Nov 2022 12:51:30 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id DD70E6280DC
+	for <lists+linux-doc@lfdr.de>; Mon, 14 Nov 2022 14:11:57 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S236515AbiKNLv2 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 14 Nov 2022 06:51:28 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:53618 "EHLO
+        id S237871AbiKNNLz (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 14 Nov 2022 08:11:55 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:39106 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S236634AbiKNLvN (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Mon, 14 Nov 2022 06:51:13 -0500
-Received: from smtp-out1.suse.de (smtp-out1.suse.de [195.135.220.28])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 4A8F023BDB;
-        Mon, 14 Nov 2022 03:46:54 -0800 (PST)
-Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
-        (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-         key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
-        (No client certificate requested)
-        by smtp-out1.suse.de (Postfix) with ESMTPS id 00E3122921;
-        Mon, 14 Nov 2022 11:46:53 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-        t=1668426413; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-         mime-version:mime-version:content-type:content-type:
-         in-reply-to:in-reply-to:references:references;
-        bh=yz5j0yLS60RhoozEN+4P1jT0Vz/W/dGC3w+wIvkQm60=;
-        b=JqQA61DtYKzNUreBa21Ln2ee1u+Nnx3ICkr8BaOKN1saiEjcwA2jBOTq0n8NqAUZVCidL7
-        JpH0+hZ62Cja3fMW9DWOSUAStE2nyIg3wJaAsYseV4a7l34Scin4D5AEL2cBZhYft95Iq5
-        bsD5IlYSAPDifI2Kyze3U+Lo5IGCyak=
-Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
-        (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-         key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
-        (No client certificate requested)
-        by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id D7BB013A92;
-        Mon, 14 Nov 2022 11:46:52 +0000 (UTC)
-Received: from dovecot-director2.suse.de ([192.168.254.65])
-        by imap2.suse-dmz.suse.de with ESMTPSA
-        id wypfM6wqcmNzBAAAMHmgww
-        (envelope-from <mhocko@suse.com>); Mon, 14 Nov 2022 11:46:52 +0000
-Date:   Mon, 14 Nov 2022 12:46:52 +0100
-From:   Michal Hocko <mhocko@suse.com>
-To:     Zhongkun He <hezhongkun.hzk@bytedance.com>
-Cc:     Andrew Morton <akpm@linux-foundation.org>, corbet@lwn.net,
-        linux-mm@kvack.org, linux-kernel@vger.kernel.org,
-        linux-api@vger.kernel.org, linux-doc@vger.kernel.org
-Subject: Re: [External] Re: [PATCH v2] mm: add new syscall
- pidfd_set_mempolicy().
-Message-ID: <Y3IqrCrDNdM5LDFt@dhcp22.suse.cz>
-References: <20221111084051.2121029-1-hezhongkun.hzk@bytedance.com>
- <20221111112732.30e1696bcd0d5b711c188a9a@linux-foundation.org>
- <a44f794e-fe60-e261-3631-9107822d5c36@bytedance.com>
- <Y3IqLzvduM6HqPJV@dhcp22.suse.cz>
+        with ESMTP id S237909AbiKNNLz (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Mon, 14 Nov 2022 08:11:55 -0500
+Received: from mail-pg1-x529.google.com (mail-pg1-x529.google.com [IPv6:2607:f8b0:4864:20::529])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id D54F317899;
+        Mon, 14 Nov 2022 05:11:51 -0800 (PST)
+Received: by mail-pg1-x529.google.com with SMTP id b62so10246449pgc.0;
+        Mon, 14 Nov 2022 05:11:51 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112;
+        h=in-reply-to:content-disposition:mime-version:references:message-id
+         :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+        bh=itwylVtul7Z49JKkp9kyK5X/B4iweq+ayVxXXotYQJw=;
+        b=MhmYxowk5DwtJgYGp8dCt9DBse6IZR1/QsPRPK0Xelm6pisV3yfUoD4CTsa+dinrge
+         cCwlff3pZMlBTXU/UMzhdVbGftM/n1A+azTXLAt99AkOPpb+rroZ08Ko+CHLI6wTBD0g
+         CqJ1fh8ASbfN7E9l6t16+7WPeuQtR9z1doqXcgOJGx7US+/u/QOWhMEQ4PTraMy9rIZM
+         jDorNtoXLX31vjleS9m/c6D1DGyOB0aiJTBy0B3zYzpUPupsd6hHueIH8UwBSU8Uc43z
+         SK0ofefxNq21dBXovbGvssLeytLO6I4d3VPth8zh+RIBcFDwPQVXdZCgraPo/25mYkxw
+         e9Cw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=in-reply-to:content-disposition:mime-version:references:message-id
+         :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=itwylVtul7Z49JKkp9kyK5X/B4iweq+ayVxXXotYQJw=;
+        b=fgqEtajlm9Kr/M8KZtgausdwJiRnHPqUXKT5NQwzu/NoMksYaBJSomaCWYvCSS62QS
+         jcPnGjyfVPz1zRt1do3akyDtbo1rpMnyha00N4ZaEq/BD51Vc5eoGG2bjtVBTqFidHWB
+         cnkosmDH930M1/c6J1hCN+UJr+9yxTUOLS2yJ5N1lNnflmnf+/oXAVMYCiEbfPuyUVVq
+         jmmki2JH6unaFbA3VoxUF/9lOWTbwX4ibIfQSXKebJ7DEtLacLdf86q7JbeMCrY5b9iT
+         LfX2n/Iwp7zYG4RRaBHmE53n2bwGVpvy0ARMMz51AMUfeEHb5IU8poZVAtNi+APLMEse
+         sc6Q==
+X-Gm-Message-State: ANoB5pklesqQZHn9ZRQVgXtBcHVv5aeDcvdENu/oq1tcmRE8zL8R7Rge
+        3+FqojWnitHPaSexyeY+8RA=
+X-Google-Smtp-Source: AA0mqf4BFVRB9+AMFDzK0Shf5FC49MuYofaTxw1/kzlGKOh8F5lY9AHUO8LwfsFYia6t7oYj5cP+1A==
+X-Received: by 2002:a05:6a00:d78:b0:56c:8dbc:f83e with SMTP id n56-20020a056a000d7800b0056c8dbcf83emr13675256pfv.41.1668431511318;
+        Mon, 14 Nov 2022 05:11:51 -0800 (PST)
+Received: from debian.me (subs02-180-214-232-86.three.co.id. [180.214.232.86])
+        by smtp.gmail.com with ESMTPSA id y28-20020aa793dc000000b0056c0d129edfsm6617533pff.121.2022.11.14.05.11.50
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 14 Nov 2022 05:11:50 -0800 (PST)
+Received: by debian.me (Postfix, from userid 1000)
+        id 326211042EC; Mon, 14 Nov 2022 20:11:46 +0700 (WIB)
+Date:   Mon, 14 Nov 2022 20:11:45 +0700
+From:   Bagas Sanjaya <bagasdotme@gmail.com>
+To:     Junhao He <hejunhao3@huawei.com>
+Cc:     mathieu.poirier@linaro.org, suzuki.poulose@arm.com,
+        mike.leach@linaro.org, leo.yan@linaro.org,
+        jonathan.cameron@huawei.com, john.garry@huawei.com,
+        coresight@lists.linaro.org, linux-kernel@vger.kernel.org,
+        linux-arm-kernel@lists.infradead.org, linux-doc@vger.kernel.org,
+        lpieralisi@kernel.org, linuxarm@huawei.com, yangyicong@huawei.com,
+        liuqi115@huawei.com, f.fangjian@huawei.com,
+        prime.zeng@hisilicon.com
+Subject: Re: [PATCH v13 0/2] Add support for UltraSoc System Memory Buffer
+Message-ID: <Y3I+kaZOe4TPNsd/@debian.me>
+References: <20221114090316.63157-1-hejunhao3@huawei.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
+Content-Type: multipart/signed; micalg=pgp-sha256;
+        protocol="application/pgp-signature"; boundary="v3CYsDSexBSkad/c"
 Content-Disposition: inline
-In-Reply-To: <Y3IqLzvduM6HqPJV@dhcp22.suse.cz>
-X-Spam-Status: No, score=-4.4 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_MED,SPF_HELO_NONE,
-        SPF_PASS autolearn=ham autolearn_force=no version=3.4.6
+In-Reply-To: <20221114090316.63157-1-hejunhao3@huawei.com>
+X-Spam-Status: No, score=-0.6 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_FROM,
+        RCVD_IN_DNSWL_NONE,RCVD_IN_SORBS_WEB,SPF_HELO_NONE,SPF_PASS
+        autolearn=no autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Mon 14-11-22 12:44:48, Michal Hocko wrote:
-> On Mon 14-11-22 00:41:21, Zhongkun He wrote:
-> > Hi Andrew, thanks for your replay.
-> > 
-> > > This sounds a bit suspicious.  Please share much more detail about
-> > > these races.  If we proced with this design then mpol_put_async()
-> > > shouild have comments which fully describe the need for the async free.
-> > > 
-> > > How do we *know* that these races are fully prevented with this
-> > > approach?  How do we know that mpol_put_async() won't free the data
-> > > until the race window has fully passed?
-> > 
-> > A mempolicy can be either associated with a process or with a VMA.
-> > All vma manipulation is somewhat protected by a down_read on
-> > mmap_lock.In process context there is no locking because only
-> > the process accesses its own state before.
-> 
-> We shouldn't really rely on mmap_sem for this IMO. There is alloc_lock
-> (aka task lock) that makes sure the policy is stable so that caller can
-> atomically take a reference and hold on the policy. And we do not do
-> that consistently and this should be fixed. E.g. just looking at some
-> random places like allowed_mems_nr (relying on get_task_policy) is
-> completely lockless and some paths (like fadvise) do not use any of the
-> explicit (alloc_lock) or implicit (mmap_lock) locking. That means that
-> the task_work based approach cannot really work in this case, right?
 
-Just to be more explicit. Task work based approach still requires an
-additional synchronization among different threads unless I miss
-something so this is really fragile synchronization model.
--- 
-Michal Hocko
-SUSE Labs
+--v3CYsDSexBSkad/c
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+On Mon, Nov 14, 2022 at 05:03:14PM +0800, Junhao He wrote:
+> Add support for UltraSoc System Memory Buffer.
+>=20
+
+The cover letter message (aside changelogs) is short but LGTM. However,
+for individual patches description, please write in imperative mood
+(that is, no "This patch/commit does foo" but "Do foo" instead).
+
+Thanks.
+
+--=20
+An old man doll... just what I always wanted! - Clara
+
+--v3CYsDSexBSkad/c
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYIAB0WIQSSYQ6Cy7oyFNCHrUH2uYlJVVFOowUCY3I+igAKCRD2uYlJVVFO
+o1UsAQC84UBCE7LcNm7rlFcJmsg5bIyUFwl1f5xkMLKP1kpS3AEAmqD8k+1nTJGa
+gxmYpWJx+6+dp8zsZXEhYNNQMUgYSAY=
+=xa7E
+-----END PGP SIGNATURE-----
+
+--v3CYsDSexBSkad/c--
