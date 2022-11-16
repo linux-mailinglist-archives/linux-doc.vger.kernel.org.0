@@ -2,198 +2,118 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id D392562B702
-	for <lists+linux-doc@lfdr.de>; Wed, 16 Nov 2022 10:56:24 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id BFD7F62B738
+	for <lists+linux-doc@lfdr.de>; Wed, 16 Nov 2022 11:10:29 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S230477AbiKPJ4W (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 16 Nov 2022 04:56:22 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:38666 "EHLO
+        id S232243AbiKPKK2 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 16 Nov 2022 05:10:28 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:45770 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S231189AbiKPJ4U (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Wed, 16 Nov 2022 04:56:20 -0500
-X-Greylist: delayed 388 seconds by postgrey-1.37 at lindbergh.monkeyblade.net; Wed, 16 Nov 2022 01:55:28 PST
-Received: from mail-sz.amlogic.com (mail-sz.amlogic.com [211.162.65.117])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id D093A1789E;
-        Wed, 16 Nov 2022 01:55:28 -0800 (PST)
-Received: from [10.88.19.158] (10.88.19.158) by mail-sz.amlogic.com
- (10.28.11.5) with Microsoft SMTP Server id 15.1.2507.13; Wed, 16 Nov 2022
- 17:55:26 +0800
-Message-ID: <7bb5e9ee-358b-ce6f-2cb5-a6b6b558c0a9@amlogic.com>
-Date:   Wed, 16 Nov 2022 17:56:12 +0800
+        with ESMTP id S231952AbiKPKK1 (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Wed, 16 Nov 2022 05:10:27 -0500
+Received: from desiato.infradead.org (desiato.infradead.org [IPv6:2001:8b0:10b:1:d65d:64ff:fe57:4e05])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 94B7D1A825;
+        Wed, 16 Nov 2022 02:10:26 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+        d=infradead.org; s=desiato.20200630; h=In-Reply-To:Content-Type:MIME-Version:
+        References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
+        Content-Transfer-Encoding:Content-ID:Content-Description;
+        bh=IP43t3hJu1Ut6R9gno8nfJ5M4E7h1wkQRd32HTSGUjo=; b=cwGxlcmqkrn87V+pOU9TIN5gsZ
+        k8k+ZoTpU4HiUzsqFp0EdEccYC9aLsFjSnFJKHVZkUssN+8m1CajV6ccnmwTQLTzAvE3fh0Eg9UWj
+        8Vjq2DE8gsMlpoe3bNrOPKMnoimSk4Hy4A1AembykPKeRTvnNsVwJrqZ5S5Rq1xy2QrGvR0VQpvzR
+        aqBiXKrgeyXbwJA2FSEv5araqwycTv9CHOUplwwq23PBbX+jaY3gKF6bBpvmm1ZwIvXGV37I2R7kL
+        9eUIxURMM9d6ZtfgZRR07+9oQGfYZUe+x5IjIJAFy3DxvvCkM9Tm7pQyMPG0BKjuL9SeQ5YQCqn1Q
+        srVTO45w==;
+Received: from j130084.upc-j.chello.nl ([24.132.130.84] helo=noisy.programming.kicks-ass.net)
+        by desiato.infradead.org with esmtpsa (Exim 4.94.2 #2 (Red Hat Linux))
+        id 1ovFMY-001GVE-G6; Wed, 16 Nov 2022 10:09:46 +0000
+Received: from hirez.programming.kicks-ass.net (hirez.programming.kicks-ass.net [192.168.1.225])
+        (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+         key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+        (Client did not present a certificate)
+        by noisy.programming.kicks-ass.net (Postfix) with ESMTPS id E8DE730002E;
+        Wed, 16 Nov 2022 11:09:43 +0100 (CET)
+Received: by hirez.programming.kicks-ass.net (Postfix, from userid 1000)
+        id 8B0392B5E08EB; Wed, 16 Nov 2022 11:09:43 +0100 (CET)
+Date:   Wed, 16 Nov 2022 11:09:43 +0100
+From:   Peter Zijlstra <peterz@infradead.org>
+To:     "Edgecombe, Rick P" <rick.p.edgecombe@intel.com>
+Cc:     "bsingharora@gmail.com" <bsingharora@gmail.com>,
+        "hpa@zytor.com" <hpa@zytor.com>,
+        "Syromiatnikov, Eugene" <esyr@redhat.com>,
+        "rdunlap@infradead.org" <rdunlap@infradead.org>,
+        "keescook@chromium.org" <keescook@chromium.org>,
+        "Yu, Yu-cheng" <yu-cheng.yu@intel.com>,
+        "Eranian, Stephane" <eranian@google.com>,
+        "kirill.shutemov@linux.intel.com" <kirill.shutemov@linux.intel.com>,
+        "dave.hansen@linux.intel.com" <dave.hansen@linux.intel.com>,
+        "linux-mm@kvack.org" <linux-mm@kvack.org>,
+        "fweimer@redhat.com" <fweimer@redhat.com>,
+        "nadav.amit@gmail.com" <nadav.amit@gmail.com>,
+        "jannh@google.com" <jannh@google.com>,
+        "dethoma@microsoft.com" <dethoma@microsoft.com>,
+        "kcc@google.com" <kcc@google.com>,
+        "linux-arch@vger.kernel.org" <linux-arch@vger.kernel.org>,
+        "bp@alien8.de" <bp@alien8.de>, "oleg@redhat.com" <oleg@redhat.com>,
+        "hjl.tools@gmail.com" <hjl.tools@gmail.com>,
+        "Yang, Weijiang" <weijiang.yang@intel.com>,
+        "Lutomirski, Andy" <luto@kernel.org>,
+        "jamorris@linux.microsoft.com" <jamorris@linux.microsoft.com>,
+        "arnd@arndb.de" <arnd@arndb.de>,
+        "tglx@linutronix.de" <tglx@linutronix.de>,
+        "pavel@ucw.cz" <pavel@ucw.cz>,
+        "mike.kravetz@oracle.com" <mike.kravetz@oracle.com>,
+        "x86@kernel.org" <x86@kernel.org>,
+        "linux-doc@vger.kernel.org" <linux-doc@vger.kernel.org>,
+        "rppt@kernel.org" <rppt@kernel.org>,
+        "john.allen@amd.com" <john.allen@amd.com>,
+        "mingo@redhat.com" <mingo@redhat.com>,
+        "Shankar, Ravi V" <ravi.v.shankar@intel.com>,
+        "corbet@lwn.net" <corbet@lwn.net>,
+        "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
+        "linux-api@vger.kernel.org" <linux-api@vger.kernel.org>,
+        "gorcunov@gmail.com" <gorcunov@gmail.com>,
+        "akpm@linux-foundation.org" <akpm@linux-foundation.org>
+Subject: Re: [PATCH v3 15/37] x86/mm: Check Shadow Stack page fault errors
+Message-ID: <Y3S258Vtj63/fBsI@hirez.programming.kicks-ass.net>
+References: <20221104223604.29615-1-rick.p.edgecombe@intel.com>
+ <20221104223604.29615-16-rick.p.edgecombe@intel.com>
+ <Y3N8Sn65TzyD6jwL@hirez.programming.kicks-ass.net>
+ <b89565c96a0330c27ae179d96be05d2fc006121c.camel@intel.com>
+ <Y3P/qltUOcCYsXoD@hirez.programming.kicks-ass.net>
+ <2766aedef0780f03b81ea7dfea42dffb328e21f1.camel@intel.com>
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
- Thunderbird/102.4.0
-Subject: Re: [PATCH v10 2/2] docs/perf: Add documentation for the Amlogic G12
- DDR PMU
-Content-Language: en-US
-To:     Bagas Sanjaya <bagasdotme@gmail.com>
-CC:     <linux-doc@vger.kernel.org>, <linux-kernel@vger.kernel.org>,
-        <linux-amlogic@lists.infradead.org>,
-        <linux-arm-kernel@lists.infradead.org>,
-        Jonathan Corbet <corbet@lwn.net>,
-        Will Deacon <will@kernel.org>,
-        Mark Rutland <mark.rutland@arm.com>,
-        Neil Armstrong <neil.armstrong@linaro.org>,
-        Kevin Hilman <khilman@baylibre.com>,
-        Jerome Brunet <jbrunet@baylibre.com>,
-        Martin Blumenstingl <martin.blumenstingl@googlemail.com>,
-        Shuai Xue <xueshuai@linux.alibaba.com>,
-        John Garry <john.garry@huawei.com>,
-        Wan Jiabing <wanjiabing@vivo.com>,
-        Chris Healy <cphealy@gmail.com>,
-        Jianxin Pan <jianxin.pan@amlogic.com>,
-        Kelvin Zhang <kelvin.zhang@amlogic.com>,
-        Chris Healy <healych@amazon.com>
-References: <20221116003133.1049346-1-jiucheng.xu@amlogic.com>
- <20221116003133.1049346-2-jiucheng.xu@amlogic.com>
- <Y3SwIPnDvEOlL+Mz@debian.me>
-From:   Jiucheng Xu <jiucheng.xu@amlogic.com>
-In-Reply-To: <Y3SwIPnDvEOlL+Mz@debian.me>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 7bit
-X-Originating-IP: [10.88.19.158]
-X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00,NICE_REPLY_A,
-        SPF_HELO_NONE,SPF_PASS autolearn=ham autolearn_force=no version=3.4.6
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <2766aedef0780f03b81ea7dfea42dffb328e21f1.camel@intel.com>
+X-Spam-Status: No, score=-4.4 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_MED,SPF_HELO_NONE,
+        SPF_NONE autolearn=ham autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Sorry for my poor English. Your writing looks very elegant. I will apply 
-your modification in next version.
+On Tue, Nov 15, 2022 at 11:13:34PM +0000, Edgecombe, Rick P wrote:
 
-Thanks,
+> When a page becomes COW it changes from a shadow stack permissioned
+> page (Write=0,Dirty=1) to (Write=0,Dirty=0,CoW=1), which is simply
+> read-only to the CPU. When shadow stack is enabled, a RET would
+> normally pop the shadow stack by reading it with a "shadow stack read"
+> access. However, in the COW case the shadow stack memory does not have
+> shadow stack permissions, it is read-only. So it will generate a fault.
+> 
+> For conventionally writable pages, a read can be serviced with a read
+> only PTE, and COW would not have to happen. But for shadow stack, there
+> isn't the concept of read-only shadow stack memory. If it is shadow
+> stack permissioned, it can be modified via CALL and RET instructions.
+> So COW needs to happen before any memory can be mapped with shadow
+> stack permissions.
+> 
+> Shadow stack accesses (read or write) need to be serviced with shadow
+> stack permissioned memory, so in the case of a shadow stack read
+> access, treat it as a WRITE fault so both COW will happen and the write
+> fault path will tickle maybe_mkwrite() and map the memory shadow stack.
 
-Jiucheng
-
-On 2022/11/16 17:40, Bagas Sanjaya wrote:
->
-> The wordings are rather weird, so I need to improve the doc:
->
-> ---- >8 ----
->
-> diff --git a/Documentation/admin-guide/perf/meson-ddr-pmu.rst b/Documentation/admin-guide/perf/meson-ddr-pmu.rst
-> index 15e93a751ced8a..4a1fdb5aba4b24 100644
-> --- a/Documentation/admin-guide/perf/meson-ddr-pmu.rst
-> +++ b/Documentation/admin-guide/perf/meson-ddr-pmu.rst
-> @@ -4,11 +4,12 @@
->   Amlogic SoC DDR Bandwidth Performance Monitoring Unit (PMU)
->   ===========================================================
->   
-> -There is a bandwidth monitor inside the DRAM controller. The monitor includes
-> -4 channels which can count the read/write request of accessing DRAM individually.
-> -It can be helpful to show if the performance bottleneck is on DDR bandwidth.
-> +The Amlogic Meson G12 SoC contains a bandwidth monitor inside DRAM controller.
-> +The monitor includes 4 channels which can count the read/write request of
-> +individual DRAM. It can be helpful to show if the performance bottleneck is on
-> +DDR bandwidth.
->   
-> -Currently, this driver supports the following 5 Perf events:
-> +Currently, this driver supports the following 5 perf events:
->   
->   + meson_ddr_bw/total_rw_bytes/
->   + meson_ddr_bw/chan_1_rw_bytes/
-> @@ -16,55 +17,54 @@ Currently, this driver supports the following 5 Perf events:
->   + meson_ddr_bw/chan_3_rw_bytes/
->   + meson_ddr_bw/chan_4_rw_bytes/
->   
-> -meson_ddr_bw/chan_{1,2,3,4}_rw_bytes/ events are the channel related events.
-> -Each channel support using keywords as filter, which can let the channel
-> -to monitor the individual IP module in SoC.
-> +meson_ddr_bw/chan_{1,2,3,4}_rw_bytes/ events are channel-specific events.
-> +Each channel support filtering, which can let the channel to monitor
-> +individual IP module in SoC.
->   
-> -The following keywords are the filter:
-> +Below are DDR access request event filter keywords:
->   
-> -+ arm             - DDR access request from CPU
-> -+ vpu_read1       - DDR access request from OSD + VPP read
-> -+ gpu             - DDR access request from 3D GPU
-> -+ pcie            - DDR access request from PCIe controller
-> -+ hdcp            - DDR access request from HDCP controller
-> -+ hevc_front      - DDR access request from HEVC codec front end
-> -+ usb3_0          - DDR access request from USB3.0 controller
-> -+ hevc_back       - DDR access request from HEVC codec back end
-> -+ h265enc         - DDR access request from HEVC encoder
-> -+ vpu_read2       - DDR access request from DI read
-> -+ vpu_write1      - DDR access request from VDIN write
-> -+ vpu_write2      - DDR access request from di write
-> -+ vdec            - DDR access request from legacy codec video decoder
-> -+ hcodec          - DDR access request from H264 encoder
-> -+ ge2d            - DDR access request from ge2d
-> -+ spicc1          - DDR access request from SPI controller 1
-> -+ usb0            - DDR access request from USB2.0 controller 0
-> -+ dma             - DDR access request from system DMA controller 1
-> -+ arb0            - DDR access request from arb0
-> -+ sd_emmc_b       - DDR access request from SD eMMC b controller
-> -+ usb1            - DDR access request from USB2.0 controller 1
-> -+ audio           - DDR access request from Audio module
-> -+ sd_emmc_c       - DDR access request from SD eMMC c controller
-> -+ spicc2          - DDR access request from SPI controller 2
-> -+ ethernet        - DDR access request from Ethernet controller
-> ++ arm             - from CPU
-> ++ vpu_read1       - from OSD + VPP read
-> ++ gpu             - from 3D GPU
-> ++ pcie            - from PCIe controller
-> ++ hdcp            - from HDCP controller
-> ++ hevc_front      - from HEVC codec front end
-> ++ usb3_0          - from USB3.0 controller
-> ++ hevc_back       - from HEVC codec back end
-> ++ h265enc         - from HEVC encoder
-> ++ vpu_read2       - from DI read
-> ++ vpu_write1      - from VDIN write
-> ++ vpu_write2      - from di write
-> ++ vdec            - from legacy codec video decoder
-> ++ hcodec          - from H264 encoder
-> ++ ge2d            - from ge2d
-> ++ spicc1          - from SPI controller 1
-> ++ usb0            - from USB2.0 controller 0
-> ++ dma             - from system DMA controller 1
-> ++ arb0            - from arb0
-> ++ sd_emmc_b       - from SD eMMC b controller
-> ++ usb1            - from USB2.0 controller 1
-> ++ audio           - from Audio module
-> ++ sd_emmc_c       - from SD eMMC c controller
-> ++ spicc2          - from SPI controller 2
-> ++ ethernet        - from Ethernet controller
->   
->   
-> -The following command is to show the total DDR bandwidth:
-> +Examples:
->   
-> -  .. code-block:: bash
-> +  + Show the total DDR bandwidth per seconds:
->   
-> -      perf stat -a -e meson_ddr_bw/total_rw_bytes/ -I 1000 sleep 10
-> +    .. code-block:: bash
->   
-> -This command will print the total DDR bandwidth per second.
-> +       perf stat -a -e meson_ddr_bw/total_rw_bytes/ -I 1000 sleep 10
->   
-> -The following commands are to show how to use filter parameters:
->   
-> -  .. code-block:: bash
-> +  + Show individual DDR bandwidth from CPU and GPU respectively, as well as
-> +    sum of them:
->   
-> -      perf stat -a -e meson_ddr_bw/chan_1_rw_bytes,arm=1/ -I 1000 sleep 10
-> -      perf stat -a -e meson_ddr_bw/chan_2_rw_bytes,gpu=1/ -I 1000 sleep 10
-> -      perf stat -a -e meson_ddr_bw/chan_3_rw_bytes,arm=1,gpu=1/ -I 1000 sleep 10
-> +    .. code-block:: bash
-> +
-> +       perf stat -a -e meson_ddr_bw/chan_1_rw_bytes,arm=1/ -I 1000 sleep 10
-> +       perf stat -a -e meson_ddr_bw/chan_2_rw_bytes,gpu=1/ -I 1000 sleep 10
-> +       perf stat -a -e meson_ddr_bw/chan_3_rw_bytes,arm=1,gpu=1/ -I 1000 sleep 10
->   
-> -The 1st command show how to use channel 1 to monitor the DDR bandwidth from ARM.
-> -The 2nd command show using channel 2 to get the DDR bandwidth of GPU.
-> -The 3rd command show using channel 3 to monitor the sum of ARM and GPU.
->
-> Thanks.
->
--- 
-Thanks,
-Jiucheng
-
+ACK.
