@@ -2,318 +2,1267 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id F0CB262AFE0
-	for <lists+linux-doc@lfdr.de>; Wed, 16 Nov 2022 01:10:18 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 9F63062B039
+	for <lists+linux-doc@lfdr.de>; Wed, 16 Nov 2022 01:47:54 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S230394AbiKPAKR (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 15 Nov 2022 19:10:17 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:51518 "EHLO
+        id S229961AbiKPAry (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 15 Nov 2022 19:47:54 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:36914 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S229561AbiKPAKQ (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 15 Nov 2022 19:10:16 -0500
-Received: from mga06.intel.com (mga06b.intel.com [134.134.136.31])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id C6F562A70E;
-        Tue, 15 Nov 2022 16:10:14 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1668557414; x=1700093414;
-  h=from:to:cc:subject:date:message-id:references:
-   in-reply-to:content-transfer-encoding:mime-version;
-  bh=JWH9cu3vSNQWqELTcYw5M90JbXrE1ZkENu0VXH+K83g=;
-  b=DgJbVvlSMi0Mhywve2AhJTGF6gre1sM1fMFSss6i7j+Qavb+rCXoBKcl
-   wWNnAtgw3zhFBEtJ6if6Rg4KgNOrbSwYxiv3hzA/zGfMaIAQ35pndKnKs
-   XwBkQViXnTS7EEnlumvsALelbr7zohZoiFnZ5FUB+YFYl9yUm/CviT7nO
-   XYhzMcc003WW7F/rpuFCjpm+v87N73KvaN8kksMAooNqPRxC2JiUfKTeZ
-   kU0GWkigCVxdo0orexM03fef48Z2pU7a/xeHttf/WGSZ0fNDbpQidUNIB
-   TpDBFQMEHo6WJl1q7EifHfjZZx3idItXXEdaiWcViKvElgUH5DWbwf4sG
-   A==;
-X-IronPort-AV: E=McAfee;i="6500,9779,10532"; a="374536558"
-X-IronPort-AV: E=Sophos;i="5.96,167,1665471600"; 
-   d="scan'208";a="374536558"
-Received: from orsmga003.jf.intel.com ([10.7.209.27])
-  by orsmga104.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 15 Nov 2022 16:09:59 -0800
-X-ExtLoop1: 1
-X-IronPort-AV: E=McAfee;i="6500,9779,10532"; a="589982866"
-X-IronPort-AV: E=Sophos;i="5.96,167,1665471600"; 
-   d="scan'208";a="589982866"
-Received: from fmsmsx601.amr.corp.intel.com ([10.18.126.81])
-  by orsmga003.jf.intel.com with ESMTP; 15 Nov 2022 16:09:58 -0800
-Received: from fmsmsx610.amr.corp.intel.com (10.18.126.90) by
- fmsmsx601.amr.corp.intel.com (10.18.126.81) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2375.31; Tue, 15 Nov 2022 16:09:57 -0800
-Received: from FMSEDG603.ED.cps.intel.com (10.1.192.133) by
- fmsmsx610.amr.corp.intel.com (10.18.126.90) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2375.31 via Frontend Transport; Tue, 15 Nov 2022 16:09:57 -0800
-Received: from NAM04-DM6-obe.outbound.protection.outlook.com (104.47.73.42) by
- edgegateway.intel.com (192.55.55.68) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.1.2375.31; Tue, 15 Nov 2022 16:09:57 -0800
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=AoGtHLDCcA5CqzsO6R3dVx4Nxo4zBqZ2HvsQI08S4Pf6KIdmc2QdgYwhKn5qRSHVw2qwPt7Yg09rFxzh+OheWFvwwgqDzOcSi7s6ErI8FgUwWspCGv69f5GGzku8yzCCNuLDMp9yNF7FBTTbjpQwO/OrXAbh6zVYoypvArba0w1WPhLZYTxAJqQzRKHJAcPBxULR4o1ThBspo8CR6WEN1BDfYYWoJcPBXQ6wGA5y0My1r1QPZOjEwYF3PAZ1bUtuLj8sLmUy0scUK7zR6FRc4UQtktwFF+30+c3iWucwVYke78FYJbVpiGcuSnHm/6QiA7r339OCYxxQZx+vR00o/g==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=j4WZR3VPyNuvuKY4e+MkPyYH6tB1Bu9Zrb/rXd9Yrvo=;
- b=Cr8XQg2FTKY2bSYUfUpqJBEZ1FoFs85mGfKjwHCjulORokKSDCSppIoLKDzutViT6HJ8a3PmtgjLopogrla2wNEz1HeKMBhR/QE2fI8rnZ+99cEjR5JGk0Q/5PDKnsmgb6ajgcY+1GpPwqw4SgJWKyVwlLrs6cypIizqC4qxK7IHMg7cHFKTyIPE/FxL9CDWlz0yYKlTTGfRjTRyEOB9oEdqRG8n+Y1notpqeJ1gUQJUdIM48rYZ8N1UeTlwmhk2n+nXSDOiT2KyZZ1I/LjwDHeT0z6PMBpbOO0ybcofWkeIm9krscdzbgl/+KXnZqMSTrleJg9hrLHuzxWtq93NTQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=intel.com; dmarc=pass action=none header.from=intel.com;
- dkim=pass header.d=intel.com; arc=none
-Received: from BN9PR11MB5276.namprd11.prod.outlook.com (2603:10b6:408:135::18)
- by SJ0PR11MB5213.namprd11.prod.outlook.com (2603:10b6:a03:2da::16) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5813.18; Wed, 16 Nov
- 2022 00:09:52 +0000
-Received: from BN9PR11MB5276.namprd11.prod.outlook.com
- ([fe80::737e:211a:bb53:4cd7]) by BN9PR11MB5276.namprd11.prod.outlook.com
- ([fe80::737e:211a:bb53:4cd7%5]) with mapi id 15.20.5813.017; Wed, 16 Nov 2022
- 00:09:52 +0000
-From:   "Tian, Kevin" <kevin.tian@intel.com>
-To:     Jason Gunthorpe <jgg@nvidia.com>
-CC:     "bpf@vger.kernel.org" <bpf@vger.kernel.org>,
-        Jonathan Corbet <corbet@lwn.net>,
-        David Woodhouse <dwmw2@infradead.org>,
-        "iommu@lists.linux.dev" <iommu@lists.linux.dev>,
-        Joerg Roedel <joro@8bytes.org>,
-        "linux-doc@vger.kernel.org" <linux-doc@vger.kernel.org>,
-        "linux-kselftest@vger.kernel.org" <linux-kselftest@vger.kernel.org>,
-        "llvm@lists.linux.dev" <llvm@lists.linux.dev>,
-        Nathan Chancellor <nathan@kernel.org>,
-        Nick Desaulniers <ndesaulniers@google.com>,
-        Miguel Ojeda <ojeda@kernel.org>,
-        Robin Murphy <robin.murphy@arm.com>,
-        Shuah Khan <shuah@kernel.org>,
-        Suravee Suthikulpanit <suravee.suthikulpanit@amd.com>,
-        Tom Rix <trix@redhat.com>, Will Deacon <will@kernel.org>,
-        Alex Williamson <alex.williamson@redhat.com>,
-        Lu Baolu <baolu.lu@linux.intel.com>,
-        "Chaitanya Kulkarni" <chaitanyak@nvidia.com>,
-        Cornelia Huck <cohuck@redhat.com>,
-        "Daniel Jordan" <daniel.m.jordan@oracle.com>,
-        David Gibson <david@gibson.dropbear.id.au>,
-        Eric Auger <eric.auger@redhat.com>,
-        "Eric Farman" <farman@linux.ibm.com>,
-        Jason Wang <jasowang@redhat.com>,
-        Jean-Philippe Brucker <jean-philippe@linaro.org>,
-        "Martins, Joao" <joao.m.martins@oracle.com>,
-        "kvm@vger.kernel.org" <kvm@vger.kernel.org>,
-        Matthew Rosato <mjrosato@linux.ibm.com>,
-        "Michael S. Tsirkin" <mst@redhat.com>,
-        Nicolin Chen <nicolinc@nvidia.com>,
-        Niklas Schnelle <schnelle@linux.ibm.com>,
-        Shameerali Kolothum Thodi 
-        <shameerali.kolothum.thodi@huawei.com>,
-        "Liu, Yi L" <yi.l.liu@intel.com>,
-        Keqian Zhu <zhukeqian1@huawei.com>
-Subject: RE: [PATCH v4 09/17] iommufd: Data structure to provide IOVA to PFN
- mapping
-Thread-Topic: [PATCH v4 09/17] iommufd: Data structure to provide IOVA to PFN
- mapping
-Thread-Index: AQHY8wv9weOL8WzpqkSvohFTeBt9pK499F6QgADXp4CAAIydYIAAyJuAgACOkcA=
-Date:   Wed, 16 Nov 2022 00:09:52 +0000
-Message-ID: <BN9PR11MB52763671DBCFA976C0038E6A8C079@BN9PR11MB5276.namprd11.prod.outlook.com>
-References: <0-v4-0de2f6c78ed0+9d1-iommufd_jgg@nvidia.com>
- <9-v4-0de2f6c78ed0+9d1-iommufd_jgg@nvidia.com>
- <BN9PR11MB527638FCF4A1351DBA1A644E8C059@BN9PR11MB5276.namprd11.prod.outlook.com>
- <Y3KMbyVwS6D505cA@nvidia.com>
- <BN9PR11MB5276CAB38B1691983A20B1D18C049@BN9PR11MB5276.namprd11.prod.outlook.com>
- <Y3Oqq74bKsQo1YMH@nvidia.com>
-In-Reply-To: <Y3Oqq74bKsQo1YMH@nvidia.com>
-Accept-Language: en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-authentication-results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=intel.com;
-x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: BN9PR11MB5276:EE_|SJ0PR11MB5213:EE_
-x-ms-office365-filtering-correlation-id: 9c47bccb-13d9-4b1b-c0c3-08dac766e233
-x-ld-processed: 46c98d88-e344-4ed4-8496-4ed7712e255d,ExtAddr
-x-ms-exchange-senderadcheck: 1
-x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam: BCL:0;
-x-microsoft-antispam-message-info: K5z3TvAMqjsD+btdqfYVnTjyG0oKi1KkjkOBUwcTkR5/bhSs0lrWuMHypXV68Y3STV96KTiumRPHdzu4UwxX8D6chTjc/HM9SOiQzDiCyY9SJWxf5DTALlhHybjF9kTcIyjlP3mPAGAhY25IB0ndQhSOwb+xC+QkVF/NEEzu0JVU4i0tducVfPfmbgR/K35ZDLNymJ0ik5W2qu7nBogAuYmYVGlT5ls7DKPMfmaAjvYQQQ35/Y+wAikMnjarV3bC1CTFQlCEJweph901hVagfgo/SCnOV2cuU0zrMvdkXwlWfZZgesZ6rVvXehwmT88J3TfucKySG/mTeKZIPsT+dxXZyF37243T71FJGf2xiIy9V55v/PPLSYLF6wSbIJN554FLOVuO+AFjM9FeqWxNc8W6Rq8Ahdm0pTHjU02FrEOsj2jaL7XOWLuqVv9x0NhhtdWnQSzaK2A00TSI+ZBBZq40iu1cBNMaR6sAAD3DQUS9oeHzzB8Zv3Pc0R5TW3GKF+fIUbtmu8fRzxIM0Gj8csBqgysUDfStcMVfWFSmfUAqxYGyvlwVjNoZQ/9yOTGUx4KsM/0I9z3u9NK5Tpk7e+4uWPlYrmxZWvwk0VHa+naJN52f5yiiwP3DPdwEyh6P8bRDkoYfO6tyipo0GW31a5FVbXO5sdG+c4EzpnVxe1FFyERww70pliUQ/yiuhT87O3yJsJaWqROeAfzM95R1c/9+LiqwyuJoN1+7G0JHlLsJBzaqs5mqoBVk06Rn20F8xrPxtw1djcIfZ8dZQM/sPg==
-x-forefront-antispam-report: CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BN9PR11MB5276.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230022)(366004)(346002)(136003)(39860400002)(376002)(396003)(451199015)(8676002)(4326008)(66946007)(66556008)(66446008)(5660300002)(66476007)(52536014)(8936002)(86362001)(316002)(76116006)(83380400001)(64756008)(7406005)(7416002)(38100700002)(82960400001)(122000001)(9686003)(6506007)(7696005)(26005)(71200400001)(38070700005)(478600001)(6916009)(55016003)(33656002)(54906003)(41300700001)(186003)(2906002);DIR:OUT;SFP:1102;
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0: =?us-ascii?Q?k/zuCkXrK1DVraOGXhqY6a+9THI3NU+h802DSRmzXvCmRj8bk5MX0S4YO//p?=
- =?us-ascii?Q?tTo+TsWcGlUKCZv96aGDvfAOtP17qtRmAZRk7iQKxJFgIajXvBDxUF7Cdty2?=
- =?us-ascii?Q?nOJhn8ei2ZqkxK3RIPbDh0TFCnprLtiHr/bhvKZjx5srk0GsbiqDn84SRTDU?=
- =?us-ascii?Q?jaQ5YhzwvSdhTeYQgF+DpY7TEC8mZKYzP60nnKVwU+4/gh6/THL5iK9NoPtg?=
- =?us-ascii?Q?7S8k0z2UbDbR6i51sOftJFyiK2TTFZzvEttzA0dm+JnZmwI9q6WVzm44WyYE?=
- =?us-ascii?Q?6kFV/4CuWWkTJtmsCrCkHF735GFzrjnShpsKPgnUaVGe4JiUO/jTwezM76re?=
- =?us-ascii?Q?h+jEnJ9fKPIEMUb/1K4GJ+It6yIJxN2BkQYFpm8xCg493Ifbo0pD3GjdgyHN?=
- =?us-ascii?Q?BhS4H5jyQd5Oe8e2ye/xBZX5SBB0i6w7uEN6JxlMFdhJdCEntoL+yVpDIqN0?=
- =?us-ascii?Q?ATBOBe5gdWKEMZjcU52zSlJXsGBhHBkas/Y8R7L8caV8/rG+c+PkTcVELdyX?=
- =?us-ascii?Q?Aeaxap7SOhvDxK66j2YYW5wGpfhyiN7forSCxY+Myh6sFUk8K6b0cxIm/Jam?=
- =?us-ascii?Q?NdwZr+KUGfM+TBfeAvG2jKLtK1sQPccp9Dn3wcpQBXwrHO1f3TF+Lclexois?=
- =?us-ascii?Q?N5fu2T4P0N3aY5Q9s7Wg472t/bTfMVumdBZ3be+F9feOoQqKYh86ID8ympN3?=
- =?us-ascii?Q?jkdkmvlBOZzbIBkAqbVbxDqSs7QYDz+QJumoqH7kxhCP5yrl8bILKvrsEikq?=
- =?us-ascii?Q?LEXgOQsdD5gWYAvNpSmVo9D+qGZIdbptvMxDCjA+XppSk1jVYIlijugQRFfq?=
- =?us-ascii?Q?5mS6bao2OtMGgDGqLvR7CPOX8n68vBTGSVjWeauJE1ssQ7JJvuKW5klWt5LC?=
- =?us-ascii?Q?dTiWo3IOL4qKl4LPWTf3xNpEyHsToMC1oIyC+U1ux/+LDrmsOAeYCEHT3tMc?=
- =?us-ascii?Q?AD/CrPrTIfXEEOiA9+STOYXLUhyOD5Qd8v0Kc7Iuy9DP4P7Ii0czIBYussuv?=
- =?us-ascii?Q?29eQTcwXLoyQrKsH48Ewpc1+jk28CG6IbvKpw+L5//oLuKHXP90l5pJ/O6mj?=
- =?us-ascii?Q?pyj+hfNSyKGBVQ1xBhoBF/QMB11pyVZVl3ufLZwbo1r7f+DR6DQKXRTu5PR3?=
- =?us-ascii?Q?iWA/7waVzIQzsUZMKbMK+05E7C3ST41++6EsqEwxVxq4UvKqFUAE8G6Hq1iE?=
- =?us-ascii?Q?hKN1xqSs7xmoGKoJw9Hp56UHvWndY0WozyovRqS9gmTQQAm1E+HOXO0Uzq1W?=
- =?us-ascii?Q?16MqwJxtCqtZZpvpBK4gpJ8ZSEOBX2LOGXg1MP0nkmgNLvofJL8BYr4/oCxU?=
- =?us-ascii?Q?bDTBiBlJi1m7W6mL8hpF5zgI4II/f2ngkis6zt6utdLIW9+czGHbJirGCmgb?=
- =?us-ascii?Q?gCXBAS7BZ2YRszaa87CcFXVmD2Qc2inS0RXFlnuAd6Wt0Q3z5tbOnTZ+zgLM?=
- =?us-ascii?Q?sNxMCkLrDx9vzbEzAPfiEkduReRrUPznTyuM3UYBMQtpqyqm0qM2p79ui9Yz?=
- =?us-ascii?Q?VBXcxNvFhvDAntOuyyMC3pDguwkNPVaF5xWOSOYZAKidA0zqi1KI65/4IbGw?=
- =?us-ascii?Q?mneyZGuDivVYKgP2fuzFxeUAKx+1SeSC1qJtkjvs?=
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+        with ESMTP id S229558AbiKPArv (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 15 Nov 2022 19:47:51 -0500
+X-Greylist: delayed 906 seconds by postgrey-1.37 at lindbergh.monkeyblade.net; Tue, 15 Nov 2022 16:46:52 PST
+Received: from mail-sh.amlogic.com (mail-sh.amlogic.com [58.32.228.43])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id C50102AC7D
+        for <linux-doc@vger.kernel.org>; Tue, 15 Nov 2022 16:46:52 -0800 (PST)
+Received: from droid01-xa.amlogic.com (10.88.11.200) by mail-sh.amlogic.com
+ (10.18.11.5) with Microsoft SMTP Server id 15.1.2507.13; Wed, 16 Nov 2022
+ 08:31:43 +0800
+From:   Jiucheng Xu <jiucheng.xu@amlogic.com>
+To:     <linux-doc@vger.kernel.org>, <linux-kernel@vger.kernel.org>,
+        <linux-amlogic@lists.infradead.org>,
+        <linux-arm-kernel@lists.infradead.org>
+CC:     Jonathan Corbet <corbet@lwn.net>, Will Deacon <will@kernel.org>,
+        Mark Rutland <mark.rutland@arm.com>,
+        Neil Armstrong <neil.armstrong@linaro.org>,
+        Kevin Hilman <khilman@baylibre.com>,
+        Jerome Brunet <jbrunet@baylibre.com>,
+        Martin Blumenstingl <martin.blumenstingl@googlemail.com>,
+        Shuai Xue <xueshuai@linux.alibaba.com>,
+        John Garry <john.garry@huawei.com>,
+        Wan Jiabing <wanjiabing@vivo.com>,
+        Chris Healy <cphealy@gmail.com>,
+        Jianxin Pan <jianxin.pan@amlogic.com>,
+        Kelvin Zhang <kelvin.zhang@amlogic.com>,
+        Jiucheng Xu <jiucheng.xu@amlogic.com>,
+        Chris Healy <healych@amzon.com>
+Subject: [PATCH v10 1/2] perf/amlogic: Add support for Amlogic meson G12 SoC DDR PMU driver
+Date:   Wed, 16 Nov 2022 08:31:32 +0800
+Message-ID: <20221116003133.1049346-1-jiucheng.xu@amlogic.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: BN9PR11MB5276.namprd11.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 9c47bccb-13d9-4b1b-c0c3-08dac766e233
-X-MS-Exchange-CrossTenant-originalarrivaltime: 16 Nov 2022 00:09:52.1667
- (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: 46c98d88-e344-4ed4-8496-4ed7712e255d
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: EvCdhSEOpqdP/iZduKvfnETy+MZKQ78eadAdqJi//3ZtcwoivgYEetaXgyCqa5JDzVXrsFY2aJ6k9ON40uV/xQ==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ0PR11MB5213
-X-OriginatorOrg: intel.com
-X-Spam-Status: No, score=-4.4 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_MED,
-        SPF_HELO_NONE,SPF_NONE autolearn=ham autolearn_force=no version=3.4.6
+Content-Transfer-Encoding: 7BIT
+Content-Type:   text/plain; charset=US-ASCII
+X-Originating-IP: [10.88.11.200]
+X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00,SPF_HELO_NONE,
+        SPF_PASS autolearn=unavailable autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-> From: Jason Gunthorpe <jgg@nvidia.com>
-> Sent: Tuesday, November 15, 2022 11:05 PM
->=20
-> On Tue, Nov 15, 2022 at 03:13:56AM +0000, Tian, Kevin wrote:
-> > > From: Jason Gunthorpe <jgg@nvidia.com>
-> > > Sent: Tuesday, November 15, 2022 2:44 AM
-> > >
-> > > On Mon, Nov 14, 2022 at 07:28:47AM +0000, Tian, Kevin wrote:
-> > > > > From: Jason Gunthorpe <jgg@nvidia.com>
-> > > > > Sent: Tuesday, November 8, 2022 8:49 AM
-> > > > >
-> > > > > +
-> > > > > +/*
-> > > > > + * Automatically find a block of IOVA that is not being used and=
- not
-> > > reserved.
-> > > > > + * Does not return a 0 IOVA even if it is valid.
-> > > >
-> > > > what is the problem with 0? should this be documented in uAPI?
-> > >
-> > > 0 is commonly used as an errant value for uninitialized things. We
-> > > don't automatically map it into a process mm because it can cause
-> > > security problems if we don't trap a bogus 0/NULL pointer reference.
-> > >
-> > > The same logic applies here too, the allocator should not return 0 to
-> > > reserve it as an unmapped IOVA page to catch bugs.
-> >
-> > CPU doesn't reference IOVA. Where do such bugs exist?
->=20
-> SW is always buggy and SW programs the DMA address, so it could leave
-> a 0 behind or something during the programming.
+This patch adds support Amlogic meson G12 series SoC
+DDR bandwidth PMU driver framework and interfaces.
 
-address 0 is never a bug in DMA to IOVA. if it is, it will be out of the
-aperture or in the reserved IOVA list.=20
+The PMU not only can monitor the total DDR bandwidth,
+but also the bandwidth which is from individual IP module.
 
-DMA API is also a auto-iova scheme from driver p.o.v while it doesn't
-impose any restriction on address 0.
+Example usage:
 
-> > > > > +		if (!__alloc_iova_check_used(&allowed_span, length,
-> > > > > +					     iova_alignment,
-> page_offset))
-> > > > > +			continue;
-> > > > > +
-> > > > > +		interval_tree_for_each_span(&area_span, &iopt-
-> >area_itree,
-> > > > > +					    allowed_span.start_used,
-> > > > > +					    allowed_span.last_used) {
-> > > > > +			if (!__alloc_iova_check_hole(&area_span,
-> length,
-> > > > > +						     iova_alignment,
-> > > > > +						     page_offset))
-> > > > > +				continue;
-> > > > > +
-> > > > > +
-> 	interval_tree_for_each_span(&reserved_span,
-> > > > > +						    &iopt-
-> >reserved_itree,
-> > > > > +
-> area_span.start_used,
-> > > > > +
-> area_span.last_used) {
-> > > > > +				if (!__alloc_iova_check_hole(
-> > > > > +					    &reserved_span, length,
-> > > > > +					    iova_alignment,
-> page_offset))
-> > > > > +					continue;
-> > > >
-> > > > this could be simplified by double span.
-> > >
-> > > It is subtly not compatible, the double span looks for used areas.
-> > > This is looking for a used area in the allowed_itree, a hole in the
-> > > area_itree, and a hole in the reserved_itree.
-> >
-> > the inner two loops can be replaced by double span, since both
-> > are skipping used areas.
->=20
-> The 2nd loop is looking for a used on allowed and the 3rd loop is
-> looking for a hole in reserved. To fix it we'd have to invert allowed
-> to work like reserved - which complicates the uAPI code.
+ $ perf stat -a -e meson_ddr_bw/total_rw_bytes/ -I 1000 sleep 10
 
-The 1st loop finds an allowed range which can hold requested length
+- or -
 
-The 2nd loop finds an *unused* hole in the allowed range
+ $ perf stat -a -e \
+   meson_ddr_bw/total_rw_bytes/,\
+   meson_ddr_bw/chan_1_rw_bytes,arm=1/ -I 1000 \
+   sleep 10
 
-The 3rd loop further looks for a hole in reserved.
+g12 SoC support 4 channels to monitor DDR bandwidth
+simultaneously. Each channel can monitor up to 4 IP modules
+simultaneously.
 
-last two both try to find a hole.
+For Instance, If you want to get the sum of DDR bandwidth
+from CPU, GPU, USB3.0 and VDEC. You can use the following
+command parameters to display.
 
->=20
-> > > > > +	if (iopt->disable_large_pages)
-> > > > > +		new_iova_alignment =3D PAGE_SIZE;
-> > > > > +	else
-> > > > > +		new_iova_alignment =3D 1;
-> > > >
-> > > > I didn't understand why we start searching alignment from a
-> > > > smaller value when large pages is enabled. what is the
-> > > > connection here?
-> > >
-> > > 'disable_large_pages' is a tiny bit misnamed, what it really does is
-> > > ensure that every iommu_map call is exactly PAGE_SIZE, not more (larg=
-e
-> > > pages) and not less (what this is protecting against).
-> > >
-> > > So if a domain has less than PAGE_SIZE we upgrade to
-> > > PAGE_SIZE. Otherwise we allow using the lowest possible alignment.
-> > >
-> > > This allows userspace to always work in PAGE_SIZE units without fear
-> > > of problems, eg with sub-page-size units becoming weird or something.
-> >
-> > above are good stuff in a comment.
->=20
-> This is the comment:
->=20
-> /*
->  * This is part of the VFIO compatibility support for VFIO_TYPE1_IOMMU.
-> That
->  * mode permits splitting a mapped area up, and then one of the splits is
->  * unmapped. Doing this normally would cause us to violate our invariant =
-of
->  * pairing map/unmap. Thus, to support old VFIO compatibility disable
-> support
->  * for batching consecutive PFNs. All PFNs mapped into the iommu are done
-> in
->  * PAGE_SIZE units, not larger or smaller.
->  */
-> static int batch_iommu_map_small(struct iommu_domain *domain,
-> 				 unsigned long iova, phys_addr_t paddr,
-> 				 size_t size, int prot)
->=20
+ $ perf stat -a -e \
+   meson_ddr_bw/chan_2_rw_bytes,arm=1,gpu=1,usb3_0=1,nna=1/ -I 1000 \
+   sleep 10
 
-I meant a comment in iopt_calculate_iova_alignment().
+Other events are supported, and advertised via perf list.
+
+Signed-off-by: Jiucheng Xu <jiucheng.xu@amlogic.com>
+Tested-by: Chris Healy <healych@amzon.com>
+---
+Changes v9 -> v10:
+  - Rebase code
+
+Changes v8 -> v9:
+  - Add "Tested-by" tag from Chris Healy
+
+Changes v7 -> v8:
+  - Add linux-amlogic@lists.infradead.org maillist for MAINTAINERS
+  - Change driver name from "amlogic,g12-ddr-pmu" to "meson-g12-ddr-pmu"
+
+Changes v6 -> v7:
+  - Drop the Reported-by tag
+
+Changes v5 -> v6:
+  - Add const for driver data
+
+Changes v4 -> v5:
+  - Remove error message
+  - Use smp_processor_id() instead of raw_smp_processor_id()
+  - Remove EXPORT_SYMBOL()
+  - Use variant specific driver data for compatible
+  - Use module_platform_driver for modules_init/exit
+  - Change location of driver structures from .h  to .c
+
+Changes v3 -> v4:
+  - No change
+
+Changes v2 -> v3:
+  - Fix sh GCC 12.1.0 compiling warning
+  - Rename prefix aml to meson for files and code
+
+Changes v1 -> v2:
+  - Remove inline to let GCC make the decisions
+  - Remove spinlock
+  - Remove ddr_cnt_accumulate()
+  - Remove the message which only indicate a bug
+  - Remove all dev_warn() message
+  - Use hweight64() helper instead of whole loop
+  - Remove setting of hwc
+  - Use for_each_set_bit() helper for bit loop
+  - Use sysfs_emit() in sysfs show
+  - Remove checking for bugs
+  - Replace irq_set_affinity_hint() to irq_set_affinity()
+  - Remove #ifdef CONFIG_OF
+  - Use devm_platform_ioremap_resource() instead of
+    platform_get_resource()&ioremap()
+  - Use platform_get_irq() instead of platform_get_resource()&ioremap()
+  - Replace IRQF_SHARED to IRQF_NOBALANCING
+  - Remove meaningless log like "init ok"
+  - Use compatible instead of creating new property to distinguish
+    different platform.
+  - Use the is_visible callback to avoid exposing unsupported fmt_attr
+  - Use module_platform_driver_probe() instead of module_init/exit
+---
+ MAINTAINERS                               |   8 +
+ drivers/perf/Kconfig                      |   2 +
+ drivers/perf/Makefile                     |   1 +
+ drivers/perf/amlogic/Kconfig              |  10 +
+ drivers/perf/amlogic/Makefile             |   5 +
+ drivers/perf/amlogic/meson_ddr_pmu_core.c | 562 ++++++++++++++++++++++
+ drivers/perf/amlogic/meson_g12_ddr_pmu.c  | 394 +++++++++++++++
+ include/soc/amlogic/meson_ddr_pmu.h       |  66 +++
+ 8 files changed, 1048 insertions(+)
+ create mode 100644 drivers/perf/amlogic/Kconfig
+ create mode 100644 drivers/perf/amlogic/Makefile
+ create mode 100644 drivers/perf/amlogic/meson_ddr_pmu_core.c
+ create mode 100644 drivers/perf/amlogic/meson_g12_ddr_pmu.c
+ create mode 100644 include/soc/amlogic/meson_ddr_pmu.h
+
+diff --git a/MAINTAINERS b/MAINTAINERS
+index c379db61b800..415eaa30c523 100644
+--- a/MAINTAINERS
++++ b/MAINTAINERS
+@@ -1093,6 +1093,14 @@ S:	Maintained
+ F:	Documentation/hid/amd-sfh*
+ F:	drivers/hid/amd-sfh-hid/
+ 
++AMLOGIC DDR PMU DRIVER
++M:	Jiucheng Xu <jiucheng.xu@amlogic.com>
++L:	linux-amlogic@lists.infradead.org
++S:	Supported
++W:	http://www.amlogic.com
++F:	drivers/perf/amlogic/
++F:	include/soc/amlogic/
++
+ AMPHION VPU CODEC V4L2 DRIVER
+ M:	Ming Qian <ming.qian@nxp.com>
+ M:	Shijie Qin <shijie.qin@nxp.com>
+diff --git a/drivers/perf/Kconfig b/drivers/perf/Kconfig
+index 341010f20b77..fa0e96568f0e 100644
+--- a/drivers/perf/Kconfig
++++ b/drivers/perf/Kconfig
+@@ -199,4 +199,6 @@ config MARVELL_CN10K_DDR_PMU
+ 	  Enable perf support for Marvell DDR Performance monitoring
+ 	  event on CN10K platform.
+ 
++source "drivers/perf/amlogic/Kconfig"
++
+ endmenu
+diff --git a/drivers/perf/Makefile b/drivers/perf/Makefile
+index 050d04ee19dd..5f06dfe7dcb2 100644
+--- a/drivers/perf/Makefile
++++ b/drivers/perf/Makefile
+@@ -21,3 +21,4 @@ obj-$(CONFIG_MARVELL_CN10K_TAD_PMU) += marvell_cn10k_tad_pmu.o
+ obj-$(CONFIG_MARVELL_CN10K_DDR_PMU) += marvell_cn10k_ddr_pmu.o
+ obj-$(CONFIG_APPLE_M1_CPU_PMU) += apple_m1_cpu_pmu.o
+ obj-$(CONFIG_ALIBABA_UNCORE_DRW_PMU) += alibaba_uncore_drw_pmu.o
++obj-$(CONFIG_MESON_DDR_PMU) += amlogic/
+diff --git a/drivers/perf/amlogic/Kconfig b/drivers/perf/amlogic/Kconfig
+new file mode 100644
+index 000000000000..f68db01a7f17
+--- /dev/null
++++ b/drivers/perf/amlogic/Kconfig
+@@ -0,0 +1,10 @@
++# SPDX-License-Identifier: GPL-2.0-only
++config MESON_DDR_PMU
++	tristate "Amlogic DDR Bandwidth Performance Monitor"
++	depends on ARCH_MESON || COMPILE_TEST
++	help
++          Provides support for the DDR performance monitor
++          in Amlogic SoCs, which can give information about
++          memory throughput and other related events. It
++          supports multiple channels to monitor the memory
++          bandwidth simultaneously.
+diff --git a/drivers/perf/amlogic/Makefile b/drivers/perf/amlogic/Makefile
+new file mode 100644
+index 000000000000..d3ab2ac5353b
+--- /dev/null
++++ b/drivers/perf/amlogic/Makefile
+@@ -0,0 +1,5 @@
++# SPDX-License-Identifier: GPL-2.0-only
++
++obj-$(CONFIG_MESON_DDR_PMU) += meson_ddr_pmu_g12.o
++
++meson_ddr_pmu_g12-y	:= meson_ddr_pmu_core.o meson_g12_ddr_pmu.o
+diff --git a/drivers/perf/amlogic/meson_ddr_pmu_core.c b/drivers/perf/amlogic/meson_ddr_pmu_core.c
+new file mode 100644
+index 000000000000..f14a8d5e24bf
+--- /dev/null
++++ b/drivers/perf/amlogic/meson_ddr_pmu_core.c
+@@ -0,0 +1,562 @@
++// SPDX-License-Identifier: GPL-2.0
++/*
++ * Copyright (c) 2022 Amlogic, Inc. All rights reserved.
++ */
++
++#include <linux/bitfield.h>
++#include <linux/init.h>
++#include <linux/irqreturn.h>
++#include <linux/kernel.h>
++#include <linux/module.h>
++#include <linux/of.h>
++#include <linux/of_device.h>
++#include <linux/of_irq.h>
++#include <linux/perf_event.h>
++#include <linux/platform_device.h>
++#include <linux/printk.h>
++#include <linux/sysfs.h>
++#include <linux/types.h>
++#include <linux/version.h>
++
++#include <soc/amlogic/meson_ddr_pmu.h>
++
++struct ddr_pmu {
++	struct pmu pmu;
++	struct dmc_info info;
++	struct dmc_counter counters;	/* save counters from hw */
++	bool pmu_enabled;
++	struct device *dev;
++	char *name;
++	struct hlist_node node;
++	enum cpuhp_state cpuhp_state;
++	int cpu;			/* for cpu hotplug */
++};
++
++#define DDR_PERF_DEV_NAME "meson_ddr_bw"
++#define MAX_AXI_PORTS_OF_CHANNEL	4	/* A DMC channel can monitor max 4 axi ports */
++
++#define to_ddr_pmu(p)		container_of(p, struct ddr_pmu, pmu)
++#define dmc_info_to_pmu(p)	container_of(p, struct ddr_pmu, info)
++
++static void dmc_pmu_enable(struct ddr_pmu *pmu)
++{
++	if (!pmu->pmu_enabled)
++		pmu->info.hw_info->enable(&pmu->info);
++
++	pmu->pmu_enabled = true;
++}
++
++static void dmc_pmu_disable(struct ddr_pmu *pmu)
++{
++	if (pmu->pmu_enabled)
++		pmu->info.hw_info->disable(&pmu->info);
++
++	pmu->pmu_enabled = false;
++}
++
++static void meson_ddr_set_axi_filter(struct perf_event *event, u8 axi_id)
++{
++	struct ddr_pmu *pmu = to_ddr_pmu(event->pmu);
++	int chann;
++
++	if (event->attr.config > ALL_CHAN_COUNTER_ID &&
++	    event->attr.config < COUNTER_MAX_ID) {
++		chann = event->attr.config - CHAN1_COUNTER_ID;
++
++		pmu->info.hw_info->set_axi_filter(&pmu->info, axi_id, chann);
++	}
++}
++
++static void ddr_cnt_addition(struct dmc_counter *sum,
++			     struct dmc_counter *add1,
++			     struct dmc_counter *add2,
++			     int chann_nr)
++{
++	int i;
++	u64 cnt1, cnt2;
++
++	sum->all_cnt = add1->all_cnt + add2->all_cnt;
++	sum->all_req = add1->all_req + add2->all_req;
++	for (i = 0; i < chann_nr; i++) {
++		cnt1 = add1->channel_cnt[i];
++		cnt2 = add2->channel_cnt[i];
++
++		sum->channel_cnt[i] = cnt1 + cnt2;
++	}
++}
++
++static void meson_ddr_perf_event_update(struct perf_event *event)
++{
++	struct ddr_pmu *pmu = to_ddr_pmu(event->pmu);
++	u64 new_raw_count = 0;
++	struct dmc_counter dc = {0}, sum_dc = {0};
++	int idx;
++	int chann_nr = pmu->info.hw_info->chann_nr;
++
++	/* get the remain counters in register. */
++	pmu->info.hw_info->get_counters(&pmu->info, &dc);
++
++	ddr_cnt_addition(&sum_dc, &pmu->counters, &dc, chann_nr);
++
++	switch (event->attr.config) {
++	case ALL_CHAN_COUNTER_ID:
++		new_raw_count = sum_dc.all_cnt;
++		break;
++	case CHAN1_COUNTER_ID:
++	case CHAN2_COUNTER_ID:
++	case CHAN3_COUNTER_ID:
++	case CHAN4_COUNTER_ID:
++	case CHAN5_COUNTER_ID:
++	case CHAN6_COUNTER_ID:
++	case CHAN7_COUNTER_ID:
++	case CHAN8_COUNTER_ID:
++		idx = event->attr.config - CHAN1_COUNTER_ID;
++		new_raw_count = sum_dc.channel_cnt[idx];
++		break;
++	}
++
++	local64_set(&event->count, new_raw_count);
++}
++
++static int meson_ddr_perf_event_init(struct perf_event *event)
++{
++	struct ddr_pmu *pmu = to_ddr_pmu(event->pmu);
++	u64 config1 = event->attr.config1;
++	u64 config2 = event->attr.config2;
++
++	if (event->attr.type != event->pmu->type)
++		return -ENOENT;
++
++	if (is_sampling_event(event) || event->attach_state & PERF_ATTACH_TASK)
++		return -EOPNOTSUPP;
++
++	if (event->cpu < 0)
++		return -EOPNOTSUPP;
++
++	/* check if the number of parameters is too much */
++	if (event->attr.config != ALL_CHAN_COUNTER_ID &&
++	    hweight64(config1) + hweight64(config2) > MAX_AXI_PORTS_OF_CHANNEL)
++		return -EOPNOTSUPP;
++
++	event->cpu = pmu->cpu;
++
++	return 0;
++}
++
++static void meson_ddr_perf_event_start(struct perf_event *event, int flags)
++{
++	struct ddr_pmu *pmu = to_ddr_pmu(event->pmu);
++
++	memset(&pmu->counters, 0, sizeof(pmu->counters));
++	dmc_pmu_enable(pmu);
++}
++
++static int meson_ddr_perf_event_add(struct perf_event *event, int flags)
++{
++	u64 config1 = event->attr.config1;
++	u64 config2 = event->attr.config2;
++	int i;
++
++	for_each_set_bit(i, (const unsigned long *)&config1, sizeof(config1))
++		meson_ddr_set_axi_filter(event, i);
++
++	for_each_set_bit(i, (const unsigned long *)&config2, sizeof(config2))
++		meson_ddr_set_axi_filter(event, i + 64);
++
++	if (flags & PERF_EF_START)
++		meson_ddr_perf_event_start(event, flags);
++
++	return 0;
++}
++
++static void meson_ddr_perf_event_stop(struct perf_event *event, int flags)
++{
++	struct ddr_pmu *pmu = to_ddr_pmu(event->pmu);
++
++	if (flags & PERF_EF_UPDATE)
++		meson_ddr_perf_event_update(event);
++
++	dmc_pmu_disable(pmu);
++}
++
++static void meson_ddr_perf_event_del(struct perf_event *event, int flags)
++{
++	meson_ddr_perf_event_stop(event, PERF_EF_UPDATE);
++}
++
++static ssize_t meson_ddr_perf_cpumask_show(struct device *dev,
++					   struct device_attribute *attr,
++					   char *buf)
++{
++	struct ddr_pmu *pmu = dev_get_drvdata(dev);
++
++	return cpumap_print_to_pagebuf(true, buf, cpumask_of(pmu->cpu));
++}
++
++static struct device_attribute meson_ddr_perf_cpumask_attr =
++__ATTR(cpumask, 0444, meson_ddr_perf_cpumask_show, NULL);
++
++static struct attribute *meson_ddr_perf_cpumask_attrs[] = {
++	&meson_ddr_perf_cpumask_attr.attr,
++	NULL,
++};
++
++static const struct attribute_group ddr_perf_cpumask_attr_group = {
++	.attrs = meson_ddr_perf_cpumask_attrs,
++};
++
++static ssize_t
++pmu_event_show(struct device *dev, struct device_attribute *attr,
++	       char *page)
++{
++	struct perf_pmu_events_attr *pmu_attr;
++
++	pmu_attr = container_of(attr, struct perf_pmu_events_attr, attr);
++	return sysfs_emit(page, "event=0x%02llx\n", pmu_attr->id);
++}
++
++static ssize_t
++event_show_unit(struct device *dev, struct device_attribute *attr,
++		char *page)
++{
++	return sysfs_emit(page, "MB\n");
++}
++
++static ssize_t
++event_show_scale(struct device *dev, struct device_attribute *attr,
++		 char *page)
++{
++	/* one count = 16byte = 1.52587890625e-05 MB */
++	return sysfs_emit(page, "1.52587890625e-05\n");
++}
++
++#define AML_DDR_PMU_EVENT_ATTR(_name, _id)				\
++{									\
++	.attr = __ATTR(_name, 0444, pmu_event_show, NULL),		\
++	.id = _id,							\
++}
++
++#define AML_DDR_PMU_EVENT_UNIT_ATTR(_name)				\
++	__ATTR(_name.unit, 0444, event_show_unit, NULL)
++
++#define AML_DDR_PMU_EVENT_SCALE_ATTR(_name)				\
++	__ATTR(_name.scale, 0444, event_show_scale, NULL)
++
++static struct device_attribute event_unit_attrs[] = {
++	AML_DDR_PMU_EVENT_UNIT_ATTR(total_rw_bytes),
++	AML_DDR_PMU_EVENT_UNIT_ATTR(chan_1_rw_bytes),
++	AML_DDR_PMU_EVENT_UNIT_ATTR(chan_2_rw_bytes),
++	AML_DDR_PMU_EVENT_UNIT_ATTR(chan_3_rw_bytes),
++	AML_DDR_PMU_EVENT_UNIT_ATTR(chan_4_rw_bytes),
++	AML_DDR_PMU_EVENT_UNIT_ATTR(chan_5_rw_bytes),
++	AML_DDR_PMU_EVENT_UNIT_ATTR(chan_6_rw_bytes),
++	AML_DDR_PMU_EVENT_UNIT_ATTR(chan_7_rw_bytes),
++	AML_DDR_PMU_EVENT_UNIT_ATTR(chan_8_rw_bytes),
++};
++
++static struct device_attribute event_scale_attrs[] = {
++	AML_DDR_PMU_EVENT_SCALE_ATTR(total_rw_bytes),
++	AML_DDR_PMU_EVENT_SCALE_ATTR(chan_1_rw_bytes),
++	AML_DDR_PMU_EVENT_SCALE_ATTR(chan_2_rw_bytes),
++	AML_DDR_PMU_EVENT_SCALE_ATTR(chan_3_rw_bytes),
++	AML_DDR_PMU_EVENT_SCALE_ATTR(chan_4_rw_bytes),
++	AML_DDR_PMU_EVENT_SCALE_ATTR(chan_5_rw_bytes),
++	AML_DDR_PMU_EVENT_SCALE_ATTR(chan_6_rw_bytes),
++	AML_DDR_PMU_EVENT_SCALE_ATTR(chan_7_rw_bytes),
++	AML_DDR_PMU_EVENT_SCALE_ATTR(chan_8_rw_bytes),
++};
++
++static struct perf_pmu_events_attr event_attrs[] = {
++	AML_DDR_PMU_EVENT_ATTR(total_rw_bytes, ALL_CHAN_COUNTER_ID),
++	AML_DDR_PMU_EVENT_ATTR(chan_1_rw_bytes, CHAN1_COUNTER_ID),
++	AML_DDR_PMU_EVENT_ATTR(chan_2_rw_bytes, CHAN2_COUNTER_ID),
++	AML_DDR_PMU_EVENT_ATTR(chan_3_rw_bytes, CHAN3_COUNTER_ID),
++	AML_DDR_PMU_EVENT_ATTR(chan_4_rw_bytes, CHAN4_COUNTER_ID),
++	AML_DDR_PMU_EVENT_ATTR(chan_5_rw_bytes, CHAN5_COUNTER_ID),
++	AML_DDR_PMU_EVENT_ATTR(chan_6_rw_bytes, CHAN6_COUNTER_ID),
++	AML_DDR_PMU_EVENT_ATTR(chan_7_rw_bytes, CHAN7_COUNTER_ID),
++	AML_DDR_PMU_EVENT_ATTR(chan_8_rw_bytes, CHAN8_COUNTER_ID),
++};
++
++/* three attrs are combined an event */
++static struct attribute *ddr_perf_events_attrs[COUNTER_MAX_ID * 3];
++
++static struct attribute_group ddr_perf_events_attr_group = {
++	.name = "events",
++	.attrs = ddr_perf_events_attrs,
++};
++
++static umode_t meson_ddr_perf_format_attr_visible(struct kobject *kobj,
++						  struct attribute *attr,
++						  int n)
++{
++	struct pmu *pmu = dev_get_drvdata(kobj_to_dev(kobj));
++	struct ddr_pmu *ddr_pmu = to_ddr_pmu(pmu);
++	const u64 *capability = ddr_pmu->info.hw_info->capability;
++	struct device_attribute *dev_attr;
++	int id;
++	char value[20]; // config1:xxx, 20 is enough
++
++	dev_attr = container_of(attr, struct device_attribute, attr);
++	dev_attr->show(NULL, NULL, value);
++
++	if (sscanf(value, "config1:%d", &id) == 1)
++		return capability[0] & (1 << id) ? attr->mode : 0;
++
++	if (sscanf(value, "config2:%d", &id) == 1)
++		return capability[1] & (1 << id) ? attr->mode : 0;
++
++	return attr->mode;
++}
++
++static struct attribute_group ddr_perf_format_attr_group = {
++	.name = "format",
++	.is_visible = meson_ddr_perf_format_attr_visible,
++};
++
++static ssize_t meson_ddr_perf_identifier_show(struct device *dev,
++					      struct device_attribute *attr,
++					      char *page)
++{
++	struct ddr_pmu *pmu = dev_get_drvdata(dev);
++
++	return sysfs_emit(page, "%s\n", pmu->name);
++}
++
++static struct device_attribute meson_ddr_perf_identifier_attr =
++__ATTR(identifier, 0444, meson_ddr_perf_identifier_show, NULL);
++
++static struct attribute *meson_ddr_perf_identifier_attrs[] = {
++	&meson_ddr_perf_identifier_attr.attr,
++	NULL,
++};
++
++static const struct attribute_group ddr_perf_identifier_attr_group = {
++	.attrs = meson_ddr_perf_identifier_attrs,
++};
++
++static const struct attribute_group *attr_groups[] = {
++	&ddr_perf_events_attr_group,
++	&ddr_perf_format_attr_group,
++	&ddr_perf_cpumask_attr_group,
++	&ddr_perf_identifier_attr_group,
++	NULL,
++};
++
++static irqreturn_t dmc_irq_handler(int irq, void *dev_id)
++{
++	struct dmc_info *info = dev_id;
++	struct ddr_pmu *pmu;
++	struct dmc_counter counters, *sum_cnter;
++	int i;
++
++	pmu = dmc_info_to_pmu(info);
++
++	if (info->hw_info->irq_handler(info, &counters) != 0)
++		goto out;
++
++	sum_cnter = &pmu->counters;
++	sum_cnter->all_cnt += counters.all_cnt;
++	sum_cnter->all_req += counters.all_req;
++
++	for (i = 0; i < pmu->info.hw_info->chann_nr; i++)
++		sum_cnter->channel_cnt[i] += counters.channel_cnt[i];
++
++	if (pmu->pmu_enabled)
++		/*
++		 * the timer interrupt only supprt
++		 * one shot mode, we have to re-enable
++		 * it in ISR to support continue mode.
++		 */
++		info->hw_info->enable(info);
++
++	dev_dbg(pmu->dev, "counts: %llu %llu %llu, %llu, %llu, %llu\t\t"
++			"sum: %llu %llu %llu, %llu, %llu, %llu\n",
++			counters.all_req,
++			counters.all_cnt,
++			counters.channel_cnt[0],
++			counters.channel_cnt[1],
++			counters.channel_cnt[2],
++			counters.channel_cnt[3],
++
++			pmu->counters.all_req,
++			pmu->counters.all_cnt,
++			pmu->counters.channel_cnt[0],
++			pmu->counters.channel_cnt[1],
++			pmu->counters.channel_cnt[2],
++			pmu->counters.channel_cnt[3]);
++out:
++	return IRQ_HANDLED;
++}
++
++static int ddr_perf_offline_cpu(unsigned int cpu, struct hlist_node *node)
++{
++	struct ddr_pmu *pmu = hlist_entry_safe(node, struct ddr_pmu, node);
++	int target;
++
++	if (cpu != pmu->cpu)
++		return 0;
++
++	target = cpumask_any_but(cpu_online_mask, cpu);
++	if (target >= nr_cpu_ids)
++		return 0;
++
++	perf_pmu_migrate_context(&pmu->pmu, cpu, target);
++	pmu->cpu = target;
++
++	WARN_ON(irq_set_affinity(pmu->info.irq_num, cpumask_of(pmu->cpu)));
++
++	return 0;
++}
++
++static void fill_event_attr(struct ddr_pmu *pmu)
++{
++	int i, j, k;
++	struct attribute **dst = ddr_perf_events_attrs;
++
++	j = 0;
++	k = 0;
++
++	/* fill ALL_CHAN_COUNTER_ID event */
++	dst[j++] = &event_attrs[k].attr.attr;
++	dst[j++] = &event_unit_attrs[k].attr;
++	dst[j++] = &event_scale_attrs[k].attr;
++
++	k++;
++
++	/* fill each channel event */
++	for (i = 0; i < pmu->info.hw_info->chann_nr; i++, k++) {
++		dst[j++] = &event_attrs[k].attr.attr;
++		dst[j++] = &event_unit_attrs[k].attr;
++		dst[j++] = &event_scale_attrs[k].attr;
++	}
++
++	dst[j] = NULL; /* mark end */
++}
++
++static void fmt_attr_fill(struct attribute **fmt_attr)
++{
++	ddr_perf_format_attr_group.attrs = fmt_attr;
++}
++
++static int ddr_pmu_parse_dt(struct platform_device *pdev,
++			    struct dmc_info *info)
++{
++	void __iomem *base;
++	int i, ret;
++
++	info->hw_info = of_device_get_match_data(&pdev->dev);
++
++	for (i = 0; i < info->hw_info->dmc_nr; i++) {
++		/* resource 0 for ddr register base */
++		base = devm_platform_ioremap_resource(pdev, i);
++		if (IS_ERR(base))
++			return PTR_ERR(base);
++
++		info->ddr_reg[i] = base;
++	}
++
++	/* resource i for pll register base */
++	base = devm_platform_ioremap_resource(pdev, i);
++	if (IS_ERR(base))
++		return PTR_ERR(base);
++
++	info->pll_reg = base;
++
++	ret = platform_get_irq(pdev, 0);
++	if (ret < 0)
++		return ret;
++
++	info->irq_num = ret;
++
++	ret = devm_request_irq(&pdev->dev, info->irq_num, dmc_irq_handler,
++			       IRQF_NOBALANCING, dev_name(&pdev->dev),
++			       (void *)info);
++	if (ret < 0)
++		return ret;
++
++	return 0;
++}
++
++int meson_ddr_pmu_create(struct platform_device *pdev)
++{
++	int ret;
++	char *name;
++	struct ddr_pmu *pmu;
++
++	pmu = devm_kzalloc(&pdev->dev, sizeof(struct ddr_pmu), GFP_KERNEL);
++	if (!pmu)
++		return -ENOMEM;
++
++	*pmu = (struct ddr_pmu) {
++		.pmu = {
++			.module		= THIS_MODULE,
++			.capabilities	= PERF_PMU_CAP_NO_EXCLUDE,
++			.task_ctx_nr	= perf_invalid_context,
++			.attr_groups	= attr_groups,
++			.event_init	= meson_ddr_perf_event_init,
++			.add		= meson_ddr_perf_event_add,
++			.del		= meson_ddr_perf_event_del,
++			.start		= meson_ddr_perf_event_start,
++			.stop		= meson_ddr_perf_event_stop,
++			.read		= meson_ddr_perf_event_update,
++		},
++	};
++
++	ret = ddr_pmu_parse_dt(pdev, &pmu->info);
++	if (ret < 0)
++		return ret;
++
++	fmt_attr_fill(pmu->info.hw_info->fmt_attr);
++
++	pmu->cpu = smp_processor_id();
++
++	name = devm_kasprintf(&pdev->dev, GFP_KERNEL, DDR_PERF_DEV_NAME);
++	if (!name)
++		return -ENOMEM;
++
++	ret = cpuhp_setup_state_multi(CPUHP_AP_ONLINE_DYN, name, NULL,
++				      ddr_perf_offline_cpu);
++	if (ret < 0)
++		return ret;
++
++	pmu->cpuhp_state = ret;
++
++	/* Register the pmu instance for cpu hotplug */
++	ret = cpuhp_state_add_instance_nocalls(pmu->cpuhp_state, &pmu->node);
++	if (ret)
++		goto cpuhp_instance_err;
++
++	fill_event_attr(pmu);
++
++	ret = perf_pmu_register(&pmu->pmu, name, -1);
++	if (ret)
++		goto pmu_register_err;
++
++	pmu->name = name;
++	pmu->dev = &pdev->dev;
++	pmu->pmu_enabled = false;
++
++	platform_set_drvdata(pdev, pmu);
++
++	return 0;
++
++pmu_register_err:
++	cpuhp_state_remove_instance_nocalls(pmu->cpuhp_state, &pmu->node);
++
++cpuhp_instance_err:
++	cpuhp_remove_state(pmu->cpuhp_state);
++
++	return ret;
++}
++
++int meson_ddr_pmu_remove(struct platform_device *pdev)
++{
++	struct ddr_pmu *pmu = platform_get_drvdata(pdev);
++
++	perf_pmu_unregister(&pmu->pmu);
++	cpuhp_state_remove_instance_nocalls(pmu->cpuhp_state, &pmu->node);
++	cpuhp_remove_state(pmu->cpuhp_state);
++
++	return 0;
++}
+diff --git a/drivers/perf/amlogic/meson_g12_ddr_pmu.c b/drivers/perf/amlogic/meson_g12_ddr_pmu.c
+new file mode 100644
+index 000000000000..c07c34f03cce
+--- /dev/null
++++ b/drivers/perf/amlogic/meson_g12_ddr_pmu.c
+@@ -0,0 +1,394 @@
++// SPDX-License-Identifier: GPL-2.0
++/*
++ * Copyright (c) 2022 Amlogic, Inc. All rights reserved.
++ */
++
++#include <linux/err.h>
++#include <linux/kernel.h>
++#include <linux/module.h>
++#include <linux/of.h>
++#include <linux/perf_event.h>
++#include <linux/platform_device.h>
++#include <linux/printk.h>
++#include <linux/types.h>
++#include <linux/version.h>
++
++#include <soc/amlogic/meson_ddr_pmu.h>
++
++#define PORT_MAJOR		32
++#define DEFAULT_XTAL_FREQ	24000000UL
++
++#define DMC_QOS_IRQ		BIT(30)
++
++/* DMC bandwidth monitor register address offset */
++#define DMC_MON_G12_CTRL0		(0x20  << 2)
++#define DMC_MON_G12_CTRL1		(0x21  << 2)
++#define DMC_MON_G12_CTRL2		(0x22  << 2)
++#define DMC_MON_G12_CTRL3		(0x23  << 2)
++#define DMC_MON_G12_CTRL4		(0x24  << 2)
++#define DMC_MON_G12_CTRL5		(0x25  << 2)
++#define DMC_MON_G12_CTRL6		(0x26  << 2)
++#define DMC_MON_G12_CTRL7		(0x27  << 2)
++#define DMC_MON_G12_CTRL8		(0x28  << 2)
++
++#define DMC_MON_G12_ALL_REQ_CNT		(0x29  << 2)
++#define DMC_MON_G12_ALL_GRANT_CNT	(0x2a  << 2)
++#define DMC_MON_G12_ONE_GRANT_CNT	(0x2b  << 2)
++#define DMC_MON_G12_SEC_GRANT_CNT	(0x2c  << 2)
++#define DMC_MON_G12_THD_GRANT_CNT	(0x2d  << 2)
++#define DMC_MON_G12_FOR_GRANT_CNT	(0x2e  << 2)
++#define DMC_MON_G12_TIMER		(0x2f  << 2)
++
++/* Each bit represent a axi line */
++PMU_FORMAT_ATTR(event, "config:0-7");
++PMU_FORMAT_ATTR(arm, "config1:0");
++PMU_FORMAT_ATTR(gpu, "config1:1");
++PMU_FORMAT_ATTR(pcie, "config1:2");
++PMU_FORMAT_ATTR(hdcp, "config1:3");
++PMU_FORMAT_ATTR(hevc_front, "config1:4");
++PMU_FORMAT_ATTR(usb3_0, "config1:6");
++PMU_FORMAT_ATTR(device, "config1:7");
++PMU_FORMAT_ATTR(hevc_back, "config1:8");
++PMU_FORMAT_ATTR(h265enc, "config1:9");
++PMU_FORMAT_ATTR(vpu_read1, "config1:16");
++PMU_FORMAT_ATTR(vpu_read2, "config1:17");
++PMU_FORMAT_ATTR(vpu_read3, "config1:18");
++PMU_FORMAT_ATTR(vpu_write1, "config1:19");
++PMU_FORMAT_ATTR(vpu_write2, "config1:20");
++PMU_FORMAT_ATTR(vdec, "config1:21");
++PMU_FORMAT_ATTR(hcodec, "config1:22");
++PMU_FORMAT_ATTR(ge2d, "config1:23");
++
++PMU_FORMAT_ATTR(spicc1, "config1:32");
++PMU_FORMAT_ATTR(usb0, "config1:33");
++PMU_FORMAT_ATTR(dma, "config1:34");
++PMU_FORMAT_ATTR(arb0, "config1:35");
++PMU_FORMAT_ATTR(sd_emmc_b, "config1:36");
++PMU_FORMAT_ATTR(usb1, "config1:37");
++PMU_FORMAT_ATTR(audio, "config1:38");
++PMU_FORMAT_ATTR(aififo, "config1:39");
++PMU_FORMAT_ATTR(parser, "config1:41");
++PMU_FORMAT_ATTR(ao_cpu, "config1:42");
++PMU_FORMAT_ATTR(sd_emmc_c, "config1:43");
++PMU_FORMAT_ATTR(spicc2, "config1:44");
++PMU_FORMAT_ATTR(ethernet, "config1:45");
++PMU_FORMAT_ATTR(sana, "config1:46");
++
++/* for sm1 and g12b */
++PMU_FORMAT_ATTR(nna, "config1:10");
++
++/* for g12b only */
++PMU_FORMAT_ATTR(gdc, "config1:11");
++PMU_FORMAT_ATTR(mipi_isp, "config1:12");
++PMU_FORMAT_ATTR(arm1, "config1:13");
++PMU_FORMAT_ATTR(sd_emmc_a, "config1:40");
++
++static struct attribute *g12_pmu_format_attrs[] = {
++	&format_attr_event.attr,
++	&format_attr_arm.attr,
++	&format_attr_gpu.attr,
++	&format_attr_nna.attr,
++	&format_attr_gdc.attr,
++	&format_attr_arm1.attr,
++	&format_attr_mipi_isp.attr,
++	&format_attr_sd_emmc_a.attr,
++	&format_attr_pcie.attr,
++	&format_attr_hdcp.attr,
++	&format_attr_hevc_front.attr,
++	&format_attr_usb3_0.attr,
++	&format_attr_device.attr,
++	&format_attr_hevc_back.attr,
++	&format_attr_h265enc.attr,
++	&format_attr_vpu_read1.attr,
++	&format_attr_vpu_read2.attr,
++	&format_attr_vpu_read3.attr,
++	&format_attr_vpu_write1.attr,
++	&format_attr_vpu_write2.attr,
++	&format_attr_vdec.attr,
++	&format_attr_hcodec.attr,
++	&format_attr_ge2d.attr,
++	&format_attr_spicc1.attr,
++	&format_attr_usb0.attr,
++	&format_attr_dma.attr,
++	&format_attr_arb0.attr,
++	&format_attr_sd_emmc_b.attr,
++	&format_attr_usb1.attr,
++	&format_attr_audio.attr,
++	&format_attr_aififo.attr,
++	&format_attr_parser.attr,
++	&format_attr_ao_cpu.attr,
++	&format_attr_sd_emmc_c.attr,
++	&format_attr_spicc2.attr,
++	&format_attr_ethernet.attr,
++	&format_attr_sana.attr,
++	NULL,
++};
++
++/* calculate ddr clock */
++static unsigned long dmc_g12_get_freq_quick(struct dmc_info *info)
++{
++	unsigned int val;
++	unsigned int n, m, od1;
++	unsigned int od_div = 0xfff;
++	unsigned long freq = 0;
++
++	val = readl(info->pll_reg);
++	val = val & 0xfffff;
++	switch ((val >> 16) & 7) {
++	case 0:
++		od_div = 2;
++		break;
++
++	case 1:
++		od_div = 3;
++		break;
++
++	case 2:
++		od_div = 4;
++		break;
++
++	case 3:
++		od_div = 6;
++		break;
++
++	case 4:
++		od_div = 8;
++		break;
++
++	default:
++		break;
++	}
++
++	m = val & 0x1ff;
++	n = ((val >> 10) & 0x1f);
++	od1 = (((val >> 19) & 0x1)) == 1 ? 2 : 1;
++	freq = DEFAULT_XTAL_FREQ / 1000;        /* avoid overflow */
++	if (n)
++		freq = ((((freq * m) / n) >> od1) / od_div) * 1000;
++
++	return freq;
++}
++
++#ifdef DEBUG
++static void g12_dump_reg(struct dmc_info *db)
++{
++	int s = 0, i;
++	unsigned int r;
++
++	for (i = 0; i < 9; i++) {
++		r  = readl(db->ddr_reg[0] + (DMC_MON_G12_CTRL0 + (i << 2)));
++		pr_notice("DMC_MON_CTRL%d:        %08x\n", i, r);
++	}
++	r  = readl(db->ddr_reg[0] + DMC_MON_G12_ALL_REQ_CNT);
++	pr_notice("DMC_MON_ALL_REQ_CNT:  %08x\n", r);
++	r  = readl(db->ddr_reg[0] + DMC_MON_G12_ALL_GRANT_CNT);
++	pr_notice("DMC_MON_ALL_GRANT_CNT:%08x\n", r);
++	r  = readl(db->ddr_reg[0] + DMC_MON_G12_ONE_GRANT_CNT);
++	pr_notice("DMC_MON_ONE_GRANT_CNT:%08x\n", r);
++	r  = readl(db->ddr_reg[0] + DMC_MON_G12_SEC_GRANT_CNT);
++	pr_notice("DMC_MON_SEC_GRANT_CNT:%08x\n", r);
++	r  = readl(db->ddr_reg[0] + DMC_MON_G12_THD_GRANT_CNT);
++	pr_notice("DMC_MON_THD_GRANT_CNT:%08x\n", r);
++	r  = readl(db->ddr_reg[0] + DMC_MON_G12_FOR_GRANT_CNT);
++	pr_notice("DMC_MON_FOR_GRANT_CNT:%08x\n", r);
++	r  = readl(db->ddr_reg[0] + DMC_MON_G12_TIMER);
++	pr_notice("DMC_MON_TIMER:        %08x\n", r);
++}
++#endif
++
++static void dmc_g12_counter_enable(struct dmc_info *info)
++{
++	unsigned int val;
++	unsigned long clock_count = dmc_g12_get_freq_quick(info) / 10; /* 100ms */
++
++	writel(clock_count, info->ddr_reg[0] + DMC_MON_G12_TIMER);
++
++	val = readl(info->ddr_reg[0] + DMC_MON_G12_CTRL0);
++
++	/* enable all channel */
++	val =  BIT(31) |	/* enable bit */
++	       BIT(20) |	/* use timer  */
++	       0x0f;		/* 4 channels */
++
++	writel(val, info->ddr_reg[0] + DMC_MON_G12_CTRL0);
++
++#ifdef DEBUG
++	g12_dump_reg(info);
++#endif
++}
++
++static void dmc_g12_config_fiter(struct dmc_info *info,
++				 int port, int channel)
++{
++	u32 val;
++	u32 rp[MAX_CHANNEL_NUM] = {DMC_MON_G12_CTRL1, DMC_MON_G12_CTRL3,
++					DMC_MON_G12_CTRL5, DMC_MON_G12_CTRL7};
++	u32 rs[MAX_CHANNEL_NUM] = {DMC_MON_G12_CTRL2, DMC_MON_G12_CTRL4,
++					DMC_MON_G12_CTRL6, DMC_MON_G12_CTRL8};
++	int subport = -1;
++
++	/* clear all port mask */
++	if (port < 0) {
++		writel(0, info->ddr_reg[0] + rp[channel]);
++		writel(0, info->ddr_reg[0] + rs[channel]);
++		return;
++	}
++
++	if (port >= PORT_MAJOR)
++		subport = port - PORT_MAJOR;
++
++	if (subport < 0) {
++		val = readl(info->ddr_reg[0] + rp[channel]);
++		val |=  (1 << port);
++		writel(val, info->ddr_reg[0] + rp[channel]);
++		val = 0xffff;
++		writel(val, info->ddr_reg[0] + rs[channel]);
++	} else {
++		val = BIT(23);		/* select device */
++		writel(val, info->ddr_reg[0] + rp[channel]);
++		val = readl(info->ddr_reg[0] + rs[channel]);
++		val |= (1 << subport);
++		writel(val, info->ddr_reg[0] + rs[channel]);
++	}
++}
++
++static void dmc_g12_set_axi_filter(struct dmc_info *info, int axi_id, int channel)
++{
++	if (channel > info->hw_info->chann_nr)
++		return;
++
++	dmc_g12_config_fiter(info, axi_id, channel);
++}
++
++static void dmc_g12_counter_disable(struct dmc_info *info)
++{
++	int i;
++
++	/* clear timer */
++	writel(0, info->ddr_reg[0] + DMC_MON_G12_CTRL0);
++	writel(0, info->ddr_reg[0] + DMC_MON_G12_TIMER);
++
++	writel(0, info->ddr_reg[0] + DMC_MON_G12_ALL_REQ_CNT);
++	writel(0, info->ddr_reg[0] + DMC_MON_G12_ALL_GRANT_CNT);
++	writel(0, info->ddr_reg[0] + DMC_MON_G12_ONE_GRANT_CNT);
++	writel(0, info->ddr_reg[0] + DMC_MON_G12_SEC_GRANT_CNT);
++	writel(0, info->ddr_reg[0] + DMC_MON_G12_THD_GRANT_CNT);
++	writel(0, info->ddr_reg[0] + DMC_MON_G12_FOR_GRANT_CNT);
++
++	/* clear port channel mapping */
++	for (i = 0; i < info->hw_info->chann_nr; i++)
++		dmc_g12_config_fiter(info, -1, i);
++}
++
++static void dmc_g12_get_counters(struct dmc_info *info,
++				 struct dmc_counter *counter)
++{
++	int i;
++	unsigned int reg;
++
++	counter->all_cnt = readl(info->ddr_reg[0] + DMC_MON_G12_ALL_GRANT_CNT);
++	counter->all_req   = readl(info->ddr_reg[0] + DMC_MON_G12_ALL_REQ_CNT);
++
++	for (i = 0; i < info->hw_info->chann_nr; i++) {
++		reg = DMC_MON_G12_ONE_GRANT_CNT + (i << 2);
++		counter->channel_cnt[i] = readl(info->ddr_reg[0] + reg);
++	}
++}
++
++static int dmc_g12_irq_handler(struct dmc_info *info,
++			       struct dmc_counter *counter)
++{
++	unsigned int val;
++	int ret = -EINVAL;
++
++	val = readl(info->ddr_reg[0] + DMC_MON_G12_CTRL0);
++	if (val & DMC_QOS_IRQ) {
++		dmc_g12_get_counters(info, counter);
++		/* clear irq flags */
++		writel(val, info->ddr_reg[0] + DMC_MON_G12_CTRL0);
++		ret = 0;
++	}
++	return ret;
++}
++
++static const struct dmc_hw_info g12a_dmc_info = {
++	.enable		= dmc_g12_counter_enable,
++	.disable	= dmc_g12_counter_disable,
++	.irq_handler	= dmc_g12_irq_handler,
++	.get_counters	= dmc_g12_get_counters,
++	.set_axi_filter	= dmc_g12_set_axi_filter,
++
++	.dmc_nr = 1,
++	.chann_nr = 4,
++	.capability = {0X7EFF00FF03DF, 0},
++	.fmt_attr = g12_pmu_format_attrs,
++};
++
++static const struct dmc_hw_info g12b_dmc_info = {
++	.enable		= dmc_g12_counter_enable,
++	.disable	= dmc_g12_counter_disable,
++	.irq_handler	= dmc_g12_irq_handler,
++	.get_counters	= dmc_g12_get_counters,
++	.set_axi_filter	= dmc_g12_set_axi_filter,
++
++	.dmc_nr = 1,
++	.chann_nr = 4,
++	.capability = {0X7FFF00FF3FDF, 0},
++	.fmt_attr = g12_pmu_format_attrs,
++};
++
++static const struct dmc_hw_info sm1_dmc_info = {
++	.enable		= dmc_g12_counter_enable,
++	.disable	= dmc_g12_counter_disable,
++	.irq_handler	= dmc_g12_irq_handler,
++	.get_counters	= dmc_g12_get_counters,
++	.set_axi_filter	= dmc_g12_set_axi_filter,
++
++	.dmc_nr = 1,
++	.chann_nr = 4,
++	.capability = {0X7EFF00FF07DF, 0},
++	.fmt_attr = g12_pmu_format_attrs,
++};
++
++static int g12_ddr_pmu_probe(struct platform_device *pdev)
++{
++	return meson_ddr_pmu_create(pdev);
++}
++
++static int g12_ddr_pmu_remove(struct platform_device *pdev)
++{
++	meson_ddr_pmu_remove(pdev);
++
++	return 0;
++}
++
++static const struct of_device_id meson_ddr_pmu_dt_match[] = {
++	{
++		.compatible = "amlogic,g12a-ddr-pmu",
++		.data = &g12a_dmc_info,
++	},
++	{
++		.compatible = "amlogic,g12b-ddr-pmu",
++		.data = &g12b_dmc_info,
++	},
++	{
++		.compatible = "amlogic,sm1-ddr-pmu",
++		.data = &sm1_dmc_info,
++	},
++	{}
++};
++
++static struct platform_driver g12_ddr_pmu_driver = {
++	.probe = g12_ddr_pmu_probe,
++	.remove = g12_ddr_pmu_remove,
++
++	.driver = {
++		.name = "meson-g12-ddr-pmu",
++		.of_match_table = meson_ddr_pmu_dt_match,
++	},
++};
++
++module_platform_driver(g12_ddr_pmu_driver);
++MODULE_AUTHOR("Jiucheng Xu");
++MODULE_LICENSE("GPL");
++MODULE_DESCRIPTION("Amlogic G12 series SoC DDR PMU");
+diff --git a/include/soc/amlogic/meson_ddr_pmu.h b/include/soc/amlogic/meson_ddr_pmu.h
+new file mode 100644
+index 000000000000..4a33e4ab8ada
+--- /dev/null
++++ b/include/soc/amlogic/meson_ddr_pmu.h
+@@ -0,0 +1,66 @@
++/* SPDX-License-Identifier: GPL-2.0 */
++/*
++ * Copyright (c) 2022 Amlogic, Inc. All rights reserved.
++ */
++
++#ifndef __MESON_DDR_PMU_H__
++#define __MESON_DDR_PMU_H__
++
++#define MAX_CHANNEL_NUM		8
++
++enum {
++	ALL_CHAN_COUNTER_ID,
++	CHAN1_COUNTER_ID,
++	CHAN2_COUNTER_ID,
++	CHAN3_COUNTER_ID,
++	CHAN4_COUNTER_ID,
++	CHAN5_COUNTER_ID,
++	CHAN6_COUNTER_ID,
++	CHAN7_COUNTER_ID,
++	CHAN8_COUNTER_ID,
++	COUNTER_MAX_ID,
++};
++
++struct dmc_info;
++
++struct dmc_counter {
++	u64 all_cnt;	/* The count of all requests come in/out ddr controller */
++	union {
++		u64 all_req;
++		struct {
++			u64 all_idle_cnt;
++			u64 all_16bit_cnt;
++		};
++	};
++	u64 channel_cnt[MAX_CHANNEL_NUM]; /* To save a DMC bandwidth-monitor channel counter */
++};
++
++struct dmc_hw_info {
++	void (*enable)(struct dmc_info *info);
++	void (*disable)(struct dmc_info *info);
++	/* Bind an axi line to a bandwidth-monitor channel */
++	void (*set_axi_filter)(struct dmc_info *info, int axi_id, int chann);
++	int (*irq_handler)(struct dmc_info *info,
++			   struct dmc_counter *counter);
++	void (*get_counters)(struct dmc_info *info,
++			     struct dmc_counter *counter);
++
++	int dmc_nr;			/* The number of dmc controller */
++	int chann_nr;			/* The number of dmc bandwidth monitor channels */
++	struct attribute **fmt_attr;
++	const u64 capability[2];
++};
++
++struct dmc_info {
++	const struct dmc_hw_info *hw_info;
++
++	void __iomem *ddr_reg[4];
++	unsigned long timer_value;	/* Timer value in TIMER register */
++	void __iomem *pll_reg;
++	int irq_num;			/* irq vector number */
++};
++
++int meson_ddr_pmu_create(struct platform_device *pdev);
++int meson_ddr_pmu_remove(struct platform_device *pdev);
++
++#endif /* __MESON_DDR_PMU_H__ */
+
+base-commit: 7c7c3a79213e6737b9dda4ec144555d4b446dd22
+-- 
+2.25.1
+
