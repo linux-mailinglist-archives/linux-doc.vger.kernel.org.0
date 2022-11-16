@@ -2,187 +2,132 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id BC93562CD90
-	for <lists+linux-doc@lfdr.de>; Wed, 16 Nov 2022 23:24:32 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 7772962CDCF
+	for <lists+linux-doc@lfdr.de>; Wed, 16 Nov 2022 23:38:32 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S234039AbiKPWYa (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 16 Nov 2022 17:24:30 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:46584 "EHLO
+        id S234329AbiKPWi3 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 16 Nov 2022 17:38:29 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:55924 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S234873AbiKPWYV (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Wed, 16 Nov 2022 17:24:21 -0500
-Received: from mail-pg1-x534.google.com (mail-pg1-x534.google.com [IPv6:2607:f8b0:4864:20::534])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 3AAB26AEE5
-        for <linux-doc@vger.kernel.org>; Wed, 16 Nov 2022 14:24:16 -0800 (PST)
-Received: by mail-pg1-x534.google.com with SMTP id n17so226005pgh.9
-        for <linux-doc@vger.kernel.org>; Wed, 16 Nov 2022 14:24:16 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=google.com; s=20210112;
-        h=in-reply-to:content-disposition:mime-version:references:message-id
-         :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
-        bh=QGkcU8bsAXTracYvItbCwnniUSLgMtAC897scf+9ddo=;
-        b=Yb4wKwuTq8SDmbVGc+P7ahM8KCEiEG3EeQYJnIBy43Yu4s+iC+yGjvQgmVRoCCNQD4
-         bFiXa2DlOoj+M6COODORifyN82jIJfcy0aF0ZJtT8PTph1kJcj2QMeh/X+0txTmE1L9e
-         vjCm/+n4/Ca01rOL6VyR5fbnbwtckm/wl6rnzgA+2U9G86s1X+WQKo3mRqwdqt/NZj4i
-         P3BxQwhuIeyDfA8UssWFkeXvKFbx/BZ4epGrEEpau+te7+rSV+HSw5cBzmIPmEEBr4ge
-         1bl1xkBDMVGhMoLkvC/hKl/ZnG4RNCOpP9NsjFm/3oC6Zxx7zYxZx28Lz46N2hnBOT/Z
-         8NoA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=in-reply-to:content-disposition:mime-version:references:message-id
-         :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=QGkcU8bsAXTracYvItbCwnniUSLgMtAC897scf+9ddo=;
-        b=SqoWsA4BdhlCdkb1noTosZW4JI0RawX8fXShepE7njX0CnKpdq8gb8JksB8CcE6mND
-         NXKe40eKrvOaj1kUm9Tp/oyT6Q4EaNBUbv1fQ3Q9J8CtdNp2WLnifNhkNX99jwK1FpOt
-         8s1s1LNuBcMAk9ZcMUnduWNq3RZSO2mhgm6o1npNj9DXlo8q0Qz4KhM9vXzGsUoZQIAn
-         jHGTVG+YLUgtNFfZPgKZVU1mg1gjBc1QY3G8xMCS9VP86wOxVwvC1fMWMiKubDCiZMDD
-         4gQGb3aEhZKlQA0xv5mkJ4YeM0Q9LIpnIlvgzGtOXFWgLLDcAdbLpjpxRAR5UuALCM6U
-         exew==
-X-Gm-Message-State: ANoB5pk8WXDMnjaVpCe7ws/M3s9r/1YTGxLobnOyh4f6uymXeQJhomn8
-        zVmHZsmKu6i1/I15ZsLMl2kd6w==
-X-Google-Smtp-Source: AA0mqf57GusGHy4fGdIdCCD+ypBDi3fwzFhsJUW/Qb2DW/M9r1lO66W8ccdVhRkSLbzOP4I6svKevg==
-X-Received: by 2002:a63:560c:0:b0:476:9983:b4b5 with SMTP id k12-20020a63560c000000b004769983b4b5mr12164723pgb.516.1668637455542;
-        Wed, 16 Nov 2022 14:24:15 -0800 (PST)
-Received: from google.com (7.104.168.34.bc.googleusercontent.com. [34.168.104.7])
-        by smtp.gmail.com with ESMTPSA id k15-20020aa7972f000000b0056bbba4302dsm11324389pfg.119.2022.11.16.14.24.14
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 16 Nov 2022 14:24:15 -0800 (PST)
-Date:   Wed, 16 Nov 2022 22:24:11 +0000
-From:   Sean Christopherson <seanjc@google.com>
-To:     Chao Peng <chao.p.peng@linux.intel.com>
-Cc:     kvm@vger.kernel.org, linux-kernel@vger.kernel.org,
-        linux-mm@kvack.org, linux-fsdevel@vger.kernel.org,
-        linux-arch@vger.kernel.org, linux-api@vger.kernel.org,
-        linux-doc@vger.kernel.org, qemu-devel@nongnu.org,
-        Paolo Bonzini <pbonzini@redhat.com>,
-        Jonathan Corbet <corbet@lwn.net>,
-        Vitaly Kuznetsov <vkuznets@redhat.com>,
-        Wanpeng Li <wanpengli@tencent.com>,
-        Jim Mattson <jmattson@google.com>,
-        Joerg Roedel <joro@8bytes.org>,
-        Thomas Gleixner <tglx@linutronix.de>,
+        with ESMTP id S233785AbiKPWi2 (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Wed, 16 Nov 2022 17:38:28 -0500
+Received: from mga05.intel.com (mga05.intel.com [192.55.52.43])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 6DBCF14013;
+        Wed, 16 Nov 2022 14:38:27 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1668638307; x=1700174307;
+  h=from:to:cc:subject:date:message-id:mime-version:
+   content-transfer-encoding;
+  bh=NRMsF2GzNxJbS/1EDuibTDtQAzC/aTBbwrI1jU8kKgM=;
+  b=B5YYnnbIgINFCO4tjBcki+ul5eJBOPdf0jkj+Gz5TJuj89POdU4q9yJ+
+   I3RjxiMWRe8PDvFV5FuPK+24aLxKfnYxoTUosklk+/2GI9j5p2iTJtcqC
+   XRylP/A52U4j3+j1hN/NOwTLKmIr1/rHRE+QbiA3cXY+iSLBpMEV4Mp6G
+   VoY+Krk6ZZLSkK2794F9RNRFHrQ8acvmxBzXth/boFO089NnoHC3wuD05
+   i2RoIw8JzIYl86iBZlIUj96zDeTm6tgaPgDgqlwgO4DbMMk2MY0+7QLaX
+   6K27CZQjmZ7l4w7GGV3P83+ZLkeofmg00lTS9c1UlUOKdzrsqTunSrDjt
+   g==;
+X-IronPort-AV: E=McAfee;i="6500,9779,10533"; a="398972921"
+X-IronPort-AV: E=Sophos;i="5.96,169,1665471600"; 
+   d="scan'208";a="398972921"
+Received: from orsmga008.jf.intel.com ([10.7.209.65])
+  by fmsmga105.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 16 Nov 2022 14:38:27 -0800
+X-IronPort-AV: E=McAfee;i="6500,9779,10533"; a="670674999"
+X-IronPort-AV: E=Sophos;i="5.96,169,1665471600"; 
+   d="scan'208";a="670674999"
+Received: from swetasha-mobl2.amr.corp.intel.com (HELO skuppusw-desk1.amr.corp.intel.com) ([10.209.58.91])
+  by orsmga008-auth.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 16 Nov 2022 14:38:26 -0800
+From:   Kuppuswamy Sathyanarayanan 
+        <sathyanarayanan.kuppuswamy@linux.intel.com>
+To:     Thomas Gleixner <tglx@linutronix.de>,
         Ingo Molnar <mingo@redhat.com>, Borislav Petkov <bp@alien8.de>,
-        x86@kernel.org, "H . Peter Anvin" <hpa@zytor.com>,
-        Hugh Dickins <hughd@google.com>,
-        Jeff Layton <jlayton@kernel.org>,
-        "J . Bruce Fields" <bfields@fieldses.org>,
-        Andrew Morton <akpm@linux-foundation.org>,
-        Shuah Khan <shuah@kernel.org>, Mike Rapoport <rppt@kernel.org>,
-        Steven Price <steven.price@arm.com>,
-        "Maciej S . Szmigiero" <mail@maciej.szmigiero.name>,
-        Vlastimil Babka <vbabka@suse.cz>,
-        Vishal Annapurve <vannapurve@google.com>,
-        Yu Zhang <yu.c.zhang@linux.intel.com>,
+        Dave Hansen <dave.hansen@linux.intel.com>, x86@kernel.org,
+        Shuah Khan <shuah@kernel.org>, Jonathan Corbet <corbet@lwn.net>
+Cc:     "H . Peter Anvin" <hpa@zytor.com>,
+        Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+        Kuppuswamy Sathyanarayanan 
+        <sathyanarayanan.kuppuswamy@linux.intel.com>,
         "Kirill A . Shutemov" <kirill.shutemov@linux.intel.com>,
-        luto@kernel.org, jun.nakajima@intel.com, dave.hansen@intel.com,
-        ak@linux.intel.com, david@redhat.com, aarcange@redhat.com,
-        ddutile@redhat.com, dhildenb@redhat.com,
-        Quentin Perret <qperret@google.com>, tabba@google.com,
-        Michael Roth <michael.roth@amd.com>, mhocko@suse.com,
-        Muchun Song <songmuchun@bytedance.com>, wei.w.wang@intel.com
-Subject: Re: [PATCH v9 5/8] KVM: Register/unregister the guest private memory
- regions
-Message-ID: <Y3VjCxCiujCOLP7x@google.com>
-References: <20221025151344.3784230-1-chao.p.peng@linux.intel.com>
- <20221025151344.3784230-6-chao.p.peng@linux.intel.com>
+        Tony Luck <tony.luck@intel.com>,
+        Kai Huang <kai.huang@intel.com>,
+        Wander Lairson Costa <wander@redhat.com>,
+        Isaku Yamahata <isaku.yamahata@gmail.com>,
+        marcelo.cerri@canonical.com, tim.gardner@canonical.com,
+        khalid.elmously@canonical.com, philip.cox@canonical.com,
+        linux-kernel@vger.kernel.org, linux-kselftest@vger.kernel.org,
+        linux-doc@vger.kernel.org
+Subject: [PATCH v18 0/3] Add TDX Guest Attestation support
+Date:   Wed, 16 Nov 2022 14:38:17 -0800
+Message-Id: <20221116223820.819090-1-sathyanarayanan.kuppuswamy@linux.intel.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20221025151344.3784230-6-chao.p.peng@linux.intel.com>
-X-Spam-Status: No, score=-17.6 required=5.0 tests=BAYES_00,DKIMWL_WL_MED,
-        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,
-        ENV_AND_HDR_SPF_MATCH,RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,SPF_PASS,
-        USER_IN_DEF_DKIM_WL,USER_IN_DEF_SPF_WL autolearn=unavailable
-        autolearn_force=no version=3.4.6
+Content-Transfer-Encoding: 8bit
+X-Spam-Status: No, score=-4.3 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_EF,RCVD_IN_DNSWL_MED,SPF_HELO_NONE,
+        SPF_NONE autolearn=ham autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Tue, Oct 25, 2022, Chao Peng wrote:
-> +static int kvm_vm_ioctl_set_mem_attr(struct kvm *kvm, gpa_t gpa, gpa_t size,
-> +				     bool is_private)
-> +{
-> +	gfn_t start, end;
-> +	unsigned long i;
-> +	void *entry;
-> +	int idx;
-> +	int r = 0;
-> +
-> +	if (size == 0 || gpa + size < gpa)
-> +		return -EINVAL;
-> +	if (gpa & (PAGE_SIZE - 1) || size & (PAGE_SIZE - 1))
-> +		return -EINVAL;
-> +
-> +	start = gpa >> PAGE_SHIFT;
-> +	end = (gpa + size - 1 + PAGE_SIZE) >> PAGE_SHIFT;
-> +
-> +	/*
-> +	 * Guest memory defaults to private, kvm->mem_attr_array only stores
-> +	 * shared memory.
-> +	 */
-> +	entry = is_private ? NULL : xa_mk_value(KVM_MEM_ATTR_SHARED);
-> +
-> +	idx = srcu_read_lock(&kvm->srcu);
-> +	KVM_MMU_LOCK(kvm);
-> +	kvm_mmu_invalidate_begin(kvm, start, end);
-> +
-> +	for (i = start; i < end; i++) {
-> +		r = xa_err(xa_store(&kvm->mem_attr_array, i, entry,
-> +				    GFP_KERNEL_ACCOUNT));
-> +		if (r)
-> +			goto err;
-> +	}
-> +
-> +	kvm_unmap_mem_range(kvm, start, end);
-> +
-> +	goto ret;
-> +err:
-> +	for (; i > start; i--)
-> +		xa_erase(&kvm->mem_attr_array, i);
+Hi All,
 
-I don't think deleting previous entries is correct.  To unwind, the correct thing
-to do is restore the original values.  E.g. if userspace space is mapping a large
-range as shared, and some of the previous entries were shared, deleting them would
-incorrectly "convert" those entries to private.
+Intel's Trust Domain Extensions (TDX) protect guest VMs from malicious
+hosts and some physical attacks. VM guest with TDX support is called
+as a TDX Guest.
 
-Tracking the previous state likely isn't the best approach, e.g. it would require
-speculatively allocating extra memory for a rare condition that is likely going to
-lead to OOM anyways.
+In TDX guest, the attestation process is used to verify the TDX guest
+trustworthiness to other entities before provisioning secrets to the
+guest. For example, a key server may request for attestation before
+releasing the encryption keys to mount the encrypted rootfs or
+secondary drive.
 
-Instead of trying to unwind, what about updating the ioctl() params such that
-retrying with the updated addr+size would Just Work?  E.g.
+This patch set adds attestation support for the TDX guest. Details
+about the TDX attestation process and the steps involved are explained
+in Documentation/x86/tdx.rst (added by patch 2/3).
 
-diff --git a/virt/kvm/kvm_main.c b/virt/kvm/kvm_main.c
-index 55b07aae67cc..f1de592a1a06 100644
---- a/virt/kvm/kvm_main.c
-+++ b/virt/kvm/kvm_main.c
-@@ -1015,15 +1015,12 @@ static int kvm_vm_ioctl_set_mem_attr(struct kvm *kvm, gpa_t gpa, gpa_t size,
- 
-        kvm_unmap_mem_range(kvm, start, end, attr);
- 
--       goto ret;
--err:
--       for (; i > start; i--)
--               xa_erase(&kvm->mem_attr_array, i);
--ret:
-        kvm_mmu_invalidate_end(kvm, start, end);
-        KVM_MMU_UNLOCK(kvm);
-        srcu_read_unlock(&kvm->srcu, idx);
- 
-+       <update gpa and size>
-+
-        return r;
- }
- #endif /* CONFIG_KVM_GENERIC_PRIVATE_MEM */
-@@ -4989,6 +4986,8 @@ static long kvm_vm_ioctl(struct file *filp,
- 
-                r = kvm_vm_ioctl_set_mem_attr(kvm, region.addr,
-                                              region.size, set);
-+               if (copy_to_user(argp, &region, sizeof(region)) && !r)
-+                       r = -EFAULT
-                break;
-        }
- #endif
+Following are the details of the patch set:
+
+Patch 1/3 -> Preparatory patch for adding attestation support.
+Patch 2/3 -> Adds user interface driver to support attestation.
+Patch 3/3 -> Adds selftest support for TDREPORT feature.
+
+Commit log history is maintained in the individual patches.
+
+Current overall status of this series is, it has no pending issues
+and can be considered for the upcoming merge cycle.
+
+Kuppuswamy Sathyanarayanan (3):
+  x86/tdx: Add a wrapper to get TDREPORT0 from the TDX Module
+  virt: Add TDX guest driver
+  selftests: tdx: Test TDX attestation GetReport support
+
+ Documentation/virt/coco/tdx-guest.rst        |  52 ++++++
+ Documentation/virt/index.rst                 |   1 +
+ Documentation/x86/tdx.rst                    |  43 +++++
+ arch/x86/coco/tdx/tdx.c                      |  40 +++++
+ arch/x86/include/asm/tdx.h                   |   2 +
+ drivers/virt/Kconfig                         |   2 +
+ drivers/virt/Makefile                        |   1 +
+ drivers/virt/coco/tdx-guest/Kconfig          |  10 ++
+ drivers/virt/coco/tdx-guest/Makefile         |   2 +
+ drivers/virt/coco/tdx-guest/tdx-guest.c      | 102 ++++++++++++
+ include/uapi/linux/tdx-guest.h               |  42 +++++
+ tools/testing/selftests/Makefile             |   1 +
+ tools/testing/selftests/tdx/Makefile         |   7 +
+ tools/testing/selftests/tdx/config           |   1 +
+ tools/testing/selftests/tdx/tdx_guest_test.c | 163 +++++++++++++++++++
+ 15 files changed, 469 insertions(+)
+ create mode 100644 Documentation/virt/coco/tdx-guest.rst
+ create mode 100644 drivers/virt/coco/tdx-guest/Kconfig
+ create mode 100644 drivers/virt/coco/tdx-guest/Makefile
+ create mode 100644 drivers/virt/coco/tdx-guest/tdx-guest.c
+ create mode 100644 include/uapi/linux/tdx-guest.h
+ create mode 100644 tools/testing/selftests/tdx/Makefile
+ create mode 100644 tools/testing/selftests/tdx/config
+ create mode 100644 tools/testing/selftests/tdx/tdx_guest_test.c
+
+-- 
+2.34.1
+
