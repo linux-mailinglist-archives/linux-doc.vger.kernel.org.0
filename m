@@ -2,92 +2,84 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id B00F762FD34
-	for <lists+linux-doc@lfdr.de>; Fri, 18 Nov 2022 19:52:23 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 45CF162FD53
+	for <lists+linux-doc@lfdr.de>; Fri, 18 Nov 2022 19:55:53 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S242839AbiKRSwU (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Fri, 18 Nov 2022 13:52:20 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:51944 "EHLO
+        id S242432AbiKRSzv (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Fri, 18 Nov 2022 13:55:51 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:56442 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S242876AbiKRSv4 (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Fri, 18 Nov 2022 13:51:56 -0500
-Received: from mail.3ffe.de (0001.3ffe.de [IPv6:2a01:4f8:c0c:9d57::1])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 3C2C78FF8A;
-        Fri, 18 Nov 2022 10:51:55 -0800 (PST)
-Received: from mwalle01.kontron.local. (unknown [213.135.10.150])
-        (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-         key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
-        (No client certificate requested)
-        by mail.3ffe.de (Postfix) with ESMTPSA id 7F4E23027;
-        Fri, 18 Nov 2022 19:51:33 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=walle.cc; s=mail2022082101;
-        t=1668797493;
-        h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-         to:to:cc:cc:mime-version:mime-version:
-         content-transfer-encoding:content-transfer-encoding:
-         in-reply-to:in-reply-to:references:references;
-        bh=NMezbZ86aEnKi4RucMK6Z8Q0L8T/YZVy7XoJzzdgBDw=;
-        b=qOUZlBKZ1mmdmsS5xamk7uGebSdSfgYf4BlGDg+yJSEfSkIbCd5+O++ZrmCQY1/kKeJ5ZL
-        JiR4jEG10kDnfslSmoxgDphQKYEKBjxn2c4smJxo+6LVlxyscsmFUyOLupms73ZfTM8ujY
-        RvS3GZQm+9N/EhGHsL1OnItweJK69SKGDlCchxFWCmIqk7cdY000mkyOmm9pun2D3kSMWb
-        qyTO3NehO6RP+IzZqYC3JDf+G8ZJsaqAuuDPIdI6vfLxLv0l9WZpGfJN0hCr4eSwQzwf1L
-        LdyH8W+oCuOCot76gbuggf0kZXJr1NzpvEPVJhHR1RzXCyMqsXImIWXwerGKWQ==
-From:   Michael Walle <michael@walle.cc>
-To:     Jonathan Corbet <corbet@lwn.net>,
-        Srinivas Kandagatla <srinivas.kandagatla@linaro.org>,
-        Miquel Raynal <miquel.raynal@bootlin.com>,
-        Rob Herring <robh+dt@kernel.org>,
-        Frank Rowand <frowand.list@gmail.com>
-Cc:     linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
-        linux-arm-kernel@lists.infradead.org, devicetree@vger.kernel.org
-Subject: [PATCH v3 18/18] MAINTAINERS: Add myself as ONIE tlv NVMEM layout maintainer
-Date:   Fri, 18 Nov 2022 19:51:18 +0100
-Message-Id: <20221118185118.1190044-19-michael@walle.cc>
-X-Mailer: git-send-email 2.30.2
-In-Reply-To: <20221118185118.1190044-1-michael@walle.cc>
-References: <20221118185118.1190044-1-michael@walle.cc>
+        with ESMTP id S242869AbiKRSzf (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Fri, 18 Nov 2022 13:55:35 -0500
+Received: from mail-yw1-x112d.google.com (mail-yw1-x112d.google.com [IPv6:2607:f8b0:4864:20::112d])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id BB269A2894;
+        Fri, 18 Nov 2022 10:53:27 -0800 (PST)
+Received: by mail-yw1-x112d.google.com with SMTP id 00721157ae682-368edbc2c18so57687207b3.13;
+        Fri, 18 Nov 2022 10:53:27 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:from:to:cc:subject:date:message-id:reply-to;
+        bh=UxR9OpGoQxx9yjPAcwW/7PeO4mN55q5wxOodCyNKVa8=;
+        b=iU9ThXBkqq8ayKDcs6HS4ecwuXdH+OMx+gSoNkDyXLNG1AAQ3jF4iExO4F6hPaf4UQ
+         +i86KSRm92hqtZDlZ6hAhaFJt6om1QahZEZRN1dsaqoGNpi1Pk5x5ha4UMdpDHcdfMCl
+         40Wg4SGQ/MCqnx76J4qxaW962YMLHdHPr7IPK9RP4JF09JOtK4V/NEisMsVR+UU92Pyh
+         11i5hi2aRC9wfx/Mhz2Zs2H66JlT8/WttOgU4nddU7PEzMw2Abm80QieTZbMW0QPNHpu
+         9AYVEjLgdkWxq0rFcOZ3G9td9bHHlbYAycrM6U0DBOscUzbDQ89aCwzCApSkkr7jZgvY
+         R6xA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=UxR9OpGoQxx9yjPAcwW/7PeO4mN55q5wxOodCyNKVa8=;
+        b=qVIv+W0iqkISz/+dl72eqit/3eT/G/KkNUhtVYluzGkZ2dXsOOeacFfjbAbNCdabLp
+         KfYksOHQE8hRppyc4oNT7Z7HpyZ5dI12I+RSV1/V6+t9yUJX35IbspJNGVQWFeQIBRFR
+         cirhZA4bbWiSvpVYLkoftoRK6kUy6sGJzLDXF0iyXY4wKN1u//xViphIt6gMaBHtg0ca
+         OcS511ESY933OqhbA7GVS7HmrcjjDy0vYd4xx8yfQCzO4kbOAblE3FeaKUIfiaGqtLsR
+         byzbAww8HTRz/qiuD6aplCQREYOH2zE//jChVs+PxBkoJZI8xwpisZpGQsv/FyN0GTKp
+         PzJg==
+X-Gm-Message-State: ANoB5pkvsoQaJl2icgY19l3xC9dYGJzSm0n9Y0Dk6dxuvoJw+5Zenh5P
+        VMZyNjyVOJc20PWEtWT7tY/25ELbccLwVpDmONI=
+X-Google-Smtp-Source: AA0mqf436iTUIdbNxYNL0kI0MCShiSQXnPw4sYZnkMf/dPBA5Z7OFdMpauzxWR1rB1uK4CY5kbvsJNlZ3q2yAbbFrec=
+X-Received: by 2002:a81:6a88:0:b0:36a:fd2f:a935 with SMTP id
+ f130-20020a816a88000000b0036afd2fa935mr7978610ywc.83.1668797603948; Fri, 18
+ Nov 2022 10:53:23 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Spam: Yes
+References: <20221118170942.2588412-1-carlos.bilbao@amd.com>
+ <20221118170942.2588412-2-carlos.bilbao@amd.com> <CANiq72nN7i4yXjnLftdKZ7zo8Qw8c=aM6L+D2SvzH47PVALJYQ@mail.gmail.com>
+ <1ee66e1e-4ea0-1a6e-92fd-60831dd938b4@amd.com>
+In-Reply-To: <1ee66e1e-4ea0-1a6e-92fd-60831dd938b4@amd.com>
+From:   Miguel Ojeda <miguel.ojeda.sandonis@gmail.com>
+Date:   Fri, 18 Nov 2022 19:53:13 +0100
+Message-ID: <CANiq72=d_khJg-LZqNXgiLnc-c1fBxdMfNhhWrg75pKQXP-quA@mail.gmail.com>
+Subject: Re: [PATCH 1/2] docs: Update maintainer of kernel-docs.rst
+To:     Carlos Bilbao <carlos.bilbao@amd.com>
+Cc:     corbet@lwn.net, lukas.bulwahn@gmail.com, Dhaval.Giani@amd.com,
+        linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org,
+        bilbao@vt.edu, ojeda@kernel.org
+Content-Type: text/plain; charset="UTF-8"
 X-Spam-Status: No, score=-2.1 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,SPF_HELO_NONE,SPF_PASS
-        autolearn=ham autolearn_force=no version=3.4.6
+        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_FROM,
+        RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,SPF_PASS autolearn=ham
+        autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-From: Miquel Raynal <miquel.raynal@bootlin.com>
+On Fri, Nov 18, 2022 at 7:27 PM Carlos Bilbao <carlos.bilbao@amd.com> wrote:
+>
+> Ah, you are right, something like in:
+>
+> CODE OF CONDUCT
+> M:      Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+> S:      Supported
+> F:      Documentation/process/code-of-conduct-interpretation.rst
+> F:      Documentation/process/code-of-conduct.rst
 
-Following the introduction of the bindings for this NVMEM parser and the
-layout driver, add myself as maintainer.
+Yeah, that way `get_maintainer.pl` would know about it.
 
-Signed-off-by: Miquel Raynal <miquel.raynal@bootlin.com>
----
-changes since v2:
- - new patch
-
- MAINTAINERS | 6 ++++++
- 1 file changed, 6 insertions(+)
-
-diff --git a/MAINTAINERS b/MAINTAINERS
-index ef4b7a31f8b4..101cff82ce44 100644
---- a/MAINTAINERS
-+++ b/MAINTAINERS
-@@ -15499,6 +15499,12 @@ L:	linux-hwmon@vger.kernel.org
- S:	Maintained
- F:	drivers/hwmon/oxp-sensors.c
- 
-+ONIE TLV NVMEM LAYOUT DRIVER
-+M:	Miquel Raynal <miquel.raynal@bootlin.com>
-+S:	Maintained
-+F:	Documentation/devicetree/bindings/nvmem/layouts/onie,tlv-layout.yaml
-+F:	drivers/nvmem/layouts/onie-tlv.c
-+
- ONION OMEGA2+ BOARD
- M:	Harvey Hunt <harveyhuntnexus@gmail.com>
- L:	linux-mips@vger.kernel.org
--- 
-2.30.2
-
+Cheers,
+Miguel
