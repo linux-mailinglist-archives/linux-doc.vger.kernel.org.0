@@ -2,71 +2,74 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id D52B3633A62
-	for <lists+linux-doc@lfdr.de>; Tue, 22 Nov 2022 11:44:32 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 14B61633A5B
+	for <lists+linux-doc@lfdr.de>; Tue, 22 Nov 2022 11:44:26 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S232577AbiKVKo3 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 22 Nov 2022 05:44:29 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:37406 "EHLO
+        id S232080AbiKVKoY (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 22 Nov 2022 05:44:24 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:38032 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S232395AbiKVKoB (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 22 Nov 2022 05:44:01 -0500
-Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.133.124])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id CB81027149
-        for <linux-doc@vger.kernel.org>; Tue, 22 Nov 2022 02:37:44 -0800 (PST)
+        with ESMTP id S232586AbiKVKn6 (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 22 Nov 2022 05:43:58 -0500
+Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.129.124])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id BCA5823EAD
+        for <linux-doc@vger.kernel.org>; Tue, 22 Nov 2022 02:37:46 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-        s=mimecast20190719; t=1669113464;
+        s=mimecast20190719; t=1669113466;
         h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
          to:to:cc:cc:mime-version:mime-version:
-         content-transfer-encoding:content-transfer-encoding;
-        bh=XmUKDHdVGsNkfncddihI4gbw7w+v9jTt1/8A8XS8FPQ=;
-        b=iMSezm/DxoIwvScyiD/zDL/0Ambrje9s4EJnGSA5ksIOX0Msy9j0a3VgAR61tz09UifWXM
-        lxlhd6k1oqFTwwfTlyUL+2K/QZxpwgHjCqhHVYsn2KL5FZg4xpO57HjK/sUpzppj/9Vvz9
-        SZ71CVPuKmTYVAXQJDZC11WBFY9Hyc8=
-Received: from mail-wm1-f71.google.com (mail-wm1-f71.google.com
- [209.85.128.71]) by relay.mimecast.com with ESMTP with STARTTLS
+         content-transfer-encoding:content-transfer-encoding:
+         in-reply-to:in-reply-to:references:references;
+        bh=s+4gJYDnQvTuS/31lYB/e4/AodAkPbxTauMPJtMr03Q=;
+        b=cpimy1dbiOCVxjVdSEZbvd1tNwEV1ctnoSa9vTDIDXVnealqZNlL0ne37U0OJFmiw32fOf
+        xQLp2u3PXAR4gyZQG7Hl9yZbINsn3VdhtA28fxFxM6Tosta6CiN92U8UAnmVZgtuRQGif+
+        zxTj7PBifX7xuQ8pMwhpR7ErXHYqftI=
+Received: from mail-wm1-f69.google.com (mail-wm1-f69.google.com
+ [209.85.128.69]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.3, cipher=TLS_AES_128_GCM_SHA256) id
- us-mta-132-96i-fezSPH-BRpQsA-_oSQ-1; Tue, 22 Nov 2022 05:37:42 -0500
-X-MC-Unique: 96i-fezSPH-BRpQsA-_oSQ-1
-Received: by mail-wm1-f71.google.com with SMTP id ay40-20020a05600c1e2800b003cf8aa16377so7870353wmb.7
-        for <linux-doc@vger.kernel.org>; Tue, 22 Nov 2022 02:37:42 -0800 (PST)
+ us-mta-595-qXg7XEzIMZG0vyE1i1TCXA-1; Tue, 22 Nov 2022 05:37:44 -0500
+X-MC-Unique: qXg7XEzIMZG0vyE1i1TCXA-1
+Received: by mail-wm1-f69.google.com with SMTP id 187-20020a1c02c4000000b003d016c210f7so4796150wmc.6
+        for <linux-doc@vger.kernel.org>; Tue, 22 Nov 2022 02:37:44 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=XmUKDHdVGsNkfncddihI4gbw7w+v9jTt1/8A8XS8FPQ=;
-        b=sv+VUFcLq1ERUSAzljRqNdqY1mCQ3OxuOBKQ72ZuVs2jBcL9rt+zyU7O6WouCHtu+V
-         GhjRQlM5B7MV3Nqhu0A4o1CF5XP093hiJ1A71p7IwFcQyWttzxZBbi5JzBUm3vLx9d5V
-         Cj/cywxCKAQR31qTl3kFP2TmgZb4sKncy1zkWqXdkZ+E02P3LmqBoJ+y+uM6Bl3Xq5lf
-         Pe8iKPQERIZEK1p9ihufaN/weU4F6me6Bjb7T0uJSLtg0J/RLRMMy8RIUF++Lrc6bnvz
-         X81M7deR2ng1rqsH5H/QBcyxOG93rHk44XdZeAVysCL359UzQu6kg/mGFFmx9ic4w7bD
-         uzWQ==
-X-Gm-Message-State: ANoB5pnaLThC+vUmVCdBGt8I3x3cbfWwwUfStfQNpDQDot5wfVeDlcYa
-        aqE3NjwhGlMHq6AolcPCDSGZgaisLQ5zpEGr5xO9RB7pFRK3gQtMbcTp35IPXq8ci5h8sHZKd4r
-        0jlj7Y1WtSNybCm+nU9Zw
-X-Received: by 2002:adf:dccf:0:b0:236:5a0:9fd9 with SMTP id x15-20020adfdccf000000b0023605a09fd9mr14579113wrm.610.1669113461382;
-        Tue, 22 Nov 2022 02:37:41 -0800 (PST)
-X-Google-Smtp-Source: AA0mqf5t/8Qnev5VOIU05eTBGUHJU3RL4CcoDOwFhHxwXxrMq8Gdu0R+CCUZtFQBYrm78WGJTEaXVQ==
-X-Received: by 2002:adf:dccf:0:b0:236:5a0:9fd9 with SMTP id x15-20020adfdccf000000b0023605a09fd9mr14579105wrm.610.1669113461213;
-        Tue, 22 Nov 2022 02:37:41 -0800 (PST)
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=s+4gJYDnQvTuS/31lYB/e4/AodAkPbxTauMPJtMr03Q=;
+        b=4IuYUqJm19Y3e6/htfluu1Z9qz9ra/f+UjcTIvsxhukMONJfCRuDhUuDYsRg7Mlum9
+         mlhxN1SfxnoIjskmYu7sZuwhmp8EVz9NwwHN4oAci7xs+dWZ8x3r+GFQrXC94BLjKlhY
+         QgfJwxzldZEoFtZW967T5SO4SqOqu6q6R8QZ9lPjvKKD1V53UX2tpNU1YpUu/gE1CQ8x
+         qdHgMdYchUiSHSjfuhaeZacR4nZJORzKxegDJiU+Ru6FwQ6HOFQY0NIQgLSeRDR/7d2A
+         stkcZlU2ed7MoOVyi1AcrMHcnsWbrsMXFll3kRjmgX/7jEzPi3MEOqsplc8QwJxHHEde
+         zh8A==
+X-Gm-Message-State: ANoB5pnxusveL1NkBsce2rJ1lDnGETkTqQZrBDGqJS49tYgVt9z0Qhky
+        EZNlOk8MEIVwa7iVFQGT6cdhWhHad/OZBrRiKitjKoijqK8YuluWx0o2abNxMzVaLmuV7kRe+D0
+        z+jdGHWXYPV8Lojh2opVN
+X-Received: by 2002:a05:600c:4f92:b0:3cf:e87a:8068 with SMTP id n18-20020a05600c4f9200b003cfe87a8068mr9603564wmq.3.1669113463632;
+        Tue, 22 Nov 2022 02:37:43 -0800 (PST)
+X-Google-Smtp-Source: AA0mqf4Ab8h51KNcYx1KMRerv4pVPNWsPhdy90oxEI7wCRvozraqNMuP3TQujOLw162yul2tIKLrjQ==
+X-Received: by 2002:a05:600c:4f92:b0:3cf:e87a:8068 with SMTP id n18-20020a05600c4f9200b003cfe87a8068mr9603540wmq.3.1669113463345;
+        Tue, 22 Nov 2022 02:37:43 -0800 (PST)
 Received: from teaching-eagle.redhat.com ([78.19.107.254])
-        by smtp.gmail.com with ESMTPSA id p11-20020a05600c468b00b003c65c9a36dfsm18674438wmo.48.2022.11.22.02.37.40
+        by smtp.gmail.com with ESMTPSA id p11-20020a05600c468b00b003c65c9a36dfsm18674438wmo.48.2022.11.22.02.37.42
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 22 Nov 2022 02:37:40 -0800 (PST)
+        Tue, 22 Nov 2022 02:37:42 -0800 (PST)
 From:   mtahhan@redhat.com
 To:     bpf@vger.kernel.org, linux-doc@vger.kernel.org
 Cc:     jbrouer@redhat.com, thoiland@redhat.com, donhunte@redhat.com,
         akiyks@gmail.com, Maryam Tahhan <mtahhan@redhat.com>
-Subject: [PATCH bpf-next v1 0/2] docs: fix sphinx warnings for cpu+dev maps
-Date:   Tue, 22 Nov 2022 10:37:36 +0000
-Message-Id: <20221122103738.65980-1-mtahhan@redhat.com>
+Subject: [PATCH bpf-next v1 1/2] docs: fix sphinx warnings for cpumap
+Date:   Tue, 22 Nov 2022 10:37:37 +0000
+Message-Id: <20221122103738.65980-2-mtahhan@redhat.com>
 X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20221122103738.65980-1-mtahhan@redhat.com>
+References: <20221122103738.65980-1-mtahhan@redhat.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-Spam-Status: No, score=-2.1 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
         DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_NONE,
-        RCVD_IN_MSPIKE_H2,SPF_HELO_NONE,SPF_NONE autolearn=unavailable
+        RCVD_IN_MSPIKE_H2,SPF_HELO_NONE,SPF_NONE autolearn=ham
         autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
@@ -77,20 +80,104 @@ X-Mailing-List: linux-doc@vger.kernel.org
 From: Maryam Tahhan <mtahhan@redhat.com>
 
 Sphinx version >=3.3 warns about duplicate function delcarations in the
-CPUMAP and DEVMAP documentation. This is because the function name is the
-same for Kernel and Userspace BPF progs but the parameters and return types
+CPUMAP documentation. This is because the function name is the same for
+Kernel and Userspace BPF progs but the parameters and return types
 they take is what differs. This patch moves from using the ``c:function::``
 directive to using the ``code-block:: c`` directive. The patches also fix
 the indentation for the text associated with the "new" code block delcarations.
 
-Maryam Tahhan (2):
-  docs: fix sphinx warnings for cpumap
-  docs: fix sphinx warnings for devmap
+Signed-off-by: Maryam Tahhan <mtahhan@redhat.com>
+---
+ Documentation/bpf/map_cpumap.rst | 48 ++++++++++++++++++++------------
+ 1 file changed, 30 insertions(+), 18 deletions(-)
 
- Documentation/bpf/map_cpumap.rst | 41 +++++++++++++-----------
- Documentation/bpf/map_devmap.rst | 54 +++++++++++++++++---------------
- 2 files changed, 52 insertions(+), 43 deletions(-)
-
---
+diff --git a/Documentation/bpf/map_cpumap.rst b/Documentation/bpf/map_cpumap.rst
+index 61a797a86342..e8d9f7abf26a 100644
+--- a/Documentation/bpf/map_cpumap.rst
++++ b/Documentation/bpf/map_cpumap.rst
+@@ -30,15 +30,18 @@ Usage
+ 
+ Kernel BPF
+ ----------
+-.. c:function::
++bpf_redirect_map()
++^^^^^^^^^^^^^^^^^^
++.. code-block:: c
++
+      long bpf_redirect_map(struct bpf_map *map, u32 key, u64 flags)
+ 
+- Redirect the packet to the endpoint referenced by ``map`` at index ``key``.
+- For ``BPF_MAP_TYPE_CPUMAP`` this map contains references to CPUs.
++Redirect the packet to the endpoint referenced by ``map`` at index ``key``.
++For ``BPF_MAP_TYPE_CPUMAP`` this map contains references to CPUs.
+ 
+- The lower two bits of ``flags`` are used as the return code if the map lookup
+- fails. This is so that the return value can be one of the XDP program return
+- codes up to ``XDP_TX``, as chosen by the caller.
++The lower two bits of ``flags`` are used as the return code if the map lookup
++fails. This is so that the return value can be one of the XDP program return
++codes up to ``XDP_TX``, as chosen by the caller.
+ 
+ Userspace
+ ---------
+@@ -47,12 +50,15 @@ Userspace
+     from an eBPF program. Trying to call these functions from a kernel eBPF
+     program will result in the program failing to load and a verifier warning.
+ 
+-.. c:function::
++bpf_map_update_elem()
++^^^^^^^^^^^^^^^^^^^^^
++.. code-block:: c
++
+     int bpf_map_update_elem(int fd, const void *key, const void *value, __u64 flags);
+ 
+- CPU entries can be added or updated using the ``bpf_map_update_elem()``
+- helper. This helper replaces existing elements atomically. The ``value`` parameter
+- can be ``struct bpf_cpumap_val``.
++CPU entries can be added or updated using the ``bpf_map_update_elem()``
++helper. This helper replaces existing elements atomically. The ``value`` parameter
++can be ``struct bpf_cpumap_val``.
+ 
+  .. code-block:: c
+ 
+@@ -64,23 +70,29 @@ Userspace
+         } bpf_prog;
+     };
+ 
+- The flags argument can be one of the following:
++The flags argument can be one of the following:
+   - BPF_ANY: Create a new element or update an existing element.
+   - BPF_NOEXIST: Create a new element only if it did not exist.
+   - BPF_EXIST: Update an existing element.
+ 
+-.. c:function::
++bpf_map_lookup_elem()
++^^^^^^^^^^^^^^^^^^^^^
++.. code-block:: c
++
+     int bpf_map_lookup_elem(int fd, const void *key, void *value);
+ 
+- CPU entries can be retrieved using the ``bpf_map_lookup_elem()``
+- helper.
++CPU entries can be retrieved using the ``bpf_map_lookup_elem()``
++helper.
++
++bpf_map_delete_elem()
++^^^^^^^^^^^^^^^^^^^^^
++.. code-block:: c
+ 
+-.. c:function::
+     int bpf_map_delete_elem(int fd, const void *key);
+ 
+- CPU entries can be deleted using the ``bpf_map_delete_elem()``
+- helper. This helper will return 0 on success, or negative error in case of
+- failure.
++CPU entries can be deleted using the ``bpf_map_delete_elem()``
++helper. This helper will return 0 on success, or negative error in case of
++failure.
+ 
+ Examples
+ ========
+-- 
 2.34.1
 
