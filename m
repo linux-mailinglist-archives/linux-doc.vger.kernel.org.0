@@ -2,216 +2,135 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id A179363561A
-	for <lists+linux-doc@lfdr.de>; Wed, 23 Nov 2022 10:28:13 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 19C6A6355FC
+	for <lists+linux-doc@lfdr.de>; Wed, 23 Nov 2022 10:28:01 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S237670AbiKWJ0M (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 23 Nov 2022 04:26:12 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:36404 "EHLO
+        id S237608AbiKWJ0w (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 23 Nov 2022 04:26:52 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:43804 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S237491AbiKWJZs (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Wed, 23 Nov 2022 04:25:48 -0500
-Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.129.124])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 958ECCC142
-        for <linux-doc@vger.kernel.org>; Wed, 23 Nov 2022 01:23:30 -0800 (PST)
+        with ESMTP id S237481AbiKWJ0i (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Wed, 23 Nov 2022 04:26:38 -0500
+Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.133.124])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 953BCBF53
+        for <linux-doc@vger.kernel.org>; Wed, 23 Nov 2022 01:24:26 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-        s=mimecast20190719; t=1669195409;
+        s=mimecast20190719; t=1669195465;
         h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-         to:to:cc:cc:mime-version:mime-version:
+         to:to:cc:cc:mime-version:mime-version:content-type:content-type:
          content-transfer-encoding:content-transfer-encoding:
          in-reply-to:in-reply-to:references:references;
-        bh=ZxJTXgscTEjZXq9Yj4bOuKdInJp2SrRUFvEsZqu2Ez0=;
-        b=Sy9YMV/AlAOfiEFw6JUqSNTlLv3ZTPaLEa4tc/bf+VY+Y6pfPc5Ianc1UT2rJlW01h67BL
-        nO22nyYYSla2NjUaUP8QfvmMaiGGBi4NkP26SWtYAkb/KFigzYlU2CqRP4FM1mTSG3D1y4
-        fPEuh4Y7I53Kt1YY+l1z9q49AH/0b+8=
-Received: from mail-wr1-f72.google.com (mail-wr1-f72.google.com
- [209.85.221.72]) by relay.mimecast.com with ESMTP with STARTTLS
+        bh=rHc539OKBsHEDzjcGTORMVJC80CXsjOyX/986bqt6ZA=;
+        b=Dd7+O14DDVVfqXnlHRkHU/P6SS4IvX6lyPKHrZYwy/sKHAuFHRCW9ixp4EYN3g2QdZVL/2
+        un/tAVL39kSyrPbJPiC7c7V/8Y12rJc/dg/m5FH8jBjGtSw7tFRUcXN4AQ8bia72WTBNEt
+        +9yrnHyY6c+LglMozpFvymU2fspZ8K0=
+Received: from mail-wr1-f71.google.com (mail-wr1-f71.google.com
+ [209.85.221.71]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.3, cipher=TLS_AES_128_GCM_SHA256) id
- us-mta-593-kz6jHVk7MI6tntevJGXlKg-1; Wed, 23 Nov 2022 04:23:28 -0500
-X-MC-Unique: kz6jHVk7MI6tntevJGXlKg-1
-Received: by mail-wr1-f72.google.com with SMTP id j20-20020adfb314000000b002366d9f67aaso4724568wrd.3
-        for <linux-doc@vger.kernel.org>; Wed, 23 Nov 2022 01:23:28 -0800 (PST)
+ us-mta-480-q7njClPTMAGAS-Fw1lhuKg-1; Wed, 23 Nov 2022 04:24:24 -0500
+X-MC-Unique: q7njClPTMAGAS-Fw1lhuKg-1
+Received: by mail-wr1-f71.google.com with SMTP id u24-20020adfa198000000b00241da98e057so2331886wru.22
+        for <linux-doc@vger.kernel.org>; Wed, 23 Nov 2022 01:24:24 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=ZxJTXgscTEjZXq9Yj4bOuKdInJp2SrRUFvEsZqu2Ez0=;
-        b=tbaeOdVFWmkyzPmKw2/dBPSOHypvJa/r7KkaURsqbRDucCoGVwX06+nvfGICP4MyPW
-         XpHxw2vpu/pSvlta2RKq/Hzlsva8PsyMXPLjNkvIVLJxlcFTvJQXifuPfrAQ0t8bilpn
-         8z/TUliueIBRg+fIe4Ev6GTQPrmuMQKvsghAtB0aEgIOOAh2AMem2x87SNL5B8mbp9WD
-         nIlGA40q633lOMNheybeB6hDtMzQffJi2Fisq/6k8qxKGm3CZ/6R9CGkZxS5g+0mu9pt
-         sOIk9AkIoIRivUC4sxGpQkXOLyBrf2S/qYitlf8tu9H2Z4O1eL/MSqM+60VKp6YJot3H
-         6BbA==
-X-Gm-Message-State: ANoB5plY+d6zWMzhpOUXqTPtm2FP6U/KXCs1yBu4Lkq/QT6XS2GrqRUA
-        qK9CkI07O0KEttzbS4PAAopn4F3w16id0iRuHne00esvC6pqSh/S6ELeEIPsGfpSgq4zcpUlgZH
-        vlwRUjroQRdknapDCEvar
-X-Received: by 2002:a5d:6b45:0:b0:236:7a1c:c41a with SMTP id x5-20020a5d6b45000000b002367a1cc41amr5553763wrw.680.1669195407314;
-        Wed, 23 Nov 2022 01:23:27 -0800 (PST)
-X-Google-Smtp-Source: AA0mqf57A0de8DOQovtNNfh6Uk1F1XYGnqWBBzOdjOEQPLBev3iul8PfgvSmywjpcu4W9T1i77G0lw==
-X-Received: by 2002:a5d:6b45:0:b0:236:7a1c:c41a with SMTP id x5-20020a5d6b45000000b002367a1cc41amr5553749wrw.680.1669195407058;
-        Wed, 23 Nov 2022 01:23:27 -0800 (PST)
-Received: from localhost.localdomain ([78.19.107.254])
-        by smtp.gmail.com with ESMTPSA id w19-20020adfbad3000000b00241c6729c2bsm13048855wrg.26.2022.11.23.01.23.25
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 23 Nov 2022 01:23:26 -0800 (PST)
-From:   mtahhan@redhat.com
-To:     bpf@vger.kernel.org, linux-doc@vger.kernel.org
-Cc:     jbrouer@redhat.com, thoiland@redhat.com, donhunte@redhat.com,
-        akiyks@gmail.com, Maryam Tahhan <mtahhan@redhat.com>
-Subject: [PATCH bpf-next v3 2/2] docs: fix sphinx warnings for devmap
-Date:   Wed, 23 Nov 2022 09:23:21 +0000
-Message-Id: <20221123092321.88558-3-mtahhan@redhat.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20221123092321.88558-1-mtahhan@redhat.com>
-References: <20221123092321.88558-1-mtahhan@redhat.com>
+        h=content-transfer-encoding:in-reply-to:organization:from:references
+         :cc:to:content-language:subject:user-agent:mime-version:date
+         :message-id:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=rHc539OKBsHEDzjcGTORMVJC80CXsjOyX/986bqt6ZA=;
+        b=AGATQTgdskjXf8AlFfWYlERID+RNykM/V+O/CKd5/X9y/iowy3PZgQMoI994/tl93o
+         XIbmyv2o5SCefbI63w/mG75udWMnCYgAbvhfGzqngya2yTbwBsUl+lFL3DVXyyInUyjr
+         baECwieoNKkYbXaaoIh2+gVIJfStL9QcrzKE3ET37p9jmsiCx4XKpXIoHBrHdQDcqURp
+         IC+YD7YCKEA2b1lHByDmFNty8SSiapn7cuoRwd6ykIDhI+22lCgFyh3eV4P3c5MWMhsJ
+         u53ZxRg6hFipKwDuhAtSd5z7MtLFyg1NrScCgyEkCeC5dyU05laC7Yg2XqvJPmKggIO/
+         JxAg==
+X-Gm-Message-State: ANoB5pl4IiI65Nt5omljFkasOPHZWxBU2BDwdUXRA0Mi8aY3X4B6M5Cn
+        bNz3MkayLyPmMHkuav4cpz1ZKz+xjlZyDf3OqsX/bOAH5aPcItALF7JAYBxqBzZ1kNxFEo+vboM
+        qE5MX+qlXRmD7HoxtcWzV
+X-Received: by 2002:adf:ea43:0:b0:22e:433a:46ba with SMTP id j3-20020adfea43000000b0022e433a46bamr9757079wrn.575.1669195463349;
+        Wed, 23 Nov 2022 01:24:23 -0800 (PST)
+X-Google-Smtp-Source: AA0mqf4u1uOdsNCjST/YVlVzbs+ClamC4UhIypgWTGe229T4v23rwD3x6qx9iq0SMSLmdCXNP/nKJw==
+X-Received: by 2002:adf:ea43:0:b0:22e:433a:46ba with SMTP id j3-20020adfea43000000b0022e433a46bamr9757054wrn.575.1669195463040;
+        Wed, 23 Nov 2022 01:24:23 -0800 (PST)
+Received: from ?IPV6:2003:cb:c704:9f00:a98d:4026:7c44:40fd? (p200300cbc7049f00a98d40267c4440fd.dip0.t-ipconnect.de. [2003:cb:c704:9f00:a98d:4026:7c44:40fd])
+        by smtp.gmail.com with ESMTPSA id b8-20020a05600c4a8800b003b492753826sm1445713wmp.43.2022.11.23.01.24.22
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Wed, 23 Nov 2022 01:24:22 -0800 (PST)
+Message-ID: <8f743e24-4da5-7ca0-ac0f-49b6ad7e7a0a@redhat.com>
+Date:   Wed, 23 Nov 2022 10:24:21 +0100
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.4.1
+Subject: Re: [PATCH] documentation/mm: Update pmd_present() in
+ arch_pgtable_helpers.rst
+Content-Language: en-US
+To:     Anshuman Khandual <anshuman.khandual@arm.com>, linux-mm@kvack.org
+Cc:     Jonathan Corbet <corbet@lwn.net>,
+        Andrew Morton <akpm@linux-foundation.org>,
+        Andrea Arcangeli <aarcange@redhat.com>,
+        Mike Rapoport <rppt@kernel.org>, linux-doc@vger.kernel.org,
+        linux-kernel@vger.kernel.org
+References: <20221123051319.1312582-1-anshuman.khandual@arm.com>
+From:   David Hildenbrand <david@redhat.com>
+Organization: Red Hat
+In-Reply-To: <20221123051319.1312582-1-anshuman.khandual@arm.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-Spam-Status: No, score=-2.1 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_NONE,
-        RCVD_IN_MSPIKE_H2,SPF_HELO_NONE,SPF_NONE autolearn=ham
-        autolearn_force=no version=3.4.6
+        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,NICE_REPLY_A,
+        RCVD_IN_DNSWL_NONE,RCVD_IN_MSPIKE_H2,SPF_HELO_NONE,SPF_NONE
+        autolearn=ham autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-From: Maryam Tahhan <mtahhan@redhat.com>
+On 23.11.22 06:13, Anshuman Khandual wrote:
+> Although pmd_present() might seem to indicate a valid and mapped pmd entry,
+> in reality it returns true when pmd_page() points to a valid page in memory
+> , regardless whether the pmd entry is mapped or not. Andrea Arcangeli had
+> earlier explained [1] the required semantics for pmd_present(). This just
+> updates the documentation for pmd_present() as required.
+> 
+> [1] https://lore.kernel.org/lkml/20181017020930.GN30832@redhat.com/
+> 
+> Cc: Jonathan Corbet <corbet@lwn.net>
+> Cc: Andrew Morton <akpm@linux-foundation.org>
+> Cc: Andrea Arcangeli <aarcange@redhat.com>
+> Cc: Mike Rapoport <rppt@kernel.org>
+> Cc: linux-mm@kvack.org
+> Cc: linux-doc@vger.kernel.org
+> Cc: linux-kernel@vger.kernel.org
+> Signed-off-by: Anshuman Khandual <anshuman.khandual@arm.com>
+> ---
+> This applies on v6.1-rc6
+> 
+> The latest trigger was from an earlier discussion here.
+> 
+> https://lore.kernel.org/all/53c0c955-7afe-905b-468a-cd7ac81238c5@arm.com/
+> 
+>   Documentation/mm/arch_pgtable_helpers.rst | 2 +-
+>   1 file changed, 1 insertion(+), 1 deletion(-)
+> 
+> diff --git a/Documentation/mm/arch_pgtable_helpers.rst b/Documentation/mm/arch_pgtable_helpers.rst
+> index cbaee9e59241..fd2a19df884e 100644
+> --- a/Documentation/mm/arch_pgtable_helpers.rst
+> +++ b/Documentation/mm/arch_pgtable_helpers.rst
+> @@ -94,7 +94,7 @@ PMD Page Table Helpers
+>   +---------------------------+--------------------------------------------------+
+>   | pmd_trans_huge            | Tests a Transparent Huge Page (THP) at PMD       |
+>   +---------------------------+--------------------------------------------------+
+> -| pmd_present               | Tests a valid mapped PMD                         |
+> +| pmd_present               | Tests whether pmd_page() points to valid memory  |
+>   +---------------------------+--------------------------------------------------+
+>   | pmd_young                 | Tests a young PMD                                |
+>   +---------------------------+--------------------------------------------------+
 
-Sphinx version >=3.1 warns about duplicate function declarations in the
-DEVMAP documentation. This is because the function name is the same for
-kernel and user space BPF progs but the parameters and return types
-they take is what differs. This patch moves from using the ``c:function::``
-directive to using the ``code-block:: c`` directive. The patches also fix
-the indentation for the text associated with the "new" code block delcarations.
-The missing support of c:namespace-push:: and c:namespace-pop:: directives by
-helper scripts for kernel documentation prevents using the ``c:function::``
-directive with proper namespacing.
+Acked-by: David Hildenbrand <david@redhat.com>
 
-Signed-off-by: Maryam Tahhan <mtahhan@redhat.com>
----
- Documentation/bpf/map_devmap.rst | 68 ++++++++++++++++++++------------
- 1 file changed, 42 insertions(+), 26 deletions(-)
-
-diff --git a/Documentation/bpf/map_devmap.rst b/Documentation/bpf/map_devmap.rst
-index f64da348dbfe..927312c7b8c8 100644
---- a/Documentation/bpf/map_devmap.rst
-+++ b/Documentation/bpf/map_devmap.rst
-@@ -29,8 +29,11 @@ Usage
- =====
- Kernel BPF
- ----------
--.. c:function::
--     long bpf_redirect_map(struct bpf_map *map, u32 key, u64 flags)
-+bpf_redirect_map()
-+^^^^^^^^^^^^^^^^^^
-+.. code-block:: c
-+
-+    long bpf_redirect_map(struct bpf_map *map, u32 key, u64 flags)
- 
- Redirect the packet to the endpoint referenced by ``map`` at index ``key``.
- For ``BPF_MAP_TYPE_DEVMAP`` and ``BPF_MAP_TYPE_DEVMAP_HASH`` this map contains
-@@ -56,26 +59,32 @@ lower bits of the ``flags`` argument if the map lookup fails.
- 
- More information about redirection can be found :doc:`redirect`
- 
--.. c:function::
-+bpf_map_lookup_elem()
-+^^^^^^^^^^^^^^^^^^^^^
-+.. code-block:: c
-+
-    void *bpf_map_lookup_elem(struct bpf_map *map, const void *key)
- 
- Net device entries can be retrieved using the ``bpf_map_lookup_elem()``
- helper.
- 
--Userspace
-----------
-+User space
-+----------
- .. note::
-     DEVMAP entries can only be updated/deleted from user space and not
-     from an eBPF program. Trying to call these functions from a kernel eBPF
-     program will result in the program failing to load and a verifier warning.
- 
--.. c:function::
-+bpf_map_update_elem()
-+^^^^^^^^^^^^^^^^^^^^^
-+.. code-block:: c
-+
-    int bpf_map_update_elem(int fd, const void *key, const void *value, __u64 flags);
- 
-- Net device entries can be added or updated using the ``bpf_map_update_elem()``
-- helper. This helper replaces existing elements atomically. The ``value`` parameter
-- can be ``struct bpf_devmap_val`` or a simple ``int ifindex`` for backwards
-- compatibility.
-+Net device entries can be added or updated using the ``bpf_map_update_elem()``
-+helper. This helper replaces existing elements atomically. The ``value`` parameter
-+can be ``struct bpf_devmap_val`` or a simple ``int ifindex`` for backwards
-+compatibility.
- 
-  .. code-block:: c
- 
-@@ -87,35 +96,42 @@ Userspace
-         } bpf_prog;
-     };
- 
-- The ``flags`` argument can be one of the following:
--
-+The ``flags`` argument can be one of the following:
-   - ``BPF_ANY``: Create a new element or update an existing element.
-   - ``BPF_NOEXIST``: Create a new element only if it did not exist.
-   - ``BPF_EXIST``: Update an existing element.
- 
-- DEVMAPs can associate a program with a device entry by adding a ``bpf_prog.fd``
-- to ``struct bpf_devmap_val``. Programs are run after ``XDP_REDIRECT`` and have
-- access to both Rx device and Tx device. The  program associated with the ``fd``
-- must have type XDP with expected attach type ``xdp_devmap``.
-- When a program is associated with a device index, the program is run on an
-- ``XDP_REDIRECT`` and before the buffer is added to the per-cpu queue. Examples
-- of how to attach/use xdp_devmap progs can be found in the kernel selftests:
-+DEVMAPs can associate a program with a device entry by adding a ``bpf_prog.fd``
-+to ``struct bpf_devmap_val``. Programs are run after ``XDP_REDIRECT`` and have
-+access to both Rx device and Tx device. The  program associated with the ``fd``
-+must have type XDP with expected attach type ``xdp_devmap``.
-+When a program is associated with a device index, the program is run on an
-+``XDP_REDIRECT`` and before the buffer is added to the per-cpu queue. Examples
-+of how to attach/use xdp_devmap progs can be found in the kernel selftests:
- 
-- - ``tools/testing/selftests/bpf/prog_tests/xdp_devmap_attach.c``
-- - ``tools/testing/selftests/bpf/progs/test_xdp_with_devmap_helpers.c``
-+- ``tools/testing/selftests/bpf/prog_tests/xdp_devmap_attach.c``
-+- ``tools/testing/selftests/bpf/progs/test_xdp_with_devmap_helpers.c``
-+
-+bpf_map_lookup_elem()
-+^^^^^^^^^^^^^^^^^^^^^
-+.. code-block:: c
- 
- .. c:function::
-    int bpf_map_lookup_elem(int fd, const void *key, void *value);
- 
-- Net device entries can be retrieved using the ``bpf_map_lookup_elem()``
-- helper.
-+Net device entries can be retrieved using the ``bpf_map_lookup_elem()``
-+helper.
-+
-+bpf_map_delete_elem()
-+^^^^^^^^^^^^^^^^^^^^^
-+.. code-block:: c
- 
- .. c:function::
-    int bpf_map_delete_elem(int fd, const void *key);
- 
-- Net device entries can be deleted using the ``bpf_map_delete_elem()``
-- helper. This helper will return 0 on success, or negative error in case of
-- failure.
-+Net device entries can be deleted using the ``bpf_map_delete_elem()``
-+helper. This helper will return 0 on success, or negative error in case of
-+failure.
- 
- Examples
- ========
 -- 
-2.34.1
+Thanks,
+
+David / dhildenb
 
