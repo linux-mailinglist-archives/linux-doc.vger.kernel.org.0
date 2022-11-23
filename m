@@ -2,85 +2,120 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 1655F634F65
-	for <lists+linux-doc@lfdr.de>; Wed, 23 Nov 2022 06:13:37 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id BE587635046
+	for <lists+linux-doc@lfdr.de>; Wed, 23 Nov 2022 07:17:33 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S229529AbiKWFNd (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 23 Nov 2022 00:13:33 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:47324 "EHLO
+        id S236082AbiKWGRc (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 23 Nov 2022 01:17:32 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:51656 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S234151AbiKWFNc (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Wed, 23 Nov 2022 00:13:32 -0500
-Received: from foss.arm.com (foss.arm.com [217.140.110.172])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTP id 904DF8F3E4;
-        Tue, 22 Nov 2022 21:13:31 -0800 (PST)
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
-        by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id CF33F1FB;
-        Tue, 22 Nov 2022 21:13:37 -0800 (PST)
-Received: from a077893.blr.arm.com (unknown [10.162.43.6])
-        by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPA id 737CC3F73B;
-        Tue, 22 Nov 2022 21:13:28 -0800 (PST)
-From:   Anshuman Khandual <anshuman.khandual@arm.com>
-To:     linux-mm@kvack.org
-Cc:     Anshuman Khandual <anshuman.khandual@arm.com>,
-        Jonathan Corbet <corbet@lwn.net>,
-        Andrew Morton <akpm@linux-foundation.org>,
-        Andrea Arcangeli <aarcange@redhat.com>,
-        Mike Rapoport <rppt@kernel.org>, linux-doc@vger.kernel.org,
-        linux-kernel@vger.kernel.org
-Subject: [PATCH] documentation/mm: Update pmd_present() in arch_pgtable_helpers.rst
-Date:   Wed, 23 Nov 2022 10:43:19 +0530
-Message-Id: <20221123051319.1312582-1-anshuman.khandual@arm.com>
+        with ESMTP id S236045AbiKWGRR (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Wed, 23 Nov 2022 01:17:17 -0500
+Received: from twspam01.aspeedtech.com (twspam01.aspeedtech.com [211.20.114.71])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id C316FF8014
+        for <linux-doc@vger.kernel.org>; Tue, 22 Nov 2022 22:16:24 -0800 (PST)
+Received: from mail.aspeedtech.com ([192.168.0.24])
+        by twspam01.aspeedtech.com with ESMTP id 2AN5pUK4081939;
+        Wed, 23 Nov 2022 13:51:30 +0800 (GMT-8)
+        (envelope-from billy_tsai@aspeedtech.com)
+Received: from BillyTsai-pc.aspeed.com (192.168.2.149) by TWMBX02.aspeed.com
+ (192.168.0.24) with Microsoft SMTP Server (TLS) id 15.0.1497.2; Wed, 23 Nov
+ 2022 14:15:54 +0800
+From:   Billy Tsai <billy_tsai@aspeedtech.com>
+To:     <jdelvare@suse.com>, <linux@roeck-us.net>, <robh+dt@kernel.org>,
+        <krzysztof.kozlowski+dt@linaro.org>, <joel@jms.id.au>,
+        <andrew@aj.id.au>, <lee@kernel.org>, <thierry.reding@gmail.com>,
+        <u.kleine-koenig@pengutronix.de>, <corbet@lwn.net>,
+        <p.zabel@pengutronix.de>, <billy_tsai@aspeedtech.com>,
+        <linux-hwmon@vger.kernel.org>, <devicetree@vger.kernel.org>,
+        <linux-arm-kernel@lists.infradead.org>,
+        <linux-aspeed@lists.ozlabs.org>, <linux-kernel@vger.kernel.org>,
+        <linux-pwm@vger.kernel.org>, <linux-doc@vger.kernel.org>
+Subject: [v4 0/5] Support pwm/tach driver for aspeed ast26xx
+Date:   Wed, 23 Nov 2022 14:16:30 +0800
+Message-ID: <20221123061635.32025-1-billy_tsai@aspeedtech.com>
 X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Spam-Status: No, score=-4.2 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_MED,
-        SPF_HELO_NONE,SPF_NONE autolearn=ham autolearn_force=no version=3.4.6
+Content-Transfer-Encoding: 7BIT
+Content-Type:   text/plain; charset=US-ASCII
+X-Originating-IP: [192.168.2.149]
+X-ClientProxiedBy: TWMBX02.aspeed.com (192.168.0.24) To TWMBX02.aspeed.com
+ (192.168.0.24)
+X-DNSRBL: 
+X-MAIL: twspam01.aspeedtech.com 2AN5pUK4081939
+X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00,SPF_HELO_NONE,
+        SPF_PASS autolearn=ham autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Although pmd_present() might seem to indicate a valid and mapped pmd entry,
-in reality it returns true when pmd_page() points to a valid page in memory
-, regardless whether the pmd entry is mapped or not. Andrea Arcangeli had
-earlier explained [1] the required semantics for pmd_present(). This just
-updates the documentation for pmd_present() as required.
+Unlike the old design that the register setting of the TACH should based
+on the configure of the PWM. In ast26xx, the dependency between pwm and
+tach controller is eliminated and becomes a separate hardware block. One
+is used to provide pwm output and another is used to monitor the frequency
+of the input. Therefore, this patch serials implements them by writing the
+two driver "pwm-aspeed-ast2600.c" and "tach-aspeed-ast2600.c". The former
+is following the pwm subsystem which can apply the existed driver to
+controller the fan(pwm-fan.c), beeper(pwm-beeper.c) and so on. The latter
+is following the sysfs interface of hwmon to creat the node for fan
+monitor.
 
-[1] https://lore.kernel.org/lkml/20181017020930.GN30832@redhat.com/
+Changes since v3:
+- pwm
+  - Remove unnecessary include header
+  - Fix warning Prefer "GPL" over "GPL v2"
+- tach:
+  - Remove the paremeter min_rpm and max_rpm and return the tach value 
+  directly without any polling or delay.
+  - Fix warning Prefer "GPL" over "GPL v2"
+- dt-binding:
+  - Replace underscore in node names with dashes
+  - Split per subsystem
 
-Cc: Jonathan Corbet <corbet@lwn.net>
-Cc: Andrew Morton <akpm@linux-foundation.org>
-Cc: Andrea Arcangeli <aarcange@redhat.com>
-Cc: Mike Rapoport <rppt@kernel.org>
-Cc: linux-mm@kvack.org
-Cc: linux-doc@vger.kernel.org
-Cc: linux-kernel@vger.kernel.org
-Signed-off-by: Anshuman Khandual <anshuman.khandual@arm.com>
----
-This applies on v6.1-rc6
+Changes since v2:
+- pwm:
+  - Use devm_* api to simplify the error cleanup
+  - Fix the multi-line alignment problem
+- tach:
+  - Add tach-aspeed-ast2600 to index.rst
+  - Fix the multi-line alignment problem
+  - Remove the tach enable/disable when read the rpm
+  - Fix some coding format issue
 
-The latest trigger was from an earlier discussion here.
+Changes since v1:
+- tach:
+  - Add the document tach-aspeed-ast2600.rst
+  - Use devm_* api to simplify the error cleanup.
+  - Change hwmon register api to devm_hwmon_device_register_with_info
 
-https://lore.kernel.org/all/53c0c955-7afe-905b-468a-cd7ac81238c5@arm.com/
+Billy Tsai (5):
+  dt-bindings: mfd: Add aspeed pwm-tach binding
+  dt-bindings: pwm: Add bindings for aspeed pwm controller
+  dt-bindings: hwmon: Add bindings for aspeed tach controller
+  pwm: Add Aspeed ast2600 PWM support
+  hwmon: Add Aspeed ast2600 TACH support
 
- Documentation/mm/arch_pgtable_helpers.rst | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ .../bindings/hwmon/aspeed,ast2600-tach.yaml   |  36 ++
+ .../bindings/mfd/aspeed,ast2600-pwm-tach.yaml |  73 ++++
+ .../bindings/pwm/aspeed,ast2600-pwm.yaml      |  54 +++
+ Documentation/hwmon/index.rst                 |   1 +
+ Documentation/hwmon/tach-aspeed-ast2600.rst   |  24 ++
+ drivers/hwmon/Kconfig                         |   9 +
+ drivers/hwmon/Makefile                        |   1 +
+ drivers/hwmon/tach-aspeed-ast2600.c           | 399 ++++++++++++++++++
+ drivers/pwm/Kconfig                           |  10 +
+ drivers/pwm/Makefile                          |   1 +
+ drivers/pwm/pwm-aspeed-ast2600.c              | 318 ++++++++++++++
+ 11 files changed, 926 insertions(+)
+ create mode 100644 Documentation/devicetree/bindings/hwmon/aspeed,ast2600-tach.yaml
+ create mode 100644 Documentation/devicetree/bindings/mfd/aspeed,ast2600-pwm-tach.yaml
+ create mode 100644 Documentation/devicetree/bindings/pwm/aspeed,ast2600-pwm.yaml
+ create mode 100644 Documentation/hwmon/tach-aspeed-ast2600.rst
+ create mode 100644 drivers/hwmon/tach-aspeed-ast2600.c
+ create mode 100644 drivers/pwm/pwm-aspeed-ast2600.c
 
-diff --git a/Documentation/mm/arch_pgtable_helpers.rst b/Documentation/mm/arch_pgtable_helpers.rst
-index cbaee9e59241..fd2a19df884e 100644
---- a/Documentation/mm/arch_pgtable_helpers.rst
-+++ b/Documentation/mm/arch_pgtable_helpers.rst
-@@ -94,7 +94,7 @@ PMD Page Table Helpers
- +---------------------------+--------------------------------------------------+
- | pmd_trans_huge            | Tests a Transparent Huge Page (THP) at PMD       |
- +---------------------------+--------------------------------------------------+
--| pmd_present               | Tests a valid mapped PMD                         |
-+| pmd_present               | Tests whether pmd_page() points to valid memory  |
- +---------------------------+--------------------------------------------------+
- | pmd_young                 | Tests a young PMD                                |
- +---------------------------+--------------------------------------------------+
 -- 
 2.25.1
 
