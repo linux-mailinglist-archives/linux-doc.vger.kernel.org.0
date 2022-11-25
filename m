@@ -2,159 +2,135 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id E1D1363856A
-	for <lists+linux-doc@lfdr.de>; Fri, 25 Nov 2022 09:43:36 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 297E963858F
+	for <lists+linux-doc@lfdr.de>; Fri, 25 Nov 2022 09:52:33 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S229803AbiKYIne (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Fri, 25 Nov 2022 03:43:34 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:58134 "EHLO
+        id S229586AbiKYIwc (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Fri, 25 Nov 2022 03:52:32 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:35780 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S229879AbiKYIn1 (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Fri, 25 Nov 2022 03:43:27 -0500
-Received: from mail-pj1-x1049.google.com (mail-pj1-x1049.google.com [IPv6:2607:f8b0:4864:20::1049])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 8498B218BA
-        for <linux-doc@vger.kernel.org>; Fri, 25 Nov 2022 00:43:24 -0800 (PST)
-Received: by mail-pj1-x1049.google.com with SMTP id z9-20020a17090ab10900b00218c5bdfd55so5160078pjq.9
-        for <linux-doc@vger.kernel.org>; Fri, 25 Nov 2022 00:43:24 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=google.com; s=20210112;
-        h=cc:to:from:subject:message-id:references:mime-version:in-reply-to
-         :date:from:to:cc:subject:date:message-id:reply-to;
-        bh=dkxFkrOpjQGLbrLmIP0+FclGqPGzevJvZOLievBv8dk=;
-        b=kqgbzNKEz/EBdl30RURuDttaaXxDeC30LnNegyGkFZc9kDj5JRKrZbbcEP9pwVxxZN
-         G9XRyB4jJukMFOoeTGeBeQ3CnM0EbzUy0iVy1MuX2Azm+2w3BQ9adRyL9kvkdnoRUBgI
-         X6bKvh5wnfqjPenjD+9aZ4sKilQcc3HfOGFYHURPQ69pGtxzEdI0XKeB9kAYdbFzp7Bg
-         iV3xmvTGIdnYEq9akRm0/9IGUCEtjMcs+FCtU+t6i2Mn7bMXvKRnkKAJSxnin4lI09Y7
-         1pZbQEDt8j+6a4aF/rIVEb1uQE3DhbYONBvJrOsxEcU1VcYGwGBsoyKH/GlpFeZvG8ID
-         eajQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=cc:to:from:subject:message-id:references:mime-version:in-reply-to
-         :date:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=dkxFkrOpjQGLbrLmIP0+FclGqPGzevJvZOLievBv8dk=;
-        b=7bcisvLn1bRWtO/tPLkUKz5UxtZbF6FQlpo+BQymZjIyaIpu2g9EZL8MNICEnwAV2s
-         /OTEppVTpmK7DQXzfmYz8Ii60huL/IWHk3MWv5AWRHx7dnFgurgZhZhnL/LIjuq956/D
-         9nyPSgHJA0Dpiy5Qz32tVBXwtw6wIRqvONu3og6cLhNKTHJRPdeIbS/fHaShc8FzD5Wh
-         vQroS6/K7CLGyIX66XnMHeWV7TzStZB1CboTBUACE2KGNqX8w7uqF7YmIwo2IFCWXU7T
-         /Tx809efPPQ/5GzFFNNP7uCRpx54gEmDP4NpM/bRxpG7uxJA8akpIPUnM53e6lbR3fZ3
-         NY7A==
-X-Gm-Message-State: ANoB5pkDG1fxsbv6sc3QwBAfxg0TsgeNierucecrPLZEZyAOuMdHN5W1
-        AOzvXm8Q5pa+VvlYaRIQqMRF+NocXTfdBA==
-X-Google-Smtp-Source: AA0mqf7RiYkevlcRuG6Fr8tnCwq1XAC9tTw8xXaio9yL/yIb9hcwf34Ri5nG0oPQNQBwzo8q3vRzqDIvG97ZmA==
-X-Received: from slicestar.c.googlers.com ([fda3:e722:ac3:cc00:4f:4b78:c0a8:20a1])
- (user=davidgow job=sendgmr) by 2002:a17:90b:3809:b0:20a:c64c:ae80 with SMTP
- id mq9-20020a17090b380900b0020ac64cae80mr28596107pjb.12.1669365803760; Fri,
- 25 Nov 2022 00:43:23 -0800 (PST)
-Date:   Fri, 25 Nov 2022 16:43:06 +0800
-In-Reply-To: <20221125084306.1063074-1-davidgow@google.com>
-Mime-Version: 1.0
-References: <20221125084306.1063074-1-davidgow@google.com>
-X-Mailer: git-send-email 2.38.1.584.g0f3c55d4c2-goog
-Message-ID: <20221125084306.1063074-3-davidgow@google.com>
-Subject: [PATCH v4 3/3] mm: slub: test: Use the kunit_get_current_test() function
-From:   David Gow <davidgow@google.com>
-To:     Brendan Higgins <brendan.higgins@linux.dev>,
-        Daniel Latypov <dlatypov@google.com>,
-        Shuah Khan <skhan@linuxfoundation.org>
-Cc:     David Gow <davidgow@google.com>, kunit-dev@googlegroups.com,
-        linux-kselftest@vger.kernel.org, linux-kernel@vger.kernel.org,
-        Kees Cook <keescook@chromium.org>, linux-doc@vger.kernel.org,
-        linux-mm@kvack.org, Oliver Glitta <glittao@gmail.com>,
-        Hyeonggon Yoo <42.hyeyoo@gmail.com>,
-        Christoph Lameter <cl@linux.com>,
-        Vlastimil Babka <vbabka@suse.cz>,
-        David Rientjes <rientjes@google.com>,
-        Andrew Morton <akpm@linux-foundation.org>
-Content-Type: text/plain; charset="UTF-8"
-X-Spam-Status: No, score=-9.6 required=5.0 tests=BAYES_00,DKIMWL_WL_MED,
-        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_NONE,
-        SPF_HELO_NONE,SPF_PASS,USER_IN_DEF_DKIM_WL autolearn=ham
-        autolearn_force=no version=3.4.6
+        with ESMTP id S229541AbiKYIwb (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Fri, 25 Nov 2022 03:52:31 -0500
+Received: from mx0a-001b2d01.pphosted.com (mx0a-001b2d01.pphosted.com [148.163.156.1])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 866BBCE9;
+        Fri, 25 Nov 2022 00:52:28 -0800 (PST)
+Received: from pps.filterd (m0098396.ppops.net [127.0.0.1])
+        by mx0a-001b2d01.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id 2AP8nmiJ006687;
+        Fri, 25 Nov 2022 08:52:25 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ibm.com; h=content-type :
+ mime-version : content-transfer-encoding : in-reply-to : references :
+ subject : to : cc : from : message-id : date; s=pp1;
+ bh=7RGeCEHG1G53Xom7o/juk/OP7d5IJEctJeBMolf8ohE=;
+ b=jtXj+Qa0Hw49rdLzDKaQKmWe6taT9UacpCAKpRHwij/B3D8wIrJKqMMcgVCIIAgf19k9
+ T77Jev2X23zV8KN2aUovjCQG3CjwXtrD5kig7Cb7j1UWRqZWg9iR0GowUNnDPAztnzB1
+ zDxmZz0Fodtw8uqtd+PS2ezUEnnWDnVY80ftIiZ1pZi6/vp+pkfs+7o3L7uNRBgL0Z1M
+ t+c7p70gKAsnciqPCRauo5MPozEo/wvaQUwLEyXGd1o61hqzxgJr70MSGAVZEvAdbq99
+ oDGNNX4RsspzR1OBTwNAxLLxUS03V+yXjyw1wXlszudVyXyTHbPUWN7vhv8pOBTP90sk lA== 
+Received: from pps.reinject (localhost [127.0.0.1])
+        by mx0a-001b2d01.pphosted.com (PPS) with ESMTPS id 3m2thrr1ny-1
+        (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+        Fri, 25 Nov 2022 08:52:25 +0000
+Received: from m0098396.ppops.net (m0098396.ppops.net [127.0.0.1])
+        by pps.reinject (8.17.1.5/8.17.1.5) with ESMTP id 2AP8oqN1009927;
+        Fri, 25 Nov 2022 08:52:24 GMT
+Received: from ppma03ams.nl.ibm.com (62.31.33a9.ip4.static.sl-reverse.com [169.51.49.98])
+        by mx0a-001b2d01.pphosted.com (PPS) with ESMTPS id 3m2thrr1nf-1
+        (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+        Fri, 25 Nov 2022 08:52:24 +0000
+Received: from pps.filterd (ppma03ams.nl.ibm.com [127.0.0.1])
+        by ppma03ams.nl.ibm.com (8.16.1.2/8.16.1.2) with SMTP id 2AP8pOZC017679;
+        Fri, 25 Nov 2022 08:52:22 GMT
+Received: from b06cxnps4076.portsmouth.uk.ibm.com (d06relay13.portsmouth.uk.ibm.com [9.149.109.198])
+        by ppma03ams.nl.ibm.com with ESMTP id 3kxps91ar3-1
+        (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+        Fri, 25 Nov 2022 08:52:22 +0000
+Received: from d06av24.portsmouth.uk.ibm.com (d06av24.portsmouth.uk.ibm.com [9.149.105.60])
+        by b06cxnps4076.portsmouth.uk.ibm.com (8.14.9/8.14.9/NCO v10.0) with ESMTP id 2AP8qI8c63766992
+        (version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+        Fri, 25 Nov 2022 08:52:18 GMT
+Received: from d06av24.portsmouth.uk.ibm.com (unknown [127.0.0.1])
+        by IMSVA (Postfix) with ESMTP id CD47B42042;
+        Fri, 25 Nov 2022 08:52:18 +0000 (GMT)
+Received: from d06av24.portsmouth.uk.ibm.com (unknown [127.0.0.1])
+        by IMSVA (Postfix) with ESMTP id A76B04203F;
+        Fri, 25 Nov 2022 08:52:18 +0000 (GMT)
+Received: from t14-nrb (unknown [9.171.26.223])
+        by d06av24.portsmouth.uk.ibm.com (Postfix) with ESMTP;
+        Fri, 25 Nov 2022 08:52:18 +0000 (GMT)
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: quoted-printable
+In-Reply-To: <e735fa2cde6e9c92dda134634cb3d67b64b23fe9.camel@linux.ibm.com>
+References: <20221117221758.66326-1-scgl@linux.ibm.com> <20221117221758.66326-3-scgl@linux.ibm.com> <f96b50e2-24ac-4016-d3f1-ffc375516e7c@redhat.com> <e735fa2cde6e9c92dda134634cb3d67b64b23fe9.camel@linux.ibm.com>
+Subject: Re: [PATCH v3 2/9] Documentation: KVM: s390: Describe KVM_S390_MEMOP_F_CMPXCHG
+To:     Alexander Gordeev <agordeev@linux.ibm.com>,
+        Christian Borntraeger <borntraeger@linux.ibm.com>,
+        Claudio Imbrenda <imbrenda@linux.ibm.com>,
+        Heiko Carstens <hca@linux.ibm.com>,
+        Janis Schoetterl-Glausch <scgl@linux.ibm.com>,
+        Janosch Frank <frankja@linux.ibm.com>,
+        Thomas Huth <thuth@redhat.com>,
+        Vasily Gorbik <gor@linux.ibm.com>
+Cc:     David Hildenbrand <david@redhat.com>,
+        Jonathan Corbet <corbet@lwn.net>, kvm@vger.kernel.org,
+        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
+        linux-kselftest@vger.kernel.org, linux-s390@vger.kernel.org,
+        Paolo Bonzini <pbonzini@redhat.com>,
+        Shuah Khan <shuah@kernel.org>,
+        Sven Schnelle <svens@linux.ibm.com>
+From:   Nico Boehr <nrb@linux.ibm.com>
+Message-ID: <166936633695.19077.13372353298394327779@t14-nrb.local>
+User-Agent: alot/0.8.1
+Date:   Fri, 25 Nov 2022 09:52:18 +0100
+X-TM-AS-GCONF: 00
+X-Proofpoint-ORIG-GUID: tHcF3P8PfsqF7PEYaJjzK5zOowVa2Wef
+X-Proofpoint-GUID: FNGyPJvbxGrMU8e6_jYyAt9gb_ciObwx
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.219,Aquarius:18.0.895,Hydra:6.0.545,FMLib:17.11.122.1
+ definitions=2022-11-25_02,2022-11-24_01,2022-06-22_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 phishscore=0 mlxlogscore=676
+ priorityscore=1501 adultscore=0 spamscore=0 clxscore=1015 bulkscore=0
+ mlxscore=0 lowpriorityscore=0 impostorscore=0 suspectscore=0
+ malwarescore=0 classifier=spam adjust=0 reason=mlx scancount=1
+ engine=8.12.0-2210170000 definitions=main-2211250069
+X-Spam-Status: No, score=-2.0 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+        DKIM_VALID,DKIM_VALID_EF,RCVD_IN_MSPIKE_H2,SPF_HELO_NONE,SPF_PASS
+        autolearn=ham autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Use the newly-added function kunit_get_current_test() instead of
-accessing current->kunit_test directly. This function uses a static key
-to return more quickly when KUnit is enabled, but no tests are actively
-running. There should therefore be a negligible performance impact to
-enabling the slub KUnit tests.
+Quoting Janis Schoetterl-Glausch (2022-11-22 14:10:41)
+> On Tue, 2022-11-22 at 08:47 +0100, Thomas Huth wrote:
+> > On 17/11/2022 23.17, Janis Schoetterl-Glausch wrote:
+[...]
+> > >   Supported flags:
+> > >     * ``KVM_S390_MEMOP_F_CHECK_ONLY``
+> > >     * ``KVM_S390_MEMOP_F_SKEY_PROTECTION``
+> > > +  * ``KVM_S390_MEMOP_F_CMPXCHG``
+> > > +
+> > > +The semantics of the flags common with logical acesses are as for lo=
+gical
+> > > +accesses.
+> > > +
+> > > +For write accesses, the KVM_S390_MEMOP_F_CMPXCHG might be supported.
+> >=20
+> > I'd maybe merge this with the last sentence:
+> >=20
+> > For write accesses, the KVM_S390_MEMOP_F_CMPXCHG flag is supported if=20
+> > KVM_CAP_S390_MEM_OP_EXTENSION has bit 1 (i.e. bit with value 2) set.
+>=20
+> Ok.
+> >=20
+> > ... and speaking of that, I wonder whether it's maybe a good idea to=20
+> > introduce some #defines for bit 1 / value 2, to avoid the confusion ?
+>=20
+> Not sure, I don't feel it's too complicated. Where would you define it?
+> Next to the mem_op struct? KVM_S390_MEMOP_EXTENSION_CAP_CMPXCHG?
 
-Other than the performance improvement, this should be a no-op.
+I think the define would be a good idea. Location and name sound good to me.
 
-Cc: Oliver Glitta <glittao@gmail.com>
-Cc: Hyeonggon Yoo <42.hyeyoo@gmail.com>
-Cc: Christoph Lameter <cl@linux.com>
-Cc: Vlastimil Babka <vbabka@suse.cz>
-Cc: David Rientjes <rientjes@google.com>
-Cc: Andrew Morton <akpm@linux-foundation.org>
-Signed-off-by: David Gow <davidgow@google.com>
-Acked-by: Vlastimil Babka <vbabka@suse.cz>
-Acked-by: Hyeonggon Yoo <42.hyeyoo@gmail.com>
----
-
-This is intended as an example use of the new function. Other users
-(such as KASAN) will be updated separately, as there would otherwise be
-conflicts.
-
-We'll take this whole series via the kselftest/kunit tree.
-
-Changes since v3:
-https://lore.kernel.org/linux-kselftest/20221119081252.3864249-3-davidgow@google.com/
-- Add Hyeonggon's Acked-by.
-
-Changes since v2:
-https://lore.kernel.org/all/20221025071907.1251820-3-davidgow@google.com/
-- Get rid of a redundant 'likely' (Thanks Vlastimil Babka)
-- Use current->kunit_test directly when we already know a test is
-  running. (Thanks Vlastimil Babka)
-- Add Vlastimil's Acked-by.
-
-There was no v1 of this patch. v1 of the series can be found here:
-https://lore.kernel.org/linux-kselftest/20221021072854.333010-1-davidgow@google.com/T/#u
-
-Cheers,
--- David
-
----
- lib/slub_kunit.c | 1 +
- mm/slub.c        | 3 ++-
- 2 files changed, 3 insertions(+), 1 deletion(-)
-
-diff --git a/lib/slub_kunit.c b/lib/slub_kunit.c
-index 7a0564d7cb7a..8fd19c8301ad 100644
---- a/lib/slub_kunit.c
-+++ b/lib/slub_kunit.c
-@@ -1,5 +1,6 @@
- // SPDX-License-Identifier: GPL-2.0
- #include <kunit/test.h>
-+#include <kunit/test-bug.h>
- #include <linux/mm.h>
- #include <linux/slab.h>
- #include <linux/module.h>
-diff --git a/mm/slub.c b/mm/slub.c
-index 157527d7101b..1887996cb703 100644
---- a/mm/slub.c
-+++ b/mm/slub.c
-@@ -39,6 +39,7 @@
- #include <linux/memcontrol.h>
- #include <linux/random.h>
- #include <kunit/test.h>
-+#include <kunit/test-bug.h>
- #include <linux/sort.h>
- 
- #include <linux/debugfs.h>
-@@ -603,7 +604,7 @@ static bool slab_add_kunit_errors(void)
- {
- 	struct kunit_resource *resource;
- 
--	if (likely(!current->kunit_test))
-+	if (!kunit_get_current_test())
- 		return false;
- 
- 	resource = kunit_find_named_resource(current->kunit_test, "slab_errors");
--- 
-2.38.1.584.g0f3c55d4c2-goog
-
+You could also replace the hard-coded 0x3 in kvm_vm_ioctl_check_extension()=
+ when you have the define.
