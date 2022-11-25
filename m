@@ -2,99 +2,40 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 297E963858F
-	for <lists+linux-doc@lfdr.de>; Fri, 25 Nov 2022 09:52:33 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id DCD3363897E
+	for <lists+linux-doc@lfdr.de>; Fri, 25 Nov 2022 13:17:07 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S229586AbiKYIwc (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Fri, 25 Nov 2022 03:52:32 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:35780 "EHLO
+        id S229792AbiKYMRF (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Fri, 25 Nov 2022 07:17:05 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:39196 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S229541AbiKYIwb (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Fri, 25 Nov 2022 03:52:31 -0500
-Received: from mx0a-001b2d01.pphosted.com (mx0a-001b2d01.pphosted.com [148.163.156.1])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 866BBCE9;
-        Fri, 25 Nov 2022 00:52:28 -0800 (PST)
-Received: from pps.filterd (m0098396.ppops.net [127.0.0.1])
-        by mx0a-001b2d01.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id 2AP8nmiJ006687;
-        Fri, 25 Nov 2022 08:52:25 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ibm.com; h=content-type :
- mime-version : content-transfer-encoding : in-reply-to : references :
- subject : to : cc : from : message-id : date; s=pp1;
- bh=7RGeCEHG1G53Xom7o/juk/OP7d5IJEctJeBMolf8ohE=;
- b=jtXj+Qa0Hw49rdLzDKaQKmWe6taT9UacpCAKpRHwij/B3D8wIrJKqMMcgVCIIAgf19k9
- T77Jev2X23zV8KN2aUovjCQG3CjwXtrD5kig7Cb7j1UWRqZWg9iR0GowUNnDPAztnzB1
- zDxmZz0Fodtw8uqtd+PS2ezUEnnWDnVY80ftIiZ1pZi6/vp+pkfs+7o3L7uNRBgL0Z1M
- t+c7p70gKAsnciqPCRauo5MPozEo/wvaQUwLEyXGd1o61hqzxgJr70MSGAVZEvAdbq99
- oDGNNX4RsspzR1OBTwNAxLLxUS03V+yXjyw1wXlszudVyXyTHbPUWN7vhv8pOBTP90sk lA== 
-Received: from pps.reinject (localhost [127.0.0.1])
-        by mx0a-001b2d01.pphosted.com (PPS) with ESMTPS id 3m2thrr1ny-1
-        (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
-        Fri, 25 Nov 2022 08:52:25 +0000
-Received: from m0098396.ppops.net (m0098396.ppops.net [127.0.0.1])
-        by pps.reinject (8.17.1.5/8.17.1.5) with ESMTP id 2AP8oqN1009927;
-        Fri, 25 Nov 2022 08:52:24 GMT
-Received: from ppma03ams.nl.ibm.com (62.31.33a9.ip4.static.sl-reverse.com [169.51.49.98])
-        by mx0a-001b2d01.pphosted.com (PPS) with ESMTPS id 3m2thrr1nf-1
-        (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
-        Fri, 25 Nov 2022 08:52:24 +0000
-Received: from pps.filterd (ppma03ams.nl.ibm.com [127.0.0.1])
-        by ppma03ams.nl.ibm.com (8.16.1.2/8.16.1.2) with SMTP id 2AP8pOZC017679;
-        Fri, 25 Nov 2022 08:52:22 GMT
-Received: from b06cxnps4076.portsmouth.uk.ibm.com (d06relay13.portsmouth.uk.ibm.com [9.149.109.198])
-        by ppma03ams.nl.ibm.com with ESMTP id 3kxps91ar3-1
-        (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
-        Fri, 25 Nov 2022 08:52:22 +0000
-Received: from d06av24.portsmouth.uk.ibm.com (d06av24.portsmouth.uk.ibm.com [9.149.105.60])
-        by b06cxnps4076.portsmouth.uk.ibm.com (8.14.9/8.14.9/NCO v10.0) with ESMTP id 2AP8qI8c63766992
-        (version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
-        Fri, 25 Nov 2022 08:52:18 GMT
-Received: from d06av24.portsmouth.uk.ibm.com (unknown [127.0.0.1])
-        by IMSVA (Postfix) with ESMTP id CD47B42042;
-        Fri, 25 Nov 2022 08:52:18 +0000 (GMT)
-Received: from d06av24.portsmouth.uk.ibm.com (unknown [127.0.0.1])
-        by IMSVA (Postfix) with ESMTP id A76B04203F;
-        Fri, 25 Nov 2022 08:52:18 +0000 (GMT)
-Received: from t14-nrb (unknown [9.171.26.223])
-        by d06av24.portsmouth.uk.ibm.com (Postfix) with ESMTP;
-        Fri, 25 Nov 2022 08:52:18 +0000 (GMT)
-Content-Type: text/plain; charset="utf-8"
+        with ESMTP id S229676AbiKYMRD (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Fri, 25 Nov 2022 07:17:03 -0500
+Received: from out30-45.freemail.mail.aliyun.com (out30-45.freemail.mail.aliyun.com [115.124.30.45])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 341414A079;
+        Fri, 25 Nov 2022 04:16:57 -0800 (PST)
+X-Alimail-AntiSpam: AC=PASS;BC=-1|-1;BR=01201311R101e4;CH=green;DM=||false|;DS=||;FP=0|-1|-1|-1|0|-1|-1|-1;HT=ay29a033018045170;MF=tianjia.zhang@linux.alibaba.com;NM=1;PH=DS;RN=11;SR=0;TI=SMTPD_---0VVfOHkY_1669378595;
+Received: from localhost(mailfrom:tianjia.zhang@linux.alibaba.com fp:SMTPD_---0VVfOHkY_1669378595)
+          by smtp.aliyun-inc.com;
+          Fri, 25 Nov 2022 20:16:36 +0800
+From:   Tianjia Zhang <tianjia.zhang@linux.alibaba.com>
+To:     Eric Biggers <ebiggers@kernel.org>,
+        "Theodore Y. Ts o" <tytso@mit.edu>,
+        Jaegeuk Kim <jaegeuk@kernel.org>,
+        Jonathan Corbet <corbet@lwn.net>, Jens Axboe <axboe@kernel.dk>,
+        Ard Biesheuvel <ardb@kernel.org>,
+        linux-fscrypt@vger.kernel.org, linux-doc@vger.kernel.org,
+        linux-kernel@vger.kernel.org, linux-block@vger.kernel.org
+Cc:     Tianjia Zhang <tianjia.zhang@linux.alibaba.com>
+Subject: [PATCH v3 0/2] Add SM4 XTS symmetric algorithm for blk-crypto and fscrypt
+Date:   Fri, 25 Nov 2022 20:16:28 +0800
+Message-Id: <20221125121630.87793-1-tianjia.zhang@linux.alibaba.com>
+X-Mailer: git-send-email 2.24.3 (Apple Git-128)
 MIME-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
-In-Reply-To: <e735fa2cde6e9c92dda134634cb3d67b64b23fe9.camel@linux.ibm.com>
-References: <20221117221758.66326-1-scgl@linux.ibm.com> <20221117221758.66326-3-scgl@linux.ibm.com> <f96b50e2-24ac-4016-d3f1-ffc375516e7c@redhat.com> <e735fa2cde6e9c92dda134634cb3d67b64b23fe9.camel@linux.ibm.com>
-Subject: Re: [PATCH v3 2/9] Documentation: KVM: s390: Describe KVM_S390_MEMOP_F_CMPXCHG
-To:     Alexander Gordeev <agordeev@linux.ibm.com>,
-        Christian Borntraeger <borntraeger@linux.ibm.com>,
-        Claudio Imbrenda <imbrenda@linux.ibm.com>,
-        Heiko Carstens <hca@linux.ibm.com>,
-        Janis Schoetterl-Glausch <scgl@linux.ibm.com>,
-        Janosch Frank <frankja@linux.ibm.com>,
-        Thomas Huth <thuth@redhat.com>,
-        Vasily Gorbik <gor@linux.ibm.com>
-Cc:     David Hildenbrand <david@redhat.com>,
-        Jonathan Corbet <corbet@lwn.net>, kvm@vger.kernel.org,
-        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
-        linux-kselftest@vger.kernel.org, linux-s390@vger.kernel.org,
-        Paolo Bonzini <pbonzini@redhat.com>,
-        Shuah Khan <shuah@kernel.org>,
-        Sven Schnelle <svens@linux.ibm.com>
-From:   Nico Boehr <nrb@linux.ibm.com>
-Message-ID: <166936633695.19077.13372353298394327779@t14-nrb.local>
-User-Agent: alot/0.8.1
-Date:   Fri, 25 Nov 2022 09:52:18 +0100
-X-TM-AS-GCONF: 00
-X-Proofpoint-ORIG-GUID: tHcF3P8PfsqF7PEYaJjzK5zOowVa2Wef
-X-Proofpoint-GUID: FNGyPJvbxGrMU8e6_jYyAt9gb_ciObwx
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.219,Aquarius:18.0.895,Hydra:6.0.545,FMLib:17.11.122.1
- definitions=2022-11-25_02,2022-11-24_01,2022-06-22_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 phishscore=0 mlxlogscore=676
- priorityscore=1501 adultscore=0 spamscore=0 clxscore=1015 bulkscore=0
- mlxscore=0 lowpriorityscore=0 impostorscore=0 suspectscore=0
- malwarescore=0 classifier=spam adjust=0 reason=mlx scancount=1
- engine=8.12.0-2210170000 definitions=main-2211250069
-X-Spam-Status: No, score=-2.0 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_EF,RCVD_IN_MSPIKE_H2,SPF_HELO_NONE,SPF_PASS
+Content-Transfer-Encoding: 8bit
+X-Spam-Status: No, score=-9.9 required=5.0 tests=BAYES_00,
+        ENV_AND_HDR_SPF_MATCH,RCVD_IN_DNSWL_NONE,RCVD_IN_MSPIKE_H2,
+        SPF_HELO_NONE,SPF_PASS,UNPARSEABLE_RELAY,USER_IN_DEF_SPF_WL
         autolearn=ham autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
@@ -102,35 +43,29 @@ Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Quoting Janis Schoetterl-Glausch (2022-11-22 14:10:41)
-> On Tue, 2022-11-22 at 08:47 +0100, Thomas Huth wrote:
-> > On 17/11/2022 23.17, Janis Schoetterl-Glausch wrote:
-[...]
-> > >   Supported flags:
-> > >     * ``KVM_S390_MEMOP_F_CHECK_ONLY``
-> > >     * ``KVM_S390_MEMOP_F_SKEY_PROTECTION``
-> > > +  * ``KVM_S390_MEMOP_F_CMPXCHG``
-> > > +
-> > > +The semantics of the flags common with logical acesses are as for lo=
-gical
-> > > +accesses.
-> > > +
-> > > +For write accesses, the KVM_S390_MEMOP_F_CMPXCHG might be supported.
-> >=20
-> > I'd maybe merge this with the last sentence:
-> >=20
-> > For write accesses, the KVM_S390_MEMOP_F_CMPXCHG flag is supported if=20
-> > KVM_CAP_S390_MEM_OP_EXTENSION has bit 1 (i.e. bit with value 2) set.
->=20
-> Ok.
-> >=20
-> > ... and speaking of that, I wonder whether it's maybe a good idea to=20
-> > introduce some #defines for bit 1 / value 2, to avoid the confusion ?
->=20
-> Not sure, I don't feel it's too complicated. Where would you define it?
-> Next to the mem_op struct? KVM_S390_MEMOP_EXTENSION_CAP_CMPXCHG?
+SM4 is widely used in China's data encryption software and hardware.
+these algoritms are mandatory in many scenarios. This serial of
+patches enables the SM4-XTS algorithm in blk-crypto and enables the
+SM4-XTS/CTS algorithm in fscrypt to encrypt file content and filename.
 
-I think the define would be a good idea. Location and name sound good to me.
+v3 change:
+  - update git commit message
 
-You could also replace the hard-coded 0x3 in kvm_vm_ioctl_check_extension()=
- when you have the define.
+v2 change:
+  - As Eric said, the new FSCRYPT_MODE is defined for the unused numbers 7 and 8
+
+Tianjia Zhang (2):
+  blk-crypto: Add support for SM4-XTS blk crypto mode
+  fscrypt: Add SM4 XTS/CTS symmetric algorithm support
+
+ Documentation/filesystems/fscrypt.rst |  1 +
+ block/blk-crypto.c                    |  6 ++++++
+ fs/crypto/keysetup.c                  | 15 +++++++++++++++
+ fs/crypto/policy.c                    |  4 ++++
+ include/linux/blk-crypto.h            |  1 +
+ include/uapi/linux/fscrypt.h          |  2 ++
+ 6 files changed, 29 insertions(+)
+
+-- 
+2.24.3 (Apple Git-128)
+
