@@ -2,130 +2,266 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 13DA663897B
-	for <lists+linux-doc@lfdr.de>; Fri, 25 Nov 2022 13:17:07 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id B14C0638C12
+	for <lists+linux-doc@lfdr.de>; Fri, 25 Nov 2022 15:26:37 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S229790AbiKYMRF (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Fri, 25 Nov 2022 07:17:05 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:39198 "EHLO
+        id S229480AbiKYO0f (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Fri, 25 Nov 2022 09:26:35 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:47820 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S229671AbiKYMRD (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Fri, 25 Nov 2022 07:17:03 -0500
-Received: from out30-45.freemail.mail.aliyun.com (out30-45.freemail.mail.aliyun.com [115.124.30.45])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 3853E4A07F;
-        Fri, 25 Nov 2022 04:16:58 -0800 (PST)
-X-Alimail-AntiSpam: AC=PASS;BC=-1|-1;BR=01201311R201e4;CH=green;DM=||false|;DS=||;FP=0|-1|-1|-1|0|-1|-1|-1;HT=ay29a033018045168;MF=tianjia.zhang@linux.alibaba.com;NM=1;PH=DS;RN=11;SR=0;TI=SMTPD_---0VVfPn5c_1669378599;
-Received: from localhost(mailfrom:tianjia.zhang@linux.alibaba.com fp:SMTPD_---0VVfPn5c_1669378599)
-          by smtp.aliyun-inc.com;
-          Fri, 25 Nov 2022 20:16:40 +0800
-From:   Tianjia Zhang <tianjia.zhang@linux.alibaba.com>
-To:     Eric Biggers <ebiggers@kernel.org>,
-        "Theodore Y. Ts o" <tytso@mit.edu>,
-        Jaegeuk Kim <jaegeuk@kernel.org>,
-        Jonathan Corbet <corbet@lwn.net>, Jens Axboe <axboe@kernel.dk>,
-        Ard Biesheuvel <ardb@kernel.org>,
-        linux-fscrypt@vger.kernel.org, linux-doc@vger.kernel.org,
-        linux-kernel@vger.kernel.org, linux-block@vger.kernel.org
-Cc:     Tianjia Zhang <tianjia.zhang@linux.alibaba.com>
-Subject: [PATCH v3 2/2] fscrypt: Add SM4 XTS/CTS symmetric algorithm support
-Date:   Fri, 25 Nov 2022 20:16:30 +0800
-Message-Id: <20221125121630.87793-3-tianjia.zhang@linux.alibaba.com>
-X-Mailer: git-send-email 2.24.3 (Apple Git-128)
-In-Reply-To: <20221125121630.87793-1-tianjia.zhang@linux.alibaba.com>
-References: <20221125121630.87793-1-tianjia.zhang@linux.alibaba.com>
+        with ESMTP id S229452AbiKYO0e (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Fri, 25 Nov 2022 09:26:34 -0500
+Received: from szxga02-in.huawei.com (szxga02-in.huawei.com [45.249.212.188])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 842532AC46;
+        Fri, 25 Nov 2022 06:26:32 -0800 (PST)
+Received: from dggpeml500025.china.huawei.com (unknown [172.30.72.55])
+        by szxga02-in.huawei.com (SkyGuard) with ESMTP id 4NJcbh0FcGzHwC8;
+        Fri, 25 Nov 2022 22:25:52 +0800 (CST)
+Received: from dggpeml500002.china.huawei.com (7.185.36.158) by
+ dggpeml500025.china.huawei.com (7.185.36.35) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2375.31; Fri, 25 Nov 2022 22:26:30 +0800
+Received: from [10.67.103.44] (10.67.103.44) by dggpeml500002.china.huawei.com
+ (7.185.36.158) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2375.31; Fri, 25 Nov
+ 2022 22:26:30 +0800
+Subject: Re: [PATCH v14 1/2] drivers/coresight: Add UltraSoc System Memory
+ Buffer driver
+To:     Suzuki K Poulose <suzuki.poulose@arm.com>,
+        <mathieu.poirier@linaro.org>, <mike.leach@linaro.org>,
+        <leo.yan@linaro.org>, <jonathan.cameron@huawei.com>
+References: <20221123123823.27973-1-hejunhao3@huawei.com>
+ <20221123123823.27973-2-hejunhao3@huawei.com>
+ <9f5f66fa-0388-6a76-25c9-cacef0e7a4e2@arm.com>
+ <0eb32726-2054-ee00-4b7a-d7a2f0121efd@huawei.com>
+ <80cf9c73-4b9a-f2f7-f72d-de985c045f9c@arm.com>
+CC:     <coresight@lists.linaro.org>, <linux-kernel@vger.kernel.org>,
+        <linux-arm-kernel@lists.infradead.org>,
+        <linux-doc@vger.kernel.org>, <lpieralisi@kernel.org>,
+        <linuxarm@huawei.com>, <yangyicong@huawei.com>,
+        <liuqi6124@gmail.com>, <f.fangjian@huawei.com>,
+        <prime.zeng@hisilicon.com>
+From:   hejunhao <hejunhao3@huawei.com>
+Message-ID: <8e3b1957-33a7-83ed-6d62-1294cdb679e4@huawei.com>
+Date:   Fri, 25 Nov 2022 22:26:29 +0800
+User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64; rv:45.0) Gecko/20100101
+ Thunderbird/45.7.1
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Spam-Status: No, score=-9.9 required=5.0 tests=BAYES_00,
-        ENV_AND_HDR_SPF_MATCH,RCVD_IN_DNSWL_NONE,RCVD_IN_MSPIKE_H2,
-        SPF_HELO_NONE,SPF_PASS,UNPARSEABLE_RELAY,USER_IN_DEF_SPF_WL
-        autolearn=ham autolearn_force=no version=3.4.6
+In-Reply-To: <80cf9c73-4b9a-f2f7-f72d-de985c045f9c@arm.com>
+Content-Type: text/plain; charset="utf-8"; format=flowed
+Content-Transfer-Encoding: 7bit
+X-Originating-IP: [10.67.103.44]
+X-ClientProxiedBy: dggems702-chm.china.huawei.com (10.3.19.179) To
+ dggpeml500002.china.huawei.com (7.185.36.158)
+X-CFilter-Loop: Reflected
+X-Spam-Status: No, score=-4.2 required=5.0 tests=BAYES_00,NICE_REPLY_A,
+        RCVD_IN_DNSWL_MED,SPF_HELO_NONE,SPF_PASS autolearn=ham
+        autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-SM4 is a symmetric algorithm widely used in China, and is even mandatory
-in many scenarios. We need to provide these users with the ability to
-encrypt files or disks using SM4-XTS, and many other algorithms that use
-SM2/3/4 algorithms or their combined algorithm scenarios, these features
-are demanded by many users, this patch enables to use SM4-XTS mode to
-encrypt file content, and use SM4-CBC-CTS to encrypt filename.
 
-Signed-off-by: Tianjia Zhang <tianjia.zhang@linux.alibaba.com>
----
- Documentation/filesystems/fscrypt.rst |  1 +
- fs/crypto/keysetup.c                  | 15 +++++++++++++++
- fs/crypto/policy.c                    |  4 ++++
- include/uapi/linux/fscrypt.h          |  2 ++
- 4 files changed, 22 insertions(+)
+On 2022/11/24 21:45, Suzuki K Poulose wrote:
+> On 24/11/2022 13:33, hejunhao wrote:
+>>
+>> On 2022/11/23 22:03, Suzuki K Poulose wrote:
+>>> On 23/11/2022 12:38, Junhao He wrote:
+>>>> From: Qi Liu <liuqi115@huawei.com>
+>>>>
+>>>> Add driver for UltraSoc SMB(System Memory Buffer) device.
+>>>> SMB provides a way to buffer messages from ETM, and store
+>>>> these "CPU instructions trace" in system memory.
+>>>> The SMB device is identifier as ACPI HID "HISI03A1". Device
+>>>> system memory address resources are allocated using the _CRS
+>>>> method and buffer modes is the circular buffer mode.
+>>>>
+>>>> SMB is developed by UltraSoc technology, which is acquired by
+>>>> Siemens, and we still use "UltraSoc" to name driver.
+>>>>
+>>>> Signed-off-by: Qi Liu <liuqi115@huawei.com>
+>>>> Signed-off-by: Junhao He <hejunhao3@huawei.com>
+>>>> Tested-by: JunHao He <hejunhao3@huawei.com>
+>>>> Reviewed-by: Jonathan Cameron <Jonathan.Cameron@huawei.com>
+>>>> ---
+>>>>   drivers/hwtracing/coresight/Kconfig        |  12 +
+>>>>   drivers/hwtracing/coresight/Makefile       |   1 +
+>>>>   drivers/hwtracing/coresight/ultrasoc-smb.c | 658 
+>>>> +++++++++++++++++++++
+>>>>   drivers/hwtracing/coresight/ultrasoc-smb.h | 129 ++++
+>>>>   4 files changed, 800 insertions(+)
+>>>>   create mode 100644 drivers/hwtracing/coresight/ultrasoc-smb.c
+>>>>   create mode 100644 drivers/hwtracing/coresight/ultrasoc-smb.h
+>>>>
+>>>
+>>>> +static void smb_sync_perf_buffer(struct smb_drv_data *drvdata,
+>>>> +                 struct cs_buffers *buf,
+>>>> +                 unsigned long head,
+>>>> +                 unsigned long data_size)
+>>>> +{
+>>>> +    struct smb_data_buffer *sdb = &drvdata->sdb;
+>>>> +    char **dst_pages = (char **)buf->data_pages;
+>>>> +    unsigned long to_copy;
+>>>> +    long pg_idx, pg_offset;
+>>>> +
+>>>> +    pg_idx = head >> PAGE_SHIFT;
+>>>> +    pg_offset = head & (PAGE_SIZE - 1);
+>>>> +
+>>>> +    while (data_size) {
+>>>> +        unsigned long pg_space = PAGE_SIZE - pg_offset;
+>>>> +
+>>>> +        /* Copy parts of trace data when read pointer wrap around */
+>>>> +        if (sdb->rd_offset + pg_space > sdb->buf_size)
+>>>> +            to_copy = sdb->buf_size - sdb->rd_offset;
+>>>> +        else
+>>>> +            to_copy = min(data_size, pg_space);
+>>>> +
+>>>> +        memcpy(dst_pages[pg_idx] + pg_offset,
+>>>> +                  sdb->buf_base + sdb->rd_offset, to_copy);
+>>>> +
+>>>> +        pg_offset += to_copy;
+>>>> +        if (pg_offset >= PAGE_SIZE) {
+>>>> +            pg_offset = 0;
+>>>> +            pg_idx++;
+>>>> +            pg_idx %= buf->nr_pages;
+>>>> +        }
+>>>> +        data_size -= to_copy;
+>>>> +        sdb->rd_offset += to_copy;
+>>>> +        sdb->rd_offset %= sdb->buf_size;
+>>>> +    }
+>>>> +
+>>>> +    sdb->data_size = 0;
+>>>
+>>>
+>>> --8>-- cut here --<8--
+>>>
+>>>> +    writel(sdb->start_addr + sdb->rd_offset,
+>>>> +        drvdata->base + SMB_LB_RD_ADDR_REG);
+>>>> +
+>>>> +    /*
+>>>> +     * Data remained in link cannot be purged when SMB is full, so
+>>>> +     * synchronize the read pointer to write pointer, to make sure
+>>>> +     * these remained data won't influence next trace.
+>>>> +     */
+>>>> +    if (sdb->full) {
+>>>> +        smb_purge_data(drvdata);
+>>>> +        writel(readl(drvdata->base + SMB_LB_WR_ADDR_REG),
+>>>> +               drvdata->base + SMB_LB_RD_ADDR_REG);
+>>>> +    }
+>>>
+>>> --<8-- end here --8>--
+>>>
+>>> As pointed out in the last review, we must do this step
+>>> everytime for perf mode irrespective of whether the buffer
+>>> was "FULL" or not.
+>>>
+>>> i.e, the above block should simply be:
+>>>
+>>>     if (sdb->full)
+>>>         smb_purge_data(drvdata);
+>>>
+>>>     /*
+>>>      * The uncollected Data must be discarded for perf,
+>>>      * as it cannot be clubbed with next schedule. We
+>>>      * any way TRUNCATE the buffer in this case.
+>>>      */
+>>>     writel(readl(drvdata->base + SMB_LB_WR_ADDR_REG),
+>>>         drvdata->base + SMB_LB_RD_ADDR_REG);
+>>>
+>>> Suzuki
+>>
+>> Hi Suzuki,
+>>
+>> We need to update SMB_LB_RD_ADDR_REG register first, then
+>> check the "full" flag, whether the register needs to be
+>> updated again.
+>
+> Why ? sdb->full is not updated after the write to RD_ADDR_REG.
+>
+Hi Suzuki,
 
-diff --git a/Documentation/filesystems/fscrypt.rst b/Documentation/filesystems/fscrypt.rst
-index 5ba5817c17c2..af27e7b2c74f 100644
---- a/Documentation/filesystems/fscrypt.rst
-+++ b/Documentation/filesystems/fscrypt.rst
-@@ -336,6 +336,7 @@ Currently, the following pairs of encryption modes are supported:
- 
- - AES-256-XTS for contents and AES-256-CTS-CBC for filenames
- - AES-128-CBC for contents and AES-128-CTS-CBC for filenames
-+- SM4-XTS for contents and SM4-CTS-CBC for filenames
- - Adiantum for both contents and filenames
- - AES-256-XTS for contents and AES-256-HCTR2 for filenames (v2 policies only)
- 
-diff --git a/fs/crypto/keysetup.c b/fs/crypto/keysetup.c
-index f7407071a952..24e55c95abc3 100644
---- a/fs/crypto/keysetup.c
-+++ b/fs/crypto/keysetup.c
-@@ -44,6 +44,21 @@ struct fscrypt_mode fscrypt_modes[] = {
- 		.security_strength = 16,
- 		.ivsize = 16,
- 	},
-+	[FSCRYPT_MODE_SM4_XTS] = {
-+		.friendly_name = "SM4-XTS",
-+		.cipher_str = "xts(sm4)",
-+		.keysize = 32,
-+		.security_strength = 16,
-+		.ivsize = 16,
-+		.blk_crypto_mode = BLK_ENCRYPTION_MODE_SM4_XTS,
-+	},
-+	[FSCRYPT_MODE_SM4_CTS] = {
-+		.friendly_name = "SM4-CTS",
-+		.cipher_str = "cts(cbc(sm4))",
-+		.keysize = 16,
-+		.security_strength = 16,
-+		.ivsize = 16,
-+	},
- 	[FSCRYPT_MODE_ADIANTUM] = {
- 		.friendly_name = "Adiantum",
- 		.cipher_str = "adiantum(xchacha12,aes)",
-diff --git a/fs/crypto/policy.c b/fs/crypto/policy.c
-index 46757c3052ef..8e69bc0c35cd 100644
---- a/fs/crypto/policy.c
-+++ b/fs/crypto/policy.c
-@@ -71,6 +71,10 @@ static bool fscrypt_valid_enc_modes_v1(u32 contents_mode, u32 filenames_mode)
- 	    filenames_mode == FSCRYPT_MODE_AES_128_CTS)
- 		return true;
- 
-+	if (contents_mode == FSCRYPT_MODE_SM4_XTS &&
-+	    filenames_mode == FSCRYPT_MODE_SM4_CTS)
-+		return true;
-+
- 	if (contents_mode == FSCRYPT_MODE_ADIANTUM &&
- 	    filenames_mode == FSCRYPT_MODE_ADIANTUM)
- 		return true;
-diff --git a/include/uapi/linux/fscrypt.h b/include/uapi/linux/fscrypt.h
-index a756b29afcc2..47dbd1994bfe 100644
---- a/include/uapi/linux/fscrypt.h
-+++ b/include/uapi/linux/fscrypt.h
-@@ -26,6 +26,8 @@
- #define FSCRYPT_MODE_AES_256_CTS		4
- #define FSCRYPT_MODE_AES_128_CBC		5
- #define FSCRYPT_MODE_AES_128_CTS		6
-+#define FSCRYPT_MODE_SM4_XTS			7
-+#define FSCRYPT_MODE_SM4_CTS			8
- #define FSCRYPT_MODE_ADIANTUM			9
- #define FSCRYPT_MODE_AES_256_HCTR2		10
- /* If adding a mode number > 10, update FSCRYPT_MODE_MAX in fscrypt_private.h */
--- 
-2.24.3 (Apple Git-128)
+Maybe using the code below is more appropriate.
+i.e,
+
+     writel(sdb->start_addr + sdb->rd_offset,
+         drvdata->base + SMB_LB_RD_ADDR_REG);
+
+     /*
+      * The uncollected Data must be discarded for perf,
+      * as it cannot be clubbed with next schedule. We
+      * any way TRUNCATE the buffer in this case.
+      */
+     smb_update_data_size(drvdata);
+     if (sdb->data_size)
+         writel(readl(drvdata->base + SMB_LB_WR_ADDR_REG),
+                 drvdata->base + SMB_LB_RD_ADDR_REG);
+
+Best regards,
+Junhao.
+
+>>
+>> If we don`t update the value of SMB_LB_RD_ADDR_REG register
+>> or reset buffer state, the buffer state will still be "full".
+>> The buffer has not free area,so the data will still remain
+>> in link.
+>
+> My issue here is with potentially "leaving the trace from a previous
+> session for the next session". i.e., at the end of a run, we must always
+> make sure that the buffer is left empty (unlike the sysfs mode).
+>
+> e.g.,
+>
+> perf_session_x: RUN0: RD=0x0, WR=0x5000, HANDLE_SIZE=0x3000, full=false.
+> At the end of the above routine we will have :
+>     RD=0x3000, WR=0x5000,
+>
+> and if a different perf session comes in, say perf_session_y, it will 
+> consume trace written by "x" at 0x3000-0x50000, right ?
+>
+> This is fine in the sysfs mode as we expect the entire sysfs mode
+> to be owned by a single session and is left to the user to split it.
+> But for perf mode we cannot do that and thus must make sure we don't
+> leak trace from one session to antoher.
+>
+> Suzuki
+>
+
+In this cace:  RUN0: RD=0x0, WR=0x5000, HANDLE_SIZE=0x3000, full=false.
+We will update the "rd_offset" in smb_update_buffer() function.
+like this:
+
+     ...
+     if (data_size > handle->size) {
+         sdb->rd_offset += data_size - handle->size;
+         sdb->rd_offset %= sdb->buf_size;
+         ...
+         }
+     ...
+
+
+So the rd_offset will advance to 0x2000 first,
+then we dump the latest trace data (0x2000 - 0x5000) from "buf_base + 
+rd_offset".
+
+Best regards,
+Junhao.
+
+>
+>>
+>> Thanks.
+>> HeJunhao.
+>>
+>>> _______________________________________________
+>>> CoreSight mailing list -- coresight@lists.linaro.org
+>>> To unsubscribe send an email to coresight-leave@lists.linaro.org
+>>>
+>>> .
+>>>
+>>
+>
+> _______________________________________________
+> CoreSight mailing list -- coresight@lists.linaro.org
+> To unsubscribe send an email to coresight-leave@lists.linaro.org
 
