@@ -2,69 +2,87 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 0BAC863C928
-	for <lists+linux-doc@lfdr.de>; Tue, 29 Nov 2022 21:17:59 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 3CE8D63CAB1
+	for <lists+linux-doc@lfdr.de>; Tue, 29 Nov 2022 22:54:54 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S233910AbiK2UR5 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 29 Nov 2022 15:17:57 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:57464 "EHLO
+        id S237061AbiK2Vyw convert rfc822-to-8bit (ORCPT
+        <rfc822;lists+linux-doc@lfdr.de>); Tue, 29 Nov 2022 16:54:52 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:37844 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S236828AbiK2URi (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 29 Nov 2022 15:17:38 -0500
-Received: from mail-lj1-x243.google.com (mail-lj1-x243.google.com [IPv6:2a00:1450:4864:20::243])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 706EB59857
-        for <linux-doc@vger.kernel.org>; Tue, 29 Nov 2022 12:17:14 -0800 (PST)
-Received: by mail-lj1-x243.google.com with SMTP id b9so18569103ljr.5
-        for <linux-doc@vger.kernel.org>; Tue, 29 Nov 2022 12:17:14 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=to:subject:message-id:date:from:reply-to:mime-version:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=SzBlYeGeT15Xra75w9IZDBjQ7Da3XKSmRdlnDJDYrko=;
-        b=V8rSLb9Cs+i68CS6FbNcHSzuXpNa7yfMGlgpB/hYq17dea7RA7JaIcu5YagzJ3Md4d
-         +CgVOFn5+lvnglvRT3zxVo0NuhAUY5ynUvmMAQio8IEwlte3rQ7SCjUw7xj3g/X9vHQG
-         sSiZ+hg09gyOQnZrqLiKcSBrteG/r+fx/2Hx6ctl78XXZhNMRYLlMcq0F6iWf9G20VVT
-         hg9BijPXqej0Mltas3xYw2m2Z3GJPTW/rTBcsNdlctk+6UVKnS8pYu1E2NM5QrJzaDqu
-         XrfFFOnwPSioPweSHCvTDmEgI6kBRoS4wCGs0qoZ8oh9CkqCFHbnjTbBBoEoVMVdrh1K
-         JlLA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=to:subject:message-id:date:from:reply-to:mime-version
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=SzBlYeGeT15Xra75w9IZDBjQ7Da3XKSmRdlnDJDYrko=;
-        b=0tNKDOX99PhY0rKNTM8kXkd+vXvUgnzGbJPvC6PibeU/ZhNF98oz1RjMagBQiUIGA7
-         mk3RXNqGfV3ofX09Ee5/yVBndZPq17OURrSfY8AgYRCmTnVBxkP2Rxx8ayU5ie7RkYL6
-         Sn8nZ8A4+uTQGsHFLmMPo5CDO5ZAE/iRkzIfyZM1zbdQqE/91/TYSKx1T0/f5z1gB8h6
-         VPjE+4rwKTeSjsGU9c3RFFV4cILqJhfgPPOUXAWWCWt4puI+FgrVu2f4A5w7JFItHGiu
-         yHCiv5wIdj2hMBcwN1UeulJl0BhPGcRHs+Wuhhd49fkglErMFv23ZyT+7FYRTzG8nz9E
-         siCg==
-X-Gm-Message-State: ANoB5pnnYtX091w/vv+fwCYlCaif8BboGSj6C+jzpTmDS6p7JsCZITmt
-        WYIlkT259hp/jp1RDdHDDp+h3CBy45S3OZQcMQU=
-X-Google-Smtp-Source: AA0mqf6evAEGpcOA9vXKkbNNPl0sac92/LC/9JJzWJDoQuLJYtxxZ53MbWtwL2p+WTsHqoPsUyU6tRZbHt2evArZ/gs=
-X-Received: by 2002:a2e:2c01:0:b0:279:926e:c9b9 with SMTP id
- s1-20020a2e2c01000000b00279926ec9b9mr7205661ljs.170.1669753032468; Tue, 29
- Nov 2022 12:17:12 -0800 (PST)
+        with ESMTP id S237097AbiK2Vyu (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 29 Nov 2022 16:54:50 -0500
+Received: from correos.bolipuertos.gob.ve.bolipuertos.gob.ve (correo.bolipuertos.gob.ve [190.202.28.106])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id ACDD62A73E;
+        Tue, 29 Nov 2022 13:54:49 -0800 (PST)
+Received: from correo.bolipuertos.gob.ve ([10.50.23.160])
+        by correos.bolipuertos.gob.ve.bolipuertos.gob.ve  with ESMTP id 2ATLsNhd005417-2ATLsNhf005417
+        (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NO);
+        Tue, 29 Nov 2022 17:54:23 -0400
+Received: from localhost (localhost [127.0.0.1])
+        by correo.bolipuertos.gob.ve (Postfix) with ESMTP id 8D08BAC27C7;
+        Tue, 29 Nov 2022 17:54:23 -0400 (-04)
+Received: from correo.bolipuertos.gob.ve ([127.0.0.1])
+        by localhost (correo.bolipuertos.gob.ve [127.0.0.1]) (amavisd-new, port 10032)
+        with ESMTP id ryAjJB5XC0dO; Tue, 29 Nov 2022 17:54:23 -0400 (-04)
+Received: from localhost (localhost [127.0.0.1])
+        by correo.bolipuertos.gob.ve (Postfix) with ESMTP id 54500AC280E;
+        Tue, 29 Nov 2022 17:54:23 -0400 (-04)
+X-Virus-Scanned: amavisd-new at bolipuertos.gob.ve
+Received: from correo.bolipuertos.gob.ve ([127.0.0.1])
+        by localhost (correo.bolipuertos.gob.ve [127.0.0.1]) (amavisd-new, port 10026)
+        with ESMTP id JSxj1upjBCT5; Tue, 29 Nov 2022 17:54:23 -0400 (-04)
+Received: from [103.125.190.179] (unknown [103.125.190.179])
+        by correo.bolipuertos.gob.ve (Postfix) with ESMTPSA id 58F2CAC27C7;
+        Tue, 29 Nov 2022 17:54:17 -0400 (-04)
+Content-Type: text/plain; charset="iso-8859-1"
 MIME-Version: 1.0
-Received: by 2002:a05:651c:a0a:0:0:0:0 with HTTP; Tue, 29 Nov 2022 12:17:11
- -0800 (PST)
-Reply-To: mr.abraham022@gmail.com
-From:   "Mr.Abraham" <chiogb00@gmail.com>
-Date:   Tue, 29 Nov 2022 20:17:11 +0000
-Message-ID: <CAAtWbkGWPPXRSpGX5T1vKAteDPKwR6CfGc1Z4UATifQAqhUz6g@mail.gmail.com>
-Subject: hi
-To:     undisclosed-recipients:;
-Content-Type: text/plain; charset="UTF-8"
-X-Spam-Status: No, score=4.9 required=5.0 tests=BAYES_50,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_ENVFROM_END_DIGIT,
-        FREEMAIL_FROM,FREEMAIL_REPLYTO,FREEMAIL_REPLYTO_END_DIGIT,
-        RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,SPF_PASS,T_HK_NAME_FM_MR_MRS,
-        UNDISC_FREEM autolearn=no autolearn_force=no version=3.4.6
-X-Spam-Level: ****
+Content-Transfer-Encoding: 8BIT
+Content-Description: Mail message body
+Subject: Strategic plan on(ROI)
+To:     Recipients <cindy@cgracephoto.com>
+From:   "Mr.IgorS. Lvovich" <cindy@cgracephoto.com>
+Date:   Tue, 29 Nov 2022 13:54:11 -0800
+Reply-To: richad.tang@yahoo.com.hk
+Message-Id: <20221129215417.58F2CAC27C7@correo.bolipuertos.gob.ve>
+X-FE-Last-Public-Client-IP: 103.125.190.179
+X-FE-Policy-ID: 1:1:2:SYSTEM
+X-Spam-Status: Yes, score=6.7 required=5.0 tests=BAYES_50,
+        FREEMAIL_FORGED_REPLYTO,HK_NAME_MR_MRS,KHOP_HELO_FCRDNS,
+        RCVD_IN_BL_SPAMCOP_NET,RCVD_IN_MSPIKE_H2,RCVD_IN_SBL,
+        RCVD_IN_VALIDITY_RPBL,SPF_FAIL,SPF_HELO_NONE,TO_EQ_FM_DOM_SPF_FAIL,
+        TO_EQ_FM_SPF_FAIL autolearn=no autolearn_force=no version=3.4.6
+X-Spam-Report: *  1.3 RCVD_IN_BL_SPAMCOP_NET RBL: Received via a relay in
+        *      bl.spamcop.net
+        *      [Blocked - see <https://www.spamcop.net/bl.shtml?103.125.190.179>]
+        *  0.8 BAYES_50 BODY: Bayes spam probability is 40 to 60%
+        *      [score: 0.5000]
+        *  0.1 RCVD_IN_SBL RBL: Received via a relay in Spamhaus SBL
+        *      [103.125.190.179 listed in zen.spamhaus.org]
+        *  1.3 RCVD_IN_VALIDITY_RPBL RBL: Relay in Validity RPBL,
+        *      https://senderscore.org/blocklistlookup/
+        *      [190.202.28.106 listed in bl.score.senderscore.com]
+        * -0.0 RCVD_IN_MSPIKE_H2 RBL: Average reputation (+2)
+        *      [190.202.28.106 listed in wl.mailspike.net]
+        *  0.0 SPF_FAIL SPF: sender does not match SPF record (fail)
+        *      [SPF failed: Please see http://www.openspf.org/Why?s=mfrom;id=cindy%40cgracephoto.com;ip=190.202.28.106;r=lindbergh.monkeyblade.net]
+        *  0.0 SPF_HELO_NONE SPF: HELO does not publish an SPF Record
+        *  1.0 HK_NAME_MR_MRS No description available.
+        *  2.1 FREEMAIL_FORGED_REPLYTO Freemail in Reply-To, but not From
+        *  0.0 TO_EQ_FM_SPF_FAIL To == From and external SPF failed
+        *  0.0 TO_EQ_FM_DOM_SPF_FAIL To domain == From domain and external SPF
+        *       failed
+        *  0.0 KHOP_HELO_FCRDNS Relay HELO differs from its IP's reverse DNS
+X-Spam-Level: ******
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-My Greeting, Did you receive the letter i sent to you. Please answer me.
-Regard, Mr.Abraham
+Hello
+I will like to use the liberty of this medium to inform you as a consultant,that my principal is interested in investing his bond/funds as a silent business partner in your company.Taking into proper
+consideration the Return on Investment(ROI) based on a ten (10) year strategic plan.
+I shall give you details when you reply.
+
+Regards,
+Igor Lvovich
