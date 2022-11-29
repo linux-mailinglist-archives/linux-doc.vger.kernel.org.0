@@ -2,239 +2,359 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id E372C63C09A
-	for <lists+linux-doc@lfdr.de>; Tue, 29 Nov 2022 14:10:04 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 87F1263C0DB
+	for <lists+linux-doc@lfdr.de>; Tue, 29 Nov 2022 14:20:48 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S232884AbiK2NKB (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 29 Nov 2022 08:10:01 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:50320 "EHLO
+        id S229818AbiK2NUr (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 29 Nov 2022 08:20:47 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:33190 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S232562AbiK2NJ7 (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 29 Nov 2022 08:09:59 -0500
-Received: from mx0b-0016f401.pphosted.com (mx0b-0016f401.pphosted.com [67.231.156.173])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 9758559160;
-        Tue, 29 Nov 2022 05:09:58 -0800 (PST)
-Received: from pps.filterd (m0045851.ppops.net [127.0.0.1])
-        by mx0b-0016f401.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id 2ATBxhCh022460;
-        Tue, 29 Nov 2022 05:09:51 -0800
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=marvell.com; h=from : to : cc :
- subject : date : message-id : in-reply-to : references : mime-version :
- content-transfer-encoding : content-type; s=pfpt0220;
- bh=V8Qi1qev7WneDs1w4LFJmudicBVWSIWv6DZvNX/IwWA=;
- b=fGdWuQIhIEd+tyAzzzBwgGnrUDMh5wPwCDRUiaCdmg2uZ4TtAiNckS7OWsY0RYqnlinB
- efX6xVW4acsWTptcUSsoTpiUk1BZ+1HAz2ShArK6Fm5JfcNeewzmdvdpAGSzU8Z5ViYe
- J42WpLZKSVUSGdvIpoT4GWuPNTj6Lyj/TvmoE+X1uZIZPOfgt7Ap90Oq0jilu4lFNOQr
- wpv6o4pjg2ldFuuEMzdC7LJ4fwPg9hUQ+EC+gEeQxsZ75DQBMc1H30LnisjSbWh/9KV6
- r4ai8GhICfX16UepiTOAtZhtcgZh/ttXtGK+mNU1GeIuhsG9g5/FEE3TOTWkYaJp2mP3 LA== 
-Received: from dc5-exch02.marvell.com ([199.233.59.182])
-        by mx0b-0016f401.pphosted.com (PPS) with ESMTPS id 3m3k6wbcp7-1
-        (version=TLSv1.2 cipher=ECDHE-RSA-AES256-SHA384 bits=256 verify=NOT);
-        Tue, 29 Nov 2022 05:09:51 -0800
-Received: from DC5-EXCH01.marvell.com (10.69.176.38) by DC5-EXCH02.marvell.com
- (10.69.176.39) with Microsoft SMTP Server (TLS) id 15.0.1497.18; Tue, 29 Nov
- 2022 05:09:48 -0800
-Received: from maili.marvell.com (10.69.176.80) by DC5-EXCH01.marvell.com
- (10.69.176.38) with Microsoft SMTP Server id 15.0.1497.2 via Frontend
- Transport; Tue, 29 Nov 2022 05:09:48 -0800
-Received: from sburla-PowerEdge-T630.caveonetworks.com (unknown [10.106.27.217])
-        by maili.marvell.com (Postfix) with ESMTP id 820B13F7086;
-        Tue, 29 Nov 2022 05:09:48 -0800 (PST)
-From:   Veerasenareddy Burru <vburru@marvell.com>
-To:     <netdev@vger.kernel.org>, <linux-kernel@vger.kernel.org>,
-        <lironh@marvell.com>, <aayarekar@marvell.com>,
-        <sedara@marvell.com>, <sburla@marvell.com>
-CC:     <linux-doc@vger.kernel.org>,
-        Veerasenareddy Burru <vburru@marvell.com>,
-        "David S. Miller" <davem@davemloft.net>,
-        Eric Dumazet <edumazet@google.com>,
-        Jakub Kicinski <kuba@kernel.org>,
-        Paolo Abeni <pabeni@redhat.com>
-Subject: [PATCH net-next v2 9/9] octeon_ep: add heartbeat monitor
-Date:   Tue, 29 Nov 2022 05:09:32 -0800
-Message-ID: <20221129130933.25231-10-vburru@marvell.com>
-X-Mailer: git-send-email 2.36.0
-In-Reply-To: <20221129130933.25231-1-vburru@marvell.com>
-References: <20221129130933.25231-1-vburru@marvell.com>
+        with ESMTP id S229773AbiK2NUq (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 29 Nov 2022 08:20:46 -0500
+Received: from mail-yb1-xb2a.google.com (mail-yb1-xb2a.google.com [IPv6:2607:f8b0:4864:20::b2a])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 46E0321813
+        for <linux-doc@vger.kernel.org>; Tue, 29 Nov 2022 05:20:45 -0800 (PST)
+Received: by mail-yb1-xb2a.google.com with SMTP id l67so17420607ybl.1
+        for <linux-doc@vger.kernel.org>; Tue, 29 Nov 2022 05:20:45 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=KcmMHtFArVsxc+G/xoaiHhB3Vq1tHgQdTzX99GzoaVE=;
+        b=UUtTV6G4KOptFxKfRiHFpCE023EfcGcWCS6IdiaAG8cRsdzW/Gq9wfoKH1Y5NVgnD8
+         d6kgKeIJscm8m3YFvonS31hWlcuedgvtA3pCVEEGRsBPMQ/Jnf62NlSxh3tNinzq+ywZ
+         xl8eXTEFrpiIBwmwZ8M9SYj8RyhtvObjTQAvApgP4ENzqrBSj5C8oFHhUkAlUcDl3j+X
+         veANV8wAIwEr7Og5Dg/OCswcp1kiQuqHL6SQZi0ZsgnH14TIaUTnr0+T/QqF3PLeQn0w
+         0l1XKW7/wUPBTLuGOPTAnxzUpXMIxd4+sUZfSq3HXZydsbLrGVZPhVfb0qDntE1pDKVO
+         AeAw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=KcmMHtFArVsxc+G/xoaiHhB3Vq1tHgQdTzX99GzoaVE=;
+        b=sY/TsG9qIvqg2Ty0pAYxsvcfxVB9SeQYbwy61hy9VD/x5HLYnHU5RhszNWTN7MxSEk
+         3CedLbk5AIKax2IbD1yMgP78caZYGrsZUysaBER5IMOusI0M58dlt+dtxVjjsYi7ve3k
+         8zyybA2dsfuXsi3dyU3h36GxqyjiDz4qWoOY4+IW0lK5MvYppZD4JeToIXgNyusMojL+
+         9t7/zDONHEEAeVafqrKGcFlNpfa1wNxTikxDkaeerdU+nHYKrbsQJetuW03jxI3lVezg
+         3904oCG4VAyn4WKT5GiZ1kmoZVKluDEUfaTi9OYN+EsFca/0hbJeu/R0pF26cNZjJV9P
+         rVyA==
+X-Gm-Message-State: ANoB5pnaE7aHxT4S4gUsQe9q+ZEnUe4mPOTcqYd7kPOS7ch8qGJukC05
+        xhwXqLsXixtl01+2uevdJVKqBZQgHnsk2QyNWVY=
+X-Google-Smtp-Source: AA0mqf7DnzwsNm7jfKGSgqmF2qCFYYh2m9uHcXPFxeajqKi5arYCAhZ3uBAxi92ol5LRbFnMNlaNP66NfbEs6zrWAE4=
+X-Received: by 2002:a25:41d1:0:b0:6f0:8cc2:22ac with SMTP id
+ o200-20020a2541d1000000b006f08cc222acmr27560226yba.303.1669728044066; Tue, 29
+ Nov 2022 05:20:44 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Proofpoint-GUID: 6p87UxuavVPynHQFDmiTPSmL5FQIfcW2
-X-Proofpoint-ORIG-GUID: 6p87UxuavVPynHQFDmiTPSmL5FQIfcW2
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.219,Aquarius:18.0.895,Hydra:6.0.545,FMLib:17.11.122.1
- definitions=2022-11-29_08,2022-11-29_01,2022-06-22_01
-X-Spam-Status: No, score=-2.8 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_LOW,SPF_HELO_NONE,
-        SPF_NONE autolearn=ham autolearn_force=no version=3.4.6
+References: <cover.1669686320.git.siyanteng@loongson.cn> <653b590c8e7ca42faff18cabfceb9b7f4b2971c1.1669686320.git.siyanteng@loongson.cn>
+ <29198961-5100-8e8c-f5a2-87d15769c550@xen0n.name> <6b84b57f-5293-0636-7a91-235aea910b7a@loongson.cn>
+In-Reply-To: <6b84b57f-5293-0636-7a91-235aea910b7a@loongson.cn>
+From:   yanteng si <siyanteng01@gmail.com>
+Date:   Tue, 29 Nov 2022 21:20:32 +0800
+Message-ID: <CAEensMz+PkLeGmxwwf4_EWXp9cgAd1egGZEujBa1q5=YHviieg@mail.gmail.com>
+Subject: Re: [PATCH v4 1/2] docs/LoongArch: Add booting
+To:     Yanteng Si <siyanteng@loongson.cn>
+Cc:     WANG Xuerui <kernel@xen0n.name>, chenhuacai@kernel.org,
+        corbet@lwn.net, alexs@kernel.org, seakeel@gmail.com,
+        wu.xiangcheng@linux.dev, jiaxun.yang@flygoat.com,
+        liuyun@loongson.cn, linux-doc@vger.kernel.org,
+        loongarch@lists.linux.dev, Xiaotian Wu <wuxiaotian@loongson.cn>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Spam-Status: No, score=-1.8 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_ENVFROM_END_DIGIT,
+        FREEMAIL_FROM,RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,SPF_PASS autolearn=ham
+        autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Monitor periodic heartbeat messages from device firmware.
-Presence of heartbeat indicates the device is active and running.
-If the heartbeat is missed for configured interval indicates
-firmware has crashed and device is unusable; in this case, PF driver
-stops and uninitialize the device.
+Yanteng Si <siyanteng@loongson.cn> =E4=BA=8E2022=E5=B9=B411=E6=9C=8829=E6=
+=97=A5=E5=91=A8=E4=BA=8C 21:04=E5=86=99=E9=81=93=EF=BC=9A
+>
+>
+> On 11/29/22 10:40, WANG Xuerui wrote:
+>
+> On 11/29/22 09:52, Yanteng Si wrote:
+>
+> Describes the meaning and value of the image header field.
+>
+> Suggested-by: Xiaotian Wu <wuxiaotian@loongson.cn>
+> Signed-off-by: Yanteng Si <siyanteng@loongson.cn>
+> ---
+>   Documentation/loongarch/booting.rst | 89 +++++++++++++++++++++++++++++
+>   Documentation/loongarch/index.rst   |  1 +
+>   2 files changed, 90 insertions(+)
+>   create mode 100644 Documentation/loongarch/booting.rst
+>
+> diff --git a/Documentation/loongarch/booting.rst b/Documentation/loongarc=
+h/booting.rst
+> new file mode 100644
+> index 000000000000..90456f713c48
+> --- /dev/null
+> +++ b/Documentation/loongarch/booting.rst
+> @@ -0,0 +1,89 @@
+> +.. SPDX-License-Identifier: GPL-2.0
+> +
+> +=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+> +=E5=90=AF=E5=8A=A8 LoongArch Linux
+>
+>
+> Forgot to translate this? ;-)
+>
+> Also it's probably more idiomatic to use the "Linux/LoongArch" convention=
+ throughout, as can be seen from similar previous usages such as "Linux/Alp=
+ha", "Linux/IA64", "Linux/PA-RISC" or "Linux/MIPS". (Of course it's "RISC-V=
+ Linux" according to my grep result but it's probably better to stick to tr=
+aditions here IMO.)
+>
+> OK!
+>
+> Booting Linux/LoongArch
+>
+>
+> +=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+> +
+> +:Author: Yanteng Si <siyanteng@loongson.cn>
+> +:Date:   18 Nov 2022
+> +
+> +BootLoader passing parameters to the kernel
+>
+> "Bootloader" or "Boot loader", but not "BootLoader".
+>
+> Ok!
+>
+> Bootloader
+>
+> +=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+> +
+> +LoongArch supports ACPI and FDT. The information that needs to be
+> +passed to the kernel are memmap, initrd, cmdline, fdt, etc.
+>
+> Perhaps "... includes the memmap, the initrd, the command line, optionall=
+y the FDT, and so on." could be better?
+>
+> Great!
+>
+> The information that needs to be passed to the kernel includes the memmap=
+, the initrd, the command line, optionally the FDT, and so on.
+>
+> +On LoongArch machines, the BootLoader (EFISTUB/Grub) will pass three
+> +valid parameters to the kernel, which are::
+>
+>
+> The "on LoongArch machines" seems redundant, we're a LoongArch document s=
+o it's kinda implied information. Also drop "valid" as it's quite obvious t=
+oo.
+>
+> And it's not the bootloader that provides the kernel with those 3 argumen=
+ts, kernel_entry isn't directly called by firmware but rather by the EFI st=
+ub. And I doubt the FDT boot flow invokes kernel_entry either. Let's clarif=
+y things then, make the whole paragraph something like this:
+>
+> "The kernel is passed the following arguments on `kernel_entry`::"
+>
+> OK!
+>
+>
+> +
+> +      a0 =3D efi_boot
+> +      a1 =3D cmdline
+> +      a2 =3D systemtable
+> +
+> +where a1 is a pointer to cmdline, a2 contains the memmap, initrd,
+> +fdt(opt) and other information that needs to be passed to the kernel.
+>
+>
+> Please use a list for enumerating the 3 arguments.
+>
+> Also the list belongs to the previous sentence, so you shouldn't start th=
+is paragraph with "where" but rather please use a new sentence. And the fac=
+t that a0 is a flag indicating whether full UEFI capabilities are present n=
+eeds mentioning too.
+>
+> "`efi_boot` is a flag indicating whether this boot environment is fully U=
+EFI-compliant. `cmdline` is a pointer to the kernel command line. `systemta=
+ble` points to the EFI system table. All pointers involved at this stage ar=
+e in physical addresses."
+>
+> OK, thanks!
+>
+>
+> +
+> +Boot image header in LoongArch Linux
+>
+> "Header of Linux/LoongArch kernel images"
+>
+> OK!
+>
+> +=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+> +
+> +The following 64-byte header is present in decompressed Linux
+> +kernel image::
+>
+>
+> Everything becomes crystal clear when you somehow indicate it's just the =
+DOS header of the EFI stub. Also AFAIK no LoongArch bootloader decompress t=
+he kernel image themselves, so it's not like there exists any "compressed L=
+inux kernel image".
+>
+> "Linux/LoongArch kernel images are EFI images. Being PE files, they have =
+a 64-byte header structured like::"
+>
+> OK!
+>
+>
+> +
+> +    u32    MZ_MAGIC        /* "MZ", MS-DOS header */
+> +    u32    res0 =3D 0        /* reserved */
+> +    u64    kernel_entry        /* Kernel entry point */
+> +    u64    _end - _text        /* Kernel image effective size */
+> +    u64    0            /* Kernel image load offset from start of RAM */
+> +    u64    res1 =3D 0        /* reserved */
+> +    u64    res2 =3D 0        /* reserved */
+> +    u64    res3 =3D 0        /* reserved */
+> +    u32    res4 =3D 0        /* reserved */
+> +    u32    pe_header - _head    /* Offset to the PE header */
+> +
+> +Header notes
+> +=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+>
+> No need for a new section: the rest are all explanations to the structure=
+ mentioned above.
+>
+> OK!
+>
+> +
+> +Currently, LoongArch has removed the "magic" field.
+>
+>
+> Needs more background information, and (IMO) unnatural topicalization.
+>
+> "LoongArch has abolished the use of a magic number for identifying the bo=
+ot image as one for the LoongArch, because ..."
+>
+> Right now, unfortunately I don't have enough time for providing all the d=
+etails for the justification of removal of magic number, but you can refer =
+to previous (long) threads where the earlier versions of the arch EFI boot =
+code were reviewed. Pay attention especially to ardb's very detailed and in=
+-depth explanation, you want to "transplant" the info here.
+>
+> OK!
+>
+>
+> +
+> +According to the EFI specification, the PE/COFF image file header is
+> +required at the beginning of the kernel image; the LoongArch kernel
+> +supports the EFI stub, so the first two bytes of the kernel image header
+> +are "MZ" magic characters, and 0x3c should point to the rest of the
+> +PE/COFF file header, between which The kernel entry point, image
+> +effectivesize, and image load offset layout are as follows::
+> +
+> +          +-----------------------------------------------+
+> +          |  0  |  1  |  2  |  3  |  4  |  5  |  6  |  7  |
+> +          +-----------------------------------------------+
+> +    0x00: |       MZ_MAGIC        |          res0         |
+> +          +-----------------------------------------------+
+> +    0x08: |                 kernel_entry                  |
+> +          +-----------------------------------------------+
+> +    0x10: |                  _end - _text                 |
+> +          +-----------------------------------------------+
+> +    0x18: |                       0                       |
+> +          +-----------------------------------------------+
+> +    0x20: |                      res1                     |
+> +          +-----------------------------------------------+
+> +    0x28: |                      res2                     |
+> +          +-----------------------------------------------+
+> +    0x30: |                      res3                     |
+> +          +-----------------------------------------------+
+> +    0x38: |          res4         |       PE header       |
+> +          +-----------------------------------------------+
+>
+>
+> This is repeating the structure described above, only in a pictorial form=
+. I think only one needs to be kept.
+>
+> I don't think so.
+>
+> The above corresponds to the struct in grub, this diagram is much more re=
+adable.
+>
+>
+>
+> +
+> +All bit fields are in little endian:
+> +
+> +    - MZ: Effective length of 2 bytes;
+> +
+> +    - kernel entry point: leaving 6 bytes blank in front, starting
+> +      from 0x8, with a effective length of 8 bytes;
+> +
+> +    - kernel image effective size: Immediately following the kernel
+> +      entry point, with a effective length of 8 bytes, this field is
+> +      required for the bootloader;
+>
+>
+> The boot loader probably doesn't care. GRUB2 just chain-loads after recog=
+nizing the image as valid EFI application, and the firmware most certainly =
+just do its routine EFI application launch too without looking at the conte=
+nts here that are all in fact just reserved space. (IIUC only the MZ signat=
+ure and the PE header offset matter here; everything in between is actually=
+ part of the DOS stub which is ignored on all modern platforms.)
+>
+> So, please clarify which component requires this info; is it the EFI stub=
+ instead? (I haven't checked myself though due to limited review time. Sorr=
+y for that.)
+>
+> I wrote this article with partial reference to riscv.
+>
+> See Documentation/riscv/boot-image-header.rst line 61:
+>
+> - Image size is mandatory for boot loader to load kernel image. Booting w=
+ill
+>   fail otherwise.
+>
+>
+> +
+> +    - kernel image load offset: Immediately following the kernel
+> +      image effective size, with a effective length of 8 bytes;
+> +
+> +    - Offset to the PE header: leaving 28 bytes blank in front,
+> +      starting from 0x3c, with a effective length of 4 bytes.
+>
+> Drop explanation for trivial things like MZ or the PE header offset, they=
+'re just common PE format thing, and totally unrelated to Linux.
+>
+> Here's just a simple description of the header bit fields, which is a pre=
+requisite for understanding the boot image header.
+>
+>
+> Thanks,
+>
+> Yanteng
+>
+> diff --git a/Documentation/loongarch/index.rst b/Documentation/loongarch/=
+index.rst
+> index aaba648db907..df0174d6d227 100644
+> --- a/Documentation/loongarch/index.rst
+> +++ b/Documentation/loongarch/index.rst
+> @@ -10,6 +10,7 @@ LoongArch Architecture
+>        introduction
+>      irq-chip-model
+> +   booting
+>        features
+>
+>
+>
+Sorry.
 
-Signed-off-by: Veerasenareddy Burru <vburru@marvell.com>
-Signed-off-by: Abhijit Ayarekar <aayarekar@marvell.com>
----
-v1 -> v2:
- * reworked the patch for changes made to preceding patches.
- * removed device status oct->status, as it is not required with the
-   modified implementation.
+I don't know why my email client sent the html part, which caused the
+email to be rejected by the list, so I re-copied it to the list.
 
- .../marvell/octeon_ep/octep_cn9k_pf.c         |  9 +++++
- .../ethernet/marvell/octeon_ep/octep_config.h |  6 +++
- .../ethernet/marvell/octeon_ep/octep_main.c   | 37 +++++++++++++++++++
- .../ethernet/marvell/octeon_ep/octep_main.h   |  7 ++++
- .../marvell/octeon_ep/octep_regs_cn9k_pf.h    |  2 +
- 5 files changed, 61 insertions(+)
-
-diff --git a/drivers/net/ethernet/marvell/octeon_ep/octep_cn9k_pf.c b/drivers/net/ethernet/marvell/octeon_ep/octep_cn9k_pf.c
-index 4840133477dc..9c6b2a95bc18 100644
---- a/drivers/net/ethernet/marvell/octeon_ep/octep_cn9k_pf.c
-+++ b/drivers/net/ethernet/marvell/octeon_ep/octep_cn9k_pf.c
-@@ -16,6 +16,9 @@
- #define CTRL_MBOX_MAX_PF	128
- #define CTRL_MBOX_SZ		((size_t)(0x400000 / CTRL_MBOX_MAX_PF))
- 
-+#define FW_HB_INTERVAL_IN_SECS		1
-+#define FW_HB_MISS_COUNT		10
-+
- /* Names of Hardware non-queue generic interrupts */
- static char *cn93_non_ioq_msix_names[] = {
- 	"epf_ire_rint",
-@@ -249,6 +252,10 @@ static void octep_init_config_cn93_pf(struct octep_device *oct)
- 	conf->ctrl_mbox_cfg.barmem_addr = (void __iomem *)oct->mmio[2].hw_addr +
- 					   (0x400000ull * 8) +
- 					   (link * CTRL_MBOX_SZ);
-+
-+	conf->hb_interval = FW_HB_INTERVAL_IN_SECS;
-+	conf->max_hb_miss_cnt = FW_HB_MISS_COUNT;
-+
- }
- 
- /* Setup registers for a hardware Tx Queue  */
-@@ -407,6 +414,8 @@ static int octep_poll_non_ioq_interrupts_cn93_pf(struct octep_device *oct)
- 		octep_write_csr64(oct, CN93_SDP_EPF_OEI_RINT, reg0);
- 		if (reg0 & CN93_SDP_EPF_OEI_RINT_DATA_BIT_MBOX)
- 			queue_work(octep_wq, &oct->ctrl_mbox_task);
-+		else if (reg0 & CN93_SDP_EPF_OEI_RINT_DATA_BIT_HBEAT)
-+			atomic_set(&oct->hb_miss_cnt, 0);
- 
- 		handled = 1;
- 	}
-diff --git a/drivers/net/ethernet/marvell/octeon_ep/octep_config.h b/drivers/net/ethernet/marvell/octeon_ep/octep_config.h
-index f208f3f9a447..df7cd39d9fce 100644
---- a/drivers/net/ethernet/marvell/octeon_ep/octep_config.h
-+++ b/drivers/net/ethernet/marvell/octeon_ep/octep_config.h
-@@ -200,5 +200,11 @@ struct octep_config {
- 
- 	/* ctrl mbox config */
- 	struct octep_ctrl_mbox_config ctrl_mbox_cfg;
-+
-+	/* Configured maximum heartbeat miss count */
-+	u32 max_hb_miss_cnt;
-+
-+	/* Configured firmware heartbeat interval in secs */
-+	u32 hb_interval;
- };
- #endif /* _OCTEP_CONFIG_H_ */
-diff --git a/drivers/net/ethernet/marvell/octeon_ep/octep_main.c b/drivers/net/ethernet/marvell/octeon_ep/octep_main.c
-index cd0d77ceb868..751a3a9c576f 100644
---- a/drivers/net/ethernet/marvell/octeon_ep/octep_main.c
-+++ b/drivers/net/ethernet/marvell/octeon_ep/octep_main.c
-@@ -903,6 +903,38 @@ static void octep_intr_poll_task(struct work_struct *work)
- 			   msecs_to_jiffies(OCTEP_INTR_POLL_TIME_MSECS));
- }
- 
-+/**
-+ * octep_hb_timeout_task - work queue task to check firmware heartbeat.
-+ *
-+ * @work: pointer to hb work_struct
-+ *
-+ * Check for heartbeat miss count. Uninitialize oct device if miss count
-+ * exceeds configured max heartbeat miss count.
-+ *
-+ **/
-+static void octep_hb_timeout_task(struct work_struct *work)
-+{
-+	struct octep_device *oct = container_of(work, struct octep_device,
-+						hb_task.work);
-+
-+	int miss_cnt;
-+
-+	atomic_inc(&oct->hb_miss_cnt);
-+	miss_cnt = atomic_read(&oct->hb_miss_cnt);
-+	if (miss_cnt < oct->conf->max_hb_miss_cnt) {
-+		queue_delayed_work(octep_wq, &oct->hb_task,
-+				   msecs_to_jiffies(oct->conf->hb_interval * 1000));
-+		return;
-+	}
-+
-+	dev_err(&oct->pdev->dev, "Missed %u heartbeats. Uninitializing\n",
-+		miss_cnt);
-+	rtnl_lock();
-+	if (netif_running(oct->netdev))
-+		octep_stop(oct->netdev);
-+	rtnl_unlock();
-+}
-+
- /**
-  * octep_ctrl_mbox_task - work queue task to handle ctrl mbox messages.
-  *
-@@ -979,6 +1011,10 @@ int octep_device_setup(struct octep_device *oct)
- 	if (ret)
- 		return ret;
- 
-+	atomic_set(&oct->hb_miss_cnt, 0);
-+	INIT_DELAYED_WORK(&oct->hb_task, octep_hb_timeout_task);
-+	queue_delayed_work(octep_wq, &oct->hb_task,
-+			   msecs_to_jiffies(oct->conf->hb_interval * 1000));
- 	return 0;
- 
- unsupported_dev:
-@@ -1004,6 +1040,7 @@ static void octep_device_cleanup(struct octep_device *oct)
- 
- 	octep_delete_pfvf_mbox(oct);
- 	octep_ctrl_net_uninit(oct);
-+	cancel_delayed_work_sync(&oct->hb_task);
- 
- 	oct->hw_ops.soft_reset(oct);
- 	for (i = 0; i < OCTEP_MMIO_REGIONS; i++) {
-diff --git a/drivers/net/ethernet/marvell/octeon_ep/octep_main.h b/drivers/net/ethernet/marvell/octeon_ep/octep_main.h
-index ad6d324bd525..beedf8dc841d 100644
---- a/drivers/net/ethernet/marvell/octeon_ep/octep_main.h
-+++ b/drivers/net/ethernet/marvell/octeon_ep/octep_main.h
-@@ -286,6 +286,13 @@ struct octep_device {
- 	bool poll_non_ioq_intr;
- 	/* Work entry to poll non-ioq interrupts */
- 	struct delayed_work intr_poll_task;
-+
-+	/* Firmware heartbeat timer */
-+	struct timer_list hb_timer;
-+	/* Firmware heartbeat miss count tracked by timer */
-+	atomic_t hb_miss_cnt;
-+	/* Task to reset device on heartbeat miss */
-+	struct delayed_work hb_task;
- };
- 
- static inline u16 OCTEP_MAJOR_REV(struct octep_device *oct)
-diff --git a/drivers/net/ethernet/marvell/octeon_ep/octep_regs_cn9k_pf.h b/drivers/net/ethernet/marvell/octeon_ep/octep_regs_cn9k_pf.h
-index f29c4344fc41..48051e23ef18 100644
---- a/drivers/net/ethernet/marvell/octeon_ep/octep_regs_cn9k_pf.h
-+++ b/drivers/net/ethernet/marvell/octeon_ep/octep_regs_cn9k_pf.h
-@@ -376,5 +376,7 @@
- 
- /* bit 0 for control mbox interrupt */
- #define CN93_SDP_EPF_OEI_RINT_DATA_BIT_MBOX	BIT_ULL(0)
-+/* bit 1 for firmware heartbeat interrupt */
-+#define CN93_SDP_EPF_OEI_RINT_DATA_BIT_HBEAT	BIT_ULL(1)
- 
- #endif /* _OCTEP_REGS_CN9K_PF_H_ */
--- 
-2.36.0
-
+Thanks,
+Yanteng
