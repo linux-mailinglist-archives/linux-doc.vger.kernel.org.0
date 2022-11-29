@@ -2,87 +2,137 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 3CE8D63CAB1
-	for <lists+linux-doc@lfdr.de>; Tue, 29 Nov 2022 22:54:54 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 5873463CBB8
+	for <lists+linux-doc@lfdr.de>; Wed, 30 Nov 2022 00:23:12 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S237061AbiK2Vyw convert rfc822-to-8bit (ORCPT
-        <rfc822;lists+linux-doc@lfdr.de>); Tue, 29 Nov 2022 16:54:52 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:37844 "EHLO
+        id S229457AbiK2XXK (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 29 Nov 2022 18:23:10 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:55410 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S237097AbiK2Vyu (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 29 Nov 2022 16:54:50 -0500
-Received: from correos.bolipuertos.gob.ve.bolipuertos.gob.ve (correo.bolipuertos.gob.ve [190.202.28.106])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id ACDD62A73E;
-        Tue, 29 Nov 2022 13:54:49 -0800 (PST)
-Received: from correo.bolipuertos.gob.ve ([10.50.23.160])
-        by correos.bolipuertos.gob.ve.bolipuertos.gob.ve  with ESMTP id 2ATLsNhd005417-2ATLsNhf005417
-        (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NO);
-        Tue, 29 Nov 2022 17:54:23 -0400
-Received: from localhost (localhost [127.0.0.1])
-        by correo.bolipuertos.gob.ve (Postfix) with ESMTP id 8D08BAC27C7;
-        Tue, 29 Nov 2022 17:54:23 -0400 (-04)
-Received: from correo.bolipuertos.gob.ve ([127.0.0.1])
-        by localhost (correo.bolipuertos.gob.ve [127.0.0.1]) (amavisd-new, port 10032)
-        with ESMTP id ryAjJB5XC0dO; Tue, 29 Nov 2022 17:54:23 -0400 (-04)
-Received: from localhost (localhost [127.0.0.1])
-        by correo.bolipuertos.gob.ve (Postfix) with ESMTP id 54500AC280E;
-        Tue, 29 Nov 2022 17:54:23 -0400 (-04)
-X-Virus-Scanned: amavisd-new at bolipuertos.gob.ve
-Received: from correo.bolipuertos.gob.ve ([127.0.0.1])
-        by localhost (correo.bolipuertos.gob.ve [127.0.0.1]) (amavisd-new, port 10026)
-        with ESMTP id JSxj1upjBCT5; Tue, 29 Nov 2022 17:54:23 -0400 (-04)
-Received: from [103.125.190.179] (unknown [103.125.190.179])
-        by correo.bolipuertos.gob.ve (Postfix) with ESMTPSA id 58F2CAC27C7;
-        Tue, 29 Nov 2022 17:54:17 -0400 (-04)
-Content-Type: text/plain; charset="iso-8859-1"
-MIME-Version: 1.0
-Content-Transfer-Encoding: 8BIT
-Content-Description: Mail message body
-Subject: Strategic plan on(ROI)
-To:     Recipients <cindy@cgracephoto.com>
-From:   "Mr.IgorS. Lvovich" <cindy@cgracephoto.com>
-Date:   Tue, 29 Nov 2022 13:54:11 -0800
-Reply-To: richad.tang@yahoo.com.hk
-Message-Id: <20221129215417.58F2CAC27C7@correo.bolipuertos.gob.ve>
-X-FE-Last-Public-Client-IP: 103.125.190.179
-X-FE-Policy-ID: 1:1:2:SYSTEM
-X-Spam-Status: Yes, score=6.7 required=5.0 tests=BAYES_50,
-        FREEMAIL_FORGED_REPLYTO,HK_NAME_MR_MRS,KHOP_HELO_FCRDNS,
-        RCVD_IN_BL_SPAMCOP_NET,RCVD_IN_MSPIKE_H2,RCVD_IN_SBL,
-        RCVD_IN_VALIDITY_RPBL,SPF_FAIL,SPF_HELO_NONE,TO_EQ_FM_DOM_SPF_FAIL,
-        TO_EQ_FM_SPF_FAIL autolearn=no autolearn_force=no version=3.4.6
-X-Spam-Report: *  1.3 RCVD_IN_BL_SPAMCOP_NET RBL: Received via a relay in
-        *      bl.spamcop.net
-        *      [Blocked - see <https://www.spamcop.net/bl.shtml?103.125.190.179>]
-        *  0.8 BAYES_50 BODY: Bayes spam probability is 40 to 60%
-        *      [score: 0.5000]
-        *  0.1 RCVD_IN_SBL RBL: Received via a relay in Spamhaus SBL
-        *      [103.125.190.179 listed in zen.spamhaus.org]
-        *  1.3 RCVD_IN_VALIDITY_RPBL RBL: Relay in Validity RPBL,
-        *      https://senderscore.org/blocklistlookup/
-        *      [190.202.28.106 listed in bl.score.senderscore.com]
-        * -0.0 RCVD_IN_MSPIKE_H2 RBL: Average reputation (+2)
-        *      [190.202.28.106 listed in wl.mailspike.net]
-        *  0.0 SPF_FAIL SPF: sender does not match SPF record (fail)
-        *      [SPF failed: Please see http://www.openspf.org/Why?s=mfrom;id=cindy%40cgracephoto.com;ip=190.202.28.106;r=lindbergh.monkeyblade.net]
-        *  0.0 SPF_HELO_NONE SPF: HELO does not publish an SPF Record
-        *  1.0 HK_NAME_MR_MRS No description available.
-        *  2.1 FREEMAIL_FORGED_REPLYTO Freemail in Reply-To, but not From
-        *  0.0 TO_EQ_FM_SPF_FAIL To == From and external SPF failed
-        *  0.0 TO_EQ_FM_DOM_SPF_FAIL To domain == From domain and external SPF
-        *       failed
-        *  0.0 KHOP_HELO_FCRDNS Relay HELO differs from its IP's reverse DNS
-X-Spam-Level: ******
+        with ESMTP id S229449AbiK2XXK (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 29 Nov 2022 18:23:10 -0500
+Received: from dfw.source.kernel.org (dfw.source.kernel.org [IPv6:2604:1380:4641:c500::1])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 9ED885289E;
+        Tue, 29 Nov 2022 15:23:09 -0800 (PST)
+Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
+        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+        (No client certificate requested)
+        by dfw.source.kernel.org (Postfix) with ESMTPS id 1BFC06195D;
+        Tue, 29 Nov 2022 23:23:09 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 5A426C433C1;
+        Tue, 29 Nov 2022 23:23:07 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=linux-foundation.org;
+        s=korg; t=1669764188;
+        bh=0fdNX9QhucmvGYsJWGOg9jQeFn+znvsZsA3GeeD73CM=;
+        h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
+        b=oBPkt6FJJWfvsgtGvs6SjxHs/2kYEDb40oxeDjWBuNGLbmZH0jVfpuraJ/TrV9+F4
+         hqoAFA2+L/RlQ1wICENr1s9GsmPkIDc9zBUGenqCJRgb4PHm3qYEnMhYXx+xLEakLb
+         I+GNCiUTX4XFglOckyjmCJUxKp2DIu33twwtFObY=
+Date:   Tue, 29 Nov 2022 15:23:06 -0800
+From:   Andrew Morton <akpm@linux-foundation.org>
+To:     Yicong Yang <yangyicong@huawei.com>
+Cc:     <linux-mm@kvack.org>, <linux-arm-kernel@lists.infradead.org>,
+        <x86@kernel.org>, <catalin.marinas@arm.com>, <will@kernel.org>,
+        <anshuman.khandual@arm.com>, <linux-doc@vger.kernel.org>,
+        <corbet@lwn.net>, <peterz@infradead.org>, <arnd@arndb.de>,
+        <punit.agrawal@bytedance.com>, <linux-kernel@vger.kernel.org>,
+        <darren@os.amperecomputing.com>, <yangyicong@hisilicon.com>,
+        <huzhanyuan@oppo.com>, <lipeifeng@oppo.com>,
+        <zhangshiming@oppo.com>, <guojian@oppo.com>, <realmz6@gmail.com>,
+        <linux-mips@vger.kernel.org>, <openrisc@lists.librecores.org>,
+        <linuxppc-dev@lists.ozlabs.org>, <linux-riscv@lists.infradead.org>,
+        <linux-s390@vger.kernel.org>, Barry Song <21cnbao@gmail.com>,
+        <wangkefeng.wang@huawei.com>, <xhao@linux.alibaba.com>,
+        <prime.zeng@hisilicon.com>,
+        Anshuman Khandual <khandual@linux.vnet.ibm.com>,
+        Barry Song <baohua@kernel.org>
+Subject: Re: [PATCH v7 1/2] mm/tlbbatch: Introduce
+ arch_tlbbatch_should_defer()
+Message-Id: <20221129152306.54b6d439e2a0ca7ece1d1afa@linux-foundation.org>
+In-Reply-To: <20221117082648.47526-2-yangyicong@huawei.com>
+References: <20221117082648.47526-1-yangyicong@huawei.com>
+        <20221117082648.47526-2-yangyicong@huawei.com>
+X-Mailer: Sylpheed 3.8.0beta1 (GTK+ 2.24.33; x86_64-pc-linux-gnu)
+Mime-Version: 1.0
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 7bit
+X-Spam-Status: No, score=-7.4 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,NICE_REPLY_A,RCVD_IN_DNSWL_HI,
+        SPF_HELO_NONE,SPF_PASS autolearn=ham autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Hello
-I will like to use the liberty of this medium to inform you as a consultant,that my principal is interested in investing his bond/funds as a silent business partner in your company.Taking into proper
-consideration the Return on Investment(ROI) based on a ten (10) year strategic plan.
-I shall give you details when you reply.
+On Thu, 17 Nov 2022 16:26:47 +0800 Yicong Yang <yangyicong@huawei.com> wrote:
 
-Regards,
-Igor Lvovich
+> From: Anshuman Khandual <khandual@linux.vnet.ibm.com>
+> 
+> The entire scheme of deferred TLB flush in reclaim path rests on the
+> fact that the cost to refill TLB entries is less than flushing out
+> individual entries by sending IPI to remote CPUs. But architecture
+> can have different ways to evaluate that. Hence apart from checking
+> TTU_BATCH_FLUSH in the TTU flags, rest of the decision should be
+> architecture specific.
+> 
+> ...
+>
+> --- a/arch/x86/include/asm/tlbflush.h
+> +++ b/arch/x86/include/asm/tlbflush.h
+> @@ -240,6 +240,18 @@ static inline void flush_tlb_page(struct vm_area_struct *vma, unsigned long a)
+>  	flush_tlb_mm_range(vma->vm_mm, a, a + PAGE_SIZE, PAGE_SHIFT, false);
+>  }
+>  
+> +static inline bool arch_tlbbatch_should_defer(struct mm_struct *mm)
+> +{
+> +	bool should_defer = false;
+> +
+> +	/* If remote CPUs need to be flushed then defer batch the flush */
+> +	if (cpumask_any_but(mm_cpumask(mm), get_cpu()) < nr_cpu_ids)
+> +		should_defer = true;
+> +	put_cpu();
+> +
+> +	return should_defer;
+> +}
+> +
+>  static inline u64 inc_mm_tlb_gen(struct mm_struct *mm)
+>  {
+>  	/*
+> diff --git a/mm/rmap.c b/mm/rmap.c
+> index 2ec925e5fa6a..a9ab10bc0144 100644
+> --- a/mm/rmap.c
+> +++ b/mm/rmap.c
+> @@ -685,17 +685,10 @@ static void set_tlb_ubc_flush_pending(struct mm_struct *mm, bool writable)
+>   */
+>  static bool should_defer_flush(struct mm_struct *mm, enum ttu_flags flags)
+>  {
+> -	bool should_defer = false;
+> -
+>  	if (!(flags & TTU_BATCH_FLUSH))
+>  		return false;
+>  
+> -	/* If remote CPUs need to be flushed then defer batch the flush */
+> -	if (cpumask_any_but(mm_cpumask(mm), get_cpu()) < nr_cpu_ids)
+> -		should_defer = true;
+> -	put_cpu();
+> -
+> -	return should_defer;
+> +	return arch_tlbbatch_should_defer(mm);
+>  }
+
+I think this conversion could have been done better.
+
+should_defer_flush() is compiled if
+CONFIG_ARCH_WANT_BATCHED_UNMAP_TLB_FLUSH.  So the patch implicitly
+assumes that only x86 implements
+CONFIG_ARCH_WANT_BATCHED_UNMAP_TLB_FLUSH.  Presently true, but what
+happens if sparc (for example) wants to set
+CONFIG_ARCH_WANT_BATCHED_UNMAP_TLB_FLUSH?  Now sparc needs its private
+version of arch_tlbbatch_should_defer(), even if that is identical to
+x86's.
+
+Wouldn't it be better to make arch_tlbbatch_should_defer() a __weak
+function in rmap.c, or a static inline inside #ifndef
+ARCH_HAS_ARCH_TLBBATCH_SHOULD_DEFER, or whatever technique best fits?
+
