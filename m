@@ -2,140 +2,172 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 9022B63C0EF
-	for <lists+linux-doc@lfdr.de>; Tue, 29 Nov 2022 14:22:13 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 8DACA63C166
+	for <lists+linux-doc@lfdr.de>; Tue, 29 Nov 2022 14:46:00 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S233131AbiK2NWJ (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 29 Nov 2022 08:22:09 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:33494 "EHLO
+        id S229936AbiK2Np6 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 29 Nov 2022 08:45:58 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:52742 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S232598AbiK2NVk (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 29 Nov 2022 08:21:40 -0500
-Received: from APC01-PSA-obe.outbound.protection.outlook.com (mail-psaapc01olkn2074.outbound.protection.outlook.com [40.92.52.74])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id B738756573;
-        Tue, 29 Nov 2022 05:21:36 -0800 (PST)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=Pearl6HtDHGRuUhp0Mcej4QZUdoSOuS0zdISN3GVOxnJfQYY9GUQhuYKNC7pf0uRReJTiqmdLrf9qlUGCgiifJalffvS0GOXxzjX9ymKAowCJF9yel4Os580Py5pJWSPtB/vCgUCTqF1kP1KWObcEpsM6QJu4cjqnXb9X847StrLMbznwxjaaz4n/8WcST0e+1MGw2d0xA7F75ZYQdGwUovf4oQVgklXFZljm41hxZGwrmatq4l351kyIH4/oxVViIMWnu1Q0Z1p5wvcuSMPw1riSYA2OEliCdvJFe1qgGt+CrU2/vxC2FHwNIn6A7C4E9T+ArXzn7Jc6QVFElcRGg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=NcHlZyHMmM1LeDIZrUe7hjj/IcsPstLhyYv1534gfn8=;
- b=U4fHos3t/cxMrn+BwpEwIzSt79eZ2YvmMukZmFIQqTJGCNaVX3/yICOo5csX4qMneDUPaF9kF70wIAJL6a3Nl61VR7+9Rord2slS483SNShY8X4T13axaPokxPm90Uq3xtGcbI6wS4GuL+D52Xw9C6BOmNXm99KW2jq65SLa/WWc/hNT+X3BmBCA4QkoVP/EmFnFAbqvTqsvwlF50BilNZRb6WyyhYqBdRRl8K42N3rTcV/mGPEs85rH0YqNMxqY8EFZ5RSwPtOgdmnIiv4xiLUtkp6gTkeqEeVVsU79MSEY14olxKf9PrkCkH24opaMCB/BRKGBgeJIsA1VCMb9yw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=none; dmarc=none;
- dkim=none; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=outlook.com;
- s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=NcHlZyHMmM1LeDIZrUe7hjj/IcsPstLhyYv1534gfn8=;
- b=mTMBxSF9fYKW9maWTQYjRxyo5zN7obgq56dl9XWrOhortjF0/Iws601nwn6LsZNLCykcS7pZCK/qX7vz8N+XmoOL6A64xqVXSCc4D6/YudEHJSkyE+3aiFL69qQrhl6x8AF9ni55Y9N9CxIwP1T7DwBwxVANPAC+xvAVstlbjeIeOhOtb44PTBnl3m3cWYNRW3ZzPRLjNff1v304oBLosjnoMikYOFQli5n+G0tO7AIu1SAiUYtoi1LlYn6S8TeH15vYoLYbJE8LayVlNq4aSHfLq6tFgZao7ok6kmUhefP92c2CCBsNcP9YXz6/NN/g9St/iG9/DNxhHYYrmvcMqA==
-Received: from SL2PR01MB2812.apcprd01.prod.exchangelabs.com
- (2603:1096:100:52::18) by KL1PR01MB5229.apcprd01.prod.exchangelabs.com
- (2603:1096:820:d2::12) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5857.22; Tue, 29 Nov
- 2022 13:21:31 +0000
-Received: from SL2PR01MB2812.apcprd01.prod.exchangelabs.com
- ([fe80::993a:e6a2:ccfc:8cdd]) by SL2PR01MB2812.apcprd01.prod.exchangelabs.com
- ([fe80::993a:e6a2:ccfc:8cdd%4]) with mapi id 15.20.5857.023; Tue, 29 Nov 2022
- 13:21:31 +0000
-From:   Kushagra Verma <kushagra765@outlook.com>
-To:     Will Deacon <will@kernel.org>,
-        Peter Zijlstra <peterz@infradead.org>,
-        Boqun Feng <boqun.feng@gmail.com>,
-        Mark Rutland <mark.rutland@arm.com>,
-        Alan Stern <stern@rowland.harvard.edu>,
-        Andrea Parri <parri.andrea@gmail.com>,
-        Nicholas Piggin <npiggin@gmail.com>,
-        David Howells <dhowells@redhat.com>,
-        Jade Alglave <j.alglave@ucl.ac.uk>,
-        Luc Maranget <luc.maranget@inria.fr>,
-        "Paul E. McKenney" <paulmck@kernel.org>,
-        Akira Yokosawa <akiyks@gmail.com>,
-        Daniel Lustig <dlustig@nvidia.com>,
-        Joel Fernandes <joel@joelfernandes.org>,
-        Jonathan Corbet <corbet@lwn.net>, linux-kernel@vger.kernel.org,
-        linux-arch@vger.kernel.org, linux-doc@vger.kernel.org
-Subject: [PATCH] Documentation: Fixed a typo in atomic_t.txt
-Date:   Tue, 29 Nov 2022 18:50:59 +0530
-Message-ID: <SL2PR01MB281219C24708CE54EC1FC610F8129@SL2PR01MB2812.apcprd01.prod.exchangelabs.com>
-X-Mailer: git-send-email 2.38.1
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-TMN:  [yO4CLxu9Re5qYr6vmjXpx5ZZJhnW9V9SLlz4ihzXMVZl+z4BluHUGlF/glsfLNsO]
-X-ClientProxiedBy: BMXPR01CA0088.INDPRD01.PROD.OUTLOOK.COM
- (2603:1096:b00:54::28) To SL2PR01MB2812.apcprd01.prod.exchangelabs.com
- (2603:1096:100:52::18)
-X-Microsoft-Original-Message-ID: <20221129132059.7027-1-kushagra765@outlook.com>
+        with ESMTP id S229650AbiK2Np6 (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 29 Nov 2022 08:45:58 -0500
+Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.129.124])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 5716F1D323
+        for <linux-doc@vger.kernel.org>; Tue, 29 Nov 2022 05:45:02 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+        s=mimecast20190719; t=1669729501;
+        h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+         to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+         content-transfer-encoding:content-transfer-encoding:
+         in-reply-to:in-reply-to:references:references;
+        bh=JlXgqzr1YlJyffb0kfUdxdiKnbkpAW53h4Ow+kGUHhA=;
+        b=GvrpkjJ9cPaCGGd9vR/Dq2DMDQPCRyC/ZeA5yvNePAhNkvQDRZM/TKJIrA5+CbtaG3l3aD
+        Uj11HtLspRnNcrjjLOEwXUfyE5lfScHwwSwzbvqZS65FPR9xOUYfl3sPdMoH63/vHGMtyO
+        AbzsnooLvMoTMPgp2LZGkF5Mr5Gl24w=
+Received: from mimecast-mx02.redhat.com (mimecast-mx02.redhat.com
+ [66.187.233.88]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ us-mta-287-was1dM1HP_Kgaik-HxG6Rg-1; Tue, 29 Nov 2022 08:44:56 -0500
+X-MC-Unique: was1dM1HP_Kgaik-HxG6Rg-1
+Received: from smtp.corp.redhat.com (int-mx08.intmail.prod.int.rdu2.redhat.com [10.11.54.8])
+        (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+        (No client certificate requested)
+        by mimecast-mx02.redhat.com (Postfix) with ESMTPS id D75F58339C5;
+        Tue, 29 Nov 2022 13:44:55 +0000 (UTC)
+Received: from rotkaeppchen (unknown [10.39.192.193])
+        by smtp.corp.redhat.com (Postfix) with ESMTP id 3BE1FC15BA4;
+        Tue, 29 Nov 2022 13:44:54 +0000 (UTC)
+Date:   Tue, 29 Nov 2022 14:44:50 +0100
+From:   Philipp Rudo <prudo@redhat.com>
+To:     Steven Rostedt <rostedt@goodmis.org>
+Cc:     Ricardo Ribalda <ribalda@chromium.org>,
+        Eric Biederman <ebiederm@xmission.com>,
+        Jonathan Corbet <corbet@lwn.net>,
+        Sergey Senozhatsky <senozhatsky@chromium.org>,
+        linux-kernel@vger.kernel.org, kexec@lists.infradead.org,
+        Ross Zwisler <zwisler@kernel.org>, linux-doc@vger.kernel.org,
+        "Joel Fernandes (Google)" <joel@joelfernandes.org>
+Subject: Re: [PATCH v1 2/2] kexec: Introduce kexec_reboot_disabled
+Message-ID: <20221129144450.75a7181e@rotkaeppchen>
+In-Reply-To: <20221128114200.72b3e2fe@gandalf.local.home>
+References: <20221114-disable-kexec-reset-v1-0-fb51d20cf871@chromium.org>
+        <20221114-disable-kexec-reset-v1-2-fb51d20cf871@chromium.org>
+        <20221117160650.16e06b37@rotkaeppchen>
+        <CANiDSCvyQ66mXbhEgj_qnE_zR4frsxtu1bXaukDrEG0FjrE4yw@mail.gmail.com>
+        <20221121150948.6f7c1f1f@rotkaeppchen>
+        <CANiDSCtqYykAjRinx9r4O+DxdTBA=OQSjF8URmM6X54nN7pDUA@mail.gmail.com>
+        <20221124124000.5af23cad@rotkaeppchen>
+        <CANiDSCvO+6TrM900Z_Jr4QL=c1uHS21deto7cU9W4mr7KimhJQ@mail.gmail.com>
+        <20221124160115.23ae7928@rotkaeppchen>
+        <20221128114200.72b3e2fe@gandalf.local.home>
+Organization: Red Hat inc.
 MIME-Version: 1.0
-X-MS-Exchange-MessageSentRepresentingType: 1
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SL2PR01MB2812:EE_|KL1PR01MB5229:EE_
-X-MS-Office365-Filtering-Correlation-Id: 7474d57d-6c13-44c4-7ac6-08dad20ca072
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: mHAufLPWJ3RR4Mwqsa4c4EXMKTl0NUoaxM2EBaxcDDMXj/CcsZDifjSH9Mu6UYAweNWV1pHaVsoP8l4yuOis1erljAr85XeXduws50Sury7xK1bn/kpbGB36dPId4sGHy/Lplx0zZ2JGxECN95J2jJ7BDctjUwRMMQeaZOMWuF8at9SF1d4EFXIjMP6opyreKiWoFfYOATYrT6nuA3EOO/sZMtelcMTw5vdQL04Qv69RfP/aKZdEaf7qDfJdO1ZWWpv5sx0kboK0zxD8STwtc76gkLxSlRAZ1C03jNW1ZseL68WF9EYFfuc3JTz9m5LbTI5UFPv8qIB9aw/4HfH6YagJDpWCF9dIeBap6338V027Gm60/nYfv4MXYdxIlXu9/w2iVs6WE9/QntWU/y3B4LL1uBN7AY3G2qNwJq2wI/vOGeG1AQem96iLE0HbcQzwbBzp9cRmQGVz3ncs20QeHztvh4ZCD8ged42vTHRMRjUcCTIFIXw47tfm2hBgiwJrnUlOZKjIt/9vMxUb64nGjbbwAEowVZLfmYj2SDTcmfZXjNg7difSM6l7KfoeYX/aerrdM6tVuoDPD1GFMtaJ927x7ZRz2xNB8RpBh9d9azQ=
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?xRPI0Zd6X8/kxwPlLjYq2ZHXS88bcZg6kmYHaSxLARA/G9tct3Ehh3K3zMOt?=
- =?us-ascii?Q?v+nSC5dl/XTLZp7lRQHl0mKSQdqF+qoAERXrJUvjyTzilUCUze2d0LdXGbW6?=
- =?us-ascii?Q?S8YDh6gytz6vseMcOTZ7+subaWJWxhpHYc5rfl/jHLKTMQnXFNQoyogOCNGd?=
- =?us-ascii?Q?ZcZDrAkvVY+mSFJzdb3kSbjPrUSLWdhvMaukMoM2CK1PhqDAv2m3wXoUYoIO?=
- =?us-ascii?Q?HNOemxzxGym2odtyHKQEHR/q3u5pEgZJC//QWfwNSvYPLpbwo1HWDlOGpY03?=
- =?us-ascii?Q?cPoZaDkppx+ZHyxQL23GXg219SV1bImZOa/R3HkivMb7e/k4ThJJUHWjaz3c?=
- =?us-ascii?Q?GTi+9t8kJ16u35iBjrFXyQg3clvaVqz6psv909zaqedOCDgieJtyc+c9rW2E?=
- =?us-ascii?Q?9Cwym7KCYJW86HISN0CMUBVa+xMkkrjusiBDERHWZBgKFeb706iTIi4LT4AQ?=
- =?us-ascii?Q?y9F35XQ2nHmWB5uQBbeegyErjdH0+hVUVW/PpRVnHIvaSWOXUkeHp7ipVB89?=
- =?us-ascii?Q?EUHPa2aFP5IufyLRFShDfHv6iswb12M6uE6q9QN5EOViAePflLvMC4jS7pWY?=
- =?us-ascii?Q?csiclaBbtDlq6Tj3HzRL1g21H0e5QbPJDG654R5e5Thl5LVinf/mgUh7oqes?=
- =?us-ascii?Q?XXQSe6iJs6AWllrqo9imE+KaS7TrD+AhaYooEGsSKEVVZP9v2Yg961hwyxPp?=
- =?us-ascii?Q?CcY6ozBn9kTokCOsf2EpzneOH+d/tx/lhd1+SXmi81PZn93VQ9MeGXRRxQ8R?=
- =?us-ascii?Q?NbtQuDMQTag27HpUE0CE3BCO4YFZlFGt4IRkcXRFUPq45mm/xe4JnATnZQGs?=
- =?us-ascii?Q?KqofE+mpEsRdCrAdVF8YNaIoItmjdliDAR1eFJDxlg5NKqfxE4oMGLYZ/Ib9?=
- =?us-ascii?Q?uQeoMFHKY8XPJ1odByg8x7hYUsj4Ka9enuuAO9k7kcOS3oy9I0yuohbGMUIn?=
- =?us-ascii?Q?O61GPj6aAY7vnC64XQk0Csz8EPw4JrKId00cY68Nkgtfh5S7Ww414YOTC79I?=
- =?us-ascii?Q?5g9B8AybLqLIkqMEqj1F8b6fTWCeE2Jk3yAPY2IGmCgsWIaeYjyo0LpXeqom?=
- =?us-ascii?Q?HaKv6+Yz3g4cdMgB/y048DGkhIM/1k2jZ5LlROt+Rm4xXQa1f3v2+qU0whwI?=
- =?us-ascii?Q?mhsHgIkMV+WuVdpktYy8O1SY7FYSlNNKBU1f8bSBG/WfbWyCgkLah0o4PSlR?=
- =?us-ascii?Q?1xnFIOHHsDFJ4abhKlj7FZLUeuMy0bHOIJQw2aF/e7vHkei5bbSrW+FRtbuk?=
- =?us-ascii?Q?58R9CgbYSDDR6xLAmN77OUl04cKx6rHssHkmdQ04xR0K1O5IP5HMJOY+BS0J?=
- =?us-ascii?Q?H2P7xh4Oasoa8PvHmOwfoAyXVCEC/zTJXV37/kegN0I+eg=3D=3D?=
-X-OriginatorOrg: outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 7474d57d-6c13-44c4-7ac6-08dad20ca072
-X-MS-Exchange-CrossTenant-AuthSource: SL2PR01MB2812.apcprd01.prod.exchangelabs.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 29 Nov 2022 13:21:30.7924
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 84df9e7f-e9f6-40af-b435-aaaaaaaaaaaa
-X-MS-Exchange-CrossTenant-RMS-PersistedConsumerOrg: 00000000-0000-0000-0000-000000000000
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: KL1PR01MB5229
-X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_ENVFROM_END_DIGIT,
-        FREEMAIL_FROM,RCVD_IN_DNSWL_NONE,RCVD_IN_MSPIKE_H2,SPF_HELO_PASS,
-        SPF_PASS autolearn=ham autolearn_force=no version=3.4.6
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 7bit
+X-Scanned-By: MIMEDefang 3.1 on 10.11.54.8
+X-Spam-Status: No, score=-2.1 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_NONE,
+        RCVD_IN_MSPIKE_H2,SPF_HELO_NONE,SPF_NONE autolearn=ham
+        autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Fixed a typo in the word 'architecture'.
+Hi Steven,
 
-Signed-off-by: Kushagra Verma <kushagra765@outlook.com>
----
- Documentation/atomic_t.txt | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+On Mon, 28 Nov 2022 11:42:00 -0500
+Steven Rostedt <rostedt@goodmis.org> wrote:
 
-diff --git a/Documentation/atomic_t.txt b/Documentation/atomic_t.txt
-index 0f1ffa03db09..d7adc6d543db 100644
---- a/Documentation/atomic_t.txt
-+++ b/Documentation/atomic_t.txt
-@@ -324,7 +324,7 @@ atomic operations.
- 
- Specifically 'simple' cmpxchg() loops are expected to not starve one another
- indefinitely. However, this is not evident on LL/SC architectures, because
--while an LL/SC architecure 'can/should/must' provide forward progress
-+while an LL/SC architecture 'can/should/must' provide forward progress
- guarantees between competing LL/SC sections, such a guarantee does not
- transfer to cmpxchg() implemented using LL/SC. Consider:
- 
--- 
-2.38.1
+> On Thu, 24 Nov 2022 16:01:15 +0100
+> Philipp Rudo <prudo@redhat.com> wrote:
+> 
+> > No, I think the implementation is fine. I'm currently only struggling
+> > to understand what problem kexec_reboot_disabled solves that cannot be
+> > solved by kexec_load_disabled.  
+> 
+> Hi Philipp,
+> 
+> Thanks for working with us on this.
+> 
+> Let me try to explain our use case. We want kexec/kdump enabled, but we
+> really do not want kexec used for any other purpose. We must have the kexec
+> kernel loaded at boot up and not afterward.
+> 
+> Your recommendation of:
+> 
+>   kexec -p dump_kernel
+>   echo 1 > /proc/sys/kernel/kexec_load_disabled
+> 
+> can work, and we will probably add it. But we are taking the paranoid
+> approach, and what I learned in security 101 ;-) and that is, only open up
+> the minimal attack surface as possible.
+
+Well that's sort of my problem. When you go all in on paranoia I would
+expect that you also restrict the crash kernel. Otherwise you keep most
+of the attack surface. But disabling 'reboot' of the crash kernel is
+quite intrusive and probably not what you want. That's why I think it
+is better do the restriction on the 'load' rather than the 'reboot'
+path.
+
+One solution for that is the script above. But that pushes all the
+responsibilities concerning syncing and error handling to the sysadmin.
+Depending on your level of paranoia that might be too risky. Personally
+I think it's fine as the kernel alone cannot fix all potential security
+problems. In my opinion this has to be done in the layer that is
+responsible for the task done. So when a security problem arises due to
+ill syncing when starting different services it's the job of the init
+system to fix the issue.
+
+An alternative approach and sort of compromise I see is to convert
+kexec_load_disabled from a simple on/off switch to a counter on how
+often a kexec load can be made (in practice a tristate on/off/one-shot
+should be sufficient). Ideally the reboot and panic path will
+have separate counters. With that you could for example use
+kexec_load_limit.reboot=0 and kexec_load_limit.panic=1 to disable the
+load of images for reboot while still allow to load a crash kernel
+once. With this you have the flexibility you need while also preventing
+a race where an attacker overwrites your crash kernel before you can
+toggle the switch. What do you think?
+
+> Yes, it's highly unlikely that the above would crash. But as with most
+> security vulnerabilities, it's not going to be an attacker that creates a
+> new gadget here, but probably another script in the future that causes this
+> to be delayed or something, and a new window of opportunity will arise for
+> an attacker. Maybe, that new window only works for non panic kernels. Yes,
+> this is a contrived scenario, but the work vs risk is very low in adding
+> this feature.
+
+True, but that problem is not limited to userspace. For example see
+Ricardos other patch [1] where he treats the load of a crash kernel
+just like a standard load. In my opinion he creates such a gadget in
+that patch.
+
+[1] https://lore.kernel.org/all/20221124-kexec-noalloc-v1-0-d78361e99aec@chromium.org/
+
+Thanks
+Philipp
+
+> Perhaps the attack surface that a reboot kexec could be, is that the
+> attacker gets the ability at boot up to load the kexec for reboot and not panic.
+> Then the attack must wait for the victim to reboot their machine before
+> they have access to the new kernel. Again, I admit this is contrived, but
+> just because I can't think of a real situation that this could be a problem
+> doesn't mean that one doesn't exist.
+> 
+> In other words, if we never want to allow a kexec reboot, why allow it at
+> all from the beginning? The above allows it, until we don't. That alone
+> makes us nervous. Whereas this patch is rather trivial and doesn't add
+> complexity.
+> 
+> Thanks for your time, we appreciate it.
+> 
+> -- Steve
+> 
+> _______________________________________________
+> kexec mailing list
+> kexec@lists.infradead.org
+> http://lists.infradead.org/mailman/listinfo/kexec
+> 
 
