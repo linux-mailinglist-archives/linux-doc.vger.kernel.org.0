@@ -2,163 +2,98 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 762A563CE71
-	for <lists+linux-doc@lfdr.de>; Wed, 30 Nov 2022 05:45:48 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 1983A63CE7B
+	for <lists+linux-doc@lfdr.de>; Wed, 30 Nov 2022 05:52:31 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S229875AbiK3Epr (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 29 Nov 2022 23:45:47 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:41986 "EHLO
+        id S231625AbiK3Ew2 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 29 Nov 2022 23:52:28 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:45522 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S233224AbiK3Epk (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 29 Nov 2022 23:45:40 -0500
-Received: from mail-pj1-x102d.google.com (mail-pj1-x102d.google.com [IPv6:2607:f8b0:4864:20::102d])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 4FC516F0D1
-        for <linux-doc@vger.kernel.org>; Tue, 29 Nov 2022 20:45:37 -0800 (PST)
-Received: by mail-pj1-x102d.google.com with SMTP id t17so14647563pjo.3
-        for <linux-doc@vger.kernel.org>; Tue, 29 Nov 2022 20:45:37 -0800 (PST)
+        with ESMTP id S232707AbiK3Ew1 (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 29 Nov 2022 23:52:27 -0500
+Received: from mail-vk1-xa2c.google.com (mail-vk1-xa2c.google.com [IPv6:2607:f8b0:4864:20::a2c])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 9510970444
+        for <linux-doc@vger.kernel.org>; Tue, 29 Nov 2022 20:52:26 -0800 (PST)
+Received: by mail-vk1-xa2c.google.com with SMTP id n191so3057200vkf.2
+        for <linux-doc@vger.kernel.org>; Tue, 29 Nov 2022 20:52:26 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=google.com; s=20210112;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:from:to:cc:subject:date:message-id:reply-to;
-        bh=+Hp5+nokbDdYXmeHO6l8YHhyQIpP1MoZJd+AqChAXdY=;
-        b=A7YLPBgwqI3LKlRDSIarExvCnxRY/Z/n/cUvePTHoIP7Cp08vix7ODXgQ26YFyzD7/
-         uS6k8LHazIo+ZbSxlJ6uHZRhv49CiUsJDug0tglJV4shM8McXhzEOynKymIeIUUJOql+
-         vTGcZgF4JcnkIJZucv2j8y+KxICagsaXvqvsO5x0sXpX7fGHcQJy9s2lIUWEnRZM6HSB
-         LOKLyk4xagb9xSlZox0y2nyYB2DhARXzSTPlRjfxwqW4/r7QEVvPYEcSNer4HjYmLQ/p
-         6zMUXACH2/R46EdPMBmKuqyk97kNBXRj9xTP7nTf1fF7MQTTH8bTeQGFkk9ssTVIiFks
-         hrcw==
+        d=gmail.com; s=20210112;
+        h=to:subject:message-id:date:from:in-reply-to:references:mime-version
+         :from:to:cc:subject:date:message-id:reply-to;
+        bh=Ze9YGMwqSnvvkjU5+Ntfdyx7nkP/I6B9Z3IIebf8Omw=;
+        b=K8WFiEpfxUwtkS5KhNenVrX3XqJfi8oh9RWBzNuqMJQ1mZ5kNzeWA3DDXY7F60/zvp
+         6mIwWm4Je6u1RY0Bh74JtkT5TZs/JkRg00cvZB+MCv+pIneeQvPZ4L68z+AQEexd0OWf
+         g2pdyuTn0H+j9WbeQ1RUOAo5KcU5kINjYXeo30Z/+NZLePFbhAMnIZpChMKyjxAm5CZW
+         j9HO8LSiVVrqfpbnRI8Doq+HOWHDuLXUvJ01H5nl/pkzxXZctZcbC1szsVj07Dr84FzS
+         URY4yp30L4rLg65KAzzJjsrw849xomY4T3bIwTAEP7gRsCLdhH9O9+5bi0c3KeMkBHy0
+         BkjA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=+Hp5+nokbDdYXmeHO6l8YHhyQIpP1MoZJd+AqChAXdY=;
-        b=HH0fTmfEvi936H+tvbK+UuebhDpPhJZaQf0wVDslFHhjPBV6PigfXrTkTLLV9ExcHR
-         y0DoF726hsbtMGhbklDnI3IjVzzSzOxVg+PkF0klRnfXRnJt6KFdUaQ1wmR4vxNQxrwV
-         cM/cTlDAj5SUyYXdYtNV4wpf6o/fPKcJXxTaxL9vVL5H/qbPGwsMmSH/ndEwlVk9Mp9h
-         C2fBwqkHzmjDbd31tJB9/4w+i/AFfq1GL5/m+H/qzGi80v0LhKMOEj5YR/2UxBq0TsgL
-         lorXEmi9Cac1dVQf5ygwmSc30rY1JAsVjhD4aaBUDJxx9qY+lNRdoFbITFRL3kt9n0qP
-         hZkw==
-X-Gm-Message-State: ANoB5pn5hFKd0PJAj6FAlEqeTaCpaeQCBiebI/kcR3vHNUW5HL0BRNw3
-        ZMZ0pXd1RSOf+ydh9wRPGHC2XVRTcW/gvgGtgSWs0g==
-X-Google-Smtp-Source: AA0mqf4Y/2dD9r4Ax34JaCVyP8lY70LEm6ZPf1Ide4lZgtW6pWmoThjhpN6O5PaVs7SLlSLu8QxOxQfuqvWgMSZ4NyE=
-X-Received: by 2002:a17:90a:dc06:b0:218:9196:1cd1 with SMTP id
- i6-20020a17090adc0600b0021891961cd1mr56371277pjv.230.1669783536628; Tue, 29
- Nov 2022 20:45:36 -0800 (PST)
+        h=to:subject:message-id:date:from:in-reply-to:references:mime-version
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=Ze9YGMwqSnvvkjU5+Ntfdyx7nkP/I6B9Z3IIebf8Omw=;
+        b=GYHrhWIKGsTtu/pqRvCcpStxSeDFFmeJSL4a4Cz6MVi7E5lASxJk/43eGbgMZvy+5J
+         lmNiui+jpKLxSmSPQ8Xv/ZoH6Ao4cPWi7pMi3STlIFNAyCBVwx/DXTChMrbUsQK+MZUH
+         wBAW2/hQ9GAdoWXDnZlStM9muNisza59cLc6suzYaOwePJmVFxQCjmRlhUlwLZorwcfy
+         epl6xaY/l0ZTwWyCT9VPJSCjBqEGSfbC591HxSKUrkArBkURRHc+YWnbEWsBzd0b4UVX
+         TPJgJtAmVkZAHR9RE8vfwoQUkHqZRFJc3ZSWj35gMzy6Q0BZNanoizLr8jTKIJ6WyIM+
+         Rivw==
+X-Gm-Message-State: ANoB5pmWNiEqXaL/bLVkf6ACMcSbSynRxk3EXCfEA2oLxo+zs0RJ0bar
+        VAHFS0N+E8/9hl/sSGWR8E2z05lOikzhCWe0Jr0=
+X-Google-Smtp-Source: AA0mqf5K2MUb1PO+zaLxLnhEFl+/wGZwDtHXCw67b1IplfPG0/f9ipzANckA1zL8VOvzIGBtt45QfiHiYA+Zb1QNauk=
+X-Received: by 2002:a1f:de84:0:b0:3bc:e3ce:a02d with SMTP id
+ v126-20020a1fde84000000b003bce3cea02dmr6768628vkg.12.1669783945702; Tue, 29
+ Nov 2022 20:52:25 -0800 (PST)
 MIME-Version: 1.0
-References: <20221129094732.306449-1-davidgow@google.com>
-In-Reply-To: <20221129094732.306449-1-davidgow@google.com>
-From:   Sadiya Kazi <sadiyakazi@google.com>
-Date:   Wed, 30 Nov 2022 10:15:25 +0530
-Message-ID: <CAO2JNKU2jfdTMC2NXeyVdnE=nf5sQe8S7tvORUpbOgN-Ccx7RQ@mail.gmail.com>
-Subject: Re: [PATCH] Documentation: kunit: Fix "How Do I Use This" / "Next
- Steps" sections
-To:     David Gow <davidgow@google.com>
-Cc:     Shuah Khan <skhan@linuxfoundation.org>,
-        Brendan Higgins <brendan.higgins@linux.dev>,
-        Jonathan Corbet <corbet@lwn.net>,
-        Daniel Latypov <dlatypov@google.com>,
-        Rae Moar <rmoar@google.com>, linux-kernel@vger.kernel.org,
-        kunit-dev@googlegroups.com, linux-kselftest@vger.kernel.org,
-        linux-doc@vger.kernel.org
+References: <CAH+toHVj-SFWy_iy8NHNhxaN=5__FCncorefbEDF99Eh4hL86g@mail.gmail.com>
+In-Reply-To: <CAH+toHVj-SFWy_iy8NHNhxaN=5__FCncorefbEDF99Eh4hL86g@mail.gmail.com>
+From:   Darvis <obianujurollers@gmail.com>
+Date:   Wed, 30 Nov 2022 05:52:13 +0100
+Message-ID: <CAH+toHXXC3rT7mPJiva_BpFUAyVYL-NZb0nGOzz6eUSZYBtUww@mail.gmail.com>
+Subject: How are you
+To:     undisclosed-recipients:;
 Content-Type: text/plain; charset="UTF-8"
-X-Spam-Status: No, score=-17.6 required=5.0 tests=BAYES_00,DKIMWL_WL_MED,
-        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,
-        ENV_AND_HDR_SPF_MATCH,RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,SPF_PASS,
-        USER_IN_DEF_DKIM_WL,USER_IN_DEF_SPF_WL autolearn=unavailable
-        autolearn_force=no version=3.4.6
+X-Spam-Status: Yes, score=7.1 required=5.0 tests=BAYES_50,DKIM_SIGNED,
+        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_FROM,HK_SCAM,
+        LOTS_OF_MONEY,MILLION_HUNDRED,RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,
+        SPF_PASS,UNDISC_MONEY autolearn=no autolearn_force=no version=3.4.6
+X-Spam-Report: * -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at
+        *      https://www.dnswl.org/, no trust
+        *      [2607:f8b0:4864:20:0:0:0:a2c listed in]
+        [list.dnswl.org]
+        *  0.8 BAYES_50 BODY: Bayes spam probability is 40 to 60%
+        *      [score: 0.5000]
+        *  0.0 FREEMAIL_FROM Sender email is commonly abused enduser mail
+        *      provider
+        *      [obianujurollers[at]gmail.com]
+        * -0.0 SPF_PASS SPF: sender matches SPF record
+        *  0.0 SPF_HELO_NONE SPF: HELO does not publish an SPF Record
+        *  1.3 MILLION_HUNDRED BODY: Million "One to Nine" Hundred
+        * -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
+        *      author's domain
+        *  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
+        *       valid
+        * -0.1 DKIM_VALID_EF Message has a valid DKIM or DK signature from
+        *      envelope-from domain
+        * -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+        *  0.0 LOTS_OF_MONEY Huge... sums of money
+        *  2.0 HK_SCAM No description available.
+        *  3.2 UNDISC_MONEY Undisclosed recipients + money/fraud signs
+X-Spam-Level: *******
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Thank you David. This looks fine to me except for some very minor
-suggestions below. Please feel free to ignore it if you do not agree.
-Also, I can send out another patch to change the occurrences of
-kunit_tool to kunit.py on run_wrapper.rst and run_manual.rst page to
-maintain consistency across as they are referenced on index.rst and
-start.rst.
+This is Darvis, an auditor
+     I need to share business opportunity with you
+ and I assure you that you can never regret it.
+About the transfer of a million three hundred thousand dollars left by
+our late client.
+ A citizen of your country with a resemblance name in the next of kin
+document I have with me
+              please reply back. I have everything needed to execute this
 
-Regards,
-Sadiya
-
-
-On Tue, Nov 29, 2022 at 3:17 PM David Gow <davidgow@google.com> wrote:
->
-> The 'index' and 'start' pages end with very similar "How Do I Use This"
-> / "Next Steps" sections respectively, which link to the other
-> documentation pages. This wasn't updated when the tips.rst page was
-> removed.
->
-> Remove the reference to tips.rst, as well as tidy up the descriptions on
-> all of the links (especially given that sphinx gives the page titles
-> anyway.
->
-> Fixes: 4399c737a97d ("Documentation: kunit: Remove redundant 'tips.rst' page")
-> Signed-off-by: David Gow <davidgow@google.com>
-> ---
->  Documentation/dev-tools/kunit/index.rst | 18 +++++++-----------
->  Documentation/dev-tools/kunit/start.rst | 16 ++++++----------
->  2 files changed, 13 insertions(+), 21 deletions(-)
->
-> diff --git a/Documentation/dev-tools/kunit/index.rst b/Documentation/dev-tools/kunit/index.rst
-> index d5629817cd72..beec6f847ef4 100644
-> --- a/Documentation/dev-tools/kunit/index.rst
-> +++ b/Documentation/dev-tools/kunit/index.rst
-> @@ -99,14 +99,10 @@ Read also :ref:`kinds-of-tests`.
->  How do I use it?
->  ================
->
-> -*   Documentation/dev-tools/kunit/start.rst - for KUnit new users.
-> -*   Documentation/dev-tools/kunit/architecture.rst - KUnit architecture.
-> -*   Documentation/dev-tools/kunit/run_wrapper.rst - run kunit_tool.
-> -*   Documentation/dev-tools/kunit/run_manual.rst - run tests without kunit_tool.
-> -*   Documentation/dev-tools/kunit/usage.rst - write tests.
-> -*   Documentation/dev-tools/kunit/tips.rst - best practices with
-> -    examples.
-> -*   Documentation/dev-tools/kunit/api/index.rst - KUnit APIs
-> -    used for testing.
-> -*   Documentation/dev-tools/kunit/faq.rst - KUnit common questions and
-> -    answers.
-> +*   Documentation/dev-tools/kunit/start.rst - for new KUnit users
-How about - start using KUnit
-> +*   Documentation/dev-tools/kunit/architecture.rst - how KUnit is put together
-How about - get to know Kunit's design
-> +*   Documentation/dev-tools/kunit/run_wrapper.rst - run tests via kunit.py
-How about - run tests with kunit.py
-> +*   Documentation/dev-tools/kunit/run_manual.rst - run tests without kunit.py
-How about - run tests without kunit.py
-> +*   Documentation/dev-tools/kunit/usage.rst - write tests
-> +*   Documentation/dev-tools/kunit/api/index.rst - API reference
-> +*   Documentation/dev-tools/kunit/faq.rst - common questions and answers
-> diff --git a/Documentation/dev-tools/kunit/start.rst b/Documentation/dev-tools/kunit/start.rst
-> index f4f504f1fb15..58c176348885 100644
-> --- a/Documentation/dev-tools/kunit/start.rst
-> +++ b/Documentation/dev-tools/kunit/start.rst
-> @@ -294,13 +294,9 @@ Congrats! You just wrote your first KUnit test.
->  Next Steps
->  ==========
->
-> -*   Documentation/dev-tools/kunit/architecture.rst - KUnit architecture.
-> -*   Documentation/dev-tools/kunit/run_wrapper.rst - run kunit_tool.
-> -*   Documentation/dev-tools/kunit/run_manual.rst - run tests without kunit_tool.
-> -*   Documentation/dev-tools/kunit/usage.rst - write tests.
-> -*   Documentation/dev-tools/kunit/tips.rst - best practices with
-> -    examples.
-> -*   Documentation/dev-tools/kunit/api/index.rst - KUnit APIs
-> -    used for testing.
-> -*   Documentation/dev-tools/kunit/faq.rst - KUnit common questions and
-> -    answers.
-> +*   Documentation/dev-tools/kunit/architecture.rst - how KUnit is put together
-same as above
-> +*   Documentation/dev-tools/kunit/run_wrapper.rst - run tests via kunit.py
-same as above
-> +*   Documentation/dev-tools/kunit/run_manual.rst - run tests without kunit.py
-same as above
-> +*   Documentation/dev-tools/kunit/usage.rst - write tests
-> +*   Documentation/dev-tools/kunit/api/index.rst - API reference
-> +*   Documentation/dev-tools/kunit/faq.rst - common questions and answers
-> --
-> 2.38.1.584.g0f3c55d4c2-goog
->
+Regards
+Darvis Ganego
