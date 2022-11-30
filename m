@@ -2,147 +2,94 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 1604363E12D
-	for <lists+linux-doc@lfdr.de>; Wed, 30 Nov 2022 21:09:58 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id B363163E1AD
+	for <lists+linux-doc@lfdr.de>; Wed, 30 Nov 2022 21:17:25 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S229851AbiK3UJw (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 30 Nov 2022 15:09:52 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:43786 "EHLO
+        id S229448AbiK3URX (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 30 Nov 2022 15:17:23 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:49330 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S229832AbiK3UJu (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Wed, 30 Nov 2022 15:09:50 -0500
-Received: from dfw.source.kernel.org (dfw.source.kernel.org [IPv6:2604:1380:4641:c500::1])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id F3F4B91360;
-        Wed, 30 Nov 2022 12:09:48 -0800 (PST)
-Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
-        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+        with ESMTP id S230113AbiK3UQ6 (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Wed, 30 Nov 2022 15:16:58 -0500
+Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.133.124])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 98B3DFAE1
+        for <linux-doc@vger.kernel.org>; Wed, 30 Nov 2022 12:12:37 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+        s=mimecast20190719; t=1669839142;
+        h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+         to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+         content-transfer-encoding:content-transfer-encoding;
+        bh=6bOTVpeICKuL76FpWE+vvC2K7TTxT1V/p2B5s3kX4Ck=;
+        b=cfmBMrpO6DHXUI66Zxsv7i3CJzvRQz16lnxrMzoyTeGZpJBavoVJZ0LFuxZTFMmOS70mc9
+        jIqNTb/wV7drCwb82qaY4+Ofhcg2TV/NMg2APUCJTBAcxlPhJPUuvvTx5/4mxSEKCxAXrp
+        DU5v9MhFk2VKqsB1DolMwPJEXIfYZao=
+Received: from mimecast-mx02.redhat.com (mimecast-mx02.redhat.com
+ [66.187.233.88]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ us-mta-272-sFsIdYlFN7G8GOPPIh-NqA-1; Wed, 30 Nov 2022 15:12:15 -0500
+X-MC-Unique: sFsIdYlFN7G8GOPPIh-NqA-1
+Received: from smtp.corp.redhat.com (int-mx08.intmail.prod.int.rdu2.redhat.com [10.11.54.8])
+        (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
         (No client certificate requested)
-        by dfw.source.kernel.org (Postfix) with ESMTPS id 9162861DA4;
-        Wed, 30 Nov 2022 20:09:48 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 66471C43146;
-        Wed, 30 Nov 2022 20:09:47 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-        s=k20201202; t=1669838987;
-        bh=r1rD9KyNMBqJg8aGe8o3Z8JXG+myDQ882BtgLSHPqNo=;
-        h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-        b=RFzWrAf4PAnp9Ebgo1QWOr+HKWbJmkSKwTKSucLkXV2ylmhJ4SrtmQX93z5/aOm3z
-         WPDjofJdvcUPp6O+vdUuuvsPlFaNCSnojT8JdYzeHgOFKai6H+1o5Bos9c4zfdpJJ6
-         53N2NsG8cxMUniXjE8Cx3hOJizULVJjjrK4aQcgjAHrnj0vgCQBgcbEi2VwjKLGFML
-         iVK45j6pM0D4c4UsOpAiSToCQJGTeR4byKkL9vghzlYZ0xIeZSK5oT7qadPPFod9z1
-         nemD4nvmaR0ba0hr8h8fNf5RFy2+0/iMGPuVFlZkjHVRJGdHOqFYNKa46pk0njabG8
-         f39eYe3O+Vmzw==
-From:   SeongJae Park <sj@kernel.org>
-To:     SeongJae Park <sj@kernel.org>,
-        Andrew Morton <akpm@linux-foundation.org>
-Cc:     Jonathan Corbet <corbet@lwn.net>, damon@lists.linux.dev,
-        linux-mm@kvack.org, linux-doc@vger.kernel.org,
+        by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 9FD81185A792;
+        Wed, 30 Nov 2022 20:12:14 +0000 (UTC)
+Received: from jtoppins.rdu.csb (unknown [10.22.32.182])
+        by smtp.corp.redhat.com (Postfix) with ESMTP id 0FB5FC15BB4;
+        Wed, 30 Nov 2022 20:12:14 +0000 (UTC)
+From:   Jonathan Toppins <jtoppins@redhat.com>
+To:     netdev@vger.kernel.org
+Cc:     Jay Vosburgh <j.vosburgh@gmail.com>,
+        Veaceslav Falico <vfalico@gmail.com>,
+        Andy Gospodarek <andy@greyhouse.net>,
+        "David S. Miller" <davem@davemloft.net>,
+        Eric Dumazet <edumazet@google.com>,
+        Jakub Kicinski <kuba@kernel.org>,
+        Paolo Abeni <pabeni@redhat.com>,
+        Jonathan Corbet <corbet@lwn.net>,
+        Mahesh Bandewar <maheshb@google.com>,
+        Jarod Wilson <jarod@redhat.com>, linux-doc@vger.kernel.org,
         linux-kernel@vger.kernel.org
-Subject: [RFC PATCH v2 10/11] Docs/admin-guide/mm/damon/usage: document DAMOS filters of sysfs
-Date:   Wed, 30 Nov 2022 20:09:36 +0000
-Message-Id: <20221130200937.118005-11-sj@kernel.org>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20221130200937.118005-1-sj@kernel.org>
-References: <20221130200937.118005-1-sj@kernel.org>
+Subject: [PATCH net-next 1/2] Documentation: bonding: update miimon default to 100
+Date:   Wed, 30 Nov 2022 15:12:06 -0500
+Message-Id: <4c3f4f0b8f4a8cd3c104d58c106b97ce5f180bc1.1669839127.git.jtoppins@redhat.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
+Content-Type: text/plain
 Content-Transfer-Encoding: 8bit
-X-Spam-Status: No, score=-7.1 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_HI,
-        SPF_HELO_NONE,SPF_PASS autolearn=ham autolearn_force=no version=3.4.6
+X-Scanned-By: MIMEDefang 3.1 on 10.11.54.8
+X-Spam-Status: No, score=-2.1 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_NONE,
+        RCVD_IN_MSPIKE_H2,SPF_HELO_NONE,SPF_NONE autolearn=unavailable
+        autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Document about the newly added files for DAMOS filters on the DAMON
-usage document.
+With commit c1f897ce186a ("bonding: set default miimon value for non-arp
+modes if not set") the miimon default was changed from zero to 100 if
+arp_interval is also zero. Document this fact in bonding.rst.
 
-Signed-off-by: SeongJae Park <sj@kernel.org>
+Fixes: c1f897ce186a ("bonding: set default miimon value for non-arp modes if not set")
+Signed-off-by: Jonathan Toppins <jtoppins@redhat.com>
 ---
- Documentation/admin-guide/mm/damon/usage.rst | 48 +++++++++++++++++++-
- 1 file changed, 46 insertions(+), 2 deletions(-)
+ Documentation/networking/bonding.rst | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
 
-diff --git a/Documentation/admin-guide/mm/damon/usage.rst b/Documentation/admin-guide/mm/damon/usage.rst
-index 1a5b6b71efa1..3d82ca6a17ff 100644
---- a/Documentation/admin-guide/mm/damon/usage.rst
-+++ b/Documentation/admin-guide/mm/damon/usage.rst
-@@ -87,6 +87,8 @@ comma (","). ::
-     │ │ │ │ │ │ │ quotas/ms,bytes,reset_interval_ms
-     │ │ │ │ │ │ │ │ weights/sz_permil,nr_accesses_permil,age_permil
-     │ │ │ │ │ │ │ watermarks/metric,interval_us,high,mid,low
-+    │ │ │ │ │ │ │ filters/nr_filters
-+    │ │ │ │ │ │ │ │ 0/type,matching,memcg_id
-     │ │ │ │ │ │ │ stats/nr_tried,sz_tried,nr_applied,sz_applied,qt_exceeds
-     │ │ │ │ │ │ │ tried_regions/
-     │ │ │ │ │ │ │ │ 0/start,end,nr_accesses,age
-@@ -151,6 +153,8 @@ number (``N``) to the file creates the number of child directories named as
- moment, only one context per kdamond is supported, so only ``0`` or ``1`` can
- be written to the file.
+diff --git a/Documentation/networking/bonding.rst b/Documentation/networking/bonding.rst
+index 96cd7a26f3d9..da57aac73ffc 100644
+--- a/Documentation/networking/bonding.rst
++++ b/Documentation/networking/bonding.rst
+@@ -566,7 +566,8 @@ miimon
+ 	link monitoring.  A value of 100 is a good starting point.
+ 	The use_carrier option, below, affects how the link state is
+ 	determined.  See the High Availability section for additional
+-	information.  The default value is 0.
++	information.  The default value is 100 if arp_interval is not
++	set.
  
-+.. _sysfs_contexts:
-+
- contexts/<N>/
- -------------
+ min_links
  
-@@ -268,8 +272,8 @@ schemes/<N>/
- ------------
- 
- In each scheme directory, five directories (``access_pattern``, ``quotas``,
--``watermarks``, ``stats``, and ``tried_regions``) and one file (``action``)
--exist.
-+``watermarks``, ``filters``, ``stats``, and ``tried_regions``) and one file
-+(``action``) exist.
- 
- The ``action`` file is for setting and getting what action you want to apply to
- memory regions having specific access pattern of the interest.  The keywords
-@@ -347,6 +351,46 @@ as below.
- 
- The ``interval`` should written in microseconds unit.
- 
-+schemes/<N>/filters/
-+--------------------
-+
-+Users could know something more than the kernel for specific types of memory.
-+In the case, users could do their own management for the memory and hence
-+doesn't want DAMOS bothers that.  Users could limit DAMOS by setting the access
-+pattern of the scheme and/or the monitoring regions for the purpose, but that
-+can be inefficient in some cases.  In such cases, users could set non-access
-+pattern driven filters using files in this directory.
-+
-+In the beginning, this directory has only one file, ``nr_filters``.  Writing a
-+number (``N``) to the file creates the number of child directories named ``0``
-+to ``N-1``.  Each directory represents each filter.  The filters are evaluated
-+in the numeric order.
-+
-+Each filter directory contains three files, namely ``type``, ``matcing``, and
-+``memcg_path``.  You can write one of two special keywords, ``anon`` for
-+anonymous pages, or ``memcg`` for specific memory cgroup filtering.  In case of
-+the memory cgroup filtering, you can specify the memory cgroup of the interest
-+by writing the path of the memory cgroup from the cgroups mount point to
-+``memcg_path`` file.  You can write ``Y`` or ``N`` to ``matching`` file to
-+filter out pages that does or does not match to the type, respectively.  Then,
-+the scheme's action will not be applied to the pages that specified to be
-+filtered out.
-+
-+For example, below restricts a DAMOS action to be applied to only non-anonymous
-+pages of all memory cgroups except ``/having_care_already``.::
-+
-+    # echo 2 > nr_filters
-+    # # filter out anonymous pages
-+    echo anon > 0/type
-+    echo Y > 0/matching
-+    # # further filter out all cgroups except one at '/having_care_already'
-+    echo memcg > 1/type
-+    echo /having_care_already > 1/memcg_path
-+    echo N > 1/matching
-+
-+Note that filters could be ignored depend on the running DAMON operations set
-+`implementation <sysfs_contexts>`.
-+
- .. _sysfs_schemes_stats:
- 
- schemes/<N>/stats/
 -- 
-2.25.1
+2.31.1
 
