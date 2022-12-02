@@ -2,116 +2,87 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 13DD964052E
-	for <lists+linux-doc@lfdr.de>; Fri,  2 Dec 2022 11:51:43 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 1E5656405AB
+	for <lists+linux-doc@lfdr.de>; Fri,  2 Dec 2022 12:20:28 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S233368AbiLBKvg (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Fri, 2 Dec 2022 05:51:36 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:35254 "EHLO
+        id S233096AbiLBLUZ (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Fri, 2 Dec 2022 06:20:25 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:37182 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S233178AbiLBKv2 (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Fri, 2 Dec 2022 05:51:28 -0500
-Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.129.124])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 71962D0392
-        for <linux-doc@vger.kernel.org>; Fri,  2 Dec 2022 02:50:34 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-        s=mimecast20190719; t=1669978233;
-        h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-         to:to:cc:cc:mime-version:mime-version:
-         content-transfer-encoding:content-transfer-encoding:
-         in-reply-to:in-reply-to:references:references;
-        bh=01EVu86F03ZVkaisaIA8aOhxapK6bD5iJUUbcQRNmys=;
-        b=gRBpVn4XFihIn5sMWZ7vHPj7PrTqcPk7f3MON2lpeIUdwZDH/iz1Zp1x2Rx6qagylD8apH
-        jj/4jxKXIM+n0hu4onVD7EoxT0wcrykZ2IOaLze5fo44iNwf4gLwW6ziBSjZpN/MB/+yz7
-        gi/YUlstB6B/dNnINKtWBpK/A9f8Bvk=
-Received: from mail-wm1-f69.google.com (mail-wm1-f69.google.com
- [209.85.128.69]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_128_GCM_SHA256) id
- us-mta-271-m4Zu7OjJPDuVGc79gXUykQ-1; Fri, 02 Dec 2022 05:50:31 -0500
-X-MC-Unique: m4Zu7OjJPDuVGc79gXUykQ-1
-Received: by mail-wm1-f69.google.com with SMTP id ay19-20020a05600c1e1300b003cf758f1617so3947915wmb.5
-        for <linux-doc@vger.kernel.org>; Fri, 02 Dec 2022 02:50:31 -0800 (PST)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=01EVu86F03ZVkaisaIA8aOhxapK6bD5iJUUbcQRNmys=;
-        b=SzSpUzBYXQM9nHvAZeE6QcXKGyLR1kA7J+EkMDPceRp5gWLW3pgn9cnmb9ArYDqqfk
-         nYBMaDP5iDkZk6YwC2/A9ZqHPCvB24JbbYjAhoplikP+CIQ0j7U/8n/ua7xM9wibiVA1
-         IEk5zZnGRu5Fq5lkvHJ26R2Hux5X88RdVktOKDtH/IAPCdwwpjoj+vUy+JAoTr1tAZza
-         HfEq80v39ccWS+Dd289ETanBqIZOd6a+S9Vhbzm0bxvc5dqRoToSKjvWK4SIA50g654U
-         6s9GkT2GmSqTHHba4DkKdBNXS8a+1jIF55cJlpaoVMyrkB3+2QUpWrpSk63kgaP9fINR
-         QptQ==
-X-Gm-Message-State: ANoB5plgcZTIECip65odgdBrTCzJH5vUsl7LGsZphJHDUPkCuyWG6lf+
-        6McTvwj1FKS5im3+oRy9U0mEFO4Bjwe18DGvU3ZKM8l1201XRyvt6GuS3T3bIDPA1LEjkZcZKvL
-        y0t8MJmyULuo6YAwdOoeo
-X-Received: by 2002:adf:e105:0:b0:236:73af:f9ad with SMTP id t5-20020adfe105000000b0023673aff9admr42046592wrz.225.1669978230868;
-        Fri, 02 Dec 2022 02:50:30 -0800 (PST)
-X-Google-Smtp-Source: AA0mqf5gKhowvqyk/ROz6Tub/sMJPyTW0HCi4czVL2HWfKAPTpnGRqZYvsKYMG8CpBMMwJo8CzalVg==
-X-Received: by 2002:adf:e105:0:b0:236:73af:f9ad with SMTP id t5-20020adfe105000000b0023673aff9admr42046575wrz.225.1669978230635;
-        Fri, 02 Dec 2022 02:50:30 -0800 (PST)
-Received: from minerva.home (205.pool92-176-231.dynamic.orange.es. [92.176.231.205])
-        by smtp.gmail.com with ESMTPSA id bg2-20020a05600c3c8200b003a3170a7af9sm9728818wmb.4.2022.12.02.02.50.29
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 02 Dec 2022 02:50:29 -0800 (PST)
-From:   Javier Martinez Canillas <javierm@redhat.com>
-To:     linux-kernel@vger.kernel.org
-Cc:     Paolo Bonzini <pbonzini@redhat.com>,
-        Sergio Lopez Pascual <slp@redhat.com>,
-        Sean Christopherson <seanjc@google.com>,
-        Javier Martinez Canillas <javierm@redhat.com>,
-        Jonathan Corbet <corbet@lwn.net>, kvm@vger.kernel.org,
-        linux-doc@vger.kernel.org
-Subject: [PATCH v2 4/4] KVM: Add missing arch for KVM_CREATE_DEVICE and KVM_{SET,GET}_DEVICE_ATTR
-Date:   Fri,  2 Dec 2022 11:50:11 +0100
-Message-Id: <20221202105011.185147-5-javierm@redhat.com>
-X-Mailer: git-send-email 2.38.1
-In-Reply-To: <20221202105011.185147-1-javierm@redhat.com>
-References: <20221202105011.185147-1-javierm@redhat.com>
+        with ESMTP id S233067AbiLBLUX (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Fri, 2 Dec 2022 06:20:23 -0500
+Received: from ams.source.kernel.org (ams.source.kernel.org [IPv6:2604:1380:4601:e00::1])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id DAC3B7F8A4;
+        Fri,  2 Dec 2022 03:20:19 -0800 (PST)
+Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
+        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+        (No client certificate requested)
+        by ams.source.kernel.org (Postfix) with ESMTPS id 89FB4B82142;
+        Fri,  2 Dec 2022 11:20:18 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPS id 4BEC6C433D7;
+        Fri,  2 Dec 2022 11:20:17 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+        s=k20201202; t=1669980017;
+        bh=ZijqJ5Y0fEiCwwKbkuv4C73PUtqmtzIwS7+w0AJ7XFg=;
+        h=Subject:From:Date:References:In-Reply-To:To:Cc:From;
+        b=lsGMj0R/aGek2z1UyvEyzjVn/8PAuj9lv4d97bptECd2JSPwoU26LbKfOUkjiOT0i
+         7IIEnboOKUClUoo96xZ7ToiNaoIEuArziy2kna3Mm+SiHJBv7WPBXrtqJXF8C1ZPQO
+         8S/ShEVjbt1kzhqkcUo/oFEgIDJLNjvvRwatiCV7ckS9Qc70Py8bdxkUPkWmjpM5JH
+         GVdD8T9WfXhtwxpWWMorEVv827prU/ZHOtGDJ9R8MMeuSRdY6GDwKgelZ2cES3sFJP
+         LqTPu/NRNFyDJn7+HXJVPVw5gzPgm26AWcjwx9VtFZre6LIjYROA8J8jKwnG0MfPcQ
+         81UofL3lMHz+Q==
+Received: from aws-us-west-2-korg-oddjob-1.ci.codeaurora.org (localhost.localdomain [127.0.0.1])
+        by aws-us-west-2-korg-oddjob-1.ci.codeaurora.org (Postfix) with ESMTP id 2B93BE450B4;
+        Fri,  2 Dec 2022 11:20:17 +0000 (UTC)
+Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Spam-Status: No, score=-2.1 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_NONE,
-        RCVD_IN_MSPIKE_H2,SPF_HELO_NONE,SPF_NONE autolearn=unavailable
-        autolearn_force=no version=3.4.6
+Subject: Re: [PATCH net-next 1/2] Documentation: bonding: update miimon default to
+ 100
+From:   patchwork-bot+netdevbpf@kernel.org
+Message-Id: <166998001717.12503.6133600119187941184.git-patchwork-notify@kernel.org>
+Date:   Fri, 02 Dec 2022 11:20:17 +0000
+References: <4c3f4f0b8f4a8cd3c104d58c106b97ce5f180bc1.1669839127.git.jtoppins@redhat.com>
+In-Reply-To: <4c3f4f0b8f4a8cd3c104d58c106b97ce5f180bc1.1669839127.git.jtoppins@redhat.com>
+To:     Jonathan Toppins <jtoppins@redhat.com>
+Cc:     netdev@vger.kernel.org, j.vosburgh@gmail.com, vfalico@gmail.com,
+        andy@greyhouse.net, davem@davemloft.net, edumazet@google.com,
+        kuba@kernel.org, pabeni@redhat.com, corbet@lwn.net,
+        maheshb@google.com, jarod@redhat.com, linux-doc@vger.kernel.org,
+        linux-kernel@vger.kernel.org
+X-Spam-Status: No, score=-7.1 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_HI,
+        SPF_HELO_NONE,SPF_PASS autolearn=ham autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-The ioctls are missing an architecture property that is present in others.
+Hello:
 
-Suggested-by: Sergio Lopez Pascual <slp@redhat.com>
-Signed-off-by: Javier Martinez Canillas <javierm@redhat.com>
----
+This series was applied to netdev/net-next.git (master)
+by David S. Miller <davem@davemloft.net>:
 
-(no changes since v1)
+On Wed, 30 Nov 2022 15:12:06 -0500 you wrote:
+> With commit c1f897ce186a ("bonding: set default miimon value for non-arp
+> modes if not set") the miimon default was changed from zero to 100 if
+> arp_interval is also zero. Document this fact in bonding.rst.
+> 
+> Fixes: c1f897ce186a ("bonding: set default miimon value for non-arp modes if not set")
+> Signed-off-by: Jonathan Toppins <jtoppins@redhat.com>
+> 
+> [...]
 
- Documentation/virt/kvm/api.rst | 2 ++
- 1 file changed, 2 insertions(+)
+Here is the summary with links:
+  - [net-next,1/2] Documentation: bonding: update miimon default to 100
+    https://git.kernel.org/netdev/net-next/c/f036b97da67f
+  - [net-next,2/2] Documentation: bonding: correct xmit hash steps
+    https://git.kernel.org/netdev/net-next/c/95cce3fae4d9
 
-diff --git a/Documentation/virt/kvm/api.rst b/Documentation/virt/kvm/api.rst
-index b15ea129f9cf..1db60cd9e1ba 100644
---- a/Documentation/virt/kvm/api.rst
-+++ b/Documentation/virt/kvm/api.rst
-@@ -3266,6 +3266,7 @@ valid entries found.
- ----------------------
- 
- :Capability: KVM_CAP_DEVICE_CTRL
-+:Architectures: all
- :Type: vm ioctl
- :Parameters: struct kvm_create_device (in/out)
- :Returns: 0 on success, -1 on error
-@@ -3306,6 +3307,7 @@ number.
- :Capability: KVM_CAP_DEVICE_CTRL, KVM_CAP_VM_ATTRIBUTES for vm device,
-              KVM_CAP_VCPU_ATTRIBUTES for vcpu device
-              KVM_CAP_SYS_ATTRIBUTES for system (/dev/kvm) device (no set)
-+:Architectures: x86, arm64, s390
- :Type: device ioctl, vm ioctl, vcpu ioctl
- :Parameters: struct kvm_device_attr
- :Returns: 0 on success, -1 on error
+You are awesome, thank you!
 -- 
-2.38.1
+Deet-doot-dot, I am a bot.
+https://korg.docs.kernel.org/patchwork/pwbot.html
+
 
