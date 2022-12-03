@@ -2,66 +2,45 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 7827664154F
-	for <lists+linux-doc@lfdr.de>; Sat,  3 Dec 2022 10:35:17 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 77ED8641559
+	for <lists+linux-doc@lfdr.de>; Sat,  3 Dec 2022 10:40:00 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S229501AbiLCJfP (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Sat, 3 Dec 2022 04:35:15 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:49158 "EHLO
+        id S229540AbiLCJj6 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Sat, 3 Dec 2022 04:39:58 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:53042 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S229503AbiLCJfN (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Sat, 3 Dec 2022 04:35:13 -0500
-Received: from mail-yb1-xb2d.google.com (mail-yb1-xb2d.google.com [IPv6:2607:f8b0:4864:20::b2d])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 99C8318B0E
-        for <linux-doc@vger.kernel.org>; Sat,  3 Dec 2022 01:35:12 -0800 (PST)
-Received: by mail-yb1-xb2d.google.com with SMTP id y135so4222639yby.12
-        for <linux-doc@vger.kernel.org>; Sat, 03 Dec 2022 01:35:12 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:from:to:cc:subject:date:message-id:reply-to;
-        bh=vtrfFxLIH+KLlkwI+VYMEBrcCrDD9/VNajjGq7Nb1f4=;
-        b=NVmWpl3QjoGFtPR4rDJHOoTnQYlO5GHybiR2vphJYM1XpTVLpHIkfNd2wQZ6LtTDp3
-         vCvrQCjnj9qWcOUXMSnMba6qcboV+zVLK3NJR5d9ual0qeT9hFnC0cr/ZoenLJCQDycB
-         p348AQq44S7N6fLPCPX3KjLf+xwnx20E6CFXhM6+kKwLAHnpoGlM8n45DKJFElO2gAWI
-         kRGptrIyJYXUwPpGrUcr/QgSQBJ7v9ZdwH6O2xsjvLmdOt80D+J3VEfQfhwfnlP45/uu
-         xCyle3Pbhdwg/TgcmeZ2gOY+XDtq3eouP6TBaOXcquCaXuVGam+xqsEMSmtcuhfzJCEq
-         n+kg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=vtrfFxLIH+KLlkwI+VYMEBrcCrDD9/VNajjGq7Nb1f4=;
-        b=R62ZqSWUgkkfbBznpqb6aZ3gM1WdmAQZg9i7GjVPnnm8JGSagOKtQ05RvISGQzd2Qk
-         x9EQqQb3mwbN0S+4JaH++s2/1+Kw5KdTYoM+Tm1v1esjpwAHCs1xOUGaA4ubmqN8VzBl
-         UX5dqQaKcvEhag988qrhXY+GSMUsWJRmWv8499VinohFfwkwMWJDKDbeZb22+13EXZAA
-         ysEJezuR5e244RmUXnw3mzyK62xgH4gVWsq9u3yP77djDZOFJiRSmhG6W/B2kiBvpgGb
-         PIxn9LEcAA1mi7H3TEZQyoMWDY4TRsYelzJiL2TvOxv6o7TLWydcML9hXqlGrRPuIKrt
-         08cw==
-X-Gm-Message-State: ANoB5pk4kz0/lb29nG5I+SEluFpjfUdUrsR0bYidhTkd4hhWFuSvOliT
-        aVD5qutknO7uHjPjZGyXhSfpMEaBwPalHvugi6tdTQ==
-X-Google-Smtp-Source: AA0mqf5lBr0i9TGCKJKQdl+c9tGgeapNQTrWM8pNJ2m+aX5ucbgHP6s/tq92nHKFL7pOBCILVQLukaUFbCxSZ2MnAf0=
-X-Received: by 2002:a25:c7cb:0:b0:6fc:834c:9c89 with SMTP id
- w194-20020a25c7cb000000b006fc834c9c89mr8728927ybe.43.1670060111875; Sat, 03
- Dec 2022 01:35:11 -0800 (PST)
+        with ESMTP id S229512AbiLCJj6 (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Sat, 3 Dec 2022 04:39:58 -0500
+Received: from szxga02-in.huawei.com (szxga02-in.huawei.com [45.249.212.188])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 2F41160B71
+        for <linux-doc@vger.kernel.org>; Sat,  3 Dec 2022 01:39:57 -0800 (PST)
+Received: from canpemm500002.china.huawei.com (unknown [172.30.72.55])
+        by szxga02-in.huawei.com (SkyGuard) with ESMTP id 4NPPsB1YTgzFq32;
+        Sat,  3 Dec 2022 17:39:10 +0800 (CST)
+Received: from localhost.localdomain (10.175.103.91) by
+ canpemm500002.china.huawei.com (7.192.104.244) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2375.31; Sat, 3 Dec 2022 17:39:54 +0800
+From:   Wei Li <liwei391@huawei.com>
+To:     Jonathan Corbet <corbet@lwn.net>
+CC:     Guo Ren <guoren@kernel.org>, Huacai Chen <chenhuacai@kernel.org>,
+        Tiezhu Yang <yangtiezhu@loongson.cn>,
+        Patricia Alfonso <trishalfonso@google.com>,
+        Richard Weinberger <richard@nod.at>,
+        Johannes Berg <johannes@sipsolutions.net>,
+        <linux-doc@vger.kernel.org>, <huawei.libin@huawei.com>
+Subject: [PATCH] Documentation/features: Update feature lists for 6.1
+Date:   Sat, 3 Dec 2022 17:37:50 +0800
+Message-ID: <20221203093750.4145802-1-liwei391@huawei.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-References: <20221130155519.20362-1-andriy.shevchenko@linux.intel.com> <20221130155519.20362-3-andriy.shevchenko@linux.intel.com>
-In-Reply-To: <20221130155519.20362-3-andriy.shevchenko@linux.intel.com>
-From:   Linus Walleij <linus.walleij@linaro.org>
-Date:   Sat, 3 Dec 2022 10:35:00 +0100
-Message-ID: <CACRpkdbhavSEFUiqEDO1cJXzmiQ8iHE25ciEt=c8NY-SQLAhow@mail.gmail.com>
-Subject: Re: [PATCH v1 3/3] Documentation: gpio: Replace leading TABs by
- spaces in the code blocks
-To:     Andy Shevchenko <andriy.shevchenko@linux.intel.com>
-Cc:     Marc Zyngier <maz@kernel.org>, linux-gpio@vger.kernel.org,
-        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
-        Bartosz Golaszewski <brgl@bgdev.pl>,
-        Jonathan Corbet <corbet@lwn.net>,
-        Hans de Goede <hdegoede@redhat.com>
-Content-Type: text/plain; charset="UTF-8"
-X-Spam-Status: No, score=-2.1 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_NONE,
+Content-Transfer-Encoding: 7BIT
+Content-Type:   text/plain; charset=US-ASCII
+X-Originating-IP: [10.175.103.91]
+X-ClientProxiedBy: dggems702-chm.china.huawei.com (10.3.19.179) To
+ canpemm500002.china.huawei.com (7.192.104.244)
+X-CFilter-Loop: Reflected
+X-Spam-Status: No, score=-4.2 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_MED,
         SPF_HELO_NONE,SPF_PASS autolearn=ham autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
@@ -69,17 +48,107 @@ Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Wed, Nov 30, 2022 at 4:55 PM Andy Shevchenko
-<andriy.shevchenko@linux.intel.com> wrote:
+Run the refresh script to document the recent feature additions
+on loong, um and csky as of v6.1-rc7.
 
-> The code blocks are indented with two spaces, if the leading TAB
-> is occurred the syntax highlighting might be broken in some editors.
-> To prevent that unify all code blocks by using spaces instead of
-> leading TAB(s).
->
-> Signed-off-by: Andy Shevchenko <andriy.shevchenko@linux.intel.com>
+Fixes: 5dc615520c4d ("LoongArch: Add BPF JIT support")
+Fixes: 5f1e001be579 ("LoongArch: Add qspinlock support")
+Fixes: b37042b2bb7c ("LoongArch: Add perf events support")
+Fixes: 5b301409e8bc ("UML: add support for KASAN under x86_64")
+Fixes: 4e8bb4ba5a55 ("csky: Add jump-label implementation")
+Fixes: 45e15c1a375e ("csky: Add qspinlock support")
+Signed-off-by: Wei Li <liwei391@huawei.com>
+---
+ Documentation/features/core/eBPF-JIT/arch-support.txt         | 2 +-
+ Documentation/features/core/jump-labels/arch-support.txt      | 2 +-
+ Documentation/features/debug/KASAN/arch-support.txt           | 2 +-
+ .../features/locking/queued-spinlocks/arch-support.txt        | 4 ++--
+ Documentation/features/perf/perf-regs/arch-support.txt        | 2 +-
+ Documentation/features/perf/perf-stackdump/arch-support.txt   | 2 +-
+ 6 files changed, 7 insertions(+), 7 deletions(-)
 
-Acked-by: Linus Walleij <linus.walleij@linaro.org>
+diff --git a/Documentation/features/core/eBPF-JIT/arch-support.txt b/Documentation/features/core/eBPF-JIT/arch-support.txt
+index c0bb9c92937f..7d968c493159 100644
+--- a/Documentation/features/core/eBPF-JIT/arch-support.txt
++++ b/Documentation/features/core/eBPF-JIT/arch-support.txt
+@@ -13,7 +13,7 @@
+     |        csky: | TODO |
+     |     hexagon: | TODO |
+     |        ia64: | TODO |
+-    |       loong: | TODO |
++    |       loong: |  ok  |
+     |        m68k: | TODO |
+     |  microblaze: | TODO |
+     |        mips: |  ok  |
+diff --git a/Documentation/features/core/jump-labels/arch-support.txt b/Documentation/features/core/jump-labels/arch-support.txt
+index 35e2a44b1448..20cbefb4cbff 100644
+--- a/Documentation/features/core/jump-labels/arch-support.txt
++++ b/Documentation/features/core/jump-labels/arch-support.txt
+@@ -10,7 +10,7 @@
+     |         arc: |  ok  |
+     |         arm: |  ok  |
+     |       arm64: |  ok  |
+-    |        csky: | TODO |
++    |        csky: |  ok  |
+     |     hexagon: | TODO |
+     |        ia64: | TODO |
+     |       loong: | TODO |
+diff --git a/Documentation/features/debug/KASAN/arch-support.txt b/Documentation/features/debug/KASAN/arch-support.txt
+index 2fd5fb6f5f23..04afee1ba4b6 100644
+--- a/Documentation/features/debug/KASAN/arch-support.txt
++++ b/Documentation/features/debug/KASAN/arch-support.txt
+@@ -25,7 +25,7 @@
+     |        s390: |  ok  |
+     |          sh: | TODO |
+     |       sparc: | TODO |
+-    |          um: | TODO |
++    |          um: |  ok  |
+     |         x86: |  ok  |
+     |      xtensa: |  ok  |
+     -----------------------
+diff --git a/Documentation/features/locking/queued-spinlocks/arch-support.txt b/Documentation/features/locking/queued-spinlocks/arch-support.txt
+index d2f2201febc8..59ee62b467f5 100644
+--- a/Documentation/features/locking/queued-spinlocks/arch-support.txt
++++ b/Documentation/features/locking/queued-spinlocks/arch-support.txt
+@@ -10,10 +10,10 @@
+     |         arc: | TODO |
+     |         arm: | TODO |
+     |       arm64: |  ok  |
+-    |        csky: | TODO |
++    |        csky: |  ok  |
+     |     hexagon: | TODO |
+     |        ia64: | TODO |
+-    |       loong: | TODO |
++    |       loong: |  ok  |
+     |        m68k: | TODO |
+     |  microblaze: | TODO |
+     |        mips: |  ok  |
+diff --git a/Documentation/features/perf/perf-regs/arch-support.txt b/Documentation/features/perf/perf-regs/arch-support.txt
+index 13c297bbf05c..3732e1cbd9e9 100644
+--- a/Documentation/features/perf/perf-regs/arch-support.txt
++++ b/Documentation/features/perf/perf-regs/arch-support.txt
+@@ -13,7 +13,7 @@
+     |        csky: |  ok  |
+     |     hexagon: | TODO |
+     |        ia64: | TODO |
+-    |       loong: | TODO |
++    |       loong: |  ok  |
+     |        m68k: | TODO |
+     |  microblaze: | TODO |
+     |        mips: |  ok  |
+diff --git a/Documentation/features/perf/perf-stackdump/arch-support.txt b/Documentation/features/perf/perf-stackdump/arch-support.txt
+index 931687eec671..4cc3b15edae5 100644
+--- a/Documentation/features/perf/perf-stackdump/arch-support.txt
++++ b/Documentation/features/perf/perf-stackdump/arch-support.txt
+@@ -13,7 +13,7 @@
+     |        csky: |  ok  |
+     |     hexagon: | TODO |
+     |        ia64: | TODO |
+-    |       loong: | TODO |
++    |       loong: |  ok  |
+     |        m68k: | TODO |
+     |  microblaze: | TODO |
+     |        mips: |  ok  |
+-- 
+2.25.1
 
-Yours,
-Linus Walleij
