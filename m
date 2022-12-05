@@ -2,197 +2,153 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 8103B6429C5
-	for <lists+linux-doc@lfdr.de>; Mon,  5 Dec 2022 14:44:12 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 34A02642A95
+	for <lists+linux-doc@lfdr.de>; Mon,  5 Dec 2022 15:46:21 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S232006AbiLENoL (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 5 Dec 2022 08:44:11 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:35752 "EHLO
+        id S232145AbiLEOqU (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 5 Dec 2022 09:46:20 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:49702 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S232385AbiLENnq (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Mon, 5 Dec 2022 08:43:46 -0500
-Received: from mail-wr1-x42d.google.com (mail-wr1-x42d.google.com [IPv6:2a00:1450:4864:20::42d])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id F138C1DA6C
-        for <linux-doc@vger.kernel.org>; Mon,  5 Dec 2022 05:43:14 -0800 (PST)
-Received: by mail-wr1-x42d.google.com with SMTP id h10so9104407wrx.3
-        for <linux-doc@vger.kernel.org>; Mon, 05 Dec 2022 05:43:14 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=bytedance-com.20210112.gappssmtp.com; s=20210112;
-        h=content-transfer-encoding:in-reply-to:references:cc:to:from
-         :content-language:subject:user-agent:mime-version:date:message-id
-         :from:to:cc:subject:date:message-id:reply-to;
-        bh=PSfDwZPeG8ibIdq5sbKvkL1VsqUlUscnguEB5oSOxSc=;
-        b=ZhFQOk5sHEFKzbm8fBjTNTecUMb6srGFq09hOHXW6kISqLW8gBDE3jNN0izPXaaE3X
-         DVOXi2YDNUqfzOv8xB3pFAgcYIuK1FmRV4esx3+KJ3cyZFEiVKFzu7NPXpA2+JEoADaD
-         13amI67POzIZYrUkAoNZH8B4OE4iZiDvYqvAJYQnER8FK5PwsZr6ShoWEvnTLGky3x/A
-         HhQd1huG4wKL1p1O37IhT2z73k7GLly9/OUH08rQU99hjNPkV9UzyOOqX2HNMEd3rXei
-         1tFaqBk4u8sgKKmkYUA8ncwGRbe6Jl7fYsJpJVyDCV6HGhhlyfUEgS5LpfZztLytNEiy
-         wlog==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=content-transfer-encoding:in-reply-to:references:cc:to:from
-         :content-language:subject:user-agent:mime-version:date:message-id
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=PSfDwZPeG8ibIdq5sbKvkL1VsqUlUscnguEB5oSOxSc=;
-        b=OTt+bfMdw67azJMq7elNAKFXfqZe82gyyYkQ8TzGSIW9kGxmr14myhXlTtJ0E1TyuM
-         sEq292q+rQQPgluHtnurP6/doDSc5viexxHqoN1PgkSlCnvSrprAgPEQRH5oF/BZCuas
-         TPIMddd7EJCAj7H+KZnLzcNkyaaiACpN4o+150omkdpapTomVTzEjecSkVapkRVwYCc0
-         cAzNO7ODMyJVanui/WHqvqwoGe2MLbtBdvMYLuAvAfa0NydiK3wQaDzjwDexMJ/LU7P5
-         t5TgiQAQ+VzsDzdV00uf4/nKPZDUO+V1rq43KIMdrGlJCgMjjkTed3Lm8ZXwhqa1KF+C
-         T8Ug==
-X-Gm-Message-State: ANoB5pmaiqLrkHaeGZgQCwmzImaTUm96iQgk8CtVn4bml+uVhbXJ8dbW
-        c8aQ5U4pF16DHHkA03HP+gv+lA==
-X-Google-Smtp-Source: AA0mqf68CFsZMOCd88AhAlMizn4w9UrnERv3KIachtaDvBlHTCAHLOEwLF5Gb8KkdqSMJF8Id58Pag==
-X-Received: by 2002:a5d:6e8e:0:b0:236:5e77:b58e with SMTP id k14-20020a5d6e8e000000b002365e77b58emr44809235wrz.320.1670247793408;
-        Mon, 05 Dec 2022 05:43:13 -0800 (PST)
-Received: from ?IPV6:2a02:6b6a:b4bd:0:4759:d90c:43ca:e8f0? ([2a02:6b6a:b4bd:0:4759:d90c:43ca:e8f0])
-        by smtp.gmail.com with ESMTPSA id n3-20020a05600c3b8300b003cfbbd54178sm28603622wms.2.2022.12.05.05.43.12
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Mon, 05 Dec 2022 05:43:12 -0800 (PST)
-Message-ID: <66bc7368-aabc-9ec3-f4ba-a3bbeed5938b@bytedance.com>
-Date:   Mon, 5 Dec 2022 13:43:12 +0000
+        with ESMTP id S231770AbiLEOqR (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Mon, 5 Dec 2022 09:46:17 -0500
+Received: from esa.microchip.iphmx.com (esa.microchip.iphmx.com [68.232.154.123])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id BC2EF1B1FA;
+        Mon,  5 Dec 2022 06:46:13 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=microchip.com; i=@microchip.com; q=dns/txt; s=mchp;
+  t=1670251573; x=1701787573;
+  h=from:to:cc:subject:date:message-id:mime-version:
+   content-transfer-encoding;
+  bh=fNYiF1ogl3tzaX/gkv9v+1He+AojtwgLXxTo8k5gkC4=;
+  b=Nv9TCsQc5jgg8O5OmVo+ipvS4H6BBva2QI8YkwtneHjis5lvKR/B0KDN
+   xs+UkqWizoEyLLoP99r42BJcHiqcwC8IKotdON0/NVg3b8cvsHalS+vAh
+   KefP12qNonobpXGrf9XN2saJHMGXz/WNUh6YKSXD2q16rn6vrO1XJUKY7
+   QkNY1l3vH2ZNlIHOUM5TAo093gDJDUbl1p93Sxxr4RZur9eB98nbMBIwb
+   wuO8u33CqBlYZS+uCV7OrOQMnOFrXQpOucUfvBB3IZ4oUZYqvTtX3jJoK
+   PhnxoDsKQOuhRMTpg+L7CPCq6bYKtCeoZ6yeCf/V0tx8p6IRTmKiXkQLL
+   w==;
+X-IronPort-AV: E=Sophos;i="5.96,219,1665471600"; 
+   d="scan'208";a="126535113"
+Received: from unknown (HELO email.microchip.com) ([170.129.1.10])
+  by esa6.microchip.iphmx.com with ESMTP/TLS/AES256-SHA256; 05 Dec 2022 07:46:12 -0700
+Received: from chn-vm-ex04.mchp-main.com (10.10.85.152) by
+ chn-vm-ex01.mchp-main.com (10.10.85.143) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2507.12; Mon, 5 Dec 2022 07:46:12 -0700
+Received: from wendy.microchip.com (10.10.115.15) by chn-vm-ex04.mchp-main.com
+ (10.10.85.152) with Microsoft SMTP Server id 15.1.2507.12 via Frontend
+ Transport; Mon, 5 Dec 2022 07:46:10 -0700
+From:   Conor Dooley <conor.dooley@microchip.com>
+To:     <linux-riscv@lists.infradead.org>,
+        Palmer Dabbelt <palmer@dabbelt.com>
+CC:     Conor Dooley <conor.dooley@microchip.com>,
+        <ajones@ventanamicro.com>, <aou@eecs.berkeley.edu>,
+        <conor@kernel.org>, <corbet@lwn.net>, <guoren@kernel.org>,
+        <heiko@sntech.de>, <paul.walmsley@sifive.com>,
+        <linux-kernel@vger.kernel.org>, <linux-doc@vger.kernel.org>
+Subject: [PATCH v2 0/3] Putting some basic order on isa extension lists
+Date:   Mon, 5 Dec 2022 14:45:23 +0000
+Message-ID: <20221205144525.2148448-1-conor.dooley@microchip.com>
+X-Mailer: git-send-email 2.38.1
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.11.0
-Subject: Re: [External] Re: [v2 0/6] KVM: arm64: implement vcpu_is_preempted
- check
-Content-Language: en-US
-From:   Usama Arif <usama.arif@bytedance.com>
-To:     Marc Zyngier <maz@kernel.org>
-Cc:     linux-kernel@vger.kernel.org, linux-arm-kernel@lists.infradead.org,
-        kvmarm@lists.cs.columbia.edu, kvm@vger.kernel.org,
-        linux-doc@vger.kernel.org,
-        virtualization@lists.linux-foundation.org, linux@armlinux.org.uk,
-        yezengruan@huawei.com, catalin.marinas@arm.com, will@kernel.org,
-        steven.price@arm.com, mark.rutland@arm.com, bagasdotme@gmail.com,
-        fam.zheng@bytedance.com, liangma@liangbit.com,
-        punit.agrawal@bytedance.com
-References: <20221104062105.4119003-1-usama.arif@bytedance.com>
- <87k048f3cm.wl-maz@kernel.org>
- <180b91af-a2aa-2cfd-eb7f-b2825c4e3dbe@bytedance.com>
- <86r0y1nmep.wl-maz@kernel.org>
- <95efd030-27f6-5668-a25e-9fbf210bfa1c@bytedance.com>
-In-Reply-To: <95efd030-27f6-5668-a25e-9fbf210bfa1c@bytedance.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-X-Spam-Status: No, score=-2.2 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-        DKIM_VALID,NICE_REPLY_A,RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,SPF_PASS
-        autolearn=ham autolearn_force=no version=3.4.6
+Content-Type: text/plain
+X-Spam-Status: No, score=-4.4 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_MED,
+        SPF_HELO_PASS,SPF_PASS autolearn=ham autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
+For v2+, I added another path with some uapi docs & switched to Drew's
+suggested ordering of alphabetically, except in the /proc/cpuinfo array,
+as per the discussion today in the pw-sync call. I also added a
+sprinkling of comments around which things should be sorted in which
+way.
 
+Pasting from the chat on v2, since it's relevant to whether re-ordering
+what appears in /proc/cpuinfo is even permitted..
 
-On 24/11/2022 13:55, Usama Arif wrote:
-> 
-> 
-> On 18/11/2022 00:20, Marc Zyngier wrote:
->> On Mon, 07 Nov 2022 12:00:44 +0000,
->> Usama Arif <usama.arif@bytedance.com> wrote:
->>>
->>>
->>>
->>> On 06/11/2022 16:35, Marc Zyngier wrote:
->>>> On Fri, 04 Nov 2022 06:20:59 +0000,
->>>> Usama Arif <usama.arif@bytedance.com> wrote:
->>>>>
->>>>> This patchset adds support for vcpu_is_preempted in arm64, which
->>>>> allows the guest to check if a vcpu was scheduled out, which is
->>>>> useful to know incase it was holding a lock. vcpu_is_preempted can
->>>>> be used to improve performance in locking (see owner_on_cpu usage in
->>>>> mutex_spin_on_owner, mutex_can_spin_on_owner, rtmutex_spin_on_owner
->>>>> and osq_lock) and scheduling (see available_idle_cpu which is used
->>>>> in several places in kernel/sched/fair.c for e.g. in wake_affine to
->>>>> determine which CPU can run soonest):
->>>>
->>>> [...]
->>>>
->>>>> pvcy shows a smaller overall improvement (50%) compared to
->>>>> vcpu_is_preempted (277%).  Host side flamegraph analysis shows that
->>>>> ~60% of the host time when using pvcy is spent in kvm_handle_wfx,
->>>>> compared with ~1.5% when using vcpu_is_preempted, hence
->>>>> vcpu_is_preempted shows a larger improvement.
->>>>
->>>> And have you worked out *why* we spend so much time handling WFE?
->>>>
->>>>     M.
->>>
->>> Its from the following change in pvcy patchset:
->>>
->>> diff --git a/arch/arm64/kvm/handle_exit.c b/arch/arm64/kvm/handle_exit.c
->>> index e778eefcf214..915644816a85 100644
->>> --- a/arch/arm64/kvm/handle_exit.c
->>> +++ b/arch/arm64/kvm/handle_exit.c
->>> @@ -118,7 +118,12 @@ static int kvm_handle_wfx(struct kvm_vcpu *vcpu)
->>>          }
->>>
->>>          if (esr & ESR_ELx_WFx_ISS_WFE) {
->>> -               kvm_vcpu_on_spin(vcpu, vcpu_mode_priv(vcpu));
->>> +               int state;
->>> +               while ((state = kvm_pvcy_check_state(vcpu)) == 0)
->>> +                       schedule();
->>> +
->>> +               if (state == -1)
->>> +                       kvm_vcpu_on_spin(vcpu, vcpu_mode_priv(vcpu));
->>>          } else {
->>>                  if (esr & ESR_ELx_WFx_ISS_WFxT)
->>>                          vcpu_set_flag(vcpu, IN_WFIT);
->>>
->>>
->>> If my understanding is correct of the pvcy changes, whenever pvcy
->>> returns an unchanged vcpu state, we would schedule to another
->>> vcpu. And its the constant scheduling where the time is spent. I guess
->>> the affects are much higher when the lock contention is very
->>> high. This can be seem from the pvcy host side flamegraph as well with
->>> (~67% of the time spent in the schedule() call in kvm_handle_wfx), For
->>> reference, I have put the graph at:
->>> https://uarif1.github.io/pvlock/perf_host_pvcy_nmi.svg
->>
->> The real issue here is that we don't try to pick the right vcpu to
->> run, and strictly rely on schedule() to eventually pick something that
->> can run.
->>
->> An interesting to do would be to try and fit the directed yield
->> mechanism there. It would be a lot more interesting than the one-off
->> vcpu_is_preempted hack, as it gives us a low-level primitive on which
->> to construct things (pvcy is effectively a mwait-like primitive).
-> 
-> We could use kvm_vcpu_yield_to to yield to a specific vcpu, but how 
-> would we determine which vcpu to yield to?
-> 
-> IMO vcpu_is_preempted is very well integrated in a lot of core kernel 
-> code, i.e. mutex, rtmutex, rwsem and osq_lock. It is also used in 
-> scheduler to determine better which vCPU we can run on soonest, select 
-> idle core, etc. I am not sure if all of these cases will be optimized by 
-> pvcy? Also, with vcpu_is_preempted, some of the lock heavy benchmarks 
-> come down from spending around 50% of the time in lock to less than 1% 
-> (so not sure how much more room is there for improvement).
-> 
-> We could also use vcpu_is_preempted to optimize IPI performance (along 
-> with directed yield to target IPI vCPU) similar to how its done in x86 
-> (https://lore.kernel.org/all/1560255830-8656-2-git-send-email-wanpengli@tencent.com/). 
-> This case definitely wont be covered by pvcy.
-> 
-> Considering all the above, i.e. the core kernel integration already 
-> present and possible future usecases of vcpu_is_preempted, maybe its 
-> worth making vcpu_is_preempted work on arm independently of pvcy?
-> 
+I wrote:
+> Drew wrote:
+> > My biggest concern is how much we need to care about the order of the
+> > string in proc and whether or not we're allowed to fix its order like
+> > we're doing with this patch. I hope we can, and I vote we do.
+>
+> Being a bit hard-nosed about it:
+> - the spec has said for years that this order is not correct
+>
+> - their parser cannot assume any given extension is even present, so the
+>   index at which the extension starts was only ever going to vary wildly
+>
+> - to break a parser, it must expect to see extension Abcd before Efgh &
+>   that order has to change for them
+>
+> - expecting that a given pair of extensions that appeared one after
+>   another would always do so is not something we should worry about
+>   breaking as it was always noted in the comment (and by the specs?)
+>   that new extensions would be added in alphabetical order (I'd like to
+>   think that if a clairvoyant wrote a parser and knew that there'd be
+>   nothing in the gap between the extensions we have now & what may be
+>   produced they'd also account for this re-ordering...)
+>
+> - the re-order of sstc is going to land for v6.1 & the addition of sstc
+>   out of order landed in v6.0, so either that is an issue too or this is
+>   fine
 
-Hi,
+I'm sending the patchset, so I think it's bordering on obvious that I
+think doing this is likely okay & maintaining a "strict" interpretation
+of what the spec says is the way to go.
 
-Just wanted to check if there are any comments on above? I can send a v3 
-with the doc and code fixes suggested in the earlier reviews if it makes 
-sense?
+I think the only case we have to worry about breaking uABI stuff is if
+this changes behaviour in a way that could not be done by an otherwise
+valid change in the ISA string, so bullet 3 above.
+
+I'll leave that determination up to the Higher Powers, but I think it's
+going to be very difficult not to accidentally break this order in the
+future if we decide that what is currently there, must remain exactly
+as-is.
 
 Thanks,
-Usama
+Conor.
 
-> Thanks,
-> Usama
-> 
->>
->>     M.
->>
+Changes since v1:
+- strengthened some wording to use "must"
+- reworded the bits in both code & doc about what canonical order is
+- added some missing "... must be in alphabetical order" sections to
+  both code & doc
+- forced an _ before multi-letter extensions
+- there's likely a trivial conflict with drew's addition of an assert
+  for RISCV_ISA_EXT_ID_MAX.
+
+CC: ajones@ventanamicro.com
+CC: aou@eecs.berkeley.edu
+CC: conor@kernel.org
+CC: conor.dooley@microchip.com
+CC: corbet@lwn.net
+CC: guoren@kernel.org
+CC: heiko@sntech.de
+CC: palmer@dabbelt.com
+CC: paul.walmsley@sifive.com
+
+CC: linux-kernel@vger.kernel.org
+CC: linux-riscv@lists.infradead.org
+CC: linux-doc@vger.kernel.org
+
+Conor Dooley (3):
+  RISC-V: clarify ISA string ordering rules in cpu.c
+  RISC-V: resort all extensions in consistent orders
+  Documentation: riscv: add a section about ISA string ordering in
+    /proc/cpuinfo
+
+ Documentation/riscv/uabi.rst   | 42 +++++++++++++++++++++++++++
+ arch/riscv/include/asm/hwcap.h | 12 ++++----
+ arch/riscv/kernel/cpu.c        | 53 ++++++++++++++++++++++++----------
+ arch/riscv/kernel/cpufeature.c |  6 ++--
+ 4 files changed, 91 insertions(+), 22 deletions(-)
+
+-- 
+2.38.1
+
