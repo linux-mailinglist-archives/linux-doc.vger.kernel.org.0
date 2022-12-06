@@ -2,144 +2,140 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 6B51B643B31
-	for <lists+linux-doc@lfdr.de>; Tue,  6 Dec 2022 03:11:41 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 0DC2D643D50
+	for <lists+linux-doc@lfdr.de>; Tue,  6 Dec 2022 07:52:21 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S230090AbiLFCLj (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 5 Dec 2022 21:11:39 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:38988 "EHLO
+        id S234038AbiLFGwT (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 6 Dec 2022 01:52:19 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:40568 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S233897AbiLFCLT (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Mon, 5 Dec 2022 21:11:19 -0500
-Received: from loongson.cn (mail.loongson.cn [114.242.206.163])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTP id A8E8726563
-        for <linux-doc@vger.kernel.org>; Mon,  5 Dec 2022 18:10:48 -0800 (PST)
-Received: from loongson.cn (unknown [112.20.109.110])
-        by gateway (Coremail) with SMTP id _____8CxbeunpI5j1nEDAA--.7990S3;
-        Tue, 06 Dec 2022 10:10:47 +0800 (CST)
-Received: from localhost.localdomain (unknown [112.20.109.110])
-        by localhost.localdomain (Coremail) with SMTP id AQAAf8CxXuClpI5jPFEmAA--.28256S4;
-        Tue, 06 Dec 2022 10:10:47 +0800 (CST)
-From:   Yanteng Si <siyanteng@loongson.cn>
-To:     chenhuacai@kernel.org, corbet@lwn.net, alexs@kernel.org,
-        seakeel@gmail.com
-Cc:     Yanteng Si <siyanteng@loongson.cn>, kernel@xen0n.name,
-        wu.xiangcheng@linux.dev, jiaxun.yang@flygoat.com,
-        liuyun@loongson.cn, linux-doc@vger.kernel.org,
-        loongarch@lists.linux.dev, siyanteng01@gmail.com,
-        Xiaotian Wu <wuxiaotian@loongson.cn>
-Subject: [PATCH v5 2/2] docs/zh_CN: Add booting Chinese translation
-Date:   Tue,  6 Dec 2022 10:07:59 +0800
-Message-Id: <3f66a26d1099155346e890d61a85adda2dc2dd07.1670289933.git.siyanteng@loongson.cn>
-X-Mailer: git-send-email 2.31.1
-In-Reply-To: <cover.1670289933.git.siyanteng@loongson.cn>
-References: <cover.1670289933.git.siyanteng@loongson.cn>
+        with ESMTP id S231895AbiLFGwR (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 6 Dec 2022 01:52:17 -0500
+Received: from mail-ed1-f54.google.com (mail-ed1-f54.google.com [209.85.208.54])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 5637A1A83A;
+        Mon,  5 Dec 2022 22:52:16 -0800 (PST)
+Received: by mail-ed1-f54.google.com with SMTP id c17so10410106edj.13;
+        Mon, 05 Dec 2022 22:52:16 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=content-transfer-encoding:in-reply-to:from:references:cc:to
+         :content-language:subject:user-agent:mime-version:date:message-id
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=SMTUgjfzyyWTmD7y/UtJYvOT87qBLK9RluPkgoZ6OBU=;
+        b=obB2Hb+oCi8AEy40JSR49oI6EgmQJ4plwPPZI1RdnuY3ps80qyjsQRNQtoIy6qsE0V
+         haO6AOaFCHWxBQd2bjCcsmU6SF2Gu0bFwxkgmAJ0vEt/X1l1m7ZcypYUmVq+52P5y52t
+         KmhgGzrKbP6s8pAEIwUZoUy785RgnIGKAkOfOK7g/lCmmNi1Dx/YJYbedVgZExZrJRFs
+         J7lqn2sGRgYg6OVXlO6bXDUZcfmhIkfrEmfCwT363dcPWxikEY35D6xjoaFdCQQS0RKg
+         j8F+ksbAEJFX07lALWoYTHsZtxERD9fAqIIXO9Qn6hO3y9zZ5QeLo3NtyZaTNYnbE+SK
+         vyyg==
+X-Gm-Message-State: ANoB5plvzfn7aPbWZizcjH5p0fTMMMxZdRgYFPvGXc4aO7cHvwr9kg59
+        UK1ZcNwbLpMxgbVRiVdU14+U5OL6hAo=
+X-Google-Smtp-Source: AA0mqf580R470q9lP4FNtIa85kztRpzJgRpl2SFp7WJ4mom5ZtAz2Sy+gJFG7CT9EUHXdT4LsDo80A==
+X-Received: by 2002:a05:6402:3807:b0:45c:a651:87f1 with SMTP id es7-20020a056402380700b0045ca65187f1mr60139045edb.359.1670309534847;
+        Mon, 05 Dec 2022 22:52:14 -0800 (PST)
+Received: from ?IPV6:2a0b:e7c0:0:107::aaaa:49? ([2a0b:e7c0:0:107::aaaa:49])
+        by smtp.gmail.com with ESMTPSA id v6-20020a170906180600b007c0c679ca2fsm4628858eje.26.2022.12.05.22.52.14
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Mon, 05 Dec 2022 22:52:14 -0800 (PST)
+Message-ID: <7117060e-9081-2bb2-823b-a1a311c8cb72@kernel.org>
+Date:   Tue, 6 Dec 2022 07:52:13 +0100
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-CM-TRANSID: AQAAf8CxXuClpI5jPFEmAA--.28256S4
-X-CM-SenderInfo: pvl1t0pwhqwqxorr0wxvrqhubq/
-X-Coremail-Antispam: 1Uk129KBjvJXoWxAw4rJF4Dtr13Xr47ZFW8WFg_yoW5XF48pF
-        97ur97Gan7Z343J343KryUXF1UXF1xGa17WFn2g3sYgFn7tw1FvryUtr90qa4xG34FyFyU
-        XF4rK34Y9F1jyw7anT9S1TB71UUUUj7qnTZGkaVYY2UrUUUUj1kv1TuYvTs0mT0YCTnIWj
-        qI5I8CrVACY4xI64kE6c02F40Ex7xfYxn0WfASr-VFAUDa7-sFnT9fnUUIcSsGvfJTRUUU
-        bSxYFVCjjxCrM7AC8VAFwI0_Jr0_Gr1l1xkIjI8I6I8E6xAIw20EY4v20xvaj40_Wr0E3s
-        1l1IIY67AEw4v_Jrv_JF1l8cAvFVAK0II2c7xJM28CjxkF64kEwVA0rcxSw2x7M28EF7xv
-        wVC0I7IYx2IY67AKxVW5JVW7JwA2z4x0Y4vE2Ix0cI8IcVCY1x0267AKxVW8JVWxJwA2z4
-        x0Y4vEx4A2jsIE14v26r4UJVWxJr1l84ACjcxK6I8E87Iv6xkF7I0E14v26r4UJVWxJr1l
-        n4kS14v26r126r1DM2AIxVAIcxkEcVAq07x20xvEncxIr21l57IF6xkI12xvs2x26I8E6x
-        ACxx1l5I8CrVACY4xI64kE6c02F40Ex7xfMcIj6xIIjxv20xvE14v26r1q6rW5McIj6I8E
-        87Iv67AKxVW8JVWxJwAm72CE4IkC6x0Yz7v_Jr0_Gr1lF7xvr2IYc2Ij64vIr41lc7CjxV
-        Aaw2AFwI0_JF0_Jw1l42xK82IYc2Ij64vIr41l4I8I3I0E4IkC6x0Yz7v_Jr0_Gr1l4IxY
-        O2xFxVAFwI0_JF0_Jw1lx2IqxVAqx4xG67AKxVWUJVWUGwC20s026x8GjcxK67AKxVWUGV
-        WUWwC2zVAF1VAY17CE14v26r1q6r43MIIYrxkI7VAKI48JMIIF0xvE2Ix0cI8IcVAFwI0_
-        Gr0_Xr1lIxAIcVC0I7IYx2IY6xkF7I0E14v26r4j6F4UMIIF0xvE42xK8VAvwI8IcIk0rV
-        WUJVWUCwCI42IY6I8E87Iv67AKxVW8JVWxJwCI42IY6I8E87Iv6xkF7I0E14v26r4j6r4U
-        JbIYCTnIWIevJa73UjIFyTuYvjxU4Xo7DUUUU
-X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00,SPF_HELO_PASS,
-        SPF_PASS autolearn=ham autolearn_force=no version=3.4.6
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.5.0
+Subject: Re: [PATCH v3 1/2] earlycon: Let users set the clock frequency
+Content-Language: en-US
+To:     Ricardo Ribalda <ribalda@chromium.org>,
+        Jonathan Corbet <corbet@lwn.net>,
+        Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+Cc:     linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
+        linux-serial@vger.kernel.org
+References: <20221123-serial-clk-v3-0-49c516980ae0@chromium.org>
+ <20221123-serial-clk-v3-1-49c516980ae0@chromium.org>
+From:   Jiri Slaby <jirislaby@kernel.org>
+In-Reply-To: <20221123-serial-clk-v3-1-49c516980ae0@chromium.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-Spam-Status: No, score=-1.7 required=5.0 tests=BAYES_00,
+        FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,HEADER_FROM_DIFFERENT_DOMAINS,
+        NICE_REPLY_A,RCVD_IN_DNSWL_NONE,RCVD_IN_MSPIKE_H2,SPF_HELO_NONE,
+        SPF_PASS autolearn=no autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Translate ../loongarch/booting.rst into Chinese.
+On 24. 11. 22, 13:39, Ricardo Ribalda wrote:
+> Some platforms, namely AMD Picasso, use non standard uart clocks (48M),
+> witch makes it impossible to use with earlycon.
+> 
+> Let the user select its own frequency.
+> 
+> Signed-off-by: Ricardo Ribalda <ribalda@chromium.org>
 
-Suggested-by: Xiaotian Wu <wuxiaotian@loongson.cn>
-Signed-off-by: Yanteng Si <siyanteng@loongson.cn>
----
- .../translations/zh_CN/loongarch/booting.rst  | 48 +++++++++++++++++++
- .../translations/zh_CN/loongarch/index.rst    |  1 +
- 2 files changed, 49 insertions(+)
- create mode 100644 Documentation/translations/zh_CN/loongarch/booting.rst
+Reviewed-by: Jiri Slaby <jirislaby@kernel.org>
 
-diff --git a/Documentation/translations/zh_CN/loongarch/booting.rst b/Documentation/translations/zh_CN/loongarch/booting.rst
-new file mode 100644
-index 000000000000..71c71c5f1b4d
---- /dev/null
-+++ b/Documentation/translations/zh_CN/loongarch/booting.rst
-@@ -0,0 +1,48 @@
-+.. SPDX-License-Identifier: GPL-2.0
-+
-+.. include:: ../disclaimer-zh_CN.rst
-+
-+:Original: Documentation/loongarch/booting.rst
-+
-+:翻译:
-+
-+ 司延腾 Yanteng Si <siyanteng@loongson.cn>
-+
-+====================
-+启动 Linux/LoongArch
-+====================
-+
-+:作者: 司延腾 <siyanteng@loongson.cn>
-+:日期: 2022年11月18日
-+
-+BootLoader传递给内核的信息
-+==========================
-+
-+LoongArch支持ACPI和FDT，需要传递给内核的信息包括memmap、initrd、cmdline、可选
-+的fdt等。
-+内核在 `kernel_entry` 被传递给以下参数:
-+
-+      - a0 = efi_boot: `efi_boot` 是一个标志，表示这个启动环境是否完全符合UEFI
-+        的要求。
-+
-+      - a1 = cmdline: `cmdline` 是一个指向内核命令行的指针。
-+
-+      - a2 = systemtable: `systemtable` 指向EFI的系统表，在这个阶段涉及的所有
-+        指针都是物理地址。
-+
-+Linux/LoongArch启动镜像文件头
-+=============================
-+
-+内核镜像是EFI镜像。作为PE文件，它们有一个64字节的头结构体，如下所示::
-+
-+	u32	MZ_MAGIC		    /* "MZ", MS-DOS 头 */
-+	u32	res0 = 0		    /* 保留 */
-+	u64	kernel_entry		/* 内核入口点 */
-+	u64	_end - _text		/* 内核镜像有效大小 */
-+	u64	0			        /* 从RAM开始的加载内核镜像的偏移量 */
-+	u64	res1 = 0		    /* 保留 */
-+	u64	res2 = 0		    /* 保留 */
-+	u64	res3 = 0		    /* 保留 */
-+	u32	LINUX_PE_MAGIC		/* 魔术数 */
-+	u32	pe_header - _head	/* 到PE头的偏移量 */
-+
-diff --git a/Documentation/translations/zh_CN/loongarch/index.rst b/Documentation/translations/zh_CN/loongarch/index.rst
-index 7d23eb78379d..8609ade41981 100644
---- a/Documentation/translations/zh_CN/loongarch/index.rst
-+++ b/Documentation/translations/zh_CN/loongarch/index.rst
-@@ -15,6 +15,7 @@ LoongArch体系结构
- 
-    introduction
-    irq-chip-model
-+   booting
- 
-    features
- 
+> diff --git a/Documentation/admin-guide/kernel-parameters.txt b/Documentation/admin-guide/kernel-parameters.txt
+> index a465d5242774..9efb6c3b0486 100644
+> --- a/Documentation/admin-guide/kernel-parameters.txt
+> +++ b/Documentation/admin-guide/kernel-parameters.txt
+> @@ -1182,10 +1182,10 @@
+>   			specified, the serial port must already be setup and
+>   			configured.
+>   
+> -		uart[8250],io,<addr>[,options]
+> -		uart[8250],mmio,<addr>[,options]
+> -		uart[8250],mmio32,<addr>[,options]
+> -		uart[8250],mmio32be,<addr>[,options]
+> +		uart[8250],io,<addr>[,options[,uartclk]]
+> +		uart[8250],mmio,<addr>[,options[,uartclk]]
+> +		uart[8250],mmio32,<addr>[,options[,uartclk]]
+> +		uart[8250],mmio32be,<addr>[,options[,uartclk]]
+>   		uart[8250],0x<addr>[,options]
+>   			Start an early, polled-mode console on the 8250/16550
+>   			UART at the specified I/O port or MMIO address.
+> @@ -1194,7 +1194,9 @@
+>   			If none of [io|mmio|mmio32|mmio32be], <addr> is assumed
+>   			to be equivalent to 'mmio'. 'options' are specified
+>   			in the same format described for "console=ttyS<n>"; if
+> -			unspecified, the h/w is not initialized.
+> +			unspecified, the h/w is not initialized. 'uartclk' is
+> +			the uart clock frequency; if unspecified, it is set
+> +			to 'BASE_BAUD' * 16.
+>   
+>   		pl011,<addr>
+>   		pl011,mmio32,<addr>
+> diff --git a/drivers/tty/serial/earlycon.c b/drivers/tty/serial/earlycon.c
+> index a5f380584cda..3a0c88419b6c 100644
+> --- a/drivers/tty/serial/earlycon.c
+> +++ b/drivers/tty/serial/earlycon.c
+> @@ -120,7 +120,13 @@ static int __init parse_options(struct earlycon_device *device, char *options)
+>   	}
+>   
+>   	if (options) {
+> +		char *uartclk;
+> +
+>   		device->baud = simple_strtoul(options, NULL, 0);
+> +		uartclk = strchr(options, ',');
+> +		if (uartclk && kstrtouint(uartclk + 1, 0, &port->uartclk) < 0)
+> +			pr_warn("[%s] unsupported earlycon uart clkrate option\n",
+> +				options);
+>   		length = min(strcspn(options, " ") + 1,
+>   			     (size_t)(sizeof(device->options)));
+>   		strscpy(device->options, options, length);
+> @@ -139,7 +145,8 @@ static int __init register_earlycon(char *buf, const struct earlycon_id *match)
+>   		buf = NULL;
+>   
+>   	spin_lock_init(&port->lock);
+> -	port->uartclk = BASE_BAUD * 16;
+> +	if (!port->uartclk)
+> +		port->uartclk = BASE_BAUD * 16;
+>   	if (port->mapbase)
+>   		port->membase = earlycon_map(port->mapbase, 64);
+>   
+> 
+
 -- 
-2.31.1
+js
+suse labs
 
