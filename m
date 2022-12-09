@@ -2,88 +2,58 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 9C20C647F31
-	for <lists+linux-doc@lfdr.de>; Fri,  9 Dec 2022 09:25:45 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 21854647F7F
+	for <lists+linux-doc@lfdr.de>; Fri,  9 Dec 2022 09:46:01 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S229542AbiLIIZm (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Fri, 9 Dec 2022 03:25:42 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:40920 "EHLO
+        id S229685AbiLIIp7 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Fri, 9 Dec 2022 03:45:59 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:50482 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S229571AbiLIIZk (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Fri, 9 Dec 2022 03:25:40 -0500
-Received: from smtp-out2.suse.de (smtp-out2.suse.de [IPv6:2001:67c:2178:6::1d])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 7253056D46;
-        Fri,  9 Dec 2022 00:25:39 -0800 (PST)
-Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
-        (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-         key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
-        (No client certificate requested)
-        by smtp-out2.suse.de (Postfix) with ESMTPS id 282851FE57;
-        Fri,  9 Dec 2022 08:25:38 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-        t=1670574338; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-         mime-version:mime-version:content-type:content-type:
-         content-transfer-encoding:content-transfer-encoding:
-         in-reply-to:in-reply-to:references:references;
-        bh=Yg8Dy91nslxvuXyFZO8v15npgrF13z71XGIrk7x/zmg=;
-        b=Gnl1efSl8C1V561RAp72h3ej4lDX6Hv8yQ8w86HPJq65Ge6RaZnEvRYmYPoSJ9jiiv1NGv
-        Fx9fSt/Cl1opw8apuCmh5dW02+cRgRM0sOsgUb5228e0NfEAvX3nWN0tgPL+Ob+UcDzKtb
-        TWx/69xXPo0xOpP4HauT3GvHY0m9jyM=
-Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
-        (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-         key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
-        (No client certificate requested)
-        by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id 024D2138E0;
-        Fri,  9 Dec 2022 08:25:38 +0000 (UTC)
-Received: from dovecot-director2.suse.de ([192.168.254.65])
-        by imap2.suse-dmz.suse.de with ESMTPSA
-        id M/+IAALxkmOgQgAAMHmgww
-        (envelope-from <mhocko@suse.com>); Fri, 09 Dec 2022 08:25:38 +0000
-Date:   Fri, 9 Dec 2022 09:25:37 +0100
-From:   Michal Hocko <mhocko@suse.com>
-To:     =?utf-8?B?56iL5Z6y5rab?= Chengkaitao Cheng 
-        <chengkaitao@didiglobal.com>
-Cc:     chengkaitao <pilgrimtao@gmail.com>,
-        "tj@kernel.org" <tj@kernel.org>,
-        "lizefan.x@bytedance.com" <lizefan.x@bytedance.com>,
-        "hannes@cmpxchg.org" <hannes@cmpxchg.org>,
-        "corbet@lwn.net" <corbet@lwn.net>,
-        "roman.gushchin@linux.dev" <roman.gushchin@linux.dev>,
-        "shakeelb@google.com" <shakeelb@google.com>,
-        "akpm@linux-foundation.org" <akpm@linux-foundation.org>,
-        "songmuchun@bytedance.com" <songmuchun@bytedance.com>,
-        "viro@zeniv.linux.org.uk" <viro@zeniv.linux.org.uk>,
-        "zhengqi.arch@bytedance.com" <zhengqi.arch@bytedance.com>,
-        "ebiederm@xmission.com" <ebiederm@xmission.com>,
-        "Liam.Howlett@oracle.com" <Liam.Howlett@oracle.com>,
-        "chengzhihao1@huawei.com" <chengzhihao1@huawei.com>,
-        "haolee.swjtu@gmail.com" <haolee.swjtu@gmail.com>,
-        "yuzhao@google.com" <yuzhao@google.com>,
-        "willy@infradead.org" <willy@infradead.org>,
-        "vasily.averin@linux.dev" <vasily.averin@linux.dev>,
-        "vbabka@suse.cz" <vbabka@suse.cz>,
-        "surenb@google.com" <surenb@google.com>,
-        "sfr@canb.auug.org.au" <sfr@canb.auug.org.au>,
-        "mcgrof@kernel.org" <mcgrof@kernel.org>,
-        "sujiaxun@uniontech.com" <sujiaxun@uniontech.com>,
-        "feng.tang@intel.com" <feng.tang@intel.com>,
-        "cgroups@vger.kernel.org" <cgroups@vger.kernel.org>,
-        "linux-doc@vger.kernel.org" <linux-doc@vger.kernel.org>,
-        "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
-        "linux-fsdevel@vger.kernel.org" <linux-fsdevel@vger.kernel.org>,
-        "linux-mm@kvack.org" <linux-mm@kvack.org>
-Subject: Re: [PATCH v2] mm: memcontrol: protect the memory in cgroup from
- being oom killed
-Message-ID: <Y5LxAbOB2AYp42hi@dhcp22.suse.cz>
-References: <Y5HzfLB7lu4+BOu1@dhcp22.suse.cz>
- <114DF8F0-3E68-4F2B-8E35-0943EC2F51AE@didiglobal.com>
+        with ESMTP id S229563AbiLIIp6 (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Fri, 9 Dec 2022 03:45:58 -0500
+Received: from frasgout13.his.huawei.com (frasgout13.his.huawei.com [14.137.139.46])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 423FA5CD12;
+        Fri,  9 Dec 2022 00:45:56 -0800 (PST)
+Received: from mail02.huawei.com (unknown [172.18.147.229])
+        by frasgout13.his.huawei.com (SkyGuard) with ESMTP id 4NT3tT5G6rz9v7Yr;
+        Fri,  9 Dec 2022 16:22:57 +0800 (CST)
+Received: from huaweicloud.com (unknown [10.204.63.22])
+        by APP1 (Coremail) with SMTP id LxC2BwBnUG318ZJjXxnRAA--.238S2;
+        Fri, 09 Dec 2022 09:29:49 +0100 (CET)
+From:   Roberto Sassu <roberto.sassu@huaweicloud.com>
+To:     corbet@lwn.net, paul@paul-moore.com, casey@schaufler-ca.com,
+        omosnace@redhat.com, john.johansen@canonical.com,
+        kpsingh@kernel.org
+Cc:     bpf@vger.kernel.org, linux-doc@vger.kernel.org,
+        linux-security-module@vger.kernel.org,
+        linux-kernel@vger.kernel.org,
+        Roberto Sassu <roberto.sassu@huawei.com>
+Subject: [PATCH 1/2] lsm: Fix description of fs_context_parse_param
+Date:   Fri,  9 Dec 2022 09:29:35 +0100
+Message-Id: <20221209082936.892416-1-roberto.sassu@huaweicloud.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
-In-Reply-To: <114DF8F0-3E68-4F2B-8E35-0943EC2F51AE@didiglobal.com>
-X-Spam-Status: No, score=-4.4 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_MED,SPF_HELO_NONE,
+X-CM-TRANSID: LxC2BwBnUG318ZJjXxnRAA--.238S2
+X-Coremail-Antispam: 1UD129KBjvdXoWrtw13Cw4DCFyxXF4xtFy8uFg_yoWfJFgE9w
+        4ftrWkXan7AFn7Ja4IkFnIgF17Krs7Ary0g3Z5t343WF4kXF4kGas7JF93Ww1Fgrnakr97
+        ZFs5Zr97ZF1fWjkaLaAFLSUrUUUUjb8apTn2vfkv8UJUUUU8Yxn0WfASr-VFAUDa7-sFnT
+        9fnUUIcSsGvfJTRUUUbIkYFVCjjxCrM7AC8VAFwI0_Gr0_Xr1l1xkIjI8I6I8E6xAIw20E
+        Y4v20xvaj40_Wr0E3s1l1IIY67AEw4v_Jr0_Jr4l8cAvFVAK0II2c7xJM28CjxkF64kEwV
+        A0rcxSw2x7M28EF7xvwVC0I7IYx2IY67AKxVWUJVWUCwA2z4x0Y4vE2Ix0cI8IcVCY1x02
+        67AKxVW8JVWxJwA2z4x0Y4vEx4A2jsIE14v26r4j6F4UM28EF7xvwVC2z280aVCY1x0267
+        AKxVW8JVW8Jr1le2I262IYc4CY6c8Ij28IcVAaY2xG8wAqx4xG64xvF2IEw4CE5I8CrVC2
+        j2WlYx0E2Ix0cI8IcVAFwI0_JrI_JrylYx0Ex4A2jsIE14v26r1j6r4UMcvjeVCFs4IE7x
+        kEbVWUJVW8JwACjcxG0xvY0x0EwIxGrwACI402YVCY1x02628vn2kIc2xKxwCY1x0262kK
+        e7AKxVW8ZVWrXwCF04k20xvY0x0EwIxGrwCFx2IqxVCFs4IE7xkEbVWUJVW8JwC20s026c
+        02F40E14v26r1j6r18MI8I3I0E7480Y4vE14v26r106r1rMI8E67AF67kF1VAFwI0_Jw0_
+        GFylIxkGc2Ij64vIr41lIxAIcVC0I7IYx2IY67AKxVWUJVWUCwCI42IY6xIIjxv20xvEc7
+        CjxVAFwI0_Gr0_Cr1lIxAIcVCF04k26cxKx2IYs7xG6rWUJVWrZr1UMIIF0xvEx4A2jsIE
+        14v26r1j6r4UMIIF0xvEx4A2jsIEc7CjxVAFwI0_Gr0_Gr1UYxBIdaVFxhVjvjDU0xZFpf
+        9x07jzQ6JUUUUU=
+X-CM-SenderInfo: purev21wro2thvvxqx5xdzvxpfor3voofrz/1tbiAgABBF1jj4J1LgAAsv
+X-CFilter-Loop: Reflected
+X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00,SPF_HELO_NONE,
         SPF_PASS autolearn=ham autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
@@ -91,55 +61,30 @@ Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Fri 09-12-22 05:07:15, 程垲涛 Chengkaitao Cheng wrote:
-> At 2022-12-08 22:23:56, "Michal Hocko" <mhocko@suse.com> wrote:
-[...]
-> >oom killer is a memory reclaim of the last resort. So yes, there is some
-> >difference but fundamentally it is about releasing some memory. And long
-> >term we have learned that the more clever it tries to be the more likely
-> >corner cases can happen. It is simply impossible to know the best
-> >candidate so this is a just a best effort. We try to aim for
-> >predictability at least.
-> 
-> Is the current oom_score strategy predictable? I don't think so. The score_adj 
-> has broken the predictability of oom_score (it is no longer simply killing the 
-> process that uses the most mems).
+From: Roberto Sassu <roberto.sassu@huawei.com>
 
-oom_score as reported to the userspace already considers oom_score_adj
-which means that you can compare processes and get a reasonable guess
-what would be the current oom_victim. There is a certain fuzz level
-because this is not atomic and also there is no clear candidate when
-multiple processes have equal score. So yes, it is not 100% predictable.
-memory.reclaim as you propose doesn't change that though.
+The fs_context_parse_param hook already has a description, which seems the
+right one according to the code.
 
-Is oom_score_adj a good interface? No, not really. If I could go back in
-time I would nack it but here we are. We have an interface that
-promises quite much but essentially it only allows two usecases
-(OOM_SCORE_ADJ_MIN, OOM_SCORE_ADJ_MAX) reliably. Everything in between
-is clumsy at best because a real user space oom policy would require to
-re-evaluate the whole oom domain (be it global or memcg oom) as the
-memory consumption evolves over time. I am really worried that your
-memory.oom.protection directs a very similar trajectory because
-protection really needs to consider other memcgs to balance properly.
+Signed-off-by: Roberto Sassu <roberto.sassu@huawei.com>
+---
+ include/linux/lsm_hooks.h | 3 ---
+ 1 file changed, 3 deletions(-)
 
-[...]
-
-> > But I am really open
-> >to be convinced otherwise and this is in fact what I have been asking
-> >for since the beginning. I would love to see some examples on the
-> >reasonable configuration for a practical usecase.
-> 
-> Here is a simple example. In a docker container, users can divide all processes 
-> into two categories (important and normal), and put them in different cgroups. 
-> One cgroup's oom.protect is set to "max", the other is set to "0". In this way, 
-> important processes in the container can be protected.
-
-That is effectivelly oom_score_adj = OOM_SCORE_ADJ_MIN - 1 to all
-processes in the important group. I would argue you can achieve a very
-similar result by the process launcher to set the oom_score_adj and
-inherit it to all processes in that important container. You do not need
-any memcg tunable for that. I am really much more interested in examples
-when the protection is to be fine tuned.
+diff --git a/include/linux/lsm_hooks.h b/include/linux/lsm_hooks.h
+index bad3b6baad86..20e70132584c 100644
+--- a/include/linux/lsm_hooks.h
++++ b/include/linux/lsm_hooks.h
+@@ -100,9 +100,6 @@
+  *	the filesystem.
+  *	@fc indicates the filesystem context.
+  *	@param The parameter.
+- *	Return 0 to indicate that the parameter should be passed on to the
+- *	filesystem, 1 to indicate that the parameter should be discarded or an
+- *	error to indicate that the parameter should be rejected.
+  *
+  * Security hooks for filesystem operations.
+  *
 -- 
-Michal Hocko
-SUSE Labs
+2.25.1
+
