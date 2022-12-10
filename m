@@ -2,43 +2,43 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id B80E2648CBD
-	for <lists+linux-doc@lfdr.de>; Sat, 10 Dec 2022 04:26:39 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 0C041648CBF
+	for <lists+linux-doc@lfdr.de>; Sat, 10 Dec 2022 04:26:41 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S229733AbiLJD0i (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Fri, 9 Dec 2022 22:26:38 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:33666 "EHLO
+        id S229554AbiLJD0j (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Fri, 9 Dec 2022 22:26:39 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:33668 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S229732AbiLJD0i (ORCPT
+        with ESMTP id S229468AbiLJD0i (ORCPT
         <rfc822;linux-doc@vger.kernel.org>); Fri, 9 Dec 2022 22:26:38 -0500
 Received: from loongson.cn (mail.loongson.cn [114.242.206.163])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTP id B16B026492
-        for <linux-doc@vger.kernel.org>; Fri,  9 Dec 2022 19:26:36 -0800 (PST)
+        by lindbergh.monkeyblade.net (Postfix) with ESMTP id 35D1A27DDB
+        for <linux-doc@vger.kernel.org>; Fri,  9 Dec 2022 19:26:37 -0800 (PST)
 Received: from loongson.cn (unknown [112.20.108.31])
-        by gateway (Coremail) with SMTP id _____8Cxrutr_JNjPZgEAA--.10836S3;
-        Sat, 10 Dec 2022 11:26:35 +0800 (CST)
+        by gateway (Coremail) with SMTP id _____8AxRPBs_JNjQpgEAA--.10660S3;
+        Sat, 10 Dec 2022 11:26:36 +0800 (CST)
 Received: from localhost.localdomain (unknown [112.20.108.31])
-        by localhost.localdomain (Coremail) with SMTP id AQAAf8BxoOJq_JNjyPIpAA--.37251S3;
-        Sat, 10 Dec 2022 11:26:35 +0800 (CST)
+        by localhost.localdomain (Coremail) with SMTP id AQAAf8BxoOJq_JNjyPIpAA--.37251S4;
+        Sat, 10 Dec 2022 11:26:36 +0800 (CST)
 From:   Yanteng Si <siyanteng@loongson.cn>
 To:     alexs@kernel.org, seakeel@gmail.com
 Cc:     Yanteng Si <siyanteng@loongson.cn>, corbet@lwn.net,
         bobwxc@email.cn, chenhuacai@kernel.org, linux-doc@vger.kernel.org,
         siyanteng01@gmail.com
-Subject: [PATCH v2 11/13] docs/zh_CN: Update the translation of ksm to 6.1-rc8
-Date:   Sat, 10 Dec 2022 11:27:03 +0800
-Message-Id: <4d11b3d7b7223c16b38ef913a6a6de108a0886d3.1670642548.git.siyanteng@loongson.cn>
+Subject: [PATCH v2 12/13] docs/zh_CN: Update the translation of msi-howto to 6.1-rc8
+Date:   Sat, 10 Dec 2022 11:27:04 +0800
+Message-Id: <a47eb583fc396cd936a27749c318557284855936.1670642548.git.siyanteng@loongson.cn>
 X-Mailer: git-send-email 2.31.1
 In-Reply-To: <cover.1670642548.git.siyanteng@loongson.cn>
 References: <cover.1670642548.git.siyanteng@loongson.cn>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-CM-TRANSID: AQAAf8BxoOJq_JNjyPIpAA--.37251S3
+X-CM-TRANSID: AQAAf8BxoOJq_JNjyPIpAA--.37251S4
 X-CM-SenderInfo: pvl1t0pwhqwqxorr0wxvrqhubq/
-X-Coremail-Antispam: 1Uk129KBjvJXoWxurW7Jry3Kr4fGw45Cr4kZwb_yoWrJF4fpF
-        9FkrWIgF47AF929Fy7Kr1DuF43trZ7Gw47Kw17taykXas5Ja92qr40kFyrJF1fZ34kA3yY
-        qrWqvFs3CF9FywUanT9S1TB71UUUUUJqnTZGkaVYY2UrUUUUj1kv1TuYvTs0mT0YCTnIWj
+X-Coremail-Antispam: 1Uk129KBjvJXoW7tr4UJFWUAFyfWr4fWr4kZwb_yoW8JFyUpa
+        srK34xJF47Jry7tr45WrWUKFW7WF97W3y3KF4xtwnIqwnxZrWktrn8tr9Fg34Igry8AFWU
+        XF1IkFyUKry2yrDanT9S1TB71UUUUUJqnTZGkaVYY2UrUUUUj1kv1TuYvTs0mT0YCTnIWj
         qI5I8CrVACY4xI64kE6c02F40Ex7xfYxn0WfASr-VFAUDa7-sFnT9fnUUIcSsGvfJTRUUU
         b-8YFVCjjxCrM7AC8VAFwI0_Jr0_Gr1l1xkIjI8I6I8E6xAIw20EY4v20xvaj40_Wr0E3s
         1l1IIY67AEw4v_Jrv_JF1l8cAvFVAK0II2c7xJM28CjxkF64kEwVA0rcxSw2x7M28EF7xv
@@ -53,7 +53,7 @@ X-Coremail-Antispam: 1Uk129KBjvJXoWxurW7Jry3Kr4fGw45Cr4kZwb_yoWrJF4fpF
         0xvEc7CjxVAFwI0_Cr0_Gr1UMIIF0xvE42xK8VAvwI8IcIk0rVWUJVWUCwCI42IY6I8E87
         Iv67AKxVWxJVW8Jr1lIxAIcVC2z280aVCY1x0267AKxVW8Jr0_Cr1UYxBIdaVFxhVjvjDU
         0xZFpf9x07jxSdgUUUUU=
-X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00,SPF_HELO_PASS,
+X-Spam-Status: No, score=-0.0 required=5.0 tests=BAYES_20,SPF_HELO_PASS,
         SPF_PASS autolearn=ham autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
@@ -61,74 +61,34 @@ Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Update to commit 21b7bdb504ae ("ksm: add profit monitoring
-documentation")
-
-commit 94bfe85bde18 ("mm/vmstat: add events for ksm cow")
+Update to commit 88614075a952 ("Documentation: PCI: Add reference
+to PCI/MSI device driver APIs")
 
 Signed-off-by: Yanteng Si <siyanteng@loongson.cn>
+Reviewed-by: Wu XiangCheng <bobwxc@email.cn>
 ---
- .../translations/zh_CN/admin-guide/mm/ksm.rst | 50 +++++++++++++++++++
- 1 file changed, 50 insertions(+)
+ Documentation/translations/zh_CN/PCI/msi-howto.rst | 11 +++++++++++
+ 1 file changed, 11 insertions(+)
 
-diff --git a/Documentation/translations/zh_CN/admin-guide/mm/ksm.rst b/Documentation/translations/zh_CN/admin-guide/mm/ksm.rst
-index 4829156ef1ae..0029c4fd2201 100644
---- a/Documentation/translations/zh_CN/admin-guide/mm/ksm.rst
-+++ b/Documentation/translations/zh_CN/admin-guide/mm/ksm.rst
-@@ -146,3 +146,53 @@ stable_node_dups
+diff --git a/Documentation/translations/zh_CN/PCI/msi-howto.rst b/Documentation/translations/zh_CN/PCI/msi-howto.rst
+index 7ea4d50cdad2..1b9b5ea790d8 100644
+--- a/Documentation/translations/zh_CN/PCI/msi-howto.rst
++++ b/Documentation/translations/zh_CN/PCI/msi-howto.rst
+@@ -231,3 +231,14 @@ ACPI FADT表中指明了它。在这种情况下，Linux会自动禁用MSI。有
  
- 比值 ``pages_sharing/pages_shared`` 的最大值受限制于 ``max_page_sharing``
- 的设定。要想增加该比值，则相应地要增加 ``max_page_sharing`` 的值。
+ 也需要检查设备驱动程序，看它是否支持MSI。例如，它可能包含对带有PCI_IRQ_MSI或
+ PCI_IRQ_MSIX标志的pci_alloc_irq_vectors（）的调用。
 +
-+监测KSM的收益
-+=============
 +
-+KSM可以通过合并相同的页面来节省内存，但也会消耗额外的内存，因为它需要生成一些rmap_items
-+来保存每个扫描页面的简要rmap信息。其中有些页面可能会被合并，但有些页面在被检查几次
-+后可能无法被合并，这些都是无益的内存消耗。
++MSI(-X) APIs设备驱动程序列表
++============================
 +
-+1) 如何确定KSM在全系统范围内是节省内存还是消耗内存？这里有一个简单的近似计算方法供参考::
++PCI/MSI子系统有一个专门的C文件，用于其导出的设备驱动程序APIs - `drivers/pci/msi/api.c` 。
++以下是导出的函数:
 +
-+       general_profit =~ pages_sharing * sizeof(page) - (all_rmap_items) *
-+                         sizeof(rmap_item);
++该API在以下内核代码中:
 +
-+   其中all_rmap_items可以通过对 ``pages_sharing`` 、 ``pages_shared`` 、 ``pages_unshared``
-+   和 ``pages_volatile`` 的求和而轻松获得。
-+
-+2) 单一进程中KSM的收益也可以通过以下近似的计算得到::
-+
-+       process_profit =~ ksm_merging_pages * sizeof(page) -
-+                         ksm_rmap_items * sizeof(rmap_item).
-+
-+   其中ksm_merging_pages显示在 ``/proc/<pid>/`` 目录下，而ksm_rmap_items
-+   显示在 ``/proc/<pid>/ksm_stat`` 。
-+
-+从应用的角度来看， ``ksm_rmap_items`` 和 ``ksm_merging_pages`` 的高比例意
-+味着不好的madvise-applied策略，所以开发者或管理员必须重新考虑如何改变madvis策
-+略。举个例子供参考，一个页面的大小通常是4K，而rmap_item的大小在32位CPU架构上分
-+别是32B，在64位CPU架构上是64B。所以如果 ``ksm_rmap_items/ksm_merging_pages``
-+的比例在64位CPU上超过64，或者在32位CPU上超过128，那么应用程序的madvise策略应
-+该被放弃，因为ksm收益大约为零或负值。
-+
-+监控KSM事件
-+===========
-+
-+在/proc/vmstat中有一些计数器，可以用来监控KSM事件。KSM可能有助于节省内存，这是
-+一种权衡，因为它可能会在KSM COW或复制中的交换上遭受延迟。这些事件可以帮助用户评估
-+是否或如何使用KSM。例如，如果cow_ksm增加得太快，用户可以减少madvise(, , MADV_MERGEABLE)
-+的范围。
-+
-+cow_ksm
-+        在每次KSM页面触发写时拷贝（COW）时都会被递增，当用户试图写入KSM页面时，
-+        我们必须做一个拷贝。
-+
-+ksm_swpin_copy
-+        在换入时，每次KSM页被复制时都会被递增。请注意，KSM页在换入时可能会被复
-+        制，因为do_swap_page()不能做所有的锁，而需要重组一个跨anon_vma的KSM页。
-+
-+--
-+Izik Eidus,
-+Hugh Dickins, 2009年11月17日。
++drivers/pci/msi/api.c
 -- 
 2.31.1
 
