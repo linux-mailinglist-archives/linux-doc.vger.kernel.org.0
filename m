@@ -2,124 +2,121 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id DAD4A649537
-	for <lists+linux-doc@lfdr.de>; Sun, 11 Dec 2022 18:17:14 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 3F5AA64963C
+	for <lists+linux-doc@lfdr.de>; Sun, 11 Dec 2022 21:28:07 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S230186AbiLKRRN (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Sun, 11 Dec 2022 12:17:13 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:36704 "EHLO
+        id S230317AbiLKU2F (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Sun, 11 Dec 2022 15:28:05 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:35350 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S230097AbiLKRRM (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Sun, 11 Dec 2022 12:17:12 -0500
-Received: from mail-wr1-x42e.google.com (mail-wr1-x42e.google.com [IPv6:2a00:1450:4864:20::42e])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id DC173E0C3
-        for <linux-doc@vger.kernel.org>; Sun, 11 Dec 2022 09:17:10 -0800 (PST)
-Received: by mail-wr1-x42e.google.com with SMTP id bx10so9793783wrb.0
-        for <linux-doc@vger.kernel.org>; Sun, 11 Dec 2022 09:17:10 -0800 (PST)
+        with ESMTP id S229471AbiLKU2E (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Sun, 11 Dec 2022 15:28:04 -0500
+Received: from mail-pj1-x1033.google.com (mail-pj1-x1033.google.com [IPv6:2607:f8b0:4864:20::1033])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 694B0E4A;
+        Sun, 11 Dec 2022 12:28:03 -0800 (PST)
+Received: by mail-pj1-x1033.google.com with SMTP id js9so8908582pjb.2;
+        Sun, 11 Dec 2022 12:28:03 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
-        h=to:subject:message-id:date:from:sender:mime-version:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=25obtB31DDlgLRXlLw15qHeqkAUXlEcFvDhBX+iWq9A=;
-        b=bUDUSB5wUoV2dFpy9KiRRKokkq2yJk2aJvYPoiMGSGge+qi4f2NMDPDTTFaMmRIzAq
-         VAxjfIFI6S2TV7UEZbPtzZFt027JqZkwynQRx9RHWEYHo/ejplJFTqp98OBkhRc3pyXu
-         uQIfGyZw11i76XJfyUXxtef/Y5LBiBxI/XAc81YtBjWphnV9w5RpHOxbgCQABsZoJQih
-         O/w949UMVwQAV5bdAqJYuGV3VTZFJQic6Qo6HgVD4gCYHgqNHIuri4TI9C6edLZbKb4C
-         OpdN54vLLoeTUvY8phACXgACOwbd2pk3PiK9BvD9ZmNCjrdhCpsB1E6Px+MIPN5e4mjS
-         6AHA==
+        h=in-reply-to:content-disposition:mime-version:references:message-id
+         :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+        bh=by9IvQrNC4n3hMJPqWVgJdj265wMQ5fsMcjx5CkRMb0=;
+        b=Gvluwy8JmJ35C4rhygAyMhL+GuwkXWeHQDfujZWe2lpeshB2WQwe8zU/oDmPrdNcNz
+         CD6szyiJYLnPouNh7PdPMCRSQXLtRZQ74900pzOfX9tJiRNXq0R4SnMzTFMYe3Q9sYWs
+         nuqQKIgkZasvDWg3OnLuLZwUcCHlvrxpWUicdx1b5rYcZcCFjjCcg5l1b52gBZ/7wWjo
+         577wUQcVyQ9CruX0RRyH5m0J+F9oixQ/Ea3HWdnF9ZpV4yJScVDkQJceaepUkJlrEkcq
+         d9FfFWRoboee96aSzpYxNwux8m3l0kNJTjbf15fwYKTetvqUSS/QNa64NluQ3HHIPINl
+         AJNw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=to:subject:message-id:date:from:sender:mime-version
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=25obtB31DDlgLRXlLw15qHeqkAUXlEcFvDhBX+iWq9A=;
-        b=EKGLOXXNzCkBlMvomIZCctIH8SXwRktB2Lfpmpiws7d19WP8tjIgRbdqLdE3IxgHui
-         H99ibPAbXjjW3fJQ4R+qNiBLjuUD/oMoreh9ZBnDIB7cvyN1OhjeUV4f4ZWpfN22PCOJ
-         wyz9qfahwq6J78jW+w7U+DQDDytIUXtAC/m/F7KBzDuNiifyRiONpbq+dhPddvf55hYS
-         JBQ0lH/n359BmvNohqrRz0x82nJenKr0QHwohD2XLuJwnMVIhW4nfHWmFK+U2Z9yviDB
-         JHZxzx4kp5PyTAmuiCotC4mlvGLNYi1c5Wg3sBSsmMkmWWpUeG98XEoQEqPL1C66mM+h
-         wLxA==
-X-Gm-Message-State: ANoB5pk6DAVyZ85Y6aX61lmPdBAkNvqDdx20320OEoNKBiVD/ZWu7AHk
-        snPSDe4Qp0MPY6irj7PZY2uLuuL7uT1BbX/OKZs=
-X-Google-Smtp-Source: AA0mqf7XEtWgrGuuHxu9pbCGz/rwhjJocgJpm28JalIGing9H5aWE7aCJffPecJndQhq17NleTTj5tEOLbUYRJ/fmzo=
-X-Received: by 2002:a05:6000:705:b0:248:443:2e99 with SMTP id
- bs5-20020a056000070500b0024804432e99mr456084wrb.52.1670779029191; Sun, 11 Dec
- 2022 09:17:09 -0800 (PST)
+        h=in-reply-to:content-disposition:mime-version:references:message-id
+         :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=by9IvQrNC4n3hMJPqWVgJdj265wMQ5fsMcjx5CkRMb0=;
+        b=vPsk2/GUUIXG8+SazL6ejyb9vixOZ0blMEY9QqNDkKnlcWt+YPUOKv4ubBc3iKjsN3
+         yLp1hnfiqnPwdrOMcHhfll63DpxoRewHOzUl+SMjljz2vwc4SrCnOlLYMnGz2dzkEblA
+         QDlHJniLxRfTIZy8mcPg4/06OL5ZN6yQAEsuT0VmyQQDgn4DHa+OfNU2n7hc141322DU
+         wjUuvfG17ATgLBP7P8PPNnVnT5JdBXZoA483DONICFbnFmNVb8Lg44LlDvR4RyULBsP1
+         xnbIcLBbmMbLiDCoEO8mgxd6zvQHmpTnmus7HXLa8pI/R67hJyQlVi8nYu9DwgJUaeZu
+         iGzg==
+X-Gm-Message-State: ANoB5pkJz0dCcSVpKZjBm05DuW8JcLBVxTqi6RdrWQVyhcazxZI1dA2Q
+        BSqFQvNyIB6g62+Nv0R/VB0=
+X-Google-Smtp-Source: AA0mqf4GK7azKp1g/5pH5O5L6eYpB3GPoNtYfq1K6iRvncnGG1DylBHg8K05syopNMajOeARdzRoUQ==
+X-Received: by 2002:a17:902:f285:b0:189:f0ac:191d with SMTP id k5-20020a170902f28500b00189f0ac191dmr3559258plc.4.1670790482873;
+        Sun, 11 Dec 2022 12:28:02 -0800 (PST)
+Received: from mail.google.com ([103.229.249.253])
+        by smtp.gmail.com with ESMTPSA id u14-20020a17090341ce00b001754fa42065sm4749908ple.143.2022.12.11.12.27.57
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Sun, 11 Dec 2022 12:28:02 -0800 (PST)
+Date:   Mon, 12 Dec 2022 09:27:55 +1300
+From:   Paulo Miguel Almeida <paulo.miguel.almeida.rodenas@gmail.com>
+To:     Bagas Sanjaya <bagasdotme@gmail.com>
+Cc:     Masahiro Yamada <masahiroy@kernel.org>,
+        Nathan Chancellor <nathan@kernel.org>,
+        Nick Desaulniers <ndesaulniers@google.com>,
+        Nicolas Schier <nicolas@fjasle.eu>,
+        Jonathan Corbet <corbet@lwn.net>,
+        Cristian Ciocaltea <cristian.ciocaltea@collabora.com>,
+        Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+        Vipin Sharma <vipinsh@google.com>,
+        linux-kbuild@vger.kernel.org, linux-doc@vger.kernel.org,
+        linux-kernel@vger.kernel.org
+Subject: Re: [PATCH v2] scripts/tags.sh: choose which directories to exclude
+ from being indexed
+Message-ID: <Y5Y9S0qSOAL/KHp1@mail.google.com>
+References: <Y5T66yWNVAZNIaJ0@mail.google.com>
+ <Y5UP+tnnxNgoi6A2@mail.google.com>
+ <Y5VazQnY7s4+cXdM@debian.me>
 MIME-Version: 1.0
-Sender: customagenttony@gmail.com
-Received: by 2002:a5d:5984:0:0:0:0:0 with HTTP; Sun, 11 Dec 2022 09:17:08
- -0800 (PST)
-From:   Mrs Aisha Gaddafi <aishagaddafiaisha20@gmail.com>
-Date:   Sun, 11 Dec 2022 09:17:08 -0800
-X-Google-Sender-Auth: Fkl9BcCdvil9CjWnKbuyYi2r26g
-Message-ID: <CAAV183S77Qp-1qOrg=vaxS7PAWeP80tVAiSG3YejQoMFJyrR3A@mail.gmail.com>
-Subject: Greetings from Aisha Gaddafi,
-To:     undisclosed-recipients:;
-Content-Type: text/plain; charset="UTF-8"
-X-Spam-Status: Yes, score=7.8 required=5.0 tests=BAYES_99,BAYES_999,
-        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FORM_FRAUD_5,
-        FREEMAIL_FROM,LOTS_OF_MONEY,MILLION_HUNDRED,MILLION_USD,
-        MONEY_FORM_SHORT,MONEY_FRAUD_5,RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,
-        SPF_PASS,T_FILL_THIS_FORM_SHORT,T_HK_NAME_FM_MR_MRS,UNDISC_MONEY,
-        URG_BIZ autolearn=no autolearn_force=no version=3.4.6
-X-Spam-Report: * -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at
-        *      https://www.dnswl.org/, no trust
-        *      [2a00:1450:4864:20:0:0:0:42e listed in]
-        [list.dnswl.org]
-        *  3.5 BAYES_99 BODY: Bayes spam probability is 99 to 100%
-        *      [score: 1.0000]
-        *  0.2 BAYES_999 BODY: Bayes spam probability is 99.9 to 100%
-        *      [score: 1.0000]
-        *  0.0 FREEMAIL_FROM Sender email is commonly abused enduser mail
-        *      provider
-        *      [customagenttony[at]gmail.com]
-        * -0.0 SPF_PASS SPF: sender matches SPF record
-        *  0.0 SPF_HELO_NONE SPF: HELO does not publish an SPF Record
-        *  0.6 MILLION_USD BODY: Talks about millions of dollars
-        *  0.0 MILLION_HUNDRED BODY: Million "One to Nine" Hundred
-        *  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
-        *       valid
-        * -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
-        * -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
-        *      author's domain
-        * -0.1 DKIM_VALID_EF Message has a valid DKIM or DK signature from
-        *      envelope-from domain
-        *  0.0 LOTS_OF_MONEY Huge... sums of money
-        *  0.0 T_HK_NAME_FM_MR_MRS No description available.
-        *  0.6 URG_BIZ Contains urgent matter
-        *  0.0 T_FILL_THIS_FORM_SHORT Fill in a short form with personal
-        *      information
-        *  0.0 MONEY_FORM_SHORT Lots of money if you fill out a short form
-        *  3.1 UNDISC_MONEY Undisclosed recipients + money/fraud signs
-        *  0.0 MONEY_FRAUD_5 Lots of money and many fraud phrases
-        *  0.0 FORM_FRAUD_5 Fill a form and many fraud phrases
-X-Spam-Level: *******
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <Y5VazQnY7s4+cXdM@debian.me>
+X-Spam-Status: No, score=-2.1 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_FROM,
+        RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,SPF_PASS autolearn=ham
+        autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-I want to use this access to open a mutual communication with you
-seeking your acceptance towards investing in your country under your
-management as my partner, My name is Aisha  Gaddafi and presently
-living in Oman, i am a Widow and single Mother with three Children,
-the only biological Daughter of late Libyan President (Late Colonel
-Muammar Gaddafi) and presently i am under political asylum protection
-by the Omani Government.
+On Sun, Dec 11, 2022 at 11:21:33AM +0700, Bagas Sanjaya wrote:
+> On Sun, Dec 11, 2022 at 12:02:18PM +1300, Paulo Miguel Almeida wrote:
+> > This patch makes it possible for the devs to specify which folders
+> > they don't want to include into database as part of the
+> > find_other_sources func if a makefile variable IGNOREDIRS is present,
+> > otherwise the original behaviour is kept.
+> 
+> Better say "Add IGNOREDIRS variable, which specifies which directories
+> to be ignored from indexing."
+> 
+> > @@ -278,6 +278,13 @@ To get all available archs you can also specify all. E.g.::
+> >  
+> >      $ make ALLSOURCE_ARCHS=all tags
+> >  
+> > +IGNOREDIRS
+> > +---------------
+> > +For tags/TAGS/cscope targets, you can choose which directories won't
+> > +be included in the databases, separated by comma. E.g.:
+> > +
+> > +    $ make IGNOREDIRS=drivers/gpu/drm/radeon,tools cscope
+> > +
+> 
+> Use two-colon syntax (::) for code block above to be consistent with
+> other code blocks.
+> 
+> Thanks. 
+> 
+> -- 
+> An old man doll... just what I always wanted! - Clara
 
-I have funds worth " Seven Million Five Hundred Thousand United State
-Dollars" $7.500.000.00 US Dollars which I want to entrust to you for
-investment projects in your country. If you are willing to handle this
-project on my behalf, kindly reply urgent to enable me provide you
-more details to start the transfer process, I shall appreciate your
-urgent response through my private email address below:
+Hi Bagas,
 
-aishagaddafiaisha20@gmail.com
+thanks for taking the time to review this patch. I will make the changes
+that you've pointed out.
 
-You can know more through the BBC news links below:
+thanks!
 
-http://www.bbc.com/news/world-africa-19966059
+- Paulo A,
 
-
-Thanks
-Yours Truly Aisha
