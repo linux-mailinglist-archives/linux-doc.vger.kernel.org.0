@@ -2,207 +2,199 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 8946564ABB9
-	for <lists+linux-doc@lfdr.de>; Tue, 13 Dec 2022 00:47:32 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id CCCBF64ACA8
+	for <lists+linux-doc@lfdr.de>; Tue, 13 Dec 2022 01:54:43 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S233732AbiLLXrb (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 12 Dec 2022 18:47:31 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:50258 "EHLO
+        id S233584AbiLMAym (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 12 Dec 2022 19:54:42 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:35886 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S234176AbiLLXrB (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Mon, 12 Dec 2022 18:47:01 -0500
-Received: from alexa-out-sd-01.qualcomm.com (alexa-out-sd-01.qualcomm.com [199.106.114.38])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id C45931C935;
-        Mon, 12 Dec 2022 15:46:59 -0800 (PST)
+        with ESMTP id S232707AbiLMAym (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Mon, 12 Dec 2022 19:54:42 -0500
+Received: from mail-vs1-xe2d.google.com (mail-vs1-xe2d.google.com [IPv6:2607:f8b0:4864:20::e2d])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 3FA8F6589
+        for <linux-doc@vger.kernel.org>; Mon, 12 Dec 2022 16:54:40 -0800 (PST)
+Received: by mail-vs1-xe2d.google.com with SMTP id k185so13140559vsc.2
+        for <linux-doc@vger.kernel.org>; Mon, 12 Dec 2022 16:54:40 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-  d=quicinc.com; i=@quicinc.com; q=dns/txt; s=qcdkim;
-  t=1670888819; x=1702424819;
-  h=message-id:date:mime-version:subject:to:cc:references:
-   from:in-reply-to:content-transfer-encoding;
-  bh=6zpZjkpO+86b4pC6kqKzJT+g7b3R6qV+dcycPq8ygjE=;
-  b=CtQg+SF5fEuS7JMsTAGuqGY7yL1nY9PrOmTkoUkN58PT0ygHKCFwOi3H
-   iIlu/4IPyvtlZkZ4VEJaqID+RvvfnwcoOHuCzMGl28XDL9VuWepDGIoyG
-   huL9gg8LDVkktOoL8uvsLTbBlmzQubdfKpmatjlVutlkJMN8yvS4JhDw/
-   M=;
-Received: from unknown (HELO ironmsg04-sd.qualcomm.com) ([10.53.140.144])
-  by alexa-out-sd-01.qualcomm.com with ESMTP; 12 Dec 2022 15:46:59 -0800
-X-QCInternal: smtphost
-Received: from nasanex01b.na.qualcomm.com ([10.46.141.250])
-  by ironmsg04-sd.qualcomm.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 12 Dec 2022 15:46:59 -0800
-Received: from [10.134.67.48] (10.80.80.8) by nasanex01b.na.qualcomm.com
- (10.46.141.250) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.986.36; Mon, 12 Dec
- 2022 15:46:58 -0800
-Message-ID: <a5c7089c-9880-e22a-ae33-eba91dc47f0e@quicinc.com>
-Date:   Mon, 12 Dec 2022 15:46:58 -0800
+        d=google.com; s=20210112;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:from:to:cc:subject:date:message-id:reply-to;
+        bh=0Zi3ZzyKkgNoOmYVx10LPKw87VjddBy1CfolqOqRLdM=;
+        b=gFj+NaTDEjrbdtpaBG2ekgela1K6vSk06PHME5bYkhlxpLN/TpofHvr+G1qhD6fdVo
+         Q48yRVBKQyN3eTdjzONydNVQa/y9AMl8JsKpVBkWTEyxMVVH2l6/8bSXPQ6nMfoaYFrl
+         JRa4ASQiKWaHIwAQxgrXNfrmnFtSqfN1Sg9AK5KhNM17J+lNd+IYqFQuV3tWZo7rCc9o
+         AJmYC89CvqJsT3AJLyzxhL2kGwNaMjt2y3z93qBrZHXDVhH4Ojb8xWbj0wCmyH9h/KeW
+         gs666d/CSjHK5LGAClY2hOgbWj3C7TMMX/h5d42YVIa2rVdiTV/geNGtmz5XyIkb2zEP
+         RKbQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=0Zi3ZzyKkgNoOmYVx10LPKw87VjddBy1CfolqOqRLdM=;
+        b=bfDSPqIm3tz2SjqkPG8GOaeuC9XdZg6+domoQ6DAZViQ172O1hKsrJtRuOqFWshQoU
+         IDqKOu7bPItF0FOcnN3BHystda4B1GUDnyYoeCQjSTBH/gNNZhDn7/1+PtnjZRdeuYwd
+         alpGg4suipab5k7neDMU4WpCW1uEAljpXN3AjkSUDbCMafWorRnoWTDfZGItEe/jMT1Z
+         CKDDjBG426ALxpRDZy7i727AIrJUf4NykNw79yA0KGqoT7lDIGHBH76Xj+5eQs31DIzX
+         7AzRwxG0KhL0tphG+cKcZeiyuTZOSTRMtZSCb3vUsNULGHBKRTAtBm4cqix3skj4PB0s
+         kruA==
+X-Gm-Message-State: ANoB5pmJckG8sWkm85wOlzYgj6t9Vh8u/h9TmWpasaOTXOCLp4kfb6F/
+        +Nn1UoPACl/0pSW9Y9BwCQzxkIREC2EMw/OfzNB76g==
+X-Google-Smtp-Source: AA0mqf6fSWCQhulCrdDkL8XnvtjamHkOLhd97/tIupBdsydu1hBCEL6D2iS02/S1te7+YgPoaA4C/YBzGlMcxrKoGe0=
+X-Received: by 2002:a67:d09a:0:b0:3b5:1527:d7bf with SMTP id
+ s26-20020a67d09a000000b003b51527d7bfmr143813vsi.72.1670892879134; Mon, 12 Dec
+ 2022 16:54:39 -0800 (PST)
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
- Thunderbird/102.4.2
-Subject: Re: [PATCH v7 10/20] gunyah: rsc_mgr: Add resource manager RPC core
-To:     Greg Kroah-Hartman <gregkh@linuxfoundation.org>
-CC:     Bjorn Andersson <quic_bjorande@quicinc.com>,
-        Murali Nalajala <quic_mnalajal@quicinc.com>,
-        Trilok Soni <quic_tsoni@quicinc.com>,
-        "Srivatsa Vaddagiri" <quic_svaddagi@quicinc.com>,
-        Carl van Schaik <quic_cvanscha@quicinc.com>,
-        Prakruthi Deepak Heragu <quic_pheragu@quicinc.com>,
-        Arnd Bergmann <arnd@arndb.de>,
-        Rob Herring <robh+dt@kernel.org>,
-        Krzysztof Kozlowski <krzysztof.kozlowski+dt@linaro.org>,
+References: <20221202223533.1785418-1-almasrymina@google.com> <Y5bsmpCyeryu3Zz1@dhcp22.suse.cz>
+In-Reply-To: <Y5bsmpCyeryu3Zz1@dhcp22.suse.cz>
+From:   Mina Almasry <almasrymina@google.com>
+Date:   Mon, 12 Dec 2022 16:54:27 -0800
+Message-ID: <CAHS8izM-XdLgFrQ1k13X-4YrK=JGayRXV_G3c3Qh4NLKP7cH_g@mail.gmail.com>
+Subject: Re: [PATCH v3] mm: Add nodes= arg to memory.reclaim
+To:     Michal Hocko <mhocko@suse.com>
+Cc:     Tejun Heo <tj@kernel.org>, Zefan Li <lizefan.x@bytedance.com>,
+        Johannes Weiner <hannes@cmpxchg.org>,
         Jonathan Corbet <corbet@lwn.net>,
-        Catalin Marinas <catalin.marinas@arm.com>,
-        Will Deacon <will@kernel.org>,
-        Jassi Brar <jassisinghbrar@gmail.com>,
-        Sudeep Holla <sudeep.holla@arm.com>,
-        Mark Rutland <mark.rutland@arm.com>,
-        Lorenzo Pieralisi <lpieralisi@kernel.org>,
-        <linux-arm-msm@vger.kernel.org>, <devicetree@vger.kernel.org>,
-        <linux-kernel@vger.kernel.org>, <linux-doc@vger.kernel.org>,
-        <linux-arm-kernel@lists.infradead.org>,
-        <linux-acpi@vger.kernel.org>
-References: <20221121140009.2353512-1-quic_eberman@quicinc.com>
- <20221121140009.2353512-11-quic_eberman@quicinc.com>
- <Y3uX9ywOVLubxYkW@kroah.com>
-Content-Language: en-US
-From:   Elliot Berman <quic_eberman@quicinc.com>
-In-Reply-To: <Y3uX9ywOVLubxYkW@kroah.com>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 7bit
-X-Originating-IP: [10.80.80.8]
-X-ClientProxiedBy: nasanex01b.na.qualcomm.com (10.46.141.250) To
- nasanex01b.na.qualcomm.com (10.46.141.250)
-X-Spam-Status: No, score=-4.4 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,NICE_REPLY_A,RCVD_IN_DNSWL_MED,
-        SPF_HELO_NONE,SPF_PASS autolearn=ham autolearn_force=no version=3.4.6
+        Roman Gushchin <roman.gushchin@linux.dev>,
+        Shakeel Butt <shakeelb@google.com>,
+        Muchun Song <songmuchun@bytedance.com>,
+        Andrew Morton <akpm@linux-foundation.org>,
+        Huang Ying <ying.huang@intel.com>,
+        Yang Shi <yang.shi@linux.alibaba.com>,
+        Yosry Ahmed <yosryahmed@google.com>, weixugc@google.com,
+        fvdl@google.com, bagasdotme@gmail.com, cgroups@vger.kernel.org,
+        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
+        linux-mm@kvack.org
+Content-Type: text/plain; charset="UTF-8"
+X-Spam-Status: No, score=-17.6 required=5.0 tests=BAYES_00,DKIMWL_WL_MED,
+        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,
+        ENV_AND_HDR_SPF_MATCH,RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,SPF_PASS,
+        USER_IN_DEF_DKIM_WL,USER_IN_DEF_SPF_WL autolearn=unavailable
+        autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
+On Mon, Dec 12, 2022 at 12:55 AM Michal Hocko <mhocko@suse.com> wrote:
+>
+> On Fri 02-12-22 14:35:31, Mina Almasry wrote:
+> > The nodes= arg instructs the kernel to only scan the given nodes for
+> > proactive reclaim. For example use cases, consider a 2 tier memory system:
+> >
+> > nodes 0,1 -> top tier
+> > nodes 2,3 -> second tier
+> >
+> > $ echo "1m nodes=0" > memory.reclaim
+> >
+> > This instructs the kernel to attempt to reclaim 1m memory from node 0.
+> > Since node 0 is a top tier node, demotion will be attempted first. This
+> > is useful to direct proactive reclaim to specific nodes that are under
+> > pressure.
+> >
+> > $ echo "1m nodes=2,3" > memory.reclaim
+> >
+> > This instructs the kernel to attempt to reclaim 1m memory in the second tier,
+> > since this tier of memory has no demotion targets the memory will be
+> > reclaimed.
+> >
+> > $ echo "1m nodes=0,1" > memory.reclaim
+> >
+> > Instructs the kernel to reclaim memory from the top tier nodes, which can
+> > be desirable according to the userspace policy if there is pressure on
+> > the top tiers. Since these nodes have demotion targets, the kernel will
+> > attempt demotion first.
+> >
+> > Since commit 3f1509c57b1b ("Revert "mm/vmscan: never demote for memcg
+> > reclaim""), the proactive reclaim interface memory.reclaim does both
+> > reclaim and demotion. Reclaim and demotion incur different latency costs
+> > to the jobs in the cgroup. Demoted memory would still be addressable
+> > by the userspace at a higher latency, but reclaimed memory would need to
+> > incur a pagefault.
+> >
+> > The 'nodes' arg is useful to allow the userspace to control demotion
+> > and reclaim independently according to its policy: if the memory.reclaim
+> > is called on a node with demotion targets, it will attempt demotion first;
+> > if it is called on a node without demotion targets, it will only attempt
+> > reclaim.
+> >
+> > Acked-by: Michal Hocko <mhocko@suse.com>
+> > Signed-off-by: Mina Almasry <almasrymina@google.com>
+>
+> After discussion in [1] I have realized that I haven't really thought
+> through all the consequences of this patch and therefore I am retracting
+> my ack here. I am not nacking the patch at this statge but I also think
+> this shouldn't be merged now and we should really consider all the
+> consequences.
+>
+> Let me summarize my main concerns here as well. The proposed
+> implementation doesn't apply the provided nodemask to the whole reclaim
+> process. This means that demotion can happen outside of the mask so the
+> the user request cannot really control demotion targets and that limits
+> the interface should there be any need for a finer grained control in
+> the future (see an example in [2]).
+> Another problem is that this can limit future reclaim extensions because
+> of existing assumptions of the interface [3] - specify only top-tier
+> node to force the aging without actually reclaiming any charges and
+> (ab)use the interface only for aging on multi-tier system. A change to
+> the reclaim to not demote in some cases could break this usecase.
+>
 
+I think this is correct. My use case is to request from the kernel to
+do demotion without reclaim in the cgroup, and the reason for that is
+stated in the commit message:
 
-On 11/21/2022 7:23 AM, Greg Kroah-Hartman wrote:
-> On Mon, Nov 21, 2022 at 05:59:59AM -0800, Elliot Berman wrote:
->> The resource manager is a special virtual machine which is always
->> running on a Gunyah system. It provides APIs for creating and destroying
->> VMs, secure memory management, sharing/lending of memory between VMs,
->> and setup of inter-VM communication. Calls to the resource manager are
->> made via message queues.
->>
->> This patch implements the basic probing and RPC mechanism to make those
->> API calls. Request/response calls can be made with gh_rm_call.
->> Drivers can also register to notifications pushed by RM via
->> gh_rm_register_notifier
->>
->> Specific API calls that resource manager supports will be implemented in
->> subsequent patches.
->>
->> Signed-off-by: Elliot Berman <quic_eberman@quicinc.com>
->> ---
->>   MAINTAINERS                          |   2 +-
->>   drivers/virt/gunyah/Kconfig          |   7 +
->>   drivers/virt/gunyah/Makefile         |   2 +
->>   drivers/virt/gunyah/gunyah_rm_rpc.c  | 570 +++++++++++++++++++++++++++
->>   drivers/virt/gunyah/gunyah_rsc_mgr.c |  50 +++
->>   drivers/virt/gunyah/rsc_mgr.h        |  37 ++
->>   include/linux/gunyah_rsc_mgr.h       |  18 +
->>   7 files changed, 685 insertions(+), 1 deletion(-)
->>   create mode 100644 drivers/virt/gunyah/gunyah_rm_rpc.c
->>   create mode 100644 drivers/virt/gunyah/gunyah_rsc_mgr.c
->>   create mode 100644 drivers/virt/gunyah/rsc_mgr.h
->>   create mode 100644 include/linux/gunyah_rsc_mgr.h
->>
->> diff --git a/MAINTAINERS b/MAINTAINERS
->> index 502798197b80..b65f7ff444e5 100644
->> --- a/MAINTAINERS
->> +++ b/MAINTAINERS
->> @@ -8948,7 +8948,7 @@ F:	Documentation/virt/gunyah/
->>   F:	arch/arm64/gunyah/
->>   F:	drivers/mailbox/gunyah-msgq.c
->>   F:	drivers/virt/gunyah/
->> -F:	include/linux/gunyah.h
->> +F:	include/linux/gunyah*.h
->>   
->>   HABANALABS PCI DRIVER
->>   M:	Oded Gabbay <ogabbay@kernel.org>
->> diff --git a/drivers/virt/gunyah/Kconfig b/drivers/virt/gunyah/Kconfig
->> index 127156a678a6..0bb497372d4e 100644
->> --- a/drivers/virt/gunyah/Kconfig
->> +++ b/drivers/virt/gunyah/Kconfig
->> @@ -10,3 +10,10 @@ config GUNYAH
->>   
->>   	  Say Y/M here to enable the drivers needed to interact in a Gunyah
->>   	  virtual environment.
->> +
->> +if GUNYAH
->> +config GUNYAH_RESOURCE_MANAGER
->> +	tristate
->> +	depends on MAILBOX
->> +	select GUNYAH_MESSAGE_QUEUES
->> +endif
->> diff --git a/drivers/virt/gunyah/Makefile b/drivers/virt/gunyah/Makefile
->> index 2ac4ee64b89d..b62ac4045621 100644
->> --- a/drivers/virt/gunyah/Makefile
->> +++ b/drivers/virt/gunyah/Makefile
->> @@ -1 +1,3 @@
->>   obj-$(CONFIG_GUNYAH) += gunyah.o
->> +
->> +obj-$(CONFIG_GUNYAH_RESOURCE_MANAGER) += gunyah_rsc_mgr.o gunyah_rm_rpc.o
->> diff --git a/drivers/virt/gunyah/gunyah_rm_rpc.c b/drivers/virt/gunyah/gunyah_rm_rpc.c
->> new file mode 100644
->> index 000000000000..45b1a8691982
->> --- /dev/null
->> +++ b/drivers/virt/gunyah/gunyah_rm_rpc.c
->> @@ -0,0 +1,570 @@
->> +// SPDX-License-Identifier: GPL-2.0-only
->> +/*
->> + * Copyright (c) 2022 Qualcomm Innovation Center, Inc. All rights reserved.
->> + */
->> +
->> +#include <linux/of.h>
->> +#include <linux/slab.h>
->> +#include <linux/mutex.h>
->> +#include <linux/sched.h>
->> +#include <linux/gunyah.h>
->> +#include <linux/module.h>
->> +#include <linux/of_irq.h>
->> +#include <linux/kthread.h>
->> +#include <linux/notifier.h>
->> +#include <linux/workqueue.h>
->> +#include <linux/completion.h>
->> +#include <linux/gunyah_rsc_mgr.h>
->> +#include <linux/platform_device.h>
-> 
-> This should not have anything to do with a platform device, please see
-> below.
-> 
->> +#include <linux/gunyah_rsc_mgr.h>
->> +#include <linux/platform_device.h>
->> +
->> +#include "rsc_mgr.h"
->> +
->> +static int gh_rm_drv_probe(struct platform_device *pdev)
-> 
-> Why is this tied to a platformm device?
-> 
-> I don't understand the relationship here, sorry.
-> >> +{
->> +	struct gh_rm_rpc *rsc_mgr;
->> +
->> +	rsc_mgr = gh_rm_rpc_init(pdev);
-> 
-> Shouldn't this be creating a new one that is just a child passed in?
-> Shouldn't this call just take a 'struct device *'?
-> 
+"Reclaim and demotion incur different latency costs to the jobs in the
+cgroup. Demoted memory would still be addressable by the userspace at
+a higher latency, but reclaimed memory would need to incur a
+pagefault."
 
-I'm following the suggestion from Arnd to have small core module that 
-calls into initialization routines for the other parts of the driver, 
-rather than creating bus for a few (2) devices.
+For jobs of some latency tiers, we would like to trigger proactive
+demotion (which incurs relatively low latency on the job), but not
+trigger proactive reclaim (which incurs a pagefault). I initially had
+proposed a separate interface for this, but Johannes directed me to
+this interface instead in [1]. In the same email Johannes also tells
+me that meta's reclaim stack relies on memory.reclaim triggering
+demotion, so it seems that I'm not the first to take a dependency on
+this. Additionally in [2] Johannes also says it would be great if in
+the long term reclaim policy and demotion policy do not diverge.
 
-https://lore.kernel.org/all/a3754259-9989-495e-a6bd-5501daff06a2@app.fastmail.com/
+[1] https://lore.kernel.org/linux-mm/Y35fw2JSAeAddONg@cmpxchg.org/
+[2] https://lore.kernel.org/linux-mm/Y36fIGFCFKiocAd6@cmpxchg.org/
 
-Thanks,
-Elliot
+> My counter proposal would be to define the nodemask for memory.reclaim
+> as a domain to constrain the charge reclaim. That means both aging and
+> reclaim including demotion which is a part of aging. This will allow
+> to control where to demote for balancing purposes (e.g. demote to node 2
+> rather than 3) which is impossible with the proposed scheme.
+>
 
+My understanding is that with this interface in order to trigger
+demotion I would want to list both the top tier nodes and the bottom
+tier nodes on the nodemask, and since the bottom tier nodes are in the
+nodemask the kernel will not just trigger demotion, but will also
+trigger reclaim. This is very specifically not our use case and not
+the goal of this patch.
 
+I had also suggested adding a demotion= arg to memory.reclaim so the
+userspace may customize this behavior, but Johannes rejected this in
+[3] to adhere to the aging pipeline.
+
+All in all I like Johannes's model in [3] describing the aging
+pipeline and the relationship between demotion and reclaim. The nodes=
+arg is just a hint to the kernel that the userspace is looking for
+reclaim from a top tier node (which would be done by demotion
+according to the aging pipeline) or a bottom tier node (which would be
+done by reclaim according to the aging pipeline). I think this
+interface is aligned with this model.
+
+[3] https://lore.kernel.org/linux-mm/Y36XchdgTCsMP4jT@cmpxchg.org/
+
+> [1] http://lkml.kernel.org/r/20221206023406.3182800-1-almasrymina@google.com
+> [2] http://lkml.kernel.org/r/Y5bnRtJ6sojtjgVD@dhcp22.suse.cz
+> [3] http://lkml.kernel.org/r/CAAPL-u8rgW-JACKUT5ChmGSJiTDABcDRjNzW_QxMjCTk9zO4sg@mail.gmail.com
+> --
+> Michal Hocko
+> SUSE Labs
