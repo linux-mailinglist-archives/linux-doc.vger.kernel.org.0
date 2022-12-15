@@ -2,93 +2,229 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 4371864D79F
-	for <lists+linux-doc@lfdr.de>; Thu, 15 Dec 2022 09:19:22 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 8DA9364D7A5
+	for <lists+linux-doc@lfdr.de>; Thu, 15 Dec 2022 09:19:59 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S229628AbiLOITT (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 15 Dec 2022 03:19:19 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:57902 "EHLO
+        id S229660AbiLOIT5 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 15 Dec 2022 03:19:57 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:58154 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S229676AbiLOITQ (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Thu, 15 Dec 2022 03:19:16 -0500
-Received: from mail-yb1-xb33.google.com (mail-yb1-xb33.google.com [IPv6:2607:f8b0:4864:20::b33])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 102EE15836
-        for <linux-doc@vger.kernel.org>; Thu, 15 Dec 2022 00:19:15 -0800 (PST)
-Received: by mail-yb1-xb33.google.com with SMTP id e141so2642755ybh.3
-        for <linux-doc@vger.kernel.org>; Thu, 15 Dec 2022 00:19:15 -0800 (PST)
+        with ESMTP id S229661AbiLOITz (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Thu, 15 Dec 2022 03:19:55 -0500
+Received: from mail-wm1-x342.google.com (mail-wm1-x342.google.com [IPv6:2a00:1450:4864:20::342])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 211A61F624
+        for <linux-doc@vger.kernel.org>; Thu, 15 Dec 2022 00:19:54 -0800 (PST)
+Received: by mail-wm1-x342.google.com with SMTP id m19so13143943wms.5
+        for <linux-doc@vger.kernel.org>; Thu, 15 Dec 2022 00:19:54 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=to:subject:message-id:date:from:reply-to:mime-version:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=47DEQpj8HBSa+/TImW+5JCeuQeRkm5NMpJWZG3hSuFU=;
-        b=BCvpmkquQf7K5NYHgRMqHmttNIhEV60vdjFKBfjJ+1zRnZwQHIMf/u/nGftd6WVvCw
-         Z0ciIMO8jz4AsbIZg6iCvNoPDqOxYNLIezU8jQ3m74Tbjhu9yw1XQjnJ2aD6LTAHXIXx
-         Rf9HbH22NZJYhMY+GKVJz6nFG3tk31xj47r6X6QV4zodetcDENwCZmzRwPsUOntTBLDf
-         pgS1kv+pR08DXIYdem+hvp29ti9ee8upKlKNt62Rt24BVEwIGoFtNVMZvExGl+vKT7Vi
-         +ToRnC7JAd01NwcL59Zgt1n2XgLMoF8xOXz+Y160PNwiRm2Ir1VLtucx0a1t4PSriBtB
-         rEJg==
+        d=rivosinc-com.20210112.gappssmtp.com; s=20210112;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=P5JatZUrB4wn6RHIEmLRs1De+PDGwMqcpJtj1hMpn28=;
+        b=JLzjunRNOInwlypF9TQNBJoNGaay7JWcNf7YoQGqGXE60pbfIWK4g6E87kqaTlNEjX
+         QYWw/I0p6xgHoTGol6FiQPq9nTnuTvFo2YLnBTUg5Ueb5OYw4a8ptZQQTNH7k2Fp3YhD
+         npDLW5SBQ5HkMKkUA8u2VTSA1gi+lAkedt2CugVww2Eze30/Pmfi+1tCa5dpR610Yter
+         uauMBuCIAdvh+JMFerv+vRM5FDaeSnHgU/XEyIR0kuVkuCIsqJi+Smi0sL2Wb8m6GZ/b
+         Uq44xe1xMFDjbmCpGCYxjhjsgdPl3K5A7Kfkec34CCBAFu4a0SBQKbD4NBulirE5Hduj
+         A9TA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=to:subject:message-id:date:from:reply-to:mime-version
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=47DEQpj8HBSa+/TImW+5JCeuQeRkm5NMpJWZG3hSuFU=;
-        b=fxAnaT5JGb2X4OpkQzrYm+ji1+pd62bzCvQkbGhPZ446OTRyA3OO4co4HbYSMfaV6d
-         HVQJQA7t4u7cfN0ec23idf/JyVHLCVcgKtqxQVfMJapFTJzMAhj+awgSsCSTWJz2y812
-         DyA/TSsmPnSxDoW38WgNbLVxtpUWq9vvMGc5yaqoKboKJVS5BbBdz8fRsPKcnBNatHdL
-         EtTJq9Rv0kzzy5MSLHNTaTl7teIy1zERglbn/Y9h893w+BRvctjcARHZy4iqW3AmnCdr
-         6cZEwl4mzDO0S0EV86Lxurp+NVzI6ubE36TD4jy11jk+Dxp8xPLYjNGSTeDXRFmkxq1t
-         nL2A==
-X-Gm-Message-State: ANoB5pnEDWVVd1ZGjAelhK1JQ7SIdjGhizu/8H6vGvSBUsNJQbsjGu+8
-        0juuyb3XTqfpGFBWYLjwntDZoLI+6WpLEBX+Bws=
-X-Google-Smtp-Source: AA0mqf4RZEju9zZBIqx73toNOu/WqT1MdleHvPC/cgo50ps+xqoBlOrj9vm7m94uNoRUtDr82g5fRh0t1ijQtop7ybI=
-X-Received: by 2002:a05:6902:91b:b0:6dd:313b:9b30 with SMTP id
- bu27-20020a056902091b00b006dd313b9b30mr96640520ybb.618.1671092354182; Thu, 15
- Dec 2022 00:19:14 -0800 (PST)
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=P5JatZUrB4wn6RHIEmLRs1De+PDGwMqcpJtj1hMpn28=;
+        b=6VDm8CEAYPqU30DHyfZFWuLRfQ6CG2L1HZ3VYmloExy8CuXobv9rjrlx5sWvqx6pJL
+         u+xE8evKooxTMZqBDPdM0h7GJUp8QosxWxY2TsXPwXe8Tn+WL0xzuMuXPFcjmkMnKRFY
+         TdOx58pkUFmYIkQWt9+fe6uum/RI4nRbe9JwFxAz42AWs7ZWeOeg+DLjeTRgJNRxVdIU
+         DVoF9trmR6+ZuqpFNns8npm/FiQmsmVHCBLjQaUyXuilxiXM7WE5awyyi1GbT8p8gYkH
+         vGgpwsYnGt7l2NwseqKivmRxsaiOJ7NNlkOs4d8nEtWA6iXDrxpGYp/S8kKWk5HF7Hsk
+         l69w==
+X-Gm-Message-State: ANoB5plysEFndmodFEGAP7BHtwPGxbxkbF5bSw/5vxaol4qHcw9lVSZO
+        ofCObixQAw91IrJWMJWWMRWkgQ==
+X-Google-Smtp-Source: AA0mqf5WjGshX/H4Sy5tMFHvg73SLxcJk240JuKos8U0A2iaj5qoJywpDAzH4oFnYFIYMozh6bDxPQ==
+X-Received: by 2002:a7b:ce89:0:b0:3d2:3be4:2d9a with SMTP id q9-20020a7bce89000000b003d23be42d9amr3967121wmj.20.1671092392702;
+        Thu, 15 Dec 2022 00:19:52 -0800 (PST)
+Received: from alex-rivos.ba.rivosinc.com (lfbn-lyo-1-450-160.w2-7.abo.wanadoo.fr. [2.7.42.160])
+        by smtp.gmail.com with ESMTPSA id f9-20020a05600c154900b003b49bd61b19sm1615436wmg.15.2022.12.15.00.19.52
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 15 Dec 2022 00:19:52 -0800 (PST)
+From:   Alexandre Ghiti <alexghiti@rivosinc.com>
+To:     Jonathan Corbet <corbet@lwn.net>,
+        Paul Walmsley <paul.walmsley@sifive.com>,
+        Palmer Dabbelt <palmer@dabbelt.com>,
+        Albert Ou <aou@eecs.berkeley.edu>,
+        =?UTF-8?q?Bj=C3=B6rn=20T=C3=B6pel?= <bjorn@kernel.org>,
+        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
+        linux-riscv@lists.infradead.org
+Cc:     Alexandre Ghiti <alexghiti@rivosinc.com>
+Subject: [PATCH v2] riscv: Allow to downgrade paging mode from the command line
+Date:   Thu, 15 Dec 2022 09:19:48 +0100
+Message-Id: <20221215081948.1256610-1-alexghiti@rivosinc.com>
+X-Mailer: git-send-email 2.37.2
 MIME-Version: 1.0
-Received: by 2002:a05:7010:7292:b0:315:c58c:168f with HTTP; Thu, 15 Dec 2022
- 00:19:13 -0800 (PST)
-Reply-To: victoriandersonoffice@aol.com
-From:   Victoria Anderson <kossisedo408@gmail.com>
-Date:   Thu, 15 Dec 2022 00:19:13 -0800
-Message-ID: <CACDcUwxAUeHR799M1z_STGh2WaaYfNg8_zbGRQCBKrN6=ZtaLA@mail.gmail.com>
-Subject: Good morning, did you receive the first email i sent to you ?-
-To:     undisclosed-recipients:;
-Content-Type: text/plain; charset="UTF-8"
-X-Spam-Status: Yes, score=6.9 required=5.0 tests=BAYES_50,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,EMPTY_MESSAGE,
-        FREEMAIL_ENVFROM_END_DIGIT,FREEMAIL_FROM,FREEMAIL_REPLYTO,
-        RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,SPF_PASS,UNDISC_FREEM autolearn=no
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+        DKIM_VALID,RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,SPF_PASS autolearn=ham
         autolearn_force=no version=3.4.6
-X-Spam-Report: * -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at
-        *      https://www.dnswl.org/, no trust
-        *      [2607:f8b0:4864:20:0:0:0:b33 listed in]
-        [list.dnswl.org]
-        *  0.8 BAYES_50 BODY: Bayes spam probability is 40 to 60%
-        *      [score: 0.5000]
-        *  0.0 SPF_HELO_NONE SPF: HELO does not publish an SPF Record
-        * -0.0 SPF_PASS SPF: sender matches SPF record
-        *  0.2 FREEMAIL_ENVFROM_END_DIGIT Envelope-from freemail username ends
-        *       in digit
-        *      [kossisedo408[at]gmail.com]
-        *  0.0 FREEMAIL_FROM Sender email is commonly abused enduser mail
-        *      provider
-        *      [kossisedo408[at]gmail.com]
-        *  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
-        *       valid
-        * -0.1 DKIM_VALID_EF Message has a valid DKIM or DK signature from
-        *      envelope-from domain
-        * -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
-        *      author's domain
-        * -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
-        *  2.3 EMPTY_MESSAGE Message appears to have no textual parts
-        *  2.7 UNDISC_FREEM Undisclosed recipients + freemail reply-to
-        *  1.0 FREEMAIL_REPLYTO Reply-To/From or Reply-To/body contain
-        *      different freemails
-X-Spam-Level: ******
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
+Add 2 early command line parameters called "no5lvl" and "no4lvl" (using
+the same naming as x86) to allow a user to downgrade from sv57 (the
+default mode if the hardware supports it) to sv48 or sv39.
+
+Note that going through the device tree to get the kernel command line
+works with ACPI too since the efi stub creates a device tree anyway with
+the command line.
+
+Also, as those params are treated very early in the boot process and we
+use standard device tree functions that may be kasan instrumented, we
+only enable them for !KASAN configurations.
+
+Signed-off-by: Alexandre Ghiti <alexghiti@rivosinc.com>
+---
+
+v2:
+- Honor CMDLINE_EXTEND and CMDLINE_FORCE as noticed by Björn
+
+ .../admin-guide/kernel-parameters.txt         |  5 +-
+ arch/riscv/mm/init.c                          | 72 +++++++++++++++++--
+ 2 files changed, 70 insertions(+), 7 deletions(-)
+
+diff --git a/Documentation/admin-guide/kernel-parameters.txt b/Documentation/admin-guide/kernel-parameters.txt
+index a465d5242774..6741524aa980 100644
+--- a/Documentation/admin-guide/kernel-parameters.txt
++++ b/Documentation/admin-guide/kernel-parameters.txt
+@@ -3548,7 +3548,10 @@
+ 			emulation library even if a 387 maths coprocessor
+ 			is present.
+ 
+-	no5lvl		[X86-64] Disable 5-level paging mode. Forces
++	no4lvl		[RISCV] Disable 4-level paging mode. Forces
++			kernel to use 3-level paging instead.
++
++	no5lvl		[X86-64,RISCV] Disable 5-level paging mode. Forces
+ 			kernel to use 4-level paging instead.
+ 
+ 	nofsgsbase	[X86] Disables FSGSBASE instructions.
+diff --git a/arch/riscv/mm/init.c b/arch/riscv/mm/init.c
+index b56a0a75533f..d90fbe9ad494 100644
+--- a/arch/riscv/mm/init.c
++++ b/arch/riscv/mm/init.c
+@@ -746,17 +746,77 @@ static void __init disable_pgtable_l4(void)
+ 	satp_mode = SATP_MODE_39;
+ }
+ 
++#ifndef CONFIG_KASAN
++static __init bool match_noXlvl(const char *cmdline)
++{
++	if (strstr(cmdline, "no5lvl")) {
++		disable_pgtable_l5();
++	} else if (strstr(cmdline, "no4lvl")) {
++		disable_pgtable_l5();
++		disable_pgtable_l4();
++		return true;
++	}
++
++	return false;
++}
++
++static int __init print_no4lvl(char *p)
++{
++	pr_info("Disabled 4-level and 5-level paging");
++	return 0;
++}
++early_param("no4lvl", print_no4lvl);
++
++static int __init print_no5lvl(char *p)
++{
++	pr_info("Disabled 5-level paging");
++	return 0;
++}
++early_param("no5lvl", print_no5lvl);
++#endif
++
+ /*
+  * There is a simple way to determine if 4-level is supported by the
+  * underlying hardware: establish 1:1 mapping in 4-level page table mode
+  * then read SATP to see if the configuration was taken into account
+  * meaning sv48 is supported.
+  */
+-static __init void set_satp_mode(void)
++static __init void set_satp_mode(uintptr_t dtb_pa)
+ {
+ 	u64 identity_satp, hw_satp;
+ 	uintptr_t set_satp_mode_pmd = ((unsigned long)set_satp_mode) & PMD_MASK;
+-	bool check_l4 = false;
++
++#ifndef CONFIG_KASAN
++	/*
++	 * The below fdt functions are kasan instrumented, since at this point
++	 * there is no mapping for the kasan shadow memory, this can't be used
++	 * when kasan is enabled.
++	 */
++	int chosen_node;
++	unsigned int fdt_cmdline_size = 0;
++
++	if (!IS_ENABLED(CONFIG_CMDLINE_FORCE)) {
++		chosen_node = fdt_path_offset((void *)dtb_pa, "/chosen");
++		if (chosen_node >= 0) {
++			const char *fdt_cmdline;
++
++			fdt_cmdline = fdt_getprop((void *)dtb_pa, chosen_node,
++						  "bootargs", NULL);
++			if (fdt_cmdline) {
++				if (match_noXlvl(fdt_cmdline))
++					return;
++				fdt_cmdline_size = strlen(fdt_cmdline);
++			}
++		}
++	}
++
++	if (IS_ENABLED(CONFIG_CMDLINE_EXTEND) ||
++	    IS_ENABLED(CONFIG_CMDLINE_FORCE) ||
++	    fdt_cmdline_size == 0 /* CONFIG_CMDLINE_FALLBACK */) {
++		if (match_noXlvl(CONFIG_CMDLINE))
++			return;
++	}
++#endif
+ 
+ 	create_p4d_mapping(early_p4d,
+ 			set_satp_mode_pmd, (uintptr_t)early_pud,
+@@ -775,7 +835,8 @@ static __init void set_satp_mode(void)
+ retry:
+ 	create_pgd_mapping(early_pg_dir,
+ 			   set_satp_mode_pmd,
+-			   check_l4 ? (uintptr_t)early_pud : (uintptr_t)early_p4d,
++			   pgtable_l5_enabled ?
++				(uintptr_t)early_p4d : (uintptr_t)early_pud,
+ 			   PGDIR_SIZE, PAGE_TABLE);
+ 
+ 	identity_satp = PFN_DOWN((uintptr_t)&early_pg_dir) | satp_mode;
+@@ -786,9 +847,8 @@ static __init void set_satp_mode(void)
+ 	local_flush_tlb_all();
+ 
+ 	if (hw_satp != identity_satp) {
+-		if (!check_l4) {
++		if (pgtable_l5_enabled) {
+ 			disable_pgtable_l5();
+-			check_l4 = true;
+ 			memset(early_pg_dir, 0, PAGE_SIZE);
+ 			goto retry;
+ 		}
+@@ -979,7 +1039,7 @@ asmlinkage void __init setup_vm(uintptr_t dtb_pa)
+ #endif
+ 
+ #if defined(CONFIG_64BIT) && !defined(CONFIG_XIP_KERNEL)
+-	set_satp_mode();
++	set_satp_mode(dtb_pa);
+ #endif
+ 
+ 	kernel_map.va_pa_offset = PAGE_OFFSET - kernel_map.phys_addr;
+-- 
+2.37.2
 
