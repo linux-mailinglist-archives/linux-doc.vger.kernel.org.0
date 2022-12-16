@@ -2,111 +2,80 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 2B6B964ECED
-	for <lists+linux-doc@lfdr.de>; Fri, 16 Dec 2022 15:35:13 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id AEAAE64ED23
+	for <lists+linux-doc@lfdr.de>; Fri, 16 Dec 2022 15:53:22 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S229787AbiLPOfL (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Fri, 16 Dec 2022 09:35:11 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:53014 "EHLO
+        id S230246AbiLPOxU (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Fri, 16 Dec 2022 09:53:20 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:60148 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S229620AbiLPOfK (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Fri, 16 Dec 2022 09:35:10 -0500
-Received: from outgoing.mit.edu (outgoing-auth-1.mit.edu [18.9.28.11])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 03BA958BE3
-        for <linux-doc@vger.kernel.org>; Fri, 16 Dec 2022 06:35:07 -0800 (PST)
-Received: from cwcc.thunk.org (pool-173-48-120-46.bstnma.fios.verizon.net [173.48.120.46])
-        (authenticated bits=0)
-        (User authenticated as tytso@ATHENA.MIT.EDU)
-        by outgoing.mit.edu (8.14.7/8.12.4) with ESMTP id 2BGEYmNH019640
-        (version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
-        Fri, 16 Dec 2022 09:34:49 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mit.edu; s=outgoing;
-        t=1671201290; bh=qd3CPexx4EUOMso6Z7mE0NS6yD0eZn69+xWu/wpfgB4=;
-        h=Date:From:To:Cc:Subject:References:In-Reply-To;
-        b=d9QHqr6rItAHBfk0jT1BIr6bhb/uHk0r0DL1bWaTQKJN02nezpYEA5vgQPmDzVk+i
-         3fMMpzfU8t+naj+iQ0R3ZdaE9JbzZSnaAJ5McAbE1l3tow6/18iTt5PVBfdD6JDOAz
-         WukdoV7XCas7N2tMqC/5OHQJ7UJ1VTAi4fDXNu9R14r0Uixh03xeULthJHhVYvhjIr
-         F+eXeQp9s7AV1OMeUtmy4JCATQ423g1EnGPAMdGVA8SHImerznMabYAE2VDsv+AIqB
-         vPbjyc+fjIzK11FE0DX+SdD6d90aSrQxqP7J29prKxE1nK4mUYsXepvbOEz+42alF1
-         5I6V5BAUeGQ0w==
-Received: by cwcc.thunk.org (Postfix, from userid 15806)
-        id 11E7D15C40A2; Fri, 16 Dec 2022 09:34:48 -0500 (EST)
-Date:   Fri, 16 Dec 2022 09:34:48 -0500
-From:   "Theodore Ts'o" <tytso@mit.edu>
-To:     Bagas Sanjaya <bagasdotme@gmail.com>
-Cc:     linux-doc@vger.kernel.org, Kees Cook <keescook@chromium.org>,
-        Dan Williams <dan.j.williams@intel.com>,
-        Jakub Kicinski <kuba@kernel.org>,
-        Christian Brauner <brauner@kernel.org>,
-        Dave Hansen <dave.hansen@linux.intel.com>
-Subject: Re: [PATCH] Documentation/process: Add Linux Kernel Contribution
- Maturity Model
-Message-ID: <Y5yCCN0W/P97hLU3@mit.edu>
-References: <20221214185714.868374-1-tytso@mit.edu>
- <Y5wo2WblrsHpM8sH@debian.me>
+        with ESMTP id S229825AbiLPOxU (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Fri, 16 Dec 2022 09:53:20 -0500
+Received: from mail-qt1-f173.google.com (mail-qt1-f173.google.com [209.85.160.173])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 3E37C4A583;
+        Fri, 16 Dec 2022 06:53:19 -0800 (PST)
+Received: by mail-qt1-f173.google.com with SMTP id bw27so707981qtb.3;
+        Fri, 16 Dec 2022 06:53:19 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=user-agent:in-reply-to:content-disposition:mime-version:references
+         :message-id:subject:cc:to:from:date:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=HOiPjXQIxXWdtEdaDgALBdOOZPdxqDznsMSDkV/eY3M=;
+        b=p8AJHZI7O0yJC/pcwxu6lmGZGEigs1ufm5Bs6ffdxu+VXBdtd7QKzROtdp0HbUs8w/
+         wZ83ljpYyducUzDPOS5azrgjzwyPIWxV38wZlwoy4COTCB1t7pIrSLJdRPgDlKCStBPx
+         MoklLhqx4FYt4AlRMd2cz1YVI7LW33M5svG4j0oIf/jqPHpWmV+R41Y4tZqcMtedTxNa
+         oaq50WJA/m9XAuhG28AUbYYV+xd2WNHvme1DXMX2/BEue3tGaNH76NvwZaWmofrgcKc1
+         dOn4UIY9uBxsAGU85QtNPRcIzQGloJpMl5qROVL149ucIm005mc03GkuphjHkbsrLK25
+         si8A==
+X-Gm-Message-State: ANoB5pn5iOpF/VPiq8pwIICnXUDUMZYvkL9qB/qkxTV1wgh+4MWbQU7C
+        XLG2n9bFTjwi1fDsUC1pe7w=
+X-Google-Smtp-Source: AA0mqf5pClytxKGos159wN8+5ZmeC5U9v2ZWL7oDM68ERmPlVd/e9CjTulfG6Vc74AGy4JlfuNEf5g==
+X-Received: by 2002:ac8:6607:0:b0:3a6:a43a:8ba9 with SMTP id c7-20020ac86607000000b003a6a43a8ba9mr41709083qtp.3.1671202398129;
+        Fri, 16 Dec 2022 06:53:18 -0800 (PST)
+Received: from maniforge.lan (c-24-15-214-156.hsd1.il.comcast.net. [24.15.214.156])
+        by smtp.gmail.com with ESMTPSA id bw20-20020a05622a099400b003a7f1e16649sm1438726qtb.42.2022.12.16.06.53.17
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Fri, 16 Dec 2022 06:53:17 -0800 (PST)
+Date:   Fri, 16 Dec 2022 08:53:14 -0600
+From:   David Vernet <void@manifault.com>
+To:     mtahhan@redhat.com
+Cc:     bpf@vger.kernel.org, linux-doc@vger.kernel.org, jbrouer@redhat.com,
+        thoiland@redhat.com, donhunte@redhat.com, john.fastabend@gmail.com
+Subject: Re: [PATCH bpf-next v5 1/1] docs: BPF_MAP_TYPE_SOCK[MAP|HASH]
+Message-ID: <Y5yGWlrdyRm+Hx2V@maniforge.lan>
+References: <20221216100135.13125-1-mtahhan@redhat.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <Y5wo2WblrsHpM8sH@debian.me>
-X-Spam-Status: No, score=-4.0 required=5.0 tests=BAYES_00,DKIM_INVALID,
-        DKIM_SIGNED,RCVD_IN_DNSWL_MED,SPF_HELO_NONE,SPF_NONE autolearn=ham
-        autolearn_force=no version=3.4.6
+In-Reply-To: <20221216100135.13125-1-mtahhan@redhat.com>
+User-Agent: Mutt/2.2.9 (2022-11-12)
+X-Spam-Status: No, score=-1.6 required=5.0 tests=BAYES_00,
+        FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,HEADER_FROM_DIFFERENT_DOMAINS,
+        RCVD_IN_DNSWL_NONE,RCVD_IN_MSPIKE_H3,RCVD_IN_MSPIKE_WL,SPF_HELO_NONE,
+        SPF_PASS autolearn=no autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Fri, Dec 16, 2022 at 03:14:17PM +0700, Bagas Sanjaya wrote:
-> On Wed, Dec 14, 2022 at 01:57:14PM -0500, Theodore Ts'o wrote:
-> > +* Software Engineers are not allowed to contribute patches to the Linux
-> > +  kernel.
+On Fri, Dec 16, 2022 at 10:01:35AM +0000, mtahhan@redhat.com wrote:
+> From: Maryam Tahhan <mtahhan@redhat.com>
 > 
-> Software engineers turned product manager or support desk people?
-
-Actually, what we were thinking of companies that were paranoid about
-the GPL.  For example, there is a particular major hardware supplier
-used by many in the Linux ecosystem where the senior management tends
-to be mostly composed of patent lawyers....
-
-(In the United States, most companies have employment contracts which
-means that all intellectual output, either on or off work.  Which
-means that some companies can prohibit their employees from
-contributing anything to any open source project, even if the work is
-done after hours on their own time.  So while "Level 0" may seem
-horrific, there are software engineers in the US who are constrained
-in this way.  If we can encourage those companies to move from Level 0
-to Level 1, that's at least a step in the right direction.)
-
-> > +  * The time interval between kernels used in the organization’s servers
-> > +    and/or products, and the publication date of the upstream kernel
-> > +    upon which the internal kernel is based.
+> Add documentation for BPF_MAP_TYPE_SOCK[MAP|HASH]
+> including kernel versions introduced, usage
+> and examples.
 > 
-> I.e. the time for rebasing internal kernel against upstream one? For
-> example rebasing against several stable minor releases (x.y.z) is easier
-> than forward porting out-of-tree commits into new upstream release
-> (x.y).
+> Signed-off-by: Maryam Tahhan <mtahhan@redhat.com>
 
-It's not necessarily the time to rebase the kernel.  It might take
-less than, say, six years to rebase a product kernel based on 4.9 to
-6.1.  But the company might decide not to expend the engineering
-resources to do the work, but instead to continue shipping product or
-using a data center kernel based on an antediluvian upstream release.
-After all, there are many companies using RHEL/CentOS 7, whose kernel
-is based on 3.10.  Yeah, with of tons of backports and (hopefully) all
-of the necessary security patches, but is that really the best way to
-run a railroad?
+Hi Maryam,
 
-But, yes, if your point is that this metric doesn't distinguish
-between an organization which is regularly keeping itself with the
-very latest 4.9.336 kernel, as opposed to reguarly jumping to the most
-recent LTS kernel (i.e., every year or every other years going from
-5.4 to 5.10 to 5.15 to 6.1), yes that's true.
+FYI I think you're missing a few tags? You can add my Acked-by, and I
+believe that John and Bagas acked and reviewed it respectively in on the
+v3 [0] set as well.
 
-However, it may be that it's better to encourage companies to adopt an
-"upstream-first" development model.  I attempted to capture this in
-the metric, "number of out-of-tree commits present in internal
-kernels".
+Thanks,
+David
 
-						- Ted
+[0]: https://lore.kernel.org/bpf/Y5EOC7HjtaRFAVfq@maniforge.lan/T/#m247ac7e1673731a9cf8b06d5ce027a1acbcce953
