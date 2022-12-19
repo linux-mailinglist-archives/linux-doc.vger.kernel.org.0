@@ -2,313 +2,312 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id E08D8651690
-	for <lists+linux-doc@lfdr.de>; Tue, 20 Dec 2022 00:05:46 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id D0BF96516D0
+	for <lists+linux-doc@lfdr.de>; Tue, 20 Dec 2022 00:47:01 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S233010AbiLSXFo (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 19 Dec 2022 18:05:44 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:53926 "EHLO
+        id S232570AbiLSXq7 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 19 Dec 2022 18:46:59 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:45212 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S232975AbiLSXDh (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Mon, 19 Dec 2022 18:03:37 -0500
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 98D0F167F6;
-        Mon, 19 Dec 2022 15:01:10 -0800 (PST)
-Received: from pps.filterd (m0279862.ppops.net [127.0.0.1])
-        by mx0a-0031df01.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id 2BJMeVG3024916;
-        Mon, 19 Dec 2022 23:00:58 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=quicinc.com; h=from : to : cc :
- subject : date : message-id : in-reply-to : references : mime-version :
- content-transfer-encoding : content-type; s=qcppdkim1;
- bh=7FMfLEKP9dRSF/3+r3eP1XbMU6ePBkPsOZAopXAWIMk=;
- b=ii9DQc6HTLemeJzW6kFPKi8U7/UnS+Tg4cNCJz6u8tDGJo+Tr03DNVOCJDaoyAXLzBsq
- uVNv0DdDs+R7zvVycbUNPN2fGwZTWFeB0Zdfi0mpM8uWdneA73tJkuI1ejv9UB5G3AxB
- d8GKTpKxKS+xLa0gGnVVbnKR7THHkgyTP0zxH4+papcecHye49ooqVX9yGUw/cGQjfWR
- KgesPesptuHkYoagBNIP2kzVj9NbBeKrlkZ5DhR3tu2tld0gHasAfyUyd5oMo4L9+ZaY
- LHAq+xSN5Vf+wnQd/OhbkHStMzLkmayyGJYRwWA6R5IXFTBYne6AWGfP0FRvK7YZ6FEP BA== 
-Received: from nasanppmta01.qualcomm.com (i-global254.qualcomm.com [199.106.103.254])
-        by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 3mjkwqsk84-1
-        (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
-        Mon, 19 Dec 2022 23:00:58 +0000
-Received: from nasanex01b.na.qualcomm.com (corens_vlan604_snip.qualcomm.com [10.53.140.1])
-        by NASANPPMTA01.qualcomm.com (8.17.1.5/8.17.1.5) with ESMTPS id 2BJN0vXx007500
-        (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
-        Mon, 19 Dec 2022 23:00:57 GMT
-Received: from hu-eberman-lv.qualcomm.com (10.49.16.6) by
- nasanex01b.na.qualcomm.com (10.46.141.250) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.986.36; Mon, 19 Dec 2022 15:00:56 -0800
-From:   Elliot Berman <quic_eberman@quicinc.com>
-To:     Bjorn Andersson <quic_bjorande@quicinc.com>,
-        Elliot Berman <quic_eberman@quicinc.com>,
-        Murali Nalajala <quic_mnalajal@quicinc.com>,
-        Jonathan Corbet <corbet@lwn.net>
-CC:     Trilok Soni <quic_tsoni@quicinc.com>,
-        Srivatsa Vaddagiri <quic_svaddagi@quicinc.com>,
-        Carl van Schaik <quic_cvanscha@quicinc.com>,
-        Prakruthi Deepak Heragu <quic_pheragu@quicinc.com>,
-        Arnd Bergmann <arnd@arndb.de>,
-        Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
-        Rob Herring <robh+dt@kernel.org>,
-        Krzysztof Kozlowski <krzysztof.kozlowski+dt@linaro.org>,
-        Bagas Sanjaya <bagasdotme@gmail.com>,
-        Catalin Marinas <catalin.marinas@arm.com>,
-        Will Deacon <will@kernel.org>,
-        Jassi Brar <jassisinghbrar@gmail.com>,
-        Sudeep Holla <sudeep.holla@arm.com>,
-        Mark Rutland <mark.rutland@arm.com>,
-        Lorenzo Pieralisi <lpieralisi@kernel.org>,
-        Dmitry Baryshkov <dmitry.baryshkov@linaro.org>,
-        <linux-arm-msm@vger.kernel.org>, <devicetree@vger.kernel.org>,
-        <linux-kernel@vger.kernel.org>, <linux-doc@vger.kernel.org>,
-        <linux-arm-kernel@lists.infradead.org>,
-        <linux-acpi@vger.kernel.org>
-Subject: [PATCH v8 28/28] virt: gunyah: Add ioeventfd
-Date:   Mon, 19 Dec 2022 14:58:49 -0800
-Message-ID: <20221219225850.2397345-29-quic_eberman@quicinc.com>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20221219225850.2397345-1-quic_eberman@quicinc.com>
-References: <20221219225850.2397345-1-quic_eberman@quicinc.com>
-MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Originating-IP: [10.49.16.6]
-X-ClientProxiedBy: nalasex01c.na.qualcomm.com (10.47.97.35) To
- nasanex01b.na.qualcomm.com (10.46.141.250)
-X-QCInternal: smtphost
-X-Proofpoint-Virus-Version: vendor=nai engine=6200 definitions=5800 signatures=585085
-X-Proofpoint-GUID: jZDMPj5TsLWgw0k0ut_Eihl9iuVeE-lt
-X-Proofpoint-ORIG-GUID: jZDMPj5TsLWgw0k0ut_Eihl9iuVeE-lt
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.205,Aquarius:18.0.923,Hydra:6.0.545,FMLib:17.11.122.1
- definitions=2022-12-19_01,2022-12-15_02,2022-06-22_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 clxscore=1015 mlxscore=0
- priorityscore=1501 spamscore=0 mlxlogscore=999 lowpriorityscore=0
- suspectscore=0 impostorscore=0 phishscore=0 bulkscore=0 adultscore=0
- malwarescore=0 classifier=spam adjust=0 reason=mlx scancount=1
- engine=8.12.0-2212070000 definitions=main-2212190202
-X-Spam-Status: No, score=-2.8 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_LOW,SPF_HELO_NONE,
-        SPF_PASS autolearn=ham autolearn_force=no version=3.4.6
+        with ESMTP id S232686AbiLSXqy (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Mon, 19 Dec 2022 18:46:54 -0500
+Received: from mail-wr1-x42e.google.com (mail-wr1-x42e.google.com [IPv6:2a00:1450:4864:20::42e])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id DB7036411
+        for <linux-doc@vger.kernel.org>; Mon, 19 Dec 2022 15:46:50 -0800 (PST)
+Received: by mail-wr1-x42e.google.com with SMTP id w15so10209878wrl.9
+        for <linux-doc@vger.kernel.org>; Mon, 19 Dec 2022 15:46:50 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=linaro.org; s=google;
+        h=references:in-reply-to:message-id:date:subject:cc:to:from:from:to
+         :cc:subject:date:message-id:reply-to;
+        bh=20URghUEhnd48vVWNIo4NcdPqwWP3OApoVFQSqBizbk=;
+        b=XrGsIL3zLIGiSSn6zRwToocscYx+EVhRGz0v2L1n/IAjuMcU6xq8ZxA2Wus2Ht6e9N
+         S6C2+S60mmYaom7yAsckD8S25Ejvvcqe3F3SJmBbvSPaiKxrPfxWn9DTSgnKDa/+OqNl
+         mc9TLU7w9ovr7ziKMBo0UqNMEtE4C3eOa0PQJvlkSW0u6trdiuySdE8p/gNE/utvkkou
+         YxAZ+G9dzZdfS0bdLiNYmdOvHB6TpFNjqgitjPcyn3NwIEffSny6Tyt0mxRN66OpK4TU
+         YOkTfkTzLeC0IdVDj8ppUq80K+kQFcI4raWg7306COdxXtCPeDg+HudpqicpXG2aegSM
+         bZDQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=references:in-reply-to:message-id:date:subject:cc:to:from
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=20URghUEhnd48vVWNIo4NcdPqwWP3OApoVFQSqBizbk=;
+        b=Nv1ibokDstilRgV+Gdw49p0UCDn12WylMz1xzotXY7mTAKIgaxM4RHqRe24bIqQht2
+         m1D/x0VF8MZRhLe0fz/OCtyEHtiqBSBWoafj7BNIpI8gijQiv1VZJg+seLgdGSfakgly
+         8HqqqQkId795A0nphaVKQR3shfpVzvD0G0nu25N5uOZ540ADAzaIwKEXacz7e382FzKY
+         xZvYpxD7S+ZYynTKP6eZYOXB4lFPd9SVUtbiInXm/tOmSAeNQypuxhT8vdN+7Qu1qWOp
+         cgidnk7G3xtrR6LTWYjW9jfA7Dj11eKm7J9LSqMdshqPO1cWJ26pgzfk5X87GljPr6d0
+         ujww==
+X-Gm-Message-State: AFqh2kpcVhECGdBlg2P7Wt+PVywN54q8NbqeDquHTwIwt7w3YTnQOCpA
+        Ls8RpfDKJnhZ14SzvhCTIbAXAg==
+X-Google-Smtp-Source: AMrXdXt6JZzeWZ/AtX+SAqVE7wKHSrEQFyPWiwpw8cD02387TMiFxduKOJlehH3NW+aKz7L7W5wBsQ==
+X-Received: by 2002:adf:dbc7:0:b0:25d:d243:4f3c with SMTP id e7-20020adfdbc7000000b0025dd2434f3cmr6508350wrj.69.1671493609382;
+        Mon, 19 Dec 2022 15:46:49 -0800 (PST)
+Received: from linaro.org ([2a00:23c5:6809:2201:bce1:4a06:7ceb:6940])
+        by smtp.gmail.com with ESMTPSA id n2-20020a5d4c42000000b002383fc96509sm11165148wrt.47.2022.12.19.15.46.48
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 19 Dec 2022 15:46:48 -0800 (PST)
+From:   Mike Leach <mike.leach@linaro.org>
+To:     linux-arm-kernel@lists.infradead.org, coresight@lists.linaro.org,
+        linux-kernel@vger.kernel.org
+Cc:     mathieu.poirier@linaro.org, suzuki.poulose@arm.com,
+        acme@kernel.org, james.clark@arm.com,
+        Mike Leach <mike.leach@linaro.org>,
+        Jonathan Corbet <corbet@lwn.net>, linux-doc@vger.kernel.org
+Subject: [PATCH v5 6/6] Documentation: coresight: docs for config load via configfs
+Date:   Mon, 19 Dec 2022 23:46:38 +0000
+Message-Id: <20221219234638.3661-7-mike.leach@linaro.org>
+X-Mailer: git-send-email 2.17.1
+In-Reply-To: <20221219234638.3661-1-mike.leach@linaro.org>
+References: <20221219234638.3661-1-mike.leach@linaro.org>
+X-Spam-Status: No, score=-2.1 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_NONE,
+        SPF_HELO_NONE,SPF_PASS autolearn=ham autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Allow userspace to attach an ioeventfd to an mmio address within the guest.
+Add documentation covering the configfs updates that allow
+binary configuration files to be loaded and unloaded via configfs,
+along with the demonstration programs in samples.
 
-Co-developed-by: Prakruthi Deepak Heragu <quic_pheragu@quicinc.com>
-Signed-off-by: Prakruthi Deepak Heragu <quic_pheragu@quicinc.com>
-Signed-off-by: Elliot Berman <quic_eberman@quicinc.com>
+Cc: Jonathan Corbet <corbet@lwn.net>
+Cc: linux-doc@vger.kernel.org
+Signed-off-by: Mike Leach <mike.leach@linaro.org>
 ---
- Documentation/virt/gunyah/vm-manager.rst |  21 +++++
- drivers/virt/gunyah/Kconfig              |  10 +++
- drivers/virt/gunyah/Makefile             |   1 +
- drivers/virt/gunyah/gunyah_ioeventfd.c   | 109 +++++++++++++++++++++++
- include/uapi/linux/gunyah.h              |  10 +++
- 5 files changed, 151 insertions(+)
- create mode 100644 drivers/virt/gunyah/gunyah_ioeventfd.c
+ .../trace/coresight/coresight-config.rst      | 202 +++++++++++++++++-
+ 1 file changed, 195 insertions(+), 7 deletions(-)
 
-diff --git a/Documentation/virt/gunyah/vm-manager.rst b/Documentation/virt/gunyah/vm-manager.rst
-index b6cf8db826b8..19ec859a7912 100644
---- a/Documentation/virt/gunyah/vm-manager.rst
-+++ b/Documentation/virt/gunyah/vm-manager.rst
-@@ -164,3 +164,24 @@ the irqfd.label.
+diff --git a/Documentation/trace/coresight/coresight-config.rst b/Documentation/trace/coresight/coresight-config.rst
+index 6d5ffa6f7347..109053eb1b93 100644
+--- a/Documentation/trace/coresight/coresight-config.rst
++++ b/Documentation/trace/coresight/coresight-config.rst
+@@ -141,11 +141,11 @@ Mount configfs as normal and the 'cs-syscfg' subsystem will appear::
+     $ ls /config
+     cs-syscfg  stp-policy
  
- GH_IRQFD_LEVEL configures the corresponding doorbell to behave like a level
- triggered interrupt.
+-This has two sub-directories::
++This has two sub-directories, with the load and unload attribute files::
+ 
+     $ cd cs-syscfg/
+     $ ls
+-    configurations  features
++    configurations features load  unload
+ 
+ The system has the configuration 'autofdo' built in. It may be examined as
+ follows::
+@@ -278,9 +278,16 @@ Creating and Loading Custom Configurations
+ ==========================================
+ 
+ Custom configurations and / or features can be dynamically loaded into the
+-system by using a loadable module.
++system by using a loadable module, or by loading a binary configuration
++file in configfs.
+ 
+-An example of a custom configuration is found in ./samples/coresight.
++Loaded configurations can use previously loaded features. The system will
++ensure that it is not possible to unload a feature that is currently in
++use, by enforcing the unload order as the strict reverse of the load order.
 +
-+Type: "ioeventfd"
-+^^^^^^^^^^^^^^^^^
++
++Using a Loadable Module
++-----------------------
+ 
+ This creates a new configuration that uses the existing built in
+ strobing feature, but provides a different set of presets.
+@@ -289,6 +296,187 @@ When the module is loaded, then the configuration appears in the configfs
+ file system and is selectable in the same way as the built in configuration
+ described above.
+ 
+-Configurations can use previously loaded features. The system will ensure
+-that it is not possible to unload a feature that is currently in use, by
+-enforcing the unload order as the strict reverse of the load order.
++The file 'coresight-cfg-sample.c' contains the configuration and module
++initialisation code needed to create the loadable module.
++
++This will be built alongside the kernel modules if select in KConfig.
++
++An example of a custom configuration module is found in './samples/coresight'.
++
++Using a Binary Configuration File
++---------------------------------
++
++The './tools/coresight' directory contains example programs to generate and
++read and print binary configuration files.
++
++Building the tools creates the 'coresight-cfg-file-gen' program that will
++generate a configuration binary 'example1.cscfg' that can be loaded into the
++system using configfs. The configuration declared in the source file
++'coresight-cfg-example1.c' is named 'autofdo3' - the name that will be used
++once loaded.
++
++The source files 'coresight-cfg-bufw.h' and 'coresight-cfg-bufw.c' provide a
++standard function to convert a configuration declared in 'C' into the correct
++binary buffer format. These files can be re-used to create new custom
++configurations. Alternatively, addition examples can be added to the
++'coresight-cfg-file-gen' program::
++
++    $ ./coresight-cfg-file-gen
++    Coresight Configuration file Generator
++
++    Generating example1 example
++    Generating example2 example
++
++The program 'coresight-cfg-file-read' can read back and print a configuration
++binary. This is built using the file reader from the driver code
++(coresight-config-file.c), which is copied over into './tools/coresight' at
++build time.::
++
++    ./coresight-cfg-file-read example1.cscfg
++    CoreSight Configuration file reader
++    ============================================
++
++    Configuration 1
++    Name:- autofdo3
++    Description:-
++    Setup ETMs with strobing for autofdo
++    Supplied presets allow experimentation with mark-space ratio for various loads
++
++    Uses 1 features:-
++    Feature-1: strobing
++
++    Provides 4 sets of preset values, 2 presets per set
++    set[0]: 0x7d0, 0x64,
++    set[1]: 0x7d0, 0x3e8,
++    set[2]: 0x7d0, 0x1388,
++    set[3]: 0x7d0, 0x2710,
++
++    ============================================
++    File contains no features
++
++There are additional attributes in the cs-syscfg directory - load and
++unload that can be used to load and unload configuration binary files. To
++load, 'cat' the binary config into the load attribute::
++
++    $ ls /config/cs-syscfg
++    configurations features  load  unload
++    $ cat example1.cscfg > /config/cs-syscfg/load
++    $ ls /config/cs-syscfg/configurations/
++    autofdo  autofdo3
++
++To unload, use the same file in the unload attribute::
++
++    $ cat example1.cscfg > /config/cs-syscfg/unload
++    ls /config/cs-syscfg/configurations/
++    autofdo
++
++
++
++Binary Configuration File Format
++--------------------------------
++
++The file format is defined in the source file **coresight-config-file.h**
++
++The source reader and generator examples produce a binary of this format.
++
++This arrangement is reproduced below:-
++
++Overall File structure
++~~~~~~~~~~~~~~~~~~~~~~
 +
 +::
 +
-+  struct gh_fn_ioeventfd_arg {
-+	__u64 datamatch;
-+	__u64 addr;        /* legal mmio address */
-+	__u32 len;         /* 1, 2, 4, or 8 bytes */
-+	__s32 fd;
-+  #define GH_IOEVENTFD_DATAMATCH		(1UL << 0)
-+	__u32 flags;
-+  };
++   [cscfg_file_header]   // Mandatory
++   [CONFIG_ELEM]*        // Optional - multiple, defined by cscfg_file_header.nr_configs
++   [FEATURE_ELEM]*       // Optional - multiple, defined by cscfg_file_header.nr_features
 +
-+Attaches an ioeventfd to a legal mmio address within the guest. A guest write
-+in the registered address will signal the provided event instead of triggering
-+an exit on the GH_VCPU_RUN ioctl.
++File is invalid if both [CONFIG_ELEM] and [FEATURE_ELEM] are omitted.
 +
-+If datamatch flag is set, the event will be signaled only if the written value
-+to the registered address is equal to datamatch in struct gh_fn_ioeventfd_arg.
-diff --git a/drivers/virt/gunyah/Kconfig b/drivers/virt/gunyah/Kconfig
-index 42842e755a04..06f1082f98f0 100644
---- a/drivers/virt/gunyah/Kconfig
-+++ b/drivers/virt/gunyah/Kconfig
-@@ -59,5 +59,15 @@ config GUNYAH_IRQFD
- 	  Enable kernel support for creating irqfds which can raise an interrupt
- 	  on Gunyah virtual machine.
- 
-+	  Say Y/M here if unsure and you want to support Gunyah VMMs.
++A file that contains only [FEATURE_ELEM] may be loaded, and the features used
++by subsequently loaded files with [CONFIG_ELEM] elements.
 +
-+config GUNYAH_IOEVENTFD
-+	tristate "Gunyah ioeventfd interface"
-+	depends on GUNYAH_RESOURCE_MANAGER
-+	depends on GUNYAH_VM_MANAGER
-+	help
-+	  Enable kernel support for creating ioeventfds which can alert userspace
-+	  when a Gunyah virtual machine accesses a memory address.
++Element Name Strings
++~~~~~~~~~~~~~~~~~~~~
 +
- 	  Say Y/M here if unsure and you want to support Gunyah VMMs.
- endif
-diff --git a/drivers/virt/gunyah/Makefile b/drivers/virt/gunyah/Makefile
-index 065eeb060597..bcffb99eb28f 100644
---- a/drivers/virt/gunyah/Makefile
-+++ b/drivers/virt/gunyah/Makefile
-@@ -7,3 +7,4 @@ obj-$(CONFIG_GUNYAH_RESOURCE_MANAGER) += gunyah_rsc_mgr.o
- 
- obj-$(CONFIG_GUNYAH_VCPU) += gunyah_vcpu.o
- obj-$(CONFIG_GUNYAH_IRQFD) += gunyah_irqfd.o
-+obj-$(CONFIG_GUNYAH_IOEVENTFD) += gunyah_ioeventfd.o
-diff --git a/drivers/virt/gunyah/gunyah_ioeventfd.c b/drivers/virt/gunyah/gunyah_ioeventfd.c
-new file mode 100644
-index 000000000000..5f43057eb768
---- /dev/null
-+++ b/drivers/virt/gunyah/gunyah_ioeventfd.c
-@@ -0,0 +1,109 @@
-+// SPDX-License-Identifier: GPL-2.0-only
-+/*
-+ * Copyright (c) 2022 Qualcomm Innovation Center, Inc. All rights reserved.
-+ */
++Configuration name strings are required to consist of alphanumeric characters and '_' only. Other special characters are not permitted.
 +
-+#include <linux/eventfd.h>
-+#include <linux/file.h>
-+#include <linux/fs.h>
-+#include <linux/gunyah.h>
-+#include <linux/gunyah_vm_mgr.h>
-+#include <linux/module.h>
-+#include <linux/printk.h>
++::
++   my_config_2          // is a valid name.
++   this-bad-config#5    // this will not work
 +
-+#include <uapi/linux/gunyah.h>
++This is in order to comply with the requirements of the perf command line.
 +
-+struct gunyah_ioeventfd {
-+	struct gunyah_vm_function *f;
-+	struct gunyah_vm_io_handler io_handler;
++It is recommended that Feature and Parameter names use the same convention to allow for future enhancements to the command line syntax.
 +
-+	struct eventfd_ctx *ctx;
-+};
++CONFIG_ELEM element
++~~~~~~~~~~~~~~~~~~~
 +
-+static int gh_write_ioeventfd(struct gunyah_vm_io_handler *io_dev, u64 addr, u32 len, u64 data)
-+{
-+	struct gunyah_ioeventfd *iofd = container_of(io_dev, struct gunyah_ioeventfd, io_handler);
++::
 +
-+	eventfd_signal(iofd->ctx, 1);
-+	return 0;
-+}
++   [cscfg_file_elem_header]                // header length value to end of feature strings.
++   [cscfg_file_elem_str]                   // name of the configuration.
++                                           // (see element string name requirements)
++   [cscfg_file_elem_str]                   // description of configuration.
++   [u16 value](nr_presets)                 // number of defined sets presets values.
++   [u32 value](nr_total_params)            // total parameters defined by all used features.
++   [u16 value](nr_feat_refs)               // number of features referenced by the configuration
++   [u64 values] * (nr_presets * nr_total_params)     // the preset values.
++   [cscfg_file_elem_str] * (nr_feat_refs)  // names of features used in the configurations.
 +
-+static struct gunyah_vm_io_handler_ops io_ops = {
-+	.write = gh_write_ioeventfd,
-+};
++FEATURE_ELEM element
++~~~~~~~~~~~~~~~~~~~~
 +
-+static long gunyah_ioeventfd_bind(struct gunyah_vm_function *f)
-+{
-+	struct eventfd_ctx *ctx = NULL;
-+	struct gunyah_ioeventfd *iofd;
-+	const struct gh_fn_ioeventfd_arg *args = &f->fn.ioeventfd;
-+	int ret;
++::
 +
-+	/* must be natural-word sized, or 0 to ignore length */
-+	switch (args->len) {
-+	case 0:
-+	case 1:
-+	case 2:
-+	case 4:
-+	case 8:
-+		break;
-+	default:
-+		return -EINVAL;
-+	}
++   [cscfg_file_elem_header]                // header length is total bytes to end of param structures.
++   [cscfg_file_elem_str]                   // feature name.
++   [cscfg_file_elem_str]                   // feature description.
++   [u32 value](match_flags)                // flags to associate the feature with a device.
++   [u16 value](nr_regs)                    // number of registers.
++   [u16 value](nr_params)                  // number of parameters.
++   [cscfg_regval_desc struct] * (nr_regs)  // register definitions
++   [PARAM_ELEM] * (nr_params)              // parameters definitions
 +
-+	/* check for range overflow */
-+	if (args->addr + args->len < args->addr)
-+		return -EINVAL;
++PARAM_ELEM element
++~~~~~~~~~~~~~~~~~~
 +
-+	/* ioeventfd with no length can't be combined with DATAMATCH */
-+	if (!args->len && (args->flags & GH_IOEVENTFD_DATAMATCH))
-+		return -EINVAL;
++::
 +
-+	ctx = eventfd_ctx_fdget(args->fd);
-+	if (IS_ERR(ctx))
-+		return PTR_ERR(ctx);
++   [cscfg_file_elem_str]         // parameter name.
++   [u64 value](param_value)      // initial value.
 +
-+	iofd = kzalloc(sizeof(*iofd), GFP_KERNEL);
-+	if (!iofd) {
-+		ret = -ENOMEM;
-+		goto err_eventfd;
-+	}
++Additional definitions.
++~~~~~~~~~~~~~~~~~~~~~~~
 +
-+	f->data = iofd;
-+	iofd->f = f;
++The following structures are defined in **coresight-config-file.h**
 +
-+	iofd->ctx = ctx;
++ * **struct cscfg_file_header** : This structure contains an initial magic number, the total
++   length of the file, and the number of configurations and features in the file.
++ * **struct cscfg_file_elem_header**: This defines the total length and type of a CONFIG_ELEM
++   or a FEATURE_ELEM.
++ * **struct cscfg_file_elem_str**: This defines a string and its length.
 +
-+	if (args->flags & GH_IOEVENTFD_DATAMATCH) {
-+		iofd->io_handler.datamatch = true;
-+		iofd->io_handler.len = args->len;
-+		iofd->io_handler.data = args->datamatch;
-+	}
-+	iofd->io_handler.addr = args->addr;
-+	iofd->io_handler.ops = &io_ops;
++The magic number in cscfg_file_header is defined as two bitfields::
 +
-+	ret = gh_vm_mgr_add_io_handler(f->ghvm, &iofd->io_handler);
-+	if (ret)
-+		goto err_io_dev_add;
++   [31:8] Fixed magic number to identify file type.
++   [7:0]  Current file format version.
 +
-+	return 0;
++The following defines determine the maximum overall file size and maximum individual
++string size::
 +
-+err_io_dev_add:
-+	kfree(iofd);
-+err_eventfd:
-+	eventfd_ctx_put(ctx);
-+	return ret;
-+}
++   CSCFG_FILE_MAXSIZE       // maximum overall file size.
++   CSCFG_FILE_STR_MAXSIZE   // maximum individual string size.
 +
-+static void gunyah_ioeventfd_release(struct gunyah_vm_function *f)
-+{
-+	struct gunyah_ioeventfd *iofd = f->data;
++Load Dependencies.
++~~~~~~~~~~~~~~~~~~
 +
-+	eventfd_ctx_put(iofd->ctx);
-+	gh_vm_mgr_remove_io_handler(iofd->f->ghvm, &iofd->io_handler);
-+	kfree(iofd);
-+}
++Files may be unloaded only in the strict reverse order of loading. This is enforced by the
++configuration system.
 +
-+DECLARE_GUNYAH_VM_FUNCTION_INIT(ioeventfd, gunyah_ioeventfd_bind, gunyah_ioeventfd_release);
-+MODULE_DESCRIPTION("Gunyah ioeventfds");
-+MODULE_LICENSE("GPL");
-diff --git a/include/uapi/linux/gunyah.h b/include/uapi/linux/gunyah.h
-index 5eab212c7bf5..5da9fb933bae 100644
---- a/include/uapi/linux/gunyah.h
-+++ b/include/uapi/linux/gunyah.h
-@@ -65,11 +65,21 @@ struct gh_fn_irqfd_arg {
- 	__u32 flags;
- };
- 
-+struct gh_fn_ioeventfd_arg {
-+	__u64 datamatch;
-+	__u64 addr;        /* legal mmio address */
-+	__u32 len;         /* 1, 2, 4, or 8 bytes; or 0 to ignore length */
-+	__s32 fd;
-+#define GH_IOEVENTFD_DATAMATCH		(1UL << 0)
-+	__u32 flags;
-+};
++This is to ensure that any load dependencies are maintained.
 +
- struct gh_vm_function {
- 	char name[GUNYAH_FUNCTION_NAME_SIZE];
- 	union {
- 		struct gh_fn_vcpu_arg vcpu;
- 		struct gh_fn_irqfd_arg irqfd;
-+		struct gh_fn_ioeventfd_arg ioeventfd;
- 		char data[GUNYAH_FUNCTION_MAX_ARG_SIZE];
- 	};
- };
++A configuration file that contains a CONFIG_ELEM that references named features "feat_A" and "feat_B" will load only if either:-
++a) "feat_A" and/or "feat_B" has been loaded previously, or are present as built-in / module loaded features.
++b) "feat_A" and/or "feat_B" are declared as FEAT_ELEM in the same file as the CONFIG_ELEM.
++
++Files that contain features or configurations with the same names as those already loaded will fail to load.
 -- 
-2.25.1
+2.17.1
 
