@@ -2,695 +2,254 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 2DADD650F25
-	for <lists+linux-doc@lfdr.de>; Mon, 19 Dec 2022 16:46:32 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 5394D650F57
+	for <lists+linux-doc@lfdr.de>; Mon, 19 Dec 2022 16:53:52 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S232328AbiLSPqW (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 19 Dec 2022 10:46:22 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:59714 "EHLO
+        id S232682AbiLSPxt (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 19 Dec 2022 10:53:49 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:39550 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S231952AbiLSPpg (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Mon, 19 Dec 2022 10:45:36 -0500
-Received: from desiato.infradead.org (desiato.infradead.org [IPv6:2001:8b0:10b:1:d65d:64ff:fe57:4e05])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 1C06F13F4B;
-        Mon, 19 Dec 2022 07:44:11 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-        d=infradead.org; s=desiato.20200630; h=Content-Type:MIME-Version:References:
-        Subject:Cc:To:From:Date:Message-ID:Sender:Reply-To:Content-Transfer-Encoding:
-        Content-ID:Content-Description:In-Reply-To;
-        bh=Q7JGtw0CYGxGDnBLhpx7/MdDSlK58U/sb9rjRrrBecg=; b=XzJZ5CLKTpECrKNMmE4dQXMDXx
-        9ojviI+pJeL7vVsAODadr6wA97uUEvnLjocmzy83qlN3o244elLngLWz385W/R9XWHFt+887523uY
-        loMGwNqobvoGjWtwJP9T95jezN+8kxNgm69hVQRqjrt0yK7PL0jQNSfZxu3TdNMJ4g7fq2P/v4O2P
-        CMTk1d50qCBiogc+/GI9TOpGtWXU+dTtfRHFUQiX2gGPv4a47dOuozsJLkraMh+PwcAraMt6DuDZb
-        le2iih9xgcBh0oWl3Zf5jSxXTBWaVDd2JrFfEXurDlum/e7ErZmkApKE5AxbDMU1xGt9GZRjOSMdA
-        UJN9DY5g==;
-Received: from j130084.upc-j.chello.nl ([24.132.130.84] helo=noisy.programming.kicks-ass.net)
-        by desiato.infradead.org with esmtpsa (Exim 4.96 #2 (Red Hat Linux))
-        id 1p7IIJ-00CeDt-2J;
-        Mon, 19 Dec 2022 15:43:12 +0000
-Received: from hirez.programming.kicks-ass.net (hirez.programming.kicks-ass.net [192.168.1.225])
-        (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-         key-exchange X25519 server-signature RSA-PSS (4096 bits))
-        (Client did not present a certificate)
-        by noisy.programming.kicks-ass.net (Postfix) with ESMTPS id 1B9B13033BF;
-        Mon, 19 Dec 2022 16:43:10 +0100 (CET)
-Received: by hirez.programming.kicks-ass.net (Postfix, from userid 0)
-        id AEC1820B0F8A1; Mon, 19 Dec 2022 16:43:06 +0100 (CET)
-Message-ID: <20221219154119.617065541@infradead.org>
-User-Agent: quilt/0.66
-Date:   Mon, 19 Dec 2022 16:35:37 +0100
-From:   Peter Zijlstra <peterz@infradead.org>
-To:     torvalds@linux-foundation.org
-Cc:     corbet@lwn.net, will@kernel.org, peterz@infradead.org,
-        boqun.feng@gmail.com, mark.rutland@arm.com,
-        catalin.marinas@arm.com, dennis@kernel.org, tj@kernel.org,
-        cl@linux.com, hca@linux.ibm.com, gor@linux.ibm.com,
-        agordeev@linux.ibm.com, borntraeger@linux.ibm.com,
-        svens@linux.ibm.com, Herbert Xu <herbert@gondor.apana.org.au>,
-        davem@davemloft.net, tglx@linutronix.de, mingo@redhat.com,
-        bp@alien8.de, dave.hansen@linux.intel.com, x86@kernel.org,
-        hpa@zytor.com, joro@8bytes.org, suravee.suthikulpanit@amd.com,
-        robin.murphy@arm.com, dwmw2@infradead.org,
-        baolu.lu@linux.intel.com, Arnd Bergmann <arnd@arndb.de>,
-        penberg@kernel.org, rientjes@google.com, iamjoonsoo.kim@lge.com,
-        Andrew Morton <akpm@linux-foundation.org>, vbabka@suse.cz,
-        roman.gushchin@linux.dev, 42.hyeyoo@gmail.com,
-        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
-        linux-mm@kvack.org, linux-s390@vger.kernel.org,
-        linux-crypto@vger.kernel.org, iommu@lists.linux.dev,
-        linux-arch@vger.kernel.org
-Subject: [RFC][PATCH 12/12] arch: Remove cmpxchg_double
-References: <20221219153525.632521981@infradead.org>
+        with ESMTP id S232388AbiLSPx0 (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Mon, 19 Dec 2022 10:53:26 -0500
+Received: from NAM10-BN7-obe.outbound.protection.outlook.com (mail-bn7nam10on2078.outbound.protection.outlook.com [40.107.92.78])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 07F1713DDF;
+        Mon, 19 Dec 2022 07:51:32 -0800 (PST)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=MaeFxeLRaJGMPu8N8X4Fp07gdQV0d6Hrpoa4lIl19gDc6euu/EsmF4MQBNyu+roNTua3H96qGGfm/8y0HKn1BmnRn1/i9FzMNrwVesASp6f0ITiX2464hZ7vZisQMQ9ya8t5q4opCws1XVVJPiqGXv2yt9lEGtU8ftvw9i/uxmzSn6+sd/2+By+zFkbfaXyVaSWAJ05Avlx+B6cBc67gzb6yzft0CP17IA1ZHLVOO/iItUL799BkFb/LGDTETjwos9YwBfsyGoL3OnSVkbf+m3PDz/t3ptSNGASYVWpD1SYQF2bIEcsRSWawRmESismr7rjp7vO6xOdfcLr9EyQjmA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=/vbl6gYZauoTTFXTZKDGLYYiBPp4eLyiT2+94M7O1Oc=;
+ b=BVbBN5bxANaWth4hNjJxZHQnhKCi7bCvZCYH2OyTIgQjQcYwJRCNf6ykaMsGpgeueLlesK0BpvfjRPToXK+b/bXOcZlcZWK8PbhR3V9Rn9UJ5E4y1E+n1dGfh1xpTV3JVPTn62I7nQupTODXPuxLg35fTmHVAkXLdgN9LLhHKesjux578KEwR4t3LuxZF6DlKoMtHed4IWvobcORdHLSq9XoC9hcgIs39HEd8D/AI1yAR5tSRe28HkWfSHBwWwZpeTtETWh3hl6Jab8s4mMS2Yso1osb7YBqFwWEbYgosvIChdyVLn/cTjAaBXC7ywi6/0MkqaLTz6iqsND8g+GSIg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
+ header.d=amd.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=/vbl6gYZauoTTFXTZKDGLYYiBPp4eLyiT2+94M7O1Oc=;
+ b=o2w6tQGiqKhC5dVDo5xCfJHlI1m/hT96MpwixKJQIjRYGcsioHa+3Jy/GTv2TmwLAwSUXSmUDgV78+fTIYX7i28GfYymdRdlMZfoYxtqXC/7PZ3BI70aq9icfrJzsXMmLSDAWTmMRQAuBne2228u+eCrE1mYlsnYolq3LYu2gUg=
+Received: from MW3PR12MB4553.namprd12.prod.outlook.com (2603:10b6:303:2c::19)
+ by DM6PR12MB4188.namprd12.prod.outlook.com (2603:10b6:5:215::18) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5924.16; Mon, 19 Dec
+ 2022 15:51:29 +0000
+Received: from MW3PR12MB4553.namprd12.prod.outlook.com
+ ([fe80::790c:da77:2d05:6098]) by MW3PR12MB4553.namprd12.prod.outlook.com
+ ([fe80::790c:da77:2d05:6098%5]) with mapi id 15.20.5924.016; Mon, 19 Dec 2022
+ 15:51:29 +0000
+From:   "Moger, Babu" <Babu.Moger@amd.com>
+To:     Reinette Chatre <reinette.chatre@intel.com>,
+        "corbet@lwn.net" <corbet@lwn.net>,
+        "tglx@linutronix.de" <tglx@linutronix.de>,
+        "mingo@redhat.com" <mingo@redhat.com>,
+        "bp@alien8.de" <bp@alien8.de>
+CC:     "fenghua.yu@intel.com" <fenghua.yu@intel.com>,
+        "dave.hansen@linux.intel.com" <dave.hansen@linux.intel.com>,
+        "x86@kernel.org" <x86@kernel.org>, "hpa@zytor.com" <hpa@zytor.com>,
+        "paulmck@kernel.org" <paulmck@kernel.org>,
+        "akpm@linux-foundation.org" <akpm@linux-foundation.org>,
+        "quic_neeraju@quicinc.com" <quic_neeraju@quicinc.com>,
+        "rdunlap@infradead.org" <rdunlap@infradead.org>,
+        "damien.lemoal@opensource.wdc.com" <damien.lemoal@opensource.wdc.com>,
+        "songmuchun@bytedance.com" <songmuchun@bytedance.com>,
+        "peterz@infradead.org" <peterz@infradead.org>,
+        "jpoimboe@kernel.org" <jpoimboe@kernel.org>,
+        "pbonzini@redhat.com" <pbonzini@redhat.com>,
+        "chang.seok.bae@intel.com" <chang.seok.bae@intel.com>,
+        "pawan.kumar.gupta@linux.intel.com" 
+        <pawan.kumar.gupta@linux.intel.com>,
+        "jmattson@google.com" <jmattson@google.com>,
+        "daniel.sneddon@linux.intel.com" <daniel.sneddon@linux.intel.com>,
+        "Das1, Sandipan" <Sandipan.Das@amd.com>,
+        "tony.luck@intel.com" <tony.luck@intel.com>,
+        "james.morse@arm.com" <james.morse@arm.com>,
+        "linux-doc@vger.kernel.org" <linux-doc@vger.kernel.org>,
+        "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
+        "bagasdotme@gmail.com" <bagasdotme@gmail.com>,
+        "eranian@google.com" <eranian@google.com>,
+        "christophe.leroy@csgroup.eu" <christophe.leroy@csgroup.eu>,
+        "jarkko@kernel.org" <jarkko@kernel.org>,
+        "adrian.hunter@intel.com" <adrian.hunter@intel.com>,
+        "quic_jiles@quicinc.com" <quic_jiles@quicinc.com>,
+        "peternewman@google.com" <peternewman@google.com>
+Subject: RE: [PATCH v9 06/13] x86/resctrl: Add __init attribute to
+ rdt_get_mon_l3_config()
+Thread-Topic: [PATCH v9 06/13] x86/resctrl: Add __init attribute to
+ rdt_get_mon_l3_config()
+Thread-Index: AQHZBZrF9YX7kqOO/k+zvGNKOWVBB65vRvGAgAYwqHA=
+Date:   Mon, 19 Dec 2022 15:51:29 +0000
+Message-ID: <MW3PR12MB4553BA5B46B87EEF27B2914295E59@MW3PR12MB4553.namprd12.prod.outlook.com>
+References: <166990882621.17806.16780480657453071426.stgit@bmoger-ubuntu>
+ <166990900117.17806.4506067708943298894.stgit@bmoger-ubuntu>
+ <70e6b0a3-a18e-ff10-1df0-3b6790692bda@intel.com>
+In-Reply-To: <70e6b0a3-a18e-ff10-1df0-3b6790692bda@intel.com>
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+msip_labels: MSIP_Label_4342314e-0df4-4b58-84bf-38bed6170a0f_Enabled=true;
+ MSIP_Label_4342314e-0df4-4b58-84bf-38bed6170a0f_SetDate=2022-12-19T15:48:57Z;
+ MSIP_Label_4342314e-0df4-4b58-84bf-38bed6170a0f_Method=Standard;
+ MSIP_Label_4342314e-0df4-4b58-84bf-38bed6170a0f_Name=General;
+ MSIP_Label_4342314e-0df4-4b58-84bf-38bed6170a0f_SiteId=3dd8961f-e488-4e60-8e11-a82d994e183d;
+ MSIP_Label_4342314e-0df4-4b58-84bf-38bed6170a0f_ActionId=a3085bda-4679-4c05-bc4c-69ca49e15463;
+ MSIP_Label_4342314e-0df4-4b58-84bf-38bed6170a0f_ContentBits=1
+msip_label_4342314e-0df4-4b58-84bf-38bed6170a0f_enabled: true
+msip_label_4342314e-0df4-4b58-84bf-38bed6170a0f_setdate: 2022-12-19T15:51:27Z
+msip_label_4342314e-0df4-4b58-84bf-38bed6170a0f_method: Standard
+msip_label_4342314e-0df4-4b58-84bf-38bed6170a0f_name: General
+msip_label_4342314e-0df4-4b58-84bf-38bed6170a0f_siteid: 3dd8961f-e488-4e60-8e11-a82d994e183d
+msip_label_4342314e-0df4-4b58-84bf-38bed6170a0f_actionid: 1ee62527-21dd-488a-93ea-30eedebf62cb
+msip_label_4342314e-0df4-4b58-84bf-38bed6170a0f_contentbits: 0
+authentication-results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=amd.com;
+x-ms-publictraffictype: Email
+x-ms-traffictypediagnostic: MW3PR12MB4553:EE_|DM6PR12MB4188:EE_
+x-ms-office365-filtering-correlation-id: d2709e88-ffa2-4663-8ca6-08dae1d8e4a8
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
+x-microsoft-antispam: BCL:0;
+x-microsoft-antispam-message-info: Fzc2W9e0/1sUFSBrV2o+nI4aNWvz3na5DCpUoXdQW1Muoia5mRi7yk/PBMgGfVGA3vm5skeeY5S+sm/wZXWTQTM+zB65w+7qxk7aPnNde5yvt/CbTNsAzpYIPo2V4b3oGnHG/ePFl288fNq8e0wjnsDGKzerD7jpBBJhmHTsKQIaEYtHPxV+4iiaFvInm9w6MEioSSGf2noO+pCw7y/iZxW03jtWtNeqSH51sqBcvpRLAca0gB8SuO7PERfZNWormOvu3UYQG+ThdiMXpb9g5VJv0ClAFnKbnPdS70uk0Mn8fs8VnTsJInrzo2goY4x1oH0hdzFPrWHj3OM+MwHQHPptkGfGtfHIMfberujr9nlecYAQwyyOHGqt391hz78sabmLNcppdqluBj0Q/a1umO6wcHeeKv114SUqoyPNjKfNaylx6LfaFE4L21yj1EINe2ZFTWNbDxRdFKSvu6EtIjFAhxPUR9kJM5+5H5XALON0ZCO6hSBgAq9rCXjvP5qlvaGaNHIpmaMA4RBdKQQ7I5ifG0TjZae2KVrBXXBdSPRKG/inh1Q40e+jTW3C4SyfqkDxJcizY5G2VLM0eYz7dYhe72wr1gLnRsPb3Cc5bHohkukALVLvjIyoRIwJTV1WGtxhDz8pjPwpA64Roivi6nBScmEzfuRuCmpifvd5v3fvqYloL3UvnTAQoYnUBWPr49jerkt8Z7jYg3/o9Fe2nw==
+x-forefront-antispam-report: CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:MW3PR12MB4553.namprd12.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230022)(4636009)(396003)(366004)(39860400002)(136003)(376002)(346002)(451199015)(2906002)(38100700002)(122000001)(38070700005)(5660300002)(83380400001)(7406005)(41300700001)(7416002)(52536014)(66476007)(66556008)(8676002)(66946007)(64756008)(66446008)(4326008)(76116006)(8936002)(55016003)(316002)(26005)(53546011)(110136005)(186003)(9686003)(54906003)(86362001)(478600001)(7696005)(33656002)(6506007)(71200400001);DIR:OUT;SFP:1101;
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0: =?utf-8?B?enpxaHdxaXhnVWZBTEdHYXplR0ttOW9WNDRVRWFYTXdSMldEUVB3WitrVDli?=
+ =?utf-8?B?NXNVVlplRStjanNSOVMrdUE5L2FmL2JMWGJjN253czVlWG1SclBNaWhmd2Fp?=
+ =?utf-8?B?cmcwejNDdDIzNEVZSElvdCtUa2lWRDVJVHFJQ1lyd1d5bGRrSmxHT05ldUZu?=
+ =?utf-8?B?cENuU1VhdU51WEdTZmVCczBadkJsVDVYaHd4VEVxZllJc29CTGhDWTU1NmxB?=
+ =?utf-8?B?UVJicXRKSy93dVU4VzExRERWcjB3dTNyK0cvSDY1ZGJ2VlU4RmtCWk51eFNy?=
+ =?utf-8?B?MjhwSHhjYmt3VThMTWYxV3FOMEZVbzlxc2NlQmU4K2VBRTZZRUUxODAzNzcz?=
+ =?utf-8?B?ajlUNkF6Ky9LVG00SHRia3FrRVJZUW9uMzZLbVA3ZVRzY2prVlhsL21qcC9K?=
+ =?utf-8?B?RGZqT3I4cCtzRHdFMXpXTkJKbWl2ZTRFenRWUTh5THdFSTlFRHJDVXZDMU9v?=
+ =?utf-8?B?REtrRXdRdnh5b0JMbG1ZazRVcVA3bFRsRkxjSmF4clNVZlUvVjQ1QXNOd3Iy?=
+ =?utf-8?B?ckxoWHpIZi9BaDBjOVpuQ1p1WmxDbnJqTm9yTjlvOHc2ZDIxL3ZtcjgxcjZZ?=
+ =?utf-8?B?UmNPTUh4d3FaN3ZCMnIxN0VacnFUQ3VPSkdGWmVpcHdmUDFzNHNlMUlkeDF2?=
+ =?utf-8?B?eUR1V3FKTnJWWUk4ZVN3bXpyclhNVmVZMFZnNzVwSVN3bTh0WW1idUJBKzN2?=
+ =?utf-8?B?dHg3VEFqaGYvK3ZFeGpKSVRzQURHdWJpU3VIZ2R1eVhJekwxUW12clBYdEZp?=
+ =?utf-8?B?RmVHNkxwV21JZHJLSStNcTZXTUpTTGpWNTA1ekVoYXFFQ215TTN5emdIMWUv?=
+ =?utf-8?B?Q0lKV0MyWEVnSjVOT0hlOEcwNmwwQ3llTmtZUkVWdEFtbFJnaWdYSXFlTWZa?=
+ =?utf-8?B?WWdqcjdvbkxJZS8zbEw0UFBZY3Nhbnp4TXlYYnpQc0VNK29jVmRGSFdBMXNG?=
+ =?utf-8?B?UExwTUFTRG5tUXgvVE9YQjYvODNxU1BOYXp6ZWxOMWdPeFZYTWR0M1ZwWTVI?=
+ =?utf-8?B?K1NPVVg3U3ZqL3FkbjV6ZnFxT3cveTFWODNnekZuNGNKb040dFpvZWxVSzhr?=
+ =?utf-8?B?aVM4aTA2U1FqaUhDU1JpTkViaEpqMWdzaG5JNEthOElWd1k1U1crN3ptWUwz?=
+ =?utf-8?B?WHV4aFRwUUhwbVN2YjRJMWRESkMzZUFpS0FQWEp4RnFXSnZCT1MwWTd4MG9u?=
+ =?utf-8?B?U0xvZVNzVkZ6a2dSVGFUS3JkdXVLcXh2d1Qrdjg4V1pNN284UloraC9wWjEr?=
+ =?utf-8?B?MGxTNGVYcWl6RngrcjhzTHUvWHVwcDI3Y2NqME5vemgrbjZXZjRJT3BFMThV?=
+ =?utf-8?B?c01IUkpQZ1djWWdkbjJ0WEszdlRDS1pBSHlGSnNtRXBZUVAwb1o0Qmw1WC9B?=
+ =?utf-8?B?SVROc3RPVStzVjJ4N1cxSDdHSkc2ZHZzU2pyMllKR1RqeTRaSmVOQkI5dzJE?=
+ =?utf-8?B?MEJiZEcwMmZ4WEg4akZYN0ZVQnZpWnpIZGJ0d3RZMFNrR0ZEWE55ZnNnUFg3?=
+ =?utf-8?B?dlBBRXhjQTdHZkFxNDBCR1h4Ky9OL1AydndubHh5bUxqNUxwdERYc1hXUmtG?=
+ =?utf-8?B?RkZTRHFZTnQvN09NaXdwVmxUZU1yQ3RuVkpYYldNcmFJNlhzbDkyRUJ5Vno2?=
+ =?utf-8?B?a0YwbDVONmdwY2hWa3ROVkt4c0NiZkFFdnYyOVVTeis2VGtGMWZUeGx4bjRa?=
+ =?utf-8?B?VVRyU25xL3ZObTkwREZjNFhqTTJ1K0tRMUlMK2J3MG1XY0RFZmRDRVoyemtG?=
+ =?utf-8?B?TXlYQStHYUt5aGNObmQwd3FveHA2ZjR2Zkt3L2RpM2xGMis1Z3AzenE5aFQ0?=
+ =?utf-8?B?UGppclFwTnVIRkpVV2hjU01aZ1FuVldhTlJIa0lGTzc3NWZHeDdJVDhiVC9O?=
+ =?utf-8?B?T293M0VyUzBoSTJXc0ozNHNQbTBxVEJTaVRaVHhNWWpnZksvYmJJZEFmVVJ1?=
+ =?utf-8?B?RTF1RlY5N0pXeHhsU2hscEhiUU96MXBFc1pTYkdKK1BXQ09iMnQrdm9pWHUr?=
+ =?utf-8?B?cVVMY0RGWnhjV0RBTmxiUjdPa1NLSVpucnZ1SlYwRGs0Y0Q3cUgvdmlOZmlO?=
+ =?utf-8?B?VURKVFhaWEdGd01acWl0NEREMDlMWklXV3JlUWJydnp3NXJvY3lNNEZ5U2d1?=
+ =?utf-8?Q?eB5o=3D?=
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-X-Spam-Status: No, score=-4.4 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_MED,SPF_HELO_NONE,
-        SPF_NONE autolearn=ham autolearn_force=no version=3.4.6
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: MW3PR12MB4553.namprd12.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: d2709e88-ffa2-4663-8ca6-08dae1d8e4a8
+X-MS-Exchange-CrossTenant-originalarrivaltime: 19 Dec 2022 15:51:29.1158
+ (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: cxjlaVifRb4qRS91C2/NDKqrbZ+6Bn2SjinQwx6wDoTM8oNx08cnhjnwZrzyZTzM
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM6PR12MB4188
+X-Spam-Status: No, score=-2.1 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_NONE,
+        RCVD_IN_MSPIKE_H2,SPF_HELO_PASS,SPF_PASS autolearn=ham
+        autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-No moar users, remove the monster.
-
-Signed-off-by: Peter Zijlstra (Intel) <peterz@infradead.org>
----
- Documentation/core-api/this_cpu_ops.rst    |    2 -
- arch/arm64/include/asm/atomic_ll_sc.h      |   33 ----------------
- arch/arm64/include/asm/atomic_lse.h        |   36 ------------------
- arch/arm64/include/asm/cmpxchg.h           |   46 -----------------------
- arch/arm64/include/asm/percpu.h            |   10 -----
- arch/s390/include/asm/cmpxchg.h            |   34 -----------------
- arch/s390/include/asm/percpu.h             |   18 ---------
- arch/x86/include/asm/cmpxchg.h             |   25 ------------
- arch/x86/include/asm/cmpxchg_32.h          |    1 
- arch/x86/include/asm/cmpxchg_64.h          |    1 
- arch/x86/include/asm/percpu.h              |   41 --------------------
- include/asm-generic/percpu.h               |   58 -----------------------------
- include/linux/atomic/atomic-instrumented.h |   17 --------
- include/linux/percpu-defs.h                |   38 -------------------
- scripts/atomic/gen-atomic-instrumented.sh  |   17 ++------
- 15 files changed, 6 insertions(+), 371 deletions(-)
-
---- a/Documentation/core-api/this_cpu_ops.rst
-+++ b/Documentation/core-api/this_cpu_ops.rst
-@@ -53,7 +53,6 @@ are defined. These operations can be use
- 	this_cpu_add_return(pcp, val)
- 	this_cpu_xchg(pcp, nval)
- 	this_cpu_cmpxchg(pcp, oval, nval)
--	this_cpu_cmpxchg_double(pcp1, pcp2, oval1, oval2, nval1, nval2)
- 	this_cpu_sub(pcp, val)
- 	this_cpu_inc(pcp)
- 	this_cpu_dec(pcp)
-@@ -242,7 +241,6 @@ modifies the variable, then RMW actions
- 	__this_cpu_add_return(pcp, val)
- 	__this_cpu_xchg(pcp, nval)
- 	__this_cpu_cmpxchg(pcp, oval, nval)
--	__this_cpu_cmpxchg_double(pcp1, pcp2, oval1, oval2, nval1, nval2)
- 	__this_cpu_sub(pcp, val)
- 	__this_cpu_inc(pcp)
- 	__this_cpu_dec(pcp)
---- a/arch/arm64/include/asm/atomic_ll_sc.h
-+++ b/arch/arm64/include/asm/atomic_ll_sc.h
-@@ -294,39 +294,6 @@ __CMPXCHG_CASE( ,  ,  mb_, 64, dmb ish,
- 
- #undef __CMPXCHG_CASE
- 
--#define __CMPXCHG_DBL(name, mb, rel, cl)				\
--static __always_inline long						\
--__ll_sc__cmpxchg_double##name(unsigned long old1,			\
--				      unsigned long old2,		\
--				      unsigned long new1,		\
--				      unsigned long new2,		\
--				      volatile void *ptr)		\
--{									\
--	unsigned long tmp, ret;						\
--									\
--	asm volatile("// __cmpxchg_double" #name "\n"			\
--	"	prfm	pstl1strm, %2\n"				\
--	"1:	ldxp	%0, %1, %2\n"					\
--	"	eor	%0, %0, %3\n"					\
--	"	eor	%1, %1, %4\n"					\
--	"	orr	%1, %0, %1\n"					\
--	"	cbnz	%1, 2f\n"					\
--	"	st" #rel "xp	%w0, %5, %6, %2\n"			\
--	"	cbnz	%w0, 1b\n"					\
--	"	" #mb "\n"						\
--	"2:"								\
--	: "=&r" (tmp), "=&r" (ret), "+Q" (*(unsigned long *)ptr)	\
--	: "r" (old1), "r" (old2), "r" (new1), "r" (new2)		\
--	: cl);								\
--									\
--	return ret;							\
--}
--
--__CMPXCHG_DBL(   ,        ,  ,         )
--__CMPXCHG_DBL(_mb, dmb ish, l, "memory")
--
--#undef __CMPXCHG_DBL
--
- union __u128_halves {
- 	u128 full;
- 	struct {
---- a/arch/arm64/include/asm/atomic_lse.h
-+++ b/arch/arm64/include/asm/atomic_lse.h
-@@ -288,42 +288,6 @@ __CMPXCHG_CASE(x,  ,  mb_, 64, al, "memo
- 
- #undef __CMPXCHG_CASE
- 
--#define __CMPXCHG_DBL(name, mb, cl...)					\
--static __always_inline long						\
--__lse__cmpxchg_double##name(unsigned long old1,				\
--					 unsigned long old2,		\
--					 unsigned long new1,		\
--					 unsigned long new2,		\
--					 volatile void *ptr)		\
--{									\
--	unsigned long oldval1 = old1;					\
--	unsigned long oldval2 = old2;					\
--	register unsigned long x0 asm ("x0") = old1;			\
--	register unsigned long x1 asm ("x1") = old2;			\
--	register unsigned long x2 asm ("x2") = new1;			\
--	register unsigned long x3 asm ("x3") = new2;			\
--	register unsigned long x4 asm ("x4") = (unsigned long)ptr;	\
--									\
--	asm volatile(							\
--	__LSE_PREAMBLE							\
--	"	casp" #mb "\t%[old1], %[old2], %[new1], %[new2], %[v]\n"\
--	"	eor	%[old1], %[old1], %[oldval1]\n"			\
--	"	eor	%[old2], %[old2], %[oldval2]\n"			\
--	"	orr	%[old1], %[old1], %[old2]"			\
--	: [old1] "+&r" (x0), [old2] "+&r" (x1),				\
--	  [v] "+Q" (*(unsigned long *)ptr)				\
--	: [new1] "r" (x2), [new2] "r" (x3), [ptr] "r" (x4),		\
--	  [oldval1] "r" (oldval1), [oldval2] "r" (oldval2)		\
--	: cl);								\
--									\
--	return x0;							\
--}
--
--__CMPXCHG_DBL(   ,   )
--__CMPXCHG_DBL(_mb, al, "memory")
--
--#undef __CMPXCHG_DBL
--
- #define __CMPXCHG128(name, mb, cl...)					\
- static __always_inline u128						\
- __lse__cmpxchg128##name(volatile u128 *ptr, u128 old, u128 new)		\
---- a/arch/arm64/include/asm/cmpxchg.h
-+++ b/arch/arm64/include/asm/cmpxchg.h
-@@ -131,22 +131,6 @@ __CMPXCHG_CASE(mb_, 64)
- 
- #undef __CMPXCHG_CASE
- 
--#define __CMPXCHG_DBL(name)						\
--static inline long __cmpxchg_double##name(unsigned long old1,		\
--					 unsigned long old2,		\
--					 unsigned long new1,		\
--					 unsigned long new2,		\
--					 volatile void *ptr)		\
--{									\
--	return __lse_ll_sc_body(_cmpxchg_double##name, 			\
--				old1, old2, new1, new2, ptr);		\
--}
--
--__CMPXCHG_DBL(   )
--__CMPXCHG_DBL(_mb)
--
--#undef __CMPXCHG_DBL
--
- #define __CMPXCHG128(name)						\
- static inline long __cmpxchg128##name(volatile u128 *ptr,		\
- 				      u128 old, u128 new)		\
-@@ -212,36 +196,6 @@ __CMPXCHG_GEN(_mb)
- #define arch_cmpxchg64			arch_cmpxchg
- #define arch_cmpxchg64_local		arch_cmpxchg_local
- 
--/* cmpxchg_double */
--#define system_has_cmpxchg_double()     1
--
--#define __cmpxchg_double_check(ptr1, ptr2)					\
--({										\
--	if (sizeof(*(ptr1)) != 8)						\
--		BUILD_BUG();							\
--	VM_BUG_ON((unsigned long *)(ptr2) - (unsigned long *)(ptr1) != 1);	\
--})
--
--#define arch_cmpxchg_double(ptr1, ptr2, o1, o2, n1, n2)				\
--({										\
--	int __ret;								\
--	__cmpxchg_double_check(ptr1, ptr2);					\
--	__ret = !__cmpxchg_double_mb((unsigned long)(o1), (unsigned long)(o2),	\
--				     (unsigned long)(n1), (unsigned long)(n2),	\
--				     ptr1);					\
--	__ret;									\
--})
--
--#define arch_cmpxchg_double_local(ptr1, ptr2, o1, o2, n1, n2)			\
--({										\
--	int __ret;								\
--	__cmpxchg_double_check(ptr1, ptr2);					\
--	__ret = !__cmpxchg_double((unsigned long)(o1), (unsigned long)(o2),	\
--				  (unsigned long)(n1), (unsigned long)(n2),	\
--				  ptr1);					\
--	__ret;									\
--})
--
- /* cmpxchg128 */
- #define system_has_cmpxchg128()		1
- 
---- a/arch/arm64/include/asm/percpu.h
-+++ b/arch/arm64/include/asm/percpu.h
-@@ -145,16 +145,6 @@ PERCPU_RET_OP(add, add, ldadd)
-  * preemption point when TIF_NEED_RESCHED gets set while preemption is
-  * disabled.
-  */
--#define this_cpu_cmpxchg_double_8(ptr1, ptr2, o1, o2, n1, n2)		\
--({									\
--	int __ret;							\
--	preempt_disable_notrace();					\
--	__ret = cmpxchg_double_local(	raw_cpu_ptr(&(ptr1)),		\
--					raw_cpu_ptr(&(ptr2)),		\
--					o1, o2, n1, n2);		\
--	preempt_enable_notrace();					\
--	__ret;								\
--})
- 
- #define _pcp_protect(op, pcp, ...)					\
- ({									\
---- a/arch/s390/include/asm/cmpxchg.h
-+++ b/arch/s390/include/asm/cmpxchg.h
-@@ -167,40 +167,6 @@ static __always_inline unsigned long __c
- #define arch_cmpxchg_local	arch_cmpxchg
- #define arch_cmpxchg64_local	arch_cmpxchg
- 
--#define system_has_cmpxchg_double()	1
--
--static __always_inline int __cmpxchg_double(unsigned long p1, unsigned long p2,
--					    unsigned long o1, unsigned long o2,
--					    unsigned long n1, unsigned long n2)
--{
--	union register_pair old = { .even = o1, .odd = o2, };
--	union register_pair new = { .even = n1, .odd = n2, };
--	int cc;
--
--	asm volatile(
--		"	cdsg	%[old],%[new],%[ptr]\n"
--		"	ipm	%[cc]\n"
--		"	srl	%[cc],28\n"
--		: [cc] "=&d" (cc), [old] "+&d" (old.pair)
--		: [new] "d" (new.pair),
--		  [ptr] "QS" (*(unsigned long *)p1), "Q" (*(unsigned long *)p2)
--		: "memory", "cc");
--	return !cc;
--}
--
--#define arch_cmpxchg_double(p1, p2, o1, o2, n1, n2)			\
--({									\
--	typeof(p1) __p1 = (p1);						\
--	typeof(p2) __p2 = (p2);						\
--									\
--	BUILD_BUG_ON(sizeof(*(p1)) != sizeof(long));			\
--	BUILD_BUG_ON(sizeof(*(p2)) != sizeof(long));			\
--	VM_BUG_ON((unsigned long)((__p1) + 1) != (unsigned long)(__p2));\
--	__cmpxchg_double((unsigned long)__p1, (unsigned long)__p2,	\
--			 (unsigned long)(o1), (unsigned long)(o2),	\
--			 (unsigned long)(n1), (unsigned long)(n2));	\
--})
--
- #define system_has_cmpxchg128()		1
- 
- static __always_inline u128 arch_cmpxchg128(volatile u128 *ptr, u128 old, u128 new)
---- a/arch/s390/include/asm/percpu.h
-+++ b/arch/s390/include/asm/percpu.h
-@@ -184,24 +184,6 @@
- #define this_cpu_xchg_4(pcp, nval) arch_this_cpu_xchg(pcp, nval)
- #define this_cpu_xchg_8(pcp, nval) arch_this_cpu_xchg(pcp, nval)
- 
--#define arch_this_cpu_cmpxchg_double(pcp1, pcp2, o1, o2, n1, n2)	    \
--({									    \
--	typeof(pcp1) *p1__;						    \
--	typeof(pcp2) *p2__;						    \
--	int ret__;							    \
--									    \
--	preempt_disable_notrace();					    \
--	p1__ = raw_cpu_ptr(&(pcp1));					    \
--	p2__ = raw_cpu_ptr(&(pcp2));					    \
--	ret__ = __cmpxchg_double((unsigned long)p1__, (unsigned long)p2__,  \
--				 (unsigned long)(o1), (unsigned long)(o2),  \
--				 (unsigned long)(n1), (unsigned long)(n2)); \
--	preempt_enable_notrace();					    \
--	ret__;								    \
--})
--
--#define this_cpu_cmpxchg_double_8 arch_this_cpu_cmpxchg_double
--
- #include <asm-generic/percpu.h>
- 
- #endif /* __ARCH_S390_PERCPU__ */
---- a/arch/x86/include/asm/cmpxchg.h
-+++ b/arch/x86/include/asm/cmpxchg.h
-@@ -233,29 +233,4 @@ extern void __add_wrong_size(void)
- #define __xadd(ptr, inc, lock)	__xchg_op((ptr), (inc), xadd, lock)
- #define xadd(ptr, inc)		__xadd((ptr), (inc), LOCK_PREFIX)
- 
--#define __cmpxchg_double(pfx, p1, p2, o1, o2, n1, n2)			\
--({									\
--	bool __ret;							\
--	__typeof__(*(p1)) __old1 = (o1), __new1 = (n1);			\
--	__typeof__(*(p2)) __old2 = (o2), __new2 = (n2);			\
--	BUILD_BUG_ON(sizeof(*(p1)) != sizeof(long));			\
--	BUILD_BUG_ON(sizeof(*(p2)) != sizeof(long));			\
--	VM_BUG_ON((unsigned long)(p1) % (2 * sizeof(long)));		\
--	VM_BUG_ON((unsigned long)((p1) + 1) != (unsigned long)(p2));	\
--	asm volatile(pfx "cmpxchg%c5b %1"				\
--		     CC_SET(e)						\
--		     : CC_OUT(e) (__ret),				\
--		       "+m" (*(p1)), "+m" (*(p2)),			\
--		       "+a" (__old1), "+d" (__old2)			\
--		     : "i" (2 * sizeof(long)),				\
--		       "b" (__new1), "c" (__new2));			\
--	__ret;								\
--})
--
--#define arch_cmpxchg_double(p1, p2, o1, o2, n1, n2) \
--	__cmpxchg_double(LOCK_PREFIX, p1, p2, o1, o2, n1, n2)
--
--#define arch_cmpxchg_double_local(p1, p2, o1, o2, n1, n2) \
--	__cmpxchg_double(, p1, p2, o1, o2, n1, n2)
--
- #endif	/* ASM_X86_CMPXCHG_H */
---- a/arch/x86/include/asm/cmpxchg_32.h
-+++ b/arch/x86/include/asm/cmpxchg_32.h
-@@ -103,7 +103,6 @@ static inline bool __try_cmpxchg64(volat
- 
- #endif
- 
--#define system_has_cmpxchg_double()	boot_cpu_has(X86_FEATURE_CX8)
- #define system_has_cmpxchg64()		boot_cpu_has(X86_FEATURE_CX8)
- 
- #endif /* _ASM_X86_CMPXCHG_32_H */
---- a/arch/x86/include/asm/cmpxchg_64.h
-+++ b/arch/x86/include/asm/cmpxchg_64.h
-@@ -72,7 +72,6 @@ static __always_inline bool arch_try_cmp
- 	return likely(ret);
- }
- 
--#define system_has_cmpxchg_double()	boot_cpu_has(X86_FEATURE_CX16)
- #define system_has_cmpxchg128()		boot_cpu_has(X86_FEATURE_CX16)
- 
- #endif /* _ASM_X86_CMPXCHG_64_H */
---- a/arch/x86/include/asm/percpu.h
-+++ b/arch/x86/include/asm/percpu.h
-@@ -339,23 +339,6 @@ do {									\
- #define this_cpu_cmpxchg_2(pcp, oval, nval)	percpu_cmpxchg_op(2, volatile, pcp, oval, nval)
- #define this_cpu_cmpxchg_4(pcp, oval, nval)	percpu_cmpxchg_op(4, volatile, pcp, oval, nval)
- 
--#ifdef CONFIG_X86_CMPXCHG64
--#define percpu_cmpxchg8b_double(pcp1, pcp2, o1, o2, n1, n2)		\
--({									\
--	bool __ret;							\
--	typeof(pcp1) __o1 = (o1), __n1 = (n1);				\
--	typeof(pcp2) __o2 = (o2), __n2 = (n2);				\
--	asm volatile("cmpxchg8b "__percpu_arg(1)			\
--		     CC_SET(z)						\
--		     : CC_OUT(z) (__ret), "+m" (pcp1), "+m" (pcp2), "+a" (__o1), "+d" (__o2) \
--		     : "b" (__n1), "c" (__n2));				\
--	__ret;								\
--})
--
--#define raw_cpu_cmpxchg_double_4	percpu_cmpxchg8b_double
--#define this_cpu_cmpxchg_double_4	percpu_cmpxchg8b_double
--#endif /* CONFIG_X86_CMPXCHG64 */
--
- /*
-  * Per cpu atomic 64 bit operations are only available under 64 bit.
-  * 32 bit must fall back to generic operations.
-@@ -378,30 +361,6 @@ do {									\
- #define this_cpu_add_return_8(pcp, val)		percpu_add_return_op(8, volatile, pcp, val)
- #define this_cpu_xchg_8(pcp, nval)		percpu_xchg_op(8, volatile, pcp, nval)
- #define this_cpu_cmpxchg_8(pcp, oval, nval)	percpu_cmpxchg_op(8, volatile, pcp, oval, nval)
--
--/*
-- * Pretty complex macro to generate cmpxchg16 instruction.  The instruction
-- * is not supported on early AMD64 processors so we must be able to emulate
-- * it in software.  The address used in the cmpxchg16 instruction must be
-- * aligned to a 16 byte boundary.
-- */
--#define percpu_cmpxchg16b_double(pcp1, pcp2, o1, o2, n1, n2)		\
--({									\
--	bool __ret;							\
--	typeof(pcp1) __o1 = (o1), __n1 = (n1);				\
--	typeof(pcp2) __o2 = (o2), __n2 = (n2);				\
--	alternative_io("leaq %P1,%%rsi\n\tcall this_cpu_cmpxchg16b_emu\n\t", \
--		       "cmpxchg16b " __percpu_arg(1) "\n\tsetz %0\n\t",	\
--		       X86_FEATURE_CX16,				\
--		       ASM_OUTPUT2("=a" (__ret), "+m" (pcp1),		\
--				   "+m" (pcp2), "+d" (__o2)),		\
--		       "b" (__n1), "c" (__n2), "a" (__o1) : "rsi");	\
--	__ret;								\
--})
--
--#define raw_cpu_cmpxchg_double_8	percpu_cmpxchg16b_double
--#define this_cpu_cmpxchg_double_8	percpu_cmpxchg16b_double
--
- #endif
- 
- static __always_inline bool x86_this_cpu_constant_test_bit(unsigned int nr,
---- a/include/asm-generic/percpu.h
-+++ b/include/asm-generic/percpu.h
-@@ -99,19 +99,6 @@ do {									\
- 	__ret;								\
- })
- 
--#define raw_cpu_generic_cmpxchg_double(pcp1, pcp2, oval1, oval2, nval1, nval2) \
--({									\
--	typeof(pcp1) *__p1 = raw_cpu_ptr(&(pcp1));			\
--	typeof(pcp2) *__p2 = raw_cpu_ptr(&(pcp2));			\
--	int __ret = 0;							\
--	if (*__p1 == (oval1) && *__p2  == (oval2)) {			\
--		*__p1 = nval1;						\
--		*__p2 = nval2;						\
--		__ret = 1;						\
--	}								\
--	(__ret);							\
--})
--
- #define __this_cpu_generic_read_nopreempt(pcp)				\
- ({									\
- 	typeof(pcp) ___ret;						\
-@@ -180,17 +167,6 @@ do {									\
- 	__ret;								\
- })
- 
--#define this_cpu_generic_cmpxchg_double(pcp1, pcp2, oval1, oval2, nval1, nval2)	\
--({									\
--	int __ret;							\
--	unsigned long __flags;						\
--	raw_local_irq_save(__flags);					\
--	__ret = raw_cpu_generic_cmpxchg_double(pcp1, pcp2,		\
--			oval1, oval2, nval1, nval2);			\
--	raw_local_irq_restore(__flags);					\
--	__ret;								\
--})
--
- #ifndef raw_cpu_read_1
- #define raw_cpu_read_1(pcp)		raw_cpu_generic_read(pcp)
- #endif
-@@ -303,23 +279,6 @@ do {									\
- 	raw_cpu_generic_cmpxchg(pcp, oval, nval)
- #endif
- 
--#ifndef raw_cpu_cmpxchg_double_1
--#define raw_cpu_cmpxchg_double_1(pcp1, pcp2, oval1, oval2, nval1, nval2) \
--	raw_cpu_generic_cmpxchg_double(pcp1, pcp2, oval1, oval2, nval1, nval2)
--#endif
--#ifndef raw_cpu_cmpxchg_double_2
--#define raw_cpu_cmpxchg_double_2(pcp1, pcp2, oval1, oval2, nval1, nval2) \
--	raw_cpu_generic_cmpxchg_double(pcp1, pcp2, oval1, oval2, nval1, nval2)
--#endif
--#ifndef raw_cpu_cmpxchg_double_4
--#define raw_cpu_cmpxchg_double_4(pcp1, pcp2, oval1, oval2, nval1, nval2) \
--	raw_cpu_generic_cmpxchg_double(pcp1, pcp2, oval1, oval2, nval1, nval2)
--#endif
--#ifndef raw_cpu_cmpxchg_double_8
--#define raw_cpu_cmpxchg_double_8(pcp1, pcp2, oval1, oval2, nval1, nval2) \
--	raw_cpu_generic_cmpxchg_double(pcp1, pcp2, oval1, oval2, nval1, nval2)
--#endif
--
- #ifndef this_cpu_read_1
- #define this_cpu_read_1(pcp)		this_cpu_generic_read(pcp)
- #endif
-@@ -432,21 +391,4 @@ do {									\
- 	this_cpu_generic_cmpxchg(pcp, oval, nval)
- #endif
- 
--#ifndef this_cpu_cmpxchg_double_1
--#define this_cpu_cmpxchg_double_1(pcp1, pcp2, oval1, oval2, nval1, nval2) \
--	this_cpu_generic_cmpxchg_double(pcp1, pcp2, oval1, oval2, nval1, nval2)
--#endif
--#ifndef this_cpu_cmpxchg_double_2
--#define this_cpu_cmpxchg_double_2(pcp1, pcp2, oval1, oval2, nval1, nval2) \
--	this_cpu_generic_cmpxchg_double(pcp1, pcp2, oval1, oval2, nval1, nval2)
--#endif
--#ifndef this_cpu_cmpxchg_double_4
--#define this_cpu_cmpxchg_double_4(pcp1, pcp2, oval1, oval2, nval1, nval2) \
--	this_cpu_generic_cmpxchg_double(pcp1, pcp2, oval1, oval2, nval1, nval2)
--#endif
--#ifndef this_cpu_cmpxchg_double_8
--#define this_cpu_cmpxchg_double_8(pcp1, pcp2, oval1, oval2, nval1, nval2) \
--	this_cpu_generic_cmpxchg_double(pcp1, pcp2, oval1, oval2, nval1, nval2)
--#endif
--
- #endif /* _ASM_GENERIC_PERCPU_H_ */
---- a/include/linux/atomic/atomic-instrumented.h
-+++ b/include/linux/atomic/atomic-instrumented.h
-@@ -2141,21 +2141,6 @@ atomic_long_dec_if_positive(atomic_long_
- 	arch_sync_cmpxchg(__ai_ptr, __VA_ARGS__); \
- })
- 
--#define cmpxchg_double(ptr, ...) \
--({ \
--	typeof(ptr) __ai_ptr = (ptr); \
--	kcsan_mb(); \
--	instrument_atomic_write(__ai_ptr, 2 * sizeof(*__ai_ptr)); \
--	arch_cmpxchg_double(__ai_ptr, __VA_ARGS__); \
--})
--
--
--#define cmpxchg_double_local(ptr, ...) \
--({ \
--	typeof(ptr) __ai_ptr = (ptr); \
--	instrument_atomic_write(__ai_ptr, 2 * sizeof(*__ai_ptr)); \
--	arch_cmpxchg_double_local(__ai_ptr, __VA_ARGS__); \
--})
- 
- #endif /* _LINUX_ATOMIC_INSTRUMENTED_H */
--// 27320c1ec2bf2878ecb9df3ea4816a7bc0c57a52
-+// 416a741acbd4d28dbfa45f1b2a2c1b714454229f
---- a/include/linux/percpu-defs.h
-+++ b/include/linux/percpu-defs.h
-@@ -359,33 +359,6 @@ static inline void __this_cpu_preempt_ch
- 	pscr2_ret__;							\
- })
- 
--/*
-- * Special handling for cmpxchg_double.  cmpxchg_double is passed two
-- * percpu variables.  The first has to be aligned to a double word
-- * boundary and the second has to follow directly thereafter.
-- * We enforce this on all architectures even if they don't support
-- * a double cmpxchg instruction, since it's a cheap requirement, and it
-- * avoids breaking the requirement for architectures with the instruction.
-- */
--#define __pcpu_double_call_return_bool(stem, pcp1, pcp2, ...)		\
--({									\
--	bool pdcrb_ret__;						\
--	__verify_pcpu_ptr(&(pcp1));					\
--	BUILD_BUG_ON(sizeof(pcp1) != sizeof(pcp2));			\
--	VM_BUG_ON((unsigned long)(&(pcp1)) % (2 * sizeof(pcp1)));	\
--	VM_BUG_ON((unsigned long)(&(pcp2)) !=				\
--		  (unsigned long)(&(pcp1)) + sizeof(pcp1));		\
--	switch(sizeof(pcp1)) {						\
--	case 1: pdcrb_ret__ = stem##1(pcp1, pcp2, __VA_ARGS__); break;	\
--	case 2: pdcrb_ret__ = stem##2(pcp1, pcp2, __VA_ARGS__); break;	\
--	case 4: pdcrb_ret__ = stem##4(pcp1, pcp2, __VA_ARGS__); break;	\
--	case 8: pdcrb_ret__ = stem##8(pcp1, pcp2, __VA_ARGS__); break;	\
--	default:							\
--		__bad_size_call_parameter(); break;			\
--	}								\
--	pdcrb_ret__;							\
--})
--
- #define __pcpu_size_call(stem, variable, ...)				\
- do {									\
- 	__verify_pcpu_ptr(&(variable));					\
-@@ -442,9 +415,6 @@ do {									\
- #define raw_cpu_xchg(pcp, nval)		__pcpu_size_call_return2(raw_cpu_xchg_, pcp, nval)
- #define raw_cpu_cmpxchg(pcp, oval, nval) \
- 	__pcpu_size16_call_return2(raw_cpu_cmpxchg_, pcp, oval, nval)
--#define raw_cpu_cmpxchg_double(pcp1, pcp2, oval1, oval2, nval1, nval2) \
--	__pcpu_double_call_return_bool(raw_cpu_cmpxchg_double_, pcp1, pcp2, oval1, oval2, nval1, nval2)
--
- #define raw_cpu_sub(pcp, val)		raw_cpu_add(pcp, -(val))
- #define raw_cpu_inc(pcp)		raw_cpu_add(pcp, 1)
- #define raw_cpu_dec(pcp)		raw_cpu_sub(pcp, 1)
-@@ -504,11 +474,6 @@ do {									\
- 	raw_cpu_cmpxchg(pcp, oval, nval);				\
- })
- 
--#define __this_cpu_cmpxchg_double(pcp1, pcp2, oval1, oval2, nval1, nval2) \
--({	__this_cpu_preempt_check("cmpxchg_double");			\
--	raw_cpu_cmpxchg_double(pcp1, pcp2, oval1, oval2, nval1, nval2);	\
--})
--
- #define __this_cpu_sub(pcp, val)	__this_cpu_add(pcp, -(typeof(pcp))(val))
- #define __this_cpu_inc(pcp)		__this_cpu_add(pcp, 1)
- #define __this_cpu_dec(pcp)		__this_cpu_sub(pcp, 1)
-@@ -529,9 +494,6 @@ do {									\
- #define this_cpu_xchg(pcp, nval)	__pcpu_size_call_return2(this_cpu_xchg_, pcp, nval)
- #define this_cpu_cmpxchg(pcp, oval, nval) \
- 	__pcpu_size16_call_return2(this_cpu_cmpxchg_, pcp, oval, nval)
--#define this_cpu_cmpxchg_double(pcp1, pcp2, oval1, oval2, nval1, nval2) \
--	__pcpu_double_call_return_bool(this_cpu_cmpxchg_double_, pcp1, pcp2, oval1, oval2, nval1, nval2)
--
- #define this_cpu_sub(pcp, val)		this_cpu_add(pcp, -(typeof(pcp))(val))
- #define this_cpu_inc(pcp)		this_cpu_add(pcp, 1)
- #define this_cpu_dec(pcp)		this_cpu_sub(pcp, 1)
---- a/scripts/atomic/gen-atomic-instrumented.sh
-+++ b/scripts/atomic/gen-atomic-instrumented.sh
-@@ -84,7 +84,6 @@ gen_xchg()
- {
- 	local xchg="$1"; shift
- 	local order="$1"; shift
--	local mult="$1"; shift
- 
- 	kcsan_barrier=""
- 	if [ "${xchg%_local}" = "${xchg}" ]; then
-@@ -104,8 +103,8 @@ cat <<EOF
- EOF
- [ -n "$kcsan_barrier" ] && printf "\t${kcsan_barrier}; \\\\\n"
- cat <<EOF
--	instrument_atomic_write(__ai_ptr, ${mult}sizeof(*__ai_ptr)); \\
--	instrument_atomic_write(__ai_oldp, ${mult}sizeof(*__ai_oldp)); \\
-+	instrument_atomic_write(__ai_ptr, sizeof(*__ai_ptr)); \\
-+	instrument_atomic_write(__ai_oldp, sizeof(*__ai_oldp)); \\
- 	arch_${xchg}${order}(__ai_ptr, __ai_oldp, __VA_ARGS__); \\
- })
- EOF
-@@ -119,7 +118,7 @@ cat <<EOF
- EOF
- [ -n "$kcsan_barrier" ] && printf "\t${kcsan_barrier}; \\\\\n"
- cat <<EOF
--	instrument_atomic_write(__ai_ptr, ${mult}sizeof(*__ai_ptr)); \\
-+	instrument_atomic_write(__ai_ptr, sizeof(*__ai_ptr)); \\
- 	arch_${xchg}${order}(__ai_ptr, __VA_ARGS__); \\
- })
- EOF
-@@ -168,22 +167,16 @@ done
- 
- for xchg in "xchg" "cmpxchg" "cmpxchg64" "cmpxchg128" "try_cmpxchg" "try_cmpxchg64" "try_cmpxchg128"; do
- 	for order in "" "_acquire" "_release" "_relaxed"; do
--		gen_xchg "${xchg}" "${order}" ""
-+		gen_xchg "${xchg}" "${order}"
- 		printf "\n"
- 	done
- done
- 
- for xchg in "cmpxchg_local" "cmpxchg64_local" "cmpxchg128_local" "sync_cmpxchg"; do
--	gen_xchg "${xchg}" "" ""
-+	gen_xchg "${xchg}" ""
- 	printf "\n"
- done
- 
--gen_xchg "cmpxchg_double" "" "2 * "
--
--printf "\n\n"
--
--gen_xchg "cmpxchg_double_local" "" "2 * "
--
- cat <<EOF
- 
- #endif /* _LINUX_ATOMIC_INSTRUMENTED_H */
-
-
+W0FNRCBPZmZpY2lhbCBVc2UgT25seSAtIEdlbmVyYWxdDQoNCkhpIFJlaW5ldHRlLA0KDQo+IC0t
+LS0tT3JpZ2luYWwgTWVzc2FnZS0tLS0tDQo+IEZyb206IFJlaW5ldHRlIENoYXRyZSA8cmVpbmV0
+dGUuY2hhdHJlQGludGVsLmNvbT4NCj4gU2VudDogVGh1cnNkYXksIERlY2VtYmVyIDE1LCAyMDIy
+IDExOjE3IEFNDQo+IFRvOiBNb2dlciwgQmFidSA8QmFidS5Nb2dlckBhbWQuY29tPjsgY29yYmV0
+QGx3bi5uZXQ7DQo+IHRnbHhAbGludXRyb25peC5kZTsgbWluZ29AcmVkaGF0LmNvbTsgYnBAYWxp
+ZW44LmRlDQo+IENjOiBmZW5naHVhLnl1QGludGVsLmNvbTsgZGF2ZS5oYW5zZW5AbGludXguaW50
+ZWwuY29tOyB4ODZAa2VybmVsLm9yZzsNCj4gaHBhQHp5dG9yLmNvbTsgcGF1bG1ja0BrZXJuZWwu
+b3JnOyBha3BtQGxpbnV4LWZvdW5kYXRpb24ub3JnOw0KPiBxdWljX25lZXJhanVAcXVpY2luYy5j
+b207IHJkdW5sYXBAaW5mcmFkZWFkLm9yZzsNCj4gZGFtaWVuLmxlbW9hbEBvcGVuc291cmNlLndk
+Yy5jb207IHNvbmdtdWNodW5AYnl0ZWRhbmNlLmNvbTsNCj4gcGV0ZXJ6QGluZnJhZGVhZC5vcmc7
+IGpwb2ltYm9lQGtlcm5lbC5vcmc7IHBib256aW5pQHJlZGhhdC5jb207DQo+IGNoYW5nLnNlb2su
+YmFlQGludGVsLmNvbTsgcGF3YW4ua3VtYXIuZ3VwdGFAbGludXguaW50ZWwuY29tOw0KPiBqbWF0
+dHNvbkBnb29nbGUuY29tOyBkYW5pZWwuc25lZGRvbkBsaW51eC5pbnRlbC5jb207IERhczEsIFNh
+bmRpcGFuDQo+IDxTYW5kaXBhbi5EYXNAYW1kLmNvbT47IHRvbnkubHVja0BpbnRlbC5jb207IGph
+bWVzLm1vcnNlQGFybS5jb207DQo+IGxpbnV4LWRvY0B2Z2VyLmtlcm5lbC5vcmc7IGxpbnV4LWtl
+cm5lbEB2Z2VyLmtlcm5lbC5vcmc7DQo+IGJhZ2FzZG90bWVAZ21haWwuY29tOyBlcmFuaWFuQGdv
+b2dsZS5jb207IGNocmlzdG9waGUubGVyb3lAY3Nncm91cC5ldTsNCj4gamFya2tvQGtlcm5lbC5v
+cmc7IGFkcmlhbi5odW50ZXJAaW50ZWwuY29tOyBxdWljX2ppbGVzQHF1aWNpbmMuY29tOw0KPiBw
+ZXRlcm5ld21hbkBnb29nbGUuY29tDQo+IFN1YmplY3Q6IFJlOiBbUEFUQ0ggdjkgMDYvMTNdIHg4
+Ni9yZXNjdHJsOiBBZGQgX19pbml0IGF0dHJpYnV0ZSB0bw0KPiByZHRfZ2V0X21vbl9sM19jb25m
+aWcoKQ0KPiANCj4gSGkgQmFidSwNCj4gDQo+IE9uIDEyLzEvMjAyMiA3OjM2IEFNLCBCYWJ1IE1v
+Z2VyIHdyb3RlOg0KPiA+IFRoZSBmdW5jdGlvbiByZHRfZ2V0X21vbl9sM19jb25maWcoKSBuZWVk
+cyB0byBjYWxsIHJkdF9jcHVfaGFzKCkgdG8NCj4gDQo+IE5vIG5lZWQgdG8gc2F5ICJUaGUgZnVu
+Y3Rpb24iIC4uLiBieSB1c2luZyAoKSBhZnRlciBhIG5hbWUgaXQgaXMgY2xlYXIgdGhhdCBpdCBp
+cyBhDQo+IGZ1bmN0aW9uLg0KDQpPaw0KPiANCj4gVG8gc3VwcG9ydCB0aGlzIGNoYW5nZSBpdCBj
+b3VsZCBwZXJoYXBzIGJlOg0KPiAiSW4gYW4gdXBjb21pbmcgY2hhbmdlIHJkdF9nZXRfbW9uX2wz
+X2NvbmZpZygpIG5lZWRzIHRvIGNhbGwNCj4gcmR0X2NwdV9oYXMoKSB0byAuLi4iDQoNClN1cmUu
+DQo+IA0KPiA+IHF1ZXJ5IHRoZSBtb25pdG9yIHJlbGF0ZWQgZmVhdHVyZXMuIEl0IGNhbm5vdCBi
+ZSBjYWxsZWQgcmlnaHQgbm93DQo+ID4gYmVjYXVzZSByZHRfY3B1X2hhcygpIGhhcyB0aGUgX19p
+bml0IGF0dHJpYnV0ZSBidXQNCj4gPiByZHRfZ2V0X21vbl9sM19jb25maWcoKSBkb2Vzbid0LiBT
+bywgYWRkIHRoZSBfX2luaXQgYXR0cmlidXRlIHRvDQo+ID4gcmR0X2dldF9tb25fbDNfY29uZmln
+KCkgdG8gcmVzb2x2ZSBpdC4NCj4gDQo+IFBsZWFzZSBwbGFjZSB0aGUgc29sdXRpb24gZGVzY3Jp
+cHRpb24gaW4gYSBuZXcgcGFyYWdyYXBoIGFuZCBkcm9wIHRoZSAiU28sIi4NCj4gVGhlIGRlc2Ny
+aXB0aW9uIGNvdWxkIGFsc28gYmUgZXhwYW5kZWQgdG8gc3VwcG9ydCB0aGlzIGNoYW5nZS4gRm9y
+IGV4YW1wbGU6DQo+IA0KPiAiQWRkIHRoZSBfX2luaXQgYXR0cmlidXRlIHRvIHJkdF9nZXRfbW9u
+X2wzX2NvbmZpZygpIHRoYXQgaXMgb25seSBjYWxsZWQgYnkNCj4gZ2V0X3JkdF9tb25fcmVzb3Vy
+Y2VzKCkgdGhhdCBhbHJlYWR5IGhhcyB0aGUgX19pbml0IGF0dHJpYnV0ZS4gQWxzbyBtYWtlDQo+
+IHJkdF9jcHVfaGFzKCkgYXZhaWxhYmxlIHRvIGJ5IHJkdF9nZXRfbW9uX2wzX2NvbmZpZygpIHZp
+YSB0aGUgaW50ZXJuYWwgaGVhZGVyDQo+IGZpbGUuIg0KPiANClN1cmUuDQo+IA0KPiA+DQo+ID4g
+QWxzbywgbWFrZSB0aGUgZnVuY3Rpb24gcmR0X2NwdV9oYXMoKSBhdmFpbGFibGUgb3V0c2lkZSBj
+b3JlLmMgZmlsZS4NCj4gPg0KPiA+IFNpZ25lZC1vZmYtYnk6IEJhYnUgTW9nZXIgPGJhYnUubW9n
+ZXJAYW1kLmNvbT4NCj4gPiAtLS0NCj4gPiAgYXJjaC94ODYva2VybmVsL2NwdS9yZXNjdHJsL2Nv
+cmUuYyAgICAgfCAgICAyICstDQo+ID4gIGFyY2gveDg2L2tlcm5lbC9jcHUvcmVzY3RybC9pbnRl
+cm5hbC5oIHwgICAgMSArDQo+ID4gIGFyY2gveDg2L2tlcm5lbC9jcHUvcmVzY3RybC9tb25pdG9y
+LmMgIHwgICAgMiArLQ0KPiA+ICAzIGZpbGVzIGNoYW5nZWQsIDMgaW5zZXJ0aW9ucygrKSwgMiBk
+ZWxldGlvbnMoLSkNCj4gPg0KPiA+IGRpZmYgLS1naXQgYS9hcmNoL3g4Ni9rZXJuZWwvY3B1L3Jl
+c2N0cmwvY29yZS5jDQo+ID4gYi9hcmNoL3g4Ni9rZXJuZWwvY3B1L3Jlc2N0cmwvY29yZS5jDQo+
+ID4gaW5kZXggYjRmYzg1MWY2NDg5Li4wMzBkM2I0MDk3NjggMTAwNjQ0DQo+ID4gLS0tIGEvYXJj
+aC94ODYva2VybmVsL2NwdS9yZXNjdHJsL2NvcmUuYw0KPiA+ICsrKyBiL2FyY2gveDg2L2tlcm5l
+bC9jcHUvcmVzY3RybC9jb3JlLmMNCj4gPiBAQCAtNzI4LDcgKzcyOCw3IEBAIHN0YXRpYyBpbnQg
+X19pbml0IHNldF9yZHRfb3B0aW9ucyhjaGFyICpzdHIpICB9DQo+ID4gX19zZXR1cCgicmR0Iiwg
+c2V0X3JkdF9vcHRpb25zKTsNCj4gPg0KPiA+IC1zdGF0aWMgYm9vbCBfX2luaXQgcmR0X2NwdV9o
+YXMoaW50IGZsYWcpDQo+ID4gK2Jvb2wgX19pbml0IHJkdF9jcHVfaGFzKGludCBmbGFnKQ0KPiA+
+ICB7DQo+ID4gIAlib29sIHJldCA9IGJvb3RfY3B1X2hhcyhmbGFnKTsNCj4gPiAgCXN0cnVjdCBy
+ZHRfb3B0aW9ucyAqbzsNCj4gPiBkaWZmIC0tZ2l0IGEvYXJjaC94ODYva2VybmVsL2NwdS9yZXNj
+dHJsL2ludGVybmFsLmgNCj4gPiBiL2FyY2gveDg2L2tlcm5lbC9jcHUvcmVzY3RybC9pbnRlcm5h
+bC5oDQo+ID4gaW5kZXggZmRiYmY2NjMxMmVjLi43YmJmYzEwMDk0YjYgMTAwNjQ0DQo+ID4gLS0t
+IGEvYXJjaC94ODYva2VybmVsL2NwdS9yZXNjdHJsL2ludGVybmFsLmgNCj4gPiArKysgYi9hcmNo
+L3g4Ni9rZXJuZWwvY3B1L3Jlc2N0cmwvaW50ZXJuYWwuaA0KPiA+IEBAIC01MTIsNiArNTEyLDcg
+QEAgdm9pZCBjbG9zaWRfZnJlZShpbnQgY2xvc2lkKTsgIGludA0KPiA+IGFsbG9jX3JtaWQodm9p
+ZCk7ICB2b2lkIGZyZWVfcm1pZCh1MzIgcm1pZCk7ICBpbnQNCj4gPiByZHRfZ2V0X21vbl9sM19j
+b25maWcoc3RydWN0IHJkdF9yZXNvdXJjZSAqcik7DQo+ID4gK2Jvb2wgcmR0X2NwdV9oYXMoaW50
+IGZsYWcpOw0KPiANCj4gUGxlYXNlIGFsc28gYWRkIF9faW5pdCBhdHRyaWJ1dGUgaGVyZSBieSB1
+c2luZyB0aGUgc2FtZSBzdHlsZSBhcyB0aGUgb3RoZXINCj4gZnVuY3Rpb25zIGluIHRoaXMgZmls
+ZSB0aGF0IG5lZWQgX19pbml0Lg0KT2sNClRoYW5rcw0KQmFidQ0KPiANCj4gPiAgdm9pZCBtb25f
+ZXZlbnRfY291bnQodm9pZCAqaW5mbyk7DQo+ID4gIGludCByZHRncm91cF9tb25kYXRhX3Nob3co
+c3RydWN0IHNlcV9maWxlICptLCB2b2lkICphcmcpOyAgdm9pZA0KPiA+IG1vbl9ldmVudF9yZWFk
+KHN0cnVjdCBybWlkX3JlYWQgKnJyLCBzdHJ1Y3QgcmR0X3Jlc291cmNlICpyLCBkaWZmDQo+ID4g
+LS1naXQgYS9hcmNoL3g4Ni9rZXJuZWwvY3B1L3Jlc2N0cmwvbW9uaXRvci5jDQo+ID4gYi9hcmNo
+L3g4Ni9rZXJuZWwvY3B1L3Jlc2N0cmwvbW9uaXRvci5jDQo+ID4gaW5kZXggZWZlMGMzMGQzYTEy
+Li5lMzNlOGQ4YmQ3OTYgMTAwNjQ0DQo+ID4gLS0tIGEvYXJjaC94ODYva2VybmVsL2NwdS9yZXNj
+dHJsL21vbml0b3IuYw0KPiA+ICsrKyBiL2FyY2gveDg2L2tlcm5lbC9jcHUvcmVzY3RybC9tb25p
+dG9yLmMNCj4gPiBAQCAtNzQ2LDcgKzc0Niw3IEBAIHN0YXRpYyB2b2lkIGwzX21vbl9ldnRfaW5p
+dChzdHJ1Y3QgcmR0X3Jlc291cmNlICpyKQ0KPiA+ICAJCWxpc3RfYWRkX3RhaWwoJm1ibV9sb2Nh
+bF9ldmVudC5saXN0LCAmci0+ZXZ0X2xpc3QpOyAgfQ0KPiA+DQo+ID4gLWludCByZHRfZ2V0X21v
+bl9sM19jb25maWcoc3RydWN0IHJkdF9yZXNvdXJjZSAqcikNCj4gPiAraW50IF9faW5pdCByZHRf
+Z2V0X21vbl9sM19jb25maWcoc3RydWN0IHJkdF9yZXNvdXJjZSAqcikNCj4gPiAgew0KPiA+ICAJ
+dW5zaWduZWQgaW50IG1ibV9vZmZzZXQgPQ0KPiBib290X2NwdV9kYXRhLng4Nl9jYWNoZV9tYm1f
+d2lkdGhfb2Zmc2V0Ow0KPiA+ICAJc3RydWN0IHJkdF9od19yZXNvdXJjZSAqaHdfcmVzID0gcmVz
+Y3RybF90b19hcmNoX3JlcyhyKTsNCj4gPg0KPiA+DQo+IA0KPiBUaGFuayB5b3UNCj4gDQo+IFJl
+aW5ldHRlDQo=
