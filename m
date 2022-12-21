@@ -2,83 +2,89 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 4A0DB6531F8
-	for <lists+linux-doc@lfdr.de>; Wed, 21 Dec 2022 14:45:37 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 29C34653246
+	for <lists+linux-doc@lfdr.de>; Wed, 21 Dec 2022 15:14:46 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S229612AbiLUNpg (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 21 Dec 2022 08:45:36 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:43962 "EHLO
+        id S229676AbiLUOOo (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 21 Dec 2022 09:14:44 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:55530 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S229522AbiLUNpf (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Wed, 21 Dec 2022 08:45:35 -0500
-Received: from ms.lwn.net (ms.lwn.net [45.79.88.28])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 8E11C1276F;
-        Wed, 21 Dec 2022 05:45:34 -0800 (PST)
-Received: from localhost (unknown [IPv6:2601:281:8300:73::5f6])
+        with ESMTP id S229472AbiLUOOn (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Wed, 21 Dec 2022 09:14:43 -0500
+Received: from ams.source.kernel.org (ams.source.kernel.org [145.40.68.75])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 2F06FE16;
+        Wed, 21 Dec 2022 06:14:42 -0800 (PST)
+Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
         (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
         (No client certificate requested)
-        by ms.lwn.net (Postfix) with ESMTPSA id 93009377;
-        Wed, 21 Dec 2022 13:45:33 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 ms.lwn.net 93009377
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=lwn.net; s=20201203;
-        t=1671630333; bh=beJP4Kkr6h/TSuOC2Qdh8B/D19ZPOqfTigW9Np05uSM=;
-        h=From:To:Cc:Subject:In-Reply-To:References:Date:From;
-        b=M/yTZSKLUuE/4gSu73sQpKftAaDPNioV00WJlWxHkM984l79P3miE6ozHL2971BcL
-         sCpK6Vnme6hcPU4TElZkLAV9opZwnlH0NMxxkmoAPRnA+Tb4xdnNCFUsdFOKottDjK
-         YWx9B3VyiZvBTsSnRWzOU7N0e1EZuUodYTJMg9WLS1fK1dJ6e2mxIFbOAUIHXkGIGq
-         W+79MiRh991nxm7gL3piE2D7YszQcFSIYf0M6YA3Wr0/3jhDZZO8pORUvtZV5SDLXl
-         pvOiSYSc14RBoTXd7e5dsj5CG+SeYa87mjkkdDwqnqNNPcKmYznwf5kvHWZaQ0WB6x
-         s59EuAWyoFFZw==
-From:   Jonathan Corbet <corbet@lwn.net>
-To:     Christoph Hellwig <hch@lst.de>
-Cc:     Christoph Hellwig <hch@lst.de>, axboe@meta.com, sagi@grimberg.me,
-        kbusch@kernel.org, linux-nvme@lists.infradead.org,
-        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
-        Jens Axboe <axboe@kernel.dk>
-Subject: Re: [PATCH] docs, nvme: add a feature and quirk policy document
-In-Reply-To: <20221221083450.GA23903@lst.de>
-References: <20221215125130.261098-1-hch@lst.de>
- <87zgboddb7.fsf@meer.lwn.net> <20221215132622.GA21083@lst.de>
- <20221221083450.GA23903@lst.de>
-Date:   Wed, 21 Dec 2022 06:45:32 -0700
-Message-ID: <87mt7g27lv.fsf@meer.lwn.net>
+        by ams.source.kernel.org (Postfix) with ESMTPS id DF938B81B5D;
+        Wed, 21 Dec 2022 14:14:40 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 588F6C433F0;
+        Wed, 21 Dec 2022 14:14:38 +0000 (UTC)
+Date:   Wed, 21 Dec 2022 09:14:35 -0500
+From:   Steven Rostedt <rostedt@goodmis.org>
+To:     Ricardo Ribalda <ribalda@chromium.org>
+Cc:     Jonathan Corbet <corbet@lwn.net>, Philipp Rudo <prudo@redhat.com>,
+        Eric Biederman <ebiederm@xmission.com>,
+        "Guilherme G. Piccoli" <gpiccoli@igalia.com>,
+        kexec@lists.infradead.org, Ross Zwisler <zwisler@kernel.org>,
+        "Joel Fernandes (Google)" <joel@joelfernandes.org>,
+        Sergey Senozhatsky <senozhatsky@chromium.org>,
+        linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org
+Subject: Re: [PATCH v4 3/3] kexec: Introduce sysctl parameters
+ kexec_load_limit_*
+Message-ID: <20221221091435.5ed368cb@gandalf.local.home>
+In-Reply-To: <20221114-disable-kexec-reset-v4-3-ab809c8d988c@chromium.org>
+References: <20221114-disable-kexec-reset-v4-0-ab809c8d988c@chromium.org>
+        <20221114-disable-kexec-reset-v4-3-ab809c8d988c@chromium.org>
+X-Mailer: Claws Mail 3.17.8 (GTK+ 2.24.33; x86_64-pc-linux-gnu)
 MIME-Version: 1.0
-Content-Type: text/plain
-X-Spam-Status: No, score=-2.1 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_NONE,
-        SPF_HELO_NONE,SPF_PASS autolearn=ham autolearn_force=no version=3.4.6
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 7bit
+X-Spam-Status: No, score=-6.7 required=5.0 tests=BAYES_00,
+        HEADER_FROM_DIFFERENT_DOMAINS,RCVD_IN_DNSWL_HI,SPF_HELO_NONE,SPF_PASS
+        autolearn=ham autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Christoph Hellwig <hch@lst.de> writes:
+On Wed, 21 Dec 2022 13:50:03 +0100
+Ricardo Ribalda <ribalda@chromium.org> wrote:
 
-> On Thu, Dec 15, 2022 at 02:26:22PM +0100, Christoph Hellwig wrote:
->> On Thu, Dec 15, 2022 at 06:08:44AM -0700, Jonathan Corbet wrote:
->> > The document looks fine, but I do wonder if it wouldn't be better placed
->> > with the other maintainer entries in Documentation/maintainer?
->> 
->> Hmm, nothing in there looks very similar to me, while process
->> seems to have real policy documents.  But we can live with either
->> place.
->
-> Any strong arguments for moving it Documentation/maintainer?
->
-> I'd like to merge this with the fixups from Randy through the nvme
-> tree ASAP, and need to decide on the location.
+> @@ -941,6 +995,20 @@ static struct ctl_table kexec_core_sysctls[] = {
+>  		.extra1		= SYSCTL_ONE,
+>  		.extra2		= SYSCTL_ONE,
+>  	},
+> +	{
+> +		.procname	= "kexec_load_limit_panic",
+> +		.data		= &load_limit_panic,
+> +		.maxlen		= sizeof(load_limit_panic),
 
-Sorry, the argument is that the subsystem profiles there were created
-for the very purpose of documenting subsystem-specific patch policies
-like those found in your document.  The hope is that, someday, people
-will be able to go to one place to learn what special hoops any given
-subsystem will make them jump through.
+If I understand the sysctl logic correctly, the .maxlen is the maxlen of
+the input to the sysctl, and not the data. Usually set to sizeof(data)
+because most proc_handlers write to data directly.
 
-This isn't something I'm going to dig in my heels on, though.  But at a
-minimum, could you add an entry to
-Documentation/maintainer/maintainer-entry-profile.rst ?
+In this case, I believe it's not even used (you override it with the
+struct ctl_table tmp). I guess it doesn't really matter what it's set to.
+Perhaps just set it to zero and leave it out?
 
-Thanks,
+> +		.mode		= 0644,
+> +		.proc_handler	= kexec_limit_handler,
+> +	},
+> +	{
+> +		.procname	= "kexec_load_limit_reboot",
+> +		.data		= &load_limit_reboot,
+> +		.maxlen		= sizeof(load_limit_reboot),
 
-jon
+Same here.
+
+-- Steve
+
+> +		.mode		= 0644,
+> +		.proc_handler	= kexec_limit_handler,
+> +	},
+>  	{ }
+>  };
+>  
