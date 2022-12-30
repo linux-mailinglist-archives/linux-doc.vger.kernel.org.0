@@ -2,40 +2,40 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 9FA15659AF5
-	for <lists+linux-doc@lfdr.de>; Fri, 30 Dec 2022 18:26:00 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id D75F9659AFF
+	for <lists+linux-doc@lfdr.de>; Fri, 30 Dec 2022 18:31:51 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S231518AbiL3RZ7 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Fri, 30 Dec 2022 12:25:59 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:34232 "EHLO
+        id S229942AbiL3Rbu (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Fri, 30 Dec 2022 12:31:50 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:36346 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S235340AbiL3RZ4 (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Fri, 30 Dec 2022 12:25:56 -0500
+        with ESMTP id S229832AbiL3Rbt (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Fri, 30 Dec 2022 12:31:49 -0500
 Received: from mx.kolabnow.com (mx.kolabnow.com [212.103.80.154])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 3A0F4C22;
-        Fri, 30 Dec 2022 09:25:54 -0800 (PST)
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 1CB01A46A;
+        Fri, 30 Dec 2022 09:31:46 -0800 (PST)
 Received: from localhost (unknown [127.0.0.1])
-        by mx.kolabnow.com (Postfix) with ESMTP id 0AD511466;
-        Fri, 30 Dec 2022 18:25:53 +0100 (CET)
+        by mx.kolabnow.com (Postfix) with ESMTP id B5E941466;
+        Fri, 30 Dec 2022 18:31:44 +0100 (CET)
 Authentication-Results: ext-mx-out002.mykolab.com (amavisd-new);
         dkim=pass (4096-bit key) reason="pass (just generated, assumed good)"
         header.d=kolabnow.com
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kolabnow.com; h=
         content-transfer-encoding:content-type:content-type:mime-version
         :message-id:date:date:subject:subject:from:from:received
-        :received:received; s=dkim20160331; t=1672421148; x=1674235549;
-         bh=cpzY3QNeeTkSZN6DmEhnllwIB6yigynBJRoX+oPeZAM=; b=gi753zfII+bK
-        s+G7EdG6trADssUi/95nZEwFHmqaCNesd3/u29RV9/Zj+k7h+HO7h+G6pR8GErZZ
-        0bx5CUv4ulIDgzRxorGm1tBmPP4ed4lqcLvBHHYX6sGMx41tSK7+mh9nTKN7626x
-        DXEuGlPnqfvpWoF5K4iyqsdE1M8APRCScmQklQbnRXxQW3FYGa117+OP76CNBqK1
-        dmz6jmrcwA0HdRXPr8MReYX7DMXw4xb5eov+OFEZsh5S/c6Y9mtlUPFZtl0sDZjA
-        MBHF+5mY2/eY04PU0ErFgoWYqIJpE4SYurAlnDYdEwU38sdHEvzAlRd3BJHwsyM5
-        SHTUWuwBZlKYaM407x8R8OVYGgKuUcVWfEWQRgNFoi/EjBD4N8RKlhLiTBuSEiKQ
-        Z1llfyiCI+oP8+e+tlzgs10Q+srQyNzTcxjSXNkVf4GL1KI+9BV3U9jVSHVTR8DP
-        yZoz2HS1dh7EiuwW+ao/zpONjzOCcFJqUipNzpZIBaH8s5Grw7GqCVLW6cF864xv
-        M/v6yvlBw7hQOueI7vhM6c5Z1LKjUikSMuXaIa7G3AVb7rjQD52AOcb7MkkyjZnZ
-        iWsgUyDe40vterJNWTDUquruPiW3WwDkDirHSIFf4wllI6bSZ8wvKUNAVymVdJWE
-        WThqvy80X6TJ4boitxDo2lvMA05zlS4=
+        :received:received; s=dkim20160331; t=1672421500; x=1674235901;
+         bh=ToeT1FwXQgDbA/u4PpTMp4964y+/ZZW9VD3o8ErjeHU=; b=zmb6DQMwrihe
+        96MoAV94M6WmVhERSCaqogB0EcBWoXjEy1SMRvzGrA9LRg2XLjIR+nyqbqHcAtgS
+        RHXJ0F0pQromDRfbx4esxEj9Uwf2FFEZs+cS5dHkJ/JNTt2FuuDJO5GvHerniDUu
+        PaiU7ShqRLSCpP3rRrwGX+i6IH05FtnxRdWMIQddfc5F1aT4oH1klZj2vowREbzM
+        iZfZFM/WgeEccICC1dyPCXq55+M7Z+AKmO28tQ7KMEOnbAsh5oVnFaT2u2CgfYsO
+        rtynnty0JC/usFryfQt0fx06o3DUqUJ+7zg7S7ffFtlCD10M25fAMUP5qdhjIcWE
+        5cPIsjPZK/WzwR+nxBablOmhpNRnuuM7nAIHzNt89X74bPHTzZuEr+qvMEusCJLq
+        HBaGwcpf+Ag8gMAg3xdyr+uEOqu9ew4UDatd0hV6EfzTH0Lv4BOlD6dPuBQcllP9
+        0uclN39LyPHsbS2pu21om7GdDWiGi5RSLLEIl656cTsIpAc3k9QKJQqfYK1i/Mse
+        Dbv7m55a3mm+DizyRX2sBr125GDwADAcXFqHTL3hnl5FQsf/CXqf+OcGYi6wO11i
+        /ZlDI2bDWuD0/0AJfHUcrJKHoNp59LLPhJ5griTvAaNsXw9Pif0CNYiIIjZcwqOL
+        TyhUeLmdCtApL4ESJZKA+GHmlPNm3dM=
 X-Virus-Scanned: amavisd-new at mykolab.com
 X-Spam-Score: -1.899
 X-Spam-Level: 
@@ -44,20 +44,20 @@ X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00,DKIM_SIGNED,
         version=3.4.6
 Received: from mx.kolabnow.com ([127.0.0.1])
         by localhost (ext-mx-out002.mykolab.com [127.0.0.1]) (amavisd-new, port 10024)
-        with ESMTP id hYA45TQFvxp4; Fri, 30 Dec 2022 18:25:48 +0100 (CET)
-Received: from int-mx002.mykolab.com (unknown [10.9.13.2])
-        by mx.kolabnow.com (Postfix) with ESMTPS id CBE0013B6;
-        Fri, 30 Dec 2022 18:25:48 +0100 (CET)
+        with ESMTP id b2weA5837KUK; Fri, 30 Dec 2022 18:31:40 +0100 (CET)
+Received: from int-mx003.mykolab.com (unknown [10.9.13.3])
+        by mx.kolabnow.com (Postfix) with ESMTPS id 9D9AE144E;
+        Fri, 30 Dec 2022 18:31:40 +0100 (CET)
 Received: from ext-subm003.mykolab.com (unknown [10.9.6.3])
-        by int-mx002.mykolab.com (Postfix) with ESMTPS id 702862BE1;
-        Fri, 30 Dec 2022 18:25:48 +0100 (CET)
+        by int-mx003.mykolab.com (Postfix) with ESMTPS id 3A0D02491;
+        Fri, 30 Dec 2022 18:31:40 +0100 (CET)
 From:   Federico Vaga <federico.vaga@vaga.pv.it>
 To:     Jonathan Corbet <corbet@lwn.net>
 Cc:     Federico Vaga <federico.vaga@vaga.pv.it>,
         linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org
-Subject: [PATCH] doc:it_IT: align Italian documentation
-Date:   Fri, 30 Dec 2022 18:25:34 +0100
-Message-Id: <20221230172534.58822-1-federico.vaga@vaga.pv.it>
+Subject: [PATCH V2] doc:it_IT: align Italian documentation
+Date:   Fri, 30 Dec 2022 18:31:27 +0100
+Message-Id: <20221230173127.59553-1-federico.vaga@vaga.pv.it>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
@@ -85,6 +85,8 @@ commit 0c7b4366f1ab ("docs: Rewrite the front page")
 
 Signed-off-by: Federico Vaga <federico.vaga@vaga.pv.it>
 ---
+V1 -> V2 fix typo in footnote link
+
  .../translations/it_IT/admin-guide/README.rst |  2 +-
  .../it_IT/doc-guide/kernel-doc.rst            |  2 +
  .../translations/it_IT/doc-guide/sphinx.rst   | 14 ++-
@@ -97,6 +99,8 @@ Signed-off-by: Federico Vaga <federico.vaga@vaga.pv.it>
  .../it_IT/process/kernel-docs.rst             |  4 +-
  .../it_IT/process/maintainer-pgp-guide.rst    |  4 +-
  11 files changed, 127 insertions(+), 95 deletions(-)
+
+
 
 diff --git a/Documentation/translations/it_IT/admin-guide/README.rst b/Documentation/translations/it_IT/admin-guide/README.rst
 index b37166817842..c874586a9af9 100644
@@ -125,7 +129,7 @@ index 78082281acf9..5cece223b46b 100644
  
  =================================
 diff --git a/Documentation/translations/it_IT/doc-guide/sphinx.rst b/Documentation/translations/it_IT/doc-guide/sphinx.rst
-index 64528790dc34..3030eedcff88 100644
+index 64528790dc34..1f513bc33618 100644
 --- a/Documentation/translations/it_IT/doc-guide/sphinx.rst
 +++ b/Documentation/translations/it_IT/doc-guide/sphinx.rst
 @@ -151,7 +151,8 @@ Ovviamente, per generare la documentazione, Sphinx (``sphinx-build``)
@@ -134,7 +138,7 @@ index 64528790dc34..3030eedcff88 100644
  Per la documentazione in formato PDF, invece, avrete bisogno di ``XeLaTeX`
 -e di ``convert(1)`` disponibile in ImageMagick (https://www.imagemagick.org).
 +e di ``convert(1)`` disponibile in ImageMagick
-+(https://www.imagemagick.org). \ [#ink]__
++(https://www.imagemagick.org). \ [#ink]_
  Tipicamente, tutti questi pacchetti sono disponibili e pacchettizzati nelle
  distribuzioni Linux.
  
