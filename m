@@ -2,46 +2,48 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id CA58965C5BB
-	for <lists+linux-doc@lfdr.de>; Tue,  3 Jan 2023 19:09:09 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 4BD7765C5B2
+	for <lists+linux-doc@lfdr.de>; Tue,  3 Jan 2023 19:09:06 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S238611AbjACSIE (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 3 Jan 2023 13:08:04 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:59806 "EHLO
+        id S238605AbjACSIH (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 3 Jan 2023 13:08:07 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:59788 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S238605AbjACSID (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 3 Jan 2023 13:08:03 -0500
-Received: from dfw.source.kernel.org (dfw.source.kernel.org [IPv6:2604:1380:4641:c500::1])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id C10A51144C;
-        Tue,  3 Jan 2023 10:08:01 -0800 (PST)
+        with ESMTP id S238660AbjACSIF (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 3 Jan 2023 13:08:05 -0500
+Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 4ECF11183E;
+        Tue,  3 Jan 2023 10:08:03 -0800 (PST)
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
         (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
         (No client certificate requested)
-        by dfw.source.kernel.org (Postfix) with ESMTPS id 36184614B8;
+        by dfw.source.kernel.org (Postfix) with ESMTPS id D236A614C6;
+        Tue,  3 Jan 2023 18:08:02 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id CA687C4339B;
         Tue,  3 Jan 2023 18:08:01 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id F41AEC433D2;
-        Tue,  3 Jan 2023 18:07:59 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-        s=k20201202; t=1672769280;
-        bh=9suXfmiqocIsILLpWpch1Pzb2obTsSehLWnKP4pUSq8=;
-        h=From:To:Cc:Subject:Date:From;
-        b=Iagw3/KdJOIwv3Gew//1r1gitcYAupBDObUgG+hOHeJHHafhJeJufqMC9xIxGj0H9
-         IJy15l9i6ZGcgpvWANvuLTNbSkSYQbYPJGolAn2Xpl+Arm2YH6uqrLJ715g9O9K3PV
-         2TVYay9k0M3tTXndu7NB2GbQd7VYMOE3+EoBy/G9RSYOYMouXY72QRnkAAE31hLi+l
-         lewvMhqHP+GuUxrUqu6Ac8esHXsG/A/C8L5nZAr3k0jevBBfDbZWkRHjYn7B1acq+s
-         LpHgXH3DGz2w/BcHQPJ2m7Emt4I4j/9U2zM6kz4CgyNF7CqZe9Fce/We7q3MY012+L
-         F3OpnSB/7Wfmg==
+        s=k20201202; t=1672769282;
+        bh=rnmBsFuUSLudytnhsoqP0P88PgJIqLj22g/9l6kDmp4=;
+        h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
+        b=nBpRuw3EasDD1MsN9xNfHnof3lqVUtDZ6Q5fqulIxjf2w5d77F2y9NmFOum/Sflpt
+         cptwyYeAL36RX455MQktiHVEDt7dBn1jbBGhJdHWoWh5FMKhb+gzwWfSR1WfqdfJhF
+         uBZhBevPZ0sdyz5KxlnwbHmzPqRwW4TqtH4LNPXgQqU+SUv6DVFnued4+1yaB8+IAN
+         aCN0t6yG8fURILAOGxlM3Px5+pd+LS/29C5p2BuOtqpFv6/LijsxjP9AZd+ZyWWmqP
+         Td4HpT6Pq97SeG/iy8X5QXjBYlgMzErf1d3aNpxvaXICUU3FQ4uMyX/EI1IAwCfVfC
+         GR4ZdVLJF0sVw==
 From:   SeongJae Park <sj@kernel.org>
 To:     Andrew Morton <akpm@linux-foundation.org>
 Cc:     SeongJae Park <sj@kernel.org>, Jonathan Corbet <corbet@lwn.net>,
-        Shuah Khan <shuah@kernel.org>, linux-mm@kvack.org,
-        linux-doc@vger.kernel.org, linux-kselftest@vger.kernel.org,
+        linux-mm@kvack.org, linux-doc@vger.kernel.org,
         linux-kernel@vger.kernel.org
-Subject: 
-Date:   Tue,  3 Jan 2023 18:07:49 +0000
-Message-Id: <20230103180754.129637-1-sj@kernel.org>
+Subject: [PATCH 3/5] tools/vm: rename tools/vm to tools/mm
+Date:   Tue,  3 Jan 2023 18:07:52 +0000
+Message-Id: <20230103180754.129637-4-sj@kernel.org>
 X-Mailer: git-send-email 2.25.1
+In-Reply-To: <20230103180754.129637-1-sj@kernel.org>
+References: <20230103180754.129637-1-sj@kernel.org>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 X-Spam-Status: No, score=-7.1 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
         DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_HI,
@@ -52,149 +54,171 @@ Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Date: Tue, 3 Jan 2023 18:00:52 +0000
-Subject: [PATCH 0/5] mm: trivial fixups
+Rename tools/vm to tools/mm for being more consistent with the code and
+documentation directories, and won't be confused with virtual machines.
 
-This patchset is for trivial fixups of mm stuff on MAINTAINERS, tools/
-selftests, and docs.
-
-SeongJae Park (5):
-  MAINTAINERS: add types to akpm/mm git trees entries
-  MAINTAINERS/MEMORY MANAGEMENT: Add tools/vm/ as managed files
-  tools/vm: rename tools/vm to tools/mm
-  selftests/vm: rename selftets/vm to selftests/mm
-  Docs/admin-guide/mm/numaperf: increase depth of subsections
-
- Documentation/admin-guide/mm/hugetlbpage.rst             | 6 +++---
- Documentation/admin-guide/mm/idle_page_tracking.rst      | 2 +-
- Documentation/admin-guide/mm/numaperf.rst                | 8 ++++----
- Documentation/admin-guide/mm/pagemap.rst                 | 4 ++--
- Documentation/core-api/pin_user_pages.rst                | 2 +-
- Documentation/mm/page_owner.rst                          | 2 +-
- Documentation/mm/slub.rst                                | 2 +-
- Documentation/translations/zh_CN/mm/page_owner.rst       | 2 +-
- MAINTAINERS                                              | 9 +++++----
- mm/Kconfig                                               | 2 +-
- mm/Kconfig.debug                                         | 2 +-
- mm/memory-failure.c                                      | 2 +-
- tools/{vm => mm}/.gitignore                              | 0
- tools/{vm => mm}/Makefile                                | 0
- tools/{vm => mm}/page-types.c                            | 0
- tools/{vm => mm}/page_owner_sort.c                       | 0
- tools/{vm => mm}/slabinfo-gnuplot.sh                     | 0
- tools/{vm => mm}/slabinfo.c                              | 0
- tools/testing/selftests/{vm => mm}/.gitignore            | 0
- tools/testing/selftests/{vm => mm}/Makefile              | 0
- .../selftests/{vm => mm}/charge_reserved_hugetlb.sh      | 0
- tools/testing/selftests/{vm => mm}/check_config.sh       | 0
- tools/testing/selftests/{vm => mm}/compaction_test.c     | 0
- tools/testing/selftests/{vm => mm}/config                | 0
- tools/testing/selftests/{vm => mm}/cow.c                 | 0
- tools/testing/selftests/{vm => mm}/gup_test.c            | 0
- tools/testing/selftests/{vm => mm}/hmm-tests.c           | 0
- tools/testing/selftests/{vm => mm}/hugepage-mmap.c       | 0
- tools/testing/selftests/{vm => mm}/hugepage-mremap.c     | 0
- tools/testing/selftests/{vm => mm}/hugepage-shm.c        | 0
- tools/testing/selftests/{vm => mm}/hugepage-vmemmap.c    | 0
- tools/testing/selftests/{vm => mm}/hugetlb-madvise.c     | 0
- .../selftests/{vm => mm}/hugetlb_reparenting_test.sh     | 0
- tools/testing/selftests/{vm => mm}/khugepaged.c          | 0
- .../testing/selftests/{vm => mm}/ksm_functional_tests.c  | 0
- tools/testing/selftests/{vm => mm}/ksm_tests.c           | 0
- tools/testing/selftests/{vm => mm}/madv_populate.c       | 0
- tools/testing/selftests/{vm => mm}/map_fixed_noreplace.c | 0
- tools/testing/selftests/{vm => mm}/map_hugetlb.c         | 0
- tools/testing/selftests/{vm => mm}/map_populate.c        | 0
- tools/testing/selftests/{vm => mm}/memfd_secret.c        | 0
- tools/testing/selftests/{vm => mm}/migration.c           | 0
- tools/testing/selftests/{vm => mm}/mlock-random-test.c   | 0
- tools/testing/selftests/{vm => mm}/mlock2-tests.c        | 0
- tools/testing/selftests/{vm => mm}/mlock2.h              | 0
- tools/testing/selftests/{vm => mm}/mrelease_test.c       | 0
- tools/testing/selftests/{vm => mm}/mremap_dontunmap.c    | 0
- tools/testing/selftests/{vm => mm}/mremap_test.c         | 0
- tools/testing/selftests/{vm => mm}/on-fault-limit.c      | 0
- tools/testing/selftests/{vm => mm}/pkey-helpers.h        | 0
- tools/testing/selftests/{vm => mm}/pkey-powerpc.h        | 0
- tools/testing/selftests/{vm => mm}/pkey-x86.h            | 0
- tools/testing/selftests/{vm => mm}/protection_keys.c     | 0
- tools/testing/selftests/{vm => mm}/run_vmtests.sh        | 0
- tools/testing/selftests/{vm => mm}/settings              | 0
- tools/testing/selftests/{vm => mm}/soft-dirty.c          | 0
- .../testing/selftests/{vm => mm}/split_huge_page_test.c  | 0
- tools/testing/selftests/{vm => mm}/test_hmm.sh           | 0
- tools/testing/selftests/{vm => mm}/test_vmalloc.sh       | 0
- tools/testing/selftests/{vm => mm}/thuge-gen.c           | 0
- tools/testing/selftests/{vm => mm}/transhuge-stress.c    | 0
- tools/testing/selftests/{vm => mm}/userfaultfd.c         | 0
- tools/testing/selftests/{vm => mm}/util.h                | 0
- tools/testing/selftests/{vm => mm}/va_128TBswitch.c      | 0
- tools/testing/selftests/{vm => mm}/va_128TBswitch.sh     | 0
- .../testing/selftests/{vm => mm}/virtual_address_range.c | 0
- tools/testing/selftests/{vm => mm}/vm_util.c             | 0
- tools/testing/selftests/{vm => mm}/vm_util.h             | 0
- .../testing/selftests/{vm => mm}/write_hugetlb_memory.sh | 0
- tools/testing/selftests/{vm => mm}/write_to_hugetlbfs.c  | 0
- 70 files changed, 22 insertions(+), 21 deletions(-)
+Signed-off-by: SeongJae Park <sj@kernel.org>
+---
+ Documentation/admin-guide/mm/idle_page_tracking.rst | 2 +-
+ Documentation/admin-guide/mm/pagemap.rst            | 4 ++--
+ Documentation/mm/page_owner.rst                     | 2 +-
+ Documentation/mm/slub.rst                           | 2 +-
+ Documentation/translations/zh_CN/mm/page_owner.rst  | 2 +-
+ MAINTAINERS                                         | 2 +-
+ mm/Kconfig.debug                                    | 2 +-
+ mm/memory-failure.c                                 | 2 +-
+ tools/{vm => mm}/.gitignore                         | 0
+ tools/{vm => mm}/Makefile                           | 0
+ tools/{vm => mm}/page-types.c                       | 0
+ tools/{vm => mm}/page_owner_sort.c                  | 0
+ tools/{vm => mm}/slabinfo-gnuplot.sh                | 0
+ tools/{vm => mm}/slabinfo.c                         | 0
+ 14 files changed, 9 insertions(+), 9 deletions(-)
  rename tools/{vm => mm}/.gitignore (100%)
  rename tools/{vm => mm}/Makefile (100%)
  rename tools/{vm => mm}/page-types.c (100%)
  rename tools/{vm => mm}/page_owner_sort.c (100%)
  rename tools/{vm => mm}/slabinfo-gnuplot.sh (100%)
  rename tools/{vm => mm}/slabinfo.c (100%)
- rename tools/testing/selftests/{vm => mm}/.gitignore (100%)
- rename tools/testing/selftests/{vm => mm}/Makefile (100%)
- rename tools/testing/selftests/{vm => mm}/charge_reserved_hugetlb.sh (100%)
- rename tools/testing/selftests/{vm => mm}/check_config.sh (100%)
- rename tools/testing/selftests/{vm => mm}/compaction_test.c (100%)
- rename tools/testing/selftests/{vm => mm}/config (100%)
- rename tools/testing/selftests/{vm => mm}/cow.c (100%)
- rename tools/testing/selftests/{vm => mm}/gup_test.c (100%)
- rename tools/testing/selftests/{vm => mm}/hmm-tests.c (100%)
- rename tools/testing/selftests/{vm => mm}/hugepage-mmap.c (100%)
- rename tools/testing/selftests/{vm => mm}/hugepage-mremap.c (100%)
- rename tools/testing/selftests/{vm => mm}/hugepage-shm.c (100%)
- rename tools/testing/selftests/{vm => mm}/hugepage-vmemmap.c (100%)
- rename tools/testing/selftests/{vm => mm}/hugetlb-madvise.c (100%)
- rename tools/testing/selftests/{vm => mm}/hugetlb_reparenting_test.sh (100%)
- rename tools/testing/selftests/{vm => mm}/khugepaged.c (100%)
- rename tools/testing/selftests/{vm => mm}/ksm_functional_tests.c (100%)
- rename tools/testing/selftests/{vm => mm}/ksm_tests.c (100%)
- rename tools/testing/selftests/{vm => mm}/madv_populate.c (100%)
- rename tools/testing/selftests/{vm => mm}/map_fixed_noreplace.c (100%)
- rename tools/testing/selftests/{vm => mm}/map_hugetlb.c (100%)
- rename tools/testing/selftests/{vm => mm}/map_populate.c (100%)
- rename tools/testing/selftests/{vm => mm}/memfd_secret.c (100%)
- rename tools/testing/selftests/{vm => mm}/migration.c (100%)
- rename tools/testing/selftests/{vm => mm}/mlock-random-test.c (100%)
- rename tools/testing/selftests/{vm => mm}/mlock2-tests.c (100%)
- rename tools/testing/selftests/{vm => mm}/mlock2.h (100%)
- rename tools/testing/selftests/{vm => mm}/mrelease_test.c (100%)
- rename tools/testing/selftests/{vm => mm}/mremap_dontunmap.c (100%)
- rename tools/testing/selftests/{vm => mm}/mremap_test.c (100%)
- rename tools/testing/selftests/{vm => mm}/on-fault-limit.c (100%)
- rename tools/testing/selftests/{vm => mm}/pkey-helpers.h (100%)
- rename tools/testing/selftests/{vm => mm}/pkey-powerpc.h (100%)
- rename tools/testing/selftests/{vm => mm}/pkey-x86.h (100%)
- rename tools/testing/selftests/{vm => mm}/protection_keys.c (100%)
- rename tools/testing/selftests/{vm => mm}/run_vmtests.sh (100%)
- rename tools/testing/selftests/{vm => mm}/settings (100%)
- rename tools/testing/selftests/{vm => mm}/soft-dirty.c (100%)
- rename tools/testing/selftests/{vm => mm}/split_huge_page_test.c (100%)
- rename tools/testing/selftests/{vm => mm}/test_hmm.sh (100%)
- rename tools/testing/selftests/{vm => mm}/test_vmalloc.sh (100%)
- rename tools/testing/selftests/{vm => mm}/thuge-gen.c (100%)
- rename tools/testing/selftests/{vm => mm}/transhuge-stress.c (100%)
- rename tools/testing/selftests/{vm => mm}/userfaultfd.c (100%)
- rename tools/testing/selftests/{vm => mm}/util.h (100%)
- rename tools/testing/selftests/{vm => mm}/va_128TBswitch.c (100%)
- rename tools/testing/selftests/{vm => mm}/va_128TBswitch.sh (100%)
- rename tools/testing/selftests/{vm => mm}/virtual_address_range.c (100%)
- rename tools/testing/selftests/{vm => mm}/vm_util.c (100%)
- rename tools/testing/selftests/{vm => mm}/vm_util.h (100%)
- rename tools/testing/selftests/{vm => mm}/write_hugetlb_memory.sh (100%)
- rename tools/testing/selftests/{vm => mm}/write_to_hugetlbfs.c (100%)
 
+diff --git a/Documentation/admin-guide/mm/idle_page_tracking.rst b/Documentation/admin-guide/mm/idle_page_tracking.rst
+index df9394fb39c2..19492064278c 100644
+--- a/Documentation/admin-guide/mm/idle_page_tracking.rst
++++ b/Documentation/admin-guide/mm/idle_page_tracking.rst
+@@ -65,7 +65,7 @@ workload one should:
+     are not reclaimable, he or she can filter them out using
+     ``/proc/kpageflags``.
+ 
+-The page-types tool in the tools/vm directory can be used to assist in this.
++The page-types tool in the tools/mm directory can be used to assist in this.
+ If the tool is run initially with the appropriate option, it will mark all the
+ queried pages as idle.  Subsequent runs of the tool can then show which pages have
+ their idle flag cleared in the interim.
+diff --git a/Documentation/admin-guide/mm/pagemap.rst b/Documentation/admin-guide/mm/pagemap.rst
+index 6e2e416af783..ceb5da3172ba 100644
+--- a/Documentation/admin-guide/mm/pagemap.rst
++++ b/Documentation/admin-guide/mm/pagemap.rst
+@@ -46,7 +46,7 @@ There are four components to pagemap:
+  * ``/proc/kpagecount``.  This file contains a 64-bit count of the number of
+    times each page is mapped, indexed by PFN.
+ 
+-The page-types tool in the tools/vm directory can be used to query the
++The page-types tool in the tools/mm directory can be used to query the
+ number of times a page is mapped.
+ 
+  * ``/proc/kpageflags``.  This file contains a 64-bit set of flags for each
+@@ -173,7 +173,7 @@ LRU related page flags
+ 14 - SWAPBACKED
+    The page is backed by swap/RAM.
+ 
+-The page-types tool in the tools/vm directory can be used to query the
++The page-types tool in the tools/mm directory can be used to query the
+ above flags.
+ 
+ Using pagemap to do something useful
+diff --git a/Documentation/mm/page_owner.rst b/Documentation/mm/page_owner.rst
+index 127514955a5e..5df26c0a0c1f 100644
+--- a/Documentation/mm/page_owner.rst
++++ b/Documentation/mm/page_owner.rst
+@@ -61,7 +61,7 @@ Usage
+ 
+ 1) Build user-space helper::
+ 
+-	cd tools/vm
++	cd tools/mm
+ 	make page_owner_sort
+ 
+ 2) Enable page owner: add "page_owner=on" to boot cmdline.
+diff --git a/Documentation/mm/slub.rst b/Documentation/mm/slub.rst
+index 7f652216dabe..3ffa7eded251 100644
+--- a/Documentation/mm/slub.rst
++++ b/Documentation/mm/slub.rst
+@@ -21,7 +21,7 @@ slabs that have data in them. See "slabinfo -h" for more options when
+ running the command. ``slabinfo`` can be compiled with
+ ::
+ 
+-	gcc -o slabinfo tools/vm/slabinfo.c
++	gcc -o slabinfo tools/mm/slabinfo.c
+ 
+ Some of the modes of operation of ``slabinfo`` require that slub debugging
+ be enabled on the command line. F.e. no tracking information will be
+diff --git a/Documentation/translations/zh_CN/mm/page_owner.rst b/Documentation/translations/zh_CN/mm/page_owner.rst
+index 21a6a0837d42..4d3b2c33e4ef 100644
+--- a/Documentation/translations/zh_CN/mm/page_owner.rst
++++ b/Documentation/translations/zh_CN/mm/page_owner.rst
+@@ -62,7 +62,7 @@ page owner在默认情况下是禁用的。所以，如果你想使用它，你
+ 
+ 1) 构建用户空间的帮助::
+ 
+-	cd tools/vm
++	cd tools/mm
+ 	make page_owner_sort
+ 
+ 2) 启用page owner: 添加 "page_owner=on" 到 boot cmdline.
+diff --git a/MAINTAINERS b/MAINTAINERS
+index 3073432ff0bf..65426446f09a 100644
+--- a/MAINTAINERS
++++ b/MAINTAINERS
+@@ -13483,8 +13483,8 @@ F:	include/linux/mm.h
+ F:	include/linux/mmzone.h
+ F:	include/linux/pagewalk.h
+ F:	mm/
++F:	tools/mm/
+ F:	tools/testing/selftests/vm/
+-F:	tools/vm/
+ 
+ VMALLOC
+ M:	Andrew Morton <akpm@linux-foundation.org>
+diff --git a/mm/Kconfig.debug b/mm/Kconfig.debug
+index fca699ad1fb0..d62f48131952 100644
+--- a/mm/Kconfig.debug
++++ b/mm/Kconfig.debug
+@@ -90,7 +90,7 @@ config PAGE_OWNER
+ 	  help to find bare alloc_page(s) leaks. Even if you include this
+ 	  feature on your build, it is disabled in default. You should pass
+ 	  "page_owner=on" to boot parameter in order to enable it. Eats
+-	  a fair amount of memory if enabled. See tools/vm/page_owner_sort.c
++	  a fair amount of memory if enabled. See tools/mm/page_owner_sort.c
+ 	  for user-space helper.
+ 
+ 	  If unsure, say N.
+diff --git a/mm/memory-failure.c b/mm/memory-failure.c
+index c77a9e37e27e..6bf07345ea2c 100644
+--- a/mm/memory-failure.c
++++ b/mm/memory-failure.c
+@@ -24,7 +24,7 @@
+  * - You have a test that can be added to mce-test
+  *   https://git.kernel.org/cgit/utils/cpu/mce/mce-test.git/
+  * - The case actually shows up as a frequent (top 10) page state in
+- *   tools/vm/page-types when running a real workload.
++ *   tools/mm/page-types when running a real workload.
+  * 
+  * There are several operations here with exponential complexity because
+  * of unsuitable VM data structures. For example the operation to map back 
+diff --git a/tools/vm/.gitignore b/tools/mm/.gitignore
+similarity index 100%
+rename from tools/vm/.gitignore
+rename to tools/mm/.gitignore
+diff --git a/tools/vm/Makefile b/tools/mm/Makefile
+similarity index 100%
+rename from tools/vm/Makefile
+rename to tools/mm/Makefile
+diff --git a/tools/vm/page-types.c b/tools/mm/page-types.c
+similarity index 100%
+rename from tools/vm/page-types.c
+rename to tools/mm/page-types.c
+diff --git a/tools/vm/page_owner_sort.c b/tools/mm/page_owner_sort.c
+similarity index 100%
+rename from tools/vm/page_owner_sort.c
+rename to tools/mm/page_owner_sort.c
+diff --git a/tools/vm/slabinfo-gnuplot.sh b/tools/mm/slabinfo-gnuplot.sh
+similarity index 100%
+rename from tools/vm/slabinfo-gnuplot.sh
+rename to tools/mm/slabinfo-gnuplot.sh
+diff --git a/tools/vm/slabinfo.c b/tools/mm/slabinfo.c
+similarity index 100%
+rename from tools/vm/slabinfo.c
+rename to tools/mm/slabinfo.c
 -- 
 2.25.1
 
