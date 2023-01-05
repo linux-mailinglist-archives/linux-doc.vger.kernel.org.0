@@ -2,171 +2,237 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id E4A2165ECC0
-	for <lists+linux-doc@lfdr.de>; Thu,  5 Jan 2023 14:18:22 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 8BF4B65ECD6
+	for <lists+linux-doc@lfdr.de>; Thu,  5 Jan 2023 14:22:36 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S233489AbjAENRx (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 5 Jan 2023 08:17:53 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:36888 "EHLO
+        id S229744AbjAENWf (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 5 Jan 2023 08:22:35 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:41282 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S234315AbjAENR0 (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Thu, 5 Jan 2023 08:17:26 -0500
-Received: from mail-pl1-x630.google.com (mail-pl1-x630.google.com [IPv6:2607:f8b0:4864:20::630])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id B5EBE5C1C6;
-        Thu,  5 Jan 2023 05:17:10 -0800 (PST)
-Received: by mail-pl1-x630.google.com with SMTP id jn22so39264114plb.13;
-        Thu, 05 Jan 2023 05:17:10 -0800 (PST)
+        with ESMTP id S233842AbjAENWR (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Thu, 5 Jan 2023 08:22:17 -0500
+Received: from mx1.tq-group.com (mx1.tq-group.com [93.104.207.81])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 4D3EC392D0;
+        Thu,  5 Jan 2023 05:22:11 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=/8J8qW+Vq8pd6T9oMP3SU6TUuvWLiPg70zvs+kZ90og=;
-        b=iCXg4LXUCBckmKqWrrrxIf26SHrZFmi22auf4ZaicKRigcxRH4J1pPKSfOGqGrx+70
-         2Dz9hHlbyfiE4Ej5uw8WLiINWCrDAzbB2ANP3+/gbqzdOwBY6PAVA7BUZTzjTjN9cnpk
-         w7tPekaV9ZL3vtm3yJhU/niRomQUa/kb4CWyJH8y8iuAh/qLPl6JCDrc6ste8rMI94Vb
-         txsfBlJ+2NXRQscx4WGe5FgfV4qryQy/us+G8v74ohmJ9dZ1/1Yydjnm5pMDR4CGIFWd
-         rFyAaog+Q+WI+4vFL84NNY7n+NkZ1tRC3x6sboqGdsT7/ikXBHb5637YYaiNJOQxgOy1
-         wIXQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=/8J8qW+Vq8pd6T9oMP3SU6TUuvWLiPg70zvs+kZ90og=;
-        b=1EsZW3jg+Lf7iiDSD0QtAfimZyq0pJG0IFjY74GLcjXT61X/zVcK7cBnGCnyY/o2hk
-         g4S3O/gKxwlFuVYri4roj/bOFmayCuuxL0IjuBmjihfwo2/X/5rtvic7ZXBctHG98DXs
-         fHwcnbXBfkbVEn32VS7taymR9klF8Ab+46CzXRld21Pi2OST5SsoJRo9WEIK4PIWzLVl
-         Lvw+Reu1hESXcaLEQv2XFxXuL08iQz18lSzpdRBiHSMZqQGms9XybTTL661/zBwcctGp
-         naXpMZjeQ9cjx8Q9PSG2j/z9Qy7IOyguSWbWkHmwLU60Us6MJbtdSlJWVwvzuIy03H4S
-         IRgg==
-X-Gm-Message-State: AFqh2kqy1Ygx2AwCzP0gaM2iJju4J3hQr4y6AqSvlGq4oifLN9HtBsVl
-        5lzZUK6keEHo2mx2+BfJqvc=
-X-Google-Smtp-Source: AMrXdXslOn7z2k07aal+6cIKgoQ5LswkwnJ95kNaoSJyQRPK/amOfoIBRXrc2Nm+i57mpW0/cAM3qw==
-X-Received: by 2002:a05:6a20:4295:b0:a8:8714:233b with SMTP id o21-20020a056a20429500b000a88714233bmr80647372pzj.57.1672924630106;
-        Thu, 05 Jan 2023 05:17:10 -0800 (PST)
-Received: from debian.me (subs02-180-214-232-68.three.co.id. [180.214.232.68])
-        by smtp.gmail.com with ESMTPSA id q7-20020a170902a3c700b0018997f6fc88sm10893264plb.34.2023.01.05.05.17.08
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 05 Jan 2023 05:17:09 -0800 (PST)
-Received: by debian.me (Postfix, from userid 1000)
-        id 8148B105232; Thu,  5 Jan 2023 20:17:00 +0700 (WIB)
-From:   Bagas Sanjaya <bagasdotme@gmail.com>
-To:     Linux CGroups <cgroups@vger.kernel.org>,
-        Linux Documentation <linux-doc@vger.kernel.org>,
-        LKML <linux-kernel@vger.kernel.org>,
-        Linux Memory Management List <linux-mm@kvack.org>
-Cc:     Tejun Heo <tj@kernel.org>, Zefan Li <lizefan.x@bytedance.com>,
-        Johannes Weiner <hannes@cmpxchg.org>,
+  d=tq-group.com; i=@tq-group.com; q=dns/txt; s=key1;
+  t=1672924931; x=1704460931;
+  h=from:to:cc:subject:date:message-id:in-reply-to:
+   references:mime-version:content-transfer-encoding;
+  bh=Ye/7kCxTq0n5xXytrE3cFeS2TfEQI3g45COmEC/N+hs=;
+  b=iquiZsp068RjteFbKDwGgRTl+i86jiVC9vBIsKpim2HY5tTufnNPTTMo
+   yS35Z6S5dAzcdqk9rRKxNzcMBhOTlD/pEZRzgeUjpXCd3a3iLqdFTVYhq
+   xFiTRejsJp6W6g6Pi2vVrB9dM6tmvyQ6FNTrVMYFp79hug5F40HIe3ZHY
+   V+++U2AAhTeWQHnhMa93U9LTod6JcwULQqJcQtEhyTuBxBHom0CVv5D+6
+   FZPw1v/25BeGBdSSuuV84ErTv9hhriJzW0rd0yRI7fIaTJfu3F/OBCo1G
+   4HOWZV7MI/52Z94G2Rh0rDVChHoO7BLr/nycDiZbDD5cHG/fIYpNBof77
+   g==;
+X-IronPort-AV: E=Sophos;i="5.96,303,1665439200"; 
+   d="scan'208";a="28260605"
+Received: from unknown (HELO tq-pgp-pr1.tq-net.de) ([192.168.6.15])
+  by mx1-pgp.tq-group.com with ESMTP; 05 Jan 2023 14:22:09 +0100
+Received: from mx1.tq-group.com ([192.168.6.7])
+  by tq-pgp-pr1.tq-net.de (PGP Universal service);
+  Thu, 05 Jan 2023 14:22:09 +0100
+X-PGP-Universal: processed;
+        by tq-pgp-pr1.tq-net.de on Thu, 05 Jan 2023 14:22:09 +0100
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+  d=tq-group.com; i=@tq-group.com; q=dns/txt; s=key1;
+  t=1672924929; x=1704460929;
+  h=from:to:cc:subject:date:message-id:in-reply-to:
+   references:mime-version:content-transfer-encoding;
+  bh=Ye/7kCxTq0n5xXytrE3cFeS2TfEQI3g45COmEC/N+hs=;
+  b=Yl3RXbZABfVHFXEe36gmY2YuiJABUYF4gQ0yFmOLIfIo+3AYn8VIkwEg
+   jTOVg97V77A65wsyardkcpXK6Nin810sHvgygGaOMRcHr+9iXy2pZhcsF
+   f6uX6hGdVpmgcE1PTi/uy9YR5O+FyBNjSNUESH0MK5Lb1daJ8wEZrGmfH
+   unrN9FUrbPJHd8aFok4v3mMXqT1NsCPdmplCayamQPPbtc9nwCWij5Xo0
+   AFrEfczzyFSy0SQu0wUv7vZQRqlstDF9Eto/dzPMGiREFzFIlMVJ27wG6
+   GXBnYnnYZs/KU+rLxczzp1rigvteERbyETl9ainiZGRcumgHnDuLii1ty
+   Q==;
+X-IronPort-AV: E=Sophos;i="5.96,303,1665439200"; 
+   d="scan'208";a="28260604"
+Received: from vtuxmail01.tq-net.de ([10.115.0.20])
+  by mx1.tq-group.com with ESMTP; 05 Jan 2023 14:22:09 +0100
+Received: from steina-w.localnet (unknown [10.123.53.21])
+        (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+        (No client certificate requested)
+        by vtuxmail01.tq-net.de (Postfix) with ESMTPSA id 32AC9280056;
+        Thu,  5 Jan 2023 14:22:09 +0100 (CET)
+From:   Alexander Stein <alexander.stein@ew.tq-group.com>
+To:     Michael Walle <michael@walle.cc>
+Cc:     Miquel Raynal <miquel.raynal@bootlin.com>,
+        Srinivas Kandagatla <srinivas.kandagatla@linaro.org>,
         Jonathan Corbet <corbet@lwn.net>,
-        Michal Hocko <mhocko@suse.com>,
-        Andrew Morton <akpm@linux-foundation.org>,
-        Hugh Dickins <hughd@google.com>,
-        Shakeel Butt <shakeelb@google.com>,
-        Bagas Sanjaya <bagasdotme@gmail.com>
-Subject: [PATCH v2 9/9] docs: cgroup-v1: use numbered lists for user interface setup
-Date:   Thu,  5 Jan 2023 20:16:34 +0700
-Message-Id: <20230105131633.553574-10-bagasdotme@gmail.com>
-X-Mailer: git-send-email 2.39.0
-In-Reply-To: <20230105131633.553574-1-bagasdotme@gmail.com>
-References: <20230105131633.553574-1-bagasdotme@gmail.com>
+        Rob Herring <robh+dt@kernel.org>,
+        Frank Rowand <frowand.list@gmail.com>,
+        Sascha Hauer <s.hauer@pengutronix.de>,
+        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
+        linux-arm-kernel@lists.infradead.org, devicetree@vger.kernel.org,
+        Dan Carpenter <error27@gmail.com>
+Subject: Re: [PATCH v5 00/21] nvmem: core: introduce NVMEM layouts
+Date:   Thu, 05 Jan 2023 14:22:06 +0100
+Message-ID: <20668918.0c2gjJ1VT2@steina-w>
+Organization: TQ-Systems GmbH
+In-Reply-To: <13fca55324d55f9d4e30ca7fcc930e15@walle.cc>
+References: <20221206200740.3567551-1-michael@walle.cc> <5906091.UjTJXf6HLC@steina-w> <13fca55324d55f9d4e30ca7fcc930e15@walle.cc>
 MIME-Version: 1.0
-X-Developer-Signature: v=1; a=openpgp-sha256; l=3017; i=bagasdotme@gmail.com; h=from:subject; bh=nysWUkfThi/UCTzfZAv3ZXQWTYDkn/SrXnv8ebwTGco=; b=owGbwMvMwCX2bWenZ2ig32LG02pJDMnbzm5cWtCq0ng04TEHZ7mB8SLVvBOR8ztZH9yf/zX6aJlM um9YRykLgxgXg6yYIsukRL6m07uMRC60r3WEmcPKBDKEgYtTACbibcPwT83d3Ur0YVzhzYLHnCdO+i /VN2/wf6tmmSycLGTr8LlwKsN/L4kJ/ZbNi2Kc+F4s8DBN49CYLV1rXfH+fJz40j4rB2VOAA==
-X-Developer-Key: i=bagasdotme@gmail.com; a=openpgp; fpr=701B806FDCA5D3A58FFB8F7D7C276C64A5E44A1D
-Content-Transfer-Encoding: 8bit
-X-Spam-Status: No, score=-0.6 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_FROM,
-        RCVD_IN_DNSWL_NONE,RCVD_IN_SORBS_WEB,SPF_HELO_NONE,SPF_PASS
-        autolearn=no autolearn_force=no version=3.4.6
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/plain; charset="us-ascii"
+X-Spam-Status: No, score=-2.0 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+        DKIM_VALID,DKIM_VALID_EF,SPF_HELO_NONE,SPF_PASS autolearn=ham
+        autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Setup instructions for memory resource controller UI uses a mix of
-section headings and normal paragraphs, whereas numbered lists are
-better fit for this purpose.
+Hi Michael,
 
-While at it, also slightly reword the instructions and add reference to
-"Why are cgroups needed?" in the main cgroups documentation.
+Am Donnerstag, 5. Januar 2023, 13:51:53 CET schrieb Michael Walle:
+> Hi,
+> 
+> Am 2023-01-05 13:21, schrieb Alexander Stein:
+> > Am Donnerstag, 5. Januar 2023, 13:11:37 CET schrieb Michael Walle:
+> >> thanks for debugging. I'm not yet sure what is going wrong, so
+> >> I have some more questions below.
+> >> 
+> >> >> This causes the following errors on existing boards (imx8mq-tqma8mq-
+> >> >> mba8mx.dtb):
+> >> >> root@tqma8-common:~# uname -r
+> >> >> 6.2.0-rc2-next-20230105
+> >> >> 
+> >> >> > OF: /soc@0: could not get #nvmem-cell-cells for /soc@0/bus@30000000/
+> >> >> 
+> >> >> efuse@30350000/soc-uid@4
+> >> >> 
+> >> >> > OF: /soc@0/bus@30800000/ethernet@30be0000: could not get
+> >> >> > #nvmem-cell-cells
+> >> >> 
+> >> >> for /soc@0/bus@30000000/efuse@30350000/mac-address@90
+> >> >> 
+> >> >> These are caused because '#nvmem-cell-cells = <0>;' is not explicitly
+> >> >> set in
+> >> >> DT.
+> >> >> 
+> >> >> > TI DP83867 30be0000.ethernet-1:0e: error -EINVAL: failed to get
+> >> >> > nvmem
+> >> >> > cell
+> >> >> 
+> >> >> io_impedance_ctrl
+> >> >> 
+> >> >> > TI DP83867: probe of 30be0000.ethernet-1:0e failed with error -22
+> >> >> 
+> >> >> These are caused because of_nvmem_cell_get() now returns -EINVAL
+> >> >> instead of -
+> >> >> ENODEV if the requested nvmem cell is not available.
+> >> 
+> >> What do you mean with not available? Not yet available because of
+> >> probe
+> >> order?
+> > 
+> > Ah, I was talking about there is no nvmem cell being used in my PHY
+> > node, e.g.
+> > no 'nvmem-cells' nor 'nvmem-cell-names' (set to 'io_impedance_ctrl').
+> > That's
+> > why of_property_match_string returns -EINVAL.
+> 
+> Ahh I see. You mean ENOENT instead of ENODEV, right?
 
-Signed-off-by: Bagas Sanjaya <bagasdotme@gmail.com>
----
- .../admin-guide/cgroup-v1/cgroups.rst         |  2 ++
- .../admin-guide/cgroup-v1/memory.rst          | 26 ++++++++-----------
- 2 files changed, 13 insertions(+), 15 deletions(-)
+Yeah you are right here, ENOENT is the one missing.
 
-diff --git a/Documentation/admin-guide/cgroup-v1/cgroups.rst b/Documentation/admin-guide/cgroup-v1/cgroups.rst
-index b0688011ed06de..9343148ee99366 100644
---- a/Documentation/admin-guide/cgroup-v1/cgroups.rst
-+++ b/Documentation/admin-guide/cgroup-v1/cgroups.rst
-@@ -80,6 +80,8 @@ access. For example, cpusets (see Documentation/admin-guide/cgroup-v1/cpusets.rs
- you to associate a set of CPUs and a set of memory nodes with the
- tasks in each cgroup.
- 
-+.. _cgroups-why-needed:
-+
- 1.2 Why are cgroups needed ?
- ----------------------------
- 
-diff --git a/Documentation/admin-guide/cgroup-v1/memory.rst b/Documentation/admin-guide/cgroup-v1/memory.rst
-index 16d938abe69f81..27d89495ac880a 100644
---- a/Documentation/admin-guide/cgroup-v1/memory.rst
-+++ b/Documentation/admin-guide/cgroup-v1/memory.rst
-@@ -387,30 +387,30 @@ U != 0, K >= U:
- 3. User Interface
- =================
- 
--3.0. Configuration
--------------------
-+To use the user interface:
- 
--a. Enable CONFIG_CGROUPS
--b. Enable CONFIG_MEMCG
--
--3.1. Prepare the cgroups (see cgroups.txt, Why are cgroups needed?)
---------------------------------------------------------------------
--
--::
-+1. Enable CONFIG_CGROUPS and CONFIG_MEMCG options
-+2. Prepare the cgroups (see :ref:`Why are cgroups needed?
-+   <cgroups-why-needed>` for the background information)::
- 
- 	# mount -t tmpfs none /sys/fs/cgroup
- 	# mkdir /sys/fs/cgroup/memory
- 	# mount -t cgroup none /sys/fs/cgroup/memory -o memory
- 
--3.2. Make the new group and move bash into it::
-+3. Make the new group and move bash into it::
- 
- 	# mkdir /sys/fs/cgroup/memory/0
- 	# echo $$ > /sys/fs/cgroup/memory/0/tasks
- 
--Since now we're in the 0 cgroup, we can alter the memory limit::
-+4. Since now we're in the 0 cgroup, we can alter the memory limit::
- 
- 	# echo 4M > /sys/fs/cgroup/memory/0/memory.limit_in_bytes
- 
-+   The limit can now be queried::
-+
-+	# cat /sys/fs/cgroup/memory/0/memory.limit_in_bytes
-+	4194304
-+
- .. note::
-    We can use a suffix (k, K, m, M, g or G) to indicate values in kilo,
-    mega or gigabytes. (Here, Kilo, Mega, Giga are Kibibytes, Mebibytes,
-@@ -422,10 +422,6 @@ Since now we're in the 0 cgroup, we can alter the memory limit::
- .. note::
-    We cannot set limits on the root cgroup any more.
- 
--::
--
--  # cat /sys/fs/cgroup/memory/0/memory.limit_in_bytes
--  4194304
- 
- We can check the usage::
- 
--- 
-An old man doll... just what I always wanted! - Clara
+> >> > Should we just assume #nvmem-cell-cells = <0> by default? I guess it's
+> >> > a safe assumption.
+> >> 
+> >> Actually, that's what patch 2/21 is for.
+> >> 
+> >> Alexander, did you verify that the EINVAL is returned by
+> >> of_parse_phandle_with_optional_args()?
+> > 
+> > Yep.
+> > 
+> > --8<--
+> > diff --git a/drivers/nvmem/core.c b/drivers/nvmem/core.c
+> > index 1b61c8bf0de4..f2a85a31d039 100644
+> > --- a/drivers/nvmem/core.c
+> > +++ b/drivers/nvmem/core.c
+> > @@ -1339,9 +1339,11 @@ struct nvmem_cell *of_nvmem_cell_get(struct
+> > device_node
+> > *np, const char *id)
+> > 
+> >         if (id)
+> >         
+> >                 index = of_property_match_string(np,
+> > 
+> > "nvmem-cell-names", id);
+> > 
+> > +       pr_info("%s: index: %d\n", __func__, index);
+> > 
+> >         ret = of_parse_phandle_with_optional_args(np, "nvmem-cells",
+> >         
+> >                                                   "#nvmem-cell-cells",
+> >                                                   index, &cell_spec);
+> > 
+> > +       pr_info("%s: of_parse_phandle_with_optional_args: %d\n",
+> > __func__,
+> > ret);
+> > 
+> >         if (ret)
+> >         
+> >                 return ERR_PTR(ret);
+> > 
+> > --8<--
+> > 
+> > Results in:
+> >> [    1.861896] of_nvmem_cell_get: index: -22
+> >> [    1.865934] of_nvmem_cell_get: of_parse_phandle_with_optional_args:
+> >> -22
+> >> [    1.872595] TI DP83867 30be0000.ethernet-1:0e: error -EINVAL:
+> >> failed to
+> > 
+> > get nvmem cell io_impedance_ctrl
+> > 
+> >> [    2.402575] TI DP83867: probe of 30be0000.ethernet-1:0e failed with
+> >> error
+> > 
+> > -22
+> > 
+> > So, the index is wrong in the first place, but this was no problem
+> > until now.
+> 
+> Thanks, could you try the following patch:
+> 
+> diff --git a/drivers/nvmem/core.c b/drivers/nvmem/core.c
+> index 1b61c8bf0de4..1085abfcd9b1 100644
+> --- a/drivers/nvmem/core.c
+> +++ b/drivers/nvmem/core.c
+> @@ -1336,8 +1336,11 @@ struct nvmem_cell *of_nvmem_cell_get(struct
+> device_node *np, const char *id)
+>          int ret;
+> 
+>          /* if cell name exists, find index to the name */
+> -       if (id)
+> +       if (id) {
+>                  index = of_property_match_string(np, "nvmem-cell-names",
+> id);
+> +               if (index < 0)
+> +                       return ERR_PTR(-ENOENT);
+> +       }
+> 
+>          ret = of_parse_phandle_with_optional_args(np, "nvmem-cells",
+>                                                    "#nvmem-cell-cells",
+> 
+> Before patch 6/21, the -EINVAL was passed as index to of_parse_phandle()
+> which then returned NULL, which caused the nvmem core to return ENOENT.
+> I have a vague memory, that I made sure, that
+> of_parse_phandle_with_optional_args() will also propagate the
+> wrong index to its return code. But now, it won't be converted
+> to ENOENT.
+
+Yes, this does the trick. Thanks
+
+Best regards,
+Alexander
+
+
 
