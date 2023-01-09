@@ -2,55 +2,55 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id AC6E9662224
-	for <lists+linux-doc@lfdr.de>; Mon,  9 Jan 2023 10:53:18 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id D54B766222A
+	for <lists+linux-doc@lfdr.de>; Mon,  9 Jan 2023 10:53:22 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S236626AbjAIJw4 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 9 Jan 2023 04:52:56 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:43886 "EHLO
+        id S233085AbjAIJxS (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 9 Jan 2023 04:53:18 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:43890 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S236533AbjAIJv4 (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Mon, 9 Jan 2023 04:51:56 -0500
-Received: from mail-pj1-x1032.google.com (mail-pj1-x1032.google.com [IPv6:2607:f8b0:4864:20::1032])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 0FF8D13CD4;
-        Mon,  9 Jan 2023 01:51:20 -0800 (PST)
-Received: by mail-pj1-x1032.google.com with SMTP id h7-20020a17090aa88700b00225f3e4c992so12235355pjq.1;
-        Mon, 09 Jan 2023 01:51:20 -0800 (PST)
+        with ESMTP id S236703AbjAIJv5 (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Mon, 9 Jan 2023 04:51:57 -0500
+Received: from mail-pj1-x102a.google.com (mail-pj1-x102a.google.com [IPv6:2607:f8b0:4864:20::102a])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id A300F13CC6;
+        Mon,  9 Jan 2023 01:51:19 -0800 (PST)
+Received: by mail-pj1-x102a.google.com with SMTP id z4-20020a17090a170400b00226d331390cso8818623pjd.5;
+        Mon, 09 Jan 2023 01:51:19 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=y2CjRZgj5w+03CooppV2h5YZRADlzHN7ByIiZ7SsR6s=;
-        b=MG55Mifdwpxh8MVPJdLjs2cTl9ualnfbSIBDen/T3cWwkgvZSgZ7pgVg9Jm4QgDyxT
-         oqikm+3W+0EfEJoZKu4GVgLDFiBaDB1E5pF1xhuL7w8b2uLz+VAeOzDHyg9/Ya3mEMcV
-         gXfDsiX5JY2VyjEUlu0+h1rowuBQOyqAHKYJ834/s+x4oX/+42PndXvYlQUtHnGzAIPP
-         BDCdlCPPrbvQ1cfx7tDUZbRGZqgL0QycBRbAl9FR/t1By4ofs95RhZ7w9Sz0YobX+fwF
-         SRGWlwkXe9JuAfyAQ4Cgpy9Of4CTz+1TVj8u+sNNMok8UHz3gHuFSv5Ja4TRKrIGxwFx
-         7Z2g==
+        bh=mqJCH7hX4dILUHJmf3hsUMhsDu5qPCEp+u1n+kr7rxg=;
+        b=iMD9gaWVVnDR5njGukGNImhoF87Ln9pekRZVKBgCi5H+o9ebrLASJQ9Pb2xx540g1b
+         siUcwH+wbT4a+l1Cue1bsgU7jsA5qiKM3BbgRhL5ZfTLVAK41WaTCzcm4nHFh8+9ID1M
+         q5N6wFjtyeQGX9HwBqsaLerLhmCLyNbyaevr5R3zYeI4RXH2SCbwekTA/tVPQh6oqR8C
+         1SfKizOBJpvEPl8mcABpM3INLBv+CZNm2tbav7SVt4UHgaxDfIzzi0dFpHolD2Iw2h/S
+         C68rkN+4SmXk1aDJz4WKFWrUuqkCMRK5AXGAXJ5GsukhBGcDJ30tdagtyaYAsPqsT4Xq
+         CDfA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=y2CjRZgj5w+03CooppV2h5YZRADlzHN7ByIiZ7SsR6s=;
-        b=iyQUhOF16dcuFMHw5UOpjlRD+YS4QSGD7ULWBi3uWdAFE+jF+RwLAqyb2ISlMKzSGy
-         W3gOqt51pnz5f5Zw4uSbnujcraqGq2E+DBd2UCdIta/jT9XIzB0GJJWbd4Az33I0+KGr
-         Txj0ryV+/5IccOPcsoWwbFoAF2AM9Oq48wafGWmQY6GA+T+7HvKma5SHTdL2ElTPXu0t
-         dopmn0P6eOnnYh+uo8f42Ai1vi8y4cWeKMRy3KlVG8fvEIBe4+bsls22e4xa3aYJv3vU
-         ARMWiGPsS1mjQ1F8AtfixRLsEuHfvVK9TC+M8C2N2Hlorz75CeEZOVX3iCzXK0/wAqxW
-         1WdA==
-X-Gm-Message-State: AFqh2kq+4Cb7+uo30KpNU71UmMFRz+f+E9i0bzzNWN+Gzl5Axr8Ln7FE
-        66oGI2VLGBisYfTfDJOkRfA=
-X-Google-Smtp-Source: AMrXdXt95xNzXFrT8/Ac8yI6E7YW5RTTJCc0zk7UJy5Exzl8ssTKQEib+yA/ks97qFSEN/iWIiJheA==
-X-Received: by 2002:a17:90b:35c7:b0:226:17f9:8025 with SMTP id nb7-20020a17090b35c700b0022617f98025mr43532509pjb.40.1673257879452;
+        bh=mqJCH7hX4dILUHJmf3hsUMhsDu5qPCEp+u1n+kr7rxg=;
+        b=Ww4AMHz0TNsRfApXpVgo9PVkpO7Ed2xqBs/BL2lgMXqFjPU4UMD5LN+TJo3b72sUmp
+         WNRkI71NAbDYv7SuTlp6Q2B0G54dypJ7/Jv6CBsOsHbZW27Ee+fjB0sJn4yLMIkUT0Yq
+         73ogXPNs3OvxdClGlBMXWy1Zv6+6M/60spc1KUqFP9KTRNtUC+adVFdDq1ME+cTSNe+f
+         yAnPeeTEv3lNhnEgWcWe62zv0rVOfflzEz8wSZrtczgZBrt5gZ1bGUfMYYaRJUpuOBrU
+         ygSoG6oE1zMeLuZDoi5OVZgPRP0oFvJWBRwlPgrGUffWPOp0F3HwM3EOOvq0dCnyh/4s
+         LsQA==
+X-Gm-Message-State: AFqh2kp+SrZExvseUC5PjxRtv858PRskyl530aPukN/K6pGgII5GZUwv
+        EJ1/CltIv8pAMdctnfN1BoY=
+X-Google-Smtp-Source: AMrXdXvxLMwwO7210xShAwXu60VO5zSYBPq3TMErKmIAVFxoEaev7iZZcvNbLW0WxAqP8M+IDQWZew==
+X-Received: by 2002:a17:90b:485:b0:223:ffd0:b2a1 with SMTP id bh5-20020a17090b048500b00223ffd0b2a1mr68601087pjb.48.1673257879189;
         Mon, 09 Jan 2023 01:51:19 -0800 (PST)
 Received: from debian.me (subs03-180-214-233-26.three.co.id. [180.214.233.26])
-        by smtp.gmail.com with ESMTPSA id lj12-20020a17090b344c00b002190eabb890sm7047881pjb.25.2023.01.09.01.51.18
+        by smtp.gmail.com with ESMTPSA id s88-20020a17090a69e100b002262ab43327sm3762001pjj.26.2023.01.09.01.51.18
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
         Mon, 09 Jan 2023 01:51:18 -0800 (PST)
 Received: by debian.me (Postfix, from userid 1000)
-        id B8817104BBE; Mon,  9 Jan 2023 16:51:10 +0700 (WIB)
+        id E2698105011; Mon,  9 Jan 2023 16:51:10 +0700 (WIB)
 From:   Bagas Sanjaya <bagasdotme@gmail.com>
 To:     Jonathan Corbet <corbet@lwn.net>,
         Yann Sionneau <ysionneau@kalray.eu>
@@ -58,15 +58,15 @@ Cc:     linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
         Clement Leger <clement.leger@bootlin.com>,
         Guillaume Thouvenin <gthouvenin@kalray.eu>,
         Bagas Sanjaya <bagasdotme@gmail.com>
-Subject: [PATCH 6/8] Documentation: kvx: Promote title headings
-Date:   Mon,  9 Jan 2023 16:51:06 +0700
-Message-Id: <20230109095108.21229-7-bagasdotme@gmail.com>
+Subject: [PATCH 7/8] Documentation: kvx: Use literal code block for command-line inputs
+Date:   Mon,  9 Jan 2023 16:51:07 +0700
+Message-Id: <20230109095108.21229-8-bagasdotme@gmail.com>
 X-Mailer: git-send-email 2.39.0
 In-Reply-To: <20230109095108.21229-1-bagasdotme@gmail.com>
 References: <874jt7fqxt.fsf@meer.lwn.net>
  <20230109095108.21229-1-bagasdotme@gmail.com>
 MIME-Version: 1.0
-X-Developer-Signature: v=1; a=openpgp-sha256; l=2735; i=bagasdotme@gmail.com; h=from:subject; bh=yMsDrHoSWinbqsJdqdRDs7EJeO2eIKc6AFgy0XYKjUY=; b=owGbwMvMwCX2bWenZ2ig32LG02pJDMm7H3dP3SI8c+YZdvfiSxa7zEQEZKYVN/+1iKsSuaqTFN8t /cK3o5SFQYyLQVZMkWVSIl/T6V1GIhfa1zrCzGFlAhnCwMUpABN5JsrIMEvOOVDmz/Kn1SLiFv91V0 jqi/tX82Rse+XwlP1+ZeKcOkaGe4VW/qVBOg9mtF4xFT3wodZ7w8rQgB+/NiiVSv0tiFfhAgA=
+X-Developer-Signature: v=1; a=openpgp-sha256; l=2492; i=bagasdotme@gmail.com; h=from:subject; bh=bMSMm0rWOWzEGbRrqmQsw/YZ3fZ91pfy18WO8XnzGNg=; b=owGbwMvMwCX2bWenZ2ig32LG02pJDMm7H3dnLJ1tKiSrLXZpuXq/3KPEJ6803loUWJ8qfWBnOMlo Bc+yjlIWBjEuBlkxRZZJiXxNp3cZiVxoX+sIM4eVCWQIAxenAExEfRYjw92Vex8wV3+XeqDu88xx6v 6dpV8rZAraTbIupz8VCpPdq8HwP0pphXxbdPhRxVXZjWs/1eirsU3+1XxYJa667qng7ad/2QA=
 X-Developer-Key: i=bagasdotme@gmail.com; a=openpgp; fpr=701B806FDCA5D3A58FFB8F7D7C276C64A5E44A1D
 Content-Transfer-Encoding: 8bit
 X-Spam-Status: No, score=-0.6 required=5.0 tests=BAYES_00,DKIM_SIGNED,
@@ -79,82 +79,65 @@ Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-The documentation contains headings which all marked up using the same
-heading level, which cause doc sections to also appear in index TOC
-alongside doc titles.
-
-Promote title headings while expanding their title text to be more
-descriptive.
+Command-line, like codes, looks ugly when default paragraph block is
+used (since proportional font is used), where literal code blocks (which
+render as monospace) do the job better.
 
 Signed-off-by: Bagas Sanjaya <bagasdotme@gmail.com>
 ---
- Documentation/kvx/kvx-exceptions.rst | 6 ++++--
- Documentation/kvx/kvx-iommu.rst      | 4 ++--
- Documentation/kvx/kvx-mmu.rst        | 5 +++--
- Documentation/kvx/kvx-smp.rst        | 5 +++--
- Documentation/kvx/kvx.rst            | 1 +
- 5 files changed, 13 insertions(+), 8 deletions(-)
+ Documentation/kvx/kvx-iommu.rst |  2 +-
+ Documentation/kvx/kvx.rst       | 10 +++++-----
+ 2 files changed, 6 insertions(+), 6 deletions(-)
 
-diff --git a/Documentation/kvx/kvx-exceptions.rst b/Documentation/kvx/kvx-exceptions.rst
-index bd485efd2362c1..15692f14b9219d 100644
---- a/Documentation/kvx/kvx-exceptions.rst
-+++ b/Documentation/kvx/kvx-exceptions.rst
-@@ -1,5 +1,7 @@
--Exceptions
--==========
-+=========================
-+Exception handling in kvx
-+=========================
-+
- On kvx, handlers are set using $ev (exception vector) register which
- specifies a base address.
- An offset is added to $ev upon exception and the result is used as
 diff --git a/Documentation/kvx/kvx-iommu.rst b/Documentation/kvx/kvx-iommu.rst
-index c97035ba624c22..5e84dc12adb437 100644
+index 5e84dc12adb437..c95d9231d5b665 100644
 --- a/Documentation/kvx/kvx-iommu.rst
 +++ b/Documentation/kvx/kvx-iommu.rst
-@@ -1,5 +1,5 @@
--IOMMU
--=====
-+IOMMU in kvx
-+============
+@@ -144,7 +144,7 @@ Maintenance interface
+ It is possible to have several "maintainers" for the same IOMMU. The driver is
+ using two of them. One that writes the TLB and another interface reads TLB. For
+ debug purpose it is possible to display the content of the tlb by using the
+-following command in gdb:
++following command in gdb::
  
- General Overview
- ----------------
-diff --git a/Documentation/kvx/kvx-mmu.rst b/Documentation/kvx/kvx-mmu.rst
-index faa6bda2c39959..05b9bc111e02db 100644
---- a/Documentation/kvx/kvx-mmu.rst
-+++ b/Documentation/kvx/kvx-mmu.rst
-@@ -1,5 +1,6 @@
--MMU
--===
-+==========================
-+kvx Memory Management Unit
-+==========================
+     gdb> p kvx_iommu_dump_tlb( <iommu addr>, 0)
  
- Virtual addresses are on 41 bits for kvx when using 64-bit mode.
- To differentiate kernel from user space, we use the high order bit
-diff --git a/Documentation/kvx/kvx-smp.rst b/Documentation/kvx/kvx-smp.rst
-index 1b69d77db8cdaf..f170bc48ea5f7f 100644
---- a/Documentation/kvx/kvx-smp.rst
-+++ b/Documentation/kvx/kvx-smp.rst
-@@ -1,5 +1,6 @@
--SMP
--===
-+===============================================
-+Symmetric Multiprocessing Implementation in kvx
-+===============================================
- 
- On kvx, 5 clusters are organized as groups of 16 processors + 1
- secure core (RM) for each cluster. These 17 processors are L1$ coherent
 diff --git a/Documentation/kvx/kvx.rst b/Documentation/kvx/kvx.rst
-index 8982d10f2678df..4aac7fce4e3d01 100644
+index 4aac7fce4e3d01..5385e1e3d30187 100644
 --- a/Documentation/kvx/kvx.rst
 +++ b/Documentation/kvx/kvx.rst
-@@ -1,3 +1,4 @@
-+=======================
- kvx Core Implementation
- =======================
+@@ -122,7 +122,7 @@ To be able to set breakpoints when MMU is enabled we added a label called
+ gdb_mmu_enabled. If you try to set a breakpoint on a function that is in
+ virtual memory before the activation of the MMU this address as no signification
+ for GDB. So, for example, if you want to break on the function start_kernel()
+-you will need to run:
++you will need to run::
+ 
+ 	kvx-gdb -silent path_to/vmlinux \
+ 		-ex 'tbreak gdb_mmu_enabled' -ex 'run' \
+@@ -253,19 +253,19 @@ Building
+ ========
+ 
+ In order to build the kernel, you will need a complete kvx toolchain.
+-First, setup the config using the following command line
++First, setup the config using the following command line::
+ 
+ $ make ARCH=kvx O=your_directory default_defconfig
+ 
+-Adjust any configuration option you may need and then, build the kernel:
++Adjust any configuration option you may need and then, build the kernel::
+ 
+ $ make ARCH=kvx O=your_directory -j12
+ 
+-You will finally have a vmlinux image ready to be run.
++You will finally have a vmlinux image ready to be run::
+ 
+ $ kvx-mppa -- vmlinux
+ 
+-Additionally, you may want to debug it. To do so, use kvx-gdb:
++Additionally, you may want to debug it. To do so, use kvx-gdb::
+ 
+ $ kvx-gdb vmlinux
  
 -- 
 An old man doll... just what I always wanted! - Clara
