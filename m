@@ -2,82 +2,77 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id E1CF166566E
-	for <lists+linux-doc@lfdr.de>; Wed, 11 Jan 2023 09:46:36 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 4B59666569E
+	for <lists+linux-doc@lfdr.de>; Wed, 11 Jan 2023 09:59:28 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S231720AbjAKIqe (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 11 Jan 2023 03:46:34 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:57728 "EHLO
+        id S230059AbjAKI7H (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 11 Jan 2023 03:59:07 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:35170 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S232027AbjAKIqc (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Wed, 11 Jan 2023 03:46:32 -0500
-Received: from out30-43.freemail.mail.aliyun.com (out30-43.freemail.mail.aliyun.com [115.124.30.43])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 64810DF1F
-        for <linux-doc@vger.kernel.org>; Wed, 11 Jan 2023 00:46:31 -0800 (PST)
-X-Alimail-AntiSpam: AC=PASS;BC=-1|-1;BR=01201311R121e4;CH=green;DM=||false|;DS=||;FP=0|-1|-1|-1|0|-1|-1|-1;HT=ay29a033018046056;MF=hsiangkao@linux.alibaba.com;NM=1;PH=DS;RN=7;SR=0;TI=SMTPD_---0VZMeQcA_1673426783;
-Received: from 30.97.48.254(mailfrom:hsiangkao@linux.alibaba.com fp:SMTPD_---0VZMeQcA_1673426783)
-          by smtp.aliyun-inc.com;
-          Wed, 11 Jan 2023 16:46:24 +0800
-Message-ID: <a7e50038-9054-d31f-2c3e-88ab3b74ed42@linux.alibaba.com>
-Date:   Wed, 11 Jan 2023 16:46:23 +0800
+        with ESMTP id S236563AbjAKI6W (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Wed, 11 Jan 2023 03:58:22 -0500
+Received: from mail-pl1-x62f.google.com (mail-pl1-x62f.google.com [IPv6:2607:f8b0:4864:20::62f])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 9CFA710568
+        for <linux-doc@vger.kernel.org>; Wed, 11 Jan 2023 00:58:21 -0800 (PST)
+Received: by mail-pl1-x62f.google.com with SMTP id c6so16106668pls.4
+        for <linux-doc@vger.kernel.org>; Wed, 11 Jan 2023 00:58:21 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=VOonr+NEoGFH/iq6NuEDMlmfm74QrHbTRChmi4DoBtc=;
+        b=NCSinN9LoF6ekuT7B8kg6W5vhkW1Z9At1Panfwu2j2h89uld8a0ZNRScZNW3XDCK6g
+         8r0f69G72KlAvosr7NDMl7WeW0dkClZUym9ucZsc3SIzu6VaLLTYkv+ogtWiLlTaqv03
+         NnckoPbq7AOhOSjK0cw8k1PrUhEi+zxbmmp/xlzksvsqK6Giw0kDP+YXioX2gTfBemJr
+         2mOUjeClySAXGbNEdliiqMD8jJkIuJVH/1q0X16wyp1OxEW1iXsT9nUD0djoWdN4o/+y
+         Aludqoi2s310LCGHI2+vQjhZpttrs8LaEc3JS9jobu7z9pEAnwlbNYPcuM+pMn23XvIG
+         YJOQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=VOonr+NEoGFH/iq6NuEDMlmfm74QrHbTRChmi4DoBtc=;
+        b=LDTVb0wgX9POdlJK4kHWxkqCaaUYf0Miz+miJXHAlzJPMOL+MYMgMx/h+omPf43zEr
+         p4gTrOtsYNXNxtvA2ZQbQgsPx8+q+CBCL/lV+Cy3E6EOwOrhgh+ZX1Ap3HhdZrxASL0Z
+         9EID991U9rOuPKicjX6Sj9cMBHeftX5S6SzPlLrTbWNmXZa3dEYJkRhqPnupjxyiWUOm
+         27YwAyhl/oCOa7rDmGXB3K6FZnjtKS9YPEN4KY4KZc6FO3/5KsOA2pD7s7ai7gj3Pt9J
+         JZxVF3+eckoTVDsge+bRzjxVw/e+OpwCQu0GSwxZdPjlgvbTkqY5F23/W0zblmY4g2Ck
+         AlfQ==
+X-Gm-Message-State: AFqh2kqOwaJc2co50oCg2RwL7NqMtx/2M/9QyvTJ/+PSgRxlbZkgdNU7
+        wiA7jETvVs/C8dx3eTgI8IVS7EJWE0gM5q9FwOo=
+X-Google-Smtp-Source: AMrXdXu2wz/OQTyNfZDi1bigcdIpv8H9Dz2avO43GN/F94ZcxWnAHlge/t8jnOtuNpx2ey/9t1RkUtCLrVxu9P7zx+0=
+X-Received: by 2002:a17:90a:5889:b0:225:bc87:5175 with SMTP id
+ j9-20020a17090a588900b00225bc875175mr5751083pji.190.1673427501146; Wed, 11
+ Jan 2023 00:58:21 -0800 (PST)
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:102.0)
- Gecko/20100101 Thunderbird/102.6.1
-Subject: Re: [PATCH 1/2] erofs: add documentation for 'domain_id' mount option
-To:     Jingbo Xu <jefflexu@linux.alibaba.com>, xiang@kernel.org,
-        chao@kernel.org, linux-erofs@lists.ozlabs.org
-Cc:     huyue2@coolpad.com, zhujia.zj@bytedance.com,
-        linux-doc@vger.kernel.org
-References: <20230111081547.126322-1-jefflexu@linux.alibaba.com>
- <20230111081547.126322-2-jefflexu@linux.alibaba.com>
-From:   Gao Xiang <hsiangkao@linux.alibaba.com>
-In-Reply-To: <20230111081547.126322-2-jefflexu@linux.alibaba.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-Spam-Status: No, score=-9.9 required=5.0 tests=BAYES_00,
-        ENV_AND_HDR_SPF_MATCH,NICE_REPLY_A,RCVD_IN_DNSWL_NONE,
-        RCVD_IN_MSPIKE_H2,SPF_HELO_NONE,SPF_PASS,UNPARSEABLE_RELAY,
-        USER_IN_DEF_SPF_WL autolearn=ham autolearn_force=no version=3.4.6
+References: <20230111083423.513461-1-siyanteng@loongson.cn>
+In-Reply-To: <20230111083423.513461-1-siyanteng@loongson.cn>
+From:   Yizhou Tang <tangyeechou@gmail.com>
+Date:   Wed, 11 Jan 2023 16:58:09 +0800
+Message-ID: <CAOB9oOY=_1X6ztx+TALbqUZvsHqujiK7QCpq9hTQSNXnWY2tRw@mail.gmail.com>
+Subject: Re: [PATCH] docs/zh_CN: Add a glossary of Chinese translation terms
+To:     Yanteng Si <siyanteng@loongson.cn>
+Cc:     alexs@kernel.org, seakeel@gmail.com, corbet@lwn.net,
+        bobwxc@email.cn, chenhuacai@kernel.org, linux-doc@vger.kernel.org,
+        me@lirui.org, siyanteng01@gmail.com
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: base64
+X-Spam-Status: No, score=-0.7 required=5.0 tests=BAYES_05,DKIM_SIGNED,
+        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_FROM,
+        RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,SPF_PASS autolearn=ham
+        autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-
-
-On 2023/1/11 16:15, Jingbo Xu wrote:
-> The share domain feature for fscache mode has been merged, and let's add
-> documentation for 'domain_id' mount option.
-Since the EROFS share domain feature for fscache mode has been available
-since Linux v6.1, let's add documentation for 'domain_id' mount option.
-
-Cc: linux-doc@vger.kernel.org
-
-> 
-> Signed-off-by: Jingbo Xu <jefflexu@linux.alibaba.com>
-> ---
->   Documentation/filesystems/erofs.rst | 3 +++
->   1 file changed, 3 insertions(+)
-> 
-> diff --git a/Documentation/filesystems/erofs.rst b/Documentation/filesystems/erofs.rst
-> index 067fd1670b1f..958cad2c4997 100644
-> --- a/Documentation/filesystems/erofs.rst
-> +++ b/Documentation/filesystems/erofs.rst
-> @@ -120,6 +120,9 @@ dax={always,never}     Use direct access (no page cache).  See
->   dax                    A legacy option which is an alias for ``dax=always``.
->   device=%s              Specify a path to an extra device to be used together.
->   fsid=%s                Specify a filesystem image ID for Fscache back-end.
-> +domain_id=%s           Specify a domain ID for Fscache back-end.  The blob
-> +                       images are shared among filesystem instances in the same
-> +                       domain.
-
-domain_id=%s           Specify a domain ID in fscache mode so that different images
-                        with the same blobs under a given domain ID can share storage.
-
-Thanks,
-Gao Xiang
-
->   ===================    =========================================================
->   
->   Sysfs Entries
+WWFudGVuZyBTaSA8c2l5YW50ZW5nQGxvb25nc29uLmNuPiDkuo4yMDIz5bm0MeaciDEx5pel5ZGo
+5LiJIDE2OjM05YaZ6YGT77yaDQoNCj4gKyogUEVMVDog5a6e5L2T6LSf6L296Lef6Liq5py65Yi2
+77yIUGVyLUVudGl0eSBMb2FkIFRyYWNraW5n77yJDQrlrp7kvZPotJ/ovb3ot5/ouKoNCg0KSU1I
+TywgaG93IGFib3V0IHRoZSBmb2xsb3dpbmc6DQpmb3JrIC0g5Yib5bu6Pw0Kc2NoZWQgZG9tYWlu
+IC0g6LCD5bqm5Z+fDQpOVU1BIC0g6Z2e57uf5LiA5YaF5a2Y6K6/6ZeuDQpIdWdlUGFnZSAtIOW3
+qOmhtSAgKGhvd2V2ZXIsIEFsaWJhYmEgQ2xvdWQgTGludXggdHJhbnNsYXRlIHRoaXMgd29yZCBp
+bnRvIOKAmOWkp+mhteKAmSkNCk9QUCAtIOaTjeS9nOaAp+iDveWAvA0KDQpUYW5nDQo=
