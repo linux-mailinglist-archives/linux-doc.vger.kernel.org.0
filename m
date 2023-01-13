@@ -2,78 +2,106 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 5224D6698D9
-	for <lists+linux-doc@lfdr.de>; Fri, 13 Jan 2023 14:41:48 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 1DDC1669C21
+	for <lists+linux-doc@lfdr.de>; Fri, 13 Jan 2023 16:28:59 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S241797AbjAMNlp (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Fri, 13 Jan 2023 08:41:45 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:41496 "EHLO
+        id S230168AbjAMP2s (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Fri, 13 Jan 2023 10:28:48 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:46824 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S241360AbjAMNl0 (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Fri, 13 Jan 2023 08:41:26 -0500
-Received: from mail-wm1-x333.google.com (mail-wm1-x333.google.com [IPv6:2a00:1450:4864:20::333])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id A20F878171;
-        Fri, 13 Jan 2023 05:35:21 -0800 (PST)
-Received: by mail-wm1-x333.google.com with SMTP id j34-20020a05600c1c2200b003da1b054057so3074777wms.5;
-        Fri, 13 Jan 2023 05:35:21 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=in-reply-to:content-transfer-encoding:content-disposition
-         :mime-version:references:message-id:subject:cc:to:from:date:from:to
-         :cc:subject:date:message-id:reply-to;
-        bh=nywJI74yQUBZKtXTFC0fV5f3ZOvRAenJVMnnfg1WwrI=;
-        b=IVFsla2zk/pD8UjPauz9WIFxhPQAM9PoW2FEh1i4d5znvYU+ky/Ms9VpY31v4vvpQm
-         O/xPh205JmuUkJuAzd3v5lo5qNva/Ipg2/3gWIj6/OyouoFyPFqmK+CfBjKhHuML3z4H
-         qont8mUNa1VOMySmlw/jBV3Zcq1ayRVJifrKJuCqVsZw15cmS4tFYgzZEvgwVEs+3AUG
-         TStqvhjCM5U/BaDBtet6E92qL4IwAlLfb4preUafs+q2C6z7LQcnw1tmL9FIUxgabsOx
-         Prv7+UNBouXprx6PkX8AjP9w6i7nP6bfyl/mDR1iwigTPkAnbhCQLhqInSjGYvv9zhfD
-         CTNQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=in-reply-to:content-transfer-encoding:content-disposition
-         :mime-version:references:message-id:subject:cc:to:from:date
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=nywJI74yQUBZKtXTFC0fV5f3ZOvRAenJVMnnfg1WwrI=;
-        b=ZW/wKa3Ta/qW3e2LS5l3AdXBWO3hzTaHT/AnZfBd85RedGFWIG7ZiHyRPFzEUbKwiA
-         S6OZNx/S9hyWB5FonC/iOmGXIFQ9laVqr6zb7jhxfXciGaQ8BGgHBKOGzVCDsvqbFYf+
-         cQ2CvJvL9bPjhT7++uSnBJNtYNTs7wSLAjl3Cj31V2fugPzIzv07JWAABwPTk5N1V1nu
-         nISfSXBlJrVUOF6YmxZzcTq6BSeHZv1/SAJ1+ddhlZ5gflYDyCQZUvmxvxckSO5Ye/y9
-         CULKSkjQ95T41nNkWb3vJIseBZ3DtcQ8vCBcriGByC4xHh7+mx3d3Aksu1/Y8rjgygRx
-         8zmw==
-X-Gm-Message-State: AFqh2koqg02iq2wQWm3ZXJspIsoOiEesn5kF6IQ+73CHGMRn3VW+MNuL
-        4B6a5JZjNjrlYqE/U/XmMKE=
-X-Google-Smtp-Source: AMrXdXtWHjgmsViWNP5py81LeeSTBqUVt9RuPCpc/mj8vZLX4C2UPCC/O0rzGUclUBEdQXhH8fYECg==
-X-Received: by 2002:a05:600c:a06:b0:3da:230e:9531 with SMTP id z6-20020a05600c0a0600b003da230e9531mr1642885wmp.13.1673616917098;
-        Fri, 13 Jan 2023 05:35:17 -0800 (PST)
-Received: from localhost (host86-164-169-89.range86-164.btcentralplus.com. [86.164.169.89])
-        by smtp.gmail.com with ESMTPSA id z14-20020a05600c220e00b003d99fad7511sm23856487wml.22.2023.01.13.05.35.15
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 13 Jan 2023 05:35:15 -0800 (PST)
-Date:   Fri, 13 Jan 2023 13:35:14 +0000
-From:   Lorenzo Stoakes <lstoakes@gmail.com>
-To:     Mike Rapoport <rppt@kernel.org>
-Cc:     Jonathan Corbet <corbet@lwn.net>,
-        Andrew Morton <akpm@linux-foundation.org>,
-        Bagas Sanjaya <bagasdotme@gmail.com>,
-        David Hildenbrand <david@redhat.com>,
-        Johannes Weiner <hannes@cmpxchg.org>,
-        "Matthew Wilcox (Oracle)" <willy@infradead.org>,
-        Mel Gorman <mgorman@suse.de>, Michal Hocko <mhocko@kernel.org>,
-        Vlastimil Babka <vbabka@suse.cz>, linux-doc@vger.kernel.org,
-        linux-kernel@vger.kernel.org, linux-mm@kvack.org
-Subject: Re: [PATCH v3 3/3] docs/mm: Physical Memory: add structure,
- introduction and nodes description
-Message-ID: <Y8FeEnCFw89WRUyr@lucifer>
-References: <20230112091616.824565-1-rppt@kernel.org>
- <20230112091616.824565-4-rppt@kernel.org>
+        with ESMTP id S230185AbjAMP2T (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Fri, 13 Jan 2023 10:28:19 -0500
+Received: from NAM10-DM6-obe.outbound.protection.outlook.com (mail-dm6nam10on2065.outbound.protection.outlook.com [40.107.93.65])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 6698F82FBD;
+        Fri, 13 Jan 2023 07:21:50 -0800 (PST)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=U7GipbxUuk46YQO85oVbewVq37V70zWXxlcXyESF7nGlqwpaevW+uONLTJfEOZns3CSxE1ufushCwVaRuVcjzFcPRW8ipB5M6TVN+WthPBqP2hxhBANUADUwhPigfzJ0+SsVnLGJyDhNnNn2URIapiz7Jv4TRS5fo157GgmCGj3Iku9sLuKmmV4Fj+To706KBc79BIDlakcrVFa84zTw9yKForXIWLvJh9AZnKKjwFL0Y8qLgTWy93e6C3Jq3BGmh5UHchCjT1Hoca77xjPNqUTQEEH0Kr5U1seaH4ER9EvpXfEHqswLmVMt3kNDdKY895hTNGb61ULbf14r0/tDtg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=LVbxYjObH2chU6IYo1gc4dNZMnREAmNCpeq5WlsfrQ4=;
+ b=HNT+7URV/0HnPgptJ9TDUTx3a8epvzVyTN5TtAVDM2XWVMDg0ei8oMCH31IGu3Jsm9GzSNeCaXno2IBsJtGndf2vnEMUz4WnbRGAQ+w4MVguT1lOcnocDO2ZlPchMbrW4WDaaoF/Qo6FvzoLCOlOz5ED/m71MVQZ8XZHx/vwS3T9XZk1B9qnPsCl8SapnV6m8/5kay5yKzT2cog+EehSA7YfsPd0/+JFiPJwVjkQPJopB/JOBEkM9pNVFt44rueMLvf8oNjECxbmsMHO0eY4KS/aibMoykTPjMs/Xq2i2y+pRp2kpeK+nroYF6zQ30BnSIepnsIQoVCkx3e654EMUg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=lwn.net smtp.mailfrom=amd.com; dmarc=pass
+ (p=quarantine sp=quarantine pct=100) action=none header.from=amd.com;
+ dkim=none (message not signed); arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=LVbxYjObH2chU6IYo1gc4dNZMnREAmNCpeq5WlsfrQ4=;
+ b=yXK3kd+mXYnqrF2ZWA+MN96oBGtEu0noBwEeyd3E03x7GjdTEbeQifKFN4TPEvnpH0Ccxlquy3UXYmSuHlP/1EaPfXzhAAxhVHcpDTcEGkDf8FAJDz6JvENsM3kJGaaUqqFTJix/HJD31aFkzXDuvmq3/7OMy1xsk245xtIIJSI=
+Received: from BN8PR07CA0001.namprd07.prod.outlook.com (2603:10b6:408:ac::14)
+ by SA0PR12MB4414.namprd12.prod.outlook.com (2603:10b6:806:9a::11) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5986.19; Fri, 13 Jan
+ 2023 15:21:47 +0000
+Received: from BN8NAM11FT080.eop-nam11.prod.protection.outlook.com
+ (2603:10b6:408:ac:cafe::8c) by BN8PR07CA0001.outlook.office365.com
+ (2603:10b6:408:ac::14) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6002.16 via Frontend
+ Transport; Fri, 13 Jan 2023 15:21:47 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
+ smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
+Received: from SATLEXMB04.amd.com (165.204.84.17) by
+ BN8NAM11FT080.mail.protection.outlook.com (10.13.176.82) with Microsoft SMTP
+ Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.20.6002.13 via Frontend Transport; Fri, 13 Jan 2023 15:21:46 +0000
+Received: from bmoger-ubuntu.amd.com (10.180.168.240) by SATLEXMB04.amd.com
+ (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2375.34; Fri, 13 Jan
+ 2023 09:20:55 -0600
+From:   Babu Moger <babu.moger@amd.com>
+To:     <corbet@lwn.net>, <reinette.chatre@intel.com>,
+        <tglx@linutronix.de>, <mingo@redhat.com>, <bp@alien8.de>
+CC:     <fenghua.yu@intel.com>, <dave.hansen@linux.intel.com>,
+        <x86@kernel.org>, <hpa@zytor.com>, <paulmck@kernel.org>,
+        <akpm@linux-foundation.org>, <quic_neeraju@quicinc.com>,
+        <rdunlap@infradead.org>, <damien.lemoal@opensource.wdc.com>,
+        <songmuchun@bytedance.com>, <peterz@infradead.org>,
+        <jpoimboe@kernel.org>, <pbonzini@redhat.com>, <babu.moger@amd.com>,
+        <chang.seok.bae@intel.com>, <pawan.kumar.gupta@linux.intel.com>,
+        <jmattson@google.com>, <daniel.sneddon@linux.intel.com>,
+        <sandipan.das@amd.com>, <tony.luck@intel.com>,
+        <james.morse@arm.com>, <linux-doc@vger.kernel.org>,
+        <linux-kernel@vger.kernel.org>, <bagasdotme@gmail.com>,
+        <eranian@google.com>, <christophe.leroy@csgroup.eu>,
+        <jarkko@kernel.org>, <adrian.hunter@intel.com>,
+        <quic_jiles@quicinc.com>, <peternewman@google.com>
+Subject: [PATCH v12 00/13] x86/resctrl: Support for AMD QoS new features
+Date:   Fri, 13 Jan 2023 09:20:26 -0600
+Message-ID: <20230113152039.770054-1-babu.moger@amd.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
-In-Reply-To: <20230112091616.824565-4-rppt@kernel.org>
+Content-Type: text/plain
+X-Originating-IP: [10.180.168.240]
+X-ClientProxiedBy: SATLEXMB04.amd.com (10.181.40.145) To SATLEXMB04.amd.com
+ (10.181.40.145)
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: BN8NAM11FT080:EE_|SA0PR12MB4414:EE_
+X-MS-Office365-Filtering-Correlation-Id: ca3babf2-f6a7-4657-d55f-08daf579e27f
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: LBr0BD8lhBx+Vw8Rww229cDBHSlIy0IHv1N9IaxT48Cs3SQnbRs43fKlaP3+IlCDL/0btn4/UfW7lvYbVf/DPSoT4+sKZ+2jkaUYZ1iNrwBemQLhUbFk4NY8aRJrzWZPDYWRTLuEr6n4YpGlkwI4O0RkIQW0NfIL0KZbp+4j/bnKEaydGbubigr+Mhg572Y6Jo6Q9OV76GqPA8VyLMJ1v2jsryFNxvmf21IAHGdyjF63TXoaq+nPvhs4eY8icjnT2x4FVHbEpw9PEuoCkZSBqvZqiwSSadViEahiLstLO4xkF+vx0Ut5VDDDVU4v8ql6+vHkY0mLlPaBLMAvpHXJm+vkbWyiKgtd5jOZxaXrQp2sJ66p5x5bo2+Js0KKKdK4Jn6p4ltvWAkS0qYoSUp6yBZw90kjl7dEQuQrvuJM82r2pQ4+JGFCNaZliHYQ4EnieoKFta/oJg8fuMA49VszKEir5YiasW5pu2PmzwERAtQCxmEZ1u0nPUiw0qK35NM95nDnDpLHZmhGLZlJ0E8EAlZMjBCGjyZhTSrK0FtOEiQUmtb+zYZp9zhqj8DYimdz3hYOtc2GPpFsSce2/4Ev90g6UfuUVjnOp/RInWHvLdGYqV+Vyl2TV8UPDHbxptJ7rtTyxbzbNOuSJcXpjX8V32vpeNbYsDXPIRWYDyVEn252gGD4v4gh03zaVVYXTn0m0euz4h8RqPvcsxX8LEBgV8wdE5uNZmqTk3mPsraGr71moornKzPYwaYLJFUXBGHff92tzKlODeRCVVFFFICEldN5GDHhkOCfzUAToBT6aPY=
+X-Forefront-Antispam-Report: CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB04.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230022)(4636009)(39860400002)(136003)(346002)(376002)(396003)(451199015)(40470700004)(36840700001)(46966006)(426003)(83380400001)(82740400003)(47076005)(36860700001)(81166007)(86362001)(356005)(2906002)(44832011)(40480700001)(41300700001)(7416002)(7406005)(5660300002)(8936002)(82310400005)(40460700003)(6666004)(478600001)(2616005)(336012)(1076003)(16526019)(186003)(26005)(966005)(316002)(8676002)(4326008)(70586007)(70206006)(7696005)(54906003)(110136005)(36756003)(36900700001);DIR:OUT;SFP:1101;
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 13 Jan 2023 15:21:46.5754
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: ca3babf2-f6a7-4657-d55f-08daf579e27f
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[SATLEXMB04.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource: BN8NAM11FT080.eop-nam11.prod.protection.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SA0PR12MB4414
 X-Spam-Status: No, score=-2.1 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_FROM,
-        RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,SPF_PASS autolearn=ham
+        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_NONE,
+        RCVD_IN_MSPIKE_H2,SPF_HELO_PASS,SPF_PASS autolearn=ham
         autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
@@ -81,375 +109,180 @@ Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Looks good!
+New AMD processors can now support following QoS features.
 
-Reviewed-by: Lorenzo Stoakes <lstoakes@gmail.com>
+1. Slow Memory Bandwidth Allocation (SMBA)
+   With this feature, the QOS enforcement policies can be applied
+   to the external slow memory connected to the host. QOS enforcement
+   is accomplished by assigning a Class Of Service (COS) to a processor
+   and specifying allocations or limits for that COS for each resource
+   to be allocated.
 
-On Thu, Jan 12, 2023 at 11:16:16AM +0200, Mike Rapoport wrote:
-> From: "Mike Rapoport (IBM)" <rppt@kernel.org>
->
-> Add structure, introduction and Nodes section to Physical Memory
-> chapter.
->
-> Signed-off-by: Mike Rapoport (IBM) <rppt@kernel.org>
-> ---
->  Documentation/mm/physical_memory.rst | 346 +++++++++++++++++++++++++++
->  1 file changed, 346 insertions(+)
->
-> diff --git a/Documentation/mm/physical_memory.rst b/Documentation/mm/physical_memory.rst
-> index 2ab7b8c1c863..eed583af6985 100644
-> --- a/Documentation/mm/physical_memory.rst
-> +++ b/Documentation/mm/physical_memory.rst
-> @@ -3,3 +3,349 @@
->  ===============
->  Physical Memory
->  ===============
-> +
-> +Linux is available for a wide range of architectures so there is a need for an
-> +architecture-independent abstraction to represent the physical memory. This
-> +chapter describes the structures used to manage physical memory in a running
-> +system.
-> +
-> +The first principal concept prevalent in the memory management is
-> +`Non-Uniform Memory Access (NUMA)
-> +<https://en.wikipedia.org/wiki/Non-uniform_memory_access>`_.
-> +With multi-core and multi-socket machines, memory may be arranged into banks
-> +that incur a different cost to access depending on the “distance” from the
-> +processor. For example, there might be a bank of memory assigned to each CPU or
-> +a bank of memory very suitable for DMA near peripheral devices.
-> +
-> +Each bank is called a node and the concept is represented under Linux by a
-> +``struct pglist_data`` even if the architecture is UMA. This structure is
-> +always referenced to by it's typedef ``pg_data_t``. ``A pg_data_t`` structure
-> +for a particular node can be referenced by ``NODE_DATA(nid)`` macro where
-> +``nid`` is the ID of that node.
-> +
-> +For NUMA architectures, the node structures are allocated by the architecture
-> +specific code early during boot. Usually, these structures are allocated
-> +locally on the memory bank they represent. For UMA architectures, only one
-> +static ``pg_data_t`` structure called ``contig_page_data`` is used. Nodes will
-> +be discussed further in Section :ref:`Nodes <nodes>`
-> +
-> +The entire physical address space is partitioned into one or more blocks
-> +called zones which represent ranges within memory. These ranges are usually
-> +determined by architectural constraints for accessing the physical memory.
-> +The memory range within a node that corresponds to a particular zone is
-> +described by a ``struct zone``, typedeffed to ``zone_t``. Each zone has
-> +one of the types described below.
-> +
-> +* ``ZONE_DMA`` and ``ZONE_DMA32`` historically represented memory suitable for
-> +  DMA by peripheral devices that cannot access all of the addressable
-> +  memory. For many years there are better more and robust interfaces to get
-> +  memory with DMA specific requirements (:ref:`DMA API <_dma_api>`), but
-> +  ``ZONE_DMA`` and ``ZONE_DMA32`` still represent memory ranges that have
-> +  restrictions on how they can be accessed.
-> +  Depending on the architecture, either of these zone types or even they both
-> +  can be disabled at build time using ``CONFIG_ZONE_DMA`` and
-> +  ``CONFIG_ZONE_DMA32`` configuration options. Some 64-bit platforms may need
-> +  both zones as they support peripherals with different DMA addressing
-> +  limitations.
-> +
-> +* ``ZONE_NORMAL`` is for normal memory that can be accessed by the kernel all
-> +  the time. DMA operations can be performed on pages in this zone if the DMA
-> +  devices support transfers to all addressable memory. ``ZONE_NORMAL`` is
-> +  always enabled.
-> +
-> +* ``ZONE_HIGHMEM`` is the part of the physical memory that is not covered by a
-> +  permanent mapping in the kernel page tables. The memory in this zone is only
-> +  accessible to the kernel using temporary mappings. This zone is available
-> +  only on some 32-bit architectures and is enabled with ``CONFIG_HIGHMEM``.
-> +
-> +* ``ZONE_MOVABLE`` is for normal accessible memory, just like ``ZONE_NORMAL``.
-> +  The difference is that the contents of most pages in ``ZONE_MOVABLE`` is
-> +  movable. That means that while virtual addresses of these pages do not
-> +  change, their content may move between different physical pages. Often
-> +  ``ZONE_MOVABLE`` is populated during memory hotplug, but it may be
-> +  also populated on boot using one of ``kernelcore``, ``movablecore`` and
-> +  ``movable_node`` kernel command line parameters. See :ref:`Page migration
-> +  <page_migration>` and :ref:`Memory Hot(Un)Plug <_admin_guide_memory_hotplug>`
-> +  for additional details.
-> +
-> +* ``ZONE_DEVICE`` represents memory residing on devices such as PMEM and GPU.
-> +  It has different characteristics than RAM zone types and it exists to provide
-> +  :ref:`struct page <Pages>` and memory map services for device driver
-> +  identified physical address ranges. ``ZONE_DEVICE`` is enabled with
-> +  configuration option ``CONFIG_ZONE_DEVICE``.
-> +
-> +It is important to note that many kernel operations can only take place using
-> +``ZONE_NORMAL`` so it is the most performance critical zone. Zones are
-> +discussed further in Section :ref:`Zones <zones>`.
-> +
-> +The relation between node and zone extents is determined by the physical memory
-> +map reported by the firmware, architectural constraints for memory addressing
-> +and certain parameters in the kernel command line.
-> +
-> +For example, with 32-bit kernel on an x86 UMA machine with 2 Gbytes of RAM the
-> +entire memory will be on node 0 and there will be three zones: ``ZONE_DMA``,
-> +``ZONE_NORMAL`` and ``ZONE_HIGHMEM``::
-> +
-> +  0                                                            2G
-> +  +-------------------------------------------------------------+
-> +  |                            node 0                           |
-> +  +-------------------------------------------------------------+
-> +
-> +  0         16M                    896M                        2G
-> +  +----------+-----------------------+--------------------------+
-> +  | ZONE_DMA |      ZONE_NORMAL      |       ZONE_HIGHMEM       |
-> +  +----------+-----------------------+--------------------------+
-> +
-> +
-> +With a kernel built with ``ZONE_DMA`` disabled and ``ZONE_DMA32`` enabled and
-> +booted with ``movablecore=80%`` parameter on an arm64 machine with 16 Gbytes of
-> +RAM equally split between two nodes, there will be ``ZONE_DMA32``,
-> +``ZONE_NORMAL`` and ``ZONE_MOVABLE`` on node 0, and ``ZONE_NORMAL`` and
-> +``ZONE_MOVABLE`` on node 1::
-> +
-> +
-> +  1G                                9G                         17G
-> +  +--------------------------------+ +--------------------------+
-> +  |              node 0            | |          node 1          |
-> +  +--------------------------------+ +--------------------------+
-> +
-> +  1G       4G        4200M          9G          9320M          17G
-> +  +---------+----------+-----------+ +------------+-------------+
-> +  |  DMA32  |  NORMAL  |  MOVABLE  | |   NORMAL   |   MOVABLE   |
-> +  +---------+----------+-----------+ +------------+-------------+
-> +
-> +.. _nodes:
-> +
-> +Nodes
-> +=====
-> +
-> +As we have mentioned, each node in memory is described by a ``pg_data_t`` which
-> +is a typedef for a ``struct pglist_data``. When allocating a page, by default
-> +Linux uses a node-local allocation policy to allocate memory from the node
-> +closest to the running CPU. As processes tend to run on the same CPU, it is
-> +likely the memory from the current node will be used. The allocation policy can
-> +be controlled by users as described in
-> +Documentation/admin-guide/mm/numa_memory_policy.rst.
-> +
-> +Most NUMA architectures maintain an array of pointers to the node
-> +structures. The actual structures are allocated early during boot when
-> +architecture specific code parses the physical memory map reported by the
-> +firmware. The bulk of the node initialization happens slightly later in the
-> +boot process by free_area_init() function, described later in Section
-> +:ref:`Initialization <initialization>`.
-> +
-> +
-> +Along with the node structures, kernel maintains an array of ``nodemask_t``
-> +bitmasks called ``node_states``. Each bitmask in this array represents a set of
-> +nodes with particular properties as defined by ``enum node_states``:
-> +
-> +``N_POSSIBLE``
-> +  The node could become online at some point.
-> +``N_ONLINE``
-> +  The node is online.
-> +``N_NORMAL_MEMORY``
-> +  The node has regular memory.
-> +``N_HIGH_MEMORY``
-> +  The node has regular or high memory. When ``CONFIG_HIGHMEM`` is disabled
-> +  aliased to ``N_NORMAL_MEMORY``.
-> +``N_MEMORY``
-> +  The node has memory(regular, high, movable)
-> +``N_CPU``
-> +  The node has one or more CPUs
-> +
-> +For each node that has a property described above, the bit corresponding to the
-> +node ID in the ``node_states[<property>]`` bitmask is set.
-> +
-> +For example, for node 2 with normal memory and CPUs, bit 2 will be set in ::
-> +
-> +  node_states[N_POSSIBLE]
-> +  node_states[N_ONLINE]
-> +  node_states[N_NORMAL_MEMORY]
-> +  node_states[N_MEMORY]
-> +  node_states[N_CPU]
-> +
-> +For various operations possible with nodemasks please refer to
-> +``include/linux/nodemask.h``.
-> +
-> +Among other things, nodemasks are used to provide macros for node traversal,
-> +namely ``for_each_node()`` and ``for_each_online_node()``.
-> +
-> +For instance, to call a function foo() for each online node::
-> +
-> +	for_each_online_node(nid) {
-> +		pg_data_t *pgdat = NODE_DATA(nid);
-> +
-> +		foo(pgdat);
-> +	}
-> +
-> +Node structure
-> +--------------
-> +
-> +The nodes structure ``struct pglist_data`` is declared in
-> +``include/linux/mmzone.h``. Here we briefly describe fields of this
-> +structure:
-> +
-> +General
-> +~~~~~~~
-> +
-> +``node_zones``
-> +  The zones for this node.  Not all of the zones may be populated, but it is
-> +  the full list. It is referenced by this node's node_zonelists as well as
-> +  other node's node_zonelists.
-> +
-> +``node_zonelists``
-> +  The list of all zones in all nodes. This list defines the order of zones
-> +  that allocations are preferred from. The ``node_zonelists`` is set up by
-> +  ``build_zonelists()`` in ``mm/page_alloc.c`` during the initialization of
-> +  core memory management structures.
-> +
-> +``nr_zones``
-> +  Number of populated zones in this node.
-> +
-> +``node_mem_map``
-> +  For UMA systems that use FLATMEM memory model the 0's node
-> +  ``node_mem_map`` is array of struct pages representing each physical frame.
-> +
-> +``node_page_ext``
-> +  For UMA systems that use FLATMEM memory model the 0's node
-> +  ``node_page_ext`` is array of extensions of struct pages. Available only
-> +  in the kernels built with ``CONFIG_PAGE_EXTENTION`` enabled.
-> +
-> +``node_start_pfn``
-> +  The page frame number of the starting page frame in this node.
-> +
-> +``node_present_pages``
-> +  Total number of physical pages present in this node.
-> +
-> +``node_spanned_pages``
-> +  Total size of physical page range, including holes.
-> +
-> +``node_size_lock``
-> +  A lock that protects the fields defining the node extents. Only defined when
-> +  at least one of ``CONFIG_MEMORY_HOTPLUG`` or
-> +  ``CONFIG_DEFERRED_STRUCT_PAGE_INIT`` configuration options are enabled.
-> +  ``pgdat_resize_lock()`` and ``pgdat_resize_unlock()`` are provided to
-> +  manipulate ``node_size_lock`` without checking for ``CONFIG_MEMORY_HOTPLUG``
-> +  or ``CONFIG_DEFERRED_STRUCT_PAGE_INIT``.
-> +
-> +``node_id``
-> +  The Node ID (NID) of the node, starts at 0.
-> +
-> +``totalreserve_pages``
-> +  This is a per-node reserve of pages that are not available to userspace
-> +  allocations.
-> +
-> +``first_deferred_pfn``
-> +  If memory initialization on large machines is deferred then this is the first
-> +  PFN that needs to be initialized. Defined only when
-> +  ``CONFIG_DEFERRED_STRUCT_PAGE_INIT`` is enabled
-> +
-> +``deferred_split_queue``
-> +  Per-node queue of huge pages that their split was deferred. Defined only when ``CONFIG_TRANSPARENT_HUGEPAGE`` is enabled.
-> +
-> +``__lruvec``
-> +  Per-node lruvec holding LRU lists and related parameters. Used only when
-> +  memory cgroups are disabled. It should not be accessed directly, use
-> +  ``mem_cgroup_lruvec()`` to look up lruvecs instead.
-> +
-> +Reclaim control
-> +~~~~~~~~~~~~~~~
-> +
-> +See also :ref:`Page Reclaim <page_reclaim>`.
-> +
-> +``kswapd``
-> +  Per-node instance of kswapd kernel thread.
-> +
-> +``kswapd_wait``, ``pfmemalloc_wait``, ``reclaim_wait``
-> +  Workqueues used to synchronize memory reclaim tasks
-> +
-> +``nr_writeback_throttled``
-> +  Number of tasks that are throttled waiting on dirty pages to clean.
-> +
-> +``nr_reclaim_start``
-> +  Number of pages written while reclaim is throttled waiting for writeback.
-> +
-> +``kswapd_order``
-> +  Controls the order kswapd tries to reclaim
-> +
-> +``kswapd_highest_zoneidx``
-> +  The highest zone index to be reclaimed by kswapd
-> +
-> +``kswapd_failures``
-> +  Number of runs kswapd was unable to reclaim any pages
-> +
-> +``min_unmapped_pages``
-> +  Minimal number of unmapped file backed pages that cannot be reclaimed.
-> +  Determined by ``vm.min_unmapped_ratio`` sysctl. Only defined when
-> +  ``CONFIG_NUMA`` is enabled.
-> +
-> +``min_slab_pages``
-> +  Minimal number of SLAB pages that cannot be reclaimed. Determined by
-> +  ``vm.min_slab_ratio sysctl``. Only defined when ``CONFIG_NUMA`` is enabled
-> +
-> +``flags``
-> +  Flags controlling reclaim behavior.
-> +
-> +Compaction control
-> +~~~~~~~~~~~~~~~~~~
-> +
-> +``kcompactd_max_order``
-> +  Page order that kcompactd should try to achieve.
-> +
-> +``kcompactd_highest_zoneidx``
-> +  The highest zone index to be compacted by kcompactd.
-> +
-> +``kcompactd_wait``
-> +  Workqueue used to synchronize memory compaction tasks.
-> +
-> +``kcompactd``
-> +  Per-node instance of kcompactd kernel thread.
-> +
-> +``proactive_compact_trigger``
-> +  Determines if proactive compaction is enabled. Controlled by
-> +  ``vm.compaction_proactiveness`` sysctl.
-> +
-> +Statistics
-> +~~~~~~~~~~
-> +
-> +``per_cpu_nodestats``
-> +  Per-CPU VM statistics for the node
-> +
-> +``vm_stat``
-> +  VM statistics for the node.
-> +
-> +.. _zones:
-> +
-> +Zones
-> +=====
-> +
-> +.. admonition:: Stub
-> +
-> +   This section is incomplete. Please list and describe the appropriate fields.
-> +
-> +.. _pages:
-> +
-> +Pages
-> +=====
-> +
-> +.. admonition:: Stub
-> +
-> +   This section is incomplete. Please list and describe the appropriate fields.
-> +
-> +.. _folios:
-> +
-> +Folios
-> +======
-> +
-> +.. admonition:: Stub
-> +
-> +   This section is incomplete. Please list and describe the appropriate fields.
-> +
-> +.. _initialization:
-> +
-> +Initialization
-> +==============
-> +
-> +.. admonition:: Stub
-> +
-> +   This section is incomplete. Please list and describe the appropriate fields.
-> --
-> 2.35.1
->
+   Currently, CXL.memory is the only supported "slow" memory device. With
+   the support of SMBA feature the hardware enables bandwidth allocation
+   on the slow memory devices.
+
+2. Bandwidth Monitoring Event Configuration (BMEC)
+   The bandwidth monitoring events mbm_total_event and mbm_local_event 
+   are set to count all the total and local reads/writes respectively.
+   With the introduction of slow memory, the two counters are not enough
+   to count all the different types are memory events. With the feature
+   BMEC, the users have the option to configure mbm_total_event and
+   mbm_local_event to count the specific type of events.
+
+   Following are the bitmaps of events supported.
+   Bits    Description
+     6       Dirty Victims from the QOS domain to all types of memory
+     5       Reads to slow memory in the non-local NUMA domain
+     4       Reads to slow memory in the local NUMA domain
+     3       Non-temporal writes to non-local NUMA domain
+     2       Non-temporal writes to local NUMA domain
+     1       Reads to memory in the non-local NUMA domain
+     0       Reads to memory in the local NUMA domain
+
+This series adds support for these features. Also added a minor cleanup(PATCH 1).
+
+Feature description is available in the specification, "AMD64 Technology Platform Quality of Service Extensions, Revision: 1.03 Publication # 56375
+Revision: 1.03 Issue Date: February 2022".
+
+Link: https://bugzilla.kernel.org/show_bug.cgi?id=206537
+Link: https://www.amd.com/en/support/tech-docs/amd64-technology-platform-quality-service-extensions
+---
+v12:
+ Summary of changes:
+ Refreshed on top of tip/master.
+ Made the new cpu features SMBA and BMEC invisible from /proc/cpuinfo based on our discussion.
+ https://lore.kernel.org/lkml/Y7xjxUj+KnOEJssZ@zn.tnic/
+ Updated the Documentation/x86/resctrl.rst with minor changes.
+
+v11:
+ https://lore.kernel.org/lkml/20230109164405.569714-2-babu.moger@amd.com/
+ Summary of changes:
+ Removed cpus_read_lock() from the patch 11 and 12 based on our discussion.
+ https://lore.kernel.org/lkml/3dc31a6d-5485-746d-3c49-df7dcd1827e3@intel.com/
+ Picked up all the Reviewed-by by Reinette.
+ Minor text changes on patch 13.
+ 
+v10:
+ https://lore.kernel.org/lkml/20221222233127.910538-1-babu.moger@amd.com/
+ Summary of changes:
+ 1. Moved the patch 12 to 1 ("x86/resctrl: Replace smp_call_function_many() with on_each_cpu_mask()")
+ 2. No need to write MSR_IA32_EVT_CFG_BASE on all the CPUs. Replaced on_each_cpu_mask with smp_call_function_any.
+ 3. Updated the subject line of the patches to replace sysfs with resctrl.
+ 4. Added Reviewed-by for the patches which are reviewed by Reinette.
+ 5. Added few more comments suggested by Reinette.
+  
+v9:
+ https://lore.kernel.org/lkml/166990882621.17806.16780480657453071426.stgit@bmoger-ubuntu/
+ Summary of changes:
+ 1. Rebased on top of lastest tip/master as of 11/30.
+ 2. Most of the changes are result of the comments from Fenghua, Reinette and Peter Newman.
+ 3. Fixed the cpuid dependancy.
+ 4. Added the __init attribute to rdt_get_mon_l3_config and mbm_config_rftype_init.
+ 5. Added new function resctrl_arch_reset_rmid_all to clear all rmid statues.
+ 6. Changed mon_event_config_index_get based on Reinette's comments.
+ 7. Changed mbm_config_rftype_init to take care of few extra error handling.
+ 8. Few other minor changes and text changes.
+
+v8:
+ https://lore.kernel.org/lkml/166759188265.3281208.11769277079826754455.stgit@bmoger-ubuntu/
+ Changes:
+ 1. Removed init attribute for rdt_cpu_has to make it available for all the files.
+ 2. Updated the change log for mon_features to correct the names of config files.
+ 3. Changed configuration file name from mbm_total_config to mbm_total_bytes_config.
+    This is more consistant with other changes.
+ 4. Added lock protection while reading/writing the config file.
+ 5. Other few minor text changes. I have been missing few comments in last couple of
+    revisions. Hope I have addressed all of them this time.
+
+v7:
+ https://lore.kernel.org/lkml/166604543832.5345.9696970469830919982.stgit@bmoger-ubuntu/
+ Changes:
+ Not much of a change. Missed one comment from Reinette from v5. Corrected it now.
+ Few format corrections from Sanjaya.
+
+v6:
+ https://lore.kernel.org/lkml/166543345606.23830.3120625408601531368.stgit@bmoger-ubuntu/
+ Summary of changes:
+ 1. Rebased on top of lastest tip tree. Fixed few minor conflicts.
+ 2. Fixed format issue with scattered.c.
+ 3. Removed config_name from the structure mon_evt. It is not required.
+ 4. The read/write format for mbm_total_config and mbm_local_config will be same
+    as schemata format "id0=val0;id1=val1;...". This is comment from Fenghua.
+ 5. Added more comments MSR_IA32_EVT_CFG_BASE writng.
+ 5. Few text changes in resctrl.rst 
+ 
+v5:
+  https://lore.kernel.org/lkml/166431016617.373387.1968875281081252467.stgit@bmoger-ubuntu/
+  Summary of changes.
+  1. Split the series into two. The first two patches are bug fixes. So, sent them separate.
+  2. The config files mbm_total_config and mbm_local_config are now under
+     /sys/fs/resctrl/info/L3_MON/. Removed these config files from mon groups.
+  3. Ran "checkpatch --strict --codespell" on all the patches. Looks good with few known exceptions.
+  4. Few minor text changes in resctrl.rst file. 
+
+v4:
+  https://lore.kernel.org/lkml/166257348081.1043018.11227924488792315932.stgit@bmoger-ubuntu/
+  Got numerios of comments from Reinette Chatre. Addressed most of them. 
+  Summary of changes.
+  1. Removed mon_configurable under /sys/fs/resctrl/info/L3_MON/.  
+  2. Updated mon_features texts if the BMEC is supported.
+  3. Added more explanation about the slow memory support.
+  4. Replaced smp_call_function_many with on_each_cpu_mask call.
+  5. Removed arch_has_empty_bitmaps
+  6. Few other text changes.
+  7. Removed Reviewed-by if the patch is modified.
+  8. Rebased the patches to latest tip.
+
+v3:
+  https://lore.kernel.org/lkml/166117559756.6695.16047463526634290701.stgit@bmoger-ubuntu/
+  a. Rebased the patches to latest tip. Resolved some conflicts.
+     https://git.kernel.org/pub/scm/linux/kernel/git/tip/tip.git
+  b. Taken care of feedback from Bagas Sanjaya.
+  c. Added Reviewed by from Mingo.
+  Note: I am still looking for comments from Reinette or Fenghua.
+
+v2:
+  https://lore.kernel.org/lkml/165938717220.724959.10931629283087443782.stgit@bmoger-ubuntu/
+  a. Rebased the patches to latest stable tree (v5.18.15). Resolved some conflicts.
+  b. Added the patch to fix CBM issue on AMD. This was originally discussed
+     https://lore.kernel.org/lkml/20220517001234.3137157-1-eranian@google.com/
+
+v1:
+  https://lore.kernel.org/lkml/165757543252.416408.13547339307237713464.stgit@bmoger-ubuntu/
+
+*** BLURB HERE ***
+
+Babu Moger (13):
+  x86/resctrl: Replace smp_call_function_many() with on_each_cpu_mask()
+  x86/cpufeatures: Add Slow Memory Bandwidth Allocation feature flag
+  x86/resctrl: Add a new resource type RDT_RESOURCE_SMBA
+  x86/cpufeatures: Add Bandwidth Monitoring Event Configuration feature
+    flag
+  x86/resctrl: Include new features in command line options
+  x86/resctrl: Detect and configure Slow Memory Bandwidth Allocation
+  x86/resctrl: Add __init attribute to rdt_get_mon_l3_config()
+  x86/resctrl: Support monitor configuration
+  x86/resctrl: Add interface to read mbm_total_bytes_config
+  x86/resctrl: Add interface to read mbm_local_bytes_config
+  x86/resctrl: Add interface to write mbm_total_bytes_config
+  x86/resctrl: Add interface to write mbm_local_bytes_config
+  Documentation/x86: Update resctrl.rst for new features
+
+ .../admin-guide/kernel-parameters.txt         |   2 +-
+ Documentation/x86/resctrl.rst                 | 147 ++++++++-
+ arch/x86/include/asm/cpufeatures.h            |   2 +
+ arch/x86/include/asm/msr-index.h              |   2 +
+ arch/x86/kernel/cpu/cpuid-deps.c              |   2 +
+ arch/x86/kernel/cpu/resctrl/core.c            |  54 ++-
+ arch/x86/kernel/cpu/resctrl/ctrlmondata.c     |  13 +-
+ arch/x86/kernel/cpu/resctrl/internal.h        |  28 ++
+ arch/x86/kernel/cpu/resctrl/monitor.c         |  30 +-
+ arch/x86/kernel/cpu/resctrl/rdtgroup.c        | 307 ++++++++++++++++--
+ arch/x86/kernel/cpu/scattered.c               |   2 +
+ include/linux/resctrl.h                       |  11 +
+ 12 files changed, 559 insertions(+), 41 deletions(-)
+
+-- 
+2.34.1
+
