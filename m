@@ -2,102 +2,143 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 8A6B466D1CA
-	for <lists+linux-doc@lfdr.de>; Mon, 16 Jan 2023 23:31:21 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 1840866D217
+	for <lists+linux-doc@lfdr.de>; Mon, 16 Jan 2023 23:58:21 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S232782AbjAPWbT (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 16 Jan 2023 17:31:19 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:57684 "EHLO
+        id S234743AbjAPW6T (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 16 Jan 2023 17:58:19 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:41156 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S233650AbjAPWbS (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Mon, 16 Jan 2023 17:31:18 -0500
-Received: from mail-yb1-xb36.google.com (mail-yb1-xb36.google.com [IPv6:2607:f8b0:4864:20::b36])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id BACF7222E7
-        for <linux-doc@vger.kernel.org>; Mon, 16 Jan 2023 14:31:17 -0800 (PST)
-Received: by mail-yb1-xb36.google.com with SMTP id e202so8497837ybh.11
-        for <linux-doc@vger.kernel.org>; Mon, 16 Jan 2023 14:31:17 -0800 (PST)
+        with ESMTP id S234233AbjAPW6S (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Mon, 16 Jan 2023 17:58:18 -0500
+Received: from mail-qv1-xf34.google.com (mail-qv1-xf34.google.com [IPv6:2607:f8b0:4864:20::f34])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 5D44F274B7
+        for <linux-doc@vger.kernel.org>; Mon, 16 Jan 2023 14:58:17 -0800 (PST)
+Received: by mail-qv1-xf34.google.com with SMTP id q10so20466211qvt.10
+        for <linux-doc@vger.kernel.org>; Mon, 16 Jan 2023 14:58:17 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=to:subject:message-id:date:from:reply-to:mime-version:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=nl4uCsevYvl21DFFHHfHpz/TY+Y4NdyKB4ccoVr7FxM=;
-        b=chY1LYkc3H+7hwj/BzINosPDLnW4BQC51NGqOsPgzOmsrQGibOT529CWVKDRNgZt5I
-         KJ0MuF5E3JcVVQ2T7wsSl+cZPlwEC0rLS71jtCLN4GB8zD/2Ch+fJCIvtL39dxavyxIA
-         vV3b92qomL4uJ01lIhnK++fLvunoAnIwDLNjG5u3aZQ6blpD9EUx5CkvorGV5xhJmej+
-         OETGuRCgLXW5njpfaCItvXGrAB9kxp8rVll+SHUg5ZQVeNcnd2QaK8QysWQj1V1kuqO5
-         ImeLHdGsxi6a+d83eMCZul4HJ7gpirnbI4QqxLwAwkQJCsSpwM3b98wZdY2LgB1BgkU3
-         gq7Q==
+        d=pefoley.com; s=google;
+        h=cc:to:message-id:content-transfer-encoding:mime-version:subject
+         :date:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=hAVeJ3QCRJXUeljpomXwE9NpCpHhvuz/NJiGaZWhfFw=;
+        b=KJQ2yk4hC0LhFeEZ9kvAmS2enIdFwP4k1kv4Uzj5G2KHoT1BAU73mB0lXPos19uZv/
+         AMw/Wd5vPAme6ZW1IPCSFOWoQM4GWSxYKU+lBfMlexrSazehIzyewBMpGJXMwxvlUn/q
+         8MVKGxpnLUy2gVwonxxrX5VaLGgVpgr2xgVPI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=to:subject:message-id:date:from:reply-to:mime-version
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=nl4uCsevYvl21DFFHHfHpz/TY+Y4NdyKB4ccoVr7FxM=;
-        b=t4srFm506uv0YJptetVPeeLqJCiMYl6r3ie4QoNeFZcoBxFSPJhvEQz3+IAzwqI4h6
-         v9u8+yIVZVgWPYmeIkAAw4PjJW6VvGVinXP2mqtLYg+ubkN1PeQdcfrDAY8LKuU0MBMA
-         YJ/9Vwd2VNm6OVWrp67AT7N6T1Bz2nY5pi8Gv8XXV3Xpb9kKOzrRogNYY6L8JjxkikjX
-         MTQXrUEwi3DQPWkR815IF/o8+mItNCLSjKrx5nx+ujY0W+MuMmNNWlC+7mpw/1k2bZI2
-         YegFwag90LNmvpgWlAC85kLRceol+WJxXlYNxyeEVHr8Q4kS9uy0ivzwLOCkEkdtVYGm
-         /bRQ==
-X-Gm-Message-State: AFqh2kpn3ACat3vbw0ccG/vfY3a3Pc7GY9IZ3pkCAY6FqrgQo1IfYB5j
-        nMc3s1nOsqPiP2RqDk6fw7X32YaY8+gNrirTN5E=
-X-Google-Smtp-Source: AMrXdXvlLUCfc+dIq+S5LzlJkLbG4mALH7IbRNhj0nlEsjsJBFMxs8d/8MZNFKA4yVyRrZU9kxbh9sXILnOYWi68GBs=
-X-Received: by 2002:a25:3309:0:b0:748:8c22:b8ff with SMTP id
- z9-20020a253309000000b007488c22b8ffmr134104ybz.468.1673908276421; Mon, 16 Jan
- 2023 14:31:16 -0800 (PST)
+        h=cc:to:message-id:content-transfer-encoding:mime-version:subject
+         :date:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=hAVeJ3QCRJXUeljpomXwE9NpCpHhvuz/NJiGaZWhfFw=;
+        b=az0tXVf7GNrnOXJG/HA3e/tlMlHKJK8kuR7w+NBtbEVFYELjW5EHfdhzYAa7YjZBIq
+         KpT64OyaBZjcdbZEpta6HZ7DMT/347+rsvi7K0hnnTQoHSp7S8bHHK+GVUNy0Ziqv4R6
+         xwef48MhwcVM5zbqE6jRBI9QQWxpEo3ExGR7Tjg2yLhE7cFExvr3B9NLH3BmkuHWULIa
+         w1k+7QWG7oS0MITR7CqUdqS0p9BziT2SppzbfojPRBYouGkjGPCWolOubO/v17MLljO1
+         92VkHEBv1ok04IEbTKcVIPP8y0+W/QGRqfdz5eNYzzZQ/PivLs4HNw//Rm2yQlqXFrVI
+         XTBQ==
+X-Gm-Message-State: AFqh2ko7A9UC7qTvcKiCI/1Jogg7W4qezjZW0sgjYr40/vDTBuRQQx93
+        BWUNVV97zTxN3Pm4dUJYxOe+5iPb7O25abKB+Pzgzw==
+X-Google-Smtp-Source: AMrXdXtm3mFEZc+22VlVjLu5vcUPcyXQ8lMkk5Mo3FjUVi9xJJFcushAFrgq6LYg00xFQLdFORLbNA==
+X-Received: by 2002:a05:6214:449e:b0:521:2df4:f467 with SMTP id on30-20020a056214449e00b005212df4f467mr2173798qvb.38.1673909896207;
+        Mon, 16 Jan 2023 14:58:16 -0800 (PST)
+Received: from [192.168.1.3] ([2600:4040:29fb:d300:887b:7eff:fe74:68b2])
+        by smtp.gmail.com with ESMTPSA id f8-20020a05620a408800b006b5cc25535fsm19477633qko.99.2023.01.16.14.58.15
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 16 Jan 2023 14:58:15 -0800 (PST)
+From:   Peter Foley <pefoley2@pefoley.com>
+Date:   Mon, 16 Jan 2023 17:58:10 -0500
+Subject: [PATCH v2] Documentation: Avoid duplicate Kconfig inclusion
 MIME-Version: 1.0
-Received: by 2002:a05:6918:959a:b0:104:e594:6d5e with HTTP; Mon, 16 Jan 2023
- 14:31:15 -0800 (PST)
-Reply-To: stbzan@gmail.com
-From:   Sheikh Tahnoon Al Nahyan <ahmedkmohammed10@gmail.com>
-Date:   Mon, 16 Jan 2023 23:31:15 +0100
-Message-ID: <CA+KTRHRDZh5FS8X3HxF=KuvQ72EeDEP7R2BBb76c-hH6JsaONQ@mail.gmail.com>
-Subject: Hello sir
-To:     undisclosed-recipients:;
-Content-Type: text/plain; charset="UTF-8"
-X-Spam-Status: Yes, score=5.2 required=5.0 tests=BAYES_60,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_ENVFROM_END_DIGIT,
-        FREEMAIL_FROM,FREEMAIL_REPLYTO,RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,
-        SPF_PASS,UNDISC_FREEM autolearn=no autolearn_force=no version=3.4.6
-X-Spam-Report: * -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at
-        *      https://www.dnswl.org/, no trust
-        *      [2607:f8b0:4864:20:0:0:0:b36 listed in]
-        [list.dnswl.org]
-        *  1.5 BAYES_60 BODY: Bayes spam probability is 60 to 80%
-        *      [score: 0.7516]
-        *  0.2 FREEMAIL_ENVFROM_END_DIGIT Envelope-from freemail username ends
-        *       in digit
-        *      [ahmedkmohammed10[at]gmail.com]
-        *  0.0 FREEMAIL_FROM Sender email is commonly abused enduser mail
-        *      provider
-        *      [ahmedkmohammed10[at]gmail.com]
-        * -0.0 SPF_PASS SPF: sender matches SPF record
-        *  0.0 SPF_HELO_NONE SPF: HELO does not publish an SPF Record
-        *  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
-        *       valid
-        * -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
-        * -0.1 DKIM_VALID_EF Message has a valid DKIM or DK signature from
-        *      envelope-from domain
-        * -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
-        *      author's domain
-        *  2.6 UNDISC_FREEM Undisclosed recipients + freemail reply-to
-        *  1.0 FREEMAIL_REPLYTO Reply-To/From or Reply-To/body contain
-        *      different freemails
-X-Spam-Level: *****
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20230114-doc-v2-1-853a8434ac95@pefoley.com>
+X-B4-Tracking: v=1; b=H4sIAILWxWMC/1WNyw7CIBREf6W5azG8NK0r/8N0QeEiJLY00BCbh
+ n8XunN5Zk5mDkgYPSZ4dAdEzD75sFTglw60U8sbiTeVgVMuKGOSmKAJpTdjpdI9GwRUc1IJyRTV
+ ol1zZ5U2jK1YI1r/PedfY2Xn0xbifr5l1tL/4cwII2hR83s/oOTiuaINH9yvOswwllJ+Sqhm9rE
+ AAAA=
+To:     Jonathan Corbet <corbet@lwn.net>
+Cc:     Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
+        linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org,
+        Randy Dunlap <rdunlap@infradead.org>,
+        Peter Foley <pefoley2@pefoley.com>
+X-Mailer: b4 0.11.2
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1673909895; l=1830;
+ i=pefoley2@pefoley.com; s=20230111; h=from:subject:message-id;
+ bh=SbAysLBIHcEAKkk779RsONCQdynE04KhleZNtYfEcD4=;
+ b=lxXIOfwh/KHXc/bz1tm270KM2GGlxntlDtXSBAJq8DtFGt7ywdzUtCMCzTEO78nTiPlOCMlPWQ1F
+ rlfV63CxCoZHmFsqbpLuEf0emhQwKe5faIxCTSxg/sKlTwGT4NZy
+X-Developer-Key: i=pefoley2@pefoley.com; a=ed25519;
+ pk=DCQqIdN6rHnvfQH58WQiQzJFfGUo1HyWSvdYG8vnO5o=
+X-Spam-Status: No, score=-2.1 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_NONE,
+        SPF_HELO_NONE,SPF_PASS autolearn=unavailable autolearn_force=no
+        version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
+Documentation/Kconfig is already included from top-level, avoid
+including it again from lib/Kconfig.debug.
+
+Signed-off-by: Peter Foley <pefoley2@pefoley.com>
+---
+Changes in v2:
+- Add a top-level Documentation entry instead of nesting under Kernel hacking
+- Link to v1: https://lore.kernel.org/r/20230114-doc-v1-1-efec2689e423@pefoley.com
+---
+ Documentation/Kconfig | 10 ++++++++--
+ lib/Kconfig.debug     |  2 --
+ 2 files changed, 8 insertions(+), 4 deletions(-)
+
+diff --git a/Documentation/Kconfig b/Documentation/Kconfig
+index 252bfc164dbdc..3a0e7ac0c4e32 100644
+--- a/Documentation/Kconfig
++++ b/Documentation/Kconfig
+@@ -1,6 +1,9 @@
++if COMPILE_TEST
++
++menu "Documentation"
++
+ config WARN_MISSING_DOCUMENTS
+ 	bool "Warn if there's a missing documentation file"
+-	depends on COMPILE_TEST
+ 	help
+ 	  It is not uncommon that a document gets renamed.
+ 	  This option makes the Kernel to check for missing dependencies,
+@@ -11,7 +14,6 @@ config WARN_MISSING_DOCUMENTS
+ 
+ config WARN_ABI_ERRORS
+ 	bool "Warn if there are errors at ABI files"
+-	depends on COMPILE_TEST
+ 	help
+ 	  The files under Documentation/ABI should follow what's
+ 	  described at Documentation/ABI/README. Yet, as they're manually
+@@ -20,3 +22,7 @@ config WARN_ABI_ERRORS
+ 	  scripts/get_abi.pl. Add a check to verify them.
+ 
+ 	  If unsure, select 'N'.
++
++endmenu
++
++endif
+diff --git a/lib/Kconfig.debug b/lib/Kconfig.debug
+index 881c3f84e88a3..4bafc5ca51f20 100644
+--- a/lib/Kconfig.debug
++++ b/lib/Kconfig.debug
+@@ -2872,6 +2872,4 @@ config RUST_BUILD_ASSERT_ALLOW
+ 
+ endmenu # "Rust"
+ 
+-source "Documentation/Kconfig"
+-
+ endmenu # Kernel hacking
+
+---
+base-commit: 5dc4c995db9eb45f6373a956eb1f69460e69e6d4
+change-id: 20230114-doc-005df4ac8193
+
+Best regards,
 -- 
-Hello,
-
-Hope you are well?
-
-Would you be interested in a possible business partnership?
-
-Please let me know.
-
-Regards,
-
-Sheikh.
+Peter Foley <pefoley2@pefoley.com>
