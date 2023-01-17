@@ -2,102 +2,142 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id D9A40670ACF
-	for <lists+linux-doc@lfdr.de>; Tue, 17 Jan 2023 23:02:13 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 6C4C2670C16
+	for <lists+linux-doc@lfdr.de>; Tue, 17 Jan 2023 23:49:38 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S229781AbjAQWCL (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 17 Jan 2023 17:02:11 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:42448 "EHLO
+        id S229907AbjAQWtg (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 17 Jan 2023 17:49:36 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:47342 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S229913AbjAQWAG (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 17 Jan 2023 17:00:06 -0500
-Received: from mail-oi1-f182.google.com (mail-oi1-f182.google.com [209.85.167.182])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 3ABA553FA2;
-        Tue, 17 Jan 2023 12:40:34 -0800 (PST)
-Received: by mail-oi1-f182.google.com with SMTP id p185so5875459oif.2;
-        Tue, 17 Jan 2023 12:40:34 -0800 (PST)
+        with ESMTP id S229916AbjAQWrt (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 17 Jan 2023 17:47:49 -0500
+Received: from mail-ed1-x52c.google.com (mail-ed1-x52c.google.com [IPv6:2a00:1450:4864:20::52c])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id EAE5532520;
+        Tue, 17 Jan 2023 13:47:52 -0800 (PST)
+Received: by mail-ed1-x52c.google.com with SMTP id v6so46990252edd.6;
+        Tue, 17 Jan 2023 13:47:52 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112;
+        h=content-disposition:mime-version:message-id:subject:cc:to:from:date
+         :from:to:cc:subject:date:message-id:reply-to;
+        bh=2pVx7h4GXYwRMqM2mQoWvBx9P7rA8jeO4z/gGfLdACY=;
+        b=iC3f3HnSOhWbWpnmiHeT4Y1TwZbjcLUEV/+SjFxpwG68ZSWNmjeL8fHcXpAyPK9RLW
+         HCX/cez0yt2XzCZqUTCgc2Un7XjcgAuOrzpIk5bB8QfKrT8fQJm3XHO0wzjP23U1MBQt
+         HhhY+qq+WHbXokrCaxNzMSs/BAS2vQqzgY8jHK923/9XUq+iN7CZO7uBuCa613ZpRMIY
+         Ki7ya2L8zmCgDefO/EJNafKrQkqik9+qa9XZyZpFuKRsIVqMa4KoK6Pw3YhvX8L4QRMD
+         JfMhWlsXEFxyULcfNc0EsxU1qopQxfTxCFQI/hCtDoJc0pssp3W94ih/U4jCyeW9eQ5O
+         aRqw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=date:subject:message-id:references:in-reply-to:cc:to:from
-         :mime-version:content-transfer-encoding:x-gm-message-state:from:to
-         :cc:subject:date:message-id:reply-to;
-        bh=67/7qFGKU8v+ncCe98IgRm1sBY7EEsIFhO8RWKpy1ms=;
-        b=oLwIjmnbd11o+N3onDhjd/7mDTpHICkyYMhzyFd9cv4tSiWTWEJwgk+IuMfQUrpZFH
-         R5tK3lY9XiW0Jy8D7hVkhIewhTnDlQufCOTVcnm6oq56F4KKtDduEv/pcG8x7MoDhnsQ
-         gw/yHid/NNd+bAL6K8UHJuqPhYziu6kXNj+ZuZ8/lSBVl4D4UuWx4FYHIMhw+QMwrbrE
-         gvdUg01b7ynsHVprZfhzkhaNXBAaUsvQoYtB3087c1rtj2LWg7k53pEiYxrOZZgYCkIq
-         41nFtLOK7U6uY6qxF41jV+63F8kRHJFHf2nal3lweh1kxXC/MUGYSIbsP7egq61H+Hb9
-         qGBg==
-X-Gm-Message-State: AFqh2kpwcAFaXMZw2tMreQ+37SWVx/0L7O/q/GW0YFyP0nPIFGYg5pzc
-        2pHWPNP5gD9wo37smdGfuQ==
-X-Google-Smtp-Source: AMrXdXure+5iEtDRLsla/oJrLqVm1rjH+eOc28MjSr7MGs42Rvef5APfJfN9jWPwzpWJRiZswegkGw==
-X-Received: by 2002:a05:6808:193:b0:364:3de0:f933 with SMTP id w19-20020a056808019300b003643de0f933mr11257851oic.52.1673988033446;
-        Tue, 17 Jan 2023 12:40:33 -0800 (PST)
-Received: from robh_at_kernel.org (66-90-144-107.dyn.grandenetworks.net. [66.90.144.107])
-        by smtp.gmail.com with ESMTPSA id o9-20020a0568080f8900b0035e461d9b1bsm15272517oiw.50.2023.01.17.12.40.32
+        h=content-disposition:mime-version:message-id:subject:cc:to:from:date
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=2pVx7h4GXYwRMqM2mQoWvBx9P7rA8jeO4z/gGfLdACY=;
+        b=sqj11gCRC8a18cK5eOa46IIY5cwJ1fvM/ZCe3BBmQxRHajFB/U1MmlSdtXBTczXSJQ
+         48VsjXzeqwH6E/DqIj3/YlPuY6ntcFPI5Et0yVdCZwPHgd/wom1IF62l7xy4PHZdFj4z
+         gM1pNzu980rkkqbP/YA6UlLBliuDqKqzIXJNgsBM6RcQHEs5hXESySI3oqXOaAru/rka
+         ECJDa4kR3UigD/ePya/25KAzb6PNxCKNUx2B7oV8iaKu3qUaNog31TgU/oFcvn5YIp0E
+         naloBi0n12vcLK1gNfCkhbPq8Oi3tN3BZJkN9K0iKVCuglt55qLrMBn5WJEEGdvjP75I
+         ABIg==
+X-Gm-Message-State: AFqh2kqS2M+FxDIZeYfBFYcLzLhIA72kpyExiT2H2/vthY304K45g0dq
+        CKn2tR7Y3E4upfIRUMmSiy8=
+X-Google-Smtp-Source: AMrXdXvVgBgFQ6P9kgPf5tuaC1a6S9fOIotbTpXVz/gBOxTSdClsR515jvZoaFmzs9z5XLKLEXer5g==
+X-Received: by 2002:a05:6402:449a:b0:499:376e:6b2b with SMTP id er26-20020a056402449a00b00499376e6b2bmr4744457edb.0.1673992070706;
+        Tue, 17 Jan 2023 13:47:50 -0800 (PST)
+Received: from gvm01 (net-5-89-66-224.cust.vodafonedsl.it. [5.89.66.224])
+        by smtp.gmail.com with ESMTPSA id m17-20020a50ef11000000b0049c4e3d4139sm5754220eds.89.2023.01.17.13.47.49
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 17 Jan 2023 12:40:33 -0800 (PST)
-Received: (nullmailer pid 3669412 invoked by uid 1000);
-        Tue, 17 Jan 2023 20:40:32 -0000
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 8bit
+        Tue, 17 Jan 2023 13:47:50 -0800 (PST)
+Date:   Tue, 17 Jan 2023 22:47:53 +0100
+From:   Piergiorgio Beruto <piergiorgio.beruto@gmail.com>
+To:     Andrew Lunn <andrew@lunn.ch>,
+        Heiner Kallweit <hkallweit1@gmail.com>,
+        Russell King <linux@armlinux.org.uk>,
+        "David S. Miller" <davem@davemloft.net>,
+        Eric Dumazet <edumazet@google.com>,
+        Jakub Kicinski <kuba@kernel.org>,
+        Paolo Abeni <pabeni@redhat.com>
+Cc:     linux-kernel@vger.kernel.org, netdev@vger.kernel.org,
+        Oleksij Rempel <o.rempel@pengutronix.de>,
+        mailhol.vincent@wanadoo.fr, sudheer.mogilappagari@intel.com,
+        sbhatta@marvell.com, linux-doc@vger.kernel.org,
+        wangjie125@huawei.com, corbet@lwn.net, lkp@intel.com,
+        gal@nvidia.com, gustavoars@kernel.org, bagasdotme@gmail.com
+Subject: [PATCH net-next 1/1] drivers/phylib: fix coverity issue
+Message-ID: <5061b6d09d0cd69c832c9c0f2f1a6848d3a5ab1c.1673991998.git.piergiorgio.beruto@gmail.com>
 MIME-Version: 1.0
-From:   Rob Herring <robh@kernel.org>
-To:     Mario Kicherer <dev@kicherer.org>
-Cc:     linux@roeck-us.net, robh+dt@kernel.org, corbet@lwn.net,
-        linux-hwmon@vger.kernel.org, krzysztof.kozlowski+dt@linaro.org,
-        jdelvare@suse.com, linux-doc@vger.kernel.org,
-        devicetree@vger.kernel.org
-In-Reply-To: <20230117161340.1310936-3-dev@kicherer.org>
-References: <20230117161340.1310936-1-dev@kicherer.org>
- <20230117161340.1310936-3-dev@kicherer.org>
-Message-Id: <167398779869.3664156.14251778655302872617.robh@kernel.org>
-Subject: Re: [PATCH v3 2/3] dt-bindings: hwmon: add nxp,mc34vr500
-Date:   Tue, 17 Jan 2023 14:40:32 -0600
-X-Spam-Status: No, score=-1.2 required=5.0 tests=BAYES_00,
-        FREEMAIL_ENVFROM_END_DIGIT,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
-        HEADER_FROM_DIFFERENT_DOMAINS,RCVD_IN_DNSWL_NONE,RCVD_IN_MSPIKE_H2,
-        SPF_HELO_NONE,SPF_PASS autolearn=no autolearn_force=no version=3.4.6
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+X-Spam-Status: No, score=-2.1 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_FROM,
+        RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,SPF_PASS autolearn=ham
+        autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
+Coverity reported the following:
 
-On Tue, 17 Jan 2023 17:13:39 +0100, Mario Kicherer wrote:
-> This patch adds dt-bindings for the NXP MC34VR500 PMIC.
-> 
-> Signed-off-by: Mario Kicherer <dev@kicherer.org>
-> ---
->  .../bindings/hwmon/nxp,mc34vr500.yaml         | 36 +++++++++++++++++++
->  1 file changed, 36 insertions(+)
->  create mode 100644 Documentation/devicetree/bindings/hwmon/nxp,mc34vr500.yaml
-> 
+*** CID 1530573:    (UNINIT)
+drivers/net/phy/phy-c45.c:1036 in genphy_c45_plca_set_cfg()
+1030     				return ret;
+1031
+1032     			val = ret;
+1033     		}
+1034
+1035     		if (plca_cfg->node_cnt >= 0)
+vvv     CID 1530573:    (UNINIT)
+vvv     Using uninitialized value "val".
+1036     			val = (val & ~MDIO_OATC14_PLCA_NCNT) |
+1037     			      (plca_cfg->node_cnt << 8);
+1038
+1039     		if (plca_cfg->node_id >= 0)
+1040     			val = (val & ~MDIO_OATC14_PLCA_ID) |
+1041     			      (plca_cfg->node_id);
+drivers/net/phy/phy-c45.c:1076 in genphy_c45_plca_set_cfg()
+1070     				return ret;
+1071
+1072     			val = ret;
+1073     		}
+1074
+1075     		if (plca_cfg->burst_cnt >= 0)
+vvv     CID 1530573:    (UNINIT)
+vvv     Using uninitialized value "val".
+1076     			val = (val & ~MDIO_OATC14_PLCA_MAXBC) |
+1077     			      (plca_cfg->burst_cnt << 8);
+1078
+1079     		if (plca_cfg->burst_tmr >= 0)
+1080     			val = (val & ~MDIO_OATC14_PLCA_BTMR) |
+1081     			      (plca_cfg->burst_tmr);
 
-My bot found errors running 'make DT_CHECKER_FLAGS=-m dt_binding_check'
-on your patch (DT_CHECKER_FLAGS is new in v5.13):
+This is not actually creating a real problem because the path leading to
+'val' being used uninitialized will eventually override the full content
+of that variable before actually using it for writing the register.
+However, the fix is simple and comes at basically no cost.
 
-yamllint warnings/errors:
+Signed-off-by: Piergiorgio Beruto <piergiorgio.beruto@gmail.com>
+Reported-by: coverity-bot <keescook+coverity-bot@chromium.org>
+Addresses-Coverity-ID: 1530573 ("UNINIT")
+Fixes: 493323416fed ("drivers/net/phy: add helpers to get/set PLCA configuration")
+---
+ drivers/net/phy/phy-c45.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-dtschema/dtc warnings/errors:
-./Documentation/devicetree/bindings/hwmon/nxp,mc34vr500.yaml: $id: relative path/filename doesn't match actual path or filename
-	expected: http://devicetree.org/schemas/hwmon/nxp,mc34vr500.yaml#
-
-doc reference errors (make refcheckdocs):
-
-See https://patchwork.ozlabs.org/project/devicetree-bindings/patch/20230117161340.1310936-3-dev@kicherer.org
-
-The base for the series is generally the latest rc1. A different dependency
-should be noted in *this* patch.
-
-If you already ran 'make dt_binding_check' and didn't see the above
-error(s), then make sure 'yamllint' is installed and dt-schema is up to
-date:
-
-pip3 install dtschema --upgrade
-
-Please check and re-submit after running the above command yourself. Note
-that DT_SCHEMA_FILES can be set to your schema file to speed up checking
-your schema. However, it must be unset to test all examples with your schema.
+diff --git a/drivers/net/phy/phy-c45.c b/drivers/net/phy/phy-c45.c
+index cff83220595c..9f9565a4819d 100644
+--- a/drivers/net/phy/phy-c45.c
++++ b/drivers/net/phy/phy-c45.c
+@@ -999,8 +999,8 @@ EXPORT_SYMBOL_GPL(genphy_c45_plca_get_cfg);
+ int genphy_c45_plca_set_cfg(struct phy_device *phydev,
+ 			    const struct phy_plca_cfg *plca_cfg)
+ {
++	u16 val = 0;
+ 	int ret;
+-	u16 val;
+ 
+ 	// PLCA IDVER is read-only
+ 	if (plca_cfg->version >= 0)
+-- 
+2.37.4
 
