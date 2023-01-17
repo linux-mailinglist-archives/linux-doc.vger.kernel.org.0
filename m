@@ -2,126 +2,226 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id F033066DE6E
-	for <lists+linux-doc@lfdr.de>; Tue, 17 Jan 2023 14:13:22 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id D84D566DEAC
+	for <lists+linux-doc@lfdr.de>; Tue, 17 Jan 2023 14:20:58 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S236221AbjAQNNV (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 17 Jan 2023 08:13:21 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:51140 "EHLO
+        id S237049AbjAQNU4 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 17 Jan 2023 08:20:56 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:56988 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S236792AbjAQNNU (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 17 Jan 2023 08:13:20 -0500
-Received: from mail-lj1-x233.google.com (mail-lj1-x233.google.com [IPv6:2a00:1450:4864:20::233])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id C1DCB360B7;
-        Tue, 17 Jan 2023 05:13:17 -0800 (PST)
-Received: by mail-lj1-x233.google.com with SMTP id o7so32728363ljj.8;
-        Tue, 17 Jan 2023 05:13:17 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=cc:to:subject:message-id:date:from:reply-to:in-reply-to:references
-         :mime-version:from:to:cc:subject:date:message-id:reply-to;
-        bh=TFP4zLTXX9LIBlf0bfwbfMp4tVuhd6yMJG3cjXrKiFc=;
-        b=ZCdN7I4n6+4vTAgM93Y2Yd3FaQgVriaZ4iz0DalmtQgt+eCTMtYtB2Qel9WWnTZACy
-         guSRCmeGR/9+F91C3KuIgMhLEjo+DUNELt9S/AFLwKP5M8KAuZW1DaP9nPjrNhbKDNxa
-         e8lO6djh+qP2vF/z0nKfkaSRLqtGSxCEe9bTayIwr04I00+iFO2mIk+LfYcgykhHVIw7
-         QM4oif8re69EfEikhJX9Ja7Rnlkoslcow99XOP54Pp4QnAKZUv9nnEpDf4frDxCPhpOh
-         DJ0VWe/9oRWEG4tz8HlQEle7BCH0WWDneD2BNOGbZ5NWL7h6Hx+eeXjpIKOl/bhFKwHy
-         S/yw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=cc:to:subject:message-id:date:from:reply-to:in-reply-to:references
-         :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=TFP4zLTXX9LIBlf0bfwbfMp4tVuhd6yMJG3cjXrKiFc=;
-        b=QE3Qt9nmt44J1oz9vICS3H0uVzb8Kqme8XNANwCZtUS6Ee3blkBJOqv1t9NxK6cnFJ
-         dmt3qkoo6wAxZpod/aIt3OSfDpwjN8p0DAtu3zjBr3iavi1gmUi3naJ4nB8yqS1NzqbK
-         CvCOhWCVlF5p8PXxjTrT+85iyP0xlTxMu+BR1I/wXNkxhlWuGWmeA1opHkZp1dc/zVjD
-         b5jpkxaJgi6Imlp6sKZtp5UwmjXAfXBFAZxzH66VLzIHrask+xwuGH78fmkmMo/6ecI8
-         3QKeaxhjglMydLzX+ey8JxU8XW0gRLBd2oH/xsCVbq7Af5KbieNZKWsmIczRerFzevn5
-         Q/TQ==
-X-Gm-Message-State: AFqh2kqLoYB/3AyX5fBjFLM0gELI2rAu34Qm7GlpmV+tH0sOggwaS1fw
-        9Y/CP0Z9nbciuj954PhnbWZYZp8ZleqhLQb1mHQ=
-X-Google-Smtp-Source: AMrXdXtBvxpOBT9mZ7eaHXtsp88Ie06TmXl/HRJlTTTsAkv6/ysOFF96JHh5JjkIhsk0GEoNnVc0lMIj1D0KF5P3KR0=
-X-Received: by 2002:a2e:9255:0:b0:289:81a4:3a7b with SMTP id
- v21-20020a2e9255000000b0028981a43a7bmr219286ljg.487.1673961195900; Tue, 17
- Jan 2023 05:13:15 -0800 (PST)
+        with ESMTP id S237012AbjAQNUx (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 17 Jan 2023 08:20:53 -0500
+Received: from mga17.intel.com (mga17.intel.com [192.55.52.151])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id EEC3439BA0;
+        Tue, 17 Jan 2023 05:20:52 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1673961653; x=1705497653;
+  h=date:from:to:cc:subject:message-id:reply-to:references:
+   mime-version:in-reply-to;
+  bh=ydzl4pu/BnSzLPZ1RlJR0Y9KESs9mzMw8rQlYf4Kzvo=;
+  b=Wa1lDjtgpSU4uygKkHIz1Dsj/E2ZHLW/CrnpG91ieGgCT0zvuxJQAYrm
+   vp7y+IQ70RsSj6ArReb10U+53BXVsw95KCrBJ+YsOOC2mpHB0uQRXE57S
+   2zMR+fAhwQUWwOKViE41UUL4EeKgWn4ZB214VWlwiDajl0WibgXPzK00P
+   PCdx/qV8X7kAPsNxnxx98C8F/lrLeSIpHZgHMDHKgEZXe/ghiDSXDLjos
+   s9xQMBGwkomNSbhpjWGeguhCQCsLjT7cG1KK+B+ppPntvBmbp+iAGuyXV
+   GYO1uWKPbN6iHsjNy4fj9BUXIDp/MXS9HL70CkVpMPDmhCmcqKmHubRCk
+   Q==;
+X-IronPort-AV: E=McAfee;i="6500,9779,10592"; a="305067244"
+X-IronPort-AV: E=Sophos;i="5.97,224,1669104000"; 
+   d="scan'208";a="305067244"
+Received: from orsmga008.jf.intel.com ([10.7.209.65])
+  by fmsmga107.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 17 Jan 2023 05:20:51 -0800
+X-ExtLoop1: 1
+X-IronPort-AV: E=McAfee;i="6500,9779,10592"; a="689797088"
+X-IronPort-AV: E=Sophos;i="5.97,224,1669104000"; 
+   d="scan'208";a="689797088"
+Received: from chaop.bj.intel.com (HELO localhost) ([10.240.192.105])
+  by orsmga008.jf.intel.com with ESMTP; 17 Jan 2023 05:20:39 -0800
+Date:   Tue, 17 Jan 2023 21:12:51 +0800
+From:   Chao Peng <chao.p.peng@linux.intel.com>
+To:     Sean Christopherson <seanjc@google.com>
+Cc:     kvm@vger.kernel.org, linux-kernel@vger.kernel.org,
+        linux-mm@kvack.org, linux-fsdevel@vger.kernel.org,
+        linux-arch@vger.kernel.org, linux-api@vger.kernel.org,
+        linux-doc@vger.kernel.org, qemu-devel@nongnu.org,
+        Paolo Bonzini <pbonzini@redhat.com>,
+        Jonathan Corbet <corbet@lwn.net>,
+        Vitaly Kuznetsov <vkuznets@redhat.com>,
+        Wanpeng Li <wanpengli@tencent.com>,
+        Jim Mattson <jmattson@google.com>,
+        Joerg Roedel <joro@8bytes.org>,
+        Thomas Gleixner <tglx@linutronix.de>,
+        Ingo Molnar <mingo@redhat.com>, Borislav Petkov <bp@alien8.de>,
+        Arnd Bergmann <arnd@arndb.de>,
+        Naoya Horiguchi <naoya.horiguchi@nec.com>,
+        Miaohe Lin <linmiaohe@huawei.com>, x86@kernel.org,
+        "H . Peter Anvin" <hpa@zytor.com>, Hugh Dickins <hughd@google.com>,
+        Jeff Layton <jlayton@kernel.org>,
+        "J . Bruce Fields" <bfields@fieldses.org>,
+        Andrew Morton <akpm@linux-foundation.org>,
+        Shuah Khan <shuah@kernel.org>, Mike Rapoport <rppt@kernel.org>,
+        Steven Price <steven.price@arm.com>,
+        "Maciej S . Szmigiero" <mail@maciej.szmigiero.name>,
+        Vlastimil Babka <vbabka@suse.cz>,
+        Vishal Annapurve <vannapurve@google.com>,
+        Yu Zhang <yu.c.zhang@linux.intel.com>,
+        "Kirill A . Shutemov" <kirill.shutemov@linux.intel.com>,
+        luto@kernel.org, jun.nakajima@intel.com, dave.hansen@intel.com,
+        ak@linux.intel.com, david@redhat.com, aarcange@redhat.com,
+        ddutile@redhat.com, dhildenb@redhat.com,
+        Quentin Perret <qperret@google.com>, tabba@google.com,
+        Michael Roth <michael.roth@amd.com>, mhocko@suse.com,
+        wei.w.wang@intel.com
+Subject: Re: [PATCH v10 9/9] KVM: Enable and expose KVM_MEM_PRIVATE
+Message-ID: <20230117131251.GC273037@chaop.bj.intel.com>
+Reply-To: Chao Peng <chao.p.peng@linux.intel.com>
+References: <20221202061347.1070246-1-chao.p.peng@linux.intel.com>
+ <20221202061347.1070246-10-chao.p.peng@linux.intel.com>
+ <Y8HwvTik/2avrCOU@google.com>
 MIME-Version: 1.0
-References: <20230117095946.2042832-1-jani.nikula@intel.com> <20230117095946.2042832-2-jani.nikula@intel.com>
-In-Reply-To: <20230117095946.2042832-2-jani.nikula@intel.com>
-Reply-To: sedat.dilek@gmail.com
-From:   Sedat Dilek <sedat.dilek@gmail.com>
-Date:   Tue, 17 Jan 2023 14:12:38 +0100
-Message-ID: <CA+icZUWgec3iwo2OXygo57w76AOJ+0+1VOYYKAcHTLebcDka+Q@mail.gmail.com>
-Subject: Re: [PATCH 1/6] MAINTAINERS: fix kbuild repo branch
-To:     Jani Nikula <jani.nikula@intel.com>
-Cc:     linux-kbuild@vger.kernel.org, linux-doc@vger.kernel.org,
-        Masahiro Yamada <masahiroy@kernel.org>,
-        Jonathan Corbet <corbet@lwn.net>
-Content-Type: text/plain; charset="UTF-8"
-X-Spam-Status: No, score=-2.1 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_FROM,
-        RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,SPF_PASS autolearn=ham
-        autolearn_force=no version=3.4.6
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <Y8HwvTik/2avrCOU@google.com>
+X-Spam-Status: No, score=-4.3 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_EF,RCVD_IN_DNSWL_MED,SPF_HELO_NONE,
+        SPF_NONE autolearn=ham autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Tue, Jan 17, 2023 at 11:15 AM Jani Nikula <jani.nikula@intel.com> wrote:
->
-> The MAINTAINERS repository entry specifies "kconfig" as the branch, but
-> the repository itself has "kbuild".
->
-> Cc: Masahiro Yamada <masahiroy@kernel.org>
-> Signed-off-by: Jani Nikula <jani.nikula@intel.com>
-> ---
->  MAINTAINERS | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
->
-> diff --git a/MAINTAINERS b/MAINTAINERS
-> index a36df9ed283d..98da2af0a653 100644
-> --- a/MAINTAINERS
-> +++ b/MAINTAINERS
-> @@ -11171,7 +11171,7 @@ M:      Masahiro Yamada <masahiroy@kernel.org>
->  L:     linux-kbuild@vger.kernel.org
->  S:     Maintained
->  Q:     https://patchwork.kernel.org/project/linux-kbuild/list/
-> -T:     git git://git.kernel.org/pub/scm/linux/kernel/git/masahiroy/linux-kbuild.git kconfig
-> +T:     git git://git.kernel.org/pub/scm/linux/kernel/git/masahiroy/linux-kbuild.git kbuild
+On Sat, Jan 14, 2023 at 12:01:01AM +0000, Sean Christopherson wrote:
+> On Fri, Dec 02, 2022, Chao Peng wrote:
+> > @@ -10357,6 +10364,12 @@ static int vcpu_enter_guest(struct kvm_vcpu *vcpu)
+> >  
+> >  		if (kvm_check_request(KVM_REQ_UPDATE_CPU_DIRTY_LOGGING, vcpu))
+> >  			static_call(kvm_x86_update_cpu_dirty_logging)(vcpu);
+> > +
+> > +		if (kvm_check_request(KVM_REQ_MEMORY_MCE, vcpu)) {
+> > +			vcpu->run->exit_reason = KVM_EXIT_SHUTDOWN;
+> 
+> Synthesizing triple fault shutdown is not the right approach.  Even with TDX's
+> MCE "architecture" (heavy sarcasm), it's possible that host userspace and the
+> guest have a paravirt interface for handling memory errors without killing the
+> host.
 
-We have two entries - one for "KCONFIG" and the other "KERNEL BUILD +
-files below scripts/ (unless maintained elsewhere)".
+Agree shutdown is not the correct choice. I see you made below change:
 
-Cannot say if kbuild is the place where KCONFIG changes are done.
+send_sig_mceerr(BUS_MCEERR_AR, (void __user *)hva, PAGE_SHIFT, current)
 
-But you are right there is no kconfig Git branch, anymore.
+The MCE may happen in any thread than KVM thread, sending siginal to
+'current' thread may not be the expected behavior. Also how userspace
+can tell is the MCE on the shared page or private page? Do we care?
 
-Some maintainers switch over to use https over git URL these days.
+> 
+> > +			r = 0;
+> > +			goto out;
+> > +		}
+> >  	}
+> 
+> 
+> > @@ -1982,6 +2112,10 @@ int __kvm_set_memory_region(struct kvm *kvm,
+> >  	     !access_ok((void __user *)(unsigned long)mem->userspace_addr,
+> >  			mem->memory_size))
+> >  		return -EINVAL;
+> > +	if (mem->flags & KVM_MEM_PRIVATE &&
+> > +		(mem->restricted_offset & (PAGE_SIZE - 1) ||
+> 
+> Align indentation.
+> 
+> > +		 mem->restricted_offset > U64_MAX - mem->memory_size))
+> 
+> Strongly prefer to use similar logic to existing code that detects wraps:
+> 
+> 		mem->restricted_offset + mem->memory_size < mem->restricted_offset
+> 
+> This is also where I'd like to add the "gfn is aligned to offset" check, though
+> my brain is too fried to figure that out right now.
+> 
+> > +		return -EINVAL;
+> >  	if (as_id >= KVM_ADDRESS_SPACE_NUM || id >= KVM_MEM_SLOTS_NUM)
+> >  		return -EINVAL;
+> >  	if (mem->guest_phys_addr + mem->memory_size < mem->guest_phys_addr)
+> > @@ -2020,6 +2154,9 @@ int __kvm_set_memory_region(struct kvm *kvm,
+> >  		if ((kvm->nr_memslot_pages + npages) < kvm->nr_memslot_pages)
+> >  			return -EINVAL;
+> >  	} else { /* Modify an existing slot. */
+> > +		/* Private memslots are immutable, they can only be deleted. */
+> 
+> I'm 99% certain I suggested this, but if we're going to make these memslots
+> immutable, then we should straight up disallow dirty logging, otherwise we'll
+> end up with a bizarre uAPI.
 
-What do you prefer?
+But in my mind dirty logging will be needed in the very short time, when
+live migration gets supported?
 
-$ grep 'git git' MAINTAINERS | grep 'T:' | wc -l
-668
+> 
+> > +		if (mem->flags & KVM_MEM_PRIVATE)
+> > +			return -EINVAL;
+> >  		if ((mem->userspace_addr != old->userspace_addr) ||
+> >  		    (npages != old->npages) ||
+> >  		    ((mem->flags ^ old->flags) & KVM_MEM_READONLY))
+> > @@ -2048,10 +2185,28 @@ int __kvm_set_memory_region(struct kvm *kvm,
+> >  	new->npages = npages;
+> >  	new->flags = mem->flags;
+> >  	new->userspace_addr = mem->userspace_addr;
+> > +	if (mem->flags & KVM_MEM_PRIVATE) {
+> > +		new->restricted_file = fget(mem->restricted_fd);
+> > +		if (!new->restricted_file ||
+> > +		    !file_is_restrictedmem(new->restricted_file)) {
+> > +			r = -EINVAL;
+> > +			goto out;
+> > +		}
+> > +		new->restricted_offset = mem->restricted_offset;
 
-$ grep 'git https' MAINTAINERS | grep 'T:' | wc -l
-49
+I see you changed slot->restricted_offset type from loff_t to gfn_t and
+used pgoff_t when doing the restrictedmem_bind/unbind(). Using page
+index is reasonable KVM internally and sounds simpler than loff_t. But
+we also need initialize it to page index here as well as changes in
+another two cases. This is needed when restricted_offset != 0.
 
-In my ~/.gitconfig I have:
-...
-[url "https://git.kernel.org/"]
-       insteadOf = git://git.kernel.org/
-[url "https://github.com/"]
-       insteadOf = git://github.com/
-...
+diff --git a/include/linux/kvm_host.h b/include/linux/kvm_host.h
+index 547b92215002..49e375e78f30 100644
+--- a/include/linux/kvm_host.h
++++ b/include/linux/kvm_host.h
+@@ -2364,8 +2364,7 @@ static inline int kvm_restricted_mem_get_pfn(struct kvm_memory_slot *slot,
+                                             gfn_t gfn, kvm_pfn_t *pfn,
+                                             int *order)
+ {
+-       pgoff_t index = gfn - slot->base_gfn +
+-                       (slot->restricted_offset >> PAGE_SHIFT);
++       pgoff_t index = gfn - slot->base_gfn + slot->restricted_offset;
+        struct page *page;
+        int ret;
+ 
+diff --git a/virt/kvm/kvm_main.c b/virt/kvm/kvm_main.c
+index 01db35ddd5b3..7439bdcb0d04 100644
+--- a/virt/kvm/kvm_main.c
++++ b/virt/kvm/kvm_main.c
+@@ -935,7 +935,7 @@ static bool restrictedmem_range_is_valid(struct kvm_memory_slot *slot,
+                                         pgoff_t start, pgoff_t end,
+                                         gfn_t *gfn_start, gfn_t *gfn_end)
+ {
+-       unsigned long base_pgoff = slot->restricted_offset >> PAGE_SHIFT;
++       unsigned long base_pgoff = slot->restricted_offset;
+ 
+        if (start > base_pgoff)
+                *gfn_start = slot->base_gfn + start - base_pgoff;
+@@ -2275,7 +2275,7 @@ int __kvm_set_memory_region(struct kvm *kvm,
+                        r = -EINVAL;
+                        goto out;
+                }
+-               new->restricted_offset = mem->restricted_offset;
++               new->restricted_offset = mem->restricted_offset >> PAGE_SHIFT;
+        }
+ 
+        r = kvm_set_memslot(kvm, old, new, change);
 
-BR,
--Sedat-
-
-
->  F:     Documentation/kbuild/kconfig*
->  F:     scripts/Kconfig.include
->  F:     scripts/kconfig/
-> --
-> 2.34.1
->
+Chao
+> > +	}
+> > +
+> > +	new->kvm = kvm;
+> 
+> Set this above, just so that the code flows better.
