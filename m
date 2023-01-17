@@ -2,501 +2,219 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 3BA4466DA74
-	for <lists+linux-doc@lfdr.de>; Tue, 17 Jan 2023 11:00:34 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id DC73466DB17
+	for <lists+linux-doc@lfdr.de>; Tue, 17 Jan 2023 11:30:53 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S236279AbjAQKAc (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 17 Jan 2023 05:00:32 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:49734 "EHLO
+        id S236564AbjAQKar (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 17 Jan 2023 05:30:47 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:37886 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S235791AbjAQKAb (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 17 Jan 2023 05:00:31 -0500
-Received: from mga17.intel.com (mga17.intel.com [192.55.52.151])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 81E8E2BEE8;
-        Tue, 17 Jan 2023 02:00:29 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1673949629; x=1705485629;
-  h=from:to:cc:subject:date:message-id:in-reply-to:
-   references:mime-version:content-transfer-encoding;
-  bh=9RnFb+TI1TUgriT4O7/ALroeAYeEPbJNYVdBwoGsYto=;
-  b=Plk3yKxatTjbXVkWx4G88QWkgyA+vWa7KnRRnGUIoLylrnlKNSyHUIws
-   pZUpfn3j2Y2un0zZWK/CxMzIFVFhgacjvNRWmULkMwZs5fcEZ5GpzXJWW
-   Mzbx8BwTJt3bxN8LWuZb/nix23zsbDx5IweF469YI1UA9xrcGOxrC27n3
-   I8pncT5uC5/IDft5NCbOdUV7rDHFqmxdI62zQX3YkzlnZDBGXJSq7HNLz
-   mfvSN1cbdb/4LLmfHRrsoBaIDNKhiRSfrnu0+EwP7QaKzb1V25y5Zo+2M
-   RATmIycygiC/hpB/5HNgQxA8An+M9CXSXdKsaDQ1YPVVnLK0lTfB6h5fi
-   w==;
-X-IronPort-AV: E=McAfee;i="6500,9779,10592"; a="305031053"
-X-IronPort-AV: E=Sophos;i="5.97,222,1669104000"; 
-   d="scan'208";a="305031053"
-Received: from orsmga003.jf.intel.com ([10.7.209.27])
-  by fmsmga107.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 17 Jan 2023 02:00:29 -0800
-X-IronPort-AV: E=McAfee;i="6500,9779,10592"; a="609197069"
-X-IronPort-AV: E=Sophos;i="5.97,222,1669104000"; 
-   d="scan'208";a="609197069"
-Received: from dmcmanus.ger.corp.intel.com (HELO localhost) ([10.252.27.166])
-  by orsmga003-auth.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 17 Jan 2023 02:00:27 -0800
-From:   Jani Nikula <jani.nikula@intel.com>
-To:     linux-kbuild@vger.kernel.org, linux-doc@vger.kernel.org,
-        Masahiro Yamada <masahiroy@kernel.org>,
-        Jonathan Corbet <corbet@lwn.net>
-Cc:     jani.nikula@intel.com
-Subject: [PATCH 6/6] docs/kbuild/makefiles: unify quoting
-Date:   Tue, 17 Jan 2023 11:59:46 +0200
-Message-Id: <20230117095946.2042832-7-jani.nikula@intel.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20230117095946.2042832-1-jani.nikula@intel.com>
-References: <20230117095946.2042832-1-jani.nikula@intel.com>
+        with ESMTP id S235982AbjAQKaT (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 17 Jan 2023 05:30:19 -0500
+Received: from mail-wm1-x32d.google.com (mail-wm1-x32d.google.com [IPv6:2a00:1450:4864:20::32d])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 6B66E2E0E2
+        for <linux-doc@vger.kernel.org>; Tue, 17 Jan 2023 02:29:37 -0800 (PST)
+Received: by mail-wm1-x32d.google.com with SMTP id q8so10038337wmo.5
+        for <linux-doc@vger.kernel.org>; Tue, 17 Jan 2023 02:29:37 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=bytedance-com.20210112.gappssmtp.com; s=20210112;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=JpU7YzXJFJIX52SQGOqq5aDKTgE96MJRn4JvPctjnfc=;
+        b=vENXUr0lSMEu6Nv7aaAFjhX2Sxi3ZaryF30CVzGrvRcpP5d8q8j/Pjk86ywQ329dz6
+         FQ6Boz2bwIPrl+OEgQf8xS9W/tfznM/EKUdslD+c2rihur9H/4y0l1ZSVlUbV8yYZoou
+         Q3aizapyB7iXbee5shE+V7qYdCshXdBzp6GTWFe6L5yP2kiuTZU4wPbAziOpxVXRNIzC
+         zuTU9xH3QWbO5cOpE4uCb6pncbigpW3XxoEsMwZtNFxipuDaN4/sttUO1MgfeyyAvCo5
+         Eo62jdtTIvH835xR3yqhGEVRphqG9ktKe7NZaPrAC1PusygqJn1jjtRgmKkH04N0kVvH
+         KaCg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=JpU7YzXJFJIX52SQGOqq5aDKTgE96MJRn4JvPctjnfc=;
+        b=R+9X52GQN6UgS3AVawPibraHZ5SF7N3X5lo/W/4fh8cshL+2jNbPSrMi2OwxkU2SBH
+         OJ4j6L4+zJX5cCB8EBZCr6cBcljpJvcCfNnmaXTAE9S9kP8sVafCN74xPBWX/CLP8RWP
+         LVJiLDv/fP6cTetFqc1E3Vqx8Pp1elAhwTfAc7bJotlcreFK2Yej4xiqWsDREQbS8i+E
+         kq5Sj5EEHe1VnzMKhL20rCH0lQV1WQi9JKADdrFcpYLl79g26ovp9C+PB2VqdDvNbUQ9
+         +1VXThs7yskWKDendztEkk/yYAU8o7uyWrddjo6VCDzQ3kVTp23PRpstbN5/R+wi5uvC
+         Tj3A==
+X-Gm-Message-State: AFqh2krsBNK5U5IlXmT0mwSEtjEFH7347aOWz+DybNQgs3b8CDnokdNV
+        2BTESl7JRet9gcX8MjtWWXpQOA==
+X-Google-Smtp-Source: AMrXdXuRbz/mM+OMtf0kKr+l3ZyDYz39gt1A5vPfxWCL+hWG7t+kmOSCYZtejR7auYD39M6wQmCCtQ==
+X-Received: by 2002:a05:600c:2d84:b0:3d9:e8b3:57f9 with SMTP id i4-20020a05600c2d8400b003d9e8b357f9mr2728822wmg.8.1673951375860;
+        Tue, 17 Jan 2023 02:29:35 -0800 (PST)
+Received: from usaari01.cust.communityfibre.co.uk ([2a02:6b6a:b566:0:17d8:e5ec:f870:7b46])
+        by smtp.gmail.com with ESMTPSA id j15-20020a5d452f000000b0028f9132e9ddsm28389844wra.39.2023.01.17.02.29.35
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 17 Jan 2023 02:29:35 -0800 (PST)
+From:   Usama Arif <usama.arif@bytedance.com>
+To:     linux-kernel@vger.kernel.org, linux-arm-kernel@lists.infradead.org,
+        kvmarm@lists.cs.columbia.edu, kvm@vger.kernel.org,
+        linux-doc@vger.kernel.org,
+        virtualization@lists.linux-foundation.org, linux@armlinux.org.uk,
+        yezengruan@huawei.com, catalin.marinas@arm.com, will@kernel.org,
+        maz@kernel.org, steven.price@arm.com, mark.rutland@arm.com,
+        bagasdotme@gmail.com, pbonzini@redhat.com
+Cc:     fam.zheng@bytedance.com, liangma@liangbit.com,
+        punit.agrawal@bytedance.com, Usama Arif <usama.arif@bytedance.com>
+Subject: [v3 0/6] KVM: arm64: implement vcpu_is_preempted check
+Date:   Tue, 17 Jan 2023 10:29:24 +0000
+Message-Id: <20230117102930.1053337-1-usama.arif@bytedance.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-Organization: Intel Finland Oy - BIC 0357606-4 - Westendinkatu 7, 02160 Espoo
 Content-Transfer-Encoding: 8bit
-X-Spam-Status: No, score=-4.4 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_MED,
-        SPF_HELO_NONE,SPF_NONE autolearn=ham autolearn_force=no version=3.4.6
+X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+        DKIM_VALID,RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,SPF_PASS
+        autolearn=unavailable autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Adding any rst quoting seems to be controversial, but at least try to
-unify the existing quoting a bit, without adding new ones.
+This patchset adds support for vcpu_is_preempted in arm64, which allows the guest
+to check if a vcpu was scheduled out, which is useful to know incase it was
+holding a lock. vcpu_is_preempted is well integrated in core kernel code and can
+be used to improve performance in locking (owner_on_cpu usage in mutex_spin_on_owner,
+mutex_can_spin_on_owner, rtmutex_spin_on_owner and osq_lock) and scheduling
+(available_idle_cpu which is used in several places in kernel/sched/fair.c
+for e.g. in wake_affine to determine which CPU can run soonest).
 
-Cc: Masahiro Yamada <masahiroy@kernel.org>
-Signed-off-by: Jani Nikula <jani.nikula@intel.com>
+This patchset shows significant improvement on overcommitted hosts (vCPUs > pCPUS),
+as waiting for preempted vCPUs reduces performance.
+
+If merged, vcpu_is_preempted could also be used to optimize IPI performance (along
+with directed yield to target IPI vCPU) similar to how its done in x86
+(https://lore.kernel.org/all/1560255830-8656-2-git-send-email-wanpengli@tencent.com/)
+
+All the results in the below experiments are done on an aws r6g.metal instance
+which has 64 pCPUs.
+
+The following table shows the index results of UnixBench running on a 128 vCPU VM
+with (6.0+vcpu_is_preempted) and without (6.0 base) the patchset.
+TestName                                6.0 base    6.0+vcpu_is_preempted      % improvement for vcpu_is_preempted
+Dhrystone 2 using register variables    187761      191274.7                   1.871368389
+Double-Precision Whetstone              96743.6     98414.4                    1.727039308
+Execl Throughput                        689.3       10426                      1412.548963
+File Copy 1024 bufsize 2000 maxblocks   549.5       3165                       475.978162
+File Copy 256 bufsize 500 maxblocks     400.7       2084.7                     420.2645371
+File Copy 4096 bufsize 8000 maxblocks   894.3       5003.2                     459.4543218
+Pipe Throughput                         76819.5     78601.5                    2.319723508
+Pipe-based Context Switching            3444.8      13414.5                    289.4130283
+Process Creation                        301.1       293.4                      -2.557289937
+Shell Scripts (1 concurrent)            1248.1      28300.6                    2167.494592
+Shell Scripts (8 concurrent)            781.2       26222.3                    3256.669227
+System Call Overhead                    3426        3729.4                     8.855808523
+
+System Benchmarks Index Score           3053        11534                      277.7923354
+
+This shows a 278% overall improvement using these patches.
+
+The biggest improvement is in the shell scripts benchmark, which forks a lot of processes.
+This acquires rwsem lock where a large chunk of time is spent in base kernel.
+This can be seen from one of the callstack of the perf output of the shell
+scripts benchmark on base (pseudo NMI enabled for perf numbers below):
+- 33.79% el0_svc
+   - 33.43% do_el0_svc
+      - 33.43% el0_svc_common.constprop.3
+         - 33.30% invoke_syscall
+            - 17.27% __arm64_sys_clone
+               - 17.27% __do_sys_clone
+                  - 17.26% kernel_clone
+                     - 16.73% copy_process
+                        - 11.91% dup_mm
+                           - 11.82% dup_mmap
+                              - 9.15% down_write
+                                 - 8.87% rwsem_down_write_slowpath
+                                    - 8.48% osq_lock
+
+Just under 50% of the total time in the shell script benchmarks ends up being
+spent in osq_lock in the base kernel:
+  Children      Self  Command   Shared Object        Symbol
+   17.19%    10.71%  sh      [kernel.kallsyms]  [k] osq_lock
+    6.17%     4.04%  sort    [kernel.kallsyms]  [k] osq_lock
+    4.20%     2.60%  multi.  [kernel.kallsyms]  [k] osq_lock
+    3.77%     2.47%  grep    [kernel.kallsyms]  [k] osq_lock
+    3.50%     2.24%  expr    [kernel.kallsyms]  [k] osq_lock
+    3.41%     2.23%  od      [kernel.kallsyms]  [k] osq_lock
+    3.36%     2.15%  rm      [kernel.kallsyms]  [k] osq_lock
+    3.28%     2.12%  tee     [kernel.kallsyms]  [k] osq_lock
+    3.16%     2.02%  wc      [kernel.kallsyms]  [k] osq_lock
+    0.21%     0.13%  looper  [kernel.kallsyms]  [k] osq_lock
+    0.01%     0.00%  Run     [kernel.kallsyms]  [k] osq_lock
+
+and this comes down to less than 1% total with 6.0+vcpu_is_preempted kernel:
+  Children      Self  Command   Shared Object        Symbol
+     0.26%     0.21%  sh      [kernel.kallsyms]  [k] osq_lock
+     0.10%     0.08%  multi.  [kernel.kallsyms]  [k] osq_lock
+     0.04%     0.04%  sort    [kernel.kallsyms]  [k] osq_lock
+     0.02%     0.01%  grep    [kernel.kallsyms]  [k] osq_lock
+     0.02%     0.02%  od      [kernel.kallsyms]  [k] osq_lock
+     0.01%     0.01%  tee     [kernel.kallsyms]  [k] osq_lock
+     0.01%     0.00%  expr    [kernel.kallsyms]  [k] osq_lock
+     0.01%     0.01%  looper  [kernel.kallsyms]  [k] osq_lock
+     0.00%     0.00%  wc      [kernel.kallsyms]  [k] osq_lock
+     0.00%     0.00%  rm      [kernel.kallsyms]  [k] osq_lock
+
+To make sure, there is no change in performance when vCPUs < pCPUs, UnixBench
+was run on a 32 CPU VM. The kernel with vcpu_is_preempted implemented
+performed 0.9% better overall than base kernel, and the individual benchmarks
+were within +/-2% improvement over 6.0 base.
+Hence the patches have no negative affect when vCPUs < pCPUs.
+
+The respective QEMU change to test this is at
+https://github.com/uarif1/qemu/commit/2da2c2927ae8de8f03f439804a0dad9cf68501b6.
+
+Looking forward to your response!
+Thanks,
+Usama
 ---
- Documentation/kbuild/makefiles.rst | 120 ++++++++++++++---------------
- 1 file changed, 60 insertions(+), 60 deletions(-)
+v2->v3
+- Updated the patchset from 6.0 to 6.2-rc3
+- Made pv_lock_init an early_initcall
+- Improved documentation
+- Changed pvlock_vcpu_state to aligned struct
+- Minor improvevments
 
-diff --git a/Documentation/kbuild/makefiles.rst b/Documentation/kbuild/makefiles.rst
-index 6a1ff67eed34..738d1499db50 100644
---- a/Documentation/kbuild/makefiles.rst
-+++ b/Documentation/kbuild/makefiles.rst
-@@ -42,7 +42,7 @@ Who does what
- People have four different relationships with the kernel Makefiles.
- 
- *Users* are people who build kernels.  These people type commands such as
--"make menuconfig" or "make".  They usually do not read or edit
-+``make menuconfig`` or ``make``.  They usually do not read or edit
- any kernel Makefiles (or any other source files).
- 
- *Normal developers* are people who work on features such as device
-@@ -69,8 +69,8 @@ Most Makefiles within the kernel are kbuild Makefiles that use the
- kbuild infrastructure. This chapter introduces the syntax used in the
- kbuild makefiles.
- 
--The preferred name for the kbuild files are 'Makefile' but 'Kbuild' can
--be used and if both a 'Makefile' and a 'Kbuild' file exists, then the 'Kbuild'
-+The preferred name for the kbuild files are ``Makefile`` but ``Kbuild`` can
-+be used and if both a ``Makefile`` and a ``Kbuild`` file exists, then the ``Kbuild``
- file will be used.
- 
- Section `Goal definitions`_ is a quick intro; further chapters provide
-@@ -111,7 +111,7 @@ in the $(obj-y) lists.  These lists depend on the kernel
- configuration.
- 
- Kbuild compiles all the $(obj-y) files.  It then calls
--"$(AR) rcSTP" to merge these files into one built-in.a file.
-+``$(AR) rcSTP`` to merge these files into one built-in.a file.
- This is a thin archive without a symbol table. It will be later
- linked into vmlinux by scripts/link-vmlinux.sh
- 
-@@ -148,7 +148,7 @@ Example::
-   #drivers/isdn/i4l/Makefile
-   obj-$(CONFIG_ISDN_PPP_BSDCOMP) += isdn_bsdcomp.o
- 
--Note: In this example $(CONFIG_ISDN_PPP_BSDCOMP) evaluates to 'm'
-+Note: In this example $(CONFIG_ISDN_PPP_BSDCOMP) evaluates to "m"
- 
- If a kernel module is built from several source files, you specify
- that you want to build a module in the same way as above; however,
-@@ -164,10 +164,10 @@ Example::
- 
- In this example, the module name will be isdn.o. Kbuild will
- compile the objects listed in $(isdn-y) and then run
--"$(LD) -r" on the list of these files to generate isdn.o.
-+``$(LD) -r`` on the list of these files to generate isdn.o.
- 
- Due to kbuild recognizing $(<module_name>-y) for composite objects,
--you can use the value of a `CONFIG_` symbol to optionally include an
-+you can use the value of a ``CONFIG_`` symbol to optionally include an
- object file as part of a composite object.
- 
- Example::
-@@ -181,7 +181,7 @@ Example::
- 
- In this example, xattr.o, xattr_user.o and xattr_trusted.o are only
- part of the composite object ext2.o if $(CONFIG_EXT2_FS_XATTR)
--evaluates to 'y'.
-+evaluates to "y".
- 
- Note: Of course, when you are building objects into the kernel,
- the syntax above will also work. So, if you have CONFIG_EXT2_FS=y,
-@@ -217,7 +217,7 @@ shall be listed in libs-y.
- 
- See also `List directories to visit when descending`_.
- 
--Use of lib-y is normally restricted to `lib/` and `arch/*/lib`.
-+Use of lib-y is normally restricted to ``lib/`` and ``arch/*/lib``.
- 
- Descending down in directories
- ------------------------------
-@@ -237,7 +237,7 @@ Example::
-   #fs/Makefile
-   obj-$(CONFIG_EXT2_FS) += ext2/
- 
--If CONFIG_EXT2_FS is set to either 'y' (built-in) or 'm' (modular)
-+If CONFIG_EXT2_FS is set to either "y" (built-in) or "m" (modular)
- the corresponding obj- variable will be set, and kbuild will descend
- down in the ext2 directory.
- 
-@@ -245,11 +245,11 @@ Kbuild uses this information not only to decide that it needs to visit
- the directory, but also to decide whether or not to link objects from
- the directory into vmlinux.
- 
--When Kbuild descends into the directory with 'y', all built-in objects
-+When Kbuild descends into the directory with "y", all built-in objects
- from that directory are combined into the built-in.a, which will be
- eventually linked into vmlinux.
- 
--When Kbuild descends into the directory with 'm', in contrast, nothing
-+When Kbuild descends into the directory with "m", in contrast, nothing
- from that directory will be linked into vmlinux. If the Makefile in
- that directory specifies obj-y, those objects will be left orphan.
- It is very likely a bug of the Makefile or of dependencies in Kconfig.
-@@ -269,9 +269,9 @@ Examples::
- Unlike obj-y/m, subdir-y/m does not need the trailing slash since this
- syntax is always used for directories.
- 
--It is good practice to use a `CONFIG_` variable when assigning directory
-+It is good practice to use a ``CONFIG_`` variable when assigning directory
- names. This allows kbuild to totally skip the directory if the
--corresponding `CONFIG_` option is neither 'y' nor 'm'.
-+corresponding ``CONFIG_`` option is neither "y" nor "m".
- 
- Non-builtin vmlinux targets - extra-y
- -------------------------------------
-@@ -294,7 +294,7 @@ Example::
- $(extra-y) should only contain targets needed for vmlinux.
- 
- Kbuild skips extra-y when vmlinux is apparently not a final goal.
--(e.g. 'make modules', or building external modules)
-+(e.g. ``make modules``, or building external modules)
- 
- If you intend to build targets unconditionally, always-y (explained
- in the next section) is the correct syntax to use.
-@@ -402,8 +402,8 @@ Dependency tracking
- 
- Kbuild tracks dependencies on the following:
- 
--1) All prerequisite files (both `*.c` and `*.h`)
--2) `CONFIG_` options used in all prerequisite files
-+1) All prerequisite files (both ``*.c`` and ``*.h``)
-+2) ``CONFIG_`` options used in all prerequisite files
- 3) Command-line used to compile target
- 
- Thus, if you change an option to $(CC) all affected files will
-@@ -451,10 +451,10 @@ $(obj)
- 
- $(kecho)
-   echoing information to user in a rule is often a good practice
--  but when execution "make -s" one does not expect to see any output
-+  but when execution ``make -s`` one does not expect to see any output
-   except for warnings/errors.
-   To support this kbuild defines $(kecho) which will echo out the
--  text following $(kecho) to stdout except if "make -s" is used.
-+  text following $(kecho) to stdout except if ``make -s`` is used.
- 
-   Example::
- 
-@@ -484,7 +484,7 @@ $(kecho)
- 
-     GEN     lib/crc32table.h
- 
--  will be displayed with "make KBUILD_VERBOSE=".
-+  will be displayed with ``make KBUILD_VERBOSE=``.
- 
- Command change detection
- ------------------------
-@@ -543,7 +543,7 @@ available.
- 
- as-option
-   as-option is used to check if $(CC) -- when used to compile
--  assembler (`*.S`) files -- supports the given option. An optional
-+  assembler (``*.S``) files -- supports the given option. An optional
-   second option may be specified if the first option is not supported.
- 
-   Example::
-@@ -579,7 +579,7 @@ cc-option
- 
- cc-option-yn
-   cc-option-yn is used to check if gcc supports a given option
--  and return 'y' if supported, otherwise 'n'.
-+  and return "y" if supported, otherwise "n".
- 
-   Example::
- 
-@@ -589,7 +589,7 @@ cc-option-yn
-     cflags-$(biarch) += -m32
- 
-   In the above example, $(biarch) is set to y if $(CC) supports the -m32
--  option. When $(biarch) equals 'y', the expanded variables $(aflags-y)
-+  option. When $(biarch) equals "y", the expanded variables $(aflags-y)
-   and $(cflags-y) will be assigned the values -a32 and -m32,
-   respectively.
- 
-@@ -700,11 +700,11 @@ compilation stage.
- Two steps are required in order to use a host executable.
- 
- The first step is to tell kbuild that a host program exists. This is
--done utilising the variable "hostprogs".
-+done utilising the variable ``hostprogs``.
- 
- The second step is to add an explicit dependency to the executable.
- This can be done in two ways. Either add the dependency in a rule,
--or utilise the variable "always-y".
-+or utilise the variable ``always-y``.
- Both possibilities are described in the following.
- 
- Simple Host Program
-@@ -820,7 +820,7 @@ Example::
-   HOSTLDLIBS_qconf := -L$(QTDIR)/lib
- 
- When linking qconf, it will be passed the extra option
--"-L$(QTDIR)/lib".
-+``-L$(QTDIR)/lib``.
- 
- When host programs are actually built
- -------------------------------------
-@@ -869,8 +869,8 @@ Just like host programs, Kbuild also supports building userspace executables
- for the target architecture (i.e. the same architecture as you are building
- the kernel for).
- 
--The syntax is quite similar. The difference is to use "userprogs" instead of
--"hostprogs".
-+The syntax is quite similar. The difference is to use ``userprogs`` instead of
-+``hostprogs``.
- 
- Simple Userspace Program
- ------------------------
-@@ -974,13 +974,13 @@ There are two ways to do this.
- Kbuild clean infrastructure
- ===========================
- 
--"make clean" deletes most generated files in the obj tree where the kernel
-+``make clean`` deletes most generated files in the obj tree where the kernel
- is compiled. This includes generated files such as host programs.
- Kbuild knows targets listed in $(hostprogs), $(always-y), $(always-m),
- $(always-), $(extra-y), $(extra-) and $(targets). They are all deleted
--during "make clean". Files matching the patterns "*.[oas]", "*.ko", plus
-+during ``make clean``. Files matching the patterns ``*.[oas]``, ``*.ko``, plus
- some additional files generated by kbuild are deleted all over the kernel
--source tree when "make clean" is executed.
-+source tree when ``make clean`` is executed.
- 
- Additional files or directories can be specified in kbuild makefiles by use of
- $(clean-files).
-@@ -990,14 +990,14 @@ Example::
-   #lib/Makefile
-   clean-files := crc32table.h
- 
--When executing "make clean", the file "crc32table.h" will be deleted.
-+When executing ``make clean``, the file ``crc32table.h`` will be deleted.
- Kbuild will assume files to be in the same relative directory as the
- Makefile, except if prefixed with $(objtree).
- 
- To exclude certain files or directories from make clean, use the
- $(no-clean-files) variable.
- 
--Usually kbuild descends down in subdirectories due to "obj-* := dir/",
-+Usually kbuild descends down in subdirectories due to ``obj-* := dir/``,
- but in the architecture makefiles where the kbuild infrastructure
- is not sufficient this sometimes needs to be explicit.
- 
-@@ -1007,14 +1007,14 @@ Example::
-   subdir- := compressed
- 
- The above assignment instructs kbuild to descend down in the
--directory compressed/ when "make clean" is executed.
-+directory compressed/ when ``make clean`` is executed.
- 
--Note 1: arch/$(SRCARCH)/Makefile cannot use "subdir-", because that file is
-+Note 1: arch/$(SRCARCH)/Makefile cannot use ``subdir-``, because that file is
- included in the top level makefile. Instead, arch/$(SRCARCH)/Kbuild can use
--"subdir-".
-+``subdir-``.
- 
- Note 2: All directories listed in core-y, libs-y, drivers-y and net-y will
--be visited during "make clean".
-+be visited during ``make clean``.
- 
- Architecture Makefiles
- ======================
-@@ -1148,7 +1148,7 @@ KBUILD_CFLAGS
- 
- 
-   The first example utilises the trick that a config option expands
--  to 'y' when selected.
-+  to "y" when selected.
- 
- KBUILD_RUSTFLAGS
-   $(RUSTC) compiler flags
-@@ -1227,7 +1227,7 @@ KBUILD_VMLINUX_OBJS
-   they are placed before the other objects.
- 
- KBUILD_VMLINUX_LIBS
--  All .a "lib" files for vmlinux. KBUILD_VMLINUX_OBJS and
-+  All .a ``lib`` files for vmlinux. KBUILD_VMLINUX_OBJS and
-   KBUILD_VMLINUX_LIBS together specify all the object files used to
-   link vmlinux.
- 
-@@ -1235,9 +1235,9 @@ Add prerequisites to archheaders
- --------------------------------
- 
- The archheaders: rule is used to generate header files that
--may be installed into user space by "make header_install".
-+may be installed into user space by ``make header_install``.
- 
--It is run before "make archprepare" when run on the
-+It is run before ``make archprepare`` when run on the
- architecture itself.
- 
- Add prerequisites to archprepare
-@@ -1317,11 +1317,11 @@ Example::
-   bzImage: vmlinux
-           $(Q)$(MAKE) $(build)=$(boot) $(boot)/$@
- 
--"$(Q)$(MAKE) $(build)=<dir>" is the recommended way to invoke
-+``$(Q)$(MAKE) $(build)=<dir>`` is the recommended way to invoke
- make in a subdirectory.
- 
- There are no rules for naming architecture-specific targets,
--but executing "make help" will list all relevant targets.
-+but executing ``make help`` will list all relevant targets.
- To support this, $(archhelp) must be defined.
- 
- Example::
-@@ -1336,7 +1336,7 @@ will be built. In the top level Makefile the first goal present
- is all:.
- 
- An architecture shall always, per default, build a bootable image.
--In "make help", the default goal is highlighted with a '*'.
-+In ``make help``, the default goal is highlighted with a ``*``.
- 
- Add a new prerequisite to all: to select a default goal different
- from vmlinux.
-@@ -1346,7 +1346,7 @@ Example::
-   #arch/x86/Makefile
-   all: bzImage
- 
--When "make" is executed without arguments, bzImage will be built.
-+When ``make`` is executed without arguments, bzImage will be built.
- 
- Commands useful for building a boot image
- -----------------------------------------
-@@ -1377,11 +1377,11 @@ ld
-   1) check for commandline changes
-   2) delete target during make clean
- 
--  The ": %: %.o" part of the prerequisite is a shorthand that
-+  The ``: %: %.o`` part of the prerequisite is a shorthand that
-   frees us from listing the setup.o and bootsect.o files.
- 
-   Note:
--  It is a common mistake to forget the "targets :=" assignment,
-+  It is a common mistake to forget the ``targets :=`` assignment,
-   resulting in the target file being recompiled for no
-   obvious reason.
- 
-@@ -1406,10 +1406,10 @@ dtc
-   in an init section in the image. Platform code *must* copy the
-   blob to non-init memory prior to calling unflatten_device_tree().
- 
--  To use this command, simply add `*.dtb` into obj-y or targets, or make
--  some other target depend on `%.dtb`
-+  To use this command, simply add ``*.dtb`` into obj-y or targets, or make
-+  some other target depend on ``%.dtb``
- 
--  A central rule exists to create `$(obj)/%.dtb` from `$(src)/%.dts`;
-+  A central rule exists to create ``$(obj)/%.dtb`` from ``$(src)/%.dts``;
-   architecture Makefiles do no need to explicitly write out that rule.
- 
-   Example::
-@@ -1426,7 +1426,7 @@ arch/$(SRCARCH)/kernel/vmlinux.lds is used.
- The script is a preprocessed variant of the file vmlinux.lds.S
- located in the same directory.
- 
--kbuild knows .lds files and includes a rule `*lds.S` -> `*lds`.
-+kbuild knows .lds files and includes a rule ``*lds.S`` -> ``*lds``.
- 
- Example::
- 
-@@ -1439,7 +1439,7 @@ target vmlinux.lds.
- The assignment to $(CPPFLAGS_vmlinux.lds) tells kbuild to use the
- specified options when building the target vmlinux.lds.
- 
--When building the `*.lds` target, kbuild uses the variables::
-+When building the ``*.lds`` target, kbuild uses the variables::
- 
-   KBUILD_CPPFLAGS      : Set in top-level Makefile
-   cppflags-y           : May be set in the kbuild makefile
-@@ -1447,7 +1447,7 @@ When building the `*.lds` target, kbuild uses the variables::
-                          Note that the full filename is used in this
-                          assignment.
- 
--The kbuild infrastructure for `*lds` files is used in several
-+The kbuild infrastructure for ``*lds`` files is used in several
- architecture-specific files.
- 
- Generic header files
-@@ -1488,7 +1488,7 @@ The pre-processing does:
- 
- - drop kernel-specific annotations
- - drop include of compiler.h
--- drop all sections that are kernel internal (guarded by `ifdef __KERNEL__`)
-+- drop all sections that are kernel internal (guarded by ``ifdef __KERNEL__``)
- 
- All headers under include/uapi/, include/generated/uapi/,
- arch/<arch>/include/uapi/ and arch/<arch>/include/generated/uapi/
-@@ -1598,7 +1598,7 @@ SRCARCH
-   This variable specifies the directory in arch/ to build.
- 
-   ARCH and SRCARCH may not necessarily match. A couple of arch
--  directories are biarch, that is, a single `arch/*/` directory supports
-+  directories are biarch, that is, a single ``arch/*/`` directory supports
-   both 32-bit and 64-bit.
- 
-   For example, you can pass in ARCH=i386, ARCH=x86_64, or ARCH=x86.
-@@ -1622,7 +1622,7 @@ INSTALL_MOD_PATH, MODLIB
- 
- INSTALL_MOD_STRIP
-   If this variable is specified, it will cause modules to be stripped
--  after they are installed.  If INSTALL_MOD_STRIP is '1', then the
-+  after they are installed.  If INSTALL_MOD_STRIP is "1", then the
-   default option --strip-debug will be used.  Otherwise, the
-   INSTALL_MOD_STRIP value will be used as the option(s) to the strip
-   command.
-@@ -1636,15 +1636,15 @@ GNU extensions.
- 
- GNU Make supports elementary list-processing functions.  The kernel
- Makefiles use a novel style of list building and manipulation with few
--"if" statements.
-+``if`` statements.
- 
--GNU Make has two assignment operators, ":=" and "=".  ":=" performs
-+GNU Make has two assignment operators, ``:=`` and ``=``.  ``:=`` performs
- immediate evaluation of the right-hand side and stores an actual string
--into the left-hand side.  "=" is like a formula definition; it stores the
-+into the left-hand side.  ``=`` is like a formula definition; it stores the
- right-hand side in an unevaluated form and then evaluates this form each
- time the left-hand side is used.
- 
--There are some cases where "=" is appropriate.  Usually, though, ":="
-+There are some cases where ``=`` is appropriate.  Usually, though, ``:=``
- is the right choice.
- 
- Credits
+RFC->v2
+- Fixed table and code referencing in pvlock documentation
+- Switched to using a single hypercall similar to ptp_kvm and made check
+  for has_kvm_pvlock simpler
+
+Usama Arif (6):
+  KVM: arm64: Document PV-lock interface
+  KVM: arm64: Add SMCCC paravirtualised lock calls
+  KVM: arm64: Support pvlock preempted via shared structure
+  KVM: arm64: Provide VCPU attributes for PV lock
+  KVM: arm64: Support the VCPU preemption check
+  KVM: selftests: add tests for PV time specific hypercall
+
+ Documentation/virt/kvm/arm/hypercalls.rst     |   3 +
+ Documentation/virt/kvm/arm/index.rst          |   1 +
+ Documentation/virt/kvm/arm/pvlock.rst         |  54 +++++++++
+ Documentation/virt/kvm/devices/vcpu.rst       |  25 ++++
+ arch/arm64/include/asm/kvm_host.h             |  25 ++++
+ arch/arm64/include/asm/paravirt.h             |   2 +
+ arch/arm64/include/asm/pvlock-abi.h           |  15 +++
+ arch/arm64/include/asm/spinlock.h             |  16 ++-
+ arch/arm64/include/uapi/asm/kvm.h             |   3 +
+ arch/arm64/kernel/paravirt.c                  | 113 ++++++++++++++++++
+ arch/arm64/kvm/Makefile                       |   2 +-
+ arch/arm64/kvm/arm.c                          |   8 ++
+ arch/arm64/kvm/guest.c                        |   9 ++
+ arch/arm64/kvm/hypercalls.c                   |   8 ++
+ arch/arm64/kvm/pvlock.c                       | 100 ++++++++++++++++
+ include/linux/arm-smccc.h                     |   8 ++
+ include/uapi/linux/kvm.h                      |   2 +
+ tools/arch/arm64/include/uapi/asm/kvm.h       |   1 +
+ tools/include/linux/arm-smccc.h               |   8 ++
+ .../selftests/kvm/aarch64/hypercalls.c        |   2 +
+ 20 files changed, 403 insertions(+), 2 deletions(-)
+ create mode 100644 Documentation/virt/kvm/arm/pvlock.rst
+ create mode 100644 arch/arm64/include/asm/pvlock-abi.h
+ create mode 100644 arch/arm64/kvm/pvlock.c
+
 -- 
-2.34.1
+2.25.1
 
