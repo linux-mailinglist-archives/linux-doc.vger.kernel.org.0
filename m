@@ -2,118 +2,108 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 4071E672994
-	for <lists+linux-doc@lfdr.de>; Wed, 18 Jan 2023 21:41:07 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 7BC71672B09
+	for <lists+linux-doc@lfdr.de>; Wed, 18 Jan 2023 23:05:33 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S230033AbjARUlE (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 18 Jan 2023 15:41:04 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:47552 "EHLO
+        id S229626AbjARWFB (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 18 Jan 2023 17:05:01 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:52140 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S229537AbjARUlB (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Wed, 18 Jan 2023 15:41:01 -0500
-Received: from desiato.infradead.org (desiato.infradead.org [IPv6:2001:8b0:10b:1:d65d:64ff:fe57:4e05])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id B76CD4A202;
-        Wed, 18 Jan 2023 12:40:58 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-        d=infradead.org; s=desiato.20200630; h=In-Reply-To:Content-Type:MIME-Version:
-        References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
-        Content-Transfer-Encoding:Content-ID:Content-Description;
-        bh=md4uxanlxoNCe8b7gZ4uQll2YVbv50mEZqFSNP3ZnLU=; b=ILnzoL+FrViTUNFXn7/4Gknk1C
-        Hq3IMtMMl24o/v4Rk232I9bNeFJ8Vy0p0oF387AqCU8GVxQR9wkPOUH7oZ4PAFsk1YvfXRs3NFpqF
-        cr3w+1BNURAhHpGsoZmlnj/LoKnn5jy2n7aryqPFSVRzRBbnOyvTmxBerMZqvmAcNlbu9g1WfWnHE
-        NeUiWw2n5QyW3cReWUPgFLVbLLdx8tqHbCkomzUvpJVvUmLVUf65FeaXkUzuLyFP5NuUvGUG7fCZ1
-        +P8Ic49FpE3HdcMkaBW6oEbh75zvK8Zm+SiBgomFNP8VrOderQ4P57tgzm5XjBwpLp/F1qMWS93Oh
-        u4aPJMtA==;
-Received: from j130084.upc-j.chello.nl ([24.132.130.84] helo=noisy.programming.kicks-ass.net)
-        by desiato.infradead.org with esmtpsa (Exim 4.96 #2 (Red Hat Linux))
-        id 1pIFE7-00067h-1t;
-        Wed, 18 Jan 2023 20:40:09 +0000
-Received: from hirez.programming.kicks-ass.net (hirez.programming.kicks-ass.net [192.168.1.225])
-        (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-         key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
-        (Client did not present a certificate)
-        by noisy.programming.kicks-ass.net (Postfix) with ESMTPS id 4B06A300094;
-        Wed, 18 Jan 2023 21:40:33 +0100 (CET)
-Received: by hirez.programming.kicks-ass.net (Postfix, from userid 1000)
-        id 0C87823BD9D65; Wed, 18 Jan 2023 21:40:33 +0100 (CET)
-Date:   Wed, 18 Jan 2023 21:40:32 +0100
-From:   Peter Zijlstra <peterz@infradead.org>
-To:     Gregory Price <gregory.price@memverge.com>
-Cc:     linux-kernel@vger.kernel.org, linux-fsdevel@vger.kernel.org,
-        linux-doc@vger.kernel.org, linux-kselftest@vger.kernel.org,
-        krisman@collabora.com, tglx@linutronix.de, luto@kernel.org,
-        oleg@redhat.com, ebiederm@xmission.com, akpm@linux-foundation.org,
-        adobriyan@gmail.com, corbet@lwn.net, shuah@kernel.org
-Subject: Re: [PATCH 1/3] ptrace,syscall_user_dispatch: Implement Syscall User
- Dispatch Suspension
-Message-ID: <Y8hZQI6UfDHhH3tj@hirez.programming.kicks-ass.net>
-References: <20230109153348.5625-1-gregory.price@memverge.com>
- <20230109153348.5625-2-gregory.price@memverge.com>
- <Y8gpZ+T/re7mEDjB@hirez.programming.kicks-ass.net>
- <CAD3UvdSpOMAOUm1CYJ5vOyEsiVZCQdiWaTmXjq1vWVFq1DhQ0w@mail.gmail.com>
- <Y8hNS4aCkkOLv1M/@memverge.com>
+        with ESMTP id S230003AbjARWEs (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Wed, 18 Jan 2023 17:04:48 -0500
+Received: from mail-wm1-x336.google.com (mail-wm1-x336.google.com [IPv6:2a00:1450:4864:20::336])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 709B5646A9
+        for <linux-doc@vger.kernel.org>; Wed, 18 Jan 2023 14:04:47 -0800 (PST)
+Received: by mail-wm1-x336.google.com with SMTP id d4-20020a05600c3ac400b003db1de2aef0so273004wms.2
+        for <linux-doc@vger.kernel.org>; Wed, 18 Jan 2023 14:04:47 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=google.com; s=20210112;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:from:to:cc:subject:date:message-id:reply-to;
+        bh=YwIPzOL5zDtnm8fGUbKYZT0rLB8g0X1JeGG+nlkwy2g=;
+        b=RbNnMw6tL2FY/7TumtFfRH/RzPMkiMlwqLjvQlOMqFpqcFg7xFzkZlKm7HshvD1uhc
+         GYf4nvjvZ9Gaig4ljDuhSRZhNRf2TmFX1ShcfKldoTziIlHLhMWiWHnLb2O5akyusUy+
+         uKI5CLnEXeGpmOZKzLfvHoPYqKSeKSoAZofTtN8t8sRNHNmgO77M7CNcVJ6dYGYMNt5C
+         AI3sWSnG4ExajqbWdAapWiz+b6jIKMCv7gK7OhMmQF+BdfZOuoGjDKCCo1yhy2fVxuZS
+         4VkTy0/WPobGmzU/LTAq7bSlN8q7d9wNfnNzIakOE8YFAo5RW5VBThYNBRo7MVdRtKR2
+         viFA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=YwIPzOL5zDtnm8fGUbKYZT0rLB8g0X1JeGG+nlkwy2g=;
+        b=Yz2rdD96Cv47z89SrXSWxGwOxeHcDp8CU795uhImSYAAxm81ygGOehUvDAeexn+OY1
+         Y/HsoJDbCyvBbUxvmV36I4sn3oqADMnyqJ7/OrQ2vLBdAkorX+f8Nhg3ifMDJbv6UdwC
+         aYIB+7NQYnnUHD6/Pn2PKXflNt5ZwiYdFOmC/j4toIFWcTKHdQa8JuWK8toNaLVq9M4k
+         Hz2mUfK6H60SMz9KbUTVNTMGPjBPWNxKZueq6D4xqO/KDzoGxZjpt8B4xyHys7aqh+GA
+         ww+eh1Y2jvc4/UPySUyjkYtkMPClBHREJIVRDGR/O46unPq0Z/dJzzfXC2KkHEC3eR7F
+         lM2g==
+X-Gm-Message-State: AFqh2kqmfnJdlYeHuzbqCcaiZZMxfklIWR1k++wy7blhD62gMlcFat6f
+        TWkpFbeCMrw7xGAmvLwG+JN+jjzvS3Sdv5ZHcAR9Yw==
+X-Google-Smtp-Source: AMrXdXs3YifbiXqcN/UM9iuN5qbxprLoFpLthaoKnHv5Q0dpt/Ixi+xaFLmP1X8b0KoaiNfnrWS05HuuetM0wGCrfJk=
+X-Received: by 2002:a05:600c:a686:b0:3db:104:7821 with SMTP id
+ ip6-20020a05600ca68600b003db01047821mr459041wmb.77.1674079485953; Wed, 18 Jan
+ 2023 14:04:45 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <Y8hNS4aCkkOLv1M/@memverge.com>
-X-Spam-Status: No, score=-4.4 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_MED,SPF_HELO_NONE,
-        SPF_NONE autolearn=ham autolearn_force=no version=3.4.6
+References: <20230113210703.62107-1-nhuck@google.com> <Y8HI+42TxxlJxT6D@slm.duckdns.org>
+ <CAJkfWY7vmvrU8sW3OWpSa9zygY=6e8BTTkktPe-VScdOcLL-sw@mail.gmail.com>
+ <Y8gxu7l8BUWewuMg@slm.duckdns.org> <CAB=BE-Q9jtJnqPwGzSTQ6-soZ9STvqAebeONy=Eyo08H+eg-rQ@mail.gmail.com>
+In-Reply-To: <CAB=BE-Q9jtJnqPwGzSTQ6-soZ9STvqAebeONy=Eyo08H+eg-rQ@mail.gmail.com>
+From:   Nathan Huckleberry <nhuck@google.com>
+Date:   Wed, 18 Jan 2023 14:04:34 -0800
+Message-ID: <CAJkfWY5c=kT1CpQ+R34MpX6_Dyq_32zgkYDgrWU7Kuoz7d9TYg@mail.gmail.com>
+Subject: Re: [PATCH] workqueue: Add WQ_SCHED_FIFO
+To:     Sandeep Dhavale <dhavale@google.com>
+Cc:     Tejun Heo <tj@kernel.org>, Daeho Jeong <daehojeong@google.com>,
+        Eric Biggers <ebiggers@kernel.org>,
+        Sami Tolvanen <samitolvanen@google.com>,
+        Lai Jiangshan <jiangshanlai@gmail.com>,
+        Jonathan Corbet <corbet@lwn.net>, linux-doc@vger.kernel.org,
+        linux-kernel@vger.kernel.org
+Content-Type: text/plain; charset="UTF-8"
+X-Spam-Status: No, score=-17.6 required=5.0 tests=BAYES_00,DKIMWL_WL_MED,
+        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,
+        ENV_AND_HDR_SPF_MATCH,RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,SPF_PASS,
+        USER_IN_DEF_DKIM_WL,USER_IN_DEF_SPF_WL autolearn=unavailable
+        autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Wed, Jan 18, 2023 at 02:49:31PM -0500, Gregory Price wrote:
-> On Wed, Jan 18, 2023 at 02:41:00PM -0500, Gregory Price wrote:
-> > ---------- Forwarded message ---------
-> > From: Peter Zijlstra <peterz@infradead.org>
-> > Date: Wed, Jan 18, 2023 at 12:16 PM
-> > Subject: Re: [PATCH 1/3] ptrace,syscall_user_dispatch: Implement Syscall
-> > User Dispatch Suspension
-> > To: Gregory Price <gourry.memverge@gmail.com>
-> > 
-> > 
-> > On Mon, Jan 09, 2023 at 10:33:46AM -0500, Gregory Price wrote:
-> > > @@ -36,6 +37,10 @@ bool syscall_user_dispatch(struct pt_regs *regs)
-> > >       struct syscall_user_dispatch *sd = &current->syscall_dispatch;
-> > >       char state;
-> > >
-> > > +     if (IS_ENABLED(CONFIG_CHECKPOINT_RESTORE) &&
-> > > +                     unlikely(current->ptrace &
-> > PT_SUSPEND_SYSCALL_USER_DISPATCH))
-> > > +             return false;
-> > > +
-> > >       if (likely(instruction_pointer(regs) - sd->offset < sd->len))
-> > >               return false;
-> > >
-> > 
-> > So by making syscall_user_dispatch() return false, we'll make
-> > syscall_trace_enter() continue to handle things, and supposedly you want
-> > to land in ptrace_report_syscall_entry(), right?
+On Wed, Jan 18, 2023 at 10:22 AM Sandeep Dhavale <dhavale@google.com> wrote:
+>
+> On Wed, Jan 18, 2023 at 9:52 AM Tejun Heo <tj@kernel.org> wrote:
 > >
-> > ... snip ...
-> > 
-> > Should setting this then not also depend on having
-> > SYSCALL_WORK_SYSCALL_TRACE set? Because without that, you get 'funny'
-> > things.
-> 
-> Hm, this is an interesting question.  My thoughts are that I want the
-> process to handle the syscall as-if syscall user dispatch was not
-> present at all, regardless of SYSCALL_TRACE.
-> 
-> This is because some software, like CRIU, actually injects syscalls to
-> run in the context of the software in an effort to collect resources.
+> > On Sat, Jan 14, 2023 at 01:00:00PM -0800, Nathan Huckleberry wrote:
+> > > This sounds fine to me. How do you feel about a config flag to change
+> > > the default WQ_HIGHPRI scheduler policy and a sysfs node to update the
+> > > policy per workqueue?
+> >
+> > Yeah, sounds fine to me.
+> >
+> > Thanks.
+> >
+> Hi Tejun,
+> If with the kernel config option, every WQ_HIGHPRI is elevated to
+> sched_fifo_low, wouldn't that be kind of defeating the purpose? Having
+> another class for even more urgent work is better in my opinion.
 
-Oh, right. I used to know that.
+I agree, however most of the users of WQ_HIGHPRI that are relevant to
+Android would probably have SCHED_FIFO enabled anyway.
 
-> So I actually *want* those 'funny' things to occur, because they're most
-> likely intentional.  I don't necessarily want to intercept system calls
-> that subsequently occur (although i might).
-> 
-> So if this feature required SYSCALL_TRACE, you would no longer be able
-> to inject system calls ala CRIU.
+I can write the patches such that WQ_HIGHPRI selects one of two
+internal WQ flags. If using SCHED_FIFO for all workqueues is
+problematic, Android can consider using the internal WQ flags directly
+and carry those one-line patches in the Android tree.
 
-Yeah, I suppose you're right. It makes it a very sharp instrument, but I
-suppose you get what you asked for.
+Thanks,
+Huck
+
+>
+> Thanks,
+> Sandeep.
+> > --
+> > tejun
