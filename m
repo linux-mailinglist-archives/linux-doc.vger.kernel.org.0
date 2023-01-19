@@ -2,131 +2,154 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 3E68E67499C
-	for <lists+linux-doc@lfdr.de>; Fri, 20 Jan 2023 03:54:40 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 25AFD674A95
+	for <lists+linux-doc@lfdr.de>; Fri, 20 Jan 2023 05:28:49 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S229528AbjATCyi (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 19 Jan 2023 21:54:38 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:52848 "EHLO
+        id S230035AbjATE2r (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 19 Jan 2023 23:28:47 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:40698 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S229453AbjATCyi (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Thu, 19 Jan 2023 21:54:38 -0500
-Received: from mail-pj1-x102e.google.com (mail-pj1-x102e.google.com [IPv6:2607:f8b0:4864:20::102e])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 809BC9B131
-        for <linux-doc@vger.kernel.org>; Thu, 19 Jan 2023 18:54:37 -0800 (PST)
-Received: by mail-pj1-x102e.google.com with SMTP id s13-20020a17090a6e4d00b0022900843652so7808715pjm.1
-        for <linux-doc@vger.kernel.org>; Thu, 19 Jan 2023 18:54:37 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=in-reply-to:content-disposition:mime-version:references:message-id
-         :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
-        bh=x4a9uQnCPAXTrBqi7c8vUTZzrQbZzTY4NuvqzCcjH6w=;
-        b=lgqUGY82DQ88m35LIkuurOpZEwKVwKTVcCXBvlf9EAT+DCwzHe2Slra61cRT6ItGuk
-         kJMUVq6Kde/svxxBaZ8GnUgVmEDLpRy55TWGrE0qrhJEtKEummvm0QzS9jkmyr2uBWj2
-         SDUaP5LtyVqhJC13QO2GSv2gztjPUUTa/gTkbmaGS8rumfcHL786Y9/SK8OPPTixPB29
-         6c1HZPb3RhpemeIyMDagEKjnxzdt5cnxf1w6DN7Fq6j6V8FTuYJ5dx3vjP96EaM7eG3Q
-         z7kffhz+iWJb+MCRbY0HS82jy5C11yfd3Og2Ryy3kpW9sHMKBJdaA+4V5LO3GUE9zZRw
-         xEbA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=in-reply-to:content-disposition:mime-version:references:message-id
-         :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=x4a9uQnCPAXTrBqi7c8vUTZzrQbZzTY4NuvqzCcjH6w=;
-        b=Evm5EHxLiAgoKphbu7QEJsx/ylMRPcSy7HtSorjOBT0kfhlOgyle9iLzlq9ZZB8pRx
-         yba+EI0iqQCeYvohlZjUXA1ax9P5jyeuXWqS5k1TwE961akTDFjOai5J6UkMQN0Wur3+
-         Ia2wjhaq7IXkgGWIxY2YdnxmpTkyRYTq82Ocn7dEr+5xmDvRffTPBTfu/QerRpOFDXO7
-         P6GuM3wRuBLSUjxyODRq4L5MH/0VENAg89PXElnI16xq9aIBVRLwXpI9r8HYL1i9h394
-         oz/BHaNQ/VRWpzTsGdwEnYIeuAdgN7wPBe/E4X5q60DrYqQLT42lMRo2s0SkwPjptabH
-         z9vQ==
-X-Gm-Message-State: AFqh2kr/gw6Q271clHrtyAoXtZL3yQxjWiC26W2TVzS64uml1y0qG6RR
-        Qg5A8H6BWKnM7SNUzBpMz8M=
-X-Google-Smtp-Source: AMrXdXu7tbwdSPRu7AplmjccpUpSs2KevldYB5rRdLAVAeC4tVQDf6bfqM9uZVxJWzhmBhzIikh+jw==
-X-Received: by 2002:a17:90a:e617:b0:229:5027:c2d9 with SMTP id j23-20020a17090ae61700b002295027c2d9mr14235176pjy.34.1674183276996;
-        Thu, 19 Jan 2023 18:54:36 -0800 (PST)
-Received: from debian.me (subs32-116-206-28-45.three.co.id. [116.206.28.45])
-        by smtp.gmail.com with ESMTPSA id x4-20020a634844000000b0044046aec036sm21542207pgk.81.2023.01.19.18.54.35
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 19 Jan 2023 18:54:36 -0800 (PST)
-Received: by debian.me (Postfix, from userid 1000)
-        id 261CE104293; Fri, 20 Jan 2023 09:54:30 +0700 (WIB)
-Date:   Fri, 20 Jan 2023 09:54:30 +0700
-From:   Bagas Sanjaya <bagasdotme@gmail.com>
-To:     Jonathan Corbet <corbet@lwn.net>, linux-doc@vger.kernel.org
-Cc:     Akira Yokosawa <akiyks@gmail.com>,
-        Sadiya Kazi <sadiyakazi@google.com>
-Subject: Re: [PATCH RFC] docs: Add more information to the HTML sidebar
-Message-ID: <Y8oCZnF0e/aMkmtg@debian.me>
-References: <87o7qu5al3.fsf@meer.lwn.net>
+        with ESMTP id S229661AbjATE2b (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Thu, 19 Jan 2023 23:28:31 -0500
+Received: from ams.source.kernel.org (ams.source.kernel.org [145.40.68.75])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 23BEEB2785;
+        Thu, 19 Jan 2023 20:28:28 -0800 (PST)
+Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
+        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+        (No client certificate requested)
+        by ams.source.kernel.org (Postfix) with ESMTPS id 2DD56B82700;
+        Thu, 19 Jan 2023 20:10:29 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id CC8AFC433D2;
+        Thu, 19 Jan 2023 20:10:24 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+        s=k20201202; t=1674159027;
+        bh=6pI7VGk0RST41E36DICzXK1xkaSuvgEZMnucSogAPIE=;
+        h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
+        b=qELc81M9x3AT5xwYio2YwsEIdabx7a/RsGRLnewTUBtlQBQX5DJ2Wn1d8NTWfzSy3
+         7O7+jw9rKFK+vTnD1s+M+BSL1gnqYeUP96mxdtkDD7LGqmqB/pqpb9bWf2x4WXHaVn
+         pB/d3AD40al2Fe1/4PZgMNv3PW5HgiqtJ5FL1EORBynHYwEz7iQfJ8kA6FzHihj5vT
+         uPsSy4lzM8Cf9Y02ulODxiKmkBlMzG3PJaBdy0sA7JuxRntP8u8AUdtGTvCZqaNyp1
+         GC+c/+zsH5UqLG4znkwe/YZrH7smHJlLlqgAJiSxH9Ozb4rnnMJ7EXQqJD2/fx2dYj
+         FScBezWCGZwBw==
+From:   SeongJae Park <sj@kernel.org>
+To:     Kees Cook <keescook@chromium.org>
+Cc:     Jann Horn <jannh@google.com>, Luis Chamberlain <mcgrof@kernel.org>,
+        Seth Jenkins <sethjenkins@google.com>,
+        Greg KH <gregkh@linuxfoundation.org>,
+        Linus Torvalds <torvalds@linuxfoundation.org>,
+        Andy Lutomirski <luto@kernel.org>,
+        Andrew Morton <akpm@linux-foundation.org>,
+        tangmeng <tangmeng@uniontech.com>,
+        "Guilherme G. Piccoli" <gpiccoli@igalia.com>,
+        Tiezhu Yang <yangtiezhu@loongson.cn>,
+        Sebastian Andrzej Siewior <bigeasy@linutronix.de>,
+        "Eric W. Biederman" <ebiederm@xmission.com>,
+        Arnd Bergmann <arnd@arndb.de>,
+        Dmitry Vyukov <dvyukov@google.com>,
+        Peter Zijlstra <peterz@infradead.org>,
+        Juri Lelli <juri.lelli@redhat.com>,
+        Vincent Guittot <vincent.guittot@linaro.org>,
+        Dietmar Eggemann <dietmar.eggemann@arm.com>,
+        Steven Rostedt <rostedt@goodmis.org>,
+        Ben Segall <bsegall@google.com>,
+        Daniel Bristot de Oliveira <bristot@redhat.com>,
+        Valentin Schneider <vschneid@redhat.com>,
+        Andrey Ryabinin <ryabinin.a.a@gmail.com>,
+        Alexander Potapenko <glider@google.com>,
+        Andrey Konovalov <andreyknvl@gmail.com>,
+        Vincenzo Frascino <vincenzo.frascino@arm.com>,
+        David Gow <davidgow@google.com>,
+        "Paul E. McKenney" <paulmck@kernel.org>,
+        Jonathan Corbet <corbet@lwn.net>,
+        Baolin Wang <baolin.wang@linux.alibaba.com>,
+        "Jason A. Donenfeld" <Jason@zx2c4.com>,
+        Eric Biggers <ebiggers@google.com>,
+        Huang Ying <ying.huang@intel.com>,
+        Anton Vorontsov <anton@enomsg.org>,
+        Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
+        Laurent Dufour <ldufour@linux.ibm.com>,
+        Rob Herring <robh@kernel.org>, linux-kernel@vger.kernel.org,
+        kasan-dev@googlegroups.com, linux-mm@kvack.org,
+        linux-doc@vger.kernel.org, linux-hardening@vger.kernel.org
+Subject: Re: [PATCH v3 2/6] exit: Put an upper limit on how often we can oops
+Date:   Thu, 19 Jan 2023 20:10:23 +0000
+Message-Id: <20230119201023.4003-1-sj@kernel.org>
+X-Mailer: git-send-email 2.25.1
+In-Reply-To: <20221117234328.594699-2-keescook@chromium.org>
+References: 
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
-        protocol="application/pgp-signature"; boundary="IYhNM+3bAPuGOoio"
-Content-Disposition: inline
-In-Reply-To: <87o7qu5al3.fsf@meer.lwn.net>
-X-Spam-Status: No, score=-0.6 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_FROM,
-        RCVD_IN_DNSWL_NONE,RCVD_IN_SORBS_WEB,SPF_HELO_NONE,SPF_PASS
-        autolearn=no autolearn_force=no version=3.4.6
+Content-Transfer-Encoding: 8bit
+X-Spam-Status: No, score=-7.1 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_HI,
+        SPF_HELO_NONE,SPF_PASS autolearn=ham autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
+Hello,
 
---IYhNM+3bAPuGOoio
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On Thu, 17 Nov 2022 15:43:22 -0800 Kees Cook <keescook@chromium.org> wrote:
 
-On Thu, Jan 19, 2023 at 05:11:20PM -0700, Jonathan Corbet wrote:
->  # Custom sidebar templates, maps document names to template names.
->  # Note that the RTD theme ignores this
-> -html_sidebars =3D { '**': ['searchbox.html', 'localtoc.html', 'sourcelin=
-k.html']}
-> +html_sidebars =3D { '**': ['searchbox.html', 'kernel-toc.html', 'sourcel=
-ink.html']}
-> =20
+> From: Jann Horn <jannh@google.com>
+> 
+> Many Linux systems are configured to not panic on oops; but allowing an
+> attacker to oops the system **really** often can make even bugs that look
+> completely unexploitable exploitable (like NULL dereferences and such) if
+> each crash elevates a refcount by one or a lock is taken in read mode, and
+> this causes a counter to eventually overflow.
+> 
+> The most interesting counters for this are 32 bits wide (like open-coded
+> refcounts that don't use refcount_t). (The ldsem reader count on 32-bit
+> platforms is just 16 bits, but probably nobody cares about 32-bit platforms
+> that much nowadays.)
+> 
+> So let's panic the system if the kernel is constantly oopsing.
+> 
+> The speed of oopsing 2^32 times probably depends on several factors, like
+> how long the stack trace is and which unwinder you're using; an empirically
+> important one is whether your console is showing a graphical environment or
+> a text console that oopses will be printed to.
+> In a quick single-threaded benchmark, it looks like oopsing in a vfork()
+> child with a very short stack trace only takes ~510 microseconds per run
+> when a graphical console is active; but switching to a text console that
+> oopses are printed to slows it down around 87x, to ~45 milliseconds per
+> run.
+> (Adding more threads makes this faster, but the actual oops printing
+> happens under &die_lock on x86, so you can maybe speed this up by a factor
+> of around 2 and then any further improvement gets eaten up by lock
+> contention.)
+> 
+> It looks like it would take around 8-12 days to overflow a 32-bit counter
+> with repeated oopsing on a multi-core X86 system running a graphical
+> environment; both me (in an X86 VM) and Seth (with a distro kernel on
+> normal hardware in a standard configuration) got numbers in that ballpark.
+> 
+> 12 days aren't *that* short on a desktop system, and you'd likely need much
+> longer on a typical server system (assuming that people don't run graphical
+> desktop environments on their servers), and this is a *very* noisy and
+> violent approach to exploiting the kernel; and it also seems to take orders
+> of magnitude longer on some machines, probably because stuff like EFI
+> pstore will slow it down a ton if that's active.
 
-In the sidebar, I see process/ is misorganized. That is,
-process/{development-process,submitting-patches,code-of-conduct}.html
-are at top-level entry, although these should have been children of
-process/.
+I found a blog article[1] recommending LTS kernels to backport this as below.
 
-> +
-> +/*
-> + * Tweaks for our local TOC
-> + */
-> +div.kerneltoc li.toctree-l1 { font-size: smaller;
-> +		text-indent: -1em;
-> +		margin-left: 1em; }
-> +div.kerneltoc li.current {font-weight: bold; }
-> +div.kerneltoc li.toctree-l2 { font-size: smaller;
-> +		text-indent: -1em;
-> +		margin-left: 2em;
-> +		list-style-type: none;
-> +	      }
-> +div.kerneltoc li.current ul { margin-left: 0; }
-> +div.kerneltoc { background-color: #eeeeee; }
-> +div.kerneltoc li.current ul { background-color: white; }
+    While this patch is already upstream, it is important that distributed
+    kernels also inherit this oops limit and backport it to LTS releases if we
+    want to avoid treating such null-dereference bugs as full-fledged security
+    issues in the future.
 
-I think only the visited page should be highlighted in bold, not its
-full hierarchy.
+Do you have a plan to backport this into upstream LTS kernels?
 
-Thanks.
+[1] https://googleprojectzero.blogspot.com/2023/01/exploiting-null-dereferences-in-linux.html
 
---=20
-An old man doll... just what I always wanted! - Clara
 
---IYhNM+3bAPuGOoio
-Content-Type: application/pgp-signature; name="signature.asc"
+Thanks,
+SJ
 
------BEGIN PGP SIGNATURE-----
-
-iHUEARYKAB0WIQSSYQ6Cy7oyFNCHrUH2uYlJVVFOowUCY8oCYQAKCRD2uYlJVVFO
-owvwAQDauY7YJIxMau8e2Q0gmzPsVXn9VZ8NWy3hlYEwmpPidAD/V/gjeBFMFdlX
-hyq4+NN6HrtZR3BEuQfK5aJtV4kZrQ4=
-=rDp7
------END PGP SIGNATURE-----
-
---IYhNM+3bAPuGOoio--
+> 
+> Signed-off-by: Jann Horn <jannh@google.com>
+> Link: https://lore.kernel.org/r/20221107201317.324457-1-jannh@google.com
+> Reviewed-by: Luis Chamberlain <mcgrof@kernel.org>
+> Signed-off-by: Kees Cook <keescook@chromium.org>
