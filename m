@@ -2,163 +2,167 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 848F9674A82
-	for <lists+linux-doc@lfdr.de>; Fri, 20 Jan 2023 05:16:44 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 559B3674C10
+	for <lists+linux-doc@lfdr.de>; Fri, 20 Jan 2023 06:23:38 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S229487AbjATEQm (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 19 Jan 2023 23:16:42 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:33566 "EHLO
+        id S231271AbjATFXh (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Fri, 20 Jan 2023 00:23:37 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:56856 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S229450AbjATEQl (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Thu, 19 Jan 2023 23:16:41 -0500
-Received: from NAM12-DM6-obe.outbound.protection.outlook.com (mail-dm6nam12on2083.outbound.protection.outlook.com [40.107.243.83])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 5F01E893FA;
-        Thu, 19 Jan 2023 20:16:38 -0800 (PST)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=FzOKWwOEQAXKWswgzfzWlUsJio1tKQvlCgzTYFVRynoBJez/akBbR9bnAfw45k5D81H9P910hf7FThD+SeHX5zCThlaRnq45jU0zYIXnCuxZTaJySGGq16ETEGB88ly/SIKNbnJ1S87/Fv2i+z4oGjRsVV/8Rh9L9TK8WKM7VVHU0hwRegiYXBcrgnvS/pcJPo2poUuLaKvGhtEuDlczusoMyQX/vcckzz6cBSk+7OBUD4n/CuIjzt6sXFDoAYX4EaP64Agu6+i1RUghl4qytg/U1FGZuscYD13naKTcSPZvalPRwraB9Jj0jgBfr5vEtVNTZ70IPpn/iTMhfO3GAw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=LoGX+A8j37Lhz5LRM6rbNdW0qABbpt+z/tE8Ty8GPmY=;
- b=JAGeZsz+yLjGkZ/P751vAi3DFXnoYhSyFBujzqYKDecWU7AkWI/zcHz6sVJ6Xdwm+rGFr7LBvL57FeidG3ZdmrGJmPM/uT1jx0957dasDXtzUwZtyBj/f5PhsSCIuCZ0OUPxAkC+Q6Di6QVXFxiDaYwo4m4FegenubsQ2qtzpHcSh/LgLrfDqwLDnFW5WeV+gWkKXDJZUFAZQdfwlvTj0GW/Yie4qgtSZ/SvPY1C86GTMLRAna9a/EYE89qK5V1F2cdLeDcqpS4w4ScZkYDMeyirzlQCk+67ZvzCxEBxFjInkMtBlS7nn/wodTmWRi6qtY6XrUSlXa8RVehYR8M3mw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
- header.d=amd.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=LoGX+A8j37Lhz5LRM6rbNdW0qABbpt+z/tE8Ty8GPmY=;
- b=Dt8XsfRtKx51w3xcBW1xsKOybklYaytPtskwblBJnp53ETCVGJMUphZdr1qm3Jw8iIL8gAdWxfNVo0r0fwUZ2IlR0JwPdT79GQvJx9kmTQHxjmJm5ZZWKW2wTs2Sfas7EQMZ0b5rlDUMIIdYxf206zN6wQB+ueQkNp1OWjlaAts=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=amd.com;
-Received: from BY5PR12MB3876.namprd12.prod.outlook.com (2603:10b6:a03:1a7::26)
- by SN7PR12MB8060.namprd12.prod.outlook.com (2603:10b6:806:343::15) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6002.24; Fri, 20 Jan
- 2023 04:16:36 +0000
-Received: from BY5PR12MB3876.namprd12.prod.outlook.com
- ([fe80::4ac9:c4f8:b0f:a863]) by BY5PR12MB3876.namprd12.prod.outlook.com
- ([fe80::4ac9:c4f8:b0f:a863%7]) with mapi id 15.20.5986.018; Fri, 20 Jan 2023
- 04:16:36 +0000
-Message-ID: <39061ae2-e8a2-c3c1-7909-9bcb030a16de@amd.com>
-Date:   Fri, 20 Jan 2023 09:46:22 +0530
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:91.0) Gecko/20100101
- Thunderbird/91.5.0
-Subject: Re: [PATCH v3 6/6] Documentation: amd_pstate: Update amd_pstate
- status sysfs for guided
-Content-Language: en-US
-To:     Bagas Sanjaya <bagasdotme@gmail.com>
-Cc:     linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
-        linux-pm@vger.kernel.org, santosh.shukla@amd.com,
-        Len Brown <lenb@kernel.org>,
-        Robert Moore <robert.moore@intel.com>,
-        Borislav Petkov <bp@suse.de>,
-        Rafael J Wysocki <rafael@kernel.org>,
-        Huang Rui <ray.huang@amd.com>,
-        Jonathan Corbet <corbet@lwn.net>,
-        Viresh Kumar <viresh.kumar@linaro.org>, Perry.Yuan@amd.com,
-        Mario.Limonciello@amd.com, Ananth Narayan <ananth.narayan@amd.com>,
-        gautham.shenoy@amd.com
-References: <20230119115017.10188-1-wyes.karny@amd.com>
- <20230119115017.10188-7-wyes.karny@amd.com>
- <13f7a493-d1b6-481b-63a5-64080a4aee90@gmail.com>
-From:   Wyes Karny <wyes.karny@amd.com>
-In-Reply-To: <13f7a493-d1b6-481b-63a5-64080a4aee90@gmail.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: PN3PR01CA0010.INDPRD01.PROD.OUTLOOK.COM
- (2603:1096:c01:95::11) To BY5PR12MB3876.namprd12.prod.outlook.com
- (2603:10b6:a03:1a7::26)
+        with ESMTP id S231274AbjATFXZ (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Fri, 20 Jan 2023 00:23:25 -0500
+Received: from ams.source.kernel.org (ams.source.kernel.org [IPv6:2604:1380:4601:e00::1])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 11B89C63A3;
+        Thu, 19 Jan 2023 21:13:21 -0800 (PST)
+Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
+        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+        (No client certificate requested)
+        by ams.source.kernel.org (Postfix) with ESMTPS id DC9BEB8211C;
+        Thu, 19 Jan 2023 08:06:10 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 302EFC433EF;
+        Thu, 19 Jan 2023 08:06:09 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+        s=k20201202; t=1674115569;
+        bh=mmNC5usq3dcfjKDDeNe5L068d60kufdrTpBgZh6LUo0=;
+        h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+        b=D3PiU4gMUxK9ZVPKRN+V28pH5GXHrbzcZF1RoTn+EZBouV3fVBDs4ik1dE10lkcd6
+         Y1KGqciV2Wd11SBHAJFOfQgfO2p3Ud5+aZhPFw6f9tBUiy9L0d5RWF6jjScp3tMVxD
+         rmbNk1vPYWwO1v9xbqJdXPn7gbLKjQjeOh0uJDm59nBMh+B8pYreKVFDi3rFYGhGRA
+         iVKSME3jxjNSLjuN4OCPoK+BUaXL24gg8YvgwpDnbO+6sUxaRMwuIeC6PB0tJPggjn
+         QNwmKCXL9BPAhUaxp68zyMa3yIzcJSyhP5A/FTf5wDBVrv0gzkFj2DuIXqJreVEEJh
+         UPULwonnBTt1A==
+Received: by pali.im (Postfix)
+        id 3407A6EB; Thu, 19 Jan 2023 09:06:06 +0100 (CET)
+Date:   Thu, 19 Jan 2023 09:06:06 +0100
+From:   Pali =?utf-8?B?Um9ow6Fy?= <pali@kernel.org>
+To:     Tianfei Zhang <tianfei.zhang@intel.com>
+Cc:     bhelgaas@google.com, linux-pci@vger.kernel.org,
+        linux-fpga@vger.kernel.org, lukas@wunner.de, kabel@kernel.org,
+        mani@kernel.org, mdf@kernel.org, hao.wu@intel.com,
+        yilun.xu@intel.com, trix@redhat.com, jgg@ziepe.ca,
+        ira.weiny@intel.com, andriy.shevchenko@linux.intel.com,
+        dan.j.williams@intel.com, keescook@chromium.org, rafael@kernel.org,
+        russell.h.weight@intel.com, corbet@lwn.net,
+        linux-doc@vger.kernel.org, ilpo.jarvinen@linux.intel.com,
+        lee@kernel.org, gregkh@linuxfoundation.org,
+        matthew.gerlach@linux.intel.com
+Subject: Re: [PATCH v1 00/12] add FPGA hotplug manager driver
+Message-ID: <20230119080606.tnjqwkseial7vpyq@pali>
+References: <20230119013602.607466-1-tianfei.zhang@intel.com>
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BY5PR12MB3876:EE_|SN7PR12MB8060:EE_
-X-MS-Office365-Filtering-Correlation-Id: 31603a1c-0740-4681-d9d0-08dafa9d1e81
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: CzOsjRhkKk7981uUs8GweWcyQzbptaR28d3/imHf9AUvdMQ8qga88o0goEe/I0+jBgZasjNppSHCK9rG2PSqaQZk9yUUkYiyw4xRgqaINQtxgSF7aYaIZKu+MyzUDPOJlwvYKt+sv9p+5EgWTWn0NA2eDNft2yJT2uTWUTdxk5dNwseyzyo3qGeppRk2TjRalpxZL2HM00Wpx1g8NN/AuaYeIXjZSek2WV+OVFqq0NIS23L1estfCPcaqDyVqnAkfO3A8PKKhKmvbZoyeEcZ3AAKWZOqzD0E/NpsXwh1mHgKsiWX8NxaxANFFQ8fmdW6LKKYzywzJzpC9VJmQZqZVNxSFeakIpCfOfXJ2R8WrBhC0COX51uKm0dB0lLISkBAzEVE5oEypl3Rn2JAJGjhW17jBDzIhjXxLjg1YG2zUkgPaAOM9QTmEjvPManUQ2Mej1j/G0oN2mD4vFpD4++04JGGRonr00DgI7xHTeXo4KXjTxND0m0UR7YDi0BmIM0POS4zN359gOHUiSbsVYUK4UF28P0svDWCWZeELAjAEVcYLcJ18ui03qPgUaGBIYY+/yRzjSXS2DsIFMiZyAoIwYkqNBCQB/iW/bPzLBdm3RnQ5g9BDPFopFXLeqPrGXEVkHeO8UJhvQ5JDW6MXQTAolmLk3Pf7hkHnsi0rig7KerrFDSGAgAorIjgpXDpuDTYQSRc73G4j2F2SktXBH1w8uUiT4EAZ3SaQ5Y10QIi8ZM=
-X-Forefront-Antispam-Report: CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BY5PR12MB3876.namprd12.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230022)(4636009)(39860400002)(376002)(136003)(346002)(366004)(396003)(451199015)(36756003)(31686004)(478600001)(86362001)(31696002)(66556008)(66476007)(15650500001)(66946007)(7416002)(4744005)(2906002)(44832011)(8936002)(5660300002)(38100700002)(316002)(54906003)(6666004)(53546011)(6486002)(6506007)(8676002)(186003)(4326008)(6916009)(41300700001)(26005)(83380400001)(6512007)(2616005)(43740500002)(45980500001);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?ZlNmbWxQeFpsSnBoZHBJejJHSCs3TnBrekhtTXJBOXZRM2RVOTQ5bjVZZnVN?=
- =?utf-8?B?RUNTVzhqUFprRFdZMVlIcG5OaW9yYzRVdnNpMlBpd2tvQWxpMUhGMWhxbW1v?=
- =?utf-8?B?b0l3bmhTak1hcFFZK3RXS0owQkIzUmx0SGN2bDRUS1QyWEVHakhHSUVxcnRi?=
- =?utf-8?B?VHhHTnlaWi9GTjBiSXVpUFJBTlFrMmNoNnpDK0VQdG5CWWhFUC9uUlBFY2Z1?=
- =?utf-8?B?Z092Y3VWMWM4MHZsRlZxMWRXK0w1Q2dNQ2FXN1kxNCt4dU1DSHpaUzljMFRt?=
- =?utf-8?B?L20xaXk1MmJzaTJId2lUNnhLdmRIUzZObkpwblpwRGVWK1Q1dlRDWkx6UW1p?=
- =?utf-8?B?Rys1bzl4TmJNbkhDQnIyei9NbjI3cEcxMEFRWTlIejNYK255NjZWeldSZ1ZN?=
- =?utf-8?B?WDk0VkQyWjRYd0ppcFlRS3NFSlI4VWRxZHFHaUJpM1d4WWF2cGVjQlEvT2tj?=
- =?utf-8?B?UjNPOHdhZzBIZW1XZFYzY3N6QXdZNWszM29uTnhjVHhFVUl2cDc4Tm5ueEhO?=
- =?utf-8?B?ZXR6N29VdEYxZjI2THd6VGdzZ2VxK3RqU0hiYUtyTzg2UjM2Qm95a3V4ZEN5?=
- =?utf-8?B?OE4yRThXS1FCR2sxV0RXU3ZuQVI4Mk1LQmhvMDVlQVFBc0E3ZFJxZGFLcjUy?=
- =?utf-8?B?ZGJ6NFBUb0J5dkZKSFNvbjNHWlIza3lGMlBKN0U0V3B0aGRxWmhla01MWnNh?=
- =?utf-8?B?VDFxZ0RzWlpib1VGY3ZITEl1bWdiUFJZNFBrU2N1WE1SN3pjSk9uY2p4WURn?=
- =?utf-8?B?UWpOVlhiSmc3aklqVllrVnBreFpKS3loakVLSk9sRThiTzVnSDBIbW93REp3?=
- =?utf-8?B?cFN6VFhLYWxXQlU4VnFHM3kydFJucGZTeXVBYU9YcTlOZWREWTVRV3FEcVIv?=
- =?utf-8?B?Z1p2ckpIYWZnR1I4Q2Y2a0NWdmFYdzJqWjJVUVZTRTdOY0xOZ1pHUHBIZDJu?=
- =?utf-8?B?bUFjeTdPdGhCaGxHdDZtZXM4RmVtNGJzd3dvbmdGOFNaVjBnaHpnbzFDSDBF?=
- =?utf-8?B?QUhaQU1DcDZrQTFrUFNZVWI2YnJndVpsN2d1M3RUL0hzZ1FCYVN3bjBOeVZj?=
- =?utf-8?B?VTBxZlRZb0s2VmtCKytJMlVGdE9pWlFXQUdmeldLNEJuNlVkT21MV0VoZFdq?=
- =?utf-8?B?T1BGcTN4Mmk5V1FnYVI0NVhTRnI0clFWN0lHOVBxMTNLNjRVUEIxanZDYzVa?=
- =?utf-8?B?NFBNd2xBUkc5NUp5YzRvUmVDSVFsand2d0hXTEFDdkRJVWpHZlJXT3hPRmJs?=
- =?utf-8?B?N3JsY3VZNmJNUks4VWRxQVdJUlJ1c0ZpbmFSazY1MUtkRk1NcE5xaXl0SlEx?=
- =?utf-8?B?d1pxa2ZrVnhKSkFQTlBlKzdVaVlRNXV0K2E2VGJ6Tk1PcVZ1bUZrTXVLdzF3?=
- =?utf-8?B?MHhpcGZIM0dsZmMrNmVYdS95S2JLY1l4TjlXRGtRU1ZLa2hzSVBWdWVXS1N1?=
- =?utf-8?B?SDZLbko2Ym44OWo2NXpmNTc1ak5TV0FDVUtYekZoVnV1eFRTTVpLc3hGY29I?=
- =?utf-8?B?VStNdldQRjh3R0E4YmJJcU1QUFF5bUFiVncvMFJMS245YkhDVDJjWnZuWTRO?=
- =?utf-8?B?djZHZ2FGUmp2ZkZ5aXlaYXlZTytEQ0VzQVFzOHhuMGFRQXBkWGhBVkJlMHlx?=
- =?utf-8?B?M0phTU9oZmJhQU81YytrbFE2Y0tsSllxeVJ3OS82MkZLUFVhUGpCVDl5T1pk?=
- =?utf-8?B?Ym1lQ1Y1WFNMZGNjR0dUWjd0RFlScTRLWUFoTTliQ2w2ekJFeXJlWTViREpo?=
- =?utf-8?B?SEJPclc1QUlrcG5xSzBwSkpxSEhUNDk1Sjh6TEQwQWhUbmh0L09EQUdXTUVV?=
- =?utf-8?B?VDR6NHM2YjFjd1dOb3VndXppbzRPR1lJL2ZYSXJOMDNlMjMzbkNkbjdSZUhz?=
- =?utf-8?B?OXozdmllcXVIUFhlTUMzSS9ud1FESmR2UjE0YmtFWitMb1pyN1lBMmZHQ0Zn?=
- =?utf-8?B?WjZKcTBsU3VCbGo0QkdTT292alB4M0o0bjlsUlBlVDIzL29tVXNYQU4zSWxH?=
- =?utf-8?B?b3NWbG1IM0ZZU2kzcnpKQnp5R0VBS2R1SUg1cWZUTmdFUWpvbGFYQVg0MnVV?=
- =?utf-8?B?Z0NDMDBlTnlqWDRnTWhuRU1sZWhrcDZ5MUdDaitablNzSXlpZFNNcjl4QmJR?=
- =?utf-8?Q?bThuo5S55Sl/2Y5BcDEM9eIsW?=
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 31603a1c-0740-4681-d9d0-08dafa9d1e81
-X-MS-Exchange-CrossTenant-AuthSource: BY5PR12MB3876.namprd12.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 20 Jan 2023 04:16:35.8888
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: EF8q7vd0oOHZ53kC5lQZUsQeD0Z6+Xj/CupUqseAWRcTJ9o3Fwcd2w5uINH3w1j4mvo7+PBbwWqOL/sVRZ8D7Q==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SN7PR12MB8060
-X-Spam-Status: No, score=-2.2 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,NICE_REPLY_A,RCVD_IN_DNSWL_NONE,
-        RCVD_IN_MSPIKE_H2,SPF_HELO_PASS,SPF_PASS autolearn=ham
-        autolearn_force=no version=3.4.6
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20230119013602.607466-1-tianfei.zhang@intel.com>
+User-Agent: NeoMutt/20180716
+X-Spam-Status: No, score=-7.1 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_HI,
+        SPF_HELO_NONE,SPF_PASS autolearn=ham autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
+Hello!
 
-
-On 1/19/2023 6:00 PM, Bagas Sanjaya wrote:
-> On 1/19/23 18:50, Wyes Karny wrote:
->> +- In autonomous mode, platform ignores the desired performance level request
->> +  and takes into account only the values set to the Minimum requested
->> +  performance, Maximum requested performance and Energy Performance Preference
->> +  registers.
+On Wednesday 18 January 2023 20:35:50 Tianfei Zhang wrote:
+> This patchset introduces the FPGA hotplug manager (fpgahp) driver which 
+> has been verified on the Intel N3000 card.
 > 
-> "minimum, maximum, and energy performance registers."
-
-Thanks for reviewing! Will update.
-
+> When a PCIe-based FPGA card is reprogrammed, it temporarily disappears
+> from the PCIe bus. This needs to be managed to avoid PCIe errors and to
+> reprobe the device after reprogramming.
 > 
->> +- In non-autonomous mode, platform gets desired performance level
->> +  from OS directly through Desired Performance Register.
->> +- In guided-autonomous mode, platform sets operating performance level
->> +  autonomously according to the current workload and within the limits set by
->> +  OS through min and max performance registers.
->>  
-> 
-> The rest is LGTM.
-> 
+> To change the FPGA image, the kernel burns a new image into the flash on
+> the card, and then triggers the card BMC to load the new image into FPGA.
+> A new FPGA hotplug manager driver is introduced that leverages the PCIe
+> hotplug framework to trigger and manage the update of the FPGA image,
+> including the disappearance and reappearance of the card on the PCIe bus.
+> The fpgahp driver uses APIs from the pciehp driver.
 
--- 
-Thanks & Regards,
-Wyes
+Just I'm thinking about one thing. PCIe cards can support PCIe hotplug
+mechanism (via standard PCIe capabilities). So what would happen when
+FPGA based PCIe card is also hotplug-able? Will be there two PCI hotplug
+drivers/devices (one fpgahp and one pciehp)? Or just one and which?
+
+> Two new operation
+> callbacks are defined in hotplug_slot_ops:
+> 
+>   - available_images: Optional: available FPGA images
+>   - image_load: Optional: trigger the FPGA to load a new image
+> 
+> 
+> The process of reprogramming an FPGA card begins by removing all devices
+> associated with the card that are not required for the reprogramming of
+> the card. This includes PCIe devices (PFs and VFs) associated with the
+> card as well as any other types of devices (platform, etc.) defined within
+> the FPGA. The remaining devices are referred to here as "reserved" devices.
+> After triggering the update of the FPGA card, the reserved devices are also
+> removed.
+> 
+> The complete process for reprogramming the FPGA are:
+>     1. remove all PFs and VFs except for PF0 (reserved).
+>     2. remove all non-reserved devices of PF0.
+>     3. trigger FPGA card to do the image update.
+>     4. disable the link of the hotplug bridge.
+>     5. remove all reserved devices under hotplug bridge.
+>     6. wait for image reload done via BMC, e.g. 10s.
+>     7. re-enable the link of hotplug bridge
+>     8. enumerate PCI devices below the hotplug bridge
+> 
+> usage example:
+> [root@localhost]# cd /sys/bus/pci/slot/X-X/
+> 
+> Get the available images.
+> [root@localhost 2-1]# cat available_images
+> bmc_factory bmc_user retimer_fw
+> 
+> Load the request images for FPGA Card, for example load the BMC user image:
+> [root@localhost 2-1]# echo bmc_user > image_load
+> 
+> Tianfei Zhang (12):
+>   PCI: hotplug: add new callbacks on hotplug_slot_ops
+>   PCI: hotplug: expose APIs from pciehp driver
+>   PCI: hotplug: add and expose link disable API
+>   PCI: hotplug: add FPGA PCI hotplug manager driver
+>   fpga: dfl: register dfl-pci device into fpgahph driver
+>   driver core: expose device_is_ancestor() API
+>   PCI: hotplug: add register/unregister function for BMC device
+>   fpga: m10bmc-sec: register BMC device into fpgahp driver
+>   fpga: dfl: remove non-reserved devices
+>   PCI: hotplug: implement the hotplug_slot_ops callback for fpgahp
+>   fpga: m10bmc-sec: add m10bmc_sec_retimer_load callback
+>   Documentation: fpga: add description of fpgahp driver
+> 
+>  Documentation/ABI/testing/sysfs-driver-fpgahp |  21 +
+>  Documentation/fpga/fpgahp.rst                 |  29 +
+>  Documentation/fpga/index.rst                  |   1 +
+>  MAINTAINERS                                   |  10 +
+>  drivers/base/core.c                           |   3 +-
+>  drivers/fpga/Kconfig                          |   2 +
+>  drivers/fpga/dfl-pci.c                        |  95 +++-
+>  drivers/fpga/dfl.c                            |  58 ++
+>  drivers/fpga/dfl.h                            |   4 +
+>  drivers/fpga/intel-m10-bmc-sec-update.c       | 246 ++++++++
+>  drivers/pci/hotplug/Kconfig                   |  14 +
+>  drivers/pci/hotplug/Makefile                  |   1 +
+>  drivers/pci/hotplug/fpgahp.c                  | 526 ++++++++++++++++++
+>  drivers/pci/hotplug/pci_hotplug_core.c        |  88 +++
+>  drivers/pci/hotplug/pciehp.h                  |   3 +
+>  drivers/pci/hotplug/pciehp_hpc.c              |  11 +-
+>  drivers/pci/hotplug/pciehp_pci.c              |   2 +
+>  include/linux/device.h                        |   1 +
+>  include/linux/fpga/fpgahp_manager.h           | 100 ++++
+>  include/linux/mfd/intel-m10-bmc.h             |  31 ++
+>  include/linux/pci_hotplug.h                   |   5 +
+>  21 files changed, 1243 insertions(+), 8 deletions(-)
+>  create mode 100644 Documentation/ABI/testing/sysfs-driver-fpgahp
+>  create mode 100644 Documentation/fpga/fpgahp.rst
+>  create mode 100644 drivers/pci/hotplug/fpgahp.c
+>  create mode 100644 include/linux/fpga/fpgahp_manager.h
+> 
+> 
+> base-commit: 5dc4c995db9eb45f6373a956eb1f69460e69e6d4
+> -- 
+> 2.38.1
+> 
