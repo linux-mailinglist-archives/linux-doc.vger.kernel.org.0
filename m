@@ -2,140 +2,159 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 04555672E40
-	for <lists+linux-doc@lfdr.de>; Thu, 19 Jan 2023 02:34:22 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id E3A9A672E91
+	for <lists+linux-doc@lfdr.de>; Thu, 19 Jan 2023 03:01:20 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S229616AbjASBeU (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 18 Jan 2023 20:34:20 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:47236 "EHLO
+        id S229646AbjASCBT (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 18 Jan 2023 21:01:19 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:59884 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S230083AbjASBbQ (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Wed, 18 Jan 2023 20:31:16 -0500
-Received: from mga11.intel.com (mga11.intel.com [192.55.52.93])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 457D26C56D;
-        Wed, 18 Jan 2023 17:29:14 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1674091759; x=1705627759;
-  h=from:to:cc:subject:date:message-id:in-reply-to:
-   references:mime-version:content-transfer-encoding;
-  bh=Txos19R8DyvDzhERcj8uKGox4wLE09dcHL2zQgioezU=;
-  b=mzbI3w4OcbcTydS5LbrNrf1WUybgd4bXfsssC0iDOCyf9EBupRSbEafO
-   NwkCiguYwrqhU/hyMG1JXJpvNKV4o3TQi6CIboyhb4AbZE1aPJJtHAAAW
-   RhA+IESmlmfDoZ+zjOM/OROXQWHliONfh7uO2uj6rEAAJwlNA3YwPmKmm
-   qzVjCuPZ7/Y6aIxwaGgkrq8d1XS7p7H6wI9Is6Z3VjDebKgSCtDBbUgME
-   NvKden6Ho+Kx4VFIGBqPmptk/lPAzhgNIEGBzM7HTyWW0xtIVyBFFTNvH
-   +ekwmJF9sEqGt2a0tbEQ8r0nfl9327bP5i3EzSQwMyS4xtYggVjtzeHYu
-   A==;
-X-IronPort-AV: E=McAfee;i="6500,9779,10594"; a="322847637"
-X-IronPort-AV: E=Sophos;i="5.97,226,1669104000"; 
-   d="scan'208";a="322847637"
-Received: from fmsmga002.fm.intel.com ([10.253.24.26])
-  by fmsmga102.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 18 Jan 2023 17:29:13 -0800
-X-ExtLoop1: 1
-X-IronPort-AV: E=McAfee;i="6500,9779,10594"; a="767995719"
-X-IronPort-AV: E=Sophos;i="5.97,226,1669104000"; 
-   d="scan'208";a="767995719"
-Received: from unknown (HELO fedora.sh.intel.com) ([10.238.175.104])
-  by fmsmga002.fm.intel.com with ESMTP; 18 Jan 2023 17:29:07 -0800
-From:   Tianfei Zhang <tianfei.zhang@intel.com>
-To:     bhelgaas@google.com, linux-pci@vger.kernel.org,
-        linux-fpga@vger.kernel.org, lukas@wunner.de, kabel@kernel.org,
-        mani@kernel.org, pali@kernel.org, mdf@kernel.org, hao.wu@intel.com,
-        yilun.xu@intel.com, trix@redhat.com, jgg@ziepe.ca,
-        ira.weiny@intel.com, andriy.shevchenko@linux.intel.com,
-        dan.j.williams@intel.com, keescook@chromium.org, rafael@kernel.org,
-        russell.h.weight@intel.com, corbet@lwn.net,
-        linux-doc@vger.kernel.org, ilpo.jarvinen@linux.intel.com,
-        lee@kernel.org, gregkh@linuxfoundation.org,
-        matthew.gerlach@linux.intel.com
-Cc:     Tianfei Zhang <tianfei.zhang@intel.com>
-Subject: [PATCH v1 12/12] Documentation: fpga: add description of fpgahp driver
-Date:   Wed, 18 Jan 2023 20:36:02 -0500
-Message-Id: <20230119013602.607466-13-tianfei.zhang@intel.com>
-X-Mailer: git-send-email 2.38.1
-In-Reply-To: <20230119013602.607466-1-tianfei.zhang@intel.com>
-References: <20230119013602.607466-1-tianfei.zhang@intel.com>
+        with ESMTP id S229716AbjASCBS (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Wed, 18 Jan 2023 21:01:18 -0500
+Received: from mail-wr1-x42d.google.com (mail-wr1-x42d.google.com [IPv6:2a00:1450:4864:20::42d])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id B4FA73A5B4
+        for <linux-doc@vger.kernel.org>; Wed, 18 Jan 2023 18:01:17 -0800 (PST)
+Received: by mail-wr1-x42d.google.com with SMTP id k8so427604wrc.9
+        for <linux-doc@vger.kernel.org>; Wed, 18 Jan 2023 18:01:17 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=google.com; s=20210112;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:from:to:cc:subject:date:message-id:reply-to;
+        bh=Pu1tq3n/LdB6P4+KI23iUwlSXgHNKcoPMfDjTSYiEt0=;
+        b=YligMrxe4E/orUgqR8VvI6pwrEwgaXISw8haCFjF/uJle48taVQYMygU3blqy0PhYu
+         5NjJq/dS99GAw4Bf9u4qfjx+7h2j/6YUYENx8CmpBsMsmzY0Ubp1IOb4t15z9hL/TACI
+         n6YPwlPWgVpXdvdchff0menWL2ZG7BV7Of+WuVBoVVff/SbAcYsKI1VEOfj3L6qqvqy4
+         zB4iQORX8DvkN7pL8vTJrt3m+WnTLb+RaHzaBME95RTp5exIDlRCPbjs2zZfsUDp4LpB
+         oVxDLqk5M3f3a4hQRnMASQilI3rMojvmnvvV8miygPf0EviOGFAL3xPm+ugtkEWltgdQ
+         7p7Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=Pu1tq3n/LdB6P4+KI23iUwlSXgHNKcoPMfDjTSYiEt0=;
+        b=V/69Bha4iad0O5dneNNOS0Gs/mP6Af7iTjkmuEcWUvkbfTyf3hiHATODl/swZOKxd0
+         cD4JH1+jHlt5vl++CP8LvDF0YZTan9Mbo/Ky949e6zTBoihVY05LNbMuJBL/bBFAbFZF
+         cGewcuQmZNYOZKq08X/HwXIJoO+YiAkws+dVjZ8BhO02cXmbdrKbX9Q1scWF/WMs6W50
+         W5wyyfhNcXDgXe2NOT1QIcEM0QLQ1MKn5CUFsIovbJ1SgB6lWkY9Xa1+dJ9ZVH9+LG+t
+         o3XN+jl4c3VRZJgC59+fkXg7b+G3KL7A2L2X+e+wjnbQy4r9Oak7DdAULjiBNszNI6Np
+         6aSA==
+X-Gm-Message-State: AFqh2kpi/2sb0+8LDIrv7TicZVinrjnvbFSs+VsMadszcoJe7+qvE2qJ
+        Aiu/X+RovNUnYutgGlqF7hqeTvbESTNROcTB9NV46A==
+X-Google-Smtp-Source: AMrXdXvGBk5yLN/gW9lWvReD+EGsDcrto7RDqABj5uRF8qWeaRh0yOMij495GRMURAhXONtQlFD3pCS9LGGRDh2eRfA=
+X-Received: by 2002:adf:ec88:0:b0:2bd:c1c9:131c with SMTP id
+ z8-20020adfec88000000b002bdc1c9131cmr221748wrn.402.1674093676160; Wed, 18 Jan
+ 2023 18:01:16 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Spam-Status: No, score=-4.4 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_MED,
-        SPF_HELO_NONE,SPF_NONE autolearn=ham autolearn_force=no version=3.4.6
+References: <20230113210703.62107-1-nhuck@google.com> <Y8HI+42TxxlJxT6D@slm.duckdns.org>
+In-Reply-To: <Y8HI+42TxxlJxT6D@slm.duckdns.org>
+From:   Nathan Huckleberry <nhuck@google.com>
+Date:   Wed, 18 Jan 2023 18:01:04 -0800
+Message-ID: <CAJkfWY4Az45dNkPu5JpDsiMV-gRLe2VjVuixQd9xNG7zdLb4jA@mail.gmail.com>
+Subject: Re: [PATCH] workqueue: Add WQ_SCHED_FIFO
+To:     Tejun Heo <tj@kernel.org>
+Cc:     Sandeep Dhavale <dhavale@google.com>,
+        Daeho Jeong <daehojeong@google.com>,
+        Eric Biggers <ebiggers@kernel.org>,
+        Sami Tolvanen <samitolvanen@google.com>,
+        Lai Jiangshan <jiangshanlai@gmail.com>,
+        Jonathan Corbet <corbet@lwn.net>, linux-doc@vger.kernel.org,
+        linux-kernel@vger.kernel.org
+Content-Type: text/plain; charset="UTF-8"
+X-Spam-Status: No, score=-17.6 required=5.0 tests=BAYES_00,DKIMWL_WL_MED,
+        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,
+        ENV_AND_HDR_SPF_MATCH,RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,SPF_PASS,
+        USER_IN_DEF_DKIM_WL,USER_IN_DEF_SPF_WL autolearn=ham
+        autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Add the description of fpgahp driver.
+On Fri, Jan 13, 2023 at 1:11 PM Tejun Heo <tj@kernel.org> wrote:
+>
+> On Fri, Jan 13, 2023 at 01:07:02PM -0800, Nathan Huckleberry wrote:
+> > Add a WQ flag that allows workqueues to use SCHED_FIFO with the least
+> > imporant RT priority.  This can reduce scheduler latency for IO
+> > post-processing when the CPU is under load without impacting other RT
+> > workloads.  This has been shown to improve app startup time on Android
+> > [1].
+> >
+> > Scheduler latency affects several drivers as evidenced by [1], [2], [3],
+> > [4].  Some of these drivers have moved post-processing into IRQ context.
+> > However, this can cause latency spikes for real-time threads and jitter
+> > related jank on Android.  Using a workqueue with SCHED_FIFO improves
+> > scheduler latency without causing latency problems for RT threads.
+> >
+> > [1]:
+> > https://lore.kernel.org/linux-erofs/20230106073502.4017276-1-dhavale@google.com/
+> > [2]:
+> > https://lore.kernel.org/linux-f2fs-devel/20220802192437.1895492-1-daeho43@gmail.com/
+> > [3]:
+> > https://lore.kernel.org/dm-devel/20220722093823.4158756-4-nhuck@google.com/
+> > [4]:
+> > https://lore.kernel.org/dm-crypt/20200706173731.3734-1-ignat@cloudflare.com/
+> >
+> > This change has been tested on dm-verity with the following fio config:
+> >
+> > [global]
+> > time_based
+> > runtime=120
+> >
+> > [do-verify]
+> > ioengine=sync
+> > filename=/dev/testing
+> > rw=randread
+> > direct=1
+> >
+> > [burn_8x90%_qsort]
+> > ioengine=cpuio
+> > cpuload=90
+> > numjobs=8
+> > cpumode=qsort
+> >
+> > Before:
+> > clat (usec): min=13, max=23882, avg=29.56, stdev=113.29 READ:
+> > bw=122MiB/s (128MB/s), 122MiB/s-122MiB/s (128MB/s-128MB/s), io=14.3GiB
+> > (15.3GB), run=120001-120001msec
+> >
+> > After:
+> > clat (usec): min=13, max=23137, avg=19.96, stdev=105.71 READ:
+> > bw=180MiB/s (189MB/s), 180MiB/s-180MiB/s (189MB/s-189MB/s), io=21.1GiB
+> > (22.7GB), run=120012-120012msec
+>
 
-Signed-off-by: Tianfei Zhang <tianfei.zhang@intel.com>
----
- Documentation/fpga/fpgahp.rst | 29 +++++++++++++++++++++++++++++
- Documentation/fpga/index.rst  |  1 +
- MAINTAINERS                   |  1 +
- 3 files changed, 31 insertions(+)
- create mode 100644 Documentation/fpga/fpgahp.rst
+Hi Tejun,
 
-diff --git a/Documentation/fpga/fpgahp.rst b/Documentation/fpga/fpgahp.rst
-new file mode 100644
-index 000000000000..3ec34bbffde1
---- /dev/null
-+++ b/Documentation/fpga/fpgahp.rst
-@@ -0,0 +1,29 @@
-+.. SPDX-License-Identifier: GPL-2.0
-+
-+===========================
-+FPGA Hotplug Manager Driver
-+===========================
-+
-+Authors:
-+
-+- Tianfei Zhang <tianfei.zhang@intel.com>
-+
-+There are some board managements for PCIe-based FPGA card like burning the entire
-+image, loading a new FPGA image or BMC firmware in FPGA deployment of data center
-+or cloud. For example, loading a new FPGA image, the driver needs to remove all of
-+PCI devices like PFs/VFs and as well as any other types of devices (platform, etc.)
-+defined within the FPGA. After triggering the image load of the FPGA card via BMC,
-+the driver reconfigures the PCI bus. The FPGA Hotplug Manager (fpgahp) driver manages
-+those devices and functions leveraging the PCI hotplug framework to deal with the
-+reconfiguration of the PCI bus and removal/probe of PCI devices below the FPGA card.
-+
-+This fpgahp driver adds 2 new callbacks to extend the hotplug mechanism to
-+allow selecting and loading a new FPGA image.
-+
-+ - available_images: Optional: called to return the available images of a FPGA card.
-+ - image_load: Optional: called to load a new image for a FPGA card.
-+
-+In general, the fpgahp driver provides some sysfs files::
-+
-+        /sys/bus/pci/slots/<X-X>/available_images
-+        /sys/bus/pci/slots/<X-X>/image_load
-diff --git a/Documentation/fpga/index.rst b/Documentation/fpga/index.rst
-index f80f95667ca2..8973a8a3f066 100644
---- a/Documentation/fpga/index.rst
-+++ b/Documentation/fpga/index.rst
-@@ -8,6 +8,7 @@ fpga
-     :maxdepth: 1
- 
-     dfl
-+    fpgahp
- 
- .. only::  subproject and html
- 
-diff --git a/MAINTAINERS b/MAINTAINERS
-index 85d4e3a0e986..569c7f680229 100644
---- a/MAINTAINERS
-+++ b/MAINTAINERS
-@@ -8169,6 +8169,7 @@ L:	linux-fpga@vger.kernel.org
- L:	linux-pci@vger.kernel.org
- S:	Maintained
- F:	Documentation/ABI/testing/sysfs-driver-fpgahp
-+F:	Documentation/fpga/fpgahp.rst
- F:	drivers/pci/hotplug/fpgahp.c
- F:	include/linux/fpga/fpgahp_manager.h
- 
--- 
-2.38.1
+> Given that its use case mostly intersects with WQ_HIGHPRI, would it make
+> more sense to add a switch to alter its behavior instead? I don't really
+> like the idea of pushing the decision between WQ_HIGHPRI and WQ_SCHED_FIFO
+> to each user.
 
+Do you think something similar should be done for WQ_UNBOUND? In most
+places where WQ_HIGHPRI is used, WQ_UNBOUND is also used because it
+boosts performance. However, I suspect that most of these benchmarks
+were done on x86-64. I've found that WQ_UNBOUND significantly reduces
+performance on arm64/Android.
+
+From the documentation, using WQ_UNBOUND for performance doesn't seem
+correct. It's only supposed to be used for long-running work. It might
+make more sense to get rid of WQ_UNBOUND altogether and only move work
+to unbound worker pools once it has stuck around for long enough.
+
+Android will probably need to remove WQ_UNBOUND from all of these
+performance critical users.
+
+If there are performance benefits to using unbinding workqueues from
+CPUs on x86-64, that should probably be a config flag, not controlled
+by every user.
+
+Thanks,
+Huck
+
+>
+> Thanks.
+>
+> --
+> tejun
