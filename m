@@ -2,77 +2,94 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id DB54A6744EC
-	for <lists+linux-doc@lfdr.de>; Thu, 19 Jan 2023 22:41:47 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 0D856674581
+	for <lists+linux-doc@lfdr.de>; Thu, 19 Jan 2023 23:09:59 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S230079AbjASVlp (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 19 Jan 2023 16:41:45 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:56154 "EHLO
+        id S229813AbjASWJz (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 19 Jan 2023 17:09:55 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:46512 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S231201AbjASVjs (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Thu, 19 Jan 2023 16:39:48 -0500
-Received: from ms.lwn.net (ms.lwn.net [IPv6:2600:3c01:e000:3a1::42])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id EA1594902E
-        for <linux-doc@vger.kernel.org>; Thu, 19 Jan 2023 13:29:22 -0800 (PST)
-Received: from localhost (unknown [IPv6:2601:281:8300:73::5f6])
-        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
-        (No client certificate requested)
-        by ms.lwn.net (Postfix) with ESMTPSA id 7E5B7359;
-        Thu, 19 Jan 2023 21:29:22 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 ms.lwn.net 7E5B7359
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=lwn.net; s=20201203;
-        t=1674163762; bh=6mx0er111Gwqw7gi8PlZs7IvCmhSKH+Y/hp0Hy++jls=;
-        h=From:To:Cc:Subject:In-Reply-To:References:Date:From;
-        b=DrCDR5B9m6EmmdSU0nwN88WsLrmNds7z3nUPazfLLIbFHf+8jDl3M35u9297288m6
-         nXLoVVvLd8gfYhDWPKcwLqxUPWXfLaSzuNr2SDLtNqmtaxuZVH7n4hIfIiiqmT05cc
-         m67YEBEBouPhcLt6/eU25VwoDujCxwlR7WwXcbriWrXhNWzJ8FxKV5bi6X1mbvMX0A
-         z2s+n8/t68sezG00C5prp++VM7QrbiX3kgUfIh00qpReFLFwPKdS4kQ7tJe6O8Tzkq
-         kyoT4Go0LoGMxDUnXt9INjhzVkW37Y+Cd24OFLNk6cvVEWj5KfOZ3Ngnd/VKSZ1cCD
-         0GAvpWNYRCdcg==
-From:   Jonathan Corbet <corbet@lwn.net>
-To:     Akira Yokosawa <akiyks@gmail.com>,
-        Sadiya Kazi <sadiyakazi@google.com>
-Cc:     brendanhiggins@google.com, davidgow@google.com,
-        kunit-dev@googlegroups.com, linux-doc@vger.kernel.org,
-        Akira Yokosawa <akiyks@gmail.com>,
-        Konstantin Ryabitsev <konstantin@linuxfoundation.org>
+        with ESMTP id S229760AbjASWJW (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Thu, 19 Jan 2023 17:09:22 -0500
+Received: from mail-qt1-x82f.google.com (mail-qt1-x82f.google.com [IPv6:2607:f8b0:4864:20::82f])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id D8295D88D1
+        for <linux-doc@vger.kernel.org>; Thu, 19 Jan 2023 13:46:53 -0800 (PST)
+Received: by mail-qt1-x82f.google.com with SMTP id e8so2741358qts.1
+        for <linux-doc@vger.kernel.org>; Thu, 19 Jan 2023 13:46:53 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=linuxfoundation.org; s=google;
+        h=in-reply-to:content-disposition:mime-version:references:message-id
+         :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+        bh=qlIuAzy0CKmfob+VwS63QoBpBffTthRBwy4ssNc++Zc=;
+        b=SO2m+CGCpI4nrJTFY3HiyfU7+iXojTJ+sfeWN38q9AzxnsA1BqzSAwk39IM+zLpR8/
+         R999v38oPtTuDm3lpEEZE8dfLlo8hks7ZDqW5M++e0Ydo6c2k/keTXZ+p2P/9RkVZSAX
+         JvnwaqJO/FT/ieeHy8b3IkzV5SprqB3dGzks8=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=in-reply-to:content-disposition:mime-version:references:message-id
+         :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=qlIuAzy0CKmfob+VwS63QoBpBffTthRBwy4ssNc++Zc=;
+        b=VFKsbI4jUI+jFLbhjd/XNqmTDfJe9G5fGcHPSl5stAy3n0fPXgBg1/tej+Vhoeet+H
+         Hzqz0yTKNaQUFL/XbS5UaXimcljk4E7rxotiO2/b1KzMvoCQHQlIi56btfg0s9d05hsm
+         aQmEW6f5p1QQc23SFWE7ypC0BmbkvJONCOIwc7SDF1BCG2+Z2QtQ/TwHuI8VpEZw5V6g
+         pda8dm93CfOXDWOZrtiYqNZ/ncFGEXdV2fUan99YbEsMuGv6+76sSqMuFs9YJAoV9G8+
+         ibUbt8B+q/iLcZaMK2NO5AZ48kwtEmY/PPU0pWmGOfBItuzn0z1rcyLQaleFa6sKl/ON
+         OXZw==
+X-Gm-Message-State: AFqh2kpy2Pe6ILWNLSf+b2mfBNh0OlbivJFeOG/S4bxsNQnU0ipXBUOB
+        z0lwlyuuPXIVz6Ys9+3pT5e6cw==
+X-Google-Smtp-Source: AMrXdXufJEeE4u+hvKEdx9M9a5l6L+SiCJEwrWUHlJVfwgyw3aFdzPaoINdbwYNbfyhRvdrFxN1VWg==
+X-Received: by 2002:ac8:748e:0:b0:3b6:2e37:3394 with SMTP id v14-20020ac8748e000000b003b62e373394mr14485171qtq.27.1674164808164;
+        Thu, 19 Jan 2023 13:46:48 -0800 (PST)
+Received: from meerkat.local (bras-base-mtrlpq5031w-grc-30-209-226-106-7.dsl.bell.ca. [209.226.106.7])
+        by smtp.gmail.com with ESMTPSA id y6-20020a37f606000000b006fef61300fesm7939701qkj.16.2023.01.19.13.46.47
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 19 Jan 2023 13:46:47 -0800 (PST)
+Date:   Thu, 19 Jan 2023 16:46:46 -0500
+From:   Konstantin Ryabitsev <konstantin@linuxfoundation.org>
+To:     Jonathan Corbet <corbet@lwn.net>
+Cc:     Akira Yokosawa <akiyks@gmail.com>,
+        Sadiya Kazi <sadiyakazi@google.com>, brendanhiggins@google.com,
+        davidgow@google.com, kunit-dev@googlegroups.com,
+        linux-doc@vger.kernel.org
 Subject: Re: New theme - Alabaster for Kernel Documentation
-In-Reply-To: <c00df839-9429-891b-5682-3dbc2d6edbbe@gmail.com>
+Message-ID: <20230119214646.nquwprfswdckwexw@meerkat.local>
 References: <CAO2JNKUA5DWxNk2cCZwj8DEFF-acf6ZpxwBqn2qTwn4fTW1+BQ@mail.gmail.com>
  <c00df839-9429-891b-5682-3dbc2d6edbbe@gmail.com>
-Date:   Thu, 19 Jan 2023 14:29:21 -0700
-Message-ID: <87r0vq6wni.fsf@meer.lwn.net>
+ <87r0vq6wni.fsf@meer.lwn.net>
 MIME-Version: 1.0
-Content-Type: text/plain
-X-Spam-Status: No, score=-2.1 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,SPF_HELO_NONE,SPF_PASS
-        autolearn=ham autolearn_force=no version=3.4.6
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+In-Reply-To: <87r0vq6wni.fsf@meer.lwn.net>
+X-Spam-Status: No, score=-2.1 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_NONE,
+        SPF_HELO_NONE,SPF_PASS autolearn=ham autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Akira Yokosawa <akiyks@gmail.com> writes:
+On Thu, Jan 19, 2023 at 02:29:21PM -0700, Jonathan Corbet wrote:
+> Akira Yokosawa <akiyks@gmail.com> writes:
+> 
+> > Konstantin, would it be possible for you to add "DOCS_THEME=sphinx_rtd_theme"
+> > for the "latest" kernel documentation builds until the new default theme
+> > becomes good enough for most people?  That is if Jon agrees.
+> > For the "next" builds, alabaster theme should be OK, and easier for us to
+> > compare the two themes.
+> 
+> I'd prefer to avoid this if possible.  In the end, though, what
+> kernel.org does isn't my decision, of course...
 
-> Konstantin, would it be possible for you to add "DOCS_THEME=sphinx_rtd_theme"
-> for the "latest" kernel documentation builds until the new default theme
-> becomes good enough for most people?  That is if Jon agrees.
-> For the "next" builds, alabaster theme should be OK, and easier for us to
-> compare the two themes.
+Something I've considered is to have /latest/ show the latest mainline
+*released* mainline, while /rc/ would show the latest rc. So, we'd have three
+distinct movable targets:
 
-I'd prefer to avoid this if possible.  In the end, though, what
-kernel.org does isn't my decision, of course...  but if the Alabaster
-mode is really that bad, we should either fix it or just revert the
-change.  I'll try to dig into the sidebar generation a bit, but time is
-scarce.
+docs.kernel.org       - latest mainline release (same as kernel.org/doc/html/latest/)
+docs.kernel.org/next/ - linux-next
+docs.kernel.org/rc/   - latest rc
 
-Before going too far, what exactly is the desired sidebar experience
-here?  I find the RTD approach, which keeps all of the top-level entries
-there, to be severely messy and would prefer not to reproduce it.  Of
-course, some of that reflects the still-messy nature of our top-level
-Documentation/ directory, another thing I'd like to fix.
+Would that be acceptable as a solution?
 
-Thanks,
-
-jon
+-K
