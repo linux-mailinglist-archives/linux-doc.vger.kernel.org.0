@@ -2,91 +2,101 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id D23E867530B
-	for <lists+linux-doc@lfdr.de>; Fri, 20 Jan 2023 12:08:02 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 1DB9F6754AC
+	for <lists+linux-doc@lfdr.de>; Fri, 20 Jan 2023 13:36:22 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S229587AbjATLIB (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Fri, 20 Jan 2023 06:08:01 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:36270 "EHLO
+        id S230290AbjATMgU (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Fri, 20 Jan 2023 07:36:20 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:59874 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S229598AbjATLIA (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Fri, 20 Jan 2023 06:08:00 -0500
-Received: from mail.skyhub.de (mail.skyhub.de [5.9.137.197])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 8D3DA39297;
-        Fri, 20 Jan 2023 03:07:58 -0800 (PST)
-Received: from zn.tnic (p5de8e9fe.dip0.t-ipconnect.de [93.232.233.254])
-        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
-        (No client certificate requested)
-        by mail.skyhub.de (SuperMail on ZX Spectrum 128k) with ESMTPSA id 2CFAF1EC0606;
-        Fri, 20 Jan 2023 12:07:57 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=alien8.de; s=dkim;
-        t=1674212877;
-        h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-         to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-         content-transfer-encoding:in-reply-to:in-reply-to:  references:references;
-        bh=40oh1pHNa5pWx4jGamed6IL3y7gkerp1r2pzkAMoq2Q=;
-        b=r00y4jQUVtDshG4tDAS91vdI7QjPCLD7pFdU+iVAYMASoniRY2/rbP59M/S67L5qjGNx+5
-        1oOm3QQe/ipoBGU/6w8M0v5QtR2qq+nofQdVTsS1CeNYs10T2YYI3wFxzN+7Wr6ZteKYFA
-        DKDwJ6NJ6CbtiorKDRcZkyYI6+RO4Eg=
-Date:   Fri, 20 Jan 2023 12:07:57 +0100
-From:   Borislav Petkov <bp@alien8.de>
-To:     Sean Christopherson <seanjc@google.com>
-Cc:     Paolo Bonzini <pbonzini@redhat.com>, kvm@vger.kernel.org,
-        Kim Phillips <kim.phillips@amd.com>, x86@kernel.org,
-        Boris Ostrovsky <boris.ostrovsky@oracle.com>,
-        Dave Hansen <dave.hansen@linux.intel.com>,
-        "H. Peter Anvin" <hpa@zytor.com>, Ingo Molnar <mingo@redhat.com>,
-        Joao Martins <joao.m.martins@oracle.com>,
-        Jonathan Corbet <corbet@lwn.net>,
-        Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>,
-        Thomas Gleixner <tglx@linutronix.de>,
-        David Woodhouse <dwmw@amazon.co.uk>,
-        Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
-        Juergen Gross <jgross@suse.com>,
-        Peter Zijlstra <peterz@infradead.org>,
-        Tony Luck <tony.luck@intel.com>,
-        Tom Lendacky <thomas.lendacky@amd.com>,
-        Alexey Kardashevskiy <aik@amd.com>, linux-doc@vger.kernel.org,
-        linux-kernel@vger.kernel.org
-Subject: Re: [PATCH v7 0/7] x86/cpu, kvm: Support AMD Automatic IBRS
-Message-ID: <Y8p2DUtzoC409HYY@zn.tnic>
-References: <20230116230159.1511393-1-kim.phillips@amd.com>
- <Y8aMiH74WFmVM5Rk@zn.tnic>
- <Y8nw/XLTpKhKbbdX@google.com>
+        with ESMTP id S230298AbjATMgN (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Fri, 20 Jan 2023 07:36:13 -0500
+Received: from mail-pj1-x102d.google.com (mail-pj1-x102d.google.com [IPv6:2607:f8b0:4864:20::102d])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 42E8ABFF60;
+        Fri, 20 Jan 2023 04:35:47 -0800 (PST)
+Received: by mail-pj1-x102d.google.com with SMTP id lp10so2035145pjb.4;
+        Fri, 20 Jan 2023 04:35:47 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=yV2oWoct8jHvEDKh4g0zGEsKHmT9W9Ju3bzPj5+1tu8=;
+        b=cLfNGiZ4VehBisHJ7fG9F9FZmP0dx1kunOo8soWbrbDm2xThbYLWvfj6sFinIgy83o
+         vAen82QLHPpigagRHSrUSPweUMZzzHwKXJKHOsZgmIaSJIbv7Af9PYQRGGt/hZUh4Nio
+         OE9m/HzJuFV7IFFhp7Y7Zf2SYEd98Hne8G2HbJ0wKUSWH4SeDYxvWG2MQTOVSpcuLYlJ
+         f26FPB/X6LCjpfWaOSGAPFjbdyZqz0jwHJSJatZikoOtpUzM7uCeQ5TnPFG954bRtmYL
+         LBtl2PbRWkdOcrwdms7kNukWpMPi4zCTWigSGjrDpecjYZQLJoWfnDepmMPvPnT2b8P6
+         j/Rw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=yV2oWoct8jHvEDKh4g0zGEsKHmT9W9Ju3bzPj5+1tu8=;
+        b=K/D7kif2iXCahzoXUp+sT6I83v2SStV6pWqxi47QY41gNEd2GYD5ZNpQRBEeuOoZJ3
+         /D7QGwI8T8IvZyQ6XQFFtUk+SrEZhzS8+U50I0iyVQaF26c2Z17RIkPi5mjRbmDNs640
+         R5BB3hIHB9rFRzRNU7JZ+qehTDcudQw8v+o3snZrC/gIIQR+IappoBprCZi086gKXdFK
+         yODOhkxRZafiYEgNxhKjvZB+VIniNdMFyjEH+AdmrODtnOHro1XeIspa7HeisVEvZ75Z
+         ZhYFxZi17/3xe9uDyhusbL3sntgprLbvbuvAuQynCjnQXf++GW7/2gTXBGWSNniIbG40
+         RcIw==
+X-Gm-Message-State: AFqh2kr0td2nPHASR1p19LL5s8DDwuiulyZbHRho3geeA2TnGLixuvZS
+        KztgSfvlUqqkBGsZ5IdLHGY=
+X-Google-Smtp-Source: AMrXdXspLJ9QM5pigmWO1C3y1SzqRqvDgFvZVsrGZuQJqOCB8Eh6WcmAQdK+Zh1gdWOZoCdxKnXM7w==
+X-Received: by 2002:a17:90b:4a91:b0:229:2a8e:90cf with SMTP id lp17-20020a17090b4a9100b002292a8e90cfmr15091662pjb.26.1674218144295;
+        Fri, 20 Jan 2023 04:35:44 -0800 (PST)
+Received: from debian.me (subs02-180-214-232-6.three.co.id. [180.214.232.6])
+        by smtp.gmail.com with ESMTPSA id t13-20020a170902b20d00b001926a76e8absm26910006plr.114.2023.01.20.04.35.42
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Fri, 20 Jan 2023 04:35:42 -0800 (PST)
+Received: by debian.me (Postfix, from userid 1000)
+        id E62DD104FAC; Fri, 20 Jan 2023 19:35:37 +0700 (WIB)
+From:   Bagas Sanjaya <bagasdotme@gmail.com>
+To:     Freedesktop DRI List <dri-devel@lists.freedesktop.org>,
+        Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
+        Linux Documentation <linux-doc@vger.kernel.org>,
+        Linux KVM <kvm@vger.kernel.org>,
+        Linux Next Mailing List <linux-next@vger.kernel.org>
+Cc:     Oded Gabbay <ogabbay@kernel.org>, Jonathan Corbet <corbet@lwn.net>,
+        Paolo Bonzini <pbonzini@redhat.com>,
+        Jeffrey Hugo <quic_jhugo@quicinc.com>,
+        Ofir Bitton <obitton@habana.ai>,
+        Sean Christopherson <seanjc@google.com>,
+        Aaron Lewis <aaronlewis@google.com>,
+        Bagas Sanjaya <bagasdotme@gmail.com>
+Subject: [PATCH linux-next 0/3] Documentation fixes for linux-next (Jan 20)
+Date:   Fri, 20 Jan 2023 19:35:31 +0700
+Message-Id: <20230120123534.137413-1-bagasdotme@gmail.com>
+X-Mailer: git-send-email 2.39.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-In-Reply-To: <Y8nw/XLTpKhKbbdX@google.com>
-X-Spam-Status: No, score=-2.1 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,SPF_HELO_NONE,SPF_PASS
-        autolearn=ham autolearn_force=no version=3.4.6
+X-Developer-Signature: v=1; a=openpgp-sha256; l=729; i=bagasdotme@gmail.com; h=from:subject; bh=xTrUPK9bQjBpPVPof0lzCkWtR4B7Q/FejCVqz3qmtzY=; b=owGbwMvMwCX2bWenZ2ig32LG02pJDMmnuvpvz+G5cJv7zF+ra5ZBBg0zN/d6/Fo1RfnFrNrO47IV M7VsOkpZGMS4GGTFFFkmJfI1nd5lJHKhfa0jzBxWJpAhDFycAjCRNxMZGabcdJbrOx188Of/0OdzOf avlBRYK+0174Lnfe8zK+LUeA4xMuzgOngz0IGp6ZS2u0x6nOisHdN5j7RoCD5k+7FjwRnHCQwA
+X-Developer-Key: i=bagasdotme@gmail.com; a=openpgp; fpr=701B806FDCA5D3A58FFB8F7D7C276C64A5E44A1D
+Content-Transfer-Encoding: 8bit
+X-Spam-Status: No, score=-0.6 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_FROM,
+        RCVD_IN_DNSWL_NONE,RCVD_IN_SORBS_WEB,SPF_HELO_NONE,SPF_PASS
+        autolearn=no autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Fri, Jan 20, 2023 at 01:40:13AM +0000, Sean Christopherson wrote:
-> Sorry, completely missed this.
+Here are fixes for recent htmldocs warnings reported in linux-next. Each
+patches can be picked up separately if ACKed.
 
-Nothing to be sorry for - can't notice everything in the flood. :)
+Bagas Sanjaya (3):
+  Documentation: accel: escape wildcard in special file path
+  habanalabs: Fix list of /sys/class/habanalabs/hl<n>/status
+  kvm: x86/pmu: Add blank line separator before
+    KVM_CAP_PMU_EVENT_MASKED_EVENTS code path list
 
-> There will be a minor conflict in KVM's reverse_cpuid, but it's trivial to resolve.
-> I don't anticipate any other conflicts, so taking this through tip does seem like
-> the best option.
+ .../ABI/testing/sysfs-driver-habanalabs       | 23 ++++++++++---------
+ Documentation/accel/introduction.rst          |  6 ++---
+ Documentation/virt/kvm/api.rst                |  1 +
+ 3 files changed, 16 insertions(+), 14 deletions(-)
 
-Ok, thx.
 
-> If possible, a new version to fix the bisection issues in patches 2 and 3 would
-> be nice, but again it's not a big deal.  The breakage is very, very minor.
-
-Yap, I've zapped them and their removal will take a bit to propagate to
-linux-next.
-
-Thx.
-
+base-commit: d514392f17fd4d386cfadde7f849d97db4ca1fb0
 -- 
-Regards/Gruss,
-    Boris.
+An old man doll... just what I always wanted! - Clara
 
-https://people.kernel.org/tglx/notes-about-netiquette
