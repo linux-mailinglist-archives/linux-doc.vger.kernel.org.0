@@ -2,74 +2,92 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id A6B96675856
-	for <lists+linux-doc@lfdr.de>; Fri, 20 Jan 2023 16:19:12 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 8C53A67586F
+	for <lists+linux-doc@lfdr.de>; Fri, 20 Jan 2023 16:23:47 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S231342AbjATPTJ (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Fri, 20 Jan 2023 10:19:09 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:50546 "EHLO
+        id S231366AbjATPXp (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Fri, 20 Jan 2023 10:23:45 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:55020 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S231331AbjATPTF (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Fri, 20 Jan 2023 10:19:05 -0500
-Received: from ms.lwn.net (ms.lwn.net [IPv6:2600:3c01:e000:3a1::42])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 3B146DA109
-        for <linux-doc@vger.kernel.org>; Fri, 20 Jan 2023 07:19:03 -0800 (PST)
-Received: from localhost (unknown [IPv6:2601:281:8300:73::5f6])
-        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+        with ESMTP id S230087AbjATPXo (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Fri, 20 Jan 2023 10:23:44 -0500
+Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.129.124])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id B4BC9C79FE
+        for <linux-doc@vger.kernel.org>; Fri, 20 Jan 2023 07:23:04 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+        s=mimecast20190719; t=1674228184;
+        h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+         to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+         in-reply-to:in-reply-to:references:references;
+        bh=xsYESgVCcA1MZ2umV5mhLIskMRGsLrEQukfEQC626BQ=;
+        b=dYinTEp/kZDch/93XBbnpcgYZ+UQLzz3BXuerkOJc1mjUGR5TXvvATm+cc9sU8efEpkADv
+        6NocufUlnyMGOHPir2jcpJJ2IczEn6SaMcAx1lId/QOnrFI51OFhQb8XZ/TVlNqrSFtTxH
+        azQAxIiHXajuAOs84cCoBYw42WTteRg=
+Received: from mimecast-mx02.redhat.com (mimecast-mx02.redhat.com
+ [66.187.233.88]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ us-mta-493-Y2hQe0jBN5yvTpDT1QYZ8g-1; Fri, 20 Jan 2023 10:22:58 -0500
+X-MC-Unique: Y2hQe0jBN5yvTpDT1QYZ8g-1
+Received: from smtp.corp.redhat.com (int-mx02.intmail.prod.int.rdu2.redhat.com [10.11.54.2])
+        (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
         (No client certificate requested)
-        by ms.lwn.net (Postfix) with ESMTPSA id 79FAA2AE;
-        Fri, 20 Jan 2023 15:19:03 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 ms.lwn.net 79FAA2AE
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=lwn.net; s=20201203;
-        t=1674227943; bh=3FC403uzC8WVoVzxoAdPn9dH5q4g1dqTxwv/UY3Ryeg=;
-        h=From:To:Cc:Subject:In-Reply-To:References:Date:From;
-        b=V4KA1dA47oKVT8FSlZT10ODjvbCMotB17nIhVMM/kgddM96QPO+Swc8elCXHncvK0
-         VyyIoQ2mu1LGDPVek9qdLqeYovu+iqwUYinLMvXOnpYIqNAokSopyggRebEJWPAL1/
-         VTBM33dVnoiaXlDPPUkwCISELgwpEisUuzDSz8NL+QgQN0bf/06W2mswsuefMf9sr6
-         JFpqs4kKJ7XEW87wHTM4Xs+pEIPZ77SEypycU8Jy0wV5mEAOR5GK5MluyiiPYfTwM2
-         E3FsYVG2rwQ388CIUAyzcfWRsVSTccU+xrpL+vZoCi5O2eYvQ/uqfeWhq10dFFD+wk
-         hu+cQyUODElhQ==
-From:   Jonathan Corbet <corbet@lwn.net>
-To:     Akira Yokosawa <akiyks@gmail.com>,
-        Sadiya Kazi <sadiyakazi@google.com>
-Cc:     linux-doc@vger.kernel.org, David Gow <davidgow@google.com>
-Subject: Re: [PATCH RFC] docs: Add more information to the HTML sidebar
-In-Reply-To: <fa426691-c76a-8ab0-4975-6edacc9cb247@gmail.com>
-References: <87o7qu5al3.fsf@meer.lwn.net>
- <CAO2JNKW9pL5097qdte1N4F=RSnRJtcnpaDf__ROJAFfHitooYQ@mail.gmail.com>
- <fa426691-c76a-8ab0-4975-6edacc9cb247@gmail.com>
-Date:   Fri, 20 Jan 2023 08:19:02 -0700
-Message-ID: <8735855j4p.fsf@meer.lwn.net>
+        by mimecast-mx02.redhat.com (Postfix) with ESMTPS id A02E985CCE0;
+        Fri, 20 Jan 2023 15:22:57 +0000 (UTC)
+Received: from dhcp-27-174.brq.redhat.com (ovpn-193-66.brq.redhat.com [10.40.193.66])
+        by smtp.corp.redhat.com (Postfix) with SMTP id 26A9340C6EC4;
+        Fri, 20 Jan 2023 15:22:53 +0000 (UTC)
+Received: by dhcp-27-174.brq.redhat.com (nbSMTP-1.00) for uid 1000
+        oleg@redhat.com; Fri, 20 Jan 2023 16:22:55 +0100 (CET)
+Date:   Fri, 20 Jan 2023 16:22:51 +0100
+From:   Oleg Nesterov <oleg@redhat.com>
+To:     Gregory Price <gourry.memverge@gmail.com>
+Cc:     linux-kernel@vger.kernel.org, linux-fsdevel@vger.kernel.org,
+        linux-doc@vger.kernel.org, linux-kselftest@vger.kernel.org,
+        krisman@collabora.com, tglx@linutronix.de, luto@kernel.org,
+        peterz@infradead.org, ebiederm@xmission.com,
+        akpm@linux-foundation.org, adobriyan@gmail.com, corbet@lwn.net,
+        shuah@kernel.org, Gregory Price <gregory.price@memverge.com>
+Subject: Re: [PATCH v3 1/3] ptrace,syscall_user_dispatch: Implement Syscall
+ User Dispatch Suspension
+Message-ID: <20230120152250.GA9801@redhat.com>
+References: <20230120144356.40717-1-gregory.price@memverge.com>
+ <20230120144356.40717-2-gregory.price@memverge.com>
 MIME-Version: 1.0
-Content-Type: text/plain
-X-Spam-Status: No, score=-2.1 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,SPF_HELO_NONE,SPF_PASS
-        autolearn=ham autolearn_force=no version=3.4.6
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20230120144356.40717-2-gregory.price@memverge.com>
+User-Agent: Mutt/1.5.24 (2015-08-30)
+X-Scanned-By: MIMEDefang 3.1 on 10.11.54.2
+X-Spam-Status: No, score=-2.1 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_NONE,
+        RCVD_IN_MSPIKE_H2,SPF_HELO_NONE,SPF_NONE autolearn=unavailable
+        autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Akira Yokosawa <akiyks@gmail.com> writes:
+Hi Gregory,
 
->>> Thoughts?  Is this headed in the right direction?  This view of the TOC
->>> is readily available from Sphinx; if we want something else it's going
->>> to be rather more work.
+I'll try to read this series next Monday, I need to recall what does
+syscall-user-dispatch actually do ;)
+
+just one question for now,
+
+On 01/20, Gregory Price wrote:
 >
-> I think this looks like the right direction. But how far do you want to
-> mimic RTD's sidebar???
+> --- a/kernel/ptrace.c
+> +++ b/kernel/ptrace.c
+> @@ -370,6 +370,10 @@ static int check_ptrace_options(unsigned long data)
+>  	if (data & ~(unsigned long)PTRACE_O_MASK)
+>  		return -EINVAL;
+>  
+> +	if (unlikely(data & PTRACE_O_SUSPEND_SYSCALL_USER_DISPATCH) &&
+> +	    (!IS_ENABLED(CONFIG_CHECKPOINT_RESTART)))
+> +			return -EINVAL;
 
-Well ... that is kind of my question for all of the folks who are
-unhappy with the current sidebar.  What would you like to see there?
+Hmm? git grep CHECKPOINT_RESTART shows nothing.
 
-Things like sidebar width, whether bullets are used (I'd deliberately
-taken them out as excess noise), which text is which color, etc. are all
-just CSS; we can paint that shed any color we like.  The harder part is
-deciding which information we want to have there in the first place.  So
-... is the set of links shown in the new sidebar close to what we
-want...  too much stuff?  Something missing?
+Oleg.
 
-Thanks,
-
-jon
