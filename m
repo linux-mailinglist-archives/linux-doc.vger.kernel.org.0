@@ -2,109 +2,124 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 8089F67490F
-	for <lists+linux-doc@lfdr.de>; Fri, 20 Jan 2023 02:53:13 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id AD6AF674993
+	for <lists+linux-doc@lfdr.de>; Fri, 20 Jan 2023 03:49:48 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S229738AbjATBxL (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 19 Jan 2023 20:53:11 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:56800 "EHLO
+        id S229461AbjATCtr (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 19 Jan 2023 21:49:47 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:50746 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S229481AbjATBxK (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Thu, 19 Jan 2023 20:53:10 -0500
-Received: from dfw.source.kernel.org (dfw.source.kernel.org [IPv6:2604:1380:4641:c500::1])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 3C22174961;
-        Thu, 19 Jan 2023 17:53:05 -0800 (PST)
-Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
-        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
-        (No client certificate requested)
-        by dfw.source.kernel.org (Postfix) with ESMTPS id CB92361DD2;
-        Fri, 20 Jan 2023 01:53:04 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 94AFCC433D2;
-        Fri, 20 Jan 2023 01:53:03 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-        s=k20201202; t=1674179584;
-        bh=lehARF5Jyz6pCpRqHY5HtN/8xxJ/fvtM+SkhBiquzMM=;
-        h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
-        b=mB+m4ib7w11UOsmsVZi/YDeUWoLb3WLKtV6hWIAoxxC+/XeNKrny5pT6tdFleINO9
-         W/epE4w3W0Jo+fH9vBg/rZyjlJ8OAszIxVI+aZCeIA5WecHVtTVuoTAldgmQ/zOByY
-         bvcmC0+06dqI/nucy6HuRE0zPIgzWtZdRgF0h3G+Vwt600yoYq3Trbqz5P2p3SLQwp
-         vCVZAT+OnYZ9+ZXtdfv1y9XfumTpL2s1hE/Q8+o/hQEYByBc9CPkq7C3URF65rua+V
-         y92K/6royO3C4yDnq1jM7ts++uGqo7y0qYcZTwC8q4rIR3XfTZVMM8Fvc/vCHcKBUe
-         ZPWC+SaIVTSuQ==
-Date:   Thu, 19 Jan 2023 17:53:02 -0800
-From:   Jakub Kicinski <kuba@kernel.org>
-To:     Johannes Berg <johannes@sipsolutions.net>
-Cc:     davem@davemloft.net, netdev@vger.kernel.org, edumazet@google.com,
-        pabeni@redhat.com, robh@kernel.org, stephen@networkplumber.org,
-        ecree.xilinx@gmail.com, sdf@google.com, f.fainelli@gmail.com,
-        fw@strlen.de, linux-doc@vger.kernel.org, razor@blackwall.org,
-        nicolas.dichtel@6wind.com
-Subject: Re: [PATCH net-next v3 3/8] net: add basic C code generators for
- Netlink
-Message-ID: <20230119175302.3a592798@kernel.org>
-In-Reply-To: <ddcea8b3cb8c2d218a2747a1e2f566dbaaee8f01.camel@sipsolutions.net>
-References: <20230119003613.111778-1-kuba@kernel.org>
-        <20230119003613.111778-4-kuba@kernel.org>
-        <ddcea8b3cb8c2d218a2747a1e2f566dbaaee8f01.camel@sipsolutions.net>
+        with ESMTP id S229457AbjATCtp (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Thu, 19 Jan 2023 21:49:45 -0500
+Received: from mga14.intel.com (mga14.intel.com [192.55.52.115])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 0AD4049567;
+        Thu, 19 Jan 2023 18:49:45 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1674182985; x=1705718985;
+  h=date:from:to:cc:subject:message-id:references:
+   mime-version:in-reply-to;
+  bh=xOt/pIp29WBfj1lDuuLWsw+OLGGWhFf5vFZBAOjOoHI=;
+  b=Zgb46PSiFryBiBetGnseg5E1U7ASywqa85T5F1/IVPs1glntg6GWBQ9M
+   OQzkJE5zwaS1pnqeRQUaPLOuIGRfZLqxiS/xvj3HMVBmyvIZTy0w1X04j
+   HZRMGOQUveYvSEqIRUJBx+WzBZzjaYDPRIm6FXfUOEijS5BViMVZM/dES
+   bqyYhANs9xPg0DXRwasY2Ge0mD+lgj9RBebzP/ANRZ7TJGmVvSwgRd5NY
+   hzrPcXG3YU2z4EAw4wt3ZlZDSs3CL+ZPUoAn0KOLKTfFsYDBemu8BwpFP
+   Qg6Q7lk+lWHHgIERBn7uPRI9VwOvt3CJmaP9Hqbqhz3GCO+KXvXS36yVd
+   g==;
+X-IronPort-AV: E=McAfee;i="6500,9779,10595"; a="325531033"
+X-IronPort-AV: E=Sophos;i="5.97,230,1669104000"; 
+   d="scan'208";a="325531033"
+Received: from fmsmga003.fm.intel.com ([10.253.24.29])
+  by fmsmga103.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 19 Jan 2023 18:49:44 -0800
+X-ExtLoop1: 1
+X-IronPort-AV: E=McAfee;i="6500,9779,10595"; a="749213525"
+X-IronPort-AV: E=Sophos;i="5.97,230,1669104000"; 
+   d="scan'208";a="749213525"
+Received: from yilunxu-optiplex-7050.sh.intel.com (HELO localhost) ([10.239.159.165])
+  by FMSMGA003.fm.intel.com with ESMTP; 19 Jan 2023 18:49:39 -0800
+Date:   Fri, 20 Jan 2023 10:39:12 +0800
+From:   Xu Yilun <yilun.xu@intel.com>
+To:     matthew.gerlach@linux.intel.com
+Cc:     hao.wu@intel.com, russell.h.weight@intel.com,
+        basheer.ahmed.muddebihal@intel.com, trix@redhat.com,
+        mdf@kernel.org, linux-fpga@vger.kernel.org,
+        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
+        tianfei.zhang@intel.com, corbet@lwn.net,
+        gregkh@linuxfoundation.org, linux-serial@vger.kernel.org,
+        jirislaby@kernel.org, geert+renesas@glider.be,
+        andriy.shevchenko@linux.intel.com,
+        niklas.soderlund+renesas@ragnatech.se, macro@orcam.me.uk,
+        johan@kernel.org, lukas@wunner.de, ilpo.jarvinen@linux.intel.com,
+        marpagan@redhat.com, bagasdotme@gmail.com
+Subject: Re: [PATCH v11 0/4] Enhance definition of DFH and use enhancements
+ for UART driver
+Message-ID: <Y8n+0OUxnDtDfJgG@yilunxu-OptiPlex-7050>
+References: <20230115151447.1353428-1-matthew.gerlach@linux.intel.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: 7bit
-X-Spam-Status: No, score=-7.1 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_HI,
-        SPF_HELO_NONE,SPF_PASS autolearn=ham autolearn_force=no version=3.4.6
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20230115151447.1353428-1-matthew.gerlach@linux.intel.com>
+X-Spam-Status: No, score=-4.4 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_MED,
+        SPF_HELO_NONE,SPF_NONE autolearn=ham autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Thu, 19 Jan 2023 21:53:12 +0100 Johannes Berg wrote:
-> > +    def _attr_policy(self, policy):
-> > +        mem = '{ '
-> > +        if len(self.checks) == 1 and 'min-len' in self.checks:
-> > +            mem += '.len = ' + str(self.checks['min-len'])  
+On 2023-01-15 at 07:14:43 -0800, matthew.gerlach@linux.intel.com wrote:
+> From: Matthew Gerlach <matthew.gerlach@linux.intel.com>
 > 
-> Why does the len(self.checks) matter?
-
-Trying to throw an exception if someone starts using checks I haven't
-gotten to implementing yet.
-
-> > +    def free_needs_iter(self):
-> > +        return 'type' not in self.attr or self.attr['type'] == 'nest'
-> > +
-> > +    def free(self, ri, var, ref):
-> > +        if 'type' not in self.attr or self.attr['type'] == 'nest':  
+> This patchset enhances the definition of the Device Feature Header (DFH) used by
+> the Device Feature List (DFL) bus and then uses the new enhancements in a UART
+> driver.
 > 
-> two more places that could use the .get trick
+> The enhancements to the DFH includes the introduction of parameter blocks.
+> Like PCI capabilities, the DFH parameter blocks further describe
+> the hardware to software. In the case of the UART, the parameter blocks
+> provide information for the interrupt, clock frequency, and register layout.
 > 
-> but it's really up to you. Just that the line like that seems rather
-> long to me :-)
-
-Better question is why attr would not have a type :S
-Let me leave it be for now, I'll revisit when exercising this code 
-in the future.
-
-> > +            if has_ntf:
-> > +                cw.p('// --------------- Common notification parsing --------------- //')  
->
-> You said you were using /* */ comments now but this is still there.
-
-Ugh, now I'm worried I lost something in a rebase :S
-
-> > +                print_ntf_parse_prototype(parsed, cw)
-> > +            cw.nl()
-> > +        else:
-> > +            cw.p('// Policies')  
->
-> and here too, etc.
+> Duplication of code parsing of the parameter blocks in multiple DFL drivers
+> is a concern. Using swnodes was considered to help minimize parsing code 
+> duplication, but their use did not help the problem. Furthermore the highly
+> changeable nature of FPGAs employing the DFL bus makes the use of swnodes
+> inappropriate. 
 > 
-> Whew. I think I skipped some bits ;-)
+> Patch 1 updates the DFL documentation to describe the added functionality to DFH.
+> 
+> Patch 2 adds the definitions for DFHv1.
+> 
+> Patch 3 adds basic support for DFHv1. It adds functionality to parse parameter blocks
+> and adds the functionality to parse the explicit location of a feature's register set.
+> 
+> Patch 4 adds a DFL UART driver that makes use of the new features of DFHv1.
 
-Thanks for looking!! :)
+Looks good to me and see Greg has taken this patchset.
 
-> Doesn't look that bad overall, IMHO. :)
+Thanks,
+Yilun
 
-I hope we can avoid over-focusing on the python tools :P
-I'm no python expert and the code would use a lot of refactoring.
-But there's only so many hours in the day and the alternative
-seems that it will bit rot in my tree forever :(
+> 
+> Basheer Ahmed Muddebihal (1):
+>   fpga: dfl: Add DFHv1 Register Definitions
+> 
+> Matthew Gerlach (3):
+>   Documentation: fpga: dfl: Add documentation for DFHv1
+>   fpga: dfl: add basic support for DFHv1
+>   tty: serial: 8250: add DFL bus driver for Altera 16550.
+> 
+>  Documentation/fpga/dfl.rst         | 119 ++++++++++++++
+>  drivers/fpga/dfl.c                 | 245 +++++++++++++++++++++++------
+>  drivers/fpga/dfl.h                 |  43 +++++
+>  drivers/tty/serial/8250/8250_dfl.c | 167 ++++++++++++++++++++
+>  drivers/tty/serial/8250/Kconfig    |  12 ++
+>  drivers/tty/serial/8250/Makefile   |   1 +
+>  include/linux/dfl.h                |   8 +
+>  7 files changed, 544 insertions(+), 51 deletions(-)
+>  create mode 100644 drivers/tty/serial/8250/8250_dfl.c
+> 
+> -- 
+> 2.25.1
+> 
