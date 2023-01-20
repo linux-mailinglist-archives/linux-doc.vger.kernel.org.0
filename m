@@ -2,217 +2,211 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 54049674BD8
-	for <lists+linux-doc@lfdr.de>; Fri, 20 Jan 2023 06:11:22 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 8A239674CA1
+	for <lists+linux-doc@lfdr.de>; Fri, 20 Jan 2023 06:38:21 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S230458AbjATFLT (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Fri, 20 Jan 2023 00:11:19 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:40216 "EHLO
+        id S231555AbjATFiS (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Fri, 20 Jan 2023 00:38:18 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:42148 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S230455AbjATFK5 (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Fri, 20 Jan 2023 00:10:57 -0500
-Received: from ams.source.kernel.org (ams.source.kernel.org [IPv6:2604:1380:4601:e00::1])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id D6B76BF895;
-        Thu, 19 Jan 2023 20:59:05 -0800 (PST)
-Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
-        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
-        (No client certificate requested)
-        by ams.source.kernel.org (Postfix) with ESMTPS id 8F3FAB8276E;
-        Thu, 19 Jan 2023 23:02:19 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 25B15C433F2;
-        Thu, 19 Jan 2023 23:02:18 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-        s=k20201202; t=1674169338;
-        bh=zAeCxgJp6CHkFtBJbMXTYY9UHGAlFauWe5Vz7iwtS2Q=;
-        h=References:In-Reply-To:From:Date:Subject:To:Cc:From;
-        b=ibAIFPtIrLecpTzrYX+dWTffkqfYBt9m6J6U4RwfOXf2zrBwu5NL1KHUJp3hbmvl6
-         Zy751fxQLKeY2Dg/uEYWwF6vJWGcB3PSndH7H8B8JwV9vGcaVAtTErKRKxj4qugMCh
-         NGbXcJLNmDlndbYCHUcNr8o90Hp8YsK8D2OHIMHQ5vkGeB5g5k4P+VS6okOKS0/e8L
-         3e6ZodIvZ70ruOmJlTXp0zT3n8FtNNlcxUcWD93lv/7qrzS/VzuuLlUzE1kE9GDqb+
-         jheCBoilFV3ohhJcIsB4nLXk/LBDyH9V2Um9TVoAU3zaJJPeyYSEV1nkeDSFWz7Xr6
-         qrxJFoI9S1Ywg==
-Received: by mail-vk1-f173.google.com with SMTP id v81so1730670vkv.5;
-        Thu, 19 Jan 2023 15:02:18 -0800 (PST)
-X-Gm-Message-State: AFqh2kpZN2sGFM1lGyx9ghvd+57XMBagQkov3t2Vk6CRXwZlpPa9INkh
-        18RMRhbrOggggsh+emVRq2GJrAmNtcspUR3QCg==
-X-Google-Smtp-Source: AMrXdXsG99tPvEHV5aCUuw0mR/bhT8/DAp2LNwREx+popn9Mxb1fPwFw16qdDUVsIULN0+2sfi3gOhp9scpEPwEz6v8=
-X-Received: by 2002:a1f:ad56:0:b0:3bc:8497:27fd with SMTP id
- w83-20020a1fad56000000b003bc849727fdmr1636148vke.15.1674169336954; Thu, 19
- Jan 2023 15:02:16 -0800 (PST)
+        with ESMTP id S231562AbjATFiE (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Fri, 20 Jan 2023 00:38:04 -0500
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id E8E5072C33;
+        Thu, 19 Jan 2023 21:34:35 -0800 (PST)
+Received: from pps.filterd (m0279864.ppops.net [127.0.0.1])
+        by mx0a-0031df01.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id 30K3o2V9011583;
+        Fri, 20 Jan 2023 05:34:19 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=quicinc.com; h=date : from : to :
+ cc : subject : message-id : reply-to : references : mime-version :
+ content-type : in-reply-to; s=qcppdkim1;
+ bh=5AwsPcgBKb4mMBYPkdjE+yVcpgBpoQQmg99thVzIvtg=;
+ b=MyHtXJEVAZa7E/joLQi+OBc4OirSPbgBGkoVLcfBccf9qGlAqrxRn7GA+Ejdgzu6RZAF
+ AwYXOm8XnO/qe/YnMPZFySntTBPGIy2R/ENhq+4JFUeiMtBuwb7usgLDejPmDmBWWYnD
+ VyLVc0BaS3/sv1ExALTr3LQNeXkeHfYCOXnyjgEMrj0LRvTSaXFSvYyyBAul/F0mk8j4
+ O8k2OcfRcI5UniTBkwQIvPlKM17HPw0sn7Xt66Dr4kS4OSDb7TaCFnWcCZG1Bowb/3IR
+ WGKn93wWWcbZ2kkBAvfOQUB0vwDhAbknMwXeI0r6H3AGxF+bzCBumLE6465dyUjmHaEU BA== 
+Received: from nalasppmta03.qualcomm.com (Global_NAT1.qualcomm.com [129.46.96.20])
+        by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 3n6vjbk9x5-1
+        (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+        Fri, 20 Jan 2023 05:34:19 +0000
+Received: from nalasex01b.na.qualcomm.com (nalasex01b.na.qualcomm.com [10.47.209.197])
+        by NALASPPMTA03.qualcomm.com (8.17.1.5/8.17.1.5) with ESMTPS id 30K5YI9a014355
+        (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+        Fri, 20 Jan 2023 05:34:18 GMT
+Received: from quicinc.com (10.80.80.8) by nalasex01b.na.qualcomm.com
+ (10.47.209.197) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.986.36; Thu, 19 Jan
+ 2023 21:34:11 -0800
+Date:   Fri, 20 Jan 2023 11:04:07 +0530
+From:   Srivatsa Vaddagiri <quic_svaddagi@quicinc.com>
+To:     Elliot Berman <quic_eberman@quicinc.com>
+CC:     Bjorn Andersson <quic_bjorande@quicinc.com>,
+        Murali Nalajala <quic_mnalajal@quicinc.com>,
+        Trilok Soni <quic_tsoni@quicinc.com>,
+        "Carl van Schaik" <quic_cvanscha@quicinc.com>,
+        Prakruthi Deepak Heragu <quic_pheragu@quicinc.com>,
+        Arnd Bergmann <arnd@arndb.de>,
+        Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+        Rob Herring <robh+dt@kernel.org>,
+        "Krzysztof Kozlowski" <krzysztof.kozlowski+dt@linaro.org>,
+        Jonathan Corbet <corbet@lwn.net>,
+        Bagas Sanjaya <bagasdotme@gmail.com>,
+        Catalin Marinas <catalin.marinas@arm.com>,
+        Will Deacon <will@kernel.org>,
+        Jassi Brar <jassisinghbrar@gmail.com>,
+        Sudeep Holla <sudeep.holla@arm.com>,
+        Mark Rutland <mark.rutland@arm.com>,
+        Lorenzo Pieralisi <lpieralisi@kernel.org>,
+        "Dmitry Baryshkov" <dmitry.baryshkov@linaro.org>,
+        <linux-arm-msm@vger.kernel.org>, <devicetree@vger.kernel.org>,
+        <linux-kernel@vger.kernel.org>, <linux-doc@vger.kernel.org>,
+        <linux-arm-kernel@lists.infradead.org>,
+        <linux-acpi@vger.kernel.org>
+Subject: Re: [PATCH v8 14/28] gunyah: vm_mgr: Add/remove user memory regions
+Message-ID: <20230118090859.GC1737564@quicinc.com>
+Reply-To: Srivatsa Vaddagiri <quic_svaddagi@quicinc.com>
+References: <20221219225850.2397345-1-quic_eberman@quicinc.com>
+ <20221219225850.2397345-15-quic_eberman@quicinc.com>
 MIME-Version: 1.0
-References: <20230119003613.111778-1-kuba@kernel.org> <20230119003613.111778-3-kuba@kernel.org>
- <CAL_JsqKk5RT6PmRSrq=YK7AvzCbcVkxasykJqe1df=3g-=kD7A@mail.gmail.com> <20230119134922.3fa24ed2@kernel.org>
-In-Reply-To: <20230119134922.3fa24ed2@kernel.org>
-From:   Rob Herring <robh@kernel.org>
-Date:   Thu, 19 Jan 2023 17:02:05 -0600
-X-Gmail-Original-Message-ID: <CAL_Jsq+_m0gn1vpAdxpcgwF4-wDtpK6wCwXgmE9pdPCJo5KTdw@mail.gmail.com>
-Message-ID: <CAL_Jsq+_m0gn1vpAdxpcgwF4-wDtpK6wCwXgmE9pdPCJo5KTdw@mail.gmail.com>
-Subject: Re: [PATCH net-next v3 2/8] netlink: add schemas for YAML specs
-To:     Jakub Kicinski <kuba@kernel.org>
-Cc:     davem@davemloft.net, netdev@vger.kernel.org, edumazet@google.com,
-        pabeni@redhat.com, johannes@sipsolutions.net,
-        stephen@networkplumber.org, ecree.xilinx@gmail.com, sdf@google.com,
-        f.fainelli@gmail.com, fw@strlen.de, linux-doc@vger.kernel.org,
-        razor@blackwall.org, nicolas.dichtel@6wind.com
-Content-Type: text/plain; charset="UTF-8"
-X-Spam-Status: No, score=-7.1 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_HI,
-        SPF_HELO_NONE,SPF_PASS autolearn=ham autolearn_force=no version=3.4.6
+Content-Type: text/plain; charset="iso-8859-1"
+Content-Disposition: inline
+In-Reply-To: <20221219225850.2397345-15-quic_eberman@quicinc.com>
+X-Originating-IP: [10.80.80.8]
+X-ClientProxiedBy: nasanex01b.na.qualcomm.com (10.46.141.250) To
+ nalasex01b.na.qualcomm.com (10.47.209.197)
+X-QCInternal: smtphost
+X-Proofpoint-Virus-Version: vendor=nai engine=6200 definitions=5800 signatures=585085
+X-Proofpoint-ORIG-GUID: hwDDQ5ftKuDYkmwG8_jwJQaSrm3ey9s7
+X-Proofpoint-GUID: hwDDQ5ftKuDYkmwG8_jwJQaSrm3ey9s7
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.219,Aquarius:18.0.930,Hydra:6.0.562,FMLib:17.11.122.1
+ definitions=2023-01-20_02,2023-01-19_01,2022-06-22_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 lowpriorityscore=0
+ suspectscore=0 priorityscore=1501 clxscore=1015 phishscore=0
+ malwarescore=0 mlxscore=0 spamscore=0 impostorscore=0 mlxlogscore=812
+ adultscore=0 bulkscore=0 classifier=spam adjust=0 reason=mlx scancount=1
+ engine=8.12.0-2212070000 definitions=main-2301200050
+X-Spam-Status: No, score=-2.8 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_LOW,SPF_HELO_NONE,
+        SPF_PASS autolearn=ham autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Thu, Jan 19, 2023 at 3:49 PM Jakub Kicinski <kuba@kernel.org> wrote:
->
-> On Thu, 19 Jan 2023 08:07:31 -0600 Rob Herring wrote:
-> > On Wed, Jan 18, 2023 at 6:36 PM Jakub Kicinski <kuba@kernel.org> wrote:
-> > >
-> > > Add schemas for Netlink spec files. As described in the docs
-> > > we have 4 "protocols" or compatibility levels, and each one
-> > > comes with its own schema, but the more general / legacy
-> > > schemas are superset of more modern ones: genetlink is
-> > > the smallest followed by genetlink-c and genetlink-legacy.
-> > > There is no schema for raw netlink, yet, I haven't found the time..
-> > >
-> > > I don't know enough jsonschema to do inheritance or something
-> > > but the repetition is not too bad. I hope.
-> >
-> > Generally you put common schemas under '$defs' and the then reference
-> > them with '$ref'.
-> >
-> > $defs:
-> >   some-prop-type:
-> >     type: integer
-> >     minimum: 0
-> >
-> > properties:
-> >   foo:
-> >     $ref: '#/$defs/some-prop-type'
-> >   bar:
-> >     $ref: '#/$defs/some-prop-type'
->
-> Thanks! Is it possible to move the common definitions to a separate
-> file? I tried to create a file called defs.yaml and change the ref to:
->
->   $ref: "defs.yaml#/$defs/len-or-define"
+* Elliot Berman <quic_eberman@quicinc.com> [2022-12-19 14:58:35]:
 
-Yes, but...
+>  static int gh_vm_release(struct inode *inode, struct file *filp)
+>  {
+>  	struct gunyah_vm *ghvm = filp->private_data;
+> +	struct gunyah_vm_memory_mapping *mapping, *tmp;
+>  
+> +	list_for_each_entry_safe(mapping, tmp, &ghvm->memory_mappings, list) {
+> +		gh_vm_mem_mapping_reclaim(ghvm, mapping);
 
-> But:
->
->   File "/usr/lib/python3.11/site-packages/jsonschema/validators.py", line 257, in iter_errors
->     for error in errors:
->   File "/usr/lib/python3.11/site-packages/jsonschema/_validators.py", line 294, in ref
->     scope, resolved = validator.resolver.resolve(ref)
->                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
->   File "/usr/lib/python3.11/site-packages/jsonschema/validators.py", line 856, in resolve
->     return url, self._remote_cache(url)
->                 ^^^^^^^^^^^^^^^^^^^^^^^
->   File "/usr/lib/python3.11/site-packages/jsonschema/validators.py", line 870, in resolve_from_url
->     raise exceptions.RefResolutionError(exc)
-> jsonschema.exceptions.RefResolutionError: Expecting value: line 1 column 1 (char 0)
+kfree(mapping) also?
 
-You either need the ref at the URL or a custom resolver to convert
-http path to a file path. Also, the default resolver doesn't handle
-YAML either. It's not much code to do and the DT tools do this. The
-hardest part was just getting the path right. For a ref with just a
-filename and no path, the URL will be the same path as the $id in the
-referring schema.
+> +	}
+>  	put_gh_rm(ghvm->rm);
+>  	kfree(ghvm);
+>  	return 0;
 
-> > If you have objects with common sets of properties, you can do the
-> > same thing, but then you need 'unevaluatedProperties' if you want to
-> > define a base set of properties and add to them. We do that frequently
-> > in DT schemas. Unlike typical inheritance, you can't override the
-> > 'base' schema. It's an AND operation.
->
-> This is hard to comprehend :o Most of the time I seem to need only the
-> ability to add a custom "description" to the object, so for example:
+[snip]
 
-By object, schemas here which are 'type: object'. Those all have a
-list of properties. If several schemas for 'objects' have the same set
-of properties like 'name' and 'type' for example, then you could
-define a schema for that and then add more properties for each
-specific object. I didn't really look close enough whether that makes
-sense here.
+> +struct gunyah_vm_memory_mapping {
+> +	struct list_head list;
+> +	enum gunyah_vm_mem_share_type share_type;
+> +	struct gh_rm_mem_parcel parcel;
+> +
+> +	__u64 guest_phys_addr;
+> +	__u32 mem_size;
 
-> $defs:
->   len-or-define:
->     oneOf:
->       -
->         type: string
->         pattern: ^[0-9A-Za-z_-]*( - 1)?$
->       -
->         type: integer
->         minimum: 0
->
-> Then:
->
->        min-len:
->          description: Min length for a binary attribute.
->          $ref: '#/$defs/len-or-define'
->
-> And that seems to work. Should I be using unevaluatedProperties somehow
-> as well here?
+'gh_userspace_memory_region' allows 64-bit mem_size, so perhaps make it 64-bit
+here as well?
 
-No, it looks fine. 'unevaluatedProperties' wouldn't make sense here as
-'type' is a string or integer.
+> +struct gunyah_vm_memory_mapping *gh_vm_mem_mapping_alloc(struct gunyah_vm *ghvm,
+> +							struct gh_userspace_memory_region *region)
+> +{
+> +	phys_addr_t curr_page, prev_page;
+> +	struct gunyah_vm_memory_mapping *mapping, *tmp_mapping;
+> +	struct gh_rm_mem_entry *mem_entries;
+> +	int i, j, pinned, ret = 0;
+> +	struct gh_rm_mem_parcel *parcel;
+> +
+> +	if (!region->memory_size || !PAGE_ALIGNED(region->memory_size) ||
+> +		!PAGE_ALIGNED(region->userspace_addr))
+> +		return ERR_PTR(-EINVAL);
+> +
+> +	ret = mutex_lock_interruptible(&ghvm->mm_lock);
+> +	if (ret)
+> +		return ERR_PTR(ret);
+> +	mapping = __gh_vm_mem_mapping_find(ghvm, region->label);
+> +	if (mapping) {
+> +		ret = -EEXIST;
+> +		goto unlock;
 
->
-> > > +          description: |
-> > > +            Name used when referring to this space in other definitions, not used outside of YAML.
-> > > +          type: string
-> > > +        # Strictly speaking 'name-prefix' and 'subset-of' should be mutually exclusive.
-> >
-> > If one is required:
-> >
-> > oneOf:
-> >   - required: [ name-prefix ]
-> >   - required: [ subset-of ]
-> >
-> > Or if both are optional:
-> >
-> > dependencies:
-> >   name-prefix:
-> >     not:
-> >       required: [ subset-of ]
-> >   subset-of:
-> >     not:
-> >       required: [ name-prefix ]
->
-> Nice, let me try this.
->
-> > > +                  min-len:
-> > > +                    description: Min length for a binary attribute.
-> > > +                    oneOf:
-> > > +                      - type: string
-> > > +                        pattern: ^[0-9A-Za-z_-]*( - 1)?$
-> > > +                      - type: integer
-> >
-> > How can a length be a string?
->
-> For readability in C I wanted to allow using a define for the length.
-> Then the name of the define goes here, and the value can be fetched
-> from the "definitions" section of the spec.
+We should avoid kfree(mapping) in this case?
 
-Ah, makes sense.
+> +	}
+> +
+> +	mapping = kzalloc(sizeof(*mapping), GFP_KERNEL);
+> +	if (!mapping) {
+> +		ret = -ENOMEM;
+> +		goto unlock;
+> +	}
+> +
+> +	mapping->parcel.label = region->label;
+> +	mapping->guest_phys_addr = region->guest_phys_addr;
+> +	mapping->npages = region->memory_size >> PAGE_SHIFT;
+> +	parcel = &mapping->parcel;
+> +	parcel->mem_handle = GH_MEM_HANDLE_INVAL; /* to be filled later by mem_share/mem_lend */
+> +	parcel->mem_type = GH_RM_MEM_TYPE_NORMAL;
+> +
+> +	/* Check for overlap */
+> +	list_for_each_entry(tmp_mapping, &ghvm->memory_mappings, list) {
+> +		if (!((mapping->guest_phys_addr + (mapping->npages << PAGE_SHIFT) <=
+> +			tmp_mapping->guest_phys_addr) ||
+> +			(mapping->guest_phys_addr >=
+> +			tmp_mapping->guest_phys_addr + (tmp_mapping->npages << PAGE_SHIFT)))) {
+> +			ret = -EEXIST;
+> +			goto unlock;
+> +		}
+> +	}
+> +
+> +	list_add(&mapping->list, &ghvm->memory_mappings);
 
-Don't you need to drop the '-' in the regex then? Also, the '*' should
-be a '+' for 1 or more instead of 0 or more.
+I think we need to either avoid adding to the list this early (until all steps
+below are successfull) or maintain some additional state in 'mapping' to
+indicate that its work in progress. Consider the race condition for example when
+multiple threads call SET_USER_MEM_REGION ioctl on same label (one with size > 0
+and other with size = 0), which can lead to unpleasant outcome AFAICS.
 
-> > Anyways, this is something you could pull out into a $defs entry and
-> > reference. It will also work without the oneOf because 'pattern' will
-> > just be ignored for an integer. That's one gotcha with json-schema. If
-> > a keyword doesn't apply to the instance, it is silently ignored. (That
-> > includes unknown keywords such as ones with typos. Fun!). 'oneOf' will
-> > give you pretty crappy error messages, so it's good to avoid when
-> > possible.
->
-> Oh, interesting. Changed to:
->
-> $defs:
->   len-or-define:
->     type: [ string, integer ]
->     pattern: ^[0-9A-Za-z_-]*( - 1)?$
->     minimum: 0
+> +unlock:
+> +	mutex_unlock(&ghvm->mm_lock);
+> +	if (ret)
+> +		goto free_mapping;
+> +
+> +	mapping->pages = kcalloc(mapping->npages, sizeof(*mapping->pages), GFP_KERNEL);
+> +	if (!mapping->pages) {
+> +		ret = -ENOMEM;
+> +		goto reclaim;
+
+Can you check this error path? We seem to call unpin_user_page() in this path,
+which is not correct.
+
+> +	}
+> +
+> +	pinned = pin_user_pages_fast(region->userspace_addr, mapping->npages,
+> +					FOLL_WRITE | FOLL_LONGTERM, mapping->pages);
+> +	if (pinned < 0) {
+> +		ret = pinned;
+> +		goto reclaim;
+
+Same comment as above
+
+> +	parcel->acl_entries[0].vmid = ghvm->vmid;
+
+cpu_to_le() wrapper missing here and few other places in this function. Pls check.
+
