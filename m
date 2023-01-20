@@ -2,143 +2,232 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 8CFB467565A
-	for <lists+linux-doc@lfdr.de>; Fri, 20 Jan 2023 15:09:53 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 014FE675667
+	for <lists+linux-doc@lfdr.de>; Fri, 20 Jan 2023 15:11:00 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S230136AbjATOJv (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Fri, 20 Jan 2023 09:09:51 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:36348 "EHLO
+        id S230203AbjATOK6 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Fri, 20 Jan 2023 09:10:58 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:37420 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S229661AbjATOJu (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Fri, 20 Jan 2023 09:09:50 -0500
-Received: from mail-pl1-x62c.google.com (mail-pl1-x62c.google.com [IPv6:2607:f8b0:4864:20::62c])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id A5F76C4E87
-        for <linux-doc@vger.kernel.org>; Fri, 20 Jan 2023 06:09:39 -0800 (PST)
-Received: by mail-pl1-x62c.google.com with SMTP id k18so5417914pll.5
-        for <linux-doc@vger.kernel.org>; Fri, 20 Jan 2023 06:09:39 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:cc:to:subject:user-agent:mime-version:date:message-id
-         :from:to:cc:subject:date:message-id:reply-to;
-        bh=FGPQvZx2mA1GFg7uw0rvj1+iQ+hzMZKdzKohNlCbJWE=;
-        b=XGwr2hT36NfBdQVpEbr9IdoWrr7FPQx7qMPrEQrmL0twoO9fLaeXgFOqXoraSqkxT5
-         F+CzWU0BDWRMY0mEtl7PLZRT5JfD+ipkP4EDf/p7CD6yCAzjHcJA3AIbaNCKHcyj8EAX
-         Evz8sFcQYsMSJgnWSvqY0B93KjGZbhUaDSwEx9Nz/EW267F64EnmosOvDymVn2ndFbVX
-         dl4JrTvbh2dq9+dFw3IOwtLIqNCRJyfwCYjon9A1YR6Zs03K9mbC075SOPOlla3ulnSb
-         M2sYLjPiujn3BVPXprYX1N+XYWQqEYHtGSPRYANjYFpG6VkvVo8n4ezcQF7xHTiGJuNR
-         BUNQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:cc:to:subject:user-agent:mime-version:date:message-id
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=FGPQvZx2mA1GFg7uw0rvj1+iQ+hzMZKdzKohNlCbJWE=;
-        b=6h0Ajy/5p/a+Z3E110QvLs9tChWSn6B9uFyRYOWF8v5bl0kXohJ4tvXAWmYc3sX8MT
-         DlzvFiGZQGRxmSk9bOvsilsagAmKigKgrQMhi75Vz1yuVM4Tnue0xH2PcI+zKJ9lCNmm
-         CVZ+6GijmwKP9u11/K8AYde/gxpAsd4asILWrhAA/oS2kZ/epe9jtXLYxmFGBuC+nuv9
-         sr8AMD5yEbEy44KbCbG39+quaTjgPouOJWkT6V9ymX49eE32HezQG7Nb6TCq/veR5cEk
-         of2ISl+bIYKrjzMolOWUuNghexXoxACHSJUzJv2njSSWvuSWiMZlibgKJ9J1VAhtVRh2
-         CDUw==
-X-Gm-Message-State: AFqh2krNUi+PAV8nr+tjsrzN5pwrpAqhJY3i8v4igsaZkhlGDM9XYu8b
-        3fDup1CEuFom4sgJAaNgNx9QDbkW4Z0=
-X-Google-Smtp-Source: AMrXdXt1r6sQtvN3UmpV3d0a6q1JZWHPsvtAQuHe3uobtrsvkYBKBqEBBV+OLna7U1yf0mwMYAk8xQ==
-X-Received: by 2002:a17:903:328b:b0:194:cd07:a8bb with SMTP id jh11-20020a170903328b00b00194cd07a8bbmr6167400plb.30.1674223778992;
-        Fri, 20 Jan 2023 06:09:38 -0800 (PST)
-Received: from [192.168.11.9] (KD106167171201.ppp-bb.dion.ne.jp. [106.167.171.201])
-        by smtp.gmail.com with ESMTPSA id h6-20020a170902f54600b00176b84eb29asm2453945plf.301.2023.01.20.06.09.37
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Fri, 20 Jan 2023 06:09:38 -0800 (PST)
-Message-ID: <fa426691-c76a-8ab0-4975-6edacc9cb247@gmail.com>
-Date:   Fri, 20 Jan 2023 23:09:34 +0900
+        with ESMTP id S230166AbjATOK4 (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Fri, 20 Jan 2023 09:10:56 -0500
+Received: from fx306.security-mail.net (smtpout30.security-mail.net [85.31.212.36])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 52773C4EAD
+        for <linux-doc@vger.kernel.org>; Fri, 20 Jan 2023 06:10:29 -0800 (PST)
+Received: from localhost (fx306.security-mail.net [127.0.0.1])
+        by fx306.security-mail.net (Postfix) with ESMTP id BF37135CF30
+        for <linux-doc@vger.kernel.org>; Fri, 20 Jan 2023 15:10:27 +0100 (CET)
+Received: from fx306 (fx306.security-mail.net [127.0.0.1]) by
+ fx306.security-mail.net (Postfix) with ESMTP id 7FDA635CF24; Fri, 20 Jan
+ 2023 15:10:27 +0100 (CET)
+Received: from zimbra2.kalray.eu (unknown [217.181.231.53]) by
+ fx306.security-mail.net (Postfix) with ESMTPS id CF40835CE76; Fri, 20 Jan
+ 2023 15:10:26 +0100 (CET)
+Received: from zimbra2.kalray.eu (localhost [127.0.0.1]) by
+ zimbra2.kalray.eu (Postfix) with ESMTPS id 915E327E043E; Fri, 20 Jan 2023
+ 15:10:26 +0100 (CET)
+Received: from localhost (localhost [127.0.0.1]) by zimbra2.kalray.eu
+ (Postfix) with ESMTP id 76ED427E043A; Fri, 20 Jan 2023 15:10:26 +0100 (CET)
+Received: from zimbra2.kalray.eu ([127.0.0.1]) by localhost
+ (zimbra2.kalray.eu [127.0.0.1]) (amavisd-new, port 10026) with ESMTP id
+ bkqmCC_I0G-S; Fri, 20 Jan 2023 15:10:26 +0100 (CET)
+Received: from junon.lin.mbt.kalray.eu (unknown [192.168.37.161]) by
+ zimbra2.kalray.eu (Postfix) with ESMTPSA id E117627E0439; Fri, 20 Jan 2023
+ 15:10:25 +0100 (CET)
+X-Virus-Scanned: E-securemail
+Secumail-id: <1626f.63caa0d2.ce20a.0>
+DKIM-Filter: OpenDKIM Filter v2.10.3 zimbra2.kalray.eu 76ED427E043A
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kalray.eu;
+ s=32AE1B44-9502-11E5-BA35-3734643DEF29; t=1674223826;
+ bh=WsdsMgF+9wdt2RCH1Xf3svKE0DGavKlRxJdrjiN4Uh8=;
+ h=From:To:Date:Message-Id:MIME-Version;
+ b=P23x+LKcvEP+IKZLbkuicGs3Pej5mBdo8yQYkaxT3SdD6c0GM19pKDj+ase6ViEKo
+ uPexGp9XpE0T3huFfEVD6e4MSK+6FZ4VooRCJ6oBEHDNAQPNIZeWLmd6d5qSRBL22D
+ of29euZL+icynxeO+ubhAeSadnZtlOlSeb48YA+Q=
+From:   Yann Sionneau <ysionneau@kalray.eu>
+To:     Arnd Bergmann <arnd@arndb.de>, Jonathan Corbet <corbet@lwn.net>,
+        Thomas Gleixner <tglx@linutronix.de>,
+        Marc Zyngier <maz@kernel.org>,
+        Rob Herring <robh+dt@kernel.org>,
+        Krzysztof Kozlowski <krzysztof.kozlowski+dt@linaro.org>,
+        Will Deacon <will@kernel.org>,
+        Peter Zijlstra <peterz@infradead.org>,
+        Boqun Feng <boqun.feng@gmail.com>,
+        Mark Rutland <mark.rutland@arm.com>,
+        Eric Biederman <ebiederm@xmission.com>,
+        Kees Cook <keescook@chromium.org>,
+        Oleg Nesterov <oleg@redhat.com>,
+        Ingo Molnar <mingo@redhat.com>,
+        Waiman Long <longman@redhat.com>,
+        "Aneesh Kumar K.V" <aneesh.kumar@linux.ibm.com>,
+        Andrew Morton <akpm@linux-foundation.org>,
+        Nick Piggin <npiggin@gmail.com>,
+        Paul Moore <paul@paul-moore.com>,
+        Eric Paris <eparis@redhat.com>,
+        Christian Brauner <brauner@kernel.org>,
+        Paul Walmsley <paul.walmsley@sifive.com>,
+        Palmer Dabbelt <palmer@dabbelt.com>,
+        Albert Ou <aou@eecs.berkeley.edu>,
+        Jules Maselbas <jmaselbas@kalray.eu>,
+        Yann Sionneau <ysionneau@kalray.eu>,
+        Guillaume Thouvenin <gthouvenin@kalray.eu>,
+        Clement Leger <clement@clement-leger.fr>,
+        Vincent Chardon <vincent.chardon@elsys-design.com>,
+        Marc =?utf-8?b?UG91bGhpw6hz?= <dkm@kataplop.net>,
+        Julian Vetter <jvetter@kalray.eu>,
+        Samuel Jones <sjones@kalray.eu>,
+        Ashley Lesdalons <alesdalons@kalray.eu>,
+        Thomas Costis <tcostis@kalray.eu>,
+        Marius Gligor <mgligor@kalray.eu>,
+        Jonathan Borne <jborne@kalray.eu>,
+        Julien Villette <jvillette@kalray.eu>,
+        Luc Michel <lmichel@kalray.eu>,
+        Louis Morhet <lmorhet@kalray.eu>,
+        Julien Hascoet <jhascoet@kalray.eu>,
+        Jean-Christophe Pince <jcpince@gmail.com>,
+        Guillaume Missonnier <gmissonnier@kalray.eu>,
+        Alex Michon <amichon@kalray.eu>,
+        Huacai Chen <chenhuacai@kernel.org>,
+        WANG Xuerui <git@xen0n.name>,
+        Shaokun Zhang <zhangshaokun@hisilicon.com>,
+        John Garry <john.garry@huawei.com>,
+        Guangbin Huang <huangguangbin2@huawei.com>,
+        Bharat Bhushan <bbhushan2@marvell.com>,
+        Bibo Mao <maobibo@loongson.cn>,
+        Atish Patra <atishp@atishpatra.org>,
+        "Jason A. Donenfeld" <Jason@zx2c4.com>,
+        Qi Liu <liuqi115@huawei.com>,
+        Jiaxun Yang <jiaxun.yang@flygoat.com>,
+        Catalin Marinas <catalin.marinas@arm.com>,
+        Mark Brown <broonie@kernel.org>,
+        Janosch Frank <frankja@linux.ibm.com>,
+        Alexey Dobriyan <adobriyan@gmail.com>
+Cc:     Benjamin Mugnier <mugnier.benjamin@gmail.com>,
+        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
+        devicetree@vger.kernel.org, linux-mm@kvack.org,
+        linux-arch@vger.kernel.org, linux-audit@redhat.com,
+        linux-riscv@lists.infradead.org, bpf@vger.kernel.org
+Subject: [RFC PATCH v2 04/31] Documentation: Add binding for
+ kalray,kv3-1-apic-mailbox
+Date:   Fri, 20 Jan 2023 15:09:35 +0100
+Message-ID: <20230120141002.2442-5-ysionneau@kalray.eu>
+X-Mailer: git-send-email 2.37.2
+In-Reply-To: <20230120141002.2442-1-ysionneau@kalray.eu>
+References: <20230120141002.2442-1-ysionneau@kalray.eu>
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.4.2
-Subject: Re: [PATCH RFC] docs: Add more information to the HTML sidebar
-To:     Sadiya Kazi <sadiyakazi@google.com>,
-        Jonathan Corbet <corbet@lwn.net>
-Cc:     linux-doc@vger.kernel.org, David Gow <davidgow@google.com>
-References: <87o7qu5al3.fsf@meer.lwn.net>
- <CAO2JNKW9pL5097qdte1N4F=RSnRJtcnpaDf__ROJAFfHitooYQ@mail.gmail.com>
-Content-Language: en-US
-From:   Akira Yokosawa <akiyks@gmail.com>
-In-Reply-To: <CAO2JNKW9pL5097qdte1N4F=RSnRJtcnpaDf__ROJAFfHitooYQ@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-Spam-Status: No, score=-2.2 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_FROM,NICE_REPLY_A,
-        RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,SPF_PASS autolearn=ham
-        autolearn_force=no version=3.4.6
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=utf-8
+X-ALTERMIMEV2_out: done
+X-Spam-Status: No, score=-2.4 required=5.0 tests=BAYES_00,DKIM_INVALID,
+        DKIM_SIGNED,RCVD_IN_DNSWL_LOW,SPF_HELO_NONE,SPF_PASS
+        autolearn=unavailable autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Hi all,
+From: Jules Maselbas <jmaselbas@kalray.eu>
 
-On Fri, 20 Jan 2023 19:08:14 +0530, Sadiya Kazi wrote:
-> On Fri, Jan 20, 2023 at 5:41 AM Jonathan Corbet <corbet@lwn.net> wrote:
->>
->> Add a new sidebar template that creates a more RTD-like "fisheye" view of
->> the current place in the document hierarchy.  It is far from ideal, but
->> some readers may find it better for navigating through the documentation as
->> a whole.
->>
->> Signed-off-by: Jonathan Corbet <corbet@lwn.net>
->> ---
-> Thank you, Jon.
-> 
-> This is definitely an improvement as we are able to see the second
-> level headings in the
-> sidebar of the main page. But I would still prefer the "RTD" theme
-> kind of sidebar due to the
-> following reasons:
-> - This sidebar toc list is not bulleted and the same chapter name runs
-> into multiple lines making
->    it trickier for the reader to click the exact chapter they are interested in.
->    Perhaps this can be handled by increasing the width of the sidebar.
-> This will avoid the
->    chapter headings to go to the next line.
-> - Comprehending "where am I" is difficult. When I use the table of
-> contents to navigate
->   to any chapter, such as https://static.lwn.net/kerneldoc/dev-
-> tools/kunit/architecture.html,
->   I'm unsure of where to go from here because it's difficult to find
-> this chapter's exact location
->   in the table of contents. Is there a way to get the nested headings
-> in the sidebar until
->   depth 3 and make it collapsible?
+Add documentation for `kalray,kv3-1-core-intc` binding.
 
-I have mostly the same list of possible improvements.
+Co-developed-by: Jules Maselbas <jmaselbas@kalray.eu>
+Signed-off-by: Jules Maselbas <jmaselbas@kalray.eu>
+Signed-off-by: Yann Sionneau <ysionneau@kalray.eu>
+---
 
-As for the "where am I?" syndrome, it would be helpful if the sidebar
-could be scrolled independently.
+Notes:
+    V1 -> V2: new patch
 
-I'd really like to suggest some code changes, but unable to do so.
+ .../kalray,kv3-1-apic-mailbox.yaml            | 75 +++++++++++++++++++
+ 1 file changed, 75 insertions(+)
+ create mode 100644 Documentation/devicetree/bindings/interrupt-controller/kalray,kv3-1-apic-mailbox.yaml
 
-> 
-> Regards,
-> Sadiya
-> 
-> 
-> 
-> 
-> 
->> So this is just a first attempt to create a more crowded sidebar; the
->> result is somewhat like what RTD does; I'm not hugely happy with it, but
->> it's a start.
->>
->> I've put a copy of the rendered docs at:
->>
->>   https://static.lwn.net/kerneldoc/
->>
->> Thoughts?  Is this headed in the right direction?  This view of the TOC
->> is readily available from Sphinx; if we want something else it's going
->> to be rather more work.
+diff --git a/Documentation/devicetree/bindings/interrupt-controller/kalray,kv3-1-apic-mailbox.yaml b/Documentation/devicetree/bindings/interrupt-controller/kalray,kv3-1-apic-mailbox.yaml
+new file mode 100644
+index 000000000000..e1eb1c9fda0d
+--- /dev/null
++++ b/Documentation/devicetree/bindings/interrupt-controller/kalray,kv3-1-apic-mailbox.yaml
+@@ -0,0 +1,75 @@
++# SPDX-License-Identifier: GPL-2.0
++%YAML 1.2
++---
++$id: http://devicetree.org/schemas/interrupt-controller/kalray,kv3-1-apic-mailbox#
++$schema: http://devicetree.org/meta-schemas/core.yaml#
++
++title: Kalray kv3-1 APIC-Mailbox
++
++description: |
++  Each cluster in the Coolidge SoC includes an Advanced Programmable Interrupt
++  Controller (APIC) which is split in two part:
++    - a Generic Interrupt Controller (referred as APIC-GIC)
++    - a Mailbox Controller           (referred as APIC-Mailbox)
++  The APIC-Mailbox contains 128 mailboxes of 8 bytes (size of a word),
++  this hardware block is basically a 1 KB of smart memory space.
++  Each mailbox can be independently configured with a trigger condition
++  and an input mode function.
++
++  Input mode are:
++   - write
++   - bitwise OR
++   - add
++
++  Interrupts are generated on a write when the mailbox content value
++  match the configured trigger condition.
++  Available conditions are:
++   - doorbell: always raise interruption on write
++   - match: when the mailbox's value equal the configured trigger value
++   - barrier: same as match but the mailbox's value is cleared on trigger
++   - threshold: when the mailbox's value is greater than, or equal to, the
++     configured trigger value
++
++  Since this hardware block generates IRQs based on writes to some memory
++  locations, it is both an interrupt controller and an MSI controller.
++
++allOf:
++  - $ref: /schemas/interrupt-controller.yaml#
++
++properties:
++  compatible:
++    const: kalray,kv3-1-apic-mailbox
++  "#interrupt-cells":
++    const: 1
++    description:
++      The IRQ number.
++  interrupt-controller: true
++  interrupt-parent: true
++  interrupts:
++    maxItems: 128
++    description: |
++     Specifies the interrupt line(s) in the interrupt-parent controller node;
++     valid values depend on the type of parent interrupt controller
++  msi-controller: true
++
++required:
++  - compatible
++  - reg
++  - "#interrupt-cells"
++  - interrupt-controller
++  - interrupt-parent
++  - interrupts
++  - msi-controller
++
++examples:
++  - |
++    apic_mailbox: interrupt-controller@a00000 {
++        compatible = "kalray,kv3-1-apic-gic";
++        reg = <0 0xa00000 0 0x0f200>;
++        #interrupt-cells = <1>;
++        interrupt-controller;
++        interrupt-parent = <&apic_gic>;
++        interrups = <0 1 2 3 4 5 6 7 8 9>;
++    };
++
++...
+-- 
+2.37.2
 
-I think this looks like the right direction. But how far do you want to
-mimic RTD's sidebar???
 
-        Thanks, Akira
+
+
 
