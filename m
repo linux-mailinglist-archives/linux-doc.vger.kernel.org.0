@@ -2,127 +2,100 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 44482676275
-	for <lists+linux-doc@lfdr.de>; Sat, 21 Jan 2023 01:32:26 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 4B38C6762B9
+	for <lists+linux-doc@lfdr.de>; Sat, 21 Jan 2023 02:37:43 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S229698AbjAUAcC (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Fri, 20 Jan 2023 19:32:02 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:44236 "EHLO
+        id S229523AbjAUBhm (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Fri, 20 Jan 2023 20:37:42 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:39324 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S230125AbjAUAcA (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Fri, 20 Jan 2023 19:32:00 -0500
-Received: from mga12.intel.com (mga12.intel.com [192.55.52.136])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 0AA26FF1F;
-        Fri, 20 Jan 2023 16:31:29 -0800 (PST)
+        with ESMTP id S229461AbjAUBhl (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Fri, 20 Jan 2023 20:37:41 -0500
+Received: from mga09.intel.com (mga09.intel.com [134.134.136.24])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id A3E9151428
+        for <linux-doc@vger.kernel.org>; Fri, 20 Jan 2023 17:37:40 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
   d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1674261089; x=1705797089;
-  h=from:to:cc:subject:date:message-id:in-reply-to:
-   references;
-  bh=APb2LiHwFZJrqIKUHw/Hp/TgOVz7B3k99VkTBnRFohc=;
-  b=Ly7N+fEPJOD1GBrhwFHOBD2vN9IZ4wjBERujcncs4gWYGpRpi7hiUrdD
-   X9T7bqYMPhf7T8YhQpJet2y+BrRPyo0+RMRHVmhZZzmjdxt9FiNrdsDhY
-   L6QvXoKrSN8IA4b3fVhZ08TE+FXRSj9jk/3k3SdycaeUlGUk/aEcHZ9Dz
-   4p95OxFJuhR/GYYS3Koo2iT6aCcNAyOCQ1yP7mGSFS+UqK/VhKYf3anqt
-   j50Ow0QTm1h7uTzVfLH/6zaO3s8kFQ07ftT5Ww8Ck+yuzkv1yZKYYRNwy
-   as8aUCwiaiIiScbZVV/Nbu3QnRCCaomGNenEtIVzWIxZRrhn4d1nm2dZ4
-   A==;
-X-IronPort-AV: E=McAfee;i="6500,9779,10596"; a="305404637"
-X-IronPort-AV: E=Sophos;i="5.97,233,1669104000"; 
-   d="scan'208";a="305404637"
-Received: from orsmga004.jf.intel.com ([10.7.209.38])
-  by fmsmga106.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 20 Jan 2023 16:30:18 -0800
+  t=1674265060; x=1705801060;
+  h=date:from:to:cc:subject:message-id:mime-version;
+  bh=7J6PTzudqg7wBuBvyxU2FxVSRCociPR/AF9fyR8o6G8=;
+  b=JGgoQ863GJda1qtMElUor5Z/leEha1HAlHS0CUZg5edmrOjZ+bIkK9zf
+   6Dtwq0IC4LgzuAXqmm4DfWPUl+6LW8exQtu22zrAEZhlfZEaENd0pnQnV
+   Dgts1fvhD13VIa/IZezgS/xbLu3V26m8mWkJQPHp61dgBCBmawGllFXxZ
+   VPtjhn8BgtC4u2tRQ0tHSVWyS2g+MKBPVSx5ed9jrOtIx3/gajMJl2i0w
+   5Fyplb9KB7BbUmjWoVjnPKOjL6a0btso9w/5Ihdv2zIAEn9l96t+KflHz
+   939nZ2tyEwyLnx0r/OLpNj2DM7sO+M056hFLi4MzfX5R0FMLn9R6dk4S5
+   Q==;
+X-IronPort-AV: E=McAfee;i="6500,9779,10596"; a="327016380"
+X-IronPort-AV: E=Sophos;i="5.97,234,1669104000"; 
+   d="scan'208";a="327016380"
+Received: from fmsmga005.fm.intel.com ([10.253.24.32])
+  by orsmga102.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 20 Jan 2023 17:37:40 -0800
 X-ExtLoop1: 1
-X-IronPort-AV: E=McAfee;i="6500,9779,10596"; a="784729506"
+X-IronPort-AV: E=McAfee;i="6500,9779,10596"; a="989594953"
 X-IronPort-AV: E=Sophos;i="5.97,233,1669104000"; 
-   d="scan'208";a="784729506"
-Received: from chang-linux-3.sc.intel.com ([172.25.66.173])
-  by orsmga004.jf.intel.com with ESMTP; 20 Jan 2023 16:30:17 -0800
-From:   "Chang S. Bae" <chang.seok.bae@intel.com>
-To:     dave.hansen@linux.intel.com, x86@kernel.org, tglx@linutronix.de,
-        mingo@redhat.com, bp@alien8.de
-Cc:     hpa@zytor.com, corbet@lwn.net, bagasdotme@gmail.com,
-        tony.luck@intel.com, yang.zhong@intel.com,
-        linux-doc@vger.kernel.org, linux-man@vger.kernel.org,
-        linux-kernel@vger.kernel.org, chang.seok.bae@intel.com
-Subject: [PATCH v5 RESEND 4/4] Documentation/x86: Explain the state component permission for guests
-Date:   Fri, 20 Jan 2023 16:19:00 -0800
-Message-Id: <20230121001900.14900-5-chang.seok.bae@intel.com>
-X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20230121001900.14900-1-chang.seok.bae@intel.com>
-References: <20220922195810.23248-1-chang.seok.bae@intel.com>
- <20230121001900.14900-1-chang.seok.bae@intel.com>
+   d="scan'208";a="989594953"
+Received: from lkp-server01.sh.intel.com (HELO 5646d64e7320) ([10.239.97.150])
+  by fmsmga005.fm.intel.com with ESMTP; 20 Jan 2023 17:37:38 -0800
+Received: from kbuild by 5646d64e7320 with local (Exim 4.96)
+        (envelope-from <lkp@intel.com>)
+        id 1pJ2p8-0003EE-0w;
+        Sat, 21 Jan 2023 01:37:38 +0000
+Date:   Sat, 21 Jan 2023 09:37:16 +0800
+From:   kernel test robot <lkp@intel.com>
+To:     Mao Jinlong <quic_jinlmao@quicinc.com>
+Cc:     oe-kbuild-all@lists.linux.dev,
+        Suzuki K Poulose <suzuki.poulose@arm.com>,
+        linux-doc@vger.kernel.org
+Subject: [coresight:next 28/28] htmldocs:
+ Documentation/trace/coresight/coresight-tpda.rst:3: WARNING: Title overline
+ too short.
+Message-ID: <202301210955.zYxDrLgv-lkp@intel.com>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 X-Spam-Status: No, score=-4.4 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
         DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_MED,
-        SPF_HELO_PASS,SPF_NONE,URIBL_BLOCKED autolearn=ham autolearn_force=no
-        version=3.4.6
+        RCVD_IN_MSPIKE_H3,RCVD_IN_MSPIKE_WL,SPF_HELO_NONE,SPF_NONE,
+        URIBL_BLOCKED autolearn=ham autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Commit 980fe2fddcff ("x86/fpu: Extend fpu_xstate_prctl() with guest
-permissions") extends a couple of arch_prctl(2) options for VCPU threads.
-Add description for them.
+tree:   https://git.kernel.org/pub/scm/linux/kernel/git/coresight/linux.git next
+head:   758d638667d474ff6b0a9052a8298f04c7ddf62f
+commit: 758d638667d474ff6b0a9052a8298f04c7ddf62f [28/28] Documentation: trace: Add documentation for TPDM and TPDA
+reproduce:
+        # https://git.kernel.org/pub/scm/linux/kernel/git/coresight/linux.git/commit/?id=758d638667d474ff6b0a9052a8298f04c7ddf62f
+        git remote add coresight https://git.kernel.org/pub/scm/linux/kernel/git/coresight/linux.git
+        git fetch --no-tags coresight next
+        git checkout 758d638667d474ff6b0a9052a8298f04c7ddf62f
+        make menuconfig
+        # enable CONFIG_COMPILE_TEST, CONFIG_WARN_MISSING_DOCUMENTS, CONFIG_WARN_ABI_ERRORS
+        make htmldocs
 
-Signed-off-by: Chang S. Bae <chang.seok.bae@intel.com>
-Reviewed-by: Thiago Macieira <thiago.macieira@intel.com>
-Reviewed-by: Yang Zhong <yang.zhong@intel.com>
-Reviewed-by: Tony Luck <tony.luck@intel.com>
-Cc: x86@kernel.org
-Cc: linux-kernel@vger.kernel.org
-Cc: linux-doc@vger.kernel.org
----
-Changes from v1:
-* Add the reason for the guest options (Dave Hansen).
-* Add a note to allude some VMM policy, i.e. KVM_X86_XCOMP_GUEST_SUPP.
-* Move it in the separate section.
+If you fix the issue, kindly add following tag where applicable
+| Reported-by: kernel test robot <lkp@intel.com>
 
-Note the correspondent attributes were also proposed for the KVM API. But,
-it was seen as inessential:
-    https://lore.kernel.org/lkml/20220823231402.7839-1-chang.seok.bae@intel.com/
----
- Documentation/x86/xstate.rst | 29 +++++++++++++++++++++++++++++
- 1 file changed, 29 insertions(+)
+All warnings (new ones prefixed by >>):
 
-diff --git a/Documentation/x86/xstate.rst b/Documentation/x86/xstate.rst
-index 23b1c9f3efb2..ae5c69e48b11 100644
---- a/Documentation/x86/xstate.rst
-+++ b/Documentation/x86/xstate.rst
-@@ -143,3 +143,32 @@ entry if the feature is in its initial configuration.  This differs from
- non-dynamic features which are always written regardless of their
- configuration.  Signal handlers can examine the XSAVE buffer's XSTATE_BV
- field to determine if a features was written.
-+
-+Dynamic features for virtual machines
-+-------------------------------------
-+
-+The permission for the guest state component needs to be managed separately
-+from the host, as they are exclusive to each other. A coupled of options
-+are extended to control the guest permission:
-+
-+-ARCH_GET_XCOMP_GUEST_PERM
-+
-+ arch_prctl(ARCH_GET_XCOMP_GUEST_PERM, &features);
-+
-+ ARCH_GET_XCOMP_GUEST_PERM is a variant of ARCH_GET_XCOMP_PERM. So it
-+ provides the same semantics and functionality but for the guest
-+ components.
-+
-+-ARCH_REQ_XCOMP_GUEST_PERM
-+
-+ arch_prctl(ARCH_REQ_XCOMP_GUEST_PERM, feature_nr);
-+
-+ ARCH_REQ_XCOMP_GUEST_PERM is a variant of ARCH_REQ_XCOMP_PERM. It has the
-+ same semantics for the guest permission. While providing a similar
-+ functionality, this comes with a constraint. Permission is frozen when the
-+ first VCPU is created. Any attempt to change permission after that point
-+ is going to be rejected. So, the permission has to be requested before the
-+ first VCPU creation.
-+
-+Note that some VMMs may have already established a set of supported state
-+components. These options are not presumed to support any particular VMM.
+>> Documentation/trace/coresight/coresight-tpda.rst:3: WARNING: Title overline too short.
+>> Documentation/trace/coresight/coresight-tpdm.rst:3: WARNING: Title overline too short.
+>> Documentation/trace/coresight/coresight-tpdm.rst:43: WARNING: Document may not end with a transition.
+
+vim +3 Documentation/trace/coresight/coresight-tpda.rst
+
+     2	
+   > 3	==============================
+     4	The trace performance monitoring and diagnostics aggregator(TPDA).
+     5	==============================
+     6	
+     7	    :Author:   Jinlong Mao <quic_jinlmao@quicinc.com>
+     8	    :Date:     January 2023
+     9	
+
 -- 
-2.17.1
-
+0-DAY CI Kernel Test Service
+https://github.com/intel/lkp-tests
