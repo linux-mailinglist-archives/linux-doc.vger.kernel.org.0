@@ -2,75 +2,116 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 11D62676B01
-	for <lists+linux-doc@lfdr.de>; Sun, 22 Jan 2023 05:12:51 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 4C82E676B3B
+	for <lists+linux-doc@lfdr.de>; Sun, 22 Jan 2023 06:31:13 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S229523AbjAVEMt (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Sat, 21 Jan 2023 23:12:49 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:48440 "EHLO
+        id S229622AbjAVFbL (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Sun, 22 Jan 2023 00:31:11 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:58254 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S229493AbjAVEMs (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Sat, 21 Jan 2023 23:12:48 -0500
-X-Greylist: delayed 1390 seconds by postgrey-1.37 at lindbergh.monkeyblade.net; Sat, 21 Jan 2023 20:12:45 PST
-Received: from webhost01.oletelecom.com.br (webhost01.oletelecom.com.br [200.194.232.34])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id C0E40E056
-        for <linux-doc@vger.kernel.org>; Sat, 21 Jan 2023 20:12:44 -0800 (PST)
-Received: from [::1] (port=50734 helo=webhost01.oletelecom.com.br)
-        by webhost01.oletelecom.com.br with esmtpa (Exim 4.93)
-        (envelope-from <avesa@avesa.com.br>)
-        id 1pJRKE-0004v9-53; Sun, 22 Jan 2023 00:47:22 -0300
+        with ESMTP id S229523AbjAVFbK (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Sun, 22 Jan 2023 00:31:10 -0500
+Received: from dfw.source.kernel.org (dfw.source.kernel.org [IPv6:2604:1380:4641:c500::1])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 8813A1E9DF;
+        Sat, 21 Jan 2023 21:31:09 -0800 (PST)
+Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
+        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+        (No client certificate requested)
+        by dfw.source.kernel.org (Postfix) with ESMTPS id 1378360B65;
+        Sun, 22 Jan 2023 05:31:09 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 0E8CAC433EF;
+        Sun, 22 Jan 2023 05:31:04 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+        s=k20201202; t=1674365468;
+        bh=3H+5gwm3jHRvPAhOxGctQ/HQqOetEu/VFFOPn2E6NdM=;
+        h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+        b=F2Pp+1aWVVoAHbhxXwyrw6jj9/cXM62lqIBXZbgl7UeNVm2mky1MvtyzXYB4abqIy
+         rEeAM/XSKEY8s/aVvu5B6QZytOQE8sogYAV3syikyXbaM17Gop9HUNxUzVdFeCf3Bj
+         0M7inqzQwQWgvfposf9Q8/LGkrL5O8AnjBeGA3iAXJFDrJ1UfgpKGgz7eNl1qjc+fx
+         wVKGNqQ+Cz+NP0uMSTDvRjCdFquZvWBbHljZtsjfjGu2U6/PITUMMkZPA4dyo5K18b
+         tWmDppJw5diFWHTVdEb/Pomlpc3I8Y8omyGHgNuaOFSjI1XxA2yjvNpi8+DPJBQdx0
+         Ux183/Vv39tUw==
+Date:   Sun, 22 Jan 2023 07:30:54 +0200
+From:   Mike Rapoport <rppt@kernel.org>
+To:     Jonathan Corbet <corbet@lwn.net>
+Cc:     Andrew Morton <akpm@linux-foundation.org>,
+        Bagas Sanjaya <bagasdotme@gmail.com>,
+        David Hildenbrand <david@redhat.com>,
+        Johannes Weiner <hannes@cmpxchg.org>,
+        Lorenzo Stoakes <lstoakes@gmail.com>,
+        "Matthew Wilcox (Oracle)" <willy@infradead.org>,
+        Mel Gorman <mgorman@suse.de>, Michal Hocko <mhocko@kernel.org>,
+        Vlastimil Babka <vbabka@suse.cz>, linux-doc@vger.kernel.org,
+        linux-kernel@vger.kernel.org, linux-mm@kvack.org
+Subject: Re: [PATCH v4 0/1] docs/mm: start filling out new structure
+Message-ID: <Y8zKDkJPeEb0wUTK@kernel.org>
+References: <20230115184212.996298-1-rppt@kernel.org>
 MIME-Version: 1.0
-Date:   Sun, 22 Jan 2023 00:47:21 -0300
-From:   Lloyds Finance <avesa@avesa.com.br>
-To:     undisclosed-recipients:;
-Subject: EINFACHE DARLEHEN!
-Organization: Lloyds Finance
-Reply-To: info@lloydesfinance.com
-Mail-Reply-To: info@lloydesfinance.com
-Message-ID: <d85271eda547aa5ed521bc3e3d268caf@avesa.com.br>
-X-Sender: avesa@avesa.com.br
-User-Agent: Roundcube Webmail/1.3.15
-Content-Type: text/plain; charset=UTF-8;
- format=flowed
-Content-Transfer-Encoding: 8bit
-X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
-X-AntiAbuse: Primary Hostname - webhost01.oletelecom.com.br
-X-AntiAbuse: Original Domain - vger.kernel.org
-X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
-X-AntiAbuse: Sender Address Domain - avesa.com.br
-X-Get-Message-Sender-Via: webhost01.oletelecom.com.br: authenticated_id: avesa@avesa.com.br
-X-Authenticated-Sender: webhost01.oletelecom.com.br: avesa@avesa.com.br
-X-Source: 
-X-Source-Args: 
-X-Source-Dir: 
-X-Spam-Status: Yes, score=7.2 required=5.0 tests=BAYES_99,BAYES_999,
-        NIXSPAM_IXHASH,SPF_HELO_NONE,SPF_NONE,SUBJ_ALL_CAPS autolearn=no
-        autolearn_force=no version=3.4.6
-X-Spam-Report: *  3.5 BAYES_99 BODY: Bayes spam probability is 99 to 100%
-        *      [score: 1.0000]
-        *  0.2 BAYES_999 BODY: Bayes spam probability is 99.9 to 100%
-        *      [score: 1.0000]
-        *  3.0 NIXSPAM_IXHASH http://www.nixspam.org/
-        *  0.0 SPF_NONE SPF: sender does not publish an SPF Record
-        *  0.0 SPF_HELO_NONE SPF: HELO does not publish an SPF Record
-        *  0.5 SUBJ_ALL_CAPS Subject is all capitals
-X-Spam-Level: *******
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20230115184212.996298-1-rppt@kernel.org>
+X-Spam-Status: No, score=-7.1 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_HI,
+        SPF_HELO_NONE,SPF_PASS autolearn=ham autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
+Gentle ping.
 
+On Sun, Jan 15, 2023 at 08:42:11PM +0200, Mike Rapoport wrote:
+> Hi,
+> 
+> Last year at LSF/MM Matthew promptly created the new structure for MM
+> documentation, but there still was no patches with content.
+> 
+> I've started to work on it a while ago and I wanted to send it out in a
+> more complete form, but I've got distracted and didn't have time to work
+> on this.
+> 
+> With fast changes around struct page and the threat of Lorenzo's book,
+> I've decided to send out what I have till now with a hope that we can
+> really make this a collaborative effort with people filling paragraph
+> here and there.
+> 
+> If somebody does not feel like sending formal patches, just send me the
+> "raw" text my way and I'll deal with the rest.
+> 
+> The text is relatively heavily formatted because I believe the target
+> audience will prefer html version.
+> 
+> v4:
+> * squash commits into one (Bagas)
+> * fix references formatting (kbuild)
+> * add Reviewed-by and Acked-by tags
+> 
+> v3: https://lore.kernel.org/all/20230112091616.824565-1-rppt@kernel.org
+> * rephrase ZONE_DMA(32) and ZONE_MOVABLE description (Michal)
+> * add cross-reference to DMA API
+> 
+> v2: https://lore.kernel.org/all/20230110152358.2641910-1-rppt@kernel.org
+> * rephrase the paragraph inroducing zones (Lorenzo)
+> * update formatting (Bagas)
+> * add section stubs (Bagas)
+> * small fixes here and there
+> 
+> v1: https://lore.kernel.org/all/20230101094523.1522109-1-rppt@kernel.org
+> 
+> Mike Rapoport (IBM) (1):
+>   docs/mm: Physical Memory: add structure, introduction and nodes
+>     description
+> 
+>  Documentation/core-api/dma-api.rst   |   2 +
+>  Documentation/mm/page_reclaim.rst    |   2 +
+>  Documentation/mm/physical_memory.rst | 346 +++++++++++++++++++++++++++
+>  3 files changed, 350 insertions(+)
+> 
+> -- 
+> 2.35.1
+> 
 
 -- 
-Benötigen Sie einen Geschäftskredit, um Ihr Geschäft zu erweitern? Haben 
-Sie eine schlechte Kreditwürdigkeit, die Sie lösen möchten? Beantragen 
-Sie jetzt einen Kredit bei uns und erhalten Sie sofort eine Zusage. Wir 
-vergeben Kredite an diejenigen, die in finanzieller Not sind, und auch 
-für die Geschäftsausweitung. Kontaktieren Sie uns noch heute und lassen 
-Sie sich genehmigen. Wir bieten alle Arten von Krediten an, wie 
-Privatkredite, Geschäftskredite, Kredite bei schlechten Krediten, 
-Immobilienkredite und Autokredite. Kontaktieren Sie uns offiziell unter 
-der folgenden E-Mail-Adresse info@lloydesfinance.com, um Ihr Darlehen 
-genehmigen zu lassen.
+Sincerely yours,
+Mike.
