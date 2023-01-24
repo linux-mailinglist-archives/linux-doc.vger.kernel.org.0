@@ -2,68 +2,139 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 0578F67A129
-	for <lists+linux-doc@lfdr.de>; Tue, 24 Jan 2023 19:29:33 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 689D367A196
+	for <lists+linux-doc@lfdr.de>; Tue, 24 Jan 2023 19:43:21 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S233484AbjAXS3b (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 24 Jan 2023 13:29:31 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:38682 "EHLO
+        id S234129AbjAXSnT (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 24 Jan 2023 13:43:19 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:48076 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S233101AbjAXS3b (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 24 Jan 2023 13:29:31 -0500
-Received: from mail-pf1-x430.google.com (mail-pf1-x430.google.com [IPv6:2607:f8b0:4864:20::430])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 85D9348614
-        for <linux-doc@vger.kernel.org>; Tue, 24 Jan 2023 10:29:29 -0800 (PST)
-Received: by mail-pf1-x430.google.com with SMTP id g205so11820176pfb.6
-        for <linux-doc@vger.kernel.org>; Tue, 24 Jan 2023 10:29:29 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=to:subject:message-id:date:from:reply-to:mime-version:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=m54Sqk02Mt1LMUdykxm/xF11P0SJ2vDzS7bOVluf730=;
-        b=WCeN0VmtScrmUWy6amLb59x+eTidcur0PbzMHFB0/vsFlptB8lK9SdVD2oxtvVJfa+
-         j5krf2fsjnMp/KMQEmj549KV+ADG4a6fGiR0TsyL8w5i2XA++4R9chb/1G0bTlVDe/6l
-         p/stsGPXZslnAkZIJzLzysZw5tkMt7bsGPRfpy9LD7/c0fuNAi0JAZ5qTvwAaIRn7FHX
-         OCo8sM6MQ9GK9wnJOPFMD0/dio4cuDgeojSoHdeHZ/xSNSZkHNnSVrQopZLJNKRd2TVT
-         2PWoVU0X7/6EaJ9EW/2l5XE0z7xsKvXP+8KCq8Xqm0HQyF+cidgIekaPfSIGmLOJfDma
-         bABw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=to:subject:message-id:date:from:reply-to:mime-version
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=m54Sqk02Mt1LMUdykxm/xF11P0SJ2vDzS7bOVluf730=;
-        b=HNHmZ8rsXvfWb9/XoRszCBT6MM8H7Q4I/EJ9ioj0Ne307WLyvzJoXBmJWM/P44IStz
-         GLYXu/2KtLRIS56cznACnD/hir7nI1y1NjFvCLBtfShDtZ3av6IKwuKqXl4WW/1lOxhL
-         aSY7obwzzX3tfnqmkDGRk0SaaKELGKHB0x1tRLjTIwJq+zF4RSLdN6GTrfY0/wPGzZAm
-         rQzLjwspiE8QXhTi5EAGqAzVc5x44lT9RUcs7fZBw25iqk/LpddxfAJokzTAjrIsD7gs
-         0a9m10MVP4K+KCdZ0MQeoPrAb+K7U9x8dtgLoRIEeNtwlYrxKVtcD5pZl8GvFzlowQ6d
-         0bOQ==
-X-Gm-Message-State: AFqh2kobc+AQ4I0rU+xWbUti0BTsOt8sG9UBbn8aNGMkYsjoAf2HriTD
-        +FYhL942DTEkYuDcLqCxf7Ipp3MPGyF3GjJCXgY=
-X-Google-Smtp-Source: AMrXdXuuy612LOEGsVSI3HgHWfrmFF7BeAQLBvpcub6BjNoi9Hn2EfZXipyT7OMNjPfNEWQ0n5QF9TW6k+kj8jbS77I=
-X-Received: by 2002:a63:234d:0:b0:4ce:ca5c:c472 with SMTP id
- u13-20020a63234d000000b004ceca5cc472mr2866754pgm.105.1674584968991; Tue, 24
- Jan 2023 10:29:28 -0800 (PST)
+        with ESMTP id S234028AbjAXSnI (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 24 Jan 2023 13:43:08 -0500
+X-Greylist: delayed 302 seconds by postgrey-1.37 at lindbergh.monkeyblade.net; Tue, 24 Jan 2023 10:43:01 PST
+Received: from xavier.telenet-ops.be (xavier.telenet-ops.be [IPv6:2a02:1800:120:4::f00:14])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id D3A481BAEF
+        for <linux-doc@vger.kernel.org>; Tue, 24 Jan 2023 10:43:01 -0800 (PST)
+Received: from ramsan.of.borg ([IPv6:2a02:1810:ac12:ed50:2f4a:8573:c294:b2ce])
+        by xavier.telenet-ops.be with bizsmtp
+        id CidZ2900656uRqi01idZDF; Tue, 24 Jan 2023 19:37:56 +0100
+Received: from rox.of.borg ([192.168.97.57])
+        by ramsan.of.borg with esmtp (Exim 4.95)
+        (envelope-from <geert@linux-m68k.org>)
+        id 1pKOAe-007HCL-GZ;
+        Tue, 24 Jan 2023 19:37:33 +0100
+Received: from geert by rox.of.borg with local (Exim 4.95)
+        (envelope-from <geert@linux-m68k.org>)
+        id 1pKOAm-002n0W-Uv;
+        Tue, 24 Jan 2023 19:37:32 +0100
+From:   Geert Uytterhoeven <geert+renesas@glider.be>
+To:     Vinod Koul <vkoul@kernel.org>, Jonathan Corbet <corbet@lwn.net>,
+        Madalin Bucur <madalin.bucur@nxp.com>,
+        "David S . Miller" <davem@davemloft.net>,
+        Eric Dumazet <edumazet@google.com>,
+        Jakub Kicinski <kuba@kernel.org>,
+        Paolo Abeni <pabeni@redhat.com>,
+        Horatiu Vultur <horatiu.vultur@microchip.com>,
+        UNGLinuxDriver@microchip.com,
+        Thierry Reding <thierry.reding@gmail.com>,
+        Lorenzo Pieralisi <lpieralisi@kernel.org>,
+        Rob Herring <robh@kernel.org>,
+        =?UTF-8?q?Krzysztof=20Wilczy=C5=84ski?= <kw@linux.com>,
+        Bjorn Helgaas <bhelgaas@google.com>,
+        Jonathan Hunter <jonathanh@nvidia.com>,
+        Kishon Vijay Abraham I <kishon@kernel.org>,
+        Alan Stern <stern@rowland.harvard.edu>,
+        Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+        Krzysztof Kozlowski <krzysztof.kozlowski@linaro.org>,
+        Alim Akhtar <alim.akhtar@samsung.com>,
+        Siddharth Vadapalli <s-vadapalli@ti.com>,
+        Russell King <linux@armlinux.org.uk>
+Cc:     linux-phy@lists.infradead.org, linux-doc@vger.kernel.org,
+        netdev@vger.kernel.org, linux-tegra@vger.kernel.org,
+        linux-pci@vger.kernel.org, linux-usb@vger.kernel.org,
+        linux-arm-kernel@lists.infradead.org,
+        linux-samsung-soc@vger.kernel.org,
+        Geert Uytterhoeven <geert+renesas@glider.be>
+Subject: [PATCH treewide v2 0/9] phy: Add devm_of_phy_optional_get() helper
+Date:   Tue, 24 Jan 2023 19:37:19 +0100
+Message-Id: <cover.1674584626.git.geert+renesas@glider.be>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-Received: by 2002:a05:7300:b098:b0:97:d8a9:a406 with HTTP; Tue, 24 Jan 2023
- 10:29:28 -0800 (PST)
-Reply-To: fionahill.usa@outlook.com
-From:   Fiona Hill <angelaemmanue@gmail.com>
-Date:   Tue, 24 Jan 2023 10:29:28 -0800
-Message-ID: <CAKpYVvC8kUaqm8sm4jtuCK9nM+8SyV6zZ_vR+tcy=BR38XhBcw@mail.gmail.com>
-Subject: 
-To:     undisclosed-recipients:;
-Content-Type: text/plain; charset="UTF-8"
-X-Spam-Status: No, score=4.4 required=5.0 tests=BAYES_50,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_FROM,FREEMAIL_REPLYTO,
-        RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,SPF_PASS,UNDISC_FREEM autolearn=no
-        autolearn_force=no version=3.4.6
-X-Spam-Level: ****
+Content-Transfer-Encoding: 8bit
+X-Spam-Status: No, score=-2.4 required=5.0 tests=BAYES_00,
+        HEADER_FROM_DIFFERENT_DOMAINS,RCVD_IN_DNSWL_LOW,SPF_HELO_NONE,SPF_NONE
+        autolearn=unavailable autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
+	Hi Vinod et al,
+
+While there exist several optional_get() PHY helper functions, there is
+no optional variant of devm_of_phy_get(), leading to several drivers
+implementing this theirselves, sometimes in buggy ways.
+
+Hence this series, after two cleanup patches, introduces a
+devm_of_phy_optional_get() helper(), and converts existing users of
+devm_of_phy_get() where appropriate.
+
+Changes compared to v1[1]:
+  - Incorporate "[PATCH v2 1/9] phy: Remove unused phy_optional_get()",
+    as it touches the same documentation,
+  - New patch "[PATCH v2 2/9] doc: phy: Document devm_of_phy_get()",
+  - Print an error message in case of failure, as requested by RobH,
+  - Update Documentation,
+  - Clarify removed checks for -ENODEV and -ENOSYS,
+  - Remove error printing in case of real failures from callers,
+  - Rebase am65-cpsw change on top of commit 854617f52ab42418 ("net:
+    ethernet: ti: am65-cpsw: Handle -EPROBE_DEFER for Serdes PHY") in
+    net-next (next-20230123 and later),
+  - Add Reviewed-by, Acked-by.
+
+Most of this series been compile-tested only, but the new helper itself
+has been tested with a new user[2].
+
+Thanks for your comments!
+
+[1] "[PATCH treewide 0/7] phy: Add devm_of_phy_optional_get() helper"
+    https://lore.kernel.org/r/cover.1674036164.git.geert+renesas@glider.be
+[2] "[PATCH 12/12] can: rcar_canfd: Add transceiver support"
+    https://lore.kernel.org/r/e825b50a843ffe40e33f34e4d858c07c1b2ff259.1674499048.git.geert+renesas@glider.be
+
+Geert Uytterhoeven (9):
+  phy: Remove unused phy_optional_get()
+  doc: phy: Document devm_of_phy_get()
+  phy: Add devm_of_phy_optional_get() helper
+  net: fman: memac: Convert to devm_of_phy_optional_get()
+  net: lan966x: Convert to devm_of_phy_optional_get()
+  net: ethernet: ti: am65-cpsw: Convert to devm_of_phy_optional_get()
+  PCI: tegra: Convert to devm_of_phy_optional_get()
+  usb: host: ehci-exynos: Convert to devm_of_phy_optional_get()
+  usb: host: ohci-exynos: Convert to devm_of_phy_optional_get()
+
+ Documentation/driver-api/phy/phy.rst          | 24 +++++----
+ .../net/ethernet/freescale/fman/fman_memac.c  |  9 ++--
+ .../ethernet/microchip/lan966x/lan966x_main.c |  5 +-
+ drivers/net/ethernet/ti/am65-cpsw-nuss.c      |  8 ++-
+ drivers/pci/controller/pci-tegra.c            |  5 +-
+ drivers/phy/phy-core.c                        | 51 +++++++++++--------
+ drivers/usb/host/ehci-exynos.c                | 23 +++------
+ drivers/usb/host/ohci-exynos.c                | 23 +++------
+ include/linux/phy/phy.h                       | 16 +++---
+ 9 files changed, 75 insertions(+), 89 deletions(-)
+
 -- 
-Hello, did you receive my message i send to you ?
+2.34.1
+
+Gr{oetje,eeting}s,
+
+						Geert
+
+--
+Geert Uytterhoeven -- There's lots of Linux beyond ia32 -- geert@linux-m68k.org
+
+In personal conversations with technical people, I call myself a hacker. But
+when I'm talking to journalists I just say "programmer" or something like that.
+							    -- Linus Torvalds
