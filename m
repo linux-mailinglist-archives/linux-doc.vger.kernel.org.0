@@ -2,149 +2,121 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id BD86B67D433
-	for <lists+linux-doc@lfdr.de>; Thu, 26 Jan 2023 19:31:01 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id E7D3C67D47C
+	for <lists+linux-doc@lfdr.de>; Thu, 26 Jan 2023 19:42:35 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S229470AbjAZSbA (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 26 Jan 2023 13:31:00 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:51084 "EHLO
+        id S231163AbjAZSme (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 26 Jan 2023 13:42:34 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:60870 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S231378AbjAZSa7 (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Thu, 26 Jan 2023 13:30:59 -0500
-Received: from mail-il1-x135.google.com (mail-il1-x135.google.com [IPv6:2607:f8b0:4864:20::135])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id C98D09029;
-        Thu, 26 Jan 2023 10:30:56 -0800 (PST)
-Received: by mail-il1-x135.google.com with SMTP id h10so1138821ilq.6;
-        Thu, 26 Jan 2023 10:30:56 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:from:to:cc:subject:date:message-id:reply-to;
-        bh=BtZAD+XajG4Ff3lpRNxc5VU6XMKBXj9jHvhDyP5qqKs=;
-        b=KPsDp1ZwjFTTJ9gseCa1sE6zHCopqeOf/Sg/pl/lSTGYaq7YbyYzCXFfjgqTaFoz2y
-         /78jOoWSVY8fpqVWeng2kRq1uHlIVfjJo7BnEpJ7D7749rrhv/gM4JQ7e5gNp5OOTSdH
-         efknyTybs2voRsrloxjG8Gs+qgrtOdoGgrjDdP6ayo/IQLrbKCIJAKXfbJCARC22Cwpl
-         N9UuoCUe7mDjrqiLucD+/LF55z+jxisMJ4WSqcBWYYm9fVDz+u3PZVxldCN9GJol1BvT
-         zq2K+sIX0tzzWEKLiZXjq6Xt41mwrgMDI5LT6r7+On7DMs2nuTaFTyLzRfXxAztNrTA6
-         FuYw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=BtZAD+XajG4Ff3lpRNxc5VU6XMKBXj9jHvhDyP5qqKs=;
-        b=Q7HautlicMRnXFrqA5hxrpjMP6GGtb19j8DP6tSQhAK6m4ymOCIYEpbans2LxQ8xVs
-         r43kBhX6y0AmBy7PSWXHzJHOSfEnWhO/RPRHirTyRqYsdR/lcKqc+WnUuRQKV39xKr2v
-         1Sdhm/MoVr5WQGC/X0IU619kKGG8UX15pq8V2roiJ9izn7R2hq+s7tHv7vi984IUfj7B
-         3eX7QuabzB3I9qZbZB4jdM1HTxKY2UAJV4UhrV+lJjHuKYY90gmewp+xVCA6Xjdu8cE6
-         ccFwGuefCxDMHDbzNan/tSjfY4HSIC4ir037i4KowkAuvfQ1JxIILw6VupXHD5OHuPcs
-         voNQ==
-X-Gm-Message-State: AFqh2kowD5I67IwNFYkCH+dRWAWQIxZjOqKAwcWobNCTU81xvk6tYULp
-        /wkGc02DrQYggg29PzM7XoHLx9xFVdGG5D6y8dtnzBlMaOw=
-X-Google-Smtp-Source: AMrXdXs7ZAjEie6unF52csPKnYMHWPA0TToP3oo+e6ede7qZNmS9Jv0sLRReSaXYHZxccnUNnT9ZZeW+MZ0E6f7JTY8=
-X-Received: by 2002:a92:6a05:0:b0:30d:ba97:90e2 with SMTP id
- f5-20020a926a05000000b0030dba9790e2mr4343477ilc.38.1674757856075; Thu, 26 Jan
- 2023 10:30:56 -0800 (PST)
+        with ESMTP id S229781AbjAZSmd (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Thu, 26 Jan 2023 13:42:33 -0500
+Received: from mga01.intel.com (mga01.intel.com [192.55.52.88])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id B312C3EFC6;
+        Thu, 26 Jan 2023 10:42:31 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1674758551; x=1706294551;
+  h=from:to:cc:subject:date:message-id:mime-version:
+   content-transfer-encoding;
+  bh=S3DfwWWHVjW08Y4Sj57WtWmKbuBdHRvdkYJVizXcOyE=;
+  b=aH5mUwCy+ipIhItezfxNJ9gWnOXNs/oI/sAqRuUUicTwGa33Uq+ocIF/
+   yqXnlRUp0tmGEzvH/WjWr3QzFoHLk1REd+lnko0ADcJM9aknRv9sdIrM/
+   8yQuCtkSyf4hpc5HzhgH6ltCdW4FlUnjQ/8mQmZGyeKGsUdKewi4Hua/c
+   DPVJaSgDXxI5k7PlmSPiHBrO+v0GF3dhHyCGWfkZSJ2G/bz8+dcGlDRPj
+   YHfzgflN0xxHxjmxVSUyEKvLvaAiM0BmaIxpwcRiVez14tYNli6eNIU2M
+   e74EUMj9i+16SRuGbHpawiswFNBGnYK6rOY4/Z354NJUJU71hydAyFMdb
+   A==;
+X-IronPort-AV: E=McAfee;i="6500,9779,10602"; a="354203308"
+X-IronPort-AV: E=Sophos;i="5.97,249,1669104000"; 
+   d="scan'208";a="354203308"
+Received: from fmsmga005.fm.intel.com ([10.253.24.32])
+  by fmsmga101.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 26 Jan 2023 10:42:05 -0800
+X-IronPort-AV: E=McAfee;i="6500,9779,10602"; a="991745435"
+X-IronPort-AV: E=Sophos;i="5.97,249,1669104000"; 
+   d="scan'208";a="991745435"
+Received: from agluck-desk3.sc.intel.com ([172.25.222.78])
+  by fmsmga005-auth.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 26 Jan 2023 10:42:05 -0800
+From:   Tony Luck <tony.luck@intel.com>
+To:     Fenghua Yu <fenghua.yu@intel.com>,
+        Reinette Chatre <reinette.chatre@intel.com>,
+        Peter Newman <peternewman@google.com>,
+        Jonathan Corbet <corbet@lwn.net>, x86@kernel.org
+Cc:     Shaopeng Tan <tan.shaopeng@fujitsu.com>,
+        James Morse <james.morse@arm.com>,
+        Jamie Iles <quic_jiles@quicinc.com>,
+        Babu Moger <babu.moger@amd.com>, linux-kernel@vger.kernel.org,
+        linux-doc@vger.kernel.org, patches@lists.linux.dev,
+        Tony Luck <tony.luck@intel.com>
+Subject: [PATCH 0/7] x86/resctrl: Add support for Sub-NUMA cluster (SNC) systems
+Date:   Thu, 26 Jan 2023 10:41:50 -0800
+Message-Id: <20230126184157.27626-1-tony.luck@intel.com>
+X-Mailer: git-send-email 2.39.1
 MIME-Version: 1.0
-References: <20230125025126.787431-1-gregory.price@memverge.com>
- <20230125025126.787431-2-gregory.price@memverge.com> <20230126003008.GA31684@redhat.com>
- <CANaxB-xn0wW5xA_CT7bA5=jig+td__EDKPBWSpZdfgMgVOezCg@mail.gmail.com>
- <20230126150725.GB4069@redhat.com> <CANaxB-woave9F479O75P9PC+nFO3DVmbeFA1rXf2c=bhRmWoiQ@mail.gmail.com>
- <Y9K92SQnrXhd0qjC@memverge.com>
-In-Reply-To: <Y9K92SQnrXhd0qjC@memverge.com>
-From:   Andrei Vagin <avagin@gmail.com>
-Date:   Thu, 26 Jan 2023 10:30:44 -0800
-Message-ID: <CANaxB-yL8-4DWMb4h9bBXSZBJ=RrPQuJw76mz0CFkX-3f4Pq_w@mail.gmail.com>
-Subject: Re: [PATCH v6 1/2] ptrace,syscall_user_dispatch: Implement Syscall
- User Dispatch Suspension
-To:     Gregory Price <gregory.price@memverge.com>
-Cc:     Oleg Nesterov <oleg@redhat.com>,
-        Gregory Price <gourry.memverge@gmail.com>,
-        LKML <linux-kernel@vger.kernel.org>,
-        "open list:DOCUMENTATION" <linux-doc@vger.kernel.org>,
-        Peter Zijlstra <peterz@infradead.org>,
-        Andy Lutomirski <luto@kernel.org>,
-        Gabriel Krisman Bertazi <krisman@collabora.com>,
-        Thomas Gleixner <tglx@linutronix.de>,
-        Jonathan Corbet <corbet@lwn.net>,
-        Shuah Khan <shuah@kernel.org>, Mike Rapoport <rppt@kernel.org>
-Content-Type: text/plain; charset="UTF-8"
-X-Spam-Status: No, score=-2.1 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_FROM,
-        RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,SPF_PASS autolearn=ham
-        autolearn_force=no version=3.4.6
+Content-Transfer-Encoding: 8bit
+X-Spam-Status: No, score=-4.4 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_MED,
+        RCVD_IN_MSPIKE_H3,RCVD_IN_MSPIKE_WL,SPF_HELO_NONE,SPF_NONE
+        autolearn=ham autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Thu, Jan 26, 2023 at 9:52 AM Gregory Price
-<gregory.price@memverge.com> wrote:
->
-> On Thu, Jan 26, 2023 at 09:45:39AM -0800, Andrei Vagin wrote:
-> > On Thu, Jan 26, 2023 at 7:07 AM Oleg Nesterov <oleg@redhat.com> wrote:
-> > >
-> > > On 01/25, Andrei Vagin wrote:
-> > > >
-> > > > On Wed, Jan 25, 2023 at 4:30 PM Oleg Nesterov <oleg@redhat.com> wrote:
-> > > > >
-> > > > > On 01/24, Gregory Price wrote:
-> > > > > >
-> > > > > > Adds PTRACE_O_SUSPEND_SYSCALL_USER_DISPATCH to ptrace options, and
-> > > > > > modify Syscall User Dispatch to suspend interception when enabled.
-> > > > > >
-> > > > > > This is modeled after the SUSPEND_SECCOMP feature, which suspends
-> > > > > > SECCOMP interposition.  Without doing this, software like CRIU will
-> > > > > > inject system calls into a process and be intercepted by Syscall
-> > > > > > User Dispatch, either causing a crash (due to blocked signals) or
-> > > > > > the delivery of those signals to a ptracer (not the intended behavior).
-> > > > >
-> > > > > Cough... Gregory, I am sorry ;)
-> > > > >
-> > > > > but can't we drop this patch to ?
-> > > > >
-> > > > > CRIU needs to do PTRACE_SET_SYSCALL_USER_DISPATCH_CONFIG and check
-> > > > > config->mode anyway as we discussed.
-> > > > >
-> > > > > Then it can simply set *config->selector = SYSCALL_DISPATCH_FILTER_ALLOW
-> > > > > with the same effect, no?
-> > > >
-> > > > Oleg,
-> > > >
-> > > > PTRACE_O_SUSPEND_SYSCALL_USER_DISPATCH is automatically cleared when
-> > > > a tracer detaches. It is critical when tracers detach due to unexpected
-> > > > reasons
-> > >
-> > > IIUC, PTRACE_O_SUSPEND_SYSCALL_USER_DISPATCH is needed to run the injected
-> > > code, and this also needs to change the state of the traced process. If
-> > > the tracer (CRIU) dies while the tracee runs this code, I guess the tracee
-> > > will have other problems?
-> >
-> > Our injected code can reheal itself if something goes wrong. The hack
-> > here is that we inject
-> > the code with a signal frame and it calls rt_segreturn to resume the process.
-> >
-> > We want to have this functionality for most cases. I don't expect that
-> > the syscall user dispatch
-> > is used by many applications, so I don't strongly insist on
-> > PTRACE_O_SUSPEND_SYSCALL_USER_DISPATCH. In addition, if we know a user dispatch
-> > memory region, it can be enough to inject our code out of this region
-> > without disabling SUD.
-> >
-> > Thanks,
-> > Andrei
->
-> The region is exclusive, so syscalls *outside* [offset, offset+len]
-> produce a dispatch. That means you would have to inject into that region.
+Intel server systems starting with Skylake support a mode that logically
+partitions each socket. E.g. when partitioned two ways, half the cores,
+L3 cache, and memory controllers are allocated to each of the partitions.
+This may reduce average latency to access L3 cache and memory, with the
+tradeoff that only half the L3 cache is available for subnode-local memory
+access.
 
-You are right. I missed that. So it depends how large a region is and
-whether it has enough
-free space to inject our code.
+The existing Linux resctrl system mishandles RDT monitoring on systems
+with SNC mode enabled.
 
-Out of curiosity, do you know any real app that use SUD? I think it
-was implemented for wine,
-but they haven't started using it yet.
+But, with some simple changes, this can be fixed. When SNC mode is
+enabled, the RDT RMID counters are also partitioned with the low numbered
+counters going to the first partition, and the high numbered counters
+to the second partition[1]. The key is to adjust the RMID value written
+to the IA32_PQR_ASSOC MSR on context switch, and the value written to
+the IA32_QM_EVTSEL when reading out counters, and to change the scaling
+factor that was read from CPUID(0xf,1).EBX
 
-Thanks,
-Andrei
+E.g. in 2-way Sub-NUMA cluster with 200 RMID counters there are only
+100 available counters to the resctrl code. When running on the first
+SNC node RMID values 0..99 are used as before. But when running on the
+second node, a task that is assigned resctrl rmid=10 must load 10+100
+into IA32_PQR_ASSOC to use RMID counter 110.
+
+There should be no changes to functionality on other architectures,
+or on Intel systems with SNC disabled, where snc_ways == 1.
+
+-Tony
+
+[1] Some systems also support a 4-way split. All the above still
+applies, just need to account for cores, cache, memory controllers
+and RMID counters being divided four ways instead of two.
+
+Tony Luck (7):
+  x86/resctrl: Refactor in preparation for node-scoped resources
+  x86/resctrl: Remove hard code of RDT_RESOURCE_L3 in monitor.c
+  x86/resctrl: Add a new node-scoped resource to rdt_resources_all[]
+  x86/resctrl: Add code to setup monitoring at L3 or NODE scope.
+  x86/resctrl: Add a new "snc_ways" file to the monitoring info
+    directory.
+  x86/resctrl: Update documentation with Sub-NUMA cluster changes
+  x86/resctrl: Determine if Sub-NUMA Cluster is enabled and initialize.
+
+ Documentation/x86/resctrl.rst             | 15 +++-
+ include/linux/resctrl.h                   |  4 +-
+ arch/x86/include/asm/resctrl.h            |  4 +-
+ arch/x86/kernel/cpu/resctrl/internal.h    |  9 +++
+ arch/x86/kernel/cpu/resctrl/core.c        | 83 ++++++++++++++++++++---
+ arch/x86/kernel/cpu/resctrl/monitor.c     | 24 ++++---
+ arch/x86/kernel/cpu/resctrl/pseudo_lock.c |  2 +-
+ arch/x86/kernel/cpu/resctrl/rdtgroup.c    | 22 +++++-
+ 8 files changed, 136 insertions(+), 27 deletions(-)
+
+-- 
+2.39.1
+
