@@ -2,75 +2,112 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 93F7567D405
-	for <lists+linux-doc@lfdr.de>; Thu, 26 Jan 2023 19:24:18 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 9CE1767D435
+	for <lists+linux-doc@lfdr.de>; Thu, 26 Jan 2023 19:31:19 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S231784AbjAZSYR (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 26 Jan 2023 13:24:17 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:43250 "EHLO
+        id S231670AbjAZSbS (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 26 Jan 2023 13:31:18 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:50718 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S230227AbjAZSYQ (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Thu, 26 Jan 2023 13:24:16 -0500
-Received: from ms.lwn.net (ms.lwn.net [IPv6:2600:3c01:e000:3a1::42])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id F107A2E811;
-        Thu, 26 Jan 2023 10:24:15 -0800 (PST)
-Received: from localhost (unknown [IPv6:2601:281:8300:73::5f6])
-        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+        with ESMTP id S231664AbjAZSbQ (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Thu, 26 Jan 2023 13:31:16 -0500
+Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.133.124])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 8CFBD72B6
+        for <linux-doc@vger.kernel.org>; Thu, 26 Jan 2023 10:30:30 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+        s=mimecast20190719; t=1674757829;
+        h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+         to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+         in-reply-to:in-reply-to:references:references;
+        bh=tZQdAeWhpsHHDlnk0ZLGhZkWwYVHE6PEpnsUOblp67M=;
+        b=Oy2Ooh6/0KkSegme7i8E+CkQLVMRrOR/eIzFMsZxCSGzRV4dATnOY5ZbrzHUJ0LetV/yL7
+        0c/p26ANdDh7Ky1WIJ+ddmpPTwjrIjKtT9W9qY9piD9YGrHKlidt/gwx42NPIGYCMdHXFY
+        J0rklMNYBgNMlBqR7zaxlMcZIWKlSPQ=
+Received: from mimecast-mx02.redhat.com (mimecast-mx02.redhat.com
+ [66.187.233.88]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ us-mta-618-chZp4DlCM_q_QexTTWLAfw-1; Thu, 26 Jan 2023 13:30:26 -0500
+X-MC-Unique: chZp4DlCM_q_QexTTWLAfw-1
+Received: from smtp.corp.redhat.com (int-mx04.intmail.prod.int.rdu2.redhat.com [10.11.54.4])
+        (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
         (No client certificate requested)
-        by ms.lwn.net (Postfix) with ESMTPSA id 748872CD;
-        Thu, 26 Jan 2023 18:24:15 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 ms.lwn.net 748872CD
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=lwn.net; s=20201203;
-        t=1674757455; bh=NDkHtT0XjsN48TGbkrZ3csn8ktoYSDEN7MwnP8baIsI=;
-        h=From:To:Cc:Subject:In-Reply-To:References:Date:From;
-        b=EfE1CVoBF1Lav23Y8wMwuTM1CGVqLS3IWz+nISXGDdFbPIyEUe7SW+jf3xOlU0DHf
-         lfvBfJEFlncw56/QVROaAgU+gtk7Jpnn70NV8ESfaRX5mO8JhzJfwB1WoyGS8RMSn5
-         U5GsPIv+d523u8tOjZ8PkYMJyA+/B60lO7WiEYnN2SL00p/nwDaLrWPqg/Uh7BynkO
-         +qISNhKnhSfBgZKrRDE7QbaYQ3EN5u10cp5GnZ39YuGnalzCy/IOpt/78fqqQ5Alz5
-         BnEJvGjdOUO/DVh9CMXI0e7rJ24ojMFS0WzKuJ/1N06+dJx+4GHIUAQMsRBeOqqR3a
-         sO9zJRCnposSw==
-From:   Jonathan Corbet <corbet@lwn.net>
-To:     Wang Yong <yongw.kernel@gmail.com>, pbonzini@redhat.com,
-        kchamart@redhat.com
-Cc:     linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
-        kvm@vger.kernel.org, Wang Yong <yongw.kernel@gmail.com>
-Subject: Re: [PATCH] Documentation: KVM: fix typos in running-nested-guests.rst
-In-Reply-To: <20230110150046.549755-1-yongw.kernel@gmail.com>
-References: <20230110150046.549755-1-yongw.kernel@gmail.com>
-Date:   Thu, 26 Jan 2023 11:24:14 -0700
-Message-ID: <87edrh9msx.fsf@meer.lwn.net>
+        by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 7632310115E0;
+        Thu, 26 Jan 2023 18:30:25 +0000 (UTC)
+Received: from dhcp-27-174.brq.redhat.com (ovpn-194-60.brq.redhat.com [10.40.194.60])
+        by smtp.corp.redhat.com (Postfix) with SMTP id C4E722026D76;
+        Thu, 26 Jan 2023 18:30:22 +0000 (UTC)
+Received: by dhcp-27-174.brq.redhat.com (nbSMTP-1.00) for uid 1000
+        oleg@redhat.com; Thu, 26 Jan 2023 19:30:22 +0100 (CET)
+Date:   Thu, 26 Jan 2023 19:30:19 +0100
+From:   Oleg Nesterov <oleg@redhat.com>
+To:     Andrei Vagin <avagin@gmail.com>
+Cc:     Gregory Price <gourry.memverge@gmail.com>,
+        LKML <linux-kernel@vger.kernel.org>,
+        "open list:DOCUMENTATION" <linux-doc@vger.kernel.org>,
+        Peter Zijlstra <peterz@infradead.org>,
+        Andy Lutomirski <luto@kernel.org>,
+        Gabriel Krisman Bertazi <krisman@collabora.com>,
+        Thomas Gleixner <tglx@linutronix.de>,
+        Jonathan Corbet <corbet@lwn.net>,
+        Shuah Khan <shuah@kernel.org>,
+        Gregory Price <gregory.price@memverge.com>,
+        Mike Rapoport <rppt@kernel.org>
+Subject: Re: [PATCH v6 1/2] ptrace,syscall_user_dispatch: Implement Syscall
+ User Dispatch Suspension
+Message-ID: <20230126183019.GD4069@redhat.com>
+References: <20230125025126.787431-1-gregory.price@memverge.com>
+ <20230125025126.787431-2-gregory.price@memverge.com>
+ <20230126003008.GA31684@redhat.com>
+ <CANaxB-xn0wW5xA_CT7bA5=jig+td__EDKPBWSpZdfgMgVOezCg@mail.gmail.com>
+ <20230126150725.GB4069@redhat.com>
+ <CANaxB-woave9F479O75P9PC+nFO3DVmbeFA1rXf2c=bhRmWoiQ@mail.gmail.com>
 MIME-Version: 1.0
-Content-Type: text/plain
-X-Spam-Status: No, score=-2.1 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,SPF_HELO_NONE,SPF_PASS
-        autolearn=ham autolearn_force=no version=3.4.6
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <CANaxB-woave9F479O75P9PC+nFO3DVmbeFA1rXf2c=bhRmWoiQ@mail.gmail.com>
+User-Agent: Mutt/1.5.24 (2015-08-30)
+X-Scanned-By: MIMEDefang 3.1 on 10.11.54.4
+X-Spam-Status: No, score=-2.1 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_NONE,
+        RCVD_IN_MSPIKE_H2,SPF_HELO_NONE,SPF_NONE autolearn=ham
+        autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Wang Yong <yongw.kernel@gmail.com> writes:
-
-> change "gues" to "guest" and remove redundant ")".
+On 01/26, Andrei Vagin wrote:
 >
-> Signed-off-by: Wang Yong <yongw.kernel@gmail.com>
-> ---
->  Documentation/virt/kvm/x86/running-nested-guests.rst | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
+> On Thu, Jan 26, 2023 at 7:07 AM Oleg Nesterov <oleg@redhat.com> wrote:
+> >
+> > IIUC, PTRACE_O_SUSPEND_SYSCALL_USER_DISPATCH is needed to run the injected
+> > code, and this also needs to change the state of the traced process. If
+> > the tracer (CRIU) dies while the tracee runs this code, I guess the tracee
+> > will have other problems?
 >
-> diff --git a/Documentation/virt/kvm/x86/running-nested-guests.rst b/Documentation/virt/kvm/x86/running-nested-guests.rst
-> index a27e6768d900..71136fe1723b 100644
-> --- a/Documentation/virt/kvm/x86/running-nested-guests.rst
-> +++ b/Documentation/virt/kvm/x86/running-nested-guests.rst
-> @@ -150,7 +150,7 @@ able to start an L1 guest with::
->      $ qemu-kvm -cpu host [...]
->  
->  The above will pass through the host CPU's capabilities as-is to the
-> -gues); or for better live migration compatibility, use a named CPU
-> +guest, or for better live migration compatibility, use a named CPU
->  model supported by QEMU. e.g.::
+> Our injected code can reheal itself if something goes wrong. The hack
+> here is that we inject
+> the code with a signal frame and it calls rt_segreturn to resume the process.
 
-Applied, thanks.
+What will happen if CRIU dies and clears ->ptrace right before
+syscall_user_dispatch() checks PT_SUSPEND_SYSCALL_USER_DISPATCH ?
 
-jon
+How the tracee will react to SIGSYS with unexpected .si_syscall ?
+
+> I don't expect that
+> the syscall user dispatch
+> is used by many applications,
+
+Agreed, so the case when CRIU will need to do the additional
+PTRACE_SET_SYSCALL_USER_DISPATCH_CONFIG twice to disable and then re-enable
+syscall_user_dispatch is unlikely.
+
+> so I don't strongly insist on
+> PTRACE_O_SUSPEND_SYSCALL_USER_DISPATCH.
+
+I too won't argue too much. but so far I do not feel there is enough
+justification for this feature ...
+
+Oleg.
+
