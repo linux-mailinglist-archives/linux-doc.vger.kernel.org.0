@@ -2,301 +2,104 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 6C94167F021
-	for <lists+linux-doc@lfdr.de>; Fri, 27 Jan 2023 22:10:23 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 4968167F082
+	for <lists+linux-doc@lfdr.de>; Fri, 27 Jan 2023 22:38:54 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S229701AbjA0VKW (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Fri, 27 Jan 2023 16:10:22 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:34112 "EHLO
+        id S231216AbjA0Vix (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Fri, 27 Jan 2023 16:38:53 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:52848 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S229619AbjA0VKV (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Fri, 27 Jan 2023 16:10:21 -0500
-Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.133.124])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 1510688CC8
-        for <linux-doc@vger.kernel.org>; Fri, 27 Jan 2023 13:09:39 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-        s=mimecast20190719; t=1674853778;
-        h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-         to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-         content-transfer-encoding:content-transfer-encoding:
-         in-reply-to:in-reply-to:references:references;
-        bh=ndB8ukEHepKxXU5mNVOIBCnfXxGd6UUpK39fQXPswC0=;
-        b=dmULehXSVJiPH+pW9C18AQpVNBHPT5lyyKGVnm93PpSjjSi++kqin+jyVnKN1tW3hSGRYE
-        iTTwAzRmdPMMv4R1+UZRP4TQYLADr+P3PJqHW38zIGrjAcIe1GMPqnMTdBRpEpOkif8zON
-        yuXfAY7ypOLGQpCRA9sZW+CIyxiQVHk=
-Received: from mail-ej1-f72.google.com (mail-ej1-f72.google.com
- [209.85.218.72]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_128_GCM_SHA256) id
- us-mta-480-lF0Z7peEOzmeQrbU04DlwQ-1; Fri, 27 Jan 2023 16:09:34 -0500
-X-MC-Unique: lF0Z7peEOzmeQrbU04DlwQ-1
-Received: by mail-ej1-f72.google.com with SMTP id d10-20020a170906640a00b008787d18c373so3055214ejm.17
-        for <linux-doc@vger.kernel.org>; Fri, 27 Jan 2023 13:09:34 -0800 (PST)
+        with ESMTP id S231163AbjA0Viw (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Fri, 27 Jan 2023 16:38:52 -0500
+Received: from mail-qk1-x730.google.com (mail-qk1-x730.google.com [IPv6:2607:f8b0:4864:20::730])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 0299125E2C
+        for <linux-doc@vger.kernel.org>; Fri, 27 Jan 2023 13:38:51 -0800 (PST)
+Received: by mail-qk1-x730.google.com with SMTP id i28so2946952qkl.6
+        for <linux-doc@vger.kernel.org>; Fri, 27 Jan 2023 13:38:50 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112;
+        h=to:subject:message-id:date:from:reply-to:mime-version:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=EkjlJx23CrkCdR6Z9AlaV1vvEzLjMrV/VSTIV1fEBgE=;
+        b=mdSFmRNUmWQq+PcXXLwJph7CYzqDTSPiartUvARRGxoGc1aVC4POxGBX2FggO/3pu3
+         tQFZhD+2V6mS+vdDTGCdjH8/FrQxi8HRqTTNNPcMu5W5wnxcbINbEwC2uNxi16VqiCrO
+         spk3LNSUUGWq9NS1/ROkCfB5Ox947kYiSkJhopYy57uEk7X1FazkJABT0QaaWtsjwE7r
+         wO/3wn0B/X9ffj10o5BpGlMf6j3OkxuiwccZ79tRyIm09vaB2+BsgheNIk/XNgIon8r0
+         AAe5cGFFuaXLmz3cJvk7X0bAKvEdrCkDma6CLHS4KCzXss+wZOUs7zLIkLGlwB9b1ui4
+         u6Ng==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=content-transfer-encoding:in-reply-to:organization:from:references
-         :cc:to:content-language:subject:user-agent:mime-version:date
-         :message-id:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=ndB8ukEHepKxXU5mNVOIBCnfXxGd6UUpK39fQXPswC0=;
-        b=upmsdlIfM0iBRuNW3MWLj5+ws2ntYUlWwrI9RVtyiLb0PPVUeTH4sSvVFLcWdDifNM
-         h65IQlo0QBPyZQgg6SpfQXAQck3K7qTjR8eScAEuKhePBwkhKP+dmX5ay+lRYlXnwHXF
-         1wznt9Fm/dpC8HF0Rsbm0hptzQppsPw/k3erx75MkHzrNi3vHSrymUZm98bRPElUL2tu
-         D1SH+hB0BH1I6GQNasLEHwIdUMqnjus1gYjkvN+YpAAUs3ZT3GeXlraEPGam6HG/xbvA
-         D4QB6Tn6nK5NuJVQKfY99GwJ9/mhaZ5IBNDgHok7w8v51pfTxSQBL86cDbXnYnTowbyD
-         gV4g==
-X-Gm-Message-State: AFqh2kpyE67A0wQENYlttoWBlkZqr0LLuwf03xNEVGyT/evNZ6x4uPGQ
-        K+pLYpgEvF9P6Q7/UrY4yoyhLMmkuLmC3iFS54FLufJvh4IPp+5hljgHzgHiIYzcB2KAX+teiO4
-        PC1z7ibyH4tU0HvmmM9ne
-X-Received: by 2002:a17:907:6f07:b0:7c0:f90f:163d with SMTP id sy7-20020a1709076f0700b007c0f90f163dmr49336057ejc.11.1674853773609;
-        Fri, 27 Jan 2023 13:09:33 -0800 (PST)
-X-Google-Smtp-Source: AMrXdXsi7P8iP1bejpKZSCAEnXNpSzoQMFgQttLInrYR0+DaK+fktxckqwLaVKdgC8gbyCCpYVQfEA==
-X-Received: by 2002:a17:907:6f07:b0:7c0:f90f:163d with SMTP id sy7-20020a1709076f0700b007c0f90f163dmr49336038ejc.11.1674853773276;
-        Fri, 27 Jan 2023 13:09:33 -0800 (PST)
-Received: from ?IPV6:2a02:810d:4b3f:de78:642:1aff:fe31:a15c? ([2a02:810d:4b3f:de78:642:1aff:fe31:a15c])
-        by smtp.gmail.com with ESMTPSA id n18-20020a1709067b5200b00878530f5324sm2871370ejo.90.2023.01.27.13.09.32
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Fri, 27 Jan 2023 13:09:32 -0800 (PST)
-Message-ID: <bc523c5c-efe6-1a7f-b49a-e0867dc1413d@redhat.com>
-Date:   Fri, 27 Jan 2023 22:09:31 +0100
+        h=to:subject:message-id:date:from:reply-to:mime-version
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=EkjlJx23CrkCdR6Z9AlaV1vvEzLjMrV/VSTIV1fEBgE=;
+        b=gVnmZf8dC+pUZwfVDHHGsjtTMqbVsOgBSqf9Y/I7e0R9q2/tQ3OH3pOWTv9ZupfTUs
+         ktzrAA2/ASE369wHb3YVgmnFWk3lVl4ZIDojg+MW9DqtZg2ehWPWgK/kiDzoL5LNq8P7
+         +/quxXsM1+eWL/wo6W4aDhQSqnCUj5R3YuFA+Li+/vn5CyAsvoa262wzWL3wK0sy1lra
+         ESPd5A2T6Y358+RGuzH655iDyhBsk3OOmp8h4MCZ4WBLpfy9T6Vg732PNbfv4aT5nWyj
+         Bj/btX5Rtp7PrsP2YdHPkK/DxpZS2pNijrRGWO+MEE5z0fB6N/uO47OL8L3vUL3Sef5c
+         72OQ==
+X-Gm-Message-State: AFqh2krxkGlwNcFnenvQMX+ObOOhsM7M2W60kNYJxqYLu1myYpPLLPEZ
+        /a0XbF+7DmZ3428poG46j5RXIno0aBab+/2SMNQ=
+X-Google-Smtp-Source: AMrXdXsk2W296jrqnhgL8kKhRiSFwc9CWIOCXF0g3sGOXBKyQYL5TqE8x1jplv4n4pOuAMZpZqMCweE4nKqi6Xud/Ak=
+X-Received: by 2002:ae9:e214:0:b0:708:ee3b:e153 with SMTP id
+ c20-20020ae9e214000000b00708ee3be153mr1126380qkc.352.1674855529998; Fri, 27
+ Jan 2023 13:38:49 -0800 (PST)
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.6.0
-Subject: Re: [PATCH drm-next 05/14] drm/nouveau: new VM_BIND uapi interfaces
-Content-Language: en-US
-To:     =?UTF-8?Q?Christian_K=c3=b6nig?= <christian.koenig@amd.com>,
-        Matthew Brost <matthew.brost@intel.com>
-Cc:     daniel@ffwll.ch, airlied@redhat.com, bskeggs@redhat.com,
-        jason@jlekstrand.net, tzimmermann@suse.de, mripard@kernel.org,
-        corbet@lwn.net, nouveau@lists.freedesktop.org,
-        linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org,
-        linux-doc@vger.kernel.org
-References: <20230118061256.2689-1-dakr@redhat.com>
- <20230118061256.2689-6-dakr@redhat.com>
- <Y9MjSeMcsd18r9vM@DUT025-TGLU.fm.intel.com>
- <7c046ff9-728d-7634-9d77-8536308c7481@redhat.com>
- <c2256c7d-e768-ae3f-d465-b9f8080d111b@amd.com>
- <2427a918-5348-d1ef-ccae-a29c1ff33c83@redhat.com>
- <a214b28b-043c-a8bb-69da-b4d8216fce56@amd.com>
- <3a76bfa9-8ee5-a7d9-b9fb-a98181baec0b@redhat.com>
- <49ac3f95-6eda-9009-4b28-0167213301b2@amd.com>
-From:   Danilo Krummrich <dakr@redhat.com>
-Organization: RedHat
-In-Reply-To: <49ac3f95-6eda-9009-4b28-0167213301b2@amd.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-Spam-Status: No, score=-3.2 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,NICE_REPLY_A,
-        RCVD_IN_DNSWL_NONE,RCVD_IN_MSPIKE_H2,SPF_HELO_NONE,SPF_NONE
-        autolearn=unavailable autolearn_force=no version=3.4.6
+Received: by 2002:a05:622a:2c6:b0:3b6:4a9d:4c83 with HTTP; Fri, 27 Jan 2023
+ 13:38:49 -0800 (PST)
+Reply-To: mrsmargaret1960r@gmail.com
+From:   "Mrs. Margaret Christopher" <alkasimabubakar644@gmail.com>
+Date:   Fri, 27 Jan 2023 22:38:49 +0100
+Message-ID: <CAC84WCrZJNgrSfmMM24wp7WU8T7ZCPvgPUyXRBgHx++ro78g4w@mail.gmail.com>
+Subject: Hello Dear
+To:     undisclosed-recipients:;
+Content-Type: text/plain; charset="UTF-8"
+X-Spam-Status: Yes, score=5.4 required=5.0 tests=BAYES_60,DKIM_SIGNED,
+        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_ENVFROM_END_DIGIT,
+        FREEMAIL_FROM,FREEMAIL_REPLYTO,RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,
+        SPF_PASS,T_HK_NAME_FM_MR_MRS,UNDISC_FREEM autolearn=no
+        autolearn_force=no version=3.4.6
+X-Spam-Report: * -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at
+        *      https://www.dnswl.org/, no trust
+        *      [2607:f8b0:4864:20:0:0:0:730 listed in]
+        [list.dnswl.org]
+        *  1.5 BAYES_60 BODY: Bayes spam probability is 60 to 80%
+        *      [score: 0.7452]
+        * -0.0 SPF_PASS SPF: sender matches SPF record
+        *  0.2 FREEMAIL_ENVFROM_END_DIGIT Envelope-from freemail username ends
+        *       in digit
+        *      [alkasimabubakar644[at]gmail.com]
+        *  0.0 FREEMAIL_FROM Sender email is commonly abused enduser mail
+        *      provider
+        *      [alkasimabubakar644[at]gmail.com]
+        *  0.0 SPF_HELO_NONE SPF: HELO does not publish an SPF Record
+        *  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
+        *       valid
+        * -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+        * -0.1 DKIM_VALID_EF Message has a valid DKIM or DK signature from
+        *      envelope-from domain
+        * -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
+        *      author's domain
+        *  0.0 T_HK_NAME_FM_MR_MRS No description available.
+        *  2.8 UNDISC_FREEM Undisclosed recipients + freemail reply-to
+        *  1.0 FREEMAIL_REPLYTO Reply-To/From or Reply-To/body contain
+        *      different freemails
+X-Spam-Level: *****
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On 1/27/23 16:17, Christian König wrote:
-> Am 27.01.23 um 15:44 schrieb Danilo Krummrich:
->> [SNIP]
->>>>>
->>>>> What you want is one component for tracking the VA allocations 
->>>>> (drm_mm based) and a different component/interface for tracking the 
->>>>> VA mappings (probably rb tree based).
->>>>
->>>> That's what the GPUVA manager is doing. There are gpuva_regions 
->>>> which correspond to VA allocations and gpuvas which represent the 
->>>> mappings. Both are tracked separately (currently both with a 
->>>> separate drm_mm, though). However, the GPUVA manager needs to take 
->>>> regions into account when dealing with mappings to make sure the 
->>>> GPUVA manager doesn't propose drivers to merge over region 
->>>> boundaries. Speaking from userspace PoV, the kernel wouldn't merge 
->>>> mappings from different VKBuffer objects even if they're virtually 
->>>> and physically contiguous.
->>>
->>> That are two completely different things and shouldn't be handled in 
->>> a single component.
->>
->> They are different things, but they're related in a way that for 
->> handling the mappings (in particular merging and sparse) the GPUVA 
->> manager needs to know the VA allocation (or region) boundaries.
->>
->> I have the feeling there might be a misunderstanding. Userspace is in 
->> charge to actually allocate a portion of VA space and manage it. The 
->> GPUVA manager just needs to know about those VA space allocations and 
->> hence keeps track of them.
->>
->> The GPUVA manager is not meant to be an allocator in the sense of 
->> finding and providing a hole for a given request.
->>
->> Maybe the non-ideal choice of using drm_mm was implying something else.
-> 
-> Uff, well long story short that doesn't even remotely match the 
-> requirements. This way the GPUVA manager won't be usable for a whole 
-> bunch of use cases.
-> 
-> What we have are mappings which say X needs to point to Y with this and 
-> hw dependent flags.
-> 
-> The whole idea of having ranges is not going to fly. Neither with AMD 
-> GPUs and I strongly think not with Intels XA either.
+-- 
+Hello Dear
 
-A range in the sense of the GPUVA manager simply represents a VA space 
-allocation (which in case of Nouveau is taken in userspace). Userspace 
-allocates the portion of VA space and lets the kernel know about it. The 
-current implementation needs that for the named reasons. So, I think 
-there is no reason why this would work with one GPU, but not with 
-another. It's just part of the design choice of the manager.
+  Am a dying woman here in the hospital, i was diagnose as a
+Coronavirus patient over  a month ago. I am A business woman who is
+dealing with Gold Exportation, I Am from USA California i have a
+charitable and unfulfilling project that am about to handover to you,
+if you are interested to know more about this project please reply me.
+ Hope to hear from you
 
-And I'm absolutely happy to discuss the details of the manager 
-implementation though.
-
-> 
->>> We should probably talk about the design of the GPUVA manager once 
->>> more when this should be applicable to all GPU drivers.
->>
->> That's what I try to figure out with this RFC, how to make it 
->> appicable for all GPU drivers, so I'm happy to discuss this. :-)
-> 
-> Yeah, that was really good idea :) That proposal here is really far away 
-> from the actual requirements.
-> 
-
-And those are the ones I'm looking for. Do you mind sharing the 
-requirements for amdgpu in particular?
-
->>>> For sparse residency the kernel also needs to know the region 
->>>> boundaries to make sure that it keeps sparse mappings around.
->>>
->>> What?
->>
->> When userspace creates a new VKBuffer with the 
->> VK_BUFFER_CREATE_SPARSE_BINDING_BIT the kernel may need to create 
->> sparse mappings in order to ensure that using this buffer without any 
->> memory backed mappings doesn't fault the GPU.
->>
->> Currently, the implementation does this the following way:
->>
->> 1. Userspace creates a new VKBuffer and hence allocates a portion of 
->> the VA space for it. It calls into the kernel indicating the new VA 
->> space region and the fact that the region is sparse.
->>
->> 2. The kernel picks up the region and stores it in the GPUVA manager, 
->> the driver creates the corresponding sparse mappings / page table 
->> entries.
->>
->> 3. Userspace might ask the driver to create a couple of memory backed 
->> mappings for this particular VA region. The GPUVA manager stores the 
->> mapping parameters, the driver creates the corresponding page table 
->> entries.
->>
->> 4. Userspace might ask to unmap all the memory backed mappings from 
->> this particular VA region. The GPUVA manager removes the mapping 
->> parameters, the driver cleans up the corresponding page table entries. 
->> However, the driver also needs to re-create the sparse mappings, since 
->> it's a sparse buffer, hence it needs to know the boundaries of the 
->> region it needs to create the sparse mappings in.
-> 
-> Again, this is not how things are working. First of all the kernel 
-> absolutely should *NOT* know about those regions.
-> 
-> What we have inside the kernel is the information what happens if an 
-> address X is accessed. On AMD HW this can be:
-> 
-> 1. Route to the PCIe bus because the mapped BO is stored in system memory.
-> 2. Route to the internal MC because the mapped BO is stored in local 
-> memory.
-> 3. Route to other GPUs in the same hive.
-> 4. Route to some doorbell to kick of other work.
-> ...
-> x. Ignore write, return 0 on reads (this is what is used for sparse 
-> mappings).
-> x+1. Trigger a recoverable page fault. This is used for things like SVA.
-> x+2. Trigger a non-recoverable page fault. This is used for things like 
-> unmapped regions where access is illegal.
-> 
-> All this is plus some hw specific caching flags.
-> 
-> When Vulkan allocates a sparse VKBuffer what should happen is the 
-> following:
-> 
-> 1. The Vulkan driver somehow figures out a VA region A..B for the 
-> buffer. This can be in userspace (libdrm_amdgpu) or kernel (drm_mm), but 
-> essentially is currently driver specific.
-
-Right, for Nouveau we have this in userspace as well.
-
-> 
-> 2. The kernel gets a request to map the VA range A..B as sparse, meaning 
-> that it updates the page tables from A..B with the sparse setting.
-> 
-> 3. User space asks kernel to map a couple of memory backings at location 
-> A+1, A+10, A+15 etc....
-> 
-> 4. The VKBuffer is de-allocated, userspace asks kernel to update region 
-> A..B to not map anything (usually triggers a non-recoverable fault).
-
-Until here this seems to be identical to what I'm doing.
-
-It'd be interesting to know how amdgpu handles everything that 
-potentially happens between your 3) and 4). More specifically, how are 
-the page tables changed when memory backed mappings are mapped on a 
-sparse range? What happens when the memory backed mappings are unmapped, 
-but the VKBuffer isn't de-allocated, and hence sparse mappings need to 
-be re-deployed?
-
-Let's assume the sparse VKBuffer (and hence the VA space allocation) is 
-pretty large. In Nouveau the corresponding PTEs would have a rather huge 
-page size to cover this. Now, if small memory backed mappings are mapped 
-to this huge sparse buffer, in Nouveau we'd allocate a new PT with a 
-corresponding smaller page size overlaying the sparse mappings PTEs.
-
-How would this look like in amdgpu?
-
-> 
-> When you want to unify this between hw drivers I strongly suggest to 
-> completely start from scratch once more.
-> 
-> First of all don't think about those mappings as VMAs, that won't work 
-> because VMAs are usually something large. Think of this as individual 
-> PTEs controlled by the application. similar how COW mappings and struct 
-> pages are handled inside the kernel.
-
-Why do you consider tracking single PTEs superior to tracking VMAs? All 
-the properties for a page you mentioned above should be equal for the 
-entirety of pages of a whole (memory backed) mapping, aren't they?
-
-> 
-> Then I would start with the VA allocation manager. You could probably 
-> base that on drm_mm. We handle it differently in amdgpu currently, but I 
-> think this is something we could change.
-
-It was not my intention to come up with an actual allocator for the VA 
-space in the sense of actually finding a free and fitting hole in the VA 
-space.
-
-For Nouveau (and XE, I think) we have this in userspace and from what 
-you've written previously I thought the same applies for amdgpu?
-
-> 
-> Then come up with something close to the amdgpu VM system. I'm pretty 
-> sure that should work for Nouveau and Intel XA as well. In other words 
-> you just have a bunch of very very small structures which represents 
-> mappings and a larger structure which combine all mappings of a specific 
-> type, e.g. all mappings of a BO or all sparse mappings etc...
-
-Considering what you wrote above I assume that small structures / 
-mappings in this paragraph refer to PTEs.
-
-Immediately, I don't really see how this fine grained resolution of 
-single PTEs would help implementing this in Nouveau. Actually, I think 
-it would even complicate the handling of PTs, but I would need to think 
-about this a bit more.
-
-> 
-> Merging of regions is actually not mandatory. We don't do it in amdgpu 
-> and can live with the additional mappings pretty well. But I think this 
-> can differ between drivers.
-> 
-> Regards,
-> Christian.
-> 
-
+Best Regard
+Mrs Margaret
