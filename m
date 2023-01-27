@@ -2,54 +2,73 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 32A2067EA1A
-	for <lists+linux-doc@lfdr.de>; Fri, 27 Jan 2023 16:58:39 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 235F567EA41
+	for <lists+linux-doc@lfdr.de>; Fri, 27 Jan 2023 17:02:31 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S233802AbjA0P6h (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Fri, 27 Jan 2023 10:58:37 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:52634 "EHLO
+        id S232785AbjA0QC3 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Fri, 27 Jan 2023 11:02:29 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:57306 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S230313AbjA0P6h (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Fri, 27 Jan 2023 10:58:37 -0500
-Received: from out0.migadu.com (out0.migadu.com [IPv6:2001:41d0:2:267::])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 8FDC180173;
-        Fri, 27 Jan 2023 07:58:33 -0800 (PST)
-Message-ID: <713a3e22-6327-875e-072d-e916f75d5239@linux.dev>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linux.dev; s=key1;
-        t=1674835111;
-        h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-         to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-         content-transfer-encoding:content-transfer-encoding:
-         in-reply-to:in-reply-to:references:references;
-        bh=LilgKmKEflCZfQlcQYFPLEHnFe8sGUdWiFuvFJpiBQE=;
-        b=W1h1/95tW4oi19mOTrCL4z3lTFY8WnS1D5JQdlCzgj3W/8QulHUVnFCJLQrkC+WNPqCc47
-        rjsHDgp33JKmjFdkuV7f2w+Tvq9wVSksD8V1gMzpBeUH3UoXQOMnhfMW/yBZFXt6NGDQ2G
-        6akvkrV+vSX/NkAKfmFonoHFUCrl15c=
-Date:   Fri, 27 Jan 2023 23:57:57 +0800
+        with ESMTP id S229456AbjA0QC3 (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Fri, 27 Jan 2023 11:02:29 -0500
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 325418B063;
+        Fri, 27 Jan 2023 08:02:01 -0800 (PST)
+Received: from pps.filterd (m0279864.ppops.net [127.0.0.1])
+        by mx0a-0031df01.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id 30RFavqC021454;
+        Fri, 27 Jan 2023 16:01:16 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=quicinc.com; h=from : to : cc :
+ subject : date : message-id : mime-version : content-type; s=qcppdkim1;
+ bh=/S22GBkuN8cVeMhaytVE3/ENZ87v5s8LO6nyMoxDA20=;
+ b=bVWQfxJ9nVf+D7QwGRMEqInO3q9qTiWkFdTTcPEqzze5qG8Y3FA8PeVU6dzcHZnWpUFJ
+ JmZ1jJXDvQu1BbEqYC67IS9Sb2Ssya8NuIZE1FDo8Z5ahckIb4nON41jzdjT7mQLmNIY
+ zZg8HKgkEOzjH8hRsdw3nO1oH4dGuneaBAxQrimEjMYhOsb9WiGHEWjdqxGzp/RNefsF
+ +WZmCeof63uqmQnP7ECfifR2TlOSH4GqwCmradvou6nCN199efaRTrKVxiutRNdmhGJW
+ LJsQqH3DDJaoMsz4uXEcLFVMNWfaa69En59g0vr3tLUX4NwIQuhVwm8zvUQ16xP7t/PR VQ== 
+Received: from nasanppmta04.qualcomm.com (i-global254.qualcomm.com [199.106.103.254])
+        by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 3ncchxrggh-1
+        (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+        Fri, 27 Jan 2023 16:01:16 +0000
+Received: from nasanex01c.na.qualcomm.com (nasanex01c.na.qualcomm.com [10.45.79.139])
+        by NASANPPMTA04.qualcomm.com (8.17.1.5/8.17.1.5) with ESMTPS id 30RG19V1021597
+        (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+        Fri, 27 Jan 2023 16:01:09 GMT
+Received: from hu-mojha-hyd.qualcomm.com (10.80.80.8) by
+ nasanex01c.na.qualcomm.com (10.45.79.139) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.986.36; Fri, 27 Jan 2023 08:01:06 -0800
+From:   Mukesh Ojha <quic_mojha@quicinc.com>
+To:     <linux-hardening@vger.kernel.org>, <linux-doc@vger.kernel.org>,
+        <linux-kernel@vger.kernel.org>, <devicetree@vger.kernel.org>
+CC:     Mukesh Ojha <quic_mojha@quicinc.com>,
+        Kees Cook <keescook@chromium.org>,
+        Tony Luck <tony.luck@intel.com>,
+        "Guilherme G . Piccoli" <gpiccoli@igalia.com>,
+        Rob Herring <robh+dt@kernel.org>,
+        Krzysztof Kozlowski <krzysztof.kozlowski+dt@linaro.org>
+Subject: [PATCH v4 1/2] dt-bindings: ramoops: Inherit reserve memory property
+Date:   Fri, 27 Jan 2023 21:30:51 +0530
+Message-ID: <1674835252-31954-1-git-send-email-quic_mojha@quicinc.com>
+X-Mailer: git-send-email 2.7.4
 MIME-Version: 1.0
-Subject: Re: [PATCH v3 4/4] KVM: arm64: Allow no running vcpu on saving vgic3
- pending table
-Content-Language: en-US
-To:     Gavin Shan <gshan@redhat.com>, kvmarm@lists.linux.dev
-Cc:     kvmarm@lists.cs.columbia.edu, kvm@vger.kernel.org,
-        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
-        linux-arm-kernel@lists.infradead.org, pbonzini@redhat.com,
-        corbet@lwn.net, maz@kernel.org, james.morse@arm.com,
-        suzuki.poulose@arm.com, oliver.upton@linux.dev,
-        yuzenghui@huawei.com, catalin.marinas@arm.com, will@kernel.org,
-        yuzhe@nfschina.com, isaku.yamahata@intel.com, seanjc@google.com,
-        ricarkol@google.com, eric.auger@redhat.com, renzhengeek@gmail.com,
-        reijiw@google.com, shan.gavin@gmail.com
-References: <20230126235451.469087-1-gshan@redhat.com>
- <20230126235451.469087-5-gshan@redhat.com>
-X-Report-Abuse: Please report any abuse attempt to abuse@migadu.com and include these headers.
-From:   Zenghui Yu <zenghui.yu@linux.dev>
-In-Reply-To: <20230126235451.469087-5-gshan@redhat.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-Migadu-Flow: FLOW_OUT
+Content-Type: text/plain
+X-Originating-IP: [10.80.80.8]
+X-ClientProxiedBy: nasanex01a.na.qualcomm.com (10.52.223.231) To
+ nasanex01c.na.qualcomm.com (10.45.79.139)
+X-QCInternal: smtphost
+X-Proofpoint-Virus-Version: vendor=nai engine=6200 definitions=5800 signatures=585085
+X-Proofpoint-ORIG-GUID: VmMSqO6Cn7xkm1WzqPYAvWqmB6PsJMMJ
+X-Proofpoint-GUID: VmMSqO6Cn7xkm1WzqPYAvWqmB6PsJMMJ
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.219,Aquarius:18.0.930,Hydra:6.0.562,FMLib:17.11.122.1
+ definitions=2023-01-27_09,2023-01-27_01,2022-06-22_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 lowpriorityscore=0
+ bulkscore=0 suspectscore=0 priorityscore=1501 impostorscore=0 phishscore=0
+ spamscore=0 clxscore=1011 adultscore=0 mlxscore=0 mlxlogscore=999
+ malwarescore=0 classifier=spam adjust=0 reason=mlx scancount=1
+ engine=8.12.0-2212070000 definitions=main-2301270148
 X-Spam-Status: No, score=-2.8 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_LOW,SPF_HELO_PASS,
+        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_LOW,SPF_HELO_NONE,
         SPF_PASS autolearn=ham autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
@@ -57,63 +76,90 @@ Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On 2023/1/27 07:54, Gavin Shan wrote:
-> We don't have a running VCPU context to save vgic3 pending table due
-> to KVM_DEV_ARM_VGIC_{GRP_CTRL, SAVE_PENDING_TABLES} command on KVM
-> device "kvm-arm-vgic-v3". The unknown case is caught by kvm-unit-tests.
-> 
->    # ./kvm-unit-tests/tests/its-pending-migration
->    WARNING: CPU: 120 PID: 7973 at arch/arm64/kvm/../../../virt/kvm/kvm_main.c:3325 \
->    mark_page_dirty_in_slot+0x60/0xe0
->     :
->    mark_page_dirty_in_slot+0x60/0xe0
->    __kvm_write_guest_page+0xcc/0x100
->    kvm_write_guest+0x7c/0xb0
->    vgic_v3_save_pending_tables+0x148/0x2a0
->    vgic_set_common_attr+0x158/0x240
->    vgic_v3_set_attr+0x4c/0x5c
->    kvm_device_ioctl+0x100/0x160
->    __arm64_sys_ioctl+0xa8/0xf0
->    invoke_syscall.constprop.0+0x7c/0xd0
->    el0_svc_common.constprop.0+0x144/0x160
->    do_el0_svc+0x34/0x60
->    el0_svc+0x3c/0x1a0
->    el0t_64_sync_handler+0xb4/0x130
->    el0t_64_sync+0x178/0x17c
-> 
-> Use vgic_write_guest_lock() to save vgic3 pending table.
-> 
-> Reported-by: Zenghui Yu <yuzenghui@huawei.com>
-> Signed-off-by: Gavin Shan <gshan@redhat.com>
-> Reviewed-by: Oliver Upton <oliver.upton@linux.dev>
-> ---
->  Documentation/virt/kvm/api.rst | 4 +++-
->  arch/arm64/kvm/vgic/vgic-v3.c  | 2 +-
->  2 files changed, 4 insertions(+), 2 deletions(-)
-> 
-> diff --git a/Documentation/virt/kvm/api.rst b/Documentation/virt/kvm/api.rst
-> index 40ada313faa3..07f07668995e 100644
-> --- a/Documentation/virt/kvm/api.rst
-> +++ b/Documentation/virt/kvm/api.rst
-> @@ -8074,7 +8074,9 @@ NOTE: Multiple examples of using the backup bitmap: (1) save vgic/its
->  tables through command KVM_DEV_ARM_{VGIC_GRP_CTRL, ITS_SAVE_TABLES} on
->  KVM device "kvm-arm-vgic-its". (2) restore vgic/its tables through
->  command KVM_DEV_ARM_{VGIC_GRP_CTRL, ITS_RESTORE_TABLES} on KVM device
-> -"kvm-arm-vgic-its". vgic3 LPI pending status is restored.
-> +"kvm-arm-vgic-its". vgic3 LPI pending status is restored. (3) save
-> +vgic3 pending table through KVM_DEV_ARM_VGIC_{GRP_CTRL, SAVE_PENDING_TABLES}
-> +command on KVM device "kvm-arm-vgic-v3".
+The reserved memory region for ramoops is assumed to be at a
+fixed and known location when read from the devicetree. This
+is not desirable in an environment where it is preferred the
+region to be dynamically allocated at runtime, as opposed to
+being fixed at compile time.
 
-Can we summarize these 3 examples with something like: "when the guest
-memory (pending tables, ITS tables, etc) is dirtied by the virtual GIC
-or ITS, which is typically triggered by a userspace request (e.g.,
-KVM_DEV_ARM_ITS_SAVE_TABLES) and doesn't require a running VCPU
-context"? In case there will be more no-running-vcpu
-kvm_write_guest_lock() cases in the VGIC emulation code in future and we
-have to extend the documentation..
+So, update the ramoops binding by inheriting some reserve memory
+property to allocate the ramoops region dynamically.
 
-But I don't have objection to your writing and the whole series looks
-good.
+Cc: Kees Cook <keescook@chromium.org>
+Cc: Tony Luck <tony.luck@intel.com>
+Cc: Guilherme G. Piccoli <gpiccoli@igalia.com>
+Cc: Rob Herring <robh+dt@kernel.org>
+Cc: Krzysztof Kozlowski <krzysztof.kozlowski+dt@linaro.org>
+Signed-off-by: Mukesh Ojha <quic_mojha@quicinc.com>
+---
+Changes in v4:
+ - Addressed comment made by Krzysztof on ramoops node name.
 
-Thanks,
-Zenghui
+Changes in v3:
+ - Fixed yaml error and updated commit text as per comment.
+
+Change in v2:
+  - Added this patch as per changes going to be done in patch 3/3
+
+ .../bindings/reserved-memory/ramoops.yaml          | 34 ++++++++++++++++++++--
+ 1 file changed, 32 insertions(+), 2 deletions(-)
+
+diff --git a/Documentation/devicetree/bindings/reserved-memory/ramoops.yaml b/Documentation/devicetree/bindings/reserved-memory/ramoops.yaml
+index 0391871..8741626 100644
+--- a/Documentation/devicetree/bindings/reserved-memory/ramoops.yaml
++++ b/Documentation/devicetree/bindings/reserved-memory/ramoops.yaml
+@@ -10,7 +10,8 @@ description: |
+   ramoops provides persistent RAM storage for oops and panics, so they can be
+   recovered after a reboot. This is a child-node of "/reserved-memory", and
+   is named "ramoops" after the backend, rather than "pstore" which is the
+-  subsystem.
++  subsystem. This region can be reserved both statically or dynamically by
++  using appropriate property in device tree.
+ 
+   Parts of this storage may be set aside for other persistent log buffers, such
+   as kernel log messages, or for optional ECC error-correction data.  The total
+@@ -112,7 +113,13 @@ unevaluatedProperties: false
+ 
+ required:
+   - compatible
+-  - reg
++
++oneOf:
++  - required:
++      - reg
++
++  - required:
++      - size
+ 
+ anyOf:
+   - required: [record-size]
+@@ -142,3 +149,26 @@ examples:
+             };
+         };
+     };
++
++  - |
++    / {
++        compatible = "foo";
++        model = "foo";
++        #address-cells = <1>;
++        #size-cells = <1>;
++
++        reserved-memory {
++            #address-cells = <1>;
++            #size-cells = <1>;
++            ranges;
++
++            ramoops_region: ramoops {
++                compatible = "ramoops";
++                alloc-ranges = <0x00000000 0xffffffff>;
++                size = <0x0 0x10000>;       /* 64kB */
++                console-size = <0x8000>;    /* 32kB */
++                record-size = <0x400>;      /*  1kB */
++                ecc-size = <16>;
++            };
++        };
++    };
+-- 
+2.7.4
+
