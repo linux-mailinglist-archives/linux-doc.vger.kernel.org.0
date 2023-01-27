@@ -2,103 +2,85 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 7A27567EA0F
-	for <lists+linux-doc@lfdr.de>; Fri, 27 Jan 2023 16:56:08 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id A3A0967EA67
+	for <lists+linux-doc@lfdr.de>; Fri, 27 Jan 2023 17:08:00 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S232813AbjA0P4H (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Fri, 27 Jan 2023 10:56:07 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:50528 "EHLO
+        id S233817AbjA0QH6 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Fri, 27 Jan 2023 11:07:58 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:35884 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S232060AbjA0P4G (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Fri, 27 Jan 2023 10:56:06 -0500
-Received: from ams.source.kernel.org (ams.source.kernel.org [IPv6:2604:1380:4601:e00::1])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 58AAD8497F;
-        Fri, 27 Jan 2023 07:55:57 -0800 (PST)
-Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
-        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
-        (No client certificate requested)
-        by ams.source.kernel.org (Postfix) with ESMTPS id E8E44B80AF8;
-        Fri, 27 Jan 2023 15:55:55 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 61F96C433D2;
-        Fri, 27 Jan 2023 15:55:54 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-        s=k20201202; t=1674834954;
-        bh=TD9Z1LDYEmj7oIuL5xM2XqnFzwsMUmAt2yOOCa2Lpm4=;
-        h=Date:From:To:Cc:Subject:In-Reply-To:From;
-        b=r0YhX9aPn1VearHX4n9CIIYmelJVHpX6YefoobdGtIRemFoYbYZ5fnBe/3FcnZW6O
-         EkgxNNvdOg9QvRxtm3mPk4EmlGpDZyFzLYNT2oE46tDpZhuzMUQvVvAunjCdtmSsyk
-         PNUiIIayS8YUphtRSEBG6XHiCrW+XeQXlNYNne/FR82jHra0ZidQiR5u3Ts0FiZd7E
-         SwgKJxaoGRJKCXVnrTf2YsVK5Lj2957G7pGghHowRTgbyBTO//k9VKZ1VjiTKpyXJn
-         zSB1bP3Tam/Jyfbw46IUOex7dT18X0Rzw31pjOtp2ByKmTc28axv4peOuBfgJbZxnY
-         L3BAGFT+84LBw==
-Date:   Fri, 27 Jan 2023 09:55:51 -0600
-From:   Bjorn Helgaas <helgaas@kernel.org>
-To:     Randy Dunlap <rdunlap@infradead.org>
-Cc:     linux-kernel@vger.kernel.org, Bjorn Helgaas <bhelgaas@google.com>,
-        Lorenzo Pieralisi <lpieralisi@kernel.org>,
-        linux-pci@vger.kernel.org, Marc Zyngier <maz@kernel.org>,
-        Thomas Gleixner <tglx@linutronix.de>,
-        Jonathan Corbet <corbet@lwn.net>, linux-doc@vger.kernel.org
-Subject: Re: [PATCH 20/35] Documentation: PCI: correct spelling
-Message-ID: <20230127155551.GA1387211@bhelgaas>
+        with ESMTP id S233599AbjA0QH6 (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Fri, 27 Jan 2023 11:07:58 -0500
+X-Greylist: delayed 574 seconds by postgrey-1.37 at lindbergh.monkeyblade.net; Fri, 27 Jan 2023 08:07:55 PST
+Received: from out-158.mta0.migadu.com (out-158.mta0.migadu.com [91.218.175.158])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id DFCA62068E
+        for <linux-doc@vger.kernel.org>; Fri, 27 Jan 2023 08:07:52 -0800 (PST)
+Message-ID: <a4b3ee35-a0d7-80f6-c64f-f9056c5b6110@linux.dev>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linux.dev; s=key1;
+        t=1674835097;
+        h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+         to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+         content-transfer-encoding:content-transfer-encoding:
+         in-reply-to:in-reply-to:references:references;
+        bh=gvi6m70GbKqrQkpAzMUr7WtmhWXUZdYOPES9ccn9egI=;
+        b=KRE4nOsctuEOl2LC2RDrgOWHYDOICSl9b3eAwTINeDAKX61JelkAi9iTzhDSLN6i0N4x/C
+        8V/akap4D9bywbnfxgFBx/MT1rGL7DIrtaCptD2OExsatEpXKZ+6pjRJFX1M9/SrT2CaWU
+        v98jc0dGUQ1VNvLSaosQbnwToi+t2Xs=
+Date:   Fri, 27 Jan 2023 23:57:40 +0800
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <20230127064005.1558-21-rdunlap@infradead.org>
-X-Spam-Status: No, score=-7.1 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_HI,
-        SPF_HELO_NONE,SPF_PASS autolearn=ham autolearn_force=no version=3.4.6
+Subject: Re: [PATCH v3 2/4] KVM: arm64: Add helper vgic_write_guest_lock()
+Content-Language: en-US
+To:     Gavin Shan <gshan@redhat.com>, kvmarm@lists.linux.dev
+Cc:     kvmarm@lists.cs.columbia.edu, kvm@vger.kernel.org,
+        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
+        linux-arm-kernel@lists.infradead.org, pbonzini@redhat.com,
+        corbet@lwn.net, maz@kernel.org, james.morse@arm.com,
+        suzuki.poulose@arm.com, oliver.upton@linux.dev,
+        yuzenghui@huawei.com, catalin.marinas@arm.com, will@kernel.org,
+        yuzhe@nfschina.com, isaku.yamahata@intel.com, seanjc@google.com,
+        ricarkol@google.com, eric.auger@redhat.com, renzhengeek@gmail.com,
+        reijiw@google.com, shan.gavin@gmail.com
+References: <20230126235451.469087-1-gshan@redhat.com>
+ <20230126235451.469087-3-gshan@redhat.com>
+X-Report-Abuse: Please report any abuse attempt to abuse@migadu.com and include these headers.
+From:   Zenghui Yu <zenghui.yu@linux.dev>
+In-Reply-To: <20230126235451.469087-3-gshan@redhat.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-Migadu-Flow: FLOW_OUT
+X-Spam-Status: No, score=-2.1 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,SPF_HELO_NONE,SPF_PASS
+        autolearn=unavailable autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Thu, Jan 26, 2023 at 10:39:50PM -0800, Randy Dunlap wrote:
-> Correct spelling problems for Documentation/PCI/ as reported
-> by codespell.
+[ just coming back from holiday, sorry for the late reply ]
+
+On 2023/1/27 07:54, Gavin Shan wrote:
+> Currently, the unknown no-running-vcpu sites are reported when a
+> dirty page is tracked by mark_page_dirty_in_slot(). Until now, the
+> only known no-running-vcpu site is saving vgic/its tables through
+> KVM_DEV_ARM_{VGIC_GRP_CTRL, ITS_SAVE_TABLES} command on KVM device
+> "kvm-arm-vgic-its". Unfortunately, there are more unknown sites to
+> be handled and no-running-vcpu context will be allowed in these
+> sites: (1) KVM_DEV_ARM_{VGIC_GRP_CTRL, ITS_RESTORE_TABLES} command
+> on KVM device "kvm-arm-vgic-its" to restore vgic/its tables. The
+> vgic3 LPI pending status could be restored. (2) Save vgic3 pending
+
+We typically write it as "VGICv3".
+
+> table through KVM_DEV_ARM_{VGIC_GRP_CTRL, VGIC_SAVE_PENDING_TABLES}
+> command on KVM device "kvm-arm-vgic-v3".
 > 
-> Signed-off-by: Randy Dunlap <rdunlap@infradead.org>
-> Cc: Bjorn Helgaas <bhelgaas@google.com>
+> In order to handle those unknown cases, we need a unified helper
+> vgic_write_guest_lock(). struct vgic_dist::save_its_tables_in_progress
+> is also renamed to struct vgic_dist::save_tables_in_progress.
 
-Looks good, thanks!  I assume these will be merged all together, but
-let me know if you'd like me to pick this up.
+How about renaming it to 'write_tables_in_progress' which would look a
+bit more generic? The rest looks good to me.
 
-Acked-by: Bjorn Helgaas <bhelgaas@google.com>
-
-> Cc: Lorenzo Pieralisi <lpieralisi@kernel.org>
-> Cc: linux-pci@vger.kernel.org
-> Cc: Marc Zyngier <maz@kernel.org>
-> Cc: Thomas Gleixner <tglx@linutronix.de>
-> Cc: Jonathan Corbet <corbet@lwn.net>
-> Cc: linux-doc@vger.kernel.org
-> ---
->  Documentation/PCI/endpoint/pci-vntb-howto.rst |    2 +-
->  Documentation/PCI/msi-howto.rst               |    2 +-
->  2 files changed, 2 insertions(+), 2 deletions(-)
-> 
-> diff -- a/Documentation/PCI/endpoint/pci-vntb-howto.rst b/Documentation/PCI/endpoint/pci-vntb-howto.rst
-> --- a/Documentation/PCI/endpoint/pci-vntb-howto.rst
-> +++ b/Documentation/PCI/endpoint/pci-vntb-howto.rst
-> @@ -103,7 +103,7 @@ A sample configuration for NTB function
->  	# echo 1 > functions/pci_epf_vntb/func1/pci_epf_vntb.0/num_mws
->  	# echo 0x100000 > functions/pci_epf_vntb/func1/pci_epf_vntb.0/mw1
->  
-> -A sample configuration for virtual NTB driver for virutal PCI bus::
-> +A sample configuration for virtual NTB driver for virtual PCI bus::
->  
->  	# echo 0x1957 > functions/pci_epf_vntb/func1/pci_epf_vntb.0/vntb_vid
->  	# echo 0x080A > functions/pci_epf_vntb/func1/pci_epf_vntb.0/vntb_pid
-> diff -- a/Documentation/PCI/msi-howto.rst b/Documentation/PCI/msi-howto.rst
-> --- a/Documentation/PCI/msi-howto.rst
-> +++ b/Documentation/PCI/msi-howto.rst
-> @@ -290,7 +290,7 @@ PCI_IRQ_MSI or PCI_IRQ_MSIX flags.
->  List of device drivers MSI(-X) APIs
->  ===================================
->  
-> -The PCI/MSI subystem has a dedicated C file for its exported device driver
-> +The PCI/MSI subsystem has a dedicated C file for its exported device driver
->  APIs — `drivers/pci/msi/api.c`. The following functions are exported:
->  
->  .. kernel-doc:: drivers/pci/msi/api.c
+Thanks,
+Zenghui
