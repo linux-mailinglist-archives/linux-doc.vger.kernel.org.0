@@ -2,161 +2,158 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 744A46812E1
-	for <lists+linux-doc@lfdr.de>; Mon, 30 Jan 2023 15:26:05 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 2753A6812F0
+	for <lists+linux-doc@lfdr.de>; Mon, 30 Jan 2023 15:26:47 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S237578AbjA3O0E (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 30 Jan 2023 09:26:04 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:41676 "EHLO
+        id S237717AbjA3O0q (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 30 Jan 2023 09:26:46 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:42170 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S237587AbjA3OZu (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Mon, 30 Jan 2023 09:25:50 -0500
-Received: from ams.source.kernel.org (ams.source.kernel.org [IPv6:2604:1380:4601:e00::1])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 3C7143CE2E;
-        Mon, 30 Jan 2023 06:24:27 -0800 (PST)
-Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
-        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
-        (No client certificate requested)
-        by ams.source.kernel.org (Postfix) with ESMTPS id C47D2B80FA0;
-        Mon, 30 Jan 2023 14:24:26 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id E181EC433EF;
-        Mon, 30 Jan 2023 14:24:24 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=linuxfoundation.org;
-        s=korg; t=1675088665;
-        bh=8zLEDSNocv1PMFqaJ4tcysTBIamldb90KBgYLdOWiMY=;
-        h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-        b=TE54oH9LbcYOBFftYZ08vqwkBvi9jyJiZqtvuKTeocbilVSgy4IYQp34nwJsT9doX
-         Fd4B+408AUCm8DiHRXvN8xVj69Bg6ZjL9UFFX2NWjldWXATD8lh3tix2IwW8uWBO3J
-         AGaoX0+QAXRw3A7CghVPL9Z/4KRg/SJ3uBzWFfD4=
-From:   Greg Kroah-Hartman <gregkh@linuxfoundation.org>
-To:     stable@vger.kernel.org
-Cc:     Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
-        patches@lists.linux.dev, Jonathan Corbet <corbet@lwn.net>,
-        Andrew Morton <akpm@linux-foundation.org>,
-        Baolin Wang <baolin.wang@linux.alibaba.com>,
-        "Jason A. Donenfeld" <Jason@zx2c4.com>,
-        Eric Biggers <ebiggers@google.com>,
-        Huang Ying <ying.huang@intel.com>,
-        Petr Mladek <pmladek@suse.com>,
-        tangmeng <tangmeng@uniontech.com>,
-        "Guilherme G. Piccoli" <gpiccoli@igalia.com>,
-        Tiezhu Yang <yangtiezhu@loongson.cn>,
-        Sebastian Andrzej Siewior <bigeasy@linutronix.de>,
-        linux-doc@vger.kernel.org, Luis Chamberlain <mcgrof@kernel.org>,
-        Kees Cook <keescook@chromium.org>,
-        Sasha Levin <sashal@kernel.org>
-Subject: [PATCH 5.10 095/143] panic: Introduce warn_limit
-Date:   Mon, 30 Jan 2023 14:52:32 +0100
-Message-Id: <20230130134310.784964743@linuxfoundation.org>
-X-Mailer: git-send-email 2.39.1
-In-Reply-To: <20230130134306.862721518@linuxfoundation.org>
-References: <20230130134306.862721518@linuxfoundation.org>
-User-Agent: quilt/0.67
+        with ESMTP id S237488AbjA3O01 (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Mon, 30 Jan 2023 09:26:27 -0500
+Received: from mail-vs1-f48.google.com (mail-vs1-f48.google.com [209.85.217.48])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 442B840BEF;
+        Mon, 30 Jan 2023 06:25:08 -0800 (PST)
+Received: by mail-vs1-f48.google.com with SMTP id y8so12664585vsq.0;
+        Mon, 30 Jan 2023 06:25:08 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=user-agent:in-reply-to:content-disposition:mime-version:references
+         :message-id:subject:cc:to:from:date:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=/EoK2PPnsf9bafcuD3921ajoctS38QF0C7+TFlgrRio=;
+        b=WTiL63muTSPhzf/htiNhZVTeHC9+w4912ydaVgQePyi9kCy2UdVDA/GdAUOD1nM/w0
+         9LmbekFlyJcGvaMrjFVew4xbUBe1+zoFk3BW2b3BRAL164HXjWT+59EJmb0KQ9DS1Oti
+         4zMJpuaYmAlavZ8RT6pZKT7xvT/cqRVb04pJhLEdDlDf8jvTD2EJUC0B4TbTN8PyZWlA
+         EmDKXEhLGMlZG2ab55N7knBcTPGLhZs7jaw+niG1rtqph9pq2yEwAW0Ep9qzgYeX1k/s
+         wYxlVjWz+AxCBo/jSiqoXHMs/Atm5HwYhB38UKyCxJm09/zFh1h8y5JnYGFuk22oox6L
+         W+xA==
+X-Gm-Message-State: AO0yUKUn1U08uMbHDssAZ5erFopc0H4r3VCeVmTjUheZ9Z+DjFZvGpU9
+        sq4Nl4Eqb8eLfLbPQ/B8OO+0d2aP2iv0qQ==
+X-Google-Smtp-Source: AK7set/+lX1Ckygn7G8bMwSVfHbUm1uNzPTyY/G2PzWCaOMCfyxOEAS9304qsXeB7Qkv2NwshzeuPQ==
+X-Received: by 2002:a67:c293:0:b0:3ef:9cd7:eca4 with SMTP id k19-20020a67c293000000b003ef9cd7eca4mr4594028vsj.18.1675088679705;
+        Mon, 30 Jan 2023 06:24:39 -0800 (PST)
+Received: from maniforge ([24.1.27.177])
+        by smtp.gmail.com with ESMTPSA id m186-20020a37bcc3000000b007068b49b8absm8099922qkf.62.2023.01.30.06.24.38
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 30 Jan 2023 06:24:39 -0800 (PST)
+Date:   Mon, 30 Jan 2023 08:24:36 -0600
+From:   David Vernet <void@manifault.com>
+To:     Randy Dunlap <rdunlap@infradead.org>
+Cc:     linux-kernel@vger.kernel.org, Andrii Nakryiko <andrii@kernel.org>,
+        Alexei Starovoitov <ast@kernel.org>,
+        Daniel Borkmann <daniel@iogearbox.net>, bpf@vger.kernel.org,
+        Jonathan Corbet <corbet@lwn.net>, linux-doc@vger.kernel.org
+Subject: Re: [PATCH 04/35] Documentation: bpf: correct spelling
+Message-ID: <Y9fTJLNVc5i2/XV5@maniforge>
+References: <20230127064005.1558-1-rdunlap@infradead.org>
+ <20230127064005.1558-5-rdunlap@infradead.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-Spam-Status: No, score=-4.4 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_MED,
-        SPF_HELO_NONE,SPF_PASS autolearn=ham autolearn_force=no version=3.4.6
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20230127064005.1558-5-rdunlap@infradead.org>
+User-Agent: Mutt/2.2.9 (2022-11-12)
+X-Spam-Status: No, score=-1.4 required=5.0 tests=BAYES_00,
+        FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,HEADER_FROM_DIFFERENT_DOMAINS,
+        RCVD_IN_DNSWL_NONE,RCVD_IN_MSPIKE_H2,SPF_HELO_NONE,SPF_PASS
+        autolearn=no autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-From: Kees Cook <keescook@chromium.org>
+On Thu, Jan 26, 2023 at 10:39:34PM -0800, Randy Dunlap wrote:
+> Correct spelling problems for Documentation/bpf/ as reported
+> by codespell.
+> 
+> Signed-off-by: Randy Dunlap <rdunlap@infradead.org>
+> Cc: Andrii Nakryiko <andrii@kernel.org>
+> Cc: Alexei Starovoitov <ast@kernel.org>
+> Cc: Daniel Borkmann <daniel@iogearbox.net>
+> Cc: bpf@vger.kernel.org
+> Cc: Jonathan Corbet <corbet@lwn.net>
+> Cc: linux-doc@vger.kernel.org
+> ---
+>  Documentation/bpf/libbpf/libbpf_naming_convention.rst |    6 +++---
+>  Documentation/bpf/map_xskmap.rst                      |    2 +-
+>  Documentation/bpf/ringbuf.rst                         |    4 ++--
+>  Documentation/bpf/verifier.rst                        |    2 +-
+>  4 files changed, 7 insertions(+), 7 deletions(-)
+> 
+> diff -- a/Documentation/bpf/libbpf/libbpf_naming_convention.rst b/Documentation/bpf/libbpf/libbpf_naming_convention.rst
+> --- a/Documentation/bpf/libbpf/libbpf_naming_convention.rst
+> +++ b/Documentation/bpf/libbpf/libbpf_naming_convention.rst
+> @@ -83,8 +83,8 @@ This prevents from accidentally exportin
+>  to be a part of ABI what, in turn, improves both libbpf developer- and
+>  user-experiences.
+>  
+> -ABI versionning
+> ----------------
+> +ABI versioning
+> +--------------
+>  
+>  To make future ABI extensions possible libbpf ABI is versioned.
+>  Versioning is implemented by ``libbpf.map`` version script that is
+> @@ -148,7 +148,7 @@ API documentation convention
+>  The libbpf API is documented via comments above definitions in
+>  header files. These comments can be rendered by doxygen and sphinx
+>  for well organized html output. This section describes the
+> -convention in which these comments should be formated.
+> +convention in which these comments should be formatted.
+>  
+>  Here is an example from btf.h:
+>  
+> diff -- a/Documentation/bpf/map_xskmap.rst b/Documentation/bpf/map_xskmap.rst
+> --- a/Documentation/bpf/map_xskmap.rst
+> +++ b/Documentation/bpf/map_xskmap.rst
+> @@ -178,7 +178,7 @@ The following code snippet shows how to
+>  
+>  For an example on how create AF_XDP sockets, please see the AF_XDP-example and
+>  AF_XDP-forwarding programs in the `bpf-examples`_ directory in the `libxdp`_ repository.
+> -For a detailed explaination of the AF_XDP interface please see:
+> +For a detailed explanation of the AF_XDP interface please see:
+>  
+>  - `libxdp-readme`_.
+>  - `AF_XDP`_ kernel documentation.
+> diff -- a/Documentation/bpf/ringbuf.rst b/Documentation/bpf/ringbuf.rst
+> --- a/Documentation/bpf/ringbuf.rst
+> +++ b/Documentation/bpf/ringbuf.rst
+> @@ -124,7 +124,7 @@ buffer.  Currently 4 are supported:
+>  
+>  - ``BPF_RB_AVAIL_DATA`` returns amount of unconsumed data in ring buffer;
+>  - ``BPF_RB_RING_SIZE`` returns the size of ring buffer;
+> -- ``BPF_RB_CONS_POS``/``BPF_RB_PROD_POS`` returns current logical possition
+> +- ``BPF_RB_CONS_POS``/``BPF_RB_PROD_POS`` returns current logical position
+>    of consumer/producer, respectively.
+>  
+>  Returned values are momentarily snapshots of ring buffer state and could be
+> @@ -146,7 +146,7 @@ Design and Implementation
+>  This reserve/commit schema allows a natural way for multiple producers, either
+>  on different CPUs or even on the same CPU/in the same BPF program, to reserve
+>  independent records and work with them without blocking other producers. This
+> -means that if BPF program was interruped by another BPF program sharing the
+> +means that if BPF program was interrupted by another BPF program sharing the
 
-commit 9fc9e278a5c0b708eeffaf47d6eb0c82aa74ed78 upstream.
+While you're here, could you please also fix this:
 
-Like oops_limit, add warn_limit for limiting the number of warnings when
-panic_on_warn is not set.
+s/if BPF program/if a BPF program
 
-Cc: Jonathan Corbet <corbet@lwn.net>
-Cc: Andrew Morton <akpm@linux-foundation.org>
-Cc: Baolin Wang <baolin.wang@linux.alibaba.com>
-Cc: "Jason A. Donenfeld" <Jason@zx2c4.com>
-Cc: Eric Biggers <ebiggers@google.com>
-Cc: Huang Ying <ying.huang@intel.com>
-Cc: Petr Mladek <pmladek@suse.com>
-Cc: tangmeng <tangmeng@uniontech.com>
-Cc: "Guilherme G. Piccoli" <gpiccoli@igalia.com>
-Cc: Tiezhu Yang <yangtiezhu@loongson.cn>
-Cc: Sebastian Andrzej Siewior <bigeasy@linutronix.de>
-Cc: linux-doc@vger.kernel.org
-Reviewed-by: Luis Chamberlain <mcgrof@kernel.org>
-Signed-off-by: Kees Cook <keescook@chromium.org>
-Link: https://lore.kernel.org/r/20221117234328.594699-5-keescook@chromium.org
-Signed-off-by: Eric Biggers <ebiggers@google.com>
-Signed-off-by: Sasha Levin <sashal@kernel.org>
----
- Documentation/admin-guide/sysctl/kernel.rst | 10 ++++++++++
- kernel/panic.c                              | 14 ++++++++++++++
- 2 files changed, 24 insertions(+)
+>  same ring buffer, they will both get a record reserved (provided there is
+>  enough space left) and can work with it and submit it independently. This
+>  applies to NMI context as well, except that due to using a spinlock during
+> diff -- a/Documentation/bpf/verifier.rst b/Documentation/bpf/verifier.rst
+> --- a/Documentation/bpf/verifier.rst
+> +++ b/Documentation/bpf/verifier.rst
+> @@ -192,7 +192,7 @@ checked and found to be non-NULL, all co
+>  As well as range-checking, the tracked information is also used for enforcing
+>  alignment of pointer accesses.  For instance, on most systems the packet pointer
+>  is 2 bytes after a 4-byte alignment.  If a program adds 14 bytes to that to jump
+> -over the Ethernet header, then reads IHL and addes (IHL * 4), the resulting
+> +over the Ethernet header, then reads IHL and adds (IHL * 4), the resulting
+>  pointer will have a variable offset known to be 4n+2 for some n, so adding the 2
+>  bytes (NET_IP_ALIGN) gives a 4-byte alignment and so word-sized accesses through
+>  that pointer are safe.
 
-diff --git a/Documentation/admin-guide/sysctl/kernel.rst b/Documentation/admin-guide/sysctl/kernel.rst
-index 470262c08858..6b0c7b650dea 100644
---- a/Documentation/admin-guide/sysctl/kernel.rst
-+++ b/Documentation/admin-guide/sysctl/kernel.rst
-@@ -1478,6 +1478,16 @@ entry will default to 2 instead of 0.
- 2 Unprivileged calls to ``bpf()`` are disabled
- = =============================================================
- 
-+
-+warn_limit
-+==========
-+
-+Number of kernel warnings after which the kernel should panic when
-+``panic_on_warn`` is not set. Setting this to 0 disables checking
-+the warning count. Setting this to 1 has the same effect as setting
-+``panic_on_warn=1``. The default value is 0.
-+
-+
- watchdog
- ========
- 
-diff --git a/kernel/panic.c b/kernel/panic.c
-index 0da47888f72e..e341366bd3e8 100644
---- a/kernel/panic.c
-+++ b/kernel/panic.c
-@@ -56,6 +56,7 @@ bool crash_kexec_post_notifiers;
- int panic_on_warn __read_mostly;
- unsigned long panic_on_taint;
- bool panic_on_taint_nousertaint = false;
-+static unsigned int warn_limit __read_mostly;
- 
- int panic_timeout = CONFIG_PANIC_TIMEOUT;
- EXPORT_SYMBOL_GPL(panic_timeout);
-@@ -85,6 +86,13 @@ static struct ctl_table kern_panic_table[] = {
- 		.extra2         = SYSCTL_ONE,
- 	},
- #endif
-+	{
-+		.procname       = "warn_limit",
-+		.data           = &warn_limit,
-+		.maxlen         = sizeof(warn_limit),
-+		.mode           = 0644,
-+		.proc_handler   = proc_douintvec,
-+	},
- 	{ }
- };
- 
-@@ -194,8 +202,14 @@ static void panic_print_sys_info(void)
- 
- void check_panic_on_warn(const char *origin)
- {
-+	static atomic_t warn_count = ATOMIC_INIT(0);
-+
- 	if (panic_on_warn)
- 		panic("%s: panic_on_warn set ...\n", origin);
-+
-+	if (atomic_inc_return(&warn_count) >= READ_ONCE(warn_limit) && warn_limit)
-+		panic("%s: system warned too often (kernel.warn_limit is %d)",
-+		      origin, warn_limit);
- }
- 
- /**
--- 
-2.39.0
-
-
-
+Otherwise, LGTM. I'll wait to add stamp until the v2 sent to bpf-next
+instead of bpf.
