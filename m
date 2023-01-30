@@ -2,106 +2,121 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 6714A680F4B
-	for <lists+linux-doc@lfdr.de>; Mon, 30 Jan 2023 14:49:16 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 5439E681248
+	for <lists+linux-doc@lfdr.de>; Mon, 30 Jan 2023 15:19:47 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S231186AbjA3NtO (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 30 Jan 2023 08:49:14 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:57398 "EHLO
+        id S237594AbjA3OTp (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 30 Jan 2023 09:19:45 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:33190 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S230340AbjA3NtN (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Mon, 30 Jan 2023 08:49:13 -0500
-Received: from vps0.lunn.ch (vps0.lunn.ch [156.67.10.101])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 03B2437556;
-        Mon, 30 Jan 2023 05:49:11 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=lunn.ch;
-        s=20171124; h=In-Reply-To:Content-Disposition:Content-Type:MIME-Version:
-        References:Message-ID:Subject:Cc:To:From:Date:From:Sender:Reply-To:Subject:
-        Date:Message-ID:To:Cc:MIME-Version:Content-Type:Content-Transfer-Encoding:
-        Content-ID:Content-Description:Content-Disposition:In-Reply-To:References;
-        bh=Uz0rS13sZn6W3GLJhzVYyYt2P+D5LMPg6daHnApH/qI=; b=I/Gl7Mypfh2GbCGKvoqfKnf/mO
-        Dk3R7Jf2jJyuPmjVvG32uHeO6huTbQoxXATic6aFd9j+35JBv1eHmiqOWB5PkzJI6z9dpS5R5wkJY
-        ILKJUFVCzokxOkSiXLPsKXtOQYkXQid2WqF7Ek5QctA5WG/YJr/iehghN7qeRu/h2ErI=;
-Received: from andrew by vps0.lunn.ch with local (Exim 4.94.2)
-        (envelope-from <andrew@lunn.ch>)
-        id 1pMUWh-003Zvv-Ej; Mon, 30 Jan 2023 14:48:51 +0100
-Date:   Mon, 30 Jan 2023 14:48:51 +0100
-From:   Andrew Lunn <andrew@lunn.ch>
-To:     Sander Vanheule <sander@svanheule.net>
-Cc:     Christian Marangi <ansuelsmth@gmail.com>,
-        Rob Herring <robh@kernel.org>,
-        Florian Fainelli <f.fainelli@gmail.com>,
-        Vladimir Oltean <olteanv@gmail.com>,
-        "David S. Miller" <davem@davemloft.net>,
-        Eric Dumazet <edumazet@google.com>,
-        Jakub Kicinski <kuba@kernel.org>,
-        Paolo Abeni <pabeni@redhat.com>,
-        Krzysztof Kozlowski <krzysztof.kozlowski+dt@linaro.org>,
-        Jonathan Corbet <corbet@lwn.net>, Pavel Machek <pavel@ucw.cz>,
-        "Russell King (Oracle)" <rmk+kernel@armlinux.org.uk>,
-        John Crispin <john@phrozen.org>, netdev@vger.kernel.org,
-        devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
-        linux-doc@vger.kernel.org, linux-leds@vger.kernel.org,
-        Tim Harvey <tharvey@gateworks.com>,
-        Alexander Stein <alexander.stein@ew.tq-group.com>,
-        Rasmus Villemoes <rasmus.villemoes@prevas.dk>
-Subject: Re: [PATCH v7 11/11] dt-bindings: net: dsa: qca8k: add LEDs
- definition example
-Message-ID: <Y9fKwzMyHK7kRjei@lunn.ch>
-References: <20221214235438.30271-1-ansuelsmth@gmail.com>
- <20221214235438.30271-12-ansuelsmth@gmail.com>
- <20221220173958.GA784285-robh@kernel.org>
- <Y6JDOFmcEQ3FjFKq@lunn.ch>
- <Y6JkXnp0/lF4p0N1@lunn.ch>
- <63a30221.050a0220.16e5f.653a@mx.google.com>
- <c609a7f865ab48f858adafdd9c1014dda8ec82d6.camel@svanheule.net>
- <Y9bs53a9zyqEU9Xw@lunn.ch>
- <f854183545a6ff55235c9f2264af97c1a7f530c3.camel@svanheule.net>
+        with ESMTP id S237633AbjA3OTX (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Mon, 30 Jan 2023 09:19:23 -0500
+Received: from ams.source.kernel.org (ams.source.kernel.org [145.40.68.75])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id A50FC3B676;
+        Mon, 30 Jan 2023 06:18:18 -0800 (PST)
+Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
+        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+        (No client certificate requested)
+        by ams.source.kernel.org (Postfix) with ESMTPS id 412C2B80CB4;
+        Mon, 30 Jan 2023 14:17:37 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 687F0C433D2;
+        Mon, 30 Jan 2023 14:17:35 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=linuxfoundation.org;
+        s=korg; t=1675088256;
+        bh=/JLBjvpUeGFzGaqOLac65hg0LUDi7EjcSMuQocrLXAU=;
+        h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
+        b=oywtRi7ITJLh+2dCGqSIxDsOdNGnHnYwYaUe7XS8Mk2X7AHfvmTIVFNKTSDwl1tCj
+         MWT2NmH9GOeqGsnIQDfeyiFIHM4fiaw8lSjs5iV33wVR0Kg71tu7kPYxQG3K/mWbYv
+         BW72NioYIfkAnsoPnH6Zizt+xRpr4+eKtv1qU888=
+From:   Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+To:     stable@vger.kernel.org
+Cc:     Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+        patches@lists.linux.dev, Jann Horn <jannh@google.com>,
+        Jonathan Corbet <corbet@lwn.net>,
+        Andrew Morton <akpm@linux-foundation.org>,
+        Baolin Wang <baolin.wang@linux.alibaba.com>,
+        "Jason A. Donenfeld" <Jason@zx2c4.com>,
+        Eric Biggers <ebiggers@google.com>,
+        Huang Ying <ying.huang@intel.com>,
+        "Eric W. Biederman" <ebiederm@xmission.com>,
+        Arnd Bergmann <arnd@arndb.de>, linux-doc@vger.kernel.org,
+        Kees Cook <keescook@chromium.org>,
+        Sasha Levin <sashal@kernel.org>
+Subject: [PATCH 5.15 137/204] exit: Allow oops_limit to be disabled
+Date:   Mon, 30 Jan 2023 14:51:42 +0100
+Message-Id: <20230130134322.551323128@linuxfoundation.org>
+X-Mailer: git-send-email 2.39.1
+In-Reply-To: <20230130134316.327556078@linuxfoundation.org>
+References: <20230130134316.327556078@linuxfoundation.org>
+User-Agent: quilt/0.67
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <f854183545a6ff55235c9f2264af97c1a7f530c3.camel@svanheule.net>
-X-Spam-Status: No, score=-2.1 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,SPF_HELO_PASS,SPF_PASS
-        autolearn=ham autolearn_force=no version=3.4.6
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+X-Spam-Status: No, score=-7.1 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_HI,
+        SPF_HELO_NONE,SPF_PASS autolearn=ham autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-> Thanks for the quick clarification. Because you mention this, I realised that
-> the RTL8382's LED controller is actually not in the PHYs. These SoCs use
-> external PHYs, which may have their own, independent, LED controllers. For
-> example the RTL8212D [1].
-> 
-> [1]
-> https://datasheet.lcsc.com/lcsc/2203252253_Realtek-Semicon-RTL8218D-CG_C2901898.pdf
-> 
-> > 
-> > But the point is, the PHYs will probe if listed. They don't have to
-> > have a MAC pointing to them with a phandle. So the phydev will exist,
-> > and that should be enough to get the LED class device registered. If
-> > there is basic on/off support, that should be enough for you to attach
-> > the Morse code panic trigger, the heartbeat handler, or any other LED
-> > trigger.
-> 
-> OK, this makes sense for (external) PHYs which need to be probed anyway to have
-> access to the LEDs.
-> 
-> Looking at the RTL8212D's datasheet (Table 11, p. 24), it appears to be possible
-> to assign an LED to any of the eight PHYs. Perhaps to allow more freedom in the
-> board layout. Maybe I'm just not seeing it, but I don't think the example with
-> an 'leds' node under a PHY contains enough information to perform such a non-
-> trivial mapping. On the other hand, I'm not sure where else that info might go.
+From: Kees Cook <keescook@chromium.org>
 
-The binding is defining all the generic properties need for generic
-PHY LED. For most PHYs, it is probably sufficient. However, there is
-nothing stopping you from adding PHY specific properties. So for
-example, for each PHY LED you could have a property which maps it to
-a LED00-LED35.
+commit de92f65719cd672f4b48397540b9f9eff67eca40 upstream.
 
-So propose a binding for the RTL8218D with whatever extra properties
-you think are needed, and it will be reviewed in the normal way.
+In preparation for keeping oops_limit logic in sync with warn_limit,
+have oops_limit == 0 disable checking the Oops counter.
 
-    Andrew
+Cc: Jann Horn <jannh@google.com>
+Cc: Jonathan Corbet <corbet@lwn.net>
+Cc: Andrew Morton <akpm@linux-foundation.org>
+Cc: Baolin Wang <baolin.wang@linux.alibaba.com>
+Cc: "Jason A. Donenfeld" <Jason@zx2c4.com>
+Cc: Eric Biggers <ebiggers@google.com>
+Cc: Huang Ying <ying.huang@intel.com>
+Cc: "Eric W. Biederman" <ebiederm@xmission.com>
+Cc: Arnd Bergmann <arnd@arndb.de>
+Cc: linux-doc@vger.kernel.org
+Signed-off-by: Kees Cook <keescook@chromium.org>
+Signed-off-by: Eric Biggers <ebiggers@google.com>
+Signed-off-by: Sasha Levin <sashal@kernel.org>
+---
+ Documentation/admin-guide/sysctl/kernel.rst | 5 +++--
+ kernel/exit.c                               | 2 +-
+ 2 files changed, 4 insertions(+), 3 deletions(-)
+
+diff --git a/Documentation/admin-guide/sysctl/kernel.rst b/Documentation/admin-guide/sysctl/kernel.rst
+index b6e68d6f297e..d6f1d3892e71 100644
+--- a/Documentation/admin-guide/sysctl/kernel.rst
++++ b/Documentation/admin-guide/sysctl/kernel.rst
+@@ -675,8 +675,9 @@ oops_limit
+ ==========
+ 
+ Number of kernel oopses after which the kernel should panic when
+-``panic_on_oops`` is not set. Setting this to 0 or 1 has the same effect
+-as setting ``panic_on_oops=1``.
++``panic_on_oops`` is not set. Setting this to 0 disables checking
++the count. Setting this to  1 has the same effect as setting
++``panic_on_oops=1``. The default value is 10000.
+ 
+ 
+ osrelease, ostype & version
+diff --git a/kernel/exit.c b/kernel/exit.c
+index f68a9c6adfc9..f6c85101dba0 100644
+--- a/kernel/exit.c
++++ b/kernel/exit.c
+@@ -941,7 +941,7 @@ void __noreturn make_task_dead(int signr)
+ 	 * To make sure this can't happen, place an upper bound on how often the
+ 	 * kernel may oops without panic().
+ 	 */
+-	if (atomic_inc_return(&oops_count) >= READ_ONCE(oops_limit))
++	if (atomic_inc_return(&oops_count) >= READ_ONCE(oops_limit) && oops_limit)
+ 		panic("Oopsed too often (kernel.oops_limit is %d)", oops_limit);
+ 
+ 	do_exit(signr);
+-- 
+2.39.0
+
+
+
