@@ -2,204 +2,298 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 1BDF8682862
-	for <lists+linux-doc@lfdr.de>; Tue, 31 Jan 2023 10:13:52 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id DDD4C682A0B
+	for <lists+linux-doc@lfdr.de>; Tue, 31 Jan 2023 11:13:21 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S232585AbjAaJNl (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 31 Jan 2023 04:13:41 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:40142 "EHLO
+        id S229686AbjAaKNT (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 31 Jan 2023 05:13:19 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:41722 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S232532AbjAaJNW (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 31 Jan 2023 04:13:22 -0500
-Received: from mail-pf1-x42c.google.com (mail-pf1-x42c.google.com [IPv6:2607:f8b0:4864:20::42c])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 46C704E52D
-        for <linux-doc@vger.kernel.org>; Tue, 31 Jan 2023 01:11:13 -0800 (PST)
-Received: by mail-pf1-x42c.google.com with SMTP id c124so9749953pfb.8
-        for <linux-doc@vger.kernel.org>; Tue, 31 Jan 2023 01:11:13 -0800 (PST)
+        with ESMTP id S229716AbjAaKNS (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 31 Jan 2023 05:13:18 -0500
+Received: from mail-ej1-x631.google.com (mail-ej1-x631.google.com [IPv6:2a00:1450:4864:20::631])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id A714E13D55;
+        Tue, 31 Jan 2023 02:13:14 -0800 (PST)
+Received: by mail-ej1-x631.google.com with SMTP id qw12so24180653ejc.2;
+        Tue, 31 Jan 2023 02:13:14 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=ventanamicro.com; s=google;
-        h=in-reply-to:content-disposition:mime-version:references:message-id
-         :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
-        bh=+G7LKm94Gh8IveRXkVxzmqetNifcC6zGcwfVmKZiIxU=;
-        b=eqXSbhCEC9s02q8nHxUEus2+H/2Y0rvRKIp9bmt9yZfTuOssg1+p7nndjt2NON5wIW
-         0/xDxXb9svWhNEqPLB2Rkr2XW12YJIgZLHJUxwc0oD+YaTcloroWP2GQkUwK+y+rcFij
-         yzwEDLuRbzZv/qbhS6M4i67X+ja+AFpECod3dAEHZNGXfwqFJdUtRuZEqhVKkIh/jbTc
-         u5WZQInCjtsSmScQ182N0Rn8PUceGOmZ46ulxNvHkMWH9xtNpDxiA8fFGaKzebqxW9LB
-         KgY3T9Sy1JDPUittTemk7HZycvL7LywHjj+jk2cmQYG6Qc22WgvPMX58TH4Hixxm7rrQ
-         6aJA==
+        d=gmail.com; s=20210112;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=Nc9Z5j9MkGMkB7mJzT9wGvl3LY8/Qix/mZ9EpxY13UU=;
+        b=pTV4aNcJs3yHVeIu0uZ+oEGW0BTDG33Bh8K+yllcVBsxr+7IYKQrsWGxtsCXdmRRGE
+         108S2mvuyKLZAnF5zT0u1IY+Nfri3aGDYwgr87VWrT5aGv7c8lizJgEjO0G8nt1DDgPG
+         WcwiGtJnWKW7dLrPon82l0yZP67BmT46ZiHhzIETbNCFs4bauU1IgHnIeIPQEbbyOyB3
+         N/X6TctSnf4ci/DSQtgFpMBZUBjtbXZPAFVuPADht0+gCYr/BuWjvRjYSNzZSALXhqPv
+         w+KRY6lm85x+oZb7TmeX9rcj1RrQe3fnH6zTStMdqyGoRmRjWdcAc6+ie1leztVAqj1/
+         kFEA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=in-reply-to:content-disposition:mime-version:references:message-id
-         :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=+G7LKm94Gh8IveRXkVxzmqetNifcC6zGcwfVmKZiIxU=;
-        b=rlhBahU0aWTmv4SUafhqTAEsHusO0LVOwh94A9+kApLSK72PrwakFvSm1VBjv0TXpF
-         su0K/I0nv4Y9gwxgNGmRLMfcPsRdSTtVL4Dn8tXenIXYHUnTDTnqJAay91yCrB+D6A1K
-         Hr9FZxTG6Bw5qZxaahsZozf1kxj8+J5sO4kmhICDob7UXaLVdAEiAtVKzZ2YBv15Eu5M
-         jCw3AGy0OxMYOAsjfxiNpC/HnHqpWnqOi1/E9iKEGvtsfeINLaDsfDT1mxmoxryWYm2V
-         KRO5hNBxJ8cgFcPmZO6Yfgn+3kMopGMcdNoTlMVk/mOm9qYHIFtk9CW6z2Bu6DHrZY9q
-         KeCw==
-X-Gm-Message-State: AO0yUKVhLFZkepIgAW18Ze5gA/i1WPYfsX1sXKqp5fftB02bxsv7PU1o
-        UYYEtD44/czTbBDbVTfKCP3BjQ==
-X-Google-Smtp-Source: AK7set9Wno7a0XYRFhzJYb6jckFGgD3MgmlKDmdJYnMg7BAjHupX6GqxvIMpR9adRETeVxpQn4ox6A==
-X-Received: by 2002:a05:6a00:1483:b0:592:61a5:40 with SMTP id v3-20020a056a00148300b0059261a50040mr15751149pfu.16.1675156269503;
-        Tue, 31 Jan 2023 01:11:09 -0800 (PST)
-Received: from sunil-laptop ([49.206.9.96])
-        by smtp.gmail.com with ESMTPSA id bt26-20020a056a00439a00b0058a7bacd31fsm6540587pfb.32.2023.01.31.01.11.03
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=Nc9Z5j9MkGMkB7mJzT9wGvl3LY8/Qix/mZ9EpxY13UU=;
+        b=hW2qAr2LcOgGfD3CI7iBJzKAXT7tb3W2rceKzuQ4Y+VM3LKhgHmFQejF0eCxRruEmJ
+         wEq9SZf4E7fUAih8g0mdf10aOQgFxlhepssNNU2LBWeSvclLZiQ0O/Xj290eonQsoCzJ
+         tzM+LoKu/DMRRkc1tNIF6F+i7cyUd+Uvd+uXIKzJm5f5R5SsrfXYJC7oTssif7ug7nEY
+         y7mVseCGL8GnBdovB+fS3Jpsxa9i4nfWGShVF+iS6YkHgr2eYmOEOKg1l57h8O5L0hDE
+         LduLPiCDghoMmO2t4DT6KoxEziAZaOsYSq3ek4li1k+ZPM+1vmlgMNgBfYfQSH2MEqgo
+         7wow==
+X-Gm-Message-State: AO0yUKWTtU0tFogZRt1q5levk2CDA/8+dmra8/viEv6AOVBXXbNnP8xa
+        aa1hSwMFV9Gxpk093nbMHiZuFJnI5BFLIg==
+X-Google-Smtp-Source: AK7set9l9y2O0Zw2wmoy1z1pL6IehAj88HMjNCapftlhZTtdc5HqDCHJ7LYSUarXyNkXqmvl5CxjCg==
+X-Received: by 2002:a17:906:cf89:b0:878:790b:b7db with SMTP id um9-20020a170906cf8900b00878790bb7dbmr17879915ejb.70.1675159992813;
+        Tue, 31 Jan 2023 02:13:12 -0800 (PST)
+Received: from fedora.. ([87.116.164.178])
+        by smtp.gmail.com with ESMTPSA id c12-20020a170906340c00b0088aadc18b69sm1844695ejb.101.2023.01.31.02.13.08
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 31 Jan 2023 01:11:09 -0800 (PST)
-Date:   Tue, 31 Jan 2023 14:41:00 +0530
-From:   Sunil V L <sunilvl@ventanamicro.com>
-To:     Jessica Clarke <jrtc27@jrtc27.com>
-Cc:     Palmer Dabbelt <palmer@dabbelt.com>,
-        Albert Ou <aou@eecs.berkeley.edu>,
-        "Rafael J . Wysocki" <rafael@kernel.org>,
-        Len Brown <lenb@kernel.org>,
-        Thomas Gleixner <tglx@linutronix.de>,
-        Marc Zyngier <maz@kernel.org>,
-        Daniel Lezcano <daniel.lezcano@linaro.org>,
-        Jonathan Corbet <corbet@lwn.net>,
-        Anup Patel <apatel@ventanamicro.com>,
-        linux-doc@vger.kernel.org, Atish Patra <atishp@rivosinc.com>,
-        Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
-        linux-acpi@vger.kernel.org, linux-riscv@lists.infradead.org,
-        Andrew Jones <ajones@ventanamicro.com>
-Subject: Re: [PATCH 11/24] RISC-V: ACPI: irqchip/riscv-intc: Add ACPI support
-Message-ID: <Y9jbJDwuJ0RnkviA@sunil-laptop>
-References: <20230130182225.2471414-1-sunilvl@ventanamicro.com>
- <20230130182225.2471414-12-sunilvl@ventanamicro.com>
- <AFDD5897-27A3-4418-B08B-9650B543692D@jrtc27.com>
+        Tue, 31 Jan 2023 02:13:10 -0800 (PST)
+From:   Aleksa Savic <savicaleksa83@gmail.com>
+To:     linux-hwmon@vger.kernel.org
+Cc:     Aleksa Savic <savicaleksa83@gmail.com>,
+        Jack Doan <me@jackdoan.com>, Jean Delvare <jdelvare@suse.com>,
+        Guenter Roeck <linux@roeck-us.net>,
+        Jonathan Corbet <corbet@lwn.net>, linux-doc@vger.kernel.org,
+        linux-kernel@vger.kernel.org
+Subject: [PATCH] hwmon: (aquacomputer_d5next) Add support for Aquacomputer Poweradjust 3
+Date:   Tue, 31 Jan 2023 11:12:09 +0100
+Message-Id: <20230131101210.8095-1-savicaleksa83@gmail.com>
+X-Mailer: git-send-email 2.39.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <AFDD5897-27A3-4418-B08B-9650B543692D@jrtc27.com>
-X-Spam-Status: No, score=-2.1 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_NONE,
-        SPF_HELO_NONE,SPF_PASS autolearn=unavailable autolearn_force=no
-        version=3.4.6
+Content-Transfer-Encoding: 8bit
+X-Spam-Status: No, score=-1.8 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_ENVFROM_END_DIGIT,
+        FREEMAIL_FROM,RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,SPF_PASS autolearn=ham
+        autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Hi Jessica,
+Extend aquacomputer_d5next driver to expose the temp sensor of the
+Aquacomputer Poweradjust 3 fan controller, which communicates
+through a proprietary USB HID protocol.
 
-On Mon, Jan 30, 2023 at 11:38:49PM +0000, Jessica Clarke wrote:
-> On 30 Jan 2023, at 18:22, Sunil V L <sunilvl@ventanamicro.com> wrote:
-> > 
-> > Add support for initializing the RISC-V INTC driver on ACPI based
-> > platforms.
-> > 
-> > Signed-off-by: Sunil V L <sunilvl@ventanamicro.com>
-> > ---
-> > drivers/irqchip/irq-riscv-intc.c | 79 +++++++++++++++++++++++++++-----
-> > 1 file changed, 67 insertions(+), 12 deletions(-)
-> > 
-> > diff --git a/drivers/irqchip/irq-riscv-intc.c b/drivers/irqchip/irq-riscv-intc.c
-> > index f229e3e66387..044ec92fcba7 100644
-> > --- a/drivers/irqchip/irq-riscv-intc.c
-> > +++ b/drivers/irqchip/irq-riscv-intc.c
-> > @@ -6,6 +6,7 @@
-> >  */
-> > 
-> > #define pr_fmt(fmt) "riscv-intc: " fmt
-> > +#include <linux/acpi.h>
-> > #include <linux/atomic.h>
-> > #include <linux/bits.h>
-> > #include <linux/cpu.h>
-> > @@ -112,6 +113,30 @@ static struct fwnode_handle *riscv_intc_hwnode(void)
-> > 	return intc_domain->fwnode;
-> > }
-> > 
-> > +static int __init riscv_intc_init_common(struct fwnode_handle *fn)
-> > +{
-> > +	int rc;
-> > +
-> > +	intc_domain = irq_domain_create_linear(fn, BITS_PER_LONG,
-> > +					       &riscv_intc_domain_ops, NULL);
-> > +	if (!intc_domain) {
-> > +		pr_err("unable to add IRQ domain\n");
-> > +		return -ENXIO;
-> > +	}
-> > +
-> > +	rc = set_handle_irq(&riscv_intc_irq);
-> > +	if (rc) {
-> > +		pr_err("failed to set irq handler\n");
-> > +		return rc;
-> > +	}
-> > +
-> > +	riscv_set_intc_hwnode_fn(riscv_intc_hwnode);
-> > +
-> > +	pr_info("%d local interrupts mapped\n", BITS_PER_LONG);
-> > +
-> > +	return 0;
-> > +}
-> > +
-> > static int __init riscv_intc_init(struct device_node *node,
-> > 				  struct device_node *parent)
-> > {
-> > @@ -133,24 +158,54 @@ static int __init riscv_intc_init(struct device_node *node,
-> > 	if (riscv_hartid_to_cpuid(hartid) != smp_processor_id())
-> > 		return 0;
-> > 
-> > -	intc_domain = irq_domain_add_linear(node, BITS_PER_LONG,
-> > -					    &riscv_intc_domain_ops, NULL);
-> > -	if (!intc_domain) {
-> > -		pr_err("unable to add IRQ domain\n");
-> > -		return -ENXIO;
-> > -	}
-> > -
-> > -	rc = set_handle_irq(&riscv_intc_irq);
-> > +	rc = riscv_intc_init_common(of_node_to_fwnode(node));
-> > 	if (rc) {
-> > -		pr_err("failed to set irq handler\n");
-> > +		pr_err("failed to initialize INTC\n");
-> > 		return rc;
-> > 	}
-> > 
-> > -	riscv_set_intc_hwnode_fn(riscv_intc_hwnode);
-> > +	return 0;
-> > +}
-> > 
-> > -	pr_info("%d local interrupts mapped\n", BITS_PER_LONG);
-> > +IRQCHIP_DECLARE(riscv, "riscv,cpu-intc", riscv_intc_init);
-> > +
-> > +#ifdef CONFIG_ACPI
-> > +
-> > +static int __init
-> > +riscv_intc_acpi_init(union acpi_subtable_headers *header,
-> > +		     const unsigned long end)
-> > +{
-> > +	int rc;
-> > +	struct fwnode_handle *fn;
-> > +	struct acpi_madt_rintc *rintc;
-> > +
-> > +	rintc = (struct acpi_madt_rintc *)header;
-> > +
-> > +	/*
-> > +	 * The ACPI MADT will have one INTC for each CPU (or HART)
-> > +	 * so riscv_intc_acpi_init() function will be called once
-> > +	 * for each INTC. We only need to do INTC initialization
-> > +	 * for the INTC belonging to the boot CPU (or boot HART).
-> > +	 */
-> > +	if (riscv_hartid_to_cpuid(rintc->hart_id) != smp_processor_id())
-> > +		return 0;
-> 
-> Why are we carrying forward this mess to ACPI? The DT bindings are
-> awful and a complete pain to deal with, as evidenced by how both Linux
-> and FreeBSD have to go out of their way to do special things to only
-> look at one of the many copies of the same thing.
->
+The Poweradjust 3 is not currently known to expose firmware version
+and serial number, so don't create debugfs entries if their values
+can't be retrieved.
 
-Local interrupt controller structures are per-cpu in any architecture.
-So, there will be multiple such structures. It is upto the OS to choose
-one of them. What is the issue here?
+Tested by a user on Github [1].
 
-The RISC-V DT code is selecting the one which is corresponding to the boot
-cpu. While in ACPI we can choose any one, I think it is better to
-follow the DT code to keep it similar and boot cpu is always guaranteed
-to be available.
+[1] https://github.com/aleksamagicka/aquacomputer_d5next-hwmon/issues/57
 
-Thanks!
-Sunil
+Signed-off-by: Aleksa Savic <savicaleksa83@gmail.com>
+---
+ Documentation/hwmon/aquacomputer_d5next.rst |  3 +
+ drivers/hwmon/aquacomputer_d5next.c         | 88 +++++++++++++++++++--
+ 2 files changed, 84 insertions(+), 7 deletions(-)
+
+diff --git a/Documentation/hwmon/aquacomputer_d5next.rst b/Documentation/hwmon/aquacomputer_d5next.rst
+index 3f7880fb8116..527bcd3edda9 100644
+--- a/Documentation/hwmon/aquacomputer_d5next.rst
++++ b/Documentation/hwmon/aquacomputer_d5next.rst
+@@ -12,6 +12,7 @@ Supported devices:
+ * Aquacomputer Octo fan controller
+ * Aquacomputer Quadro fan controller
+ * Aquacomputer High Flow Next sensor
++* Aquacomputer Poweradjust 3 fan controller
+ 
+ Author: Aleksa Savic
+ 
+@@ -53,6 +54,8 @@ The High Flow Next exposes +5V voltages, water quality, conductivity and flow re
+ A temperature sensor can be connected to it, in which case it provides its reading
+ and an estimation of the dissipated/absorbed power in the liquid cooling loop.
+ 
++The Poweradjust 3 controller exposes a single external temperature sensor.
++
+ Depending on the device, not all sysfs and debugfs entries will be available.
+ Writing to virtual temperature sensors is not currently supported.
+ 
+diff --git a/drivers/hwmon/aquacomputer_d5next.c b/drivers/hwmon/aquacomputer_d5next.c
+index c1b885240ddf..2945b630b4a0 100644
+--- a/drivers/hwmon/aquacomputer_d5next.c
++++ b/drivers/hwmon/aquacomputer_d5next.c
+@@ -4,7 +4,8 @@
+  * Quadro, High Flow Next, Aquaero)
+  *
+  * Aquacomputer devices send HID reports (with ID 0x01) every second to report
+- * sensor values.
++ * sensor values, except for devices that communicate through the
++ * legacy way (currently, Poweradjust 3).
+  *
+  * Copyright 2021 Aleksa Savic <savicaleksa83@gmail.com>
+  * Copyright 2022 Jack Doan <me@jackdoan.com>
+@@ -28,8 +29,9 @@
+ #define USB_PRODUCT_ID_FARBWERK360	0xf010
+ #define USB_PRODUCT_ID_OCTO		0xf011
+ #define USB_PRODUCT_ID_HIGHFLOWNEXT	0xf012
++#define USB_PRODUCT_ID_POWERADJUST3	0xf0bd
+ 
+-enum kinds { d5next, farbwerk, farbwerk360, octo, quadro, highflownext, aquaero };
++enum kinds { d5next, farbwerk, farbwerk360, octo, quadro, highflownext, aquaero, poweradjust3 };
+ 
+ static const char *const aqc_device_names[] = {
+ 	[d5next] = "d5next",
+@@ -38,7 +40,8 @@ static const char *const aqc_device_names[] = {
+ 	[octo] = "octo",
+ 	[quadro] = "quadro",
+ 	[highflownext] = "highflownext",
+-	[aquaero] = "aquaero"
++	[aquaero] = "aquaero",
++	[poweradjust3] = "poweradjust3"
+ };
+ 
+ #define DRIVER_NAME			"aquacomputer_d5next"
+@@ -59,6 +62,9 @@ static u8 secondary_ctrl_report[] = {
+ 	0x02, 0x00, 0x00, 0x00, 0x02, 0x00, 0x00, 0x00, 0x00, 0x34, 0xC6
+ };
+ 
++/* Report IDs for legacy devices */
++#define POWERADJUST3_STATUS_REPORT_ID	0x03
++
+ /* Info, sensor sizes and offsets for most Aquacomputer devices */
+ #define AQC_SERIAL_START		0x3
+ #define AQC_FIRMWARE_VERSION		0xD
+@@ -176,6 +182,13 @@ static u16 quadro_ctrl_fan_offsets[] = { 0x37, 0x8c, 0xe1, 0x136 }; /* Fan speed
+ #define HIGHFLOWNEXT_5V_VOLTAGE		97
+ #define HIGHFLOWNEXT_5V_VOLTAGE_USB	99
+ 
++/* Specs of the Poweradjust 3 */
++#define POWERADJUST3_NUM_SENSORS	1
++#define POWERADJUST3_SENSOR_REPORT_SIZE	0x32
++
++/* Sensor report offsets for the Poweradjust 3 */
++#define POWERADJUST3_SENSOR_START	0x03
++
+ /* Labels for D5 Next */
+ static const char *const label_d5next_temp[] = {
+ 	"Coolant temp"
+@@ -326,6 +339,11 @@ static const char *const label_highflownext_voltage[] = {
+ 	"+5V USB voltage"
+ };
+ 
++/* Labels for Poweradjust 3 */
++static const char *const label_poweradjust3_temp_sensors[] = {
++	"External sensor"
++};
++
+ struct aqc_fan_structure_offsets {
+ 	u8 voltage;
+ 	u8 curr;
+@@ -357,6 +375,8 @@ struct aqc_data {
+ 	enum kinds kind;
+ 	const char *name;
+ 
++	int status_report_id;	/* Used for legacy devices, report is stored in buffer */
++
+ 	int buffer_size;
+ 	u8 *buffer;
+ 	int checksum_start;
+@@ -615,14 +635,49 @@ static umode_t aqc_is_visible(const void *data, enum hwmon_sensor_types type, u3
+ 	return 0;
+ }
+ 
++/* Read device sensors by manually requesting the sensor report (legacy way) */
++static int aqc_legacy_read(struct aqc_data *priv)
++{
++	int ret, i, sensor_value;
++
++	mutex_lock(&priv->mutex);
++
++	memset(priv->buffer, 0x00, priv->buffer_size);
++	ret = hid_hw_raw_request(priv->hdev, priv->status_report_id, priv->buffer,
++				 priv->buffer_size, HID_FEATURE_REPORT, HID_REQ_GET_REPORT);
++	if (ret < 0)
++		goto unlock_and_return;
++
++	/* Temperature sensor readings */
++	for (i = 0; i < priv->num_temp_sensors; i++) {
++		sensor_value = get_unaligned_le16(priv->buffer + priv->temp_sensor_start_offset +
++						  i * AQC_SENSOR_SIZE);
++		priv->temp_input[i] = sensor_value * 10;
++	}
++
++	priv->updated = jiffies;
++
++unlock_and_return:
++	mutex_unlock(&priv->mutex);
++	return ret;
++}
++
+ static int aqc_read(struct device *dev, enum hwmon_sensor_types type, u32 attr,
+ 		    int channel, long *val)
+ {
+ 	int ret;
+ 	struct aqc_data *priv = dev_get_drvdata(dev);
+ 
+-	if (time_after(jiffies, priv->updated + STATUS_UPDATE_INTERVAL))
+-		return -ENODATA;
++	if (time_after(jiffies, priv->updated + STATUS_UPDATE_INTERVAL)) {
++		if (priv->status_report_id != 0) {
++			/* Legacy devices require manual reads */
++			ret = aqc_legacy_read(priv);
++			if (ret < 0)
++				return -ENODATA;
++		} else {
++			return -ENODATA;
++		}
++	}
+ 
+ 	switch (type) {
+ 	case hwmon_temp:
+@@ -1014,9 +1069,13 @@ static void aqc_debugfs_init(struct aqc_data *priv)
+ 		  dev_name(&priv->hdev->dev));
+ 
+ 	priv->debugfs = debugfs_create_dir(name, NULL);
+-	debugfs_create_file("serial_number", 0444, priv->debugfs, priv, &serial_number_fops);
+-	debugfs_create_file("firmware_version", 0444, priv->debugfs, priv, &firmware_version_fops);
+ 
++	if (priv->serial_number_start_offset != 0)
++		debugfs_create_file("serial_number", 0444, priv->debugfs, priv,
++				    &serial_number_fops);
++	if (priv->firmware_version_offset != 0)
++		debugfs_create_file("firmware_version", 0444, priv->debugfs, priv,
++				    &firmware_version_fops);
+ 	if (priv->power_cycle_count_offset != 0)
+ 		debugfs_create_file("power_cycles", 0444, priv->debugfs, priv, &power_cycles_fops);
+ }
+@@ -1214,6 +1273,17 @@ static int aqc_probe(struct hid_device *hdev, const struct hid_device_id *id)
+ 		priv->power_label = label_highflownext_power;
+ 		priv->voltage_label = label_highflownext_voltage;
+ 		break;
++	case USB_PRODUCT_ID_POWERADJUST3:
++		priv->kind = poweradjust3;
++
++		priv->num_fans = 0;
++
++		priv->num_temp_sensors = POWERADJUST3_NUM_SENSORS;
++		priv->temp_sensor_start_offset = POWERADJUST3_SENSOR_START;
++		priv->buffer_size = POWERADJUST3_SENSOR_REPORT_SIZE;
++
++		priv->temp_label = label_poweradjust3_temp_sensors;
++		break;
+ 	default:
+ 		break;
+ 	}
+@@ -1225,6 +1295,9 @@ static int aqc_probe(struct hid_device *hdev, const struct hid_device_id *id)
+ 
+ 		priv->fan_structure = &aqc_aquaero_fan_structure;
+ 		break;
++	case poweradjust3:
++		priv->status_report_id = POWERADJUST3_STATUS_REPORT_ID;
++		break;
+ 	default:
+ 		priv->serial_number_start_offset = AQC_SERIAL_START;
+ 		priv->firmware_version_offset = AQC_FIRMWARE_VERSION;
+@@ -1287,6 +1360,7 @@ static const struct hid_device_id aqc_table[] = {
+ 	{ HID_USB_DEVICE(USB_VENDOR_ID_AQUACOMPUTER, USB_PRODUCT_ID_OCTO) },
+ 	{ HID_USB_DEVICE(USB_VENDOR_ID_AQUACOMPUTER, USB_PRODUCT_ID_QUADRO) },
+ 	{ HID_USB_DEVICE(USB_VENDOR_ID_AQUACOMPUTER, USB_PRODUCT_ID_HIGHFLOWNEXT) },
++	{ HID_USB_DEVICE(USB_VENDOR_ID_AQUACOMPUTER, USB_PRODUCT_ID_POWERADJUST3) },
+ 	{ }
+ };
+ 
+-- 
+2.39.1
+
