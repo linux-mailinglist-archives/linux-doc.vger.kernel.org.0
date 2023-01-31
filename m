@@ -2,325 +2,101 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id EBCFE683206
-	for <lists+linux-doc@lfdr.de>; Tue, 31 Jan 2023 17:00:14 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 9A0A0683228
+	for <lists+linux-doc@lfdr.de>; Tue, 31 Jan 2023 17:04:17 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S233401AbjAaQAO (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 31 Jan 2023 11:00:14 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:38054 "EHLO
+        id S231838AbjAaQEQ (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 31 Jan 2023 11:04:16 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:43226 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S231292AbjAaQAK (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 31 Jan 2023 11:00:10 -0500
-Received: from mail-ej1-x62c.google.com (mail-ej1-x62c.google.com [IPv6:2a00:1450:4864:20::62c])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id D68C04614F
-        for <linux-doc@vger.kernel.org>; Tue, 31 Jan 2023 08:00:05 -0800 (PST)
-Received: by mail-ej1-x62c.google.com with SMTP id ml19so19411887ejb.0
-        for <linux-doc@vger.kernel.org>; Tue, 31 Jan 2023 08:00:05 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=resnulli-us.20210112.gappssmtp.com; s=20210112;
-        h=in-reply-to:content-disposition:mime-version:references:message-id
-         :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
-        bh=ah9+k0w/nRIiVTPPZXwqr7trAB5DOfdEEINSad8SRrU=;
-        b=QETQKU1/4codq3BX8Ei4sqqHEH2UlgFz3UkYFpIbZ7tyFWw31mKriW4Fj4DQKfLSj9
-         Ou4hBSaynTzNKEBNiEyCPAu+kAMDoTogzahhNHXCSbEyEoO7MNcmK5GvjOyE5qV54ITd
-         8vVbkr+iMXR0Ixf1313ozfDfseEEb1KZWqSEjkROePeOHMQhOJKhhBlOzdWGHyu/9QfW
-         ZKnHBvJrQx9QxMBCjqMIvENgqbdc4KTJPWnfgTpIO8wjyhvnR6DG5vHwj66npXhffojg
-         4a2XwUUlzVZp6Q52rnAyLTyJsfZ3pj/yA3XYIQGhZF46JGwpjCzp19ntkNvivtpkbGYR
-         tH6Q==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=in-reply-to:content-disposition:mime-version:references:message-id
-         :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=ah9+k0w/nRIiVTPPZXwqr7trAB5DOfdEEINSad8SRrU=;
-        b=yJq4rjCE0K+3WEJaNe6xA5aMDOQNrGojSR4mtoLFrfl9zKP0LdilXK5ZYj8+zCZ50Z
-         mNbF1U2RdrL1+mT/q633c9kg7fw/gAeW9vATOTnoh+OfaAMIE+idv3pnUKznw5xdkQrb
-         yLn3DGXaQEbogq5KaLws2uDlAp3l5Z6p+kmlm3FkRT4IymsXZTqskBs8PvZgk/9H+M6e
-         mgCWoAZyHW7O5AKcwk3v/ydfEWTLWdmVBNpyLamKrgLLDVt9lunik00EDeYLDhE1vYBp
-         3S3olzhLKHUnOB2qBMRx+rd1IIZfJVVwOmbIyGECQ49EPhHuIMk2GaKaXHW25pd69MU3
-         spUg==
-X-Gm-Message-State: AFqh2kollHMAzwx5ORDoI8gbhvGgbi4vfEP3OdbabbxEPUIR9Gs9fG2B
-        pyEjstHDX3hSHuFqVAuEwvWtFQ==
-X-Google-Smtp-Source: AMrXdXtQ7r8FAsvfnYrhUCCVQRLR9gnkLUCTmWYwkWRritatTQf+Nm+8d7KhCm9coKYyHk9QUx0v/Q==
-X-Received: by 2002:a17:907:a2cb:b0:871:dd2:4af0 with SMTP id re11-20020a170907a2cb00b008710dd24af0mr65022425ejc.26.1675180804341;
-        Tue, 31 Jan 2023 08:00:04 -0800 (PST)
-Received: from localhost (host-213-179-129-39.customer.m-online.net. [213.179.129.39])
-        by smtp.gmail.com with ESMTPSA id g18-20020a170906595200b00888d593ce76sm3252074ejr.72.2023.01.31.08.00.03
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 31 Jan 2023 08:00:03 -0800 (PST)
-Date:   Tue, 31 Jan 2023 17:00:02 +0100
-From:   Jiri Pirko <jiri@resnulli.us>
-To:     alejandro.lucero-palau@amd.com
-Cc:     netdev@vger.kernel.org, linux-net-drivers@amd.com,
-        davem@davemloft.net, kuba@kernel.org, pabeni@redhat.com,
-        edumazet@google.com, habetsm.xilinx@gmail.com,
-        ecree.xilinx@gmail.com, linux-doc@vger.kernel.org, corbet@lwn.net,
-        jiri@nvidia.com
-Subject: Re: [PATCH v4 net-next 1/8] sfc: add devlink support for ef100
-Message-ID: <Y9k7Ap4Irby7vnWg@nanopsycho>
-References: <20230131145822.36208-1-alejandro.lucero-palau@amd.com>
- <20230131145822.36208-2-alejandro.lucero-palau@amd.com>
+        with ESMTP id S231717AbjAaQEK (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 31 Jan 2023 11:04:10 -0500
+Received: from mga04.intel.com (mga04.intel.com [192.55.52.120])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 9681853991;
+        Tue, 31 Jan 2023 08:04:04 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1675181044; x=1706717044;
+  h=date:from:to:cc:subject:message-id:references:
+   mime-version:in-reply-to;
+  bh=rPmI8NFTKFtV4xhsN35E9c3s3k7pVuZjYYwYdF5DF30=;
+  b=LDMKGYSusNQu7dWju4CxvYi7Q8F2k8+TRE8RGANfkMbWOQ2RkCV9TcMf
+   y4SR2c3M0HeSA6Mg2ynbqjkjfim7W3PXAeUGvNKMRF9yU1xNNwXUZjGCP
+   0drPfjrohTgKy5Lr3vPnKiIniDMNEq94zJAube1T4nKsmtEH3yMBJCmDQ
+   m5FeOK5LOzkrus83sHPR3CAFPFbopmBxd8nN5UlKzx874IO4sxmBsRkUR
+   kOWHrqoIwq5O2fShtplNrefAgxlCtsHkwjKfpfKcvBXI7ehevkdj0Xnk0
+   GQP1FmYaCN/96bnHsslF2ITg41sRCFtextKDGSiEGrn5pz9EpJuddAJM+
+   Q==;
+X-IronPort-AV: E=McAfee;i="6500,9779,10606"; a="326539386"
+X-IronPort-AV: E=Sophos;i="5.97,261,1669104000"; 
+   d="scan'208";a="326539386"
+Received: from fmsmga004.fm.intel.com ([10.253.24.48])
+  by fmsmga104.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 31 Jan 2023 08:03:01 -0800
+X-ExtLoop1: 1
+X-IronPort-AV: E=McAfee;i="6500,9779,10606"; a="733164535"
+X-IronPort-AV: E=Sophos;i="5.97,261,1669104000"; 
+   d="scan'208";a="733164535"
+Received: from lkp-server01.sh.intel.com (HELO ffa7f14d1d0f) ([10.239.97.150])
+  by fmsmga004.fm.intel.com with ESMTP; 31 Jan 2023 08:02:59 -0800
+Received: from kbuild by ffa7f14d1d0f with local (Exim 4.96)
+        (envelope-from <lkp@intel.com>)
+        id 1pMt62-0004XC-2w;
+        Tue, 31 Jan 2023 16:02:58 +0000
+Date:   Wed, 1 Feb 2023 00:02:51 +0800
+From:   kernel test robot <lkp@intel.com>
+To:     Mike Rapoport <rppt@kernel.org>, Jonathan Corbet <corbet@lwn.net>
+Cc:     oe-kbuild-all@lists.linux.dev, linux-doc@vger.kernel.org,
+        linux-kernel@vger.kernel.org, linux-mm@kvack.org,
+        "Mike Rapoport (IBM)" <rppt@kernel.org>
+Subject: Re: [PATCH 2/2] docs/mm: remove useless markup
+Message-ID: <202301312351.WrB0VfS9-lkp@intel.com>
+References: <20230129075018.207678-3-rppt@kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20230131145822.36208-2-alejandro.lucero-palau@amd.com>
-X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-        DKIM_VALID,RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,SPF_NONE autolearn=ham
-        autolearn_force=no version=3.4.6
+In-Reply-To: <20230129075018.207678-3-rppt@kernel.org>
+X-Spam-Status: No, score=-4.4 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_MED,
+        SPF_HELO_NONE,SPF_NONE autolearn=ham autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Tue, Jan 31, 2023 at 03:58:15PM CET, alejandro.lucero-palau@amd.com wrote:
->From: Alejandro Lucero <alejandro.lucero-palau@amd.com>
->
->Basic devlink infrastructure support.
->
->Signed-off-by: Alejandro Lucero <alejandro.lucero-palau@amd.com>
->---
-> drivers/net/ethernet/sfc/Kconfig        |  1 +
-> drivers/net/ethernet/sfc/Makefile       |  3 +-
-> drivers/net/ethernet/sfc/ef100_netdev.c | 12 +++++
-> drivers/net/ethernet/sfc/ef100_nic.c    |  3 +-
-> drivers/net/ethernet/sfc/efx_devlink.c  | 71 +++++++++++++++++++++++++
-> drivers/net/ethernet/sfc/efx_devlink.h  | 22 ++++++++
-> drivers/net/ethernet/sfc/net_driver.h   |  2 +
-> 7 files changed, 111 insertions(+), 3 deletions(-)
-> create mode 100644 drivers/net/ethernet/sfc/efx_devlink.c
-> create mode 100644 drivers/net/ethernet/sfc/efx_devlink.h
->
->diff --git a/drivers/net/ethernet/sfc/Kconfig b/drivers/net/ethernet/sfc/Kconfig
->index 0950e6b0508f..4af36ba8906b 100644
->--- a/drivers/net/ethernet/sfc/Kconfig
->+++ b/drivers/net/ethernet/sfc/Kconfig
->@@ -22,6 +22,7 @@ config SFC
-> 	depends on PTP_1588_CLOCK_OPTIONAL
-> 	select MDIO
-> 	select CRC32
->+	select NET_DEVLINK
-> 	help
-> 	  This driver supports 10/40-gigabit Ethernet cards based on
-> 	  the Solarflare SFC9100-family controllers.
->diff --git a/drivers/net/ethernet/sfc/Makefile b/drivers/net/ethernet/sfc/Makefile
->index 712a48d00069..55b9c73cd8ef 100644
->--- a/drivers/net/ethernet/sfc/Makefile
->+++ b/drivers/net/ethernet/sfc/Makefile
->@@ -6,7 +6,8 @@ sfc-y			+= efx.o efx_common.o efx_channels.o nic.o \
-> 			   mcdi.o mcdi_port.o mcdi_port_common.o \
-> 			   mcdi_functions.o mcdi_filters.o mcdi_mon.o \
-> 			   ef100.o ef100_nic.o ef100_netdev.o \
->-			   ef100_ethtool.o ef100_rx.o ef100_tx.o
->+			   ef100_ethtool.o ef100_rx.o ef100_tx.o \
->+			   efx_devlink.o
-> sfc-$(CONFIG_SFC_MTD)	+= mtd.o
-> sfc-$(CONFIG_SFC_SRIOV)	+= sriov.o ef10_sriov.o ef100_sriov.o ef100_rep.o \
->                            mae.o tc.o tc_bindings.o tc_counters.o
->diff --git a/drivers/net/ethernet/sfc/ef100_netdev.c b/drivers/net/ethernet/sfc/ef100_netdev.c
->index ddcc325ed570..b10a226f4a07 100644
->--- a/drivers/net/ethernet/sfc/ef100_netdev.c
->+++ b/drivers/net/ethernet/sfc/ef100_netdev.c
->@@ -24,6 +24,7 @@
-> #include "rx_common.h"
-> #include "ef100_sriov.h"
-> #include "tc_bindings.h"
->+#include "efx_devlink.h"
-> 
-> static void ef100_update_name(struct efx_nic *efx)
-> {
->@@ -332,6 +333,8 @@ void ef100_remove_netdev(struct efx_probe_data *probe_data)
-> 		efx_ef100_pci_sriov_disable(efx, true);
-> #endif
-> 
->+	/* devlink lock */
->+	efx_fini_devlink_start(efx);
-> 	ef100_unregister_netdev(efx);
-> 
-> #ifdef CONFIG_SFC_SRIOV
->@@ -345,6 +348,9 @@ void ef100_remove_netdev(struct efx_probe_data *probe_data)
-> 	kfree(efx->phy_data);
-> 	efx->phy_data = NULL;
-> 
->+	/* devlink unlock */
->+	efx_fini_devlink(efx);
->+
-> 	free_netdev(efx->net_dev);
-> 	efx->net_dev = NULL;
-> 	efx->state = STATE_PROBED;
->@@ -405,6 +411,10 @@ int ef100_probe_netdev(struct efx_probe_data *probe_data)
-> 	/* Don't fail init if RSS setup doesn't work. */
-> 	efx_mcdi_push_default_indir_table(efx, efx->n_rx_channels);
-> 
->+	/* devlink creation, registration and lock */
->+	if (efx_probe_devlink(efx))
+Hi Mike,
 
-Use variable to store the return value and check that in if.
+Thank you for the patch! Perhaps something to improve:
 
+[auto build test WARNING on lwn/docs-next]
+[also build test WARNING on linus/master v6.2-rc6]
+[cannot apply to akpm-mm/mm-everything next-20230131]
+[If your patch is applied to the wrong git tree, kindly drop us a note.
+And when submitting patch, we suggest to use '--base' as documented in
+https://git-scm.com/docs/git-format-patch#_base_tree_information]
 
->+		pci_info(efx->pci_dev, "devlink registration failed");
->+
-> 	rc = ef100_register_netdev(efx);
-> 	if (rc)
-> 		goto fail;
->@@ -424,5 +434,7 @@ int ef100_probe_netdev(struct efx_probe_data *probe_data)
-> 	}
-> 
-> fail:
->+	/* devlink unlock */
->+	efx_probe_devlink_done(efx);
-> 	return rc;
-> }
->diff --git a/drivers/net/ethernet/sfc/ef100_nic.c b/drivers/net/ethernet/sfc/ef100_nic.c
->index ad686c671ab8..e4aacb4ec666 100644
->--- a/drivers/net/ethernet/sfc/ef100_nic.c
->+++ b/drivers/net/ethernet/sfc/ef100_nic.c
->@@ -1120,11 +1120,10 @@ int ef100_probe_netdev_pf(struct efx_nic *efx)
-> 		return rc;
-> 
-> 	rc = efx_ef100_get_base_mport(efx);
->-	if (rc) {
->+	if (rc)
-> 		netif_warn(efx, probe, net_dev,
-> 			   "Failed to probe base mport rc %d; representors will not function\n",
-> 			   rc);
->-	}
+url:    https://github.com/intel-lab-lkp/linux/commits/Mike-Rapoport/docs-admin-guide-mm-remove-useless-markup/20230129-155123
+base:   git://git.lwn.net/linux.git docs-next
+patch link:    https://lore.kernel.org/r/20230129075018.207678-3-rppt%40kernel.org
+patch subject: [PATCH 2/2] docs/mm: remove useless markup
+reproduce:
+        # https://github.com/intel-lab-lkp/linux/commit/379db4d59bd650ce02960ca6a4ee2e7d3846452e
+        git remote add linux-review https://github.com/intel-lab-lkp/linux
+        git fetch --no-tags linux-review Mike-Rapoport/docs-admin-guide-mm-remove-useless-markup/20230129-155123
+        git checkout 379db4d59bd650ce02960ca6a4ee2e7d3846452e
+        make menuconfig
+        # enable CONFIG_COMPILE_TEST, CONFIG_WARN_MISSING_DOCUMENTS, CONFIG_WARN_ABI_ERRORS
+        make htmldocs
 
-I don't see how this hunk is related to this patch. Please remove.
+If you fix the issue, kindly add following tag where applicable
+| Reported-by: kernel test robot <lkp@intel.com>
 
+All warnings (new ones prefixed by >>):
 
-> 
-> 	rc = efx_init_tc(efx);
-> 	if (rc) {
->diff --git a/drivers/net/ethernet/sfc/efx_devlink.c b/drivers/net/ethernet/sfc/efx_devlink.c
->new file mode 100644
->index 000000000000..fab06aaa4b8a
->--- /dev/null
->+++ b/drivers/net/ethernet/sfc/efx_devlink.c
->@@ -0,0 +1,71 @@
->+// SPDX-License-Identifier: GPL-2.0-only
->+/****************************************************************************
->+ * Driver for AMD network controllers and boards
->+ * Copyright (C) 2023, Advanced Micro Devices, Inc.
->+ *
->+ * This program is free software; you can redistribute it and/or modify it
->+ * under the terms of the GNU General Public License version 2 as published
->+ * by the Free Software Foundation, incorporated herein by reference.
->+ */
->+
->+#include <linux/rtc.h>
->+#include "net_driver.h"
->+#include "ef100_nic.h"
->+#include "efx_devlink.h"
->+#include "nic.h"
->+#include "mcdi.h"
->+#include "mcdi_functions.h"
->+#include "mcdi_pcol.h"
->+
->+struct efx_devlink {
->+	struct efx_nic *efx;
->+};
->+
->+static const struct devlink_ops sfc_devlink_ops = {
->+};
->+
->+void efx_fini_devlink_start(struct efx_nic *efx)
->+{
->+	if (efx->devlink)
->+		devl_lock(efx->devlink);
->+}
->+
->+void efx_fini_devlink(struct efx_nic *efx)
->+{
->+	if (efx->devlink) {
->+		devl_unregister(efx->devlink);
->+		devl_unlock(efx->devlink);
->+		devlink_free(efx->devlink);
->+		efx->devlink = NULL;
->+	}
->+}
->+
->+int efx_probe_devlink(struct efx_nic *efx)
->+{
->+	struct efx_devlink *devlink_private;
->+
->+	if (efx->type->is_vf)
->+		return 0;
->+
->+	efx->devlink = devlink_alloc(&sfc_devlink_ops,
->+				     sizeof(struct efx_devlink),
->+				     &efx->pci_dev->dev);
->+	if (!efx->devlink)
->+		return -ENOMEM;
->+
->+	devl_lock(efx->devlink);
->+	devlink_private = devlink_priv(efx->devlink);
->+	devlink_private->efx = efx;
->+
->+	devl_register(efx->devlink);
->+
->+	return 0;
->+}
->+
->+void efx_probe_devlink_done(struct efx_nic *efx)
->+{
->+	if (!efx->devlink)
->+		return;
->+
->+	devl_unlock(efx->devlink);
->+}
->diff --git a/drivers/net/ethernet/sfc/efx_devlink.h b/drivers/net/ethernet/sfc/efx_devlink.h
->new file mode 100644
->index 000000000000..55d0d8aeca1e
->--- /dev/null
->+++ b/drivers/net/ethernet/sfc/efx_devlink.h
->@@ -0,0 +1,22 @@
->+/* SPDX-License-Identifier: GPL-2.0-only */
->+/****************************************************************************
->+ * Driver for AMD network controllers and boards
->+ * Copyright (C) 2023, Advanced Micro Devices, Inc.
->+ *
->+ * This program is free software; you can redistribute it and/or modify it
->+ * under the terms of the GNU General Public License version 2 as published
->+ * by the Free Software Foundation, incorporated herein by reference.
->+ */
->+
->+#ifndef _EFX_DEVLINK_H
->+#define _EFX_DEVLINK_H
->+
->+#include "net_driver.h"
->+#include <net/devlink.h>
->+
->+int efx_probe_devlink(struct efx_nic *efx);
->+void efx_probe_devlink_done(struct efx_nic *efx);
->+void efx_fini_devlink_start(struct efx_nic *efx);
->+void efx_fini_devlink(struct efx_nic *efx);
+>> Warning: Documentation/mm/hugetlbfs_reserv.rst references a file that doesn't exist: Documentation/mm/hugetlbpage.rst
+>> Documentation/mm/physical_memory.rst:61: WARNING: undefined label: page_migration (if the link has no caption the label must precede a section header)
+>> Documentation/translations/zh_CN/mm/hmm.rst:251: WARNING: undefined label: page_migration (if the link has no caption the label must precede a section header)
 
-Odd naming... Just saying.
-
-
->+
->+#endif	/* _EFX_DEVLINK_H */
->diff --git a/drivers/net/ethernet/sfc/net_driver.h b/drivers/net/ethernet/sfc/net_driver.h
->index 3b49e216768b..d036641dc043 100644
->--- a/drivers/net/ethernet/sfc/net_driver.h
->+++ b/drivers/net/ethernet/sfc/net_driver.h
->@@ -994,6 +994,7 @@ enum efx_xdp_tx_queues_mode {
->  *      xdp_rxq_info structures?
->  * @netdev_notifier: Netdevice notifier.
->  * @tc: state for TC offload (EF100).
->+ * @devlink: reference to devlink structure owned by this device
->  * @mem_bar: The BAR that is mapped into membase.
->  * @reg_base: Offset from the start of the bar to the function control window.
->  * @monitor_work: Hardware monitor workitem
->@@ -1179,6 +1180,7 @@ struct efx_nic {
-> 	struct notifier_block netdev_notifier;
-> 	struct efx_tc_state *tc;
-> 
->+	struct devlink *devlink;
-> 	unsigned int mem_bar;
-> 	u32 reg_base;
-> 
->-- 
->2.17.1
->
+-- 
+0-DAY CI Kernel Test Service
+https://github.com/intel/lkp-tests
