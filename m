@@ -2,85 +2,102 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id EE92F682FFA
-	for <lists+linux-doc@lfdr.de>; Tue, 31 Jan 2023 15:59:03 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 8E6716830DC
+	for <lists+linux-doc@lfdr.de>; Tue, 31 Jan 2023 16:06:46 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S231826AbjAaO7C (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 31 Jan 2023 09:59:02 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:58324 "EHLO
+        id S233019AbjAaPGp (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 31 Jan 2023 10:06:45 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:36708 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S232362AbjAaO6n (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 31 Jan 2023 09:58:43 -0500
-Received: from ams.source.kernel.org (ams.source.kernel.org [IPv6:2604:1380:4601:e00::1])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 383641BACD;
-        Tue, 31 Jan 2023 06:58:41 -0800 (PST)
-Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
-        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
-        (No client certificate requested)
-        by ams.source.kernel.org (Postfix) with ESMTPS id D9298B81D3D;
-        Tue, 31 Jan 2023 14:58:39 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 65823C4339B;
-        Tue, 31 Jan 2023 14:58:37 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-        s=k20201202; t=1675177118;
-        bh=AUXvmQ08Qq/TFGePV5E04fRc2l+nOAmf/XpIUb4AnRQ=;
-        h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
-        b=abRa4JP6HJ/1OaTFiQzeLhnwjRm0GTu8VQeMGh4JyWnfWg2IwuAkwA5Jg4IN6Dh+m
-         BcfMidmRw6HaIP2xAwe9suTIOPfOy2YMlwqB4+ejWNw6Gw7LAU/06aT62LiOZXY5bA
-         M285TQLrUhth95G8wzrLfUsP6mD97rTh6y/kGQvpY5ZYpyhlk0vGdFNmzWBT5EMVyr
-         pIsnWvKbq3XvSpbu10D7MdvvgNDwMt86+2hgRrafoctN0qKhvBUz8LHuxSEzqbtQQY
-         OBlcWnSPAEoCpIi6R6rdOz9FOQMhtmLjP/BH4HtnUSN8LNOU/2t1cUmTeZ4tNTN/Lp
-         I4Z0FziW+MANg==
-Date:   Tue, 31 Jan 2023 15:58:34 +0100
-From:   Mauro Carvalho Chehab <mchehab@kernel.org>
+        with ESMTP id S233023AbjAaPG1 (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 31 Jan 2023 10:06:27 -0500
+Received: from mail-ot1-x32b.google.com (mail-ot1-x32b.google.com [IPv6:2607:f8b0:4864:20::32b])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 68ED9539A7;
+        Tue, 31 Jan 2023 07:03:42 -0800 (PST)
+Received: by mail-ot1-x32b.google.com with SMTP id v24-20020a05683011d800b0068bdd29b160so1071076otq.13;
+        Tue, 31 Jan 2023 07:03:42 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112;
+        h=in-reply-to:content-disposition:mime-version:references:message-id
+         :subject:cc:to:from:date:sender:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=EsnDPQM4B0QKOQ6uYZT1z5VR6q1vjdQ5vLL7x8NaaD4=;
+        b=Xpq2kQptQht2RH7BxsFGtMCYL2ip5WMVlqOa/K89moYZkrzjSpazUIwQSl7vVhBz4W
+         yCaGemw9AQjR90Spg2K4+V+9Alekp+nDQ4SmPo7Ak4vSOv/HqHc8s3pyttxLNF+Wp6a0
+         Di6A94ytQU29+MTeNu5G6N+OGn88ZW9mChc+3aTLXLWSBB0EWeYuU/GETx2h263bfKGQ
+         eKXtnfrGSW0YNHqy5oY2KneFbmm7aNfPjEOO9/lRXoA+RfKNC518hgEXQn8Kzqh36Tae
+         nd+9sHZbCTica68sIXECUQGPRxywWV1JxeiJZUulXfSToHP9+UMhuMnmRwZlawJHLC70
+         6GKA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=in-reply-to:content-disposition:mime-version:references:message-id
+         :subject:cc:to:from:date:sender:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=EsnDPQM4B0QKOQ6uYZT1z5VR6q1vjdQ5vLL7x8NaaD4=;
+        b=mGfXXEYg1Ksva7QutSVPEpnICBvr/UzycRmjgDEDQd3L/88zGKUHO7ELnJBDJLlMBE
+         ypaxSmSVS9VQRv0FJLgzh5QeLMej7DANK9PKQ6g/BtyrY55B9UHeAWrAhgTv2d0xsKkT
+         N/Pwo2L9i5Mt8DZwrOnLfq3H1D6oyfBDW2tYOhNwvHDj8RATPoWynM5TP8d/aRrULUpB
+         ThGVU3Zr57oACWHRt85NMfPPPiFhbe9jxRTMcmhOgajx3FkPsvd61dgJ1z2iZt7nZZ0s
+         4czwfQBNBBjV5bWOuAypLISf+CpX59JMRGhJ/H1ITiquPz/V5nM0WZ4yp3oCbta6Z4L+
+         S3Iw==
+X-Gm-Message-State: AO0yUKXw+xba1x01fzcVH3fu0EZm9OqP/ycjLltIGfcuzZ97kNzWIcw5
+        LryG18NdA3Q1WWeFi7I4CCo=
+X-Google-Smtp-Source: AK7set8NCDNMemSi5MBtRJlA5xcY1coTxXR2AN3JhWwcH5EDNPI/P3gDYJFtH5WfjyNSxePBqlHWfA==
+X-Received: by 2002:a9d:1b4b:0:b0:68a:bc9d:f245 with SMTP id l69-20020a9d1b4b000000b0068abc9df245mr10041725otl.6.1675177323141;
+        Tue, 31 Jan 2023 07:02:03 -0800 (PST)
+Received: from server.roeck-us.net ([2600:1700:e321:62f0:329c:23ff:fee3:9d7c])
+        by smtp.gmail.com with ESMTPSA id r6-20020a056830134600b0068bb36e8c22sm5101249otq.39.2023.01.31.07.02.02
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 31 Jan 2023 07:02:02 -0800 (PST)
+Sender: Guenter Roeck <groeck7@gmail.com>
+Date:   Tue, 31 Jan 2023 07:02:01 -0800
+From:   Guenter Roeck <linux@roeck-us.net>
 To:     SeongJae Park <sj@kernel.org>
-Cc:     Jonathan Corbet <corbet@lwn.net>, linux-doc@vger.kernel.org,
+Cc:     Jonathan Corbet <corbet@lwn.net>, Jean Delvare <jdelvare@suse.com>,
+        linux-hwmon@vger.kernel.org, linux-doc@vger.kernel.org,
         linux-kernel@vger.kernel.org
-Subject: Re: [PATCH v2 7/8] Docs/scheduler/index: Add missing SPDX License
+Subject: Re: [PATCH v2 4/8] Docs/hwmon/index: Add missing SPDX License
  Identifier
-Message-ID: <20230131155834.238886ef@coco.lan>
-In-Reply-To: <20230122213650.187710-8-sj@kernel.org>
+Message-ID: <20230131150201.GA3591412@roeck-us.net>
 References: <20230122213650.187710-1-sj@kernel.org>
-        <20230122213650.187710-8-sj@kernel.org>
-X-Mailer: Claws Mail 4.1.1 (GTK 3.24.36; x86_64-redhat-linux-gnu)
+ <20230122213650.187710-5-sj@kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: 7bit
-X-Spam-Status: No, score=-4.4 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_MED,
-        SPF_HELO_NONE,SPF_PASS autolearn=ham autolearn_force=no version=3.4.6
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20230122213650.187710-5-sj@kernel.org>
+X-Spam-Status: No, score=-1.2 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+        DKIM_VALID,DKIM_VALID_EF,FREEMAIL_ENVFROM_END_DIGIT,
+        FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,HEADER_FROM_DIFFERENT_DOMAINS,
+        RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,SPF_PASS autolearn=no
+        autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Em Sun, 22 Jan 2023 21:36:49 +0000
-SeongJae Park <sj@kernel.org> escreveu:
-
-> Add missing SPDX License Identifier for scheduler documentation index
-> file.
+On Sun, Jan 22, 2023 at 09:36:46PM +0000, SeongJae Park wrote:
+> Add missing SPDX License Identifier for hwmon documentation index file.
 > 
 > Signed-off-by: SeongJae Park <sj@kernel.org>
+> Reviewed-by: Mauro Carvalho Chehab <mchehab@kernel.org>
 
-Reviewed-by: Mauro Carvalho Chehab <mchehab@kernel.org>
+Applied to hwmon-next.
+
+Thanks,
+Guenter
 
 > ---
->  Documentation/scheduler/index.rst | 2 ++
+>  Documentation/hwmon/index.rst | 2 ++
 >  1 file changed, 2 insertions(+)
 > 
-> diff --git a/Documentation/scheduler/index.rst b/Documentation/scheduler/index.rst
-> index 1aac972a652f..ae0229f5a9cf 100644
-> --- a/Documentation/scheduler/index.rst
-> +++ b/Documentation/scheduler/index.rst
+> diff --git a/Documentation/hwmon/index.rst b/Documentation/hwmon/index.rst
+> index c2b3c1a822dd..2186d732654f 100644
+> --- a/Documentation/hwmon/index.rst
+> +++ b/Documentation/hwmon/index.rst
 > @@ -1,3 +1,5 @@
 > +.. SPDX-License-Identifier: GPL-2.0
 > +
->  =========
->  Scheduler
->  =========
-
-
-
-Thanks,
-Mauro
+>  ===================
+>  Hardware Monitoring
+>  ===================
