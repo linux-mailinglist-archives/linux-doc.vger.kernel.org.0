@@ -2,53 +2,53 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id CDBC8683223
-	for <lists+linux-doc@lfdr.de>; Tue, 31 Jan 2023 17:03:49 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 03B5068324C
+	for <lists+linux-doc@lfdr.de>; Tue, 31 Jan 2023 17:12:22 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S231220AbjAaQDr (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 31 Jan 2023 11:03:47 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:42722 "EHLO
+        id S229518AbjAaQMU (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 31 Jan 2023 11:12:20 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:52084 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S231142AbjAaQDq (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 31 Jan 2023 11:03:46 -0500
-Received: from mail-ed1-x52a.google.com (mail-ed1-x52a.google.com [IPv6:2a00:1450:4864:20::52a])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 02BD1C142
-        for <linux-doc@vger.kernel.org>; Tue, 31 Jan 2023 08:03:31 -0800 (PST)
-Received: by mail-ed1-x52a.google.com with SMTP id f7so7630820edw.5
-        for <linux-doc@vger.kernel.org>; Tue, 31 Jan 2023 08:03:30 -0800 (PST)
+        with ESMTP id S229613AbjAaQMT (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 31 Jan 2023 11:12:19 -0500
+Received: from mail-wm1-x332.google.com (mail-wm1-x332.google.com [IPv6:2a00:1450:4864:20::332])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id AEF1F32505
+        for <linux-doc@vger.kernel.org>; Tue, 31 Jan 2023 08:12:16 -0800 (PST)
+Received: by mail-wm1-x332.google.com with SMTP id k16so10719206wms.2
+        for <linux-doc@vger.kernel.org>; Tue, 31 Jan 2023 08:12:16 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=resnulli-us.20210112.gappssmtp.com; s=20210112;
         h=in-reply-to:content-disposition:mime-version:references:message-id
          :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
-        bh=u4JOxx5gYgwaEVUE9fPJi8bFOFYSs1BwGI3qL7TVr0M=;
-        b=VyxW+VCTutcKwKurXDuIuvGAbQS2DUZdQRUVtMFziqUhz2RTBqFv2RC4KiBUJObAhv
-         dsgZCd5pc47YPDWh2gEc/88TO/KdQzE7NFqLTHk4lCxaOfAwmN4PIr0z0airix86U3ny
-         Dh+OLS94CAJDJ17p0raT0qxVHeVP7LLjFuhWFg5302PGqf7h7sNOtgnRllCKMy9Sxk+j
-         kInoEGY2NwwkovGNaxJZPeV0ovY0cej/skJChpdpk7bUYnUmjvMf5OgMgZ+Et/J1QFou
-         w0fczGgthV1D1ujHSIMlMEUZmVK6GjMyMC68+bQXMwAT4WkXRI7KDTPkuIFDuYdbMvnD
-         KJcQ==
+        bh=ItD98OSNWnEgPICcXZS172xoV2XpbYvzBX/HVSTeV3A=;
+        b=SIrq+o8WnlQKcj1/vEBuoAfjtI/RZ6+LOoI07mwcAgQxS6mrFvGjd/fgJ0jRskc1vI
+         3uy2QEqZUYvsaCfCNZb9KMnf4ikYTovfrGH7qvQvJQPeBkJRFZvOPDdG/fjgNIW7nnga
+         BqAF/LBVuE9mbbo6OCGh1s8l78nTtqVbVjTa1L6mISN64mPIlcY/wMPQU04IlVBUjRO+
+         IpuHf7xTCLP30PFB+k9hkC2vOagsvEJzz7fG3f49ltHq6o9cP5Y360wDZ2P0hkdBQmid
+         x3RDmdoqdo47F7zPOy03aPC7934+W311se9tPHaTAgLfkk3oAF4s5uKSNmvjV5OF78hf
+         Anow==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=in-reply-to:content-disposition:mime-version:references:message-id
          :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=u4JOxx5gYgwaEVUE9fPJi8bFOFYSs1BwGI3qL7TVr0M=;
-        b=00HDqJRIgKK1jQIxFyuRX8ZuV/TBUHjlPntOX5y4CVW1h3Fg00OCH9FWp0WH205xR8
-         Nb92ki/CeNosBc4roXRN6Cc3Bk4o1kDgy139Cv4Q9/l7d8ChtkDfmAFGDNDNWXrAlRYw
-         2OJfR9CoTRUCo6A+UsomxLE/rYdxZT0yIMFazLVLbh2zH29ptzOha+id9Ip6BtbQv/oj
-         SyxebTmARf/R/8cxMv4ULkUPca2f526iKQ9y3D6+8ciLFp06BsPltwNULbAcWRLVftBR
-         nyZe0iq1U90CcKdnpo0n1G7Nzw5mBy8Ci3/wWOiggVSgbxK1UfgRlECadcutKkW6pMF3
-         rEFA==
-X-Gm-Message-State: AFqh2kq2vuG0yi5eq7UPWctA9krObX8UsrUEZiD08BlTFw2q7tY605N2
-        oDjKKHHR6nXXJk9o2jCL/Jgijw==
-X-Google-Smtp-Source: AMrXdXvRT+TqHrxc9vfhdeKP0kfRdugy/3RVShll5KIvbWJCY1dCE/SSECtGuR5/OVavKm93SEZDKQ==
-X-Received: by 2002:a05:6402:3986:b0:49d:5c6:3e5f with SMTP id fk6-20020a056402398600b0049d05c63e5fmr68995556edb.41.1675181009184;
-        Tue, 31 Jan 2023 08:03:29 -0800 (PST)
+        bh=ItD98OSNWnEgPICcXZS172xoV2XpbYvzBX/HVSTeV3A=;
+        b=7IhhGBcg9oDga3DQMRGY80Wn17k+G6N/+4L+5dmXHd+Nsqepxl8ym2dcjOBoBMat0Z
+         +Q0CB5moObkwPjAXO2/XAw6AglU//cQb0fxx+3hntP+gm4tRX7htpx6to7cBvU6qo17W
+         4WghiGUKuxE+Ur4hnI/FiI0Gkb6LiY/a+SKaiJSyhO00RgV8T+JqE0D9dhC96UB+QmCL
+         FFlwjcDUHLFdxyFPKO4znskDQJlJRj65Hp8es41/rgTmhC97Wr3eQNQoZc0Kmy0/4BSU
+         OzSknKnoRnl+rydfwnYXnl/pQ8a4FHf50xD6blaFc3kUAtehx7fKNY95zpW+7T86etDw
+         LtAQ==
+X-Gm-Message-State: AO0yUKUckfw6v4/t1WWNIESYhlxmn5MUt7YVcdbmEZP31fZi7y2u8eC3
+        S4T/gAlY9zdVsjy1H7CcSum9Ng==
+X-Google-Smtp-Source: AK7set97NuiQKgnfSDo+95l2NCyRiutAJGFQ4S65dXSGYUTvxBJizdCRfjB5xDD+OHp16AwAf60cJg==
+X-Received: by 2002:a05:600c:5104:b0:3dc:445f:642 with SMTP id o4-20020a05600c510400b003dc445f0642mr4285769wms.37.1675181535165;
+        Tue, 31 Jan 2023 08:12:15 -0800 (PST)
 Received: from localhost (host-213-179-129-39.customer.m-online.net. [213.179.129.39])
-        by smtp.gmail.com with ESMTPSA id u20-20020a50a414000000b004a08c52a2f0sm8635192edb.76.2023.01.31.08.03.28
+        by smtp.gmail.com with ESMTPSA id t1-20020a05600c41c100b003dc47d458cdsm10788627wmh.15.2023.01.31.08.12.12
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 31 Jan 2023 08:03:28 -0800 (PST)
-Date:   Tue, 31 Jan 2023 17:03:27 +0100
+        Tue, 31 Jan 2023 08:12:13 -0800 (PST)
+Date:   Tue, 31 Jan 2023 17:12:11 +0100
 From:   Jiri Pirko <jiri@resnulli.us>
 To:     alejandro.lucero-palau@amd.com
 Cc:     netdev@vger.kernel.org, linux-net-drivers@amd.com,
@@ -56,14 +56,14 @@ Cc:     netdev@vger.kernel.org, linux-net-drivers@amd.com,
         edumazet@google.com, habetsm.xilinx@gmail.com,
         ecree.xilinx@gmail.com, linux-doc@vger.kernel.org, corbet@lwn.net,
         jiri@nvidia.com
-Subject: Re: [PATCH v4 net-next 2/8] sfc: add devlink info support for ef100
-Message-ID: <Y9k7z4zUlsSz7/sE@nanopsycho>
+Subject: Re: [PATCH v4 net-next 5/8] sfc: add devlink port support for ef100
+Message-ID: <Y9k921b19TF6KDPE@nanopsycho>
 References: <20230131145822.36208-1-alejandro.lucero-palau@amd.com>
- <20230131145822.36208-3-alejandro.lucero-palau@amd.com>
+ <20230131145822.36208-6-alejandro.lucero-palau@amd.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20230131145822.36208-3-alejandro.lucero-palau@amd.com>
+In-Reply-To: <20230131145822.36208-6-alejandro.lucero-palau@amd.com>
 X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00,DKIM_SIGNED,
         DKIM_VALID,RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,SPF_NONE
         autolearn=unavailable autolearn_force=no version=3.4.6
@@ -73,644 +73,352 @@ Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Tue, Jan 31, 2023 at 03:58:16PM CET, alejandro.lucero-palau@amd.com wrote:
+Tue, Jan 31, 2023 at 03:58:19PM CET, alejandro.lucero-palau@amd.com wrote:
 >From: Alejandro Lucero <alejandro.lucero-palau@amd.com>
 >
->Support for devlink info command.
+>Using the data when enumerating mports, create devlink ports just before
+>netdevs are registered and remove those devlink ports after netdev has
+>been unregistered.
 >
 >Signed-off-by: Alejandro Lucero <alejandro.lucero-palau@amd.com>
 >---
-> Documentation/networking/devlink/sfc.rst |  57 ++++
-> MAINTAINERS                              |   1 +
-> drivers/net/ethernet/sfc/efx_devlink.c   | 404 +++++++++++++++++++++++
-> drivers/net/ethernet/sfc/efx_devlink.h   |  17 +
-> drivers/net/ethernet/sfc/mcdi.c          |  72 ++++
-> drivers/net/ethernet/sfc/mcdi.h          |   3 +
-> 6 files changed, 554 insertions(+)
-> create mode 100644 Documentation/networking/devlink/sfc.rst
+> drivers/net/ethernet/sfc/ef100_netdev.c |  9 +++
+> drivers/net/ethernet/sfc/ef100_rep.c    | 22 ++++++
+> drivers/net/ethernet/sfc/ef100_rep.h    |  7 ++
+> drivers/net/ethernet/sfc/efx_devlink.c  | 97 +++++++++++++++++++++++++
+> drivers/net/ethernet/sfc/efx_devlink.h  |  6 ++
+> drivers/net/ethernet/sfc/mae.h          |  2 +
+> drivers/net/ethernet/sfc/net_driver.h   |  2 +
+> 7 files changed, 145 insertions(+)
 >
->diff --git a/Documentation/networking/devlink/sfc.rst b/Documentation/networking/devlink/sfc.rst
->new file mode 100644
->index 000000000000..e2541a2f18ee
->--- /dev/null
->+++ b/Documentation/networking/devlink/sfc.rst
->@@ -0,0 +1,57 @@
->+.. SPDX-License-Identifier: GPL-2.0
->+
->+===================
->+sfc devlink support
->+===================
->+
->+This document describes the devlink features implemented by the ``sfc``
->+device driver for the ef100 device.
->+
->+Info versions
->+=============
->+
->+The ``sfc`` driver reports the following versions
->+
->+.. list-table:: devlink info versions implemented
->+    :widths: 5 5 90
->+
->+   * - Name
->+     - Type
->+     - Description
->+   * - ``fw.mgmt.suc``
->+     - running
->+     - For boards where the management function is split between multiple
->+       control units, this is the SUC control unit's firmware version.
->+   * - ``fw.mgmt.cmc``
->+     - running
->+     - For boards where the management function is split between multiple
->+       control units, this is the CMC control unit's firmware version.
->+   * - ``fpga.rev``
->+     - running
->+     - FPGA design revision.
->+   * - ``fpga.app``
->+     - running
->+     - Datapath programmable logic version.
->+   * - ``fw.app``
->+     - running
->+     - Datapath software/microcode/firmware version.
->+   * - ``coproc.boot``
->+     - running
->+     - SmartNIC application co-processor (APU) first stage boot loader version.
->+   * - ``coproc.uboot``
->+     - running
->+     - SmartNIC application co-processor (APU) co-operating system loader version.
->+   * - ``coproc.main``
->+     - running
->+     - SmartNIC application co-processor (APU) main operating system version.
->+   * - ``coproc.recovery``
->+     - running
->+     - SmartNIC application co-processor (APU) recovery operating system version.
->+   * - ``fw.exprom``
->+     - running
->+     - Expansion ROM version. For boards where the expansion ROM is split between
->+       multiple images (e.g. PXE and UEFI), this is the specifically the PXE boot
->+       ROM version.
->+   * - ``fw.uefi``
->+     - running
->+     - UEFI driver version (No UNDI support).
->diff --git a/MAINTAINERS b/MAINTAINERS
->index f82dd8d43c2b..57c9cb55cfd3 100644
->--- a/MAINTAINERS
->+++ b/MAINTAINERS
->@@ -18920,6 +18920,7 @@ M:	Martin Habets <habetsm.xilinx@gmail.com>
-> L:	netdev@vger.kernel.org
-> S:	Supported
-> F:	drivers/net/ethernet/sfc/
->+F:	Documentation/networking/devlink/sfc.rst
+>diff --git a/drivers/net/ethernet/sfc/ef100_netdev.c b/drivers/net/ethernet/sfc/ef100_netdev.c
+>index b10a226f4a07..36774b55d413 100644
+>--- a/drivers/net/ethernet/sfc/ef100_netdev.c
+>+++ b/drivers/net/ethernet/sfc/ef100_netdev.c
+>@@ -335,7 +335,9 @@ void ef100_remove_netdev(struct efx_probe_data *probe_data)
 > 
-> SFF/SFP/SFP+ MODULE SUPPORT
-> M:	Russell King <linux@armlinux.org.uk>
+> 	/* devlink lock */
+> 	efx_fini_devlink_start(efx);
+>+
+
+Does not seem related to the patch.
+
+
+
+> 	ef100_unregister_netdev(efx);
+>+	ef100_pf_unset_devlink_port(efx);
+> 
+> #ifdef CONFIG_SFC_SRIOV
+> 	efx_fini_tc(efx);
+>@@ -423,6 +425,8 @@ int ef100_probe_netdev(struct efx_probe_data *probe_data)
+> 		rc = ef100_probe_netdev_pf(efx);
+> 		if (rc)
+> 			goto fail;
+>+
+>+		ef100_pf_set_devlink_port(efx);
+> 	}
+> 
+> 	efx->netdev_notifier.notifier_call = ef100_netdev_event;
+>@@ -433,7 +437,12 @@ int ef100_probe_netdev(struct efx_probe_data *probe_data)
+> 		goto fail;
+> 	}
+> 
+>+	/* devlink unlock */
+>+	efx_probe_devlink_done(efx);
+>+	return rc;
+> fail:
+>+	/* remove devlink port if does exist */
+>+	ef100_pf_unset_devlink_port(efx);
+> 	/* devlink unlock */
+> 	efx_probe_devlink_done(efx);
+> 	return rc;
+>diff --git a/drivers/net/ethernet/sfc/ef100_rep.c b/drivers/net/ethernet/sfc/ef100_rep.c
+>index 9cd1a3ac67e0..6b5bc5d6955d 100644
+>--- a/drivers/net/ethernet/sfc/ef100_rep.c
+>+++ b/drivers/net/ethernet/sfc/ef100_rep.c
+>@@ -16,6 +16,7 @@
+> #include "mae.h"
+> #include "rx_common.h"
+> #include "tc_bindings.h"
+>+#include "efx_devlink.h"
+> 
+> #define EFX_EF100_REP_DRIVER	"efx_ef100_rep"
+> 
+>@@ -297,6 +298,7 @@ int efx_ef100_vfrep_create(struct efx_nic *efx, unsigned int i)
+> 			i, rc);
+> 		goto fail1;
+> 	}
+>+	ef100_rep_set_devlink_port(efv);
+> 	rc = register_netdev(efv->net_dev);
+> 	if (rc) {
+> 		pci_err(efx->pci_dev,
+>@@ -308,6 +310,7 @@ int efx_ef100_vfrep_create(struct efx_nic *efx, unsigned int i)
+> 		efv->net_dev->name);
+> 	return 0;
+> fail2:
+>+	ef100_rep_unset_devlink_port(efv);
+> 	efx_ef100_deconfigure_rep(efv);
+> fail1:
+> 	efx_ef100_rep_destroy_netdev(efv);
+>@@ -323,6 +326,7 @@ void efx_ef100_vfrep_destroy(struct efx_nic *efx, struct efx_rep *efv)
+> 		return;
+> 	netif_dbg(efx, drv, rep_dev, "Removing VF representor\n");
+> 	unregister_netdev(rep_dev);
+>+	ef100_rep_unset_devlink_port(efv);
+> 	efx_ef100_deconfigure_rep(efv);
+> 	efx_ef100_rep_destroy_netdev(efv);
+> }
+>@@ -339,6 +343,24 @@ void efx_ef100_fini_vfreps(struct efx_nic *efx)
+> 		efx_ef100_vfrep_destroy(efx, efv);
+> }
+> 
+>+static bool ef100_mport_is_pcie_vnic(struct mae_mport_desc *mport_desc)
+>+{
+>+	return mport_desc->mport_type == MAE_MPORT_DESC_MPORT_TYPE_VNIC &&
+>+	       mport_desc->vnic_client_type == MAE_MPORT_DESC_VNIC_CLIENT_TYPE_FUNCTION;
+>+}
+>+
+>+bool ef100_mport_on_local_intf(struct efx_nic *efx,
+>+			       struct mae_mport_desc *mport_desc)
+>+{
+>+	struct ef100_nic_data *nic_data = efx->nic_data;
+>+	bool pcie_func;
+>+
+>+	pcie_func = ef100_mport_is_pcie_vnic(mport_desc);
+>+
+>+	return nic_data->have_local_intf && pcie_func &&
+>+		     mport_desc->interface_idx == nic_data->local_mae_intf;
+>+}
+>+
+> void efx_ef100_init_reps(struct efx_nic *efx)
+> {
+> 	struct ef100_nic_data *nic_data = efx->nic_data;
+>diff --git a/drivers/net/ethernet/sfc/ef100_rep.h b/drivers/net/ethernet/sfc/ef100_rep.h
+>index 328ac0cbb532..ae6add4b0855 100644
+>--- a/drivers/net/ethernet/sfc/ef100_rep.h
+>+++ b/drivers/net/ethernet/sfc/ef100_rep.h
+>@@ -22,6 +22,8 @@ struct efx_rep_sw_stats {
+> 	atomic64_t rx_dropped, tx_errors;
+> };
+> 
+>+struct devlink_port;
+>+
+> /**
+>  * struct efx_rep - Private data for an Efx representor
+>  *
+>@@ -39,6 +41,7 @@ struct efx_rep_sw_stats {
+>  * @rx_lock: protects @rx_list
+>  * @napi: NAPI control structure
+>  * @stats: software traffic counters for netdev stats
+>+ * @dl_port: devlink port associated to this netdev representor
+>  */
+> struct efx_rep {
+> 	struct efx_nic *parent;
+>@@ -54,6 +57,7 @@ struct efx_rep {
+> 	spinlock_t rx_lock;
+> 	struct napi_struct napi;
+> 	struct efx_rep_sw_stats stats;
+>+	struct devlink_port *dl_port;
+> };
+> 
+> int efx_ef100_vfrep_create(struct efx_nic *efx, unsigned int i);
+>@@ -69,4 +73,7 @@ struct efx_rep *efx_ef100_find_rep_by_mport(struct efx_nic *efx, u16 mport);
+> extern const struct net_device_ops efx_ef100_rep_netdev_ops;
+> void efx_ef100_init_reps(struct efx_nic *efx);
+> void efx_ef100_fini_reps(struct efx_nic *efx);
+>+struct mae_mport_desc;
+>+bool ef100_mport_on_local_intf(struct efx_nic *efx,
+>+			       struct mae_mport_desc *mport_desc);
+> #endif /* EF100_REP_H */
 >diff --git a/drivers/net/ethernet/sfc/efx_devlink.c b/drivers/net/ethernet/sfc/efx_devlink.c
->index fab06aaa4b8a..ff5adfe3905e 100644
+>index ff5adfe3905e..b1637eb372ad 100644
 >--- a/drivers/net/ethernet/sfc/efx_devlink.c
 >+++ b/drivers/net/ethernet/sfc/efx_devlink.c
->@@ -21,7 +21,411 @@ struct efx_devlink {
+>@@ -16,11 +16,48 @@
+> #include "mcdi.h"
+> #include "mcdi_functions.h"
+> #include "mcdi_pcol.h"
+>+#include "mae.h"
+>+#include "ef100_rep.h"
+> 
+> struct efx_devlink {
 > 	struct efx_nic *efx;
 > };
 > 
->+static int efx_devlink_info_nvram_partition(struct efx_nic *efx,
->+					    struct devlink_info_req *req,
->+					    unsigned int partition_type,
->+					    const char *version_name)
+>+static void efx_devlink_del_port(struct devlink_port *dl_port)
 >+{
->+	char buf[EFX_MAX_VERSION_INFO_LEN];
->+	u16 version[4];
->+	int rc;
->+
->+	rc = efx_mcdi_nvram_metadata(efx, partition_type, NULL, version, NULL,
->+				     0);
->+	if (rc)
->+		return rc;
->+
->+	snprintf(buf, EFX_MAX_VERSION_INFO_LEN, "%u.%u.%u.%u", version[0],
->+		 version[1], version[2], version[3]);
->+	devlink_info_version_stored_put(req, version_name, buf);
->+
->+	return 0;
->+}
->+
->+static void efx_devlink_info_stored_versions(struct efx_nic *efx,
->+					     struct devlink_info_req *req)
->+{
->+	efx_devlink_info_nvram_partition(efx, req, NVRAM_PARTITION_TYPE_BUNDLE,
->+					 DEVLINK_INFO_VERSION_GENERIC_FW_BUNDLE_ID);
->+	efx_devlink_info_nvram_partition(efx, req,
->+					 NVRAM_PARTITION_TYPE_MC_FIRMWARE,
->+					 DEVLINK_INFO_VERSION_GENERIC_FW_MGMT);
->+	efx_devlink_info_nvram_partition(efx, req,
->+					 NVRAM_PARTITION_TYPE_SUC_FIRMWARE,
->+					 EFX_DEVLINK_INFO_VERSION_FW_MGMT_SUC);
->+	efx_devlink_info_nvram_partition(efx, req,
->+					 NVRAM_PARTITION_TYPE_EXPANSION_ROM,
->+					 EFX_DEVLINK_INFO_VERSION_FW_EXPROM);
->+	efx_devlink_info_nvram_partition(efx, req,
->+					 NVRAM_PARTITION_TYPE_EXPANSION_UEFI,
->+					 EFX_DEVLINK_INFO_VERSION_FW_UEFI);
->+}
->+
->+#define EFX_VER_FLAG(_f)	\
->+	(MC_CMD_GET_VERSION_V5_OUT_ ## _f ## _PRESENT_LBN)
->+
->+static void efx_devlink_info_running_v2(struct efx_nic *efx,
->+					struct devlink_info_req *req,
->+					unsigned int flags, efx_dword_t *outbuf)
->+{
->+	char buf[EFX_MAX_VERSION_INFO_LEN];
->+	union {
->+		const __le32 *dwords;
->+		const __le16 *words;
->+		const char *str;
->+	} ver;
->+	struct rtc_time build_date;
->+	unsigned int build_id;
->+	size_t offset;
->+	u64 tstamp;
->+
->+	if (flags & BIT(EFX_VER_FLAG(BOARD_EXT_INFO))) {
->+		snprintf(buf, EFX_MAX_VERSION_INFO_LEN, "%s",
->+			 MCDI_PTR(outbuf, GET_VERSION_V2_OUT_BOARD_NAME));
->+		devlink_info_version_fixed_put(req,
->+					       DEVLINK_INFO_VERSION_GENERIC_BOARD_ID,
->+					       buf);
->+
->+		/* Favour full board version if present (in V5 or later) */
->+		if (~flags & BIT(EFX_VER_FLAG(BOARD_VERSION))) {
->+			snprintf(buf, EFX_MAX_VERSION_INFO_LEN, "%u",
->+				 MCDI_DWORD(outbuf,
->+					    GET_VERSION_V2_OUT_BOARD_REVISION));
->+			devlink_info_version_fixed_put(req,
->+						       DEVLINK_INFO_VERSION_GENERIC_BOARD_REV,
->+						       buf);
->+		}
->+
->+		ver.str = MCDI_PTR(outbuf, GET_VERSION_V2_OUT_BOARD_SERIAL);
->+		if (ver.str[0])
->+			devlink_info_board_serial_number_put(req, ver.str);
->+	}
->+
->+	if (flags & BIT(EFX_VER_FLAG(FPGA_EXT_INFO))) {
->+		ver.dwords = (__le32 *)MCDI_PTR(outbuf,
->+						GET_VERSION_V2_OUT_FPGA_VERSION);
->+		offset = snprintf(buf, EFX_MAX_VERSION_INFO_LEN, "%u_%c%u",
->+				  le32_to_cpu(ver.dwords[0]),
->+				  'A' + le32_to_cpu(ver.dwords[1]),
->+				  le32_to_cpu(ver.dwords[2]));
->+
->+		ver.str = MCDI_PTR(outbuf, GET_VERSION_V2_OUT_FPGA_EXTRA);
->+		if (ver.str[0])
->+			snprintf(&buf[offset], EFX_MAX_VERSION_INFO_LEN - offset,
->+				 " (%s)", ver.str);
->+
->+		devlink_info_version_running_put(req,
->+						 EFX_DEVLINK_INFO_VERSION_FPGA_REV,
->+						 buf);
->+	}
->+
->+	if (flags & BIT(EFX_VER_FLAG(CMC_EXT_INFO))) {
->+		ver.dwords = (__le32 *)MCDI_PTR(outbuf,
->+						GET_VERSION_V2_OUT_CMCFW_VERSION);
->+		offset = snprintf(buf, EFX_MAX_VERSION_INFO_LEN, "%u.%u.%u.%u",
->+				  le32_to_cpu(ver.dwords[0]),
->+				  le32_to_cpu(ver.dwords[1]),
->+				  le32_to_cpu(ver.dwords[2]),
->+				  le32_to_cpu(ver.dwords[3]));
->+
->+		tstamp = MCDI_QWORD(outbuf,
->+				    GET_VERSION_V2_OUT_CMCFW_BUILD_DATE);
->+		if (tstamp) {
->+			rtc_time64_to_tm(tstamp, &build_date);
->+			snprintf(&buf[offset], EFX_MAX_VERSION_INFO_LEN - offset,
->+				 " (%ptRd)", &build_date);
->+		}
->+
->+		devlink_info_version_running_put(req,
->+						 EFX_DEVLINK_INFO_VERSION_FW_MGMT_CMC,
->+						 buf);
->+	}
->+
->+	ver.words = (__le16 *)MCDI_PTR(outbuf, GET_VERSION_V2_OUT_VERSION);
->+	offset = snprintf(buf, EFX_MAX_VERSION_INFO_LEN, "%u.%u.%u.%u",
->+			  le16_to_cpu(ver.words[0]), le16_to_cpu(ver.words[1]),
->+			  le16_to_cpu(ver.words[2]), le16_to_cpu(ver.words[3]));
->+	if (flags & BIT(EFX_VER_FLAG(MCFW_EXT_INFO))) {
->+		build_id = MCDI_DWORD(outbuf, GET_VERSION_V2_OUT_MCFW_BUILD_ID);
->+		snprintf(&buf[offset], EFX_MAX_VERSION_INFO_LEN - offset,
->+			 " (%x) %s", build_id,
->+			 MCDI_PTR(outbuf, GET_VERSION_V2_OUT_MCFW_BUILD_NAME));
->+	}
->+	devlink_info_version_running_put(req,
->+					 DEVLINK_INFO_VERSION_GENERIC_FW_MGMT,
->+					 buf);
->+
->+	if (flags & BIT(EFX_VER_FLAG(SUCFW_EXT_INFO))) {
->+		ver.dwords = (__le32 *)MCDI_PTR(outbuf,
->+						GET_VERSION_V2_OUT_SUCFW_VERSION);
->+		tstamp = MCDI_QWORD(outbuf,
->+				    GET_VERSION_V2_OUT_SUCFW_BUILD_DATE);
->+		rtc_time64_to_tm(tstamp, &build_date);
->+		build_id = MCDI_DWORD(outbuf, GET_VERSION_V2_OUT_SUCFW_CHIP_ID);
->+
->+		snprintf(buf, EFX_MAX_VERSION_INFO_LEN,
->+			 "%u.%u.%u.%u type %x (%ptRd)",
->+			 le32_to_cpu(ver.dwords[0]), le32_to_cpu(ver.dwords[1]),
->+			 le32_to_cpu(ver.dwords[2]), le32_to_cpu(ver.dwords[3]),
->+			 build_id, &build_date);
->+
->+		devlink_info_version_running_put(req,
->+						 EFX_DEVLINK_INFO_VERSION_FW_MGMT_SUC,
->+						 buf);
->+	}
->+}
->+
->+static void efx_devlink_info_running_v3(struct efx_nic *efx,
->+					struct devlink_info_req *req,
->+					unsigned int flags, efx_dword_t *outbuf)
->+{
->+	char buf[EFX_MAX_VERSION_INFO_LEN];
->+	union {
->+		const __le32 *dwords;
->+		const __le16 *words;
->+		const char *str;
->+	} ver;
->+
->+	if (flags & BIT(EFX_VER_FLAG(DATAPATH_HW_VERSION))) {
->+		ver.dwords = (__le32 *)MCDI_PTR(outbuf,
->+						GET_VERSION_V3_OUT_DATAPATH_HW_VERSION);
->+
->+		snprintf(buf, EFX_MAX_VERSION_INFO_LEN, "%u.%u.%u",
->+			 le32_to_cpu(ver.dwords[0]), le32_to_cpu(ver.dwords[1]),
->+			 le32_to_cpu(ver.dwords[2]));
->+
->+		devlink_info_version_running_put(req,
->+						 EFX_DEVLINK_INFO_VERSION_DATAPATH_HW,
->+						 buf);
->+	}
->+
->+	if (flags & BIT(EFX_VER_FLAG(DATAPATH_FW_VERSION))) {
->+		ver.dwords = (__le32 *)MCDI_PTR(outbuf,
->+						GET_VERSION_V3_OUT_DATAPATH_FW_VERSION);
->+
->+		snprintf(buf, EFX_MAX_VERSION_INFO_LEN, "%u.%u.%u",
->+			 le32_to_cpu(ver.dwords[0]), le32_to_cpu(ver.dwords[1]),
->+			 le32_to_cpu(ver.dwords[2]));
->+
->+		devlink_info_version_running_put(req,
->+						 EFX_DEVLINK_INFO_VERSION_DATAPATH_FW,
->+						 buf);
->+	}
->+}
->+
->+static void efx_devlink_info_running_v4(struct efx_nic *efx,
->+					struct devlink_info_req *req,
->+					unsigned int flags, efx_dword_t *outbuf)
->+{
->+	char buf[EFX_MAX_VERSION_INFO_LEN];
->+	union {
->+		const __le32 *dwords;
->+		const __le16 *words;
->+		const char *str;
->+	} ver;
->+
->+	if (flags & BIT(EFX_VER_FLAG(SOC_BOOT_VERSION))) {
->+		ver.dwords = (__le32 *)MCDI_PTR(outbuf,
->+						GET_VERSION_V4_OUT_SOC_BOOT_VERSION);
->+
->+		snprintf(buf, EFX_MAX_VERSION_INFO_LEN, "%u.%u.%u.%u",
->+			 le32_to_cpu(ver.dwords[0]), le32_to_cpu(ver.dwords[1]),
->+			 le32_to_cpu(ver.dwords[2]),
->+			 le32_to_cpu(ver.dwords[3]));
->+
->+		devlink_info_version_running_put(req,
->+						 EFX_DEVLINK_INFO_VERSION_SOC_BOOT,
->+						 buf);
->+	}
->+
->+	if (flags & BIT(EFX_VER_FLAG(SOC_UBOOT_VERSION))) {
->+		ver.dwords = (__le32 *)MCDI_PTR(outbuf,
->+						GET_VERSION_V4_OUT_SOC_UBOOT_VERSION);
->+
->+		snprintf(buf, EFX_MAX_VERSION_INFO_LEN, "%u.%u.%u.%u",
->+			 le32_to_cpu(ver.dwords[0]), le32_to_cpu(ver.dwords[1]),
->+			 le32_to_cpu(ver.dwords[2]),
->+			 le32_to_cpu(ver.dwords[3]));
->+
->+		devlink_info_version_running_put(req,
->+						 EFX_DEVLINK_INFO_VERSION_SOC_UBOOT,
->+						 buf);
->+	}
->+
->+	if (flags & BIT(EFX_VER_FLAG(SOC_MAIN_ROOTFS_VERSION))) {
->+		ver.dwords = (__le32 *)MCDI_PTR(outbuf,
->+					GET_VERSION_V4_OUT_SOC_MAIN_ROOTFS_VERSION);
->+
->+		snprintf(buf, EFX_MAX_VERSION_INFO_LEN, "%u.%u.%u.%u",
->+			 le32_to_cpu(ver.dwords[0]), le32_to_cpu(ver.dwords[1]),
->+			 le32_to_cpu(ver.dwords[2]),
->+			 le32_to_cpu(ver.dwords[3]));
->+
->+		devlink_info_version_running_put(req,
->+						 EFX_DEVLINK_INFO_VERSION_SOC_MAIN,
->+						 buf);
->+	}
->+
->+	if (flags & BIT(EFX_VER_FLAG(SOC_RECOVERY_BUILDROOT_VERSION))) {
->+		ver.dwords = (__le32 *)MCDI_PTR(outbuf,
->+						GET_VERSION_V4_OUT_SOC_RECOVERY_BUILDROOT_VERSION);
->+
->+		snprintf(buf, EFX_MAX_VERSION_INFO_LEN, "%u.%u.%u.%u",
->+			 le32_to_cpu(ver.dwords[0]), le32_to_cpu(ver.dwords[1]),
->+			 le32_to_cpu(ver.dwords[2]),
->+			 le32_to_cpu(ver.dwords[3]));
->+
->+		devlink_info_version_running_put(req,
->+						 EFX_DEVLINK_INFO_VERSION_SOC_RECOVERY,
->+						 buf);
->+	}
->+
->+	if (flags & BIT(EFX_VER_FLAG(SUCFW_VERSION)) &&
->+	    ~flags & BIT(EFX_VER_FLAG(SUCFW_EXT_INFO))) {
->+		ver.dwords = (__le32 *)MCDI_PTR(outbuf,
->+						GET_VERSION_V4_OUT_SUCFW_VERSION);
->+
->+		snprintf(buf, EFX_MAX_VERSION_INFO_LEN, "%u.%u.%u.%u",
->+			 le32_to_cpu(ver.dwords[0]), le32_to_cpu(ver.dwords[1]),
->+			 le32_to_cpu(ver.dwords[2]),
->+			 le32_to_cpu(ver.dwords[3]));
->+
->+		devlink_info_version_running_put(req,
->+						 EFX_DEVLINK_INFO_VERSION_FW_MGMT_SUC,
->+						 buf);
->+	}
->+}
->+
->+static void efx_devlink_info_running_v5(struct efx_nic *efx,
->+					struct devlink_info_req *req,
->+					unsigned int flags, efx_dword_t *outbuf)
->+{
->+	char buf[EFX_MAX_VERSION_INFO_LEN];
->+	union {
->+		const __le32 *dwords;
->+		const __le16 *words;
->+		const char *str;
->+	} ver;
->+
->+	if (flags & BIT(EFX_VER_FLAG(BOARD_VERSION))) {
->+		ver.dwords = (__le32 *)MCDI_PTR(outbuf,
->+						GET_VERSION_V5_OUT_BOARD_VERSION);
->+
->+		snprintf(buf, EFX_MAX_VERSION_INFO_LEN, "%u.%u.%u.%u",
->+			 le32_to_cpu(ver.dwords[0]), le32_to_cpu(ver.dwords[1]),
->+			 le32_to_cpu(ver.dwords[2]),
->+			 le32_to_cpu(ver.dwords[3]));
->+
->+		devlink_info_version_running_put(req,
->+						 DEVLINK_INFO_VERSION_GENERIC_BOARD_REV,
->+						 buf);
->+	}
->+
->+	if (flags & BIT(EFX_VER_FLAG(BUNDLE_VERSION))) {
->+		ver.dwords = (__le32 *)MCDI_PTR(outbuf,
->+						GET_VERSION_V5_OUT_BUNDLE_VERSION);
->+
->+		snprintf(buf, EFX_MAX_VERSION_INFO_LEN, "%u.%u.%u.%u",
->+			 le32_to_cpu(ver.dwords[0]), le32_to_cpu(ver.dwords[1]),
->+			 le32_to_cpu(ver.dwords[2]),
->+			 le32_to_cpu(ver.dwords[3]));
->+
->+		devlink_info_version_running_put(req,
->+						 DEVLINK_INFO_VERSION_GENERIC_FW_BUNDLE_ID,
->+						 buf);
->+	}
->+}
->+
->+static void efx_devlink_info_running_versions(struct efx_nic *efx,
->+					      struct devlink_info_req *req)
->+{
->+	MCDI_DECLARE_BUF(outbuf, MC_CMD_GET_VERSION_V5_OUT_LEN);
->+	MCDI_DECLARE_BUF(inbuf, MC_CMD_GET_VERSION_EXT_IN_LEN);
->+	char buf[EFX_MAX_VERSION_INFO_LEN];
->+	union {
->+		const __le32 *dwords;
->+		const __le16 *words;
->+		const char *str;
->+	} ver;
->+	size_t outlength;
->+	unsigned int flags;
->+	int rc;
->+
->+	rc = efx_mcdi_rpc(efx, MC_CMD_GET_VERSION, inbuf, sizeof(inbuf),
->+			  outbuf, sizeof(outbuf), &outlength);
->+	if (rc || outlength < MC_CMD_GET_VERSION_OUT_LEN)
+>+	if (!dl_port)
 >+		return;
+>+	devl_port_unregister(dl_port);
+>+}
 >+
->+	/* Handle previous output */
->+	if (outlength < MC_CMD_GET_VERSION_V2_OUT_LEN) {
->+		ver.words = (__le16 *)MCDI_PTR(outbuf,
->+					       GET_VERSION_EXT_OUT_VERSION);
->+		snprintf(buf, EFX_MAX_VERSION_INFO_LEN, "%u.%u.%u.%u",
->+			 le16_to_cpu(ver.words[0]),
->+			 le16_to_cpu(ver.words[1]),
->+			 le16_to_cpu(ver.words[2]),
->+			 le16_to_cpu(ver.words[3]));
+>+static int efx_devlink_add_port(struct efx_nic *efx,
+>+				struct mae_mport_desc *mport)
+>+{
+>+	bool external = false;
 >+
->+		devlink_info_version_running_put(req,
->+						 DEVLINK_INFO_VERSION_GENERIC_FW_MGMT,
->+						 buf);
->+		return;
+>+	if (!ef100_mport_on_local_intf(efx, mport))
+>+		external = true;
+>+
+>+	switch (mport->mport_type) {
+>+	case MAE_MPORT_DESC_MPORT_TYPE_VNIC:
+>+		if (mport->vf_idx != MAE_MPORT_DESC_VF_IDX_NULL)
+>+			devlink_port_attrs_pci_vf_set(&mport->dl_port, 0, mport->pf_idx,
+>+						      mport->vf_idx,
+>+						      external);
+>+		else
+>+			devlink_port_attrs_pci_pf_set(&mport->dl_port, 0, mport->pf_idx,
+>+						      external);
+>+		break;
+>+	default:
+>+		/* MAE_MPORT_DESC_MPORT_ALIAS and UNDEFINED */
+>+		return 0;
 >+	}
 >+
->+	/* Handle V2 additions */
->+	flags = MCDI_DWORD(outbuf, GET_VERSION_V2_OUT_FLAGS);
->+	efx_devlink_info_running_v2(efx, req, flags, outbuf);
+>+	mport->dl_port.index = mport->mport_id;
 >+
->+	if (outlength < MC_CMD_GET_VERSION_V3_OUT_LEN)
->+		return;
->+
->+	/* Handle V3 additions */
->+	efx_devlink_info_running_v3(efx, req, flags, outbuf);
->+
->+	if (outlength < MC_CMD_GET_VERSION_V4_OUT_LEN)
->+		return;
->+
->+	/* Handle V4 additions */
->+	efx_devlink_info_running_v4(efx, req, flags, outbuf);
->+
->+	if (outlength < MC_CMD_GET_VERSION_V5_OUT_LEN)
->+		return;
->+
->+	/* Handle V5 additions */
->+	efx_devlink_info_running_v5(efx, req, flags, outbuf);
+>+	return devl_port_register(efx->devlink, &mport->dl_port, mport->mport_id);
 >+}
 >+
->+#define EFX_MAX_SERIALNUM_LEN	(ETH_ALEN * 2 + 1)
->+
->+static void efx_devlink_info_board_cfg(struct efx_nic *efx,
->+				       struct devlink_info_req *req)
->+{
->+	char sn[EFX_MAX_SERIALNUM_LEN];
->+	u8 mac_address[ETH_ALEN];
->+	int rc;
->+
->+	rc = efx_mcdi_get_board_cfg(efx, (u8 *)mac_address, NULL, NULL);
->+	if (!rc) {
->+		snprintf(sn, EFX_MAX_SERIALNUM_LEN, "%pm", mac_address);
->+		devlink_info_serial_number_put(req, sn);
->+	}
->+}
->+
->+static int efx_devlink_info_get(struct devlink *devlink,
->+				struct devlink_info_req *req,
->+				struct netlink_ext_ack *extack)
->+{
->+	struct efx_devlink *devlink_private = devlink_priv(devlink);
->+	struct efx_nic *efx = devlink_private->efx;
->+
->+	efx_devlink_info_board_cfg(efx, req);
->+	efx_devlink_info_stored_versions(efx, req);
->+	efx_devlink_info_running_versions(efx, req);
-
-I wonder, why don't you propagate error to the user? He may be
-interested that you had troubles of getting some info, instead of silent
-failure.
-
-
->+	return 0;
->+}
->+
-> static const struct devlink_ops sfc_devlink_ops = {
->+	.info_get			= efx_devlink_info_get,
+> static int efx_devlink_info_nvram_partition(struct efx_nic *efx,
+> 					    struct devlink_info_req *req,
+> 					    unsigned int partition_type,
+>@@ -428,6 +465,66 @@ static const struct devlink_ops sfc_devlink_ops = {
+> 	.info_get			= efx_devlink_info_get,
 > };
 > 
-> void efx_fini_devlink_start(struct efx_nic *efx)
->diff --git a/drivers/net/ethernet/sfc/efx_devlink.h b/drivers/net/ethernet/sfc/efx_devlink.h
->index 55d0d8aeca1e..8bcd077d8d8d 100644
->--- a/drivers/net/ethernet/sfc/efx_devlink.h
->+++ b/drivers/net/ethernet/sfc/efx_devlink.h
->@@ -14,6 +14,23 @@
-> #include "net_driver.h"
-> #include <net/devlink.h>
-> 
->+/* Custom devlink-info version object names for details that do not map to the
->+ * generic standardized names.
->+ */
->+#define EFX_DEVLINK_INFO_VERSION_FW_MGMT_SUC	"fw.mgmt.suc"
->+#define EFX_DEVLINK_INFO_VERSION_FW_MGMT_CMC	"fw.mgmt.cmc"
->+#define EFX_DEVLINK_INFO_VERSION_FPGA_REV	"fpga.rev"
->+#define EFX_DEVLINK_INFO_VERSION_DATAPATH_HW	"fpga.app"
->+#define EFX_DEVLINK_INFO_VERSION_DATAPATH_FW	DEVLINK_INFO_VERSION_GENERIC_FW_APP
->+#define EFX_DEVLINK_INFO_VERSION_SOC_BOOT	"coproc.boot"
->+#define EFX_DEVLINK_INFO_VERSION_SOC_UBOOT	"coproc.uboot"
->+#define EFX_DEVLINK_INFO_VERSION_SOC_MAIN	"coproc.main"
->+#define EFX_DEVLINK_INFO_VERSION_SOC_RECOVERY	"coproc.recovery"
->+#define EFX_DEVLINK_INFO_VERSION_FW_EXPROM	"fw.exprom"
->+#define EFX_DEVLINK_INFO_VERSION_FW_UEFI	"fw.uefi"
->+
->+#define EFX_MAX_VERSION_INFO_LEN	64
->+
-> int efx_probe_devlink(struct efx_nic *efx);
-> void efx_probe_devlink_done(struct efx_nic *efx);
-> void efx_fini_devlink_start(struct efx_nic *efx);
->diff --git a/drivers/net/ethernet/sfc/mcdi.c b/drivers/net/ethernet/sfc/mcdi.c
->index af338208eae9..a7f2c31071e8 100644
->--- a/drivers/net/ethernet/sfc/mcdi.c
->+++ b/drivers/net/ethernet/sfc/mcdi.c
->@@ -2175,6 +2175,78 @@ int efx_mcdi_get_privilege_mask(struct efx_nic *efx, u32 *mask)
-> 	return 0;
-> }
-> 
->+int efx_mcdi_nvram_metadata(struct efx_nic *efx, unsigned int type,
->+			    u32 *subtype, u16 version[4], char *desc,
->+			    size_t descsize)
+>+static struct devlink_port *ef100_set_devlink_port(struct efx_nic *efx, u32 idx)
 >+{
->+	MCDI_DECLARE_BUF(inbuf, MC_CMD_NVRAM_METADATA_IN_LEN);
->+	efx_dword_t *outbuf;
->+	size_t outlen;
->+	u32 flags;
->+	int rc;
+>+	struct mae_mport_desc *mport;
+>+	u32 id;
 >+
->+	outbuf = kzalloc(MC_CMD_NVRAM_METADATA_OUT_LENMAX_MCDI2, GFP_KERNEL);
->+	if (!outbuf)
->+		return -ENOMEM;
->+
->+	MCDI_SET_DWORD(inbuf, NVRAM_METADATA_IN_TYPE, type);
->+
->+	rc = efx_mcdi_rpc_quiet(efx, MC_CMD_NVRAM_METADATA, inbuf,
->+				sizeof(inbuf), outbuf,
->+				MC_CMD_NVRAM_METADATA_OUT_LENMAX_MCDI2,
->+				&outlen);
->+	if (rc)
->+		goto out_free;
->+	if (outlen < MC_CMD_NVRAM_METADATA_OUT_LENMIN) {
->+		rc = -EIO;
->+		goto out_free;
->+	}
->+
->+	flags = MCDI_DWORD(outbuf, NVRAM_METADATA_OUT_FLAGS);
->+
->+	if (desc && descsize > 0) {
->+		if (flags & BIT(MC_CMD_NVRAM_METADATA_OUT_DESCRIPTION_VALID_LBN)) {
->+			if (descsize <=
->+			    MC_CMD_NVRAM_METADATA_OUT_DESCRIPTION_NUM(outlen)) {
->+				rc = -E2BIG;
->+				goto out_free;
->+			}
->+
->+			strncpy(desc,
->+				MCDI_PTR(outbuf, NVRAM_METADATA_OUT_DESCRIPTION),
->+				MC_CMD_NVRAM_METADATA_OUT_DESCRIPTION_NUM(outlen));
->+			desc[MC_CMD_NVRAM_METADATA_OUT_DESCRIPTION_NUM(outlen)] = '\0';
->+		} else {
->+			desc[0] = '\0';
->+		}
->+	}
->+
->+	if (subtype) {
->+		if (flags & BIT(MC_CMD_NVRAM_METADATA_OUT_SUBTYPE_VALID_LBN))
->+			*subtype = MCDI_DWORD(outbuf, NVRAM_METADATA_OUT_SUBTYPE);
+>+	if (efx_mae_lookup_mport(efx, idx, &id)) {
+>+		/* This should not happen. */
+>+		if (idx == MAE_MPORT_DESC_VF_IDX_NULL)
+>+			pci_warn(efx->pci_dev, "No mport ID found for PF.\n");
 >+		else
->+			*subtype = 0;
+>+			pci_warn(efx->pci_dev, "No mport ID found for VF %u.\n",
+>+				 idx);
+>+		return NULL;
 >+	}
 >+
->+	if (version) {
->+		if (flags & BIT(MC_CMD_NVRAM_METADATA_OUT_VERSION_VALID_LBN)) {
->+			version[0] = MCDI_WORD(outbuf, NVRAM_METADATA_OUT_VERSION_W);
->+			version[1] = MCDI_WORD(outbuf, NVRAM_METADATA_OUT_VERSION_X);
->+			version[2] = MCDI_WORD(outbuf, NVRAM_METADATA_OUT_VERSION_Y);
->+			version[3] = MCDI_WORD(outbuf, NVRAM_METADATA_OUT_VERSION_Z);
->+		} else {
->+			version[0] = 0;
->+			version[1] = 0;
->+			version[2] = 0;
->+			version[3] = 0;
->+		}
+>+	mport = efx_mae_get_mport(efx, id);
+>+	if (!mport) {
+>+		/* This should not happen. */
+
+Should not happen? WARN_ON?
+
+
+>+		if (idx == MAE_MPORT_DESC_VF_IDX_NULL)
+>+			pci_warn(efx->pci_dev, "No mport found for PF.\n");
+>+		else
+>+			pci_warn(efx->pci_dev, "No mport found for VF %u.\n",
+>+				 idx);
+>+		return NULL;
 >+	}
 >+
->+out_free:
->+	kfree(outbuf);
->+	return rc;
+>+	if (efx_devlink_add_port(efx, mport)) {
+
+Store the return value into variable please.
+
+
+>+		if (idx == MAE_MPORT_DESC_VF_IDX_NULL)
+>+			pci_warn(efx->pci_dev,
+>+				 "devlink port creation for PF failed.\n");
+>+		else
+>+			pci_warn(efx->pci_dev,
+>+				 "devlink_port creationg for VF %u failed.\n",
+>+				 idx);
+>+		return NULL;
+>+	}
+>+
+>+	return &mport->dl_port;
 >+}
 >+
-> #ifdef CONFIG_SFC_MTD
+>+void ef100_rep_set_devlink_port(struct efx_rep *efv)
+>+{
+>+	efv->dl_port = ef100_set_devlink_port(efv->parent, efv->idx);
+>+}
+>+
+>+void ef100_pf_set_devlink_port(struct efx_nic *efx)
+>+{
+>+	efx->dl_port = ef100_set_devlink_port(efx, MAE_MPORT_DESC_VF_IDX_NULL);
+>+}
+>+
+>+void ef100_rep_unset_devlink_port(struct efx_rep *efv)
+>+{
+>+	efx_devlink_del_port(efv->dl_port);
+>+}
+>+
+>+void ef100_pf_unset_devlink_port(struct efx_nic *efx)
+>+{
+>+	efx_devlink_del_port(efx->dl_port);
+>+}
+>+
+> void efx_fini_devlink_start(struct efx_nic *efx)
+> {
+> 	if (efx->devlink)
+>diff --git a/drivers/net/ethernet/sfc/efx_devlink.h b/drivers/net/ethernet/sfc/efx_devlink.h
+>index 8bcd077d8d8d..d453a180c44c 100644
+>--- a/drivers/net/ethernet/sfc/efx_devlink.h
+>+++ b/drivers/net/ethernet/sfc/efx_devlink.h
+>@@ -36,4 +36,10 @@ void efx_probe_devlink_done(struct efx_nic *efx);
+> void efx_fini_devlink_start(struct efx_nic *efx);
+> void efx_fini_devlink(struct efx_nic *efx);
 > 
-> #define EFX_MCDI_NVRAM_LEN_MAX 128
->diff --git a/drivers/net/ethernet/sfc/mcdi.h b/drivers/net/ethernet/sfc/mcdi.h
->index 7e35fec9da35..5cb202684858 100644
->--- a/drivers/net/ethernet/sfc/mcdi.h
->+++ b/drivers/net/ethernet/sfc/mcdi.h
->@@ -378,6 +378,9 @@ int efx_mcdi_nvram_info(struct efx_nic *efx, unsigned int type,
-> 			size_t *size_out, size_t *erase_size_out,
-> 			bool *protected_out);
-> int efx_new_mcdi_nvram_test_all(struct efx_nic *efx);
->+int efx_mcdi_nvram_metadata(struct efx_nic *efx, unsigned int type,
->+			    u32 *subtype, u16 version[4], char *desc,
->+			    size_t descsize);
-> int efx_mcdi_nvram_test_all(struct efx_nic *efx);
-> int efx_mcdi_handle_assertion(struct efx_nic *efx);
-> int efx_mcdi_set_id_led(struct efx_nic *efx, enum efx_led_mode mode);
+>+struct efx_rep;
+>+
+>+void ef100_pf_set_devlink_port(struct efx_nic *efx);
+>+void ef100_rep_set_devlink_port(struct efx_rep *efv);
+>+void ef100_pf_unset_devlink_port(struct efx_nic *efx);
+>+void ef100_rep_unset_devlink_port(struct efx_rep *efv);
+> #endif	/* _EFX_DEVLINK_H */
+>diff --git a/drivers/net/ethernet/sfc/mae.h b/drivers/net/ethernet/sfc/mae.h
+>index d9adeafc0654..e1b7967132ad 100644
+>--- a/drivers/net/ethernet/sfc/mae.h
+>+++ b/drivers/net/ethernet/sfc/mae.h
+>@@ -13,6 +13,7 @@
+> #define EF100_MAE_H
+> /* MCDI interface for the ef100 Match-Action Engine */
+> 
+>+#include <net/devlink.h>
+> #include "net_driver.h"
+> #include "tc.h"
+> #include "mcdi_pcol.h" /* needed for various MC_CMD_MAE_*_NULL defines */
+>@@ -44,6 +45,7 @@ struct mae_mport_desc {
+> 	};
+> 	struct rhash_head linkage;
+> 	struct efx_rep *efv;
+>+	struct devlink_port dl_port;
+
+This is quite odd to store the devlink port struct in something called
+"match action engine"... Why don't you put it to struct efx_nic
+directly? Much more suitable.
+
+
+> };
+> 
+> int efx_mae_enumerate_mports(struct efx_nic *efx);
+>diff --git a/drivers/net/ethernet/sfc/net_driver.h b/drivers/net/ethernet/sfc/net_driver.h
+>index bc9efbfb3d6b..fcd51d3992fa 100644
+>--- a/drivers/net/ethernet/sfc/net_driver.h
+>+++ b/drivers/net/ethernet/sfc/net_driver.h
+>@@ -998,6 +998,7 @@ struct efx_mae;
+>  * @netdev_notifier: Netdevice notifier.
+>  * @tc: state for TC offload (EF100).
+>  * @devlink: reference to devlink structure owned by this device
+>+ * @dl_port: devlink port associated with the PF
+>  * @mem_bar: The BAR that is mapped into membase.
+>  * @reg_base: Offset from the start of the bar to the function control window.
+>  * @monitor_work: Hardware monitor workitem
+>@@ -1185,6 +1186,7 @@ struct efx_nic {
+> 	struct efx_tc_state *tc;
+> 
+> 	struct devlink *devlink;
+>+	struct devlink_port *dl_port;
+> 	unsigned int mem_bar;
+> 	u32 reg_base;
+> 
 >-- 
 >2.17.1
 >
