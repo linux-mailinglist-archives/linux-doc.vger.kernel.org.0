@@ -2,118 +2,174 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 445D2687BAC
-	for <lists+linux-doc@lfdr.de>; Thu,  2 Feb 2023 12:10:16 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 77689687BE6
+	for <lists+linux-doc@lfdr.de>; Thu,  2 Feb 2023 12:14:41 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S231722AbjBBLKO (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 2 Feb 2023 06:10:14 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:39960 "EHLO
+        id S229935AbjBBLOj (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 2 Feb 2023 06:14:39 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:45438 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S232396AbjBBLKA (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Thu, 2 Feb 2023 06:10:00 -0500
-Received: from dggsgout12.his.huawei.com (unknown [45.249.212.56])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 494591631D;
-        Thu,  2 Feb 2023 03:09:32 -0800 (PST)
-Received: from mail02.huawei.com (unknown [172.30.67.169])
-        by dggsgout12.his.huawei.com (SkyGuard) with ESMTP id 4P6wzB22gGz4f3kp4;
-        Thu,  2 Feb 2023 19:09:26 +0800 (CST)
-Received: from [10.174.176.117] (unknown [10.174.176.117])
-        by APP4 (Coremail) with SMTP id gCh0CgDHd6vkmdtjMDR2Cw--.56257S2;
-        Thu, 02 Feb 2023 19:09:28 +0800 (CST)
-Subject: Re: [PATCH] blk-ioprio: Introduce promote-to-rt policy
-To:     Bart Van Assche <bvanassche@acm.org>, linux-block@vger.kernel.org
-Cc:     Jan Kara <jack@suse.cz>, Jens Axboe <axboe@kernel.dk>,
-        cgroups@vger.kernel.org, Tejun Heo <tj@kernel.org>,
-        Zefan Li <lizefan.x@bytedance.com>,
-        Johannes Weiner <hannes@cmpxchg.org>,
-        Jonathan Corbet <corbet@lwn.net>, linux-kernel@vger.kernel.org,
-        linux-doc@vger.kernel.org, houtao1@huawei.com
-References: <20230201045227.2203123-1-houtao@huaweicloud.com>
- <8c068af3-7199-11cf-5c69-a523c7c22d9a@acm.org>
-From:   Hou Tao <houtao@huaweicloud.com>
-Message-ID: <4f7dcb3e-2d5a-cae3-0e1c-a82bcc3d2217@huaweicloud.com>
-Date:   Thu, 2 Feb 2023 19:09:24 +0800
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:78.0) Gecko/20100101
- Thunderbird/78.6.0
+        with ESMTP id S230156AbjBBLOi (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Thu, 2 Feb 2023 06:14:38 -0500
+Received: from NAM12-BN8-obe.outbound.protection.outlook.com (mail-bn8nam12on2040.outbound.protection.outlook.com [40.107.237.40])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id DFC2886EBE;
+        Thu,  2 Feb 2023 03:14:36 -0800 (PST)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=Nc7WSYdi82jOff8TFhvjdSbDiIIPZaBQQ7urMMqhehHvpmRiaxCH+Ub9xkrsfCDo74Kp1pvrtg6QoNwxEVgef9MUdDSiizeD1Z07WzQ4XJV6xJEUvSoTru4IN62bVWr4g2UKFLbfoQYFN8IDHY6aEAGZh4gV7W/N5DZ8L2tg99VV3EabTvSFi2q7zxpHe0oNTOp/+caneCH/4LFhL4xVHcjNSPK8h6kntzWOTNEW5TWLiqDmjEhWu2E19qgfPflHwVGpJ+vtwD5TBJ2IrII/qbxYXBhxjQD61dWQAScDgFYDGAWYZ2XKL4hPsAs+tN1tGqHnlOqYfGEBzXdZj2s5QA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=r1ezyLpJzbgh6D859wQt124ND6M+E2Vv0rm2dy/nHZ0=;
+ b=oBz3sX2dSLMffSG0o8NTqHF+yjzWhzVoLrpHJgAX+/6RSbB1T6Ln40YQLT5bQrw0+VI59NXE3krrLFjSrMnwCarO/yAn6Xo6zfnh0PDV1e0OyC2MkDydKplHQwGBmxHkvUGqIHWiMg5bUZ2fTdjCPncVGNITGhg6IV6n0B7WG1MUvFkD6u8e4U7BbmD87xlc2QeY74ADh1gyoNb1IyTvLarIja6LKqnO+q4Xh0nnLJ2kXoPVzRvp+oKspd7KrIologaGB/bko/M8juqt/IfKi7R5tN4VWFgmHcqENYSnZley3B8TFlfYSL3oeNjVrUqJPkZxAPGTfyFFlPcLqjY7Yg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=vger.kernel.org smtp.mailfrom=amd.com;
+ dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
+ header.from=amd.com; dkim=none (message not signed); arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=r1ezyLpJzbgh6D859wQt124ND6M+E2Vv0rm2dy/nHZ0=;
+ b=a1gdR8rrKQW6AunFrFLmNOisph4hx8GoyPbfEh1sGxr4OGazOktdVuncOIwYz21srFvz+wCnGxbrp7bFFOOtV9VXGWVyC5KlM0xXNt4r+f+Ss9AzA+ZSfn5quVP/tzpXzij4/bCczsfGq8VRcuasMls+djn0a/WYBn7PwpblWC8=
+Received: from DS7PR05CA0091.namprd05.prod.outlook.com (2603:10b6:8:56::12) by
+ BN9PR12MB5383.namprd12.prod.outlook.com (2603:10b6:408:104::7) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.6064.27; Thu, 2 Feb 2023 11:14:34 +0000
+Received: from DM6NAM11FT046.eop-nam11.prod.protection.outlook.com
+ (2603:10b6:8:56:cafe::43) by DS7PR05CA0091.outlook.office365.com
+ (2603:10b6:8:56::12) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6086.6 via Frontend
+ Transport; Thu, 2 Feb 2023 11:14:34 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
+ smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=SATLEXMB03.amd.com; pr=C
+Received: from SATLEXMB03.amd.com (165.204.84.17) by
+ DM6NAM11FT046.mail.protection.outlook.com (10.13.172.121) with Microsoft SMTP
+ Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.20.6043.28 via Frontend Transport; Thu, 2 Feb 2023 11:14:34 +0000
+Received: from SATLEXMB04.amd.com (10.181.40.145) by SATLEXMB03.amd.com
+ (10.181.40.144) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2375.34; Thu, 2 Feb
+ 2023 05:14:33 -0600
+Received: from xcbalucerop41x.xilinx.com (10.180.168.240) by
+ SATLEXMB04.amd.com (10.181.40.145) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2375.34 via Frontend Transport; Thu, 2 Feb 2023 05:14:31 -0600
+From:   <alejandro.lucero-palau@amd.com>
+To:     <netdev@vger.kernel.org>, <linux-net-drivers@amd.com>
+CC:     <davem@davemloft.net>, <kuba@kernel.org>, <pabeni@redhat.com>,
+        <edumazet@google.com>, <habetsm.xilinx@gmail.com>,
+        <ecree.xilinx@gmail.com>, <linux-doc@vger.kernel.org>,
+        <corbet@lwn.net>, <jiri@nvidia.com>,
+        "Alejandro Lucero" <alejandro.lucero-palau@amd.com>
+Subject: [PATCH v5 net-next 0/8] sfc: devlink support for ef100
+Date:   Thu, 2 Feb 2023 11:14:15 +0000
+Message-ID: <20230202111423.56831-1-alejandro.lucero-palau@amd.com>
+X-Mailer: git-send-email 2.17.1
 MIME-Version: 1.0
-In-Reply-To: <8c068af3-7199-11cf-5c69-a523c7c22d9a@acm.org>
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: 8bit
-Content-Language: en-US
-X-CM-TRANSID: gCh0CgDHd6vkmdtjMDR2Cw--.56257S2
-X-Coremail-Antispam: 1UD129KBjvJXoW7Cr47Kr4DAFWrKFW8AFy8Grg_yoW8uFy3pF
-        48CFykJrZYqFy8Jr1kXa18GrWUA3y3J3WUJF1FqF98uw48Kw10gw4FqFn2gFyfGa1kXrn8
-        Jw4DJrWUua45Aw7anT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
-        9KBjDU0xBIdaVrnRJUUUvab4IE77IF4wAFF20E14v26r4j6ryUM7CY07I20VC2zVCF04k2
-        6cxKx2IYs7xG6rWj6s0DM7CIcVAFz4kK6r1j6r18M28lY4IEw2IIxxk0rwA2F7IY1VAKz4
-        vEj48ve4kI8wA2z4x0Y4vE2Ix0cI8IcVAFwI0_tr0E3s1l84ACjcxK6xIIjxv20xvEc7Cj
-        xVAFwI0_Gr1j6F4UJwA2z4x0Y4vEx4A2jsIE14v26rxl6s0DM28EF7xvwVC2z280aVCY1x
-        0267AKxVW0oVCq3wAS0I0E0xvYzxvE52x082IY62kv0487Mc02F40EFcxC0VAKzVAqx4xG
-        6I80ewAv7VC0I7IYx2IY67AKxVWUJVWUGwAv7VC2z280aVAFwI0_Jr0_Gr1lOx8S6xCaFV
-        Cjc4AY6r1j6r4UM4x0Y48IcVAKI48JM4IIrI8v6xkF7I0E8cxan2IY04v7Mxk0xIA0c2IE
-        e2xFo4CEbIxvr21l42xK82IYc2Ij64vIr41l4I8I3I0E4IkC6x0Yz7v_Jr0_Gr1lx2IqxV
-        Aqx4xG67AKxVWUJVWUGwC20s026x8GjcxK67AKxVWUGVWUWwC2zVAF1VAY17CE14v26r1q
-        6r43MIIYrxkI7VAKI48JMIIF0xvE2Ix0cI8IcVAFwI0_Jr0_JF4lIxAIcVC0I7IYx2IY6x
-        kF7I0E14v26r4j6F4UMIIF0xvE42xK8VAvwI8IcIk0rVWrJr0_WFyUJwCI42IY6I8E87Iv
-        67AKxVWUJVW8JwCI42IY6I8E87Iv6xkF7I0E14v26r4j6r4UJbIYCTnIWIevJa73UjIFyT
-        uYvjxUrR6zUUUUU
-X-CM-SenderInfo: xkrx3t3r6k3tpzhluzxrxghudrp/
-X-CFilter-Loop: Reflected
-X-Spam-Status: No, score=-2.0 required=5.0 tests=BAYES_00,KHOP_HELO_FCRDNS,
-        MAY_BE_FORGED,NICE_REPLY_A,SPF_HELO_NONE,SPF_NONE autolearn=ham
-        autolearn_force=no version=3.4.6
+Content-Type: text/plain
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: DM6NAM11FT046:EE_|BN9PR12MB5383:EE_
+X-MS-Office365-Filtering-Correlation-Id: 8837a87b-42d3-463f-2176-08db050eaa4d
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: fjCSHhuuFnf5ZAkGVcICrpcNF7rp3ZAxGtV+fHkuoHxmBTQHEkwD5BJtBiKLEzBqjufc8XSudG5hM0W72N9Uf2Bjyd6mqbb8Gyx5vDG3FaifJ/sfAQhoQBKjZg529+vgBIxLNviGPhXxrXNGy3/ODK/4/e1Gvgxp/diTZjELFobbcgCeUZMu4QjXU+mkXNXgW2nRlDCPstwUmWlUsDyYRS3CJ/OcKffIF74nbHp41HFna1kC6ZDB44bQtpctjTk+ptbulInCGjw/mU3PcJkY/uWRhcQ0OvgmszhObTApNzNh5pPwYwQabVdlr+teEgzfmS0TgzxArl5mNwoTI/2pZ6iwATgCbeUXU25wbfshdU2VUUuW9tesK9oPNp4nOb6yhGStxoUKTGY6eQ43KMcyc7PNaWDnU+bT8tv389PP0NM4YmtW0omzWZfbfL0vzbWb/fHrPFzltlq/hrALX3lE7+sSWlIAp7eGgmtN+2/MUHZFyfg6p4YsIftUW+nqksyLiPjLaMqDr+3E0QYTsfclvbC5qfQwo6B4BCnwviDB1wXBaRMvstbPaKS64PHN2vXcagwFC+NhscveD0Oy+DHwc8sum/oPw+G6nbCNo/upQKvAY8fEzk29yJucRvZ3kk4j/iRrqmh78FOMXbGPb30Bkb/zr1fzHbnUN/iChEQYTHrbJsMgsJh4aEoyTfckG+CjCzaOGcHnAOwFhZPQYYMoMudU/MdHVcBUrjOtYT2MYsc=
+X-Forefront-Antispam-Report: CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB03.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230025)(4636009)(136003)(39860400002)(376002)(396003)(346002)(451199018)(36840700001)(40470700004)(46966006)(40460700003)(36860700001)(8936002)(6636002)(478600001)(54906003)(110136005)(186003)(26005)(36756003)(1076003)(82310400005)(316002)(6666004)(5660300002)(86362001)(7416002)(2906002)(2876002)(4326008)(70586007)(70206006)(8676002)(41300700001)(40480700001)(336012)(2616005)(426003)(83380400001)(47076005)(356005)(81166007)(82740400003)(36900700001);DIR:OUT;SFP:1101;
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 02 Feb 2023 11:14:34.7138
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 8837a87b-42d3-463f-2176-08db050eaa4d
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[SATLEXMB03.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource: DM6NAM11FT046.eop-nam11.prod.protection.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: BN9PR12MB5383
+X-Spam-Status: No, score=-1.1 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FORGED_SPF_HELO,
+        RCVD_IN_DNSWL_NONE,RCVD_IN_MSPIKE_H2,SPF_HELO_PASS,SPF_NONE
+        autolearn=no autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Hi,
+From: Alejandro Lucero <alejandro.lucero-palau@amd.com>
 
-On 2/2/2023 1:33 AM, Bart Van Assche wrote:
-> On 1/31/23 20:52, Hou Tao wrote:
->>   /**
->>    * enum prio_policy - I/O priority class policy.
->>    * @POLICY_NO_CHANGE: (default) do not modify the I/O priority class.
->> @@ -27,21 +34,30 @@
->>    * @POLICY_RESTRICT_TO_BE: modify IOPRIO_CLASS_NONE and IOPRIO_CLASS_RT into
->>    *        IOPRIO_CLASS_BE.
->>    * @POLICY_ALL_TO_IDLE: change the I/O priority class into IOPRIO_CLASS_IDLE.
->> - *
->> + * @POLICY_PROMOTE_TO_RT: modify IOPRIO_CLASS_NONE and IOPRIO_CLASS_BE into
->> + *         IOPRIO_CLASS_RT.
->>    * See also <linux/ioprio.h>.
->>    */
->>   enum prio_policy {
->> -    POLICY_NO_CHANGE    = 0,
->> -    POLICY_NONE_TO_RT    = 1,
->> -    POLICY_RESTRICT_TO_BE    = 2,
->> -    POLICY_ALL_TO_IDLE    = 3,
->> +    POLICY_NO_CHANGE    = IOPRIO_CLASS_NONE,
->> +    POLICY_NONE_TO_RT    = IOPRIO_CLASS_RT,
->> +    POLICY_RESTRICT_TO_BE    = IOPRIO_CLASS_BE,
->> +    POLICY_ALL_TO_IDLE    = IOPRIO_CLASS_IDLE,
->> +    POLICY_PROMOTE_TO_RT    = IOPRIO_CLASS_RT | IOPRIO_POL_PROMOTION,
->> +};
->
-> The above change complicates the ioprio code. Additionally, I'm concerned that
-> it makes the ioprio code slower. Has it been considered to keep the numerical
-> values for the existing policies, to assign the number 4 to
-> POLICY_PROMOTE_TO_RT and to use a lookup-array in blkcg_set_ioprio() to
-> convert the policy number into an IOPRIO_CLASS value?
-For the slowness, do you meaning the extra dereference of blkcg->ioprio->policy
-when policy is no-change or the handle of IOPRIO_POL_PROMOTION in
-blkcg_set_ioprio()? It seems other functions (e.g., ioprio_show_prio_policy()
-and ioprio_set_prio_policy()) are not on the hot path. Using a lookup array in
-blkcg_set_ioprio() to do the conversion will also be OK, although it will
-introduce an extra lookup each time when policy is not no-change. I don't have
-strong preference. If you are OK with lookup array in blkcg_set_ioprio(), will
-do it in v2.
->
-> Thanks,
->
-> Bart.
->
->
-> .
+v5 changes
+ - add extack error report for devlink info
+ - Rename devlink functions stating locking
+ - Check functions return through a variable
+ - Remove unnecessary non related changes
+ - put SRIOV dependent code inside #ifdefs (is ia64 still alive?)
+
+v4 changes:
+ - Add new doc file to MAINTAINERS
+ - nvram metadata call independent of MTD config
+ - add more useful info with extack
+
+v3 changes:
+ - fix compilation warnings/errors reported by checkpatch
+
+v2 changes:
+ - splitting up devlink info from basic devlink support
+ - using devlink lock/unlock during initialization and removal
+ - fix devlink registration order
+ - splitting up efx_devlink_info_running_versions
+ - Add sfc.rst with specifics about sfc info
+ - embedding dl_port in mports
+ - using extack for error reports to user space
+
+This patchset adds devlink port support for ef100 allowing setting VFs
+mac addresses through the VF representor devlink ports.
+
+Basic devlink infrastructure is first introduced, then support for info
+command. Next changes for enumerating MAE ports which will be used for
+devlink port creation when netdevs are registered.
+
+Adding support for devlink port_function_hw_addr_get requires changes in
+the ef100 driver for getting the mac address based on a client handle.
+This allows to obtain VFs mac addresses during netdev initialization as
+well what is included in patch 6.
+
+Such client handle is used in patches 7 and 8 for getting and setting
+devlink port addresses.
+
+Alejandro Lucero (8):
+  sfc: add devlink support for ef100
+  sfc: add devlink info support for ef100
+  sfc: enumerate mports in ef100
+  sfc: add mport lookup based on driver's mport data
+  sfc: add devlink port support for ef100
+  sfc: obtain device mac address based on firmware handle for ef100
+  sfc: add support for devlink port_function_hw_addr_get in ef100
+  sfc: add support for devlink port_function_hw_addr_set in ef100
+
+ Documentation/networking/devlink/sfc.rst |  57 ++
+ MAINTAINERS                              |   1 +
+ drivers/net/ethernet/sfc/Kconfig         |   1 +
+ drivers/net/ethernet/sfc/Makefile        |   3 +-
+ drivers/net/ethernet/sfc/ef100_netdev.c  |  33 +
+ drivers/net/ethernet/sfc/ef100_nic.c     |  93 ++-
+ drivers/net/ethernet/sfc/ef100_nic.h     |   7 +
+ drivers/net/ethernet/sfc/ef100_rep.c     |  57 +-
+ drivers/net/ethernet/sfc/ef100_rep.h     |  10 +
+ drivers/net/ethernet/sfc/efx_devlink.c   | 738 +++++++++++++++++++++++
+ drivers/net/ethernet/sfc/efx_devlink.h   |  47 ++
+ drivers/net/ethernet/sfc/mae.c           | 218 ++++++-
+ drivers/net/ethernet/sfc/mae.h           |  41 ++
+ drivers/net/ethernet/sfc/mcdi.c          |  72 +++
+ drivers/net/ethernet/sfc/mcdi.h          |   8 +
+ drivers/net/ethernet/sfc/net_driver.h    |   8 +
+ 16 files changed, 1369 insertions(+), 25 deletions(-)
+ create mode 100644 Documentation/networking/devlink/sfc.rst
+ create mode 100644 drivers/net/ethernet/sfc/efx_devlink.c
+ create mode 100644 drivers/net/ethernet/sfc/efx_devlink.h
+
+-- 
+2.17.1
 
