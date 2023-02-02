@@ -2,136 +2,142 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id AD63E6879A9
-	for <lists+linux-doc@lfdr.de>; Thu,  2 Feb 2023 11:00:21 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 8112E687981
+	for <lists+linux-doc@lfdr.de>; Thu,  2 Feb 2023 10:52:50 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S231520AbjBBKAS (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 2 Feb 2023 05:00:18 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:41390 "EHLO
+        id S230003AbjBBJwt (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 2 Feb 2023 04:52:49 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:33912 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S232512AbjBBKAK (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Thu, 2 Feb 2023 05:00:10 -0500
-Received: from smtp-relay-internal-0.canonical.com (smtp-relay-internal-0.canonical.com [185.125.188.122])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id B468B8936A
-        for <linux-doc@vger.kernel.org>; Thu,  2 Feb 2023 01:59:57 -0800 (PST)
-Received: from mail-yw1-f200.google.com (mail-yw1-f200.google.com [209.85.128.200])
-        (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-         key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
-        (No client certificate requested)
-        by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id 12B5E442FB
-        for <linux-doc@vger.kernel.org>; Thu,  2 Feb 2023 09:46:55 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
-        s=20210705; t=1675331215;
-        bh=j6zWA0cmeZq/Pdujw3e8IyUapMEhl5TgQN8H+c5DyTY=;
-        h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
-         To:Cc:Content-Type;
-        b=GTwdiPbSuSaJMT5L0j2KMlY3lcYYOfdk0g0HHFzHp7uoknkeZ7xc81THDSXctGTst
-         DIMdDM7BLU33V2o16thXOWjI5xJKNPd400bSA051mAHwkN1aEg2+MqNr+tdR/Tx3mj
-         tBLbdoFib9rIGEjljP5fhNFapcdPmoC1yq2qYlOXiwuWIr/TUbhEI77h6D2vdX7H8B
-         TE+FYPYqDv7C2rpHy60fSzvDz0wLdbY6t9QWSp1NgjkR1VhoTQfJkc5vQ+TynoqMFm
-         6Q/71NXleyahCl6CmS0pxKuQfg6vF2OgKjAig0ZakmEMfnFPyAdgNSgKEpx2hwAgh9
-         ex/zNMiI4um7g==
-Received: by mail-yw1-f200.google.com with SMTP id 00721157ae682-514bf89d3cfso15023717b3.21
-        for <linux-doc@vger.kernel.org>; Thu, 02 Feb 2023 01:46:55 -0800 (PST)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=j6zWA0cmeZq/Pdujw3e8IyUapMEhl5TgQN8H+c5DyTY=;
-        b=n8M6HX7lx2xPHYIJDHw5w9y3GtparhJhcjwsjbF944iVruPHATEuI0iMoeR/NUjXTL
-         OIhzf8pmiENrTN90k6DretUroHHko+XxXGk/ARF6u2rMEZc7ee2iHgphVHz32hNrmHjY
-         jt4P2d9V8DDhNIm81kody1EIQOtrnechlumjsc+S0f0WGK8cAglIwZCFJ1FaYE6cqR9m
-         rG/bC9p/lPKqR1D12Hq/b/x+52lAvTZJN3oEXwDR+6HQ046+BBNZ7VuBpg3pVzlWFOK9
-         KQ+fEtz9+kHQyT/q5cC7JRCBIGuRiGQktUnT//VVuT/Jf9w94zxTTpJT0ZgKBM44UpSJ
-         ETjA==
-X-Gm-Message-State: AO0yUKWpPxlRuiYKYeXew/yX/n3mLqz36/UT37V+sExijDNuB8TcWFvw
-        t0UPPk6n79ByVTyk858cn/VjocdV3vh8xP3q4I31MgVop/lpvbT11xpMHoGWKBcp0QTGabLL93h
-        GMGlva1atdTqoZ8qT2CLa1mYLdW0KtVABc6wwlthvZcQQ29JxvJOWBA==
-X-Received: by 2002:a81:70c2:0:b0:506:6e1a:9b0 with SMTP id l185-20020a8170c2000000b005066e1a09b0mr631036ywc.277.1675331214115;
-        Thu, 02 Feb 2023 01:46:54 -0800 (PST)
-X-Google-Smtp-Source: AK7set93ZODHHCCQG04l+loQG6KBDQem1oCQB9qjfFasFJzVoB868hVcGOuxhSj0em1uOkSPuerV1TPOuLKFLpPe8Gc=
-X-Received: by 2002:a81:70c2:0:b0:506:6e1a:9b0 with SMTP id
- l185-20020a8170c2000000b005066e1a09b0mr631035ywc.277.1675331213915; Thu, 02
- Feb 2023 01:46:53 -0800 (PST)
-MIME-Version: 1.0
-References: <20230131121608.177250-1-aleksandr.mikhalitsyn@canonical.com>
- <87bkme4gwu.fsf@meer.lwn.net> <CAEivzxfxkWtYP4bqFrmD__3M9WpJNZjTJNx9wp4WQ0_LoGKT6g@mail.gmail.com>
- <Y9tJPn0a/O27SBuJ@sol.localdomain>
-In-Reply-To: <Y9tJPn0a/O27SBuJ@sol.localdomain>
-From:   Aleksandr Mikhalitsyn <aleksandr.mikhalitsyn@canonical.com>
-Date:   Thu, 2 Feb 2023 10:46:42 +0100
-Message-ID: <CAEivzxdLUy6CKaQg7Go6P892xgQxi_CEk2M4A3TdVA644DSLqg@mail.gmail.com>
-Subject: Re: [PATCH 2/2] docs: filesystems: vfs: actualize struct
- super_operations description
-To:     Eric Biggers <ebiggers@kernel.org>
-Cc:     Jonathan Corbet <corbet@lwn.net>, linux-fsdevel@vger.kernel.org,
-        linux-doc@vger.kernel.org, Al Viro <viro@zeniv.linux.org.uk>
+        with ESMTP id S229595AbjBBJws (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Thu, 2 Feb 2023 04:52:48 -0500
+Received: from frasgout12.his.huawei.com (frasgout12.his.huawei.com [14.137.139.154])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 7F23AE6;
+        Thu,  2 Feb 2023 01:52:46 -0800 (PST)
+Received: from mail02.huawei.com (unknown [172.18.147.228])
+        by frasgout12.his.huawei.com (SkyGuard) with ESMTP id 4P6v542HL0z9xGYW;
+        Thu,  2 Feb 2023 17:44:24 +0800 (CST)
+Received: from roberto-ThinkStation-P620 (unknown [10.204.63.22])
+        by APP1 (Coremail) with SMTP id LxC2BwDXVwPJh9tj+jnpAA--.15060S2;
+        Thu, 02 Feb 2023 10:52:21 +0100 (CET)
+Message-ID: <6ddfa7344d01b21a93d3909af9dac0ae5e2a79ee.camel@huaweicloud.com>
+Subject: Re: [RFC PATCH v9 13/16] ipe: enable support for fs-verity as a
+ trust provider
+From:   Roberto Sassu <roberto.sassu@huaweicloud.com>
+To:     Fan Wu <wufan@linux.microsoft.com>
+Cc:     corbet@lwn.net, zohar@linux.ibm.com, jmorris@namei.org,
+        serge@hallyn.com, tytso@mit.edu, ebiggers@kernel.org,
+        axboe@kernel.dk, agk@redhat.com, snitzer@kernel.org,
+        eparis@redhat.com, paul@paul-moore.com, linux-doc@vger.kernel.org,
+        linux-integrity@vger.kernel.org,
+        linux-security-module@vger.kernel.org,
+        linux-fscrypt@vger.kernel.org, linux-block@vger.kernel.org,
+        dm-devel@redhat.com, linux-audit@redhat.com,
+        roberto.sassu@huawei.com, linux-kernel@vger.kernel.org,
+        Deven Bowers <deven.desai@linux.microsoft.com>
+Date:   Thu, 02 Feb 2023 10:51:56 +0100
+In-Reply-To: <20230201235031.GC9075@linuxonhyperv3.guj3yctzbm1etfxqx2vob5hsef.xx.internal.cloudapp.net>
+References: <1675119451-23180-1-git-send-email-wufan@linux.microsoft.com>
+         <1675119451-23180-14-git-send-email-wufan@linux.microsoft.com>
+         <d62907da62b5e0b25c9d7bd4b3119a3d1827bd29.camel@huaweicloud.com>
+         <20230201235031.GC9075@linuxonhyperv3.guj3yctzbm1etfxqx2vob5hsef.xx.internal.cloudapp.net>
 Content-Type: text/plain; charset="UTF-8"
-X-Spam-Status: No, score=-4.4 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_MED,
-        SPF_HELO_NONE,SPF_PASS autolearn=unavailable autolearn_force=no
-        version=3.4.6
+User-Agent: Evolution 3.36.5-0ubuntu1 
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+X-CM-TRANSID: LxC2BwDXVwPJh9tj+jnpAA--.15060S2
+X-Coremail-Antispam: 1UD129KBjvJXoW7ZF1Dtry3CFyxuFWkCr4fAFb_yoW5JryfpF
+        WFkF48KrZ0qF17KF10y3W8Xw1akrWxKay7urn8uwn7Was5Zr9rtr1IyFWUWFn8CFy8ZryY
+        qF42yF15Z3s8AFJanT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+        9KBjDU0xBIdaVrnRJUUUkjb4IE77IF4wAFF20E14v26ryj6rWUM7CY07I20VC2zVCF04k2
+        6cxKx2IYs7xG6rWj6s0DM7CIcVAFz4kK6r1j6r18M28lY4IEw2IIxxk0rwA2F7IY1VAKz4
+        vEj48ve4kI8wA2z4x0Y4vE2Ix0cI8IcVAFwI0_Jr0_JF4l84ACjcxK6xIIjxv20xvEc7Cj
+        xVAFwI0_Gr0_Cr1l84ACjcxK6I8E87Iv67AKxVW8JVWxJwA2z4x0Y4vEx4A2jsIEc7CjxV
+        AFwI0_Gr0_Gr1UM2AIxVAIcxkEcVAq07x20xvEncxIr21l5I8CrVACY4xI64kE6c02F40E
+        x7xfMcIj6xIIjxv20xvE14v26r1j6r18McIj6I8E87Iv67AKxVWUJVW8JwAm72CE4IkC6x
+        0Yz7v_Jr0_Gr1lF7xvr2IY64vIr41lFIxGxcIEc7CjxVA2Y2ka0xkIwI1l42xK82IYc2Ij
+        64vIr41l4I8I3I0E4IkC6x0Yz7v_Jr0_Gr1lx2IqxVAqx4xG67AKxVWUJVWUGwC20s026x
+        8GjcxK67AKxVWUGVWUWwC2zVAF1VAY17CE14v26r4a6rW5MIIYrxkI7VAKI48JMIIF0xvE
+        2Ix0cI8IcVAFwI0_Jr0_JF4lIxAIcVC0I7IYx2IY6xkF7I0E14v26r4j6F4UMIIF0xvE42
+        xK8VAvwI8IcIk0rVWrZr1j6s0DMIIF0xvEx4A2jsIE14v26r1j6r4UMIIF0xvEx4A2jsIE
+        c7CjxVAFwI0_Gr0_Gr1UYxBIdaVFxhVjvjDU0xZFpf9x07UZ18PUUUUU=
+X-CM-SenderInfo: purev21wro2thvvxqx5xdzvxpfor3voofrz/1tbiAQAQBF1jj4hv0wAAsQ
+X-CFilter-Loop: Reflected
+X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00,SPF_HELO_NONE,
+        SPF_NONE autolearn=ham autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Thu, Feb 2, 2023 at 6:25 AM Eric Biggers <ebiggers@kernel.org> wrote:
->
-> On Tue, Jan 31, 2023 at 10:12:42PM +0100, Aleksandr Mikhalitsyn wrote:
-> > On Tue, Jan 31, 2023 at 8:56 PM Jonathan Corbet <corbet@lwn.net> wrote:
-> > >
-> > > Alexander Mikhalitsyn <aleksandr.mikhalitsyn@canonical.com> writes:
-> > >
-> > > > Cc: linux-fsdevel@vger.kernel.org
-> > > > Cc: linux-doc@vger.kernel.org
-> > > > Signed-off-by: Alexander Mikhalitsyn <aleksandr.mikhalitsyn@canonical.com>
-> > > > ---
-> > > >  Documentation/filesystems/vfs.rst | 74 ++++++++++++++++++++++++-------
-> > > >  1 file changed, 59 insertions(+), 15 deletions(-)
-> > >
-> > > Thanks for updating this document!  That said, could I ask you, please,
-> > > to resubmit these with a proper changelog?  I'd also suggest copying Al
-> > > Viro, who will surely have comments on the changes you have made.
-> >
-> > Hi, Jonathan!
-> >
-> > Sure. Have done and of course I've to add Al Viro to CC, but forgot to do that,
-> > cause scripts/get_maintainer.pl have didn't remind me (-:
-> >
-> > >
-> > > > diff --git a/Documentation/filesystems/vfs.rst b/Documentation/filesystems/vfs.rst
-> > > > index fab3bd702250..8671eafa745a 100644
-> > > > --- a/Documentation/filesystems/vfs.rst
-> > > > +++ b/Documentation/filesystems/vfs.rst
-> > > > @@ -242,33 +242,42 @@ struct super_operations
-> > > >  -----------------------
-> > > >
-> > > >  This describes how the VFS can manipulate the superblock of your
-> > > > -filesystem.  As of kernel 2.6.22, the following members are defined:
-> > > > +filesystem.  As of kernel 6.1, the following members are defined:
-> > >
-> > > Why not 6.2 while you're at it?  We might as well be as current as we
-> > > can while we're updating things.
-> >
-> > I'm on 6.2, but for some reason decided to put 6.1. Will fix it :)
-> >
->
-> It would be better to just remove the version number.  Whenever documentation
-> says something like "as of vX.Y.Z", people usually forget to update the version
-> number when updating the documentation.  So then we end up in the situation
-> where the documentation actually describes the latest kernel version, but it
-> claims to be describing an extremely old kernel version.
+On Wed, 2023-02-01 at 15:50 -0800, Fan Wu wrote:
+> On Tue, Jan 31, 2023 at 03:00:08PM +0100, Roberto Sassu wrote:
+> > On Mon, 2023-01-30 at 14:57 -0800, Fan Wu wrote:
+> > > +/**
+> > > + * evaluate_fsv_sig_false - Analyze @ctx against a fsv sig false property.
+> > > + * @ctx: Supplies a pointer to the context being evaluated.
+> > > + * @p: Supplies a pointer to the property being evaluated.
+> > > + *
+> > > + * Return:
+> > > + * * true	- The current @ctx match the @p
+> > > + * * false	- The current @ctx doesn't match the @p
+> > > + */
+> > > +static bool evaluate_fsv_sig_false(const struct ipe_eval_ctx *const ctx,
+> > > +				   struct ipe_prop *p)
+> > > +{
+> > > +	return !ctx->ino ||
+> > > +	       !IS_VERITY(ctx->ino) ||
+> > > +	       !ctx->ipe_inode ||
+> > > +	       !ctx->ipe_inode->fs_verity_signed;
+> > > +}
+> > > +
+> > > +/**
+> > > + * evaluate_fsv_sig_true - Analyze @ctx against a fsv sig true property.
+> > > + * @ctx: Supplies a pointer to the context being evaluated.
+> > > + * @p: Supplies a pointer to the property being evaluated.
+> > > + *
+> > > + * Return:
+> > > + * * true - The current @ctx match the @p
+> > > + * * false - The current @ctx doesn't match the @p
+> > > + */
+> > > +static bool evaluate_fsv_sig_true(const struct ipe_eval_ctx *const ctx,
+> > > +				  struct ipe_prop *p)
+> > > +{
+> > > +	return ctx->ino &&
+> > > +	       IS_VERITY(ctx->ino) &&
+> > > +	       ctx->ipe_inode &&
+> > > +	       ctx->ipe_inode->fs_verity_signed;
+> > > +}
+> > 
+> > Isn't better to just define one function and prepend a ! in
+> > evaluate_property()?
+> Yes that's a better way to do it, I will take this idea.
+> 
+> > Not sure about the usefulness of the fsverity_signature= property as it
+> > is. I would at minimum allow to specify which keyring signatures are
+> > verified against, and ensure that the keyring has a restriction.
+> > 
+> > And maybe I would call fsverity_verify_signature() directly, after
+> > extending it to pass the desired keyring.
+> > 
+> Thanks for the suggestion.
+> For the initial version we only have the fsverity_signature property
+> to enable the policy can make decision based on the existence of the
+> signature. In the future we plan to add more properties to leverage
+> the remaining signature information so we can have the restrictions
+> you mentioned.
 
-Hi, Eric!
+Uhm, these boolean properties feel like something is missing. In my
+opinion, one cannot accept just any signature, but should be able to
+specify the approved signers.
 
-Agree. Will remove version specifiers in the next resend after Al
-Viro's and other folks reviews. :)
+Roberto
 
-Kind regards,
-Alex
+> -Fan
+> 
+> > I would also split this patch in two, one for fsverity_digest= and one
+> > for fsverity_signature=.
+> > 
+> > Roberto
 
->
-> - Eric
