@@ -2,166 +2,153 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 4A6D5688256
-	for <lists+linux-doc@lfdr.de>; Thu,  2 Feb 2023 16:31:27 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id C56AE6880F1
+	for <lists+linux-doc@lfdr.de>; Thu,  2 Feb 2023 16:03:43 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S233120AbjBBPbZ (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 2 Feb 2023 10:31:25 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:51088 "EHLO
+        id S231661AbjBBPDl (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 2 Feb 2023 10:03:41 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:44148 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S232994AbjBBPbR (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Thu, 2 Feb 2023 10:31:17 -0500
-Received: from casper.infradead.org (casper.infradead.org [IPv6:2001:8b0:10b:1236::1])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 396E03ABB;
-        Thu,  2 Feb 2023 07:30:40 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-        d=infradead.org; s=casper.20170209; h=Content-Type:MIME-Version:References:
-        Subject:Cc:To:From:Date:Message-ID:Sender:Reply-To:Content-Transfer-Encoding:
-        Content-ID:Content-Description:In-Reply-To;
-        bh=LNTskqo5roGsovH+JFQKAebOFNRW3Kky7MgwbIWmzaM=; b=SutQsn5HCDPd7RqYYJOqaRBAAw
-        ghza+gVMb7VvZ8S5mXEBYv9fP8q8Y9wXALUK5q0pzocuZuyXrPepuT1+wCOd/OzB+ntZth6DaMT6B
-        S8zOdGU0FmbWx9fMkVMCos7RUSpLps4sna/LO0IsKeshnyabCK7cNceYm4e+4Fmn11Z+jL+MTpNzN
-        I6xv1Uhkv4ss9oJhXYo64MzEkqJxVqSn1hWToVBJlsAr9MjKCkQ2hdLEGzmvnX+l4DLFC6cT1hP4d
-        2/1/3QPc9YolaFPwoZcHS+Sn+GoiEBzfYylecr9r98dtv7EMTfckM+5a0Ow5UAFEBYeCLaBAG2mQU
-        PcOP0H6w==;
-Received: from j130084.upc-j.chello.nl ([24.132.130.84] helo=noisy.programming.kicks-ass.net)
-        by casper.infradead.org with esmtpsa (Exim 4.94.2 #2 (Red Hat Linux))
-        id 1pNbW4-00DV2e-2G; Thu, 02 Feb 2023 15:28:48 +0000
-Received: from hirez.programming.kicks-ass.net (hirez.programming.kicks-ass.net [192.168.1.225])
-        (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-         key-exchange X25519 server-signature RSA-PSS (4096 bits))
-        (Client did not present a certificate)
-        by noisy.programming.kicks-ass.net (Postfix) with ESMTPS id 4121B302E1F;
-        Thu,  2 Feb 2023 16:28:45 +0100 (CET)
-Received: by hirez.programming.kicks-ass.net (Postfix, from userid 0)
-        id AB09623F326C1; Thu,  2 Feb 2023 16:28:40 +0100 (CET)
-Message-ID: <20230202152655.805747571@infradead.org>
-User-Agent: quilt/0.66
-Date:   Thu, 02 Feb 2023 15:50:40 +0100
-From:   Peter Zijlstra <peterz@infradead.org>
-To:     torvalds@linux-foundation.org
-Cc:     corbet@lwn.net, will@kernel.org, peterz@infradead.org,
-        boqun.feng@gmail.com, mark.rutland@arm.com,
-        catalin.marinas@arm.com, dennis@kernel.org, tj@kernel.org,
-        cl@linux.com, hca@linux.ibm.com, gor@linux.ibm.com,
-        agordeev@linux.ibm.com, borntraeger@linux.ibm.com,
-        svens@linux.ibm.com, tglx@linutronix.de, mingo@redhat.com,
-        bp@alien8.de, dave.hansen@linux.intel.com, x86@kernel.org,
-        hpa@zytor.com, joro@8bytes.org, suravee.suthikulpanit@amd.com,
-        robin.murphy@arm.com, dwmw2@infradead.org,
-        baolu.lu@linux.intel.com, Arnd Bergmann <arnd@arndb.de>,
-        Herbert Xu <herbert@gondor.apana.org.au>, davem@davemloft.net,
-        penberg@kernel.org, rientjes@google.com, iamjoonsoo.kim@lge.com,
-        Andrew Morton <akpm@linux-foundation.org>, vbabka@suse.cz,
-        roman.gushchin@linux.dev, 42.hyeyoo@gmail.com,
-        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
-        linux-mm@kvack.org, linux-s390@vger.kernel.org,
-        iommu@lists.linux.dev, linux-arch@vger.kernel.org,
-        linux-crypto@vger.kernel.org
-Subject: [PATCH v2 10/10] s390/cpum_sf: Convert to cmpxchg128()
-References: <20230202145030.223740842@infradead.org>
+        with ESMTP id S229972AbjBBPDk (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Thu, 2 Feb 2023 10:03:40 -0500
+Received: from mail-oa1-f51.google.com (mail-oa1-f51.google.com [209.85.160.51])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 8B1BE1715E;
+        Thu,  2 Feb 2023 07:03:15 -0800 (PST)
+Received: by mail-oa1-f51.google.com with SMTP id 586e51a60fabf-163bd802238so2805495fac.1;
+        Thu, 02 Feb 2023 07:03:15 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=yOafWoNIBGU3Q76qlhkVuk+ht5BzMZtDb+TwP4LrI+s=;
+        b=7SxN6CsChFi5CsO8BdujQhNA/maxiN0bWxxXhoWdm5A6m7yQlMHyBtpBPTDKt5RtZB
+         GxO3XulvBXey/LiZakCjF5UgHjDQL3MxMhzeCDJl2+qgCwVoUXiC/l6HGEpuocw8pSKL
+         ZRL2mkLBjDBw5MVj+5xB4bjZW2GzsTRu7foHfGBz0pzYWJhxaRoGuLeHu0voWnA+IOow
+         2NwgNOi6wVerN4nl8x5yKvPRiof1UBDPtFJ4dSoCRAi5TmWcD0o+UpKUMFuhqvXfWPsY
+         yRs7U0IzCyr04h+BGAgpJTnjOxp9P79qOBMp8NW7GNvVDSartGam4huphLKdEseQ5JvL
+         nq+g==
+X-Gm-Message-State: AO0yUKUUt45JuYS2f4r/EmiRbsZ9QORZ5bxUVV0fcioOWI4HZPkB21hb
+        n4PsE5d14T9TNJRYd+uYFbsA3kcnGuW50Q==
+X-Google-Smtp-Source: AK7set/jqRpSpKwOVgmd0hRVvLflEu/ZJ53kNj+Z0g73c5pb0/FJd/Mx0loSgB+vzVz/aKrqVxiwDg==
+X-Received: by 2002:a05:6870:d184:b0:163:88f7:d947 with SMTP id a4-20020a056870d18400b0016388f7d947mr3037186oac.43.1675350169477;
+        Thu, 02 Feb 2023 07:02:49 -0800 (PST)
+Received: from mail-yb1-f172.google.com (mail-yb1-f172.google.com. [209.85.219.172])
+        by smtp.gmail.com with ESMTPSA id o4-20020a05620a0d4400b006ea7f9d8644sm14344458qkl.96.2023.02.02.07.02.49
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Thu, 02 Feb 2023 07:02:49 -0800 (PST)
+Received: by mail-yb1-f172.google.com with SMTP id 74so2238008ybl.12;
+        Thu, 02 Feb 2023 07:02:49 -0800 (PST)
+X-Received: by 2002:a25:fc1c:0:b0:80b:8602:f3fe with SMTP id
+ v28-20020a25fc1c000000b0080b8602f3femr916791ybd.36.1675349832295; Thu, 02 Feb
+ 2023 06:57:12 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-X-Spam-Status: No, score=-4.4 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_MED,SPF_HELO_NONE,
-        SPF_NONE autolearn=ham autolearn_force=no version=3.4.6
+References: <cover.1674584626.git.geert+renesas@glider.be>
+In-Reply-To: <cover.1674584626.git.geert+renesas@glider.be>
+From:   Geert Uytterhoeven <geert@linux-m68k.org>
+Date:   Thu, 2 Feb 2023 15:57:00 +0100
+X-Gmail-Original-Message-ID: <CAMuHMdWhY9OtW2Pa+LmY0qOvbxLiuyNYEQr5WnPgO1xD=5M1AQ@mail.gmail.com>
+Message-ID: <CAMuHMdWhY9OtW2Pa+LmY0qOvbxLiuyNYEQr5WnPgO1xD=5M1AQ@mail.gmail.com>
+Subject: Re: [PATCH treewide v2 0/9] phy: Add devm_of_phy_optional_get() helper
+To:     Vinod Koul <vkoul@kernel.org>
+Cc:     Jonathan Corbet <corbet@lwn.net>,
+        Madalin Bucur <madalin.bucur@nxp.com>,
+        "David S . Miller" <davem@davemloft.net>,
+        Eric Dumazet <edumazet@google.com>,
+        Jakub Kicinski <kuba@kernel.org>,
+        Paolo Abeni <pabeni@redhat.com>,
+        Horatiu Vultur <horatiu.vultur@microchip.com>,
+        UNGLinuxDriver@microchip.com,
+        Thierry Reding <thierry.reding@gmail.com>,
+        Lorenzo Pieralisi <lpieralisi@kernel.org>,
+        Rob Herring <robh@kernel.org>,
+        =?UTF-8?Q?Krzysztof_Wilczy=C5=84ski?= <kw@linux.com>,
+        Bjorn Helgaas <bhelgaas@google.com>,
+        Jonathan Hunter <jonathanh@nvidia.com>,
+        Kishon Vijay Abraham I <kishon@kernel.org>,
+        Alan Stern <stern@rowland.harvard.edu>,
+        Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+        Krzysztof Kozlowski <krzysztof.kozlowski@linaro.org>,
+        Alim Akhtar <alim.akhtar@samsung.com>,
+        Siddharth Vadapalli <s-vadapalli@ti.com>,
+        Russell King <linux@armlinux.org.uk>,
+        linux-phy@lists.infradead.org, linux-doc@vger.kernel.org,
+        netdev@vger.kernel.org, linux-tegra@vger.kernel.org,
+        linux-pci@vger.kernel.org, linux-usb@vger.kernel.org,
+        linux-arm-kernel@lists.infradead.org,
+        linux-samsung-soc@vger.kernel.org,
+        Marc Kleine-Budde <mkl@pengutronix.de>
+Content-Type: text/plain; charset="UTF-8"
+X-Spam-Status: No, score=-1.4 required=5.0 tests=BAYES_00,
+        FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,HEADER_FROM_DIFFERENT_DOMAINS,
+        RCVD_IN_DNSWL_NONE,RCVD_IN_MSPIKE_H3,RCVD_IN_MSPIKE_WL,SPF_HELO_NONE,
+        SPF_PASS autolearn=no autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Now that there is a cross arch u128 and cmpxchg128(), use those
-instead of the custom CDSG helper.
+Hi Vinod,
 
-Signed-off-by: Peter Zijlstra (Intel) <peterz@infradead.org>
----
- arch/s390/include/asm/cpu_mf.h  |    2 +-
- arch/s390/kernel/perf_cpum_sf.c |   22 ++++++----------------
- 2 files changed, 7 insertions(+), 17 deletions(-)
+On Tue, Jan 24, 2023 at 7:37 PM Geert Uytterhoeven
+<geert+renesas@glider.be> wrote:
+> While there exist several optional_get() PHY helper functions, there is
+> no optional variant of devm_of_phy_get(), leading to several drivers
+> implementing this theirselves, sometimes in buggy ways.
+>
+> Hence this series, after two cleanup patches, introduces a
+> devm_of_phy_optional_get() helper(), and converts existing users of
+> devm_of_phy_get() where appropriate.
+>
+> Changes compared to v1[1]:
+>   - Incorporate "[PATCH v2 1/9] phy: Remove unused phy_optional_get()",
+>     as it touches the same documentation,
+>   - New patch "[PATCH v2 2/9] doc: phy: Document devm_of_phy_get()",
+>   - Print an error message in case of failure, as requested by RobH,
+>   - Update Documentation,
+>   - Clarify removed checks for -ENODEV and -ENOSYS,
+>   - Remove error printing in case of real failures from callers,
+>   - Rebase am65-cpsw change on top of commit 854617f52ab42418 ("net:
+>     ethernet: ti: am65-cpsw: Handle -EPROBE_DEFER for Serdes PHY") in
+>     net-next (next-20230123 and later),
+>   - Add Reviewed-by, Acked-by.
+>
+> Most of this series been compile-tested only, but the new helper itself
+> has been tested with a new user[2].
 
---- a/arch/s390/include/asm/cpu_mf.h
-+++ b/arch/s390/include/asm/cpu_mf.h
-@@ -141,7 +141,7 @@ union hws_trailer_header {
- 		unsigned int dsdes:16;	/* 48-63: size of diagnostic SDE */
- 		unsigned long long overflow; /* 64 - Overflow Count   */
- 	};
--	__uint128_t val;
-+	u128 val;
- };
- 
- struct hws_trailer_entry {
---- a/arch/s390/kernel/perf_cpum_sf.c
-+++ b/arch/s390/kernel/perf_cpum_sf.c
-@@ -1228,16 +1228,6 @@ static void hw_collect_samples(struct pe
- 	}
- }
- 
--static inline __uint128_t __cdsg(__uint128_t *ptr, __uint128_t old, __uint128_t new)
--{
--	asm volatile(
--		"	cdsg	%[old],%[new],%[ptr]\n"
--		: [old] "+d" (old), [ptr] "+QS" (*ptr)
--		: [new] "d" (new)
--		: "memory", "cc");
--	return old;
--}
--
- /* hw_perf_event_update() - Process sampling buffer
-  * @event:	The perf event
-  * @flush_all:	Flag to also flush partially filled sample-data-blocks
-@@ -1307,14 +1297,14 @@ static void hw_perf_event_update(struct
- 
- 		/* Reset trailer (using compare-double-and-swap) */
- 		/* READ_ONCE() 16 byte header */
--		prev.val = __cdsg(&te->header.val, 0, 0);
-+		prev.val = cmpxchg128(&te->header.val, 0, 0);
- 		do {
- 			old.val = prev.val;
- 			new.val = prev.val;
- 			new.f = 0;
- 			new.a = 1;
- 			new.overflow = 0;
--			prev.val = __cdsg(&te->header.val, old.val, new.val);
-+			prev.val = cmpxchg128(&te->header.val, old.val, new.val);
- 		} while (prev.val != old.val);
- 
- 		/* Advance to next sample-data-block */
-@@ -1496,7 +1486,7 @@ static bool aux_set_alert(struct aux_buf
- 
- 	te = aux_sdb_trailer(aux, alert_index);
- 	/* READ_ONCE() 16 byte header */
--	prev.val = __cdsg(&te->header.val, 0, 0);
-+	prev.val = cmpxchg128(&te->header.val, 0, 0);
- 	do {
- 		old.val = prev.val;
- 		new.val = prev.val;
-@@ -1511,7 +1501,7 @@ static bool aux_set_alert(struct aux_buf
- 		}
- 		new.a = 1;
- 		new.overflow = 0;
--		prev.val = __cdsg(&te->header.val, old.val, new.val);
-+		prev.val = cmpxchg128(&te->header.val, old.val, new.val);
- 	} while (prev.val != old.val);
- 	return true;
- }
-@@ -1575,7 +1565,7 @@ static bool aux_reset_buffer(struct aux_
- 	for (i = 0; i < range_scan; i++, idx++) {
- 		te = aux_sdb_trailer(aux, idx);
- 		/* READ_ONCE() 16 byte header */
--		prev.val = __cdsg(&te->header.val, 0, 0);
-+		prev.val = cmpxchg128(&te->header.val, 0, 0);
- 		do {
- 			old.val = prev.val;
- 			new.val = prev.val;
-@@ -1586,7 +1576,7 @@ static bool aux_reset_buffer(struct aux_
- 				new.a = 1;
- 			else
- 				new.a = 0;
--			prev.val = __cdsg(&te->header.val, old.val, new.val);
-+			prev.val = cmpxchg128(&te->header.val, old.val, new.val);
- 		} while (prev.val != old.val);
- 		*overflow += orig_overflow;
- 	}
+Are you happy with this?  This series (at least patch 3) is a dependency
+for [2], and in [3] you said you could apply it and create an immutable
+branch.
 
+Thanks!
 
+> [1] "[PATCH treewide 0/7] phy: Add devm_of_phy_optional_get() helper"
+>     https://lore.kernel.org/r/cover.1674036164.git.geert+renesas@glider.be
+> [2] "[PATCH 12/12] can: rcar_canfd: Add transceiver support"
+>     https://lore.kernel.org/r/e825b50a843ffe40e33f34e4d858c07c1b2ff259.1674499048.git.geert+renesas@glider.be
+
+[3] https://lore.kernel.org/all/Y8kmG+jB%2Fs7stebA@matsya
+
+>
+> Geert Uytterhoeven (9):
+>   phy: Remove unused phy_optional_get()
+>   doc: phy: Document devm_of_phy_get()
+>   phy: Add devm_of_phy_optional_get() helper
+>   net: fman: memac: Convert to devm_of_phy_optional_get()
+>   net: lan966x: Convert to devm_of_phy_optional_get()
+>   net: ethernet: ti: am65-cpsw: Convert to devm_of_phy_optional_get()
+>   PCI: tegra: Convert to devm_of_phy_optional_get()
+>   usb: host: ehci-exynos: Convert to devm_of_phy_optional_get()
+>   usb: host: ohci-exynos: Convert to devm_of_phy_optional_get()
+
+Gr{oetje,eeting}s,
+
+                        Geert
+
+--
+Geert Uytterhoeven -- There's lots of Linux beyond ia32 -- geert@linux-m68k.org
+
+In personal conversations with technical people, I call myself a hacker. But
+when I'm talking to journalists I just say "programmer" or something like that.
+                                -- Linus Torvalds
