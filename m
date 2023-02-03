@@ -2,140 +2,91 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 7B070688D21
-	for <lists+linux-doc@lfdr.de>; Fri,  3 Feb 2023 03:37:52 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 5375B688D51
+	for <lists+linux-doc@lfdr.de>; Fri,  3 Feb 2023 03:51:50 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S229662AbjBCChv (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 2 Feb 2023 21:37:51 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:50708 "EHLO
+        id S231614AbjBCCvr (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 2 Feb 2023 21:51:47 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:56926 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S229554AbjBCChu (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Thu, 2 Feb 2023 21:37:50 -0500
-Received: from mail-pl1-x630.google.com (mail-pl1-x630.google.com [IPv6:2607:f8b0:4864:20::630])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 160141A945
-        for <linux-doc@vger.kernel.org>; Thu,  2 Feb 2023 18:37:50 -0800 (PST)
-Received: by mail-pl1-x630.google.com with SMTP id z1so3916041plg.6
-        for <linux-doc@vger.kernel.org>; Thu, 02 Feb 2023 18:37:50 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:cc:to:subject:user-agent:mime-version:date:message-id
-         :from:to:cc:subject:date:message-id:reply-to;
-        bh=NAu/hppQCC01gCUFwOHpg8qV/q+qXELdiUcejWAliIc=;
-        b=gwBT6i31Job98y2t+SgqrUPVsoIDsUh/WsBIRFnuUR9hOqagInjjjt0kM+qB6CbQBH
-         o+hJntSwkC1CUO9FMV5Q1CsC8Mkc6ILEytN2563RhBUn+OnGZ/p9N6+OrvHOsYmr6c9I
-         DL5Kz7KvTg2TDRX19com0EBUSzm9+3vTyohPPbDUL1C2I3M8jvL/9T80ftgjvEbgKyOV
-         Dx/E+KO6w0UMb9dbbkv+oFs3N99Z5lfErV4/HxUC7ndTbKjylCQBLQC7bN5qAmlR3Ako
-         vu24qy8RFdt7s9ZbZqHn0Bbve4oE9DPh86XDvHhkYYiU7LyBRTo1Y2uw7ZDYC+Bg73iv
-         Dwng==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:cc:to:subject:user-agent:mime-version:date:message-id
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=NAu/hppQCC01gCUFwOHpg8qV/q+qXELdiUcejWAliIc=;
-        b=MKS0TVihbB0J4c61S8Fg9QeWSBHQEQrvejYL6+PNA0mzNNJ2UszJT9r5hBnOA/WGdN
-         ki/n2YnQTedDCffHRkFPEJAcf3jEfXoKh8WJVLJ//Lh/jMxzUchOJpbgVwXiMx9//L89
-         nmEQHbO3fVA7XJ62bfwx3BABK1XevUWgzmffrCSpqKlBmzgOwzOvuXHkgyYRLpHFoHf/
-         Rs3Fi6cVuk6++nYkJgPjSnsZbxue7caLDOrXlUtod4gYGH0TkNSXLXztlTUbX0z37gOH
-         amKuYRePtrZWJ4m9neNTxxydadg4031ygFPslyMHXj4lHp4k8DdVbpjtaD3xKWZRVZOG
-         R6/A==
-X-Gm-Message-State: AO0yUKW4HD+AadqWso2wxlK4IuNd0FM9e/IXB0RYGwP+SjUoQkZjOS8l
-        CUVQrWyo9pdeMXVKY14Ffpo=
-X-Google-Smtp-Source: AK7set9ylDUfYubOy6yFtOyASsENqWYJILOFJdTal6iS5MQT8xCyPUrrmvPuuWdeNmD6IjbfCvwYGQ==
-X-Received: by 2002:a17:902:f112:b0:196:77fd:abfc with SMTP id e18-20020a170902f11200b0019677fdabfcmr7073641plb.16.1675391869434;
-        Thu, 02 Feb 2023 18:37:49 -0800 (PST)
-Received: from [192.168.11.9] (KD106167171201.ppp-bb.dion.ne.jp. [106.167.171.201])
-        by smtp.gmail.com with ESMTPSA id u2-20020a170902a60200b001962858f990sm366204plq.164.2023.02.02.18.37.47
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Thu, 02 Feb 2023 18:37:49 -0800 (PST)
-Message-ID: <1c9bb0dc-7efd-c664-043a-5c0453739166@gmail.com>
-Date:   Fri, 3 Feb 2023 11:37:45 +0900
+        with ESMTP id S230147AbjBCCvr (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Thu, 2 Feb 2023 21:51:47 -0500
+Received: from mga05.intel.com (mga05.intel.com [192.55.52.43])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 109F24A1CB;
+        Thu,  2 Feb 2023 18:51:45 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1675392705; x=1706928705;
+  h=message-id:date:mime-version:cc:subject:to:references:
+   from:in-reply-to:content-transfer-encoding;
+  bh=UxeZ8FJwNzkiSv+FCcjHMP+ssabzgfr3PcMLKiBT6p0=;
+  b=WTtTHnc4Iyd5y1FWOzWjW8o2fqGDG0DwHnj/sCgYtlbcsqpRMrklqY08
+   Kg5rxnbgcrAjYKs3qY9NPYh+vqPa40MWiHog4vU4fMNZh5o6zloThN5A1
+   hO5YpD4JCB+F87ccIKQfqp0SCOX+FoVJYfnDwIGRM7vLwI/65iUwfiSCQ
+   Tb2P1jpDehG3aBDW0IEGyvYOFV70c6PBCxS64UdBBLxI9nlUbiq1s8p/3
+   QCTMShQYagh8KJsayZCNglOjt93HKEZaqb5taDkYmE1UTNRsbR3NBrNnR
+   3Ivay3NHweWfdZeA3zHdiLdVXBtiY/kANh28GLDthssmho54U9gDvTUPA
+   g==;
+X-IronPort-AV: E=McAfee;i="6500,9779,10609"; a="414851328"
+X-IronPort-AV: E=Sophos;i="5.97,269,1669104000"; 
+   d="scan'208";a="414851328"
+Received: from orsmga003.jf.intel.com ([10.7.209.27])
+  by fmsmga105.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 02 Feb 2023 18:51:44 -0800
+X-IronPort-AV: E=McAfee;i="6500,9779,10609"; a="615547679"
+X-IronPort-AV: E=Sophos;i="5.97,269,1669104000"; 
+   d="scan'208";a="615547679"
+Received: from blu2-mobl.ccr.corp.intel.com (HELO [10.254.208.253]) ([10.254.208.253])
+  by orsmga003-auth.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 02 Feb 2023 18:51:35 -0800
+Message-ID: <018498d7-d966-6c87-d829-50270565147d@linux.intel.com>
+Date:   Fri, 3 Feb 2023 10:51:33 +0800
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.4.2
-Subject: Re: [PATCH RFC] docs: Add more information to the HTML sidebar
-To:     Jonathan Corbet <corbet@lwn.net>
-Cc:     linux-doc@vger.kernel.org, David Gow <davidgow@google.com>,
-        Sadiya Kazi <sadiyakazi@google.com>,
-        Akira Yokosawa <akiyks@gmail.com>
-References: <87o7qu5al3.fsf@meer.lwn.net>
- <CAO2JNKW9pL5097qdte1N4F=RSnRJtcnpaDf__ROJAFfHitooYQ@mail.gmail.com>
- <fa426691-c76a-8ab0-4975-6edacc9cb247@gmail.com>
- <8735855j4p.fsf@meer.lwn.net>
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
+ Thunderbird/102.6.1
+Cc:     baolu.lu@linux.intel.com, corbet@lwn.net, will@kernel.org,
+        boqun.feng@gmail.com, mark.rutland@arm.com,
+        catalin.marinas@arm.com, dennis@kernel.org, tj@kernel.org,
+        cl@linux.com, hca@linux.ibm.com, gor@linux.ibm.com,
+        agordeev@linux.ibm.com, borntraeger@linux.ibm.com,
+        svens@linux.ibm.com, tglx@linutronix.de, mingo@redhat.com,
+        bp@alien8.de, dave.hansen@linux.intel.com, x86@kernel.org,
+        hpa@zytor.com, joro@8bytes.org, suravee.suthikulpanit@amd.com,
+        robin.murphy@arm.com, dwmw2@infradead.org,
+        Arnd Bergmann <arnd@arndb.de>,
+        Herbert Xu <herbert@gondor.apana.org.au>, davem@davemloft.net,
+        penberg@kernel.org, rientjes@google.com, iamjoonsoo.kim@lge.com,
+        Andrew Morton <akpm@linux-foundation.org>, vbabka@suse.cz,
+        roman.gushchin@linux.dev, 42.hyeyoo@gmail.com,
+        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
+        linux-mm@kvack.org, linux-s390@vger.kernel.org,
+        iommu@lists.linux.dev, linux-arch@vger.kernel.org,
+        linux-crypto@vger.kernel.org
+Subject: Re: [PATCH v2 07/10] x86,intel_iommu: Replace cmpxchg_double()
 Content-Language: en-US
-From:   Akira Yokosawa <akiyks@gmail.com>
-In-Reply-To: <8735855j4p.fsf@meer.lwn.net>
-Content-Type: text/plain; charset=UTF-8
+To:     Peter Zijlstra <peterz@infradead.org>,
+        torvalds@linux-foundation.org
+References: <20230202145030.223740842@infradead.org>
+ <20230202152655.624998774@infradead.org>
+From:   Baolu Lu <baolu.lu@linux.intel.com>
+In-Reply-To: <20230202152655.624998774@infradead.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-Spam-Status: No, score=-2.2 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_FROM,NICE_REPLY_A,
-        RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,SPF_PASS autolearn=ham
-        autolearn_force=no version=3.4.6
+X-Spam-Status: No, score=-4.4 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_EF,NICE_REPLY_A,RCVD_IN_DNSWL_MED,
+        SPF_HELO_NONE,SPF_NONE autolearn=ham autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Fri, 20 Jan 2023 08:19:02 -0700, Jonathan Corbet wrote:
-> Akira Yokosawa <akiyks@gmail.com> writes:
-> 
->>>> Thoughts?  Is this headed in the right direction?  This view of the TOC
->>>> is readily available from Sphinx; if we want something else it's going
->>>> to be rather more work.
->>
->> I think this looks like the right direction. But how far do you want to
->> mimic RTD's sidebar???
-> 
-> Well ... that is kind of my question for all of the folks who are
-> unhappy with the current sidebar.  What would you like to see there?
-> 
-> Things like sidebar width, whether bullets are used (I'd deliberately
-> taken them out as excess noise), which text is which color, etc. are all
-> just CSS; we can paint that shed any color we like.  The harder part is
-> deciding which information we want to have there in the first place.  So
-> ... is the set of links shown in the new sidebar close to what we
-> want...  too much stuff?  Something missing?
+On 2023/2/2 22:50, Peter Zijlstra wrote:
+> Signed-off-by: Peter Zijlstra (Intel)<peterz@infradead.org>
+> ---
+>   drivers/iommu/intel/irq_remapping.c |    8 --
+>   include/linux/dmar.h                |  125 +++++++++++++++++++-----------------
+>   2 files changed, 68 insertions(+), 65 deletions(-)
 
-Seeing no response from anyone so far, I feel like I need to express
-my personal view. As you might already be well aware of, I love the
-site navigation of RTD both on large screens and small (narrow) screens.
+Reviewed-by: Lu Baolu <baolu.lu@linux.intel.com>
 
-On *what* should be in the sidebar, I don't see anything missing
-give or take the toctree depth.
-
-To my eyes, there is two deficiencies with the alabaster theme in site
-navigation.
-
-  - Even with this RFC patch amended with the diff I suggested in
-    https://lore.kernel.org/linux-doc/6b2e496f-d7f6-abea-6bbd-4b12fea76a68@gmail.com/,
-    there remain "Where am I???" moments when jumping to a different page.
-    In such jumps, alabaster's sidebar always reset to top with the
-    main pane. RTD's sidebar keeps its position so there is no such
-    moment.
-
-  - On small/narrow screens, alabaster's sidebar is pushed downward
-    to the bottom of the page. This means you typically need three
-    steps to see where you are when jumping to another page:
-
-      1) Jump to another page.
-      2) Scroll to the bottom.
-      3) See where you are.
-
-    With RTD, you don't need to scroll to the bottom. Sidebar is there
-    behind an icon at the top-left which is often used as "menu" icon.
-
-      1) Jump to another page.
-      2) Open sidebar and it tells you where you are.
-
-I don't know if alabaster can be managed to behave similar to RTD
-with a reasonable effort.
-
-        Thanks, Akira
-
-
-> 
-> Thanks,
-> 
-> jon
+Best regards,
+baolu
