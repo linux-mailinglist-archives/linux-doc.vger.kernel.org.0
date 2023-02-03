@@ -2,273 +2,224 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 422CC688CFE
-	for <lists+linux-doc@lfdr.de>; Fri,  3 Feb 2023 03:14:53 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id E7452688D22
+	for <lists+linux-doc@lfdr.de>; Fri,  3 Feb 2023 03:38:20 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S229554AbjBCCOw (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 2 Feb 2023 21:14:52 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:44362 "EHLO
+        id S229916AbjBCCiU (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 2 Feb 2023 21:38:20 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:50942 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S232056AbjBCCOv (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Thu, 2 Feb 2023 21:14:51 -0500
-Received: from mail-pl1-x630.google.com (mail-pl1-x630.google.com [IPv6:2607:f8b0:4864:20::630])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 6A93289341;
-        Thu,  2 Feb 2023 18:14:19 -0800 (PST)
-Received: by mail-pl1-x630.google.com with SMTP id jh15so3872321plb.8;
-        Thu, 02 Feb 2023 18:14:19 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=content-transfer-encoding:in-reply-to:from:references:cc:to
-         :content-language:subject:user-agent:mime-version:date:message-id
-         :from:to:cc:subject:date:message-id:reply-to;
-        bh=TKAQRjTFaXWS77vgv6q0ZfLRZHBfHqYPvWhJ5n/8Urw=;
-        b=HStmIgqnezSrhFQAflZ152q7o549fqXxmFhj1JKRzJbReJI9NQxcE0ZcfFX8qFv06+
-         /d//M9szyKOznSHB7vCeEy5Bjtb00oCIyoSB1sM0tfLP+HCGgxsrOEnQD5x3sHDSV0Rh
-         zENMfY969UISFeTDv88iAewVZooooFsqs53LB7pV6nYSsNAeizhiMJ9fgzaS3k3zJcen
-         m1wquPLBwGwF55vtVtrIrCpUEaXGWfyYjguWdV5Ukfxy5/8U83oBT6P0EJcNZV981ieM
-         ev9y8jNJfO+VtCeb7XeTfFpLGjr+GyaxzqJtwe3Bi0Rltuo6g1/w5TXnF0dauXw5CVBE
-         I+gw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=content-transfer-encoding:in-reply-to:from:references:cc:to
-         :content-language:subject:user-agent:mime-version:date:message-id
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=TKAQRjTFaXWS77vgv6q0ZfLRZHBfHqYPvWhJ5n/8Urw=;
-        b=1V9In1KXGVabN3a9dxLQq+xV1/VysVOX1GaJ+avIbX6RLiEdz1BlUHrAgpYX7822cI
-         S+Yk3Iz2SloIQyzzTvanEfpacRjVvWOmaIiIgk3lvW4Zt22U308xqUD5s0fIAJ7OU52e
-         ZIgTC2QVwP0ydEB1UXX3sqmdfGsW+D5oxRmYnLlTRoe28oxPpEglTj+snUxG0LnEVcZw
-         IvXAwpykbgsjr/BcpGwAf6FSmtaeaLesn5tm2kVVJJzBxeNiRNuP9kNWrVLVSaQ64Bpq
-         bg6YkQmjM40EAF+IN9bzoAVw1ml2OSdaLWK1vuojf988INqv7roq/WlcUaztrpKrwgZa
-         ALOw==
-X-Gm-Message-State: AO0yUKV/yGXNXZ2WEksBTkMh15xmF1BcpdVZc/vxTF58heqdiEkjKz7B
-        W8fQfyyAG7rGirqNK6lg6IY=
-X-Google-Smtp-Source: AK7set830bqUqT4sOcIBCoelkdwbIhhp7J9OP66CNDgnAiEZgxZ9sVYgeDX7KWgXo/0v+ZjvIW4EFA==
-X-Received: by 2002:a17:90b:1bc7:b0:225:a226:9fbb with SMTP id oa7-20020a17090b1bc700b00225a2269fbbmr8462096pjb.39.1675390457708;
-        Thu, 02 Feb 2023 18:14:17 -0800 (PST)
-Received: from [192.168.43.80] (subs02-180-214-232-10.three.co.id. [180.214.232.10])
-        by smtp.gmail.com with ESMTPSA id ij14-20020a17090af80e00b0020a11217682sm534653pjb.27.2023.02.02.18.14.13
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Thu, 02 Feb 2023 18:14:17 -0800 (PST)
-Message-ID: <cb4c5572-baff-6c0c-5aba-d2867664c682@gmail.com>
-Date:   Fri, 3 Feb 2023 09:14:11 +0700
+        with ESMTP id S229554AbjBCCiT (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Thu, 2 Feb 2023 21:38:19 -0500
+Received: from mga18.intel.com (mga18.intel.com [134.134.136.126])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id E85976D5C7;
+        Thu,  2 Feb 2023 18:38:17 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1675391897; x=1706927897;
+  h=date:from:to:cc:subject:message-id:references:
+   mime-version:in-reply-to;
+  bh=LeIg3sS9Sk/YKoZDPmvBD6+Ro7uz4Jou7ZE/kE//F1c=;
+  b=cGJfBNJdg8f585WZXSGlL39yiLRK+CKeK2WwY+GdxkXVlu0iY3dFBY6S
+   M0Jcu5MVJsoqh0Tsmf32V8S9l/8OrO9qNc/GzTRFq4Rqw55R9zDLxNudf
+   uwvKNxBQtqnfHB7/ZFXyNinRWGWpqfItXL9uN/j5xypbWGocxWJH/D5Re
+   ZkEGuaF6S4D56bO5o5wSNTa0q0sFofk/p/31b9wlTIfwWvs37RoTysrd4
+   0NXEMikvOvecmXqRe5+mhM3VnxQe9OeFYuQRsoCUnDMO099Kv7S5JrpoN
+   hEkBo/7vcZVYAlg0BXS1gOsfFDLLS6B7S2Q2y/deerwn+7y7jFFK8zqlQ
+   A==;
+X-IronPort-AV: E=McAfee;i="6500,9779,10609"; a="312291279"
+X-IronPort-AV: E=Sophos;i="5.97,269,1669104000"; 
+   d="scan'208";a="312291279"
+Received: from orsmga006.jf.intel.com ([10.7.209.51])
+  by orsmga106.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 02 Feb 2023 18:38:17 -0800
+X-ExtLoop1: 1
+X-IronPort-AV: E=McAfee;i="6500,9779,10609"; a="643113785"
+X-IronPort-AV: E=Sophos;i="5.97,269,1669104000"; 
+   d="scan'208";a="643113785"
+Received: from lkp-server01.sh.intel.com (HELO 0572c01a5cf9) ([10.239.97.150])
+  by orsmga006.jf.intel.com with ESMTP; 02 Feb 2023 18:38:14 -0800
+Received: from kbuild by 0572c01a5cf9 with local (Exim 4.96)
+        (envelope-from <lkp@intel.com>)
+        id 1pNlxt-00002p-1V;
+        Fri, 03 Feb 2023 02:38:13 +0000
+Date:   Fri, 3 Feb 2023 10:37:41 +0800
+From:   kernel test robot <lkp@intel.com>
+To:     alejandro.lucero-palau@amd.com, netdev@vger.kernel.org,
+        linux-net-drivers@amd.com
+Cc:     oe-kbuild-all@lists.linux.dev, davem@davemloft.net,
+        kuba@kernel.org, pabeni@redhat.com, edumazet@google.com,
+        habetsm.xilinx@gmail.com, ecree.xilinx@gmail.com,
+        linux-doc@vger.kernel.org, corbet@lwn.net, jiri@nvidia.com,
+        Alejandro Lucero <alejandro.lucero-palau@amd.com>
+Subject: Re: [PATCH v5 net-next 2/8] sfc: add devlink info support for ef100
+Message-ID: <202302031027.lyf8KjKA-lkp@intel.com>
+References: <20230202111423.56831-3-alejandro.lucero-palau@amd.com>
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.6.1
-Subject: Re: [PATCH bpf-next v2] bpf/docs: Document kfunc lifecycle /
- stability expectations
-Content-Language: en-US
-To:     David Vernet <void@manifault.com>, bpf@vger.kernel.org
-Cc:     ast@kernel.org, daniel@iogearbox.net, andrii@kernel.org,
-        martin.lau@linux.dev, song@kernel.org, yhs@meta.com,
-        john.fastabend@gmail.com, kpsingh@kernel.org, sdf@google.com,
-        haoluo@google.com, jolsa@kernel.org, linux-kernel@vger.kernel.org,
-        kernel-team@meta.com, toke@redhat.com, brouer@redhat.com,
-        corbet@lwn.net, linux-doc@vger.kernel.org
-References: <20230202223557.744110-1-void@manifault.com>
- <20230202223557.744110-2-void@manifault.com>
-From:   Bagas Sanjaya <bagasdotme@gmail.com>
-In-Reply-To: <20230202223557.744110-2-void@manifault.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-Spam-Status: No, score=-0.7 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_FROM,NICE_REPLY_A,
-        RCVD_IN_DNSWL_NONE,RCVD_IN_SORBS_WEB,SPF_HELO_NONE,SPF_PASS
-        autolearn=no autolearn_force=no version=3.4.6
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20230202111423.56831-3-alejandro.lucero-palau@amd.com>
+X-Spam-Status: No, score=-2.1 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,SPF_HELO_NONE,
+        SPF_NONE autolearn=ham autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On 2/3/23 05:35, David Vernet wrote:
-> diff --git a/Documentation/bpf/kfuncs.rst b/Documentation/bpf/kfuncs.rst
-> index 0bd07b39c2a4..4135f3111b67 100644
-> --- a/Documentation/bpf/kfuncs.rst
-> +++ b/Documentation/bpf/kfuncs.rst
-> @@ -13,7 +13,7 @@ BPF Kernel Functions or more commonly known as kfuncs are functions in the Linux
->  kernel which are exposed for use by BPF programs. Unlike normal BPF helpers,
->  kfuncs do not have a stable interface and can change from one kernel release to
->  another. Hence, BPF programs need to be updated in response to changes in the
-> -kernel.
-> +kernel. See :ref:`BPF_kfunc_lifecycle_expectations` for more information.
->  
->  2. Defining a kfunc
->  ===================
-> @@ -238,6 +238,32 @@ single argument which must be a trusted argument or a MEM_RCU pointer.
->  The argument may have reference count of 0 and the kfunc must take this
->  into consideration.
->  
-> +.. _KF_deprecated_flag:
-> +
-> +2.4.9 KF_DEPRECATED flag
-> +------------------------
-> +
-> +The KF_DEPRECATED flag is used for kfuncs which are expected to be changed or
-> +removed in a subsequent kernel release. Deprecated kfuncs may be removed at any
-> +time, though if possible (and when applicable), developers are encouraged to
-> +provide users with a deprecation window to ease the burden of migrating off of
-> +the kfunc.
-> +
-> +A kfunc that is marked with KF_DEPRECATED should also have any relevant
-> +information captured in its kernel doc. Such information typically includes the
-> +kfunc's expected remaining lifespan, a recommendation for new functionality
-> +that can replace it if any is available, and possibly a rationale for why it is
-> +being removed.
-> +
-> +Note that while on some occasions, a KF_DEPRECATED kfunc may continue to be
-> +supported and have its KF_DEPRECATED flag removed, it is likely to be far more
-> +difficult to remove a KF_DEPRECATED flag after it's been added than it is to
-> +prevent it from being added in the first place. As described in
-> +:ref:`BPF_kfunc_lifecycle_expectations`, users that rely on specific kfuncs are
-> +highly encouraged to make their use-cases known as early as possible, and
-> +participate in upstream discussions regarding whether to keep, change,
-> +deprecate, or remove those kfuncs if and when such discussions occur.
-> +
->  2.5 Registering the kfuncs
->  --------------------------
->  
-> @@ -304,14 +330,116 @@ In order to accommodate such requirements, the verifier will enforce strict
->  PTR_TO_BTF_ID type matching if two types have the exact same name, with one
->  being suffixed with ``___init``.
->  
-> -3. Core kfuncs
-> +.. _BPF_kfunc_lifecycle_expectations:
-> +
-> +3. kfunc lifecycle expectations
-> +===============================
-> +
-> +kfuncs provide a kernel <-> kernel API, and thus are not bound by any of the
-> +strict stability restrictions associated with kernel <-> user UAPIs. Instead,
-> +they're modeled more similarly to EXPORT_SYMBOL_GPL, and can therefore be
-> +modified or removed by a maintainer of the subsystem they're defined in when
-> +it's deemed necessary.
-> +
-> +Like any other change to the kernel, maintainers will not change or remove a
-> +kfunc without having a reasonable justification.  Whether or not they'll choose
-> +to change a kfunc will ultimately depend on a variety of factors, such as how
-> +widely used the kfunc is, how long the kfunc has been in the kernel, whether an
-> +alternative kfunc exists, what the norm is in terms of stability for the
-> +subsystem in question, and of course what the technical cost is of continuing
-> +to support the kfunc.
-> +
-> +There are several implications of this:
-> +
-> +a) kfuncs that are widely used or have been in the kernel for a long time will
-> +   be more difficult to justify being changed or removed by a maintainer. Said
-> +   in a different way, kfuncs that are known to have a lot of users and provide
-> +   significant value provide stronger incentives for maintainers to invest the
-> +   time and complexity in supporting them. It is therefore important for
-> +   developers that are using kfuncs in their BPF programs to communicate and
-> +   explain how and why those kfuncs are being used, and to participate in
-> +   discussions regarding those kfuncs when they occur upstream.
-> +
-> +b) Because many BPF programs are not upstreamed as part of the kernel tree, it
-> +   is often not possible to change them in-place when a kfunc changes, as it is
-> +   for e.g. an upstreamed driver being updated in place when an
-> +   EXPORT_SYMBOL_GPL symbol is changed. Distributions that bundle BPF programs
-> +   that use kfuncs must therefore ensure that those BPF programs are linking
-> +   against the kfuncs that are supported by the kernel version being used for
-> +   any given release. Additionally, BPF developers are encouraged to upstream
-> +   their BPF programs so they can enjoy the same benefits as upstreamed
-> +   modules, and avoid code churn.
-> +
-> +   On the other hand, while the hope is that it will become the norm to
-> +   upstream BPF programs, the reality is that most BPF programs are still
-> +   out-of-tree. This means that users with out-of-tree BPF programs that use
-> +   kfuncs should be considered relevant to discussions and decisions around
-> +   modifying and removing kfuncs, despite that not being the norm for
-> +   out-of-tree kernel modules. The BPF community will take an active role in
-> +   participating in upstream discussions when necessary to ensure that the
-> +   perspectives of such users are taken into account.
-> +
-> +c) A kfunc will never have any hard stability guarantees. BPF APIs cannot and
-> +   will not ever hard-block a change in the kernel purely for stability
-> +   reasons. In other words, kfuncs have the same stability guarantees as any
-> +   other kernel API, such as those provided by EXPORT_SYMBOL_GPL, though with
-> +   perhaps less burden than EXPORT_SYMBOL_GPL changes thanks to BPF CO-RE.
-> +
-> +   That being said, kfuncs are features that are meant to solve problems and
-> +   provide value to users. The decision of whether to change or remove a kfunc
-> +   is a multivariate technical decision that is made on a case-by-case basis,
-> +   and which is informed by data points such as those mentioned above. It is
-> +   expected that a kfunc being removed or changed with no warning will not be a
-> +   common occurrence or take place without sound justification, but it is a
-> +   possibility that must be accepted if one is to use kfuncs.
-> +
-> +3.1 kfunc deprecation
-> +---------------------
-> +
-> +As described above, while sometimes a maintainer may find that a kfunc must be
-> +changed or removed immediately to accommodate some changes in their subsystem,
-> +other kfuncs may be able to accommodate a longer and more measured deprecation
-> +process. For example, if a new kfunc comes along which provides superior
-> +functionality to an existing kfunc, the existing kfunc may be deprecated for
-> +some period of time to allow users to migrate their BPF programs to use the new
-> +one. Or, if a kfunc has no known users, a decision may be made to remove the
-> +kfunc (without providing an alternative API) after some deprecation period
-> +period so as to provide users with a window to notify the kfunc maintainer if
-> +it turns out that the kfunc is actually being used.
-> +
-> +kfuncs being deprecated (rather than changed or removed with no warning) is
-> +expected to be the common case, and as described in :ref:`KF_deprecated_flag`,
-> +the kfunc framework provides the KF_DEPRECATED flag to kfunc developers to
-> +signal to users that a kfunc has been deprecated. Once a kfunc has been marked
-> +with KF_DEPRECATED, the following procedure is followed for removal:
-> +
-> +1. Any relevant information for deprecated kfuncs is documented in the kfunc's
-> +   kernel docs. This documentation will typically include the kfunc's expected
-> +   remaining lifespan,  a recommendation for new functionality that can replace
-> +   the usage of the deprecated function (or an explanation as to why no such
-> +   replacement exists), etc.
-> +
-> +2. The deprecated kfunc is kept in the kernel for some period of time after it
-> +   was first marked as deprecated. This time period will be chosen on a
-> +   case-by-case basis, and will typically depend on how widespread the use of
-> +   the kfunc is, how long it has been in the kernel, and how hard it is to move
-> +   to alternatives. This deprecation time period is "best effort", and as
-> +   described :ref:`above<BPF_kfunc_lifecycle_expectations>`, circumstances may
-> +   sometimes dictate that the kfunc be removed before the full intended
-> +   deprecation period has elapsed.
-> +
-> +3. After the deprecation period, or sometimes earlier if necessary, the kfunc
-> +   will be removed. At this point, BPF programs calling the kfunc will be
-> +   rejected by the verifier.
-> +
-> +4. Core kfuncs
->  ==============
->  
->  The BPF subsystem provides a number of "core" kfuncs that are potentially
->  applicable to a wide variety of different possible use cases and programs.
->  Those kfuncs are documented here.
->  
-> -3.1 struct task_struct * kfuncs
-> +4.1 struct task_struct * kfuncs
->  -------------------------------
->  
->  There are a number of kfuncs that allow ``struct task_struct *`` objects to be
-> @@ -387,7 +515,7 @@ Here is an example of it being used:
->  		return 0;
->  	}
->  
-> -3.2 struct cgroup * kfuncs
-> +4.2 struct cgroup * kfuncs
->  --------------------------
->  
->  ``struct cgroup *`` objects also have acquire and release functions:
-> @@ -502,7 +630,7 @@ the verifier. bpf_cgroup_ancestor() can be used as follows:
->  		return 0;
->  	}
->  
-> -3.3 struct cpumask * kfuncs
-> +4.3 struct cpumask * kfuncs
->  ---------------------------
->  
->  BPF provides a set of kfuncs that can be used to query, allocate, mutate, and
+Hi,
 
-LGTM, thanks!
+Thank you for the patch! Yet something to improve:
 
-Reviewed-by: Bagas Sanjaya <bagasdotme@gmail.com>
+[auto build test ERROR on net-next/master]
+
+url:    https://github.com/intel-lab-lkp/linux/commits/alejandro-lucero-palau-amd-com/sfc-add-devlink-support-for-ef100/20230202-191843
+patch link:    https://lore.kernel.org/r/20230202111423.56831-3-alejandro.lucero-palau%40amd.com
+patch subject: [PATCH v5 net-next 2/8] sfc: add devlink info support for ef100
+config: microblaze-randconfig-s042-20230202 (https://download.01.org/0day-ci/archive/20230203/202302031027.lyf8KjKA-lkp@intel.com/config)
+compiler: microblaze-linux-gcc (GCC) 12.1.0
+reproduce:
+        wget https://raw.githubusercontent.com/intel/lkp-tests/master/sbin/make.cross -O ~/bin/make.cross
+        chmod +x ~/bin/make.cross
+        # apt-get install sparse
+        # sparse version: v0.6.4-39-gce1a6720-dirty
+        # https://github.com/intel-lab-lkp/linux/commit/ae013a0522dccc6ec3db361d23a5cbf2e1de2702
+        git remote add linux-review https://github.com/intel-lab-lkp/linux
+        git fetch --no-tags linux-review alejandro-lucero-palau-amd-com/sfc-add-devlink-support-for-ef100/20230202-191843
+        git checkout ae013a0522dccc6ec3db361d23a5cbf2e1de2702
+        # save the config file
+        mkdir build_dir && cp config build_dir/.config
+        COMPILER_INSTALL_PATH=$HOME/0day COMPILER=gcc-12.1.0 make.cross C=1 CF='-fdiagnostic-prefix -D__CHECK_ENDIAN__' O=build_dir ARCH=microblaze olddefconfig
+        COMPILER_INSTALL_PATH=$HOME/0day COMPILER=gcc-12.1.0 make.cross C=1 CF='-fdiagnostic-prefix -D__CHECK_ENDIAN__' O=build_dir ARCH=microblaze SHELL=/bin/bash
+
+If you fix the issue, kindly add following tag where applicable
+| Reported-by: kernel test robot <lkp@intel.com>
+
+All errors (new ones prefixed by >>):
+
+   microblaze-linux-ld: drivers/net/ethernet/sfc/efx_devlink.o: in function `efx_devlink_info_running_v2.constprop.0':
+>> drivers/net/ethernet/sfc/efx_devlink.c:157: undefined reference to `rtc_time64_to_tm'
+>> microblaze-linux-ld: drivers/net/ethernet/sfc/efx_devlink.c:186: undefined reference to `rtc_time64_to_tm'
+
+
+vim +157 drivers/net/ethernet/sfc/efx_devlink.c
+
+    86	
+    87	#define EFX_VER_FLAG(_f)	\
+    88		(MC_CMD_GET_VERSION_V5_OUT_ ## _f ## _PRESENT_LBN)
+    89	
+    90	static void efx_devlink_info_running_v2(struct efx_nic *efx,
+    91						struct devlink_info_req *req,
+    92						unsigned int flags, efx_dword_t *outbuf)
+    93	{
+    94		char buf[EFX_MAX_VERSION_INFO_LEN];
+    95		union {
+    96			const __le32 *dwords;
+    97			const __le16 *words;
+    98			const char *str;
+    99		} ver;
+   100		struct rtc_time build_date;
+   101		unsigned int build_id;
+   102		size_t offset;
+   103		u64 tstamp;
+   104	
+   105		if (flags & BIT(EFX_VER_FLAG(BOARD_EXT_INFO))) {
+   106			snprintf(buf, EFX_MAX_VERSION_INFO_LEN, "%s",
+   107				 MCDI_PTR(outbuf, GET_VERSION_V2_OUT_BOARD_NAME));
+   108			devlink_info_version_fixed_put(req,
+   109						       DEVLINK_INFO_VERSION_GENERIC_BOARD_ID,
+   110						       buf);
+   111	
+   112			/* Favour full board version if present (in V5 or later) */
+   113			if (~flags & BIT(EFX_VER_FLAG(BOARD_VERSION))) {
+   114				snprintf(buf, EFX_MAX_VERSION_INFO_LEN, "%u",
+   115					 MCDI_DWORD(outbuf,
+   116						    GET_VERSION_V2_OUT_BOARD_REVISION));
+   117				devlink_info_version_fixed_put(req,
+   118							       DEVLINK_INFO_VERSION_GENERIC_BOARD_REV,
+   119							       buf);
+   120			}
+   121	
+   122			ver.str = MCDI_PTR(outbuf, GET_VERSION_V2_OUT_BOARD_SERIAL);
+   123			if (ver.str[0])
+   124				devlink_info_board_serial_number_put(req, ver.str);
+   125		}
+   126	
+   127		if (flags & BIT(EFX_VER_FLAG(FPGA_EXT_INFO))) {
+   128			ver.dwords = (__le32 *)MCDI_PTR(outbuf,
+   129							GET_VERSION_V2_OUT_FPGA_VERSION);
+   130			offset = snprintf(buf, EFX_MAX_VERSION_INFO_LEN, "%u_%c%u",
+   131					  le32_to_cpu(ver.dwords[0]),
+   132					  'A' + le32_to_cpu(ver.dwords[1]),
+   133					  le32_to_cpu(ver.dwords[2]));
+   134	
+   135			ver.str = MCDI_PTR(outbuf, GET_VERSION_V2_OUT_FPGA_EXTRA);
+   136			if (ver.str[0])
+   137				snprintf(&buf[offset], EFX_MAX_VERSION_INFO_LEN - offset,
+   138					 " (%s)", ver.str);
+   139	
+   140			devlink_info_version_running_put(req,
+   141							 EFX_DEVLINK_INFO_VERSION_FPGA_REV,
+   142							 buf);
+   143		}
+   144	
+   145		if (flags & BIT(EFX_VER_FLAG(CMC_EXT_INFO))) {
+   146			ver.dwords = (__le32 *)MCDI_PTR(outbuf,
+   147							GET_VERSION_V2_OUT_CMCFW_VERSION);
+   148			offset = snprintf(buf, EFX_MAX_VERSION_INFO_LEN, "%u.%u.%u.%u",
+   149					  le32_to_cpu(ver.dwords[0]),
+   150					  le32_to_cpu(ver.dwords[1]),
+   151					  le32_to_cpu(ver.dwords[2]),
+   152					  le32_to_cpu(ver.dwords[3]));
+   153	
+   154			tstamp = MCDI_QWORD(outbuf,
+   155					    GET_VERSION_V2_OUT_CMCFW_BUILD_DATE);
+   156			if (tstamp) {
+ > 157				rtc_time64_to_tm(tstamp, &build_date);
+   158				snprintf(&buf[offset], EFX_MAX_VERSION_INFO_LEN - offset,
+   159					 " (%ptRd)", &build_date);
+   160			}
+   161	
+   162			devlink_info_version_running_put(req,
+   163							 EFX_DEVLINK_INFO_VERSION_FW_MGMT_CMC,
+   164							 buf);
+   165		}
+   166	
+   167		ver.words = (__le16 *)MCDI_PTR(outbuf, GET_VERSION_V2_OUT_VERSION);
+   168		offset = snprintf(buf, EFX_MAX_VERSION_INFO_LEN, "%u.%u.%u.%u",
+   169				  le16_to_cpu(ver.words[0]), le16_to_cpu(ver.words[1]),
+   170				  le16_to_cpu(ver.words[2]), le16_to_cpu(ver.words[3]));
+   171		if (flags & BIT(EFX_VER_FLAG(MCFW_EXT_INFO))) {
+   172			build_id = MCDI_DWORD(outbuf, GET_VERSION_V2_OUT_MCFW_BUILD_ID);
+   173			snprintf(&buf[offset], EFX_MAX_VERSION_INFO_LEN - offset,
+   174				 " (%x) %s", build_id,
+   175				 MCDI_PTR(outbuf, GET_VERSION_V2_OUT_MCFW_BUILD_NAME));
+   176		}
+   177		devlink_info_version_running_put(req,
+   178						 DEVLINK_INFO_VERSION_GENERIC_FW_MGMT,
+   179						 buf);
+   180	
+   181		if (flags & BIT(EFX_VER_FLAG(SUCFW_EXT_INFO))) {
+   182			ver.dwords = (__le32 *)MCDI_PTR(outbuf,
+   183							GET_VERSION_V2_OUT_SUCFW_VERSION);
+   184			tstamp = MCDI_QWORD(outbuf,
+   185					    GET_VERSION_V2_OUT_SUCFW_BUILD_DATE);
+ > 186			rtc_time64_to_tm(tstamp, &build_date);
+   187			build_id = MCDI_DWORD(outbuf, GET_VERSION_V2_OUT_SUCFW_CHIP_ID);
+   188	
+   189			snprintf(buf, EFX_MAX_VERSION_INFO_LEN,
+   190				 "%u.%u.%u.%u type %x (%ptRd)",
+   191				 le32_to_cpu(ver.dwords[0]), le32_to_cpu(ver.dwords[1]),
+   192				 le32_to_cpu(ver.dwords[2]), le32_to_cpu(ver.dwords[3]),
+   193				 build_id, &build_date);
+   194	
+   195			devlink_info_version_running_put(req,
+   196							 EFX_DEVLINK_INFO_VERSION_FW_MGMT_SUC,
+   197							 buf);
+   198		}
+   199	}
+   200	
 
 -- 
-An old man doll... just what I always wanted! - Clara
-
+0-DAY CI Kernel Test Service
+https://github.com/intel/lkp-tests
