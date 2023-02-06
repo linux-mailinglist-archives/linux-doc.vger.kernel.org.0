@@ -2,59 +2,52 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 0CAD168B39E
-	for <lists+linux-doc@lfdr.de>; Mon,  6 Feb 2023 02:08:10 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id B911268B5D1
+	for <lists+linux-doc@lfdr.de>; Mon,  6 Feb 2023 07:53:12 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S229490AbjBFBIH (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Sun, 5 Feb 2023 20:08:07 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:55768 "EHLO
+        id S229760AbjBFGxJ (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 6 Feb 2023 01:53:09 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:47464 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S229488AbjBFBIG (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Sun, 5 Feb 2023 20:08:06 -0500
-Received: from dfw.source.kernel.org (dfw.source.kernel.org [IPv6:2604:1380:4641:c500::1])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id E6181CDF4;
-        Sun,  5 Feb 2023 17:08:05 -0800 (PST)
-Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
-        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
-        (No client certificate requested)
-        by dfw.source.kernel.org (Postfix) with ESMTPS id 7312060C4D;
-        Mon,  6 Feb 2023 01:08:05 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id D781AC433D2;
-        Mon,  6 Feb 2023 01:08:04 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-        s=k20201202; t=1675645684;
-        bh=XyBLgfQK6ge4EhdCnRlXceT5yEg/NKnPwHNtxHUH0+o=;
-        h=References:In-Reply-To:From:Date:Subject:To:Cc:From;
-        b=TFp/nNwV67HIdFc5vi8rwNLOpB0TJQOS9Z1aAEQk/ywmRw5oWzuETG7y0eeUCCt9D
-         y2jTHN1SPxkaHlNnE5REHYMqcNuF1TyWkgez/DcNJ4lpBiWWlAJglq5QdbuLLIOHC5
-         MdIuF/8k9HYFVpQLRbQ+8Kxj8DZ9t7ONoeKlvMnwpiBxc/+PU3YR97c0sSshrq8jz1
-         fDeb52qd0fYrUJn4ut941v8DgvSOG5InuaQA+RgVoMiyLyEPyumEskJ9OtKZrRKAoO
-         vDwvwkg+u6gX2ZOMDcGcqcdWubdsKDhvqNyNUiZA3ievQ7PlC2hmgrNf6GcdLMvJz9
-         ymV7fu+ecAmZg==
-Received: by mail-oa1-f45.google.com with SMTP id 586e51a60fabf-15f97c478a8so13428750fac.13;
-        Sun, 05 Feb 2023 17:08:04 -0800 (PST)
-X-Gm-Message-State: AO0yUKXY0Jm0nxyXWB+i+oU4vCuCvx6uAv3c5KOUY3z9c9vlRZiMaPV3
-        iLVt1EyWCaY5KpZwXyYS3ByAhWd0tOtsmv4dn74=
-X-Google-Smtp-Source: AK7set8xoNkkqvVBNjBk9EbvclUMut0KpNh/NqPcJOx0XYTEkZbTCC+vIzJ2aYHACMV0LfSIms6VOVMi0gK5faJxh+M=
-X-Received: by 2002:a05:6870:110f:b0:160:3296:a9b9 with SMTP id
- 15-20020a056870110f00b001603296a9b9mr1494289oaf.287.1675645684087; Sun, 05
- Feb 2023 17:08:04 -0800 (PST)
+        with ESMTP id S229717AbjBFGxJ (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Mon, 6 Feb 2023 01:53:09 -0500
+Received: from szxga02-in.huawei.com (szxga02-in.huawei.com [45.249.212.188])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 7E8737D90;
+        Sun,  5 Feb 2023 22:53:06 -0800 (PST)
+Received: from dggpeml500019.china.huawei.com (unknown [172.30.72.56])
+        by szxga02-in.huawei.com (SkyGuard) with ESMTP id 4P9H2q29WszRp9s;
+        Mon,  6 Feb 2023 14:50:43 +0800 (CST)
+Received: from localhost.localdomain (10.67.165.2) by
+ dggpeml500019.china.huawei.com (7.185.36.137) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2375.34; Mon, 6 Feb 2023 14:53:03 +0800
+From:   Jie Zhan <zhanjie9@hisilicon.com>
+To:     <will@kernel.org>, <mark.rutland@arm.com>,
+        <mathieu.poirier@linaro.org>, <suzuki.poulose@arm.com>,
+        <mike.leach@linaro.org>, <leo.yan@linaro.org>,
+        <john.g.garry@oracle.com>, <james.clark@arm.com>,
+        <peterz@infradead.org>, <mingo@redhat.com>, <acme@kernel.org>,
+        <corbet@lwn.net>, <jonathan.cameron@huawei.com>
+CC:     <zhangshaokun@hisilicon.com>, <shenyang39@huawei.com>,
+        <hejunhao3@huawei.com>, <yangyicong@hisilicon.com>,
+        <prime.zeng@huawei.com>, <zhanjie9@hisilicon.com>,
+        <suntao25@huawei.com>, <jiazhao4@hisilicon.com>,
+        <linuxarm@huawei.com>, <linux-doc@vger.kernel.org>,
+        <linux-kernel@vger.kernel.org>,
+        <linux-arm-kernel@lists.infradead.org>,
+        <linux-perf-users@vger.kernel.org>
+Subject: [RFC PATCH v1 0/4] HiSilicon Performance Monitor Control Unit
+Date:   Mon, 6 Feb 2023 14:51:42 +0800
+Message-ID: <20230206065146.645505-1-zhanjie9@hisilicon.com>
+X-Mailer: git-send-email 2.30.0
 MIME-Version: 1.0
-References: <20230205163752.2535-1-rdunlap@infradead.org>
-In-Reply-To: <20230205163752.2535-1-rdunlap@infradead.org>
-From:   Masahiro Yamada <masahiroy@kernel.org>
-Date:   Mon, 6 Feb 2023 10:07:27 +0900
-X-Gmail-Original-Message-ID: <CAK7LNASGAk3sAaK0bDiTMdWR2ocRcRs8UBLekRddv0mizQKxqg@mail.gmail.com>
-Message-ID: <CAK7LNASGAk3sAaK0bDiTMdWR2ocRcRs8UBLekRddv0mizQKxqg@mail.gmail.com>
-Subject: Re: [PATCH v2] parisc: update kbuild doc. aliases for parisc64
-To:     Randy Dunlap <rdunlap@infradead.org>, Helge Deller <deller@gmx.de>
-Cc:     linux-kernel@vger.kernel.org,
-        "James E.J. Bottomley" <James.Bottomley@hansenpartnership.com>,
-        linux-parisc@vger.kernel.org, linux-kbuild@vger.kernel.org,
-        Jonathan Corbet <corbet@lwn.net>, linux-doc@vger.kernel.org
-Content-Type: text/plain; charset="UTF-8"
-X-Spam-Status: No, score=-4.4 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_MED,
+Content-Transfer-Encoding: 7BIT
+Content-Type:   text/plain; charset=US-ASCII
+X-Originating-IP: [10.67.165.2]
+X-ClientProxiedBy: dggems701-chm.china.huawei.com (10.3.19.178) To
+ dggpeml500019.china.huawei.com (7.185.36.137)
+X-CFilter-Loop: Reflected
+X-Spam-Status: No, score=-4.2 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_MED,
         SPF_HELO_NONE,SPF_PASS autolearn=ham autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
@@ -62,49 +55,70 @@ Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Mon, Feb 6, 2023 at 1:37 AM Randy Dunlap <rdunlap@infradead.org> wrote:
->
-> ARCH=parisc64 is now supported for 64-bit parisc builds, so add
-> this alias to the kbuild.rst documentation.
->
-> Fixes: 3dcfb729b5f4 ("parisc: Make CONFIG_64BIT available for ARCH=parisc64 only")
-> Signed-off-by: Randy Dunlap <rdunlap@infradead.org>
-> Cc: "James E.J. Bottomley" <James.Bottomley@HansenPartnership.com>
-> Cc: Helge Deller <deller@gmx.de>
-> Cc: linux-parisc@vger.kernel.org
-> Cc: Masahiro Yamada <masahiroy@kernel.org>
-> Cc: linux-kbuild@vger.kernel.org
-> Cc: Jonathan Corbet <corbet@lwn.net>
-> Cc: linux-doc@vger.kernel.org
-> ---
-> v2: drop "parisc for 32 bit" part since "parisc" is not an alias
->
->  Documentation/kbuild/kbuild.rst |    1 +
->  1 file changed, 1 insertion(+)
->
-> diff -- a/Documentation/kbuild/kbuild.rst b/Documentation/kbuild/kbuild.rst
-> --- a/Documentation/kbuild/kbuild.rst
-> +++ b/Documentation/kbuild/kbuild.rst
-> @@ -160,6 +160,7 @@ directory name found in the arch/ direct
->  But some architectures such as x86 and sparc have aliases.
->
->  - x86: i386 for 32 bit, x86_64 for 64 bit
-> +- parisc: parisc64 for 64 bit
->  - sh: sh for 32 bit, sh64 for 64 bit
->  - sparc: sparc32 for 32 bit, sparc64 for 64 bit
->
+HiSilicon Performance Monitor Control Unit (PMCU) is a device that offloads
+PMU accesses from CPUs, handling the configuration, event switching, and
+counter reading of core PMUs on Kunpeng SoC. It facilitates fine-grained
+and multi-PMU-event CPU profiling, in which scenario the current 'perf'
+scheme may lose events or drop sampling frequency. With PMCU, users can
+reliably obtain the data of up to 240 PMU events with the sample interval
+of events down to 1ms, while the software overhead of accessing PMUs, as
+well as its impact on target workloads, is reduced.
+
+This patchset contains the documentation, driver, and user perf tool
+support to enable using PMCU with the 'perf_event' framework. 
+
+Here are two key questions requested for comments:
+
+- How do we make it compatible with arm_pmu drivers?
+
+  Hardware-wise, PMCU uses the existing core PMUs, so PMUs can be accessed
+  from CPU and PMCU simultaneously. The current hardware can't guarantee
+  mutual exclusive accesses. Hence, scheduling arm_pmu and PMCU events at
+  the same time may mess up the operation of PMUs, delivering incorrect
+  data for both events, e.g. unexpected events or sample periods.
+  Software-wise, we probably need to prevent the two types of events from
+  running at the same time, but currently there isn't a clear solution.
+
+- Currently we reply on a sysfs file for users to input event numbers. Is
+  there a better way to pass many events?
+
+  The perf framework only allows three 64-bit config fields for custom PMU
+  configs. Obviously, this can't satisfy our need for passing many events
+  at a time. As an event number is 16-bit wide, the config fields can only
+  take up to 12 events at a time, or up to 192 events even if we do a
+  bitmap of events (and there are more than 192 available event numbers).
+  Hence, the current design takes an array of event numbers from a sysfs
+  file before starting profiling. However, this may go against the common
+  way to schedule perf events through perf commands.
+
+Jie Zhan (4):
+  docs: perf: Add documentation for HiSilicon PMCU
+  drivers/perf: hisi: Add driver support for HiSilicon PMCU
+  perf tool: Add HiSilicon PMCU data recording support
+  perf tool: Add HiSilicon PMCU data decoding support
+
+ Documentation/admin-guide/perf/hisi-pmcu.rst |  183 +++
+ Documentation/admin-guide/perf/index.rst     |    1 +
+ drivers/perf/hisilicon/Kconfig               |   15 +
+ drivers/perf/hisilicon/Makefile              |    1 +
+ drivers/perf/hisilicon/hisi_pmcu.c           | 1096 ++++++++++++++++++
+ tools/perf/arch/arm/util/auxtrace.c          |   61 +
+ tools/perf/arch/arm64/util/Build             |    2 +-
+ tools/perf/arch/arm64/util/hisi-pmcu.c       |  145 +++
+ tools/perf/util/Build                        |    1 +
+ tools/perf/util/auxtrace.c                   |    4 +
+ tools/perf/util/auxtrace.h                   |    1 +
+ tools/perf/util/hisi-pmcu.c                  |  305 +++++
+ tools/perf/util/hisi-pmcu.h                  |   19 +
+ 13 files changed, 1833 insertions(+), 1 deletion(-)
+ create mode 100644 Documentation/admin-guide/perf/hisi-pmcu.rst
+ create mode 100644 drivers/perf/hisilicon/hisi_pmcu.c
+ create mode 100644 tools/perf/arch/arm64/util/hisi-pmcu.c
+ create mode 100644 tools/perf/util/hisi-pmcu.c
+ create mode 100644 tools/perf/util/hisi-pmcu.h
 
 
-
-
-If Helge will pick this up, please feel free to add
-
-Acked-by: Masahiro Yamada <masahiroy@kernel.org>
-
-
-
-
-
+base-commit: 830b3c68c1fb1e9176028d02ef86f3cf76aa2476
 -- 
-Best Regards
-Masahiro Yamada
+2.30.0
+
