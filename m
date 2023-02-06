@@ -2,550 +2,166 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id AD1F168C2B7
-	for <lists+linux-doc@lfdr.de>; Mon,  6 Feb 2023 17:13:39 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id EDA1168C2C9
+	for <lists+linux-doc@lfdr.de>; Mon,  6 Feb 2023 17:16:01 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S231801AbjBFQNi (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 6 Feb 2023 11:13:38 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:51146 "EHLO
+        id S231727AbjBFQQA (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 6 Feb 2023 11:16:00 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:52324 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S231771AbjBFQNY (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Mon, 6 Feb 2023 11:13:24 -0500
-Received: from mail-wr1-x42d.google.com (mail-wr1-x42d.google.com [IPv6:2a00:1450:4864:20::42d])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 29B0B7D85
-        for <linux-doc@vger.kernel.org>; Mon,  6 Feb 2023 08:13:06 -0800 (PST)
-Received: by mail-wr1-x42d.google.com with SMTP id o18so10893260wrj.3
-        for <linux-doc@vger.kernel.org>; Mon, 06 Feb 2023 08:13:06 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google;
-        h=content-transfer-encoding:in-reply-to:from:references:cc:to
-         :content-language:subject:user-agent:mime-version:date:message-id
-         :from:to:cc:subject:date:message-id:reply-to;
-        bh=mAvudNFftbYPGJ/wOqY8UXA/T5UpeFO6vMP45zNs2N0=;
-        b=MC+50Wfl3iw2A0V1e2xrVoUA16TZ2fEOnfier9HTUwRPhrCPIhzGAz04SiR98TI39W
-         Wm/fcaC2IkL8uuLEA1G27dIZT+hv6MgKaTQlpWfl/a7cFmKbve9t4Fzwwho2cjQiKInm
-         +RdccHLasOeQMnOf+2Xr/xIYAR3rkHNwDhuAUsY2GfwOS8F6bg/jxCrANunNR+ECcV3f
-         n/8GHeDSkvSj/NOyclQeanlge5CTO76ik4bXTmM9rhXVHPBN+HFMvDkFTRMx8EWSJreN
-         IJZCvW+wTu4nauC49K/Bhx7TEM+HVAT2VhIf52h4EPKU3XNZiBmsae8tAVkU4lAWqHsL
-         N1jA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=content-transfer-encoding:in-reply-to:from:references:cc:to
-         :content-language:subject:user-agent:mime-version:date:message-id
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=mAvudNFftbYPGJ/wOqY8UXA/T5UpeFO6vMP45zNs2N0=;
-        b=IpZWO1EcYkDkBVGgKkH6HgNYQgYz/+n3cD1EBzHjv4aQJggOnmU7ASF0+tvMRYQJEd
-         G6Mqn24G18Wh/yfPwIG9oSM8djJTv/Xmm5EtXPIG4BN2SvHhisqqDT9aIMY1l8zhe+F7
-         RFTPZat252Xje6ZMMYmT2BHzRGrLWHLw9Sb5xXefjy3cei/DxMfcN0S3q+VHNtLhL8yL
-         rP0W6jtSBO3A18My7nYMaHjYy5TIpBpAix5PnuQs8z7QaD1GMli/EBLSHvjrr7R3yZ4k
-         QwvYNNUeC0EjxuRONK14ZX59m/XkhcK40ezNeYXpAeGkDEmxnltaMCIm106W7Pj3EmWI
-         NoKg==
-X-Gm-Message-State: AO0yUKWAvr/wPuSfrjtb9jYcm9WT3+b62zFdgz0otbXjLs68SYeHxU7I
-        RC2GL10cfNI/K7D1saIRt+TyOA==
-X-Google-Smtp-Source: AK7set8ENvI2At6Nu7CPauH8827z6d6FxXYnMa+67wfn4skgFTtqXBH8eGtty6DgBUwRwIkeMs2U5A==
-X-Received: by 2002:a05:6000:1b04:b0:2c3:def9:7e1a with SMTP id f4-20020a0560001b0400b002c3def97e1amr6851838wrz.44.1675699981540;
-        Mon, 06 Feb 2023 08:13:01 -0800 (PST)
-Received: from [192.168.1.195] ([5.133.47.210])
-        by smtp.googlemail.com with ESMTPSA id d17-20020a5d5391000000b002bfbf7679absm9040325wrv.107.2023.02.06.08.13.00
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Mon, 06 Feb 2023 08:13:00 -0800 (PST)
-Message-ID: <36950638-6aae-f115-86e5-97606a5d67fe@linaro.org>
-Date:   Mon, 6 Feb 2023 16:12:59 +0000
-MIME-Version: 1.0
+        with ESMTP id S231776AbjBFQPz (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Mon, 6 Feb 2023 11:15:55 -0500
+Received: from NAM11-CO1-obe.outbound.protection.outlook.com (mail-co1nam11on2051.outbound.protection.outlook.com [40.107.220.51])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 9C2F39ED4;
+        Mon,  6 Feb 2023 08:15:27 -0800 (PST)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=lksoR2Z8QRKmeoAvHYHxfRAIObOfGOyxo8cK9oKdKew8w/solzspapbiaORmXPD3rG0XtSk0bkETcgjtIDBP+MQ7Zy8GmEIOgy+HTSiKz+8oqRkiRzbereejEDVUQIWAOb3Vz8Q8r0zqtboCRvJ54P9PCwdDh0f/zM/F4N0sm8ncxRRwGR94vAkHxpGL/yloYvRJYcKv2gBC6wFX94nYlfaSrJFlqkGp0ZB6mJjHdlRpjHREigVGX2D9989COLGOJa2c1G2CDEHDc2/S7PHJHdYFCVt7laopub+BCk7L46/0okV9qtatMRQrb6OlcnAYFJYjBJWsnvn88g3uag53rw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=ieKBmWLrrQzdTtcMGPgc2sBfRtpXnGnIHgrfCI5toi8=;
+ b=aLN+p75XEXlH4B4MvGi3QJWuukAiEKM3XuDkB2hF9YE453wuD+qijyKgTbuWiX6YoPcohs4TOWgQFHXYfRU6oUMOiRKY9XE3Qp5cjQeogcGyqjm2B/Ek5NWbGM8TRX6PDThak1Jx6oxRBySyQGNqG3IEqjZ1hmIuGkFgJlNFCJoPVv5+qPAswrFjeUkFgZbMeHhxHH9Om6SWBd41opncPrw1e4c5qy0XYLNstSCfBXSt4Ij0blAyvfxRM8ZTibi76vGEI0Q696zyPp9Rr7lcEetkw3VjpHg3HKa7DosIjHdAZ/zP9DEKEKY/goINpQpIM6Q3byf7zhYBwV1P1fzkHg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
+ header.d=amd.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=ieKBmWLrrQzdTtcMGPgc2sBfRtpXnGnIHgrfCI5toi8=;
+ b=3I6M3fE4ZtaRriLndJ8aPJwYRFm4b5tEUQ81APJVLJOj/ggVC/c10RBynCnjR7TNDeAg7cgFT7kavEzBIGLLQ0KQRnVLfky/G3Ojw95LTiBLH5GgTHi9BBODj776sLNOHTOKo4lwAGl8Ftm7f1mB+aZaK5U7jFE4KEasJcVo/2Q=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=amd.com;
+Received: from BN8PR12MB3587.namprd12.prod.outlook.com (2603:10b6:408:43::13)
+ by SJ0PR12MB5408.namprd12.prod.outlook.com (2603:10b6:a03:305::18) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6064.34; Mon, 6 Feb
+ 2023 16:15:01 +0000
+Received: from BN8PR12MB3587.namprd12.prod.outlook.com
+ ([fe80::2e4f:4041:28be:ba7a]) by BN8PR12MB3587.namprd12.prod.outlook.com
+ ([fe80::2e4f:4041:28be:ba7a%6]) with mapi id 15.20.6064.032; Mon, 6 Feb 2023
+ 16:15:01 +0000
+Message-ID: <c0635ff3-027f-bcd7-afbc-46f4e62d3651@amd.com>
+Date:   Mon, 6 Feb 2023 17:14:54 +0100
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
  Thunderbird/102.4.2
-Subject: Re: [PATCH v9 13/27] gunyah: vm_mgr: Add/remove user memory regions
+Subject: Re: [Nouveau] [PATCH drm-next 05/14] drm/nouveau: new VM_BIND uapi
+ interfaces
 Content-Language: en-US
-To:     Elliot Berman <quic_eberman@quicinc.com>,
-        Bjorn Andersson <quic_bjorande@quicinc.com>,
-        Alex Elder <elder@linaro.org>,
-        Murali Nalajala <quic_mnalajal@quicinc.com>
-Cc:     Trilok Soni <quic_tsoni@quicinc.com>,
-        Srivatsa Vaddagiri <quic_svaddagi@quicinc.com>,
-        Carl van Schaik <quic_cvanscha@quicinc.com>,
-        Prakruthi Deepak Heragu <quic_pheragu@quicinc.com>,
-        Dmitry Baryshkov <dmitry.baryshkov@linaro.org>,
-        Arnd Bergmann <arnd@arndb.de>,
-        Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
-        Rob Herring <robh+dt@kernel.org>,
-        Krzysztof Kozlowski <krzysztof.kozlowski+dt@linaro.org>,
-        Jonathan Corbet <corbet@lwn.net>,
-        Bagas Sanjaya <bagasdotme@gmail.com>,
-        Catalin Marinas <catalin.marinas@arm.com>,
-        Will Deacon <will@kernel.org>, Marc Zyngier <maz@kernel.org>,
-        Jassi Brar <jassisinghbrar@gmail.com>,
-        Sudeep Holla <sudeep.holla@arm.com>,
-        linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org,
-        linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org,
-        linux-arm-kernel@lists.infradead.org
-References: <20230120224627.4053418-1-quic_eberman@quicinc.com>
- <20230120224627.4053418-14-quic_eberman@quicinc.com>
-From:   Srinivas Kandagatla <srinivas.kandagatla@linaro.org>
-In-Reply-To: <20230120224627.4053418-14-quic_eberman@quicinc.com>
+To:     Danilo Krummrich <dakr@redhat.com>, Dave Airlie <airlied@gmail.com>
+Cc:     Matthew Brost <matthew.brost@intel.com>, daniel@ffwll.ch,
+        corbet@lwn.net, dri-devel@lists.freedesktop.org,
+        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
+        mripard@kernel.org, bskeggs@redhat.com, jason@jlekstrand.net,
+        nouveau@lists.freedesktop.org, airlied@redhat.com
+References: <20230118061256.2689-1-dakr@redhat.com>
+ <20230118061256.2689-6-dakr@redhat.com>
+ <Y9MjSeMcsd18r9vM@DUT025-TGLU.fm.intel.com>
+ <7c046ff9-728d-7634-9d77-8536308c7481@redhat.com>
+ <c2256c7d-e768-ae3f-d465-b9f8080d111b@amd.com>
+ <2427a918-5348-d1ef-ccae-a29c1ff33c83@redhat.com>
+ <a214b28b-043c-a8bb-69da-b4d8216fce56@amd.com>
+ <3a76bfa9-8ee5-a7d9-b9fb-a98181baec0b@redhat.com>
+ <49ac3f95-6eda-9009-4b28-0167213301b2@amd.com>
+ <bc523c5c-efe6-1a7f-b49a-e0867dc1413d@redhat.com>
+ <15fb0179-c7c5-8a64-ed08-841189919f5e@redhat.com>
+ <1840e9fb-fd1b-79b7-4238-54ae97333d0b@amd.com>
+ <CAPM=9txON8VCb3H7vDY_DOgtUg2Ad3mBvYVxgSMyZ1noOu-rBQ@mail.gmail.com>
+ <a1c526e0-0df7-12cb-c5a1-06e9cd0d876b@amd.com>
+ <3f935a7e-fede-2bad-c029-4a3af850c9b5@redhat.com>
+ <95d0631b-545c-ea4d-7439-75422e9a9120@amd.com>
+ <67958920-c5bb-a0f5-2306-e3ae4fdbaeb3@redhat.com>
+From:   =?UTF-8?Q?Christian_K=c3=b6nig?= <christian.koenig@amd.com>
+In-Reply-To: <67958920-c5bb-a0f5-2306-e3ae4fdbaeb3@redhat.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-Spam-Status: No, score=-3.2 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,NICE_REPLY_A,RCVD_IN_DNSWL_NONE,
-        SPF_HELO_NONE,SPF_PASS autolearn=unavailable autolearn_force=no
-        version=3.4.6
+X-ClientProxiedBy: FR3P281CA0029.DEUP281.PROD.OUTLOOK.COM
+ (2603:10a6:d10:1c::22) To BN8PR12MB3587.namprd12.prod.outlook.com
+ (2603:10b6:408:43::13)
+MIME-Version: 1.0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: BN8PR12MB3587:EE_|SJ0PR12MB5408:EE_
+X-MS-Office365-Filtering-Correlation-Id: 545af347-bbb0-4c61-8112-08db085d4c8a
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: 4YgAr/WoUymFYgils929a4WuNmW+HdMTXALlGA9OldJO5cdWKEAXgTI8iw21fpGL6NpqA2YvSK/z2bNLgGjMow8ZaEXlexkr3dOfHn7ccMslRcf8InseVsEqlw2g84Fk7lJywdJvqjvsnVV9TKP9u3HvsIZ9fh/zrMKTQ5WZ/qbc5idwWGGBfMS0Mbuqt8EtLMnyXF6Wd7S7pySMz3TkWvLL2+I5C+LOdY9/yDbd9LkNwgolAYt6NoMRCy029Aemmc+bFqal7f/TbCzY3kwMiUHHu93t2QKBxXgpWEaC9zArBNkb5vKYJzbco8in8Lu3rxRpOIJ2NlnS2D6ypykRGYSkNpq1nc4PilvDtFxQ9LNDsKqN+PA58ha3P+jAx7cJaWPGu9NxerGJfR4reKR0jBi/eT3j2V+pN8AffMf7hCyBRoV2LYsSRmsppPibuwExtE9cm1iI9shxH6RHsPvQEUcW/1cam69DJyKZgigvCz/MxHgIL4P5PqfBicITD/LZwYa5Qqv3UAR0mo8zKvzJan/A2VpYpzUTNA17DWwHLRtXQMo2UCnMpnfC4FIyQuTgri9GhYTNj4CTnptU3ccr6+YtW+upJceFCBu9rOMIyI6g55i71F5caY+bE62S/47FPfdKDiMuDcGC/wkw+cfwmOUb3Bba/RbdFGr+ydSXS4np8tk5wPLZGlIHM+hbom4cz7opYGZoA6amw9Z9lmNn1mwsjoPEJTA2mm5udnfDwzQ=
+X-Forefront-Antispam-Report: CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BN8PR12MB3587.namprd12.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230025)(4636009)(396003)(136003)(39860400002)(346002)(366004)(376002)(451199018)(36756003)(316002)(110136005)(6512007)(31696002)(86362001)(31686004)(186003)(6506007)(2906002)(66476007)(4744005)(66556008)(7416002)(4326008)(8936002)(8676002)(5660300002)(41300700001)(2616005)(6486002)(6666004)(478600001)(66946007)(38100700002)(83380400001)(45980500001)(43740500002);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?RFg0YzhwVSsvelErNXcwcmJ3L2xiTVZxeGlaTDN2a1huNHBwa0NHeXk2NWxk?=
+ =?utf-8?B?bGIzaTNLb3BTaFpxeFBtTzFlbUpFMWRDZFJIbWtsTHF4bU1kSnhoSmxGK2NI?=
+ =?utf-8?B?NnkreHFuVGdoeWQxUEhtaStiV1UrTmlQcndJOHU5SHNBb0t1TzZLQ0UxaC8z?=
+ =?utf-8?B?bDU1NlpMTS9TakJlWWE4TCtFaXQ1a1NqZkdRWFd4R21SQ1NYdTFEc3UwR082?=
+ =?utf-8?B?cU9seExYSHo1cE53RlFSa3k1L2NQRUJYdU9VcDNUKzB2SStwNDBQSWJKd0lP?=
+ =?utf-8?B?Q09TemF0d3ZuSjZvYTNoRFJMZ0JGSHJrOVpPNEkvNk1YTDYwSi9UY3E5TXF3?=
+ =?utf-8?B?T3ZuTWt0eDRIUWZLVmJaTEZsY0s0OGF1U1ZKbStybGdlR2tvZFREZkpKL3Rt?=
+ =?utf-8?B?WGFweHAvTVM4MFJtUkYrMm0yU0pCNUVCRTF3UnhkLzJERlZvTFc2UDhBNCtZ?=
+ =?utf-8?B?S2xrVEhPSHhaRHA0TVRQenhzbFdoS2JpTDhIakFBdUx4dzJra3dLYkJ5TGFL?=
+ =?utf-8?B?Q0lPRHlzNHR5SW1ZN1RHWHFuSWlWc3BSWkpMQkJaR05SZnprVnVRakV1TXpD?=
+ =?utf-8?B?VjN1YS9DdmpRaWh4TFUzeHdCOHA1cE5MODRFWTJqbXFCZmxFdksvNXZtSkRy?=
+ =?utf-8?B?eEsvby9iaWVQVU9DSUJaeVZDV2pSRlg5RTRpZ3c0M0RGQ3BEaCsrQzgwcks1?=
+ =?utf-8?B?bFhUNkhGekl0SUtSaFZMK0xXc3ZBLzkyMi9BbnQraHV4V2RZNG5OMjAyRDY3?=
+ =?utf-8?B?amxiQS8rbTVYblYxcDBQQk1ucHJlcnIrYXUvYmM4V2w2eWhOVXZrcllrckFk?=
+ =?utf-8?B?dW9aM08vRzdMSVo5K0loYnhxb2E3VXJhWHdDMGRML01MSmJaaHdPYXJuS0Ey?=
+ =?utf-8?B?RnhreDhwdUV4cEZXM3NLU2J4dHhMS0l0VHdHREpONmdrMEx4ckRxeFl1c2Rl?=
+ =?utf-8?B?T0x0NU1mNnVYZHpCdUZtbTFEbmhaam81dUh6OEMvdk1Yd1lPYWx6YS9JMXhk?=
+ =?utf-8?B?NEVTY01tM1lIajNpWm9MOHlQWG9kRmJxSDcwMFNtZloyOGhkL2diOS9FTEc0?=
+ =?utf-8?B?NHJ3eldBMU56eGE2Ujc0NzJsZGtLQkNQK3ArdS9HMzV3WHBFYngrcW1mRTZj?=
+ =?utf-8?B?amJCMXRzSFhIYVAvVnZqdTB5ajJjZTVuY3JNVjY5T3kzU2NXRkp0THExamFx?=
+ =?utf-8?B?eERuQWVrTjlBRWFmdWV1bnBJd0ZGbThCdGVKSTFqcnUrc1JoNUo4QVp5cmZ1?=
+ =?utf-8?B?QkpINmdmRnVpNzd1eU01UlI0WlFnS0VHOUo0OStVVm9aQ3VRdUYzUlRQMU01?=
+ =?utf-8?B?RXQzNFNyRTY1OW5kUjYvazhkUDVqTmJPaXNuRnNGTkRkZ0ZGbm5zUWFZeGNk?=
+ =?utf-8?B?K3lkOHRiOU5zcjNBakVYUFVOMHpQWkJzTkx3OWVWMVlMRzhpRDdDNStqN0gr?=
+ =?utf-8?B?TURSV0JWQTJ1MGxPdGdwMlgxWWM2bjFYUHYrWjFrZGpKZmIxR21xN3VGL3pl?=
+ =?utf-8?B?QWp0RmdLVXdQQkxYN0JUSFovS2tBVXkydHVTcFpCejNLdGsvSHM1WDZvZEdi?=
+ =?utf-8?B?bms4OGIxRWRxdnFyYmwxUGpVYVVDWWt3dnB0aEJ5UFp1UTdPaS9vTzFQa3BT?=
+ =?utf-8?B?M1AwbGJ1UU9mQ1JnTmRWWjJ4SWdWNjU4blF1cDdYdms0RXY2WnFYYzBVczFE?=
+ =?utf-8?B?dnYvZFhKQmFFUWlETzNCb3FjZng3Nk1vbmRGbmlVb1Vka3Z4Y1FyL213YUJi?=
+ =?utf-8?B?ZnZDVzd3akZFbmU5WEtpRGRJcldhdGxPZTl5Q1JKTytPZUY2T0VpZ1dBdE9W?=
+ =?utf-8?B?SWN3a1doSkp4TUZpY0lQNGhpTVdzcEh2alYxMTFFWEJQQ0FPSFByUVFCMXl1?=
+ =?utf-8?B?dkRjZ0RoaFdLNXRha3M4Y1ZWemZPejB6eEtjWGxjbWJVLzJFYVM3WHBjdGd1?=
+ =?utf-8?B?M2NvcHRMdnV2b2tiMm9abi9GY3ZQSm5tZzVGZzFIY1l2RHY4TkpCbnR5dWcx?=
+ =?utf-8?B?U01WTmVkeERoNSsyVitoOHRSSytaN2M0WXgvbEM4Y2JJdzNhYXQvT25mS1pB?=
+ =?utf-8?B?T0hyTndnSXFnU09nYmtJVk8vM2kreUlmZVh1dHJ3ajR5cEQ1dlBVbFRRaGkv?=
+ =?utf-8?B?NUJORmVsNXVIVGp2TFJWMnFwU3JyQVBrN2NSTnB5dncrMXdFbk1XRDEwdnFH?=
+ =?utf-8?Q?bsYD+PPXmVE8TSZHBSDzA0lPKG3U9hn117cjOQweEgtt?=
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 545af347-bbb0-4c61-8112-08db085d4c8a
+X-MS-Exchange-CrossTenant-AuthSource: BN8PR12MB3587.namprd12.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 06 Feb 2023 16:15:01.5464
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: ny9pO6KBM6hIhN8Oizxqr9RFBcVpgfCL6PbOuG/tYj2OUdvU0Uygdf10N4UZaRzZ
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ0PR12MB5408
+X-Spam-Status: No, score=-2.2 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FORGED_SPF_HELO,NICE_REPLY_A,
+        RCVD_IN_DNSWL_NONE,RCVD_IN_MSPIKE_H2,SPF_HELO_PASS,SPF_NONE
+        autolearn=ham autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
+Concentrating this discussion on a very big misunderstanding first.
 
+Am 06.02.23 um 14:27 schrieb Danilo Krummrich:
+> [SNIP]
+> My understanding is that userspace is fully responsible on the parts 
+> of the GPU VA space it owns. This means that userspace needs to take 
+> care to *not* ask the kernel to modify mappings that are in use currently.
 
-On 20/01/2023 22:46, Elliot Berman wrote:
-> When launching a virtual machine, Gunyah userspace allocates memory for
-> the guest and informs Gunyah about these memory regions through
-> SET_USER_MEMORY_REGION ioctl.
-> 
-> Co-developed-by: Prakruthi Deepak Heragu <quic_pheragu@quicinc.com>
-> Signed-off-by: Prakruthi Deepak Heragu <quic_pheragu@quicinc.com>
-> Signed-off-by: Elliot Berman <quic_eberman@quicinc.com>
-> ---
->   drivers/virt/gunyah/Makefile    |   2 +-
->   drivers/virt/gunyah/vm_mgr.c    |  46 +++++++
->   drivers/virt/gunyah/vm_mgr.h    |  28 +++-
->   drivers/virt/gunyah/vm_mgr_mm.c | 223 ++++++++++++++++++++++++++++++++
->   include/uapi/linux/gunyah.h     |  22 ++++
->   5 files changed, 319 insertions(+), 2 deletions(-)
->   create mode 100644 drivers/virt/gunyah/vm_mgr_mm.c
-> 
-> diff --git a/drivers/virt/gunyah/Makefile b/drivers/virt/gunyah/Makefile
-> index 03951cf82023..ff8bc4925392 100644
-> --- a/drivers/virt/gunyah/Makefile
-> +++ b/drivers/virt/gunyah/Makefile
-> @@ -2,5 +2,5 @@
->   
->   obj-$(CONFIG_GUNYAH) += gunyah.o
->   
-> -gunyah_rsc_mgr-y += rsc_mgr.o rsc_mgr_rpc.o vm_mgr.o
-> +gunyah_rsc_mgr-y += rsc_mgr.o rsc_mgr_rpc.o vm_mgr.o vm_mgr_mm.o
->   obj-$(CONFIG_GUNYAH) += gunyah_rsc_mgr.o
-> diff --git a/drivers/virt/gunyah/vm_mgr.c b/drivers/virt/gunyah/vm_mgr.c
-> index 0864dbd77e28..b847fde63333 100644
-> --- a/drivers/virt/gunyah/vm_mgr.c
-> +++ b/drivers/virt/gunyah/vm_mgr.c
-> @@ -35,14 +35,55 @@ static __must_check struct gunyah_vm *gunyah_vm_alloc(struct gh_rm_rpc *rm)
->   	ghvm->vmid = vmid;
->   	ghvm->rm = rm;
->   
-> +	mutex_init(&ghvm->mm_lock);
-> +	INIT_LIST_HEAD(&ghvm->memory_mappings);
-> +
->   	return ghvm;
->   }
->   
->   static long gh_vm_ioctl(struct file *filp, unsigned int cmd, unsigned long arg)
->   {
-> +	struct gunyah_vm *ghvm = filp->private_data;
-> +	void __user *argp = (void __user *)arg;
->   	long r;
->   
->   	switch (cmd) {
-> +	case GH_VM_SET_USER_MEM_REGION: {
-> +		struct gunyah_vm_memory_mapping *mapping;
-> +		struct gh_userspace_memory_region region;
-> +
-> +		r = -EFAULT;
-> +		if (copy_from_user(&region, argp, sizeof(region)))
-> +			break;
-Why not be explict about the error codes, do something like.
+This is a completely wrong assumption! Take a look at what games like 
+Forza Horizzon are doing.
 
-if (copy_from_user(&region, argp, sizeof(region)))
-	return -EFAULT;
+Basically that game allocates a very big sparse area and fills it with 
+pages from BOs while shaders are accessing it. And yes, as far as I know 
+this is completely valid behavior.
 
+So you need to be able to handle this case anyway and the approach with 
+the regions won't help you at all preventing that.
 
-setting r value everytime before starting any code is making the code 
-more reader unfriendly.
+Regards,
+Christian.
 
-
-> +
-> +		r = -EINVAL;
-> +		/* All other flag bits are reserved for future use */
-> +		if (region.flags & ~(GH_MEM_ALLOW_READ | GH_MEM_ALLOW_WRITE | GH_MEM_ALLOW_EXEC |
-> +			GH_MEM_LENT))
-> +			break;
-> +
-> +
-> +		if (region.memory_size) {
-
-This behaviour allocating memory in presense of valid memory_size and 
-finding memory in cases of zero size needs to be described properly in 
-the uapi so that the users are aware of this.
-
-> +			r = 0;
-> +			mapping = gh_vm_mem_mapping_alloc(ghvm, &region);
-> +			if (IS_ERR(mapping)) {
-> +				r = PTR_ERR(mapping);
-> +				break;
-> +			}
-> +		} else {
-> +			mapping = gh_vm_mem_mapping_find(ghvm, region.label);
-> +			if (IS_ERR(mapping)) {
-> +				r = PTR_ERR(mapping);
-> +				break;
-> +			}
-> +			r = 0;
-> +			if (!mapping)
-> +				break;
-> +			gh_vm_mem_mapping_reclaim(ghvm, mapping);
-> +			kfree(mapping);
-> +		}
-> +		break;
-> +	}
->   	default:
->   		r = -ENOTTY;
->   		break;
-> @@ -54,7 +95,12 @@ static long gh_vm_ioctl(struct file *filp, unsigned int cmd, unsigned long arg)
->   static int gh_vm_release(struct inode *inode, struct file *filp)
->   {
->   	struct gunyah_vm *ghvm = filp->private_data;
-> +	struct gunyah_vm_memory_mapping *mapping, *tmp;
->   
-Locking?
-> +	list_for_each_entry_safe(mapping, tmp, &ghvm->memory_mappings, list) {
-> +		gh_vm_mem_mapping_reclaim(ghvm, mapping);
-> +		kfree(mapping);
-> +	}
->   	put_gh_rm(ghvm->rm);
->   	kfree(ghvm);
->   	return 0;
-> diff --git a/drivers/virt/gunyah/vm_mgr.h b/drivers/virt/gunyah/vm_mgr.h
-> index e47f34de7f9e..6b38bf780f76 100644
-> --- a/drivers/virt/gunyah/vm_mgr.h
-> +++ b/drivers/virt/gunyah/vm_mgr.h
-> @@ -7,14 +7,40 @@
->   #define _GH_PRIV_VM_MGR_H
->   
->   #include <linux/gunyah_rsc_mgr.h>
-> +#include <linux/list.h>
-> +#include <linux/miscdevice.h>
-> +#include <linux/mutex.h>
->   
->   #include <uapi/linux/gunyah.h>
->   
->   long gh_dev_vm_mgr_ioctl(struct gh_rm *rm, unsigned int cmd, unsigned long arg);
->   
-> +enum gunyah_vm_mem_share_type {
-> +	VM_MEM_SHARE,
-> +	VM_MEM_LEND,
-> +};
-> +
-> +struct gunyah_vm_memory_mapping {
-> +	struct list_head list;
-> +	enum gunyah_vm_mem_share_type share_type;
-> +	struct gh_rm_mem_parcel parcel;
-> +
-> +	__u64 guest_phys_addr;
-> +	struct page **pages;
-> +	unsigned long npages;
-> +};
-> +
->   struct gunyah_vm {
->   	u16 vmid;
-> -	struct gh_rm_rpc *rm;
-> +	struct gh_rm *rm;
-> +
-> +	struct mutex mm_lock;
-> +	struct list_head memory_mappings;
->   };
->   
-> +struct gunyah_vm_memory_mapping *gh_vm_mem_mapping_alloc(struct gunyah_vm *ghvm,
-> +							struct gh_userspace_memory_region *region);
-> +void gh_vm_mem_mapping_reclaim(struct gunyah_vm *ghvm, struct gunyah_vm_memory_mapping *mapping);
-> +struct gunyah_vm_memory_mapping *gh_vm_mem_mapping_find(struct gunyah_vm *ghvm, u32 label);
-> +
->   #endif
-> diff --git a/drivers/virt/gunyah/vm_mgr_mm.c b/drivers/virt/gunyah/vm_mgr_mm.c
-> new file mode 100644
-> index 000000000000..f2dbdb4ee8ab
-> --- /dev/null
-> +++ b/drivers/virt/gunyah/vm_mgr_mm.c
-> @@ -0,0 +1,223 @@
-> +// SPDX-License-Identifier: GPL-2.0-only
-> +/*
-> + * Copyright (c) 2022-2023 Qualcomm Innovation Center, Inc. All rights reserved.
-> + */
-> +
-> +#define pr_fmt(fmt) "gh_vm_mgr: " fmt
-> +
-> +#include <linux/gunyah_rsc_mgr.h>
-> +#include <linux/mm.h>
-> +
-> +#include <uapi/linux/gunyah.h>
-> +
-> +#include "vm_mgr.h"
-> +
-> +static inline bool page_contiguous(phys_addr_t p, phys_addr_t t)
-> +{
-> +	return t - p == PAGE_SIZE;
-> +}
-> +
-> +static struct gunyah_vm_memory_mapping *__gh_vm_mem_mapping_find(struct gunyah_vm *ghvm, u32 label)
-> +{
-> +	struct gunyah_vm_memory_mapping *mapping;
-> +
-> +
-only one line.
-> +	list_for_each_entry(mapping, &ghvm->memory_mappings, list)
-> +		if (mapping->parcel.label == label)
-> +			return mapping;
-> +
-> +	return NULL;
-> +}
-> +
-> +void gh_vm_mem_mapping_reclaim(struct gunyah_vm *ghvm, struct gunyah_vm_memory_mapping *mapping)
-> +{
-> +	int i, ret = 0;
-> +
-> +	if (mapping->parcel.mem_handle != GH_MEM_HANDLE_INVAL) {
-> +		ret = gh_rm_mem_reclaim(ghvm->rm, &mapping->parcel);
-> +		if (ret)
-> +			pr_warn("Failed to reclaim memory parcel for label %d: %d\n",
-> +				mapping->parcel.label, ret);
-> +	}
-> +
-> +	if (!ret)
-> +		for (i = 0; i < mapping->npages; i++)
-> +			unpin_user_page(mapping->pages[i]);
-> +
-> +	kfree(mapping->pages);
-> +	kfree(mapping->parcel.acl_entries);
-> +	kfree(mapping->parcel.mem_entries);
-> +
-> +	mutex_lock(&ghvm->mm_lock);
-> +	list_del(&mapping->list);
-> +	mutex_unlock(&ghvm->mm_lock);
-> +}
-> +
-> +struct gunyah_vm_memory_mapping *gh_vm_mem_mapping_find(struct gunyah_vm *ghvm, u32 label)
-> +{
-> +	struct gunyah_vm_memory_mapping *mapping;
-> +	int ret;
-> +
-> +	ret = mutex_lock_interruptible(&ghvm->mm_lock);
-> +	if (ret)
-> +		return ERR_PTR(ret);
-> +	mapping = __gh_vm_mem_mapping_find(ghvm, label);
-> +	mutex_unlock(&ghvm->mm_lock);
-> +	return mapping ? : ERR_PTR(-ENODEV);
-> +}
-> +
-> +struct gunyah_vm_memory_mapping *gh_vm_mem_mapping_alloc(struct gunyah_vm *ghvm,
-> +							struct gh_userspace_memory_region *region)
-> +{
-Is this a static functoin or an exported symbol?
-
-> +	phys_addr_t curr_page, prev_page;
-> +	struct gunyah_vm_memory_mapping *mapping, *tmp_mapping;
-> +	struct gh_rm_mem_entry *mem_entries;
-> +	int i, j, pinned, ret = 0;
-> +	struct gh_rm_mem_parcel *parcel;
-> +	size_t entry_size;
-> +	u16 vmid; > +
-Reverse christmas tree to sor local variables would be nice.
-
-> +	if (!region->memory_size || !PAGE_ALIGNED(region->memory_size) ||
-> +		!PAGE_ALIGNED(region->userspace_addr))
-Even this alignment needs some documentation.
-
-Or why not just let the user only pass number of pages instead of size?
-
-
-> +		return ERR_PTR(-EINVAL);
-> +
-> +	if (!gh_api_has_feature(GH_API_FEATURE_MEMEXTENT))
-> +		return ERR_PTR(-EOPNOTSUPP);
-
-We should proabably move this as very first check while handling this IOCTL.
-
-
-> +
-> +	ret = mutex_lock_interruptible(&ghvm->mm_lock);
-> +	if (ret)
-> +		return ERR_PTR(ret);
-> +	mapping = __gh_vm_mem_mapping_find(ghvm, region->label);
-
-so label is unique and userspace proabably aware of this?
-Can we have more than one userspace doing this? and if so how can it 
-ensure that each label is unique?
-
-
-> +	if (mapping) {
-> +		mutex_unlock(&ghvm->mm_lock);
-> +		return ERR_PTR(-EEXIST);
-> +	}
-> +
-> +	mapping = kzalloc(sizeof(*mapping), GFP_KERNEL);
-> +	if (!mapping) {
-> +		ret = -ENOMEM;
-> +		goto unlock;
-> +	}
-> +
-> +	mapping->parcel.label = region->label;
-
-> +	mapping->guest_phys_addr = region->guest_phys_addr;
-> +	mapping->npages = region->memory_size >> PAGE_SHIFT;
-> +	parcel = &mapping->parcel;
-> +	parcel->mem_handle = GH_MEM_HANDLE_INVAL; /* to be filled later by mem_share/mem_lend */
-> +	parcel->mem_type = GH_RM_MEM_TYPE_NORMAL;
-> +
-> +	/* Check for overlap */
-> +	list_for_each_entry(tmp_mapping, &ghvm->memory_mappings, list) {
-> +		if (!((mapping->guest_phys_addr + (mapping->npages << PAGE_SHIFT) <=
-> +			tmp_mapping->guest_phys_addr) ||
-> +			(mapping->guest_phys_addr >=
-> +			tmp_mapping->guest_phys_addr + (tmp_mapping->npages << PAGE_SHIFT)))) {
-> +			ret = -EEXIST;
-> +			goto unlock;
-> +		}
-> +	}
-This looks like we will loop every mappign for each allocation giving us 
-an O(n), How frequent and how many max mappings can be there in the system?
-
-> +
-> +	list_add(&mapping->list, &ghvm->memory_mappings);
-> +unlock:
-> +	mutex_unlock(&ghvm->mm_lock);
-> +	if (ret)
-> +		goto free_mapping;
-> +
-> +	mapping->pages = kcalloc(mapping->npages, sizeof(*mapping->pages), GFP_KERNEL);
-> +	if (!mapping->pages) {
-> +		ret = -ENOMEM;
-> +		goto reclaim;
-> +	}
-> +
-> +	pinned = pin_user_pages_fast(region->userspace_addr, mapping->npages,
-> +					FOLL_WRITE | FOLL_LONGTERM, mapping->pages);
-> +	if (pinned < 0) {
-> +		ret = pinned;
-> +		goto reclaim;
-> +	} else if (pinned != mapping->npages) {
-> +		ret = -EFAULT;
-> +		mapping->npages = pinned; /* update npages for reclaim */
-> +		goto reclaim;
-> +	}
-> +
-> +	if (region->flags & GH_MEM_LENT) {
-> +		parcel->n_acl_entries = 1;
-> +		mapping->share_type = VM_MEM_LEND;
-> +	} else {
-> +		parcel->n_acl_entries = 2;
-> +		mapping->share_type = VM_MEM_SHARE;
-> +	}
-> +	parcel->acl_entries = kcalloc(parcel->n_acl_entries,
-> +						sizeof(*parcel->acl_entries),
-> +						GFP_KERNEL);
-> +	if (!parcel->acl_entries) {
-> +		ret = -ENOMEM;
-> +		goto reclaim;
-> +	}
-> +
-> +	parcel->acl_entries[0].vmid = cpu_to_le16(ghvm->vmid);
-> +	if (region->flags & GH_MEM_ALLOW_READ)
-> +		parcel->acl_entries[0].perms |= GH_RM_ACL_R;
-> +	if (region->flags & GH_MEM_ALLOW_WRITE)
-> +		parcel->acl_entries[0].perms |= GH_RM_ACL_W;
-> +	if (region->flags & GH_MEM_ALLOW_EXEC)
-> +		parcel->acl_entries[0].perms |= GH_RM_ACL_X;
-> +
-> +	if (mapping->share_type == VM_MEM_SHARE) {
-> +		ret = gh_rm_get_vmid(ghvm->rm, &vmid);
-> +		if (ret) {
-> +			if (ret > 0) {
-> +				pr_warn("RM failed to get this VM's VMID: %d", ret);
-> +				ret = -EINVAL;
-> +			}
-> +			goto reclaim;
-> +		}
-> +
-> +		parcel->acl_entries[1].vmid = cpu_to_le16(vmid);
-> +		/* Host assumed to have all these permissions. Gunyah will not
-> +		 * grant new permissions if host actually had less than RWX
-> +		 */
-> +		parcel->acl_entries[1].perms |= GH_RM_ACL_R | GH_RM_ACL_W | GH_RM_ACL_X;
-> +	}
-> +
-> +	mem_entries = kcalloc(mapping->npages, sizeof(*mem_entries), GFP_KERNEL);
-> +	if (!mem_entries) {
-> +		ret = -ENOMEM;
-> +		goto reclaim;
-> +	}
-> +
-> +	/* reduce number of entries by combining contiguous pages into single memory entry */
-> +	prev_page = page_to_phys(mapping->pages[0]);
-> +	mem_entries[0].ipa_base = cpu_to_le64(prev_page);
-> +	entry_size = PAGE_SIZE;
-> +	for (i = 1, j = 0; i < mapping->npages; i++) {
-> +		curr_page = page_to_phys(mapping->pages[i]);
-> +		if (page_contiguous(prev_page, curr_page)) {
-> +			entry_size += PAGE_SIZE;
-> +		} else {
-> +			mem_entries[j].size = cpu_to_le64(entry_size);
-> +			j++;
-> +			mem_entries[j].ipa_base = cpu_to_le64(curr_page);
-> +			entry_size = PAGE_SIZE;
-> +		}
-> +
-> +		prev_page = curr_page;
-> +	}
-> +	mem_entries[j].size = cpu_to_le64(entry_size);
-> +
-> +	parcel->n_mem_entries = j + 1;
-> +	parcel->mem_entries = kmemdup(mem_entries, sizeof(*mem_entries) * parcel->n_mem_entries,
-> +					GFP_KERNEL);
-> +	kfree(mem_entries);
-> +	if (!parcel->mem_entries) {
-> +		ret = -ENOMEM;
-> +		goto reclaim;
-> +	}
-> +
-> +	return mapping;
-> +reclaim:
-> +	gh_vm_mem_mapping_reclaim(ghvm, mapping);
-> +free_mapping:
-> +	kfree(mapping);
-> +	return ERR_PTR(ret);
-> +}
-> diff --git a/include/uapi/linux/gunyah.h b/include/uapi/linux/gunyah.h
-> index 88a40d6e0b96..574f33b198d0 100644
-> --- a/include/uapi/linux/gunyah.h
-> +++ b/include/uapi/linux/gunyah.h
-> @@ -20,4 +20,26 @@
->    */
->   #define GH_CREATE_VM			_IO(GH_IOCTL_TYPE, 0x0) /* Returns a Gunyah VM fd */
->   
-> +/*
-> + * ioctls for VM fds
-> + */
-> +struct gh_userspace_memory_region {
-
-This struct needs some kernedoc.
-
-> +	__u32 label;
-
-> +#define GH_MEM_ALLOW_READ	(1UL << 0)
-> +#define GH_MEM_ALLOW_WRITE	(1UL << 1)
-> +#define GH_MEM_ALLOW_EXEC	(1UL << 2)
-> +/*
-> + * The guest will be lent the memory instead of shared.
-> + * In other words, the guest has exclusive access to the memory region and the host loses access.
-> + */
-> +#define GH_MEM_LENT		(1UL << 3)
-> +	__u32 flags;
-> +	__u64 guest_phys_addr;
-> +	__u64 memory_size;
-if we are only expecting pages, this should probably be make explict by 
-using nr_pages instead of size
-
-> +	__u64 userspace_addr;
-> +};
-> +
-> +#define GH_VM_SET_USER_MEM_REGION	_IOW(GH_IOCTL_TYPE, 0x1, \
-> +						struct gh_userspace_memory_region)
-> +
->   #endif
