@@ -2,140 +2,109 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id BDCD968F5EB
-	for <lists+linux-doc@lfdr.de>; Wed,  8 Feb 2023 18:46:04 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id DD12568F626
+	for <lists+linux-doc@lfdr.de>; Wed,  8 Feb 2023 18:53:47 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S232165AbjBHRqD (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 8 Feb 2023 12:46:03 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:49756 "EHLO
+        id S230244AbjBHRxq (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 8 Feb 2023 12:53:46 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:60816 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S231483AbjBHRp1 (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Wed, 8 Feb 2023 12:45:27 -0500
-Received: from mga02.intel.com (mga02.intel.com [134.134.136.20])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 94B7653E57;
-        Wed,  8 Feb 2023 09:44:25 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1675878265; x=1707414265;
-  h=date:from:to:cc:subject:message-id:references:
-   mime-version:in-reply-to;
-  bh=+jF3CDzzwW6yo4ozmXcRNVjpZY0lFCu8o1UhbMtHcsA=;
-  b=SYv0btPLcrot+UChAMRwARHn3CXimT7f/2LR3lF5GgIxtopUnSNGqEI/
-   uCTmvB0GZF9OqmVbxMCAIlSxRScx+CW8gjL/tefQ4BMP3h+CaBfMbxIFz
-   09T0WqyEU2mjZQ7rjiREme6729OTk3Pqa4K2OEJ8YW9gzCSXwyqJP6C7j
-   dHqmktyB04/L9tZOFWfh87uMZIqFHeuqdNqN+ueZnAp5NZD5Az5wdJ01O
-   akfrxkdozAi2/fcnjpUQDrxNF7UEjRK1RKsAivYGpe6k6mZbO2XX/OWJ+
-   gi3flI2++/RwwFEImMNj0SL6gXM/jo/Fd35odPzX8tiy2HfEO19vbhvup
-   w==;
-X-IronPort-AV: E=McAfee;i="6500,9779,10615"; a="317876336"
-X-IronPort-AV: E=Sophos;i="5.97,281,1669104000"; 
-   d="scan'208";a="317876336"
-Received: from fmsmga005.fm.intel.com ([10.253.24.32])
-  by orsmga101.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 08 Feb 2023 09:43:27 -0800
-X-ExtLoop1: 1
-X-IronPort-AV: E=McAfee;i="6500,9779,10615"; a="996219805"
-X-IronPort-AV: E=Sophos;i="5.97,281,1669104000"; 
-   d="scan'208";a="996219805"
-Received: from smile.fi.intel.com ([10.237.72.54])
-  by fmsmga005.fm.intel.com with ESMTP; 08 Feb 2023 09:43:09 -0800
-Received: from andy by smile.fi.intel.com with local (Exim 4.96)
-        (envelope-from <andriy.shevchenko@linux.intel.com>)
-        id 1pPoTH-004EYe-0x;
-        Wed, 08 Feb 2023 19:43:03 +0200
-Date:   Wed, 8 Feb 2023 19:43:02 +0200
-From:   Andy Shevchenko <andriy.shevchenko@linux.intel.com>
-To:     Krzysztof Kozlowski <krzysztof.kozlowski@linaro.org>
-Cc:     Arnd Bergmann <arnd@arndb.de>,
-        Linus Walleij <linus.walleij@linaro.org>,
-        Bartosz Golaszewski <bartosz.golaszewski@linaro.org>,
-        Tony Lindgren <tony@atomide.com>,
-        Thomas Gleixner <tglx@linutronix.de>,
-        Geert Uytterhoeven <geert@linux-m68k.org>,
-        Michael Ellerman <mpe@ellerman.id.au>,
-        Christophe Leroy <christophe.leroy@csgroup.eu>,
-        Vincenzo Palazzo <vincenzopalazzodev@gmail.com>,
-        Devarsh Thakkar <devarsht@ti.com>,
-        Michael Walle <michael@walle.cc>,
-        Dmitry Torokhov <dmitry.torokhov@gmail.com>,
-        Dipen Patel <dipenp@nvidia.com>,
-        Thierry Reding <treding@nvidia.com>,
-        Stefan Schmidt <stefan@datenfreihafen.org>,
-        Miquel Raynal <miquel.raynal@bootlin.com>,
-        Lee Jones <lee@kernel.org>, linux-gpio@vger.kernel.org,
-        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
-        linux-doc-tw-discuss@lists.sourceforge.net,
-        linux-arm-kernel@lists.infradead.org, linux-omap@vger.kernel.org,
-        linux-samsung-soc@vger.kernel.org, linux-m68k@lists.linux-m68k.org,
-        linuxppc-dev@lists.ozlabs.org, linux-sh@vger.kernel.org,
-        linux-acpi@vger.kernel.org, linux-tegra@vger.kernel.org,
-        linux-input@vger.kernel.org, linux-media@vger.kernel.org,
-        linux-wpan@vger.kernel.org, netdev@vger.kernel.org,
-        linux-wireless@vger.kernel.org,
-        brcm80211-dev-list.pdl@broadcom.com,
-        SHA-cyfmac-dev-list@infineon.com, linux-arch@vger.kernel.org,
-        devicetree@vger.kernel.org, Bartosz Golaszewski <brgl@bgdev.pl>,
-        Jonathan Corbet <corbet@lwn.net>, Alex Shi <alexs@kernel.org>,
-        Yanteng Si <siyanteng@loongson.cn>,
-        Hu Haowen <src.res@email.cn>,
-        Russell King <linux@armlinux.org.uk>,
-        Aaro Koskinen <aaro.koskinen@iki.fi>,
-        Janusz Krzysztofik <jmkrzyszt@gmail.com>,
-        Andrew Lunn <andrew@lunn.ch>,
-        Sebastian Hesselbarth <sebastian.hesselbarth@gmail.com>,
-        Gregory Clement <gregory.clement@bootlin.com>,
-        Alim Akhtar <alim.akhtar@samsung.com>,
-        Nicholas Piggin <npiggin@gmail.com>,
-        Yoshinori Sato <ysato@users.sourceforge.jp>,
-        Rich Felker <dalias@libc.org>,
-        Mun Yew Tham <mun.yew.tham@intel.com>,
-        Keerthy <j-keerthy@ti.com>,
-        Mika Westerberg <mika.westerberg@linux.intel.com>,
-        Thierry Reding <thierry.reding@gmail.com>,
-        Jonathan Hunter <jonathanh@nvidia.com>,
-        Mauro Carvalho Chehab <mchehab@kernel.org>,
-        Alexander Aring <alex.aring@gmail.com>,
-        "David S. Miller" <davem@davemloft.net>,
-        Eric Dumazet <edumazet@google.com>,
-        Jakub Kicinski <kuba@kernel.org>,
-        Paolo Abeni <pabeni@redhat.com>,
-        Arend van Spriel <aspriel@gmail.com>,
-        Franky Lin <franky.lin@broadcom.com>,
-        Hante Meuleman <hante.meuleman@broadcom.com>,
-        Kalle Valo <kvalo@kernel.org>, Qiang Zhao <qiang.zhao@nxp.com>,
-        Li Yang <leoyang.li@nxp.com>, Rob Herring <robh+dt@kernel.org>,
-        Frank Rowand <frowand.list@gmail.com>
-Subject: Re: [PATCH v4 02/18] ARM: s3c24xx: Use the right include
-Message-ID: <Y+PfJr4l4U3DYpWT@smile.fi.intel.com>
-References: <20230208173343.37582-1-andriy.shevchenko@linux.intel.com>
- <20230208173343.37582-3-andriy.shevchenko@linux.intel.com>
- <30234963-33e5-e2d7-a6ef-112e89efbdd0@linaro.org>
+        with ESMTP id S231182AbjBHRxp (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Wed, 8 Feb 2023 12:53:45 -0500
+Received: from mail-pl1-f182.google.com (mail-pl1-f182.google.com [209.85.214.182])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id D2BAB59E2;
+        Wed,  8 Feb 2023 09:53:44 -0800 (PST)
+Received: by mail-pl1-f182.google.com with SMTP id k13so20227761plg.0;
+        Wed, 08 Feb 2023 09:53:44 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=content-transfer-encoding:in-reply-to:from:references:cc:to
+         :content-language:subject:user-agent:mime-version:date:message-id
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=UHYPrSiTkVKIlfo8HfMdMKbV5juD4qgKqM8oSnLweE8=;
+        b=sQwEsm+G5eaUbb7aY1mSz7DJb8FYCFum2/YVoB4IJIWjliqWRFDlUam0z9NiKPYfl8
+         1tx0ZjD+WdqUjwWbtzjxx7ER0S2E5GXcsunYeS4CrkWjR9XYMWLqDJ4nEvPJCSNqIvKb
+         gfN6bySy569/MsWsXFEAkVF4qIQST4IGSFtaJH+fsb9We1LUyqwXmJ3fpzv1DjUV6AIa
+         PSgDdeytsXpAHk5wZ2tP94Rpr4UZo8amFj1z7QqvKjnOUKQEtRiAwf74C3i1O99Tgher
+         6dsKD1+ZmRXMW33Qm45LSgQRcu6PLgAZi8GhupiKbkeyVEY76bLEapaRwoODq13AOYgW
+         mzMw==
+X-Gm-Message-State: AO0yUKVCqbh/42wON6JxA3liBwlzgya8lCkqcJMjXdGNC+g/UpnwRqxD
+        1plw+3ptQzc+rGEA/FGB//Y=
+X-Google-Smtp-Source: AK7set/GrvVfRVcZ26t5iBnwWqMEPtJBrPM9dsurSPWoOG+E6492+ASW9DmosYVxi30oZtwSF3UQFQ==
+X-Received: by 2002:a17:902:e1c4:b0:195:e92e:c4d3 with SMTP id t4-20020a170902e1c400b00195e92ec4d3mr5589893pla.46.1675878824157;
+        Wed, 08 Feb 2023 09:53:44 -0800 (PST)
+Received: from ?IPV6:2620:15c:211:201:869f:66a2:40c:445d? ([2620:15c:211:201:869f:66a2:40c:445d])
+        by smtp.gmail.com with ESMTPSA id u2-20020a170902a60200b001962858f990sm11370358plq.164.2023.02.08.09.53.42
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Wed, 08 Feb 2023 09:53:43 -0800 (PST)
+Message-ID: <7fcd4c38-ccbe-6411-e424-a57595ad9c0b@acm.org>
+Date:   Wed, 8 Feb 2023 09:53:41 -0800
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <30234963-33e5-e2d7-a6ef-112e89efbdd0@linaro.org>
-Organization: Intel Finland Oy - BIC 0357606-4 - Westendinkatu 7, 02160 Espoo
-X-Spam-Status: No, score=-4.3 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_EF,RCVD_IN_DNSWL_MED,
-        RCVD_IN_MSPIKE_H3,RCVD_IN_MSPIKE_WL,SPF_HELO_NONE,SPF_NONE
-        autolearn=ham autolearn_force=no version=3.4.6
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.6.0
+Subject: Re: [PATCH] blk-ioprio: Introduce promote-to-rt policy
+Content-Language: en-US
+To:     Jan Kara <jack@suse.cz>
+Cc:     Hou Tao <houtao@huaweicloud.com>, linux-block@vger.kernel.org,
+        Jens Axboe <axboe@kernel.dk>, cgroups@vger.kernel.org,
+        Tejun Heo <tj@kernel.org>, Zefan Li <lizefan.x@bytedance.com>,
+        Johannes Weiner <hannes@cmpxchg.org>,
+        Jonathan Corbet <corbet@lwn.net>, linux-kernel@vger.kernel.org,
+        linux-doc@vger.kernel.org, houtao1@huawei.com
+References: <20230201045227.2203123-1-houtao@huaweicloud.com>
+ <8c068af3-7199-11cf-5c69-a523c7c22d9a@acm.org>
+ <4f7dcb3e-2d5a-cae3-0e1c-a82bcc3d2217@huaweicloud.com>
+ <b6b3c498-e90b-7d1f-6ad5-a31334e433ae@acm.org>
+ <beb7782e-72a4-c350-3750-23a767c88753@huaweicloud.com>
+ <aedc240d-7c9e-248a-52d2-c9775f3e8ca1@acm.org>
+ <20230208134345.77bdep3kzp52haxu@quack3>
+From:   Bart Van Assche <bvanassche@acm.org>
+In-Reply-To: <20230208134345.77bdep3kzp52haxu@quack3>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-Spam-Status: No, score=-2.5 required=5.0 tests=BAYES_00,
+        FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,HEADER_FROM_DIFFERENT_DOMAINS,
+        NICE_REPLY_A,RCVD_IN_DNSWL_NONE,RCVD_IN_MSPIKE_H3,RCVD_IN_MSPIKE_WL,
+        SPF_HELO_NONE,SPF_PASS autolearn=ham autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Wed, Feb 08, 2023 at 06:39:12PM +0100, Krzysztof Kozlowski wrote:
-> On 08/02/2023 18:33, Andy Shevchenko wrote:
+On 2/8/23 05:43, Jan Kara wrote:
+> On Fri 03-02-23 11:45:32, Bart Van Assche wrote:
+>> On 2/2/23 17:48, Hou Tao wrote:
+>>> I don't get it on how to remove IOPRIO_POL_PROMOTION when calculating the final
+>>> ioprio for bio. IOPRIO_POL_PROMOTION is not used for IOPRIO_CLASS values but
+>>> used to determinate on how to calculate the final ioprio for bio: choosing the
+>>> maximum or minimum between blkcg ioprio and original bio bi_ioprio.
+>>
+>> Do the block layer code changes shown below implement the functionality
+>> that you need?
+> 
+> Just one question guys: So with my a78418e6a04c ("block: Always initialize
+> bio IO priority on submit") none-to-rt policy became effectively a noop as
+> Hou properly noticed. Are we aware of any users that were broken by this?
+> Shouldn't we rather fix the code so that none-to-rt starts to operate
+> correctly again? Or maybe change the none-to-rt meaning to be actually
+> promote-to-rt?
+> 
+> I have to admit I'm wondering a bit what was the intended usecase behind
+> the introduction of none-to-rt policy. Can someone elaborate? promote-to-rt
+> makes some sense to me - we have a priviledged cgroup we want to provide
+> low latency access to IO but none-to-rt just does not make much sense to
+> me...
 
-...
+Hi Jan,
 
-> It's not s3c24xx anymore, so subject prefix:
-> ARM: s3c64xx:
+The test results I shared some time ago show that IOPRIO_CLASS_NONE was 
+the default I/O priority two years ago (see also 
+https://lore.kernel.org/linux-block/20210927220328.1410161-5-bvanassche@acm.org/). 
+The none-to-rt policy increases the priority of bio's that have not been 
+assigned an I/O priority to RT. Does this answer your question?
 
-Fixed locally, thanks.
+Thanks,
 
--- 
-With Best Regards,
-Andy Shevchenko
-
+Bart.
 
