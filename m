@@ -2,128 +2,225 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 914C26917CD
-	for <lists+linux-doc@lfdr.de>; Fri, 10 Feb 2023 05:58:31 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id D3B2D691709
+	for <lists+linux-doc@lfdr.de>; Fri, 10 Feb 2023 04:11:41 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S230425AbjBJE63 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 9 Feb 2023 23:58:29 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:46118 "EHLO
+        id S230486AbjBJDLk (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 9 Feb 2023 22:11:40 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:53492 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S230231AbjBJE62 (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Thu, 9 Feb 2023 23:58:28 -0500
-Received: from NAM10-DM6-obe.outbound.protection.outlook.com (mail-dm6nam10on2053.outbound.protection.outlook.com [40.107.93.53])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 581482F783;
-        Thu,  9 Feb 2023 20:58:27 -0800 (PST)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=cFG1MKSphuLkif4b4ZUH2sOp40FbxqrYz39/HhZGRmRWHUMyYkexAYYhjYaP7cz/Q4ddwhDuy9zqtqNNxMWX0zzCDKX13wzqRmHV/YGMSMmK9MMxuszC+/IqfCcEnZ2cGryqIri0WSyZC5PyjeicSlq06do7sI6d+lNOlxaWJBr0SOPzmHdSm8ns6y4qNB+ZaZbaYY7EfOUrXa489iUQeLNuO9oBzRY/XInC5uUS0lb8oyYOzfdnGvFiSzuqd+IBh9yRdlhQIDnXOy1hdlz3zJipCZags4Ex6VsnU86lk5wS8uYeVjhBjMTrsW4MfUE7ODQTDOc6U6iykUwh0HKlGA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=jJnTL4erVwsF2HP40iwReEsEY+8wLkUeZ7c5iGIB0lI=;
- b=DN9Hhx6W9PMrKad/pCfvbYCKShWbC0wLUi5ciobq7lK2Si+CXmC2ggKUfwCVg5GY4yuHHP1+3iiux6NtFzqvtL9PLAsrtjdOyGYnLZr9ZAxMcCh+BwFZSa/jhCQOdlO6RHxAn8zbPoTe7klCu4q0BM+Lr8pyZKtAteI+m4EdVTlJyhYp7RvwiI6/Qdkzck6MtXLeyFmZ9Yzspad0Ug3UyiqESJ28t4zIK0UXowrlj17m+X6U9OxwQm6pMkHCkeR+KQpa8cW3CNN+tqp9rHX5IpN11emd3lH0vmncq+BLjjIUgVk8QqJx+6a8gwgqFKoYUJLBCocxw1u/2OstWu3zBw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=memverge.com; dmarc=pass action=none header.from=memverge.com;
- dkim=pass header.d=memverge.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=memverge.com;
- s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=jJnTL4erVwsF2HP40iwReEsEY+8wLkUeZ7c5iGIB0lI=;
- b=OFZuXiINOeQ8wCqn6vWX70awlN2t5AfNnnv0YDaaKveC5mAC8XYC83fPM1W0gBD2lJdnGMKjEoAMNOBhQ1TSYGlkx3FrDzANFiI5IyLUqOkFt4RsN2GyJ3vyux1jm/LaYnQpovGyITbsplvPVDTai8WQKwFDRFtrYVRMe5DA2v4=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=memverge.com;
-Received: from BN6PR17MB3121.namprd17.prod.outlook.com (2603:10b6:405:7c::19)
- by IA1PR17MB6073.namprd17.prod.outlook.com (2603:10b6:208:3af::5) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6086.19; Fri, 10 Feb
- 2023 04:58:24 +0000
-Received: from BN6PR17MB3121.namprd17.prod.outlook.com
- ([fe80::d253:1eb3:9347:c660]) by BN6PR17MB3121.namprd17.prod.outlook.com
- ([fe80::d253:1eb3:9347:c660%3]) with mapi id 15.20.6086.019; Fri, 10 Feb 2023
- 04:58:23 +0000
-Date:   Thu, 9 Feb 2023 20:27:51 -0500
-From:   Gregory Price <gregory.price@memverge.com>
-To:     Thomas Gleixner <tglx@linutronix.de>
-Cc:     Gregory Price <gourry.memverge@gmail.com>,
-        linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org,
-        oleg@redhat.com, avagin@gmail.com, peterz@infradead.org,
-        luto@kernel.org, krisman@collabora.com, corbet@lwn.net,
-        shuah@kernel.org
-Subject: Re: [PATCH v8 1/1] ptrace,syscall_user_dispatch: checkpoint/restore
- support for SUD
-Message-ID: <Y+Wdl6D41jSdhK9J@memverge.com>
-References: <20230131144458.1980891-1-gregory.price@memverge.com>
- <20230131144458.1980891-2-gregory.price@memverge.com>
- <87edqy1jzf.ffs@tglx>
- <87bkm21jxa.ffs@tglx>
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <87bkm21jxa.ffs@tglx>
-X-ClientProxiedBy: BYAPR06CA0039.namprd06.prod.outlook.com
- (2603:10b6:a03:14b::16) To BN6PR17MB3121.namprd17.prod.outlook.com
- (2603:10b6:405:7c::19)
+        with ESMTP id S229933AbjBJDLf (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Thu, 9 Feb 2023 22:11:35 -0500
+Received: from mail-pj1-x102d.google.com (mail-pj1-x102d.google.com [IPv6:2607:f8b0:4864:20::102d])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 657616D8DE
+        for <linux-doc@vger.kernel.org>; Thu,  9 Feb 2023 19:11:34 -0800 (PST)
+Received: by mail-pj1-x102d.google.com with SMTP id pj3so3972188pjb.1
+        for <linux-doc@vger.kernel.org>; Thu, 09 Feb 2023 19:11:34 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=google.com; s=20210112;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:from:to:cc:subject:date:message-id:reply-to;
+        bh=FEPn77ESYIWVktoaQnjTNLNeGuggpLVq+3vwGPbB35I=;
+        b=A9FhsYH5L9tlz7FGuENUr6v6DJ0Pdfx0p7iGzjX7R0Gna8ecK/roT9qmulSbi7gtAP
+         NFz5I4oDjDOja9RTbcpD3MHImxBZEqfY+8Fz29y+qsrKB9Aig5hPcVIdUfVwXLrA3rGI
+         qxva/GfbPyuJv9NGnQK/PjyV1Ff1bCo8hEwtlKPHrDeCw9QR4caJAiIhy75PdoqFIpQe
+         +6QqRf3HSj2PriO5ZROjJxdlQA+0r7kBHwjdxTMai9rCBvUzyXntT/bOILRwdi7yKxme
+         Jzn7BySHor7oQpPVdy4ldxsRITrjqwOl+rat9pbnxnS7aT7uL4arNvOuN0WFESEn/UpM
+         57cQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=FEPn77ESYIWVktoaQnjTNLNeGuggpLVq+3vwGPbB35I=;
+        b=5iVR+Qe0Bs1YEB16iOIyM1svUKddN6/Dp96xWXY7MwfDfBC3U9PW1kXGYOZ56OonMh
+         GnKBXaXOPhZSdjxU1fYz/lEA31usk8DapmspG1kn1f0+tvaDPdQYYjDgLIEmnZYyUeC/
+         ZZd/Q0tte47AomKNl3ydj3iYsrCXeSlrm31Myo+y5EDlXg8UchoSP1WKoOIS83uBrGX5
+         bpXdc4VHHptkwUXwBWYSzLuJ3abUADXft5A4r6YdxHw5KBNqGpq+Bp3yqYsuREQFBB4g
+         XozurCj0WAqlLphxP1Zaofjixm9FqbWJvcPLPAE1BPCr0Pl2ngjkPX12fuKCFdz1QAeD
+         OvXw==
+X-Gm-Message-State: AO0yUKV1JuYp5pq2cjCHkCTl7PeukdESWpciroM/eh7isR1wn+oRIUkP
+        Q3RRrwKmWA5gJxGDF4oyzlKd/5b1c7lpMxgts6QHJg==
+X-Google-Smtp-Source: AK7set8yU/MGjwR5qOqf8Qi9y4vdL6GPFCeUOpzJJalKny4BBIVqfXxBCIAWk5G1Ff/1zqzNpZO5lS8b3LZGWqlStzI=
+X-Received: by 2002:a17:90a:c70e:b0:230:aa66:1e7c with SMTP id
+ o14-20020a17090ac70e00b00230aa661e7cmr2118157pjt.19.1675998693612; Thu, 09
+ Feb 2023 19:11:33 -0800 (PST)
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BN6PR17MB3121:EE_|IA1PR17MB6073:EE_
-X-MS-Office365-Filtering-Correlation-Id: 80664179-0d10-467c-3f41-08db0b237001
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: VDMDgKwfeERld9RGtSeg3ZlfvzE8lkzRSL0OY83ULc9IcATPVxg28Y9Jl2aBwxjOceVQGCgUH2rSAteJvEBIiXrpsCfmw2QwvDB5Nmse6tb8AZcXy0MaXGWaJO3T8xGQyOmvKdK8GA/y1hMPyXfii/oX3Lo7hiWjps6WEMdyPJ8wEDnmemFQYbxSva9bkef+xFBIOzhtRbpV7b/yw48ZsPWRVctKZJv4AyaF9HmaVh7eV07sGJk8xwuV8a21LVZ7RZ03SUZffpTNWLdZtETTJFrS+bxyZdp45z7YKQXQ4K5CLPPXjbRYXgrnCLe5z+k/qySPzGYsT4TMjcCUlmBwobVjXO8i66QW+nX1IvJpqHqwa7zaxeBo+/+nD/dmTrqa9yGb36wg8RJmfxjRsHSlEfdPFjf+Q6dLA1/wAFOVfsX4b7uSmDO49+v+Sxk9lT+sDGqzcnxDm6+Or0nGC7s2z20EvDkIpEC3qzQNT3DMNSGq0X2FwbFhzhBEVD5utcnBhuYUYean6OxuCZFBkiR+LjxaCalYkPSiM7A2AisUald7XpCX7K265ayWEm6LRBgBopJSeBm1HDQqov7gK35KiT3oGP41QDiLNYDEcOQeonRv4wQd9Ej1ofuI+4XQD7z92Tz37SuCOP8wHbuXU4XUsjWAx+VJypZ1/CCYlnq5yym/fph09ggPlp1L3qtxCoGv
-X-Forefront-Antispam-Report: CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BN6PR17MB3121.namprd17.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230025)(366004)(136003)(346002)(39840400004)(376002)(396003)(451199018)(36756003)(558084003)(83380400001)(38100700002)(186003)(6512007)(26005)(6666004)(478600001)(2906002)(316002)(6486002)(6506007)(7416002)(41300700001)(5660300002)(8936002)(86362001)(44832011)(2616005)(66556008)(66946007)(66476007)(8676002)(4326008)(6916009)(67856001);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?mzSPMzcfwbgzHg/IBXaoWH9JxQ1MBhXiivH5yqODzHeUxUbSJGtZRot872Tr?=
- =?us-ascii?Q?928ieD2un8uKPA9UPD0se6bQ4TaJleKFCq7H5xNcA0RtxABGK4yQMj3qbHew?=
- =?us-ascii?Q?lGMb5DkQuXjMxYeQZIgszIUDCsTpGf25n6ZJICU8erBd/9nvvixVo78N2XrS?=
- =?us-ascii?Q?sVmSkkEeigAirwT1bB7E8dNcvwFMJaJGHBUwUwqIezoBMdRgKPgMVM+NjMfM?=
- =?us-ascii?Q?kq1SJa7R70yPdQ2Kx8IZKSsoa+oBOpf40KV71Wt5ODYW1whu5niisxMC+rZh?=
- =?us-ascii?Q?+26uIWGlc2WaHlhVlWZQrKXnLGUD83BuN1dU3QCOEYVgpCO/NJEfNXxaYkwG?=
- =?us-ascii?Q?29CRbqAWPGUu9Hg2mVTF9a07aGwsDjY4FTrI9eiQVopk7yme7WHZmwl4FjcM?=
- =?us-ascii?Q?SExqHZNdPKrGq3XmvTtP+tqdm5G+xVe1oaSyvQSP3y8pZKnOADaL2Ykg1y4B?=
- =?us-ascii?Q?AjWnKK3zxcqNSoZE/qsA8DXychVBDBAywmlwrjKk/0tEaSy8N8fIDrPHuNFz?=
- =?us-ascii?Q?J5eTPNdxLxJMQApNSMTR2+Ti18zUEoTIEpHA9hCqXPj1EBb3VFiORiKU2fc1?=
- =?us-ascii?Q?9uCiI3LRfttZSWzGCLv6MrABRtpdPpP5+VpkSni5DG0mx211U6qBQMnF4prI?=
- =?us-ascii?Q?eoIinHwxcbWo+iyIdHI2/LlQeP3TUVltUHqFyfTN/0fZz0Ly1H1SiFTjt7Pa?=
- =?us-ascii?Q?YLLNpj2gq2fZqgTJ6kT01uL6VYWFpZBiRPvW00KyFbb6iUQ1XNZldPSd+WoL?=
- =?us-ascii?Q?wkCftgaw41Py56W1VvVNA8APozz7QpaitqYPfkil2punaMCfFmfBXPJyYcH+?=
- =?us-ascii?Q?3jPk7UJsmQHHmdcbb82qwUf1cwU6njugT0xXQ1GYAps8WVm+hzoUZKQwwATk?=
- =?us-ascii?Q?asn6B9iDV7r8yX44ONShjI+w3wjBJgarWUDGxgKtYpWCuJT1BfrpXxRSji/W?=
- =?us-ascii?Q?L4ixtxO4E/iatlJST6poP+x6+SptM3Efh0oqFxFP4/z+V7QZZNkU1mypCewh?=
- =?us-ascii?Q?5ByNE8luh0mo4iU5435hHvdUdWTKWnrGbOoK4x+hHP6IrfswuRofGo0OuhwT?=
- =?us-ascii?Q?l44WPjYzcVsbmhZmfedqfu+AkzuNSWgNArcAO4t3ABN8WDRPAXhISukC7P42?=
- =?us-ascii?Q?Fn3pdr8fMNm6dbRuIQ6enBKClFyMrAhvcgZioX+athhcO2kp4RnAgI74oYPo?=
- =?us-ascii?Q?b7++AFcPQezTPGfcogNKdgHXHItLWJzb8Ck7JGNhbyqeEJ2mwJghS7M3h25t?=
- =?us-ascii?Q?OxiRxQK9q8C5fbH5C2q4F55aO0XTvy0KhYwFAnW/1/XzNB5mjwDLAGkJ539m?=
- =?us-ascii?Q?oIYD9ScCCQRRG7S7tslr359ySJTM72dOs02d2vbGmK8jUd6cJsFgTVOhPWYr?=
- =?us-ascii?Q?F2BpBcVkIpdQzx4pnEmSlbrXr5FafVba4v3P9wqLv4LuS++dq/O5nbnAALDF?=
- =?us-ascii?Q?mDOKS8GVK+tzFq7nMqPKGkCtMmYe1jmv4oXMOFT6qezczVHmp20MkGbz9gUT?=
- =?us-ascii?Q?qLklMogAbk7L13hxwmgytg9Mk7mTmt7C8om0hPadij8/T59zpTHT1PTQC37V?=
- =?us-ascii?Q?DzeG7MNRWZKN7Z6/cKPi6pTLgwZBPNTWdGQV5K8hChISYCixOJoVXq/40q0Z?=
- =?us-ascii?Q?gQ=3D=3D?=
-X-OriginatorOrg: memverge.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 80664179-0d10-467c-3f41-08db0b237001
-X-MS-Exchange-CrossTenant-AuthSource: BN6PR17MB3121.namprd17.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 10 Feb 2023 04:58:23.5510
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 5c90cb59-37e7-4c81-9c07-00473d5fb682
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: Ie6qbxcC46uC+ipn/gkwr5ZTMPjXu2VHDRBnGRKFkRiB98kUdB9cc4db5uNhef+o/BPmPsTWVVEVeyqzeWmkCylhJk0QQPqxvnPsDOvKKE0=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: IA1PR17MB6073
-X-Spam-Status: No, score=0.5 required=5.0 tests=BAYES_00,DATE_IN_PAST_03_06,
-        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FORGED_SPF_HELO,
-        RCVD_IN_DNSWL_NONE,RCVD_IN_MSPIKE_H2,SPF_HELO_PASS,SPF_NONE
-        autolearn=no autolearn_force=no version=3.4.6
+References: <87h6vyr3r9.fsf@meer.lwn.net>
+In-Reply-To: <87h6vyr3r9.fsf@meer.lwn.net>
+From:   Sadiya Kazi <sadiyakazi@google.com>
+Date:   Fri, 10 Feb 2023 08:41:22 +0530
+Message-ID: <CAO2JNKUD-X-=ye5e+EQ2aJ+vQU6iuMR4++cqXOgZYA5kbqWSag@mail.gmail.com>
+Subject: Re: [PATCH v3] docs: improve the HTML sidebar/TOC
+To:     Jonathan Corbet <corbet@lwn.net>
+Cc:     linux-doc@vger.kernel.org, David Gow <davidgow@google.com>,
+        Akira Yokosawa <akiyks@gmail.com>
+Content-Type: text/plain; charset="UTF-8"
+X-Spam-Status: No, score=-17.6 required=5.0 tests=BAYES_00,DKIMWL_WL_MED,
+        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,
+        ENV_AND_HDR_SPF_MATCH,RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,SPF_PASS,
+        USER_IN_DEF_DKIM_WL,USER_IN_DEF_SPF_WL autolearn=ham
+        autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Fri, Feb 10, 2023 at 12:46:41AM +0100, Thomas Gleixner wrote:
-> On Fri, Feb 10 2023 at 00:45, Thomas Gleixner wrote:
-> > I'm neither impressed by this patch nor by the reviews.
-> 
-> I just noticed that this is V8. I'm truly impressed now.
+On Tue, Feb 7, 2023 at 1:00 AM Jonathan Corbet <corbet@lwn.net> wrote:
+>
+> Add a new sidebar template that creates a more RTD-like "fisheye" view of
+> the current place in the document hierarchy.  It is far from ideal, but
+> some readers may find it better for navigating through the documentation as
+> a whole.
+>
+> Add some CSS trickery as well to make the table of contents less intrusive
+> when viewing the pages on a small screen.
+>
+> Signed-off-by: Jonathan Corbet <corbet@lwn.net>
+> ---
+> Changes this time are almost entirely in the small-screen view; I've
+> added some CSS trickery to hide the TOC by default so it doesn't get
+> between readers and what they actually want to see.  I'm sure it could
+> be done more elegantly, but my fluency with CSS ... does not afford much
+> elegance ...
+>
+> Once again, the results are at:
+>
+>   https://static.lwn.net/kerneldoc/
+>
+> This is as far as this work is likely to get before the merge window; in
+> the absence of screams, I'll drop it into linux-next in the near future.
 
-I'll address your feedback, thank you for the review :]
+Thanks Jon! This looks fine to me. Although the font size in the nested
+headings could be increased slightly. But for the time being, this is
+sufficient.
+
+Reviewed-by: Sadiya Kazi <sadiyakazi@google.com>
+
+Regards,
+Sadiya Kazi
+>
+>  Documentation/conf.py                         |  5 +-
+>  Documentation/sphinx-static/custom.css        | 48 ++++++++++++++++++-
+>  .../sphinx/templates/kernel-toc.html          | 15 ++++++
+>  3 files changed, 65 insertions(+), 3 deletions(-)
+>  create mode 100644 Documentation/sphinx/templates/kernel-toc.html
+>
+> diff --git a/Documentation/conf.py b/Documentation/conf.py
+> index d927737e3c10..6c8ccf3095ac 100644
+> --- a/Documentation/conf.py
+> +++ b/Documentation/conf.py
+> @@ -153,7 +153,7 @@ else:
+>      math_renderer = 'mathjax'
+>
+>  # Add any paths that contain templates here, relative to this directory.
+> -templates_path = ['_templates']
+> +templates_path = ['sphinx/templates']
+>
+>  # The suffix(es) of source filenames.
+>  # You can specify multiple suffix as a list of string:
+> @@ -328,6 +328,7 @@ if  html_theme == 'alabaster':
+>          'description': get_cline_version(),
+>          'page_width': '65em',
+>          'sidebar_width': '15em',
+> +        'fixed_sidebar': 'true',
+>          'font_size': 'inherit',
+>          'font_family': 'serif',
+>      }
+> @@ -345,7 +346,7 @@ html_use_smartypants = False
+>
+>  # Custom sidebar templates, maps document names to template names.
+>  # Note that the RTD theme ignores this
+> -html_sidebars = { '**': ['searchbox.html', 'localtoc.html', 'sourcelink.html']}
+> +html_sidebars = { '**': ['searchbox.html', 'kernel-toc.html', 'sourcelink.html']}
+>
+>  # about.html is available for alabaster theme. Add it at the front.
+>  if html_theme == 'alabaster':
+> diff --git a/Documentation/sphinx-static/custom.css b/Documentation/sphinx-static/custom.css
+> index 45a624fdcf2c..539577ac9baa 100644
+> --- a/Documentation/sphinx-static/custom.css
+> +++ b/Documentation/sphinx-static/custom.css
+> @@ -11,7 +11,9 @@ div.body h3 { font-size: 130%; }
+>  /* Tighten up the layout slightly */
+>  div.body { padding: 0 15px 0 10px; }
+>  div.sphinxsidebarwrapper { padding: 1em 0.4em; }
+> -div.sphinxsidebar { font-size: inherit; }
+> +div.sphinxsidebar { font-size: inherit;
+> +                   max-height: 100%;
+> +                   overflow-y: auto; }
+>  /* Tweak document margins and don't force width */
+>  div.document {
+>      margin: 20px 10px 0 10px;
+> @@ -27,3 +29,47 @@ dl.function, dl.struct, dl.enum { margin-top: 2em; background-color: #ecf0f3; }
+>  dl.function dt { margin-left: 10em; text-indent: -10em; }
+>  dt.sig-object { font-size: larger; }
+>  div.kernelindent { margin-left: 2em; margin-right: 4em; }
+> +
+> +/*
+> + * Tweaks for our local TOC
+> + */
+> +div.kerneltoc li.toctree-l1 { font-size: smaller;
+> +               text-indent: -1em;
+> +               margin-left: 1em; }
+> +div.kerneltoc li.current > a {font-weight: bold; }
+> +div.kerneltoc li.toctree-l2,li.toctree-l3 { font-size: smaller;
+> +               text-indent: -1em;
+> +               margin-left: 2em;
+> +               list-style-type: none;
+> +             }
+> +div.kerneltoc li.current ul { margin-left: 0; }
+> +div.kerneltoc { background-color: #eeeeee; }
+> +div.kerneltoc li.current ul { background-color: white; }
+> +
+> +/*
+> + * The CSS magic to toggle the contents on small screens.
+> + */
+> +label.kernel-toc-title { display: none; }
+> +label.kernel-toc-title:after {
+> +    content: "[Hide]";
+> +}
+> +input[type=checkbox]:checked ~ label.kernel-toc-title:after {
+> +    content: "[Show]";
+> +}
+> +/* Hide the toggle on large screens */
+> +input.kernel-toc-toggle { display: none; }
+> +
+> +/*
+> + * Show and implement the toggle on small screens.
+> + * The 875px width seems to be wired into alabaster.
+> + */
+> +@media screen and (max-width: 875px) {
+> +    label.kernel-toc-title { display: inline;
+> +                            font-weight: bold;
+> +                            font-size: larger; }
+> +    input[type=checkbox]:checked ~ div.kerneltoc {
+> +       display: none;
+> +    }
+> +    h3.kernel-toc-contents { display: inline; }
+> +    div.kerneltoc a { color: black; }
+> +}
+> diff --git a/Documentation/sphinx/templates/kernel-toc.html b/Documentation/sphinx/templates/kernel-toc.html
+> new file mode 100644
+> index 000000000000..b124f6cfa558
+> --- /dev/null
+> +++ b/Documentation/sphinx/templates/kernel-toc.html
+> @@ -0,0 +1,15 @@
+> +{# Create a local TOC the kernel way #}
+> +<p>
+> +<h3 class="kernel-toc-contents">Contents</h3>
+> +<input type="checkbox" class="kernel-toc-toggle" id = "kernel-toc-toggle" checked>
+> +<label class="kernel-toc-title" for="kernel-toc-toggle"></label>
+> +
+> +<div class="kerneltoc" id="kerneltoc">
+> +{{ toctree(maxdepth=3) }}
+> +</div>
+> +{# hacky script to try to position the left column #}
+> +<script type="text/javascript"> <!--
+> +  var sbar = document.getElementsByClassName("sphinxsidebar")[0];
+> +  let currents = document.getElementsByClassName("current")
+> +  sbar.scrollTop = currents[currents.length - 1].offsetTop;
+> +  --> </script>
+> --
+> 2.39.1
+>
