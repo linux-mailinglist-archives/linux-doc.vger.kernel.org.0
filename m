@@ -2,131 +2,104 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id B77BA696FB2
-	for <lists+linux-doc@lfdr.de>; Tue, 14 Feb 2023 22:28:30 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 530FA697043
+	for <lists+linux-doc@lfdr.de>; Tue, 14 Feb 2023 23:01:59 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S233147AbjBNV21 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 14 Feb 2023 16:28:27 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:52644 "EHLO
+        id S233179AbjBNWB6 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 14 Feb 2023 17:01:58 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:51840 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S233252AbjBNV2M (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 14 Feb 2023 16:28:12 -0500
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 38000305E5;
-        Tue, 14 Feb 2023 13:27:43 -0800 (PST)
-Received: from pps.filterd (m0279862.ppops.net [127.0.0.1])
-        by mx0a-0031df01.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id 31EIkJHP026229;
-        Tue, 14 Feb 2023 21:26:49 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=quicinc.com; h=from : to : cc :
- subject : date : message-id : in-reply-to : references : mime-version :
- content-transfer-encoding : content-type; s=qcppdkim1;
- bh=7XTX0e1TwxXGq+VYRxBWfDoOgRwXEaT0/Dy/Kzxe1fQ=;
- b=fBjjsuAZlEUFIpWE5ZvUeLhLRDyz75fSHsy7ADf2+PwJQenQ9KCaI8enFqrq0tZnV7x5
- /ulruR+40pK6SdrQtgKvO5lMysZRICI7xJUjqsif4qh1ECUjtXvWX0vH+GIBDFFLyKkK
- tHQOT55IHTknkqEwJrmOGjlosUr8m8SiGfWwZTggTp/AAI4Kg4ywpXqerp3BuFttjHG1
- aIi0k5HJzEs0HcPXBYbCBUjJsfJT3I5lAiHfWnMzt7SN/3w/bBhtwRkJLN0s4t3K3aNM
- WXfgYD7eRyLOI1/wvPtQkkfUkVUccuqcWbIzGDmWPMSIJGU4s5VQ43olNMI5dHthLy3t xQ== 
-Received: from nasanppmta01.qualcomm.com (i-global254.qualcomm.com [199.106.103.254])
-        by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 3nqyygtu03-1
-        (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
-        Tue, 14 Feb 2023 21:26:49 +0000
-Received: from nasanex01b.na.qualcomm.com (nasanex01b.na.qualcomm.com [10.46.141.250])
-        by NASANPPMTA01.qualcomm.com (8.17.1.5/8.17.1.5) with ESMTPS id 31ELQnJH012177
-        (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
-        Tue, 14 Feb 2023 21:26:49 GMT
-Received: from hu-eberman-lv.qualcomm.com (10.49.16.6) by
- nasanex01b.na.qualcomm.com (10.46.141.250) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.986.36; Tue, 14 Feb 2023 13:26:48 -0800
-From:   Elliot Berman <quic_eberman@quicinc.com>
-To:     Alex Elder <elder@linaro.org>,
-        Srinivas Kandagatla <srinivas.kandagatla@linaro.org>
-CC:     Elliot Berman <quic_eberman@quicinc.com>,
-        Murali Nalajala <quic_mnalajal@quicinc.com>,
-        Trilok Soni <quic_tsoni@quicinc.com>,
-        "Srivatsa Vaddagiri" <quic_svaddagi@quicinc.com>,
-        Carl van Schaik <quic_cvanscha@quicinc.com>,
-        Prakruthi Deepak Heragu <quic_pheragu@quicinc.com>,
-        Dmitry Baryshkov <dmitry.baryshkov@linaro.org>,
-        Bjorn Andersson <andersson@kernel.org>,
-        Konrad Dybcio <konrad.dybcio@linaro.org>,
-        Arnd Bergmann <arnd@arndb.de>,
-        Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
-        Rob Herring <robh+dt@kernel.org>,
-        "Krzysztof Kozlowski" <krzysztof.kozlowski+dt@linaro.org>,
-        Jonathan Corbet <corbet@lwn.net>,
-        Bagas Sanjaya <bagasdotme@gmail.com>,
-        Catalin Marinas <catalin.marinas@arm.com>,
-        Jassi Brar <jassisinghbrar@gmail.com>,
-        <linux-arm-msm@vger.kernel.org>, <devicetree@vger.kernel.org>,
-        <linux-kernel@vger.kernel.org>, <linux-doc@vger.kernel.org>,
-        <linux-arm-kernel@lists.infradead.org>
-Subject: [PATCH v10 26/26] MAINTAINERS: Add Gunyah hypervisor drivers section
-Date:   Tue, 14 Feb 2023 13:26:40 -0800
-Message-ID: <20230214212640.3331636-1-quic_eberman@quicinc.com>
+        with ESMTP id S233137AbjBNWB5 (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 14 Feb 2023 17:01:57 -0500
+Received: from mail-wm1-x334.google.com (mail-wm1-x334.google.com [IPv6:2a00:1450:4864:20::334])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 26F49EB57;
+        Tue, 14 Feb 2023 14:01:52 -0800 (PST)
+Received: by mail-wm1-x334.google.com with SMTP id f23-20020a05600c491700b003dff4480a17so1510430wmp.1;
+        Tue, 14 Feb 2023 14:01:52 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=qMXnw1VQbx8Sv6EwiMKN2CItMHbinEY7o7yRWkmdY/w=;
+        b=FXSyug5ZkRqNz85G/mIciOh6KEJc19RzIJFXXm1I21jfpEbb3bTXbqeKCsp+6Swrt6
+         pRVwPLI3K5z9PLANI39ojOhskzW2C6WqnTym9AHPyappb3ZALXfE0IFZ9Reue4Ljb1nA
+         s7v/VquL9ZYV8Gu+t1EuZonlNg17UgJuVf5wwC0GXzAy8/D2LRs4r62y304qfjvheqlR
+         s5vL2wKCrZX+2ZWIjwqJseCGsVhWMkV43gTOY3vIRHN3uOuKMVHwTr7h4nI4g1sh9a1k
+         p5YHSKdTVIXyu+etWOmOsOTa/TmuyxV4plw5RdBMZaIpbilplZ/W1kOlyi4h5S4gvKRW
+         D1EQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=qMXnw1VQbx8Sv6EwiMKN2CItMHbinEY7o7yRWkmdY/w=;
+        b=5WNjmEf1sI1DHDTyD6jiQ7Q7pMwtL8LAZnicPERUY7Bpr+hZajbO1dKhOoMEO77Gwx
+         QLO/OCwmm8eNk3Hh2y1n1a0hLKGrDh0K2jQQMtoMDkKln8UoRDcSIOj9hWV/CFLBzPQn
+         axAcWAPZ6m4nNcAi8XJ8CBfbi47JploE7ugWf+lZoCuU0ZkRGb5Y7+R0mr5CYJdIITzP
+         Zr/OZarABTbk7WQQAIjLQjLTjh3Ws2pyDlHAOFiCGWzNsRBNX5FsbcHyg3q65N4ePPg5
+         oFM5ANjBMAfxMZtxaZ0gr1NNJf4JvMKiRnTCGtnHifeWcxIBNt0yw+mTdwj0BQMkdG38
+         JXPA==
+X-Gm-Message-State: AO0yUKXWu5K+eXsHGdNQtb81hTBNidGbi99+83WDBSmV+V/yFZmfIf3g
+        J4FEWedy2TZjVqbm5pI7upxkMiC70us=
+X-Google-Smtp-Source: AK7set/tM8s2RiEJEMN6uWf3UY9LrrDzG6rIpTwhNfcePgvPj/sWGT5FXFUz75ht5huBgV4hLdecwQ==
+X-Received: by 2002:a05:600c:539b:b0:3db:1ab:b91b with SMTP id hg27-20020a05600c539b00b003db01abb91bmr295735wmb.15.1676412110535;
+        Tue, 14 Feb 2023 14:01:50 -0800 (PST)
+Received: from localhost.localdomain ([2001:9e8:20f2:3300:c2d2:a008:b022:b1e0])
+        by smtp.gmail.com with ESMTPSA id u14-20020adff88e000000b002c56046a3b5sm4033704wrp.53.2023.02.14.14.01.48
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 14 Feb 2023 14:01:49 -0800 (PST)
+From:   Leonard Anderweit <leonard.anderweit@gmail.com>
+To:     linux-hwmon@vger.kernel.org
+Cc:     Aleksa Savic <savicaleksa83@gmail.com>,
+        Jack Doan <me@jackdoan.com>, Jean Delvare <jdelvare@suse.com>,
+        Guenter Roeck <linux@roeck-us.net>,
+        Jonathan Corbet <corbet@lwn.net>, linux-doc@vger.kernel.org,
+        linux-kernel@vger.kernel.org,
+        Leonard Anderweit <leonard.anderweit@gmail.com>
+Subject: [PATCH v2 0/6] hwmon: (aquacomputer_d5next) Add Aquacomputer Aquaero control
+Date:   Tue, 14 Feb 2023 23:02:15 +0100
+Message-Id: <20230214220221.15003-1-leonard.anderweit@gmail.com>
 X-Mailer: git-send-email 2.39.1
-In-Reply-To: <20230214211229.3239350-1-quic_eberman@quicinc.com>
-References: <20230214211229.3239350-1-quic_eberman@quicinc.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Originating-IP: [10.49.16.6]
-X-ClientProxiedBy: nalasex01a.na.qualcomm.com (10.47.209.196) To
- nasanex01b.na.qualcomm.com (10.46.141.250)
-X-QCInternal: smtphost
-X-Proofpoint-Virus-Version: vendor=nai engine=6200 definitions=5800 signatures=585085
-X-Proofpoint-ORIG-GUID: 88X3Qd1CaS7F1kwT5bTare4h6J3m4_xH
-X-Proofpoint-GUID: 88X3Qd1CaS7F1kwT5bTare4h6J3m4_xH
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.219,Aquarius:18.0.930,Hydra:6.0.562,FMLib:17.11.170.22
- definitions=2023-02-14_15,2023-02-14_01,2023-02-09_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 suspectscore=0 phishscore=0
- impostorscore=0 malwarescore=0 adultscore=0 mlxlogscore=938 mlxscore=0
- priorityscore=1501 lowpriorityscore=0 spamscore=0 bulkscore=0
- clxscore=1015 classifier=spam adjust=0 reason=mlx scancount=1
- engine=8.12.0-2212070000 definitions=main-2302140184
-X-Spam-Status: No, score=-2.8 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_LOW,SPF_HELO_NONE,
-        SPF_PASS autolearn=ham autolearn_force=no version=3.4.6
+X-Spam-Status: No, score=-2.1 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_FROM,
+        RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,SPF_PASS autolearn=ham
+        autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
+Add support for controlling the Aquacomputer Aquaero 5/6 fan controllers. The
+controllable settings include temperature offsets and fan PWM.
 
-Add myself and Prakruthi as maintainers of Gunyah hypervisor drivers.
+The first four patches expand the capabilities of the control system without
+changing functionality. Patches 4-6 add support for Aquaero control.
 
-Signed-off-by: Prakruthi Deepak Heragu <quic_pheragu@quicinc.com>
-Signed-off-by: Elliot Berman <quic_eberman@quicinc.com>
----
- MAINTAINERS | 13 +++++++++++++
- 1 file changed, 13 insertions(+)
+changelog:
+v2:
+ - split original patch 3 into three patches to have one logical change each
+ - explain why Aquaero does not need the checksum
+ - improve wording of documentation
+ - drop last patch with pwmX_mode
 
-diff --git a/MAINTAINERS b/MAINTAINERS
-index 539d9359385c..fe6645099395 100644
---- a/MAINTAINERS
-+++ b/MAINTAINERS
-@@ -8913,6 +8913,19 @@ L:	linux-efi@vger.kernel.org
- S:	Maintained
- F:	block/partitions/efi.*
- 
-+GUNYAH HYPERVISOR DRIVER
-+M:	Elliot Berman <quic_eberman@quicinc.com>
-+M:	Prakruthi Deepak Heragu <quic_pheragu@quicinc.com>
-+L:	linux-arm-msm@vger.kernel.org
-+S:	Supported
-+F:	Documentation/devicetree/bindings/firmware/gunyah-hypervisor.yaml
-+F:	Documentation/virt/gunyah/
-+F:	arch/arm64/gunyah/
-+F:	drivers/mailbox/gunyah-msgq.c
-+F:	drivers/virt/gunyah/
-+F:	include/linux/gunyah*.h
-+F:	samples/gunyah/
-+
- HABANALABS PCI DRIVER
- M:	Oded Gabbay <ogabbay@kernel.org>
- L:	dri-devel@lists.freedesktop.org
+Leonard Anderweit (6):
+  hwmon: (aquacomputer_d5next) Support one byte control values
+  hwmon: (aquacomputer_d5next) Support writing multiple control values
+    at once
+  hwmon: (aquacomputer_d5next) Device dependent control report settings
+  hwmon: (aquacomputer_d5next) Add infrastructure for Aquaero control
+    reports
+  hwmon: (aquacomputer_d5next) Add temperature offset control for
+    Aquaero
+  hwmon: (aquacomputer_d5next) Add fan PWM control for Aquaero
+
+ Documentation/hwmon/aquacomputer_d5next.rst |   5 +-
+ drivers/hwmon/aquacomputer_d5next.c         | 182 ++++++++++++++++----
+ 2 files changed, 155 insertions(+), 32 deletions(-)
+
 -- 
 2.39.1
 
