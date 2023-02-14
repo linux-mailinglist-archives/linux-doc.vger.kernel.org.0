@@ -2,240 +2,465 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 322DF695848
-	for <lists+linux-doc@lfdr.de>; Tue, 14 Feb 2023 06:15:21 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 411FB6958DB
+	for <lists+linux-doc@lfdr.de>; Tue, 14 Feb 2023 07:10:19 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S231569AbjBNFOr (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 14 Feb 2023 00:14:47 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:46176 "EHLO
+        id S229798AbjBNGKQ (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 14 Feb 2023 01:10:16 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:41792 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S231462AbjBNFOm (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 14 Feb 2023 00:14:42 -0500
-Received: from mx0b-0016f401.pphosted.com (mx0a-0016f401.pphosted.com [67.231.148.174])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 573AC30EF;
-        Mon, 13 Feb 2023 21:14:40 -0800 (PST)
-Received: from pps.filterd (m0045849.ppops.net [127.0.0.1])
-        by mx0a-0016f401.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id 31E53xGm028903;
-        Mon, 13 Feb 2023 21:14:35 -0800
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=marvell.com; h=from : to : cc :
- subject : date : message-id : in-reply-to : references : mime-version :
- content-transfer-encoding : content-type; s=pfpt0220;
- bh=CjNanjOJsaONWAVcBLd93QXnEsPFhbNUqAV97KKAbnk=;
- b=Eh9ZkGRdnpfmEU87ew4y8JZHdJQ2NAnWdTQbrmBoyBhLcTXFj9jyHY6BZ3xvbVXhsQ+f
- A7PmmjgYIntv7sCz6wJuWq3y5w3ydO6KTw1ac0Jk+3GMW4X0VZ3t+ZG5N1hC5q82E0zp
- U5d1ZwNfmy52ACdByvI9p9Bqq/gcPpLWF6ZSCV9KdDFzcqvwlE6Gi6y8DfU55Kk68I66
- 4cDACmZkpXpFvl87OsuF8ZRZ8mKtPqL0T8AORPQN2zsEeNA97awu0oYmwFyEcfDvk7Dv
- tD4GNka7ReFwTW33y0BiC1XOTyIdW3OQXkQ2Dho6y3nxE6pSEVtmSTbedLJGRZK2BKt3 dg== 
-Received: from dc5-exch02.marvell.com ([199.233.59.182])
-        by mx0a-0016f401.pphosted.com (PPS) with ESMTPS id 3np98upmph-2
-        (version=TLSv1.2 cipher=ECDHE-RSA-AES256-SHA384 bits=256 verify=NOT);
-        Mon, 13 Feb 2023 21:14:34 -0800
-Received: from DC5-EXCH02.marvell.com (10.69.176.39) by DC5-EXCH02.marvell.com
- (10.69.176.39) with Microsoft SMTP Server (TLS) id 15.0.1497.42; Mon, 13 Feb
- 2023 21:14:33 -0800
-Received: from maili.marvell.com (10.69.176.80) by DC5-EXCH02.marvell.com
- (10.69.176.39) with Microsoft SMTP Server id 15.0.1497.42 via Frontend
- Transport; Mon, 13 Feb 2023 21:14:33 -0800
-Received: from sburla-PowerEdge-T630.caveonetworks.com (unknown [10.106.27.217])
-        by maili.marvell.com (Postfix) with ESMTP id 4E52C3F707A;
-        Mon, 13 Feb 2023 21:14:33 -0800 (PST)
-From:   Veerasenareddy Burru <vburru@marvell.com>
-To:     <netdev@vger.kernel.org>, <linux-kernel@vger.kernel.org>,
-        <aayarekar@marvell.com>, <sedara@marvell.com>, <sburla@marvell.com>
-CC:     <linux-doc@vger.kernel.org>,
-        Veerasenareddy Burru <vburru@marvell.com>,
-        "David S. Miller" <davem@davemloft.net>,
-        Eric Dumazet <edumazet@google.com>,
-        Jakub Kicinski <kuba@kernel.org>,
-        Paolo Abeni <pabeni@redhat.com>
-Subject: [PATCH net-next v3 7/7] octeon_ep: add heartbeat monitor
-Date:   Mon, 13 Feb 2023 21:14:22 -0800
-Message-ID: <20230214051422.13705-8-vburru@marvell.com>
-X-Mailer: git-send-email 2.36.0
-In-Reply-To: <20230214051422.13705-1-vburru@marvell.com>
-References: <20230214051422.13705-1-vburru@marvell.com>
+        with ESMTP id S230117AbjBNGKP (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 14 Feb 2023 01:10:15 -0500
+Received: from mail-pf1-x432.google.com (mail-pf1-x432.google.com [IPv6:2607:f8b0:4864:20::432])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 4983EC658
+        for <linux-doc@vger.kernel.org>; Mon, 13 Feb 2023 22:10:11 -0800 (PST)
+Received: by mail-pf1-x432.google.com with SMTP id y25so231904pfw.11
+        for <linux-doc@vger.kernel.org>; Mon, 13 Feb 2023 22:10:11 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=rivosinc-com.20210112.gappssmtp.com; s=20210112;
+        h=in-reply-to:content-disposition:mime-version:references:message-id
+         :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+        bh=NG4gcbUUK30ZHhhVbfm4gzBvWsoUmaEF9T4G8HFC5DU=;
+        b=imc+WDA64o/oCZFfk+tk7K24NCVK59euUCIFuRoHhcwxXrhR58u+VydiYPBt1jdoh9
+         xxrvRYiFQdB8N2yDX7rHkHANnRRm7US53h7EUC9hRO7lo6NFDLRuvPuAlVIhTQujpsUL
+         IyQegsZbYlKPSQ/3ou44CTHTppHMiqCF5SPPOJ7SKpnzHt8cai6tQiwEj3fH4PPetk2E
+         Kf3fskCHTb7bOfDHQsne4YBol5eN0j6zYx/9QcD4hmoWAtmhyZBZIpF4M2GhnPPsVN9p
+         QbK9CDDCh9V3V9jyIpCl/n+053EEAvLW5DP8VdA9eoa+gkdE5WLOXLTKz1m2B3NFvj04
+         clCA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=in-reply-to:content-disposition:mime-version:references:message-id
+         :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=NG4gcbUUK30ZHhhVbfm4gzBvWsoUmaEF9T4G8HFC5DU=;
+        b=aGSY6DMMgd/0R76WFWyUPS1nNaR55SodVdmVjw1urG0BR/yKUw75ZO1l89URzAOuKS
+         xA0/yNeP1RQOldwZ+QQHYDr86QE0i5oVMrPmQp7Jqz3XB3QeJXR1j227dm+12Ru+ZiE/
+         KhroaAFkjqqBzmc0vc0d1g0yyVzJhVh4QLRVhKKUxONQY+MrnDiz8bl+4ckBxUhm3rHs
+         lIcPZdPbmRKV8VNkZsFb33ETRL5NwWCzSUFIak84TOlQWpNlUutmCbUvDcLy6fV/uPhb
+         VDTzOUSAq7IjjeLRlFvXSpFF/1HG4kJxO0a9x9uROc7I/GrSoMrdlhjwaI3nhymg+D73
+         OTtw==
+X-Gm-Message-State: AO0yUKXKOLJVJDSNdxWn5YdWVYWNN6XaP2MpxFBBoVUJd+MFmRkTr3oR
+        Q0Jgfv4bjSRDkeWXx9I7H0ctXg==
+X-Google-Smtp-Source: AK7set8EpHinXKztvT8UlqHA6mo7YSo/ZczyCzuoRhPTml/zlOTu5lm33Qc63djl+IVA2FPiFzFkpA==
+X-Received: by 2002:a62:1b47:0:b0:5a8:b1bc:4ac4 with SMTP id b68-20020a621b47000000b005a8b1bc4ac4mr1173950pfb.4.1676355010515;
+        Mon, 13 Feb 2023 22:10:10 -0800 (PST)
+Received: from debug.ba.rivosinc.com ([66.220.2.162])
+        by smtp.gmail.com with ESMTPSA id w3-20020aa78583000000b0058e24050648sm9222236pfn.12.2023.02.13.22.10.08
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 13 Feb 2023 22:10:09 -0800 (PST)
+Date:   Mon, 13 Feb 2023 22:10:07 -0800
+From:   Deepak Gupta <debug@rivosinc.com>
+To:     "Edgecombe, Rick P" <rick.p.edgecombe@intel.com>
+Cc:     "bsingharora@gmail.com" <bsingharora@gmail.com>,
+        "hpa@zytor.com" <hpa@zytor.com>,
+        "Syromiatnikov, Eugene" <esyr@redhat.com>,
+        "peterz@infradead.org" <peterz@infradead.org>,
+        "rdunlap@infradead.org" <rdunlap@infradead.org>,
+        "keescook@chromium.org" <keescook@chromium.org>,
+        "Yu, Yu-cheng" <yu-cheng.yu@intel.com>,
+        "dave.hansen@linux.intel.com" <dave.hansen@linux.intel.com>,
+        "kirill.shutemov@linux.intel.com" <kirill.shutemov@linux.intel.com>,
+        "Eranian, Stephane" <eranian@google.com>,
+        "linux-mm@kvack.org" <linux-mm@kvack.org>,
+        "fweimer@redhat.com" <fweimer@redhat.com>,
+        "nadav.amit@gmail.com" <nadav.amit@gmail.com>,
+        "jannh@google.com" <jannh@google.com>,
+        "dethoma@microsoft.com" <dethoma@microsoft.com>,
+        "kcc@google.com" <kcc@google.com>,
+        "linux-arch@vger.kernel.org" <linux-arch@vger.kernel.org>,
+        "bp@alien8.de" <bp@alien8.de>, "oleg@redhat.com" <oleg@redhat.com>,
+        "hjl.tools@gmail.com" <hjl.tools@gmail.com>,
+        "pavel@ucw.cz" <pavel@ucw.cz>,
+        "Lutomirski, Andy" <luto@kernel.org>,
+        "linux-doc@vger.kernel.org" <linux-doc@vger.kernel.org>,
+        "arnd@arndb.de" <arnd@arndb.de>,
+        "tglx@linutronix.de" <tglx@linutronix.de>,
+        "Schimpe, Christina" <christina.schimpe@intel.com>,
+        "mike.kravetz@oracle.com" <mike.kravetz@oracle.com>,
+        "x86@kernel.org" <x86@kernel.org>,
+        "Yang, Weijiang" <weijiang.yang@intel.com>,
+        "jamorris@linux.microsoft.com" <jamorris@linux.microsoft.com>,
+        "john.allen@amd.com" <john.allen@amd.com>,
+        "rppt@kernel.org" <rppt@kernel.org>,
+        "andrew.cooper3@citrix.com" <andrew.cooper3@citrix.com>,
+        "mingo@redhat.com" <mingo@redhat.com>,
+        "corbet@lwn.net" <corbet@lwn.net>,
+        "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
+        "linux-api@vger.kernel.org" <linux-api@vger.kernel.org>,
+        "gorcunov@gmail.com" <gorcunov@gmail.com>,
+        "akpm@linux-foundation.org" <akpm@linux-foundation.org>
+Subject: Re: [PATCH v5 19/39] mm: Fixup places that call pte_mkwrite()
+ directly
+Message-ID: <20230214061007.GC4016181@debug.ba.rivosinc.com>
+References: <20230119212317.8324-1-rick.p.edgecombe@intel.com>
+ <20230119212317.8324-20-rick.p.edgecombe@intel.com>
+ <20230214000947.GB4016181@debug.ba.rivosinc.com>
+ <1dd1c61c69739fde6db445df79ebbbbec0efe8cd.camel@intel.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Proofpoint-GUID: bwvxFCwIOXgPVqu1Eq8AHur0K0EWs5Qu
-X-Proofpoint-ORIG-GUID: bwvxFCwIOXgPVqu1Eq8AHur0K0EWs5Qu
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.219,Aquarius:18.0.930,Hydra:6.0.562,FMLib:17.11.170.22
- definitions=2023-02-14_03,2023-02-13_01,2023-02-09_01
-X-Spam-Status: No, score=-2.8 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_LOW,SPF_HELO_NONE,
-        SPF_NONE autolearn=ham autolearn_force=no version=3.4.6
+Content-Type: text/plain; charset=us-ascii; format=flowed
+Content-Disposition: inline
+In-Reply-To: <1dd1c61c69739fde6db445df79ebbbbec0efe8cd.camel@intel.com>
+X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+        DKIM_VALID,RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,SPF_PASS
+        autolearn=unavailable autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Monitor periodic heartbeat messages from device firmware.
-Presence of heartbeat indicates the device is active and running.
-If the heartbeat is missed for configured interval indicates
-firmware has crashed and device is unusable; in this case, PF driver
-stops and uninitialize the device.
+On Tue, Feb 14, 2023 at 01:07:24AM +0000, Edgecombe, Rick P wrote:
+>On Mon, 2023-02-13 at 16:09 -0800, Deepak Gupta wrote:
+>> Since I've a general question on outcome of discussion of how to
+>> handle
+>> `pte_mkwrite`, so I am top posting.
+>>
+>> I have posted patches yesterday targeting riscv zisslpcfi extension.
+>>
+>https://lore.kernel.org/lkml/20230213045351.3945824-1-debug@rivosinc.com/
+>>
+>> Since there're similarities in extension(s), patches have similarity
+>> too.
+>> One of the similarity was updating `maybe_mkwrite`. I was asked (by
+>> dhildenb
+>> on my patch #11) to look at x86 approach on how to approach this so
+>> that
+>> core-mm approach fits multiple architectures along with the need to
+>> update `pte_mkwrite` to consume vma flags.
+>> In x86 CET patch series, I see that locations where `pte_mkwrite` is
+>> invoked are updated to check for shadow stack vma and not necessarily
+>> `pte_mkwrite` itself is updated to consume vma flags. Let me know if
+>> my
+>> understanding is correct and that's the current direction (to update
+>> call sites for vma check where `pte_mkwrite` is invoked)
+>>
+>> Being said that as I've mentioned in my patch series that there're
+>> similarities between x86, arm and now riscv for implementing shadow
+>> stack
+>> and indirect branch tracking, overall it'll be a good thing if we can
+>> collaborate and come up with common bits.
+>
+>Oh interesting. I've made the changes to have pte_mkwrite() take a VMA.
+>It seems to work pretty well with the core MM code, but I'm letting 0-
+>day chew on it for a bit because it touched so many arch's. I'll
+>include you when I send it out, hopefully later this week.
 
-Signed-off-by: Veerasenareddy Burru <vburru@marvell.com>
-Signed-off-by: Abhijit Ayarekar <aayarekar@marvell.com>
----
-v2 -> v3:
- * 0009-xxx.patch in v2 is now 0007-xxx.patch in v3 due to
-   0007 and 0008.patch from v2 are removed in v3.
+Thanks.
+>
+>From just a quick look, I see some design aspects that have been
+>problematic on the x86 implementation.
+>
+>There was something like PROT_SHADOW_STACK before, but there were two
+>problems:
+>1. Writable windows while provisioning restore tokens (maybe this is
+>just an x86 thing)
+>2. Adding guard pages when a shadow stack was mprotect()ed to change it
+>from writable to shadow stack. Again this might be an x86 need, since
+>it needed to have it writable to add a restore token, and the guard
+>pages help with security.
 
-v1 -> v2:
- * no change
+I've not seen your earlier patch but I am assuming when you say window you
+mean that shadow stack was open to regular stores (or I may be missing
+something here)
 
- .../marvell/octeon_ep/octep_cn9k_pf.c         |  9 +++++
- .../ethernet/marvell/octeon_ep/octep_config.h |  6 +++
- .../ethernet/marvell/octeon_ep/octep_main.c   | 37 +++++++++++++++++++
- .../ethernet/marvell/octeon_ep/octep_main.h   |  7 ++++
- .../marvell/octeon_ep/octep_regs_cn9k_pf.h    |  2 +
- 5 files changed, 61 insertions(+)
+I am wondering if mapping it as shadow stack (instead of having temporary
+writeable mapping) and using `wruss` was an option to put the token or
+you wanted to avoid it?
 
-diff --git a/drivers/net/ethernet/marvell/octeon_ep/octep_cn9k_pf.c b/drivers/net/ethernet/marvell/octeon_ep/octep_cn9k_pf.c
-index c82a1347eed8..7095595483bf 100644
---- a/drivers/net/ethernet/marvell/octeon_ep/octep_cn9k_pf.c
-+++ b/drivers/net/ethernet/marvell/octeon_ep/octep_cn9k_pf.c
-@@ -16,6 +16,9 @@
- #define CTRL_MBOX_MAX_PF	128
- #define CTRL_MBOX_SZ		((size_t)(0x400000 / CTRL_MBOX_MAX_PF))
- 
-+#define FW_HB_INTERVAL_IN_SECS		1
-+#define FW_HB_MISS_COUNT		10
-+
- /* Names of Hardware non-queue generic interrupts */
- static char *cn93_non_ioq_msix_names[] = {
- 	"epf_ire_rint",
-@@ -249,6 +252,10 @@ static void octep_init_config_cn93_pf(struct octep_device *oct)
- 	conf->ctrl_mbox_cfg.barmem_addr = (void __iomem *)oct->mmio[2].hw_addr +
- 					   (0x400000ull * 8) +
- 					   (link * CTRL_MBOX_SZ);
-+
-+	conf->hb_interval = FW_HB_INTERVAL_IN_SECS;
-+	conf->max_hb_miss_cnt = FW_HB_MISS_COUNT;
-+
- }
- 
- /* Setup registers for a hardware Tx Queue  */
-@@ -383,6 +390,8 @@ static int octep_poll_non_ioq_interrupts_cn93_pf(struct octep_device *oct)
- 		octep_write_csr64(oct, CN93_SDP_EPF_OEI_RINT, reg0);
- 		if (reg0 & CN93_SDP_EPF_OEI_RINT_DATA_BIT_MBOX)
- 			queue_work(octep_wq, &oct->ctrl_mbox_task);
-+		else if (reg0 & CN93_SDP_EPF_OEI_RINT_DATA_BIT_HBEAT)
-+			atomic_set(&oct->hb_miss_cnt, 0);
- 
- 		handled = 1;
- 	}
-diff --git a/drivers/net/ethernet/marvell/octeon_ep/octep_config.h b/drivers/net/ethernet/marvell/octeon_ep/octep_config.h
-index f208f3f9a447..df7cd39d9fce 100644
---- a/drivers/net/ethernet/marvell/octeon_ep/octep_config.h
-+++ b/drivers/net/ethernet/marvell/octeon_ep/octep_config.h
-@@ -200,5 +200,11 @@ struct octep_config {
- 
- 	/* ctrl mbox config */
- 	struct octep_ctrl_mbox_config ctrl_mbox_cfg;
-+
-+	/* Configured maximum heartbeat miss count */
-+	u32 max_hb_miss_cnt;
-+
-+	/* Configured firmware heartbeat interval in secs */
-+	u32 hb_interval;
- };
- #endif /* _OCTEP_CONFIG_H_ */
-diff --git a/drivers/net/ethernet/marvell/octeon_ep/octep_main.c b/drivers/net/ethernet/marvell/octeon_ep/octep_main.c
-index b0f80ad855f4..185ea5e80b44 100644
---- a/drivers/net/ethernet/marvell/octeon_ep/octep_main.c
-+++ b/drivers/net/ethernet/marvell/octeon_ep/octep_main.c
-@@ -902,6 +902,38 @@ static void octep_intr_poll_task(struct work_struct *work)
- 			   msecs_to_jiffies(OCTEP_INTR_POLL_TIME_MSECS));
- }
- 
-+/**
-+ * octep_hb_timeout_task - work queue task to check firmware heartbeat.
-+ *
-+ * @work: pointer to hb work_struct
-+ *
-+ * Check for heartbeat miss count. Uninitialize oct device if miss count
-+ * exceeds configured max heartbeat miss count.
-+ *
-+ **/
-+static void octep_hb_timeout_task(struct work_struct *work)
-+{
-+	struct octep_device *oct = container_of(work, struct octep_device,
-+						hb_task.work);
-+
-+	int miss_cnt;
-+
-+	atomic_inc(&oct->hb_miss_cnt);
-+	miss_cnt = atomic_read(&oct->hb_miss_cnt);
-+	if (miss_cnt < oct->conf->max_hb_miss_cnt) {
-+		queue_delayed_work(octep_wq, &oct->hb_task,
-+				   msecs_to_jiffies(oct->conf->hb_interval * 1000));
-+		return;
-+	}
-+
-+	dev_err(&oct->pdev->dev, "Missed %u heartbeats. Uninitializing\n",
-+		miss_cnt);
-+	rtnl_lock();
-+	if (netif_running(oct->netdev))
-+		octep_stop(oct->netdev);
-+	rtnl_unlock();
-+}
-+
- /**
-  * octep_ctrl_mbox_task - work queue task to handle ctrl mbox messages.
-  *
-@@ -978,6 +1010,10 @@ int octep_device_setup(struct octep_device *oct)
- 	if (ret)
- 		return ret;
- 
-+	atomic_set(&oct->hb_miss_cnt, 0);
-+	INIT_DELAYED_WORK(&oct->hb_task, octep_hb_timeout_task);
-+	queue_delayed_work(octep_wq, &oct->hb_task,
-+			   msecs_to_jiffies(oct->conf->hb_interval * 1000));
- 	return 0;
- 
- unsupported_dev:
-@@ -1007,6 +1043,7 @@ static void octep_device_cleanup(struct octep_device *oct)
- 	}
- 
- 	octep_ctrl_net_uninit(oct);
-+	cancel_delayed_work_sync(&oct->hb_task);
- 
- 	oct->hw_ops.soft_reset(oct);
- 	for (i = 0; i < OCTEP_MMIO_REGIONS; i++) {
-diff --git a/drivers/net/ethernet/marvell/octeon_ep/octep_main.h b/drivers/net/ethernet/marvell/octeon_ep/octep_main.h
-index 70cc3e236cb4..d97d5b787395 100644
---- a/drivers/net/ethernet/marvell/octeon_ep/octep_main.h
-+++ b/drivers/net/ethernet/marvell/octeon_ep/octep_main.h
-@@ -280,6 +280,13 @@ struct octep_device {
- 	bool poll_non_ioq_intr;
- 	/* Work entry to poll non-ioq interrupts */
- 	struct delayed_work intr_poll_task;
-+
-+	/* Firmware heartbeat timer */
-+	struct timer_list hb_timer;
-+	/* Firmware heartbeat miss count tracked by timer */
-+	atomic_t hb_miss_cnt;
-+	/* Task to reset device on heartbeat miss */
-+	struct delayed_work hb_task;
- };
- 
- static inline u16 OCTEP_MAJOR_REV(struct octep_device *oct)
-diff --git a/drivers/net/ethernet/marvell/octeon_ep/octep_regs_cn9k_pf.h b/drivers/net/ethernet/marvell/octeon_ep/octep_regs_cn9k_pf.h
-index 0466fd9a002d..b25c3093dc7b 100644
---- a/drivers/net/ethernet/marvell/octeon_ep/octep_regs_cn9k_pf.h
-+++ b/drivers/net/ethernet/marvell/octeon_ep/octep_regs_cn9k_pf.h
-@@ -367,5 +367,7 @@
- 
- /* bit 0 for control mbox interrupt */
- #define CN93_SDP_EPF_OEI_RINT_DATA_BIT_MBOX	BIT_ULL(0)
-+/* bit 1 for firmware heartbeat interrupt */
-+#define CN93_SDP_EPF_OEI_RINT_DATA_BIT_HBEAT	BIT_ULL(1)
- 
- #endif /* _OCTEP_REGS_CN9K_PF_H_ */
--- 
-2.36.0
+And yes on riscv, architecture itself doesn't define token or its format.
+Since it's RISC, software can define the token format and thus can use
+either `sspush` or `ssamoswap` to put a token on `shadow stack` virtual
+memory.
 
+>
+>So instead this series creates a map_shadow_stack syscall that maps a
+>shadow stack and writes the token from the kernel side. Then mprotect()
+>is prevented from making shadow stack's conventionally writable.
+>
+>another difference is enabling shadow stack based on elf header bits
+>instead of the arch_prctl()s. See the history and reasoning here
+>(section "Switch Enabling Interface"):
+>
+>https://lore.kernel.org/lkml/20220130211838.8382-1-rick.p.edgecombe@intel.com/
+>
+>Not sure if those two issues would be problems on riscv or not.
+
+Apart from mapping and window issue that you mentioned, I couldn't
+understand on why elf header bit is an issue only in this case for x86
+shadow stack and not an issue for let's say aarch64. I can see that
+aarch64 pretty much uses elf header bit for BTI. Eventually indirect
+branch tracking also needs to be enabled which is analogous to BTI.
+
+BTW eventually riscv binaries plan to use `.riscv.attributes` section
+in riscv elf binary instead of `.gnu.note.property`. So I am hoping that
+part will go into arch specific code of elf parsing for riscv and will be
+contained.
+
+>
+>For sharing the prctl() interface. The other thing is that x86 also has
+>this "wrss" instruction that can be enabled with shadow stack. The
+>current arch_prctl() interface supports both. I'm thinking it's
+>probably a pretty arch-specific thing.
+
+yes ability to perform writes on shadow stack absolutely are prevented on
+x86. So enabling that should be a arch specific prctl.
+
+>
+>ABI-wise, are you planning to automatically allocate shadow stacks for
+>new tasks? If the ABI is completely different it might be best to not
+>share user interfaces. But also, I wonder why is it different.
+
+Yes as of now planning both:
+- allocate shadow stack for new task based on elf header
+- task can create them using `prctls` (from glibc)
+
+And yes `fork` will get the all cfi properties (shdow stack and branch tracking)
+from parent.
+>
+>>
+>>
+>> Rest inline.
+>>
+>>
+>> On Thu, Jan 19, 2023 at 01:22:57PM -0800, Rick Edgecombe wrote:
+>> > From: Yu-cheng Yu <yu-cheng.yu@intel.com>
+>> >
+>> > The x86 Control-flow Enforcement Technology (CET) feature includes
+>> > a new
+>> > type of memory called shadow stack. This shadow stack memory has
+>> > some
+>> > unusual properties, which requires some core mm changes to function
+>> > properly.
+>> >
+>> > With the introduction of shadow stack memory there are two ways a
+>> > pte can
+>> > be writable: regular writable memory and shadow stack memory.
+>> >
+>> > In past patches, maybe_mkwrite() has been updated to apply
+>> > pte_mkwrite()
+>> > or pte_mkwrite_shstk() depending on the VMA flag. This covers most
+>> > cases
+>> > where a PTE is made writable. However, there are places where
+>> > pte_mkwrite()
+>> > is called directly and the logic should now also create a shadow
+>> > stack PTE
+>> > in the case of a shadow stack VMA.
+>> >
+>> > - do_anonymous_page() and migrate_vma_insert_page() check VM_WRITE
+>> >  directly and call pte_mkwrite(). Teach it about
+>> > pte_mkwrite_shstk()
+>> >
+>> > - When userfaultfd is creating a PTE after userspace handles the
+>> > fault
+>> >  it calls pte_mkwrite() directly. Teach it about
+>> > pte_mkwrite_shstk()
+>> >
+>> > To make the code cleaner, introduce is_shstk_write() which
+>> > simplifies
+>> > checking for VM_WRITE | VM_SHADOW_STACK together.
+>> >
+>> > In other cases where pte_mkwrite() is called directly, the VMA will
+>> > not
+>> > be VM_SHADOW_STACK, and so shadow stack memory should not be
+>> > created.
+>> > - In the case of pte_savedwrite(), shadow stack VMA's are excluded.
+>> > - In the case of the "dirty_accountable" optimization in
+>> > mprotect(),
+>> >   shadow stack VMA's won't be VM_SHARED, so it is not necessary.
+>> >
+>> > Tested-by: Pengfei Xu <pengfei.xu@intel.com>
+>> > Tested-by: John Allen <john.allen@amd.com>
+>> > Signed-off-by: Yu-cheng Yu <yu-cheng.yu@intel.com>
+>> > Co-developed-by: Rick Edgecombe <rick.p.edgecombe@intel.com>
+>> > Signed-off-by: Rick Edgecombe <rick.p.edgecombe@intel.com>
+>> > Cc: Kees Cook <keescook@chromium.org>
+>> > ---
+>> >
+>> > v5:
+>> > - Fix typo in commit log
+>> >
+>> > v3:
+>> > - Restore do_anonymous_page() that accidetally moved commits
+>> > (Kirill)
+>> > - Open code maybe_mkwrite() cases from v2, so the behavior doesn't
+>> > change
+>> >   to mark that non-writable PTEs dirty. (Nadav)
+>> >
+>> > v2:
+>> > - Updated commit log with comment's from Dave Hansen
+>> > - Dave also suggested (I understood) to maybe tweak
+>> > vm_get_page_prot()
+>> >   to avoid having to call maybe_mkwrite(). After playing around
+>> > with
+>> >   this I opted to *not* do this. Shadow stack memory memory is
+>> >   effectively writable, so having the default permissions be
+>> > writable
+>> >   ended up mapping the zero page as writable and other surprises.
+>> > So
+>> >   creating shadow stack memory needs to be done with manual logic
+>> >   like pte_mkwrite().
+>> > - Drop change in change_pte_range() because it couldn't actually
+>> > trigger
+>> >   for shadow stack VMAs.
+>> > - Clarify reasoning for skipped cases of pte_mkwrite().
+>> >
+>> > Yu-cheng v25:
+>> > - Apply same changes to do_huge_pmd_numa_page() as to
+>> > do_numa_page().
+>> >
+>> > arch/x86/include/asm/pgtable.h |  3 +++
+>> > arch/x86/mm/pgtable.c          |  6 ++++++
+>> > include/linux/pgtable.h        |  7 +++++++
+>> > mm/memory.c                    |  5 ++++-
+>> > mm/migrate_device.c            |  4 +++-
+>> > mm/userfaultfd.c               | 10 +++++++---
+>> > 6 files changed, 30 insertions(+), 5 deletions(-)
+>> >
+>> > diff --git a/arch/x86/include/asm/pgtable.h
+>> > b/arch/x86/include/asm/pgtable.h
+>> > index 45b1a8f058fe..87d3068734ec 100644
+>> > --- a/arch/x86/include/asm/pgtable.h
+>> > +++ b/arch/x86/include/asm/pgtable.h
+>> > @@ -951,6 +951,9 @@ static inline pgd_t pti_set_user_pgtbl(pgd_t
+>> > *pgdp, pgd_t pgd)
+>> > }
+>> > #endif  /* CONFIG_PAGE_TABLE_ISOLATION */
+>> >
+>> > +#define is_shstk_write is_shstk_write
+>> > +extern bool is_shstk_write(unsigned long vm_flags);
+>> > +
+>> > #endif	/* __ASSEMBLY__ */
+>> >
+>> >
+>> > diff --git a/arch/x86/mm/pgtable.c b/arch/x86/mm/pgtable.c
+>> > index e4f499eb0f29..d103945ba502 100644
+>> > --- a/arch/x86/mm/pgtable.c
+>> > +++ b/arch/x86/mm/pgtable.c
+>> > @@ -880,3 +880,9 @@ int pmd_free_pte_page(pmd_t *pmd, unsigned long
+>> > addr)
+>> >
+>> > #endif /* CONFIG_X86_64 */
+>> > #endif	/* CONFIG_HAVE_ARCH_HUGE_VMAP */
+>> > +
+>> > +bool is_shstk_write(unsigned long vm_flags)
+>> > +{
+>> > +	return (vm_flags & (VM_SHADOW_STACK | VM_WRITE)) ==
+>> > +	       (VM_SHADOW_STACK | VM_WRITE);
+>> > +}
+>>
+>> Can we call this function something along the lines
+>> `is_shadow_stack_vma`?
+>> Reason being, we're actually checking for vma property here.
+>>
+>> Also can we move this into common code? Common code can then further
+>> call
+>> `arch_is_shadow_stack_vma`. Respective arch can implement their own
+>> shadow
+>> stack encoding. I see that x86 is using one of the arch bit. Current
+>> riscv
+>> implementation uses presence of only `VM_WRITE` as shadow stack
+>> encoding.
+>
+>In the next version I've successfully moved all of the shadow stack
+>bits out of core MM. It doesn't need is_shstk_write() after the
+>pte_mkwrite() change, and changing this other one:
+>
+>https://lore.kernel.org/lkml/20230119212317.8324-26-rick.p.edgecombe@intel.com/
+>For that I added an arch_check_zapped_pte() which an arch can use to
+>add warnings.
+>
+>So I wonder if riscv won't need anything either?
+>
+>>
+>> Please see patch #11 and #12 in the series I posted (URL at the top
+>> of
+>> this e-mail).
+>>
+>>
+>> > diff --git a/include/linux/pgtable.h b/include/linux/pgtable.h
+>> > index 14a820a45a37..49ce1f055242 100644
+>> > --- a/include/linux/pgtable.h
+>> > +++ b/include/linux/pgtable.h
+>> > @@ -1578,6 +1578,13 @@ static inline bool
+>> > arch_has_pfn_modify_check(void)
+>> > }
+>> > #endif /* !_HAVE_ARCH_PFN_MODIFY_ALLOWED */
+>> >
+>> > +#ifndef is_shstk_write
+>> > +static inline bool is_shstk_write(unsigned long vm_flags)
+>> > +{
+>> > +	return false;
+>> > +}
+>> > +#endif
+>> > +
+>> > /*
+>> >  * Architecture PAGE_KERNEL_* fallbacks
+>> >  *
+>> > diff --git a/mm/memory.c b/mm/memory.c
+>> > index aad226daf41b..5e5107232a26 100644
+>> > --- a/mm/memory.c
+>> > +++ b/mm/memory.c
+>> > @@ -4088,7 +4088,10 @@ static vm_fault_t do_anonymous_page(struct
+>> > vm_fault *vmf)
+>> >
+>> > 	entry = mk_pte(page, vma->vm_page_prot);
+>> > 	entry = pte_sw_mkyoung(entry);
+>> > -	if (vma->vm_flags & VM_WRITE)
+>> > +
+>> > +	if (is_shstk_write(vma->vm_flags))
+>> > +		entry = pte_mkwrite_shstk(pte_mkdirty(entry));
+>> > +	else if (vma->vm_flags & VM_WRITE)
+>> > 		entry = pte_mkwrite(pte_mkdirty(entry));
+>> >
+>> > 	vmf->pte = pte_offset_map_lock(vma->vm_mm, vmf->pmd, vmf-
+>> > >address,
+>> > diff --git a/mm/migrate_device.c b/mm/migrate_device.c
+>> > index 721b2365dbca..53d417683e01 100644
+>> > --- a/mm/migrate_device.c
+>> > +++ b/mm/migrate_device.c
+>> > @@ -645,7 +645,9 @@ static void migrate_vma_insert_page(struct
+>> > migrate_vma *migrate,
+>> > 			goto abort;
+>> > 		}
+>> > 		entry = mk_pte(page, vma->vm_page_prot);
+>> > -		if (vma->vm_flags & VM_WRITE)
+>> > +		if (is_shstk_write(vma->vm_flags))
+>> > +			entry = pte_mkwrite_shstk(pte_mkdirty(entry));
+>> > +		else if (vma->vm_flags & VM_WRITE)
+>> > 			entry = pte_mkwrite(pte_mkdirty(entry));
+>> > 	}
+>> >
+>> > diff --git a/mm/userfaultfd.c b/mm/userfaultfd.c
+>> > index 0499907b6f1a..832f0250ca61 100644
+>> > --- a/mm/userfaultfd.c
+>> > +++ b/mm/userfaultfd.c
+>> > @@ -63,6 +63,7 @@ int mfill_atomic_install_pte(struct mm_struct
+>> > *dst_mm, pmd_t *dst_pmd,
+>> > 	int ret;
+>> > 	pte_t _dst_pte, *dst_pte;
+>> > 	bool writable = dst_vma->vm_flags & VM_WRITE;
+>> > +	bool shstk = dst_vma->vm_flags & VM_SHADOW_STACK;
+>> > 	bool vm_shared = dst_vma->vm_flags & VM_SHARED;
+>> > 	bool page_in_cache = page_mapping(page);
+>> > 	spinlock_t *ptl;
+>> > @@ -84,9 +85,12 @@ int mfill_atomic_install_pte(struct mm_struct
+>> > *dst_mm, pmd_t *dst_pmd,
+>> > 		writable = false;
+>> > 	}
+>> >
+>> > -	if (writable)
+>> > -		_dst_pte = pte_mkwrite(_dst_pte);
+>> > -	else
+>> > +	if (writable) {
+>> > +		if (shstk)
+>> > +			_dst_pte = pte_mkwrite_shstk(_dst_pte);
+>> > +		else
+>> > +			_dst_pte = pte_mkwrite(_dst_pte);
+>> > +	} else
+>> > 		/*
+>> > 		 * We need this to make sure write bit removed; as
+>> > mk_pte()
+>> > 		 * could return a pte with write bit set.
+>> > --
+>> > 2.17.1
+>> >
