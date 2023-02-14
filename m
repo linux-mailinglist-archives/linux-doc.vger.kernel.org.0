@@ -2,125 +2,138 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 84C4B696072
-	for <lists+linux-doc@lfdr.de>; Tue, 14 Feb 2023 11:14:10 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id ED77F696111
+	for <lists+linux-doc@lfdr.de>; Tue, 14 Feb 2023 11:40:11 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S232148AbjBNKOJ (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 14 Feb 2023 05:14:09 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:53636 "EHLO
+        id S232691AbjBNKkJ convert rfc822-to-8bit (ORCPT
+        <rfc822;lists+linux-doc@lfdr.de>); Tue, 14 Feb 2023 05:40:09 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:44072 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S231992AbjBNKOF (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 14 Feb 2023 05:14:05 -0500
-Received: from wp530.webpack.hosteurope.de (wp530.webpack.hosteurope.de [80.237.130.52])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 485EF16AED;
-        Tue, 14 Feb 2023 02:13:58 -0800 (PST)
-Received: from ip4d148da6.dynamic.kabel-deutschland.de ([77.20.141.166] helo=truhe.fritz.box); authenticated
-        by wp530.webpack.hosteurope.de running ExIM with esmtpsa (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256)
-        id 1pRsJr-0007xD-TO; Tue, 14 Feb 2023 11:13:51 +0100
-From:   Thorsten Leemhuis <linux@leemhuis.info>
-To:     Jonathan Corbet <corbet@lwn.net>
-Cc:     Randy Dunlap <rdunlap@infradead.org>, linux-doc@vger.kernel.org,
-        linux-kernel@vger.kernel.org, regressions@lists.linux.dev
-Subject: [PATCH v1] docs: recommend using Link: whenever using Reported-by:
-Date:   Tue, 14 Feb 2023 11:13:51 +0100
-Message-Id: <9a07ec640d809723492f8ade4f54705914e80419.1676369564.git.linux@leemhuis.info>
-X-Mailer: git-send-email 2.39.1
+        with ESMTP id S232672AbjBNKj4 (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 14 Feb 2023 05:39:56 -0500
+Received: from outpost1.zedat.fu-berlin.de (outpost1.zedat.fu-berlin.de [130.133.4.66])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 39CB825E2D;
+        Tue, 14 Feb 2023 02:39:53 -0800 (PST)
+Received: from inpost2.zedat.fu-berlin.de ([130.133.4.69])
+          by outpost.zedat.fu-berlin.de (Exim 4.95)
+          with esmtps (TLS1.3)
+          tls TLS_AES_256_GCM_SHA384
+          (envelope-from <glaubitz@zedat.fu-berlin.de>)
+          id 1pRshz-000K86-Qj; Tue, 14 Feb 2023 11:38:47 +0100
+Received: from p5b13aa49.dip0.t-ipconnect.de ([91.19.170.73] helo=[192.168.178.81])
+          by inpost2.zedat.fu-berlin.de (Exim 4.95)
+          with esmtpsa (TLS1.3)
+          tls TLS_AES_256_GCM_SHA384
+          (envelope-from <glaubitz@physik.fu-berlin.de>)
+          id 1pRshz-003Z8i-EF; Tue, 14 Feb 2023 11:38:47 +0100
+Message-ID: <6a420bb0e033562bc7f67cc8f218f994e0892d3b.camel@physik.fu-berlin.de>
+Subject: Re: [PATCH v3 10/24] sparc: Remove COMMAND_LINE_SIZE from uapi
+From:   John Paul Adrian Glaubitz <glaubitz@physik.fu-berlin.de>
+To:     WANG Xuerui <kernel@xen0n.name>,
+        Sergey Shtylyov <s.shtylyov@omp.ru>,
+        Alexandre Ghiti <alexghiti@rivosinc.com>,
+        Jonathan Corbet <corbet@lwn.net>,
+        Richard Henderson <richard.henderson@linaro.org>,
+        Ivan Kokshaysky <ink@jurassic.park.msu.ru>,
+        Matt Turner <mattst88@gmail.com>,
+        Vineet Gupta <vgupta@kernel.org>,
+        Russell King <linux@armlinux.org.uk>,
+        Catalin Marinas <catalin.marinas@arm.com>,
+        Will Deacon <will@kernel.org>,
+        Huacai Chen <chenhuacai@kernel.org>,
+        Geert Uytterhoeven <geert@linux-m68k.org>,
+        Michal Simek <monstr@monstr.eu>,
+        Thomas Bogendoerfer <tsbogend@alpha.franken.de>,
+        "James E . J . Bottomley" <James.Bottomley@HansenPartnership.com>,
+        Helge Deller <deller@gmx.de>,
+        Michael Ellerman <mpe@ellerman.id.au>,
+        Nicholas Piggin <npiggin@gmail.com>,
+        Christophe Leroy <christophe.leroy@csgroup.eu>,
+        Paul Walmsley <paul.walmsley@sifive.com>,
+        Palmer Dabbelt <palmer@dabbelt.com>,
+        Albert Ou <aou@eecs.berkeley.edu>,
+        Heiko Carstens <hca@linux.ibm.com>,
+        Vasily Gorbik <gor@linux.ibm.com>,
+        Alexander Gordeev <agordeev@linux.ibm.com>,
+        Christian Borntraeger <borntraeger@linux.ibm.com>,
+        Sven Schnelle <svens@linux.ibm.com>,
+        Yoshinori Sato <ysato@users.sourceforge.jp>,
+        Rich Felker <dalias@libc.org>,
+        "David S . Miller" <davem@davemloft.net>,
+        Thomas Gleixner <tglx@linutronix.de>,
+        Ingo Molnar <mingo@redhat.com>, Borislav Petkov <bp@alien8.de>,
+        Dave Hansen <dave.hansen@linux.intel.com>, x86@kernel.org,
+        "H . Peter Anvin" <hpa@zytor.com>, Chris Zankel <chris@zankel.net>,
+        Max Filippov <jcmvbkbc@gmail.com>,
+        Arnd Bergmann <arnd@arndb.de>, linux-doc@vger.kernel.org,
+        linux-kernel@vger.kernel.org, linux-alpha@vger.kernel.org,
+        linux-snps-arc@lists.infradead.org,
+        linux-arm-kernel@lists.infradead.org, linux-ia64@vger.kernel.org,
+        loongarch@lists.linux.dev, linux-m68k@lists.linux-m68k.org,
+        linux-mips@vger.kernel.org, linux-parisc@vger.kernel.org,
+        linuxppc-dev@lists.ozlabs.org, linux-riscv@lists.infradead.org,
+        linux-s390@vger.kernel.org, linux-sh@vger.kernel.org,
+        sparclinux@vger.kernel.org, linux-xtensa@linux-xtensa.org,
+        linux-arch@vger.kernel.org
+Cc:     Palmer Dabbelt <palmer@rivosinc.com>
+Date:   Tue, 14 Feb 2023 11:38:45 +0100
+In-Reply-To: <f3db61bb-5c89-2724-769f-9d606f587f92@xen0n.name>
+References: <20230214074925.228106-1-alexghiti@rivosinc.com>
+         <20230214074925.228106-11-alexghiti@rivosinc.com>
+         <017f0b40-8021-8b3b-24d2-c70661b6b292@omp.ru>
+         <f3db61bb-5c89-2724-769f-9d606f587f92@xen0n.name>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8BIT
+User-Agent: Evolution 3.46.4 
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-bounce-key: webpack.hosteurope.de;linux@leemhuis.info;1676369638;b6cccbd2;
-X-HE-SMSGID: 1pRsJr-0007xD-TO
-X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_NONE,
-        SPF_HELO_NONE,SPF_PASS autolearn=ham autolearn_force=no version=3.4.6
+X-Original-Sender: glaubitz@physik.fu-berlin.de
+X-Originating-IP: 91.19.170.73
+X-Spam-Status: No, score=-4.2 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_MED,
+        RCVD_IN_MSPIKE_H3,RCVD_IN_MSPIKE_WL,SPF_HELO_NONE,SPF_PASS
+        autolearn=ham autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Encourage developers to place Link: tag pointing to the report when they
-are using Reported-by: tags. Those links are often extremely useful for
-any code archaeologist that wants to know more about the backstory of a
-change than the commit message provides. That includes maintainers
-higher up in the patch-flow hierarchy, which is why Linus asks
-developers to add such links [1, 2, 3]. To quote [1]:
+On Tue, 2023-02-14 at 16:59 +0800, WANG Xuerui wrote:
+> On 2023/2/14 16:50, Sergey Shtylyov wrote:
+> > On 2/14/23 10:49 AM, Alexandre Ghiti wrote:
+> > 
+> > > From: Palmer Dabbelt <palmer@rivosinc.com>
+> > > 
+> > > As far as I can tell this is not used by userspace and thus should not
+> > > be part of the user-visible API.
+> > > 
+> > > Signed-off-by: Palmer Dabbelt <palmer@rivosinc.com>
+> > > ---
+> > >   arch/sparc/include/asm/setup.h      | 6 +++++-
+> > >   arch/sparc/include/uapi/asm/setup.h | 7 -------
+> > >   2 files changed, 5 insertions(+), 8 deletions(-)
+> > > 
+> > > diff --git a/arch/sparc/include/asm/setup.h b/arch/sparc/include/asm/setup.h
+> > > index 72205684e51e..d1384ed92547 100644
+> > > --- a/arch/sparc/include/asm/setup.h
+> > > +++ b/arch/sparc/include/asm/setup.h
+> > > @@ -7,7 +7,11 @@
+> > >   
+> > >   #include <linux/interrupt.h>
+> > >   
+> > > -#include <uapi/asm/setup.h>
+> > > +#if defined(__sparc__) && defined(__arch64__)
+> > 
+> >     Mhm, I don't think these two can be #define'd simulaneously...
+> 
+> I believe it's just a SPARC-ism [1] [2] that may look strange and be 
+> easily confused for __aarch64__ (notice the extra 'a')...
 
-> Again, the commit has a link to the patch *submission*, which is
-> almost entirely useless. There's no link to the actual problem the
-> patch fixes.
->
-> [...]
->
-> Put another way: I can see that
->
-> Reported-by: Zhangfei Gao <zhangfei.gao@foxmail.com>
->
-> in the commit, but I don't have a clue what the actual report was, and
-> there really isn't enough information in the commit itself, except for
-> a fairly handwavy "Device drivers might, for instance, still need to
-> flush operations.."
->
-> I don't want to know what device drivers _might_ do. I would want to
-> have an actual pointer to what they do and where.
+Yep, that's correct. On 64-bit Linux/SPARC, gcc/clang define __sparc__ AND __arch64__.
 
-Another reason why these links are wanted: the ongoing regression
-tracking efforts can only scale with them, as they allow the regression
-tracking bot 'regzbot' to automatically connect tracked reports with
-patches that are posted or committed to fix tracked regressions.
+Adrian
 
-Link: https://lore.kernel.org/all/CAHk-=wjMmSZzMJ3Xnskdg4+GGz=5p5p+GSYyFBTh0f-DgvdBWg@mail.gmail.com/ [1]
-Link: https://lore.kernel.org/all/CAHk-=wgs38ZrfPvy=nOwVkVzjpM3VFU1zobP37Fwd_h9iAD5JQ@mail.gmail.com/ [2]
-Link: https://lore.kernel.org/all/CAHk-=wjxzafG-=J8oT30s7upn4RhBs6TX-uVFZ5rME+L5_DoJA@mail.gmail.com/ [3]
-Signed-off-by: Thorsten Leemhuis <linux@leemhuis.info>
-
----
-Hi! Just small change for two texts. Note, the change to
-submitting-patches.rst looks bigger than it is, as I reshuffled the
-sentences in that area. The new flow afaics makes more sense then it
-would have if I had added the 'use Link: tag' recommendation at the end
-of the current text.
-
-Ciao, Thorsten
----
- Documentation/process/5.Posting.rst          | 3 ++-
- Documentation/process/submitting-patches.rst | 9 +++++----
- 2 files changed, 7 insertions(+), 5 deletions(-)
-
-diff --git a/Documentation/process/5.Posting.rst b/Documentation/process/5.Posting.rst
-index d87f1fee4cbc..7a670a075ab6 100644
---- a/Documentation/process/5.Posting.rst
-+++ b/Documentation/process/5.Posting.rst
-@@ -251,7 +251,8 @@ The tags in common use are:
-  - Reported-by: names a user who reported a problem which is fixed by this
-    patch; this tag is used to give credit to the (often underappreciated)
-    people who test our code and let us know when things do not work
--   correctly.
-+   correctly. Note, this tag should be followed by a Link: tag pointing to the
-+   report, unless the report is not available on the web.
- 
-  - Cc: the named person received a copy of the patch and had the
-    opportunity to comment on it.
-diff --git a/Documentation/process/submitting-patches.rst b/Documentation/process/submitting-patches.rst
-index 7dc94555417d..1e009dbe6991 100644
---- a/Documentation/process/submitting-patches.rst
-+++ b/Documentation/process/submitting-patches.rst
-@@ -496,10 +496,11 @@ Using Reported-by:, Tested-by:, Reviewed-by:, Suggested-by: and Fixes:
- ----------------------------------------------------------------------
- 
- The Reported-by tag gives credit to people who find bugs and report them and it
--hopefully inspires them to help us again in the future.  Please note that if
--the bug was reported in private, then ask for permission first before using the
--Reported-by tag. The tag is intended for bugs; please do not use it to credit
--feature requests.
-+hopefully inspires them to help us again in the future. The tag is intended for
-+bugs; please do not use it to credit feature requests. The tag should be
-+followed by a Link: tag pointing to the report, unless the report is not
-+available on the web. Please note that if the bug was reported in private, then
-+ask for permission first before using the Reported-by tag.
- 
- A Tested-by: tag indicates that the patch has been successfully tested (in
- some environment) by the person named.  This tag informs maintainers that
-
-base-commit: e076f253283c3e55a128fa9665c0e6cd8146948d
 -- 
-2.39.1
-
+ .''`.  John Paul Adrian Glaubitz
+: :' :  Debian Developer
+`. `'   Physicist
+  `-    GPG: 62FF 8A75 84E0 2956 9546  0006 7426 3B37 F5B5 F913
