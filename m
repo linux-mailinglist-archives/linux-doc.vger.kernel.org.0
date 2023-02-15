@@ -2,119 +2,116 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 1356C697BA3
-	for <lists+linux-doc@lfdr.de>; Wed, 15 Feb 2023 13:22:28 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 39312697BCF
+	for <lists+linux-doc@lfdr.de>; Wed, 15 Feb 2023 13:33:12 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S230195AbjBOMW0 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 15 Feb 2023 07:22:26 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:44034 "EHLO
+        id S233446AbjBOMdJ (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 15 Feb 2023 07:33:09 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:49782 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S233150AbjBOMWZ (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Wed, 15 Feb 2023 07:22:25 -0500
-Received: from ams.source.kernel.org (ams.source.kernel.org [145.40.68.75])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id EC3FA36446;
-        Wed, 15 Feb 2023 04:22:23 -0800 (PST)
-Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
-        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
-        (No client certificate requested)
-        by ams.source.kernel.org (Postfix) with ESMTPS id 8D230B8217D;
-        Wed, 15 Feb 2023 12:22:22 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 83AACC433D2;
-        Wed, 15 Feb 2023 12:22:20 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-        s=k20201202; t=1676463741;
-        bh=GeSCjTFqgMCEWnnu2zVVsYJTBX5zY7VucmFUJcaJF8Y=;
-        h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-        b=JtBEjKhBFsb8y2w9HxMp223w9f5YI2nxNwvgAuh1RY9Z6zEen7ehWAC0QNuKFjyXi
-         JvBH4Dl/3cv++thj0+lAptse19lPCQZBQkI5iBV9upwreE5KO4Mor7Z6gbKMRQ+/v3
-         whrxdC9bx1Ql85Dh3pXm+ktnupR2wWPH13dvWw8KC9Su75zrPEpvZ1o5bHjb52xRMK
-         HOh6LdPQ8t/qlFbpD2fxLLz+nXNl+BDlGLoaNAo/CkL7L03YrOQ/I5UhKDEJ8FrgMN
-         wMuy9ILMsVORtXlel1gsuaKvPStR8bRwTDDwfbpgCcNaxdN9hZQ6DWfZnwio7L3Hpy
-         Evq4ud7majwsw==
-Date:   Wed, 15 Feb 2023 14:22:16 +0200
-From:   Leon Romanovsky <leon@kernel.org>
-To:     "Lucero Palau, Alejandro" <alejandro.lucero-palau@amd.com>
-Cc:     Alexander Lobakin <alexandr.lobakin@intel.com>,
-        Edward Cree <ecree.xilinx@gmail.com>,
-        "netdev@vger.kernel.org" <netdev@vger.kernel.org>,
-        "linux-net-drivers (AMD-Xilinx)" <linux-net-drivers@amd.com>,
-        "davem@davemloft.net" <davem@davemloft.net>,
-        "kuba@kernel.org" <kuba@kernel.org>,
-        "pabeni@redhat.com" <pabeni@redhat.com>,
-        "edumazet@google.com" <edumazet@google.com>,
-        "habetsm.xilinx@gmail.com" <habetsm.xilinx@gmail.com>,
-        "linux-doc@vger.kernel.org" <linux-doc@vger.kernel.org>,
-        "corbet@lwn.net" <corbet@lwn.net>,
-        "jiri@nvidia.com" <jiri@nvidia.com>
-Subject: Re: [PATCH v7 net-next 2/8] sfc: add devlink info support for ef100
-Message-ID: <Y+zOeGYK0EctinF1@unreal>
-References: <20230213183428.10734-1-alejandro.lucero-palau@amd.com>
- <20230213183428.10734-3-alejandro.lucero-palau@amd.com>
- <Y+s6vrDLkpLRwtx3@unreal>
- <ef18677a-74d0-87a7-5659-637e63714b15@gmail.com>
- <cac3fa89-50a3-6de0-796c-a215400f3710@intel.com>
- <DM6PR12MB4202CDD780F886E718159A8CC1A39@DM6PR12MB4202.namprd12.prod.outlook.com>
+        with ESMTP id S230492AbjBOMdG (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Wed, 15 Feb 2023 07:33:06 -0500
+Received: from mail-pl1-x636.google.com (mail-pl1-x636.google.com [IPv6:2607:f8b0:4864:20::636])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 797803669C;
+        Wed, 15 Feb 2023 04:33:05 -0800 (PST)
+Received: by mail-pl1-x636.google.com with SMTP id be8so20085885plb.7;
+        Wed, 15 Feb 2023 04:33:05 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=1IsC8ng/nt0IIOs5zLEhvzEjLU5ZtX7trPinF9wC4HY=;
+        b=XpjVcbaAfAVK6cvQGU8LDsYr96rqAbvOVHsTzUlNZqTf6q6zEyEXhHiraiEGhgr6a4
+         f8PSxKnB5I5nSqeED5HwnD7OFwqfdrbjru1pzgA0SzLob3RBUE/f22Sks3NVtY7if7PN
+         LCvI/3Ug6wKAf5ihUKtvqERBxvgW0eFHx3n4iWOtDrliTYYvaiuQYFmpRef3q/+t4wNV
+         ylIQA66PF8DlHMoCTeXnJq2RXyqBXBIdto+B4MZTSP0prH6tT3sY7OJbLUFZvsXPWr1Y
+         v+F/zLqf9Wla01E4HQtZ0lJncCLgOB5vT41JeiqEeDxKpEg2gNRFNh2Qp8XWYf/FcDYB
+         DhnA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=1IsC8ng/nt0IIOs5zLEhvzEjLU5ZtX7trPinF9wC4HY=;
+        b=c80ieYSvL+YEUhXOWq3d6zH0kD/EVGzJPWFzpEBWxYtpSv6kXYSnT8v3d2mx7vTA06
+         +60bWUlNzURoyK8rIRnlr3r5U98dRXLIZM/mK8rNEw2RwO8DifU1Q/5UK6Ts3TqwMWy0
+         e5WJSGd02xtB8jTnPcPPgA3kq2ry45ALTL1wLfPmEiY6NAdn+k9sAXvm9RUlkvvQ9u8m
+         65UJkWkskLTuUp/jPyoIK8Xm+QWSYXOqEJ46u0NOiyHedaBkQFULpHBLloZDHH5nHiMj
+         W99fkZ65Uizzc19CiQbL7XyueCunjggZcp82hpeC5NbvjEpz4aQIDMV6U/JGIs64gqkf
+         1pYQ==
+X-Gm-Message-State: AO0yUKWp1rdIK4h95rQlPGLWZJEkiuJnbnLYwtYU9Qxj9zojxDBZMJsq
+        oPSfVM3zfK2+cEJ2Un8WBKQ=
+X-Google-Smtp-Source: AK7set9sYhrmqIc2PoBdRatAonL/QL6fPII6/8bPAa4/6SESq5JoJ9lV3XsruwM0w5/4COASa9t/rQ==
+X-Received: by 2002:a05:6a20:e688:b0:b8:78dd:5fa2 with SMTP id mz8-20020a056a20e68800b000b878dd5fa2mr1533864pzb.52.1676464384335;
+        Wed, 15 Feb 2023 04:33:04 -0800 (PST)
+Received: from debian.me (subs03-180-214-233-93.three.co.id. [180.214.233.93])
+        by smtp.gmail.com with ESMTPSA id u9-20020a63a909000000b004790eb3fee1sm10219535pge.90.2023.02.15.04.33.02
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 15 Feb 2023 04:33:03 -0800 (PST)
+Received: by debian.me (Postfix, from userid 1000)
+        id 70F8C1055EA; Wed, 15 Feb 2023 19:32:58 +0700 (WIB)
+From:   Bagas Sanjaya <bagasdotme@gmail.com>
+To:     Linux Documentation <linux-doc@vger.kernel.org>,
+        Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
+        Linux Next Mailing List <linux-next@vger.kernel.org>,
+        Linux Power Management <linux-pm@vger.kernel.org>,
+        Linux BPF Development <bpf@vger.kernel.org>
+Cc:     Jonathan Corbet <corbet@lwn.net>, Huang Rui <ray.huang@amd.com>,
+        Alexei Starovoitov <ast@kernel.org>,
+        Daniel Borkmann <daniel@iogearbox.net>,
+        Andrii Nakryiko <andrii@kernel.org>,
+        Martin KaFai Lau <martin.lau@linux.dev>,
+        Song Liu <song@kernel.org>, Yonghong Song <yhs@fb.com>,
+        John Fastabend <john.fastabend@gmail.com>,
+        KP Singh <kpsingh@kernel.org>,
+        Stanislav Fomichev <sdf@google.com>,
+        Hao Luo <haoluo@google.com>, Jiri Olsa <jolsa@kernel.org>,
+        Bagas Sanjaya <bagasdotme@gmail.com>,
+        Paolo Bonzini <pbonzini@redhat.com>,
+        Tom Lendacky <thomas.lendacky@amd.com>,
+        Dave Marchevsky <davemarchevsky@fb.com>,
+        Perry Yuan <perry.yuan@amd.com>,
+        "Rafael J. Wysocki" <rafael.j.wysocki@intel.com>,
+        Wyes Karny <wyes.karny@amd.com>,
+        Mario Limonciello <mario.limonciello@amd.com>,
+        oe-kbuild-all@lists.linux.dev
+Subject: [PATCH 0/3] Documentation fixes for next-20230215
+Date:   Wed, 15 Feb 2023 19:32:50 +0700
+Message-Id: <20230215123253.41552-1-bagasdotme@gmail.com>
+X-Mailer: git-send-email 2.39.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <DM6PR12MB4202CDD780F886E718159A8CC1A39@DM6PR12MB4202.namprd12.prod.outlook.com>
-X-Spam-Status: No, score=-7.1 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_HI,
-        SPF_HELO_NONE,SPF_PASS autolearn=ham autolearn_force=no version=3.4.6
+X-Developer-Signature: v=1; a=openpgp-sha256; l=832; i=bagasdotme@gmail.com; h=from:subject; bh=/OLtDi2ZSSHFwhtEVzxXuHzhqWiXCRsIhg/ssojQQRs=; b=owGbwMvMwCX2bWenZ2ig32LG02pJDMlvLry90P20YdMKq8sTi8OPLpn7s4x/y//U2uoXJT6mT/YV O+236ChlYRDjYpAVU2SZlMjXdHqXkciF9rWOMHNYmUCGMHBxCsBEUsQZ/md7dP5oNzG4fMz6/uOM62 vmpoTuMGs48nJlW+dHNekTttKMDPsNG7c8vf/mur7iF6c7rXpXuT311luYpmws56mVXf17GRMA
+X-Developer-Key: i=bagasdotme@gmail.com; a=openpgp; fpr=701B806FDCA5D3A58FFB8F7D7C276C64A5E44A1D
+Content-Transfer-Encoding: 8bit
+X-Spam-Status: No, score=-0.6 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_FROM,
+        RCVD_IN_DNSWL_NONE,RCVD_IN_SORBS_WEB,SPF_HELO_NONE,SPF_PASS
+        autolearn=no autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Wed, Feb 15, 2023 at 08:43:21AM +0000, Lucero Palau, Alejandro wrote:
-> 
-> On 2/14/23 16:56, Alexander Lobakin wrote:
-> > From: Edward Cree <ecree.xilinx@gmail.com>
-> > Date: Tue, 14 Feb 2023 15:28:24 +0000
-> >
-> >> On 14/02/2023 07:39, Leon Romanovsky wrote:
-> >>> On Mon, Feb 13, 2023 at 06:34:22PM +0000, alejandro.lucero-palau@amd.com wrote:
-> >>>> +#ifdef CONFIG_RTC_LIB
-> >>>> +	u64 tstamp;
-> >>>> +#endif
-> >>> If you are going to resubmit the series.
-> >>>
-> >>> Documentation/process/coding-style.rst
-> >>>    1140 21) Conditional Compilation
-> >>>    1141 ---------------------------
-> >>> ....
-> >>>    1156 If you have a function or variable which may potentially go unused in a
-> >>>    1157 particular configuration, and the compiler would warn about its definition
-> >>>    1158 going unused, mark the definition as __maybe_unused rather than wrapping it in
-> >>>    1159 a preprocessor conditional.  (However, if a function or variable *always* goes
-> >>>    1160 unused, delete it.)
-> >>>
-> >>> Thanks
-> >> FWIW, the existing code in sfc all uses the preprocessor
-> >>   conditional approach; maybe it's better to be consistent
-> >>   within the driver?
-> >>
-> > When it comes to "consistency vs start doing it right" thing, I always
-> > go for the latter. This "we'll fix it all one day" moment often tends to
-> > never happen and it's applicable to any vendor or subsys. Stop doing
-> > things the discouraged way often is a good (and sometimes the only) start.
-> 
-> 
-> It is not clear to me what you prefer, if fixing this now or leaving it 
-> and fixing it later.
+Here are fixes for documentation (htmldocs) warnings as reported for
+next-20230215. The changelog below should be self-explanatory.
 
-He asked to fix.
+Each patch can be applied separately by respective maintainers.
 
-Thanks
+Bagas Sanjaya (3):
+  Documentation: hw-vuln: Wrap mitigate_smt_rsb example in literal code
+    block
+  Documentation: bpf: Add missing line break separator in node_data
+    struct code block
+  Documentation: amd-pstate: disambiguate user space sections
 
-> 
-> The first sentence in your comment suggest the latter to me. The rest of 
-> the comment suggests the fix it now.
-> 
-> Anyway, patchwork says changes requested, so I'll send v8.
-> 
-> Thanks
-> 
-> > Thanks,
-> > Olek
+ Documentation/admin-guide/hw-vuln/cross-thread-rsb.rst | 3 ++-
+ Documentation/admin-guide/pm/amd-pstate.rst            | 8 ++++----
+ Documentation/bpf/graph_ds_impl.rst                    | 1 +
+ 3 files changed, 7 insertions(+), 5 deletions(-)
+
+
+base-commit: 9d9019bcea1aac7eed64a1a4966282b6b7b141c8
+-- 
+An old man doll... just what I always wanted! - Clara
+
