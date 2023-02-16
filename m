@@ -2,122 +2,143 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id AFD6F699C45
-	for <lists+linux-doc@lfdr.de>; Thu, 16 Feb 2023 19:24:09 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id E4C35699E54
+	for <lists+linux-doc@lfdr.de>; Thu, 16 Feb 2023 21:54:32 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S230303AbjBPSYH (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 16 Feb 2023 13:24:07 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:56278 "EHLO
+        id S229879AbjBPUyb (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 16 Feb 2023 15:54:31 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:60412 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S230302AbjBPSXf (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Thu, 16 Feb 2023 13:23:35 -0500
-Received: from mail-pj1-x1033.google.com (mail-pj1-x1033.google.com [IPv6:2607:f8b0:4864:20::1033])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id C539152CD5
-        for <linux-doc@vger.kernel.org>; Thu, 16 Feb 2023 10:22:39 -0800 (PST)
-Received: by mail-pj1-x1033.google.com with SMTP id n20-20020a17090aab9400b00229ca6a4636so6766970pjq.0
-        for <linux-doc@vger.kernel.org>; Thu, 16 Feb 2023 10:22:39 -0800 (PST)
+        with ESMTP id S229793AbjBPUy3 (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Thu, 16 Feb 2023 15:54:29 -0500
+Received: from mail-wr1-x432.google.com (mail-wr1-x432.google.com [IPv6:2a00:1450:4864:20::432])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 38C64505D7;
+        Thu, 16 Feb 2023 12:54:28 -0800 (PST)
+Received: by mail-wr1-x432.google.com with SMTP id m10so3058499wrn.4;
+        Thu, 16 Feb 2023 12:54:28 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=ventanamicro.com; s=google;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=Rc+EdRzJ0SRGUPyQRF18IAjDuJpqdPevv1iUeqHNSDY=;
-        b=MT+u6Ji2DSotNL/3ZJ31+4cfLb/HUgIEAzHyb/4A3W3hXKL7CuBMT7DFaf8PRm7cRi
-         hkX1t1QcAn6Fsh4g9bblEZv+ilGLrh4phGy+dWKqmPb5y5cpQtlH3TAu+YOU0SnV0Luk
-         HDucHKXRMGxNFDuLtGBJm3I9tnzVAAQ1MUc6DNMO077XW2R/1eEDaW0Jd2emJHRAWPjM
-         HGm8QIKeax6/ljYPvC/5GtfUEcuV0hqZzqfkU0/3+9ZK0znENu0rEkld1JzriqhbZHHh
-         XyGAE624cdyEKo/bR2ibxnm20fA1861ECmsz+HbEDZY/Me4+oPLiv4hAMXBd3+rQsqSP
-         LmUQ==
+        d=gmail.com; s=20210112;
+        h=in-reply-to:content-disposition:mime-version:references:subject:cc
+         :to:from:date:message-id:from:to:cc:subject:date:message-id:reply-to;
+        bh=XxHXAnEzcfwmzL57yBeDEI2OXJgv4sM92NV8AEEiDjk=;
+        b=IyXielZJHYrNZdwUKZ/VHSjiRRKC/fjAWKB6XxREQUlMeGCRBy5MFzAGkBPKtYuX4z
+         msWn2erMVQDpu8k7efDx+nvXtSeWNs31J9hz/wEg2PaPxLq7OR55qY/q/YrNJOwefAZS
+         dSYlPVT7UlhosbScdEHNsDbT/vgPIxzsYh3RHF9qb0wZEOoMwe4jEGldfVHfsXzlipXB
+         pHKvx/izp8RyWFctgV4zplDi9ggX4ajBM3dpn2fUPYBbCJcl4kiOEAjtyS6blk1CWixb
+         voq8WTudsJtj8Wpif+Z8gjXgdM7gnXwodJ57wPcwEt1MP5VtwLyMDcUwDV0VR7RVEoE5
+         rxrA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=Rc+EdRzJ0SRGUPyQRF18IAjDuJpqdPevv1iUeqHNSDY=;
-        b=EZgkwIADYZLX+AAmMxF/WkeTZAUo1VkiCblcRE8ZUjDJYhhmRV/YS5xp3jxmWTkn6k
-         lNO3oySuFUiaBsHFmMO+14v0yJOtNKcNx1h5gRKCND8Hd5PpVR6EgQTgixvXxwB8VKE/
-         g+ibhkUBH4rXvsk49NoUd5EwZMtI1dw/9rawA8uZPOyuCDLSWjjrOaQBXCi7mZi2LT1q
-         Oh3cqCvJCMH9OoRrGKBrQi8BqmRHI/Lgelaq7VQ86xsKVIC1O+ZiN3c2evqE09oQPuJ8
-         whpiLH+wBNGtRaWhSH+zWMnn7Ol+VLoKNvXYWnbZUb4pXo9H3Mr5I/NJiXc7tr5etIf4
-         TBmg==
-X-Gm-Message-State: AO0yUKWky3ea74IfAMnPJpwF6lKutD7hjx6JU7nyvw/jVrgbFJNJ7Vf+
-        MzBkwUNRf3p7m2JET7CApOV1Cg==
-X-Google-Smtp-Source: AK7set9M9fF7YNnpHhSlQVgpgwmmQbyWXyDh9qg54yswDsPTDVjsTPAME9mc2ETjA4Y1JYejJYwZog==
-X-Received: by 2002:a05:6a20:d49b:b0:bd:278:f68f with SMTP id im27-20020a056a20d49b00b000bd0278f68fmr6832215pzb.52.1676571753281;
-        Thu, 16 Feb 2023 10:22:33 -0800 (PST)
-Received: from kerodi.Dlink ([49.206.14.226])
-        by smtp.gmail.com with ESMTPSA id n21-20020a637215000000b004dff15fc121sm1517574pgc.36.2023.02.16.10.22.28
+        h=in-reply-to:content-disposition:mime-version:references:subject:cc
+         :to:from:date:message-id:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=XxHXAnEzcfwmzL57yBeDEI2OXJgv4sM92NV8AEEiDjk=;
+        b=F4pOc7lBRkKpfcBSQQfjt+lBPSTLGR/5RQW8DzBRiPwd4K0IxJKrbj/qeTpjLxJvbM
+         /e8MsTZDANNOv4I8qNWEnlrH2UMwC8g6uLWXc7zh+jg/Y0e6T1la5gSd/hvivMJEt/Pr
+         JIaofMGc9R1qGDIXVKgCZmAAbrAgkMktG69/41ncNbrC6PVc9Wnd2sEj8DLfjJboOVwN
+         8HSyD9RRIx4y8LTuVspJd/Z3kBdsGKJk1JwcwxpxyFlNHOjui2rlIPyFXud+w0VjS0ew
+         sGOuxSV4tNEx36z9Pk/YMjNjJM0Pxn25tDN5uYEb5FB2FxcVHozSX1bTY8rpHSJSPtKD
+         FCrA==
+X-Gm-Message-State: AO0yUKV4g/82pYyIPAD1LKd2BAc9tlgH06umCkYavKxDvD0E+qxj9QnR
+        KxQM/8jLQudamiod7fHAgGzMMMjYIN8=
+X-Google-Smtp-Source: AK7set/m5y8QLJ2rVEPQuLfvuJfCZb7LXLMd5x6BkDXzGrf7EnTAlb0ezjgXsvVzFHXmWfzhzcXAjA==
+X-Received: by 2002:adf:f3cf:0:b0:2c5:8575:c37 with SMTP id g15-20020adff3cf000000b002c585750c37mr2323400wrp.66.1676580866381;
+        Thu, 16 Feb 2023 12:54:26 -0800 (PST)
+Received: from Ansuel-xps. (93-34-91-73.ip49.fastwebnet.it. [93.34.91.73])
+        by smtp.gmail.com with ESMTPSA id w13-20020adfcd0d000000b002c54f39d34csm2368271wrm.111.2023.02.16.12.54.24
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 16 Feb 2023 10:22:32 -0800 (PST)
-From:   Sunil V L <sunilvl@ventanamicro.com>
-To:     Palmer Dabbelt <palmer@dabbelt.com>,
-        Albert Ou <aou@eecs.berkeley.edu>,
-        Paul Walmsley <paul.walmsley@sifive.com>,
-        "Rafael J . Wysocki" <rafael@kernel.org>,
-        Len Brown <lenb@kernel.org>,
-        Thomas Gleixner <tglx@linutronix.de>,
-        Marc Zyngier <maz@kernel.org>, Jonathan Corbet <corbet@lwn.net>
-Cc:     linux-riscv@lists.infradead.org, linux-acpi@vger.kernel.org,
-        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
-        Conor Dooley <conor.dooley@microchip.com>,
-        Andrew Jones <ajones@ventanamicro.com>,
-        Anup Patel <apatel@ventanamicro.com>,
-        Atish Patra <atishp@rivosinc.com>,
-        Sunil V L <sunilvl@ventanamicro.com>,
-        "Rafael J . Wysocki" <rafael.j.wysocki@intel.com>
-Subject: [PATCH V2 21/21] Documentation/kernel-parameters.txt: Add RISC-V for ACPI parameter
-Date:   Thu, 16 Feb 2023 23:50:43 +0530
-Message-Id: <20230216182043.1946553-22-sunilvl@ventanamicro.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20230216182043.1946553-1-sunilvl@ventanamicro.com>
-References: <20230216182043.1946553-1-sunilvl@ventanamicro.com>
+        Thu, 16 Feb 2023 12:54:25 -0800 (PST)
+Message-ID: <63ee9801.df0a0220.a106.72a3@mx.google.com>
+X-Google-Original-Message-ID: <Y+3+0e1fVOF0m329@Ansuel-xps.>
+Date:   Thu, 16 Feb 2023 11:00:49 +0100
+From:   Christian Marangi <ansuelsmth@gmail.com>
+To:     Rob Herring <robh@kernel.org>
+Cc:     Lee Jones <lee@kernel.org>, linux-leds@vger.kernel.org,
+        Florian Fainelli <f.fainelli@gmail.com>,
+        devicetree@vger.kernel.org, John Crispin <john@phrozen.org>,
+        Paolo Abeni <pabeni@redhat.com>, linux-kernel@vger.kernel.org,
+        Russell King <linux@armlinux.org.uk>,
+        Bagas Sanjaya <bagasdotme@gmail.com>,
+        Heiner Kallweit <hkallweit1@gmail.com>,
+        Eric Dumazet <edumazet@google.com>,
+        Rob Herring <robh+dt@kernel.org>,
+        Tim Harvey <tharvey@gateworks.com>,
+        Alexander Stein <alexander.stein@ew.tq-group.com>,
+        "David S. Miller" <davem@davemloft.net>,
+        "Russell King (Oracle)" <rmk+kernel@armlinux.org.uk>,
+        Jakub Kicinski <kuba@kernel.org>,
+        Jonathan Corbet <corbet@lwn.net>, linux-doc@vger.kernel.org,
+        Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
+        netdev@vger.kernel.org, Pavel Machek <pavel@ucw.cz>,
+        Vladimir Oltean <olteanv@gmail.com>,
+        Jacek Anaszewski <jacek.anaszewski@gmail.com>,
+        Krzysztof Kozlowski <krzysztof.kozlowski+dt@linaro.org>,
+        Andrew Lunn <andrew@lunn.ch>, Arun.Ramadoss@microchip.com
+Subject: Re: [PATCH v8 12/13] dt-bindings: net: phy: Document support for
+ leds node
+References: <20230216013230.22978-1-ansuelsmth@gmail.com>
+ <20230216013230.22978-13-ansuelsmth@gmail.com>
+ <167651373836.1183034.17900591036429665419.robh@kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Spam-Status: No, score=-2.1 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_NONE,
-        SPF_HELO_NONE,SPF_PASS autolearn=unavailable autolearn_force=no
-        version=3.4.6
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <167651373836.1183034.17900591036429665419.robh@kernel.org>
+X-Spam-Status: No, score=-0.6 required=5.0 tests=BAYES_00,DATE_IN_PAST_06_12,
+        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_FROM,
+        RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,SPF_PASS autolearn=no
+        autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-With ACPI support added for RISC-V, this kernel parameter is also
-supported on RISC-V. Hence, update the documentation.
+On Wed, Feb 15, 2023 at 08:32:11PM -0600, Rob Herring wrote:
+> 
+> On Thu, 16 Feb 2023 02:32:29 +0100, Christian Marangi wrote:
+> > Document support for leds node in phy and add an example for it.
+> > Phy led will have to match led-phy pattern and should be treated as a
+> > generic led.
+> > 
+> > Signed-off-by: Christian Marangi <ansuelsmth@gmail.com>
+> > ---
+> >  .../devicetree/bindings/net/ethernet-phy.yaml | 22 +++++++++++++++++++
+> >  1 file changed, 22 insertions(+)
+> > 
+> 
+> My bot found errors running 'make DT_CHECKER_FLAGS=-m dt_binding_check'
+> on your patch (DT_CHECKER_FLAGS is new in v5.13):
+> 
+> yamllint warnings/errors:
+> 
+> dtschema/dtc warnings/errors:
+> /builds/robherring/dt-review-ci/linux/Documentation/devicetree/bindings/net/ethernet-phy.example.dtb: ethernet-phy@0: leds:led-phy@0:linux,default-trigger: 'oneOf' conditional failed, one must be fixed:
+> 	'netdev' is not one of ['backlight', 'default-on', 'heartbeat', 'disk-activity', 'ide-disk', 'timer', 'pattern']
+> 	'netdev' does not match '^mmc[0-9]+$'
+> 	'netdev' does not match '^cpu[0-9]*$'
+> 	From schema: /builds/robherring/dt-review-ci/linux/Documentation/devicetree/bindings/net/ethernet-phy.yaml
+> 
 
-Signed-off-by: Sunil V L <sunilvl@ventanamicro.com>
-Acked-by: Rafael J. Wysocki <rafael.j.wysocki@intel.com>
----
- Documentation/admin-guide/kernel-parameters.txt | 8 ++++----
- 1 file changed, 4 insertions(+), 4 deletions(-)
+Hi, I could be wrong but this should be fixed by the previous patch that
+adds netdev to the trigger list.
 
-diff --git a/Documentation/admin-guide/kernel-parameters.txt b/Documentation/admin-guide/kernel-parameters.txt
-index 6cfa6e3996cf..b3a5a5844daa 100644
---- a/Documentation/admin-guide/kernel-parameters.txt
-+++ b/Documentation/admin-guide/kernel-parameters.txt
-@@ -1,17 +1,17 @@
--	acpi=		[HW,ACPI,X86,ARM64]
-+	acpi=		[HW,ACPI,X86,ARM64,RISC-V]
- 			Advanced Configuration and Power Interface
- 			Format: { force | on | off | strict | noirq | rsdt |
- 				  copy_dsdt }
- 			force -- enable ACPI if default was off
--			on -- enable ACPI but allow fallback to DT [arm64]
-+			on -- enable ACPI but allow fallback to DT [arm64,riscv]
- 			off -- disable ACPI if default was on
- 			noirq -- do not use ACPI for IRQ routing
- 			strict -- Be less tolerant of platforms that are not
- 				strictly ACPI specification compliant.
- 			rsdt -- prefer RSDT over (default) XSDT
- 			copy_dsdt -- copy DSDT to memory
--			For ARM64, ONLY "acpi=off", "acpi=on" or "acpi=force"
--			are available
-+			For ARM64 and RISC-V, ONLY "acpi=off", "acpi=on" or
-+			"acpi=force" are available
- 
- 			See also Documentation/power/runtime_pm.rst, pci=noacpi
- 
+> doc reference errors (make refcheckdocs):
+> 
+> See https://patchwork.ozlabs.org/project/devicetree-bindings/patch/20230216013230.22978-13-ansuelsmth@gmail.com
+> 
+> The base for the series is generally the latest rc1. A different dependency
+> should be noted in *this* patch.
+> 
+> If you already ran 'make dt_binding_check' and didn't see the above
+> error(s), then make sure 'yamllint' is installed and dt-schema is up to
+> date:
+> 
+> pip3 install dtschema --upgrade
+> 
+> Please check and re-submit after running the above command yourself. Note
+> that DT_SCHEMA_FILES can be set to your schema file to speed up checking
+> your schema. However, it must be unset to test all examples with your schema.
+> 
+
 -- 
-2.34.1
-
+	Ansuel
