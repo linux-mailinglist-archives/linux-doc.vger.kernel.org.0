@@ -2,132 +2,222 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id D520669B624
-	for <lists+linux-doc@lfdr.de>; Sat, 18 Feb 2023 00:05:58 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id B25AE69A7CC
+	for <lists+linux-doc@lfdr.de>; Fri, 17 Feb 2023 10:06:17 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S229684AbjBQXF5 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Fri, 17 Feb 2023 18:05:57 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:53196 "EHLO
+        id S230001AbjBQJGR (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Fri, 17 Feb 2023 04:06:17 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:38526 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S229669AbjBQXF4 (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Fri, 17 Feb 2023 18:05:56 -0500
-Received: from mail-wm1-x32c.google.com (mail-wm1-x32c.google.com [IPv6:2a00:1450:4864:20::32c])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 0F4A753EF3;
-        Fri, 17 Feb 2023 15:05:49 -0800 (PST)
-Received: by mail-wm1-x32c.google.com with SMTP id f19so2083120wml.3;
-        Fri, 17 Feb 2023 15:05:48 -0800 (PST)
+        with ESMTP id S229725AbjBQJGP (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Fri, 17 Feb 2023 04:06:15 -0500
+Received: from mail-ed1-x534.google.com (mail-ed1-x534.google.com [IPv6:2a00:1450:4864:20::534])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 6787E60A43
+        for <linux-doc@vger.kernel.org>; Fri, 17 Feb 2023 01:06:13 -0800 (PST)
+Received: by mail-ed1-x534.google.com with SMTP id dn12so9462414edb.5
+        for <linux-doc@vger.kernel.org>; Fri, 17 Feb 2023 01:06:13 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=in-reply-to:content-disposition:mime-version:references:subject:cc
-         :to:from:date:message-id:from:to:cc:subject:date:message-id:reply-to;
-        bh=iVfVFdTeB2G3+/DvdyG5XCOtX+6GFkOVr0x9Cn2QTxo=;
-        b=Ig7F6MDvxzH2xO4k4V5CyCuAP+VEIWRZnElFSl3gDmgkZXzDs0a9yfd/jXD80CuCnf
-         s14ylBa5jeejT3JSppnZW2zljtI51xTkCg2gRZHP/dd+7hvdnc4L2cmTVRaX+sfiE2Wf
-         FamRFPY6zNQY0FxFeO5m/XgHn33HEBfeJI6q3nRoEtTEMAYgltFmzoWX3bOfx5He/BSV
-         q9HSbWlcajc1cZGzMSZLxlBUIg01c4uQHTMnwQuR6qNkAqOfI22Vu7D7ii0KK+BSn7c4
-         6x3pSoxDBCfVBCZnhL9+9WRSnKKCOSJTRh46EGuiuhId11P/ypX2v+wrrYTzXPpLpRY1
-         r7RA==
+        d=linaro.org; s=google;
+        h=content-transfer-encoding:in-reply-to:from:references:cc:to
+         :content-language:subject:user-agent:mime-version:date:message-id
+         :from:to:cc:subject:date:message-id:reply-to;
+        bh=JSIBIYecSAzgxxMW+baXFDwV8+JzmvL6P/jsbxXUIM8=;
+        b=Y2/kbJRo//tgiNv267ceDZHTRJQc2QnBbl/hTDbXCBcGUZvpafMthRihk5BXV3snif
+         cdDwQPfx9WkHfioUXRlfrNGz+jerIwUcJae2X+t80PPfeVGxjSz525CexDnpbEy9l3ur
+         iZ7J9Cy+uD7yYGVOug5xKR96sCVbBIZNKdA88bV2PSthIpSjZ0xpdZMovRKwrA/SGMsE
+         cwPQgX6mS4SKZn7BQTDj8FeWIRhFgtEXgtMZtRJiYvwPjW6gG4VjWYESNU0EFvEtUmDS
+         6tVhg3Yo43uOA3MxppWLtxEKPnwUEFiQuimIDdxdP8h0NKmSn867Vqe5Eqd23J9a4JiD
+         UlIg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=in-reply-to:content-disposition:mime-version:references:subject:cc
-         :to:from:date:message-id:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=iVfVFdTeB2G3+/DvdyG5XCOtX+6GFkOVr0x9Cn2QTxo=;
-        b=41LfT0BNsOfpkXHF8gIBTdC16yh9oKN/EKnZagi7CLTzA45AlYu0Moe8d1TSQsP4ow
-         GIfroUEtpmpE1SQszGO2NakvZZsMSuJseF21wZKfFyrglGk4lHMDeGUlmrMFoVRe2e6+
-         X8OUN72p8JDFLOeu+8kHmC9HEtYU1ZYDhhyJCbsgXHEhOQRKParrlIvz8lW2iXT7Itqq
-         /F0jAqm5pl7rOBwW3h0HmwqxGjsI15vswm5HJb/WuVyeSbAADzyA4P6epDBObvJffkpD
-         xe2GzTENppz9+EkHQtk3qGOhbBjpOOrprcwcLk1a74YiQCU9iLMxPo7G9yF9cuvUOH5G
-         r7WQ==
-X-Gm-Message-State: AO0yUKXcxy5rtF6/PU+as7tdgpVk71AmC65ECkA3u1BpFZhWYe+t0Ahk
-        w/WQwGpPZ+QnSDdi8YZU04O4b5qGo/M=
-X-Google-Smtp-Source: AK7set8BQ4qFWRGud1mnA7eMLLnciVgGPOUjg93Es34dRLtOBPjQ/tZzPiJ1IoxUodF9lEeqKDJTlA==
-X-Received: by 2002:a05:600c:a29e:b0:3d2:3be4:2d9a with SMTP id hu30-20020a05600ca29e00b003d23be42d9amr1466478wmb.20.1676675146706;
-        Fri, 17 Feb 2023 15:05:46 -0800 (PST)
-Received: from Ansuel-xps. (93-34-91-73.ip49.fastwebnet.it. [93.34.91.73])
-        by smtp.gmail.com with ESMTPSA id d8-20020adfe2c8000000b002c3ea5ebc73sm5325065wrj.101.2023.02.17.15.05.45
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 17 Feb 2023 15:05:46 -0800 (PST)
-Message-ID: <63f0084a.df0a0220.6220b.fb5a@mx.google.com>
-X-Google-Original-Message-ID: <Y+8Xj50FwrXOsBKi@Ansuel-xps.>
-Date:   Fri, 17 Feb 2023 06:58:39 +0100
-From:   Christian Marangi <ansuelsmth@gmail.com>
-To:     Rob Herring <robh@kernel.org>
-Cc:     Pavel Machek <pavel@ucw.cz>, Lee Jones <lee@kernel.org>,
-        Krzysztof Kozlowski <krzysztof.kozlowski+dt@linaro.org>,
-        Andrew Lunn <andrew@lunn.ch>,
-        Florian Fainelli <f.fainelli@gmail.com>,
-        Vladimir Oltean <olteanv@gmail.com>,
-        "David S. Miller" <davem@davemloft.net>,
-        Eric Dumazet <edumazet@google.com>,
-        Jakub Kicinski <kuba@kernel.org>,
-        Paolo Abeni <pabeni@redhat.com>,
-        Heiner Kallweit <hkallweit1@gmail.com>,
-        Russell King <linux@armlinux.org.uk>,
-        Jonathan Corbet <corbet@lwn.net>,
-        "Russell King (Oracle)" <rmk+kernel@armlinux.org.uk>,
-        Jacek Anaszewski <jacek.anaszewski@gmail.com>,
-        John Crispin <john@phrozen.org>, linux-leds@vger.kernel.org,
-        devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
-        netdev@vger.kernel.org, linux-doc@vger.kernel.org,
-        Tim Harvey <tharvey@gateworks.com>,
-        Alexander Stein <alexander.stein@ew.tq-group.com>,
-        Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
-        Bagas Sanjaya <bagasdotme@gmail.com>,
-        Arun.Ramadoss@microchip.com
-Subject: Re: [PATCH v8 11/13] dt-bindings: leds: Document netdev trigger
-References: <20230216013230.22978-1-ansuelsmth@gmail.com>
- <20230216013230.22978-12-ansuelsmth@gmail.com>
- <20230217230346.GA2217008-robh@kernel.org>
+        h=content-transfer-encoding:in-reply-to:from:references:cc:to
+         :content-language:subject:user-agent:mime-version:date:message-id
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=JSIBIYecSAzgxxMW+baXFDwV8+JzmvL6P/jsbxXUIM8=;
+        b=JGOC52y+mSOL+MoghAf701gz0Hx2EkWU3OhXz4WeKLCkOBTSrBSTOR8kLDH0rjb/tI
+         RwQPery1TX9ewxiXOissIDCSiMrFkg1Hn2MUS/btyCMTKICoD+gFEjZjMQ/klcfis9II
+         O84jvaQn/M6C/81fHQ9M8LfJ1b5k0+Eq0dGuZDajG07tG2VJkGrtuVNUmboAgL9ivljh
+         2KWvd1jBb3QzfxzVaNHkx5nSfzVrcSEXRyvOq4MUcC3G7Yya0N/YB9wiVhs+5az5HZpe
+         1lFcyiWKVeDsate3ODKy5E28fcB71nWvG5ivx2vSPtTlEEEyIhaJTzqAIBKAD2VIQVAR
+         G4xA==
+X-Gm-Message-State: AO0yUKXGZjFE2kOR918Gp9Xr3OfLxzk+ZP/H4Crzwoe4aO71fkq19vsm
+        KB3pmUMh0+wPuk/5TTWVjCGuXw==
+X-Google-Smtp-Source: AK7set9mE6QyfGJnv+24G8XcIOFFM/CXR2pndtsVwQAW5+l7mkajK1EbhdqM4iSWcJJFbpSblf6ZPQ==
+X-Received: by 2002:a17:906:e293:b0:8aa:9abe:8edd with SMTP id gg19-20020a170906e29300b008aa9abe8eddmr1718372ejb.66.1676624771844;
+        Fri, 17 Feb 2023 01:06:11 -0800 (PST)
+Received: from [192.168.1.109] ([178.197.216.144])
+        by smtp.gmail.com with ESMTPSA id o1-20020a170906288100b0084cb4d37b8csm1906045ejd.141.2023.02.17.01.06.10
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Fri, 17 Feb 2023 01:06:11 -0800 (PST)
+Message-ID: <c50503f0-dce1-a3b0-2973-8a22b5ef8bc2@linaro.org>
+Date:   Fri, 17 Feb 2023 10:06:09 +0100
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20230217230346.GA2217008-robh@kernel.org>
-X-Spam-Status: No, score=-1.1 required=5.0 tests=BAYES_00,DATE_IN_PAST_12_24,
-        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_FROM,
-        RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,SPF_PASS autolearn=no
-        autolearn_force=no version=3.4.6
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.7.1
+Subject: Re: [PATCH v1 1/4] dt-bindings: mfd: Add DT bindings for TI TPS6594
+ PMIC
+Content-Language: en-US
+To:     Julien Panis <jpanis@baylibre.com>, lee@kernel.org,
+        robh+dt@kernel.org, krzysztof.kozlowski+dt@linaro.org,
+        corbet@lwn.net
+Cc:     hdegoede@redhat.com, eric.auger@redhat.com, jgg@ziepe.ca,
+        razor@blackwall.org, suma.hegde@amd.com,
+        stephen@networkplumber.org, arnd@arndb.de,
+        devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
+        linux-doc@vger.kernel.org, eblanc@baylibre.com,
+        jneanne@baylibre.com
+References: <20230216114410.183489-1-jpanis@baylibre.com>
+ <20230216114410.183489-2-jpanis@baylibre.com>
+From:   Krzysztof Kozlowski <krzysztof.kozlowski@linaro.org>
+In-Reply-To: <20230216114410.183489-2-jpanis@baylibre.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-Spam-Status: No, score=-2.4 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,NICE_REPLY_A,RCVD_IN_DNSWL_NONE,
+        SPF_HELO_NONE,SPF_PASS autolearn=unavailable autolearn_force=no
+        version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Fri, Feb 17, 2023 at 05:03:46PM -0600, Rob Herring wrote:
-> On Thu, Feb 16, 2023 at 02:32:28AM +0100, Christian Marangi wrote:
-> > Document the netdev trigger that makes the LED blink or turn on based on
-> > switch/phy events or an attached network interface.
-> 
-> NAK. What is netdev?
+On 16/02/2023 12:44, Julien Panis wrote:
+> TPS6594 is a Power Management IC which provides regulators and others
 
-But netdev is a trigger, nothing new. Actually it was never documented.
-Is the linux,default-trigger getting deprecated? 
+Subject: drop second/last, redundant "DT bindings for". The
+"dt-bindings" prefix is already stating that these are bindings.
 
-> 
-> Don't add new linux,default-trigger entries either. We have better ways 
-> to define trigger sources, namely 'trigger-sources'.
-> 
-> > Signed-off-by: Christian Marangi <ansuelsmth@gmail.com>
-> > ---
-> >  Documentation/devicetree/bindings/leds/common.yaml | 2 ++
-> >  1 file changed, 2 insertions(+)
-> > 
-> > diff --git a/Documentation/devicetree/bindings/leds/common.yaml b/Documentation/devicetree/bindings/leds/common.yaml
-> > index d34bb58c0037..6e016415a4d8 100644
-> > --- a/Documentation/devicetree/bindings/leds/common.yaml
-> > +++ b/Documentation/devicetree/bindings/leds/common.yaml
-> > @@ -98,6 +98,8 @@ properties:
-> >              # LED alters the brightness for the specified duration with one software
-> >              # timer (requires "led-pattern" property)
-> >            - pattern
-> > +            # LED blink and turns on based on netdev events
-> > +          - netdev
-> >        - pattern: "^cpu[0-9]*$"
-> >        - pattern: "^hci[0-9]+-power$"
-> >          # LED is triggered by Bluetooth activity
-> > -- 
-> > 2.38.1
-> > 
 
--- 
-	Ansuel
+> features like GPIOs, RTC, watchdog, ESMs (Error Signal Monitor), and
+> PFSM (Pre-configurable Finite State Machine) managing the state of the
+> device.
+> TPS6594 is the super-set device while TPS6593 and LP8764X are derivatives.
+> 
+> Signed-off-by: Julien Panis <jpanis@baylibre.com>
+> ---
+>  .../devicetree/bindings/mfd/ti,tps6594.yaml   | 164 ++++++++++++++++++
+>  1 file changed, 164 insertions(+)
+>  create mode 100644 Documentation/devicetree/bindings/mfd/ti,tps6594.yaml
+> 
+> diff --git a/Documentation/devicetree/bindings/mfd/ti,tps6594.yaml b/Documentation/devicetree/bindings/mfd/ti,tps6594.yaml
+> new file mode 100644
+> index 000000000000..37968d6c0420
+> --- /dev/null
+> +++ b/Documentation/devicetree/bindings/mfd/ti,tps6594.yaml
+> @@ -0,0 +1,164 @@
+> +# SPDX-License-Identifier: GPL-2.0-only OR BSD-2-Clause
+> +%YAML 1.2
+> +---
+> +$id: http://devicetree.org/schemas/mfd/ti,tps6594.yaml#
+> +$schema: http://devicetree.org/meta-schemas/core.yaml#
+> +
+> +title: TI TPS6594 Power Management Integrated Circuit
+> +
+> +maintainers:
+> +  - Julien Panis <jpanis@baylibre.com>
+> +
+> +description: |
+> +  TPS6594 is a Power Management IC which provides regulators and others
+> +  features like GPIOs, RTC, watchdog, ESMs (Error Signal Monitor), and
+> +  PFSM (Pre-configurable Finite State Machine) managing the state of the device.
+> +  TPS6594 is the super-set device while TPS6593 and LP8764X are derivatives.
+> +
+> +properties:
+> +  compatible:
+> +    enum:
+> +      - ti,tps6594
+> +      - ti,tps6593
+> +      - ti,lp8764x
+
+Any particular choice of ordering (different than alphabetical)?
+
+> +
+> +  reg:
+> +    description: I2C slave address or SPI chip select number.
+> +    maxItems: 1
+> +
+> +  ti,use-crc:
+> +    type: boolean
+> +    description: If true, use CRC for I2C and SPI interface protocols.
+
+Hm, why different boards would like to enable or disable it? Why this
+suits DT?
+
+> +
+> +  system-power-controller: true
+> +
+> +  interrupts:
+> +    maxItems: 1
+> +
+> +  ti,multi-phase-id:
+> +    description: |
+> +      Describes buck multi-phase configuration, if any. For instance, XY id means
+> +      that outputs of buck converters X and Y are combined in multi-phase mode.
+> +    $ref: /schemas/types.yaml#/definitions/uint32
+> +    enum: [12, 34, 123, 1234]
+> +
+> +patternProperties:
+> +  "^buck([1-5]|12|34|123|1234)-supply$":
+> +    description: Input supply phandle for each buck.
+> +
+> +  "^ldo[1-4]-supply$":
+> +    description: Input supply phandle for each ldo.
+> +
+> +  regulators:
+
+This should go to properties, not patternProperties.
+
+> +    type: object
+> +    description: List of regulators provided by this controller.
+> +
+> +    patternProperties:
+> +      "^buck([1-5]|12|34|123|1234)$":
+> +        type: object
+> +        $ref: /schemas/regulator/regulator.yaml#
+> +
+> +        unevaluatedProperties: false
+> +
+> +      "^ldo[1-4]$":
+> +        type: object
+> +        $ref: /schemas/regulator/regulator.yaml#
+> +
+> +        unevaluatedProperties: false
+> +
+
+You could add here - on this level - of indentation allOf:if for
+excluding setups
+
+if:
+  required:
+    - buck12
+then:
+  properties:
+    buck123: false
+    buck1234: false
+
+Or, if you want to require regulator then:
+oneOf:
+  - required:
+      - buck12
+  - required:
+      - buck123
+  - required:
+      - buck1234
+
+and anyway exclude buck34 with two above.
+
+> +    additionalProperties: false
+> +
+> +required:
+> +  - compatible
+> +  - reg
+> +  - interrupts
+> +
+> +additionalProperties: false
+
+
+
+Best regards,
+Krzysztof
+
