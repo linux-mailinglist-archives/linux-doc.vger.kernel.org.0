@@ -2,104 +2,206 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 7F96A69D20B
-	for <lists+linux-doc@lfdr.de>; Mon, 20 Feb 2023 18:19:23 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id DC6FC69D225
+	for <lists+linux-doc@lfdr.de>; Mon, 20 Feb 2023 18:34:12 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S232402AbjBTRTW (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 20 Feb 2023 12:19:22 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:55176 "EHLO
+        id S232427AbjBTReK (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 20 Feb 2023 12:34:10 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:34412 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S232410AbjBTRTV (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Mon, 20 Feb 2023 12:19:21 -0500
-Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.129.124])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 36C7E1C58D
-        for <linux-doc@vger.kernel.org>; Mon, 20 Feb 2023 09:18:34 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-        s=mimecast20190719; t=1676913513;
-        h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-         to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-         content-transfer-encoding:content-transfer-encoding:
-         in-reply-to:in-reply-to:references:references;
-        bh=n9UUOuyc1RiLX6lt0RLTFWolnPF6Xb+dal6ndxAWPtg=;
-        b=Vq10yZR3A7b7rPIPnWDgQAQgBV2lsTaMzKWelkcd61Ss13FiE5LMvyESweEMWy/OnNcwC1
-        KroPBbEdxcGDqXM1wUdNt0fUX/kA5ebUGSRhFO4HxxONu4XuY1KkdT0VuETToscb3pU5bN
-        c+JZ6QxDt69QE0nCg7iD4brf2iUcJ8o=
-Received: from mimecast-mx02.redhat.com (mimecast-mx02.redhat.com
- [66.187.233.88]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- us-mta-465-0ZToPXgeO9mm24tFAWT64g-1; Mon, 20 Feb 2023 12:18:30 -0500
-X-MC-Unique: 0ZToPXgeO9mm24tFAWT64g-1
-Received: from smtp.corp.redhat.com (int-mx09.intmail.prod.int.rdu2.redhat.com [10.11.54.9])
-        (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
-        (No client certificate requested)
-        by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 7618288562A;
-        Mon, 20 Feb 2023 17:18:29 +0000 (UTC)
-Received: from [10.18.17.153] (dhcp-17-153.bos.redhat.com [10.18.17.153])
-        by smtp.corp.redhat.com (Postfix) with ESMTP id B4C9A492C3C;
-        Mon, 20 Feb 2023 17:18:28 +0000 (UTC)
-Message-ID: <248fbb79-744b-4e49-71de-a6d3d0a0e7ef@redhat.com>
-Date:   Mon, 20 Feb 2023 12:18:28 -0500
+        with ESMTP id S229869AbjBTReJ (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Mon, 20 Feb 2023 12:34:09 -0500
+Received: from mail-ed1-x52a.google.com (mail-ed1-x52a.google.com [IPv6:2a00:1450:4864:20::52a])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id B4E961BAD9
+        for <linux-doc@vger.kernel.org>; Mon, 20 Feb 2023 09:34:06 -0800 (PST)
+Received: by mail-ed1-x52a.google.com with SMTP id cq23so7302238edb.1
+        for <linux-doc@vger.kernel.org>; Mon, 20 Feb 2023 09:34:06 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=ventanamicro.com; s=google;
+        h=in-reply-to:content-disposition:mime-version:references:message-id
+         :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+        bh=w2lPEjmPsu3LYtY8DZxk5vrralnhH+zYWV8cw/aygZg=;
+        b=oN+qyijYHJlUO7+d73fPjJC/vzJxExkcwOeC6kHPx8kPL/nHekvsr9vT/PQhWUEV+B
+         7pwRDd2qaWfGtUFPdZQvgnVyAvrHkohNcXubH+3Cb0SoQUjx0TvHyfgrqFhallZgTk64
+         zunL4GsAEJEUkKeyArSs3gtqmlRH6ZOFS6MS/g9dDEr+nZh7TuhCkIGnkmLeVFmG2qU8
+         HZehIvTKG+CID3zvhzIzoEulLZ/bZvWlGvRrrOn/IP2jw/4juroGQjWZq4GmFY3ywcUA
+         QgPB9fv0Wnprj+5psROiCuENlXNDLj53cr/c3slFOpvNXn5b/j/ti98PB71HlpKcuGE5
+         azRA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=in-reply-to:content-disposition:mime-version:references:message-id
+         :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=w2lPEjmPsu3LYtY8DZxk5vrralnhH+zYWV8cw/aygZg=;
+        b=E93B6qC6Cp0p7OWB6mpt5gRjILvhFqUkQEpBDYNdESKg4Xp0j8QlWB7iaJ5X59UDPM
+         tTESacZ16BbsqLHcGxXl0LNBt0K7E9r4dHB+vLBA6yq4E0RV5I2EU0PGH9uXz9TGRQ7N
+         Onfo7lOd1uIIGJmZr2ZhVW0KHyc3inMSn46FpDSIHfMyTtXuTlKYXcKXnFmedmVt9AFO
+         T6zrKGTNwn8fGddNziL7h9Cin8K1QzIqlt2yb7sz0kNtzZ7A+YkxFajpmetBGQqA2Wsw
+         6EXcedMD/zOvVJHJQCurnW2zWuY5AZ1Th1gsqfKZAha8Nkw3SqpwZuKBQDKgts5RMODv
+         ToOQ==
+X-Gm-Message-State: AO0yUKVb3WcizOZrBSLq2hHySDu7OHhLty89wJ8Tqpr36yA++yMh8Rp2
+        MU3jRwS/RZECT30iuFDd059oXw==
+X-Google-Smtp-Source: AK7set9H4zV0LUVjLvSVauvnlRDsvf+acSYg6cf8q8+/u488Q6Z3MDYmkhABENzUNnf/V0vpL+34Cg==
+X-Received: by 2002:a17:907:cc97:b0:88f:13f0:4565 with SMTP id up23-20020a170907cc9700b0088f13f04565mr6809782ejc.69.1676914445228;
+        Mon, 20 Feb 2023 09:34:05 -0800 (PST)
+Received: from localhost (2001-1ae9-1c2-4c00-20f-c6b4-1e57-7965.ip6.tmcz.cz. [2001:1ae9:1c2:4c00:20f:c6b4:1e57:7965])
+        by smtp.gmail.com with ESMTPSA id i10-20020a170906a28a00b008bda61ff999sm3477128ejz.130.2023.02.20.09.34.04
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 20 Feb 2023 09:34:04 -0800 (PST)
+Date:   Mon, 20 Feb 2023 18:34:03 +0100
+From:   Andrew Jones <ajones@ventanamicro.com>
+To:     Sunil V L <sunilvl@ventanamicro.com>
+Cc:     Palmer Dabbelt <palmer@dabbelt.com>,
+        Albert Ou <aou@eecs.berkeley.edu>,
+        Paul Walmsley <paul.walmsley@sifive.com>,
+        "Rafael J . Wysocki" <rafael@kernel.org>,
+        Len Brown <lenb@kernel.org>,
+        Thomas Gleixner <tglx@linutronix.de>,
+        Marc Zyngier <maz@kernel.org>,
+        Jonathan Corbet <corbet@lwn.net>,
+        linux-riscv@lists.infradead.org, linux-acpi@vger.kernel.org,
+        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
+        Conor Dooley <conor.dooley@microchip.com>,
+        Anup Patel <apatel@ventanamicro.com>,
+        Atish Patra <atishp@rivosinc.com>,
+        "Rafael J . Wysocki" <rafael.j.wysocki@intel.com>
+Subject: Re: [PATCH V2 11/21] RISC-V: ACPI: Add a function to retrieve the
+ hartid
+Message-ID: <20230220173403.avvggi4qhsxgismo@orel>
+References: <20230216182043.1946553-1-sunilvl@ventanamicro.com>
+ <20230216182043.1946553-12-sunilvl@ventanamicro.com>
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.6.0
-Subject: Re: [PATCH] docs: locking: refer to the actual existing config names
-Content-Language: en-US
-To:     Lukas Bulwahn <lukas.bulwahn@gmail.com>,
-        Peter Zijlstra <peterz@infradead.org>,
-        Ingo Molnar <mingo@redhat.com>, Will Deacon <will@kernel.org>,
-        Boqun Feng <boqun.feng@gmail.com>,
-        Jonathan Corbet <corbet@lwn.net>, linux-doc@vger.kernel.org
-Cc:     kernel-janitors@vger.kernel.org, linux-kernel@vger.kernel.org
-References: <20230220165749.12850-1-lukas.bulwahn@gmail.com>
-From:   Waiman Long <longman@redhat.com>
-In-Reply-To: <20230220165749.12850-1-lukas.bulwahn@gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-Scanned-By: MIMEDefang 3.1 on 10.11.54.9
-X-Spam-Status: No, score=-2.2 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,NICE_REPLY_A,
-        RCVD_IN_DNSWL_NONE,RCVD_IN_MSPIKE_H2,SPF_HELO_NONE,SPF_NONE
-        autolearn=unavailable autolearn_force=no version=3.4.6
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20230216182043.1946553-12-sunilvl@ventanamicro.com>
+X-Spam-Status: No, score=-2.1 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_NONE,
+        SPF_HELO_NONE,SPF_PASS autolearn=unavailable autolearn_force=no
+        version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On 2/20/23 11:57, Lukas Bulwahn wrote:
-> The config is actually called CONFIG_RT_MUTEXES, not CONFIG_RT_MUTEX.
->
-> The config CONFIG_LOCK_TORTURE_TEST should be connected by underscore, for
-> the sake of consistent referencing to configs in the kernel documentation.
->
-> Address those issues.
->
-> Signed-off-by: Lukas Bulwahn <lukas.bulwahn@gmail.com>
+On Thu, Feb 16, 2023 at 11:50:33PM +0530, Sunil V L wrote:
+> The hartid is in the RINTC structure of the MADT table. Instead of
+> parsing the ACPI table every time, cache it and provide a function
+> to read it.
+> 
+> Signed-off-by: Sunil V L <sunilvl@ventanamicro.com>
+> Acked-by: Rafael J. Wysocki <rafael.j.wysocki@intel.com>
 > ---
->   Documentation/locking/locktorture.rst | 4 ++--
->   1 file changed, 2 insertions(+), 2 deletions(-)
->
-> diff --git a/Documentation/locking/locktorture.rst b/Documentation/locking/locktorture.rst
-> index dfaf9fc883f4..7f56fc0d7c31 100644
-> --- a/Documentation/locking/locktorture.rst
-> +++ b/Documentation/locking/locktorture.rst
-> @@ -5,7 +5,7 @@ Kernel Lock Torture Test Operation
->   CONFIG_LOCK_TORTURE_TEST
->   ========================
->   
-> -The CONFIG LOCK_TORTURE_TEST config option provides a kernel module
-> +The CONFIG_LOCK_TORTURE_TEST config option provides a kernel module
->   that runs torture tests on core kernel locking primitives. The kernel
->   module, 'locktorture', may be built after the fact on the running
->   kernel to be tested, if desired. The tests periodically output status
-> @@ -67,7 +67,7 @@ torture_type
->   
->   		     - "rtmutex_lock":
->   				rtmutex_lock() and rtmutex_unlock() pairs.
-> -				Kernel must have CONFIG_RT_MUTEX=y.
-> +				Kernel must have CONFIG_RT_MUTEXES=y.
->   
->   		     - "rwsem_lock":
->   				read/write down() and up() semaphore pairs.
-Acked-by: Waiman Long <longman@redhat.com>
+>  arch/riscv/include/asm/acpi.h |  8 +++++
+>  arch/riscv/kernel/acpi.c      | 55 +++++++++++++++++++++++++++++++++++
+>  2 files changed, 63 insertions(+)
+> 
+> diff --git a/arch/riscv/include/asm/acpi.h b/arch/riscv/include/asm/acpi.h
+> index 3c3a8ac3b37a..b9d7b713fb43 100644
+> --- a/arch/riscv/include/asm/acpi.h
+> +++ b/arch/riscv/include/asm/acpi.h
+> @@ -67,6 +67,9 @@ int acpi_numa_get_nid(unsigned int cpu);
+>  static inline int acpi_numa_get_nid(unsigned int cpu) { return NUMA_NO_NODE; }
+>  #endif /* CONFIG_ACPI_NUMA */
+>  
+> +struct acpi_madt_rintc *acpi_cpu_get_madt_rintc(int cpu);
+> +
+> +u32 get_acpi_id_for_cpu(int cpu);
+>  #else
+>  static inline int acpi_get_riscv_isa(struct acpi_table_header *table,
+>  				     unsigned int cpu, const char **isa)
+> @@ -74,6 +77,11 @@ static inline int acpi_get_riscv_isa(struct acpi_table_header *table,
+>  	return -EINVAL;
+>  }
+>  
+> +static inline u32 get_acpi_id_for_cpu(int cpu)
+> +{
+> +	return -1;
+> +}
+> +
+>  #endif /* CONFIG_ACPI */
+>  
+>  #endif /*_ASM_ACPI_H*/
+> diff --git a/arch/riscv/kernel/acpi.c b/arch/riscv/kernel/acpi.c
+> index 81d448c41714..13b26c87c136 100644
+> --- a/arch/riscv/kernel/acpi.c
+> +++ b/arch/riscv/kernel/acpi.c
+> @@ -24,6 +24,61 @@ EXPORT_SYMBOL(acpi_disabled);
+>  int acpi_pci_disabled = 1;	/* skip ACPI PCI scan and IRQ initialization */
+>  EXPORT_SYMBOL(acpi_pci_disabled);
+>  
+> +static unsigned int intc_count;
+> +static struct acpi_madt_rintc cpu_madt_rintc[NR_CPUS];
+> +
+> +static int acpi_parse_madt_rintc(union acpi_subtable_headers *header, const unsigned long end)
+> +{
+> +	struct acpi_madt_rintc *rintc = (struct acpi_madt_rintc *)header;
+> +
+> +	if (!(rintc->flags & ACPI_MADT_ENABLED))
+> +		return 0;
+> +
+> +	cpu_madt_rintc[intc_count++] = *rintc;
+> +
+> +	return 0;
+> +}
+> +
+> +static int acpi_init_rintc_array(void)
+> +{
+> +	if (acpi_table_parse_madt(ACPI_MADT_TYPE_RINTC, acpi_parse_madt_rintc, 0) > 0)
+> +		return 0;
+> +
+> +	pr_info("No valid RINTC entries exist\n");
 
+This pr_info() could be dropped or turned into a comment and the pr_err()
+below moved up here.
+
+> +	return -ENODEV;
+> +}
+> +
+> +struct acpi_madt_rintc *acpi_cpu_get_madt_rintc(int cpu)
+> +{
+> +	static bool rintc_init_done;
+> +	unsigned int i;
+> +
+> +	if (!rintc_init_done) {
+> +		if (acpi_init_rintc_array()) {
+> +			pr_err("Failed to initialize RINTC array\n");
+> +			return NULL;
+> +		}
+> +		rintc_init_done = true;
+> +	}
+> +
+> +	for (i = 0; i < intc_count; i++) {
+> +		if (cpu_madt_rintc[i].hart_id == cpuid_to_hartid_map(cpu))
+> +			return &cpu_madt_rintc[i];
+> +	}
+
+Maybe I'll see the reason in later patches, but it seems odd that this
+patch says we want to cache the cpuid to acpi_processor_id mapping, but
+then we cache each RINTC instead and still have to do a linear search of
+them to determine which one to use.
+
+> +
+> +	return NULL;
+> +}
+> +
+> +u32 get_acpi_id_for_cpu(int cpu)
+> +{
+> +	struct acpi_madt_rintc *rintc = acpi_cpu_get_madt_rintc(cpu);
+> +
+> +	if (!rintc)
+> +		return -1;
+> +
+> +	return  rintc->uid;
+              ^ extra blank here
+> +}
+> +
+>  /*
+>   * __acpi_map_table() will be called before paging_init(), so early_ioremap()
+>   * or early_memremap() should be called here to for ACPI table mapping.
+> -- 
+> 2.34.1
+> 
+
+Thanks,
+drew
