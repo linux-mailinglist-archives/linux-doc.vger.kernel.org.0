@@ -2,67 +2,50 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 5132869E445
-	for <lists+linux-doc@lfdr.de>; Tue, 21 Feb 2023 17:10:51 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 4A79369E4B3
+	for <lists+linux-doc@lfdr.de>; Tue, 21 Feb 2023 17:33:31 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S232992AbjBUQKu (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 21 Feb 2023 11:10:50 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:36654 "EHLO
+        id S233708AbjBUQd1 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 21 Feb 2023 11:33:27 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:59324 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S229876AbjBUQKt (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 21 Feb 2023 11:10:49 -0500
-Received: from mail-qt1-x82f.google.com (mail-qt1-x82f.google.com [IPv6:2607:f8b0:4864:20::82f])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 603B5C660
-        for <linux-doc@vger.kernel.org>; Tue, 21 Feb 2023 08:10:47 -0800 (PST)
-Received: by mail-qt1-x82f.google.com with SMTP id ay9so4653228qtb.9
-        for <linux-doc@vger.kernel.org>; Tue, 21 Feb 2023 08:10:47 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=cmpxchg-org.20210112.gappssmtp.com; s=20210112;
-        h=in-reply-to:content-disposition:mime-version:references:message-id
-         :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
-        bh=hOLB/HnML99ya6804mbfQSmZBEApjV83G7ETjQ04VsU=;
-        b=yDl2F+bJ2ER+JfnGjFqIXfhCtD2SJ6l/O6+O3fI/Sq+ptsvezNMgriS6S5JZkhOi7j
-         Cpz27bf5cwgllWWelIJa9jIsb6Xv+AOUjWGRf7DqkBVnA41mUuBr5/NdP8xpqWCBG9qE
-         s5pDYuCj2uLijFydwVKxfaDe39x0bAV1M8x4VqFO/AYJPqz56VCO8u6R1EM74IFKnJz2
-         3eUYgOXY90HKc6EQCEre/kS2O1Ay+CyqUTXYhxN+hoPX+uKZoXSQKXhRkhNahkqL2k0v
-         9xTKmSgeTWdw4pgV8kBuvWvRrRTqJICyj13L0RZhGEqWOh/xlVL3BWfuy3oY1XLu7pa3
-         N+9A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=in-reply-to:content-disposition:mime-version:references:message-id
-         :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=hOLB/HnML99ya6804mbfQSmZBEApjV83G7ETjQ04VsU=;
-        b=fpGwbSd8kGS8MMTqJDTGiuJ7BJQtduEkHiz1WUPf52Xr36e2aszdt24zaIf4HjVnHw
-         creI6ntG5Dtri8T9mZlF3GIdFrQTruE6deyWT5wjyHXABDECfagasympoT5nnoPNvX0J
-         8kcN7s+zZV1RZZshVGHn/QDub/8VDQzU07Vh096J67QnhAY9kQF0lu7H94MYiuDwOfYo
-         6SRIaC21xPHQPFrloOEYxrqk/FcpfhpxFM58t58J1o0RoCcU0SGghinoYaIEU7RRKaPu
-         F6kg+6iMRA6oXTec/mnzYbUrhH+xnX58AmVupAHaE5Jg76A9f02jO8qevjM1r0cX/uwO
-         Gqsw==
-X-Gm-Message-State: AO0yUKUixR0LdWfEFYZOgr01sGLco6PbvtM545nEZRabs82F4Rea3MCl
-        eOZ8JVbZNOaleuMjgwGdvlSfOA==
-X-Google-Smtp-Source: AK7set/d87HCAHTcDyiftivrBKW2GCwl+NkEApnd4V3/UrHDLxxuTFB2tkatAEs/5lqrJXY8eYeXCg==
-X-Received: by 2002:ac8:5f10:0:b0:3bf:a545:cffa with SMTP id x16-20020ac85f10000000b003bfa545cffamr2863338qta.23.1676995846477;
-        Tue, 21 Feb 2023 08:10:46 -0800 (PST)
-Received: from localhost ([2620:10d:c091:480::1:5e17])
-        by smtp.gmail.com with ESMTPSA id f23-20020ac84657000000b003b9a6d54b6csm952844qto.59.2023.02.21.08.10.45
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 21 Feb 2023 08:10:46 -0800 (PST)
-Date:   Tue, 21 Feb 2023 11:10:45 -0500
-From:   Johannes Weiner <hannes@cmpxchg.org>
-To:     Stefan Roesch <shr@devkernel.io>
-Cc:     kernel-team@fb.com, linux-mm@kvack.org, riel@surriel.com,
-        mhocko@suse.com, david@redhat.com, linux-kselftest@vger.kernel.org,
-        linux-doc@vger.kernel.org, akpm@linux-foundation.org
-Subject: Re: [RFC PATCH v2 00/19] mm: process/cgroup ksm support
-Message-ID: <Y/TtBc9DAkUKRHnV@cmpxchg.org>
-References: <20230210215023.2740545-1-shr@devkernel.io>
+        with ESMTP id S232995AbjBUQd0 (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 21 Feb 2023 11:33:26 -0500
+Received: from outgoing.mit.edu (outgoing-auth-1.mit.edu [18.9.28.11])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 339C810A8C
+        for <linux-doc@vger.kernel.org>; Tue, 21 Feb 2023 08:33:23 -0800 (PST)
+Received: from cwcc.thunk.org (pool-173-48-120-46.bstnma.fios.verizon.net [173.48.120.46])
+        (authenticated bits=0)
+        (User authenticated as tytso@ATHENA.MIT.EDU)
+        by outgoing.mit.edu (8.14.7/8.12.4) with ESMTP id 31LGXF2N026137
+        (version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+        Tue, 21 Feb 2023 11:33:16 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mit.edu; s=outgoing;
+        t=1676997198; bh=5sMaIVZHI3jdW3A9kgLBjlYpSMtuQJn4n/N/g9XfGys=;
+        h=Date:From:To:Cc:Subject:References:In-Reply-To;
+        b=NqZQjjwBidzTkaVeNaIAemY9bN09H9bj97S4yQqWIEJFBpDT8wXR90lm79tKUmP2v
+         lLPgBllEQnuQOlK4a6r+1UdZ3kgj/sfxkkaQUx0oQnFAaIugCAxImi3eJnZrqsJnPw
+         LaUKKFXEo9EkBb8JGyYuhQE/+lGScAd3k4mphzo5PJyDt5GqzbyNkL+QAY5w9NmJyu
+         CjnAW/N7PmTF10GozqctjzHhSsjKOOqizUyfCdcQ1dgP6UxUrhyvav58gRLP164aBE
+         4wdhQVmWc0k/v8EtY+PBoYVHOTIDMoI7fd//KfAi5x6bOfi+wsVtN1RU03B7EjoPKK
+         ggiwAyhmPJ7bA==
+Received: by cwcc.thunk.org (Postfix, from userid 15806)
+        id 8DB8A15C35A1; Tue, 21 Feb 2023 11:33:15 -0500 (EST)
+Date:   Tue, 21 Feb 2023 11:33:15 -0500
+From:   "Theodore Ts'o" <tytso@mit.edu>
+To:     Wu Bo <bo.wu@vivo.com>
+Cc:     Andreas Dilger <adilger.kernel@dilger.ca>,
+        Jonathan Corbet <corbet@lwn.net>, linux-ext4@vger.kernel.org,
+        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org
+Subject: Re: [PATCH] docs: ext4: modify the group desc size to 64
+Message-ID: <Y/TyS9wkzMsr0j4Y@mit.edu>
+References: <20230220110637.42678-1-bo.wu@vivo.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20230210215023.2740545-1-shr@devkernel.io>
-X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-        DKIM_VALID,RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,SPF_PASS autolearn=ham
+In-Reply-To: <20230220110637.42678-1-bo.wu@vivo.com>
+X-Spam-Status: No, score=-4.0 required=5.0 tests=BAYES_00,DKIM_INVALID,
+        DKIM_SIGNED,RCVD_IN_DNSWL_MED,SPF_HELO_NONE,SPF_NONE autolearn=ham
         autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
@@ -70,71 +53,15 @@ Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Hi Stefan,
-
-On Fri, Feb 10, 2023 at 01:50:04PM -0800, Stefan Roesch wrote:
-> So far KSM can only be enabled by calling madvise for memory regions. What is
-> required to enable KSM for more workloads is to enable / disable it at the
-> process / cgroup level.
+On Mon, Feb 20, 2023 at 07:06:37PM +0800, Wu Bo wrote:
+> Since the default ext4 group desc size is 64 now and the size mentioned
+> in this doc is 64 too. Change it to 64.
 > 
-> Use case:
-> The madvise call is not available in the programming language. An example for
-> this are programs with forked workloads using a garbage collected language without
-> pointers. In such a language madvise cannot be made available.
-> 
-> In addition the addresses of objects get moved around as they are garbage
-> collected. KSM sharing needs to be enabled "from the outside" for these type of
-> workloads.
+> Signed-off-by: Wu Bo <bo.wu@vivo.com>
 
-It would be good to expand on the argument that Rik made about the
-interpreter being used for things were there are no merging
-opportunities, and the KSM scanning overhead isn't amortized.
-
-There is a fundamental mismatch in scopes. madvise() is a
-workload-local decision, whereas sizable sharing opportunities may or
-may not exist across multiple workloads. Only a higher-level entity
-like a job scheduler can know for certain whether it's running one or
-more instances of a job. That job scheduler in turn doesn't have the
-necessary knowledge of the workload's internals to make targeted and
-well-timed advise calls with, say, process_madvise().
-
-This also applies to the security concerns brought up in previous
-threads. An individual workload doesn't know what else is running on
-the machine, so it needs to be highly conservative about what it can
-give up for system-wide merging. However, if the system is dedicated
-to running multiple jobs within the same security domain, it's the job
-scheduler that knows that sharing isn't a problem, and even desirable.
-
-So I think this series makes sense, but it would be good to expand a
-bit on the reasoning and address the security aspect in the cover/doc.
-
-> Stefan Roesch (19):
->   mm: add new flag to enable ksm per process
->   mm: add flag to __ksm_enter
->   mm: add flag to __ksm_exit call
->   mm: invoke madvise for all vmas in scan_get_next_rmap_item
->   mm: support disabling of ksm for a process
->   mm: add new prctl option to get and set ksm for a process
-
-The implementation looks sound to me as well.
-
-I think it would be a bit easier to review if you folded these ^^^
-patches, the tools patch below, and the prctl selftests, all into one
-single commit. It's one logical change. This way the new flags and
-helper functions can be reviewed against the new users and callsites
-without having to jump back and forth between emails.
-
->   mm: split off pages_volatile function
->   mm: expose general_profit metric
->   docs: document general_profit sysfs knob
->   mm: calculate ksm process profit metric
->   mm: add ksm_merge_type() function
->   mm: expose ksm process profit metric in ksm_stat
->   mm: expose ksm merge type in ksm_stat
->   docs: document new procfs ksm knobs
-
-Same with the new knobs/stats and their documentation.
-
-Logical splitting is easier to follow than geographical splitting.
+Could you please a parenthetical comment: "(assuming that the 64-bit
+feature is enbled)"?
 
 Thanks!
+
+					- Ted
