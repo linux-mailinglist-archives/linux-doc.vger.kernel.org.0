@@ -2,92 +2,81 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 9A91D69E695
-	for <lists+linux-doc@lfdr.de>; Tue, 21 Feb 2023 18:58:42 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 3AEE569E6BE
+	for <lists+linux-doc@lfdr.de>; Tue, 21 Feb 2023 19:03:38 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S231415AbjBUR6l (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 21 Feb 2023 12:58:41 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:48730 "EHLO
+        id S230363AbjBUSDg (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 21 Feb 2023 13:03:36 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:53498 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S232020AbjBUR6i (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 21 Feb 2023 12:58:38 -0500
-Received: from mail-wr1-x429.google.com (mail-wr1-x429.google.com [IPv6:2a00:1450:4864:20::429])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 773252F78F
-        for <linux-doc@vger.kernel.org>; Tue, 21 Feb 2023 09:58:35 -0800 (PST)
-Received: by mail-wr1-x429.google.com with SMTP id bo30so4827282wrb.0
-        for <linux-doc@vger.kernel.org>; Tue, 21 Feb 2023 09:58:35 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google;
-        h=content-transfer-encoding:in-reply-to:from:references:cc:to
-         :content-language:subject:user-agent:mime-version:date:message-id
-         :from:to:cc:subject:date:message-id:reply-to;
-        bh=S9iW/ZoFwA+vNVbz0hgRVCmhSYJ67As/r6GQ/C1MS14=;
-        b=kkmL3bkoMHa3rpgJXIU9fm2m/Fc9fjZpTR1+czz9opAjVjbwio3hmu13RUzThMYSXr
-         dAX9XP9ZETJTtBG/QfX7MLtnF0j7iNoZ+6VR48IL6eY1Uw/Rb2J3XMlPIbrCbU7JbcJm
-         5sE1pZjBk+SnC1hEpL2huMoX5Okevrj7K/cC8lPGfxtmEFmCVIJDnloBCXlpxCBZPGQD
-         eEyXAU8spQI6HN5l7w6WeCddUq9Hfo3j+p2R/paxWwsuumVe1yo+tgc+axra5TILoAEa
-         z/nbx6Ycfgg1nU3Zd1TPZpREwMdRh1wGGq5ltq59Q/PgXdHcnvnLjZX2fUdWRvnsBDF9
-         3iHA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=content-transfer-encoding:in-reply-to:from:references:cc:to
-         :content-language:subject:user-agent:mime-version:date:message-id
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=S9iW/ZoFwA+vNVbz0hgRVCmhSYJ67As/r6GQ/C1MS14=;
-        b=4jEME5BLJEnbfCHnHdXrPmPbIwOyFOKUnESi4FkAnRR8PaoncvPasLhgBSrHPB8SkY
-         QSUDYwDs/P4vv7raHQ2etzxDfuQjevCd8T/av6Yqy7d6eMipzk7GVlB01PMSuAC8k98t
-         WcG3luELP6RWCyC9miCSfEQbznliXqy/r2zeWEatnckvLuGq9sMzb5m1QFLzGqiG2mDD
-         Lu6yoGwl7NcaUOVWY+DTqXAJcRpBdSSxmqfauKEo7Q4DT8SVCl3/YfgVNv/LCoQgMw6K
-         2s1jlUp0lIHcIyOopHTLRN35Ugf739ztJ8mSaycUMSJ0RvDVfYadxWBkN0SukioNsUEp
-         HD1g==
-X-Gm-Message-State: AO0yUKVSbE3c/yHtwOsm7xziKiU60bsnoD4beNUyUnYn4MzCihY/Upzk
-        jeXpRpJ67A3nUCWD5FYxL68mYw==
-X-Google-Smtp-Source: AK7set+2VYBIviYYpXRgHb6iWH4/F+lDyppvQ+R3fLX/zzCucj88ZsetqCFcBEokjGqacqiFHlxYlQ==
-X-Received: by 2002:adf:d081:0:b0:2c5:9a0d:70a2 with SMTP id y1-20020adfd081000000b002c59a0d70a2mr4778164wrh.16.1677002313874;
-        Tue, 21 Feb 2023 09:58:33 -0800 (PST)
-Received: from [192.168.1.195] ([5.133.47.210])
-        by smtp.googlemail.com with ESMTPSA id z8-20020a056000110800b002c3dc4131f5sm6101436wrw.18.2023.02.21.09.58.32
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Tue, 21 Feb 2023 09:58:33 -0800 (PST)
-Message-ID: <51b57a36-a1e0-45c4-7300-6d2a85f30f6d@linaro.org>
-Date:   Tue, 21 Feb 2023 17:58:31 +0000
+        with ESMTP id S230188AbjBUSDf (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 21 Feb 2023 13:03:35 -0500
+Received: from out1-smtp.messagingengine.com (out1-smtp.messagingengine.com [66.111.4.25])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 61F68EFBF;
+        Tue, 21 Feb 2023 10:03:32 -0800 (PST)
+Received: from compute5.internal (compute5.nyi.internal [10.202.2.45])
+        by mailout.nyi.internal (Postfix) with ESMTP id 14BBF5C00EE;
+        Tue, 21 Feb 2023 13:03:29 -0500 (EST)
+Received: from mailfrontend2 ([10.202.2.163])
+  by compute5.internal (MEProxy); Tue, 21 Feb 2023 13:03:29 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=devkernel.io; h=
+        cc:cc:content-type:date:date:from:from:in-reply-to:in-reply-to
+        :message-id:mime-version:references:reply-to:sender:subject
+        :subject:to:to; s=fm2; t=1677002609; x=1677089009; bh=ZH9OeA2FvC
+        aJR9ZdNyNOKK8xdZTHpoN/UMcS3ejigug=; b=uFm3OuqiNjZk1Pp1VcYl+B4GLI
+        LHh0AzdprYYpC0NdWU4lBklhoeaUyj8Ky/y48Su+7draK6ujiDqll6TAHxuTTvVE
+        e58ql/Hott1vljDoBYKN/P+cgMOQsAvatGq9i0/dLBmBCdZIo5IGOrDPNISTITrG
+        Kz01+aqAf4LzyCQKvaqvQFmRYKFhEsfqEfYIM+tBqafPCpGuGNM8lLYKX/fwbd53
+        8ak3vPCjL4xHJzBgOi4zdvDpJLMTF0z7sK4VhVf2Pu1dA0QpKzgj2Vx948kMk8Mv
+        XRgznh0CTgY3I8BUuNBoCT5T9Ao2ACFibsD7UsDtVyvIUIqv9EsVPMTxv85g==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
+        messagingengine.com; h=cc:cc:content-type:date:date:feedback-id
+        :feedback-id:from:from:in-reply-to:in-reply-to:message-id
+        :mime-version:references:reply-to:sender:subject:subject:to:to
+        :x-me-proxy:x-me-proxy:x-me-sender:x-me-sender:x-sasl-enc; s=
+        fm1; t=1677002609; x=1677089009; bh=ZH9OeA2FvCaJR9ZdNyNOKK8xdZTH
+        poN/UMcS3ejigug=; b=AaTB+z0pCAZE5fWJg+tXQ9XobiP2hdb4zrZw2akHB+Oq
+        /qN7mH5X2STy4YUeJKdrmAVcWwKMBS3Sa8GuvfgjwhNSOAenm+aLhc7bmzGwK6Tp
+        BA1ZycvGfZc5z/r9Q2D1JXAitRXeKOWlVYi7RNVLBki4+c3c8fy28zWF1K6ev4L8
+        fsfVrceQ3CHhYx+6fta5ib+QtTtwyNct0wCVGoIyNHJJLR/wky9b410Oy6SRH2Ou
+        67cUxgssYFu/RWi7E/7yieo3p0/iaD3kKriy1VD1GvbhDEBuB1e9njUg2amd8XaC
+        woBK0CSqBTzVKLeGaUTTvgalkjFDHf21CTqq9a6fEA==
+X-ME-Sender: <xms:cAf1YykvX83DCS4cVcdGyEkdQgZp3fI-veIRAsihNug-EF_k4IkjeQ>
+    <xme:cAf1Y50GqEVO49TkBN3lihfG-6z5AY0goeofFZdYOmEIW2SrGyb7-ubHzz2Jmz8W1
+    Brn1C1gBLayXK4xp9A>
+X-ME-Received: <xmr:cAf1Ywo3mNSv7UEEqZXh5QXdyHlHyhM3sjeqiHIdATJHMR2w2KjLtbVsdDtGDZUeaKl31uXs-jLVGacAt5VqelNxwSEWhOkBk3t_4Qo>
+X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvhedrudejjedguddtiecutefuodetggdotefrod
+    ftvfcurfhrohhfihhlvgemucfhrghsthforghilhdpqfgfvfdpuffrtefokffrpgfnqfgh
+    necuuegrihhlohhuthemuceftddtnecunecujfgurhepfhgfhffvvefuffgjkfggtgesth
+    dtofdttdertdenucfhrhhomhepufhtvghfrghnucftohgvshgthhcuoehshhhrseguvghv
+    khgvrhhnvghlrdhioheqnecuggftrfgrthhtvghrnhepfeeludefhfegvdffieeuhfdvud
+    etvdetfefgieegffduhfegffeuudevkeeiuedunecuvehluhhsthgvrhfuihiivgeptden
+    ucfrrghrrghmpehmrghilhhfrhhomhepshhhrhesuggvvhhkvghrnhgvlhdrihho
+X-ME-Proxy: <xmx:cAf1Y2nXXfRrqcLzVDk7NnExbFZQ8trl5HsmurfFrc52XTZWYfWNWQ>
+    <xmx:cAf1Yw3SjDo4olDVlF0KNzjU493iZpZpa1WkdTgLUEu13i-JcArJmw>
+    <xmx:cAf1Y9u5j932q5El25kyBFiDlpkY9o4N6PWILAtPc3GbT8ZiFMO_5g>
+    <xmx:cQf1YxlyRNGOiANfBZCF4ez6YfBJ3r6tIYOuQI2kvS95FZIqnHxzCQ>
+Feedback-ID: i84614614:Fastmail
+Received: by mail.messagingengine.com (Postfix) with ESMTPA; Tue,
+ 21 Feb 2023 13:03:27 -0500 (EST)
+References: <20230210215023.2740545-1-shr@devkernel.io>
+ <Y/TtBc9DAkUKRHnV@cmpxchg.org>
+User-agent: mu4e 1.6.11; emacs 28.2.50
+From:   Stefan Roesch <shr@devkernel.io>
+To:     Johannes Weiner <hannes@cmpxchg.org>
+Cc:     kernel-team@fb.com, linux-mm@kvack.org, riel@surriel.com,
+        mhocko@suse.com, david@redhat.com, linux-kselftest@vger.kernel.org,
+        linux-doc@vger.kernel.org, akpm@linux-foundation.org
+Subject: Re: [RFC PATCH v2 00/19] mm: process/cgroup ksm support
+Date:   Tue, 21 Feb 2023 09:59:59 -0800
+In-reply-to: <Y/TtBc9DAkUKRHnV@cmpxchg.org>
+Message-ID: <qvqwttzevqtx.fsf@dev0134.prn3.facebook.com>
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.7.1
-Subject: Re: [PATCH v10 19/26] gunyah: vm_mgr: Add framework to add VM
- Functions
-Content-Language: en-US
-To:     Srivatsa Vaddagiri <quic_svaddagi@quicinc.com>,
-        Elliot Berman <quic_eberman@quicinc.com>
-Cc:     Alex Elder <elder@linaro.org>,
-        Prakruthi Deepak Heragu <quic_pheragu@quicinc.com>,
-        Jonathan Corbet <corbet@lwn.net>,
-        Murali Nalajala <quic_mnalajal@quicinc.com>,
-        Trilok Soni <quic_tsoni@quicinc.com>,
-        Carl van Schaik <quic_cvanscha@quicinc.com>,
-        Dmitry Baryshkov <dmitry.baryshkov@linaro.org>,
-        Bjorn Andersson <andersson@kernel.org>,
-        Konrad Dybcio <konrad.dybcio@linaro.org>,
-        Arnd Bergmann <arnd@arndb.de>,
-        Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
-        Rob Herring <robh+dt@kernel.org>,
-        Krzysztof Kozlowski <krzysztof.kozlowski+dt@linaro.org>,
-        Bagas Sanjaya <bagasdotme@gmail.com>,
-        Catalin Marinas <catalin.marinas@arm.com>,
-        Jassi Brar <jassisinghbrar@gmail.com>,
-        linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org,
-        linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org,
-        linux-arm-kernel@lists.infradead.org
-References: <20230214211229.3239350-1-quic_eberman@quicinc.com>
- <20230214212531.3323284-1-quic_eberman@quicinc.com>
- <20230221130759.GD787573@quicinc.com>
-From:   Srinivas Kandagatla <srinivas.kandagatla@linaro.org>
-In-Reply-To: <20230221130759.GD787573@quicinc.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-Spam-Status: No, score=-2.2 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,NICE_REPLY_A,RCVD_IN_DNSWL_NONE,
-        SPF_HELO_NONE,SPF_PASS autolearn=ham autolearn_force=no version=3.4.6
+Content-Type: text/plain
+X-Spam-Status: No, score=-2.8 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_LOW,
+        RCVD_IN_MSPIKE_H3,RCVD_IN_MSPIKE_WL,SPF_HELO_PASS,SPF_PASS
+        autolearn=ham autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
@@ -95,50 +84,83 @@ List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
 
+Johannes Weiner <hannes@cmpxchg.org> writes:
 
-On 21/02/2023 13:07, Srivatsa Vaddagiri wrote:
-> * Elliot Berman <quic_eberman@quicinc.com> [2023-02-14 13:25:30]:
-> 
->> +int __must_check gh_vm_get(struct gh_vm *ghvm)
-> 
-> Minor comment:
-> 
-> get_gh_rm vs gh_vm_get -> can follow some consistent convention I think.
-> 
-> Perhaps get_gh_vm()?
+> Hi Stefan,
+>
+> On Fri, Feb 10, 2023 at 01:50:04PM -0800, Stefan Roesch wrote:
+>> So far KSM can only be enabled by calling madvise for memory regions. What is
+>> required to enable KSM for more workloads is to enable / disable it at the
+>> process / cgroup level.
+>>
+>> Use case:
+>> The madvise call is not available in the programming language. An example for
+>> this are programs with forked workloads using a garbage collected language without
+>> pointers. In such a language madvise cannot be made available.
+>>
+>> In addition the addresses of objects get moved around as they are garbage
+>> collected. KSM sharing needs to be enabled "from the outside" for these type of
+>> workloads.
+>
+> It would be good to expand on the argument that Rik made about the
+> interpreter being used for things were there are no merging
+> opportunities, and the KSM scanning overhead isn't amortized.
+>
+> There is a fundamental mismatch in scopes. madvise() is a
+> workload-local decision, whereas sizable sharing opportunities may or
+> may not exist across multiple workloads. Only a higher-level entity
+> like a job scheduler can know for certain whether it's running one or
+> more instances of a job. That job scheduler in turn doesn't have the
+> necessary knowledge of the workload's internals to make targeted and
+> well-timed advise calls with, say, process_madvise().
+>
+> This also applies to the security concerns brought up in previous
+> threads. An individual workload doesn't know what else is running on
+> the machine, so it needs to be highly conservative about what it can
+> give up for system-wide merging. However, if the system is dedicated
+> to running multiple jobs within the same security domain, it's the job
+> scheduler that knows that sharing isn't a problem, and even desirable.
+>
+> So I think this series makes sense, but it would be good to expand a
+> bit on the reasoning and address the security aspect in the cover/doc.
+>
 
-it should be other way around
+These are good points Johannes, I'll elaborate on them with the next
+version of the patch.
 
-currently we have combinations of gh_vm and some other pattern, we 
-should stick with one, in this case gh_vm_* or gh_rm_* makes more sense
+>> Stefan Roesch (19):
+>>   mm: add new flag to enable ksm per process
+>>   mm: add flag to __ksm_enter
+>>   mm: add flag to __ksm_exit call
+>>   mm: invoke madvise for all vmas in scan_get_next_rmap_item
+>>   mm: support disabling of ksm for a process
+>>   mm: add new prctl option to get and set ksm for a process
+>
+> The implementation looks sound to me as well.
+>
+> I think it would be a bit easier to review if you folded these ^^^
+> patches, the tools patch below, and the prctl selftests, all into one
+> single commit. It's one logical change. This way the new flags and
+> helper functions can be reviewed against the new users and callsites
+> without having to jump back and forth between emails.
+>
 
-here are all the exported symbols in gunyah.
+I'll fold them in the next version.
 
-./drivers/virt/gunyah/vm_mgr.c:EXPORT_SYMBOL_GPL(gh_vm_function_register);
-./drivers/virt/gunyah/vm_mgr.c:EXPORT_SYMBOL_GPL(gh_vm_function_unregister);
-./drivers/virt/gunyah/vm_mgr.c:EXPORT_SYMBOL_GPL(gh_vm_add_resource_ticket);
-./drivers/virt/gunyah/vm_mgr.c:EXPORT_SYMBOL_GPL(gh_vm_remove_resource_ticket);
-./drivers/virt/gunyah/vm_mgr.c:EXPORT_SYMBOL_GPL(gh_vm_mmio_write);
-./drivers/virt/gunyah/vm_mgr.c:EXPORT_SYMBOL_GPL(gh_vm_add_io_handler);
-./drivers/virt/gunyah/vm_mgr.c:EXPORT_SYMBOL_GPL(gh_vm_remove_io_handler);
-./drivers/virt/gunyah/vm_mgr.c:EXPORT_SYMBOL_GPL(gh_vm_get);
-./drivers/virt/gunyah/vm_mgr.c:EXPORT_SYMBOL_GPL(gh_vm_put);
-./drivers/virt/gunyah/rsc_mgr.c:EXPORT_SYMBOL_GPL(gh_rm_notifier_register);
-./drivers/virt/gunyah/rsc_mgr.c:EXPORT_SYMBOL_GPL(gh_rm_notifier_unregister);
-./drivers/virt/gunyah/rsc_mgr.c:EXPORT_SYMBOL_GPL(get_gh_rm);
-./drivers/virt/gunyah/rsc_mgr.c:EXPORT_SYMBOL_GPL(put_gh_rm);
-./drivers/virt/gunyah/gunyah.c:EXPORT_SYMBOL_GPL(gh_api_version);
-./drivers/virt/gunyah/gunyah.c:EXPORT_SYMBOL_GPL(gh_api_has_feature);
-./drivers/virt/gunyah/rsc_mgr_rpc.c:EXPORT_SYMBOL_GPL(gh_rm_get_vmid);
-./drivers/virt/gunyah/gunyah_platform_hooks.c:EXPORT_SYMBOL_GPL(gh_rm_platform_pre_mem_share);
-./drivers/virt/gunyah/gunyah_platform_hooks.c:EXPORT_SYMBOL_GPL(gh_rm_platform_post_mem_reclaim);
-./drivers/virt/gunyah/gunyah_platform_hooks.c:EXPORT_SYMBOL_GPL(gh_rm_register_platform_ops);
-./drivers/virt/gunyah/gunyah_platform_hooks.c:EXPORT_SYMBOL_GPL(gh_rm_unregister_platform_ops);
-./drivers/virt/gunyah/gunyah_platform_hooks.c:EXPORT_SYMBOL_GPL(devm_gh_rm_register_platform_ops);
+>>   mm: split off pages_volatile function
+>>   mm: expose general_profit metric
+>>   docs: document general_profit sysfs knob
+>>   mm: calculate ksm process profit metric
+>>   mm: add ksm_merge_type() function
+>>   mm: expose ksm process profit metric in ksm_stat
+>>   mm: expose ksm merge type in ksm_stat
+>>   docs: document new procfs ksm knobs
+>
+> Same with the new knobs/stats and their documentation.
+>
 
-> 
-> 
->> +{
->> +	return kref_get_unless_zero(&ghvm->kref);
->> +}
->> +EXPORT_SYMBOL_GPL(gh_vm_get);
+I'll fold them in the next version.
+
+> Logical splitting is easier to follow than geographical splitting.
+>
+> Thanks!
