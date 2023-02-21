@@ -2,183 +2,334 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id A43E069E2E1
-	for <lists+linux-doc@lfdr.de>; Tue, 21 Feb 2023 16:00:31 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 51F7069E2A3
+	for <lists+linux-doc@lfdr.de>; Tue, 21 Feb 2023 15:49:27 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S234570AbjBUPA3 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 21 Feb 2023 10:00:29 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:51070 "EHLO
+        id S233577AbjBUOt0 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 21 Feb 2023 09:49:26 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:39676 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S234551AbjBUPA2 (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 21 Feb 2023 10:00:28 -0500
-Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.133.124])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 9F2449EDA
-        for <linux-doc@vger.kernel.org>; Tue, 21 Feb 2023 06:59:42 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-        s=mimecast20190719; t=1676991581;
-        h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-         to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-         in-reply-to:in-reply-to:references:references;
-        bh=zR01m6f0KMxaCdW6/9YON73JqwNOZ58NWx14UlZixkQ=;
-        b=Fg3MHoU+lHyQmBOd2njFZCnYCJD0K+S2jZOAYOQWFj1TCoez7lV/7g1yFwPluBZ1u+ru8H
-        T4OP2zQKoHnTvyyJdgIisZpf13pLSsUJ2hzibWJP9Eyrha6f84M4Wz8rkfx+jp53x+QwvZ
-        3EzeMIfgqDXw+/+WtKnE9O/r8lyj4gQ=
-Received: from mail-ed1-f72.google.com (mail-ed1-f72.google.com
- [209.85.208.72]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_128_GCM_SHA256) id
- us-mta-650-8hbzzBcRMlKkns9NHcSm6g-1; Tue, 21 Feb 2023 09:59:40 -0500
-X-MC-Unique: 8hbzzBcRMlKkns9NHcSm6g-1
-Received: by mail-ed1-f72.google.com with SMTP id eh16-20020a0564020f9000b004acc4f8aa3fso6351487edb.3
-        for <linux-doc@vger.kernel.org>; Tue, 21 Feb 2023 06:59:40 -0800 (PST)
+        with ESMTP id S233364AbjBUOtZ (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 21 Feb 2023 09:49:25 -0500
+Received: from mail-ed1-x52f.google.com (mail-ed1-x52f.google.com [IPv6:2a00:1450:4864:20::52f])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 286B840E9
+        for <linux-doc@vger.kernel.org>; Tue, 21 Feb 2023 06:49:21 -0800 (PST)
+Received: by mail-ed1-x52f.google.com with SMTP id f13so17665938edz.6
+        for <linux-doc@vger.kernel.org>; Tue, 21 Feb 2023 06:49:21 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=baylibre-com.20210112.gappssmtp.com; s=20210112;
+        h=content-transfer-encoding:in-reply-to:from:content-language
+         :references:cc:to:subject:user-agent:mime-version:date:message-id
+         :from:to:cc:subject:date:message-id:reply-to;
+        bh=O2m6GeHfYXzVaSr3VckfJrn4hduzvo0x539FyIhmfDs=;
+        b=laWx5JPNYJgCQqBAnvYC1Dvh7aTIuYigy7pErJqHZIOfE62XB7z+DQr5zVO7mXAaS5
+         JlMXuxoCPfolaT1mShJr0Kzy9o7x0bArn/wen1mDDbis7ObqpVlBJOuumRJVQkVYtknD
+         gprvL2XG4pVFH/jkGcpF0tdDt1/UqbjDT6+SdZoFJ2O3jmlbhKaNkgbSrfgLjHSowK0G
+         LuQrb5se2rRdqICHQlUt5SLOCp5TtmTvih9eQcUNe2gZKs9t0eeLxQJUSGgvoZnvBkG0
+         WRw5uUH471m1FT4NmudtR8TOd6X4ndbWZyE1LziqnzpHzn+SiWAmVBmOVVe0U6OFUa0V
+         l06A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=in-reply-to:content-disposition:mime-version:references:message-id
-         :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=zR01m6f0KMxaCdW6/9YON73JqwNOZ58NWx14UlZixkQ=;
-        b=36AVN4QKISrXFM7y55/8rmE69uHYDN192LSYQbwfmMfYXAM2zQlw6/dBaZSJFVDby5
-         D7Lke3e2foseg0/XgDGp2LnswWzrfmaCWL8fOBnA/Hx/mLYc30sqAdYkNqLiLubihu32
-         FHITzTHyxYJ/eUrAbSlmhwqaNVDjrtNUH7ztCyd0EBEiD5z7ye18X2J10Ryp+KtVdm0R
-         i7gYxBCNJHxAwLE5xkNegWpdoUXV9irpPguHjfbOnC0rVPEMDkyo+wJEnOcAuF/0Qnj6
-         GzoLuew/v76+V6sDmxudmGCOz2y/0jin3ffdEF2HafkgF21mskV1d9kh95FOO6ZwgrQf
-         EQAA==
-X-Gm-Message-State: AO0yUKUzoTV+UXDu9ZFaxgM5bPpiYXn72MDoU1q+1ElEug4gANUD0fSS
-        qqtXMZKb5p5RuNTiLHBtwN9kYS2ufmREozXttWtu3EckC8rsvQf4UiiMy5aOz+WBbZqgS0ystRD
-        tlvng4DeNbkPA4/4Wu2Ix
-X-Received: by 2002:a17:906:f298:b0:877:8ae7:2e44 with SMTP id gu24-20020a170906f29800b008778ae72e44mr10449577ejb.5.1676991579519;
-        Tue, 21 Feb 2023 06:59:39 -0800 (PST)
-X-Google-Smtp-Source: AK7set/rd+60WkR9Pb5ZCfi4/q+0aDmwntl5Cr4CAeiqkkwHXnHhiHRgUbf3dBpXyGaefcHcmhtyMQ==
-X-Received: by 2002:a17:906:f298:b0:877:8ae7:2e44 with SMTP id gu24-20020a170906f29800b008778ae72e44mr10449559ejb.5.1676991579247;
-        Tue, 21 Feb 2023 06:59:39 -0800 (PST)
-Received: from pollux ([2a02:810d:4b3f:de78:642:1aff:fe31:a15c])
-        by smtp.gmail.com with ESMTPSA id dt23-20020a170906b79700b00889db195470sm7194952ejb.82.2023.02.21.06.59.37
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 21 Feb 2023 06:59:38 -0800 (PST)
-Date:   Tue, 21 Feb 2023 15:37:49 +0100
-From:   Danilo Krummrich <dakr@redhat.com>
-To:     Matthew Wilcox <willy@infradead.org>
-Cc:     matthew.brost@intel.com, dri-devel@lists.freedesktop.org,
-        corbet@lwn.net, nouveau@lists.freedesktop.org, ogabbay@kernel.org,
-        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
-        linux-mm@kvack.org, boris.brezillon@collabora.com,
-        bskeggs@redhat.com, tzimmermann@suse.de, Liam.Howlett@oracle.com,
-        bagasdotme@gmail.com, christian.koenig@amd.com,
-        jason@jlekstrand.net
-Subject: Re: [PATCH drm-next v2 04/16] maple_tree: add flag MT_FLAGS_LOCK_NONE
-Message-ID: <Y/TXPasvkhtGiR+w@pollux>
-References: <20230217134422.14116-1-dakr@redhat.com>
- <20230217134422.14116-5-dakr@redhat.com>
- <Y+/Xn11dfdn7SfBD@casper.infradead.org>
- <3bb02ec3-4d19-9135-cabc-26ed210f7396@redhat.com>
- <Y/ONYhyDCPEYH1ml@casper.infradead.org>
- <e43f6acc-175d-1031-c4a2-67a6f1741866@redhat.com>
- <Y/PZH/q2Xsr3od9m@casper.infradead.org>
+        h=content-transfer-encoding:in-reply-to:from:content-language
+         :references:cc:to:subject:user-agent:mime-version:date:message-id
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=O2m6GeHfYXzVaSr3VckfJrn4hduzvo0x539FyIhmfDs=;
+        b=uHd0+OR7ipKBQS883rMMsEK+xfhCr7KDouP0IPvLpwKAYoouCSkxZwzYmQ1/LEFcDf
+         XvvdLSxSNPmdct9SG7NlGSTD/loKK6TRnncOHnALl8Qtx5heMBsfttGH6PzVJiOy4xrb
+         1j8GapXjQVk1Z2eoTBXte4piBfyPDxp6MADZG15I4esclWmBpcabHruJIrn0nptrvS8t
+         7n6jHUdq/YXBbNH8wmT/elq4v7EDgaFkiaA7Ei/1CGOAvTXe/tIoDsb7qRi6uFAba4Zf
+         ej6H8RK+TXrtyz7wRQZ+1O+3ksOTB/cQlBvTtD+NPt8UpGKjGDGiOah9UY7p2nz9TvCE
+         TRYQ==
+X-Gm-Message-State: AO0yUKX9/wNveLsYrT3lRjq7IZFtMTe3JoKBUL17eL0lmyuKDBQ7g+pe
+        39Y+dpHWamlLiVARSTiJNVuhTw==
+X-Google-Smtp-Source: AK7set83TDYqLloq+McepeVv6RvAXS8Xv4zUfUNaIcna2HGfOzuukEfezRsolIELB/r/xPDeDPFdzQ==
+X-Received: by 2002:a05:6402:3cb:b0:4ac:d2b4:5e37 with SMTP id t11-20020a05640203cb00b004acd2b45e37mr5640091edw.39.1676990959083;
+        Tue, 21 Feb 2023 06:49:19 -0800 (PST)
+Received: from [192.168.1.70] (125.62.71.86.rev.sfr.net. [86.71.62.125])
+        by smtp.gmail.com with ESMTPSA id y21-20020a056402359500b004ab33d52d03sm3133400edc.22.2023.02.21.06.49.17
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Tue, 21 Feb 2023 06:49:18 -0800 (PST)
+Message-ID: <85183c04-40e3-fd97-c4ca-06795fe99e40@baylibre.com>
+Date:   Tue, 21 Feb 2023 15:49:16 +0100
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <Y/PZH/q2Xsr3od9m@casper.infradead.org>
-X-Spam-Status: No, score=-2.1 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_NONE,
-        RCVD_IN_MSPIKE_H2,SPF_HELO_NONE,SPF_NONE autolearn=ham
-        autolearn_force=no version=3.4.6
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.7.1
+Subject: Re: [PATCH v1 1/4] dt-bindings: mfd: Add DT bindings for TI TPS6594
+ PMIC
+To:     Krzysztof Kozlowski <krzysztof.kozlowski@linaro.org>,
+        lee@kernel.org, robh+dt@kernel.org,
+        krzysztof.kozlowski+dt@linaro.org, corbet@lwn.net
+Cc:     hdegoede@redhat.com, eric.auger@redhat.com, jgg@ziepe.ca,
+        razor@blackwall.org, suma.hegde@amd.com,
+        stephen@networkplumber.org, arnd@arndb.de,
+        devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
+        linux-doc@vger.kernel.org, eblanc@baylibre.com,
+        jneanne@baylibre.com
+References: <20230216114410.183489-1-jpanis@baylibre.com>
+ <20230216114410.183489-2-jpanis@baylibre.com>
+ <c50503f0-dce1-a3b0-2973-8a22b5ef8bc2@linaro.org>
+ <4e64838c-b727-923b-b6d5-413a0681977c@baylibre.com>
+ <8de5a3bb-a0b1-8d69-cf61-0c33f42c56f6@linaro.org>
+Content-Language: en-US
+From:   Julien Panis <jpanis@baylibre.com>
+In-Reply-To: <8de5a3bb-a0b1-8d69-cf61-0c33f42c56f6@linaro.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-Spam-Status: No, score=-2.0 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+        DKIM_VALID,NICE_REPLY_A,RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,SPF_PASS
+        autolearn=unavailable autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Mon, Feb 20, 2023 at 08:33:35PM +0000, Matthew Wilcox wrote:
-> On Mon, Feb 20, 2023 at 06:06:03PM +0100, Danilo Krummrich wrote:
-> > On 2/20/23 16:10, Matthew Wilcox wrote:
-> > > This is why we like people to use the spinlock embedded in the tree.
-> > > There's nothing for the user to care about.  If the access really is
-> > > serialised, acquiring/releasing the uncontended spinlock is a minimal
-> > > cost compared to all the other things that will happen while modifying
-> > > the tree.
-> > 
-> > I think as for the users of the GPUVA manager we'd have two cases:
-> > 
-> > 1) Accesses to the manager (and hence the tree) are serialized, no lock
-> > needed.
-> > 
-> > 2) Multiple operations on the tree must be locked in order to make them
-> > appear atomic.
-> 
-> Could you give an example here of what you'd like to do?  Ideally
-> something complicated so I don't say "Oh, you can just do this" when
-> there's a more complex example for which "this" won't work.  I'm sure
-> that's embedded somewhere in the next 20-odd patches, but it's probably
-> quicker for you to describe in terms of tree operations that have to
-> appear atomic than for me to try to figure it out.
-> 
 
-Absolutely, not gonna ask you to read all of that. :-)
 
-One thing the GPUVA manager does is to provide drivers the (sub-)operations
-that need to be processed in order to fulfill a map or unmap request from
-userspace. For instance, when userspace asks the driver to map some memory
-the GPUVA manager calculates which existing mappings must be removed, split up
-or can be merged with the newly requested mapping.
+On 2/21/23 12:17, Krzysztof Kozlowski wrote:
+> On 17/02/2023 13:10, Julien Panis wrote:
+>> On 2/17/23 10:06, Krzysztof Kozlowski wrote:
+>>> On 16/02/2023 12:44, Julien Panis wrote:
+>>>> TPS6594 is a Power Management IC which provides regulators and others
+>>> Subject: drop second/last, redundant "DT bindings for". The
+>>> "dt-bindings" prefix is already stating that these are bindings.
+>>>
+>>>
+>>>> features like GPIOs, RTC, watchdog, ESMs (Error Signal Monitor), and
+>>>> PFSM (Pre-configurable Finite State Machine) managing the state of the
+>>>> device.
+>>>> TPS6594 is the super-set device while TPS6593 and LP8764X are derivatives.
+>>>>
+>>>> Signed-off-by: Julien Panis <jpanis@baylibre.com>
+>>>> ---
+>>>>    .../devicetree/bindings/mfd/ti,tps6594.yaml   | 164 ++++++++++++++++++
+>>>>    1 file changed, 164 insertions(+)
+>>>>    create mode 100644 Documentation/devicetree/bindings/mfd/ti,tps6594.yaml
+>>>>
+>>>> diff --git a/Documentation/devicetree/bindings/mfd/ti,tps6594.yaml b/Documentation/devicetree/bindings/mfd/ti,tps6594.yaml
+>>>> new file mode 100644
+>>>> index 000000000000..37968d6c0420
+>>>> --- /dev/null
+>>>> +++ b/Documentation/devicetree/bindings/mfd/ti,tps6594.yaml
+>>>> @@ -0,0 +1,164 @@
+>>>> +# SPDX-License-Identifier: GPL-2.0-only OR BSD-2-Clause
+>>>> +%YAML 1.2
+>>>> +---
+>>>> +$id: http://devicetree.org/schemas/mfd/ti,tps6594.yaml#
+>>>> +$schema: http://devicetree.org/meta-schemas/core.yaml#
+>>>> +
+>>>> +title: TI TPS6594 Power Management Integrated Circuit
+>>>> +
+>>>> +maintainers:
+>>>> +  - Julien Panis <jpanis@baylibre.com>
+>>>> +
+>>>> +description: |
+>>>> +  TPS6594 is a Power Management IC which provides regulators and others
+>>>> +  features like GPIOs, RTC, watchdog, ESMs (Error Signal Monitor), and
+>>>> +  PFSM (Pre-configurable Finite State Machine) managing the state of the device.
+>>>> +  TPS6594 is the super-set device while TPS6593 and LP8764X are derivatives.
+>>>> +
+>>>> +properties:
+>>>> +  compatible:
+>>>> +    enum:
+>>>> +      - ti,tps6594
+>>>> +      - ti,tps6593
+>>>> +      - ti,lp8764x
+>>> Any particular choice of ordering (different than alphabetical)?
+>> Thank you for the review.
+>>
+>> I chose this ordering because it emphasizes the fact that tps6593 and
+>> lp8764x
+>> are derivatives of tps6594 : tps6593 is nearly the same (a minor feature
+>> is not
+>> supported), and lp8764x has less resources (less bucks/LDO, and no RTC).
+>>
+>> Besides, a multi-PMIC synchronization scheme is implemented in the PMIC
+>> device
+>> to synchronize the power state changes with other PMIC devices. This is done
+>> through a SPMI bus : the master PMIC is the controller device on the
+>> SPMI bus,
+>> and the slave PMICs are the target devices on the SPMI bus. For the 5 boards
+>> we work on (for which device trees will be sent in another patch series):
+>> - tps6594 is used on 3 boards and is always master (multi-PMIC config)
+>> - tps6593 is used on 1 board and is master (single-PMIC config)
+>> - lp8764x is used on 2 boards and is always slave (multi-PMIC config)
+>> There might not be situations in which lp8764x would be master and tps6594
+>> or tps6593 would be slave.
+>>
+>> That's why I preferred this ordering.
+>>
+>> Do you think that alphabetical order would be better ?
+> It's simpler (requires no knowledge about chips) and reduces the future
+> conflicts. It's fine to keep it also ordered like you said, although I
+> wonder how other people adding new compatibles here will figure it out...
 
-A driver has two ways to fetch those operations from the GPUVA manager. It can
-either obtain a list of operations or receive a callback for each operation
-generated by the GPUVA manager.
+I will reorder it alphabetically in v2.
 
-In both cases the GPUVA manager walks the maple tree, which keeps track of
-existing mappings, for the given range in __drm_gpuva_sm_map() (only considering
-the map case, since the unmap case is a subset basically). For each mapping
-found in the given range the driver, as mentioned, either receives a callback or
-a list entry is added to the list of operations.
+>
+>>>> +
+>>>> +  reg:
+>>>> +    description: I2C slave address or SPI chip select number.
+>>>> +    maxItems: 1
+>>>> +
+>>>> +  ti,use-crc:
+>>>> +    type: boolean
+>>>> +    description: If true, use CRC for I2C and SPI interface protocols.
+>>> Hm, why different boards would like to enable or disable it? Why this
+>>> suits DT?
+>> You're right. Reading your comment, it appears to me that CRC feature is
+>> not fully
+>> related to HW description and should not be set in DT.
+>>
+>> CRC is not 'fully' related to HW, but...
+>> For CRC feature as well, PMICs are synchronized (for boards with
+>> multi-PMIC config).
+>> To use CRC mode, this feature must be requested explicitly on the master
+>> PMIC
+>> through I2C or SPI driver, then it is enabled for the slave PMICs
+>> through SPMI bus: that
+>> sync is performed 'automatically', without intervention from the I2C or
+>> SPI driver to
+>> enable CRC on slave PMICs.
+>> As a consequence, CRC feature is enabled for all PMICs at I2C/SPI driver
+>> probe,
+>> or it is let disabled for all PMICs. But it can't be enabled for one
+>> PMIC and disabled
+>> for another one.
+>>
+>> This will probably rediscussed for I2C/SPI drivers, but do you think
+>> that a 'use_crc'
+>> driver parameter would be an acceptable solution ? If so, the master
+>> PMIC would have
+>> to be identified, so that the driver can explicitly enable CRC mode for
+>> this one if
+>> 'use_crc' is true. With this solution, some 'ti,is-master;' bool
+>> property would be necessary.
+> It looks the property should be only in the drivers, not in the DT.
 
-Typically, for each operation / callback one entry within the maple tree is
-removed and, optionally at the beginning and end of a new mapping's range, a
-new entry is inserted. An of course, as the last operation, there is the new
-mapping itself to insert.
+I will remove 'ti,use-crc;' property from the DT. This will be only in
+the driver.
+Do you also consider that a property such as 'ti,is-secondary-pmic;'
+would not be acceptable either ? From driver point of view, this
+primary/secondary role on SPMI bus is a 'built-in' property of the
+PMIC (CRC must be enabled only via primary PMIC but using the
+primary PMIC does not imply that CRC is necessarily used).
 
-The GPUVA manager delegates locking responsibility to the drivers. Typically,
-a driver either serializes access to the VA space managed by the GPUVA manager
-(no lock needed) or need to lock the processing of a full set of operations
-generated by the GPUVA manager.
+>>>> +
+>>>> +  system-power-controller: true
+>>>> +
+>>>> +  interrupts:
+>>>> +    maxItems: 1
+>>>> +
+>>>> +  ti,multi-phase-id:
+>>>> +    description: |
+>>>> +      Describes buck multi-phase configuration, if any. For instance, XY id means
+>>>> +      that outputs of buck converters X and Y are combined in multi-phase mode.
+>>>> +    $ref: /schemas/types.yaml#/definitions/uint32
+>>>> +    enum: [12, 34, 123, 1234]
+>>>> +
+>>>> +patternProperties:
+>>>> +  "^buck([1-5]|12|34|123|1234)-supply$":
+>>>> +    description: Input supply phandle for each buck.
+>>>> +
+>>>> +  "^ldo[1-4]-supply$":
+>>>> +    description: Input supply phandle for each ldo.
+>>>> +
+>>>> +  regulators:
+>>> This should go to properties, not patternProperties.
+>>>
+>>>> +    type: object
+>>>> +    description: List of regulators provided by this controller.
+>>>> +
+>>>> +    patternProperties:
+>>>> +      "^buck([1-5]|12|34|123|1234)$":
+>>>> +        type: object
+>>>> +        $ref: /schemas/regulator/regulator.yaml#
+>>>> +
+>>>> +        unevaluatedProperties: false
+>>>> +
+>>>> +      "^ldo[1-4]$":
+>>>> +        type: object
+>>>> +        $ref: /schemas/regulator/regulator.yaml#
+>>>> +
+>>>> +        unevaluatedProperties: false
+>>>> +
+>>> You could add here - on this level - of indentation allOf:if for
+>>> excluding setups
+>>>
+>>> if:
+>>>     required:
+>>>       - buck12
+>>> then:
+>>>     properties:
+>>>       buck123: false
+>>>       buck1234: false
+>>>
+>>> Or, if you want to require regulator then:
+>>> oneOf:
+>>>     - required:
+>>>         - buck12
+>>>     - required:
+>>>         - buck123
+>>>     - required:
+>>>         - buck1234
+>>>
+>>> and anyway exclude buck34 with two above.
+>> I am not sure that we have the same understanding of the multi-phase setup.
+>> Maybe the description I wrote is not clear enough (?) Or I just don't
+>> understand
+>> what you mean exactly.
+>>
+>> How would you combine outputs of bucks 3 and 4 ?
+> No one discusses here changing this...
+>
+>> We use 'buck34' property to mean that:
+>>    - buck1 output is mono-phase,
+>>    - buck2 output is mono-phase,
+>>    - buck3 and buck4 outputs are combined (i.e. multi-phases).
+>> This weird configuration is supported by these PMICs.
+>>
+>> Using a PMIC without using the provided regulators does not seem very
+>> interesting
+>> indeed.
+>> But strictly speaking, these regulators are not required. One could use
+>> some others
+>> resources provided by the PMIC (the Error Signal Monitor device for
+>> instance).
+> Then the first method.
 
-> > In either case the embedded spinlock wouldn't be useful, we'd either need an
-> > external lock or no lock at all.
-> > 
-> > If there are any internal reasons why specific tree operations must be
-> > mutually excluded (such as those you explain below), wouldn't it make more
-> > sense to always have the internal lock and, optionally, allow users to
-> > specify an external lock additionally?
-> 
-> So the way this works for the XArray, which is a little older than the
-> Maple tree, is that we always use the internal spinlock for
-> modifications (possibly BH or IRQ safe), and if someone wants to
-> use an external mutex to make some callers atomic with respect to each
-> other, they're free to do so.  In that case, the XArray doesn't check
-> the user's external locking at all, because it really can't know.
-> 
-> I'd advise taking that approach; if there's really no way to use the
-> internal spinlock to make your complicated updates appear atomic
-> then just let the maple tree use its internal spinlock, and you can
-> also use your external mutex however you like.
-> 
+OK. Regarding buck34, it might be unnecessary and could finally be
+removed in v2. If we keep it, my understanding of your suggestion is:
+allOf:
+   - if:
+        required:
+         - buck12
+     then:
+       properties:
+         buck123: false
+         buck1234: false
+   - if:
+       required:
+         - buck123
+     then:
+       properties:
+         buck34: false
+   - if:
+       required:
+         - buck1234
+      then:
+         properties:
+           buck34: false
 
-That sounds like the right thing to do.
+>
+>> Besides, multi-phase mode depends on the chosen design and is not
+>> required for
+>> all situations.
+> Sorry, I don't think it is related to the topic I proposed.
+>
+>
+> Best regards,
+> Krzysztof
+>
 
-However, I'm using the advanced API of the maple tree (and that's the reason
-why the above example appears a little more detailed than needed) because I
-think with the normal API I can't insert / remove tree entries while walking
-the tree, right?
-
-As by the documentation the advanced API, however, doesn't take care of locking
-itself, hence just letting the maple tree use its internal spinlock doesn't
-really work - I need to take care of that myself, right?
-
-It feels a bit weird that I, as a user of the API, would need to lock certain
-(or all?) mas_*() functions with the internal spinlock in order to protect
-(future) internal features of the tree, such as the slab cache defragmentation
-you mentioned. Because from my perspective, as the generic component that tells
-it's users (the drivers) to take care of locking VA space operations (and hence
-tree operations) I don't have an own purpose of this internal spinlock, right?
-
-Also I'm a little confused how I'd know where to take the spinlock? E.g. for
-inserting entries in the tree I use mas_store_gfp() with GFP_KERNEL.
-
+Julien
