@@ -2,237 +2,306 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 45E216A0A69
-	for <lists+linux-doc@lfdr.de>; Thu, 23 Feb 2023 14:23:40 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 3E8916A0C6D
+	for <lists+linux-doc@lfdr.de>; Thu, 23 Feb 2023 16:02:32 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S233356AbjBWNXj (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 23 Feb 2023 08:23:39 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:54966 "EHLO
+        id S234644AbjBWPCa (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 23 Feb 2023 10:02:30 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:41160 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S232420AbjBWNXi (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Thu, 23 Feb 2023 08:23:38 -0500
-Received: from dggsgout11.his.huawei.com (dggsgout11.his.huawei.com [45.249.212.51])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id CFFDE55067;
-        Thu, 23 Feb 2023 05:23:36 -0800 (PST)
-Received: from mail02.huawei.com (unknown [172.30.67.153])
-        by dggsgout11.his.huawei.com (SkyGuard) with ESMTP id 4PMtyC48pRz4f3l8q;
-        Thu, 23 Feb 2023 21:23:31 +0800 (CST)
-Received: from huaweicloud.com (unknown [10.175.124.27])
-        by APP4 (Coremail) with SMTP id gCh0CgD3rLDUaPdj05CuEA--.41220S4;
-        Thu, 23 Feb 2023 21:23:33 +0800 (CST)
-From:   Hou Tao <houtao@huaweicloud.com>
-To:     linux-block@vger.kernel.org
-Cc:     Bart Van Assche <bvanassche@acm.org>, Jan Kara <jack@suse.cz>,
-        Bagas Sanjaya <bagasdotme@gmail.com>,
-        Chaitanya Kulkarni <kch@nvidia.com>,
-        Jens Axboe <axboe@kernel.dk>, cgroups@vger.kernel.org,
-        Tejun Heo <tj@kernel.org>, Zefan Li <lizefan.x@bytedance.com>,
-        Johannes Weiner <hannes@cmpxchg.org>,
-        Jonathan Corbet <corbet@lwn.net>, linux-kernel@vger.kernel.org,
-        linux-doc@vger.kernel.org, houtao1@huawei.com
-Subject: [PATCH v3] blk-ioprio: Introduce promote-to-rt policy
-Date:   Thu, 23 Feb 2023 21:51:54 +0800
-Message-Id: <20230223135154.3749088-1-houtao@huaweicloud.com>
-X-Mailer: git-send-email 2.29.2
+        with ESMTP id S229502AbjBWPC3 (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Thu, 23 Feb 2023 10:02:29 -0500
+Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.133.124])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id B6816222FC
+        for <linux-doc@vger.kernel.org>; Thu, 23 Feb 2023 07:01:47 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+        s=mimecast20190719; t=1677164506;
+        h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+         to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+         content-transfer-encoding:content-transfer-encoding:
+         in-reply-to:in-reply-to:references:references;
+        bh=k9OY3DOmsttxoPAiFSmCq7gtwaYekEfHfeSsFmsCyrY=;
+        b=BiPImrSZC7ZWJy+Q0kpj+4UOl3hYYavOk/yUQ8+IOL21EgN0EC6ukutpbueKwDTpKV820c
+        7KMwOd4zKk7VvW8cQ37D/OuAJbXD+ElNcVs08MMkwX+yzmf+NHFNbxU8TadwCmu+P+wSQM
+        jIwdPKLif4OFvBypBh52vBWK6S4icbo=
+Received: from mail-ed1-f69.google.com (mail-ed1-f69.google.com
+ [209.85.208.69]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_128_GCM_SHA256) id
+ us-mta-222-X9NubvHmN0O2jDlNDUPB6Q-1; Thu, 23 Feb 2023 10:01:45 -0500
+X-MC-Unique: X9NubvHmN0O2jDlNDUPB6Q-1
+Received: by mail-ed1-f69.google.com with SMTP id dm14-20020a05640222ce00b0046790cd9082so15737543edb.21
+        for <linux-doc@vger.kernel.org>; Thu, 23 Feb 2023 07:01:44 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=content-transfer-encoding:in-reply-to:organization:from:references
+         :cc:to:content-language:subject:user-agent:mime-version:date
+         :message-id:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=k9OY3DOmsttxoPAiFSmCq7gtwaYekEfHfeSsFmsCyrY=;
+        b=IcGbZ11Zcm3VMPu6ui+Aydz+4dB0enXgSm+yjjcdkc9CYml5g3lzm1ZU+PePJyPgNk
+         IJBl2K2Y8t2g0LYzYg70OOBGqE9Sllz/OHoX9BB061OL2q1VoFfGopYyMnKpa4l4Jyaj
+         5O2zvWd1tYrtURwPtlODJONuiZVpYTGDDnpe6wbgjonfsGni2qHZ5SUeV2rhZJEd23J9
+         jCxJKE7Na0wtRiag2GH1C69pSDZiSYBzPw45uYhq15ZzVKbUB0Q500V4Yyqq/JaHg0eG
+         R4wnqifPWzJdBV3SRfystkhIOODxdVkTA4KmF6ADa7YwgVyuHupSgzEg+Amdzq5JtnM9
+         kN1A==
+X-Gm-Message-State: AO0yUKVff8EA2DrLRgDz9zR5S0dyOlKqZ2LePYaNV1LLMlQHwN+ZqQqf
+        qZggyb2ow4CZzNCdD9evfE5AskuIUL3AbPa1kzCnAy2w+S3mR+m+/6oHR0Iauoqn+TxnaE58J9v
+        I9kGtj6CesKFXw4IQ+uKu
+X-Received: by 2002:a17:907:3e22:b0:8e3:8543:8e71 with SMTP id hp34-20020a1709073e2200b008e385438e71mr11141657ejc.40.1677164503827;
+        Thu, 23 Feb 2023 07:01:43 -0800 (PST)
+X-Google-Smtp-Source: AK7set9x3TEkF4rjKsOMblKg8nB91RIygBy/qyspdCpvJfYp5Ifo24giDUJ/K+JxqZGl9KaboO5b6g==
+X-Received: by 2002:a17:907:3e22:b0:8e3:8543:8e71 with SMTP id hp34-20020a1709073e2200b008e385438e71mr11141608ejc.40.1677164503488;
+        Thu, 23 Feb 2023 07:01:43 -0800 (PST)
+Received: from ?IPV6:2a02:810d:4b3f:de78:642:1aff:fe31:a15c? ([2a02:810d:4b3f:de78:642:1aff:fe31:a15c])
+        by smtp.gmail.com with ESMTPSA id h7-20020a170906260700b008b8ae79a72bsm7650214ejc.135.2023.02.23.07.01.41
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Thu, 23 Feb 2023 07:01:42 -0800 (PST)
+Message-ID: <734e3c77-a536-95ca-bcae-1e1e86940a48@redhat.com>
+Date:   Thu, 23 Feb 2023 15:12:32 +0100
 MIME-Version: 1.0
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.7.1
+Subject: Re: [PATCH drm-next v2 05/16] drm: manager to keep track of GPUs VA
+ mappings
+Content-Language: en-US
+To:     =?UTF-8?Q?Christian_K=c3=b6nig?= <christian.koenig@amd.com>
+Cc:     airlied@gmail.com, daniel@ffwll.ch, tzimmermann@suse.de,
+        mripard@kernel.org, corbet@lwn.net, bskeggs@redhat.com,
+        Liam.Howlett@oracle.com, matthew.brost@intel.com,
+        boris.brezillon@collabora.com, alexdeucher@gmail.com,
+        ogabbay@kernel.org, bagasdotme@gmail.com, willy@infradead.org,
+        jason@jlekstrand.net, linux-doc@vger.kernel.org,
+        nouveau@lists.freedesktop.org, linux-kernel@vger.kernel.org,
+        dri-devel@lists.freedesktop.org, linux-mm@kvack.org,
+        Dave Airlie <airlied@redhat.com>
+References: <20230217134422.14116-1-dakr@redhat.com>
+ <20230217134422.14116-6-dakr@redhat.com>
+ <70ba382f-1559-289a-4922-ca9c371aaf59@amd.com>
+ <cc8eeaf4-31e7-98e4-a712-012fc604e985@redhat.com>
+ <29ea3705-5634-c204-c1da-d356b6dfbafc@amd.com>
+ <83755119-083d-7d66-fca0-ca306c841d9c@redhat.com>
+ <7780a9b9-d6bd-6f3f-9c31-aafacb09db1f@amd.com>
+From:   Danilo Krummrich <dakr@redhat.com>
+Organization: RedHat
+In-Reply-To: <7780a9b9-d6bd-6f3f-9c31-aafacb09db1f@amd.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-X-CM-TRANSID: gCh0CgD3rLDUaPdj05CuEA--.41220S4
-X-Coremail-Antispam: 1UD129KBjvJXoW3GF1ftF4UWrW3trWrZw4ktFb_yoWxAF13pF
-        4fAF9xWr9YqF1xtFnrJ3WkXrWFyas2yw47uFsxKFyF93yjyw1DuF40y3WkWFyfA3yDXFZx
-        XrZ8ArW8CFn8ur7anT9S1TB71UUUUU7qnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
-        9KBjDU0xBIdaVrnRJUUUvIb4IE77IF4wAFF20E14v26r4j6ryUM7CY07I20VC2zVCF04k2
-        6cxKx2IYs7xG6rWj6s0DM7CIcVAFz4kK6r1j6r18M28lY4IEw2IIxxk0rwA2F7IY1VAKz4
-        vEj48ve4kI8wA2z4x0Y4vE2Ix0cI8IcVAFwI0_tr0E3s1l84ACjcxK6xIIjxv20xvEc7Cj
-        xVAFwI0_Gr1j6F4UJwA2z4x0Y4vEx4A2jsIE14v26rxl6s0DM28EF7xvwVC2z280aVCY1x
-        0267AKxVW0oVCq3wAS0I0E0xvYzxvE52x082IY62kv0487Mc02F40EFcxC0VAKzVAqx4xG
-        6I80ewAv7VC0I7IYx2IY67AKxVWUGVWUXwAv7VC2z280aVAFwI0_Jr0_Gr1lOx8S6xCaFV
-        Cjc4AY6r1j6r4UM4x0Y48IcxkI7VAKI48JM4IIrI8v6xkF7I0E8cxan2IY04v7MxkF7I0E
-        n4kS14v26r1q6r43MxAIw28IcxkI7VAKI48JMxC20s026xCaFVCjc4AY6r1j6r4UMI8I3I
-        0E5I8CrVAFwI0_Jr0_Jr4lx2IqxVCjr7xvwVAFwI0_JrI_JrWlx4CE17CEb7AF67AKxVWU
-        tVW8ZwCIc40Y0x0EwIxGrwCI42IY6xIIjxv20xvE14v26r1j6r1xMIIF0xvE2Ix0cI8IcV
-        CY1x0267AKxVW8JVWxJwCI42IY6xAIw20EY4v20xvaj40_Zr0_Wr1UMIIF0xvEx4A2jsIE
-        14v26r1j6r4UMIIF0xvEx4A2jsIEc7CjxVAFwI0_Gr0_Gr1UYxBIdaVFxhVjvjDU0xZFpf
-        9x07UQ6p9UUUUU=
-X-CM-SenderInfo: xkrx3t3r6k3tpzhluzxrxghudrp/
-X-CFilter-Loop: Reflected
-X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00,SPF_HELO_NONE,
-        SPF_NONE autolearn=ham autolearn_force=no version=3.4.6
+X-Spam-Status: No, score=-2.2 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,NICE_REPLY_A,
+        RCVD_IN_DNSWL_NONE,RCVD_IN_MSPIKE_H2,SPF_HELO_NONE,SPF_NONE
+        autolearn=ham autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-From: Hou Tao <houtao1@huawei.com>
+On 2/23/23 08:06, Christian König wrote:
+> Am 22.02.23 um 17:40 schrieb Danilo Krummrich:
+>> On 2/22/23 16:14, Christian König wrote:
+>>> Am 22.02.23 um 16:07 schrieb Danilo Krummrich:
+>>>> On 2/22/23 11:25, Christian König wrote:
+>>>>> Am 17.02.23 um 14:44 schrieb Danilo Krummrich:
+>>>>
+>>>> <snip>
+>>>>
+>>>>>> +/**
+>>>>>> + * DOC: Overview
+>>>>>> + *
+>>>>>> + * The DRM GPU VA Manager, represented by struct 
+>>>>>> drm_gpuva_manager keeps track
+>>>>>> + * of a GPU's virtual address (VA) space and manages the 
+>>>>>> corresponding virtual
+>>>>>> + * mappings represented by &drm_gpuva objects. It also keeps 
+>>>>>> track of the
+>>>>>> + * mapping's backing &drm_gem_object buffers.
+>>>>>> + *
+>>>>>> + * &drm_gem_object buffers maintain a list (and a corresponding 
+>>>>>> list lock) of
+>>>>>> + * &drm_gpuva objects representing all existent GPU VA mappings 
+>>>>>> using this
+>>>>>> + * &drm_gem_object as backing buffer.
+>>>>>> + *
+>>>>>> + * If the &DRM_GPUVA_MANAGER_REGIONS feature is enabled, a GPU VA 
+>>>>>> mapping can
+>>>>>> + * only be created within a previously allocated 
+>>>>>> &drm_gpuva_region, which
+>>>>>> + * represents a reserved portion of the GPU VA space. GPU VA 
+>>>>>> mappings are not
+>>>>>> + * allowed to span over a &drm_gpuva_region's boundary.
+>>>>>> + *
+>>>>>> + * GPU VA regions can also be flagged as sparse, which allows 
+>>>>>> drivers to create
+>>>>>> + * sparse mappings for a whole GPU VA region in order to support 
+>>>>>> Vulkan
+>>>>>> + * 'Sparse Resources'.
+>>>>>
+>>>>> Well since we have now found that there is absolutely no technical 
+>>>>> reason for having those regions could we please drop them?
+>>>>
+>>>> I disagree this was the outcome of our previous discussion.
+>>>>
+>>>> In nouveau I still need them to track the separate sparse page 
+>>>> tables and, as you confirmed previously, Nvidia cards are not the 
+>>>> only cards supporting this feature.
+>>>>
+>>>> The second reason is that with regions we can avoid merging between 
+>>>> buffers, which saves some effort. However, I agree that this 
+>>>> argument by itself probably doesn't hold too much, since you've 
+>>>> pointed out in a previous mail that:
+>>>>
+>>>> <cite>
+>>>> 1) If we merge and decide to only do that inside certain boundaries 
+>>>> then those boundaries needs to be provided and checked against. This 
+>>>> burns quite some CPU cycles
+>>>>
+>>>> 2) If we just merge what we can we might have extra page table 
+>>>> updates which cost time and could result in undesired side effects.
+>>>>
+>>>> 3) If we don't merge at all we have additional housekeeping for the 
+>>>> mappings and maybe hw restrictions.
+>>>> </cite>
+>>>>
+>>>> However, if a driver uses regions to track its separate sparse page 
+>>>> tables anyway it gets 1) for free, which is a nice synergy.
+>>>>
+>>>> I totally agree that regions aren't for everyone though. Hence, I 
+>>>> made them an optional feature and by default regions are disabled. 
+>>>> In order to use them drm_gpuva_manager_init() must be called with 
+>>>> the DRM_GPUVA_MANAGER_REGIONS feature flag.
+>>>>
+>>>> I really would not want to open code regions or have two GPUVA 
+>>>> manager instances in nouveau to track sparse page tables. That would 
+>>>> be really messy, hence I hope we can agree on this to be an optional 
+>>>> feature.
+>>>
+>>> I absolutely don't think that this is a good idea then. This separate 
+>>> handling of sparse page tables is completely Nouveau specific.
+>>
+>> Actually, I rely on what you said in a previous mail when I say it's, 
+>> potentially, not specific to nouveau.
+>>
+>> <cite>
+>> This sounds similar to what AMD hw used to have up until gfx8 (I 
+>> think), basically sparse resources where defined through a separate 
+>> mechanism to the address resolution of the page tables. I won't rule 
+>> out that other hardware has similar approaches.
+>> </cite>
+> 
+> Ok, sounds like I didn't made my point here clear: AMD does have that 
+> same mechanism for older hw you try to implement here for Nouveau, but 
+> we have *abandoned* it because it is to much trouble and especially 
+> overhead to support! In other words we have said "Ok we would need two 
+> separate components to cleanly handle that, one for newer hw and one for 
+> older hw.".
 
-Since commit a78418e6a04c ("block: Always initialize bio IO priority on
-submit"), bio->bi_ioprio will never be IOPRIO_CLASS_NONE when calling
-blkcg_set_ioprio(), so there will be no way to promote the io-priority
-of one cgroup to IOPRIO_CLASS_RT, because bi_ioprio will always be
-greater than or equals to IOPRIO_CLASS_RT.
+My point was more about the potential existence of other hardware having 
+similar concepts.
 
-It seems possible to call blkcg_set_ioprio() first then try to
-initialize bi_ioprio later in bio_set_ioprio(), but this doesn't work
-for bio in which bi_ioprio is already initialized (e.g., direct-io), so
-introduce a new promote-to-rt policy to promote the iopriority of bio to
-IOPRIO_CLASS_RT if the ioprio is not already RT.
+I, personally, can't judge whether actually making use of having 
+separate sparse page tables (or similar concepts) makes sense for other 
+drivers or not. I think it depends on how the hardware works, which 
+limitations it has in handling page tables, etc.
 
-For none-to-rt policy, although it doesn't work now, but considering
-that its purpose was also to override the io-priority to RT and allowing
-for a smoother transition, just keep it and treat it as an alias of
-the promote-to-rt policy.
+I definitely recognize your experience and that for AMD you decided its 
+not worth using a similar mechanism. I would definitely be interested in 
+the details. Do you mind sharing them?
 
-Signed-off-by: Hou Tao <houtao1@huawei.com>
-Acked-by: Tejun Heo <tj@kernel.org>
-Reviewed-by: Bart Van Assche <bvanassche@acm.org>
-Reviewed-by: Chaitanya Kulkarni <kch@nvidia.com>
----
-v3:
- * Use 'non-RT' instead of 'no-RT' in document (from Bagas)
- * Remove repeated sentence in commit message
- * Add Reviewed-by and Acked-by tags
- 
-v2: https://lore.kernel.org/linux-block/20230220135428.2632906-1-houtao@huaweicloud.com
+However, I think we need to differentiate between whether for AMD 
+hardware you just found an approach that worked out better for your 
+specific hardware or whether something is fundamentally broken with 
+separate sparse page tables (or similar concepts) in general.
 
- * Simplify the implementation of promote-to-rt (from Bart)
- * Make none-to-rt to work again by treating it as an alias of
-   the promote-to-rt policy (from Bart & Jan)
- * fix the style of new content in cgroup-v2.rst (from Bagas)
- * set the default priority level to 4 instead of 0 for promote-to-rt
+Do you think there is something fundamentally broken with such an 
+approach? And if so, why?
 
-v1: https://lore.kernel.org/linux-block/20230201045227.2203123-1-houtao@huaweicloud.com
+> 
+> What you now try to do is to write one component which works for both. 
+> We have already exercised this idea and came to the conclusion that it's 
+> not a good path to go down. So you're basically just repeating our mistake.
+> 
+> I mean if it's just for Nouveau then I would say feel free to do 
+> whatever you want, but since this component is supposed to be used by 
+> more drivers then I strongly think we need to tackle this from a 
+> different side.
+> 
+>>> Even when it's optional feature mixing this into the common handling 
+>>> is exactly what I pointed out as not properly separating between 
+>>> hardware specific and hardware agnostic functionality.
+>>
+>> Optionally having regions is *not* a hardware specific concept, 
+>> drivers might use it for a hardware specific purpose though. Which 
+>> potentially is is the case for almost every DRM helper.
+>>
+>> Drivers can use regions only for the sake of not merging between 
+>> buffer boundaries as well. Some drivers might prefer this over "never 
+>> merge" or "always merge", depending on the cost of re-organizing page 
+>> tables for unnecessary splits/merges, without having the need of 
+>> tracking separate sparse page tables.
+>>
+>> Its just that I think *if* a driver needs to track separate sparse 
+>> page tables anyways its a nice synergy since then there is no extra 
+>> cost for getting this optimization.
+> 
+> Well exactly that's the point: I really don't believe that this comes 
+> without extra costs.
 
- Documentation/admin-guide/cgroup-v2.rst | 42 ++++++++++++++-----------
- block/blk-ioprio.c                      | 23 ++++++++++++--
- 2 files changed, 44 insertions(+), 21 deletions(-)
+If you already have to store some information for purpose A and an 
+optional purpose B requires the exact same information you would get B 
+for free.
 
-diff --git a/Documentation/admin-guide/cgroup-v2.rst b/Documentation/admin-guide/cgroup-v2.rst
-index f67c0829350b..7544ce00e0cb 100644
---- a/Documentation/admin-guide/cgroup-v2.rst
-+++ b/Documentation/admin-guide/cgroup-v2.rst
-@@ -2024,31 +2024,33 @@ that attribute:
-   no-change
- 	Do not modify the I/O priority class.
- 
--  none-to-rt
--	For requests that do not have an I/O priority class (NONE),
--	change the I/O priority class into RT. Do not modify
--	the I/O priority class of other requests.
-+  promote-to-rt
-+	For requests that have a non-RT I/O priority class, change it into RT.
-+	Also change the priority level of these requests to 4. Do not modify
-+	the I/O priority of requests that have priority class RT.
- 
-   restrict-to-be
- 	For requests that do not have an I/O priority class or that have I/O
--	priority class RT, change it into BE. Do not modify the I/O priority
--	class of requests that have priority class IDLE.
-+	priority class RT, change it into BE. Also change the priority level
-+	of these requests to 0. Do not modify the I/O priority class of
-+	requests that have priority class IDLE.
- 
-   idle
- 	Change the I/O priority class of all requests into IDLE, the lowest
- 	I/O priority class.
- 
-+  none-to-rt
-+	Deprecated. Just an alias for promote-to-rt.
-+
- The following numerical values are associated with the I/O priority policies:
- 
--+-------------+---+
--| no-change   | 0 |
--+-------------+---+
--| none-to-rt  | 1 |
--+-------------+---+
--| rt-to-be    | 2 |
--+-------------+---+
--| all-to-idle | 3 |
--+-------------+---+
-++----------------+---+
-+| no-change      | 0 |
-++----------------+---+
-+| rt-to-be       | 2 |
-++----------------+---+
-+| all-to-idle    | 3 |
-++----------------+---+
- 
- The numerical value that corresponds to each I/O priority class is as follows:
- 
-@@ -2064,9 +2066,13 @@ The numerical value that corresponds to each I/O priority class is as follows:
- 
- The algorithm to set the I/O priority class for a request is as follows:
- 
--- Translate the I/O priority class policy into a number.
--- Change the request I/O priority class into the maximum of the I/O priority
--  class policy number and the numerical I/O priority class.
-+- If I/O priority class policy is promote-to-rt, change the request I/O
-+  priority class to IOPRIO_CLASS_RT and change the request I/O priority
-+  level to 4.
-+- If I/O priorityt class is not promote-to-rt, translate the I/O priority
-+  class policy into a number, then change the request I/O priority class
-+  into the maximum of the I/O priority class policy number and the numerical
-+  I/O priority class.
- 
- PID
- ---
-diff --git a/block/blk-ioprio.c b/block/blk-ioprio.c
-index 055529b9b92b..4051fada01f1 100644
---- a/block/blk-ioprio.c
-+++ b/block/blk-ioprio.c
-@@ -23,25 +23,28 @@
- /**
-  * enum prio_policy - I/O priority class policy.
-  * @POLICY_NO_CHANGE: (default) do not modify the I/O priority class.
-- * @POLICY_NONE_TO_RT: modify IOPRIO_CLASS_NONE into IOPRIO_CLASS_RT.
-+ * @POLICY_PROMOTE_TO_RT: modify no-IOPRIO_CLASS_RT to IOPRIO_CLASS_RT.
-  * @POLICY_RESTRICT_TO_BE: modify IOPRIO_CLASS_NONE and IOPRIO_CLASS_RT into
-  *		IOPRIO_CLASS_BE.
-  * @POLICY_ALL_TO_IDLE: change the I/O priority class into IOPRIO_CLASS_IDLE.
-+ * @POLICY_NONE_TO_RT: an alias for POLICY_PROMOTE_TO_RT.
-  *
-  * See also <linux/ioprio.h>.
-  */
- enum prio_policy {
- 	POLICY_NO_CHANGE	= 0,
--	POLICY_NONE_TO_RT	= 1,
-+	POLICY_PROMOTE_TO_RT	= 1,
- 	POLICY_RESTRICT_TO_BE	= 2,
- 	POLICY_ALL_TO_IDLE	= 3,
-+	POLICY_NONE_TO_RT	= 4,
- };
- 
- static const char *policy_name[] = {
- 	[POLICY_NO_CHANGE]	= "no-change",
--	[POLICY_NONE_TO_RT]	= "none-to-rt",
-+	[POLICY_PROMOTE_TO_RT]	= "promote-to-rt",
- 	[POLICY_RESTRICT_TO_BE]	= "restrict-to-be",
- 	[POLICY_ALL_TO_IDLE]	= "idle",
-+	[POLICY_NONE_TO_RT]	= "none-to-rt",
- };
- 
- static struct blkcg_policy ioprio_policy;
-@@ -189,6 +192,20 @@ void blkcg_set_ioprio(struct bio *bio)
- 	if (!blkcg || blkcg->prio_policy == POLICY_NO_CHANGE)
- 		return;
- 
-+	if (blkcg->prio_policy == POLICY_PROMOTE_TO_RT ||
-+	    blkcg->prio_policy == POLICY_NONE_TO_RT) {
-+		/*
-+		 * For RT threads, the default priority level is 4 because
-+		 * task_nice is 0. By promoting non-RT io-priority to RT-class
-+		 * and default level 4, those requests that are already
-+		 * RT-class but need a higher io-priority can use ioprio_set()
-+		 * to achieve this.
-+		 */
-+		if (IOPRIO_PRIO_CLASS(bio->bi_ioprio) != IOPRIO_CLASS_RT)
-+			bio->bi_ioprio = IOPRIO_PRIO_VALUE(IOPRIO_CLASS_RT, 4);
-+		return;
-+	}
-+
- 	/*
- 	 * Except for IOPRIO_CLASS_NONE, higher I/O priority numbers
- 	 * correspond to a lower priority. Hence, the max_t() below selects
--- 
-2.29.2
+Which other costs would you see here?
+
+> 
+> What we could maybe do is to have an two separate functions, one for 
+> updating the data structures and one for merging. When you now call the 
+> merging function with a limit you don't get mappings merged over that 
+> limit and if you don't call the merging function at all you don't get 
+> merges.
+
+Having a separate merging function would work. However, I am against an 
+interface that takes limit parameters. Having such an interface signals 
+general compliance with tracking regions to drivers, but without the 
+offer to do this job in a generic way.
+
+This sounds like a bad compromise to me. I think we should either accept 
+that some drivers might have a purpose of tracking regions and hence 
+*optionally* support them or have clear evidence that tracking regions 
+never ever make sense at all regardless of how a specific hardware 
+handles it's page tables.
+
+Allowing drivers to set the merge strategy, however, is a good idea. I 
+could also just add corresponding feature flags to let the driver pick.
+
+> 
+> But we should have definitely not have the tracking of the ranges inside 
+> the common component. This is something separated.
+> 
+>>> This is exactly the problem we ran into with TTM as well and I've 
+>>> spend a massive amount of time to clean that up again. >
+>>
+>> Admittedly, I don't know what problems you are referring to. However, 
+>> I don't see which kind of trouble it could cause by allowing drivers 
+>> to track regions optionally.
+> 
+> Take a look at my 2020 presentation about TTM on FOSDEM.
+> 
+> Regards,
+> Christian.
+> 
+>>
+>>> Regards,
+>>> Christian.
+>>>
+>>>>
+>>>>>
+>>>>> I don't really see a need for them any more.
+>>>>>
+>>>>> Regards,
+>>>>> Christian.
+>>>>>
+>>>>
+>>>
+>>
+> 
 
