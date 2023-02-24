@@ -2,330 +2,148 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id E26406A18E0
-	for <lists+linux-doc@lfdr.de>; Fri, 24 Feb 2023 10:35:26 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 7C4376A18EB
+	for <lists+linux-doc@lfdr.de>; Fri, 24 Feb 2023 10:37:39 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S229918AbjBXJfY (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Fri, 24 Feb 2023 04:35:24 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:46142 "EHLO
+        id S229552AbjBXJhh (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Fri, 24 Feb 2023 04:37:37 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:49156 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S229848AbjBXJfU (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Fri, 24 Feb 2023 04:35:20 -0500
-Received: from mail-wm1-x32b.google.com (mail-wm1-x32b.google.com [IPv6:2a00:1450:4864:20::32b])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 11DD816308
-        for <linux-doc@vger.kernel.org>; Fri, 24 Feb 2023 01:35:10 -0800 (PST)
-Received: by mail-wm1-x32b.google.com with SMTP id az36so1396524wmb.1
-        for <linux-doc@vger.kernel.org>; Fri, 24 Feb 2023 01:35:09 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=3qtQ6Hb1NcMmUdmeDB55iw9V1Tm3Jd0QSWgTcrurHX8=;
-        b=IaqygHprsEYiu7vlcVABSQcoFLIzT2pf2we+OcE8esJq5iLpeExRK3wGg7dypYfAoo
-         I+DLxUpNQVLlr01nJbxYBl13k+C0nd6WC10n7614S5U3hCry/AXb7CUKiv+wNTjNyNCz
-         fZ8mzLBKVmQnyRwyL9rGzexQhBHHVhGGvuAPbpM0MVst1ve+yFdCBwVtlK8dZVF46yne
-         rWGyCVlw6lGHGBxeugK3JiMo3IKWfEspcAk6sqEjop7ObswC83ot9Ep1t73Pb1nGD/9p
-         Sq6EusFG5WzOglWvwvMAkidavnmT5fylR0EHcwtMGYCLG5hgQub1Y3adTjBGoId2FEmy
-         6/Og==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=3qtQ6Hb1NcMmUdmeDB55iw9V1Tm3Jd0QSWgTcrurHX8=;
-        b=dR3rqX/JvROX4yk4gEu8A5yLC8V7SkVOVSqLfDROL7bzwUoB4wWamhmhTJqNcYCEX7
-         63iPmWpTOXbGRlqz411I/IHUlNaDpXFDQWjF6pP71qwJnQWgEzq7w3JYFNzxsvBjh25h
-         X6o7HUGWEnpFc68k0YAXysspjrpKhVkOwf4TWaEkhImuM6Xa5ijOq7oBN2F0QEhBejnq
-         gzAPyNggqHXXLfF+njvdavRAYJiR2BHHObGZxuP9KynWCz8TkJnhuTU+cGIoP45PA8Jj
-         wMhCpuAIjKEvYcDXJmvZHYzARezX0eh/wLewFropXg/XrwXRY/ON+CI1V9Izn5osxfh3
-         jvMA==
-X-Gm-Message-State: AO0yUKWpBCkgXkLPbM9/OaZizY7cuzajhTgUhlJETHMiKmb6XVklbr4f
-        byjPOaamAeiMzGYp+7SBA8D9Uw==
-X-Google-Smtp-Source: AK7set/1z6/n08FtINXYYIsgT9DeL+2IeeIo+m0ts9HTwIjpcWmgHz9WzCRoPOSXIWMCSG3SDjVAbg==
-X-Received: by 2002:a05:600c:198e:b0:3e2:1f00:bff7 with SMTP id t14-20020a05600c198e00b003e21f00bff7mr13128798wmq.12.1677231308585;
-        Fri, 24 Feb 2023 01:35:08 -0800 (PST)
-Received: from vingu-book.. ([2a01:e0a:f:6020:a6f0:4ee9:c103:44cb])
-        by smtp.gmail.com with ESMTPSA id d18-20020a05600c34d200b003e6dcd562a6sm2239179wmq.28.2023.02.24.01.35.07
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 24 Feb 2023 01:35:08 -0800 (PST)
-From:   Vincent Guittot <vincent.guittot@linaro.org>
-To:     mingo@redhat.com, peterz@infradead.org, juri.lelli@redhat.com,
-        dietmar.eggemann@arm.com, rostedt@goodmis.org, bsegall@google.com,
-        mgorman@suse.de, bristot@redhat.com, vschneid@redhat.com,
-        linux-kernel@vger.kernel.org, parth@linux.ibm.com, tj@kernel.org,
-        lizefan.x@bytedance.com, hannes@cmpxchg.org,
-        cgroups@vger.kernel.org, corbet@lwn.net, linux-doc@vger.kernel.org
-Cc:     qyousef@layalina.io, chris.hyser@oracle.com,
-        patrick.bellasi@matbug.net, David.Laight@aculab.com,
-        pjt@google.com, pavel@ucw.cz, qperret@google.com,
-        tim.c.chen@linux.intel.com, joshdon@google.com, timj@gnu.org,
-        kprateek.nayak@amd.com, yu.c.chen@intel.com,
-        youssefesmat@chromium.org, joel@joelfernandes.org,
-        Vincent Guittot <vincent.guittot@linaro.org>
-Subject: [PATCH v12 8/8] sched/fair: Add latency list
-Date:   Fri, 24 Feb 2023 10:34:54 +0100
-Message-Id: <20230224093454.956298-9-vincent.guittot@linaro.org>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20230224093454.956298-1-vincent.guittot@linaro.org>
-References: <20230224093454.956298-1-vincent.guittot@linaro.org>
+        with ESMTP id S229532AbjBXJhg (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Fri, 24 Feb 2023 04:37:36 -0500
+Received: from mga11.intel.com (mga11.intel.com [192.55.52.93])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 08DDE64D70;
+        Fri, 24 Feb 2023 01:37:02 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1677231422; x=1708767422;
+  h=date:from:to:cc:subject:message-id:references:
+   mime-version:in-reply-to;
+  bh=qh5dHIF3Zy/2vFiSSHWmzyQvmvJlUbTRwfF+WltTESk=;
+  b=WDRmYASbnHMX3Ojs54SxtR4XRQJcnzIlqgO0LVMrqnnPuoTJUGcsDl+p
+   q7lTPDO1RvYqMufhR4Swyq+ciCjFN5UzzFbTRdCIH31tMDTToidONCaWO
+   wwVgFq3VlbhT2hZsgq6GRfavpzfa4627vKCHOGo6QjKSlXHo1GviywI04
+   Jb9qM+kFi5zX1vpLGvmsqz9i7yiHw8qHcjyh8LDYOHTZlmViKL6GS+xfP
+   lh2NK0dHo/LYlKDOQrSstBW12KHy/00lN/ngwTbVod68HxdA0UGoZc79o
+   DbNRlqAFoks4I6NKWKYWyptQ8/jcGFitNemb/4umoWmXqr2tOM3Kgqt9/
+   Q==;
+X-IronPort-AV: E=McAfee;i="6500,9779,10630"; a="331171606"
+X-IronPort-AV: E=Sophos;i="5.97,324,1669104000"; 
+   d="scan'208";a="331171606"
+Received: from fmsmga004.fm.intel.com ([10.253.24.48])
+  by fmsmga102.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 24 Feb 2023 01:36:13 -0800
+X-IronPort-AV: E=McAfee;i="6500,9779,10630"; a="741608912"
+X-IronPort-AV: E=Sophos;i="5.97,324,1669104000"; 
+   d="scan'208";a="741608912"
+Received: from rkris18-mobl.amr.corp.intel.com (HELO box.shutemov.name) ([10.252.56.190])
+  by fmsmga004-auth.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 24 Feb 2023 01:36:03 -0800
+Received: by box.shutemov.name (Postfix, from userid 1000)
+        id C84DF10A581; Fri, 24 Feb 2023 12:36:00 +0300 (+03)
+Date:   Fri, 24 Feb 2023 12:36:00 +0300
+From:   kirill.shutemov@linux.intel.com
+To:     Ackerley Tng <ackerleytng@google.com>
+Cc:     "Kirill A. Shutemov" <kirill@shutemov.name>, kvm@vger.kernel.org,
+        linux-api@vger.kernel.org, linux-arch@vger.kernel.org,
+        linux-doc@vger.kernel.org, linux-fsdevel@vger.kernel.org,
+        linux-kernel@vger.kernel.org, linux-mm@kvack.org,
+        qemu-devel@nongnu.org, chao.p.peng@linux.intel.com,
+        aarcange@redhat.com, ak@linux.intel.com, akpm@linux-foundation.org,
+        arnd@arndb.de, bfields@fieldses.org, bp@alien8.de, corbet@lwn.net,
+        dave.hansen@intel.com, david@redhat.com, ddutile@redhat.com,
+        dhildenb@redhat.com, hpa@zytor.com, hughd@google.com,
+        jlayton@kernel.org, jmattson@google.com, joro@8bytes.org,
+        jun.nakajima@intel.com, linmiaohe@huawei.com, luto@kernel.org,
+        mail@maciej.szmigiero.name, mhocko@suse.com, michael.roth@amd.com,
+        mingo@redhat.com, naoya.horiguchi@nec.com, pbonzini@redhat.com,
+        qperret@google.com, rppt@kernel.org, seanjc@google.com,
+        shuah@kernel.org, steven.price@arm.com, tabba@google.com,
+        tglx@linutronix.de, vannapurve@google.com, vbabka@suse.cz,
+        vkuznets@redhat.com, wanpengli@tencent.com, wei.w.wang@intel.com,
+        x86@kernel.org, yu.c.zhang@linux.intel.com
+Subject: Re: [RFC PATCH 1/2] mm: restrictedmem: Allow userspace to specify
+ mount_path for memfd_restricted
+Message-ID: <20230224093600.osmbpilmsi64wlwb@box.shutemov.name>
+References: <20230216100150.yv2ehwrdcfzbdhcq@box.shutemov.name>
+ <diqzsfex5hfv.fsf@ackerleytng-cloudtop.c.googlers.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Spam-Status: No, score=-2.1 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_NONE,
-        SPF_HELO_NONE,SPF_PASS autolearn=unavailable autolearn_force=no
-        version=3.4.6
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <diqzsfex5hfv.fsf@ackerleytng-cloudtop.c.googlers.com>
+X-Spam-Status: No, score=-4.3 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_EF,RCVD_IN_DNSWL_MED,SPF_HELO_NONE,
+        SPF_NONE autolearn=ham autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Add a rb tree for latency sensitive entities so we can schedule the most
-sensitive one first even when it failed to preempt current at wakeup or
-when it got quickly preempted by another entity of higher priority.
+On Thu, Feb 23, 2023 at 12:55:16AM +0000, Ackerley Tng wrote:
+> 
+> "Kirill A. Shutemov" <kirill@shutemov.name> writes:
+> 
+> > On Thu, Feb 16, 2023 at 12:41:16AM +0000, Ackerley Tng wrote:
+> > > By default, the backing shmem file for a restrictedmem fd is created
+> > > on shmem's kernel space mount.
+> 
+> > > With this patch, an optional tmpfs mount can be specified, which will
+> > > be used as the mountpoint for backing the shmem file associated with a
+> > > restrictedmem fd.
+> 
+> > > This change is modeled after how sys_open() can create an unnamed
+> > > temporary file in a given directory with O_TMPFILE.
+> 
+> > > This will help restrictedmem fds inherit the properties of the
+> > > provided tmpfs mounts, for example, hugepage allocation hints, NUMA
+> > > binding hints, etc.
+> 
+> > > Signed-off-by: Ackerley Tng <ackerleytng@google.com>
+> > > ---
+> > >   include/linux/syscalls.h           |  2 +-
+> > >   include/uapi/linux/restrictedmem.h |  8 ++++
+> > >   mm/restrictedmem.c                 | 63 +++++++++++++++++++++++++++---
+> > >   3 files changed, 66 insertions(+), 7 deletions(-)
+> > >   create mode 100644 include/uapi/linux/restrictedmem.h
+> 
+> > > diff --git a/include/linux/syscalls.h b/include/linux/syscalls.h
+> > > index f9e9e0c820c5..4b8efe9a8680 100644
+> > > --- a/include/linux/syscalls.h
+> > > +++ b/include/linux/syscalls.h
+> > > @@ -1056,7 +1056,7 @@ asmlinkage long sys_memfd_secret(unsigned int
+> > > flags);
+> > >   asmlinkage long sys_set_mempolicy_home_node(unsigned long start,
+> > > unsigned long len,
+> > >   					    unsigned long home_node,
+> > >   					    unsigned long flags);
+> > > -asmlinkage long sys_memfd_restricted(unsigned int flags);
+> > > +asmlinkage long sys_memfd_restricted(unsigned int flags, const char
+> > > __user *mount_path);
+> 
+> > >   /*
+> > >    * Architecture-specific system calls
+> 
+> > I'm not sure what the right practice now: do we provide string that
+> > contains mount path or fd that represents the filesystem (returned from
+> > fsmount(2) or open_tree(2)).
+> 
+> > fd seems more flexible: it allows to specify unbind mounts.
+> 
+> I tried out the suggestion of passing fds to memfd_restricted() instead
+> of strings.
+> 
+> One benefit I see of using fds is interface uniformity: it feels more
+> aligned with other syscalls like fsopen(), fsconfig(), and fsmount() in
+> terms of using and passing around fds.
+> 
+> Other than being able to use a mount without a path attached to the
+> mount, are there any other benefits of using fds over using the path string?
 
-In order to keep fairness, the latency is used once at wakeup to get a
-minimum slice and not during the following scheduling slice to prevent
-long running entity to got more running time than allocated to his nice
-priority.
+It would be nice if anyone from fs folks comment on this.
 
-The rb tree enables to cover the last corner case where latency
-sensitive entity can't got schedule quickly after the wakeup.
+> Should I post the patches that allows specifying a mount using fds?
+> Should I post them as a separate RFC, or as a new revision to this RFC?
 
-Signed-off-by: Vincent Guittot <vincent.guittot@linaro.org>
-Tested-by: K Prateek Nayak <kprateek.nayak@amd.com>
----
- include/linux/sched.h |   1 +
- kernel/sched/core.c   |   1 +
- kernel/sched/fair.c   | 109 ++++++++++++++++++++++++++++++++++++++++--
- kernel/sched/sched.h  |   1 +
- 4 files changed, 109 insertions(+), 3 deletions(-)
+Let's first decide what the right direction is.
 
-diff --git a/include/linux/sched.h b/include/linux/sched.h
-index 38decae3e156..41bb92be5ecc 100644
---- a/include/linux/sched.h
-+++ b/include/linux/sched.h
-@@ -548,6 +548,7 @@ struct sched_entity {
- 	/* For load-balancing: */
- 	struct load_weight		load;
- 	struct rb_node			run_node;
-+	struct rb_node			latency_node;
- 	struct list_head		group_node;
- 	unsigned int			on_rq;
- 
-diff --git a/kernel/sched/core.c b/kernel/sched/core.c
-index 093cc1af73dc..752fd364216c 100644
---- a/kernel/sched/core.c
-+++ b/kernel/sched/core.c
-@@ -4434,6 +4434,7 @@ static void __sched_fork(unsigned long clone_flags, struct task_struct *p)
- 	p->se.nr_migrations		= 0;
- 	p->se.vruntime			= 0;
- 	INIT_LIST_HEAD(&p->se.group_node);
-+	RB_CLEAR_NODE(&p->se.latency_node);
- 
- #ifdef CONFIG_FAIR_GROUP_SCHED
- 	p->se.cfs_rq			= NULL;
-diff --git a/kernel/sched/fair.c b/kernel/sched/fair.c
-index 125a6ff53378..e2aeb4511686 100644
---- a/kernel/sched/fair.c
-+++ b/kernel/sched/fair.c
-@@ -680,7 +680,85 @@ struct sched_entity *__pick_last_entity(struct cfs_rq *cfs_rq)
- 
- 	return __node_2_se(last);
- }
-+#endif
- 
-+/**************************************************************
-+ * Scheduling class tree data structure manipulation methods:
-+ * for latency
-+ */
-+
-+static inline bool latency_before(struct sched_entity *a,
-+				struct sched_entity *b)
-+{
-+	return (s64)(a->vruntime + a->latency_offset - b->vruntime - b->latency_offset) < 0;
-+}
-+
-+#define __latency_node_2_se(node) \
-+	rb_entry((node), struct sched_entity, latency_node)
-+
-+static inline bool __latency_less(struct rb_node *a, const struct rb_node *b)
-+{
-+	return latency_before(__latency_node_2_se(a), __latency_node_2_se(b));
-+}
-+
-+/*
-+ * Enqueue an entity into the latency rb-tree:
-+ */
-+static void __enqueue_latency(struct cfs_rq *cfs_rq, struct sched_entity *se, int flags)
-+{
-+
-+	/* Only latency sensitive entity can be added to the list */
-+	if (se->latency_offset >= 0)
-+		return;
-+
-+	if (!RB_EMPTY_NODE(&se->latency_node))
-+		return;
-+
-+	/*
-+	 * The entity is always added the latency list at wakeup.
-+	 * Then, a not waking up entity that is put back in the list after an
-+	 * execution time less than sysctl_sched_min_granularity, means that
-+	 * the entity has been preempted by a higher sched class or an entity
-+	 * with higher latency constraint. In thi case, the entity is also put
-+	 * back in the latency list so it gets a chance to run 1st during the
-+	 * next slice.
-+	 */
-+	if (!(flags & ENQUEUE_WAKEUP)) {
-+		u64 delta_exec = se->sum_exec_runtime - se->prev_sum_exec_runtime;
-+
-+		if (delta_exec >= sysctl_sched_min_granularity)
-+			return;
-+	}
-+
-+	rb_add_cached(&se->latency_node, &cfs_rq->latency_timeline, __latency_less);
-+}
-+
-+/*
-+ * Dequeue an entity from the latency rb-tree and return true if it was really
-+ * part of the rb-tree:
-+ */
-+static bool __dequeue_latency(struct cfs_rq *cfs_rq, struct sched_entity *se)
-+{
-+	if (!RB_EMPTY_NODE(&se->latency_node)) {
-+		rb_erase_cached(&se->latency_node, &cfs_rq->latency_timeline);
-+		RB_CLEAR_NODE(&se->latency_node);
-+		return true;
-+	}
-+
-+	return false;
-+}
-+
-+static struct sched_entity *__pick_first_latency(struct cfs_rq *cfs_rq)
-+{
-+	struct rb_node *left = rb_first_cached(&cfs_rq->latency_timeline);
-+
-+	if (!left)
-+		return NULL;
-+
-+	return __latency_node_2_se(left);
-+}
-+
-+#ifdef CONFIG_SCHED_DEBUG
- /**************************************************************
-  * Scheduling class statistics methods:
-  */
-@@ -4758,8 +4836,10 @@ enqueue_entity(struct cfs_rq *cfs_rq, struct sched_entity *se, int flags)
- 	check_schedstat_required();
- 	update_stats_enqueue_fair(cfs_rq, se, flags);
- 	check_spread(cfs_rq, se);
--	if (!curr)
-+	if (!curr) {
- 		__enqueue_entity(cfs_rq, se);
-+		__enqueue_latency(cfs_rq, se, flags);
-+	}
- 	se->on_rq = 1;
- 
- 	if (cfs_rq->nr_running == 1) {
-@@ -4845,8 +4925,10 @@ dequeue_entity(struct cfs_rq *cfs_rq, struct sched_entity *se, int flags)
- 
- 	clear_buddies(cfs_rq, se);
- 
--	if (se != cfs_rq->curr)
-+	if (se != cfs_rq->curr) {
- 		__dequeue_entity(cfs_rq, se);
-+		__dequeue_latency(cfs_rq, se);
-+	}
- 	se->on_rq = 0;
- 	account_entity_dequeue(cfs_rq, se);
- 
-@@ -4941,6 +5023,7 @@ set_next_entity(struct cfs_rq *cfs_rq, struct sched_entity *se)
- 		 */
- 		update_stats_wait_end_fair(cfs_rq, se);
- 		__dequeue_entity(cfs_rq, se);
-+		__dequeue_latency(cfs_rq, se);
- 		update_load_avg(cfs_rq, se, UPDATE_TG);
- 	}
- 
-@@ -4979,7 +5062,7 @@ static struct sched_entity *
- pick_next_entity(struct cfs_rq *cfs_rq, struct sched_entity *curr)
- {
- 	struct sched_entity *left = __pick_first_entity(cfs_rq);
--	struct sched_entity *se;
-+	struct sched_entity *latency, *se;
- 
- 	/*
- 	 * If curr is set we have to see if its left of the leftmost entity
-@@ -5021,6 +5104,12 @@ pick_next_entity(struct cfs_rq *cfs_rq, struct sched_entity *curr)
- 		se = cfs_rq->last;
- 	}
- 
-+	/* Check for latency sensitive entity waiting for running */
-+	latency = __pick_first_latency(cfs_rq);
-+	if (latency && (latency != se) &&
-+	    wakeup_preempt_entity(latency, se) < 1)
-+		se = latency;
-+
- 	return se;
- }
- 
-@@ -5044,6 +5133,7 @@ static void put_prev_entity(struct cfs_rq *cfs_rq, struct sched_entity *prev)
- 		update_stats_wait_start_fair(cfs_rq, prev);
- 		/* Put 'current' back into the tree. */
- 		__enqueue_entity(cfs_rq, prev);
-+		__enqueue_latency(cfs_rq, prev, 0);
- 		/* in !on_rq case, update occurred at dequeue */
- 		update_load_avg(cfs_rq, prev, 0);
- 	}
-@@ -12222,6 +12312,7 @@ static void set_next_task_fair(struct rq *rq, struct task_struct *p, bool first)
- void init_cfs_rq(struct cfs_rq *cfs_rq)
- {
- 	cfs_rq->tasks_timeline = RB_ROOT_CACHED;
-+	cfs_rq->latency_timeline = RB_ROOT_CACHED;
- 	u64_u32_store(cfs_rq->min_vruntime, (u64)(-(1LL << 20)));
- #ifdef CONFIG_SMP
- 	raw_spin_lock_init(&cfs_rq->removed.lock);
-@@ -12378,6 +12469,7 @@ void init_tg_cfs_entry(struct task_group *tg, struct cfs_rq *cfs_rq,
- 	se->my_q = cfs_rq;
- 
- 	se->latency_offset = calc_latency_offset(tg->latency_prio);
-+	RB_CLEAR_NODE(&se->latency_node);
- 
- 	/* guarantee group entities always have weight */
- 	update_load_set(&se->load, NICE_0_LOAD);
-@@ -12529,8 +12621,19 @@ int sched_group_set_latency(struct task_group *tg, int prio)
- 
- 	for_each_possible_cpu(i) {
- 		struct sched_entity *se = tg->se[i];
-+		struct rq *rq = cpu_rq(i);
-+		struct rq_flags rf;
-+		bool queued;
-+
-+		rq_lock_irqsave(rq, &rf);
- 
-+		queued = __dequeue_latency(se->cfs_rq, se);
- 		WRITE_ONCE(se->latency_offset, latency_offset);
-+		if (queued)
-+			__enqueue_latency(se->cfs_rq, se, ENQUEUE_WAKEUP);
-+
-+
-+		rq_unlock_irqrestore(rq, &rf);
- 	}
- 
- 	mutex_unlock(&shares_mutex);
-diff --git a/kernel/sched/sched.h b/kernel/sched/sched.h
-index 9a2e71231083..21dd309e98a9 100644
---- a/kernel/sched/sched.h
-+++ b/kernel/sched/sched.h
-@@ -570,6 +570,7 @@ struct cfs_rq {
- #endif
- 
- 	struct rb_root_cached	tasks_timeline;
-+	struct rb_root_cached	latency_timeline;
- 
- 	/*
- 	 * 'curr' points to currently running entity on this cfs_rq.
 -- 
-2.34.1
-
+  Kiryl Shutsemau / Kirill A. Shutemov
