@@ -2,358 +2,261 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 50C166A186E
-	for <lists+linux-doc@lfdr.de>; Fri, 24 Feb 2023 10:02:15 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 5CBB46A18CE
+	for <lists+linux-doc@lfdr.de>; Fri, 24 Feb 2023 10:35:06 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S229780AbjBXJCN (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Fri, 24 Feb 2023 04:02:13 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:45274 "EHLO
+        id S229736AbjBXJfE (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Fri, 24 Feb 2023 04:35:04 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:45218 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S229965AbjBXJBr (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Fri, 24 Feb 2023 04:01:47 -0500
-Received: from mail-pj1-x1034.google.com (mail-pj1-x1034.google.com [IPv6:2607:f8b0:4864:20::1034])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 716E1662A5
-        for <linux-doc@vger.kernel.org>; Fri, 24 Feb 2023 01:01:10 -0800 (PST)
-Received: by mail-pj1-x1034.google.com with SMTP id qa18-20020a17090b4fd200b0023750b675f5so2081286pjb.3
-        for <linux-doc@vger.kernel.org>; Fri, 24 Feb 2023 01:01:10 -0800 (PST)
+        with ESMTP id S229678AbjBXJfC (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Fri, 24 Feb 2023 04:35:02 -0500
+Received: from mail-wm1-x329.google.com (mail-wm1-x329.google.com [IPv6:2a00:1450:4864:20::329])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id F288916308
+        for <linux-doc@vger.kernel.org>; Fri, 24 Feb 2023 01:34:58 -0800 (PST)
+Received: by mail-wm1-x329.google.com with SMTP id t25-20020a1c7719000000b003eb052cc5ccso1238239wmi.4
+        for <linux-doc@vger.kernel.org>; Fri, 24 Feb 2023 01:34:58 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=ventanamicro.com; s=google;
-        h=in-reply-to:content-disposition:mime-version:references:message-id
-         :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
-        bh=7SciX5aVZChspF9M3W2UcrfB8lkq1WSnSwFmbufo/K4=;
-        b=ZI383dRDIbf8rnbyqXMKkKwicJwWHKyhiJTe3izBokdxTjMOJDe8gArmmeBig46IPg
-         3FLKFHmnqBnsE4jhea/WELLQQEgoa0qt/7VZ3z6cAR3523nb5Ufrp4GDBDc3sZIBq4OV
-         SJcq9Zzp/OHbKDSga7ZwuvO7o+nQpKRGs6sXSjJaSjNUzEK5C2WDSQBCsdyNHFGEPnZr
-         b/MCBliE6jjByZpUysVs9U2QiOjEPKl3A1bd0h77AinQ/trZwVfaR09VksCJuntZTJVv
-         3Dgi3R6jmo/qQolSZdCHvu+Jc3NeRof7W9q1v8wcm+nx+jnqHOVscx0H7JpE2LckPM4y
-         2Ghg==
+        d=linaro.org; s=google;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=7MESVcb0g47iFx+NjjNUXz3tLNPtYavh4Fnoa4DatG4=;
+        b=MNI9dwgzbdM57MbIF248fH6T0SnxmGohL7exzi5QEWRMvYdycQQ9JFqZTW4PZgqCAO
+         eqhnxKuUta7hTQWhlqS+ufHDTdSyqDj0Kojx5p/pvcX/kp1GV4VNqJMpD6XZzll3C9jd
+         8rez0aFk84nBx35u5ksK4g/R0kwll9WCVvUKVPuPEAJdk4bDK00PIFxayPl2CH2WlBQ+
+         /PahV9wmJ4OPgEwVVFpCA2x9KoDwrqtfxknJTQIF+2U1s+2PR7R9XiA3yp3duabXawxv
+         UzcGLP/HUbcEabmTWsqnqwGlBeAYv4EoLaAngeUyoJmeG0NoXwZyQsAIYUlCZkUauV3L
+         D5JQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=in-reply-to:content-disposition:mime-version:references:message-id
-         :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=7SciX5aVZChspF9M3W2UcrfB8lkq1WSnSwFmbufo/K4=;
-        b=S4T5VFo/WMyp4a1R8J9ozFfyvrUgQdcSrJlkG2tVd32HjnCMHN/4/OLhneuq4QBxh1
-         b9kE4oSfr83YhtlvPB858zyqZRSV782eBHeUi8RKAVDex7vZ7/zWV8THvfWYoEFqEQno
-         EL8GXf4DhvAo7rRdgbJF1WpLOHIV2niFhlY/Xjr9oXcA7MujLA249I8HKZrZMikX+Ar6
-         MQqYYdAJ0B+yDgnusqyMeGrOv3SivF13rSJCeax/Fmkf3hxGnof3gjp5GHpUyrRQ/2eT
-         u1qzQA0ouoJhFKvNWrwoELfeWIz1+9cGivHd/ClgJ4HABGSc38uMeG3vgwbpS1q9nEY0
-         2OFQ==
-X-Gm-Message-State: AO0yUKWj8AJBkeLMW7cVo+hZSUghBuA9rA/dXmzp0XY77462Ibic9HPv
-        IpQ+gBHAbJQjmc4xFWgG8553BA==
-X-Google-Smtp-Source: AK7set9TN0cuW8/3ER/OJmFGi76u0ihPyZMOpJVaB8g6dEcNmNinMZWMGq3IjbfFDv/DEQrUjT2bkQ==
-X-Received: by 2002:a17:90b:3912:b0:233:b73c:18c9 with SMTP id ob18-20020a17090b391200b00233b73c18c9mr18005220pjb.40.1677229268265;
-        Fri, 24 Feb 2023 01:01:08 -0800 (PST)
-Received: from sunil-laptop ([49.206.14.226])
-        by smtp.gmail.com with ESMTPSA id mv11-20020a17090b198b00b002376d85844dsm1039904pjb.51.2023.02.24.01.01.02
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=7MESVcb0g47iFx+NjjNUXz3tLNPtYavh4Fnoa4DatG4=;
+        b=Gg6dOFwonzk64D0TjbQxN9Wwj2gxCqA+W+PWg8ug1iaTM7LmMFbu5X4tKghmj9+cml
+         ivK30RROJloyCqVA8rhpnve3F5hbue62q5v7Ax1/TBmDMmhpHsVUpZNmMNS+l4xhvxEL
+         4gsxNfDiH/KKp2VOcbciKa0r3jDmFrwWxifLCHxM3yHwGSzglxXrrW6kDy1nmHuc3Gzy
+         i1cruPmB2iVdo1IJIvuf0IKbKMWOPjdHJnkXv+LqEMpUftIXjA67iCeGxTATJbkv0UfF
+         houd9HTGPZCmAlEZQPybmfiaZt8ajG2eaC02qLJBMPh2xXSoTe1COJJ70+3a/+SkKcdx
+         cz0g==
+X-Gm-Message-State: AO0yUKUIjCPGd7Ctapn7aMd7HfuZv650iRIgrpn+o5RIvSY1qt/+8lfJ
+        h2GD+5nHrnTXlnmrYmciLQmn+w==
+X-Google-Smtp-Source: AK7set865xxSsMkTO5iGWPi5y7vK4V6q7mqmItJ7yJ2m0Er5FDJyMZR7QaE/DVJ8wShKuDh37On7wA==
+X-Received: by 2002:a05:600c:2ed3:b0:3df:7948:886b with SMTP id q19-20020a05600c2ed300b003df7948886bmr6036362wmn.31.1677231297360;
+        Fri, 24 Feb 2023 01:34:57 -0800 (PST)
+Received: from vingu-book.. ([2a01:e0a:f:6020:a6f0:4ee9:c103:44cb])
+        by smtp.gmail.com with ESMTPSA id d18-20020a05600c34d200b003e6dcd562a6sm2239179wmq.28.2023.02.24.01.34.55
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 24 Feb 2023 01:01:07 -0800 (PST)
-Date:   Fri, 24 Feb 2023 14:30:58 +0530
-From:   Sunil V L <sunilvl@ventanamicro.com>
-To:     Andrew Jones <ajones@ventanamicro.com>
-Cc:     Palmer Dabbelt <palmer@dabbelt.com>,
-        Albert Ou <aou@eecs.berkeley.edu>,
-        Paul Walmsley <paul.walmsley@sifive.com>,
-        "Rafael J . Wysocki" <rafael@kernel.org>,
-        Len Brown <lenb@kernel.org>,
-        Thomas Gleixner <tglx@linutronix.de>,
-        Marc Zyngier <maz@kernel.org>,
-        Jonathan Corbet <corbet@lwn.net>,
-        linux-riscv@lists.infradead.org, linux-acpi@vger.kernel.org,
-        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
-        Conor Dooley <conor.dooley@microchip.com>,
-        Anup Patel <apatel@ventanamicro.com>,
-        Atish Patra <atishp@rivosinc.com>,
-        "Rafael J . Wysocki" <rafael.j.wysocki@intel.com>
-Subject: Re: [PATCH V2 04/21] RISC-V: Add support to build the ACPI core
-Message-ID: <Y/h8ygElKNMzPVoy@sunil-laptop>
-References: <20230216182043.1946553-1-sunilvl@ventanamicro.com>
- <20230216182043.1946553-5-sunilvl@ventanamicro.com>
- <20230220154415.u435t34q7btmwzwx@orel>
+        Fri, 24 Feb 2023 01:34:56 -0800 (PST)
+From:   Vincent Guittot <vincent.guittot@linaro.org>
+To:     mingo@redhat.com, peterz@infradead.org, juri.lelli@redhat.com,
+        dietmar.eggemann@arm.com, rostedt@goodmis.org, bsegall@google.com,
+        mgorman@suse.de, bristot@redhat.com, vschneid@redhat.com,
+        linux-kernel@vger.kernel.org, parth@linux.ibm.com, tj@kernel.org,
+        lizefan.x@bytedance.com, hannes@cmpxchg.org,
+        cgroups@vger.kernel.org, corbet@lwn.net, linux-doc@vger.kernel.org
+Cc:     qyousef@layalina.io, chris.hyser@oracle.com,
+        patrick.bellasi@matbug.net, David.Laight@aculab.com,
+        pjt@google.com, pavel@ucw.cz, qperret@google.com,
+        tim.c.chen@linux.intel.com, joshdon@google.com, timj@gnu.org,
+        kprateek.nayak@amd.com, yu.c.chen@intel.com,
+        youssefesmat@chromium.org, joel@joelfernandes.org,
+        Vincent Guittot <vincent.guittot@linaro.org>
+Subject: [PATCH v12 0/8] Add latency priority for CFS class
+Date:   Fri, 24 Feb 2023 10:34:46 +0100
+Message-Id: <20230224093454.956298-1-vincent.guittot@linaro.org>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20230220154415.u435t34q7btmwzwx@orel>
+Content-Transfer-Encoding: 8bit
 X-Spam-Status: No, score=-2.1 required=5.0 tests=BAYES_00,DKIM_SIGNED,
         DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_NONE,
-        SPF_HELO_NONE,SPF_PASS autolearn=ham autolearn_force=no version=3.4.6
+        SPF_HELO_NONE,SPF_PASS autolearn=unavailable autolearn_force=no
+        version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Mon, Feb 20, 2023 at 04:44:15PM +0100, Andrew Jones wrote:
-> On Thu, Feb 16, 2023 at 11:50:26PM +0530, Sunil V L wrote:
-> > Enable ACPI core for RISC-V after adding architecture-specific
-> > interfaces and header files required to build the ACPI core.
-> > 
-> > 1) Couple of header files are required unconditionally by the ACPI
-> > core. Add empty acenv.h and cpu.h header files.
-> > 
-> > 2) If CONFIG_PCI is enabled, a few PCI related interfaces need to
-> > be provided by the architecture. Define dummy interfaces for now
-> > so that build succeeds. Actual implementation will be added when
-> > PCI support is added for ACPI along with external interrupt
-> > controller support.
-> > 
-> > 3) A few globals and memory mapping related functions specific
-> > to the architecture need to be provided.
-> > 
-> > Signed-off-by: Sunil V L <sunilvl@ventanamicro.com>
-> > Acked-by: Rafael J. Wysocki <rafael.j.wysocki@intel.com>
-> > ---
-> >  arch/riscv/Kconfig             |  5 +++
-> >  arch/riscv/include/asm/acenv.h | 11 +++++
-> >  arch/riscv/include/asm/acpi.h  | 60 +++++++++++++++++++++++++
-> >  arch/riscv/include/asm/cpu.h   |  8 ++++
-> >  arch/riscv/kernel/Makefile     |  2 +
-> >  arch/riscv/kernel/acpi.c       | 80 ++++++++++++++++++++++++++++++++++
-> >  6 files changed, 166 insertions(+)
-> >  create mode 100644 arch/riscv/include/asm/acenv.h
-> >  create mode 100644 arch/riscv/include/asm/acpi.h
-> >  create mode 100644 arch/riscv/include/asm/cpu.h
-> >  create mode 100644 arch/riscv/kernel/acpi.c
-> > 
-> > diff --git a/arch/riscv/Kconfig b/arch/riscv/Kconfig
-> > index d153e1cd890b..3ba701b26389 100644
-> > --- a/arch/riscv/Kconfig
-> > +++ b/arch/riscv/Kconfig
-> > @@ -12,6 +12,8 @@ config 32BIT
-> >  
-> >  config RISCV
-> >  	def_bool y
-> > +	select ACPI_GENERIC_GSI if ACPI
-> 
-> Is it better for this to come after patch 14, "irqchip/riscv-intc:
-> Add ACPI support"?
-> 
-This is required to just to enable building the ACPI core for RISC-V.
+This patchset restarts the work about adding a latency priority to describe
+the latency tolerance of cfs tasks.
 
-> > +	select ACPI_REDUCED_HARDWARE_ONLY if ACPI
-> >  	select ARCH_CLOCKSOURCE_INIT
-> >  	select ARCH_ENABLE_HUGEPAGE_MIGRATION if HUGETLB_PAGE && MIGRATION
-> >  	select ARCH_ENABLE_SPLIT_PMD_PTLOCK if PGTABLE_LEVELS > 2
-> > @@ -598,6 +600,7 @@ config EFI_STUB
-> >  config EFI
-> >  	bool "UEFI runtime support"
-> >  	depends on OF && !XIP_KERNEL
-> > +	select ARCH_SUPPORTS_ACPI if 64BIT
-> >  	select LIBFDT
-> >  	select UCS2_STRING
-> >  	select EFI_PARAMS_FROM_FDT
-> > @@ -703,3 +706,5 @@ source "drivers/cpufreq/Kconfig"
-> >  endmenu # "CPU Power Management"
-> >  
-> >  source "arch/riscv/kvm/Kconfig"
-> > +
-> > +source "drivers/acpi/Kconfig"
-> > diff --git a/arch/riscv/include/asm/acenv.h b/arch/riscv/include/asm/acenv.h
-> > new file mode 100644
-> > index 000000000000..22123c5a4883
-> > --- /dev/null
-> > +++ b/arch/riscv/include/asm/acenv.h
-> > @@ -0,0 +1,11 @@
-> > +/* SPDX-License-Identifier: GPL-2.0-only */
-> > +/*
-> > + * RISC-V specific ACPICA environments and implementation
-> > + */
-> > +
-> > +#ifndef _ASM_ACENV_H
-> > +#define _ASM_ACENV_H
-> > +
-> > +/* It is required unconditionally by ACPI core */
-> > +
-> > +#endif /* _ASM_ACENV_H */
-> > diff --git a/arch/riscv/include/asm/acpi.h b/arch/riscv/include/asm/acpi.h
-> > new file mode 100644
-> > index 000000000000..7f9dce3c39d0
-> > --- /dev/null
-> > +++ b/arch/riscv/include/asm/acpi.h
-> > @@ -0,0 +1,60 @@
-> > +/* SPDX-License-Identifier: GPL-2.0-only */
-> > +/*
-> > + *  Copyright (C) 2013-2014, Linaro Ltd.
-> > + *	Author: Al Stone <al.stone@linaro.org>
-> > + *	Author: Graeme Gregory <graeme.gregory@linaro.org>
-> > + *	Author: Hanjun Guo <hanjun.guo@linaro.org>
-> > + *
-> > + *  Copyright (C) 2021-2023, Ventana Micro Systems Inc.
-> > + *	Author: Sunil V L <sunilvl@ventanamicro.com>
-> > + */
-> > +
-> > +#ifndef _ASM_ACPI_H
-> > +#define _ASM_ACPI_H
-> > +
-> > +/* Basic configuration for ACPI */
-> > +#ifdef CONFIG_ACPI
-> > +
-> > +/* ACPI table mapping after acpi_permanent_mmap is set */
-> > +void *acpi_os_ioremap(acpi_physical_address phys, acpi_size size);
-> > +#define acpi_os_ioremap acpi_os_ioremap
-> > +
-> > +#define acpi_strict 1   /* No out-of-spec workarounds on RISC-V */
-> > +extern int acpi_disabled;
-> > +extern int acpi_noirq;
-> > +extern int acpi_pci_disabled;
-> 
-> need blank line here
-> 
-Okay.
+Patch [1] is a new one that has been added with v6. It fixes an
+unfairness for low prio tasks because of wakeup_gran() being bigger
+than the maximum vruntime credit that a waking task can keep after
+sleeping.
 
-> > +static inline void disable_acpi(void)
-> > +{
-> > +	acpi_disabled = 1;
-> > +	acpi_pci_disabled = 1;
-> > +	acpi_noirq = 1;
-> > +}
-> > +
-> > +static inline void enable_acpi(void)
-> > +{
-> > +	acpi_disabled = 0;
-> > +	acpi_pci_disabled = 0;
-> > +	acpi_noirq = 0;
-> > +}
-> > +
-> > +/*
-> > + * The ACPI processor driver for ACPI core code needs this macro
-> > + * to find out this cpu was already mapped (mapping from CPU hardware
-> > + * ID to CPU logical ID) or not.
-> > + */
-> > +#define cpu_physical_id(cpu) cpuid_to_hartid_map(cpu)
-> > +
-> > +/*
-> > + * Since MADT must provide at least one RINTC structure, the
-> > + * CPU will be always available in MADT on RISC-V.
-> > + */
-> > +static inline bool acpi_has_cpu_in_madt(void)
-> > +{
-> > +	return true;
-> > +}
-> > +
-> > +static inline void arch_fix_phys_package_id(int num, u32 slot) { }
-> > +
-> > +#endif /* CONFIG_ACPI */
-> > +
-> > +#endif /*_ASM_ACPI_H*/
-> > diff --git a/arch/riscv/include/asm/cpu.h b/arch/riscv/include/asm/cpu.h
-> > new file mode 100644
-> > index 000000000000..ea1a88b3d5f2
-> > --- /dev/null
-> > +++ b/arch/riscv/include/asm/cpu.h
-> > @@ -0,0 +1,8 @@
-> > +/* SPDX-License-Identifier: GPL-2.0-only */
-> > +
-> > +#ifndef _ASM_CPU_H
-> > +#define _ASM_CPU_H
-> > +
-> > +/* It is required unconditionally by ACPI core */
-> > +
-> > +#endif /* _ASM_CPU_H */
-> > diff --git a/arch/riscv/kernel/Makefile b/arch/riscv/kernel/Makefile
-> > index 67f542be1bea..f979dc8cf47d 100644
-> > --- a/arch/riscv/kernel/Makefile
-> > +++ b/arch/riscv/kernel/Makefile
-> > @@ -90,3 +90,5 @@ obj-$(CONFIG_EFI)		+= efi.o
-> >  obj-$(CONFIG_COMPAT)		+= compat_syscall_table.o
-> >  obj-$(CONFIG_COMPAT)		+= compat_signal.o
-> >  obj-$(CONFIG_COMPAT)		+= compat_vdso/
-> > +
-> > +obj-$(CONFIG_ACPI)              += acpi.o
-> > diff --git a/arch/riscv/kernel/acpi.c b/arch/riscv/kernel/acpi.c
-> > new file mode 100644
-> > index 000000000000..81d448c41714
-> > --- /dev/null
-> > +++ b/arch/riscv/kernel/acpi.c
-> > @@ -0,0 +1,80 @@
-> > +// SPDX-License-Identifier: GPL-2.0-only
-> > +/*
-> > + *  RISC-V Specific Low-Level ACPI Boot Support
-> > + *
-> > + *  Copyright (C) 2013-2014, Linaro Ltd.
-> > + *	Author: Al Stone <al.stone@linaro.org>
-> > + *	Author: Graeme Gregory <graeme.gregory@linaro.org>
-> > + *	Author: Hanjun Guo <hanjun.guo@linaro.org>
-> > + *	Author: Tomasz Nowicki <tomasz.nowicki@linaro.org>
-> > + *	Author: Naresh Bhat <naresh.bhat@linaro.org>
-> > + *
-> > + *  Copyright (C) 2021-2023, Ventana Micro Systems Inc.
-> > + *	Author: Sunil V L <sunilvl@ventanamicro.com>
-> > + */
-> > +
-> > +#include <linux/acpi.h>
-> > +#include <linux/io.h>
-> > +#include <linux/pci.h>
-> > +
-> > +int acpi_noirq = 1;		/* skip ACPI IRQ initialization */
-> > +int acpi_disabled = 1;
-> > +EXPORT_SYMBOL(acpi_disabled);
-> > +
-> > +int acpi_pci_disabled = 1;	/* skip ACPI PCI scan and IRQ initialization */
-> > +EXPORT_SYMBOL(acpi_pci_disabled);
-> > +
-> > +/*
-> > + * __acpi_map_table() will be called before paging_init(), so early_ioremap()
-> > + * or early_memremap() should be called here to for ACPI table mapping.
-> > + */
-> > +void __init __iomem *__acpi_map_table(unsigned long phys, unsigned long size)
-> > +{
-> > +	if (!size)
-> > +		return NULL;
-> > +
-> > +	return early_memremap(phys, size);
-> > +}
-> > +
-> > +void __init __acpi_unmap_table(void __iomem *map, unsigned long size)
-> > +{
-> > +	if (!map || !size)
-> > +		return;
-> > +
-> > +	early_memunmap(map, size);
-> > +}
-> > +
-> > +void *acpi_os_ioremap(acpi_physical_address phys, acpi_size size)
-> > +{
-> > +	return memremap(phys, size, MEMREMAP_WB);
-> > +}
-> > +
-> > +#ifdef CONFIG_PCI
-> > +
-> > +/*
-> > + * These interfaces are defined just to enable building ACPI core.
-> > + * TODO: Update it with actual implementation when external interrupt
-> > + * controller support is added in RISC-V ACPI.
-> > + */
-> > +int raw_pci_read(unsigned int domain, unsigned int bus, unsigned int devfn,
-> > +		 int reg, int len, u32 *val)
-> > +{
-> > +	return PCIBIOS_DEVICE_NOT_FOUND;
-> > +}
-> > +
-> > +int raw_pci_write(unsigned int domain, unsigned int bus, unsigned int devfn,
-> > +		  int reg, int len, u32 val)
-> > +{
-> > +	return PCIBIOS_DEVICE_NOT_FOUND;
-> > +}
-> > +
-> > +int acpi_pci_bus_find_domain_nr(struct pci_bus *bus)
-> > +{
-> > +	return -1;
-> > +}
-> > +
-> > +struct pci_bus *pci_acpi_scan_root(struct acpi_pci_root *root)
-> > +{
-> > +	return NULL;
-> > +}
-> > +#endif	/* CONFIG_PCI */
-> > -- 
-> > 2.34.1
-> >
-> 
-> Otherwise, afaict, this is pretty consistent with how arm64 started its
-> ACPI support.
-> 
-> Reviewed-by: Andrew Jones <ajones@ventanamicro.com>
-> 
-Thanks!
-Sunil
+The patches [2-4] have been done by Parth:
+https://lore.kernel.org/lkml/20200228090755.22829-1-parth@linux.ibm.com/
+
+I have just rebased and moved the set of latency priority outside the
+priority update. I have removed the reviewed tag because the patches
+are 2 years old.
+
+This aims to be a generic interface and the following patches is one use
+of it to improve the scheduling latency of cfs tasks.
+
+Patch [5] uses latency nice priority to define a latency offset
+and then decide if a cfs task can or should preempt the current
+running task. The patch gives some tests results with cyclictests and
+hackbench to highlight the benefit of latency priority for short
+interactive task or long intensive tasks.
+
+Patch [6] adds the support of latency nice priority to task group by
+adding a cpu.latency.nice field. The range is [-20:19] as for setting task
+latency priority.
+
+Patch [7] makes sched_core taking into account the latency offset.
+
+Patch [8] adds a rb tree to cover some corner cases where the latency
+sensitive task (priority < 0) is preempted by high priority task (RT/DL)
+or fails to preempt them. This patch ensures that tasks will have at least
+a slice of sched_min_granularity in priority at wakeup.
+
+I have also backported the patchset on a dragonboard RB3 with an android
+mainline kernel based on v5.18 for a quick test. I have used the
+TouchLatency app which is part of AOSP and described to be a very good
+test to highlight jitter and jank frame sources of a system [1].
+In addition to the app, I have added some short running tasks waking-up
+regularly (to use the 8 cpus for 4 ms every 37777us) to stress the system
+without overloading it (and disabling EAS). The 1st results shows that the
+patchset helps to reduce the missed deadline frames from 5% to less than
+0.1% when the cpu.latency.nice of task group are set. I haven't rerun the
+test with latest version.
+
+I have also tested the patchset with the modified version of the alsa
+latency test that has been shared by Tim. The test quickly xruns with
+default latency nice priority 0 but is able to run without underuns with
+a latency -20 and hackbench running simultaneously.
+
+While preparing the version 8, I have evaluated the benefit of using an
+augmented rbtree instead of adding a rbtree for latency sensitive entities,
+which was a relevant suggestion done by PeterZ. Although the augmented
+rbtree enables to sort additional information in the tree with a limited
+overhead, it has more impact on legacy use cases (latency_nice >= 0)
+because the augmented callbacks are always called to maintain this
+additional information even when there is no sensitive tasks. In such
+cases, the dedicated rbtree remains empty and the overhead is reduced to
+loading a cached null node pointer. Nevertheless, we might want to
+reconsider the augmented rbtree once the use of negative latency_nice will
+be more widlely deployed. At now, the different tests that I have done,
+have not shown improvements with augmented rbtree.
+
+Below are some hackbench results (from v10):
+        2 rbtrees               augmented rbtree        augmented rbtree	
+                                sorted by vruntime      sorted by wakeup_vruntime
+sched	pipe	
+avg     26311,000               25976,667               25839,556
+stdev   0,15 %                  0,28 %                  0,24 %
+vs tip  0,50 %                  -0,78 %                 -1,31 %
+hackbench	1 group	
+avg     1,315                   1,344                   1,359
+stdev   0,88 %                  1,55 %                  1,82 %
+vs tip  -0,47 %                 -2,68 %                 -3,87 %
+hackbench	4 groups
+avg     1,339                   1,365                   1,367
+stdev   2,39 %                  2,26 %                  3,58 %
+vs tip  -0,08 %                 -2,01 %                 -2,22 %
+hackbench	8 groups
+avg     1,233                   1,286                   1,301
+stdev   0,74 %                  1,09 %                  1,52 %
+vs tip  0,29 %                  -4,05 %                 -5,27 %
+hackbench	16 groups	
+avg     1,268                   1,313                   1,319
+stdev   0,85 %                  1,60 %                  0,68 %
+vs tip  -0,02 %                 -3,56 %                 -4,01 %
+
+[1] https://source.android.com/docs/core/debug/eval_perf#touchlatency
+
+Change since v11:
+- init latency_node of task group entity
+
+Change since v10:
+- remove sched_latency_to_weight array and use a calc_latency_offset() instead
+- save latency_prio instead for task group instead of latency offset
+- enqueue back an entity when changing the latency nice prio fo a task group
+
+Change since v9:
+- Rebase
+- add tags
+
+Change since v8:
+- Rename get_sched_latency by get_sleep_latency
+- move latency nice defines in sched/prio.h and fix latency_prio init value
+- Fix typo and comments
+
+Change since v7:
+- Replaced se->on_latency by using RB_CLEAR_NODE() and RB_EMPTY_NODE()
+- Clarify the limit behavior fo the cgroup cpu.latenyc_nice
+
+Change since v6:
+- Fix compilation error for !CONFIG_SCHED_DEBUG
+
+Change since v5:
+- Add patch 1 to fix unfairness for low prio task. This has been
+  discovered while studying Youssef's tests results with latency nice
+  which were hitting the same problem.
+- Fixed latency_offset computation to take into account
+  GENTLE_FAIR_SLEEPERS. This has diseappeared with v2and has been raised
+  by Youssef's tests.
+- Reworked and optimized how latency_offset in used to check for
+  preempting current task at wakeup and tick. This cover more cases too.
+- Add patch 9 to remove check_preempt_from_others() which is not needed
+  anymore with the rb tree.
+
+Change since v4:
+- Removed permission checks to set latency priority. This enables user
+  without elevated privilege like audio application to set their latency
+  priority as requested by Tim.
+- Removed cpu.latency and replaced it by cpu.latency.nice so we keep a
+  generic interface not tied to latency_offset which can be used to
+  implement other latency features.
+- Added an entry in Documentation/admin-guide/cgroup-v2.rst to describe
+  cpu.latency.nice.
+- Fix some typos.
+
+Change since v3:
+- Fix 2 compilation warnings raised by kernel test robot <lkp@intel.com>
+
+Change since v2:
+- Set a latency_offset field instead of saving a weight and computing it
+  on the fly.
+- Make latency_offset available for task group: cpu.latency
+- Fix some corner cases to make latency sensitive tasks schedule first and
+  add a rb tree for latency sensitive task.
+
+Change since v1:
+- fix typo
+- move some codes in the right patch to make bisect happy
+- simplify and fixed how the weight is computed
+- added support of sched core patch 7
+
+Parth Shah (3):
+  sched: Introduce latency-nice as a per-task attribute
+  sched/core: Propagate parent task's latency requirements to the child
+    task
+  sched: Allow sched_{get,set}attr to change latency_nice of the task
+
+Vincent Guittot (5):
+  sched/fair: fix unfairness at wakeup
+  sched/fair: Take into account latency priority at wakeup
+  sched/fair: Add sched group latency support
+  sched/core: Support latency priority with sched core
+  sched/fair: Add latency list
+
+ Documentation/admin-guide/cgroup-v2.rst |  10 ++
+ include/linux/sched.h                   |   4 +
+ include/linux/sched/prio.h              |  27 +++
+ include/uapi/linux/sched.h              |   4 +-
+ include/uapi/linux/sched/types.h        |  19 ++
+ init/init_task.c                        |   1 +
+ kernel/sched/core.c                     |  65 +++++++
+ kernel/sched/debug.c                    |   1 +
+ kernel/sched/fair.c                     | 222 ++++++++++++++++++++----
+ kernel/sched/sched.h                    |  50 +++++-
+ tools/include/uapi/linux/sched.h        |   4 +-
+ 11 files changed, 371 insertions(+), 36 deletions(-)
+
+-- 
+2.34.1
+
