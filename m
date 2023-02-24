@@ -2,18 +2,18 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 8C3586A1619
-	for <lists+linux-doc@lfdr.de>; Fri, 24 Feb 2023 06:04:12 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 504006A161F
+	for <lists+linux-doc@lfdr.de>; Fri, 24 Feb 2023 06:09:11 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S229542AbjBXFEK (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Fri, 24 Feb 2023 00:04:10 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:38132 "EHLO
+        id S229477AbjBXFJJ (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Fri, 24 Feb 2023 00:09:09 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:40418 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S229477AbjBXFEJ (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Fri, 24 Feb 2023 00:04:09 -0500
+        with ESMTP id S229470AbjBXFJI (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Fri, 24 Feb 2023 00:09:08 -0500
 Received: from 66-220-144-178.mail-mxout.facebook.com (66-220-144-178.mail-mxout.facebook.com [66.220.144.178])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id C0F6F1DB81
-        for <linux-doc@vger.kernel.org>; Thu, 23 Feb 2023 21:04:06 -0800 (PST)
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id BD571367D5
+        for <linux-doc@vger.kernel.org>; Thu, 23 Feb 2023 21:09:07 -0800 (PST)
 Received: by dev0134.prn3.facebook.com (Postfix, from userid 425415)
         id 0A66F7B74EDD; Thu, 23 Feb 2023 20:40:59 -0800 (PST)
 From:   Stefan Roesch <shr@devkernel.io>
