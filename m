@@ -2,62 +2,60 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 128586A5DBC
-	for <lists+linux-doc@lfdr.de>; Tue, 28 Feb 2023 17:55:43 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 712616A5DE9
+	for <lists+linux-doc@lfdr.de>; Tue, 28 Feb 2023 18:04:49 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S229529AbjB1Qzl (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 28 Feb 2023 11:55:41 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:48504 "EHLO
+        id S229705AbjB1REp (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 28 Feb 2023 12:04:45 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:33274 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S229527AbjB1Qzk (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 28 Feb 2023 11:55:40 -0500
-Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.129.124])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 0F61D28D0C
-        for <linux-doc@vger.kernel.org>; Tue, 28 Feb 2023 08:54:34 -0800 (PST)
+        with ESMTP id S229662AbjB1REp (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 28 Feb 2023 12:04:45 -0500
+Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.133.124])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 22DBCB776
+        for <linux-doc@vger.kernel.org>; Tue, 28 Feb 2023 09:03:57 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-        s=mimecast20190719; t=1677603177;
+        s=mimecast20190719; t=1677603836;
         h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
          to:to:cc:cc:mime-version:mime-version:content-type:content-type:
          in-reply-to:in-reply-to:references:references;
-        bh=zCkSECvXS7yB7KD0+uxNsAJHsyUzclFZ5TPFGlTqNhA=;
-        b=jNV9M5Vy3EZkgSlC7wpRa26Sor7Vxk7PhlMZ+U773dWl43//IAPJrwV/sOxe1BqDo3nvAh
-        1xdbZ+FxYa5/lqa7rvYZnV2y02Rv5ymZOko1UVH/e0oS4j4qbfg5vy8ZFBigGVOyJsuEeb
-        Tv7JI36Z4NF6ml7kbCUWRDNyAFPA4kw=
-Received: from mimecast-mx02.redhat.com (mimecast-mx02.redhat.com
- [66.187.233.88]) by relay.mimecast.com with ESMTP with STARTTLS
+        bh=uLkxFWJZoOWbhdfRTliUPcDXf7HJjLU8upPpqW9MN+E=;
+        b=CYDNxVlIbt932Nv7lC72aIFWHBDJIYjrw7SfJl6sC64o8wYK2VgqnEXXPMYr465aeuR9UD
+        q23i89jABWZ/LeFYqVOyWI2v3IRTk3Dng6oH0QkqYwq2WKGi+tB3/lEhyflbnIK/n6zO0K
+        MXUs5gSF+MTxYQzkw7kk5xacR99MYuA=
+Received: from mimecast-mx02.redhat.com (mx3-rdu2.redhat.com
+ [66.187.233.73]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- us-mta-605-7BXfBiSpNsaGYExb4C9rcw-1; Tue, 28 Feb 2023 11:52:51 -0500
-X-MC-Unique: 7BXfBiSpNsaGYExb4C9rcw-1
-Received: from smtp.corp.redhat.com (int-mx05.intmail.prod.int.rdu2.redhat.com [10.11.54.5])
+ us-mta-656-MUOEg7B2MX2gDbAZOsCHxA-1; Tue, 28 Feb 2023 12:03:51 -0500
+X-MC-Unique: MUOEg7B2MX2gDbAZOsCHxA-1
+Received: from smtp.corp.redhat.com (int-mx01.intmail.prod.int.rdu2.redhat.com [10.11.54.1])
         (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
         (No client certificate requested)
-        by mimecast-mx02.redhat.com (Postfix) with ESMTPS id AA670811E9C;
-        Tue, 28 Feb 2023 16:52:50 +0000 (UTC)
+        by mimecast-mx02.redhat.com (Postfix) with ESMTPS id F35A73C0ED4A;
+        Tue, 28 Feb 2023 17:03:49 +0000 (UTC)
 Received: from dhcp-27-174.brq.redhat.com (unknown [10.45.226.252])
-        by smtp.corp.redhat.com (Postfix) with SMTP id C9D3018EC6;
-        Tue, 28 Feb 2023 16:52:47 +0000 (UTC)
+        by smtp.corp.redhat.com (Postfix) with SMTP id 4C88C404BEC5;
+        Tue, 28 Feb 2023 17:03:47 +0000 (UTC)
 Received: by dhcp-27-174.brq.redhat.com (nbSMTP-1.00) for uid 1000
-        oleg@redhat.com; Tue, 28 Feb 2023 17:52:44 +0100 (CET)
-Date:   Tue, 28 Feb 2023 17:52:40 +0100
+        oleg@redhat.com; Tue, 28 Feb 2023 18:03:43 +0100 (CET)
+Date:   Tue, 28 Feb 2023 18:03:40 +0100
 From:   Oleg Nesterov <oleg@redhat.com>
-To:     Dmitry Safonov <0x7f454c46@gmail.com>
-Cc:     Gregory Price <gourry.memverge@gmail.com>,
-        linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org,
+To:     Gregory Price <gourry.memverge@gmail.com>
+Cc:     linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org,
         avagin@gmail.com, peterz@infradead.org, luto@kernel.org,
         krisman@collabora.com, tglx@linutronix.de, corbet@lwn.net,
         shuah@kernel.org, Gregory Price <gregory.price@memverge.com>
 Subject: Re: [PATCH v12 2/3] ptrace,syscall_user_dispatch: checkpoint/restore
  support for SUD
-Message-ID: <20230228165217.GA16798@redhat.com>
+Message-ID: <20230228170339.GA15021@redhat.com>
 References: <20230224233126.1936-1-gregory.price@memverge.com>
  <20230224233126.1936-3-gregory.price@memverge.com>
- <CAJwJo6YnELNhU8RmR-z37vDZ=xb0CmUUBgrPGgHP2dqjVm=O2g@mail.gmail.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <CAJwJo6YnELNhU8RmR-z37vDZ=xb0CmUUBgrPGgHP2dqjVm=O2g@mail.gmail.com>
+In-Reply-To: <20230224233126.1936-3-gregory.price@memverge.com>
 User-Agent: Mutt/1.5.24 (2015-08-30)
-X-Scanned-By: MIMEDefang 3.1 on 10.11.54.5
+X-Scanned-By: MIMEDefang 3.1 on 10.11.54.1
 X-Spam-Status: No, score=-2.1 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
         DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_NONE,
         RCVD_IN_MSPIKE_H2,SPF_HELO_NONE,SPF_NONE autolearn=unavailable
@@ -68,26 +66,55 @@ Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On 02/27, Dmitry Safonov wrote:
->
-> > +int syscall_user_dispatch_set_config(struct task_struct *task, unsigned long size,
-> > +                                    void __user *data)
-> > +{
-> > +       int rc;
-> > +       struct ptrace_sud_config cfg;
-> > +
-> > +       if (size != sizeof(struct ptrace_sud_config))
-> > +               return -EINVAL;
-> > +
-> > +       if (copy_from_user(&cfg, data, sizeof(struct ptrace_sud_config)))
-> > +               return -EFAULT;
->
-> It seems that the tool you want here would be copy_struct_from_user(),
-> which is designed for extendable syscalls.
+Gregory,
 
-Hmm. Why?
+I can't resist, I have a couple of cosmetic nits.
 
-In this case ksize == usize, so why do we need copy_struct_from_user ?
+On 02/24, Gregory Price wrote:
+>
+> +int syscall_user_dispatch_get_config(struct task_struct *task, unsigned long size,
+> +				     void __user *data)
+> +{
+> +	struct syscall_user_dispatch *sd = &task->syscall_dispatch;
+> +	struct ptrace_sud_config config;
+> +
+> +	if (size != sizeof(struct ptrace_sud_config))
+> +		return -EINVAL;
+> +
+> +	if (test_task_syscall_work(task, SYSCALL_USER_DISPATCH))
+> +		config.mode = PR_SYS_DISPATCH_ON;
+> +	else
+> +		config.mode = PR_SYS_DISPATCH_OFF;
+> +
+> +	config.offset = sd->offset;
+> +	config.len = sd->len;
+> +	config.selector = (__u64)(uintptr_t)sd->selector;
+> +
+> +	if (copy_to_user(data, &config, sizeof(config)))
+
+Let me repeat, do not mix sizeof(struct ptrace_sud_config) and sizeof(config).
+Perhaps this is just me, but this looks confusing to me. Please use
+sizeof(config) both times.
+
+> +int syscall_user_dispatch_set_config(struct task_struct *task, unsigned long size,
+> +				     void __user *data)
+> +{
+> +	int rc;
+> +	struct ptrace_sud_config cfg;
+                                 ^^^
+
+Again, this is cosmetic but a bit annoying. Please use either "config" or
+"cfg" in both functions to make the naming more consistent.
+
+
+> +	rc = task_set_syscall_user_dispatch(task, cfg.mode, cfg.offset,
+> +					    cfg.len, (char __user *)(uintptr_t)cfg.selector);
+
+
+	rc = task_set_syscall_user_dispatch(task, cfg.mode, cfg.offset, cfg.len,
+					   (char __user *)(uintptr_t)cfg.selector);
+
+looks a bit better to me.
 
 Oleg.
 
