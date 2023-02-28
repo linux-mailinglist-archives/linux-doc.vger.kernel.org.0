@@ -2,141 +2,106 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 186AB6A5398
-	for <lists+linux-doc@lfdr.de>; Tue, 28 Feb 2023 08:12:59 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 288DB6A53D2
+	for <lists+linux-doc@lfdr.de>; Tue, 28 Feb 2023 08:45:36 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S229565AbjB1HM5 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 28 Feb 2023 02:12:57 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:38252 "EHLO
+        id S230259AbjB1Hpe (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 28 Feb 2023 02:45:34 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:35056 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S229533AbjB1HM4 (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 28 Feb 2023 02:12:56 -0500
-Received: from mail-lf1-x133.google.com (mail-lf1-x133.google.com [IPv6:2a00:1450:4864:20::133])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 93DBE2B619;
-        Mon, 27 Feb 2023 23:12:23 -0800 (PST)
-Received: by mail-lf1-x133.google.com with SMTP id s22so11858133lfi.9;
-        Mon, 27 Feb 2023 23:12:23 -0800 (PST)
+        with ESMTP id S229652AbjB1Hpd (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 28 Feb 2023 02:45:33 -0500
+Received: from mail-pl1-x62c.google.com (mail-pl1-x62c.google.com [IPv6:2607:f8b0:4864:20::62c])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id C27FE20056;
+        Mon, 27 Feb 2023 23:45:31 -0800 (PST)
+Received: by mail-pl1-x62c.google.com with SMTP id p20so8289085plw.13;
+        Mon, 27 Feb 2023 23:45:31 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112; t=1677568341;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=V2el8epI4ehY4PQhzCIaQmBUYq/tD84LZ7fZuHKl00o=;
-        b=OogPw/DeSprgfA45tucixhanu1pqk4JujFYhoxxBMC/vl2iAoBga9+G3Pu/pq9n6o7
-         ztmvezIRFcEG2RSBLU2vIZPHB2hPPQ2Nbire1D2KdUiTWfpCgNaYRmgozx1y0k38yIlQ
-         zgLemtdhlCTC4gUWaPT0xCpO6tAioJnDr+IBXdQSqY7OEPGUMPtFKGFXa9KkR6qzDSiy
-         Ap+QSgf452caujUPME3M3ACeUyaErwZ+1rZM3HthMeQ2wIEz19bgoH9Q8oSD3DECxZ9d
-         NHyJHnWkHHZLt7wFVEKrxbNubIe+Ki1v0v/frQRrLW5T3LZgOIuXtIN5QSCgpM6YvOwM
-         20Xg==
+        d=gmail.com; s=20210112; t=1677570331;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=B3IIbCz5VoootLT5YWGDuEjPpnKLu/63h0xoAFiVcZk=;
+        b=V8+YN3Jv29gr7RpoaOjzqtnM5GPq+Mx2cPWj6NKepht54VPpr0K/0LFOSLv6Oay9Bh
+         leyqNrY2lmQ3MVRdTD0xu2gEGICqXwNSbmaoJLiPFxEZoPQzDO1KS4ADF6qJ1dEVE18Q
+         K0bNPYWQIW3L3tYz9QsORMuu9RcYOzxJ0Be3U3LYSDqwQnIJ+FK4BUMeWXw4Am1P9i2s
+         94PexP+QZHWL8qaGk5jP2+YJw2DDxKVW6miOXXSaW0IAkthrta/+ajTfQfgTlvMrH422
+         rKi/AtUtF2R56vW7mkQYB34zcWBt/VOXelMW5BHbzfke5OnHdEAGeCKOBBQkWtyMxeUF
+         cLyg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112; t=1677568341;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=V2el8epI4ehY4PQhzCIaQmBUYq/tD84LZ7fZuHKl00o=;
-        b=ZmBFwAl1c6X718LWD8Zemoz7wLIwATnHGz7s0EmLiPmWdpddA27nVD6a4hhHWFlggv
-         RYODdihwPEjAVB+Gabrktjyz+bWAuXMYsbPADDQPMy4kFwFhUuA9n4tO/6ZZvUT2pY6C
-         CAhYOM+d2Yimm1C9wgUzummhjccnZ+kvuVg+hcdHVHcEeIjLKHo4U9Nms3kcrrV1AUo/
-         dKANQpiGLdWQNwqt6p3XZ7XpLsWhgDMUS3se+qFZaDxtc1SSAH7DaPiZokZ3XnmHUOAt
-         9XOAwqAI3xsOYNxkUT9sRp+p5AZQTeQf2vAybJ5ltY1MEGVugdg2BkWnJNLRDn+boRNB
-         F2mw==
-X-Gm-Message-State: AO0yUKVRSw2KCgvAHHQxaKP4IDACCubUcCZkwXyJGEIae+SuwU36q1jA
-        Up/ogMKFNuC5DnoeHE0scd+h+QlPjZ2ISFVyFms=
-X-Google-Smtp-Source: AK7set85nhQ9g8yz02zH57y/oTI0WP0o9k1NFfgZU2Uz9PbtXdmMvCjK/p4NyEDFKJMgEHfHvgJnVUYXT02rDuEFI5Q=
-X-Received: by 2002:ac2:4432:0:b0:4db:38ba:618d with SMTP id
- w18-20020ac24432000000b004db38ba618dmr382693lfl.12.1677568340985; Mon, 27 Feb
- 2023 23:12:20 -0800 (PST)
+        d=1e100.net; s=20210112; t=1677570331;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=B3IIbCz5VoootLT5YWGDuEjPpnKLu/63h0xoAFiVcZk=;
+        b=viGHcR5JJ+RnT1dElqOrIi7icgeACi1sNl7ujXki5zMKxDBppDH6/od5ZiUkNvXDZg
+         FBg2Ju3Us7bzs/ZXpu0nMQ0uQD2d3k6SV6ZJs6nKaOoL4kDnIf3vyiHWysvTT6WEdS2f
+         jpN5yQ8N1XTh/YEfbogXguXjqxgufePRzMFAmIB4QCg0BnEC6mGWBWB4NXQnHREGbyst
+         ejw5DUSZJezG7Bd80FnTEi2f8snXgh2Prj2EyP5xY2tk64jRMMKbjjcGPoM93Ww83N5U
+         8gcrAZNf1rGmPQBC6Vz/L38kbCpOVn+o8wynD9vTcmGlBZJwKqvY+zgSQVlPNf5DRo7o
+         4RQA==
+X-Gm-Message-State: AO0yUKW79iSxe490eg/km37IkyTU3yC/VkI50l1HfKomRvMw0LGex4Gx
+        CvgPZbxeo8+BmBfBxEa3VEs=
+X-Google-Smtp-Source: AK7set9Eh7VgsYyp2ljJmYCIFQfKilCRuaHIthXT3jOHBTGuVlc0afsxJQLt52+1Lde4Az2sBKlsAA==
+X-Received: by 2002:a17:902:d507:b0:19a:96ea:3850 with SMTP id b7-20020a170902d50700b0019a96ea3850mr2547931plg.17.1677570331254;
+        Mon, 27 Feb 2023 23:45:31 -0800 (PST)
+Received: from debian.me (subs02-180-214-232-86.three.co.id. [180.214.232.86])
+        by smtp.gmail.com with ESMTPSA id w13-20020a170902d70d00b0019aeddce6casm5773361ply.205.2023.02.27.23.45.29
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 27 Feb 2023 23:45:30 -0800 (PST)
+Received: by debian.me (Postfix, from userid 1000)
+        id ED4FE106642; Tue, 28 Feb 2023 14:45:25 +0700 (WIB)
+From:   Bagas Sanjaya <bagasdotme@gmail.com>
+To:     Linux BPF <bpf@vger.kernel.org>,
+        Linux Documentation <linux-doc@vger.kernel.org>,
+        Linux Kernel Mailing List <linux-kernel@vger.kernel.org>
+Cc:     Alexei Starovoitov <ast@kernel.org>,
+        Daniel Borkmann <daniel@iogearbox.net>,
+        Andrii Nakryiko <andrii@kernel.org>,
+        Martin KaFai Lau <martin.lau@linux.dev>,
+        Song Liu <song@kernel.org>, Yonghong Song <yhs@fb.com>,
+        John Fastabend <john.fastabend@gmail.com>,
+        KP Singh <kpsingh@kernel.org>,
+        Stanislav Fomichev <sdf@google.com>,
+        Hao Luo <haoluo@google.com>, Jiri Olsa <jolsa@kernel.org>,
+        Jonathan Corbet <corbet@lwn.net>,
+        Jesper Dangaard Brouer <brouer@redhat.com>,
+        Bagas Sanjaya <bagasdotme@gmail.com>
+Subject: [PATCH 0/2] Hyperlink fixes for BPF QA documentation
+Date:   Tue, 28 Feb 2023 14:45:21 +0700
+Message-Id: <20230228074523.11493-1-bagasdotme@gmail.com>
+X-Mailer: git-send-email 2.39.2
 MIME-Version: 1.0
-References: <20230227105941.2749193-1-suagrfillet@gmail.com>
-In-Reply-To: <20230227105941.2749193-1-suagrfillet@gmail.com>
-From:   Alex Shi <seakeel@gmail.com>
-Date:   Tue, 28 Feb 2023 15:11:44 +0800
-Message-ID: <CAJy-AmnZmeTEwG9xTevhCzB2t9y0nb2yYsyWPMLn8R1V4XonQw@mail.gmail.com>
-Subject: Re: [PATCH] sched/doc: supplement CPU capacity with RISC-V
-To:     Song Shuai <suagrfillet@gmail.com>
-Cc:     corbet@lwn.net, alexs@kernel.org, siyanteng@loongson.cn,
-        robh@kernel.org, conor.dooley@microchip.com, palmer@rivosinc.com,
-        leyfoon.tan@starfivetech.com, linux-doc@vger.kernel.org,
-        linux-kernel@vger.kernel.org, linux-riscv@lists.infradead.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Spam-Status: No, score=-2.1 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+X-Developer-Signature: v=1; a=openpgp-sha256; l=753; i=bagasdotme@gmail.com; h=from:subject; bh=us+PmiUeFdZVNAJDwt3UjWoGL9oA6EGBTOm77WeDDAM=; b=owGbwMvMwCX2bWenZ2ig32LG02pJDMl/N3ILKSw4Hdc+Z/uUIyI+lTOyZeNUeHfHzHAQCp1suvzp 2//nOkpZGMS4GGTFFFkmJfI1nd5lJHKhfa0jzBxWJpAhDFycAjCRP2aMDL06x6pNNwlO8Z1vFm/P5G 4u0FmxSS5iflyjtoisa5hbEyPDqxRl/63OzY80TtZeqHI8voVfeL/NnuK9YR2Hel4HX+LhAwA=
+X-Developer-Key: i=bagasdotme@gmail.com; a=openpgp; fpr=701B806FDCA5D3A58FFB8F7D7C276C64A5E44A1D
+Content-Transfer-Encoding: 8bit
+X-Spam-Status: No, score=-0.6 required=5.0 tests=BAYES_00,DKIM_SIGNED,
         DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_FROM,
-        RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,SPF_PASS autolearn=ham
-        autolearn_force=no version=3.4.6
+        RCVD_IN_DNSWL_NONE,RCVD_IN_SORBS_WEB,SPF_HELO_NONE,SPF_PASS
+        autolearn=no autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Mon, Feb 27, 2023 at 6:59 PM Song Shuai <suagrfillet@gmail.com> wrote:
->
-> This commit 7d2078310cbf ("dt-bindings: arm: move cpu-capacity to a
-> shared loation") updates some references about capacity-dmips-mhz
-> property in this document.
->
-> The list of architectures using capacity-dmips-mhz omits RISC-V, so
-> supplements it here.
->
-> Signed-off-by: Song Shuai <suagrfillet@gmail.com>
-> ---
->  Documentation/scheduler/sched-capacity.rst                    | 2 +-
->  Documentation/translations/zh_CN/scheduler/sched-capacity.rst | 2 +-
->  2 files changed, 2 insertions(+), 2 deletions(-)
->
-> diff --git a/Documentation/scheduler/sched-capacity.rst b/Documentation/s=
-cheduler/sched-capacity.rst
-> index 8e2b8538bc2b..e2c1cf743158 100644
-> --- a/Documentation/scheduler/sched-capacity.rst
-> +++ b/Documentation/scheduler/sched-capacity.rst
-> @@ -258,7 +258,7 @@ Linux cannot currently figure out CPU capacity on its=
- own, this information thus
->  needs to be handed to it. Architectures must define arch_scale_cpu_capac=
-ity()
->  for that purpose.
->
-> -The arm and arm64 architectures directly map this to the arch_topology d=
-river
-> +The arm, arm64, and RISC-V architectures directly map this to the arch_t=
-opology driver
->  CPU scaling data, which is derived from the capacity-dmips-mhz CPU bindi=
-ng; see
->  Documentation/devicetree/bindings/cpu/cpu-capacity.txt.
->
-> diff --git a/Documentation/translations/zh_CN/scheduler/sched-capacity.rs=
-t b/Documentation/translations/zh_CN/scheduler/sched-capacity.rst
-> index e07ffdd391d3..8cba135dcd1a 100644
-> --- a/Documentation/translations/zh_CN/scheduler/sched-capacity.rst
-> +++ b/Documentation/translations/zh_CN/scheduler/sched-capacity.rst
-> @@ -231,7 +231,7 @@ CFS=E8=B0=83=E5=BA=A6=E7=B1=BB=E5=9F=BA=E4=BA=8E=E5=
-=AE=9E=E4=BD=93=E8=B4=9F=E8=BD=BD=E8=B7=9F=E8=B8=AA=E6=9C=BA=E5=88=B6=EF=BC=
-=88Per-Entity Load Tracking, PELT=EF=BC=89
->  =E5=BD=93=E5=89=8D=EF=BC=8CLinux=E6=97=A0=E6=B3=95=E5=87=AD=E8=87=AA=E8=
-=BA=AB=E7=AE=97=E5=87=BACPU=E7=AE=97=E5=8A=9B=EF=BC=8C=E5=9B=A0=E6=AD=A4=E5=
-=BF=85=E9=A1=BB=E8=A6=81=E6=9C=89=E6=8A=8A=E8=BF=99=E4=B8=AA=E4=BF=A1=E6=81=
-=AF=E4=BC=A0=E9=80=92=E7=BB=99Linux=E7=9A=84=E6=96=B9=E5=BC=8F=E3=80=82=E6=
-=AF=8F=E4=B8=AA=E6=9E=B6=E6=9E=84=E5=BF=85=E9=A1=BB=E4=B8=BA=E6=AD=A4
->  =E5=AE=9A=E4=B9=89arch_scale_cpu_capacity()=E5=87=BD=E6=95=B0=E3=80=82
->
-> -arm=E5=92=8Carm64=E6=9E=B6=E6=9E=84=E7=9B=B4=E6=8E=A5=E6=8A=8A=E8=BF=99=
-=E4=B8=AA=E4=BF=A1=E6=81=AF=E6=98=A0=E5=B0=84=E5=88=B0arch_topology=E9=A9=
-=B1=E5=8A=A8=E7=9A=84CPU scaling=E6=95=B0=E6=8D=AE=E4=B8=AD=EF=BC=88=E8=AF=
-=91=E6=B3=A8=EF=BC=9A=E5=8F=82=E8=80=83
-> +arm=E3=80=81arm64=E5=92=8CRISC-V=E6=9E=B6=E6=9E=84=E7=9B=B4=E6=8E=A5=E6=
-=8A=8A=E8=BF=99=E4=B8=AA=E4=BF=A1=E6=81=AF=E6=98=A0=E5=B0=84=E5=88=B0arch_t=
-opology=E9=A9=B1=E5=8A=A8=E7=9A=84CPU scaling=E6=95=B0=E6=8D=AE=E4=B8=AD=EF=
-=BC=88=E8=AF=91=E6=B3=A8=EF=BC=9A=E5=8F=82=E8=80=83
->  arch_topology.h=E7=9A=84percpu=E5=8F=98=E9=87=8Fcpu_scale=EF=BC=89=EF=BC=
-=8C=E5=AE=83=E6=98=AF=E4=BB=8Ecapacity-dmips-mhz CPU binding=E4=B8=AD=E8=A1=
-=8D=E7=94=9F=E8=AE=A1=E7=AE=97
->  =E5=87=BA=E6=9D=A5=E7=9A=84=E3=80=82=E5=8F=82=E8=A7=81Documentation/devi=
-cetree/bindings/cpu/cpu-capacity.txt=E3=80=82
+When the broken link fix for Documentation/bpf/bpf_devel_QA.rst was
+applied, Daniel Borkmann asked me to also fix some other links in the
+documentation [1]. So here is the series.
 
-LGTM,
-Reviewed-by: Alex Shi <alexs@kernel.org>
+The fixes in the shortlog below should be self-explanatory.
 
->
-> --
-> 2.20.1
->
+[1]: https://lore.kernel.org/linux-doc/7cd545a2-4a5c-1961-1cf7-cd0f24e41df8@iogearbox.net/
+
+Bagas Sanjaya (2):
+  Documentation: bpf: Do not link to docs.kernel.org for kselftest link
+  Documentation: bpf: Link to submitting-patches.rst for general patch
+    submission info
+
+ Documentation/bpf/bpf_devel_QA.rst | 11 ++++-------
+ 1 file changed, 4 insertions(+), 7 deletions(-)
+
+
+base-commit: 2d311f480b52eeb2e1fd432d64b78d82952c3808
+-- 
+An old man doll... just what I always wanted! - Clara
+
