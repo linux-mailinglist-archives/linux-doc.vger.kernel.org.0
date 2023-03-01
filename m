@@ -2,161 +2,96 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 605D86A762C
-	for <lists+linux-doc@lfdr.de>; Wed,  1 Mar 2023 22:31:20 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 28DFC6A7721
+	for <lists+linux-doc@lfdr.de>; Wed,  1 Mar 2023 23:54:55 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S229618AbjCAVbT (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 1 Mar 2023 16:31:19 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:60790 "EHLO
+        id S229851AbjCAWyy (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 1 Mar 2023 17:54:54 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:34488 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S229471AbjCAVbS (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Wed, 1 Mar 2023 16:31:18 -0500
-Received: from mail-lj1-x22b.google.com (mail-lj1-x22b.google.com [IPv6:2a00:1450:4864:20::22b])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 35C8451F84
-        for <linux-doc@vger.kernel.org>; Wed,  1 Mar 2023 13:31:16 -0800 (PST)
-Received: by mail-lj1-x22b.google.com with SMTP id a32so632557ljr.9
-        for <linux-doc@vger.kernel.org>; Wed, 01 Mar 2023 13:31:16 -0800 (PST)
+        with ESMTP id S229445AbjCAWyx (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Wed, 1 Mar 2023 17:54:53 -0500
+Received: from mail-yw1-x112a.google.com (mail-yw1-x112a.google.com [IPv6:2607:f8b0:4864:20::112a])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 062FE1B2F4
+        for <linux-doc@vger.kernel.org>; Wed,  1 Mar 2023 14:54:53 -0800 (PST)
+Received: by mail-yw1-x112a.google.com with SMTP id 00721157ae682-536bbef1c5eso393070987b3.9
+        for <linux-doc@vger.kernel.org>; Wed, 01 Mar 2023 14:54:52 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=joelfernandes.org; s=google; t=1677706274;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=lO9u8Y9aCl3r3Q/aM+pDkXOYi2YlGs7AHUhcyE2n2LY=;
-        b=a9nHs6kSXWVgIl5oXYw2ESLt4jjTbPTVaUPLY4bwiIKzlL3BRCcc6btqbMcVuIeW0m
-         OaXbVQnUkn4Kn5iviM5qK9E5zlPYPH4pUT3dO0PXPPZfCFnbR6AgyIMNhDUDsTmP9h68
-         4OrComDjpKwoDUeG63K5E5OB9K16LZzLZPtXk=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112; t=1677706274;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+        d=gmail.com; s=20210112;
+        h=to:subject:message-id:date:from:reply-to:mime-version:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=lO9u8Y9aCl3r3Q/aM+pDkXOYi2YlGs7AHUhcyE2n2LY=;
-        b=YlqhrC1AjMUXqZW4O7fs271TH7SOYR73t/UUHi/Bo/+KFqtDaFzYaKrfi8XtDclNRd
-         /gDhaLye8/eteW438FdyVRCanYdHO3WyBfFkvvSrPQhpXGtyupWFI6TddwIl4L68Ddw+
-         hc92y03Z0/ZdA2QooSdcb8wxYgTjvLAxWgZ4Y/o+FwCZb6yP68Sr5gLnGz1/bXMqETdt
-         j4OGYAwpxPinXaX0W/vUeDQjt47/YB0QTyNqdqUithfye2rFp4nImKmeLZ8bt8KLCP6Z
-         DbQLLCH3K+bDanLRyN6RtAxyifDLUx0pogoemNanhl1FalshocvYsIEFKkinmIL1BqVM
-         ntmw==
-X-Gm-Message-State: AO0yUKXXvJ9eFcUrzmKXsL/fMpBfupwE6TMJnLVaNDee7e5BZ9do0K8N
-        HciKJ+OH3q6bA0o61RQ+zRqnypyDcPuKPVBtUtwJLw==
-X-Google-Smtp-Source: AK7set9Tm1EDlxHZBroReRahXqjqtSYLr7qj1vqPncn5dhoSh7r0awu49+RC5nrhdI7rVsydMc8y1qKFWfcNEkcTR6M=
-X-Received: by 2002:a05:651c:231b:b0:293:2d18:36a0 with SMTP id
- bi27-20020a05651c231b00b002932d1836a0mr2531588ljb.3.1677706274370; Wed, 01
- Mar 2023 13:31:14 -0800 (PST)
+        bh=etDsOsklTFhdv20/ihPgdxxbpxkX/HMYSlW+AO+gqjs=;
+        b=aICLZyQueWqvaWvDfBNl3Qa+ej2826EfYBpQJ0krxNUkv7W0IojtiJyB9TpyYzYqD+
+         4vVoio1fhG3MNeMoWrtVLlejQSqTVFvllyYOOaAjeq0PEAa9q9tX8ilCDWty0zS2HuAl
+         nhrnBJ3qlgOGCl87X5uAYfBoq0OfhN7+D3gdpQ+v3JOl/SCVL/8VsuvMa3paPRBeHwBW
+         04JbYb6OROdLwDXZWg1d00QAgGMl/TAPcQxqIsCfgTwQXBAYwwWTSmWMTuwmLxQI6tvG
+         G5Deuhm0gt7WG5ZfhG3V/iOXTXn6wL+BvtGuMjCUmNsMyhnV/WxbSbLcrztjQVuPbrdf
+         URdg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=to:subject:message-id:date:from:reply-to:mime-version
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=etDsOsklTFhdv20/ihPgdxxbpxkX/HMYSlW+AO+gqjs=;
+        b=ueizANAhABKQ9SDGsg1jc4AYeQnBznWlDshM3tx+Lj/hiy1m6KtL5DY1bw3hN686kf
+         L1IImH5fmHxuuve5HHagWXszQKnchxrlRAciUrahBKXNLzCYzPx2i7G71dwUrXxjqKSm
+         U5O0XdBE5GdhVglOGKS6bia7n2JuoPaiZ70Uc4Ao7iVodbhV505m/GB0VFAnrYDvU+ay
+         sVVbrEPWtQc136aHnagbco6XZgZK+upN0Vzi0xAVzkoVtE18SZ8zz55X2kXBGL6HcyI5
+         +frPsx4ByaytLKwiKrnG2GtgZenXj7myiwLboPBHJYDH8cqyNJwmvr022yiQQ9kkpKkE
+         CDwQ==
+X-Gm-Message-State: AO0yUKWjJn8ztBq9JgWgG2jl4ikhduBuyeO4Rd9xkPyKMAfn3TACV1HB
+        RVop+LlNAyLuF41KrWCf/UPehyjnRh9hbY/HgAs=
+X-Google-Smtp-Source: AK7set9Jt3R4B/nBZAnyRFxDNjwJfhVD2X3iBcKTlDbZdZQRQlWagMI6W28tE8f23Y+zuarxHqkoRSy6AKBRc2xeIVk=
+X-Received: by 2002:a81:b305:0:b0:536:155a:b73d with SMTP id
+ r5-20020a81b305000000b00536155ab73dmr5099693ywh.2.1677711292255; Wed, 01 Mar
+ 2023 14:54:52 -0800 (PST)
 MIME-Version: 1.0
-References: <Y/z0fHHYdxEXcWMT@pc636> <7EBE4F51-F2BD-4B42-AFC1-CA234E78CC7B@joelfernandes.org>
- <Y/z9Its1RKetIr8V@pc636> <CAEXW_YSjT_orp8TbomBFU+ETS7YJ7TrbHTdrsBRTzCKG5_SBdw@mail.gmail.com>
- <20230227230502.GJ2948950@paulmck-ThinkPad-P17-Gen-1> <Y/0/dnmIk508sidK@lothringen>
- <Y/1ZMXsNZtwYPJNW@google.com> <Y/3fxLXbfvnLFEZq@lothringen>
- <Y/5fXskgrQxzbt0U@google.com> <Y/+HPrU/ofFXapHM@lothringen>
-In-Reply-To: <Y/+HPrU/ofFXapHM@lothringen>
-From:   Joel Fernandes <joel@joelfernandes.org>
-Date:   Wed, 1 Mar 2023 16:31:01 -0500
-Message-ID: <CAEXW_YTt=VZ8ZMptccFMStsQvfjy5yMbd5Ah3KL=PUB4YVSTCg@mail.gmail.com>
-Subject: Re: [PATCH RFC v2] rcu: Add a minimum time for marking boot as completed
-To:     Frederic Weisbecker <frederic@kernel.org>
-Cc:     "Paul E. McKenney" <paulmck@kernel.org>,
-        Uladzislau Rezki <urezki@gmail.com>,
-        "Zhuo, Qiuxu" <qiuxu.zhuo@intel.com>, linux-kernel@vger.kernel.org,
-        Lai Jiangshan <jiangshanlai@gmail.com>,
-        linux-doc@vger.kernel.org, rcu@vger.kernel.org
+Received: by 2002:a05:7000:44cd:b0:483:f82b:3d70 with HTTP; Wed, 1 Mar 2023
+ 14:54:51 -0800 (PST)
+Reply-To: fiona.hill.2023@outlook.com
+From:   Fiona Hill <lorijrobinson589@gmail.com>
+Date:   Wed, 1 Mar 2023 14:54:51 -0800
+Message-ID: <CAKXTXJzvLF6GO_SgDLWK5N=06Hz=hW8yw9BC_vzGwsnUoG+pGQ@mail.gmail.com>
+Subject: 
+To:     undisclosed-recipients:;
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Spam-Status: No, score=-2.1 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_NONE,
-        SPF_HELO_NONE,SPF_PASS autolearn=ham autolearn_force=no version=3.4.6
+X-Spam-Status: Yes, score=5.8 required=5.0 tests=BAYES_60,DKIM_SIGNED,
+        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_ENVFROM_END_DIGIT,
+        FREEMAIL_FROM,FREEMAIL_REPLYTO,FREEMAIL_REPLYTO_END_DIGIT,
+        RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,SPF_PASS,UNDISC_FREEM autolearn=no
+        autolearn_force=no version=3.4.6
+X-Spam-Report: * -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at
+        *      https://www.dnswl.org/, no trust
+        *      [2607:f8b0:4864:20:0:0:0:112a listed in]
+        [list.dnswl.org]
+        *  1.5 BAYES_60 BODY: Bayes spam probability is 60 to 80%
+        *      [score: 0.6374]
+        *  0.2 FREEMAIL_REPLYTO_END_DIGIT Reply-To freemail username ends in
+        *      digit
+        *      [fiona.hill.2023[at]outlook.com]
+        *  0.2 FREEMAIL_ENVFROM_END_DIGIT Envelope-from freemail username ends
+        *       in digit
+        *      [lorijrobinson589[at]gmail.com]
+        * -0.0 SPF_PASS SPF: sender matches SPF record
+        *  0.0 SPF_HELO_NONE SPF: HELO does not publish an SPF Record
+        *  0.0 FREEMAIL_FROM Sender email is commonly abused enduser mail
+        *      provider
+        *      [lorijrobinson589[at]gmail.com]
+        * -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
+        *      author's domain
+        * -0.1 DKIM_VALID_EF Message has a valid DKIM or DK signature from
+        *      envelope-from domain
+        *  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
+        *       valid
+        * -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+        *  3.0 UNDISC_FREEM Undisclosed recipients + freemail reply-to
+        *  1.0 FREEMAIL_REPLYTO Reply-To/From or Reply-To/body contain
+        *      different freemails
+X-Spam-Level: *****
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Wed, Mar 1, 2023 at 12:11=E2=80=AFPM Frederic Weisbecker <frederic@kerne=
-l.org> wrote:
-[...]
-> > Hmmm I see what you mean, so a conservative and configurable "fail-safe=
-"
-> > timeout followed by sysctl to end the boot earlier than the timeout, sh=
-ould
-> > do it (something like 30 seconds IMHO sounds reasonable)? In any case,
-> > whatever way we go, we would not end the kernel boot before
-> > rcu_end_inkernel_boot() is called at least once (which is the current
-> > behavior).
-> >
-> > So it would be:
-> >
-> >   low level boot + initcalls
-> >        20 sec                         30 second timeout
-> > |------------------------------|--------------------------
-> >                                |                         |
-> >               old rcu_end_inkernel_boot()      new rcu_end_inkernel_boo=
-t()
-> >
-> > But it could be, if user decides:
-> >   low level boot + initcalls
-> >        20 sec                         10 second timeout
-> > |------------------------------|--------------------------
-> >                                |                         |
-> >               old rcu_end_inkernel_boot()      new rcu_end_inkernel_boo=
-t()
-> >                                                via /sys/ entry.
->
-> The problem I have with a random default timeout is that it may break sen=
-sitive
-> workloads. If the default is 30 and say the boot only takes 5 seconds and
-> immediately launches a latency sensitive task, this may break things in a
-> subtle way during these 25 seconds when it usually didn't. Because expedi=
-ted
-> RCU is a hammer interrupting all non-idle CPUs.
->
-> Until now forcing expedited RCU was only performed before any user code. =
-Now it
-> crosses the boundary so better be careful. I'd personally advocate for ke=
-eping
-> the current call before init is launched. Then provide an end_boot_sysctl=
- kernel
-> boot parameter that will ignore the current call before init and let the =
-user
-> signal that through sysctl.
-
-Considering that the PREEMPT-RT system benefits from it within the 8
-seconds, I will go ahead make the default 15 seconds or so and make it
-tunable. Hopefully that will be an acceptable compromise, with
-sufficient documentation, changelog, and so forth... If you agree I'd
-appreciate your Ack on the next posting.
-
-> > > > > So shouldn't we disable lazy callbacks by default when CONFIG_RCU=
-_LAZY=3Dy and then
-> > > > > turn it on with "sysctl kernel.rcu.lazy=3D1" only whenever usersp=
-ace feels ready
-> > > > > about it? We can still keep the current call to rcu_end_inkernel_=
-boot().
-> > > >
-> > > > Hmm IMHO that would add more knobs for not much reason honestly. We=
- already
-> > > > have CONFIG_RCU_LAZY default disabled, I really don't want to add m=
-ore
-> > > > dependency (like user enables the config and does not see laziness)=
-.
-> > >
-> > > I don't know. Like I said, different problems, different solutions. L=
-et's
-> > > identify what the issue is precisely. For example can we expect that =
-the issues
-> > > on boot can be a problem also on some temporary workloads?
-> > >
-> > > Besides I'm currently testing a very hacky flavour of rcu_lazy and so=
- far it
-> > > shows many idle calls that would have been delayed if callbacks weren=
-'t queued
-> > > as lazy.
-> >
-> > Can you provide more details? What kind of hack flavor, and what is it =
-doing?
->
-> Sorry, I meant a hacky implementation of lazy to work with !NOCB.
-
-Interesting, I'm curious which calls those are and if they should also
-be call_rcu_hurry().
-
- - Joel
+-- 
+Hello did you see my message i send to you?
