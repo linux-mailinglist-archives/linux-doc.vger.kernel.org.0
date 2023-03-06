@@ -2,134 +2,230 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 4682A6AC84A
-	for <lists+linux-doc@lfdr.de>; Mon,  6 Mar 2023 17:39:19 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 685ED6AC869
+	for <lists+linux-doc@lfdr.de>; Mon,  6 Mar 2023 17:43:29 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S229932AbjCFQiq (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 6 Mar 2023 11:38:46 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:48322 "EHLO
+        id S230176AbjCFQn2 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 6 Mar 2023 11:43:28 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:32838 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S230043AbjCFQhG (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Mon, 6 Mar 2023 11:37:06 -0500
-Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.129.124])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id DB8FA2597E
-        for <linux-doc@vger.kernel.org>; Mon,  6 Mar 2023 08:35:46 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-        s=mimecast20190719; t=1678120506;
-        h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-         to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-         in-reply-to:in-reply-to:references:references;
-        bh=8gChhWa5+pV9cvva7KKeCwxEw+kt5hxoG0ztKCrLbRE=;
-        b=P+8lztDGEqSbRQdV8oGz9Ny/tBXLdVRTeHy05nW36fLm1jenRI3mxk5DuQVvS7YxN//OE1
-        D5U+rpJCChQcXxPvtGqJ7lVUVOVJjA16cZ8QhZommCarqXVEpibdR/suiHvHBfoqUCO2ED
-        JWmgmWEgycfFF+yz2k3uCy0QnfZ13Sk=
-Received: from mimecast-mx02.redhat.com (mx3-rdu2.redhat.com
- [66.187.233.73]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- us-mta-479-xAeRr96XNX6SiROa8aY1Yg-1; Mon, 06 Mar 2023 11:31:52 -0500
-X-MC-Unique: xAeRr96XNX6SiROa8aY1Yg-1
-Received: from smtp.corp.redhat.com (int-mx02.intmail.prod.int.rdu2.redhat.com [10.11.54.2])
-        (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
-        (No client certificate requested)
-        by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 583BE3850545;
-        Mon,  6 Mar 2023 16:31:50 +0000 (UTC)
-Received: from oldenburg.str.redhat.com (unknown [10.2.16.80])
-        by smtp.corp.redhat.com (Postfix) with ESMTPS id 62FB140C10FA;
-        Mon,  6 Mar 2023 16:31:42 +0000 (UTC)
-From:   Florian Weimer <fweimer@redhat.com>
-To:     szabolcs.nagy@arm.com
-Cc:     "Edgecombe, Rick P" <rick.p.edgecombe@intel.com>,
-        "david@redhat.com" <david@redhat.com>,
-        "bsingharora@gmail.com" <bsingharora@gmail.com>,
-        "hpa@zytor.com" <hpa@zytor.com>,
-        "Syromiatnikov, Eugene" <esyr@redhat.com>,
-        "peterz@infradead.org" <peterz@infradead.org>,
-        "rdunlap@infradead.org" <rdunlap@infradead.org>,
-        "keescook@chromium.org" <keescook@chromium.org>,
-        "Eranian, Stephane" <eranian@google.com>,
-        "kirill.shutemov@linux.intel.com" <kirill.shutemov@linux.intel.com>,
-        "dave.hansen@linux.intel.com" <dave.hansen@linux.intel.com>,
-        "linux-mm@kvack.org" <linux-mm@kvack.org>,
-        "nadav.amit@gmail.com" <nadav.amit@gmail.com>,
-        "jannh@google.com" <jannh@google.com>,
-        "dethoma@microsoft.com" <dethoma@microsoft.com>,
-        "broonie@kernel.org" <broonie@kernel.org>,
-        "kcc@google.com" <kcc@google.com>,
-        "linux-arch@vger.kernel.org" <linux-arch@vger.kernel.org>,
-        "bp@alien8.de" <bp@alien8.de>, "oleg@redhat.com" <oleg@redhat.com>,
-        "hjl.tools@gmail.com" <hjl.tools@gmail.com>,
-        "Yang, Weijiang" <weijiang.yang@intel.com>,
-        "Lutomirski, Andy" <luto@kernel.org>,
-        "pavel@ucw.cz" <pavel@ucw.cz>, "arnd@arndb.de" <arnd@arndb.de>,
-        "tglx@linutronix.de" <tglx@linutronix.de>,
-        "Schimpe, Christina" <christina.schimpe@intel.com>,
-        "mike.kravetz@oracle.com" <mike.kravetz@oracle.com>,
-        "x86@kernel.org" <x86@kernel.org>,
-        "linux-doc@vger.kernel.org" <linux-doc@vger.kernel.org>,
-        "debug@rivosinc.com" <debug@rivosinc.com>,
-        "jamorris@linux.microsoft.com" <jamorris@linux.microsoft.com>,
-        "john.allen@amd.com" <john.allen@amd.com>,
-        "rppt@kernel.org" <rppt@kernel.org>,
-        "andrew.cooper3@citrix.com" <andrew.cooper3@citrix.com>,
-        "mingo@redhat.com" <mingo@redhat.com>,
-        "corbet@lwn.net" <corbet@lwn.net>,
-        "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
-        "linux-api@vger.kernel.org" <linux-api@vger.kernel.org>,
-        "gorcunov@gmail.com" <gorcunov@gmail.com>,
-        "akpm@linux-foundation.org" <akpm@linux-foundation.org>,
-        "Yu, Yu-cheng" <yu-cheng.yu@intel.com>, "nd@arm.com" <nd@arm.com>
-Subject: Re: [PATCH v7 01/41] Documentation/x86: Add CET shadow stack
- description
-References: <Y/9fdYQ8Cd0GI+8C@arm.com>
-        <636de4a28a42a082f182e940fbd8e63ea23895cc.camel@intel.com>
-        <df8ef3a9e5139655a223589c16a68393ab3f6d1d.camel@intel.com>
-        <ZADQISkczejfgdoS@arm.com>
-        <9714f724b53b04fdf69302c6850885f5dfbf3af5.camel@intel.com>
-        <ZAYS6CHuZ0MiFvmE@arm.com>
-Date:   Mon, 06 Mar 2023 17:31:40 +0100
-In-Reply-To: <ZAYS6CHuZ0MiFvmE@arm.com> (szabolcs's message of "Mon, 6 Mar
-        2023 16:20:56 +0000")
-Message-ID: <87wn3tsuxf.fsf@oldenburg.str.redhat.com>
-User-Agent: Gnus/5.13 (Gnus v5.13) Emacs/28.2 (gnu/linux)
+        with ESMTP id S229801AbjCFQnU (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Mon, 6 Mar 2023 11:43:20 -0500
+Received: from mail-ed1-x52b.google.com (mail-ed1-x52b.google.com [IPv6:2a00:1450:4864:20::52b])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 2664D61BE
+        for <linux-doc@vger.kernel.org>; Mon,  6 Mar 2023 08:42:54 -0800 (PST)
+Received: by mail-ed1-x52b.google.com with SMTP id g3so41341660eda.1
+        for <linux-doc@vger.kernel.org>; Mon, 06 Mar 2023 08:42:54 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=baylibre-com.20210112.gappssmtp.com; s=20210112; t=1678120900;
+        h=content-transfer-encoding:in-reply-to:from:references:cc:to
+         :content-language:subject:user-agent:mime-version:date:message-id
+         :from:to:cc:subject:date:message-id:reply-to;
+        bh=CBQLhMJNJwBxWCZBMKKd2ZioyWT7HHTdTuSHuSD5zeE=;
+        b=RymyUxEqXDN6lqEMPjXJTgOOGQgr5jbPevWg8i40M+/MPF9dFVfBLTwCZgxRLAl46d
+         Nw/KqOGzbnN3Q4Ki62BMdS7r2U3bvniAWizojRlbFsi2tCP9JpJ/kBxnPGuGrGT4q8xy
+         raXXBoV2dAXAfj90iQOvAzDND8z0f2MR5DjBr5lepEWwn/d0ZzmiuL74BixrSAxBIVcH
+         rREZOqtfY8LN8WH5mHd0lTO80qa/S8ovZopCCPZ1yjpC2F3ziHWty8MZ9gFFgAQhxW7n
+         TZiRddDGSdircQbHifgYgGIhdIbNL5yofWgbB4LX1Qrblg8MyEt90pqodeP9mhBrnavh
+         SNpQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112; t=1678120900;
+        h=content-transfer-encoding:in-reply-to:from:references:cc:to
+         :content-language:subject:user-agent:mime-version:date:message-id
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=CBQLhMJNJwBxWCZBMKKd2ZioyWT7HHTdTuSHuSD5zeE=;
+        b=FgdwsUqoGpp+yW5RDgK2VjtS8iuZM1sfz35VN6clQ+TNBBDVoEkhVHwIwbjwwt0B6z
+         IDL3v75uA1vVcfPW6n6rVRnvGStUdY2JFduhUhfwUu7yJkFFPBB8mR+yRRXB9/dc7Zvh
+         2CF4sT8qZWHHlqNi5wQxMaANIgLY00i7//9HRZxxvO0bRRvB5H+381Ild/GdsEM6+5gG
+         jSxLQmjEKJ8c2284+k9mkGpG7rjTIRg9NkKMk86MsTMfstzLnbkAwIwstDMg1evNtyZJ
+         Xzd0bKdVvTJStu84Oin0EOjcPUw1XEY/lhCNYbyoHh93NA/hvhW3wDyzQcVg4MBsXfKV
+         slgg==
+X-Gm-Message-State: AO0yUKVIkPR+FhPZlAQMtcSqA9c1/P0/D1W5LoUq7sADy3cZOyJdR3q0
+        whXy4h1NZf7/QARVt+reQPS/NOVVChlhLIf2+hvGsa0j
+X-Google-Smtp-Source: AK7set8jxix0Za/DVd/wm3kcw43surTXMo2qOCiwMqzZSVfE/iqtn5rPhfFDjsexdGCVyoGKW4OM/Q==
+X-Received: by 2002:a17:906:ee9:b0:8af:2bb3:80d7 with SMTP id x9-20020a1709060ee900b008af2bb380d7mr15158307eji.31.1678120899857;
+        Mon, 06 Mar 2023 08:41:39 -0800 (PST)
+Received: from [192.168.1.70] (125.62.71.86.rev.sfr.net. [86.71.62.125])
+        by smtp.gmail.com with ESMTPSA id m30-20020a50d7de000000b004c13fe8fabfsm5355664edj.84.2023.03.06.08.41.38
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Mon, 06 Mar 2023 08:41:39 -0800 (PST)
+Message-ID: <7ade5f76-426c-297c-2809-af5f67279cf9@baylibre.com>
+Date:   Mon, 6 Mar 2023 17:41:37 +0100
 MIME-Version: 1.0
-Content-Type: text/plain
-X-Scanned-By: MIMEDefang 3.1 on 10.11.54.2
-X-Spam-Status: No, score=-2.1 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_NONE,
-        RCVD_IN_MSPIKE_H2,SPF_HELO_NONE,SPF_NONE autolearn=unavailable
-        autolearn_force=no version=3.4.6
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.8.0
+Subject: Re: [PATCH v1 2/4] mfd: tps6594: Add driver for TI TPS6594 PMIC
+Content-Language: en-US
+To:     Lee Jones <lee@kernel.org>
+Cc:     robh+dt@kernel.org, krzysztof.kozlowski+dt@linaro.org,
+        corbet@lwn.net, hdegoede@redhat.com, eric.auger@redhat.com,
+        jgg@ziepe.ca, razor@blackwall.org, suma.hegde@amd.com,
+        stephen@networkplumber.org, arnd@arndb.de,
+        devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
+        linux-doc@vger.kernel.org, eblanc@baylibre.com,
+        jneanne@baylibre.com
+References: <20230216114410.183489-1-jpanis@baylibre.com>
+ <20230216114410.183489-3-jpanis@baylibre.com>
+ <20230303150355.GQ2420672@google.com>
+From:   Julien Panis <jpanis@baylibre.com>
+In-Reply-To: <20230303150355.GQ2420672@google.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+        DKIM_VALID,NICE_REPLY_A,RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,SPF_PASS
+        autolearn=unavailable autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-* szabolcs:
 
-> syscall overhead in case of frequent stack trace collection can be
-> avoided by caching (in tls) when ssp falls within the thread shadow
-> stack bounds. otherwise caching does not work as the shadow stack may
-> be reused (alt shadow stack or ucontext case).
 
-Do we need to perform the system call at each page boundary only?  That
-should reduce overhead to the degree that it should not matter.
+On 3/3/23 16:03, Lee Jones wrote:
+> On Thu, 16 Feb 2023, Julien Panis wrote:
+>
+>> This patch adds support for TPS6594 PMIC MFD core. It provides
+>> communication through the I2C and SPI interfaces, and supports
+>> protocols with embedded CRC data fields for safety applications.
+>>
+>> Signed-off-by: Julien Panis <jpanis@baylibre.com>
+>> ---
 
-> unfortunately i don't know if syscall overhead is actually a problem
-> (probably not) or if backtrace across signal handlers need to work
-> with alt shadow stack (i guess it should work for crash reporting).
+(...)
 
-Ideally, we would implement the backtrace function (in glibc) as just a
-shadow stack copy.  But this needs to follow the chain of alternate
-stacks, and it may also need some form of markup for signal handler
-frames (which need program counter adjustment to reflect that a
-*non-signal* frame is conceptually nested within the previous
-instruction, and not the function the return address points to).  But I
-think we can add support for this incrementally.
+>> +
+>> +static int tps6594_check_crc_mode(struct tps6594 *tps, bool primary_pmic)
+>> +{
+>> +	int ret;
+>> +
+>> +	/*
+>> +	 * Ensure that CRC is enabled.
+>> +	 * Once CRC is enabled, it can't be disabled until next power cycle.
+>> +	 */
+>> +	tps->use_crc = true;
+>> +	ret = regmap_test_bits(tps->regmap, TPS6594_REG_SERIAL_IF_CONFIG,
+>> +			       TPS6594_BIT_I2C1_SPI_CRC_EN);
+>> +	if (ret < 0) {
+>> +		tps->use_crc = false;
+>> +	} else if (ret == 0) {
+>> +		tps->use_crc = false;
+> Will this value be used again after you return an error?
 
-I assume there is no desire at all on the kernel side that sigaltstack
-transparently allocates the shadow stack?  Because there is no
-deallocation function today for sigaltstack?
+No, it is not used any more. I will remove this line in v2.
 
-Thanks,
-Florian
+>
+>> +		ret = -EIO;
+>> +	} else {
+>> +		dev_info(tps->dev, "CRC feature enabled on %s PMIC",
+>> +			 primary_pmic ? "primary" : "secondary");
+>> +		ret = 0;
+> I would consider reversing the logic of the if()s, default to 'false'
+> then set 'true' in here before the print.
 
+Do you speak about 'tps->use_crc' value ?
+'tps->use_crc' is used in regmap read/write callbacks, so it
+must be set 'true' before calling 'regmap_test_bits()' function.
+In other words, CRC_EN bit must be read with 'tps->use_crc = true'.
+
+>
+>> +	}
+>> +
+>> +	return ret;
+>> +}
+>> +
+>> +static int tps6594_set_crc_feature(struct tps6594 *tps)
+>> +{
+>> +	int ret;
+>> +
+>> +	/* Force PFSM I2C_2 trigger to enable CRC on primary PMIC */
+>> +	ret = regmap_write_bits(tps->regmap, TPS6594_REG_FSM_I2C_TRIGGERS,
+>> +				TPS6594_BIT_TRIGGER_I2C(2), TPS6594_BIT_TRIGGER_I2C(2));
+>> +	if (ret)
+>> +		return ret;
+>> +
+>> +	/* Wait for PFSM to process trigger */
+>> +	msleep(20);
+> Is this the time specified in the datasheet?
+
+I checked with the customer after your review and the datasheet
+specifies 2 ms.
+The clock specification is +/-5%. The customer recommends
+using 4ms, which is a simple number providing sufficient margin.
+As a consequence, I will adjust this delay in v2.
+
+>
+>> +	return tps6594_check_crc_mode(tps, true);
+>> +}
+>> +
+>> +int tps6594_device_init(struct tps6594 *tps)
+>> +{
+>> +	struct device *dev = tps->dev;
+>> +	unsigned int prop;
+> Since this only has a single use, better to rename it to something specific.
+>
+>> +	unsigned long timeout = msecs_to_jiffies(TPS6594_CRC_SYNC_TIMEOUT_MS);
+>> +	int n_dev = ARRAY_SIZE(tps6594_cells);
+>> +	int ret;
+>> +
+>> +	/* Keep PMIC in ACTIVE state */
+>> +	ret = regmap_set_bits(tps->regmap, TPS6594_REG_FSM_NSLEEP_TRIGGERS,
+>> +			      TPS6594_BIT_NSLEEP1B | TPS6594_BIT_NSLEEP2B);
+>> +	if (ret)
+>> +		return dev_err_probe(dev, ret, "Failed to set PMIC state\n");
+>> +
+>> +	/*
+>> +	 * CRC mode can be used with I2C or SPI protocols.
+>> +	 * If this mode is specified for primary PMIC, it will also be applied to secondary PMICs
+>> +	 * through SPMI serial interface.
+>> +	 * In this multi-PMIC synchronization scheme, the primary PMIC is the controller device
+>> +	 * on the SPMI bus, and the secondary PMICs are the target devices on the SPMI bus.
+>> +	 */
+>> +	prop = of_property_read_bool(dev->of_node, "ti,use-crc");
+
+As discussed with Krzysztof for dt-bindings, this 'ti,use-crc'
+property will be removed from the device tree, in v2.
+Instead, a property will be used to identify the primary PMIC.
+Moreover, since using CRC applies either to all the PMICs or
+to none of them, it is a global feature. That's why a driver
+parameter will be added to enable CRC feature at initialization
+(something like a 'enable_crc' bool).
+
+(...)
+
+>> diff --git a/include/linux/mfd/tps6594.h b/include/linux/mfd/tps6594.h
+>> new file mode 100644
+>> index 000000000000..e2ffd4dc034d
+>> --- /dev/null
+>> +++ b/include/linux/mfd/tps6594.h
+>> @@ -0,0 +1,1018 @@
+>> +/* SPDX-License-Identifier: GPL-2.0 */
+>> +/*
+>> + * Functions to access TPS6594 Power Management IC
+>> + *
+>> + * Copyright (C) 2022 BayLibre Incorporated - https://www.baylibre.com/
+>> + */
+>> +
+>> +#ifndef __LINUX_MFD_TPS6594_H
+>> +#define __LINUX_MFD_TPS6594_H
+>> +
+>> +#include <linux/device.h>
+>> +#include <linux/regmap.h>
+>> +
+>> +struct regmap_irq_chip_data;
+>> +
+>> +/* Chip id list */
+>> +#define TPS6594		0
+>> +#define TPS6593		1
+>> +#define LP8764X		2
+> enum?
+
+Yes indeed, I will fix that in v2.
+
+(...)
+
+Your others suggestions will also be implemented in v2.
+
+Thank you Lee for your time and feedback.
+
+Julien
