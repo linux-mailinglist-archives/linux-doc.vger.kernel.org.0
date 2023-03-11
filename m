@@ -2,93 +2,156 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id CF74E6B5D09
-	for <lists+linux-doc@lfdr.de>; Sat, 11 Mar 2023 15:52:48 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id CD4EF6B5D22
+	for <lists+linux-doc@lfdr.de>; Sat, 11 Mar 2023 16:06:12 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S229555AbjCKOwr (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Sat, 11 Mar 2023 09:52:47 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:36246 "EHLO
+        id S229906AbjCKPGL (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Sat, 11 Mar 2023 10:06:11 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:59130 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S230110AbjCKOwm (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Sat, 11 Mar 2023 09:52:42 -0500
-Received: from mail-lj1-x22b.google.com (mail-lj1-x22b.google.com [IPv6:2a00:1450:4864:20::22b])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 272A41135CC
-        for <linux-doc@vger.kernel.org>; Sat, 11 Mar 2023 06:52:40 -0800 (PST)
-Received: by mail-lj1-x22b.google.com with SMTP id by8so8305004ljb.7
-        for <linux-doc@vger.kernel.org>; Sat, 11 Mar 2023 06:52:40 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112; t=1678546358;
-        h=to:subject:message-id:date:from:reply-to:mime-version:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=Qj8nrG0sL8loOIOhZdmt6f4M2skgayD9pumOqV207G8=;
-        b=YKMEhdApj5X8jDUQMd8Bc5EFxz5MT1uvr6nOFMxwtRApuJKrPyGcZUY8RR2bm8sId/
-         /MYu82rI541esxSQbby7NHUPk+0uBeYlhaj03ZFS2dnV4ou/G6KwBVaGY573hRyr52I7
-         bnHT7Jz3G1lz4EJeKfZeNLHe3Ofhm19dT7VNrFjVNFPTVrIOfje3iqcrZSUgjACfc+9s
-         1UhU0qStTw2hsSILN9bxAX2m/oBx1LMJ9HUdGEAxjwQuc8JESCHb/yKiX1C92FYUW1aj
-         qhi+BfDZgJfi4SZiVb/GPJlctnh4ID3UjfT6xuHs2w/JAfwr7zZvJi4ljtSthqRptYQa
-         yKqQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112; t=1678546358;
-        h=to:subject:message-id:date:from:reply-to:mime-version
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=Qj8nrG0sL8loOIOhZdmt6f4M2skgayD9pumOqV207G8=;
-        b=yTcmOYayhHr6/1m775wgHE5zPs8Votmj4FbYkSH7iuRXxUcm1Mu34bzjB9TFdTCnB0
-         kYOamPYZXXa8PMmO74r5UFrh/Z5uMLWRbjWPNKxScKnUYydTSfYsw1f0LTZnwPjF2u69
-         yOCfWRoMLSV5qFPI0/Ttu2PnTsXkzwmCh4ZPRUopLr5EvtybAlNGjaasL9IsIvz/Vt9j
-         blvOIU0mpQqoT08XPx9+JMU7oPpMu1OCZBMDw7rtuNuTywXGvswGXJsiwMdLA/HTlpY2
-         Bb3hIyaevGOomtcBD/5CzXFM5BprYqg7UXxwZF0f6vw5UCS8uKGe56TrlBHjTkwbjGiz
-         UgYQ==
-X-Gm-Message-State: AO0yUKUTmXgMKr5RdcmqhoS7Kou3WM8AJzQeMjJki2vP8viSkN+3k2fm
-        jMWgVxoAHscHEJKbPmXBEUR3DAxqQb8vlZqw9yA=
-X-Google-Smtp-Source: AK7set/Q3gx76aJrzE4SuUWtwufrEgQz1FLhedNSEuueuFeKI7nQfTBabPVF0Oq9ugXC1lG0ttpPd+/uKq3x9Bh6ta4=
-X-Received: by 2002:a05:651c:10a5:b0:295:9626:a20f with SMTP id
- k5-20020a05651c10a500b002959626a20fmr1859407ljn.1.1678546358215; Sat, 11 Mar
- 2023 06:52:38 -0800 (PST)
+        with ESMTP id S229455AbjCKPGK (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Sat, 11 Mar 2023 10:06:10 -0500
+Received: from mail.skyhub.de (mail.skyhub.de [5.9.137.197])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 984D9311C3;
+        Sat, 11 Mar 2023 07:06:08 -0800 (PST)
+Received: from zn.tnic (p5de8e9fe.dip0.t-ipconnect.de [93.232.233.254])
+        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+        (No client certificate requested)
+        by mail.skyhub.de (SuperMail on ZX Spectrum 128k) with ESMTPSA id 250D91EC0501;
+        Sat, 11 Mar 2023 16:06:07 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=alien8.de; s=dkim;
+        t=1678547167;
+        h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+         to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+         content-transfer-encoding:in-reply-to:in-reply-to:  references:references;
+        bh=i83jfo39n7QMWxUoY3tEAV03lUsmodN+NDXkdxSgb/8=;
+        b=SggQnHUgQJgx3LqZReMr0kMmCymGL3wmgRsic7eHnZ0lKfbKfBbtV3o/gIij9K4QAzCZI/
+        ewqsr3IuyHt2IdnynzYStZidsPtO5oYVJBw6cX88UZd5t5g5YELH+rP2ZHr4CKEb2PaLr+
+        DZUyBLy+vG75cHJywPqFlYmuMf3DEuQ=
+Date:   Sat, 11 Mar 2023 16:06:02 +0100
+From:   Borislav Petkov <bp@alien8.de>
+To:     Rick Edgecombe <rick.p.edgecombe@intel.com>
+Cc:     x86@kernel.org, "H . Peter Anvin" <hpa@zytor.com>,
+        Thomas Gleixner <tglx@linutronix.de>,
+        Ingo Molnar <mingo@redhat.com>, linux-kernel@vger.kernel.org,
+        linux-doc@vger.kernel.org, linux-mm@kvack.org,
+        linux-arch@vger.kernel.org, linux-api@vger.kernel.org,
+        Arnd Bergmann <arnd@arndb.de>,
+        Andy Lutomirski <luto@kernel.org>,
+        Balbir Singh <bsingharora@gmail.com>,
+        Cyrill Gorcunov <gorcunov@gmail.com>,
+        Dave Hansen <dave.hansen@linux.intel.com>,
+        Eugene Syromiatnikov <esyr@redhat.com>,
+        Florian Weimer <fweimer@redhat.com>,
+        "H . J . Lu" <hjl.tools@gmail.com>, Jann Horn <jannh@google.com>,
+        Jonathan Corbet <corbet@lwn.net>,
+        Kees Cook <keescook@chromium.org>,
+        Mike Kravetz <mike.kravetz@oracle.com>,
+        Nadav Amit <nadav.amit@gmail.com>,
+        Oleg Nesterov <oleg@redhat.com>, Pavel Machek <pavel@ucw.cz>,
+        Peter Zijlstra <peterz@infradead.org>,
+        Randy Dunlap <rdunlap@infradead.org>,
+        Weijiang Yang <weijiang.yang@intel.com>,
+        "Kirill A . Shutemov" <kirill.shutemov@linux.intel.com>,
+        John Allen <john.allen@amd.com>, kcc@google.com,
+        eranian@google.com, rppt@kernel.org, jamorris@linux.microsoft.com,
+        dethoma@microsoft.com, akpm@linux-foundation.org,
+        Andrew.Cooper3@citrix.com, christina.schimpe@intel.com,
+        david@redhat.com, debug@rivosinc.com,
+        Yu-cheng Yu <yu-cheng.yu@intel.com>
+Subject: Re: [PATCH v7 39/41] x86: Add PTRACE interface for shadow stack
+Message-ID: <ZAyY2mor+HJAO1ht@zn.tnic>
+References: <20230227222957.24501-1-rick.p.edgecombe@intel.com>
+ <20230227222957.24501-40-rick.p.edgecombe@intel.com>
 MIME-Version: 1.0
-Received: by 2002:ab3:389:0:b0:21f:c391:1da7 with HTTP; Sat, 11 Mar 2023
- 06:52:37 -0800 (PST)
-Reply-To: wormer.amos@aol.com
-From:   Wormer Amos <concepttradinglimited@gmail.com>
-Date:   Sat, 11 Mar 2023 15:52:37 +0100
-Message-ID: <CADfPB6daPDCFQ49imOgJd+KwMrrsvzpD5Vmc+0Vvq3W9Xr6TGg@mail.gmail.com>
-Subject: VERY IMPORTANT PLEASE
-To:     undisclosed-recipients:;
-Content-Type: text/plain; charset="UTF-8"
-X-Spam-Status: Yes, score=6.2 required=5.0 tests=BAYES_80,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_FROM,FREEMAIL_REPLYTO,
-        RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,SPF_PASS,SUBJ_ALL_CAPS,UNDISC_FREEM
-        autolearn=no autolearn_force=no version=3.4.6
-X-Spam-Report: * -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at
-        *      https://www.dnswl.org/, no trust
-        *      [2a00:1450:4864:20:0:0:0:22b listed in]
-        [list.dnswl.org]
-        *  2.0 BAYES_80 BODY: Bayes spam probability is 80 to 95%
-        *      [score: 0.8917]
-        * -0.0 SPF_PASS SPF: sender matches SPF record
-        *  0.0 SPF_HELO_NONE SPF: HELO does not publish an SPF Record
-        *  0.5 SUBJ_ALL_CAPS Subject is all capitals
-        *  0.0 FREEMAIL_FROM Sender email is commonly abused enduser mail
-        *      provider
-        *      [concepttradinglimited[at]gmail.com]
-        *  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
-        *       valid
-        * -0.1 DKIM_VALID_EF Message has a valid DKIM or DK signature from
-        *      envelope-from domain
-        * -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
-        *      author's domain
-        * -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
-        *  2.9 UNDISC_FREEM Undisclosed recipients + freemail reply-to
-        *  1.0 FREEMAIL_REPLYTO Reply-To/From or Reply-To/body contain
-        *      different freemails
-X-Spam-Level: ******
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+In-Reply-To: <20230227222957.24501-40-rick.p.edgecombe@intel.com>
+X-Spam-Status: No, score=-2.1 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,SPF_HELO_NONE,SPF_PASS,
+        URIBL_BLOCKED autolearn=ham autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Please are you capable for investment in your country. i
-need serious investment project with good background, kindly connect
-me to discuss details immediately. i will appreciate you to contact me
-on this email address Thanks and awaiting your quick response yours
-Amos
+On Mon, Feb 27, 2023 at 02:29:55PM -0800, Rick Edgecombe wrote:
+> The only downside to not having a generic supervisor xfeature regset,
+> is that apps need to be enlightened of any new supervisor xfeature
+> exposed this way (i.e. they can't try to have generic save/restore
+> logic). But maybe that is a good thing, because they have to think
+> through each new xfeature instead of encountering issues when new a new
+
+Remove the first "new".
+
+> supervisor xfeature was added.
+> 
+> By adding a shadow stack regset, it also has the effect of including the
+> shadow stack state in a core dump, which could be useful for debugging.
+> 
+> The shadow stack specific xstate includes the SSP, and the shadow stack
+> and WRSS enablement status. Enabling shadow stack or wrss in the kernel
+						       ^^^^
+
+"WRSS"
+
+> involves more than just flipping the bit. The kernel is made aware that
+> it has to do extra things when cloning or handling signals. That logic
+> is triggered off of separate feature enablement state kept in the task
+> struct. So the flipping on HW shadow stack enforcement without notifying
+> the kernel to change its behavior would severely limit what an application
+> could do without crashing, and the results would depend on kernel
+> internal implementation details. There is also no known use for controlling
+> this state via prtace today. So only expose the SSP, which is something
+
+Unknown word [prtace] in commit message.
+Suggestions: ['ptrace'
+
+> that userspace already has indirect control over.
+> 
+> Tested-by: Pengfei Xu <pengfei.xu@intel.com>
+> Tested-by: John Allen <john.allen@amd.com>
+> Tested-by: Kees Cook <keescook@chromium.org>
+> Acked-by: Mike Rapoport (IBM) <rppt@kernel.org>
+> Reviewed-by: Kees Cook <keescook@chromium.org>
+> Co-developed-by: Rick Edgecombe <rick.p.edgecombe@intel.com>
+> Signed-off-by: Rick Edgecombe <rick.p.edgecombe@intel.com>
+> Signed-off-by: Yu-cheng Yu <yu-cheng.yu@intel.com>
+
+I think your SOB should come last:
+
+...
+Signed-off-by: Yu-cheng Yu <yu-cheng.yu@intel.com>
+Co-developed-by: Rick Edgecombe <rick.p.edgecombe@intel.com>
+Signed-off-by: Rick Edgecombe <rick.p.edgecombe@intel.com>
+
+Pls check whole set.
+
+
+> +#ifdef CONFIG_X86_USER_SHADOW_STACK
+> +int ssp_active(struct task_struct *target, const struct user_regset *regset)
+> +{
+> +	if (target->thread.features & ARCH_SHSTK_SHSTK)
+> +		return regset->n;
+> +
+> +	return 0;
+> +}
+> +
+> +int ssp_get(struct task_struct *target, const struct user_regset *regset,
+> +	    struct membuf to)
+> +{
+> +	struct fpu *fpu = &target->thread.fpu;
+> +	struct cet_user_state *cetregs;
+> +
+> +	if (!boot_cpu_has(X86_FEATURE_USER_SHSTK))
+
+check_for_deprecated_apis: WARNING: arch/x86/kernel/fpu/regset.c:193: Do not use boot_cpu_has() - use cpu_feature_enabled() instead.
+
+Check your whole set pls.
+
+-- 
+Regards/Gruss,
+    Boris.
+
+https://people.kernel.org/tglx/notes-about-netiquette
