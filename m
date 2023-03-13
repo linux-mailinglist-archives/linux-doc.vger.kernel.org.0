@@ -2,112 +2,157 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 6B65F6B819C
-	for <lists+linux-doc@lfdr.de>; Mon, 13 Mar 2023 20:19:35 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 59FD36B82DD
+	for <lists+linux-doc@lfdr.de>; Mon, 13 Mar 2023 21:38:09 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S231318AbjCMTTd (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 13 Mar 2023 15:19:33 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:49738 "EHLO
+        id S229635AbjCMUiH (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 13 Mar 2023 16:38:07 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:34762 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S231330AbjCMTTK (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Mon, 13 Mar 2023 15:19:10 -0400
-Received: from mail-ed1-x52e.google.com (mail-ed1-x52e.google.com [IPv6:2a00:1450:4864:20::52e])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 4B9865550A
-        for <linux-doc@vger.kernel.org>; Mon, 13 Mar 2023 12:18:34 -0700 (PDT)
-Received: by mail-ed1-x52e.google.com with SMTP id r11so1362029edd.5
-        for <linux-doc@vger.kernel.org>; Mon, 13 Mar 2023 12:18:34 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=isovalent.com; s=google; t=1678735103;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=4jzQHLH+czFdrkdirmcmRjGKRMXSK18PVFqhOp6lwdI=;
-        b=QsWgw9kBrVnin7kxkUV6/DSRmwHT6AIQV3oz377JmlslGnbmhWZfWjagVAK9+2YH4+
-         m7ovB5rqA3be1T6dKrbvP8Mtu5luoRvUq/s0qvYiuAWjrR+hVosvWeUfl+cGYlswn77O
-         V8KDNFr+PJW9L7MlEA5OZ+boh/p+gLR1pnQfgX7rQ6ZpGxlznAfYYeEMNnW7WBJyZv7P
-         QFdMeUY5nHjU/CKnIJd3B6YPCMolP4ooAy6tE7ttlS1avDVlPtEkb5OZngfP31JFhuBS
-         d+JooudLa97bWheIQYYV7BhxGmqO3BbRXEkEICJZACdsKuBqvUqPdQTKPKP2yA/AfdjY
-         sFlA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112; t=1678735103;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=4jzQHLH+czFdrkdirmcmRjGKRMXSK18PVFqhOp6lwdI=;
-        b=a5WOJPQTI6Sg0txaapRGXKW2yjMrqbGVs2WnZOBTgJmxy5sLBTph6DV3z4I5e3jmXt
-         UwGWkdnLj7GWEMweAyZcKOTQEy5Txn6B+XP+O4UyzJh1cJhrHQPB3hho1jwj6aNpJ1dg
-         ncZvNFXYS0XLvgfYVm8W5eBGXoxF1GRqUiEHlM1DsEBODkCD4h4TGnH/FbtxB15Q8i0H
-         4xGjt3DPnZkpGqkmktQaYMifb8hSYEsQ1v/tjSBjfrPoe9W4KxUYfJrVeNNtlK90uYDV
-         e1ABIX+c13BMGijWY/AnV4bgDYiM0Kugj2vOV5BRah+hg69THmOm1T6eixU/gAqqGMbT
-         v7dg==
-X-Gm-Message-State: AO0yUKW53DZXZTKWGJ5gDrD65+xdsfKvgJq459H2MoBx+qfQDNpw5g5X
-        aOYUwbwL/KY8JD3N8vRaOpX4bnES+aTGQrKu0vPDFw==
-X-Google-Smtp-Source: AK7set9iHKb6Bre4RqW3221gyWUC4UjEXzVE8fpYLJqP1GDRCMYCrtwk4fHPFHQkY4jgZozb2tRZ1crzU/LyT0PA6zI=
-X-Received: by 2002:a17:906:7803:b0:8db:b5c1:7203 with SMTP id
- u3-20020a170906780300b008dbb5c17203mr18275513ejm.11.1678735103127; Mon, 13
- Mar 2023 12:18:23 -0700 (PDT)
+        with ESMTP id S229536AbjCMUiG (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Mon, 13 Mar 2023 16:38:06 -0400
+Received: from mga11.intel.com (mga11.intel.com [192.55.52.93])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 47D9D55BE;
+        Mon, 13 Mar 2023 13:38:05 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1678739885; x=1710275885;
+  h=from:to:cc:subject:date:message-id:mime-version:
+   content-transfer-encoding;
+  bh=xhLemzapIYtjwt7W6UjVVSZx3bQKLmhz6UvBBX3dL3c=;
+  b=NYyfInkMm8rKQCdXPwFYho32BAhtDX4FwScEizr+Y9ocRy6vBohl5zi6
+   OkTigMJD3sZafm4Y1d6TTFkhXyJF+N6Qf3y4uj3CbY6yUz3Y4t4kB9Qo5
+   V2cOKEsPyPoUPg75hNwHNkMzUExVfVUhD4Ko2iSL3llQ3lcyEQe/qWAa1
+   zOIr3pVq9PKCDl1fi0EhKm4pyNG5+F2DagZMkGyrkdXhXRAkZNTiB/Db1
+   00ER/pDRL3fPrggUFKm09gw+CHdjzZxHqjxIHoZNfKWYVym+aezwcG+xZ
+   8kMoLgJhNUWPfhrp+FTIU/oZCSo7xAw9GVuSHnt/HcmJt524ihj7rxuWg
+   g==;
+X-IronPort-AV: E=McAfee;i="6500,9779,10648"; a="334732019"
+X-IronPort-AV: E=Sophos;i="5.98,257,1673942400"; 
+   d="scan'208";a="334732019"
+Received: from orsmga004.jf.intel.com ([10.7.209.38])
+  by fmsmga102.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 13 Mar 2023 13:38:04 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=McAfee;i="6500,9779,10648"; a="802584766"
+X-IronPort-AV: E=Sophos;i="5.98,257,1673942400"; 
+   d="scan'208";a="802584766"
+Received: from srinivas-otcpl-7600.jf.intel.com (HELO jacob-builder.jf.intel.com) ([10.54.39.106])
+  by orsmga004.jf.intel.com with ESMTP; 13 Mar 2023 13:38:03 -0700
+From:   Jacob Pan <jacob.jun.pan@linux.intel.com>
+To:     LKML <linux-kernel@vger.kernel.org>, iommu@lists.linux.dev,
+        Jason Gunthorpe <jgg@nvidia.com>,
+        "Lu Baolu" <baolu.lu@linux.intel.com>,
+        Joerg Roedel <joro@8bytes.org>,
+        Jean-Philippe Brucker <jean-philippe@linaro.com>,
+        "Robin Murphy" <robin.murphy@arm.com>,
+        Dave Hansen <dave.hansen@intel.com>,
+        Thomas Gleixner <tglx@linutronix.de>,
+        X86 Kernel <x86@kernel.org>, bp@alien8.de,
+        "H. Peter Anvin" <hpa@zytor.com>,
+        Peter Zijlstra <peterz@infradead.org>, corbet@lwn.net,
+        vkoul@kernel.org, dmaengine@vger.kernel.org,
+        linux-doc@vger.kernel.org
+Cc:     "Will Deacon" <will@kernel.org>,
+        David Woodhouse <dwmw2@infradead.org>,
+        Raj Ashok <ashok.raj@intel.com>,
+        "Tian, Kevin" <kevin.tian@intel.com>, Yi Liu <yi.l.liu@intel.com>,
+        "Yu, Fenghua" <fenghua.yu@intel.com>,
+        Dave Jiang <dave.jiang@intel.com>,
+        Kirill Shutemov <kirill.shutemov@linux.intel.com>,
+        Tony Luck <tony.luck@intel.com>,
+        Jacob Pan <jacob.jun.pan@linux.intel.com>
+Subject: 
+Date:   Mon, 13 Mar 2023 13:41:51 -0700
+Message-Id: <20230313204158.1495067-1-jacob.jun.pan@linux.intel.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-References: <20230312190600.324573-1-joe@isovalent.com> <ZA6ecdQl3STWVAH6@debian.me>
-In-Reply-To: <ZA6ecdQl3STWVAH6@debian.me>
-From:   Joe Stringer <joe@isovalent.com>
-Date:   Mon, 13 Mar 2023 12:18:12 -0700
-Message-ID: <CADa=Ryyp10=ki5ctVTVbeUFy23uyRbi+ZgJE5JpxX3UFWvQcyw@mail.gmail.com>
-Subject: Re: [PATCH bpf-next v3] docs/bpf: Add LRU internals description and graph
-To:     Bagas Sanjaya <bagasdotme@gmail.com>
-Cc:     bpf@vger.kernel.org, linux-doc@vger.kernel.org,
-        linux-kernel@vger.kernel.org, ast@kernel.org, corbet@lwn.net,
-        martin.lau@linux.dev, maxtram95@gmail.com
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Spam-Status: No, score=-2.1 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_NONE,
-        SPF_HELO_NONE,SPF_PASS autolearn=unavailable autolearn_force=no
-        version=3.4.6
+Content-Transfer-Encoding: 8bit
+X-Spam-Status: No, score=-2.8 required=5.0 tests=AC_FROM_MANY_DOTS,BAYES_00,
+        DKIMWL_WL_HIGH,DKIM_SIGNED,DKIM_VALID,DKIM_VALID_EF,RCVD_IN_DNSWL_MED,
+        SPF_HELO_NONE,SPF_NONE autolearn=ham autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Sun, Mar 12, 2023 at 8:54=E2=80=AFPM Bagas Sanjaya <bagasdotme@gmail.com=
-> wrote:
->
-> On Sun, Mar 12, 2023 at 12:05:59PM -0700, Joe Stringer wrote:
-> > +Even if an LRU node may be acquired, maps of type ``BPF_MAP_TYPE_LRU_H=
-ASH``
-> > +may fail to insert the entry into the map if other CPUs are heavily co=
-ntending
-> > +on the global hashmap lock.
->
-> "Even if an LRU node can be acquired, ..."
+Subject: [PATCH v6 0/7] Remove VT-d virtual command interface and IOASID
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-Ack.
+Hi all,
 
-> > +
-> > +This algorithm is described visually in the following diagram. See the
-> > +description in commit 3a08c2fd7634 ("bpf: LRU List") for a full explan=
-ation of
-> > +the corresponding operations:
-> > +
-> > +.. kernel-figure::  map_lru_hash_update.dot
-> > +   :alt:    Diagram outlining the LRU eviction steps taken during map =
-update
-> > +
-> > +   LRU hash eviction during map update for ``BPF_MAP_TYPE_LRU_HASH`` a=
-nd
-> > +   variants
-> > +
-> > <snipped> ...
-> > +The dot file source for the above figure uses internal kernel function=
- names
-> > +for the node names in order to make the corresponding logic easier to =
-find.
->
-> Shouldn't the figure note above be in :alt:?
+This patch set removes unused VT-d virtual command interface followed by
+removal of the IOASID infrastructure.
 
-Do you mean alt or caption? Alt will hide the information from most develop=
-ers.
+This has only been tested on x86 platforms, need help with testing on ARM
+SMMU and other architectures.
 
-> Otherwise LGTM.
 
-Thanks for the review!
+Thanks,
+
+Jacob
+
+ChangeLog:
+v6:
+ - put pasid helpers under iommu.h instead of iommu-helper.h
+ - add comments for pasid allocation function to clarify inclusive range
+
+v5:
+ - rebased on v6.3-rc1
+ - put removing iommu_sva_find() in a separate patch (Kevin)
+ - move definition of helpers to iommu code to be consistent with
+   declarations. (Kevin)
+ - misc fixes
+
+v4:
+ - keep mm_pasid helpers inline as much as we can for fork performance
+ - separate GFP_ATOMIC to GFP_KERNEL change for bisectability
+
+v3:
+ - moved helper functions for PASID under SVA code, avoided circular inclusion
+   between mm.h and iommu.h
+ - deleted makefiles
+ - put rename under a different patch
+
+
+Jacob Pan (5):
+  iommu/vt-d: Remove virtual command interface
+  iommu/sva: Move PASID helpers to sva code
+  iommu/sva: Remove PASID to mm lookup function
+  iommu/sva: Use GFP_KERNEL for pasid allocation
+  iommu/ioasid: Rename INVALID_IOASID
+
+Jason Gunthorpe (2):
+  iommu/sva: Stop using ioasid_set for SVA
+  iommu: Remove ioasid infrastructure
+
+ Documentation/x86/sva.rst       |   2 +-
+ arch/x86/kernel/traps.c         |   5 +-
+ drivers/dma/idxd/device.c       |   8 +-
+ drivers/dma/idxd/idxd.h         |   2 +-
+ drivers/dma/idxd/init.c         |   2 +-
+ drivers/dma/idxd/irq.c          |   2 +-
+ drivers/iommu/Kconfig           |   5 -
+ drivers/iommu/Makefile          |   1 -
+ drivers/iommu/intel/cap_audit.c |   2 -
+ drivers/iommu/intel/dmar.c      |   6 +-
+ drivers/iommu/intel/iommu.c     |  87 +------
+ drivers/iommu/intel/iommu.h     |   3 -
+ drivers/iommu/intel/svm.c       |   3 +-
+ drivers/iommu/ioasid.c          | 422 --------------------------------
+ drivers/iommu/iommu-sva.c       |  63 ++---
+ drivers/iommu/iommu-sva.h       |   4 -
+ include/linux/ioasid.h          |  83 -------
+ include/linux/iommu.h           |  14 +-
+ include/linux/sched/mm.h        |  26 --
+ kernel/fork.c                   |   3 +
+ mm/init-mm.c                    |   4 +-
+ 21 files changed, 53 insertions(+), 694 deletions(-)
+ delete mode 100644 drivers/iommu/ioasid.c
+ delete mode 100644 include/linux/ioasid.h
+
+-- 
+2.25.1
+
