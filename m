@@ -2,80 +2,121 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 150576BAC6A
-	for <lists+linux-doc@lfdr.de>; Wed, 15 Mar 2023 10:44:13 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 426FC6BACF2
+	for <lists+linux-doc@lfdr.de>; Wed, 15 Mar 2023 11:04:12 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S232114AbjCOJoK (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 15 Mar 2023 05:44:10 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:54538 "EHLO
+        id S231232AbjCOKEJ (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 15 Mar 2023 06:04:09 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:56018 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S232096AbjCOJn7 (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Wed, 15 Mar 2023 05:43:59 -0400
-Received: from szxga02-in.huawei.com (szxga02-in.huawei.com [45.249.212.188])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id C469062D9B;
-        Wed, 15 Mar 2023 02:43:47 -0700 (PDT)
-Received: from canpemm500009.china.huawei.com (unknown [172.30.72.55])
-        by szxga02-in.huawei.com (SkyGuard) with ESMTP id 4Pc54t3n2VzHwyp;
-        Wed, 15 Mar 2023 17:41:34 +0800 (CST)
-Received: from localhost.localdomain (10.50.163.32) by
- canpemm500009.china.huawei.com (7.192.105.203) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.21; Wed, 15 Mar 2023 17:43:45 +0800
-From:   Yicong Yang <yangyicong@huawei.com>
-To:     <mathieu.poirier@linaro.org>, <suzuki.poulose@arm.com>,
-        <jonathan.cameron@huawei.com>, <corbet@lwn.net>,
-        <linux-kernel@vger.kernel.org>, <linux-doc@vger.kernel.org>
-CC:     <alexander.shishkin@linux.intel.com>, <helgaas@kernel.org>,
-        <linux-pci@vger.kernel.org>, <prime.zeng@huawei.com>,
-        <linuxarm@huawei.com>
-Subject: [PATCH 4/4] hwtracing: hisi_ptt: Advertise PERF_PMU_CAP_NO_EXCLUDE for PTT PMU
-Date:   Wed, 15 Mar 2023 17:43:16 +0800
-Message-ID: <20230315094316.26772-5-yangyicong@huawei.com>
-X-Mailer: git-send-email 2.31.0
-In-Reply-To: <20230315094316.26772-1-yangyicong@huawei.com>
-References: <20230315094316.26772-1-yangyicong@huawei.com>
+        with ESMTP id S231822AbjCOKDk (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Wed, 15 Mar 2023 06:03:40 -0400
+Received: from mail-pl1-x62d.google.com (mail-pl1-x62d.google.com [IPv6:2607:f8b0:4864:20::62d])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 4C8491A49C;
+        Wed, 15 Mar 2023 03:02:53 -0700 (PDT)
+Received: by mail-pl1-x62d.google.com with SMTP id k2so11563893pll.8;
+        Wed, 15 Mar 2023 03:02:53 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112; t=1678874573;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=E6BuA3/IaA3KWYlTwYpc4ySsD7kuUXxU+Kj5w0UtdhE=;
+        b=SLTsblRQDj3hkyp3w7oJr7oob7FDAHKjv2+Mreuy9faOMpQ7icqe5dw5uCylZCciyJ
+         Xx7cvS6o7nhMbC6NBIS4bqtP+Wo3In5uefBukxOSquIk1W73whijpnXXEYAF3evfY2oA
+         15PBs1SkBZorbn3pGJz6dNwsdRAmW2A26fuZjQkUW1cgAcq0vQjauOmpEjhmVpNXxsia
+         NWNA1MulpyMl9p1oqL741Kt9ZJCk5oLTHOId2Njqp0O5tbrTPHKVO1KyAsLCDG36o1za
+         85dtDX7pDAbZH4kxejKGLPsBMtzlYMc6RQcmpik72VDm4Ed1eX5ee0gwLONpgrn2gr4k
+         ssKg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112; t=1678874573;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=E6BuA3/IaA3KWYlTwYpc4ySsD7kuUXxU+Kj5w0UtdhE=;
+        b=5beM/ZBGsQCeamwbgXJPRyyM/rFBws16HPrThKYw+S3pZwlN0tQjVFCVv36VN17XzD
+         +GUHEeXe8bZpiYBFkVdcz+GoFEQ28jkdV7GYeP+f+ok2WlUJbqzh4KvMwYPI6sWhvOIn
+         2ABf709fTwb4s39H+OKXyQ/0U5mAI+Ml866Hj4cGFaGvcEMDtfO3bDESWgWVq8Y2v2gu
+         OkiL0xT5V1x6K4jXKofdQ9NlYxJI7ADsLjTwJvtyoHiTDIWTUw8z3ONAdV+RK+KPODiD
+         UPTwBdyhXVQGefHvkoOuaMfA831+iC+bObjYqc7WtRjzljQRfXirv7SXmjTATvrl4Yae
+         /wmQ==
+X-Gm-Message-State: AO0yUKUY0cxKDI2hJyLnWb1d4tcjhUvsa7cE533IMMYaxLwn2+RmjFxT
+        TVV87g9lDbofNdprBf0u6Cs=
+X-Google-Smtp-Source: AK7set81/JklFphaEtwIIoFmsuM5gRmI6FUFj9z2LVAn9V3Ecdj2lCJC9Wnd8qKsGwmL3O9zPhtvAQ==
+X-Received: by 2002:a17:902:f687:b0:19c:e440:9256 with SMTP id l7-20020a170902f68700b0019ce4409256mr2673849plg.35.1678874572753;
+        Wed, 15 Mar 2023 03:02:52 -0700 (PDT)
+Received: from debian.me (subs09b-223-255-225-224.three.co.id. [223.255.225.224])
+        by smtp.gmail.com with ESMTPSA id kc13-20020a17090333cd00b0019a82ff8c38sm3269378plb.29.2023.03.15.03.02.52
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 15 Mar 2023 03:02:52 -0700 (PDT)
+Received: by debian.me (Postfix, from userid 1000)
+        id 0925510653F; Wed, 15 Mar 2023 17:02:48 +0700 (WIB)
+From:   Bagas Sanjaya <bagasdotme@gmail.com>
+To:     Linux Documentation <linux-doc@vger.kernel.org>,
+        Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
+        Linux Staging Drivers <linux-staging@lists.linux.dev>
+Cc:     Jonathan Corbet <corbet@lwn.net>, Borislav Petkov <bp@suse.de>,
+        "Paul E. McKenney" <paulmck@kernel.org>,
+        Andrew Morton <akpm@linux-foundation.org>,
+        Randy Dunlap <rdunlap@infradead.org>,
+        Damien Le Moal <damien.lemoal@opensource.wdc.com>,
+        Kim Phillips <kim.phillips@amd.com>,
+        "Steven Rostedt (Google)" <rostedt@goodmis.org>,
+        Mauro Carvalho Chehab <mchehab@kernel.org>,
+        Hans Verkuil <hverkuil-cisco@xs4all.nl>,
+        Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+        Bagas Sanjaya <bagasdotme@gmail.com>,
+        kernel test robot <lkp@intel.com>
+Subject: [PATCH] Documentation: kernel-parameters: Remove meye entry
+Date:   Wed, 15 Mar 2023 17:02:46 +0700
+Message-Id: <20230315100246.62324-1-bagasdotme@gmail.com>
+X-Mailer: git-send-email 2.39.2
 MIME-Version: 1.0
-Content-Transfer-Encoding: 7BIT
-Content-Type:   text/plain; charset=US-ASCII
-X-Originating-IP: [10.50.163.32]
-X-ClientProxiedBy: dggems706-chm.china.huawei.com (10.3.19.183) To
- canpemm500009.china.huawei.com (7.192.105.203)
-X-CFilter-Loop: Reflected
-X-Spam-Status: No, score=-4.2 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_MED,
-        SPF_HELO_NONE,SPF_PASS autolearn=ham autolearn_force=no version=3.4.6
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1388; i=bagasdotme@gmail.com; h=from:subject; bh=avfJeM8iBKx7EY1UHi3pTSAbm1wMcUWal73uKqAUeY8=; b=owGbwMvMwCX2bWenZ2ig32LG02pJDCmC0/d8vt5u6LT2o/pedX42YbZ6FW79kzLX3rDVGuxst PM1UWrtKGVhEONikBVTZJmUyNd0epeRyIX2tY4wc1iZQIYwcHEKwEQ6uxj+Kbs9OSl663765V3r 5qTnhPJcLvvya077/29avGd+9QVLFzH84Zef/42Le5Wrp87unKJb/x0ffrBP3278Y7PLy8v5s/Y p8AEA
+X-Developer-Key: i=bagasdotme@gmail.com; a=openpgp; fpr=701B806FDCA5D3A58FFB8F7D7C276C64A5E44A1D
+Content-Transfer-Encoding: 8bit
+X-Spam-Status: No, score=-0.6 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_FROM,
+        RCVD_IN_DNSWL_NONE,RCVD_IN_SORBS_WEB,SPF_HELO_NONE,SPF_PASS
+        autolearn=no autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-From: Yicong Yang <yangyicong@hisilicon.com>
+Commit ba47652ba65523 ("media: meye: remove this deprecated driver")
+removes meye driver but forgets to purge its kernel-parameters.txt
+entry, hence broken reference.
 
-The PTT trace collects PCIe TLP headers from the PCIe link and don't
-have the ability to exclude certain context. It doesn't support itrace
-as well. So only advertise PERF_PMU_CAP_NO_EXCLUDE. This will greatly
-save the storage of final data. Tested tracing idle link for ~15s,
-without this patch we'll collect ~28.682MB data for context related
-information and with this patch it reduced to ~0.226MB.
+Remove the entry.
 
-Signed-off-by: Yicong Yang <yangyicong@hisilicon.com>
+Link: https://lore.kernel.org/all/202302070341.OVqstpMM-lkp@intel.com/
+Fixes: ba47652ba65523 ("media: meye: remove this deprecated driver")
+Reported-by: kernel test robot <lkp@intel.com>
+Signed-off-by: Bagas Sanjaya <bagasdotme@gmail.com>
 ---
- drivers/hwtracing/ptt/hisi_ptt.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ This patch is based on staging-next tree, because the driver removal
+ touched drivers/staging/.
 
-diff --git a/drivers/hwtracing/ptt/hisi_ptt.c b/drivers/hwtracing/ptt/hisi_ptt.c
-index a5cd87edb813..8c1cce32b83f 100644
---- a/drivers/hwtracing/ptt/hisi_ptt.c
-+++ b/drivers/hwtracing/ptt/hisi_ptt.c
-@@ -1216,7 +1216,7 @@ static int hisi_ptt_register_pmu(struct hisi_ptt *hisi_ptt)
+ Documentation/admin-guide/kernel-parameters.txt | 3 ---
+ 1 file changed, 3 deletions(-)
+
+diff --git a/Documentation/admin-guide/kernel-parameters.txt b/Documentation/admin-guide/kernel-parameters.txt
+index 6221a1d057dd58..e54d4ce7870c00 100644
+--- a/Documentation/admin-guide/kernel-parameters.txt
++++ b/Documentation/admin-guide/kernel-parameters.txt
+@@ -3184,9 +3184,6 @@
+ 			deep    - Suspend-To-RAM or equivalent (if supported)
+ 			See Documentation/admin-guide/pm/sleep-states.rst.
  
- 	hisi_ptt->hisi_ptt_pmu = (struct pmu) {
- 		.module		= THIS_MODULE,
--		.capabilities	= PERF_PMU_CAP_EXCLUSIVE | PERF_PMU_CAP_ITRACE,
-+		.capabilities	= PERF_PMU_CAP_NO_EXCLUDE,
- 		.task_ctx_nr	= perf_sw_context,
- 		.attr_groups	= hisi_ptt_pmu_groups,
- 		.event_init	= hisi_ptt_pmu_event_init,
+-	meye.*=		[HW] Set MotionEye Camera parameters
+-			See Documentation/admin-guide/media/meye.rst.
+-
+ 	mfgpt_irq=	[IA-32] Specify the IRQ to use for the
+ 			Multi-Function General Purpose Timers on AMD Geode
+ 			platforms.
+
+base-commit: 458219ca9246076971961d695eef9eb56e05fcf7
 -- 
-2.24.0
+An old man doll... just what I always wanted! - Clara
 
