@@ -2,65 +2,93 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id B32406BC449
-	for <lists+linux-doc@lfdr.de>; Thu, 16 Mar 2023 04:17:26 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 767D96BC4A1
+	for <lists+linux-doc@lfdr.de>; Thu, 16 Mar 2023 04:25:34 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S229454AbjCPDRZ (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 15 Mar 2023 23:17:25 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:56580 "EHLO
+        id S229617AbjCPDZc (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 15 Mar 2023 23:25:32 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:39938 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S229464AbjCPDRY (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Wed, 15 Mar 2023 23:17:24 -0400
-Received: from mail-lj1-x22a.google.com (mail-lj1-x22a.google.com [IPv6:2a00:1450:4864:20::22a])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 55BA0856AC
-        for <linux-doc@vger.kernel.org>; Wed, 15 Mar 2023 20:17:22 -0700 (PDT)
-Received: by mail-lj1-x22a.google.com with SMTP id b13so264617ljf.6
-        for <linux-doc@vger.kernel.org>; Wed, 15 Mar 2023 20:17:22 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112; t=1678936640;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=bpSONzeiXbnF6a+TR0uwezkX7CnfhK34t7ir+4j6xyc=;
-        b=ODacuaT+Ce9idqr0rK6SckQf2xkyFp16DJMgGBnGxSKrpetZXCKMjxrIHXTAEfotqQ
-         63Fk9FiphvahADiFlzMcN1TTLx2oBlClVOQDHlrQtfaaLGUyoTvQEu3HqArwcTu62Vp6
-         ZtSh6nwldMynhBi5RWyD9TkaS0g+fWIlvZZkBEJ3biLajiLthIFHnlG7SCmABkXnPTJd
-         uQNqL+o7dBHgNgUtaMkh7VzldHuSiNy47a0kgDMvZUhnT/QFIvGEZ5l+PV8Y77jK/3lj
-         s8yrQ4GHyVYzapFhII0lPE8xlIXJl8eiA5Huvcbq967axIwdrq7tYaD4vMjlxLiHWCvT
-         la1Q==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112; t=1678936640;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=bpSONzeiXbnF6a+TR0uwezkX7CnfhK34t7ir+4j6xyc=;
-        b=pywTKqxDYV/Eblk7BK5u5JA9EsmKdcA1QBJ7ZeT5ttc4p7USImDODEg1ICk6sixFEX
-         FhXImKCVSyFi+JCwHCc8wA/k2RV0tPzF0z/clrNRT/hsaHVnt5RyT21owsPHkF9ah9Mu
-         7Gv/KqZhymSDdu3vvwsVz/lQwrarNucaV2N1vLgAF/x1wOY2yQIlMBZ0g4ZB/ZLd2Wt/
-         xMqLnh93i4kCdSG3QnOLk21lyiCXT78DGpJ0ULaVbISxJ2E0XpIFKkIAAgC5MaYIx5rA
-         5nqPP4eAFrc7n7CU/rf4dKMUJ+Xm4Ak2ysS5T5Gg2kTJVtmuDs8udDUdToKPMIpiOz+s
-         H4AA==
-X-Gm-Message-State: AO0yUKVnZukcmDpk9zmdLghOp6o+60R6FE7v+ThItv6O+KHo5ifK6oNM
-        ounYlXvaMGRj9uqwM1+feiYORy0Dy5/CPCDdhWuYpsEhX3eauw==
-X-Google-Smtp-Source: AK7set9zsKlSyKeInjIHrcAYy44SZVHSTLEZRZVwzlpeyndRUPMDevvDSTG/wbc08Vnvbzf/n8jSvHz3H9wMlCRCK7I=
-X-Received: by 2002:a2e:9b8a:0:b0:298:b337:c127 with SMTP id
- z10-20020a2e9b8a000000b00298b337c127mr1020479lji.1.1678936640440; Wed, 15 Mar
- 2023 20:17:20 -0700 (PDT)
-MIME-Version: 1.0
-References: <20230316024519.27992-1-zangleigang@hisilicon.com>
-In-Reply-To: <20230316024519.27992-1-zangleigang@hisilicon.com>
-From:   Alex Shi <seakeel@gmail.com>
-Date:   Thu, 16 Mar 2023 11:16:44 +0800
-Message-ID: <CAJy-Amn1R-0Nq-tEqNcW7-kCmjPpYUtD=EjAfCK3oJVPWirB0g@mail.gmail.com>
-Subject: Re: [PATCH] docs/zh_CN: fix a wrong format
-To:     Zang Leigang <zangleigang@hisilicon.com>
-Cc:     alexs@kernel.org, siyanteng@loongson.cn, corbet@lwn.net,
-        rppt@kernel.org, linux-doc@vger.kernel.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: base64
-X-Spam-Status: No, score=0.6 required=5.0 tests=BAYES_50,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_FROM,
-        RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,SPF_PASS autolearn=ham
+        with ESMTP id S229962AbjCPDYU (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Wed, 15 Mar 2023 23:24:20 -0400
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id EADD8ABAC2;
+        Wed, 15 Mar 2023 20:22:18 -0700 (PDT)
+Received: from pps.filterd (m0279867.ppops.net [127.0.0.1])
+        by mx0a-0031df01.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id 32G2UYXr001845;
+        Thu, 16 Mar 2023 03:20:20 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=quicinc.com; h=from : to : cc :
+ subject : date : message-id; s=qcppdkim1;
+ bh=G2ndkKjTC7YndGTL160uD3YPfgNsKL4syB7064e2854=;
+ b=o48t1EpQ2epfzZUHYmYU3YPjga6Slt739/5CEobatv/H0LvsgjDG7pcjZpTlFSzYMaUQ
+ sMyT+07JZB4JtK0B/HeZSb1vqpvS4uX4LQPH83DXC2Hws/mRd0LUKIOGVZ+yr8GMRTXk
+ w1B7uz4+6BOEdGoh+esjMHfY6JIg4Z6BNX6oTPguT/6vmSI1vKRLTx2akhTd+ziDPlQ8
+ orzVmckfvY0oFQ9efdxQz2oQy39rCIRfuzJi9YnaDD3X5JDWJCXF4fia6B4uIaf0ATQb
+ sscrWcWrk+f+jWX0DDgwQubYDnmEIBfOa2MUOR+dCBXSnwibaMfxDptELQcBdGhYcTXw HA== 
+Received: from aptaippmta02.qualcomm.com (tpe-colo-wan-fw-bordernet.qualcomm.com [103.229.16.4])
+        by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 3pbpxjrhhf-1
+        (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+        Thu, 16 Mar 2023 03:20:20 +0000
+Received: from pps.filterd (APTAIPPMTA02.qualcomm.com [127.0.0.1])
+        by APTAIPPMTA02.qualcomm.com (8.17.1.5/8.17.1.5) with ESMTP id 32G3KIXP003048;
+        Thu, 16 Mar 2023 03:20:18 GMT
+Received: from pps.reinject (localhost [127.0.0.1])
+        by APTAIPPMTA02.qualcomm.com (PPS) with ESMTP id 3p8jqmp08r-1;
+        Thu, 16 Mar 2023 03:20:18 +0000
+Received: from APTAIPPMTA02.qualcomm.com (APTAIPPMTA02.qualcomm.com [127.0.0.1])
+        by pps.reinject (8.17.1.5/8.17.1.5) with ESMTP id 32G3KItO003042;
+        Thu, 16 Mar 2023 03:20:18 GMT
+Received: from hazha-gv.ap.qualcomm.com (hazha-gv.qualcomm.com [10.239.105.144])
+        by APTAIPPMTA02.qualcomm.com (PPS) with ESMTP id 32G3KHM2003039;
+        Thu, 16 Mar 2023 03:20:18 +0000
+Received: by hazha-gv.ap.qualcomm.com (Postfix, from userid 4083943)
+        id 8A70F1200071; Thu, 16 Mar 2023 11:20:16 +0800 (CST)
+From:   Hao Zhang <quic_hazha@quicinc.com>
+To:     Mathieu Poirier <mathieu.poirier@linaro.org>,
+        Suzuki K Poulose <suzuki.poulose@arm.com>,
+        Alexander Shishkin <alexander.shishkin@linux.intel.com>,
+        Konrad Dybcio <konradybcio@gmail.com>,
+        Mike Leach <mike.leach@linaro.org>,
+        Rob Herring <robh+dt@kernel.org>,
+        Krzysztof Kozlowski <krzysztof.kozlowski+dt@linaro.org>,
+        Andy Gross <agross@kernel.org>,
+        Paul Walmsley <paul.walmsley@sifive.com>,
+        Palmer Dabbelt <palmer@dabbelt.com>,
+        Albert Ou <aou@eecs.berkeley.edu>,
+        Jonathan Corbet <corbet@lwn.net>
+Cc:     Hao Zhang <quic_hazha@quicinc.com>, Leo Yan <leo.yan@linaro.org>,
+        Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+        coresight@lists.linaro.org, linux-arm-kernel@lists.infradead.org,
+        linux-kernel@vger.kernel.org, devicetree@vger.kernel.org,
+        Tingwei Zhang <quic_tingweiz@quicinc.com>,
+        Jinlong Mao <quic_jinlmao@quicinc.com>,
+        Yuanfang Zhang <quic_yuanfang@quicinc.com>,
+        Tao Zhang <quic_taozha@quicinc.com>,
+        Trilok Soni <quic_tsoni@quicinc.com>,
+        linux-arm-msm@vger.kernel.org,
+        Bjorn Andersson <andersson@kernel.org>,
+        linux-doc@vger.kernel.org
+Subject: [PATCH v1 0/3] Add support to configure Coresight Dummy subunit
+Date:   Thu, 16 Mar 2023 11:20:02 +0800
+Message-Id: <20230316032005.6509-1-quic_hazha@quicinc.com>
+X-Mailer: git-send-email 2.17.1
+X-QCInternal: smtphost
+X-QCInternal: smtphost
+X-Proofpoint-Virus-Version: vendor=nai engine=6200 definitions=5800 signatures=585085
+X-Proofpoint-Virus-Version: vendor=nai engine=6200 definitions=5800 signatures=585085
+X-Proofpoint-GUID: x6XpTLoB3IL6ofB8f4TW3KSqv9rXil8T
+X-Proofpoint-ORIG-GUID: x6XpTLoB3IL6ofB8f4TW3KSqv9rXil8T
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.254,Aquarius:18.0.942,Hydra:6.0.573,FMLib:17.11.170.22
+ definitions=2023-03-16_02,2023-03-15_01,2023-02-09_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 spamscore=0 mlxscore=0
+ adultscore=0 suspectscore=0 mlxlogscore=861 clxscore=1011 malwarescore=0
+ priorityscore=1501 bulkscore=0 phishscore=0 lowpriorityscore=0
+ impostorscore=0 classifier=spam adjust=0 reason=mlx scancount=1
+ engine=8.12.0-2303150002 definitions=main-2303160028
+X-Spam-Status: No, score=-2.4 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+        DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
+        RCVD_IN_DNSWL_LOW,SPF_HELO_NONE,SPF_NONE autolearn=ham
         autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
@@ -68,28 +96,31 @@ Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-UmV2aWV3ZWQtYnk6IEFsZXggU2hpIDxhbGV4c0BrZXJuZWwub3JnPg0KDQpPbiBUaHUsIE1hciAx
-NiwgMjAyMyBhdCAxMDo0NeKAr0FNIFphbmcgTGVpZ2FuZyA8emFuZ2xlaWdhbmdAaGlzaWxpY29u
-LmNvbT4gd3JvdGU6DQo+DQo+IEFkZCBhIG1pc3NpbmcgbWFya3VwIGZvciB0aGUgY29kZSBzbmlw
-cGV0IGF0IHRoZSBlbmQgb2YgbHJ1X3NvcnQucnN0DQo+DQo+IFNpZ25lZC1vZmYtYnk6IFphbmcg
-TGVpZ2FuZyA8emFuZ2xlaWdhbmdAaGlzaWxpY29uLmNvbT4NCj4gLS0tDQo+ICAuLi4vdHJhbnNs
-YXRpb25zL3poX0NOL2FkbWluLWd1aWRlL21tL2RhbW9uL2xydV9zb3J0LnJzdCAgICAgICAgfCAy
-ICstDQo+ICAxIGZpbGUgY2hhbmdlZCwgMSBpbnNlcnRpb24oKyksIDEgZGVsZXRpb24oLSkNCj4N
-Cj4gZGlmZiAtLWdpdCBhL0RvY3VtZW50YXRpb24vdHJhbnNsYXRpb25zL3poX0NOL2FkbWluLWd1
-aWRlL21tL2RhbW9uL2xydV9zb3J0LnJzdCBiL0RvY3VtZW50YXRpb24vdHJhbnNsYXRpb25zL3po
-X0NOL2FkbWluLWd1aWRlL21tL2RhbW9uL2xydV9zb3J0LnJzdA0KPiBpbmRleCA4MTJlZjMxNWM4
-ZjYuLjAzZDMzYzcxMDYwNCAxMDA2NDQNCj4gLS0tIGEvRG9jdW1lbnRhdGlvbi90cmFuc2xhdGlv
-bnMvemhfQ04vYWRtaW4tZ3VpZGUvbW0vZGFtb24vbHJ1X3NvcnQucnN0DQo+ICsrKyBiL0RvY3Vt
-ZW50YXRpb24vdHJhbnNsYXRpb25zL3poX0NOL2FkbWluLWd1aWRlL21tL2RhbW9uL2xydV9zb3J0
-LnJzdA0KPiBAQCAtMjUwLDcgKzI1MCw3IEBAIExSVeeahOS8mOWFiOe6p+eahOaPkOWNh++8jOWQ
-jOaXtumZjeS9jumCo+S6m+i2hei/hzEyMOenkuaXoOS6uuiuv+mXrueahOWGheWtmA0KPiAg55CG
-6KKr6ZmQ5Yi25Zyo5pyA5aSaMSXnmoRDUFXku6Xpgb/lhY1EQU1PTl9MUlVfU09SVOa2iOi0uei/
-h+WkmkNQVeaXtumXtOOAguWcqOezu+e7n+epuumXsuWGheWtmOi2hei/hzUwJQ0KPiAg5pe2REFN
-T05fTFJVX1NPUlTlgZzmraLlt6XkvZzvvIzlubblnKjkvY7kuo40MCXml7bph43mlrDlvIDlp4vl
-t6XkvZzjgILlpoLmnpxEQU1PTl9SRUNMQUlN5rKh5pyJ5Y+W5b6XDQo+ICDov5vlsZXkuJTnqbrp
-l7LlhoXlrZjkvY7kuo4yMCXvvIzlho3mrKHorqlEQU1PTl9MUlVfU09SVOWBnOatouW3peS9nO+8
-jOS7peatpOWbnumAgOWIsOS7pUxSVemTvuihqOS4uuWfuuehgA0KPiAt5Lul6aG16Z2i5Li65Y2V
-5L2N55qE5YaF5a2Y5Zue5pS25LiK44CCDQo+ICvku6XpobXpnaLkuLrljZXkvY3nmoTlhoXlrZjl
-m57mlLbkuIrjgIIgOjoNCj4NCj4gICAgICAjIGNkIC9zeXMvbW9kdWxlcy9kYW1vbl9scnVfc29y
-dC9wYXJhbWV0ZXJzDQo+ICAgICAgIyBlY2hvIDUwMCA+IGhvdF90aHJlc19hY2Nlc3NfZnJlcQ0K
-PiAtLQ0KPiAyLjE3LjENCj4NCg==
+Introduction of Coresight Dummy subunit
+The Coresight Dummy subunit is for Coresight Dummy component, there are some
+specific Coresight devices that HLOS don't have permission to access. Such as
+some TPDMs, they would be configured in NON-HLOS side, but it's necessary to
+build Coresight path for it to debug. So there need driver to register dummy
+devices as Coresight devices.
+
+Commit link:
+https://git.codelinaro.org/clo/linux-kernel/coresight/-/tree/coresight-dummy
+
+Hao Zhang (3):
+  Coresight: Add coresight dummy driver
+  dt-bindings: arm: Add Coresight Dummy Trace YAML schema
+  Documentation: trace: Add documentation for Coresight Dummy Trace
+
+ .../bindings/arm/qcom,coresight-dummy.yaml    | 129 +++++++++++++
+ .../trace/coresight/coresight-dummy.rst       |  58 ++++++
+ drivers/hwtracing/coresight/Kconfig           |  11 ++
+ drivers/hwtracing/coresight/Makefile          |   1 +
+ drivers/hwtracing/coresight/coresight-dummy.c | 176 ++++++++++++++++++
+ 5 files changed, 375 insertions(+)
+ create mode 100644 Documentation/devicetree/bindings/arm/qcom,coresight-dummy.yaml
+ create mode 100644 Documentation/trace/coresight/coresight-dummy.rst
+ create mode 100644 drivers/hwtracing/coresight/coresight-dummy.c
+
+-- 
+2.17.1
+
