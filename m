@@ -2,58 +2,61 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 2542E6BD2DD
-	for <lists+linux-doc@lfdr.de>; Thu, 16 Mar 2023 16:01:47 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id D50516BD2F5
+	for <lists+linux-doc@lfdr.de>; Thu, 16 Mar 2023 16:10:35 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S229732AbjCPPBq (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 16 Mar 2023 11:01:46 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:48904 "EHLO
+        id S229629AbjCPPKE (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 16 Mar 2023 11:10:04 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:60430 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S229887AbjCPPBp (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Thu, 16 Mar 2023 11:01:45 -0400
-Received: from ms.lwn.net (ms.lwn.net [IPv6:2600:3c01:e000:3a1::42])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 2BB73A677D;
-        Thu, 16 Mar 2023 08:01:44 -0700 (PDT)
-Received: from localhost (unknown [IPv6:2601:281:8300:73::5f6])
-        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
-        (No client certificate requested)
-        by ms.lwn.net (Postfix) with ESMTPSA id B79677F9;
-        Thu, 16 Mar 2023 15:01:42 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 ms.lwn.net B79677F9
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=lwn.net; s=20201203;
-        t=1678978902; bh=r39TXwfU5ibGFuKiz/lz+KdHlMI9MyKXbnGhJMSGF1M=;
-        h=From:To:Cc:Subject:In-Reply-To:References:Date:From;
-        b=L4L3rXRDLOAp7CVaoBWzIX3EBahBUumiMc5w43E3HgEauZKiCf3eEeCSntKeq6qgb
-         1wn/0REJuJKKDjOZSvBatI+15qArXYXWMBXtGgwJp/SCRQdF8uaIqeJhmgwROuqPuK
-         iW6JsDBStQMw3E15v4+847HjLjbkrGhbnKMAj+Gla1fYCTdWrQs//SEmc2ydYziDEe
-         aGNPcIQO30Uz9n2ULV7mBxyp86jDiWwnV+Cc/HMSkV2gfLPioPWmRF6+KiLM5weGDH
-         NUUAU++L7+sCUqPMorohSI2g4/stmIsjso58rva/Ki5zs10ZM900oXudvaXRcIQxhs
-         MywgA/TBZFxeg==
-From:   Jonathan Corbet <corbet@lwn.net>
-To:     Theodore Ts'o <tytso@mit.edu>, Greg KH <gregkh@linuxfoundation.org>
-Cc:     Krzysztof Kozlowski <krzysztof.kozlowski@linaro.org>,
-        Bagas Sanjaya <bagasdotme@gmail.com>,
-        Linux Documentation <linux-doc@vger.kernel.org>,
-        Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
-        Linux Outreachy <outreachy@lists.linux.dev>,
-        Thorsten Leemhuis <linux@leemhuis.info>,
-        Lukas Bulwahn <lukas.bulwahn@gmail.com>,
-        Akira Yokosawa <akiyks@gmail.com>,
-        Alison Schofield <alison.schofield@intel.com>,
-        Kloudifold <cloudifold.3125@gmail.com>,
-        Sudip Mukherjee <sudipm.mukherjee@gmail.com>
-Subject: Re: [PATCH] Documentation: submitting-patches: Disqualify style
- fixes from Fixes: tag
-In-Reply-To: <20230316145503.GN860405@mit.edu>
-References: <20230316082034.14191-1-bagasdotme@gmail.com>
- <fe15da9c-d03f-ccc3-ea6a-2b6401496aad@linaro.org>
- <ZBLSrXrxrV4dRjak@kroah.com> <20230316145503.GN860405@mit.edu>
-Date:   Thu, 16 Mar 2023 09:01:41 -0600
-Message-ID: <87zg8cn3je.fsf@meer.lwn.net>
+        with ESMTP id S231386AbjCPPJz (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Thu, 16 Mar 2023 11:09:55 -0400
+Received: from mga09.intel.com (mga09.intel.com [134.134.136.24])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 898173252C
+        for <linux-doc@vger.kernel.org>; Thu, 16 Mar 2023 08:09:54 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1678979394; x=1710515394;
+  h=date:from:to:cc:subject:message-id:mime-version;
+  bh=eOV/ldQx3xWA9S+utd9+eO0S2mmhiPUV0nhprHPp4bM=;
+  b=H0SdlfK4cHqY0gWlHghUvm/jpxL7ngRnloiaimWVHu6uVncVR+wnuewc
+   Y15CmxDPCMsTz/aAnESD6Ab4RpSbDEprBWWZsiF05XfjNdF/MNbU16sDm
+   Cy31wJNQZnAZpg+jHQvVUKIEpZiKPpa9Xtxb631MS5MOyzX37DGblpsYp
+   i7kdCKf2C/e4zlkCwmeNrhRDYwZPd6DuWCWvj9isIbOTFeASYRkfAj42k
+   zMOeKCztf8Fp/i1sbI3sOU2EIklaH4xp8dCfUp+jgeJSwJ3oBxFMAcB1Z
+   mEF3eYxhpY7ZIk3Apx95qxmbpzWRg1+qI1HxUwKA5hJtiMQkVlKI34qKm
+   Q==;
+X-IronPort-AV: E=McAfee;i="6600,9927,10651"; a="339561204"
+X-IronPort-AV: E=Sophos;i="5.98,265,1673942400"; 
+   d="scan'208";a="339561204"
+Received: from orsmga002.jf.intel.com ([10.7.209.21])
+  by orsmga102.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 16 Mar 2023 08:09:34 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=McAfee;i="6600,9927,10651"; a="679930012"
+X-IronPort-AV: E=Sophos;i="5.98,265,1673942400"; 
+   d="scan'208";a="679930012"
+Received: from lkp-server01.sh.intel.com (HELO b613635ddfff) ([10.239.97.150])
+  by orsmga002.jf.intel.com with ESMTP; 16 Mar 2023 08:09:33 -0700
+Received: from kbuild by b613635ddfff with local (Exim 4.96)
+        (envelope-from <lkp@intel.com>)
+        id 1pcpES-0008as-2b;
+        Thu, 16 Mar 2023 15:09:32 +0000
+Date:   Thu, 16 Mar 2023 23:09:08 +0800
+From:   kernel test robot <lkp@intel.com>
+To:     Alexey Dobriyan <adobriyan@gmail.com>
+Cc:     oe-kbuild-all@lists.linux.dev,
+        Andrew Morton <akpm@linux-foundation.org>,
+        Linux Memory Management List <linux-mm@kvack.org>,
+        linux-doc@vger.kernel.org
+Subject: [akpm-mm:mm-nonmm-unstable 23/26] htmldocs:
+ Documentation/ELF/ELF.rst: WARNING: document isn't included in any toctree
+Message-ID: <202303162342.blXLNoBi-lkp@intel.com>
 MIME-Version: 1.0
-Content-Type: text/plain
-X-Spam-Status: No, score=-2.1 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,SPF_HELO_NONE,SPF_PASS
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+X-Spam-Status: No, score=-4.4 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_MED,
+        RCVD_IN_MSPIKE_H3,RCVD_IN_MSPIKE_WL,SPF_HELO_NONE,SPF_NONE
         autolearn=ham autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
@@ -61,25 +64,26 @@ Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-"Theodore Ts'o" <tytso@mit.edu> writes:
+tree:   https://git.kernel.org/pub/scm/linux/kernel/git/akpm/mm.git mm-nonmm-unstable
+head:   ad1ba07b8ea42d34d4b48e960bae2ecb35d95bba
+commit: 60b38b7cbb295d7914ca4a6e6cbe1f32b234c830 [23/26] ELF: document some de-facto PT_* ABI quirks
+reproduce:
+        # https://git.kernel.org/pub/scm/linux/kernel/git/akpm/mm.git/commit/?id=60b38b7cbb295d7914ca4a6e6cbe1f32b234c830
+        git remote add akpm-mm https://git.kernel.org/pub/scm/linux/kernel/git/akpm/mm.git
+        git fetch --no-tags akpm-mm mm-nonmm-unstable
+        git checkout 60b38b7cbb295d7914ca4a6e6cbe1f32b234c830
+        make menuconfig
+        # enable CONFIG_COMPILE_TEST, CONFIG_WARN_MISSING_DOCUMENTS, CONFIG_WARN_ABI_ERRORS
+        make htmldocs
 
-> On Thu, Mar 16, 2023 at 09:26:21AM +0100, Greg KH wrote:
->> > Coding style is not a bug, but that's obvious.
->> 
->> I agree, let's not make this file even longer than it is if at all
->> possible.
->>
->
-> I've actually been wondering if there is some way to split the file
-> since it's quite large already.  It's been unclear to me whether that
-> would make it easier or harder to find stuff though.  :-/
+If you fix the issue, kindly add following tag where applicable
+| Reported-by: kernel test robot <lkp@intel.com>
+| Link: https://lore.kernel.org/oe-kbuild-all/202303162342.blXLNoBi-lkp@intel.com/
 
-I made a pass over it a few years ago and managed to shorten it a fair
-amount, but it clearly still needs attention.  This is one of our most
-important and heavily referenced documents, and it would be nice if
-newcomers didn't feel like they were being asked to read a version of
-War and Peace written by Kafka before they can contribute.
+All warnings (new ones prefixed by >>):
 
-I'll try to find time to think about this some.
+>> Documentation/ELF/ELF.rst: WARNING: document isn't included in any toctree
 
-jon
+-- 
+0-DAY CI Kernel Test Service
+https://github.com/intel/lkp-tests
