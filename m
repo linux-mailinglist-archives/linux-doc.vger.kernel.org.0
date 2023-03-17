@@ -2,528 +2,511 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 762DB6BED0D
-	for <lists+linux-doc@lfdr.de>; Fri, 17 Mar 2023 16:33:37 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id BDF8C6BEC8A
+	for <lists+linux-doc@lfdr.de>; Fri, 17 Mar 2023 16:10:02 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S230274AbjCQPdf (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Fri, 17 Mar 2023 11:33:35 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:39958 "EHLO
+        id S230188AbjCQPKB (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Fri, 17 Mar 2023 11:10:01 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:56094 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S230212AbjCQPde (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Fri, 17 Mar 2023 11:33:34 -0400
-Received: from frasgout12.his.huawei.com (frasgout12.his.huawei.com [14.137.139.154])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 594C0C3CEB;
-        Fri, 17 Mar 2023 08:33:04 -0700 (PDT)
-Received: from mail02.huawei.com (unknown [172.18.147.228])
-        by frasgout12.his.huawei.com (SkyGuard) with ESMTP id 4PdRkC08qjz9xGYt;
-        Fri, 17 Mar 2023 22:45:07 +0800 (CST)
-Received: from huaweicloud.com (unknown [10.204.63.22])
-        by APP2 (Coremail) with SMTP id GxC2BwBnOWDafhRkaQemAQ--.41316S6;
-        Fri, 17 Mar 2023 15:54:17 +0100 (CET)
-From:   Roberto Sassu <roberto.sassu@huaweicloud.com>
-To:     corbet@lwn.net, ast@kernel.org, daniel@iogearbox.net,
-        andrii@kernel.org, martin.lau@linux.dev, song@kernel.org,
-        yhs@fb.com, john.fastabend@gmail.com, kpsingh@kernel.org,
-        sdf@google.com, haoluo@google.com, jolsa@kernel.org,
-        davem@davemloft.net, edumazet@google.com, kuba@kernel.org,
-        pabeni@redhat.com, dsahern@kernel.org, shuah@kernel.org,
-        brauner@kernel.org
-Cc:     linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
-        bpf@vger.kernel.org, netdev@vger.kernel.org,
-        linux-kselftest@vger.kernel.org, ebiederm@xmission.com,
-        mcgrof@kernel.org, Roberto Sassu <roberto.sassu@huawei.com>
-Subject: [PATCH 4/5] selftests/umd_mgmt: Add selftests for UMD management library
-Date:   Fri, 17 Mar 2023 15:52:39 +0100
-Message-Id: <20230317145240.363908-5-roberto.sassu@huaweicloud.com>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20230317145240.363908-1-roberto.sassu@huaweicloud.com>
-References: <20230317145240.363908-1-roberto.sassu@huaweicloud.com>
+        with ESMTP id S231491AbjCQPJo (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Fri, 17 Mar 2023 11:09:44 -0400
+Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.129.124])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id DAE5E3A4ED
+        for <linux-doc@vger.kernel.org>; Fri, 17 Mar 2023 08:08:37 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+        s=mimecast20190719; t=1679065659;
+        h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+         to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+         content-transfer-encoding:content-transfer-encoding:
+         in-reply-to:in-reply-to:references:references;
+        bh=dZJU/fEEhuF9U7cN3pXMxhADcyk4jZbjIzMqrS3FEvI=;
+        b=E5D+8RihUkEyViBUzQeL5QUyLjBkt8Zj7pdRq6FqpKPGYq57MXYTcosQNoQ+Jk9EaQRnlA
+        YY+g5oQeTWNxgAE95sJ2XDbZqpchUUQP4E3wl0IXYKC21HlofMS1bvgs60os5ceq9Or3XV
+        QmtRlQ4gcSNxtQH4b+X2nZl+LJ/vub0=
+Received: from mail-lf1-f70.google.com (mail-lf1-f70.google.com
+ [209.85.167.70]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-313-qAh2I1ATOgqpZk5Ki96naw-1; Fri, 17 Mar 2023 11:07:37 -0400
+X-MC-Unique: qAh2I1ATOgqpZk5Ki96naw-1
+Received: by mail-lf1-f70.google.com with SMTP id p8-20020a056512234800b004dda0f69233so2144179lfu.13
+        for <linux-doc@vger.kernel.org>; Fri, 17 Mar 2023 08:07:37 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112; t=1679065656;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=dZJU/fEEhuF9U7cN3pXMxhADcyk4jZbjIzMqrS3FEvI=;
+        b=iinid8Bqr7WqNEFqBEvff8OuZiaxkjTi5TZ5+VTfrHLw9PPw5M6lzvPOw6oLQbElLN
+         9Z1iYaIsVs9kk9rAjd4kMGFdx+kuQqZivE1Fa3yjy83wVSXniIwxxvh//e70puak8lO+
+         +fuPvLFSRiv1yZHE+4TSQshmPvyww9bPbpSroR5nzQsMojs2P+HnGRT3FoPm+Z3gd8sp
+         /nRlqPrGl9R4RsDAS4RG77v3bKhNApe8nI+fnRD/U+PHkHDvBmjzkyZW276Vi6/Tz4/y
+         y3TI8lHs5Md1EnujZr3cAe5awY2jbuT6dzGCYsoWV/lMx3yeHOQcoAQEF4iFAwraoZtI
+         3QBA==
+X-Gm-Message-State: AO0yUKXnmgQQbZ/aE9PKikmqngZS98hZ8a3aZTs5Evv4vaOIFVaCHrtB
+        NocFZixgLuez+4Fi5XB+DKkplbqPN2vmJR1ozM5jsUGRXv3Xpe2dVaWKEJFLGLQx9DKaNjkBWtM
+        +BzJeepkG8Lx8hj0bmu00zWIME9gklR+O+9+q
+X-Received: by 2002:a19:7009:0:b0:4e8:6261:58c2 with SMTP id h9-20020a197009000000b004e8626158c2mr2512602lfc.7.1679065655841;
+        Fri, 17 Mar 2023 08:07:35 -0700 (PDT)
+X-Google-Smtp-Source: AK7set+POVytsQS+rqGfWtdW6NULVr/TzxdPfoGfV6mMYr/se72Yd56lLKlYCXbQVCqj+CxKQBv2WyI4dF0EWqFSczU=
+X-Received: by 2002:a19:7009:0:b0:4e8:6261:58c2 with SMTP id
+ h9-20020a197009000000b004e8626158c2mr2512585lfc.7.1679065655381; Fri, 17 Mar
+ 2023 08:07:35 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-CM-TRANSID: GxC2BwBnOWDafhRkaQemAQ--.41316S6
-X-Coremail-Antispam: 1UD129KBjvAXoWfXr17tr4rXF4UGw1kAFyUAwb_yoW8JFyfuo
-        ZxGrs8Wr409347Aw13Wr4xJrWxW393KF17JF1rW3yrJF9rAayYkryUCw13Zr4Svr4rZa40
-        vF1qva1xJayrXr1kn29KB7ZKAUJUUUU8529EdanIXcx71UUUUU7v73VFW2AGmfu7bjvjm3
-        AaLaJ3UjIYCTnIWjp_UUUOo7kC6x804xWl14x267AKxVWrJVCq3wAFc2x0x2IEx4CE42xK
-        8VAvwI8IcIk0rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2048vs2IY020E87I2jVAFwI0_JF
-        0E3s1l82xGYIkIc2x26xkF7I0E14v26ryj6s0DM28lY4IEw2IIxxk0rwA2F7IY1VAKz4vE
-        j48ve4kI8wA2z4x0Y4vE2Ix0cI8IcVAFwI0_Jr0_JF4l84ACjcxK6xIIjxv20xvEc7CjxV
-        AFwI0_Gr1j6F4UJwA2z4x0Y4vEx4A2jsIE14v26r4j6F4UM28EF7xvwVC2z280aVCY1x02
-        67AKxVW8Jr0_Cr1UM2AIxVAIcxkEcVAq07x20xvEncxIr21l5I8CrVACY4xI64kE6c02F4
-        0Ex7xfMcIj6xIIjxv20xvE14v26r1j6r18McIj6I8E87Iv67AKxVWUJVW8JwAm72CE4IkC
-        6x0Yz7v_Jr0_Gr1lF7xvr2IYc2Ij64vIr41lFIxGxcIEc7CjxVA2Y2ka0xkIwI1lc7CjxV
-        Aaw2AFwI0_GFv_Wryl42xK82IYc2Ij64vIr41l4I8I3I0E4IkC6x0Yz7v_Jr0_Gr1lx2Iq
-        xVAqx4xG67AKxVWUJVWUGwC20s026x8GjcxK67AKxVWUGVWUWwC2zVAF1VAY17CE14v26r
-        4a6rW5MIIYrxkI7VAKI48JMIIF0xvE2Ix0cI8IcVAFwI0_Jr0_JF4lIxAIcVC0I7IYx2IY
-        6xkF7I0E14v26r4UJVWxJr1lIxAIcVCF04k26cxKx2IYs7xG6r1j6r1xMIIF0xvEx4A2js
-        IE14v26r4j6F4UMIIF0xvEx4A2jsIEc7CjxVAFwI0_Gr1j6F4UJbIYCTnIWIevJa73UjIF
-        yTuYvjxUI-eODUUUU
-X-CM-SenderInfo: purev21wro2thvvxqx5xdzvxpfor3voofrz/1tbiAgATBF1jj4asxgAFsN
-X-CFilter-Loop: Reflected
-X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00,SPF_HELO_NONE,
-        SPF_NONE,URIBL_BLOCKED autolearn=ham autolearn_force=no version=3.4.6
+References: <20230308155322.344664-1-robdclark@gmail.com> <20230308155322.344664-2-robdclark@gmail.com>
+ <ZAtQspuFjPtGy7ze@gmail.com> <CAF6AEGsGOr5+Q10wX=5ttrWCSUJfn7gzHW8QhxFC0GDLgagMHg@mail.gmail.com>
+ <ZBHNvT3BLgS3qvV5@gmail.com> <CAF6AEGu1S2CXzRxV_c5tE_H+XUGiO=n0tXjLZ_u_tW-eMqMsQw@mail.gmail.com>
+ <ZBLg0t0tTVvuPuiJ@gmail.com> <CAF6AEGvV5arZThTyju_=xFFDWRbMaexgO_kkdKZuK-zeCxrN7Q@mail.gmail.com>
+ <CA+hFU4xbssR+=Sf4ia5kPdsSb4y9SQUd4nx_2p1Szcbtna28CA@mail.gmail.com> <CAF6AEGuSaNAQUfbkJf2bt+VMTxYWTf0j0jiJOS6Q-6HfCLnw6Q@mail.gmail.com>
+In-Reply-To: <CAF6AEGuSaNAQUfbkJf2bt+VMTxYWTf0j0jiJOS6Q-6HfCLnw6Q@mail.gmail.com>
+From:   Sebastian Wick <sebastian.wick@redhat.com>
+Date:   Fri, 17 Mar 2023 16:07:24 +0100
+Message-ID: <CA+hFU4xH7C9+KdusqydNF_YxUc8RpN1D_KBi_cD8mMjwpjBO5A@mail.gmail.com>
+Subject: Re: [PATCH v10 01/15] dma-buf/dma-fence: Add deadline awareness
+To:     Rob Clark <robdclark@gmail.com>
+Cc:     =?UTF-8?B?Sm9uYXMgw4VkYWhs?= <jadahl@gmail.com>,
+        Rob Clark <robdclark@chromium.org>,
+        Pekka Paalanen <pekka.paalanen@collabora.com>,
+        Jonathan Corbet <corbet@lwn.net>,
+        =?UTF-8?Q?Christian_K=C3=B6nig?= <ckoenig.leichtzumerken@gmail.com>,
+        intel-gfx@lists.freedesktop.org,
+        "open list:DOCUMENTATION" <linux-doc@vger.kernel.org>,
+        open list <linux-kernel@vger.kernel.org>,
+        dri-devel@lists.freedesktop.org,
+        =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>,
+        "moderated list:DMA BUFFER SHARING FRAMEWORK" 
+        <linaro-mm-sig@lists.linaro.org>,
+        Luben Tuikov <luben.tuikov@amd.com>,
+        Bagas Sanjaya <bagasdotme@gmail.com>,
+        Rodrigo Vivi <rodrigo.vivi@intel.com>,
+        Gustavo Padovan <gustavo@padovan.org>,
+        Matt Turner <mattst88@gmail.com>,
+        freedreno@lists.freedesktop.org,
+        Sumit Semwal <sumit.semwal@linaro.org>,
+        "open list:DMA BUFFER SHARING FRAMEWORK" 
+        <linux-media@vger.kernel.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Spam-Status: No, score=-2.1 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_NONE,
+        RCVD_IN_MSPIKE_H2,SPF_HELO_NONE,SPF_NONE autolearn=ham
+        autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-From: Roberto Sassu <roberto.sassu@huawei.com>
+On Thu, Mar 16, 2023 at 11:59=E2=80=AFPM Rob Clark <robdclark@gmail.com> wr=
+ote:
+>
+> On Thu, Mar 16, 2023 at 3:22=E2=80=AFPM Sebastian Wick
+> <sebastian.wick@redhat.com> wrote:
+> >
+> > On Thu, Mar 16, 2023 at 5:29=E2=80=AFPM Rob Clark <robdclark@gmail.com>=
+ wrote:
+> > >
+> > > On Thu, Mar 16, 2023 at 2:26=E2=80=AFAM Jonas =C3=85dahl <jadahl@gmai=
+l.com> wrote:
+> > > >
+> > > > On Wed, Mar 15, 2023 at 09:19:49AM -0700, Rob Clark wrote:
+> > > > > On Wed, Mar 15, 2023 at 6:53=E2=80=AFAM Jonas =C3=85dahl <jadahl@=
+gmail.com> wrote:
+> > > > > >
+> > > > > > On Fri, Mar 10, 2023 at 09:38:18AM -0800, Rob Clark wrote:
+> > > > > > > On Fri, Mar 10, 2023 at 7:45=E2=80=AFAM Jonas =C3=85dahl <jad=
+ahl@gmail.com> wrote:
+> > > > > > > >
+> > > > > > > > On Wed, Mar 08, 2023 at 07:52:52AM -0800, Rob Clark wrote:
+> > > > > > > > > From: Rob Clark <robdclark@chromium.org>
+> > > > > > > > >
+> > > > > > > > > Add a way to hint to the fence signaler of an upcoming de=
+adline, such as
+> > > > > > > > > vblank, which the fence waiter would prefer not to miss. =
+ This is to aid
+> > > > > > > > > the fence signaler in making power management decisions, =
+like boosting
+> > > > > > > > > frequency as the deadline approaches and awareness of mis=
+sing deadlines
+> > > > > > > > > so that can be factored in to the frequency scaling.
+> > > > > > > > >
+> > > > > > > > > v2: Drop dma_fence::deadline and related logic to filter =
+duplicate
+> > > > > > > > >     deadlines, to avoid increasing dma_fence size.  The f=
+ence-context
+> > > > > > > > >     implementation will need similar logic to track deadl=
+ines of all
+> > > > > > > > >     the fences on the same timeline.  [ckoenig]
+> > > > > > > > > v3: Clarify locking wrt. set_deadline callback
+> > > > > > > > > v4: Clarify in docs comment that this is a hint
+> > > > > > > > > v5: Drop DMA_FENCE_FLAG_HAS_DEADLINE_BIT.
+> > > > > > > > > v6: More docs
+> > > > > > > > > v7: Fix typo, clarify past deadlines
+> > > > > > > > >
+> > > > > > > > > Signed-off-by: Rob Clark <robdclark@chromium.org>
+> > > > > > > > > Reviewed-by: Christian K=C3=B6nig <christian.koenig@amd.c=
+om>
+> > > > > > > > > Acked-by: Pekka Paalanen <pekka.paalanen@collabora.com>
+> > > > > > > > > Reviewed-by: Bagas Sanjaya <bagasdotme@gmail.com>
+> > > > > > > > > ---
+> > > > > > > >
+> > > > > > > > Hi Rob!
+> > > > > > > >
+> > > > > > > > >  Documentation/driver-api/dma-buf.rst |  6 +++
+> > > > > > > > >  drivers/dma-buf/dma-fence.c          | 59 ++++++++++++++=
+++++++++++++++
+> > > > > > > > >  include/linux/dma-fence.h            | 22 +++++++++++
+> > > > > > > > >  3 files changed, 87 insertions(+)
+> > > > > > > > >
+> > > > > > > > > diff --git a/Documentation/driver-api/dma-buf.rst b/Docum=
+entation/driver-api/dma-buf.rst
+> > > > > > > > > index 622b8156d212..183e480d8cea 100644
+> > > > > > > > > --- a/Documentation/driver-api/dma-buf.rst
+> > > > > > > > > +++ b/Documentation/driver-api/dma-buf.rst
+> > > > > > > > > @@ -164,6 +164,12 @@ DMA Fence Signalling Annotations
+> > > > > > > > >  .. kernel-doc:: drivers/dma-buf/dma-fence.c
+> > > > > > > > >     :doc: fence signalling annotation
+> > > > > > > > >
+> > > > > > > > > +DMA Fence Deadline Hints
+> > > > > > > > > +~~~~~~~~~~~~~~~~~~~~~~~~
+> > > > > > > > > +
+> > > > > > > > > +.. kernel-doc:: drivers/dma-buf/dma-fence.c
+> > > > > > > > > +   :doc: deadline hints
+> > > > > > > > > +
+> > > > > > > > >  DMA Fences Functions Reference
+> > > > > > > > >  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+> > > > > > > > >
+> > > > > > > > > diff --git a/drivers/dma-buf/dma-fence.c b/drivers/dma-bu=
+f/dma-fence.c
+> > > > > > > > > index 0de0482cd36e..f177c56269bb 100644
+> > > > > > > > > --- a/drivers/dma-buf/dma-fence.c
+> > > > > > > > > +++ b/drivers/dma-buf/dma-fence.c
+> > > > > > > > > @@ -912,6 +912,65 @@ dma_fence_wait_any_timeout(struct dm=
+a_fence **fences, uint32_t count,
+> > > > > > > > >  }
+> > > > > > > > >  EXPORT_SYMBOL(dma_fence_wait_any_timeout);
+> > > > > > > > >
+> > > > > > > > > +/**
+> > > > > > > > > + * DOC: deadline hints
+> > > > > > > > > + *
+> > > > > > > > > + * In an ideal world, it would be possible to pipeline a=
+ workload sufficiently
+> > > > > > > > > + * that a utilization based device frequency governor co=
+uld arrive at a minimum
+> > > > > > > > > + * frequency that meets the requirements of the use-case=
+, in order to minimize
+> > > > > > > > > + * power consumption.  But in the real world there are m=
+any workloads which
+> > > > > > > > > + * defy this ideal.  For example, but not limited to:
+> > > > > > > > > + *
+> > > > > > > > > + * * Workloads that ping-pong between device and CPU, wi=
+th alternating periods
+> > > > > > > > > + *   of CPU waiting for device, and device waiting on CP=
+U.  This can result in
+> > > > > > > > > + *   devfreq and cpufreq seeing idle time in their respe=
+ctive domains and in
+> > > > > > > > > + *   result reduce frequency.
+> > > > > > > > > + *
+> > > > > > > > > + * * Workloads that interact with a periodic time based =
+deadline, such as double
+> > > > > > > > > + *   buffered GPU rendering vs vblank sync'd page flippi=
+ng.  In this scenario,
+> > > > > > > > > + *   missing a vblank deadline results in an *increase* =
+in idle time on the GPU
+> > > > > > > > > + *   (since it has to wait an additional vblank period),=
+ sending a signal to
+> > > > > > > > > + *   the GPU's devfreq to reduce frequency, when in fact=
+ the opposite is what is
+> > > > > > > > > + *   needed.
+> > > > > > > >
+> > > > > > > > This is the use case I'd like to get some better understand=
+ing about how
+> > > > > > > > this series intends to work, as the problematic scheduling =
+behavior
+> > > > > > > > triggered by missed deadlines has plagued compositing displ=
+ay servers
+> > > > > > > > for a long time.
+> > > > > > > >
+> > > > > > > > I apologize, I'm not a GPU driver developer, nor an OpenGL =
+driver
+> > > > > > > > developer, so I will need some hand holding when it comes t=
+o
+> > > > > > > > understanding exactly what piece of software is responsible=
+ for
+> > > > > > > > communicating what piece of information.
+> > > > > > > >
+> > > > > > > > > + *
+> > > > > > > > > + * To this end, deadline hint(s) can be set on a &dma_fe=
+nce via &dma_fence_set_deadline.
+> > > > > > > > > + * The deadline hint provides a way for the waiting driv=
+er, or userspace, to
+> > > > > > > > > + * convey an appropriate sense of urgency to the signali=
+ng driver.
+> > > > > > > > > + *
+> > > > > > > > > + * A deadline hint is given in absolute ktime (CLOCK_MON=
+OTONIC for userspace
+> > > > > > > > > + * facing APIs).  The time could either be some point in=
+ the future (such as
+> > > > > > > > > + * the vblank based deadline for page-flipping, or the s=
+tart of a compositor's
+> > > > > > > > > + * composition cycle), or the current time to indicate a=
+n immediate deadline
+> > > > > > > > > + * hint (Ie. forward progress cannot be made until this =
+fence is signaled).
+> > > > > > > >
+> > > > > > > > Is it guaranteed that a GPU driver will use the actual star=
+t of the
+> > > > > > > > vblank as the effective deadline? I have some memories of s=
+eing
+> > > > > > > > something about vblank evasion browsing driver code, which =
+I might have
+> > > > > > > > misunderstood, but I have yet to find whether this is somet=
+hing
+> > > > > > > > userspace can actually expect to be something it can rely o=
+n.
+> > > > > > >
+> > > > > > > I guess you mean s/GPU driver/display driver/ ?  It makes thi=
+ngs more
+> > > > > > > clear if we talk about them separately even if they happen to=
+ be the
+> > > > > > > same device.
+> > > > > >
+> > > > > > Sure, sorry about being unclear about that.
+> > > > > >
+> > > > > > >
+> > > > > > > Assuming that is what you mean, nothing strongly defines what=
+ the
+> > > > > > > deadline is.  In practice there is probably some buffering in=
+ the
+> > > > > > > display controller.  For ex, block based (including bandwidth
+> > > > > > > compressed) formats, you need to buffer up a row of blocks to
+> > > > > > > efficiently linearize for scanout.  So you probably need to l=
+atch some
+> > > > > > > time before you start sending pixel data to the display.  But=
+ details
+> > > > > > > like this are heavily implementation dependent.  I think the =
+most
+> > > > > > > reasonable thing to target is start of vblank.
+> > > > > >
+> > > > > > The driver exposing those details would be quite useful for use=
+rspace
+> > > > > > though, so that it can delay committing updates to late, but no=
+t too
+> > > > > > late. Setting a deadline to be the vblank seems easy enough, bu=
+t it
+> > > > > > isn't enough for scheduling the actual commit.
+> > > > >
+> > > > > I'm not entirely sure how that would even work.. but OTOH I think=
+ you
+> > > > > are talking about something on the order of 100us?  But that is a=
+ bit
+> > > > > of another topic.
+> > > >
+> > > > Yes, something like that. But yea, it's not really related. Schedul=
+ing
+> > > > commits closer to the deadline has more complex behavior than that =
+too,
+> > > > e.g. the need for real time scheduling, and knowing how long it usu=
+ally
+> > > > takes to create and commit and for the kernel to process.
+> >
+> > Vblank can be really long, especially with VRR where the additional
+> > time you get to finish the frame comes from making vblank longer.
+> > Using the start of vblank as a deadline makes VRR useless. It really
+> > would be nice to have some feedback about the actual deadline from the
+> > kernel, maybe in `struct drm_event_vblank`.
+>
+> note that here we are only talking about the difference between
+> start/end of vblank and the deadline for the hw to latch a change for
+> the next frame.  (Which I _expect_ generally amounts to however long
+> it takes to slurp in a row of tiles)
+>
+> > But yes, sorry, off topic...
+> >
+> > > > >
+> > > >
+> > > > 8-< *snip* 8-<
+> > > >
+> > > > > > >
+> > > > > > > You need a fence to set the deadline, and for that work needs=
+ to be
+> > > > > > > flushed.  But you can't associate a deadline with work that t=
+he kernel
+> > > > > > > is unaware of anyways.
+> > > > > >
+> > > > > > That makes sense, but it might also a bit inadequate to have it=
+ as the
+> > > > > > only way to tell the kernel it should speed things up. Even wit=
+h the
+> > > > > > trick i915 does, with GNOME Shell, we still end up with the fee=
+dback
+> > > > > > loop this series aims to mitigate. Doing triple buffering, i.e.=
+ delaying
+> > > > > > or dropping the first frame is so far the best work around that=
+ works,
+> > > > > > except doing other tricks that makes the kernel to ramp up its =
+clock.
+> > > > > > Having to rely on choosing between latency and frame drops shou=
+ld
+> > > > > > ideally not have to be made.
+> > > > >
+> > > > > Before you have a fence, the thing you want to be speeding up is =
+the
+> > > > > CPU, not the GPU.  There are existing mechanisms for that.
+> > > >
+> > > > Is there no benefit to let the GPU know earlier that it should spee=
+d up,
+> > > > so that when the job queue arrives, it's already up to speed?
+> > >
+> > > Downstream we have input notifier that resumes the GPU so we can
+> > > pipeline the 1-2ms it takes to boot up the GPU with userspace.  But w=
+e
+> > > wait to boost freq until we have cmdstream to submit, since that
+> > > doesn't take as long.  What needs help initially after input is all
+> > > the stuff that happens on the CPU before the GPU can start to do
+> > > anything ;-)
+> > >
+> > > Btw, I guess I haven't made this clear, dma-fence deadline is trying
+> > > to help the steady-state situation, rather than the input-latency
+> > > situation.  It might take a frame or two of missed deadlines for
+> > > gpufreq to arrive at a good steady-state freq.
+> >
+> > The mutter issue also is about a suboptimal steady-state.
+> >
+> > Truth be told, I'm not sure if this fence deadline idea fixes the
+> > issue we're seeing or at least helps sometimes. It might, it might
+> > not. What annoys me is that the compositor *knows* before any work is
+> > submitted that some work will be submitted and when it has to finish.
+> > We could maximize the chances to get everything right but having to
+> > wait for a fence to materialize in the compositor to do anything about
+> > it is suboptimal.
+>
+> Why would the app not immediately send the fence+buf to the compositor
+> as soon as it is submitted to the kernel on client process side?
 
-Introduce a simple UMD driver using the management library, for testing
-purposes.
+Some apps just are not good at this. Reading back work from the GPU,
+taking a lot of CPU time to create the GPU work, etc.
 
-UMD Manager: sample_mgr.c
-UMD Loader: sample_loader.c
-UMD Handler: sample_handler.c
+The other obvious offender: frame callbacks. Committing a buffer only
+happens after receiving a frame callback in FIFO/vsync mode which we
+try to schedule as close to the deadline as possible.
 
-The UMD Manager exposes /sys/kernel/security/sample_umd and accepts an
-offset between 0-128K. It invokes the UMD Loader to start the UMD Handler
-and passes to the latter the offset at which it sets the byte of the
-response buffer to 1. The UMD Manager verifies that and returns the number
-of bytes written on success, a negative value on failure.
+The idea that the clients are able to submit all GPU work some time
+early, then immediately commit to show up in the compositor well
+before the deadline is very idealized. We're trying to get there but
+we also only have control over the WSI so bad apps will still be bad
+apps.
 
-Signed-off-by: Roberto Sassu <roberto.sassu@huawei.com>
----
- MAINTAINERS                                   |   1 +
- tools/testing/selftests/Makefile              |   1 +
- tools/testing/selftests/umd_mgmt/.gitignore   |   1 +
- tools/testing/selftests/umd_mgmt/Makefile     |  14 ++
- tools/testing/selftests/umd_mgmt/config       |   1 +
- .../selftests/umd_mgmt/sample_umd/Makefile    |  22 ++++
- .../selftests/umd_mgmt/sample_umd/msgfmt.h    |  13 ++
- .../umd_mgmt/sample_umd/sample_binary_blob.S  |   7 +
- .../umd_mgmt/sample_umd/sample_handler.c      |  81 ++++++++++++
- .../umd_mgmt/sample_umd/sample_loader.c       |  28 ++++
- .../umd_mgmt/sample_umd/sample_mgr.c          | 124 ++++++++++++++++++
- tools/testing/selftests/umd_mgmt/umd_mgmt.sh  |  40 ++++++
- 12 files changed, 333 insertions(+)
- create mode 100644 tools/testing/selftests/umd_mgmt/.gitignore
- create mode 100644 tools/testing/selftests/umd_mgmt/Makefile
- create mode 100644 tools/testing/selftests/umd_mgmt/config
- create mode 100644 tools/testing/selftests/umd_mgmt/sample_umd/Makefile
- create mode 100644 tools/testing/selftests/umd_mgmt/sample_umd/msgfmt.h
- create mode 100644 tools/testing/selftests/umd_mgmt/sample_umd/sample_binary_blob.S
- create mode 100644 tools/testing/selftests/umd_mgmt/sample_umd/sample_handler.c
- create mode 100644 tools/testing/selftests/umd_mgmt/sample_umd/sample_loader.c
- create mode 100644 tools/testing/selftests/umd_mgmt/sample_umd/sample_mgr.c
- create mode 100755 tools/testing/selftests/umd_mgmt/umd_mgmt.sh
+> At any rate, it really doesn't matter how early the kernel finds out
+> about the deadline, since the point is to let the kernel driver know
+> if it is missing the deadline so that it doesn't mis-interpret stall
+> time waiting for the _next_ vblank after the one we wanted.
 
-diff --git a/MAINTAINERS b/MAINTAINERS
-index 7b27435fd20..a0cd161843e 100644
---- a/MAINTAINERS
-+++ b/MAINTAINERS
-@@ -11251,6 +11251,7 @@ L:	linux-kernel@vger.kernel.org
- S:	Maintained
- F:	include/linux/usermode_driver_mgmt.h
- F:	kernel/usermode_driver_mgmt.c
-+F:	tools/testing/selftests/umd_mgmt/*
- 
- KERNEL VIRTUAL MACHINE (KVM)
- M:	Paolo Bonzini <pbonzini@redhat.com>
-diff --git a/tools/testing/selftests/Makefile b/tools/testing/selftests/Makefile
-index 13a6837a0c6..84202d5b4fb 100644
---- a/tools/testing/selftests/Makefile
-+++ b/tools/testing/selftests/Makefile
-@@ -84,6 +84,7 @@ TARGETS += timers
- endif
- TARGETS += tmpfs
- TARGETS += tpm2
-+TARGETS += umd_mgmt
- TARGETS += user
- TARGETS += vDSO
- TARGETS += mm
-diff --git a/tools/testing/selftests/umd_mgmt/.gitignore b/tools/testing/selftests/umd_mgmt/.gitignore
-new file mode 100644
-index 00000000000..215c17d13e9
---- /dev/null
-+++ b/tools/testing/selftests/umd_mgmt/.gitignore
-@@ -0,0 +1 @@
-+/sample_umd/sample_umh
-diff --git a/tools/testing/selftests/umd_mgmt/Makefile b/tools/testing/selftests/umd_mgmt/Makefile
-new file mode 100644
-index 00000000000..f1d47eec04e
---- /dev/null
-+++ b/tools/testing/selftests/umd_mgmt/Makefile
-@@ -0,0 +1,14 @@
-+# SPDX-License-Identifier: GPL-2.0
-+TEST_GEN_PROGS_EXTENDED = sample_umd.ko
-+
-+$(OUTPUT)/%.ko: $(wildcard sample_umd/Makefile sample_umd/*.[ch])
-+	$(call msg,MOD,,$@)
-+	$(Q)$(MAKE) -C sample_umd install
-+
-+OVERRIDE_TARGETS := 1
-+override define CLEAN
-+	$(call msg,CLEAN)
-+	$(Q)$(MAKE) -C sample_umd clean
-+endef
-+
-+include ../lib.mk
-diff --git a/tools/testing/selftests/umd_mgmt/config b/tools/testing/selftests/umd_mgmt/config
-new file mode 100644
-index 00000000000..71a078a3ac0
---- /dev/null
-+++ b/tools/testing/selftests/umd_mgmt/config
-@@ -0,0 +1 @@
-+CONFIG_BPFILTER=y
-diff --git a/tools/testing/selftests/umd_mgmt/sample_umd/Makefile b/tools/testing/selftests/umd_mgmt/sample_umd/Makefile
-new file mode 100644
-index 00000000000..6d950e05f3d
---- /dev/null
-+++ b/tools/testing/selftests/umd_mgmt/sample_umd/Makefile
-@@ -0,0 +1,22 @@
-+KDIR ?= ../../../../..
-+
-+userprogs := sample_umh
-+sample_umh-objs := sample_handler.o
-+userccflags += -I $(srctree)
-+
-+$(obj)/sample_binary_blob.o: $(obj)/sample_umh
-+
-+MODULES = sample_loader_kmod.ko sample_mgr.ko
-+
-+obj-m += sample_loader_kmod.o sample_mgr.o
-+
-+sample_loader_kmod-objs = sample_loader.o sample_binary_blob.o
-+
-+all:
-+	+$(Q)$(MAKE) -C $(KDIR) M=$$PWD modules
-+
-+clean:
-+	+$(Q)$(MAKE) -C $(KDIR) M=$$PWD clean
-+
-+install: all
-+	+$(Q)$(MAKE) -C $(KDIR) M=$$PWD modules_install
-diff --git a/tools/testing/selftests/umd_mgmt/sample_umd/msgfmt.h b/tools/testing/selftests/umd_mgmt/sample_umd/msgfmt.h
-new file mode 100644
-index 00000000000..34a62d72cde
---- /dev/null
-+++ b/tools/testing/selftests/umd_mgmt/sample_umd/msgfmt.h
-@@ -0,0 +1,13 @@
-+/* SPDX-License-Identifier: GPL-2.0 */
-+#ifndef _SAMPLE_UMH_MSGFMT_H
-+#define _SAMPLE_UMH_MSGFMT_H
-+
-+struct sample_request {
-+	uint32_t offset;
-+};
-+
-+struct sample_reply {
-+	uint8_t data[128 * 1024];
-+};
-+
-+#endif
-diff --git a/tools/testing/selftests/umd_mgmt/sample_umd/sample_binary_blob.S b/tools/testing/selftests/umd_mgmt/sample_umd/sample_binary_blob.S
-new file mode 100644
-index 00000000000..3687dd13973
---- /dev/null
-+++ b/tools/testing/selftests/umd_mgmt/sample_umd/sample_binary_blob.S
-@@ -0,0 +1,7 @@
-+/* SPDX-License-Identifier: GPL-2.0 */
-+	.section .init.rodata, "a"
-+	.global sample_umh_start
-+sample_umh_start:
-+	.incbin "tools/testing/selftests/umd_mgmt/sample_umd/sample_umh"
-+	.global sample_umh_end
-+sample_umh_end:
-diff --git a/tools/testing/selftests/umd_mgmt/sample_umd/sample_handler.c b/tools/testing/selftests/umd_mgmt/sample_umd/sample_handler.c
-new file mode 100644
-index 00000000000..94ea6d99bbc
---- /dev/null
-+++ b/tools/testing/selftests/umd_mgmt/sample_umd/sample_handler.c
-@@ -0,0 +1,81 @@
-+// SPDX-License-Identifier: GPL-2.0
-+/*
-+ * Copyright (C) 2023 Huawei Technologies Duesseldorf GmbH
-+ *
-+ * Author: Roberto Sassu <roberto.sassu@huawei.com>
-+ *
-+ * Implement the UMD Handler.
-+ */
-+#include <unistd.h>
-+#include <malloc.h>
-+#include <stdint.h>
-+
-+#include "msgfmt.h"
-+
-+FILE *debug_f;
-+
-+static void loop(void)
-+{
-+	struct sample_request *req = NULL;
-+	struct sample_reply *reply = NULL;
-+
-+	req = calloc(1, sizeof(*req));
-+	if (!req)
-+		return;
-+
-+	reply = calloc(1, sizeof(*reply));
-+	if (!reply)
-+		goto out;
-+
-+	while (1) {
-+		int n, len, offset;
-+
-+		offset = 0;
-+		len = sizeof(*req);
-+
-+		while (len) {
-+			n = read(0, ((void *)req) + offset, len);
-+			if (n <= 0) {
-+				fprintf(debug_f, "invalid request %d\n", n);
-+				goto out;
-+			}
-+
-+			len -= n;
-+			offset += n;
-+		}
-+
-+		if (req->offset < sizeof(reply->data))
-+			reply->data[req->offset] = 1;
-+
-+		offset = 0;
-+		len = sizeof(*reply);
-+
-+		while (len) {
-+			n = write(1, ((void *)reply) + offset, len);
-+			if (n <= 0) {
-+				fprintf(debug_f, "reply failed %d\n", n);
-+				goto out;
-+			}
-+
-+			len -= n;
-+			offset += n;
-+		}
-+
-+		if (req->offset < sizeof(reply->data))
-+			reply->data[req->offset] = 0;
-+	}
-+out:
-+	free(req);
-+	free(reply);
-+}
-+
-+int main(void)
-+{
-+	debug_f = fopen("/dev/kmsg", "w");
-+	setvbuf(debug_f, 0, _IOLBF, 0);
-+	fprintf(debug_f, "<5>Started sample_umh\n");
-+	loop();
-+	fclose(debug_f);
-+
-+	return 0;
-+}
-diff --git a/tools/testing/selftests/umd_mgmt/sample_umd/sample_loader.c b/tools/testing/selftests/umd_mgmt/sample_umd/sample_loader.c
-new file mode 100644
-index 00000000000..36c0e69e3f7
---- /dev/null
-+++ b/tools/testing/selftests/umd_mgmt/sample_umd/sample_loader.c
-@@ -0,0 +1,28 @@
-+// SPDX-License-Identifier: GPL-2.0
-+/*
-+ * Copyright (C) 2023 Huawei Technologies Duesseldorf GmbH
-+ *
-+ * Author: Roberto Sassu <roberto.sassu@huawei.com>
-+ *
-+ * Implement the UMD Loader (credits: bpfilter).
-+ */
-+#include <linux/module.h>
-+#include <linux/usermode_driver_mgmt.h>
-+
-+extern char sample_umh_start;
-+extern char sample_umh_end;
-+extern struct umd_mgmt sample_mgmt_ops;
-+
-+static int __init load_umh(void)
-+{
-+	return umd_mgmt_load(&sample_mgmt_ops, &sample_umh_start,
-+			     &sample_umh_end);
-+}
-+
-+static void __exit fini_umh(void)
-+{
-+	umd_mgmt_unload(&sample_mgmt_ops);
-+}
-+module_init(load_umh);
-+module_exit(fini_umh);
-+MODULE_LICENSE("GPL");
-diff --git a/tools/testing/selftests/umd_mgmt/sample_umd/sample_mgr.c b/tools/testing/selftests/umd_mgmt/sample_umd/sample_mgr.c
-new file mode 100644
-index 00000000000..75c572f9849
---- /dev/null
-+++ b/tools/testing/selftests/umd_mgmt/sample_umd/sample_mgr.c
-@@ -0,0 +1,124 @@
-+// SPDX-License-Identifier: GPL-2.0
-+/*
-+ * Copyright (C) 2023 Huawei Technologies Duesseldorf GmbH
-+ *
-+ * Author: Roberto Sassu <roberto.sassu@huawei.com>
-+ *
-+ * Implement the UMD Manager.
-+ */
-+#include <linux/module.h>
-+#include <linux/security.h>
-+#include <linux/seq_file.h>
-+#include <linux/usermode_driver_mgmt.h>
-+
-+#include "msgfmt.h"
-+
-+struct umd_mgmt sample_mgmt_ops;
-+EXPORT_SYMBOL_GPL(sample_mgmt_ops);
-+
-+struct dentry *sample_umd_dentry;
-+
-+static int sample_write_common(u32 offset, bool test)
-+{
-+	struct sample_request *req;
-+	struct sample_reply *reply;
-+	int ret;
-+
-+	req = kzalloc(sizeof(*req), GFP_KERNEL);
-+	if (!req) {
-+		ret = -ENOMEM;
-+		goto out;
-+	}
-+
-+	reply = kzalloc(sizeof(*reply), GFP_KERNEL);
-+	if (!reply) {
-+		ret = -ENOMEM;
-+		goto out;
-+	}
-+
-+	req->offset = offset;
-+
-+	if (test)
-+		/* Lock is already taken. */
-+		ret = umd_send_recv(&sample_mgmt_ops.info, req, sizeof(*req),
-+				    reply, sizeof(*reply));
-+	else
-+		ret = umd_mgmt_send_recv(&sample_mgmt_ops, req, sizeof(*req),
-+					 reply, sizeof(*reply));
-+	if (ret < 0)
-+		goto out;
-+
-+	if (reply->data[req->offset] != 1) {
-+		ret = -EINVAL;
-+		goto out;
-+	}
-+out:
-+	kfree(req);
-+	kfree(reply);
-+
-+	return ret;
-+}
-+
-+static ssize_t sample_umd_write(struct file *file, const char __user *buf,
-+				size_t datalen, loff_t *ppos)
-+{
-+	char offset_str[8];
-+	u32 offset;
-+	int ret;
-+
-+	if (datalen >= sizeof(offset_str))
-+		return -EINVAL;
-+
-+	ret = copy_from_user(offset_str, buf, datalen);
-+	if (ret < 0)
-+		return ret;
-+
-+	offset_str[datalen] = '\0';
-+
-+	ret = kstrtou32(offset_str, 10, &offset);
-+	if (ret < 0)
-+		return ret;
-+
-+	if (offset >= sizeof(((struct sample_reply *)0)->data))
-+		return -EINVAL;
-+
-+	ret = sample_write_common(offset, false);
-+	if (ret < 0)
-+		return ret;
-+
-+	return datalen;
-+}
-+
-+static const struct file_operations sample_umd_file_ops = {
-+	.write = sample_umd_write,
-+};
-+
-+static int sample_post_start_umh(struct umd_mgmt *mgmt)
-+{
-+	return sample_write_common(0, true);
-+}
-+
-+static int __init load_umh(void)
-+{
-+	mutex_init(&sample_mgmt_ops.lock);
-+	sample_mgmt_ops.info.tgid = NULL;
-+	sample_mgmt_ops.info.driver_name = "sample_umh";
-+	sample_mgmt_ops.post_start = sample_post_start_umh;
-+	sample_mgmt_ops.kmod = "sample_loader_kmod";
-+	sample_mgmt_ops.kmod_loaded = false;
-+
-+	sample_umd_dentry = securityfs_create_file("sample_umd", 0200, NULL,
-+						   NULL, &sample_umd_file_ops);
-+	if (IS_ERR(sample_umd_dentry))
-+		return PTR_ERR(sample_umd_dentry);
-+
-+	return 0;
-+}
-+
-+static void __exit fini_umh(void)
-+{
-+	securityfs_remove(sample_umd_dentry);
-+}
-+module_init(load_umh);
-+module_exit(fini_umh);
-+MODULE_LICENSE("GPL");
-diff --git a/tools/testing/selftests/umd_mgmt/umd_mgmt.sh b/tools/testing/selftests/umd_mgmt/umd_mgmt.sh
-new file mode 100755
-index 00000000000..9b90d737fec
---- /dev/null
-+++ b/tools/testing/selftests/umd_mgmt/umd_mgmt.sh
-@@ -0,0 +1,40 @@
-+#!/bin/bash
-+# SPDX-License-Identifier: GPL-2.0-only
-+#
-+# Copyright (C) 2023 Huawei Technologies Duesseldorf GmbH
-+#
-+# Author: Roberto Sassu <roberto.sassu@huawei.com>
-+#
-+# Script to test the UMD management library.
-+
-+# Kselftest framework defines: ksft_pass=0, ksft_fail=1, ksft_skip=4
-+ksft_pass=0
-+ksft_fail=1
-+ksft_skip=4
-+
-+if ! /sbin/modprobe -q sample_mgr; then
-+	echo "umd_mgmt: module sample_mgr is not found [SKIP]"
-+	exit $ksft_skip
-+fi
-+
-+if [ ! -f /sys/kernel/security/sample_umd ]; then
-+	echo "umd_mgmt: kernel interface is not found [SKIP]"
-+	exit $ksft_skip
-+fi
-+
-+i=0
-+
-+while [ $i -lt 500 ]; do
-+	if ! echo $(( RANDOM % 128 * 1024 )) > /sys/kernel/security/sample_umd; then
-+		echo "umd_mgmt: test failed"
-+		exit $ksft_fail
-+	fi
-+
-+	if [ $(( i % 50 )) -eq 0 ]; then
-+		rmmod sample_loader_kmod
-+	fi
-+
-+	(( i++ ))
-+done
-+
-+exit $ksft_pass
--- 
-2.25.1
+That's a good point! Let's see how well this works in practice and how
+we can improve on that in the future.
+
+> > > > >
+> > > > > TBF I'm of the belief that there is still a need for input based =
+cpu
+> > > > > boost (and early wake-up trigger for GPU).. we have something lik=
+e
+> > > > > this in CrOS kernel.  That is a bit of a different topic, but my =
+point
+> > > > > is that fence deadlines are just one of several things we need to
+> > > > > optimize power/perf and responsiveness, rather than the single th=
+ing
+> > > > > that solves every problem under the sun ;-)
+> > > >
+> > > > Perhaps; but I believe it's a bit of a back channel of intent; the =
+piece
+> > > > of the puzzle that has the information to know whether there is nee=
+d
+> > > > actually speed up is the compositor, not the kernel.
+> > > >
+> > > > For example, pressing 'p' while a terminal is focused does not need=
+ high
+> > > > frequency clocks, it just needs the terminal emulator to draw a 'p'=
+ and
+> > > > the compositor to composite that update. Pressing <Super> may howev=
+er
+> > > > trigger a non-trivial animation moving a lot of stuff around on scr=
+een,
+> > > > maybe triggering Wayland clients to draw and what not, and should m=
+ost
+> > > > arguably have the ability to "warn" the kernel about the upcoming f=
+lood
+> > > > of work before it is already knocking on its door step.
+> > >
+> > > The super key is problematic, but not for the reason you think.  It i=
+s
+> > > because it is a case where we should boost on key-up instead of
+> > > key-down.. and the second key-up event comes after the cpu-boost is
+> > > already in it's cool-down period.  But even if suboptimal in cases
+> > > like this, it is still useful for touch/stylus cases where the
+> > > slightest of lag is much more perceptible.
+> > >
+> > > This is getting off topic but I kinda favor coming up with some sort
+> > > of static definition that userspace could give the kernel to let the
+> > > kernel know what input to boost on.  Or maybe something could be done
+> > > with BPF?
+> >
+> > Why? Do you think user space is so slow that it can't process the
+> > input events and then do a syscall? We need to have all input devices
+> > open anyway that can affect the system and know more about how they
+> > affect behavior than the kernel can ever know.
+>
+> Again this is getting off into a different topic.  But my gut feel is
+> that the shorter the path to input cpu freq boost, the better.. since
+> however many extra cycles you add, they will be cycles with cpu (and
+> probably ddr) at lowest freq
+
+On the one hand, sure, that makes sense in theory. On the other hand,
+we won't know for sure until we try it and I suspect a RT thread in
+user space will be fast enough.
+
+> BR,
+> -R
+>
+> > >
+> > > > >
+> > > >
+> > > > 8-< *snip* 8-<
+> > > >
+> > > > > >
+> > > > > > Is it expected that WSI's will set their own deadlines, or shou=
+ld that
+> > > > > > be the job of the compositor? For example by using compositors =
+using
+> > > > > > DMA_BUF_IOCTL_EXPORT_SYNC_FILE that you mentioned, using it to =
+set a
+> > > > > > deadline matching the vsync it most ideally will be committed t=
+o?
+> > > > > >
+> > > > >
+> > > > > I'm kind of assuming compositors, but if the WSI somehow has more
+> > > > > information about ideal presentation time, then I suppose it coul=
+d be
+> > > > > in the WSI?  I'll defer to folks who spend more time on WSI and
+> > > > > compositors to hash out the details ;-)
+> > > >
+> > > > With my compositor developer hat on, it might be best to let it be =
+up to
+> > > > the compositor, it's the one that knows if a client's content will
+> > > > actually end up anywhere visible.
+> > > >
+> > >
+> > > wfm
+> > >
+> > > BR,
+> > > -R
+> > >
+> > > >
+> > > > Jonas
+> > > >
+> > > > >
+> > > > > BR,
+> > > > > -R
+> > >
+> >
+>
 
