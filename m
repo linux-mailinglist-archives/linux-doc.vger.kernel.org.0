@@ -2,136 +2,92 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id A84676BFFD5
-	for <lists+linux-doc@lfdr.de>; Sun, 19 Mar 2023 08:49:19 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 0FF6A6C0006
+	for <lists+linux-doc@lfdr.de>; Sun, 19 Mar 2023 09:28:10 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S230121AbjCSHtR (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Sun, 19 Mar 2023 03:49:17 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:52844 "EHLO
+        id S229685AbjCSI2I (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Sun, 19 Mar 2023 04:28:08 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:59736 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S229652AbjCSHtN (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Sun, 19 Mar 2023 03:49:13 -0400
-Received: from mail-pj1-x102a.google.com (mail-pj1-x102a.google.com [IPv6:2607:f8b0:4864:20::102a])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id A738917CD9;
-        Sun, 19 Mar 2023 00:49:11 -0700 (PDT)
-Received: by mail-pj1-x102a.google.com with SMTP id y2so9317181pjg.3;
-        Sun, 19 Mar 2023 00:49:11 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112; t=1679212151;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=v05rQQaGlo1pyl376I/VtsiDWSss2IkaTyB0UDJtjm0=;
-        b=ciLgT5fY5cTZIJLgLAwox4Aa/6J1AK6tg44G4ZB0dGIjqjYFMKBK5Bk4beuTI0gyC0
-         79gOIRQ5fU2fELyZ9bfu1K6eGx99f+TX2eYafwWCtl/jlcP67NR7ApMZkPXkYpKjh5P5
-         M9JXdZtlU/FrQz2LJWxvXMDwzshLnN/jWzwT3Wu24sx0aq53n854TGo1hA3Bh53x3Ytd
-         t2q4ItydT4gQX0rjB65C21LDpkBMRPG2vum4JAqBClXGVKoU3uh4Ikxbe2ufYZpVApYV
-         utTZbY7ULSmQNR59uDTjY53KSKDkxNh9HPWHURfQrbm5W0pGlYtQ0GbmDa32igY4dSYk
-         zGgA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112; t=1679212151;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=v05rQQaGlo1pyl376I/VtsiDWSss2IkaTyB0UDJtjm0=;
-        b=bpd6j2/UbhCM40mFIqBHv/rpoLQ3NQhXUx3L3dwZO959v+CorvK/kOTUDjyuN+0C8h
-         FCDx3FOawalrkup13AR6d1rgwukZ/sx9LT0BgvnW2p44H4BU3yVhnDvMA25yrZsq9/Jw
-         eKZ6QqclIa0BHtbOUSJVHKpwAEBWQVDs4nT6sLVlUNUxv6GJlWbykniXF7sCtd/UDKEv
-         gTYrIijTrYGT6j8W1xqazZOaWSrjrWDeoeZdrhusm4HWl9zGOj4AAFRq6yN/DyAwwc5j
-         85DdOHsaP41+bLEpUvRYIqjGLISWH5uuiEJjmOPwopF2w8ogWwUPbbKt5VoinRKUUsdW
-         f31g==
-X-Gm-Message-State: AO0yUKW7va6u8fJRLdunyuthKqKZgw9tpSs7TVEA00FxIwyThhd+lIJn
-        P7uRgwjmLCqnlAY7vwTNAoQ=
-X-Google-Smtp-Source: AK7set9Tg0zxbyUAYIOpLktcG+E6CTcXT48PPu0KmZnyA413iHs4uzzxBhLAT8t4aQgI8NimPdFm2g==
-X-Received: by 2002:a05:6a20:1bdf:b0:d9:4c19:fe69 with SMTP id cv31-20020a056a201bdf00b000d94c19fe69mr588049pzb.25.1679212151098;
-        Sun, 19 Mar 2023 00:49:11 -0700 (PDT)
-Received: from debian.me (subs03-180-214-233-29.three.co.id. [180.214.233.29])
-        by smtp.gmail.com with ESMTPSA id m15-20020a638c0f000000b0050bf6f246edsm4062983pgd.3.2023.03.19.00.49.10
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 19 Mar 2023 00:49:10 -0700 (PDT)
-Received: by debian.me (Postfix, from userid 1000)
-        id 3F9B210667A; Sun, 19 Mar 2023 14:49:06 +0700 (WIB)
-From:   Bagas Sanjaya <bagasdotme@gmail.com>
-To:     Linux Documentation <linux-doc@vger.kernel.org>,
-        Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
-        Linux ARM <linux-arm-kernel@lists.infradead.org>,
-        Linux MediaTek <linux-mediatek@lists.infradead.org>,
-        Linux LEDs <linux-leds@vger.kernel.org>
-Cc:     Jonathan Corbet <corbet@lwn.net>,
-        Matthias Brugger <matthias.bgg@gmail.com>,
-        AngeloGioacchino Del Regno 
-        <angelogioacchino.delregno@collabora.com>,
-        Shuah Khan <skhan@linuxfoundation.org>,
-        Bagas Sanjaya <bagasdotme@gmail.com>,
-        ChiaEn Wu <chiaen_wu@richtek.com>, Lee Jones <lee@kernel.org>,
-        ChiYuan Huang <cy_huang@richtek.com>,
-        kernel test robot <lkp@intel.com>
-Subject: [PATCH 3/3] Documentation: leds: MT6370: Use bullet lists for timing variables
-Date:   Sun, 19 Mar 2023 14:49:03 +0700
-Message-Id: <20230319074903.13075-4-bagasdotme@gmail.com>
-X-Mailer: git-send-email 2.40.0
-In-Reply-To: <20230319074903.13075-1-bagasdotme@gmail.com>
-References: <20230319074903.13075-1-bagasdotme@gmail.com>
+        with ESMTP id S229508AbjCSI2H (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Sun, 19 Mar 2023 04:28:07 -0400
+Received: from mga03.intel.com (mga03.intel.com [134.134.136.65])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id D9DFF21A3D
+        for <linux-doc@vger.kernel.org>; Sun, 19 Mar 2023 01:28:05 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1679214485; x=1710750485;
+  h=date:from:to:cc:subject:message-id:mime-version;
+  bh=xUpBKuyCq3zDvKFg5zoxA5YrmdR01ZE/PnMjGtfcNaU=;
+  b=MjzhKnL82tqk3gAlTXrUX5k1Liqptn70tmLRxplyDWgamB4q/yKWHM7N
+   1sAqzVG3Clx/vuFBsOGWwoX5Jb72QVQM8PBNPea7kbsQsl8+TsExiI4mp
+   sk9YP9xlpofJkCD4CIycOn/+RkEU8HVVN9ww0jWcc8aWVaUsQRCj34nDe
+   PzInbzyEEgYMcAH8x8xCX5zhFroE8YiVLd3ngT6jdNB9wAI+bDPkxyU2i
+   CtyvfiDGwWXGOqmq9Ot64PL3fBWqDr3Lir6QzTtJmW1//ydJFWN/hc3D5
+   vqu/CUSzMJ1fqllDrK2lcEllGRA+GwqnlxbR7w6cqZ8Je4wuATBzx/TBx
+   g==;
+X-IronPort-AV: E=McAfee;i="6600,9927,10653"; a="340849621"
+X-IronPort-AV: E=Sophos;i="5.98,273,1673942400"; 
+   d="scan'208";a="340849621"
+Received: from orsmga007.jf.intel.com ([10.7.209.58])
+  by orsmga103.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 19 Mar 2023 01:28:05 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=McAfee;i="6600,9927,10653"; a="674014013"
+X-IronPort-AV: E=Sophos;i="5.98,273,1673942400"; 
+   d="scan'208";a="674014013"
+Received: from lkp-server01.sh.intel.com (HELO b613635ddfff) ([10.239.97.150])
+  by orsmga007.jf.intel.com with ESMTP; 19 Mar 2023 01:28:04 -0700
+Received: from kbuild by b613635ddfff with local (Exim 4.96)
+        (envelope-from <lkp@intel.com>)
+        id 1pdoOZ-000ASs-14;
+        Sun, 19 Mar 2023 08:28:03 +0000
+Date:   Sun, 19 Mar 2023 16:27:58 +0800
+From:   kernel test robot <lkp@intel.com>
+To:     Christian Marangi <ansuelsmth@gmail.com>
+Cc:     oe-kbuild-all@lists.linux.dev, Andrew Lunn <andrew@lunn.ch>,
+        linux-doc@vger.kernel.org
+Subject: [lunn:v6.2.0-net-next-phy-leds 2/28] htmldocs:
+ Documentation/leds/leds-class.rst:217: WARNING: Inline emphasis start-string
+ without end-string.
+Message-ID: <202303191637.XhbORWKz-lkp@intel.com>
 MIME-Version: 1.0
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1990; i=bagasdotme@gmail.com; h=from:subject; bh=Ho6JS/QsaewELgY3oj9F2/RDEMc+m0oRO+h4IFBGt1I=; b=owGbwMvMwCX2bWenZ2ig32LG02pJDCli+/Idutvs9ILKXzTH+c2Sb2KXPrQkNupbx4KdPBv3H Zz1j/9IRykLgxgXg6yYIsukRL6m07uMRC60r3WEmcPKBDKEgYtTACbiHcnwz8D8CPfLs7vZTl+x 2By96GB8l9jLuGInr+LA951T8q/89mFkeKh1tlf6//VFFp2Lly17tv7be4YjnRMlO95l7/o8mf2 8PC8A
-X-Developer-Key: i=bagasdotme@gmail.com; a=openpgp; fpr=701B806FDCA5D3A58FFB8F7D7C276C64A5E44A1D
-Content-Transfer-Encoding: 8bit
-X-Spam-Status: No, score=-0.6 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_FROM,
-        RCVD_IN_DNSWL_NONE,RCVD_IN_SORBS_WEB,SPF_HELO_NONE,SPF_PASS
-        autolearn=no autolearn_force=no version=3.4.6
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+X-Spam-Status: No, score=-4.4 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_MED,
+        SPF_HELO_NONE,SPF_NONE autolearn=ham autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-The timing description contains list of timing pattern variables, but it
-uses code block without indentation instead. Switch to bullet list as it
-is better fit for this purpose.
+tree:   https://github.com/lunn/linux.git v6.2.0-net-next-phy-leds
+head:   8a9b1a5ad5dd0e48585009020088a2ee5bdd6688
+commit: d4ee8e7089227062d16b95302ae0532f578bc205 [2/28] leds: add function to configure hardware controlled LED
+reproduce:
+        # https://github.com/lunn/linux/commit/d4ee8e7089227062d16b95302ae0532f578bc205
+        git remote add lunn https://github.com/lunn/linux.git
+        git fetch --no-tags lunn v6.2.0-net-next-phy-leds
+        git checkout d4ee8e7089227062d16b95302ae0532f578bc205
+        make menuconfig
+        # enable CONFIG_COMPILE_TEST, CONFIG_WARN_MISSING_DOCUMENTS, CONFIG_WARN_ABI_ERRORS
+        make htmldocs
 
-While at it, substitute "load" for "duty" because the variables control
-timing for current load into the device.
+If you fix the issue, kindly add following tag where applicable
+| Reported-by: kernel test robot <lkp@intel.com>
+| Link: https://lore.kernel.org/oe-kbuild-all/202303191637.XhbORWKz-lkp@intel.com/
 
-Link: https://lore.kernel.org/oe-kbuild-all/202303182310.tB1mUzU7-lkp@intel.com/
-Fixes: 4ba9df04b7ac66 ("docs: leds: Add MT6370 RGB LED pattern document")
-Reported-by: kernel test robot <lkp@intel.com>
-Signed-off-by: Bagas Sanjaya <bagasdotme@gmail.com>
----
- Documentation/leds/leds-mt6370-rgb.rst | 18 +++++++++---------
- 1 file changed, 9 insertions(+), 9 deletions(-)
+All warnings (new ones prefixed by >>):
 
-diff --git a/Documentation/leds/leds-mt6370-rgb.rst b/Documentation/leds/leds-mt6370-rgb.rst
-index ea782797a06df0..152a2e5921724b 100644
---- a/Documentation/leds/leds-mt6370-rgb.rst
-+++ b/Documentation/leds/leds-mt6370-rgb.rst
-@@ -45,17 +45,17 @@ Pattern diagram::
-           +----------------------------------============------------> Time
-           < Tr1><Tr2><   Ton    ><Tf1><Tf2 ><  Toff    >< Tr1><Tr2>
- 
--Timing description::
-+Timing description:
- 
--Tr1:    First rising time for duty 0 to 30%.
--Tr2:    Second rising time for duty 31% to 100%.
--Ton:    On time for duty 100%.
--Tf1:    First falling time for duty 100% to 31%.
--Tf2:    Second falling time for duty 30% to 0%.
--Toff:   Off time for duty 0%.
-+  * Tr1:    First rising time for 0% - 30% load.
-+  * Tr2:    Second rising time for 31% - 100% load.
-+  * Ton:    On time for 100% load.
-+  * Tf1:    First falling time for 100% - 31% load.
-+  * Tf2:    Second falling time for 30% to 0% load.
-+  * Toff:   Off time for 0% load.
- 
--Tr1/Tr2/Tf1/Tf2/Ton: 125ms to 3125ms, 200ms per step.
--Toff: 250ms to 6250ms, 400ms per step.
-+  * Tr1/Tr2/Tf1/Tf2/Ton: 125ms to 3125ms, 200ms per step.
-+  * Toff: 250ms to 6250ms, 400ms per step.
- 
- Pattern example::
- 
+>> Documentation/leds/leds-class.rst:217: WARNING: Inline emphasis start-string without end-string.
+
+vim +217 Documentation/leds/leds-class.rst
+
+   216	
+ > 217	- struct led_classdev *led_cdev
+   218	
+
 -- 
-An old man doll... just what I always wanted! - Clara
-
+0-DAY CI Kernel Test Service
+https://github.com/intel/lkp-tests
