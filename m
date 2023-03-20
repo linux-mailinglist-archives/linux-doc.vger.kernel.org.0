@@ -2,196 +2,113 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 685F66C1247
-	for <lists+linux-doc@lfdr.de>; Mon, 20 Mar 2023 13:48:17 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id C6ABD6C1219
+	for <lists+linux-doc@lfdr.de>; Mon, 20 Mar 2023 13:43:40 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S231566AbjCTMsO (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 20 Mar 2023 08:48:14 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:56566 "EHLO
+        id S231442AbjCTMnj (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 20 Mar 2023 08:43:39 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:48200 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S231600AbjCTMsC (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Mon, 20 Mar 2023 08:48:02 -0400
-X-Greylist: delayed 1103 seconds by postgrey-1.37 at lindbergh.monkeyblade.net; Mon, 20 Mar 2023 05:47:45 PDT
-Received: from frasgout13.his.huawei.com (frasgout13.his.huawei.com [14.137.139.46])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 1F9B012BE8;
-        Mon, 20 Mar 2023 05:47:44 -0700 (PDT)
-Received: from mail02.huawei.com (unknown [172.18.147.229])
-        by frasgout13.his.huawei.com (SkyGuard) with ESMTP id 4PgDN6589Vz9v7Z6;
-        Mon, 20 Mar 2023 20:20:38 +0800 (CST)
-Received: from A2101119013HW2.china.huawei.com (unknown [10.48.148.162])
-        by APP2 (Coremail) with SMTP id GxC2BwBnOF9kURhkkqGyAQ--.46782S6;
-        Mon, 20 Mar 2023 13:29:08 +0100 (CET)
-From:   Petr Tesarik <petrtesarik@huaweicloud.com>
-To:     Jonathan Corbet <corbet@lwn.net>, Christoph Hellwig <hch@lst.de>,
-        Marek Szyprowski <m.szyprowski@samsung.com>,
-        Robin Murphy <robin.murphy@arm.com>,
-        Borislav Petkov <bp@suse.de>,
-        "Paul E. McKenney" <paulmck@kernel.org>,
-        Andrew Morton <akpm@linux-foundation.org>,
-        Randy Dunlap <rdunlap@infradead.org>,
-        Damien Le Moal <damien.lemoal@opensource.wdc.com>,
-        Kim Phillips <kim.phillips@amd.com>,
-        "Steven Rostedt (Google)" <rostedt@goodmis.org>,
-        linux-doc@vger.kernel.org (open list:DOCUMENTATION),
-        linux-kernel@vger.kernel.org (open list),
-        iommu@lists.linux.dev (open list:DMA MAPPING HELPERS)
-Cc:     Roberto Sassu <roberto.sassu@huawei.com>, petr@tesarici.cz
-Subject: [RFC v1 4/4] swiotlb: Add an option to allow dynamic bounce buffers
-Date:   Mon, 20 Mar 2023 13:28:16 +0100
-Message-Id: <e00c8c576b8ef2fa3cf867ab776cd136a519a835.1679309810.git.petr.tesarik.ext@huawei.com>
-X-Mailer: git-send-email 2.21.0.windows.1
-In-Reply-To: <cover.1679309810.git.petr.tesarik.ext@huawei.com>
-References: <cover.1679309810.git.petr.tesarik.ext@huawei.com>
+        with ESMTP id S231438AbjCTMni (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Mon, 20 Mar 2023 08:43:38 -0400
+Received: from mail-pj1-x102d.google.com (mail-pj1-x102d.google.com [IPv6:2607:f8b0:4864:20::102d])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id DB2E59776;
+        Mon, 20 Mar 2023 05:43:34 -0700 (PDT)
+Received: by mail-pj1-x102d.google.com with SMTP id x15so1662301pjk.2;
+        Mon, 20 Mar 2023 05:43:34 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112; t=1679316214;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=CuPNRur3NtDnFJVCvDkEsVvpqOyVBKyvwyaXnfO9pqQ=;
+        b=QMgf8Le2567Br9ksKL7GWK1o3CI5/d/geLI8q2Tpae+sN4p5dtWy0TU8d154IWd9el
+         k2eHxUtxg18PFCvrZv3gGPh9Yu+3x9+CdOyl/alM0efOpo4jys4fk0iLr6xWv+lvxVSb
+         8LX4tkFuQRp3DNPaY8qW90NokPcLNXzF5uhztu8SmG2W3b3eBEqjNuWo4JSRHPtV6CSL
+         w6bzCX8NhIdahw8f31d9/B8Sonxo7V4u/iijvJ0H26p4dvAIssh4cvlVD+HYYN/tiArX
+         aHbbMJ5/nJFCHZeqY4DBSFtuZdd27bGIAqxaH1dCR1WteITU5JG/oSO0FIfONDsuJGeQ
+         ZI5A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112; t=1679316214;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=CuPNRur3NtDnFJVCvDkEsVvpqOyVBKyvwyaXnfO9pqQ=;
+        b=g7YMRlcF91a78Xi+8w+c8lKfDxZs4/3GuUgNkyOKgb4D/KJKaUz3jMwu/+TS4VVkEO
+         jKWjHIyTCGmimqJnLGDaIZrQ3BSzlEJuq5zfZjBxr0VrMElrIjh6FsJnhfaEdBMXLUWH
+         sMo98FEFtfZqoCDYJ2PF/fpUVL9AC6Gz9DjnPMBME2FDR4wkf0PK6LSleSnDq2w4xCCp
+         CotCl1av24ZbIVyo9JFSyxfHTFU4donsDjyruln113RZJy234gqps7U8jHcc5ruQizb/
+         9EofxxZU1p8/qD5e+BJ3l32sAGEAz0pycwg9yoDSQr9h2eEsnZ1OOfXPW5ZtPIA3Wzpv
+         yPPg==
+X-Gm-Message-State: AO0yUKUWfw11uQESVXWgzH1Nm2PKO05Kz9qQ1fHr+lnlan6Bb6afhqvU
+        4RxtQj+ALUa1d6Alfvg+5Z8=
+X-Google-Smtp-Source: AK7set9exICfpZxGY8h+eBzFIKrFFkrk0yOXMxizkoAm5tACLSpbGCmlrUA5F82wFem4X1ugpyK80A==
+X-Received: by 2002:a17:90b:4acf:b0:23d:9a3:f571 with SMTP id mh15-20020a17090b4acf00b0023d09a3f571mr19188670pjb.20.1679316214106;
+        Mon, 20 Mar 2023 05:43:34 -0700 (PDT)
+Received: from debian.me (subs02-180-214-232-6.three.co.id. [180.214.232.6])
+        by smtp.gmail.com with ESMTPSA id p12-20020a17090a2d8c00b0023440af7aafsm6114484pjd.9.2023.03.20.05.43.33
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 20 Mar 2023 05:43:33 -0700 (PDT)
+Received: by debian.me (Postfix, from userid 1000)
+        id 7343A1065D0; Mon, 20 Mar 2023 19:43:29 +0700 (WIB)
+From:   Bagas Sanjaya <bagasdotme@gmail.com>
+To:     Linux Documentation <linux-doc@vger.kernel.org>,
+        Linux Kernel Mailing List <linux-kernel@vger.kernel.org>
+Cc:     Jonathan Corbet <corbet@lwn.net>, Borislav Petkov <bp@suse.de>,
+        Dave Hansen <dave.hansen@linux.intel.com>,
+        Bagas Sanjaya <bagasdotme@gmail.com>,
+        Thomas Gleixner <tglx@linutronix.de>,
+        "Paul E. McKenney" <paulmck@kernel.org>
+Subject: [PATCH] Documentation: maintainer-tip: Rectify link to "Describe your changes" section of submitting-patches.rst
+Date:   Mon, 20 Mar 2023 19:43:27 +0700
+Message-Id: <20230320124327.174881-1-bagasdotme@gmail.com>
+X-Mailer: git-send-email 2.40.0
 MIME-Version: 1.0
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1511; i=bagasdotme@gmail.com; h=from:subject; bh=FAEl/7SkBqFPoHqShwOaCVSmuT0ZoOhqKjAWrvmRTI8=; b=owGbwMvMwCX2bWenZ2ig32LG02pJDCkSIa8U3zaEsvBwi3b9MjvFo2LWZiqYvyjNcfopsfPiY Xftf6zuKGVhEONikBVTZJmUyNd0epeRyIX2tY4wc1iZQIYwcHEKwETCMhn+qXt+UL5/0Lpl1bbP e0IXNxxJX/GE/ZBJSv8CYQnuBvvjqxj+R3zxWmVvsKvj2htVnsUpqQ83ld7a+WzHCZ65otdnv7V cwQcA
+X-Developer-Key: i=bagasdotme@gmail.com; a=openpgp; fpr=701B806FDCA5D3A58FFB8F7D7C276C64A5E44A1D
 Content-Transfer-Encoding: 8bit
-X-CM-TRANSID: GxC2BwBnOF9kURhkkqGyAQ--.46782S6
-X-Coremail-Antispam: 1UD129KBjvJXoWxWFyUXw4rKw1kZw1kJFWfuFg_yoWrZryUpr
-        y0va4YgFZ7JF18Z347Cw47GF1Fkan29ay3ZayFgryFyr98Xrn0qwnrtr4YqF1rt3y09F47
-        ZFyYvF4Ykr17t3DanT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
-        9KBjDU0xBIdaVrnRJUUUPmb4IE77IF4wAFF20E14v26rWj6s0DM7CY07I20VC2zVCF04k2
-        6cxKx2IYs7xG6rWj6s0DM7CIcVAFz4kK6r1j6r18M28IrcIa0xkI8VA2jI8067AKxVWUAV
-        Cq3wA2048vs2IY020Ec7CjxVAFwI0_Xr0E3s1l8cAvFVAK0II2c7xJM28CjxkF64kEwVA0
-        rcxSw2x7M28EF7xvwVC0I7IYx2IY67AKxVWUJVWUCwA2z4x0Y4vE2Ix0cI8IcVCY1x0267
-        AKxVWxJVW8Jr1l84ACjcxK6I8E87Iv67AKxVW8JVWxJwA2z4x0Y4vEx4A2jsIEc7CjxVAF
-        wI0_Gr1j6F4UJwAS0I0E0xvYzxvE52x082IY62kv0487Mc02F40EFcxC0VAKzVAqx4xG6I
-        80ewAv7VC0I7IYx2IY67AKxVWUJVWUGwAv7VC2z280aVAFwI0_Jr0_Gr1lOx8S6xCaFVCj
-        c4AY6r1j6r4UM4x0Y48IcxkI7VAKI48JM4IIrI8v6xkF7I0E8cxan2IY04v7MxkF7I0Ew4
-        C26cxK6c8Ij28IcwCF04k20xvY0x0EwIxGrwCFx2IqxVCFs4IE7xkEbVWUJVW8JwC20s02
-        6c02F40E14v26r1j6r18MI8I3I0E7480Y4vE14v26r106r1rMI8E67AF67kF1VAFwI0_GF
-        v_WrylIxkGc2Ij64vIr41lIxAIcVC0I7IYx2IY67AKxVWUJVWUCwCI42IY6xIIjxv20xvE
-        c7CjxVAFwI0_Cr0_Gr1UMIIF0xvE42xK8VAvwI8IcIk0rVWUJVWUCwCI42IY6I8E87Iv67
-        AKxVW8JVWxJwCI42IY6I8E87Iv6xkF7I0E14v26r4UJVWxJrUvcSsGvfC2KfnxnUUI43ZE
-        Xa7IU8gAw7UUUUU==
-X-CM-SenderInfo: hshw23xhvd2x3n6k3tpzhluzxrxghudrp/
-X-CFilter-Loop: Reflected
-X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00,SPF_HELO_NONE,
-        SPF_NONE autolearn=ham autolearn_force=no version=3.4.6
+X-Spam-Status: No, score=-0.6 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_FROM,
+        RCVD_IN_DNSWL_NONE,RCVD_IN_SORBS_WEB,SPF_HELO_NONE,SPF_PASS
+        autolearn=no autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-From: Petr Tesarik <petr.tesarik.ext@huawei.com>
+The general changelog rules for the tip tree refers to "Describe your
+changes" section of submitting patches guide. However, the internal link
+reference targets to non-existent "submittingpatches" label, which
+brings reader to the top of the linked doc.
 
-Dynamic allocation of bounce buffers may introduce regression for
-some workloads. The expected outcomes are bigger worst-case I/O
-latency reduced performance for some workloads. Unfortunately,
-real-world testing has been too unstable to draw any conclusion.
+Correct the target. No changes to submitting-patches.rst since the
+required label is already there.
 
-To stay on the safe side, make the feature disabled by default and
-let people turn it on with "swiotlb=dynamic" if needed. Since this
-option can be combined with "force", the parser must be modified to
-allow multiple options separated by commas.
-
-A new bool field is added to struct io_tlb_mem to tell whether
-dynamic allocations are allowed. This field is always false for
-DMA restricted pools. It is also false for other software IO
-TLBs unless "swiotlb=dynamic" was specified.
-
-Signed-off-by: Petr Tesarik <petr.tesarik.ext@huawei.com>
+Fixes: 31c9d7c8297558 ("Documentation/process: Add tip tree handbook")
+Signed-off-by: Bagas Sanjaya <bagasdotme@gmail.com>
 ---
- .../admin-guide/kernel-parameters.txt         |  6 +++++-
- include/linux/swiotlb.h                       |  3 ++-
- kernel/dma/swiotlb.c                          | 19 ++++++++++++++-----
- 3 files changed, 21 insertions(+), 7 deletions(-)
+ This patch is based on core/urgent branch of tip tree.
 
-diff --git a/Documentation/admin-guide/kernel-parameters.txt b/Documentation/admin-guide/kernel-parameters.txt
-index 6cfa6e3996cf..6240a463631b 100644
---- a/Documentation/admin-guide/kernel-parameters.txt
-+++ b/Documentation/admin-guide/kernel-parameters.txt
-@@ -6081,14 +6081,18 @@
- 			Execution Facility on pSeries.
+ Documentation/process/maintainer-tip.rst | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/Documentation/process/maintainer-tip.rst b/Documentation/process/maintainer-tip.rst
+index 572a3289c9cbf3..178c95fd17dcad 100644
+--- a/Documentation/process/maintainer-tip.rst
++++ b/Documentation/process/maintainer-tip.rst
+@@ -128,8 +128,8 @@ uppercase letter and should be written in imperative tone.
+ Changelog
+ ^^^^^^^^^
  
- 	swiotlb=	[ARM,IA-64,PPC,MIPS,X86]
--			Format: { <int> [,<int>] | force | noforce }
-+			Format: { <int> [,<int>] [,option-list] | option-list }
- 			<int> -- Number of I/O TLB slabs
- 			<int> -- Second integer after comma. Number of swiotlb
- 				 areas with their own lock. Will be rounded up
- 				 to a power of 2.
-+			<option-list> -- Comma-separated list of options.
-+
-+			Available options:
- 			force -- force using of bounce buffers even if they
- 			         wouldn't be automatically used by the kernel
- 			noforce -- Never use bounce buffers (for debugging)
-+			dynamic -- allow dynamic allocation of bounce buffers
+-The general rules about changelogs in the process documentation, see
+-:ref:`Documentation/process/ <submittingpatches>`, apply.
++The general rules about changelogs in the :ref:`Submitting patches guide
++<describe_changes>`, apply.
  
- 	switches=	[HW,M68k]
- 
-diff --git a/include/linux/swiotlb.h b/include/linux/swiotlb.h
-index 0ef27d6491b9..628e25ad7db7 100644
---- a/include/linux/swiotlb.h
-+++ b/include/linux/swiotlb.h
-@@ -101,6 +101,7 @@ struct io_tlb_mem {
- 	bool late_alloc;
- 	bool force_bounce;
- 	bool for_alloc;
-+	bool allow_dyn;
- 	unsigned int nareas;
- 	unsigned int area_nslabs;
- 	struct io_tlb_area *areas;
-@@ -123,7 +124,7 @@ static inline bool is_swiotlb_buffer(struct device *dev, phys_addr_t paddr)
- 
- 	return mem &&
- 		(is_swiotlb_fixed(mem, paddr) ||
--		 is_swiotlb_dyn(mem, paddr));
-+		 (mem->allow_dyn && is_swiotlb_dyn(mem, paddr)));
- }
- 
- static inline bool is_swiotlb_force_bounce(struct device *dev)
-diff --git a/kernel/dma/swiotlb.c b/kernel/dma/swiotlb.c
-index c6a0b8f2aa6f..3efaefebb6af 100644
---- a/kernel/dma/swiotlb.c
-+++ b/kernel/dma/swiotlb.c
-@@ -78,6 +78,7 @@ struct io_tlb_dyn_slot {
- 
- static bool swiotlb_force_bounce;
- static bool swiotlb_force_disable;
-+static bool swiotlb_dynamic;
- 
- struct io_tlb_mem io_tlb_default_mem;
- 
-@@ -159,10 +160,17 @@ setup_io_tlb_npages(char *str)
- 		swiotlb_adjust_nareas(simple_strtoul(str, &str, 0));
- 	if (*str == ',')
- 		++str;
--	if (!strcmp(str, "force"))
--		swiotlb_force_bounce = true;
--	else if (!strcmp(str, "noforce"))
--		swiotlb_force_disable = true;
-+	while (str && *str) {
-+		char *opt = strsep(&str, ",");
-+		if (!strcmp(opt, "force"))
-+			swiotlb_force_bounce = true;
-+		else if (!strcmp(opt, "noforce"))
-+			swiotlb_force_disable = true;
-+		else if (!strcmp(opt, "dynamic"))
-+			swiotlb_dynamic = true;
-+		else
-+			pr_warn("Invalid swiotlb option: %s", opt);
-+	}
- 
- 	return 0;
- }
-@@ -287,6 +295,7 @@ static void swiotlb_init_io_tlb_mem(struct io_tlb_mem *mem, phys_addr_t start,
- 	mem->area_nslabs = nslabs / mem->nareas;
- 
- 	mem->force_bounce = swiotlb_force_bounce || (flags & SWIOTLB_FORCE);
-+	mem->allow_dyn = swiotlb_dynamic;
- 
- 	for (i = 0; i < mem->nareas; i++) {
- 		spin_lock_init(&mem->areas[i].lock);
-@@ -930,7 +939,7 @@ phys_addr_t swiotlb_tbl_map_single(struct device *dev, phys_addr_t orig_addr,
- 	}
- 
- 	tlb_addr = (phys_addr_t)DMA_MAPPING_ERROR;
--	if (!is_swiotlb_for_alloc(dev))
-+	if (mem->allow_dyn)
- 		tlb_addr = swiotlb_dyn_map(dev, orig_addr, alloc_size,
- 					   alloc_align_mask, dir, attrs);
- 	if (tlb_addr == (phys_addr_t)DMA_MAPPING_ERROR)
+ The tip tree maintainers set value on following these rules, especially on
+ the request to write changelogs in imperative mood and not impersonating
+
+base-commit: 3e2619c4ebba2cab8414c55b131b7a28f628de3b
 -- 
-2.25.1
+An old man doll... just what I always wanted! - Clara
 
