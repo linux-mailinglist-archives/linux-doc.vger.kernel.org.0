@@ -2,113 +2,143 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id C6ABD6C1219
-	for <lists+linux-doc@lfdr.de>; Mon, 20 Mar 2023 13:43:40 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 705016C1244
+	for <lists+linux-doc@lfdr.de>; Mon, 20 Mar 2023 13:48:07 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S231442AbjCTMnj (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 20 Mar 2023 08:43:39 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:48200 "EHLO
+        id S231622AbjCTMsF (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 20 Mar 2023 08:48:05 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:55590 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S231438AbjCTMni (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Mon, 20 Mar 2023 08:43:38 -0400
-Received: from mail-pj1-x102d.google.com (mail-pj1-x102d.google.com [IPv6:2607:f8b0:4864:20::102d])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id DB2E59776;
-        Mon, 20 Mar 2023 05:43:34 -0700 (PDT)
-Received: by mail-pj1-x102d.google.com with SMTP id x15so1662301pjk.2;
-        Mon, 20 Mar 2023 05:43:34 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112; t=1679316214;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=CuPNRur3NtDnFJVCvDkEsVvpqOyVBKyvwyaXnfO9pqQ=;
-        b=QMgf8Le2567Br9ksKL7GWK1o3CI5/d/geLI8q2Tpae+sN4p5dtWy0TU8d154IWd9el
-         k2eHxUtxg18PFCvrZv3gGPh9Yu+3x9+CdOyl/alM0efOpo4jys4fk0iLr6xWv+lvxVSb
-         8LX4tkFuQRp3DNPaY8qW90NokPcLNXzF5uhztu8SmG2W3b3eBEqjNuWo4JSRHPtV6CSL
-         w6bzCX8NhIdahw8f31d9/B8Sonxo7V4u/iijvJ0H26p4dvAIssh4cvlVD+HYYN/tiArX
-         aHbbMJ5/nJFCHZeqY4DBSFtuZdd27bGIAqxaH1dCR1WteITU5JG/oSO0FIfONDsuJGeQ
-         ZI5A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112; t=1679316214;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=CuPNRur3NtDnFJVCvDkEsVvpqOyVBKyvwyaXnfO9pqQ=;
-        b=g7YMRlcF91a78Xi+8w+c8lKfDxZs4/3GuUgNkyOKgb4D/KJKaUz3jMwu/+TS4VVkEO
-         jKWjHIyTCGmimqJnLGDaIZrQ3BSzlEJuq5zfZjBxr0VrMElrIjh6FsJnhfaEdBMXLUWH
-         sMo98FEFtfZqoCDYJ2PF/fpUVL9AC6Gz9DjnPMBME2FDR4wkf0PK6LSleSnDq2w4xCCp
-         CotCl1av24ZbIVyo9JFSyxfHTFU4donsDjyruln113RZJy234gqps7U8jHcc5ruQizb/
-         9EofxxZU1p8/qD5e+BJ3l32sAGEAz0pycwg9yoDSQr9h2eEsnZ1OOfXPW5ZtPIA3Wzpv
-         yPPg==
-X-Gm-Message-State: AO0yUKUWfw11uQESVXWgzH1Nm2PKO05Kz9qQ1fHr+lnlan6Bb6afhqvU
-        4RxtQj+ALUa1d6Alfvg+5Z8=
-X-Google-Smtp-Source: AK7set9exICfpZxGY8h+eBzFIKrFFkrk0yOXMxizkoAm5tACLSpbGCmlrUA5F82wFem4X1ugpyK80A==
-X-Received: by 2002:a17:90b:4acf:b0:23d:9a3:f571 with SMTP id mh15-20020a17090b4acf00b0023d09a3f571mr19188670pjb.20.1679316214106;
-        Mon, 20 Mar 2023 05:43:34 -0700 (PDT)
-Received: from debian.me (subs02-180-214-232-6.three.co.id. [180.214.232.6])
-        by smtp.gmail.com with ESMTPSA id p12-20020a17090a2d8c00b0023440af7aafsm6114484pjd.9.2023.03.20.05.43.33
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 20 Mar 2023 05:43:33 -0700 (PDT)
-Received: by debian.me (Postfix, from userid 1000)
-        id 7343A1065D0; Mon, 20 Mar 2023 19:43:29 +0700 (WIB)
-From:   Bagas Sanjaya <bagasdotme@gmail.com>
-To:     Linux Documentation <linux-doc@vger.kernel.org>,
-        Linux Kernel Mailing List <linux-kernel@vger.kernel.org>
-Cc:     Jonathan Corbet <corbet@lwn.net>, Borislav Petkov <bp@suse.de>,
-        Dave Hansen <dave.hansen@linux.intel.com>,
-        Bagas Sanjaya <bagasdotme@gmail.com>,
-        Thomas Gleixner <tglx@linutronix.de>,
-        "Paul E. McKenney" <paulmck@kernel.org>
-Subject: [PATCH] Documentation: maintainer-tip: Rectify link to "Describe your changes" section of submitting-patches.rst
-Date:   Mon, 20 Mar 2023 19:43:27 +0700
-Message-Id: <20230320124327.174881-1-bagasdotme@gmail.com>
-X-Mailer: git-send-email 2.40.0
+        with ESMTP id S231578AbjCTMrk (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Mon, 20 Mar 2023 08:47:40 -0400
+Received: from mga17.intel.com (mga17.intel.com [192.55.52.151])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 1B9FA149AB;
+        Mon, 20 Mar 2023 05:47:35 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1679316455; x=1710852455;
+  h=date:from:to:cc:subject:message-id:references:
+   mime-version:in-reply-to;
+  bh=BS/iDj084XvVXlM/TI4ORDgBbDzLSZq0yXe7n1ACXBA=;
+  b=j9QG30vAS0DKc/3qnMLMiFY6bp9keIN4U7TKil+tNwggJBlBHE1OGdou
+   Ev3hGaBRV0UqJ/V0IY0FARCF8BkxP7/vpmT1IucShYPvlZOVCYp4RHFG3
+   u2p/n43Db23Ch67urc+ILtKcE0QTHNyQuaFjO6gvkNxSG2SYmPKD7wB0S
+   CeidzDI12sphF0MbiQxsrHW1wn+1+nm+YaigHaMwLrtF9AztVQTjcCs7s
+   XNVqf/oGAAlmyaURzYERCQhuCcIrwRd4cPpXyq5Aj25JEmN0qlPW4kO+t
+   dlaM9tr9TYJ6rA3ZR+nYkYQff4XMdpWxmZo0HuezHYLF72yGco18BsY2G
+   g==;
+X-IronPort-AV: E=McAfee;i="6600,9927,10654"; a="319050903"
+X-IronPort-AV: E=Sophos;i="5.98,274,1673942400"; 
+   d="scan'208";a="319050903"
+Received: from fmsmga008.fm.intel.com ([10.253.24.58])
+  by fmsmga107.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 20 Mar 2023 05:46:57 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=McAfee;i="6600,9927,10654"; a="745361757"
+X-IronPort-AV: E=Sophos;i="5.98,274,1673942400"; 
+   d="scan'208";a="745361757"
+Received: from smile.fi.intel.com ([10.237.72.54])
+  by fmsmga008.fm.intel.com with ESMTP; 20 Mar 2023 05:46:51 -0700
+Received: from andy by smile.fi.intel.com with local (Exim 4.96)
+        (envelope-from <andriy.shevchenko@linux.intel.com>)
+        id 1peEuW-006GkN-0C;
+        Mon, 20 Mar 2023 14:46:48 +0200
+Date:   Mon, 20 Mar 2023 14:46:47 +0200
+From:   Andy Shevchenko <andriy.shevchenko@linux.intel.com>
+To:     Paul Fertser <fercerpav@gmail.com>
+Cc:     Iwona Winiarska <iwona.winiarska@intel.com>,
+        linux-kernel@vger.kernel.org, openbmc@lists.ozlabs.org,
+        Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+        linux-aspeed@lists.ozlabs.org, linux-doc@vger.kernel.org,
+        Dave Hansen <dave.hansen@intel.com>,
+        Zev Weiss <zweiss@equinix.com>,
+        Jae Hyun Yoo <jae.hyun.yoo@linux.intel.com>,
+        Jonathan Corbet <corbet@lwn.net>,
+        Pierre-Louis Bossart <pierre-louis.bossart@linux.intel.com>,
+        Guenter Roeck <linux@roeck-us.net>, devicetree@vger.kernel.org,
+        Jean Delvare <jdelvare@suse.com>,
+        Arnd Bergmann <arnd@arndb.de>,
+        Billy Tsai <billy_tsai@aspeedtech.com>,
+        Rob Herring <robh+dt@kernel.org>,
+        Borislav Petkov <bp@alien8.de>,
+        Dan Williams <dan.j.williams@intel.com>,
+        linux-arm-kernel@lists.infradead.org, linux-hwmon@vger.kernel.org,
+        Tony Luck <tony.luck@intel.com>,
+        Andrew Jeffery <andrew@aj.id.au>,
+        Randy Dunlap <rdunlap@infradead.org>,
+        Olof Johansson <olof@lixom.net>
+Subject: Re: [PATCH v8 10/13] hwmon: peci: Add cputemp driver
+Message-ID: <ZBhVt74i1DSoa+bE@smile.fi.intel.com>
+References: <20220208153639.255278-1-iwona.winiarska@intel.com>
+ <20220208153639.255278-11-iwona.winiarska@intel.com>
+ <ZBhHS7v+98NK56is@home.paul.comp>
 MIME-Version: 1.0
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1511; i=bagasdotme@gmail.com; h=from:subject; bh=FAEl/7SkBqFPoHqShwOaCVSmuT0ZoOhqKjAWrvmRTI8=; b=owGbwMvMwCX2bWenZ2ig32LG02pJDCkSIa8U3zaEsvBwi3b9MjvFo2LWZiqYvyjNcfopsfPiY Xftf6zuKGVhEONikBVTZJmUyNd0epeRyIX2tY4wc1iZQIYwcHEKwETCMhn+qXt+UL5/0Lpl1bbP e0IXNxxJX/GE/ZBJSv8CYQnuBvvjqxj+R3zxWmVvsKvj2htVnsUpqQ83ld7a+WzHCZ65otdnv7V cwQcA
-X-Developer-Key: i=bagasdotme@gmail.com; a=openpgp; fpr=701B806FDCA5D3A58FFB8F7D7C276C64A5E44A1D
-Content-Transfer-Encoding: 8bit
-X-Spam-Status: No, score=-0.6 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_FROM,
-        RCVD_IN_DNSWL_NONE,RCVD_IN_SORBS_WEB,SPF_HELO_NONE,SPF_PASS
-        autolearn=no autolearn_force=no version=3.4.6
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <ZBhHS7v+98NK56is@home.paul.comp>
+Organization: Intel Finland Oy - BIC 0357606-4 - Westendinkatu 7, 02160 Espoo
+X-Spam-Status: No, score=-4.3 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_EF,RCVD_IN_DNSWL_MED,SPF_HELO_NONE,
+        SPF_NONE autolearn=ham autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-The general changelog rules for the tip tree refers to "Describe your
-changes" section of submitting patches guide. However, the internal link
-reference targets to non-existent "submittingpatches" label, which
-brings reader to the top of the linked doc.
+On Mon, Mar 20, 2023 at 02:45:15PM +0300, Paul Fertser wrote:
+> Hello,
+> 
+> We are seeing wrong DTS temperatures on at least "Intel(R) Xeon(R)
+> Bronze 3204 CPU @ 1.90GHz" and most probably other Skylake Xeon CPUs
+> are also affected, see inline.
 
-Correct the target. No changes to submitting-patches.rst since the
-required label is already there.
+Thanks for the report! I guess we need a fix for this indeed.
 
-Fixes: 31c9d7c8297558 ("Documentation/process: Add tip tree handbook")
-Signed-off-by: Bagas Sanjaya <bagasdotme@gmail.com>
----
- This patch is based on core/urgent branch of tip tree.
+> On Tue, Feb 08, 2022 at 04:36:36PM +0100, Iwona Winiarska wrote:
+> > Add peci-cputemp driver for Digital Thermal Sensor (DTS) thermal
+> > readings of the processor package and processor cores that are
+> > accessible via the PECI interface.
+> ...
+> > +static const struct cpu_info cpu_hsx = {
+> > +	.reg		= &resolved_cores_reg_hsx,
+> > +	.min_peci_revision = 0x33,
+> > +	.thermal_margin_to_millidegree = &dts_eight_dot_eight_to_millidegree,
+> > +};
+> > +
+> > +static const struct cpu_info cpu_icx = {
+> > +	.reg		= &resolved_cores_reg_icx,
+> > +	.min_peci_revision = 0x40,
+> > +	.thermal_margin_to_millidegree = &dts_ten_dot_six_to_millidegree,
+> > +};
+> ...
+> > +	{
+> > +		.name = "peci_cpu.cputemp.skx",
+> > +		.driver_data = (kernel_ulong_t)&cpu_hsx,
+> > +	},
+> 
+> With this configuration we get this data:
+> 
+> /sys/bus/peci/devices/0-30/peci_cpu.cputemp.skx.48/hwmon/hwmon15# grep . temp[123]_{label,input}
+> temp1_label:Die
+> temp2_label:DTS
+> temp3_label:Tcontrol
+> temp1_input:30938
+> temp2_input:67735
+> temp3_input:80000
+> 
+> On the host system "sensors" report
+> 
+> Package id 0:  +31.C (high = +80.C, crit = +90.C)
+> 
+> So I conclude Die temperature as retrieved over PECI is correct while
+> DTS is mis-calculated. The old downstream code in OpenBMC was using
+> ten_dot_six_to_millidegree() function for conversion, and that was
+> providing expected results. And indeed if we reverse the calculation
+> here we get 80000 - ((80000-67735) * 256 / 64) = 30940 which matches
+> expectations.
 
- Documentation/process/maintainer-tip.rst | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
-
-diff --git a/Documentation/process/maintainer-tip.rst b/Documentation/process/maintainer-tip.rst
-index 572a3289c9cbf3..178c95fd17dcad 100644
---- a/Documentation/process/maintainer-tip.rst
-+++ b/Documentation/process/maintainer-tip.rst
-@@ -128,8 +128,8 @@ uppercase letter and should be written in imperative tone.
- Changelog
- ^^^^^^^^^
- 
--The general rules about changelogs in the process documentation, see
--:ref:`Documentation/process/ <submittingpatches>`, apply.
-+The general rules about changelogs in the :ref:`Submitting patches guide
-+<describe_changes>`, apply.
- 
- The tip tree maintainers set value on following these rules, especially on
- the request to write changelogs in imperative mood and not impersonating
-
-base-commit: 3e2619c4ebba2cab8414c55b131b7a28f628de3b
 -- 
-An old man doll... just what I always wanted! - Clara
+With Best Regards,
+Andy Shevchenko
+
 
