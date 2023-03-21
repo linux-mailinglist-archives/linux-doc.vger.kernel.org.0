@@ -2,507 +2,445 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 45EB96C3348
-	for <lists+linux-doc@lfdr.de>; Tue, 21 Mar 2023 14:50:05 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 5D56D6C32CF
+	for <lists+linux-doc@lfdr.de>; Tue, 21 Mar 2023 14:26:01 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S230221AbjCUNuE (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 21 Mar 2023 09:50:04 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:47112 "EHLO
+        id S229873AbjCUNZ5 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 21 Mar 2023 09:25:57 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:43326 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S230478AbjCUNuD (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 21 Mar 2023 09:50:03 -0400
-X-Greylist: delayed 2085 seconds by postgrey-1.37 at lindbergh.monkeyblade.net; Tue, 21 Mar 2023 06:49:52 PDT
-Received: from mailgw.felk.cvut.cz (mailgw.felk.cvut.cz [147.32.82.15])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id CB4D747823
-        for <linux-doc@vger.kernel.org>; Tue, 21 Mar 2023 06:49:52 -0700 (PDT)
-Received: from mailgw.felk.cvut.cz (localhost.localdomain [127.0.0.1])
-        by mailgw.felk.cvut.cz (Proxmox) with ESMTP id 6925230B297D;
-        Tue, 21 Mar 2023 14:14:35 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
-        cmp.felk.cvut.cz; h=cc:cc:content-transfer-encoding:content-type
-        :content-type:date:from:from:in-reply-to:message-id:mime-version
-        :references:reply-to:subject:subject:to:to; s=felkmail; bh=Z3KDv
-        o1vtl3aWdCV5OZRHZJT+mxwFWTbwRzKJ9hV6Zk=; b=Dcp4WJJ/M0iBDnt3AVDrO
-        Yxd2BWd7M/fftXf/Cvy6t3sKgoYtvXIyXbIAQqiJvwoQYukqJNuCkuv0DwRYvWaa
-        f+nFsJgzhJSSwIi+FqKcCZRUetsFeYQk45CmOqkiUwqGzqmz4IwSRdWlkbnGMqx3
-        js4u8SNufLM+XIWxxIL2/JA5xxydLeGQ3+98cgW+cQHCccWogv/0ANvHpC5sv3N/
-        nMQFVLaMUMUcrYgaMSn0+xJpBCgivpaDkXxCwgAYCrREQ0VLu/pZWw+rLdPeIwAl
-        3IB5DozzvgI0PzBzyIYL/nbnDnCdGcAiW3+M9bfvyNcewsfo6iOSTpc8c9lsAcam
-        w==
-Received: from cmp.felk.cvut.cz (haar.felk.cvut.cz [147.32.84.19])
-        by mailgw.felk.cvut.cz (Proxmox) with ESMTPS id 955FA30B2979;
-        Tue, 21 Mar 2023 14:14:32 +0100 (CET)
-Received: from haar.felk.cvut.cz (localhost [127.0.0.1])
-        by cmp.felk.cvut.cz (8.14.0/8.12.3/SuSE Linux 0.6) with ESMTP id 32LDEWl3027777;
-        Tue, 21 Mar 2023 14:14:32 +0100
-Received: (from pisa@localhost)
-        by haar.felk.cvut.cz (8.14.0/8.13.7/Submit) id 32LDEVRM027776;
-        Tue, 21 Mar 2023 14:14:31 +0100
-X-Authentication-Warning: haar.felk.cvut.cz: pisa set sender to pisa@cmp.felk.cvut.cz using -f
-From:   Pavel Pisa <pisa@cmp.felk.cvut.cz>
-To:     Jakub Kicinski <kuba@kernel.org>
-Subject: Re: [PATCH net-next v2] docs: networking: document NAPI
-Date:   Tue, 21 Mar 2023 14:14:11 +0100
-User-Agent: KMail/1.9.10
-Cc:     davem@davemloft.net, netdev@vger.kernel.org, edumazet@google.com,
-        pabeni@redhat.com, Bagas Sanjaya <bagasdotme@gmail.com>,
-        "Toke =?utf-8?q?H=C3=B8iland-J=C3=B8rgensen?=" <toke@redhat.com>,
-        corbet@lwn.net, jesse.brandeburg@intel.com,
-        anthony.l.nguyen@intel.com, mkl@pengutronix.de,
-        linux-doc@vger.kernel.org, f.fainelli@gmail.com,
-        stephen@networkplumber.org
-References: <20230321050334.1036870-1-kuba@kernel.org>
-In-Reply-To: <20230321050334.1036870-1-kuba@kernel.org>
-X-KMail-QuotePrefix: > 
+        with ESMTP id S229606AbjCUNZ4 (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 21 Mar 2023 09:25:56 -0400
+Received: from mail-lf1-x12a.google.com (mail-lf1-x12a.google.com [IPv6:2a00:1450:4864:20::12a])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 4C2BF4ECE1;
+        Tue, 21 Mar 2023 06:25:17 -0700 (PDT)
+Received: by mail-lf1-x12a.google.com with SMTP id bi9so19062907lfb.12;
+        Tue, 21 Mar 2023 06:25:17 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112; t=1679405045;
+        h=in-reply-to:content-transfer-encoding:content-disposition
+         :mime-version:references:message-id:subject:cc:to:from:date:from:to
+         :cc:subject:date:message-id:reply-to;
+        bh=hGk4QhzV6m7VkJkhXX15t1lCL2ihZM2uNosdUtyN80g=;
+        b=ZUAFkm09zT/2txCWSpqDsJy7gap41A5uBCG4xjzXv5RJE4Qs9SC+liY/RHxLEsc3/C
+         BwzlsT+Y8RJiFY6yi64lvi2bIQaqW8V+s+ACbtkhFW2FF4xa2G0I+Hzu8+9OtvwwYEuV
+         Bg/y0Rpu6zkeq0NiA/i7AHQLH6/0QExcdS8AI5BAsAdhLZNHk6P6PuOCBU/I5HLHRKuH
+         kSH9AUzcjWKazzkuACrSdkLruEZtw08TS0mXWEi4YyMw0mTQk8EDKPn5YdPjAFdFRb6M
+         ScyaFTjPnnE28fPz3XIVCq9XU6OkhrquyTXKY4yC1QCNQ/Zn1/Cpb+Rv8ti+zvld8DrP
+         IBiA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112; t=1679405045;
+        h=in-reply-to:content-transfer-encoding:content-disposition
+         :mime-version:references:message-id:subject:cc:to:from:date
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=hGk4QhzV6m7VkJkhXX15t1lCL2ihZM2uNosdUtyN80g=;
+        b=RTqPoBN7JdbiR4mmuDhSfxjSHQWH6ah7iS0+1SlVM0rUX/WWwojiVqs+eSKxHusAzg
+         nFXKC4DanURzqzNoWTJsqx2PqzGIix1iUOUxZsEwvdOrOr3swQJh1cLbR3TFU1E6WJZZ
+         rfRp0jyk66FM3P/zcexHPzwexmSjE6OiHW2wtaBALmncFgeHijhtlqIlb6Jk4F+ZfcVt
+         QUM7eOS2iPRCCHLBV//hgbqVwbQ/PF2LWmrW5yJqwF6KN3g9je1ii5vAZ/IJLyvI6O5J
+         /0ShB3VeBwwe4xbtBSVrnZFJ2m1dawClgSnNqcKds82ZxqupB328Wr5+IQZs4eHxwblG
+         KORg==
+X-Gm-Message-State: AO0yUKWaQLqV4i5h++eDuBPXdOrpTSOGt+Zq/GwuNctA9IExIsQj/6DL
+        o9kycrFIlLyEPAF5gW68d+Q=
+X-Google-Smtp-Source: AK7set8Pn27qOKWi4fLa6EedkEGUcEQHTxM9gDXG1TvgDvmf79vRk1o6Cx6xjJuQDq5ugLjqqqTwww==
+X-Received: by 2002:ac2:43d3:0:b0:4a4:68b9:1a14 with SMTP id u19-20020ac243d3000000b004a468b91a14mr692901lfl.60.1679405045219;
+        Tue, 21 Mar 2023 06:24:05 -0700 (PDT)
+Received: from gmail.com (host-95-193-64-255.mobileonline.telia.com. [95.193.64.255])
+        by smtp.gmail.com with ESMTPSA id f21-20020ac251b5000000b004eaf2207a33sm161998lfk.223.2023.03.21.06.24.03
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 21 Mar 2023 06:24:04 -0700 (PDT)
+Date:   Tue, 21 Mar 2023 14:24:02 +0100
+From:   Jonas =?iso-8859-1?Q?=C5dahl?= <jadahl@gmail.com>
+To:     Rob Clark <robdclark@gmail.com>
+Cc:     dri-devel@lists.freedesktop.org,
+        Rob Clark <robdclark@chromium.org>,
+        Pekka Paalanen <pekka.paalanen@collabora.com>,
+        Jonathan Corbet <corbet@lwn.net>,
+        Christian =?iso-8859-1?Q?K=F6nig?= 
+        <ckoenig.leichtzumerken@gmail.com>,
+        intel-gfx@lists.freedesktop.org,
+        "open list:DOCUMENTATION" <linux-doc@vger.kernel.org>,
+        open list <linux-kernel@vger.kernel.org>,
+        Sumit Semwal <sumit.semwal@linaro.org>,
+        "moderated list:DMA BUFFER SHARING FRAMEWORK" 
+        <linaro-mm-sig@lists.linaro.org>,
+        Luben Tuikov <luben.tuikov@amd.com>,
+        Bagas Sanjaya <bagasdotme@gmail.com>,
+        Rodrigo Vivi <rodrigo.vivi@intel.com>,
+        Gustavo Padovan <gustavo@padovan.org>,
+        Matt Turner <mattst88@gmail.com>,
+        freedreno@lists.freedesktop.org,
+        Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>,
+        "open list:DMA BUFFER SHARING FRAMEWORK" 
+        <linux-media@vger.kernel.org>
+Subject: Re: [PATCH v10 01/15] dma-buf/dma-fence: Add deadline awareness
+Message-ID: <ZBmv8oTAqqAY/ZDP@gmail.com>
+References: <20230308155322.344664-1-robdclark@gmail.com>
+ <20230308155322.344664-2-robdclark@gmail.com>
+ <ZAtQspuFjPtGy7ze@gmail.com>
+ <CAF6AEGsGOr5+Q10wX=5ttrWCSUJfn7gzHW8QhxFC0GDLgagMHg@mail.gmail.com>
+ <ZBHNvT3BLgS3qvV5@gmail.com>
+ <CAF6AEGu1S2CXzRxV_c5tE_H+XUGiO=n0tXjLZ_u_tW-eMqMsQw@mail.gmail.com>
+ <ZBLg0t0tTVvuPuiJ@gmail.com>
+ <CAF6AEGvV5arZThTyju_=xFFDWRbMaexgO_kkdKZuK-zeCxrN7Q@mail.gmail.com>
+ <ZBQ/qoxP+EGI0E7R@gmail.com>
+ <CAF6AEGvj6SuA63M=tBBfek0ESgU3fRvPcJLKDMn3_hgL3OdnTA@mail.gmail.com>
 MIME-Version: 1.0
-Content-Type: Text/Plain;
-  charset="utf-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=utf-8
 Content-Disposition: inline
-Message-Id: <202303211414.11544.pisa@cmp.felk.cvut.cz>
-X-Spam-Status: No, score=-2.0 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_AU,NICE_REPLY_A,SPF_HELO_NONE,SPF_NONE,
-        URIBL_BLOCKED autolearn=unavailable autolearn_force=no version=3.4.6
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <CAF6AEGvj6SuA63M=tBBfek0ESgU3fRvPcJLKDMn3_hgL3OdnTA@mail.gmail.com>
+X-Spam-Status: No, score=-2.1 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_FROM,
+        RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,SPF_PASS autolearn=ham
+        autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Hello Jakub,
+On Fri, Mar 17, 2023 at 08:59:48AM -0700, Rob Clark wrote:
+> On Fri, Mar 17, 2023 at 3:23 AM Jonas Ådahl <jadahl@gmail.com> wrote:
+> >
+> > On Thu, Mar 16, 2023 at 09:28:55AM -0700, Rob Clark wrote:
+> > > On Thu, Mar 16, 2023 at 2:26 AM Jonas Ådahl <jadahl@gmail.com> wrote:
+> > > >
+> > > > On Wed, Mar 15, 2023 at 09:19:49AM -0700, Rob Clark wrote:
+> > > > > On Wed, Mar 15, 2023 at 6:53 AM Jonas Ådahl <jadahl@gmail.com> wrote:
+> > > > > >
+> > > > > > On Fri, Mar 10, 2023 at 09:38:18AM -0800, Rob Clark wrote:
+> > > > > > > On Fri, Mar 10, 2023 at 7:45 AM Jonas Ådahl <jadahl@gmail.com> wrote:
+> > > > > > > >
+> > > > > > > > On Wed, Mar 08, 2023 at 07:52:52AM -0800, Rob Clark wrote:
+> > > > > > > > > From: Rob Clark <robdclark@chromium.org>
+> > > > > > > > >
+> > > > > > > > > Add a way to hint to the fence signaler of an upcoming deadline, such as
+> > > > > > > > > vblank, which the fence waiter would prefer not to miss.  This is to aid
+> > > > > > > > > the fence signaler in making power management decisions, like boosting
+> > > > > > > > > frequency as the deadline approaches and awareness of missing deadlines
+> > > > > > > > > so that can be factored in to the frequency scaling.
+> > > > > > > > >
+> > > > > > > > > v2: Drop dma_fence::deadline and related logic to filter duplicate
+> > > > > > > > >     deadlines, to avoid increasing dma_fence size.  The fence-context
+> > > > > > > > >     implementation will need similar logic to track deadlines of all
+> > > > > > > > >     the fences on the same timeline.  [ckoenig]
+> > > > > > > > > v3: Clarify locking wrt. set_deadline callback
+> > > > > > > > > v4: Clarify in docs comment that this is a hint
+> > > > > > > > > v5: Drop DMA_FENCE_FLAG_HAS_DEADLINE_BIT.
+> > > > > > > > > v6: More docs
+> > > > > > > > > v7: Fix typo, clarify past deadlines
+> > > > > > > > >
+> > > > > > > > > Signed-off-by: Rob Clark <robdclark@chromium.org>
+> > > > > > > > > Reviewed-by: Christian König <christian.koenig@amd.com>
+> > > > > > > > > Acked-by: Pekka Paalanen <pekka.paalanen@collabora.com>
+> > > > > > > > > Reviewed-by: Bagas Sanjaya <bagasdotme@gmail.com>
+> > > > > > > > > ---
+> > > > > > > >
+> > > > > > > > Hi Rob!
+> > > > > > > >
+> > > > > > > > >  Documentation/driver-api/dma-buf.rst |  6 +++
+> > > > > > > > >  drivers/dma-buf/dma-fence.c          | 59 ++++++++++++++++++++++++++++
+> > > > > > > > >  include/linux/dma-fence.h            | 22 +++++++++++
+> > > > > > > > >  3 files changed, 87 insertions(+)
+> > > > > > > > >
+> > > > > > > > > diff --git a/Documentation/driver-api/dma-buf.rst b/Documentation/driver-api/dma-buf.rst
+> > > > > > > > > index 622b8156d212..183e480d8cea 100644
+> > > > > > > > > --- a/Documentation/driver-api/dma-buf.rst
+> > > > > > > > > +++ b/Documentation/driver-api/dma-buf.rst
+> > > > > > > > > @@ -164,6 +164,12 @@ DMA Fence Signalling Annotations
+> > > > > > > > >  .. kernel-doc:: drivers/dma-buf/dma-fence.c
+> > > > > > > > >     :doc: fence signalling annotation
+> > > > > > > > >
+> > > > > > > > > +DMA Fence Deadline Hints
+> > > > > > > > > +~~~~~~~~~~~~~~~~~~~~~~~~
+> > > > > > > > > +
+> > > > > > > > > +.. kernel-doc:: drivers/dma-buf/dma-fence.c
+> > > > > > > > > +   :doc: deadline hints
+> > > > > > > > > +
+> > > > > > > > >  DMA Fences Functions Reference
+> > > > > > > > >  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+> > > > > > > > >
+> > > > > > > > > diff --git a/drivers/dma-buf/dma-fence.c b/drivers/dma-buf/dma-fence.c
+> > > > > > > > > index 0de0482cd36e..f177c56269bb 100644
+> > > > > > > > > --- a/drivers/dma-buf/dma-fence.c
+> > > > > > > > > +++ b/drivers/dma-buf/dma-fence.c
+> > > > > > > > > @@ -912,6 +912,65 @@ dma_fence_wait_any_timeout(struct dma_fence **fences, uint32_t count,
+> > > > > > > > >  }
+> > > > > > > > >  EXPORT_SYMBOL(dma_fence_wait_any_timeout);
+> > > > > > > > >
+> > > > > > > > > +/**
+> > > > > > > > > + * DOC: deadline hints
+> > > > > > > > > + *
+> > > > > > > > > + * In an ideal world, it would be possible to pipeline a workload sufficiently
+> > > > > > > > > + * that a utilization based device frequency governor could arrive at a minimum
+> > > > > > > > > + * frequency that meets the requirements of the use-case, in order to minimize
+> > > > > > > > > + * power consumption.  But in the real world there are many workloads which
+> > > > > > > > > + * defy this ideal.  For example, but not limited to:
+> > > > > > > > > + *
+> > > > > > > > > + * * Workloads that ping-pong between device and CPU, with alternating periods
+> > > > > > > > > + *   of CPU waiting for device, and device waiting on CPU.  This can result in
+> > > > > > > > > + *   devfreq and cpufreq seeing idle time in their respective domains and in
+> > > > > > > > > + *   result reduce frequency.
+> > > > > > > > > + *
+> > > > > > > > > + * * Workloads that interact with a periodic time based deadline, such as double
+> > > > > > > > > + *   buffered GPU rendering vs vblank sync'd page flipping.  In this scenario,
+> > > > > > > > > + *   missing a vblank deadline results in an *increase* in idle time on the GPU
+> > > > > > > > > + *   (since it has to wait an additional vblank period), sending a signal to
+> > > > > > > > > + *   the GPU's devfreq to reduce frequency, when in fact the opposite is what is
+> > > > > > > > > + *   needed.
+> > > > > > > >
+> > > > > > > > This is the use case I'd like to get some better understanding about how
+> > > > > > > > this series intends to work, as the problematic scheduling behavior
+> > > > > > > > triggered by missed deadlines has plagued compositing display servers
+> > > > > > > > for a long time.
+> > > > > > > >
+> > > > > > > > I apologize, I'm not a GPU driver developer, nor an OpenGL driver
+> > > > > > > > developer, so I will need some hand holding when it comes to
+> > > > > > > > understanding exactly what piece of software is responsible for
+> > > > > > > > communicating what piece of information.
+> > > > > > > >
+> > > > > > > > > + *
+> > > > > > > > > + * To this end, deadline hint(s) can be set on a &dma_fence via &dma_fence_set_deadline.
+> > > > > > > > > + * The deadline hint provides a way for the waiting driver, or userspace, to
+> > > > > > > > > + * convey an appropriate sense of urgency to the signaling driver.
+> > > > > > > > > + *
+> > > > > > > > > + * A deadline hint is given in absolute ktime (CLOCK_MONOTONIC for userspace
+> > > > > > > > > + * facing APIs).  The time could either be some point in the future (such as
+> > > > > > > > > + * the vblank based deadline for page-flipping, or the start of a compositor's
+> > > > > > > > > + * composition cycle), or the current time to indicate an immediate deadline
+> > > > > > > > > + * hint (Ie. forward progress cannot be made until this fence is signaled).
+> > > > > > > >
+> > > > > > > > Is it guaranteed that a GPU driver will use the actual start of the
+> > > > > > > > vblank as the effective deadline? I have some memories of seing
+> > > > > > > > something about vblank evasion browsing driver code, which I might have
+> > > > > > > > misunderstood, but I have yet to find whether this is something
+> > > > > > > > userspace can actually expect to be something it can rely on.
+> > > > > > >
+> > > > > > > I guess you mean s/GPU driver/display driver/ ?  It makes things more
+> > > > > > > clear if we talk about them separately even if they happen to be the
+> > > > > > > same device.
+> > > > > >
+> > > > > > Sure, sorry about being unclear about that.
+> > > > > >
+> > > > > > >
+> > > > > > > Assuming that is what you mean, nothing strongly defines what the
+> > > > > > > deadline is.  In practice there is probably some buffering in the
+> > > > > > > display controller.  For ex, block based (including bandwidth
+> > > > > > > compressed) formats, you need to buffer up a row of blocks to
+> > > > > > > efficiently linearize for scanout.  So you probably need to latch some
+> > > > > > > time before you start sending pixel data to the display.  But details
+> > > > > > > like this are heavily implementation dependent.  I think the most
+> > > > > > > reasonable thing to target is start of vblank.
+> > > > > >
+> > > > > > The driver exposing those details would be quite useful for userspace
+> > > > > > though, so that it can delay committing updates to late, but not too
+> > > > > > late. Setting a deadline to be the vblank seems easy enough, but it
+> > > > > > isn't enough for scheduling the actual commit.
+> > > > >
+> > > > > I'm not entirely sure how that would even work.. but OTOH I think you
+> > > > > are talking about something on the order of 100us?  But that is a bit
+> > > > > of another topic.
+> > > >
+> > > > Yes, something like that. But yea, it's not really related. Scheduling
+> > > > commits closer to the deadline has more complex behavior than that too,
+> > > > e.g. the need for real time scheduling, and knowing how long it usually
+> > > > takes to create and commit and for the kernel to process.
+> > > >
+> > > > >
+> > > >
+> > > > 8-< *snip* 8-<
+> > > >
+> > > > > > >
+> > > > > > > You need a fence to set the deadline, and for that work needs to be
+> > > > > > > flushed.  But you can't associate a deadline with work that the kernel
+> > > > > > > is unaware of anyways.
+> > > > > >
+> > > > > > That makes sense, but it might also a bit inadequate to have it as the
+> > > > > > only way to tell the kernel it should speed things up. Even with the
+> > > > > > trick i915 does, with GNOME Shell, we still end up with the feedback
+> > > > > > loop this series aims to mitigate. Doing triple buffering, i.e. delaying
+> > > > > > or dropping the first frame is so far the best work around that works,
+> > > > > > except doing other tricks that makes the kernel to ramp up its clock.
+> > > > > > Having to rely on choosing between latency and frame drops should
+> > > > > > ideally not have to be made.
+> > > > >
+> > > > > Before you have a fence, the thing you want to be speeding up is the
+> > > > > CPU, not the GPU.  There are existing mechanisms for that.
+> > > >
+> > > > Is there no benefit to let the GPU know earlier that it should speed up,
+> > > > so that when the job queue arrives, it's already up to speed?
+> > >
+> > > Downstream we have input notifier that resumes the GPU so we can
+> > > pipeline the 1-2ms it takes to boot up the GPU with userspace.  But we
+> > > wait to boost freq until we have cmdstream to submit, since that
+> > > doesn't take as long.  What needs help initially after input is all
+> > > the stuff that happens on the CPU before the GPU can start to do
+> > > anything ;-)
+> >
+> > How do you deal with boosting CPU speeds downstream? Does the input
+> > notifier do that too?
+> 
+> Yes.. actually currently downstream (depending on device) we have 1 to
+> 3 input notifiers, one for CPU boost, one for early-PSR-exit, and one
+> to get a head start on booting up the GPU.
 
-On Tuesday 21 of March 2023 06:03:34 Jakub Kicinski wrote:
-> Add basic documentation about NAPI. We can stop linking to the ancient
-> doc on the LF wiki.
->
-> Signed-off-by: Jakub Kicinski <kuba@kernel.org>
-> Link: https://lore.kernel.org/all/20230315223044.471002-1-kuba@kernel.org/
-> Reviewed-by: Bagas Sanjaya <bagasdotme@gmail.com>
-> Reviewed-by: Toke H=C3=B8iland-J=C3=B8rgensen <toke@redhat.com>
+Would be really nice to upstream these, one way or the other, be it
+actually input event based, or via some uapi to just poke the kernel. I
+realize it's not related to this thread, so this is just me wishing
+things into the void.
 
-Acked-by: Pavel Pisa <pisa@cmp.felk.cvut.cz> # for ctucanfd-driver.rst
+> 
+> > >
+> > > Btw, I guess I haven't made this clear, dma-fence deadline is trying
+> > > to help the steady-state situation, rather than the input-latency
+> > > situation.  It might take a frame or two of missed deadlines for
+> > > gpufreq to arrive at a good steady-state freq.
+> >
+> > I'm just not sure it will help. Missed deadlines set at commit hasn't
+> > been enough in the past to let the kernel understand it should speed
+> > things up before the next frame (which will be a whole frame late
+> > without any triple buffering which should be a last resort), so I don't
+> > see how it will help by adding a userspace hook to do the same thing.
+> 
+> So deadline is just a superset of "right now" and "sometime in the
+> future".. and this has been useful enough for i915 that they have both
+> forms, when waiting on GPU via i915 specific ioctls and when pageflip
+> (assuming userspace isn't deferring composition decision and instead
+> just pushing it all down to the kernel).  But this breaks down in a
+> few cases:
+> 
+> 1) non pageflip (for ex. ping-ponging between cpu and gpu) use cases
+> when you wait via polling on fence fd or wait via drm_syncobj instead
+> of DRM_IOCTL_I915_GEM_WAIT
+> 2) when userspace decides late in frame to not pageflip because app
+> fence isn't signaled yet
 
-> ---
-> v2: remove the links in CAN and in ICE as well
->     improve the start of the threaded NAPI section
->     name footnote
->     internal links from the intro to sections
->     various clarifications from Florian and Stephen
->
-> CC: corbet@lwn.net
-> CC: jesse.brandeburg@intel.com
-> CC: anthony.l.nguyen@intel.com
-> CC: pisa@cmp.felk.cvut.cz
-> CC: mkl@pengutronix.de
-> CC: linux-doc@vger.kernel.org
-> CC: f.fainelli@gmail.com
-> CC: stephen@networkplumber.org
-> ---
->  .../can/ctu/ctucanfd-driver.rst               |   3 +-
->  .../device_drivers/ethernet/intel/e100.rst    |   3 +-
->  .../device_drivers/ethernet/intel/i40e.rst    |   4 +-
->  .../device_drivers/ethernet/intel/ice.rst     |   4 +-
->  .../device_drivers/ethernet/intel/ixgb.rst    |   4 +-
->  Documentation/networking/index.rst            |   1 +
->  Documentation/networking/napi.rst             | 251 ++++++++++++++++++
->  include/linux/netdevice.h                     |  13 +-
->  8 files changed, 267 insertions(+), 16 deletions(-)
->  create mode 100644 Documentation/networking/napi.rst
->
-> diff --git
-> a/Documentation/networking/device_drivers/can/ctu/ctucanfd-driver.rst
-> b/Documentation/networking/device_drivers/can/ctu/ctucanfd-driver.rst ind=
-ex
-> 1a4fc6607582..1661d13174d5 100644
-> --- a/Documentation/networking/device_drivers/can/ctu/ctucanfd-driver.rst
-> +++ b/Documentation/networking/device_drivers/can/ctu/ctucanfd-driver.rst
-> @@ -229,8 +229,7 @@ frames for a while. This has a potential to avoid the
-> costly round of enabling interrupts, handling an incoming IRQ in ISR,
-> re-enabling the softirq and switching context back to softirq.
->
-> -More detailed documentation of NAPI may be found on the pages of Linux
-> -Foundation `<https://wiki.linuxfoundation.org/networking/napi>`_.
-> +See :ref:`Documentation/networking/napi.rst <napi>` for more information.
->
->  Integrating the core to Xilinx Zynq
->  -----------------------------------
-> diff --git
-> a/Documentation/networking/device_drivers/ethernet/intel/e100.rst
-> b/Documentation/networking/device_drivers/ethernet/intel/e100.rst index
-> 3d4a9ba21946..371b7e5c3293 100644
-> --- a/Documentation/networking/device_drivers/ethernet/intel/e100.rst
-> +++ b/Documentation/networking/device_drivers/ethernet/intel/e100.rst
-> @@ -151,8 +151,7 @@ NAPI
->
->  NAPI (Rx polling mode) is supported in the e100 driver.
->
-> -See https://wiki.linuxfoundation.org/networking/napi for more
-> -information on NAPI.
-> +See :ref:`Documentation/networking/napi.rst <napi>` for more information.
->
->  Multiple Interfaces on Same Ethernet Broadcast Network
->  ------------------------------------------------------
-> diff --git
-> a/Documentation/networking/device_drivers/ethernet/intel/i40e.rst
-> b/Documentation/networking/device_drivers/ethernet/intel/i40e.rst index
-> ac35bd472bdc..c495c4e16b3b 100644
-> --- a/Documentation/networking/device_drivers/ethernet/intel/i40e.rst
-> +++ b/Documentation/networking/device_drivers/ethernet/intel/i40e.rst
-> @@ -399,8 +399,8 @@ operate only in full duplex and only at their native
-> speed. NAPI
->  ----
->  NAPI (Rx polling mode) is supported in the i40e driver.
-> -For more information on NAPI, see
-> -https://wiki.linuxfoundation.org/networking/napi
-> +
-> +See :ref:`Documentation/networking/napi.rst <napi>` for more information.
->
->  Flow Control
->  ------------
-> diff --git a/Documentation/networking/device_drivers/ethernet/intel/ice.r=
-st
-> b/Documentation/networking/device_drivers/ethernet/intel/ice.rst index
-> 5efea4dd1251..2b6dc7880d7b 100644
-> --- a/Documentation/networking/device_drivers/ethernet/intel/ice.rst
-> +++ b/Documentation/networking/device_drivers/ethernet/intel/ice.rst
-> @@ -817,10 +817,10 @@ on your device, you may not be able to change the
-> auto-negotiation setting.
->
->  NAPI
->  ----
-> +
->  This driver supports NAPI (Rx polling mode).
-> -For more information on NAPI, see
-> -https://wiki.linuxfoundation.org/networking/napi
->
-> +See :ref:`Documentation/networking/napi.rst <napi>` for more information.
->
->  MACVLAN
->  -------
-> diff --git
-> a/Documentation/networking/device_drivers/ethernet/intel/ixgb.rst
-> b/Documentation/networking/device_drivers/ethernet/intel/ixgb.rst index
-> c6a233e68ad6..90ddbc912d8d 100644
-> --- a/Documentation/networking/device_drivers/ethernet/intel/ixgb.rst
-> +++ b/Documentation/networking/device_drivers/ethernet/intel/ixgb.rst
-> @@ -367,9 +367,7 @@ NAPI
->  ----
->  NAPI (Rx polling mode) is supported in the ixgb driver.
->
-> -See https://wiki.linuxfoundation.org/networking/napi for more information
-> on -NAPI.
-> -
-> +See :ref:`Documentation/networking/napi.rst <napi>` for more information.
->
->  Known Issues/Troubleshooting
->  =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D
-> diff --git a/Documentation/networking/index.rst
-> b/Documentation/networking/index.rst index 4ddcae33c336..24bb256d6d53
-> 100644
-> --- a/Documentation/networking/index.rst
-> +++ b/Documentation/networking/index.rst
-> @@ -73,6 +73,7 @@ Refer to :ref:`netdev-FAQ` for a guide on netdev
-> development process specifics. mpls-sysctl
->     mptcp-sysctl
->     multiqueue
-> +   napi
->     netconsole
->     netdev-features
->     netdevices
-> diff --git a/Documentation/networking/napi.rst
-> b/Documentation/networking/napi.rst new file mode 100644
-> index 000000000000..e9833f2b777a
-> --- /dev/null
-> +++ b/Documentation/networking/napi.rst
-> @@ -0,0 +1,251 @@
-> +.. _napi:
-> +
-> +=3D=3D=3D=3D
-> +NAPI
-> +=3D=3D=3D=3D
-> +
-> +NAPI is the event handling mechanism used by the Linux networking stack.
-> +The name NAPI does not stand for anything in particular [#]_.
-> +
-> +In basic operation device notifies the host about new events via an
-> interrupt. +The host then schedules a NAPI instance to process the events.
-> +Device may also be polled for events via NAPI without receiving
-> +interrupts first (:ref:`busy polling<poll>`).
-> +
-> +NAPI processing usually happens in the software interrupt context,
-> +but user may choose to use :ref:`separate kernel threads<threaded>`
-> +for NAPI processing.
-> +
-> +All in all NAPI abstracts away from the drivers the context and
-> configuration +of event (packet Rx and Tx) processing.
-> +
-> +Driver API
-> +=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-> +
-> +The two most important elements of NAPI are the struct napi_struct
-> +and the associated poll method. struct napi_struct holds the state
-> +of the NAPI instance while the method is the driver-specific event
-> +handler. The method will typically free Tx packets which had been
-> +transmitted and process newly received packets.
-> +
-> +.. _drv_ctrl:
-> +
-> +Control API
-> +-----------
-> +
-> +netif_napi_add() and netif_napi_del() add/remove a NAPI instance
-> +from the system. The instances are attached to the netdevice passed
-> +as argument (and will be deleted automatically when netdevice is
-> +unregistered). Instances are added in a disabled state.
-> +
-> +napi_enable() and napi_disable() manage the disabled state.
-> +A disabled NAPI can't be scheduled and its poll method is guaranteed
-> +to not be invoked. napi_disable() waits for ownership of the NAPI
-> +instance to be released.
-> +
-> +The control APIs are not idempotent. Control API calls are safe against
-> +concurrent use of datapath APIs but incorrect sequence of control API
-> +calls may result in crashes, deadlocks, or race conditions. For example
-> +calling napi_disable() multiple times in a row will deadlock.
-> +
-> +Datapath API
-> +------------
-> +
-> +napi_schedule() is the basic method of scheduling a NAPI poll.
-> +Drivers should call this function in their interrupt handler
-> +(see :ref:`drv_sched` for more info). Successful call to napi_schedule()
-> +will take ownership of the NAPI instance.
-> +
-> +Some time after NAPI is scheduled driver's poll method will be
-> +called to process the events/packets. The method takes a ``budget``
-> +argument - drivers can process completions for any number of Tx
-> +packets but should only process up to ``budget`` number of
-> +Rx packets. Rx processing is usually much more expensive.
-> +
-> +In other words, it is recommended to ignore the budget argument when
-> +performing TX buffer reclamation to ensure that the reclamation is not
-> +arbitrarily bounded, however, it is required to honor the budget argument
-> +for RX processing.
-> +
-> +.. warning::
-> +
-> +   ``budget`` may be 0 if core tries to only process Tx completions
-> +   and no Rx packets.
-> +
-> +The poll method returns amount of work done. If the driver still
-> +has outstanding work to do (e.g. ``budget`` was exhausted)
-> +the poll method should return exactly ``budget``. In that case
-> +the NAPI instance will be serviced/polled again (without the
-> +need to be scheduled).
-> +
-> +If event processing has been completed (all outstanding packets
-> +processed) the poll method should call napi_complete_done()
-> +before returning. napi_complete_done() releases the ownership
-> +of the instance.
-> +
-> +.. warning::
-> +
-> +   The case of finishing all events and using exactly ``budget``
-> +   must be handled carefully. There is no way to report this
-> +   (rare) condition to the stack, so the driver must either
-> +   not call napi_complete_done() and wait to be called again,
-> +   or return ``budget - 1``.
-> +
-> +   If ``budget`` is 0 napi_complete_done() should never be called.
-> +
-> +Call sequence
-> +-------------
-> +
-> +Drivers should not make assumptions about the exact sequencing
-> +of calls. The poll method may be called without driver scheduling
-> +the instance (unless the instance is disabled). Similarly
-> +it's not guaranteed that the poll method will be called, even
-> +if napi_schedule() succeeded (e.g. if the instance gets disabled).
-> +
-> +As mentioned in the :ref:`drv_ctrl` section - napi_disable() and
-> subsequent +calls to the poll method only wait for the ownership of the
-> instance +to be released, not for the poll method to exit. This means that
-> +drivers should avoid accessing any data structures after calling
-> +napi_complete_done().
-> +
-> +.. _drv_sched:
-> +
-> +Scheduling and IRQ masking
-> +--------------------------
-> +
-> +Drivers should keep the interrupts masked after scheduling
-> +the NAPI instance - until NAPI polling finishes any further
-> +interrupts are unnecessary.
-> +
-> +Drivers which have to mask the interrupts explicitly (as opposed
-> +to IRQ being auto-masked by the device) should use the
-> napi_schedule_prep() +and __napi_schedule() calls:
-> +
-> +.. code-block:: c
-> +
-> +  if (napi_schedule_prep(&v->napi)) {
-> +      mydrv_mask_rxtx_irq(v->idx);
-> +      /* schedule after masking to avoid races */
-> +      __napi_schedule(&v->napi);
-> +  }
-> +
-> +IRQ should only be unmasked after successful call to napi_complete_done(=
-):
-> +
-> +.. code-block:: c
-> +
-> +  if (budget && napi_complete_done(&v->napi, work_done)) {
-> +    mydrv_unmask_rxtx_irq(v->idx);
-> +    return min(work_done, budget - 1);
-> +  }
-> +
-> +napi_schedule_irqoff() is a variant of napi_schedule() which takes
-> advantage +of guarantees given by being invoked in IRQ context (no need to
-> +mask interrupts). Note that PREEMPT_RT forces all interrupts
-> +to be threaded so the interrupt may need to be marked ``IRQF_NO_THREAD``
-> +to avoid issues on real-time kernel configurations.
-> +
-> +Instance to queue mapping
-> +-------------------------
-> +
-> +Modern devices have multiple NAPI instances (struct napi_struct) per
-> +interface. There is no strong requirement on how the instances are
-> +mapped to queues and interrupts. NAPI is primarily a polling/processing
-> +abstraction without many user-facing semantics. That said, most networki=
-ng
-> +devices end up using NAPI in fairly similar ways.
-> +
-> +NAPI instances most often correspond 1:1:1 to interrupts and queue pairs
-> +(queue pair is a set of a single Rx and single Tx queue).
-> +
-> +In less common cases a NAPI instance may be used for multiple queues
-> +or Rx and Tx queues can be serviced by separate NAPI instances on a sing=
-le
-> +core. Regardless of the queue assignment, however, there is usually still
-> +a 1:1 mapping between NAPI instances and interrupts.
-> +
-> +It's worth noting that the ethtool API uses a "channel" terminology where
-> +each channel can be either ``rx``, ``tx`` or ``combined``. It's not clear
-> +what constitutes a channel, the recommended interpretation is to
-> understand +a channel as an IRQ/NAPI which services queues of a given typ=
-e.
-> For example +a configuration of 1 ``rx``, 1 ``tx`` and 1 ``combined``
-> channel is expected +to utilize 3 interrupts, 2 Rx and 2 Tx queues.
-> +
-> +User API
-> +=3D=3D=3D=3D=3D=3D=3D=3D
-> +
-> +User interactions with NAPI depend on NAPI instance ID. The instance IDs
-> +are only visible to the user thru the ``SO_INCOMING_NAPI_ID`` socket
-> option. +It's not currently possible to query IDs used by a given device.
-> +
-> +Software IRQ coalescing
-> +-----------------------
-> +
-> +NAPI does not perform any explicit event coalescing by default.
-> +In most scenarios batching happens due to IRQ coalescing which is done
-> +by the device. There are cases where software coalescing is helpful.
-> +
-> +NAPI can be configured to arm a repoll timer instead of unmasking
-> +the hardware interrupts as soon as all packets are processed.
-> +The ``gro_flush_timeout`` sysfs configuration of the netdevice
-> +is reused to control the delay of the timer, while
-> +``napi_defer_hard_irqs`` controls the number of consecutive empty polls
-> +before NAPI gives up and goes back to using hardware IRQs.
-> +
-> +.. _poll:
-> +
-> +Busy polling
-> +------------
-> +
-> +Busy polling allows user process to check for incoming packets before
-> +the device interrupt fires. As is the case with any busy polling it trad=
-es
-> +off CPU cycles for lower latency (in fact production uses of NAPI busy
-> +polling are not well known).
-> +
-> +User can enable busy polling by either setting ``SO_BUSY_POLL`` on
-> +selected sockets or using the global ``net.core.busy_poll`` and
-> +``net.core.busy_read`` sysctls. An io_uring API for NAPI busy polling
-> +also exists.
-> +
-> +IRQ mitigation
-> +---------------
-> +
-> +While busy polling is supposed to be used by low latency applications,
-> +a similar mechanism can be used for IRQ mitigation.
-> +
-> +Very high request-per-second applications (especially routing/forwarding
-> +applications and especially applications using AF_XDP sockets) may not
-> +want to be interrupted until they finish processing a request or a batch
-> +of packets.
-> +
-> +Such applications can pledge to the kernel that they will perform a busy
-> +polling operation periodically, and the driver should keep the device IR=
-Qs
-> +permanently masked. This mode is enabled by using the
-> ``SO_PREFER_BUSY_POLL`` +socket option. To avoid the system misbehavior t=
-he
-> pledge is revoked +if ``gro_flush_timeout`` passes without any busy poll
-> call.
-> +
-> +The NAPI budget for busy polling is lower than the default (which makes
-> +sense given the low latency intention of normal busy polling). This is
-> +not the case with IRQ mitigation, however, so the budget can be adjusted
-> +with the ``SO_BUSY_POLL_BUDGET`` socket option.
-> +
-> +.. _threaded:
-> +
-> +Threaded NAPI
-> +-------------
-> +
-> +Threaded NAPI is an operating mode which uses dedicated kernel
-> +threads rather than software IRQ context for NAPI processing.
-> +The configuration is per netdevice and will affect all
-> +NAPI instances of that device. Each NAPI instance will spawn a separate
-> +thread (called ``napi/${ifc-name}-${napi-id}``).
-> +
-> +It is recommended to pin each kernel thread to a single CPU, the same
-> +CPU as services the interrupt. Note that the mapping between IRQs and
-> +NAPI instances may not be trivial (and is driver dependent).
-> +The NAPI instance IDs will be assigned in the opposite order
-> +than the process IDs of the kernel threads.
-> +
-> +Threaded NAPI is controlled by writing 0/1 to the ``threaded`` file in
-> +netdev's sysfs directory.
-> +
-> +.. rubric:: Footnotes
-> +
-> +.. [#] NAPI was originally referred to as New API in 2.4 Linux.
-> diff --git a/include/linux/netdevice.h b/include/linux/netdevice.h
-> index 470085b121d3..b439f877bc3a 100644
-> --- a/include/linux/netdevice.h
-> +++ b/include/linux/netdevice.h
-> @@ -508,15 +508,18 @@ static inline bool napi_reschedule(struct napi_stru=
-ct
-> *napi) return false;
->  }
->
-> -bool napi_complete_done(struct napi_struct *n, int work_done);
->  /**
-> - *	napi_complete - NAPI processing complete
-> - *	@n: NAPI context
-> + * napi_complete_done - NAPI processing complete
-> + * @n: NAPI context
-> + * @work_done: number of packets processed
->   *
-> - * Mark NAPI processing as complete.
-> - * Consider using napi_complete_done() instead.
-> + * Mark NAPI processing as complete. Should only be called if poll budget
-> + * has not been completely consumed.
-> + * Prefer over napi_complete().
->   * Return false if device should avoid rearming interrupts.
->   */
-> +bool napi_complete_done(struct napi_struct *n, int work_done);
-> +
->  static inline bool napi_complete(struct napi_struct *n)
->  {
->  	return napi_complete_done(n, 0);
+It breaks down in practice today, because we do entering the low-freq
+feedback loop that triple buffering today effectively works around.
+That is even with non-delayed page flipping, and a single pipeline
+source (compositor only rendering) or only using already signaled ready
+client buffers when compositing.
+
+Anyway, I don't doubt its usefulness, just a bit pessimistic.
+
+> 
+> And this is all done in a way that doesn't help for situations where
+> you have separate kms and render devices.  Or the kms driver doesn't
+> bypass atomic helpers (ie. uses drm_atomic_helper_wait_for_fences()).
+> So the technique has already proven to be useful.  This series just
+> extends it beyond driver specific primitives (ie.
+> dma_fence/drm_syncojb)
+> 
+> > I think input latency and steady state target frequency here is tightly
+> > linked; what we should aim for is to provide enough information at the
+> > right time so that it does *not* take a frame or two to of missed
+> > deadlines to arrive at the target frequency, as those missed deadlines
+> > either means either stuttering and/or lag.
+> 
+> If you have some magic way for a gl/vk driver to accurately predict
+> how many cycles it will take to execute a sequence of draws, I'm all
+> ears.
+> 
+> Realistically, the best solution on sudden input is to overshoot and
+> let freqs settle back down.
+> 
+> But there is a lot more to input latency than GPU freq.  In UI
+> workloads, even fullscreen animation, I don't really see the GPU going
+> above the 2nd lowest OPP even on relatively small things like a618.
+> UI input latency (touch scrolling, on-screen stylus / low-latency-ink,
+> animations) are a separate issue from what this series addresses, and
+> aren't too much to do with GPU freq.
+> 
+> > That it helps with the deliberately late commit I do understand, but we
+> > don't do that yet, but intend to when there is kernel uapi to lets us do
+> > so without negative consequences.
+> >
+> > >
+> > > > >
+> > > > > TBF I'm of the belief that there is still a need for input based cpu
+> > > > > boost (and early wake-up trigger for GPU).. we have something like
+> > > > > this in CrOS kernel.  That is a bit of a different topic, but my point
+> > > > > is that fence deadlines are just one of several things we need to
+> > > > > optimize power/perf and responsiveness, rather than the single thing
+> > > > > that solves every problem under the sun ;-)
+> > > >
+> > > > Perhaps; but I believe it's a bit of a back channel of intent; the piece
+> > > > of the puzzle that has the information to know whether there is need
+> > > > actually speed up is the compositor, not the kernel.
+> > > >
+> > > > For example, pressing 'p' while a terminal is focused does not need high
+> > > > frequency clocks, it just needs the terminal emulator to draw a 'p' and
+> > > > the compositor to composite that update. Pressing <Super> may however
+> > > > trigger a non-trivial animation moving a lot of stuff around on screen,
+> > > > maybe triggering Wayland clients to draw and what not, and should most
+> > > > arguably have the ability to "warn" the kernel about the upcoming flood
+> > > > of work before it is already knocking on its door step.
+> > >
+> > > The super key is problematic, but not for the reason you think.  It is
+> > > because it is a case where we should boost on key-up instead of
+> > > key-down.. and the second key-up event comes after the cpu-boost is
+> > > already in it's cool-down period.  But even if suboptimal in cases
+> > > like this, it is still useful for touch/stylus cases where the
+> > > slightest of lag is much more perceptible.
+> >
+> > Other keys are even more problematic. Alt, for example, does nothing,
+> > Alt + Tab does some light rendering, but Alt + KeyAboveTab will,
+> > depending on the current active applications, suddenly trigger N Wayland
+> > surfaces to start rendering at the same time.
+> >
+> > >
+> > > This is getting off topic but I kinda favor coming up with some sort
+> > > of static definition that userspace could give the kernel to let the
+> > > kernel know what input to boost on.  Or maybe something could be done
+> > > with BPF?
+> >
+> > I have hard time seeing any static information can be enough, it's
+> > depends too much on context what is expected to happen. And can a BPF
+> > program really help? Unless BPF programs that pulls some internal kernel
+> > strings to speed things up whenever userspace wants I don't see how it
+> > is that much better.
+> >
+> > I don't think userspace is necessarily too slow to actively particitpate
+> > in providing direct scheduling hints either. Input processing can, for
+> > example, be off loaded to a real time scheduled thread, and plumbing any
+> > hints about future expectations from rendering, windowing and layout
+> > subsystems will be significantly easier to plumb to a real time input
+> > thread than translated into static informations or BPF programs.
+> 
+> I mean, the kernel side input handler is called from irq context long
+> before even the scheduler gets involved..
+> 
+> But I think you are over-thinking the Alt + SomeOtherKey case.  The
+> important thing isn't what the other key is, it is just to know that
+> Alt is a modifier key (ie. handle it on key-up instead of key-down).
+> No need to over-complicate things.  It's probably enough to give the
+> kernel a list of modifier+key combo's that do _something_..
+
+Perhaps I'm over thinking it, it just seems all so unnecessary to
+complicate the kernel so that it's able to predict when GUI animations
+will happen instead of the GUI itself doing it when it is actually
+beneficial. All it'd take (naively) is uapi for the three kind of boosts
+downstream now does automatically from input events.
+
+> 
+> And like I've said before, keyboard input is the least problematic in
+> terms of latency.  It is a _lot_ easier to notice lag with touch
+> scrolling or stylus (on screen).  (The latter case, I think wayland
+> has some catching up to do compared to CrOS or android.. you really
+> need a way to allow the app to do front buffer rendering to an overlay
+> for the stylus case, because even just 16ms delay is _very_
+> noticeable.)
+
+Sure, but here too userpsace (rt thread in the compositor) is probably a
+good enough place to predict when to boost since it will be the one
+proxies e.g. the stylus input events to the application.
+
+Front buffering on the other hand is a very different topic ;)
 
 
+Jonas
+
+> 
+> BR,
+> -R
