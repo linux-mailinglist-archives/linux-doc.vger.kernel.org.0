@@ -2,84 +2,76 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id EBA956C59A9
-	for <lists+linux-doc@lfdr.de>; Wed, 22 Mar 2023 23:58:28 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 3E81B6C5A15
+	for <lists+linux-doc@lfdr.de>; Thu, 23 Mar 2023 00:12:21 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S229820AbjCVW60 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 22 Mar 2023 18:58:26 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:53012 "EHLO
+        id S229436AbjCVXMU (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 22 Mar 2023 19:12:20 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:38818 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S229522AbjCVW6X (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Wed, 22 Mar 2023 18:58:23 -0400
-Received: from bombadil.infradead.org (bombadil.infradead.org [IPv6:2607:7c80:54:3::133])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id B0FC1305F1
-        for <linux-doc@vger.kernel.org>; Wed, 22 Mar 2023 15:58:22 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-        d=infradead.org; s=bombadil.20210309; h=Content-Transfer-Encoding:
-        Content-Type:In-Reply-To:From:References:To:Subject:MIME-Version:Date:
-        Message-ID:Sender:Reply-To:Cc:Content-ID:Content-Description;
-        bh=zJp4Y5Lw4Qy49NkbNely/ZBAVf09re8By+2d8xkTbJw=; b=KQ7TCKjrvVjJTlr8bpGUCV/Uk4
-        3puin9ZNHhyPNBGlMFm+RYuRsVLKgjfLVOcntd3CAWisQmGlr3MH9A/sPaAyDaPcit4evoKJFfyZ/
-        oTKRJpoylUdhAvs1zDk74PLC4Ju3jR/e/vjCmgWtIkm4rbcXhUPHtuItMGl/Q1gn/iq6+AnVYUvDU
-        P84djWehACF+nHdFsd8H6kIlMsqHDJxpgRTWl8r3Ja4R50JKHX6PPrsFv//bazTXvgWdZFIdy5OQz
-        HT+N3WOhemd6NyhmmDD7hZBDQrwvz9rFJ8i5yxlJ5y1xmAr+5YmdL2jMNPzQZCLjruii4wnypOfzz
-        F8chSG3A==;
-Received: from [2601:1c2:980:9ec0::21b4]
-        by bombadil.infradead.org with esmtpsa (Exim 4.96 #2 (Red Hat Linux))
-        id 1pf7PS-0003bB-16;
-        Wed, 22 Mar 2023 22:58:22 +0000
-Message-ID: <369843bb-3a7a-78d0-40ac-0df51b0cc58d@infradead.org>
-Date:   Wed, 22 Mar 2023 15:58:21 -0700
+        with ESMTP id S229654AbjCVXMT (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Wed, 22 Mar 2023 19:12:19 -0400
+X-Greylist: delayed 3601 seconds by postgrey-1.37 at lindbergh.monkeyblade.net; Wed, 22 Mar 2023 16:12:17 PDT
+Received: from 8.mo548.mail-out.ovh.net (8.mo548.mail-out.ovh.net [46.105.45.231])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 1784C10247
+        for <linux-doc@vger.kernel.org>; Wed, 22 Mar 2023 16:12:16 -0700 (PDT)
+Received: from mxplan6.mail.ovh.net (unknown [10.108.20.7])
+        by mo548.mail-out.ovh.net (Postfix) with ESMTPS id EE9A8202C3;
+        Wed, 22 Mar 2023 21:53:13 +0000 (UTC)
+Received: from jwilk.net (37.59.142.106) by DAG4EX1.mxp6.local (172.16.2.31)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.23; Wed, 22 Mar
+ 2023 22:53:12 +0100
+Authentication-Results: garm.ovh; auth=pass (GARM-106R006f6024961-d43b-433f-ac60-913a5e3d2475,
+                    65661AC9A5D673C6099EB45C0BA3B174173FF86C) smtp.auth=jwilk@jwilk.net
+X-OVh-ClientIp: 5.172.255.55
+From:   Jakub Wilk <jwilk@jwilk.net>
+To:     Jonathan Corbet <corbet@lwn.net>
+CC:     Mauro Carvalho Chehab <mchehab@kernel.org>,
+        <linux-doc@vger.kernel.org>
+Subject: [PATCH] coding-style: fix title of Greg K-H's talk
+Date:   Wed, 22 Mar 2023 22:53:11 +0100
+Message-ID: <20230322215311.6579-1-jwilk@jwilk.net>
+X-Mailer: git-send-email 2.40.0
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.8.0
-Subject: Re: Fwd: Documentation on IMA for Linux Kernel Documentation
-Content-Language: en-US
-To:     Ken Goldman <kgold@linux.ibm.com>, linux-doc@vger.kernel.org
-References: <60ac4c41-65b8-3c3d-7e31-1a580e728ca5@infradead.org>
- <a3289dfb-da44-47ce-9f3b-1f5c9dec900c@linux.ibm.com>
-From:   Randy Dunlap <rdunlap@infradead.org>
-In-Reply-To: <a3289dfb-da44-47ce-9f3b-1f5c9dec900c@linux.ibm.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-Spam-Status: No, score=-2.5 required=5.0 tests=DKIM_SIGNED,DKIM_VALID,
-        DKIM_VALID_AU,DKIM_VALID_EF,NICE_REPLY_A,RCVD_IN_DNSWL_MED,
-        SPF_HELO_NONE,SPF_NONE,URIBL_BLOCKED autolearn=unavailable
-        autolearn_force=no version=3.4.6
+Content-Transfer-Encoding: 7BIT
+Content-Type:   text/plain; charset=US-ASCII
+X-Originating-IP: [37.59.142.106]
+X-ClientProxiedBy: DAG6EX1.mxp6.local (172.16.2.51) To DAG4EX1.mxp6.local
+ (172.16.2.31)
+X-Ovh-Tracer-GUID: 9df3da02-f192-4f6f-8361-a235e6131127
+X-Ovh-Tracer-Id: 8703487756989487072
+X-VR-SPAMSTATE: OK
+X-VR-SPAMSCORE: -100
+X-VR-SPAMCAUSE: gggruggvucftvghtrhhoucdtuddrgedvhedrvdegvddgudehiecutefuodetggdotefrodftvfcurfhrohhfihhlvgemucfqggfjpdevjffgvefmvefgnecuuegrihhlohhuthemucehtddtnecusecvtfgvtghiphhivghnthhsucdlqddutddtmdenucfjughrpefhvfevufffkffoggfgtghisehtkeertdertddtnecuhfhrohhmpeflrghkuhgsucghihhlkhcuoehjfihilhhksehjfihilhhkrdhnvghtqeenucggtffrrghtthgvrhhnpeelveeludehleefudetgeehkeelheekudeifeethfelveevgefgleeludduieetheenucffohhmrghinhepghhnuhdrohhrghdpohhpvghnqdhsthgurdhorhhgpdhkrhhorghhrdgtohhmnecukfhppeduvdejrddtrddtrddupdefjedrheelrddugedvrddutdeinecuvehluhhsthgvrhfuihiivgeptdenucfrrghrrghmpehinhgvthepuddvjedrtddrtddruddpmhgrihhlfhhrohhmpeeojhifihhlkhesjhifihhlkhdrnhgvtheqpdhnsggprhgtphhtthhopedupdhrtghpthhtoheptghorhgsvghtsehlfihnrdhnvghtpdhmtghhvghhrggssehkvghrnhgvlhdrohhrghdplhhinhhugidqughotgesvhhgvghrrdhkvghrnhgvlhdrohhrghdpoffvtefjohhsthepmhhoheegkedpmhhouggvpehsmhhtphhouhht
+X-Spam-Status: No, score=0.0 required=5.0 tests=RCVD_IN_DNSWL_NONE,
+        RCVD_IN_MSPIKE_H2,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED
+        autolearn=unavailable autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
+The talk title was inadvertently mangled in 8c27ceff3604 ("docs: fix
+locations of several documents that got moved").
 
+Signed-off-by: Jakub Wilk <jwilk@jwilk.net>
+---
+ Documentation/process/coding-style.rst | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-On 3/22/23 15:04, Ken Goldman wrote:
-> I'm writing documentation on IMA targeting users (not kernel developers).  It includes concepts, details on writing policies, the IMA event log format, utilities, and more.  It aggregates existing scattered documentation, but adds much more.  It's maybe 1/2 done.
-> 
-> Questions:
-> 
-> 1. Are there people who could look at it and see if I'm on the right path?
-> 
-> It's a lot of work.  I'd like to know that it has some chance of acceptance.
-
-Review in terms of IMA-specific content?  or in terms of ReST usage?
-or in general terms to see if it is appropriate for kernel tree documentation?
-
-I think that you should Cc: linux-integrity@vger.kernel.org for their input
-as well as linux-doc@vger.kernel.org. Several of us here can look at it for
-general review feedback.
-
-> 2. What is the process for getting a block of documentation added to https://www.kernel.org/doc/html?
-
-From last week's email:
-
->>> It should be added to the kernel tree in the Documentation/userspace-api/ subdirectory
->>> or Documentation/security/ subdirectory.  The kernel.org/doc/ web pages are generated
->>> from what is in the Linux kernel tree.
-
-although if you don't think that it is appropriate for either of those subdirectories,
-just explain and justify that and it might be possible to put it somewhere else.
-
+diff --git a/Documentation/process/coding-style.rst b/Documentation/process/coding-style.rst
+index 007e49ef6cec..6db37a46d305 100644
+--- a/Documentation/process/coding-style.rst
++++ b/Documentation/process/coding-style.rst
+@@ -1267,5 +1267,5 @@ gcc internals and indent, all available from https://www.gnu.org/manual/
+ WG14 is the international standardization working group for the programming
+ language C, URL: http://www.open-std.org/JTC1/SC22/WG14/
+ 
+-Kernel :ref:`process/coding-style.rst <codingstyle>`, by greg@kroah.com at OLS 2002:
++Kernel CodingStyle, by greg@kroah.com at OLS 2002:
+ http://www.kroah.com/linux/talks/ols_2002_kernel_codingstyle_talk/html/
 -- 
-~Randy
+2.40.0
+
