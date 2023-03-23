@@ -2,83 +2,79 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 689246C707C
-	for <lists+linux-doc@lfdr.de>; Thu, 23 Mar 2023 19:48:36 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 5AA256C70D5
+	for <lists+linux-doc@lfdr.de>; Thu, 23 Mar 2023 20:15:13 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S231530AbjCWSsd (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 23 Mar 2023 14:48:33 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:47304 "EHLO
+        id S229823AbjCWTPL (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 23 Mar 2023 15:15:11 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:36730 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S231314AbjCWSsc (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Thu, 23 Mar 2023 14:48:32 -0400
-Received: from ms.lwn.net (ms.lwn.net [IPv6:2600:3c01:e000:3a1::42])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 9ADB218B38;
-        Thu, 23 Mar 2023 11:48:31 -0700 (PDT)
-Received: from localhost (unknown [IPv6:2601:281:8300:73::5f6])
-        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
-        (No client certificate requested)
-        by ms.lwn.net (Postfix) with ESMTPSA id A34B560A;
-        Thu, 23 Mar 2023 18:48:30 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 ms.lwn.net A34B560A
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=lwn.net; s=20201203;
-        t=1679597310; bh=9yoyvhXowHGEuMYgXmRUw0CVS4vFN9DeR+lhvNeV+Os=;
-        h=From:To:Cc:Subject:In-Reply-To:References:Date:From;
-        b=RKf2GJexb0hK6y93UUJ6zwtPiBSEGWZSdzHlY1qePaQc0+h6JB/v4UKiDebk2vVPE
-         E0n5tDstFAAgFgbeFfnRK86oIvtTJONLNzHG7xkbergn6so7j2zMz9Ry5o0plQO+lu
-         fcyJGxKWfymWudkpohzVlfuGLB8vsNgJEeSbuZ/Wi65S9AG+Wi33mM2fVeguifu63k
-         T7C2+lj2mKl8rHnfGmRWkB91yYA9Ej5S0LlABbDQEMaEbTo5d8YpA3naEupKrekHY+
-         NT+/15dsvdAIVm2pXTXH9T9kXFIiz+zlcyV3/R1iAz9YqqdZbk2NYYJ5P7rFX4mUbN
-         jtj1Oizg0Z4MA==
-From:   Jonathan Corbet <corbet@lwn.net>
-To:     Dave Hansen <dave.hansen@intel.com>, linux-doc@vger.kernel.org
+        with ESMTP id S229529AbjCWTPK (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Thu, 23 Mar 2023 15:15:10 -0400
+Received: from mga05.intel.com (mga05.intel.com [192.55.52.43])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 1799749F7;
+        Thu, 23 Mar 2023 12:15:09 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1679598910; x=1711134910;
+  h=message-id:date:mime-version:subject:to:cc:references:
+   from:in-reply-to:content-transfer-encoding;
+  bh=8v1MfgmasFE+BalMNtLnvgpx+sV9Z9LnMJ4Kr4Tdph8=;
+  b=OWokWtXPHWiLMs2z/G/jViz9dGD2gg9FLdhAjSXgIvQmbP4z2Q6BuP3V
+   6IEFtmlEL81aG2NxxE5FZyWkQ6QJE6RLJ5nd8deVuoqCAAo3zIRGSzNTc
+   J18zONBVzI65/SaG7YMBkZ3XKSUWklUDTk0OfSw7kqU0X8lVKjDsw5v7+
+   /S5bNg3vMWM7SsUyIsmyVecBUDmHtQ8LNuNsGuwFVUFuRebs+rVoXdJSC
+   c+Oq4WC6kN4F4vkx4jukZfkppkFyMPy8cpwDl3pHluv8ff3MAPfN9QI45
+   eftOupnwwb0jmK+znxaKywupMu9LDDlzNaDWxq/FdzrPO9IMrmQy2ycCR
+   Q==;
+X-IronPort-AV: E=McAfee;i="6600,9927,10658"; a="425872202"
+X-IronPort-AV: E=Sophos;i="5.98,285,1673942400"; 
+   d="scan'208";a="425872202"
+Received: from fmsmga004.fm.intel.com ([10.253.24.48])
+  by fmsmga105.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 23 Mar 2023 12:15:09 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=McAfee;i="6600,9927,10658"; a="751612054"
+X-IronPort-AV: E=Sophos;i="5.98,285,1673942400"; 
+   d="scan'208";a="751612054"
+Received: from jball6-mobl.amr.corp.intel.com (HELO [10.209.105.116]) ([10.209.105.116])
+  by fmsmga004-auth.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 23 Mar 2023 12:15:08 -0700
+Message-ID: <5064fa75-20a8-7297-8c0d-18199d02e273@intel.com>
+Date:   Thu, 23 Mar 2023 12:15:08 -0700
+MIME-Version: 1.0
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.7.1
+Subject: Re: [PATCH 2/2] docs: move x86 documentation into Documentation/arch/
+Content-Language: en-US
+To:     Jonathan Corbet <corbet@lwn.net>, linux-doc@vger.kernel.org
 Cc:     linux-kernel@vger.kernel.org, linux-arch@vger.kernel.org,
         Thomas Gleixner <tglx@linutronix.de>,
         Ingo Molnar <mingo@redhat.com>,
         Dave Hansen <dave.hansen@linux.intel.com>, x86@kernel.org,
         Peter Zijlstra <peterz@infradead.org>,
         Borislav Petkov <bp@alien8.de>
-Subject: Re: [PATCH RFC 0/2] Begin reorganizing the arch documentation
-In-Reply-To: <fe5d1e0e-0725-45eb-8b96-edcd12ae4a8b@intel.com>
 References: <20230315211523.108836-1-corbet@lwn.net>
- <fe5d1e0e-0725-45eb-8b96-edcd12ae4a8b@intel.com>
-Date:   Thu, 23 Mar 2023 12:48:29 -0600
-Message-ID: <87cz4zb8xu.fsf@meer.lwn.net>
-MIME-Version: 1.0
-Content-Type: text/plain
-X-Spam-Status: No, score=-0.2 required=5.0 tests=DKIM_SIGNED,DKIM_VALID,
-        DKIM_VALID_AU,DKIM_VALID_EF,SPF_HELO_NONE,SPF_PASS
-        autolearn=unavailable autolearn_force=no version=3.4.6
+ <20230315211523.108836-3-corbet@lwn.net>
+From:   Dave Hansen <dave.hansen@intel.com>
+In-Reply-To: <20230315211523.108836-3-corbet@lwn.net>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-Spam-Status: No, score=-2.5 required=5.0 tests=DKIMWL_WL_HIGH,DKIM_SIGNED,
+        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,NICE_REPLY_A,RCVD_IN_DNSWL_MED,
+        SPF_HELO_NONE,SPF_NONE autolearn=unavailable autolearn_force=no
+        version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Dave Hansen <dave.hansen@intel.com> writes:
+On 3/15/23 14:15, Jonathan Corbet wrote:
+> Move the x86 documentation under Documentation/arch/ as a way of cleaning
+> up the top-level directory and making the structure of our docs more
+> closely match the structure of the source directories it describes.
+> 
+> All in-kernel references to the old paths have been updated.
+> 
+> Signed-off-by: Jonathan Corbet <corbet@lwn.net>
 
-> On 3/15/23 14:15, Jonathan Corbet wrote:
->> On the other hand, it *is* a fair amount of churn.  If it's more than
->> people can handle, I'll quietly back away and we'll muddle along as we have
->> been; this isn't something I'm going to dig in my heels over.
->
-> I'm not fundamentally opposed to this.  It'll probably cost me a few
-> keystrokes in moments of confusion, but that's the price of progress. :)
->
-> Things in Documentation/ have also been mobile enough in recent years
-> that I tend to "find Documentation | grep something" rather than try to
-> remember the paths for things.  Adding an arch/ in there won't hurt
-> anything.
-
-So, if I'm not going to get tarred and feathered for this, I'd like to
-proceed, and am wondering what the best way is.  Patch 1 is a pure docs
-change that won't affect anybody.  I could also apply #2 if I could get
-an ack from the x86 community, but that is sure to create conflicts with
-tip and get us all more cheery notes from Stephen Rothwell.
-
-I could do the "fix up and send at the end of the merge window" trick
-with it.  Or perhaps some of this should go via tip?  Suggestions
-welcome.
-
-Thanks,
-
-jon
+Acked-by: Dave Hansen <dave.hansen@linux.intel.com>
