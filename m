@@ -2,75 +2,105 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 711BF6C8731
-	for <lists+linux-doc@lfdr.de>; Fri, 24 Mar 2023 22:00:35 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 28F4F6C8781
+	for <lists+linux-doc@lfdr.de>; Fri, 24 Mar 2023 22:30:55 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S231248AbjCXVAd (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Fri, 24 Mar 2023 17:00:33 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:36684 "EHLO
+        id S231924AbjCXVax (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Fri, 24 Mar 2023 17:30:53 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:38972 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S231753AbjCXVAd (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Fri, 24 Mar 2023 17:00:33 -0400
-Received: from mail-pf1-x442.google.com (mail-pf1-x442.google.com [IPv6:2607:f8b0:4864:20::442])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 03107166E7
-        for <linux-doc@vger.kernel.org>; Fri, 24 Mar 2023 14:00:22 -0700 (PDT)
-Received: by mail-pf1-x442.google.com with SMTP id fd25so2090014pfb.1
-        for <linux-doc@vger.kernel.org>; Fri, 24 Mar 2023 14:00:21 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112; t=1679691621;
-        h=content-transfer-encoding:to:subject:message-id:date:from:reply-to
-         :mime-version:from:to:cc:subject:date:message-id:reply-to;
-        bh=HYRme9w/Hokg+w7UfrHHNxcKtCEktIwgtARFl7bYjCs=;
-        b=WRvSXZCUVGnv0SITlZXftUSbP/Rf3y6IbIq8LhIxl9oaq8oIhO80qJOe4bw3FSsTIC
-         wT8kVVaSU07HNZmHZU5eTcns8m309iUskPyzY4x3nvMyAhswbKix4C8j2HdvHURfPxks
-         VfnWQxFgKpxcppYaVOGPzlE4xyiKtl/Nb4DR2JmhC/i4iTljtoclQ4RtjRit2VjbaPCO
-         RhCuR54otU3j3e04UnVRoao4A7337edAlVWJdfQW5jwxKmVcMCJkYqH0cwh4DibZV/A3
-         bUQsKYwKrUBa+DdvODD5BuiWM534o6n+mIqeNIo5Hir+UBR26u73eKS/KSyQcFK44423
-         acFQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112; t=1679691621;
-        h=content-transfer-encoding:to:subject:message-id:date:from:reply-to
-         :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=HYRme9w/Hokg+w7UfrHHNxcKtCEktIwgtARFl7bYjCs=;
-        b=FQYu62BV8U83yspJQm4vxLIJ4uSaN1N/y04Ig+djNgqMJ4P988zGhBRR38oSggYJKN
-         8R4n9G/5FS1Egeannzjz5R3RqwW5Ab/SSJNb33yLSQ/uCYArQ+GCRQeKLXzptWFnH7uA
-         AllzMd9Y48yxIOx5pqZrqa7sVU1MUWaRD5EsSuVmcoA2HSpuJhV/0e88B0Fup9SU6Kb3
-         yQJwTe6DCkPargmV9mAeBEVMeYuj3mP84mV0uerFCh2lqGa/ldwNU5giQtniZDbMNQCs
-         jWm3bsBeMjs9RPU3BgmKi9jeyJJPgJpxzvDNahm/rlw3UzYJn4vwt3/TUCwdmtCNiFsZ
-         C4sw==
-X-Gm-Message-State: AAQBX9eq766W2K3Tz7idYV5DdF2zJQEuIXkv9NsV5i1VReTE25/E5trH
-        0Z2dtkGOlkHmG9knv4NsVgJZqkkDCzSHeUGrcNg=
-X-Google-Smtp-Source: AKy350Z4oQexPlutvxzJb1425L+TOQKYoS/NgdKwYYr10HIOybIVQVrj+x1FaLTKj4956hxi1YRxk5wayAp99TP/cNQ=
-X-Received: by 2002:a63:ea0e:0:b0:502:e4df:5f3f with SMTP id
- c14-20020a63ea0e000000b00502e4df5f3fmr1012425pgi.6.1679691621490; Fri, 24 Mar
- 2023 14:00:21 -0700 (PDT)
+        with ESMTP id S231864AbjCXVav (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Fri, 24 Mar 2023 17:30:51 -0400
+Received: from mx0b-001b2d01.pphosted.com (mx0b-001b2d01.pphosted.com [148.163.158.5])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 007D519F2F
+        for <linux-doc@vger.kernel.org>; Fri, 24 Mar 2023 14:30:48 -0700 (PDT)
+Received: from pps.filterd (m0098417.ppops.net [127.0.0.1])
+        by mx0a-001b2d01.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id 32OK1s7O023157
+        for <linux-doc@vger.kernel.org>; Fri, 24 Mar 2023 21:30:48 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ibm.com; h=message-id : date : to :
+ from : subject : content-type : content-transfer-encoding : mime-version;
+ s=pp1; bh=31YoTRDV29vrbxHR92ConsN1QShr+CnS36IdwmGEaPE=;
+ b=ldnhjIyYDxMa3VzGP/df1pCmqs94ufqHP8I5NPD+fjy2tsIG9p6FyY2lP07Na7KtCAkm
+ HsG1cAEUfZjqhDrHjsY/g5res4VcnA4tLCY8dolCj2aqMjzwpfc71Y7X5tgwcCaNtxep
+ qTj0tGAXs0W1xpibs70I0N8CpYAiVolmL+tTslBEas0ZUNQin1YsO9M1HGzHue+VFw4G
+ hueqFyNBKVXfBxWpVvKMCA4/vLfkn/aINtn5dMh9pH14roa/JylcliY0R79HvKQSEl4t
+ Yf40w8fqfq84sNEMc+ct/g8AJ5+davwWUHLSCTBmR2TKNiwjRgv9k0NYhfyQ/vrCz4E+ oQ== 
+Received: from ppma01dal.us.ibm.com (83.d6.3fa9.ip4.static.sl-reverse.com [169.63.214.131])
+        by mx0a-001b2d01.pphosted.com (PPS) with ESMTPS id 3phjhua8sy-1
+        (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT)
+        for <linux-doc@vger.kernel.org>; Fri, 24 Mar 2023 21:30:48 +0000
+Received: from pps.filterd (ppma01dal.us.ibm.com [127.0.0.1])
+        by ppma01dal.us.ibm.com (8.17.1.19/8.17.1.19) with ESMTP id 32OL5rNo002401
+        for <linux-doc@vger.kernel.org>; Fri, 24 Mar 2023 21:30:47 GMT
+Received: from smtprelay04.wdc07v.mail.ibm.com ([9.208.129.114])
+        by ppma01dal.us.ibm.com (PPS) with ESMTPS id 3pgy3tf4ve-1
+        (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT)
+        for <linux-doc@vger.kernel.org>; Fri, 24 Mar 2023 21:30:47 +0000
+Received: from smtpav05.wdc07v.mail.ibm.com (smtpav05.wdc07v.mail.ibm.com [10.39.53.232])
+        by smtprelay04.wdc07v.mail.ibm.com (8.14.9/8.14.9/NCO v10.0) with ESMTP id 32OLUjcu51642832
+        (version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK)
+        for <linux-doc@vger.kernel.org>; Fri, 24 Mar 2023 21:30:46 GMT
+Received: from smtpav05.wdc07v.mail.ibm.com (unknown [127.0.0.1])
+        by IMSVA (Postfix) with ESMTP id E59F358053
+        for <linux-doc@vger.kernel.org>; Fri, 24 Mar 2023 21:30:45 +0000 (GMT)
+Received: from smtpav05.wdc07v.mail.ibm.com (unknown [127.0.0.1])
+        by IMSVA (Postfix) with ESMTP id AF92A58043
+        for <linux-doc@vger.kernel.org>; Fri, 24 Mar 2023 21:30:45 +0000 (GMT)
+Received: from [9.160.56.143] (unknown [9.160.56.143])
+        by smtpav05.wdc07v.mail.ibm.com (Postfix) with ESMTP
+        for <linux-doc@vger.kernel.org>; Fri, 24 Mar 2023 21:30:45 +0000 (GMT)
+Message-ID: <e747b0ba-7992-36c7-f931-08aac46385f1@linux.ibm.com>
+Date:   Fri, 24 Mar 2023 17:30:44 -0400
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
+ Thunderbird/102.9.0
+To:     linux-doc@vger.kernel.org
+Content-Language: en-US
+From:   Ken Goldman <kgold@linux.ibm.com>
+Subject: sphinx - proper method for linking
+Content-Type: text/plain; charset=UTF-8; format=flowed
+X-TM-AS-GCONF: 00
+X-Proofpoint-ORIG-GUID: r5xZ5mkV3pVMwOBQ1bLdyLjm-rPqAc0_
+X-Proofpoint-GUID: r5xZ5mkV3pVMwOBQ1bLdyLjm-rPqAc0_
+Content-Transfer-Encoding: 7bit
+X-Proofpoint-UnRewURL: 0 URL was un-rewritten
 MIME-Version: 1.0
-Received: by 2002:a05:6a10:f3d4:b0:45e:8b4a:651f with HTTP; Fri, 24 Mar 2023
- 14:00:20 -0700 (PDT)
-Reply-To: illuminatenwelt992@gmail.com
-From:   einladen <nepk08544@gmail.com>
-Date:   Fri, 24 Mar 2023 14:00:20 -0700
-Message-ID: <CA+D=n1BEykJXhu7RGA3aEJDzP7hL3WxT8Z63sktmxgQbg8ZFdA@mail.gmail.com>
-Subject: 
-To:     undisclosed-recipients:;
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Spam-Status: No, score=4.2 required=5.0 tests=DKIM_SIGNED,DKIM_VALID,
-        DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_ENVFROM_END_DIGIT,FREEMAIL_FROM,
-        FREEMAIL_REPLYTO,FREEMAIL_REPLYTO_END_DIGIT,RCVD_IN_DNSWL_NONE,
-        SPF_HELO_NONE,SPF_PASS,UNDISC_FREEM autolearn=no autolearn_force=no
-        version=3.4.6
-X-Spam-Level: ****
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.254,Aquarius:18.0.942,Hydra:6.0.573,FMLib:17.11.170.22
+ definitions=2023-03-24_11,2023-03-24_01,2023-02-09_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 suspectscore=0 phishscore=0
+ spamscore=0 clxscore=1015 mlxscore=0 lowpriorityscore=0 bulkscore=0
+ adultscore=0 impostorscore=0 priorityscore=1501 malwarescore=0
+ mlxlogscore=451 classifier=spam adjust=0 reason=mlx scancount=1
+ engine=8.12.0-2303200000 definitions=main-2303240160
+X-Spam-Status: No, score=-0.1 required=5.0 tests=DKIM_SIGNED,DKIM_VALID,
+        DKIM_VALID_EF,RCVD_IN_MSPIKE_H2,SPF_HELO_NONE,SPF_PASS
+        autolearn=unavailable autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
---=20
-Finanzielle Freiheit garantiert.
-Schlie=C3=9Fen Sie sich Illuminati f=C3=BCr Geld und Ruhm an.
-Tritt heute bei!!!!
+1. What is the recommended way to link to documents outside my tree.
 
-illuminatenwelt992@gmail.com
+Should I be doing that, or is it fragile / not recommended?
+
+Are links to other documents stable?
+
+How about sections within the page?
+
+I found that this .rst works.
+
+See 
+https://www.kernel.org/doc/html/latest/security/keys/trusted-encrypted.html
+
+Is that OK, or is there a better way?
+
+Is that link (doc/html/latest) correct.
+
+2. Are my pages and headings to be treated as stable, like an API? I.e., 
+once I release documentation, are all the pages and headings frozen so 
+they will not break links?
+
+
+
