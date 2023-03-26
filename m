@@ -2,51 +2,42 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id B07056C92C2
-	for <lists+linux-doc@lfdr.de>; Sun, 26 Mar 2023 08:21:00 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id CBBFE6C92D5
+	for <lists+linux-doc@lfdr.de>; Sun, 26 Mar 2023 08:35:04 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S231778AbjCZGU6 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Sun, 26 Mar 2023 02:20:58 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:36412 "EHLO
+        id S230495AbjCZGfC (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Sun, 26 Mar 2023 02:35:02 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:47700 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S230495AbjCZGUy (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Sun, 26 Mar 2023 02:20:54 -0400
-Received: from mga09.intel.com (mga09.intel.com [134.134.136.24])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id E1A77AD2C;
-        Sat, 25 Mar 2023 23:20:52 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1679811652; x=1711347652;
-  h=from:to:cc:subject:date:message-id:in-reply-to:
-   references:mime-version:content-transfer-encoding;
-  bh=ydZLCE/MXF8HLZPf5gPr8IRs4piBXCqu3WnxIn0aYQw=;
-  b=ar6P6G3sbIQdmqFk2wSSMbeO1P4W2IfO8Latx5VX/ZQxWYgMrScWpB8q
-   YPQnKFfwSSNmjhRsTFeb5jFELyng0yF6laybUy92LO9t1LDVK6I2QZtHC
-   9CHPb9I5PjhyuPurNpvZs9BHQPha/JCNjkTomqcO+re2hFJJ5GcfNpz5X
-   Af3T6A1RFkhcgm0VYy+OP8ZPth+tPgi/k4elzlEtWKkL7oNmiz2Z2nA8o
-   Fmy3CHA+gszF3F/milrjeYd1oS+l8pqsVQuP+O5AXhimnfBmmz/E0vrMp
-   gP3HtsOmN84rA+brl+jENMOQ2nn4rPgg9rjJ2yEsd1H47+Meafc1JWxPN
-   w==;
-X-IronPort-AV: E=McAfee;i="6600,9927,10660"; a="341628557"
-X-IronPort-AV: E=Sophos;i="5.98,292,1673942400"; 
-   d="scan'208";a="341628557"
-Received: from orsmga006.jf.intel.com ([10.7.209.51])
-  by orsmga102.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 25 Mar 2023 23:20:51 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=McAfee;i="6600,9927,10660"; a="660510714"
-X-IronPort-AV: E=Sophos;i="5.98,292,1673942400"; 
-   d="scan'208";a="660510714"
-Received: from srivats1-mobl.amr.corp.intel.com (HELO skuppusw-desk1.amr.corp.intel.com) ([10.209.108.178])
-  by orsmga006-auth.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 25 Mar 2023 23:20:50 -0700
-From:   Kuppuswamy Sathyanarayanan 
+        with ESMTP id S229795AbjCZGfB (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Sun, 26 Mar 2023 02:35:01 -0400
+Received: from ams.source.kernel.org (ams.source.kernel.org [IPv6:2604:1380:4601:e00::1])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 6951A5FDE;
+        Sat, 25 Mar 2023 23:35:00 -0700 (PDT)
+Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
+        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+        (No client certificate requested)
+        by ams.source.kernel.org (Postfix) with ESMTPS id 0162BB801C0;
+        Sun, 26 Mar 2023 06:34:59 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 019D8C433D2;
+        Sun, 26 Mar 2023 06:34:56 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=linuxfoundation.org;
+        s=korg; t=1679812497;
+        bh=jr13vMuf/WaHi5CBNG+X2Brpbr1MnZxbiMHYOEZyZVw=;
+        h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+        b=eTIMMVczZqjaFFjFea7FxGinqMwyKi5ehjeZtYZt0iztBREcv6eiTgOszrG/eZ2cE
+         n/c/vwh+0PMqajzLshr0kG/lz8zHju9wAGv+SY2TiYEcsPO3+c288/Wetnm9VoGi3s
+         /j4Me3rpKvEU6uIRun8B/CigylfUrb+ZEwjh4Fes=
+Date:   Sun, 26 Mar 2023 08:34:53 +0200
+From:   Greg KH <gregkh@linuxfoundation.org>
+To:     Kuppuswamy Sathyanarayanan 
         <sathyanarayanan.kuppuswamy@linux.intel.com>
-To:     Thomas Gleixner <tglx@linutronix.de>,
+Cc:     Thomas Gleixner <tglx@linutronix.de>,
         Ingo Molnar <mingo@redhat.com>, Borislav Petkov <bp@alien8.de>,
         Dave Hansen <dave.hansen@linux.intel.com>, x86@kernel.org,
-        Shuah Khan <shuah@kernel.org>, Jonathan Corbet <corbet@lwn.net>
-Cc:     "H . Peter Anvin" <hpa@zytor.com>,
-        Kuppuswamy Sathyanarayanan 
-        <sathyanarayanan.kuppuswamy@linux.intel.com>,
+        Shuah Khan <shuah@kernel.org>,
+        Jonathan Corbet <corbet@lwn.net>,
+        "H . Peter Anvin" <hpa@zytor.com>,
         "Kirill A . Shutemov" <kirill.shutemov@linux.intel.com>,
         Tony Luck <tony.luck@intel.com>,
         Wander Lairson Costa <wander@redhat.com>,
@@ -54,153 +45,90 @@ Cc:     "H . Peter Anvin" <hpa@zytor.com>,
         Guorui Yu <GuoRui.Yu@linux.alibaba.com>,
         Du Fan <fan.du@intel.com>, linux-kernel@vger.kernel.org,
         linux-kselftest@vger.kernel.org, linux-doc@vger.kernel.org
-Subject: [PATCH v1 3/3] selftests/tdx: Test GetQuote TDX attestation feature
-Date:   Sat, 25 Mar 2023 23:20:39 -0700
-Message-Id: <20230326062039.341479-4-sathyanarayanan.kuppuswamy@linux.intel.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20230326062039.341479-1-sathyanarayanan.kuppuswamy@linux.intel.com>
+Subject: Re: [PATCH v1 2/3] virt: tdx-guest: Add Quote generation support
+Message-ID: <ZB/njYsTTwgTtAeA@kroah.com>
 References: <20230326062039.341479-1-sathyanarayanan.kuppuswamy@linux.intel.com>
+ <20230326062039.341479-3-sathyanarayanan.kuppuswamy@linux.intel.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Spam-Status: No, score=-2.4 required=5.0 tests=DKIMWL_WL_HIGH,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_EF,RCVD_IN_DNSWL_MED,RCVD_IN_MSPIKE_H3,
-        RCVD_IN_MSPIKE_WL,SPF_HELO_NONE,SPF_NONE autolearn=unavailable
-        autolearn_force=no version=3.4.6
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20230326062039.341479-3-sathyanarayanan.kuppuswamy@linux.intel.com>
+X-Spam-Status: No, score=-2.5 required=5.0 tests=DKIMWL_WL_HIGH,DKIM_SIGNED,
+        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_MED,SPF_HELO_NONE,
+        SPF_PASS autolearn=unavailable autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-In TDX guest, the second stage of the attestation process is Quote
-generation. This process is required to convert the locally generated
-TDREPORT into a remotely verifiable Quote. It involves sending the
-TDREPORT data to a Quoting Enclave (QE) which will verify the
-integerity of the TDREPORT and sign it with an attestation key.
+On Sat, Mar 25, 2023 at 11:20:38PM -0700, Kuppuswamy Sathyanarayanan wrote:
+> Since GetQuote support requires usage of DMA APIs, convert TDX guest
+> driver to a platform driver.
 
-Intel's TDX attestation driver exposes TDX_CMD_GET_QUOTE IOCTL to
-allow user agent get the TD Quote.
+Sorry, but that's not a valid reason to use a platform device for fake
+things like this:
 
-Add a kernel selftest module to verify the Quote generation feature.
+> +static struct platform_device *tdx_dev;
 
-TD Quote generation involves following steps:
+Especially a single static one.
 
-* Get the TDREPORT data using TDX_CMD_GET_REPORT IOCTL.
-* Embed the TDREPORT data in quote buffer and request for quote
-  generation via TDX_CMD_GET_QUOTE IOCTL request.
-* Upon completion of the GetQuote request, check for non zero value
-  in the status field of Quote header to make sure the generated
-  quote is valid.
+> +static int tdx_guest_probe(struct platform_device *pdev)
+> +{
+> +	if (tdx_register_event_irq_cb(attestation_callback_handler, pdev))
+> +		return -EIO;
+> +
+> +	return misc_register(&tdx_misc_dev);
+> +}
+> +
+> +static int tdx_guest_remove(struct platform_device *pdev)
+> +{
+> +	tdx_unregister_event_irq_cb(attestation_callback_handler, pdev);
+> +	misc_deregister(&tdx_misc_dev);
+> +	return 0;
+> +}
+> +
+> +static struct platform_driver tdx_guest_driver = {
+> +	.probe = tdx_guest_probe,
+> +	.remove = tdx_guest_remove,
+> +	.driver.name = KBUILD_MODNAME,
+> +};
+> +
+>  static const struct x86_cpu_id tdx_guest_ids[] = {
+>  	X86_MATCH_FEATURE(X86_FEATURE_TDX_GUEST, NULL),
+>  	{}
+> @@ -84,16 +310,35 @@ MODULE_DEVICE_TABLE(x86cpu, tdx_guest_ids);
+>  
+>  static int __init tdx_guest_init(void)
+>  {
+> +	int ret;
+> +
+>  	if (!x86_match_cpu(tdx_guest_ids))
+>  		return -ENODEV;
+>  
+> -	return misc_register(&tdx_misc_dev);
+> +	ret = platform_driver_register(&tdx_guest_driver);
+> +	if (ret) {
+> +		pr_err("failed to register driver, err=%d\n", ret);
+> +		return ret;
+> +	}
 
-Reviewed-by: Tony Luck <tony.luck@intel.com>
-Reviewed-by: Andi Kleen <ak@linux.intel.com>
-Reviewed-by: Mika Westerberg <mika.westerberg@linux.intel.com>
-Acked-by: Kirill A. Shutemov <kirill.shutemov@linux.intel.com>
-Signed-off-by: Kuppuswamy Sathyanarayanan <sathyanarayanan.kuppuswamy@linux.intel.com>
----
- tools/testing/selftests/tdx/tdx_guest_test.c | 68 ++++++++++++++++++--
- 1 file changed, 62 insertions(+), 6 deletions(-)
+No, please do not create a fake platform driver.
 
-diff --git a/tools/testing/selftests/tdx/tdx_guest_test.c b/tools/testing/selftests/tdx/tdx_guest_test.c
-index 81d8cb88ea1a..2eccde54185b 100644
---- a/tools/testing/selftests/tdx/tdx_guest_test.c
-+++ b/tools/testing/selftests/tdx/tdx_guest_test.c
-@@ -18,6 +18,7 @@
- #define TDX_GUEST_DEVNAME "/dev/tdx_guest"
- #define HEX_DUMP_SIZE 8
- #define DEBUG 0
-+#define QUOTE_SIZE 8192
- 
- /**
-  * struct tdreport_type - Type header of TDREPORT_STRUCT.
-@@ -128,21 +129,29 @@ static void print_array_hex(const char *title, const char *prefix_str,
- 	printf("\n");
- }
- 
-+/* Helper function to get TDREPORT */
-+long get_tdreport0(int devfd, struct tdx_report_req *req)
-+{
-+	int i;
-+
-+	/* Generate sample report data */
-+	for (i = 0; i < TDX_REPORTDATA_LEN; i++)
-+		req->reportdata[i] = i;
-+
-+	return ioctl(devfd, TDX_CMD_GET_REPORT0, req);
-+}
-+
- TEST(verify_report)
- {
- 	struct tdx_report_req req;
- 	struct tdreport *tdreport;
--	int devfd, i;
-+	int devfd;
- 
- 	devfd = open(TDX_GUEST_DEVNAME, O_RDWR | O_SYNC);
- 	ASSERT_LT(0, devfd);
- 
--	/* Generate sample report data */
--	for (i = 0; i < TDX_REPORTDATA_LEN; i++)
--		req.reportdata[i] = i;
--
- 	/* Get TDREPORT */
--	ASSERT_EQ(0, ioctl(devfd, TDX_CMD_GET_REPORT0, &req));
-+	ASSERT_EQ(0, get_tdreport0(devfd, &req));
- 
- 	if (DEBUG) {
- 		print_array_hex("\n\t\tTDX report data\n", "",
-@@ -160,4 +169,51 @@ TEST(verify_report)
- 	ASSERT_EQ(0, close(devfd));
- }
- 
-+TEST(verify_quote)
-+{
-+	struct tdx_quote_hdr *quote_hdr;
-+	struct tdx_report_req rep_req;
-+	struct tdx_quote_req req;
-+	__u64 quote_buf_size;
-+	__u8 *quote_buf;
-+	int devfd;
-+
-+	/* Open attestation device */
-+	devfd = open(TDX_GUEST_DEVNAME, O_RDWR | O_SYNC);
-+
-+	ASSERT_LT(0, devfd);
-+
-+	/* Add size for quote header */
-+	quote_buf_size = sizeof(*quote_hdr) + QUOTE_SIZE;
-+
-+	/* Allocate quote buffer */
-+	quote_buf = malloc(quote_buf_size);
-+	ASSERT_NE(NULL, quote_buf);
-+
-+	quote_hdr = (struct tdx_quote_hdr *)quote_buf;
-+
-+	/* Initialize GetQuote header */
-+	quote_hdr->version = 1;
-+	quote_hdr->status  = GET_QUOTE_SUCCESS;
-+	quote_hdr->in_len  = TDX_REPORT_LEN;
-+	quote_hdr->out_len = 0;
-+
-+	/* Get TDREPORT data */
-+	ASSERT_EQ(0, get_tdreport0(devfd, &rep_req));
-+
-+	/* Fill GetQuote request */
-+	memcpy(quote_hdr->data, rep_req.tdreport, TDX_REPORT_LEN);
-+	req.buf	  = (__u64)quote_buf;
-+	req.len	  = quote_buf_size;
-+
-+	ASSERT_EQ(0, ioctl(devfd, TDX_CMD_GET_QUOTE, &req));
-+
-+	/* Check whether GetQuote request is successful */
-+	EXPECT_EQ(0, quote_hdr->status);
-+
-+	free(quote_buf);
-+
-+	ASSERT_EQ(0, close(devfd));
-+}
-+
- TEST_HARNESS_MAIN
--- 
-2.34.1
+> +	tdx_dev = platform_device_register_simple(KBUILD_MODNAME,
+> +						  PLATFORM_DEVID_NONE,
+> +						  NULL, 0);
 
+And please do not create a fake platform device.
+
+As always, do not create fake platform devices for things that are NOT
+platform devices.
+
+If this device needs DMA (but why?) then make it a real device and tie
+it to the bus it belongs to (that it is obviously doing DMA on.)
+
+But as-is, this isn't ok, sorry.
+
+thanks,
+
+greg k-h
