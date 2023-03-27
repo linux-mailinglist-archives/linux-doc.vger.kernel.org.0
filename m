@@ -2,118 +2,121 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 9F0A56C9F19
-	for <lists+linux-doc@lfdr.de>; Mon, 27 Mar 2023 11:13:21 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id E51256C9F2C
+	for <lists+linux-doc@lfdr.de>; Mon, 27 Mar 2023 11:16:28 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S232827AbjC0JNU (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 27 Mar 2023 05:13:20 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:55774 "EHLO
+        id S233104AbjC0JQ1 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 27 Mar 2023 05:16:27 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:59852 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S232951AbjC0JNR (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Mon, 27 Mar 2023 05:13:17 -0400
-Received: from dfw.source.kernel.org (dfw.source.kernel.org [IPv6:2604:1380:4641:c500::1])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 6561D1BD3;
-        Mon, 27 Mar 2023 02:13:14 -0700 (PDT)
-Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
-        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
-        (No client certificate requested)
-        by dfw.source.kernel.org (Postfix) with ESMTPS id EB7C761151;
-        Mon, 27 Mar 2023 09:13:13 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 98696C433D2;
-        Mon, 27 Mar 2023 09:13:12 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=linuxfoundation.org;
-        s=korg; t=1679908393;
-        bh=i2DixOICfTfUPwZLMVJoKRB8PiwZdHjvi1UBGoZXtjM=;
-        h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-        b=aE+TZGdKB+QTUlhkYnSe5/ij+7cpn3cOYgImMe+fvgtL5gv02Mtjdje2CHFXX7BBk
-         RxwjoHfbYNos1c3FeezzhWjbXBDbZkDUjKLUoJ7XC4R2xqwb3SoKrOonLoGOOapzNi
-         s3JL0ESeq9HuqGi8H7RS4kIJbiQ1h0dBnIpH5NNk=
-Date:   Mon, 27 Mar 2023 11:13:10 +0200
-From:   Greg Kroah-Hartman <gregkh@linuxfoundation.org>
-To:     Hao Zhang <quic_hazha@quicinc.com>
-Cc:     Mathieu Poirier <mathieu.poirier@linaro.org>,
-        Suzuki K Poulose <suzuki.poulose@arm.com>,
-        Alexander Shishkin <alexander.shishkin@linux.intel.com>,
-        Konrad Dybcio <konradybcio@gmail.com>,
-        Mike Leach <mike.leach@linaro.org>,
-        Rob Herring <robh+dt@kernel.org>,
-        Krzysztof Kozlowski <krzysztof.kozlowski+dt@linaro.org>,
-        Andy Gross <agross@kernel.org>,
-        Paul Walmsley <paul.walmsley@sifive.com>,
-        Palmer Dabbelt <palmer@dabbelt.com>,
-        Albert Ou <aou@eecs.berkeley.edu>,
-        Jonathan Corbet <corbet@lwn.net>, Leo Yan <leo.yan@linaro.org>,
-        coresight@lists.linaro.org, linux-arm-kernel@lists.infradead.org,
-        linux-kernel@vger.kernel.org, devicetree@vger.kernel.org,
-        Tingwei Zhang <quic_tingweiz@quicinc.com>,
-        Jinlong Mao <quic_jinlmao@quicinc.com>,
-        Yuanfang Zhang <quic_yuanfang@quicinc.com>,
-        Tao Zhang <quic_taozha@quicinc.com>,
-        Trilok Soni <quic_tsoni@quicinc.com>,
-        linux-arm-msm@vger.kernel.org,
-        Bjorn Andersson <andersson@kernel.org>,
-        linux-doc@vger.kernel.org
-Subject: Re: [PATCH v2 3/3] Documentation: trace: Add documentation for
- Coresight Dummy Trace
-Message-ID: <ZCFeJkkpIor5P28r@kroah.com>
-References: <20230324061608.33609-1-quic_hazha@quicinc.com>
- <20230324061608.33609-4-quic_hazha@quicinc.com>
+        with ESMTP id S233144AbjC0JQ0 (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Mon, 27 Mar 2023 05:16:26 -0400
+Received: from mail-pf1-x42e.google.com (mail-pf1-x42e.google.com [IPv6:2607:f8b0:4864:20::42e])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 7022E44AD
+        for <linux-doc@vger.kernel.org>; Mon, 27 Mar 2023 02:16:24 -0700 (PDT)
+Received: by mail-pf1-x42e.google.com with SMTP id y2so5129730pfw.9
+        for <linux-doc@vger.kernel.org>; Mon, 27 Mar 2023 02:16:24 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112; t=1679908584;
+        h=to:subject:message-id:date:from:reply-to:mime-version:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=HgMR0rh/4y7PUWkgjC5D1ZLTIu4Xe0fvcNc/5RhdQ/Y=;
+        b=Tf3VlODMFHBHv+1/ruZ9mzU/s9xIJ5lj6UCtpOOF778BZ/hXE+m/y0NHp81l/I16wo
+         oSAK6z22iwfXLjtc9TRRJQVTiDcM6BXDptxMtOy6Ke/gCW6MxAfjBv0eShsgq3aKheLz
+         0IcqfsS5oquDJ/S5Zl2Bv2yNsNxhCMu7FKhS/TiZeEJkZXZhi18Fg0K/aX19BKYKUgcf
+         ucN3OHRwIIbMbw3Em0Zo7WY27nut/4i3Jf+oFVg4mBSNl/fpwfEvy/Bn63oSpMtC29fI
+         QEu02R6/UIVLj8wRit6d3xl3MGuI/+uxUxAJ91/OHRcIZP660R5XrQGJI95AL67XZPH/
+         St+Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112; t=1679908584;
+        h=to:subject:message-id:date:from:reply-to:mime-version
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=HgMR0rh/4y7PUWkgjC5D1ZLTIu4Xe0fvcNc/5RhdQ/Y=;
+        b=nBfL4Yd1LzxzqD9ozlE5oSqT1J0mRy9Cw5LOhLfCHOLq589YB3HgN9epKwGurvxrlH
+         KGz6IwJXkbckpM1KYRZL7fA28vZWAYSbpXSs23mzUv7uxOE2B9FTgjM6zZwvQWRIFyC4
+         Ml2htF0MY8i9S1sYXucHrAPhayaKkAN7sPvjppXqo3Fvxuj8WrapzfknE2EVZD8lUPhr
+         RPAOrYVHbJDCwvwVQViph7danv40vS0XZ8ao1kjEpYunrXqsh49wDE9VSdPnJYn1Dawu
+         3GLyIHGEp/mBHkznjr8eINL4oc2FwQXPjFEyhaVsxKkYeUUHCNdrQTsqESdK9Q9ZhV+N
+         HsVA==
+X-Gm-Message-State: AAQBX9edNilj8AqiGDcnCc/wDazqfnhJq1lUAkREmiMcHQlSWzJb0AcO
+        139WXef6phRaz/jWlwrfq61uve7ciIJrODwUUwQ=
+X-Google-Smtp-Source: AKy350b+2BjvoaB0h1h5RqdVuPNI4IheZ03EvkSuB5OrSam0bFfwHf6zKvERWVTVaMsqRMllge4H6b00STs3LUq8pUY=
+X-Received: by 2002:a05:6a00:2d27:b0:627:e677:bc54 with SMTP id
+ fa39-20020a056a002d2700b00627e677bc54mr5637021pfb.5.1679908583864; Mon, 27
+ Mar 2023 02:16:23 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20230324061608.33609-4-quic_hazha@quicinc.com>
-X-Spam-Status: No, score=-2.5 required=5.0 tests=DKIMWL_WL_HIGH,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_MED,SPF_HELO_NONE,
-        SPF_PASS autolearn=unavailable autolearn_force=no version=3.4.6
+Received: by 2002:a05:7300:3db:b0:9f:d19a:fd79 with HTTP; Mon, 27 Mar 2023
+ 02:16:23 -0700 (PDT)
+Reply-To: annamalgorzata587@gmail.com
+From:   "Leszczynska Anna Malgorzata." <mrsstewartprisca@gmail.com>
+Date:   Mon, 27 Mar 2023 02:16:23 -0700
+Message-ID: <CAFoYun0pOf7h6MXemKOxx_VJ9qat6_H9Si4pXTKnow3m+j_=JA@mail.gmail.com>
+Subject: Mrs. Leszczynska Anna Malgorzata.
+To:     undisclosed-recipients:;
+Content-Type: text/plain; charset="UTF-8"
+X-Spam-Status: Yes, score=6.8 required=5.0 tests=ADVANCE_FEE_5_NEW,DKIM_SIGNED,
+        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_FROM,FREEMAIL_REPLYTO,
+        FREEMAIL_REPLYTO_END_DIGIT,RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,SPF_PASS,
+        UNDISC_FREEM,UNDISC_MONEY autolearn=no autolearn_force=no version=3.4.6
+X-Spam-Report: * -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at
+        *      https://www.dnswl.org/, no trust
+        *      [2607:f8b0:4864:20:0:0:0:42e listed in]
+        [list.dnswl.org]
+        * -0.0 SPF_PASS SPF: sender matches SPF record
+        *  0.0 SPF_HELO_NONE SPF: HELO does not publish an SPF Record
+        *  0.0 FREEMAIL_FROM Sender email is commonly abused enduser mail
+        *      provider
+        *      [mrsstewartprisca[at]gmail.com]
+        *  0.2 FREEMAIL_REPLYTO_END_DIGIT Reply-To freemail username ends in
+        *      digit
+        *      [annamalgorzata587[at]gmail.com]
+        *  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
+        *       valid
+        * -0.1 DKIM_VALID_EF Message has a valid DKIM or DK signature from
+        *      envelope-from domain
+        * -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
+        *      author's domain
+        * -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+        *  2.9 UNDISC_FREEM Undisclosed recipients + freemail reply-to
+        *  1.0 FREEMAIL_REPLYTO Reply-To/From or Reply-To/body contain
+        *      different freemails
+        *  0.8 ADVANCE_FEE_5_NEW Appears to be advance fee fraud (Nigerian
+        *      419)
+        *  2.0 UNDISC_MONEY Undisclosed recipients + money/fraud signs
+X-Spam-Level: ******
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Fri, Mar 24, 2023 at 02:16:08PM +0800, Hao Zhang wrote:
-> Add documentation for Coresight Dummy Trace under trace/coresight.
-> 
-> Signed-off-by: Hao Zhang <quic_hazha@quicinc.com>
-> ---
->  .../trace/coresight/coresight-dummy.rst       | 58 +++++++++++++++++++
->  1 file changed, 58 insertions(+)
->  create mode 100644 Documentation/trace/coresight/coresight-dummy.rst
-> 
-> diff --git a/Documentation/trace/coresight/coresight-dummy.rst b/Documentation/trace/coresight/coresight-dummy.rst
-> new file mode 100644
-> index 000000000000..819cabab8623
-> --- /dev/null
-> +++ b/Documentation/trace/coresight/coresight-dummy.rst
-> @@ -0,0 +1,58 @@
-> +.. SPDX-License-Identifier: GPL-2.0
-> +
-> +=============================
-> +Coresight Dummy Trace Module
-> +=============================
-> +
-> +    :Author:   Hao Zhang <quic_hazha@quicinc.com>
-> +    :Date:     March 2023
-> +
-> +Introduction
-> +---------------------------
-> +
-> +Coresight Dummy Trace Module is for the specific devices that HLOS don't
-> +have permission to access or configure. Such as Coresight sink EUD, some
-> +TPDMs etc. So there need driver to register dummy devices as Coresight
-> +devices. Provide Coresight API for dummy device operations, such as
-> +enabling and disabling dummy devices. Build the Coresight path for dummy
-> +sink or dummy source for debugging.
-> +
-> +Sysfs files and directories
-> +---------------------------
-> +
-> +Root: ``/sys/bus/coresight/devices/dummy<N>``
+-- 
+I am Mrs. Leszczynska Anna Malgorzatafrom Germany . Presently admitted
+ in one of the hospitals here in Ivory Coast.
 
-sysfs files are documented in Documentation/ABI/ not in random .rst
-files, sorry.  Please use the correct format described there, not a
-random one like this :)
+I and my late husband do not have any child that is why I am donating
+this money to you having known my condition that I will join my late
+husband soonest.
 
-thanks,
+I wish to donate towards education and the less privileged I ask for
+your assistance. I am suffering from colon cancer I have some few
+weeks to live according to my doctor.
 
-greg k-h
+The money should be used for this purpose.
+Motherless babies
+Children orphaned by aids.
+Destitute children
+Widows and Widowers.
+Children who cannot afford education.
+
+My husband stressed the importance of education and the less
+privileged I feel that this is what he would have wanted me to do with
+the money that he left for charity.
+
+These services bring so much joy to the kids. Together we are
+transforming lives and building brighter futures - but without you, it
+just would not be possible.
+
+Sincerely,
+
+Mrs. Leszczynska Anna Malgorzata.
