@@ -2,508 +2,181 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id F240D6CA95B
-	for <lists+linux-doc@lfdr.de>; Mon, 27 Mar 2023 17:41:55 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 7B9DC6CA9A0
+	for <lists+linux-doc@lfdr.de>; Mon, 27 Mar 2023 17:55:38 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S233034AbjC0Plx (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 27 Mar 2023 11:41:53 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:35648 "EHLO
+        id S232592AbjC0Pzh (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 27 Mar 2023 11:55:37 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:54134 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S229821AbjC0Plm (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Mon, 27 Mar 2023 11:41:42 -0400
-Received: from mail-wr1-x42b.google.com (mail-wr1-x42b.google.com [IPv6:2a00:1450:4864:20::42b])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 48C114C2C
-        for <linux-doc@vger.kernel.org>; Mon, 27 Mar 2023 08:41:23 -0700 (PDT)
-Received: by mail-wr1-x42b.google.com with SMTP id q19so6192534wrc.5
-        for <linux-doc@vger.kernel.org>; Mon, 27 Mar 2023 08:41:23 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=baylibre-com.20210112.gappssmtp.com; s=20210112; t=1679931672;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=1qYUT8eH+GBja6dZkOJxD7CQwhf3OQ3evXxb7a7LNSw=;
-        b=1hdnDWRqkOhoJCFOoYVaMi1WgekYiDgJ8z/WNNYREEz+nZMPWYNwlcBCUKXfsTQfZx
-         nzUL/cDv8CNtiSAj7jo5lS0zKw8bf90rh9wDgS27oV9iIAH0TWV2Y3AZBRoaMp/qHsLW
-         tEkt7FXT/VtEmaYLWJXYxt8ktMhnu/xdG/hqbIFVSaEyeofGJH3WmXBy+H70BDIk8lYr
-         LApvAf42SNAeG9inFRnWpx0pKT1WwQ6FXhfEoN24/6n+mdqP/udr5bhVtNWFCwgQsVYi
-         j4s29VFhJJmuegq3XM78dQ7oPOF30Voe4utRVrtj+6v8n2nhNPAgCPtbpSebPc9Z8uMc
-         zJKw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112; t=1679931672;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=1qYUT8eH+GBja6dZkOJxD7CQwhf3OQ3evXxb7a7LNSw=;
-        b=OS6n5dDs4srlHDKJBO2IxmpUJKD/6llMUpoj2Y8w0AU7OTXqumSWak3aSYQYvtJNCK
-         ay00F0gIQ4BIGxulN85RXyGfdC+rqcnJ+QoDb+XnuefsBiw9+SH4sSLw5u4sFU+iboCO
-         n551NLYdolTn84SvxqWic5c1GDy6GhvdRsVCoU/X1nIztuRboviO1OJQFFY7kPyEVveY
-         +JhnaFvnEPfWtqveULNUa78+CwjmfI/zc43ZWDVJd+0P1LnfNfZ2+7DYlxI3a2bcTXXJ
-         fvoS6DYriLjh+Xycsr/Wjmc+ZiccXKUniexlYB8ApM8Q2EupIkBJwYUvDsw5sM7h/5vG
-         IIgA==
-X-Gm-Message-State: AAQBX9cRWZzEk8pdih2qA9Zi9BcLDh7I3C6CFvndSC8JsTWK8m3fkB8n
-        q5jNP2YBQ8AZwF9jrFt3izFHrw==
-X-Google-Smtp-Source: AKy350ZcmbP806uWUlOTlsZ3nWaHS/JeS2jLtnKhSe1EGAEe3h1BThe8a5ysiBD0Rcj1/fuV/4D5JA==
-X-Received: by 2002:adf:dd06:0:b0:2d4:62ed:e7cf with SMTP id a6-20020adfdd06000000b002d462ede7cfmr9962412wrm.43.1679931672229;
-        Mon, 27 Mar 2023 08:41:12 -0700 (PDT)
-Received: from baylibre-ThinkPad-T14s-Gen-2i.. (151.31.102.84.rev.sfr.net. [84.102.31.151])
-        by smtp.gmail.com with ESMTPSA id a18-20020a5d4d52000000b002d1e49cff35sm25277161wru.40.2023.03.27.08.41.10
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 27 Mar 2023 08:41:11 -0700 (PDT)
-From:   Julien Panis <jpanis@baylibre.com>
-To:     lee@kernel.org, robh+dt@kernel.org,
-        krzysztof.kozlowski+dt@linaro.org, corbet@lwn.net, arnd@arndb.de,
-        gregkh@linuxfoundation.org, derek.kiernan@xilinx.com,
-        dragan.cvetic@xilinx.com
-Cc:     eric.auger@redhat.com, jgg@ziepe.ca, razor@blackwall.org,
-        stephen@networkplumber.org, davem@davemloft.net,
-        christian.koenig@amd.com, contact@emersion.fr,
-        devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
-        linux-doc@vger.kernel.org, sterzik@ti.com, u-kumar1@ti.com,
-        eblanc@baylibre.com, jneanne@baylibre.com
-Subject: [PATCH v4 4/4] misc: tps6594-pfsm: Add driver for TI TPS6594 PFSM
-Date:   Mon, 27 Mar 2023 17:41:01 +0200
-Message-Id: <20230327154101.211732-5-jpanis@baylibre.com>
-X-Mailer: git-send-email 2.37.3
-In-Reply-To: <20230327154101.211732-1-jpanis@baylibre.com>
-References: <20230327154101.211732-1-jpanis@baylibre.com>
+        with ESMTP id S232384AbjC0Pzf (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Mon, 27 Mar 2023 11:55:35 -0400
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id C54E72719;
+        Mon, 27 Mar 2023 08:55:32 -0700 (PDT)
+Received: from pps.filterd (m0279870.ppops.net [127.0.0.1])
+        by mx0a-0031df01.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id 32RE6LvA019377;
+        Mon, 27 Mar 2023 15:55:12 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=quicinc.com; h=from : to : cc :
+ subject : date : message-id : mime-version : content-transfer-encoding :
+ content-type; s=qcppdkim1;
+ bh=pY/LLfD/hpa0lfcytqnmGd9KrthhI28TEQrPLcbONME=;
+ b=lqjwM93v8yIdmJmoYKdGdj2gBeSjql7/pcsWUb7H9K0Cjn/3i3AAB9QE+XJuVFfvmFZ8
+ pqFh690hORw9ZTIyU4E/61tugJ3NjS2Jn/K2qOyqdvrqvY70BFO9PHw6reesqmSjQNL+
+ qIRc+ztd1HW/kgCy7WzBjVOOwuIBlccUBkwDwMbwvTNtTiUWii3lkN7cvu8YyZgIgIoB
+ Z9zZgaZEzmeZA+OFYa6h3uYDmVoxEVEG6S3Lj1oHzj8bJ3wniDlrw/zWLqe6lKMrFT3C
+ ZklfwgsiseqUgVIqltGT3gJBgJcduv3YKNnw9PRIjaltykWPmTf8qjYUTVVZYB03e9/N ew== 
+Received: from nalasppmta03.qualcomm.com (Global_NAT1.qualcomm.com [129.46.96.20])
+        by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 3pkcm2rc2e-1
+        (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+        Mon, 27 Mar 2023 15:55:12 +0000
+Received: from nalasex01a.na.qualcomm.com (nalasex01a.na.qualcomm.com [10.47.209.196])
+        by NALASPPMTA03.qualcomm.com (8.17.1.5/8.17.1.5) with ESMTPS id 32RFtBtM024080
+        (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+        Mon, 27 Mar 2023 15:55:11 GMT
+Received: from jhugo-lnx.qualcomm.com (10.80.80.8) by
+ nalasex01a.na.qualcomm.com (10.47.209.196) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.986.41; Mon, 27 Mar 2023 08:55:10 -0700
+From:   Jeffrey Hugo <quic_jhugo@quicinc.com>
+To:     <ogabbay@kernel.org>, <airlied@gmail.com>, <daniel@ffwll.ch>
+CC:     <jacek.lawrynowicz@linux.intel.com>,
+        <stanislaw.gruszka@linux.intel.com>,
+        <dri-devel@lists.freedesktop.org>, <quic_pkanojiy@quicinc.com>,
+        <quic_carlv@quicinc.com>, <quic_ajitpals@quicinc.com>,
+        <linux-doc@vger.kernel.org>, <linux-arm-msm@vger.kernel.org>,
+        <bagasdotme@gmail.com>, <mani@kernel.org>,
+        Jeffrey Hugo <quic_jhugo@quicinc.com>
+Subject: [PATCH v5 0/8] QAIC accel driver
+Date:   Mon, 27 Mar 2023 09:54:49 -0600
+Message-ID: <1679932497-30277-1-git-send-email-quic_jhugo@quicinc.com>
+X-Mailer: git-send-email 2.7.4
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Spam-Status: No, score=0.0 required=5.0 tests=DKIM_SIGNED,DKIM_VALID,
-        RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,SPF_PASS autolearn=unavailable
-        autolearn_force=no version=3.4.6
+Content-Transfer-Encoding: 7bit
+Content-Type: text/plain
+X-Originating-IP: [10.80.80.8]
+X-ClientProxiedBy: nasanex01a.na.qualcomm.com (10.52.223.231) To
+ nalasex01a.na.qualcomm.com (10.47.209.196)
+X-QCInternal: smtphost
+X-Proofpoint-Virus-Version: vendor=nai engine=6200 definitions=5800 signatures=585085
+X-Proofpoint-ORIG-GUID: FvYEwFNZbjJ8cIAwUoJWPl-DafpXon4A
+X-Proofpoint-GUID: FvYEwFNZbjJ8cIAwUoJWPl-DafpXon4A
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.254,Aquarius:18.0.942,Hydra:6.0.573,FMLib:17.11.170.22
+ definitions=2023-03-24_11,2023-03-27_02,2023-02-09_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 mlxscore=0 lowpriorityscore=0
+ malwarescore=0 mlxlogscore=721 bulkscore=0 priorityscore=1501
+ suspectscore=0 spamscore=0 clxscore=1015 impostorscore=0 adultscore=0
+ phishscore=0 classifier=spam adjust=0 reason=mlx scancount=1
+ engine=8.12.0-2303200000 definitions=main-2303270127
+X-Spam-Status: No, score=-0.2 required=5.0 tests=DKIM_SIGNED,DKIM_VALID,
+        DKIM_VALID_AU,DKIM_VALID_EF,SPF_HELO_NONE,SPF_PASS
+        autolearn=unavailable autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-This PFSM controls the operational modes of the PMIC:
-- STANDBY and LP_STANDBY,
-- ACTIVE state,
-- MCU_ONLY state,
-- RETENTION state, with or without DDR and/or GPIO retention.
-Depending on the current operational mode, some voltage domains
-remain energized while others can be off.
+This series introduces a driver under the accel subsystem (QAIC -
+Qualcomm AIC) for the Qualcomm Cloud AI 100 product (AIC100).  AIC100 is
+a PCIe adapter card that hosts a dedicated machine learning inference
+accelerator.
 
-This PFSM is also used to trigger a firmware update, and provides
-R/W access to device registers.
+The previous version (v4) can be found at:
+https://lore.kernel.org/all/1679325074-5494-1-git-send-email-quic_jhugo@quicinc.com/
 
-Signed-off-by: Julien Panis <jpanis@baylibre.com>
----
- .../userspace-api/ioctl/ioctl-number.rst      |   1 +
- drivers/misc/Kconfig                          |  12 +
- drivers/misc/Makefile                         |   1 +
- drivers/misc/tps6594-pfsm.c                   | 304 ++++++++++++++++++
- include/uapi/linux/tps6594_pfsm.h             |  45 +++
- 5 files changed, 363 insertions(+)
- create mode 100644 drivers/misc/tps6594-pfsm.c
- create mode 100644 include/uapi/linux/tps6594_pfsm.h
+v5:
+-Drop version.h in mhi_qaic_cntl
+-Remove DRM_RENDER_ALLOW on ioctls
+-Use div_u64 in qaic_data for 32-bit architectures
+-Documentation formatting changes
+-cntl->cntrl for mhi controller instances
+-char->u8 in mhi_controller
 
-diff --git a/Documentation/userspace-api/ioctl/ioctl-number.rst b/Documentation/userspace-api/ioctl/ioctl-number.rst
-index 0a1882e296ae..07ff4d619db4 100644
---- a/Documentation/userspace-api/ioctl/ioctl-number.rst
-+++ b/Documentation/userspace-api/ioctl/ioctl-number.rst
-@@ -180,6 +180,7 @@ Code  Seq#    Include File                                           Comments
- 'P'   00-0F  drivers/usb/class/usblp.c                               conflict!
- 'P'   01-09  drivers/misc/pci_endpoint_test.c                        conflict!
- 'P'   00-0F  xen/privcmd.h                                           conflict!
-+'P'   00-03  linux/tps6594_pfsm.h                                    conflict!
- 'Q'   all    linux/soundcard.h
- 'R'   00-1F  linux/random.h                                          conflict!
- 'R'   01     linux/rfkill.h                                          conflict!
-diff --git a/drivers/misc/Kconfig b/drivers/misc/Kconfig
-index c73c02801330..75e427f124b2 100644
---- a/drivers/misc/Kconfig
-+++ b/drivers/misc/Kconfig
-@@ -549,6 +549,18 @@ config TPS6594_ESM
- 	  This driver can also be built as a module.  If so, the module
- 	  will be called tps6594-esm.
- 
-+config TPS6594_PFSM
-+	tristate "TI TPS6594 Pre-configurable Finite State Machine support"
-+	depends on MFD_TPS6594
-+	default MFD_TPS6594
-+	help
-+	  Support PFSM (Pre-configurable Finite State Machine) on TPS6594 PMIC devices.
-+	  These devices integrate a finite state machine engine, which manages the state
-+	  of the device during operating state transition.
-+
-+	  This driver can also be built as a module.  If so, the module
-+	  will be called tps6594-pfsm.
-+
- source "drivers/misc/c2port/Kconfig"
- source "drivers/misc/eeprom/Kconfig"
- source "drivers/misc/cb710/Kconfig"
-diff --git a/drivers/misc/Makefile b/drivers/misc/Makefile
-index 3dc69ec69912..f2a4d1ff65d4 100644
---- a/drivers/misc/Makefile
-+++ b/drivers/misc/Makefile
-@@ -66,3 +66,4 @@ obj-$(CONFIG_VCPU_STALL_DETECTOR)	+= vcpu_stall_detector.o
- obj-$(CONFIG_TMR_MANAGER)      += xilinx_tmr_manager.o
- obj-$(CONFIG_TMR_INJECT)	+= xilinx_tmr_inject.o
- obj-$(CONFIG_TPS6594_ESM)	+= tps6594-esm.o
-+obj-$(CONFIG_TPS6594_PFSM)	+= tps6594-pfsm.o
-diff --git a/drivers/misc/tps6594-pfsm.c b/drivers/misc/tps6594-pfsm.c
-new file mode 100644
-index 000000000000..e7b5ccfa1d4b
---- /dev/null
-+++ b/drivers/misc/tps6594-pfsm.c
-@@ -0,0 +1,304 @@
-+// SPDX-License-Identifier: GPL-2.0
-+/*
-+ * PFSM (Pre-configurable Finite State Machine) driver for TI TPS6594/TPS6593/LP8764X PMICs
-+ *
-+ * Copyright (C) 2023 BayLibre Incorporated - https://www.baylibre.com/
-+ */
-+
-+#include <linux/fs.h>
-+#include <linux/interrupt.h>
-+#include <linux/ioctl.h>
-+#include <linux/miscdevice.h>
-+#include <linux/module.h>
-+#include <linux/platform_device.h>
-+#include <linux/regmap.h>
-+
-+#include <linux/mfd/tps6594.h>
-+
-+#include <linux/tps6594_pfsm.h>
-+
-+#define TPS6594_STARTUP_DEST_MCU_ONLY_VAL 2
-+#define TPS6594_STARTUP_DEST_ACTIVE_VAL   3
-+#define TPS6594_STARTUP_DEST_SHIFT	  5
-+#define TPS6594_STARTUP_DEST_MCU_ONLY	  (TPS6594_STARTUP_DEST_MCU_ONLY_VAL \
-+					   << TPS6594_STARTUP_DEST_SHIFT)
-+#define TPS6594_STARTUP_DEST_ACTIVE	  (TPS6594_STARTUP_DEST_ACTIVE_VAL \
-+					   << TPS6594_STARTUP_DEST_SHIFT)
-+
-+/*
-+ * To update the PMIC firmware, the user must be able to access
-+ * page 0 (user registers) and page 1 (NVM control and configuration).
-+ */
-+#define TPS6594_PMIC_MAX_POS 0x200
-+
-+#define TPS6594_FILE_TO_PFSM(f) container_of((f)->private_data, struct tps6594_pfsm, miscdev)
-+
-+/**
-+ * struct tps6594_pfsm - device private data structure
-+ *
-+ * @miscdev: misc device infos
-+ * @regmap:  regmap for accessing the device registers
-+ */
-+struct tps6594_pfsm {
-+	struct miscdevice miscdev;
-+	struct regmap *regmap;
-+};
-+
-+static ssize_t tps6594_pfsm_read(struct file *f, char __user *buf,
-+				 size_t count, loff_t *ppos)
-+{
-+	struct tps6594_pfsm *pfsm = TPS6594_FILE_TO_PFSM(f);
-+	loff_t pos = *ppos;
-+	unsigned int val;
-+	int ret;
-+	int i;
-+
-+	if (pos < 0)
-+		return -EINVAL;
-+	if (pos >= TPS6594_PMIC_MAX_POS)
-+		return 0;
-+	if (count > TPS6594_PMIC_MAX_POS - pos)
-+		count = TPS6594_PMIC_MAX_POS - pos;
-+
-+	for (i = 0 ; i < count ; i++) {
-+		ret = regmap_read(pfsm->regmap, pos + i, &val);
-+		if (ret)
-+			return ret;
-+
-+		if (put_user(val, buf + i))
-+			return -EFAULT;
-+	}
-+
-+	*ppos = pos + count;
-+
-+	return count;
-+}
-+
-+static ssize_t tps6594_pfsm_write(struct file *f, const char __user *buf,
-+				  size_t count, loff_t *ppos)
-+{
-+	struct tps6594_pfsm *pfsm = TPS6594_FILE_TO_PFSM(f);
-+	loff_t pos = *ppos;
-+	char val;
-+	int ret;
-+	int i;
-+
-+	if (pos < 0)
-+		return -EINVAL;
-+	if (pos >= TPS6594_PMIC_MAX_POS || !count)
-+		return 0;
-+	if (count > TPS6594_PMIC_MAX_POS - pos)
-+		count = TPS6594_PMIC_MAX_POS - pos;
-+
-+	for (i = 0 ; i < count ; i++) {
-+		if (get_user(val, buf + i))
-+			return -EFAULT;
-+
-+		ret = regmap_write(pfsm->regmap, pos + i, val);
-+		if (ret)
-+			return ret;
-+	}
-+
-+	*ppos = pos + count;
-+
-+	return count;
-+}
-+
-+static int tps6594_pfsm_configure_ret_trig(struct regmap *regmap, u8 options)
-+{
-+	int ret;
-+
-+	if (options & PMIC_GPIO_RETENTION)
-+		ret = regmap_set_bits(regmap, TPS6594_REG_FSM_I2C_TRIGGERS,
-+				      TPS6594_BIT_TRIGGER_I2C(5) | TPS6594_BIT_TRIGGER_I2C(6));
-+	else
-+		ret = regmap_clear_bits(regmap, TPS6594_REG_FSM_I2C_TRIGGERS,
-+					TPS6594_BIT_TRIGGER_I2C(5) | TPS6594_BIT_TRIGGER_I2C(6));
-+	if (ret)
-+		return ret;
-+
-+	if (options & PMIC_DDR_RETENTION)
-+		ret = regmap_set_bits(regmap, TPS6594_REG_FSM_I2C_TRIGGERS,
-+				      TPS6594_BIT_TRIGGER_I2C(7));
-+	else
-+		ret = regmap_clear_bits(regmap, TPS6594_REG_FSM_I2C_TRIGGERS,
-+					TPS6594_BIT_TRIGGER_I2C(7));
-+
-+	return ret;
-+}
-+
-+static long tps6594_pfsm_ioctl(struct file *f, unsigned int cmd, unsigned long arg)
-+{
-+	struct tps6594_pfsm *pfsm = TPS6594_FILE_TO_PFSM(f);
-+	struct pmic_state pfsm_state;
-+	void __user *argp = (void __user *)arg;
-+	int ret = -EINVAL;
-+
-+	switch (cmd) {
-+	case PMIC_GOTO_STANDBY:
-+		/* Disable LP mode */
-+		ret = regmap_clear_bits(pfsm->regmap, TPS6594_REG_RTC_CTRL_2,
-+					TPS6594_BIT_LP_STANDBY_SEL);
-+		if (ret)
-+			return ret;
-+
-+		/* Force trigger */
-+		ret = regmap_write_bits(pfsm->regmap, TPS6594_REG_FSM_I2C_TRIGGERS,
-+					TPS6594_BIT_TRIGGER_I2C(0), TPS6594_BIT_TRIGGER_I2C(0));
-+		break;
-+	case PMIC_GOTO_LP_STANDBY:
-+		/* Enable LP mode */
-+		ret = regmap_set_bits(pfsm->regmap, TPS6594_REG_RTC_CTRL_2,
-+				      TPS6594_BIT_LP_STANDBY_SEL);
-+		if (ret)
-+			return ret;
-+
-+		/* Force trigger */
-+		ret = regmap_write_bits(pfsm->regmap, TPS6594_REG_FSM_I2C_TRIGGERS,
-+					TPS6594_BIT_TRIGGER_I2C(0), TPS6594_BIT_TRIGGER_I2C(0));
-+		break;
-+	case PMIC_UPDATE_PGM:
-+		/* Force trigger */
-+		ret = regmap_write_bits(pfsm->regmap, TPS6594_REG_FSM_I2C_TRIGGERS,
-+					TPS6594_BIT_TRIGGER_I2C(3), TPS6594_BIT_TRIGGER_I2C(3));
-+		break;
-+	case PMIC_SET_STATE:
-+		if (copy_from_user(&pfsm_state, argp, sizeof(pfsm_state)))
-+			return -EFAULT;
-+
-+		switch (pfsm_state.state) {
-+		case PMIC_ACTIVE_STATE:
-+			/* Modify NSLEEP1-2 bits */
-+			ret = regmap_set_bits(pfsm->regmap, TPS6594_REG_FSM_NSLEEP_TRIGGERS,
-+					      TPS6594_BIT_NSLEEP1B | TPS6594_BIT_NSLEEP2B);
-+			break;
-+		case PMIC_MCU_ONLY_STATE:
-+			/* Configure retention triggers */
-+			ret = tps6594_pfsm_configure_ret_trig(pfsm->regmap, pfsm_state.options);
-+			if (ret)
-+				return ret;
-+
-+			/* Modify NSLEEP1-2 bits */
-+			ret = regmap_clear_bits(pfsm->regmap, TPS6594_REG_FSM_NSLEEP_TRIGGERS,
-+						TPS6594_BIT_NSLEEP1B);
-+			if (ret)
-+				return ret;
-+
-+			ret = regmap_set_bits(pfsm->regmap, TPS6594_REG_FSM_NSLEEP_TRIGGERS,
-+					      TPS6594_BIT_NSLEEP2B);
-+			break;
-+		case PMIC_RETENTION_STATE:
-+			/* Configure wake-up destination */
-+			if (pfsm_state.options & PMIC_MCU_ONLY_STARTUP_DEST)
-+				ret = regmap_write_bits(pfsm->regmap, TPS6594_REG_RTC_CTRL_2,
-+							TPS6594_MASK_STARTUP_DEST,
-+							TPS6594_STARTUP_DEST_MCU_ONLY);
-+			else
-+				ret = regmap_write_bits(pfsm->regmap, TPS6594_REG_RTC_CTRL_2,
-+							TPS6594_MASK_STARTUP_DEST,
-+							TPS6594_STARTUP_DEST_ACTIVE);
-+			if (ret)
-+				return ret;
-+
-+			/* Configure retention triggers */
-+			ret = tps6594_pfsm_configure_ret_trig(pfsm->regmap, pfsm_state.options);
-+			if (ret)
-+				return ret;
-+
-+			/* Modify NSLEEP1-2 bits */
-+			ret = regmap_clear_bits(pfsm->regmap, TPS6594_REG_FSM_NSLEEP_TRIGGERS,
-+						TPS6594_BIT_NSLEEP2B);
-+			break;
-+		}
-+
-+		break;
-+	}
-+
-+	return ret;
-+}
-+
-+static const struct file_operations tps6594_pfsm_fops = {
-+	.owner		= THIS_MODULE,
-+	.llseek		= generic_file_llseek,
-+	.read		= tps6594_pfsm_read,
-+	.write		= tps6594_pfsm_write,
-+	.unlocked_ioctl	= tps6594_pfsm_ioctl,
-+};
-+
-+static irqreturn_t tps6594_pfsm_isr(int irq, void *dev_id)
-+{
-+	struct platform_device *pdev = dev_id;
-+	int i;
-+
-+	for (i = 0 ; i < pdev->num_resources ; i++) {
-+		if (irq == platform_get_irq_byname(pdev, pdev->resource[i].name)) {
-+			dev_err(pdev->dev.parent, "%s event detected\n", pdev->resource[i].name);
-+			return IRQ_HANDLED;
-+		}
-+	}
-+
-+	return IRQ_NONE;
-+}
-+
-+static int tps6594_pfsm_probe(struct platform_device *pdev)
-+{
-+	struct tps6594_pfsm *pfsm;
-+	struct tps6594 *tps = dev_get_drvdata(pdev->dev.parent);
-+	struct device *dev = &pdev->dev;
-+	int irq;
-+	int ret;
-+	int i;
-+
-+	pfsm = devm_kzalloc(dev, sizeof(struct tps6594_pfsm), GFP_KERNEL);
-+	if (!pfsm)
-+		return -ENOMEM;
-+
-+	pfsm->regmap = tps->regmap;
-+
-+	pfsm->miscdev.minor = MISC_DYNAMIC_MINOR;
-+	pfsm->miscdev.name = devm_kasprintf(dev, GFP_KERNEL, "pfsm-%ld-0x%02x",
-+					    tps->chip_id, tps->reg);
-+	pfsm->miscdev.fops = &tps6594_pfsm_fops;
-+	pfsm->miscdev.parent = dev->parent;
-+
-+	for (i = 0 ; i < pdev->num_resources ; i++) {
-+		irq = platform_get_irq_byname(pdev, pdev->resource[i].name);
-+		if (irq < 0)
-+			return dev_err_probe(dev, irq, "Failed to get %s irq\n",
-+					     pdev->resource[i].name);
-+
-+		ret = devm_request_threaded_irq(dev, irq, NULL,
-+						tps6594_pfsm_isr, IRQF_ONESHOT,
-+						pdev->resource[i].name, pdev);
-+		if (ret)
-+			return dev_err_probe(dev, ret, "Failed to request irq\n");
-+	}
-+
-+	platform_set_drvdata(pdev, pfsm);
-+
-+	return misc_register(&pfsm->miscdev);
-+}
-+
-+static int tps6594_pfsm_remove(struct platform_device *pdev)
-+{
-+	struct tps6594_pfsm *pfsm = platform_get_drvdata(pdev);
-+
-+	misc_deregister(&pfsm->miscdev);
-+
-+	return 0;
-+}
-+
-+static struct platform_driver tps6594_pfsm_driver = {
-+	.driver	= {
-+		.name = "tps6594-pfsm",
-+	},
-+	.probe = tps6594_pfsm_probe,
-+	.remove = tps6594_pfsm_remove,
-+};
-+
-+module_platform_driver(tps6594_pfsm_driver);
-+
-+MODULE_ALIAS("platform:tps6594-pfsm");
-+MODULE_AUTHOR("Julien Panis <jpanis@baylibre.com>");
-+MODULE_DESCRIPTION("TPS6594 Pre-configurable Finite State Machine Driver");
-+MODULE_LICENSE("GPL");
-diff --git a/include/uapi/linux/tps6594_pfsm.h b/include/uapi/linux/tps6594_pfsm.h
-new file mode 100644
-index 000000000000..c3fd07df28b3
---- /dev/null
-+++ b/include/uapi/linux/tps6594_pfsm.h
-@@ -0,0 +1,45 @@
-+/* SPDX-License-Identifier: GPL-2.0 WITH Linux-syscall-note */
-+/*
-+ * Userspace ABI for TPS6594 PMIC Pre-configurable Finite State Machine
-+ *
-+ * Copyright (C) 2023 BayLibre Incorporated - https://www.baylibre.com/
-+ */
-+
-+#ifndef __TPS6594_PFSM_H
-+#define __TPS6594_PFSM_H
-+
-+#include <linux/const.h>
-+#include <linux/ioctl.h>
-+#include <linux/types.h>
-+
-+/* PFSM state definitions */
-+enum pfsm_state {
-+	PMIC_ACTIVE_STATE,
-+	PMIC_MCU_ONLY_STATE,
-+	PMIC_RETENTION_STATE
-+};
-+
-+/**
-+ * struct pmic_state - PMIC state identification
-+ * @state:   PFSM destination state
-+ * @options: options for destination state
-+ */
-+struct pmic_state {
-+	enum pfsm_state state;
-+	__u8 options;
-+};
-+
-+/* Commands */
-+#define	PMIC_BASE			'P'
-+
-+#define	PMIC_GOTO_STANDBY		_IO(PMIC_BASE, 0)
-+#define	PMIC_GOTO_LP_STANDBY		_IO(PMIC_BASE, 1)
-+#define	PMIC_UPDATE_PGM			_IO(PMIC_BASE, 2)
-+#define	PMIC_SET_STATE			_IOW(PMIC_BASE, 3, struct pmic_state)
-+
-+/* Options for destination state */
-+#define PMIC_GPIO_RETENTION		_BITUL(0)
-+#define PMIC_DDR_RETENTION		_BITUL(1)
-+#define PMIC_MCU_ONLY_STARTUP_DEST	_BITUL(2)
-+
-+#endif /*  __TPS6594_PFSM_H */
+v4:
+-Whitespace fixes
+-Add MODULE_PARM_DESC for the module parameters
+-Refactor qaic_open error handling
+-Shorten mhi boot error message
+-Remove extranious reset check
+-Remove _ prefix in qaic_control structs
+-Refactor encode_dma()
+-Refactor __qaic_execute_bo_ioctl
+-Remove extraniuous open_count checks
+-List drm-misc tree in MAINTAINERS
+
+v3:
+-Various style updates and word smithing
+-Remove unused function declarations
+-Drop iommu workaround for sg lists and outdated reserve_pages()
+-Remove unnecessary includes
+-Refactor qaic_pci_probe()
+-Use FIELD_PREP for ENCODE_SEM
+-Gate qaic subdirectory on the kconfig symbol
+-Add dri-devel@lists.freedesktop.org to MAINTAINERS entry
+-Rename copy_sgt()
+-Correct guard macro for qaic.h and cplusplus macro
+-Add comment in qaic_mhi_remove
+-Fix qaic_open use after free
+-Use devm allocs in qaic_mhi_register_controller()
+-Remove partition device ioctl.
+
+v2:
+-Addressed comments from RFC
+-Reduced the code to the core minimum by dropping telemetery, etc
+-Conversion to accel subsystem
+-Dropped versioning
+-Add mhi_qaic_cntl component
+-Restructure the documentation
+-Pull in a few fixes from the downstream tree
+
+Jeffrey Hugo (7):
+  accel/qaic: Add documentation for AIC100 accelerator driver
+  accel/qaic: Add uapi and core driver file
+  accel/qaic: Add MHI controller
+  accel/qaic: Add control path
+  accel/qaic: Add datapath
+  accel/qaic: Add qaic driver to the build system
+  MAINTAINERS: Add entry for QAIC driver
+
+Pranjal Ramajor Asha Kanojiya (1):
+  accel/qaic: Add mhi_qaic_cntl
+
+ Documentation/accel/index.rst       |    1 +
+ Documentation/accel/qaic/aic100.rst |  510 ++++++++++
+ Documentation/accel/qaic/index.rst  |   13 +
+ Documentation/accel/qaic/qaic.rst   |  170 ++++
+ MAINTAINERS                         |   10 +
+ drivers/accel/Kconfig               |    1 +
+ drivers/accel/Makefile              |    1 +
+ drivers/accel/qaic/Kconfig          |   23 +
+ drivers/accel/qaic/Makefile         |   13 +
+ drivers/accel/qaic/mhi_controller.c |  563 +++++++++++
+ drivers/accel/qaic/mhi_controller.h |   16 +
+ drivers/accel/qaic/mhi_qaic_ctrl.c  |  570 +++++++++++
+ drivers/accel/qaic/mhi_qaic_ctrl.h  |   12 +
+ drivers/accel/qaic/qaic.h           |  282 ++++++
+ drivers/accel/qaic/qaic_control.c   | 1527 ++++++++++++++++++++++++++++
+ drivers/accel/qaic/qaic_data.c      | 1903 +++++++++++++++++++++++++++++++++++
+ drivers/accel/qaic/qaic_drv.c       |  647 ++++++++++++
+ include/uapi/drm/qaic_accel.h       |  397 ++++++++
+ 18 files changed, 6659 insertions(+)
+ create mode 100644 Documentation/accel/qaic/aic100.rst
+ create mode 100644 Documentation/accel/qaic/index.rst
+ create mode 100644 Documentation/accel/qaic/qaic.rst
+ create mode 100644 drivers/accel/qaic/Kconfig
+ create mode 100644 drivers/accel/qaic/Makefile
+ create mode 100644 drivers/accel/qaic/mhi_controller.c
+ create mode 100644 drivers/accel/qaic/mhi_controller.h
+ create mode 100644 drivers/accel/qaic/mhi_qaic_ctrl.c
+ create mode 100644 drivers/accel/qaic/mhi_qaic_ctrl.h
+ create mode 100644 drivers/accel/qaic/qaic.h
+ create mode 100644 drivers/accel/qaic/qaic_control.c
+ create mode 100644 drivers/accel/qaic/qaic_data.c
+ create mode 100644 drivers/accel/qaic/qaic_drv.c
+ create mode 100644 include/uapi/drm/qaic_accel.h
+
 -- 
-2.37.3
+2.7.4
 
