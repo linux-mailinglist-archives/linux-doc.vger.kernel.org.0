@@ -2,118 +2,115 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 8B2DA6CEBDC
-	for <lists+linux-doc@lfdr.de>; Wed, 29 Mar 2023 16:41:06 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 57EA06CEBFB
+	for <lists+linux-doc@lfdr.de>; Wed, 29 Mar 2023 16:43:48 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S229983AbjC2OlE (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 29 Mar 2023 10:41:04 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:38648 "EHLO
+        id S229998AbjC2Onp (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 29 Mar 2023 10:43:45 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:42180 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S229960AbjC2Okw (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Wed, 29 Mar 2023 10:40:52 -0400
-Received: from ams.source.kernel.org (ams.source.kernel.org [145.40.68.75])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id B9DA27684;
-        Wed, 29 Mar 2023 07:37:59 -0700 (PDT)
-Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
-        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+        with ESMTP id S230019AbjC2OnS (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Wed, 29 Mar 2023 10:43:18 -0400
+Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.133.124])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 980524EFE
+        for <linux-doc@vger.kernel.org>; Wed, 29 Mar 2023 07:39:47 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+        s=mimecast20190719; t=1680100786;
+        h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+         to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+         in-reply-to:in-reply-to:references:references;
+        bh=eOGvCBK3xTc7UhN8iQW8f99rBt5fCj0lar0/GGKSAUo=;
+        b=NioUosh00e0TvbtfxyHENkMSZgKe12D5YryqNN6rOXPC4qMwnblB2wtA2JgW3RM8Zq1anT
+        6rpJYcP/LJHVnxPnuQdbDOK13KvM9NTPvrdoaYuRLxn0JSigWOfkeA+/Tke7aoBSPPp7M1
+        Ft5dB97qqq9NBvmOI9DctpsFhAz+H9o=
+Received: from mimecast-mx02.redhat.com (mx3-rdu2.redhat.com
+ [66.187.233.73]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ us-mta-586-OX_M3mnhOyOLIjTwhOpgsw-1; Wed, 29 Mar 2023 10:39:40 -0400
+X-MC-Unique: OX_M3mnhOyOLIjTwhOpgsw-1
+Received: from smtp.corp.redhat.com (int-mx06.intmail.prod.int.rdu2.redhat.com [10.11.54.6])
+        (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
         (No client certificate requested)
-        by ams.source.kernel.org (Postfix) with ESMTPS id A55F1B820FE;
-        Wed, 29 Mar 2023 14:37:30 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 95671C4339B;
-        Wed, 29 Mar 2023 14:37:27 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-        s=k20201202; t=1680100649;
-        bh=L1sqLmIkifE2Q8DXW/e/GjzJNlmt1BIwb5AvVrF0wO8=;
-        h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-        b=FCwHJUPMBB2T0IVu3eU/P+W1JqphqMbb768sdao2TORxURk+WeoyQYAVg+Q+drdj1
-         ++BV38HtdQsEpBsufFO+21Lft9t3gt2nXrwkgZ5xbW8gTkacUm5coCLBsxhM+ZQZX6
-         gdq2N3yCkBi+jLr44SLjezXhsXVHBlCqF+omci4nnp9IyDPRjJdE6T0O5MTlBGbrj4
-         rfviN2WlFprK8I0fqoxEg6aINQRa2Xhq5HK5v7PHhvp6HazGoYpPibeGufWErZBEmo
-         8HlHuYfloPLK1SvQcB0mk+5DnvaVNEckdo3PcyEmCp4XZ3MBw4P2M3F02pVdceNWFY
-         T/SvmxtvsrjrA==
-Date:   Wed, 29 Mar 2023 15:37:25 +0100
-From:   Conor Dooley <conor@kernel.org>
-To:     Alexandre Ghiti <alexghiti@rivosinc.com>
-Cc:     Jonathan Corbet <corbet@lwn.net>,
-        Paul Walmsley <paul.walmsley@sifive.com>,
-        Palmer Dabbelt <palmer@dabbelt.com>,
-        Albert Ou <aou@eecs.berkeley.edu>,
-        Conor Dooley <conor.dooley@microchip.com>,
-        linux-doc@vger.kernel.org, linux-riscv@lists.infradead.org,
-        linux-kernel@vger.kernel.org
-Subject: Re: [PATCH -fixes v2 2/3] riscv: Do not set initial_boot_params to
- the linear address of the dtb
-Message-ID: <179c38d6-4298-4a16-b0d7-8aee49a91f58@spud>
-References: <20230329081932.79831-1-alexghiti@rivosinc.com>
- <20230329081932.79831-3-alexghiti@rivosinc.com>
+        by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 52F783C10ED2;
+        Wed, 29 Mar 2023 14:39:38 +0000 (UTC)
+Received: from warthog.procyon.org.uk (unknown [10.33.36.18])
+        by smtp.corp.redhat.com (Postfix) with ESMTP id 900FA2166B33;
+        Wed, 29 Mar 2023 14:39:34 +0000 (UTC)
+Organization: Red Hat UK Ltd. Registered Address: Red Hat UK Ltd, Amberley
+        Place, 107-111 Peascod Street, Windsor, Berkshire, SI4 1TE, United
+        Kingdom.
+        Registered in England and Wales under Company Registration No. 3798903
+From:   David Howells <dhowells@redhat.com>
+In-Reply-To: <e128356a-f56f-4c02-7437-dfea38e4194b@suse.de>
+References: <e128356a-f56f-4c02-7437-dfea38e4194b@suse.de> <20230329141354.516864-1-dhowells@redhat.com> <20230329141354.516864-49-dhowells@redhat.com>
+To:     Hannes Reinecke <hare@suse.de>
+cc:     David Howells <dhowells@redhat.com>,
+        Matthew Wilcox <willy@infradead.org>,
+        "David S. Miller" <davem@davemloft.net>,
+        Eric Dumazet <edumazet@google.com>,
+        Jakub Kicinski <kuba@kernel.org>,
+        Paolo Abeni <pabeni@redhat.com>, linux-doc@vger.kernel.org,
+        virtualization@lists.linux-foundation.org, linux-mm@kvack.org,
+        linux-sctp@vger.kernel.org, linux-afs@lists.infradead.org,
+        rds-devel@oss.oracle.com, linux-x25@vger.kernel.org,
+        dccp@vger.kernel.org, linux-rdma@vger.kernel.org,
+        Christoph Hellwig <hch@infradead.org>,
+        linux-wpan@vger.kernel.org, linux-arm-msm@vger.kernel.org,
+        linux-can@vger.kernel.org, Marc Kleine-Budde <mkl@pengutronix.de>,
+        Al Viro <viro@zeniv.linux.org.uk>, linux-hams@vger.kernel.org,
+        mptcp@lists.linux.dev, Jens Axboe <axboe@kernel.dk>,
+        Christian Brauner <brauner@kernel.org>, netdev@vger.kernel.org,
+        Jeff Layton <jlayton@kernel.org>, linux-kernel@vger.kernel.org,
+        Chuck Lever III <chuck.lever@oracle.com>,
+        tipc-discussion@lists.sourceforge.net,
+        linux-crypto@vger.kernel.org, linux-fsdevel@vger.kernel.org,
+        bpf@vger.kernel.org, Linus Torvalds <torvalds@linux-foundation.org>
+Subject: Re: [RFC PATCH v2 48/48] sock: Remove ->sendpage*() in favour of sendmsg(MSG_SPLICE_PAGES)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha256;
-        protocol="application/pgp-signature"; boundary="UOjzVrvSVXjIViV0"
-Content-Disposition: inline
-In-Reply-To: <20230329081932.79831-3-alexghiti@rivosinc.com>
-X-Spam-Status: No, score=-5.2 required=5.0 tests=DKIMWL_WL_HIGH,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_HI,SPF_HELO_NONE,
-        SPF_PASS autolearn=unavailable autolearn_force=no version=3.4.6
+Content-Type: text/plain; charset="us-ascii"
+Content-ID: <518630.1680100773.1@warthog.procyon.org.uk>
+Date:   Wed, 29 Mar 2023 15:39:33 +0100
+Message-ID: <518631.1680100773@warthog.procyon.org.uk>
+X-Scanned-By: MIMEDefang 3.1 on 10.11.54.6
+X-Spam-Status: No, score=-0.2 required=5.0 tests=DKIMWL_WL_HIGH,DKIM_SIGNED,
+        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_NONE,
+        RCVD_IN_MSPIKE_H2,SPF_HELO_NONE,SPF_NONE autolearn=unavailable
+        autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
+Hannes Reinecke <hare@suse.de> wrote:
 
---UOjzVrvSVXjIViV0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+> > [!] Note: This is a work in progress.  At the moment, some things won't
+> >      build if this patch is applied.  nvme, kcm, smc, tls.
 
-On Wed, Mar 29, 2023 at 10:19:31AM +0200, Alexandre Ghiti wrote:
-> early_init_dt_verify() is already called in parse_dtb() and since the dtb
-> address does not change anymore (it is now in the fixmap region), no need
-> to reset initial_boot_params by calling early_init_dt_verify() again.
->=20
-> Signed-off-by: Alexandre Ghiti <alexghiti@rivosinc.com>
-> ---
->  arch/riscv/kernel/setup.c | 5 +----
->  1 file changed, 1 insertion(+), 4 deletions(-)
->=20
-> diff --git a/arch/riscv/kernel/setup.c b/arch/riscv/kernel/setup.c
-> index 542eed85ad2c..a059b73f4ddb 100644
-> --- a/arch/riscv/kernel/setup.c
-> +++ b/arch/riscv/kernel/setup.c
-> @@ -278,10 +278,7 @@ void __init setup_arch(char **cmdline_p)
->  #if IS_ENABLED(CONFIG_BUILTIN_DTB)
->  	unflatten_and_copy_device_tree();
->  #else
-> -	if (early_init_dt_verify(__va(XIP_FIXUP(dtb_early_pa))))
-> -		unflatten_device_tree();
+Actually, that needs updating.  nvme and smc now build.
 
-Silly question maybe, but since it isn't explicitly mentioned, the
-XIP_FIXUP bits no longer matter?
-Also, in related news, I assume you don't have a QEMU setup that can do
-boot an XIP kernel?
+> Weelll ... what happens to consumers of kernel_sendpage()?
+> (Let's call them nvme ...)
+> Should they be moved over, too?
 
-Cheers,
-Conor.
+Patch 42 should address NVMe, I think.  I can't test it, though, as I don't
+have hardware.
 
-> -	else
-> -		pr_err("No DTB found in kernel mappings\n");
-> +	unflatten_device_tree();
->  #endif
->  	misc_mem_init();
-> =20
-> --=20
-> 2.37.2
->=20
+There should be no callers of kernel_sendmsg() by the end of this patchset,
+and the only remaining implementors of sendpage are Chelsio-TLS, AF_TLS and
+AF_KCM, which as stated in the cover, aren't yet converted and won't build.
 
---UOjzVrvSVXjIViV0
-Content-Type: application/pgp-signature; name="signature.asc"
+> Or what is the general consensus here?
+> 
+> (And what do we do with TLS? It does have a ->sendpage() version, too ...)
 
------BEGIN PGP SIGNATURE-----
+I know.  There are three things left that I need to tackle, but I'd like to
+get opinions on some of the other bits and I might need some help with AF_TLS
+and AF_KCM.
 
-iHUEABYIAB0WIQRh246EGq/8RLhDjO14tDGHoIJi0gUCZCRNJQAKCRB4tDGHoIJi
-0gqaAQDSe9gvXHde8jzjSZoWLPBptYoYGaraDZqYua/MYlGe3wEA/9h+58eBSjUH
-4VGr3g5fK9KMQFkCCp3A/kRsgdI7bwM=
-=B9wY
------END PGP SIGNATURE-----
+That said, should I just remove tls_sw_do_sendpage() since presumably the data
+is going to get copied(?) and encrypted and the source pages aren't going to
+be held onto?
 
---UOjzVrvSVXjIViV0--
+David
+
