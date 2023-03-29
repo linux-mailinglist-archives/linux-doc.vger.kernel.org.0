@@ -2,72 +2,101 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id C7ABF6CF566
-	for <lists+linux-doc@lfdr.de>; Wed, 29 Mar 2023 23:30:57 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 4580D6CF7CB
+	for <lists+linux-doc@lfdr.de>; Thu, 30 Mar 2023 01:55:50 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S229462AbjC2Va4 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 29 Mar 2023 17:30:56 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:56594 "EHLO
+        id S230176AbjC2Xzs (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 29 Mar 2023 19:55:48 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:55856 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S229436AbjC2Vaz (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Wed, 29 Mar 2023 17:30:55 -0400
-Received: from mail-lj1-x230.google.com (mail-lj1-x230.google.com [IPv6:2a00:1450:4864:20::230])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 8114E172A
-        for <linux-doc@vger.kernel.org>; Wed, 29 Mar 2023 14:30:54 -0700 (PDT)
-Received: by mail-lj1-x230.google.com with SMTP id e21so17630475ljn.7
-        for <linux-doc@vger.kernel.org>; Wed, 29 Mar 2023 14:30:54 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112; t=1680125453;
-        h=content-transfer-encoding:to:subject:message-id:date:from:reply-to
-         :mime-version:from:to:cc:subject:date:message-id:reply-to;
-        bh=NOquimWBlPNqCwfHk0HCCimkePJplThkTjUTXqbQpc4=;
-        b=cCv7nZIC5l5TkoQ5813Vdi24YBgSE7it7da4M4ODk1ZgVyT32iMtyhxy0n8aAFlEGy
-         lvLDziMR5oj+nCiPr/bX65VI4EB800K5TFdcUvcXYpjFpMkz2eaVW05vi09Zydi5qAUp
-         K0x87nTm+1I53zurNphOT7bDGoFudTSTyFFvCSGWVX9qRzyvbuLWR3g/5Ox0YLFYR1ye
-         iVBBA5sRqVHS2RUCm5Evh6xxfzvQut4uT5h5LELu2aJPj6h81qhnELGE6WgRzLbY9oKq
-         j1TK0bR/UnofdsFa+d8FIiZxaK7jc11/J+Fax7vW9pDVEHYEw5m3AoPh478Ck4zTK9iD
-         gjWQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112; t=1680125453;
-        h=content-transfer-encoding:to:subject:message-id:date:from:reply-to
-         :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=NOquimWBlPNqCwfHk0HCCimkePJplThkTjUTXqbQpc4=;
-        b=XfrAejubxzR0cWCQWhOAR1yPcGnwc/Et5yGAd64ORDFxP+pHQtHk34mr3q3pdhVjDw
-         P8GkED4iMV9QLXjgaltU0giBMSvAsWLSnHXIU2GB7sa+RgRKKUFNpDKVCD3SLdXq8NgB
-         I6hbvsM5UqiBG3uA+P5d3vz4/qSTtt9IZHDKXO45bbaaOpJOAootwveCboTJixdDoh4I
-         utWlXeugZIazN47GUTfRaoVQ2XsOX92KU/P+bJS+hjNoSLg8f4QUSKgaoQI34/jXlOMK
-         RdCXKBAe7f8olzLpoaMW/AwVQLRWqVrA0qRjho7laAsvltnkHmpzcSHGqzQkKGShWqxY
-         Aqkw==
-X-Gm-Message-State: AAQBX9figZfOCE0OybstMIbIIQI3m7hj4PsUedYO20kvwI1K+Fuswwu4
-        6Sb13Anbki1Hace+6T1DCM3+QHtezstZY48y+GM=
-X-Google-Smtp-Source: AKy350Y1AO/cwfsto1wfc6LzPfSpcqg9p11hcqXCcvssMgOvA8fxRXVTLG2lVYtGCMs6vArbtbFRGgyleCtQkFcHpy0=
-X-Received: by 2002:a2e:9d15:0:b0:299:ab25:5a89 with SMTP id
- t21-20020a2e9d15000000b00299ab255a89mr6423380lji.5.1680125452614; Wed, 29 Mar
- 2023 14:30:52 -0700 (PDT)
+        with ESMTP id S231288AbjC2Xzr (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Wed, 29 Mar 2023 19:55:47 -0400
+Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.133.124])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 713151FD2
+        for <linux-doc@vger.kernel.org>; Wed, 29 Mar 2023 16:55:01 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+        s=mimecast20190719; t=1680134100;
+        h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+         to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+         in-reply-to:in-reply-to:references:references;
+        bh=YDvzU53CPeswLit/FMHu3YOxwiNaBZwdjQxKehJieKw=;
+        b=KpIdcd0gkaSTioCNr4d1uGjOOrF73EuXGl4XHnRkB8stP2uGbqsZavAqKG2ylau/SEF8cg
+        XIivhYRuChbUARFUvIsBLpkgzB47HcvDlDA0XcF2z85E54II7gbDFAXiPQIhc/pFppj3G2
+        MJTa/2sle19+8Rj2Vnko5RmCeunnALc=
+Received: from mimecast-mx02.redhat.com (mx3-rdu2.redhat.com
+ [66.187.233.73]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ us-mta-658-gjbwPLEMPuu8BeS56HR0nQ-1; Wed, 29 Mar 2023 19:54:56 -0400
+X-MC-Unique: gjbwPLEMPuu8BeS56HR0nQ-1
+Received: from smtp.corp.redhat.com (int-mx10.intmail.prod.int.rdu2.redhat.com [10.11.54.10])
+        (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+        (No client certificate requested)
+        by mimecast-mx02.redhat.com (Postfix) with ESMTPS id C88EE3C0DDA1;
+        Wed, 29 Mar 2023 23:54:55 +0000 (UTC)
+Received: from dhcp-27-174.brq.redhat.com (unknown [10.45.224.161])
+        by smtp.corp.redhat.com (Postfix) with SMTP id AFE50492C3E;
+        Wed, 29 Mar 2023 23:54:51 +0000 (UTC)
+Received: by dhcp-27-174.brq.redhat.com (nbSMTP-1.00) for uid 1000
+        oleg@redhat.com; Thu, 30 Mar 2023 01:54:48 +0200 (CEST)
+Date:   Thu, 30 Mar 2023 01:54:43 +0200
+From:   Oleg Nesterov <oleg@redhat.com>
+To:     Gregory Price <gregory.price@memverge.com>
+Cc:     Arnd Bergmann <arnd@arndb.de>,
+        Gregory Price <gourry.memverge@gmail.com>,
+        linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org,
+        linux-arm-kernel@lists.infradead.org,
+        Linux-Arch <linux-arch@vger.kernel.org>, avagin@gmail.com,
+        Peter Zijlstra <peterz@infradead.org>,
+        Andy Lutomirski <luto@kernel.org>, krisman@collabora.com,
+        Thomas Gleixner <tglx@linutronix.de>,
+        Jonathan Corbet <corbet@lwn.net>, shuah <shuah@kernel.org>,
+        Catalin Marinas <catalin.marinas@arm.com>,
+        Will Deacon <will@kernel.org>,
+        Mark Rutland <mark.rutland@arm.com>, tongtiangen@huawei.com,
+        Robin Murphy <robin.murphy@arm.com>
+Subject: Re: [PATCH v14 1/4] asm-generic,arm64: create task variant of
+ access_ok
+Message-ID: <20230329235442.GA10790@redhat.com>
+References: <20230328164811.2451-1-gregory.price@memverge.com>
+ <20230328164811.2451-2-gregory.price@memverge.com>
+ <20230329151515.GA913@redhat.com>
+ <9a456346-e207-44e1-873e-40d21334e01b@app.fastmail.com>
+ <20230329160322.GA4477@redhat.com>
+ <ZCO20bzX/IB8J6Gp@memverge.com>
+ <20230329171322.GB4477@redhat.com>
+ <ZCPOpClZ3hOQCs7a@memverge.com>
+ <20230329175850.GA8425@redhat.com>
+ <ZCQMsWNfkMJ0xHSy@memverge.com>
 MIME-Version: 1.0
-Received: by 2002:a05:6520:3845:b0:24f:5228:ed8 with HTTP; Wed, 29 Mar 2023
- 14:30:52 -0700 (PDT)
-Reply-To: illuminatenwelt7@gmail.com
-From:   Illuminaten Welt <auwalualiyumalam46@gmail.com>
-Date:   Wed, 29 Mar 2023 14:30:52 -0700
-Message-ID: <CAHQtquTp_4PANo1c6a0v8s2HYhwYyox20fULe5HZV4A3NUMJEA@mail.gmail.com>
-Subject: 
-To:     undisclosed-recipients:;
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Spam-Status: No, score=4.2 required=5.0 tests=DKIM_SIGNED,DKIM_VALID,
-        DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_ENVFROM_END_DIGIT,FREEMAIL_FROM,
-        FREEMAIL_REPLYTO,FREEMAIL_REPLYTO_END_DIGIT,RCVD_IN_DNSWL_NONE,
-        SPF_HELO_NONE,SPF_PASS,UNDISC_FREEM autolearn=no autolearn_force=no
-        version=3.4.6
-X-Spam-Level: ****
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <ZCQMsWNfkMJ0xHSy@memverge.com>
+User-Agent: Mutt/1.5.24 (2015-08-30)
+X-Scanned-By: MIMEDefang 3.1 on 10.11.54.10
+X-Spam-Status: No, score=-0.2 required=5.0 tests=DKIMWL_WL_HIGH,DKIM_SIGNED,
+        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_NONE,
+        RCVD_IN_MSPIKE_H2,SPF_HELO_NONE,SPF_NONE autolearn=unavailable
+        autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
---=20
-F=C3=BCr Reichtum, Ruhm und Macht schlie=C3=9Fen Sie sich noch heute den Il=
-luminaten an!
+On 03/29, Gregory Price wrote:
+>
+> Last note on this before I push up another patch set.
+>
+> The change from __get_user to get_user also introduces a call to
+> might_fault() which adds a larger callstack for every syscall /
+> dispatch.  This turns into a might_sleep and might_reschedule, which
+> represent a very different pattern of execution from before.
+
+might_fault() is nop unless CONFIG_PROVE_LOCKING || DEBUG_ATOMIC_SLEEP.
+
+Again, I won't really argue with task_access_ok(). Just I am not sure
+2/4 gives enough justification for this new helper with unclear semantics
+(until we ensure that access_ok() doesn't depend on current).
+
+Oleg.
+
