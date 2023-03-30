@@ -2,168 +2,93 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 109B26D0881
-	for <lists+linux-doc@lfdr.de>; Thu, 30 Mar 2023 16:41:50 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 082A46D0925
+	for <lists+linux-doc@lfdr.de>; Thu, 30 Mar 2023 17:10:07 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S231151AbjC3Ols (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 30 Mar 2023 10:41:48 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:47878 "EHLO
+        id S232783AbjC3PKF (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 30 Mar 2023 11:10:05 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:56534 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S232024AbjC3Olr (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Thu, 30 Mar 2023 10:41:47 -0400
-Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.133.124])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 93D81A246
-        for <linux-doc@vger.kernel.org>; Thu, 30 Mar 2023 07:40:53 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-        s=mimecast20190719; t=1680187252;
-        h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-         to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-         content-transfer-encoding:content-transfer-encoding:
-         in-reply-to:in-reply-to:references:references;
-        bh=EBPUuk2JCRV9N/XVlREPZ4qIQldNVbbnB+3Y+KyNIMg=;
-        b=I6NQAe7Y1DDcH5JyJZYQdDpkHvs4on0pjESlrqbj5OL2WFGM+ZMr/I7xyciaj2kdZJYguQ
-        SJbgGuHUq2bqNVvij36/fMaMvuFaEquLjYnlR3Ac6JJto5kAZ0SzttAGJr8m1r3ZQPsPgs
-        unnwqOPOXnFQ4dAgI2MOdt2K1EATH2Y=
-Received: from mail-pg1-f200.google.com (mail-pg1-f200.google.com
- [209.85.215.200]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-342-DA5RHRVrMN-OSvYbEGWDjQ-1; Thu, 30 Mar 2023 10:40:51 -0400
-X-MC-Unique: DA5RHRVrMN-OSvYbEGWDjQ-1
-Received: by mail-pg1-f200.google.com with SMTP id d34-20020a630e22000000b005039e28b68cso5518888pgl.13
-        for <linux-doc@vger.kernel.org>; Thu, 30 Mar 2023 07:40:50 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112; t=1680187250;
-        h=content-transfer-encoding:in-reply-to:subject:organization:from
-         :content-language:references:cc:to:user-agent:mime-version:date
-         :message-id:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=EBPUuk2JCRV9N/XVlREPZ4qIQldNVbbnB+3Y+KyNIMg=;
-        b=z2AEsZsyyCAqcvHiduWmKoCMbWEQ15RzIj0VkXnrTJm7Q6lpN72d10rdHqFHQSlA8q
-         Jx6dth1fYaBrgd3RWWwfLMDo5xue4hAu0yFn2NdKqaCCEHI40uVwcOnXPzXxePtDF4iF
-         Pm9PXIY6y+GblpYvThua0vT5t8Ycm9D/JYYFqlhaUd6onC3tpG7SOrfZwrnp2k1t6VQB
-         2g6p331D1NUw8yqX8hWHbbDzgcRSt3DOMV+MRAwYqNEBgIcXd5Vm4IOFoQs0ym3wilkR
-         DKE2naEyn+1ig2dXxluwSRHig7oSkvkWQE1Ycw8n0i9ZKAX1N0bT7rONin5drsutlrhy
-         yoQA==
-X-Gm-Message-State: AAQBX9fbhzwv+YwaYozuUHbVYAoQzHeIl5g51im/WVsoiaK4BctxiWcU
-        Xcl2o62m37sAd3O83f8fy1lREul5v8joPA1sj/OMjl+WsSyfjNAqKemtNDW5JE9u7FXSo2scCWz
-        JY/0t0ntURc3M6ihofIFD
-X-Received: by 2002:a17:90a:86c3:b0:231:248c:6ac4 with SMTP id y3-20020a17090a86c300b00231248c6ac4mr25890645pjv.7.1680187249918;
-        Thu, 30 Mar 2023 07:40:49 -0700 (PDT)
-X-Google-Smtp-Source: AKy350YRnh6kqb08u4czJc76hdyMex7f7wBhD8J6ELIXqGjTnfL30swP4TDll3Hnd/sy8n5Lpfm+kg==
-X-Received: by 2002:a17:90a:86c3:b0:231:248c:6ac4 with SMTP id y3-20020a17090a86c300b00231248c6ac4mr25890606pjv.7.1680187249419;
-        Thu, 30 Mar 2023 07:40:49 -0700 (PDT)
-Received: from [192.168.35.160] ([64.114.255.114])
-        by smtp.gmail.com with ESMTPSA id mh11-20020a17090b4acb00b0023cfbe7d62esm8363577pjb.1.2023.03.30.07.40.48
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Thu, 30 Mar 2023 07:40:48 -0700 (PDT)
-Message-ID: <ff599dc1-729d-52dc-d605-8a8ac890ad15@redhat.com>
-Date:   Thu, 30 Mar 2023 16:40:48 +0200
+        with ESMTP id S232705AbjC3PKE (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Thu, 30 Mar 2023 11:10:04 -0400
+Received: from mga07.intel.com (mga07.intel.com [134.134.136.100])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 2207DD31D
+        for <linux-doc@vger.kernel.org>; Thu, 30 Mar 2023 08:08:56 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1680188936; x=1711724936;
+  h=date:from:to:cc:subject:message-id:mime-version;
+  bh=9X5RJ4c+ptuUM1bme3S23XjEv8J3KsKmGwReVeUc16w=;
+  b=bdVvmipz9u42D9Lt67KQvRjSY9ic0ibPH1htg4Q/nAhNHhFqmQ3YStjD
+   GkxwF0W+6WANSpxo/qbSwn1Au6q8btwIdR5px1fUVigiXd+5lzAWPw+qe
+   2UWVzHosdJK7Pt0hgMYx2zEz8F5IvDaTBDCeSIvdtyVgH0n86Dty1d3tj
+   6Nb1Wup1iI1xenO4k+BCikWgdYLnZQwaX1jqkEUh6memggPOniJljlpVK
+   jimOEW6hjazs021iw9hE0slfyWCIhx/l5KTsIU9NI54vAZVKdqc7v0cot
+   nvB05AFi167gch3v4Ov0xBlibWpK65+5MsB3XtGA8QsEcike78GoqUj8G
+   w==;
+X-IronPort-AV: E=McAfee;i="6600,9927,10665"; a="406183947"
+X-IronPort-AV: E=Sophos;i="5.98,303,1673942400"; 
+   d="scan'208";a="406183947"
+Received: from orsmga001.jf.intel.com ([10.7.209.18])
+  by orsmga105.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 30 Mar 2023 08:06:00 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=McAfee;i="6600,9927,10665"; a="717343222"
+X-IronPort-AV: E=Sophos;i="5.98,303,1673942400"; 
+   d="scan'208";a="717343222"
+Received: from lkp-server01.sh.intel.com (HELO b613635ddfff) ([10.239.97.150])
+  by orsmga001.jf.intel.com with ESMTP; 30 Mar 2023 08:05:58 -0700
+Received: from kbuild by b613635ddfff with local (Exim 4.96)
+        (envelope-from <lkp@intel.com>)
+        id 1phtqf-000Kw0-1g;
+        Thu, 30 Mar 2023 15:05:57 +0000
+Date:   Thu, 30 Mar 2023 23:05:13 +0800
+From:   kernel test robot <lkp@intel.com>
+To:     Joshua Hay <joshua.a.hay@intel.com>
+Cc:     oe-kbuild-all@lists.linux.dev,
+        Intel Wired LAN <intel-wired-lan@lists.osuosl.org>,
+        Tony Nguyen <anthony.l.nguyen@intel.com>,
+        Alan Brady <alan.brady@intel.com>,
+        Madhu Chittim <madhu.chittim@intel.com>,
+        Phani Burra <phani.r.burra@intel.com>,
+        Pavan Kumar Linga <pavan.kumar.linga@intel.com>,
+        Sridhar Samudrala <sridhar.samudrala@intel.com>,
+        linux-doc@vger.kernel.org
+Subject: [tnguy-next-queue:10GbE 15/15] htmldocs:
+ Documentation/networking/device_drivers/ethernet/intel/idpf.rst: WARNING:
+ document isn't included in any toctree
+Message-ID: <202303302334.b3zIhN9j-lkp@intel.com>
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.9.0
-To:     Johannes Weiner <hannes@cmpxchg.org>
-Cc:     Andrew Morton <akpm@linux-foundation.org>,
-        Stefan Roesch <shr@devkernel.io>, kernel-team@fb.com,
-        linux-mm@kvack.org, riel@surriel.com, mhocko@suse.com,
-        linux-kselftest@vger.kernel.org, linux-doc@vger.kernel.org,
-        Hugh Dickins <hughd@google.com>
-References: <20230310182851.2579138-1-shr@devkernel.io>
- <20230328160914.5b6b66e4a5ad39e41fd63710@linux-foundation.org>
- <37dcd52a-2e32-c01d-b805-45d862721fbc@redhat.com>
- <ZCWcJelF5bEdF4N3@cmpxchg.org>
-Content-Language: en-US
-From:   David Hildenbrand <david@redhat.com>
-Organization: Red Hat
-Subject: Re: [PATCH v4 0/3] mm: process/cgroup ksm support
-In-Reply-To: <ZCWcJelF5bEdF4N3@cmpxchg.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-Spam-Status: No, score=-0.2 required=5.0 tests=DKIMWL_WL_HIGH,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,NICE_REPLY_A,RCVD_IN_DNSWL_NONE,
-        RCVD_IN_MSPIKE_H2,SPF_HELO_NONE,SPF_NONE autolearn=unavailable
-        autolearn_force=no version=3.4.6
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+X-Spam-Status: No, score=-2.5 required=5.0 tests=DKIMWL_WL_HIGH,DKIM_SIGNED,
+        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_MED,SPF_HELO_NONE,
+        SPF_NONE autolearn=unavailable autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On 30.03.23 16:26, Johannes Weiner wrote:
-> On Thu, Mar 30, 2023 at 06:55:31AM +0200, David Hildenbrand wrote:
->> On 29.03.23 01:09, Andrew Morton wrote:
->>> On Fri, 10 Mar 2023 10:28:48 -0800 Stefan Roesch <shr@devkernel.io> wrote:
->>>
->>>> So far KSM can only be enabled by calling madvise for memory regions. To
->>>> be able to use KSM for more workloads, KSM needs to have the ability to be
->>>> enabled / disabled at the process / cgroup level.
->>>
->>> Review on this series has been a bit thin.  Are we OK with moving this
->>> into mm-stable for the next merge window?
->>
->> I still want to review (traveling this week), but I also don't want to block
->> this forever.
->>
->> I think I didn't get a reply from Stefan to my question [1] yet (only some
->> comments from Johannes). I would still be interested in the variance of
->> pages we end up de-duplicating for processes.
->>
->> The 20% statement in the cover letter is rather useless and possibly
->> misleading if no details about the actual workload are shared.
-> 
-> The workload is instagram. It forks off Django runtimes on-demand
-> until it saturates whatever hardware it's running on. This benefits
-> from merging common heap/stack state between instances. Since that
-> runtime is quite large, the 20% number is not surprising, and matches
-> our expectations of duplicative memory between instances.
+tree:   https://git.kernel.org/pub/scm/linux/kernel/git/tnguy/next-queue.git 10GbE
+head:   e8a488d38e0a75704e37e952fedd329e977df362
+commit: e8a488d38e0a75704e37e952fedd329e977df362 [15/15] idpf: configure SRIOV and add other ndo_ops
+reproduce:
+        # https://git.kernel.org/pub/scm/linux/kernel/git/tnguy/next-queue.git/commit/?id=e8a488d38e0a75704e37e952fedd329e977df362
+        git remote add tnguy-next-queue https://git.kernel.org/pub/scm/linux/kernel/git/tnguy/next-queue.git
+        git fetch --no-tags tnguy-next-queue 10GbE
+        git checkout e8a488d38e0a75704e37e952fedd329e977df362
+        make menuconfig
+        # enable CONFIG_COMPILE_TEST, CONFIG_WARN_MISSING_DOCUMENTS, CONFIG_WARN_ABI_ERRORS
+        make htmldocs
 
-Thanks for this explanation. It's valuable to get at least a feeling for 
-the workload because it doesn't seem to apply to other workloads at all.
+If you fix the issue, kindly add following tag where applicable
+| Reported-by: kernel test robot <lkp@intel.com>
+| Link: https://lore.kernel.org/oe-kbuild-all/202303302334.b3zIhN9j-lkp@intel.com/
 
-> 
-> Obviously we could spend months analysing which exact allocations are
-> identical, and then more months or years reworking the architecture to
-> deduplicate them by hand and in userspace. But this isn't practical,
-> and KSM is specifically for cases where this isn't practical.
-> 
-> Based on your request in the previous thread, we investigated whether
-> the boost was coming from the unintended side effects of KSM splitting
-> THPs. This wasn't the case.
-> 
-> If you have other theories on how the results could be bogus, we'd be
-> happy to investigate those as well. But you have to let us know what
-> you're looking for.
-> 
+All warnings (new ones prefixed by >>):
 
-Maybe I'm bad at making such requests but
-
-"Stefan, can you do me a favor and investigate which pages we end up
-deduplicating -- especially if it's mostly only the zeropage and if it's
-still that significant when disabling THP?"
-
-"In any case, it would be nice to get a feeling for how much variety in
-these 20% of deduplicated pages are. "
-
-is pretty clear to me. And shouldn't take months.
-
-> Beyond that, I don't think we need to prove from scratch that KSM can
-
-I never expected a proof. I was merely trying to understand if it's 
-really KSM that helps here. Also with the intention to figure out if KSM 
-is really the right tool to use here or if it simply "helps by luck" as 
-with the shared zeropage. That end result could have been valuable to 
-your use case as well, because KSM overhead is real.
-
-> be a worthwhile optimization. It's been established that it can
-> be. This series is about enabling it in scenarios where madvise()
-> isn't practical, that's it, and it's yielding the expected results.
-
-I'm sorry to say, but you sound a bit aggressive and annoyed. I also 
-have no idea why Stefan isn't replying to me but always you.
-
-Am I asking the wrong questions? Do you want me to stop looking at KSM code?
+>> Documentation/networking/device_drivers/ethernet/intel/idpf.rst: WARNING: document isn't included in any toctree
 
 -- 
-Thanks,
-
-David / dhildenb
-
+0-DAY CI Kernel Test Service
+https://github.com/intel/lkp-tests
