@@ -2,148 +2,233 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id DD4816D0786
-	for <lists+linux-doc@lfdr.de>; Thu, 30 Mar 2023 16:02:06 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 096C96D0791
+	for <lists+linux-doc@lfdr.de>; Thu, 30 Mar 2023 16:04:58 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S231357AbjC3OCF (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 30 Mar 2023 10:02:05 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:50176 "EHLO
+        id S231760AbjC3OE4 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 30 Mar 2023 10:04:56 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:51968 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S230262AbjC3OCE (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Thu, 30 Mar 2023 10:02:04 -0400
-Received: from mail-ed1-x544.google.com (mail-ed1-x544.google.com [IPv6:2a00:1450:4864:20::544])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id B779E422C
-        for <linux-doc@vger.kernel.org>; Thu, 30 Mar 2023 07:02:03 -0700 (PDT)
-Received: by mail-ed1-x544.google.com with SMTP id ew6so76855077edb.7
-        for <linux-doc@vger.kernel.org>; Thu, 30 Mar 2023 07:02:03 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112; t=1680184922;
-        h=content-transfer-encoding:to:subject:message-id:date:from:reply-to
-         :mime-version:from:to:cc:subject:date:message-id:reply-to;
-        bh=zprVqURmoIr8Yjxlxe5JE5AiP0aq2hBtyHd/myx7ajE=;
-        b=QLKQXBahF2ITMq84r0Q6nmjqbgt6GKoFY7x2lSKY6hyNqtjVC99dgSgDC+BgwobBXP
-         UJvoBdyd16qrrR+JZ/haUILOY6lEC2kEXQInCUzSSX8r8PbYYw+X74rp2PJdCGbDixkY
-         cbUfvnUJ0eDHybU53nIBeGxbm8bb8pyfPSKjPoC4gB4qpLGWvWSni2zBWflfoNHIz9fT
-         54WjzYSjs/1GwFM4Bcj/8+MnBnyW4bVFmVqerQzQnUUxN6rNsdJ3rcExpvuQr52gvTnd
-         k3S0pAFmkQI54pqr5MyO1pckk/v8ZkSFMggEawocoM9oyCOCg7gQvZwBb025SVf2vdFV
-         HWoQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112; t=1680184922;
-        h=content-transfer-encoding:to:subject:message-id:date:from:reply-to
-         :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=zprVqURmoIr8Yjxlxe5JE5AiP0aq2hBtyHd/myx7ajE=;
-        b=D753fT2igbaO6zDIsGwIjqFwkQDRn0T5/uyTUzfEtGIq54ufxvUuOmNyqmUF3TrF/T
-         kiuGPWhAokAE8Z7l2D9KwPwU1qBUwbRHHzpBiPy2opw5GdZB02VM141x1lRNIcvDyUbA
-         U3NgwMUCSvzIAv02p0LkeBe4fD4u+CxOPCYsAy6LW0uWYm3Yn/q8NbEzQs7N2qtcYn2D
-         QAtymKHqQUgMgxYFuM7pWfyzjVO8yOupmbHrBIAkjLaAS0v/lMKE/xlDBOu7EyLGUBJT
-         ROqzJS7NcHzOX9wXzJp4+kh6sx2bLRXWMD0Bb0hq95ddG4K7Yus3wdWYOsSQpC9Gvjwy
-         w5LQ==
-X-Gm-Message-State: AAQBX9e4kxNUQFEKv0f/75OMLTPzDV5bANnBev6GpkrYKYwrFaPQRTvy
-        wAUGbaEXm4FF7TfiQA5Cl1MtBLY2g6JBxpg1uHo=
-X-Google-Smtp-Source: AKy350aSo5k1iU5/O40DGLfkS2FKNLFXD9noE38a8J2MW2gNBMR1lZYXrAjG056k7+WA2UGB/T0a66wBmiMxPXxRT1A=
-X-Received: by 2002:a17:907:720e:b0:947:46e0:9e51 with SMTP id
- dr14-20020a170907720e00b0094746e09e51mr1372549ejc.11.1680184922043; Thu, 30
- Mar 2023 07:02:02 -0700 (PDT)
+        with ESMTP id S231645AbjC3OEz (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Thu, 30 Mar 2023 10:04:55 -0400
+Received: from NAM10-DM6-obe.outbound.protection.outlook.com (mail-dm6nam10on2072.outbound.protection.outlook.com [40.107.93.72])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id CEEEB7AB9;
+        Thu, 30 Mar 2023 07:04:53 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=l39z7ClYAN6W5xLmEe4gcDZgdLLvSLlapxbRa6nHMwbysaUmPibvxfN3Owl4md5o3VbX54FDOFi/zMDqrw4Omf6UZn7rqNwL6lalVRVJ82Xwgq9T+nSszdAggM7grhzTuq6iyaXt3nk9sANTLGDxUf6BlHvhzQGrd9s6ESZXCoV03ZxMGOxK5YqVukBCLx0Dqn4CIFtPBgfgXwOce2j08/Ns+3zo38vhCMEMeSYk8NYtRFsQy45iKxLBOKYCh1vhk6+HMfMs5lqM68/+ekghYTBMCFo8DC0FOXKvxRfjOH1CTXj3BQ71iGxagpohikkWGCQUPxjLEIO3jjVT8FOW7w==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=vsLKkTp8hz4w7W7LuG08H4lzukZ+jsr2LWNhriQ6xXY=;
+ b=Nw60edn8gEVqgpQexbsD4kivhYQP33hruw1gRcvKbl2Luir3TVvFb+P8JKvipA+mhyMgCDiRJkV00tLC8Dt8EN4Hy1PBQ6eQXFWibaG6nc471H/PWzJhGhruRHf6r1WDmsMYCKoGiFh2225a3V1hNScE9WoMInCv7SmCrx9qem7mLZAmsOA5svd5V7m3i1ocz2j/h0J9CmlWsXdALMAw35Yc2sI7DWA0pyQ43js5Z+k305K7TMjMGMxcsqXfVsAcY4p3HLzca92yWUkWrjJkjnwH060BlxKfqhIj85ClwfEGg7XTpiu8wTgckB/eA42gJ3flxOf8d79tMRi4w8A9Rg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 216.228.117.161) smtp.rcpttodomain=arm.com smtp.mailfrom=nvidia.com;
+ dmarc=pass (p=reject sp=reject pct=100) action=none header.from=nvidia.com;
+ dkim=none (message not signed); arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
+ s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=vsLKkTp8hz4w7W7LuG08H4lzukZ+jsr2LWNhriQ6xXY=;
+ b=WyLJ3AR/oagkpfklwqZjgswb4QHcPOU/ShDSH8nCrOvAcaERf8j1Rk+f5mqUr4+rGEk5Vj3+e/LjZ1wb7PChjLzHCRhYFfyeB0HVFDdJ4eTdxZRmU67IbIeA2hjb5D29nRtL8bioEGd9cJxl9+8bjEo1CEAw0H0XK3fFs+vT5FcswJ7FkMd73X02UaQtV1AsCx3trkZQw2hi+WjxwmXuo42IGGQDM7z4tFrP4cBFVZRpYBsPwtnJGlPwnxXKC0W1KbxruYvFOz9B52UzskHQ0XTU+6lxYJUBhIejAuCVCaEQAFrecurywBSwpkp/U8LIVY5JFMu7UvLruNRNfpcK6w==
+Received: from DM6PR13CA0004.namprd13.prod.outlook.com (2603:10b6:5:bc::17) by
+ DS0PR12MB6655.namprd12.prod.outlook.com (2603:10b6:8:d0::12) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.6222.33; Thu, 30 Mar 2023 14:04:50 +0000
+Received: from DM6NAM11FT074.eop-nam11.prod.protection.outlook.com
+ (2603:10b6:5:bc:cafe::27) by DM6PR13CA0004.outlook.office365.com
+ (2603:10b6:5:bc::17) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6254.20 via Frontend
+ Transport; Thu, 30 Mar 2023 14:04:50 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 216.228.117.161)
+ smtp.mailfrom=nvidia.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=nvidia.com;
+Received-SPF: Pass (protection.outlook.com: domain of nvidia.com designates
+ 216.228.117.161 as permitted sender) receiver=protection.outlook.com;
+ client-ip=216.228.117.161; helo=mail.nvidia.com; pr=C
+Received: from mail.nvidia.com (216.228.117.161) by
+ DM6NAM11FT074.mail.protection.outlook.com (10.13.173.203) with Microsoft SMTP
+ Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.6254.21 via Frontend Transport; Thu, 30 Mar 2023 14:04:50 +0000
+Received: from rnnvmail204.nvidia.com (10.129.68.6) by mail.nvidia.com
+ (10.129.200.67) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.986.5; Thu, 30 Mar 2023
+ 07:04:40 -0700
+Received: from rnnvmail201.nvidia.com (10.129.68.8) by rnnvmail204.nvidia.com
+ (10.129.68.6) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.986.37; Thu, 30 Mar
+ 2023 07:04:39 -0700
+Received: from SDONTHINENI-DESKTOP.nvidia.com (10.127.8.9) by mail.nvidia.com
+ (10.129.68.8) with Microsoft SMTP Server id 15.2.986.37 via Frontend
+ Transport; Thu, 30 Mar 2023 07:04:38 -0700
+From:   Shanker Donthineni <sdonthineni@nvidia.com>
+To:     Catalin Marinas <catalin.marinas@arm.com>,
+        Will Deacon <will@kernel.org>,
+        Jonathan Corbet <corbet@lwn.net>,
+        Ard Biesheuvel <ardb@kernel.org>,
+        "Mark Rutland" <mark.rutland@arm.com>
+CC:     Anshuman Khandual <anshuman.khandual@arm.com>,
+        Kalesh Singh <kaleshsingh@google.com>,
+        Zhou Guanghui <zhouguanghui1@huawei.com>,
+        <linux-arm-kernel@lists.infradead.org>,
+        <linux-doc@vger.kernel.org>, <linux-kernel@vger.kernel.org>,
+        Shanker Donthineni <sdonthineni@nvidia.com>,
+        Vikram Sethi <vsethi@nvidia.com>,
+        Thierry Reding <treding@nvidia.com>
+Subject: [PATCH v2] arm64: mm: Increase MODULES_VSIZE to 2GB
+Date:   Thu, 30 Mar 2023 09:04:37 -0500
+Message-ID: <20230330140437.984211-1-sdonthineni@nvidia.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-Received: by 2002:a05:7208:4282:b0:65:6bd4:9c4e with HTTP; Thu, 30 Mar 2023
- 07:02:01 -0700 (PDT)
-Reply-To: mrspatriciawilsons@gmail.com
-From:   POST OFFICE SERVICE <mrkelvinogene927@gmail.com>
-Date:   Thu, 30 Mar 2023 07:02:01 -0700
-Message-ID: <CA+SUeDFQLxt-JEr0PGhi0XVXu3HAcGJyE_YbLP4eBvvbqfxfFw@mail.gmail.com>
-Subject: =?UTF-8?B?7Y6A65OcIOyImOy3qOyduCDsnbTrqZTsnbwg7IaM7Jyg7J6Q64uY6ruYLA==?=
-To:     undisclosed-recipients:;
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: base64
-X-Spam-Status: Yes, score=7.8 required=5.0 tests=DKIM_SIGNED,DKIM_VALID,
-        DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_ENVFROM_END_DIGIT,FREEMAIL_FROM,
-        FREEMAIL_REPLYTO,LOTS_OF_MONEY,MONEY_FREEMAIL_REPTO,RCVD_IN_DNSWL_NONE,
-        SPF_HELO_NONE,SPF_PASS,UNDISC_FREEM,UNDISC_MONEY,UPPERCASE_50_75
-        autolearn=no autolearn_force=no version=3.4.6
-X-Spam-Report: * -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at
-        *      https://www.dnswl.org/, no trust
-        *      [2a00:1450:4864:20:0:0:0:544 listed in]
-        [list.dnswl.org]
-        * -0.0 SPF_PASS SPF: sender matches SPF record
-        *  0.2 FREEMAIL_ENVFROM_END_DIGIT Envelope-from freemail username ends
-        *       in digit
-        *      [mrkelvinogene927[at]gmail.com]
-        *  0.0 SPF_HELO_NONE SPF: HELO does not publish an SPF Record
-        *  0.0 FREEMAIL_FROM Sender email is commonly abused enduser mail
-        *      provider
-        *      [mrkelvinogene927[at]gmail.com]
-        *  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
-        *       valid
-        * -0.1 DKIM_VALID_EF Message has a valid DKIM or DK signature from
-        *      envelope-from domain
-        * -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
-        *      author's domain
-        * -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
-        *  0.0 LOTS_OF_MONEY Huge... sums of money
-        *  0.8 UPPERCASE_50_75 message body is 50-75% uppercase
-        *  2.9 UNDISC_FREEM Undisclosed recipients + freemail reply-to
-        *  1.0 FREEMAIL_REPLYTO Reply-To/From or Reply-To/body contain
-        *      different freemails
-        *  1.1 MONEY_FREEMAIL_REPTO Lots of money from someone using free
-        *      email?
-        *  2.0 UNDISC_MONEY Undisclosed recipients + money/fraud signs
-X-Spam-Level: *******
+X-NVConfidentiality: public
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: DM6NAM11FT074:EE_|DS0PR12MB6655:EE_
+X-MS-Office365-Filtering-Correlation-Id: 02e7a66d-031f-4b83-9230-08db3127ba56
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: AZM/wYZWQPRu6ARbtzhYpiz1RFgJ+p0QWTKUYG7peTiymbR+foSkYA7GL+z9rjuBfdhSlIdujrVfoc3XNMRUReiQYF1yF0PHssnTD2jaQUkqp96KFi82HQPOFeLX0BUDt5aw73QRl0j84eFBJx90Kk94Z4IPhw4w7z/4aZlj3+U7Mxu8VrjK7U2VBCsNK1F/h6JBnewVG6qNly4kecxpRS7EtVB3SwAcDThS1v+aycDnyqwTtaMjrN2k0arJS9IeHK0Jujb27fhD32nlZL4cPVVV94DU7m1CR9KrgZEfDYhtPu/mR2EpwjHF6lPKp1biR5X2qNwYKqVYLb4pPel2dO8XhYoIIK188BRzUyDNJfJGDacwJvpLANVGXbymkGSSPTPUdCgSDdDVRuc0kfUekfzw5o3D0VQusgzCBrLbsi3wBlcc7iZVu8uB1CCE95YDI5tSNhcu37bAl7EhSv5cJcvVkeNrvz3ebaAIPLgRrkirsSmtVnZbntUd2clwqJypkO5Kv1Z3ufUzyodw+Y9rKioWRGGILXbOYGYK2wagsvmiHQxEglcAHee10Cy0DyiDNnkL1rTzJqR/cbJYNBWLSQw8WvRQtp7mv0+pUaPG28v+WWw1YztYoF8EYe1gapM9IhEXBkCoDJUBVEaftbYEJu1sNmEH1avOnLS15o4zAsM25Et62PsbyaeBqjObdS6HACn2evDmYYyE5WNBSORXO8Ky6k2rAY6JBTIJqvQScU9lhX8XCFNNOhngX1QTFN90ZEg9hGPdcvhY8O72czNTdyk2BgnuKg1Pm+7bExfamao=
+X-Forefront-Antispam-Report: CIP:216.228.117.161;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:mail.nvidia.com;PTR:dc6edge2.nvidia.com;CAT:NONE;SFS:(13230028)(4636009)(136003)(346002)(376002)(39860400002)(396003)(451199021)(40470700004)(36840700001)(46966006)(36756003)(426003)(336012)(47076005)(86362001)(82740400003)(83380400001)(5660300002)(82310400005)(2616005)(186003)(7416002)(1076003)(26005)(356005)(7636003)(8936002)(2906002)(107886003)(7696005)(70586007)(40460700003)(36860700001)(70206006)(41300700001)(40480700001)(4326008)(54906003)(316002)(34020700004)(8676002)(478600001)(110136005);DIR:OUT;SFP:1101;
+X-OriginatorOrg: Nvidia.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 30 Mar 2023 14:04:50.1216
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 02e7a66d-031f-4b83-9230-08db3127ba56
+X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=43083d15-7273-40c1-b7db-39efd9ccc17a;Ip=[216.228.117.161];Helo=[mail.nvidia.com]
+X-MS-Exchange-CrossTenant-AuthSource: DM6NAM11FT074.eop-nam11.prod.protection.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS0PR12MB6655
+X-Spam-Status: No, score=-0.2 required=5.0 tests=DKIMWL_WL_HIGH,DKIM_SIGNED,
+        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FORGED_SPF_HELO,
+        RCVD_IN_DNSWL_NONE,RCVD_IN_MSPIKE_H2,SPF_HELO_PASS,SPF_NONE
+        autolearn=unavailable autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-7Y6A65OcIOyImOy3qOyduCDsnbTrqZTsnbwg7IaM7Jyg7J6Q64uY6ruYLA0KDQrsmrDrpqzripQg
-VU4g7J2066aE7J2EIOyCrOyaqe2VmOuKlCDsgqzquLDqvrzsnbQg7IaN7JWY64uk64qUIOyGjOyc
-oOyekOulvCDtmLzrnoDsiqTrn73qsowg66eM65OgIFVOIOygleu2gCDrsJTqtazri4jsl5Ag7Jik
-656r64+Z7JWIIOyngOu2iO2VtOyVvCDtlZjripQg66+47IiY6riIDQrsnpDquIjsnYQg7KGw7IKs
-7ZWY64+E66GdIOuMgO2GteugueqzvCBVTiDqtIDrpqwg6riw6rWs66Gc67aA7YSwIOyalOyyreyd
-hCDrsJvslZjsirXri4jri6QuIOyhsOyCrCDspJEg6reA7ZWY7J2YIOydtOuplOydvCDso7zshozq
-sIAg7Y+s7ZWo65CcIOuLueyCrCDsi5zsiqTthZzsnZgg642w7J207YSwDQrsoIDsnqUg6riw66Gd
-7JeQIOuUsOultOuptCDqt4DtlZjsnZgg7KeA67aI7J2AIOuLpOydjOqzvCDqsJnsnbQg67aE66WY
-65CcIDE1MOuqheydmCDsiJjsi6DsnpAg66qp66Gd7JeQIO2PrO2VqOuQqeuLiOuLpC4NCg0K7Jqw
-66as64qUIOq3gO2VmOydmCDsnpDquIjsnYQg7IaN7J2066Ck64qUIOyLnOuPhOuhnCDrtoDtjKjt
-lZwg7J2A7ZaJIOyngeybkOyXkCDsnZjtlbQg6reA7ZWY7J2YIOyngOu2iOydtCDrtojtlYTsmpTt
-lZjqsowg7KeA7Jew65CY7Ja0IOq3gO2VmOydmCDsuKHsl5DshJwg66eO7J2AIOyGkOyLpOydhA0K
-7LSI656Y7ZWY6rOgIOq3gO2VmOydmCDsp4DrtojsnYQg67Cb64qUIOuNsCDrtojtlYTsmpTtlZwg
-7KeA7Jew7J20IOuwnOyDne2WiOuLpOuKlCDsgqzsi6Tsl5Ag6rK97JWF7J2EIOq4iOy5mCDrqrvt
-lanri4jri6QuIOycoOyXlOqzvCDqta3soJzthrXtmZTquLDquIgoSU1GKeydgCDquIDroZzrsowN
-CuqysOygnOyduCDrp4ztgbwg67aB66+4LCDrgqjrr7gsIOuvuOq1rSwg7Jyg65+9LCDslYTsi5zs
-lYQg65OxIOyghCDshLjqs4QgMTUw66qF7J2YIOyImOugueyduOyXkOqyjCBBVE0g67mE7J6Q7Lm0
-65Oc66W8IO2Gte2VtCDrqqjrk6Ag67O07IOB6riI7J2EDQrsp4DquIntlZjquLDroZwg7ZaI64uk
-LiDshozruYTsnpAsIOq4sOyXhSwg6riI7Jy1IOq4sOq0gCDrsI8g7KCV67aA6rCAIO2YhOq4iCDr
-sI8g7IiY7ZGcIOuMgOyLoCDrlJTsp4DthLgg7Ya17ZmU66W8IOyCrOyaqe2VoCDsiJgg7J6I64+E
-66GdIO2VmOuKlCDquLDsiKDsnoXri4jri6QuDQoNCuq3gO2VmOydmCDsnbTrpoTsnLzroZwg67Cc
-6riJ65CY6rOgIERITCDrmJDripQg6reA7ZWY7J2YIOq1reqwgOyXkOyEnCDsgqzsmqkg6rCA64ql
-7ZWcIO2DneuwsCDshJzruYTsiqTrpbwg7Ya17ZW0IOq3gO2VmOydmCDso7zshozroZwg7KeB7KCR
-IOuwnOyGoeuQmOuKlCBBVE0NClZpc2Eg7Lm065Oc66W8IO2Gte2VtCDqsrDsoJzqsIAg7J2066Oo
-7Ja07KeA64+E66GdIOuztOyepe2VqeuLiOuLpC4g7Jew6529IO2bhCAkODAwLDAwMC4wMOqwgCDq
-t4DtlZjsnZggQVRNIFZpc2Eg7Lm065Oc7JeQIOyggeumveuQmOyWtA0K7ZWY66OoIOy1nOyGjCAk
-MTAsMDAw7J2YIOyduOy2nOuhnCDtlbTri7kg6rWt6rCA7J2YIOuqqOuToCBBVE3sl5DshJwg7J6Q
-6riI7J2EIOyduOy2nO2VoCDsiJgg7J6I7Iq164uI64ukLiDsmpTssq0g7IucIO2VnOuPhOulvCDt
-lZjro6gNCiQyMCwwMDAuMDDquYzsp4Ag64qY66a0IOyImCDsnojsirXri4jri6QuDQoNCuydtOyZ
-gCDqtIDroKjtlZjsl6wg6reA7ZWY64qUIOuLpOydjOqzvCDqsJnsnbQg6rWt7KCcIOyngOu2iCDr
-sI8g7Iah6riI7J2EIOychO2VnCDsnbTsgqztmozsl5Ag7Jew65297ZWY7JesIO2VhOyalO2VnCDs
-oJXrs7Trpbwg7KCc6rO17ZW07JW8IO2VqeuLiOuLpC4NCg0KMS4g7ISx66qFKOyEseqzvCDsnbTr
-poQpPT09PQ0KMi4g6rGw7KO87KeAIOuwjyDqta3qsIDsnZgg7KCE7LK0IOyjvOyGjD09PQ0KMy4g
-6rWt7KCBPT09DQo0LiDsg53rhYTsm5Tsnbwv7ISx67OEPT09DQo1LiDsp4Hsl4U9PT09PQ0KNi4g
-7KCE7ZmUL+2MqeyKpCDrsojtmLjsi6DrtoTspp0g7IKs67O4OiA9PT09DQo3LiDtmozsgqwg7J20
-66mU7J28IOyjvOyGjCAvIOqwnOyduCDsnbTrqZTsnbwg7KO87IaMLiA9PT09DQoNCuydtCDsvZTr
-k5woUmVmOiBDTElFTlQtNjAxKeulvCDsnbTrqZTsnbwg7KO87IaM7J2YIOygnOuqqeycvOuhnCDs
-gqzsmqntlZjsl6wg7Iud67OE7ZWY6rOgIEFUTSBWaXNhIOy5tOuTnCDrsJzquIkg67CPIOuwsOyG
-oeydhCDsnITtlbQNCuychOydmCDsoJXrs7Trpbwg7JWE656YIOuLtOuLueyekOyXkOqyjCDsoJzq
-s7XtlZjsi63si5zsmKQuDQoNCuyasOumrOuKlCDqt4DtlZjsnZgg7J6Q6riI7J20IOy2lOqwgOuh
-nCDsp4Dsl7DrkJjqsbDrgpgg7J6Y66q7IOyghOuLrOuQmOuKlCDqsoPsnYQg67Cp7KeA7ZWY6riw
-IOychO2VtCDsnbQg7KeA67aIIOuwjyDshqHquIgg7Ya17Iug7J2EIOy2lOygge2VoCDsiJgg7J6I
-64+E66GdDQrsl5DsnbTsoITtirjsl5Dqsowg7IOIIOuyiO2YuOuhnCDqsJzsnbgg7J2066mU7J28
-IOyjvOyGjOulvCDsl7Trj4TroZ0g7KGw7Ja47ZaI7Iq164uI64ukLg0KDQrslYTrnpgg7Jew6529
-7LKYIOygleuztOulvCDsgqzsmqntlZjsl6wg64yA66as7J247JeQ6rKMIOusuOydmO2VmOyLreyL
-nOyYpC4g7Jew65297LKYOiBNUlMuIFBBVFJJQ0lBIFdJTFNPTiDsnbTsgqwg67O07IOBIOq4sOq4
-iA0K67aA7IScKFVuaXRlZCBCYW5rIEFUTSBWSVNBIENBUkQpDQoNCuydtOygnCBNUlPsl5Ag66y4
-7J2Y7ZWY7Iut7Iuc7JikLiDtjKjtirjrpqzsg6Qg7JyM7IqoLCDqsJDrj4UNCuydtOuplOydvDog
-KG1yc3BhdHJpY2lhd2lsc29uc0BnbWFpbC5jb20pDQoNCuy2lOqwgCDsp4Dsl7DsnYQg67Cp7KeA
-7ZWY6riwIOychO2VtCDsp4Dsuajsl5Ag65Sw6528IOydtCDsnbTrqZTsnbzsl5Ag6ri06riJIOyd
-keuLteydhCDsmpTssq3tlojsirXri4jri6QuDQoNCuusuOyViCDsnbjsgqwNCk1SUy5LUklTVEFM
-SU5BIEdFT1JHSUVWQSwg6rO167O06rSALuq1reygnO2Gte2ZlOq4sOq4iC4NCg==
+The allocation of modules occurs in two regions. The first region
+is MODULES_VSIZE, which is 128MB in size and shared with the core
+kernel when the KASLR feature is unavailable or disabled through
+a boot parameter. The second region, which is 2GB in size, is
+shared with the other vmalloc callers. Depending on the size of
+the core kernel, the 128MB region may quickly fill up after
+loading a few modules, causing the system to switch to the 2GB
+region. Unfortunately, even the 2GB region can run out of space
+if previously loaded modules and other kernel subsystems consume
+the entire area, leaving no space for additional modules.
+
+This issue usually occurs when the system has a large number of
+CPU cores, PCIe host-brigde controllers, and I/O devices. For
+instance, the ECAM region of one host-bridge controller can use
+up to 256MB of vmalloc space, while eight controllers can occupy
+the entire 2GB.
+
+To address this problem, a possible solution would be to increase
+the MODULES_VSIZE to 2GB. This would improve the system's ability
+to accommodate a greater number of dynamically loaded modules and
+drivers when KASLR is not enabled. However, prior to switching to
+the 2GB region, it is advisable to allocate modules within the
+128MB space that covers the core kernel, in order to benefit from
+the direct branches.
+
+Signed-off-by: Shanker Donthineni <sdonthineni@nvidia.com>
+---
+Changes since v1:
+ - Included Ard's recommendations.
+ - Revised the commit message.
+
+dmesg:
+ On a NVIDIA T241 system with Ubuntu-22.04, hitting boot failures
+ due to vmalloc/vmap allocation errors when loading modules.
+
+ [   64.181308] ipmi_ssif: IPMI SSIF Interface driver
+ [   64.184494] usbcore: registered new interface driver r8152
+ [   64.242492] vmap allocation for size 393216 failed: use vmalloc=<size> to increase size
+ [   64.242499] systemd-udevd: vmalloc error: size 327680, vm_struct allocation failed, mode:0xcc0(GFP_KERNEL), nodemask=(null),cpuset=/,mems_allowed=0-3
+ [   64.242510] CPU: 32 PID: 2910 Comm: systemd-udevd Tainted: G           OE      6.2-generic-64k 
+ [   64.242513] Hardware name: NVIDIA T241, BIOS v1.1.0 2023-03-18T21:32:31+00:00
+ [   64.242515] Call trace:
+ [   64.242516]  dump_backtrace+0xe0/0x130
+ [   64.242523]  show_stack+0x20/0x60
+ [   64.242525]  dump_stack_lvl+0x68/0x84
+ [   64.242530]  dump_stack+0x18/0x34
+ [   64.242532]  warn_alloc+0x11c/0x1b0
+ [   64.242537]  __vmalloc_node_range+0xe0/0x20c
+ [   64.242540]  module_alloc+0x118/0x160
+ [   64.242543]  move_module+0x2c/0x190
+ [   64.242546]  layout_and_allocate+0xfc/0x160
+ [   64.242548]  load_module+0x260/0xbc4
+ [   64.242549]  __do_sys_finit_module+0xac/0x130
+ [   64.242551]  __arm64_sys_finit_module+0x28/0x34
+ [   64.242552]  invoke_syscall+0x78/0x100
+ [   64.242553]  el0_svc_common.constprop.0+0x170/0x194
+ [   64.242555]  do_el0_svc+0x38/0x4c
+ [   64.242556]  el0_svc+0x2c/0xc0
+ [   64.242558]  el0t_64_sync_handler+0xbc/0x13c
+ [   64.242560]  el0t_64_sync+0x1a0/0x1a4
+
+ Documentation/arm64/memory.rst  | 8 ++++----
+ arch/arm64/include/asm/memory.h | 2 +-
+ arch/arm64/kernel/module.c      | 2 +-
+ 3 files changed, 6 insertions(+), 6 deletions(-)
+
+diff --git a/Documentation/arm64/memory.rst b/Documentation/arm64/memory.rst
+index 2a641ba7be3b..55a55f30eed8 100644
+--- a/Documentation/arm64/memory.rst
++++ b/Documentation/arm64/memory.rst
+@@ -33,8 +33,8 @@ AArch64 Linux memory layout with 4KB pages + 4 levels (48-bit)::
+   0000000000000000	0000ffffffffffff	 256TB		user
+   ffff000000000000	ffff7fffffffffff	 128TB		kernel logical memory map
+  [ffff600000000000	ffff7fffffffffff]	  32TB		[kasan shadow region]
+-  ffff800000000000	ffff800007ffffff	 128MB		modules
+-  ffff800008000000	fffffbffefffffff	 124TB		vmalloc
++  ffff800000000000	ffff80007fffffff	   2GB		modules
++  ffff800080000000	fffffbffefffffff	 124TB		vmalloc
+   fffffbfff0000000	fffffbfffdffffff	 224MB		fixed mappings (top down)
+   fffffbfffe000000	fffffbfffe7fffff	   8MB		[guard region]
+   fffffbfffe800000	fffffbffff7fffff	  16MB		PCI I/O space
+@@ -50,8 +50,8 @@ AArch64 Linux memory layout with 64KB pages + 3 levels (52-bit with HW support):
+   0000000000000000	000fffffffffffff	   4PB		user
+   fff0000000000000	ffff7fffffffffff	  ~4PB		kernel logical memory map
+  [fffd800000000000	ffff7fffffffffff]	 512TB		[kasan shadow region]
+-  ffff800000000000	ffff800007ffffff	 128MB		modules
+-  ffff800008000000	fffffbffefffffff	 124TB		vmalloc
++  ffff800000000000	ffff80007fffffff	   2GB		modules
++  ffff800080000000	fffffbffefffffff	 124TB		vmalloc
+   fffffbfff0000000	fffffbfffdffffff	 224MB		fixed mappings (top down)
+   fffffbfffe000000	fffffbfffe7fffff	   8MB		[guard region]
+   fffffbfffe800000	fffffbffff7fffff	  16MB		PCI I/O space
+diff --git a/arch/arm64/include/asm/memory.h b/arch/arm64/include/asm/memory.h
+index 78e5163836a0..b58c3127323e 100644
+--- a/arch/arm64/include/asm/memory.h
++++ b/arch/arm64/include/asm/memory.h
+@@ -46,7 +46,7 @@
+ #define KIMAGE_VADDR		(MODULES_END)
+ #define MODULES_END		(MODULES_VADDR + MODULES_VSIZE)
+ #define MODULES_VADDR		(_PAGE_END(VA_BITS_MIN))
+-#define MODULES_VSIZE		(SZ_128M)
++#define MODULES_VSIZE		(SZ_2G)
+ #define VMEMMAP_START		(-(UL(1) << (VA_BITS - VMEMMAP_SHIFT)))
+ #define VMEMMAP_END		(VMEMMAP_START + VMEMMAP_SIZE)
+ #define PCI_IO_END		(VMEMMAP_START - SZ_8M)
+diff --git a/arch/arm64/kernel/module.c b/arch/arm64/kernel/module.c
+index 5af4975caeb5..b4affe775f23 100644
+--- a/arch/arm64/kernel/module.c
++++ b/arch/arm64/kernel/module.c
+@@ -37,7 +37,7 @@ void *module_alloc(unsigned long size)
+ 		/* don't exceed the static module region - see below */
+ 		module_alloc_end = MODULES_END;
+ 
+-	p = __vmalloc_node_range(size, MODULE_ALIGN, module_alloc_base,
++	p = __vmalloc_node_range(size, MODULE_ALIGN, module_alloc_end - SZ_128M,
+ 				module_alloc_end, gfp_mask, PAGE_KERNEL, VM_DEFER_KMEMLEAK,
+ 				NUMA_NO_NODE, __builtin_return_address(0));
+ 
+-- 
+2.25.1
+
