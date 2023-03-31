@@ -2,67 +2,101 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 16E526D196D
-	for <lists+linux-doc@lfdr.de>; Fri, 31 Mar 2023 10:09:00 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 9A3926D1AE2
+	for <lists+linux-doc@lfdr.de>; Fri, 31 Mar 2023 10:55:57 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S231285AbjCaII7 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Fri, 31 Mar 2023 04:08:59 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:54426 "EHLO
+        id S230379AbjCaIzz (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Fri, 31 Mar 2023 04:55:55 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:35554 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S231181AbjCaII6 (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Fri, 31 Mar 2023 04:08:58 -0400
-Received: from mail-il1-x131.google.com (mail-il1-x131.google.com [IPv6:2607:f8b0:4864:20::131])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 35D181B7DA
-        for <linux-doc@vger.kernel.org>; Fri, 31 Mar 2023 01:08:55 -0700 (PDT)
-Received: by mail-il1-x131.google.com with SMTP id l9so11161614iln.1
-        for <linux-doc@vger.kernel.org>; Fri, 31 Mar 2023 01:08:54 -0700 (PDT)
+        with ESMTP id S230007AbjCaIzx (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Fri, 31 Mar 2023 04:55:53 -0400
+Received: from mail-lf1-x12d.google.com (mail-lf1-x12d.google.com [IPv6:2a00:1450:4864:20::12d])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 12894198B
+        for <linux-doc@vger.kernel.org>; Fri, 31 Mar 2023 01:55:51 -0700 (PDT)
+Received: by mail-lf1-x12d.google.com with SMTP id y15so27977932lfa.7
+        for <linux-doc@vger.kernel.org>; Fri, 31 Mar 2023 01:55:50 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=google.com; s=20210112; t=1680250134;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:from:to:cc:subject:date:message-id:reply-to;
-        bh=LvcG32LrcW3g50I5LPfO5+RWUPW4vD2QBWi/auVUxYI=;
-        b=gC128q652ZH2y1RVmvYN94Cenpa3z4CD/CHOw2FwT5kCdS775T3bxZWmyWTnRXu5oE
-         bBLQx0XrsQAVBWGFHhoz6ay2Hm3CoLpTKfqayCm2+y2DqfbnwjZ3htGDsI0de40z48/U
-         Op4sMH67u3D0jPopJC5ofNsS30/WlbBFfM4WmYVnSY83mpMw1V6uZoAAuSNaGDTvgDBA
-         6G8rzWsz06coEL2ttqQjJkTzo3zT7PdMmI6t+V8rmiScCbtgjkSqlwOEuVB8yhSeOAhJ
-         jFKHnW1H2QRrFPMY4vRNUqh8WIgDiAtVUunaUEjvpQv2kA2qMx9GWWw4Vvl5rbQpeB3A
-         HrNg==
+        d=linaro.org; s=google; t=1680252949;
+        h=content-transfer-encoding:in-reply-to:from:references:cc:to
+         :content-language:subject:user-agent:mime-version:date:message-id
+         :from:to:cc:subject:date:message-id:reply-to;
+        bh=4dm+BPEOnC7e4hjDLH6po2CUlQmPHlDI5qtCyO0in2Q=;
+        b=h9p+asgoR7hjf3xWGqt0dESGNOGLYImfThLBriNOU0tdhyee4Dj/v82aPxY1l+yshP
+         rJxuPxGgYI6jUI6DBjgYqYHHxlm+3k4RYYjQX99sNkOanqarLy2UZMupY9g1Qv7egTfD
+         3iQbRP3qKjrBlBC8MLOcVhwBkT2DGC+KDRqi3qP+7TvgmVGRfbMfZRu/AYlQ4SaPljzg
+         eKCGp/zIAvGJhIBwkH1RyLPXBc3rwVclVdlHiyQi2cfc80JRI6qtQmM/Tw/rIsAQTfyg
+         fAv4m06xtOPLY7yFFiKTKST/6WJIbCvp+KFLiospIbLfJzI44pgopG9eozFO+yO6h/5e
+         dQkA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112; t=1680250134;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=LvcG32LrcW3g50I5LPfO5+RWUPW4vD2QBWi/auVUxYI=;
-        b=xx5eze2UiZIfIIQRMeE8VdA086yH0OLddNBIeWVNtHILn8w0syws4fMUNDGSzL/up6
-         t6skFxhRAjPYxIto21Z7jDpYl/MfgCiag8TMMGYtiVcMi/QwY9t2/LQ/OrDnY52+tjhW
-         yLJcu9YajRsWhf4rJH/IPRvrUdWXAz8GKD62f2cXCnYvo/v9G2E7BL73bgsouT1hu1Xo
-         mJxI5OoHaVxtTtJmUKaFBawDPoIdGB3737A3KbxbeIjmB7uueCvqNONmWr+Nt4v9iUVy
-         jS6za/fRp0cE1D47uS+C25Ck4pOKM24nYtfjhfA89pfe5bhV2zdNgdzP6FdIXbGU1SSw
-         7zmg==
-X-Gm-Message-State: AAQBX9cFWaaBK+J3qaqM51mT2n3N9R5yUEF0vudKwdZ53fnJvZJv7ulV
-        4bo1KzvreYvQ+EPo3GvBoi6cKFs9saOnpEObh5UHsw==
-X-Google-Smtp-Source: AKy350aLGnhwlA6xGd1wCV7e2FwTACBbcnm5tTRc/zKzwBwOKecQZYKQJuam8DkwaJrhmRn0SErGxlXPq9nqNyQwAdU=
-X-Received: by 2002:a05:6e02:de9:b0:313:fa72:d9aa with SMTP id
- m9-20020a056e020de900b00313fa72d9aamr13252138ilj.0.1680250134109; Fri, 31 Mar
- 2023 01:08:54 -0700 (PDT)
+        d=1e100.net; s=20210112; t=1680252949;
+        h=content-transfer-encoding:in-reply-to:from:references:cc:to
+         :content-language:subject:user-agent:mime-version:date:message-id
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=4dm+BPEOnC7e4hjDLH6po2CUlQmPHlDI5qtCyO0in2Q=;
+        b=G1efKS5sDfof9MBd3G0tQxor7R0AQv1tSTpJT8tnHOMarF06YQ2+jJyyX3Q9k2AfCL
+         Gw1oPTIU7ZGWVFbmcmP5Deb2Kv0cmCznchqhF1c3TjtlwZtRcUb5NmzEBIVmw6/40H8v
+         kR8N9Vbbx/56GjhnlzuoTnuW2pl5HZXIY1wqiHvH9ChIxv/IOtTGLoZr1r0cFnI9/ont
+         XMUcJvSso3fhwSzseDubOw5rtFuUYAkN/6u70uWxagKjZqrzUwinQXimR8FT9ftFlvwn
+         P9zqdR6vJ2pB7KKpOAv8v2iTcBstqLABk+KaWvj7C7JnSHZsyi7jP8DusQxKNmDmnjtO
+         eayw==
+X-Gm-Message-State: AAQBX9egYXulrczYf61CMhIYow2zwJLuj9isGViXf4pCU1FevTm9418j
+        hHV5c6Fa4+dKJwu77MwdY06Y6g==
+X-Google-Smtp-Source: AKy350ZI/3UGdFSqbHDvzrq0gk2lxo1Tz6xoBuV/VTSFHLt8yiKO4pkQahghPdhIFyzf5V5sRpBGCA==
+X-Received: by 2002:a19:f619:0:b0:4d5:831a:1af8 with SMTP id x25-20020a19f619000000b004d5831a1af8mr7934107lfe.40.1680252949296;
+        Fri, 31 Mar 2023 01:55:49 -0700 (PDT)
+Received: from [192.168.0.21] (78-11-189-27.static.ip.netia.com.pl. [78.11.189.27])
+        by smtp.gmail.com with ESMTPSA id z9-20020ac25de9000000b004eb2dab8a61sm294109lfq.44.2023.03.31.01.55.47
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Fri, 31 Mar 2023 01:55:48 -0700 (PDT)
+Message-ID: <e28e76e2-f392-44d9-e88c-27c6d26115d0@linaro.org>
+Date:   Fri, 31 Mar 2023 10:55:46 +0200
 MIME-Version: 1.0
-References: <20230331064528.3764174-1-sadiyakazi@google.com>
-In-Reply-To: <20230331064528.3764174-1-sadiyakazi@google.com>
-From:   David Gow <davidgow@google.com>
-Date:   Fri, 31 Mar 2023 16:08:41 +0800
-Message-ID: <CABVgOSnC5rcO-tf6GSwa4Pgkk0wZfhOdWJFdo4xy6Zjn66mULg@mail.gmail.com>
-Subject: Re: [PATCH v2] list: test: Test the klist structure
-To:     Sadiya Kazi <sadiyakazi@google.com>
-Cc:     brendanhiggins@google.com, skhan@linuxfoundation.org,
-        corbet@lwn.net, linux-kselftest@vger.kernel.org,
-        kunit-dev@googlegroups.com, linux-doc@vger.kernel.org,
-        linux-kernel@vger.kernel.org
-Content-Type: multipart/signed; protocol="application/pkcs7-signature"; micalg=sha-256;
-        boundary="00000000000067bb3605f82db8c9"
-X-Spam-Status: No, score=-15.7 required=5.0 tests=DKIMWL_WL_MED,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,ENV_AND_HDR_SPF_MATCH,
-        RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,SPF_PASS,USER_IN_DEF_DKIM_WL,
-        USER_IN_DEF_SPF_WL autolearn=unavailable autolearn_force=no
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.9.0
+Subject: Re: [RFC PATCH v2 5/6] dt-bindings: cpufreq: add bindings for virtual
+ kvm cpufreq
+Content-Language: en-US
+To:     David Dai <davidai@google.com>,
+        "Rafael J. Wysocki" <rafael@kernel.org>,
+        Viresh Kumar <viresh.kumar@linaro.org>,
+        Rob Herring <robh+dt@kernel.org>,
+        Krzysztof Kozlowski <krzysztof.kozlowski+dt@linaro.org>,
+        Paolo Bonzini <pbonzini@redhat.com>,
+        Jonathan Corbet <corbet@lwn.net>,
+        Marc Zyngier <maz@kernel.org>,
+        Oliver Upton <oliver.upton@linux.dev>,
+        James Morse <james.morse@arm.com>,
+        Suzuki K Poulose <suzuki.poulose@arm.com>,
+        Zenghui Yu <yuzenghui@huawei.com>,
+        Catalin Marinas <catalin.marinas@arm.com>,
+        Will Deacon <will@kernel.org>,
+        Mark Rutland <mark.rutland@arm.com>,
+        Lorenzo Pieralisi <lpieralisi@kernel.org>,
+        Sudeep Holla <sudeep.holla@arm.com>,
+        Ingo Molnar <mingo@redhat.com>,
+        Peter Zijlstra <peterz@infradead.org>,
+        Juri Lelli <juri.lelli@redhat.com>,
+        Vincent Guittot <vincent.guittot@linaro.org>,
+        Dietmar Eggemann <dietmar.eggemann@arm.com>,
+        Steven Rostedt <rostedt@goodmis.org>,
+        Ben Segall <bsegall@google.com>, Mel Gorman <mgorman@suse.de>,
+        Daniel Bristot de Oliveira <bristot@redhat.com>,
+        Valentin Schneider <vschneid@redhat.com>
+Cc:     Saravana Kannan <saravanak@google.com>, kernel-team@android.com,
+        linux-pm@vger.kernel.org, devicetree@vger.kernel.org,
+        linux-kernel@vger.kernel.org, kvm@vger.kernel.org,
+        linux-doc@vger.kernel.org, linux-arm-kernel@lists.infradead.org,
+        kvmarm@lists.linux.dev
+References: <20230331014356.1033759-1-davidai@google.com>
+ <20230331014356.1033759-6-davidai@google.com>
+From:   Krzysztof Kozlowski <krzysztof.kozlowski@linaro.org>
+In-Reply-To: <20230331014356.1033759-6-davidai@google.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-Spam-Status: No, score=-0.2 required=5.0 tests=DKIM_SIGNED,DKIM_VALID,
+        DKIM_VALID_AU,DKIM_VALID_EF,NICE_REPLY_A,RCVD_IN_DNSWL_NONE,
+        SPF_HELO_NONE,SPF_PASS autolearn=unavailable autolearn_force=no
         version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
@@ -70,438 +104,88 @@ Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
---00000000000067bb3605f82db8c9
-Content-Type: text/plain; charset="UTF-8"
+On 31/03/2023 03:43, David Dai wrote:
+> Add devicetree bindings for a virtual kvm cpufreq driver.
 
-On Fri, 31 Mar 2023 at 14:45, Sadiya Kazi <sadiyakazi@google.com> wrote:
->
-> Add KUnit tests to the klist linked-list structure.
-> These perform testing for different variations of node add
-> and node delete in the klist data structure (<linux/klist.h>).
->
-> Limitation: Since we use a static global variable, and if
-> multiple instances of this test are run concurrently, the test may fail.
->
-> Signed-off-by: Sadiya Kazi <sadiyakazi@google.com>
-> Reviewed-by: Brendan Higgins <brendanhiggins@google.com>
-> Reviewed-by: David Gow <davidgow@google.com>
+Why? Why virtual devices should be documented in DT? DT is for
+non-discoverable hardware, right? You have entire commit msg to explain
+it instead of saying something easily visible by the diff.
+
+> 
+> Co-developed-by: Saravana Kannan <saravanak@google.com>
+> Signed-off-by: Saravana Kannan <saravanak@google.com>
+> Signed-off-by: David Dai <davidai@google.com>
 > ---
-> Thank you Brendan and David for reviewing this patch. I have addressed
-> the review comments in this iteration.
->
-> Changes since v1:
-> https://lore.kernel.org/linux-kselftest/20230329110723.3458843-1-sadiyakazi@google.com/
->
-> - Corrected the commenting style
-> - Deleted the comment /* counts the number of nodes*/
-> - Renamed last_node_count to last_node
->
->
-> ---
+>  .../bindings/cpufreq/cpufreq-virtual-kvm.yaml | 39 +++++++++++++++++++
+>  1 file changed, 39 insertions(+)
+>  create mode 100644 Documentation/devicetree/bindings/cpufreq/cpufreq-virtual-kvm.yaml
+> 
+> diff --git a/Documentation/devicetree/bindings/cpufreq/cpufreq-virtual-kvm.yaml b/Documentation/devicetree/bindings/cpufreq/cpufreq-virtual-kvm.yaml
+> new file mode 100644
+> index 000000000000..31e64558a7f1
+> --- /dev/null
+> +++ b/Documentation/devicetree/bindings/cpufreq/cpufreq-virtual-kvm.yaml
+> @@ -0,0 +1,39 @@
+> +# SPDX-License-Identifier: GPL-2.0-only OR BSD-2-Clause
+> +%YAML 1.2
+> +---
+> +$id: http://devicetree.org/schemas/cpufreq/cpufreq-virtual-kvm.yaml#
+> +$schema: http://devicetree.org/meta-schemas/core.yaml#
+> +
+> +title: Virtual KVM CPUFreq
+> +
+> +maintainers:
+> +  - David Dai <davidai@google.com>
+> +
+> +description: |
 
-Looks good now, thanks!
+Do not need '|'.
+> +
 
--- David
+Drop stray blank line.
 
->  lib/list-test.c | 300 +++++++++++++++++++++++++++++++++++++++++++++++-
->  1 file changed, 299 insertions(+), 1 deletion(-)
->
-> diff --git a/lib/list-test.c b/lib/list-test.c
-> index d374cf5d1a57..0cc27de9cec8 100644
-> --- a/lib/list-test.c
-> +++ b/lib/list-test.c
-> @@ -8,6 +8,7 @@
->  #include <kunit/test.h>
->
->  #include <linux/list.h>
-> +#include <linux/klist.h>
->
->  struct list_test_struct {
->         int data;
-> @@ -1199,6 +1200,303 @@ static struct kunit_suite hlist_test_module = {
->         .test_cases = hlist_test_cases,
->  };
->
-> -kunit_test_suites(&list_test_module, &hlist_test_module);
-> +
-> +struct klist_test_struct {
-> +       int data;
-> +       struct klist klist;
-> +       struct klist_node klist_node;
-> +};
-> +
-> +static int node_count;
-> +static struct klist_node *last_node;
-> +
-> +static void check_node(struct klist_node *node_ptr)
-> +{
-> +       node_count++;
-> +       last_node = node_ptr;
-> +}
-> +
-> +static void check_delete_node(struct klist_node *node_ptr)
-> +{
-> +       node_count--;
-> +       last_node = node_ptr;
-> +}
-> +
-> +static void klist_test_add_tail(struct kunit *test)
-> +{
-> +       struct klist_node a, b;
-> +       struct klist mylist;
-> +       struct klist_iter i;
-> +
-> +       node_count = 0;
-> +       klist_init(&mylist, &check_node, NULL);
-> +
-> +       klist_add_tail(&a, &mylist);
-> +       KUNIT_EXPECT_EQ(test, node_count, 1);
-> +       KUNIT_EXPECT_PTR_EQ(test, last_node, &a);
-> +
-> +       klist_add_tail(&b, &mylist);
-> +       KUNIT_EXPECT_EQ(test, node_count, 2);
-> +       KUNIT_EXPECT_PTR_EQ(test, last_node, &b);
-> +
-> +       /* should be [list] -> a -> b */
-> +       klist_iter_init(&mylist, &i);
-> +
-> +       KUNIT_EXPECT_PTR_EQ(test, klist_next(&i), &a);
-> +       KUNIT_EXPECT_PTR_EQ(test, klist_next(&i), &b);
-> +       KUNIT_EXPECT_NULL(test, klist_next(&i));
-> +
-> +       klist_iter_exit(&i);
-> +
-> +}
-> +
-> +static void klist_test_add_head(struct kunit *test)
-> +{
-> +       struct klist_node a, b;
-> +       struct klist mylist;
-> +       struct klist_iter i;
-> +
-> +       node_count = 0;
-> +       klist_init(&mylist, &check_node, NULL);
-> +
-> +       klist_add_head(&a, &mylist);
-> +       KUNIT_EXPECT_EQ(test, node_count, 1);
-> +       KUNIT_EXPECT_PTR_EQ(test, last_node, &a);
-> +
-> +       klist_add_head(&b, &mylist);
-> +       KUNIT_EXPECT_EQ(test, node_count, 2);
-> +       KUNIT_EXPECT_PTR_EQ(test, last_node, &b);
-> +
-> +       /* should be [list] -> b -> a */
-> +       klist_iter_init(&mylist, &i);
-> +
-> +       KUNIT_EXPECT_PTR_EQ(test, klist_next(&i), &b);
-> +       KUNIT_EXPECT_PTR_EQ(test, klist_next(&i), &a);
-> +       KUNIT_EXPECT_NULL(test, klist_next(&i));
-> +
-> +       klist_iter_exit(&i);
-> +
-> +}
-> +
-> +static void klist_test_add_behind(struct kunit *test)
-> +{
-> +       struct klist_node a, b, c, d;
-> +       struct klist mylist;
-> +       struct klist_iter i;
-> +
-> +       node_count = 0;
-> +       klist_init(&mylist, &check_node, NULL);
-> +
-> +       klist_add_head(&a, &mylist);
-> +       klist_add_head(&b, &mylist);
-> +
-> +       klist_add_behind(&c, &a);
-> +       KUNIT_EXPECT_EQ(test, node_count, 3);
-> +       KUNIT_EXPECT_PTR_EQ(test, last_node, &c);
-> +
-> +       klist_add_behind(&d, &b);
-> +       KUNIT_EXPECT_EQ(test, node_count, 4);
-> +       KUNIT_EXPECT_PTR_EQ(test, last_node, &d);
-> +
-> +       klist_iter_init(&mylist, &i);
-> +
-> +       /* should be [list] -> b -> d -> a -> c*/
-> +       KUNIT_EXPECT_PTR_EQ(test, klist_next(&i), &b);
-> +       KUNIT_EXPECT_PTR_EQ(test, klist_next(&i), &d);
-> +       KUNIT_EXPECT_PTR_EQ(test, klist_next(&i), &a);
-> +       KUNIT_EXPECT_PTR_EQ(test, klist_next(&i), &c);
-> +       KUNIT_EXPECT_NULL(test, klist_next(&i));
-> +
-> +       klist_iter_exit(&i);
-> +
-> +}
-> +
-> +static void klist_test_add_before(struct kunit *test)
-> +{
-> +       struct klist_node a, b, c, d;
-> +       struct klist mylist;
-> +       struct klist_iter i;
-> +
-> +       node_count = 0;
-> +       klist_init(&mylist, &check_node, NULL);
-> +
-> +       klist_add_head(&a, &mylist);
-> +       klist_add_head(&b, &mylist);
-> +       klist_add_before(&c, &a);
-> +       KUNIT_EXPECT_EQ(test, node_count, 3);
-> +       KUNIT_EXPECT_PTR_EQ(test, last_node, &c);
-> +
-> +       klist_add_before(&d, &b);
-> +       KUNIT_EXPECT_EQ(test, node_count, 4);
-> +       KUNIT_EXPECT_PTR_EQ(test, last_node, &d);
-> +
-> +       klist_iter_init(&mylist, &i);
-> +
-> +       /* should be [list] -> b -> d -> a -> c*/
-> +       KUNIT_EXPECT_PTR_EQ(test, klist_next(&i), &d);
-> +       KUNIT_EXPECT_PTR_EQ(test, klist_next(&i), &b);
-> +       KUNIT_EXPECT_PTR_EQ(test, klist_next(&i), &c);
-> +       KUNIT_EXPECT_PTR_EQ(test, klist_next(&i), &a);
-> +       KUNIT_EXPECT_NULL(test, klist_next(&i));
-> +
-> +       klist_iter_exit(&i);
-> +
-> +}
-> +
-> +/*
-> + * Verify that klist_del() delays the deletion of a node until there
-> + * are no other references to it
-> + */
-> +static void klist_test_del_refcount_greater_than_zero(struct kunit *test)
-> +{
-> +       struct klist_node a, b, c, d;
-> +       struct klist mylist;
-> +       struct klist_iter i;
-> +
-> +       node_count = 0;
-> +       klist_init(&mylist, &check_node, &check_delete_node);
-> +
-> +       /* Add nodes a,b,c,d to the list*/
-> +       klist_add_tail(&a, &mylist);
-> +       klist_add_tail(&b, &mylist);
-> +       klist_add_tail(&c, &mylist);
-> +       klist_add_tail(&d, &mylist);
-> +
-> +       klist_iter_init(&mylist, &i);
-> +
-> +       KUNIT_EXPECT_PTR_EQ(test, klist_next(&i), &a);
-> +       KUNIT_EXPECT_PTR_EQ(test, klist_next(&i), &b);
-> +       /* Advance the iterator to point to node c*/
-> +       KUNIT_EXPECT_PTR_EQ(test, klist_next(&i), &c);
-> +
-> +       /* Try to delete node c while there is a reference to it*/
-> +       klist_del(&c);
-> +
-> +       /*
-> +        * Verify that node c is still attached to the list even after being
-> +        * deleted. Since the iterator still points to c, the reference count is not
-> +        * decreased to 0
-> +        */
-> +       KUNIT_EXPECT_TRUE(test, klist_node_attached(&c));
-> +
-> +       /* Check that node c has not been removed yet*/
-> +       KUNIT_EXPECT_EQ(test, node_count, 4);
-> +       KUNIT_EXPECT_PTR_EQ(test, last_node, &d);
-> +
-> +       klist_iter_exit(&i);
-> +
-> +       /*
-> +        * Since the iterator is no longer pointing to node c, node c is removed
-> +        * from the list
-> +        */
-> +       KUNIT_EXPECT_EQ(test, node_count, 3);
-> +       KUNIT_EXPECT_PTR_EQ(test, last_node, &c);
-> +
-> +}
-> +
-> +/*
-> + * Verify that klist_del() deletes a node immediately when there are no
-> + * other references to it.
-> + */
-> +static void klist_test_del_refcount_zero(struct kunit *test)
-> +{
-> +       struct klist_node a, b, c, d;
-> +       struct klist mylist;
-> +       struct klist_iter i;
-> +
-> +       node_count = 0;
-> +       klist_init(&mylist, &check_node, &check_delete_node);
-> +
-> +       /* Add nodes a,b,c,d to the list*/
-> +       klist_add_tail(&a, &mylist);
-> +       klist_add_tail(&b, &mylist);
-> +       klist_add_tail(&c, &mylist);
-> +       klist_add_tail(&d, &mylist);
-> +       /* Delete node c*/
-> +       klist_del(&c);
-> +
-> +       /* Check that node c is deleted from the list*/
-> +       KUNIT_EXPECT_EQ(test, node_count, 3);
-> +       KUNIT_EXPECT_PTR_EQ(test, last_node, &c);
-> +
-> +       /* Should be [list] -> a -> b -> d*/
-> +       klist_iter_init(&mylist, &i);
-> +
-> +       KUNIT_EXPECT_PTR_EQ(test, klist_next(&i), &a);
-> +       KUNIT_EXPECT_PTR_EQ(test, klist_next(&i), &b);
-> +       KUNIT_EXPECT_PTR_EQ(test, klist_next(&i), &d);
-> +       KUNIT_EXPECT_NULL(test, klist_next(&i));
-> +
-> +       klist_iter_exit(&i);
-> +
-> +}
-> +
-> +static void klist_test_remove(struct kunit *test)
-> +{
-> +       /* This test doesn't check correctness under concurrent access */
-> +       struct klist_node a, b, c, d;
-> +       struct klist mylist;
-> +       struct klist_iter i;
-> +
-> +       node_count = 0;
-> +       klist_init(&mylist, &check_node, &check_delete_node);
-> +
-> +       /* Add nodes a,b,c,d to the list*/
-> +       klist_add_tail(&a, &mylist);
-> +       klist_add_tail(&b, &mylist);
-> +       klist_add_tail(&c, &mylist);
-> +       klist_add_tail(&d, &mylist);
-> +       /* Delete node c*/
-> +       klist_remove(&c);
-> +
-> +       /* Check the nodes in the list*/
-> +       KUNIT_EXPECT_EQ(test, node_count, 3);
-> +       KUNIT_EXPECT_PTR_EQ(test, last_node, &c);
-> +
-> +       /* should be [list] -> a -> b -> d*/
-> +       klist_iter_init(&mylist, &i);
-> +
-> +       KUNIT_EXPECT_PTR_EQ(test, klist_next(&i), &a);
-> +       KUNIT_EXPECT_PTR_EQ(test, klist_next(&i), &b);
-> +       KUNIT_EXPECT_PTR_EQ(test, klist_next(&i), &d);
-> +       KUNIT_EXPECT_NULL(test, klist_next(&i));
-> +
-> +       klist_iter_exit(&i);
-> +
-> +}
-> +
-> +static void klist_test_node_attached(struct kunit *test)
-> +{
-> +       struct klist_node a = {};
-> +       struct klist mylist;
-> +
-> +       klist_init(&mylist, NULL, NULL);
-> +
-> +       KUNIT_EXPECT_FALSE(test, klist_node_attached(&a));
-> +       klist_add_head(&a, &mylist);
-> +       KUNIT_EXPECT_TRUE(test, klist_node_attached(&a));
-> +       klist_del(&a);
-> +       KUNIT_EXPECT_FALSE(test, klist_node_attached(&a));
-> +
-> +}
-> +
-> +static struct kunit_case klist_test_cases[] = {
-> +       KUNIT_CASE(klist_test_add_tail),
-> +       KUNIT_CASE(klist_test_add_head),
-> +       KUNIT_CASE(klist_test_add_behind),
-> +       KUNIT_CASE(klist_test_add_before),
-> +       KUNIT_CASE(klist_test_del_refcount_greater_than_zero),
-> +       KUNIT_CASE(klist_test_del_refcount_zero),
-> +       KUNIT_CASE(klist_test_remove),
-> +       KUNIT_CASE(klist_test_node_attached),
-> +       {},
-> +};
-> +
-> +static struct kunit_suite klist_test_module = {
-> +       .name = "klist",
-> +       .test_cases = klist_test_cases,
-> +};
-> +
-> +kunit_test_suites(&list_test_module, &hlist_test_module, &klist_test_module);
->
->  MODULE_LICENSE("GPL v2");
-> --
-> 2.40.0.348.gf938b09366-goog
->
+> +  KVM CPUFreq is a virtualized driver in guest kernels that sends utilization
+> +  of its vCPUs as a hint to the host. The host uses hint to schedule vCPU
+> +  threads and select CPU frequency. It enables accurate Per-Entity Load
+> +  Tracking for tasks running in the guest by querying host CPU frequency
+> +  unless a virtualized FIE exists(Like AMUs).
 
---00000000000067bb3605f82db8c9
-Content-Type: application/pkcs7-signature; name="smime.p7s"
-Content-Transfer-Encoding: base64
-Content-Disposition: attachment; filename="smime.p7s"
-Content-Description: S/MIME Cryptographic Signature
+No clue why you need DT bindings for this. KVM has interfaces between
+host and guests.
 
-MIIPnwYJKoZIhvcNAQcCoIIPkDCCD4wCAQExDzANBglghkgBZQMEAgEFADALBgkqhkiG9w0BBwGg
-ggz5MIIEtjCCA56gAwIBAgIQeAMYYHb81ngUVR0WyMTzqzANBgkqhkiG9w0BAQsFADBMMSAwHgYD
-VQQLExdHbG9iYWxTaWduIFJvb3QgQ0EgLSBSMzETMBEGA1UEChMKR2xvYmFsU2lnbjETMBEGA1UE
-AxMKR2xvYmFsU2lnbjAeFw0yMDA3MjgwMDAwMDBaFw0yOTAzMTgwMDAwMDBaMFQxCzAJBgNVBAYT
-AkJFMRkwFwYDVQQKExBHbG9iYWxTaWduIG52LXNhMSowKAYDVQQDEyFHbG9iYWxTaWduIEF0bGFz
-IFIzIFNNSU1FIENBIDIwMjAwggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQCvLe9xPU9W
-dpiHLAvX7kFnaFZPuJLey7LYaMO8P/xSngB9IN73mVc7YiLov12Fekdtn5kL8PjmDBEvTYmWsuQS
-6VBo3vdlqqXZ0M9eMkjcKqijrmDRleudEoPDzTumwQ18VB/3I+vbN039HIaRQ5x+NHGiPHVfk6Rx
-c6KAbYceyeqqfuJEcq23vhTdium/Bf5hHqYUhuJwnBQ+dAUcFndUKMJrth6lHeoifkbw2bv81zxJ
-I9cvIy516+oUekqiSFGfzAqByv41OrgLV4fLGCDH3yRh1tj7EtV3l2TngqtrDLUs5R+sWIItPa/4
-AJXB1Q3nGNl2tNjVpcSn0uJ7aFPbAgMBAAGjggGKMIIBhjAOBgNVHQ8BAf8EBAMCAYYwHQYDVR0l
-BBYwFAYIKwYBBQUHAwIGCCsGAQUFBwMEMBIGA1UdEwEB/wQIMAYBAf8CAQAwHQYDVR0OBBYEFHzM
-CmjXouseLHIb0c1dlW+N+/JjMB8GA1UdIwQYMBaAFI/wS3+oLkUkrk1Q+mOai97i3Ru8MHsGCCsG
-AQUFBwEBBG8wbTAuBggrBgEFBQcwAYYiaHR0cDovL29jc3AyLmdsb2JhbHNpZ24uY29tL3Jvb3Ry
-MzA7BggrBgEFBQcwAoYvaHR0cDovL3NlY3VyZS5nbG9iYWxzaWduLmNvbS9jYWNlcnQvcm9vdC1y
-My5jcnQwNgYDVR0fBC8wLTAroCmgJ4YlaHR0cDovL2NybC5nbG9iYWxzaWduLmNvbS9yb290LXIz
-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
-64VRg2IjDI2fJVE9RD6aMEwGA1UdIARFMEMwQQYJKwYBBAGgMgEoMDQwMgYIKwYBBQUHAgEWJmh0
-dHBzOi8vd3d3Lmdsb2JhbHNpZ24uY29tL3JlcG9zaXRvcnkvMAwGA1UdEwEB/wQCMAAwgZoGCCsG
-AQUFBwEBBIGNMIGKMD4GCCsGAQUFBzABhjJodHRwOi8vb2NzcC5nbG9iYWxzaWduLmNvbS9jYS9n
-c2F0bGFzcjNzbWltZWNhMjAyMDBIBggrBgEFBQcwAoY8aHR0cDovL3NlY3VyZS5nbG9iYWxzaWdu
-LmNvbS9jYWNlcnQvZ3NhdGxhc3Izc21pbWVjYTIwMjAuY3J0MB8GA1UdIwQYMBaAFHzMCmjXouse
-LHIb0c1dlW+N+/JjMEYGA1UdHwQ/MD0wO6A5oDeGNWh0dHA6Ly9jcmwuZ2xvYmFsc2lnbi5jb20v
-Y2EvZ3NhdGxhc3Izc21pbWVjYTIwMjAuY3JsMA0GCSqGSIb3DQEBCwUAA4IBAQA2lZLYRLu7foeR
-cHo1VeNA974FZBiCm08Kd44/aCMEzdTJvxAE9xbUJf7hS1i6eW49qxuSp3/YLn6U7uatwAcmZcwp
-Zma19ftf3LH+9Hvffk+X8fbPKe6uHkJhR2LktrhRzF159jj67NvXyGQv8J4n7UNeEVP0d5ByvRwv
-tF2bJwlOwRGLoxasKSyDHIyUpwTfWYPq7XvjoGqQ/tDS7Khcc5WncJl0/ZEj7EKjtoGbsDbLdXEF
-m/6vdcYKJzF9ghHewtV3YIU4RE3pEM4aCWWRtJwbExzeue6fI7RqURbNCAyQuSpWv0YQvzsX3ZX3
-c1otrs50n1N0Sf8/rfJxq7sWMYICajCCAmYCAQEwaDBUMQswCQYDVQQGEwJCRTEZMBcGA1UEChMQ
-R2xvYmFsU2lnbiBudi1zYTEqMCgGA1UEAxMhR2xvYmFsU2lnbiBBdGxhcyBSMyBTTUlNRSBDQSAy
-MDIwAhABxy1wm0tAmHKHFkLS9RWPMA0GCWCGSAFlAwQCAQUAoIHUMC8GCSqGSIb3DQEJBDEiBCDR
-ZhDR1GkiWSb5Ytzh1OQoOucpJxCdscDJqCU+Rh35BTAYBgkqhkiG9w0BCQMxCwYJKoZIhvcNAQcB
-MBwGCSqGSIb3DQEJBTEPFw0yMzAzMzEwODA4NTRaMGkGCSqGSIb3DQEJDzFcMFowCwYJYIZIAWUD
-BAEqMAsGCWCGSAFlAwQBFjALBglghkgBZQMEAQIwCgYIKoZIhvcNAwcwCwYJKoZIhvcNAQEKMAsG
-CSqGSIb3DQEBBzALBglghkgBZQMEAgEwDQYJKoZIhvcNAQEBBQAEggEAXQLl5x2IdFNNPBnD4Btv
-+wlLySLocKvQoeZwboTSNCJ5DKhQPSZDLijptSP3cMqJXyOWEqJpQ+6/L0ubwG0NcbhdZBFsF8H6
-3qjW1CQcb9Q8OrGaP2vBQA+lXKW1uNyVa0uLfGgymTTuIt3PppUwLQ++szX5P08mDiHX1SqFN69I
-zneB7qLZxkC1Ls7UaRlnAj9oCt815uHZhc39A5tnTDKqp1jN/7vqJPk/KlpikHojFjyHcZWRcBQ7
-fSNroDmrQlJOEhZ9DEKQfc1A9uXlXMoPQ4UqJ/e9txYHrcx8C60gYp2ygqHm3Vw6HzEOCDNeNHYR
-GR2LhkYnOVEK89vvjA==
---00000000000067bb3605f82db8c9--
+> +
+> +properties:
+> +  compatible:
+> +    const: virtual,kvm-cpufreq
+> +
+> +required:
+> +  - compatible
+> +
+> +additionalProperties: false
+> +
+> +examples:
+> +  - |
+> +    {
+
+This is some broken syntax and/or indentation.
+
+I don't get what this node is about.
+
+> +      #address-cells = <2>;
+> +      #size-cells = <2>;
+
+Why?
+
+> +
+> +      cpufreq {
+> +            compatible = "virtual,kvm-cpufreq";
+> +      };
+> +
+
+Drop stray blank lines
+
+> +    };
+
+Best regards,
+Krzysztof
+
