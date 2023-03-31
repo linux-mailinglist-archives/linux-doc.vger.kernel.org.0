@@ -2,96 +2,108 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id F0EA26D1E13
-	for <lists+linux-doc@lfdr.de>; Fri, 31 Mar 2023 12:34:23 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id D13336D1EED
+	for <lists+linux-doc@lfdr.de>; Fri, 31 Mar 2023 13:27:33 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S229523AbjCaKeW (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Fri, 31 Mar 2023 06:34:22 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:40456 "EHLO
+        id S230096AbjCaL1c (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Fri, 31 Mar 2023 07:27:32 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:36958 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S229441AbjCaKeV (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Fri, 31 Mar 2023 06:34:21 -0400
-Received: from wp530.webpack.hosteurope.de (wp530.webpack.hosteurope.de [80.237.130.52])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 943E56A58;
-        Fri, 31 Mar 2023 03:34:20 -0700 (PDT)
-Received: from [2a02:8108:8980:2478:8cde:aa2c:f324:937e]; authenticated
-        by wp530.webpack.hosteurope.de running ExIM with esmtpsa (TLS1.3:ECDHE_RSA_AES_128_GCM_SHA256:128)
-        id 1piC5D-0002Be-5M; Fri, 31 Mar 2023 12:34:11 +0200
-Message-ID: <7d8cae85-5d0a-599e-cc48-0d06db27d9fe@leemhuis.info>
-Date:   Fri, 31 Mar 2023 12:34:07 +0200
+        with ESMTP id S229538AbjCaL1b (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Fri, 31 Mar 2023 07:27:31 -0400
+Received: from mail-ed1-x52b.google.com (mail-ed1-x52b.google.com [IPv6:2a00:1450:4864:20::52b])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id E61851D2E7
+        for <linux-doc@vger.kernel.org>; Fri, 31 Mar 2023 04:27:30 -0700 (PDT)
+Received: by mail-ed1-x52b.google.com with SMTP id i5so88487697eda.0
+        for <linux-doc@vger.kernel.org>; Fri, 31 Mar 2023 04:27:30 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112; t=1680262049;
+        h=content-transfer-encoding:to:subject:message-id:date:from:reply-to
+         :mime-version:from:to:cc:subject:date:message-id:reply-to;
+        bh=BvVBXZsWUhRTexhKjd3TloYD9bYfy6NOY43HMkgs7w4=;
+        b=Px1sfUz6FxM27ZW44toZWMaDg6OHbWUOtn9DLDimWYyzwzQ+A+qLe6gmxFakrFsL0G
+         9qcOlQcydKwKkbNIxEXIMKX4otCOlu+MJWBfbtvQIX14wb8GjL95gs85jbDWXRJ+7lWN
+         sPGpydPF/Wh9ovuBVFjzYaBLD8xhQ8LklZl31Hr/kb0BcxJGQau1JyHnLoDsUwoYHtJ9
+         ul+Z0ANETzJud73AeMJvUikXMhXkfhpsi/i8JQlD0zct1AA1y/0E0meCmAdFKRTtgxyx
+         AfwRkxVaSlqWZsRaV/SKWv11c3tzYs6dDyfcWVECUKwJal4t7y+tYXrDk5+scZd5YINu
+         cyKA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112; t=1680262049;
+        h=content-transfer-encoding:to:subject:message-id:date:from:reply-to
+         :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=BvVBXZsWUhRTexhKjd3TloYD9bYfy6NOY43HMkgs7w4=;
+        b=FXwd52NqZmnvG+pWE3FrlB8aw8YIu/yByjWLBKCds3Vhd19rZ+2+NyDKvfVe6mjYg1
+         zfL80TpkYxdOyWCRq1a+rIEDuOQcCGqv1O1/2wO+UzHYT6GHTOTqLYot8F6NBV2jAZeg
+         310I3dL1janRO6kZitmQsaAByfMMi3K3Uzv1aO2uVGZQQeOZIBnydIR4pIyl2cxiEi8z
+         AwFbbvg4I5kCEKVIO9y/xs6r4GM5t6lM8Yp1SXPZr7y3LnxVc1otS99v4w+m300tp4Vh
+         Qr0Q2fj6EHlI3ojMN7O3Hl4sZ8CDzz95AWkdTJIXHubA/pRJAUhNE0aF7hgTZe6DdoJa
+         mXig==
+X-Gm-Message-State: AAQBX9cRp5yqh2ippNTiiwD0kkaQ7Pdds8Y941aS8CVx8pkhKkrV5F+/
+        Poe1AhbQkXF4CaHHR8gbPaKgjXW8dxmTO50ozfI=
+X-Google-Smtp-Source: AKy350Z0QBgzRKUjCV4C8U7Nf4E0sBQfRKNpYhXTQgJHeL7DHyI9FNtUvjVBUYg82RQIbEvMmf+fKK3uqM22aom6JQM=
+X-Received: by 2002:a17:907:d687:b0:8d0:2c55:1aa with SMTP id
+ wf7-20020a170907d68700b008d02c5501aamr12304786ejc.0.1680262049132; Fri, 31
+ Mar 2023 04:27:29 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.9.1
-Content-Language: en-US, de-DE
-To:     Conor Dooley <conor.dooley@microchip.com>
-Cc:     Matthieu Baerts <matthieu.baerts@tessares.net>,
-        Jonathan Corbet <corbet@lwn.net>,
-        Andy Whitcroft <apw@canonical.com>,
-        Joe Perches <joe@perches.com>,
-        Dwaipayan Ray <dwaipayanray1@gmail.com>,
-        Lukas Bulwahn <lukas.bulwahn@gmail.com>,
-        =?UTF-8?Q?Kai_Wasserb=c3=a4ch?= <kai@dev.carbon-project.org>,
-        Andrew Morton <akpm@linux-foundation.org>,
-        David Airlie <airlied@gmail.com>,
-        Daniel Vetter <daniel@ffwll.ch>,
-        Konstantin Ryabitsev <konstantin@linuxfoundation.org>,
-        Bagas Sanjaya <bagasdotme@gmail.com>,
-        Linus Torvalds <torvalds@linux-foundation.org>,
-        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
-        dri-devel@lists.freedesktop.org, mptcp@lists.linux.dev
-References: <20230314-doc-checkpatch-closes-tag-v3-0-d1bdcf31c71c@tessares.net>
- <2194d19d-f195-1a1e-41fc-7827ae569351@leemhuis.info>
- <cf5a3e73-c97d-4f98-80d7-4bcc68eb557a@spud>
-From:   Thorsten Leemhuis <linux@leemhuis.info>
-Subject: Re: [PATCH v3 0/4] docs & checkpatch: allow Closes tags with links
-In-Reply-To: <cf5a3e73-c97d-4f98-80d7-4bcc68eb557a@spud>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-bounce-key: webpack.hosteurope.de;linux@leemhuis.info;1680258860;efe5fe62;
-X-HE-SMSGID: 1piC5D-0002Be-5M
-X-Spam-Status: No, score=-0.0 required=5.0 tests=NICE_REPLY_A,
-        RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,SPF_PASS autolearn=unavailable
-        autolearn_force=no version=3.4.6
+Received: by 2002:a54:3b4d:0:b0:200:8c6e:b61 with HTTP; Fri, 31 Mar 2023
+ 04:27:28 -0700 (PDT)
+Reply-To: gb529585@gmail.com
+From:   "Gilbert . W" <rachidatousalami1@gmail.com>
+Date:   Fri, 31 Mar 2023 11:27:28 +0000
+Message-ID: <CAGzS2OEw2z6-neq6QibdjyztVe7ZAu=wBA8a4w4LH5KiKgaO=w@mail.gmail.com>
+Subject: Hello
+To:     undisclosed-recipients:;
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Spam-Status: Yes, score=7.3 required=5.0 tests=DKIM_SIGNED,DKIM_VALID,
+        DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_ENVFROM_END_DIGIT,FREEMAIL_FROM,
+        FREEMAIL_REPLYTO,FREEMAIL_REPLYTO_END_DIGIT,LOTS_OF_MONEY,
+        MONEY_FREEMAIL_REPTO,RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,SPF_PASS,
+        UNDISC_FREEM,UNDISC_MONEY autolearn=no autolearn_force=no version=3.4.6
+X-Spam-Report: * -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at
+        *      https://www.dnswl.org/, no trust
+        *      [2a00:1450:4864:20:0:0:0:52b listed in]
+        [list.dnswl.org]
+        * -0.0 SPF_PASS SPF: sender matches SPF record
+        *  0.2 FREEMAIL_ENVFROM_END_DIGIT Envelope-from freemail username ends
+        *       in digit
+        *      [rachidatousalami1[at]gmail.com]
+        *  0.0 SPF_HELO_NONE SPF: HELO does not publish an SPF Record
+        *  0.0 FREEMAIL_FROM Sender email is commonly abused enduser mail
+        *      provider
+        *      [rachidatousalami1[at]gmail.com]
+        *  0.2 FREEMAIL_REPLYTO_END_DIGIT Reply-To freemail username ends in
+        *      digit
+        *      [gb529585[at]gmail.com]
+        *  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
+        *       valid
+        * -0.1 DKIM_VALID_EF Message has a valid DKIM or DK signature from
+        *      envelope-from domain
+        * -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
+        *      author's domain
+        * -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+        *  0.0 LOTS_OF_MONEY Huge... sums of money
+        *  2.9 UNDISC_FREEM Undisclosed recipients + freemail reply-to
+        *  1.0 FREEMAIL_REPLYTO Reply-To/From or Reply-To/body contain
+        *      different freemails
+        *  1.1 MONEY_FREEMAIL_REPTO Lots of money from someone using free
+        *      email?
+        *  2.0 UNDISC_MONEY Undisclosed recipients + money/fraud signs
+X-Spam-Level: *******
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On 31.03.23 12:08, Conor Dooley wrote:
-> On Fri, Mar 31, 2023 at 11:39:22AM +0200, Thorsten Leemhuis wrote:
-> 
->> -Please check the link to make sure that it is actually working and points
->> -to the relevant message.
->> +If the URL points to a bug report that is fixed by the patch, use 'Closes:'
->> +instead.
-> 
-> This is not specifically a comment about your additional diff, but this
-> sprang to mind (again) while reading it.
-> I have been wondering if this sort of thing will lead to inconsistency. 
-> Reports sometimes report more than one issue at once. Other times a
-> patch that is (intentionally) not a complete fix for the problem.
-> Using Closes: in those cases is not really true, as it does not close
-> the report.
->
-> Having a series of N patches, each of which purport to close an issue,
-> also doesn't seem quite right.
-> The word Closes has a meaning and "forcing" the use of Closes: for
-> reports implies meaning that may not be present.
-> 
-> I suppose it is true that just because documentation or checkpatch says
-> to do something, doesn't mean that you **have** to do it but I don't
-> want to be the one on the Rx side of a rant...
+--=20
+Greetings,
 
-Yeah, maybe checkpath.pl should allow a "Link" after a "Reported-by" for
-cases like this, then developers could save "Closes" for the patch that
-addresses the last of the issues the report is about.
+I'm Mr. Bryan W. Gilbert from Turkey, I have a lucrative business
+proposal of Twenty Six Million Great British Pounds for you. (=C2=A3
+26,000,000.00)
+Kindly get back to me and I shall send more details to you.
 
-OTOH checkpatch.pl currently just prints a warning, so developers could
-ignore this and do the above already now, as you say. Guess it depends
-on how often we expect "one report with multiple issue" to happen.
-
-Maybe this is an indicator that we are on the wrong track in general and
-should not do any of this and just stick to "Link:".
-
-Ciao, Thorsten
+Thanks, and God blessings
+B. Gilbert
