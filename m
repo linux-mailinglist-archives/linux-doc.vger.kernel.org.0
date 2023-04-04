@@ -2,67 +2,72 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 7E4746D63FD
-	for <lists+linux-doc@lfdr.de>; Tue,  4 Apr 2023 15:53:53 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id BFFC26D8356
+	for <lists+linux-doc@lfdr.de>; Wed,  5 Apr 2023 18:15:03 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S235722AbjDDNxw (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 4 Apr 2023 09:53:52 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:53182 "EHLO
+        id S229693AbjDEQOs (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 5 Apr 2023 12:14:48 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:43224 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S235742AbjDDNxk (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 4 Apr 2023 09:53:40 -0400
-Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id B72574224;
-        Tue,  4 Apr 2023 06:53:28 -0700 (PDT)
-Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
+        with ESMTP id S231190AbjDEQOh (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Wed, 5 Apr 2023 12:14:37 -0400
+Received: from mx2.veeam.com (mx2.veeam.com [64.129.123.6])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id E911E72A7;
+        Wed,  5 Apr 2023 09:14:12 -0700 (PDT)
+Received: from mx1.veeam.com (mx1.veeam.com [172.18.34.147])
         (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
         (No client certificate requested)
-        by dfw.source.kernel.org (Postfix) with ESMTPS id 4159E61FF6;
-        Tue,  4 Apr 2023 13:53:28 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 01718C4339B;
-        Tue,  4 Apr 2023 13:53:16 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-        s=k20201202; t=1680616407;
-        bh=/XmQ33Vz5rwMvBxocOUTIIX51AasQPq8MBzmwbLl0tM=;
-        h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-        b=j3pvbEx+ZOhkZUE1LhdjIxby9njBvyhGGDw8XHNztZL/HYm+7Hxi7G2yVH87tLGXc
-         8CnD+aWL0pEfl8K8eEelOm98QkGvx9t82yLNNIDbeUQbrNgrgJfn5szL4qfacmifzK
-         rPf45WV4a2jbZGv1xNcqWD6pLaJXwrjXc0olsbyf9BBEd2EZkpozWqX1cpZJ+N/H4B
-         DgcmwjDTRFPqxMyHwoKOds6qUcJuJA5u8+/FD/+XXp0LvwfGWk4fHYFr/UhTWZm0gV
-         fPQ9esbG+NnpA8lDyV4zQGiCjpZvv+DaqXProbhEGTYkWTuiPCv+24pkuCN8MpR4Xn
-         uVKJnk0xDg9EA==
-Date:   Tue, 4 Apr 2023 15:53:13 +0200
-From:   Christian Brauner <brauner@kernel.org>
-To:     Ackerley Tng <ackerleytng@google.com>
-Cc:     kvm@vger.kernel.org, linux-api@vger.kernel.org,
-        linux-arch@vger.kernel.org, linux-doc@vger.kernel.org,
-        linux-fsdevel@vger.kernel.org, linux-kernel@vger.kernel.org,
-        linux-mm@kvack.org, qemu-devel@nongnu.org, aarcange@redhat.com,
-        ak@linux.intel.com, akpm@linux-foundation.org, arnd@arndb.de,
-        bfields@fieldses.org, bp@alien8.de, chao.p.peng@linux.intel.com,
-        corbet@lwn.net, dave.hansen@intel.com, david@redhat.com,
-        ddutile@redhat.com, dhildenb@redhat.com, hpa@zytor.com,
-        hughd@google.com, jlayton@kernel.org, jmattson@google.com,
-        joro@8bytes.org, jun.nakajima@intel.com,
-        kirill.shutemov@linux.intel.com, linmiaohe@huawei.com,
-        luto@kernel.org, mail@maciej.szmigiero.name, mhocko@suse.com,
-        michael.roth@amd.com, mingo@redhat.com, naoya.horiguchi@nec.com,
-        pbonzini@redhat.com, qperret@google.com, rppt@kernel.org,
-        seanjc@google.com, shuah@kernel.org, steven.price@arm.com,
-        tabba@google.com, tglx@linutronix.de, vannapurve@google.com,
-        vbabka@suse.cz, vkuznets@redhat.com, wanpengli@tencent.com,
-        wei.w.wang@intel.com, x86@kernel.org, yu.c.zhang@linux.intel.com
-Subject: Re: [RFC PATCH v3 1/2] mm: restrictedmem: Allow userspace to specify
- mount for memfd_restricted
-Message-ID: <20230404-amnesty-untying-01de932d4945@brauner>
-References: <cover.1680306489.git.ackerleytng@google.com>
- <592ebd9e33a906ba026d56dc68f42d691706f865.1680306489.git.ackerleytng@google.com>
+        by mx2.veeam.com (Postfix) with ESMTPS id 82F4F41A83;
+        Wed,  5 Apr 2023 12:13:40 -0400 (EDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=veeam.com;
+        s=mx2-2022; t=1680711220;
+        bh=OSK8IuFYxHwG6zPLaBYuaWrlVpckxHmP2+trnUr1Qyc=;
+        h=From:To:CC:Subject:Date:From;
+        b=FWJOw6141c5PR4x1ZbnnKbxAB03yi1/sB3mY/tXrm7vLbpuojkV9311g+snFPuZ6b
+         cn3beggf1J18MCrdC/VzmbvRAYfxEspPI8//45cyxZKOrJVy8Tid9Xamatb+QgDKRg
+         XcrNmlMGM10nJjVriRqW+XSkFKd547Nc26GAd9q2mXmIohNsWSzl7Z61/FReEJgVy1
+         UI7SH/5mzEzZ9o1Xv2DpXxHAVEsv+vCLGb3TKpUtZTUp+LZY4hlWr8nJkgY6HiR02D
+         65WB7xHTisPEWJmzwJUh3VfgoPvo63vf+dI63P7AIZmKKgl5wA15u22s98qb66FlHn
+         OU8cHCEyN7bOw==
+Received: from mx4.veeam.com (mx4.amust.local [172.31.224.40])
+        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+        (No client certificate requested)
+        by mx1.veeam.com (Postfix) with ESMTPS id C9D1C41E3C;
+        Wed,  5 Apr 2023 06:09:15 -0400 (EDT)
+Received: from mail.veeam.com (prgmbx01.amust.local [172.24.128.102])
+        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+        (No client certificate requested)
+        by mx4.veeam.com (Postfix) with ESMTPS id 5E4EB7D499;
+        Tue,  4 Apr 2023 17:09:00 +0300 (MSK)
+Received: from ssh-deb10-ssd-vb.amust.local (172.24.10.107) by
+ prgmbx01.amust.local (172.24.128.102) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.1118.26; Tue, 4 Apr 2023 16:08:55 +0200
+From:   Sergei Shtepa <sergei.shtepa@veeam.com>
+To:     <axboe@kernel.dk>, <hch@infradead.org>, <corbet@lwn.net>,
+        <snitzer@kernel.org>
+CC:     <viro@zeniv.linux.org.uk>, <brauner@kernel.org>,
+        <willy@infradead.org>, <kch@nvidia.com>,
+        <martin.petersen@oracle.com>, <vkoul@kernel.org>,
+        <ming.lei@redhat.com>, <gregkh@linuxfoundation.org>,
+        <linux-block@vger.kernel.org>, <linux-doc@vger.kernel.org>,
+        <linux-kernel@vger.kernel.org>, <linux-fsdevel@vger.kernel.org>,
+        <sergei.shtepa@veeam.com>
+Subject: [PATCH v3 00/11] blksnap - block devices snapshots module
+Date:   Tue, 4 Apr 2023 16:08:24 +0200
+Message-ID: <20230404140835.25166-1-sergei.shtepa@veeam.com>
+X-Mailer: git-send-email 2.20.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-In-Reply-To: <592ebd9e33a906ba026d56dc68f42d691706f865.1680306489.git.ackerleytng@google.com>
-X-Spam-Status: No, score=-5.2 required=5.0 tests=DKIMWL_WL_HIGH,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_HI,SPF_HELO_NONE,
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Originating-IP: [172.24.10.107]
+X-ClientProxiedBy: prgmbx02.amust.local (172.24.128.103) To
+ prgmbx01.amust.local (172.24.128.102)
+X-EsetResult: clean, is OK
+X-EsetId: 37303A2924031554657367
+X-Veeam-MMEX: True
+X-Spam-Status: No, score=-0.2 required=5.0 tests=DKIMWL_WL_HIGH,DKIM_SIGNED,
+        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_MSPIKE_H2,SPF_HELO_NONE,
         SPF_PASS autolearn=unavailable autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
@@ -70,246 +75,165 @@ Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Fri, Mar 31, 2023 at 11:50:39PM +0000, Ackerley Tng wrote:
-> By default, the backing shmem file for a restrictedmem fd is created
-> on shmem's kernel space mount.
-> 
-> With this patch, an optional tmpfs mount can be specified via an fd,
-> which will be used as the mountpoint for backing the shmem file
-> associated with a restrictedmem fd.
-> 
-> This will help restrictedmem fds inherit the properties of the
-> provided tmpfs mounts, for example, hugepage allocation hints, NUMA
-> binding hints, etc.
-> 
-> Permissions for the fd passed to memfd_restricted() is modeled after
-> the openat() syscall, since both of these allow creation of a file
-> upon a mount/directory.
-> 
-> Permission to reference the mount the fd represents is checked upon fd
-> creation by other syscalls (e.g. fsmount(), open(), or open_tree(),
-> etc) and any process that can present memfd_restricted() with a valid
-> fd is expected to have obtained permission to use the mount
-> represented by the fd. This behavior is intended to parallel that of
-> the openat() syscall.
-> 
-> memfd_restricted() will check that the tmpfs superblock is
-> writable, and that the mount is also writable, before attempting to
-> create a restrictedmem file on the mount.
-> 
-> Signed-off-by: Ackerley Tng <ackerleytng@google.com>
-> ---
->  include/linux/syscalls.h           |  2 +-
->  include/uapi/linux/restrictedmem.h |  8 ++++
->  mm/restrictedmem.c                 | 74 +++++++++++++++++++++++++++---
->  3 files changed, 77 insertions(+), 7 deletions(-)
->  create mode 100644 include/uapi/linux/restrictedmem.h
-> 
-> diff --git a/include/linux/syscalls.h b/include/linux/syscalls.h
-> index f9e9e0c820c5..a23c4c385cd3 100644
-> --- a/include/linux/syscalls.h
-> +++ b/include/linux/syscalls.h
-> @@ -1056,7 +1056,7 @@ asmlinkage long sys_memfd_secret(unsigned int flags);
->  asmlinkage long sys_set_mempolicy_home_node(unsigned long start, unsigned long len,
->  					    unsigned long home_node,
->  					    unsigned long flags);
-> -asmlinkage long sys_memfd_restricted(unsigned int flags);
-> +asmlinkage long sys_memfd_restricted(unsigned int flags, int mount_fd);
-> 
->  /*
->   * Architecture-specific system calls
-> diff --git a/include/uapi/linux/restrictedmem.h b/include/uapi/linux/restrictedmem.h
-> new file mode 100644
-> index 000000000000..22d6f2285f6d
-> --- /dev/null
-> +++ b/include/uapi/linux/restrictedmem.h
-> @@ -0,0 +1,8 @@
-> +/* SPDX-License-Identifier: GPL-2.0 WITH Linux-syscall-note */
-> +#ifndef _UAPI_LINUX_RESTRICTEDMEM_H
-> +#define _UAPI_LINUX_RESTRICTEDMEM_H
-> +
-> +/* flags for memfd_restricted */
-> +#define RMFD_USERMNT		0x0001U
-> +
-> +#endif /* _UAPI_LINUX_RESTRICTEDMEM_H */
-> diff --git a/mm/restrictedmem.c b/mm/restrictedmem.c
-> index c5d869d8c2d8..f7b62364a31a 100644
-> --- a/mm/restrictedmem.c
-> +++ b/mm/restrictedmem.c
-> @@ -1,11 +1,12 @@
->  // SPDX-License-Identifier: GPL-2.0
-> -#include "linux/sbitmap.h"
-> +#include <linux/namei.h>
->  #include <linux/pagemap.h>
->  #include <linux/pseudo_fs.h>
->  #include <linux/shmem_fs.h>
->  #include <linux/syscalls.h>
->  #include <uapi/linux/falloc.h>
->  #include <uapi/linux/magic.h>
-> +#include <uapi/linux/restrictedmem.h>
->  #include <linux/restrictedmem.h>
-> 
->  struct restrictedmem {
-> @@ -189,19 +190,20 @@ static struct file *restrictedmem_file_create(struct file *memfd)
->  	return file;
->  }
-> 
-> -SYSCALL_DEFINE1(memfd_restricted, unsigned int, flags)
-> +static int restrictedmem_create(struct vfsmount *mount)
->  {
->  	struct file *file, *restricted_file;
->  	int fd, err;
-> 
-> -	if (flags)
-> -		return -EINVAL;
-> -
->  	fd = get_unused_fd_flags(0);
+Hi Jens. Hi Christoph. Hi Jonathan. Hi Mike. Hi all.
 
-Any reasons the file descriptors aren't O_CLOEXEC by default? I don't
-see any reasons why we should introduce new fdtypes that aren't
-O_CLOEXEC by default. The "don't mix-and-match" train has already left
-the station anyway as we do have seccomp noitifer fds and pidfds both of
-which are O_CLOEXEC by default.
+I am happy to offer a modified version of the Block Devices Snapshots
+Module. It allows to create non-persistent snapshots of any block devices.
+The main purpose of such snapshots is to provide backups of block devices.
+See more in Documentation/block/blksnap.rst.
 
->  	if (fd < 0)
->  		return fd;
-> 
-> -	file = shmem_file_setup("memfd:restrictedmem", 0, VM_NORESERVE);
-> +	if (mount)
-> +		file = shmem_file_setup_with_mnt(mount, "memfd:restrictedmem", 0, VM_NORESERVE);
-> +	else
-> +		file = shmem_file_setup("memfd:restrictedmem", 0, VM_NORESERVE);
-> +
->  	if (IS_ERR(file)) {
->  		err = PTR_ERR(file);
->  		goto err_fd;
-> @@ -223,6 +225,66 @@ SYSCALL_DEFINE1(memfd_restricted, unsigned int, flags)
->  	return err;
->  }
-> 
-> +static bool is_shmem_mount(struct vfsmount *mnt)
-> +{
-> +	return mnt && mnt->mnt_sb && mnt->mnt_sb->s_magic == TMPFS_MAGIC;
+The Block Device Filtering Mechanism is added to the block layer. This
+allows to attach and detach block device filters to the block layer.
+Filters allow to extend the functionality of the block layer.
+See more in Documentation/block/blkfilter.rst.
 
-This can just be if (mnt->mnt_sb->s_magic == TMPFS_MAGIC).
+The tool, library and tests for working with blksnap can be found on github.
+Link: https://github.com/veeam/blksnap/tree/stable-v2.0
 
-> +}
-> +
-> +static bool is_mount_root(struct file *file)
-> +{
-> +	return file->f_path.dentry == file->f_path.mnt->mnt_root;
+The v2 version was suggested at 9 December 2022.
+Link: https://patchwork.kernel.org/project/linux-block/list/?series=703315&archive=both
+Since then, in collaboration with Christoph, work was carried out to optimize
+COW algorithms for snapshots, the algorithm for reading images of snapshots,
+and the control interface was redesigned.
 
-mount -t tmpfs tmpfs /mnt
-touch /mnt/bla
-touch /mnt/ble
-mount --bind /mnt/bla /mnt/ble
-fd = open("/mnt/ble")
-fd_restricted = memfd_restricted(fd)
+Changes:
+- new block device I/O contols BLKFILTER_ATTACH and BLKFILTER_DETACH allow 
+  to attach and detach filters
+- new block device I/O contol BLKFILTER_CTL allow send command to attached 
+  block device filter
+- the copy-on-write algorithm for processing I/O units has been optimized and
+  has become asynchronous
+- the snapshot image reading algorithm has been optimized and has become
+  asynchronous
+- optimized the finite state machine for processing chunks
+- fixed a tracking block size calculation bug.
 
-IOW, this doesn't restrict it to the tmpfs root. It only restricts it to
-paths that refer to the root of any tmpfs mount. To exclude bind-mounts
-that aren't bind-mounts of the whole filesystem you want:
+The v1 version was suggested at 2 November 2022.
+Link: https://patchwork.kernel.org/project/linux-block/list/?series=691286&archive=both
+Since then, documentation has been added describing the filtering mechanism and
+the snapshot module of block devices. Many thanks to Fabio Fantoni for his for
+his participation in the "blksnap" project on github and Jonathan Corbet for
+his article.
+Link: https://lwn.net/Articles/914031/.
 
-path->dentry == path->mnt->mnt_root && 
-path->mnt->mnt_root == path->mnt->mnt_sb->s_root
+Changes:
+- added documentation for Block Device Filtering Mechanism
+- added documentation for Block Devices Snapshots Module (blksnap)
+- the MAINTAINERS file has been updated
+- optimized queue code for snapshot images
+- fixed comments, log messages and code for better readability.
 
-> +}
-> +
-> +static int restrictedmem_create_on_user_mount(int mount_fd)
-> +{
-> +	int ret;
-> +	struct fd f;
-> +	struct vfsmount *mnt;
-> +
-> +	f = fdget_raw(mount_fd);
-> +	if (!f.file)
-> +		return -EBADF;
-> +
-> +	ret = -EINVAL;
-> +	if (!is_mount_root(f.file))
-> +		goto out;
-> +
-> +	mnt = f.file->f_path.mnt;
-> +	if (!is_shmem_mount(mnt))
-> +		goto out;
-> +
-> +	ret = file_permission(f.file, MAY_WRITE | MAY_EXEC);
+The first version was suggested at 13 June 2022.
+Link: https://patchwork.kernel.org/project/linux-block/list/?series=649931&archive=both
+Many thanks to Christoph Hellwig and Randy Dunlap for the review of that
+version.
 
-With the current semantics you're asking whether you have write
-permissions on the /mnt/ble file in order to get answer to the question
-whether you're allowed to create an unlinked restricted memory file.
-That doesn't make much sense afaict.
+Changes:
+- forgotten "static" declarations have been added
+- the text of the comments has been corrected.
+- it is possible to connect only one filter, since there are no others in
+  upstream.
+- do not have additional locks for attach/detach filter.
+- blksnap.h moved to include/uapi/.
+- #pragma once and commented code removed.
+- uuid_t removed from user API.
+- removed default values for module parameters from the configuration file.
+- the debugging code for tracking memory leaks has been removed.
+- simplified Makefile.
+- optimized work with large memory buffers, CBT tables are now in virtual
+  memory.
+- the allocation code of minor numbers has been optimized.
+- the implementation of the snapshot image block device has been
+  simplified, now it is a bio-based block device.
+- removed initialization of global variables with null values.
+- only one bio is used to copy one chunk.
+- checked on ppc64le.
 
-> +	if (ret)
-> +		goto out;
-> +
-> +	ret = mnt_want_write(mnt);
-> +	if (unlikely(ret))
-> +		goto out;
-> +
-> +	ret = restrictedmem_create(mnt);
-> +
-> +	mnt_drop_write(mnt);
-> +out:
-> +	fdput(f);
-> +
-> +	return ret;
-> +}
-> +
-> +SYSCALL_DEFINE2(memfd_restricted, unsigned int, flags, int, mount_fd)
-> +{
-> +	if (flags & ~RMFD_USERMNT)
-> +		return -EINVAL;
-> +
-> +	if (flags == RMFD_USERMNT) {
+Sergei Shtepa (11):
+  documentation: Block Device Filtering Mechanism
+  block: Block Device Filtering Mechanism
+  documentation: Block Devices Snapshots Module
+  blksnap: header file of the module interface
+  blksnap: module management interface functions
+  blksnap: handling and tracking I/O units
+  blksnap: minimum data storage unit of the original block device
+  blksnap: difference storage
+  blksnap: event queue from the difference storage
+  blksnap: snapshot and snapshot image block device
+  blksnap: Kconfig and Makefile
 
-Why do you even need this flag? It seems that @mount_fd being < 0 is
-sufficient to indicate that a new restricted memory fd is supposed to be
-created in the system instance.
+ Documentation/block/blkfilter.rst    |  64 ++++
+ Documentation/block/blksnap.rst      | 345 ++++++++++++++++++++
+ Documentation/block/index.rst        |   2 +
+ MAINTAINERS                          |  17 +
+ block/Makefile                       |   2 +-
+ block/bdev.c                         |   1 +
+ block/blk-core.c                     |  40 ++-
+ block/blk-filter.c                   | 199 ++++++++++++
+ block/blk.h                          |  10 +
+ block/genhd.c                        |   2 +
+ block/ioctl.c                        |   7 +
+ block/partitions/core.c              |   2 +
+ drivers/block/Kconfig                |   2 +
+ drivers/block/Makefile               |   2 +
+ drivers/block/blksnap/Kconfig        |  12 +
+ drivers/block/blksnap/Makefile       |  15 +
+ drivers/block/blksnap/cbt_map.c      | 228 +++++++++++++
+ drivers/block/blksnap/cbt_map.h      |  90 +++++
+ drivers/block/blksnap/chunk.c        | 470 +++++++++++++++++++++++++++
+ drivers/block/blksnap/chunk.h        | 106 ++++++
+ drivers/block/blksnap/diff_area.c    | 440 +++++++++++++++++++++++++
+ drivers/block/blksnap/diff_area.h    | 133 ++++++++
+ drivers/block/blksnap/diff_buffer.c  | 127 ++++++++
+ drivers/block/blksnap/diff_buffer.h  |  37 +++
+ drivers/block/blksnap/diff_storage.c | 329 +++++++++++++++++++
+ drivers/block/blksnap/diff_storage.h | 111 +++++++
+ drivers/block/blksnap/event_queue.c  |  87 +++++
+ drivers/block/blksnap/event_queue.h  |  64 ++++
+ drivers/block/blksnap/main.c         | 428 ++++++++++++++++++++++++
+ drivers/block/blksnap/params.h       |  16 +
+ drivers/block/blksnap/snapimage.c    | 120 +++++++
+ drivers/block/blksnap/snapimage.h    |  10 +
+ drivers/block/blksnap/snapshot.c     | 433 ++++++++++++++++++++++++
+ drivers/block/blksnap/snapshot.h     |  68 ++++
+ drivers/block/blksnap/tracker.c      | 320 ++++++++++++++++++
+ drivers/block/blksnap/tracker.h      |  71 ++++
+ include/linux/blk-filter.h           |  51 +++
+ include/linux/blk_types.h            |   2 +
+ include/linux/blkdev.h               |   1 +
+ include/uapi/linux/blk-filter.h      |  35 ++
+ include/uapi/linux/blksnap.h         | 421 ++++++++++++++++++++++++
+ include/uapi/linux/fs.h              |   5 +
+ 42 files changed, 4922 insertions(+), 3 deletions(-)
+ create mode 100644 Documentation/block/blkfilter.rst
+ create mode 100644 Documentation/block/blksnap.rst
+ create mode 100644 block/blk-filter.c
+ create mode 100644 drivers/block/blksnap/Kconfig
+ create mode 100644 drivers/block/blksnap/Makefile
+ create mode 100644 drivers/block/blksnap/cbt_map.c
+ create mode 100644 drivers/block/blksnap/cbt_map.h
+ create mode 100644 drivers/block/blksnap/chunk.c
+ create mode 100644 drivers/block/blksnap/chunk.h
+ create mode 100644 drivers/block/blksnap/diff_area.c
+ create mode 100644 drivers/block/blksnap/diff_area.h
+ create mode 100644 drivers/block/blksnap/diff_buffer.c
+ create mode 100644 drivers/block/blksnap/diff_buffer.h
+ create mode 100644 drivers/block/blksnap/diff_storage.c
+ create mode 100644 drivers/block/blksnap/diff_storage.h
+ create mode 100644 drivers/block/blksnap/event_queue.c
+ create mode 100644 drivers/block/blksnap/event_queue.h
+ create mode 100644 drivers/block/blksnap/main.c
+ create mode 100644 drivers/block/blksnap/params.h
+ create mode 100644 drivers/block/blksnap/snapimage.c
+ create mode 100644 drivers/block/blksnap/snapimage.h
+ create mode 100644 drivers/block/blksnap/snapshot.c
+ create mode 100644 drivers/block/blksnap/snapshot.h
+ create mode 100644 drivers/block/blksnap/tracker.c
+ create mode 100644 drivers/block/blksnap/tracker.h
+ create mode 100644 include/linux/blk-filter.h
+ create mode 100644 include/uapi/linux/blk-filter.h
+ create mode 100644 include/uapi/linux/blksnap.h
 
-> +		if (mount_fd < 0)
-> +			return -EINVAL;
-> +
-> +		return restrictedmem_create_on_user_mount(mount_fd);
-> +	} else {
-> +		return restrictedmem_create(NULL);
-> +	}
-> +}
+-- 
+2.20.1
 
-I have to say that I'm very confused by all of this the more I look at it.
-
-Effectively memfd restricted functions as a wrapper filesystem around
-the tmpfs filesystem. This is basically a weird overlay filesystem.
-You're allocating tmpfs files that you stash in restrictedmem files. 
-I have to say that this seems very hacky. I didn't get this at all at
-first.
-
-So what does the caller get if they call statx() on a restricted memfd?
-Do they get the device number of the tmpfs mount and the inode numbers
-of the tmpfs mount? Because it looks like they would:
-
-static int restrictedmem_getattr(struct user_namespace *mnt_userns,
-				 const struct path *path, struct kstat *stat,
-				 u32 request_mask, unsigned int query_flags)
-{
-	struct inode *inode = d_inode(path->dentry);
-	struct restrictedmem *rm = inode->i_mapping->private_data;
-	struct file *memfd = rm->memfd;
-
-	return memfd->f_inode->i_op->getattr(mnt_userns, path, stat,
-					     request_mask, query_flags);
-
-That @memfd would be a struct file allocated in a tmpfs instance, no? So
-you'd be calling the inode operation of the tmpfs file meaning that
-struct kstat will be filled up with the info from the tmpfs instance.
-
-But then if I call statfs() and check the fstype I would get
-RESTRICTEDMEM_MAGIC, no? This is... unorthodox?
-
-I'm honestly puzzled and this sounds really strange. There must be a
-better way to implement all of this.
-
-Shouldn't you try and make this a part of tmpfs proper? Make a really
-separate filesystem and add a memfs library that both tmpfs and
-restrictedmemfs can use? Add a mount option to tmpfs that makes it a
-restricted tmpfs?
