@@ -2,113 +2,177 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 91F5B6D9091
-	for <lists+linux-doc@lfdr.de>; Thu,  6 Apr 2023 09:39:25 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 4AB5D6D90D6
+	for <lists+linux-doc@lfdr.de>; Thu,  6 Apr 2023 09:56:38 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S235130AbjDFHjY (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 6 Apr 2023 03:39:24 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:50542 "EHLO
+        id S235337AbjDFH4e (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 6 Apr 2023 03:56:34 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:34170 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S234846AbjDFHjX (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Thu, 6 Apr 2023 03:39:23 -0400
-Received: from desiato.infradead.org (desiato.infradead.org [IPv6:2001:8b0:10b:1:d65d:64ff:fe57:4e05])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 4DD3F76A8;
-        Thu,  6 Apr 2023 00:39:22 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-        d=infradead.org; s=desiato.20200630; h=In-Reply-To:Content-Type:MIME-Version:
-        References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
-        Content-Transfer-Encoding:Content-ID:Content-Description;
-        bh=PSTnZvKPii8CuqOLasDZa85RvXeN5qcfEeMj/qPN4AI=; b=NS+Rj5XNebo6MF4JhS2WqHg+pY
-        ILIdptlQ1bk40yfARr2w/c3p1krt6L0pMWX612ksBo1yCxk9YxCWaqf2t7UWlPP1tCrwpnQzKCNd3
-        cBi2ZFmaJ7k+LwPVX3gYnTYJSIF3tMDHiTVxOXbMEKAhDpOq3v6ZOpOU9kD7sFxxavM5TdWx5S3fd
-        gOJSgcgQM086pSBofRNXZVbJkznDSLzclz5TcbU0TrQy0hMUae0+OQhMcsOIPqKSLyv67cepA8V7m
-        9Tiogm4Fuxu1w4JrHqEV6JFitpcmTral7U/bnGHxrFZX4jTpKUycTLFmHBUJJZD1SM7/dBCTXlEOZ
-        0K21+nJQ==;
-Received: from j130084.upc-j.chello.nl ([24.132.130.84] helo=noisy.programming.kicks-ass.net)
-        by desiato.infradead.org with esmtpsa (Exim 4.96 #2 (Red Hat Linux))
-        id 1pkKCn-00ASbW-0T;
-        Thu, 06 Apr 2023 07:38:49 +0000
-Received: from hirez.programming.kicks-ass.net (hirez.programming.kicks-ass.net [192.168.1.225])
-        (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-         key-exchange X25519 server-signature RSA-PSS (4096 bits))
-        (Client did not present a certificate)
-        by noisy.programming.kicks-ass.net (Postfix) with ESMTPS id 74E9D3000DC;
-        Thu,  6 Apr 2023 09:38:48 +0200 (CEST)
-Received: by hirez.programming.kicks-ass.net (Postfix, from userid 1000)
-        id 5BAFA24C025F1; Thu,  6 Apr 2023 09:38:48 +0200 (CEST)
-Date:   Thu, 6 Apr 2023 09:38:48 +0200
-From:   Peter Zijlstra <peterz@infradead.org>
-To:     Saravana Kannan <saravanak@google.com>
-Cc:     David Dai <davidai@google.com>,
-        "Rafael J. Wysocki" <rafael@kernel.org>,
-        Viresh Kumar <viresh.kumar@linaro.org>,
-        Rob Herring <robh+dt@kernel.org>,
-        Krzysztof Kozlowski <krzysztof.kozlowski+dt@linaro.org>,
-        Paolo Bonzini <pbonzini@redhat.com>,
-        Jonathan Corbet <corbet@lwn.net>,
-        Marc Zyngier <maz@kernel.org>,
-        Oliver Upton <oliver.upton@linux.dev>,
-        James Morse <james.morse@arm.com>,
-        Suzuki K Poulose <suzuki.poulose@arm.com>,
-        Zenghui Yu <yuzenghui@huawei.com>,
-        Catalin Marinas <catalin.marinas@arm.com>,
-        Will Deacon <will@kernel.org>,
-        Mark Rutland <mark.rutland@arm.com>,
-        Lorenzo Pieralisi <lpieralisi@kernel.org>,
-        Sudeep Holla <sudeep.holla@arm.com>,
-        Ingo Molnar <mingo@redhat.com>,
-        Juri Lelli <juri.lelli@redhat.com>,
-        Vincent Guittot <vincent.guittot@linaro.org>,
-        Dietmar Eggemann <dietmar.eggemann@arm.com>,
-        Steven Rostedt <rostedt@goodmis.org>,
-        Ben Segall <bsegall@google.com>, Mel Gorman <mgorman@suse.de>,
-        Daniel Bristot de Oliveira <bristot@redhat.com>,
-        Valentin Schneider <vschneid@redhat.com>,
-        kernel-team@android.com, linux-pm@vger.kernel.org,
-        devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
-        kvm@vger.kernel.org, linux-doc@vger.kernel.org,
-        linux-arm-kernel@lists.infradead.org, kvmarm@lists.linux.dev
-Subject: Re: [RFC PATCH 0/6] Improve VM DVFS and task placement behavior
-Message-ID: <20230406073848.GC386572@hirez.programming.kicks-ass.net>
-References: <20230330224348.1006691-1-davidai@google.com>
- <20230405080548.GW4253@hirez.programming.kicks-ass.net>
- <CAGETcx-qgKeUQ60VhvW+hYUY-sMh-wX1G8zSwJUFpJ-u7aU6aA@mail.gmail.com>
+        with ESMTP id S235325AbjDFH4b (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Thu, 6 Apr 2023 03:56:31 -0400
+Received: from mail-wm1-x32f.google.com (mail-wm1-x32f.google.com [IPv6:2a00:1450:4864:20::32f])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id B8943659A
+        for <linux-doc@vger.kernel.org>; Thu,  6 Apr 2023 00:56:26 -0700 (PDT)
+Received: by mail-wm1-x32f.google.com with SMTP id m8so11225003wmq.5
+        for <linux-doc@vger.kernel.org>; Thu, 06 Apr 2023 00:56:26 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=baylibre-com.20210112.gappssmtp.com; s=20210112; t=1680767785; x=1683359785;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=RyMJ/LPWyITMHJeLGKmI4fclBoXgbQHEcia5vkVYuYQ=;
+        b=C1Gm3N8nHtU7kLWsmrNG8Nk2scc1RfScS2FvPY72/2b757hkeS1ferVMmT6+GNB/k8
+         F266u9ZdxlTE+SrC5qF05azDXRDCADMovyHGxWsi88ETJbVrqrlXtn65MOiQ0nyNXZ3R
+         8bub+pTFtzzd6HsmtCymyqTm5IO5j5AVh5o/k85nTWtPd84dMGAIP4BLbDLWbjIph+Rl
+         UN/7alvEAYRLFeAZuuw3Avhxftc1tBroSjw30x3bdshAk8ahLISL/X8XbG3cC2jYXieb
+         Ondso4SwEdb9NHRGsa8ZI95BAXovuiRzCa6pTQFXMXpkmxilx9GNv5Kw8cVZGJeLOAQV
+         dz0g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112; t=1680767785; x=1683359785;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=RyMJ/LPWyITMHJeLGKmI4fclBoXgbQHEcia5vkVYuYQ=;
+        b=5w6U2zOzQicC6J3iyEzj4cNMtwNzembcwKSWBrH39oB9aEfrY7xKA8q4T2lpMOc8XK
+         8RPnf7wfEoxq4mlr6tOW1ccD6x4c+ktM8nzx1NwuhpWOIY6VGaHI+qqLOBqqvuPTubxj
+         qI00bSOv61Dsv02S2q4oFobyYYuHgUghIrbzBhX8pC5J5J+oPOoACbKYWqeH4LQjdmg+
+         CgTmh7wsY4nMrGUAmUuknKGO+6q4xUqFoNW7ApABA1WKEDq8aKTL1wM6fmGchBjXGPDt
+         04maxr1cPR7mwgogUbpnfRZcnXfU7AdPCP0dWilBNj4IYIODT23c/K/2jEON23tfLYJ4
+         1Uqw==
+X-Gm-Message-State: AAQBX9eJJwTTof3KFX32oI17LSpTljVwQA4E+rLvY6PYOPt1JRUw5unA
+        HwtLqTV3D2HUz7268/3Ibc9IxA==
+X-Google-Smtp-Source: AKy350aRCbPwVFoCElS5gaRlAjyKcd2c6JbclERtzragMJZPLJ2jGCUwBnm/fKh1DP/Wwz1WO/LQ2w==
+X-Received: by 2002:a1c:4c16:0:b0:3ee:1084:aa79 with SMTP id z22-20020a1c4c16000000b003ee1084aa79mr3141461wmf.20.1680767785225;
+        Thu, 06 Apr 2023 00:56:25 -0700 (PDT)
+Received: from baylibre-ThinkPad-T14s-Gen-2i.. (151.31.102.84.rev.sfr.net. [84.102.31.151])
+        by smtp.gmail.com with ESMTPSA id r15-20020a05600c458f00b003f03d483966sm4572651wmo.44.2023.04.06.00.56.23
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 06 Apr 2023 00:56:24 -0700 (PDT)
+From:   Julien Panis <jpanis@baylibre.com>
+To:     lee@kernel.org, robh+dt@kernel.org,
+        krzysztof.kozlowski+dt@linaro.org, corbet@lwn.net, arnd@arndb.de,
+        gregkh@linuxfoundation.org, derek.kiernan@xilinx.com,
+        dragan.cvetic@xilinx.com
+Cc:     yi.l.liu@intel.com, jgg@ziepe.ca, razor@blackwall.org,
+        stephen@networkplumber.org, prabhakar.csengg@gmail.com,
+        contact@emersion.fr, macro@orcam.me.uk, dsahern@kernel.org,
+        alex.williamson@redhat.com, akrowiak@linux.ibm.com,
+        mark.rutland@arm.com, ye.xingchen@zte.com.cn, ojeda@kernel.org,
+        keescook@chromium.org, me@kloenk.de, mhiramat@kernel.org,
+        milan@mdaverde.com, devicetree@vger.kernel.org,
+        linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org,
+        sterzik@ti.com, u-kumar1@ti.com, eblanc@baylibre.com,
+        jneanne@baylibre.com
+Subject: [PATCH v6 0/6] TI TPS6594 PMIC support (Core, ESM, PFSM)
+Date:   Thu,  6 Apr 2023 09:56:16 +0200
+Message-Id: <20230406075622.8990-1-jpanis@baylibre.com>
+X-Mailer: git-send-email 2.37.3
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <CAGETcx-qgKeUQ60VhvW+hYUY-sMh-wX1G8zSwJUFpJ-u7aU6aA@mail.gmail.com>
-X-Spam-Status: No, score=-2.5 required=5.0 tests=DKIM_SIGNED,DKIM_VALID,
-        DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_MED,SPF_HELO_NONE,SPF_NONE
-        autolearn=unavailable autolearn_force=no version=3.4.6
+Content-Transfer-Encoding: 8bit
+X-Spam-Status: No, score=0.0 required=5.0 tests=DKIM_SIGNED,DKIM_VALID,
+        RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,SPF_PASS autolearn=unavailable
+        autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Wed, Apr 05, 2023 at 02:08:43PM -0700, Saravana Kannan wrote:
+TPS6594 is a Power Management IC which provides regulators and others
+features like GPIOs, RTC, watchdog, ESMs (Error Signal Monitor), and
+PFSM (Pre-configurable Finite State Machine). The SoC and the PMIC can
+communicate through the I2C or SPI interfaces.
+TPS6594 is the super-set device while TPS6593 and LP8764 are derivatives.
 
-> The only 2 pieces of information shared between host/guest are:
-> 
-> 1. Host CPU frequency -- this isn't really scheduler internals and
-> will map nicely to a virtual cpufreq driver.
-> 
-> 2. A vCPU util value between 0 - 1024 where 1024 corresponds to the
-> highest performance point across all CPUs (taking freq, arch, etc into
-> consideration). Yes, this currently matches how the run queue util is
-> tracked, but we can document the interface as "percentage of max
-> performance capability", but representing it as 0 - 1024 instead of
-> 0-100. That way, even if the scheduler changes how it tracks util in
-> the future, we can still keep this interface between guest/host and
-> map it appropriately on the host end.
-> 
-> In either case, we could even have a Windows guest where they might
-> track vCPU utilization differently and still have this work with the
-> Linux host with this interface.
-> 
-> Does that sound reasonable to you?
+This series adds support to TI TPS6594 PMIC and its derivatives.
 
-Yeah, I suppose that's managable.
+The features implemented in this series are:
+- Core (MFD I2C and SPI entry points)
+- ESM (child device)
+- PFSM (child device)
 
-Something that wasn't initially clear to me; all this hard assumes a 1:1
-vCPU:CPU relation, right? Which isn't typical in virt land.
+- Core description:
+I2C and SPI interface protocols are implemented, with and without
+the bit-integrity error detection feature (CRC mode).
+In multi-PMIC configuration, all instances share a single GPIO of
+the SoC to generate interrupt requests via their respective nINT
+output pin.
+
+- ESM description:
+This device monitors the SoC error output signal at its nERR_SOC
+input pin. In error condition, ESM toggles its nRSTOUT_SOC pin
+to reset the SoC.
+Basically, ESM driver starts ESM hardware.
+
+- PFSM description:
+Strictly speaking, PFSM is not hardware. It is a piece of code.
+PMIC integrates a state machine which manages operational modes.
+Depending on the current operational mode, some voltage domains
+remain energized while others can be off.
+PFSM driver can be used to trigger transitions between configured
+states.
+
+Changes since v5 [all related to PFSM 'misc' driver]:
+* [PFSM driver] Return -ENOIOCTLCMD instead of -EINVAL for unknown ioctl command.
+* [PFSM driver] Add compat_ioctl pointer set to compat_ptr_ioctl() helper.
+* [PFSM driver] Replace PMIC_SET_STATE ioctl command with 3 different ioctl
+commands, and rename/modify pmic_state struct accordingly (enum removed and
+bitfield replaced with several __u8 to enable/disable state options).
+* [doc] Add 'tps6594-pfsm.rst' file to 'Documentation/misc-devices' directory.
+* [doc] Modify command range in 'ioctl-number.rst'.
+* [samples] Add 'pfsm/pfsm-wakeup.c' userspace code to 'samples' directory.
+
+Link to v5:
+https://lore.kernel.org/all/20230330082006.11216-1-jpanis@baylibre.com/
+
+Others series will be submitted over the next few weeks, providing
+drivers for others child devices like GPIOs (pinctrl), RTC, and
+regulators. Board support will also be added (device trees).
+
+Julien Panis (6):
+  dt-bindings: mfd: Add TI TPS6594 PMIC
+  mfd: tps6594: Add driver for TI TPS6594 PMIC
+  misc: tps6594-esm: Add driver for TI TPS6594 ESM
+  misc: tps6594-pfsm: Add driver for TI TPS6594 PFSM
+  Documentation: Add TI TPS6594 PFSM
+  samples: Add userspace example for TI TPS6594 PFSM
+
+ .../devicetree/bindings/mfd/ti,tps6594.yaml   |  193 ++++
+ Documentation/misc-devices/index.rst          |    1 +
+ Documentation/misc-devices/tps6594-pfsm.rst   |   87 ++
+ .../userspace-api/ioctl/ioctl-number.rst      |    1 +
+ drivers/mfd/Kconfig                           |   32 +
+ drivers/mfd/Makefile                          |    3 +
+ drivers/mfd/tps6594-core.c                    |  462 ++++++++
+ drivers/mfd/tps6594-i2c.c                     |  244 ++++
+ drivers/mfd/tps6594-spi.c                     |  129 +++
+ drivers/misc/Kconfig                          |   23 +
+ drivers/misc/Makefile                         |    2 +
+ drivers/misc/tps6594-esm.c                    |  132 +++
+ drivers/misc/tps6594-pfsm.c                   |  306 +++++
+ include/linux/mfd/tps6594.h                   | 1020 +++++++++++++++++
+ include/uapi/linux/tps6594_pfsm.h             |   37 +
+ samples/Kconfig                               |    6 +
+ samples/Makefile                              |    1 +
+ samples/pfsm/.gitignore                       |    2 +
+ samples/pfsm/Makefile                         |    4 +
+ samples/pfsm/pfsm-wakeup.c                    |  125 ++
+ 20 files changed, 2810 insertions(+)
+ create mode 100644 Documentation/devicetree/bindings/mfd/ti,tps6594.yaml
+ create mode 100644 Documentation/misc-devices/tps6594-pfsm.rst
+ create mode 100644 drivers/mfd/tps6594-core.c
+ create mode 100644 drivers/mfd/tps6594-i2c.c
+ create mode 100644 drivers/mfd/tps6594-spi.c
+ create mode 100644 drivers/misc/tps6594-esm.c
+ create mode 100644 drivers/misc/tps6594-pfsm.c
+ create mode 100644 include/linux/mfd/tps6594.h
+ create mode 100644 include/uapi/linux/tps6594_pfsm.h
+ create mode 100644 samples/pfsm/.gitignore
+ create mode 100644 samples/pfsm/Makefile
+ create mode 100644 samples/pfsm/pfsm-wakeup.c
+
+
+base-commit: fe15c26ee26efa11741a7b632e9f23b01aca4cc6
+-- 
+2.37.3
+
