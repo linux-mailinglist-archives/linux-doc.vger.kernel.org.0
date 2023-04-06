@@ -2,108 +2,80 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 2E3EA6D98F8
-	for <lists+linux-doc@lfdr.de>; Thu,  6 Apr 2023 16:06:29 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 337166DA61F
+	for <lists+linux-doc@lfdr.de>; Fri,  7 Apr 2023 01:30:06 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S238189AbjDFOG1 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 6 Apr 2023 10:06:27 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:48378 "EHLO
+        id S230035AbjDFXaE (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 6 Apr 2023 19:30:04 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:41558 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S238976AbjDFOGX (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Thu, 6 Apr 2023 10:06:23 -0400
-Received: from szxga02-in.huawei.com (szxga02-in.huawei.com [45.249.212.188])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id A7CF7903B;
-        Thu,  6 Apr 2023 07:05:56 -0700 (PDT)
-Received: from dggpemm500016.china.huawei.com (unknown [172.30.72.56])
-        by szxga02-in.huawei.com (SkyGuard) with ESMTP id 4Psjrj4KHPzKx4d;
-        Thu,  6 Apr 2023 22:03:17 +0800 (CST)
-Received: from huawei.com (10.67.174.205) by dggpemm500016.china.huawei.com
- (7.185.36.25) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.23; Thu, 6 Apr
- 2023 22:05:47 +0800
-From:   Chen Jiahao <chenjiahao16@huawei.com>
-To:     <linux-kernel@vger.kernel.org>, <linux-riscv@lists.infradead.org>,
-        <kexec@lists.infradead.org>, <linux-doc@vger.kernel.org>
-CC:     <paul.walmsley@sifive.com>, <palmer@dabbelt.com>,
-        <conor.dooley@microchip.com>, <guoren@kernel.org>,
-        <heiko@sntech.de>, <bjorn@rivosinc.com>, <alex@ghiti.fr>,
-        <akpm@linux-foundation.org>, <atishp@rivosinc.com>,
-        <bhe@redhat.com>, <thunder.leizhen@huawei.com>, <horms@kernel.org>
-Subject: [PATCH -next v3 2/2] docs: kdump: Update the crashkernel description for riscv
-Date:   Fri, 7 Apr 2023 06:02:06 +0800
-Message-ID: <20230406220206.3067006-3-chenjiahao16@huawei.com>
-X-Mailer: git-send-email 2.31.1
-In-Reply-To: <20230406220206.3067006-1-chenjiahao16@huawei.com>
-References: <20230406220206.3067006-1-chenjiahao16@huawei.com>
-MIME-Version: 1.0
-Content-Transfer-Encoding: 7BIT
-Content-Type:   text/plain; charset=US-ASCII
-X-Originating-IP: [10.67.174.205]
-X-ClientProxiedBy: dggems706-chm.china.huawei.com (10.3.19.183) To
- dggpemm500016.china.huawei.com (7.185.36.25)
-X-CFilter-Loop: Reflected
-X-Spam-Status: No, score=-2.3 required=5.0 tests=DATE_IN_FUTURE_06_12,
-        RCVD_IN_DNSWL_MED,SPF_HELO_NONE,SPF_PASS autolearn=unavailable
-        autolearn_force=no version=3.4.6
+        with ESMTP id S229626AbjDFXaD (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Thu, 6 Apr 2023 19:30:03 -0400
+Received: from dfw.source.kernel.org (dfw.source.kernel.org [IPv6:2604:1380:4641:c500::1])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id C2A019EC5;
+        Thu,  6 Apr 2023 16:29:59 -0700 (PDT)
+Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
+        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+        (No client certificate requested)
+        by dfw.source.kernel.org (Postfix) with ESMTPS id 5FFF26498D;
+        Thu,  6 Apr 2023 23:29:59 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 72C76C433D2;
+        Thu,  6 Apr 2023 23:29:58 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=linux-foundation.org;
+        s=korg; t=1680823798;
+        bh=qDIlNriYIeS492HkC/yOLQLD8cyeiSLOgIcNJoMa84k=;
+        h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
+        b=UFwip8/hNEYfi28GVP5NGN6Q4UQK1bbuIXgHii34OS4tBhjOISMQG42LkdSssjw4j
+         jv58Vi79dzbgX0Fd5QxH5lXD6O2iX6aMpgOX9tPxsxSnGL/yLT74sl4InM5nXKD8xf
+         fRYWzvlLHAGI1zNjF1tVVBxDAcDqVfRYihUJeANA=
+Date:   Thu, 6 Apr 2023 16:29:57 -0700
+From:   Andrew Morton <akpm@linux-foundation.org>
+To:     Stefan Roesch <shr@devkernel.io>
+Cc:     kernel-team@fb.com, linux-mm@kvack.org, riel@surriel.com,
+        mhocko@suse.com, david@redhat.com, linux-kselftest@vger.kernel.org,
+        linux-doc@vger.kernel.org, hannes@cmpxchg.org,
+        Bagas Sanjaya <bagasdotme@gmail.com>
+Subject: Re: [PATCH v5 1/3] mm: add new api to enable ksm per process
+Message-Id: <20230406162957.57fa69a46691a97d4600f444@linux-foundation.org>
+In-Reply-To: <20230406165339.1017597-2-shr@devkernel.io>
+References: <20230406165339.1017597-1-shr@devkernel.io>
+        <20230406165339.1017597-2-shr@devkernel.io>
+X-Mailer: Sylpheed 3.8.0beta1 (GTK+ 2.24.33; x86_64-pc-linux-gnu)
+Mime-Version: 1.0
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 7bit
+X-Spam-Status: No, score=-4.7 required=5.0 tests=DKIM_SIGNED,DKIM_VALID,
+        DKIM_VALID_AU,DKIM_VALID_EF,NICE_REPLY_A,RCVD_IN_DNSWL_MED,
+        SPF_HELO_NONE,SPF_PASS autolearn=unavailable autolearn_force=no
+        version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Now "crashkernel=" parameter on riscv has been updated to support
-crashkernel=X,[high,low]. Through which we can reserve memory region
-above/within 32bit addressible DMA zone.
+On Thu,  6 Apr 2023 09:53:37 -0700 Stefan Roesch <shr@devkernel.io> wrote:
 
-Here update the parameter description accordingly.
+> So far KSM can only be enabled by calling madvise for memory regions.  To
+> be able to use KSM for more workloads, KSM needs to have the ability to be
+> enabled / disabled at the process / cgroup level.
+> 
+> ...
+>
+> @@ -53,6 +62,18 @@ void folio_migrate_ksm(struct folio *newfolio, struct folio *folio);
+>  
+>  #else  /* !CONFIG_KSM */
+>  
+> +static inline int ksm_add_mm(struct mm_struct *mm)
+> +{
+> +}
 
-Signed-off-by: Chen Jiahao <chenjiahao16@huawei.com>
----
- Documentation/admin-guide/kernel-parameters.txt | 15 ++++++++-------
- 1 file changed, 8 insertions(+), 7 deletions(-)
+The compiler doesn't like the lack of a return value.
 
-diff --git a/Documentation/admin-guide/kernel-parameters.txt b/Documentation/admin-guide/kernel-parameters.txt
-index 54702bd488eb..41865aae9eaa 100644
---- a/Documentation/admin-guide/kernel-parameters.txt
-+++ b/Documentation/admin-guide/kernel-parameters.txt
-@@ -866,7 +866,7 @@
- 			memory region [offset, offset + size] for that kernel
- 			image. If '@offset' is omitted, then a suitable offset
- 			is selected automatically.
--			[KNL, X86-64, ARM64] Select a region under 4G first, and
-+			[KNL, X86-64, ARM64, RISCV] Select a region under 4G first, and
- 			fall back to reserve region above 4G when '@offset'
- 			hasn't been specified.
- 			See Documentation/admin-guide/kdump/kdump.rst for further details.
-@@ -879,14 +879,14 @@
- 			Documentation/admin-guide/kdump/kdump.rst for an example.
- 
- 	crashkernel=size[KMG],high
--			[KNL, X86-64, ARM64] range could be above 4G. Allow kernel
--			to allocate physical memory region from top, so could
--			be above 4G if system have more than 4G ram installed.
--			Otherwise memory region will be allocated below 4G, if
--			available.
-+			[KNL, X86-64, ARM64, RISCV] range could be above 4G.
-+			Allow kernel to allocate physical memory region from top,
-+			so could be above 4G if system have more than 4G ram
-+			installed. Otherwise memory region will be allocated
-+			below 4G, if available.
- 			It will be ignored if crashkernel=X is specified.
- 	crashkernel=size[KMG],low
--			[KNL, X86-64, ARM64] range under 4G. When crashkernel=X,high
-+			[KNL, X86-64, ARM64, RISCV] range under 4G. When crashkernel=X,high
- 			is passed, kernel could allocate physical memory region
- 			above 4G, that cause second kernel crash on system
- 			that require some amount of low memory, e.g. swiotlb
-@@ -897,6 +897,7 @@
- 			size is	platform dependent.
- 			  --> x86: max(swiotlb_size_or_default() + 8MiB, 256MiB)
- 			  --> arm64: 128MiB
-+			  --> riscv: 128MiB
- 			This one lets the user specify own low range under 4G
- 			for second kernel instead.
- 			0: to disable low allocation.
--- 
-2.31.1
+I queued up a patch to simply delete the above function - seems that
+ksm_add_mm() has no callers if CONFIG_KSM=n.
+
+The same might be true of the ksm_add_vma()...ksm_exit() stubs also,
+Perhaps some kind soul could take a look at whether we can simply clean
+those out.
 
