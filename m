@@ -2,134 +2,126 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id A08B56DA388
-	for <lists+linux-doc@lfdr.de>; Thu,  6 Apr 2023 22:40:56 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id ED01E6DA3B0
+	for <lists+linux-doc@lfdr.de>; Thu,  6 Apr 2023 22:42:12 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S240213AbjDFUky (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 6 Apr 2023 16:40:54 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:55522 "EHLO
+        id S239851AbjDFUmK (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 6 Apr 2023 16:42:10 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:55044 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S240721AbjDFUkc (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Thu, 6 Apr 2023 16:40:32 -0400
-Received: from smtp-fw-2101.amazon.com (smtp-fw-2101.amazon.com [72.21.196.25])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 7CBE69767;
-        Thu,  6 Apr 2023 13:36:35 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-  d=amazon.com; i=@amazon.com; q=dns/txt; s=amazon201209;
-  t=1680813396; x=1712349396;
-  h=from:to:cc:subject:date:message-id:in-reply-to:
-   references:mime-version:content-transfer-encoding;
-  bh=glRId3TCjvVwkSyTTe1OVXVyxecEefJVI+EkBN/jPxc=;
-  b=D3d/72cr7XzDezJrhwct98a/FY/gL2KCZOGFUDIZumVI1kPS0ueN/CPZ
-   gmegO0blWZUGGS5DiR68LrVrQbmw7n/c6iZyj2UbuGOlKZeitgt26y3yV
-   s8OcKCxxckFJFOiDU9TCLDxiuF5pMn7r6lEV37fKHZtgPLKQ0q7+TesbC
-   8=;
-X-IronPort-AV: E=Sophos;i="5.98,323,1673913600"; 
-   d="scan'208";a="311400107"
-Received: from iad12-co-svc-p1-lb1-vlan3.amazon.com (HELO email-inbound-relay-iad-1d-m6i4x-153b24bc.us-east-1.amazon.com) ([10.43.8.6])
-  by smtp-border-fw-2101.iad2.amazon.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 06 Apr 2023 20:36:33 +0000
-Received: from EX19MTAUWA002.ant.amazon.com (iad12-ws-svc-p26-lb9-vlan3.iad.amazon.com [10.40.163.38])
-        by email-inbound-relay-iad-1d-m6i4x-153b24bc.us-east-1.amazon.com (Postfix) with ESMTPS id 6F94EC18F0;
-        Thu,  6 Apr 2023 20:36:30 +0000 (UTC)
-Received: from EX19D004ANA001.ant.amazon.com (10.37.240.138) by
- EX19MTAUWA002.ant.amazon.com (10.250.64.202) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1118.26; Thu, 6 Apr 2023 20:36:29 +0000
-Received: from 88665a182662.ant.amazon.com (10.119.181.3) by
- EX19D004ANA001.ant.amazon.com (10.37.240.138) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1118.26; Thu, 6 Apr 2023 20:36:26 +0000
-From:   Kuniyuki Iwashima <kuniyu@amazon.com>
-To:     <yuehaibing@huawei.com>
-CC:     <corbet@lwn.net>, <davem@davemloft.net>, <dsahern@kernel.org>,
-        <edumazet@google.com>, <kuba@kernel.org>, <kuniyu@amazon.com>,
-        <linux-doc@vger.kernel.org>, <linux-kernel@vger.kernel.org>,
-        <netdev@vger.kernel.org>, <pabeni@redhat.com>
-Subject: Re: [PATCH net] tcp: restrict net.ipv4.tcp_app_win
-Date:   Thu, 6 Apr 2023 13:36:15 -0700
-Message-ID: <20230406203615.43591-1-kuniyu@amazon.com>
-X-Mailer: git-send-email 2.30.2
-In-Reply-To: <20230406063450.19572-1-yuehaibing@huawei.com>
-References: <20230406063450.19572-1-yuehaibing@huawei.com>
+        with ESMTP id S240190AbjDFUlj (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Thu, 6 Apr 2023 16:41:39 -0400
+Received: from dfw.source.kernel.org (dfw.source.kernel.org [IPv6:2604:1380:4641:c500::1])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 36B0FAD18;
+        Thu,  6 Apr 2023 13:38:37 -0700 (PDT)
+Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
+        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+        (No client certificate requested)
+        by dfw.source.kernel.org (Postfix) with ESMTPS id C2B5160F77;
+        Thu,  6 Apr 2023 20:38:36 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 99A21C433D2;
+        Thu,  6 Apr 2023 20:38:25 +0000 (UTC)
+From:   Krzysztof Kozlowski <krzysztof.kozlowski@linaro.org>
+To:     Jean Delvare <jdelvare@suse.com>,
+        Guenter Roeck <linux@roeck-us.net>,
+        Jonathan Corbet <corbet@lwn.net>,
+        Oded Gabbay <ogabbay@kernel.org>,
+        Michael Hennerich <Michael.Hennerich@analog.com>,
+        Aleksa Savic <savicaleksa83@gmail.com>,
+        Jack Doan <me@jackdoan.com>,
+        =?UTF-8?q?Nuno=20S=C3=A1?= <nuno.sa@analog.com>,
+        Marius Zachmann <mail@mariuszachmann.de>,
+        Wilken Gottwalt <wilken.gottwalt@posteo.net>,
+        =?UTF-8?q?Pali=20Roh=C3=A1r?= <pali@kernel.org>,
+        Jean-Marie Verdun <verdun@hpe.com>,
+        Nick Hawkins <nick.hawkins@hpe.com>,
+        Xu Yilun <yilun.xu@intel.com>, Tom Rix <trix@redhat.com>,
+        Clemens Ladisch <clemens@ladisch.de>,
+        Rudolf Marek <r.marek@assembler.cz>,
+        Charles Keepax <ckeepax@opensource.cirrus.com>,
+        Richard Fitzgerald <rf@opensource.cirrus.com>,
+        Ibrahim Tilki <Ibrahim.Tilki@analog.com>,
+        Avi Fishman <avifishman70@gmail.com>,
+        Tomer Maimon <tmaimon77@gmail.com>,
+        Tali Perry <tali.perry1@gmail.com>,
+        Patrick Venture <venture@google.com>,
+        Nancy Yuen <yuenn@google.com>,
+        Benjamin Fair <benjaminfair@google.com>,
+        Jonas Malaco <jonas@protocubo.io>,
+        Aleksandr Mezin <mezin.alexander@gmail.com>,
+        Derek John Clark <derekjohn.clark@gmail.com>,
+        =?UTF-8?q?Joaqu=C3=ADn=20Ignacio=20Aramend=C3=ADa?= 
+        <samsagax@gmail.com>, Iwona Winiarska <iwona.winiarska@intel.com>,
+        Florian Fainelli <f.fainelli@gmail.com>,
+        Broadcom internal kernel review list 
+        <bcm-kernel-feedback-list@broadcom.com>,
+        Hans de Goede <hdegoede@redhat.com>,
+        Michael Walle <michael@walle.cc>,
+        Lars Povlsen <lars.povlsen@microchip.com>,
+        Steen Hegelund <Steen.Hegelund@microchip.com>,
+        Daniel Machon <daniel.machon@microchip.com>,
+        UNGLinuxDriver@microchip.com,
+        Agathe Porte <agathe.porte@nokia.com>,
+        Eric Tremblay <etremblay@distech-controls.com>,
+        Robert Marko <robert.marko@sartura.hr>,
+        linux-hwmon@vger.kernel.org, linux-doc@vger.kernel.org,
+        linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org,
+        patches@opensource.cirrus.com, openbmc@lists.ozlabs.org,
+        linux-rpi-kernel@lists.infradead.org,
+        linux-arm-kernel@lists.infradead.org
+Cc:     Krzysztof Kozlowski <krzysztof.kozlowski@linaro.org>
+Subject: [PATCH 50/68] hwmon: peci: constify pointers to hwmon_channel_info
+Date:   Thu,  6 Apr 2023 22:38:12 +0200
+Message-Id: <20230406203821.3012402-1-krzysztof.kozlowski@linaro.org>
+X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20230406203103.3011503-1-krzysztof.kozlowski@linaro.org>
+References: <20230406203103.3011503-1-krzysztof.kozlowski@linaro.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Originating-IP: [10.119.181.3]
-X-ClientProxiedBy: EX19D033UWC001.ant.amazon.com (10.13.139.218) To
- EX19D004ANA001.ant.amazon.com (10.37.240.138)
-X-Spam-Status: No, score=-2.1 required=5.0 tests=DKIMWL_WL_HIGH,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
-        RCVD_IN_DNSWL_MED,RCVD_IN_MSPIKE_H3,RCVD_IN_MSPIKE_WL,SPF_HELO_NONE,
-        SPF_PASS autolearn=unavailable autolearn_force=no version=3.4.6
+X-Spam-Status: No, score=-2.0 required=5.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
+        RCVD_IN_DNSWL_MED,SPF_HELO_NONE,SPF_PASS autolearn=unavailable
+        autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-From:   YueHaibing <yuehaibing@huawei.com>
-Date:   Thu, 6 Apr 2023 14:34:50 +0800
-> UBSAN: shift-out-of-bounds in net/ipv4/tcp_input.c:555:23
-> shift exponent 255 is too large for 32-bit type 'int'
-> CPU: 1 PID: 7907 Comm: ssh Not tainted 6.3.0-rc4-00161-g62bad54b26db-dirty #206
-> Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS 1.15.0-1 04/01/2014
-> Call Trace:
->  <TASK>
->  dump_stack_lvl+0x136/0x150
->  __ubsan_handle_shift_out_of_bounds+0x21f/0x5a0
->  tcp_init_transfer.cold+0x3a/0xb9
->  tcp_finish_connect+0x1d0/0x620
->  tcp_rcv_state_process+0xd78/0x4d60
->  tcp_v4_do_rcv+0x33d/0x9d0
->  __release_sock+0x133/0x3b0
->  release_sock+0x58/0x1b0
-> 
-> 'maxwin' is int, shifting int for 32 or more bits is undefined behaviour.
-> 
-> Signed-off-by: YueHaibing <yuehaibing@huawei.com>
+Statically allocated array of pointed to hwmon_channel_info can be made
+const for safety.
 
-Reviewed-by: Kuniyuki Iwashima <kuniyu@amazon.com>
+Signed-off-by: Krzysztof Kozlowski <krzysztof.kozlowski@linaro.org>
+---
+ drivers/hwmon/peci/cputemp.c  | 2 +-
+ drivers/hwmon/peci/dimmtemp.c | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
 
-Thanks!
+diff --git a/drivers/hwmon/peci/cputemp.c b/drivers/hwmon/peci/cputemp.c
+index 87d56f0fc888..e5b65a382772 100644
+--- a/drivers/hwmon/peci/cputemp.c
++++ b/drivers/hwmon/peci/cputemp.c
+@@ -447,7 +447,7 @@ static const struct hwmon_ops peci_cputemp_ops = {
+ 	.read = cputemp_read,
+ };
+ 
+-static const struct hwmon_channel_info *peci_cputemp_info[] = {
++static const struct hwmon_channel_info * const peci_cputemp_info[] = {
+ 	HWMON_CHANNEL_INFO(temp,
+ 			   /* Die temperature */
+ 			   HWMON_T_LABEL | HWMON_T_INPUT | HWMON_T_MAX |
+diff --git a/drivers/hwmon/peci/dimmtemp.c b/drivers/hwmon/peci/dimmtemp.c
+index 0a633bda3668..ed968401f93c 100644
+--- a/drivers/hwmon/peci/dimmtemp.c
++++ b/drivers/hwmon/peci/dimmtemp.c
+@@ -300,7 +300,7 @@ static int create_dimm_temp_label(struct peci_dimmtemp *priv, int chan)
+ 	return 0;
+ }
+ 
+-static const struct hwmon_channel_info *peci_dimmtemp_temp_info[] = {
++static const struct hwmon_channel_info * const peci_dimmtemp_temp_info[] = {
+ 	HWMON_CHANNEL_INFO(temp,
+ 			   [0 ... DIMM_NUMS_MAX - 1] = HWMON_T_LABEL |
+ 				HWMON_T_INPUT | HWMON_T_MAX | HWMON_T_CRIT),
+-- 
+2.34.1
 
-> ---
->  Documentation/networking/ip-sysctl.rst | 2 ++
->  net/ipv4/sysctl_net_ipv4.c             | 3 +++
->  2 files changed, 5 insertions(+)
-> 
-> diff --git a/Documentation/networking/ip-sysctl.rst b/Documentation/networking/ip-sysctl.rst
-> index 87dd1c5283e6..58a78a316697 100644
-> --- a/Documentation/networking/ip-sysctl.rst
-> +++ b/Documentation/networking/ip-sysctl.rst
-> @@ -340,6 +340,8 @@ tcp_app_win - INTEGER
->  	Reserve max(window/2^tcp_app_win, mss) of window for application
->  	buffer. Value 0 is special, it means that nothing is reserved.
->  
-> +	Possible values are [0, 31], inclusive.
-> +
->  	Default: 31
->  
->  tcp_autocorking - BOOLEAN
-> diff --git a/net/ipv4/sysctl_net_ipv4.c b/net/ipv4/sysctl_net_ipv4.c
-> index 0d0cc4ef2b85..40fe70fc2015 100644
-> --- a/net/ipv4/sysctl_net_ipv4.c
-> +++ b/net/ipv4/sysctl_net_ipv4.c
-> @@ -25,6 +25,7 @@ static int ip_local_port_range_min[] = { 1, 1 };
->  static int ip_local_port_range_max[] = { 65535, 65535 };
->  static int tcp_adv_win_scale_min = -31;
->  static int tcp_adv_win_scale_max = 31;
-> +static int tcp_app_win_max = 31;
->  static int tcp_min_snd_mss_min = TCP_MIN_SND_MSS;
->  static int tcp_min_snd_mss_max = 65535;
->  static int ip_privileged_port_min;
-> @@ -1198,6 +1199,8 @@ static struct ctl_table ipv4_net_table[] = {
->  		.maxlen		= sizeof(u8),
->  		.mode		= 0644,
->  		.proc_handler	= proc_dou8vec_minmax,
-> +		.extra1		= SYSCTL_ZERO,
-> +		.extra2		= &tcp_app_win_max,
->  	},
->  	{
->  		.procname	= "tcp_adv_win_scale",
-> -- 
-> 2.34.1
