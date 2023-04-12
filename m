@@ -2,81 +2,204 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 985676DE972
-	for <lists+linux-doc@lfdr.de>; Wed, 12 Apr 2023 04:33:15 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id B338B6DE9DF
+	for <lists+linux-doc@lfdr.de>; Wed, 12 Apr 2023 05:20:06 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S229481AbjDLCdO (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 11 Apr 2023 22:33:14 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:41546 "EHLO
+        id S229712AbjDLDUE (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 11 Apr 2023 23:20:04 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:32920 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S229469AbjDLCdN (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 11 Apr 2023 22:33:13 -0400
-Received: from mail-pj1-x1030.google.com (mail-pj1-x1030.google.com [IPv6:2607:f8b0:4864:20::1030])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id A9B2F40D8
-        for <linux-doc@vger.kernel.org>; Tue, 11 Apr 2023 19:33:11 -0700 (PDT)
-Received: by mail-pj1-x1030.google.com with SMTP id w11so10540908pjh.5
-        for <linux-doc@vger.kernel.org>; Tue, 11 Apr 2023 19:33:11 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20221208; t=1681266791; x=1683858791;
-        h=to:subject:message-id:date:from:sender:mime-version:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=b7ZMAe08pa3yftUB4lm1DUg8EjCg6JbDyenNfQYXhuk=;
-        b=neBHAraeOkLRNuzf/pqZigbSGg6l8jbHXxaFnRIsBQG3G/iTHP2avQPY44ZiZAfjp6
-         4B8LFgo920EQbKBaE+bS6hrSn62AHHcLTlGAzXOsE0+7/H2WUBtJjR39NZPRok/Sp0Ew
-         hfAZ58iTNWCZQhntF/7NArDd8aBhjPU0E6NRXm24LkrW6I49ExTf4wpIo6bBy9HSI/s9
-         RHUkSZ0Y8A7qZVqmX7BM95DRK4PNBApd0frjkbSpYVTS2ELjjc6OCzYFSDvYNCHENVZK
-         xNlN7EEQcgAS5wSYPR0cy83B/XdNn1P9ka9JVTaour4x/yA36nrSF39eqp3qobZiMCq/
-         QZZQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112; t=1681266791; x=1683858791;
-        h=to:subject:message-id:date:from:sender:mime-version
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=b7ZMAe08pa3yftUB4lm1DUg8EjCg6JbDyenNfQYXhuk=;
-        b=ZIuzZQE5tL3ya6nTDr62Gi+IWI8hXfhQ/TORUrgJqBxiNWwVhYtCCMK63kkpH6W6FZ
-         IiMzZhEgJ3Vn70qxmBgbeySUPX2OB6yMauXVC3CGvLujvQPnhSZqkoweyzslO/6kAnNJ
-         poIdx+Vju+1fiQAo/ZUPUwox1BoVlwQ4twxpU+NXMhBYy/EbMPjKDaGV7G2bnfPoqzz2
-         Xmc1mJAv/zJEpxeYehdBdOGvVdUbFnh817voHspw2Kv2KTmFlTdTyZ/iNyFNbvarl+Rf
-         HsfaS6DUldf7Ejz5yjCaNS/CVUAef2uwLGWXUtQLCKE97zTovEaOKKkvfnt5kNsbqL+L
-         36jg==
-X-Gm-Message-State: AAQBX9fMz84NSVBtrntlnIDv6GQGC1FMQwCgYUyqTVjd/tpv+YwqonUY
-        QYkt6WKAzjbA79rkVZx4zQrjXgKip0RtkQwpYig=
-X-Google-Smtp-Source: AKy350aNyOB/vHJr3ZI6DSGpT77uMZtfSraBg2oFr+/ZuhILprXg5NJXOx2VIOixJDxLp3hA5+Tt3RAzErpSoReWiDc=
-X-Received: by 2002:a17:90a:bf90:b0:22b:b375:ec3f with SMTP id
- d16-20020a17090abf9000b0022bb375ec3fmr20061334pjs.21.1681266791105; Tue, 11
- Apr 2023 19:33:11 -0700 (PDT)
+        with ESMTP id S229522AbjDLDUB (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 11 Apr 2023 23:20:01 -0400
+Received: from 66-220-144-178.mail-mxout.facebook.com (66-220-144-178.mail-mxout.facebook.com [66.220.144.178])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 6C91710F8
+        for <linux-doc@vger.kernel.org>; Tue, 11 Apr 2023 20:20:00 -0700 (PDT)
+Received: by devbig1114.prn1.facebook.com (Postfix, from userid 425415)
+        id 95A5332C5B06; Tue, 11 Apr 2023 20:17:03 -0700 (PDT)
+From:   Stefan Roesch <shr@devkernel.io>
+To:     kernel-team@fb.com
+Cc:     shr@devkernel.io, linux-mm@kvack.org, riel@surriel.com,
+        mhocko@suse.com, david@redhat.com, linux-kselftest@vger.kernel.org,
+        linux-doc@vger.kernel.org, akpm@linux-foundation.org,
+        hannes@cmpxchg.org, willy@infradead.org
+Subject: [PATCH v6 0/3] mm: process/cgroup ksm support
+Date:   Tue, 11 Apr 2023 20:16:45 -0700
+Message-Id: <20230412031648.2206875-1-shr@devkernel.io>
+X-Mailer: git-send-email 2.31.1
 MIME-Version: 1.0
-Sender: mrsamina.kadi46@gmail.com
-Received: by 2002:a05:7300:2d2a:b0:b2:ba4:48cb with HTTP; Tue, 11 Apr 2023
- 19:33:10 -0700 (PDT)
-From:   "Mrs. Bill Chantal Govo Desmond" <mrsbillchantal.govo@gmail.com>
-Date:   Tue, 11 Apr 2023 19:33:10 -0700
-X-Google-Sender-Auth: ZkyNSIdrfGr_PRdz4P6-VIdT-1c
-Message-ID: <CADuGaS_3j-=pY3CX9fq=Dszp+d+Pqwi0H51Cr1w=CwRrpqDD=A@mail.gmail.com>
-Subject: Hello Good Day,
-To:     undisclosed-recipients:;
-Content-Type: text/plain; charset="UTF-8"
-X-Spam-Status: No, score=1.3 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_ENVFROM_END_DIGIT,
-        FREEMAIL_FROM,LOTS_OF_MONEY,RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,SPF_PASS,
-        T_HK_NAME_FM_MR_MRS,UNDISC_MONEY,URIBL_BLOCKED autolearn=no
-        autolearn_force=no version=3.4.6
-X-Spam-Level: *
+Content-Transfer-Encoding: quoted-printable
+X-Spam-Status: No, score=-0.1 required=5.0 tests=BAYES_00,RDNS_DYNAMIC,
+        SPF_HELO_PASS,SPF_NEUTRAL,TVD_RCVD_IP autolearn=no autolearn_force=no
+        version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Hello Good Day, you have been compensated with the sum of 3.6 million
-U.s dollars in this united nation
+So far KSM can only be enabled by calling madvise for memory regions. To
+be able to use KSM for more workloads, KSM needs to have the ability to b=
+e
+enabled / disabled at the process / cgroup level.
 
-The payment will be issue into atm visa card and send to
-You from the Santander bank of Spain.
+Use case 1:
+The madvise call is not available in the programming language. An example=
+ for
+this are programs with forked workloads using a garbage collected languag=
+e without
+pointers. In such a language madvise cannot be made available.
 
-We need your address and your whatsaap number.My email.ID
-(mrsbillchantal.govo@gmail.com)
+In addition the addresses of objects get moved around as they are garbage
+collected. KSM sharing needs to be enabled "from the outside" for these t=
+ype of
+workloads.
+
+Use case 2:
+The same interpreter can also be used for workloads where KSM brings no
+benefit or even has overhead. We'd like to be able to enable KSM on a wor=
+kload
+by workload basis.
+
+Use case 3:
+With the madvise call sharing opportunities are only enabled for the curr=
+ent
+process: it is a workload-local decision. A considerable number of sharin=
+g
+opportunities may exist across multiple workloads or jobs (if they are pa=
+rt
+of the same security domain). Only a higler level entity like a job sched=
+uler
+or container can know for certain if its running one or more instances of=
+ a
+job. That job scheduler however doesn't have the necessary internal workl=
+oad
+knowledge to make targeted madvise calls.
+
+Security concerns:
+In previous discussions security concerns have been brought up. The probl=
+em is
+that an individual workload does not have the knowledge about what else i=
+s
+running on a machine. Therefore it has to be very conservative in what me=
+mory
+areas can be shared or not. However, if the system is dedicated to runnin=
+g
+multiple jobs within the same security domain, its the job scheduler that=
+ has
+the knowledge that sharing can be safely enabled and is even desirable.
+
+Performance:
+Experiments with using UKSM have shown a capacity increase of around 20%.
 
 
-Thanks
-From
-Mrs. Bill Chantal Govo Desmond
+1. New options for prctl system command
+This patch series adds two new options to the prctl system call. The firs=
+t
+one allows to enable KSM at the process level and the second one to query=
+ the
+setting.
+
+The setting will be inherited by child processes.
+
+With the above setting, KSM can be enabled for the seed process of a cgro=
+up
+and all processes in the cgroup will inherit the setting.
+
+2. Changes to KSM processing
+When KSM is enabled at the process level, the KSM code will iterate over =
+all
+the VMA's and enable KSM for the eligible VMA's.
+
+When forking a process that has KSM enabled, the setting will be inherite=
+d by
+the new child process.
+
+3. Add general_profit metric
+The general_profit metric of KSM is specified in the documentation, but n=
+ot
+calculated. This adds the general profit metric to /sys/kernel/debug/mm/k=
+sm.
+
+4. Add more metrics to ksm_stat
+This adds the process profit metric to /proc/<pid>/ksm_stat.
+
+5. Add more tests to ksm_tests
+This adds an option to specify the merge type to the ksm_tests. This allo=
+ws to
+test madvise and prctl KSM. It also adds a new option to query if prctl K=
+SM has
+been enabled. It adds a fork test to verify that the KSM process setting =
+is
+inherited by client processes.
+
+
+Changes:
+- V6:
+  - Fix error condition in prctl call
+  - Remove ksm_merge_type function and ksm_stat output
+  - Some minor changes like whitespace and removing a cast.
+ =20
+- V5:
+  - When the prctl system call is invoked, mark all compatible VMA
+    as mergeable
+  - Instead of checcking during scan if VMA is mergeable, mark the VMA
+    mergeable when the VMA is created (in case the VMA is compatible)
+    - Remove earlier changes, they are no longer necessary
+  - Unset the flag MMF_VM_MERGE_ANY in gmap_mark_unmergeable().
+  - When unsetting the MMF_VM_MERGE_ANY flag with prctl, only unset the
+    flag
+  - Remove pages_volatile function (with the simplar general_profit calcu=
+lation,
+    the function is no longer needed)
+  - Use simpler formula for calculation of general_profit
+
+- V4:
+  - removing check in prctl for MMF_VM_MERGEABLE in PR_SET_MEMORY_MERGE
+    handling
+  - Checking for VM_MERGEABLE AND MMF_VM_MERGE_ANY to avoid chaning vm_fl=
+ags
+    - This requires also checking that the vma is compatible. The
+      compatibility check is provided by a new helper
+    - processes which have set MMF_VM_MERGE_ANY, only need to call the
+      helper and not madvise.
+  - removed unmerge_vmas function, this function is no longer necessary,
+    clearing the MMF_VM_MERGE_ANY bit is sufficient
+
+- V3:
+  - folded patch 1 - 6
+  - folded patch 7 - 14
+  - folded patch 15 - 19
+  - Expanded on the use cases in the cover letter
+  - Added a section on security concerns to the cover letter
+
+- V2:
+  - Added use cases to the cover letter
+  - Removed the tracing patch from the patch series and posted it as an
+    individual patch
+  - Refreshed repo
+
+
+Stefan Roesch (3):
+  mm: add new api to enable ksm per process
+  mm: add new KSM process and sysfs knobs
+  selftests/mm: add new selftests for KSM
+
+ Documentation/ABI/testing/sysfs-kernel-mm-ksm |   8 +
+ Documentation/admin-guide/mm/ksm.rst          |   5 +-
+ arch/s390/mm/gmap.c                           |   1 +
+ fs/proc/base.c                                |   3 +
+ include/linux/ksm.h                           |  27 +-
+ include/linux/sched/coredump.h                |   1 +
+ include/uapi/linux/prctl.h                    |   2 +
+ kernel/fork.c                                 |   1 +
+ kernel/sys.c                                  |  23 ++
+ mm/ksm.c                                      | 132 +++++++--
+ mm/mmap.c                                     |   7 +
+ tools/include/uapi/linux/prctl.h              |   2 +
+ tools/testing/selftests/mm/Makefile           |   2 +-
+ tools/testing/selftests/mm/ksm_tests.c        | 254 +++++++++++++++---
+ 14 files changed, 400 insertions(+), 68 deletions(-)
+
+--=20
+2.31.1
+
