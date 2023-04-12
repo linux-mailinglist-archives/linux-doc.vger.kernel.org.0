@@ -2,82 +2,76 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 5DA166DF7CB
-	for <lists+linux-doc@lfdr.de>; Wed, 12 Apr 2023 15:56:10 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id E6A186DF802
+	for <lists+linux-doc@lfdr.de>; Wed, 12 Apr 2023 16:07:49 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S229635AbjDLN4J (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 12 Apr 2023 09:56:09 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:57866 "EHLO
+        id S229663AbjDLOHs (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 12 Apr 2023 10:07:48 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:38738 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S230285AbjDLN4I (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Wed, 12 Apr 2023 09:56:08 -0400
-Received: from mail-yw1-x112f.google.com (mail-yw1-x112f.google.com [IPv6:2607:f8b0:4864:20::112f])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id B94197D9E;
-        Wed, 12 Apr 2023 06:55:50 -0700 (PDT)
-Received: by mail-yw1-x112f.google.com with SMTP id 00721157ae682-54c17fa9ae8so319591937b3.5;
-        Wed, 12 Apr 2023 06:55:50 -0700 (PDT)
+        with ESMTP id S231251AbjDLOHq (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Wed, 12 Apr 2023 10:07:46 -0400
+Received: from mail-pl1-x636.google.com (mail-pl1-x636.google.com [IPv6:2607:f8b0:4864:20::636])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id B18C09033
+        for <linux-doc@vger.kernel.org>; Wed, 12 Apr 2023 07:07:20 -0700 (PDT)
+Received: by mail-pl1-x636.google.com with SMTP id w11so11514758plp.13
+        for <linux-doc@vger.kernel.org>; Wed, 12 Apr 2023 07:07:20 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20221208; t=1681307750; x=1683899750;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=933rqrJ5JW6xLLolSy8p/l987jO0ZQnx8xOK/Rz6sro=;
-        b=nx7U8oZhzlF0AOp6y1Eods+RekUaFqPLuIZmfj/VtfuMR1usD9ckyk8fsIKTQctlRR
-         yizqSV0S6KBUSdxEIf6Km8flho3enwQTh83nUMtN2Co52+Rsw3kiBqZxabqKqJSXU6oz
-         riLKjD89F4/n8x5wIdmJBGzYbkIUnNCOXRKVVebc4HaCW6wvc+U4v4T24AAIXaVZCFHG
-         9MYCIyPIgVYnzHEM4WuQ1kGgEjnZTQf3kyh9IQS25FfjhPyW2ThvSCmFpl/ROZMpUzb/
-         5Vp+nfljNeilxTxvEY4hNfelFFpMmxFEKSDR0u7Jq/AOY0RGvDe3Gn9yVDdDWbwPyst8
-         0/Vg==
+        d=bytedance.com; s=google; t=1681308440;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=ezr0Pa2G5CPCejRpgTKWLJ2fU/GGW7Xz3oIM+nnVa98=;
+        b=RUfxf6kD6IVsna+AcdeGpsOuyFBveZCvq4fj5TUDZEDOJMqYKtchhmzLkACtgRjcoG
+         c0nrY2rl7Jpm6mc9ZXCH7XpVnXkhQfAfisiZ6Q37g31KcI5eAclqRq0msdxE6vgM/P45
+         cdt6u3/iHu/QmUG9QPGq5X0oVet0CBytzJF0SMywaFud+I6Sao1MeFWBRHd6r/QlYysH
+         Ex3SZ1TNSlbeb110UJuhky/8YxGowIYvNxfyWc/iS6bkGkXoYmjKiFCgC/roxlytfFFL
+         PAzLy2MWPeGu1FWblrPfZGPiuqCrXQXxMl+jZGrZL0xQnHVt1ezlNytEn6Pb99sKTvBF
+         tLsw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112; t=1681307750; x=1683899750;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=933rqrJ5JW6xLLolSy8p/l987jO0ZQnx8xOK/Rz6sro=;
-        b=nThmfCEMVlppficouA5LGUmqa/O0PisdqfdaF8Au02yhDK+4DNOwNxc7XDLaDFi43I
-         MdG4r/RUG8UVzJ6cto0CGKaLL61mBtEY+EN1c1CrjoineZQVUcbR8DQJlSmh/YIudE4t
-         26t8pVGXza6UD8DiL56w9ZShM0cY7xMrVu/KhhRhsm+iVVOU3lgNQlDJ5r2wgeu3+DW4
-         idBTJ1b1JphwNaMFXo223gsApFnKwhU6oDZnjJw/AM3CfmUwo+bYvy0VIU3dNQx/6jHK
-         qhVu0A0r1rKoqmamahtDvoyCPCsb6+PvDtczcpL0dDeAdwZ/QDYwPB0RAUa7lK/KgaSb
-         OvXg==
-X-Gm-Message-State: AAQBX9eka45ZVuGSIFFzMwLLylWrLjBbGoXjJyc0OO1Uv0o7nDFWr0+7
-        KnSfra2FnPMhCaeh3x2lS3DuQl+qNsauRvxb3r8g1Y4jUHJMeJLs
-X-Google-Smtp-Source: AKy350bAa0ZsGfxqwG6PFWeyb/56jhdj0mZnmhX4MEHqX0MJdVmwadEJGZF9WZDwBUFma1xppMcjKNdhQaRPMq0BVt8=
-X-Received: by 2002:a81:ac5c:0:b0:54f:b2a3:8441 with SMTP id
- z28-20020a81ac5c000000b0054fb2a38441mr518540ywj.10.1681307749851; Wed, 12 Apr
- 2023 06:55:49 -0700 (PDT)
-MIME-Version: 1.0
-References: <20230406130205.49996-1-kal.conley@dectris.com>
- <20230406130205.49996-2-kal.conley@dectris.com> <87sfdckgaa.fsf@toke.dk>
- <ZDBEng1KEEG5lOA6@boxer> <CAHApi-nuD7iSY7fGPeMYiNf8YX3dG27tJx1=n8b_i=ZQdZGZbw@mail.gmail.com>
- <875ya12phx.fsf@toke.dk>
-In-Reply-To: <875ya12phx.fsf@toke.dk>
-From:   Magnus Karlsson <magnus.karlsson@gmail.com>
-Date:   Wed, 12 Apr 2023 15:55:38 +0200
-Message-ID: <CAJ8uoz0arggpZdf9KPe5+pJbq_nVJUmvVryPHuwAsqswGs1LZw@mail.gmail.com>
-Subject: Re: [PATCH bpf-next v3 1/3] xsk: Support UMEM chunk_size > PAGE_SIZE
-To:     =?UTF-8?B?VG9rZSBIw7hpbGFuZC1Kw7hyZ2Vuc2Vu?= <toke@redhat.com>
-Cc:     Kal Cutter Conley <kal.conley@dectris.com>,
-        Maciej Fijalkowski <maciej.fijalkowski@intel.com>,
-        =?UTF-8?B?QmrDtnJuIFTDtnBlbA==?= <bjorn@kernel.org>,
-        Magnus Karlsson <magnus.karlsson@intel.com>,
-        Jonathan Lemon <jonathan.lemon@gmail.com>,
-        "David S. Miller" <davem@davemloft.net>,
-        Eric Dumazet <edumazet@google.com>,
-        Jakub Kicinski <kuba@kernel.org>,
-        Paolo Abeni <pabeni@redhat.com>,
+        d=1e100.net; s=20210112; t=1681308440;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=ezr0Pa2G5CPCejRpgTKWLJ2fU/GGW7Xz3oIM+nnVa98=;
+        b=2pLU9LkhHGhyrRttpY2gYTQe+J2hfeorrHEZ4iuw43a2JoeggdRvUDO1ynwtemff+2
+         A3sIt9qTXrtWziDCBLHAgRsloBozrAexNK7laeaDZHIGcu7k2L4ztk9quhfbRrlxS58z
+         RSqDbwTHv9kJfQPRrMGTpGGE+TEDT+IfomHCvuSgHBtoVm8Q05aGPuvvIthLqjulBfuq
+         SjxiJyD8F65TvuTmg5r27VR9fDbMt1eN/klIJQM3ul0HinTYABf5jvFTW31U1EcVnRkN
+         3bE+BfG6gcg8Q9wuNqGa45m4k/VTx8FEJFYdFJNAlfW0bR5SLx4TJCbkps6gnX3xipop
+         R88Q==
+X-Gm-Message-State: AAQBX9cJUpKOZxc6tv9VVqwiAKhGAcBWHdKyaSfcmpH5yRNBz/5nSMzb
+        RMJ+EdtA0sIgIMdzLlJ0xRA3PhU9CylQaPl00V9EEi/c
+X-Google-Smtp-Source: AKy350aoVZivfdOILzQNFOY/Kl0qh9fiQnQGPIoXOeaWxhUQeXzRzX7ejWwCul5FRJunZAWmCLAiSg==
+X-Received: by 2002:a05:6a20:7a90:b0:da:f525:e629 with SMTP id u16-20020a056a207a9000b000daf525e629mr19924239pzh.53.1681308439909;
+        Wed, 12 Apr 2023 07:07:19 -0700 (PDT)
+Received: from C02FT5A6MD6R.lan ([111.201.131.102])
+        by smtp.gmail.com with ESMTPSA id f9-20020a63de09000000b00502e6bfedc0sm10473613pgg.0.2023.04.12.07.07.15
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 12 Apr 2023 07:07:19 -0700 (PDT)
+From:   Gang Li <ligang.bdlg@bytedance.com>
+To:     John Hubbard <jhubbard@nvidia.com>,
         Jonathan Corbet <corbet@lwn.net>,
-        Alexei Starovoitov <ast@kernel.org>,
-        Daniel Borkmann <daniel@iogearbox.net>,
-        Jesper Dangaard Brouer <hawk@kernel.org>,
-        John Fastabend <john.fastabend@gmail.com>,
-        netdev@vger.kernel.org, bpf@vger.kernel.org,
-        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+        Ingo Molnar <mingo@redhat.com>,
+        Peter Zijlstra <peterz@infradead.org>,
+        Juri Lelli <juri.lelli@redhat.com>,
+        Vincent Guittot <vincent.guittot@linaro.org>,
+        Dietmar Eggemann <dietmar.eggemann@arm.com>,
+        Steven Rostedt <rostedt@goodmis.org>,
+        Ben Segall <bsegall@google.com>, Mel Gorman <mgorman@suse.de>,
+        Daniel Bristot de Oliveira <bristot@redhat.com>,
+        Valentin Schneider <vschneid@redhat.com>
+Cc:     linux-api@vger.kernel.org, linux-kernel@vger.kernel.org,
+        linux-fsdevel@vger.kernel.org, linux-doc@vger.kernel.org,
+        Gang Li <ligang.bdlg@bytedance.com>
+Subject: [PATCH v6 0/2] sched/numa: add per-process numa_balancing
+Date:   Wed, 12 Apr 2023 22:06:58 +0800
+Message-Id: <20230412140701.58337-1-ligang.bdlg@bytedance.com>
+X-Mailer: git-send-email 2.32.0
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 X-Spam-Status: No, score=-2.1 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_FROM,
-        RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,SPF_PASS autolearn=ham
+        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_NONE,
+        SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED autolearn=unavailable
         autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
@@ -85,86 +79,78 @@ Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Wed, 12 Apr 2023 at 15:40, Toke H=C3=B8iland-J=C3=B8rgensen <toke@redhat=
-.com> wrote:
->
-> Kal Cutter Conley <kal.conley@dectris.com> writes:
->
-> >> > > Add core AF_XDP support for chunk sizes larger than PAGE_SIZE. Thi=
-s
-> >> > > enables sending/receiving jumbo ethernet frames up to the theoreti=
-cal
-> >> > > maxiumum of 64 KiB. For chunk sizes > PAGE_SIZE, the UMEM is requi=
-red
-> >> > > to consist of HugeTLB VMAs (and be hugepage aligned). Initially, o=
-nly
-> >> > > SKB mode is usable pending future driver work.
-> >> >
-> >> > Hmm, interesting. So how does this interact with XDP multibuf?
-> >>
-> >> To me it currently does not interact with mbuf in any way as it is ena=
-bled
-> >> only for skb mode which linearizes the skb from what i see.
-> >>
-> >> I'd like to hear more about Kal's use case - Kal do you use AF_XDP in =
-SKB
-> >> mode on your side?
-> >
-> > Our use-case is to receive jumbo Ethernet frames up to 9000 bytes with
-> > AF_XDP in zero-copy mode. This patchset is a step in this direction.
-> > At the very least, it lets you test out the feature in SKB mode
-> > pending future driver support. Currently, XDP multi-buffer does not
-> > support AF_XDP at all. It could support it in theory, but I think it
-> > would need some UAPI design work and a bit of implementation work.
-> >
-> > Also, I think that the approach taken in this patchset has some
-> > advantages over XDP multi-buffer:
-> >     (1) It should be possible to achieve higher performance
-> >         (a) because the packet data is kept together
-> >         (b) because you need to acquire and validate less descriptors
-> > and touch the queue pointers less often.
-> >     (2) It is a nicer user-space API.
-> >         (a) Since the packet data is all available in one linear
-> > buffer. This may even be a requirement to avoid an extra copy if the
-> > data must be handed off contiguously to other code.
-> >
-> > The disadvantage of this patchset is requiring the user to allocate
-> > HugeTLB pages which is an extra complication.
-> >
-> > I am not sure if this patchset would need to interact with XDP
-> > multi-buffer at all directly. Does anyone have anything to add here?
->
-> Well, I'm mostly concerned with having two different operation and
-> configuration modes for the same thing. We'll probably need to support
-> multibuf for AF_XDP anyway for the non-ZC path, which means we'll need
-> to create a UAPI for that in any case. And having two APIs is just going
-> to be more complexity to handle at both the documentation and
-> maintenance level.
+# Introduce
+Add PR_NUMA_BALANCING in prctl.
 
-One does not replace the other. We need them both, unfortunately.
-Multi-buff is great for e.g., stitching together different headers
-with the same data. Point to different buffers for the header in each
-packet but the same piece of data in all of them. This will never be
-solved with Kal's approach. We just need multi-buffer support for
-this. BTW, we are close to posting multi-buff support for AF_XDP. Just
-hang in there a little while longer while the last glitches are fixed.
-We have to stage it in two patch sets as it will be too long
-otherwise. First one will only contain improvements to the xsk
-selftests framework so that multi-buffer tests can be supported. The
-second one will be the core code and the actual multi-buffer tests. As
-for what Kal's patches are good for, please see below.
+A large number of page faults will cause performance loss when numa
+balancing is performing. Thus those processes which care about worst-case
+performance need numa balancing disabled. Others, on the contrary, allow a
+temporary performance loss in exchange for higher average performance, so
+enable numa balancing is better for them.
 
-> It *might* be worth it to do this if the performance benefit is really
-> compelling, but, well, you'd need to implement both and compare directly
-> to know that for sure :)
+Numa balancing can only be controlled globally by
+/proc/sys/kernel/numa_balancing. Due to the above case, we want to
+disable/enable numa_balancing per-process instead.
 
-The performance benefit is compelling. As I wrote in a mail to a post
-by Kal, there are users out there that state that this feature (for
-zero-copy mode nota bene) is a must for them to be able to use AF_XDP
-instead of DPDK style user-mode drivers. They have really tough
-latency requirements.
+Set per-process numa balancing:
+	prctl(PR_NUMA_BALANCING, PR_SET_NUMA_BALANCING_DISABLE); //disable
+	prctl(PR_NUMA_BALANCING, PR_SET_NUMA_BALANCING_ENABLE);  //enable
+	prctl(PR_NUMA_BALANCING, PR_SET_NUMA_BALANCING_DEFAULT); //follow global
+Get numa_balancing state:
+	prctl(PR_NUMA_BALANCING, PR_GET_NUMA_BALANCING, &ret);
+	cat /proc/<pid>/status | grep NumaB_mode
 
+# Unixbench
+This is overhead of this patch, not performance improvement.
++-------------------+----------+
+|       NAME        | OVERHEAD |
++-------------------+----------+
+| Pipe_Throughput   |  0.98%   |
+| Context_Switching | -0.96%   |
+| Process_Creation  |  1.18%   |
++-------------------+----------+
 
+# Changes
+Changes in v6:
+- rebase on top of next-20230411
+- run Unixbench on physical machine
+- acked by John Hubbard <jhubbard@nvidia.com>
 
-> -Toke
->
+Changes in v5:
+- replace numab_enabled with numa_balancing_mode (Peter Zijlstra)
+- make numa_balancing_enabled and numa_balancing_mode inline (Peter Zijlstra)
+- use static_branch_inc/dec instead of static_branch_enable/disable (Peter Zijlstra)
+- delete CONFIG_NUMA_BALANCING in task_tick_fair (Peter Zijlstra)
+- reword commit, use imperative mood (Bagas Sanjaya)
+- Unixbench overhead result
+
+Changes in v4:
+- code clean: add wrapper function `numa_balancing_enabled`
+
+Changes in v3:
+- Fix compile error.
+
+Changes in v2:
+- Now PR_NUMA_BALANCING support three states: enabled, disabled, default.
+  enabled and disabled will ignore global setting, and default will follow
+  global setting.
+
+Gang Li (2):
+  sched/numa: use static_branch_inc/dec for sched_numa_balancing
+  sched/numa: add per-process numa_balancing
+
+ Documentation/filesystems/proc.rst   |  2 ++
+ fs/proc/task_mmu.c                   | 20 ++++++++++++
+ include/linux/mm_types.h             |  3 ++
+ include/linux/sched/numa_balancing.h | 45 ++++++++++++++++++++++++++
+ include/uapi/linux/prctl.h           |  8 +++++
+ kernel/fork.c                        |  4 +++
+ kernel/sched/core.c                  | 26 +++++++--------
+ kernel/sched/fair.c                  |  9 +++---
+ kernel/sys.c                         | 47 ++++++++++++++++++++++++++++
+ mm/mprotect.c                        |  6 ++--
+ 10 files changed, 151 insertions(+), 19 deletions(-)
+
+-- 
+2.20.1
+
