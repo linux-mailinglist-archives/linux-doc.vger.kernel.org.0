@@ -2,343 +2,407 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id BCB4A6E49D0
-	for <lists+linux-doc@lfdr.de>; Mon, 17 Apr 2023 15:23:41 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 455996E4A2E
+	for <lists+linux-doc@lfdr.de>; Mon, 17 Apr 2023 15:43:08 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S230043AbjDQNXj (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 17 Apr 2023 09:23:39 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:51482 "EHLO
+        id S229688AbjDQNnG (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 17 Apr 2023 09:43:06 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:41570 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S229542AbjDQNXi (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Mon, 17 Apr 2023 09:23:38 -0400
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 71F1830DC;
-        Mon, 17 Apr 2023 06:23:36 -0700 (PDT)
-Received: from pps.filterd (m0279863.ppops.net [127.0.0.1])
-        by mx0a-0031df01.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id 33H8skMm024804;
-        Mon, 17 Apr 2023 13:23:11 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=quicinc.com; h=message-id : date :
- mime-version : subject : to : cc : references : from : in-reply-to :
- content-type : content-transfer-encoding; s=qcppdkim1;
- bh=XwpxomG3rWLUbB1XoGemSNYyJ/Toe7thPIH7pe9chAk=;
- b=S8FqyamOHb23BHlkjwJs5p3YHjKG7n+qkDhbcxKA5hVZ/bzWzAM46ueheZg2eU7pljTT
- 2AYLpWanpCzCRUkisn5h0bTZOvgFppSboeHIK2K8Bbn/XyVUdmDMbgt6LXOcLmgLbqUS
- O6e/pP1vZp+lbKlq0A89ujQ0rQkP3TDZBsIIg425x/dGpcGXnvPfo+MXLbrmQzz0bWw+
- vPnCj6iUf+0nMfwCjYixXuV5O9BASf2o0yBYYBszXlJFi52fmsFkmfm/OkT/uJRSALWk
- UCccXUiSAMdJRnIvheMmZ916Qao3WL+PT6AxcwpPJ6dTQ+n7e49WM9Z1OGB4fuY47re1 6w== 
-Received: from nasanppmta03.qualcomm.com (i-global254.qualcomm.com [199.106.103.254])
-        by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 3pymneuk0j-1
-        (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
-        Mon, 17 Apr 2023 13:23:11 +0000
-Received: from nasanex01c.na.qualcomm.com (nasanex01c.na.qualcomm.com [10.45.79.139])
-        by NASANPPMTA03.qualcomm.com (8.17.1.5/8.17.1.5) with ESMTPS id 33HDNA82020535
-        (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
-        Mon, 17 Apr 2023 13:23:10 GMT
-Received: from [10.216.21.23] (10.80.80.8) by nasanex01c.na.qualcomm.com
- (10.45.79.139) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.986.42; Mon, 17 Apr
- 2023 06:23:04 -0700
-Message-ID: <a33e2d43-d6a6-f830-8421-ec68baf8159d@quicinc.com>
-Date:   Mon, 17 Apr 2023 18:52:17 +0530
+        with ESMTP id S230047AbjDQNnF (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Mon, 17 Apr 2023 09:43:05 -0400
+Received: from mail-oi1-x236.google.com (mail-oi1-x236.google.com [IPv6:2607:f8b0:4864:20::236])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 114B36EB7;
+        Mon, 17 Apr 2023 06:43:01 -0700 (PDT)
+Received: by mail-oi1-x236.google.com with SMTP id x22so5150402oiv.10;
+        Mon, 17 Apr 2023 06:43:00 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20221208; t=1681738980; x=1684330980;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=n1AboqRVWhxplnRX9xmGZ+3x7052CTP+9TiYfyhoHXg=;
+        b=ohPPr+vPNReALlZf3AM1ln/5JqsYayv5WB/dJHTDy7h8gZOm2JiiHhkHExsuy0K/vb
+         QxcTvrYjHVQLdh2MTccx5TflioxpArtJZq6eH7/ntDby2mtDq3bAfi238Z2t6ZfYyU4z
+         FSa52wbkSms2TfgZ76cHxXCTk1FlCJz6VFqvlE5BdEMY4rB2cRO/kVKn8Jf1ZRDJmjmp
+         ORF949qIofG9JH/5nMpP5yt3qEuSU6SOnochhwmvcyIlfq2/rvD82bKywSe+wGjBmr3U
+         CNlFpX32BQ0AypmST7uzdIbp356z1fbUKLssI6bMhpFWxPpdSy5xIJHvvNgiP5vJEb7K
+         Zl+g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20221208; t=1681738980; x=1684330980;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=n1AboqRVWhxplnRX9xmGZ+3x7052CTP+9TiYfyhoHXg=;
+        b=H3QB30leNJLzK1c1lH1qb0eBRO+VBLBcFL9WuXsSYyAHYvbDD+soPpvBJ2GLGn870G
+         p52B7uvdKpmiw5u4ypiA+ylCkR+GIe4ueT+j8cBbeCSpukKmY54HYD4MMWRO8+3JyF85
+         8PaMv/oeMoSTvAcZ5qJEyHaob/c14Q5EBeHPdHb5VXH/4STvpeSuqHUQYs11IJ5p760p
+         mwTAsxeQSwpDZSqruPHYhkUKGD9NTbg6PI14jxxGfOf7oy7K82rKzsUjZuob+3lkErHr
+         hgU4pzxw/++BQyplBnXlYzaWkdnf5yLIKlc6LIMWcyDyayVxPBzv1a0L2bYCNlaIPu2u
+         r/Jw==
+X-Gm-Message-State: AAQBX9evyApw7iULh9L8L5hGOoMIf9SYdeJ/AcyET+MvAH/a1iOJrBdT
+        UWPaQ/W2INt1bf0tgf8nRSGAvuPjIaksfNCiHGY=
+X-Google-Smtp-Source: AKy350b7dkndI2KxsBcOxqmecazSD1tapB/+6WpxXKRQdaHEuyziGzteX4PkhjMQ/BH8T7AjZ9jIVDvrBkKIzR0O9jk=
+X-Received: by 2002:aca:de87:0:b0:38e:30:121b with SMTP id v129-20020acade87000000b0038e0030121bmr1054181oig.5.1681738979969;
+ Mon, 17 Apr 2023 06:42:59 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
- Thunderbird/102.8.0
-Subject: Re: [PATCH v2 2/6] remoteproc: qcom: Move minidump specific data to
- qcom_minidump.h
-To:     Srinivas Kandagatla <srinivas.kandagatla@linaro.org>,
-        <agross@kernel.org>, <andersson@kernel.org>,
-        <konrad.dybcio@linaro.org>, <corbet@lwn.net>,
-        <keescook@chromium.org>, <tony.luck@intel.com>,
-        <gpiccoli@igalia.com>, <catalin.marinas@arm.com>, <will@kernel.org>
-CC:     <linux-arm-msm@vger.kernel.org>,
-        <linux-remoteproc@vger.kernel.org>, <linux-kernel@vger.kernel.org>,
-        <linux-hardening@vger.kernel.org>,
-        <linux-arm-kernel@lists.infradead.org>, <linux-doc@vger.kernel.org>
-References: <1679491817-2498-1-git-send-email-quic_mojha@quicinc.com>
- <1679491817-2498-3-git-send-email-quic_mojha@quicinc.com>
- <e74fb30d-4268-86b1-cdf7-ad3d104c6c40@linaro.org>
- <3df1ec27-7e4d-1f84-ff20-94e8ea91c86f@quicinc.com>
- <040a1992-baff-c3e4-69a9-ff3110de62e7@linaro.org>
-Content-Language: en-US
-From:   Mukesh Ojha <quic_mojha@quicinc.com>
-In-Reply-To: <040a1992-baff-c3e4-69a9-ff3110de62e7@linaro.org>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 8bit
-X-Originating-IP: [10.80.80.8]
-X-ClientProxiedBy: nasanex01a.na.qualcomm.com (10.52.223.231) To
- nasanex01c.na.qualcomm.com (10.45.79.139)
-X-QCInternal: smtphost
-X-Proofpoint-Virus-Version: vendor=nai engine=6200 definitions=5800 signatures=585085
-X-Proofpoint-ORIG-GUID: Btf2zd7RS_BmGpJ7-xz9tMB6k9gpt69W
-X-Proofpoint-GUID: Btf2zd7RS_BmGpJ7-xz9tMB6k9gpt69W
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.254,Aquarius:18.0.942,Hydra:6.0.573,FMLib:17.11.170.22
- definitions=2023-04-17_08,2023-04-17_01,2023-02-09_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 mlxlogscore=999 phishscore=0
- lowpriorityscore=0 clxscore=1015 mlxscore=0 spamscore=0 impostorscore=0
- malwarescore=0 bulkscore=0 priorityscore=1501 adultscore=0 suspectscore=0
- classifier=spam adjust=0 reason=mlx scancount=1 engine=8.12.0-2303200000
- definitions=main-2304170120
-X-Spam-Status: No, score=-5.1 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,NICE_REPLY_A,RCVD_IN_DNSWL_LOW,
-        SPF_HELO_NONE,SPF_PASS,T_SCC_BODY_TEXT_LINE autolearn=ham
-        autolearn_force=no version=3.4.6
+References: <CAF6AEGsZsMx+Vy+4UQSx3X7w_QNvvjLqWxx=PnCLAOC9f-X2CQ@mail.gmail.com>
+ <ZDb1phnddSne79iN@phenom.ffwll.local> <CAF6AEGvBeDVM12ac0j_PKSdcY83hNDhyrQs9-=h=dx_7AoMXLw@mail.gmail.com>
+ <ZDcEGoSPGr/oRLas@phenom.ffwll.local> <c82fd8fa-9f4b-f62f-83be-25853f9ecf5e@linux.intel.com>
+ <ZDgDQ1PqtXwu8zqA@phenom.ffwll.local> <ad8f2793-c1b3-a505-e93f-6cc52fded86d@linux.intel.com>
+ <ZDhgcqiOtJi6//TS@phenom.ffwll.local> <8893ad56-8807-eb69-2185-b338725f0b18@linux.intel.com>
+ <CAF6AEGtaiKMWsGxTSUHM7_s_Wqiw3=ta+g=arUxknJ0dxbYvFQ@mail.gmail.com>
+ <ZDuoWC7TlvNa1OOm@phenom.ffwll.local> <09c8d794-bb64-f7ba-f854-f14ac30600a6@linux.intel.com>
+In-Reply-To: <09c8d794-bb64-f7ba-f854-f14ac30600a6@linux.intel.com>
+From:   Rob Clark <robdclark@gmail.com>
+Date:   Mon, 17 Apr 2023 06:42:48 -0700
+Message-ID: <CAF6AEGsvCBoS+uKyBESk_ZHm-H_nyMbVi0K4ND1Cfbw97QcYfQ@mail.gmail.com>
+Subject: Re: [PATCH v3 6/7] drm: Add fdinfo memory stats
+To:     Tvrtko Ursulin <tvrtko.ursulin@linux.intel.com>
+Cc:     Rob Clark <robdclark@chromium.org>,
+        Jonathan Corbet <corbet@lwn.net>,
+        linux-arm-msm@vger.kernel.org,
+        "open list:DOCUMENTATION" <linux-doc@vger.kernel.org>,
+        Emil Velikov <emil.l.velikov@gmail.com>,
+        Christopher Healy <healych@amazon.com>,
+        dri-devel@lists.freedesktop.org,
+        open list <linux-kernel@vger.kernel.org>,
+        Boris Brezillon <boris.brezillon@collabora.com>,
+        Thomas Zimmermann <tzimmermann@suse.de>,
+        freedreno@lists.freedesktop.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Spam-Status: No, score=-2.1 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_FROM,
+        RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,SPF_PASS,T_SCC_BODY_TEXT_LINE
+        autolearn=ham autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
+On Mon, Apr 17, 2023 at 4:10=E2=80=AFAM Tvrtko Ursulin
+<tvrtko.ursulin@linux.intel.com> wrote:
+>
+>
+> On 16/04/2023 08:48, Daniel Vetter wrote:
+> > On Fri, Apr 14, 2023 at 06:40:27AM -0700, Rob Clark wrote:
+> >> On Fri, Apr 14, 2023 at 1:57=E2=80=AFAM Tvrtko Ursulin
+> >> <tvrtko.ursulin@linux.intel.com> wrote:
+> >>>
+> >>>
+> >>> On 13/04/2023 21:05, Daniel Vetter wrote:
+> >>>> On Thu, Apr 13, 2023 at 05:40:21PM +0100, Tvrtko Ursulin wrote:
+> >>>>>
+> >>>>> On 13/04/2023 14:27, Daniel Vetter wrote:
+> >>>>>> On Thu, Apr 13, 2023 at 01:58:34PM +0100, Tvrtko Ursulin wrote:
+> >>>>>>>
+> >>>>>>> On 12/04/2023 20:18, Daniel Vetter wrote:
+> >>>>>>>> On Wed, Apr 12, 2023 at 11:42:07AM -0700, Rob Clark wrote:
+> >>>>>>>>> On Wed, Apr 12, 2023 at 11:17=E2=80=AFAM Daniel Vetter <daniel@=
+ffwll.ch> wrote:
+> >>>>>>>>>>
+> >>>>>>>>>> On Wed, Apr 12, 2023 at 10:59:54AM -0700, Rob Clark wrote:
+> >>>>>>>>>>> On Wed, Apr 12, 2023 at 7:42=E2=80=AFAM Tvrtko Ursulin
+> >>>>>>>>>>> <tvrtko.ursulin@linux.intel.com> wrote:
+> >>>>>>>>>>>>
+> >>>>>>>>>>>>
+> >>>>>>>>>>>> On 11/04/2023 23:56, Rob Clark wrote:
+> >>>>>>>>>>>>> From: Rob Clark <robdclark@chromium.org>
+> >>>>>>>>>>>>>
+> >>>>>>>>>>>>> Add support to dump GEM stats to fdinfo.
+> >>>>>>>>>>>>>
+> >>>>>>>>>>>>> v2: Fix typos, change size units to match docs, use div_u64
+> >>>>>>>>>>>>> v3: Do it in core
+> >>>>>>>>>>>>>
+> >>>>>>>>>>>>> Signed-off-by: Rob Clark <robdclark@chromium.org>
+> >>>>>>>>>>>>> Reviewed-by: Emil Velikov <emil.l.velikov@gmail.com>
+> >>>>>>>>>>>>> ---
+> >>>>>>>>>>>>>       Documentation/gpu/drm-usage-stats.rst | 21 ++++++++
+> >>>>>>>>>>>>>       drivers/gpu/drm/drm_file.c            | 76 ++++++++++=
++++++++++++++++++
+> >>>>>>>>>>>>>       include/drm/drm_file.h                |  1 +
+> >>>>>>>>>>>>>       include/drm/drm_gem.h                 | 19 +++++++
+> >>>>>>>>>>>>>       4 files changed, 117 insertions(+)
+> >>>>>>>>>>>>>
+> >>>>>>>>>>>>> diff --git a/Documentation/gpu/drm-usage-stats.rst b/Docume=
+ntation/gpu/drm-usage-stats.rst
+> >>>>>>>>>>>>> index b46327356e80..b5e7802532ed 100644
+> >>>>>>>>>>>>> --- a/Documentation/gpu/drm-usage-stats.rst
+> >>>>>>>>>>>>> +++ b/Documentation/gpu/drm-usage-stats.rst
+> >>>>>>>>>>>>> @@ -105,6 +105,27 @@ object belong to this client, in the r=
+espective memory region.
+> >>>>>>>>>>>>>       Default unit shall be bytes with optional unit specif=
+iers of 'KiB' or 'MiB'
+> >>>>>>>>>>>>>       indicating kibi- or mebi-bytes.
+> >>>>>>>>>>>>>
+> >>>>>>>>>>>>> +- drm-shared-memory: <uint> [KiB|MiB]
+> >>>>>>>>>>>>> +
+> >>>>>>>>>>>>> +The total size of buffers that are shared with another fil=
+e (ie. have more
+> >>>>>>>>>>>>> +than a single handle).
+> >>>>>>>>>>>>> +
+> >>>>>>>>>>>>> +- drm-private-memory: <uint> [KiB|MiB]
+> >>>>>>>>>>>>> +
+> >>>>>>>>>>>>> +The total size of buffers that are not shared with another=
+ file.
+> >>>>>>>>>>>>> +
+> >>>>>>>>>>>>> +- drm-resident-memory: <uint> [KiB|MiB]
+> >>>>>>>>>>>>> +
+> >>>>>>>>>>>>> +The total size of buffers that are resident in system memo=
+ry.
+> >>>>>>>>>>>>
+> >>>>>>>>>>>> I think this naming maybe does not work best with the existi=
+ng
+> >>>>>>>>>>>> drm-memory-<region> keys.
+> >>>>>>>>>>>
+> >>>>>>>>>>> Actually, it was very deliberate not to conflict with the exi=
+sting
+> >>>>>>>>>>> drm-memory-<region> keys ;-)
+> >>>>>>>>>>>
+> >>>>>>>>>>> I wouldn't have preferred drm-memory-{active,resident,...} bu=
+t it
+> >>>>>>>>>>> could be mis-parsed by existing userspace so my hands were a =
+bit tied.
+> >>>>>>>>>>>
+> >>>>>>>>>>>> How about introduce the concept of a memory region from the =
+start and
+> >>>>>>>>>>>> use naming similar like we do for engines?
+> >>>>>>>>>>>>
+> >>>>>>>>>>>> drm-memory-$CATEGORY-$REGION: ...
+> >>>>>>>>>>>>
+> >>>>>>>>>>>> Then we document a bunch of categories and their semantics, =
+for instance:
+> >>>>>>>>>>>>
+> >>>>>>>>>>>> 'size' - All reachable objects
+> >>>>>>>>>>>> 'shared' - Subset of 'size' with handle_count > 1
+> >>>>>>>>>>>> 'resident' - Objects with backing store
+> >>>>>>>>>>>> 'active' - Objects in use, subset of resident
+> >>>>>>>>>>>> 'purgeable' - Or inactive? Subset of resident.
+> >>>>>>>>>>>>
+> >>>>>>>>>>>> We keep the same semantics as with process memory accounting=
+ (if I got
+> >>>>>>>>>>>> it right) which could be desirable for a simplified mental m=
+odel.
+> >>>>>>>>>>>>
+> >>>>>>>>>>>> (AMD needs to remind me of their 'drm-memory-...' keys seman=
+tics. If we
+> >>>>>>>>>>>> correctly captured this in the first round it should be equi=
+valent to
+> >>>>>>>>>>>> 'resident' above. In any case we can document no category is=
+ equal to
+> >>>>>>>>>>>> which category, and at most one of the two must be output.)
+> >>>>>>>>>>>>
+> >>>>>>>>>>>> Region names we at most partially standardize. Like we could=
+ say
+> >>>>>>>>>>>> 'system' is to be used where backing store is system RAM and=
+ others are
+> >>>>>>>>>>>> driver defined.
+> >>>>>>>>>>>>
+> >>>>>>>>>>>> Then discrete GPUs could emit N sets of key-values, one for =
+each memory
+> >>>>>>>>>>>> region they support.
+> >>>>>>>>>>>>
+> >>>>>>>>>>>> I think this all also works for objects which can be migrate=
+d between
+> >>>>>>>>>>>> memory regions. 'Size' accounts them against all regions whi=
+le for
+> >>>>>>>>>>>> 'resident' they only appear in the region of their current p=
+lacement, etc.
+> >>>>>>>>>>>
+> >>>>>>>>>>> I'm not too sure how to rectify different memory regions with=
+ this,
+> >>>>>>>>>>> since drm core doesn't really know about the driver's memory =
+regions.
+> >>>>>>>>>>> Perhaps we can go back to this being a helper and drivers wit=
+h vram
+> >>>>>>>>>>> just don't use the helper?  Or??
+> >>>>>>>>>>
+> >>>>>>>>>> I think if you flip it around to drm-$CATEGORY-memory{-$REGION=
+}: then it
+> >>>>>>>>>> all works out reasonably consistently?
+> >>>>>>>>>
+> >>>>>>>>> That is basically what we have now.  I could append -system to =
+each to
+> >>>>>>>>> make things easier to add vram/etc (from a uabi standpoint)..
+> >>>>>>>>
+> >>>>>>>> What you have isn't really -system, but everything. So doesn't r=
+eally make
+> >>>>>>>> sense to me to mark this -system, it's only really true for inte=
+grated (if
+> >>>>>>>> they don't have stolen or something like that).
+> >>>>>>>>
+> >>>>>>>> Also my comment was more in reply to Tvrtko's suggestion.
+> >>>>>>>
+> >>>>>>> Right so my proposal was drm-memory-$CATEGORY-$REGION which I thi=
+nk aligns
+> >>>>>>> with the current drm-memory-$REGION by extending, rather than cre=
+ating
+> >>>>>>> confusion with different order of key name components.
+> >>>>>>
+> >>>>>> Oh my comment was pretty much just bikeshed, in case someone creat=
+es a
+> >>>>>> $REGION that other drivers use for $CATEGORY. Kinda Rob's parsing =
+point.
+> >>>>>> So $CATEGORY before the -memory.
+> >>>>>>
+> >>>>>> Otoh I don't think that'll happen, so I guess we can go with whate=
+ver more
+> >>>>>> folks like :-) I don't really care much personally.
+> >>>>>
+> >>>>> Okay I missed the parsing problem.
+> >>>>>
+> >>>>>>> AMD currently has (among others) drm-memory-vram, which we could =
+define in
+> >>>>>>> the spec maps to category X, if category component is not present=
+.
+> >>>>>>>
+> >>>>>>> Some examples:
+> >>>>>>>
+> >>>>>>> drm-memory-resident-system:
+> >>>>>>> drm-memory-size-lmem0:
+> >>>>>>> drm-memory-active-vram:
+> >>>>>>>
+> >>>>>>> Etc.. I think it creates a consistent story.
+> >>>>>>>
+> >>>>>>> Other than this, my two I think significant opens which haven't b=
+een
+> >>>>>>> addressed yet are:
+> >>>>>>>
+> >>>>>>> 1)
+> >>>>>>>
+> >>>>>>> Why do we want totals (not per region) when userspace can trivial=
+ly
+> >>>>>>> aggregate if they want. What is the use case?
+> >>>>>>>
+> >>>>>>> 2)
+> >>>>>>>
+> >>>>>>> Current proposal limits the value to whole objects and fixates th=
+at by
+> >>>>>>> having it in the common code. If/when some driver is able to supp=
+ort sub-BO
+> >>>>>>> granularity they will need to opt out of the common printer at wh=
+ich point
+> >>>>>>> it may be less churn to start with a helper rather than mid-layer=
+. Or maybe
+> >>>>>>> some drivers already support this, I don't know. Given how import=
+ant VM BIND
+> >>>>>>> is I wouldn't be surprised.
+> >>>>>>
+> >>>>>> I feel like for drivers using ttm we want a ttm helper which takes=
+ care of
+> >>>>>> the region printing in hopefully a standard way. And that could th=
+en also
+> >>>>>> take care of all kinds of of partial binding and funny rules (like=
+ maybe
+> >>>>>> we want a standard vram region that addds up all the lmem regions =
+on
+> >>>>>> intel, so that all dgpu have a common vram bucket that generic too=
+ls
+> >>>>>> understand?).
+> >>>>>
+> >>>>> First part yes, but for the second I would think we want to avoid a=
+ny
+> >>>>> aggregation in the kernel which can be done in userspace just as we=
+ll. Such
+> >>>>> total vram bucket would be pretty useless on Intel even since users=
+pace
+> >>>>> needs to be region aware to make use of all resources. It could eve=
+n be
+> >>>>> counter productive I think - "why am I getting out of memory when h=
+alf of my
+> >>>>> vram is unused!?".
+> >>>>
+> >>>> This is not for intel-aware userspace. This is for fairly generic "g=
+putop"
+> >>>> style userspace, which might simply have no clue or interest in what=
+ lmemX
+> >>>> means, but would understand vram.
+> >>>>
+> >>>> Aggregating makes sense.
+> >>>
+> >>> Lmem vs vram is now an argument not about aggregation but about
+> >>> standardizing regions names.
+> >>>
+> >>> One detail also is a change in philosophy compared to engine stats wh=
+ere
+> >>> engine names are not centrally prescribed and it was expected userspa=
+ce
+> >>> will have to handle things generically and with some vendor specific
+> >>> knowledge.
+> >>>
+> >>> Like in my gputop patches. It doesn't need to understand what is what=
+,
+> >>> it just finds what's there and presents it to the user.
+> >>>
+> >>> Come some accel driver with local memory it wouldn't be vram any more=
+.
+> >>> Or even a headless data center GPU. So I really don't think it is goo=
+d
+> >>> to hardcode 'vram' in the spec, or midlayer, or helpers.
+> >>>
+> >>> And for aggregation.. again, userspace can do it just as well. If we =
+do
+> >>> it in kernel then immediately we have multiple sets of keys to output
+> >>> for any driver which wants to show the region view. IMO it is just
+> >>> pointless work in the kernel and more code in the kernel, when usersp=
+ace
+> >>> can do it.
+> >>>
+> >>> Proposal A (one a discrete gpu, one category only):
+> >>>
+> >>> drm-resident-memory: x KiB
+> >>> drm-resident-memory-system: x KiB
+> >>> drm-resident-memory-vram: x KiB
+> >>>
+> >>> Two loops in the kernel, more parsing in userspace.
+> >>
+> >> why would it be more than one loop, ie.
+> >>
+> >>      mem.resident +=3D size;
+> >>      mem.category[cat].resident +=3D size;
+> >>
+> >> At the end of the day, there is limited real-estate to show a million
+> >> different columns of information.  Even the gputop patches I posted
+> >> don't show everything of what is currently there.  And nvtop only
+> >> shows toplevel resident stat.  So I think the "everything" stat is
+> >> going to be what most tools use.
+> >
+> > Yeah with enough finesse the double-loop isn't needed, it's just the
+> > simplest possible approach.
+> >
+> > Also this is fdinfo, I _really_ want perf data showing that it's a
+> > real-world problem when we conjecture about algorithmic complexity.
+> > procutils have been algorithmically garbage since decades after all :-)
+>
+> Just run it. :)
+>
+> Algorithmic complexity is quite obvious and not a conjecture - to find
+> DRM clients you have to walk _all_ pids and _all_ fds under them. So
+> amount of work can scale very quickly and even _not_ with the number of
+> DRM clients.
+>
+> It's not too bad on my desktop setup but it is significantly more CPU
+> intensive than top(1).
+>
+> It would be possible to optimise the current code some more by not
+> parsing full fdinfo (may become more important as number of keys grow),
+> but that's only relevant when number of drm fds is large. It doesn't
+> solve the basic pids * open fds search for which we'd need a way to walk
+> the list of pids with drm fds directly.
 
+All of which has (almost[1]) nothing to do with one loop or two
+(ignoring for a moment that I already pointed out a single loop is all
+that is needed).  If CPU overhead is a problem, we could perhaps come
+up some sysfs which has one file per drm_file and side-step crawling
+of all of the proc * fd.  I'll play around with it some but I'm pretty
+sure you are trying to optimize the wrong thing.
 
-On 4/14/2023 4:10 PM, Srinivas Kandagatla wrote:
-> 
-> 
-> On 14/04/2023 08:05, Mukesh Ojha wrote:
->> Thanks again for coming back on this.
->>
->> On 4/14/2023 4:02 AM, Srinivas Kandagatla wrote:
->>>
->>>
->>> On 22/03/2023 13:30, Mukesh Ojha wrote:
->>>> Move minidump specific data types and macros to a separate internal
->>>> header(qcom_minidump.h) so that it can be shared among different
->>>
->>> minidump.h should be good as we are already in include/soc/qcom/
->>
->>
->> Initially, i wanted to protect the content of qcom_minidump.h between 
->> qcom_minidump.c and qcom_common.c
->>
->> Ideally, here qcom_minidump.h should be supplier/provider header and can 
-> 
-> Am not sure if I understand the supplier concept correctly.
-> AFAIU, we have a 2 sets of apis
-> 
-> 1. get hold of minidump descriptor based on minidump_id fro gtoc using 
-> qcom_minidump_subsystem_desc(). Am assuming which ever driver uses this 
-> api will set there segments and regions in there respective drivers.
-> 
-> 2. setting regions/segments in APSS minidump descriptors which are done 
-> via qcom_minidump_region_register(). TBH this should be renamed to 
-> qcom_apss_minidump_region_register().
-> 
-> mixing of thsee apis makes it bit confusing, specially we have these two 
-> category of apis that deal with different things.
-> 
-> Does it make sense to spit and abstract them properly by doing?
-> 
-> 
-> 1. minidump driver to deal with handling gtoc and providing descriptors 
-> to the consumers like remoteproc or apss, This can probably live within 
-> smem driver as loc for this support is very minimal and proabably rename 
-> the api accordingly.
-> 
+BR,
+-R
 
-> 2. apss_minidump driver to allow other qcom drivers to 
-> register/unregister regions within apss minidump descriptor.
-> 
-> did I miss something?
-
-No, you are correct with your understanding.
-
-To your suggestion to split code and to keep 
-qcom_minidump_subsystem_desc() live inside smem driver,
-
-And how about the header qcom_minidump.h, should we keep it separate 
-than the apss minidump client header minidump.h ?
-
-Since, you kind of understand the driver now, do you think it is worth
-to create platform device for minidump from smem driver, and
-have a probe inside apss minidump driver to solve chicken and egg 
-problem for the clients who comes before minidump and try to register 
-itself without doing ready check and apss_minidump can note this client 
-entry and only register this region once minidump probe success and then 
-it can register all the noted clients in one go.
-
-The reason to do this would be apss_minidump driver has no meaning 
-without smem, and for this reason checking qcom_minidump_ready() would 
-not be ideal for at least qcom clients and for core kernel may be.
-
---Mukesh
-> 
-> thanks,
-> Srini
-> 
->> be shared among above qcom_minidump.c and qcom_common.c but since they 
->> are not in same directory, moved it inside include/soc/qcom/ as 
->> separate header than consumer header minidump.h . >
->> -Mukesh
->>>
->>> --srini
->>>
->>>> Qualcomm drivers.
->>>>
->>>> There is no change in functional behavior after this.
->>>>
->>>> Signed-off-by: Mukesh Ojha <quic_mojha@quicinc.com>
->>>> ---
->>>>   drivers/remoteproc/qcom_common.c | 56 
->>>> +---------------------------------
->>>>   include/soc/qcom/qcom_minidump.h | 66 
->>>> ++++++++++++++++++++++++++++++++++++++++
->>>>   2 files changed, 67 insertions(+), 55 deletions(-)
->>>>   create mode 100644 include/soc/qcom/qcom_minidump.h
->>>>
->>>> diff --git a/drivers/remoteproc/qcom_common.c 
->>>> b/drivers/remoteproc/qcom_common.c
->>>> index 805e525..88fc984 100644
->>>> --- a/drivers/remoteproc/qcom_common.c
->>>> +++ b/drivers/remoteproc/qcom_common.c
->>>> @@ -18,6 +18,7 @@
->>>>   #include <linux/slab.h>
->>>>   #include <linux/soc/qcom/mdt_loader.h>
->>>>   #include <linux/soc/qcom/smem.h>
->>>> +#include <soc/qcom/qcom_minidump.h>
->>>>   #include "remoteproc_internal.h"
->>>>   #include "qcom_common.h"
->>>> @@ -26,61 +27,6 @@
->>>>   #define to_smd_subdev(d) container_of(d, struct qcom_rproc_subdev, 
->>>> subdev)
->>>>   #define to_ssr_subdev(d) container_of(d, struct qcom_rproc_ssr, 
->>>> subdev)
->>>> -#define MAX_NUM_OF_SS           10
->>>> -#define MAX_REGION_NAME_LENGTH  16
->>>> -#define SBL_MINIDUMP_SMEM_ID    602
->>>> -#define MINIDUMP_REGION_VALID        ('V' << 24 | 'A' << 16 | 'L' 
->>>> << 8 | 'I' << 0)
->>>> -#define MINIDUMP_SS_ENCR_DONE        ('D' << 24 | 'O' << 16 | 'N' 
->>>> << 8 | 'E' << 0)
->>>> -#define MINIDUMP_SS_ENABLED        ('E' << 24 | 'N' << 16 | 'B' << 
->>>> 8 | 'L' << 0)
->>>> -
->>>> -/**
->>>> - * struct minidump_region - Minidump region
->>>> - * @name        : Name of the region to be dumped
->>>> - * @seq_num:        : Use to differentiate regions with same name.
->>>> - * @valid        : This entry to be dumped (if set to 1)
->>>> - * @address        : Physical address of region to be dumped
->>>> - * @size        : Size of the region
->>>> - */
->>>> -struct minidump_region {
->>>> -    char    name[MAX_REGION_NAME_LENGTH];
->>>> -    __le32    seq_num;
->>>> -    __le32    valid;
->>>> -    __le64    address;
->>>> -    __le64    size;
->>>> -};
->>>> -
->>>> -/**
->>>> - * struct minidump_subsystem - Subsystem's SMEM Table of content
->>>> - * @status : Subsystem toc init status
->>>> - * @enabled : if set to 1, this region would be copied during coredump
->>>> - * @encryption_status: Encryption status for this subsystem
->>>> - * @encryption_required : Decides to encrypt the subsystem regions 
->>>> or not
->>>> - * @region_count : Number of regions added in this subsystem toc
->>>> - * @regions_baseptr : regions base pointer of the subsystem
->>>> - */
->>>> -struct minidump_subsystem {
->>>> -    __le32    status;
->>>> -    __le32    enabled;
->>>> -    __le32    encryption_status;
->>>> -    __le32    encryption_required;
->>>> -    __le32    region_count;
->>>> -    __le64    regions_baseptr;
->>>> -};
->>>> -
->>>> -/**
->>>> - * struct minidump_global_toc - Global Table of Content
->>>> - * @status : Global Minidump init status
->>>> - * @md_revision : Minidump revision
->>>> - * @enabled : Minidump enable status
->>>> - * @subsystems : Array of subsystems toc
->>>> - */
->>>> -struct minidump_global_toc {
->>>> -    __le32                status;
->>>> -    __le32                md_revision;
->>>> -    __le32                enabled;
->>>> -    struct minidump_subsystem    subsystems[MAX_NUM_OF_SS];
->>>> -};
->>>> -
->>>>   struct qcom_ssr_subsystem {
->>>>       const char *name;
->>>>       struct srcu_notifier_head notifier_list;
->>>> diff --git a/include/soc/qcom/qcom_minidump.h 
->>>> b/include/soc/qcom/qcom_minidump.h
->>>> new file mode 100644
->>>> index 0000000..84c8605
->>>> --- /dev/null
->>>> +++ b/include/soc/qcom/qcom_minidump.h
->>>> @@ -0,0 +1,66 @@
->>>> +/* SPDX-License-Identifier: GPL-2.0-only */
->>>> +/*
->>>> + * Qualcomm minidump shared data structures and macros
->>>> + *
->>>> + * Copyright (c) 2023 Qualcomm Innovation Center, Inc. All rights 
->>>> reserved.
->>>> + */
->>>> +
->>>> +#ifndef _QCOM_MINIDUMP_H_
->>>> +#define _QCOM_MINIDUMP_H_
->>>> +
->>>> +#define MAX_NUM_OF_SS           10
->>>> +#define MAX_REGION_NAME_LENGTH  16
->>>> +#define SBL_MINIDUMP_SMEM_ID    602
->>>> +#define MINIDUMP_REGION_VALID        ('V' << 24 | 'A' << 16 | 'L' 
->>>> << 8 | 'I' << 0)
->>>> +#define MINIDUMP_SS_ENCR_DONE        ('D' << 24 | 'O' << 16 | 'N' 
->>>> << 8 | 'E' << 0)
->>>> +#define MINIDUMP_SS_ENABLED        ('E' << 24 | 'N' << 16 | 'B' << 
->>>> 8 | 'L' << 0)
->>>> +
->>>> +/**
->>>> + * struct minidump_region - Minidump region
->>>> + * @name        : Name of the region to be dumped
->>>> + * @seq_num:        : Use to differentiate regions with same name.
->>>> + * @valid        : This entry to be dumped (if set to 1)
->>>> + * @address        : Physical address of region to be dumped
->>>> + * @size        : Size of the region
->>>> + */
->>>> +struct minidump_region {
->>>> +    char    name[MAX_REGION_NAME_LENGTH];
->>>> +    __le32    seq_num;
->>>> +    __le32    valid;
->>>> +    __le64    address;
->>>> +    __le64    size;
->>>> +};
->>>> +
->>>> +/**
->>>> + * struct minidump_subsystem - Subsystem's SMEM Table of content
->>>> + * @status : Subsystem toc init status
->>>> + * @enabled : if set to 1, this region would be copied during coredump
->>>> + * @encryption_status: Encryption status for this subsystem
->>>> + * @encryption_required : Decides to encrypt the subsystem regions 
->>>> or not
->>>> + * @region_count : Number of regions added in this subsystem toc
->>>> + * @regions_baseptr : regions base pointer of the subsystem
->>>> + */
->>>> +struct minidump_subsystem {
->>>> +    __le32    status;
->>>> +    __le32    enabled;
->>>> +    __le32    encryption_status;
->>>> +    __le32    encryption_required;
->>>> +    __le32    region_count;
->>>> +    __le64    regions_baseptr;
->>>> +};
->>>> +
->>>> +/**
->>>> + * struct minidump_global_toc - Global Table of Content
->>>> + * @status : Global Minidump init status
->>>> + * @md_revision : Minidump revision
->>>> + * @enabled : Minidump enable status
->>>> + * @subsystems : Array of subsystems toc
->>>> + */
->>>> +struct minidump_global_toc {
->>>> +    __le32                status;
->>>> +    __le32                md_revision;
->>>> +    __le32                enabled;
->>>> +    struct minidump_subsystem    subsystems[MAX_NUM_OF_SS];
->>>> +};
->>>> +
->>>> +#endif  /* _QCOM_MINIDUMP_H_ */
+[1] generally a single process using drm has multiple fd's pointing at
+the same drm_file.. which makes the current approach of having to read
+fdinfo to find the client-id sub-optimal.  But still the total # of
+proc * fd is much larger
