@@ -2,74 +2,290 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 4DEB06EA291
-	for <lists+linux-doc@lfdr.de>; Fri, 21 Apr 2023 06:05:34 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 8C6446E85D1
+	for <lists+linux-doc@lfdr.de>; Thu, 20 Apr 2023 01:22:22 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S232146AbjDUEFb (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Fri, 21 Apr 2023 00:05:31 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:51144 "EHLO
+        id S232165AbjDSXWU (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 19 Apr 2023 19:22:20 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:45422 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S230144AbjDUEFa (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Fri, 21 Apr 2023 00:05:30 -0400
-Received: from mx1.bulutepostam.com (mx1.bulutepostam.com [95.217.25.88])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 06E5344A0;
-        Thu, 20 Apr 2023 21:05:27 -0700 (PDT)
-Date:   Thu, 20 Apr 2023 01:42:48 +0300 (TRT)
-From:   MK <zibel.koc@hisarhospital.com>
-Reply-To: MK <marion.k07081@gmail.com>
-Message-ID: <400187858.5363902.1681944168236.JavaMail.zimbra@hisarhospital.com>
-Subject: Hello sunshine, how are you?
+        with ESMTP id S232007AbjDSXWT (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Wed, 19 Apr 2023 19:22:19 -0400
+Received: from mail-pg1-x52e.google.com (mail-pg1-x52e.google.com [IPv6:2607:f8b0:4864:20::52e])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 6B783E4D
+        for <linux-doc@vger.kernel.org>; Wed, 19 Apr 2023 16:22:11 -0700 (PDT)
+Received: by mail-pg1-x52e.google.com with SMTP id 41be03b00d2f7-51f597c97c5so270591a12.0
+        for <linux-doc@vger.kernel.org>; Wed, 19 Apr 2023 16:22:11 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=atishpatra.org; s=google; t=1681946531; x=1684538531;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=En09xFPrxukQPGMrtSxoWS7NIY2dUf28Hw9SmizN5E8=;
+        b=gS2MMLbFXaic3E2igi5ue9CWwyEXnWQRGzKJ5oiJ2o2NNz/2gbNDIkxOI4YfEhZ0sV
+         +Wi7JatdplmXdoabzjUOh2fazYKcndAZgN+dlrK95xWPAaotKWUHY9ehrqMgTIA0Wh1t
+         ByBEmI0ASVpSTgXq8dXOaktN4gtTDYkpn2gmo=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20221208; t=1681946531; x=1684538531;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=En09xFPrxukQPGMrtSxoWS7NIY2dUf28Hw9SmizN5E8=;
+        b=hgGIXWT9C+v5n1Tn0SGBS+sJXTe/Q0Cl0ySEFf5Nwzl3DXtC/cS48h52QcbCozQzew
+         dv/7VVRukxb1Zm0I9YnQlJhSSzrHcLSzI1+ZV/Hg4OyehCf9ZgaMCKGriRjsxI7Pm8zr
+         S1j7VbkTTwyeom4Hnn2S+CHThvSIpxHcfiEZHT1yIcChLbDEt72LkK6zfdtdf3cgMQ8S
+         9nzeaaWe4Fxm1XfRSAFoTqMZVP68py2VbSPfCdC4I444G2t/P9flkLmsgLuXftSIGfVG
+         l6J3nDLP3MSL09aDLAOraKo3bXMRCEpcpxOwahxDpBn9DsD39/q1AExe8s09eWfetPk1
+         hfSQ==
+X-Gm-Message-State: AAQBX9fo08QNo1aSTkzagHQvo/ual4GisoFF/uy550N+cbH9FM5AnKw9
+        4yKV8h7CTv6ETFEJXBUh5+B5OajTAnGupvbVDQG+
+X-Google-Smtp-Source: AKy350aChvSnivLcUF7wRVT9Tts2Lp5tgA2pMNS5kQFeqIKwNTpjWzEMnaCkhSSO++g8H5/BvYo3D96AB1h1z09XTJw=
+X-Received: by 2002:a17:90b:4c8e:b0:23f:9448:89c2 with SMTP id
+ my14-20020a17090b4c8e00b0023f944889c2mr4380591pjb.7.1681946530740; Wed, 19
+ Apr 2023 16:22:10 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: 7bit
-Thread-Index: xzEDSzG9J8z7bidkk2N0lDO9pqJDaQ==
-Thread-Topic: Hello sunshine, how are you?
-X-FEAS-Client-IP: 10.34.37.30
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; d=hisarhospital.com; s=e948eec2-1790-11eb-ab59-4e91913d126c; c=relaxed/relaxed;
- h=date:from:reply-to:message-id:subject:mime-version:content-type;
- bh=Bo1svp3IpcnzzRBOA3XuS0KEAWebltEu5dzkGD/6mbE=;
- b=ohqWPRT+W+DJRPGE2efANgAJbga5MIaWgwSb3Le72LGeT6NTmKUHszZHY/BQzoMHIUv/GubEexgi
-        ad3ODmVLHnDxpZhF99MNZhrkL3bhD/PLiCVPv/H+18GltV7iNE4Wja7UyxxRsGxUCpZ4ZAZPPU0s
-        eijNeS0iz0FRq37dSAwcfYXCvusJ6mUOyRFF+oq2eRZwJs+TOttin9UDLKQSL2ebbgev2T0FWTzN
-        eaaHPefqN3XsSvloNOfimmE4l/2s8U7zj3BUCuZgsK1lwUlt3FFTBryxBuaX85rBPCrTEYNyhOD+
-        tS6/BaWE+G/i+bIqIiAf7R/DY1duDNG8w8keLA==
-X-Spam-Status: No, score=4.1 required=5.0 tests=BAYES_00,DATE_IN_PAST_24_48,
-        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,
-        FREEMAIL_FORGED_REPLYTO,FREEMAIL_REPLYTO_END_DIGIT,MISSING_HEADERS,
-        REPLYTO_WITHOUT_TO_CC,SPF_HELO_NONE,SPF_PASS,T_SCC_BODY_TEXT_LINE,
-        URIBL_BLOCKED autolearn=no autolearn_force=no version=3.4.6
-X-Spam-Level: ****
+References: <20230413161725.195417-1-alexghiti@rivosinc.com>
+ <CAOnJCU+72PV1=o1c_TpogkmBT36278BneVWEMr1=tqX0CZi+ag@mail.gmail.com>
+ <aadca595b4a24e36932ba41e61f4e263@AcuMS.aculab.com> <CAOnJCUJ7mY+fh9VqE4dRntnVAEAc26=NnOCPUqkXk6ky__cUZQ@mail.gmail.com>
+ <CAP-5=fUYJEecmhQVuvbM4ZoDP_Hj=2RKOgR4cKepU072Uy3xyw@mail.gmail.com>
+ <CAOnJCULJfSN79MzAwhCrbVzG1rYyrPB3OraFmoZFBxuRCwq01w@mail.gmail.com>
+ <CAHVXubjhORBEDok_Zhq5p_Yv4Ty4Hct84dWJZXzo48+40N=CGg@mail.gmail.com> <CAP-5=fX6kaZt68UbMMZzW-zs0RyRWoOS-Tq5NwekWj8k9Shx6g@mail.gmail.com>
+In-Reply-To: <CAP-5=fX6kaZt68UbMMZzW-zs0RyRWoOS-Tq5NwekWj8k9Shx6g@mail.gmail.com>
+From:   Atish Patra <atishp@atishpatra.org>
+Date:   Thu, 20 Apr 2023 04:51:58 +0530
+Message-ID: <CAOnJCU+5EQp-AqrwJpBo6ZPWfybwaGyD3zcC0YrCAsSY4=fqdw@mail.gmail.com>
+Subject: Re: [PATCH 0/4] riscv: Allow userspace to directly access perf counters
+To:     Ian Rogers <irogers@google.com>
+Cc:     Alexandre Ghiti <alexghiti@rivosinc.com>,
+        paranlee <p4ranlee@gmail.com>,
+        David Laight <David.Laight@aculab.com>,
+        Jonathan Corbet <corbet@lwn.net>,
+        Peter Zijlstra <peterz@infradead.org>,
+        Ingo Molnar <mingo@redhat.com>,
+        Arnaldo Carvalho de Melo <acme@kernel.org>,
+        Mark Rutland <mark.rutland@arm.com>,
+        Alexander Shishkin <alexander.shishkin@linux.intel.com>,
+        Jiri Olsa <jolsa@kernel.org>,
+        Namhyung Kim <namhyung@kernel.org>,
+        Paul Walmsley <paul.walmsley@sifive.com>,
+        Palmer Dabbelt <palmer@dabbelt.com>,
+        Albert Ou <aou@eecs.berkeley.edu>,
+        Anup Patel <anup@brainfault.org>,
+        Will Deacon <will@kernel.org>, Rob Herring <robh@kernel.org>,
+        "linux-doc@vger.kernel.org" <linux-doc@vger.kernel.org>,
+        "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
+        "linux-perf-users@vger.kernel.org" <linux-perf-users@vger.kernel.org>,
+        "linux-riscv@lists.infradead.org" <linux-riscv@lists.infradead.org>,
+        "linux-arm-kernel@lists.infradead.org" 
+        <linux-arm-kernel@lists.infradead.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Spam-Status: No, score=-2.1 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_NONE,
+        SPF_HELO_NONE,SPF_PASS,T_SCC_BODY_TEXT_LINE,URIBL_BLOCKED
+        autolearn=unavailable autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
-To:     unlisted-recipients:; (no To-header on input)
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-I sent an email to you yesterday but since I did not get a response,
-I thought probably you did not receive it so I decided to send it 
-again and hopefully I will get a response this time around.
+On Wed, Apr 19, 2023 at 11:13=E2=80=AFPM Ian Rogers <irogers@google.com> wr=
+ote:
+>
+> On Wed, Apr 19, 2023 at 2:21=E2=80=AFAM Alexandre Ghiti <alexghiti@rivosi=
+nc.com> wrote:
+> >
+> > Hi Ian,
+> >
+> > On Tue, Apr 18, 2023 at 10:30=E2=80=AFPM Atish Patra <atishp@atishpatra=
+.org> wrote:
+> > >
+> > > On Tue, Apr 18, 2023 at 11:46=E2=80=AFPM Ian Rogers <irogers@google.c=
+om> wrote:
+> > > >
+> > > > On Tue, Apr 18, 2023 at 9:43=E2=80=AFAM Atish Patra <atishp@atishpa=
+tra.org> wrote:
+> > > > >
+> > > > > On Fri, Apr 14, 2023 at 2:40=E2=80=AFAM David Laight <David.Laigh=
+t@aculab.com> wrote:
+> > > > > >
+> > > > > > From: Atish Patra
+> > > > > > > Sent: 13 April 2023 20:18
+> > > > > > >
+> > > > > > > On Thu, Apr 13, 2023 at 9:47=E2=80=AFPM Alexandre Ghiti <alex=
+ghiti@rivosinc.com> wrote:
+> > > > > > > >
+> > > > > > > > riscv used to allow direct access to cycle/time/instret cou=
+nters,
+> > > > > > > > bypassing the perf framework, this patchset intends to allo=
+w the user to
+> > > > > > > > mmap any counter when accessed through perf. But we can't b=
+reak the
+> > > > > > > > existing behaviour so we introduce a sysctl perf_user_acces=
+s like arm64
+> > > > > > > > does, which defaults to the legacy mode described above.
+> > > > > > > >
+> > > > > > >
+> > > > > > > It would be good provide additional direction for user space =
+packages:
+> > > > > > >
+> > > > > > > The legacy behavior is supported for now in order to avoid br=
+eaking
+> > > > > > > existing software.
+> > > > > > > However, reading counters directly without perf interaction m=
+ay
+> > > > > > > provide incorrect values which
+> > > > > > > the userspace software must avoid. We are hoping that the use=
+r space
+> > > > > > > packages which
+> > > > > > > read the cycle/instret directly, will move to the proper inte=
+rface
+> > > > > > > eventually if they actually need it.
+> > > > > > > Most of the users are supposed to read "time" instead of "cyc=
+le" if
+> > > > > > > they intend to read timestamps.
+> > > > > >
+> > > > > > If you are trying to measure the performance of short code
+> > > > > > fragments then you need pretty much raw access directly to
+> > > > > > the cycle/clock count register.
+> > > > > >
+> > > > > > I've done this on x86 to compare the actual cycle times
+> > > > > > of different implementations of the IP checksum loop
+> > > > > > (and compare them to the theoretical limit).
+> > > > > > The perf framework just added far too much latency,
+> > > > > > only directly reading the cpu registers gave anything
+> > > > > > like reliable (and consistent) answers.
+> > > > > >
+> > > > >
+> > > > > This series allows direct access to the counters once configured
+> > > > > through the perf.
+> > > > > Earlier the cycle/instret counters are directly exposed to the
+> > > > > userspace without kernel/perf frameworking knowing
+> > > > > when/which user space application is reading it. That has securit=
+y implications.
+> > > > >
+> > > > > With this series applied, the user space application just needs t=
+o
+> > > > > configure the event (cycle/instret) through perf syscall.
+> > > > > Once configured, the userspace application can find out the count=
+er
+> > > > > information from the mmap & directly
+> > > > > read the counter. There is no latency while reading the counters.
+> > > > >
+> > > > > This mechanism allows stop/clear the counters when the requesting=
+ task
+> > > > > is not running. It also takes care of context switching
+> > > > > which may result in invalid values as you mentioned below. This i=
+s
+> > > > > nothing new and all other arch (x86, ARM64) allow user space
+> > > > > counter read through the same mechanism.
+> > > > >
+> > > > > Here is the relevant upstream discussion:
+> > > > > https://lore.kernel.org/lkml/Y7wLa7I2hlz3rKw%2F@hirez.programming=
+.kicks-ass.net/T/
+> > > > >
+> > > > > ARM64:
+> > > > > https://docs.kernel.org/arm64/perf.html?highlight=3Dperf_user_acc=
+ess#perf-userspace-pmu-hardware-counter-access
+> > > > >
+> > > > > example usage in x86:
+> > > > > https://github.com/andikleen/pmu-tools/blob/master/jevents/rdpmc.=
+c
+> > > >
+> > > > The canonical implementation of this should be:
+> > > > https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/=
+tree/tools/lib/perf/mmap.c#n400
+> > >
+> > > Thanks for sharing the libperf implementation.
+> > >
+> > > > which is updated in these patches but the tests are not:
+> > > > https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/=
+tree/tools/perf/tests/mmap-basic.c#n287
+> > > > Which appears to be an oversight. The tests display some difference=
+s
+> > >
+> > > Yes. It's an oversight. We should make sure that perf mmap tests pass
+> > > for RISC-V as well.
+> >
+> > Yes, that's an oversight, I had a local test adapted from this one but
+> > forgot to update it afterwards, I'll do that in the next version.
+> >
+> > Thanks for your quick feedbacks and sorry for being late,
+> >
+> > Alex
+>
+> Thanks Alex, there was an equally likely chance that I wasn't
+> understanding things :-) Is there any information on RISC-V PMU
+> testing? I know ParanLee is interested. It'd be awesome to have
 
-I am a secret admirer and would like to explore the opportunity to 
-learn more about each other. I know it is strange to contact you 
-this way and I hope you can forgive me. I am a shy person and 
-this is the only way I know I could get your attention. I just want 
-to know what you think and my intention is not to offend you.
-I hope we can be friends if that is what you want, although I wish 
-to be more than just a friend. I know you have a few questions to 
-ask and I hope I can satisfy some of your curiosity with a few 
-answers.
+Are you looking for something specific to RISC-V general or perf on RISC-V?
+All the RISC-V PMU patches have been upstream for a while (both in the
+Qemu & Linux kernel).
+Perf should work out-of-the box when you boot the latest kernel in the
+latest version of the Qemu.
 
-I believe in the saying that &#039;to the world you are just one person, 
-but to someone special you are the world&#039;. All I want is love, 
-romantic care and attention from a special companion which I am
-hoping would be you.
+Initial KVM[1] patches support got merged during the last merge
+window. It doesn't support
+event sampling yet. We are working on that.
 
-I hope this message will be the beginning of a long term 
-communication between us, simply send a reply to this message, it 
-will make me happy.
+[1] https://lore.kernel.org/lkml/20230207095529.1787260-1-atishp@rivosinc.c=
+om/
+
+> something say on:
+> https://perf.wiki.kernel.org/index.php/Main_Page
+> on how to run tests, perhaps on QEMU or known to work boards. We can
+> also just drop a link on there if there is information. We can also
+> add the RISC-V PMU information to the links here:
+> https://perf.wiki.kernel.org/index.php/Useful_Links
+>
+
+I did not see any arch specific information there. Let us know what
+would be good to
+add there and we would be happy to add.
+
+> Thanks,
+> Ian
+>
+> >
+> > >
+> > >
+> > > > between x86 and aarch64 that have assumed userspace hardware counte=
+r
+> > > > access, and everything else that it is assumed don't.
+> > > >
+> > > > Thanks,
+> > > > Ian
+> > > >
+> > > > > > Clearly process switches (especially cpu migrations) cause
+> > > > > > problems, but they are obviously invalid values and can
+> > > > > > be ignored.
+> > > > > >
+> > > > > > So while a lot of uses may be 'happy' with the values the
+> > > > > > perf framework gives, sometimes you do need to directly
+> > > > > > read the relevant registers.
+> > > > > >
+> > > > > >         David
+> > > > > >
+> > > > > > -
+> > > > > > Registered Address Lakeside, Bramley Road, Mount Farm, Milton K=
+eynes, MK1 1PT, UK
+> > > > > > Registration No: 1397386 (Wales)
+> > > > >
+> > > > >
+> > > > >
+> > > > > --
+> > > > > Regards,
+> > > > > Atish
+> > >
+> > >
+> > >
+> > > --
+> > > Regards,
+> > > Atish
 
 
-Hugs and kisses,
 
-Marion.
+--=20
+Regards,
+Atish
