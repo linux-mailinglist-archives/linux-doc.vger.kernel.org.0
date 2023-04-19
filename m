@@ -2,112 +2,74 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 03A8C6E8506
-	for <lists+linux-doc@lfdr.de>; Thu, 20 Apr 2023 00:34:27 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 4DEB06EA291
+	for <lists+linux-doc@lfdr.de>; Fri, 21 Apr 2023 06:05:34 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S232592AbjDSWeZ (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 19 Apr 2023 18:34:25 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:33998 "EHLO
+        id S232146AbjDUEFb (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Fri, 21 Apr 2023 00:05:31 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:51144 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S229991AbjDSWeZ (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Wed, 19 Apr 2023 18:34:25 -0400
-Received: from mail-yw1-f175.google.com (mail-yw1-f175.google.com [209.85.128.175])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 51C6410D5
-        for <linux-doc@vger.kernel.org>; Wed, 19 Apr 2023 15:33:50 -0700 (PDT)
-Received: by mail-yw1-f175.google.com with SMTP id 00721157ae682-54f8af6dfa9so3802967b3.2
-        for <linux-doc@vger.kernel.org>; Wed, 19 Apr 2023 15:33:50 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=fromorbit-com.20221208.gappssmtp.com; s=20221208; t=1681943486; x=1684535486;
-        h=in-reply-to:content-disposition:mime-version:references:message-id
-         :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
-        bh=/ZrPULhZIKJV34C2bhX8PcgMIHgEG0C+dg13xBQhh0w=;
-        b=BucwJja0NZZouiHsE6IPRymXHfvuN2GBpf0QYn9Cs4UXJmQWr2yTyDz9Sni6cXQ+KS
-         Xad4+fwH0ZaJjAw8T641ngy+qwMOSbEyOeief8pa4za57y/iMMVYaWGo0mMV+S/Un443
-         o07RiDXDWbUPjqUq6tAoSnYgCxaFj93eK4sMOmlJPumrGmc4naLgVCIsY+t1833jzsA8
-         bDt1Whc4YXeVBHNcDG7uAwSrBJevfFOc8i+TiwayDT5NPfW9hzjokkRyUj5AYItgwhQr
-         AFc0xlAGydRl4ENEgMnfS86yhCC1zMc0lqfJ3DpALd2NqEQlRrPiut7SlGyvxehYrJ3T
-         YNDA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1681943486; x=1684535486;
-        h=in-reply-to:content-disposition:mime-version:references:message-id
-         :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=/ZrPULhZIKJV34C2bhX8PcgMIHgEG0C+dg13xBQhh0w=;
-        b=UY5n1b11sIRAJ8keByTp5FMLM8G2uBxv/iQ52TACsHUc2jgWogPV1ND7WaWA9cfbII
-         ufyi92WzKu/CKD5I58gSW7v/EVLHI9IaHk0YtoSZOfc78ZSJmZnKPR7kZOD6G7Euv9nB
-         3Yh2ZQMgv/SNHUDbpoCxdDHSnTH9DOZ1CLRBfcgtsX4PSd0XzgwtwUIJnnJaMZgENScr
-         ljDhguQtASXoW81emWBnD4OYKSWYVzzrvJGjyapWFAEarisItuqx91jVKfMfZzo8DjUL
-         xI94gl6CxEWjR9y8OEcb7dOfKcMzmNJ4R2hJjjWCT3J5Kb7OXvG2vcIcHkeVLk/Wo8yu
-         Ai7Q==
-X-Gm-Message-State: AAQBX9e/g/1Vpp2x/fEXCoIMOchYUj+pUzfx/OiwNXt+Fz0G8nuMbQg7
-        aiRsJ/YzOaD5itO9RPtBQxlMuI2Zls/I8KsRzQk=
-X-Google-Smtp-Source: AKy350Yn+z+rdiDG8ySW4WCMw+0zQ/ws73YT2f1f1XxWKOrSMbU2byidZa3yVOwPBeUzkNz7+7uMJA==
-X-Received: by 2002:a17:902:654a:b0:1a8:1c9a:f68 with SMTP id d10-20020a170902654a00b001a81c9a0f68mr3322962pln.36.1681942790785;
-        Wed, 19 Apr 2023 15:19:50 -0700 (PDT)
-Received: from dread.disaster.area (pa49-180-41-174.pa.nsw.optusnet.com.au. [49.180.41.174])
-        by smtp.gmail.com with ESMTPSA id ji2-20020a170903324200b001a4ee6ec809sm11964287plb.46.2023.04.19.15.19.49
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 19 Apr 2023 15:19:50 -0700 (PDT)
-Received: from dave by dread.disaster.area with local (Exim 4.92.3)
-        (envelope-from <david@fromorbit.com>)
-        id 1ppG9T-005QFi-2w; Thu, 20 Apr 2023 08:19:47 +1000
-Date:   Thu, 20 Apr 2023 08:19:47 +1000
-From:   Dave Chinner <david@fromorbit.com>
-To:     "Darrick J. Wong" <djwong@kernel.org>
-Cc:     Bagas Sanjaya <bagasdotme@gmail.com>,
-        Linux XFS Development <linux-xfs@vger.kernel.org>,
-        Linux Documentation <linux-doc@vger.kernel.org>,
-        Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
-        Jonathan Corbet <corbet@lwn.net>
-Subject: Re: [PATCH] Documentation: xfs: Extend table marker on deprecated
- mount options table
-Message-ID: <20230419221947.GU3223426@dread.disaster.area>
-References: <20230419094921.27279-1-bagasdotme@gmail.com>
- <20230419151536.GM360895@frogsfrogsfrogs>
+        with ESMTP id S230144AbjDUEFa (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Fri, 21 Apr 2023 00:05:30 -0400
+Received: from mx1.bulutepostam.com (mx1.bulutepostam.com [95.217.25.88])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 06E5344A0;
+        Thu, 20 Apr 2023 21:05:27 -0700 (PDT)
+Date:   Thu, 20 Apr 2023 01:42:48 +0300 (TRT)
+From:   MK <zibel.koc@hisarhospital.com>
+Reply-To: MK <marion.k07081@gmail.com>
+Message-ID: <400187858.5363902.1681944168236.JavaMail.zimbra@hisarhospital.com>
+Subject: Hello sunshine, how are you?
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20230419151536.GM360895@frogsfrogsfrogs>
-X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-        DKIM_VALID,RCVD_IN_DNSWL_NONE,RCVD_IN_MSPIKE_H2,SPF_HELO_NONE,SPF_PASS,
-        T_SCC_BODY_TEXT_LINE autolearn=ham autolearn_force=no version=3.4.6
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: 7bit
+Thread-Index: xzEDSzG9J8z7bidkk2N0lDO9pqJDaQ==
+Thread-Topic: Hello sunshine, how are you?
+X-FEAS-Client-IP: 10.34.37.30
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; d=hisarhospital.com; s=e948eec2-1790-11eb-ab59-4e91913d126c; c=relaxed/relaxed;
+ h=date:from:reply-to:message-id:subject:mime-version:content-type;
+ bh=Bo1svp3IpcnzzRBOA3XuS0KEAWebltEu5dzkGD/6mbE=;
+ b=ohqWPRT+W+DJRPGE2efANgAJbga5MIaWgwSb3Le72LGeT6NTmKUHszZHY/BQzoMHIUv/GubEexgi
+        ad3ODmVLHnDxpZhF99MNZhrkL3bhD/PLiCVPv/H+18GltV7iNE4Wja7UyxxRsGxUCpZ4ZAZPPU0s
+        eijNeS0iz0FRq37dSAwcfYXCvusJ6mUOyRFF+oq2eRZwJs+TOttin9UDLKQSL2ebbgev2T0FWTzN
+        eaaHPefqN3XsSvloNOfimmE4l/2s8U7zj3BUCuZgsK1lwUlt3FFTBryxBuaX85rBPCrTEYNyhOD+
+        tS6/BaWE+G/i+bIqIiAf7R/DY1duDNG8w8keLA==
+X-Spam-Status: No, score=4.1 required=5.0 tests=BAYES_00,DATE_IN_PAST_24_48,
+        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,
+        FREEMAIL_FORGED_REPLYTO,FREEMAIL_REPLYTO_END_DIGIT,MISSING_HEADERS,
+        REPLYTO_WITHOUT_TO_CC,SPF_HELO_NONE,SPF_PASS,T_SCC_BODY_TEXT_LINE,
+        URIBL_BLOCKED autolearn=no autolearn_force=no version=3.4.6
+X-Spam-Level: ****
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
+To:     unlisted-recipients:; (no To-header on input)
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Wed, Apr 19, 2023 at 08:15:36AM -0700, Darrick J. Wong wrote:
-> On Wed, Apr 19, 2023 at 04:49:21PM +0700, Bagas Sanjaya wrote:
-> > Sphinx reports htmldocs warning on deprecated mount options table:
-> > 
-> > /home/bagas/repo/linux-kernel/Documentation/admin-guide/xfs.rst:243: WARNING: Malformed table.
-> > Text in column margin in table line 5.
-> > 
-> > ===========================     ================
-> >   Name                          Removal Schedule
-> > ===========================     ================
-> > Mounting with V4 filesystem     September 2030
-> > Mounting ascii-ci filesystem    September 2030
-> > ikeep/noikeep                   September 2025
-> > attr2/noattr2                   September 2025
-> > ===========================     ================
-> > 
-> > Extend the table markers to take account of the second name entry
-> > ("Mounting ascii-ci filesystem"), which is now the widest and
-> > to fix the above warning.
-> > 
-> > Fixes: 7ba83850ca2691 ("xfs: deprecate the ascii-ci feature")
-> > Signed-off-by: Bagas Sanjaya <bagasdotme@gmail.com>
-> 
-> Looks good.  Dave, could you take this through the xfs tree whenever you
-> push the duplicate #include fixes, please?
-> 
-> Reviewed-by: Darrick J. Wong <djwong@kernel.org>
+I sent an email to you yesterday but since I did not get a response,
+I thought probably you did not receive it so I decided to send it 
+again and hopefully I will get a response this time around.
 
-Applied.
+I am a secret admirer and would like to explore the opportunity to 
+learn more about each other. I know it is strange to contact you 
+this way and I hope you can forgive me. I am a shy person and 
+this is the only way I know I could get your attention. I just want 
+to know what you think and my intention is not to offend you.
+I hope we can be friends if that is what you want, although I wish 
+to be more than just a friend. I know you have a few questions to 
+ask and I hope I can satisfy some of your curiosity with a few 
+answers.
 
--Dave.
--- 
-Dave Chinner
-david@fromorbit.com
+I believe in the saying that &#039;to the world you are just one person, 
+but to someone special you are the world&#039;. All I want is love, 
+romantic care and attention from a special companion which I am
+hoping would be you.
+
+I hope this message will be the beginning of a long term 
+communication between us, simply send a reply to this message, it 
+will make me happy.
+
+
+Hugs and kisses,
+
+Marion.
