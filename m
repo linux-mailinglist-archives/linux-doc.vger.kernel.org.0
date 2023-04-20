@@ -2,142 +2,83 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id C85936E90E1
-	for <lists+linux-doc@lfdr.de>; Thu, 20 Apr 2023 12:49:08 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id A5B376E9652
+	for <lists+linux-doc@lfdr.de>; Thu, 20 Apr 2023 15:51:17 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S234754AbjDTKs6 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 20 Apr 2023 06:48:58 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:33466 "EHLO
+        id S231514AbjDTNvQ (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 20 Apr 2023 09:51:16 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:53508 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S234540AbjDTKsf (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Thu, 20 Apr 2023 06:48:35 -0400
-Received: from mail-pg1-x544.google.com (mail-pg1-x544.google.com [IPv6:2607:f8b0:4864:20::544])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 974BE10EA;
-        Thu, 20 Apr 2023 03:47:01 -0700 (PDT)
-Received: by mail-pg1-x544.google.com with SMTP id 41be03b00d2f7-5144a9c11c7so835695a12.2;
-        Thu, 20 Apr 2023 03:47:01 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20221208; t=1681987619; x=1684579619;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=fUsKL4hqeOrADLXVSzAKCm9V00hdTaU+8spEB1aYNQY=;
-        b=XwOj6TyipWhhJdAB/ZOgsH+8NkWNHP9eop/f1eQlml/0xc71YH8eJGrLygEzTd9ECL
-         keYbS0+HlxqcLXMjXaOR9Z3Hl1CeU5/pLmBQ/EzVtnfppCWcRK4YogbQ6deH1DSen2sV
-         Mlxu7ov93Wj0KZ5ZRy3WaY8enAZrb1A8C/33Sn6oOVYdbAzQgYzdvQDDMDMJmKXaYbKK
-         hSdNVHvVyNfa3Gpl7OHpDSLxEuGu7CBu2cw6JuS8DfqUf/1tL5d/5LtDYxr/Sw7U0rNd
-         DcMRhwq1zCKdubu8rnzugBJIqls8P7zkxv8eTup0v/x2huQERG2UVCtnl6CaPt9w/ilU
-         IoGQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1681987619; x=1684579619;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=fUsKL4hqeOrADLXVSzAKCm9V00hdTaU+8spEB1aYNQY=;
-        b=PqXrqwd7UYdU1ecQQ1QlV3+V+b6lpwfBlg16/6xYaTL5C128rm3fH5Y2RfM1P516Hu
-         +wutCwdwPVQ3nnO61ywcOg1f245NgVhxUGrNzonnUm35vnzSZnPC/yMO0Hqi9LxOYUbQ
-         ExrhrSFOf0aR5gAUeAmZGt5hJcWcHnVEqoWGONAHyBBerwCHtGzY/TAU6jTONq9ZhcD7
-         2iKsE3hPoBZiEmUfKYVkWR0koBUrSUolCbHzaXvhDr50J3vBc+uR47fGuo/+J6DOUcQA
-         pSidfIYWjVjN3dwdd6MXZEVwxWYARsK6G1QADH5QRvoQFTwWFPnppa2ZS6gW23NnpdCk
-         dK2A==
-X-Gm-Message-State: AAQBX9ekZzkVqnFGPV/+JMBnJuzCkR6fHq60qxuZkb3d6XeBMbpgJSiN
-        9JnHWMzO6bqNrWOaN1R2V0g497/dz6hZL+a0
-X-Google-Smtp-Source: AKy350aI2hqildqUB6LxE9IbVKgqCR4ALns3I3izkecaOeS3k/gPSceIf14vciqRl46CPQ7yhdCZhg==
-X-Received: by 2002:a17:90b:1bc8:b0:249:897b:fac with SMTP id oa8-20020a17090b1bc800b00249897b0facmr1154624pjb.39.1681987618824;
-        Thu, 20 Apr 2023 03:46:58 -0700 (PDT)
-Received: from CLOUDLIANG-MB2.tencent.com ([103.7.29.32])
-        by smtp.gmail.com with ESMTPSA id ju18-20020a170903429200b001a526805b86sm923735plb.191.2023.04.20.03.46.53
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 20 Apr 2023 03:46:58 -0700 (PDT)
-From:   Jinrong Liang <ljr.kernel@gmail.com>
-X-Google-Original-From: Jinrong Liang <ljrcore@126.com>
-To:     Sean Christopherson <seanjc@google.com>
-Cc:     Like Xu <like.xu.linux@gmail.com>,
-        Paolo Bonzini <pbonzini@redhat.com>,
-        Jonathan Corbet <corbet@lwn.net>,
-        Shuah Khan <shuah@kernel.org>,
-        Aaron Lewis <aaronlewis@google.com>,
-        David Matlack <dmatlack@google.com>,
-        Vishal Annapurve <vannapurve@google.com>,
-        Wanpeng Li <wanpengli@tencent.com>,
-        Bagas Sanjaya <bagasdotme@gmail.com>,
-        Jinrong Liang <cloudliang@tencent.com>,
-        linux-kselftest@vger.kernel.org, linux-doc@vger.kernel.org,
-        kvm@vger.kernel.org, linux-kernel@vger.kernel.org
-Subject: [PATCH v2 7/7] KVM: selftests: Test pmu event filter with incompatible kvm_pmu_event_filter
-Date:   Thu, 20 Apr 2023 18:46:22 +0800
-Message-Id: <20230420104622.12504-8-ljrcore@126.com>
-X-Mailer: git-send-email 2.39.2
-In-Reply-To: <20230420104622.12504-1-ljrcore@126.com>
-References: <20230420104622.12504-1-ljrcore@126.com>
+        with ESMTP id S230342AbjDTNvP (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Thu, 20 Apr 2023 09:51:15 -0400
+Received: from ms.lwn.net (ms.lwn.net [IPv6:2600:3c01:e000:3a1::42])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 39C135B98;
+        Thu, 20 Apr 2023 06:51:11 -0700 (PDT)
+Received: from localhost (unknown [IPv6:2601:281:8300:73::5f6])
+        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+        (No client certificate requested)
+        by ms.lwn.net (Postfix) with ESMTPSA id 9C5582AE;
+        Thu, 20 Apr 2023 13:51:10 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 ms.lwn.net 9C5582AE
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=lwn.net; s=20201203;
+        t=1681998670; bh=/HYRZYBMpyNaQ4v0vpG/OhEOPSI9xHRsqndtnAocw4E=;
+        h=From:To:Cc:Subject:In-Reply-To:References:Date:From;
+        b=bhC8AhpYrKjnmG0JnaW5RjTdER8iwG3G9nb9BVcOk0OWAqZvcmFSN+uKIUl12S50F
+         9laIZQSjgAjxGM/PVJLj+W/FrOvzr3BH5VVoX87cvtjl4C/vHvyPZrP0HbZvCw90Jp
+         WAcl4prNQZpTyHiOsaNNz+mkN6YzzVK6vUYj7wvmFk/NKnKrCnLTe6Slza7Ps8LEZo
+         xl2lJ8YHebgy4ADc2T7yNAimxczjySSTobX4BbeTMCtB0F8Jxy3g1HN+ZXgbSQHzgo
+         GQuh9SmuyoAesda/zFn2MvfWTvaNk8M1m1C1I5Vfj2Rhthd6wxZIf9AUWsz/XMHVMh
+         By7WDlZJoyZxg==
+From:   Jonathan Corbet <corbet@lwn.net>
+To:     Zipeng Zhang <zhangzipeng0@foxmail.com>
+Cc:     ojeda@kernel.org, alex.gaynor@gmail.com, wedsonaf@gmail.com,
+        boqun.feng@gmail.com, gary@garyguo.net, bjorn3_gh@protonmail.com,
+        nathan@kernel.org, ndesaulniers@google.com, trix@redhat.com,
+        masahiroy@kernel.org, codeagain@codeagain.dev,
+        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
+        rust-for-linux@vger.kernel.org, llvm@lists.linux.dev,
+        Zipeng Zhang <zhangzipeng0@foxmail.com>
+Subject: Re: [PATCH] Documentation/process/changes: Escape --options to fix
+ Sphinx output
+In-Reply-To: <tencent_CB1A298D31FD221496FF657CD7EF406E6605@qq.com>
+References: <tencent_CB1A298D31FD221496FF657CD7EF406E6605@qq.com>
+Date:   Thu, 20 Apr 2023 07:51:09 -0600
+Message-ID: <87sfcuu0fm.fsf@meer.lwn.net>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
 X-Spam-Status: No, score=-2.1 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_FROM,
-        RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,SPF_PASS,T_SCC_BODY_TEXT_LINE
-        autolearn=ham autolearn_force=no version=3.4.6
+        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,SPF_HELO_NONE,SPF_PASS,
+        T_SCC_BODY_TEXT_LINE autolearn=ham autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-From: Jinrong Liang <cloudliang@tencent.com>
+Zipeng Zhang <zhangzipeng0@foxmail.com> writes:
 
-From: Jinrong Liang <cloudliang@tencent.com>
+> Add an escape character to resolve the problem of
+> "--version" being displayed as "=E2=80=93version".
+>
+> Without such escaping, -- is rendered as =E2=80=93 (en dash).
+>
+> Signed-off-by: Zipeng Zhang <zhangzipeng0@foxmail.com>
+> ---
+>  Documentation/process/changes.rst | 38 +++++++++++++++----------------
+>  1 file changed, 19 insertions(+), 19 deletions(-)
 
-Add test to verify the behavior of the pmu event filter when an
-incomplete kvm_pmu_event_filter structure is used. By running the
-test, we can ensure that the pmu event filter correctly handles
-incomplete structures and does not allow events to be counted when
-they should not be.
+Thanks for working on improving the documentation!
 
-Signed-off-by: Jinrong Liang <cloudliang@tencent.com>
----
- .../kvm/x86_64/pmu_event_filter_test.c        | 23 +++++++++++++++++++
- 1 file changed, 23 insertions(+)
+I understand where you are coming from, but this may be one of those
+cases where the readability of the plain-text documentation has to win
+out.  Those backslashes are ugly and seem unlikely to be maintained
+going forward.
 
-diff --git a/tools/testing/selftests/kvm/x86_64/pmu_event_filter_test.c b/tools/testing/selftests/kvm/x86_64/pmu_event_filter_test.c
-index 9be4c6f8fb7e..a6b6e0d086ae 100644
---- a/tools/testing/selftests/kvm/x86_64/pmu_event_filter_test.c
-+++ b/tools/testing/selftests/kvm/x86_64/pmu_event_filter_test.c
-@@ -881,6 +881,24 @@ static bool fixed_ctr_is_allowed(uint8_t idx, uint32_t action, uint32_t bitmap)
- 		(action == KVM_PMU_EVENT_DENY && !(bitmap & BIT_ULL(idx)));
- }
- 
-+struct incompatible_pmu_event_filter {
-+	__u32 action;
-+	__u32 nevents;
-+	__u32 fixed_counter_bitmap;
-+};
-+
-+static uint64_t test_incompatible_filter(struct kvm_vcpu *vcpu, uint32_t action,
-+					 uint32_t bitmap)
-+{
-+	struct incompatible_pmu_event_filter err_f;
-+
-+	err_f.action = action;
-+	err_f.fixed_counter_bitmap = bitmap;
-+	ioctl((vcpu->vm)->fd, KVM_SET_PMU_EVENT_FILTER, &err_f.action);
-+
-+	return run_vcpu_to_sync(vcpu);
-+}
-+
- static void test_fixed_ctr_action_and_bitmap(struct kvm_vcpu *vcpu,
- 					     uint8_t fixed_ctr_idx,
- 					     uint8_t max_fixed_num)
-@@ -918,6 +936,11 @@ static void test_fixed_ctr_action_and_bitmap(struct kvm_vcpu *vcpu,
- 
- 			TEST_ASSERT(expected == !!count,
- 				    "Fixed event filter does not work as expected.");
-+
-+			/* Test incompatible event filter works as expected. */
-+			count = test_incompatible_filter(vcpu, actions[i], bitmap);
-+			TEST_ASSERT(expected == !!count,
-+				    "Incompatible filter does not work as expected.");
- 		}
- 	}
- }
--- 
-2.31.1
+The right solution, if it is possible, is to convince Sphinx to stop
+messing with "--" altogether.  Substituting em-dashes is of limited
+cosmetic value and, I think, is something we could do without.
 
+Thanks,
+
+jon
