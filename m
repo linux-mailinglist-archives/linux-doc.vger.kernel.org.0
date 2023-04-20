@@ -2,103 +2,142 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id AC0956E8FCC
-	for <lists+linux-doc@lfdr.de>; Thu, 20 Apr 2023 12:15:53 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 3F69D6E9766
+	for <lists+linux-doc@lfdr.de>; Thu, 20 Apr 2023 16:42:56 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S234730AbjDTKOn (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 20 Apr 2023 06:14:43 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:54798 "EHLO
+        id S231532AbjDTOmy (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 20 Apr 2023 10:42:54 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:37352 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S231268AbjDTKOI (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Thu, 20 Apr 2023 06:14:08 -0400
-Received: from mail-lf1-x12a.google.com (mail-lf1-x12a.google.com [IPv6:2a00:1450:4864:20::12a])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 535111735
-        for <linux-doc@vger.kernel.org>; Thu, 20 Apr 2023 03:12:11 -0700 (PDT)
-Received: by mail-lf1-x12a.google.com with SMTP id 2adb3069b0e04-4edc114c716so447219e87.1
-        for <linux-doc@vger.kernel.org>; Thu, 20 Apr 2023 03:12:11 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google; t=1681985529; x=1684577529;
-        h=content-transfer-encoding:in-reply-to:from:references:cc:to
-         :content-language:subject:user-agent:mime-version:date:message-id
-         :from:to:cc:subject:date:message-id:reply-to;
-        bh=B1gg5qH9FVKEIvZx9IgwaMQ/p/pcxPmbM2nNSvflA+Y=;
-        b=oGF+NGmUcuKNfYKptKRvcA/mqBwJP3vVKuFesYiVXRdyTFgOoercusxcIZm6AB4RE8
-         /wRmO/0CDcuj9QTn+vHkn6mrx/DuytmBsRSzskfwvb0UDt3Gf6H0c3kE9rOL763teqFl
-         IeHCZIap55eiRWQFwdNU9nDGVj5cWc/nVmvjIM7tqxBkrRWdCoSm3HSMHPCo3tLuyUB+
-         zNZLX5K8573+XXXjDBREn7WlXbSCjv2O153I2thYxjoJ1PFi5xTmzksQv0SF2vk28b0+
-         u0gJwnTPdUCAKmZgt637xMuWdIqW6AgN2R4HzYxUXecvTMz9WyYgRVksLixG7kmkYWnJ
-         RiJg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1681985529; x=1684577529;
-        h=content-transfer-encoding:in-reply-to:from:references:cc:to
-         :content-language:subject:user-agent:mime-version:date:message-id
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=B1gg5qH9FVKEIvZx9IgwaMQ/p/pcxPmbM2nNSvflA+Y=;
-        b=N42/gXDmmeCQl7+gW1Vg2SmkTtPU4Wp4hXk9q07R1WeXGci2KU2penhU1JUx14S/u6
-         9HgkdaMmorwBkrllLZ3oxllQGKUgyzNr3he4DEp7nSfu3IZJJb+jviW9tupknprDRPUc
-         w4+V/AWepX88/DR99SA2wDQwabv+ziuyRFP9tKgptrgz1ri/mSlke6y1gVtlSy4Hl8kr
-         fClSVeolOMDlGQqv9dgHs2q3ucG2UVt8VUFYTsoZgyTl8H+UVtlBstihXWpxJ98nRFPZ
-         pmuXq27oGjw32wfiqzhvuUjXiC2XCrOZGKTb5NQVzmzns5y7sNFr8JpdUGDlNw06KC6k
-         Ix0g==
-X-Gm-Message-State: AAQBX9c9R2ghkbNe1lhN2ve8AcNVDTFhy9x6AXrYqHifZ0SJ86BkyFmj
-        hBOGU94PXJA1PzlOp+JQ9m2h3vOU+Plc8tCvHpQ=
-X-Google-Smtp-Source: AKy350ZLeDAg/Z65XdnFNNxyJxECDLyd0G1w1LAFz9U3aeC7C/mcAJ4Bbx0in4YxGwlg5oYVk58TSQ==
-X-Received: by 2002:a05:6512:204:b0:4ed:befc:9b4e with SMTP id a4-20020a056512020400b004edbefc9b4emr363243lfo.3.1681985529604;
-        Thu, 20 Apr 2023 03:12:09 -0700 (PDT)
-Received: from ?IPV6:2001:14ba:a085:4d00::8a5? (dzccz6yyyyyyyyyyybcwt-3.rev.dnainternet.fi. [2001:14ba:a085:4d00::8a5])
-        by smtp.gmail.com with ESMTPSA id f21-20020ac251b5000000b004cb45148027sm166060lfk.203.2023.04.20.03.12.08
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Thu, 20 Apr 2023 03:12:09 -0700 (PDT)
-Message-ID: <d757326e-9dd1-36ea-9340-2a95c3cce70c@linaro.org>
-Date:   Thu, 20 Apr 2023 13:12:08 +0300
+        with ESMTP id S231394AbjDTOmw (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Thu, 20 Apr 2023 10:42:52 -0400
+X-Greylist: delayed 10840 seconds by postgrey-1.37 at lindbergh.monkeyblade.net; Thu, 20 Apr 2023 07:42:49 PDT
+Received: from out203-205-221-242.mail.qq.com (out203-205-221-242.mail.qq.com [203.205.221.242])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id E6B32358D;
+        Thu, 20 Apr 2023 07:42:49 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foxmail.com;
+        s=s201512; t=1682001766;
+        bh=E7pJ8JH4za56KdbQ6Rbh54isxL4xVCKZ8wbfrIdCrY4=;
+        h=From:To:Cc:Subject:Date;
+        b=jNltLnjMKF8YGszO6aKdDhv2Z8SQHg9SqXl4lis83fZWswvK0y2bydMuLxiVMgWEJ
+         7eiYfJD9RPpexwT9XbBDL96GpWxqX1KKCNDLXhCO3PXtVN7QVPC9kqTvSwBX70R2Tq
+         cea4UCEAOpjgauwsPZbVlkg2tdnr7OiCcLVBVUmE=
+Received: from localhost.localdomain.localdomain ([219.238.10.2])
+        by newxmesmtplogicsvrszb6-0.qq.com (NewEsmtp) with SMTP
+        id 584A06E6; Thu, 20 Apr 2023 18:22:04 +0800
+X-QQ-mid: xmsmtpt1681986124t3chxyu9v
+Message-ID: <tencent_CB1A298D31FD221496FF657CD7EF406E6605@qq.com>
+X-QQ-XMAILINFO: NDgMZBR9sMmaUT5c7qkd18KH0pTZHNxLkthc94tfL7YUCpyUPjjdyeaVUNbCkP
+         Xdgm/eyJwxAZS4dPTg2sKcLaUI8eaIhmLzOM0vNJDMaEdT7akJPqVx3mpJPekU0qOUDy8SvoBbMk
+         c0wcUflwJmMqIPdgAmXdGiW2FnU3oEWiWedOeqePUcnP4YW/EvkWPMYLmCBlLoJzF8erE5JqqBcm
+         wRiDheW/eTeACjfXNGZ/lr/Stb6heSJOYTCdVmOjAnOSYaUz2uR8Hh/4Xi3QYR/GHh65yPpzc2iW
+         u6TZMIyjlfNa0jQ9Su/5KaJYkTKcGoCAucH/loiVH8GotCg9IFpWKvGNDVe3lSO/EpR8XNJarsSc
+         Zo/Wcb/SgszkAWgdbqFg7w3YKPf9TEIjR/iZ6gVn82+jD1rnw5DFX4hmQ0O33m1pGT5XH2fVp0ke
+         UtQrLIPzFKh40cBcluvVmlgSm5nwOj0QbFCu4/vNaXHl03+sv/ROotLQ8LIOoS5f2JWTRIPH6gII
+         6cKEvHexMxgQOjAK3c5fzOYtCnoe2n3LydK0dimXW9Qn9YoooLJV53JgPESzKAQNRURLzux7jyRG
+         sqsNvx/zCYo2fhD7iI2GA7Zy65OpvxgN/rdnwaPBFeaR1IeCqPtHABnEzbOIqr7CmeQG9o/MIpRf
+         /wpXIciMOv7ZkrfBL9r0NR+DkF2WeLOGFg8ADgSPoY7tqlLp8ikJOJsIHSucjKjUcMOjUKqmX5VA
+         DzLlGOwjqNXAhSLI1hAdvhmAtvRY0Z5SN+myYvUckYKc2Y2+ukac6UfYlg1brXbnJfxVVtX/gStc
+         Lzeho3r0AclG1G2s/Tm0B8V96UncmB/PEs/udqPNEc/RdNgFcMCGlOLalNloWc2Gft+ZmCv4WTjj
+         FeZV9c7x3uMwT8CY9uJ+Qc9LZpL3wl5FXe4EVfYZjnFQAXS6ob7a5zJFgwpbgcXoO4wvWjjC4Lwe
+         haLUGrCRpt093vedzAr8jylwhgvlAU
+From:   Zipeng Zhang <zhangzipeng0@foxmail.com>
+To:     corbet@lwn.net
+Cc:     ojeda@kernel.org, alex.gaynor@gmail.com, wedsonaf@gmail.com,
+        boqun.feng@gmail.com, gary@garyguo.net, bjorn3_gh@protonmail.com,
+        nathan@kernel.org, ndesaulniers@google.com, trix@redhat.com,
+        masahiroy@kernel.org, codeagain@codeagain.dev,
+        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
+        rust-for-linux@vger.kernel.org, llvm@lists.linux.dev,
+        Zipeng Zhang <zhangzipeng0@foxmail.com>
+Subject: [PATCH] Documentation/process/changes: Escape --options to fix Sphinx output
+Date:   Thu, 20 Apr 2023 18:21:31 +0800
+X-OQ-MSGID: <20230420102131.16545-1-zhangzipeng0@foxmail.com>
+X-Mailer: git-send-email 2.39.2
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.9.0
-Subject: Re: [PATCH v2 2/8] pinctrl: qcom: spmi-gpio: Add PMI632 support
-Content-Language: en-GB
-To:     Luca Weiss <luca@z3ntu.xyz>, ~postmarketos/upstreaming@lists.sr.ht,
-        phone-devel@vger.kernel.org, Andy Gross <agross@kernel.org>,
-        Bjorn Andersson <andersson@kernel.org>,
-        Konrad Dybcio <konrad.dybcio@linaro.org>,
-        Linus Walleij <linus.walleij@linaro.org>,
-        Rob Herring <robh+dt@kernel.org>,
-        Krzysztof Kozlowski <krzysztof.kozlowski+dt@linaro.org>,
-        Pavel Machek <pavel@ucw.cz>, Lee Jones <lee@kernel.org>,
-        Jonathan Cameron <jic23@kernel.org>,
-        Lars-Peter Clausen <lars@metafoo.de>,
-        Stephen Boyd <sboyd@kernel.org>,
-        Jonathan Corbet <corbet@lwn.net>
-Cc:     linux-arm-msm@vger.kernel.org, linux-gpio@vger.kernel.org,
-        devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
-        linux-leds@vger.kernel.org, linux-iio@vger.kernel.org,
-        linux-doc@vger.kernel.org
-References: <20230414-pmi632-v2-0-98bafa909c36@z3ntu.xyz>
- <20230414-pmi632-v2-2-98bafa909c36@z3ntu.xyz>
-From:   Dmitry Baryshkov <dmitry.baryshkov@linaro.org>
-In-Reply-To: <20230414-pmi632-v2-2-98bafa909c36@z3ntu.xyz>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-Spam-Status: No, score=-3.8 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,NICE_REPLY_A,RCVD_IN_DNSWL_NONE,
-        SPF_HELO_NONE,SPF_PASS,T_SCC_BODY_TEXT_LINE autolearn=unavailable
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+X-Spam-Status: No, score=1.1 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_ENVFROM_END_DIGIT,
+        FREEMAIL_FROM,HELO_DYNAMIC_IPADDR,RCVD_IN_DNSWL_NONE,RCVD_IN_MSPIKE_H2,
+        RDNS_DYNAMIC,SPF_HELO_NONE,SPF_PASS,T_SCC_BODY_TEXT_LINE autolearn=no
         autolearn_force=no version=3.4.6
+X-Spam-Level: *
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On 18/04/2023 19:43, Luca Weiss wrote:
-> Add support for the 8 GPIOs found on PMI632.
-> 
-> Signed-off-by: Luca Weiss <luca@z3ntu.xyz>
-> ---
->   drivers/pinctrl/qcom/pinctrl-spmi-gpio.c | 1 +
->   1 file changed, 1 insertion(+)
+Add an escape character to resolve the problem of
+"--version" being displayed as "–version".
 
-Reviewed-by: Dmitry Baryshkov <dmitry.baryshkov@linaro.org>
+Without such escaping, -- is rendered as – (en dash).
 
+Signed-off-by: Zipeng Zhang <zhangzipeng0@foxmail.com>
+---
+ Documentation/process/changes.rst | 38 +++++++++++++++----------------
+ 1 file changed, 19 insertions(+), 19 deletions(-)
+
+diff --git a/Documentation/process/changes.rst b/Documentation/process/changes.rst
+index ef540865ad22..2d2747e1964a 100644
+--- a/Documentation/process/changes.rst
++++ b/Documentation/process/changes.rst
+@@ -29,17 +29,17 @@ you probably needn't concern yourself with pcmciautils.
+ ====================== ===============  ========================================
+         Program        Minimal version       Command to check the version
+ ====================== ===============  ========================================
+-GNU C                  5.1              gcc --version
+-Clang/LLVM (optional)  11.0.0           clang --version
+-Rust (optional)        1.62.0           rustc --version
+-bindgen (optional)     0.56.0           bindgen --version
+-GNU make               3.82             make --version
+-bash                   4.2              bash --version
++GNU C                  5.1              gcc \--version
++Clang/LLVM (optional)  11.0.0           clang \--version
++Rust (optional)        1.62.0           rustc \--version
++bindgen (optional)     0.56.0           bindgen \--version
++GNU make               3.82             make \--version
++bash                   4.2              bash \--version
+ binutils               2.25             ld -v
+-flex                   2.5.35           flex --version
+-bison                  2.0              bison --version
+-pahole                 1.16             pahole --version
+-util-linux             2.10o            fdformat --version
++flex                   2.5.35           flex \--version
++bison                  2.0              bison \--version
++pahole                 1.16             pahole \--version
++util-linux             2.10o            fdformat \--version
+ kmod                   13               depmod -V
+ e2fsprogs              1.41.4           e2fsck -V
+ jfsutils               1.1.3            fsck.jfs -V
+@@ -49,17 +49,17 @@ squashfs-tools         4.0              mksquashfs -version
+ btrfs-progs            0.18             btrfsck
+ pcmciautils            004              pccardctl -V
+ quota-tools            3.09             quota -V
+-PPP                    2.4.0            pppd --version
+-nfs-utils              1.0.5            showmount --version
+-procps                 3.2.0            ps --version
+-udev                   081              udevd --version
+-grub                   0.93             grub --version || grub-install --version
+-mcelog                 0.6              mcelog --version
++PPP                    2.4.0            pppd \--version
++nfs-utils              1.0.5            showmount \--version
++procps                 3.2.0            ps \--version
++udev                   081              udevd \--version
++grub                   0.93             grub \--version || grub-install \--version
++mcelog                 0.6              mcelog \--version
+ iptables               1.4.2            iptables -V
+ openssl & libcrypto    1.0.0            openssl version
+-bc                     1.06.95          bc --version
+-Sphinx\ [#f1]_         1.7              sphinx-build --version
+-cpio                   any              cpio --version
++bc                     1.06.95          bc \--version
++Sphinx\ [#f1]_         1.7              sphinx-build \--version
++cpio                   any              cpio \--version
+ ====================== ===============  ========================================
+ 
+ .. [#f1] Sphinx is needed only to build the Kernel documentation
 -- 
-With best wishes
-Dmitry
+2.39.2
 
