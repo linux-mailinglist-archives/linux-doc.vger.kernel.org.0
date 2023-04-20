@@ -2,102 +2,138 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 70D106E9A6D
-	for <lists+linux-doc@lfdr.de>; Thu, 20 Apr 2023 19:17:04 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 61F6A6E9AE6
+	for <lists+linux-doc@lfdr.de>; Thu, 20 Apr 2023 19:37:15 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S230459AbjDTRRD (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 20 Apr 2023 13:17:03 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:51270 "EHLO
+        id S231279AbjDTRhO (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 20 Apr 2023 13:37:14 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:39480 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S229563AbjDTRRC (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Thu, 20 Apr 2023 13:17:02 -0400
-Received: from mail-yb1-xb31.google.com (mail-yb1-xb31.google.com [IPv6:2607:f8b0:4864:20::b31])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 0A52FE67;
-        Thu, 20 Apr 2023 10:17:00 -0700 (PDT)
-Received: by mail-yb1-xb31.google.com with SMTP id n193so2645755ybf.12;
-        Thu, 20 Apr 2023 10:17:00 -0700 (PDT)
+        with ESMTP id S231246AbjDTRhN (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Thu, 20 Apr 2023 13:37:13 -0400
+Received: from mail-pf1-x435.google.com (mail-pf1-x435.google.com [IPv6:2607:f8b0:4864:20::435])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 4E5C959EA
+        for <linux-doc@vger.kernel.org>; Thu, 20 Apr 2023 10:36:47 -0700 (PDT)
+Received: by mail-pf1-x435.google.com with SMTP id d2e1a72fcca58-63d2ba63dddso1141617b3a.2
+        for <linux-doc@vger.kernel.org>; Thu, 20 Apr 2023 10:36:47 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20221208; t=1682011019; x=1684603019;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=iR3MrYbDMYps02FpM6CgXLeP0ow7vP9dNqGf0sKZVkU=;
-        b=feAhS6Gn5OV5Nz56PvCNsQQbwHKpP2XUJx+Rxk3BWh2G0DJ8XgpcrpkMYqNtu2PlxG
-         Ymcju82iy+Ky3oowVt6Dl5q7FfQinxh53sBwmmWDmuaiZ19/HY9hBEySYF/fWeAsVCk1
-         EGEwfyfTG/+QXWyaq5pjQsqEZszr4a4D6vces80Bgj02hvwL1RGiLaJpwswAQO2lzym3
-         gJOaK96xyucW0NKY5tFxOvX9YoUQJRZGHqdlQo6AyCyFaHeyCDMrx7uIkIdm9ffC9OhA
-         nl+P+DestXdIoa40lCbxAwcBW61PIpAu7bnP1blZU9hqih5lTYKIcu3teBJTP8FmgHUo
-         cprg==
+        d=rivosinc-com.20221208.gappssmtp.com; s=20221208; t=1682012206; x=1684604206;
+        h=to:from:cc:content-transfer-encoding:mime-version:date:message-id
+         :subject:references:in-reply-to:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=QCEy80G5HOek7evJubycy60H7TmBgXN6S6jqg8NE5AA=;
+        b=qt34Ca8pJyfInnsKvQsJ+ATBCHwkD8yXhCNubTccdEm/zIin+n/JcbELHJ/pMGu5MD
+         8vOKkfU1vdV1wENziP8ftZ/SDgzOnklFq26flU1X2bGDp8mLRs77RpZGKHq8Ht/KwiOA
+         fr1kR3jCo8PiqehFpMbwCkSKYX4Y3xMb7Za90C+lrr/1yKWQLAnKRYWc2sYI1SbCVkwq
+         bowcnC98V441QK4Lfiwf3ZUB2lVP0Tr0W0wujC42ZvBXRXTnaMgYK2meYa9Uu0p+s4qO
+         hj2vCz+La3rz6wS3jMsw82niKWKymLdYox/MVL/XPkxwSiISAR4yjgG+0nMkOAbJsA+T
+         kX6g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1682011019; x=1684603019;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+        d=1e100.net; s=20221208; t=1682012206; x=1684604206;
+        h=to:from:cc:content-transfer-encoding:mime-version:date:message-id
+         :subject:references:in-reply-to:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=iR3MrYbDMYps02FpM6CgXLeP0ow7vP9dNqGf0sKZVkU=;
-        b=UL9AAI2lAksCTPTbYyyvqond/72ROj4XYh481DvyweqqcSIpc4tJViGGjywYACLpXW
-         f3FMCLwmmc8YFwWTtwNyvyVXUhV8jyojrmLRHTcrsOb0HnbiOct+Y4VLxk90vmWDNj8m
-         QHAP7wZd/B6TgnnaiHLXFyv2SbDXV25w936FV8jQJhUKSIIhqH7DICTgoVhh0UD5ImmX
-         hPW35Rjh/oU5toShvm8GJmj2pvytuyxPmHl07+uLtPNO9YbR6iQ3cikvYG+lw4kw9AR0
-         R6G84iNlXjJ6JnpEXay9/c4KcmufADXfyzB/HPT90Nd53qddybl1gdyV5rCS09fOwFj5
-         OCCA==
-X-Gm-Message-State: AAQBX9cynSo3gUgiu4R0BIpL+Y21h76myEwDuiJUrPpkVReTI2F9vCkD
-        qxR5r9DERP5eNc6Bc1nJUGW0I8jouhktdS6QkuQ=
-X-Google-Smtp-Source: AKy350b+9jyLFlcvFZTFwaDafV4O6IuCCJNUZWmUt4dda8BcGy2rSeuJ9k+2jdOPTM1SqvEljb+qQWNrtFbjMzzfWxA=
-X-Received: by 2002:a25:183:0:b0:b8f:545f:aa0a with SMTP id
- 125-20020a250183000000b00b8f545faa0amr1973346ybb.31.1682011019151; Thu, 20
- Apr 2023 10:16:59 -0700 (PDT)
+        bh=QCEy80G5HOek7evJubycy60H7TmBgXN6S6jqg8NE5AA=;
+        b=RgeI6tQ8tBl9gyjNR2ukIt5WxZxFUsNb3JvNA6TJPFm6PfxOX/99/ORdGjzg1bUMN3
+         kU+UzhIJ8RWcLYg+czwKD7VjD/BjDU1pQrL6R1mcFG96/7UBYojYXJ8tTdAqKPVT9BV0
+         3kdjs8FQ8y3LZId8b9H9GtgHLMxu3RlChVZIz9mW4lQnyIurwjUx6SC2UdDgqRAwzGhy
+         /+XRx4LhCxScrul+5e5CC8TZEX+46H54PmTRj4+qFBz6gnVpBr9GdQy7BGHOeQyq9Kf4
+         6apGQ7xi02yTa446l/D7zeGwSfCH0FfeC3suiNe9mVbvvDZde4jYUYH0QGH/DppJiiI+
+         ulTg==
+X-Gm-Message-State: AAQBX9f6dhun0lLlSV7+OpTA6VHh/IA5aDxiZX/xIfBYATYWgePL3BJU
+        9Jn+FrblTuN/N+y1fPUswVCVVA==
+X-Google-Smtp-Source: AKy350anLRbb1718rY21erAN2i76dk/7U/I6A0UD9q7UMYTl2QG0KvWi1Xv/8e0rt+P8WT3wygV06g==
+X-Received: by 2002:a05:6a20:d906:b0:ef:bd:38 with SMTP id jd6-20020a056a20d90600b000ef00bd0038mr2856576pzb.55.1682012206529;
+        Thu, 20 Apr 2023 10:36:46 -0700 (PDT)
+Received: from localhost ([50.221.140.188])
+        by smtp.gmail.com with ESMTPSA id fd22-20020a056a002e9600b0063b6e3e5a39sm1522819pfb.52.2023.04.20.10.36.45
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 20 Apr 2023 10:36:46 -0700 (PDT)
+In-Reply-To: <20230407231103.2622178-1-evan@rivosinc.com>
+References: <20230407231103.2622178-1-evan@rivosinc.com>
+Subject: Re: [PATCH v6 0/6] RISC-V Hardware Probing User Interface
+Message-Id: <168201218504.13763.1031176103296142331.b4-ty@rivosinc.com>
+Date:   Thu, 20 Apr 2023 10:36:25 -0700
 MIME-Version: 1.0
-References: <tencent_CB1A298D31FD221496FF657CD7EF406E6605@qq.com>
- <87sfcuu0fm.fsf@meer.lwn.net> <87o7nitvd4.fsf@meer.lwn.net>
-In-Reply-To: <87o7nitvd4.fsf@meer.lwn.net>
-From:   Miguel Ojeda <miguel.ojeda.sandonis@gmail.com>
-Date:   Thu, 20 Apr 2023 19:16:48 +0200
-Message-ID: <CANiq72k7gVJ1gjN-qbkUM_hh=1QEb8ezKb8FnaD9hnF2kka8Ng@mail.gmail.com>
-Subject: Re: [PATCH] Documentation/process/changes: Escape --options to fix
- Sphinx output
-To:     Jonathan Corbet <corbet@lwn.net>
-Cc:     Zipeng Zhang <zhangzipeng0@foxmail.com>, ojeda@kernel.org,
-        alex.gaynor@gmail.com, wedsonaf@gmail.com, boqun.feng@gmail.com,
-        gary@garyguo.net, bjorn3_gh@protonmail.com, nathan@kernel.org,
-        ndesaulniers@google.com, trix@redhat.com, masahiroy@kernel.org,
-        codeagain@codeagain.dev, linux-doc@vger.kernel.org,
-        linux-kernel@vger.kernel.org, rust-for-linux@vger.kernel.org,
-        llvm@lists.linux.dev
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Spam-Status: No, score=-2.1 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_FROM,
-        RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,SPF_PASS,T_SCC_BODY_TEXT_LINE
-        autolearn=ham autolearn_force=no version=3.4.6
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.13-dev-901c5
+Cc:     slewis@rivosinc.com, heiko@sntech.de,
+        Conor Dooley <conor@kernel.org>,
+        Vineet Gupta <vineetg@rivosinc.com>,
+        Albert Ou <aou@eecs.berkeley.edu>,
+        Andrew Bresticker <abrestic@rivosinc.com>,
+        Andrew Jones <ajones@ventanamicro.com>,
+        Andrew Morton <akpm@linux-foundation.org>,
+        Anup Patel <apatel@ventanamicro.com>,
+        Atish Patra <atishp@rivosinc.com>,
+        Catalin Marinas <catalin.marinas@arm.com>,
+        Celeste Liu <coelacanthus@outlook.com>,
+        Conor Dooley <conor.dooley@microchip.com>,
+        Guo Ren <guoren@kernel.org>,
+        Heiko Carstens <hca@linux.ibm.com>,
+        Heiko Stuebner <heiko.stuebner@vrull.eu>,
+        Jann Horn <jannh@google.com>,
+        Jisheng Zhang <jszhang@kernel.org>,
+        Jonathan Corbet <corbet@lwn.net>,
+        Ley Foon Tan <leyfoon.tan@starfivetech.com>,
+        "Liam R. Howlett" <Liam.Howlett@Oracle.com>,
+        Mark Brown <broonie@kernel.org>,
+        Mike Kravetz <mike.kravetz@oracle.com>,
+        Nathan Chancellor <nathan@kernel.org>,
+        Palmer Dabbelt <palmer@dabbelt.com>,
+        Paul Walmsley <paul.walmsley@sifive.com>,
+        Philipp Tomsich <philipp.tomsich@vrull.eu>,
+        Samuel Holland <samuel@sholland.org>,
+        Shuah Khan <shuah@kernel.org>,
+        Sunil V L <sunilvl@ventanamicro.com>,
+        Tobias Klauser <tklauser@distanz.ch>,
+        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
+        linux-kselftest@vger.kernel.org, linux-riscv@lists.infradead.org
+From:   Palmer Dabbelt <palmer@rivosinc.com>
+To:     Evan Green <evan@rivosinc.com>
+X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+        DKIM_VALID,RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,SPF_PASS,
+        T_SCC_BODY_TEXT_LINE autolearn=ham autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Thu, Apr 20, 2023 at 5:40=E2=80=AFPM Jonathan Corbet <corbet@lwn.net> wr=
-ote:
->
-> We have long disabled the "html_use_smartypants" option to prevent Sphinx
-> from mangling "--" sequences (among others).  Unfortunately, Sphinx chang=
-ed
-> that option to "smartquotes" in the 1.6.6 release, and seemingly didn't s=
-ee
-> fit to warn about the use of the obsolete option, resulting in the
-> aforementioned mangling returning.  Disable this behavior again and hope
-> that the option name stays stable for a while.
 
-I think it was deprecated in v1.6, and removed in v1.7. There seems to
-be code for printing a deprecation warning during v1.6, though.
+On Fri, 07 Apr 2023 16:10:57 -0700, Evan Green wrote:
+> There's been a bunch of off-list discussions about this, including at
+> Plumbers.  The original plan was to do something involving providing an
+> ISA string to userspace, but ISA strings just aren't sufficient for a
+> stable ABI any more: in order to parse an ISA string users need the
+> version of the specifications that the string is written to, the version
+> of each extension (sometimes at a finer granularity than the RISC-V
+> releases/versions encode), and the expected use case for the ISA string
+> (ie, is it a U-mode or M-mode string).  That's a lot of complexity to
+> try and keep ABI compatible and it's probably going to continue to grow,
+> as even if there's no more complexity in the specifications we'll have
+> to deal with the various ISA string parsing oddities that end up all
+> over userspace.
+> 
+> [...]
 
-> +# If true, Docutils "smart quotes will be used to convert quotes and das=
-hes
+Applied, thanks!
 
-Missing quote in "smart quotes"? Or maybe Saxon genitive?
+[1/6] RISC-V: Move struct riscv_cpuinfo to new header
+      https://git.kernel.org/palmer/c/ff77cf5b2e03
+[2/6] RISC-V: Add a syscall for HW probing
+      https://git.kernel.org/palmer/c/ea3de9ce8aa2
+[3/6] RISC-V: hwprobe: Add support for RISCV_HWPROBE_BASE_BEHAVIOR_IMA
+      https://git.kernel.org/palmer/c/00e76e2c6a2b
+[4/6] RISC-V: hwprobe: Support probing of misaligned access performance
+      https://git.kernel.org/palmer/c/62a31d6e38bd
+[5/6] selftests: Test the new RISC-V hwprobe interface
+      https://git.kernel.org/palmer/c/287dcc2b0c83
+[6/6] RISC-V: Add hwprobe vDSO function and data
+      https://git.kernel.org/palmer/c/aa5af0aa90ba
 
-Other than that, sounds good to me!
+Best regards,
+-- 
+Palmer Dabbelt <palmer@rivosinc.com>
 
-Reviewed-by: Miguel Ojeda <ojeda@kernel.org>
-
-Cheers,
-Miguel
