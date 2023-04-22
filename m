@@ -2,145 +2,106 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 5B4656EB983
-	for <lists+linux-doc@lfdr.de>; Sat, 22 Apr 2023 16:01:59 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 69B896EBAA1
+	for <lists+linux-doc@lfdr.de>; Sat, 22 Apr 2023 19:21:11 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S229769AbjDVOB6 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Sat, 22 Apr 2023 10:01:58 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:47336 "EHLO
+        id S229774AbjDVRVI (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Sat, 22 Apr 2023 13:21:08 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:36630 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S229687AbjDVOB5 (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Sat, 22 Apr 2023 10:01:57 -0400
-Received: from mail-oa1-x32.google.com (mail-oa1-x32.google.com [IPv6:2001:4860:4864:20::32])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 175D51BEB
-        for <linux-doc@vger.kernel.org>; Sat, 22 Apr 2023 07:01:56 -0700 (PDT)
-Received: by mail-oa1-x32.google.com with SMTP id 586e51a60fabf-18e6e11c5fbso13272fac.0
-        for <linux-doc@vger.kernel.org>; Sat, 22 Apr 2023 07:01:56 -0700 (PDT)
+        with ESMTP id S229709AbjDVRVH (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Sat, 22 Apr 2023 13:21:07 -0400
+Received: from mail-pf1-x42f.google.com (mail-pf1-x42f.google.com [IPv6:2607:f8b0:4864:20::42f])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 2B5C7268D
+        for <linux-doc@vger.kernel.org>; Sat, 22 Apr 2023 10:21:03 -0700 (PDT)
+Received: by mail-pf1-x42f.google.com with SMTP id d2e1a72fcca58-63b73203e0aso19909732b3a.1
+        for <linux-doc@vger.kernel.org>; Sat, 22 Apr 2023 10:21:03 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20221208; t=1682172115; x=1684764115;
-        h=content-transfer-encoding:to:subject:message-id:date:from
-         :mime-version:from:to:cc:subject:date:message-id:reply-to;
-        bh=A51qER/+0Uwg373WDhhFIvlu+oxZvJ7RfKVETtmCu7A=;
-        b=IV3NJI/cb8BoqQGVHVZhtmQKVe9/kHKC9UkRJZXEhv5jNUa5ROvMBZHEjTzZMqKuMA
-         jntEm2dgjQ999EsNNCIa1xFNhDLFUUAi0UA1cgq4Bt8YBqXYUAGH0x5PO4A+hWm8WMfO
-         gc3riSWHqA67Q7qHdT6Qv6kntE2cm3kaDwn6C1L4vwJm7yhKYlI9pQL/w7YWqOMOZuDZ
-         15eutsnEaF9v5Vz9qAW4PEgDEeKLUfoxwGYXhKH8Ek7hxphB4hWo+SE+Oq5U4dREOek6
-         eYSrNTsfdBanslsa4G1Ywey1WXZf6/wzLLqQmaMAKSXf4u7gcITeJzlPAgRVE44DG7od
-         ZejA==
+        d=isovalent.com; s=google; t=1682184062; x=1684776062;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=h/Iwxwf19giRiaEj5owcf/YVCgHFbeN6M1lbc9444FQ=;
+        b=JhcABvhIW3GaMteWwLpvP3Hqr+PKPr65wM6hF2XYPgsbVIf5G3jUigiNV7UBMuO/OZ
+         5VV208S3eHWQ88O5LcGnojDROcVJyh4vPE0U97yhevpbQ1/WvNxrLSMQmJL7psmYqubC
+         iHcVAgxgqqoBzfp5OuCJ3IBb3jIaqvf4wOkeCpjwTqHP4X6WJeBRsdlHnZHUwMpeYFsy
+         S4lxW+f47PyZrEDsAUHG1qJ99TgQushsf7xeNZoO4esAoF2M0ea/2UyARJJpXB4Gkd5n
+         Px5Azge+0Pw32ZyLtg6w5snLZkJLata5KepdiGHDBv+TD/rgjBY1NnGqnX1yL3ANu4wg
+         oZRA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1682172115; x=1684764115;
-        h=content-transfer-encoding:to:subject:message-id:date:from
-         :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+        d=1e100.net; s=20221208; t=1682184062; x=1684776062;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=A51qER/+0Uwg373WDhhFIvlu+oxZvJ7RfKVETtmCu7A=;
-        b=FCPl4Qi7357xWwW5EO/WsgNbjcDAFx4lEX1fgmZKuX8nOX2MPueWFjz4r7HBz4UBeA
-         5vwN178if1mTFdNYksB2ds2luBco7pLZBWo8oYynWi2acjKm6z/HnMf4iTb/M60ZIj8F
-         96qISKcP76Qcm9FI5qGS7c9jjn+kI4jInTCwz0uy70JfZ3lkRhp16uLwUPOHelmY4v9c
-         4uBcrvQI7JCgw5sZveGjkqpZ7z+1k1cweBCYdQDLdbsc/604Wv9UgOr6DGXdr23eBtH/
-         AkIwn6bzYDNY7Y2AldRD5tAtUQDGn2z1fBVp+y//UHczPWUPG4gZIBnQTYlAMoipuGRH
-         YqZg==
-X-Gm-Message-State: AAQBX9febBIHR1FfPFObEEKnR5S2y/dbySIdsIo0FSwyG4PLdyxst+6U
-        ojhb2bsqyTRVB9Ek+MUpNWBghyUnnhdQiWylQ4o=
-X-Google-Smtp-Source: AKy350aAq9xyjQurrruIg8DDP3teis4ewvAqa991PMosm1zdUWcmDojdtM8Fn5yjA3yMNjRJLYbdyuJY4PZDEn/Mxrs=
-X-Received: by 2002:a05:6870:560e:b0:17a:c612:ae0d with SMTP id
- m14-20020a056870560e00b0017ac612ae0dmr5842646oao.49.1682172114929; Sat, 22
- Apr 2023 07:01:54 -0700 (PDT)
+        bh=h/Iwxwf19giRiaEj5owcf/YVCgHFbeN6M1lbc9444FQ=;
+        b=Ejap8tgCtgmnIB6HYcv5NNqrQdzEnACezabj0++vKRuwRv17UgIrcP23Mz0HNPehxS
+         wynqDYBguGcOG38yelLmMqf/Jh4pE0wtoLvTGTPJqWipZCIeUfEiInIQGaaL4ATAWsCk
+         fuZzIJ8qQ5u3SZV1bx+WsWeTWjwfgWvkuTf6l3SLDBKTf3SDZoxHSZ1yK0rhXUXjCYax
+         uajKT0pTcBgBypr4Zr0IuxsS6Xd4xWwBserY8SwPx4/UjWMfWTys776KaZ0WvkrAXa1K
+         J6h4aTsbZaRB8BwCBuYgQhZYYem70PGC2iXF7jxRKt15vnPP34DlfnVMuCx9gnvhI3w0
+         eYrg==
+X-Gm-Message-State: AAQBX9fciybdrNx+xQVieAWL4kG3+sTg6wYAb5f7uMSwarApksmn7ad9
+        SILS/KermV/Bbak8qr5g1KdvjQ==
+X-Google-Smtp-Source: AKy350asm2xC4ELk9HOxk7QtNVh+S4xezinZtxnPHSV0fB2CGfYqFycRx1aGPk56NPBu5P8sTvQ1pQ==
+X-Received: by 2002:a17:902:cecb:b0:1a6:8527:8e0f with SMTP id d11-20020a170902cecb00b001a685278e0fmr9432486plg.10.1682184062380;
+        Sat, 22 Apr 2023 10:21:02 -0700 (PDT)
+Received: from carnotaurus.. (c-73-252-184-87.hsd1.ca.comcast.net. [73.252.184.87])
+        by smtp.gmail.com with ESMTPSA id p8-20020a1709026b8800b001a04ff0e2eesm4261673plk.58.2023.04.22.10.21.01
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Sat, 22 Apr 2023 10:21:01 -0700 (PDT)
+From:   Joe Stringer <joe@isovalent.com>
+To:     bpf@vger.kernel.org
+Cc:     linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
+        ast@kernel.org, corbet@lwn.net, martin.lau@linux.dev,
+        bagasdotme@gmail.com, maxtram95@gmail.com, john.fastabend@gmail.com
+Subject: [PATCH bpf-next v5 1/2] docs/bpf: Add table to describe LRU properties
+Date:   Sat, 22 Apr 2023 10:20:53 -0700
+Message-Id: <20230422172054.3355436-1-joe@isovalent.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-Received: by 2002:a05:6358:7f8f:b0:105:64e9:9c9b with HTTP; Sat, 22 Apr 2023
- 07:01:54 -0700 (PDT)
-From:   Aisha Gaddafi <aishagaddafilibya5@gmail.com>
-Date:   Sat, 22 Apr 2023 16:01:54 +0200
-Message-ID: <CAJdAvay+6fHtadom=XW6iv9z7M8r_vH7vbH++DvkeeUZp9chfw@mail.gmail.com>
-Subject: GREETINGS FROM NEW YORK CITY USA
-To:     undisclosed-recipients:;
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Spam-Status: Yes, score=5.9 required=5.0 tests=ADVANCE_FEE_5_NEW_MONEY,
-        BAYES_00,DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,
-        FORM_FRAUD_5,FREEMAIL_ENVFROM_END_DIGIT,FREEMAIL_FROM,FREEMAIL_REPLY,
-        LOTS_OF_MONEY,MONEY_FORM_SHORT,MONEY_FRAUD_8,RCVD_IN_DNSWL_NONE,
-        SPF_HELO_NONE,SPF_PASS,SUBJ_ALL_CAPS,T_FILL_THIS_FORM_SHORT,
-        T_MONEY_PERCENT,T_SCC_BODY_TEXT_LINE,UNDISC_MONEY autolearn=no
-        autolearn_force=no version=3.4.6
-X-Spam-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
-        *      [score: 0.0000]
-        * -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at
-        *      https://www.dnswl.org/, no trust
-        *      [2001:4860:4864:20:0:0:0:32 listed in]
-        [list.dnswl.org]
-        *  0.0 FREEMAIL_FROM Sender email is commonly abused enduser mail
-        *      provider
-        *      [aishagaddafilibya5[at]gmail.com]
-        *  0.2 FREEMAIL_ENVFROM_END_DIGIT Envelope-from freemail username ends
-        *       in digit
-        *      [aishagaddafilibya5[at]gmail.com]
-        * -0.0 SPF_PASS SPF: sender matches SPF record
-        *  0.0 SPF_HELO_NONE SPF: HELO does not publish an SPF Record
-        *  0.5 SUBJ_ALL_CAPS Subject is all capitals
-        * -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
-        * -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
-        *      author's domain
-        *  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
-        *       valid
-        * -0.1 DKIM_VALID_EF Message has a valid DKIM or DK signature from
-        *      envelope-from domain
-        *  0.0 LOTS_OF_MONEY Huge... sums of money
-        * -0.0 T_SCC_BODY_TEXT_LINE No description available.
-        *  1.0 FREEMAIL_REPLY From and body contain different freemails
-        *  0.0 T_MONEY_PERCENT X% of a lot of money for you
-        *  0.0 T_FILL_THIS_FORM_SHORT Fill in a short form with personal
-        *      information
-        *  0.0 MONEY_FRAUD_8 Lots of money and very many fraud phrases
-        *  0.0 MONEY_FORM_SHORT Lots of money if you fill out a short form
-        *  3.0 ADVANCE_FEE_5_NEW_MONEY Advance Fee fraud and lots of money
-        *  3.2 UNDISC_MONEY Undisclosed recipients + money/fraud signs
-        *  0.0 FORM_FRAUD_5 Fill a form and many fraud phrases
-X-Spam-Level: *****
+Content-Transfer-Encoding: 8bit
+X-Spam-Status: No, score=-2.1 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_NONE,
+        SPF_HELO_NONE,SPF_PASS,T_SCC_BODY_TEXT_LINE,URIBL_BLOCKED
+        autolearn=unavailable autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Dearest How are you doing today,
+Depending on the map type and flags for LRU, different properties are
+global or percpu. Add a table to describe these.
 
+Signed-off-by: Joe Stringer <joe@isovalent.com>
+---
+v5: Use bold rather than verbatim for column header
+v4: Initial posting
+---
+ Documentation/bpf/map_hash.rst | 11 ++++++++++-
+ 1 file changed, 10 insertions(+), 1 deletion(-)
 
-I came across your e-mail contact prior a private search while in need
-of your assistance.
+diff --git a/Documentation/bpf/map_hash.rst b/Documentation/bpf/map_hash.rst
+index 8669426264c6..1314dfc5e7e1 100644
+--- a/Documentation/bpf/map_hash.rst
++++ b/Documentation/bpf/map_hash.rst
+@@ -29,7 +29,16 @@ will automatically evict the least recently used entries when the hash
+ table reaches capacity. An LRU hash maintains an internal LRU list that
+ is used to select elements for eviction. This internal LRU list is
+ shared across CPUs but it is possible to request a per CPU LRU list with
+-the ``BPF_F_NO_COMMON_LRU`` flag when calling ``bpf_map_create``.
++the ``BPF_F_NO_COMMON_LRU`` flag when calling ``bpf_map_create``.  The
++following table outlines the properties of LRU maps depending on the a
++map type and the flags used to create the map.
++
++======================== ========================= ================================
++Flag                     ``BPF_MAP_TYPE_LRU_HASH`` ``BPF_MAP_TYPE_LRU_PERCPU_HASH``
++======================== ========================= ================================
++**BPF_F_NO_COMMON_LRU**  Per-CPU LRU, global map   Per-CPU LRU, per-cpu map
++**!BPF_F_NO_COMMON_LRU** Global LRU, global map    Global LRU, per-cpu map
++======================== ========================= ================================
+ 
+ Usage
+ =====
+-- 
+2.34.1
 
-Please do not feel disturbed for contacting you, based on the critical
-condition I find mine self, though, it's not financial problem, but my
-health, you might have know that cancer is not what to talk home
-about, I am married to Mr. Oscar who was a businessman from New york
-United States
-before dying some years ago? We were married to many years without a
-child. He died after a brief illness that lasted for five days. And I
-myself have been suffering from an ovarian cancer disease. At this
-moment I am about to finish the race in this way.
-
-Since his death I decided not to remarry again, When my late husband was
-alive he deposited the sum of (=E2=82=AC18.5 Million Euros) I have confirme=
-d
-from the Banco Santander Bank in Spain where the fund was deposited present=
-ly
-this fund is still in Bank. And My Doctor told me that I don't have
-much time to live again because of the cancer problem, having known my
-condition I decided to hand you over this fund to you to take care of the
-less-privileged people,
-
-You will utilize this money the way I am going to instruct you. I want
-you to take 50 Percent of the total money for your personal use While
-50% of the money will go to charity" people and helping the orphanage
-and the poor I will really do appreciate if l can put my trust on you
-to help me claim my fund for the mission of the Lord in donating it to
-the Motherless Baby Home (ORPHANAGE). I want you to know that am right
-here lying on the sick bed at the hospital waiting for the Lord's call
-but I really want this mission to be well accomplished by Gods grace, I
-don't want my husband's efforts to be used by the Government. I grew
-up as an Orphan and I don't have anybody as my family member,
-
-I am expecting your urgent respond. Bellow is my private email address
-(monicaabraham1947@gmail.com)
-
-Best Regards.
-Mrs. Monica Oscar Abraham
