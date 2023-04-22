@@ -2,65 +2,65 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 631A36EB820
-	for <lists+linux-doc@lfdr.de>; Sat, 22 Apr 2023 11:00:53 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id A10676EB822
+	for <lists+linux-doc@lfdr.de>; Sat, 22 Apr 2023 11:01:29 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S229536AbjDVJAt (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Sat, 22 Apr 2023 05:00:49 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:56466 "EHLO
+        id S229559AbjDVJB2 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Sat, 22 Apr 2023 05:01:28 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:56538 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S229468AbjDVJAs (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Sat, 22 Apr 2023 05:00:48 -0400
-Received: from mail-oa1-x30.google.com (mail-oa1-x30.google.com [IPv6:2001:4860:4864:20::30])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id ED4C61BC2
-        for <linux-doc@vger.kernel.org>; Sat, 22 Apr 2023 02:00:47 -0700 (PDT)
-Received: by mail-oa1-x30.google.com with SMTP id 586e51a60fabf-18777914805so15258839fac.1
-        for <linux-doc@vger.kernel.org>; Sat, 22 Apr 2023 02:00:47 -0700 (PDT)
+        with ESMTP id S229468AbjDVJB2 (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Sat, 22 Apr 2023 05:01:28 -0400
+Received: from mail-oi1-x22c.google.com (mail-oi1-x22c.google.com [IPv6:2607:f8b0:4864:20::22c])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 2EDE11BC2
+        for <linux-doc@vger.kernel.org>; Sat, 22 Apr 2023 02:01:25 -0700 (PDT)
+Received: by mail-oi1-x22c.google.com with SMTP id 5614622812f47-38de3338abeso1700674b6e.1
+        for <linux-doc@vger.kernel.org>; Sat, 22 Apr 2023 02:01:25 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20221208; t=1682154047; x=1684746047;
+        d=gmail.com; s=20221208; t=1682154084; x=1684746084;
         h=content-transfer-encoding:to:subject:message-id:date:from:sender
          :mime-version:from:to:cc:subject:date:message-id:reply-to;
         bh=y1bEiNpfNWaupTJq/MT6CaNCMwtQHUlCN6T2ayUv+NI=;
-        b=g9S5qKCdQChjO8wmUlvuU8GogUgtpqISqAjB5phVL1n1CV3Gh40RK+fLK2whlX5NiQ
-         cSM6kVd1uAOZOGDaoWR5pBMJfl7cxgAfrHVBkumyRlkjQ6FB46cG0z+ITCkqToRhZkfS
-         VgvW10XfLDGwep9IXIJh0aDkNZ0I3CdcZnzyBf6YYHtukB5QkCN1FUo45sdQKJqfrkAi
-         0AyrrXcuwRjEeqTSv6jp9RMMpUzBlIiLTrPmvsuO1lngmvECCNsoe5KVD8XMfKd+OMKO
-         4bZJo6oHJwBwRJHYQ0znzQlVvi6Ub2HgOLLB01u0+oGu0EEsXYJG7SiPcP5Fot+xjReC
-         6nEA==
+        b=N0vumqziVkWywCz27drrkoLiX1UyRFN3Rm6kCAG+ItZokXoYycwGbLyRacWYwYx17P
+         d0kB5ehKRsdD4dpoq/pWo4qeZGpHUGIIIev1EJZCABZNZXCltIq5YcGBdtkrSflc+ji/
+         PKBiSFsXfW7RTrJxCzrJjTc/SOn89GvgdY9x4ZkmAZQOX+KIAhgdUF08eZwrjPU+Hi46
+         7ONt6gmbINjMhdLx5qTchJ8xzWvJXLeEcYwhNCrLd1KqOoaC7hjWLztz8bsT7h5H2Mpg
+         zbz4Ap4cPdL3Ewsg8PQVd7BX4lucvT/1W6Yf89vac+Qibk3SPVOtxgtZ2eLkUrCZDNY5
+         BvYg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1682154047; x=1684746047;
+        d=1e100.net; s=20221208; t=1682154084; x=1684746084;
         h=content-transfer-encoding:to:subject:message-id:date:from:sender
          :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
         bh=y1bEiNpfNWaupTJq/MT6CaNCMwtQHUlCN6T2ayUv+NI=;
-        b=PGstab48+ao+0hsZl8LglC94LTDaqsu1P8eoW+DZjzdqz3GrhZ79hO8Q4lw4/xKw/I
-         0nHadfNrklb5fyX6AKECDH7fomQBIgKyvm9cFFURsexTNAFyGeM27E9+4HgEDcZEnXbA
-         M+zyRs/CqR0254hUccN989vVldQ7GpH4L+pUQjQXcXrRHJEnkv08g440HyENA56v+PSY
-         V0i/VwEUnSjz88eBClP4Y2R+51h7gFrl3T2VOL71tr6PMJul11BtnOeOcQfRFlTA7I2D
-         nYrj4hLSrdEPQwAROK8avULMhaeOARbvK2gVEKYib4pEWVHPLJo//AJ5miiQpiUeAtPz
-         LbKQ==
-X-Gm-Message-State: AAQBX9dRyRtatySCs9sBuKjzEZO9+nXP4eoEF0AUjvPBgybAAnrXHx/S
-        +YczlS92UDPNnoE5+z2vqtYgdlrYu9M4V0zgzcA=
-X-Google-Smtp-Source: AKy350YeAPB6S0xDEU4UeyflI/0dT/01SJbAh3Qen58hrbUx5L8wgDmljSkrLuvclDHGjQ2oey9hLwgDyPRSZDjQoKY=
-X-Received: by 2002:a05:6808:206:b0:38e:8ecc:b4d9 with SMTP id
- l6-20020a056808020600b0038e8eccb4d9mr2127161oie.10.1682154047248; Sat, 22 Apr
- 2023 02:00:47 -0700 (PDT)
+        b=IR+hnMBVkba12WS2LBJSV3UTGpJElH5WmR2ajEomgkDhdJFWaj9m2/m+TCXaUWreR/
+         6vJarClUWevdBbsy8y5yvXxiQ4jE8mI8taBjc5IMfB3rOqxwrupLOpHq9yiwjgj+WGo2
+         vFxIB1o5+tMZqZZwQ3rOELhsj00EyBvYK0rTCwV0JfY7N1cSCczb4T859dJYaiZ+1I7J
+         8bCOtJFgDgbQtBRE1Dmm3TuMk4bN2CfG57bGAZkWOp6YVVVatySaX41NFabk5R/Ikwtv
+         wwqVsnHNsyEKuiRTJT8BrEeL2rJ8Fu3RRjF/q7ONP2zOG7VdWsjFluKEtFqpVfI7cYIT
+         XxNg==
+X-Gm-Message-State: AAQBX9eMRpEWiC95ALQGVLYQGEY/xp9o1tdnwIdysZS1UTLB7uEmmJ7b
+        B1+Q5OnXWBFXOHQl8PsZGs9yTYlAsdbbGgnUfj8=
+X-Google-Smtp-Source: AKy350ZQUQKrUW+IZk841YScEZ9NgRy5XpoQHSUMyF2D55Gtp90HbG7IPIDCrLjd/XH1CVGN8H/Zgp5+ZkrZ7FkJhw4=
+X-Received: by 2002:a05:6808:120d:b0:38e:365:305e with SMTP id
+ a13-20020a056808120d00b0038e0365305emr4674999oil.21.1682154084480; Sat, 22
+ Apr 2023 02:01:24 -0700 (PDT)
 MIME-Version: 1.0
 Sender: namaroismael54@gmail.com
 Received: by 2002:ac9:6157:0:b0:4d0:8c5:9f3e with HTTP; Sat, 22 Apr 2023
- 02:00:46 -0700 (PDT)
+ 02:01:24 -0700 (PDT)
 From:   Miss Marybeth <marybethmonson009@gmail.com>
-Date:   Sat, 22 Apr 2023 09:00:46 +0000
-X-Google-Sender-Auth: 2Wr_l0umdsZfEl9uxtafvcB4eVQ
-Message-ID: <CAFXq+JJK0gRJjpvTfqU5cD5Q6ZWbzu2OUYWVoEG+Vq0w8azm4g@mail.gmail.com>
-Subject: RE: HELLO DEAR
+Date:   Sat, 22 Apr 2023 09:01:24 +0000
+X-Google-Sender-Auth: suyP-Ly5f7aZhWKyAwzoqhzTBng
+Message-ID: <CAFXq+JLhev7wQaWrfGa_=5P8_HTeVJnpeOx1ExBTnLuV3rucdg@mail.gmail.com>
+Subject: 
 To:     undisclosed-recipients:;
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-X-Spam-Status: No, score=-1.3 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+X-Spam-Status: No, score=-1.8 required=5.0 tests=BAYES_00,DKIM_SIGNED,
         DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_ENVFROM_END_DIGIT,
-        FREEMAIL_FROM,RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,SPF_PASS,SUBJ_ALL_CAPS,
-        T_HK_NAME_FM_MR_MRS,T_SCC_BODY_TEXT_LINE autolearn=no
+        FREEMAIL_FROM,RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,SPF_PASS,
+        T_HK_NAME_FM_MR_MRS,T_SCC_BODY_TEXT_LINE autolearn=ham
         autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
