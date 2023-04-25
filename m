@@ -2,107 +2,94 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id CB48A6EDC91
-	for <lists+linux-doc@lfdr.de>; Tue, 25 Apr 2023 09:28:40 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 35A516EDE7A
+	for <lists+linux-doc@lfdr.de>; Tue, 25 Apr 2023 10:48:59 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S232851AbjDYH2j (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 25 Apr 2023 03:28:39 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:40364 "EHLO
+        id S233108AbjDYIs5 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 25 Apr 2023 04:48:57 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:39518 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S233620AbjDYH1y (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 25 Apr 2023 03:27:54 -0400
-Received: from mail-wr1-f54.google.com (mail-wr1-f54.google.com [209.85.221.54])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 7FF35CC0F;
-        Tue, 25 Apr 2023 00:27:13 -0700 (PDT)
-Received: by mail-wr1-f54.google.com with SMTP id ffacd0b85a97d-3047ff3269aso997751f8f.0;
-        Tue, 25 Apr 2023 00:27:13 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1682407623; x=1684999623;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=anbzC7fpaMxRgKbGTHCf+Ypir7RbEsM4mAuu7bHFScU=;
-        b=bgEl7WVxOhfc7V/EGpfWhH30TEreSYY9q/2hg7fBURjoHiiho7lr79vrO+0HOFsbr9
-         MMBL97H69YVMQy1gps10Moucx1jEmNljRPX0R5e6dlP2CxaSp/s6sXxC331cz7U6Eqf7
-         GakaR26Jd+9s5SYuO2/CfqhpyCv6RHqwLqp5XMc4JKr6ZxcXUMRXkETZ6tji3t2a7Lyq
-         3r21n0FyNAPv1yQd+NpbCCE/w0hvpf3eR6vDHx3XSQMllSrP9fbUUFTgx4xZTi3fMNG/
-         KzURjzrupc0978suMCqmqeF6hYCyA1/iRLV46AW0vIcBlJTZAFSX7esEfUXcSgKdq75j
-         nhIA==
-X-Gm-Message-State: AAQBX9cFptGHy+8Q36/gof+ncOA5dXDFd1s7VbD8q7cncI/sorMg6OEy
-        FxRRlK5a+q8o+q/8Nkvt5aQ=
-X-Google-Smtp-Source: AKy350biIUtO/kChzZEbsFdXOlPYfTzgcNJYccIpGUOz2HRwvvSh7SLB74CXnN+snvu/SLYpl1P5EA==
-X-Received: by 2002:a5d:4c4d:0:b0:2d7:a062:ec8 with SMTP id n13-20020a5d4c4d000000b002d7a0620ec8mr11277270wrt.41.1682407623105;
-        Tue, 25 Apr 2023 00:27:03 -0700 (PDT)
-Received: from costa-tp.redhat.com ([2a00:a040:1a3:c11b:3ae6:1732:e587:a81f])
-        by smtp.gmail.com with ESMTPSA id c16-20020a05600c0ad000b003f198dfbbfcsm8411489wmr.19.2023.04.25.00.27.01
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 25 Apr 2023 00:27:02 -0700 (PDT)
-From:   Costa Shulyupin <costa.shul@redhat.com>
-To:     Jonathan Corbet <corbet@lwn.net>, linux-doc@vger.kernel.org
-Cc:     Costa Shulyupin <costa.shul@redhat.com>,
-        Krzysztof Kozlowski <krzysztof.kozlowski@linaro.org>,
-        Akira Yokosawa <akiyks@gmail.com>,
-        Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
-        Thorsten Leemhuis <linux@leemhuis.info>,
-        Lukas Bulwahn <lukas.bulwahn@gmail.com>,
-        Rong Tao <rtoax@foxmail.com>,
-        linux-kernel@vger.kernel.org (open list)
-Subject: [PATCH] docs: split subtitle of Submitting patches
-Date:   Tue, 25 Apr 2023 10:26:43 +0300
-Message-Id: <20230425072644.868535-1-costa.shul@redhat.com>
-X-Mailer: git-send-email 2.40.0
+        with ESMTP id S233416AbjDYIsp (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 25 Apr 2023 04:48:45 -0400
+Received: from mail.tkos.co.il (wiki.tkos.co.il [84.110.109.230])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 1911B448C;
+        Tue, 25 Apr 2023 01:48:44 -0700 (PDT)
+Received: from tarshish (unknown [10.0.8.2])
+        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+        (No client certificate requested)
+        by mail.tkos.co.il (Postfix) with ESMTPS id 5DF854403E5;
+        Tue, 25 Apr 2023 11:29:37 +0300 (IDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=tkos.co.il;
+        s=default; t=1682411377;
+        bh=UkMtkcMa++6iafnSwjpqXocSH7XxdlGS73FZYqAy42c=;
+        h=References:From:To:Cc:Subject:Date:In-reply-to:From;
+        b=ER6tN7Ne7zbJaKJK/SgUbaqWD+EMpWJnlUNmkipwMGUUdFvlDkd5yNleCADsygJJG
+         DJtmLxs/Rq8XvEP9dLbKKmeeCJo7gJ5BMbB4bwQ63bOtpb/mdh/m+21QygRpg98tQz
+         e43fbIzITzWGsKYelX1pKhK0yIfY1vyAgvryR4WeEqOfV1fK4dXF60o4ODU/8qmK01
+         Y/E187SOV1rgJbSz7RfZd7GHwmF/Cf1q2aqPZnCRdHwhKEwk+uaqBK5lf/7zp0aPG1
+         AbBjRi44jzdzxcLBz6u5PkWxRub0+CTnPg7VKcio1TRTA/7tV5Fv0okzLYffH+R8HC
+         0n4imCKraTr4Q==
+References: <9e137548c4e76e0d8deef6d49460cb37897934ca.1682333574.git.baruch@tkos.co.il>
+User-agent: mu4e 1.9.21; emacs 28.2
+From:   Baruch Siach <baruch@tkos.co.il>
+To:     Rob Herring <robh+dt@kernel.org>,
+        Krzysztof Kozlowski <krzysztof.kozlowski+dt@linaro.org>
+Cc:     Alex Shi <alexs@kernel.org>, Yanteng Si <siyanteng@loongson.cn>,
+        devicetree@vger.kernel.org, linux-doc@vger.kernel.org
+Subject: Re: [PATCH v2 1/2] docs: dt: fix documented Primecell compatible
+ string
+Date:   Tue, 25 Apr 2023 11:31:15 +0300
+In-reply-to: <9e137548c4e76e0d8deef6d49460cb37897934ca.1682333574.git.baruch@tkos.co.il>
+Message-ID: <878regbbr7.fsf@tarshish>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Spam-Status: No, score=-1.4 required=5.0 tests=BAYES_00,
-        FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,HEADER_FROM_DIFFERENT_DOMAINS,
-        RCVD_IN_DNSWL_NONE,RCVD_IN_MSPIKE_H2,SPF_HELO_NONE,SPF_PASS,
-        T_SCC_BODY_TEXT_LINE autolearn=no autolearn_force=no version=3.4.6
+Content-Type: text/plain
+X-Spam-Status: No, score=-2.1 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,SPF_HELO_NONE,SPF_PASS,
+        T_SCC_BODY_TEXT_LINE,URIBL_BLOCKED autolearn=ham autolearn_force=no
+        version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Motivation:
+Hi Rob, Krzysztof,
 
-The original long page title in the left Content pane spans three lines:
+On Mon, Apr 24 2023, Baruch Siach wrote:
+> Only arm,primecell is documented as compatible string for Primecell
+> peripherals. Current code agrees with that.
 
-Submitting patches: the essential
-  guide to getting your code into
-  the kernel
+Once again my patches do not show up in patchwork. But they do show in
+lore:
 
-Issues:
-- It is not readable.
-- It further inflates already overpopulated Contents pane.
+  https://lore.kernel.org/linux-devicetree/9e137548c4e76e0d8deef6d49460cb37897934ca.1682333574.git.baruch@tkos.co.il/
 
-The solution:
-- Split the long title to title and subtitle.
-- Vertical bar '|' in Sphinx-doc introduces empty line to
-  make the subtitle closer to the title than to the following text.
+FYI,
+baruch
 
+> Signed-off-by: Baruch Siach <baruch@tkos.co.il>
+> ---
+> v2:
+>
+>   Split the translation update to a separate patch
+> ---
+>  Documentation/devicetree/usage-model.rst | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+>
+> diff --git a/Documentation/devicetree/usage-model.rst b/Documentation/devicetree/usage-model.rst
+> index b6a287955ee5..0717426856b2 100644
+> --- a/Documentation/devicetree/usage-model.rst
+> +++ b/Documentation/devicetree/usage-model.rst
+> @@ -415,6 +415,6 @@ When using the DT, this creates problems for of_platform_populate()
+>  because it must decide whether to register each node as either a
+>  platform_device or an amba_device.  This unfortunately complicates the
+>  device creation model a little bit, but the solution turns out not to
+> -be too invasive.  If a node is compatible with "arm,amba-primecell", then
+> +be too invasive.  If a node is compatible with "arm,primecell", then
+>  of_platform_populate() will register it as an amba_device instead of a
+>  platform_device.
 
-Signed-off-by: Costa Shulyupin <costa.shul@redhat.com>
----
- Documentation/process/submitting-patches.rst | 7 +++++--
- 1 file changed, 5 insertions(+), 2 deletions(-)
-
-diff --git a/Documentation/process/submitting-patches.rst b/Documentation/process/submitting-patches.rst
-index 7a5619fecb38..051eba1bbc7f 100644
---- a/Documentation/process/submitting-patches.rst
-+++ b/Documentation/process/submitting-patches.rst
-@@ -1,7 +1,10 @@
- .. _submittingpatches:
- 
--Submitting patches: the essential guide to getting your code into the kernel
--============================================================================
-+Submitting patches
-+==================
-+The essential guide to getting your code into the kernel
-+
-+|
- 
- For a person or company who wishes to submit a change to the Linux
- kernel, the process can sometimes be daunting if you're not familiar
 -- 
-2.40.0
-
+                                                     ~. .~   Tk Open Systems
+=}------------------------------------------------ooO--U--Ooo------------{=
+   - baruch@tkos.co.il - tel: +972.52.368.4656, http://www.tkos.co.il -
