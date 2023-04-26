@@ -2,75 +2,154 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 63BED6EFBC9
-	for <lists+linux-doc@lfdr.de>; Wed, 26 Apr 2023 22:38:50 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 5CBA46EFC87
+	for <lists+linux-doc@lfdr.de>; Wed, 26 Apr 2023 23:33:24 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S235264AbjDZUit (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 26 Apr 2023 16:38:49 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:56636 "EHLO
+        id S232197AbjDZVdW (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 26 Apr 2023 17:33:22 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:56176 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S234827AbjDZUis (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Wed, 26 Apr 2023 16:38:48 -0400
-Received: from mail-qt1-x82b.google.com (mail-qt1-x82b.google.com [IPv6:2607:f8b0:4864:20::82b])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id C9AAC115
-        for <linux-doc@vger.kernel.org>; Wed, 26 Apr 2023 13:38:47 -0700 (PDT)
-Received: by mail-qt1-x82b.google.com with SMTP id d75a77b69052e-3ef6e84945dso21977251cf.2
-        for <linux-doc@vger.kernel.org>; Wed, 26 Apr 2023 13:38:47 -0700 (PDT)
+        with ESMTP id S239500AbjDZVdL (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Wed, 26 Apr 2023 17:33:11 -0400
+Received: from mail-pf1-x44a.google.com (mail-pf1-x44a.google.com [IPv6:2607:f8b0:4864:20::44a])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id E879B1708
+        for <linux-doc@vger.kernel.org>; Wed, 26 Apr 2023 14:33:08 -0700 (PDT)
+Received: by mail-pf1-x44a.google.com with SMTP id d2e1a72fcca58-63b54cd223dso8506975b3a.1
+        for <linux-doc@vger.kernel.org>; Wed, 26 Apr 2023 14:33:08 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20221208; t=1682541527; x=1685133527;
-        h=to:subject:message-id:date:from:reply-to:mime-version:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=JL3yT3Q33W5/BCQtgOVvz2cK4S2v0dqNTi6RS5aes9g=;
-        b=aQncxVJNwweVJ4SoWMB7rELbKOfurvS0I6a0zdM1lrhvVqDZQrrDJMUSzZx3Mptof3
-         hHxIYNlCbQlhXnRols5xLtFBeLyrpj6DfzYNlc9Hsb9k1gXalzT2MqlI1DBA6fIkWiKW
-         ER8grA2PjkjxeiBTq0L7UwE0ojGol+apccBNY0KfZDYwa8rTkHC7s11Ut7dIW1eXKwKP
-         0YS0j6qaAJYt9wll9BLk9mUu1dI4h1gfUM9/hcFaTCeNTBXzp815JwrKM7UY/hMLsCln
-         yAfdswepq5XMkBZLwVpMmdAs51vX2I/E951uG4nQK9vr01+TvECEE03zp16GHYygvDWp
-         pNmA==
+        d=google.com; s=20221208; t=1682544788; x=1685136788;
+        h=cc:to:from:subject:message-id:references:mime-version:in-reply-to
+         :date:from:to:cc:subject:date:message-id:reply-to;
+        bh=Q6gblr+rFHKZD7TQERahHneNEtjZ/bNSKQPsJJcCZzo=;
+        b=64Yxcr1gv5G1ETQLzD3H47rDdo9llnuvTFEaz75CzsReyyURjw7U8DWGnhmfXVvgtZ
+         YyjiJSDUQj2A/nCNiitga4A5xU3qn7GA8HHODEzZFqstJ6xPwdWcKfVPsA/8yP6Gai8v
+         pqcDFk3HITVbGtpz6z6qskA9c4AfU1GVXBltqvK+7jsS8ezrnFSS9gYo/v+NwdF1wU8q
+         6U+Mkl74emXIw3FxE0fq6KRi66kPzgnHmDMcnbf6+jP8x37zNl+zx4xo8JHU/F2bf/vX
+         1pzG/Na/2k6qt2JrHeWhVVSdK2MdhHAKZnc/Tm6KiWNw9es1T3MVQDxRUmKKfvKG8PfG
+         yl6g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1682541527; x=1685133527;
-        h=to:subject:message-id:date:from:reply-to:mime-version
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=JL3yT3Q33W5/BCQtgOVvz2cK4S2v0dqNTi6RS5aes9g=;
-        b=W9J7q7YlRuzc9x4eyZ5K/Gl8l9cq/VHcziN2u1CyuNmo0bZHhtbb9sLbLkUKhpXATo
-         PGgEBluw33O7hhGHR76YnIblOqsNa46TfikYjacmKMP0e40VwBbEQU2P/Wr7tZsQGpjI
-         B1n1EswdvGy4NOvguZiyIBg/eYENBWhj1vX0s26+HSWMyHvh+oovs5lVFWBrqPdMxMko
-         unO0TbRfuoOIhR3fHH6qHvKF8qcRoVVR0FM7hDtNEckP3Xe7jhJjnn7dlJt+xchjIDN9
-         BVpqvs7PoTL+8MLtEl9EJnDJHsMxM2vJKSCw57pShkmkZHUBO3bPlGZ0RVMo/uhvYzMq
-         zY6g==
-X-Gm-Message-State: AAQBX9d+4cy7CQQbedtrFFLJVRazhPu0n3Yp7ah6XAJxFy55U1P7OXtL
-        IolTaFjAoJLRXiswjZZz5TSjSo5NSbdKl87Opz0=
-X-Google-Smtp-Source: AKy350avQLaHMkkF6qL1LVTEP9H9bMoxSZVvF85IqbMOhtT/FX0dRM+i/Z9E7B05dTaexba8pMSIzpq3MsDHM6i2/YQ=
-X-Received: by 2002:ac8:4e42:0:b0:3f0:a5a5:cb86 with SMTP id
- e2-20020ac84e42000000b003f0a5a5cb86mr19221155qtw.49.1682541526885; Wed, 26
- Apr 2023 13:38:46 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 2002:a05:622a:1391:b0:3b8:6d45:da15 with HTTP; Wed, 26 Apr 2023
- 13:38:46 -0700 (PDT)
-Reply-To: klassoumark@gmail.com
-From:   Mark Klassou <georgerown101@gmail.com>
-Date:   Wed, 26 Apr 2023 20:38:46 +0000
-Message-ID: <CAHmBb7sqUDFqCE6zxoS5WJGh+OjUOZSh34QxCoAhUGC45PXVeQ@mail.gmail.com>
-Subject: Re
-To:     undisclosed-recipients:;
-Content-Type: text/plain; charset="UTF-8"
-X-Spam-Status: No, score=4.7 required=5.0 tests=BAYES_50,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_ENVFROM_END_DIGIT,
-        FREEMAIL_FROM,FREEMAIL_REPLYTO,RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,
-        SPF_PASS,T_SCC_BODY_TEXT_LINE,UNDISC_FREEM autolearn=no
-        autolearn_force=no version=3.4.6
-X-Spam-Level: ****
+        d=1e100.net; s=20221208; t=1682544788; x=1685136788;
+        h=cc:to:from:subject:message-id:references:mime-version:in-reply-to
+         :date:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=Q6gblr+rFHKZD7TQERahHneNEtjZ/bNSKQPsJJcCZzo=;
+        b=D89mblbsARG8SH3trSu3Tur+Rlkm2nddFQmJUw8jipO3gmdoRFBB7pFu6GnSoyWml1
+         Wo5IVls8+1CFEr3NxYbwI0FeG1CLhDdp/vTmsyz6ImVH/ws5uq9EcyrdF79ET8UN0UUE
+         euAB77NQW2abw9haFy9U2FL2lpTtW0HdG5bpdNLBT/vQOpvETV1ovr3PYApfbEcVYYxL
+         zcv0dPcmb+hKFE7L2UQoPNqIkMa9ah2PGjFFAPiyVusazpthPyZqjLtgsIIyPcX3supP
+         ffdvkoFuEgmAh/YgMLIpRUSVv9ejzByB+Jgx/hqE86hnYBOHJwkkc7redZ8ZZCBCUtsr
+         1bYA==
+X-Gm-Message-State: AAQBX9dzxN4N3QlSqkC84QvMDxD3MECOyes+j/eGQrdr2O6fIq37VY62
+        lSaT9CbZFPwo5JP/P7Kdf075wg9+DZM=
+X-Google-Smtp-Source: AKy350Ywg746UTmjxVc3lRngXV/2GRWirJY3Wo6T7fLxvcZc5uWOilbZIUGF50vH2Wq5XgJ7IPSdZv2Jrbc=
+X-Received: from zagreus.c.googlers.com ([fda3:e722:ac3:cc00:7f:e700:c0a8:5c37])
+ (user=seanjc job=sendgmr) by 2002:a05:6a00:134b:b0:63d:5dcd:bc06 with SMTP id
+ k11-20020a056a00134b00b0063d5dcdbc06mr8678577pfu.5.1682544788341; Wed, 26 Apr
+ 2023 14:33:08 -0700 (PDT)
+Date:   Wed, 26 Apr 2023 14:33:06 -0700
+In-Reply-To: <04383d21-b71e-93dd-5f4c-b39f5bc21937@amd.com>
+Mime-Version: 1.0
+References: <20230327141816.2648615-1-carlos.bilbao@amd.com>
+ <ZEfrjtgGgm1lpadq@google.com> <DM8PR11MB575046B6DAA17B41FFED8080E7659@DM8PR11MB5750.namprd11.prod.outlook.com>
+ <9fa5ce43-584d-878d-227a-fb458254c00a@amd.com> <ZElIjw7Ca6N2mYHe@google.com>
+ <9021d861-cde6-a51a-7d8c-b3f67eaa01d8@amd.com> <ZEmBULXp24oMxaUH@google.com> <04383d21-b71e-93dd-5f4c-b39f5bc21937@amd.com>
+Message-ID: <ZEmYR0fWl05lGW0d@google.com>
+Subject: Re: [PATCH] docs: security: Confidential computing intro and threat model
+From:   Sean Christopherson <seanjc@google.com>
+To:     Carlos Bilbao <carlos.bilbao@amd.com>
+Cc:     Elena Reshetova <elena.reshetova@intel.com>,
+        "corbet@lwn.net" <corbet@lwn.net>,
+        "linux-doc@vger.kernel.org" <linux-doc@vger.kernel.org>,
+        "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
+        "ardb@kernel.org" <ardb@kernel.org>,
+        "kraxel@redhat.com" <kraxel@redhat.com>,
+        "dovmurik@linux.ibm.com" <dovmurik@linux.ibm.com>,
+        "dave.hansen@linux.intel.com" <dave.hansen@linux.intel.com>,
+        "Dhaval.Giani@amd.com" <Dhaval.Giani@amd.com>,
+        "michael.day@amd.com" <michael.day@amd.com>,
+        "pavankumar.paluri@amd.com" <pavankumar.paluri@amd.com>,
+        "David.Kaplan@amd.com" <David.Kaplan@amd.com>,
+        "Reshma.Lal@amd.com" <Reshma.Lal@amd.com>,
+        "Jeremy.Powell@amd.com" <Jeremy.Powell@amd.com>,
+        "sathyanarayanan.kuppuswamy@linux.intel.com" 
+        <sathyanarayanan.kuppuswamy@linux.intel.com>,
+        "alexander.shishkin@linux.intel.com" 
+        <alexander.shishkin@linux.intel.com>,
+        "thomas.lendacky@amd.com" <thomas.lendacky@amd.com>,
+        "tglx@linutronix.de" <tglx@linutronix.de>,
+        "dgilbert@redhat.com" <dgilbert@redhat.com>,
+        "gregkh@linuxfoundation.org" <gregkh@linuxfoundation.org>,
+        "dinechin@redhat.com" <dinechin@redhat.com>,
+        "linux-coco@lists.linux.dev" <linux-coco@lists.linux.dev>,
+        "berrange@redhat.com" <berrange@redhat.com>,
+        "mst@redhat.com" <mst@redhat.com>, "tytso@mit.edu" <tytso@mit.edu>,
+        "jikos@kernel.org" <jikos@kernel.org>,
+        "joro@8bytes.org" <joro@8bytes.org>,
+        "leon@kernel.org" <leon@kernel.org>,
+        "richard.weinberger@gmail.com" <richard.weinberger@gmail.com>,
+        "lukas@wunner.de" <lukas@wunner.de>,
+        "jejb@linux.ibm.com" <jejb@linux.ibm.com>,
+        "cdupontd@redhat.com" <cdupontd@redhat.com>,
+        "jasowang@redhat.com" <jasowang@redhat.com>,
+        "sameo@rivosinc.com" <sameo@rivosinc.com>,
+        "bp@alien8.de" <bp@alien8.de>,
+        "security@kernel.org" <security@kernel.org>,
+        Andrew Bresticker <abrestic@rivosinc.com>,
+        Rajnesh Kanwal <rkanwal@rivosinc.com>,
+        Dylan Reid <dylan@rivosinc.com>,
+        Ravi Sahita <ravi@rivosinc.com>
+Content-Type: text/plain; charset="us-ascii"
+X-Spam-Status: No, score=-9.6 required=5.0 tests=BAYES_00,DKIMWL_WL_MED,
+        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_NONE,
+        SPF_HELO_NONE,SPF_PASS,T_SCC_BODY_TEXT_LINE,USER_IN_DEF_DKIM_WL
+        autolearn=unavailable autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Good Morning,
+On Wed, Apr 26, 2023, Carlos Bilbao wrote:
+> On 4/26/23 2:53 PM, Sean Christopherson wrote:
+> > On Wed, Apr 26, 2023, Carlos Bilbao wrote:
+> >> On 4/26/23 10:51 AM, Sean Christopherson wrote:
+> >>> This document is named confidential-computing.rst, not tdx-and-snp.rst.  Not
+> >>> explicitly mentioning SEV doesn't magically warp reality to make descriptions like
+> >>> this one from security/secrets/coco.rst disappear:
+> >>>
+> >>>   Introduction                                                                    
+> >>>   ============                                                                    
+> >>>                                                                                 
+> >>>   Confidential Computing (coco) hardware such as AMD SEV (Secure Encrypted        
+> >>>   Virtualization) allows guest owners to inject secrets into the VMs              
+> >>>   memory without the host/hypervisor being able to read them.
+> >>>
+> >>> My complaint about this document being too Intel/AMD centric isn't that it doesn't
+> >>> mention other implementations, it's that the doc describes CoCo purely from the
+> >>> narrow viewpoint of Intel TDX and AMD SNP, and to be blunt, reads like a press
+> >>> release and not an objective overview of CoCo.
+> >>
+> >> Be specific about the parts of the document that you feel are too
+> >> AMD/Intel centric, and we will correct them.
+> > 
+> > The whole thing?  There aren't specific parts that are too SNP/TDX centric, the
+> > entire tone and approach of the document is wrong.  As I responded to Dave, I
+> > would feel differently if the document were named tdx-and-snp-threat-model.rst,
+> > but this patch proposes a generic confidential-computing.rst and presents the
+> > SNP+TDX confidential VM use case as if it's the *only* confidential computing use
+> > case.
+> 
+> What part of us describing the current Linux kernel threat model or
+> defining basic concepts of confidential computing is SNP/TDX centric?
+> 
+> IMHO, simply stating that "the whole thing" is wrong and that you don't
+> like the "tone", is not making a good enough case for us to change
+> anything, including the name of the document.
 
-I was only wondering if you got my previous email? I have been trying
-to reach you by email. Kindly get back to me swiftly, it is very
-important.
+I honestly don't know how to respond since you are either unable or unwilling to
+see the problems with naming a document "confidential computing" and then talking
+only about one very, very specific flavor of confidential computing as if that is
+the only flavor of confidential computing.
 
-Yours faithfully
-Mark Klassou.
+So if you want to push this doc as is, please add my
+
+Nacked-by: Sean Christopherson <seanjc@google.com>
