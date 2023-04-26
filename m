@@ -2,102 +2,127 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 6E9176EF89D
-	for <lists+linux-doc@lfdr.de>; Wed, 26 Apr 2023 18:46:01 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id D7E7A6EF813
+	for <lists+linux-doc@lfdr.de>; Wed, 26 Apr 2023 18:03:37 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S229605AbjDZQqA (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 26 Apr 2023 12:46:00 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:48548 "EHLO
+        id S240792AbjDZQDf (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 26 Apr 2023 12:03:35 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:59118 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S231704AbjDZQp6 (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Wed, 26 Apr 2023 12:45:58 -0400
-Received: from mail-pl1-x634.google.com (mail-pl1-x634.google.com [IPv6:2607:f8b0:4864:20::634])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 62BB3659E
-        for <linux-doc@vger.kernel.org>; Wed, 26 Apr 2023 09:45:57 -0700 (PDT)
-Received: by mail-pl1-x634.google.com with SMTP id d9443c01a7336-1a68f2345c5so58326045ad.2
-        for <linux-doc@vger.kernel.org>; Wed, 26 Apr 2023 09:45:57 -0700 (PDT)
+        with ESMTP id S240189AbjDZQDe (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Wed, 26 Apr 2023 12:03:34 -0400
+Received: from mail-yb1-xb49.google.com (mail-yb1-xb49.google.com [IPv6:2607:f8b0:4864:20::b49])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 232D84EE5
+        for <linux-doc@vger.kernel.org>; Wed, 26 Apr 2023 09:03:31 -0700 (PDT)
+Received: by mail-yb1-xb49.google.com with SMTP id 3f1490d57ef6-b9229bffbebso12417755276.0
+        for <linux-doc@vger.kernel.org>; Wed, 26 Apr 2023 09:03:31 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=rivosinc-com.20221208.gappssmtp.com; s=20221208; t=1682527556; x=1685119556;
-        h=to:from:content-transfer-encoding:mime-version:date:message-id
-         :subject:references:in-reply-to:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=yatjVq4XJpKuYfqw9iU5Uu3id4cVfMvHZW+dyEQj7X4=;
-        b=ROPYuwymJIXdKR2mNFiFbms7bF34DxQulcyPoD2s8ls+l6DB2FjVlZvO7u5GF9MPuQ
-         cdFwxm/1Wdzy7TIPTZ69Wr+YgUHOotkVJ7lnAfWkJ+f+59O5mxxR14YA5dVdOLDcas7l
-         VrI6xsoMmtJ5Pv5IDSUJMq66LuSfXGyLRS8Qnv97ZkKXvzCn2wsVN9nRn1cVtoxSSXiT
-         e0t5pUo4xzsce/7smaQtXT2frKjr1syw+iTOxFq/frawwnHjPZD+orX6kCf+XxBV2eN3
-         1w+aG0j+ES+k3qrwnew12cvsaYLIY7zrqWLSFckf6BVWDB/+mI8M3pzDq0G5ogsIjjQk
-         UAuA==
+        d=google.com; s=20221208; t=1682525010; x=1685117010;
+        h=cc:to:from:subject:message-id:references:mime-version:in-reply-to
+         :date:from:to:cc:subject:date:message-id:reply-to;
+        bh=1iOXlTlBLlGt+xFnlJYCk9LyE8NZedUUmTtvF/W7cl8=;
+        b=h+7lAviaHcHoFJpqy3l+q4CabqtBWTwMXj6h3C+ydRYC7L5NH31UBwdxn/KILMf1vm
+         Y3vhdFcyJJxaJBnjdPnWm7EBsjBS8kuNRT0+c+ooFTlTSiIAeM+ZhPZ+v4avFK2rF6da
+         NKHHFZS93BeoFnmnVNHb70DY2nYMrEXtIMaEcvAzh9FEsQlC+lu4UZrSdQJNIi3TbNiN
+         Osqj2HWbJV565qJluzmWFQ2Zx94MqcPWBMekVUXkmQ0ynAuX+95+bgjNZRWPsXuaW3gU
+         EXWxsZ29GFTlMsTaKN2ZOqlgY92cP9ECTwdj+vbRvLIyJcH5f/MnuTDBzk0s/4Dcuuor
+         UogA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1682527556; x=1685119556;
-        h=to:from:content-transfer-encoding:mime-version:date:message-id
-         :subject:references:in-reply-to:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=yatjVq4XJpKuYfqw9iU5Uu3id4cVfMvHZW+dyEQj7X4=;
-        b=QhhbMs3KlD+iF3QrGgRizmpotzN+GloTpx3smfzEIEEUTjg9b91V8UIq7FwieQiUe4
-         tYJWnj3EF04UmHrzNGJVkLoUk7iF/FPOtX6WDJACkP6YtzuQfc/75w1OcfROjsCxDmXZ
-         HOFusBVh6sjdH5yk6MVsQ7fNriQNiXdi/HQ9hTgnBCkG0YbfxQr2G6Y6Ri0G+AEU3351
-         FesY3MoJybgq9ZGN5YVgPw/WM0Ewa+z+T4WKTkGnMYcrKyL/fgquB5n19kNUHoDdHKsH
-         GHc4Wl8vSazh9qP2oBP1T/SErAFnN/3TXhT/PqZOcJ3m5g5XleofMLGbAWpH8c52k4Iz
-         ieEA==
-X-Gm-Message-State: AAQBX9cbCNEVU9eISjZvgXiRzqMi0yvsDvjieoWDnz/Imfb8YCRTGGCL
-        bc4562Y8OocZvvr733Sb4ncKwg==
-X-Google-Smtp-Source: AKy350aLlCXNGnDpwf2/bJmKJLs42syuWY18ObpLSP7pw47h7IOSJhgDcejLVqj4h9oiMCZCX1X0WQ==
-X-Received: by 2002:a17:902:fb86:b0:1a5:4ff:33c0 with SMTP id lg6-20020a170902fb8600b001a504ff33c0mr18747856plb.12.1682527556692;
-        Wed, 26 Apr 2023 09:45:56 -0700 (PDT)
-Received: from localhost ([135.180.227.0])
-        by smtp.gmail.com with ESMTPSA id f2-20020a170902ab8200b001a0448731c2sm10176955plr.47.2023.04.26.09.45.56
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 26 Apr 2023 09:45:56 -0700 (PDT)
-In-Reply-To: <20230424092313.178699-1-alexghiti@rivosinc.com>
-References: <20230424092313.178699-1-alexghiti@rivosinc.com>
-Subject: Re: [PATCH v10 0/1] riscv: Allow to downgrade paging mode from the
- command line
-Message-Id: <168252462351.26895.11552045445752621188.b4-ty@rivosinc.com>
-Date:   Wed, 26 Apr 2023 08:57:03 -0700
-MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.13-dev-901c5
-From:   Palmer Dabbelt <palmer@rivosinc.com>
-To:     Jonathan Corbet <corbet@lwn.net>,
-        Paul Walmsley <paul.walmsley@sifive.com>,
-        Palmer Dabbelt <palmer@dabbelt.com>,
-        Albert Ou <aou@eecs.berkeley.edu>,
-        Conor Dooley <conor@kernel.org>,
-        Ard Biesheuvel <ardb@kernel.org>,
-        =C3=B6rn_T=C3=B6pel?= <bjorn@kernel.org>,
+        d=1e100.net; s=20221208; t=1682525010; x=1685117010;
+        h=cc:to:from:subject:message-id:references:mime-version:in-reply-to
+         :date:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=1iOXlTlBLlGt+xFnlJYCk9LyE8NZedUUmTtvF/W7cl8=;
+        b=HrejDAlpQoObw0fZOHcZ69jdSd5amOm1FxiRX2tXrlN3j381voU8VFcvlDZMBedjhn
+         miPtY5QBGKXU0dqaf8M1sz271cKaACWdq2ScHQZVuCpf8hHv5tnz50LkYSTPaFKPFES1
+         NiGAFby7ALjkCQB4M/Itz1QNTxuWKmp/d++MaPvGIrYBFluqhqyRMmscXGAm/BwSycSI
+         yy6ngII44HlrygnMFjjh0TVx5PFT5OJApcpzyT4sjaRZyqmR7Ub43Z2i6RiTQAePDQVz
+         b2D4Lps4xw73QuN6oR5/KBsqcXfhGitw3Fft9NOooRNjQHvhHzMECAEE7ZB9IJISBLe5
+         gV8g==
+X-Gm-Message-State: AAQBX9dz//OqoVAl4j4tS1A89Bmk/s0yiRkK7NH0m8CZtfkscBGle9Z6
+        YLFYtfimBoMeclCqyXVC3XMhVO7npJY=
+X-Google-Smtp-Source: AKy350bLi2qJ+4nzU1ANPOt2oieWNNI6eHJyZmf0N2WaN8R6KPw5aRqvu3QGqGyegbPKHISQlL/Sdaz4cD4=
+X-Received: from zagreus.c.googlers.com ([fda3:e722:ac3:cc00:7f:e700:c0a8:5c37])
+ (user=seanjc job=sendgmr) by 2002:a25:cac4:0:b0:b8f:1d2c:243f with SMTP id
+ a187-20020a25cac4000000b00b8f1d2c243fmr7979508ybg.1.1682525010384; Wed, 26
+ Apr 2023 09:03:30 -0700 (PDT)
+Date:   Wed, 26 Apr 2023 09:03:28 -0700
+In-Reply-To: <da1c807e-66b7-7e9f-143d-44b6f7389b50@intel.com>
+Mime-Version: 1.0
+References: <20230327141816.2648615-1-carlos.bilbao@amd.com>
+ <ZEfrjtgGgm1lpadq@google.com> <da1c807e-66b7-7e9f-143d-44b6f7389b50@intel.com>
+Message-ID: <ZElLUMDhIZPoG87K@google.com>
+Subject: Re: [PATCH] docs: security: Confidential computing intro and threat model
+From:   Sean Christopherson <seanjc@google.com>
+To:     Dave Hansen <dave.hansen@intel.com>
+Cc:     Carlos Bilbao <carlos.bilbao@amd.com>, corbet@lwn.net,
         linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
-        linux-riscv@lists.infradead.org,
-        Alexandre Ghiti <alexghiti@rivosinc.com>
-X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-        DKIM_VALID,RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,SPF_PASS,
-        T_SCC_BODY_TEXT_LINE autolearn=unavailable autolearn_force=no
-        version=3.4.6
+        ardb@kernel.org, kraxel@redhat.com, dovmurik@linux.ibm.com,
+        elena.reshetova@intel.com, dave.hansen@linux.intel.com,
+        Dhaval.Giani@amd.com, michael.day@amd.com,
+        pavankumar.paluri@amd.com, David.Kaplan@amd.com,
+        Reshma.Lal@amd.com, Jeremy.Powell@amd.com,
+        sathyanarayanan.kuppuswamy@linux.intel.com,
+        alexander.shishkin@linux.intel.com, thomas.lendacky@amd.com,
+        tglx@linutronix.de, dgilbert@redhat.com,
+        gregkh@linuxfoundation.org, dinechin@redhat.com,
+        linux-coco@lists.linux.dev, berrange@redhat.com, mst@redhat.com,
+        tytso@mit.edu, jikos@kernel.org, joro@8bytes.org, leon@kernel.org,
+        richard.weinberger@gmail.com, lukas@wunner.de, jejb@linux.ibm.com,
+        cdupontd@redhat.com, jasowang@redhat.com, sameo@rivosinc.com,
+        bp@alien8.de, security@kernel.org
+Content-Type: text/plain; charset="us-ascii"
+X-Spam-Status: No, score=-9.6 required=5.0 tests=BAYES_00,DKIMWL_WL_MED,
+        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_NONE,
+        SPF_HELO_NONE,SPF_PASS,T_SCC_BODY_TEXT_LINE,USER_IN_DEF_DKIM_WL
+        autolearn=unavailable autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-
-On Mon, 24 Apr 2023 11:23:12 +0200, Alexandre Ghiti wrote:
-> his new version gets rid of the limitation that prevented KASAN kernels
-> to use the newly introduced parameters.
+On Wed, Apr 26, 2023, Dave Hansen wrote:
+> On 4/25/23 08:02, Sean Christopherson wrote:
+> >> +While the traditional hypervisor has unlimited access to guest data and
+> >> +can leverage this access to attack the guest, the CoCo systems mitigate
+> >> +such attacks by adding security features like guest data confidentiality
+> >> +and integrity protection. This threat model assumes that those features
+> >> +are available and intact.
+> > Again, if you're claiming integrity is a key tenant, then SEV and SEV-ES can't be
+> > considered CoCo.
 > 
-> While looking into KASLR, I fell onto commit aacd149b6238 ("arm64: head:
-> avoid relocating the kernel twice for KASLR"): it allows to use the fdt
-> functions very early in the boot process with KASAN enabled by simply
-> compiling a new version of those functions without instrumentation.
+> This document is clearly trying to draw a line in the sand and say:
 > 
-> [...]
+> 	CoCo on one side, non-CoCo on the other
+> 
+> I think it's less important to name that line than it is to realize what
+> we need to do on one side versus the other.
+> 
+> For instance, if the system doesn't have strong guest memory
+> confidentiality protection, then it's kinda silly to talk about the
+> guest's need to defend against "CoCo guest data attacks".
+> 
+> Sure, the mitigations for "CoCo guest data attacks" are pretty sane even
+> without all this CoCo jazz. But if your goal is to mitigate damage that
+> a VMM out of the TCB can do, then they don't do much if there isn't
+> VMM->guest memory confidentiality in the first place.
+> 
+> So, sure, CoCo implementations exist along a continuum.  SGX is in there
+> (with and without integrity protection), as are SEV=>SEV-ES=>SEV and
+> MKTME=>TDX.
+> 
+> This document is making the case that the kernel should go to some new
+> (and extraordinary) lengths to defend itself against ... something.
 
-Applied, thanks!
+Then name the document something other than confidential-computing.rst, e.g.
+tdx-and-snp-threat-model.rst.  Because this doc isn't remotely close to achieving
+its stated goal of providing an "architecture-agnostic introduction ... to help
+developers gain a foundational understanding of the subject".  IMO, it does more
+harm than good on that front because it presents Intel's and AMD's viewpoints as
+if they are widely accepted for all of CoCo, and that is just flagrantly false.
 
-[1/1] riscv: Allow to downgrade paging mode from the command line
-      https://git.kernel.org/palmer/c/26e7aacb83df
-
-Best regards,
--- 
-Palmer Dabbelt <palmer@rivosinc.com>
-
+ : In order to effectively engage with the linux-coco mailing list and contribute
+ : to ongoing kernel efforts, one must have a thorough familiarity with these
+ : concepts.  Add a concise, architecture-agnostic introduction and threat model
+ : to provide a reference for ongoing design discussions and to help developers
+ : gain a foundational understanding of the subject.
