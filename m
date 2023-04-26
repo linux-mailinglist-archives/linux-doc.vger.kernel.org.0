@@ -2,37 +2,35 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id E82D96EF49D
-	for <lists+linux-doc@lfdr.de>; Wed, 26 Apr 2023 14:45:45 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id E10476EF4C0
+	for <lists+linux-doc@lfdr.de>; Wed, 26 Apr 2023 14:53:59 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S241046AbjDZMpn (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 26 Apr 2023 08:45:43 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:53556 "EHLO
+        id S240945AbjDZMx6 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 26 Apr 2023 08:53:58 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:33852 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S241053AbjDZMpY (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Wed, 26 Apr 2023 08:45:24 -0400
-Received: from bee.tesarici.cz (bee.tesarici.cz [IPv6:2a03:3b40:fe:2d4::1])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 7F84765AC;
-        Wed, 26 Apr 2023 05:44:45 -0700 (PDT)
-Received: from meshulam.tesarici.cz (dynamic-2a00-1028-83b8-1e7a-4427-cc85-6706-c595.ipv6.o2.cz [IPv6:2a00:1028:83b8:1e7a:4427:cc85:6706:c595])
-        (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-         key-exchange ECDHE (P-256) server-signature RSA-PSS (2048 bits) server-digest SHA256)
+        with ESMTP id S240523AbjDZMx6 (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Wed, 26 Apr 2023 08:53:58 -0400
+Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 6EFB71720;
+        Wed, 26 Apr 2023 05:53:56 -0700 (PDT)
+Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
+        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
         (No client certificate requested)
-        by bee.tesarici.cz (Postfix) with ESMTPSA id CA0C9165337;
-        Wed, 26 Apr 2023 14:44:40 +0200 (CEST)
-Authentication-Results: mail.tesarici.cz; dmarc=fail (p=none dis=none) header.from=tesarici.cz
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=tesarici.cz; s=mail;
-        t=1682513081; bh=TUvWyN8jrQgQ7QsrJmJ6ZjN4uMqDIuUrXKhGCfiOkT4=;
-        h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
-        b=W9ZadZpoOR/aiQ3ArOSxYlCe4i81AoAJ2X36fC/6cYva7r6B6NKzsh7xS8FB1MZCA
-         ghC5/ZaJl5If6DnpEnLvxseVebYHoee5ytSORNXCiH4AvSGmzfow6fTL5xG21KGXKr
-         3MBq6vh3NSBopuWhUDcbCWpJNFjf9JcqlWLT+Gz6oy7HG/11IwZTrJNDomATw8u7a2
-         gDdYRuHACnfzoQ5c99yHxDV8QCfKWZFD+7KKEK1eGLWUbdaJuSXF+KBMAqFghkrW/D
-         s7GKjvo14gtjI37/6t8zfyh9wWDL7tHklrNDb2N8mrGVRNlAbxkS84kZ1lvFwVMR7h
-         /O8vY9/sPtH3g==
-Date:   Wed, 26 Apr 2023 14:44:39 +0200
-From:   Petr =?UTF-8?B?VGVzYcWZw61r?= <petr@tesarici.cz>
-To:     Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+        by dfw.source.kernel.org (Postfix) with ESMTPS id EA54163665;
+        Wed, 26 Apr 2023 12:53:55 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id C0A4AC433D2;
+        Wed, 26 Apr 2023 12:53:54 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=linuxfoundation.org;
+        s=korg; t=1682513635;
+        bh=rnR2gHMom5cZ9EE0QbaWG0mAQc/4BfAqxA6wiBHOddQ=;
+        h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+        b=0O5fefgIhXFVwx4bd/JHCnR2BWedmFunEuhy57jrlZSyAl3OzSBYYcehg0kqdST72
+         LDrHPOnCB314Vs0VFJJIEkS9b2AQwIuZKkVcvVjIisDaelGAgM9+dQ/hD/hIewmiWV
+         KBROROmgExlXq2SJmL+iWP6rJn4hf+8RDIC0tFSM=
+Date:   Wed, 26 Apr 2023 14:53:52 +0200
+From:   Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+To:     Petr =?utf-8?B?VGVzYcWZw61r?= <petr@tesarici.cz>
 Cc:     Petr Tesarik <petrtesarik@huaweicloud.com>,
         Jonathan Corbet <corbet@lwn.net>,
         "Rafael J. Wysocki" <rafael@kernel.org>,
@@ -71,83 +69,88 @@ Cc:     Petr Tesarik <petrtesarik@huaweicloud.com>,
         Kefeng Wang <wangkefeng.wang@huawei.com>
 Subject: Re: [PATCH v2 0/7] Allow dynamic allocation of software IO TLB
  bounce buffers
-Message-ID: <20230426144439.5674f8bc@meshulam.tesarici.cz>
-In-Reply-To: <2023042617-wobble-enlighten-9361@gregkh>
+Message-ID: <2023042630-amends-speech-7db2@gregkh>
 References: <cover.1681898595.git.petr.tesarik.ext@huawei.com>
-        <20230426141520.0caf4386@meshulam.tesarici.cz>
-        <2023042617-wobble-enlighten-9361@gregkh>
-X-Mailer: Claws Mail 4.1.1 (GTK 3.24.37; x86_64-suse-linux-gnu)
+ <20230426141520.0caf4386@meshulam.tesarici.cz>
+ <2023042617-wobble-enlighten-9361@gregkh>
+ <20230426144439.5674f8bc@meshulam.tesarici.cz>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
-X-Spam-Status: No, score=-2.1 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,SPF_HELO_PASS,SPF_PASS,
-        T_SCC_BODY_TEXT_LINE,URIBL_BLOCKED autolearn=ham autolearn_force=no
-        version=3.4.6
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <20230426144439.5674f8bc@meshulam.tesarici.cz>
+X-Spam-Status: No, score=-7.3 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_HI,
+        SPF_HELO_NONE,SPF_PASS,T_SCC_BODY_TEXT_LINE,URIBL_BLOCKED
+        autolearn=ham autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Hi Greg,
+On Wed, Apr 26, 2023 at 02:44:39PM +0200, Petr Tesařík wrote:
+> Hi Greg,
+> 
+> On Wed, 26 Apr 2023 14:26:36 +0200
+> Greg Kroah-Hartman <gregkh@linuxfoundation.org> wrote:
+> 
+> > On Wed, Apr 26, 2023 at 02:15:20PM +0200, Petr Tesařík wrote:
+> > > Hi,
+> > > 
+> > > On Wed, 19 Apr 2023 12:03:52 +0200
+> > > Petr Tesarik <petrtesarik@huaweicloud.com> wrote:
+> > >   
+> > > > From: Petr Tesarik <petr.tesarik.ext@huawei.com>
+> > > > 
+> > > > The goal of my work is to provide more flexibility in the sizing of
+> > > > SWIOTLB.
+> > > > 
+> > > > The software IO TLB was designed with these assumptions:
+> > > > 
+> > > > 1. It would not be used much, especially on 64-bit systems.
+> > > > 2. A small fixed memory area (64 MiB by default) is sufficient to
+> > > >    handle the few cases which require a bounce buffer.
+> > > > 3. 64 MiB is little enough that it has no impact on the rest of the
+> > > >    system.
+> > > > 
+> > > > First, if SEV is active, all DMA must be done through shared
+> > > > unencrypted pages, and SWIOTLB is used to make this happen without
+> > > > changing device drivers. The software IO TLB size is increased to
+> > > > 6% of total memory in sev_setup_arch(), but that is more of an
+> > > > approximation. The actual requirements may vary depending on the
+> > > > amount of I/O and which drivers are used. These factors may not be
+> > > > know at boot time, i.e. when SWIOTLB is allocated.
+> > > > 
+> > > > Second, other colleagues have noticed that they can reliably get
+> > > > rid of occasional OOM kills on an Arm embedded device by reducing
+> > > > the SWIOTLB size. This can be achieved with a kernel parameter, but
+> > > > determining the right value puts additional burden on pre-release
+> > > > testing, which could be avoided if SWIOTLB is allocated small and
+> > > > grows only when necessary.  
+> > > 
+> > > Now that merging into 6.4 has begun, what about this patch series? I'm
+> > > eager to get some feedback (positive or negative) and respin the next
+> > > version.  
+> > 
+> > It's the merge window, we can't add new things that haven't been in
+> > linux-next already.
+> 
+> This is understood. I'm not asking for immediate inclusion.
+> 
+> >   Please resubmit it after -rc1 is out.
+> 
+> If you can believe that rebasing to -rc1 will be enough, then I will
+> also try to believe I'm lucky. ;-)
+> 
+> The kind of feedback I really want to get is e.g. about the extra
+> per-device DMA-specific fields. If they cannot be added to struct
+> device, then I'd rather start discussing an interim solution, because
+> getting all existing DMA fields out of that struct will take a lot of
+> time...
 
-On Wed, 26 Apr 2023 14:26:36 +0200
-Greg Kroah-Hartman <gregkh@linuxfoundation.org> wrote:
+I thought the goal was to get them out of the device and into the bus
+instead right?  Or was it the other way around?  I can't remember
+anymore, sorry...
 
-> On Wed, Apr 26, 2023 at 02:15:20PM +0200, Petr Tesa=C5=99=C3=ADk wrote:
-> > Hi,
-> >=20
-> > On Wed, 19 Apr 2023 12:03:52 +0200
-> > Petr Tesarik <petrtesarik@huaweicloud.com> wrote:
-> >  =20
-> > > From: Petr Tesarik <petr.tesarik.ext@huawei.com>
-> > >=20
-> > > The goal of my work is to provide more flexibility in the sizing of
-> > > SWIOTLB.
-> > >=20
-> > > The software IO TLB was designed with these assumptions:
-> > >=20
-> > > 1. It would not be used much, especially on 64-bit systems.
-> > > 2. A small fixed memory area (64 MiB by default) is sufficient to
-> > >    handle the few cases which require a bounce buffer.
-> > > 3. 64 MiB is little enough that it has no impact on the rest of the
-> > >    system.
-> > >=20
-> > > First, if SEV is active, all DMA must be done through shared
-> > > unencrypted pages, and SWIOTLB is used to make this happen without
-> > > changing device drivers. The software IO TLB size is increased to
-> > > 6% of total memory in sev_setup_arch(), but that is more of an
-> > > approximation. The actual requirements may vary depending on the
-> > > amount of I/O and which drivers are used. These factors may not be
-> > > know at boot time, i.e. when SWIOTLB is allocated.
-> > >=20
-> > > Second, other colleagues have noticed that they can reliably get
-> > > rid of occasional OOM kills on an Arm embedded device by reducing
-> > > the SWIOTLB size. This can be achieved with a kernel parameter, but
-> > > determining the right value puts additional burden on pre-release
-> > > testing, which could be avoided if SWIOTLB is allocated small and
-> > > grows only when necessary. =20
-> >=20
-> > Now that merging into 6.4 has begun, what about this patch series? I'm
-> > eager to get some feedback (positive or negative) and respin the next
-> > version. =20
->=20
-> It's the merge window, we can't add new things that haven't been in
-> linux-next already.
-
-This is understood. I'm not asking for immediate inclusion.
-
->   Please resubmit it after -rc1 is out.
-
-If you can believe that rebasing to -rc1 will be enough, then I will
-also try to believe I'm lucky. ;-)
-
-The kind of feedback I really want to get is e.g. about the extra
-per-device DMA-specific fields. If they cannot be added to struct
-device, then I'd rather start discussing an interim solution, because
-getting all existing DMA fields out of that struct will take a lot of
-time...
-
-Thanks,
-Petr T
+greg k-h
