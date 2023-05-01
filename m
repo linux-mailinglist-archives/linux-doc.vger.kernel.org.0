@@ -2,56 +2,56 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id E4BFE6F3468
-	for <lists+linux-doc@lfdr.de>; Mon,  1 May 2023 18:59:58 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 421F46F347C
+	for <lists+linux-doc@lfdr.de>; Mon,  1 May 2023 19:00:14 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S233106AbjEAQ7s (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 1 May 2023 12:59:48 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:59666 "EHLO
+        id S233186AbjEARAJ (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 1 May 2023 13:00:09 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:59610 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S232942AbjEAQ66 (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Mon, 1 May 2023 12:58:58 -0400
+        with ESMTP id S232356AbjEAQ7D (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Mon, 1 May 2023 12:59:03 -0400
 Received: from mail-yb1-xb4a.google.com (mail-yb1-xb4a.google.com [IPv6:2607:f8b0:4864:20::b4a])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id EB7241BE5
-        for <linux-doc@vger.kernel.org>; Mon,  1 May 2023 09:56:15 -0700 (PDT)
-Received: by mail-yb1-xb4a.google.com with SMTP id 3f1490d57ef6-b9a7766d220so3265423276.2
-        for <linux-doc@vger.kernel.org>; Mon, 01 May 2023 09:56:15 -0700 (PDT)
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 76AA630FD
+        for <linux-doc@vger.kernel.org>; Mon,  1 May 2023 09:56:17 -0700 (PDT)
+Received: by mail-yb1-xb4a.google.com with SMTP id 3f1490d57ef6-b922aa3725fso5385666276.0
+        for <linux-doc@vger.kernel.org>; Mon, 01 May 2023 09:56:17 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=google.com; s=20221208; t=1682960158; x=1685552158;
+        d=google.com; s=20221208; t=1682960160; x=1685552160;
         h=cc:to:from:subject:message-id:references:mime-version:in-reply-to
          :date:from:to:cc:subject:date:message-id:reply-to;
-        bh=+1Ptlsu3HrvWcynZoOK0ZqIIaOTUmOtwKZY5J1VaLvs=;
-        b=7gQ7i/dAC1G0h1XxKulN+zlGUyuRlgFLhf3t4U3ldYpJ9ZDjgqW3Y7teulwLUtCfTD
-         /VnlwalgQGiFZbmlj07JbUX6Sp54fAN7SxMoxkItZT8pyryAeS9XmoLet1E+NORYJiar
-         iYyZW8dCc0lMzuXcFL3U4QE+FrlZuAGGckHXyur/pD6//ulYUoFzkf8zDD0aROPp40k/
-         xmTrCxx3e3E9BLeb2nij/r9kqOJAFZfyDKOq1UGUdyyy0zgGTjg9yGYmpyEbnJHJf0ZV
-         W5qYg5oFjenWEcOuTpD8cYePEcPbJSlpmAYb7YzYWjMWXvtbqAw/EQzvEU6N9zSkiTXv
-         C/RA==
+        bh=3JQAU/dBFDp2j3prOKpx9pu61B2aRzHMn5ijo1mj0wk=;
+        b=Nr4QXyj/etzJlAh8i4e3XnDFrHrok+4KAhChzrGdGYpNpzqnTzNz+b7TDzIFPvjVWJ
+         9m6bX+drGU9A6fH4AYp0HUvbrb0fCoSPBmCg7BeIb7knPz8EfEfG9cPbzcBJ5VX+RXOe
+         xKxhA1OiVlh84AEwzHBh+cMUHvzUPF37NpWH9RACZgYBnn9nhrwQ+ZtD6LOD5aF3vQAg
+         h9QGbAMavYpJls9fxf3kDm4J6+Qn0mT0BuRWWAvY6omxOHY3anv02SbqbukFuexGdvmI
+         uLtak6s/1IGom0RtuY8qFrrhQXG4Ym0F7I61Qiqk5+0EJAXYPW/dDKZJd/GArGchifG6
+         ytrA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1682960158; x=1685552158;
+        d=1e100.net; s=20221208; t=1682960160; x=1685552160;
         h=cc:to:from:subject:message-id:references:mime-version:in-reply-to
          :date:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=+1Ptlsu3HrvWcynZoOK0ZqIIaOTUmOtwKZY5J1VaLvs=;
-        b=BBpAyDTzplxZOHLJ97bidvl5pN+CuVH9bWxgpKnTeDfuCyBIpnF9hYqg++O8wLmeoD
-         KhDKDBurxvmGCro4yzi9voSGFzETjxYn+F602KWJuskVqBSIk1lZ8tn461bZg5+lMtBg
-         h6LPfq6FZEZm59bFdc5nHTIrewn659ixFpusTXz6MTz3ZYNaQ8hlqjqvJd/LcwFMKusO
-         53lWEtzflg7u5AS7KVYhEfSAs8LGLcexm/0b/YcnbpoysI3sUz8WRHyTGCdCGaOeOphh
-         2pFlthDGRFXARLT7bREvxaZ3CZXrsVUAHP7IXnPHMPhsIb+G/4OsqE3Q3fh/aggBye1X
-         ENMQ==
-X-Gm-Message-State: AC+VfDwolHO7TlCQYZgEFaOFqxHj45eSvpf5FJsfH41Y4GGrtgXjiV6G
-        +A9+SOZ+3bD2BkotN28dq1DMBB7rhw8=
-X-Google-Smtp-Source: ACHHUZ7r1ycZ9itNH1qfXqxuYbQFcFPivnhoEDNh4tWwK8chvFvWCKKjG1ErV0+LZWXbi1M27uOVRiApR9A=
+        bh=3JQAU/dBFDp2j3prOKpx9pu61B2aRzHMn5ijo1mj0wk=;
+        b=ZJgMNrjv2fwgyyT4ragznVdwW2+3joPEi2G2RY+OIChX2p2/FPyNi0mzmfTM9FvIZs
+         rXOsba+7QKhF2y9oLVkMOKFhGrY+SWdt1cyVFWN/LgoksJ5GW3j4cCMg92PTmoRr9vgb
+         9SNnlIgDBURyQOtPM7eiOqHhA4uUYU4c/QRbRTQIoFs6mhQbs4EwiFpzfKFKg8Nu6bq2
+         Awf5ONLoQ092/mUuyw1jjQlm83janQtw/kRRO3nIKfuAFUxIjSskQm0IdXX+L4WIAopG
+         3GdGNeLLbU2g58H9MXscwyfU1pdljKtqPXW861WQvWjlo7ks1RbQU1LjYJ74G7an+tfV
+         xtyw==
+X-Gm-Message-State: AC+VfDysEt09EqdND6sPivNUvBhZ+psVGVZcPu8xU/y8rwcYkqzJFSQl
+        rmap9s1vmsGAaqB27VXgZqo0CShaBLI=
+X-Google-Smtp-Source: ACHHUZ5flxShenE/t9NPL/moLDuNx9TkwM/Lf/8wW54V2Eq3VJ/wRhfgfjc0frmw2aZZoQxo3iYMAN5xHBU=
 X-Received: from surenb-desktop.mtv.corp.google.com ([2620:15c:211:201:6d24:3efd:facc:7ac4])
- (user=surenb job=sendgmr) by 2002:a05:6902:1028:b0:b8c:607:7669 with SMTP id
- x8-20020a056902102800b00b8c06077669mr8930549ybt.5.1682960158430; Mon, 01 May
- 2023 09:55:58 -0700 (PDT)
-Date:   Mon,  1 May 2023 09:54:32 -0700
+ (user=surenb job=sendgmr) by 2002:a25:2484:0:b0:b95:e649:34b6 with SMTP id
+ k126-20020a252484000000b00b95e64934b6mr8454589ybk.1.1682960160542; Mon, 01
+ May 2023 09:56:00 -0700 (PDT)
+Date:   Mon,  1 May 2023 09:54:33 -0700
 In-Reply-To: <20230501165450.15352-1-surenb@google.com>
 Mime-Version: 1.0
 References: <20230501165450.15352-1-surenb@google.com>
 X-Mailer: git-send-email 2.40.1.495.gc816e09b53d-goog
-Message-ID: <20230501165450.15352-23-surenb@google.com>
-Subject: [PATCH 22/40] mm: create new codetag references during page splitting
+Message-ID: <20230501165450.15352-24-surenb@google.com>
+Subject: [PATCH 23/40] lib: add codetag reference into slabobj_ext
 From:   Suren Baghdasaryan <surenb@google.com>
 To:     akpm@linux-foundation.org
 Cc:     kent.overstreet@linux.dev, mhocko@suse.com, vbabka@suse.cz,
@@ -93,104 +93,62 @@ Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-When a high-order page is split into smaller ones, each newly split
-page should get its codetag. The original codetag is reused for these
-pages but it's recorded as 0-byte allocation because original codetag
-already accounts for the original high-order allocated page.
+To store code tag for every slab object, a codetag reference is embedded
+into slabobj_ext when CONFIG_MEM_ALLOC_PROFILING=y.
 
 Signed-off-by: Suren Baghdasaryan <surenb@google.com>
+Co-developed-by: Kent Overstreet <kent.overstreet@linux.dev>
+Signed-off-by: Kent Overstreet <kent.overstreet@linux.dev>
 ---
- include/linux/pgalloc_tag.h | 30 ++++++++++++++++++++++++++++++
- mm/huge_memory.c            |  2 ++
- mm/page_alloc.c             |  2 ++
- 3 files changed, 34 insertions(+)
+ include/linux/memcontrol.h | 5 +++++
+ lib/Kconfig.debug          | 1 +
+ mm/slab.h                  | 4 ++++
+ 3 files changed, 10 insertions(+)
 
-diff --git a/include/linux/pgalloc_tag.h b/include/linux/pgalloc_tag.h
-index 567327c1c46f..0cbba13869b5 100644
---- a/include/linux/pgalloc_tag.h
-+++ b/include/linux/pgalloc_tag.h
-@@ -52,11 +52,41 @@ static inline void pgalloc_tag_dec(struct page *page, unsigned int order)
- 	}
- }
+diff --git a/include/linux/memcontrol.h b/include/linux/memcontrol.h
+index 5e2da63c525f..c7f21b15b540 100644
+--- a/include/linux/memcontrol.h
++++ b/include/linux/memcontrol.h
+@@ -1626,7 +1626,12 @@ unsigned long mem_cgroup_soft_limit_reclaim(pg_data_t *pgdat, int order,
+  * if MEMCG_DATA_OBJEXTS is set.
+  */
+ struct slabobj_ext {
++#ifdef CONFIG_MEMCG_KMEM
+ 	struct obj_cgroup *objcg;
++#endif
++#ifdef CONFIG_MEM_ALLOC_PROFILING
++	union codetag_ref ref;
++#endif
+ } __aligned(8);
  
-+static inline void pgalloc_tag_split(struct page *page, unsigned int nr)
-+{
-+	int i;
-+	struct page_ext *page_ext;
-+	union codetag_ref *ref;
-+	struct alloc_tag *tag;
-+
-+	if (!mem_alloc_profiling_enabled())
-+		return;
-+
-+	page_ext = page_ext_get(page);
-+	if (unlikely(!page_ext))
-+		return;
-+
-+	ref = codetag_ref_from_page_ext(page_ext);
-+	if (!ref->ct)
-+		goto out;
-+
-+	tag = ct_to_alloc_tag(ref->ct);
-+	page_ext = page_ext_next(page_ext);
-+	for (i = 1; i < nr; i++) {
-+		/* New reference with 0 bytes accounted */
-+		alloc_tag_add(codetag_ref_from_page_ext(page_ext), tag, 0);
-+		page_ext = page_ext_next(page_ext);
-+	}
-+out:
-+	page_ext_put(page_ext);
-+}
-+
- #else /* CONFIG_MEM_ALLOC_PROFILING */
+ static inline void __inc_lruvec_kmem_state(void *p, enum node_stat_item idx)
+diff --git a/lib/Kconfig.debug b/lib/Kconfig.debug
+index d3aa5ee0bf0d..4157c2251b07 100644
+--- a/lib/Kconfig.debug
++++ b/lib/Kconfig.debug
+@@ -968,6 +968,7 @@ config MEM_ALLOC_PROFILING
+ 	select CODE_TAGGING
+ 	select LAZY_PERCPU_COUNTER
+ 	select PAGE_EXTENSION
++	select SLAB_OBJ_EXT
+ 	help
+ 	  Track allocation source code and record total allocation size
+ 	  initiated at that code location. The mechanism can be used to track
+diff --git a/mm/slab.h b/mm/slab.h
+index bec202bdcfb8..f953e7c81e98 100644
+--- a/mm/slab.h
++++ b/mm/slab.h
+@@ -418,6 +418,10 @@ int alloc_slab_obj_exts(struct slab *slab, struct kmem_cache *s,
  
- static inline union codetag_ref *get_page_tag_ref(struct page *page) { return NULL; }
- static inline void put_page_tag_ref(union codetag_ref *ref) {}
- #define pgalloc_tag_dec(__page, __size)		do {} while (0)
-+static inline void pgalloc_tag_split(struct page *page, unsigned int nr) {}
- 
- #endif /* CONFIG_MEM_ALLOC_PROFILING */
- 
-diff --git a/mm/huge_memory.c b/mm/huge_memory.c
-index 624671aaa60d..221cce0052a2 100644
---- a/mm/huge_memory.c
-+++ b/mm/huge_memory.c
-@@ -37,6 +37,7 @@
- #include <linux/page_owner.h>
- #include <linux/sched/sysctl.h>
- #include <linux/memory-tiers.h>
-+#include <linux/pgalloc_tag.h>
- 
- #include <asm/tlb.h>
- #include <asm/pgalloc.h>
-@@ -2557,6 +2558,7 @@ static void __split_huge_page(struct page *page, struct list_head *list,
- 	/* Caller disabled irqs, so they are still disabled here */
- 
- 	split_page_owner(head, nr);
-+	pgalloc_tag_split(head, nr);
- 
- 	/* See comment in __split_huge_page_tail() */
- 	if (PageAnon(head)) {
-diff --git a/mm/page_alloc.c b/mm/page_alloc.c
-index edd35500f7f6..8cf5a835af7f 100644
---- a/mm/page_alloc.c
-+++ b/mm/page_alloc.c
-@@ -2796,6 +2796,7 @@ void split_page(struct page *page, unsigned int order)
- 	for (i = 1; i < (1 << order); i++)
- 		set_page_refcounted(page + i);
- 	split_page_owner(page, 1 << order);
-+	pgalloc_tag_split(page, 1 << order);
- 	split_page_memcg(page, 1 << order);
- }
- EXPORT_SYMBOL_GPL(split_page);
-@@ -5012,6 +5013,7 @@ static void *make_alloc_exact(unsigned long addr, unsigned int order,
- 		struct page *last = page + nr;
- 
- 		split_page_owner(page, 1 << order);
-+		pgalloc_tag_split(page, 1 << order);
- 		split_page_memcg(page, 1 << order);
- 		while (page < --last)
- 			set_page_refcounted(last);
+ static inline bool need_slab_obj_ext(void)
+ {
++#ifdef CONFIG_MEM_ALLOC_PROFILING
++	if (mem_alloc_profiling_enabled())
++		return true;
++#endif
+ 	/*
+ 	 * CONFIG_MEMCG_KMEM creates vector of obj_cgroup objects conditionally
+ 	 * inside memcg_slab_post_alloc_hook. No other users for now.
 -- 
 2.40.1.495.gc816e09b53d-goog
 
