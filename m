@@ -2,151 +2,125 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 5FEAA6F5CEE
-	for <lists+linux-doc@lfdr.de>; Wed,  3 May 2023 19:21:32 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 1BDBE6F5D1F
+	for <lists+linux-doc@lfdr.de>; Wed,  3 May 2023 19:40:59 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S229571AbjECRVa (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 3 May 2023 13:21:30 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:56728 "EHLO
+        id S229874AbjECRk6 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 3 May 2023 13:40:58 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:35630 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S229825AbjECRV3 (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Wed, 3 May 2023 13:21:29 -0400
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id A05452D69;
-        Wed,  3 May 2023 10:21:27 -0700 (PDT)
-Received: from pps.filterd (m0279868.ppops.net [127.0.0.1])
-        by mx0a-0031df01.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id 343F8jFY029276;
-        Wed, 3 May 2023 17:04:42 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=quicinc.com; h=from : to : cc :
- subject : date : message-id : in-reply-to : references : mime-version :
- content-type; s=qcppdkim1;
- bh=qbH7MY6GGBgS0pDOVGPhqlpYiVtd0OBI+s2aNgE53Hg=;
- b=ZsLgDONGInc7bLVlS4UT6DtybDKv1nq2gwI2A7Vxdqwwl7X3noaGIh2Nj4zsmbx6jdPS
- xGp4MDFmP277tytp0wXKtKuOJTvhvEJesSiT+lYnm38S2PuPWNMuh6syzQdSaaUrh8eQ
- zytEQdd23I1GxRCcSpw+EqDNUMFBUj4imkbNz4yQ/aj0Ppsjkz13Rvb+G8X5sfmsqjUz
- ceMtEjrG9jcO2eKuuG5WlJRL+3IYxRi99vL0x/CDR5wAS042V8Z2Uuv478c8U+dS0A86
- f8M0DgAlvJl+PqLGUmp0KVpb0l+8S4DUwGMKaSGwSVLBTmBcD6Dm8S3YMwnFhAecpMgg jQ== 
-Received: from nasanppmta02.qualcomm.com (i-global254.qualcomm.com [199.106.103.254])
-        by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 3qbmy48xym-1
-        (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
-        Wed, 03 May 2023 17:04:42 +0000
-Received: from nasanex01c.na.qualcomm.com (nasanex01c.na.qualcomm.com [10.45.79.139])
-        by NASANPPMTA02.qualcomm.com (8.17.1.5/8.17.1.5) with ESMTPS id 343H4fEb005094
-        (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
-        Wed, 3 May 2023 17:04:41 GMT
-Received: from hu-mojha-hyd.qualcomm.com (10.80.80.8) by
- nasanex01c.na.qualcomm.com (10.45.79.139) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.986.42; Wed, 3 May 2023 10:04:35 -0700
-From:   Mukesh Ojha <quic_mojha@quicinc.com>
-To:     <agross@kernel.org>, <andersson@kernel.org>,
-        <konrad.dybcio@linaro.org>, <corbet@lwn.net>,
-        <keescook@chromium.org>, <tony.luck@intel.com>,
-        <gpiccoli@igalia.com>, <catalin.marinas@arm.com>,
-        <will@kernel.org>, <krzysztof.kozlowski+dt@linaro.org>,
-        <robh+dt@kernel.org>, <linus.walleij@linaro.org>,
-        <linux-gpio@vger.kernel.org>, <srinivas.kandagatla@linaro.org>
-CC:     <linux-arm-msm@vger.kernel.org>,
-        <linux-remoteproc@vger.kernel.org>, <linux-kernel@vger.kernel.org>,
-        <linux-hardening@vger.kernel.org>,
-        <linux-arm-kernel@lists.infradead.org>,
-        <linux-doc@vger.kernel.org>, "Mukesh Ojha" <quic_mojha@quicinc.com>
-Subject: [PATCH v3 18/18] firmware: qcom_scm: Add multiple download mode support
-Date:   Wed, 3 May 2023 22:32:32 +0530
-Message-ID: <1683133352-10046-19-git-send-email-quic_mojha@quicinc.com>
-X-Mailer: git-send-email 2.7.4
-In-Reply-To: <1683133352-10046-1-git-send-email-quic_mojha@quicinc.com>
-References: <1683133352-10046-1-git-send-email-quic_mojha@quicinc.com>
+        with ESMTP id S229522AbjECRk5 (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Wed, 3 May 2023 13:40:57 -0400
+Received: from mail-yw1-x1132.google.com (mail-yw1-x1132.google.com [IPv6:2607:f8b0:4864:20::1132])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 32451AC
+        for <linux-doc@vger.kernel.org>; Wed,  3 May 2023 10:40:55 -0700 (PDT)
+Received: by mail-yw1-x1132.google.com with SMTP id 00721157ae682-55a8e9e2c53so26459417b3.1
+        for <linux-doc@vger.kernel.org>; Wed, 03 May 2023 10:40:55 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=google.com; s=20221208; t=1683135654; x=1685727654;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=VnWJwoqbKS+XkHViPIVupavn1s9FL+9QLrnitzrqP5g=;
+        b=eK3o90MKtG0sAxJkQzBjjPPdgC8Naf0DW8LSnzzFyGy7r2iplN6tx8LRS+K1pesqQ/
+         +dlPpm9XhI5MpmbmybPkhrAEcSQe8jXQWxke9zLF0oWZbujbmGNiLr16iUXkN33UUHSx
+         XBXGIEWcktzdHazuLFLqwBuOkd1R9zqRh1rR05EQP6mEIW+Y870cMvkQ+YZdkTbO3EXe
+         JnQPUyB6BIyM6BqPoFJBWX+ubIIjmGY6Y6TRZTV6HlKG9bq6FA2QoEZiVTg495moZLJm
+         8j7J7Vy9fMLWKuo3JHmpkQUMBoO2kqt3hu+UuR0WJjg5iixGZu5y4Lvke1eQTwl5WZQa
+         NpXA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20221208; t=1683135654; x=1685727654;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=VnWJwoqbKS+XkHViPIVupavn1s9FL+9QLrnitzrqP5g=;
+        b=CTg84z6R7Z+hfL+sGII8ThkHlcRk06gNDCNRAX6IPnm72BO3mb/KZdegFSa8+ha7AF
+         uUAUOOrjIBJGkQ6gY/ZJ4GY12rrFZvUEnGMF7XK/HdjnuduQlVlcW87tnsDnE3t56tst
+         znSL12w5jIEJWoiVU3EHgyl6k2IdNO5yuXEb+xP8fXIciSRLCYyiRMUvDDRdk0ObNsue
+         lk/OOX520Q+8Pjulgk1jaCWb30hR4XigaLD/3HFJWLiGXPGx4mGmltgVJM3sFATWiq70
+         Vhs52DoEc0wfoitzIzByaE5Z3sfaZxDNq5FHo94KyyCcd5xkl/PJSke+6j91tfQinxHO
+         SXSQ==
+X-Gm-Message-State: AC+VfDxnesNo62yWllm0u/HR4WZycaYSSj4ECAfb2rkvkkhX4mCYnfnm
+        Ufkx1J7jCpmyw1r5cnJHAbERc/Bhc0wazuCeFet+RA==
+X-Google-Smtp-Source: ACHHUZ5+xgmBEFDJhkEbV6hOZk2BeNhUs5riMMl8CEWVIZEPl5lRwY7k05WxOPH80Nz6y5uKgnKRw8/1iWaKnQTfG2Y=
+X-Received: by 2002:a25:1885:0:b0:b92:3f59:26e with SMTP id
+ 127-20020a251885000000b00b923f59026emr18942712yby.41.1683135654167; Wed, 03
+ May 2023 10:40:54 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain
-X-Originating-IP: [10.80.80.8]
-X-ClientProxiedBy: nasanex01b.na.qualcomm.com (10.46.141.250) To
- nasanex01c.na.qualcomm.com (10.45.79.139)
-X-QCInternal: smtphost
-X-Proofpoint-Virus-Version: vendor=nai engine=6200 definitions=5800 signatures=585085
-X-Proofpoint-ORIG-GUID: VbcRgKWOMRSE0qF1RQWPhjN5R6oFkcI2
-X-Proofpoint-GUID: VbcRgKWOMRSE0qF1RQWPhjN5R6oFkcI2
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.254,Aquarius:18.0.942,Hydra:6.0.573,FMLib:17.11.170.22
- definitions=2023-05-03_12,2023-05-03_01,2023-02-09_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 lowpriorityscore=0
- bulkscore=0 priorityscore=1501 malwarescore=0 suspectscore=0
- impostorscore=0 adultscore=0 mlxlogscore=999 spamscore=0 phishscore=0
- clxscore=1015 mlxscore=0 classifier=spam adjust=0 reason=mlx scancount=1
- engine=8.12.0-2303200000 definitions=main-2305030145
-X-Spam-Status: No, score=-2.1 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,SPF_HELO_NONE,SPF_PASS,
-        T_SCC_BODY_TEXT_LINE,URIBL_BLOCKED autolearn=ham autolearn_force=no
-        version=3.4.6
+References: <20230501165450.15352-1-surenb@google.com> <ZFIMaflxeHS3uR/A@dhcp22.suse.cz>
+ <CAJuCfpHxbYFxDENYFfnggh1D8ot4s493PQX0C7kD-JLvixC-Vg@mail.gmail.com> <20230503122839.0d9934c5@gandalf.local.home>
+In-Reply-To: <20230503122839.0d9934c5@gandalf.local.home>
+From:   Suren Baghdasaryan <surenb@google.com>
+Date:   Wed, 3 May 2023 10:40:42 -0700
+Message-ID: <CAJuCfpFYq7CZS4y2ZiF+AJHRKwnyhmZCk_uuTwFse26DxGh-qQ@mail.gmail.com>
+Subject: Re: [PATCH 00/40] Memory allocation profiling
+To:     Steven Rostedt <rostedt@goodmis.org>
+Cc:     Michal Hocko <mhocko@suse.com>, akpm@linux-foundation.org,
+        kent.overstreet@linux.dev, vbabka@suse.cz, hannes@cmpxchg.org,
+        roman.gushchin@linux.dev, mgorman@suse.de, dave@stgolabs.net,
+        willy@infradead.org, liam.howlett@oracle.com, corbet@lwn.net,
+        void@manifault.com, peterz@infradead.org, juri.lelli@redhat.com,
+        ldufour@linux.ibm.com, catalin.marinas@arm.com, will@kernel.org,
+        arnd@arndb.de, tglx@linutronix.de, mingo@redhat.com,
+        dave.hansen@linux.intel.com, x86@kernel.org, peterx@redhat.com,
+        david@redhat.com, axboe@kernel.dk, mcgrof@kernel.org,
+        masahiroy@kernel.org, nathan@kernel.org, dennis@kernel.org,
+        tj@kernel.org, muchun.song@linux.dev, rppt@kernel.org,
+        paulmck@kernel.org, pasha.tatashin@soleen.com,
+        yosryahmed@google.com, yuzhao@google.com, dhowells@redhat.com,
+        hughd@google.com, andreyknvl@gmail.com, keescook@chromium.org,
+        ndesaulniers@google.com, gregkh@linuxfoundation.org,
+        ebiggers@google.com, ytcoode@gmail.com, vincent.guittot@linaro.org,
+        dietmar.eggemann@arm.com, bsegall@google.com, bristot@redhat.com,
+        vschneid@redhat.com, cl@linux.com, penberg@kernel.org,
+        iamjoonsoo.kim@lge.com, 42.hyeyoo@gmail.com, glider@google.com,
+        elver@google.com, dvyukov@google.com, shakeelb@google.com,
+        songmuchun@bytedance.com, jbaron@akamai.com, rientjes@google.com,
+        minchan@google.com, kaleshsingh@google.com,
+        kernel-team@android.com, linux-doc@vger.kernel.org,
+        linux-kernel@vger.kernel.org, iommu@lists.linux.dev,
+        linux-arch@vger.kernel.org, linux-fsdevel@vger.kernel.org,
+        linux-mm@kvack.org, linux-modules@vger.kernel.org,
+        kasan-dev@googlegroups.com, cgroups@vger.kernel.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Spam-Status: No, score=-17.6 required=5.0 tests=BAYES_00,DKIMWL_WL_MED,
+        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,
+        ENV_AND_HDR_SPF_MATCH,RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,SPF_PASS,
+        T_SCC_BODY_TEXT_LINE,USER_IN_DEF_DKIM_WL,USER_IN_DEF_SPF_WL
+        autolearn=ham autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Currently, scm driver only supports full dump when download
-mode is selected. Add support to enable minidump as well as
-enable it along with fulldump.
+On Wed, May 3, 2023 at 9:28=E2=80=AFAM Steven Rostedt <rostedt@goodmis.org>=
+ wrote:
+>
+> On Wed, 3 May 2023 08:09:28 -0700
+> Suren Baghdasaryan <surenb@google.com> wrote:
+>
+> > There is another issue, which I think can be solved in a smart way but
+> > will either affect performance or would require more memory. With the
+> > tracing approach we don't know beforehand how many individual
+> > allocation sites exist, so we have to allocate code tags (or similar
+> > structures for counting) at runtime vs compile time. We can be smart
+> > about it and allocate in batches or even preallocate more than we need
+> > beforehand but, as I said, it will require some kind of compromise.
+>
+> This approach is actually quite common, especially since tagging every
+> instance is usually overkill, as if you trace function calls in a running
+> kernel, you will find that only a small percentage of the kernel ever
+> executes. It's possible that you will be allocating a lot of tags that wi=
+ll
+> never be used. If run time allocation is possible, that is usually the
+> better approach.
 
-Signed-off-by: Mukesh Ojha <quic_mojha@quicinc.com>
----
- drivers/firmware/qcom_scm.c | 15 ++++++++++++---
- 1 file changed, 12 insertions(+), 3 deletions(-)
+True but the memory overhead should not be prohibitive here. As a
+ballpark number, on my machine I see there are 4838 individual
+allocation locations and each codetag structure is 32 bytes, so that's
+152KB.
 
-diff --git a/drivers/firmware/qcom_scm.c b/drivers/firmware/qcom_scm.c
-index 4e8fd4e..be7adc6 100644
---- a/drivers/firmware/qcom_scm.c
-+++ b/drivers/firmware/qcom_scm.c
-@@ -32,6 +32,8 @@ static u32 download_mode;
- 
- #define QCOM_DOWNLOAD_MODE_MASK 0x30
- #define QCOM_DOWNLOAD_FULLDUMP	0x1
-+#define QCOM_DOWNLOAD_MINIDUMP  0x2
-+#define QCOM_DOWNLOAD_BOTHDUMP	(QCOM_DOWNLOAD_FULLDUMP | QCOM_DOWNLOAD_MINIDUMP)
- #define QCOM_DOWNLOAD_NODUMP	0x0
- 
- struct qcom_scm {
-@@ -1422,13 +1424,16 @@ static irqreturn_t qcom_scm_irq_handler(int irq, void *data)
- 	return IRQ_HANDLED;
- }
- 
--
- static int get_download_mode(char *buffer, const struct kernel_param *kp)
- {
- 	int len = 0;
- 
- 	if (download_mode == QCOM_DOWNLOAD_FULLDUMP)
- 		len = sysfs_emit(buffer, "full\n");
-+	else if (download_mode == QCOM_DOWNLOAD_MINIDUMP)
-+		len = sysfs_emit(buffer, "mini\n");
-+	else if (download_mode == QCOM_DOWNLOAD_BOTHDUMP)
-+		len = sysfs_emit(buffer, "full,mini\n");
- 	else if (download_mode == QCOM_DOWNLOAD_NODUMP)
- 		len = sysfs_emit(buffer, "off\n");
- 
-@@ -1439,8 +1444,12 @@ static int set_download_mode(const char *val, const struct kernel_param *kp)
- {
- 	u32 old = download_mode;
- 
--	if (sysfs_streq(val, "full")) {
-+	if (sysfs_streq(val, "full,mini") || sysfs_streq(val, "mini,full")) {
-+		download_mode = QCOM_DOWNLOAD_BOTHDUMP;
-+	} else if (sysfs_streq(val, "full")) {
- 		download_mode = QCOM_DOWNLOAD_FULLDUMP;
-+	} else if (sysfs_streq(val, "mini")) {
-+		download_mode = QCOM_DOWNLOAD_MINIDUMP;
- 	} else if (sysfs_streq(val, "off")) {
- 		download_mode = QCOM_DOWNLOAD_NODUMP;
- 	} else if (kstrtouint(val, 0, &download_mode) ||
-@@ -1463,7 +1472,7 @@ static const struct kernel_param_ops download_mode_param_ops = {
- 
- module_param_cb(download_mode, &download_mode_param_ops, NULL, 0644);
- MODULE_PARM_DESC(download_mode,
--		 "Download mode: off/full or 0/1 for existing users");
-+		"download mode: off/full/mini/full,mini or mini,full and 0/1 for existing users");
- 
- static int qcom_scm_probe(struct platform_device *pdev)
- {
--- 
-2.7.4
-
+>
+> -- Steve
