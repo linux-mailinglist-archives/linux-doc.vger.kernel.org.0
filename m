@@ -2,78 +2,42 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 346B26F6590
-	for <lists+linux-doc@lfdr.de>; Thu,  4 May 2023 09:14:09 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id A9B726F6740
+	for <lists+linux-doc@lfdr.de>; Thu,  4 May 2023 10:26:21 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S229494AbjEDHOH (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 4 May 2023 03:14:07 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:41024 "EHLO
+        id S229935AbjEDI0U (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 4 May 2023 04:26:20 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:35414 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S229564AbjEDHOG (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Thu, 4 May 2023 03:14:06 -0400
-Received: from mail-lj1-x22e.google.com (mail-lj1-x22e.google.com [IPv6:2a00:1450:4864:20::22e])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 192082128
-        for <linux-doc@vger.kernel.org>; Thu,  4 May 2023 00:14:05 -0700 (PDT)
-Received: by mail-lj1-x22e.google.com with SMTP id 38308e7fff4ca-2ac733b813fso1641071fa.1
-        for <linux-doc@vger.kernel.org>; Thu, 04 May 2023 00:14:05 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google; t=1683184443; x=1685776443;
-        h=content-transfer-encoding:in-reply-to:from:references:cc:to
-         :content-language:subject:user-agent:mime-version:date:message-id
-         :from:to:cc:subject:date:message-id:reply-to;
-        bh=fC32ZRL6kv8V/7o8EGUr1mtZobBUgWUVglha3gwf8ss=;
-        b=SKg0wIfLaLDnuauS+QNo+ttQkKMyX0p/sZ1KfMllPb9bPgx0sMEFrOosJEwQJqFBdY
-         wdWWmFf8C/l/3uLBTHhG+/iyxOn6Do7W+6sFqQt5qDl2E+RCyKhHnZzHacoNRdbVqQ5m
-         lQ5ZIcWhbbQL0CTZkKKpjThRy97Kgz/haVJTKFCnvPQ2oEW2IF/OBH94ki02CmcTy9Z9
-         k6IoUswj4PAWNobK0Tkc1ASV4hmdtkx5J5nqYreU5HvczJEJYjXSZgAumAI5p92cPpoi
-         +nk+3CKDzkgfEXLkcjCpFbFW5VhLYVOpLCMdsxWsaMA2AANRUtrvcHHkQr6gzFjt3X5X
-         Jr2Q==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1683184443; x=1685776443;
-        h=content-transfer-encoding:in-reply-to:from:references:cc:to
-         :content-language:subject:user-agent:mime-version:date:message-id
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=fC32ZRL6kv8V/7o8EGUr1mtZobBUgWUVglha3gwf8ss=;
-        b=I1TdscRfmyPYnSHqFGf2uQbYNdbHvDPqs/gpeeEjMmt9Nib+6Sd+URcD7J7f1gPphH
-         j6YILEYUJDIs/5W7tBg/TNuHYG/3bJanX8MxF4m/8/D3Pkz9Fcn4WyIXygNr6yGr8vWe
-         H4wYWiP/r0tJtgkMR4t7bHqnfr8jJpIfigBUrqgy2zh17Jb4sfLmUbndt/eLSJaeoohK
-         Lm6QuY4lYVpDKCVWXpTqiyWRI1Jm9Ju53TCn3ISwuPMjhOCIE2NnBdUfoOnauLklub6E
-         Pp1gxQqR8/VozKMofe9HnOxoqLRbURqRB/8sM3b9a/HiMYZBdw7XUPyTpBPYpgLGULbJ
-         vF+Q==
-X-Gm-Message-State: AC+VfDzU6GivYFU7xiH+JPRZkk9OQEja/TIZFaD6zGJXOfgOlIhDinmI
-        9r0EhLPTJVMNezIlv0NIlXZwtQ==
-X-Google-Smtp-Source: ACHHUZ68E5CT+tz5TBMWB/yNgy/q68QX2qmngSSqztLupWyrwNdOkkrkNo9hgynnEpklbx+XHjkw6g==
-X-Received: by 2002:a2e:9785:0:b0:2ab:d1b:dcb2 with SMTP id y5-20020a2e9785000000b002ab0d1bdcb2mr635844lji.38.1683184443371;
-        Thu, 04 May 2023 00:14:03 -0700 (PDT)
-Received: from [192.168.1.101] (abyl248.neoplus.adsl.tpnet.pl. [83.9.31.248])
-        by smtp.gmail.com with ESMTPSA id f2-20020ac25082000000b004eed63bc08csm6402214lfm.131.2023.05.04.00.14.01
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Thu, 04 May 2023 00:14:02 -0700 (PDT)
-Message-ID: <21b500a5-2c4a-e156-61b3-aa0a2f4f5183@linaro.org>
-Date:   Thu, 4 May 2023 09:14:00 +0200
+        with ESMTP id S229963AbjEDIZW (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Thu, 4 May 2023 04:25:22 -0400
+Received: from m228-4.mailgun.net (m228-4.mailgun.net [159.135.228.4])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 0065A6186
+        for <linux-doc@vger.kernel.org>; Thu,  4 May 2023 01:18:53 -0700 (PDT)
+DKIM-Signature: a=rsa-sha256; v=1; c=relaxed/relaxed; d=equiv.tech; q=dns/txt;
+ s=mx; t=1683188332; x=1683195532; h=Content-Transfer-Encoding: MIME-Version:
+ Message-Id: Date: Subject: Subject: Cc: To: To: From: From: Sender: Sender;
+ bh=ms3njcBQrrmRVxxbQssJjnY8BrYOrndinPX9QZIyRxU=;
+ b=kVI/kK/cfVePXyfKN8F3nT/QhFQZMufJcfyrNWHv4dgN0yLGa2fvNLrcEkiFiXbwMG9d9h1uNeU18yZZGijprmaHPepI45RgPYOpXhSV2C/L9CVKf8Bdl4iXk34i4dALQH0Sifx1pXWfokmULXXehdpWtSEmpWNmd97DN7nkJw5ploN0BS0Ex0lvy0ektW98S0mmGJc90/3T4zbdjV60u0WovGZpWjPoP/OUcD1SZAop6a/BuSw7W5D17JS4cBwmc0jctnc8/Odfbj4vW3Dtua9LsMUt0ZXV91DJEdne+x6UAPycsd3Me2omdU+B37YTCD5V71pUt1DzMxS31TGYsQ==
+X-Mailgun-Sending-Ip: 159.135.228.4
+X-Mailgun-Sid: WyIxNjU3YyIsImxpbnV4LWRvY0B2Z2VyLmtlcm5lbC5vcmciLCI5M2Q1YWIiXQ==
+Received: from mail.equiv.tech (equiv.tech [142.93.28.83]) by f7d08f3fa3fc with SMTP id
+ 6453659de31b292e1ff52a9a (version=TLS1.2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256); Thu, 04 May 2023 07:58:21 GMT
+Sender: james@equiv.tech
+From:   James Seo <james@equiv.tech>
+To:     Jean Delvare <jdelvare@suse.com>,
+        Guenter Roeck <linux@roeck-us.net>,
+        Jonathan Corbet <corbet@lwn.net>
+Cc:     James Seo <james@equiv.tech>, linux-hwmon@vger.kernel.org,
+        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org
+Subject: [RFC 00/11] hwmon: Modernize documentation
+Date:   Thu,  4 May 2023 00:57:41 -0700
+Message-Id: <20230504075752.1320967-1-james@equiv.tech>
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.10.1
-Subject: Re: [PATCH v3 11/18] arm64: dts: qcom: sm8450: Add Qualcomm ramoops
- minidump node
-Content-Language: en-US
-To:     Mukesh Ojha <quic_mojha@quicinc.com>, agross@kernel.org,
-        andersson@kernel.org, corbet@lwn.net, keescook@chromium.org,
-        tony.luck@intel.com, gpiccoli@igalia.com, catalin.marinas@arm.com,
-        will@kernel.org, krzysztof.kozlowski+dt@linaro.org,
-        robh+dt@kernel.org, linus.walleij@linaro.org,
-        linux-gpio@vger.kernel.org, srinivas.kandagatla@linaro.org
-Cc:     linux-arm-msm@vger.kernel.org, linux-remoteproc@vger.kernel.org,
-        linux-kernel@vger.kernel.org, linux-hardening@vger.kernel.org,
-        linux-arm-kernel@lists.infradead.org, linux-doc@vger.kernel.org
-References: <1683133352-10046-1-git-send-email-quic_mojha@quicinc.com>
- <1683133352-10046-12-git-send-email-quic_mojha@quicinc.com>
-From:   Konrad Dybcio <konrad.dybcio@linaro.org>
-In-Reply-To: <1683133352-10046-12-git-send-email-quic_mojha@quicinc.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-Spam-Status: No, score=-6.4 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,NICE_REPLY_A,RCVD_IN_DNSWL_NONE,
+Content-Transfer-Encoding: 8bit
+X-Spam-Status: No, score=-2.1 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_NONE,
         SPF_HELO_NONE,SPF_PASS,T_SCC_BODY_TEXT_LINE,URIBL_BLOCKED
         autolearn=unavailable autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
@@ -82,53 +46,39 @@ Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
+To help summon the beautifully documented kernel of the future
+promised by the move to ReST, this series revises the hwmon subsystem
+documentation to make it more comprehensive and internally consistent.
+The latter goal also requires a few API and ABI additions that should
+have been in tree but weren't.
+
+James Seo (11):
+  Documentation/hwmon: Move misplaced entry in hwmon docs index
+  hwmon: (core) Rename last parameter of devm_hwmon_register_with_info()
+  hwmon: (core) Revise kerneldoc comments
+  Documentation/hwmon: Revise hwmon kernel API reference
+  Documentation/hwmon: Revise PMBus core documentation
+  Documentation/hwmon: Revise patch submission checklist
+  Documentation/hwmon: Revise sysfs interface specification
+  Documentation/hwmon: Revise userspace tools documentation
+  ABI: sysfs-class-hwmon: Revise hwmon ABI documentation
+  hwmon: (core) Add missing beep-related standard attributes
+  ABI: sysfs-class-hwmon: Add missing hwmon standard attributes
+
+ Documentation/ABI/testing/sysfs-class-hwmon | 901 +++++++++++++-----
+ Documentation/hwmon/hwmon-kernel-api.rst    | 740 ++++++++-------
+ Documentation/hwmon/index.rst               |   2 +-
+ Documentation/hwmon/pmbus-core.rst          | 348 ++++---
+ Documentation/hwmon/submitting-patches.rst  | 110 +--
+ Documentation/hwmon/sysfs-interface.rst     | 984 +++++++++-----------
+ Documentation/hwmon/userspace-tools.rst     | 129 ++-
+ drivers/hwmon/hwmon.c                       | 169 ++--
+ include/linux/hwmon-sysfs.h                 |  19 +-
+ include/linux/hwmon.h                       |  90 +-
+ 10 files changed, 2037 insertions(+), 1455 deletions(-)
 
 
-On 3.05.2023 19:02, Mukesh Ojha wrote:
-> This enable dynamic reserve memory for Qualcomm ramoops device,
-> Which will used to save ramoops frontend data and this region
-> gets dumped on crash via Qualcomm's minidump infrastructure.
-> qcom_pstore_minidump is the associated driver for this node.
-> 
-> Signed-off-by: Mukesh Ojha <quic_mojha@quicinc.com>
-> ---
->  arch/arm64/boot/dts/qcom/sm8450.dtsi | 11 +++++++++++
->  1 file changed, 11 insertions(+)
-> 
-> diff --git a/arch/arm64/boot/dts/qcom/sm8450.dtsi b/arch/arm64/boot/dts/qcom/sm8450.dtsi
-> index 595533a..92d023f 100644
-> --- a/arch/arm64/boot/dts/qcom/sm8450.dtsi
-> +++ b/arch/arm64/boot/dts/qcom/sm8450.dtsi
-> @@ -614,6 +614,17 @@
->  			reg = <0x0 0xed900000 0x0 0x3b00000>;
->  			no-map;
->  		};
-> +
-> +		qcom_ramoops_md_region:qcom_ramoops_md {
-Missing space after ':'
+base-commit: 1a5304fecee523060f26e2778d9d8e33c0562df3
+-- 
+2.34.1
 
-node names should not contain underscores
-
-minidump {
-
-or
-
-ramoops {
-
-would probably be better names for this node
-> +			alloc-ranges = <0x0 0x00000000 0xffffffff 0xffffffff>;
-> +			size = <0x0 0x200000>;
-> +			no-map;
-> +		};
-> +	};
-> +
-> +	qcom_ramoops_md {
-Node names should be generic (e.g. ramdump or something) and should
-not contain underscores.
-
-Konrad
-> +		compatible = "qcom,sm8450-ramoops-minidump", "qcom,ramoops-minidump";
-> +		memory-region = <&qcom_ramoops_md_region>;
->  	};
->  
->  	smp2p-adsp {
