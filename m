@@ -2,493 +2,163 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 66BED6F6709
-	for <lists+linux-doc@lfdr.de>; Thu,  4 May 2023 10:14:26 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id CE7BD6F666C
+	for <lists+linux-doc@lfdr.de>; Thu,  4 May 2023 10:00:13 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S230055AbjEDIOX (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 4 May 2023 04:14:23 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:55648 "EHLO
+        id S229822AbjEDIAM (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 4 May 2023 04:00:12 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:42274 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S229938AbjEDIMx (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Thu, 4 May 2023 04:12:53 -0400
-Received: from m228-13.mailgun.net (m228-13.mailgun.net [159.135.228.13])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id D14A826A4
-        for <linux-doc@vger.kernel.org>; Thu,  4 May 2023 01:10:30 -0700 (PDT)
-DKIM-Signature: a=rsa-sha256; v=1; c=relaxed/relaxed; d=equiv.tech; q=dns/txt;
- s=mx; t=1683187830; x=1683195030; h=Content-Transfer-Encoding: MIME-Version:
- References: In-Reply-To: Message-Id: Date: Subject: Subject: Cc: To: To:
- From: From: Sender: Sender; bh=ASc5HhJn/HU0yPFLW+gOwv9LjjchW0gxLnNsBeAyJh8=;
- b=rY2WXHt/FQ0cIep2cdTXhkwO5ZBTGWtrMPGDOD2zLo/+HJEnXPynguaH8i+e3bS6jFWfCG52Hi1iPah5m7DaI6Gu/W3RsVuGQXUxdA27MOCoaMKSnofV1Ek1be7bxAszzqN8DFkw/si9ec7+r2ZIVbEe8xpACbDC9j4+mgERharQtT7bqOM4GPjHylcdHKixPZ2ZGxKQVDJrIBK/MDDiXmRAZlWbPevk0AnWHJx7nsRrjODN8C948yeyCrjf/Iglt4/iNUeWIlGOpfOkLIDLHtPGJfyl9Q84zGG/nL1uzksdDazLI7Q1r9omOD3caPxfghPeVarkdOE5w66IeB/bww==
-X-Mailgun-Sending-Ip: 159.135.228.13
-X-Mailgun-Sid: WyIxNjU3YyIsImxpbnV4LWRvY0B2Z2VyLmtlcm5lbC5vcmciLCI5M2Q1YWIiXQ==
-Received: from mail.equiv.tech (equiv.tech [142.93.28.83]) by ffb17371f780 with SMTP id
- 64536600621871856c3f65e5 (version=TLS1.2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256); Thu, 04 May 2023 08:00:00 GMT
-Sender: james@equiv.tech
-From:   James Seo <james@equiv.tech>
-To:     Jean Delvare <jdelvare@suse.com>,
-        Guenter Roeck <linux@roeck-us.net>,
-        Jonathan Corbet <corbet@lwn.net>
-Cc:     James Seo <james@equiv.tech>, linux-hwmon@vger.kernel.org,
-        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org
-Subject: [RFC 11/11] ABI: sysfs-class-hwmon: Add missing hwmon standard attributes
-Date:   Thu,  4 May 2023 00:57:52 -0700
-Message-Id: <20230504075752.1320967-12-james@equiv.tech>
-In-Reply-To: <20230504075752.1320967-1-james@equiv.tech>
-References: <20230504075752.1320967-1-james@equiv.tech>
+        with ESMTP id S229564AbjEDIAK (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Thu, 4 May 2023 04:00:10 -0400
+Received: from bee.tesarici.cz (bee.tesarici.cz [77.93.223.253])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 8BCA519B7;
+        Thu,  4 May 2023 01:00:08 -0700 (PDT)
+Received: from meshulam.tesarici.cz (dynamic-2a00-1028-83b8-1e7a-4427-cc85-6706-c595.ipv6.o2.cz [IPv6:2a00:1028:83b8:1e7a:4427:cc85:6706:c595])
+        (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+         key-exchange ECDHE (P-256) server-signature RSA-PSS (2048 bits) server-digest SHA256)
+        (No client certificate requested)
+        by bee.tesarici.cz (Postfix) with ESMTPSA id C0CB514F3D5;
+        Thu,  4 May 2023 10:00:03 +0200 (CEST)
+Authentication-Results: mail.tesarici.cz; dmarc=fail (p=none dis=none) header.from=tesarici.cz
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=tesarici.cz; s=mail;
+        t=1683187204; bh=14yIEEd7A8I6Tu7lFvLcP+c0d1kvUNzGycGQrBMqaec=;
+        h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
+        b=i7U3c2nW7tDZIQt+x9yz3m1gnOLRMA9C6yJT6Lzxj+dxqDistyX+bd+0n320wEwJP
+         mG2SyfCNE02FKthsBOaBd1l8X2sl7oLvrB/qCQMI9TdxqtZ39wha4fpP0ZE3+zeKkK
+         k0trzdHlCZJa68SOs/TaUtBngoBADHokTtRxc0S9tbNJ2CGCzrCU1Scif9VY4vZMaG
+         4N0HqGKW74zhhnlGRus1U5tjOoHSH8T2YLQCYURrBpLx1c6/Vj9FoN6/WcaiorzJev
+         vQPIWwTXe3QxIxMc/r7IVrjtPa9xgEwraQ4rTZJf6649purGXb5q61XhugqznFqKR8
+         fSbA318uN2Nlg==
+Date:   Thu, 4 May 2023 10:00:02 +0200
+From:   Petr =?UTF-8?B?VGVzYcWZw61r?= <petr@tesarici.cz>
+To:     Suren Baghdasaryan <surenb@google.com>
+Cc:     Tejun Heo <tj@kernel.org>,
+        Kent Overstreet <kent.overstreet@linux.dev>,
+        Johannes Weiner <hannes@cmpxchg.org>,
+        Michal Hocko <mhocko@suse.com>, akpm@linux-foundation.org,
+        vbabka@suse.cz, roman.gushchin@linux.dev, mgorman@suse.de,
+        dave@stgolabs.net, willy@infradead.org, liam.howlett@oracle.com,
+        corbet@lwn.net, void@manifault.com, peterz@infradead.org,
+        juri.lelli@redhat.com, ldufour@linux.ibm.com,
+        catalin.marinas@arm.com, will@kernel.org, arnd@arndb.de,
+        tglx@linutronix.de, mingo@redhat.com, dave.hansen@linux.intel.com,
+        x86@kernel.org, peterx@redhat.com, david@redhat.com,
+        axboe@kernel.dk, mcgrof@kernel.org, masahiroy@kernel.org,
+        nathan@kernel.org, dennis@kernel.org, muchun.song@linux.dev,
+        rppt@kernel.org, paulmck@kernel.org, pasha.tatashin@soleen.com,
+        yosryahmed@google.com, yuzhao@google.com, dhowells@redhat.com,
+        hughd@google.com, andreyknvl@gmail.com, keescook@chromium.org,
+        ndesaulniers@google.com, gregkh@linuxfoundation.org,
+        ebiggers@google.com, ytcoode@gmail.com, vincent.guittot@linaro.org,
+        dietmar.eggemann@arm.com, rostedt@goodmis.org, bsegall@google.com,
+        bristot@redhat.com, vschneid@redhat.com, cl@linux.com,
+        penberg@kernel.org, iamjoonsoo.kim@lge.com, 42.hyeyoo@gmail.com,
+        glider@google.com, elver@google.com, dvyukov@google.com,
+        shakeelb@google.com, songmuchun@bytedance.com, jbaron@akamai.com,
+        rientjes@google.com, minchan@google.com, kaleshsingh@google.com,
+        kernel-team@android.com, linux-doc@vger.kernel.org,
+        linux-kernel@vger.kernel.org, iommu@lists.linux.dev,
+        linux-arch@vger.kernel.org, linux-fsdevel@vger.kernel.org,
+        linux-mm@kvack.org, linux-modules@vger.kernel.org,
+        kasan-dev@googlegroups.com, cgroups@vger.kernel.org,
+        Alexei Starovoitov <ast@kernel.org>,
+        Andrii Nakryiko <andrii@kernel.org>
+Subject: Re: [PATCH 00/40] Memory allocation profiling
+Message-ID: <20230504100002.3d410939@meshulam.tesarici.cz>
+In-Reply-To: <CAJuCfpE4YD_BumqFf2-NC8KS9D+kq0s_o4gRyWAH-WK4SgqUbA@mail.gmail.com>
+References: <ZFIVtB8JyKk0ddA5@moria.home.lan>
+        <ZFKNZZwC8EUbOLMv@slm.duckdns.org>
+        <20230503180726.GA196054@cmpxchg.org>
+        <ZFKlrP7nLn93iIRf@slm.duckdns.org>
+        <ZFKqh5Dh93UULdse@slm.duckdns.org>
+        <ZFKubD/lq7oB4svV@moria.home.lan>
+        <ZFKu6zWA00AzArMF@slm.duckdns.org>
+        <ZFKxcfqkUQ60zBB_@slm.duckdns.org>
+        <CAJuCfpEPkCJZO2svT-GfmpJ+V-jSLyFDKM_atnqPVRBKtzgtnQ@mail.gmail.com>
+        <ZFK6pwOelIlhV8Bm@slm.duckdns.org>
+        <ZFK9XMSzOBxIFOHm@slm.duckdns.org>
+        <CAJuCfpE4YD_BumqFf2-NC8KS9D+kq0s_o4gRyWAH-WK4SgqUbA@mail.gmail.com>
+X-Mailer: Claws Mail 4.1.1 (GTK 3.24.37; x86_64-suse-linux-gnu)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 X-Spam-Status: No, score=-2.1 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_NONE,
-        SPF_HELO_NONE,SPF_PASS,T_SCC_BODY_TEXT_LINE,URIBL_BLOCKED
-        autolearn=unavailable autolearn_force=no version=3.4.6
+        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,SPF_HELO_PASS,SPF_PASS,
+        T_SCC_BODY_TEXT_LINE,URIBL_BLOCKED autolearn=ham autolearn_force=no
+        version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Add definitions for the following non-deprecated standard
-attributes implemented in the API and mentioned in the sysfs
-interface spec but not found in the ABI documentation.
+On Wed, 3 May 2023 13:14:57 -0700
+Suren Baghdasaryan <surenb@google.com> wrote:
 
-Alarm attributes:
-* inY_alarm, inY_min_alarm, inY_max_alarm,
-  inY_lcrit_alarm, inY_crit_alarm
-* currY_alarm, currY_min_alarm, currY_max_alarm,
-  currY_lcrit_alarm, currY_crit_alarm
-* powerY_alarm, powerY_cap_alarm,
-  powerY_max_alarm, powerY_crit_alarm
-* fanY_alarm, fanY_min_alarm, fanY_max_alarm
-* tempY_alarm, tempY_min_alarm, tempY_max_alarm,
-  tempY_lcrit_alarm, tempY_emergency_alarm
-  (tempY_crit_alarm already existed)
+> On Wed, May 3, 2023 at 1:00=E2=80=AFPM Tejun Heo <tj@kernel.org> wrote:
+> >
+> > Hello,
+> >
+> > On Wed, May 03, 2023 at 09:48:55AM -1000, Tejun Heo wrote: =20
+> > > > If so, that's the idea behind the context capture feature so that we
+> > > > can enable it on specific allocations only after we determine there=
+ is
+> > > > something interesting there. So, with low-cost persistent tracking =
+we
+> > > > can determine the suspects and then pay some more to investigate th=
+ose
+> > > > suspects in more detail. =20
+> > >
+> > > Yeah, I was wondering whether it'd be useful to have that configurabl=
+e so
+> > > that it'd be possible for a user to say "I'm okay with the cost, plea=
+se
+> > > track more context per allocation". Given that tracking the immediate=
+ caller
+> > > is already a huge improvement and narrowing it down from there using
+> > > existing tools shouldn't be that difficult, I don't think this is a b=
+locker
+> > > in any way. It just bothers me a bit that the code is structured so t=
+hat
+> > > source line is the main abstraction. =20
+> >
+> > Another related question. So, the reason for macro'ing stuff is needed =
+is
+> > because you want to print the line directly from kernel, right? =20
+>=20
+> The main reason is because we want to inject a code tag at the
+> location of the call. If we have a code tag injected at every
+> allocation call, then finding the allocation counter (code tag) to
+> operate takes no time.
 
-Beep attributes:
-beep_enable, inY_beep, currY_beep, fanY_beep, tempY_beep
+Another consequence is that each source code location gets its own tag.
+The compiler can no longer apply common subexpression elimination
+(because the tag is different). I have some doubts that there are any
+places where CSE could be applied to allocation calls, but in general,
+this is one more difference to using _RET_IP_.
 
-Sample average attributes:
-samples, in_samples, power_samples, temp_samples, curr_samples
+Petr T
 
-Fault attributes:
-tempY_fault (fanY_fault already existed)
-
-Signed-off-by: James Seo <james@equiv.tech>
----
- Documentation/ABI/testing/sysfs-class-hwmon | 358 +++++++++++++++++++-
- 1 file changed, 344 insertions(+), 14 deletions(-)
-
-diff --git a/Documentation/ABI/testing/sysfs-class-hwmon b/Documentation/ABI/testing/sysfs-class-hwmon
-index 7fc914bc70e2..2f6884874812 100644
---- a/Documentation/ABI/testing/sysfs-class-hwmon
-+++ b/Documentation/ABI/testing/sysfs-class-hwmon
-@@ -33,6 +33,23 @@ Description:
- 
- 		RW
- 
-+What:		/sys/class/hwmon/hwmonX/beep_enable
-+Description:
-+		Enable or disable beeps.
-+
-+		- 0: No beeps
-+		- 1: Beeps
-+
-+		RW
-+
-+What:		/sys/class/hwmon/hwmonX/samples
-+Description:
-+		Samples in calculated average.
-+
-+		Applies to all types of channels.
-+
-+		RW
-+
- What:		/sys/class/hwmon/hwmonX/inY_min
- Description:
- 		Voltage min value.
-@@ -194,6 +211,76 @@ Description:
- 
- 		RO
- 
-+What:		/sys/class/hwmon/hwmonX/inY_alarm
-+Description:
-+		Voltage channel alarm indicator.
-+
-+		Clears itself when read.
-+
-+		- 0: No alarm
-+		- 1: Alarm
-+
-+		RO
-+
-+What:		/sys/class/hwmon/hwmonX/inY_min_alarm
-+Description:
-+		Voltage min alarm indicator.
-+
-+		Clears itself when read.
-+
-+		- 0: No alarm
-+		- 1: Alarm
-+
-+		RO
-+
-+What:		/sys/class/hwmon/hwmonX/inY_max_alarm
-+Description:
-+		Voltage max alarm indicator.
-+
-+		Clears itself when read.
-+
-+		- 0: No alarm
-+		- 1: Alarm
-+
-+		RO
-+
-+What:		/sys/class/hwmon/hwmonX/inY_lcrit_alarm
-+Description:
-+		Voltage critical min alarm indicator.
-+
-+		Clears itself when read.
-+
-+		- 0: No alarm
-+		- 1: Alarm
-+
-+		RO
-+
-+What:		/sys/class/hwmon/hwmonX/inY_crit_alarm
-+Description:
-+		Voltage critical max alarm indicator.
-+
-+		Clears itself when read.
-+
-+		- 0: No alarm
-+		- 1: Alarm
-+
-+		RO
-+
-+What:		/sys/class/hwmon/hwmonX/inY_beep
-+Description:
-+		Voltage channel beep.
-+
-+		- 0: Disable
-+		- 1: Enable
-+
-+		RW
-+
-+What:		/sys/class/hwmon/hwmonX/in_samples
-+Description:
-+		Voltage samples in calculated average.
-+
-+		RW
-+
- What:		/sys/class/hwmon/hwmonX/fanY_min
- Description:
- 		Fan minimum value.
-@@ -283,6 +370,48 @@ Description:
- 
- 		RW
- 
-+What:		/sys/class/hwmon/hwmonX/fanY_alarm
-+Description:
-+		Fan channel alarm indicator.
-+
-+		Clears itself when read.
-+
-+		- 0: No alarm
-+		- 1: Alarm
-+
-+		RO
-+
-+What:		/sys/class/hwmon/hwmonX/fanY_min_alarm
-+Description:
-+		Fan min alarm indicator.
-+
-+		Clears itself when read.
-+
-+		- 0: No alarm
-+		- 1: Alarm
-+
-+		RO
-+
-+What:		/sys/class/hwmon/hwmonX/fanY_max_alarm
-+Description:
-+		Fan max alarm indicator.
-+
-+		Clears itself when read.
-+
-+		- 0: No alarm
-+		- 1: Alarm
-+
-+		RO
-+
-+What:		/sys/class/hwmon/hwmonX/fanY_beep
-+Description:
-+		Fan channel beep.
-+
-+		- 0: Disable
-+		- 1: Enable
-+
-+		RW
-+
- What:		/sys/class/hwmon/hwmonX/fanY_fault
- Description:
- 		Fan channel fault indicator.
-@@ -468,20 +597,6 @@ Description:
- 
- 		RW
- 
--What:		/sys/class/hwmon/hwmonX/tempY_crit_alarm
--Description:
--		Temperature critical max alarm indicator.
--
--		Contrary to regular alarm flags which clear themselves
--		automatically when read, this one sticks until cleared by
--		the user. This is done by writing 0 to the file. Writing
--		other values is unsupported.
--
--		- 0: No alarm
--		- 1: Alarm
--
--		RW
--
- What:		/sys/class/hwmon/hwmonX/tempY_crit_hyst
- Description:
- 		Temperature hysteresis value for critical limit.
-@@ -645,6 +760,101 @@ Description:
- 
- 		RO
- 
-+What:		/sys/class/hwmon/hwmonX/tempY_alarm
-+Description:
-+		Temperature channel alarm indicator.
-+
-+		Clears itself when read.
-+
-+		- 0: No alarm
-+		- 1: Alarm
-+
-+		RO
-+
-+What:		/sys/class/hwmon/hwmonX/tempY_min_alarm
-+Description:
-+		Temperature min alarm indicator.
-+
-+		Clears itself when read.
-+
-+		- 0: No alarm
-+		- 1: Alarm
-+
-+		RO
-+
-+What:		/sys/class/hwmon/hwmonX/tempY_max_alarm
-+Description:
-+		Temperature max alarm indicator.
-+
-+		Clears itself when read.
-+
-+		- 0: No alarm
-+		- 1: Alarm
-+
-+		RO
-+
-+What:		/sys/class/hwmon/hwmonX/tempY_lcrit_alarm
-+Description:
-+		Temperature critical min alarm indicator.
-+
-+		Clears itself when read.
-+
-+		- 0: No alarm
-+		- 1: Alarm
-+
-+		RO
-+
-+What:		/sys/class/hwmon/hwmonX/tempY_crit_alarm
-+Description:
-+		Temperature critical max alarm indicator.
-+
-+		Contrary to regular alarm flags which clear themselves
-+		automatically when read, this one sticks until cleared by
-+		the user. This is done by writing 0 to the file. Writing
-+		other values is unsupported.
-+
-+		- 0: No alarm
-+		- 1: Alarm
-+
-+		RW
-+
-+What:		/sys/class/hwmon/hwmonX/tempY_emergency_alarm
-+Description:
-+		Temperature emergency max alarm indicator.
-+
-+		Clears itself when read.
-+
-+		- 0: No alarm
-+		- 1: Alarm
-+
-+		RO
-+
-+What:		/sys/class/hwmon/hwmonX/tempY_beep
-+Description:
-+		Temperature channel beep.
-+
-+		- 0: Disable
-+		- 1: Enable
-+
-+		RW
-+
-+What:		/sys/class/hwmon/hwmonX/tempY_fault
-+Description:
-+		Temperature channel fault indicator.
-+
-+		Indicates whether a temperature sensor has reported failure.
-+
-+		- 0: OK
-+		- 1: Failed
-+
-+		RO
-+
-+What:		/sys/class/hwmon/hwmonX/temp_samples
-+Description:
-+		Temperature samples in calculated average.
-+
-+		RW
-+
- What:		/sys/class/hwmon/hwmonX/currY_max
- Description:
- 		Current max value.
-@@ -748,6 +958,76 @@ Description:
- 
- 		RO
- 
-+What:		/sys/class/hwmon/hwmonX/currY_alarm
-+Description:
-+		Current channel alarm indicator.
-+
-+		Clears itself when read.
-+
-+		- 0: No alarm
-+		- 1: Alarm
-+
-+		RO
-+
-+What:		/sys/class/hwmon/hwmonX/currY_min_alarm
-+Description:
-+		Current min alarm indicator.
-+
-+		Clears itself when read.
-+
-+		- 0: No alarm
-+		- 1: Alarm
-+
-+		RO
-+
-+What:		/sys/class/hwmon/hwmonX/currY_max_alarm
-+Description:
-+		Current max alarm indicator.
-+
-+		Clears itself when read.
-+
-+		- 0: No alarm
-+		- 1: Alarm
-+
-+		RO
-+
-+What:		/sys/class/hwmon/hwmonX/currY_lcrit_alarm
-+Description:
-+		Current critical min alarm indicator.
-+
-+		Clears itself when read.
-+
-+		- 0: No alarm
-+		- 1: Alarm
-+
-+		RO
-+
-+What:		/sys/class/hwmon/hwmonX/currY_crit_alarm
-+Description:
-+		Current critical max alarm indicator.
-+
-+		Clears itself when read.
-+
-+		- 0: No alarm
-+		- 1: Alarm
-+
-+		RO
-+
-+What:		/sys/class/hwmon/hwmonX/currY_beep
-+Description:
-+		Current channel beep.
-+
-+		- 0: Disable
-+		- 1: Enable
-+
-+		RW
-+
-+What:		/sys/class/hwmon/hwmonX/curr_samples
-+Description:
-+		Current samples in calculated average.
-+
-+		RW
-+
- What:		/sys/class/hwmon/hwmonX/powerY_average
- Description:
- 		Average power use.
-@@ -950,6 +1230,56 @@ Description:
- 
- 		RO
- 
-+What:		/sys/class/hwmon/hwmonX/powerY_alarm
-+Description:
-+		Power channel alarm indicator.
-+
-+		Clears itself when read.
-+
-+		- 0: No alarm
-+		- 1: Alarm
-+
-+		RO
-+
-+What:		/sys/class/hwmon/hwmonX/powerY_cap_alarm
-+Description:
-+		Power reduction alarm indicator.
-+
-+		Clears itself when read.
-+
-+		- 0: No alarm
-+		- 1: Alarm
-+
-+		RO
-+
-+What:		/sys/class/hwmon/hwmonX/powerY_max_alarm
-+Description:
-+		Power max alarm indicator.
-+
-+		Clears itself when read.
-+
-+		- 0: No alarm
-+		- 1: Alarm
-+
-+		RO
-+
-+What:		/sys/class/hwmon/hwmonX/powerY_crit_alarm
-+Description:
-+		Power critical reduction alarm indicator.
-+
-+		Clears itself when read.
-+
-+		- 0: No alarm
-+		- 1: Alarm
-+
-+		RO
-+
-+What:		/sys/class/hwmon/hwmonX/power_samples
-+Description:
-+		Power samples in calculated average.
-+
-+		RW
-+
- What:		/sys/class/hwmon/hwmonX/energyY_input
- Description:
- 		Cumulative energy use.
--- 
-2.34.1
+> > Is that
+> > really necessary? Values from __builtin_return_address() can easily be
+> > printed out as function+offset from kernel which already gives most of =
+the
+> > necessary information for triaging and mapping that back to source line=
+ from
+> > userspace isn't difficult. Wouldn't using __builtin_return_address() ma=
+ke
+> > the whole thing a lot simpler? =20
+>=20
+> If we do that we have to associate that address with the allocation
+> counter at runtime on the first allocation and look it up on all
+> following allocations. That introduces the overhead which we are
+> trying to avoid by using macros.
+>=20
+> >
+> > Thanks.
+> >
+> > --
+> > tejun =20
+>=20
 
