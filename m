@@ -2,294 +2,104 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 5429B6F6F21
-	for <lists+linux-doc@lfdr.de>; Thu,  4 May 2023 17:35:55 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 224366F6CC6
+	for <lists+linux-doc@lfdr.de>; Thu,  4 May 2023 15:17:58 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S231475AbjEDPfx (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 4 May 2023 11:35:53 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:49726 "EHLO
+        id S230257AbjEDNR4 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 4 May 2023 09:17:56 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:51328 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S231469AbjEDPfv (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Thu, 4 May 2023 11:35:51 -0400
-Received: from mail-ed1-x529.google.com (mail-ed1-x529.google.com [IPv6:2a00:1450:4864:20::529])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 6B26749D9
-        for <linux-doc@vger.kernel.org>; Thu,  4 May 2023 08:35:47 -0700 (PDT)
-Received: by mail-ed1-x529.google.com with SMTP id 4fb4d7f45d1cf-50bd2d7ba74so18423219a12.1
-        for <linux-doc@vger.kernel.org>; Thu, 04 May 2023 08:35:47 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google; t=1683214546; x=1685806546;
-        h=content-transfer-encoding:in-reply-to:from:references:cc:to
-         :content-language:subject:user-agent:mime-version:date:message-id
-         :from:to:cc:subject:date:message-id:reply-to;
-        bh=ejh4crEBOmtG4UC1kk86Qe+Ml+DMERXcjPl1rLzWy/A=;
-        b=ls54MAt8vRmbuJ1pN0j4ExdrRZHf+goxJOCk/9QMiAqwRIBARCMMukGq/VbAKOcY78
-         VxEyPKBChJVz+IAbsnORgTExobdIYSaeClyyQxx+7vReGRsZCfRj5cKRxvadkGy+9yRL
-         GntWHAQPYQCGLp8OH13fWxsDwlbpFqg+c/5APdKPbIZM15PxLigaHs8HGSddisPFzYjl
-         7UqxhldoUQlLoR6qcEVmkjXOJra+5fX+s9IBxQo5+yVsqWYvpp6Um3TuGMUPiu8EeVXq
-         hWDdoJwjIVQHPnACEgc2n6ldlghABF1CSS29tYYuI3DZR+QX570Nn0Hg0UiXsVmvSmxt
-         HN3Q==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1683214546; x=1685806546;
-        h=content-transfer-encoding:in-reply-to:from:references:cc:to
-         :content-language:subject:user-agent:mime-version:date:message-id
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=ejh4crEBOmtG4UC1kk86Qe+Ml+DMERXcjPl1rLzWy/A=;
-        b=IaZ13LdI1Lyjkr2sfLSVly1OyBdueDNEg1uuyWjTTRcApuXbRMPAyNZdOW+RhVelqV
-         ISXUAKAaux6mG7UDrjP3IL+w94+zjzf5StqbsAMJm7OrZiFlQmEurBmOMjOOroXMmyIR
-         8MJP6DnRPsiwNKWXD+Az4tJx/5VlLEgCMmRM/6JBNHdvkGUDyE9zWsbIZlwD7l8Fh1C6
-         nDggEvquuAd/b5gAo3ydZDCtFn/jlMegXG2klfdG69sYBegKbAUGoSm1YbCBlDzL7Uf4
-         PwhxlGbO1+uzaV6YRtQXggS0quOjf/aKihi6xw7qPFHUoRsQgIVw081jtpw43H7AmFH+
-         mUVg==
-X-Gm-Message-State: AC+VfDwyKcY1Lch8fmNMI1KT0yIKjwwsFIdy7TEGHrCEjVdUewSLu0pI
-        qXITX7elZefV92MOi+g1g3jRxg==
-X-Google-Smtp-Source: ACHHUZ7jzfDt06eS0CGkxF6QauQkCZSpGzNA36btONhIeYYIhlGdGvHung1H+PrKfGrXAL7Q3uqFrg==
-X-Received: by 2002:a17:907:72d1:b0:94f:1d54:95d2 with SMTP id du17-20020a17090772d100b0094f1d5495d2mr6179188ejc.15.1683214545801;
-        Thu, 04 May 2023 08:35:45 -0700 (PDT)
-Received: from ?IPV6:2a02:810d:15c0:828:cbf1:e7ef:fb81:e912? ([2a02:810d:15c0:828:cbf1:e7ef:fb81:e912])
-        by smtp.gmail.com with ESMTPSA id l13-20020a170906230d00b0094f2f1c5ea1sm19210155eja.174.2023.05.04.08.35.43
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Thu, 04 May 2023 08:35:44 -0700 (PDT)
-Message-ID: <62b81216-120b-40c0-bcf4-d3d3867200e0@linaro.org>
-Date:   Thu, 4 May 2023 17:35:43 +0200
+        with ESMTP id S229606AbjEDNRz (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Thu, 4 May 2023 09:17:55 -0400
+Received: from mx0a-00128a01.pphosted.com (mx0a-00128a01.pphosted.com [148.163.135.77])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 850AB4C24;
+        Thu,  4 May 2023 06:17:54 -0700 (PDT)
+Received: from pps.filterd (m0167089.ppops.net [127.0.0.1])
+        by mx0a-00128a01.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id 344CX03c016081;
+        Thu, 4 May 2023 09:17:38 -0400
+Received: from nwd2mta3.analog.com ([137.71.173.56])
+        by mx0a-00128a01.pphosted.com (PPS) with ESMTPS id 3qc40yumch-1
+        (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+        Thu, 04 May 2023 09:17:37 -0400
+Received: from ASHBMBX9.ad.analog.com (ASHBMBX9.ad.analog.com [10.64.17.10])
+        by nwd2mta3.analog.com (8.14.7/8.14.7) with ESMTP id 344DHa4M018001
+        (version=TLSv1/SSLv3 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=FAIL);
+        Thu, 4 May 2023 09:17:36 -0400
+Received: from ASHBCASHYB4.ad.analog.com (10.64.17.132) by
+ ASHBMBX9.ad.analog.com (10.64.17.10) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.986.14; Thu, 4 May 2023 09:17:35 -0400
+Received: from ASHBMBX9.ad.analog.com (10.64.17.10) by
+ ASHBCASHYB4.ad.analog.com (10.64.17.132) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.986.14; Thu, 4 May 2023 09:17:35 -0400
+Received: from zeus.spd.analog.com (10.66.68.11) by ashbmbx9.ad.analog.com
+ (10.64.17.10) with Microsoft SMTP Server id 15.2.986.14 via Frontend
+ Transport; Thu, 4 May 2023 09:17:35 -0400
+Received: from daniel-Precision-5530.ad.analog.com ([10.48.65.214])
+        by zeus.spd.analog.com (8.15.1/8.15.1) with ESMTP id 344DHKoQ020836;
+        Thu, 4 May 2023 09:17:22 -0400
+From:   Daniel Matyas <daniel.matyas@analog.com>
+CC:     Daniel Matyas <daniel.matyas@analog.com>,
+        Jean Delvare <jdelvare@suse.com>,
+        Guenter Roeck <linux@roeck-us.net>,
+        Rob Herring <robh+dt@kernel.org>,
+        Krzysztof Kozlowski <krzysztof.kozlowski+dt@linaro.org>,
+        Jonathan Corbet <corbet@lwn.net>,
+        <linux-hwmon@vger.kernel.org>, <devicetree@vger.kernel.org>,
+        <linux-kernel@vger.kernel.org>, <linux-doc@vger.kernel.org>
+Subject: [PATCH v5 0/2] Hwmon driver for MAX31827 temperature switch
+Date:   Thu, 4 May 2023 19:17:09 +0300
+Message-ID: <20230504161714.6281-1-daniel.matyas@analog.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.10.1
-Subject: Re: [PATCH v3 09/18] soc: qcom: Add qcom's pstore minidump driver
- support
-Content-Language: en-US
-To:     Mukesh Ojha <quic_mojha@quicinc.com>, agross@kernel.org,
-        andersson@kernel.org, konrad.dybcio@linaro.org, corbet@lwn.net,
-        keescook@chromium.org, tony.luck@intel.com, gpiccoli@igalia.com,
-        catalin.marinas@arm.com, will@kernel.org,
-        krzysztof.kozlowski+dt@linaro.org, robh+dt@kernel.org,
-        linus.walleij@linaro.org, linux-gpio@vger.kernel.org,
-        srinivas.kandagatla@linaro.org
-Cc:     linux-arm-msm@vger.kernel.org, linux-remoteproc@vger.kernel.org,
-        linux-kernel@vger.kernel.org, linux-hardening@vger.kernel.org,
-        linux-arm-kernel@lists.infradead.org, linux-doc@vger.kernel.org
-References: <1683133352-10046-1-git-send-email-quic_mojha@quicinc.com>
- <1683133352-10046-10-git-send-email-quic_mojha@quicinc.com>
-From:   Krzysztof Kozlowski <krzysztof.kozlowski@linaro.org>
-In-Reply-To: <1683133352-10046-10-git-send-email-quic_mojha@quicinc.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-Spam-Status: No, score=-6.4 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,NICE_REPLY_A,RCVD_IN_DNSWL_NONE,
-        SPF_HELO_NONE,SPF_PASS,T_SCC_BODY_TEXT_LINE,URIBL_BLOCKED
-        autolearn=unavailable autolearn_force=no version=3.4.6
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
+X-ADIRuleOP-NewSCL: Rule Triggered
+X-Proofpoint-ORIG-GUID: Z7A3Hbr773vN-GlW6s-RVpdHSh_Ezqnd
+X-Proofpoint-GUID: Z7A3Hbr773vN-GlW6s-RVpdHSh_Ezqnd
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.254,Aquarius:18.0.942,Hydra:6.0.573,FMLib:17.11.170.22
+ definitions=2023-05-04_08,2023-05-04_01,2023-02-09_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 priorityscore=1501 mlxscore=0
+ malwarescore=0 adultscore=0 clxscore=1015 suspectscore=0 spamscore=0
+ phishscore=0 mlxlogscore=764 impostorscore=0 bulkscore=0
+ lowpriorityscore=0 classifier=spam adjust=0 reason=mlx scancount=1
+ engine=8.12.0-2303200000 definitions=main-2305040107
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_LOW,
+        RCVD_IN_MSPIKE_H2,SPF_HELO_NONE,SPF_PASS,T_SCC_BODY_TEXT_LINE
+        autolearn=ham autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
+To:     unlisted-recipients:; (no To-header on input)
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On 03/05/2023 19:02, Mukesh Ojha wrote:
-> This driver was inspired from the fact pstore ram region should be
-> fixed and boot firmware need to have awarness about this region,
-> so that it will be persistent across boot. But, there are many
-> QCOM SoC which does not support warm boot from hardware but they
-> have minidump support from the software, and for them, there is
-> no need of this pstore ram region to be fixed, but at the same
-> time have interest in the pstore frontends. So, this driver
-> get the dynamic reserved region from the ram and register the
-> ramoops platform device.
-> 
->  +---------+     +---------+   +--------+     +---------+
->  | console |     | pmsg    |   | ftrace |     | dmesg   |
->  +---------+     +---------+   +--------+     +---------+
->        |             |             |              |
->        |             |             |              |
->        +------------------------------------------+
->                           |
->                          \ /
->                   +----------------+
->             (1)   |pstore frontends|
->                   +----------------+
->                           |
->                          \ /
->                  +------------------- +
->             (2)  | pstore backend(ram)|
->                  +--------------------+
->                           |
->                          \ /
->                  +--------------------+
->             (3)  |qcom_pstore_minidump|
->                  +--------------------+
->                           |
->                          \ /
->                    +---------------+
->             (4)    | qcom_minidump |
->                    +---------------+
-> 
-> This driver will route all the pstore front data to the stored
-> in qcom pstore reserved region and the reason of showing an
-> arrow from (3) to (4) as qcom_pstore_minidump driver will register
-> all the available frontends region with qcom minidump driver
-> in upcoming patch.
-> 
-> Signed-off-by: Mukesh Ojha <quic_mojha@quicinc.com>
-> ---
->  drivers/soc/qcom/Kconfig                |  11 +++
->  drivers/soc/qcom/Makefile               |   1 +
->  drivers/soc/qcom/qcom_pstore_minidump.c | 116 ++++++++++++++++++++++++++++++++
->  3 files changed, 128 insertions(+)
->  create mode 100644 drivers/soc/qcom/qcom_pstore_minidump.c
-> 
-> diff --git a/drivers/soc/qcom/Kconfig b/drivers/soc/qcom/Kconfig
-> index 15c931e..afdc634 100644
-> --- a/drivers/soc/qcom/Kconfig
-> +++ b/drivers/soc/qcom/Kconfig
-> @@ -293,4 +293,15 @@ config QCOM_MINIDUMP
->  	  these selective regions will be dumped instead of the entire DDR.
->  	  This saves significant amount of time and/or storage space.
->  
-> +config QCOM_PSTORE_MINIDUMP
-> +	tristate "Pstore support for QCOM Minidump"
-> +	depends on ARCH_QCOM
-> +	depends on PSTORE_RAM
-> +	depends on QCOM_MINIDUMP
-> +	help
-> +	  Enablement of this driver ensures that ramoops region can be anywhere
-> +	  reserved in ram instead of being fixed address which needs boot firmware
-> +	  awareness. So, this driver creates plaform device and registers available
-> +	  frontend region with the Qualcomm's minidump driver.
-> +
->  endmenu
-> diff --git a/drivers/soc/qcom/Makefile b/drivers/soc/qcom/Makefile
-> index 1ebe081..02d30d7 100644
-> --- a/drivers/soc/qcom/Makefile
-> +++ b/drivers/soc/qcom/Makefile
-> @@ -34,3 +34,4 @@ obj-$(CONFIG_QCOM_KRYO_L2_ACCESSORS) +=	kryo-l2-accessors.o
->  obj-$(CONFIG_QCOM_ICC_BWMON)	+= icc-bwmon.o
->  obj-$(CONFIG_QCOM_INLINE_CRYPTO_ENGINE)	+= ice.o
->  obj-$(CONFIG_QCOM_MINIDUMP) += qcom_minidump.o
-> +obj-$(CONFIG_QCOM_PSTORE_MINIDUMP) += qcom_pstore_minidump.o
-> diff --git a/drivers/soc/qcom/qcom_pstore_minidump.c b/drivers/soc/qcom/qcom_pstore_minidump.c
-> new file mode 100644
-> index 0000000..8d58500
-> --- /dev/null
-> +++ b/drivers/soc/qcom/qcom_pstore_minidump.c
-> @@ -0,0 +1,116 @@
-> +// SPDX-License-Identifier: GPL-2.0-only
-> +
-> +/*
-> + * Copyright (c) 2023 Qualcomm Innovation Center, Inc. All rights reserved.
-> + */
-> +
-> +#include <linux/module.h>
-> +#include <linux/of_device.h>
-> +#include <linux/of_reserved_mem.h>
-> +#include <linux/platform_device.h>
-> +#include <linux/pstore_ram.h>
-> +#include <soc/qcom/qcom_minidump.h>
-> +
-> +struct qcom_ramoops_config {
-> +	unsigned long	record_size;
-> +	unsigned long	console_size;
-> +	unsigned long	ftrace_size;
-> +	unsigned long	pmsg_size;
-> +	unsigned int	mem_type;
-> +	unsigned int	flags;
-> +	int		max_reason;
-> +};
-> +
-> +struct qcom_ramoops_dd {
-> +	struct ramoops_platform_data qcom_ramoops_pdata;
-> +	struct platform_device *ramoops_pdev;
-> +};
-> +
-> +static struct qcom_ramoops_config default_ramoops_config = {
+Readded the of_match_table.
 
-Cannot this be const?
+Added default cases where it was necessary.
 
+Used mutex where it was necessary.
 
-> +	.mem_type = 2,
-> +	.record_size = 0x0,
-> +	.console_size = 0x200000,
-> +	.ftrace_size = 0x0,
-> +	.pmsg_size = 0x0,
-> +};
-> +
-> +static struct qcom_ramoops_dd *qcom_rdd;
+Added conversion to milli-degrees and milli-seconds.
 
-Drop file scope variable. It's not even used.
+Daniel Matyas (2):
+  dt-bindings: hwmon: add MAX31827
+  hwmon: max31827: add MAX31827 driver
 
-> +static int qcom_ramoops_probe(struct platform_device *pdev)
-> +{
-> +	struct device_node *of_node = pdev->dev.of_node;
-> +	struct device_node *node;
-> +	const struct qcom_ramoops_config *cfg;
-> +	struct ramoops_platform_data *pdata;
-> +	struct reserved_mem *rmem;
-> +	long ret;
-> +
-> +	node = of_parse_phandle(of_node, "memory-region", 0);
-> +	if (!node)
-> +		return -ENODEV;
-> +
-> +	rmem = of_reserved_mem_lookup(node);
-> +	of_node_put(node);
-> +	if (!rmem) {
-> +		dev_err(&pdev->dev, "failed to locate DT /reserved-memory resource\n");
-> +		return -EINVAL;
-> +	}
-> +
-> +	qcom_rdd = devm_kzalloc(&pdev->dev, sizeof(*qcom_rdd), GFP_KERNEL);
-> +	if (!qcom_rdd)
-> +		return -ENOMEM;
-> +
-> +	cfg = of_device_get_match_data(&pdev->dev);
-> +	if (!cfg) {
-> +		dev_err(&pdev->dev, "failed to get supported matched data\n");
-> +		return -ENOENT;
-> +	}
-> +
-> +	pdata = &qcom_rdd->qcom_ramoops_pdata;
-> +	pdata->mem_size = rmem->size;
-> +	pdata->mem_address = rmem->base;
-> +	pdata->mem_type = cfg->mem_type;
-> +	pdata->record_size = cfg->record_size;
-> +	pdata->console_size = cfg->console_size;
-> +	pdata->ftrace_size = cfg->ftrace_size;
-> +	pdata->pmsg_size = cfg->pmsg_size;
-> +	pdata->max_reason = KMSG_DUMP_PANIC;
-> +
-> +	qcom_rdd->ramoops_pdev = platform_device_register_data(NULL, "ramoops", -1,
-> +							       pdata, sizeof(*pdata));
-> +	if (IS_ERR(qcom_rdd->ramoops_pdev)) {
-> +		ret = PTR_ERR(qcom_rdd->ramoops_pdev);
-> +		dev_err(&pdev->dev, "could not create platform device: %ld\n", ret);
-> +		qcom_rdd->ramoops_pdev = NULL;
-> +	}
-> +
-> +	return ret;
-> +}
-> +
-> +static int qcom_ramoops_remove(struct platform_device *pdev)
+ .../bindings/hwmon/adi,max31827.yaml          |  54 +++
+ Documentation/hwmon/index.rst                 |   1 +
+ Documentation/hwmon/max31827.rst              |  83 ++++
+ MAINTAINERS                                   |   9 +
+ drivers/hwmon/Kconfig                         |  11 +
+ drivers/hwmon/Makefile                        |   2 +-
+ drivers/hwmon/max31827.c                      | 427 ++++++++++++++++++
+ 7 files changed, 586 insertions(+), 1 deletion(-)
+ create mode 100644 Documentation/devicetree/bindings/hwmon/adi,max31827.yaml
+ create mode 100644 Documentation/hwmon/max31827.rst
+ create mode 100644 drivers/hwmon/max31827.c
 
-Use instead .remove_new callback.
-
-> +{
-> +	platform_device_unregister(qcom_rdd->ramoops_pdev);
-> +	qcom_rdd->ramoops_pdev = NULL;
-> +
-> +	return 0;
-> +}
-> +
-> +static const struct of_device_id qcom_ramoops_of_match[] = {
-> +	{ .compatible = "qcom,sm8450-ramoops-minidump", .data = &default_ramoops_config },
-
-You don't need this entry.
-
-> +	{ .compatible = "qcom,ramoops-minidump", .data = &default_ramoops_config },
-> +	{}
-> +};
-> +
-> +MODULE_DEVICE_TABLE(of, qcom_ramoops_of_match);
-
-Blank line goes after the MODULE_DEVICE_TABLE, not before.
-
-
-Best regards,
-Krzysztof
+-- 
+2.34.1
 
