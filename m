@@ -2,129 +2,92 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id AA7636F90C0
-	for <lists+linux-doc@lfdr.de>; Sat,  6 May 2023 11:01:53 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 1F5C86F91B9
+	for <lists+linux-doc@lfdr.de>; Sat,  6 May 2023 13:52:17 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S232082AbjEFJBt (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Sat, 6 May 2023 05:01:49 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:44392 "EHLO
+        id S232289AbjEFLwO (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Sat, 6 May 2023 07:52:14 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:33544 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S231705AbjEFJBq (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Sat, 6 May 2023 05:01:46 -0400
-Received: from mail-qt1-x831.google.com (mail-qt1-x831.google.com [IPv6:2607:f8b0:4864:20::831])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 81B2CA5F1;
-        Sat,  6 May 2023 02:01:33 -0700 (PDT)
-Received: by mail-qt1-x831.google.com with SMTP id d75a77b69052e-3ef302a642eso13844511cf.1;
-        Sat, 06 May 2023 02:01:33 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20221208; t=1683363692; x=1685955692;
-        h=in-reply-to:content-disposition:mime-version:references
-         :mail-followup-to:message-id:subject:cc:to:from:date:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=hZ/5LqweTtZrPkjTKwCpHOg2/Sdaepy5dm+TbvvEjYs=;
-        b=dNrMv2iIFYICQFrW5CIPsF24kFW6ylwSmaK+s6ndfG79f7FUOl6n/9ejqCLLunmQev
-         gzDMpDlTxd7GOv7veA63i9xXPJ4s6LzswOKOrVRRaADXGgA1fBY/v8kc/w9EbCEu4KRs
-         ZEtGVVVu5DmGWAJrQXCJe+NZUrBBY6fIDUC52BSy9gQSW7NijeG7RBQRDEEXPEmZaQ7j
-         dUAC8e6w0bDk4lxdnJaMsr2PblaTth07JaYlhW5ei9mdhegJKtKOsFJBnUiUpLdFSuOH
-         3cWaeF7l7/hZ/y252hs6wgC8KR95ahrwqZm6Hy/2zmXDuwDstY8qBR91EsIbaHwWFL6t
-         u5Mw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1683363692; x=1685955692;
-        h=in-reply-to:content-disposition:mime-version:references
-         :mail-followup-to:message-id:subject:cc:to:from:date
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=hZ/5LqweTtZrPkjTKwCpHOg2/Sdaepy5dm+TbvvEjYs=;
-        b=jP4afuJXPLzK7XNjlUGjoaTrRMOeG1+URWbOrx0ezQELblZXjtBE+ZY70aJBUPKbn4
-         WSNkBxPf0C3kUflz+oJrLSAFY1+hEXixNa/fMrEQgUsV6tDLHW2C9QbMOZUDo+MYZpwR
-         OWcLPqWNt8vQX92Mi8NhfSqhYZZ86eKMV7CG3H7AN0qS4lBbTEiECNewqIJbF014pGCT
-         g3sYXbcYqylm6Y9z0Uknv3fIxpWCkQ7hA9N+77l3R0NJd0MTJePRCjWVcPpMqOLyWwYQ
-         5Bl6bKEnQQ2y0gjKct3i1LzZJ468DPNkybpKZadNYpc+Ca8FPjtYT9lVv51kXzHbIn/w
-         fpBg==
-X-Gm-Message-State: AC+VfDyPegbhO5R3zPehscKV4/Uf1ne0RTlx+ZCLX1OuhFSfmzK+UaLD
-        +R6UODmyynkSDImRZTq3ATL2vPLX3ddOEDN5
-X-Google-Smtp-Source: ACHHUZ5AB0u7MAH7jMRAkwYQ5CVq8beLin+sFaIK1Eh1YcYLJMkrkxKfob07B2nTjp3TMKMXU8AW5Q==
-X-Received: by 2002:ad4:5de2:0:b0:5e0:5935:d80e with SMTP id jn2-20020ad45de2000000b005e05935d80emr5338425qvb.45.1683363692294;
-        Sat, 06 May 2023 02:01:32 -0700 (PDT)
-Received: from Gentoo ([191.96.227.112])
-        by smtp.gmail.com with ESMTPSA id f8-20020a0cf3c8000000b005ef6128255bsm1220357qvm.92.2023.05.06.02.01.28
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 06 May 2023 02:01:31 -0700 (PDT)
-Date:   Sat, 6 May 2023 14:31:20 +0530
-From:   Bhaskar Chowdhury <unixbhaskar@gmail.com>
-To:     Bagas Sanjaya <bagasdotme@gmail.com>
-Cc:     dhowells@redhat.com, jarkko@kernel.org, corbet@lwn.net,
-        keyrings@vger.kernel.org, linux-doc@vger.kernel.org,
-        linux-kernel@vger.kernel.org
-Subject: Re: [PATCH]Documentation: Security: Consistent block output by
- removing a misfit line
-Message-ID: <ZFYXYPivioHcQ866@Gentoo>
-Mail-Followup-To: Bhaskar Chowdhury <unixbhaskar@gmail.com>,
-        Bagas Sanjaya <bagasdotme@gmail.com>, dhowells@redhat.com,
-        jarkko@kernel.org, corbet@lwn.net, keyrings@vger.kernel.org,
-        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org
-References: <20230506033738.16908-1-unixbhaskar@gmail.com>
- <ZFYFi+eS3efdx0jS@debian.me>
+        with ESMTP id S231899AbjEFLwM (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Sat, 6 May 2023 07:52:12 -0400
+X-Greylist: delayed 123 seconds by postgrey-1.37 at lindbergh.monkeyblade.net; Sat, 06 May 2023 04:52:09 PDT
+Received: from mx6.didiglobal.com (mx6.didiglobal.com [111.202.70.123])
+        by lindbergh.monkeyblade.net (Postfix) with SMTP id 241AF559E;
+        Sat,  6 May 2023 04:52:08 -0700 (PDT)
+Received: from mail.didiglobal.com (unknown [10.79.71.35])
+        by mx6.didiglobal.com (Maildata Gateway V2.8) with ESMTPS id 4FDF311004C019;
+        Sat,  6 May 2023 19:50:03 +0800 (CST)
+Received: from localhost.localdomain (10.79.64.102) by
+ ZJY03-ACTMBX-05.didichuxing.com (10.79.71.35) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2507.21; Sat, 6 May 2023 19:50:02 +0800
+X-MD-Sfrom: chengkaitao@didiglobal.com
+X-MD-SrcIP: 10.79.71.35
+From:   chengkaitao <chengkaitao@didiglobal.com>
+To:     <tj@kernel.org>, <lizefan.x@bytedance.com>, <hannes@cmpxchg.org>,
+        <corbet@lwn.net>, <mhocko@kernel.org>, <roman.gushchin@linux.dev>,
+        <shakeelb@google.com>, <akpm@linux-foundation.org>,
+        <brauner@kernel.org>, <muchun.song@linux.dev>
+CC:     <viro@zeniv.linux.org.uk>, <zhengqi.arch@bytedance.com>,
+        <ebiederm@xmission.com>, <Liam.Howlett@Oracle.com>,
+        <chengzhihao1@huawei.com>, <pilgrimtao@gmail.com>,
+        <haolee.swjtu@gmail.com>, <yuzhao@google.com>,
+        <willy@infradead.org>, <vasily.averin@linux.dev>, <vbabka@suse.cz>,
+        <surenb@google.com>, <sfr@canb.auug.org.au>, <mcgrof@kernel.org>,
+        <sujiaxun@uniontech.com>, <feng.tang@intel.com>,
+        <cgroups@vger.kernel.org>, <linux-doc@vger.kernel.org>,
+        <linux-kernel@vger.kernel.org>, <linux-fsdevel@vger.kernel.org>,
+        <linux-mm@kvack.org>, chengkaitao <chengkaitao@didiglobal.com>
+Subject: [PATCH v3 0/2] memcontrol: support cgroup level OOM protection
+Date:   Sat, 6 May 2023 19:49:46 +0800
+Message-ID: <20230506114948.6862-1-chengkaitao@didiglobal.com>
+X-Mailer: git-send-email 2.24.3 (Apple Git-128)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha256;
-        protocol="application/pgp-signature"; boundary="1yHWxPoUvlWEjiHs"
-Content-Disposition: inline
-In-Reply-To: <ZFYFi+eS3efdx0jS@debian.me>
-X-Spam-Status: No, score=-2.1 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_FROM,
-        RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,SPF_PASS,T_SCC_BODY_TEXT_LINE,
-        URIBL_BLOCKED autolearn=ham autolearn_force=no version=3.4.6
+Content-Transfer-Encoding: 7BIT
+Content-Type:   text/plain; charset=US-ASCII
+X-Originating-IP: [10.79.64.102]
+X-ClientProxiedBy: ZJY01-PUBMBX-01.didichuxing.com (10.79.64.32) To
+ ZJY03-ACTMBX-05.didichuxing.com (10.79.71.35)
+X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00,SPF_HELO_NONE,
+        SPF_PASS,T_SCC_BODY_TEXT_LINE autolearn=ham autolearn_force=no
+        version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
+Establish a new OOM score algorithm, supports the cgroup level OOM
+protection mechanism. When an global/memcg oom event occurs, we treat
+all processes in the cgroup as a whole, and OOM killers need to select
+the process to kill based on the protection quota of the cgroup
 
---1yHWxPoUvlWEjiHs
-Content-Type: text/plain; charset=us-ascii; format=flowed
-Content-Disposition: inline
+Changelog:
+v3:
+  * Add "auto" option for memory.oom.protect. (patch 1)
+  * Fix division errors. (patch 1)
+  * Add observation indicator oom_kill_inherit. (patch 2)
+v2:
+  * Modify the formula of the process request memcg protection quota.
+  https://lore.kernel.org/linux-mm/20221208034644.3077-1-chengkaitao@didiglobal.com/
+v1:
+  https://lore.kernel.org/linux-mm/20221130070158.44221-1-chengkaitao@didiglobal.com/
 
-On 14:45 Sat 06 May 2023, Bagas Sanjaya wrote:
->On Sat, May 06, 2023 at 09:07:38AM +0530, Bhaskar Chowdhury wrote:
->> -	[root@andromeda root]# cat /proc/key-users
->
->You remove the command line, right? The preceding sentence should be
->adjusted too, e.g. "This file lists the tracking data (including
->quota information and statistics) ... . Example file contents::".
->
-I don't think that is needed. Plus look just below that outputted block, the
-explanation to the columns are given...isn't it?? That is good enough for the
-user to gather.
+chengkaitao (2):
+  mm: memcontrol: protect the memory in cgroup from being oom killed
+  memcg: add oom_kill_inherit event indicator
 
-That command line was unnecessarily present there,so the removal.
+ Documentation/admin-guide/cgroup-v2.rst |  29 ++++-
+ fs/proc/base.c                          |  17 ++-
+ include/linux/memcontrol.h              |  46 +++++++-
+ include/linux/oom.h                     |   3 +-
+ include/linux/page_counter.h            |   6 +
+ mm/memcontrol.c                         | 199 ++++++++++++++++++++++++++++++++
+ mm/oom_kill.c                           |  25 ++--
+ mm/page_counter.c                       |  30 +++++
+ 8 files changed, 334 insertions(+), 21 deletions(-)
 
->Thanks.
->
->--
->An old man doll... just what I always wanted! - Clara
+-- 
+2.14.1
 
-
-
---
-Thanks,
-Bhaskar
-
-"Here's looking at you kid"-- Casablanca
-https://about.me/unixbhaskar
-
---1yHWxPoUvlWEjiHs
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQEzBAABCAAdFiEEnwF+nWawchZUPOuwsjqdtxFLKRUFAmRWF2AACgkQsjqdtxFL
-KRUV+AgA1KEc8TAbc+AMKK5iH77eJhrWOZfog0+mvb3jM8WxHXZiKwQbkuyN8RtK
-7oi9nWHvT4rv9Xk+VxL8Vp+9E2ndbQEqxTkwpHBKt5Cut7riGCHaPP7lxBbJkf9y
-57ThzQTIxdYBnioek5YH9Frip3AxRMm61cigW7mxJ+a/okPkLy5NOEqJgzTckfTL
-eOT3RvqE7tpSKvIsJeHPLdS7HDfSjWpO5xVX93XmdRBTxnIB4xMEiLoBLpfZh7El
-kh8HADEl/B/mkICIv7BtN1IP4tj/KmYBgSDvaHk5vbjAVORbQnSWz1//LXymKSZH
-bRAnNjjYzzzNJSX7tDjuESUIIbip0g==
-=26sT
------END PGP SIGNATURE-----
-
---1yHWxPoUvlWEjiHs--
