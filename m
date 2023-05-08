@@ -2,740 +2,408 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 5BAA86FB2AF
-	for <lists+linux-doc@lfdr.de>; Mon,  8 May 2023 16:25:23 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id E90A46FB4C2
+	for <lists+linux-doc@lfdr.de>; Mon,  8 May 2023 18:09:02 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S234471AbjEHOZV (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 8 May 2023 10:25:21 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:33284 "EHLO
+        id S233559AbjEHQI7 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 8 May 2023 12:08:59 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:46532 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S234301AbjEHOZT (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Mon, 8 May 2023 10:25:19 -0400
-Received: from mx0a-00128a01.pphosted.com (mx0a-00128a01.pphosted.com [148.163.135.77])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id D6FF461B3;
-        Mon,  8 May 2023 07:25:14 -0700 (PDT)
-Received: from pps.filterd (m0167089.ppops.net [127.0.0.1])
-        by mx0a-00128a01.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id 348D1srN003279;
-        Mon, 8 May 2023 10:24:57 -0400
-Received: from nwd2mta3.analog.com ([137.71.173.56])
-        by mx0a-00128a01.pphosted.com (PPS) with ESMTPS id 3qdkt9bhtq-1
-        (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
-        Mon, 08 May 2023 10:24:56 -0400
-Received: from ASHBMBX8.ad.analog.com (ASHBMBX8.ad.analog.com [10.64.17.5])
-        by nwd2mta3.analog.com (8.14.7/8.14.7) with ESMTP id 348EOtFB028253
-        (version=TLSv1/SSLv3 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=FAIL);
-        Mon, 8 May 2023 10:24:55 -0400
-Received: from ASHBMBX9.ad.analog.com (10.64.17.10) by ASHBMBX8.ad.analog.com
- (10.64.17.5) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.986.14; Mon, 8 May 2023
- 10:24:54 -0400
-Received: from zeus.spd.analog.com (10.66.68.11) by ashbmbx9.ad.analog.com
- (10.64.17.10) with Microsoft SMTP Server id 15.2.986.14 via Frontend
- Transport; Mon, 8 May 2023 10:24:54 -0400
-Received: from daniel-Precision-5530.ad.analog.com ([10.48.65.214])
-        by zeus.spd.analog.com (8.15.1/8.15.1) with ESMTP id 348EOYCs012218;
-        Mon, 8 May 2023 10:24:48 -0400
-From:   Daniel Matyas <daniel.matyas@analog.com>
-CC:     Daniel Matyas <daniel.matyas@analog.com>,
-        Jean Delvare <jdelvare@suse.com>,
-        Guenter Roeck <linux@roeck-us.net>,
-        Rob Herring <robh+dt@kernel.org>,
-        Krzysztof Kozlowski <krzysztof.kozlowski+dt@linaro.org>,
-        Jonathan Corbet <corbet@lwn.net>,
-        <linux-hwmon@vger.kernel.org>, <devicetree@vger.kernel.org>,
-        <linux-kernel@vger.kernel.org>, <linux-doc@vger.kernel.org>
-Subject: [PATCH v7 2/2] hwmon: max31827: add MAX31827 driver
-Date:   Mon, 8 May 2023 20:24:24 +0300
-Message-ID: <20230508172427.23915-2-daniel.matyas@analog.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20230508172427.23915-1-daniel.matyas@analog.com>
-References: <20230508172427.23915-1-daniel.matyas@analog.com>
+        with ESMTP id S233480AbjEHQI6 (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Mon, 8 May 2023 12:08:58 -0400
+Received: from mail-qt1-x82d.google.com (mail-qt1-x82d.google.com [IPv6:2607:f8b0:4864:20::82d])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 15FCA65BA
+        for <linux-doc@vger.kernel.org>; Mon,  8 May 2023 09:08:55 -0700 (PDT)
+Received: by mail-qt1-x82d.google.com with SMTP id d75a77b69052e-3f38956ffdbso10452021cf.1
+        for <linux-doc@vger.kernel.org>; Mon, 08 May 2023 09:08:55 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=bitbyteword.org; s=google; t=1683562134; x=1686154134;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=DokJ6fYaaBRhKrV4S/uj+WyyNaTiSYdljrZ3rYjlJyo=;
+        b=Yh0Dnodle5sUTHyycNw5vrGRkTAAZIjEWnaiHcEWg7ujU0bGDmEeEk3DwgGz4lEOK1
+         3YfbD7stwblZptNXHZvGwanBIxA8ueG1SGnndXzaZaM8W283lR7qXkKMXtR/j+BilrKJ
+         hFZG2YY5I5sxMaHgy1OZIgcgUwiq+T/rpkVHk4zjDMULf6qmyPVlhnxRNUv9lR8GSQ41
+         p7dDwGF3IDbpBTnc3hazwWDqw8VmqAmQhybIqJJnNOQWdXof/JM2ZGH8tKiZ/9a/ACTD
+         vLH+P3Oiy8uOj7Vz7GK9Q0YEUhM3zOrfgGQCNB3Q2BK01SX8AifCj2AygZd6Aobr0oAV
+         PB8w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20221208; t=1683562134; x=1686154134;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=DokJ6fYaaBRhKrV4S/uj+WyyNaTiSYdljrZ3rYjlJyo=;
+        b=Nsp1JjzT0n9c8JHD2CMi77kTREZdIAyoWG6I8P2knf3fKiDXHaARRfHS5KZ+dyV4EC
+         Q3JSCKh3xAfagX9Sz0kh4DzQWBz/t5uFOCaUnWZP/0UF0vDp+ANOJxh8LfXpbcM5hUkj
+         lsY8KXMcUgVSwhOg74SxLHi4+vG4jGuiYwFEgGzsEASxu8efylb00tzHsdysTuSeLSAD
+         1LCBfCv8K2ZUl60x4kdgVY1fNuwrjoqEoBXQY2aSFxyD/SRreE65JHssm/ysCtCWDiaP
+         5PDSCFdj5X/LP2f6ffq0pQsKXVTsQFjsBivKxcjYuq5d2yYg5DbjN91I1C61qasbi7mB
+         N1Tw==
+X-Gm-Message-State: AC+VfDzW9exKUUmdSpXT/WrDfzXVEuN0ITnjIWomBgSQZlrlUFSIg3r9
+        N+eG4cX2xOjkSPKRmttCvtitXg==
+X-Google-Smtp-Source: ACHHUZ5wEWM8b1MyMoJK1ne4ZuQCwV3u6Cxs/delMjjETgW0ueTSWlcckiQNqU9MULYxt3aM8mWVdQ==
+X-Received: by 2002:ac8:5788:0:b0:3ef:3696:c3ee with SMTP id v8-20020ac85788000000b003ef3696c3eemr15041905qta.20.1683562133645;
+        Mon, 08 May 2023 09:08:53 -0700 (PDT)
+Received: from vinz16.lan (c-73-143-21-186.hsd1.ma.comcast.net. [73.143.21.186])
+        by smtp.gmail.com with ESMTPSA id h20-20020a05622a171400b003e4c6b2cc35sm1997025qtk.24.2023.05.08.09.08.51
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 08 May 2023 09:08:53 -0700 (PDT)
+From:   Vineeth Pillai <vineeth@bitbyteword.org>
+To:     luca.abeni@santannapisa.it, Juri Lelli <juri.lelli@redhat.com>,
+        Daniel Bristot de Oliveira <bristot@redhat.com>,
+        Peter Zijlstra <peterz@infradead.org>,
+        Ingo Molnar <mingo@redhat.com>,
+        Vincent Guittot <vincent.guittot@linaro.org>,
+        Steven Rostedt <rostedt@goodmis.org>,
+        Joel Fernandes <joel@joelfernandes.org>,
+        Dietmar Eggemann <dietmar.eggemann@arm.com>,
+        Ben Segall <bsegall@google.com>, Mel Gorman <mgorman@suse.de>,
+        Valentin Schneider <vschneid@redhat.com>
+Cc:     Vineeth Pillai <vineeth@bitbyteword.org>,
+        Jonathan Corbet <corbet@lwn.net>, linux-kernel@vger.kernel.org,
+        linux-doc@vger.kernel.org
+Subject: [PATCH 1/2] sched/deadline: accurate reclaim bandwidth for GRUB
+Date:   Mon,  8 May 2023 12:08:28 -0400
+Message-Id: <20230508160829.2756405-1-vineeth@bitbyteword.org>
+X-Mailer: git-send-email 2.40.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
-X-ADIRuleOP-NewSCL: Rule Triggered
-X-Proofpoint-GUID: Ae2AJQAZcqrqBwvs7wcNakc8_UPfzrc6
-X-Proofpoint-ORIG-GUID: Ae2AJQAZcqrqBwvs7wcNakc8_UPfzrc6
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.254,Aquarius:18.0.942,Hydra:6.0.573,FMLib:17.11.170.22
- definitions=2023-05-08_10,2023-05-05_01,2023-02-09_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 suspectscore=0 phishscore=0
- adultscore=0 mlxlogscore=999 mlxscore=0 priorityscore=1501
- lowpriorityscore=0 malwarescore=0 bulkscore=0 clxscore=1015
- impostorscore=0 spamscore=0 classifier=spam adjust=0 reason=mlx
- scancount=1 engine=8.12.0-2303200000 definitions=main-2305080097
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_LOW,
-        RCVD_IN_MSPIKE_H2,SPF_HELO_NONE,SPF_PASS,T_SCC_BODY_TEXT_LINE
-        autolearn=ham autolearn_force=no version=3.4.6
+X-Spam-Status: No, score=-2.1 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_NONE,
+        SPF_HELO_NONE,SPF_PASS,T_SCC_BODY_TEXT_LINE autolearn=ham
+        autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
-To:     unlisted-recipients:; (no To-header on input)
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-MAX31827 is a low-power temperature switch with I2C interface.
+Current reclaim calculation for GRUB is a bit inaccurate and the
+inaccuracy gets larger as the bandwidth of tasks becomes smaller.
+I have a test program to show the issue - it runs one or more
+deadline threads and observes the utilization. Following tests
+are run on an isolated cpu(isolcpus=3) in a 4 cpu system and the
+results as shown below:
 
-The device is a ±1°C accuracy from -40°C to +125°C
-(12 bits) local temperature switch and sensor with I2C/SM-
-Bus interface. The combination of small 6-bump wafer-lev-
-el package (WLP) and high accuracy makes this temper-
-ature sensor/switch ideal for a wide range of applications.
+RUN 1: runtime=7ms, deadline=period=10ms, RT capacity = 95%
+TID[693]: RECLAIM=1, (r=7ms, d=10ms, p=10ms), Util: 93.33
+TID[693]: RECLAIM=1, (r=7ms, d=10ms, p=10ms), Util: 93.35
+TID[693]: RECLAIM=1, (r=7ms, d=10ms, p=10ms), Util: 93.35
+TID[693]: RECLAIM=1, (r=7ms, d=10ms, p=10ms), Util: 93.29
 
-Signed-off-by: Daniel Matyas <daniel.matyas@analog.com>
+RUN 2: runtime=2ms, deadline=period=10ms, RT capacity = 95%
+TID[704]: RECLAIM=1, (r=2ms, d=10ms, p=10ms), Util: 79.96
+TID[704]: RECLAIM=1, (r=2ms, d=10ms, p=10ms), Util: 80.06
+TID[704]: RECLAIM=1, (r=2ms, d=10ms, p=10ms), Util: 80.00
+
+RUN 3: runtime=1ms, deadline=period=100ms, RT capacity = 95%
+TID[708]: RECLAIM=1, (r=1ms, d=100ms, p=100ms), Util: 16.69
+TID[708]: RECLAIM=1, (r=1ms, d=100ms, p=100ms), Util: 16.69
+TID[708]: RECLAIM=1, (r=1ms, d=100ms, p=100ms), Util: 16.70
+
+When running multiple tasks, the reclaimed bandwidth is divided
+proportionately, but is not reclaimed to the max allowable limit:
+
+RUN 4: 2 SCHED_FLAG_RECLAIM tasks, 1 normal task
+	Task 1: runtime=1ms, deadline=period=10ms
+	Task 2: runtime=1ms, deadline=period=10ms
+	Task 3: runtime=5ms, deadline=period=20ms(normal)
+TID[624]: RECLAIM=1, (r=1ms, d=10ms, p=10ms), Util: 20.10
+TID[625]: RECLAIM=1, (r=1ms, d=10ms, p=10ms), Util: 20.10
+TID[626]: RECLAIM=0, (r=5ms, d=20ms, p=20ms), Util: 25.07
+TID[624]: RECLAIM=1, (r=1ms, d=10ms, p=10ms), Util: 20.06
+TID[625]: RECLAIM=1, (r=1ms, d=10ms, p=10ms), Util: 20.13
+TID[626]: RECLAIM=0, (r=5ms, d=20ms, p=20ms), Util: 25.12
+TID[624]: RECLAIM=1, (r=1ms, d=10ms, p=10ms), Util: 19.95
+TID[625]: RECLAIM=1, (r=1ms, d=10ms, p=10ms), Util: 19.93
+TID[626]: RECLAIM=0, (r=5ms, d=20ms, p=20ms), Util: 25.04
+
+I have also tested multiple tasks on all cpus allowing for tasks to
+migrate and see the same issue there as well. Running 10 tasks on 3
+cpus with 6 SCHED_FLAG_RECLAIM and 4 normal tasks, top shows:
+%Cpu0  : 70.1 us,  0.3 sy,  0.0 ni, 29.3 id,  0.0 wa
+%Cpu1  : 69.1 us,  0.3 sy,  0.0 ni, 30.3 id,  0.3 wa
+%Cpu2  : 70.5 us,  0.3 sy,  0.0 ni, 29.2 id,  0.0 wa
+
+The max{} logic in the existing implementation seems to not fully
+capture the GRUB algorithm.
+
+This patch fixes the issue by appropriatley caping the max allowed
+utilization and also slightly adjusting GRUB algorithm to account
+for a mix of normal deadline and SCHED_FLAG_RECLAIM tasks.
+
+According to the GRUB rule, the runtime is depreciated as a factor
+of active bandwidth of the runqueue: "dq = -dt", where U is the
+active bandwidth. Also, we do not allocate the full bandwidth of a
+cpu to deadline task, but only a portion(Umax) to it, so as to avoid
+deadline tasks starving lower class tasks. The equation could be
+re-written as "dq = -(U / Umax) * dt".
+
+Since both normal deadline and SCHED_FLAG_RECLAIM tasks can share
+cpu, we need to consider bandwidth of only SCHED_FLAG_RECLAIM tasks
+in the equation:
+	"dq = -(Ureclaim / Umax_reclaim) * dt"
+
+Following are the results with this patch:
+
+RUN 1: runtime=7ms, deadline=period=10ms, RT capacity = 95%
+TID[616]: RECLAIM=1, (r=7ms, d=10ms, p=10ms), Util: 94.98
+TID[616]: RECLAIM=1, (r=7ms, d=10ms, p=10ms), Util: 95.04
+TID[616]: RECLAIM=1, (r=7ms, d=10ms, p=10ms), Util: 95.01
+
+RUN 2: runtime=2ms, deadline=period=10ms, RT capacity = 95%
+TID[625]: RECLAIM=1, (r=2ms, d=10ms, p=10ms), Util: 95.00
+TID[625]: RECLAIM=1, (r=2ms, d=10ms, p=10ms), Util: 95.01
+TID[625]: RECLAIM=1, (r=2ms, d=10ms, p=10ms), Util: 94.99
+
+RUN 3: runtime=1ms, deadline=period=100ms, RT capacity = 95%
+TID[629]: RECLAIM=1, (r=1ms, d=100ms, p=100ms), Util: 94.87
+TID[629]: RECLAIM=1, (r=1ms, d=100ms, p=100ms), Util: 95.03
+TID[629]: RECLAIM=1, (r=1ms, d=100ms, p=100ms), Util: 95.03
+
+Also more results with multiple tasks.
+RUN 4: 2 SCHED_FLAG RECLAIM tasks:
+	Task 1: runtime=1ms, deadline=period=10ms
+	Task 2: runtime=1ms, deadline=period=10ms
+TID[633]: RECLAIM=1, (r=1ms, d=10ms, p=10ms), Util: 47.53
+TID[634]: RECLAIM=1, (r=1ms, d=10ms, p=10ms), Util: 47.64
+TID[633]: RECLAIM=1, (r=1ms, d=10ms, p=10ms), Util: 47.52
+TID[634]: RECLAIM=1, (r=1ms, d=10ms, p=10ms), Util: 47.39
+TID[633]: RECLAIM=1, (r=1ms, d=10ms, p=10ms), Util: 47.59
+TID[634]: RECLAIM=1, (r=1ms, d=10ms, p=10ms), Util: 47.61
+
+RUN 5: 2 SCHED_FLAG_RECLAIM tasks, 1 normal task
+	Task 1: runtime=1ms, deadline=period=10ms
+	Task 2: runtime=1ms, deadline=period=10ms
+	Task 3: runtime=5ms, deadline=period=20ms(normal)
+TID[641]: RECLAIM=1, (r=1ms, d=10ms, p=10ms), Util: 35.02
+TID[642]: RECLAIM=1, (r=1ms, d=10ms, p=10ms), Util: 35.02
+TID[643]: RECLAIM=0, (r=5ms, d=20ms, p=20ms), Util: 24.93
+TID[641]: RECLAIM=1, (r=1ms, d=10ms, p=10ms), Util: 35.00
+TID[642]: RECLAIM=1, (r=1ms, d=10ms, p=10ms), Util: 34.94
+TID[643]: RECLAIM=0, (r=5ms, d=20ms, p=20ms), Util: 24.98
+TID[641]: RECLAIM=1, (r=1ms, d=10ms, p=10ms), Util: 35.00
+TID[642]: RECLAIM=1, (r=1ms, d=10ms, p=10ms), Util: 35.03
+TID[643]: RECLAIM=0, (r=5ms, d=20ms, p=20ms), Util: 25.03
+
+Running tasks on all cpus allowing for migration also showed that
+the utilization is reclaimed to the maximum. Running 10 tasks on
+3 cpus with 6 SCHED_FLAG_RECLAIM and 4 normal tasks - top shows:
+%Cpu0  : 94.3 us,  0.3 sy,  0.0 ni,  5.4 id,  0.0 wa
+%Cpu1  : 95.2 us,  0.0 sy,  0.0 ni,  4.8 id,  0.0 wa
+%Cpu2  : 94.9 us,  0.0 sy,  0.0 ni,  5.1 id,  0.0 wa
+
+Signed-off-by: Vineeth Pillai (Google) <vineeth@bitbyteword.org>
 ---
+ kernel/sched/deadline.c | 95 +++++++++++++++++++++++------------------
+ kernel/sched/sched.h    | 21 +++++++--
+ 2 files changed, 71 insertions(+), 45 deletions(-)
 
-v6 -> v7 : Used goto instead of return in write_alarm_val function.
-Unlocked mutex in goto label.
-
-Used mutex for enable.
-
-Now update_interval can only be modified if the device is enabled. I did
-this, b.c. modifying the update interval, when the device is in shutdown
-mode, automatically enables the device.
-
- Documentation/hwmon/index.rst    |   1 +
- Documentation/hwmon/max31827.rst |  90 ++++++
- MAINTAINERS                      |   2 +
- drivers/hwmon/Kconfig            |  11 +
- drivers/hwmon/Makefile           |   2 +-
- drivers/hwmon/max31827.c         | 466 +++++++++++++++++++++++++++++++
- 6 files changed, 571 insertions(+), 1 deletion(-)
- create mode 100644 Documentation/hwmon/max31827.rst
- create mode 100644 drivers/hwmon/max31827.c
-
-diff --git a/Documentation/hwmon/index.rst b/Documentation/hwmon/index.rst
-index fa1208c62855..8cc0922f3b36 100644
---- a/Documentation/hwmon/index.rst
-+++ b/Documentation/hwmon/index.rst
-@@ -140,6 +140,7 @@ Hardware Monitoring Kernel Drivers
-    max31760
-    max31785
-    max31790
-+   max31827
-    max34440
-    max6620
-    max6639
-diff --git a/Documentation/hwmon/max31827.rst b/Documentation/hwmon/max31827.rst
-new file mode 100644
-index 000000000000..b0971d05b8a4
---- /dev/null
-+++ b/Documentation/hwmon/max31827.rst
-@@ -0,0 +1,90 @@
-+.. SPDX-License-Identifier: GPL-2.0
-+
-+Kernel driver max31827
-+======================
-+
-+Supported chips:
-+
-+  * Maxim MAX31827
-+
-+    Prefix: 'max31827'
-+
-+    Addresses scanned: I2C 0x40 - 0x5f
-+
-+    Datasheet: Publicly available at the Analog Devices website
-+
-+  * Maxim MAX31828
-+
-+    Prefix: 'max31828'
-+
-+    Addresses scanned: I2C 0x40 - 0x5f
-+
-+    Datasheet: Publicly available at the Analog Devices website
-+
-+  * Maxim MAX31829
-+
-+    Prefix: 'max31829'
-+
-+    Addresses scanned: I2C 0x40 - 0x5f
-+
-+    Datasheet: Publicly available at the Analog Devices website
-+
-+
-+Authors:
-+	- Daniel Matyas <daniel.matyas@analog.com>
-+
-+Description
-+-----------
-+
-+The chips supported by this driver are quite similar. The only difference
-+between them is found in the default power-on behaviour of the chips. While the
-+MAX31827's fault queue is set to 1, the other two chip's fault queue is set to
-+4. Besides this, the MAX31829's alarm active state is high, while the other two
-+chip's alarms are active on low. It is important to note that the chips can be
-+configured to operate in the same manner with 1 write operation to the
-+configuration register. From here on, we will refer to all these chips as
-+MAX31827.
-+
-+MAX31827 implements a temperature sensor with a 6 WLP packaging scheme. This
-+sensor measures the temperature of the chip itself.
-+
-+MAX31827 has low and over temperature alarms with an effective value and a
-+hysteresis value: -40 and -30 degrees for under temperature alarm and +100 and
-++90 degrees for over temperature alarm.
-+
-+The alarm can be configured in comparator and interrupt mode. Currently only
-+comparator mode is implemented. In Comparator mode, the OT/UT status bits have a
-+value of 1 when the temperature rises above the TH value or falls below TL,
-+which is also subject to the Fault Queue selection. OT status returns to 0 when
-+the temperature drops below the TH_HYST value or when shutdown mode is entered.
-+Similarly, UT status returns to 0 when the temperature rises above TL_HYST value
-+or when shutdown mode is entered.
-+
-+Putting the MAX31827 into shutdown mode also resets the OT/UT status bits. Note
-+that if the mode is changed while OT/UT status bits are set, an OT/UT status
-+reset may be required before it begins to behave normally. To prevent this,
-+it is recommended to perform a read of the configuration/status register to
-+clear the status bits before changing the operating mode.
-+
-+The conversions can be manual with the one-shot functionality and automatic with
-+a set frequency. When powered on, the chip measures temperatures with 1 conv/s.
-+Enabling the device when it is already enabled has the side effect of setting
-+the conversion frequency to 1 conv/s. The conversion time varies depending on
-+the resolution. The conversion time doubles with every bit of increased
-+resolution. For 10 bit resolution 35ms are needed, while for 12 bit resolution
-+(default) 140ms. When chip is in shutdown mode and a read operation is
-+requested, one-shot is triggered, the device waits for 140 (conversion time) + 1
-+(error) ms, and only after that is the temperature value register read.
-+
-+The LSB of the temperature values is 0.0625 degrees Celsius, but the values of
-+the temperatures are displayed in milli-degrees. This means, that some data is
-+lost. The step between 2 consecutive values is 62 or 63. This effect can be seen
-+in the writing of alarm values too. For positive numbers the user-input value
-+will always be rounded down to the nearest possible value, for negative numbers
-+the user-input will always be rounded up to the nearest possible value.
-+
-+Notes
-+-----
-+
-+Currently fault queue, alarm polarity and resolution cannot be modified.
-+PEC is not implemented either.
-diff --git a/MAINTAINERS b/MAINTAINERS
-index 91de1e95f11d..40504fc94db5 100644
---- a/MAINTAINERS
-+++ b/MAINTAINERS
-@@ -12624,6 +12624,8 @@ L:	linux-hwmon@vger.kernel.org
- S:	Supported
- W:	http://ez.analog.com/community/linux-device-drivers
- F:	Documentation/devicetree/bindings/hwmon/adi,max31827.yaml
-+F:	Documentation/hwmon/max31827.rst
-+F:	drivers/hwmon/max31827.c
+diff --git a/kernel/sched/deadline.c b/kernel/sched/deadline.c
+index 71b24371a6f7..17b2d87ea6fc 100644
+--- a/kernel/sched/deadline.c
++++ b/kernel/sched/deadline.c
+@@ -229,11 +229,13 @@ __dl_overflow(struct dl_bw *dl_b, unsigned long cap, u64 old_bw, u64 new_bw)
+ }
  
- MAX6650 HARDWARE MONITOR AND FAN CONTROLLER DRIVER
- L:	linux-hwmon@vger.kernel.org
-diff --git a/drivers/hwmon/Kconfig b/drivers/hwmon/Kconfig
-index fc640201a2de..12bd17075dc4 100644
---- a/drivers/hwmon/Kconfig
-+++ b/drivers/hwmon/Kconfig
-@@ -1097,6 +1097,17 @@ config SENSORS_MAX31760
- 	  This driver can also be built as a module. If so, the module
- 	  will be called max31760.
+ static inline
+-void __add_running_bw(u64 dl_bw, struct dl_rq *dl_rq)
++void __add_running_bw(u64 dl_bw, struct dl_rq *dl_rq, bool reclaim_bw_se)
+ {
+ 	u64 old = dl_rq->running_bw;
  
-+config MAX31827
-+	tristate "MAX31827 low-power temperature switch and similar devices"
-+	depends on I2C
-+	select REGMAP_I2C
-+	help
-+	  If you say yes here you get support for MAX31827, MAX31828 and
-+	  MAX31829 low-power temperature switches and sensors connected with I2C.
-+
-+	  This driver can also be built as a module.  If so, the module
-+	  will be called max31827.
-+
- config SENSORS_MAX6620
- 	tristate "Maxim MAX6620 fan controller"
- 	depends on I2C
-diff --git a/drivers/hwmon/Makefile b/drivers/hwmon/Makefile
-index cd8c568c80a9..8a8021f9ca9e 100644
---- a/drivers/hwmon/Makefile
-+++ b/drivers/hwmon/Makefile
-@@ -149,6 +149,7 @@ obj-$(CONFIG_SENSORS_MAX6642)	+= max6642.o
- obj-$(CONFIG_SENSORS_MAX6650)	+= max6650.o
- obj-$(CONFIG_SENSORS_MAX6697)	+= max6697.o
- obj-$(CONFIG_SENSORS_MAX31790)	+= max31790.o
-+obj-$(CONFIG_MAX31827) += max31827.o
- obj-$(CONFIG_SENSORS_MC13783_ADC)+= mc13783-adc.o
- obj-$(CONFIG_SENSORS_MC34VR500)	+= mc34vr500.o
- obj-$(CONFIG_SENSORS_MCP3021)	+= mcp3021.o
-@@ -224,4 +225,3 @@ obj-$(CONFIG_SENSORS_PECI)	+= peci/
- obj-$(CONFIG_PMBUS)		+= pmbus/
+ 	lockdep_assert_rq_held(rq_of_dl_rq(dl_rq));
++	if (reclaim_bw_se)
++		dl_rq->reclaim_bw += dl_bw;
+ 	dl_rq->running_bw += dl_bw;
+ 	SCHED_WARN_ON(dl_rq->running_bw < old); /* overflow */
+ 	SCHED_WARN_ON(dl_rq->running_bw > dl_rq->this_bw);
+@@ -242,15 +244,19 @@ void __add_running_bw(u64 dl_bw, struct dl_rq *dl_rq)
+ }
  
- ccflags-$(CONFIG_HWMON_DEBUG_CHIP) := -DDEBUG
--
-diff --git a/drivers/hwmon/max31827.c b/drivers/hwmon/max31827.c
-new file mode 100644
-index 000000000000..fce20f52a680
---- /dev/null
-+++ b/drivers/hwmon/max31827.c
-@@ -0,0 +1,466 @@
-+// SPDX-License-Identifier: GPL-2.0
-+/*
-+ * max31827.c - Support for Maxim Low-Power Switch
+ static inline
+-void __sub_running_bw(u64 dl_bw, struct dl_rq *dl_rq)
++void __sub_running_bw(u64 dl_bw, struct dl_rq *dl_rq, bool reclaim_bw_se)
+ {
+ 	u64 old = dl_rq->running_bw;
+ 
+ 	lockdep_assert_rq_held(rq_of_dl_rq(dl_rq));
++	if (reclaim_bw_se)
++		dl_rq->reclaim_bw -= dl_bw;
+ 	dl_rq->running_bw -= dl_bw;
+ 	SCHED_WARN_ON(dl_rq->running_bw > old); /* underflow */
+-	if (dl_rq->running_bw > old)
++	if (dl_rq->running_bw > old) {
+ 		dl_rq->running_bw = 0;
++		dl_rq->reclaim_bw = 0;
++	}
+ 	/* kick cpufreq (see the comment in kernel/sched/sched.h). */
+ 	cpufreq_update_util(rq_of_dl_rq(dl_rq), 0);
+ }
+@@ -296,14 +302,14 @@ static inline
+ void add_running_bw(struct sched_dl_entity *dl_se, struct dl_rq *dl_rq)
+ {
+ 	if (!dl_entity_is_special(dl_se))
+-		__add_running_bw(dl_se->dl_bw, dl_rq);
++		__add_running_bw(dl_se->dl_bw, dl_rq, dl_entity_is_reclaim(dl_se));
+ }
+ 
+ static inline
+ void sub_running_bw(struct sched_dl_entity *dl_se, struct dl_rq *dl_rq)
+ {
+ 	if (!dl_entity_is_special(dl_se))
+-		__sub_running_bw(dl_se->dl_bw, dl_rq);
++		__sub_running_bw(dl_se->dl_bw, dl_rq, dl_entity_is_reclaim(dl_se));
+ }
+ 
+ static void dl_change_utilization(struct task_struct *p, u64 new_bw)
+@@ -522,6 +528,7 @@ void init_dl_rq(struct dl_rq *dl_rq)
+ #endif
+ 
+ 	dl_rq->running_bw = 0;
++	dl_rq->reclaim_bw = 0;
+ 	dl_rq->this_bw = 0;
+ 	init_dl_rq_bw_ratio(dl_rq);
+ }
+@@ -1260,44 +1267,51 @@ int dl_runtime_exceeded(struct sched_dl_entity *dl_se)
+ }
+ 
+ /*
+- * This function implements the GRUB accounting rule:
+- * according to the GRUB reclaiming algorithm, the runtime is
+- * not decreased as "dq = -dt", but as
+- * "dq = -max{u / Umax, (1 - Uinact - Uextra)} dt",
+- * where u is the utilization of the task, Umax is the maximum reclaimable
+- * utilization, Uinact is the (per-runqueue) inactive utilization, computed
+- * as the difference between the "total runqueue utilization" and the
+- * runqueue active utilization, and Uextra is the (per runqueue) extra
+- * reclaimable utilization.
+- * Since rq->dl.running_bw and rq->dl.this_bw contain utilizations
+- * multiplied by 2^BW_SHIFT, the result has to be shifted right by
+- * BW_SHIFT.
+- * Since rq->dl.bw_ratio contains 1 / Umax multiplied by 2^RATIO_SHIFT,
+- * dl_bw is multiped by rq->dl.bw_ratio and shifted right by RATIO_SHIFT.
+- * Since delta is a 64 bit variable, to have an overflow its value
+- * should be larger than 2^(64 - 20 - 8), which is more than 64 seconds.
+- * So, overflow is not an issue here.
++ * This function implements a slightly modified version of the GRUB accounting
++ * rule to accommodate mix of normal deadline tasks and SCHED_FLAG_RECLAIM tasks
++ * running together:
++ * As per the GRUB rule, the runtime is not decreased as "dq = -dt", but as a
++ * factor of the running(active) bandwidth for a cpu:
++ *	"dq = -U * dt"
++ * In our case, deadline is not allowed to use the whole bandwidth of the cpu,
++ * but only a fraction of it: "Umax". So the equation becomes:
++ *	"dq = -(U / Umax) * dt"
 + *
-+ * Copyright (c) 2023 Daniel Matyas <daniel.matyas@analog.com>
-+ */
++ * To account for the fact that we have a mix of normal deadline tasks and
++ * SCHED_RECLAIM_FLAG tasks running together, we do not consider the bandwidth
++ * of normal tasks in the equation. So
++ *	"dq = -(Ureclaim / Umax_reclaim) * dt"
++ * Where
++ *	Ureclaim:	Active Bandwidth of SCHED_FLAG_RECLAIM tasks for this rq.
++ *	Umax_reclaim:	Maximum reclaimable bandwidth for this rq.
++ *
++ * We can calculate Umax_reclaim as:
++ *	Umax_reclaim:	this_bw + Uinact + Ureclaim
++ * Where:
++ *	this_bw:	Reserved bandwidth for this runqueue.
++ *	Ureclaim:	Active Bandwidth of SCHED_FLAG_RECLAIM tasks for this rq.
++ *	Uinact:		Inactive utilization (this_bw - running_bw)
++ *	Uextra:		Extra bandwidth(Usually Umax - this_bw)
++ *	Umax:		Max usable bandwidth. Currently
++ *			= sched_rt_runtime_us / sched_rt_period_us
++ *
++ * We use the above formula to scale the runtime down
++ *
++ *	dq = -(Ureclaim / Umax_reclaim) * dt
++ *	   = -(Ureclaim / (Ureclaim + Uextra + Uinact)) * dt
+  */
+ static u64 grub_reclaim(u64 delta, struct rq *rq, struct sched_dl_entity *dl_se)
+ {
++	u64 scaled_delta;
+ 	u64 u_inact = rq->dl.this_bw - rq->dl.running_bw; /* Utot - Uact */
+-	u64 u_act;
+-	u64 u_act_min = (dl_se->dl_bw * rq->dl.bw_ratio) >> RATIO_SHIFT;
++	u64 reclaimable_bw = rq->dl.extra_bw + u_inact;
+ 
+-	/*
+-	 * Instead of computing max{u * bw_ratio, (1 - u_inact - u_extra)},
+-	 * we compare u_inact + rq->dl.extra_bw with
+-	 * 1 - (u * rq->dl.bw_ratio >> RATIO_SHIFT), because
+-	 * u_inact + rq->dl.extra_bw can be larger than
+-	 * 1 * (so, 1 - u_inact - rq->dl.extra_bw would be negative
+-	 * leading to wrong results)
+-	 */
+-	if (u_inact + rq->dl.extra_bw > BW_UNIT - u_act_min)
+-		u_act = u_act_min;
+-	else
+-		u_act = BW_UNIT - u_inact - rq->dl.extra_bw;
++	if (reclaimable_bw > rq->dl.max_bw)
++		reclaimable_bw = rq->dl.max_bw;
+ 
+-	return (delta * u_act) >> BW_SHIFT;
++	scaled_delta = div64_u64(delta * rq->dl.reclaim_bw,
++			    (rq->dl.reclaim_bw + reclaimable_bw));
++	return scaled_delta;
+ }
+ 
+ /*
+@@ -2783,12 +2797,9 @@ int sched_dl_global_validate(void)
+ static void init_dl_rq_bw_ratio(struct dl_rq *dl_rq)
+ {
+ 	if (global_rt_runtime() == RUNTIME_INF) {
+-		dl_rq->bw_ratio = 1 << RATIO_SHIFT;
+-		dl_rq->extra_bw = 1 << BW_SHIFT;
++		dl_rq->max_bw = dl_rq->extra_bw = 1 << BW_SHIFT;
+ 	} else {
+-		dl_rq->bw_ratio = to_ratio(global_rt_runtime(),
+-			  global_rt_period()) >> (BW_SHIFT - RATIO_SHIFT);
+-		dl_rq->extra_bw = to_ratio(global_rt_period(),
++		dl_rq->max_bw = dl_rq->extra_bw = to_ratio(global_rt_period(),
+ 						    global_rt_runtime());
+ 	}
+ }
+diff --git a/kernel/sched/sched.h b/kernel/sched/sched.h
+index 3e8df6d31c1e..13d85af0f42b 100644
+--- a/kernel/sched/sched.h
++++ b/kernel/sched/sched.h
+@@ -257,6 +257,11 @@ static inline bool dl_entity_is_special(const struct sched_dl_entity *dl_se)
+ #endif
+ }
+ 
++static inline bool dl_entity_is_reclaim(const struct sched_dl_entity *dl_se)
++{
++	return dl_se->flags & SCHED_FLAG_RECLAIM;
++}
 +
-+#include <linux/bitfield.h>
-+#include <linux/bitops.h>
-+#include <linux/delay.h>
-+#include <linux/hwmon.h>
-+#include <linux/i2c.h>
-+#include <linux/mutex.h>
-+#include <linux/regmap.h>
+ /*
+  * Tells if entity @a should preempt entity @b.
+  */
+@@ -754,10 +759,20 @@ struct dl_rq {
+ 	u64			extra_bw;
+ 
+ 	/*
+-	 * Inverse of the fraction of CPU utilization that can be reclaimed
+-	 * by the GRUB algorithm.
++	 * Maximum available bandwidth for this runqueue. This is used to
++	 * calculate reclaimable bandwidth for SCHED_FLAG_RECLAIM tasks.
++	 * By restricting maximum usable bandwidth, we aim to give other
++	 * tasks on lower classes a chance to run, when competing with
++	 * SCHED_FLAG_RECLAIM tasks.
+ 	 */
+-	u64			bw_ratio;
++	u64			max_bw;
 +
-+#define MAX31827_T_REG	0x0
-+#define MAX31827_CONFIGURATION_REG	0x2
-+#define MAX31827_TH_REG	0x4
-+#define MAX31827_TL_REG 0x6
-+#define MAX31827_TH_HYST_REG	0x8
-+#define MAX31827_TL_HYST_REG	0xA
-+
-+#define MAX31827_CONFIGURATION_1SHOT_MASK	BIT(0)
-+#define MAX31827_CONFIGURATION_CNV_RATE_MASK	GENMASK(3, 1)
-+#define MAX31827_CONFIGURATION_U_TEMP_STAT_MASK BIT(14)
-+#define MAX31827_CONFIGURATION_O_TEMP_STAT_MASK BIT(15)
-+
-+#define MAX31827_12_BIT_CNV_TIME	141
-+
-+#define MAX31827_CNV_1_DIV_64_HZ	0x1
-+#define MAX31827_CNV_1_DIV_32_HZ	0x2
-+#define MAX31827_CNV_1_DIV_16_HZ	0x3
-+#define MAX31827_CNV_1_DIV_4_HZ		0x4
-+#define MAX31827_CNV_1_HZ	0x5
-+#define MAX31827_CNV_4_HZ	0x6
-+#define MAX31827_CNV_8_HZ	0x7
-+
-+#define MAX31827_16_BIT_TO_M_DGR(x)	(sign_extend32(x, 15) * 1000 / 16)
-+#define MAX31827_M_DGR_TO_16_BIT(x)	(((x) << 4) / 1000)
-+#define MAX31827_DEVICE_ENABLE(x)	((x) ? 0xA : 0x0)
-+
-+struct max31827_state {
 +	/*
-+	 * Prevent simultaneous access to the i2c client.
++	 * Active bandwidth of SCHED_FLAG_RECLAIM tasks on this rq.
++	 * This will be a subset of running_bw.
 +	 */
-+	struct mutex lock;
-+	struct regmap *regmap;
-+	bool enable;
-+};
-+
-+static const struct regmap_config max31827_regmap = {
-+	.reg_bits = 8,
-+	.val_bits = 16,
-+	.max_register = 0xA,
-+};
-+
-+static int write_alarm_val(struct max31827_state *st, unsigned int reg,
-+			   long val)
-+{
-+	unsigned int cfg;
-+	unsigned int tmp;
-+	int ret;
-+
-+	val = MAX31827_M_DGR_TO_16_BIT(val);
-+
-+	/*
-+	 * Before the Temperature Threshold Alarm and Alarm Hysteresis Threshold
-+	 * register values are changed over I2C, the part must be in shutdown
-+	 * mode.
-+	 *
-+	 * Mutex is used to ensure, that some other process doesn't change the
-+	 * configuration register.
-+	 */
-+	mutex_lock(&st->lock);
-+
-+	if (!st->enable) {
-+		ret = regmap_write(st->regmap, reg, val);
-+		goto unlock;
-+	}
-+
-+	ret = regmap_read(st->regmap, MAX31827_CONFIGURATION_REG, &cfg);
-+	if (ret)
-+		goto unlock;
-+
-+	tmp = cfg & ~(MAX31827_CONFIGURATION_1SHOT_MASK |
-+		      MAX31827_CONFIGURATION_CNV_RATE_MASK);
-+	ret = regmap_write(st->regmap, MAX31827_CONFIGURATION_REG, tmp);
-+	if (ret)
-+		goto unlock;
-+
-+	ret = regmap_write(st->regmap, reg, val);
-+	if (ret)
-+		goto unlock;
-+
-+	ret = regmap_write(st->regmap, MAX31827_CONFIGURATION_REG, cfg);
-+
-+unlock:
-+	mutex_unlock(&st->lock);
-+	return ret;
-+}
-+
-+static umode_t max31827_is_visible(const void *state,
-+				   enum hwmon_sensor_types type, u32 attr,
-+				   int channel)
-+{
-+	if (type == hwmon_temp) {
-+		switch (attr) {
-+		case hwmon_temp_enable:
-+		case hwmon_temp_max:
-+		case hwmon_temp_min:
-+		case hwmon_temp_max_hyst:
-+		case hwmon_temp_min_hyst:
-+			return 0644;
-+		case hwmon_temp_input:
-+		case hwmon_temp_min_alarm:
-+		case hwmon_temp_max_alarm:
-+			return 0444;
-+		default:
-+			return 0;
-+		}
-+	} else if (type == hwmon_chip) {
-+		if (attr == hwmon_chip_update_interval)
-+			return 0644;
-+	}
-+
-+	return 0;
-+}
-+
-+static int max31827_read(struct device *dev, enum hwmon_sensor_types type,
-+			 u32 attr, int channel, long *val)
-+{
-+	struct max31827_state *st = dev_get_drvdata(dev);
-+	unsigned int uval;
-+	int ret;
-+
-+	switch (type) {
-+	case hwmon_temp:
-+		switch (attr) {
-+		case hwmon_temp_enable:
-+			ret = regmap_read(st->regmap,
-+					  MAX31827_CONFIGURATION_REG, &uval);
-+			if (ret)
-+				break;
-+
-+			uval = FIELD_GET(MAX31827_CONFIGURATION_1SHOT_MASK |
-+					 MAX31827_CONFIGURATION_CNV_RATE_MASK,
-+					 uval);
-+			*val = !!uval;
-+
-+			break;
-+		case hwmon_temp_input:
-+			mutex_lock(&st->lock);
-+
-+			if (!st->enable) {
-+				/*
-+				 * This operation requires mutex protection,
-+				 * because the chip configuration should not
-+				 * be changed during the conversion process.
-+				 */
-+
-+				ret = regmap_update_bits(st->regmap,
-+							 MAX31827_CONFIGURATION_REG,
-+							 MAX31827_CONFIGURATION_1SHOT_MASK,
-+							 1);
-+				if (ret) {
-+					mutex_unlock(&st->lock);
-+					return ret;
-+				}
-+
-+				msleep(MAX31827_12_BIT_CNV_TIME);
-+			}
-+			ret = regmap_read(st->regmap, MAX31827_T_REG, &uval);
-+
-+			mutex_unlock(&st->lock);
-+
-+			if (ret)
-+				break;
-+
-+			*val = MAX31827_16_BIT_TO_M_DGR(uval);
-+
-+			break;
-+		case hwmon_temp_max:
-+			ret = regmap_read(st->regmap, MAX31827_TH_REG, &uval);
-+			if (ret)
-+				break;
-+
-+			*val = MAX31827_16_BIT_TO_M_DGR(uval);
-+			break;
-+		case hwmon_temp_max_hyst:
-+			ret = regmap_read(st->regmap, MAX31827_TH_HYST_REG,
-+					  &uval);
-+			if (ret)
-+				break;
-+
-+			*val = MAX31827_16_BIT_TO_M_DGR(uval);
-+			break;
-+		case hwmon_temp_max_alarm:
-+			ret = regmap_read(st->regmap,
-+					  MAX31827_CONFIGURATION_REG, &uval);
-+			if (ret)
-+				break;
-+
-+			*val = FIELD_GET(MAX31827_CONFIGURATION_O_TEMP_STAT_MASK,
-+					 uval);
-+			break;
-+		case hwmon_temp_min:
-+			ret = regmap_read(st->regmap, MAX31827_TL_REG, &uval);
-+			if (ret)
-+				break;
-+
-+			*val = MAX31827_16_BIT_TO_M_DGR(uval);
-+			break;
-+		case hwmon_temp_min_hyst:
-+			ret = regmap_read(st->regmap, MAX31827_TL_HYST_REG,
-+					  &uval);
-+			if (ret)
-+				break;
-+
-+			*val = MAX31827_16_BIT_TO_M_DGR(uval);
-+			break;
-+		case hwmon_temp_min_alarm:
-+			ret = regmap_read(st->regmap,
-+					  MAX31827_CONFIGURATION_REG, &uval);
-+			if (ret)
-+				break;
-+
-+			*val = FIELD_GET(MAX31827_CONFIGURATION_U_TEMP_STAT_MASK,
-+					 uval);
-+			break;
-+		default:
-+			ret = -EOPNOTSUPP;
-+			break;
-+		}
-+
-+		break;
-+
-+	case hwmon_chip:
-+		if (attr == hwmon_chip_update_interval) {
-+			ret = regmap_read(st->regmap,
-+					  MAX31827_CONFIGURATION_REG, &uval);
-+			if (ret)
-+				break;
-+
-+			uval = FIELD_GET(MAX31827_CONFIGURATION_CNV_RATE_MASK,
-+					 uval);
-+			switch (uval) {
-+			case MAX31827_CNV_1_DIV_64_HZ:
-+				*val = 64000;
-+				break;
-+			case MAX31827_CNV_1_DIV_32_HZ:
-+				*val = 32000;
-+				break;
-+			case MAX31827_CNV_1_DIV_16_HZ:
-+				*val = 16000;
-+				break;
-+			case MAX31827_CNV_1_DIV_4_HZ:
-+				*val = 4000;
-+				break;
-+			case MAX31827_CNV_1_HZ:
-+				*val = 1000;
-+				break;
-+			case MAX31827_CNV_4_HZ:
-+				*val = 250;
-+				break;
-+			case MAX31827_CNV_8_HZ:
-+				*val = 125;
-+				break;
-+			default:
-+				*val = 0;
-+				break;
-+			}
-+		}
-+		break;
-+
-+	default:
-+		ret = -EOPNOTSUPP;
-+		break;
-+	}
-+
-+	return ret;
-+}
-+
-+static int max31827_write(struct device *dev, enum hwmon_sensor_types type,
-+			  u32 attr, int channel, long val)
-+{
-+	struct max31827_state *st = dev_get_drvdata(dev);
-+	int ret;
-+
-+	switch (type) {
-+	case hwmon_temp:
-+		switch (attr) {
-+		case hwmon_temp_enable:
-+			if (val >> 1)
-+				return -EOPNOTSUPP;
-+
-+			mutex_lock(&st->lock);
-+			/**
-+			 * The chip should not be enabled while a conversion is
-+			 * performed. Neither should the chip be enabled when
-+			 * the alarm values are changed.
-+			 */
-+
-+			st->enable = val;
-+
-+			ret = regmap_update_bits(st->regmap,
-+						 MAX31827_CONFIGURATION_REG,
-+						 MAX31827_CONFIGURATION_1SHOT_MASK |
-+						 MAX31827_CONFIGURATION_CNV_RATE_MASK,
-+						 MAX31827_DEVICE_ENABLE(val));
-+
-+			mutex_unlock(&st->lock);
-+
-+			return ret;
-+
-+		case hwmon_temp_max:
-+			return write_alarm_val(st, MAX31827_TH_REG, val);
-+
-+		case hwmon_temp_max_hyst:
-+			return write_alarm_val(st, MAX31827_TH_HYST_REG, val);
-+
-+		case hwmon_temp_min:
-+			return write_alarm_val(st, MAX31827_TL_REG, val);
-+
-+		case hwmon_temp_min_hyst:
-+			return write_alarm_val(st, MAX31827_TL_HYST_REG, val);
-+
-+		default:
-+			return -EOPNOTSUPP;
-+		}
-+
-+	case hwmon_chip:
-+		if (attr == hwmon_chip_update_interval) {
-+			if (!st->enable)
-+				return -EOPNOTSUPP;
-+
-+			switch (val) {
-+			case 125:
-+				val = MAX31827_CNV_8_HZ;
-+				break;
-+			case 250:
-+				val = MAX31827_CNV_4_HZ;
-+				break;
-+			case 1000:
-+				val = MAX31827_CNV_1_HZ;
-+				break;
-+			case 4000:
-+				val = MAX31827_CNV_1_DIV_4_HZ;
-+				break;
-+			case 16000:
-+				val = MAX31827_CNV_1_DIV_16_HZ;
-+				break;
-+			case 32000:
-+				val = MAX31827_CNV_1_DIV_32_HZ;
-+				break;
-+			case 64000:
-+				val = MAX31827_CNV_1_DIV_64_HZ;
-+				break;
-+			default:
-+				return -EOPNOTSUPP;
-+			}
-+
-+			val = FIELD_PREP(MAX31827_CONFIGURATION_CNV_RATE_MASK,
-+					 val);
-+
-+			return regmap_update_bits(st->regmap,
-+						  MAX31827_CONFIGURATION_REG,
-+						  MAX31827_CONFIGURATION_CNV_RATE_MASK,
-+						  val);
-+		}
-+		break;
-+
-+	default:
-+		return -EOPNOTSUPP;
-+	}
-+
-+	return -EOPNOTSUPP;
-+}
-+
-+static int max31827_init_client(struct max31827_state *st)
-+{
-+	st->enable = true;
-+
-+	return regmap_update_bits(st->regmap, MAX31827_CONFIGURATION_REG,
-+				  MAX31827_CONFIGURATION_1SHOT_MASK |
-+					  MAX31827_CONFIGURATION_CNV_RATE_MASK,
-+				  MAX31827_DEVICE_ENABLE(1));
-+}
-+
-+static const struct hwmon_channel_info *max31827_info[] = {
-+	HWMON_CHANNEL_INFO(temp, HWMON_T_ENABLE | HWMON_T_INPUT | HWMON_T_MIN |
-+					 HWMON_T_MIN_HYST | HWMON_T_MIN_ALARM |
-+					 HWMON_T_MAX | HWMON_T_MAX_HYST |
-+					 HWMON_T_MAX_ALARM),
-+	HWMON_CHANNEL_INFO(chip, HWMON_C_UPDATE_INTERVAL),
-+	NULL,
-+};
-+
-+static const struct hwmon_ops max31827_hwmon_ops = {
-+	.is_visible = max31827_is_visible,
-+	.read = max31827_read,
-+	.write = max31827_write,
-+};
-+
-+static const struct hwmon_chip_info max31827_chip_info = {
-+	.ops = &max31827_hwmon_ops,
-+	.info = max31827_info,
-+};
-+
-+static int max31827_probe(struct i2c_client *client)
-+{
-+	struct device *dev = &client->dev;
-+	struct device *hwmon_dev;
-+	struct max31827_state *st;
-+	int err;
-+
-+	if (!i2c_check_functionality(client->adapter, I2C_FUNC_SMBUS_WORD_DATA))
-+		return -EOPNOTSUPP;
-+
-+	st = devm_kzalloc(dev, sizeof(*st), GFP_KERNEL);
-+	if (!st)
-+		return -ENOMEM;
-+
-+	mutex_init(&st->lock);
-+
-+	st->regmap = devm_regmap_init_i2c(client, &max31827_regmap);
-+	if (IS_ERR(st->regmap))
-+		return dev_err_probe(dev, PTR_ERR(st->regmap),
-+				     "Failed to allocate regmap.\n");
-+
-+	err = max31827_init_client(st);
-+	if (err)
-+		return err;
-+
-+	hwmon_dev = devm_hwmon_device_register_with_info(dev, client->name, st,
-+							 &max31827_chip_info,
-+							 NULL);
-+
-+	return PTR_ERR_OR_ZERO(hwmon_dev);
-+}
-+
-+static const struct i2c_device_id max31827_i2c_ids[] = {
-+	{ "max31827", 0 },
-+	{ }
-+};
-+MODULE_DEVICE_TABLE(i2c, max31827_i2c_ids);
-+
-+static const struct of_device_id max31827_of_match[] = {
-+	{ .compatible = "max31827" },
-+	{ }
-+};
-+MODULE_DEVICE_TABLE(of, max31827_of_match);
-+
-+static struct i2c_driver max31827_driver = {
-+	.class = I2C_CLASS_HWMON,
-+	.driver = {
-+		.name = "max31827",
-+		.of_match_table = max31827_of_match,
-+	},
-+	.probe_new = max31827_probe,
-+	.id_table = max31827_i2c_ids,
-+};
-+module_i2c_driver(max31827_driver);
-+
-+MODULE_AUTHOR("Daniel Matyas <daniel.matyas@analog.com>");
-+MODULE_DESCRIPTION("Maxim MAX31827 low-power temperature switch driver");
-+MODULE_LICENSE("GPL");
++	u64			reclaim_bw;
++
+ };
+ 
+ #ifdef CONFIG_FAIR_GROUP_SCHED
 -- 
-2.34.1
+2.40.1
 
