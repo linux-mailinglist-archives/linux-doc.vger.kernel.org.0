@@ -2,75 +2,114 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id D57A66FB557
-	for <lists+linux-doc@lfdr.de>; Mon,  8 May 2023 18:40:06 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id CB4DC6FB61A
+	for <lists+linux-doc@lfdr.de>; Mon,  8 May 2023 19:51:47 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S233677AbjEHQkF (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 8 May 2023 12:40:05 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:37416 "EHLO
+        id S232492AbjEHRvq (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 8 May 2023 13:51:46 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:51428 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S233424AbjEHQkA (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Mon, 8 May 2023 12:40:00 -0400
-Received: from dfw.source.kernel.org (dfw.source.kernel.org [IPv6:2604:1380:4641:c500::1])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 170366EB1;
-        Mon,  8 May 2023 09:39:30 -0700 (PDT)
-Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
-        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
-        (No client certificate requested)
-        by dfw.source.kernel.org (Postfix) with ESMTPS id 75E6C6252F;
-        Mon,  8 May 2023 16:39:29 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id BABD4C433D2;
-        Mon,  8 May 2023 16:39:28 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-        s=k20201202; t=1683563968;
-        bh=k6cUHSsgK5Fn8DpZlfU29s/FNuK/SUl4o07CWRZz99s=;
-        h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-        b=mC0a7zrM1FiMolYByDwdo1vM7uJNnt5DJS/o1UEFnCWoz2+W/9BeveIDHs3SC0/EY
-         EeXO1UF6/8p2MKgZTeFSJW9QsZ+Z3DR7eDXHZiO655BcmmIvskOVZdt0HbqBZpSCKT
-         rmAelxzuu2KMxU2GpOuHFmEPFIC4GEkHaio29Pa5e14dPNoKxIsuTYAOn8VZzhp8px
-         DtdPydAO+oXNc5FKPT73Aal0VABVde2qdq4a2QOcuTwj6lhBBsS/4X/Bnyc/y68f+B
-         1U/Q+/7c/36jDDoWFdWeiJYHwpm8T026WiIfsgUrjPkH/8MTiNfeNK+YoN8o6pKkOY
-         4cpeO04DZLjTA==
-Date:   Mon, 8 May 2023 18:39:31 +0200
-From:   Christian Brauner <brauner@kernel.org>
-To:     Randy Dunlap <rdunlap@infradead.org>
-Cc:     linux-kernel@vger.kernel.org, Jonathan Corbet <corbet@lwn.net>,
-        linux-doc@vger.kernel.org,
-        Alexander Viro <viro@zeniv.linux.org.uk>,
-        linux-fsdevel@vger.kernel.org, Rob Landley <rob@landley.net>,
-        Andrew Morton <akpm@linux-foundation.org>
-Subject: Re: [PATCH] Documentation/filesystems: ramfs-rootfs-initramfs: use
- :Author:
-Message-ID: <20230508-absehbar-nickel-c94c8e3069e3@brauner>
-References: <20230508055928.3548-1-rdunlap@infradead.org>
+        with ESMTP id S229475AbjEHRvp (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Mon, 8 May 2023 13:51:45 -0400
+Received: from galois.linutronix.de (Galois.linutronix.de [IPv6:2a0a:51c0:0:12e:550::1])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 42ED744A0;
+        Mon,  8 May 2023 10:51:44 -0700 (PDT)
+From:   Thomas Gleixner <tglx@linutronix.de>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linutronix.de;
+        s=2020; t=1683568301;
+        h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+         to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+         content-transfer-encoding:content-transfer-encoding:
+         in-reply-to:in-reply-to:references:references;
+        bh=xBM5m6wDNW8LeDu3c/o/2yvJ8k64BJF0JoE591jbLbA=;
+        b=sMXXfFh+31ZYLnj/Q/317zJ8ZSNPWFhoFiud2U76+34ZcjDHzfH94OqL5J7Cq08AktHEob
+        jScu3BBU+qL6S/lcL3VxvFTcbres7JXXNwc90R7lK1wlwr2ZmAigc0dIvG5AV6JAzorBaq
+        DIpcER3iASDOuzirPArCyeojNdahXrhqv4d/Uweihy+eMCslrpiZjVjkedRt1mJY4raFyK
+        YgUIvPPYtt7wKOkz2+m2PZtlqlM8wnC8SGGOKlzyhUWXe5PLhj9G2a/vKTQIm9Ki6XKPrl
+        ry4fY2g0q5I7fMBhPRATR4Kgl2/343VnWymkfbnsQx7N+fW0pldcN8wNrV6oMw==
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=linutronix.de;
+        s=2020e; t=1683568301;
+        h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+         to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+         content-transfer-encoding:content-transfer-encoding:
+         in-reply-to:in-reply-to:references:references;
+        bh=xBM5m6wDNW8LeDu3c/o/2yvJ8k64BJF0JoE591jbLbA=;
+        b=FKKYbkze0DTjbg51KVCUWSLfNiUsicv5XAC0hJm2+JvwoRzcsJXs/xUt9yUiE5d6ajXhX2
+        oLbHvKULh49aPoDw==
+To:     Jason Xing <kerneljasonxing@gmail.com>,
+        Liu Jian <liujian56@huawei.com>
+Cc:     corbet@lwn.net, paulmck@kernel.org, frederic@kernel.org,
+        quic_neeraju@quicinc.com, joel@joelfernandes.org,
+        josh@joshtriplett.org, boqun.feng@gmail.com, rostedt@goodmis.org,
+        mathieu.desnoyers@efficios.com, jiangshanlai@gmail.com,
+        qiang1.zhang@intel.com, jstultz@google.com, sboyd@kernel.org,
+        davem@davemloft.net, edumazet@google.com, kuba@kernel.org,
+        pabeni@redhat.com, peterz@infradead.org, frankwoo@google.com,
+        Rhinewuwu@google.com, linux-doc@vger.kernel.org,
+        linux-kernel@vger.kernel.org, rcu@vger.kernel.org,
+        netdev@vger.kernel.org
+Subject: Re: [PATCH 2/9] softirq: Use sched_clock() based timeout
+In-Reply-To: <CAL+tcoDY11sSO8_h1DKCWgAXOjQwM1JR5cx7cpmotWVj28m_fg@mail.gmail.com>
+References: <20230505113315.3307723-1-liujian56@huawei.com>
+ <20230505113315.3307723-3-liujian56@huawei.com>
+ <CAL+tcoDY11sSO8_h1DKCWgAXOjQwM1JR5cx7cpmotWVj28m_fg@mail.gmail.com>
+Date:   Mon, 08 May 2023 19:51:41 +0200
+Message-ID: <87cz3a3e4y.ffs@tglx>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-In-Reply-To: <20230508055928.3548-1-rdunlap@infradead.org>
-X-Spam-Status: No, score=-4.4 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_MED,
-        SPF_HELO_NONE,SPF_PASS,T_SCC_BODY_TEXT_LINE autolearn=ham
-        autolearn_force=no version=3.4.6
+Content-Transfer-Encoding: quoted-printable
+X-Spam-Status: No, score=-4.4 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_MED,SPF_HELO_NONE,
+        SPF_PASS,T_SCC_BODY_TEXT_LINE autolearn=ham autolearn_force=no
+        version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Sun, May 07, 2023 at 10:59:28PM -0700, Randy Dunlap wrote:
-> Use the :Author: markup instead of making it a chapter heading.
-> This cleans up the table of contents for this file.
-> 
-> Fixes: 7f46a240b0a1 ("[PATCH] ramfs, rootfs, and initramfs docs")
-> Signed-off-by: Randy Dunlap <rdunlap@infradead.org>
-> Cc: Jonathan Corbet <corbet@lwn.net>
-> Cc: linux-doc@vger.kernel.org
-> Cc: Alexander Viro <viro@zeniv.linux.org.uk>
-> Cc: Christian Brauner <brauner@kernel.org>
-> Cc: linux-fsdevel@vger.kernel.org
-> Cc: Rob Landley <rob@landley.net>
-> Cc: Andrew Morton <akpm@linux-foundation.org>
-> ---
+On Mon, May 08 2023 at 12:08, Jason Xing wrote:
+> On Fri, May 5, 2023 at 7:25=E2=80=AFPM Liu Jian <liujian56@huawei.com> wr=
+ote:
+>> @@ -489,7 +490,7 @@ asmlinkage __visible void do_softirq(void)
+>>   * we want to handle softirqs as soon as possible, but they
+>>   * should not be able to lock up the box.
+>>   */
+>> -#define MAX_SOFTIRQ_TIME  msecs_to_jiffies(2)
+>> +#define MAX_SOFTIRQ_TIME       (2 * NSEC_PER_MSEC)
+>
+> I wonder if it affects those servers that set HZ to some different
+> values rather than 1000 as default.
 
-Looks good,
-Reviewed-by: Christian Brauner <brauner@kernel.org>
+The result of msecs_to_jiffies(2) for different HZ values:
+
+HZ=3D100     1
+HZ=3D250     1
+HZ=3D1000    2
+
+So depending on when the softirq processing starts, this gives the
+following ranges in which the timeout ends:
+
+HZ=3D100    0 - 10ms
+HZ=3D250    0 -  4ms
+HZ=3D1000   1 -  2ms
+
+But as the various softirq handlers have their own notion of timeouts,
+loop limits etc. and the timeout is only checked after _all_ pending
+bits of each iteration have been processed, the outcome of this is all
+lottery.
+
+Due to that the sched_clock() change per se won't have too much impact,
+but if the overall changes to consolidate the break conditions are in
+place, I think it will have observable effects.
+
+Making this consistent is definitely a good thing, but it won't solve
+the underlying problem of soft interrupt processing at all.
+
+We definitely need to spend more thoughts on pulling things out of soft
+interrupt context so that these functionalities get under proper
+resource control by the scheduler.
+
+Thanks,
+
+        tglx
