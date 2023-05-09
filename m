@@ -2,121 +2,117 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 629746FBC85
-	for <lists+linux-doc@lfdr.de>; Tue,  9 May 2023 03:31:44 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id B3DB96FBD02
+	for <lists+linux-doc@lfdr.de>; Tue,  9 May 2023 04:18:05 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S229726AbjEIBbn (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 8 May 2023 21:31:43 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:34766 "EHLO
+        id S229995AbjEICSE (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 8 May 2023 22:18:04 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:60160 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S229621AbjEIBbm (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Mon, 8 May 2023 21:31:42 -0400
-Received: from galois.linutronix.de (Galois.linutronix.de [193.142.43.55])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id B540CE45
-        for <linux-doc@vger.kernel.org>; Mon,  8 May 2023 18:31:41 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linutronix.de;
-        s=2020; t=1683595900;
-        h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-         to:to:cc:cc:mime-version:mime-version:
-         content-transfer-encoding:content-transfer-encoding:resent-to:
-         resent-from:resent-message-id:in-reply-to:in-reply-to:  references:references;
-        bh=2FpVaM1b9/dK9ZgZzXFPsww04+6hb6vHVJbMLmOixEs=;
-        b=3hSIi3K5CDWOqJW5du2+z/LoTfp4bCdqpn5lCFzI6bAlDSwWB63jaP/9MiWYSPmhpbvMY/
-        65Oj/1ICWEzfkykT5FQhGxUBJY9WP6Nj4kir1+zZJV5+k7W+76KuRSOe2SAaWMmT8zwOtt
-        DApydsdHrjKiqLrtLDNud16yThbKBXEQA/dKgIb//QMGsxudPfvMxlNuzQqzZHPjHhq+zk
-        OB4QRXM0LB4547ED288qUWt0/n7pmlbtV1jrJQ/DjXoyUzkyf+MMqvGmIxGErutkc+iGcK
-        LAPA2zWR1OZ5usl624IHuln6z8Zcp/fAQPR0lOkUsYfb83hQaXR2/R//RHkSqQ==
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=linutronix.de;
-        s=2020e; t=1683595900;
-        h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-         to:to:cc:cc:mime-version:mime-version:
-         content-transfer-encoding:content-transfer-encoding:resent-to:
-         resent-from:resent-message-id:in-reply-to:in-reply-to:  references:references;
-        bh=2FpVaM1b9/dK9ZgZzXFPsww04+6hb6vHVJbMLmOixEs=;
-        b=qiCnQ/QBjLxO8cFe9JVcIKNmQnt1mFnHXVm3sRnkX+NYIpnfBGYH1mGLMw3pSe2WEcU2Ek
-        8vLmuUwhJ8GtZcAA==
-From:   "Ahmed S. Darwish" <darwi@linutronix.de>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linutronix.de;
-        s=2020; t=1683595601;
-        h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-         to:to:cc:cc:mime-version:mime-version:
-         content-transfer-encoding:content-transfer-encoding:
-         in-reply-to:in-reply-to:references:references;
-        bh=2FpVaM1b9/dK9ZgZzXFPsww04+6hb6vHVJbMLmOixEs=;
-        b=ELAtSl2IMtdlg7PbfAf2eQ/WCKprqNTcowRfQlQ7OWL3S8e+MqkVf6CzNhYDuHus1MQmdj
-        FLEMJm3W5RzWhgjXVvmC46uQ3fgHjzfQSswQrRRInUPVPcW/pvc7rI4o8sUHDJrSxIbBTQ
-        D8se8nyPbTwAP312nkqooBzp0EJiPsgDSwW7MFolsWYf8rkRuPmmGB3mvg/3fskQRB/1Dr
-        SICdgDP5jYSLYoOAHr8ow+V39j86alQKjsVaDq9aQ9Mbx37B6bf9EObIp8rkQr7c/4dD4Y
-        rdhLKrfos1kg9O9VGxAapKRSqrJRSJqsmQsC7SetWR18jSMmtA5Zts0FHPxW4g==
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=linutronix.de;
-        s=2020e; t=1683595601;
-        h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-         to:to:cc:cc:mime-version:mime-version:
-         content-transfer-encoding:content-transfer-encoding:
-         in-reply-to:in-reply-to:references:references;
-        bh=2FpVaM1b9/dK9ZgZzXFPsww04+6hb6vHVJbMLmOixEs=;
-        b=TZOqOHsOZHAdVNxm/WWL24EBFkQQ7fhfUJI6BI1Hald7rlOG6X1kk6zqjP0kGymOje/BxE
-        canixfzlL96ppyCg==
-To:     Masahiro Yamada <masahiroy@kernel.org>,
+        with ESMTP id S229575AbjEICSE (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Mon, 8 May 2023 22:18:04 -0400
+Received: from 167-179-156-38.a7b39c.syd.nbn.aussiebb.net (167-179-156-38.a7b39c.syd.nbn.aussiebb.net [167.179.156.38])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 7C15FE60;
+        Mon,  8 May 2023 19:18:02 -0700 (PDT)
+Received: from loth.rohan.me.apana.org.au ([192.168.167.2])
+        by formenos.hmeau.com with smtp (Exim 4.94.2 #2 (Debian))
+        id 1pwCvA-006hX7-Oq; Tue, 09 May 2023 10:17:46 +0800
+Received: by loth.rohan.me.apana.org.au (sSMTP sendmail emulation); Tue, 09 May 2023 10:17:45 +0800
+Date:   Tue, 9 May 2023 10:17:45 +0800
+From:   Herbert Xu <herbert@gondor.apana.org.au>
+To:     Sunil V L <sunilvl@ventanamicro.com>
+Cc:     linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
+        linux-riscv@lists.infradead.org, linux-acpi@vger.kernel.org,
+        linux-crypto@vger.kernel.org, platform-driver-x86@vger.kernel.org,
+        llvm@lists.linux.dev, Jonathan Corbet <corbet@lwn.net>,
+        Paul Walmsley <paul.walmsley@sifive.com>,
+        Palmer Dabbelt <palmer@dabbelt.com>,
+        Albert Ou <aou@eecs.berkeley.edu>,
+        "Rafael J . Wysocki" <rafael@kernel.org>,
+        Len Brown <lenb@kernel.org>,
+        Daniel Lezcano <daniel.lezcano@linaro.org>,
+        Thomas Gleixner <tglx@linutronix.de>,
+        Weili Qian <qianweili@huawei.com>,
+        Zhou Wang <wangzhou1@hisilicon.com>,
+        "David S . Miller" <davem@davemloft.net>,
+        Marc Zyngier <maz@kernel.org>,
+        Maximilian Luz <luzmaximilian@gmail.com>,
+        Hans de Goede <hdegoede@redhat.com>,
+        Mark Gross <markgross@kernel.org>,
         Nathan Chancellor <nathan@kernel.org>,
         Nick Desaulniers <ndesaulniers@google.com>,
-        Nicolas Schier <nicolas@fjasle.eu>
-Cc:     Thomas Gleixner <tglx@linutronix.de>, linux-kbuild@vger.kernel.org,
-        LKML <linux-kernel@vger.kernel.org>,
-        "Ahmed S. Darwish" <darwi@linutronix.de>
-Subject: [PATCH v2 2/2] docs: Set minimal gtags / GNU GLOBAL version to 6.6.5
-Date:   Tue,  9 May 2023 03:26:16 +0200
-Message-Id: <20230509012616.81579-3-darwi@linutronix.de>
-In-Reply-To: <20230509012616.81579-1-darwi@linutronix.de>
-References: <20230504201833.202494-1-darwi@linutronix.de>
- <20230509012616.81579-1-darwi@linutronix.de>
+        Tom Rix <trix@redhat.com>
+Subject: Re: [PATCH V5 03/21] crypto: hisilicon/qm: Fix to enable build with
+ RISC-V clang
+Message-ID: <ZFmtSReX9/WR5CkK@gondor.apana.org.au>
+References: <20230508115237.216337-1-sunilvl@ventanamicro.com>
+ <20230508115237.216337-4-sunilvl@ventanamicro.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Spam-Status: No, score=-4.4 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_MED,SPF_HELO_NONE,
-        SPF_PASS,T_SCC_BODY_TEXT_LINE,URIBL_BLOCKED autolearn=unavailable
-        autolearn_force=no version=3.4.6
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20230508115237.216337-4-sunilvl@ventanamicro.com>
+X-Spam-Status: No, score=2.7 required=5.0 tests=BAYES_00,HELO_DYNAMIC_IPADDR2,
+        RDNS_DYNAMIC,SPF_HELO_NONE,SPF_PASS,TVD_RCVD_IP,T_SCC_BODY_TEXT_LINE,
+        URIBL_BLOCKED autolearn=no autolearn_force=no version=3.4.6
+X-Spam-Level: **
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Kernel build now uses the gtags "-C (--directory)" option, available
-since GNU GLOBAL v6.6.5.  Update the documentation accordingly.
+On Mon, May 08, 2023 at 05:22:19PM +0530, Sunil V L wrote:
+> With CONFIG_ACPI enabled for RISC-V, this driver gets enabled in
+> allmodconfig build. However, build fails with clang and below
+> error is seen.
+> 
+> drivers/crypto/hisilicon/qm.c:627:10: error: invalid output constraint '+Q' in asm
+>                        "+Q" (*((char __iomem *)fun_base))
+>                        ^
+> This is expected error with clang due to the way it is designed.
+> 
+> To fix this issue, move arm64 assembly code under #if.
+> 
+> Link: https://github.com/ClangBuiltLinux/linux/issues/999
+> Signed-off-by: Nathan Chancellor <nathan@kernel.org>
+> [sunilvl@ventanamicro.com: Moved tmp0 and tmp1 into the #if]
+> Signed-off-by: Sunil V L <sunilvl@ventanamicro.com>
+> ---
+>  drivers/crypto/hisilicon/qm.c | 13 +++++++------
+>  1 file changed, 7 insertions(+), 6 deletions(-)
+> 
+> diff --git a/drivers/crypto/hisilicon/qm.c b/drivers/crypto/hisilicon/qm.c
+> index ad0c042b5e66..2eaeaac2e246 100644
+> --- a/drivers/crypto/hisilicon/qm.c
+> +++ b/drivers/crypto/hisilicon/qm.c
+> @@ -610,13 +610,9 @@ EXPORT_SYMBOL_GPL(hisi_qm_wait_mb_ready);
+>  static void qm_mb_write(struct hisi_qm *qm, const void *src)
+>  {
+>  	void __iomem *fun_base = qm->io_base + QM_MB_CMD_SEND_BASE;
+> -	unsigned long tmp0 = 0, tmp1 = 0;
+>  
+> -	if (!IS_ENABLED(CONFIG_ARM64)) {
+> -		memcpy_toio(fun_base, src, 16);
+> -		dma_wmb();
+> -		return;
+> -	}
 
-Signed-off-by: Ahmed S. Darwish <darwi@linutronix.de>
-Cc: <stable@vger.kernel.org>
-Link: https://lists.gnu.org/archive/html/info-global/2020-09/msg00000.html
----
- Documentation/process/changes.rst | 7 +++++++
- 1 file changed, 7 insertions(+)
+Please leave this bit as it stands.
 
-diff --git a/Documentation/process/changes.rst b/Documentation/process/changes.rst
-index ef540865ad22..a9ef00509c9b 100644
---- a/Documentation/process/changes.rst
-+++ b/Documentation/process/changes.rst
-@@ -60,6 +60,7 @@ openssl & libcrypto    1.0.0            openssl version
- bc                     1.06.95          bc --version
- Sphinx\ [#f1]_         1.7              sphinx-build --version
- cpio                   any              cpio --version
-+gtags (optional)       6.6.5            gtags --version
- ====================== ===============  ========================================
- 
- .. [#f1] Sphinx is needed only to build the Kernel documentation
-@@ -174,6 +175,12 @@ You will need openssl to build kernels 3.7 and higher if module signing is
- enabled.  You will also need openssl development packages to build kernels 4.3
- and higher.
- 
-+gtags / GNU GLOBAL (optional)
-+-----------------------------
-+
-+The kernel build requires GNU GLOBAL version 6.6.5 or later to generate
-+tag files through ``make gtags``.  This is due to its use of the gtags
-+``-C (--directory)`` flag.
- 
- System utilities
- ****************
+> +#if IS_ENABLED(CONFIG_ARM64)
+> +	unsigned long tmp0 = 0, tmp1 = 0;
+>  
+>  	asm volatile("ldp %0, %1, %3\n"
+>  		     "stp %0, %1, %2\n"
+> @@ -626,6 +622,11 @@ static void qm_mb_write(struct hisi_qm *qm, const void *src)
+>  		       "+Q" (*((char __iomem *)fun_base))
+>  		     : "Q" (*((char *)src))
+>  		     : "memory");
+
+And simply add the ifdef around the assembly.
+
+Thanks,
 -- 
-2.40.0
-
+Email: Herbert Xu <herbert@gondor.apana.org.au>
+Home Page: http://gondor.apana.org.au/~herbert/
+PGP Key: http://gondor.apana.org.au/~herbert/pubkey.txt
