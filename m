@@ -2,149 +2,158 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 73BDC6FB879
-	for <lists+linux-doc@lfdr.de>; Mon,  8 May 2023 22:48:52 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 6AD606FBC83
+	for <lists+linux-doc@lfdr.de>; Tue,  9 May 2023 03:31:24 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S233353AbjEHUsq (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 8 May 2023 16:48:46 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:43190 "EHLO
+        id S229460AbjEIBbW (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 8 May 2023 21:31:22 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:34696 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S229452AbjEHUsp (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Mon, 8 May 2023 16:48:45 -0400
-Received: from out-26.mta1.migadu.com (out-26.mta1.migadu.com [IPv6:2001:41d0:203:375::1a])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 11D0F5BAE
-        for <linux-doc@vger.kernel.org>; Mon,  8 May 2023 13:48:42 -0700 (PDT)
-Date:   Mon, 8 May 2023 16:48:27 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linux.dev; s=key1;
-        t=1683578919;
+        with ESMTP id S229457AbjEIBbV (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Mon, 8 May 2023 21:31:21 -0400
+Received: from galois.linutronix.de (Galois.linutronix.de [193.142.43.55])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 55372E45
+        for <linux-doc@vger.kernel.org>; Mon,  8 May 2023 18:31:20 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linutronix.de;
+        s=2020; t=1683595879;
         h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-         to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+         to:to:cc:cc:mime-version:mime-version:
+         content-transfer-encoding:content-transfer-encoding:resent-to:
+         resent-from:resent-message-id:in-reply-to:in-reply-to:  references:references;
+        bh=EH7EJCy+zaOYirnoFTx4j8Sz/5+BcH8LizE4QJejMqI=;
+        b=oagT7ei6wTyxlgPwXjuqKteuuutWPJODxtn1E6PE0zN8OeqrTxZvYHbt9T3JWjX8l/R9Ix
+        eCvlYFHsP3r6sU39sS85Qo4zlrchuAzlduEza8xTvTlwNCsEkf/Oya+NnkHL1fIeuHLK5N
+        OTqQ34gn2ttS6Y6B9/FGIX9f64FsTJVDwJUk4FkZQqo61K+F2+pu6G5h5wypzmXiOUMSHG
+        lW7woCkcQLVh4dXNqPswIt5P4D7XQM+GZjN4p8vF82J+RkDVLLOx9g/01IC23llJ+io3Aw
+        Pp1HA5kwNa44DVAk8Z/YaQ0V/v+WL+5nRkzBra7Bj38JNFGJr5qIUMMmpkbVZA==
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=linutronix.de;
+        s=2020e; t=1683595879;
+        h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+         to:to:cc:cc:mime-version:mime-version:
+         content-transfer-encoding:content-transfer-encoding:resent-to:
+         resent-from:resent-message-id:in-reply-to:in-reply-to:  references:references;
+        bh=EH7EJCy+zaOYirnoFTx4j8Sz/5+BcH8LizE4QJejMqI=;
+        b=K1MbBvV8jGi9o8vEbQBL37I1DAAqaoCRPf9TO/S9XBez0QcUCyjjkAuPd+PeV1J7YJ3Yf6
+        n4H8paPSCSne5UBQ==
+From:   "Ahmed S. Darwish" <darwi@linutronix.de>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linutronix.de;
+        s=2020; t=1683595595;
+        h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+         to:to:cc:cc:mime-version:mime-version:
          content-transfer-encoding:content-transfer-encoding:
          in-reply-to:in-reply-to:references:references;
-        bh=T9yUrg/v5raybQi2xKwTXiJDyugUh7KFNSbnsbVf1ko=;
-        b=JlOqRkPdzk5AJhxPMwu8AlexUvrKA9kXRniMs6KXFAxkkCykU6KjHBDIF+g4xO4yC/3Xao
-        +RuScEMByhVbOYP7Nl+Ojs+6ZTV4KDzSfRqi3slN82Zdtt1OUgviKekasieY9DgexpymM2
-        tFWfTgTgTslrvfQsG/FcZTuRpfPmr6I=
-X-Report-Abuse: Please report any abuse attempt to abuse@migadu.com and include these headers.
-From:   Kent Overstreet <kent.overstreet@linux.dev>
-To:     Petr =?utf-8?B?VGVzYcWZw61r?= <petr@tesarici.cz>
-Cc:     Michal Hocko <mhocko@suse.com>,
-        Suren Baghdasaryan <surenb@google.com>,
-        akpm@linux-foundation.org, vbabka@suse.cz, hannes@cmpxchg.org,
-        roman.gushchin@linux.dev, mgorman@suse.de, dave@stgolabs.net,
-        willy@infradead.org, liam.howlett@oracle.com, corbet@lwn.net,
-        void@manifault.com, peterz@infradead.org, juri.lelli@redhat.com,
-        ldufour@linux.ibm.com, catalin.marinas@arm.com, will@kernel.org,
-        arnd@arndb.de, tglx@linutronix.de, mingo@redhat.com,
-        dave.hansen@linux.intel.com, x86@kernel.org, peterx@redhat.com,
-        david@redhat.com, axboe@kernel.dk, mcgrof@kernel.org,
-        masahiroy@kernel.org, nathan@kernel.org, dennis@kernel.org,
-        tj@kernel.org, muchun.song@linux.dev, rppt@kernel.org,
-        paulmck@kernel.org, pasha.tatashin@soleen.com,
-        yosryahmed@google.com, yuzhao@google.com, dhowells@redhat.com,
-        hughd@google.com, andreyknvl@gmail.com, keescook@chromium.org,
-        ndesaulniers@google.com, gregkh@linuxfoundation.org,
-        ebiggers@google.com, ytcoode@gmail.com, vincent.guittot@linaro.org,
-        dietmar.eggemann@arm.com, rostedt@goodmis.org, bsegall@google.com,
-        bristot@redhat.com, vschneid@redhat.com, cl@linux.com,
-        penberg@kernel.org, iamjoonsoo.kim@lge.com, 42.hyeyoo@gmail.com,
-        glider@google.com, elver@google.com, dvyukov@google.com,
-        shakeelb@google.com, songmuchun@bytedance.com, jbaron@akamai.com,
-        rientjes@google.com, minchan@google.com, kaleshsingh@google.com,
-        kernel-team@android.com, linux-doc@vger.kernel.org,
-        linux-kernel@vger.kernel.org, iommu@lists.linux.dev,
-        linux-arch@vger.kernel.org, linux-fsdevel@vger.kernel.org,
-        linux-mm@kvack.org, linux-modules@vger.kernel.org,
-        kasan-dev@googlegroups.com, cgroups@vger.kernel.org
-Subject: Re: [PATCH 00/40] Memory allocation profiling
-Message-ID: <ZFlgG02A87qPNIn1@moria.home.lan>
-References: <20230501165450.15352-1-surenb@google.com>
- <ZFIMaflxeHS3uR/A@dhcp22.suse.cz>
- <CAJuCfpHxbYFxDENYFfnggh1D8ot4s493PQX0C7kD-JLvixC-Vg@mail.gmail.com>
- <ZFN1yswCd9wRgYPR@dhcp22.suse.cz>
- <ZFfd99w9vFTftB8D@moria.home.lan>
- <20230508175206.7dc3f87c@meshulam.tesarici.cz>
- <ZFkb1p80vq19rieI@moria.home.lan>
- <20230508180913.6a018b21@meshulam.tesarici.cz>
- <ZFkjRBCExpXfI+O5@moria.home.lan>
- <20230508205939.0b5b485c@meshulam.tesarici.cz>
+        bh=EH7EJCy+zaOYirnoFTx4j8Sz/5+BcH8LizE4QJejMqI=;
+        b=zIbXZrgRQbJHKb8OzPbZ7vMxSTyfY46CvnA/s8gUORRkBMUxa1xGgYRVUF2F/P7zgg8maa
+        dxruFxMyxqU4pIXtnvtZalhqhgcp3P1Reuy3pwWGwsnxshkqBzxfosXC99eitBu4Q4V5ko
+        SE7twaUCtizq56kWDyhV4YKhKvw4EhF0uLBLu0gvmuJTBP/9u3al/taNNyKNshSItMgtuA
+        TuX2o1qOKGMMkJWv7UR2iiCWo29GjH6oO4DO1j/AArqZLlzzTnMrguHrqjPgtOkLFPaZLz
+        w0EEjLG8F1qN5B4uYM+MnprGMgpNgheGd4tzd88UBjQ+EfypLDKpw+cXuN+o7g==
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=linutronix.de;
+        s=2020e; t=1683595595;
+        h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+         to:to:cc:cc:mime-version:mime-version:
+         content-transfer-encoding:content-transfer-encoding:
+         in-reply-to:in-reply-to:references:references;
+        bh=EH7EJCy+zaOYirnoFTx4j8Sz/5+BcH8LizE4QJejMqI=;
+        b=LBDu6RpBg2cbJvicyJUcsmEvUlVyxh2w2toUNuTWgSsO2y9weEgLHVaa3qRxsL2iUrpEbL
+        MBZ8CeY5gdnzaoBw==
+To:     Masahiro Yamada <masahiroy@kernel.org>,
+        Nathan Chancellor <nathan@kernel.org>,
+        Nick Desaulniers <ndesaulniers@google.com>,
+        Nicolas Schier <nicolas@fjasle.eu>
+Cc:     Thomas Gleixner <tglx@linutronix.de>, linux-kbuild@vger.kernel.org,
+        LKML <linux-kernel@vger.kernel.org>,
+        "Ahmed S. Darwish" <darwi@linutronix.de>
+Subject: [PATCH v2 0/2] scripts: Resolve gtags empty index generation
+Date:   Tue,  9 May 2023 03:26:14 +0200
+Message-Id: <20230509012616.81579-1-darwi@linutronix.de>
+In-Reply-To: <20230504201833.202494-1-darwi@linutronix.de>
+References: <20230504201833.202494-1-darwi@linutronix.de>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
-In-Reply-To: <20230508205939.0b5b485c@meshulam.tesarici.cz>
-X-Migadu-Flow: FLOW_OUT
-X-Spam-Status: No, score=-2.1 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,SPF_HELO_NONE,SPF_PASS,
-        T_SCC_BODY_TEXT_LINE autolearn=ham autolearn_force=no version=3.4.6
+X-Spam-Status: No, score=-4.4 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_MED,SPF_HELO_NONE,
+        SPF_PASS,T_SCC_BODY_TEXT_LINE,URIBL_BLOCKED autolearn=unavailable
+        autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Mon, May 08, 2023 at 08:59:39PM +0200, Petr Tesařík wrote:
-> On Mon, 8 May 2023 12:28:52 -0400
-> Kent Overstreet <kent.overstreet@linux.dev> wrote:
-> 
-> > On Mon, May 08, 2023 at 06:09:13PM +0200, Petr Tesařík wrote:
-> > > Sure, although AFAIK the index does not cover all possible config
-> > > options (so non-x86 arch code is often forgotten). However, that's the
-> > > less important part.
-> > > 
-> > > What do you do if you need to hook something that does conflict with an
-> > > existing identifier?  
-> > 
-> > As already happens in this patchset, rename the other identifier.
-> > 
-> > But this is C, we avoid these kinds of conflicts already because the
-> > language has no namespacing
-> 
-> This statement is not accurate, but I agree there's not much. Refer to
-> section 6.2.3 of ISO/IEC9899:2018 (Name spaces of identifiers).
-> 
-> More importantly, macros also interfere with identifier scoping, e.g.
-> you cannot even have a local variable with the same name as a macro.
-> That's why I dislike macros so much.
+Hi,
 
-Shadowing a global identifier like that would at best be considered poor
-style, so I don't see this as a major downside.
+v2-changelog
+------------
 
-> But since there's no clear policy regarding macros in the kernel, I'm
-> merely showing a downside; it's perfectly fine to write kernel code
-> like this as long as the maintainers agree that the limitation is
-> acceptable and outweighed by the benefits.
+Handle review remarks from Masahiro Yamada:
 
-Macros do have lots of tricky downsides, but in general we're not shy
-about using them for things that can't be done otherwise; see
-wait_event(), all of tracing...
+  - scripts/tags.sh: remove the O= language, and focus on the general
+    case of the build directory being different from the kernel source
+    tree, as specified in kernel Makefile L159.
 
-I think we could in general do a job of making the macros _themselves_
-more managable, when writing things that need to be macros I'll often
-have just the wrapper as a macro and write the bulk as inline functions.
-See the generic radix tree code for example.
+  - Fix failure when build directory is a subdirectory of the kernel
+    source tree.
 
-Reflection is a major use case for macros, and the underlying mechanism
-here - code tagging - is something worth talking about more, since it's
-codifying something that's been done ad-hoc in the kernel for a long
-time and something we hope to refactor other existing code to use,
-including tracing - I've got a patch already written to convert the
-dynamic debug code to code tagging; it's a nice -200 loc cleanup.
+NEW:
 
-Regarding the alloc_hooks() macro itself specifically, I've got more
-plans for it. I have another patch series after this one that implements
-code tagging based fault injection, which is _far_ more ergonomic to use
-than our existing fault injection capabilities (and this matters! Fault
-injection is a really important tool for getting good test coverage, but
-tools that are a pain in the ass to use don't get used) - and with the
-alloc_hooks() macro already in place, we'll be able to turn _every
-individual memory allocation callsite_ into a distinct, individually
-selectable fault injection point - which is something our existing fault
-injection framework attempts at but doesn't really manage.
+  - Update Documentation/process/changes.rst with new gtags (GNU GLOBAL)
+    requirements.
 
-If we can get this in, it'll make it really easy to write unit tests
-that iterate over every memory allocation site in a given module,
-individually telling them to fail, run a workload until they hit, and
-verify that the code path being tested was executed. It'll nicely
-complement the fuzz testing capabilities that we've been working on,
-particularly in filesystem land.
+Thanks!
+
+Cover letter / v1
+-----------------
+
+https://lkml.kernel.org/r/20230504201833.202494-1-darwi@linutronix.de
+
+make gtags for O= kernel builds is currently broken. For example, when doing:
+
+   make O=../build/ x86_64_defconfig
+   make O=../build/ gtags
+
+gtags generates a warning for each kernel source file to be indexed:
+
+   make[1]: Entering directory '/home/darwi/build'
+     GEN     gtags
+   Warning: '/home/darwi/linux/arch/x86/include/asm/qspinlock.h' is out of source tree. ignored.
+   Warning: '/home/darwi/linux/arch/x86/include/asm/hpet.h' is out of source tree. ignored.
+   ...
+   Warning: '/home/darwi/linux/virt/lib/irqbypass.c' is out of source tree. ignored.
+   make[1]: Leaving directory '/home/darwi/build/'
+
+and then generates an empty index:
+
+   $ du -hs ~/build/G*
+   16K	/home/darwi/build/GPATH
+   16K	/home/darwi/build/GRTAGS
+   16K	/home/darwi/build/GTAGS
+
+This series includes a proposed fix. After applying it:
+
+   $ make O=../build/ gtags
+   make[1]: Entering directory '/home/darwi/build'
+     GEN     gtags
+   make[1]: Leaving directory '/home/darwi/build'
+
+   $ du -hs ~/build/G*
+   9.1M	/home/darwi/build/GPATH
+   506M	/home/darwi/build/GRTAGS
+   696M	/home/darwi/build/GTAGS
+
+The generated files can then be integrated with editors or IDEs as
+usual.
+
+=>
+
+Ahmed S. Darwish (2):
+  scripts/tags.sh: Resolve gtags empty index generation
+  docs: Set minimal gtags / GNU GLOBAL version to 6.6.5
+
+ Documentation/process/changes.rst |  7 +++++++
+ scripts/tags.sh                   | 14 +++++++++++++-
+ 2 files changed, 20 insertions(+), 1 deletion(-)
+
+base-commit: ba0ad6ed89fd5dada3b7b65ef2b08e95d449d4ab
+--
+2.40.0
