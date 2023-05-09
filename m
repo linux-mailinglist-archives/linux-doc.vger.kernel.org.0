@@ -2,223 +2,180 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 9FC726FCFD7
-	for <lists+linux-doc@lfdr.de>; Tue,  9 May 2023 22:48:44 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 9F9D96FD055
+	for <lists+linux-doc@lfdr.de>; Tue,  9 May 2023 22:55:20 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S230177AbjEIUsn (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 9 May 2023 16:48:43 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:39506 "EHLO
+        id S235123AbjEIUzT (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 9 May 2023 16:55:19 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:46256 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S229734AbjEIUsl (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 9 May 2023 16:48:41 -0400
-Received: from EUR05-AM6-obe.outbound.protection.outlook.com (mail-am6eur05on2066.outbound.protection.outlook.com [40.107.22.66])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 3E0FC5590;
-        Tue,  9 May 2023 13:48:36 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=C8FngEewX8fMexqllVXSGmlqr+3IUwCJduHbvflwL06clAmjj9mggD/x4TKHZpy/t0B9IGETQGRodHE+KNM1okT59+H9NMZjKnT5pL/oeh159ZuqHZn85Yi4/mrQ1Kcfcs7L+2OEXWKNn06kk/pIqReeKMqdJdkdTGOEgE5PAQDJiZYCDzXbYvJPFtYXVxZkHLpTjRDcmLfd/8MIvE/QJPQJE2vf6qI5YgLf1O3L0LwBuzhB15c6araowM0GQOAEfHejEfyKsvlJc6Gu8x8iNS0DNGUA6WsgVBObZxfI5RWG1/IqOlRovGiwXmpjyF/hQTfas+s9VcaKpiHjfIPAog==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=69MKZTDdjD0zWUaNtvtOhyLTOHIHn5u9Zpj9S/7D2W0=;
- b=FFW2mXxIPerFtDcSnV/Bry7mWDR1uzRTBsw1yBH1muesiGy+wfOxkmLGlWbhWlqL6QePiXn+VCAvahu7tFJt23Xr8/JYlnUp6EUqeyZ4HXgwQBi0Ito/nkO7dHU2SuYckN9MZVQ0g90wqZXQ3uU8fDHlLW3vUDch/8VrTOjRUBsGPQdW3CnXKY90BJaI3FJEuDv9ZVzQt2FsiUIIa7enHGNjmpB31WbeBPzUG2GsLHcdgz27Vi2pj5ohG2/X2c6JEnq+QvTbNHyjjN0jqxdqO6F20HHn/iqQslJhAwxCZH+aWYHfKJ3xplEsccHYwfFTO/rxL6zH7LGLZoGo1EzOUQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=santannapisa.it; dmarc=pass action=none
- header.from=santannapisa.it; dkim=pass header.d=santannapisa.it; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=santannapisa.it;
- s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=69MKZTDdjD0zWUaNtvtOhyLTOHIHn5u9Zpj9S/7D2W0=;
- b=JkNAeWi44BQaKRoSbxjOe0PY7CeB3AFmcTQdSaJA8wCmqQjwoDnQMlmNJHrotc4XaLafq5Cai7RoUV78/qflLaDaQv38Gr1f2HNWdQNgGg18xTT3AlyiMtTiDZkCihhprAR57eyJYNoKX6YTgoTmeKH7xI1UgyIGip/ABdQpXr4=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=santannapisa.it;
-Received: from VI1PR03MB2880.eurprd03.prod.outlook.com (2603:10a6:802:2d::21)
- by PA4PR03MB7390.eurprd03.prod.outlook.com (2603:10a6:102:10a::11) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6363.33; Tue, 9 May
- 2023 20:48:33 +0000
-Received: from VI1PR03MB2880.eurprd03.prod.outlook.com
- ([fe80::8cd9:c5f1:f698:5600]) by VI1PR03MB2880.eurprd03.prod.outlook.com
- ([fe80::8cd9:c5f1:f698:5600%3]) with mapi id 15.20.6363.031; Tue, 9 May 2023
- 20:48:32 +0000
-Date:   Tue, 9 May 2023 22:48:29 +0200
-From:   luca abeni <luca.abeni@santannapisa.it>
-To:     Vineeth Remanan Pillai <vineeth@bitbyteword.org>
-Cc:     Juri Lelli <juri.lelli@redhat.com>,
-        Daniel Bristot de Oliveira <bristot@redhat.com>,
+        with ESMTP id S235487AbjEIUzO (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 9 May 2023 16:55:14 -0400
+Received: from mga14.intel.com (mga14.intel.com [192.55.52.115])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 476CE59E8;
+        Tue,  9 May 2023 13:54:44 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1683665684; x=1715201684;
+  h=date:from:to:cc:subject:message-id:references:
+   mime-version:in-reply-to;
+  bh=Qb7JnGYGX/q0kXPU2rhDE3PwsSlBsEq5dhBfzcKgApM=;
+  b=ItULmH/VZ61oT6Nwgz7iG+wxgLrigfSEv1M4VfXGit2kBCZM3+5TIPEm
+   GuVZVnu9DuD8yjMhGZRWyyuPMb06GKugXpElluDOXgAb8xlSbxyzUmFmI
+   XJjdHXSGEIv9nlBxLxRwyRaHnTrkVtX/zjR1CWlFqkhTJXnM8NyAqCbR2
+   esNg+TuFMHJoHtp1z8zqhC31evy210SPykq7XPL93ww1h9Xieqc3K76vO
+   UwJ4cklLYGyJEM9JW0Ku+4qXffQbR73gOnuFoKJ54DYlyva760UZZXZ2u
+   LkaYqs4tFyNC14kF5Xo81OIsSSWU7tyGhXDz0LMn4B5d60vtGId9oBbJ6
+   w==;
+X-IronPort-AV: E=McAfee;i="6600,9927,10705"; a="350081851"
+X-IronPort-AV: E=Sophos;i="5.99,262,1677571200"; 
+   d="scan'208";a="350081851"
+Received: from orsmga003.jf.intel.com ([10.7.209.27])
+  by fmsmga103.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 09 May 2023 13:52:53 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=McAfee;i="6600,9927,10705"; a="649486667"
+X-IronPort-AV: E=Sophos;i="5.99,262,1677571200"; 
+   d="scan'208";a="649486667"
+Received: from lkp-server01.sh.intel.com (HELO dea6d5a4f140) ([10.239.97.150])
+  by orsmga003.jf.intel.com with ESMTP; 09 May 2023 13:52:50 -0700
+Received: from kbuild by dea6d5a4f140 with local (Exim 4.96)
+        (envelope-from <lkp@intel.com>)
+        id 1pwUKH-0002UO-0a;
+        Tue, 09 May 2023 20:52:49 +0000
+Date:   Wed, 10 May 2023 04:51:57 +0800
+From:   kernel test robot <lkp@intel.com>
+To:     Youling Tang <tangyouling@loongson.cn>,
+        Huacai Chen <chenhuacai@kernel.org>
+Cc:     oe-kbuild-all@lists.linux.dev, Jonathan Corbet <corbet@lwn.net>,
         Peter Zijlstra <peterz@infradead.org>,
-        Ingo Molnar <mingo@redhat.com>,
-        Vincent Guittot <vincent.guittot@linaro.org>,
-        Steven Rostedt <rostedt@goodmis.org>,
-        Joel Fernandes <joel@joelfernandes.org>,
-        Dietmar Eggemann <dietmar.eggemann@arm.com>,
-        Ben Segall <bsegall@google.com>, Mel Gorman <mgorman@suse.de>,
-        Valentin Schneider <vschneid@redhat.com>,
-        Jonathan Corbet <corbet@lwn.net>, linux-kernel@vger.kernel.org,
-        linux-doc@vger.kernel.org
-Subject: Re: [PATCH 1/2] sched/deadline: accurate reclaim bandwidth for GRUB
-Message-ID: <20230509224829.2fb547fd@nowhere>
-In-Reply-To: <CAO7JXPhrqKWfsp860rRmEenxARi8U2gNMGsOn4m+aKporWwBcg@mail.gmail.com>
-References: <20230508160829.2756405-1-vineeth@bitbyteword.org>
-        <20230509132534.09098acc@luca64>
-        <CAO7JXPhrqKWfsp860rRmEenxARi8U2gNMGsOn4m+aKporWwBcg@mail.gmail.com>
-Organization: Scuola Superiore Sant'Anna
-X-Mailer: Claws Mail 4.1.1 (GTK 3.24.37; x86_64-pc-linux-gnu)
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: ZR0P278CA0197.CHEP278.PROD.OUTLOOK.COM
- (2603:10a6:910:44::8) To VI1PR03MB2880.eurprd03.prod.outlook.com
- (2603:10a6:802:2d::21)
+        Josh Poimboeuf <jpoimboe@kernel.org>,
+        Jason Baron <jbaron@akamai.com>,
+        WANG Xuerui <kernel@xen0n.name>,
+        Zhangjin Wu <falcon@tinylab.org>, linux-doc@vger.kernel.org,
+        linux-kernel@vger.kernel.org, loongarch@lists.linux.dev
+Subject: Re: [PATCH] LoongArch: Add jump-label implementation
+Message-ID: <202305100412.gazWW71q-lkp@intel.com>
+References: <1683617390-18015-1-git-send-email-tangyouling@loongson.cn>
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: VI1PR03MB2880:EE_|PA4PR03MB7390:EE_
-X-MS-Office365-Filtering-Correlation-Id: a6b9f44a-503f-4bfd-94d7-08db50cec052
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: TQ8PDvU8jtS9YmEudgJ6s1EdKjIkaxM87xuXZK0R/dwufyQ6OOULJV2G74ZPYpYD3QdYcZhDti/W3MHL9204lV0Hiu/1eGclxt8uHXwBbO0cNUslv+bBWnXqUdRpHb6xDngD42FY7sAYN9ycaRVnt9lHkvFPy1w+QpfkjbMkSMe9W3Vx3RSq6KMCUiUxsRM6yc+ghTDR2KtJI/svwhrxUgyj0kcGaIDdmrmdME+tQsP1eqj9FBPPCDZ7KHOgEkR7mQpNIpkE1RsA63VNA42CxDsb651dPYP/sXLhXi6BR+Y57uGnqI7FhVe1vCeWZ/vQ4uOavv/DPLH6PoTYyDPiwbIVaHpHi7qXExF3a8sh2FgAhlkiskwrz9YGQ8B+55x55w9U2hbGx58WEZT8vk9YEr/7TcX0a6lEvwi+QPvAgibhnn9FEAQKm3Ntns5K/9MSO/1UizdeCkUUY2MGYmjOBE3i+WBmajPHJfzc0ahvMP/9i46WSlUd9AJfwSkyvvfoXXF+iE9O6ZwyvvEZccjUTV4MPU0DT3zGeZo4k1mbbsg+QYD4hxui3mFiBzBOnKpa
-X-Forefront-Antispam-Report: CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:VI1PR03MB2880.eurprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230028)(4636009)(7916004)(346002)(376002)(366004)(136003)(39860400002)(396003)(451199021)(86362001)(316002)(786003)(54906003)(66946007)(66476007)(4326008)(36916002)(6916009)(6486002)(6666004)(478600001)(66556008)(41320700001)(33716001)(8676002)(8936002)(2906002)(5660300002)(7416002)(41300700001)(38100700002)(186003)(9686003)(1076003)(6506007)(6512007)(26005)(83380400001);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?om0LSM6q007C9q0F+XKl0fQzWgiD2mh5nhPghWifrIUOkyn5BSHYoevEhUKT?=
- =?us-ascii?Q?EHy5lrZ7x5LxONHnKnFXHpoLEXdM3nx/vx+x+Nll4NhcMlKX6rMLr8UrsMNl?=
- =?us-ascii?Q?XEnaX1MNP5Fx6entpJjAMQzww0SP5Vpx2svmKxz9S6AqdPrBXXKStfaw+2TF?=
- =?us-ascii?Q?ga8Jmz6vX4bKCWYxaV6kAkk8hliQ/OFb7dulRa2w82ppV1B9XjAiWgG0M7iU?=
- =?us-ascii?Q?DP91CeOyok3AveiuLrq5o776AswM6E0g7hExBz4I4yBJ+NpZfgYBNsgF2QkK?=
- =?us-ascii?Q?NZ3FjgKIc9pFhLQqtUuFPvPJOaPgho7ahwgJYjq/wOxnygAEU8wd4Z+hvJhK?=
- =?us-ascii?Q?YpksLkbbZsxtaNMe9Oti8DNGhmXe3+VSzAHa8o6g/19XFfYNebaLh44khoZf?=
- =?us-ascii?Q?RDU/YfrNCR6P+OMc1CTzwwfC7kJV6DnFlcE5aGQtbKIAeulUUYgBCHD81UX9?=
- =?us-ascii?Q?gJQ1DAhXVL/HiEXrwrZhxp0xk5psBVFpesySIk9lGDW7cLmR2NLvfw4oZrD6?=
- =?us-ascii?Q?4FBHjWrB9/H83NHf3QEJ/VamuVQLEN4QjrwmFeqjwXJtUSjhfE2PEpqbHqdv?=
- =?us-ascii?Q?ILJbM5NbXeMBoClyE3ThJia313CcAGc1GQ0u1dhpMJGf1JXWtd7g7lvewhkh?=
- =?us-ascii?Q?5Jakd5BxRwvmAMSy3YOM5j5dDl+zTmf9lpcLpXMUVX7GDwXdz/6SrHAjdpAV?=
- =?us-ascii?Q?GDoBGjeuhGgbCW1BPjLfglYQSQE+NJl2wOJ+dIb1KLihN8VBJ8U00zMxrYVL?=
- =?us-ascii?Q?6xlwS3Po9flRpLpscJllIhS/Wgm51ShgK+7eQYbo+KxnlZq/sX7WB4+IvpEU?=
- =?us-ascii?Q?aBvQK3DeexE1CCSEVeQRV0EZWnOMq9jzuCd8mKAPPf82cRuawqnt6z5CS081?=
- =?us-ascii?Q?RC2X/zVdDjJ5reNc5DQg2APN6vPKnWBIvFoLDE2/C/hcVrsDT0w5OuZC45lO?=
- =?us-ascii?Q?ckVMmYEeB8MPnfMiUd1hegH+A6wdtPuCDlncobZFIdNUlyppV8W2kd9QrUfF?=
- =?us-ascii?Q?IipmWyb/NpwqOFcGoJFoFP7msMnb/z1Ov1lO/YUQXf/neXCapnB0gQ1Ehrpp?=
- =?us-ascii?Q?xbu+66LNppNv8dBEJ0tlDQspmQH877wN9gXtM8aiZyUvrzGBGwmtM+Gr64jo?=
- =?us-ascii?Q?MByvMFO4suuLNWWFR0Yj/QxLK8eBR26g7ZP+JIRw7RBBvDkzCrlrnMzNHlRh?=
- =?us-ascii?Q?vUK69tzpYbdcjfbeJZEwNky0fN6f+HxCaNFq6jRZsGokchdWYDAuyjZ2nJdU?=
- =?us-ascii?Q?4h2mfgA1mrgllRIcqS9wnUUpLzqQow68AuCr7ebILtniTtSPqZmtwA6y6lAN?=
- =?us-ascii?Q?CYZnJBtP/y+12LxXXsK35rafuFQ3JiLFBG4pfy7kOSLYOjy2pwE6XYyx78ej?=
- =?us-ascii?Q?iJsXRX2u2u8AFg5krosir0qdY0akebWabgnXg+WymIuxbTkWflQ/7rgPlnW2?=
- =?us-ascii?Q?bFZHNFdGTNl5/Zmf25qMFxFRBjc6/gfYFSyCvCN0K1Q5sOAYPY5T52nQ66pB?=
- =?us-ascii?Q?pzwoGXN/GrTQzWv2Uzjv9eshRoxNrp7RbHxfbJXD2Y42j6Ol+bSdwXfIdVPt?=
- =?us-ascii?Q?+aGnK7CYqCiBFXd8TADAhQyoqTu2WdvDu6hqdrKExA3RWLuJKcsM8kfMs0le?=
- =?us-ascii?Q?tg=3D=3D?=
-X-OriginatorOrg: santannapisa.it
-X-MS-Exchange-CrossTenant-Network-Message-Id: a6b9f44a-503f-4bfd-94d7-08db50cec052
-X-MS-Exchange-CrossTenant-AuthSource: VI1PR03MB2880.eurprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 09 May 2023 20:48:32.5573
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: d97360e3-138d-4b5f-956f-a646c364a01e
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: P2989zjkGsmkW/nj5d1M4MGdt+Dt+uizNmqNAs4ggqgSRssEKAqNgaDhsNNOj57rU6isG4PW48kGq9eGmDbCcJL3R1/E04LRoLcrKB5wykA=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PA4PR03MB7390
-X-Spam-Status: No, score=-2.1 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_NONE,
-        RCVD_IN_MSPIKE_H2,SPF_HELO_PASS,SPF_PASS,T_SCC_BODY_TEXT_LINE,
-        URIBL_BLOCKED autolearn=ham autolearn_force=no version=3.4.6
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <1683617390-18015-1-git-send-email-tangyouling@loongson.cn>
+X-Spam-Status: No, score=-4.4 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_MED,
+        SPF_HELO_NONE,SPF_NONE,T_SCC_BODY_TEXT_LINE,URIBL_BLOCKED
+        autolearn=ham autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Hi,
+Hi Youling,
 
-On Tue, 9 May 2023 15:29:21 -0400
-Vineeth Remanan Pillai <vineeth@bitbyteword.org> wrote:
-[...]
-> > Is this understanding correct?  
-> Yes, the above two details are correct. In addition to that, I think
-> the existing equation had a small bug:
-> GRUB paper says, running time is depreciated as
->    "dq = -U dt" where U is running_bw.
-> This is assuming that the whole cpu bandwidth could be reclaimed. But
-> in our case, we cap at Umax. So the equation should be
->    "dq = -(U/Umax) dt"
+kernel test robot noticed the following build errors:
 
-Yes, this is the approximation I was mentioning... Instead of using a
-division, I approximated it with a different equation using a sum.
+[auto build test ERROR on linus/master]
+[also build test ERROR on v6.4-rc1 next-20230509]
+[If your patch is applied to the wrong git tree, kindly drop us a note.
+And when submitting patch, we suggest to use '--base' as documented in
+https://git-scm.com/docs/git-format-patch#_base_tree_information]
+
+url:    https://github.com/intel-lab-lkp/linux/commits/Youling-Tang/LoongArch-Add-jump-label-implementation/20230509-153154
+base:   linus/master
+patch link:    https://lore.kernel.org/r/1683617390-18015-1-git-send-email-tangyouling%40loongson.cn
+patch subject: [PATCH] LoongArch: Add jump-label implementation
+config: loongarch-allmodconfig (https://download.01.org/0day-ci/archive/20230510/202305100412.gazWW71q-lkp@intel.com/config)
+compiler: loongarch64-linux-gcc (GCC) 12.1.0
+reproduce (this is a W=1 build):
+        wget https://raw.githubusercontent.com/intel/lkp-tests/master/sbin/make.cross -O ~/bin/make.cross
+        chmod +x ~/bin/make.cross
+        # https://github.com/intel-lab-lkp/linux/commit/369827734136be509a0c817517fed12548d9c41f
+        git remote add linux-review https://github.com/intel-lab-lkp/linux
+        git fetch --no-tags linux-review Youling-Tang/LoongArch-Add-jump-label-implementation/20230509-153154
+        git checkout 369827734136be509a0c817517fed12548d9c41f
+        # save the config file
+        mkdir build_dir && cp config build_dir/.config
+        COMPILER_INSTALL_PATH=$HOME/0day COMPILER=gcc-12.1.0 make.cross W=1 O=build_dir ARCH=loongarch olddefconfig
+        COMPILER_INSTALL_PATH=$HOME/0day COMPILER=gcc-12.1.0 make.cross W=1 O=build_dir ARCH=loongarch prepare
+
+If you fix the issue, kindly add following tag where applicable
+| Reported-by: kernel test robot <lkp@intel.com>
+| Link: https://lore.kernel.org/oe-kbuild-all/202305100412.gazWW71q-lkp@intel.com/
+
+All errors (new ones prefixed by >>):
+
+   scripts/genksyms/parse.y: warning: 9 shift/reduce conflicts [-Wconflicts-sr]
+   scripts/genksyms/parse.y: warning: 5 reduce/reduce conflicts [-Wconflicts-rr]
+   scripts/genksyms/parse.y: note: rerun with option '-Wcounterexamples' to generate conflict counterexamples
+   In file included from include/linux/cpumask.h:16,
+                    from arch/loongarch/include/asm/processor.h:9,
+                    from arch/loongarch/include/asm/thread_info.h:15,
+                    from arch/loongarch/include/asm/ptrace.h:10,
+                    from arch/loongarch/include/asm/inst.h:10,
+                    from arch/loongarch/include/asm/jump_label.h:13,
+                    from include/linux/jump_label.h:112,
+                    from include/linux/dynamic_debug.h:6,
+                    from include/linux/printk.h:564,
+                    from include/asm-generic/bug.h:22,
+                    from arch/loongarch/include/asm/bug.h:59,
+                    from include/linux/bug.h:5,
+                    from include/linux/fortify-string.h:5,
+                    from include/linux/string.h:254,
+                    from include/linux/uuid.h:11,
+                    from include/linux/mod_devicetable.h:14,
+                    from scripts/mod/devicetable-offsets.c:3:
+   include/linux/numa.h: In function 'phys_to_target_node':
+>> include/linux/numa.h:41:9: error: implicit declaration of function 'pr_info_once' [-Werror=implicit-function-declaration]
+      41 |         pr_info_once("Unknown target node for memory at 0x%llx, assuming node 0\n",
+         |         ^~~~~~~~~~~~
+   include/linux/cpumask.h: In function 'cpu_max_bits_warn':
+>> include/linux/cpumask.h:143:9: error: implicit declaration of function 'WARN_ON_ONCE' [-Werror=implicit-function-declaration]
+     143 |         WARN_ON_ONCE(cpu >= bits);
+         |         ^~~~~~~~~~~~
+   cc1: some warnings being treated as errors
+   make[2]: *** [scripts/Makefile.build:114: scripts/mod/devicetable-offsets.s] Error 1
+   make[2]: Target 'scripts/mod/' not remade because of errors.
+   make[1]: *** [Makefile:1286: prepare0] Error 2
+   make[1]: Target 'prepare' not remade because of errors.
+   make: *** [Makefile:226: __sub-make] Error 2
+   make: Target 'prepare' not remade because of errors.
 
 
-> And then we have an upper limit of (1 - Uextra - Uinact). I feel we
-> should be taking the minimum of these values to make sure that we
-> don't cross the upper bound. I think the equation should be:
->    "dq = -min{U/Umax, (1 - Uextra - Uinact)} dt"
-> 
-> But the current implementation is
->    "dq = -max{u/Umax, (1 - Uextra - Uinact)} dt"
->    Where u = dl_se->dl_bw.
+vim +/pr_info_once +41 include/linux/numa.h
 
-Well, here I think we should really use a "max{}", not a "min{}",
-otherwise we risk to subtract an amount of time which is too small (the
-"min{}" should be on the reclaimed bandwidth - so that we do not
-reclaim too much - but this expression is computing the runtime
-decrement - so I think this should be a "max{}").
+a927bd6ba952d1 Dan Williams 2020-11-21  29  
+a927bd6ba952d1 Dan Williams 2020-11-21  30  #ifndef memory_add_physaddr_to_nid
+a927bd6ba952d1 Dan Williams 2020-11-21  31  static inline int memory_add_physaddr_to_nid(u64 start)
+a927bd6ba952d1 Dan Williams 2020-11-21  32  {
+a927bd6ba952d1 Dan Williams 2020-11-21  33  	pr_info_once("Unknown online node for memory at 0x%llx, assuming node 0\n",
+a927bd6ba952d1 Dan Williams 2020-11-21  34  			start);
+a927bd6ba952d1 Dan Williams 2020-11-21  35  	return 0;
+a927bd6ba952d1 Dan Williams 2020-11-21  36  }
+a927bd6ba952d1 Dan Williams 2020-11-21  37  #endif
+a927bd6ba952d1 Dan Williams 2020-11-21  38  #ifndef phys_to_target_node
+a927bd6ba952d1 Dan Williams 2020-11-21  39  static inline int phys_to_target_node(u64 start)
+a927bd6ba952d1 Dan Williams 2020-11-21  40  {
+a927bd6ba952d1 Dan Williams 2020-11-21 @41  	pr_info_once("Unknown target node for memory at 0x%llx, assuming node 0\n",
+a927bd6ba952d1 Dan Williams 2020-11-21  42  			start);
+a927bd6ba952d1 Dan Williams 2020-11-21  43  	return 0;
+a927bd6ba952d1 Dan Williams 2020-11-21  44  }
+a927bd6ba952d1 Dan Williams 2020-11-21  45  #endif
+a927bd6ba952d1 Dan Williams 2020-11-21  46  #else /* !CONFIG_NUMA */
+b2ca916ce392a9 Dan Williams 2020-02-16  47  static inline int numa_map_to_online_node(int node)
+b2ca916ce392a9 Dan Williams 2020-02-16  48  {
+b2ca916ce392a9 Dan Williams 2020-02-16  49  	return NUMA_NO_NODE;
+b2ca916ce392a9 Dan Williams 2020-02-16  50  }
+a927bd6ba952d1 Dan Williams 2020-11-21  51  static inline int memory_add_physaddr_to_nid(u64 start)
+a927bd6ba952d1 Dan Williams 2020-11-21  52  {
+a927bd6ba952d1 Dan Williams 2020-11-21  53  	return 0;
+a927bd6ba952d1 Dan Williams 2020-11-21  54  }
+a927bd6ba952d1 Dan Williams 2020-11-21  55  static inline int phys_to_target_node(u64 start)
+a927bd6ba952d1 Dan Williams 2020-11-21  56  {
+a927bd6ba952d1 Dan Williams 2020-11-21  57  	return 0;
+a927bd6ba952d1 Dan Williams 2020-11-21  58  }
+b2ca916ce392a9 Dan Williams 2020-02-16  59  #endif
+b2ca916ce392a9 Dan Williams 2020-02-16  60  
 
-Or am I misunderstanding something?
-
-Did you try using u/Umax, but without changing the "max{}" into "min{}"?
-
-
-> After fixing the above equation, reclaim logic works well but when
-> only SCHED_FLAG_RECLAIM tasks are running. When we have a mix of both
-> normal deadline and SCHED_FLAG_RECLAIM, it breaks the reclaim logic.
-> As you pointed out, the second part of the fix is for that.
-
-OK
-
-
-> > If using div64_u64() does not introduce too much overhead, then I
-> > agree with the first change.  
-> In my testing, I did not see a change in the performance of the
-> grub_reclaim function. Both old and new implementations take 10 to
-> 20 nanoseconds on average. But my observation might not be accurate.
-
-Or maybe my assumption that div64 is bad was wrong :)
-Let's see what other people think about this.
-
-
-			Thanks,
-				Luca
-
-
-
-
-> With this change, it is difficult to avoid division as the denominator
-> is a variable and we would not be able to pre-calculate an inverse. We
-> could probably calculate inverse during {__add/__sub}_running_bw so as
-> to reduce the frequency of div64_u64. I shall try this for v2.
-> 
-> > The second change also looks good to me.
-> >
-> > I have no comments on the code, but there is one thing in the
-> > comments that looks misleading to me (or I am misunderstanding the
-> > code or the comments):
-> >  
-> 
-> > > + * We can calculate Umax_reclaim as:
-> > > + *   Umax_reclaim:   this_bw + Uinact + Ureclaim  
-> >
-> > I think this looks like a typo (summing this_bw to Uinact
-> > looks wrong). Should "this_bw" be Uextra?
-> >  
-> Thanks a lot for pointing it out. Yes you are right, I messed up in
-> the comments. It should be Uextra and I shall fix it in v2.
-> 
-> > > + *   dq = -(Ureclaim / Umax_reclaim) * dt
-> > > + *      = -(Ureclaim / (Ureclaim + Uextra + Uinact)) * dt  
-> >
-> > I think this should be the correct equation. BTW, since you are
-> > summing Uextra and Uinact, mabe you could just use "Umax -
-> > running_bw"? 
-> Makes sense, it will avoid an extra variable Uinact. I shall modify
-> this in v2.
-> 
-> Thanks,
-> Vineeth
-
+-- 
+0-DAY CI Kernel Test Service
+https://github.com/intel/lkp-tests
