@@ -2,111 +2,108 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 045686FEE08
-	for <lists+linux-doc@lfdr.de>; Thu, 11 May 2023 10:51:39 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id D7C596FEE95
+	for <lists+linux-doc@lfdr.de>; Thu, 11 May 2023 11:21:51 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S233866AbjEKIvh (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 11 May 2023 04:51:37 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:52688 "EHLO
+        id S235698AbjEKJVt (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 11 May 2023 05:21:49 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:45174 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S232114AbjEKIvf (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Thu, 11 May 2023 04:51:35 -0400
-Received: from szxga01-in.huawei.com (szxga01-in.huawei.com [45.249.212.187])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 6AA305FD0;
-        Thu, 11 May 2023 01:51:33 -0700 (PDT)
-Received: from dggpemm500016.china.huawei.com (unknown [172.30.72.53])
-        by szxga01-in.huawei.com (SkyGuard) with ESMTP id 4QH59y6TpwzpVCp;
-        Thu, 11 May 2023 16:47:18 +0800 (CST)
-Received: from huawei.com (10.67.174.205) by dggpemm500016.china.huawei.com
- (7.185.36.25) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.23; Thu, 11 May
- 2023 16:51:31 +0800
-From:   Chen Jiahao <chenjiahao16@huawei.com>
-To:     <linux-kernel@vger.kernel.org>, <linux-riscv@lists.infradead.org>,
-        <kexec@lists.infradead.org>, <linux-doc@vger.kernel.org>
-CC:     <paul.walmsley@sifive.com>, <palmer@dabbelt.com>,
-        <conor.dooley@microchip.com>, <guoren@kernel.org>,
-        <heiko@sntech.de>, <bjorn@rivosinc.com>, <alex@ghiti.fr>,
-        <akpm@linux-foundation.org>, <atishp@rivosinc.com>,
-        <bhe@redhat.com>, <thunder.leizhen@huawei.com>, <horms@kernel.org>
-Subject: [PATCH -next v5 2/2] docs: kdump: Update the crashkernel description for riscv
-Date:   Thu, 11 May 2023 16:51:39 +0800
-Message-ID: <20230511085139.1039088-3-chenjiahao16@huawei.com>
-X-Mailer: git-send-email 2.31.1
-In-Reply-To: <20230511085139.1039088-1-chenjiahao16@huawei.com>
-References: <20230511085139.1039088-1-chenjiahao16@huawei.com>
+        with ESMTP id S230200AbjEKJVr (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Thu, 11 May 2023 05:21:47 -0400
+Received: from wp530.webpack.hosteurope.de (wp530.webpack.hosteurope.de [80.237.130.52])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 3FF0C1A6;
+        Thu, 11 May 2023 02:21:46 -0700 (PDT)
+Received: from [2a02:8108:8980:2478:8cde:aa2c:f324:937e]; authenticated
+        by wp530.webpack.hosteurope.de running ExIM with esmtpsa (TLS1.3:ECDHE_RSA_AES_128_GCM_SHA256:128)
+        id 1px2UX-0002A5-NX; Thu, 11 May 2023 11:21:41 +0200
+Message-ID: <6c1f853b-b051-c390-267e-1ea1741e8537@leemhuis.info>
+Date:   Thu, 11 May 2023 11:21:36 +0200
 MIME-Version: 1.0
-Content-Transfer-Encoding: 7BIT
-Content-Type:   text/plain; charset=US-ASCII
-X-Originating-IP: [10.67.174.205]
-X-ClientProxiedBy: dggems701-chm.china.huawei.com (10.3.19.178) To
- dggpemm500016.china.huawei.com (7.185.36.25)
-X-CFilter-Loop: Reflected
-X-Spam-Status: No, score=-4.2 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_MED,
-        SPF_HELO_NONE,SPF_PASS,T_SCC_BODY_TEXT_LINE autolearn=ham
-        autolearn_force=no version=3.4.6
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.10.0
+To:     Kees Cook <keescook@chromium.org>, Jonathan Corbet <corbet@lwn.net>
+Cc:     Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+        Rong Tao <rtoax@foxmail.com>,
+        Lukas Bulwahn <lukas.bulwahn@gmail.com>,
+        Zhangfei Gao <zhangfei.gao@foxmail.com>,
+        linux-doc@vger.kernel.org, linux-hardening@vger.kernel.org,
+        linux-kernel@vger.kernel.org
+References: <20230510183423.never.877-kees@kernel.org>
+Content-Language: en-US, de-DE
+From:   Thorsten Leemhuis <linux@leemhuis.info>
+Subject: Re: [PATCH] docs: submitting-patches: Discuss interleaved replies
+In-Reply-To: <20230510183423.never.877-kees@kernel.org>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-bounce-key: webpack.hosteurope.de;linux@leemhuis.info;1683796906;6a8a3a56;
+X-HE-SMSGID: 1px2UX-0002A5-NX
+X-Spam-Status: No, score=-4.0 required=5.0 tests=BAYES_00,NICE_REPLY_A,
+        RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,SPF_PASS,T_SCC_BODY_TEXT_LINE
+        autolearn=ham autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Now "crashkernel=" parameter on riscv has been updated to support
-crashkernel=X,[high,low]. Through which we can reserve memory region
-above/within 32bit addressible DMA zone.
+On 10.05.23 20:34, Kees Cook wrote:
+> Top-posting has been strongly discouraged in Linux development, but this
+> was actually not written anywhere in the common documentation about
+> sending patches and replying to reviews. Add a section about trimming
+> and interleaved replies.
 
-Here update the parameter description accordingly.
+Thx for doing this.
 
-Signed-off-by: Chen Jiahao <chenjiahao16@huawei.com>
-Reviewed-by: Guo Ren <guoren@kernel.org>
-Reviewed-by: Simon Horman <horms@kernel.org>
-Reviewed-by: Zhen Lei <thunder.leizhen@huawei.com>
----
- Documentation/admin-guide/kernel-parameters.txt | 15 ++++++++-------
- 1 file changed, 8 insertions(+), 7 deletions(-)
+> [...]
+> ---
+>  Documentation/process/submitting-patches.rst | 23 ++++++++++++++++++++
+>  1 file changed, 23 insertions(+)
 
-diff --git a/Documentation/admin-guide/kernel-parameters.txt b/Documentation/admin-guide/kernel-parameters.txt
-index 9e5bab29685f..982da6bcaebd 100644
---- a/Documentation/admin-guide/kernel-parameters.txt
-+++ b/Documentation/admin-guide/kernel-parameters.txt
-@@ -866,7 +866,7 @@
- 			memory region [offset, offset + size] for that kernel
- 			image. If '@offset' is omitted, then a suitable offset
- 			is selected automatically.
--			[KNL, X86-64, ARM64] Select a region under 4G first, and
-+			[KNL, X86-64, ARM64, RISCV] Select a region under 4G first, and
- 			fall back to reserve region above 4G when '@offset'
- 			hasn't been specified.
- 			See Documentation/admin-guide/kdump/kdump.rst for further details.
-@@ -879,14 +879,14 @@
- 			Documentation/admin-guide/kdump/kdump.rst for an example.
- 
- 	crashkernel=size[KMG],high
--			[KNL, X86-64, ARM64] range could be above 4G. Allow kernel
--			to allocate physical memory region from top, so could
--			be above 4G if system have more than 4G ram installed.
--			Otherwise memory region will be allocated below 4G, if
--			available.
-+			[KNL, X86-64, ARM64, RISCV] range could be above 4G.
-+			Allow kernel to allocate physical memory region from top,
-+			so could be above 4G if system have more than 4G ram
-+			installed. Otherwise memory region will be allocated
-+			below 4G, if available.
- 			It will be ignored if crashkernel=X is specified.
- 	crashkernel=size[KMG],low
--			[KNL, X86-64, ARM64] range under 4G. When crashkernel=X,high
-+			[KNL, X86-64, ARM64, RISCV] range under 4G. When crashkernel=X,high
- 			is passed, kernel could allocate physical memory region
- 			above 4G, that cause second kernel crash on system
- 			that require some amount of low memory, e.g. swiotlb
-@@ -897,6 +897,7 @@
- 			size is	platform dependent.
- 			  --> x86: max(swiotlb_size_or_default() + 8MiB, 256MiB)
- 			  --> arm64: 128MiB
-+			  --> riscv: 128MiB
- 			This one lets the user specify own low range under 4G
- 			for second kernel instead.
- 			0: to disable low allocation.
--- 
-2.31.1
+For some reason we have duplicate code^w documentation for this, hence
+I'd say the same or a similar text should also be added to one of the
+filed in Documentation/process/[0-9].*rst ; from a quick
+Documentation/process/6.Followthrough.rst might be the best one.
 
+Maybe in fact the text should move there and submitting-patches.rst
+should have a much shorter version, as it's meant to be the terser of
+the two docs about this.
+
+> diff --git a/Documentation/process/submitting-patches.rst b/Documentation/process/submitting-patches.rst
+> index eac7167dce83..3e838da8822f 100644
+> --- a/Documentation/process/submitting-patches.rst
+> +++ b/Documentation/process/submitting-patches.rst
+> @@ -326,6 +326,29 @@ explaining difference aganst previous submission (see
+>  See Documentation/process/email-clients.rst for recommendations on email
+>  clients and mailing list etiquette.
+>  
+> +Use trimmed interleaved replies in email discussions
+> +----------------------------------------------------
+> +Top-posting is strongly discouraged in Linux kernel development
+> +discusions. Interleaved (or "inline") replies make conversations much
+
+s/discusions/discussions/
+
+> +easier to follow. For more details see:
+> +https://en.wikipedia.org/wiki/Posting_style#Interleaved_style
+> +
+> +As is frequently quoted on the mailing list:
+> +
+> +  A: http://en.wikipedia.org/wiki/Top_post
+> +  Q: Were do I find info about this thing called top-posting?
+> +  A: Because it messes up the order in which people normally read text.
+> +  Q: Why is top-posting such a bad thing?
+> +  A: Top-posting.
+> +  Q: What is the most annoying thing in e-mail?
+> +
+> +Similarly, please trim all unneeded quotations that aren't relevant
+> +to your reply. This makes replies easier to find, and saves time and
+
+Nitpicking, feel free to ignore: maybe "s/replies/responses/" or
+something like that, as at least my stupid brain accidentally thought of
+the email reply (as whole) when reading this for the first time.
+
+> +space. For more details see: http://daringfireball.net/2007/07/on_top
+> [...]
+
+Ciao, Thorsten
