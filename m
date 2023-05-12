@@ -2,45 +2,67 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 2E9AD70093B
-	for <lists+linux-doc@lfdr.de>; Fri, 12 May 2023 15:30:59 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id B668A700946
+	for <lists+linux-doc@lfdr.de>; Fri, 12 May 2023 15:38:11 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S241262AbjELNao (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Fri, 12 May 2023 09:30:44 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:48868 "EHLO
+        id S240581AbjELNiJ (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Fri, 12 May 2023 09:38:09 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:51982 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S241241AbjELNan (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Fri, 12 May 2023 09:30:43 -0400
-Received: from foss.arm.com (foss.arm.com [217.140.110.172])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTP id 2F5173C00;
-        Fri, 12 May 2023 06:30:42 -0700 (PDT)
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
-        by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 7D60CC14;
-        Fri, 12 May 2023 06:31:26 -0700 (PDT)
-Received: from FVFF77S0Q05N (unknown [10.57.58.179])
-        by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 4BA283F67D;
-        Fri, 12 May 2023 06:30:40 -0700 (PDT)
-Date:   Fri, 12 May 2023 14:30:37 +0100
-From:   Mark Rutland <mark.rutland@arm.com>
-To:     Peter Zijlstra <peterz@infradead.org>
-Cc:     "Paul E. McKenney" <paulmck@kernel.org>,
-        linux-kernel@vger.kernel.org, x86@kernel.org, akiyks@gmail.com,
-        linux-doc@vger.kernel.org, kernel-team@meta.com,
-        Will Deacon <will@kernel.org>,
-        Boqun Feng <boqun.feng@gmail.com>
-Subject: Re: [PATCH locking/atomic 18/19] locking/atomic: Refrain from
- generating duplicate fallback kernel-doc
-Message-ID: <ZF4/fV83euZoCZkp@FVFF77S0Q05N>
-References: <19135936-06d7-4705-8bc8-bb31c2a478ca@paulmck-laptop>
- <20230510181717.2200934-18-paulmck@kernel.org>
- <ZF0haDfyL3At3Ijw@FVFF77S0Q05N.cambridge.arm.com>
- <20230511193856.GA2296992@hirez.programming.kicks-ass.net>
+        with ESMTP id S241289AbjELNiI (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Fri, 12 May 2023 09:38:08 -0400
+Received: from mail-pf1-x435.google.com (mail-pf1-x435.google.com [IPv6:2607:f8b0:4864:20::435])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id DEB10132BB
+        for <linux-doc@vger.kernel.org>; Fri, 12 May 2023 06:38:06 -0700 (PDT)
+Received: by mail-pf1-x435.google.com with SMTP id d2e1a72fcca58-64a9335a8e7so5655931b3a.0
+        for <linux-doc@vger.kernel.org>; Fri, 12 May 2023 06:38:06 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=linaro.org; s=google; t=1683898686; x=1686490686;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:from:to:cc:subject:date:message-id:reply-to;
+        bh=XNxZTNO7D9ObZ8vOcMXVGazHEEVb2c+NF1aDFDFH7DM=;
+        b=YKPlD/uCoqEk3zob/jbIjUOVuiyBL4crRQbBjz/7JDAHYOVEpFZnmH6rHuxs4jbwoG
+         1qtYfpef/TcWtY4pTcsw5jL585W0toJQ3WtYlcEjQ62OeCfdNjeihwa5xBZbqeVSkMuu
+         Fgzr2t4VnhHBZzdhHAxZLbpTm+3qtlszLbzJKzo03e11wYkfWLp01Si+5EcHqQV/hml/
+         LuGuEEzzxkBXMGUxofWdK/exeWZuVEjvn/3kHdAwcFDO9E4qO6qoDuzR+ebYiUHVWLp0
+         yJB3U8GY1GA+CLexyHvS7qFKhlhT+uQhLmUUcx/VESw6bBnqBLdKPQv/Mq3hij6HGOXm
+         7RSQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20221208; t=1683898686; x=1686490686;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=XNxZTNO7D9ObZ8vOcMXVGazHEEVb2c+NF1aDFDFH7DM=;
+        b=lgsZb8G4o9mjfE4rMvk0SqprFtYjfKmxYQbiY7jirhUzkeomd1utYrlm0hRHF28KG0
+         j/GBpo7S+uNDVzQVUvMCPYeKh5fc2uuhjILSdC9XcIX+zEFDVYPMr93EUNzfEdrwej6M
+         4mqnvcsU9ZppMeujvI/PtZtTpWgPHg66oeUrs6YaC6MHNoOD9lePbvOep9REm8AJ7Juz
+         0uAI9j7Hp1lcrZALCjBGb2Xm7AHXiAAKf9acQn/7k2gqmWDalHpoYFZ205M7plnh0u/v
+         /MpomKUBXH9tHhsiZwSBV3nUdOR2SiHooRKLs3b2lnRUrzRGOtt6cc+E8QE1hiAT9h/G
+         20hw==
+X-Gm-Message-State: AC+VfDzBHdrn6DbckQ1Xaa2P8G8TF97SWk4VpBCXNAeJleXubO4Y2YoR
+        HOdoj5ik/ixmWXYhrgc3fQDuM7u/QzytB25VVI4X9A==
+X-Google-Smtp-Source: ACHHUZ5x5rNNHXImOFnMBQaOPcrvO1ueMVR3kvli10xvSUMTslM0qxwiHUW2eerJJ+LJVDEQ476Yb+lv9+Kc9ELSv78=
+X-Received: by 2002:a17:902:ea08:b0:1ad:e2b6:d2a0 with SMTP id
+ s8-20020a170902ea0800b001ade2b6d2a0mr2832259plg.11.1683898686185; Fri, 12 May
+ 2023 06:38:06 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20230511193856.GA2296992@hirez.programming.kicks-ass.net>
-X-Spam-Status: No, score=-4.2 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_MED,
-        SPF_HELO_NONE,SPF_NONE,T_SCC_BODY_TEXT_LINE,URIBL_BLOCKED
+References: <20230512023933.961-1-hejunhao3@huawei.com>
+In-Reply-To: <20230512023933.961-1-hejunhao3@huawei.com>
+From:   Mike Leach <mike.leach@linaro.org>
+Date:   Fri, 12 May 2023 14:37:54 +0100
+Message-ID: <CAJ9a7VgX+mf-J6jipQgJY7=F2vJzLhF9XcBxHAV7pCwiqPdbnw@mail.gmail.com>
+Subject: Re: [PATCH] coresight: etm4x: fix trctraceid sysfs always invisible
+To:     Junhao He <hejunhao3@huawei.com>
+Cc:     mathieu.poirier@linaro.org, suzuki.poulose@arm.com,
+        leo.yan@linaro.org, jonathan.cameron@huawei.com,
+        coresight@lists.linaro.org, linux-kernel@vger.kernel.org,
+        linux-arm-kernel@lists.infradead.org, linux-doc@vger.kernel.org,
+        linuxarm@huawei.com, yangyicong@huawei.com, shenyang39@huawei.com,
+        prime.zeng@hisilicon.com
+Content-Type: text/plain; charset="UTF-8"
+X-Spam-Status: No, score=-2.1 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_NONE,
+        SPF_HELO_NONE,SPF_PASS,T_SCC_BODY_TEXT_LINE,URIBL_BLOCKED
         autolearn=ham autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
@@ -48,100 +70,126 @@ Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Thu, May 11, 2023 at 09:38:56PM +0200, Peter Zijlstra wrote:
-> On Thu, May 11, 2023 at 06:10:00PM +0100, Mark Rutland wrote:
-> > Hi Paul
-> > 
-> > On Wed, May 10, 2023 at 11:17:16AM -0700, Paul E. McKenney wrote:
-> > > The gen-atomics.sh script currently generates 42 duplicate definitions:
-> > > 
-> > > 	arch_atomic64_add_negative
-> > > 	arch_atomic64_add_negative_acquire
-> > > 	arch_atomic64_add_negative_release
-> > 
-> > 	[...]
-> > 
-> > > These duplicates are presumably to handle different architectures
-> > > generating hand-coded definitions for different subsets of the atomic
-> > > operations.
-> > 
-> > Yup, for each FULL/ACQUIRE/RELEASE/RELAXED variant of each op, we allow the
-> > archtiecture to choose between:
-> > 
-> > * Providing the ordering variant directly
-> > * Providing the FULL ordering variant only
-> > * Providing the RELAXED ordering variant only
-> > * Providing an equivalent op that we can build from
-> > 
-> > > However, generating duplicate kernel-doc headers is undesirable.
-> > 
-> > Understood -- I hadn't understood that duplication was a problem when this was
-> > originally written.
-> > 
-> > The way this is currently done is largely an artifact of our ifdeffery (and the
-> > kerneldoc for fallbacks living inthe fallback templates), and I think we can
-> > fix both of those.
-> > 
-> > > Therefore, generate only the first kernel-doc definition in a group
-> > > of duplicates.  A comment indicates the name of the function and the
-> > > fallback script that generated it.
-> > 
-> > I'm not keen on this approach, especially with the chkdup.sh script -- it feels
-> > like we're working around an underlying structural issue.
-> > 
-> > I think that we can restructure the ifdeffery so that each ordering variant
-> > gets its own ifdeffery, and then we could place the kerneldoc immediately above
-> > that, e.g.
-> > 
-> > 	/**
-> > 	 * arch_atomic_inc_return_release()
-> > 	 *
-> > 	 * [ full kerneldoc block here ]
-> > 	 */
-> > 	#if defined(arch_atomic_inc_return_release)
-> > 	/* defined in arch code */
-> > 	#elif defined(arch_atomic_inc_return_relaxed)
-> > 	[ define in terms of arch_atomic_inc_return_relaxed ]
-> > 	#elif defined(arch_atomic_inc_return)
-> > 	[ define in terms of arch_atomic_inc_return ]
-> > 	#else
-> > 	[ define in terms of arch_atomic_fetch_inc_release ]
-> > 	#endif
-> > 
-> > ... with similar for the mandatory ops that each arch must provide, e.g.
-> > 
-> > 	/**
-> > 	 * arch_atomic_or()
-> > 	 *
-> > 	 * [ full kerneldoc block here ]
-> > 	 */
-> > 	/* arch_atomic_or() is mandatory -- architectures must define it! */
-> > 
-> > I had a go at that restructuring today, and while local build testing indicates
-> > I haven't got it quite right, I think it's possible:
-> > 
-> >   https://git.kernel.org/pub/scm/linux/kernel/git/mark/linux.git/log/?h=atomics/fallback-rework
-> > 
-> > Does that sound ok to you?
-> 
-> If the end result is simpler scripts, sure.
+Hi
 
-FWIW, regardless of the comments, I'd like to make this restructuring as it
-makes it easier to add some more fallback cases, and I find the generated
-ifdeffery a bit easier to follow when it's a chain of of-elif-elif-else-end
-rather than a few nested cases.
+Thanks for spotting this and supplying a patch.
 
-> I'm not at all keen to complicate the scripts for something daft like
-> kernel-doc. The last thing we need is documentation style weenies making
-> an unholy mess of things.
+Unfortunately, this solution moving the location of the file alters
+the published ABI
+(/Documents/ABI/testing/sysfs-bus-coresight-devices-etm4x), which is
+generally not permitted
 
-Sure. I agree we don't want to bend over backwards for it at the cost of
-maintainability, but I think it can be made pretty simple and self-contained,
-and hopefully we can prove that with a v2 or v3. ;)
+The file is associated with a register - TRCTRACIDR - so to fix this
+we need a solution to ensure the offset is correctly set in the
+attribute.
 
-If nothing else, handling this centrally means that we'll have *one* set of
-comments for this rather than a tonne of randomly managed copies in arch
-code, which seems like a win...
+The first few versions of the Trace ID set that you reference did do
+this correctly, but some code change after a review in a later version
+introduced the error which we did not then notice.
 
-Thanks,
-Mark.
+Based on that earlier work have sent a fix patch that restores the
+visibility of this register in the mgmt/ directory.
+
+Thanks and regards
+
+Mike
+
+On Fri, 12 May 2023 at 03:41, Junhao He <hejunhao3@huawei.com> wrote:
+>
+> The trctraceid sysfs interface is current in etm4x mgmt group.
+> Each attr in the mgmt group will call the function is_visible()
+> to check whether the register is implemented. However the trctraceid
+> does not bound to any register. So the trctraceid sysfs will
+> always be invisible.
+>
+> Move it to etmv4 group to fix that.
+>
+> Fixes: df4871204e5d ("coresight: etm4x: Update ETM4 driver to use Trace ID API")
+> Signed-off-by: Junhao He <hejunhao3@huawei.com>
+> ---
+>  .../coresight/coresight-etm4x-sysfs.c         | 42 +++++++++----------
+>  1 file changed, 21 insertions(+), 21 deletions(-)
+>
+> diff --git a/drivers/hwtracing/coresight/coresight-etm4x-sysfs.c b/drivers/hwtracing/coresight/coresight-etm4x-sysfs.c
+> index 5e62aa40ecd0..0ea71de0f56b 100644
+> --- a/drivers/hwtracing/coresight/coresight-etm4x-sysfs.c
+> +++ b/drivers/hwtracing/coresight/coresight-etm4x-sysfs.c
+> @@ -2335,6 +2335,26 @@ static ssize_t ts_source_show(struct device *dev,
+>  }
+>  static DEVICE_ATTR_RO(ts_source);
+>
+> +/*
+> + * Trace ID allocated dynamically on enable - but also allocate on read
+> + * in case sysfs or perf read before enable to ensure consistent metadata
+> + * information for trace decode
+> + */
+> +static ssize_t trctraceid_show(struct device *dev,
+> +                              struct device_attribute *attr,
+> +                              char *buf)
+> +{
+> +       int trace_id;
+> +       struct etmv4_drvdata *drvdata = dev_get_drvdata(dev->parent);
+> +
+> +       trace_id = etm4_read_alloc_trace_id(drvdata);
+> +       if (trace_id < 0)
+> +               return trace_id;
+> +
+> +       return sysfs_emit(buf, "0x%x\n", trace_id);
+> +}
+> +static DEVICE_ATTR_RO(trctraceid);
+> +
+>  static struct attribute *coresight_etmv4_attrs[] = {
+>         &dev_attr_nr_pe_cmp.attr,
+>         &dev_attr_nr_addr_cmp.attr,
+> @@ -2390,29 +2410,10 @@ static struct attribute *coresight_etmv4_attrs[] = {
+>         &dev_attr_vmid_masks.attr,
+>         &dev_attr_cpu.attr,
+>         &dev_attr_ts_source.attr,
+> +       &dev_attr_trctraceid.attr,
+>         NULL,
+>  };
+>
+> -/*
+> - * Trace ID allocated dynamically on enable - but also allocate on read
+> - * in case sysfs or perf read before enable to ensure consistent metadata
+> - * information for trace decode
+> - */
+> -static ssize_t trctraceid_show(struct device *dev,
+> -                              struct device_attribute *attr,
+> -                              char *buf)
+> -{
+> -       int trace_id;
+> -       struct etmv4_drvdata *drvdata = dev_get_drvdata(dev->parent);
+> -
+> -       trace_id = etm4_read_alloc_trace_id(drvdata);
+> -       if (trace_id < 0)
+> -               return trace_id;
+> -
+> -       return sysfs_emit(buf, "0x%x\n", trace_id);
+> -}
+> -static DEVICE_ATTR_RO(trctraceid);
+> -
+>  struct etmv4_reg {
+>         struct coresight_device *csdev;
+>         u32 offset;
+> @@ -2549,7 +2550,6 @@ static struct attribute *coresight_etmv4_mgmt_attrs[] = {
+>         coresight_etm4x_reg(trcpidr3, TRCPIDR3),
+>         coresight_etm4x_reg(trcoslsr, TRCOSLSR),
+>         coresight_etm4x_reg(trcconfig, TRCCONFIGR),
+> -       &dev_attr_trctraceid.attr,
+>         coresight_etm4x_reg(trcdevarch, TRCDEVARCH),
+>         NULL,
+>  };
+> --
+> 2.33.0
+>
+> _______________________________________________
+> CoreSight mailing list -- coresight@lists.linaro.org
+> To unsubscribe send an email to coresight-leave@lists.linaro.org
+
+
+
+-- 
+Mike Leach
+Principal Engineer, ARM Ltd.
+Manchester Design Centre. UK
