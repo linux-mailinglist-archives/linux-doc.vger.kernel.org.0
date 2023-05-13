@@ -2,64 +2,67 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 32C6B7013E1
-	for <lists+linux-doc@lfdr.de>; Sat, 13 May 2023 04:11:20 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 95F107015F0
+	for <lists+linux-doc@lfdr.de>; Sat, 13 May 2023 11:56:15 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S240664AbjEMCLS (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Fri, 12 May 2023 22:11:18 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:47358 "EHLO
+        id S237411AbjEMJ4N (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Sat, 13 May 2023 05:56:13 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:47520 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S229507AbjEMCLR (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Fri, 12 May 2023 22:11:17 -0400
-Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id B37821710;
-        Fri, 12 May 2023 19:11:16 -0700 (PDT)
-Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
-        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
-        (No client certificate requested)
-        by dfw.source.kernel.org (Postfix) with ESMTPS id 4412163D14;
-        Sat, 13 May 2023 02:11:16 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 931DDC433EF;
-        Sat, 13 May 2023 02:11:15 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-        s=k20201202; t=1683943875;
-        bh=aWUB3L/whFkUMJnZZsjmAKotLHLW07XcdL/SF0nCOLA=;
-        h=Date:From:To:Cc:Subject:Reply-To:References:In-Reply-To:From;
-        b=ogh/VBafyx+SkMxY/eAMpHlyKXQHac5hSAFheYicynUV/jOrECUFbb6nDivBpKOaW
-         u3+4k9WTsDSwVL0PnPO5EBBQkEWoDMEhKcqyoS9awpPdUM0jVeZfBsU1iNCgYsPOUz
-         JY2UdnPpj5jrk9lwoxraoQv24xRdOHTUkNGau5i9M50X8vU+HxtprzX5Pplf8tJnR5
-         iMnO81m1UM9/pSwDHLlo286Wn+NVqbazfLoq9SrofwIKlBHs1duOdbTtAKtc9EehXZ
-         K1ZGQgyo7tYFvfgr/nIsEI+r/NSjTAEDxy4IX9usiQZnVnBOEO/KrNk6GXRR2AeCf4
-         lo6QkcYGWAJlg==
-Received: by paulmck-ThinkPad-P17-Gen-1.home (Postfix, from userid 1000)
-        id 28658CE0CCE; Fri, 12 May 2023 19:11:15 -0700 (PDT)
-Date:   Fri, 12 May 2023 19:11:15 -0700
-From:   "Paul E. McKenney" <paulmck@kernel.org>
-To:     Mark Rutland <mark.rutland@arm.com>
-Cc:     linux-kernel@vger.kernel.org, x86@kernel.org, akiyks@gmail.com,
-        linux-doc@vger.kernel.org, kernel-team@meta.com,
-        Will Deacon <will@kernel.org>,
-        Peter Zijlstra <peterz@infradead.org>,
-        Boqun Feng <boqun.feng@gmail.com>
-Subject: Re: [PATCH locking/atomic 18/19] locking/atomic: Refrain from
- generating duplicate fallback kernel-doc
-Message-ID: <b3956719-d478-4dc6-95fd-ec0744acc662@paulmck-laptop>
-Reply-To: paulmck@kernel.org
-References: <19135936-06d7-4705-8bc8-bb31c2a478ca@paulmck-laptop>
- <20230510181717.2200934-18-paulmck@kernel.org>
- <ZF0haDfyL3At3Ijw@FVFF77S0Q05N.cambridge.arm.com>
- <2a8b310c-3145-462b-a4c4-a130939da862@paulmck-laptop>
- <ZF48uBYKczItubrU@FVFF77S0Q05N>
- <b5498819-c2d4-414d-ba01-5373e749dc52@paulmck-laptop>
- <ZF5xXuPsrZEgAEEE@FVFF77S0Q05N>
- <e767dcc6-ea63-4ed8-9a15-9e5bb133fafc@paulmck-laptop>
+        with ESMTP id S235372AbjEMJ4N (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Sat, 13 May 2023 05:56:13 -0400
+Received: from mx0b-0016f401.pphosted.com (mx0a-0016f401.pphosted.com [67.231.148.174])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id EB046CE;
+        Sat, 13 May 2023 02:56:11 -0700 (PDT)
+Received: from pps.filterd (m0045849.ppops.net [127.0.0.1])
+        by mx0a-0016f401.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id 34D9QTZv019979;
+        Sat, 13 May 2023 02:56:00 -0700
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=marvell.com; h=from : to : cc :
+ subject : date : message-id : mime-version : content-type; s=pfpt0220;
+ bh=JTfxwqkfeo+OZ4ivi5IkCaSG/A/YyNvJhN2rrPjPEW8=;
+ b=DHhcsjjwWrRiKDXq8mXFLKYhgXPcYIlcXqSSwgrUYzMBlifRpAIlOGq3JjWYmOeqRJLe
+ d/WvpcNTmrS5ns72tlyg/e3Bc34qom5e59HecbGMRHo/giZXHFeAL7Evkr6p8D+rP+aL
+ Z5OtwMB61I5zpgWG/kSeYEuDxc/rHkhTqOO73OXklKfQX8W1IynN/v+3sduIWiaysmV+
+ ujcuqi9c+J7yC+ujyT5aP5HO3Erq6z6xPodP8HiJQOqLC5c4PsyaPqk740BduYpOsFaQ
+ FcGJrRmifWhGyri9GV+GUu09MCE/zuLpqOvlAE7kLq1ZD5nsfHCEfd9hA7ic+EHICn7J Ig== 
+Received: from dc5-exch02.marvell.com ([199.233.59.182])
+        by mx0a-0016f401.pphosted.com (PPS) with ESMTPS id 3qj7wnr2ju-1
+        (version=TLSv1.2 cipher=ECDHE-RSA-AES256-SHA384 bits=256 verify=NOT);
+        Sat, 13 May 2023 02:56:00 -0700
+Received: from DC5-EXCH02.marvell.com (10.69.176.39) by DC5-EXCH02.marvell.com
+ (10.69.176.39) with Microsoft SMTP Server (TLS) id 15.0.1497.48; Sat, 13 May
+ 2023 02:55:59 -0700
+Received: from maili.marvell.com (10.69.176.80) by DC5-EXCH02.marvell.com
+ (10.69.176.39) with Microsoft SMTP Server id 15.0.1497.48 via Frontend
+ Transport; Sat, 13 May 2023 02:55:59 -0700
+Received: from hyd1soter3.marvell.com (unknown [10.29.37.12])
+        by maili.marvell.com (Postfix) with ESMTP id 653996267B9;
+        Sat, 13 May 2023 01:51:44 -0700 (PDT)
+From:   Hariprasad Kelam <hkelam@marvell.com>
+To:     <netdev@vger.kernel.org>, <linux-kernel@vger.kernel.org>
+CC:     <kuba@kernel.org>, <davem@davemloft.net>,
+        <willemdebruijn.kernel@gmail.com>, <andrew@lunn.ch>,
+        <sgoutham@marvell.com>, <lcherian@marvell.com>,
+        <gakula@marvell.com>, <jerinj@marvell.com>, <sbhatta@marvell.com>,
+        <hkelam@marvell.com>, <naveenm@marvell.com>, <edumazet@google.com>,
+        <pabeni@redhat.com>, <jhs@mojatatu.com>,
+        <xiyou.wangcong@gmail.com>, <jiri@resnulli.us>,
+        <maxtram95@gmail.com>, <corbet@lwn.net>,
+        <linux-doc@vger.kernel.org>
+Subject: [net-next Patch v10 0/8] octeontx2-pf: HTB offload support
+Date:   Sat, 13 May 2023 14:21:35 +0530
+Message-ID: <20230513085143.3289-1-hkelam@marvell.com>
+X-Mailer: git-send-email 2.17.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <e767dcc6-ea63-4ed8-9a15-9e5bb133fafc@paulmck-laptop>
-X-Spam-Status: No, score=-7.1 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_HI,
-        SPF_HELO_NONE,SPF_PASS,T_SCC_BODY_TEXT_LINE autolearn=ham
+Content-Type: text/plain
+X-Proofpoint-GUID: 7WhnyDlunQ-Zvf2FAeoejvQrEHsj_J1K
+X-Proofpoint-ORIG-GUID: 7WhnyDlunQ-Zvf2FAeoejvQrEHsj_J1K
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.254,Aquarius:18.0.942,Hydra:6.0.573,FMLib:17.11.170.22
+ definitions=2023-05-13_06,2023-05-05_01,2023-02-09_01
+X-Spam-Status: No, score=-2.8 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_LOW,SPF_HELO_NONE,
+        SPF_NONE,T_SCC_BODY_TEXT_LINE,URIBL_BLOCKED autolearn=ham
         autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
@@ -67,123 +70,117 @@ Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Fri, May 12, 2023 at 11:42:02AM -0700, Paul E. McKenney wrote:
-> On Fri, May 12, 2023 at 06:03:26PM +0100, Mark Rutland wrote:
-> > On Fri, May 12, 2023 at 09:01:27AM -0700, Paul E. McKenney wrote:
-> > > On Fri, May 12, 2023 at 02:18:48PM +0100, Mark Rutland wrote:
-> > > > On Thu, May 11, 2023 at 12:12:16PM -0700, Paul E. McKenney wrote:
-> > > > > On Thu, May 11, 2023 at 06:10:00PM +0100, Mark Rutland wrote:
-> > > > > > I think that we can restructure the ifdeffery so that each ordering variant
-> > > > > > gets its own ifdeffery, and then we could place the kerneldoc immediately above
-> > > > > > that, e.g.
-> > > > > > 
-> > > > > > 	/**
-> > > > > > 	 * arch_atomic_inc_return_release()
-> > > > > > 	 *
-> > > > > > 	 * [ full kerneldoc block here ]
-> > > > > > 	 */
-> > > > > > 	#if defined(arch_atomic_inc_return_release)
-> > > > > > 	/* defined in arch code */
-> > > > > > 	#elif defined(arch_atomic_inc_return_relaxed)
-> > > > > > 	[ define in terms of arch_atomic_inc_return_relaxed ]
-> > > > > > 	#elif defined(arch_atomic_inc_return)
-> > > > > > 	[ define in terms of arch_atomic_inc_return ]
-> > > > > > 	#else
-> > > > > > 	[ define in terms of arch_atomic_fetch_inc_release ]
-> > > > > > 	#endif
-> > > > > > 
-> > > > > > ... with similar for the mandatory ops that each arch must provide, e.g.
-> > > > > > 
-> > > > > > 	/**
-> > > > > > 	 * arch_atomic_or()
-> > > > > > 	 *
-> > > > > > 	 * [ full kerneldoc block here ]
-> > > > > > 	 */
-> > > > > > 	/* arch_atomic_or() is mandatory -- architectures must define it! */
-> > > > > > 
-> > > > > > I had a go at that restructuring today, and while local build testing indicates
-> > > > > > I haven't got it quite right, I think it's possible:
-> > > > > > 
-> > > > > >   https://git.kernel.org/pub/scm/linux/kernel/git/mark/linux.git/log/?h=atomics/fallback-rework
-> > > > > > 
-> > > > > > Does that sound ok to you?
-> > > > > 
-> > > > > At first glance, it appears that your "TODO" locations have the same
-> > > > > information that I was using, so it should not be hard for me to adapt the
-> > > > > current kernel-doc generation to your new scheme.  (Famous last words!)
-> > > > 
-> > > > Great!
-> > > > 
-> > > > > Plus having the kernel-doc generation all in one place does have some
-> > > > > serious attractions.
-> > > > 
-> > > > :)
-> > > > 
-> > > > > I will continue maintaining my current stack, but would of course be
-> > > > > happy to port it on top of your refactoring.  If it turns out that
-> > > > > the refactoring will take a long time, we can discuss what to do in
-> > > > > the meantime.  But here is hoping that the refactoring goes smoothly!
-> > > > > That would be easier all around.  ;-)
-> > > > 
-> > > > FWIW, I think that's working now; every cross-build I've tried works.
-> > > > 
-> > > > I've updated the branch at:
-> > > > 
-> > > >   https://git.kernel.org/pub/scm/linux/kernel/git/mark/linux.git/log/?h=atomics/fallback-rework
-> > > > 
-> > > > Tagged as:
-> > > > 
-> > > >   atomics-fallback-rework-20230512
-> > > 
-> > > Thank you very much!
-> > > 
-> > > I expect to send v2 of my original late today on the perhaps unlikely
-> > > off-chance that someone might be interested in reviewing the verbiage.
-> > 
-> > I'll be more than happy to, though I suspect "late today" is far too late today
-> > for me in UK time terms, so I probably won't look until Monday.
-> 
-> Works for me!
+octeontx2 silicon and CN10K transmit interface consists of five
+transmit levels starting from MDQ, TL4 to TL1. Once packets are
+submitted to MDQ, hardware picks all active MDQs using strict
+priority, and MDQs having the same priority level are chosen using
+round robin. Each packet will traverse MDQ, TL4 to TL1 levels.
+Each level contains an array of queues to support scheduling and
+shaping.
 
-Except that cleaning up the old version proved more obnoxious than
-creating a new one, adding more evidence behind the wisdom of your
-reworkin.  So no v2 of the previous series, for the moment, at least.
+As HTB supports classful queuing mechanism by supporting rate and
+ceil and allow the user to control the absolute bandwidth to
+particular classes of traffic the same can be achieved by
+configuring shapers and schedulers on different transmit levels.
 
-> > > More to the point, I have started porting my changes on top of your
-> > > stack.  My thought is to have a separate "."-included script that does
-> > > the kernel-doc work.
-> > 
-> > I was thinking that we'd have a gen_kerneldoc(...) shell function (probably in
-> > atomic-tbl.sh), but that's an easy thing to refactor after v2, so either way is
-> > fine for now!
-> 
-> Good point, will make that happen.  Easy to move the code, so might
-> as well be v1.  ;-)
-> 
-> > > I am also thinking in terms of putting the kernel-doc generation into
-> > > an "else" clause to the "is mandatory" check, and leaving the kernel-doc
-> > > for the mandatory functions in arch/x86/include/asm/atomic.h.
-> > 
-> > My thinking was that all the kernel-doc bits should live in the common header
-> > so that they're all easy to find when looking at the source code, and since if
-> > feels a bit weird to have to look into arch/x86/ to figure out the semantics of
-> > a function on !x86.
-> > 
-> > That said, if that's painful for some reason, please go with the easiest option
-> > for now and we can figure out how to attack it for v3. :)
-> 
-> I will give it a shot.
+This series of patches adds support for HTB offload,
 
-And here is a rough first cut:
+Patch1: Allow strict priority parameter in HTB offload mode.
 
-git://git.kernel.org/pub/scm/linux/kernel/git/paulmck/linux-rcu.git tags/fallback-rework-kernel-doc.2023.05.12a
+Patch2: Rename existing total tx queues for better readability
 
-Or via HTML:
+Patch3: defines APIs such that the driver can dynamically initialize/
+        deinitialize the send queues.
 
-https://git.kernel.org/pub/scm/linux/kernel/git/paulmck/linux-rcu.git/log/?h=fallback-rework-kernel-doc.2023.05.12a
+Patch4: Refactors transmit alloc/free calls as preparation for QOS
+        offload code.
 
-Thoughts?
+Patch5: moves rate limiting logic to common header which will be used
+        by qos offload code.
 
-In the meantime, enjoy the weekend!
+Patch6: Adds actual HTB offload support.
 
-							Thanx, Paul
+Patch7: exposes qos send queue stats over ethtool.
+
+Patch8: Add documentation about htb offload flow in driver
+
+Hariprasad Kelam (5):
+  octeontx2-pf: Rename tot_tx_queues to non_qos_queues
+  octeontx2-pf: Refactor schedular queue alloc/free calls
+  octeontx2-pf: Prepare for QOS offload
+  octeontx2-pf: ethtool expose qos stats
+  docs: octeontx2: Add Documentation for QOS
+
+Naveen Mamindlapalli (2):
+  sch_htb: Allow HTB priority parameter in offload mode
+  octeontx2-pf: Add support for HTB offload
+
+Subbaraya Sundeep (1):
+  octeontx2-pf: qos send queues management
+-----
+v1 -> v2 :
+          ensure other drivers won't affect by allowing 'prio'
+          a parameter in htb offload mode.
+
+v2 -> v3 :
+          1. discard patch supporting devlink to configure TL1 round
+             robin priority
+          2. replace NL_SET_ERR_MSG with NL_SET_ERR_MSG_MOD
+          3. use max3 instead of using max couple of times and use a better
+             naming convention in send queue management code.
+
+v3 -> v4:
+	  1. fix sparse warnings.
+	  2. release mutex lock in error conditions.
+
+v4 -> v5:
+	  1. fix pahole reported issues
+          2. add documentation for htb offload flow.
+
+v5 -> v6:
+	  1. fix synchronization issues w.r.t hlist accessing
+             from ndo_select_queue with rcu lock.
+          2. initialize qos related resources in device init.
+
+v6 -> v7:
+	  1. fix erros reported by sparse and clang
+
+v7 -> v8:
+	  1. cover letter header is malformed in last version.
+             correct the cover letter
+v8 -> v9:
+	  1. fix issues reported by smatch
+
+v9 -> v10:
+         1. split the htb offload patch
+         2. define helper APIs for txschq config
+         3. update commit description and documentation.
+
+
+ .../ethernet/marvell/octeontx2.rst            |   45 +
+ .../ethernet/marvell/octeontx2/af/common.h    |    2 +-
+ .../marvell/octeontx2/af/rvu_debugfs.c        |    5 +
+ .../ethernet/marvell/octeontx2/af/rvu_nix.c   |   45 +
+ .../ethernet/marvell/octeontx2/nic/Makefile   |    2 +-
+ .../marvell/octeontx2/nic/otx2_common.c       |  121 +-
+ .../marvell/octeontx2/nic/otx2_common.h       |   82 +-
+ .../marvell/octeontx2/nic/otx2_ethtool.c      |   29 +-
+ .../ethernet/marvell/octeontx2/nic/otx2_pf.c  |  114 +-
+ .../ethernet/marvell/octeontx2/nic/otx2_reg.h |   13 +
+ .../ethernet/marvell/octeontx2/nic/otx2_tc.c  |   29 +-
+ .../marvell/octeontx2/nic/otx2_txrx.c         |   24 +-
+ .../marvell/octeontx2/nic/otx2_txrx.h         |    3 +-
+ .../ethernet/marvell/octeontx2/nic/otx2_vf.c  |   14 +-
+ .../net/ethernet/marvell/octeontx2/nic/qos.c  | 1363 +++++++++++++++++
+ .../net/ethernet/marvell/octeontx2/nic/qos.h  |   69 +
+ .../ethernet/marvell/octeontx2/nic/qos_sq.c   |  296 ++++
+ .../net/ethernet/mellanox/mlx5/core/en/qos.c  |    7 +-
+ include/net/pkt_cls.h                         |    1 +
+ net/sched/sch_htb.c                           |    7 +-
+ 20 files changed, 2144 insertions(+), 127 deletions(-)
+ create mode 100644 drivers/net/ethernet/marvell/octeontx2/nic/qos.c
+ create mode 100644 drivers/net/ethernet/marvell/octeontx2/nic/qos.h
+ create mode 100644 drivers/net/ethernet/marvell/octeontx2/nic/qos_sq.c
+
+--
+2.17.1
