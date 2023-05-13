@@ -2,47 +2,60 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id C812C70159C
-	for <lists+linux-doc@lfdr.de>; Sat, 13 May 2023 11:24:25 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 36A7170164E
+	for <lists+linux-doc@lfdr.de>; Sat, 13 May 2023 13:09:21 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S234013AbjEMJYY (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Sat, 13 May 2023 05:24:24 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:58996 "EHLO
+        id S237370AbjEMLJS (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Sat, 13 May 2023 07:09:18 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:47152 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S231446AbjEMJYX (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Sat, 13 May 2023 05:24:23 -0400
-Received: from wp530.webpack.hosteurope.de (wp530.webpack.hosteurope.de [80.237.130.52])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 98B2540FB;
-        Sat, 13 May 2023 02:24:19 -0700 (PDT)
-Received: from [2a02:8108:8980:2478:8cde:aa2c:f324:937e]; authenticated
-        by wp530.webpack.hosteurope.de running ExIM with esmtpsa (TLS1.3:ECDHE_RSA_AES_128_GCM_SHA256:128)
-        id 1pxlTx-0005lU-9d; Sat, 13 May 2023 11:24:05 +0200
-Message-ID: <10dfcc33-b3f9-57f7-1693-dd850f3adc6e@leemhuis.info>
-Date:   Sat, 13 May 2023 11:24:04 +0200
+        with ESMTP id S233804AbjEMLJR (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Sat, 13 May 2023 07:09:17 -0400
+Received: from dfw.source.kernel.org (dfw.source.kernel.org [IPv6:2604:1380:4641:c500::1])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 06F3440E3;
+        Sat, 13 May 2023 04:09:16 -0700 (PDT)
+Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
+        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+        (No client certificate requested)
+        by dfw.source.kernel.org (Postfix) with ESMTPS id 87CD760B73;
+        Sat, 13 May 2023 11:09:15 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id E93D2C433D2;
+        Sat, 13 May 2023 11:09:13 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=linuxfoundation.org;
+        s=korg; t=1683976154;
+        bh=uXFoiR1SWFtZOtGgV5o4WxStrNeNIyIJxeYxRx+a7hQ=;
+        h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+        b=t5xMjIXx3kXmI5AGZ+OV2hLCDwdg5B4Io7eigd84X5cC9TCmNGEWkD3eFWtpwqfsN
+         IHavtVhWBzvBtYoyMy8qruC3SpuVVoE0fQfF6XwMuzTWqNzIjRYD2Numx1NTD5MZTQ
+         PubhhDESdtazxWt29zBxdGxLLKnhefo0yeOXkqkw=
+Date:   Sat, 13 May 2023 20:04:40 +0900
+From:   Greg KH <gregkh@linuxfoundation.org>
+To:     James Clark <james.clark@arm.com>
+Cc:     linux-kernel@vger.kernel.org, linux@roeck-us.net,
+        michal.simek@amd.com, Jonathan.Cameron@huawei.com,
+        Jonathan Corbet <corbet@lwn.net>,
+        Jean Delvare <jdelvare@suse.com>,
+        Anand Ashok Dumbre <anand.ashok.dumbre@xilinx.com>,
+        Jonathan Cameron <jic23@kernel.org>,
+        Lars-Peter Clausen <lars@metafoo.de>,
+        Andy Gross <agross@kernel.org>,
+        Bjorn Andersson <andersson@kernel.org>,
+        Konrad Dybcio <konrad.dybcio@linaro.org>,
+        Jiri Slaby <jirislaby@kernel.org>, linux-doc@vger.kernel.org,
+        linux-hwmon@vger.kernel.org, linux-iio@vger.kernel.org,
+        linux-arm-kernel@lists.infradead.org,
+        linux-arm-msm@vger.kernel.org, linux-serial@vger.kernel.org
+Subject: Re: [PATCH v4 1/4] devres: Provide krealloc_array
+Message-ID: <2023051340-sinuous-darkroom-2497@gregkh>
+References: <20230509094942.396150-1-james.clark@arm.com>
+ <20230509094942.396150-2-james.clark@arm.com>
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.10.0
-Content-Language: en-US, de-DE
-To:     Kees Cook <keescook@chromium.org>
-Cc:     Jonathan Corbet <corbet@lwn.net>,
-        Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
-        Rong Tao <rtoax@foxmail.com>,
-        Lukas Bulwahn <lukas.bulwahn@gmail.com>,
-        Zhangfei Gao <zhangfei.gao@foxmail.com>,
-        linux-doc@vger.kernel.org, linux-hardening@vger.kernel.org,
-        linux-kernel@vger.kernel.org
-References: <20230510183423.never.877-kees@kernel.org>
- <6c1f853b-b051-c390-267e-1ea1741e8537@leemhuis.info>
- <202305111135.D65457C24@keescook>
-From:   Thorsten Leemhuis <linux@leemhuis.info>
-Subject: Re: [PATCH] docs: submitting-patches: Discuss interleaved replies
-In-Reply-To: <202305111135.D65457C24@keescook>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-bounce-key: webpack.hosteurope.de;linux@leemhuis.info;1683969859;5f7505f3;
-X-HE-SMSGID: 1pxlTx-0005lU-9d
-X-Spam-Status: No, score=-2.8 required=5.0 tests=BAYES_00,NICE_REPLY_A,
-        RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,SPF_PASS,T_SCC_BODY_TEXT_LINE
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20230509094942.396150-2-james.clark@arm.com>
+X-Spam-Status: No, score=-4.4 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_MED,
+        SPF_HELO_NONE,SPF_PASS,T_SCC_BODY_TEXT_LINE,URIBL_BLOCKED
         autolearn=ham autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
@@ -50,43 +63,55 @@ Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On 11.05.23 20:37, Kees Cook wrote:
-> On Thu, May 11, 2023 at 11:21:36AM +0200, Thorsten Leemhuis wrote:
->> On 10.05.23 20:34, Kees Cook wrote:
->>> Top-posting has been strongly discouraged in Linux development, but this
->>> was actually not written anywhere in the common documentation about
->>> sending patches and replying to reviews. Add a section about trimming
->>> and interleaved replies.
->>
->> Thx for doing this.
->>
->>> [...]
->>> ---
->>>  Documentation/process/submitting-patches.rst | 23 ++++++++++++++++++++
->>>  1 file changed, 23 insertions(+)
->>
->> For some reason we have duplicate code^w documentation for this, hence
->> I'd say the same or a similar text should also be added to one of the
->> filed in Documentation/process/[0-9].*rst ; from a quick
->> Documentation/process/6.Followthrough.rst might be the best one.
->>
->> Maybe in fact the text should move there and submitting-patches.rst
->> should have a much shorter version, as it's meant to be the terser of
->> the two docs about this.
+On Tue, May 09, 2023 at 10:49:38AM +0100, James Clark wrote:
+> There is no krealloc_array equivalent in devres. Users would have to
+> do their own multiplication overflow check so provide one.
 > 
-> Hm, The place where it is mentioned is even shorter,
+> Reviewed-by: Jonathan Cameron <Jonathan.Cameron@huawei.com>
+> Signed-off-by: James Clark <james.clark@arm.com>
+> ---
+>  Documentation/driver-api/driver-model/devres.rst |  1 +
+>  include/linux/device.h                           | 11 +++++++++++
+>  2 files changed, 12 insertions(+)
+> 
+> diff --git a/Documentation/driver-api/driver-model/devres.rst b/Documentation/driver-api/driver-model/devres.rst
+> index 4249eb4239e0..8be086b3f829 100644
+> --- a/Documentation/driver-api/driver-model/devres.rst
+> +++ b/Documentation/driver-api/driver-model/devres.rst
+> @@ -364,6 +364,7 @@ MEM
+>    devm_kmalloc_array()
+>    devm_kmemdup()
+>    devm_krealloc()
+> +  devm_krealloc_array()
+>    devm_kstrdup()
+>    devm_kstrdup_const()
+>    devm_kvasprintf()
+> diff --git a/include/linux/device.h b/include/linux/device.h
+> index 472dd24d4823..58f4f5948edb 100644
+> --- a/include/linux/device.h
+> +++ b/include/linux/device.h
+> @@ -223,6 +223,17 @@ static inline void *devm_kcalloc(struct device *dev,
+>  {
+>  	return devm_kmalloc_array(dev, n, size, flags | __GFP_ZERO);
+>  }
+> +static inline __realloc_size(3, 4) void * __must_check
 
-Ohh, it is mentioned there already? I briefly looked, but had missed it.
-Sorry. :-/
+Shouldn't you have a blank line before this one?
 
-> so I kind of like
-> it in submittingpatches. But, I'm open to whatever seems best.
+> +devm_krealloc_array(struct device *dev, void *p, size_t new_n, size_t new_size, gfp_t flags)
+> +{
+> +	size_t bytes;
+> +
+> +	if (unlikely(check_mul_overflow(new_n, new_size, &bytes)))
+> +		return NULL;
+> +
+> +	return devm_krealloc(dev, p, bytes, flags);
+> +}
 
-Guess that is Jonathan's call to make. Your v2 patch to me looks a bit
-like adding quite a bit of new and slow code to the fast path while
-adjusting faster code in the slow path.
+I dislike how we have to keep copying the "real" functions (i.e.
+krealloc_array) into something like this, but I can't think of a better
+way to do it.
 
-But the relation and interaction between those two texts in a bit messy
-already, so maybe it doesn't matter that much.
+thanks,
 
-Ciao, Thorsten
+greg k-h
