@@ -2,78 +2,86 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 5EFC07021EE
-	for <lists+linux-doc@lfdr.de>; Mon, 15 May 2023 04:57:43 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id CAC1870237D
+	for <lists+linux-doc@lfdr.de>; Mon, 15 May 2023 07:49:44 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S238459AbjEOC5i (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Sun, 14 May 2023 22:57:38 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:52280 "EHLO
+        id S229635AbjEOFtm (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 15 May 2023 01:49:42 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:56218 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S237973AbjEOC5f (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Sun, 14 May 2023 22:57:35 -0400
-Received: from mail-qv1-xf2d.google.com (mail-qv1-xf2d.google.com [IPv6:2607:f8b0:4864:20::f2d])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 627BA19A8
-        for <linux-doc@vger.kernel.org>; Sun, 14 May 2023 19:57:29 -0700 (PDT)
-Received: by mail-qv1-xf2d.google.com with SMTP id 6a1803df08f44-61b58779b93so113216446d6.0
-        for <linux-doc@vger.kernel.org>; Sun, 14 May 2023 19:57:29 -0700 (PDT)
+        with ESMTP id S234751AbjEOFtl (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Mon, 15 May 2023 01:49:41 -0400
+Received: from mail-pl1-x635.google.com (mail-pl1-x635.google.com [IPv6:2607:f8b0:4864:20::635])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id B5B531FD9
+        for <linux-doc@vger.kernel.org>; Sun, 14 May 2023 22:49:38 -0700 (PDT)
+Received: by mail-pl1-x635.google.com with SMTP id d9443c01a7336-1aaf706768cso93828125ad.0
+        for <linux-doc@vger.kernel.org>; Sun, 14 May 2023 22:49:38 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=bitbyteword.org; s=google; t=1684119448; x=1686711448;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=2oFCVXjeQ2GIJ5xOGeSz2EMiD7vB66GrLgt9ZF9wK0s=;
-        b=qhLbjW0ZVawuhRY+HIQn9xeqEM+Nwhz5f83xoGSVPgCdqqwYib1B9HscXalx/PHVqB
-         bc+wFoKd/2aIPiJOZ57PPjD43ps7ah8rHeXMhuUoBSPf/HNwiD4AmR/ryYX1GhOTl7Un
-         /awsoDp1jZbMbTa8vksU90Usb3E8VYj7H0SLZnTJ5Gsoj6njR3wmLKo+RNFjhf/SBqmx
-         nez7v5D9IBcrLAaTiXIrIY8l23c2g0l2SjiW1YcUvA/o2BX/G5yMYqeqIFvcA9zNmTBu
-         ez0M/6ZBRAerRK1uMdhYdPiVDHY/8Y/3+1JkPhucWTGeILptA7lK21iPOsjg40/V7/7r
-         lcNg==
+        d=ventanamicro.com; s=google; t=1684129778; x=1686721778;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=TZ99alEe0A23tymHcdv/vfT8nEQiGh2D6cQUBbX+NYU=;
+        b=YC+K75o6oTdqYCv/UpwXe9gABJK307bP4yAL6WMj+c0OGsLbwkOJ/0OoSCS/Hfnwsu
+         GE65E5xvfgH6srsEB4tPrXUaOlutSgYPtnJ9OnZa6Sfly4dUMHmFpX5971LIfNSqGIdP
+         Nv2gRNBDawMmNUWqOTu0rbCvluknVfp9eY5z9QAJU2PYdGv+chHD3N6e9l7aDmV5kzWK
+         lSJdnZNxeGgWdSd74Lab4pJ/OB2qUQOL81v5QcFRSIwoBmezMntHOYaPBw740unBgypm
+         Fdcxp34uF51fGVRKTaWQuNCk7Asr2mpnyQ189by4GCzwMaNY9+Mm6vBizXEnrYzhR8lK
+         UKUw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1684119448; x=1686711448;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=2oFCVXjeQ2GIJ5xOGeSz2EMiD7vB66GrLgt9ZF9wK0s=;
-        b=Nh2Jchg+/ApHwgofjacJTCMJEczpnFwMTgNUrxgo7fqA1vMO7Kk4FJonKmgxrEWVQx
-         el7QsSYV3SCPyJ8dp/iG5W9sHaxfV4TYMb7TArxOmraXGGfYS73daCjXg0k5eDyCr2it
-         m/jHRDkStaMsQXw078iCNE2s0XJtGkApdZTQFsohTGVFTohiRfQCwrkz90mpUsrqjES3
-         /6IKh/f3qhb1U/O0+ZNdH+6F1fNpRLZLrn2LjBBNV6tIHoIrNCZAeRbzECFVjQhhqivr
-         X377e4/PZY91853QXENW9TeJLKupdwc3zwSA2PLPFZLtjcXvf9GafYCKULewt8px2RY5
-         9FBA==
-X-Gm-Message-State: AC+VfDxqtrOouoeRHHQXGNiNdLkUBKJ5YMach70/M5eHzBrtO9WhjsVm
-        aFTpeiwtd6UqDreyQ8dQ9bfz7w==
-X-Google-Smtp-Source: ACHHUZ4Q9Tdhe54rgSkAw/RlkBa+2YFISrSNKj8WaG7r0IV3OOMS2EDrDsXpMppUmAcbKVEQRq5Ngw==
-X-Received: by 2002:a05:6214:e4c:b0:621:e17a:a676 with SMTP id o12-20020a0562140e4c00b00621e17aa676mr15883547qvc.17.1684119448427;
-        Sun, 14 May 2023 19:57:28 -0700 (PDT)
-Received: from vinz16.lan (c-73-143-21-186.hsd1.ma.comcast.net. [73.143.21.186])
-        by smtp.gmail.com with ESMTPSA id c3-20020a05620a134300b007339c5114a9sm2308994qkl.103.2023.05.14.19.57.27
+        d=1e100.net; s=20221208; t=1684129778; x=1686721778;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=TZ99alEe0A23tymHcdv/vfT8nEQiGh2D6cQUBbX+NYU=;
+        b=RlZX3b2fPX0CGSJWnDERy7RWyrV6W0nTBY7x1pYdgwbj1u4nw2/aHiJHge08Na4RcC
+         qJzAHGcsxo3e6zAZpZRuFQtytshuxDTr3QEeBiCPDb6LtXFyqrLcCydB9OqybRLFMBzn
+         yGAKY25PJ2DTiZm87S3DwHWKJbzZSkd4C4XBAg0MZJDQnleG+NN2Iv4wYNEkcNOSt8Si
+         5aqXyH/N0gRwCAEzZhMKfZct9neV0PT0AK1sNqVHmvp/zXKTC7aWqegWBVb21WT98RHF
+         uIHdNvwDAszQq4Q5j2PHEW66jOyWGoCn8uG1+LGqxGRZJde3hXw8c6fSADtwAWwsh/T2
+         Hytw==
+X-Gm-Message-State: AC+VfDxYqoM5JDeHpG2N1POrT7a01vPpGzDQzhmvh/Lh1Eax/XayUtxl
+        h7Abah+7nwgRVi42UEvfRFN+z5dSTsZtOT9c36Q=
+X-Google-Smtp-Source: ACHHUZ66EM/Ffo2wiDqrucRe8wNpu1TreTFryx+X27BDltpTe5DxTsemz+afopAg9iZvWFHQw1Mb4A==
+X-Received: by 2002:a17:902:e9d5:b0:1ac:b52e:f3e5 with SMTP id 21-20020a170902e9d500b001acb52ef3e5mr18553911plk.43.1684129777671;
+        Sun, 14 May 2023 22:49:37 -0700 (PDT)
+Received: from localhost.localdomain ([106.51.191.118])
+        by smtp.gmail.com with ESMTPSA id f10-20020a17090274ca00b001ab28f620d0sm12423277plt.290.2023.05.14.22.49.31
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 14 May 2023 19:57:28 -0700 (PDT)
-From:   Vineeth Pillai <vineeth@bitbyteword.org>
-To:     luca.abeni@santannapisa.it, Juri Lelli <juri.lelli@redhat.com>,
-        Daniel Bristot de Oliveira <bristot@redhat.com>,
-        Peter Zijlstra <peterz@infradead.org>,
-        Ingo Molnar <mingo@redhat.com>,
-        Vincent Guittot <vincent.guittot@linaro.org>,
-        Steven Rostedt <rostedt@goodmis.org>,
-        Joel Fernandes <joel@joelfernandes.org>,
-        Dietmar Eggemann <dietmar.eggemann@arm.com>,
-        Ben Segall <bsegall@google.com>, Mel Gorman <mgorman@suse.de>,
-        Valentin Schneider <vschneid@redhat.com>
-Cc:     Vineeth Pillai <vineeth@bitbyteword.org>,
-        Jonathan Corbet <corbet@lwn.net>, linux-kernel@vger.kernel.org,
-        linux-doc@vger.kernel.org
-Subject: [PATCH v3 5/5] Documentation: sched/deadline: Update GRUB description
-Date:   Sun, 14 May 2023 22:57:16 -0400
-Message-Id: <20230515025716.316888-6-vineeth@bitbyteword.org>
-X-Mailer: git-send-email 2.40.1
-In-Reply-To: <20230515025716.316888-1-vineeth@bitbyteword.org>
-References: <20230515025716.316888-1-vineeth@bitbyteword.org>
+        Sun, 14 May 2023 22:49:37 -0700 (PDT)
+From:   Sunil V L <sunilvl@ventanamicro.com>
+To:     linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
+        linux-riscv@lists.infradead.org, linux-acpi@vger.kernel.org,
+        linux-crypto@vger.kernel.org, platform-driver-x86@vger.kernel.org,
+        llvm@lists.linux.dev
+Cc:     Jonathan Corbet <corbet@lwn.net>,
+        Paul Walmsley <paul.walmsley@sifive.com>,
+        Palmer Dabbelt <palmer@dabbelt.com>,
+        Albert Ou <aou@eecs.berkeley.edu>,
+        "Rafael J . Wysocki" <rafael@kernel.org>,
+        Len Brown <lenb@kernel.org>,
+        Sunil V L <sunilvl@ventanamicro.com>,
+        Daniel Lezcano <daniel.lezcano@linaro.org>,
+        Thomas Gleixner <tglx@linutronix.de>,
+        Weili Qian <qianweili@huawei.com>,
+        Zhou Wang <wangzhou1@hisilicon.com>,
+        Herbert Xu <herbert@gondor.apana.org.au>,
+        "David S . Miller" <davem@davemloft.net>,
+        Marc Zyngier <maz@kernel.org>,
+        Maximilian Luz <luzmaximilian@gmail.com>,
+        Hans de Goede <hdegoede@redhat.com>,
+        Mark Gross <markgross@kernel.org>,
+        Nathan Chancellor <nathan@kernel.org>,
+        Nick Desaulniers <ndesaulniers@google.com>,
+        Tom Rix <trix@redhat.com>
+Subject: [PATCH V6 00/21] Add basic ACPI support for RISC-V
+Date:   Mon, 15 May 2023 11:19:07 +0530
+Message-Id: <20230515054928.2079268-1-sunilvl@ventanamicro.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-Spam-Status: No, score=-2.1 required=5.0 tests=BAYES_00,DKIM_SIGNED,
         DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_NONE,
-        SPF_HELO_NONE,SPF_PASS,T_SCC_BODY_TEXT_LINE autolearn=ham
+        SPF_HELO_NONE,SPF_PASS,T_SCC_BODY_TEXT_LINE autolearn=unavailable
         autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
@@ -81,93 +89,144 @@ Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Update the details of GRUB to reflect the updated logic.
+This patch series enables the basic ACPI infrastructure for RISC-V.
+Supporting external interrupt controllers is in progress and hence it is
+tested using poll based HVC SBI console and RAM disk.
 
-Signed-off-by: Vineeth Pillai (Google) <vineeth@bitbyteword.org>
----
- Documentation/scheduler/sched-deadline.rst | 28 ++++++++++++++--------
- 1 file changed, 18 insertions(+), 10 deletions(-)
+The first patch in this series is one of the patch from Jisheng's
+series [1] which is not merged yet. This patch is required to support
+ACPI since efi_init() which gets called before sbi_init() can enable
+static branches and hits a panic.
 
-diff --git a/Documentation/scheduler/sched-deadline.rst b/Documentation/scheduler/sched-deadline.rst
-index 9d9be52f221a..b45c9dde6671 100644
---- a/Documentation/scheduler/sched-deadline.rst
-+++ b/Documentation/scheduler/sched-deadline.rst
-@@ -195,11 +195,15 @@ Deadline Task Scheduling
-       its utilization is added to the active utilization of the runqueue where
-       it has been enqueued.
- 
-- For each runqueue, the algorithm GRUB keeps track of two different bandwidths:
-+ For each runqueue, the algorithm GRUB keeps track of three different bandwidths:
- 
-   - Active bandwidth (running_bw): this is the sum of the bandwidths of all
-     tasks in active state (i.e., ActiveContending or ActiveNonContending);
- 
-+  - Active bandwidth of SCHED_FLAG_RECLAIM tasks(reclaim_bw): this is the sum of
-+    bandwidth of all tasks in active state which participates in GRUB. This is a
-+    subset of running_bw and is needed for reclaimable bandwidth calculation.
-+
-   - Total bandwidth (this_bw): this is the sum of all tasks "belonging" to the
-     runqueue, including the tasks in Inactive state.
- 
-@@ -208,21 +212,25 @@ Deadline Task Scheduling
-  It does so by decrementing the runtime of the executing task Ti at a pace equal
-  to
- 
--           dq = -max{ Ui / Umax, (1 - Uinact - Uextra) } dt
-+           dq = -(max{Ui, (Umax_reclaim - Uinact - Uextra)} / Umax_reclaim) dt
- 
-  where:
--
-   - Ui is the bandwidth of task Ti;
-   - Umax is the maximum reclaimable utilization (subjected to RT throttling
-     limits);
-+  - Umax_reclaim is the maximum allowable bandwidth for all reclaimable tasks
-+    in the runqueue. If there are only SCHED_FLAG_RECLAIM tasks, then
-+    Umax_reclaim = Umax;
-+    Otherwise Umax_reclaim = (Umax - running_bw + reclaim_bw);
-   - Uinact is the (per runqueue) inactive utilization, computed as
--    (this_bq - running_bw);
-+    (this_bw - running_bw);
-   - Uextra is the (per runqueue) extra reclaimable utilization
--    (subjected to RT throttling limits).
-+    (subjected to RT throttling limits);
- 
- 
-- Let's now see a trivial example of two deadline tasks with runtime equal
-- to 4 and period equal to 8 (i.e., bandwidth equal to 0.5)::
-+ Let's now see a trivial example of two SCHED_FLAG_RECLAIM tasks with runtime
-+ equal to 4 and period equal to 8 (i.e., bandwidth equal to 0.5). Tasks are
-+ allowed to use the whole cpu(Umax = Umax_reclaim = 1)::
- 
-          A            Task T1
-          |
-@@ -244,7 +252,7 @@ Deadline Task Scheduling
-          0   1   2   3   4   5   6   7   8
- 
- 
--         A            running_bw
-+         A            reclaim_bw
-          |
-        1 -----------------               ------
-          |               |               |
-@@ -272,7 +280,7 @@ Deadline Task Scheduling
- 
-     This is the 0-lag time for Task T1. Since it didn't woken up in the
-     meantime, it enters the Inactive state. Its bandwidth is removed from
--    running_bw.
-+    running_bw and reclaim_bw.
-     Task T2 continues its execution. However, its runtime is now decreased as
-     dq = - 0.5 dt because Uinact = 0.5.
-     Task T2 therefore reclaims the bandwidth unused by Task T1.
-@@ -280,7 +288,7 @@ Deadline Task Scheduling
-   - Time t = 8:
- 
-     Task T1 wakes up. It enters the ActiveContending state again, and the
--    running_bw is incremented.
-+    running_bw and reclaim_bw are incremented.
- 
- 
- 2.3 Energy-aware scheduling
+Below are two ECRs approved by ASWG.
+RINTC - https://drive.google.com/file/d/1R6k4MshhN3WTT-hwqAquu5nX6xSEqK2l/view
+RHCT - https://drive.google.com/file/d/1nP3nFiH4jkPMp6COOxP6123DCZKR-tia/view
+
+
+Changes since V5:
+	1) Reordered commits in the series to avoid intermediate build failure reported by Conor.
+	2) Updated hisilicon driver patch as per feedback from Herbert Xu.
+	3) Rebased to 6.4-rc2
+
+Changes since V4:
+	1) Rebased with 6.4-rc1 which has ACPICA patches now.
+	2) Split cpufeature.c patch into two by adding patch 2/7 from Conor's series [2]
+	3) Updated caching RINTC logic to avoid global.
+	4) Added driver patches to enable allmodconfig build at the start of the series.
+	5) Updated tags
+
+Changes since V3:
+	1) Added two more driver patches to workaround allmodconfig build failure.
+	2) Separated removal of riscv_of_processor_hartid() to a different patch.
+	3) Addressed Conor's feedback.
+	4) Rebased to v6.3-rc5 and added latest tags
+
+Changes since V2:
+	1) Dropped ACPI_PROCESSOR patch.
+	2) Added new patch to print debug info of RISC-V INTC in MADT
+	3) Addressed other comments from Drew.
+	4) Rebased and updated tags
+
+Changes since V1:
+	1) Dropped PCI changes and instead added dummy interfaces just to enable
+	   building ACPI core when CONFIG_PCI is enabled. Actual PCI changes will
+	   be added in future along with external interrupt controller support
+	   in ACPI.
+	2) Squashed couple of patches so that new code added gets built in each
+	   commit.
+	3) Fixed the missing wake_cpu code in timer refactor patch as pointed by
+	   Conor
+	4) Fixed an issue with SMP disabled.
+	5) Addressed other comments from Conor.
+	6) Updated documentation patch as per feedback from Sanjaya.
+	7) Fixed W=1 and checkpatch --strict issues.
+	8) Added ACK/RB tags
+
+[1] https://lore.kernel.org/all/20220821140918.3613-1-jszhang@kernel.org/
+[2] https://lore.kernel.org/linux-riscv/20230504-divisive-unsavory-5a2ff0c3c2d1@spud/
+
+These changes are available at
+https://github.com/vlsunil/linux/commits/acpi_b1_us_review_v6
+
+Testing:
+1) Build latest Qemu 
+
+2) Build EDK2 as per instructions in
+https://github.com/vlsunil/riscv-uefi-edk2-docs/wiki/RISC-V-Qemu-Virt-support
+
+3) Build Linux after enabling SBI HVC and SBI earlycon
+CONFIG_RISCV_SBI_V01=y
+CONFIG_SERIAL_EARLYCON_RISCV_SBI=y
+CONFIG_HVC_RISCV_SBI=y
+
+4) Build buildroot.
+
+Run with below command.
+qemu-system-riscv64   -nographic \
+-drive file=Build/RiscVVirtQemu/RELEASE_GCC5/FV/RISCV_VIRT.fd,if=pflash,format=raw,unit=1 \
+-machine virt -smp 16 -m 2G \
+-kernel arch/riscv/boot/Image \
+-initrd buildroot/output/images/rootfs.cpio \
+-append "root=/dev/ram ro console=hvc0 earlycon=sbi"
+
+
+Jisheng Zhang (1):
+  riscv: move sbi_init() earlier before jump_label_init()
+
+Sunil V L (20):
+  platform/surface: Disable for RISC-V
+  crypto: hisilicon/qm: Fix to enable build with RISC-V clang
+  ACPI: tables: Print RINTC information when MADT is parsed
+  ACPI: OSL: Make should_use_kmap() 0 for RISC-V
+  RISC-V: Add support to build the ACPI core
+  ACPI: processor_core: RISC-V: Enable mapping processor to the hartid
+  RISC-V: Add ACPI initialization in setup_arch()
+  RISC-V: ACPI: Cache and retrieve the RINTC structure
+  drivers/acpi: RISC-V: Add RHCT related code
+  RISC-V: smpboot: Create wrapper setup_smp()
+  RISC-V: smpboot: Add ACPI support in setup_smp()
+  RISC-V: only iterate over possible CPUs in ISA string parser
+  RISC-V: cpufeature: Add ACPI support in riscv_fill_hwcap()
+  RISC-V: cpu: Enable cpuinfo for ACPI systems
+  irqchip/riscv-intc: Add ACPI support
+  clocksource/timer-riscv: Refactor riscv_timer_init_dt()
+  clocksource/timer-riscv: Add ACPI support
+  RISC-V: time.c: Add ACPI support for time_init()
+  RISC-V: Enable ACPI in defconfig
+  MAINTAINERS: Add entry for drivers/acpi/riscv
+
+ .../admin-guide/kernel-parameters.txt         |   8 +-
+ MAINTAINERS                                   |   7 +
+ arch/riscv/Kconfig                            |   5 +
+ arch/riscv/configs/defconfig                  |   1 +
+ arch/riscv/include/asm/acenv.h                |  11 +
+ arch/riscv/include/asm/acpi.h                 |  84 ++++++
+ arch/riscv/include/asm/cpu.h                  |   8 +
+ arch/riscv/kernel/Makefile                    |   1 +
+ arch/riscv/kernel/acpi.c                      | 251 ++++++++++++++++++
+ arch/riscv/kernel/cpu.c                       |  30 ++-
+ arch/riscv/kernel/cpufeature.c                |  42 ++-
+ arch/riscv/kernel/setup.c                     |  11 +-
+ arch/riscv/kernel/smpboot.c                   |  77 +++++-
+ arch/riscv/kernel/time.c                      |  25 +-
+ drivers/acpi/Makefile                         |   2 +
+ drivers/acpi/osl.c                            |   2 +-
+ drivers/acpi/processor_core.c                 |  29 ++
+ drivers/acpi/riscv/Makefile                   |   2 +
+ drivers/acpi/riscv/rhct.c                     |  83 ++++++
+ drivers/acpi/tables.c                         |  10 +
+ drivers/clocksource/timer-riscv.c             |  92 ++++---
+ drivers/crypto/hisilicon/qm.c                 |   5 +
+ drivers/irqchip/irq-riscv-intc.c              |  70 +++--
+ drivers/platform/surface/aggregator/Kconfig   |   2 +-
+ 24 files changed, 772 insertions(+), 86 deletions(-)
+ create mode 100644 arch/riscv/include/asm/acenv.h
+ create mode 100644 arch/riscv/include/asm/acpi.h
+ create mode 100644 arch/riscv/include/asm/cpu.h
+ create mode 100644 arch/riscv/kernel/acpi.c
+ create mode 100644 drivers/acpi/riscv/Makefile
+ create mode 100644 drivers/acpi/riscv/rhct.c
+
 -- 
-2.40.1
+2.34.1
 
