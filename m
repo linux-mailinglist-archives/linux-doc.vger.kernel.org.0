@@ -2,154 +2,130 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 43A187050B5
-	for <lists+linux-doc@lfdr.de>; Tue, 16 May 2023 16:28:41 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 7F6F97050C5
+	for <lists+linux-doc@lfdr.de>; Tue, 16 May 2023 16:31:27 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S232509AbjEPO2j (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 16 May 2023 10:28:39 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:39322 "EHLO
+        id S233923AbjEPObZ (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 16 May 2023 10:31:25 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:41798 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S233340AbjEPO2g (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 16 May 2023 10:28:36 -0400
-Received: from mail-lf1-x129.google.com (mail-lf1-x129.google.com [IPv6:2a00:1450:4864:20::129])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 290EB5264
-        for <linux-doc@vger.kernel.org>; Tue, 16 May 2023 07:28:31 -0700 (PDT)
-Received: by mail-lf1-x129.google.com with SMTP id 2adb3069b0e04-4f00d41df22so4768013e87.1
-        for <linux-doc@vger.kernel.org>; Tue, 16 May 2023 07:28:31 -0700 (PDT)
+        with ESMTP id S233721AbjEPObY (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 16 May 2023 10:31:24 -0400
+Received: from mail-ed1-x52c.google.com (mail-ed1-x52c.google.com [IPv6:2a00:1450:4864:20::52c])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id EB71655BE
+        for <linux-doc@vger.kernel.org>; Tue, 16 May 2023 07:31:20 -0700 (PDT)
+Received: by mail-ed1-x52c.google.com with SMTP id 4fb4d7f45d1cf-50bc2feb320so21704942a12.3
+        for <linux-doc@vger.kernel.org>; Tue, 16 May 2023 07:31:20 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=sifive.com; s=google; t=1684247309; x=1686839309;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=kOOZCXXP4LpksxHkg4nvdaIq0tmnRiTZx/elW7W7niI=;
-        b=arVBo25pNBMxfPhoKYvltlB2Uawur/F4MwIhKfOR0W/WANPEJ4fkT9fZ9/Z+67DvC4
-         PYkZ5qy1YsWJ2cSP3jNStIcHxio06VMqYxMIt9Bm7J6eRNLlkKTJ+ZQF3SZI5VsbCQd3
-         rqAETBqGvxX4bPwjK+3MGw9NTSsRra04LPUHsz8jciXU0YhQ0HB2OvRipVMi7ek1okZk
-         RAsQxXpyYyiPbFwi19FE0r55eKYoalQ0p9nbdnhjFMsctO4owxzAEyKYPAnPs83Rv/Ar
-         SdYtn0w0UqI1dYILJ+yIfP8lZPB9XYe4HuDndSPPOw2dpNi0RZkKl3oRuIuF6XYpPhQS
-         LCzw==
+        d=gmail.com; s=20221208; t=1684247479; x=1686839479;
+        h=content-transfer-encoding:to:subject:message-id:date:from:reply-to
+         :mime-version:from:to:cc:subject:date:message-id:reply-to;
+        bh=mhMTEtmnAgofUvsT7JdDd7CuFjDTNwQ0IePtBe84tf4=;
+        b=RjQ6vBlPrLZrqaZibPuzPOyAcQ/N68F6X9g7mU07aWoQlYVkQmpNUoo/MoxMLr0o4/
+         sOdCghqidlUJ2/yatZjMwldzrgMNdmwrwl9mkPK29F+KialT0N/Mgyt/pN9V7DW3zTnQ
+         QxZs3Y/aLlDHf4tFTwYj0qAShWqfeV9ASoog8dw1pdsy4eZuR42ryP+SyMw9IBIO03ce
+         3w5HZX5MjiF+YWUAWfO8uVH3ADI3M4/Rb5c35IhqGgG6sf3zv/dCu8RSDa1SxkKPRSlF
+         O73ylzGd2uZDYRNXjvvMxXqNyxCA0cELAIcZWkb7cCPkdjb49TiJfn0zPvpKy6ofd2kC
+         Mt8g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1684247309; x=1686839309;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=kOOZCXXP4LpksxHkg4nvdaIq0tmnRiTZx/elW7W7niI=;
-        b=FcTaMHiwMCmz9PW4ni2EViGPmd9SwbdOwxc1xw6MeN7gbJqj6ra/EiLfR8rkYj608y
-         URnBuafXTFLG3apsBtnGHMXC/qre9m9FArofGy5owiDo/zANGwYfuaaNd+ISTlk5xPHx
-         GFwX/UwffRI/UzaduKYA2hggWeAnsH/ru1qlsT1Dh3rEkMhyExX0Zh6lWWmcbbwhUuaJ
-         39obAbb8eJ7KqqO3b9JE6JZiHKQxH68gGsqK0T6YD2LeD++/T+xAMk0xl8rNFXN0BONj
-         MPhkxwjmbX7QOn5SiJdinZY5tOxRJEjaIq8em+M57lpS2YN0avFEFdpwpZW489r8eFml
-         bQnw==
-X-Gm-Message-State: AC+VfDxGQNdbbLJJqG+dgJfz4KHYOFGZ2Bw0e8pAbHCBL5ZATIyZwDQx
-        j6z0KfH/3adKMUOibuBCsYxh4t24gC7cyPw5sgmsHg==
-X-Google-Smtp-Source: ACHHUZ7c3hpAgVDEakFIgQTQp0miw0Pxe4R/I3dNmfZOb4bLnc8dYAsrTxAxvOzRqzhyH7uBZf87J9mRIW+Ood4BRJY=
-X-Received: by 2002:a05:6512:90d:b0:4eb:e8e:4139 with SMTP id
- e13-20020a056512090d00b004eb0e8e4139mr6452092lft.2.1684247309388; Tue, 16 May
- 2023 07:28:29 -0700 (PDT)
+        d=1e100.net; s=20221208; t=1684247479; x=1686839479;
+        h=content-transfer-encoding:to:subject:message-id:date:from:reply-to
+         :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=mhMTEtmnAgofUvsT7JdDd7CuFjDTNwQ0IePtBe84tf4=;
+        b=NWKnW/WU+rK/Lb9degDZUmKNpL7+1krXJo0rp+OjVWXKPP7hldLCjiJKejUpu+NDD3
+         ByrOD+08lnpv2PGG9FGsar9owAdoe8vILBddqoB5n2PsvSrCkj10uzfz9/hjnxfmiG01
+         HpH/A1gGl5Fv336/MJB4x+CzOXMlR1AJ7nxFZHW2Ril5neWiXdHJ+mCRp3tJGFXjw9/L
+         FhNgH4mfGpqJKzj77nQu5pgFlzQOWndPDyoRY0RQCAGu0Rn61dA8sXzENlU1JiJIToHw
+         McfYN7peGIj0zk/74zlUHVlYhaGfw0MXuR88wQvPAWlH6mnJgBzCDyFs5KSzFKS1cKZN
+         Jr9g==
+X-Gm-Message-State: AC+VfDzAOPN6TZysS+XW96FebNh3WFITBQ24YvoVu9/+FDriKBSy4ddv
+        Su+VD8BvhB4F9bVzSK7/4QGXm5pn+CRQ/yWTxL4=
+X-Google-Smtp-Source: ACHHUZ5QKqqSi2ocS2x1810ACJVREO+lAlDubwfN+cq/HXGiulVDAWi9WFdFateC1tcKqrw65H5o1JQ8UNsbYMYW3r4=
+X-Received: by 2002:a05:6402:202a:b0:50b:c804:46b8 with SMTP id
+ ay10-20020a056402202a00b0050bc80446b8mr29382171edb.31.1684247478827; Tue, 16
+ May 2023 07:31:18 -0700 (PDT)
 MIME-Version: 1.0
-References: <20230514090432.78217-1-bagasdotme@gmail.com> <20230514090432.78217-4-bagasdotme@gmail.com>
- <20230514-proposal-resort-3ce1beeaa089@spud>
-In-Reply-To: <20230514-proposal-resort-3ce1beeaa089@spud>
-From:   Andy Chiu <andy.chiu@sifive.com>
-Date:   Tue, 16 May 2023 22:28:18 +0800
-Message-ID: <CABgGipWt+ux3CJwotoG588MBqO1EeSV2E4mw8Kvm+d01WTPPzQ@mail.gmail.com>
-Subject: Re: [PATCH 3/5] Documentation: riscv: vector: Use bullet lists for
- prctl list
-To:     Conor Dooley <conor@kernel.org>
-Cc:     Bagas Sanjaya <bagasdotme@gmail.com>,
-        Linux Documentation <linux-doc@vger.kernel.org>,
-        Linux RISC-V <linux-riscv@lists.infradead.org>,
-        Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
-        Jonathan Corbet <corbet@lwn.net>,
-        Paul Walmsley <paul.walmsley@sifive.com>,
-        Palmer Dabbelt <palmer@dabbelt.com>,
-        Albert Ou <aou@eecs.berkeley.edu>,
-        Vincent Chen <vincent.chen@sifive.com>,
-        Greentime Hu <greentime.hu@sifive.com>
+Received: by 2002:a05:6f02:c902:b0:4e:b15d:3b17 with HTTP; Tue, 16 May 2023
+ 07:31:17 -0700 (PDT)
+Reply-To: sandrina.omaru2022@gmail.com
+From:   Sandrina Omaru <omarusandrina04@gmail.com>
+Date:   Tue, 16 May 2023 16:31:17 +0200
+Message-ID: <CAPssEY9E8ZeWnf1Am6eVJEN2ou2Y5rG2BWdG54Ai6bCz3ARd_g@mail.gmail.com>
+Subject: KOMPLIMENT DNEVA
+To:     undisclosed-recipients:;
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-X-Spam-Status: No, score=-2.1 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_NONE,
-        SPF_HELO_NONE,SPF_PASS,T_SCC_BODY_TEXT_LINE,URIBL_BLOCKED
-        autolearn=ham autolearn_force=no version=3.4.6
+X-Spam-Status: No, score=2.6 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_ENVFROM_END_DIGIT,
+        FREEMAIL_FROM,FREEMAIL_REPLYTO,FREEMAIL_REPLYTO_END_DIGIT,
+        RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,SPF_PASS,SUBJ_ALL_CAPS,
+        T_SCC_BODY_TEXT_LINE,UNDISC_FREEM autolearn=no autolearn_force=no
+        version=3.4.6
+X-Spam-Level: **
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Hi Bagas,
+KOMPLIMENT DNEVA
 
-On Sun, May 14, 2023 at 5:49=E2=80=AFPM Conor Dooley <conor@kernel.org> wro=
-te:
->
-> Hey Bagas,
->
-> On Sun, May 14, 2023 at 04:04:30PM +0700, Bagas Sanjaya wrote:
-> > The documentation lists two userspace prctl() calls. Use bullet
-> > lists for the listing.
-> >
-> > Fixes: 412c68cfeeb178 ("riscv: Add documentation for Vector")
->
-> Firstly, these fixes commit hashes would not be stable as this series
-> has been applied to riscv/for-next [1]. But also, from this commit
-> onwards, things seem like stylistic comments that would be undeserving
-> of a Fixes: tag to begin with.
-> Perhaps you'd be better off suggesting these changes in response to the
-> original thread [2], so that it goes in "correctly" in the first place?
-> Andy has to re-submit anyway as there are a few bugs that crept in in
-> the most recent revision of his series.
->
-> Thanks,
-> Conor.
->
-> 1 - https://git.kernel.org/pub/scm/linux/kernel/git/riscv/linux.git/log/?=
-h=3Dfor-next
-> 2 - https://lore.kernel.org/linux-riscv/20230509103033.11285-25-andy.chiu=
-@sifive.com/
->
-> > Signed-off-by: Bagas Sanjaya <bagasdotme@gmail.com>
-> > ---
-> >  Documentation/riscv/vector.rst | 4 ++--
-> >  1 file changed, 2 insertions(+), 2 deletions(-)
-> >
-> > diff --git a/Documentation/riscv/vector.rst b/Documentation/riscv/vecto=
-r.rst
-> > index 178b3f3f452462..c7bd701c7963b6 100644
-> > --- a/Documentation/riscv/vector.rst
-> > +++ b/Documentation/riscv/vector.rst
-> > @@ -13,7 +13,7 @@ order to support the use of the RISC-V Vector Extensi=
-on.
-> >  Two new prctl() calls are added to allow programs to manage the enable=
-ment
-> >  status for the use of Vector in userspace:
-> >
-> > -prctl(PR_RISCV_V_SET_CONTROL, unsigned long arg)
-> > +* prctl(PR_RISCV_V_SET_CONTROL, unsigned long arg)
-> >
-> >      Sets the Vector enablement status of the calling thread, where the=
- control
-> >      argument consists of two 2-bit enablement statuses and a bit for i=
-nheritance
-> > @@ -89,7 +89,7 @@ prctl(PR_RISCV_V_SET_CONTROL, unsigned long arg)
-> >          * Every successful call overwrites a previous setting for the =
-calling
-> >            thread.
-> >
-> > -prctl(PR_RISCV_V_SET_CONTROL)
-> > +* prctl(PR_RISCV_V_SET_CONTROL)
-> >
-> >      Gets the same Vector enablement status for the calling thread. Set=
-ting for
-> >      next execve() call and the inheritance bit are all OR-ed together.
-> > --
-> > An old man doll... just what I always wanted! - Clara
-> >
+Z globokim spo=C5=A1tovanjem in poni=C5=BEnim priznanjem vas prosim, da nav=
+edem
+naslednjih nekaj vrstic v va=C5=A1o prijaznost. Upam, da boste prihranili
+nekaj svojih dragocenih minut in s so=C4=8Dutjem prebrali ta poziv.
+Priznati moram, da vam pi=C5=A1em to e-po=C5=A1tno sporo=C4=8Dilo z velikim=
+ upanjem,
+veseljem in navdu=C5=A1enjem, za katerega vem in z vero verjamem, da vas
+mora zagotovo najti v dobrem zdravstvenem stanju.
 
-Thanks for fixing the document. Do you mind if I merge them into my
-patch and add you as a co-developer? I think merging those fixes into
-the one original patch would be much cleaner than providing fix
-patches afterward.
+Moje ime je Sandrina Omaru; Sem edini otrok mojih pokojnih star=C5=A1ev
+Chief. G. Williams Omaru. Moj o=C4=8De je bil zelo ugleden poslovni magnet,
+ki je v svojih dneh deloval v glavnem mestu Slonoko=C5=A1=C4=8Dene obale.
 
-Thanks,
-Andy
+=C5=BDalostno je, da povem, da je skrivnostno umrl v Franciji med enim od
+svojih poslovnih potovanj v tujino, =C4=8Deprav je njegovo nenadno smrt
+povezoval ali bolje re=C4=8Deno domneval, da jo je na=C4=8Drtoval moj stric=
+, ki
+je takrat potoval z njim. Toda Bog pozna resnico! Moja mama je umrla,
+ko sem bil star komaj 6 let, in od takrat me je o=C4=8De vzel tako
+posebnega.
+
+Pred smrtjo mojega o=C4=8Deta me je poklical in me obvestil, da ima vsoto
+tri milijone =C5=A1eststo tiso=C4=8D evrov. (3.600.000,00 =E2=82=AC), ki ji=
+h je
+deponiral v zasebni banki tukaj v Abid=C5=BEanu, Slonoko=C5=A1=C4=8Dena oba=
+la. Rekel
+mi je, da je polo=C5=BEil denar na moje ime in mi dal tudi vse potrebne
+pravne dokumente v zvezi s tem depozitom pri banki,
+
+Star sem komaj 22 let in sem univerzitetni diplomant in res ne vem,
+kaj naj naredim. Zdaj =C5=BEelim po=C5=A1tenega in BOGA boje=C4=8Dega partn=
+erja v
+tujini, ki mu lahko naka=C5=BEe ta denar z njegovo pomo=C4=8Djo, in po
+transakciji bom pri=C5=A1el in stalno prebival v va=C5=A1i dr=C5=BEavi do t=
+renutka,
+ko bo primerno, da se vrnem domov, =C4=8De tako =C5=BEelja. To je zato, ker=
+ sem
+zaradi nenehne politi=C4=8Dne krize tukaj na Slonoko=C5=A1=C4=8Deni obali u=
+trpel
+veliko =C5=A1kode.
+
+Smrt mojega o=C4=8Deta je pravzaprav prinesla =C5=BEalost v moje =C5=BEivlj=
+enje. Prav
+tako =C5=BEelim vlo=C5=BEiti sklad pod va=C5=A1im nadzorom, ker se ne spozn=
+am na
+poslovni svet. Iskreno si =C5=BEelim va=C5=A1e poni=C5=BEne pomo=C4=8Di v z=
+vezi s tem.
+Va=C5=A1e predloge in ideje bomo zelo cenili.
+
+Prosim, upo=C5=A1tevajte to in se =C4=8Dim prej oglasite pri meni. Takoj po=
+trdim
+va=C5=A1o pripravljenost, poslal vam bom svojo sliko in vas obvestil o ve=
+=C4=8D
+podrobnostih v zvezi s to zadevo.
+
+Prijazni pozdravi,
+
+Sandrina Omaru.
