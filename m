@@ -2,186 +2,92 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id DF8E37044D6
-	for <lists+linux-doc@lfdr.de>; Tue, 16 May 2023 07:47:30 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 5B3B07044FF
+	for <lists+linux-doc@lfdr.de>; Tue, 16 May 2023 08:13:20 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S229847AbjEPFr3 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 16 May 2023 01:47:29 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:54624 "EHLO
+        id S230014AbjEPGNS (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 16 May 2023 02:13:18 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:34716 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S229510AbjEPFr3 (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 16 May 2023 01:47:29 -0400
-Received: from mail-wm1-x332.google.com (mail-wm1-x332.google.com [IPv6:2a00:1450:4864:20::332])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 47C563C3B
-        for <linux-doc@vger.kernel.org>; Mon, 15 May 2023 22:47:25 -0700 (PDT)
-Received: by mail-wm1-x332.google.com with SMTP id 5b1f17b1804b1-3f423ac6e2dso67814975e9.2
-        for <linux-doc@vger.kernel.org>; Mon, 15 May 2023 22:47:25 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=philpotter-co-uk.20221208.gappssmtp.com; s=20221208; t=1684216043; x=1686808043;
-        h=in-reply-to:content-disposition:mime-version:references:message-id
-         :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
-        bh=rGOXS5oeYEm1eXVEOFIbXWDzPg8PMUvacNlvjP+UFms=;
-        b=iVu3Wxf06XZ3lRKy/n6RQOFfwAcXqWLQMZvIokp/GZ/cpQabpwZtzF4nf/gpUKhmJ6
-         npP2ExnTGfb9Lz1fa99FUfa1O95b5QGdS7g3P/KDNBucm04zveYg2qJ5VBZ/G5p/ut/I
-         CYWc4VU8abVUWH+JeRXqCtw7WI/v86wSmOrceS5BrCYqplj4O3XpeYFxoDIvZKmRIe5L
-         1Y44DhhSm+DPV17s2YGfIKkHyv4w935cupOvUIVgbyAtH7CNXFt+t0h7SW5SPnsA/5SX
-         Tstg8B+wE1KgmA6Gbs4LU8Sch8c3wsHdQAl4/FpwQp9SP+B26YT1L1LKINuzdnkH2Ydx
-         v+yA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1684216043; x=1686808043;
-        h=in-reply-to:content-disposition:mime-version:references:message-id
-         :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=rGOXS5oeYEm1eXVEOFIbXWDzPg8PMUvacNlvjP+UFms=;
-        b=Kb720gBy59Lkpt7WzCD+tAehh8OTU5276sn/PruOVb550Ol+NNSu9sZWBIFQGRGyiD
-         NulhdPayfRoiNDwQJneictPlARKpjsJvt3vi+dpqMKhvWFGPd5LgxY6WAKtO49C2+jsS
-         RCOKksiEDkCRd5XEtIyyqMfQVN27eanGT96MGh6QPK72JeMD/6vF9+WFsK3P2K9nu4q6
-         +L5kUtykmn1E/bP0uH+xHLqawgRwKvpHb0e9ISyk5T/o1b5DPVDJUHZicvqfJruWCPtP
-         TiiN3YC6gyb4xo74bVY0fdZW+fDuc9ewbJsMYozyF5t8Xp2dTUCq4Nem5pznCrqiKxFn
-         os/A==
-X-Gm-Message-State: AC+VfDx2Kh5CeK6nRKreg5yAEtXYSBuSU7XxnHhKFYKf/J4pjNeVi0fe
-        GXSG3K+vfBu+SYRpHE6x3vwiwA==
-X-Google-Smtp-Source: ACHHUZ7UVZh7I+HRTjlWTG+V01v8fP9MNwUWb0S81XmV8Pv1P/knSk+1bVmpRoHZkH7Onz9DRmgFbA==
-X-Received: by 2002:a7b:cb92:0:b0:3f4:2374:3515 with SMTP id m18-20020a7bcb92000000b003f423743515mr21551025wmi.5.1684216043618;
-        Mon, 15 May 2023 22:47:23 -0700 (PDT)
-Received: from equinox (2.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.a.1.e.e.d.f.d.0.b.8.0.1.0.0.2.ip6.arpa. [2001:8b0:dfde:e1a0::2])
-        by smtp.gmail.com with ESMTPSA id g14-20020a5d46ce000000b00304aba2cfcbsm1319495wrs.7.2023.05.15.22.47.22
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 15 May 2023 22:47:23 -0700 (PDT)
-Date:   Tue, 16 May 2023 06:47:20 +0100
-From:   Phillip Potter <phil@philpotter.co.uk>
-To:     Randy Dunlap <rdunlap@infradead.org>
-Cc:     linux-kernel@vger.kernel.org, Jonathan Corbet <corbet@lwn.net>,
-        linux-doc@vger.kernel.org, linux-fpga@vger.kernel.org,
-        Moritz Fischer <mdf@kernel.org>, Wu Hao <hao.wu@intel.com>,
-        Xu Yilun <yilun.xu@intel.com>, Tom Rix <trix@redhat.com>,
-        Peter Zijlstra <peterz@infradead.org>,
-        Ingo Molnar <mingo@redhat.com>, Will Deacon <will@kernel.org>,
-        Waiman Long <longman@redhat.com>,
-        Boqun Feng <boqun.feng@gmail.com>,
-        Dominik Brodowski <linux@dominikbrodowski.net>,
-        Thomas Gleixner <tglx@linutronix.de>
-Subject: Re: [PATCH] Documentation: use capitalization for chapters and
- acronyms
-Message-ID: <ZGMY6LWlv8LC7zL3@equinox>
-References: <20230516001518.14514-1-rdunlap@infradead.org>
+        with ESMTP id S229619AbjEPGNR (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 16 May 2023 02:13:17 -0400
+Received: from verein.lst.de (verein.lst.de [213.95.11.211])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 007B410C1;
+        Mon, 15 May 2023 23:13:16 -0700 (PDT)
+Received: by verein.lst.de (Postfix, from userid 2407)
+        id 1F6EB67373; Tue, 16 May 2023 08:13:10 +0200 (CEST)
+Date:   Tue, 16 May 2023 08:13:09 +0200
+From:   Christoph Hellwig <hch@lst.de>
+To:     "Michael Kelley (LINUX)" <mikelley@microsoft.com>
+Cc:     Petr Tesarik <petrtesarik@huaweicloud.com>,
+        Jonathan Corbet <corbet@lwn.net>,
+        Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+        "Rafael J. Wysocki" <rafael@kernel.org>,
+        Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+        Maxime Ripard <mripard@kernel.org>,
+        Thomas Zimmermann <tzimmermann@suse.de>,
+        David Airlie <airlied@gmail.com>,
+        Daniel Vetter <daniel@ffwll.ch>,
+        Christoph Hellwig <hch@lst.de>,
+        Marek Szyprowski <m.szyprowski@samsung.com>,
+        Robin Murphy <robin.murphy@arm.com>,
+        "Paul E. McKenney" <paulmck@kernel.org>,
+        Borislav Petkov <bp@suse.de>,
+        Randy Dunlap <rdunlap@infradead.org>,
+        Catalin Marinas <catalin.marinas@arm.com>,
+        Damien Le Moal <damien.lemoal@opensource.wdc.com>,
+        Kim Phillips <kim.phillips@amd.com>,
+        "Steven Rostedt (Google)" <rostedt@goodmis.org>,
+        Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
+        Hans de Goede <hdegoede@redhat.com>,
+        Jason Gunthorpe <jgg@ziepe.ca>,
+        Kees Cook <keescook@chromium.org>,
+        Thomas Gleixner <tglx@linutronix.de>,
+        "open list:DOCUMENTATION" <linux-doc@vger.kernel.org>,
+        open list <linux-kernel@vger.kernel.org>,
+        "open list:DRM DRIVERS" <dri-devel@lists.freedesktop.org>,
+        "open list:DMA MAPPING HELPERS" <iommu@lists.linux.dev>,
+        Roberto Sassu <roberto.sassu@huawei.com>,
+        Kefeng Wang <wangkefeng.wang@huawei.com>,
+        "petr@tesarici.cz" <petr@tesarici.cz>
+Subject: Re: [PATCH v2 RESEND 4/7] swiotlb: Dynamically allocated bounce
+ buffers
+Message-ID: <20230516061309.GA7219@lst.de>
+References: <cover.1683623618.git.petr.tesarik.ext@huawei.com> <346abecdb13b565820c414ecf3267275577dbbf3.1683623618.git.petr.tesarik.ext@huawei.com> <BYAPR21MB168874BC467BFCEC133A9DCDD7789@BYAPR21MB1688.namprd21.prod.outlook.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20230516001518.14514-1-rdunlap@infradead.org>
-X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-        DKIM_VALID,RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,SPF_PASS,
-        T_SCC_BODY_TEXT_LINE autolearn=ham autolearn_force=no version=3.4.6
+In-Reply-To: <BYAPR21MB168874BC467BFCEC133A9DCDD7789@BYAPR21MB1688.namprd21.prod.outlook.com>
+User-Agent: Mutt/1.5.17 (2007-11-01)
+X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00,SPF_HELO_NONE,
+        SPF_NONE,T_SCC_BODY_TEXT_LINE autolearn=ham autolearn_force=no
+        version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Mon, May 15, 2023 at 05:15:18PM -0700, Randy Dunlap wrote:
-> Use capital letters in acronyms for CD-ROM, FPGA, and PCMCIA.
-> 
-> Use capital letter in the first word of chapter headings for
-> Locking, Timers, and "Brief tutorial on CRC computation".
-> 
-> Signed-off-by: Randy Dunlap <rdunlap@infradead.org>
-> Cc: Jonathan Corbet <corbet@lwn.net>
-> Cc: linux-doc@vger.kernel.org
-> Cc: linux-fpga@vger.kernel.org
-> Cc: Phillip Potter <phil@philpotter.co.uk>
-> Cc: Moritz Fischer <mdf@kernel.org>
-> Cc: Wu Hao <hao.wu@intel.com>
-> Cc: Xu Yilun <yilun.xu@intel.com>
-> Cc: Tom Rix <trix@redhat.com>
-> Cc: Peter Zijlstra <peterz@infradead.org>
-> Cc: Ingo Molnar <mingo@redhat.com>
-> Cc: Will Deacon <will@kernel.org>
-> Cc: Waiman Long <longman@redhat.com>
-> Cc: Boqun Feng <boqun.feng@gmail.com>
-> Cc: Dominik Brodowski <linux@dominikbrodowski.net>
-> Cc: Thomas Gleixner <tglx@linutronix.de>
-> ---
->  Documentation/cdrom/index.rst   |    6 +++---
->  Documentation/fpga/index.rst    |    2 +-
->  Documentation/locking/index.rst |    2 +-
->  Documentation/pcmcia/index.rst  |    2 +-
->  Documentation/staging/crc32.rst |    2 +-
->  Documentation/timers/index.rst  |    2 +-
->  6 files changed, 8 insertions(+), 8 deletions(-)
-> 
-> --- linux-next-20230515.orig/Documentation/cdrom/index.rst
-> +++ linux-next-20230515/Documentation/cdrom/index.rst
-> @@ -1,8 +1,8 @@
->  .. SPDX-License-Identifier: GPL-2.0
->  
-> -=====
-> -cdrom
-> -=====
-> +======
-> +CD-ROM
-> +======
->  
->  .. toctree::
->      :maxdepth: 1
-> --- linux-next-20230515.orig/Documentation/fpga/index.rst
-> +++ linux-next-20230515/Documentation/fpga/index.rst
-> @@ -1,7 +1,7 @@
->  .. SPDX-License-Identifier: GPL-2.0
->  
->  ====
-> -fpga
-> +FPGA
->  ====
->  
->  .. toctree::
-> --- linux-next-20230515.orig/Documentation/locking/index.rst
-> +++ linux-next-20230515/Documentation/locking/index.rst
-> @@ -1,7 +1,7 @@
->  .. SPDX-License-Identifier: GPL-2.0
->  
->  =======
-> -locking
-> +Locking
->  =======
->  
->  .. toctree::
-> --- linux-next-20230515.orig/Documentation/pcmcia/index.rst
-> +++ linux-next-20230515/Documentation/pcmcia/index.rst
-> @@ -1,7 +1,7 @@
->  .. SPDX-License-Identifier: GPL-2.0
->  
->  ======
-> -pcmcia
-> +PCMCIA
->  ======
->  
->  .. toctree::
-> --- linux-next-20230515.orig/Documentation/staging/crc32.rst
-> +++ linux-next-20230515/Documentation/staging/crc32.rst
-> @@ -1,5 +1,5 @@
->  =================================
-> -brief tutorial on CRC computation
-> +Brief tutorial on CRC computation
->  =================================
->  
->  A CRC is a long-division remainder.  You add the CRC to the message,
-> --- linux-next-20230515.orig/Documentation/timers/index.rst
-> +++ linux-next-20230515/Documentation/timers/index.rst
-> @@ -1,7 +1,7 @@
->  .. SPDX-License-Identifier: GPL-2.0
->  
->  ======
-> -timers
-> +Timers
->  ======
->  
->  .. toctree::
+On Mon, May 15, 2023 at 07:43:52PM +0000, Michael Kelley (LINUX) wrote:
+> FWIW, I don't think the approach you have implemented here will be
+> practical to use for CoCo VMs (SEV, TDX, whatever else).  The problem
+> is that dma_direct_alloc_pages() and dma_direct_free_pages() must
+> call dma_set_decrypted() and dma_set_encrypted(), respectively.  In CoCo
+> VMs, these calls are expensive because they require a hypercall to the host,
+> and the operation on the host isn't trivial either.  I haven't measured the
+> overhead, but doing a hypercall on every DMA map operation and on
+> every unmap operation has long been something we thought we must
+> avoid.  The fixed swiotlb bounce buffer space solves this problem by
+> doing set_decrypted() in batch at boot time, and never
+> doing set_encrypted().
 
-Hi Randy,
+I also suspect it doesn't really scale too well due to the number of
+allocations.  I suspect a better way to implement things would be to
+add more large chunks that are used just like the main swiotlb buffers.
 
-Thanks for the patch.
-
-Reviewed-by: Phillip Potter <phil@philpotter.co.uk>
-
-Regards,
-Phil
+That is when we run out of space try to allocate another chunk of the
+same size in the background, similar to what we do with the pool in
+dma-pool.c.  This means we'll do a fairly large allocation, so we'll
+need compaction or even CMA to back it up, but the other big upside
+is that it also reduces the number of buffers that need to be checked
+in is_swiotlb_buffer or the free / sync side.
