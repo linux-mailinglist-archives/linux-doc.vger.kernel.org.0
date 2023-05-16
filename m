@@ -2,137 +2,219 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id E77E7704764
-	for <lists+linux-doc@lfdr.de>; Tue, 16 May 2023 10:08:32 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id E286B704755
+	for <lists+linux-doc@lfdr.de>; Tue, 16 May 2023 10:05:58 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S231300AbjEPIIa (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 16 May 2023 04:08:30 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:35068 "EHLO
+        id S231262AbjEPIF5 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 16 May 2023 04:05:57 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:32928 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S231363AbjEPIIZ (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 16 May 2023 04:08:25 -0400
-X-Greylist: delayed 600 seconds by postgrey-1.37 at lindbergh.monkeyblade.net; Tue, 16 May 2023 01:08:23 PDT
-Received: from bee.tesarici.cz (bee.tesarici.cz [IPv6:2a03:3b40:fe:2d4::1])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 002A43C12;
-        Tue, 16 May 2023 01:08:23 -0700 (PDT)
-Received: from meshulam.tesarici.cz (dynamic-2a00-1028-83b8-1e7a-4427-cc85-6706-c595.ipv6.o2.cz [IPv6:2a00:1028:83b8:1e7a:4427:cc85:6706:c595])
-        (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-         key-exchange ECDHE (P-256) server-signature RSA-PSS (2048 bits) server-digest SHA256)
-        (No client certificate requested)
-        by bee.tesarici.cz (Postfix) with ESMTPSA id 022691617A9;
-        Tue, 16 May 2023 09:58:20 +0200 (CEST)
-Authentication-Results: mail.tesarici.cz; dmarc=fail (p=none dis=none) header.from=tesarici.cz
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=tesarici.cz; s=mail;
-        t=1684223901; bh=vgp/F7g/spz90YI9EAe5zEYmTaqdHJkzRNoRv0QNyqo=;
-        h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
-        b=PiKtJUDXeLIXLILtSnIYL0BWgkz+1wtz3Skq/knjoFpezpja2UdK19+qCjZ7PudN3
-         Y30ABlU9VOPl9n8xKjK5pH/3a8JiDL195rF6HNNpdMHP6wArDy70+Zi6x/LxqQIQlu
-         ibT19G77KLEtOH9rfxVy+qRNl4Bzq6+qxaP4382xqIziuSKvlMU3p8RupyFg5U5W/o
-         tFWS2oTyGYyMLRjdnCK2qeWtiHho1mdvnndZuLvLV1+H80+qAAYo8Pq83ef4A8xA4R
-         +bQXyF5Kf4JJ/L0goFRsCBPLCj0g5AtWa0385zU9r4oMTsoeg4N3n8jhCgkY5fSenZ
-         tDBAOVxUZcDdg==
-Date:   Tue, 16 May 2023 09:58:19 +0200
-From:   Petr =?UTF-8?B?VGVzYcWZw61r?= <petr@tesarici.cz>
-To:     Niklas Schnelle <schnelle@linux.ibm.com>
-Cc:     Joerg Roedel <joro@8bytes.org>,
-        Matthew Rosato <mjrosato@linux.ibm.com>,
-        Will Deacon <will@kernel.org>,
-        Wenjia Zhang <wenjia@linux.ibm.com>,
-        Robin Murphy <robin.murphy@arm.com>,
-        Jason Gunthorpe <jgg@ziepe.ca>,
-        Gerd Bayer <gbayer@linux.ibm.com>,
-        Julian Ruess <julianr@linux.ibm.com>,
-        Pierre Morel <pmorel@linux.ibm.com>,
-        Alexandra Winter <wintera@linux.ibm.com>,
-        Heiko Carstens <hca@linux.ibm.com>,
-        Vasily Gorbik <gor@linux.ibm.com>,
-        Alexander Gordeev <agordeev@linux.ibm.com>,
-        Christian Borntraeger <borntraeger@linux.ibm.com>,
-        Sven Schnelle <svens@linux.ibm.com>,
-        Suravee Suthikulpanit <suravee.suthikulpanit@amd.com>,
-        Hector Martin <marcan@marcan.st>,
-        Sven Peter <sven@svenpeter.dev>,
-        Alyssa Rosenzweig <alyssa@rosenzweig.io>,
-        David Woodhouse <dwmw2@infradead.org>,
-        Lu Baolu <baolu.lu@linux.intel.com>,
-        Andy Gross <agross@kernel.org>,
-        Bjorn Andersson <andersson@kernel.org>,
-        Konrad Dybcio <konrad.dybcio@linaro.org>,
-        Yong Wu <yong.wu@mediatek.com>,
-        Matthias Brugger <matthias.bgg@gmail.com>,
-        AngeloGioacchino Del Regno 
-        <angelogioacchino.delregno@collabora.com>,
-        Gerald Schaefer <gerald.schaefer@linux.ibm.com>,
-        Orson Zhai <orsonzhai@gmail.com>,
-        Baolin Wang <baolin.wang@linux.alibaba.com>,
-        Chunyan Zhang <zhang.lyra@gmail.com>,
-        Chen-Yu Tsai <wens@csie.org>,
-        Jernej Skrabec <jernej.skrabec@gmail.com>,
-        Samuel Holland <samuel@sholland.org>,
-        Thierry Reding <thierry.reding@gmail.com>,
-        Krishna Reddy <vdumpa@nvidia.com>,
-        Jonathan Hunter <jonathanh@nvidia.com>,
-        Jonathan Corbet <corbet@lwn.net>, linux-s390@vger.kernel.org,
-        netdev@vger.kernel.org, linux-kernel@vger.kernel.org,
-        iommu@lists.linux.dev, asahi@lists.linux.dev,
-        linux-arm-kernel@lists.infradead.org,
-        linux-arm-msm@vger.kernel.org, linux-mediatek@lists.infradead.org,
-        linux-sunxi@lists.linux.dev, linux-tegra@vger.kernel.org,
-        linux-doc@vger.kernel.org
-Subject: Re: [PATCH v9 1/6] s390/ism: Set DMA coherent mask
-Message-ID: <20230516095819.78442f09@meshulam.tesarici.cz>
-In-Reply-To: <20230310-dma_iommu-v9-1-65bb8edd2beb@linux.ibm.com>
-References: <20230310-dma_iommu-v9-0-65bb8edd2beb@linux.ibm.com>
-        <20230310-dma_iommu-v9-1-65bb8edd2beb@linux.ibm.com>
-X-Mailer: Claws Mail 4.1.1 (GTK 3.24.38; x86_64-suse-linux-gnu)
+        with ESMTP id S231350AbjEPIF5 (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 16 May 2023 04:05:57 -0400
+Received: from NAM10-MW2-obe.outbound.protection.outlook.com (mail-mw2nam10on2118.outbound.protection.outlook.com [40.107.94.118])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 6C1D649D1;
+        Tue, 16 May 2023 01:05:55 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=j8HoG+itgGKa/NxEFWFY+YCkujQnxYZspqyQ7aP9e11b7NjGYhtAg3IwqCKzbKFahYLulPI2dEcvLumFXHrPxe2SYB/2pK3DPgSb8TLj9jqG23my8ymRN1J5wurK+E4I/2ji+1uuSX5ZX7fDoimx+Xikhj9H+Fhd3KBZO80DwPLQ1IV8v1FDuIVc+IJjzA7TUwml8SN0tasD5hwI+JctGCO/YoIZzNucsmHxiRgs/xRg3wN+YaEi9XUndVRvlhpPgGnpjnK3LRTeYNYq9q/7T3PC5y/M6Jkpv0aG6lO0CISoufkM10eQBnofB822Y+Nt2sNBHjUypyhnP8BE/mxvMQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=QLx4sXunLZrfwp3LEPjxO1wSov8W3sutrn6njyOi2U8=;
+ b=KJI/VDUF6pc/J8pdtB7po098+AAWq1IieFzK3jBt1bh28/dI7IcopTXVlbzsjNYpLvdvLJcCsuEvohhBkM8Fpsr/OgwgSd11wtuB4OaZhDMfFrAEoMEbqoXQF1UZRpERFsAKk8kG6zE+X5qih07hsNY1XL+CXoyORLckVNrdTn/w0qSQZFwbFHQjoIX7uvp+iK9Ga23O16Sw3UhMGjdnS//adS3MNonEbsm1j1pfI5ax3vdwmj4pO7u16RNRobfG+NZs2/HdGqQB0qy23t6TdVtbhnqiIUez+qZT9wHPXySH94rzy+qdUBiIELJ8BcXut4sFhWtHo98+Iyq13CnrKw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=corigine.com; dmarc=pass action=none header.from=corigine.com;
+ dkim=pass header.d=corigine.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=corigine.onmicrosoft.com; s=selector2-corigine-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=QLx4sXunLZrfwp3LEPjxO1wSov8W3sutrn6njyOi2U8=;
+ b=Epg2zVJadOMgjRxY59fZ4bDelPRJAk8tLuIhjuuCiKp2dcACSa4cz2kMQiBCLZUgKVaCsb/teezmyrvPHPwUioHBZjpkcFG//Skh6AiiJD/b+FT34ONYIhedgQvCusWdkHihJPyczfo2enXZQ8FFFUItI+Pa1HbGNQvWcDKdu80=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=corigine.com;
+Received: from PH0PR13MB4842.namprd13.prod.outlook.com (2603:10b6:510:78::6)
+ by CO1PR13MB4840.namprd13.prod.outlook.com (2603:10b6:303:f6::13) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6387.33; Tue, 16 May
+ 2023 08:05:51 +0000
+Received: from PH0PR13MB4842.namprd13.prod.outlook.com
+ ([fe80::f416:544d:18b7:bb34]) by PH0PR13MB4842.namprd13.prod.outlook.com
+ ([fe80::f416:544d:18b7:bb34%5]) with mapi id 15.20.6387.033; Tue, 16 May 2023
+ 08:05:51 +0000
+Date:   Tue, 16 May 2023 10:05:42 +0200
+From:   Simon Horman <simon.horman@corigine.com>
+To:     Hariprasad Kelam <hkelam@marvell.com>
+Cc:     netdev@vger.kernel.org, linux-kernel@vger.kernel.org,
+        kuba@kernel.org, davem@davemloft.net,
+        willemdebruijn.kernel@gmail.com, andrew@lunn.ch,
+        sgoutham@marvell.com, lcherian@marvell.com, gakula@marvell.com,
+        jerinj@marvell.com, sbhatta@marvell.com, naveenm@marvell.com,
+        edumazet@google.com, pabeni@redhat.com, jhs@mojatatu.com,
+        xiyou.wangcong@gmail.com, jiri@resnulli.us, maxtram95@gmail.com,
+        corbet@lwn.net, linux-doc@vger.kernel.org
+Subject: Re: [net-next Patch v10 4/8] octeontx2-pf: Refactor schedular queue
+ alloc/free calls
+Message-ID: <ZGM5VmGcuEFG2Jh6@corigine.com>
+References: <20230513085143.3289-1-hkelam@marvell.com>
+ <20230513085143.3289-5-hkelam@marvell.com>
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20230513085143.3289-5-hkelam@marvell.com>
+X-ClientProxiedBy: AM0P190CA0003.EURP190.PROD.OUTLOOK.COM
+ (2603:10a6:208:190::13) To PH0PR13MB4842.namprd13.prod.outlook.com
+ (2603:10b6:510:78::6)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: 7bit
-X-Spam-Status: No, score=-2.1 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,SPF_HELO_PASS,SPF_PASS,
-        T_SCC_BODY_TEXT_LINE,URIBL_BLOCKED autolearn=ham autolearn_force=no
-        version=3.4.6
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: PH0PR13MB4842:EE_|CO1PR13MB4840:EE_
+X-MS-Office365-Filtering-Correlation-Id: dc06bb30-965d-4b3b-c216-08db55e45d99
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: QjrA2Aq4H2R2L1tU2E+82xy8mU/0MHuQRBGrAe1RbyyFS0UiutHwijv2XmGxNlZm77uyUidT5aASZWiW1cTTIqn0nHU29RUm/Kp0t96Zws4sQz5NOBUv0KPgBhjhMC/oMk0Ntz7NZUUvoTgufuw9iyLhdYNv+SHyu2mRRjMO4nnCc/GT3/VyaUtbrtTN2xHznf4r1uHoNOpUCtX3J/v/H9VyJKGqHt91Es6qQ4pCHccrZSZ2EvlJUkRUdeJ4Gng9axGpEI63sTXjl5J29l8bz6pFPA1IFRbIM2NKgxEZttM0Um8W4gYgCh5xcQkpZ6WToVvNRut17rGACUTVhBChvyiuermydkSUU6pOiJf+q11wqXjmNCtJfuXk8JPqXnIZk2E0DCFSm73D8YpnFaRa7s23nQhmNIc5CfL46RiaMhKkUSRDoWKOpFpsnSqCGNVT/chp7LvQOnJn/hf33vbJbDugLNZJM1OHqoWaFVP845XVW3DsBw/NK58nJBv9ax1KjBSrua109CTo/nQ1m5ccwgdxEkbS/xk90rj4OrYvjpzO/IgHjtpzDIt/u8tBhXOf
+X-Forefront-Antispam-Report: CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:PH0PR13MB4842.namprd13.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230028)(4636009)(396003)(136003)(366004)(39840400004)(376002)(346002)(451199021)(36756003)(86362001)(316002)(66946007)(66556008)(66476007)(6916009)(4326008)(478600001)(6666004)(8936002)(8676002)(5660300002)(41300700001)(2906002)(7416002)(44832011)(38100700002)(2616005)(6512007)(6506007)(186003)(83380400001)(6486002);DIR:OUT;SFP:1102;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?gLLoFbA07zQuboSjI01O6Z264XFxSB1rjS38srIKnQcn62QW5WK+TCyqcEMQ?=
+ =?us-ascii?Q?zxRfvXTvYe0MSJV2PvQRQq2pHsnfvn2QqBRbZQGFmpO1w8OgrcuhV58rLTBy?=
+ =?us-ascii?Q?AZVESTBA5UGWwZAuR5ItyWGcWmHbbNUaG7GOGvUXYVtPnK7pBsHsbZN9Igg8?=
+ =?us-ascii?Q?VUobFvUnwpykcqg6HZsnX++YTvcZBPVG2DTjrwbRxeuQ96tBbGaPDQgKkhTB?=
+ =?us-ascii?Q?nsHmKfd5PgZwpgiJcddMbpswfgGBHkAYsL7s15GRPAoFHhM5dGPIzui4don+?=
+ =?us-ascii?Q?DIQLorDwOA6nQu1gLjJYnfxu7RohItV4QLuatHt6oCGniskaeLLcrhll+Uuy?=
+ =?us-ascii?Q?dQZ1bQpY7bsI2A/8Sj4xo717Q24UXmjUoRpatSqGjFj9T0/KObEe6bX/zTll?=
+ =?us-ascii?Q?2GjcRWE7r6YCqP7sOoQfPVD7PnrEYjgGZq9TPXBe3jAOp53brQt9nEIqOaEU?=
+ =?us-ascii?Q?TKL7e+ESJlZnuKS+5BtWbybuY2GCUht73JhnWMWjLhlHIXBEceCQu/E7l4EU?=
+ =?us-ascii?Q?EBYIw/AN84cmc02JLdc0KctUi+iptS3iHFM2a+g9XoD3xVep3HRHMnk3kMn0?=
+ =?us-ascii?Q?AdgKPxd3LYuhMIJ1kq14LAtFi8/dCmTBx9j+xsEc2uIqAT0FjQWXiH3fiIbP?=
+ =?us-ascii?Q?oLLj4niKAo5JtzW0UoqMd4QrQu36WWuDDCdBqAuWAaYYCKOGe6at00mB1tfW?=
+ =?us-ascii?Q?koBRWJYCTJHHfxWYv4YkeVV38jqU14Yrt0H9YtGB6hI3enHdyeg0ziPChdMR?=
+ =?us-ascii?Q?I5c4MfxepHcIPMzblcpvtY/eAzMnpWbmF1HdDkT/78Xao8rz337zAdiNVZFi?=
+ =?us-ascii?Q?t3tuqsNHdOeSF+aV7LRcfT5ANQWjkeKIVclznkGxposLJQCw1Va2kUyoybTz?=
+ =?us-ascii?Q?bBJADfJVkbQuFoZiAfentgJYQziNS2aLJZszYQeaDRUNW/kzNzbzbINSosFA?=
+ =?us-ascii?Q?WF7toQFCODAx1MwEA/rcRaigxSBG0nXR/jg0stdXecOMgfgVaNzbTqHy1TDX?=
+ =?us-ascii?Q?307ph1U3/fcS5qksr9cMSZySMbD0uVhkySroDgIapWV3JijbKY0H7kK2B6Iz?=
+ =?us-ascii?Q?MRJXY6PPs+dTcxI3wi4f/5vLgowIt/VzUHpNED0m9b5hQ7E3nun7iNAYlmEU?=
+ =?us-ascii?Q?l2ayfqR0OVtsE236c+q2oCDsmOfP16MLoSX6Twfjp9+bEDk5oalw2rdraepR?=
+ =?us-ascii?Q?M+GLIWKJuYO53zD/IjzRlTuawzFrnVm2sR4v8R759voS4AtBUqUc9LNzNqgE?=
+ =?us-ascii?Q?0QXy7H6C4OREas8xv/zB3OHB/120hib0MS8b8g73560+Zp+5Huskm3yniB2W?=
+ =?us-ascii?Q?/qXXw257bB0H2W6RjP2fPrPISRc81yqChgQO+thNwszg2Nrin2rmPnbONfKe?=
+ =?us-ascii?Q?Mio6EJ0siO3d8Tv9vQdxmEVpoOEmSKcV436rvo0Wjlr9wPupyV+ChKVnLX5m?=
+ =?us-ascii?Q?ZQedn5P5IJ0PZu3/DVRhOutI3homDD1gP3x7edHAtNWEmHvuWUFEbrP7nAQa?=
+ =?us-ascii?Q?5Tg7lPYFTwv0YxJLpsRw6mbcWmoW0vrTy5UjOzdqAghXmUKm7UXmX9L5gPh0?=
+ =?us-ascii?Q?S3qEwl8egZ3KNDN6g81h/gmcDjaHH5TFZBwXxc05EGdN8rqmBuSEfPrq8sB8?=
+ =?us-ascii?Q?jX6/tE+tlnUr623VnKpvNFD3urx06l8sIgoo+lsYPsxRSb2a2IUd/wyqVb1l?=
+ =?us-ascii?Q?NE5OqA=3D=3D?=
+X-OriginatorOrg: corigine.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: dc06bb30-965d-4b3b-c216-08db55e45d99
+X-MS-Exchange-CrossTenant-AuthSource: PH0PR13MB4842.namprd13.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 16 May 2023 08:05:51.5803
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: fe128f2c-073b-4c20-818e-7246a585940c
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: N0QQ9PRlBj/3crDPTsuhxkRQlsaFKGt6WwrnxLGChNdIWQQAkJMrKBQ3Lma5+DNe8UwAzUuC3sf35S/NUQP2+MCETL7GMHHkdGha4q+HhkI=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: CO1PR13MB4840
+X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+        DKIM_VALID,RCVD_IN_DNSWL_NONE,RCVD_IN_MSPIKE_H2,SPF_HELO_PASS,SPF_PASS,
+        T_SCC_BODY_TEXT_LINE autolearn=ham autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Mon, 15 May 2023 11:15:51 +0200
-Niklas Schnelle <schnelle@linux.ibm.com> wrote:
+Hi Hariprasad,
 
-> A future change will convert the DMA API implementation from the
-> architecture specific arch/s390/pci/pci_dma.c to using the common code
-> drivers/iommu/dma-iommu.c which the utilizes the same IOMMU hardware
-> through the s390-iommu driver. Unlike the s390 specific DMA API this
-> requires devices to correctly call set the coherent mask to be allowed
-> to use IOVAs >2^32 in dma_alloc_coherent(). This was however not done
-> for ISM devices. ISM requires such addresses since currently the DMA
-> aperture for PCI devices starts at 2^32 and all calls to
-> dma_alloc_coherent() would thus fail.
+On Sat, May 13, 2023 at 02:21:39PM +0530, Hariprasad Kelam wrote:
+> 1. Upon txschq free request, the transmit schedular config in hardware
+> is not getting reset. This patch adds necessary changes to do the same.
 > 
-> Reviewed-by: Alexandra Winter <wintera@linux.ibm.com>
-> Reviewed-by: Matthew Rosato <mjrosato@linux.ibm.com>
-> Signed-off-by: Niklas Schnelle <schnelle@linux.ibm.com>
-> ---
->  drivers/s390/net/ism_drv.c | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
+
+nit: s/schedular/scheduler/
+
+> 2. Current implementation calls txschq alloc during interface
+> initialization and in response handler updates the default txschq array.
+> This creates a problem for htb offload where txsch alloc will be called
+> for every tc class. This patch addresses the issue by reading txschq
+> response in mbox caller function instead in the response handler.
 > 
-> diff --git a/drivers/s390/net/ism_drv.c b/drivers/s390/net/ism_drv.c
-> index 8acb9eba691b..1399b5dc646c 100644
-> --- a/drivers/s390/net/ism_drv.c
-> +++ b/drivers/s390/net/ism_drv.c
-> @@ -660,7 +660,7 @@ static int ism_probe(struct pci_dev *pdev, const struct pci_device_id *id)
->  	if (ret)
->  		goto err_disable;
+> 3. Current otx2_txschq_stop routine tries to free all txschq nodes
+> allocated to the interface. This creates a problem for htb offload.
+> This patch introduces the otx2_txschq_free_one to free txschq in a
+> given level.
+
+This patch seems to be doing three things.
+Could it be split into three patches?
+
+...
+
+> -int otx2_txschq_stop(struct otx2_nic *pfvf)
+> +void otx2_txschq_free_one(struct otx2_nic *pfvf, u16 lvl, u16 schq)
+>  {
+>  	struct nix_txsch_free_req *free_req;
+> -	int lvl, schq, err;
+> +	int err;
 >  
-> -	ret = dma_set_mask(&pdev->dev, DMA_BIT_MASK(64));
-> +	ret = dma_set_mask_and_coherent(&pdev->dev, DMA_BIT_MASK(64));
+>  	mutex_lock(&pfvf->mbox.lock);
+> -	/* Free the transmit schedulers */
+> +
+>  	free_req = otx2_mbox_alloc_msg_nix_txsch_free(&pfvf->mbox);
 
-Ah. I love this change. I have already wondered a few times if the
-coherent DMA mask for this device may actually be different from
-dma_mask. Now I know. ;-)
+Mainly for my own edification:
 
-Thanks!
+	- otx2_mbox_alloc_msg_nix_txsch_free is created via the
+	  M(_name, _id, _fn_name, _req_type, _rsp_type) macro
+	  around line 844 of  otx2_common.h
+	- It calls otx2_mbox_alloc_msg_rsp
+	- Which does not call any allocation functions such as kmalloc
 
-Petr T
+>  	if (!free_req) {
+>  		mutex_unlock(&pfvf->mbox.lock);
+> -		return -ENOMEM;
+> +		netdev_err(pfvf->netdev,
+> +			   "Failed alloc txschq free req\n");
+
+I think that given the above it's ok to log an error here.
+As the allocation core won't have (because it's not used here.
+But I wonder if it would be more consistent with how
+allocation errors are usually handled to move the logging into
+otx2_mbox_alloc_msg_rsp().
+
+> +		return;
+>  	}
+>  
+> -	free_req->flags = TXSCHQ_FREE_ALL;
+> +	free_req->schq_lvl = lvl;
+> +	free_req->schq = schq;
+> +
+>  	err = otx2_sync_mbox_msg(&pfvf->mbox);
+> +	if (err) {
+> +		netdev_err(pfvf->netdev,
+> +			   "Failed stop txschq %d at level %d\n", schq, lvl);
+> +	}
+> +
+>  	mutex_unlock(&pfvf->mbox.lock);
+> +}
+> +
+> +void otx2_txschq_stop(struct otx2_nic *pfvf)
+> +{
+> +	int lvl, schq;
+> +
+> +	/* free non QOS TLx nodes */
+> +	for (lvl = 0; lvl < NIX_TXSCH_LVL_CNT; lvl++)
+> +		otx2_txschq_free_one(pfvf, lvl,
+> +				     pfvf->hw.txschq_list[lvl][0]);
+>  
+>  	/* Clear the txschq list */
+>  	for (lvl = 0; lvl < NIX_TXSCH_LVL_CNT; lvl++) {
+>  		for (schq = 0; schq < MAX_TXSCHQ_PER_FUNC; schq++)
+>  			pfvf->hw.txschq_list[lvl][schq] = 0;
+>  	}
+> -	return err;
+> +
+
+nit: no blank line here.
+
+>  }
+>  
+>  void otx2_sqb_flush(struct otx2_nic *pfvf)
+
+...
