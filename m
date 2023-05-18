@@ -2,248 +2,165 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 48FF67079CC
-	for <lists+linux-doc@lfdr.de>; Thu, 18 May 2023 07:49:01 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 63701707A7A
+	for <lists+linux-doc@lfdr.de>; Thu, 18 May 2023 09:01:08 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S229704AbjERFs7 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 18 May 2023 01:48:59 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:58282 "EHLO
+        id S229983AbjERHBC (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 18 May 2023 03:01:02 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:48438 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S229586AbjERFs6 (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Thu, 18 May 2023 01:48:58 -0400
-Received: from NAM04-BN8-obe.outbound.protection.outlook.com (mail-bn8nam04on2041.outbound.protection.outlook.com [40.107.100.41])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 9401C1721;
-        Wed, 17 May 2023 22:48:57 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=NhVUaVojghzZBKZFIMu8HrHkwt+N9vgvEhXxVugXBQeD1HC208kYHLy0ens/J+w9m4EJyDGLdd7z6zdsnCdktzWhxlVdj5b30bw9ZDk1pOT9TXxuXqJpz3aUwBUFd4LMr1XfTeEHUDV79gNkFV11foYegn5GOvEVL11QUqnnXz1xZYchzqaRV1w73wvyPcajfulJJD+jqwwReOujcT4YJUgeHPOxlBMbhF2ciK2Tnc8nr5D+PLICyAHSoFouUB7kBBFO3SFFOdSTHKBDbbl47cZYt73Cpd1wIB+aubxU6b/q7PR8SChSq7qN0b/VNo+F0+xgvqBODykvI+BnTnkWVw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=uP8Aev+gMBcJF8nbYQIyLgLTxjWnvh55/t4jh0rTaEw=;
- b=BNaeI3+t6UixIVmDLetXhHAt4hBJm4jYwOIJU9BXmkfP9fuE+cZ4CHkZEy9F4hHIU3DOInpOBF/5liNuBj0hDtNEX7tZs3DyuIi8ijZD95vbs238e/hwyoFA7nZ6SNAlPBjq0ZRcCaN06hOoLbU8DsIuq2VauIAA3p599FsZ2rob1ZVHGIrY4BAxXBYnvwGIL3XiNQX7DK4zuOMnWrqzfTHuevyW4BiRMs0f7lSYxfdBkLyYtHrHHLWxkRnsLj+IPCnD1W9GjbXGohMLb+IO8nGyFeBoW+ZDbjXAigFtKh3wzcI0uSm2FMyouAbWQmUnG49NeBJTur7zl0osz8l0jQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=vger.kernel.org smtp.mailfrom=amd.com;
- dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
- header.from=amd.com; dkim=none (message not signed); arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=uP8Aev+gMBcJF8nbYQIyLgLTxjWnvh55/t4jh0rTaEw=;
- b=OAQYt/2jOvmF+8SgIS2xs6AWYHVeCIYICe/m6ZPL0qATfyaMOh/10PHOI01Ty/quyIisah/BFPdNmsYveaOzkMQPtxJVWCBjzAxO+Y5CYr1HLoGyQTQh0MgJFs0YXKEqMWMjyVoqzOlIuvZOWsL96Yza//3BcFA7yGyOF0biOBQ=
-Received: from BN9PR03CA0113.namprd03.prod.outlook.com (2603:10b6:408:fd::28)
- by PH7PR12MB6564.namprd12.prod.outlook.com (2603:10b6:510:210::22) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6411.17; Thu, 18 May
- 2023 05:48:54 +0000
-Received: from BN8NAM11FT103.eop-nam11.prod.protection.outlook.com
- (2603:10b6:408:fd:cafe::4) by BN9PR03CA0113.outlook.office365.com
- (2603:10b6:408:fd::28) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6411.18 via Frontend
- Transport; Thu, 18 May 2023 05:48:54 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
- smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
-Received: from SATLEXMB04.amd.com (165.204.84.17) by
- BN8NAM11FT103.mail.protection.outlook.com (10.13.176.181) with Microsoft SMTP
- Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.6411.19 via Frontend Transport; Thu, 18 May 2023 05:48:54 +0000
-Received: from SATLEXMB08.amd.com (10.181.40.132) by SATLEXMB04.amd.com
- (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2375.34; Thu, 18 May
- 2023 00:48:53 -0500
-Received: from SATLEXMB03.amd.com (10.181.40.144) by SATLEXMB08.amd.com
- (10.181.40.132) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2375.34; Wed, 17 May
- 2023 22:48:53 -0700
-Received: from xcbalucerop41x.xilinx.com (10.180.168.240) by
- SATLEXMB03.amd.com (10.181.40.144) with Microsoft SMTP Server
+        with ESMTP id S229958AbjERHA6 (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Thu, 18 May 2023 03:00:58 -0400
+Received: from szxga08-in.huawei.com (szxga08-in.huawei.com [45.249.212.255])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 804321FFE;
+        Thu, 18 May 2023 00:00:54 -0700 (PDT)
+Received: from canpemm500009.china.huawei.com (unknown [172.30.72.56])
+        by szxga08-in.huawei.com (SkyGuard) with ESMTP id 4QMLNt5ymqz18Lk1;
+        Thu, 18 May 2023 14:56:30 +0800 (CST)
+Received: from localhost.localdomain (10.50.163.32) by
+ canpemm500009.china.huawei.com (7.192.105.203) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2375.34 via Frontend Transport; Thu, 18 May 2023 00:48:51 -0500
-From:   <alejandro.lucero-palau@amd.com>
-To:     <netdev@vger.kernel.org>, <linux-net-drivers@amd.com>
-CC:     <davem@davemloft.net>, <kuba@kernel.org>, <pabeni@redhat.com>,
-        <edumazet@google.com>, <martin.habets@amd.com>,
-        <edward.cree@amd.com>, <linux-doc@vger.kernel.org>,
-        <corbet@lwn.net>, <jiri@nvidia.com>,
-        "Alejandro Lucero" <alejandro.lucero-palau@amd.com>
-Subject: [PATCH net] sfc: fix devlink info error handling
-Date:   Thu, 18 May 2023 06:48:22 +0100
-Message-ID: <20230518054822.20242-1-alejandro.lucero-palau@amd.com>
-X-Mailer: git-send-email 2.17.1
+ 15.1.2507.23; Thu, 18 May 2023 15:00:51 +0800
+From:   Yicong Yang <yangyicong@huawei.com>
+To:     <akpm@linux-foundation.org>, <linux-mm@kvack.org>,
+        <linux-arm-kernel@lists.infradead.org>, <x86@kernel.org>,
+        <catalin.marinas@arm.com>, <mark.rutland@arm.com>,
+        <ryan.roberts@arm.com>, <will@kernel.org>,
+        <anshuman.khandual@arm.com>, <linux-doc@vger.kernel.org>
+CC:     <corbet@lwn.net>, <peterz@infradead.org>, <arnd@arndb.de>,
+        <punit.agrawal@bytedance.com>, <linux-kernel@vger.kernel.org>,
+        <darren@os.amperecomputing.com>, <yangyicong@hisilicon.com>,
+        <huzhanyuan@oppo.com>, <lipeifeng@oppo.com>,
+        <zhangshiming@oppo.com>, <guojian@oppo.com>, <realmz6@gmail.com>,
+        <linux-mips@vger.kernel.org>, <openrisc@lists.librecores.org>,
+        <linuxppc-dev@lists.ozlabs.org>, <linux-riscv@lists.infradead.org>,
+        <linux-s390@vger.kernel.org>, Barry Song <21cnbao@gmail.com>,
+        <wangkefeng.wang@huawei.com>, <xhao@linux.alibaba.com>,
+        <prime.zeng@hisilicon.com>, <Jonathan.Cameron@Huawei.com>
+Subject: [RESEND PATCH v9 0/2] arm64: support batched/deferred tlb shootdown during page reclamation/migration
+Date:   Thu, 18 May 2023 14:59:32 +0800
+Message-ID: <20230518065934.12877-1-yangyicong@huawei.com>
+X-Mailer: git-send-email 2.31.0
 MIME-Version: 1.0
-Content-Type: text/plain
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BN8NAM11FT103:EE_|PH7PR12MB6564:EE_
-X-MS-Office365-Filtering-Correlation-Id: 61008f14-8dc6-41d7-20ed-08db576390e9
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: U7B8znOtgbS7QiRs4NXKbObTmOStgGWa2KIdb5QO6CqhcUdGxfCa+ndiuadxyOfmSsq0Lt/NAwOmM2mg3i1jCmSNew5+PXqf4dTeolmx5KqsJg0U/576zeh5OArf4wLpgkzqXqNaArDSXz0ZPRRNAsau/FrQF8hbXEGYeJLpR/uMjlM4pI7wrmnV1ZPLbq24E3dZ3CGOAB+nTpyX2WpSx+1cgbA4sadU5N392qlJBB5kqdv+aJOjxB8aUBvaky6XqBmEoD5vsU52AjVvBtxzxkt+3urzH2CCtKAXmBgi16VZ9uIUS3P1cxAB51JQUcZFxN5ccpdR4M30kC7hPvVzRTjPWCStVEWcbTesQOOVPvE+fQ2GZUxjn4zxX8m/q3R83GgYEFhYBM41muQdk/vZr/EbLStoR07WaYc84gOhoiFINjzB++9Lxrnewzjcih4qVVquhEJpv/ARKwKVbWKs7XJiIxu9IRa3vK4ya2dAjTxtpaJYCePaLmgY5H0AoxSlZ6+7rNPTgFIXC+LMieKzSeOeWI86qfgncGouhMdrGM190xU3zOCfnRTmK1MXB+q3FTEoY1TLQE4XTYdoO2XsUyLp2ZN0WT2p7wVa5BClNOq62c/VctyUKkO6JnLl057JQv4I/ZP1okJ9fUg4OCfnuuAJ9QT/B4vcQ0kJ+TW/3TNzUoi1Fdp+AJ3oueQKsSXZGgsBZK2PgXLB1/eqayyBiAfmoyr8rjjD9u1Ue9Ogd9rIfT3tkWpbwqsI4WeReYCeS4BoxQD83QKjn1l/gGkY9w==
-X-Forefront-Antispam-Report: CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB04.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230028)(4636009)(136003)(396003)(39860400002)(346002)(376002)(451199021)(40470700004)(46966006)(36840700001)(40460700003)(70206006)(316002)(6636002)(478600001)(70586007)(4326008)(54906003)(110136005)(36756003)(86362001)(47076005)(83380400001)(1076003)(426003)(36860700001)(186003)(26005)(2616005)(8936002)(2906002)(5660300002)(8676002)(2876002)(40480700001)(6666004)(336012)(82310400005)(356005)(82740400003)(81166007)(41300700001)(36900700001);DIR:OUT;SFP:1101;
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 18 May 2023 05:48:54.7164
- (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 61008f14-8dc6-41d7-20ed-08db576390e9
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[SATLEXMB04.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource: BN8NAM11FT103.eop-nam11.prod.protection.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH7PR12MB6564
-X-Spam-Status: No, score=-1.1 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FORGED_SPF_HELO,
-        RCVD_IN_DNSWL_NONE,RCVD_IN_MSPIKE_H2,SPF_HELO_PASS,SPF_NONE,
-        T_SCC_BODY_TEXT_LINE autolearn=no autolearn_force=no version=3.4.6
+Content-Transfer-Encoding: 7BIT
+Content-Type:   text/plain; charset=US-ASCII
+X-Originating-IP: [10.50.163.32]
+X-ClientProxiedBy: dggems704-chm.china.huawei.com (10.3.19.181) To
+ canpemm500009.china.huawei.com (7.192.105.203)
+X-CFilter-Loop: Reflected
+X-Spam-Status: No, score=-4.2 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_MED,
+        RCVD_IN_MSPIKE_H2,SPF_HELO_NONE,SPF_PASS,T_SCC_BODY_TEXT_LINE
+        autolearn=ham autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-From: Alejandro Lucero <alejandro.lucero-palau@amd.com>
+From: Yicong Yang <yangyicong@hisilicon.com>
 
-Avoid early devlink info return if errors arise with MCDI commands
-executed for getting the required info from the device. The rationale
-is some commands can fail but later ones could still give useful data.
-Moreover, some nvram partitions could not be present which needs to be
-handled as a non error.
+Though ARM64 has the hardware to do tlb shootdown, the hardware
+broadcasting is not free.
+A simplest micro benchmark shows even on snapdragon 888 with only
+8 cores, the overhead for ptep_clear_flush is huge even for paging
+out one page mapped by only one process:
+5.36%  a.out    [kernel.kallsyms]  [k] ptep_clear_flush
 
-The specific errors are reported through system messages and if any
-error appears, it will be reported generically through extack.
+While pages are mapped by multiple processes or HW has more CPUs,
+the cost should become even higher due to the bad scalability of
+tlb shootdown.
 
-Fixes 14743ddd2495 (sfc: add devlink info support for ef100)
-Signed-off-by: Alejandro Lucero <alejandro.lucero-palau@amd.com>
----
- drivers/net/ethernet/sfc/efx_devlink.c | 95 ++++++++++++--------------
- 1 file changed, 45 insertions(+), 50 deletions(-)
+The same benchmark can result in 16.99% CPU consumption on ARM64
+server with around 100 cores according to Yicong's test on patch
+2/2.
 
-diff --git a/drivers/net/ethernet/sfc/efx_devlink.c b/drivers/net/ethernet/sfc/efx_devlink.c
-index 381b805659d3..ef9971cbb695 100644
---- a/drivers/net/ethernet/sfc/efx_devlink.c
-+++ b/drivers/net/ethernet/sfc/efx_devlink.c
-@@ -171,9 +171,14 @@ static int efx_devlink_info_nvram_partition(struct efx_nic *efx,
- 
- 	rc = efx_mcdi_nvram_metadata(efx, partition_type, NULL, version, NULL,
- 				     0);
-+
-+	/* If the partition does not exist, that is not an error. */
-+	if (rc == -ENOENT)
-+		return 0;
-+
- 	if (rc) {
--		netif_err(efx, drv, efx->net_dev, "mcdi nvram %s: failed\n",
--			  version_name);
-+		netif_err(efx, drv, efx->net_dev, "mcdi nvram %s: failed (rc=%d)\n",
-+			  version_name, rc);
- 		return rc;
- 	}
- 
-@@ -187,36 +192,33 @@ static int efx_devlink_info_nvram_partition(struct efx_nic *efx,
- static int efx_devlink_info_stored_versions(struct efx_nic *efx,
- 					    struct devlink_info_req *req)
- {
--	int rc;
--
--	rc = efx_devlink_info_nvram_partition(efx, req,
--					      NVRAM_PARTITION_TYPE_BUNDLE,
--					      DEVLINK_INFO_VERSION_GENERIC_FW_BUNDLE_ID);
--	if (rc)
--		return rc;
--
--	rc = efx_devlink_info_nvram_partition(efx, req,
--					      NVRAM_PARTITION_TYPE_MC_FIRMWARE,
--					      DEVLINK_INFO_VERSION_GENERIC_FW_MGMT);
--	if (rc)
--		return rc;
--
--	rc = efx_devlink_info_nvram_partition(efx, req,
--					      NVRAM_PARTITION_TYPE_SUC_FIRMWARE,
--					      EFX_DEVLINK_INFO_VERSION_FW_MGMT_SUC);
--	if (rc)
--		return rc;
--
--	rc = efx_devlink_info_nvram_partition(efx, req,
--					      NVRAM_PARTITION_TYPE_EXPANSION_ROM,
--					      EFX_DEVLINK_INFO_VERSION_FW_EXPROM);
--	if (rc)
--		return rc;
-+	int err;
- 
--	rc = efx_devlink_info_nvram_partition(efx, req,
--					      NVRAM_PARTITION_TYPE_EXPANSION_UEFI,
--					      EFX_DEVLINK_INFO_VERSION_FW_UEFI);
--	return rc;
-+	/* We do not care here about the specific error but just if an error
-+	 * happened. The specific error will be reported inside the call
-+	 * through system messages, and if any error happened in any call
-+	 * below, we report it through extack.
-+	 */
-+	err = efx_devlink_info_nvram_partition(efx, req,
-+					       NVRAM_PARTITION_TYPE_BUNDLE,
-+					       DEVLINK_INFO_VERSION_GENERIC_FW_BUNDLE_ID);
-+
-+	err |= efx_devlink_info_nvram_partition(efx, req,
-+						NVRAM_PARTITION_TYPE_MC_FIRMWARE,
-+						DEVLINK_INFO_VERSION_GENERIC_FW_MGMT);
-+
-+	err |= efx_devlink_info_nvram_partition(efx, req,
-+						NVRAM_PARTITION_TYPE_SUC_FIRMWARE,
-+						EFX_DEVLINK_INFO_VERSION_FW_MGMT_SUC);
-+
-+	err |= efx_devlink_info_nvram_partition(efx, req,
-+						NVRAM_PARTITION_TYPE_EXPANSION_ROM,
-+						EFX_DEVLINK_INFO_VERSION_FW_EXPROM);
-+
-+	err |= efx_devlink_info_nvram_partition(efx, req,
-+						NVRAM_PARTITION_TYPE_EXPANSION_UEFI,
-+						EFX_DEVLINK_INFO_VERSION_FW_UEFI);
-+	return err;
- }
- 
- #define EFX_VER_FLAG(_f)	\
-@@ -587,27 +589,20 @@ static int efx_devlink_info_get(struct devlink *devlink,
- {
- 	struct efx_devlink *devlink_private = devlink_priv(devlink);
- 	struct efx_nic *efx = devlink_private->efx;
--	int rc;
-+	int err;
- 
--	/* Several different MCDI commands are used. We report first error
--	 * through extack returning at that point. Specific error
--	 * information via system messages.
-+	/* Several different MCDI commands are used. We report if errors
-+	 * happened through extack. Specific error information via system
-+	 * messages inside the calls.
- 	 */
--	rc = efx_devlink_info_board_cfg(efx, req);
--	if (rc) {
--		NL_SET_ERR_MSG_MOD(extack, "Getting board info failed");
--		return rc;
--	}
--	rc = efx_devlink_info_stored_versions(efx, req);
--	if (rc) {
--		NL_SET_ERR_MSG_MOD(extack, "Getting stored versions failed");
--		return rc;
--	}
--	rc = efx_devlink_info_running_versions(efx, req);
--	if (rc) {
--		NL_SET_ERR_MSG_MOD(extack, "Getting running versions failed");
--		return rc;
--	}
-+	err = efx_devlink_info_board_cfg(efx, req);
-+
-+	err |= efx_devlink_info_stored_versions(efx, req);
-+
-+	err |= efx_devlink_info_running_versions(efx, req);
-+
-+	if (err)
-+		NL_SET_ERR_MSG_MOD(extack, "Errors when getting device info. Check system messages");
- 
- 	return 0;
- }
+This patchset leverages the existing BATCHED_UNMAP_TLB_FLUSH by
+1. only send tlbi instructions in the first stage -
+	arch_tlbbatch_add_mm()
+2. wait for the completion of tlbi by dsb while doing tlbbatch
+	sync in arch_tlbbatch_flush()
+Testing on snapdragon shows the overhead of ptep_clear_flush
+is removed by the patchset. The micro benchmark becomes 5% faster
+even for one page mapped by single process on snapdragon 888.
+
+This support also optimize the page migration more than 50% with support
+of batched TLB flushing [*].
+
+[*] https://lore.kernel.org/linux-mm/20230213123444.155149-1-ying.huang@intel.com/
+
+-v9:
+1. Using a runtime tunable to control batched TLB flush, per Catalin in v7.
+   Sorry for missing this on v8.
+Link: https://lore.kernel.org/all/20230329035512.57392-1-yangyicong@huawei.com/
+
+-v8:
+1. Rebase on 6.3-rc4
+2. Tested the optimization on page migration and mentioned it in the commit
+3. Thanks the review from Anshuman.
+Link: https://lore.kernel.org/linux-mm/20221117082648.47526-1-yangyicong@huawei.com/
+
+-v7:
+1. rename arch_tlbbatch_add_mm() to arch_tlbbatch_add_pending() as suggested, since it
+   takes an extra address for arm64, per Nadav and Anshuman. Also mentioned in the commit.
+2. add tags from Xin Hao, thanks.
+Link: https://lore.kernel.org/lkml/20221115031425.44640-1-yangyicong@huawei.com/
+
+-v6:
+1. comment we don't defer TLB flush on platforms affected by ARM64_WORKAROUND_REPEAT_TLBI
+2. use cpus_have_const_cap() instead of this_cpu_has_cap()
+3. add tags from Punit, Thanks.
+4. default enable the feature when cpus >= 8 rather than > 8, since the original
+   improvement is observed on snapdragon 888 with 8 cores.
+Link: https://lore.kernel.org/lkml/20221028081255.19157-1-yangyicong@huawei.com/
+
+-v5:
+1. Make ARCH_WANT_BATCHED_UNMAP_TLB_FLUSH depends on EXPERT for this stage on arm64.
+2. Make a threshold of CPU numbers for enabling batched TLP flush on arm64
+Link: https://lore.kernel.org/linux-arm-kernel/20220921084302.43631-1-yangyicong@huawei.com/T/
+
+-v4:
+1. Add tags from Kefeng and Anshuman, Thanks.
+2. Limit the TLB batch/defer on systems with >4 CPUs, per Anshuman
+3. Merge previous Patch 1,2-3 into one, per Anshuman
+Link: https://lore.kernel.org/linux-mm/20220822082120.8347-1-yangyicong@huawei.com/
+
+-v3:
+1. Declare arch's tlbbatch defer support by arch_tlbbatch_should_defer() instead
+   of ARCH_HAS_MM_CPUMASK, per Barry and Kefeng
+2. Add Tested-by from Xin Hao
+Link: https://lore.kernel.org/linux-mm/20220711034615.482895-1-21cnbao@gmail.com/
+
+-v2:
+1. Collected Yicong's test result on kunpeng920 ARM64 server;
+2. Removed the redundant vma parameter in arch_tlbbatch_add_mm()
+   according to the comments of Peter Zijlstra and Dave Hansen
+3. Added ARCH_HAS_MM_CPUMASK rather than checking if mm_cpumask
+   is empty according to the comments of Nadav Amit
+
+Thanks, Peter, Dave and Nadav for your testing or reviewing
+, and comments.
+
+-v1:
+https://lore.kernel.org/lkml/20220707125242.425242-1-21cnbao@gmail.com/
+
+Anshuman Khandual (1):
+  mm/tlbbatch: Introduce arch_tlbbatch_should_defer()
+
+Barry Song (1):
+  arm64: support batched/deferred tlb shootdown during page
+    reclamation/migration
+
+ .../features/vm/TLB/arch-support.txt          |  2 +-
+ arch/arm64/Kconfig                            |  1 +
+ arch/arm64/include/asm/tlbbatch.h             | 12 ++++
+ arch/arm64/include/asm/tlbflush.h             | 33 ++++++++-
+ arch/arm64/mm/flush.c                         | 69 +++++++++++++++++++
+ arch/x86/include/asm/tlbflush.h               | 17 ++++-
+ include/linux/mm_types_task.h                 |  4 +-
+ mm/rmap.c                                     | 21 +++---
+ 8 files changed, 139 insertions(+), 20 deletions(-)
+ create mode 100644 arch/arm64/include/asm/tlbbatch.h
+
 -- 
-2.17.1
+2.24.0
 
