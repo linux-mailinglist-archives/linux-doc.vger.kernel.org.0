@@ -2,92 +2,118 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 37C407089EA
-	for <lists+linux-doc@lfdr.de>; Thu, 18 May 2023 22:55:55 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id D8522708A77
+	for <lists+linux-doc@lfdr.de>; Thu, 18 May 2023 23:28:26 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S230497AbjERUzy (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 18 May 2023 16:55:54 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:33916 "EHLO
+        id S230359AbjERV2E (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 18 May 2023 17:28:04 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:46508 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S230494AbjERUzx (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Thu, 18 May 2023 16:55:53 -0400
+        with ESMTP id S230233AbjERV2B (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Thu, 18 May 2023 17:28:01 -0400
 Received: from bombadil.infradead.org (bombadil.infradead.org [IPv6:2607:7c80:54:3::133])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 361D1F7;
-        Thu, 18 May 2023 13:55:53 -0700 (PDT)
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 9B43E10C6;
+        Thu, 18 May 2023 14:27:57 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-        d=infradead.org; s=bombadil.20210309; h=Sender:In-Reply-To:Content-Type:
-        MIME-Version:References:Message-ID:Subject:Cc:To:From:Date:Reply-To:
-        Content-Transfer-Encoding:Content-ID:Content-Description;
-        bh=YPhP6BC+IEsfoXB2aA0bVLzSVsaUv9891PdK+C1Dx8g=; b=tt6ENj/lVkKUJKiCYXjfjkcAgl
-        E1CE5UrauzZwRVEElGcCTmu8epF1a4mGfMbBfAkXKwjH5q2F1eGd9tVyROLDRXDSxDuYOD7kFuo9J
-        QClvD48BhsS7IcENKjAOSAlShtPujeLos50tHDAYM0XQvweiKi7RTBQZNcKeBnr+OHDzzE+bj9iLj
-        wgWwyDZPDIM+md6dmmZ66Mu9UZ4dzSbkUYmTs3XEW3hUdN2tf26kYUqB3Xs8I19yOjW/qHeQDxWX7
-        v9180P287Yh/woZlzZVheCx3vYqiqTPaDO+wn5Qa5HppftycV9NrqXqPdeC3+XMtkI7rQyeI6jFTh
-        4a0LBx+Q==;
-Received: from mcgrof by bombadil.infradead.org with local (Exim 4.96 #2 (Red Hat Linux))
-        id 1pzkf6-00EAQG-0R;
-        Thu, 18 May 2023 20:55:48 +0000
-Date:   Thu, 18 May 2023 13:55:48 -0700
-From:   Luis Chamberlain <mcgrof@kernel.org>
-To:     Randy Dunlap <rdunlap@infradead.org>
-Cc:     corbet@lwn.net, jake@lwn.net, hch@infradead.org, djwong@kernel.org,
-        dchinner@redhat.com, ritesh.list@gmail.com, rgoldwyn@suse.com,
-        jack@suse.cz, linux-doc@vger.kernel.org, linux-xfs@vger.kernel.org,
-        linux-fsdevel@vger.kernel.org, linux-block@vger.kernel.org,
-        p.raghav@samsung.com, da.gomez@samsung.com, rohan.puri@samsung.com
-Subject: Re: [PATCH v2] Documentation: add initial iomap kdoc
-Message-ID: <ZGaQ1KzKGuuPIpTb@bombadil.infradead.org>
-References: <20230518150105.3160445-1-mcgrof@kernel.org>
- <707b28de-2449-5cf3-9360-b2faec0481c7@infradead.org>
+        d=infradead.org; s=bombadil.20210309; h=Content-Transfer-Encoding:
+        MIME-Version:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
+        Content-ID:Content-Description:In-Reply-To:References;
+        bh=Dykfym+h/fBFI+QSChaFq+A6w9GQjFVudoBE08aqTKQ=; b=l6TwZDVz5xktrEEcffBG7ylf7C
+        bpzTOidYU8TPWGiDPdEDxlJmnzO04hUghnYE4dhVo+tg6EdhPMpCdifUYnPo7hfqKLjq86eqPFwAv
+        fsu4bDkEne8YpnQ1xG1s1q7swTXfB5B062/LWgGTzqYAgOtMjvfy6z75pR9SXHBiTuM9LIGiLKTSh
+        aXEScrSx+YI1EKFUAEM0BYB9Nan0JSF0nakGzNK+txQWnv9hZDrzTrONVy5tS6erH4taPU0fnqYjQ
+        6emQMv7pVrBx1F1GcVa24aBXsa5cTw5ZnsugmuC/tjFZqYAfDDltDhpj2iG2j3RXHD5vDqg/XhVbQ
+        zaYQJChw==;
+Received: from [2601:1c2:980:9ec0::2764] (helo=bombadil.infradead.org)
+        by bombadil.infradead.org with esmtpsa (Exim 4.96 #2 (Red Hat Linux))
+        id 1pzlA9-00EFRV-0z;
+        Thu, 18 May 2023 21:27:53 +0000
+From:   Randy Dunlap <rdunlap@infradead.org>
+To:     linux-kernel@vger.kernel.org
+Cc:     Randy Dunlap <rdunlap@infradead.org>,
+        "James E.J. Bottomley" <jejb@linux.ibm.com>,
+        "Martin K. Petersen" <martin.petersen@oracle.com>,
+        linux-scsi@vger.kernel.org, Jonathan Corbet <corbet@lwn.net>,
+        linux-doc@vger.kernel.org, Gerd Knorr <kraxel@bytesex.org>,
+        Oliver Neukum <oliver@neukum.org>,
+        Ali Akcaagac <aliakc@web.de>,
+        Jamie Lenehan <lenehan@twibble.org>, dc395x@twibble.org,
+        James Smart <james.smart@broadcom.com>,
+        Doug Gilbert <dgilbert@interlog.com>,
+        Finn Thain <fthain@linux-m68k.org>,
+        Michael Schmitz <schmitzmic@gmail.com>,
+        Kashyap Desai <kashyap.desai@broadcom.com>,
+        Sumit Saxena <sumit.saxena@broadcom.com>,
+        Shivasharan S <shivasharan.srikanteshwara@broadcom.com>,
+        megaraidlinux.pdl@broadcom.com,
+        Matthew Wilcox <willy@infradead.org>
+Subject: [PATCH 00/11] Documentation/scsi: organize SCSI docs & make more readable
+Date:   Thu, 18 May 2023 14:27:38 -0700
+Message-Id: <20230518212749.18266-1-rdunlap@infradead.org>
+X-Mailer: git-send-email 2.40.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <707b28de-2449-5cf3-9360-b2faec0481c7@infradead.org>
-Sender: Luis Chamberlain <mcgrof@infradead.org>
-X-Spam-Status: No, score=-4.1 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_EF,HEADER_FROM_DIFFERENT_DOMAINS,
-        RCVD_IN_DNSWL_MED,SPF_HELO_NONE,SPF_NONE,T_SCC_BODY_TEXT_LINE
-        autolearn=ham autolearn_force=no version=3.4.6
+Content-Transfer-Encoding: 8bit
+X-Spam-Status: No, score=-4.4 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_MED,SPF_HELO_NONE,
+        SPF_NONE,T_SCC_BODY_TEXT_LINE autolearn=ham autolearn_force=no
+        version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Thu, May 18, 2023 at 08:49:26AM -0700, Randy Dunlap wrote:
-> On 5/18/23 08:01, Luis Chamberlain wrote:
-> >   * use 80 char length as if we're in the 1980's
-> 
-> Well, like Jon said, long lines are difficult to read, even on printed paper.
-> That's (at least one reason) why newspapers(!) have narrow columns of print.
+Organize the SCSI documentation into categories instead of
+alphabetically by filename.
 
-Makes sense!
+Modify several of the document chapter headings so that they are
+shorter and easier to find.
 
-> Anyway, thanks for doing it.
+Make several updates to the scsi-generic driver documentation.
 
-Heh yeah, I just trying to follow the convention, but I didn't know it was
-a special-case for bumping up to 100 only, and that it was definitely
-not good for docs. It's easy to loose it though, we have one for commit log,
-one for length on code with an exception, and we have a clear perference
-for docs. Makes me wonder if editors pick up on project specific requirements
-somehow? 
+ [PATCH 01/11] Docs/scsi: organize the SCSI documentation
+ [PATCH 02/11] Docs/scsi: introduction: multiple cleanups
+ [PATCH 03/11] Docs/scsi: arcmsr: use a chapter heading for clarity
+ [PATCH 04/11] Docs/scsi: scsi-changer: shorten the chapter heading
+ [PATCH 05/11] Docs/scsi: dc395x: shorten the chapter heading
+ [PATCH 06/11] Docs/scsi: scsi_fc_transport: fix typo in heading
+ [PATCH 07/11] Docs/scsi: scsi-generic: multiple cleanups
+ [PATCH 08/11] Docs/scsi: g_NCR5380: shorten chapter heading
+ [PATCH 09/11] Docs/scsi: megaraid: clarify chapter heading
+ [PATCH 10/11] Docs/scsi: ncr53c8xx: shorten chapter heading
+ [PATCH 11/11] Docs/scsi: sym53c8xx_2: shorten chapter heading
 
-So for instance I used to have incorrectly;
 
-set textwidth=100
-autocmd FileType gitcommit set textwidth=72
-set colorcolumn=+1
+ Documentation/scsi/arcmsr_spec.rst       |    1 
+ Documentation/scsi/dc395x.rst            |    6 +-
+ Documentation/scsi/g_NCR5380.rst         |    6 +-
+ Documentation/scsi/index.rst             |   37 ++++++++++++--
+ Documentation/scsi/megaraid.rst          |    6 +-
+ Documentation/scsi/ncr53c8xx.rst         |    6 +-
+ Documentation/scsi/scsi-changer.rst      |    6 +-
+ Documentation/scsi/scsi-generic.rst      |   53 ++++++++-------------
+ Documentation/scsi/scsi.rst              |   23 +++------
+ Documentation/scsi/scsi_fc_transport.rst |    8 +--
+ Documentation/scsi/sym53c8xx_2.rst       |    6 +-
+ 11 files changed, 86 insertions(+), 72 deletions(-)
 
-Cleary that 100 is wrong now and I've now updated it bacak to 80.
-Could one be used for FileType for rst and ascii files?
 
-If we shared something on the top level which lets developers
-optionally pick up on project specific guideline it would be a less
-common problem to ping back / forth about this. Curious how many
-patches "length" is the reason introduces a latency for patches getting
-upstream. You figured this would be a simple fix in year 2023 :P
-
-Thanks for the fix recommendations! I'll wait and see if others find
-others!
-
-  Luis
+Cc: "James E.J. Bottomley" <jejb@linux.ibm.com>
+Cc: "Martin K. Petersen" <martin.petersen@oracle.com>
+Cc: linux-scsi@vger.kernel.org
+Cc: Jonathan Corbet <corbet@lwn.net>
+Cc: linux-doc@vger.kernel.org
+Cc: Gerd Knorr <kraxel@bytesex.org>
+Cc: Oliver Neukum <oliver@neukum.org>
+Cc: Ali Akcaagac <aliakc@web.de>
+Cc: Jamie Lenehan <lenehan@twibble.org>
+Cc: dc395x@twibble.org
+Cc: James Smart <james.smart@broadcom.com>
+Cc: Doug Gilbert <dgilbert@interlog.com>
+Cc: Finn Thain <fthain@linux-m68k.org>
+Cc: Michael Schmitz <schmitzmic@gmail.com>
+Cc: Kashyap Desai <kashyap.desai@broadcom.com>
+Cc: Sumit Saxena <sumit.saxena@broadcom.com>
+Cc: Shivasharan S <shivasharan.srikanteshwara@broadcom.com>
+Cc: megaraidlinux.pdl@broadcom.com
+Cc: Matthew Wilcox <willy@infradead.org>
