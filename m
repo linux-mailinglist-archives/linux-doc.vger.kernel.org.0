@@ -2,176 +2,233 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 41638709C24
-	for <lists+linux-doc@lfdr.de>; Fri, 19 May 2023 18:13:22 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id D05D0709CAC
+	for <lists+linux-doc@lfdr.de>; Fri, 19 May 2023 18:46:25 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S230060AbjESQNU (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Fri, 19 May 2023 12:13:20 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:44596 "EHLO
+        id S229885AbjESQqY (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Fri, 19 May 2023 12:46:24 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:34782 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S229970AbjESQNN (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Fri, 19 May 2023 12:13:13 -0400
-Received: from mail-ot1-x335.google.com (mail-ot1-x335.google.com [IPv6:2607:f8b0:4864:20::335])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id DF1331B0
-        for <linux-doc@vger.kernel.org>; Fri, 19 May 2023 09:13:01 -0700 (PDT)
-Received: by mail-ot1-x335.google.com with SMTP id 46e09a7af769-6aaf52ff35bso3401543a34.2
-        for <linux-doc@vger.kernel.org>; Fri, 19 May 2023 09:13:01 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=bitbyteword.org; s=google; t=1684512781; x=1687104781;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=eHquhOH1janzOdG3XB4hk90MhkxIdvt/1uHwN+rT0zk=;
-        b=WCpmkxAGDyeiLO9ZEaCvW6RgQ3WuS0KqdFQjsYcMM9tFinA2q5H3nn9JKRMahUO90l
-         uGY5Z2HB5sOorURNQv3gwtA5AcaxR+pG4kfymTc4DtQr0dQm83cxH3y1y2jVYg/z+kRU
-         xttuuCvY91/d+DSiiE9L0wwqgK3IYrhYRvIHU+aZ5T5vzydFDzuzjQKSwzGQtW9TAt8G
-         iyUCEyTwtXM52wQPc4N5t5mTTpj65NZBl+E/i3n50pQ3FEX6lVHIRfHNHV3aoGGeQ0W2
-         QpPwpuu5N6erddGoKxKaToT8EU784KxheO+vw5iSFJSJUYacC2OUaJ/ViNGKDHsvAy0b
-         OmAg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1684512781; x=1687104781;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=eHquhOH1janzOdG3XB4hk90MhkxIdvt/1uHwN+rT0zk=;
-        b=XcwYsFx1v8OQqNFp7mXfZ7CzzbNYeSb5//5F9n2MIbEFzpNFIhid9qHk1ejURKbG6D
-         zTpkY85n70wLzcwLFg3iNzMCnzGXZt+ssArVAQ81/NYhV7i60J2NbVpc83sWiEfVFwjW
-         Sv4Re1YtN6+1ij3FnysfKwrr2HPTz4Bp5gHlzkO9t7mmXRfImM+w/TFWVEAWSfaaMNo8
-         CxhqJiNhuUd0N0GpUAmhYM4WLPPiZSF7EuOOLZB3eXXCJJcxcDJsHYaApyvhp5ibhgVl
-         MIpvD7I1OI48A/Yao/aJygDrwsylHYlro0MwZATUrxg9TS7qsnGfUM64BZET5uxjY6Cm
-         cj0Q==
-X-Gm-Message-State: AC+VfDzyfGB/1WVLx5lo1VQ+MoNRd8fr7mRPIeWeHz0OhdtV0FuJvn7C
-        upv1ONHREsrntROEJf2yx8IqhkJdg90EgpbmCH6hjA==
-X-Google-Smtp-Source: ACHHUZ6V+kguC9vGVpO+0BoaUu0woqNZ08zhdCOicNb//slcwMgQ8oCjHrbRSuWPyvFKo6wzVDlnaR+KV2CWgXAZbi8=
-X-Received: by 2002:a05:6830:d5:b0:6a6:f06:48eb with SMTP id
- x21-20020a05683000d500b006a60f0648ebmr1269755oto.30.1684512781215; Fri, 19
- May 2023 09:13:01 -0700 (PDT)
+        with ESMTP id S229501AbjESQqW (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Fri, 19 May 2023 12:46:22 -0400
+Received: from ms.lwn.net (ms.lwn.net [IPv6:2600:3c01:e000:3a1::42])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 9E3E5D2;
+        Fri, 19 May 2023 09:46:17 -0700 (PDT)
+Received: from meer.lwn.net (unknown [IPv6:2601:281:8300:73::5f6])
+        by ms.lwn.net (Postfix) with ESMTPA id 1098E6E3;
+        Fri, 19 May 2023 16:46:17 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 ms.lwn.net 1098E6E3
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=lwn.net; s=20201203;
+        t=1684514777; bh=joOVoaCe6s0h4lpsz+lfTwPzy6pyJXuF5rvKMxjptzc=;
+        h=From:To:Cc:Subject:Date:From;
+        b=Yk/a/Bq2T3glrHKvweVVQrMhcdV43t40z6wbcEQWkf/wMcL+sDSOEyKzGvfpRxttz
+         ah2JOdpopui65/XGcf4vGPlcLWOVeODpCWYRhz8MyMND6GoBkDrVRNPNbNTIJDm+DZ
+         HZ2AoVwPopHo+TZvtdYJX5CKfEfDfO1zyYUFWuwEJn7isyL3jZapQcOBrbxcOijmha
+         1lrzej+AuAG9ZZYQSdQ9kRbcuzTwfpHGSIkyycZV+2f701m2nXg1PfLLwebQNtGAF8
+         0vSLCrrZRS1A8i2mYw5fplelvjNXedqwBNH16488nVqpLrx0/DuvY/ZGQnjqlaCNuJ
+         PY/n9dl5/yjRA==
+From:   Jonathan Corbet <corbet@lwn.net>
+To:     linux-doc@vger.kernel.org
+Cc:     linux-kernel@vger.kernel.org, linux-arch@vger.kernel.org,
+        linux-arm-kernel@lists.infradead.org,
+        Jonathan Corbet <corbet@lwn.net>
+Subject: [PATCH 0/7] docs: Move Documentation/arm under Documentation/arch
+Date:   Fri, 19 May 2023 10:46:00 -0600
+Message-Id: <20230519164607.38845-1-corbet@lwn.net>
+X-Mailer: git-send-email 2.40.1
 MIME-Version: 1.0
-References: <20230515025716.316888-1-vineeth@bitbyteword.org>
- <20230515025716.316888-3-vineeth@bitbyteword.org> <20230515100616.33ba5dd9@luca64>
- <CAO7JXPgq8V5yHM6F2+iXf4XJ9cyT30Hn4ot5b2k7srjsaPc3JQ@mail.gmail.com>
- <20230516093729.0771938c@luca64> <CAO7JXPh5uLV4QjAEi6bJXfAGSsZ=XsnCyzrvKS8m35BGbRPYJw@mail.gmail.com>
- <20230519115621.2b3f75e2@luca64> <20230519121804.6c85a3ed@luca64>
-In-Reply-To: <20230519121804.6c85a3ed@luca64>
-From:   Vineeth Remanan Pillai <vineeth@bitbyteword.org>
-Date:   Fri, 19 May 2023 12:12:50 -0400
-Message-ID: <CAO7JXPhZPvzVRyL87qNT5VnaVOf=0wrRftFB-Rjx-vJc3JUMog@mail.gmail.com>
-Subject: Re: [PATCH v3 2/5] sched/deadline: Fix reclaim inaccuracy with SMP
-To:     luca abeni <luca.abeni@santannapisa.it>
-Cc:     Juri Lelli <juri.lelli@redhat.com>,
-        Daniel Bristot de Oliveira <bristot@redhat.com>,
-        Peter Zijlstra <peterz@infradead.org>,
-        Ingo Molnar <mingo@redhat.com>,
-        Vincent Guittot <vincent.guittot@linaro.org>,
-        Steven Rostedt <rostedt@goodmis.org>,
-        Joel Fernandes <joel@joelfernandes.org>,
-        Dietmar Eggemann <dietmar.eggemann@arm.com>,
-        Ben Segall <bsegall@google.com>, Mel Gorman <mgorman@suse.de>,
-        Valentin Schneider <vschneid@redhat.com>,
-        Jonathan Corbet <corbet@lwn.net>, linux-kernel@vger.kernel.org,
-        linux-doc@vger.kernel.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 X-Spam-Status: No, score=-2.1 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_NONE,
-        SPF_HELO_NONE,SPF_PASS,T_SCC_BODY_TEXT_LINE,URIBL_BLOCKED
-        autolearn=unavailable autolearn_force=no version=3.4.6
+        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,SPF_HELO_NONE,SPF_PASS,
+        T_SCC_BODY_TEXT_LINE,URIBL_BLOCKED autolearn=ham autolearn_force=no
+        version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Hi Luca,
+Architecture-specific documentation is being moved into Documentation/arch/
+as a way of cleaning up the top-level documentation directory and making
+the docs hierarchy more closely match the source hierarchy.  Move
+Documentation/arm into arch/ and fix all in-tree references.
 
-On Fri, May 19, 2023 at 6:18=E2=80=AFAM luca abeni <luca.abeni@santannapisa=
-.it> wrote:
->
-> On Fri, 19 May 2023 11:56:21 +0200
-> luca abeni <luca.abeni@santannapisa.it> wrote:
-> [...]
->
-> OK, sorry again... I found my error immediately after sending the email.
-> Uextra is computed as "Umax - ...", not "1 - ...".
-> So, I now understand where the 35% comes from.
->
-Thanks for debugging this, it makes sense now!
+This is one of the more intrusive moves (if not *the* most intrusive), but
+the changes are all straighforward.
 
-> I now _suspect_ the correct equation should be
->         dq =3D -(max{u_i / Umax, (Umax - Uinact - Uextra)}) * dt
-> but I want to test it before wasting your time again; I'll write more
-> after performing some more tests.
->
-I tried this equation and it fixes the above issue. But a little
-confused as to why we should not be limiting the second term to Umax?
-In my testing, I was seeing the issue solved with this equation as
-well:
- "dq =3D -(max{u_i, (Umax - Uinact - Uextra)} / Umax) * dt"
+I'm happy to take these through the docs tree, but the potential for
+conflicts might be less if they go through an Arm tree instead.
 
-With both these equations, it doesn't solve couple of other issues we
-had discussed before:
-- tasks with different bandwidth reclaims differently even when #tasks
-  is less than #cpus.
-- cpu util may go to 100% when we have tasks with large bandwidth close
-  to Umax
+Jonathan Corbet (7):
+  arm: docs: Move Arm documentation to Documentation/arch/
+  arm: update in-source documentation references
+  arm64: Update Documentation/arm references
+  mips: update a reference to a moved Arm Document
+  crypto: update some Arm documentation references
+  docs: update some straggling Documentation/arm references
+  dt-bindings: Update Documentation/arm references
 
-As an eg. for issue 1, three tasks - (7,10) (3,10) and (1,10):
-TID[590]: RECLAIM=3D1, (r=3D7ms, d=3D10ms, p=3D10ms), Util: 95.20
-TID[591]: RECLAIM=3D1, (r=3D3ms, d=3D10ms, p=3D10ms), Util: 81.94
-TID[592]: RECLAIM=3D1, (r=3D1ms, d=3D10ms, p=3D10ms), Util: 27.19
+ Documentation/{ => arch}/arm/arm.rst                        | 0
+ Documentation/{ => arch}/arm/booting.rst                    | 0
+ Documentation/{ => arch}/arm/cluster-pm-race-avoidance.rst  | 0
+ Documentation/{ => arch}/arm/features.rst                   | 0
+ Documentation/{ => arch}/arm/firmware.rst                   | 0
+ .../{ => arch}/arm/google/chromebook-boot-flow.rst          | 0
+ Documentation/{ => arch}/arm/index.rst                      | 0
+ Documentation/{ => arch}/arm/interrupts.rst                 | 0
+ Documentation/{ => arch}/arm/ixp4xx.rst                     | 0
+ Documentation/{ => arch}/arm/kernel_mode_neon.rst           | 0
+ Documentation/{ => arch}/arm/kernel_user_helpers.rst        | 0
+ Documentation/{ => arch}/arm/keystone/knav-qmss.rst         | 0
+ Documentation/{ => arch}/arm/keystone/overview.rst          | 0
+ Documentation/{ => arch}/arm/marvell.rst                    | 0
+ Documentation/{ => arch}/arm/mem_alignment.rst              | 0
+ Documentation/{ => arch}/arm/memory.rst                     | 0
+ Documentation/{ => arch}/arm/microchip.rst                  | 0
+ Documentation/{ => arch}/arm/netwinder.rst                  | 0
+ Documentation/{ => arch}/arm/nwfpe/index.rst                | 0
+ Documentation/{ => arch}/arm/nwfpe/netwinder-fpe.rst        | 0
+ Documentation/{ => arch}/arm/nwfpe/notes.rst                | 0
+ Documentation/{ => arch}/arm/nwfpe/nwfpe.rst                | 0
+ Documentation/{ => arch}/arm/nwfpe/todo.rst                 | 0
+ Documentation/{ => arch}/arm/omap/dss.rst                   | 0
+ Documentation/{ => arch}/arm/omap/index.rst                 | 0
+ Documentation/{ => arch}/arm/omap/omap.rst                  | 0
+ Documentation/{ => arch}/arm/omap/omap_pm.rst               | 0
+ Documentation/{ => arch}/arm/porting.rst                    | 0
+ Documentation/{ => arch}/arm/pxa/mfp.rst                    | 0
+ Documentation/{ => arch}/arm/sa1100/assabet.rst             | 0
+ Documentation/{ => arch}/arm/sa1100/cerf.rst                | 0
+ Documentation/{ => arch}/arm/sa1100/index.rst               | 0
+ Documentation/{ => arch}/arm/sa1100/lart.rst                | 0
+ Documentation/{ => arch}/arm/sa1100/serial_uart.rst         | 0
+ .../{ => arch}/arm/samsung/bootloader-interface.rst         | 0
+ .../{ => arch}/arm/samsung/clksrc-change-registers.awk      | 0
+ Documentation/{ => arch}/arm/samsung/gpio.rst               | 0
+ Documentation/{ => arch}/arm/samsung/index.rst              | 0
+ Documentation/{ => arch}/arm/samsung/overview.rst           | 0
+ Documentation/{ => arch}/arm/setup.rst                      | 0
+ Documentation/{ => arch}/arm/spear/overview.rst             | 0
+ Documentation/{ => arch}/arm/sti/overview.rst               | 0
+ Documentation/{ => arch}/arm/sti/stih407-overview.rst       | 0
+ Documentation/{ => arch}/arm/sti/stih418-overview.rst       | 0
+ Documentation/{ => arch}/arm/stm32/overview.rst             | 0
+ .../{ => arch}/arm/stm32/stm32-dma-mdma-chaining.rst        | 0
+ Documentation/{ => arch}/arm/stm32/stm32f429-overview.rst   | 0
+ Documentation/{ => arch}/arm/stm32/stm32f746-overview.rst   | 0
+ Documentation/{ => arch}/arm/stm32/stm32f769-overview.rst   | 0
+ Documentation/{ => arch}/arm/stm32/stm32h743-overview.rst   | 0
+ Documentation/{ => arch}/arm/stm32/stm32h750-overview.rst   | 0
+ Documentation/{ => arch}/arm/stm32/stm32mp13-overview.rst   | 0
+ Documentation/{ => arch}/arm/stm32/stm32mp151-overview.rst  | 0
+ Documentation/{ => arch}/arm/stm32/stm32mp157-overview.rst  | 0
+ Documentation/{ => arch}/arm/sunxi.rst                      | 0
+ Documentation/{ => arch}/arm/sunxi/clocks.rst               | 0
+ Documentation/{ => arch}/arm/swp_emulation.rst              | 0
+ Documentation/{ => arch}/arm/tcm.rst                        | 0
+ Documentation/{ => arch}/arm/uefi.rst                       | 0
+ Documentation/{ => arch}/arm/vfp/release-notes.rst          | 0
+ Documentation/{ => arch}/arm/vlocks.rst                     | 0
+ Documentation/arch/index.rst                                | 2 +-
+ Documentation/devicetree/bindings/arm/xen.txt               | 2 +-
+ Documentation/translations/zh_CN/arm/Booting                | 4 ++--
+ .../translations/zh_CN/arm/kernel_user_helpers.txt          | 4 ++--
+ MAINTAINERS                                                 | 6 +++---
+ arch/arm/Kconfig                                            | 2 +-
+ arch/arm/common/mcpm_entry.c                                | 2 +-
+ arch/arm/common/mcpm_head.S                                 | 2 +-
+ arch/arm/common/vlock.S                                     | 2 +-
+ arch/arm/include/asm/setup.h                                | 2 +-
+ arch/arm/include/uapi/asm/setup.h                           | 2 +-
+ arch/arm/kernel/entry-armv.S                                | 2 +-
+ arch/arm/mach-exynos/common.h                               | 2 +-
+ arch/arm/mach-sti/Kconfig                                   | 2 +-
+ arch/arm/mm/Kconfig                                         | 4 ++--
+ arch/arm/tools/mach-types                                   | 2 +-
+ arch/arm64/Kconfig                                          | 2 +-
+ arch/arm64/kernel/kuser32.S                                 | 2 +-
+ arch/mips/bmips/setup.c                                     | 5 ++++-
+ drivers/crypto/allwinner/sun4i-ss/sun4i-ss-cipher.c         | 2 +-
+ drivers/crypto/allwinner/sun4i-ss/sun4i-ss-core.c           | 2 +-
+ drivers/crypto/allwinner/sun4i-ss/sun4i-ss-hash.c           | 2 +-
+ drivers/crypto/allwinner/sun4i-ss/sun4i-ss.h                | 2 +-
+ drivers/crypto/allwinner/sun8i-ce/sun8i-ce-cipher.c         | 2 +-
+ drivers/crypto/allwinner/sun8i-ce/sun8i-ce-core.c           | 2 +-
+ drivers/crypto/allwinner/sun8i-ce/sun8i-ce-hash.c           | 2 +-
+ drivers/crypto/allwinner/sun8i-ce/sun8i-ce-prng.c           | 2 +-
+ drivers/crypto/allwinner/sun8i-ce/sun8i-ce-trng.c           | 2 +-
+ drivers/crypto/allwinner/sun8i-ss/sun8i-ss-cipher.c         | 2 +-
+ drivers/crypto/allwinner/sun8i-ss/sun8i-ss-core.c           | 2 +-
+ drivers/crypto/allwinner/sun8i-ss/sun8i-ss-hash.c           | 2 +-
+ drivers/crypto/allwinner/sun8i-ss/sun8i-ss-prng.c           | 2 +-
+ drivers/input/touchscreen/sun4i-ts.c                        | 2 +-
+ drivers/pwm/pwm-atmel.c                                     | 2 +-
+ drivers/pwm/pwm-pxa.c                                       | 2 +-
+ drivers/tty/serial/Kconfig                                  | 4 ++--
+ 97 files changed, 45 insertions(+), 42 deletions(-)
+ rename Documentation/{ => arch}/arm/arm.rst (100%)
+ rename Documentation/{ => arch}/arm/booting.rst (100%)
+ rename Documentation/{ => arch}/arm/cluster-pm-race-avoidance.rst (100%)
+ rename Documentation/{ => arch}/arm/features.rst (100%)
+ rename Documentation/{ => arch}/arm/firmware.rst (100%)
+ rename Documentation/{ => arch}/arm/google/chromebook-boot-flow.rst (100%)
+ rename Documentation/{ => arch}/arm/index.rst (100%)
+ rename Documentation/{ => arch}/arm/interrupts.rst (100%)
+ rename Documentation/{ => arch}/arm/ixp4xx.rst (100%)
+ rename Documentation/{ => arch}/arm/kernel_mode_neon.rst (100%)
+ rename Documentation/{ => arch}/arm/kernel_user_helpers.rst (100%)
+ rename Documentation/{ => arch}/arm/keystone/knav-qmss.rst (100%)
+ rename Documentation/{ => arch}/arm/keystone/overview.rst (100%)
+ rename Documentation/{ => arch}/arm/marvell.rst (100%)
+ rename Documentation/{ => arch}/arm/mem_alignment.rst (100%)
+ rename Documentation/{ => arch}/arm/memory.rst (100%)
+ rename Documentation/{ => arch}/arm/microchip.rst (100%)
+ rename Documentation/{ => arch}/arm/netwinder.rst (100%)
+ rename Documentation/{ => arch}/arm/nwfpe/index.rst (100%)
+ rename Documentation/{ => arch}/arm/nwfpe/netwinder-fpe.rst (100%)
+ rename Documentation/{ => arch}/arm/nwfpe/notes.rst (100%)
+ rename Documentation/{ => arch}/arm/nwfpe/nwfpe.rst (100%)
+ rename Documentation/{ => arch}/arm/nwfpe/todo.rst (100%)
+ rename Documentation/{ => arch}/arm/omap/dss.rst (100%)
+ rename Documentation/{ => arch}/arm/omap/index.rst (100%)
+ rename Documentation/{ => arch}/arm/omap/omap.rst (100%)
+ rename Documentation/{ => arch}/arm/omap/omap_pm.rst (100%)
+ rename Documentation/{ => arch}/arm/porting.rst (100%)
+ rename Documentation/{ => arch}/arm/pxa/mfp.rst (100%)
+ rename Documentation/{ => arch}/arm/sa1100/assabet.rst (100%)
+ rename Documentation/{ => arch}/arm/sa1100/cerf.rst (100%)
+ rename Documentation/{ => arch}/arm/sa1100/index.rst (100%)
+ rename Documentation/{ => arch}/arm/sa1100/lart.rst (100%)
+ rename Documentation/{ => arch}/arm/sa1100/serial_uart.rst (100%)
+ rename Documentation/{ => arch}/arm/samsung/bootloader-interface.rst (100%)
+ rename Documentation/{ => arch}/arm/samsung/clksrc-change-registers.awk (100%)
+ rename Documentation/{ => arch}/arm/samsung/gpio.rst (100%)
+ rename Documentation/{ => arch}/arm/samsung/index.rst (100%)
+ rename Documentation/{ => arch}/arm/samsung/overview.rst (100%)
+ rename Documentation/{ => arch}/arm/setup.rst (100%)
+ rename Documentation/{ => arch}/arm/spear/overview.rst (100%)
+ rename Documentation/{ => arch}/arm/sti/overview.rst (100%)
+ rename Documentation/{ => arch}/arm/sti/stih407-overview.rst (100%)
+ rename Documentation/{ => arch}/arm/sti/stih418-overview.rst (100%)
+ rename Documentation/{ => arch}/arm/stm32/overview.rst (100%)
+ rename Documentation/{ => arch}/arm/stm32/stm32-dma-mdma-chaining.rst (100%)
+ rename Documentation/{ => arch}/arm/stm32/stm32f429-overview.rst (100%)
+ rename Documentation/{ => arch}/arm/stm32/stm32f746-overview.rst (100%)
+ rename Documentation/{ => arch}/arm/stm32/stm32f769-overview.rst (100%)
+ rename Documentation/{ => arch}/arm/stm32/stm32h743-overview.rst (100%)
+ rename Documentation/{ => arch}/arm/stm32/stm32h750-overview.rst (100%)
+ rename Documentation/{ => arch}/arm/stm32/stm32mp13-overview.rst (100%)
+ rename Documentation/{ => arch}/arm/stm32/stm32mp151-overview.rst (100%)
+ rename Documentation/{ => arch}/arm/stm32/stm32mp157-overview.rst (100%)
+ rename Documentation/{ => arch}/arm/sunxi.rst (100%)
+ rename Documentation/{ => arch}/arm/sunxi/clocks.rst (100%)
+ rename Documentation/{ => arch}/arm/swp_emulation.rst (100%)
+ rename Documentation/{ => arch}/arm/tcm.rst (100%)
+ rename Documentation/{ => arch}/arm/uefi.rst (100%)
+ rename Documentation/{ => arch}/arm/vfp/release-notes.rst (100%)
+ rename Documentation/{ => arch}/arm/vlocks.rst (100%)
 
-re. issue 2, four tasks with same reservation (7,10), tasks tries
-to reclaim leading to 100% cpu usage on all three cpus and leads to
-system hang.
+-- 
+2.40.1
 
-I was trying to understand the issue and it looks like static values
-of Uextra and Umax are causing inaccuracies. Uextra is calculated
-based on global bandwidth But based on the local state of the cpu, we
-could reclaim more or less than (u_inact + rq->dl.extra_bw). Similarly
-Umax is a local max for each cpu and we should not be reclaiming upto
-Umax unconditionally. If the global load is high, reclaiming upto Umax
-would cause problems as a migration can land in.
-
-I was trying an idea to dynamically decide Uextra and Umax based on
-global and local load.
-
-The crux of the idea is as below
-
-+ if (rq->dl.running_bw > rq->dl.max_bw)
-+ return delta;
-+
-+ max_bw =3D rq->dl.this_bw + rq->dl.extra_bw;
-+ extra_bw =3D rq->dl.extra_bw;
-+ if (rq->dl.this_bw < rq->dl.extra_bw || max_bw > rq->dl.max_bw) {
-+ extra_bw =3D rq->dl.max_bw - rq->dl.this_bw;
-+ max_bw =3D rq->dl.max_bw;
-+ }
-+
-
-And use this max_bw and extra_bw in the equation:
- "dq =3D -(max{u_i, (Umax - Uinact - Uextra)} / Umax) * dt"
-
-The reasoning for above changes are:
-- running_bw can be greater than max_bw in SMP and we should not be
-  reclaiming if that's the case
-- Initially we assume max_bw and extra_bw, based on global load.
-  If this_bw < extra_bw, it means that cpus are not heavily loaded
-  and incoming migrations can be satisfied with local cpu's available
-  bandwidth and we could reclaim upto rq->dl.max_bw and use extra_bw
-  as "rq->dl.max_bw - rq->dl.this_bw". Also we should limit max_bw for
-  any cpu to a maximum of rq->dl.max_cpu.
-
-This does not consider mix of normal and SCHED_FLAG_RECLAIM tasks and
-minor changes on top of this are need to consider that scenario. This
-seems to fix all the issues that I have encountered.
-
-The above fix doesn't work on equation:
-  "dq =3D -(max{u_i / Umax, (Umax - Uinact - Uextra)}) * dt"
-
-cpu still spikes to 100% with 4 tasks of (7,10). I am not sure, but I
-guess it might be because we are not limiting the second term to Umax.
-
-Please let me know your thoughts on this.
-
-Thanks again,
-Vineeth
