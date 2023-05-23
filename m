@@ -2,175 +2,114 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 5F48770E503
-	for <lists+linux-doc@lfdr.de>; Tue, 23 May 2023 21:00:23 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id DDAFD70E6B8
+	for <lists+linux-doc@lfdr.de>; Tue, 23 May 2023 22:42:37 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S237723AbjEWTAV (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 23 May 2023 15:00:21 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:53566 "EHLO
+        id S238566AbjEWUmg (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 23 May 2023 16:42:36 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:40176 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S229834AbjEWTAQ (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 23 May 2023 15:00:16 -0400
-Received: from smtp-fw-52002.amazon.com (smtp-fw-52002.amazon.com [52.119.213.150])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 1F5F791;
-        Tue, 23 May 2023 12:00:14 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-  d=amazon.com; i=@amazon.com; q=dns/txt; s=amazon201209;
-  t=1684868415; x=1716404415;
-  h=mime-version:content-transfer-encoding:date:cc:subject:
-   from:to:message-id:references:in-reply-to;
-  bh=2f6hgtyoF3npyINkvFYDynw82+STAB4fWRrWAyFHWQA=;
-  b=rFrsHxEx4TA20pUdS17YN6UMkg+qfoSFBqBw8KE/INYT7NkhhhV5iWwV
-   5T27Bh8pxrQjY/iu0XsMxq0C8VqNzfepjssPX/1G2hHoH5J5W08I3J4uF
-   kpU4FR/qKo1bBZIEXdhuPI4BGSN3koysLpldGLa7iF483sjtn0BAB2T4J
-   E=;
-X-IronPort-AV: E=Sophos;i="6.00,187,1681171200"; 
-   d="scan'208";a="564743059"
-Received: from iad12-co-svc-p1-lb1-vlan3.amazon.com (HELO email-inbound-relay-pdx-1box-2bm6-32cf6363.us-west-2.amazon.com) ([10.43.8.6])
-  by smtp-border-fw-52002.iad7.amazon.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 23 May 2023 19:00:09 +0000
-Received: from EX19D004EUC001.ant.amazon.com (pdx1-ws-svc-p6-lb9-vlan3.pdx.amazon.com [10.236.137.198])
-        by email-inbound-relay-pdx-1box-2bm6-32cf6363.us-west-2.amazon.com (Postfix) with ESMTPS id 98D7A80457;
-        Tue, 23 May 2023 19:00:05 +0000 (UTC)
-Received: from localhost (10.13.235.138) by EX19D004EUC001.ant.amazon.com
- (10.252.51.190) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.1118.26; Tue, 23 May
- 2023 18:59:51 +0000
+        with ESMTP id S238557AbjEWUmf (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 23 May 2023 16:42:35 -0400
+Received: from mail.z3ntu.xyz (mail.z3ntu.xyz [128.199.32.197])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 191A7E5;
+        Tue, 23 May 2023 13:42:20 -0700 (PDT)
+Received: from [192.168.122.1] (84-115-214-73.cable.dynamic.surfer.at [84.115.214.73])
+        by mail.z3ntu.xyz (Postfix) with ESMTPSA id B7109CFB3C;
+        Tue, 23 May 2023 20:41:38 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=z3ntu.xyz; s=z3ntu;
+        t=1684874499; bh=mv+iwmwhLjIePzSdjIrh7FapElK7S6I9sslfFya7rPA=;
+        h=From:Subject:Date:To:Cc;
+        b=guLb+49LRg595ahi9wPkfQwjTKAPv/6jUbY7bK/ahfUs+61hP2sR7Sc/JEuRNyZuG
+         gyOKBz67u98HpmCpM7T/oUrjcYkad3KVi5u003y28m4A8EaZJyUTpkEtjR0EqFFNSm
+         tvOyjexiAMHdWHb+olssYR6AJMe9c0MM7WYbQTfc=
+From:   Luca Weiss <luca@z3ntu.xyz>
+Subject: [PATCH v3 0/3] Add PMI632 PMIC and RGB LED on sdm632-fairphone-fp3
+Date:   Tue, 23 May 2023 22:41:27 +0200
+Message-Id: <20230414-pmi632-v3-0-079d2cada699@z3ntu.xyz>
 MIME-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset="UTF-8"
-Date:   Tue, 23 May 2023 18:59:47 +0000
-CC:     Chao Peng <chao.p.peng@linux.intel.com>, <kvm@vger.kernel.org>,
-        <linux-kernel@vger.kernel.org>, <linux-mm@kvack.org>,
-        <linux-fsdevel@vger.kernel.org>, <linux-arch@vger.kernel.org>,
-        <linux-api@vger.kernel.org>, <linux-doc@vger.kernel.org>,
-        <qemu-devel@nongnu.org>, <graf@amazon.com>,
-        Paolo Bonzini <pbonzini@redhat.com>,
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAPckbWQC/22Nyw6DIBREf6VhXSxy1UpX/Y+mC8RLZSEasMRH/
+ PeCqybt8kzOzGzEozPoye20EYfBeDPYCHA+EdVJ+0Jq2siEMw6syAs69qYCTguJDDgvJV5LEuV
+ GeqSNk1Z1Sa8yyNill8ZSPUISRofazMfT4xm5M34a3HIchzylPx8hp4xqFEWrYloDv69gp3c2L
+ ytJE4H/r/FYE3UjtRRMKKi+a/u+fwAjwDIg9AAAAA==
+To:     ~postmarketos/upstreaming@lists.sr.ht, phone-devel@vger.kernel.org,
+        Andy Gross <agross@kernel.org>,
+        Bjorn Andersson <andersson@kernel.org>,
+        Konrad Dybcio <konrad.dybcio@linaro.org>,
+        Linus Walleij <linus.walleij@linaro.org>,
+        Rob Herring <robh+dt@kernel.org>,
+        Krzysztof Kozlowski <krzysztof.kozlowski+dt@linaro.org>,
+        Pavel Machek <pavel@ucw.cz>, Lee Jones <lee@kernel.org>,
+        Jonathan Cameron <jic23@kernel.org>,
+        Lars-Peter Clausen <lars@metafoo.de>,
+        Stephen Boyd <sboyd@kernel.org>,
         Jonathan Corbet <corbet@lwn.net>,
-        "Vitaly Kuznetsov" <vkuznets@redhat.com>,
-        Wanpeng Li <wanpengli@tencent.com>,
-        Jim Mattson <jmattson@google.com>,
-        Joerg Roedel <joro@8bytes.org>,
-        Thomas Gleixner <tglx@linutronix.de>,
-        Ingo Molnar <mingo@redhat.com>, Borislav Petkov <bp@alien8.de>,
-        Arnd Bergmann <arnd@arndb.de>,
-        "Naoya Horiguchi" <naoya.horiguchi@nec.com>,
-        Miaohe Lin <linmiaohe@huawei.com>, <x86@kernel.org>,
-        "H . Peter Anvin" <hpa@zytor.com>, Hugh Dickins <hughd@google.com>,
-        Jeff Layton <jlayton@kernel.org>,
-        "J . Bruce Fields" <bfields@fieldses.org>,
-        Andrew Morton <akpm@linux-foundation.org>,
-        "Shuah Khan" <shuah@kernel.org>, Mike Rapoport <rppt@kernel.org>,
-        Steven Price <steven.price@arm.com>,
-        "Maciej S . Szmigiero" <mail@maciej.szmigiero.name>,
-        Vlastimil Babka <vbabka@suse.cz>,
-        "Vishal Annapurve" <vannapurve@google.com>,
-        Yu Zhang <yu.c.zhang@linux.intel.com>,
-        "Kirill A . Shutemov" <kirill.shutemov@linux.intel.com>,
-        <luto@kernel.org>, <jun.nakajima@intel.com>,
-        <dave.hansen@intel.com>, <ak@linux.intel.com>, <david@redhat.com>,
-        <aarcange@redhat.com>, <ddutile@redhat.com>, <dhildenb@redhat.com>,
-        Quentin Perret <qperret@google.com>, <tabba@google.com>,
-        Michael Roth <michael.roth@amd.com>, <mhocko@suse.com>,
-        <wei.w.wang@intel.com>, <anelkz@amazon.de>
-Subject: Re: [PATCH v10 2/9] KVM: Introduce per-page memory attributes
-From:   Nicolas Saenz Julienne <nsaenz@amazon.com>
-To:     Sean Christopherson <seanjc@google.com>
-Message-ID: <CSTLMGOZVEV7.3B9QXJ2STLLLF@dev-dsk-nsaenz-1b-189b39ae.eu-west-1.amazon.com>
-X-Mailer: aerc 0.15.2-21-g30c1a30168df-dirty
-References: <20221202061347.1070246-1-chao.p.peng@linux.intel.com>
- <20221202061347.1070246-3-chao.p.peng@linux.intel.com>
- <CSQFE7I30W27.2TPDIHOTZNRIZ@dev-dsk-nsaenz-1b-189b39ae.eu-west-1.amazon.com> <ZGe+m+uFzpiW7wlr@google.com>
-In-Reply-To: <ZGe+m+uFzpiW7wlr@google.com>
-X-Originating-IP: [10.13.235.138]
-X-ClientProxiedBy: EX19D032UWA004.ant.amazon.com (10.13.139.56) To
- EX19D004EUC001.ant.amazon.com (10.252.51.190)
-X-Spam-Status: No, score=-1.8 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
-        SPF_HELO_NONE,T_SCC_BODY_TEXT_LINE,T_SPF_PERMERROR autolearn=no
-        autolearn_force=no version=3.4.6
+        Conor Dooley <conor+dt@kernel.org>
+Cc:     linux-arm-msm@vger.kernel.org, linux-gpio@vger.kernel.org,
+        devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
+        linux-leds@vger.kernel.org, linux-iio@vger.kernel.org,
+        linux-doc@vger.kernel.org, Luca Weiss <luca@z3ntu.xyz>
+X-Mailer: b4 0.12.2
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1193; i=luca@z3ntu.xyz;
+ h=from:subject:message-id; bh=mv+iwmwhLjIePzSdjIrh7FapElK7S6I9sslfFya7rPA=;
+ b=owEBbQKS/ZANAwAIAXLYQ7idTddWAcsmYgBkbST/8EEnBOczZaRquJxzq56eFt4sgSVrn0Q9M
+ nxPXkR832iJAjMEAAEIAB0WIQQ5utIvCCzakboVj/py2EO4nU3XVgUCZG0k/wAKCRBy2EO4nU3X
+ VqLqEADRlHJcmJq4lV7S9X9LW3BlpDJQaUXGq48xmRZzhaHQOKSYjUxW65aL74sBppfQyWyCwbH
+ QYwuvmZE5LvpOLmXRnq+5z64If/osgGHHtxwZLymrzvn9npEjWODMzFASFpFiZEb0VVyd+/sBXQ
+ m9ryi9K8GeHv+3yWjvhgX+WLEr1jD+2gIqaHhrNwDMrWwQ3alWA8K3hoP7F2YHM1WmqDHWGm8zm
+ 6qaFoEaE8Jt3r5NOrTQUF7fLoiTdSGrVWUqGdkSrJjtuQ+GtEJxQeLoF/iP4ECSpb6CGz853kYC
+ /Ams41ZPx54veCqqW6PedplyAIeZ6ixSN+9EIpknye6/m2muBRka+faGVPu2LXeOzCOYiusx6aT
+ 8GSqFD5S/cwR09zDA1P47o4uvQQ0TXg/OVeK/KBAPh5QKPwpw69PqaqCY+3JVNm0xtJkECjhgol
+ bsRs0CK7RoEb5LyEQG7uidF6fFNOH3oRd2ADGFR8WfNH5Sjq45GH7BMBfcfExfdPmhImYq9BSdn
+ UsRYgooVi6GV1yLyss7EYi6HViusad9/oR5ppcAplmhBIskyxMTT4m0PQ2+/y6qtjBqZOrTge1x
+ RYiGfijjZZfPsC8WQX8Q5UKWfPAhfDrnwJsngxGhGBQ3BzcrcCLT0eJfi+e/LMdcegV+LWs33JK
+ 8N8/0U8yDYfEsPg==
+X-Developer-Key: i=luca@z3ntu.xyz; a=openpgp;
+ fpr=BD04DA24C971B8D587B2B8D7FAF69CF6CD2D02CD
+X-Spam-Status: No, score=-2.1 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,SPF_HELO_NONE,SPF_PASS,
+        T_SCC_BODY_TEXT_LINE,URIBL_BLOCKED autolearn=ham autolearn_force=no
+        version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Hi Sean,
+Add support for the PMI632 PMIC in the spmi-gpio & qcom-lpg driver, add
+the dtsi for the PMIC and enable the notification LED on fairphone-fp3.
 
-On Fri May 19, 2023 at 6:23 PM UTC, Sean Christopherson wrote:
-> On Fri, May 19, 2023, Nicolas Saenz Julienne wrote:
-> > Hi,
-> > On Fri Dec 2, 2022 at 6:13 AM UTC, Chao Peng wrote:
+Signed-off-by: Luca Weiss <luca@z3ntu.xyz>
+---
+Changes in v3:
+- Pick up tags
+- Drop patches that have been applied
+- Link to v2: https://lore.kernel.org/r/20230414-pmi632-v2-0-98bafa909c36@z3ntu.xyz
 
-[...]
+Changes in v2:
+- Add qcom,pmi632-gpio to all the needed places in yaml
+- Add patch documenting led path
+- Pick up tags
+- Drop vadc pre-scaling patch since it was applied
+- Link to v1: https://lore.kernel.org/r/20230414-pmi632-v1-0-fe94dc414832@z3ntu.xyz
 
-> > VSM introduces isolated guest execution contexts called Virtual Trust
-> > Levels (VTL) [2]. Each VTL has its own memory access protections,
-> > virtual processors states, interrupt controllers and overlay pages. VTL=
-s
-> > are hierarchical and might enforce memory protections on less privilege=
-d
-> > VTLs. Memory protections are enforced on a per-GPA granularity.
-> >
-> > We implemented this in the past by using a separate address space per
-> > VTL and updating memory regions on protection changes. But having to
-> > update the memory slot layout for every permission change scales poorly=
-,
-> > especially as we have to perform 100.000s of these operations at boot
-> > (see [1] for a little more context).
-> >
-> > I believe the biggest barrier for us to use memory attributes is not
-> > having the ability to target specific address spaces, or to the very
-> > least having some mechanism to maintain multiple independent layers of
-> > attributes.
->
-> Can you elaborate on "specific address spaces"?  In KVM, that usually mea=
-ns SMM,
-> but the VTL comment above makes me think you're talking about something e=
-ntirely
-> different.  E.g. can you provide a brief summary of the requirements/expe=
-ctations?
+---
+Luca Weiss (3):
+      arm64: dts: qcom: Add PMI632 PMIC
+      arm64: dts: qcom: sdm632-fairphone-fp3: Add notification LED
+      Documentation: leds: Add "rgb:status" path
 
-Let me refresh some concepts first. VTLs are vCPU modes implemented by
-the hypervisor. Lower VTLs switch into higher VTLs [1] through a
-hypercall or asynchronously through interrupts. Each VTL has its own CPU
-architectural state, lapic and MSR state (applies to only some MSRs).
-These are saved/restored when switching VTLS [2]. Additionally, VTLs
-share a common GPA->HPA mapping, but protection bits differ depending on
-which VTL the CPU is on. Privileged VTLs might revoke R/W/X(+MBEC,
-optional) access bits from lower VTLs on a per-GPA basis.
+ Documentation/leds/well-known-leds.txt            |   1 +
+ arch/arm64/boot/dts/qcom/pmi632.dtsi              | 165 ++++++++++++++++++++++
+ arch/arm64/boot/dts/qcom/sdm632-fairphone-fp3.dts |  29 ++++
+ 3 files changed, 195 insertions(+)
+---
+base-commit: 5a3b858944b3a5a297df90353614abfb7c7ef592
+change-id: 20230414-pmi632-4ae03225ae75
 
-In order to deal with the per-VTL memory protection bits, we extended
-the number of KVM address spaces and assigned one to each VTL. The
-hypervisor initializes all VTLs address spaces with the same mappings
-and protections, they are expected to diverge during runtime. Operations
-that rely on memory slots for GPA->HPA/HVA translations (including page
-faults) are already address space aware, so adding VTL support was
-fairly simple.
+Best regards,
+-- 
+Luca Weiss <luca@z3ntu.xyz>
 
-Ultimately, when a privileged VTL enforces memory protections on lower
-VTLs we update that VTL's address space memory regions to reflect them.
-Protection changes are requested through a hypercall, which expects the
-new protection to be visible system wide upon returning from it. These
-hypercalls happen around 100000+ times during boot, so we introduced an
-"atomic memory slot update" API similar to Emanuele's [3] that allows
-splitting memory regions/changing permissions concurrent with other
-vCPUs.
-
-Now, if we had a way to map memory attributes to specific VTLs, we could
-use that instead. Actually, we wouldn't need to extend address spaces at
-all to support this (we might still need them to support Overlay Pages,
-but that's another story).
-
-Hope it makes a little more sense now. :)
-
-Nicolas
-
-[1] In practice we've only seen VTL0 and VTL1 being used. The spec
-    supports up to 16 VTLs.
-
-[2] One can draw an analogy with arm's TrustZone. The hypervisor plays
-    the role of EL3. Windows (VTL0) runs in Non-Secure (EL0/EL1) and the
-    secure kernel (VTL1) in Secure World (EL1s/EL0s).
-
-[3] https://lore.kernel.org/all/20220909104506.738478-1-eesposit@redhat.com=
-/
