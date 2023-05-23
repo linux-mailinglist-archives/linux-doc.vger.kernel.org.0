@@ -2,94 +2,158 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 0172D70CFC7
-	for <lists+linux-doc@lfdr.de>; Tue, 23 May 2023 02:47:15 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 1A5BE70CFD2
+	for <lists+linux-doc@lfdr.de>; Tue, 23 May 2023 02:49:09 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S234912AbjEWArM (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 22 May 2023 20:47:12 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:49288 "EHLO
+        id S235135AbjEWAtG (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 22 May 2023 20:49:06 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:49362 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S234913AbjEWAq4 (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Mon, 22 May 2023 20:46:56 -0400
-Received: from mail-pj1-x102d.google.com (mail-pj1-x102d.google.com [IPv6:2607:f8b0:4864:20::102d])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 72D62423C;
-        Mon, 22 May 2023 17:30:01 -0700 (PDT)
-Received: by mail-pj1-x102d.google.com with SMTP id 98e67ed59e1d1-253340db64fso6198705a91.2;
-        Mon, 22 May 2023 17:30:01 -0700 (PDT)
+        with ESMTP id S234761AbjEWAsa (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Mon, 22 May 2023 20:48:30 -0400
+Received: from mail-wm1-x331.google.com (mail-wm1-x331.google.com [IPv6:2a00:1450:4864:20::331])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id F412FB7
+        for <linux-doc@vger.kernel.org>; Mon, 22 May 2023 17:33:02 -0700 (PDT)
+Received: by mail-wm1-x331.google.com with SMTP id 5b1f17b1804b1-3f42ba32e24so43453925e9.3
+        for <linux-doc@vger.kernel.org>; Mon, 22 May 2023 17:33:02 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20221208; t=1684801801; x=1687393801;
-        h=in-reply-to:content-disposition:mime-version:references:message-id
-         :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
-        bh=HEifJEBSj843qwkcWh042z8MQfZIbIFpzgNR/nZXc5s=;
-        b=PjMYjRIziDSPvIlo9uMabR3TcCLJABTa7b5x2+c2JcD3JRZ60jrEAQafRzLNHwwV+I
-         enUO/HEFYmmQgZcCuq6wb/35dF/6jUolpkPPW34vPT3AOfBIGogDIIo9cqrjHY90XTY+
-         PXZGtxAta++G1i94Z4nT9DOtmrPiCRZ8iQrqgyYfpyHqWs9v804Y7btk9ga1u/gxoRfI
-         DJCUc0PyN4ZTEBXIYLQ5kRorIvYr0Pa2R2HgCFz4UDUwWgm5Q90LGBID+8D0W2Aiss9D
-         1iQE6V2mqAGOj7mwKTMjKWZpUyzMDjTa/NKWCWypDA0WsqpeffcdGvaXLuG+CfuC8wzY
-         nqig==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1684801801; x=1687393801;
-        h=in-reply-to:content-disposition:mime-version:references:message-id
-         :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+        d=jrtc27.com; s=gmail.jrtc27.user; t=1684801981; x=1687393981;
+        h=to:references:message-id:content-transfer-encoding:cc:date
+         :in-reply-to:from:subject:mime-version:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=HEifJEBSj843qwkcWh042z8MQfZIbIFpzgNR/nZXc5s=;
-        b=Vba19XvgG6OcRW8gyi4eLLnVTUgnJaFz1Zmj5FcSDsuIh1KhYVvXnqGSzS9b8JY8c5
-         GkJ/IHo+wJO9ehPHvld/kOnZI+yVkV+KMHW7PLM5ndInGjTCZVy6pSfTN3XntVZl1b3B
-         Ng4velwVTX5hdPaHsXYajn3SHuz49GjtAdTT5HOPiKLXnqWQOC46OxmFHB180+uy/zpQ
-         HfIGoRRBynllV12qNJ9Ivmz/7J5x+LSoq2lnjFXDligJHs5OeloWemxsUDHChjzn8kXP
-         ahbPSvEXvufMH/YFr1sULCjcZwNrDu2cX0JWJ+J+nHVFWDvcUfK1/e91npqVoyAqTMdq
-         HPmA==
-X-Gm-Message-State: AC+VfDwxaQL2015z7FFFpo4W8SCrXIFNxyq/9UCdhxFskBRY/jevhqQt
-        7oYo03XwyeBrVwTCR9tOFho=
-X-Google-Smtp-Source: ACHHUZ7wWyVCJpxZmHsghH/6/RZ4D9JiWJJ7UL2PxapwGvf1T3n3EcRWA2L20zNwu0GC2oCe+8joqg==
-X-Received: by 2002:a17:90b:2292:b0:253:83d8:e487 with SMTP id kx18-20020a17090b229200b0025383d8e487mr10976879pjb.0.1684801800788;
-        Mon, 22 May 2023 17:30:00 -0700 (PDT)
-Received: from google.com ([2620:15c:9d:2:54fa:e8a7:76de:888d])
-        by smtp.gmail.com with ESMTPSA id gj13-20020a17090b108d00b00250ad795d72sm4590532pjb.44.2023.05.22.17.29.59
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 22 May 2023 17:30:00 -0700 (PDT)
-Date:   Mon, 22 May 2023 17:29:57 -0700
-From:   Dmitry Torokhov <dmitry.torokhov@gmail.com>
-To:     Ismael Ferreras Morezuelas <swyterzone@gmail.com>
-Cc:     Jonathan Corbet <corbet@lwn.net>, linux-input@vger.kernel.org,
-        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
-        Cameron Gutman <aicommander@gmail.com>,
-        Marcos Alano <marcoshalano@gmail.com>
-Subject: Re: [PATCH v2] xpad: Spelling fixes for "Xbox", improve and
- proofread the listed xpad device names
-Message-ID: <ZGwJBTFd4JRKzocu@google.com>
-References: <401b1d94-1348-15fd-b48f-a80e8885c7a4@gmail.com>
-MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <401b1d94-1348-15fd-b48f-a80e8885c7a4@gmail.com>
+        bh=LrFGl63UuCEpD0/cTn8zK2OoUmxoYf1cLwIERUmWju0=;
+        b=eTt828dUiWmLDNAB9dxn4tYuW5E06NyZpscH/7KYbHvT3H/7gyKD7v0rjwTuwrtiQW
+         NUJxrc4sE+j9UsAJmC0FfdetMEqHf9lZai2ji0gZXVr7gxyVHvN872ikUfMSm+9ukLO2
+         PVXZuLKuIJ3m9Q3JoqHNO6MzDAIh7w8ieL/1/NBdk4OzfdBxMPtioHoLJNar73hHho/H
+         mcesOgI1rZFfIr6dwqHyxNtX5WIdbM3adoCndWrVSUiYwXYXQsDa4isiCAO7aWGt9+hk
+         scm1zheIYZF3iEPPpA335kiav3/+saa/D73Ypsb3YErwfAKAFwdcGFqYnmdJS1sHbvka
+         WzSQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20221208; t=1684801981; x=1687393981;
+        h=to:references:message-id:content-transfer-encoding:cc:date
+         :in-reply-to:from:subject:mime-version:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=LrFGl63UuCEpD0/cTn8zK2OoUmxoYf1cLwIERUmWju0=;
+        b=NxfAvgqtRHiB4ilL+s9s3yMFT7qqahEEF1FszGE1AYCSEXIPfIsZE0aqxKD6XC7v2J
+         CGuuuMw9ptjDZdL6dyjtZqWqXYz7nfUAoMNGhFrXPJNEQ6mDIYMABJpMfFphc9haUasF
+         gihm9GVGsR2otdjqvRd36XISuJD3p69MLFE7P4DHqaG+QdkP7lm9nMM/wfDj2mYW/Lyu
+         PXlyJx4VIL4E2zvFGm1sT97ld7gysgLOGFn5X5J6m1mBz565qD/c+VtslYSw8KGdHGiU
+         f375GVPQy1L0Ur59ofFDMsOwKVyoHaWIhUUqvcYB0kSQlDWVVJvQ5fMsc4u0v3jTLfKx
+         g3nA==
+X-Gm-Message-State: AC+VfDw+7d+8R1zoxOKezGwWcjMMFIgK/PJd3snPZKE3VqyMJH5GPk8n
+        lATmbGFn3wjbIPgXR9ouJK8PIQ==
+X-Google-Smtp-Source: ACHHUZ4CZCrzym57qPoHumfgDh1AfJecnm6yW7KJJLL5ovCAtDUwzXSiFcYUjymp+3V9VRRgsl4rIg==
+X-Received: by 2002:a7b:ca54:0:b0:3f4:3562:f799 with SMTP id m20-20020a7bca54000000b003f43562f799mr8697189wml.28.1684801981473;
+        Mon, 22 May 2023 17:33:01 -0700 (PDT)
+Received: from smtpclient.apple ([131.111.5.246])
+        by smtp.gmail.com with ESMTPSA id 8-20020a05600c22c800b003f4289b18a7sm9924645wmg.5.2023.05.22.17.33.00
+        (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
+        Mon, 22 May 2023 17:33:00 -0700 (PDT)
+Content-Type: text/plain;
+        charset=us-ascii
+Mime-Version: 1.0 (Mac OS X Mail 16.0 \(3731.500.231\))
+Subject: Re: [PATCH v1] Documentation/process: add soc maintainer handbook
+From:   Jessica Clarke <jrtc27@jrtc27.com>
+In-Reply-To: <20230522-concrete-unpeeled-7e4718e61b46@spud>
+Date:   Tue, 23 May 2023 01:32:49 +0100
+Cc:     Krzysztof Kozlowski <krzysztof.kozlowski@linaro.org>,
+        soc@kernel.org, Conor Dooley <conor.dooley@microchip.com>,
+        Arnd Bergmann <arnd@arndb.de>,
+        Rob Herring <robh+dt@kernel.org>,
+        Krzysztof Kozlowski <krzysztof.kozlowski+dt@linaro.org>,
+        Conor Dooley <conor+dt@kernel.org>,
+        Jonathan Corbet <corbet@lwn.net>,
+        Olof Johansson <olof@lixom.net>,
+        Palmer Dabbelt <palmer@dabbelt.com>,
+        "open list:OPEN FIRMWARE AND FLATTENED DEVICE TREE BINDINGS" 
+        <devicetree@vger.kernel.org>,
+        Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
+        linux-doc@vger.kernel.org,
+        Linux ARM <linux-arm-kernel@lists.infradead.org>,
+        linux-riscv@lists.infradead.org
+Content-Transfer-Encoding: quoted-printable
+Message-Id: <3B8DFBEF-9EA1-4375-998D-944EA18D3E4E@jrtc27.com>
+References: <20230515-geometry-olympics-b0556ff8a5f7@spud>
+ <cf1c6b8c-8a3f-eca1-948f-e41946d4c34c@linaro.org>
+ <20230522-concrete-unpeeled-7e4718e61b46@spud>
+To:     Conor Dooley <conor@kernel.org>
+X-Mailer: Apple Mail (2.3731.500.231)
 X-Spam-Status: No, score=-2.1 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_FROM,
-        RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,SPF_PASS,T_SCC_BODY_TEXT_LINE
-        autolearn=ham autolearn_force=no version=3.4.6
+        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_NONE,
+        SPF_HELO_NONE,SPF_PASS,T_SCC_BODY_TEXT_LINE,URIBL_BLOCKED
+        autolearn=unavailable autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Wed, Jan 05, 2022 at 12:30:20AM +0100, Ismael Ferreras Morezuelas wrote:
-> The Linux kernel is notorious for misspelling X-Box, X-box, XBox or XBOX;
-> the official spelling is actually just Xbox. Plain and simple.
-> 
-> Tried to respect the existing notes but still following the style guide.
-> No functional changes intended. This only affects ancillary parts.
-> 
-> Sounds trivial, but this makes it easier to search the correct
-> entries in xmenu by name. It has always been a pet peeve of mine.
-> 
-> Signed-off-by: Ismael Ferreras Morezuelas <swyterzone@gmail.com>
-> ---
+On 22 May 2023, at 22:34, Conor Dooley <conor@kernel.org> wrote:
+>=20
+> On Tue, May 16, 2023 at 10:31:19AM +0200, Krzysztof Kozlowski wrote:
+>> On 15/05/2023 21:20, Conor Dooley wrote:
+>=20
+>>> +devicetree ABI stability
+>>> +~~~~~~~~~~~~~~~~~~~~~~~~
+>>> +
+>>> +Perhaps one of the most important things to highlight is that =
+dt-bindings
+>>> +document the ABI between the devicetree and the kernel.  Once =
+dt-bindings have
+>>> +been merged (and appear in a release of the kernel) they are set in =
+stone, and
+>>> +any changes made must be compatible with existing devicetrees.  =
+This means that,
+>>> +when changing properties, a "new" kernel must still be able to =
+handle an old
+>>> +devicetree.  For many systems the devicetree is provided by =
+firmware, and
+>>> +upgrading to a newer kernel cannot cause regressions.  Ideally, the =
+inverse is
+>>> +also true, and a new devicetree will also be compatible with an old =
+kernel,
+>>> +although this is often not possible.
+>>=20
+>> I would prefer to skip it and instead: enhance
+>> Documentation/devicetree/bindings/ABI.rst and then reference it here.
+>>=20
+>>> +
+>>> +If changes are being made to a devicetree that are incompatible =
+with old
+>>> +kernels, the devicetree patch should not be applied until the =
+driver is, or an
+>>> +appropriate time later.  Most importantly, any incompatible changes =
+should be
+>>> +clearly pointed out in the patch description and pull request, =
+along with the
+>>> +expected impact on existing users.
+>=20
+> I'm not really sure that I like this truncated section so much, but =
+here
+> it is... I kept the last paragraph intact as it does not talk about =
+the
+> ABI, but rather exceptions of submaintainers.
+>=20
+> devicetree ABI stability
+> ~~~~~~~~~~~~~~~~~~~~~~~~
+>=20
+> Perhaps one of the most important things to highlight is that =
+dt-bindings
+> document the ABI between the devicetree and the kernel. Please see
+> :ref:`devicetree-abi` for devicetree ABI rules.
+>=20
+> If changes are being made to a devicetree that are incompatible with =
+old
+> kernels, the devicetree patch should not be applied until the driver =
+is, or an
+> appropriate time later.  Most importantly, any incompatible changes =
+should be
+> clearly pointed out in the patch description and pull request, along =
+with the
+> expected impact on existing users.
 
-Adjusted the patch description a little to remove mention searching by
-name (since user-visible names are not touched), and applied.
+Do you have an opinion on acknowledging the existence of other OSes =
+here?
 
-Thanks.
+Jess
 
--- 
-Dmitry
