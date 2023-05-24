@@ -2,225 +2,186 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 0C05070FB41
-	for <lists+linux-doc@lfdr.de>; Wed, 24 May 2023 18:02:06 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id E428870F735
+	for <lists+linux-doc@lfdr.de>; Wed, 24 May 2023 15:04:00 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S238275AbjEXQBy (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 24 May 2023 12:01:54 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:55128 "EHLO
+        id S235314AbjEXND6 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 24 May 2023 09:03:58 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:42530 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S238427AbjEXQBS (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Wed, 24 May 2023 12:01:18 -0400
-Received: from mail-pg1-x52f.google.com (mail-pg1-x52f.google.com [IPv6:2607:f8b0:4864:20::52f])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 9E45C186;
-        Wed, 24 May 2023 09:00:44 -0700 (PDT)
-Received: by mail-pg1-x52f.google.com with SMTP id 41be03b00d2f7-53eee18a192so426895a12.3;
-        Wed, 24 May 2023 09:00:44 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20221208; t=1684944039; x=1687536039;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=ex5RgcOGAy76xADxIoHPP5AhCcNedegsTMiHxYneYvA=;
-        b=AESaB1MjaCZtF0RCoh9e77N5vnrWapnBypJL1aCtjHEnEZb14XPLFFeEJGplihdCB9
-         xcEovBnrNPwzC7actG2PNYtsxUMNUvPyjKjRRUrpLAdhSU5qs/L1njJWvayRfHp6l+gz
-         DqdY/B8iS7/N4Cz3Mh8phN8N4jdj1+hGp50cUv08D3FxbcIRaj092Fo6DNoRQFZ2kjEG
-         FdlR6Vkl83wdnxOKU0/1vIWWJhcfMA+VF0M9QMBpwhVsYaADIYuYWXvuGLJxUk/v3JW0
-         4nYEjVSCl7hMOEonBURtneMlQ5nePBIVU79XIPcNi5N5riSozrlNxKYUZdorCfnJ7/CW
-         cgpg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1684944039; x=1687536039;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=ex5RgcOGAy76xADxIoHPP5AhCcNedegsTMiHxYneYvA=;
-        b=O4ZkO9fo0HPxLE0x6WK4gELXFwuhQ/lwwb9tCxR+96tyMFMTw/WzJWZZYPizfebulr
-         v0EfS8cqlV8kjRKBcVcTeNUKYXHl4qqJ5JbcGkNHxjD85bf0dPi4dXVO7hv5ifGyp6A6
-         lA7E7umWcuB77x2zGsgSj6z9R7TjpKD0ByXUHLJGxowcI+yMRne/o1vAIxGeF+TXw+lt
-         TeYobUjLkZdLvHjilrGSXU4w4kxSNl26vqDMQb+mnnPvtBUM4q6FPiUIcdizxjz7fG2z
-         lmHPyJAn/OKX3BB9uLs6E2BddvaAGK297z4UpWGJWe5cshRt4nB5HspI4xMyGLBwyftq
-         FZnw==
-X-Gm-Message-State: AC+VfDxaKO+lgZPfBBmPvd5lXgQlHXY8+VP4TbVJlyOY5q7QedrpNkjp
-        kCk9J75ZD8xAQdEMzXcuJdQ=
-X-Google-Smtp-Source: ACHHUZ7onA/29uMKwZvh+T+iC1Z1taVKK6Wncz/arA/4C9WyRm6daOgouT46veHHvrkbpt6hDF5Vwg==
-X-Received: by 2002:a17:902:748c:b0:1a9:21bc:65f8 with SMTP id h12-20020a170902748c00b001a921bc65f8mr16308136pll.11.1684944039060;
-        Wed, 24 May 2023 09:00:39 -0700 (PDT)
-Received: from localhost ([2a00:79e1:abd:4a00:61b:48ed:72ab:435b])
-        by smtp.gmail.com with ESMTPSA id e16-20020a17090301d000b001afccb29d69sm3698533plh.303.2023.05.24.09.00.38
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 24 May 2023 09:00:38 -0700 (PDT)
-From:   Rob Clark <robdclark@gmail.com>
-To:     dri-devel@lists.freedesktop.org
-Cc:     freedreno@lists.freedesktop.org, Daniel Vetter <daniel@ffwll.ch>,
-        Tvrtko Ursulin <tvrtko.ursulin@linux.intel.com>,
-        Boris Brezillon <boris.brezillon@collabora.com>,
-        Christopher Healy <healych@amazon.com>,
-        Emil Velikov <emil.l.velikov@gmail.com>,
-        =?UTF-8?q?Christian=20K=C3=B6nig?= <christian.koenig@amd.com>,
-        Rob Clark <robdclark@chromium.org>,
-        Tvrtko Ursulin <tvrtko.ursulin@intel.com>,
-        Dave Airlie <airlied@redhat.com>,
-        Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
-        Maxime Ripard <mripard@kernel.org>,
-        Thomas Zimmermann <tzimmermann@suse.de>,
-        David Airlie <airlied@gmail.com>,
+        with ESMTP id S235205AbjEXNDg (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Wed, 24 May 2023 09:03:36 -0400
+Received: from mx0a-00128a01.pphosted.com (mx0a-00128a01.pphosted.com [148.163.135.77])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 3B1DFE44;
+        Wed, 24 May 2023 06:03:20 -0700 (PDT)
+Received: from pps.filterd (m0167088.ppops.net [127.0.0.1])
+        by mx0a-00128a01.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id 34OArOT9031201;
+        Wed, 24 May 2023 09:02:54 -0400
+Received: from nwd2mta4.analog.com ([137.71.173.58])
+        by mx0a-00128a01.pphosted.com (PPS) with ESMTPS id 3qpr27bpte-1
+        (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+        Wed, 24 May 2023 09:02:45 -0400
+Received: from ASHBMBX9.ad.analog.com (ASHBMBX9.ad.analog.com [10.64.17.10])
+        by nwd2mta4.analog.com (8.14.7/8.14.7) with ESMTP id 34OD23Ci017607
+        (version=TLSv1/SSLv3 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=FAIL);
+        Wed, 24 May 2023 09:02:03 -0400
+Received: from ASHBCASHYB4.ad.analog.com (10.64.17.132) by
+ ASHBMBX9.ad.analog.com (10.64.17.10) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.986.14; Wed, 24 May 2023 09:02:02 -0400
+Received: from ASHBMBX8.ad.analog.com (10.64.17.5) by
+ ASHBCASHYB4.ad.analog.com (10.64.17.132) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.986.14; Wed, 24 May 2023 09:02:02 -0400
+Received: from zeus.spd.analog.com (10.66.68.11) by ashbmbx8.ad.analog.com
+ (10.64.17.5) with Microsoft SMTP Server id 15.2.986.14 via Frontend
+ Transport; Wed, 24 May 2023 09:02:02 -0400
+Received: from daniel-Precision-5530.ad.analog.com ([10.48.65.214])
+        by zeus.spd.analog.com (8.15.1/8.15.1) with ESMTP id 34OD1npV000947;
+        Wed, 24 May 2023 09:01:52 -0400
+From:   Daniel Matyas <daniel.matyas@analog.com>
+CC:     Daniel Matyas <daniel.matyas@analog.com>,
+        Rob Herring <robh@kernel.org>,
+        Jean Delvare <jdelvare@suse.com>,
+        Guenter Roeck <linux@roeck-us.net>,
+        "Rob Herring" <robh+dt@kernel.org>,
+        Krzysztof Kozlowski <krzysztof.kozlowski+dt@linaro.org>,
+        Conor Dooley <conor+dt@kernel.org>,
         Jonathan Corbet <corbet@lwn.net>,
-        linux-doc@vger.kernel.org (open list:DOCUMENTATION),
-        linux-kernel@vger.kernel.org (open list)
-Subject: [PATCH v5 7/7] drm/doc: Relax fdinfo string constraints
-Date:   Wed, 24 May 2023 08:59:37 -0700
-Message-Id: <20230524155956.382440-8-robdclark@gmail.com>
-X-Mailer: git-send-email 2.40.1
-In-Reply-To: <20230524155956.382440-1-robdclark@gmail.com>
-References: <20230524155956.382440-1-robdclark@gmail.com>
+        <linux-hwmon@vger.kernel.org>, <devicetree@vger.kernel.org>,
+        <linux-kernel@vger.kernel.org>, <linux-doc@vger.kernel.org>
+Subject: [PATCH v10 1/2] dt-bindings: hwmon: add MAX31827
+Date:   Wed, 24 May 2023 19:01:29 +0300
+Message-ID: <20230524160131.14081-1-daniel.matyas@analog.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
-X-Spam-Status: No, score=-2.1 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_FROM,
-        RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,SPF_PASS,T_SCC_BODY_TEXT_LINE
-        autolearn=ham autolearn_force=no version=3.4.6
+X-ADIRuleOP-NewSCL: Rule Triggered
+X-Proofpoint-GUID: eguqr4SGfYA-mSGxZHz18lrx9__7x59L
+X-Proofpoint-ORIG-GUID: eguqr4SGfYA-mSGxZHz18lrx9__7x59L
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.254,Aquarius:18.0.957,Hydra:6.0.573,FMLib:17.11.176.26
+ definitions=2023-05-24_08,2023-05-24_01,2023-05-22_02
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 priorityscore=1501
+ spamscore=0 lowpriorityscore=0 suspectscore=0 adultscore=0 malwarescore=0
+ phishscore=0 mlxscore=0 clxscore=1015 mlxlogscore=999 bulkscore=0
+ impostorscore=0 classifier=spam adjust=0 reason=mlx scancount=1
+ engine=8.12.0-2304280000 definitions=main-2305240107
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_LOW,
+        SPF_HELO_NONE,SPF_PASS,T_SCC_BODY_TEXT_LINE autolearn=ham
+        autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
+To:     unlisted-recipients:; (no To-header on input)
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-From: Rob Clark <robdclark@chromium.org>
+MAX31827 is a low-power temperature switch with I2C interface.
 
-The restriction about no whitespace, etc, really only applies to the
-usage of strings in keys.  Values can contain anything (other than
-newline).
+The device is a ±1°C accuracy from -40°C to +125°C
+(12 bits) local temperature switch and sensor with I2C/SM-
+Bus interface. The combination of small 6-bump wafer-lev-
+el package (WLP) and high accuracy makes this temper-
+ature sensor/switch ideal for a wide range of applications.
 
-Signed-off-by: Rob Clark <robdclark@chromium.org>
-Acked-by: Tvrtko Ursulin <tvrtko.ursulin@intel.com>
-Acked-by: Dave Airlie <airlied@redhat.com>
+Signed-off-by: Daniel Matyas <daniel.matyas@analog.com>
+Reviewed-by: Rob Herring <robh@kernel.org>
 ---
- Documentation/gpu/drm-usage-stats.rst | 27 ++++++++++++++-------------
- 1 file changed, 14 insertions(+), 13 deletions(-)
+Change log:
+v9 -> v10: Added proper change log.
+v8 -> v9: Did not use '--base'.
+v7 -> v8: Added '--base=[Linux 6.4-rc1 commmit]' when using 'git format-patch'
+v6 -> v7: No change.
+v5 -> v6: Added Reviewed-by tag.
+v3 -> v5: Forgot to add Reviewed-by tag.
+v2 -> v3: Made max31828 and max31829 compatible with max31827.
+v1 -> v2: Resolved dt_binding_check errors. Dropped status at i2c node. Made node name generic. 
 
-diff --git a/Documentation/gpu/drm-usage-stats.rst b/Documentation/gpu/drm-usage-stats.rst
-index d012eb56885e..fe35a291ff3e 100644
---- a/Documentation/gpu/drm-usage-stats.rst
-+++ b/Documentation/gpu/drm-usage-stats.rst
-@@ -17,41 +17,42 @@ wherever possible effort should still be made to standardise as much as
- possible.
+ .../bindings/hwmon/adi,max31827.yaml          | 54 +++++++++++++++++++
+ MAINTAINERS                                   |  7 +++
+ 2 files changed, 61 insertions(+)
+ create mode 100644 Documentation/devicetree/bindings/hwmon/adi,max31827.yaml
+
+diff --git a/Documentation/devicetree/bindings/hwmon/adi,max31827.yaml b/Documentation/devicetree/bindings/hwmon/adi,max31827.yaml
+new file mode 100644
+index 000000000000..2dc8b07b4d3b
+--- /dev/null
++++ b/Documentation/devicetree/bindings/hwmon/adi,max31827.yaml
+@@ -0,0 +1,54 @@
++# SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause)
++%YAML 1.2
++---
++$id: http://devicetree.org/schemas/hwmon/adi,max31827.yaml#
++$schema: http://devicetree.org/meta-schemas/core.yaml#
++
++title: Analog Devices MAX31827, MAX31828, MAX31829 Low-Power Temperature Switch
++
++maintainers:
++  - Daniel Matyas <daniel.matyas@analog.com>
++
++description: |
++  Analog Devices MAX31827, MAX31828, MAX31829 Low-Power Temperature Switch with
++  I2C Interface
++  https://www.analog.com/media/en/technical-documentation/data-sheets/MAX31827-MAX31829.pdf
++
++properties:
++  compatible:
++    oneOf:
++      - const: adi,max31827
++      - items:
++          - enum:
++              - adi,max31828
++              - adi,max31829
++          - const: adi,max31827
++
++  reg:
++    maxItems: 1
++
++  vref-supply:
++    description:
++      Must have values in the interval (1.6V; 3.6V) in order for the device to
++      function correctly.
++
++required:
++  - compatible
++  - reg
++  - vref-supply
++
++additionalProperties: false
++
++examples:
++  - |
++    i2c {
++        #address-cells = <1>;
++        #size-cells = <0>;
++
++        temperature-sensor@42 {
++            compatible = "adi,max31827";
++            reg = <0x42>;
++            vref-supply = <&reg_vdd>;
++        };
++    };
++...
+diff --git a/MAINTAINERS b/MAINTAINERS
+index 27ef11624748..752c7e9c4e4a 100644
+--- a/MAINTAINERS
++++ b/MAINTAINERS
+@@ -12612,6 +12612,13 @@ F:	Documentation/userspace-api/media/drivers/max2175.rst
+ F:	drivers/media/i2c/max2175*
+ F:	include/uapi/linux/max2175.h
  
- File format specification
- =========================
- 
- - File shall contain one key value pair per one line of text.
- - Colon character (`:`) must be used to delimit keys and values.
- - All keys shall be prefixed with `drm-`.
- - Whitespace between the delimiter and first non-whitespace character shall be
-   ignored when parsing.
--- Neither keys or values are allowed to contain whitespace characters.
-+- Keys are not allowed to contain whitespace characters.
- - Numerical key value pairs can end with optional unit string.
- - Data type of the value is fixed as defined in the specification.
- 
- Key types
- ---------
- 
- 1. Mandatory, fully standardised.
- 2. Optional, fully standardised.
- 3. Driver specific.
- 
- Data types
- ----------
- 
- - <uint> - Unsigned integer without defining the maximum value.
--- <str> - String excluding any above defined reserved characters or whitespace.
-+- <keystr> - String excluding any above defined reserved characters or whitespace.
-+- <valstr> - String.
- 
- Mandatory fully standardised keys
- ---------------------------------
- 
--- drm-driver: <str>
-+- drm-driver: <valstr>
- 
- String shall contain the name this driver registered as via the respective
- `struct drm_driver` data structure.
- 
- Optional fully standardised keys
- --------------------------------
- 
- Identification
- ^^^^^^^^^^^^^^
- 
-@@ -68,62 +69,62 @@ to the in kernel representation of `struct drm_file` instances.
- 
- Uniqueness of the value shall be either globally unique, or unique within the
- scope of each device, in which case `drm-pdev` shall be present as well.
- 
- Userspace should make sure to not double account any usage statistics by using
- the above described criteria in order to associate data to individual clients.
- 
- Utilization
- ^^^^^^^^^^^
- 
--- drm-engine-<str>: <uint> ns
-+- drm-engine-<keystr>: <uint> ns
- 
- GPUs usually contain multiple execution engines. Each shall be given a stable
--and unique name (str), with possible values documented in the driver specific
-+and unique name (keystr), with possible values documented in the driver specific
- documentation.
- 
- Value shall be in specified time units which the respective GPU engine spent
- busy executing workloads belonging to this client.
- 
- Values are not required to be constantly monotonic if it makes the driver
- implementation easier, but are required to catch up with the previously reported
- larger value within a reasonable period. Upon observing a value lower than what
- was previously read, userspace is expected to stay with that larger previous
- value until a monotonic update is seen.
- 
--- drm-engine-capacity-<str>: <uint>
-+- drm-engine-capacity-<keystr>: <uint>
- 
- Engine identifier string must be the same as the one specified in the
--drm-engine-<str> tag and shall contain a greater than zero number in case the
-+drm-engine-<keystr> tag and shall contain a greater than zero number in case the
- exported engine corresponds to a group of identical hardware engines.
- 
- In the absence of this tag parser shall assume capacity of one. Zero capacity
- is not allowed.
- 
--- drm-cycles-<str>: <uint>
-+- drm-cycles-<keystr>: <uint>
- 
- Engine identifier string must be the same as the one specified in the
--drm-engine-<str> tag and shall contain the number of busy cycles for the given
-+drm-engine-<keystr> tag and shall contain the number of busy cycles for the given
- engine.
- 
- Values are not required to be constantly monotonic if it makes the driver
- implementation easier, but are required to catch up with the previously reported
- larger value within a reasonable period. Upon observing a value lower than what
- was previously read, userspace is expected to stay with that larger previous
- value until a monotonic update is seen.
- 
--- drm-maxfreq-<str>: <uint> [Hz|MHz|KHz]
-+- drm-maxfreq-<keystr>: <uint> [Hz|MHz|KHz]
- 
- Engine identifier string must be the same as the one specified in the
--drm-engine-<str> tag and shall contain the maximum frequency for the given
--engine.  Taken together with drm-cycles-<str>, this can be used to calculate
--percentage utilization of the engine, whereas drm-engine-<str> only reflects
-+drm-engine-<keystr> tag and shall contain the maximum frequency for the given
-+engine.  Taken together with drm-cycles-<keystr>, this can be used to calculate
-+percentage utilization of the engine, whereas drm-engine-<keystr> only reflects
- time active without considering what frequency the engine is operating as a
- percentage of it's maximum frequency.
- 
- Memory
- ^^^^^^
- 
- - drm-memory-<region>: <uint> [KiB|MiB]
- 
- Each possible memory type which can be used to store buffer objects by the
- GPU in question shall be given a stable and unique name to be returned as the
++MAX31827 TEMPERATURE SWITCH DRIVER
++M:	Daniel Matyas <daniel.matyas@analog.com>
++L:	linux-hwmon@vger.kernel.org
++S:	Supported
++W:	http://ez.analog.com/community/linux-device-drivers
++F:	Documentation/devicetree/bindings/hwmon/adi,max31827.yaml
++
+ MAX6650 HARDWARE MONITOR AND FAN CONTROLLER DRIVER
+ L:	linux-hwmon@vger.kernel.org
+ S:	Orphan
 -- 
-2.40.1
+2.34.1
 
