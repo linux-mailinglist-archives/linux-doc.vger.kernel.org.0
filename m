@@ -2,259 +2,250 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id DD18370F5BF
-	for <lists+linux-doc@lfdr.de>; Wed, 24 May 2023 13:58:31 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id A353970F832
+	for <lists+linux-doc@lfdr.de>; Wed, 24 May 2023 16:04:17 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S229778AbjEXL6a (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 24 May 2023 07:58:30 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:38092 "EHLO
+        id S231886AbjEXOEQ (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 24 May 2023 10:04:16 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:46270 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S229630AbjEXL63 (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Wed, 24 May 2023 07:58:29 -0400
-Received: from smtp-out1.suse.de (smtp-out1.suse.de [195.135.220.28])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 2AEB3135;
-        Wed, 24 May 2023 04:58:27 -0700 (PDT)
-Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
-        (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-         key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
-        (No client certificate requested)
-        by smtp-out1.suse.de (Postfix) with ESMTPS id 802D622168;
-        Wed, 24 May 2023 11:58:25 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.cz; s=susede2_rsa;
-        t=1684929505; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-         mime-version:mime-version:content-type:content-type:
-         content-transfer-encoding:content-transfer-encoding:
-         in-reply-to:in-reply-to:references:references;
-        bh=rH18iBwWnn9zYEQ2bRQgcgXCwVXM3ls6ER1KLLT/r60=;
-        b=WMTRqdgWgo5Xv1JGWXGXa/4leJ+kA3Fr2EvuxoJ+Aqe6NU5zbCpx8cdBkJRqivz3zlmCI8
-        fYweNr+iUlPQUznzgqAE9D1FG4L+KMokWqHKNGTedF59FJDkPiQa49qcPJoEz7QSNuY/TE
-        11uKzpPFgkG44/ySFC88vJeQKALxzNA=
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.cz;
-        s=susede2_ed25519; t=1684929505;
-        h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-         mime-version:mime-version:content-type:content-type:
-         content-transfer-encoding:content-transfer-encoding:
-         in-reply-to:in-reply-to:references:references;
-        bh=rH18iBwWnn9zYEQ2bRQgcgXCwVXM3ls6ER1KLLT/r60=;
-        b=5OLIE73rOKr/k1ojPtkzX/HPu5nXWbAb/WgNuvY9KLod1eci7r+KTUnNLWeyZDjI8HJPtV
-        go+jXuaQCYw1m7Dw==
-Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
-        (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-         key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
-        (No client certificate requested)
-        by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id F3D0D13425;
-        Wed, 24 May 2023 11:58:24 +0000 (UTC)
-Received: from dovecot-director2.suse.de ([192.168.254.65])
-        by imap2.suse-dmz.suse.de with ESMTPSA
-        id cu/HOuD7bWSZVgAAMHmgww
-        (envelope-from <vbabka@suse.cz>); Wed, 24 May 2023 11:58:24 +0000
-Message-ID: <18c33bf0-0c7e-7584-5149-33cf77b50b8a@suse.cz>
-Date:   Wed, 24 May 2023 13:58:24 +0200
+        with ESMTP id S231573AbjEXOEO (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Wed, 24 May 2023 10:04:14 -0400
+Received: from mail-pf1-x429.google.com (mail-pf1-x429.google.com [IPv6:2607:f8b0:4864:20::429])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id AE302E7;
+        Wed, 24 May 2023 07:04:12 -0700 (PDT)
+Received: by mail-pf1-x429.google.com with SMTP id d2e1a72fcca58-64d2a613ec4so729793b3a.1;
+        Wed, 24 May 2023 07:04:12 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20221208; t=1684937052; x=1687529052;
+        h=content-transfer-encoding:in-reply-to:from:content-language
+         :references:cc:to:subject:user-agent:mime-version:date:message-id
+         :from:to:cc:subject:date:message-id:reply-to;
+        bh=h3ryO674tidvGL1C9R3/slJDmhuMCbCkck5NhlxC3KY=;
+        b=RgZqaiWy3OZvMhNNe3yzbZncIgpHeGmAP60B0EbMXzoTRrkHxdzBX62D+EtuSmYRSb
+         nzN1f0JlhG79e9kH9Ombee+VqZhU1WyhNmscn/9TuZ4HXNoprChl0pYJIJh4ZJYvNWY1
+         YHQIXyaQDvTCC23a8ECbT5HIZguFJTKPjueRZKfhYTsbBIlyOXOp2zCmrVmCkKxtsw0s
+         Pv3eKzcj/44o94PlMW495nM6SEUl8P353kZPVKG2k6eqo9dNme3hdgQD0VQbfbYDnMHM
+         Ay0SlZDOSie11UJok8uF5xIc4+cAPKsIlNZUgZ+NMTri0HoEDfQ5neEheSkm7bSc2U9q
+         /ZHA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20221208; t=1684937052; x=1687529052;
+        h=content-transfer-encoding:in-reply-to:from:content-language
+         :references:cc:to:subject:user-agent:mime-version:date:message-id
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=h3ryO674tidvGL1C9R3/slJDmhuMCbCkck5NhlxC3KY=;
+        b=lc0xKOtAc7k/fCJC3bFKbddcg2iJrNgdSIDRatm70PfPdE2ZdxonpS/eemJ9W7I9u1
+         GTxLX6RCVsJZg/RVVgmTwrhMMOo6Sym36IfXUUtHRqcl7/SjBaRWf+5bqNLobc+hppS1
+         OX19W76cuEYxy1gCXO1cTEkvA93Z6uh85qxXAt4h8JnwsjT+RBbFJHaLt6bSshazIDrc
+         vliKZi5H6/+JtEi+t4EgDqtFqhBT/PWR4nceAVzkR04bsN25NJh65UJR/I8G1IwHd5Vz
+         IzlYS28KVLkm1Dkpl9TnEq+grV/Py1y3thHJEU+5NonArQrijHU2OTxuyFHCRsdG4vju
+         jIWw==
+X-Gm-Message-State: AC+VfDw0MPtWpHXYL5h331oZy5zdUYuCHGF5LYTwwOv5y2GUOvF/KIvL
+        RE7OTS+0+jKxLqFcyeR5mXHqTyAeP1Y=
+X-Google-Smtp-Source: ACHHUZ7oPIMU1hwIO/kIU9m19ryJ8QuU5rEftRMFOj9EKTu/ieIgyRqUpzo1f47E0KdfOP9/VnKZCQ==
+X-Received: by 2002:a05:6a00:1356:b0:64c:c841:4e8a with SMTP id k22-20020a056a00135600b0064cc8414e8amr3528455pfu.22.1684937051813;
+        Wed, 24 May 2023 07:04:11 -0700 (PDT)
+Received: from [192.168.11.9] (KD106167171201.ppp-bb.dion.ne.jp. [106.167.171.201])
+        by smtp.gmail.com with ESMTPSA id q20-20020a63e954000000b00502ecc282e2sm7939127pgj.5.2023.05.24.07.04.07
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Wed, 24 May 2023 07:04:11 -0700 (PDT)
+Message-ID: <96d6930b-78b1-4b4c-63e3-c385a764d6e3@gmail.com>
+Date:   Wed, 24 May 2023 23:03:58 +0900
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
  Thunderbird/102.11.0
-Subject: Re: [PATCH v3 09/11] mm/slub: Fold slab_update_freelist()
+Subject: Re: [PATCH 24/26] locking/atomic: scripts: generate kerneldoc
+ comments
+To:     Mark Rutland <mark.rutland@arm.com>, linux-kernel@vger.kernel.org
+Cc:     boqun.feng@gmail.com, corbet@lwn.net, keescook@chromium.org,
+        linux-arch@vger.kernel.org, linux@armlinux.org.uk,
+        linux-doc@vger.kernel.org, paulmck@kernel.org,
+        peterz@infradead.org, sstabellini@kernel.org, will@kernel.org,
+        Akira Yokosawa <akiyks@gmail.com>
+References: <20230522122429.1915021-1-mark.rutland@arm.com>
+ <20230522122429.1915021-25-mark.rutland@arm.com>
 Content-Language: en-US
-To:     Peter Zijlstra <peterz@infradead.org>,
-        torvalds@linux-foundation.org
-Cc:     corbet@lwn.net, will@kernel.org, boqun.feng@gmail.com,
-        mark.rutland@arm.com, catalin.marinas@arm.com, dennis@kernel.org,
-        tj@kernel.org, cl@linux.com, hca@linux.ibm.com, gor@linux.ibm.com,
-        agordeev@linux.ibm.com, borntraeger@linux.ibm.com,
-        svens@linux.ibm.com, tglx@linutronix.de, mingo@redhat.com,
-        bp@alien8.de, dave.hansen@linux.intel.com, x86@kernel.org,
-        hpa@zytor.com, joro@8bytes.org, suravee.suthikulpanit@amd.com,
-        robin.murphy@arm.com, dwmw2@infradead.org,
-        baolu.lu@linux.intel.com, Arnd Bergmann <arnd@arndb.de>,
-        Herbert Xu <herbert@gondor.apana.org.au>, davem@davemloft.net,
-        penberg@kernel.org, rientjes@google.com, iamjoonsoo.kim@lge.com,
-        Andrew Morton <akpm@linux-foundation.org>,
-        roman.gushchin@linux.dev, 42.hyeyoo@gmail.com,
-        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
-        linux-mm@kvack.org, linux-s390@vger.kernel.org,
-        iommu@lists.linux.dev, linux-arch@vger.kernel.org,
-        linux-crypto@vger.kernel.org
-References: <20230515075659.118447996@infradead.org>
- <20230515080554.520976397@infradead.org>
-From:   Vlastimil Babka <vbabka@suse.cz>
-In-Reply-To: <20230515080554.520976397@infradead.org>
+From:   Akira Yokosawa <akiyks@gmail.com>
+In-Reply-To: <20230522122429.1915021-25-mark.rutland@arm.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-Spam-Status: No, score=-4.5 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,NICE_REPLY_A,RCVD_IN_DNSWL_MED,
-        SPF_HELO_NONE,SPF_PASS,T_SCC_BODY_TEXT_LINE autolearn=ham
-        autolearn_force=no version=3.4.6
+X-Spam-Status: No, score=-2.2 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_FROM,NICE_REPLY_A,
+        RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,SPF_PASS,T_SCC_BODY_TEXT_LINE
+        autolearn=ham autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On 5/15/23 09:57, Peter Zijlstra wrote:
-> The two functions slab_update_freelist() and __slab_update_freelist()
-> are nearly identical, fold and add a boolean argument and rely on
-> constant propagation.
+Hi Mark,
+
+Thank you for the nice documentation improvements!
+
+Please see inline comments for minor nits.
+
+On Mon, 22 May 2023 13:24:27 +0100, Mark Rutland wrote:
+> Currently the atomics are documented in Documentation/atomic_t.txt, and
+> have no kerneldoc comments. There are a sufficient number of gotchas
+> (e.g. semantics, noinstr-safety) that it would be nice to have comments
+> to call these out, and it would be nice to have kerneldoc comments such
+> that these can be collated.
 > 
-> Signed-off-by: Peter Zijlstra (Intel) <peterz@infradead.org>
+> While it's possible to derive the semantics from the code, this can be
+> painful given the amount of indirection we currently have (e.g. fallback
+> paths), and it's easy to be mislead by naming, e.g.
+> 
+> * The unconditional void-returning ops *only* have relaxed variants
+>   without a _relaxed suffix, and can easily be mistaken for being fully
+>   ordered.
+> 
+>   It would be nice to give these a _relaxed() suffix, but this would
+>   result in significant churn throughout the kernel.
+> 
+> * Our naming of conditional and unconditional+test ops is rather
+>   inconsistent, and it can be difficult to derive the name of an
+>   operation, or to identify where an op is conditional or
+>   unconditional+test.
+> 
+>   Some ops are clearly conditional:
+>   - dec_if_positive
+>   - add_unless
+>   - dec_unless_positive
+>   - inc_unless_negative
+> 
+>   Some ops are clearly unconditional+test:
+>   - sub_and_test
+>   - dec_and_test
+>   - inc_and_test
+> 
+>   However, what exactly those test is not obvious. A _test_zero suffix
+>   might be clearer.
+> 
+>   Others could be read ambiguously:
+>   - inc_not_zero	// conditional
+>   - add_negative	// unconditional+test
+> 
+>   It would probably be worth renaming these, e.g. to inc_unless_zero and
+>   add_test_negative.
+> 
+> As a step towards making this more consistent and easier to understand,
+> this patch adds kerneldoc comments for all generated *atomic*_*()
+> functions. These are generated from templates, with some common text
+> shared, making it easy to extend these in future if necessary.
+> 
+> I've tried to make these as consistent and clear as possible, and I've
+> deliberately ensured:
+> 
+> * All ops have their ordering explicitly mentioned in the short and long
+>   description.
+> 
+> * All test ops have "test" in their short description.
+> 
+> * All ops are described as an expression using their usual C operator.
+>   For example:
+> 
+>   andnot: "Atomically updates @v to (@v & ~@i)"
 
-Something like that has been tried before and the result:
-https://lore.kernel.org/all/CAHk-=wiJLqL2cUhJbvpyPQpkbVOu1rVSzgO2=S2jC55hneLtfQ@mail.gmail.com/
+The kernel-doc script converts "~@i" into reST source of "~**i**",
+where the emphasis of i is not recognized by Sphinx.
 
-Your parameter is not called 'locked' but 'irq_save' which is better, but
-that's just one detail.
+For the "@" to work as expected, please say "~(@i)" or "~ @i".
+My preference is the former.
 
-After your refactoring in 08/11 which puts most of the code into
-__update_freelist_fast() and _slow() I'd say the result is not so bad already.
+>   inc:    "Atomically updates @v to (@v + 1)"
+> 
+>   Which may be clearer to non-naative English speakers, and allows all
+                            non-native
 
-BTW I have some suspicion that some SLUB code is based on assumptions that
-are no longer true these days. IIRC I've seen some microbenchmark results a
-while ago that showed that disabling/enabling irqs is surprisingly (to me)
-very cheap today, so maybe it's not so useful to keep doing the
-this_cpu_cmpxchg128 for the struct kmem_cache_cpu operations (less so for
-struct slab cmpxchg128 where actually different cpus may be involved). But
-it needs a closer look.
+>   the operations to be described in the same style.
+> 
+> * All conditional ops have their condition described as an expression
+>   using the usual C operators. For example:
+> 
+>   add_unless: "If (@v != @u), atomically updates @v to (@v + @i)"
+>   cmpxchg:    "If (@v == @old), atomically updates @v to @new"
+> 
+>   Which may be clearer to non-naative English speakers, and allows all
+
+Ditto.
+
+>   the operations to be described in the same style.
+> 
+> * All bitwise ops (and,andnot,or,xor) explicitly mention that they are
+>   bitwise in their short description, so that they are not mistaken for
+>   performing their logical equivalents.
+> 
+> * The noinstr safety of each op is explicitly described, with a
+>   description of whether or not to use the raw_ form of the op.
+> 
+> There should be no functional change as a result of this patch.
+> 
+> Reported-by: Paul E. McKenney <paulmck@kernel.org>
+> Signed-off-by: Mark Rutland <mark.rutland@arm.com>
+> Cc: Will Deacon <will@kernel.org>
+> Cc: Peter Zijlstra <peterz@infradead.org>
+> Cc: Boqun Feng <boqun.feng@gmail.com>
+
+FWIW,
+
+Reviewed-by: Akira Yokosawa <akiyks@gmail.com>
+
+        Thanks, Akira
 
 > ---
->  mm/slub.c |   80 +++++++++++++++++++++-----------------------------------------
->  1 file changed, 28 insertions(+), 52 deletions(-)
+>  include/linux/atomic/atomic-arch-fallback.h  | 1848 +++++++++++-
+>  include/linux/atomic/atomic-instrumented.h   | 2771 +++++++++++++++++-
+>  include/linux/atomic/atomic-long.h           |  925 +++++-
+>  scripts/atomic/atomic-tbl.sh                 |  112 +-
+>  scripts/atomic/gen-atomic-fallback.sh        |    2 +
+>  scripts/atomic/gen-atomic-instrumented.sh    |    2 +
+>  scripts/atomic/gen-atomic-long.sh            |    2 +
+>  scripts/atomic/kerneldoc/add                 |   13 +
+>  scripts/atomic/kerneldoc/add_negative        |   13 +
+>  scripts/atomic/kerneldoc/add_unless          |   18 +
+>  scripts/atomic/kerneldoc/and                 |   13 +
+>  scripts/atomic/kerneldoc/andnot              |   13 +
+>  scripts/atomic/kerneldoc/cmpxchg             |   14 +
+>  scripts/atomic/kerneldoc/dec                 |   12 +
+>  scripts/atomic/kerneldoc/dec_and_test        |   12 +
+>  scripts/atomic/kerneldoc/dec_if_positive     |   12 +
+>  scripts/atomic/kerneldoc/dec_unless_positive |   12 +
+>  scripts/atomic/kerneldoc/inc                 |   12 +
+>  scripts/atomic/kerneldoc/inc_and_test        |   12 +
+>  scripts/atomic/kerneldoc/inc_not_zero        |   12 +
+>  scripts/atomic/kerneldoc/inc_unless_negative |   12 +
+>  scripts/atomic/kerneldoc/or                  |   13 +
+>  scripts/atomic/kerneldoc/read                |   12 +
+>  scripts/atomic/kerneldoc/set                 |   13 +
+>  scripts/atomic/kerneldoc/sub                 |   13 +
+>  scripts/atomic/kerneldoc/sub_and_test        |   13 +
+>  scripts/atomic/kerneldoc/try_cmpxchg         |   15 +
+>  scripts/atomic/kerneldoc/xchg                |   13 +
+>  scripts/atomic/kerneldoc/xor                 |   13 +
+>  29 files changed, 5940 insertions(+), 7 deletions(-)
+>  create mode 100644 scripts/atomic/kerneldoc/add
+>  create mode 100644 scripts/atomic/kerneldoc/add_negative
+>  create mode 100644 scripts/atomic/kerneldoc/add_unless
+>  create mode 100644 scripts/atomic/kerneldoc/and
+>  create mode 100644 scripts/atomic/kerneldoc/andnot
+>  create mode 100644 scripts/atomic/kerneldoc/cmpxchg
+>  create mode 100644 scripts/atomic/kerneldoc/dec
+>  create mode 100644 scripts/atomic/kerneldoc/dec_and_test
+>  create mode 100644 scripts/atomic/kerneldoc/dec_if_positive
+>  create mode 100644 scripts/atomic/kerneldoc/dec_unless_positive
+>  create mode 100644 scripts/atomic/kerneldoc/inc
+>  create mode 100644 scripts/atomic/kerneldoc/inc_and_test
+>  create mode 100644 scripts/atomic/kerneldoc/inc_not_zero
+>  create mode 100644 scripts/atomic/kerneldoc/inc_unless_negative
+>  create mode 100644 scripts/atomic/kerneldoc/or
+>  create mode 100644 scripts/atomic/kerneldoc/read
+>  create mode 100644 scripts/atomic/kerneldoc/set
+>  create mode 100644 scripts/atomic/kerneldoc/sub
+>  create mode 100644 scripts/atomic/kerneldoc/sub_and_test
+>  create mode 100644 scripts/atomic/kerneldoc/try_cmpxchg
+>  create mode 100644 scripts/atomic/kerneldoc/xchg
+>  create mode 100644 scripts/atomic/kerneldoc/xor
 > 
-> --- a/mm/slub.c
-> +++ b/mm/slub.c
-> @@ -559,53 +559,29 @@ __update_freelist_slow(struct slab *slab
->   * allocation/ free operation in hardirq context. Therefore nothing can
->   * interrupt the operation.
->   */
-> -static inline bool __slab_update_freelist(struct kmem_cache *s, struct slab *slab,
-> -		void *freelist_old, unsigned long counters_old,
-> -		void *freelist_new, unsigned long counters_new,
-> -		const char *n)
-> +static __always_inline
-> +bool slab_update_freelist(struct kmem_cache *s, struct slab *slab,
-> +			  void *freelist_old, unsigned long counters_old,
-> +			  void *freelist_new, unsigned long counters_new,
-> +			  bool irq_save, const char *n)
->  {
->  	bool ret;
->  
-> -	if (USE_LOCKLESS_FAST_PATH())
-> +	if (!irq_save && USE_LOCKLESS_FAST_PATH())
->  		lockdep_assert_irqs_disabled();
->  
->  	if (s->flags & __CMPXCHG_DOUBLE) {
->  		ret = __update_freelist_fast(slab, freelist_old, counters_old,
->  				            freelist_new, counters_new);
->  	} else {
-> -		ret = __update_freelist_slow(slab, freelist_old, counters_old,
-> -				            freelist_new, counters_new);
-> -	}
-> -	if (likely(ret))
-> -		return true;
-> -
-> -	cpu_relax();
-> -	stat(s, CMPXCHG_DOUBLE_FAIL);
-> -
-> -#ifdef SLUB_DEBUG_CMPXCHG
-> -	pr_info("%s %s: cmpxchg double redo ", n, s->name);
-> -#endif
-> -
-> -	return false;
-> -}
-> -
-> -static inline bool slab_update_freelist(struct kmem_cache *s, struct slab *slab,
-> -		void *freelist_old, unsigned long counters_old,
-> -		void *freelist_new, unsigned long counters_new,
-> -		const char *n)
-> -{
-> -	bool ret;
-> -
-> -	if (s->flags & __CMPXCHG_DOUBLE) {
-> -		ret = __update_freelist_fast(slab, freelist_old, counters_old,
-> -				            freelist_new, counters_new);
-> -	} else {
->  		unsigned long flags;
->  
-> -		local_irq_save(flags);
-> +		if (irq_save)
-> +			local_irq_save(flags);
->  		ret = __update_freelist_slow(slab, freelist_old, counters_old,
->  				            freelist_new, counters_new);
-> -		local_irq_restore(flags);
-> +		if (irq_save)
-> +			local_irq_restore(flags);
->  	}
->  	if (likely(ret))
->  		return true;
-> @@ -2250,10 +2226,10 @@ static inline void *acquire_slab(struct
->  	VM_BUG_ON(new.frozen);
->  	new.frozen = 1;
->  
-> -	if (!__slab_update_freelist(s, slab,
-> -			freelist, counters,
-> -			new.freelist, new.counters,
-> -			"acquire_slab"))
-> +	if (!slab_update_freelist(s, slab,
-> +				  freelist, counters,
-> +				  new.freelist, new.counters,
-> +				  false, "acquire_slab"))
->  		return NULL;
->  
->  	remove_partial(n, slab);
-> @@ -2577,9 +2553,9 @@ static void deactivate_slab(struct kmem_
->  
->  
->  	if (!slab_update_freelist(s, slab,
-> -				old.freelist, old.counters,
-> -				new.freelist, new.counters,
-> -				"unfreezing slab")) {
-> +				  old.freelist, old.counters,
-> +				  new.freelist, new.counters,
-> +				  true, "unfreezing slab")) {
->  		if (mode == M_PARTIAL)
->  			spin_unlock_irqrestore(&n->list_lock, flags);
->  		goto redo;
-> @@ -2633,10 +2609,10 @@ static void __unfreeze_partials(struct k
->  
->  			new.frozen = 0;
->  
-> -		} while (!__slab_update_freelist(s, slab,
-> -				old.freelist, old.counters,
-> -				new.freelist, new.counters,
-> -				"unfreezing slab"));
-> +		} while (!slab_update_freelist(s, slab,
-> +					       old.freelist, old.counters,
-> +					       new.freelist, new.counters,
-> +					       false, "unfreezing slab"));
->  
->  		if (unlikely(!new.inuse && n->nr_partial >= s->min_partial)) {
->  			slab->next = slab_to_discard;
-> @@ -3072,10 +3048,10 @@ static inline void *get_freelist(struct
->  		new.inuse = slab->objects;
->  		new.frozen = freelist != NULL;
->  
-> -	} while (!__slab_update_freelist(s, slab,
-> -		freelist, counters,
-> -		NULL, new.counters,
-> -		"get_freelist"));
-> +	} while (!slab_update_freelist(s, slab,
-> +				       freelist, counters,
-> +				       NULL, new.counters,
-> +				       false, "get_freelist"));
->  
->  	return freelist;
->  }
-> @@ -3666,9 +3642,9 @@ static void __slab_free(struct kmem_cach
->  		}
->  
->  	} while (!slab_update_freelist(s, slab,
-> -		prior, counters,
-> -		head, new.counters,
-> -		"__slab_free"));
-> +				       prior, counters,
-> +				       head, new.counters,
-> +				       true, "__slab_free"));
->  
->  	if (likely(!n)) {
->  
-> 
-> 
+[...]
 
