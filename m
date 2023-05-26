@@ -2,149 +2,170 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id BDD72712442
-	for <lists+linux-doc@lfdr.de>; Fri, 26 May 2023 12:09:59 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 609D771249E
+	for <lists+linux-doc@lfdr.de>; Fri, 26 May 2023 12:28:25 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S243225AbjEZKJv (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Fri, 26 May 2023 06:09:51 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:56328 "EHLO
+        id S235332AbjEZK2N (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Fri, 26 May 2023 06:28:13 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:37150 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S243223AbjEZKJo (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Fri, 26 May 2023 06:09:44 -0400
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 585B5E7;
-        Fri, 26 May 2023 03:09:42 -0700 (PDT)
-Received: from pps.filterd (m0279863.ppops.net [127.0.0.1])
-        by mx0a-0031df01.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id 34Q9c4L3002992;
-        Fri, 26 May 2023 10:09:28 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=quicinc.com; h=from : to : cc :
- subject : date : message-id : in-reply-to : references : mime-version :
- content-type; s=qcppdkim1;
- bh=927t+Jc3BbVATY+uT8tywu3mTWnUFfdwEVcCWZY9YDk=;
- b=WA2UKZgAnSUcjgtf88laz+SxYLmgl4Ziu4QMmrgPsctbnlpR34PhW9kY/qeSBrfCfIJt
- 79YZRfcFSnGa5uhtFwQxqOKdg7PTMPtly4+G3RyUDyxkBB9xauMNppEZ9ttv7B3W8F8b
- OjAKRtkoC87lqlvu5oIkEQHxZApJQsCAa7Ld+qIniZ7CXfqZU69PdstlkKO6AAYeETai
- XZjlkNjK8XdGJg8zeGLj81vuF1gugNZRaR6EBKatmPFJMlepE+cEsi3AaxEGbQZzG+86
- +rywbzuNtegLtH9K+uSKAmFk7sd534NSJFKdi9VOXxhLKInXYQbauPrtyIr5sqRBAnyU DA== 
-Received: from nasanppmta05.qualcomm.com (i-global254.qualcomm.com [199.106.103.254])
-        by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 3qt27n35br-1
-        (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
-        Fri, 26 May 2023 10:09:28 +0000
-Received: from nasanex01a.na.qualcomm.com (nasanex01a.na.qualcomm.com [10.52.223.231])
-        by NASANPPMTA05.qualcomm.com (8.17.1.5/8.17.1.5) with ESMTPS id 34QA9ITk001304
-        (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
-        Fri, 26 May 2023 10:09:18 GMT
-Received: from hazha-gv.qualcomm.com (10.80.80.8) by
- nasanex01a.na.qualcomm.com (10.52.223.231) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.986.42; Fri, 26 May 2023 03:09:12 -0700
-From:   Hao Zhang <quic_hazha@quicinc.com>
-To:     Suzuki K Poulose <suzuki.poulose@arm.com>,
-        Mike Leach <mike.leach@linaro.org>,
-        Leo Yan <leo.yan@linaro.org>,
-        James Clark <james.clark@arm.com>,
-        Alexander Shishkin <alexander.shishkin@linux.intel.com>,
-        Mathieu Poirier <mathieu.poirier@linaro.org>,
-        Konrad Dybcio <konradybcio@gmail.com>,
-        "Rob Herring" <robh+dt@kernel.org>,
-        Krzysztof Kozlowski <krzysztof.kozlowski+dt@linaro.org>,
-        Andy Gross <agross@kernel.org>,
-        "Paul Walmsley" <paul.walmsley@sifive.com>,
-        Palmer Dabbelt <palmer@dabbelt.com>,
-        Albert Ou <aou@eecs.berkeley.edu>,
-        Jonathan Corbet <corbet@lwn.net>
-CC:     Hao Zhang <quic_hazha@quicinc.com>,
-        Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
-        <coresight@lists.linaro.org>,
-        <linux-arm-kernel@lists.infradead.org>,
-        <linux-kernel@vger.kernel.org>, <devicetree@vger.kernel.org>,
-        Tingwei Zhang <quic_tingweiz@quicinc.com>,
-        Jinlong Mao <quic_jinlmao@quicinc.com>,
-        Yuanfang Zhang <quic_yuanfang@quicinc.com>,
-        Tao Zhang <quic_taozha@quicinc.com>,
-        Trilok Soni <quic_tsoni@quicinc.com>,
-        <linux-arm-msm@vger.kernel.org>,
-        Bjorn Andersson <andersson@kernel.org>,
-        <linux-doc@vger.kernel.org>
-Subject: [PATCH v5 3/3] Documentation: trace: Add documentation for Coresight Dummy Trace
-Date:   Fri, 26 May 2023 18:07:53 +0800
-Message-ID: <20230526100753.34581-4-quic_hazha@quicinc.com>
-X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20230526100753.34581-1-quic_hazha@quicinc.com>
-References: <20230526100753.34581-1-quic_hazha@quicinc.com>
+        with ESMTP id S243149AbjEZK2K (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Fri, 26 May 2023 06:28:10 -0400
+Received: from mail-pl1-x632.google.com (mail-pl1-x632.google.com [IPv6:2607:f8b0:4864:20::632])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 4688712F;
+        Fri, 26 May 2023 03:28:02 -0700 (PDT)
+Received: by mail-pl1-x632.google.com with SMTP id d9443c01a7336-1b01dac1a82so241075ad.2;
+        Fri, 26 May 2023 03:28:02 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20221208; t=1685096882; x=1687688882;
+        h=content-transfer-encoding:in-reply-to:from:content-language
+         :references:cc:to:subject:user-agent:mime-version:date:message-id
+         :from:to:cc:subject:date:message-id:reply-to;
+        bh=aZO0rJalJeJGbkGsp4THesp5QJNmk1G4UdTf0ECue4c=;
+        b=XhH0D0v1D/gUuJkfVBmEkCkn/0BSN48AWwvSmsd+5pVdMFtBBLC/dvLZnlBouhnPju
+         9yeJO6EJs/28rK/qxSILPALQbfmLRr5TNmhdLjrTl1FfwLQa83GSujmXyXH0zxaWqJHk
+         7ggmKZX3lEo+puMyDfNTDXxmhq24wueKtHN01UmJ5FqeC1Pf1GcDQMY4oT7mh1B7MDlv
+         +rOYfgl0VMjRT6xpUdn07HoVVgUF/MdDVY5JmP7PccYq3+XDeGfEubQ7xSn4T1VVlP5l
+         k/7xETTehE74AE+xQvqz31C3LiFnqWO2ZqCj4cF6jpYxqj7vbpoZN0JD6hb6LvElsE7C
+         ghsw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20221208; t=1685096882; x=1687688882;
+        h=content-transfer-encoding:in-reply-to:from:content-language
+         :references:cc:to:subject:user-agent:mime-version:date:message-id
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=aZO0rJalJeJGbkGsp4THesp5QJNmk1G4UdTf0ECue4c=;
+        b=ic88I3WwiyU7vNIQw1gRws1hHEYHaYU2orGJ2HBXW5Bvt+juWJlmkkGReP/DXcz429
+         /UjKz1ARZReWrxMfkrRRX4o1fpT36k+0scUyGvGvi2uVNdIACzcTfWgFH/eP4+LHP88W
+         rAAhieyCdk/laUaKJh45EQCuDWnxKWNxiTlO4kZ06OE+BoFwJ/5Z0x19YSuwTXLwFVRP
+         xIXR+OIXuHtttvHR1795PkJQ8j4lGcz6bUner+T9oQy6/hB6hTgCbDyTKa/MS8MCVRT2
+         RJgCQ4btqrECX3fqqo/c8qhytEbEh1XEuB8mKPLrZC3I5o6Wwqru8rJBqOFn5aTrHDp/
+         Y0WQ==
+X-Gm-Message-State: AC+VfDwVw5+gDtqfBVzXSFQZqPUTt69MCm/8NHp6UgYO68HbFcQois//
+        JUA2RNcnmeoyWf4O6G/O5ZY=
+X-Google-Smtp-Source: ACHHUZ7Z98CHq6GRXCmsrPlmgwgS2hYtAkiYLAcZOxn45HkkIC+P8mR6M1Tvt3fDPIJZvnVBfa5AoA==
+X-Received: by 2002:a17:902:cecd:b0:1af:f751:1be9 with SMTP id d13-20020a170902cecd00b001aff7511be9mr2156719plg.32.1685096881595;
+        Fri, 26 May 2023 03:28:01 -0700 (PDT)
+Received: from [192.168.11.9] (KD106167171201.ppp-bb.dion.ne.jp. [106.167.171.201])
+        by smtp.gmail.com with ESMTPSA id n2-20020a170902e54200b001ae268978cfsm2929008plf.259.2023.05.26.03.27.58
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Fri, 26 May 2023 03:28:01 -0700 (PDT)
+Message-ID: <a5405368-d04c-f95c-ad18-95f429120dbe@gmail.com>
+Date:   Fri, 26 May 2023 19:27:56 +0900
 MIME-Version: 1.0
-Content-Type: text/plain
-X-Originating-IP: [10.80.80.8]
-X-ClientProxiedBy: nasanex01b.na.qualcomm.com (10.46.141.250) To
- nasanex01a.na.qualcomm.com (10.52.223.231)
-X-QCInternal: smtphost
-X-Proofpoint-Virus-Version: vendor=nai engine=6200 definitions=5800 signatures=585085
-X-Proofpoint-ORIG-GUID: BIKqSiad5Hb8lLy5TtcQ7omTW-4K6x1i
-X-Proofpoint-GUID: BIKqSiad5Hb8lLy5TtcQ7omTW-4K6x1i
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.254,Aquarius:18.0.957,Hydra:6.0.573,FMLib:17.11.176.26
- definitions=2023-05-26_01,2023-05-25_03,2023-05-22_02
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 impostorscore=0 spamscore=0
- mlxlogscore=959 adultscore=0 priorityscore=1501 suspectscore=0
- clxscore=1015 mlxscore=0 bulkscore=0 malwarescore=0 phishscore=0
- lowpriorityscore=0 classifier=spam adjust=0 reason=mlx scancount=1
- engine=8.12.0-2304280000 definitions=main-2305260088
-X-Spam-Status: No, score=-2.8 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_LOW,SPF_HELO_NONE,
-        SPF_PASS,T_SCC_BODY_TEXT_LINE,URIBL_BLOCKED autolearn=ham
-        autolearn_force=no version=3.4.6
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.11.0
+Subject: Re: [PATCH 24/26] locking/atomic: scripts: generate kerneldoc
+ comments
+To:     Randy Dunlap <rdunlap@infradead.org>
+Cc:     Mark Rutland <mark.rutland@arm.com>, linux-kernel@vger.kernel.org,
+        boqun.feng@gmail.com, corbet@lwn.net, keescook@chromium.org,
+        linux-arch@vger.kernel.org, linux@armlinux.org.uk,
+        linux-doc@vger.kernel.org, paulmck@kernel.org,
+        sstabellini@kernel.org, will@kernel.org,
+        Peter Zijlstra <peterz@infradead.org>,
+        Akira Yokosawa <akiyks@gmail.com>
+References: <20230522122429.1915021-1-mark.rutland@arm.com>
+ <20230522122429.1915021-25-mark.rutland@arm.com>
+ <96d6930b-78b1-4b4c-63e3-c385a764d6e3@gmail.com>
+ <20230524141152.GL4253@hirez.programming.kicks-ass.net>
+ <e76c924a-762c-061d-02b8-13be884ab344@gmail.com>
+ <c9399722-b2df-52ee-cefe-338b118aeb1e@infradead.org>
+Content-Language: en-US
+From:   Akira Yokosawa <akiyks@gmail.com>
+In-Reply-To: <c9399722-b2df-52ee-cefe-338b118aeb1e@infradead.org>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-Spam-Status: No, score=-2.2 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_FROM,NICE_REPLY_A,
+        RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,SPF_PASS,T_SCC_BODY_TEXT_LINE
+        autolearn=ham autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Add documentation for Coresight Dummy Trace under trace/coresight.
+Hi Randy,
 
-Signed-off-by: Hao Zhang <quic_hazha@quicinc.com>
----
- .../trace/coresight/coresight-dummy.rst       | 32 +++++++++++++++++++
- 1 file changed, 32 insertions(+)
- create mode 100644 Documentation/trace/coresight/coresight-dummy.rst
+On 2023/05/26 13:51, Randy Dunlap wrote:
+> Hi Akira,
+> 
+> On 5/25/23 20:17, Akira Yokosawa wrote:
+>> On Wed, 24 May 2023 16:11:52 +0200, Peter Zijlstra wrote:
+>>> On Wed, May 24, 2023 at 11:03:58PM +0900, Akira Yokosawa wrote:
+>>>
+>>>>> * All ops are described as an expression using their usual C operator.
+>>>>>   For example:
+>>>>>
+>>>>>   andnot: "Atomically updates @v to (@v & ~@i)"
+>>>>
+>>>> The kernel-doc script converts "~@i" into reST source of "~**i**",
+>>>> where the emphasis of i is not recognized by Sphinx.
+>>>>
+>>>> For the "@" to work as expected, please say "~(@i)" or "~ @i".
+>>>> My preference is the former.
+>>>
+>>> And here we start :-/ making the actual comment less readable because
+>>> retarded tooling.
+>>>
+>>>>>   inc:    "Atomically updates @v to (@v + 1)"
+>>>>>
+>>>>>   Which may be clearer to non-naative English speakers, and allows all
+>>>>                             non-native
+>>>>
+>>>>>   the operations to be described in the same style.
+>>>>>
+>>>>> * All conditional ops have their condition described as an expression
+>>>>>   using the usual C operators. For example:
+>>>>>
+>>>>>   add_unless: "If (@v != @u), atomically updates @v to (@v + @i)"
+>>>>>   cmpxchg:    "If (@v == @old), atomically updates @v to @new"
+>>>>>
+>>>>>   Which may be clearer to non-naative English speakers, and allows all
+>>>>
+>>>> Ditto.
+>>>
+>>> How about we just keep it as is, and all the rst and html weenies learn
+>>> to use a text editor to read code comments?
+>>
+>> :-) :-) :-)
+>>
+>> It turns out that kernel-doc is aware of !@var [1].
+>> Similar tricks can be added for ~@var.
+>> So let's keep it as is!
+>>
+>> I'll ask documentation forks for updating kernel-doc when this change
+>> is merged eventually.
+> 
+> What do you mean by that?
+> What needs to be updated and how?
+ 
+I mean, scripts/kernel-doc needs to be updated so that "~@var"
+is converted into "**~var**".
 
-diff --git a/Documentation/trace/coresight/coresight-dummy.rst b/Documentation/trace/coresight/coresight-dummy.rst
-new file mode 100644
-index 000000000000..f0a92669288b
---- /dev/null
-+++ b/Documentation/trace/coresight/coresight-dummy.rst
-@@ -0,0 +1,32 @@
-+.. SPDX-License-Identifier: GPL-2.0
-+
-+=============================
-+Coresight Dummy Trace Module
-+=============================
-+
-+    :Author:   Hao Zhang <quic_hazha@quicinc.com>
-+    :Date:     May 2023
-+
-+Introduction
-+------------
-+
-+The Coresight dummy trace module is for the specific devices that kernel don't
-+have permission to access or configure, e.g., CoreSight TPDMs on Qualcomm
-+platforms. For these devices, a dummy driver is needed to register them as
-+Coresight devices. The module may also be used to define components that may
-+not have any programming interfaces (e.g, static links), so that paths can be
-+created in the driver. It provides Coresight API for operations on dummy
-+devices, such as enabling and disabling them. It also provides the Coresight
-+dummy sink/source paths for debugging.
-+
-+Config details
-+--------------
-+
-+There are two types of nodes, dummy sink and dummy source. These nodes
-+are available at ``/sys/bus/coresight/devices``.
-+
-+Example output::
-+
-+    $ ls -l /sys/bus/coresight/devices | grep dummy
-+    dummy_sink0 -> ../../../devices/platform/soc@0/soc@0:sink/dummy_sink0
-+    dummy_source0 -> ../../../devices/platform/soc@0/soc@0:source/dummy_source0
--- 
-2.17.1
+I think adding "~" to the substitution pattern added in [1] as follows
+should do the trick (not well tested):
 
+diff --git a/scripts/kernel-doc b/scripts/kernel-doc
+index 2486689ffc7b..eb70c1fd4e86 100755
+--- a/scripts/kernel-doc
++++ b/scripts/kernel-doc
+@@ -64,7 +64,7 @@ my $type_constant = '\b``([^\`]+)``\b';
+ my $type_constant2 = '\%([-_\w]+)';
+ my $type_func = '(\w+)\(\)';
+ my $type_param = '\@(\w*((\.\w+)|(->\w+))*(\.\.\.)?)';
+-my $type_param_ref = '([\!]?)\@(\w*((\.\w+)|(->\w+))*(\.\.\.)?)';
++my $type_param_ref = '([\!~]?)\@(\w*((\.\w+)|(->\w+))*(\.\.\.)?)';
+ my $type_fp_param = '\@(\w+)\(\)';  # Special RST handling for func ptr params
+ my $type_fp_param2 = '\@(\w+->\S+)\(\)';  # Special RST handling for structs with func ptr params
+ my $type_env = '(\$\w+)';
+
+Thoughts?
+
+        Thanks, Akira
+
+> 
+> 
+>> [1]: ee2aa7590398 ("scripts: kernel-doc: accept negation like !@var")
+> 
+> thanks.
