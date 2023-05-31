@@ -2,92 +2,132 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id C71707186E8
-	for <lists+linux-doc@lfdr.de>; Wed, 31 May 2023 18:00:19 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 6FAAB71877F
+	for <lists+linux-doc@lfdr.de>; Wed, 31 May 2023 18:35:39 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S229936AbjEaQAS (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 31 May 2023 12:00:18 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:41242 "EHLO
+        id S229789AbjEaQfh (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 31 May 2023 12:35:37 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:58130 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S233823AbjEaQAR (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Wed, 31 May 2023 12:00:17 -0400
-Received: from frasgout.his.huawei.com (frasgout.his.huawei.com [185.176.79.56])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id EAA4E194;
-        Wed, 31 May 2023 09:00:04 -0700 (PDT)
-Received: from lhrpeml500005.china.huawei.com (unknown [172.18.147.201])
-        by frasgout.his.huawei.com (SkyGuard) with ESMTP id 4QWYkJ6M8tz6J7Sx;
-        Wed, 31 May 2023 23:55:04 +0800 (CST)
-Received: from localhost (10.202.227.76) by lhrpeml500005.china.huawei.com
- (7.191.163.240) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.23; Wed, 31 May
- 2023 17:00:02 +0100
-Date:   Wed, 31 May 2023 17:00:01 +0100
-From:   Jonathan Cameron <Jonathan.Cameron@Huawei.com>
-To:     Junhao He <hejunhao3@huawei.com>
-CC:     <will@kernel.org>, <linux-kernel@vger.kernel.org>,
-        <mark.rutland@arm.com>, <linux-arm-kernel@lists.infradead.org>,
-        <linux-doc@vger.kernel.org>, <linuxarm@huawei.com>,
-        <yangyicong@huawei.com>, <shenyang39@huawei.com>,
-        <prime.zeng@hisilicon.com>
-Subject: Re: [PATCH v2 3/3] docs: perf: Add new description for HiSilicon UC
- PMU
-Message-ID: <20230531170001.00005210@Huawei.com>
-In-Reply-To: <20230531104625.18296-4-hejunhao3@huawei.com>
-References: <20230531104625.18296-1-hejunhao3@huawei.com>
-        <20230531104625.18296-4-hejunhao3@huawei.com>
-Organization: Huawei Technologies Research and Development (UK) Ltd.
-X-Mailer: Claws Mail 4.1.0 (GTK 3.24.33; x86_64-w64-mingw32)
+        with ESMTP id S229775AbjEaQfg (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Wed, 31 May 2023 12:35:36 -0400
+Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.133.124])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 55AFBE46
+        for <linux-doc@vger.kernel.org>; Wed, 31 May 2023 09:34:16 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+        s=mimecast20190719; t=1685550855;
+        h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+         to:to:cc:cc:mime-version:mime-version:
+         content-transfer-encoding:content-transfer-encoding;
+        bh=W5Ntvs4Cwyl2QgvwcOBrVxRXkGHt94aU7j3HrNtgJ4Y=;
+        b=UehugPJUjC1l0PrJwrRm76U4Q3smSOgdhu6701Ldfzy+Rq3Oetuv0Kg+oYmo8mH6mnf8Re
+        nCE+of8a0rx+wjZVWDQVlHWjVjFwxpxewGT+e1nNQCi6zwtaSG+fwJIEALhnfNUdGAg8QL
+        MrUC6lB6m/Gxv14hriNHYV0NVVvTwi0=
+Received: from mimecast-mx02.redhat.com (mx3-rdu2.redhat.com
+ [66.187.233.73]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ us-mta-418-pO9mQNz7PaS5ecqsEMv-Zw-1; Wed, 31 May 2023 12:34:12 -0400
+X-MC-Unique: pO9mQNz7PaS5ecqsEMv-Zw-1
+Received: from smtp.corp.redhat.com (int-mx06.intmail.prod.int.rdu2.redhat.com [10.11.54.6])
+        (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+        (No client certificate requested)
+        by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 95BAA1C05AA2;
+        Wed, 31 May 2023 16:34:11 +0000 (UTC)
+Received: from llong.com (dhcp-17-153.bos.redhat.com [10.18.17.153])
+        by smtp.corp.redhat.com (Postfix) with ESMTP id 8FCED2166B25;
+        Wed, 31 May 2023 16:34:10 +0000 (UTC)
+From:   Waiman Long <longman@redhat.com>
+To:     Tejun Heo <tj@kernel.org>, Zefan Li <lizefan.x@bytedance.com>,
+        Johannes Weiner <hannes@cmpxchg.org>,
+        Jonathan Corbet <corbet@lwn.net>, Shuah Khan <shuah@kernel.org>
+Cc:     linux-kernel@vger.kernel.org, cgroups@vger.kernel.org,
+        linux-doc@vger.kernel.org, linux-kselftest@vger.kernel.org,
+        Juri Lelli <juri.lelli@redhat.com>,
+        Valentin Schneider <vschneid@redhat.com>,
+        Frederic Weisbecker <frederic@kernel.org>,
+        Mrunal Patel <mpatel@redhat.com>,
+        Ryan Phillips <rphillips@redhat.com>,
+        Brent Rowsell <browsell@redhat.com>,
+        Peter Hunt <pehunt@redhat.com>, Phil Auld <pauld@redhat.com>,
+        Waiman Long <longman@redhat.com>
+Subject: [PATCH v2 0/6] cgroup/cpuset: Support remote isolated partitions
+Date:   Wed, 31 May 2023 12:33:59 -0400
+Message-Id: <20230531163405.2200292-1-longman@redhat.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="US-ASCII"
-Content-Transfer-Encoding: 7bit
-X-Originating-IP: [10.202.227.76]
-X-ClientProxiedBy: lhrpeml500005.china.huawei.com (7.191.163.240) To
- lhrpeml500005.china.huawei.com (7.191.163.240)
-X-CFilter-Loop: Reflected
-X-Spam-Status: No, score=-4.2 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_MED,
-        RCVD_IN_MSPIKE_H5,RCVD_IN_MSPIKE_WL,SPF_HELO_NONE,SPF_PASS,
-        T_SCC_BODY_TEXT_LINE autolearn=ham autolearn_force=no version=3.4.6
+Content-Transfer-Encoding: 8bit
+X-Scanned-By: MIMEDefang 3.1 on 10.11.54.6
+X-Spam-Status: No, score=-2.3 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_NONE,
+        SPF_HELO_NONE,SPF_NONE,T_SCC_BODY_TEXT_LINE autolearn=unavailable
+        autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Wed, 31 May 2023 18:46:25 +0800
-Junhao He <hejunhao3@huawei.com> wrote:
+ v2:
+  - [v1] https://lore.kernel.org/lkml/20230412153758.3088111-1-longman@redhat.com/
+  - Dropped the special "isolcpus" partition in v1
+  - Add the root only "cpuset.cpus.reserve" control file for reserving
+    CPUs used for remote isolated partitions.
+  - Update the test_cpuset_prs.sh test script and documentation
+    accordingly.
 
-> A new function is added on HiSilicon uncore UC PMU.
-> 
-> The UC PMU support to filter statistical information based on
-> the specified tx request uring channel. Make user configuration
-> through "uring_channel" parameter.
-> Document them to provide guidance on how to use them.
-> 
-> Signed-off-by: Junhao He <hejunhao3@huawei.com>
-Seems reasonable to me.
-Reviewed-by: Jonathan Cameron <Jonthan.Cameron@huawei.com>
+This patch series introduces a new category of cpuset partition called
+remote partitions. The existing partition category where the partition
+roots have to be clustered around the root cgroup in a hierarchical way
+is now referred to as adjacent partitions.
 
-> ---
->  Documentation/admin-guide/perf/hisi-pmu.rst | 8 ++++++++
->  1 file changed, 8 insertions(+)
-> 
-> diff --git a/Documentation/admin-guide/perf/hisi-pmu.rst b/Documentation/admin-guide/perf/hisi-pmu.rst
-> index 546979360513..939a524fa1d6 100644
-> --- a/Documentation/admin-guide/perf/hisi-pmu.rst
-> +++ b/Documentation/admin-guide/perf/hisi-pmu.rst
-> @@ -98,6 +98,14 @@ CCL/ICL-ID. For I/O die, the ICL-ID is followed by:
->  5'b00011: HAC_ICL;
->  5'b10000: PCIe_ICL;
->  
-> +(e) uring_channel: UC PMU events 0x47~0x59 supports filtering by tx request
-> +uring channel. It is 2 bits. Some important codes are as follows:
-> +2'b11: count the events which sent to the uring_ext (MATA) channel;
-> +2'b01: is the same as 2'b11;
-> +2'b10: count the events which sent to the uring (non-MATA) channel;
-> +2'b00: default value, count the events which sent to the both uring and
-> +       uring_ext channel;
-> +
->  Users could configure IDs to count data come from specific CCL/ICL, by setting
->  srcid_cmd & srcid_msk, and data desitined for specific CCL/ICL by setting
->  tgtid_cmd & tgtid_msk. A set bit in srcid_msk/tgtid_msk means the PMU will not
+A remote partition can be formed far from the root cgroup with no
+partition root parent. The only commonality is that the CPUs that are
+used in the partition as specified in "cpuset.cpus" have to be present
+in the "cpuset.cpus" of all its ancestors.
+
+It is relatively rare to have applications that require creation of
+a separate scheduling domain (root). However, it is more common to
+have applications that require the use of isolated CPUs (isolated),
+e.g. DPDK. One can use the "isolcpus" or "nohz_full" boot command options
+to get that statically. Of course, the "isolated" partition is another
+way to achieve that dynamically.
+
+Modern container orchestration tools like Kubernetes use the cgroup
+hierarchy to manage different containers. And it is relying on other
+middleware like systemd to help managing it. If a container needs to
+use isolated CPUs, it is hard to get those with the adjacent partitions
+as it will require the administrative parent cgroup to be a partition
+root too which tool like systemd may not be ready to manage.
+
+With this patch series, a new root cgroup only "cpuset.cpus.reserve"
+file is added to specify the set of CPUs that can be used in partitions
+(whether remote or adjacent). To create a remote partition, the set
+of CPUs to be used in that partition (the "cpuset.cpus" file of the
+partition root) has to be reserved by manually adding them to that
+control file first. Then that partition can be activated by writing
+"isolated" into its "cpuset.cpus.partition". CPU reservation of adjacent
+partitions is done automatically without touching "cpuset.cpus.reserve"
+at all.
+
+Currently only remote isolated partitions are supported, we could
+support a scheduling partition ("root") in the future if the need arises.
+Additional isolation attributes like those with the "isolcpus" or "nohz"
+boot command line options may be supported in the isolated partitions
+in the future.
+
+Waiman Long (6):
+  cgroup/cpuset: Extract out CS_CPU_EXCLUSIVE & CS_SCHED_LOAD_BALANCE
+    handling
+  cgroup/cpuset: Improve temporary cpumasks handling
+  cgroup/cpuset: Add cpuset.cpus.reserve for top cpuset
+  cgroup/cpuset: Introduce remote isolated partition
+  cgroup/cpuset: Documentation update for partition
+  cgroup/cpuset: Extend test_cpuset_prs.sh to test remote partition
+
+ Documentation/admin-guide/cgroup-v2.rst       |  92 ++-
+ kernel/cgroup/cpuset.c                        | 749 +++++++++++++++---
+ .../selftests/cgroup/test_cpuset_prs.sh       | 403 ++++++----
+ 3 files changed, 988 insertions(+), 256 deletions(-)
+
+-- 
+2.31.1
 
