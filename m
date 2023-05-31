@@ -2,53 +2,53 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 58E0C718469
-	for <lists+linux-doc@lfdr.de>; Wed, 31 May 2023 16:12:34 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id D8611718430
+	for <lists+linux-doc@lfdr.de>; Wed, 31 May 2023 16:07:40 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S237036AbjEaOMd (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 31 May 2023 10:12:33 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:51640 "EHLO
+        id S237408AbjEaOHj (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 31 May 2023 10:07:39 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:47610 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S236660AbjEaOMU (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Wed, 31 May 2023 10:12:20 -0400
-Received: from mail-lf1-x129.google.com (mail-lf1-x129.google.com [IPv6:2a00:1450:4864:20::129])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id D70252D62
-        for <linux-doc@vger.kernel.org>; Wed, 31 May 2023 07:09:24 -0700 (PDT)
-Received: by mail-lf1-x129.google.com with SMTP id 2adb3069b0e04-4f4b80bf93aso6732792e87.0
-        for <linux-doc@vger.kernel.org>; Wed, 31 May 2023 07:09:24 -0700 (PDT)
+        with ESMTP id S237496AbjEaOHW (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Wed, 31 May 2023 10:07:22 -0400
+Received: from mail-ej1-x634.google.com (mail-ej1-x634.google.com [IPv6:2a00:1450:4864:20::634])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 43B75E4E
+        for <linux-doc@vger.kernel.org>; Wed, 31 May 2023 07:02:44 -0700 (PDT)
+Received: by mail-ej1-x634.google.com with SMTP id a640c23a62f3a-96fb45a5258so1018517766b.2
+        for <linux-doc@vger.kernel.org>; Wed, 31 May 2023 07:02:44 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=ventanamicro.com; s=google; t=1685542098; x=1688134098;
+        d=ventanamicro.com; s=google; t=1685541687; x=1688133687;
         h=in-reply-to:content-disposition:mime-version:references:message-id
          :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
-        bh=UleDEf3AixBo9U/UXpWY/ydRnuyv0U623659h0izsxQ=;
-        b=lurfrXpWAGNgCdsq5lHgxP4TG/3bORyorzXjHAbyfKZk2wkkoGyqGnKDSZDnRW7vCh
-         BaGf4I0Boi7XkjHKemAV5Vt/fMkWtW6R6EWWSE9jZ98eCPE8uhxqWP7v2VtRX7ZEUxwh
-         1RyES1adW3ySuOls3iXTbHrqg+CimTq77Tb64Vmd2sQ1yps9mSQdvDvLTkG4CpiOx1PN
-         ls8uC/7mheaU8PpXdFOnt1K3yKxpuDwwk04pNgUkpfrv2WuzE2VMZktra+Kv8ZLw9xKQ
-         Kj29cLDTYyG1mE0CAZ2PvRYCre6YJxWkGXpCoMqGPoB7q5VU78TZ00+qvG7IhgQg+miv
-         BOmQ==
+        bh=xV0p1cILT3YTZiyLBW2gM8L29pLx3no3Au0rCN/fAsw=;
+        b=gUF0PwXYe8VCgDpxtcKPgbxsSJTGNkqXOtSRlywJlkOjfIJ4RSdfa2UVuR44ynbHFw
+         NKNlI0h8WPdCGNa+vUoV2SDzv0cNPY++y1O+tSLD8DyL+GNgS0+nkfGF0a6i3YJH+wNV
+         x4Bp+2sGbToPR2nr3y4lOVew5cRUUf0c0FY3u/GtWzluqFr8GLUv2Nk+8WCV1g20INdO
+         UOcEZhwWwmk9YeNFWiDVZ/Gl2IRFnDzPIDxnaFptnayBtNdH1D8DIsrPvDfelv48ixSU
+         FJeUMC0Jl9ubMq0XnS+bntiTO2K2CBvylp+N3GZIEWWPJ2nplN2VeXy5NQg1vGhN3qCH
+         j4pw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1685542098; x=1688134098;
+        d=1e100.net; s=20221208; t=1685541687; x=1688133687;
         h=in-reply-to:content-disposition:mime-version:references:message-id
          :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=UleDEf3AixBo9U/UXpWY/ydRnuyv0U623659h0izsxQ=;
-        b=hFO5vdgJr/0UgEVZKuisqL+jDxCg6SL1XehAvr9bKfHQkqCV6FX4J4JxBwxJ7RLtGE
-         qFDZNNfBRuWdIA2K0SKGEm1xM1XYbMatO1qgfZrgyn8xLHTiutnnh7unrYkhoOKYg+bi
-         hfQzxIu+d7eTzElN3TVxeiGuu0/Y9JbsI/KECD2+gsod21QptmMMHkdKTUyuAIE6+01d
-         Q1e7hj/IlbRLASuZ8JbKQsbipq561tcSXsqLO7QRDPCloYoXrOPpuKhdTpyMkBjjHhlW
-         RU2Y5nUf2m7v6e7Atwj8k1JfqEcumBBG+VZMbZfnf4hb+dFkb7tiwn4s6gu9EhPRFxYq
-         mXPg==
-X-Gm-Message-State: AC+VfDzYA/SMMw2fpdr8F1qHVV5wW6+f+Q5QU5ho+NyaQ8gVoACDL/si
-        qlna809bMRU88YWZovQppq9hJRD8x+8uNBOxXbE=
-X-Google-Smtp-Source: ACHHUZ73Q8q9IJwMsX7edY6y2EM+CFjk3itDAZXOWz2NI9uE9E+/V3YrQjB4Rf2f+g7r1cETzEjw8g==
-X-Received: by 2002:a17:907:1c14:b0:968:2bb1:f39d with SMTP id nc20-20020a1709071c1400b009682bb1f39dmr6314966ejc.36.1685541371576;
-        Wed, 31 May 2023 06:56:11 -0700 (PDT)
+        bh=xV0p1cILT3YTZiyLBW2gM8L29pLx3no3Au0rCN/fAsw=;
+        b=dV7eHaaqyULp4qk+h22srraiJzmpPHBbI1J4TCJTfAbVQTV8rHrkh8X91tYhnlr3yJ
+         q/+GIqNkZeuz5ZEtkGikg43+tA6EzeDTsBRFLbnBsrSYE5JONKsrZ6M2kqBY9mvfNqqP
+         xwliZWx2HcFEy8o1Oz1fhUPzimZ4TSJIKq2wIgNZfguiybEtlckqHQtFhOkM48Dm9iBk
+         qSqQODFv/EMsScJvHH8n0zoEzKKCRKLhBw7gzP4mSFF3F1SgETLB39uaqH3IwAkeBhJu
+         XGh+ELlwyFL/FMFRQMKa4BMlJH60gQdQCRP586hzgY6zAN+MoRD32CdQI/Wn+6WYaETP
+         KU6g==
+X-Gm-Message-State: AC+VfDxGUF2pWWuVYqFQtdU+nuRFW9H00b2jnCmz2DOOhLrxyUr9cj2B
+        NdEzE6keVN/Pl+WcZPLbarKPgw==
+X-Google-Smtp-Source: ACHHUZ65P5pCqpKEk6KKg8Qqezxma5Yv53pnk0dfCkZMl5e4aOBfLb2ibQkhM3VpJR/whOzqfU8jYA==
+X-Received: by 2002:a17:907:72cb:b0:974:1d8b:ca5e with SMTP id du11-20020a17090772cb00b009741d8bca5emr5212006ejc.14.1685541686880;
+        Wed, 31 May 2023 07:01:26 -0700 (PDT)
 Received: from localhost (2001-1ae9-1c2-4c00-20f-c6b4-1e57-7965.ip6.tmcz.cz. [2001:1ae9:1c2:4c00:20f:c6b4:1e57:7965])
-        by smtp.gmail.com with ESMTPSA id va15-20020a17090711cf00b0094ee99eeb01sm9041514ejb.150.2023.05.31.06.56.10
+        by smtp.gmail.com with ESMTPSA id e6-20020a170906504600b00965ac1510f8sm8966578ejk.185.2023.05.31.07.01.26
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 31 May 2023 06:56:10 -0700 (PDT)
-Date:   Wed, 31 May 2023 15:56:10 +0200
+        Wed, 31 May 2023 07:01:26 -0700 (PDT)
+Date:   Wed, 31 May 2023 16:01:25 +0200
 From:   Andrew Jones <ajones@ventanamicro.com>
 To:     Alexandre Ghiti <alexghiti@rivosinc.com>
 Cc:     Jonathan Corbet <corbet@lwn.net>,
@@ -68,61 +68,55 @@ Cc:     Jonathan Corbet <corbet@lwn.net>,
         Will Deacon <will@kernel.org>, Rob Herring <robh@kernel.org>,
         linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
         linux-perf-users@vger.kernel.org, linux-riscv@lists.infradead.org,
-        linux-arm-kernel@lists.infradead.org,
-        Conor Dooley <conor.dooley@microchip.com>
-Subject: Re: [PATCH v2 02/10] include: riscv: Fix wrong include guard in
- riscv_pmu.h
-Message-ID: <20230531-707d254be1238272fb2c182d@orel>
+        linux-arm-kernel@lists.infradead.org
+Subject: Re: [PATCH v2 03/10] riscv: Make legacy counter enum match the HW
+ numbering
+Message-ID: <20230531-ddb2d631e152526102f41d5e@orel>
 References: <20230512085321.13259-1-alexghiti@rivosinc.com>
- <20230512085321.13259-3-alexghiti@rivosinc.com>
+ <20230512085321.13259-4-alexghiti@rivosinc.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20230512085321.13259-3-alexghiti@rivosinc.com>
+In-Reply-To: <20230512085321.13259-4-alexghiti@rivosinc.com>
 X-Spam-Status: No, score=-2.1 required=5.0 tests=BAYES_00,DKIM_SIGNED,
         DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_NONE,
         SPF_HELO_NONE,SPF_PASS,T_SCC_BODY_TEXT_LINE,URIBL_BLOCKED
-        autolearn=unavailable autolearn_force=no version=3.4.6
+        autolearn=ham autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Fri, May 12, 2023 at 10:53:13AM +0200, Alexandre Ghiti wrote:
-> The current include guard prevents the inclusion of asm/perf_event.h
-> which uses the same include guard: fix the one in riscv_pmu.h so that it
-> matches the file name.
+On Fri, May 12, 2023 at 10:53:14AM +0200, Alexandre Ghiti wrote:
+> RISCV_PMU_LEGACY_INSTRET used to be set to 1 whereas the offset of this
+> hardware counter from CSR_CYCLE is actually 2: make this offset match the
+> real hw offset so that we can directly expose those values to userspace.
 > 
 > Signed-off-by: Alexandre Ghiti <alexghiti@rivosinc.com>
-> Reviewed-by: Conor Dooley <conor.dooley@microchip.com>
 > ---
->  include/linux/perf/riscv_pmu.h | 6 +++---
->  1 file changed, 3 insertions(+), 3 deletions(-)
+>  drivers/perf/riscv_pmu_legacy.c | 7 +++++--
+>  1 file changed, 5 insertions(+), 2 deletions(-)
 > 
-> diff --git a/include/linux/perf/riscv_pmu.h b/include/linux/perf/riscv_pmu.h
-> index 43fc892aa7d9..9f70d94942e0 100644
-> --- a/include/linux/perf/riscv_pmu.h
-> +++ b/include/linux/perf/riscv_pmu.h
-> @@ -6,8 +6,8 @@
->   *
->   */
+> diff --git a/drivers/perf/riscv_pmu_legacy.c b/drivers/perf/riscv_pmu_legacy.c
+> index ca9e20bfc7ac..0d8c9d8849ee 100644
+> --- a/drivers/perf/riscv_pmu_legacy.c
+> +++ b/drivers/perf/riscv_pmu_legacy.c
+> @@ -12,8 +12,11 @@
+>  #include <linux/perf/riscv_pmu.h>
+>  #include <linux/platform_device.h>
 >  
-> -#ifndef _ASM_RISCV_PERF_EVENT_H
-> -#define _ASM_RISCV_PERF_EVENT_H
-> +#ifndef _RISCV_PMU_H
-> +#define _RISCV_PMU_H
->  
->  #include <linux/perf_event.h>
->  #include <linux/ptrace.h>
-> @@ -81,4 +81,4 @@ int riscv_pmu_get_hpm_info(u32 *hw_ctr_width, u32 *num_hw_ctr);
->  
->  #endif /* CONFIG_RISCV_PMU */
->  
-> -#endif /* _ASM_RISCV_PERF_EVENT_H */
-> +#endif /* _RISCV_PMU_H */
-> -- 
-> 2.37.2
->
+> -#define RISCV_PMU_LEGACY_CYCLE		0
+> -#define RISCV_PMU_LEGACY_INSTRET	1
+> +enum {
+> +	RISCV_PMU_LEGACY_CYCLE,
+> +	RISCV_PMU_LEGACY_TIME,
+> +	RISCV_PMU_LEGACY_INSTRET
+> +};
 
-Reviewed-by: Andrew Jones <ajones@ventanamicro.com>
+I guess this doesn't hurt, since these are just indices internal to this
+driver, but it's a bit odd to also have a RISCV_PMU_LEGACY_TIME, when
+the driver is only for cycle and instret, as its Kconfig help text says.
+
+Thanks,
+drew
