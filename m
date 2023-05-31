@@ -2,76 +2,105 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 1696671881B
-	for <lists+linux-doc@lfdr.de>; Wed, 31 May 2023 19:09:21 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id DDC3C7189F5
+	for <lists+linux-doc@lfdr.de>; Wed, 31 May 2023 21:17:29 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S229570AbjEaRJS (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 31 May 2023 13:09:18 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:47300 "EHLO
+        id S229573AbjEaTR2 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 31 May 2023 15:17:28 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:49886 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S230149AbjEaRJO (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Wed, 31 May 2023 13:09:14 -0400
-Received: from mail-lj1-x22e.google.com (mail-lj1-x22e.google.com [IPv6:2a00:1450:4864:20::22e])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id C71CE18D
-        for <linux-doc@vger.kernel.org>; Wed, 31 May 2023 10:09:09 -0700 (PDT)
-Received: by mail-lj1-x22e.google.com with SMTP id 38308e7fff4ca-2af30a12e84so66508381fa.0
-        for <linux-doc@vger.kernel.org>; Wed, 31 May 2023 10:09:09 -0700 (PDT)
+        with ESMTP id S229713AbjEaTR0 (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Wed, 31 May 2023 15:17:26 -0400
+Received: from mail-ot1-x32a.google.com (mail-ot1-x32a.google.com [IPv6:2607:f8b0:4864:20::32a])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id BDE0D136
+        for <linux-doc@vger.kernel.org>; Wed, 31 May 2023 12:17:08 -0700 (PDT)
+Received: by mail-ot1-x32a.google.com with SMTP id 46e09a7af769-6af7d6f6f41so101985a34.1
+        for <linux-doc@vger.kernel.org>; Wed, 31 May 2023 12:17:08 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=atishpatra.org; s=google; t=1685552948; x=1688144948;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=jQ4u7E+2pu1MUIvR5vq40l8aNtL/U44SVHTVaiFl+ZE=;
-        b=dpkjmQJu6nzfEvoWvKrVmVKQFGK9PktpjQr+7FUyc7TmLV2jDpBImI3W6D2jWa8bxQ
-         l5hJd7cLgyNz7BZdZU1OQXZKfXRkX4bD9w1XsNtr411FOCbaa6RddJGelQbb9wilkc9y
-         DMWXRHS43Ov4MPvOjEalEiIKCv7yNQTvhrIlI=
+        d=ziepe.ca; s=google; t=1685560628; x=1688152628;
+        h=in-reply-to:content-disposition:mime-version:references:message-id
+         :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+        bh=MHtweHA3SWHMpKKRoTnSYY+2sgOnMlETASaKZp5cnWg=;
+        b=XsEc9zVFJou7Y3nnebryiByVBn6LMK4Wf9l4nO5gpford+hJUA/H2QpOG0COLFuX5a
+         URGPWFQpc3LDA6bntwf8mYCOUR7LRedzET0Ewd0rzO9PgVPKYEFRaNqy9Tly9asRKiaJ
+         uFEF3kE4Sc6oLXyO2nGQxY+xPOxeWYxp2VOpLq6pkzybqeLXldDHEX36YE+JV0/2WgYR
+         MEZP0OGJ34Wk74uKTPmjaR3f2Bt+Qidy74lDTyE54KXWUVya+wI2fELz6WmymjadQ0vz
+         6R6qPRykBkgotiP004pJgvChmAdW+rE0X9JyPAJunztg1ytyzcjhuhEpYuoYimbwCbpO
+         ox3w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1685552948; x=1688144948;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=jQ4u7E+2pu1MUIvR5vq40l8aNtL/U44SVHTVaiFl+ZE=;
-        b=USxwgN9IEGgV2Uc6e6mEzxGNqAEzUuWL0NlERsCOjjXP6W/En1tRhe7aGJsAF+Zw9M
-         ISnZr0BhFO7JM1ZnMpv7Xk9+GcO3cWxj3Au1JBugSMIQ+wsfwaWoAt21HtoavdYrD15O
-         viAyw+GEBxxl7yNz+KIk+DdSN/eUj6IM2rc7hIb4qfmZBg9lWxMpVzBAE2uK0Hg5lBsP
-         ux7yeFTQDX7Ddjta8bhPxiN0YZH6Ap9z9dEs8QfQHeBF1U54bgGs/xikuToL/zceFS8H
-         7rlkaiFxwbY35Bs3dWlVheOZBEn+PT2KqQHgp6i4HvBc1Cr4R2zqyKbzhOiXvLkRCsqg
-         FP0A==
-X-Gm-Message-State: AC+VfDw3brTsOqq4XuzWNP9FmJbIXUbOTBVsyA1xkDquHyEyRCX2om4U
-        PN/XvuyW/uyr0y3/UZCdFxCGv+v8DQPwQfb1VDZB
-X-Google-Smtp-Source: ACHHUZ4Yj35TR6Xj5jR1jPOnnSx23dqmIilZiSg9iS5EDhMCva7jreZ1DdDVMqkhgJshkIN4lTSdR5pmfFIPgmIgll4=
-X-Received: by 2002:a2e:8189:0:b0:2ad:ba85:9f7 with SMTP id
- e9-20020a2e8189000000b002adba8509f7mr3527397ljg.22.1685552947968; Wed, 31 May
- 2023 10:09:07 -0700 (PDT)
-MIME-Version: 1.0
-References: <20230512085321.13259-1-alexghiti@rivosinc.com>
- <20230512085321.13259-9-alexghiti@rivosinc.com> <20230531-0707dc46df8078cd92711314@orel>
-In-Reply-To: <20230531-0707dc46df8078cd92711314@orel>
-From:   Atish Patra <atishp@atishpatra.org>
-Date:   Wed, 31 May 2023 10:08:56 -0700
-Message-ID: <CAOnJCU+sda3UaOvC3Si4TT3nvibUSEOwmx94eQK-9ouvG4=ovQ@mail.gmail.com>
-Subject: Re: [PATCH v2 08/10] Documentation: admin-guide: Add riscv sysctl_perf_user_access
-To:     Andrew Jones <ajones@ventanamicro.com>
-Cc:     Alexandre Ghiti <alexghiti@rivosinc.com>,
-        Jonathan Corbet <corbet@lwn.net>,
-        Peter Zijlstra <peterz@infradead.org>,
-        Ingo Molnar <mingo@redhat.com>,
-        Arnaldo Carvalho de Melo <acme@kernel.org>,
-        Mark Rutland <mark.rutland@arm.com>,
-        Alexander Shishkin <alexander.shishkin@linux.intel.com>,
-        Jiri Olsa <jolsa@kernel.org>,
-        Namhyung Kim <namhyung@kernel.org>,
-        Ian Rogers <irogers@google.com>,
-        Paul Walmsley <paul.walmsley@sifive.com>,
-        Palmer Dabbelt <palmer@dabbelt.com>,
-        Albert Ou <aou@eecs.berkeley.edu>,
+        d=1e100.net; s=20221208; t=1685560628; x=1688152628;
+        h=in-reply-to:content-disposition:mime-version:references:message-id
+         :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=MHtweHA3SWHMpKKRoTnSYY+2sgOnMlETASaKZp5cnWg=;
+        b=Wi80oS7rJuN0CtCVGxpi9K46HDUvHeZheXPgn5SfqMfnLKDUEL5sPMOFKrOt+lgxmH
+         feQ5lQMQ43NQyaO9dFsTiGqCaGfLX3x/2D+0ckf82xpEtQjXIypZQj/OyYhzkrhGYOcT
+         5cXZM6n23z5sV68h/8Uh8MwzFoig6XIEjnlLKxkjNglOsCqtloFJsz7CzoudWcBjeYmH
+         PzpgPHj9dS/E5vjLnGhunqK7LaHNmCUC8ki/x9uufVsZVSNTxBktpvW/qJ55KUqqgVOB
+         yh9mHxRitHHe11OpooRjp2qRe5XhSfBliyhq9NW+FPygD120997bUit0gzfGAxJ4Kr6r
+         fMHQ==
+X-Gm-Message-State: AC+VfDyWsNlaHI50cJ0FbHLtYr5w39xsNcfUc3bLXYKTs9YVi1JFE1ap
+        Tiu3XPshAgotn+vok5NvYGs4qw==
+X-Google-Smtp-Source: ACHHUZ5EAb6uxqk7kkbizac+JrcIuoYNmIlHHRhpUDjRmBZ8boj1JThitoXP6J0DZ/TEoplrWHjlbg==
+X-Received: by 2002:a05:6358:7e9b:b0:123:3203:928a with SMTP id o27-20020a0563587e9b00b001233203928amr1487114rwn.27.1685560627568;
+        Wed, 31 May 2023 12:17:07 -0700 (PDT)
+Received: from ziepe.ca ([206.223.160.26])
+        by smtp.gmail.com with ESMTPSA id g3-20020a17090a300300b00250d670306esm1594668pjb.35.2023.05.31.12.17.06
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 31 May 2023 12:17:06 -0700 (PDT)
+Received: from jgg by wakko with local (Exim 4.95)
+        (envelope-from <jgg@ziepe.ca>)
+        id 1q4RJh-0017d4-7W;
+        Wed, 31 May 2023 16:17:05 -0300
+Date:   Wed, 31 May 2023 16:17:05 -0300
+From:   Jason Gunthorpe <jgg@ziepe.ca>
+To:     Yu Zhao <yuzhao@google.com>
+Cc:     Andrew Morton <akpm@linux-foundation.org>,
+        Paolo Bonzini <pbonzini@redhat.com>,
+        Alistair Popple <apopple@nvidia.com>,
         Anup Patel <anup@brainfault.org>,
-        Will Deacon <will@kernel.org>, Rob Herring <robh@kernel.org>,
+        Ben Gardon <bgardon@google.com>,
+        Borislav Petkov <bp@alien8.de>,
+        Catalin Marinas <catalin.marinas@arm.com>,
+        Chao Peng <chao.p.peng@linux.intel.com>,
+        Christophe Leroy <christophe.leroy@csgroup.eu>,
+        Dave Hansen <dave.hansen@linux.intel.com>,
+        Fabiano Rosas <farosas@linux.ibm.com>,
+        Gaosheng Cui <cuigaosheng1@huawei.com>,
+        Gavin Shan <gshan@redhat.com>,
+        "H. Peter Anvin" <hpa@zytor.com>, Ingo Molnar <mingo@redhat.com>,
+        James Morse <james.morse@arm.com>,
+        "Jason A. Donenfeld" <Jason@zx2c4.com>,
+        Jonathan Corbet <corbet@lwn.net>,
+        Marc Zyngier <maz@kernel.org>,
+        Masami Hiramatsu <mhiramat@kernel.org>,
+        Michael Ellerman <mpe@ellerman.id.au>,
+        Michael Larabel <michael@michaellarabel.com>,
+        Mike Rapoport <rppt@kernel.org>,
+        Nicholas Piggin <npiggin@gmail.com>,
+        Oliver Upton <oliver.upton@linux.dev>,
+        Paul Mackerras <paulus@ozlabs.org>,
+        Peter Xu <peterx@redhat.com>,
+        Sean Christopherson <seanjc@google.com>,
+        Steven Rostedt <rostedt@goodmis.org>,
+        Suzuki K Poulose <suzuki.poulose@arm.com>,
+        Thomas Gleixner <tglx@linutronix.de>,
+        Thomas Huth <thuth@redhat.com>, Will Deacon <will@kernel.org>,
+        Zenghui Yu <yuzenghui@huawei.com>, kvmarm@lists.linux.dev,
+        kvm@vger.kernel.org, linux-arm-kernel@lists.infradead.org,
         linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
-        linux-perf-users@vger.kernel.org, linux-riscv@lists.infradead.org,
-        linux-arm-kernel@lists.infradead.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+        linux-mm@kvack.org, linuxppc-dev@lists.ozlabs.org,
+        linux-trace-kernel@vger.kernel.org, x86@kernel.org,
+        linux-mm@google.com
+Subject: Re: [PATCH mm-unstable v2 01/10] mm/kvm: add
+ mmu_notifier_ops->test_clear_young()
+Message-ID: <ZHedMX470b7EMwbe@ziepe.ca>
+References: <20230526234435.662652-1-yuzhao@google.com>
+ <20230526234435.662652-2-yuzhao@google.com>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20230526234435.662652-2-yuzhao@google.com>
 X-Spam-Status: No, score=-2.1 required=5.0 tests=BAYES_00,DKIM_SIGNED,
         DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_NONE,
         SPF_HELO_NONE,SPF_PASS,T_SCC_BODY_TEXT_LINE,URIBL_BLOCKED
@@ -82,82 +111,17 @@ Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Wed, May 31, 2023 at 8:07=E2=80=AFAM Andrew Jones <ajones@ventanamicro.c=
-om> wrote:
->
-> On Fri, May 12, 2023 at 10:53:19AM +0200, Alexandre Ghiti wrote:
-> > riscv now uses this sysctl so document its usage for this architecture.
-> >
-> > Signed-off-by: Alexandre Ghiti <alexghiti@rivosinc.com>
-> > ---
-> >  Documentation/admin-guide/sysctl/kernel.rst | 24 +++++++++++++++++----
-> >  1 file changed, 20 insertions(+), 4 deletions(-)
-> >
-> > diff --git a/Documentation/admin-guide/sysctl/kernel.rst b/Documentatio=
-n/admin-guide/sysctl/kernel.rst
-> > index 4b7bfea28cd7..93cd518ca94b 100644
-> > --- a/Documentation/admin-guide/sysctl/kernel.rst
-> > +++ b/Documentation/admin-guide/sysctl/kernel.rst
-> > @@ -941,16 +941,32 @@ enabled, otherwise writing to this file will retu=
-rn ``-EBUSY``.
-> >  The default value is 8.
-> >
-> >
-> > -perf_user_access (arm64 only)
-> > -=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-> > +perf_user_access (arm64 and riscv only)
-> > +=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-> > +
-> > +Controls user space access for reading perf event counters.
-> >
-> > -Controls user space access for reading perf event counters. When set t=
-o 1,
-> > -user space can read performance monitor counter registers directly.
-> > +arm64
-> > +=3D=3D=3D=3D=3D
-> >
-> >  The default value is 0 (access disabled).
-> > +When set to 1, user space can read performance monitor counter registe=
-rs
-> > +directly.
-> >
-> >  See Documentation/arm64/perf.rst for more information.
-> >
-> > +riscv
-> > +=3D=3D=3D=3D=3D
-> > +
-> > +When set to 0, user access is disabled.
-> > +
-> > +When set to 1, user space can read performance monitor counter registe=
-rs
-> > +directly only through perf, any direct access without perf interventio=
-n will
-> > +trigger an illegal instruction.
-> > +
-> > +The default value is 2, which enables legacy mode (user space has dire=
-ct
-> > +access to cycle, time and insret CSRs only). Note that this legacy val=
-ue
-> > +is deprecated and will be removed once all userspace applications are =
-fixed.
->
-> All modes can access the time CSR so I'm not sure if it should be pointed
-> out here as if it's an exception. Maybe we shouldn't point it out at all
-> or we should point it out for all three?
->
+On Fri, May 26, 2023 at 05:44:26PM -0600, Yu Zhao wrote:
+> @@ -122,6 +124,10 @@ struct mmu_notifier_ops {
+>  			  struct mm_struct *mm,
+>  			  unsigned long address);
+>  
+> +	int (*test_clear_young)(struct mmu_notifier *mn, struct mm_struct *mm,
+> +				unsigned long start, unsigned long end,
+> +				bool clear, unsigned long *bitmap);
+> +
 
-Valid point. Thanks Drew.
-In the future, we probably want to support prctl
-(PR_SET_TSC/SECCOMP_MODE_STRICT) to disable even
-time CSR access. I don't think there is any use case for it right now.
+Why leave clear_young behind? Just make a NULL bitmap mean
+clear_young?
 
-> Thanks,
-> drew
-
-
-
---=20
-Regards,
-Atish
+Jason
