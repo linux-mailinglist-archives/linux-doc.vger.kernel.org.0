@@ -2,58 +2,32 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id F0E22718A07
-	for <lists+linux-doc@lfdr.de>; Wed, 31 May 2023 21:20:15 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id C3685718A3E
+	for <lists+linux-doc@lfdr.de>; Wed, 31 May 2023 21:36:10 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S229728AbjEaTUO (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 31 May 2023 15:20:14 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:51764 "EHLO
+        id S229729AbjEaTgK (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 31 May 2023 15:36:10 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:58298 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S229676AbjEaTUN (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Wed, 31 May 2023 15:20:13 -0400
-Received: from mail-pf1-x432.google.com (mail-pf1-x432.google.com [IPv6:2607:f8b0:4864:20::432])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 46906107
-        for <linux-doc@vger.kernel.org>; Wed, 31 May 2023 12:20:11 -0700 (PDT)
-Received: by mail-pf1-x432.google.com with SMTP id d2e1a72fcca58-64d5f65a2f7so106609b3a.1
-        for <linux-doc@vger.kernel.org>; Wed, 31 May 2023 12:20:11 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=ziepe.ca; s=google; t=1685560811; x=1688152811;
-        h=in-reply-to:content-disposition:mime-version:references:message-id
-         :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
-        bh=49Ctqz+Z6/EpgEVzBMBiySSOETw/gRZF7F8sKc0/gW4=;
-        b=SCXzv5NFJkdSd2DBch3tBur6rt87sHZadMvllcCYrBSlAnujqsn2w6NYfs8kRw7zEH
-         UUy5B5M3fdwqVh4cJAPUbO4ymzbGUQhjG0wsWvcB0rzXrJuUXqSQWExeBcxLh5dnJ4hW
-         JdIcMLBU2Wr5PTX+4Sgey8hL0W2zyc7yeXyBOoy9FNA13tz08zsvGn7+DUiMDrwaQkpg
-         hdZvFD7p3uuyL6jZGaitCwZEBXvEijJ+fMG39fXax6zGLA/zH3JFxhLgU8GjKTvmwn3U
-         cfKL4OTNs21hoPihFH4rxpZz8Ex23V4vNxSxIHe04E18MS+FM6lfIrpkz5m+NwO2u7KZ
-         /PHA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1685560811; x=1688152811;
-        h=in-reply-to:content-disposition:mime-version:references:message-id
-         :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=49Ctqz+Z6/EpgEVzBMBiySSOETw/gRZF7F8sKc0/gW4=;
-        b=IFu9ClDse52UtseI4SzD8v3iP6vwgwLAzJpCNE1n5H4rVhkjHcnmjH8lSy7kcMC2bH
-         cBN8eYkgqeB19ADjU2eMXZVEedCGNyM176ljnRMcQz9Md1OiawRUR8KcnQ9TbD1kUgKR
-         UVT4QAhe73YqbFS25rX+HATwK1IZBOwtM3Jy1aaM2o9DPm9bwa99ehbeUeIwoXJDJXDT
-         2DbVem1HAxbqW+erhVoXgbISC5Sm4vPs1+k+S/IuqXcHRMorImNEHUl6iNPlc4wYF3o3
-         4AfeS7LdjFvw3clu2LKZnm52+cEBWJqDF3Q6/nwYIJ0PvHfSQWrNaTAD79UsuffaMUP6
-         PHMw==
-X-Gm-Message-State: AC+VfDzym+f5ZGaBbt9sPRcXxLte17H1uc2mDoj1uI3LjF6binkKlzXb
-        M275p4nDWSUQgHmYGTIfLNzBow==
-X-Google-Smtp-Source: ACHHUZ5vOhH+Z20smvih3PRoBzyu6112d4DjAZ/k2Hk8Q2510QpTt0jTRAeR3hLBF9CzQodd76AWQw==
-X-Received: by 2002:a05:6a00:1344:b0:647:e45f:1a4c with SMTP id k4-20020a056a00134400b00647e45f1a4cmr5931413pfu.11.1685560810753;
-        Wed, 31 May 2023 12:20:10 -0700 (PDT)
-Received: from ziepe.ca ([206.223.160.26])
-        by smtp.gmail.com with ESMTPSA id 15-20020aa7920f000000b0065017055caasm918208pfo.210.2023.05.31.12.20.10
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 31 May 2023 12:20:10 -0700 (PDT)
-Received: from jgg by wakko with local (Exim 4.95)
-        (envelope-from <jgg@ziepe.ca>)
-        id 1q4RMe-0017g6-KI;
-        Wed, 31 May 2023 16:20:08 -0300
-Date:   Wed, 31 May 2023 16:20:08 -0300
-From:   Jason Gunthorpe <jgg@ziepe.ca>
+        with ESMTP id S229612AbjEaTgJ (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Wed, 31 May 2023 15:36:09 -0400
+X-Greylist: delayed 454 seconds by postgrey-1.37 at lindbergh.monkeyblade.net; Wed, 31 May 2023 12:36:04 PDT
+Received: from out-63.mta1.migadu.com (out-63.mta1.migadu.com [IPv6:2001:41d0:203:375::3f])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id B682B128
+        for <linux-doc@vger.kernel.org>; Wed, 31 May 2023 12:36:04 -0700 (PDT)
+Date:   Wed, 31 May 2023 19:28:17 +0000
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linux.dev; s=key1;
+        t=1685561308;
+        h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+         to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+         content-transfer-encoding:content-transfer-encoding:
+         in-reply-to:in-reply-to:references:references;
+        bh=fExwE02o2n9ir13h12C6sJUjb5CZIzSGV94ltztSeYU=;
+        b=j6oi+jpW4qEEAfeTqR1gVmlOIouoNE2cZuCQ9g4gmWt/4cyclojreEVXHu8btfeiGiVcDJ
+        x4P5UZRMb0dW2T4B2o8jFedTmwMjh8UL0366wjygZebZR43zxO9qUMsie4B5b5unRoLQTv
+        JJJh2wVtTtDIseRjA+dHi+WATyCzmmE=
+X-Report-Abuse: Please report any abuse attempt to abuse@migadu.com and include these headers.
+From:   Oliver Upton <oliver.upton@linux.dev>
 To:     Yu Zhao <yuzhao@google.com>
 Cc:     Andrew Morton <akpm@linux-foundation.org>,
         Paolo Bonzini <pbonzini@redhat.com>,
@@ -71,6 +45,7 @@ Cc:     Andrew Morton <akpm@linux-foundation.org>,
         "H. Peter Anvin" <hpa@zytor.com>, Ingo Molnar <mingo@redhat.com>,
         James Morse <james.morse@arm.com>,
         "Jason A. Donenfeld" <Jason@zx2c4.com>,
+        Jason Gunthorpe <jgg@ziepe.ca>,
         Jonathan Corbet <corbet@lwn.net>,
         Marc Zyngier <maz@kernel.org>,
         Masami Hiramatsu <mhiramat@kernel.org>,
@@ -78,7 +53,6 @@ Cc:     Andrew Morton <akpm@linux-foundation.org>,
         Michael Larabel <michael@michaellarabel.com>,
         Mike Rapoport <rppt@kernel.org>,
         Nicholas Piggin <npiggin@gmail.com>,
-        Oliver Upton <oliver.upton@linux.dev>,
         Paul Mackerras <paulus@ozlabs.org>,
         Peter Xu <peterx@redhat.com>,
         Sean Christopherson <seanjc@google.com>,
@@ -92,71 +66,66 @@ Cc:     Andrew Morton <akpm@linux-foundation.org>,
         linux-mm@kvack.org, linuxppc-dev@lists.ozlabs.org,
         linux-trace-kernel@vger.kernel.org, x86@kernel.org,
         linux-mm@google.com
-Subject: Re: [PATCH mm-unstable v2 02/10] mm/kvm: use
- mmu_notifier_ops->test_clear_young()
-Message-ID: <ZHed6OuO/ALNfvaX@ziepe.ca>
+Subject: Re: [PATCH mm-unstable v2 04/10] kvm/arm64: make stage2 page tables
+ RCU safe
+Message-ID: <ZHef0VsZvZ1Vnz0u@linux.dev>
 References: <20230526234435.662652-1-yuzhao@google.com>
- <20230526234435.662652-3-yuzhao@google.com>
+ <20230526234435.662652-5-yuzhao@google.com>
+ <ZHJHJPBF6euzOFdw@linux.dev>
+ <CAOUHufa74CufHziHSquO5bZwbFXz2MNssBzW+AH7=Xo5RCnQ0A@mail.gmail.com>
+ <ZHZQdQAApIrw6fBu@linux.dev>
+ <CAOUHufZOkBmZJgCU2xW2B8S3P3TWERHezy0xKWY9_TeyV9K7Rg@mail.gmail.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
+Content-Type: text/plain; charset=utf-8
 Content-Disposition: inline
-In-Reply-To: <20230526234435.662652-3-yuzhao@google.com>
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <CAOUHufZOkBmZJgCU2xW2B8S3P3TWERHezy0xKWY9_TeyV9K7Rg@mail.gmail.com>
+X-Migadu-Flow: FLOW_OUT
 X-Spam-Status: No, score=-2.1 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_NONE,
-        SPF_HELO_NONE,SPF_PASS,T_SCC_BODY_TEXT_LINE,URIBL_BLOCKED
-        autolearn=unavailable autolearn_force=no version=3.4.6
+        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,SPF_HELO_NONE,SPF_PASS,
+        T_SCC_BODY_TEXT_LINE,URIBL_BLOCKED autolearn=unavailable
+        autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Fri, May 26, 2023 at 05:44:27PM -0600, Yu Zhao wrote:
-> Replace test_young() and clear_young() with test_clear_young().
+On Tue, May 30, 2023 at 02:06:55PM -0600, Yu Zhao wrote:
+> On Tue, May 30, 2023 at 1:37 PM Oliver Upton <oliver.upton@linux.dev> wrote:
+> >
+> > Hi Yu,
+> >
+> > On Sat, May 27, 2023 at 02:13:07PM -0600, Yu Zhao wrote:
+> > > On Sat, May 27, 2023 at 12:08 PM Oliver Upton <oliver.upton@linux.dev> wrote:
+> > > > diff --git a/arch/arm64/kvm/hyp/pgtable.c b/arch/arm64/kvm/hyp/pgtable.c
+> > > > index 3d61bd3e591d..bfbebdcb4ef0 100644
+> > > > --- a/arch/arm64/kvm/hyp/pgtable.c
+> > > > +++ b/arch/arm64/kvm/hyp/pgtable.c
+> > > > @@ -1019,7 +1019,7 @@ static int stage2_unmap_walker(const struct kvm_pgtable_visit_ctx *ctx,
+> > > >                                                kvm_granule_size(ctx->level));
+> > > >
+> > > >         if (childp)
+> > > > -               mm_ops->put_page(childp);
+> > > > +               mm_ops->free_removed_table(childp, ctx->level);
+> > >
+> > > Thanks, Oliver.
+> > >
+> > > A couple of things I haven't had the chance to verify -- I'm hoping
+> > > you could help clarify:
+> > > 1. For unmapping, with free_removed_table(), wouldn't we have to look
+> > > into the table we know it's empty unnecessarily?
+> >
+> > As it is currently implemented, yes. But, there's potential to fast-path
+> > the implementation by checking page_count() before starting the walk.
 > 
-> Signed-off-by: Yu Zhao <yuzhao@google.com>
-> ---
->  include/linux/mmu_notifier.h | 29 ++-----------------
->  include/trace/events/kvm.h   | 15 ----------
->  mm/mmu_notifier.c            | 42 ----------------------------
->  virt/kvm/kvm_main.c          | 54 ------------------------------------
->  4 files changed, 2 insertions(+), 138 deletions(-)
-> 
-> diff --git a/include/linux/mmu_notifier.h b/include/linux/mmu_notifier.h
-> index dfdbb370682d..c8f35fc08703 100644
-> --- a/include/linux/mmu_notifier.h
-> +++ b/include/linux/mmu_notifier.h
-> @@ -104,26 +104,6 @@ struct mmu_notifier_ops {
->  				 unsigned long start,
->  				 unsigned long end);
->  
-> -	/*
-> -	 * clear_young is a lightweight version of clear_flush_young. Like the
-> -	 * latter, it is supposed to test-and-clear the young/accessed bitflag
-> -	 * in the secondary pte, but it may omit flushing the secondary tlb.
-> -	 */
-> -	int (*clear_young)(struct mmu_notifier *subscription,
-> -			   struct mm_struct *mm,
-> -			   unsigned long start,
-> -			   unsigned long end);
-> -
-> -	/*
-> -	 * test_young is called to check the young/accessed bitflag in
-> -	 * the secondary pte. This is used to know if the page is
-> -	 * frequently used without actually clearing the flag or tearing
-> -	 * down the secondary mapping on the page.
-> -	 */
-> -	int (*test_young)(struct mmu_notifier *subscription,
-> -			  struct mm_struct *mm,
-> -			  unsigned long address);
-> -
->  	int (*test_clear_young)(struct mmu_notifier *mn, struct mm_struct *mm,
->  				unsigned long start, unsigned long end,
->  				bool clear, unsigned long *bitmap);
+> Do you mind posting another patch? I'd be happy to ack it, as well as
+> the one you suggested above.
 
-Oh, you split the patch. This MMU notifier stuff seems OK for both
-patches then, and KVM is the only user:
+I'd rather not take such a patch independent of the test_clear_young
+series if you're OK with that. Do you mind implementing something
+similar to the above patch w/ the proposed optimization if you need it?
 
-Reviewed-by: Jason Gunthorpe <jgg@nvidia.com>
-
-Jason
+-- 
+Thanks,
+Oliver
