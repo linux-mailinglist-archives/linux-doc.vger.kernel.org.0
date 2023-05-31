@@ -2,115 +2,176 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 60F6D718BC2
-	for <lists+linux-doc@lfdr.de>; Wed, 31 May 2023 23:23:51 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 5D208718EF1
+	for <lists+linux-doc@lfdr.de>; Thu,  1 Jun 2023 01:11:35 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S230134AbjEaVXt (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 31 May 2023 17:23:49 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:35688 "EHLO
+        id S230110AbjEaXLd (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 31 May 2023 19:11:33 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:35084 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S229629AbjEaVXs (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Wed, 31 May 2023 17:23:48 -0400
-Received: from mail-lf1-x12c.google.com (mail-lf1-x12c.google.com [IPv6:2a00:1450:4864:20::12c])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 883B4B3;
-        Wed, 31 May 2023 14:23:47 -0700 (PDT)
-Received: by mail-lf1-x12c.google.com with SMTP id 2adb3069b0e04-4f3b9c88af8so7703875e87.2;
-        Wed, 31 May 2023 14:23:47 -0700 (PDT)
+        with ESMTP id S229873AbjEaXLc (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Wed, 31 May 2023 19:11:32 -0400
+Received: from mail-qt1-x831.google.com (mail-qt1-x831.google.com [IPv6:2607:f8b0:4864:20::831])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 9A2AF12F
+        for <linux-doc@vger.kernel.org>; Wed, 31 May 2023 16:11:29 -0700 (PDT)
+Received: by mail-qt1-x831.google.com with SMTP id d75a77b69052e-3f81ffc9065so39891cf.1
+        for <linux-doc@vger.kernel.org>; Wed, 31 May 2023 16:11:29 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20221208; t=1685568225; x=1688160225;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+        d=google.com; s=20221208; t=1685574688; x=1688166688;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=/o7KHBWZ+J55ZTx2wkCBeVpg6ewT4ab9Dk0YMh5VnVQ=;
-        b=FLvgGKO/oMijXf1KYnSriKRqcF0Khz4UsHfadWLafI//gSZwBgh9OxypJBiBWgBA+l
-         /gquV9B3z8AW0P35EYtkBK6LSBDgJRm3oH5zSsypekY4x0+a51FVxXSireeZE2kFZ/ym
-         1tCMBT6WZG2i5WptFxX5yfTAiiR4CeV/oABWLsMbqu8wb2JWUs1WzndLDdjk0oIYhIjT
-         MGA3J7kH9nUeAmM3pBT6w68gWIbr6Arq3TdCesdyAlTiwr7YuvVW40DpM4b4s9AsPsR6
-         5ZiTRyg5Mc/mLF7m1i8aY6Miaa5PKp/FPb4YfoPJzWk4XBQ1wA8GbDiFjxaOAbXzAwNi
-         z2wg==
+        bh=M/MWN6rejTskcfCq1jo0OT/p1QBXsLATfA+P3wCJaoY=;
+        b=Fl9wqKb8OYiVPVPir2ykRI7L87RcY3p24K4mWUjopqQTvt6/CSKSwE9qVHRGO6ZIyW
+         IGgJ7ajDetdyJJ3J0awBrq/8PPsnnFT2U0Y+VQZlF3ypjJSsz6wb3/99o33RUgdV8q9D
+         LxgAmYusm5FQ9UhHpudVCbDtgWoGgI+YBGozKHPGQpt2VgcJVtpWrvFEyOgNyTyxzZmg
+         y4FzNbCCExTZsYgnHR8rb0eLgQOqCa2HOYwcjAeJPG8Rf8wPXO/lWazTGQJhdwBxCct5
+         ro3o47PFqt8NJqRflzi2ECtQf6klWmKPHu/KYN9vgBMNLtr5ELk17kW3gYx2FDQJWqVF
+         wK+g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1685568225; x=1688160225;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+        d=1e100.net; s=20221208; t=1685574688; x=1688166688;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=/o7KHBWZ+J55ZTx2wkCBeVpg6ewT4ab9Dk0YMh5VnVQ=;
-        b=R5GDIZzC4rKVrCRotqmHh86Pr8B2az1mISLC6c7LCvpeK4zuAn3Cgqnvi0jtBBOCMc
-         g0bkdwFV/Og3gZnDiSsTCWwPQ2Z9zUbqoinYJDpyr0ex8qweQ4YbazMeeIBrGhUCKeWf
-         ZZKTjMehaC1yT7v18kgbyjc8jT78Ti4a5rgG7H7mM/6+ywimA/wF0YXdSdukEfFj7Ndn
-         ty/UoEfBws2JOpSS+Ldo6hIfJEg2OQgjGD1SVDRzT9d6EbU77y5WoIGo/iDK/QMLSYOS
-         UdKx9OaqvIh/Z4WIic3LLYlvddHWKRfm5IiGGdHqAylprIKKrg+krvlkLNzliFQzuxWD
-         p3VQ==
-X-Gm-Message-State: AC+VfDylDacCf4hdCXdoxDHNFFY9v4aYIWRHSJ3v0nOEZ+bNWOSsNIre
-        eOtxIzfMTKgOBrtWJaSxHR4GBvk80u4lkNNQ
-X-Google-Smtp-Source: ACHHUZ4HSrzAKwWcEGlLlqcZKTHdB6wwjM/xqNb72tZZsHT76BgqQkER9rkEj+np4PSBiBEzo6O0Kg==
-X-Received: by 2002:a19:a413:0:b0:4ef:ec94:9674 with SMTP id q19-20020a19a413000000b004efec949674mr188296lfc.32.1685568224666;
-        Wed, 31 May 2023 14:23:44 -0700 (PDT)
-Received: from jernej-laptop.localnet (82-149-1-233.dynamic.telemach.net. [82.149.1.233])
-        by smtp.gmail.com with ESMTPSA id f25-20020aa7d859000000b00514b3dd8638sm2015646eds.67.2023.05.31.14.23.43
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 31 May 2023 14:23:44 -0700 (PDT)
-From:   Jernej =?utf-8?B?xaBrcmFiZWM=?= <jernej.skrabec@gmail.com>
-To:     linux-doc@vger.kernel.org, Jonathan Corbet <corbet@lwn.net>
-Cc:     linux-arch@vger.kernel.org, linux-arm-kernel@lists.infradead.org,
-        Jonathan Corbet <corbet@lwn.net>,
-        Dmitry Torokhov <dmitry.torokhov@gmail.com>,
-        Chen-Yu Tsai <wens@csie.org>,
-        Samuel Holland <samuel@sholland.org>,
-        Thierry Reding <thierry.reding@gmail.com>,
-        Uwe =?ISO-8859-1?Q?Kleine=2DK=F6nig?= 
-        <u.kleine-koenig@pengutronix.de>,
-        Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
-        linux-input@vger.kernel.org, linux-sunxi@lists.linux.dev,
-        linux-pwm@vger.kernel.org, linux-serial@vger.kernel.org
-Subject: Re: [PATCH v2 6/7] docs: update some straggling Documentation/arm references
-Date:   Wed, 31 May 2023 23:23:43 +0200
-Message-ID: <1852730.tdWV9SEqCh@jernej-laptop>
-In-Reply-To: <20230529144856.102755-7-corbet@lwn.net>
-References: <20230529144856.102755-1-corbet@lwn.net>
- <20230529144856.102755-7-corbet@lwn.net>
+        bh=M/MWN6rejTskcfCq1jo0OT/p1QBXsLATfA+P3wCJaoY=;
+        b=HkCREerZvK3jYRR/tEofNjvYtj3NtVmAn4hjsmpiNYy9Mdyeo+emaLYCkwyAM6DKOM
+         yNWTNhagtxi0bom9J5JtAnno15pY2v02jsXVRGGqnxvG07XIxADOJOW8ADgyOFfdjbSa
+         hZGH/aLjA1c4AJPtGGJGey6n2ckeOAEV4N/QQSdG3iqsxE1tDMVmixBqWwsbaZn94UbJ
+         iKsxQCnwM3YxXtRhjFp+/eH9cOFrBA5yZiKFIp2Kk8A8oDRdmF5ZbQN8gUo3ivmwFvFg
+         gTb2YfPQ68ZwmmbZY7n93mrNJxfnXaXB+ZtV1EvfcKa/KzUv7G+Dn08VDKg67UH6CAfN
+         5G6A==
+X-Gm-Message-State: AC+VfDzwG4HvdadxmKMQh5gsjrQ6lnuqp1PqhYavrN+WbCsij62eC4u8
+        p0o3Z6ML8IIGQhqgibqjg05o9qoa8g0aSdnPmpICIg==
+X-Google-Smtp-Source: ACHHUZ4fYvopsUDf0tKZluhlRdIiL+dMyvw/iJd7HM69nbbpN2GCk7JOyoWyB+QIJLSvn8t1n1/kKB5iqs8Czcu+kSs=
+X-Received: by 2002:ac8:4e45:0:b0:3db:1c01:9d95 with SMTP id
+ e5-20020ac84e45000000b003db1c019d95mr104964qtw.4.1685574688480; Wed, 31 May
+ 2023 16:11:28 -0700 (PDT)
 MIME-Version: 1.0
+References: <20230526234435.662652-1-yuzhao@google.com> <20230526234435.662652-5-yuzhao@google.com>
+ <ZHJHJPBF6euzOFdw@linux.dev> <CAOUHufa74CufHziHSquO5bZwbFXz2MNssBzW+AH7=Xo5RCnQ0A@mail.gmail.com>
+ <ZHZQdQAApIrw6fBu@linux.dev> <CAOUHufZOkBmZJgCU2xW2B8S3P3TWERHezy0xKWY9_TeyV9K7Rg@mail.gmail.com>
+ <ZHef0VsZvZ1Vnz0u@linux.dev>
+In-Reply-To: <ZHef0VsZvZ1Vnz0u@linux.dev>
+From:   Yu Zhao <yuzhao@google.com>
+Date:   Wed, 31 May 2023 17:10:52 -0600
+Message-ID: <CAOUHufZrfnfcbrqSzmHkejR5MA2gmGKZ3LMRhbLHV+1427z=Tw@mail.gmail.com>
+Subject: Re: [PATCH mm-unstable v2 04/10] kvm/arm64: make stage2 page tables
+ RCU safe
+To:     Oliver Upton <oliver.upton@linux.dev>
+Cc:     Andrew Morton <akpm@linux-foundation.org>,
+        Paolo Bonzini <pbonzini@redhat.com>,
+        Alistair Popple <apopple@nvidia.com>,
+        Anup Patel <anup@brainfault.org>,
+        Ben Gardon <bgardon@google.com>,
+        Borislav Petkov <bp@alien8.de>,
+        Catalin Marinas <catalin.marinas@arm.com>,
+        Chao Peng <chao.p.peng@linux.intel.com>,
+        Christophe Leroy <christophe.leroy@csgroup.eu>,
+        Dave Hansen <dave.hansen@linux.intel.com>,
+        Fabiano Rosas <farosas@linux.ibm.com>,
+        Gaosheng Cui <cuigaosheng1@huawei.com>,
+        Gavin Shan <gshan@redhat.com>,
+        "H. Peter Anvin" <hpa@zytor.com>, Ingo Molnar <mingo@redhat.com>,
+        James Morse <james.morse@arm.com>,
+        "Jason A. Donenfeld" <Jason@zx2c4.com>,
+        Jason Gunthorpe <jgg@ziepe.ca>,
+        Jonathan Corbet <corbet@lwn.net>,
+        Marc Zyngier <maz@kernel.org>,
+        Masami Hiramatsu <mhiramat@kernel.org>,
+        Michael Ellerman <mpe@ellerman.id.au>,
+        Michael Larabel <michael@michaellarabel.com>,
+        Mike Rapoport <rppt@kernel.org>,
+        Nicholas Piggin <npiggin@gmail.com>,
+        Paul Mackerras <paulus@ozlabs.org>,
+        Peter Xu <peterx@redhat.com>,
+        Sean Christopherson <seanjc@google.com>,
+        Steven Rostedt <rostedt@goodmis.org>,
+        Suzuki K Poulose <suzuki.poulose@arm.com>,
+        Thomas Gleixner <tglx@linutronix.de>,
+        Thomas Huth <thuth@redhat.com>, Will Deacon <will@kernel.org>,
+        Zenghui Yu <yuzenghui@huawei.com>, kvmarm@lists.linux.dev,
+        kvm@vger.kernel.org, linux-arm-kernel@lists.infradead.org,
+        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
+        linux-mm@kvack.org, linuxppc-dev@lists.ozlabs.org,
+        linux-trace-kernel@vger.kernel.org, x86@kernel.org,
+        linux-mm@google.com
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset="iso-8859-1"
-X-Spam-Status: No, score=-2.1 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_FROM,
-        RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,SPF_PASS,T_SCC_BODY_TEXT_LINE
-        autolearn=ham autolearn_force=no version=3.4.6
+X-Spam-Status: No, score=-17.6 required=5.0 tests=BAYES_00,DKIMWL_WL_MED,
+        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,
+        ENV_AND_HDR_SPF_MATCH,RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,SPF_PASS,
+        T_SCC_BODY_TEXT_LINE,USER_IN_DEF_DKIM_WL,USER_IN_DEF_SPF_WL
+        autolearn=unavailable autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Dne ponedeljek, 29. maj 2023 ob 16:48:55 CEST je Jonathan Corbet napisal(a):
-> The Arm documentation has moved to Documentation/arch/arm; update the
-> last remaining references to match.
->=20
-> Cc: Dmitry Torokhov <dmitry.torokhov@gmail.com>
-> Cc: Chen-Yu Tsai <wens@csie.org>
-> Cc: Jernej Skrabec <jernej.skrabec@gmail.com>
-> Cc: Samuel Holland <samuel@sholland.org>
-> Cc: Thierry Reding <thierry.reding@gmail.com>
-> Cc: "Uwe Kleine-K=F6nig" <u.kleine-koenig@pengutronix.de>
-> Cc: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
-> Cc: linux-input@vger.kernel.org
-> Cc: linux-sunxi@lists.linux.dev
-> Cc: linux-pwm@vger.kernel.org
-> Cc: linux-serial@vger.kernel.org
-> Signed-off-by: Jonathan Corbet <corbet@lwn.net>
-> ---
->  MAINTAINERS                          | 4 ++--
->  drivers/input/touchscreen/sun4i-ts.c | 2 +-
+On Wed, May 31, 2023 at 1:28=E2=80=AFPM Oliver Upton <oliver.upton@linux.de=
+v> wrote:
+>
+> On Tue, May 30, 2023 at 02:06:55PM -0600, Yu Zhao wrote:
+> > On Tue, May 30, 2023 at 1:37=E2=80=AFPM Oliver Upton <oliver.upton@linu=
+x.dev> wrote:
+> > >
+> > > Hi Yu,
+> > >
+> > > On Sat, May 27, 2023 at 02:13:07PM -0600, Yu Zhao wrote:
+> > > > On Sat, May 27, 2023 at 12:08=E2=80=AFPM Oliver Upton <oliver.upton=
+@linux.dev> wrote:
+> > > > > diff --git a/arch/arm64/kvm/hyp/pgtable.c b/arch/arm64/kvm/hyp/pg=
+table.c
+> > > > > index 3d61bd3e591d..bfbebdcb4ef0 100644
+> > > > > --- a/arch/arm64/kvm/hyp/pgtable.c
+> > > > > +++ b/arch/arm64/kvm/hyp/pgtable.c
+> > > > > @@ -1019,7 +1019,7 @@ static int stage2_unmap_walker(const struct=
+ kvm_pgtable_visit_ctx *ctx,
+> > > > >                                                kvm_granule_size(c=
+tx->level));
+> > > > >
+> > > > >         if (childp)
+> > > > > -               mm_ops->put_page(childp);
+> > > > > +               mm_ops->free_removed_table(childp, ctx->level);
+> > > >
+> > > > Thanks, Oliver.
+> > > >
+> > > > A couple of things I haven't had the chance to verify -- I'm hoping
+> > > > you could help clarify:
+> > > > 1. For unmapping, with free_removed_table(), wouldn't we have to lo=
+ok
+> > > > into the table we know it's empty unnecessarily?
+> > >
+> > > As it is currently implemented, yes. But, there's potential to fast-p=
+ath
+> > > the implementation by checking page_count() before starting the walk.
+> >
+> > Do you mind posting another patch? I'd be happy to ack it, as well as
+> > the one you suggested above.
+>
+> I'd rather not take such a patch independent of the test_clear_young
+> series if you're OK with that. Do you mind implementing something
+> similar to the above patch w/ the proposed optimization if you need it?
 
-=46or sun4i-ts.c:
-Acked-by: Jernej Skrabec <jernej.skrabec@gmail.com>
+No worries. I can take the above together with the following, which
+would form a new series with its own merits, since apparently you
+think the !AF case is important.
 
-Best regards,
-Jernej
+diff --git a/arch/arm64/kvm/mmu.c b/arch/arm64/kvm/mmu.c
+index 26a8d955b49c..6ce73ce9f146 100644
+--- a/arch/arm64/kvm/mmu.c
++++ b/arch/arm64/kvm/mmu.c
+@@ -1453,10 +1453,10 @@ static void handle_access_fault(struct
+kvm_vcpu *vcpu, phys_addr_t fault_ipa)
 
->  drivers/pwm/pwm-atmel.c              | 2 +-
->  drivers/pwm/pwm-pxa.c                | 2 +-
->  drivers/tty/serial/Kconfig           | 4 ++--
->  5 files changed, 7 insertions(+), 7 deletions(-)
+        trace_kvm_access_fault(fault_ipa);
 
+-       read_lock(&vcpu->kvm->mmu_lock);
++       rcu_read_lock();
+        mmu =3D vcpu->arch.hw_mmu;
+        pte =3D kvm_pgtable_stage2_mkyoung(mmu->pgt, fault_ipa);
+-       read_unlock(&vcpu->kvm->mmu_lock);
++       rcu_read_unlock();
 
-
+        if (kvm_pte_valid(pte))
+                kvm_set_pfn_accessed(kvm_pte_to_pfn(pte));
