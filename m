@@ -2,107 +2,142 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id DD6D671FD4F
-	for <lists+linux-doc@lfdr.de>; Fri,  2 Jun 2023 11:13:21 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 6109C71FE9D
+	for <lists+linux-doc@lfdr.de>; Fri,  2 Jun 2023 12:09:14 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S234748AbjFBJNS (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Fri, 2 Jun 2023 05:13:18 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:37696 "EHLO
+        id S235132AbjFBKJN (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Fri, 2 Jun 2023 06:09:13 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:36984 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S234728AbjFBJMq (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Fri, 2 Jun 2023 05:12:46 -0400
-Received: from baptiste.telenet-ops.be (baptiste.telenet-ops.be [IPv6:2a02:1800:120:4::f00:13])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id D13B61709
-        for <linux-doc@vger.kernel.org>; Fri,  2 Jun 2023 02:11:48 -0700 (PDT)
-Received: from ramsan.of.borg ([IPv6:2a02:1810:ac12:ed30:158c:2ccf:1f70:e136])
-        by baptiste.telenet-ops.be with bizsmtp
-        id 49Bg2A00L1tRZS8019BgSY; Fri, 02 Jun 2023 11:11:46 +0200
-Received: from rox.of.borg ([192.168.97.57])
-        by ramsan.of.borg with esmtp (Exim 4.95)
-        (envelope-from <geert@linux-m68k.org>)
-        id 1q50ob-00BvaU-4t;
-        Fri, 02 Jun 2023 11:11:40 +0200
-Received: from geert by rox.of.borg with local (Exim 4.95)
-        (envelope-from <geert@linux-m68k.org>)
-        id 1q50ou-00ASIR-8C;
-        Fri, 02 Jun 2023 11:11:40 +0200
-From:   Geert Uytterhoeven <geert+renesas@glider.be>
-To:     David Airlie <airlied@gmail.com>, Daniel Vetter <daniel@ffwll.ch>,
-        Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
-        Maxime Ripard <mripard@kernel.org>,
-        Thomas Zimmermann <tzimmermann@suse.de>,
-        Jonathan Corbet <corbet@lwn.net>,
-        Jyri Sarha <jyri.sarha@iki.fi>,
-        Tomi Valkeinen <tomba@kernel.org>,
-        Laurent Pinchart <laurent.pinchart+renesas@ideasonboard.com>,
-        Biju Das <biju.das.jz@bp.renesas.com>
-Cc:     dri-devel@lists.freedesktop.org, linux-doc@vger.kernel.org,
-        linux-renesas-soc@vger.kernel.org, linux-kernel@vger.kernel.org,
-        Geert Uytterhoeven <geert+renesas@glider.be>
-Subject: [PATCH 3/3] drm: Fix references to drm_plane_helper_check_state()
-Date:   Fri,  2 Jun 2023 11:11:36 +0200
-Message-Id: <2408d7841c91e98e9a2b24b1b4df9b2b865519a6.1685696114.git.geert+renesas@glider.be>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <cover.1685696114.git.geert+renesas@glider.be>
-References: <cover.1685696114.git.geert+renesas@glider.be>
+        with ESMTP id S235228AbjFBKJA (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Fri, 2 Jun 2023 06:09:00 -0400
+Received: from mail-pj1-x102a.google.com (mail-pj1-x102a.google.com [IPv6:2607:f8b0:4864:20::102a])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id C63F81B6;
+        Fri,  2 Jun 2023 03:08:55 -0700 (PDT)
+Received: by mail-pj1-x102a.google.com with SMTP id 98e67ed59e1d1-256712d65ceso869457a91.1;
+        Fri, 02 Jun 2023 03:08:55 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20221208; t=1685700535; x=1688292535;
+        h=in-reply-to:content-disposition:mime-version:references:message-id
+         :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+        bh=KJXA2dF12j4Fb3Ta+K6rkvK8zj4+C8MbngTwWrfwo10=;
+        b=pKozTKg8bkqoQRAw4Or1/2O3jhNTORXzV0T2l2OubLw3KGl5/I6zCtOTsidD9yC5ZN
+         kynmkimoC6akMvLQ7qppsxXl9hUbACdXysk4pUXwE8mvIMLOefP7b6G/w1eY5dgCXSJ9
+         gOzN/3y8qFFgzT5xx3v8Zkm1YN5YqH5s2OEPxQuBYFrwsXb8lzoEeEeO6Hou7xwCYYAh
+         JrilTMh66/iRuPtRJIWL0+X/jZmsUtj8muQHWh5m4rrBLE0TU8UMRAFifbNXJVdx+mjp
+         EJyYdBASIrnkttxOgDlgjYSJWsEYyEgLFx+M8XYPxai2fAKsIonHyE9TOkvPxAAb11pQ
+         nxeQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20221208; t=1685700535; x=1688292535;
+        h=in-reply-to:content-disposition:mime-version:references:message-id
+         :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=KJXA2dF12j4Fb3Ta+K6rkvK8zj4+C8MbngTwWrfwo10=;
+        b=aOLFrn0YoMWAGf1HJMCXjpCBUf8e5cehsNPotgQ/d1tILgv0VPwOrVlhncPh4+j/6H
+         MF3V5fdIxkizLJQ2z/hlnwLHboZG4+9qjjVKULYiDmbgmiBfVVh+CULny/dVFKEUB7JS
+         ifVjh3Sbb5QnCrSKRHZSINZ3LzhtisCJ8cja+63rmM0wKWTkPNJT2WMtZpBxfBgZfW6S
+         1xxZ94f8RHfIEOVWNDpsIUout1hk5u4Ol8kCSfwEisvA69V1SAWPvo4DlvluZVB+yAc3
+         yzrshaJZE+nNC7DfavDCh/WeHyC/wbTiURz8CgNQ9n/tLmeHYFStMFPTbiJbUkjhi+MI
+         2ajQ==
+X-Gm-Message-State: AC+VfDxjYQYcovHbhR81ZF3EubXVmrKUIcTdPSD+RalcAjMLmeXVshVr
+        9yU7hpsYHhL7HJ7oXG9QexVtaGxNtmU=
+X-Google-Smtp-Source: ACHHUZ5NMghrvOYiQcrgDDURUUe2m+/zTpIzGsO5lBtXx5es280eqgOGpqaD3QSBm4mosQoHfp0YSg==
+X-Received: by 2002:a17:902:bb10:b0:1ab:63e:67b0 with SMTP id im16-20020a170902bb1000b001ab063e67b0mr899784plb.54.1685700534901;
+        Fri, 02 Jun 2023 03:08:54 -0700 (PDT)
+Received: from debian.me (subs02-180-214-232-3.three.co.id. [180.214.232.3])
+        by smtp.gmail.com with ESMTPSA id ik29-20020a170902ab1d00b001b19d14a3d5sm992095plb.68.2023.06.02.03.08.54
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Fri, 02 Jun 2023 03:08:54 -0700 (PDT)
+Received: by debian.me (Postfix, from userid 1000)
+        id 93BBC106A05; Fri,  2 Jun 2023 17:08:51 +0700 (WIB)
+Date:   Fri, 2 Jun 2023 17:08:51 +0700
+From:   Bagas Sanjaya <bagasdotme@gmail.com>
+To:     Costa Shulyupin <costa.shul@redhat.com>,
+        Jonathan Corbet <corbet@lwn.net>, linux-doc@vger.kernel.org
+Cc:     Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
+        Linux BPF <bpf@vger.kernel.org>
+Subject: Re: [PATCH v3] Documentation: subsystem-apis: Categorize remaining
+ subsystems
+Message-ID: <ZHm_s7kQP6kilBtO@debian.me>
+References: <ZHgM0qKWP3OusjUW@debian.me>
+ <20230601145556.3927838-1-costa.shul@redhat.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Spam-Status: No, score=-2.4 required=5.0 tests=BAYES_00,
-        HEADER_FROM_DIFFERENT_DOMAINS,RCVD_IN_DNSWL_LOW,SPF_HELO_NONE,SPF_NONE,
-        T_SCC_BODY_TEXT_LINE autolearn=ham autolearn_force=no version=3.4.6
+Content-Type: multipart/signed; micalg=pgp-sha512;
+        protocol="application/pgp-signature"; boundary="rQ+siVK50HQ8TR+2"
+Content-Disposition: inline
+In-Reply-To: <20230601145556.3927838-1-costa.shul@redhat.com>
+X-Spam-Status: No, score=-0.6 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_FROM,
+        RCVD_IN_DNSWL_NONE,RCVD_IN_SORBS_WEB,SPF_HELO_NONE,SPF_PASS,
+        T_SCC_BODY_TEXT_LINE autolearn=no autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-As of commit a01cb8ba3f628293 ("drm: Move drm_plane_helper_check_state()
-into drm_atomic_helper.c"), drm_plane_helper_check_state() no longer
-exists, but is part of drm_atomic_helper_check_plane_state().
 
-Signed-off-by: Geert Uytterhoeven <geert+renesas@glider.be>
----
-Interestingly, all these comments appeared only after the commit that
-removed the function...
+--rQ+siVK50HQ8TR+2
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-This is against next-20230602, which does not have the
-drivers/gpu/drm/{ => renesas}/rcar-du move yet.
+On Thu, Jun 01, 2023 at 05:55:55PM +0300, Costa Shulyupin wrote:
+> From: Bagas Sanjaya <bagasdotme@gmail.com>
+>=20
+> Add classes:
+> * Core subsystems
+> * Storage
+> * Networking
+> * Peripherals and devices
+> * Embedded systems
+> * Integrity
+> * Virtualization
+> * Miscellaneous
 
-Biju: you're adding a new copy in
-drivers/gpu/drm/renesas/rz-du/rzg2l_du_crtc.c
----
- drivers/gpu/drm/rcar-du/rcar_du_plane.c | 3 ++-
- drivers/gpu/drm/tidss/tidss_plane.c     | 3 ++-
- 2 files changed, 4 insertions(+), 2 deletions(-)
+Above list is unnecessary, because the diff should clearly show those
+categories.
 
-diff --git a/drivers/gpu/drm/rcar-du/rcar_du_plane.c b/drivers/gpu/drm/rcar-du/rcar_du_plane.c
-index d759e019218181ce..e445fac8e0b46c21 100644
---- a/drivers/gpu/drm/rcar-du/rcar_du_plane.c
-+++ b/drivers/gpu/drm/rcar-du/rcar_du_plane.c
-@@ -600,7 +600,8 @@ int __rcar_du_plane_atomic_check(struct drm_plane *plane,
- 	if (!state->crtc) {
- 		/*
- 		 * The visible field is not reset by the DRM core but only
--		 * updated by drm_plane_helper_check_state(), set it manually.
-+		 * updated by drm_atomic_helper_check_plane_state(), set it
-+		 * manually.
- 		 */
- 		state->visible = false;
- 		*format = NULL;
-diff --git a/drivers/gpu/drm/tidss/tidss_plane.c b/drivers/gpu/drm/tidss/tidss_plane.c
-index 6bdd6e4a955ab3cc..e1c0ef0c3894c855 100644
---- a/drivers/gpu/drm/tidss/tidss_plane.c
-+++ b/drivers/gpu/drm/tidss/tidss_plane.c
-@@ -38,7 +38,8 @@ static int tidss_plane_atomic_check(struct drm_plane *plane,
- 	if (!new_plane_state->crtc) {
- 		/*
- 		 * The visible field is not reset by the DRM core but only
--		 * updated by drm_plane_helper_check_state(), set it manually.
-+		 * updated by drm_atomic_helper_check_plane_state(), set it
-+		 * manually.
- 		 */
- 		new_plane_state->visible = false;
- 		return 0;
--- 
-2.34.1
+>=20
+> There is a FIXME that says to organize subsystems listed in
+> subsystem-apis.rst. Fulfill it by categorize remaining subsytems
+> by purpose/themes, while sorting entries in each category.
+>=20
+> HID devices are already categorized in 3c591cc954d56e ("docs:
+> consolidate human interface subsystems").
+>=20
+> Signed-off-by: Costa Shulyupin <costa.shul@redhat.com>
 
+Thanks for picking my version from v2 [1]. However, From: address in the
+patch message doesn't match one from message header nor your Signed-off-by
+address. Conversely, if you handle someone else's patch (in this case mine),
+you need to also add SoB from him/her.
+
+As you're still newbie here, I'd recommend you to try contributing to
+drivers/staging/ first in order to gain experience on kernel developement
+workflow. Also, you use your RedHat address, so I expect you have been
+given kernel development training from your company (and doesn't make
+trivial errors like these ones).
+
+Anyway, I'd like to send my own version instead (incorporating feedback
+=66rom this version) if you still reroll with trivial sending mistakes.
+
+Thanks.
+
+[1]: https://lore.kernel.org/linux-doc/ZHgM0qKWP3OusjUW@debian.me/
+=20
+--=20
+An old man doll... just what I always wanted! - Clara
+
+--rQ+siVK50HQ8TR+2
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQSSYQ6Cy7oyFNCHrUH2uYlJVVFOowUCZHm/rwAKCRD2uYlJVVFO
+o/ZUAQCtuYTGyPA8AC22WDnO5aWuZ+KGuo0KtrmJ+gIcaexwRgD9HOoqQ0SMGUaV
+mZzZ+Di26FcMIUJgp8EMYc0VwvrZXw4=
+=vBk8
+-----END PGP SIGNATURE-----
+
+--rQ+siVK50HQ8TR+2--
