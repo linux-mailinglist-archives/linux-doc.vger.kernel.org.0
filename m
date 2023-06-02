@@ -2,49 +2,75 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 793157200E6
-	for <lists+linux-doc@lfdr.de>; Fri,  2 Jun 2023 13:53:25 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 968EE72013C
+	for <lists+linux-doc@lfdr.de>; Fri,  2 Jun 2023 14:13:05 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S235019AbjFBLxY (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Fri, 2 Jun 2023 07:53:24 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:41388 "EHLO
+        id S235501AbjFBMND (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Fri, 2 Jun 2023 08:13:03 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:53690 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S234510AbjFBLxX (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Fri, 2 Jun 2023 07:53:23 -0400
-Received: from foss.arm.com (foss.arm.com [217.140.110.172])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTP id 34DACE67;
-        Fri,  2 Jun 2023 04:53:00 -0700 (PDT)
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
-        by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 93B091063;
-        Fri,  2 Jun 2023 04:52:24 -0700 (PDT)
-Received: from [10.57.84.31] (unknown [10.57.84.31])
-        by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id C67043F67D;
-        Fri,  2 Jun 2023 04:51:37 -0700 (PDT)
-Message-ID: <93c3f3a6-a3bc-f3ca-9077-8985865b8abf@arm.com>
-Date:   Fri, 2 Jun 2023 12:51:34 +0100
+        with ESMTP id S235757AbjFBMNC (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Fri, 2 Jun 2023 08:13:02 -0400
+Received: from smtp-out2.suse.de (smtp-out2.suse.de [IPv6:2001:67c:2178:6::1d])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id BC8721B0;
+        Fri,  2 Jun 2023 05:12:55 -0700 (PDT)
+Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
+        (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+         key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
+        (No client certificate requested)
+        by smtp-out2.suse.de (Postfix) with ESMTPS id 6BB541FDAF;
+        Fri,  2 Jun 2023 12:12:54 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
+        t=1685707974; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+         mime-version:mime-version:content-type:content-type:
+         in-reply-to:in-reply-to:references:references;
+        bh=IYIAHDMmiE1O2mmuQzkbbS+OyPQbKM3RtLGdWxOhflM=;
+        b=Q2eEud1dHdWbj63hvUj5MzU8CalW7mrMzE9vcPOjV0+1F/XIjHZ50pui367Mfo9YonUctI
+        tjb6Gu2b6kGgWs71a4FkvP514KFY0Ar6T47AUegipQHRmiLdHouk47nRfWLUV2fV/a2OvP
+        G4lnykpWvWKfZ4xC52QzhNlNjufuWhw=
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
+        s=susede2_ed25519; t=1685707974;
+        h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+         mime-version:mime-version:content-type:content-type:
+         in-reply-to:in-reply-to:references:references;
+        bh=IYIAHDMmiE1O2mmuQzkbbS+OyPQbKM3RtLGdWxOhflM=;
+        b=MkLlk4wmkoBVTEe8h0gFyVSLfi4rRsD8rCOQ4sK9u4HIxyrPBflAV/TrZIVyNutOdJq1cE
+        Mo9RIN011FavmyDA==
+Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
+        (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+         key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
+        (No client certificate requested)
+        by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id 3434013A2E;
+        Fri,  2 Jun 2023 12:12:54 +0000 (UTC)
+Received: from dovecot-director2.suse.de ([192.168.254.65])
+        by imap2.suse-dmz.suse.de with ESMTPSA
+        id rpTKC8bceWTFEAAAMHmgww
+        (envelope-from <tzimmermann@suse.de>); Fri, 02 Jun 2023 12:12:54 +0000
+Message-ID: <8ea1e2e8-302c-5519-768b-fff0556269ae@suse.de>
+Date:   Fri, 2 Jun 2023 14:12:53 +0200
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (Windows NT 10.0; rv:102.0) Gecko/20100101
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
  Thunderbird/102.11.2
-Subject: Re: [PATCH v2 5/5] perf: arm_cspmu: ampere_cspmu: Add support for
- Ampere SoC PMU
-Content-Language: en-GB
-To:     Ilkka Koskinen <ilkka@os.amperecomputing.com>
-Cc:     Jonathan Corbet <corbet@lwn.net>, Will Deacon <will@kernel.org>,
-        Mark Rutland <mark.rutland@arm.com>,
-        Besar Wicaksono <bwicaksono@nvidia.com>,
-        Suzuki K Poulose <suzuki.poulose@arm.com>,
-        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
-        linux-arm-kernel@lists.infradead.org
-References: <20230601030144.3458136-1-ilkka@os.amperecomputing.com>
- <20230601030144.3458136-6-ilkka@os.amperecomputing.com>
- <e15f1773-e843-3bc3-f265-65524ea3385a@arm.com>
- <607a395b-b01f-33e1-c67d-d4bd4d92c3d@os.amperecomputing.com>
-From:   Robin Murphy <robin.murphy@arm.com>
-In-Reply-To: <607a395b-b01f-33e1-c67d-d4bd4d92c3d@os.amperecomputing.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-Spam-Status: No, score=-4.3 required=5.0 tests=BAYES_00,NICE_REPLY_A,
-        RCVD_IN_DNSWL_MED,SPF_HELO_NONE,SPF_NONE,T_SCC_BODY_TEXT_LINE
+Subject: Re: [PATCH] drm/todo: Fix corrupted duplicate in defio section
+To:     Geert Uytterhoeven <geert+renesas@glider.be>,
+        David Airlie <airlied@gmail.com>,
+        Daniel Vetter <daniel@ffwll.ch>,
+        Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+        Maxime Ripard <mripard@kernel.org>,
+        Jonathan Corbet <corbet@lwn.net>,
+        =?UTF-8?Q?Noralf_Tr=c3=b8nnes?= <noralf@tronnes.org>
+Cc:     dri-devel@lists.freedesktop.org, linux-doc@vger.kernel.org,
+        linux-kernel@vger.kernel.org
+References: <843fbc95dd5b067b64fa684204234b915ecf0304.1685705373.git.geert+renesas@glider.be>
+Content-Language: en-US
+From:   Thomas Zimmermann <tzimmermann@suse.de>
+In-Reply-To: <843fbc95dd5b067b64fa684204234b915ecf0304.1685705373.git.geert+renesas@glider.be>
+Content-Type: multipart/signed; micalg=pgp-sha256;
+ protocol="application/pgp-signature";
+ boundary="------------PDRo2NaZMTe6VE3xxJWI7t4S"
+X-Spam-Status: No, score=-4.5 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,NICE_REPLY_A,RCVD_IN_DNSWL_MED,
+        SPF_HELO_NONE,SPF_PASS,T_SCC_BODY_TEXT_LINE,URIBL_BLOCKED
         autolearn=ham autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
@@ -52,58 +78,76 @@ Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On 2023-06-02 08:13, Ilkka Koskinen wrote:
-> 
-> Hi Robin,
-> 
-> On Thu, 1 Jun 2023, Robin Murphy wrote:
->> On 2023-06-01 04:01, Ilkka Koskinen wrote:
->> [...]
->>> +static bool ampere_cspmu_validate_event(struct arm_cspmu *cspmu,
->>> +                    struct perf_event *new)
->>> +{
->>> +    struct perf_event *curr;
->>> +    unsigned int idx;
->>> +    u32 threshold = 0, rank = 0, bank = 0;
->>> +
->>> +    /* We compare the global filter settings to existing events */
->>> +    idx = find_first_bit(cspmu->hw_events.used_ctrs,
->>> +                 cspmu->cycle_counter_logical_idx);
->>> +
->>> +    /* This is the first event */
->>> +    if (idx == cspmu->cycle_counter_logical_idx)
->>> +        return true;
->>> +
->>> +    curr = cspmu->hw_events.events[idx];
->>> +
->>> +    if (get_filter_enable(new)) {
->>> +        threshold    = get_threshold(new);
->>> +        rank        = get_rank(new);
->>> +        bank        = get_bank(new);
->>> +    }
->>> +
->>> +    if (get_filter_enable(new) != get_filter_enable(curr) ||
->>
->> Is there any useful purpose in allowing the user to specify nonzero 
->> rank, bank or threshold values with filter_enable=0? Assuming not, 
->> then between this and ampere_cspmu_set_ev_filter() it appears that you 
->> don't need filter_enable at all.
-> 
-> Not really. I dropped filter_enable at one point but restored it later 
-> to match the smmuv3 pmu driver. I totally agree, it's unnecessary and 
-> it's better to remove it completely.
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--------------PDRo2NaZMTe6VE3xxJWI7t4S
+Content-Type: multipart/mixed; boundary="------------C80EVAhQvWk2LOVmMUaricJH";
+ protected-headers="v1"
+From: Thomas Zimmermann <tzimmermann@suse.de>
+To: Geert Uytterhoeven <geert+renesas@glider.be>,
+ David Airlie <airlied@gmail.com>, Daniel Vetter <daniel@ffwll.ch>,
+ Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+ Maxime Ripard <mripard@kernel.org>, Jonathan Corbet <corbet@lwn.net>,
+ =?UTF-8?Q?Noralf_Tr=c3=b8nnes?= <noralf@tronnes.org>
+Cc: dri-devel@lists.freedesktop.org, linux-doc@vger.kernel.org,
+ linux-kernel@vger.kernel.org
+Message-ID: <8ea1e2e8-302c-5519-768b-fff0556269ae@suse.de>
+Subject: Re: [PATCH] drm/todo: Fix corrupted duplicate in defio section
+References: <843fbc95dd5b067b64fa684204234b915ecf0304.1685705373.git.geert+renesas@glider.be>
+In-Reply-To: <843fbc95dd5b067b64fa684204234b915ecf0304.1685705373.git.geert+renesas@glider.be>
 
-Ah, I see - the SMMU PMCG driver needs that to differentiate between 
-"filter values defaulted to 0 because user didn't ask for filtering" and 
-"user asked to filter an exact match on StreamID 0", since it's 
-impractical to expect userspace tools to understand and manually set the 
-all-ones mask value to indicate that filtering wasn't requested. In your 
-case, though, since values of 0 appear to mean "no filter", it should 
-just work as expected without needing any additional complexity. Ideally 
-your interface should reflect the functionality and expected usage model 
-of your PMU hardware in the way that's most intuitive and helpful for 
-the user - it doesn't need to be influenced by other PMUs that work 
-differently.
+--------------C80EVAhQvWk2LOVmMUaricJH
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: base64
 
-Thanks,
-Robin.
+SGkNCg0KQW0gMDIuMDYuMjMgdW0gMTM6MzAgc2NocmllYiBHZWVydCBVeXR0ZXJob2V2ZW46
+DQo+IFBhcnQgb2YgdGhlIHBhcmFncmFwaCB3YXMgYWNjaWRlbnRhbGx5IGR1cGxpY2F0ZWQu
+DQoNClRoaXMgVE9ETyBpdGVtIGlzIG1vc3RseSBvYnNvbGV0ZS4gSXQgc2hvdWxkIGJlIHJl
+bW92ZWQuDQoNCkJlc3QgcmVnYXJkcw0KVGhvbWFzDQoNCj4gDQo+IEZpeGVzOiBiZTVjYWRj
+N2U3YjRjZWU4ICgiZHJtL3RvZG86IEJldHRlciBkZWZpbyBzdXBwb3J0IGluIHRoZSBnZW5l
+cmljIGZiZGV2IGVtdWxhdGlvbiIpDQo+IFNpZ25lZC1vZmYtYnk6IEdlZXJ0IFV5dHRlcmhv
+ZXZlbiA8Z2VlcnQrcmVuZXNhc0BnbGlkZXIuYmU+DQo+IC0tLQ0KPiAgIERvY3VtZW50YXRp
+b24vZ3B1L3RvZG8ucnN0IHwgMyArLS0NCj4gICAxIGZpbGUgY2hhbmdlZCwgMSBpbnNlcnRp
+b24oKyksIDIgZGVsZXRpb25zKC0pDQo+IA0KPiBkaWZmIC0tZ2l0IGEvRG9jdW1lbnRhdGlv
+bi9ncHUvdG9kby5yc3QgYi9Eb2N1bWVudGF0aW9uL2dwdS90b2RvLnJzdA0KPiBpbmRleCA2
+NjczNmRiMDBlNmQxODJkLi5jMjVlM2NkYmU5NjQ5NjdhIDEwMDY0NA0KPiAtLS0gYS9Eb2N1
+bWVudGF0aW9uL2dwdS90b2RvLnJzdA0KPiArKysgYi9Eb2N1bWVudGF0aW9uL2dwdS90b2Rv
+LnJzdA0KPiBAQCAtMzEyLDggKzMxMiw3IEBAIGV2ZXJ5dGhpbmcgYWZ0ZXIgaXQgaGFzIGRv
+bmUgdGhlIHdyaXRlLXByb3RlY3QvbWt3cml0ZSB0cmlja2VyeToNCj4gICANCj4gICAtIFNl
+dCB0aGUgbWt3cml0ZSBhbmQgZnN5bmMgY2FsbGJhY2tzIHdpdGggc2ltaWxhciBpbXBsZW1l
+bnRpb25zIHRvIHRoZSBjb3JlDQo+ICAgICBmYmRldiBkZWZpbyBzdHVmZi4gVGhlc2Ugc2hv
+dWxkIGFsbCB3b3JrIG9uIHBsYWluIHB0ZXMsIHRoZXkgZG9uJ3QgYWN0dWFsbHkNCj4gLSAg
+cmVxdWlyZSBhIHN0cnVjdCBwYWdlLiAgdWZmLiBUaGVzZSBzaG91bGQgYWxsIHdvcmsgb24g
+cGxhaW4gcHRlcywgdGhleSBkb24ndA0KPiAtICBhY3R1YWxseSByZXF1aXJlIGEgc3RydWN0
+IHBhZ2UuDQo+ICsgIHJlcXVpcmUgYSBzdHJ1Y3QgcGFnZS4NCj4gICANCj4gICAtIFRyYWNr
+IHRoZSBkaXJ0eSBwYWdlcyBpbiBhIHNlcGFyYXRlIHN0cnVjdHVyZSAoYml0ZmllbGQgd2l0
+aCBvbmUgYml0IHBlciBwYWdlDQo+ICAgICBzaG91bGQgd29yaykgdG8gYXZvaWQgY2xvYmJl
+cmluZyBzdHJ1Y3QgcGFnZS4NCg0KLS0gDQpUaG9tYXMgWmltbWVybWFubg0KR3JhcGhpY3Mg
+RHJpdmVyIERldmVsb3Blcg0KU1VTRSBTb2Z0d2FyZSBTb2x1dGlvbnMgR2VybWFueSBHbWJI
+DQpGcmFua2Vuc3RyYXNzZSAxNDYsIDkwNDYxIE51ZXJuYmVyZywgR2VybWFueQ0KR0Y6IEl2
+byBUb3RldiwgQW5kcmV3IE15ZXJzLCBBbmRyZXcgTWNEb25hbGQsIEJvdWRpZW4gTW9lcm1h
+bg0KSFJCIDM2ODA5IChBRyBOdWVybmJlcmcpDQo=
+
+--------------C80EVAhQvWk2LOVmMUaricJH--
+
+--------------PDRo2NaZMTe6VE3xxJWI7t4S
+Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="OpenPGP_signature"
+
+-----BEGIN PGP SIGNATURE-----
+
+wsF5BAABCAAjFiEExndm/fpuMUdwYFFolh/E3EQov+AFAmR53MUFAwAAAAAACgkQlh/E3EQov+Dq
+gA/8CCMHTbViNZPBj3aMrnXkmOc7HjdmhyxLvianCpjfD0p8fKekc/GNa1+dA1hQyb9rwxhKFPaQ
+ROfU0ih0Xoe2ZuGEM8EtFzf5gT+2gvkAGivQ4LKHfmvowovz0VBNaQXIJc2UTTsoB9T/51DFeQNo
+cWJt5YznGLUrGCxbXOW61ei6B9naHNO1x/SLJYdAY15O48DEa/PypyBO00BoMy2HbMFJzxxPqPHJ
+Iq86BnhJ4Hcn9jKOw2ne/XpTNNW9WWuYkgT6rZF3B1/EG63lHw/jbmaMX+N0gZXJZeQnm3AW8jPn
+pXlzoLbdfnq62zPUe2nLr2kz5vjyN73yWFjA4V3S8hAWkf9cy0VakLr63If7W+APfeR1ilgyKVcC
+GWBP99+MBUs9YtSb1Idfi/Hp9czq8w68gvdhKhb+z7XrdGjr0hyfdS+ZHvjznyxemb69gOm+cjLY
+yq9HWmLVemRJfVu2VAS7pl2HGjrae1OGAqvkLxX5Np4zawkwi9LMu618IF1CwjXHhpMxD6vPg7Ne
+FQTBoOYvHzZcjmsPF/S4YPpJqxDogsf3yQv97iKdL9LtEsv/0gQ2veNF09EdyT2HoJ6GTjxy14jM
+qG78v0BDSUpikt+Ht87zGpv3MWohh2ub8hov+c4UzISAr7BqW9Skq0JegyaNc/GP4mYA7SG4IxKu
+PdM=
+=Vmu/
+-----END PGP SIGNATURE-----
+
+--------------PDRo2NaZMTe6VE3xxJWI7t4S--
