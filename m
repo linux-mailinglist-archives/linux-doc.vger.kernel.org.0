@@ -2,91 +2,150 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 2145B720571
-	for <lists+linux-doc@lfdr.de>; Fri,  2 Jun 2023 17:08:47 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 609B172059E
+	for <lists+linux-doc@lfdr.de>; Fri,  2 Jun 2023 17:11:56 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S236379AbjFBPIp (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Fri, 2 Jun 2023 11:08:45 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:58146 "EHLO
+        id S236536AbjFBPLx (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Fri, 2 Jun 2023 11:11:53 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:60878 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S236399AbjFBPIm (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Fri, 2 Jun 2023 11:08:42 -0400
-Received: from mga11.intel.com (mga11.intel.com [192.55.52.93])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id A43D2E5F;
-        Fri,  2 Jun 2023 08:08:38 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1685718518; x=1717254518;
-  h=date:from:to:cc:subject:message-id:references:
-   mime-version:in-reply-to;
-  bh=sOg+e66aWxQVMH2SnS4c8kmK+t/T96W9yihpb4WFeM4=;
-  b=Wug9L8JeAOebSm8bE9NXNeQBVVwY1zwQlRyLwoWXeRCIPhfz8hpF4GPl
-   jPeBCRpODWk+W59mfI9FYizx30i6DUSecqhbPZfpNTfwLhda4tRvFNnj/
-   o9MAGfjk3J3cuEmhmPDq9PCd98dcPVxeV2FH8JBBlg/z5GRTRK2uCNsZ7
-   x5rzNXkmvBhDmmi6CsrzD7LdL+YF3TmJAoQuLcGU2JtzRZuxC/cVGaD+r
-   1I/qAeRjXaEV8pwMScOULduvcm41Ff4UuK7jQWvV4GAKalH9tNqH6Bq16
-   7lFz9nJjVK9RNeNWZDLySO60OMe/2GT0fLykUH1Ji+/8qmjDPUxSIGY1J
-   Q==;
-X-IronPort-AV: E=McAfee;i="6600,9927,10729"; a="353384526"
-X-IronPort-AV: E=Sophos;i="6.00,213,1681196400"; 
-   d="scan'208";a="353384526"
-Received: from fmsmga008.fm.intel.com ([10.253.24.58])
-  by fmsmga102.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 02 Jun 2023 08:07:01 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=McAfee;i="6600,9927,10729"; a="772910503"
-X-IronPort-AV: E=Sophos;i="6.00,213,1681196400"; 
-   d="scan'208";a="772910503"
-Received: from smile.fi.intel.com ([10.237.72.54])
-  by fmsmga008.fm.intel.com with ESMTP; 02 Jun 2023 08:06:58 -0700
-Received: from andy by smile.fi.intel.com with local (Exim 4.96)
-        (envelope-from <andriy.shevchenko@linux.intel.com>)
-        id 1q56Mh-000fcK-2s;
-        Fri, 02 Jun 2023 18:06:55 +0300
-Date:   Fri, 2 Jun 2023 18:06:55 +0300
-From:   Andy Shevchenko <andriy.shevchenko@linux.intel.com>
-To:     Linus Walleij <linus.walleij@linaro.org>,
-        Arnd Bergmann <arnd@arndb.de>, linux-gpio@vger.kernel.org,
-        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
-        linux-doc-tw-discuss@lists.sourceforge.net,
-        linux-m68k@lists.linux-m68k.org, linux-mips@vger.kernel.org
-Cc:     Bartosz Golaszewski <brgl@bgdev.pl>,
-        Jonathan Corbet <corbet@lwn.net>, Alex Shi <alexs@kernel.org>,
-        Yanteng Si <siyanteng@loongson.cn>,
-        Hu Haowen <src.res@email.cn>,
-        Geert Uytterhoeven <geert@linux-m68k.org>,
-        Thomas Bogendoerfer <tsbogend@alpha.franken.de>
-Subject: Re: [PATCH v1 1/1] gpiolib: Remove unused gpio_cansleep()
-Message-ID: <ZHoFj1NSftx8iS3y@smile.fi.intel.com>
-References: <20230602150106.47783-1-andriy.shevchenko@linux.intel.com>
-MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20230602150106.47783-1-andriy.shevchenko@linux.intel.com>
-Organization: Intel Finland Oy - BIC 0357606-4 - Westendinkatu 7, 02160 Espoo
-X-Spam-Status: No, score=-4.5 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_EF,RCVD_IN_DNSWL_MED,SPF_HELO_NONE,
-        SPF_NONE,T_SCC_BODY_TEXT_LINE,URIBL_BLOCKED autolearn=unavailable
-        autolearn_force=no version=3.4.6
+        with ESMTP id S236510AbjFBPLp (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Fri, 2 Jun 2023 11:11:45 -0400
+Received: from mail-pl1-x630.google.com (mail-pl1-x630.google.com [IPv6:2607:f8b0:4864:20::630])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 2A774E43
+        for <linux-doc@vger.kernel.org>; Fri,  2 Jun 2023 08:11:19 -0700 (PDT)
+Received: by mail-pl1-x630.google.com with SMTP id d9443c01a7336-1b021cddb74so11093485ad.0
+        for <linux-doc@vger.kernel.org>; Fri, 02 Jun 2023 08:11:19 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=dabbelt-com.20221208.gappssmtp.com; s=20221208; t=1685718665; x=1688310665;
+        h=content-transfer-encoding:mime-version:message-id:to:from:cc
+         :in-reply-to:subject:date:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=fg/hT1sAjEd8rIup2CN/upwAvrKBrR2pDnfw7PopqQs=;
+        b=hzC+VK1jGbXhgWkUL0OeOG1AJqJbOX3K5gyj68YKEVb25v+GV//e4fuQzpeld+sA8O
+         2WdHnDWRmeXmx6geUq25Vqxa42Hwlwqdf2d3i39t0QDaQut+gvISpWJtIZYz6ATNTV4J
+         1QgEA/SczaV3YNFw9abTToLwu9ommsI9VhXE9xT7mkCTEttc+N0EQxPZMpDLxdvRsYj/
+         vigM1fvZ6FnHiCjG/KwbRAMRDaIrv/Z/FRrNAxXbI5k0K/HQDFft3bQe5wCk1Fv5vZNL
+         qf3LvjUpS8LXDQb0jauHzcz/lrdIold+VYUYF2cO5H6ly0TtjlRd8yC6CMLl3XKwdH1F
+         m3Rg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20221208; t=1685718665; x=1688310665;
+        h=content-transfer-encoding:mime-version:message-id:to:from:cc
+         :in-reply-to:subject:date:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=fg/hT1sAjEd8rIup2CN/upwAvrKBrR2pDnfw7PopqQs=;
+        b=fCh7xFPlyy/yNmbaOy0pW3eUA95IdYBs0tc/j/jWc+PEW6VyNWidjUGALa/otQd9jC
+         YssZS394loKFUmfgAFDizIU9cs7kZ+7kOQzqaf2v0hloxtERGKZF4fUL2HqqVG7YzZky
+         zj45SRQaBKOZ0aEEL4Fn/MWMTc4xdaEDDeLxM47HInhxVAdvI79EH6gBiOMDcXPs6inP
+         KvjQHxM509UHrDp8D9leUhHGdmi6FVkHsJ3KgsOFN7Qc1YFRyvNGj/m69i1d/c5X13Tc
+         V8YAqTzyqkrGsSfAzgWoIZG3kb30AlBC9UF2Sc8ABwPpSs9XzCrDdfTfgeIbULcx+Nq+
+         GhVg==
+X-Gm-Message-State: AC+VfDwRn8g1tub5uoBpqj6RZE+uRi4BEKFEGuI96v11Pxr6132MXbBS
+        ftC96/R2N7H8trpzb5nx2+5sFH4Q8NKVBwXdoDo=
+X-Google-Smtp-Source: ACHHUZ4iv27hx94ZjANRzx1oNWxLXW5Ls2Q/boifCy7lcHk8Olifk19LX70BLLdSoojjPpYWMlRiwQ==
+X-Received: by 2002:a17:902:cec9:b0:1a9:8d57:6d6c with SMTP id d9-20020a170902cec900b001a98d576d6cmr254164plg.24.1685718665293;
+        Fri, 02 Jun 2023 08:11:05 -0700 (PDT)
+Received: from localhost ([135.180.227.0])
+        by smtp.gmail.com with ESMTPSA id d12-20020a170902654c00b001b03cda6389sm1520434pln.10.2023.06.02.08.11.04
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Fri, 02 Jun 2023 08:11:04 -0700 (PDT)
+Date:   Fri, 02 Jun 2023 08:11:04 -0700 (PDT)
+X-Google-Original-Date: Fri, 02 Jun 2023 08:10:51 PDT (-0700)
+Subject:     Re: (subset) [PATCH V6 00/21] Add basic ACPI support for RISC-V
+In-Reply-To: <168571787727.17224.6663458864222960682.b4-ty@rivosinc.com>
+CC:     linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
+        linux-riscv@lists.infradead.org, linux-acpi@vger.kernel.org,
+        linux-crypto@vger.kernel.org, platform-driver-x86@vger.kernel.org,
+        llvm@lists.linux.dev, corbet@lwn.net,
+        Paul Walmsley <paul.walmsley@sifive.com>,
+        aou@eecs.berkeley.edu, rafael@kernel.org, lenb@kernel.org,
+        daniel.lezcano@linaro.org, tglx@linutronix.de,
+        qianweili@huawei.com, wangzhou1@hisilicon.com,
+        herbert@gondor.apana.org.au, davem@davemloft.net,
+        Marc Zyngier <maz@kernel.org>, luzmaximilian@gmail.com,
+        hdegoede@redhat.com, markgross@kernel.org, nathan@kernel.org,
+        ndesaulniers@google.com, trix@redhat.com
+From:   Palmer Dabbelt <palmer@dabbelt.com>
+To:     sunilvl@ventanamicro.com, Bjorn Topel <bjorn@rivosinc.com>,
+        Conor Dooley <conor@kernel.org>
+Message-ID: <mhng-4fad860f-b5ff-4dc1-968e-219be1983acd@palmer-ri-x1c9>
+Mime-Version: 1.0 (MHng)
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+        DKIM_VALID,RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,SPF_PASS,
+        T_SCC_BODY_TEXT_LINE autolearn=unavailable autolearn_force=no
+        version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Fri, Jun 02, 2023 at 06:01:06PM +0300, Andy Shevchenko wrote:
-> There is not a single user in the entire kernel of this deprecated API,
-> kill it for good.
+On Fri, 02 Jun 2023 07:57:57 PDT (-0700), Palmer Dabbelt wrote:
+>
+> On Mon, 15 May 2023 11:19:07 +0530, Sunil V L wrote:
+>> This patch series enables the basic ACPI infrastructure for RISC-V.
+>> Supporting external interrupt controllers is in progress and hence it is
+>> tested using poll based HVC SBI console and RAM disk.
+>>
+>> The first patch in this series is one of the patch from Jisheng's
+>> series [1] which is not merged yet. This patch is required to support
+>> ACPI since efi_init() which gets called before sbi_init() can enable
+>> static branches and hits a panic.
+>>
+>> [...]
+>
+> Applied, thanks!
+>
+> [01/21] riscv: move sbi_init() earlier before jump_label_init()
+>         https://git.kernel.org/palmer/c/24fc18087f42
+> [02/21] platform/surface: Disable for RISC-V
+>         https://git.kernel.org/palmer/c/7f2e20459b28
+> [03/21] crypto: hisilicon/qm: Fix to enable build with RISC-V clang
+>         https://git.kernel.org/palmer/c/fbb995a7b27c
+> [04/21] ACPI: tables: Print RINTC information when MADT is parsed
+>         https://git.kernel.org/palmer/c/4d02d88d2b92
+> [05/21] ACPI: OSL: Make should_use_kmap() 0 for RISC-V
+>         https://git.kernel.org/palmer/c/214c236223b8
+> [06/21] RISC-V: Add support to build the ACPI core
+>         https://git.kernel.org/palmer/c/a91a9ffbd3a5
+> [07/21] ACPI: processor_core: RISC-V: Enable mapping processor to the hartid
+>         https://git.kernel.org/palmer/c/8b7809e28952
+> [08/21] RISC-V: Add ACPI initialization in setup_arch()
+>         https://git.kernel.org/palmer/c/724f4c0df766
+> [09/21] RISC-V: ACPI: Cache and retrieve the RINTC structure
+>         https://git.kernel.org/palmer/c/f99561199470
+> [10/21] drivers/acpi: RISC-V: Add RHCT related code
+>         https://git.kernel.org/palmer/c/e6b9d8eddb17
+> [11/21] RISC-V: smpboot: Create wrapper setup_smp()
+>         https://git.kernel.org/palmer/c/61946127ab49
+> [12/21] RISC-V: smpboot: Add ACPI support in setup_smp()
+>         https://git.kernel.org/palmer/c/ce92546cd637
+> [13/21] RISC-V: only iterate over possible CPUs in ISA string parser
+>         https://git.kernel.org/palmer/c/914d6f44fc50
+> [14/21] RISC-V: cpufeature: Add ACPI support in riscv_fill_hwcap()
+>         https://git.kernel.org/palmer/c/396c018332a1
+> [15/21] RISC-V: cpu: Enable cpuinfo for ACPI systems
+>         https://git.kernel.org/palmer/c/0b144c818989
+> [16/21] irqchip/riscv-intc: Add ACPI support
+>         https://git.kernel.org/palmer/c/7023b9d83f03
+> [17/21] clocksource/timer-riscv: Refactor riscv_timer_init_dt()
+>         https://git.kernel.org/palmer/c/cd12d206685a
+> [18/21] clocksource/timer-riscv: Add ACPI support
+>         https://git.kernel.org/palmer/c/21f4f92410dc
+> [19/21] RISC-V: time.c: Add ACPI support for time_init()
+>         https://git.kernel.org/palmer/c/714aa1d1c8ca
+> [20/21] RISC-V: Enable ACPI in defconfig
+>         https://git.kernel.org/palmer/c/0b8e15ca0082
 
-...
+I applied the MAINTAINERS entry too, it just had a conflict and it looks 
+like my attempt at juggling it didn't play nice with the thanks message.  
+Everything's on top of rc1 because that's what my for-next is based on.
 
->  .../translations/zh_CN/driver-api/gpio/legacy.rst  | 14 +++-----------
->  Documentation/translations/zh_TW/gpio.txt          | 14 +++-----------
+I also don't yet have any testing for the ACPI stuff, but hopefully I'll 
+get around to adding some.  We should probably add it to the patchwwork 
+CI as well.
 
-There are Chinese speaking people in Cc, if I'm not mistaken, can you, please,
-check the respective translation fixes?
-
--- 
-With Best Regards,
-Andy Shevchenko
-
-
+>
+> Best regards,
