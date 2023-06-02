@@ -2,77 +2,87 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 86516720AB1
-	for <lists+linux-doc@lfdr.de>; Fri,  2 Jun 2023 23:00:30 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 81260720B07
+	for <lists+linux-doc@lfdr.de>; Fri,  2 Jun 2023 23:36:20 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S236373AbjFBVA3 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Fri, 2 Jun 2023 17:00:29 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:34314 "EHLO
+        id S236003AbjFBVgS (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Fri, 2 Jun 2023 17:36:18 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:43310 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S235923AbjFBVA3 (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Fri, 2 Jun 2023 17:00:29 -0400
-Received: from sipsolutions.net (s3.sipsolutions.net [IPv6:2a01:4f8:191:4433::2])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id B8628E44;
-        Fri,  2 Jun 2023 14:00:26 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-        d=sipsolutions.net; s=mail; h=Content-Transfer-Encoding:MIME-Version:
-        References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Content-Type:Sender
-        :Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:Resent-To:
-        Resent-Cc:Resent-Message-ID; bh=tML0IzPFBtLerBMNlD1/rTkDJlPPcitapvPwY9vPC0M=;
-        t=1685739626; x=1686949226; b=j2Q4K5+PW784UIb9ZDlEGWKuXq5F8nfShe0nNeOI1Qhj8Ks
-        RWySFDZHTmK49Mtsr30Ghp6UJlbbq0wW8xo2PGDKJWeycREsadmODk7IZwkXIfLYkUl4Mcpm/Y/PG
-        9mOTkxJvqrMG+vij1jadhc/8P0nQSYc2xjTu1eTCpdTnfay/GzlTuUBcvqehiiqAuHP6wao8K2nrL
-        /u6LReRqJ6kSnuAP0HDemNT1t6H+6dmrfujbDJgm7JEQwbTUZbSZskdmjRkvSBye4/SawDA6WQcOw
-        FVduz9dk8BnN3KnjCUbEnGF0+ljAvfeukcoZnVUyaJRjNChCr4IPjQsfOopZctEg==;
-Received: by sipsolutions.net with esmtpsa (TLS1.3:ECDHE_X25519__RSA_PSS_RSAE_SHA256__AES_256_GCM:256)
-        (Exim 4.96)
-        (envelope-from <johannes@sipsolutions.net>)
-        id 1q5Bsk-00BgEs-2o;
-        Fri, 02 Jun 2023 23:00:22 +0200
-From:   Johannes Berg <johannes@sipsolutions.net>
-To:     linux-kernel@vger.kernel.org
-Cc:     linux-kbuild@vger.kernel.org, linux-doc@vger.kernel.org,
-        Johannes Berg <johannes.berg@intel.com>
-Subject: [PATCH 2/2] kbuild: enable kernel-doc -Wall for W=2
-Date:   Fri,  2 Jun 2023 23:00:14 +0200
-Message-Id: <20230602230014.ca0aede8195f.Ibd08cad396b630b68d93b2469905ad55b375af65@changeid>
-X-Mailer: git-send-email 2.40.1
-In-Reply-To: <20230602230014.a435aab03cee.I21ab3b54eeebd638676bead3b2f87417944e44f3@changeid>
-References: <20230602230014.a435aab03cee.I21ab3b54eeebd638676bead3b2f87417944e44f3@changeid>
+        with ESMTP id S235681AbjFBVgR (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Fri, 2 Jun 2023 17:36:17 -0400
+Received: from mail-qt1-x82a.google.com (mail-qt1-x82a.google.com [IPv6:2607:f8b0:4864:20::82a])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 74B62E44
+        for <linux-doc@vger.kernel.org>; Fri,  2 Jun 2023 14:36:16 -0700 (PDT)
+Received: by mail-qt1-x82a.google.com with SMTP id d75a77b69052e-3f6a6e9d90dso62671cf.0
+        for <linux-doc@vger.kernel.org>; Fri, 02 Jun 2023 14:36:16 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=google.com; s=20221208; t=1685741775; x=1688333775;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=5bXSdg68Nu6Ipeqx4DXmMogRTJ0wZKXtu+V3JAgD7Dw=;
+        b=4BEcihJjrkOc1hpBnt/rQMSN2szZBaDAd6GF0MhsvMk+8MnwM9znQsqD6iIwJJmdZn
+         SnbSmK5wDS4y+luDI9FyavyR8A2zz9Lv/Q79yoNpBYX1EFCDCVS3j/zC3/o5l3kYwiIS
+         ijr5iDY/p7ngfxCwVCFu8AiOK0AFoP9g5/YuyrDB9AqUcG+M9oFbylTw2rJ90VEAXu4/
+         PfE+TH6nzUsN8z/00c6+KYIs9Nb7XfcUmIFwhQOrP96I0G7IoUtlT7M/Mdojl5PxCHgR
+         bEF/F3e1m7wx5btFqjIxE+dFfqfGPVOZ3xoBRF3IT0R1ax+qIWLnLPLdUOBmCyhHlNsS
+         zhmA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20221208; t=1685741775; x=1688333775;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=5bXSdg68Nu6Ipeqx4DXmMogRTJ0wZKXtu+V3JAgD7Dw=;
+        b=flP3D03VEfXEtaKOnt5oFKuppNZp4SjJui+gK6T2V6EWbBv7V/mFTCBc/DeAneiv+r
+         lDoejqbNxnpC09+bkDnjOXM8z+GLwIcjQGztdkTT3j2liFJPtqkQxpEWw+4RNwNqH3vB
+         QPOlmlevQS1Wgr7OSGQtqM8bzhBrqBrkhZG0qdOpcMsOBddGLTlkTdejGztnkHinABrW
+         kancPabu/ANNlXLnLSbVDrABKWhxaEXP0C29ILEL+WoLw4+3P4uD9w5n96MXs2cTzJlX
+         K1qSxHhV7VgzJth/CcF9qyDH9HeKLgQigUQWUwHqut0KxPTQYUBuikTYh7fTkZ4+8q2t
+         lZAg==
+X-Gm-Message-State: AC+VfDxjY1XgzOkQNNYy2cdczoGhs18zCloRnjV8sXlEaBDDL0+eH38H
+        c8TyDP3KyNAF17AhXGmSEb1LFtMOf4mHyFJkihoGNg==
+X-Google-Smtp-Source: ACHHUZ6R/RbK0lgZOsIGD8lNiNYKFwpx2gVJ++04EbFp+o/7g575Bcx1tNgZa4IJRgsldJedUvcqUFCmY0Pk0wzhV2Y=
+X-Received: by 2002:a05:622a:11d3:b0:3f8:1f30:a1f2 with SMTP id
+ n19-20020a05622a11d300b003f81f30a1f2mr341117qtk.26.1685741775555; Fri, 02 Jun
+ 2023 14:36:15 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Spam-Status: No, score=-2.1 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,SPF_HELO_PASS,SPF_PASS,
-        T_SCC_BODY_TEXT_LINE,URIBL_BLOCKED autolearn=ham autolearn_force=no
-        version=3.4.6
+References: <20230602035400.2333527-1-davidgow@google.com>
+In-Reply-To: <20230602035400.2333527-1-davidgow@google.com>
+From:   Daniel Latypov <dlatypov@google.com>
+Date:   Fri, 2 Jun 2023 14:36:04 -0700
+Message-ID: <CAGS_qxqRStkLU9F-+P3TBUO29=CCXLuv=Ca0d-AXpVogYrOTpg@mail.gmail.com>
+Subject: Re: [PATCH] Documentation: kunit: Rename references to kunit_abort()
+To:     David Gow <davidgow@google.com>
+Cc:     Brendan Higgins <brendan.higgins@linux.dev>,
+        Shuah Khan <skhan@linuxfoundation.org>,
+        Rae Moar <rmoar@google.com>, Jonathan Corbet <corbet@lwn.net>,
+        linux-doc@vger.kernel.org, kunit-dev@googlegroups.com,
+        linux-kselftest@vger.kernel.org, linux-kernel@vger.kernel.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Spam-Status: No, score=-17.6 required=5.0 tests=BAYES_00,DKIMWL_WL_MED,
+        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,
+        ENV_AND_HDR_SPF_MATCH,RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,SPF_PASS,
+        T_SCC_BODY_TEXT_LINE,USER_IN_DEF_DKIM_WL,USER_IN_DEF_SPF_WL
+        autolearn=ham autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-From: Johannes Berg <johannes.berg@intel.com>
+On Thu, Jun 1, 2023 at 8:54=E2=80=AFPM David Gow <davidgow@google.com> wrot=
+e:
+>
+> The kunit_abort() function has been renamed __kunit_abort(), update the
+> references to it in the documentation.
+>
+> Suggested-by: Daniel Latypov <dlatypov@google.com>
+> Signed-off-by: David Gow <davidgow@google.com>
 
-For W=2, we can enable more kernel-doc warnings,
-such as missing return value descriptions etc.
+Reviewed-by: Daniel Latypov <dlatypov@google.com>
 
-Signed-off-by: Johannes Berg <johannes.berg@intel.com>
----
- scripts/Makefile.extrawarn | 1 +
- 1 file changed, 1 insertion(+)
-
-diff --git a/scripts/Makefile.extrawarn b/scripts/Makefile.extrawarn
-index 40cd13eca82e..d77eb2474a67 100644
---- a/scripts/Makefile.extrawarn
-+++ b/scripts/Makefile.extrawarn
-@@ -85,6 +85,7 @@ KBUILD_CFLAGS += $(call cc-option, -Wunused-macros)
- 
- KBUILD_CPPFLAGS += -DKBUILD_EXTRA_WARN2
- 
-+export KDOC_WALL=1
- endif
- 
- #
--- 
-2.40.1
-
+Thanks!
+Double checked that this was the only remaining reference and that
+this patch applied OK.
