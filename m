@@ -2,105 +2,76 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id A90C0721966
-	for <lists+linux-doc@lfdr.de>; Sun,  4 Jun 2023 21:06:55 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id BF52D721A6E
+	for <lists+linux-doc@lfdr.de>; Sun,  4 Jun 2023 23:54:04 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S231167AbjFDTGy (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Sun, 4 Jun 2023 15:06:54 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:44866 "EHLO
+        id S230140AbjFDVyC (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Sun, 4 Jun 2023 17:54:02 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:39302 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S231389AbjFDTGx (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Sun, 4 Jun 2023 15:06:53 -0400
-Received: from mail-pf1-x42a.google.com (mail-pf1-x42a.google.com [IPv6:2607:f8b0:4864:20::42a])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id A5217D2
-        for <linux-doc@vger.kernel.org>; Sun,  4 Jun 2023 12:06:48 -0700 (PDT)
-Received: by mail-pf1-x42a.google.com with SMTP id d2e1a72fcca58-65314ee05c6so1491480b3a.1
-        for <linux-doc@vger.kernel.org>; Sun, 04 Jun 2023 12:06:48 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20221208; t=1685905608; x=1688497608;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=iKFRG4sLddr5jyH4jgTyfJ4yjF3tqwuDIQl2XFzUyrU=;
-        b=oTCYkiFJvjVU0WBkJFOJvDisxaMyUDu3UoyebWveo08qPmVtDtkGfI1kXo4hONesQC
-         IHAAllpJsMZq2/6OBOs+CTH3nArhy1fq2sZRoLNmnK0/O5mQpmjxQ9b0Q8d2fQp0lS33
-         t2p/VvHC7kKk/alw/COviCugI8S6oT4k2eO7vApYOgGX2ew2vIebB+XMuZ/OGsP+bTlX
-         f7AgC0iBZJ3/4NA3ElZ+RtYa0STerMw+O//AWdm+Pb/vRLjuho9JIfOmgEo3cnoNnOeT
-         4C03ntM7QThZRfBJZv0Hf3Aqrceji1lYcAi0cJmZfhP4FVSx7nPlg7QZTwoxhAojLyHY
-         FBdw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1685905608; x=1688497608;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=iKFRG4sLddr5jyH4jgTyfJ4yjF3tqwuDIQl2XFzUyrU=;
-        b=MYDV7zS0l81jAtwzPWTBNeqoKeBhuRgaw+PVTfYsh4dasl8ii4lxQWFSCOhNRZfHjL
-         kMg/aQBWuYDRKEnNsUpmkHVt9NiWmOt/f2SQpKZ9+vh7xhGQknDZ0ZAsl2EvUFQWpiy9
-         Bz3k8VUuV7/O0uyOJWo7DtkOk7CHRO4lD1NVvmn4nutxC5lhrfR1C4m1MIqqGx96Jpt/
-         R6Y0aJndqoWBDYeERiMHADPR5m2xMbUKSR5Wta7xx98Msnmu+NHRYGeYGIGoP1g4nNQ1
-         apoHvD3Kq25bs3pZWz1ju0Nd641q/H5gnKU6AYeXgX8rpNLcH55Epl/EjNhDU+72QK9V
-         CXfw==
-X-Gm-Message-State: AC+VfDzVp6hk9NNtoBd+7SGyMHHZlDXObF0Eqbm0YmaAG1xxWyBF5Dl4
-        Yrh5fPtxrhxmDx/rccGp8Lk=
-X-Google-Smtp-Source: ACHHUZ7cDgIjV0oILt0pZVD+r4aDxwUFJD0QMvse+QGJquJ/eroO8Pk1b3XFDfgRAeWKntRV/xdXLA==
-X-Received: by 2002:a05:6a20:1450:b0:110:9b0b:71ab with SMTP id a16-20020a056a20145000b001109b0b71abmr2574568pzi.40.1685905607854;
-        Sun, 04 Jun 2023 12:06:47 -0700 (PDT)
-Received: from localhost.localdomain ([76.132.108.20])
-        by smtp.gmail.com with ESMTPSA id m8-20020a170902db0800b001a6ed2d0ef8sm4979072plx.273.2023.06.04.12.06.47
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 04 Jun 2023 12:06:47 -0700 (PDT)
-From:   Russell Harmon <eatnumber1@gmail.com>
-To:     bagasdotme@gmail.com
-Cc:     mpatocka@redhat.com, snitzer@redhat.com, dm-devel@redhat.com,
-        linux-doc@vger.kernel.org, Russell Harmon <eatnumber1@gmail.com>
-Subject: [PATCH v3 4/4] Document an example of how the tunables relate in dm-integrity.
-Date:   Sun,  4 Jun 2023 12:06:04 -0700
-Message-Id: <20230604190604.4800-5-eatnumber1@gmail.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20230604190604.4800-1-eatnumber1@gmail.com>
-References: <CA+zrezTegR8jHQA3MNM6WnfFU_RP4=fiCuk6WgwJZsjZ2PYUSw@mail.gmail.com>
- <20230604190604.4800-1-eatnumber1@gmail.com>
+        with ESMTP id S229680AbjFDVyC (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Sun, 4 Jun 2023 17:54:02 -0400
+Received: from bombadil.infradead.org (bombadil.infradead.org [IPv6:2607:7c80:54:3::133])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 90A96A6;
+        Sun,  4 Jun 2023 14:54:01 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+        d=infradead.org; s=bombadil.20210309; h=Content-Transfer-Encoding:
+        Content-Type:In-Reply-To:From:References:Cc:To:Subject:MIME-Version:Date:
+        Message-ID:Sender:Reply-To:Content-ID:Content-Description;
+        bh=v0kdGZEJ992DG/hu03jxO4B41LPgZK2Zh/+I1NymOz8=; b=StVZgoVqk+aDAbbYXo2UwJfXqt
+        zpDTma/LeYDNQzzQGXslI5cjWRKp46gMnKqxo0I6A2dKepC+ZZ+yocTHLN/ArShm5pzF0ooftDjqa
+        W7xmE3F6+HQ8QH0OXCqLSHvJZN9qNseWPG4xNWt+psn1qYFEF6kmfhCBJekiKzcT1a6zVPpLM454a
+        zJ+Ijsr72HcMVdXvA2BnW8zkXqzy1fR2vkDfGdiA+MQwrsI8aQFQvvKKlHnvv0tdZQUgTSvXgtLtL
+        zFK3v3YJy5fhDSauNqAychPOEsSQ7emejhN5T+abmccWtGN+qNMRolyrrLtGhptx0HtQWT+0aY31J
+        PmRkM/iw==;
+Received: from [2601:1c2:980:9ec0::2764]
+        by bombadil.infradead.org with esmtpsa (Exim 4.96 #2 (Red Hat Linux))
+        id 1q5vfi-00DFcq-1b;
+        Sun, 04 Jun 2023 21:53:58 +0000
+Message-ID: <e8a932aa-25ad-65a5-913b-5d940be51218@infradead.org>
+Date:   Sun, 4 Jun 2023 14:53:56 -0700
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_ENVFROM_END_DIGIT,
-        FREEMAIL_FROM,RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,SPF_PASS,
-        T_SCC_BODY_TEXT_LINE autolearn=ham autolearn_force=no version=3.4.6
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.11.2
+Subject: Re: [RFC] docs: process: Send patches 'To' maintainers and 'Cc' lists
+To:     Bagas Sanjaya <bagasdotme@gmail.com>, James Seo <james@equiv.tech>,
+        Jonathan Corbet <corbet@lwn.net>
+Cc:     Kalle Valo <kvalo@kernel.org>, workflows@vger.kernel.org,
+        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org
+References: <20230603151447.29288-1-james@equiv.tech>
+ <10e68064-42a3-c80e-10cc-079a3cf4eb35@gmail.com>
+Content-Language: en-US
+From:   Randy Dunlap <rdunlap@infradead.org>
+In-Reply-To: <10e68064-42a3-c80e-10cc-079a3cf4eb35@gmail.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-Spam-Status: No, score=-4.5 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,NICE_REPLY_A,RCVD_IN_DNSWL_MED,
+        SPF_HELO_NONE,SPF_NONE,T_SCC_BODY_TEXT_LINE autolearn=ham
+        autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-For example, on a device using the default interleave_sectors of 32768, a
-block_size of 512, and an internal_hash of crc32c with a tag size of 4
-bytes, it will take 128 KiB of tags to track a full data area, requiring
-256 sectors of metadata per data area. With the default buffer_sectors of
-128, that means there will be 2 buffers per metadata area, or 2 buffers
-per 16 MiB of data.
 
-Signed-off-by: Russell Harmon <eatnumber1@gmail.com>
----
- Documentation/admin-guide/device-mapper/dm-integrity.rst | 6 ++++++
- 1 file changed, 6 insertions(+)
 
-diff --git a/Documentation/admin-guide/device-mapper/dm-integrity.rst b/Documentation/admin-guide/device-mapper/dm-integrity.rst
-index 0241457c0027..d8a5f14d0e3c 100644
---- a/Documentation/admin-guide/device-mapper/dm-integrity.rst
-+++ b/Documentation/admin-guide/device-mapper/dm-integrity.rst
-@@ -213,6 +213,12 @@ table and swap the tables with suspend and resume). The other arguments
- should not be changed when reloading the target because the layout of disk
- data depend on them and the reloaded target would be non-functional.
- 
-+For example, on a device using the default interleave_sectors of 32768, a
-+block_size of 512, and an internal_hash of crc32c with a tag size of 4
-+bytes, it will take 128 KiB of tags to track a full data area, requiring
-+256 sectors of metadata per data area. With the default buffer_sectors of
-+128, that means there will be 2 buffers per metadata area, or 2 buffers
-+per 16 MiB of data.
- 
- Status line:
- 
+On 6/4/23 07:01, Bagas Sanjaya wrote:
+> On 6/3/23 22:14, James Seo wrote:
+>> To reduce ambiguity and eliminate this class of potential (albeit
+>> tangential) issues, prescribe sending patches 'To' maintainers and
+>> 'Cc' lists. While we're at it, strengthen the recommendation to use
+>> scripts/get_maintainer.pl to find patch recipients, and move Andrew
+>> Morton's callout as the maintainer of last resort to the next
+>> paragraph for better flow.
+>>
+> 
+> IMO, To: and Cc: don't have any practical differences between two,
+> and I usually do vice-versa when sending patches: lists are in To:
+> and individual maintainers are in Cc:
+
+Ack all of that.
+
 -- 
-2.34.1
-
+~Randy
