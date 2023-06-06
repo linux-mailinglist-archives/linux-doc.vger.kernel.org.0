@@ -2,152 +2,99 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 206D7724FE2
-	for <lists+linux-doc@lfdr.de>; Wed,  7 Jun 2023 00:34:18 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 0BC3D7250EE
+	for <lists+linux-doc@lfdr.de>; Wed,  7 Jun 2023 01:54:53 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S240056AbjFFWeP (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 6 Jun 2023 18:34:15 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:59332 "EHLO
+        id S234604AbjFFXys (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 6 Jun 2023 19:54:48 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:36110 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S240030AbjFFWdg (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 6 Jun 2023 18:33:36 -0400
-Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.133.124])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id A9B4419AD
-        for <linux-doc@vger.kernel.org>; Tue,  6 Jun 2023 15:32:42 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-        s=mimecast20190719; t=1686090761;
-        h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-         to:to:cc:cc:mime-version:mime-version:
-         content-transfer-encoding:content-transfer-encoding:
-         in-reply-to:in-reply-to:references:references;
-        bh=a7jCgjA/GeF+vfePBjhGpS1KJtr0QbtMbF11c3DSw0c=;
-        b=K4DzI+iFI82Qme43PPXajcn2iQjI1mV/FOIJ/50u4YTneUlnAcVcnOMow9oARWR/bYe35U
-        sQJt3djJ2Enu2QORBkJfkmnFDkJ1a7AwzSz+KzPYWZA2GPBvFjuGcWTHAsIUN9Wu6KAUG0
-        9hpZ0gdjURuebOF4uaPDohNkI64XoP8=
-Received: from mail-ej1-f72.google.com (mail-ej1-f72.google.com
- [209.85.218.72]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-668-q1aTwG6tPLykFjIbaTI61g-1; Tue, 06 Jun 2023 18:32:40 -0400
-X-MC-Unique: q1aTwG6tPLykFjIbaTI61g-1
-Received: by mail-ej1-f72.google.com with SMTP id a640c23a62f3a-94f7a2b21fdso595692766b.2
-        for <linux-doc@vger.kernel.org>; Tue, 06 Jun 2023 15:32:40 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1686090759; x=1688682759;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=a7jCgjA/GeF+vfePBjhGpS1KJtr0QbtMbF11c3DSw0c=;
-        b=e/EO7dkW1bKT4JUvZZ9R3Ioj13iiaddXx/fYfY8Du1AKzjecQIXfDrCrSbk5qOB0Sf
-         HYu37vUgI+Tlrn2GSAu6sqyYsl7JSqzzIaAN5BPhULIjLneZ97kIjiMG6GrlVhCgswgz
-         llGXJG5VY+u28Kd1VNEQdnFLxHU/DgQjqVHEQzGpEHXr/1CeIkfHaFuReR50mlcQGuWY
-         mP3JyFXew8Jgt4bmdiV5Ate8UnVixd4R3390772gMZX6cUdMnD0JxKsbmiFePHOWVuBX
-         HdPBuaNqiUM/8uT9ip72OohlZcJvfWKUKta5K85SKZeAwdsBzx4USSDvIXuOo2WAR4mf
-         ZygA==
-X-Gm-Message-State: AC+VfDzE2nqhP2OPmLM38HXell+W/brgXpLvQE/5kiykHPHpK0ylod0w
-        npRHT3yKCdNtgEzQfns7mOdFA3wca+0oodc/8fiTWWOUc42F2asvj4GpYq4rMmeu+HATVfw7UBj
-        hXE+GQOiTG3QybZPNm1xY
-X-Received: by 2002:a17:907:961c:b0:96f:f046:9a92 with SMTP id gb28-20020a170907961c00b0096ff0469a92mr4529867ejc.37.1686090759334;
-        Tue, 06 Jun 2023 15:32:39 -0700 (PDT)
-X-Google-Smtp-Source: ACHHUZ6qGlpc03YEG/CcUcMQBwrK3ZBv0I8EcaoURRio7MIi2slO/uki0F3KmJyflgj5wBFLEUnEiA==
-X-Received: by 2002:a17:907:961c:b0:96f:f046:9a92 with SMTP id gb28-20020a170907961c00b0096ff0469a92mr4529834ejc.37.1686090759142;
-        Tue, 06 Jun 2023 15:32:39 -0700 (PDT)
-Received: from cassiopeiae.. ([2a02:810d:4b3f:de9c:642:1aff:fe31:a19f])
-        by smtp.gmail.com with ESMTPSA id g9-20020a1709063b0900b00969e9fef151sm6051554ejf.97.2023.06.06.15.32.37
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 06 Jun 2023 15:32:38 -0700 (PDT)
-From:   Danilo Krummrich <dakr@redhat.com>
-To:     airlied@gmail.com, daniel@ffwll.ch, tzimmermann@suse.de,
-        mripard@kernel.org, corbet@lwn.net, christian.koenig@amd.com,
-        bskeggs@redhat.com, Liam.Howlett@oracle.com,
-        matthew.brost@intel.com, boris.brezillon@collabora.com,
-        alexdeucher@gmail.com, ogabbay@kernel.org, bagasdotme@gmail.com,
-        willy@infradead.org, jason@jlekstrand.net
-Cc:     dri-devel@lists.freedesktop.org, nouveau@lists.freedesktop.org,
-        linux-doc@vger.kernel.org, linux-mm@kvack.org,
-        linux-kernel@vger.kernel.org, Danilo Krummrich <dakr@redhat.com>
-Subject: [PATCH drm-next v4 14/14] drm/nouveau: debugfs: implement DRM GPU VA debugfs
-Date:   Wed,  7 Jun 2023 00:31:30 +0200
-Message-Id: <20230606223130.6132-15-dakr@redhat.com>
-X-Mailer: git-send-email 2.40.1
-In-Reply-To: <20230606223130.6132-1-dakr@redhat.com>
-References: <20230606223130.6132-1-dakr@redhat.com>
+        with ESMTP id S234129AbjFFXyq (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 6 Jun 2023 19:54:46 -0400
+Received: from foss.arm.com (foss.arm.com [217.140.110.172])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTP id 1EBE21732;
+        Tue,  6 Jun 2023 16:54:45 -0700 (PDT)
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+        by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 0ED39AB6;
+        Tue,  6 Jun 2023 16:55:30 -0700 (PDT)
+Received: from [192.168.122.164] (unknown [172.31.20.19])
+        by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 4AB953F587;
+        Tue,  6 Jun 2023 16:54:44 -0700 (PDT)
+Message-ID: <888baa97-ac71-18ca-ad21-eae19ef241f1@arm.com>
+Date:   Tue, 6 Jun 2023 18:54:35 -0500
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Spam-Status: No, score=-2.1 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_NONE,
-        SPF_HELO_NONE,SPF_NONE,T_SCC_BODY_TEXT_LINE autolearn=ham
-        autolearn_force=no version=3.4.6
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.11.0
+Subject: Re: [PATCH 0/3 v2] Update ACPI documentation for Arm systems
+Content-Language: en-US
+To:     Jose Marinho <jose.marinho@arm.com>
+Cc:     Catalin Marinas <catalin.marinas@arm.com>,
+        James Morse <James.Morse@arm.com>,
+        Rob Herring <Rob.Herring@arm.com>,
+        Will Deacon <will@kernel.org>,
+        Jonathan Corbet <corbet@lwn.net>,
+        Hanjun Guo <guohanjun@huawei.com>,
+        linux-arm-kernel@lists.infradead.org, linux-doc@vger.kernel.org,
+        linux-acpi@vger.kernel.org
+References: <20230606093528.1494344-1-jose.marinho@arm.com>
+From:   Jeremy Linton <jeremy.linton@arm.com>
+In-Reply-To: <20230606093528.1494344-1-jose.marinho@arm.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-Spam-Status: No, score=-4.3 required=5.0 tests=BAYES_00,NICE_REPLY_A,
+        RCVD_IN_DNSWL_MED,SPF_HELO_NONE,SPF_NONE,T_SCC_BODY_TEXT_LINE
+        autolearn=ham autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Provide the driver indirection iterating over all DRM GPU VA spaces to
-enable the common 'gpuvas' debugfs file for dumping DRM GPU VA spaces.
+Hi,
 
-Signed-off-by: Danilo Krummrich <dakr@redhat.com>
----
- drivers/gpu/drm/nouveau/nouveau_debugfs.c | 39 +++++++++++++++++++++++
- 1 file changed, 39 insertions(+)
+On 6/6/23 04:35, Jose Marinho wrote:
+> This set of patches updates the Linux kernel ACPI documentation for Arm
+> systems. The intent is to integrate the developments in the BBR
+> specification that happened over the last couple of years.
 
-diff --git a/drivers/gpu/drm/nouveau/nouveau_debugfs.c b/drivers/gpu/drm/nouveau/nouveau_debugfs.c
-index 99d022a91afc..053f703f2f68 100644
---- a/drivers/gpu/drm/nouveau/nouveau_debugfs.c
-+++ b/drivers/gpu/drm/nouveau/nouveau_debugfs.c
-@@ -203,6 +203,44 @@ nouveau_debugfs_pstate_open(struct inode *inode, struct file *file)
- 	return single_open(file, nouveau_debugfs_pstate_get, inode->i_private);
- }
- 
-+static void
-+nouveau_debugfs_gpuva_regions(struct seq_file *m, struct nouveau_uvmm *uvmm)
-+{
-+	MA_STATE(mas, &uvmm->region_mt, 0, 0);
-+	struct nouveau_uvma_region *reg;
-+
-+	seq_puts  (m, " VA regions  | start              | range              | end                \n");
-+	seq_puts  (m, "----------------------------------------------------------------------------\n");
-+	mas_for_each(&mas, reg, ULONG_MAX)
-+		seq_printf(m, "             | 0x%016llx | 0x%016llx | 0x%016llx\n",
-+			   reg->va.addr, reg->va.range, reg->va.addr + reg->va.range);
-+}
-+
-+static int
-+nouveau_debugfs_gpuva(struct seq_file *m, void *data)
-+{
-+	struct drm_info_node *node = (struct drm_info_node *) m->private;
-+	struct nouveau_drm *drm = nouveau_drm(node->minor->dev);
-+	struct nouveau_cli *cli;
-+
-+	mutex_lock(&drm->clients_lock);
-+	list_for_each_entry(cli, &drm->clients, head) {
-+		struct nouveau_uvmm *uvmm = nouveau_cli_uvmm(cli);
-+
-+		if (!uvmm)
-+			continue;
-+
-+		nouveau_uvmm_lock(uvmm);
-+		drm_debugfs_gpuva_info(m, &uvmm->umgr);
-+		seq_puts(m, "\n");
-+		nouveau_debugfs_gpuva_regions(m, uvmm);
-+		nouveau_uvmm_unlock(uvmm);
-+	}
-+	mutex_unlock(&drm->clients_lock);
-+
-+	return 0;
-+}
-+
- static const struct file_operations nouveau_pstate_fops = {
- 	.owner = THIS_MODULE,
- 	.open = nouveau_debugfs_pstate_open,
-@@ -214,6 +252,7 @@ static const struct file_operations nouveau_pstate_fops = {
- static struct drm_info_list nouveau_debugfs_list[] = {
- 	{ "vbios.rom",  nouveau_debugfs_vbios_image, 0, NULL },
- 	{ "strap_peek", nouveau_debugfs_strap_peek, 0, NULL },
-+	DRM_DEBUGFS_GPUVA_INFO(nouveau_debugfs_gpuva, NULL),
- };
- #define NOUVEAU_DEBUGFS_ENTRIES ARRAY_SIZE(nouveau_debugfs_list)
- 
--- 
-2.40.1
+Thanks for doing this, it has been sorely needed. The changes all look 
+good to me too, so:
+
+Reviewed-by: Jeremy Linton <jeremy.linton@arm.com>
+
+
+Now all that said, at some point it will be worthwhile to reopen the 
+discussion around a few of the more "controversial" parts of this 
+document so they better reflect the current state of machines utilizing 
+ACPI.
+
+
+> 
+> Cc: Catalin Marinas <catalin.marinas@arm.com>
+> Cc: Jeremy Linton <Jeremy.Linton@arm.com>
+> Cc: James Morse <James.Morse@arm.com>
+> Cc: Rob Herring <Rob.Herring@arm.com>
+> Cc: Will Deacon <will@kernel.org>
+> Cc: Jonathan Corbet <corbet@lwn.net>
+> Cc: Hanjun Guo <guohanjun@huawei.com>
+> Cc: linux-arm-kernel@lists.infradead.org
+> Cc: linux-doc@vger.kernel.org
+> Cc: linux-acpi@vger.kernel.org
+> 
+> v2:
+>   - Clarify that the RAS tables are conditionaly required when ACPI
+>     Platform Error Interfaces are required: Hanjun Guo.
+>   - Clarify that HMAT is required if NUMA is supported and the system
+>     contains heterogeneous memory: Hanjun Guo.
+> 
+> 
+> Jose Marinho (3):
+>    Documentation/arm64: Update ARM and arch reference
+>    Documentation/arm64: Update references in arm-acpi
+>    Documentation/arm64: Update ACPI tables from BBR
+> 
+>   Documentation/arm64/acpi_object_usage.rst |  81 ++++++++++-
+>   Documentation/arm64/arm-acpi.rst          | 168 ++++++++++++++--------
+>   2 files changed, 183 insertions(+), 66 deletions(-)
+> 
 
