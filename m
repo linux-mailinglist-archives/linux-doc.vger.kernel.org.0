@@ -2,135 +2,140 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id E1B357245D0
-	for <lists+linux-doc@lfdr.de>; Tue,  6 Jun 2023 16:24:35 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id F1AD87245C0
+	for <lists+linux-doc@lfdr.de>; Tue,  6 Jun 2023 16:24:01 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S237867AbjFFOYc (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 6 Jun 2023 10:24:32 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:58290 "EHLO
+        id S237266AbjFFOYA (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 6 Jun 2023 10:24:00 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:57938 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S237664AbjFFOYW (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 6 Jun 2023 10:24:22 -0400
-Received: from szxga02-in.huawei.com (szxga02-in.huawei.com [45.249.212.188])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 8C24F10E9;
-        Tue,  6 Jun 2023 07:24:18 -0700 (PDT)
-Received: from canpemm500009.china.huawei.com (unknown [172.30.72.55])
-        by szxga02-in.huawei.com (SkyGuard) with ESMTP id 4QbCMD1gwczLqNp;
-        Tue,  6 Jun 2023 22:21:12 +0800 (CST)
-Received: from localhost.localdomain (10.50.163.32) by
- canpemm500009.china.huawei.com (7.192.105.203) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.23; Tue, 6 Jun 2023 22:24:13 +0800
-From:   Yicong Yang <yangyicong@huawei.com>
-To:     <mathieu.poirier@linaro.org>, <suzuki.poulose@arm.com>,
-        <jonathan.cameron@huawei.com>, <corbet@lwn.net>,
-        <linux-kernel@vger.kernel.org>, <linux-doc@vger.kernel.org>
-CC:     <alexander.shishkin@linux.intel.com>, <helgaas@kernel.org>,
-        <linux-pci@vger.kernel.org>, <prime.zeng@huawei.com>,
-        <linuxarm@huawei.com>, <yangyicong@hisilicon.com>
-Subject: [PATCH v4 5/5] hwtracing: hisi_ptt: Fix potential sleep in atomic context
-Date:   Tue, 6 Jun 2023 22:22:44 +0800
-Message-ID: <20230606142244.10939-6-yangyicong@huawei.com>
-X-Mailer: git-send-email 2.31.0
-In-Reply-To: <20230606142244.10939-1-yangyicong@huawei.com>
-References: <20230606142244.10939-1-yangyicong@huawei.com>
+        with ESMTP id S233201AbjFFOX7 (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 6 Jun 2023 10:23:59 -0400
+Received: from mail-ej1-x62b.google.com (mail-ej1-x62b.google.com [IPv6:2a00:1450:4864:20::62b])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id D8B0B10D4
+        for <linux-doc@vger.kernel.org>; Tue,  6 Jun 2023 07:23:56 -0700 (PDT)
+Received: by mail-ej1-x62b.google.com with SMTP id a640c23a62f3a-9745c5fed21so759984566b.3
+        for <linux-doc@vger.kernel.org>; Tue, 06 Jun 2023 07:23:56 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=linaro.org; s=google; t=1686061435; x=1688653435;
+        h=content-transfer-encoding:in-reply-to:from:references:cc:to
+         :content-language:subject:user-agent:mime-version:date:message-id
+         :from:to:cc:subject:date:message-id:reply-to;
+        bh=ZrVZ+SOBI/x4uatGRzhwg8fwXrewUsr2gOgY5H5Ft9g=;
+        b=fjsh3FJuBj9U15nWQpVdEMJbpDHN4ljEkK9i2Vw7zwBuDx4W8rMjbHbsp9EmQtjyMn
+         eJF3j78A6GgKT5UmL33X70+Hn7Vza2duvJhoTuMmw2WP9K0uDsTiDNGs9f79C6arQHPg
+         9jVHZeruC6m8xpteMR0Dla+l2bhyabByCOIwilQYD4nT33q7Pbu31UeXpHuYVaaVGTBZ
+         CC4NtSF+mfmdaB3EUVgPZWPkbVVb8i81qGDd4Gj//FwS3EtZ7pyGd9yqlQkcYI1T4rVB
+         nGmGUBb9O5E9PZSf45Qkw5rPLiKqEavRcfFfNH7iu9n14Y5qV4u03o9Dy3NyKApuUmvb
+         vduQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20221208; t=1686061435; x=1688653435;
+        h=content-transfer-encoding:in-reply-to:from:references:cc:to
+         :content-language:subject:user-agent:mime-version:date:message-id
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=ZrVZ+SOBI/x4uatGRzhwg8fwXrewUsr2gOgY5H5Ft9g=;
+        b=l4i9TBXl0KVQ7IHpAzT9MpWyD/3yqCAcmRJ0p216aOt0Der0DqLLyBz1Vt4V/ZnF1x
+         9MOOuwmRIDX2CMWzK22Bv7lfmVhf6z5UgnTncZFgveSc9loFBux+qJARMBaHL2u8Fgr6
+         P/kyzNbk6gQwcFkDsZ8p1vZydLLnMlzsIxSJ3LNWWufznC1I6JJFBdNnMM1IBEdKKI9U
+         CUONKOzsT5W9sfu/pN77mp9EYyG4DAv4UQ37D2s2fHJC/17iSOPnZ6PhtMOYRFgJBOSN
+         QE+ZC73zxx0fUDq7aSk6On5Vv7jSrTtOP9Vwy+1slQXfAy5t8viRHOVNMr4mpHameu3c
+         XwXw==
+X-Gm-Message-State: AC+VfDxntFrGZI3uHVu5ENQC+jIrt5SzGbbeOJE85TZ/EmYwgMuGB8Jj
+        dwf7BEWZX+AgK4IdJ2W4LxjH6g==
+X-Google-Smtp-Source: ACHHUZ4tNfkNmafis8UY8kYNaoiMX1MZKlLqdyE0bOdqVbjV255h69EPHklsSAMRYGIU1YtOe+jhjQ==
+X-Received: by 2002:a17:907:2da9:b0:966:5730:c3fe with SMTP id gt41-20020a1709072da900b009665730c3femr2925794ejc.52.1686061435313;
+        Tue, 06 Jun 2023 07:23:55 -0700 (PDT)
+Received: from [192.168.1.20] ([178.197.219.26])
+        by smtp.gmail.com with ESMTPSA id qc16-20020a170906d8b000b00965d294e633sm5624319ejb.58.2023.06.06.07.23.53
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Tue, 06 Jun 2023 07:23:54 -0700 (PDT)
+Message-ID: <c28f963e-d13c-6b5c-c389-996e986f81d5@linaro.org>
+Date:   Tue, 6 Jun 2023 16:23:52 +0200
 MIME-Version: 1.0
-Content-Transfer-Encoding: 7BIT
-Content-Type:   text/plain; charset=US-ASCII
-X-Originating-IP: [10.50.163.32]
-X-ClientProxiedBy: dggems705-chm.china.huawei.com (10.3.19.182) To
- canpemm500009.china.huawei.com (7.192.105.203)
-X-CFilter-Loop: Reflected
-X-Spam-Status: No, score=-4.2 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_MED,
-        SPF_HELO_NONE,SPF_PASS,T_SCC_BODY_TEXT_LINE autolearn=ham
-        autolearn_force=no version=3.4.6
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.11.2
+Subject: Re: [v5 3/5] dt-bindings: mfd: Add aspeed pwm-tach binding
+Content-Language: en-US
+To:     Patrick Williams <patrick@stwcx.xyz>
+Cc:     Billy Tsai <billy_tsai@aspeedtech.com>, jdelvare@suse.com,
+        linux@roeck-us.net, robh+dt@kernel.org,
+        krzysztof.kozlowski+dt@linaro.org, joel@jms.id.au, andrew@aj.id.au,
+        lee@kernel.org, thierry.reding@gmail.com,
+        u.kleine-koenig@pengutronix.de, corbet@lwn.net,
+        p.zabel@pengutronix.de, linux-hwmon@vger.kernel.org,
+        devicetree@vger.kernel.org, linux-arm-kernel@lists.infradead.org,
+        linux-aspeed@lists.ozlabs.org, linux-kernel@vger.kernel.org,
+        linux-pwm@vger.kernel.org, linux-doc@vger.kernel.org
+References: <20230606094535.5388-1-billy_tsai@aspeedtech.com>
+ <20230606094535.5388-4-billy_tsai@aspeedtech.com>
+ <35bf0a69-bcf6-ae35-eb3c-e74cfcf9c571@linaro.org>
+ <ZH89fXknZlhGmM_H@heinlein.vulture-banana.ts.net>
+From:   Krzysztof Kozlowski <krzysztof.kozlowski@linaro.org>
+In-Reply-To: <ZH89fXknZlhGmM_H@heinlein.vulture-banana.ts.net>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-Spam-Status: No, score=-2.2 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,NICE_REPLY_A,RCVD_IN_DNSWL_NONE,
+        SPF_HELO_NONE,SPF_PASS,T_SCC_BODY_TEXT_LINE,URIBL_BLOCKED
+        autolearn=unavailable autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-From: Yicong Yang <yangyicong@hisilicon.com>
+On 06/06/2023 16:06, Patrick Williams wrote:
+> On Tue, Jun 06, 2023 at 12:49:04PM +0200, Krzysztof Kozlowski wrote:
+> 
+> Hi Krzysztof,
+> 
+> Thank you for reviewing this from Billy.
+> 
+> The Aspeed chip is heavily used by the OpenBMC community and the 2600
+> has been used in production systems for almost 2 years now.  Many
+> companies are having to carry previous versions of these as patches, and
+> some of the APIs changed since the last revision from Billy.  So, I had
+> asked him to submit the latest patch set with as many revisions as he
+> understood what to change, since the conversation seemed to have died
+> since last time he submitted.  
+> 
+> I don't believe Billy is intentionally ignoring your feedback and he is
+> motivated to get this patch set wrapped up into an acceptable state.
+> 
+>> On 06/06/2023 11:45, Billy Tsai wrote:
+>  
+>> NAK. You got here clear comment. You cannot have simple MFD with
+>> resources. It is not simple anymore.
+>>
+> 
+> In fairness, Billy asked for clarification from you on this point and didn't
+> receive it.
+> 
+> https://lore.kernel.org/lkml/24DD1FEB-95F3-47BE-BE61-8B0E6FBDE20F@aspeedtech.com/
 
-We're using pci_irq_vector() to obtain the interrupt number and then
-bind it to the CPU start perf under the protection of spinlock in
-pmu::start(). pci_irq_vector() might sleep since [1] because it will
-call msi_domain_get_virq() to get the MSI interrupt number and it
-needs to acquire dev->msi.data->mutex. Getting a mutex will sleep on
-contention. So use pci_irq_vector() in an atomic context is problematic.
+I gave the instruction what Billy should do:
 
-This patch cached the interrupt number in the probe() and uses the
-cached data instead to avoid potential sleep.
+https://lore.kernel.org/lkml/41500a04-b004-0e2c-20a1-3a3092b90e6d@linaro.org/
 
-[1] commit 82ff8e6b78fc ("PCI/MSI: Use msi_get_virq() in pci_get_vector()")
-Fixes: ff0de066b463 ("hwtracing: hisi_ptt: Add trace function support for HiSilicon PCIe Tune and Trace device")
-Signed-off-by: Yicong Yang <yangyicong@hisilicon.com>
----
- drivers/hwtracing/ptt/hisi_ptt.c | 12 +++++-------
- drivers/hwtracing/ptt/hisi_ptt.h |  2 ++
- 2 files changed, 7 insertions(+), 7 deletions(-)
+What about other ignored comments? About subject, quotes and more? Even
+if this one was unclear, then why ignoring all the rest?
 
-diff --git a/drivers/hwtracing/ptt/hisi_ptt.c b/drivers/hwtracing/ptt/hisi_ptt.c
-index ff2c16efe5b1..d78d71b6764f 100644
---- a/drivers/hwtracing/ptt/hisi_ptt.c
-+++ b/drivers/hwtracing/ptt/hisi_ptt.c
-@@ -341,13 +341,13 @@ static int hisi_ptt_register_irq(struct hisi_ptt *hisi_ptt)
- 	if (ret < 0)
- 		return ret;
- 
--	ret = devm_request_threaded_irq(&pdev->dev,
--					pci_irq_vector(pdev, HISI_PTT_TRACE_DMA_IRQ),
-+	hisi_ptt->trace_irq = pci_irq_vector(pdev, HISI_PTT_TRACE_DMA_IRQ);
-+	ret = devm_request_threaded_irq(&pdev->dev, hisi_ptt->trace_irq,
- 					NULL, hisi_ptt_isr, 0,
- 					DRV_NAME, hisi_ptt);
- 	if (ret) {
- 		pci_err(pdev, "failed to request irq %d, ret = %d\n",
--			pci_irq_vector(pdev, HISI_PTT_TRACE_DMA_IRQ), ret);
-+			hisi_ptt->trace_irq, ret);
- 		return ret;
- 	}
- 
-@@ -1096,8 +1096,7 @@ static void hisi_ptt_pmu_start(struct perf_event *event, int flags)
- 	 * core in event_function_local(). If CPU passed is offline we'll fail
- 	 * here, just log it since we can do nothing here.
- 	 */
--	ret = irq_set_affinity(pci_irq_vector(hisi_ptt->pdev, HISI_PTT_TRACE_DMA_IRQ),
--					      cpumask_of(cpu));
-+	ret = irq_set_affinity(hisi_ptt->trace_irq, cpumask_of(cpu));
- 	if (ret)
- 		dev_warn(dev, "failed to set the affinity of trace interrupt\n");
- 
-@@ -1392,8 +1391,7 @@ static int hisi_ptt_cpu_teardown(unsigned int cpu, struct hlist_node *node)
- 	 * Also make sure the interrupt bind to the migrated CPU as well. Warn
- 	 * the user on failure here.
- 	 */
--	if (irq_set_affinity(pci_irq_vector(hisi_ptt->pdev, HISI_PTT_TRACE_DMA_IRQ),
--					    cpumask_of(target)))
-+	if (irq_set_affinity(hisi_ptt->trace_irq, cpumask_of(target)))
- 		dev_warn(dev, "failed to set the affinity of trace interrupt\n");
- 
- 	hisi_ptt->trace_ctrl.on_cpu = target;
-diff --git a/drivers/hwtracing/ptt/hisi_ptt.h b/drivers/hwtracing/ptt/hisi_ptt.h
-index 164012dba4ec..e17f045d7e72 100644
---- a/drivers/hwtracing/ptt/hisi_ptt.h
-+++ b/drivers/hwtracing/ptt/hisi_ptt.h
-@@ -201,6 +201,7 @@ struct hisi_ptt_pmu_buf {
-  * @pdev:         pci_dev of this PTT device
-  * @tune_lock:    lock to serialize the tune process
-  * @pmu_lock:     lock to serialize the perf process
-+ * @trace_irq:    interrupt number used by trace
-  * @upper_bdf:    the upper BDF range of the PCI devices managed by this PTT device
-  * @lower_bdf:    the lower BDF range of the PCI devices managed by this PTT device
-  * @port_filters: the filter list of root ports
-@@ -221,6 +222,7 @@ struct hisi_ptt {
- 	struct pci_dev *pdev;
- 	struct mutex tune_lock;
- 	spinlock_t pmu_lock;
-+	int trace_irq;
- 	u32 upper_bdf;
- 	u32 lower_bdf;
- 
--- 
-2.24.0
+> 
+> He felt what he was trying to accomplish met the documented
+> expectations.  Are there some changes that need to be done in mfd.txt to
+> further clarify when to use it and when not to?
+
+I think mfd.txt clearly states:
+"For more complex devices, when the nexus driver has to
+probe registers to figure out what child devices exist etc, this should
+not be used. In the latter case the child devices will be determined by
+the operating system."
+
+Also, repeated many times:
+https://lore.kernel.org/all/YXhINE00HG6hbQI4@robh.at.kernel.org/
+https://lore.kernel.org/all/20220701000959.GA3588170-robh@kernel.org/
+https://osseu2022.sched.com/event/15z0W
+
+Best regards,
+Krzysztof
 
