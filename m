@@ -2,157 +2,259 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id A2FB07250F4
-	for <lists+linux-doc@lfdr.de>; Wed,  7 Jun 2023 01:56:32 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 25B827252DB
+	for <lists+linux-doc@lfdr.de>; Wed,  7 Jun 2023 06:33:13 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S239673AbjFFX4b (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 6 Jun 2023 19:56:31 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:36650 "EHLO
+        id S234158AbjFGEdJ (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 7 Jun 2023 00:33:09 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:49488 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S234129AbjFFX43 (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 6 Jun 2023 19:56:29 -0400
-Received: from mga17.intel.com (mga17.intel.com [192.55.52.151])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 61A74172E;
-        Tue,  6 Jun 2023 16:56:28 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1686095788; x=1717631788;
-  h=date:from:to:cc:subject:message-id:references:
-   mime-version:in-reply-to;
-  bh=66dLf9QF5suSz6s4ALv0ff3Sijn5fcliAkM/PxefKBo=;
-  b=LI2My02QO2QjDSKzbiHeOri3apAP3wJh9uM6EyYBrqR0Zu1q9lyVs1CG
-   ydPr9TNnwskd1iUzz47/omn5JWnmGC/4XPHoTHWOsB3xGg/qyktvOfa8m
-   amy+veLfms+yslJxQ6ahmhb28oZMjrewWFecqe41ggUT7kBhJvQirseP+
-   wVbCj3KZLhLjIVYtH4p+gpSZddBJ80m9EUFdGzUxezyBlD0twM+7TMOwy
-   4ggNFfIDKk4RoE/vsfRwWH7oA0ZI83+9K8dVc6H2LQpT9vaSSxekluIYB
-   SypuRXSdayFBb1EhocB0WHmv36Ysaw+HPiV5NWRjn4st0jvAmDbUhRhHr
-   w==;
-X-IronPort-AV: E=McAfee;i="6600,9927,10733"; a="337190041"
-X-IronPort-AV: E=Sophos;i="6.00,222,1681196400"; 
-   d="scan'208";a="337190041"
-Received: from orsmga008.jf.intel.com ([10.7.209.65])
-  by fmsmga107.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 06 Jun 2023 16:56:27 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=McAfee;i="6600,9927,10733"; a="738979508"
-X-IronPort-AV: E=Sophos;i="6.00,222,1681196400"; 
-   d="scan'208";a="738979508"
-Received: from lkp-server01.sh.intel.com (HELO 15ab08e44a81) ([10.239.97.150])
-  by orsmga008.jf.intel.com with ESMTP; 06 Jun 2023 16:56:22 -0700
-Received: from kbuild by 15ab08e44a81 with local (Exim 4.96)
-        (envelope-from <lkp@intel.com>)
-        id 1q6gXF-0005th-2F;
-        Tue, 06 Jun 2023 23:56:21 +0000
-Date:   Wed, 7 Jun 2023 07:55:41 +0800
-From:   kernel test robot <lkp@intel.com>
-To:     Danilo Krummrich <dakr@redhat.com>, airlied@gmail.com,
-        daniel@ffwll.ch, tzimmermann@suse.de, mripard@kernel.org,
-        corbet@lwn.net, christian.koenig@amd.com, bskeggs@redhat.com,
-        Liam.Howlett@oracle.com, matthew.brost@intel.com,
-        boris.brezillon@collabora.com, alexdeucher@gmail.com,
-        ogabbay@kernel.org, bagasdotme@gmail.com, willy@infradead.org,
-        jason@jlekstrand.net
-Cc:     oe-kbuild-all@lists.linux.dev, dri-devel@lists.freedesktop.org,
-        nouveau@lists.freedesktop.org, linux-doc@vger.kernel.org,
-        linux-mm@kvack.org, linux-kernel@vger.kernel.org,
-        Danilo Krummrich <dakr@redhat.com>
-Subject: Re: [PATCH drm-next v4 04/14] drm: debugfs: provide infrastructure
- to dump a DRM GPU VA space
-Message-ID: <202306070751.26WX3ive-lkp@intel.com>
-References: <20230606223130.6132-5-dakr@redhat.com>
+        with ESMTP id S230086AbjFGEcd (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Wed, 7 Jun 2023 00:32:33 -0400
+Received: from dggsgout12.his.huawei.com (unknown [45.249.212.56])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id E19241FEC;
+        Tue,  6 Jun 2023 21:30:45 -0700 (PDT)
+Received: from mail02.huawei.com (unknown [172.30.67.153])
+        by dggsgout12.his.huawei.com (SkyGuard) with ESMTP id 4QbYqX5904z4f3khb;
+        Wed,  7 Jun 2023 12:13:28 +0800 (CST)
+Received: from [10.174.176.117] (unknown [10.174.176.117])
+        by APP1 (Coremail) with SMTP id cCh0CgAngRvkA4BkYN7+KQ--.51373S2;
+        Wed, 07 Jun 2023 12:13:28 +0800 (CST)
+Subject: Re: [PATCH v4] blk-ioprio: Introduce promote-to-rt policy
+To:     linux-block@vger.kernel.org, Jens Axboe <axboe@kernel.dk>
+Cc:     Bart Van Assche <bvanassche@acm.org>, Jan Kara <jack@suse.cz>,
+        Bagas Sanjaya <bagasdotme@gmail.com>,
+        Chaitanya Kulkarni <kch@nvidia.com>, cgroups@vger.kernel.org,
+        Tejun Heo <tj@kernel.org>, Zefan Li <lizefan.x@bytedance.com>,
+        Johannes Weiner <hannes@cmpxchg.org>,
+        Jonathan Corbet <corbet@lwn.net>, linux-kernel@vger.kernel.org,
+        linux-doc@vger.kernel.org,
+        "houtao1@huawei.com" <houtao1@huawei.com>
+References: <20230428074404.280532-1-houtao@huaweicloud.com>
+ <1db53a95-46d3-c906-31a1-0be4992a4b8d@huaweicloud.com>
+ <bff92f4c-0f21-9cf2-7135-812a184716b3@huaweicloud.com>
+From:   Hou Tao <houtao@huaweicloud.com>
+Message-ID: <116e9f61-cdf9-2eeb-51c3-a211bb1f06ca@huaweicloud.com>
+Date:   Wed, 7 Jun 2023 12:13:24 +0800
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:78.0) Gecko/20100101
+ Thunderbird/78.6.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20230606223130.6132-5-dakr@redhat.com>
-X-Spam-Status: No, score=-4.4 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_MED,
-        SPF_HELO_NONE,SPF_NONE,T_SCC_BODY_TEXT_LINE,URIBL_BLOCKED
-        autolearn=ham autolearn_force=no version=3.4.6
+In-Reply-To: <bff92f4c-0f21-9cf2-7135-812a184716b3@huaweicloud.com>
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: 7bit
+Content-Language: en-US
+X-CM-TRANSID: cCh0CgAngRvkA4BkYN7+KQ--.51373S2
+X-Coremail-Antispam: 1UD129KBjvJXoW3GF1ftF1rWw43AF47GF18AFb_yoW3XF1DpF
+        4fAFW3uryvqF1xtF12q3WkXrW7t3s7tr17WFnxKFyF934qywnrAF1jyF18WFyxArWDXrZx
+        Zr98AFZ2kFy5ZrJanT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+        9KBjDU0xBIdaVrnRJUUUv2b4IE77IF4wAFF20E14v26r4j6ryUM7CY07I20VC2zVCF04k2
+        6cxKx2IYs7xG6rWj6s0DM7CIcVAFz4kK6r1j6r18M28lY4IEw2IIxxk0rwA2F7IY1VAKz4
+        vEj48ve4kI8wA2z4x0Y4vE2Ix0cI8IcVAFwI0_Ar0_tr1l84ACjcxK6xIIjxv20xvEc7Cj
+        xVAFwI0_Cr0_Gr1UM28EF7xvwVC2z280aVAFwI0_GcCE3s1l84ACjcxK6I8E87Iv6xkF7I
+        0E14v26rxl6s0DM2AIxVAIcxkEcVAq07x20xvEncxIr21l5I8CrVACY4xI64kE6c02F40E
+        x7xfMcIj6xIIjxv20xvE14v26r1j6r18McIj6I8E87Iv67AKxVWUJVW8JwAm72CE4IkC6x
+        0Yz7v_Jr0_Gr1lF7xvr2IY64vIr41lFIxGxcIEc7CjxVA2Y2ka0xkIwI1lc7I2V7IY0VAS
+        07AlzVAYIcxG8wCF04k20xvY0x0EwIxGrwCFx2IqxVCFs4IE7xkEbVWUJVW8JwC20s026c
+        02F40E14v26r1j6r18MI8I3I0E7480Y4vE14v26r106r1rMI8E67AF67kF1VAFwI0_Jw0_
+        GFylIxkGc2Ij64vIr41lIxAIcVC0I7IYx2IY67AKxVWUJVWUCwCI42IY6xIIjxv20xvEc7
+        CjxVAFwI0_Gr0_Cr1lIxAIcVCF04k26cxKx2IYs7xG6rW3Jr0E3s1lIxAIcVC2z280aVAF
+        wI0_Jr0_Gr1lIxAIcVC2z280aVCY1x0267AKxVW8JVW8JrUvcSsGvfC2KfnxnUUI43ZEXa
+        7IU1zuWJUUUUU==
+X-CM-SenderInfo: xkrx3t3r6k3tpzhluzxrxghudrp/
+X-CFilter-Loop: Reflected
+X-Spam-Status: No, score=-2.0 required=5.0 tests=BAYES_00,KHOP_HELO_FCRDNS,
+        NICE_REPLY_A,SPF_HELO_NONE,SPF_NONE,T_SCC_BODY_TEXT_LINE autolearn=ham
+        autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Hi Danilo,
+ping ?
 
-kernel test robot noticed the following build warnings:
+On 5/23/2023 2:48 PM, Hou Tao wrote:
+> ping ?
+>
+> On 5/8/2023 8:08 PM, Hou Tao wrote:
+>> ping ?
+>>
+>> On 4/28/2023 3:44 PM, Hou Tao wrote:
+>>> From: Hou Tao <houtao1@huawei.com>
+>>>
+>>> Since commit a78418e6a04c ("block: Always initialize bio IO priority on
+>>> submit"), bio->bi_ioprio will never be IOPRIO_CLASS_NONE when calling
+>>> blkcg_set_ioprio(), so there will be no way to promote the io-priority
+>>> of one cgroup to IOPRIO_CLASS_RT, because bi_ioprio will always be
+>>> greater than or equals to IOPRIO_CLASS_RT.
+>>>
+>>> It seems possible to call blkcg_set_ioprio() first then try to
+>>> initialize bi_ioprio later in bio_set_ioprio(), but this doesn't work
+>>> for bio in which bi_ioprio is already initialized (e.g., direct-io), so
+>>> introduce a new promote-to-rt policy to promote the iopriority of bio to
+>>> IOPRIO_CLASS_RT if the ioprio is not already RT.
+>>>
+>>> For none-to-rt policy, although it doesn't work now, but considering
+>>> that its purpose was also to override the io-priority to RT and allowing
+>>> for a smoother transition, just keep it and treat it as an alias of
+>>> the promote-to-rt policy.
+>>>
+>>> Acked-by: Tejun Heo <tj@kernel.org>
+>>> Reviewed-by: Bart Van Assche <bvanassche@acm.org>
+>>> Reviewed-by: Chaitanya Kulkarni <kch@nvidia.com>
+>>> Reviewed-by: Jan Kara <jack@suse.cz>
+>>> Signed-off-by: Hou Tao <houtao1@huawei.com>
+>>> ---
+>>> v4:
+>>>  * rebased on 33afd4b76393
+>>>  * Add Reviewed-by from Jan Kara
+>>>
+>>> v3: https://lore.kernel.org/linux-block/20230223135154.3749088-1-houtao@huaweicloud.com
+>>>  * Use 'non-RT' instead of 'no-RT' in document (from Bagas)
+>>>  * Remove repeated sentence in commit message
+>>>  * Add Reviewed-by and Acked-by tags
+>>>  
+>>> v2: https://lore.kernel.org/linux-block/20230220135428.2632906-1-houtao@huaweicloud.com
+>>>
+>>>  * Simplify the implementation of promote-to-rt (from Bart)
+>>>  * Make none-to-rt to work again by treating it as an alias of
+>>>    the promote-to-rt policy (from Bart & Jan)
+>>>  * fix the style of new content in cgroup-v2.rst (from Bagas)
+>>>  * set the default priority level to 4 instead of 0 for promote-to-rt
+>>>
+>>> v1: https://lore.kernel.org/linux-block/20230201045227.2203123-1-houtao@huaweicloud.com
+>>>
+>>>  Documentation/admin-guide/cgroup-v2.rst | 42 ++++++++++++++-----------
+>>>  block/blk-ioprio.c                      | 23 ++++++++++++--
+>>>  2 files changed, 44 insertions(+), 21 deletions(-)
+>>>
+>>> diff --git a/Documentation/admin-guide/cgroup-v2.rst b/Documentation/admin-guide/cgroup-v2.rst
+>>> index f67c0829350b..7544ce00e0cb 100644
+>>> --- a/Documentation/admin-guide/cgroup-v2.rst
+>>> +++ b/Documentation/admin-guide/cgroup-v2.rst
+>>> @@ -2024,31 +2024,33 @@ that attribute:
+>>>    no-change
+>>>  	Do not modify the I/O priority class.
+>>>  
+>>> -  none-to-rt
+>>> -	For requests that do not have an I/O priority class (NONE),
+>>> -	change the I/O priority class into RT. Do not modify
+>>> -	the I/O priority class of other requests.
+>>> +  promote-to-rt
+>>> +	For requests that have a non-RT I/O priority class, change it into RT.
+>>> +	Also change the priority level of these requests to 4. Do not modify
+>>> +	the I/O priority of requests that have priority class RT.
+>>>  
+>>>    restrict-to-be
+>>>  	For requests that do not have an I/O priority class or that have I/O
+>>> -	priority class RT, change it into BE. Do not modify the I/O priority
+>>> -	class of requests that have priority class IDLE.
+>>> +	priority class RT, change it into BE. Also change the priority level
+>>> +	of these requests to 0. Do not modify the I/O priority class of
+>>> +	requests that have priority class IDLE.
+>>>  
+>>>    idle
+>>>  	Change the I/O priority class of all requests into IDLE, the lowest
+>>>  	I/O priority class.
+>>>  
+>>> +  none-to-rt
+>>> +	Deprecated. Just an alias for promote-to-rt.
+>>> +
+>>>  The following numerical values are associated with the I/O priority policies:
+>>>  
+>>> -+-------------+---+
+>>> -| no-change   | 0 |
+>>> -+-------------+---+
+>>> -| none-to-rt  | 1 |
+>>> -+-------------+---+
+>>> -| rt-to-be    | 2 |
+>>> -+-------------+---+
+>>> -| all-to-idle | 3 |
+>>> -+-------------+---+
+>>> ++----------------+---+
+>>> +| no-change      | 0 |
+>>> ++----------------+---+
+>>> +| rt-to-be       | 2 |
+>>> ++----------------+---+
+>>> +| all-to-idle    | 3 |
+>>> ++----------------+---+
+>>>  
+>>>  The numerical value that corresponds to each I/O priority class is as follows:
+>>>  
+>>> @@ -2064,9 +2066,13 @@ The numerical value that corresponds to each I/O priority class is as follows:
+>>>  
+>>>  The algorithm to set the I/O priority class for a request is as follows:
+>>>  
+>>> -- Translate the I/O priority class policy into a number.
+>>> -- Change the request I/O priority class into the maximum of the I/O priority
+>>> -  class policy number and the numerical I/O priority class.
+>>> +- If I/O priority class policy is promote-to-rt, change the request I/O
+>>> +  priority class to IOPRIO_CLASS_RT and change the request I/O priority
+>>> +  level to 4.
+>>> +- If I/O priorityt class is not promote-to-rt, translate the I/O priority
+>>> +  class policy into a number, then change the request I/O priority class
+>>> +  into the maximum of the I/O priority class policy number and the numerical
+>>> +  I/O priority class.
+>>>  
+>>>  PID
+>>>  ---
+>>> diff --git a/block/blk-ioprio.c b/block/blk-ioprio.c
+>>> index 055529b9b92b..4051fada01f1 100644
+>>> --- a/block/blk-ioprio.c
+>>> +++ b/block/blk-ioprio.c
+>>> @@ -23,25 +23,28 @@
+>>>  /**
+>>>   * enum prio_policy - I/O priority class policy.
+>>>   * @POLICY_NO_CHANGE: (default) do not modify the I/O priority class.
+>>> - * @POLICY_NONE_TO_RT: modify IOPRIO_CLASS_NONE into IOPRIO_CLASS_RT.
+>>> + * @POLICY_PROMOTE_TO_RT: modify no-IOPRIO_CLASS_RT to IOPRIO_CLASS_RT.
+>>>   * @POLICY_RESTRICT_TO_BE: modify IOPRIO_CLASS_NONE and IOPRIO_CLASS_RT into
+>>>   *		IOPRIO_CLASS_BE.
+>>>   * @POLICY_ALL_TO_IDLE: change the I/O priority class into IOPRIO_CLASS_IDLE.
+>>> + * @POLICY_NONE_TO_RT: an alias for POLICY_PROMOTE_TO_RT.
+>>>   *
+>>>   * See also <linux/ioprio.h>.
+>>>   */
+>>>  enum prio_policy {
+>>>  	POLICY_NO_CHANGE	= 0,
+>>> -	POLICY_NONE_TO_RT	= 1,
+>>> +	POLICY_PROMOTE_TO_RT	= 1,
+>>>  	POLICY_RESTRICT_TO_BE	= 2,
+>>>  	POLICY_ALL_TO_IDLE	= 3,
+>>> +	POLICY_NONE_TO_RT	= 4,
+>>>  };
+>>>  
+>>>  static const char *policy_name[] = {
+>>>  	[POLICY_NO_CHANGE]	= "no-change",
+>>> -	[POLICY_NONE_TO_RT]	= "none-to-rt",
+>>> +	[POLICY_PROMOTE_TO_RT]	= "promote-to-rt",
+>>>  	[POLICY_RESTRICT_TO_BE]	= "restrict-to-be",
+>>>  	[POLICY_ALL_TO_IDLE]	= "idle",
+>>> +	[POLICY_NONE_TO_RT]	= "none-to-rt",
+>>>  };
+>>>  
+>>>  static struct blkcg_policy ioprio_policy;
+>>> @@ -189,6 +192,20 @@ void blkcg_set_ioprio(struct bio *bio)
+>>>  	if (!blkcg || blkcg->prio_policy == POLICY_NO_CHANGE)
+>>>  		return;
+>>>  
+>>> +	if (blkcg->prio_policy == POLICY_PROMOTE_TO_RT ||
+>>> +	    blkcg->prio_policy == POLICY_NONE_TO_RT) {
+>>> +		/*
+>>> +		 * For RT threads, the default priority level is 4 because
+>>> +		 * task_nice is 0. By promoting non-RT io-priority to RT-class
+>>> +		 * and default level 4, those requests that are already
+>>> +		 * RT-class but need a higher io-priority can use ioprio_set()
+>>> +		 * to achieve this.
+>>> +		 */
+>>> +		if (IOPRIO_PRIO_CLASS(bio->bi_ioprio) != IOPRIO_CLASS_RT)
+>>> +			bio->bi_ioprio = IOPRIO_PRIO_VALUE(IOPRIO_CLASS_RT, 4);
+>>> +		return;
+>>> +	}
+>>> +
+>>>  	/*
+>>>  	 * Except for IOPRIO_CLASS_NONE, higher I/O priority numbers
+>>>  	 * correspond to a lower priority. Hence, the max_t() below selects
+>> .
+> .
 
-[auto build test WARNING on 33a86170888b7e4aa0cea94ebb9c67180139cea9]
-
-url:    https://github.com/intel-lab-lkp/linux/commits/Danilo-Krummrich/drm-execution-context-for-GEM-buffers-v4/20230607-063442
-base:   33a86170888b7e4aa0cea94ebb9c67180139cea9
-patch link:    https://lore.kernel.org/r/20230606223130.6132-5-dakr%40redhat.com
-patch subject: [PATCH drm-next v4 04/14] drm: debugfs: provide infrastructure to dump a DRM GPU VA space
-config: m68k-allyesconfig (https://download.01.org/0day-ci/archive/20230607/202306070751.26WX3ive-lkp@intel.com/config)
-compiler: m68k-linux-gcc (GCC) 12.3.0
-reproduce (this is a W=1 build):
-        mkdir -p ~/bin
-        wget https://raw.githubusercontent.com/intel/lkp-tests/master/sbin/make.cross -O ~/bin/make.cross
-        chmod +x ~/bin/make.cross
-        git checkout 33a86170888b7e4aa0cea94ebb9c67180139cea9
-        b4 shazam https://lore.kernel.org/r/20230606223130.6132-5-dakr@redhat.com
-        # save the config file
-        mkdir build_dir && cp config build_dir/.config
-        COMPILER_INSTALL_PATH=$HOME/0day COMPILER=gcc-12.3.0 ~/bin/make.cross W=1 O=build_dir ARCH=m68k olddefconfig
-        COMPILER_INSTALL_PATH=$HOME/0day COMPILER=gcc-12.3.0 ~/bin/make.cross W=1 O=build_dir ARCH=m68k SHELL=/bin/bash drivers/gpu/drm/
-
-If you fix the issue, kindly add following tag where applicable
-| Reported-by: kernel test robot <lkp@intel.com>
-| Closes: https://lore.kernel.org/oe-kbuild-all/202306070751.26WX3ive-lkp@intel.com/
-
-All warnings (new ones prefixed by >>):
-
-   drivers/gpu/drm/drm_debugfs.c: In function 'drm_debugfs_gpuva_info':
->> drivers/gpu/drm/drm_debugfs.c:213:28: warning: cast from pointer to integer of different size [-Wpointer-to-int-cast]
-     213 |                            (u64)va->gem.obj, va->gem.offset);
-         |                            ^
-
-
-vim +213 drivers/gpu/drm/drm_debugfs.c
-
-   178	
-   179	/**
-   180	 * drm_debugfs_gpuva_info - dump the given DRM GPU VA space
-   181	 * @m: pointer to the &seq_file to write
-   182	 * @mgr: the &drm_gpuva_manager representing the GPU VA space
-   183	 *
-   184	 * Dumps the GPU VA mappings of a given DRM GPU VA manager.
-   185	 *
-   186	 * For each DRM GPU VA space drivers should call this function from their
-   187	 * &drm_info_list's show callback.
-   188	 *
-   189	 * Returns: 0 on success, -ENODEV if the &mgr is not initialized
-   190	 */
-   191	int drm_debugfs_gpuva_info(struct seq_file *m,
-   192				   struct drm_gpuva_manager *mgr)
-   193	{
-   194		DRM_GPUVA_ITER(it, mgr, 0);
-   195		struct drm_gpuva *va, *kva = &mgr->kernel_alloc_node;
-   196	
-   197		if (!mgr->name)
-   198			return -ENODEV;
-   199	
-   200		seq_printf(m, "DRM GPU VA space (%s) [0x%016llx;0x%016llx]\n",
-   201			   mgr->name, mgr->mm_start, mgr->mm_start + mgr->mm_range);
-   202		seq_printf(m, "Kernel reserved node [0x%016llx;0x%016llx]\n",
-   203			   kva->va.addr, kva->va.addr + kva->va.range);
-   204		seq_puts(m, "\n");
-   205		seq_puts(m, " VAs | start              | range              | end                | object             | object offset\n");
-   206		seq_puts(m, "-------------------------------------------------------------------------------------------------------------\n");
-   207		drm_gpuva_iter_for_each(va, it) {
-   208			if (unlikely(va == &mgr->kernel_alloc_node))
-   209				continue;
-   210	
-   211			seq_printf(m, "     | 0x%016llx | 0x%016llx | 0x%016llx | 0x%016llx | 0x%016llx\n",
-   212				   va->va.addr, va->va.range, va->va.addr + va->va.range,
- > 213				   (u64)va->gem.obj, va->gem.offset);
-   214		}
-   215	
-   216		return 0;
-   217	}
-   218	EXPORT_SYMBOL(drm_debugfs_gpuva_info);
-   219	
-
--- 
-0-DAY CI Kernel Test Service
-https://github.com/intel/lkp-tests/wiki
