@@ -2,136 +2,181 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 4215F725A85
-	for <lists+linux-doc@lfdr.de>; Wed,  7 Jun 2023 11:33:01 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 3AD77725D01
+	for <lists+linux-doc@lfdr.de>; Wed,  7 Jun 2023 13:25:19 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S240103AbjFGJc7 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 7 Jun 2023 05:32:59 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:50856 "EHLO
+        id S234635AbjFGLZR (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 7 Jun 2023 07:25:17 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:57760 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S240084AbjFGJc5 (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Wed, 7 Jun 2023 05:32:57 -0400
+        with ESMTP id S235736AbjFGLZO (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Wed, 7 Jun 2023 07:25:14 -0400
 Received: from szxga08-in.huawei.com (szxga08-in.huawei.com [45.249.212.255])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 245051725;
-        Wed,  7 Jun 2023 02:32:54 -0700 (PDT)
-Received: from canpemm500009.china.huawei.com (unknown [172.30.72.55])
-        by szxga08-in.huawei.com (SkyGuard) with ESMTP id 4QbhpY3NyYz18MGW;
-        Wed,  7 Jun 2023 17:28:05 +0800 (CST)
-Received: from localhost.localdomain (10.50.163.32) by
- canpemm500009.china.huawei.com (7.192.105.203) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.23; Wed, 7 Jun 2023 17:32:52 +0800
-From:   Yicong Yang <yangyicong@huawei.com>
-To:     <mathieu.poirier@linaro.org>, <suzuki.poulose@arm.com>,
-        <jonathan.cameron@huawei.com>, <corbet@lwn.net>,
-        <linux-kernel@vger.kernel.org>, <linux-doc@vger.kernel.org>
-CC:     <alexander.shishkin@linux.intel.com>, <helgaas@kernel.org>,
-        <linux-pci@vger.kernel.org>, <prime.zeng@huawei.com>,
-        <linuxarm@huawei.com>, <yangyicong@hisilicon.com>
-Subject: [PATCH v5 5/5] hwtracing: hisi_ptt: Fix potential sleep in atomic context
-Date:   Wed, 7 Jun 2023 17:31:23 +0800
-Message-ID: <20230607093123.51421-6-yangyicong@huawei.com>
-X-Mailer: git-send-email 2.31.0
-In-Reply-To: <20230607093123.51421-1-yangyicong@huawei.com>
-References: <20230607093123.51421-1-yangyicong@huawei.com>
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 942D910DE;
+        Wed,  7 Jun 2023 04:25:12 -0700 (PDT)
+Received: from dggpeml500002.china.huawei.com (unknown [172.30.72.55])
+        by szxga08-in.huawei.com (SkyGuard) with ESMTP id 4Qbkm93n4jz18M3t;
+        Wed,  7 Jun 2023 18:56:09 +0800 (CST)
+Received: from [10.67.103.44] (10.67.103.44) by dggpeml500002.china.huawei.com
+ (7.185.36.158) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.23; Wed, 7 Jun
+ 2023 19:00:57 +0800
+Subject: Re: [PATCH v2 2/3] drivers/perf: hisi: Add support for HiSilicon UC
+ PMU driver
+To:     Jonathan Cameron <Jonathan.Cameron@Huawei.com>
+References: <20230531104625.18296-1-hejunhao3@huawei.com>
+ <20230531104625.18296-3-hejunhao3@huawei.com>
+ <20230531165908.000022b0@Huawei.com>
+CC:     <will@kernel.org>, <linux-kernel@vger.kernel.org>,
+        <mark.rutland@arm.com>, <linux-arm-kernel@lists.infradead.org>,
+        <linux-doc@vger.kernel.org>, <linuxarm@huawei.com>,
+        <yangyicong@huawei.com>, <shenyang39@huawei.com>,
+        <prime.zeng@hisilicon.com>
+From:   hejunhao <hejunhao3@huawei.com>
+Message-ID: <e78b951f-eecc-8ac1-0784-695ca8027234@huawei.com>
+Date:   Wed, 7 Jun 2023 19:00:56 +0800
+User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64; rv:45.0) Gecko/20100101
+ Thunderbird/45.7.1
 MIME-Version: 1.0
-Content-Transfer-Encoding: 7BIT
-Content-Type:   text/plain; charset=US-ASCII
-X-Originating-IP: [10.50.163.32]
-X-ClientProxiedBy: dggems701-chm.china.huawei.com (10.3.19.178) To
- canpemm500009.china.huawei.com (7.192.105.203)
+In-Reply-To: <20230531165908.000022b0@Huawei.com>
+Content-Type: text/plain; charset="windows-1252"; format=flowed
+Content-Transfer-Encoding: 7bit
+X-Originating-IP: [10.67.103.44]
+X-ClientProxiedBy: dggems705-chm.china.huawei.com (10.3.19.182) To
+ dggpeml500002.china.huawei.com (7.185.36.158)
 X-CFilter-Loop: Reflected
-X-Spam-Status: No, score=-4.2 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_MED,
-        SPF_HELO_NONE,SPF_PASS,T_SCC_BODY_TEXT_LINE autolearn=ham
-        autolearn_force=no version=3.4.6
+X-Spam-Status: No, score=-4.3 required=5.0 tests=BAYES_00,NICE_REPLY_A,
+        RCVD_IN_DNSWL_MED,SPF_HELO_NONE,SPF_PASS,T_SCC_BODY_TEXT_LINE
+        autolearn=ham autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-From: Yicong Yang <yangyicong@hisilicon.com>
+Hi Jonathan,
 
-We're using pci_irq_vector() to obtain the interrupt number and then
-bind it to the CPU start perf under the protection of spinlock in
-pmu::start(). pci_irq_vector() might sleep since [1] because it will
-call msi_domain_get_virq() to get the MSI interrupt number and it
-needs to acquire dev->msi.data->mutex. Getting a mutex will sleep on
-contention. So use pci_irq_vector() in an atomic context is problematic.
 
-This patch cached the interrupt number in the probe() and uses the
-cached data instead to avoid potential sleep.
+On 2023/5/31 23:59, Jonathan Cameron wrote:
+> On Wed, 31 May 2023 18:46:24 +0800
+> Junhao He <hejunhao3@huawei.com> wrote:
+>
+> Hi Junhao,
+>
+> A few small comments inline.
+>
+>> On HiSilicon Hip09 platform, there is a UC (unified cache) module
+>> on each chip SCCL (Super CPU Cluster). UC is a cache that provides
+>> coherence between NUMA and UMA domains. It is located between L2
+>> and Memory System. While PA uncore PMU model is the same as other
+>> Hip09 PMU modules and many PMU events are supported.
+> I don't follow what this sentence means.  Normally you'd have
+> While A, B is different..
+>
 
-[1] commit 82ff8e6b78fc ("PCI/MSI: Use msi_get_virq() in pci_get_vector()")
-Fixes: ff0de066b463 ("hwtracing: hisi_ptt: Add trace function support for HiSilicon PCIe Tune and Trace device")
-Reviewed-by: Jonathan Cameron <Jonathan.Cameron@huawei.com>
-Signed-off-by: Yicong Yang <yangyicong@hisilicon.com>
----
- drivers/hwtracing/ptt/hisi_ptt.c | 12 +++++-------
- drivers/hwtracing/ptt/hisi_ptt.h |  2 ++
- 2 files changed, 7 insertions(+), 7 deletions(-)
+Ok, will fix it.
 
-diff --git a/drivers/hwtracing/ptt/hisi_ptt.c b/drivers/hwtracing/ptt/hisi_ptt.c
-index dd404d93081b..aab16baf3913 100644
---- a/drivers/hwtracing/ptt/hisi_ptt.c
-+++ b/drivers/hwtracing/ptt/hisi_ptt.c
-@@ -341,13 +341,13 @@ static int hisi_ptt_register_irq(struct hisi_ptt *hisi_ptt)
- 	if (ret < 0)
- 		return ret;
- 
--	ret = devm_request_threaded_irq(&pdev->dev,
--					pci_irq_vector(pdev, HISI_PTT_TRACE_DMA_IRQ),
-+	hisi_ptt->trace_irq = pci_irq_vector(pdev, HISI_PTT_TRACE_DMA_IRQ);
-+	ret = devm_request_threaded_irq(&pdev->dev, hisi_ptt->trace_irq,
- 					NULL, hisi_ptt_isr, 0,
- 					DRV_NAME, hisi_ptt);
- 	if (ret) {
- 		pci_err(pdev, "failed to request irq %d, ret = %d\n",
--			pci_irq_vector(pdev, HISI_PTT_TRACE_DMA_IRQ), ret);
-+			hisi_ptt->trace_irq, ret);
- 		return ret;
- 	}
- 
-@@ -1098,8 +1098,7 @@ static void hisi_ptt_pmu_start(struct perf_event *event, int flags)
- 	 * core in event_function_local(). If CPU passed is offline we'll fail
- 	 * here, just log it since we can do nothing here.
- 	 */
--	ret = irq_set_affinity(pci_irq_vector(hisi_ptt->pdev, HISI_PTT_TRACE_DMA_IRQ),
--					      cpumask_of(cpu));
-+	ret = irq_set_affinity(hisi_ptt->trace_irq, cpumask_of(cpu));
- 	if (ret)
- 		dev_warn(dev, "failed to set the affinity of trace interrupt\n");
- 
-@@ -1394,8 +1393,7 @@ static int hisi_ptt_cpu_teardown(unsigned int cpu, struct hlist_node *node)
- 	 * Also make sure the interrupt bind to the migrated CPU as well. Warn
- 	 * the user on failure here.
- 	 */
--	if (irq_set_affinity(pci_irq_vector(hisi_ptt->pdev, HISI_PTT_TRACE_DMA_IRQ),
--					    cpumask_of(target)))
-+	if (irq_set_affinity(hisi_ptt->trace_irq, cpumask_of(target)))
- 		dev_warn(dev, "failed to set the affinity of trace interrupt\n");
- 
- 	hisi_ptt->trace_ctrl.on_cpu = target;
-diff --git a/drivers/hwtracing/ptt/hisi_ptt.h b/drivers/hwtracing/ptt/hisi_ptt.h
-index 164012dba4ec..e17f045d7e72 100644
---- a/drivers/hwtracing/ptt/hisi_ptt.h
-+++ b/drivers/hwtracing/ptt/hisi_ptt.h
-@@ -201,6 +201,7 @@ struct hisi_ptt_pmu_buf {
-  * @pdev:         pci_dev of this PTT device
-  * @tune_lock:    lock to serialize the tune process
-  * @pmu_lock:     lock to serialize the perf process
-+ * @trace_irq:    interrupt number used by trace
-  * @upper_bdf:    the upper BDF range of the PCI devices managed by this PTT device
-  * @lower_bdf:    the lower BDF range of the PCI devices managed by this PTT device
-  * @port_filters: the filter list of root ports
-@@ -221,6 +222,7 @@ struct hisi_ptt {
- 	struct pci_dev *pdev;
- 	struct mutex tune_lock;
- 	spinlock_t pmu_lock;
-+	int trace_irq;
- 	u32 upper_bdf;
- 	u32 lower_bdf;
- 
--- 
-2.24.0
+>> Let's support
+>> the PMU driver using the HiSilicon uncore PMU framework.
+>>
+>> * rd_req_en : rd_req_en is the abbreviation of read request tracetag enable
+>> and allows user to count only read operations.
+>> details are listed in the hisi-pmu document.
+> Details are .. Also no need for the ine break
+>    and allows user to count only read operations. Details are listed
+>    in the hisi-pmu document at ....
+
+Thanks, I'm going to replace this
+
+>> * srcid_en & srcid: allows user to filter statistics that come from
+> Allows
+> for consistency with the uring_channel description that follows.
+
+Yes, I will do that.
+
+>> specific CPU/ICL by configuration source ID.
+>>
+>> * uring_channel: Allows users to filter statistical information based on
+>> the specified tx request uring channel.
+>> uring_channel only supported events: [0x47 ~ 0x59].
+>>
+>> Signed-off-by: Junhao He <hejunhao3@huawei.com>
+>
+>> diff --git a/drivers/perf/hisilicon/hisi_uncore_uc_pmu.c b/drivers/perf/hisilicon/hisi_uncore_uc_pmu.c
+>> new file mode 100644
+>> index 000000000000..d27f28584fd7
+>> --- /dev/null
+>> +++ b/drivers/perf/hisilicon/hisi_uncore_uc_pmu.c
+>> @@ -0,0 +1,577 @@
+> ...
+>
+>
+>
+>
+>> +static int hisi_uc_pmu_init_data(struct platform_device *pdev,
+>> +				 struct hisi_pmu *uc_pmu)
+>> +{
+>> +	/*
+>> +	 * Use SCCL (Super CPU Cluster) ID and CCL (CPU Cluster) ID to
+>> +	 * identify the topology information of UC PMU devices in the chip.
+>> +	 */
+> >From patch description, I'd assume there is only one of these
+> per sccl so why do we care about the cluster level or the sub-id?
+> Perhaps that description is missleading?
+
+They have some CCLs per SCCL and then 4 uc pmu per CCL.
+The patch description is misleading and I will fix this in the next release.
+Thanks.
+
+>> +	if (device_property_read_u32(&pdev->dev, "hisilicon,scl-id",
+>> +				     &uc_pmu->sccl_id)) {
+>> +		dev_err(&pdev->dev, "Can not read uc sccl-id!\n");
+>> +		return -EINVAL;
+>> +	}
+>> +
+>> +	if (device_property_read_u32(&pdev->dev, "hisilicon,ccl-id",
+>> +				     &uc_pmu->ccl_id)) {
+>> +		dev_err(&pdev->dev, "Can not read uc ccl-id!\n");
+>> +		return -EINVAL;
+>> +	}
+>> +
+>> +	if (device_property_read_u32(&pdev->dev, "hisilicon,sub-id",
+>> +				     &uc_pmu->sub_id)) {
+>> +		dev_err(&pdev->dev, "Can not read sub-id!\n");
+>> +		return -EINVAL;
+>> +	}
+>> +
+>> +	uc_pmu->base = devm_platform_ioremap_resource(pdev, 0);
+>> +	if (IS_ERR(uc_pmu->base)) {
+>> +		dev_err(&pdev->dev, "ioremap failed for uc_pmu resource\n");
+>> +		return PTR_ERR(uc_pmu->base);
+>> +	}
+>> +
+>> +	uc_pmu->identifier = readl(uc_pmu->base + HISI_UC_VERSION_REG);
+>> +
+>> +	return 0;
+>> +}
+>
+>> +static struct platform_driver hisi_uc_pmu_driver = {
+>> +	.driver = {
+>> +		.name = "hisi_uc_pmu",
+>> +		.acpi_match_table = hisi_uc_pmu_acpi_match,
+>> +		/*
+>> +		 * We have not worked out a safe bind/unbind process,
+>> +		 * so this is not supported yet.
+> If you can reference more info on this that would be great.
+> Perhaps a thread talking about why?
+forcefully unbinding during sampling will lead to a
+kernel panic, because the perf upper-layer framework
+call a NULL pointer in this situation.
+
+Best regards,
+Junhao.
+>> +		 */
+>> +		.suppress_bind_attrs = true,
+>> +	},
+>> +	.probe = hisi_uc_pmu_probe,
+>> +};
+> .
+>
 
