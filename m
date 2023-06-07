@@ -2,124 +2,108 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 287667258D1
-	for <lists+linux-doc@lfdr.de>; Wed,  7 Jun 2023 10:56:36 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id DDF1C725A82
+	for <lists+linux-doc@lfdr.de>; Wed,  7 Jun 2023 11:32:59 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S239705AbjFGI4d (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 7 Jun 2023 04:56:33 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:54630 "EHLO
+        id S240092AbjFGJc6 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 7 Jun 2023 05:32:58 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:50790 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S239616AbjFGI4L (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Wed, 7 Jun 2023 04:56:11 -0400
-Received: from mail-ed1-x529.google.com (mail-ed1-x529.google.com [IPv6:2a00:1450:4864:20::529])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 7B24D1BCB
-        for <linux-doc@vger.kernel.org>; Wed,  7 Jun 2023 01:55:13 -0700 (PDT)
-Received: by mail-ed1-x529.google.com with SMTP id 4fb4d7f45d1cf-5169f920a9dso465087a12.0
-        for <linux-doc@vger.kernel.org>; Wed, 07 Jun 2023 01:55:13 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google; t=1686128112; x=1688720112;
-        h=content-transfer-encoding:in-reply-to:from:references:cc:to
-         :content-language:subject:user-agent:mime-version:date:message-id
-         :from:to:cc:subject:date:message-id:reply-to;
-        bh=RTpA5qOAPRS8MQZfyN8Ss9cXLKE3reuQWNe17eVOs98=;
-        b=D2ESwCvV3EMJ4Ca9Xo0YrNr2h8zDu3w8UAFRDTvjKd+CzOHysYAMrUv95WmgXW6pef
-         PsKk6OT+GE3LhG59KbziqQ8SX2zQaEPT9u8GVDR84WIwdNAJaeEZI0k91AdVnjG4fkba
-         7QfIE+0YEtfGCqwMJjmHD0uUn7sG3yGccZKVA9w7gvuWa2pSa7UzCkUG/q57UumGb1EA
-         4OKi4guQJOqGhlKfXqujVgAzpzyCQ7hJotGxoUFQ9FHVd4N13KRLYrRg+JJE1C5Pxxon
-         yqRiF+kOeMILJ7ArRRRzkzEFaxvUjTteQsnxlZPRwwLMcnLuFClt6rOtK1yjIsDrIlmd
-         ftfw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1686128112; x=1688720112;
-        h=content-transfer-encoding:in-reply-to:from:references:cc:to
-         :content-language:subject:user-agent:mime-version:date:message-id
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=RTpA5qOAPRS8MQZfyN8Ss9cXLKE3reuQWNe17eVOs98=;
-        b=KMIw9h4oyecSbuIkRtyOqUFfYti3EJg0qAcAA/GptpryboYYIicJiLQnWxE7BZ1kfe
-         La/XGQsYps4hmvN6onmqbHxTbn8RZBKvv7J3g8lguwR2usEGUITP1SlphUCB6gBiVDd9
-         xN23GVM5SYhuh7GTDt3KPCuHujwajEp2Aj61q/ZSfpTrenFFG/AHU6uAG/0NJH+nuK6Q
-         AKVe9zxLwSFQm9FZ2ITua/lxxB88REGA5+xWmTuTgrI1U9+WJ36+rCTC0EwFY4bLCebN
-         XJA9jxU8vjiXoOQbdgwXucn2eH5SUbmwbvQWUZk/VuGFqBp7TbmIM0oB/jLRyLwKUgCL
-         rFGA==
-X-Gm-Message-State: AC+VfDxdzWESneh3PZphHZIBmJtrugpdw/vfiuggUq8I4P+yWxVP+YEB
-        LVPbHTIsReO6VnkdMPx4x9qaJQ==
-X-Google-Smtp-Source: ACHHUZ68EljsPgkNMfLt/pjzYCbcf3rch3Eqf0hQ739bCBHvP3l1XP1YD46PoScoXp1Rg3YgbqRIWg==
-X-Received: by 2002:aa7:c59a:0:b0:514:9e47:4319 with SMTP id g26-20020aa7c59a000000b005149e474319mr4990483edq.5.1686128111991;
-        Wed, 07 Jun 2023 01:55:11 -0700 (PDT)
-Received: from [192.168.1.20] ([178.197.219.26])
-        by smtp.gmail.com with ESMTPSA id u6-20020aa7d0c6000000b0050488d1d376sm5951735edo.0.2023.06.07.01.55.09
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Wed, 07 Jun 2023 01:55:11 -0700 (PDT)
-Message-ID: <c8fe71a4-f8bb-d0a5-a227-14040fa024a9@linaro.org>
-Date:   Wed, 7 Jun 2023 10:55:08 +0200
+        with ESMTP id S240068AbjFGJcz (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Wed, 7 Jun 2023 05:32:55 -0400
+Received: from szxga03-in.huawei.com (szxga03-in.huawei.com [45.249.212.189])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id F32E6EB;
+        Wed,  7 Jun 2023 02:32:53 -0700 (PDT)
+Received: from canpemm500009.china.huawei.com (unknown [172.30.72.56])
+        by szxga03-in.huawei.com (SkyGuard) with ESMTP id 4Qbht50YGkzlXGy;
+        Wed,  7 Jun 2023 17:31:09 +0800 (CST)
+Received: from localhost.localdomain (10.50.163.32) by
+ canpemm500009.china.huawei.com (7.192.105.203) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2507.23; Wed, 7 Jun 2023 17:32:51 +0800
+From:   Yicong Yang <yangyicong@huawei.com>
+To:     <mathieu.poirier@linaro.org>, <suzuki.poulose@arm.com>,
+        <jonathan.cameron@huawei.com>, <corbet@lwn.net>,
+        <linux-kernel@vger.kernel.org>, <linux-doc@vger.kernel.org>
+CC:     <alexander.shishkin@linux.intel.com>, <helgaas@kernel.org>,
+        <linux-pci@vger.kernel.org>, <prime.zeng@huawei.com>,
+        <linuxarm@huawei.com>, <yangyicong@hisilicon.com>
+Subject: [PATCH v5 0/5] Improve PTT filter interface and some fixes
+Date:   Wed, 7 Jun 2023 17:31:18 +0800
+Message-ID: <20230607093123.51421-1-yangyicong@huawei.com>
+X-Mailer: git-send-email 2.31.0
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.11.2
-Subject: Re: [v5 3/5] dt-bindings: mfd: Add aspeed pwm-tach binding
-Content-Language: en-US
-To:     Billy Tsai <billy_tsai@aspeedtech.com>,
-        Patrick Williams <patrick@stwcx.xyz>
-Cc:     "jdelvare@suse.com" <jdelvare@suse.com>,
-        "linux@roeck-us.net" <linux@roeck-us.net>,
-        "robh+dt@kernel.org" <robh+dt@kernel.org>,
-        "krzysztof.kozlowski+dt@linaro.org" 
-        <krzysztof.kozlowski+dt@linaro.org>,
-        "joel@jms.id.au" <joel@jms.id.au>,
-        "andrew@aj.id.au" <andrew@aj.id.au>,
-        "lee@kernel.org" <lee@kernel.org>,
-        "thierry.reding@gmail.com" <thierry.reding@gmail.com>,
-        "u.kleine-koenig@pengutronix.de" <u.kleine-koenig@pengutronix.de>,
-        "corbet@lwn.net" <corbet@lwn.net>,
-        "p.zabel@pengutronix.de" <p.zabel@pengutronix.de>,
-        "linux-hwmon@vger.kernel.org" <linux-hwmon@vger.kernel.org>,
-        "devicetree@vger.kernel.org" <devicetree@vger.kernel.org>,
-        "linux-arm-kernel@lists.infradead.org" 
-        <linux-arm-kernel@lists.infradead.org>,
-        "linux-aspeed@lists.ozlabs.org" <linux-aspeed@lists.ozlabs.org>,
-        "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
-        "linux-pwm@vger.kernel.org" <linux-pwm@vger.kernel.org>,
-        "linux-doc@vger.kernel.org" <linux-doc@vger.kernel.org>
-References: <20230606094535.5388-1-billy_tsai@aspeedtech.com>
- <20230606094535.5388-4-billy_tsai@aspeedtech.com>
- <35bf0a69-bcf6-ae35-eb3c-e74cfcf9c571@linaro.org>
- <ZH89fXknZlhGmM_H@heinlein.vulture-banana.ts.net>
- <c28f963e-d13c-6b5c-c389-996e986f81d5@linaro.org>
- <SG2PR06MB33652E18980E9CF8E4F0894D8B53A@SG2PR06MB3365.apcprd06.prod.outlook.com>
-From:   Krzysztof Kozlowski <krzysztof.kozlowski@linaro.org>
-In-Reply-To: <SG2PR06MB33652E18980E9CF8E4F0894D8B53A@SG2PR06MB3365.apcprd06.prod.outlook.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-Spam-Status: No, score=-2.2 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,NICE_REPLY_A,RCVD_IN_DNSWL_NONE,
-        SPF_HELO_NONE,SPF_PASS,T_SCC_BODY_TEXT_LINE,URIBL_BLOCKED
-        autolearn=ham autolearn_force=no version=3.4.6
+Content-Transfer-Encoding: 7BIT
+Content-Type:   text/plain; charset=US-ASCII
+X-Originating-IP: [10.50.163.32]
+X-ClientProxiedBy: dggems701-chm.china.huawei.com (10.3.19.178) To
+ canpemm500009.china.huawei.com (7.192.105.203)
+X-CFilter-Loop: Reflected
+X-Spam-Status: No, score=-4.2 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_MED,
+        SPF_HELO_NONE,SPF_PASS,T_SCC_BODY_TEXT_LINE autolearn=ham
+        autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On 07/06/2023 08:26, Billy Tsai wrote:
->         >>
->         >> He felt what he was trying to accomplish met the documented
->         >> expectations.  Are there some changes that need to be done in mfd.txt to
->         >> further clarify when to use it and when not to?
-> 
->         > I think mfd.txt clearly states:
->         > "For more complex devices, when the nexus driver has to
->         > probe registers to figure out what child devices exist etc, this should
->         > not be used. In the latter case the child devices will be determined by
->         > the operating system."
-> 
-> About the mfd:
-> For our pwm and tach devices, there is no need to check/apply any hardware register from parent to determine child’s existence or functional.
-> They don’t have any dependency on the parent node. In fact, it doesn’t require a specific driver to bind with the "aspeed,ast2600-pwm-tach" label. Their purpose is solely to share the same clock, reset phandle and base address. The main reason for using simple-mfd in this case is because these two independent devices share the same base address.
+From: Yicong Yang <yangyicong@hisilicon.com>
 
-Actually one more thoughts. I have doubt that you have two independent
-devices. If you share the clock, reset line and register address space,
-this means *you do not have two independent devices*.
+This series tends to improve the PTT's filter interface in 2 aspects (Patch 2&3):
+- Support dynamically filter updating to response to hotplug
+  Previous the supported filter list is settled down once the driver probed and
+  it maybe out-of-date if hotplug events happen later. User need to reload the
+  driver to update list. Patch 1/2 enable the driver to update the list by
+  registering a PCI bus notifier and the filter list will always be the latest.
+- Export the available filters through sysfs
+  Previous user needs to calculate the filters and filter value using device's
+  BDF number, which requires the user to know the hardware well. Patch 3/3 tends
+  to export the available filter information through sysfs attributes, the filter
+  value will be gotten by reading the file. This will be more user friendly.
 
-You have most likely only one device.
+In order to support above function, this series also includes a patch 1/4 to factor
+out the allocation and release function of PTT filters.
 
-Best regards,
-Krzysztof
+Also includes an improvement and a fix. Patch 4 tends to set proper PMU capability
+to avoid collecting unnecessary data to save the storage. Patch 5 fix an improper
+use of pci_irq_vector() which have potential problem.
+
+Change since v4:
+- Add tags for Patch 2,3,5 and tweak some comments/docs in Patch 3
+Link: https://lore.kernel.org/all/20230606142244.10939-1-yangyicong@huawei.com/
+
+Change since v3:
+- Addressed the comment from Jonathan. Add tags for Patch 1 and 4. Thanks.
+- Add one bugfix in Patch 5/5
+Link: https://lore.kernel.org/linux-pci/20230523093228.48149-1-yangyicong@huawei.com/
+
+Change since v2:
+- Fix one possible issue for dereferencing a NULL pointer
+Link: https://lore.kernel.org/linux-pci/20230331070310.5465-1-yangyicong@huawei.com/
+
+Change since v1:
+- Drop the patch for handling the cpumask since it seems to be redundant
+- Refine of the codes per Jonathan
+- Add Patch 1/4 for refactor the filters allocation and release
+- Thanks the review of Jonathan.
+Link: https://lore.kernel.org/linux-pci/d496ee4f-641a-a726-ab3f-62b587422b61@huawei.com/T/#m47e4de552d69920035214b3e91080cdc185f61f5
+
+Yicong Yang (5):
+  hwtracing: hisi_ptt: Factor out filter allocation and release
+    operation
+  hwtracing: hisi_ptt: Add support for dynamically updating the filter
+    list
+  hwtracing: hisi_ptt: Export available filters through sysfs
+  hwtracing: hisi_ptt: Advertise PERF_PMU_CAP_NO_EXCLUDE for PTT PMU
+  hwtracing: hisi_ptt: Fix potential sleep in atomic context
+
+ .../ABI/testing/sysfs-devices-hisi_ptt        |  52 ++
+ Documentation/trace/hisi-ptt.rst              |  12 +-
+ drivers/hwtracing/ptt/hisi_ptt.c              | 444 ++++++++++++++++--
+ drivers/hwtracing/ptt/hisi_ptt.h              |  56 +++
+ 4 files changed, 526 insertions(+), 38 deletions(-)
+
+-- 
+2.24.0
 
