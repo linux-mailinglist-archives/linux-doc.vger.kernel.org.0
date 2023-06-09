@@ -2,41 +2,46 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 1476F729206
-	for <lists+linux-doc@lfdr.de>; Fri,  9 Jun 2023 10:00:51 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 71C8C72923F
+	for <lists+linux-doc@lfdr.de>; Fri,  9 Jun 2023 10:07:29 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S239822AbjFIIAk (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Fri, 9 Jun 2023 04:00:40 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:33432 "EHLO
+        id S230129AbjFIIHO (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Fri, 9 Jun 2023 04:07:14 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:43690 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S239911AbjFIH7x (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Fri, 9 Jun 2023 03:59:53 -0400
+        with ESMTP id S236470AbjFIIGu (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Fri, 9 Jun 2023 04:06:50 -0400
 Received: from ms.lwn.net (ms.lwn.net [IPv6:2600:3c01:e000:3a1::42])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 5FD84449C;
-        Fri,  9 Jun 2023 00:58:41 -0700 (PDT)
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 352DB3C00;
+        Fri,  9 Jun 2023 01:06:04 -0700 (PDT)
 Received: from localhost (mdns.lwn.net [45.79.72.68])
         (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
         (No client certificate requested)
-        by ms.lwn.net (Postfix) with ESMTPSA id 9DED8218;
-        Fri,  9 Jun 2023 07:58:38 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 ms.lwn.net 9DED8218
+        by ms.lwn.net (Postfix) with ESMTPSA id CA860218;
+        Fri,  9 Jun 2023 08:06:02 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 ms.lwn.net CA860218
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=lwn.net; s=20201203;
-        t=1686297519; bh=2EHa8FhMrcu51fRSpi7i1IAQ7GWyQ0qfKe2xhFMGwO8=;
+        t=1686297963; bh=vCCZoyVJv/dG21uOzB2PPXR7mnqwnSl+JgF4RTz00ho=;
         h=From:To:Cc:Subject:In-Reply-To:References:Date:From;
-        b=fCEbLKtxgboAcYHLsFNjqVDS5DRjl+edCxiV2VSyDF2xJ83d2LwicIKaVT+6LNfhI
-         q/HkKO1FN79f7TX/O7nItREk/uFaW8H4N5luqeMrfWBd1LpYNJ5NCkQtIut343mC08
-         B21x9h1+3zAUJVSPgvMWS3eRTIxqwBxM98qHhzEhv+QTDk6O/74CSysCG1XSwD8tkN
-         kI74ibqoBNK1ZTj3uOMbNbrgWFqe4ZKjN79W2men0JOcIDiNmaodjslQeZ1xbHb9WE
-         2bkWzHQ4ntQwSY2OuSWJuNDB/ZVmba7W+bErfvjVEovF2yKrdDiN7TS0p9XxoDw4iJ
-         v5k2QL9NlFp+A==
+        b=HYWVs0E+uZvrD2KTOWcZc9exCT37zc1JzeOP9bPEBmIRQnULCdL3gTvh9VwPaRUkQ
+         ywuIjrg2tNNaLKOVs8ykB+Gqx2utABkMLDx4YbDqy3QFg4fSbDCSG7K8oSOnsjc57o
+         Hq/8cYLZ6M441DCYyEeL+Jf7oCZsnkQFRm9ioqXBoa+8r0qfY6q7f0wsJIdvaqaH2X
+         Z2Js1dmjmchCAXAb0+wjf+Y8/mf/2IPTLq3QpMHp9vJwyM5ExNBjbBaxXfOit2OgxX
+         zvyIg9O8WvxcyjcwyLKk66llzhRKwkHQgfnPy58Fb7Beu1XVnfxPirMo1eam4RXQV7
+         JNf0RCN5qqclw==
 From:   Jonathan Corbet <corbet@lwn.net>
-To:     Joe Stringer <joe@isovalent.com>, linux-doc@vger.kernel.org
-Cc:     linux-kernel@vger.kernel.org
-Subject: Re: [PATCH linux-doc v3] docs/doc-guide: Clarify how to write tables
-In-Reply-To: <20230424171850.3612317-1-joe@isovalent.com>
-References: <20230424171850.3612317-1-joe@isovalent.com>
-Date:   Fri, 09 Jun 2023 01:58:35 -0600
-Message-ID: <87mt19oyms.fsf@meer.lwn.net>
+To:     Costa Shulyupin <costa.shul@redhat.com>, linux-doc@vger.kernel.org,
+        Bagas Sanjaya <bagasdotme@gmail.com>
+Cc:     Costa Shulyupin <costa.shul@redhat.com>,
+        open list <linux-kernel@vger.kernel.org>,
+        "open list:BPF [MISC]" <bpf@vger.kernel.org>
+Subject: Re: [PATCH v3] Documentation: subsystem-apis: Categorize remaining
+ subsystems
+In-Reply-To: <20230601145556.3927838-1-costa.shul@redhat.com>
+References: <ZHgM0qKWP3OusjUW@debian.me>
+ <20230601145556.3927838-1-costa.shul@redhat.com>
+Date:   Fri, 09 Jun 2023 02:05:59 -0600
+Message-ID: <87h6rhoyag.fsf@meer.lwn.net>
 MIME-Version: 1.0
 Content-Type: text/plain
 X-Spam-Status: No, score=-2.1 required=5.0 tests=BAYES_00,DKIM_SIGNED,
@@ -49,27 +54,38 @@ Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Joe Stringer <joe@isovalent.com> writes:
+Costa Shulyupin <costa.shul@redhat.com> writes:
 
-> Prior to this commit, the kernel docs writing guide spent over a page
-> describing exactly how *not* to write tables into the kernel docs,
-> without providing a example about the desired format.
+> From: Bagas Sanjaya <bagasdotme@gmail.com>
 >
-> This patch provides a positive example first in the guide so that it's
-> harder to miss, then leaves the existing less desirable approach below
-> for contributors to follow if they have some stronger justification for
-> why to use that approach.
+> Add classes:
+> * Core subsystems
+> * Storage
+> * Networking
+> * Peripherals and devices
+> * Embedded systems
+> * Integrity
+> * Virtualization
+> * Miscellaneous
 >
-> Signed-off-by: Joe Stringer <joe@isovalent.com>
-> ---
-> v3: Fix grammar mistake
-> v2: Simplify recommendation for either simple or grid table syntax
->     Remove example, link to rST user reference
-> ---
->  Documentation/doc-guide/sphinx.rst | 11 ++++++++++-
->  1 file changed, 10 insertions(+), 1 deletion(-)
+> There is a FIXME that says to organize subsystems listed in
+> subsystem-apis.rst. Fulfill it by categorize remaining subsytems
+> by purpose/themes, while sorting entries in each category.
+>
+> HID devices are already categorized in 3c591cc954d56e ("docs:
+> consolidate human interface subsystems").
+>
+> Signed-off-by: Costa Shulyupin <costa.shul@redhat.com>
 
-I stumbled across this languishing in my docs folder, sorry ... it's
-applied now, thanks.
+So now that I've found a moment to look at stuff, I'm a bit confused
+here.  Up top, you have a From: line identifying Bagas as the author of
+this patch - but it lacks his signoff so I can't apply it.
+
+If this is *really* such a complex change that it needs a
+co-developed-by tag, please arrange that and the correct signoffs.
+Otherwise, please send a patch that's your work (which can certainly
+reflect suggestions from others) that is properly tagged.
+
+Thanks,
 
 jon
