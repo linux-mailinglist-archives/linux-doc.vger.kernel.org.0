@@ -2,113 +2,121 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 24049729A57
-	for <lists+linux-doc@lfdr.de>; Fri,  9 Jun 2023 14:49:02 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 7E341729AF4
+	for <lists+linux-doc@lfdr.de>; Fri,  9 Jun 2023 15:04:37 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S231932AbjFIMsb convert rfc822-to-8bit (ORCPT
-        <rfc822;lists+linux-doc@lfdr.de>); Fri, 9 Jun 2023 08:48:31 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:51576 "EHLO
+        id S239341AbjFINEg (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Fri, 9 Jun 2023 09:04:36 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:33330 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S240719AbjFIMsO (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Fri, 9 Jun 2023 08:48:14 -0400
-Received: from mail-yb1-f174.google.com (mail-yb1-f174.google.com [209.85.219.174])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 3A2E22136;
-        Fri,  9 Jun 2023 05:48:14 -0700 (PDT)
-Received: by mail-yb1-f174.google.com with SMTP id 3f1490d57ef6-bacbc7a2998so1668039276.3;
-        Fri, 09 Jun 2023 05:48:14 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1686314893; x=1688906893;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=oUnX0UM+Igwa0fUtgyLnX5bA3wv9FfoFnuZ0mnmyxD8=;
-        b=QNfBp9nfbz0AfKG00qc1JiVBqf8gMHVWNRy0eaSgvW3FiSjCm7J2ET7tgcwDP+NOXz
-         v3ZPc0HMUzAVTumUMPfROmQBlCdKSYCUur6/NeRoBdhGbiDmNChwc2enJoXrwt8Bdz0K
-         fIqrWitTmWdNe0gpkhpzu6tmemVvwIbg0nVtAsz+oulZgAO8dNeiledSXDBSw/HBcvdw
-         +lOxjSnxbwrsxl9eX7YBW564T5bnrAgWpDb/0mEghoe01DxyUqoQ+TArYQ5czNAJJVqJ
-         c5wEL8os1hRXOVTJUoW/TmiUtcVpwGuSKT6av9urD9UQ8lMD/DMAE20apVvmjDFCNCOH
-         1ICQ==
-X-Gm-Message-State: AC+VfDz+3pwdC/wYEgUXXMNiRFV9o4uSgJuHudZeesogVcMmyCQ8q0fE
-        o1m2N5zd8ixE8HwDCg1EJFSGkavCBonYcg==
-X-Google-Smtp-Source: ACHHUZ7iOVF1xsri3laKFtxHiXxBTzdHcJz92n4d/K3jiRMka4jRQy8Ck96PBiGAEaEHSisSKXkFNQ==
-X-Received: by 2002:a25:8207:0:b0:bab:f4bb:9402 with SMTP id q7-20020a258207000000b00babf4bb9402mr997724ybk.46.1686314893217;
-        Fri, 09 Jun 2023 05:48:13 -0700 (PDT)
-Received: from mail-yw1-f170.google.com (mail-yw1-f170.google.com. [209.85.128.170])
-        by smtp.gmail.com with ESMTPSA id ch22-20020a0569020b1600b00bac1087b44esm847720ybb.35.2023.06.09.05.48.10
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Fri, 09 Jun 2023 05:48:11 -0700 (PDT)
-Received: by mail-yw1-f170.google.com with SMTP id 00721157ae682-565ee3d14c2so15657597b3.2;
-        Fri, 09 Jun 2023 05:48:10 -0700 (PDT)
-X-Received: by 2002:a81:8841:0:b0:569:1ff9:58d3 with SMTP id
- y62-20020a818841000000b005691ff958d3mr1254652ywf.1.1686314890673; Fri, 09 Jun
- 2023 05:48:10 -0700 (PDT)
-MIME-Version: 1.0
-References: <cover.1685696114.git.geert+renesas@glider.be> <14e091fc522aa63a3e33bda1016e5fa946d47d18.1685696114.git.geert+renesas@glider.be>
- <20230602110459.GC26944@pendragon.ideasonboard.com> <CAMuHMdXR79TTSAcKb=DA2mRVDgaxBERts5PQLMf+mXpZDQJu=Q@mail.gmail.com>
-In-Reply-To: <CAMuHMdXR79TTSAcKb=DA2mRVDgaxBERts5PQLMf+mXpZDQJu=Q@mail.gmail.com>
-From:   Geert Uytterhoeven <geert@linux-m68k.org>
-Date:   Fri, 9 Jun 2023 14:47:59 +0200
-X-Gmail-Original-Message-ID: <CAMuHMdWcrLme4qHnhXymJZmbYk2Bwr3sBymf5W=t8pdj_g8YXA@mail.gmail.com>
-Message-ID: <CAMuHMdWcrLme4qHnhXymJZmbYk2Bwr3sBymf5W=t8pdj_g8YXA@mail.gmail.com>
-Subject: Re: [PATCH 2/3] drm: Remove references to removed transitional helpers
-To:     Laurent Pinchart <laurent.pinchart@ideasonboard.com>
-Cc:     David Airlie <airlied@gmail.com>, Daniel Vetter <daniel@ffwll.ch>,
-        Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
-        Maxime Ripard <mripard@kernel.org>,
-        Thomas Zimmermann <tzimmermann@suse.de>,
+        with ESMTP id S238814AbjFINEf (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Fri, 9 Jun 2023 09:04:35 -0400
+Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 06B052D72;
+        Fri,  9 Jun 2023 06:04:35 -0700 (PDT)
+Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
+        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+        (No client certificate requested)
+        by dfw.source.kernel.org (Postfix) with ESMTPS id 97BBB61234;
+        Fri,  9 Jun 2023 13:04:34 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id EC01EC433EF;
+        Fri,  9 Jun 2023 13:04:33 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+        s=k20201202; t=1686315874;
+        bh=90rVHTRs/3F5on7zL7vvDRpDwafaR4yvoFsAW9sVsUU=;
+        h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
+        b=ct18ILo60TPRsRZeRF0MA6HqVV541momQ/jF4nftPln9ac11WPptBUohnWBmUvWqE
+         vnbarfiPcuydHingkmODEEfgyBqMNPOYeP2WxeWyeZBtXUQLPWlTQiK3YoRCoQuOkz
+         ykp2yROWej+XaTRvcPNC1Mj4JCwFi/idPxZcvWKMzoJB4BmjIGu9z7nSlgQ6TTTjIl
+         qP4PTzdDzoU3b8crpqEvZ0W3ktzTOLFYBKjsvJzANfoNoi8mgwX007iMF+sc9WNoo4
+         c5+GV/8GYH3NerKeEbysr3Xjw/+GD6dgRglU5pvXYup5qB/zjHokXJytURgg3jzfRS
+         C5Xro19M414WQ==
+Received: from 152.5.30.93.rev.sfr.net ([93.30.5.152] helo=wait-a-minute.misterjones.org)
+        by disco-boy.misterjones.org with esmtpsa  (TLS1.3) tls TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384
+        (Exim 4.95)
+        (envelope-from <maz@kernel.org>)
+        id 1q7bn5-0045UR-GR;
+        Fri, 09 Jun 2023 14:04:31 +0100
+Date:   Fri, 09 Jun 2023 14:04:27 +0100
+Message-ID: <873530okh0.wl-maz@kernel.org>
+From:   Marc Zyngier <maz@kernel.org>
+To:     Yu Zhao <yuzhao@google.com>
+Cc:     Andrew Morton <akpm@linux-foundation.org>,
+        Paolo Bonzini <pbonzini@redhat.com>,
+        Alistair Popple <apopple@nvidia.com>,
+        Anup Patel <anup@brainfault.org>,
+        Ben Gardon <bgardon@google.com>,
+        Borislav Petkov <bp@alien8.de>,
+        Catalin Marinas <catalin.marinas@arm.com>,
+        Chao Peng <chao.p.peng@linux.intel.com>,
+        Christophe Leroy <christophe.leroy@csgroup.eu>,
+        Dave Hansen <dave.hansen@linux.intel.com>,
+        Fabiano Rosas <farosas@linux.ibm.com>,
+        Gaosheng Cui <cuigaosheng1@huawei.com>,
+        Gavin Shan <gshan@redhat.com>,
+        "H. Peter Anvin" <hpa@zytor.com>, Ingo Molnar <mingo@redhat.com>,
+        James Morse <james.morse@arm.com>,
+        "Jason A. Donenfeld" <Jason@zx2c4.com>,
+        Jason Gunthorpe <jgg@ziepe.ca>,
         Jonathan Corbet <corbet@lwn.net>,
-        Jyri Sarha <jyri.sarha@iki.fi>,
-        Tomi Valkeinen <tomba@kernel.org>,
-        Biju Das <biju.das.jz@bp.renesas.com>,
-        dri-devel@lists.freedesktop.org, linux-doc@vger.kernel.org,
-        linux-renesas-soc@vger.kernel.org, linux-kernel@vger.kernel.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 8BIT
-X-Spam-Status: No, score=-1.4 required=5.0 tests=BAYES_00,
-        FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,HEADER_FROM_DIFFERENT_DOMAINS,
-        RCVD_IN_DNSWL_NONE,RCVD_IN_MSPIKE_H2,SPF_HELO_NONE,SPF_PASS,
-        T_SCC_BODY_TEXT_LINE autolearn=no autolearn_force=no version=3.4.6
+        Masami Hiramatsu <mhiramat@kernel.org>,
+        Michael Ellerman <mpe@ellerman.id.au>,
+        Michael Larabel <michael@michaellarabel.com>,
+        Mike Rapoport <rppt@kernel.org>,
+        Nicholas Piggin <npiggin@gmail.com>,
+        Oliver Upton <oliver.upton@linux.dev>,
+        Paul Mackerras <paulus@ozlabs.org>,
+        Peter Xu <peterx@redhat.com>,
+        Sean Christopherson <seanjc@google.com>,
+        Steven Rostedt <rostedt@goodmis.org>,
+        Suzuki K Poulose <suzuki.poulose@arm.com>,
+        Thomas Gleixner <tglx@linutronix.de>,
+        Thomas Huth <thuth@redhat.com>, Will Deacon <will@kernel.org>,
+        Zenghui Yu <yuzenghui@huawei.com>, kvmarm@lists.linux.dev,
+        kvm@vger.kernel.org, linux-arm-kernel@lists.infradead.org,
+        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
+        linux-mm@kvack.org, linuxppc-dev@lists.ozlabs.org,
+        linux-trace-kernel@vger.kernel.org, x86@kernel.org,
+        linux-mm@google.com
+Subject: Re: kvm/arm64: Spark benchmark
+In-Reply-To: <20230609005935.42390-1-yuzhao@google.com>
+References: <20230526234435.662652-1-yuzhao@google.com>
+        <20230609005935.42390-1-yuzhao@google.com>
+User-Agent: Wanderlust/2.15.9 (Almost Unreal) SEMI-EPG/1.14.7 (Harue)
+ FLIM-LB/1.14.9 (=?UTF-8?B?R29qxY0=?=) APEL-LB/10.8 EasyPG/1.0.0 Emacs/28.2
+ (x86_64-pc-linux-gnu) MULE/6.0 (HANACHIRUSATO)
+MIME-Version: 1.0 (generated by SEMI-EPG 1.14.7 - "Harue")
+Content-Type: text/plain; charset=US-ASCII
+X-SA-Exim-Connect-IP: 93.30.5.152
+X-SA-Exim-Rcpt-To: yuzhao@google.com, akpm@linux-foundation.org, pbonzini@redhat.com, apopple@nvidia.com, anup@brainfault.org, bgardon@google.com, bp@alien8.de, catalin.marinas@arm.com, chao.p.peng@linux.intel.com, christophe.leroy@csgroup.eu, dave.hansen@linux.intel.com, farosas@linux.ibm.com, cuigaosheng1@huawei.com, gshan@redhat.com, hpa@zytor.com, mingo@redhat.com, james.morse@arm.com, Jason@zx2c4.com, jgg@ziepe.ca, corbet@lwn.net, mhiramat@kernel.org, mpe@ellerman.id.au, michael@michaellarabel.com, rppt@kernel.org, npiggin@gmail.com, oliver.upton@linux.dev, paulus@ozlabs.org, peterx@redhat.com, seanjc@google.com, rostedt@goodmis.org, suzuki.poulose@arm.com, tglx@linutronix.de, thuth@redhat.com, will@kernel.org, yuzenghui@huawei.com, kvmarm@lists.linux.dev, kvm@vger.kernel.org, linux-arm-kernel@lists.infradead.org, linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org, linux-mm@kvack.org, linuxppc-dev@lists.ozlabs.org, linux-trace-kernel@vger.kernel.org, x86@kernel.org, linux-m
+ m@google.com
+X-SA-Exim-Mail-From: maz@kernel.org
+X-SA-Exim-Scanned: No (on disco-boy.misterjones.org); SAEximRunCond expanded to false
+X-Spam-Status: No, score=-7.1 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_HI,
+        SPF_HELO_NONE,SPF_PASS,T_SCC_BODY_TEXT_LINE autolearn=ham
+        autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Fri, Jun 2, 2023 at 1:17 PM Geert Uytterhoeven <geert@linux-m68k.org> wrote:
-> On Fri, Jun 2, 2023 at 1:05 PM Laurent Pinchart
-> <laurent.pinchart@ideasonboard.com> wrote:
-> > On Fri, Jun 02, 2023 at 11:11:35AM +0200, Geert Uytterhoeven wrote:
-> > > The transitional helpers were removed a long time ago, but some
-> > > references stuck.  Remove them.
-> > >
-> > > Fixes: 21ebe615c16994f3 ("drm: Remove transitional helpers")
-> > > Signed-off-by: Geert Uytterhoeven <geert+renesas@glider.be>
->
-> > > --- a/drivers/gpu/drm/drm_plane_helper.c
-> > > +++ b/drivers/gpu/drm/drm_plane_helper.c
-> > > @@ -51,14 +51,6 @@
-> > >   * planes, and newly merged drivers must not rely upon these transitional
-> > >   * helpers.
-> > >   *
-> >
-> > The first paragraph starts with "This helper library has two parts.". As
-> > you're dropping the mention of the second part, I think you should
-> > rework the first paragraph too.
->
-> That was my initial thought, too.
-> However, the code still has a second part, not related to the topic of
-> the first part (primary plane support).
+On Fri, 09 Jun 2023 01:59:35 +0100,
+Yu Zhao <yuzhao@google.com> wrote:
+> 
+> TLDR
+> ====
+> Apache Spark spent 12% less time sorting four billion random integers twenty times (in ~4 hours) after this patchset [1].
 
-Upon deeper investigation, all of this is related to primary plane
-support. Will update...
+Why are the 3 architectures you have considered being evaluated with 3
+different benchmarks? I am not suspecting you to have cherry-picked
+the best results, but I'd really like to see a variety of benchmarks
+that exercise this stuff differently.
 
-Gr{oetje,eeting}s,
+Thanks,
 
-                        Geert
+	M.
 
 -- 
-Geert Uytterhoeven -- There's lots of Linux beyond ia32 -- geert@linux-m68k.org
-
-In personal conversations with technical people, I call myself a hacker. But
-when I'm talking to journalists I just say "programmer" or something like that.
-                                -- Linus Torvalds
+Without deviation from the norm, progress is not possible.
