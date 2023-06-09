@@ -2,87 +2,74 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 9806772920D
-	for <lists+linux-doc@lfdr.de>; Fri,  9 Jun 2023 10:01:23 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 1476F729206
+	for <lists+linux-doc@lfdr.de>; Fri,  9 Jun 2023 10:00:51 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S239767AbjFIIBP (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Fri, 9 Jun 2023 04:01:15 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:33692 "EHLO
+        id S239822AbjFIIAk (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Fri, 9 Jun 2023 04:00:40 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:33432 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S239775AbjFIIAh (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Fri, 9 Jun 2023 04:00:37 -0400
-Received: from szxga08-in.huawei.com (szxga08-in.huawei.com [45.249.212.255])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id B50282121;
-        Fri,  9 Jun 2023 00:58:58 -0700 (PDT)
-Received: from dggpeml500002.china.huawei.com (unknown [172.30.72.53])
-        by szxga08-in.huawei.com (SkyGuard) with ESMTP id 4QctcK6HgQz18MBM;
-        Fri,  9 Jun 2023 15:53:21 +0800 (CST)
-Received: from localhost.localdomain (10.69.192.56) by
- dggpeml500002.china.huawei.com (7.185.36.158) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.23; Fri, 9 Jun 2023 15:58:11 +0800
-From:   Junhao He <hejunhao3@huawei.com>
-To:     <will@kernel.org>, <jonathan.cameron@huawei.com>,
-        <linux-kernel@vger.kernel.org>, <mark.rutland@arm.com>
-CC:     <linux-arm-kernel@lists.infradead.org>,
-        <linux-doc@vger.kernel.org>, <linuxarm@huawei.com>,
-        <yangyicong@huawei.com>, <shenyang39@huawei.com>,
-        <prime.zeng@hisilicon.com>, <hejunhao3@huawei.com>
-Subject: [PATCH v4 3/3] docs: perf: Add new description for HiSilicon UC PMU
-Date:   Fri, 9 Jun 2023 15:56:08 +0800
-Message-ID: <20230609075608.36559-4-hejunhao3@huawei.com>
-X-Mailer: git-send-email 2.33.0
-In-Reply-To: <20230609075608.36559-1-hejunhao3@huawei.com>
-References: <20230609075608.36559-1-hejunhao3@huawei.com>
+        with ESMTP id S239911AbjFIH7x (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Fri, 9 Jun 2023 03:59:53 -0400
+Received: from ms.lwn.net (ms.lwn.net [IPv6:2600:3c01:e000:3a1::42])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 5FD84449C;
+        Fri,  9 Jun 2023 00:58:41 -0700 (PDT)
+Received: from localhost (mdns.lwn.net [45.79.72.68])
+        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+        (No client certificate requested)
+        by ms.lwn.net (Postfix) with ESMTPSA id 9DED8218;
+        Fri,  9 Jun 2023 07:58:38 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 ms.lwn.net 9DED8218
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=lwn.net; s=20201203;
+        t=1686297519; bh=2EHa8FhMrcu51fRSpi7i1IAQ7GWyQ0qfKe2xhFMGwO8=;
+        h=From:To:Cc:Subject:In-Reply-To:References:Date:From;
+        b=fCEbLKtxgboAcYHLsFNjqVDS5DRjl+edCxiV2VSyDF2xJ83d2LwicIKaVT+6LNfhI
+         q/HkKO1FN79f7TX/O7nItREk/uFaW8H4N5luqeMrfWBd1LpYNJ5NCkQtIut343mC08
+         B21x9h1+3zAUJVSPgvMWS3eRTIxqwBxM98qHhzEhv+QTDk6O/74CSysCG1XSwD8tkN
+         kI74ibqoBNK1ZTj3uOMbNbrgWFqe4ZKjN79W2men0JOcIDiNmaodjslQeZ1xbHb9WE
+         2bkWzHQ4ntQwSY2OuSWJuNDB/ZVmba7W+bErfvjVEovF2yKrdDiN7TS0p9XxoDw4iJ
+         v5k2QL9NlFp+A==
+From:   Jonathan Corbet <corbet@lwn.net>
+To:     Joe Stringer <joe@isovalent.com>, linux-doc@vger.kernel.org
+Cc:     linux-kernel@vger.kernel.org
+Subject: Re: [PATCH linux-doc v3] docs/doc-guide: Clarify how to write tables
+In-Reply-To: <20230424171850.3612317-1-joe@isovalent.com>
+References: <20230424171850.3612317-1-joe@isovalent.com>
+Date:   Fri, 09 Jun 2023 01:58:35 -0600
+Message-ID: <87mt19oyms.fsf@meer.lwn.net>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 7BIT
-Content-Type:   text/plain; charset=US-ASCII
-X-Originating-IP: [10.69.192.56]
-X-ClientProxiedBy: dggems706-chm.china.huawei.com (10.3.19.183) To
- dggpeml500002.china.huawei.com (7.185.36.158)
-X-CFilter-Loop: Reflected
-X-Spam-Status: No, score=-4.2 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_MED,
-        SPF_HELO_NONE,SPF_PASS,T_SCC_BODY_TEXT_LINE autolearn=ham
-        autolearn_force=no version=3.4.6
+Content-Type: text/plain
+X-Spam-Status: No, score=-2.1 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,SPF_HELO_NONE,SPF_PASS,
+        T_SCC_BODY_TEXT_LINE,URIBL_BLOCKED autolearn=ham autolearn_force=no
+        version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-A new function is added on HiSilicon uncore UC PMU.
+Joe Stringer <joe@isovalent.com> writes:
 
-The UC PMU support to filter statistical information based on
-the specified tx request uring channel. Make user configuration
-through "uring_channel" parameter.
-Document them to provide guidance on how to use them.
+> Prior to this commit, the kernel docs writing guide spent over a page
+> describing exactly how *not* to write tables into the kernel docs,
+> without providing a example about the desired format.
+>
+> This patch provides a positive example first in the guide so that it's
+> harder to miss, then leaves the existing less desirable approach below
+> for contributors to follow if they have some stronger justification for
+> why to use that approach.
+>
+> Signed-off-by: Joe Stringer <joe@isovalent.com>
+> ---
+> v3: Fix grammar mistake
+> v2: Simplify recommendation for either simple or grid table syntax
+>     Remove example, link to rST user reference
+> ---
+>  Documentation/doc-guide/sphinx.rst | 11 ++++++++++-
+>  1 file changed, 10 insertions(+), 1 deletion(-)
 
-Signed-off-by: Junhao He <hejunhao3@huawei.com>
-Reviewed-by: Jonathan Cameron <Jonthan.Cameron@huawei.com>
-Reviewed-by: Yicong Yang <yangyicong@hisilicon.com>
----
- Documentation/admin-guide/perf/hisi-pmu.rst | 8 ++++++++
- 1 file changed, 8 insertions(+)
+I stumbled across this languishing in my docs folder, sorry ... it's
+applied now, thanks.
 
-diff --git a/Documentation/admin-guide/perf/hisi-pmu.rst b/Documentation/admin-guide/perf/hisi-pmu.rst
-index 546979360513..939a524fa1d6 100644
---- a/Documentation/admin-guide/perf/hisi-pmu.rst
-+++ b/Documentation/admin-guide/perf/hisi-pmu.rst
-@@ -98,6 +98,14 @@ CCL/ICL-ID. For I/O die, the ICL-ID is followed by:
- 5'b00011: HAC_ICL;
- 5'b10000: PCIe_ICL;
- 
-+(e) uring_channel: UC PMU events 0x47~0x59 supports filtering by tx request
-+uring channel. It is 2 bits. Some important codes are as follows:
-+2'b11: count the events which sent to the uring_ext (MATA) channel;
-+2'b01: is the same as 2'b11;
-+2'b10: count the events which sent to the uring (non-MATA) channel;
-+2'b00: default value, count the events which sent to the both uring and
-+       uring_ext channel;
-+
- Users could configure IDs to count data come from specific CCL/ICL, by setting
- srcid_cmd & srcid_msk, and data desitined for specific CCL/ICL by setting
- tgtid_cmd & tgtid_msk. A set bit in srcid_msk/tgtid_msk means the PMU will not
--- 
-2.33.0
-
+jon
