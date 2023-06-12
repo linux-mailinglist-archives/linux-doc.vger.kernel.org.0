@@ -2,70 +2,75 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id C567072D4A1
-	for <lists+linux-doc@lfdr.de>; Tue, 13 Jun 2023 00:43:44 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 87C7272D50D
+	for <lists+linux-doc@lfdr.de>; Tue, 13 Jun 2023 01:40:54 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S236337AbjFLWnn (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 12 Jun 2023 18:43:43 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:51396 "EHLO
+        id S237942AbjFLXkw (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 12 Jun 2023 19:40:52 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:40500 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S236558AbjFLWnf (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Mon, 12 Jun 2023 18:43:35 -0400
-Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id EE869F0;
-        Mon, 12 Jun 2023 15:43:33 -0700 (PDT)
-Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
-        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
-        (No client certificate requested)
-        by dfw.source.kernel.org (Postfix) with ESMTPS id 888D961F2D;
-        Mon, 12 Jun 2023 22:43:33 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id CE8A3C433D2;
-        Mon, 12 Jun 2023 22:43:30 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-        s=k20201202; t=1686609812;
-        bh=JBnyaSL01ZIaD9BxSHKCygGU9ZOWddzqcQnjN+ViNR8=;
-        h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
-        b=Y+dhwf2/ZroIxTkGwW0S2KpBpLyAmhnEDkWq8yrVJBaUmeNTM8chFq3gJGGAI9AJP
-         hgMI//H1pDJ47odAmSs2mBJR2CpDMQqiviylWQF8wWxOJvSni8Y4Mbh8LAXR20OxcU
-         6Xhm7nJrbOoj0l2hV0O/MUopYZQ1jj1VgkAFYT0F1CwVg2T3QOmJFlDXbUzMR92E5X
-         HVXSZcqxVSq0xilwvIoplXESzJcetA9CXlCXMguI3cKCaAJndPxDEi39UqHgpoH0EV
-         /yv/QVyVJVoJr2TdG4igeCfEZUJjvTah3/P2T8uGRxR2wSkfztSfGPM1HFOARQ6xzL
-         L/1Gs8PyRFmiw==
-Date:   Mon, 12 Jun 2023 15:43:29 -0700
-From:   Jakub Kicinski <kuba@kernel.org>
-To:     Arkadiusz Kubalewski <arkadiusz.kubalewski@intel.com>
-Cc:     jiri@resnulli.us, vadfed@meta.com, jonathan.lemon@gmail.com,
-        pabeni@redhat.com, corbet@lwn.net, davem@davemloft.net,
-        edumazet@google.com, vadfed@fb.com, jesse.brandeburg@intel.com,
-        anthony.l.nguyen@intel.com, saeedm@nvidia.com, leon@kernel.org,
-        richardcochran@gmail.com, sj@kernel.org, javierm@redhat.com,
-        ricardo.canuelo@collabora.com, mst@redhat.com, tzimmermann@suse.de,
-        michal.michalik@intel.com, gregkh@linuxfoundation.org,
-        jacek.lawrynowicz@linux.intel.com, airlied@redhat.com,
-        ogabbay@kernel.org, arnd@arndb.de, nipun.gupta@amd.com,
-        axboe@kernel.dk, linux@zary.sk, masahiroy@kernel.org,
-        benjamin.tissoires@redhat.com, geert+renesas@glider.be,
-        milena.olech@intel.com, kuniyu@amazon.com, liuhangbin@gmail.com,
-        hkallweit1@gmail.com, andy.ren@getcruise.com, razor@blackwall.org,
-        idosch@nvidia.com, lucien.xin@gmail.com, nicolas.dichtel@6wind.com,
-        phil@nwl.cc, claudiajkang@gmail.com, linux-doc@vger.kernel.org,
-        linux-kernel@vger.kernel.org, netdev@vger.kernel.org,
-        intel-wired-lan@lists.osuosl.org, linux-rdma@vger.kernel.org,
-        linux-arm-kernel@lists.infradead.org, poros@redhat.com,
-        mschmidt@redhat.com, linux-clk@vger.kernel.org,
-        vadim.fedorenko@linux.dev
-Subject: Re: [RFC PATCH v8 01/10] dpll: documentation on DPLL subsystem
- interface
-Message-ID: <20230612154329.7bd2d52f@kernel.org>
-In-Reply-To: <20230609121853.3607724-2-arkadiusz.kubalewski@intel.com>
-References: <20230609121853.3607724-1-arkadiusz.kubalewski@intel.com>
-        <20230609121853.3607724-2-arkadiusz.kubalewski@intel.com>
+        with ESMTP id S237529AbjFLXkv (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Mon, 12 Jun 2023 19:40:51 -0400
+Received: from mail-ej1-x62b.google.com (mail-ej1-x62b.google.com [IPv6:2a00:1450:4864:20::62b])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 274B5183
+        for <linux-doc@vger.kernel.org>; Mon, 12 Jun 2023 16:40:50 -0700 (PDT)
+Received: by mail-ej1-x62b.google.com with SMTP id a640c23a62f3a-9745baf7c13so721620166b.1
+        for <linux-doc@vger.kernel.org>; Mon, 12 Jun 2023 16:40:50 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=linaro.org; s=google; t=1686613248; x=1689205248;
+        h=content-transfer-encoding:in-reply-to:from:references:cc:to
+         :content-language:subject:user-agent:mime-version:date:message-id
+         :from:to:cc:subject:date:message-id:reply-to;
+        bh=0plznu46M2amPYKPK8ZShoxVxxLpYp87ml9xhcEannU=;
+        b=iylhla0TLJOHJ7YHwNZvblc32iC04Dj2fukw4IkvwHF6HOMdTOBMVkcBA6f0ioZOlq
+         rP9W8XD2DgUW8AGMnhwikHTLgo4yq4AH3DMAqkVEfIKvlnfgrQlROk9ENg72G+8niOmB
+         UH58ThMEnrXe9q6wdezMeMbOrDO46P0rcOameor6+BkRe2IDTqwNRD4KK5fOIp1LEH0m
+         EFRJu63MX5e/S1O2nwL9Kx9x9i2CwgvbZ59shdEyiPkz1YdtkA6tkVvCi1c2PAh+uolg
+         OrhL54V41Zt8LZ5Tm00jRMetnsCUQtziE04+Is7tQQ3zgf0/gvheGbK4tFFfA8Ax46l8
+         w4/w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20221208; t=1686613248; x=1689205248;
+        h=content-transfer-encoding:in-reply-to:from:references:cc:to
+         :content-language:subject:user-agent:mime-version:date:message-id
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=0plznu46M2amPYKPK8ZShoxVxxLpYp87ml9xhcEannU=;
+        b=JIjB0dEO6+pI6YOqMg2+Q0aG3Hx25+1NT6zpu3J8pfJzwAmwJZE0qsF89a02gelCYi
+         K9NMPL2rnnZUz3dItp4hhEKEnH28AupeKwi/27u3leYmBMXHqAC4cL4NLUzs0F88d8DV
+         s44MPD/oP+mP+vxATg9OE2Wnmt7vsJKoXaH+JcPaVeTD40KsG99sDJR4BAwxPgCcs5sG
+         tTGI6pkJz7+kUZOSdewzPmEuqNx71HNM+JaE6nEZ66MiEsJAlGD6v7nrQjISEZzXoVCq
+         r1Uen+Yr+GYTqRE6NrV4d1gPNWS0LvF+lXvXe03mjwkWqzK6CziGARBoTeBFmxz6Ui42
+         Ud7w==
+X-Gm-Message-State: AC+VfDxNvU6BsLYbZdBnKR7OmZe8fkwh74T3EJdFwZ4DvvZwSWV6ESgK
+        4MfYnWs/cKFBMYeW4VKYcerzLg==
+X-Google-Smtp-Source: ACHHUZ77MZwbIKwyjdjJH4wSPQIhZQXuxZ5o4bsqJJFoMk2Jtj2w5fhlm9UpqhqLOuDiov0zmcH6TA==
+X-Received: by 2002:a17:907:a411:b0:96f:2315:29fe with SMTP id sg17-20020a170907a41100b0096f231529femr11761796ejc.0.1686613248692;
+        Mon, 12 Jun 2023 16:40:48 -0700 (PDT)
+Received: from [10.10.0.115] ([185.140.244.249])
+        by smtp.gmail.com with ESMTPSA id w8-20020aa7cb48000000b0051632dc69absm5598949edt.86.2023.06.12.16.40.47
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Mon, 12 Jun 2023 16:40:48 -0700 (PDT)
+Message-ID: <50955a66-f8eb-9999-1685-763c3f2ceda0@linaro.org>
+Date:   Tue, 13 Jun 2023 01:40:47 +0200
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: 7bit
-X-Spam-Status: No, score=-7.1 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_HI,
-        SPF_HELO_NONE,SPF_PASS,T_SCC_BODY_TEXT_LINE autolearn=ham
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:102.0)
+ Gecko/20100101 Thunderbird/102.11.2
+Subject: Re: [PATCH 4/7] mips: update a reference to a moved Arm Document
+Content-Language: en-US
+To:     Jonathan Corbet <corbet@lwn.net>, linux-doc@vger.kernel.org
+Cc:     linux-kernel@vger.kernel.org, linux-arch@vger.kernel.org,
+        linux-arm-kernel@lists.infradead.org,
+        Florian Fainelli <f.fainelli@gmail.com>,
+        Thomas Bogendoerfer <tsbogend@alpha.franken.de>,
+        linux-mips@vger.kernel.org
+References: <20230519164607.38845-1-corbet@lwn.net>
+ <20230519164607.38845-5-corbet@lwn.net>
+From:   =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <philmd@linaro.org>
+In-Reply-To: <20230519164607.38845-5-corbet@lwn.net>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-Spam-Status: No, score=-2.2 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,NICE_REPLY_A,RCVD_IN_DNSWL_NONE,
+        SPF_HELO_NONE,SPF_PASS,T_SCC_BODY_TEXT_LINE autolearn=unavailable
         autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
@@ -73,45 +78,17 @@ Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Fri,  9 Jun 2023 14:18:44 +0200 Arkadiusz Kubalewski wrote:
-> From: Vadim Fedorenko <vadim.fedorenko@linux.dev>
+On 19/5/23 18:46, Jonathan Corbet wrote:
+> Arm documentation has moved to Documentation/arch/arm; update a reference
+> in arch/mips/bmips/setup.c to match.
 > 
-> Add documentation explaining common netlink interface to configure DPLL
-> devices and monitoring events. Common way to implement DPLL device in
-> a driver is also covered.
+> Cc: Florian Fainelli <f.fainelli@gmail.com>
+> Cc: Thomas Bogendoerfer <tsbogend@alpha.franken.de>
+> Cc: linux-mips@vger.kernel.org
+> Signed-off-by: Jonathan Corbet <corbet@lwn.net>
+> ---
+>   arch/mips/bmips/setup.c | 5 ++++-
+>   1 file changed, 4 insertions(+), 1 deletion(-)
 
-> +``'pin': [{
-> + {'clock-id': 282574471561216,
-> +  'module-name': 'ice',
-> +  'pin-dpll-caps': 4,
-> +  'pin-id': 13,
-> +  'pin-parent': [{'pin-id': 2, 'pin-state': 'connected'},
-> +                 {'pin-id': 3, 'pin-state': 'disconnected'},
-> +                 {'id': 0, 'pin-direction': 'input'},
-> +                 {'id': 1, 'pin-direction': 'input'}],
-> +  'pin-type': 'synce-eth-port'}
-> +}]``
+Reviewed-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 
-It seems like pin-parent is overloaded, can we split it into two
-different nests?
-
-> +SET commands format
-> +===================
-> +
-> +``DPLL_CMD_DEVICE_SET`` - to target a dpll device, the user provides
-> +``DPLL_A_ID``, which is unique identifier of dpll device in the system,
-> +as well as parameter being configured (``DPLL_A_MODE``).
-> +
-> +``DPLL_CMD_PIN_SET`` - to target a pin user has to provide a
-> +``DPLL_A_PIN_ID``, which is unique identifier of a pin in the system.
-> +Also configured pin parameters must be added.
-> +If ``DPLL_A_PIN_DIRECTION`` or ``DPLL_A_PIN_FREQUENCY`` are configured,
-> +this affects all the dpll device they are connected, that is why those
-> +attributes shall not be enclosed in ``DPLL_A_PIN_PARENT``.
-> +Other attributes:
-> +``DPLL_A_PIN_PRIO`` or ``DPLL_A_PIN_STATE`` must be enclosed in
-> +``DPLL_A_PIN_PARENT`` as their configuration relates to only one
-> +parent dpll or parent pin.
-
-Also sounds like setting pin attrs and pin-parent attrs should be
-different commands.
