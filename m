@@ -2,80 +2,95 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 67BF972C83D
-	for <lists+linux-doc@lfdr.de>; Mon, 12 Jun 2023 16:24:32 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 8957672CDC6
+	for <lists+linux-doc@lfdr.de>; Mon, 12 Jun 2023 20:21:21 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S238652AbjFLOYa (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 12 Jun 2023 10:24:30 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:33206 "EHLO
+        id S234190AbjFLSVT (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 12 Jun 2023 14:21:19 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:42236 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S237975AbjFLOYH (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Mon, 12 Jun 2023 10:24:07 -0400
-Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id BCEB3294D;
-        Mon, 12 Jun 2023 07:22:30 -0700 (PDT)
-Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
-        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+        with ESMTP id S233889AbjFLSVS (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Mon, 12 Jun 2023 14:21:18 -0400
+Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.129.124])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 28A64E64
+        for <linux-doc@vger.kernel.org>; Mon, 12 Jun 2023 11:20:24 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+        s=mimecast20190719; t=1686594022;
+        h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+         to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+         in-reply-to:in-reply-to:references:references;
+        bh=DweJJLld2HQbZcM4M29lIrPOPHeHIdRll60sBYlCG68=;
+        b=RMmGa3V9xNhWF+I8DrbRl+BrGJWIyabuysgKaWt1cOCe2fbEBjmtw25RVzRet4XDXdvVJ1
+        RyiWxbVr84v+Cm0392SXkX7vgQ6Q2gHQwuDigt0ZiV870Q9zFSn5q8Pq5ecoZdcC+gT24z
+        go/o2wkjpSXTwNLvZF1rVm0rTqhqGjw=
+Received: from mimecast-mx02.redhat.com (mx3-rdu2.redhat.com
+ [66.187.233.73]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ us-mta-91-MT2yHL5fPISWGWg2lrhwgw-1; Mon, 12 Jun 2023 14:20:20 -0400
+X-MC-Unique: MT2yHL5fPISWGWg2lrhwgw-1
+Received: from smtp.corp.redhat.com (int-mx02.intmail.prod.int.rdu2.redhat.com [10.11.54.2])
+        (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
         (No client certificate requested)
-        by dfw.source.kernel.org (Postfix) with ESMTPS id D7E566286F;
-        Mon, 12 Jun 2023 14:21:41 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 5812AC433EF;
-        Mon, 12 Jun 2023 14:21:38 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-        s=k20201202; t=1686579701;
-        bh=bSUbZg2GY9GL7g7yiiN7tqLp1+VLUW4pVV34E8slSwo=;
-        h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
-        b=lk0U0vNCLXQ1jivG/UTk76PB3arKqpixoHqJxze+Y0oeKQYI25nfxIRv9g7FkYVIx
-         F8wVXE0VeX09NSrfb19zCwclIB1bs51uXd/uTAVZonb+t/LhSq76sGtK8vFKgtP4We
-         /h7LeE3Fc9ZmBewyd4Onfs/WH29sWmtjrjs/w0Tu+DPUWeQFxlNwA7ZK+UlmpKr2me
-         yWkAS+rvrfAnVzak8Iu0biKpUHP7Ea8MI8JeVjIq7DaFzFhjWGNLCQ3bpdWkqcM282
-         cBoDHFPDO475XTpOvyhfFO4cQx8W89mA+6fdK8VJCRa9DMgf6PxytEXcQa/evvB8Ai
-         tUUHO95sQgenw==
-Message-ID: <8cbfa5c1-bc6b-741e-3739-f251edeecfbf@kernel.org>
-Date:   Mon, 12 Jun 2023 16:21:35 +0200
+        by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 968DE38117F7;
+        Mon, 12 Jun 2023 18:20:19 +0000 (UTC)
+Received: from tpad.localdomain (ovpn-112-2.gru2.redhat.com [10.97.112.2])
+        by smtp.corp.redhat.com (Postfix) with ESMTPS id 57E1440D1B61;
+        Mon, 12 Jun 2023 18:20:19 +0000 (UTC)
+Received: by tpad.localdomain (Postfix, from userid 1000)
+        id 526D3400F7B72; Mon, 12 Jun 2023 11:24:17 -0300 (-03)
+Date:   Mon, 12 Jun 2023 11:24:17 -0300
+From:   Marcelo Tosatti <mtosatti@redhat.com>
+To:     Randy Dunlap <rdunlap@infradead.org>
+Cc:     linux-kernel@vger.kernel.org,
+        "Rafael J. Wysocki" <rafael.j.wysocki@intel.com>,
+        Jonathan Corbet <corbet@lwn.net>, linux-doc@vger.kernel.org
+Subject: Re: [PATCH] Documentation: virt: correct location of haltpoll module
+ params
+Message-ID: <ZIcqkSzHGTZB6spQ@tpad>
+References: <20230610054302.6223-1-rdunlap@infradead.org>
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.9.1
-Subject: Re: [PATCH V3 02/11] rtla: Add --house-keeping option
-Content-Language: en-US
-To:     "Masami Hiramatsu (Google)" <mhiramat@kernel.org>
-Cc:     linux-kernel@vger.kernel.org, linux-trace-kernel@vger.kernel.org,
-        Steven Rostedt <rostedt@goodmis.org>,
-        linux-doc@vger.kernel.org, Juri Lelli <juri.lelli@redhat.com>,
-        William White <chwhite@redhat.com>,
-        Jonathan Corbet <corbet@lwn.net>
-References: <cover.1686066600.git.bristot@kernel.org>
- <6a6c78a579a96ba8b02ae67ee1e0ba2cb5e03c4a.1686066600.git.bristot@kernel.org>
- <20230612230600.7e009782e8365cd5f1bce444@kernel.org>
-From:   Daniel Bristot de Oliveira <bristot@kernel.org>
-In-Reply-To: <20230612230600.7e009782e8365cd5f1bce444@kernel.org>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-Spam-Status: No, score=-7.2 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,NICE_REPLY_A,
-        RCVD_IN_DNSWL_HI,SPF_HELO_NONE,SPF_PASS,T_SCC_BODY_TEXT_LINE
-        autolearn=ham autolearn_force=no version=3.4.6
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20230610054302.6223-1-rdunlap@infradead.org>
+X-Scanned-By: MIMEDefang 3.1 on 10.11.54.2
+X-Spam-Status: No, score=-0.5 required=5.0 tests=BAYES_00,DATE_IN_PAST_03_06,
+        DKIMWL_WL_HIGH,DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,
+        RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,SPF_NONE,T_SCC_BODY_TEXT_LINE
+        autolearn=no autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On 6/12/23 16:06, Masami Hiramatsu (Google) wrote:
-> On Tue,  6 Jun 2023 18:12:16 +0200
-> Daniel Bristot de Oliveira <bristot@kernel.org> wrote:
+On Fri, Jun 09, 2023 at 10:43:02PM -0700, Randy Dunlap wrote:
+> Module parameters are located in sysfs, not debugfs, so correct the
+> statement.
 > 
->> To avoid having rtla interfering with the measurement threads, add an
->> option for the user to set the CPUs in which rtla should run. For
->> instance:
->>
->>   # rtla timerlat top -H 0 -C 1-7
-> Isn't it '-c 1-7' instead of '-C', because -C is for cgroup name?
-
-Ooops, you are right.
-
--- Daniel
-
-> Thanks,
+> Fixes: 2cffe9f6b96f ("cpuidle: add haltpoll governor")
+> Signed-off-by: Randy Dunlap <rdunlap@infradead.org>
+> Cc: Marcelo Tosatti <mtosatti@redhat.com>
+> Cc: "Rafael J. Wysocki" <rafael.j.wysocki@intel.com>
+> Cc: Jonathan Corbet <corbet@lwn.net>
+> Cc: linux-doc@vger.kernel.org
+> ---
+>  Documentation/virt/guest-halt-polling.rst |    2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
 > 
+> diff -- a/Documentation/virt/guest-halt-polling.rst b/Documentation/virt/guest-halt-polling.rst
+> --- a/Documentation/virt/guest-halt-polling.rst
+> +++ b/Documentation/virt/guest-halt-polling.rst
+> @@ -72,7 +72,7 @@ high once achieves global guest_halt_pol
+>  
+>  Default: Y
+>  
+> -The module parameters can be set from the debugfs files in::
+> +The module parameters can be set from the sysfs files in::
+>  
+>  	/sys/module/haltpoll/parameters/
+>  
+> 
+> 
+
+Signed-off-by: Marcelo Tosatti <mtosatti@redhat.com>
 
