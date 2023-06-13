@@ -2,92 +2,133 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 37DC172EAE0
-	for <lists+linux-doc@lfdr.de>; Tue, 13 Jun 2023 20:25:38 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id CADC572EAED
+	for <lists+linux-doc@lfdr.de>; Tue, 13 Jun 2023 20:28:40 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S232748AbjFMSZQ (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 13 Jun 2023 14:25:16 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:58518 "EHLO
+        id S230456AbjFMS2b (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 13 Jun 2023 14:28:31 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:33390 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S239370AbjFMSYn (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 13 Jun 2023 14:24:43 -0400
-Received: from dfw.source.kernel.org (dfw.source.kernel.org [IPv6:2604:1380:4641:c500::1])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 9A54DE41;
-        Tue, 13 Jun 2023 11:24:42 -0700 (PDT)
-Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
-        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
-        (No client certificate requested)
-        by dfw.source.kernel.org (Postfix) with ESMTPS id 2F36063365;
-        Tue, 13 Jun 2023 18:24:42 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 125D1C433F1;
-        Tue, 13 Jun 2023 18:24:41 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-        s=k20201202; t=1686680681;
-        bh=tKaE0feCA4Misffydrf5UR6uG+RXTeYv2hshyi6erLw=;
-        h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-        b=BhJ2cluNI4psNgHorBPau3CpVT1R9LA6maOtkq4Jg7r+eOP1b9SBvIOw2gL4U1U+p
-         sJTDHRyT0xThUGQQ3SLFPV51kBaQry3fG6EpHHmfpVx6TLUEBMwzHlrlcuav0vhQaV
-         BtJbiA9mYF3TaUyVgC1XDtp32cQR+GRJ5jE5SXiqkHGYF9M9LCMyC1VBaVAdeE8YB6
-         rbd54j5/RMZflfPPq/WfFhiV2g7HBVbkOaX4veNpewafKHPPILbiiNeVGRg4OX1rSp
-         24wcRcOPE9R4POUba/uQafK1PW/ggSSCEq1vPrrhTKW4g84QbMBGLbMau12YYQpZpk
-         ouVO+GoDJhOzg==
-From:   SeongJae Park <sj@kernel.org>
-To:     paulmck@kernel.org
-Cc:     SeongJae Park <sj@kernel.org>, joel@joelfernandes.org,
-        mmpgouride@gmail.com, corbet@lwn.net, rcu@vger.kernel.org,
-        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org
-Subject: [PATCH v2 4/4] Docs/RCU/rculist_nulls: Fix wrong text about atomic_set_release()
-Date:   Tue, 13 Jun 2023 18:24:34 +0000
-Message-Id: <20230613182434.88317-5-sj@kernel.org>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20230613182434.88317-1-sj@kernel.org>
-References: <20230613182434.88317-1-sj@kernel.org>
+        with ESMTP id S229682AbjFMS23 (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 13 Jun 2023 14:28:29 -0400
+Received: from mail-ed1-x530.google.com (mail-ed1-x530.google.com [IPv6:2a00:1450:4864:20::530])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 55B0110CC
+        for <linux-doc@vger.kernel.org>; Tue, 13 Jun 2023 11:28:28 -0700 (PDT)
+Received: by mail-ed1-x530.google.com with SMTP id 4fb4d7f45d1cf-5147e40bbbbso8806235a12.3
+        for <linux-doc@vger.kernel.org>; Tue, 13 Jun 2023 11:28:28 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=linux-foundation.org; s=google; t=1686680906; x=1689272906;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=c13OqGThZo2X78u4bO5FLqEGNspfbVSXUjccgWtSHTY=;
+        b=bj0eAgReK1rz2YvIsysbZI4REZKwTwavtfzTGkbwIdYEOO6rdiVTCfqL6HY9yFyxoL
+         DkcqEV6dz6b8Vu2Ssd7P5DuIbtngR5yhr/FS7ipKSzteNHOOhJUjTvjOSvOA6Q3QkOaM
+         OpcETy/dEMkN5kiLPvqCfEcGfY319ZqvlfjwM=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20221208; t=1686680906; x=1689272906;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=c13OqGThZo2X78u4bO5FLqEGNspfbVSXUjccgWtSHTY=;
+        b=NOkFESBXRPLx9nRdxUfPHgfo7ROxtUfoNDiCRo7Bxl5XWysbCJUzH876Yh6oREuxK/
+         Kw0MRKpuyCpdp5VBgjShWYEtFPWFP9w41LdWoFxnob5jlF72EdkHHAKzm+K40Yh6ZR0Y
+         Tg/csnwgPiwdMn8iMhP/qn21nni4+TASDeZV9mK5enmwzTnksi4HbQGwCEe3RBz2QV9K
+         HMOavJSAtdm5nxikLLpLL1QZw20UItV4tSkJY/rYKliplk5Ss4Bxg/LHTMesEwXLpwfa
+         tJ+GjmqHfu+TBYoG5JPDDtQfNVkPB9Lxn0+C5G3iOrb4YW6quG/25Ov1fD7Zx3FzABd0
+         Rlvw==
+X-Gm-Message-State: AC+VfDydGcD/Cdk0QVygL7h4QMX/rEeL+W1fBVi4LYbHEBZm91qfNV1Q
+        UIYsUgIWeaXqgfRFptztkJJJEn/lgxLLBheoN09kWRhp
+X-Google-Smtp-Source: ACHHUZ6w7fRrYyvPJGCZZs6YIepeYGZnpURJNx1Fh84Jp87kkteEydBftjs14r1fpUeJL504SsIArg==
+X-Received: by 2002:a17:907:6d08:b0:978:992e:efc4 with SMTP id sa8-20020a1709076d0800b00978992eefc4mr12056356ejc.8.1686680906631;
+        Tue, 13 Jun 2023 11:28:26 -0700 (PDT)
+Received: from mail-ed1-f52.google.com (mail-ed1-f52.google.com. [209.85.208.52])
+        by smtp.gmail.com with ESMTPSA id p6-20020a1709061b4600b00977e4c1727esm6940360ejg.29.2023.06.13.11.28.24
+        for <linux-doc@vger.kernel.org>
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Tue, 13 Jun 2023 11:28:25 -0700 (PDT)
+Received: by mail-ed1-f52.google.com with SMTP id 4fb4d7f45d1cf-5184abe9e86so2772591a12.0
+        for <linux-doc@vger.kernel.org>; Tue, 13 Jun 2023 11:28:24 -0700 (PDT)
+X-Received: by 2002:a19:3819:0:b0:4f7:457e:a457 with SMTP id
+ f25-20020a193819000000b004f7457ea457mr3476722lfa.53.1686680882933; Tue, 13
+ Jun 2023 11:28:02 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Spam-Status: No, score=-4.4 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_MED,
-        SPF_HELO_NONE,SPF_PASS,T_SCC_BODY_TEXT_LINE autolearn=ham
-        autolearn_force=no version=3.4.6
+References: <20230613001108.3040476-1-rick.p.edgecombe@intel.com>
+ <CAHk-=wh0UNRn96k3XLh2AYOo0iz1k_Qk-rQXv8kYjXkKBzUMWA@mail.gmail.com>
+ <c239d2c4f7e369690866db455813cac359731e1d.camel@intel.com> <CAHk-=wjSWhVV+qr_tV0xg8c0WRn_H9wtFZkUVCpv-VzsddAS-Q@mail.gmail.com>
+In-Reply-To: <CAHk-=wjSWhVV+qr_tV0xg8c0WRn_H9wtFZkUVCpv-VzsddAS-Q@mail.gmail.com>
+From:   Linus Torvalds <torvalds@linux-foundation.org>
+Date:   Tue, 13 Jun 2023 11:27:45 -0700
+X-Gmail-Original-Message-ID: <CAHk-=whY0ggV9P+3Ch1LcqefnS3=O7FmWkOPoiABD7QJGtwSHg@mail.gmail.com>
+Message-ID: <CAHk-=whY0ggV9P+3Ch1LcqefnS3=O7FmWkOPoiABD7QJGtwSHg@mail.gmail.com>
+Subject: Re: [PATCH v9 00/42] Shadow stacks for userspace
+To:     "Edgecombe, Rick P" <rick.p.edgecombe@intel.com>
+Cc:     "akpm@linux-foundation.org" <akpm@linux-foundation.org>,
+        "tglx@linutronix.de" <tglx@linutronix.de>,
+        "linux-arch@vger.kernel.org" <linux-arch@vger.kernel.org>,
+        "kcc@google.com" <kcc@google.com>,
+        "Lutomirski, Andy" <luto@kernel.org>,
+        "nadav.amit@gmail.com" <nadav.amit@gmail.com>,
+        "kirill.shutemov@linux.intel.com" <kirill.shutemov@linux.intel.com>,
+        "david@redhat.com" <david@redhat.com>,
+        "Schimpe, Christina" <christina.schimpe@intel.com>,
+        "peterz@infradead.org" <peterz@infradead.org>,
+        "corbet@lwn.net" <corbet@lwn.net>,
+        "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
+        "jannh@google.com" <jannh@google.com>,
+        "dethoma@microsoft.com" <dethoma@microsoft.com>,
+        "broonie@kernel.org" <broonie@kernel.org>,
+        "mike.kravetz@oracle.com" <mike.kravetz@oracle.com>,
+        "pavel@ucw.cz" <pavel@ucw.cz>, "bp@alien8.de" <bp@alien8.de>,
+        "rdunlap@infradead.org" <rdunlap@infradead.org>,
+        "linux-api@vger.kernel.org" <linux-api@vger.kernel.org>,
+        "john.allen@amd.com" <john.allen@amd.com>,
+        "arnd@arndb.de" <arnd@arndb.de>,
+        "jamorris@linux.microsoft.com" <jamorris@linux.microsoft.com>,
+        "rppt@kernel.org" <rppt@kernel.org>,
+        "bsingharora@gmail.com" <bsingharora@gmail.com>,
+        "x86@kernel.org" <x86@kernel.org>,
+        "oleg@redhat.com" <oleg@redhat.com>,
+        "fweimer@redhat.com" <fweimer@redhat.com>,
+        "keescook@chromium.org" <keescook@chromium.org>,
+        "gorcunov@gmail.com" <gorcunov@gmail.com>,
+        "andrew.cooper3@citrix.com" <andrew.cooper3@citrix.com>,
+        "hpa@zytor.com" <hpa@zytor.com>,
+        "mingo@redhat.com" <mingo@redhat.com>,
+        "szabolcs.nagy@arm.com" <szabolcs.nagy@arm.com>,
+        "hjl.tools@gmail.com" <hjl.tools@gmail.com>,
+        "debug@rivosinc.com" <debug@rivosinc.com>,
+        "linux-mm@kvack.org" <linux-mm@kvack.org>,
+        "Syromiatnikov, Eugene" <esyr@redhat.com>,
+        "Yang, Weijiang" <weijiang.yang@intel.com>,
+        "linux-doc@vger.kernel.org" <linux-doc@vger.kernel.org>,
+        "dave.hansen@linux.intel.com" <dave.hansen@linux.intel.com>,
+        "Eranian, Stephane" <eranian@google.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Spam-Status: No, score=-1.8 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+        DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
+        RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,SPF_PASS,T_SCC_BODY_TEXT_LINE,
+        URIBL_BLOCKED autolearn=no autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-The document says we can avoid extra _release() in insert function when
-hlist_nulls is used, but that's not true[1].  Drop it.
+On Tue, Jun 13, 2023 at 10:44=E2=80=AFAM Linus Torvalds
+<torvalds@linux-foundation.org> wrote:
+>
+> Anyway, I'm scanning through it right now. No comments yet, I only
+> just got started.
 
-[1] https://lore.kernel.org/rcu/46440869-644a-4982-b790-b71b43976c66@paulmck-laptop/
+Well, it all looked fine from a quick scan. One small comment, and
+even that was just a minor stylistic nit.
 
-Signed-off-by: SeongJae Park <sj@kernel.org>
----
- Documentation/RCU/rculist_nulls.rst | 6 ++++--
- 1 file changed, 4 insertions(+), 2 deletions(-)
+I didn't actually look through the x86 state infrastructure side -
+I'll just trust that is fine, and it doesn't interact with anything
+else, so I don't really worry about it. I mainly care about the VM
+side not causing problems, and the changes on that side all looked
+fine.
 
-diff --git a/Documentation/RCU/rculist_nulls.rst b/Documentation/RCU/rculist_nulls.rst
-index 5cd6f3f8810f..018cc100d19b 100644
---- a/Documentation/RCU/rculist_nulls.rst
-+++ b/Documentation/RCU/rculist_nulls.rst
-@@ -129,8 +129,7 @@ very very fast (before the end of RCU grace period)
- Avoiding extra smp_rmb()
- ========================
- 
--With hlist_nulls we can avoid extra smp_rmb() in lockless_lookup()
--and extra _release() in insert function.
-+With hlist_nulls we can avoid extra smp_rmb() in lockless_lookup().
- 
- For example, if we choose to store the slot number as the 'nulls'
- end-of-list marker for each slot of the hash table, we can detect
-@@ -182,6 +181,9 @@ scan the list again without harm.
- 2) Insert algorithm
- -------------------
- 
-+Same to the above one, but uses hlist_nulls_add_head_rcu() instead of
-+hlist_add_head_rcu().
-+
- ::
- 
-   /*
--- 
-2.25.1
-
+             Linus
