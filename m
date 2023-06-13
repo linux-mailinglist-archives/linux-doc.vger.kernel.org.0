@@ -2,65 +2,70 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id B20DA72DF0F
-	for <lists+linux-doc@lfdr.de>; Tue, 13 Jun 2023 12:19:13 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id D769F72E005
+	for <lists+linux-doc@lfdr.de>; Tue, 13 Jun 2023 12:47:43 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S238753AbjFMKTK (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 13 Jun 2023 06:19:10 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:50772 "EHLO
+        id S241211AbjFMKrl (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 13 Jun 2023 06:47:41 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:40384 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S236035AbjFMKTJ (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 13 Jun 2023 06:19:09 -0400
-Received: from mail-il1-f181.google.com (mail-il1-f181.google.com [209.85.166.181])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id A8A88187;
-        Tue, 13 Jun 2023 03:19:08 -0700 (PDT)
-Received: by mail-il1-f181.google.com with SMTP id e9e14a558f8ab-33e585a0ca6so20671155ab.3;
-        Tue, 13 Jun 2023 03:19:08 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1686651548; x=1689243548;
-        h=date:subject:message-id:references:in-reply-to:cc:to:from
-         :mime-version:content-transfer-encoding:x-gm-message-state:from:to
-         :cc:subject:date:message-id:reply-to;
-        bh=ZGZZQK+1qfBDERk2tuB1aLbh7nI+UyNwane24jIPm+M=;
-        b=L1yiON2XmbvcDIwqHEMaMwN61Gi5T51fhaPU24IDuhekO5USQn8Uv6ZQDU3n2oK7+l
-         KFbkPPg/BKpDlWwugUEqTSCwSpzM5VF1MWyf2B7ub1pJf+zt1kQRtRYcwRwLvpas3syF
-         u9mWXb9ZkmSZEtRqWNmTrMgPpAYnRnLmLMFurf6ipf8ebd+jcJnCGDz9cxVq0b330np/
-         u/dz/4l6gQ98AbghKkD0QAu8Gud/Kh7CFaWMqAG1md9mhSO/GGNe0ZloZC2UKp0EI7co
-         IxpVvnZxFhDBLNgFZeu+fpMN0ALtEybM7Vad0+6LTBr7Pb25VKUuN4USwtGvHdrX3DO/
-         Bfug==
-X-Gm-Message-State: AC+VfDy5WNGNPY+YmcGiwS1UJYelpIsCrYD7hDC9y8djwpzkPYVg6Jud
-        Eyqvt45b2NZUDggiDjNGhA==
-X-Google-Smtp-Source: ACHHUZ4YbPi+dVjDqClBdyqHAnFOuuSiVPdfpssZVvsbOyvlW1vIkmv7fDwVxTfy4eUAkDUbbwORfw==
-X-Received: by 2002:a6b:7614:0:b0:777:b377:b225 with SMTP id g20-20020a6b7614000000b00777b377b225mr10228083iom.11.1686651547869;
-        Tue, 13 Jun 2023 03:19:07 -0700 (PDT)
-Received: from robh_at_kernel.org ([64.188.179.250])
-        by smtp.gmail.com with ESMTPSA id z23-20020a029f17000000b00422cf285ed1sm149264jal.11.2023.06.13.03.19.06
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 13 Jun 2023 03:19:07 -0700 (PDT)
-Received: (nullmailer pid 1311615 invoked by uid 1000);
-        Tue, 13 Jun 2023 10:19:01 -0000
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 8bit
+        with ESMTP id S238981AbjFMKrk (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 13 Jun 2023 06:47:40 -0400
+Received: from mx4.veeam.com (mx4.veeam.com [104.41.138.86])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id B96811AC;
+        Tue, 13 Jun 2023 03:47:39 -0700 (PDT)
+Received: from mail.veeam.com (prgmbx01.amust.local [172.24.128.102])
+        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+        (No client certificate requested)
+        by mx4.veeam.com (Postfix) with ESMTPS id D96E25E91D;
+        Tue, 13 Jun 2023 13:47:37 +0300 (MSK)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=veeam.com;
+        s=mx4-2022; t=1686653258;
+        bh=Z7dNDDmcpifePckvcqW3TSCqfRweG1amD84n3lPragY=;
+        h=Date:Subject:To:CC:References:From:In-Reply-To:From;
+        b=G81g0nM4EYIPIQEClVwgOGTxMajn0Ko1zyPiCrWwoKHprdoEd8oLiDEE4qaLbjrNp
+         VZe0PpeeqGdLTgyqAMv2gCODJvMXr18nCaOsz5uCa+B6EVY6YO7LbLYxubvuHknSLw
+         +Sf5GD/P3f4ElvgLDl6C+02x/jeBbE/ecien7pvE44117yMV9PhA7S0lDmEpnYXF1G
+         6w/xdup9AYJbf4dvxFFT1pjLUWh9USwm94QAnCU0vDSOYXuecjsgmOwttyBomuIiva
+         j+SLkf2kWAH5bumQnimtvQ79U7Qj5xta8aMXLkRzurdwUqt6I0ADNfdWYQuOrjvf9f
+         O6tUHBnRi4eww==
+Received: from [172.24.10.107] (172.24.10.107) by prgmbx01.amust.local
+ (172.24.128.102) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.1118.26; Tue, 13 Jun
+ 2023 12:47:36 +0200
+Message-ID: <7dbbaf60-c85d-5a7a-8f16-5f5e4ff43cd8@veeam.com>
+Date:   Tue, 13 Jun 2023 12:47:29 +0200
 MIME-Version: 1.0
-From:   Rob Herring <robh@kernel.org>
-To:     Jonathan Corbet <corbet@lwn.net>
-Cc:     Rob Herring <robh+dt@kernel.org>, linux-kernel@vger.kernel.org,
-        linux-doc@vger.kernel.org,
-        Krzysztof Kozlowski <krzysztof.kozlowski+dt@linaro.org>,
-        devicetree@vger.kernel.org, linux-arm-kernel@lists.infradead.org,
-        Conor Dooley <conor+dt@kernel.org>, linux-arch@vger.kernel.org
-In-Reply-To: <20230613094606.334687-3-corbet@lwn.net>
-References: <20230613094606.334687-1-corbet@lwn.net>
- <20230613094606.334687-3-corbet@lwn.net>
-Message-Id: <168665154172.1311568.8471309596161026195.robh@kernel.org>
-Subject: Re: [PATCH 2/5] dt-bindings: fix dangling Documentation/arm64
- reference
-Date:   Tue, 13 Jun 2023 04:19:01 -0600
-X-Spam-Status: No, score=-1.2 required=5.0 tests=BAYES_00,
-        FREEMAIL_ENVFROM_END_DIGIT,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
-        HEADER_FROM_DIFFERENT_DOMAINS,RCVD_IN_DNSWL_NONE,RCVD_IN_MSPIKE_H2,
-        SPF_HELO_NONE,SPF_PASS,T_SCC_BODY_TEXT_LINE,URIBL_BLOCKED autolearn=no
-        autolearn_force=no version=3.4.6
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.11.2
+Subject: Re: [PATCH v4 11/11] blksnap: Kconfig and Makefile
+Content-Language: en-US
+To:     Randy Dunlap <rdunlap@infradead.org>, <axboe@kernel.dk>,
+        <hch@infradead.org>, <corbet@lwn.net>, <snitzer@kernel.org>
+CC:     <viro@zeniv.linux.org.uk>, <brauner@kernel.org>,
+        <willy@infradead.org>, <dlemoal@kernel.org>, <wsa@kernel.org>,
+        <heikki.krogerus@linux.intel.com>, <ming.lei@redhat.com>,
+        <gregkh@linuxfoundation.org>, <linux-block@vger.kernel.org>,
+        <linux-doc@vger.kernel.org>, <linux-kernel@vger.kernel.org>,
+        <linux-fsdevel@vger.kernel.org>
+References: <20230609115858.4737-1-sergei.shtepa@veeam.com>
+ <20230609115858.4737-11-sergei.shtepa@veeam.com>
+ <499ded51-3fb8-f11b-8776-08ab2e9a8812@infradead.org>
+From:   Sergei Shtepa <sergei.shtepa@veeam.com>
+In-Reply-To: <499ded51-3fb8-f11b-8776-08ab2e9a8812@infradead.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
+X-Originating-IP: [172.24.10.107]
+X-ClientProxiedBy: prgmbx02.amust.local (172.24.128.103) To
+ prgmbx01.amust.local (172.24.128.102)
+X-EsetResult: clean, is OK
+X-EsetId: 37303A29240315546D7163
+X-Veeam-MMEX: True
+X-Spam-Status: No, score=-2.2 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,NICE_REPLY_A,
+        RCVD_IN_DNSWL_NONE,RCVD_IN_MSPIKE_H2,SPF_HELO_NONE,SPF_PASS,
+        T_SCC_BODY_TEXT_LINE,URIBL_BLOCKED autolearn=ham autolearn_force=no
+        version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
@@ -68,43 +73,36 @@ List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
 
-On Tue, 13 Jun 2023 03:46:03 -0600, Jonathan Corbet wrote:
-> The arm64 documentation has move under Documentation/arch/ fix a reference
-> to match.
+
+On 6/13/23 01:43, Randy Dunlap wrote:
+>> +config BLKSNAP
+>> +	tristate "Block Devices Snapshots Module (blksnap)"
+>> +	help
+>> +	  Allow to create snapshots and track block changes for block devices.
+>> +	  Designed for creating backups for simple block devices. Snapshots are
+>> +	  temporary and are released then backup is completed. Change block
+> 	                             when backup is completed.
 > 
-> Cc: Rob Herring <robh+dt@kernel.org>
-> Cc: Krzysztof Kozlowski <krzysztof.kozlowski+dt@linaro.org>
-> Cc: Conor Dooley <conor+dt@kernel.org>
-> Cc: devicetree@vger.kernel.org
-> Signed-off-by: Jonathan Corbet <corbet@lwn.net>
-> ---
->  Documentation/devicetree/bindings/cpu/idle-states.yaml | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
+> or is the order of operations as listed: release snapshots and then backup
+> can be completed?
 > 
+>> +	  tracking allows to create incremental or differential backups.
 
-My bot found errors running 'make DT_CHECKER_FLAGS=-m dt_binding_check'
-on your patch (DT_CHECKER_FLAGS is new in v5.13):
+"when backup is completed." - it will be more correct.
 
-yamllint warnings/errors:
+Normal backup process:
 
-dtschema/dtc warnings/errors:
+Take snapshot                                        Release snapshot
+    |    Start backup                        Finish backup   |
+    |        |  Copy data from snapshot images    |          |
+------------------------------------------------------------------------->
+                                                                         t
 
+In case of failure, for example, when the snapshot is overflowing:
 
-doc reference errors (make refcheckdocs):
-Documentation/devicetree/bindings/cpu/idle-states.yaml: Documentation/arch/arm64/booting.rst
-
-See https://patchwork.ozlabs.org/project/devicetree-bindings/patch/20230613094606.334687-3-corbet@lwn.net
-
-The base for the series is generally the latest rc1. A different dependency
-should be noted in *this* patch.
-
-If you already ran 'make dt_binding_check' and didn't see the above
-error(s), then make sure 'yamllint' is installed and dt-schema is up to
-date:
-
-pip3 install dtschema --upgrade
-
-Please check and re-submit after running the above command yourself. Note
-that DT_SCHEMA_FILES can be set to your schema file to speed up checking
-your schema. However, it must be unset to test all examples with your schema.
-
+                                           The snapshot is corrupted
+Take snapshot                                   | Release snapshot
+    |    Start backup                           |   | Finish failed backup
+    |        |  Copy data from snapshot images  |   |    |
+------------------------------------------------------------------------->
+                                                                         t
