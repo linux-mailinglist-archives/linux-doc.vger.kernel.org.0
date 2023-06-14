@@ -2,84 +2,115 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id C053572F4BD
-	for <lists+linux-doc@lfdr.de>; Wed, 14 Jun 2023 08:26:48 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id A68E772F578
+	for <lists+linux-doc@lfdr.de>; Wed, 14 Jun 2023 09:06:49 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S242823AbjFNG0q (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 14 Jun 2023 02:26:46 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:42344 "EHLO
+        id S229943AbjFNHGs (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 14 Jun 2023 03:06:48 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:60586 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S242281AbjFNG0o (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Wed, 14 Jun 2023 02:26:44 -0400
-Received: from bombadil.infradead.org (bombadil.infradead.org [IPv6:2607:7c80:54:3::133])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id B8B9E199;
-        Tue, 13 Jun 2023 23:26:43 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-        d=infradead.org; s=bombadil.20210309; h=In-Reply-To:Content-Type:MIME-Version
-        :References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
-        Content-Transfer-Encoding:Content-ID:Content-Description;
-        bh=GAL8rYu1Idr0YOdnXNBIthABV/YsGkUhTmU/DBbzch8=; b=tvDzinqkrdr5HsvTJrFz63M6uM
-        s38FyrvASnhlz58s1iCWQyO4ieh+ddqTrlYffk6YGHFCs1y5BsV1s6RdMFczPVMHrvHhofzB6IsA6
-        9hmJKz9Rz36FWYHj+a2EUqh/4KB/Xs1HARqfQZiC1PdmZAXLFwAB8tm59uVn+zNjVHLeLjvGzS5qq
-        almeyKHsarLuYOZzQKgNcw84/3bgIoydHoBeHOnrhd/OlHNFclDqtRGIJMsZR9JOP26ppFL8ZywOc
-        abpa3Ut6d7aZ2ydfYcdZSPsE0uXeonEwBnNGTID5qoVkjc2eIcbGjStZZRhS1DBkfHLemIWiyNw3G
-        JLkP8r4w==;
-Received: from hch by bombadil.infradead.org with local (Exim 4.96 #2 (Red Hat Linux))
-        id 1q9JxZ-00AQvZ-0a;
-        Wed, 14 Jun 2023 06:26:25 +0000
-Date:   Tue, 13 Jun 2023 23:26:25 -0700
-From:   Christoph Hellwig <hch@infradead.org>
-To:     Dave Chinner <david@fromorbit.com>
-Cc:     Sergei Shtepa <sergei.shtepa@veeam.com>, axboe@kernel.dk,
-        hch@infradead.org, corbet@lwn.net, snitzer@kernel.org,
-        viro@zeniv.linux.org.uk, brauner@kernel.org, dchinner@redhat.com,
-        willy@infradead.org, dlemoal@kernel.org, linux@weissschuh.net,
-        jack@suse.cz, ming.lei@redhat.com, linux-block@vger.kernel.org,
-        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
-        linux-fsdevel@vger.kernel.org, Donald Buczek <buczek@molgen.mpg.de>
-Subject: Re: [PATCH v5 04/11] blksnap: header file of the module interface
-Message-ID: <ZIldkb1pwhNsSlfl@infradead.org>
-References: <20230612135228.10702-1-sergei.shtepa@veeam.com>
- <20230612135228.10702-5-sergei.shtepa@veeam.com>
- <ZIjsywOtHM5nIhSr@dread.disaster.area>
+        with ESMTP id S243259AbjFNHE1 (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Wed, 14 Jun 2023 03:04:27 -0400
+Received: from metis.ext.pengutronix.de (metis.ext.pengutronix.de [IPv6:2001:67c:670:201:290:27ff:fe1d:cc33])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id A84A81BF0
+        for <linux-doc@vger.kernel.org>; Wed, 14 Jun 2023 00:04:26 -0700 (PDT)
+Received: from drehscheibe.grey.stw.pengutronix.de ([2a0a:edc0:0:c01:1d::a2])
+        by metis.ext.pengutronix.de with esmtps (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256)
+        (Exim 4.92)
+        (envelope-from <ukl@pengutronix.de>)
+        id 1q9KYC-0000oB-KR; Wed, 14 Jun 2023 09:04:16 +0200
+Received: from [2a0a:edc0:0:900:1d::77] (helo=ptz.office.stw.pengutronix.de)
+        by drehscheibe.grey.stw.pengutronix.de with esmtp (Exim 4.94.2)
+        (envelope-from <ukl@pengutronix.de>)
+        id 1q9KY9-007IK9-8z; Wed, 14 Jun 2023 09:04:13 +0200
+Received: from ukl by ptz.office.stw.pengutronix.de with local (Exim 4.94.2)
+        (envelope-from <ukl@pengutronix.de>)
+        id 1q9KY8-00E8Az-HT; Wed, 14 Jun 2023 09:04:12 +0200
+Date:   Wed, 14 Jun 2023 09:04:12 +0200
+From:   Uwe =?utf-8?Q?Kleine-K=C3=B6nig?= <u.kleine-koenig@pengutronix.de>
+To:     Jonathan Corbet <corbet@lwn.net>
+Cc:     linux-doc@vger.kernel.org, linux-arch@vger.kernel.org,
+        linux-arm-kernel@lists.infradead.org,
+        Dmitry Torokhov <dmitry.torokhov@gmail.com>,
+        Chen-Yu Tsai <wens@csie.org>,
+        Jernej Skrabec <jernej.skrabec@gmail.com>,
+        Samuel Holland <samuel@sholland.org>,
+        Thierry Reding <thierry.reding@gmail.com>,
+        Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+        linux-input@vger.kernel.org, linux-sunxi@lists.linux.dev,
+        linux-pwm@vger.kernel.org, linux-serial@vger.kernel.org
+Subject: Re: [PATCH v2 6/7] docs: update some straggling Documentation/arm
+ references
+Message-ID: <20230614070412.ts5yd47uefkvhlet@pengutronix.de>
+References: <20230529144856.102755-1-corbet@lwn.net>
+ <20230529144856.102755-7-corbet@lwn.net>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
+Content-Type: multipart/signed; micalg=pgp-sha512;
+        protocol="application/pgp-signature"; boundary="p4c3uocja4ru6qiz"
 Content-Disposition: inline
-In-Reply-To: <ZIjsywOtHM5nIhSr@dread.disaster.area>
-X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by bombadil.infradead.org. See http://www.infradead.org/rpr.html
-X-Spam-Status: No, score=-4.4 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_MED,SPF_HELO_NONE,
-        SPF_NONE,T_SCC_BODY_TEXT_LINE,URIBL_BLOCKED autolearn=ham
-        autolearn_force=no version=3.4.6
+In-Reply-To: <20230529144856.102755-7-corbet@lwn.net>
+X-SA-Exim-Connect-IP: 2a0a:edc0:0:c01:1d::a2
+X-SA-Exim-Mail-From: ukl@pengutronix.de
+X-SA-Exim-Scanned: No (on metis.ext.pengutronix.de); SAEximRunCond expanded to false
+X-PTX-Original-Recipient: linux-doc@vger.kernel.org
+X-Spam-Status: No, score=-4.2 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_MED,
+        SPF_HELO_NONE,SPF_PASS,T_SCC_BODY_TEXT_LINE,URIBL_BLOCKED
+        autolearn=ham autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Wed, Jun 14, 2023 at 08:25:15AM +1000, Dave Chinner wrote:
-> > + * Return: 0 if succeeded, negative errno otherwise.
-> > + */
-> > +#define IOCTL_BLKSNAP_SNAPSHOT_APPEND_STORAGE					\
-> > +	_IOW(BLKSNAP, blksnap_ioctl_snapshot_append_storage,			\
-> > +	     struct blksnap_snapshot_append_storage)
-> 
-> That's an API I'm extremely uncomfortable with. We've learnt the
-> lesson *many times* that userspace physical mappings of underlying
-> file storage are unreliable.
-> 
-> i.e.  This is reliant on userspace telling the kernel the physical
-> mapping of the filesystem file to block device LBA space and then
-> providing a guarantee (somehow) that the mapping will always remain
-> unchanged. i.e. It's reliant on passing FIEMAP data from the
-> filesystem to userspace and then back into the kernel without it
-> becoming stale and somehow providing a guarantee that nothing (not
-> even the filesystem doing internal garbage collection) will change
-> it.
 
-Hmm, I never thought of this API as used on files that somewhere
-had a logical to physical mapping applied to them.
+--p4c3uocja4ru6qiz
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Sergey, is that the indtended use case?  If so we really should
-be going through the file system using direct I/O.
+Hello,
 
+On Mon, May 29, 2023 at 08:48:55AM -0600, Jonathan Corbet wrote:
+> The Arm documentation has moved to Documentation/arch/arm; update the
+> last remaining references to match.
+>=20
+> Cc: Dmitry Torokhov <dmitry.torokhov@gmail.com>
+> Cc: Chen-Yu Tsai <wens@csie.org>
+> Cc: Jernej Skrabec <jernej.skrabec@gmail.com>
+> Cc: Samuel Holland <samuel@sholland.org>
+> Cc: Thierry Reding <thierry.reding@gmail.com>
+> Cc: "Uwe Kleine-K=F6nig" <u.kleine-koenig@pengutronix.de>
+> Cc: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+> Cc: linux-input@vger.kernel.org
+> Cc: linux-sunxi@lists.linux.dev
+> Cc: linux-pwm@vger.kernel.org
+> Cc: linux-serial@vger.kernel.org
+> Signed-off-by: Jonathan Corbet <corbet@lwn.net>
+
+If you respin this series, you can add my:
+
+Acked-by: Uwe Kleine-K=F6nig <u.kleine-koenig@pengutronix.de> # for pwm
+
+Best regards
+Uwe
+
+--=20
+Pengutronix e.K.                           | Uwe Kleine-K=F6nig            |
+Industrial Linux Solutions                 | https://www.pengutronix.de/ |
+
+--p4c3uocja4ru6qiz
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQEzBAABCgAdFiEEP4GsaTp6HlmJrf7Tj4D7WH0S/k4FAmSJZmsACgkQj4D7WH0S
+/k7I6Qf/RuLkOuJd0YIg1k8zFTfaS2bByaI7jkNapwz2cj6IM37CjKT8PnJl0khU
+USzG5sc02bVd0COaO0E69Pv1+l86wxBMqx/wRW65PSkBz6krz2skusoIGek56vDe
+LKz/YRIGjP3gcIx6fVKjPVgWb3pgQAJyi6iN+yEac+AAgBbK5NtjvRSqrjpKPSC8
++BSS5Tb7JmOthh3NMEwKUOeiBgsjuHCD//UNmenONHQBIWet3+5gOxB+sKVQQZmc
+H+bw4c8bVF8elViKHnk/omalp7oIL4l2tFITkpcR0np44NRwr8D4MSsrlEkiSxuy
+KAFqHYnkJtypcQQCYJ21VCVOBoU1ig==
+=kqLy
+-----END PGP SIGNATURE-----
+
+--p4c3uocja4ru6qiz--
