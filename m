@@ -2,93 +2,191 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id F1E13731FC3
-	for <lists+linux-doc@lfdr.de>; Thu, 15 Jun 2023 20:10:22 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id D6CDF731FE9
+	for <lists+linux-doc@lfdr.de>; Thu, 15 Jun 2023 20:26:58 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S238242AbjFOSKV (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 15 Jun 2023 14:10:21 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:32984 "EHLO
+        id S229730AbjFOS0z (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 15 Jun 2023 14:26:55 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:38654 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S239424AbjFOSKO (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Thu, 15 Jun 2023 14:10:14 -0400
-Received: from dfw.source.kernel.org (dfw.source.kernel.org [IPv6:2604:1380:4641:c500::1])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 87A5C295C;
-        Thu, 15 Jun 2023 11:10:13 -0700 (PDT)
-Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
-        (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-         key-exchange X25519 server-signature RSA-PSS (2048 bits))
-        (No client certificate requested)
-        by dfw.source.kernel.org (Postfix) with ESMTPS id 1CAFA6104D;
-        Thu, 15 Jun 2023 18:10:13 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id F2046C433C0;
-        Thu, 15 Jun 2023 18:10:11 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-        s=k20201202; t=1686852612;
-        bh=BGArqnN0cuqkluggRcsoV7lA0nFMtudLK2PV5oM2SLk=;
-        h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-        b=Dg7w2Q4eFBTgBpgKnDq/sZZYe9EfGxulIUr82J0bCnZopXm069n/34WAAy6cD1vwO
-         dzVlmrSLFAD9Sd4IeMhdQzy/4UuFJHbwdfqYhJCzcymyt8womLR/A7PUUz0ysTA8rR
-         oMM4HIaFoENgdA5jVNwq56H6Y4Vj6qw+ydz/xi1aL4OcVDhaozOjSqQdQTKLOekGY0
-         tXStzxRXsroFSKaIQLBd6aPC+ZuGJv/pK05PSu9p54+3pFkAAA6wNnzOSEd8g9wzio
-         ARHwJ7MqtcKwaIk7vB00eLmLl2jS7UivS148GUWuxkwkfhx7+hKzgIRjo3ulzQWGGp
-         Eml0K6jEmwbBg==
-From:   SeongJae Park <sj@kernel.org>
-To:     paulmck@kernel.org
-Cc:     SeongJae Park <sj@kernel.org>, joel@joelfernandes.org,
-        mmpgouride@gmail.com, corbet@lwn.net, rcu@vger.kernel.org,
-        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org
-Subject: [PATCH v3 3/3] Docs/RCU/rculist_nulls: Fix text about atomic_set_release()
-Date:   Thu, 15 Jun 2023 18:10:04 +0000
-Message-Id: <20230615181004.86850-4-sj@kernel.org>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20230615181004.86850-1-sj@kernel.org>
-References: <20230615181004.86850-1-sj@kernel.org>
-MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Spam-Status: No, score=-4.4 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_MED,
-        SPF_HELO_NONE,SPF_PASS,T_SCC_BODY_TEXT_LINE autolearn=ham
-        autolearn_force=no version=3.4.6
+        with ESMTP id S229648AbjFOS0y (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Thu, 15 Jun 2023 14:26:54 -0400
+Received: from mail-pl1-x64a.google.com (mail-pl1-x64a.google.com [IPv6:2607:f8b0:4864:20::64a])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 3301B1FD4
+        for <linux-doc@vger.kernel.org>; Thu, 15 Jun 2023 11:26:53 -0700 (PDT)
+Received: by mail-pl1-x64a.google.com with SMTP id d9443c01a7336-1b516cb26c9so7792935ad.0
+        for <linux-doc@vger.kernel.org>; Thu, 15 Jun 2023 11:26:53 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=google.com; s=20221208; t=1686853612; x=1689445612;
+        h=cc:to:from:subject:message-id:references:mime-version:in-reply-to
+         :date:from:to:cc:subject:date:message-id:reply-to;
+        bh=v5j0wCZPnfsM4/SjEwwVDfexZdOw0uK6iqseA0HQUzE=;
+        b=pVetr2jEMF5lF1mCTvADonXqP6bFE0nxsdmxOn0ASTw2/bFTnBCX3GM5/ND7idJYcK
+         WLJ9v5Jtgv7YkQ2t1A7zr6BtWjGAUd3nGNd07s8rKjBzK87V1SPxXbBBFz/A0h4/TJ+6
+         PGmBMXeXE9iwEFyxsQoXFCV8sBkm29Ah7+IBIGN34Rgv+Rsgl1RNt8i9bBt7KJ4b5QVP
+         kObHHMIWjacSwTjfHlphojvQG6ZoJtxmutK76LuVb5zNph2otTKjSu6e9v7dG85CX5qp
+         /ZUeWSJZa6+15VCNA95293lQnjitxNStYywqEhGfprGR2cMKGHH5r/UDSXD2EdD+dK2Z
+         XA6g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20221208; t=1686853612; x=1689445612;
+        h=cc:to:from:subject:message-id:references:mime-version:in-reply-to
+         :date:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=v5j0wCZPnfsM4/SjEwwVDfexZdOw0uK6iqseA0HQUzE=;
+        b=JHYGwo5oswm6+lFtg/cYykPpb7bnluTdHnfOTMH9iJ6U1Tq3pZrLoTjClnQ3C96jJU
+         616caZcCOy2rXGqgqd27slv3Yq+LA+pAD/PBwDZXohmtlYjFTLdUmkoep1uiKxeS39rB
+         DbrxkiNdC4AkGkl4MuLM9JtsfbOk6BKpRoh4S4SiXZjeFHfTP2NK2Oy69jvs+CpT7ORu
+         AzcA6heUf5fE3HW3ahAikOVRyQ3jhpkTT18vvXZWSRTENLlr+0IhSxwBjogP0F7PNMVw
+         VtdjD4CfJj8/FMOdoJFtxAcr+FeTcH0XiVbX8SKmQEMuVhK2ju6H7sF06PHlFNqzgw8X
+         5z9w==
+X-Gm-Message-State: AC+VfDyKFyrWaSgNnxXyMLNcX0hQlrVy9jDb5WRWE2lnKPR7df/45A3o
+        iGA7l6BSaLeTsABWhOyluxumUo/QLyI=
+X-Google-Smtp-Source: ACHHUZ4XblfvtELYfPfTXYv/mZguDzYqVYK+D/wTZAy9MdyrQSECLLlB+UmOM8NMKOmXv6Fwf6a/c1+W5jI=
+X-Received: from zagreus.c.googlers.com ([fda3:e722:ac3:cc00:7f:e700:c0a8:5c37])
+ (user=seanjc job=sendgmr) by 2002:a17:902:a70f:b0:1b5:64:1862 with SMTP id
+ w15-20020a170902a70f00b001b500641862mr893196plq.9.1686853612603; Thu, 15 Jun
+ 2023 11:26:52 -0700 (PDT)
+Date:   Thu, 15 Jun 2023 11:26:51 -0700
+In-Reply-To: <20230526234435.662652-10-yuzhao@google.com>
+Mime-Version: 1.0
+References: <20230526234435.662652-1-yuzhao@google.com> <20230526234435.662652-10-yuzhao@google.com>
+Message-ID: <ZItX64Bbx5vdjo9M@google.com>
+Subject: Re: [PATCH mm-unstable v2 09/10] kvm/x86: add kvm_arch_test_clear_young()
+From:   Sean Christopherson <seanjc@google.com>
+To:     Yu Zhao <yuzhao@google.com>
+Cc:     Andrew Morton <akpm@linux-foundation.org>,
+        Paolo Bonzini <pbonzini@redhat.com>,
+        Alistair Popple <apopple@nvidia.com>,
+        Anup Patel <anup@brainfault.org>,
+        Ben Gardon <bgardon@google.com>,
+        Borislav Petkov <bp@alien8.de>,
+        Catalin Marinas <catalin.marinas@arm.com>,
+        Chao Peng <chao.p.peng@linux.intel.com>,
+        Christophe Leroy <christophe.leroy@csgroup.eu>,
+        Dave Hansen <dave.hansen@linux.intel.com>,
+        Fabiano Rosas <farosas@linux.ibm.com>,
+        Gaosheng Cui <cuigaosheng1@huawei.com>,
+        Gavin Shan <gshan@redhat.com>,
+        "H. Peter Anvin" <hpa@zytor.com>, Ingo Molnar <mingo@redhat.com>,
+        James Morse <james.morse@arm.com>,
+        "Jason A. Donenfeld" <Jason@zx2c4.com>,
+        Jason Gunthorpe <jgg@ziepe.ca>,
+        Jonathan Corbet <corbet@lwn.net>,
+        Marc Zyngier <maz@kernel.org>,
+        Masami Hiramatsu <mhiramat@kernel.org>,
+        Michael Ellerman <mpe@ellerman.id.au>,
+        Michael Larabel <michael@michaellarabel.com>,
+        Mike Rapoport <rppt@kernel.org>,
+        Nicholas Piggin <npiggin@gmail.com>,
+        Oliver Upton <oliver.upton@linux.dev>,
+        Paul Mackerras <paulus@ozlabs.org>,
+        Peter Xu <peterx@redhat.com>,
+        Steven Rostedt <rostedt@goodmis.org>,
+        Suzuki K Poulose <suzuki.poulose@arm.com>,
+        Thomas Gleixner <tglx@linutronix.de>,
+        Thomas Huth <thuth@redhat.com>, Will Deacon <will@kernel.org>,
+        Zenghui Yu <yuzenghui@huawei.com>, kvmarm@lists.linux.dev,
+        kvm@vger.kernel.org, linux-arm-kernel@lists.infradead.org,
+        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
+        linux-mm@kvack.org, linuxppc-dev@lists.ozlabs.org,
+        linux-trace-kernel@vger.kernel.org, x86@kernel.org,
+        linux-mm@google.com
+Content-Type: text/plain; charset="us-ascii"
+X-Spam-Status: No, score=-9.6 required=5.0 tests=BAYES_00,DKIMWL_WL_MED,
+        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_NONE,
+        SPF_HELO_NONE,SPF_PASS,T_SCC_BODY_TEXT_LINE,USER_IN_DEF_DKIM_WL
+        autolearn=ham autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-The document says we can avoid extra _release() in insert function when
-hlist_nulls is used, but that's not true[1].  Drop it.
+On Fri, May 26, 2023, Yu Zhao wrote:
+> diff --git a/arch/x86/kvm/mmu/tdp_mmu.c b/arch/x86/kvm/mmu/tdp_mmu.c
+> index 08340219c35a..6875a819e007 100644
+> --- a/arch/x86/kvm/mmu/tdp_mmu.c
+> +++ b/arch/x86/kvm/mmu/tdp_mmu.c
+> @@ -1232,6 +1232,40 @@ bool kvm_tdp_mmu_test_age_gfn(struct kvm *kvm, struct kvm_gfn_range *range)
+>  	return kvm_tdp_mmu_handle_gfn(kvm, range, test_age_gfn);
+>  }
+>  
+> +bool kvm_arch_test_clear_young(struct kvm *kvm, struct kvm_gfn_range *range)
+> +{
+> +	struct kvm_mmu_page *root;
+> +	int offset = ffs(shadow_accessed_mask) - 1;
+> +
+> +	if (kvm_shadow_root_allocated(kvm))
 
-[1] https://lore.kernel.org/rcu/46440869-644a-4982-b790-b71b43976c66@paulmck-laptop/
+This needs a comment.
 
-Signed-off-by: SeongJae Park <sj@kernel.org>
----
- Documentation/RCU/rculist_nulls.rst | 6 ++++--
- 1 file changed, 4 insertions(+), 2 deletions(-)
+> +		return true;
+> +
+> +	rcu_read_lock();
+> +
+> +	list_for_each_entry_rcu(root, &kvm->arch.tdp_mmu_roots, link) {
 
-diff --git a/Documentation/RCU/rculist_nulls.rst b/Documentation/RCU/rculist_nulls.rst
-index a24783ebc5df..58a32dad21b8 100644
---- a/Documentation/RCU/rculist_nulls.rst
-+++ b/Documentation/RCU/rculist_nulls.rst
-@@ -138,8 +138,7 @@ very very fast (before the end of RCU grace period)
- Avoiding extra smp_rmb()
- ========================
+As requested in v1[1], please add a macro for a lockless walk.
+
+[1] https://lkml.kernel.org/r/Y%2Fed0XYAPx%2B7pukA%40google.com
+
+> +		struct tdp_iter iter;
+> +
+> +		if (kvm_mmu_page_as_id(root) != range->slot->as_id)
+> +			continue;
+> +
+> +		tdp_root_for_each_leaf_pte(iter, root, range->start, range->end) {
+> +			u64 *sptep = rcu_dereference(iter.sptep);
+> +
+> +			VM_WARN_ON_ONCE(!page_count(virt_to_page(sptep)));
+
+Hrm, I don't like adding this in KVM.  The primary MMU might guarantee that this
+callback is invoked if and only if the SPTE is backed by struct page memory, but
+there's no reason to assume that's true in KVM.  If we want the sanity check, then
+this needs to use kvm_pfn_to_refcounted_page().
+
+And it should use KVM's MMU_WARN_ON(), which is a mess and effectively dead code,
+but I'm working on changing that[*], i.e. by the time this gets to Linus' tree,
+the sanity check should have a much cleaner implementation.
+
+[2] https://lore.kernel.org/all/20230511235917.639770-8-seanjc@google.com
+
+> +
+> +			if (!(iter.old_spte & shadow_accessed_mask))
+> +				continue;
+> +
+> +			if (kvm_should_clear_young(range, iter.gfn))
+> +				clear_bit(offset, (unsigned long *)sptep);
+
+If/when you rebase on https://github.com/kvm-x86/linux/tree/next, can you pull
+out the atomic bits of tdp_mmu_clear_spte_bits() and use that new helper? E.g.
+
+diff --git a/arch/x86/kvm/mmu/tdp_iter.h b/arch/x86/kvm/mmu/tdp_iter.h
+index fae559559a80..914c34518829 100644
+--- a/arch/x86/kvm/mmu/tdp_iter.h
++++ b/arch/x86/kvm/mmu/tdp_iter.h
+@@ -58,15 +58,18 @@ static inline u64 kvm_tdp_mmu_write_spte(tdp_ptep_t sptep, u64 old_spte,
+        return old_spte;
+ }
  
--With hlist_nulls we can avoid extra smp_rmb() in lockless_lookup()
--and extra _release() in insert function.
-+With hlist_nulls we can avoid extra smp_rmb() in lockless_lookup().
- 
- For example, if we choose to store the slot number as the 'nulls'
- end-of-list marker for each slot of the hash table, we can detect
-@@ -194,6 +193,9 @@ Note that using hlist_nulls means the type of 'obj_node' field of
- 2) Insert algorithm
- -------------------
- 
-+Same to the above one, but uses hlist_nulls_add_head_rcu() instead of
-+hlist_add_head_rcu().
++static inline u64 tdp_mmu_clear_spte_bits_atomic(tdp_ptep_t sptep, u64 mask)
++{
++       atomic64_t *sptep_atomic = (atomic64_t *)rcu_dereference(sptep);
 +
- ::
++       return (u64)atomic64_fetch_and(~mask, sptep_atomic);
++}
++
+ static inline u64 tdp_mmu_clear_spte_bits(tdp_ptep_t sptep, u64 old_spte,
+                                          u64 mask, int level)
+ {
+-       atomic64_t *sptep_atomic;
+-
+-       if (kvm_tdp_mmu_spte_need_atomic_write(old_spte, level)) {
+-               sptep_atomic = (atomic64_t *)rcu_dereference(sptep);
+-               return (u64)atomic64_fetch_and(~mask, sptep_atomic);
+-       }
++       if (kvm_tdp_mmu_spte_need_atomic_write(old_spte, level))
++               return tdp_mmu_clear_spte_bits_atomic(sptep, mask);
  
-   /*
--- 
-2.25.1
+        __kvm_tdp_mmu_write_spte(sptep, old_spte & ~mask);
+        return old_spte;
 
