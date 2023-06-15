@@ -2,97 +2,82 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 0669E731FF2
-	for <lists+linux-doc@lfdr.de>; Thu, 15 Jun 2023 20:28:31 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id F3501731FC0
+	for <lists+linux-doc@lfdr.de>; Thu, 15 Jun 2023 20:10:20 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S230360AbjFOS2a (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 15 Jun 2023 14:28:30 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:39664 "EHLO
+        id S229574AbjFOSKT (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 15 Jun 2023 14:10:19 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:32962 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S229798AbjFOS23 (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Thu, 15 Jun 2023 14:28:29 -0400
-Received: from mail-pl1-x632.google.com (mail-pl1-x632.google.com [IPv6:2607:f8b0:4864:20::632])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 53D1410F7
-        for <linux-doc@vger.kernel.org>; Thu, 15 Jun 2023 11:28:28 -0700 (PDT)
-Received: by mail-pl1-x632.google.com with SMTP id d9443c01a7336-1b50d7b4aaaso11735475ad.3
-        for <linux-doc@vger.kernel.org>; Thu, 15 Jun 2023 11:28:28 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=rivosinc-com.20221208.gappssmtp.com; s=20221208; t=1686853708; x=1689445708;
-        h=to:from:cc:content-transfer-encoding:mime-version:date:message-id
-         :subject:references:in-reply-to:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=mVChjkIcSM6+MNaIJlrMcShBmvjcuV4uPlBpX4ONGWQ=;
-        b=lzrKOx2r8o63tyQknjMShqZ4Ks/nGd467s+Q0mwp9tGYafN2VMWGj2AZwRDIE5/QmW
-         IxetuEwfkkPeA7eAQ9Qw/bPCBX2ElYrh5rDTXo2iqQxyfOzJ5adnWwc6kVR5GD30IqLF
-         KugNlFI6+qP85LG4QdoZp0nCBb4pazWHP8DDNy6g0giRkvsLuWYpyKXgpB7rnh7ixv+O
-         wY6MmeG4owCwb266i7BFJLNdp3uvQoQRn4kWJKio9CLxIB0TF+x4OPAUBJZs6uK5HMsX
-         /iw5a92V3hLmvvxdMIT5/rrt/aBsVoP1u6dU0T9X1RyAU0zZreyzaOrang21qu/Z0Plz
-         m4jg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1686853708; x=1689445708;
-        h=to:from:cc:content-transfer-encoding:mime-version:date:message-id
-         :subject:references:in-reply-to:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=mVChjkIcSM6+MNaIJlrMcShBmvjcuV4uPlBpX4ONGWQ=;
-        b=dhmYKZ4v7t5Ne7isMHJ02tl4Q/5fqRUu3SCDkzDG/WU30BpJbnMJcgyhTt7PTW/fS5
-         My7BCBocJcRxNX3Z1FKFQRVGWCJOg8OKV38PckNQl0HpG6AEqefbqKYqN08KorPKj4xt
-         3uARq9duj1UmQxNmy7Xe+99shrza8jCzwbYQQwHDF5BkbMSTwvFE3snTXPwT8F+sVocn
-         NGuWO3brsjiL4e3mJns97Di2Y26lTONvFl2JlAqwQxMkzjqQNsqJvb+PNsM7XCvCQOMB
-         twtFmPLnHP2ONqZzPcz+yV4tmhOjAlIfs3F5sDIrfyUuBo/LiVejWVNHr6f92CVKmQU0
-         pJ3A==
-X-Gm-Message-State: AC+VfDwDydfZ4KvBQFq44pCkk4nNNCdApQzDbBilnrLTj2JaRzVtzP/g
-        9uF+KwfdmWHANw1Rc42K8BYKTg==
-X-Google-Smtp-Source: ACHHUZ5yt0VPK6NWeZnlY/aLP9daDWJTbT4CRFJ5q0WhZJ1UafvOtwLd1fkMFTX274W9OpO2trsQxA==
-X-Received: by 2002:a17:903:2311:b0:1ae:1364:6079 with SMTP id d17-20020a170903231100b001ae13646079mr17199372plh.44.1686853707702;
-        Thu, 15 Jun 2023 11:28:27 -0700 (PDT)
-Received: from localhost ([135.180.227.0])
-        by smtp.gmail.com with ESMTPSA id p11-20020a1709026b8b00b001b39ffff838sm10598209plk.25.2023.06.15.11.28.26
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 15 Jun 2023 11:28:26 -0700 (PDT)
-In-Reply-To: <20230606-rehab-monsoon-12c17bbe08e3@wendy>
-References: <20230606-rehab-monsoon-12c17bbe08e3@wendy>
-Subject: Re: [PATCH v2] Documentation: RISC-V: patch-acceptance: mention
- patchwork's role
-Message-Id: <168684928914.25663.18359435106543749767.b4-ty@rivosinc.com>
-Date:   Thu, 15 Jun 2023 10:14:49 -0700
+        with ESMTP id S239374AbjFOSKM (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Thu, 15 Jun 2023 14:10:12 -0400
+Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 2D8EE295B;
+        Thu, 15 Jun 2023 11:10:11 -0700 (PDT)
+Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
+        (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+         key-exchange X25519 server-signature RSA-PSS (2048 bits))
+        (No client certificate requested)
+        by dfw.source.kernel.org (Postfix) with ESMTPS id BEFFA6106D;
+        Thu, 15 Jun 2023 18:10:10 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 7DB04C433C0;
+        Thu, 15 Jun 2023 18:10:09 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+        s=k20201202; t=1686852610;
+        bh=vv4meO1knN0gNYFpBkBU7VnOP3JPLKf+tWByQNe1cyg=;
+        h=From:To:Cc:Subject:Date:From;
+        b=As0HhD51H/x7PIE1X7eVgPnRRbhxiMsT9wGidylJBBPAf1MDJi7+z62Ej/E34fOFX
+         Sbav8GO/82gscjXoODCAyMJje2b09uKeM8OcJnjtMBT0YXSBiprSGDVxaS0RM7tFGE
+         ZLrmE4saX+pjfJFHlCFbiSKiViBIpUtAEny+B2HlYWZkyfS+cHitwfEn8VQZ1xj6AV
+         +YPRniQIWVSJ3dQdiP+VUPDcQlkKexDuuOJZl5J5Wn6mrM4vealArGrMYbuoq58lX6
+         bGAgvmIZkHGjFIQkINTTyu8BMN3Dfyutg6pyluOfADzGX4R/iNc7ibRvOGFNxDhCq/
+         ZnXa3HFUueASg==
+From:   SeongJae Park <sj@kernel.org>
+To:     paulmck@kernel.org
+Cc:     SeongJae Park <sj@kernel.org>, joel@joelfernandes.org,
+        mmpgouride@gmail.com, corbet@lwn.net, rcu@vger.kernel.org,
+        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org
+Subject: [PATCH v3 0/3] Docs/RCU/rculist_nulls: Minor fixup
+Date:   Thu, 15 Jun 2023 18:10:01 +0000
+Message-Id: <20230615181004.86850-1-sj@kernel.org>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.13-dev-901c5
-Cc:     Conor Dooley <conor@kernel.org>,
-        =C3=B6rn_T=C3=B6pel?= <bjorn@kernel.org>,
-        Paul Walmsley <paul.walmsley@sifive.com>,
-        Jonathan Corbet <corbet@lwn.net>,
-        linux-riscv@lists.infradead.org, linux-doc@vger.kernel.org
-From:   Palmer Dabbelt <palmer@rivosinc.com>
-To:     Palmer Dabbelt <palmer@dabbelt.com>,
-        Conor Dooley <conor.dooley@microchip.com>
-X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-        DKIM_VALID,RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,SPF_PASS,
-        T_SCC_BODY_TEXT_LINE autolearn=ham autolearn_force=no version=3.4.6
+Content-Transfer-Encoding: 8bit
+X-Spam-Status: No, score=-7.1 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_HI,
+        SPF_HELO_NONE,SPF_PASS,T_SCC_BODY_TEXT_LINE autolearn=ham
+        autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
+Changes from v2
+(https://lore.kernel.org/rcu/20230613182434.88317-1-sj@kernel.org/)
+- Drop first two patches that merged to Paul's tree
+- Add definition of 'obj' (Paul E. McKenney)
+- Fix more wrong hlist_[nulls]_head field name mentions
 
-On Tue, 06 Jun 2023 07:59:19 +0100, Conor Dooley wrote:
-> Palmer suggested at some point, not sure if it was in one of the
-> weekly linux-riscv syncs, or a conversation at FOSDEM, that we
-> should document the role of the automation running on our patchwork
-> instance plays in patch acceptance.
-> 
-> Add a short note to the patch-acceptance document to that end.
-> 
-> [...]
+Changes from v1
+(https://lore.kernel.org/rcu/20230518224008.2468-1-sj@kernel.org/)
+- Add Reviewed-by tags from Joel Fernandes for first three patches
+- Fix the text for wrong extra _release()
 
-Applied, thanks!
+---
 
-[1/1] Documentation: RISC-V: patch-acceptance: mention patchwork's role
-      https://git.kernel.org/palmer/c/b104dbedbe61
+Fix minor problems in example code snippets and the text of
+rculist_nulls.rst file.
 
-Best regards,
+
+SeongJae Park (3):
+  Docs/RCU/rculist_nulls: Specify type of the object in examples
+  Docs/RCU/rculist_nulls: Fix hlist_[nulls]_head field names of 'obj'
+  Docs/RCU/rculist_nulls: Fix text about atomic_set_release()
+
+ Documentation/RCU/rculist_nulls.rst | 28 +++++++++++++++++++++-------
+ 1 file changed, 21 insertions(+), 7 deletions(-)
+
 -- 
-Palmer Dabbelt <palmer@rivosinc.com>
+2.25.1
 
