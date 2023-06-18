@@ -2,104 +2,131 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 32028734482
-	for <lists+linux-doc@lfdr.de>; Sun, 18 Jun 2023 02:09:33 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id BAFF273450F
+	for <lists+linux-doc@lfdr.de>; Sun, 18 Jun 2023 08:29:53 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S234670AbjFRAJa (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Sat, 17 Jun 2023 20:09:30 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:38318 "EHLO
+        id S229499AbjFRG3w (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Sun, 18 Jun 2023 02:29:52 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:46792 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S233746AbjFRAJZ (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Sat, 17 Jun 2023 20:09:25 -0400
-Received: from mail-pl1-x64a.google.com (mail-pl1-x64a.google.com [IPv6:2607:f8b0:4864:20::64a])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 327861723
-        for <linux-doc@vger.kernel.org>; Sat, 17 Jun 2023 17:09:23 -0700 (PDT)
-Received: by mail-pl1-x64a.google.com with SMTP id d9443c01a7336-1b04dbcf0dbso19084765ad.1
-        for <linux-doc@vger.kernel.org>; Sat, 17 Jun 2023 17:09:23 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=google.com; s=20221208; t=1687046962; x=1689638962;
-        h=cc:to:from:subject:message-id:references:mime-version:in-reply-to
-         :date:reply-to:from:to:cc:subject:date:message-id:reply-to;
-        bh=1VCe6Te4dbtLGKgb4rOHMky/xQ+L+u4Ve7fRkEOuWfM=;
-        b=eM6eEMdeAdA3q12h/4zPiNDSyzDv6iURF6JeeAlS92vFN138+Ea57eUPBYKXB/1hSK
-         LO+sRsz7LswUmxtY2fR1MXtZ5ODEii85FISwNsl00srPgkpT+xOgRzsXGZenLTovEC4K
-         5bCdZnpVEh3xw/+QxJve/qwSzVD1fa3TqfhTUHfYi7y0bg4vv9JGAYAycx//ck2bTtEa
-         x0mjE8f8m8SfrfLilZa2KalRke5BniQVDR2ujyq/cZrSDYm/79+HVziX7w7RrRTnHlXw
-         fYE6FC2kIKP7Hw3VUVpp7d1JE/EkJAqrZYwsEiLJj6sx6zDZWhNU/Od3Bkmt9PNwwxke
-         +F7g==
+        with ESMTP id S229456AbjFRG3v (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Sun, 18 Jun 2023 02:29:51 -0400
+Received: from mail-wr1-f43.google.com (mail-wr1-f43.google.com [209.85.221.43])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 13797E51;
+        Sat, 17 Jun 2023 23:29:50 -0700 (PDT)
+Received: by mail-wr1-f43.google.com with SMTP id ffacd0b85a97d-3110ab7110aso2066554f8f.3;
+        Sat, 17 Jun 2023 23:29:50 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1687046962; x=1689638962;
-        h=cc:to:from:subject:message-id:references:mime-version:in-reply-to
-         :date:reply-to:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=1VCe6Te4dbtLGKgb4rOHMky/xQ+L+u4Ve7fRkEOuWfM=;
-        b=HkQ6BfA4SKiyLWbp2HgMuHBZP6Fp/+jqI7vkZ84zbvKJiOPv9EeZ2U5HjQmH3Q8CEj
-         MjkAsPM/MxWoYD+5IFOA+erFItBT7ZsRi2encak9bwQuAtz2PowGKGb5fVnLUSQCrvn7
-         R3/69ZgNP4o/1qsfvRU5N4BHAnm1vihhO2o2DS6wjCYcdZmPFrpZYMMhvVuZCKwsb7yF
-         Z2An9QRNaFuFRl6rUNWMuZZQU4/1rMgxI7V2tWvlWam+wdhkr9W5uy2aymHohkyDGoNW
-         6NX7hXRZnkbnM7zF9rDaS4X/a3hq9IsEfqhTQgAkBH0SUL37nNfaxL/Jq5uy/29Gga1N
-         wJYw==
-X-Gm-Message-State: AC+VfDzYnLnDQ9RAdsJm/0zlayUDcEjC/DZY3Vc2y3x7DKfOzSczgKnE
-        JalK16Yl19L6BqpSinHOhhDkTO8Ko9LS
-X-Google-Smtp-Source: ACHHUZ587n83fnu4WPNdcoRuCpjN8gdiXgApo0KsiKTF4x3Syc0S5oMmIS04y4PImd7mWuJ5Od9KbFTaOwBX
-X-Received: from mizhang-super.c.googlers.com ([35.247.89.60]) (user=mizhang
- job=sendgmr) by 2002:a17:902:e88b:b0:1a8:1f4:2d50 with SMTP id
- w11-20020a170902e88b00b001a801f42d50mr1222628plg.4.1687046962586; Sat, 17 Jun
- 2023 17:09:22 -0700 (PDT)
-Reply-To: Mingwei Zhang <mizhang@google.com>
-Date:   Sun, 18 Jun 2023 00:08:56 +0000
-In-Reply-To: <20230618000856.1714902-1-mizhang@google.com>
-Mime-Version: 1.0
-References: <20230618000856.1714902-1-mizhang@google.com>
-X-Mailer: git-send-email 2.41.0.162.gfafddb0af9-goog
-Message-ID: <20230618000856.1714902-7-mizhang@google.com>
-Subject: [PATCH 6/6] KVM: Documentation: Add the missing tdp_mmu_page into kvm_mmu_page
-From:   Mingwei Zhang <mizhang@google.com>
-To:     Sean Christopherson <seanjc@google.com>,
-        Paolo Bonzini <pbonzini@redhat.com>
-Cc:     kvm@vger.kernel.org, linux-doc@vger.kernel.org,
-        linux-kernel@vger.kernel.org, Mingwei Zhang <mizhang@google.com>,
-        Jim Mattson <jmattson@google.com>,
-        David Matlack <dmatlack@google.com>,
-        Ben Gardon <bgardon@google.com>
-Content-Type: text/plain; charset="UTF-8"
-X-Spam-Status: No, score=-9.6 required=5.0 tests=BAYES_00,DKIMWL_WL_MED,
-        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_NONE,
-        SPF_HELO_NONE,SPF_PASS,T_SCC_BODY_TEXT_LINE,USER_IN_DEF_DKIM_WL
-        autolearn=unavailable autolearn_force=no version=3.4.6
+        d=1e100.net; s=20221208; t=1687069788; x=1689661788;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=3kVdcijOpIuUfsXa/7yUYV8tahrXAsxjueUTSgD3qp8=;
+        b=fIf3RAr/PXadXa++2uSc7dLjzJXN7bNqAOaY6aiCQ8PiGmZDoSXRyFjXIoLsEfxwJr
+         d5z+SP3rROU5jhqp/ZWZN5YNiiIzzlrYG3r6gJ+EA+Z2TKyx+6vqDF6K29bLfSX7kZEC
+         +/tpg4cPvmbAWNmfxrdgIQoAnRlnK1LQqGTyqT29bOby2JMQgSbmSp0bFoKz6DzRiVEl
+         FXvHs9OZcgjfbd3NrEVvALxgqXCXt0qAa7RFHPu2PZNVQNHyLzpmkZ0BPNOcOT+Slkr6
+         THcautXwnp39N8yvRHFYpfUvSdLvRy6uKY+0SIAItTNJ+7IQ8iO/hsfEtK/40PFrP8IK
+         K/Kg==
+X-Gm-Message-State: AC+VfDyld1vcir11cztyHBAGmmpz8oYgifJNThSPga6Og/uJmkX9kpPz
+        OoprpPnekavOUmZcqA70dZIwbGsmkH+IzQ==
+X-Google-Smtp-Source: ACHHUZ6ZbnURw/CVYWDl9YzpGIputEl07AhKursQyXeSC4U6a7TWrl7sOOOImEUOnLqLJzNaj7JAzg==
+X-Received: by 2002:adf:fd4e:0:b0:30f:c153:2f08 with SMTP id h14-20020adffd4e000000b0030fc1532f08mr5247859wrs.33.1687069788313;
+        Sat, 17 Jun 2023 23:29:48 -0700 (PDT)
+Received: from costa-tp.bos2.lab ([2a00:a040:1a3:c11b:3ae6:1732:e587:a81f])
+        by smtp.gmail.com with ESMTPSA id h4-20020adffa84000000b0030647d1f34bsm27932929wrr.1.2023.06.17.23.29.46
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Sat, 17 Jun 2023 23:29:47 -0700 (PDT)
+From:   Costa Shulyupin <costa.shul@redhat.com>
+To:     Jonathan Corbet <corbet@lwn.net>, linux-doc@vger.kernel.org
+Cc:     Costa Shulyupin <costa.shul@redhat.com>,
+        linux-kernel@vger.kernel.org (open list)
+Subject: [PATCH v4] docs: consolidate storage interfaces
+Date:   Sun, 18 Jun 2023 09:29:37 +0300
+Message-Id: <20230618062937.481280-1-costa.shul@redhat.com>
+X-Mailer: git-send-email 2.40.1
+In-Reply-To: <87h6rhoyag.fsf@meer.lwn.net>
+References: <87h6rhoyag.fsf@meer.lwn.net>
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
+X-Spam-Status: No, score=-1.4 required=5.0 tests=BAYES_00,
+        FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,HEADER_FROM_DIFFERENT_DOMAINS,
+        RCVD_IN_DNSWL_NONE,RCVD_IN_MSPIKE_H2,SPF_HELO_NONE,SPF_PASS,
+        T_SCC_BODY_TEXT_LINE autolearn=no autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Add tdp_mmu_page into kvm_mmu_page description. tdp_mmu_page is a field to
-differentiate shadow pages from TDP MMU and non-TDP MMU. When TDP MMU is
-enabled, sp->tdp_mmu_page=1 indicates a shadow page for L1, while
-sp->tdp_mmu_page=0 indicates a shadow page for an L2. When TDP MMU is
-disabled, sp->tdp_mmu_page is always 0. So update the doc to reflect the
-information.
+to make the page more organized as requested
 
-Signed-off-by: Mingwei Zhang <mizhang@google.com>
+Signed-off-by: Costa Shulyupin <costa.shul@redhat.com>
+
 ---
- Documentation/virt/kvm/x86/mmu.rst | 4 ++++
- 1 file changed, 4 insertions(+)
 
-diff --git a/Documentation/virt/kvm/x86/mmu.rst b/Documentation/virt/kvm/x86/mmu.rst
-index 0dbdb7fb8cc6..cbad49c37629 100644
---- a/Documentation/virt/kvm/x86/mmu.rst
-+++ b/Documentation/virt/kvm/x86/mmu.rst
-@@ -277,6 +277,10 @@ Shadow pages contain the following information:
-     since the last time the page table was actually used; if emulation
-     is triggered too frequently on this page, KVM will unmap the page
-     to avoid emulation in the future.
-+  tdp_mmu_page:
-+    Is 1 if the shadow page is a TDP MMU page. When TDP MMU is disabled,
-+    this field is always 0.
-+
+Changes:
+ v4. rollback to single Storage category, add 'TCM Virtual Device'
+ v3. add Integrity, Virtualization and Miscellaneous per Bagas Sanjaya
+ v2. add Core subsystems, Networking, Peripherals and Embedded
+ v1. add Storage category
+---
+ Documentation/subsystem-apis.rst | 17 ++++++++++++-----
+ 1 file changed, 12 insertions(+), 5 deletions(-)
+
+diff --git a/Documentation/subsystem-apis.rst b/Documentation/subsystem-apis.rst
+index 55c90d5383ef..b67a1b65855b 100644
+--- a/Documentation/subsystem-apis.rst
++++ b/Documentation/subsystem-apis.rst
+@@ -22,6 +22,18 @@ Human interfaces
+    gpu/index
+    fb/index
  
- Reverse map
- ===========
++Storage interfaces
++------------------
++
++.. toctree::
++   :maxdepth: 1
++
++   filesystems/index
++   block/index
++   cdrom/index
++   scsi/index
++   target/index
++
+ **Fixme**: much more organizational work is needed here.
+ 
+ .. toctree::
+@@ -31,8 +43,6 @@ Human interfaces
+    core-api/index
+    locking/index
+    accounting/index
+-   block/index
+-   cdrom/index
+    cpu-freq/index
+    fpga/index
+    i2c/index
+@@ -44,7 +54,6 @@ Human interfaces
+    networking/index
+    pcmcia/index
+    power/index
+-   target/index
+    timers/index
+    spi/index
+    w1/index
+@@ -54,12 +63,10 @@ Human interfaces
+    accel/index
+    security/index
+    crypto/index
+-   filesystems/index
+    mm/index
+    bpf/index
+    usb/index
+    PCI/index
+-   scsi/index
+    misc-devices/index
+    scheduler/index
+    mhi/index
 -- 
-2.41.0.162.gfafddb0af9-goog
+2.40.1
 
