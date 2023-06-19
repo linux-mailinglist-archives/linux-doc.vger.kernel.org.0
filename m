@@ -2,70 +2,78 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id A9D0F736045
-	for <lists+linux-doc@lfdr.de>; Tue, 20 Jun 2023 01:56:03 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 61D0F7360EB
+	for <lists+linux-doc@lfdr.de>; Tue, 20 Jun 2023 02:57:47 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S229651AbjFSX4B (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 19 Jun 2023 19:56:01 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:55136 "EHLO
+        id S230009AbjFTA5a (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 19 Jun 2023 20:57:30 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:44962 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S229473AbjFSX4A (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Mon, 19 Jun 2023 19:56:00 -0400
-Received: from mail-pj1-x102a.google.com (mail-pj1-x102a.google.com [IPv6:2607:f8b0:4864:20::102a])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 522FE197
-        for <linux-doc@vger.kernel.org>; Mon, 19 Jun 2023 16:55:59 -0700 (PDT)
-Received: by mail-pj1-x102a.google.com with SMTP id 98e67ed59e1d1-25e8b2931f2so3144501a91.2
-        for <linux-doc@vger.kernel.org>; Mon, 19 Jun 2023 16:55:59 -0700 (PDT)
+        with ESMTP id S229882AbjFTA5Y (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Mon, 19 Jun 2023 20:57:24 -0400
+Received: from mail-pj1-x102d.google.com (mail-pj1-x102d.google.com [IPv6:2607:f8b0:4864:20::102d])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id B459710C8
+        for <linux-doc@vger.kernel.org>; Mon, 19 Jun 2023 17:57:21 -0700 (PDT)
+Received: by mail-pj1-x102d.google.com with SMTP id 98e67ed59e1d1-25eee11a9f1so1289338a91.1
+        for <linux-doc@vger.kernel.org>; Mon, 19 Jun 2023 17:57:21 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=rivosinc-com.20221208.gappssmtp.com; s=20221208; t=1687218959; x=1689810959;
-        h=content-transfer-encoding:mime-version:message-id:to:from:cc
-         :in-reply-to:subject:date:from:to:cc:subject:date:message-id
+        d=rivosinc-com.20221208.gappssmtp.com; s=20221208; t=1687222641; x=1689814641;
+        h=to:from:cc:content-transfer-encoding:mime-version:date:message-id
+         :subject:references:in-reply-to:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=PVs4GZ+Uk0ye5HivrV52qoVsAKrFnxtINai6WrA4s10=;
-        b=bnsaeUByEcXlvYMyc0xWRsGsq5X5KsQgHfS2Q8HQkhML7cQ+TQpwPamDechTjs34uH
-         qjhluw+hW1+E3Bc0w5iBO2iBQqzLeU9/EGZjdKW5pxEPHhdlKfRRGomEwBdixLX4cl7t
-         /fy8OSmL/rTd06qUB83TXKOk4Ut56Gj0HopDxZczzm7hmAXBpoKh3/QCjMeZNfFqNFYJ
-         nB/QN3p14jrPE06jxdBl+QItEcVdC5eoF0eKuRC+PFFDpIHypISY5uZ6ABDBSnIMgs4D
-         78EbUKJ9aORJDEo8cOpl8gkPK10Xr987b1iVXfW89v0fCFKoIoPiqOoHKfQPvuwdov7Q
-         A83w==
+        bh=gBIbwLVWMH//WD3Wf9PBLkgpgUav5DDPmHySKVJGkxs=;
+        b=D3pBN2EIf32vLSdkOh29A1LHMm5TMF2J2yQIlV+iG12cgfQi7sW66+VtTSFTha4Qv9
+         m1duhRu0twm1MEiaHVMvr3WRu4sndp7F+uut7wOSySJvDZdKfPntqjVVRWgJLKddienr
+         n8Duylo2Pvc8Tza4BPUFHnahRdrp3xP2Tf0xJQ63Wa7jKdr/WRzCiZMfBIRErprrGRP7
+         +tFi/s8npOZSaNj9aHIQg0ERzQBm0p/MbbOrZMctOiSxGP52VJ1hu1rSrTQTdub16CGJ
+         g7pciOXrFZCZ4Rf9UBiijSVoRM+yCNWwUSlqWkv3sY3qDa3yi1XGSz8HTEHIYzA1U7Ox
+         xMkg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1687218959; x=1689810959;
-        h=content-transfer-encoding:mime-version:message-id:to:from:cc
-         :in-reply-to:subject:date:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=PVs4GZ+Uk0ye5HivrV52qoVsAKrFnxtINai6WrA4s10=;
-        b=HqX6XaqfVZ9ciMV3z8NfkvyhIBGEM+PTf/ug1RMRMFwoNMIp4O8XsvSDUIqE6s5oEx
-         SbDajXSxwSgDJBbJmDboVE6Bxu44bzOhOoWK0apIB6mfqMq5dNXTy/ykY3valiBRGbqc
-         as97NlKOvbp63bt+Phdg+L6dqhenf5WsHhQmVKgKD/xsS9TYYNKmB7nF9H72nco7TJ29
-         tMxVld9gqgXlli+aRl95yStmSacwzjGXJNJYyjU3MBSZa3x3W4CI33vxoWXp0+ZCOU4s
-         zLp0Jen1HubR4eXuD7QoW4PRMtLWEAYTP4zL01Xs2EEpWaZcgDQbBcn9qDEyYOMixsZO
-         fq7A==
-X-Gm-Message-State: AC+VfDwbZb/2yvL7ps/Ns0hufwYIpCek7NlkaOWK7khPS9/ubpGAcYKF
-        U1WN7hjgVZbcj33AArOa2GurbQ==
-X-Google-Smtp-Source: ACHHUZ7H4bBeRtg5noFSyoSmqZBkjh8GrAu4Bc58BQ9WL/NTPzK1axTjkkcFFvOw/eLdBjnQiPhdmw==
-X-Received: by 2002:a17:90b:1202:b0:25e:a1c7:3a73 with SMTP id gl2-20020a17090b120200b0025ea1c73a73mr10645969pjb.2.1687218958757;
-        Mon, 19 Jun 2023 16:55:58 -0700 (PDT)
+        d=1e100.net; s=20221208; t=1687222641; x=1689814641;
+        h=to:from:cc:content-transfer-encoding:mime-version:date:message-id
+         :subject:references:in-reply-to:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=gBIbwLVWMH//WD3Wf9PBLkgpgUav5DDPmHySKVJGkxs=;
+        b=gwJTX/Sx10EenI2f4zdt6kUnh93IflQa1Obm9a20PNL/JlldZMsOpCkHOQrqTuj+WX
+         MtYfErdZ/Lve/gRzainVmfVC8K2YyFMTf3escAsDVI68deNmdZmsuCaSafVnwQAAAYef
+         fDVX4OJzhEDxu2IDEPySuDKk7vH61pebH80hnhRTMR/bwYbjQFQvHLMc+P2VBo2trpyu
+         SZ75RSIjfgdDlBRcGTZIqZej2LX2H0qpwoDsco5mlHviofx+Mp08b1dei7k2zzMqcoO0
+         kkCZPzRV0jgip7p7mlzJ0QQ6xGtp6osrnLb253wfuqPlNs/UDa5RxCcyfAOG6ms6Rg7E
+         Hhxw==
+X-Gm-Message-State: AC+VfDwi1WohRKPGnpfH/Xra/lLhIOgwbasLotsh0ClgyNgMlObXK6oj
+        C9wbqoQiE+b5mRT2V+CfnLb5AQ==
+X-Google-Smtp-Source: ACHHUZ40lV3Zh+E3IFDyCnE48Nl/azsICbkSdfKF13FTWfxhYHUs6IYph016dX3P9sIQF3XRMcLR4w==
+X-Received: by 2002:a17:902:e543:b0:1b1:d51c:f3f6 with SMTP id n3-20020a170902e54300b001b1d51cf3f6mr11325151plf.57.1687222641217;
+        Mon, 19 Jun 2023 17:57:21 -0700 (PDT)
 Received: from localhost ([135.180.227.0])
-        by smtp.gmail.com with ESMTPSA id gz10-20020a17090b0eca00b00256b67208b1sm6140575pjb.56.2023.06.19.16.55.58
+        by smtp.gmail.com with ESMTPSA id s6-20020a170902988600b001b20dc1b3b9sm375264plp.104.2023.06.19.17.57.20
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 19 Jun 2023 16:55:58 -0700 (PDT)
-Date:   Mon, 19 Jun 2023 16:55:58 -0700 (PDT)
-X-Google-Original-Date: Mon, 19 Jun 2023 09:54:21 PDT (-0700)
-Subject:     Re: [PATCH v2 3/3] RISC-V: hwprobe: Expose Zba, Zbb, and Zbs
-In-Reply-To: <2605015.k3LOHGUjKi@diego>
-CC:     linux-riscv@lists.infradead.org, Evan Green <evan@rivosinc.com>,
-        ajones@ventanamicro.com, aou@eecs.berkeley.edu,
-        abrestic@rivosinc.com, coelacanthus@outlook.com,
-        Conor Dooley <conor.dooley@microchip.com>, corbet@lwn.net,
+        Mon, 19 Jun 2023 17:57:20 -0700 (PDT)
+In-Reply-To: <20230509182504.2997252-1-evan@rivosinc.com>
+References: <20230509182504.2997252-1-evan@rivosinc.com>
+Subject: Re: [PATCH v2 0/3] RISC-V: Export Zba, Zbb to usermode via hwprobe
+Message-Id: <168721242551.30028.288770602847866224.b4-ty@rivosinc.com>
+Date:   Mon, 19 Jun 2023 15:07:05 -0700
+MIME-Version: 1.0
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.13-dev-901c5
+Cc:     Albert Ou <aou@eecs.berkeley.edu>,
+        Andrew Bresticker <abrestic@rivosinc.com>,
+        Andrew Jones <ajones@ventanamicro.com>,
+        Anup Patel <apatel@ventanamicro.com>,
+        Celeste Liu <coelacanthus@outlook.com>,
+        Conor Dooley <conor.dooley@microchip.com>,
+        Heiko Stuebner <heiko.stuebner@vrull.eu>,
+        Jisheng Zhang <jszhang@kernel.org>,
+        Jonathan Corbet <corbet@lwn.net>,
+        Palmer Dabbelt <palmer@dabbelt.com>,
         Paul Walmsley <paul.walmsley@sifive.com>,
+        Sunil V L <sunilvl@ventanamicro.com>,
         linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
-        linux-riscv@lists.infradead.org, Evan Green <evan@rivosinc.com>
+        linux-riscv@lists.infradead.org
 From:   Palmer Dabbelt <palmer@rivosinc.com>
-To:     heiko@sntech.de
-Message-ID: <mhng-92d5d02a-ccb5-497c-b8ea-c57709b3df5f@palmer-ri-x1c9>
-Mime-Version: 1.0 (MHng)
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: 8bit
+To:     Evan Green <evan@rivosinc.com>
 X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00,DKIM_SIGNED,
         DKIM_VALID,RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,SPF_PASS,
         T_SCC_BODY_TEXT_LINE autolearn=unavailable autolearn_force=no
@@ -76,20 +84,32 @@ Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Wed, 10 May 2023 07:47:54 PDT (-0700), heiko@sntech.de wrote:
-> Am Dienstag, 9. Mai 2023, 20:25:03 CEST schrieb Evan Green:
->> Add two new bits to the IMA_EXT_0 key for ZBA, ZBB, and ZBS extensions.
->> These are accurately reported per CPU.
->>
->> Signed-off-by: Evan Green <evan@rivosinc.com>
->> Reviewed-by: Andrew Jones <ajones@ventanamicro.com>
->
-> Reviewed-by: Heiko Stuebner <heiko.stuebner@vrull.eu>
 
-This one too.
+On Tue, 09 May 2023 11:25:00 -0700, Evan Green wrote:
+> This change detects the presence of Zba, Zbb, and Zbs extensions and exports
+> them per-hart to userspace via the hwprobe mechanism. Glibc can then use
+> these in setting up hwcaps-based library search paths.
+> 
+> There's a little bit of extra housekeeping here: the first change adds
+> Zba and Zbs to the set of extensions the kernel recognizes, and the second
+> change starts tracking ISA features per-hart (in addition to the ANDed
+> mask of features across all harts which the kernel uses to make
+> decisions). Now that we track the ISA information per-hart, we could
+> even fix up /proc/cpuinfo to accurately report extension per-hart,
+> though I've left that out of this series for now.
+> 
+> [...]
 
-> though a part of me wonders, what happened to Zbc ;-)
+Applied, thanks!
 
-I think we all just keep forgetting about it as this round of HW has 
-missed out on it.  If you care enough to send a patch I'm happy to pick 
-it up ;)
+[1/3] RISC-V: Add Zba, Zbs extension probing
+      https://git.kernel.org/palmer/c/c6699baf1064
+[2/3] RISC-V: Track ISA extensions per hart
+      https://git.kernel.org/palmer/c/82e9c66e81c8
+[3/3] RISC-V: hwprobe: Expose Zba, Zbb, and Zbs
+      https://git.kernel.org/palmer/c/c0baf321038d
+
+Best regards,
+-- 
+Palmer Dabbelt <palmer@rivosinc.com>
+
