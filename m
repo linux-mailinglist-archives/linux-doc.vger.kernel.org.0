@@ -2,153 +2,316 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id B4A70737018
-	for <lists+linux-doc@lfdr.de>; Tue, 20 Jun 2023 17:15:17 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 0D22B73706B
+	for <lists+linux-doc@lfdr.de>; Tue, 20 Jun 2023 17:27:59 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S232746AbjFTPPP (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 20 Jun 2023 11:15:15 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:45302 "EHLO
+        id S233581AbjFTP15 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 20 Jun 2023 11:27:57 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:53900 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S233735AbjFTPOg (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 20 Jun 2023 11:14:36 -0400
-Received: from mail-pl1-x630.google.com (mail-pl1-x630.google.com [IPv6:2607:f8b0:4864:20::630])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id CC6331704
-        for <linux-doc@vger.kernel.org>; Tue, 20 Jun 2023 08:14:11 -0700 (PDT)
-Received: by mail-pl1-x630.google.com with SMTP id d9443c01a7336-1b50d7b4aaaso20819895ad.3
-        for <linux-doc@vger.kernel.org>; Tue, 20 Jun 2023 08:14:11 -0700 (PDT)
+        with ESMTP id S232699AbjFTP14 (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 20 Jun 2023 11:27:56 -0400
+Received: from mail-lj1-x230.google.com (mail-lj1-x230.google.com [IPv6:2a00:1450:4864:20::230])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 3350B12C
+        for <linux-doc@vger.kernel.org>; Tue, 20 Jun 2023 08:27:55 -0700 (PDT)
+Received: by mail-lj1-x230.google.com with SMTP id 38308e7fff4ca-2b45b6adffbso64504841fa.3
+        for <linux-doc@vger.kernel.org>; Tue, 20 Jun 2023 08:27:55 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=chromium.org; s=google; t=1687274049; x=1689866049;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+        d=atishpatra.org; s=google; t=1687274873; x=1689866873;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=h4+x+nHT/B45E7UNnOquSwSO/h9YI0Q8rRdwe69B63Q=;
-        b=RqtNAe1RFUQMvzoORbX6DkZQi3UCv6ODu+PrzEzpYSbBftvYU2zYVD47PcImmkCIe7
-         BKQM7uPqi2PLFoKjz6oKM07HnmCNSiGOM9BPK6LGvIHrdADRMqW3EA7bHIQlaSA4aCaH
-         K4ZagfAuaP18sbIGdxUoH2jYTicucMLlHh5Hc=
+        bh=MWc3ffsLlLsRDaXHC1vH0eD7pmc4umQuuhX2yd4RuuA=;
+        b=MtjCMfeQ5T+xKdGWUSlyGt2LAZB+mDLNVzcjOOyDL8nlKZ1EBYtfqeLCKIlSTx9wSg
+         zoEe91ZlSSxfORN929ZpqGObs0lHIygZatD7H17OdGxzoCPwWF+qwl3eCP2O7dfVYm48
+         QFxaY2N3qxj9lZnYOkccGhLlzirOaLqDT7v5w=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1687274049; x=1689866049;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+        d=1e100.net; s=20221208; t=1687274873; x=1689866873;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=h4+x+nHT/B45E7UNnOquSwSO/h9YI0Q8rRdwe69B63Q=;
-        b=HFeTHU0HEd84FrhLCH6VnI86BaN57B5eH/3Jj13BjLVXnZ0Wx7Gq2XZMvhXOCecnrc
-         JTK96qTWwoCcHwxwRfUfuS0L0dw0S+SAN0yiXGTcXvQSGCawfuJBhmslUkG0H4QaWEwO
-         XD6hCEAOphAr7bnQmazS132TBf/XBAJr/0niBv3eVqLjI5GHNHHSCpZv5GibzUuzsgi+
-         7Q327ad0MLMdRJ7127ff0B8nal9cbK6zJNV5Nd3lVxD8/duM3AFS+MFsJZOAfpGsYHoA
-         Y86mbsPVS7ijQ5G/n0T8cawwFiKNd1lH96epR1vJTNCeSM2v9A7EA2BnDQ+WVxozG9i0
-         XO8A==
-X-Gm-Message-State: AC+VfDzSVa6Gfwo8YHBMeJ3OO7uziCiyAPZGXa9aPnqZj2lyl/Re7J0B
-        kpGWlAJ8PH2fwFPpgE4KihH1Hw==
-X-Google-Smtp-Source: ACHHUZ7Rq928JI13B91Bwvj3KipWu3jBQaQgSh0KVxwME+Q4LkNUZdGe807jnxk5uiZldi6heglgvQ==
-X-Received: by 2002:a17:903:124e:b0:1b1:dfbd:a18c with SMTP id u14-20020a170903124e00b001b1dfbda18cmr8932980plh.39.1687274048672;
-        Tue, 20 Jun 2023 08:14:08 -0700 (PDT)
-Received: from keiichiw1.tok.corp.google.com ([2401:fa00:8f:203:e87e:41e3:d762:f8a8])
-        by smtp.gmail.com with ESMTPSA id x9-20020a170902ec8900b001aaf370b1c7sm1731872plg.278.2023.06.20.08.14.05
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 20 Jun 2023 08:14:08 -0700 (PDT)
-From:   Keiichi Watanabe <keiichiw@chromium.org>
-To:     LKML <linux-kernel@vger.kernel.org>
-Cc:     mhiramat@google.com, takayas@chromium.org, drosen@google.com,
-        sarthakkukreti@google.com, uekawa@chromium.org,
-        Keiichi Watanabe <keiichiw@chromium.org>,
-        Jonathan Corbet <corbet@lwn.net>,
-        Miklos Szeredi <miklos@szeredi.hu>,
-        Stefan Hajnoczi <stefanha@redhat.com>,
-        Vivek Goyal <vgoyal@redhat.com>, linux-doc@vger.kernel.org,
-        linux-fsdevel@vger.kernel.org,
-        virtualization@lists.linux-foundation.org
-Subject: [PATCH 3/3] virtiofs: Add negative_dentry_timeout option
-Date:   Wed, 21 Jun 2023 00:13:16 +0900
-Message-ID: <20230620151328.1637569-4-keiichiw@chromium.org>
-X-Mailer: git-send-email 2.41.0.185.g7c58973941-goog
-In-Reply-To: <20230620151328.1637569-1-keiichiw@chromium.org>
-References: <20230620151328.1637569-1-keiichiw@chromium.org>
+        bh=MWc3ffsLlLsRDaXHC1vH0eD7pmc4umQuuhX2yd4RuuA=;
+        b=Jx/8/J5jnmR0YLEh/T+eKivm+M0yFaVuXxE0xi8WpiHFTsCh+KixzTl83r9b96tI+4
+         VkiRIw7YJlcRS1dmuoTPtr4t1vknfb3/I91mL24yFzZSwk+FiBP9Hqz5SIexW6FToVOh
+         XPspmQE5IPo4yLGnvPPEoGGL2RWrwYiJOnSuiejWJGrHwvah2jbfXRv2gqM7pz5W+Rte
+         N9DRnN6iyOAsjqriKXUMIB0pBhwKsfg0ce61JK8SVqgLJ8JGafHV0oeEj59d4nzYiraa
+         qOjLuEkLmhvfBVJwBUP6GEte6e+tnhTS3b+oS0Gya8CGxSmP++2G/yVijC/LerzLiD/y
+         bb0Q==
+X-Gm-Message-State: AC+VfDyNcTr9KPlArU2gm1V0GAl2q5o4qYIqC4hjiM0yt1zDZX3kMl64
+        Fo5VOfTLvfOp+t26rVzSPfnLJh5uLt1+fwGsKRiy
+X-Google-Smtp-Source: ACHHUZ4iJxyq8wixAEsG5fsenW43VgO7TdA51NhH86k/lVs2bfSFzzK9Vh3crsVpW3nMnthkCcUCYTXXokUdmyWZUzA=
+X-Received: by 2002:a2e:3a19:0:b0:2b4:73bc:da89 with SMTP id
+ h25-20020a2e3a19000000b002b473bcda89mr4728825lja.12.1687274873200; Tue, 20
+ Jun 2023 08:27:53 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Spam-Status: No, score=-2.1 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_NONE,
+References: <20230512085321.13259-1-alexghiti@rivosinc.com>
+ <20230512085321.13259-6-alexghiti@rivosinc.com> <CAOnJCUL8t-BMfLX0uvjbFK9TFVyqEdCnkYN9aE0hB4NXEtRHZw@mail.gmail.com>
+ <CAHVXubjty9spB5EG9gmEAgUT67DaTmGDQMb7kqt46cW-cV2_PA@mail.gmail.com>
+In-Reply-To: <CAHVXubjty9spB5EG9gmEAgUT67DaTmGDQMb7kqt46cW-cV2_PA@mail.gmail.com>
+From:   Atish Patra <atishp@atishpatra.org>
+Date:   Tue, 20 Jun 2023 08:27:41 -0700
+Message-ID: <CAOnJCULXkx2Uv7GBM1d0mFfFgv6A2rAjWkVYv3wri2vzwbntfQ@mail.gmail.com>
+Subject: Re: [PATCH v2 05/10] riscv: Prepare for user-space perf event mmap support
+To:     Alexandre Ghiti <alexghiti@rivosinc.com>
+Cc:     Jonathan Corbet <corbet@lwn.net>,
+        Peter Zijlstra <peterz@infradead.org>,
+        Ingo Molnar <mingo@redhat.com>,
+        Arnaldo Carvalho de Melo <acme@kernel.org>,
+        Mark Rutland <mark.rutland@arm.com>,
+        Alexander Shishkin <alexander.shishkin@linux.intel.com>,
+        Jiri Olsa <jolsa@kernel.org>,
+        Namhyung Kim <namhyung@kernel.org>,
+        Ian Rogers <irogers@google.com>,
+        Paul Walmsley <paul.walmsley@sifive.com>,
+        Palmer Dabbelt <palmer@dabbelt.com>,
+        Albert Ou <aou@eecs.berkeley.edu>,
+        Anup Patel <anup@brainfault.org>,
+        Will Deacon <will@kernel.org>, Rob Herring <robh@kernel.org>,
+        Andrew Jones <ajones@ventanamicro.com>,
+        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
+        linux-perf-users@vger.kernel.org, linux-riscv@lists.infradead.org,
+        linux-arm-kernel@lists.infradead.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Spam-Status: No, score=-2.1 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_NONE,
         SPF_HELO_NONE,SPF_PASS,T_SCC_BODY_TEXT_LINE,URIBL_BLOCKED
-        autolearn=unavailable autolearn_force=no version=3.4.6
+        autolearn=ham autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Add negative_dentry_timeout mount option to virtiofs to caching negative
-dentry on the guest side. When the host virito-fs device has an exclusive
-access to the file system and the machine has enough memory, one can
-specify a long time as the timeout.
+On Fri, Jun 16, 2023 at 1:57=E2=80=AFAM Alexandre Ghiti <alexghiti@rivosinc=
+.com> wrote:
+>
+> On Fri, Jun 16, 2023 at 10:28=E2=80=AFAM Atish Patra <atishp@atishpatra.o=
+rg> wrote:
+> >
+> > On Fri, May 12, 2023 at 1:58=E2=80=AFAM Alexandre Ghiti <alexghiti@rivo=
+sinc.com> wrote:
+> > >
+> > > Provide all the necessary bits in the generic riscv pmu driver to be
+> > > able to mmap perf events in userspace: the heavy lifting lies in the
+> > > driver backend, namely the legacy and sbi implementations.
+> > >
+> > > Note that arch_perf_update_userpage is almost a copy of arm64 code.
+> > >
+> > > Signed-off-by: Alexandre Ghiti <alexghiti@rivosinc.com>
+> > > ---
+> > >  arch/riscv/kernel/Makefile     |  2 +-
+> > >  arch/riscv/kernel/perf_event.c | 58 ++++++++++++++++++++++++++++++++=
+++
+> > >  drivers/perf/riscv_pmu.c       | 41 ++++++++++++++++++++++++
+> > >  include/linux/perf/riscv_pmu.h |  4 +++
+> > >  4 files changed, 104 insertions(+), 1 deletion(-)
+> > >  create mode 100644 arch/riscv/kernel/perf_event.c
+> > >
+> > > diff --git a/arch/riscv/kernel/Makefile b/arch/riscv/kernel/Makefile
+> > > index 4cf303a779ab..0d215fd9860d 100644
+> > > --- a/arch/riscv/kernel/Makefile
+> > > +++ b/arch/riscv/kernel/Makefile
+> > > @@ -70,7 +70,7 @@ obj-$(CONFIG_DYNAMIC_FTRACE)  +=3D mcount-dyn.o
+> > >
+> > >  obj-$(CONFIG_TRACE_IRQFLAGS)   +=3D trace_irq.o
+> > >
+> > > -obj-$(CONFIG_PERF_EVENTS)      +=3D perf_callchain.o
+> > > +obj-$(CONFIG_PERF_EVENTS)      +=3D perf_callchain.o perf_event.o
+> > >  obj-$(CONFIG_HAVE_PERF_REGS)   +=3D perf_regs.o
+> > >  obj-$(CONFIG_RISCV_SBI)                +=3D sbi.o
+> > >  ifeq ($(CONFIG_RISCV_SBI), y)
+> > > diff --git a/arch/riscv/kernel/perf_event.c b/arch/riscv/kernel/perf_=
+event.c
+> > > new file mode 100644
+> > > index 000000000000..94174a0fc251
+> > > --- /dev/null
+> > > +++ b/arch/riscv/kernel/perf_event.c
+> > > @@ -0,0 +1,58 @@
+> > > +// SPDX-License-Identifier: GPL-2.0-only
+> > > +#include <linux/sched_clock.h>
+> > > +
+> > > +void arch_perf_update_userpage(struct perf_event *event,
+> > > +                              struct perf_event_mmap_page *userpg, u=
+64 now)
+> > > +{
+> > > +       struct clock_read_data *rd;
+> > > +       unsigned int seq;
+> > > +       u64 ns;
+> > > +
+> > > +       userpg->cap_user_time =3D 0;
+> > > +       userpg->cap_user_time_zero =3D 0;
+> > > +       userpg->cap_user_time_short =3D 0;
+> > > +       userpg->cap_user_rdpmc =3D
+> > > +               !!(event->hw.flags & PERF_EVENT_FLAG_USER_READ_CNT);
+> > > +
+> > > +       userpg->pmc_width =3D 64;
+> > > +
+> >
+> > The counter width is 64 for cycle & instret. Other hpmcounter can have
+> > different width.
+> > This information should retrieved from counter info.
+>
+> Yes, this is done in patch 7 when I adapt the perf SBI backend to
+> allow the user access.
+>
 
-This option saves ~1 second per 10,000 stat request for non-existing paths.
+Yes. I missed that earlier. Thanks.
 
-Signed-off-by: Keiichi Watanabe <keiichiw@chromium.org>
----
+> >
+> > > +       do {
+> > > +               rd =3D sched_clock_read_begin(&seq);
+> > > +
+> > > +               userpg->time_mult =3D rd->mult;
+> > > +               userpg->time_shift =3D rd->shift;
+> > > +               userpg->time_zero =3D rd->epoch_ns;
+> > > +               userpg->time_cycles =3D rd->epoch_cyc;
+> > > +               userpg->time_mask =3D rd->sched_clock_mask;
+> > > +
+> > > +               /*
+> > > +                * Subtract the cycle base, such that software that
+> > > +                * doesn't know about cap_user_time_short still 'work=
+s'
+> > > +                * assuming no wraps.
+> > > +                */
+> > > +               ns =3D mul_u64_u32_shr(rd->epoch_cyc, rd->mult, rd->s=
+hift);
+> > > +               userpg->time_zero -=3D ns;
+> > > +
+> > > +       } while (sched_clock_read_retry(seq));
+> > > +
+> > > +       userpg->time_offset =3D userpg->time_zero - now;
+> > > +
+> > > +       /*
+> > > +        * time_shift is not expected to be greater than 31 due to
+> > > +        * the original published conversion algorithm shifting a
+> > > +        * 32-bit value (now specifies a 64-bit value) - refer
+> > > +        * perf_event_mmap_page documentation in perf_event.h.
+> > > +        */
+> > > +       if (userpg->time_shift =3D=3D 32) {
+> > > +               userpg->time_shift =3D 31;
+> > > +               userpg->time_mult >>=3D 1;
+> > > +       }
+> > > +
+> > > +       /*
+> > > +        * Internal timekeeping for enabled/running/stopped times
+> > > +        * is always computed with the sched_clock.
+> > > +        */
+> > > +       userpg->cap_user_time =3D 1;
+> > > +       userpg->cap_user_time_zero =3D 1;
+> > > +       userpg->cap_user_time_short =3D 1;
+> > > +}
+> > > diff --git a/drivers/perf/riscv_pmu.c b/drivers/perf/riscv_pmu.c
+> > > index ebca5eab9c9b..af69da268246 100644
+> > > --- a/drivers/perf/riscv_pmu.c
+> > > +++ b/drivers/perf/riscv_pmu.c
+> > > @@ -171,6 +171,8 @@ int riscv_pmu_event_set_period(struct perf_event =
+*event)
+> > >
+> > >         local64_set(&hwc->prev_count, (u64)-left);
+> > >
+> > > +       perf_event_update_userpage(event);
+> > > +
+> > >         return overflow;
+> > >  }
+> > >
+> > > @@ -267,6 +269,9 @@ static int riscv_pmu_event_init(struct perf_event=
+ *event)
+> > >         hwc->idx =3D -1;
+> > >         hwc->event_base =3D mapped_event;
+> > >
+> > > +       if (rvpmu->event_init)
+> > > +               rvpmu->event_init(event);
+> > > +
+> > >         if (!is_sampling_event(event)) {
+> > >                 /*
+> > >                  * For non-sampling runs, limit the sample_period to =
+half
+> > > @@ -283,6 +288,39 @@ static int riscv_pmu_event_init(struct perf_even=
+t *event)
+> > >         return 0;
+> > >  }
+> > >
+> > > +static int riscv_pmu_event_idx(struct perf_event *event)
+> > > +{
+> > > +       struct riscv_pmu *rvpmu =3D to_riscv_pmu(event->pmu);
+> > > +
+> > > +       if (!(event->hw.flags & PERF_EVENT_FLAG_USER_READ_CNT))
+> > > +               return 0;
+> > > +
+> > > +       if (rvpmu->csr_index)
+> > > +               return rvpmu->csr_index(event) + 1;
+> > > +
+> > > +       return 0;
+> > > +}
+> > > +
+> > > +static void riscv_pmu_event_mapped(struct perf_event *event, struct =
+mm_struct *mm)
+> > > +{
+> > > +       struct riscv_pmu *rvpmu =3D to_riscv_pmu(event->pmu);
+> > > +
+> > > +       if (rvpmu->event_mapped) {
+> > > +               rvpmu->event_mapped(event, mm);
+> > > +               perf_event_update_userpage(event);
+> > > +       }
+> > > +}
+> > > +
+> > > +static void riscv_pmu_event_unmapped(struct perf_event *event, struc=
+t mm_struct *mm)
+> > > +{
+> > > +       struct riscv_pmu *rvpmu =3D to_riscv_pmu(event->pmu);
+> > > +
+> > > +       if (rvpmu->event_unmapped) {
+> > > +               rvpmu->event_unmapped(event, mm);
+> > > +               perf_event_update_userpage(event);
+> > > +       }
+> > > +}
+> > > +
+> > >  struct riscv_pmu *riscv_pmu_alloc(void)
+> > >  {
+> > >         struct riscv_pmu *pmu;
+> > > @@ -307,6 +345,9 @@ struct riscv_pmu *riscv_pmu_alloc(void)
+> > >         }
+> > >         pmu->pmu =3D (struct pmu) {
+> > >                 .event_init     =3D riscv_pmu_event_init,
+> > > +               .event_mapped   =3D riscv_pmu_event_mapped,
+> > > +               .event_unmapped =3D riscv_pmu_event_unmapped,
+> > > +               .event_idx      =3D riscv_pmu_event_idx,
+> > >                 .add            =3D riscv_pmu_add,
+> > >                 .del            =3D riscv_pmu_del,
+> > >                 .start          =3D riscv_pmu_start,
+> > > diff --git a/include/linux/perf/riscv_pmu.h b/include/linux/perf/risc=
+v_pmu.h
+> > > index 9f70d94942e0..1452c8af3b67 100644
+> > > --- a/include/linux/perf/riscv_pmu.h
+> > > +++ b/include/linux/perf/riscv_pmu.h
+> > > @@ -55,6 +55,10 @@ struct riscv_pmu {
+> > >         void            (*ctr_start)(struct perf_event *event, u64 in=
+it_val);
+> > >         void            (*ctr_stop)(struct perf_event *event, unsigne=
+d long flag);
+> > >         int             (*event_map)(struct perf_event *event, u64 *c=
+onfig);
+> > > +       void            (*event_init)(struct perf_event *event);
+> > > +       void            (*event_mapped)(struct perf_event *event, str=
+uct mm_struct *mm);
+> > > +       void            (*event_unmapped)(struct perf_event *event, s=
+truct mm_struct *mm);
+> > > +       uint8_t         (*csr_index)(struct perf_event *event);
+> > >
+> > >         struct cpu_hw_events    __percpu *hw_events;
+> > >         struct hlist_node       node;
+> > > --
+> > > 2.37.2
+> > >
+> >
+> >
+> > --
+> > Regards,
+> > Atish
 
- Documentation/filesystems/virtiofs.rst | 4 ++++
- fs/fuse/virtio_fs.c                    | 8 ++++++++
- 2 files changed, 12 insertions(+)
 
-diff --git a/Documentation/filesystems/virtiofs.rst b/Documentation/filesystems/virtiofs.rst
-index fdec5a7840f7..b045ef2223de 100644
---- a/Documentation/filesystems/virtiofs.rst
-+++ b/Documentation/filesystems/virtiofs.rst
-@@ -48,6 +48,10 @@ ro, rw, context, etc. Also, virtiofs has its own options.
- dax[=always,never,inode]
-   Enable direct access for files. See :ref:`virtiofs-dax`.
- 
-+negative_dentry_timeout=N
-+  Set the time in seconds to keep negative dentry cache. Same as the FUSE's
-+  mount option.
-+
- atime behavior
- ^^^^^^^^^^^^^^
- 
-diff --git a/fs/fuse/virtio_fs.c b/fs/fuse/virtio_fs.c
-index 4d8d4f16c727..bbbd840510f9 100644
---- a/fs/fuse/virtio_fs.c
-+++ b/fs/fuse/virtio_fs.c
-@@ -99,11 +99,13 @@ static const struct constant_table dax_param_enums[] = {
- enum {
- 	OPT_DAX,
- 	OPT_DAX_ENUM,
-+	OPT_NEGATIVE_DENTRY_TIMEOUT,
- };
- 
- static const struct fs_parameter_spec virtio_fs_parameters[] = {
- 	fsparam_flag("dax", OPT_DAX),
- 	fsparam_enum("dax", OPT_DAX_ENUM, dax_param_enums),
-+	fsparam_u32 ("negative_dentry_timeout", OPT_NEGATIVE_DENTRY_TIMEOUT),
- 	{}
- };
- 
-@@ -125,6 +127,9 @@ static int virtio_fs_parse_param(struct fs_context *fsc,
- 	case OPT_DAX_ENUM:
- 		ctx->dax_mode = result.uint_32;
- 		break;
-+	case OPT_NEGATIVE_DENTRY_TIMEOUT:
-+		ctx->negative_dentry_timeout = result.uint_32;
-+		break;
- 	default:
- 		return -EINVAL;
- 	}
-@@ -1416,6 +1421,7 @@ static int virtio_fs_get_tree(struct fs_context *fsc)
- 	struct super_block *sb;
- 	struct fuse_conn *fc = NULL;
- 	struct fuse_mount *fm;
-+	struct fuse_fs_context *ffc;
- 	unsigned int virtqueue_size;
- 	int err = -EIO;
- 
-@@ -1468,6 +1474,8 @@ static int virtio_fs_get_tree(struct fs_context *fsc)
- 
- 		sb->s_flags |= SB_ACTIVE;
- 	}
-+	ffc = fsc->fs_private;
-+	fm->negative_dentry_timeout = ffc->negative_dentry_timeout;
- 
- 	WARN_ON(fsc->root);
- 	fsc->root = dget(sb->s_root);
--- 
-2.41.0.185.g7c58973941-goog
 
+--=20
+Regards,
+Atish
