@@ -2,393 +2,177 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 711FE736B93
-	for <lists+linux-doc@lfdr.de>; Tue, 20 Jun 2023 14:07:08 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 4A417736E24
+	for <lists+linux-doc@lfdr.de>; Tue, 20 Jun 2023 15:59:56 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S232238AbjFTMHH (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 20 Jun 2023 08:07:07 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:44430 "EHLO
+        id S232109AbjFTN7r (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 20 Jun 2023 09:59:47 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:55100 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S232144AbjFTMG5 (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 20 Jun 2023 08:06:57 -0400
-Received: from mail-lf1-x133.google.com (mail-lf1-x133.google.com [IPv6:2a00:1450:4864:20::133])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id D9C91B7
-        for <linux-doc@vger.kernel.org>; Tue, 20 Jun 2023 05:06:55 -0700 (PDT)
-Received: by mail-lf1-x133.google.com with SMTP id 2adb3069b0e04-4f87592ecaeso2368588e87.0
-        for <linux-doc@vger.kernel.org>; Tue, 20 Jun 2023 05:06:55 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=rivosinc-com.20221208.gappssmtp.com; s=20221208; t=1687262814; x=1689854814;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=VLydGTIWW1L6p8nWmxO80K1g2yQP3Od4h4FMa6lJY3M=;
-        b=frhjQU6RFgXYzCkJcSmQ3d70Ob91iOSuMtk04T99p56QxQJ/VqciaRherElT7Ne/Pd
-         c61vwvkpTg62LzftNkeh1kXPeS3nIJZChl+w1N2XzafO7iKdHK3+Fns0k7lfDxfmeahg
-         TAF8GCKQPsiKuaVK5KXSFThX05ZkqebVyW5yqv/1EiUgUFl2Qmy3y3TnEk4dF/0R3WAh
-         sd7+E7/N6dAa11YoaSp8F+Eu7KiLgdqHe6k+dD7xHA8zD+opJLKNd5U9cAyAepoKJQMr
-         U4VHKqie1BZO5uH4Zb2qlfjvQ1LckAANb933XfYghiNfVz2BJc5e88XTsCbxArYbrJhI
-         n39Q==
+        with ESMTP id S231949AbjFTN7q (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 20 Jun 2023 09:59:46 -0400
+Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.129.124])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id EC1891B6
+        for <linux-doc@vger.kernel.org>; Tue, 20 Jun 2023 06:59:07 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+        s=mimecast20190719; t=1687269547;
+        h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+         to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+         content-transfer-encoding:content-transfer-encoding:
+         in-reply-to:in-reply-to:references:references;
+        bh=QTLnyrCbOY1xAfP5SqHK9oZhSTIFzQoN+FT5nbHO/xo=;
+        b=dxHcvQ2irS/IXiBDe+bJkryhqR92sUPmxPHEyIqEvVkfDky9GVUYaCsCMCEd7MMVxRe98t
+        ulFHuwqmlgybPkFwWsmVgvTBQk6Q/DqEE5iQzxb7mR7Rju/AmuQKiHyEs/XOaItU5fCn6y
+        sOquqecRcS2iLJYd8TnvvQHHwQPc5Ew=
+Received: from mail-ed1-f70.google.com (mail-ed1-f70.google.com
+ [209.85.208.70]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-645-t-wZmbamNGmxz2ercdai_A-1; Tue, 20 Jun 2023 09:59:05 -0400
+X-MC-Unique: t-wZmbamNGmxz2ercdai_A-1
+Received: by mail-ed1-f70.google.com with SMTP id 4fb4d7f45d1cf-514a6909c35so3104316a12.3
+        for <linux-doc@vger.kernel.org>; Tue, 20 Jun 2023 06:59:04 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1687262814; x=1689854814;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=VLydGTIWW1L6p8nWmxO80K1g2yQP3Od4h4FMa6lJY3M=;
-        b=eo1G25SqEyzalKrzFNn6SJIFAAN5rGuFz6RYLW51Q/OXhCC3eiAgjJ0B93zkeAYXH4
-         edDDe7OJev6FhIc0ppXXKG9TmNd9sugYQ/f0K1/8EajuVgbUP/7w02hEvet2HmjhHqjk
-         waLDsKHqRb2lEVsXhe8dGNdpcnQCA05tf87MrQaggqDQTOFHjSOmG7ApYVa8MHq7GL0j
-         8yNqof+gDbKOv2wmHZPplunVKpar8ExmBjGNvR4xSxyKaXkCO/APKinm+C35NfffTqP7
-         cpv1C9W+/2wdx6RvH2hXPZGRSpOtJtRn8KVXVgGMJLjsQrOBs0cFr2anKGdJ1DxcVjJg
-         AsPg==
-X-Gm-Message-State: AC+VfDysIoPFte/np62ty4sBrZAZuQunwgDqZk2TnmVKszCHbz3hxQXc
-        oWgZ55PQFR9padA+CV3ww9a0JwvE8lvJxiECAVsdgQ==
-X-Google-Smtp-Source: ACHHUZ52j+KulP8+OQ3GMSobwdYytSflKlEVT8LhbO4JDHFvwvrmjO21e7ScGU5nx3XM4yVN6rZLExvwfWNnE0rmSoI=
-X-Received: by 2002:a19:791d:0:b0:4f8:6f40:4773 with SMTP id
- u29-20020a19791d000000b004f86f404773mr3070743lfc.7.1687262813819; Tue, 20 Jun
- 2023 05:06:53 -0700 (PDT)
+        d=1e100.net; s=20221208; t=1687269543; x=1689861543;
+        h=content-transfer-encoding:in-reply-to:organization:from:references
+         :cc:to:content-language:subject:user-agent:mime-version:date
+         :message-id:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=QTLnyrCbOY1xAfP5SqHK9oZhSTIFzQoN+FT5nbHO/xo=;
+        b=Tcqi4aFME9Z2orLSZpCQX/qpKBX/zchKzV8y2H4tjatD6TL5q6GeAdlNHmFLqjNZ5W
+         E+HDAgmO3tGbJZy9kc0mG/ffY3g0kWe7eOfz+KCX8zsajVZC94U5xW5Ymz9cI+SWiC4R
+         ED/aW9WmrRHKCCqF0wmWaCizHrtuQrXqL7F5MKBIX4zM7uTRcui7z/dq/wXBCa4dSroK
+         ZEkcOSF9WuOcfa/1GQkdjN5Jv9GbRz0vmFMEzCihQBlIq9KmUYzqNHW4G7w4QV6sTxfe
+         dCkAV1qECOureEfHZnJW/i1vVjwmCKpEmWDABrP8TB8xRA+m7RzHnBME/0DKHMLYWrqq
+         BNYg==
+X-Gm-Message-State: AC+VfDxp4zlm7h7aaIhZYc7lUGlB+UnjOo9auDgW31f2gcEEswSD3k0c
+        UCqUdde81EPdN0TiEN2czBvdOA0qpsylxIll9IaY4JZVRulwo9/2+BdXQFbXLjB7EjI70KXcafC
+        57AJ4cbs2pi3wZ29kUKf2
+X-Received: by 2002:aa7:d888:0:b0:51a:23fb:355c with SMTP id u8-20020aa7d888000000b0051a23fb355cmr8076331edq.10.1687269543776;
+        Tue, 20 Jun 2023 06:59:03 -0700 (PDT)
+X-Google-Smtp-Source: ACHHUZ6b5AT6QAAjfNGSFqHnSqiPb5mv+npztwci67WB0CYLQf6lJNAROx+U2HhYdxy7fYnS0gvCQg==
+X-Received: by 2002:aa7:d888:0:b0:51a:23fb:355c with SMTP id u8-20020aa7d888000000b0051a23fb355cmr8076320edq.10.1687269543440;
+        Tue, 20 Jun 2023 06:59:03 -0700 (PDT)
+Received: from ?IPV6:2a02:810d:4b3f:de9c:642:1aff:fe31:a15c? ([2a02:810d:4b3f:de9c:642:1aff:fe31:a15c])
+        by smtp.gmail.com with ESMTPSA id x22-20020aa7dad6000000b0050d83a39e6fsm1278687eds.4.2023.06.20.06.59.01
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Tue, 20 Jun 2023 06:59:02 -0700 (PDT)
+Message-ID: <a8edf75b-e0f7-a6c7-7d29-f0d39923549b@redhat.com>
+Date:   Tue, 20 Jun 2023 14:23:25 +0200
 MIME-Version: 1.0
-References: <20230619094705.51337-1-alexghiti@rivosinc.com> <6B5FC5C805CA568D+43d4ca18-deca-8d1a-394f-0cf69509ca53@tinylab.org>
-In-Reply-To: <6B5FC5C805CA568D+43d4ca18-deca-8d1a-394f-0cf69509ca53@tinylab.org>
-From:   Alexandre Ghiti <alexghiti@rivosinc.com>
-Date:   Tue, 20 Jun 2023 14:06:43 +0200
-Message-ID: <CAHVXubiEvLFnQMWsUomoG3FJhQNGqoXC41dWDuGhXcUdCnL2ZQ@mail.gmail.com>
-Subject: Re: [PATCH 1/2] Documentation: riscv: Add early boot document
-To:     Song Shuai <songshuaishuai@tinylab.org>
-Cc:     Jonathan Corbet <corbet@lwn.net>,
-        Paul Walmsley <paul.walmsley@sifive.com>,
-        Palmer Dabbelt <palmer@dabbelt.com>,
-        Albert Ou <aou@eecs.berkeley.edu>, linux-doc@vger.kernel.org,
-        linux-riscv@lists.infradead.org, linux-kernel@vger.kernel.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-        DKIM_VALID,RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,SPF_PASS,
-        T_SCC_BODY_TEXT_LINE autolearn=ham autolearn_force=no version=3.4.6
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.10.0
+Subject: Re: [PATCH drm-next v5 03/14] drm: manager to keep track of GPUs VA
+ mappings
+Content-Language: en-US
+To:     =?UTF-8?Q?Christian_K=c3=b6nig?= <christian.koenig@amd.com>,
+        airlied@gmail.com, daniel@ffwll.ch, tzimmermann@suse.de,
+        mripard@kernel.org, corbet@lwn.net, bskeggs@redhat.com,
+        Liam.Howlett@oracle.com, matthew.brost@intel.com,
+        boris.brezillon@collabora.com, alexdeucher@gmail.com,
+        ogabbay@kernel.org, bagasdotme@gmail.com, willy@infradead.org,
+        jason@jlekstrand.net
+Cc:     dri-devel@lists.freedesktop.org, nouveau@lists.freedesktop.org,
+        linux-doc@vger.kernel.org, linux-mm@kvack.org,
+        linux-kernel@vger.kernel.org,
+        Donald Robson <donald.robson@imgtec.com>,
+        Dave Airlie <airlied@redhat.com>
+References: <20230620004217.4700-1-dakr@redhat.com>
+ <20230620004217.4700-4-dakr@redhat.com>
+ <cf6846ea-5bd0-0b41-b7e6-901c70701751@amd.com>
+From:   Danilo Krummrich <dakr@redhat.com>
+Organization: RedHat
+In-Reply-To: <cf6846ea-5bd0-0b41-b7e6-901c70701751@amd.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-Spam-Status: No, score=-2.2 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,NICE_REPLY_A,
+        RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,SPF_NONE,T_SCC_BODY_TEXT_LINE
+        autolearn=ham autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Tue, Jun 20, 2023 at 12:32=E2=80=AFPM Song Shuai <songshuaishuai@tinylab=
-.org> wrote:
->
->
->
-> =E5=9C=A8 2023/6/19 17:47, Alexandre Ghiti =E5=86=99=E9=81=93:
-> > This document describes the constraints and requirements of the early
-> > boot process in a RISC-V kernel.
-> >
-> > Szigned-off-by: Alexandre Ghiti <alexghiti@rivosinc.com>
-> > ---
-> >   Documentation/riscv/boot-image-header.rst |   3 -
-> >   Documentation/riscv/boot.rst              | 181 +++++++++++++++++++++=
-+
-> >   Documentation/riscv/index.rst             |   1 +
-> >   3 files changed, 182 insertions(+), 3 deletions(-)
-> >   create mode 100644 Documentation/riscv/boot.rst
-> >
-> > diff --git a/Documentation/riscv/boot-image-header.rst b/Documentation/=
-riscv/boot-image-header.rst
-> > index d7752533865f..a4a45310c4c4 100644
-> > --- a/Documentation/riscv/boot-image-header.rst
-> > +++ b/Documentation/riscv/boot-image-header.rst
-> > @@ -7,9 +7,6 @@ Boot image header in RISC-V Linux
-> >
-> >   This document only describes the boot image header details for RISC-V=
- Linux.
-> >
-> > -TODO:
-> > -  Write a complete booting guide.
-> > -
-> >   The following 64-byte header is present in decompressed Linux kernel =
-image::
-> >
-> >       u32 code0;                /* Executable code */
-> > diff --git a/Documentation/riscv/boot.rst b/Documentation/riscv/boot.rs=
-t
-> > new file mode 100644
-> > index 000000000000..b02230818b79
-> > --- /dev/null
-> > +++ b/Documentation/riscv/boot.rst
-> > @@ -0,0 +1,181 @@
-> > +.. SPDX-License-Identifier: GPL-2.0
-> > +
-> > +=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-> > +Early boot requirements/constraints on RISC-V
-> > +=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-> > +
-> > +:Author: Alexandre Ghiti <alexghiti@rivosinc.com>
-> > +:Date: 23 May 2023
-> > +
-> > +This document describes what the RISC-V kernel expects from the previo=
-us stages
-> > +and the firmware, but also the constraints that any developer must hav=
-e in mind
-> > +when touching the early boot process, e.g. before the final virtual ma=
-pping is
-> > +setup.
-> > +
-> > +Pre-kernel boot (Expectations from firmware)
-> > +=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-> > +
-> > +Registers state
-> > +---------------
-> > +
-> > +The RISC-V kernel expects:
-> > +
-> > +  * `$a0` to contain the hartid of the current core.
-> > +  * `$a1` to contain the address of the device tree in memory.
-> > +
-> > +CSR state
-> > +---------
-> > +
-> > +The RISC-V kernel expects:
-> > +
-> > +  * `$satp =3D 0`: the MMU must be disabled.
-> > +
-> > +Reserved memory for resident firmware
-> > +-------------------------------------
-> > +
-> > +The RISC-V kernel expects the firmware to mark any resident memory wit=
-h the
-> > +`no-map` flag, thus the kernel won't map those regions in the direct m=
-apping
-> > +(avoiding issues with hibernation, speculative accesses and probably o=
-ther
-> > +subsystems).
-> > +
-> > +Kernel location
-> > +---------------
-> > +
-> > +The RISC-V kernel expects to be placed at a PMD boundary (2MB for rv64=
- and 4MB
-> > +for rv32). Note though that the EFI stub will physically relocate the =
-kernel if
-> > +that's not the case.
-> > +
-> > +Device-tree
-> > +-----------
-> > +
-> > +The RISC-V kernel always expects a device tree, it is:
-> > +
-> > +- either passed directly to the kernel from the previous stage using t=
-he `$a1`
-> > +  register,
-> > +- or when booting with UEFI, the device tree will be retrieved by the =
-EFI stub
-> > +  using the EFI configuration table or it will be created.
-> > +
-> > +Bootflow
-> > +--------
-> > +
-> > +There exist 2 methods to enter the kernel:
-> > +
-> > +- `RISCV_BOOT_SPINWAIT`: the firmware releases all harts in the kernel=
-, one hart
-> > +  wins a lottery and executes the early boot code while the other hart=
-s are
-> > +  parked waiting for the initialization to finish. This method is now
-> > +  **deprecated**.
-> > +- Ordered booting: the firmware releases only one hart that will execu=
-te the
-> > +  initialization phase and then will start all other harts using the S=
-BI HSM
-> > +  extension.
-> > +
-> > +UEFI
-> > +----
-> > +
-> > +UEFI memory map
-> > +~~~~~~~~~~~~~~~
-> > +
-> > +When booting with UEFI, the RISC-V kernel will use only the EFI memory=
- map to
-> > +populate the system memory.
-> > +
-> > +The UEFI firmware must parse the subnodes of the `/reserved-memory` de=
-vice tree
-> > +node and abide by the device tree specification to convert the attribu=
-tes of
-> > +those subnodes (`no-map` and `reusable`) into their correct EFI equiva=
-lent
-> > +(refer to section "3.5.4 /reserved-memory and UEFI" of the device tree
-> > +specification).
-> how about declare the version of Device Tree specification?
-> like the devicetree-specification-v0.4-rc1 we recently reference
+Hi Christian,
 
-You're right, the section number refers to this version of the
-specification, so it should be noted.
+On 6/20/23 08:45, Christian König wrote:
+> Hi Danilo,
+> 
+> sorry for the delayed reply. I've trying to dig myself out of a hole at 
+> the moment.
 
-> > +
-> > +RISCV_EFI_BOOT_PROTOCOL
-> > +~~~~~~~~~~~~~~~~~~~~~~~
-> > +
-> > +When booting with UEFI, the EFI stub requires the boot hartid in order=
- to pass
-> > +it to the RISC-V kernel in `$a1`. The EFI stub retrieves the boot hart=
-id using
-> > +one of the following methods:
-> > +
-> > +- `RISCV_EFI_BOOT_PROTOCOL` (**preferred**).
-> > +- `boot-hartid` device tree subnode (**deprecated**).
-> > +
-> > +Any new firmware must implement `RISCV_EFI_BOOT_PROTOCOL` as the devic=
-e tree
-> > +based approach is deprecated now.
-> > +
-> > +During kernel boot: (Kernel internals)
-> > +=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-> > +
-> > +EFI stub and device tree
-> > +------------------------
-> > +
-> > +When booting with UEFI, the device tree is supplemented by the EFI stu=
-b with the
-> > +following parameters (largely shared with arm64 in Documentation/arm/u=
-efi.rst):
-> > +
-> > +=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D  =3D=3D=3D=3D=3D=3D   =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D
-> > +Name                        Size     Description
-> > +=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D  =3D=3D=3D=3D=3D=3D   =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D
-> > +linux,uefi-system-table     64-bit   Physical address of the UEFI Syst=
-em Table.
-> > +
-> > +linux,uefi-mmap-start       64-bit   Physical address of the UEFI memo=
-ry map,
-> > +                                     populated by the UEFI GetMemoryMa=
-p() call.
-> > +
-> > +linux,uefi-mmap-size        32-bit   Size in bytes of the UEFI memory =
-map
-> > +                                     pointed to in previous entry.
-> > +
-> > +linux,uefi-mmap-desc-size   32-bit   Size in bytes of each entry in th=
-e UEFI
-> > +                                     memory map.
-> > +
-> > +linux,uefi-mmap-desc-ver    32-bit   Version of the mmap descriptor fo=
-rmat.
-> > +
-> > +kaslr-seed                  64-bit   Entropy used to randomize the ker=
-nel image
-> > +                                     base address location.
-> > +
-> > +bootargs                             Kernel command line
-> how about use "string" to declare the type of "bootargs"
-> and replace the "Size" in header with "Type"
+No worries, thank you for taking a look anyway!
 
-Why not, this will be more accurate.
+> 
+> Am 20.06.23 um 02:42 schrieb Danilo Krummrich:
+>> [SNIP]
+>> diff --git a/include/drm/drm_gem.h b/include/drm/drm_gem.h
+>> index bbc721870c13..5ec8148a30ee 100644
+>> --- a/include/drm/drm_gem.h
+>> +++ b/include/drm/drm_gem.h
+>> @@ -36,6 +36,8 @@
+>>   #include <linux/kref.h>
+>>   #include <linux/dma-resv.h>
+>> +#include <linux/list.h>
+>> +#include <linux/mutex.h>
+>>   #include <drm/drm_vma_manager.h>
+>> @@ -379,6 +381,18 @@ struct drm_gem_object {
+>>        */
+>>       struct dma_resv _resv;
+>> +    /**
+>> +     * @gpuva:
+>> +     *
+>> +     * Provides the list of GPU VAs attached to this GEM object.
+>> +     *
+>> +     * Drivers should lock list accesses with the GEMs &dma_resv lock
+>> +     * (&drm_gem_object.resv).
+>> +     */
+>> +    struct {
+>> +        struct list_head list;
+>> +    } gpuva;
+>> +
+>>       /**
+>>        * @funcs:
+>>        *
+> 
+> I'm pretty sure that it's not a good idea to attach this directly to the 
+> GEM object.
 
-> > +=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D  =3D=3D=3D=3D=3D=3D   =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D
-> > +
-> > +Virtual mapping setup
-> > +---------------------
-> > +
-> > +The installation of the virtual mapping is done in 2 steps in the RISC=
--V kernel:
-> > +
-> > +1. :c:func:`setup_vm` installs a temporary kernel mapping in
-> > +   :c:var:`early_pg_dir` which allows to discover the system memory: o=
-nly the
-> > +   kernel text/data are mapped at this point. When establishing this m=
-apping,
-> > +   no allocation can be done (since the system memory is not known yet=
-), so
-> > +   :c:var:`early_pg_dir` page table is statically allocated (using onl=
-y one
-> > +   table for each level).
-> > +
-> > +2. :c:func:`setup_vm_final` creates the final kernel mapping in
-> > +   :c:var:`swapper_pg_dir` and takes advantage of the discovered syste=
-m memory
-> > +   to create the linear mapping. When establishing this mapping, the k=
-ernel
-> > +   can allocate memory but cannot access it directly (since the direct=
- mapping
-> > +   is not present yet), so it uses temporary mappings in the fixmap re=
-gion to
-> > +   be able to access the newly allocated page table levels.
-> > +
-> > +For :c:func:`virt_to_phys` and :c:func:`phys_to_virt` to be able to co=
-rrectly
-> > +convert direct mapping addresses to physical addresses, it needs to kn=
-ow the
-> > +start of the DRAM: this happens after 1, right before 2 installs the d=
-irect
-> > +mapping (see :c:func:`setup_bootmem` function in arch/riscv/mm/init.c)=
-. So
-> > +any usage of those macros before the final virtual mapping is installe=
-d must be
-> > +carefully examined.
-> > +
-> > +Device-tree mapping via fixmap
-> > +------------------------------
-> > +
-> > +The RISC-V kernel uses the fixmap region to map the device tree becaus=
-e the
-> > +device tree virtual mapping must remain the same between :c:func:`setu=
-p_vm` and
-> > +:c:func:`setup_vm_final` calls since :c:var:`reserved_mem` array is in=
-itialized
-> > +with virtual addresses established by :c:func:`setup_vm` and used with=
- the
-> > +mapping established by :c:func:`setup_vm_final`.
-> > +
-> > +Pre-MMU execution
-> > +-----------------
-> > +
-> > +Any code that executes before even the first virtual mapping is establ=
-ished
-> > +must be very carefully compiled as:
-> > +
-> > +- `-fno-pie`: This is needed for relocatable kernels which use `-fPIE`=
-, since
-> > +  otherwise, any access to a global symbol would go through the GOT wh=
-ich is
-> > +  only relocated virtually.
-> > +- `-mcmodel=3Dmedany`: Any access to a global symbol must be PC-relati=
-ve to avoid
-> > +  any relocations to happen before the MMU is setup.
-> > +- Also note that *all* instrumentation must also be disabled (that inc=
-ludes
-> > +  KASAN, ftrace and others).
-> > +
-> > +As using a symbol from a different compilation unit requires this unit=
- to be
-> > +compiled with those flags, we advise, as much as possible, not to use =
-external
-> > +symbols.
-> > diff --git a/Documentation/riscv/index.rst b/Documentation/riscv/index.=
-rst
-> > index 175a91db0200..1f66062def6d 100644
-> > --- a/Documentation/riscv/index.rst
-> > +++ b/Documentation/riscv/index.rst
-> > @@ -5,6 +5,7 @@ RISC-V architecture
-> >   .. toctree::
-> >       :maxdepth: 1
-> >
-> > +    boot
-> >       boot-image-header
-> >       vm-layout
-> >       hwprobe
->
-> --
-> Thanks
-> Song Shuai
->
+Why do you think so? IMHO having a common way to connect mappings to 
+their backing buffers is a good thing, since every driver needs this 
+connection anyway.
 
-Thanks Song!
+E.g. when a BO gets evicted, drivers can just iterate the list of 
+mappings and, as the circumstances require, invalidate the corresponding 
+mappings or to unmap all existing mappings of a given buffer.
+
+What would be the advantage to let every driver implement a driver 
+specific way of keeping this connection? Do you see cases where this 
+kind of connection between mappings and backing buffers wouldn't be good 
+enough? If so, which cases do you have in mind? Maybe we can cover them 
+in a common way as well?
+
+> 
+> As you wrote in the commit message it's highly driver specific what to 
+> map and where to map it.
+
+In the end the common case should be that in a VA space at least every 
+mapping being backed by a BO is represented by a struct drm_gpuva.
+
+> 
+> Instead I suggest to have a separate structure for mappings in a VA 
+> space which driver can then add to their GEM objects or whatever they 
+> want to map into their VMs.
+
+Which kind of separate structure for mappings? Another one analogous to 
+struct drm_gpuva?
+
+- Danilo
+
+> 
+> Regards,
+> Christian.
+> 
+> 
+
