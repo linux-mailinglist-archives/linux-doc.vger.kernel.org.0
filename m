@@ -2,235 +2,225 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id B40DD7361EB
-	for <lists+linux-doc@lfdr.de>; Tue, 20 Jun 2023 05:03:19 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 8D86C73621E
+	for <lists+linux-doc@lfdr.de>; Tue, 20 Jun 2023 05:18:20 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S230226AbjFTDDR (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 19 Jun 2023 23:03:17 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:48942 "EHLO
+        id S229960AbjFTDSS (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 19 Jun 2023 23:18:18 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:55232 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S230229AbjFTDCq (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Mon, 19 Jun 2023 23:02:46 -0400
-Received: from mail-ed1-x52c.google.com (mail-ed1-x52c.google.com [IPv6:2a00:1450:4864:20::52c])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id BE98A10F0
-        for <linux-doc@vger.kernel.org>; Mon, 19 Jun 2023 20:02:11 -0700 (PDT)
-Received: by mail-ed1-x52c.google.com with SMTP id 4fb4d7f45d1cf-51a5eec783cso1749055a12.3
-        for <linux-doc@vger.kernel.org>; Mon, 19 Jun 2023 20:02:11 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20221208; t=1687230130; x=1689822130;
-        h=content-transfer-encoding:to:subject:message-id:date:from
-         :mime-version:from:to:cc:subject:date:message-id:reply-to;
-        bh=BrbG7JxveYysVe86t5gOLnlc9dkaosvcFTwxzJdTEvM=;
-        b=c3c1F42BSRJrnwxC+NT6wlaZRfilh6uv0+S5nmUDKQ5jvF9EnpQIYrc5RBgHzdEvAd
-         AR4JIpVZNIv8eoAoLh0KLkH0IuSA7E9QS/+0oT5R3Xp7rRhV9649OkcrloB1NptT3eCp
-         K+ml2lCsYTFSAY0MiZrDnmXXwNCa58l2dXJrenR5YR8h14+qhG8MWBkHBwVN2uA22FJ5
-         h7k6TG0vPVY66NpSJm+rOf2mxD1qqXqb23uZJNj8/10zdCCT8+o+5/v2NqbI2w6dPGcu
-         1wTzfGt03Kv20wtXU41V1oHYDhduXiDwwwS92/lM6xbVSxNTeqKAg7RvDCmbtcJ43fVA
-         Ibow==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1687230130; x=1689822130;
-        h=content-transfer-encoding:to:subject:message-id:date:from
-         :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=BrbG7JxveYysVe86t5gOLnlc9dkaosvcFTwxzJdTEvM=;
-        b=CaAt95qm8rFgBaLsU+dc1YlSdz0rYHAoEFCjM+0okEXsy7N0FUwtmIVjXDXNQZGOI5
-         7a4g96EynjPPGJGM2fYnMjAy9rpUzq6sFir7ZECRTRiNYi+a3UJ1XLS812X9ql/OpXBq
-         44gmndJIOSbmTCcKPXS+aKywUJwFmnOqGjYmkon9l0fEDa/NVzpbFQWVLfXOyNmRS7hA
-         X5WuzRPCQ4byTxGH651NsIbZf0exXi0BNgNpT709g276r57Fh5vhbJ7cwgW5z5LoCrHz
-         sFbMqhktWPkAD+nEwbnHGEoBgwQwRixb9qVS0XFWGeibfqoXw+rZDbp39uvXFbMzig/R
-         59FQ==
-X-Gm-Message-State: AC+VfDya5JEe731mIOzEqbg+C0lnERbNO8XFTJBB11ewNaGsBicuamc0
-        PDDxsTUVzEfDAUO5QR73UbxBxdlouONR0NO+SU8=
-X-Google-Smtp-Source: ACHHUZ7H2L9rnk4Go8ghmBKtMZMB54Y6NcPhsYwk7lHemIMMDVRcSTKI5NBDfr3kqQ8AlU0klWaNAV6GjvhpnFvTW6Q=
-X-Received: by 2002:a17:906:730e:b0:986:4552:e7d7 with SMTP id
- di14-20020a170906730e00b009864552e7d7mr12095772ejc.17.1687230129918; Mon, 19
- Jun 2023 20:02:09 -0700 (PDT)
+        with ESMTP id S229929AbjFTDSS (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Mon, 19 Jun 2023 23:18:18 -0400
+Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id AD5DA1B0;
+        Mon, 19 Jun 2023 20:18:16 -0700 (PDT)
+Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
+        (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+         key-exchange X25519 server-signature RSA-PSS (2048 bits))
+        (No client certificate requested)
+        by dfw.source.kernel.org (Postfix) with ESMTPS id 495C060E99;
+        Tue, 20 Jun 2023 03:18:16 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 7A4ECC433C0;
+        Tue, 20 Jun 2023 03:18:15 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+        s=k20201202; t=1687231095;
+        bh=5kX3k4XJ9Q5Hely0t1ghE0El8Wyy1Z6098NToPfXlEg=;
+        h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+        b=MESw7CmzT0ggbKAhmbX2XebQDrYUo1Ww3FbyjHZ4UOAITSmk2FNd26sNGHamem3Gk
+         bjRYEBVPq2n1l+h0ABhRi08/cGpRxwlwZFERZKcEX4TSXJoGGCzwT6brbN8gXWSOaJ
+         NCqAWNq0AKvofWbavZfAQZn/B6jzOlIfB+KHMk23TiQy/5F8DqeCYqByt5xydFXKv+
+         fTQZYKfLFWl/rJ2mnqHYUGdU5NeIrvLm1Izvc/LYrzsHlxj4yo7kXpZFMYc/UuEnJN
+         +Wi6XRO+UEE9kavhE7mQid1ItKf6F9xdiqC1BzZVXzDe/Ick4WsZUMgkklRsn+gIl9
+         eAOo0GXuCu6eQ==
+Date:   Mon, 19 Jun 2023 20:18:13 -0700
+From:   Eric Biggers <ebiggers@kernel.org>
+To:     Luca Boccassi <bluca@debian.org>
+Cc:     fsverity@lists.linux.dev, linux-integrity@vger.kernel.org,
+        linux-doc@vger.kernel.org, Colin Walters <walters@verbum.org>,
+        Alexander Larsson <alexl@redhat.com>,
+        Victor Hsieh <victorhsieh@google.com>
+Subject: Re: [PATCH v2] fsverity: improve documentation for builtin signature
+ support
+Message-ID: <20230620031813.GA1590@sol.localdomain>
+References: <20230619221048.10335-1-ebiggers@kernel.org>
+ <CAMw=ZnQCBJM71wi-yO99yi+KTy=WtR2+jJxU2snvWgJTzTeeFw@mail.gmail.com>
+ <20230619234939.GA2320@sol.localdomain>
+ <CAMw=ZnRVKQz9tY=DH9eoAMeEd07tdXMENW0Lhbx2tApH==5D_Q@mail.gmail.com>
 MIME-Version: 1.0
-Received: by 2002:a17:906:4a90:b0:986:545c:2dc5 with HTTP; Mon, 19 Jun 2023
- 20:02:09 -0700 (PDT)
-From:   United Nations <cindylove276@gmail.com>
-Date:   Mon, 19 Jun 2023 23:02:09 -0400
-Message-ID: <CANHmF4D9_Dr81HRVJn55dbcu+qF4TFLy6ORc3SGVE4V2E5haGw@mail.gmail.com>
-Subject: Congratulations
-To:     undisclosed-recipients:;
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Spam-Status: Yes, score=6.9 required=5.0 tests=ADVANCE_FEE_3_NEW_FRM_MNY,
-        BAYES_50,DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,
-        FILL_THIS_FORM,FILL_THIS_FORM_LONG,FORM_FRAUD_5,
-        FREEMAIL_ENVFROM_END_DIGIT,FREEMAIL_FROM,FREEMAIL_REPLY,LOTS_OF_MONEY,
-        MONEY_FORM,MONEY_FRAUD_5,RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,SPF_PASS,
-        T_SCC_BODY_TEXT_LINE,UNDISC_MONEY autolearn=no autolearn_force=no
-        version=3.4.6
-X-Spam-Report: * -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at
-        *      https://www.dnswl.org/, no trust
-        *      [2a00:1450:4864:20:0:0:0:52c listed in]
-        [list.dnswl.org]
-        *  0.8 BAYES_50 BODY: Bayes spam probability is 40 to 60%
-        *      [score: 0.5000]
-        *  0.0 SPF_HELO_NONE SPF: HELO does not publish an SPF Record
-        * -0.0 SPF_PASS SPF: sender matches SPF record
-        *  0.2 FREEMAIL_ENVFROM_END_DIGIT Envelope-from freemail username ends
-        *       in digit
-        *      [cindylove276[at]gmail.com]
-        *  0.0 FREEMAIL_FROM Sender email is commonly abused enduser mail
-        *      provider
-        *      [cindylove276[at]gmail.com]
-        * -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
-        *      author's domain
-        *  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
-        *       valid
-        * -0.1 DKIM_VALID_EF Message has a valid DKIM or DK signature from
-        *      envelope-from domain
-        * -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
-        *  0.0 LOTS_OF_MONEY Huge... sums of money
-        * -0.0 T_SCC_BODY_TEXT_LINE No description available.
-        *  1.0 FREEMAIL_REPLY From and body contain different freemails
-        *  0.0 FILL_THIS_FORM Fill in a form with personal information
-        *  2.0 FILL_THIS_FORM_LONG Fill in a form with personal information
-        *  0.0 MONEY_FORM Lots of money if you fill out a form
-        *  3.1 UNDISC_MONEY Undisclosed recipients + money/fraud signs
-        *  0.0 ADVANCE_FEE_3_NEW_FRM_MNY Advance Fee fraud form and lots of
-        *      money
-        *  0.0 MONEY_FRAUD_5 Lots of money and many fraud phrases
-        *  0.0 FORM_FRAUD_5 Fill a form and many fraud phrases
-X-Spam-Level: ******
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <CAMw=ZnRVKQz9tY=DH9eoAMeEd07tdXMENW0Lhbx2tApH==5D_Q@mail.gmail.com>
+X-Spam-Status: No, score=-7.1 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_HI,
+        SPF_HELO_NONE,SPF_PASS,T_SCC_BODY_TEXT_LINE,URIBL_BLOCKED
+        autolearn=ham autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-V=C3=A1=C5=BEen=C3=BD vlastn=C3=ADk e-mailu/p=C5=99=C3=ADjemce fondu,
+On Tue, Jun 20, 2023 at 01:42:20AM +0100, Luca Boccassi wrote:
+> On Tue, 20 Jun 2023 at 00:49, Eric Biggers <ebiggers@kernel.org> wrote:
+> >
+> > On Tue, Jun 20, 2023 at 12:04:39AM +0100, Luca Boccassi wrote:
+> > > > diff --git a/Documentation/filesystems/fsverity.rst b/Documentation/filesystems/fsverity.rst
+> > > > index ede672dedf110..c33f783e74953 100644
+> > > > --- a/Documentation/filesystems/fsverity.rst
+> > > > +++ b/Documentation/filesystems/fsverity.rst
+> > > <...>
+> > > > +- Trusted userspace code.  Often, the userspace code that accesses
+> > > > +  files can be trusted to authenticate them.  Consider e.g. an
+> > > > +  application that wants to authenticate data files before using them,
+> > > > +  or an application loader that is part of the operating system (which
+> > > > +  is already authenticated in a different way, such as by being loaded
+> > > > +  from a read-only partition that uses dm-verity) and that wants to
+> > > > +  authenticate applications before loading them.  In these cases, this
+> > > > +  trusted userspace code can authenticate a file's contents by
+> > > > +  retrieving its fs-verity digest using `FS_IOC_ENABLE_VERITY`_, then
+> > > > +  verifying a signature of it using any userspace cryptographic
+> > > > +  library that supports digital signatures.  Consider using `libsodium
+> > > > +  <https://libsodium.gitbook.io/doc/public-key_cryptography/public-key_signatures>`_
+> > > > +  or `Tink <https://developers.google.com/tink/digitally-sign-data>`_.
+> > > > +  Other options include OpenSSL, JCA, and libgcrypt.
+> > >
+> > > Text looks good to me now, but please just drop the last sentence with
+> > > the external projects links, as it seems best left as an exercise for
+> > > the reader to find their preferred tooling that is appropriate to be
+> > > used at the time of reading, as this will get out of date fast.
+> > >
+> > > <...>
+> >
+> > Well, a significant part of the motivation for this patch is that the "exercise
+> > for the reader" approach has already been tried, for several years, but it is
+> > not working well.  People don't know what to use and need a little more help.
+> >
+> > I'm planning to add some example code to fsverity-utils, probably using
+> > libsodium.  After that, I'll make this documentation link to there.  But for
+> > now, I think the last two sentences of the above paragraph are helpful.
+> 
+> That list does not help, quite the opposite - libsodium seems all but
+> abandoned (last release 5 years ago, an unmaintained project is not
+> exactly what you want for your crypto primitives)
 
-Neodvolateln=C3=BD platebn=C3=AD p=C5=99=C3=ADkaz p=C5=99es western union
+libsodium has an active maintainer.  Last commit was 3 months ago.
 
-Byli jsme pov=C4=9B=C5=99eni gener=C3=A1ln=C3=ADm tajemn=C3=ADkem Organizac=
-e spojen=C3=BDch n=C3=A1rod=C5=AF a
-=C5=99=C3=ADd=C3=ADc=C3=ADm org=C3=A1nem m=C4=9Bnov=C3=A9 jednotky OSN, aby=
-chom pro=C5=A1et=C5=99ili zbyte=C4=8Dn=C3=A9
-zpo=C5=BEd=C4=9Bn=C3=AD platby doporu=C4=8Den=C3=A9 a schv=C3=A1len=C3=A9 v=
-e v=C3=A1=C5=A1 prosp=C4=9Bch. B=C4=9Bhem na=C5=A1eho
-vy=C5=A1et=C5=99ov=C3=A1n=C3=AD jsme se zd=C4=9B=C5=A1en=C3=ADm zjistili, =
-=C5=BEe va=C5=A1e platba byla zbyte=C4=8Dn=C4=9B
-zdr=C5=BEov=C3=A1na zkorumpovan=C3=BDmi =C3=BA=C5=99edn=C3=ADky banky, kte=
-=C5=99=C3=AD se sna=C5=BEili p=C5=99esm=C4=9Brovat
-va=C5=A1e prost=C5=99edky na jejich soukrom=C3=A9 =C3=BA=C4=8Dty.
+Also note that simple crypto libraries that focus on offering modern
+cryptographic algorithms don't need to be updated often.  You actually *don't*
+really want to have to constantly update your crypto library because they e.g.
+messed up their ASN.1 parser.  If there is no ASN.1, that cannot happen.
 
-Aby se tomu p=C5=99ede=C5=A1lo, bylo zabezpe=C4=8Den=C3=AD va=C5=A1ich fina=
-n=C4=8Dn=C3=ADch prost=C5=99edk=C5=AF
-zorganizov=C3=A1no ve form=C4=9B kontroln=C3=ADch =C4=8D=C3=ADsel p=C5=99ev=
-odu pen=C4=9Bz (MTCN) v
-Western Union, co=C5=BE v=C3=A1m umo=C5=BEn=C3=AD m=C3=ADt p=C5=99=C3=ADmou=
- kontrolu nad va=C5=A1imi
-finan=C4=8Dn=C3=ADmi prost=C5=99edky prost=C5=99ednictv=C3=ADm Western Unio=
-n. Tuto platbu
-budeme sami sledovat, abychom se vyhnuli bezv=C3=BDchodn=C3=A9 situaci, kte=
-rou
-vytvo=C5=99ili =C3=BA=C5=99edn=C3=ADci banky.
+> tink appears to
+> be one of those google's sources-available-proprietary projects, which
+> means that, as with everything else that google throws over the wall,
+> it's at permanent risk of getting killed with little notice, among
+> many other problems.
 
-Skupina Sv=C4=9Btov=C3=A9 banky a Mezin=C3=A1rodn=C3=AD m=C4=9Bnov=C3=BD fo=
-nd (MMF) na va=C5=A1i platbu
-vystavily neodvolatelnou platebn=C3=AD z=C3=A1ruku. Jsme v=C5=A1ak r=C3=A1d=
-i, =C5=BEe v=C3=A1m
-m=C5=AF=C5=BEeme ozn=C3=A1mit, =C5=BEe na z=C3=A1klad=C4=9B na=C5=A1eho dop=
-oru=C4=8Den=C3=AD/pokyn=C5=AF; va=C5=A1e kompletn=C3=AD
-finan=C4=8Dn=C3=AD prost=C5=99edky byly p=C5=99ips=C3=A1ny ve v=C3=A1=C5=A1=
- prosp=C4=9Bch prost=C5=99ednictv=C3=ADm
-pen=C4=9B=C5=BEenky western union a western union v=C3=A1m bude pos=C3=ADla=
-t =C4=8D=C3=A1stku p=C4=9Bt
-tis=C3=ADc dolar=C5=AF denn=C4=9B, dokud nebude celkov=C3=A1 =C4=8D=C3=A1st=
-ka kompenzace dokon=C4=8Dena.
+Tink is an open source project licensed under the Apache license.  Non-Google
+contributions to Tink are being accepted on GitHub.  If Google stops maintaining
+Tink, it can be forked, like any other open source project.
 
-Proto V=C3=A1m doporu=C4=8Dujeme kontaktovat:
+Anyway, my intent was simply to list some modern crypto libraries.  One of them
+just happens to be from Google.  I'm sorry if it may have appeared like I listed
+a Google project because of it being from Google.  That was not my intent.
 
-pan=C3=AD Olga Martinezov=C3=A1
-=C5=98editel platebn=C3=ADho odd=C4=9Blen=C3=AD
-Glob=C3=A1ln=C3=AD obnova spot=C5=99ebitele
-Podpora operac=C3=AD Fcc
-E-mailov=C3=A1 adresa: (olgapatygmartinez@fastservice.com)
+> If you really want to suggest something, OpenSSL
+> seems like an appropriate choice of a widely available, supported and
+> well-known solution that is the most likely to still be around and
+> maintained in 5/10 years.
 
-Kontaktujte ji nyn=C3=AD a =C5=99ekn=C4=9Bte j=C3=AD, aby v=C3=A1m poradila=
-, jak obdr=C5=BEet prvn=C3=AD
-platbu. Jakmile s n=C3=AD nav=C3=A1=C5=BEete kontakt, nasm=C4=9Bruje v=C3=
-=A1s, co m=C3=A1te d=C4=9Blat, a
-p=C5=99es Western Union budete dost=C3=A1vat =C4=8D=C3=A1stku p=C4=9Bt tis=
-=C3=ADc dolar=C5=AF (5000
-dolar=C5=AF) denn=C4=9B, dokud nebude celkov=C3=A1 =C4=8D=C3=A1stka dokon=
-=C4=8Dena.
+Sure.  Which is why I included OpenSSL in the list.
 
-Kdy=C5=BE ji budete kontaktovat, m=C4=9Bli byste ji kontaktovat se sv=C3=BD=
-mi =C3=BAdaji,
-jak je uvedeno n=C3=AD=C5=BEe:
+Anyway, I'll go ahead and take your suggestion to omit the mentions of any
+specific crypto libraries.  I do agree that it could use some more thought, and
+the main place for this information will be in fsverity-utils which will have
+the example code.
 
-1. Va=C5=A1e cel=C3=A9 jm=C3=A9no:
-2. Va=C5=A1e adresa:
-3. V=C3=A1=C5=A1 v=C4=9Bk:
-4. Povol=C3=A1n=C3=AD:
-5. Telefonn=C3=AD =C4=8D=C3=ADsla:
-6. Zem=C4=9B:
+> > > > +- fs-verity builtin signatures are in PKCS#7 format, and the public
+> > > > +  keys are in X.509 format.  These data formats are unnecessarily
+> > > > +  complex and prone to vulnerabilities.  (fs-verity builtin signatures
+> > > > +  were made to use these formats because other kernel subsystems, such
+> > > > +  as the module loader, unfortunately used these formats already.
+> > > > +  Note, these formats should still be used when they are the only
+> > > > +  option to have signatures at all.)  Userspace signature verification
+> > > > +  avoids having to enable CONFIG_FS_VERITY_BUILTIN_SIGNATURES and the
+> > > > +  associated kernel attack surface.  Userspace also has the
+> > > > +  flexibility to choose simpler formats.  For example, consider using
+> > > > +  straightforward Ed25519 keys and signatures with `libsodium
+> > > > +  <https://libsodium.gitbook.io/doc/public-key_cryptography/public-key_signatures>`_.
+> > > > +
+> > > > +  IMA appraisal, which supports fs-verity, does not use PKCS#7, so it
+> > > > +  partially avoids this issue as well (though it does use X.509).
+> > > > +
+> > > > +  If you are considering making use of "advanced" features of X.509
+> > > > +  and/or PKCS#7, please also keep in mind that these "advanced"
+> > > > +  features do not always work as intended with the kernel.  For
+> > > > +  example, the kernel does not check X.509 certificate validity times.
+> > >
+> > > Sorry but this still reads as way too opinionated and generic, rather
+> > > than being fsverity-specific.
+> > >
+> > > Please simplify to convey the same
+> > > message in more concise way, perhaps something along these lines:
+> > >
+> > > - fs-verity builtin signatures are in PKCS#7 format, and the public
+> > > keys are in X.509 format. IMA appraisal, which supports fs-verity,
+> > > uses a custom signature format rather than PKCS#7 and X.509 for public
+> > > keys. Alternative formats for signatures and public keys are not
+> > > supported for builtin signatures or IMA appraisal. For fully flexible
+> > > and customized signature and public keys formats, while also avoiding
+> > > to expose the kernel to untrusted input, signature verification can be
+> > > implemented by a trusted userspace component as described at <pointer
+> > > to appropriate section>
+> >
+> > That is not the same message at all, as it omits the mention of the
+> > disadvantages of PKCS#7 and X.509 compared to raw signatures, which was the main
+> > point.  So no, I don't think your version would be better.
+> 
+> The 'disadvantages' are your personal opinions. It's fine to have
+> opinions, it's less fine to present them as if they were industry
+> consensus in public project-wide documentation.
 
-Pozn=C3=A1mka: Doporu=C4=8Dujeme v=C3=A1m, abyste pan=C3=AD Olze Martinezov=
-=C3=A9 poskytli
-spr=C3=A1vn=C3=A9 a platn=C3=A9 =C3=BAdaje. Bu=C4=8Fte tak=C3=A9 informov=
-=C3=A1ni, =C5=BEe va=C5=A1e celkov=C3=A1 =C4=8D=C3=A1stka
-m=C3=A1 hodnotu 1 000 000 00 $. Gratulujeme.
+I think it is a bit more objective than a "personal opinion".  I've given many
+examples of vulnerability fixes in the kernel's ASN.1, X.509, and PKCS#7 code,
+which were not inherent to the actual crypto that users want but rather just
+caused by the complexities of these formats.  I've also mentioned how signatures
+can be created and verified using an industry-standard signature algorithm
+without using any of these formats.  I think you're also being a bit
+disrespectful to people like me who have actually taken time to find and fix
+vulnerabilities in the kernel's implementation of these formats.  As well as the
+developers of major crypto libraries who will tell you the exact same thing.
 
-Zpr=C3=A1va od prof=C3=ADka
-Spojen=C3=A9 n=C3=A1rody
-...................................................
-Dear email owner/fund beneficiary,
+> > It seems that what is going on here is that you are invested heavily into
+> > existing X.509 and PKCS#7 based systems, and as a result you do not want the
+> > problems with these formats to be described anywhere in the kernel
+> > documentation.  That is understandable, but that is a special interest that
+> > should not be catered to here.  This documentation is trying to help users make
+> > a decision of what type of signature to use in new systems.  And yes, it is
+> > fsverity specific documentation, but there is no way for it to make the needed
+> > point without dicussing the underlying data formats.
+> 
+> Industry standards are by very definition the opposite of 'special
+> interests'. Look, I tried my best to provide constructive and
+> actionable feedback in previous replies, but given you seem only
+> interested in casting aspersions and hijacking kernel documentation to
+> promote the latest proprietary google-toy-of-the-month:
+> 
+> Nacked-by: Luca Boccassi <bluca@debian.org>
 
-Irrevocable payment order via western union
+It's quite strange that you consider Ed25519 to be a "Google proprietary-toy-of-
+the-month".  Are you sure you really know what you're talking about?
 
-We have been authorized by the United Nations' secretary general, and
-the governing body of the United Nations' monetary unit, to
-investigate the unnecessary delay on the payment recommended and
-approved in your favor. During our investigation, we discovered with
-dismay that your payment has been unnecessarily delayed by corrupt
-officials of the bank who were trying to divert your funds into their
-private accounts.
+You've also claimed that my proposed documentation contradicts other kernel
+documentation.  I don't see where that's the case.  There are other features
+that use PKCS#7, but none of them seems to be extolling the virtues of PKCS#7.
+It's just the signature format they happened to choose, probably because it was
+the first one that came to mind (which is what happened to fs-verity too).  I
+just would like to help fs-verity users avoid that mistake, when possible.
 
-To forestall this, security for your funds was organized in the form
-of money transfer control numbers (MTCN) in western union, and this
-will enable only you to have direct control over your funds via
-western union. We will monitor this payment ourselves to avoid the
-hopeless situation created by the officials of the bank.
+Anyway, I'll send out v3 of this patch with the mentions of the specific crypto
+libraries removed.  I'll also update the wording of the PKCS#7 paragraph a bit.
+I expect you still won't be happy with it.  But I do believe it is important to
+give good security advice, which includes avoiding unnecessary complexity.
 
-An irrevocable payment guarantee has been issued by the World Bank
-group and the international monetary fund (IMF) on your payment.
-However, we are happy to inform you that based on our
-recommendation/instructions; your complete funds have been credited in
-your favor through western union wallet, and western union will be
-sending to you the sum of five thousand dollars per day until the
-total compensation amount is completed.
-
-You are therefore advised to contact:
-
-Mrs. Olga Martinez
-Director payment department
-Global consumer reinstatement
-Fcc operations support
-Email address:  (olgapatygmartinez@naver.com)
-
-Contact her now and tell her to advise you on how to receive your
-first payment. As soon as you establish a contact with her, she will
-direct you on what to do, and you will be receiving the sum of five
-thousand dollars ($5000) via western union per day until the total sum
-is completed.
-
-When contacting her, you should contact her with your data as stated below:
-
-1. Your full name:
-2. Your address:
-3. Your age:
-4. Occupation:
-5. Telephone numbers:
-6. Country:
-
-Note: you are advised to furnish Mrs. Olga Martinez with your correct
-and valid details. Also be informed that your total sum is valued $1,
-000, 000, 00. Congratulations.
-
-Message from the pro
-United Nations
+- Eric
