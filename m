@@ -2,211 +2,113 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id F0F7A7380D2
-	for <lists+linux-doc@lfdr.de>; Wed, 21 Jun 2023 13:10:43 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 19524738086
+	for <lists+linux-doc@lfdr.de>; Wed, 21 Jun 2023 13:10:21 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S229864AbjFUJSp (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 21 Jun 2023 05:18:45 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:54020 "EHLO
+        id S231791AbjFUJbK (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 21 Jun 2023 05:31:10 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:34842 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S229758AbjFUJSo (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Wed, 21 Jun 2023 05:18:44 -0400
-Received: from mail-pl1-x629.google.com (mail-pl1-x629.google.com [IPv6:2607:f8b0:4864:20::629])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id A764D1B4
-        for <linux-doc@vger.kernel.org>; Wed, 21 Jun 2023 02:18:43 -0700 (PDT)
-Received: by mail-pl1-x629.google.com with SMTP id d9443c01a7336-1b51488ad67so29317725ad.3
-        for <linux-doc@vger.kernel.org>; Wed, 21 Jun 2023 02:18:43 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=ventanamicro.com; s=google; t=1687339123; x=1689931123;
-        h=in-reply-to:content-transfer-encoding:content-disposition
-         :mime-version:references:message-id:subject:cc:to:from:date:from:to
-         :cc:subject:date:message-id:reply-to;
-        bh=pB2kKOyXmNJk2e2QsKOkbUZlQ9krtQWymG1tqTKND7M=;
-        b=JEl+WD8TxC8kp5VqXUE8dKNh2/i7vnWvgiUcocUBtcvkMYbkJ/3i/v1xwcQI/dnAYD
-         OocJ0aboXF1NcZDeOK+0y/eEiy2dSnUKH8qOOzAKez+JCw7tFekIKtwqCFhRfiNAKlLt
-         q5+gV8VlyclcWMQHTWua5wpsF/9nEXJZj/nZagINJw6yXeij1vuicd7+vVmeUoHRt4If
-         bnBpQ8XUnXOkoLSp2bYEahv6V/k4PyCu7yOSZCqc7nu5EzRWafvELH50E9xAkYQwv7Jn
-         SJe9vOVGMBBXv8+yJMdaxMtks4idFDRhUSiJN05C/KeQ6BdmEBhTcbqL7PropsMzaMpq
-         pqbg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1687339123; x=1689931123;
-        h=in-reply-to:content-transfer-encoding:content-disposition
-         :mime-version:references:message-id:subject:cc:to:from:date
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=pB2kKOyXmNJk2e2QsKOkbUZlQ9krtQWymG1tqTKND7M=;
-        b=MRl1jjDuW7c3rtsbtAUotS4v5m1rZyp4Epw5meqrgN0mrJScfPHfwklD/Jr3zCjURR
-         HH5Twn2+V1oBtsyXV9VFy+HSQQLo++A2zLzLgvtUElA01SmQ3L6U3suuFmbPOz7yb10e
-         K6axykvGtq63lN/9UCYwr5VSr81d0E7XYtWNODG7MIlcO/4S4ZF7Nd8Xf03or2sO3xN5
-         4el1sg8HvZbDUK5E0pZ8RaW2Mrwybg/P0MIgVf8OEsA2s8Rgvo39Xz4uk4eSRBkUWBSW
-         oNzIXnx61ncCl5Am2lN6Gu3hwK3I3V+Axl2EJOW9Yyd2+5hx4Mv/y8koYTP0h2mQR8nY
-         gbgw==
-X-Gm-Message-State: AC+VfDzZqhD3O1M+AejWN+hmg1J2Rj5Vi+QECIzlmJqP5HeB6fHnrAKO
-        68DE+tmGsXbZ0VtQjFfjbSnsMQ==
-X-Google-Smtp-Source: ACHHUZ7Lr9AUWR6pAzVAfNdiplGzzD94FoKQ4yBkZgab3ADs+Jo6JR2/ENdEGi0ao1yboNbI01pSuQ==
-X-Received: by 2002:a17:902:ce91:b0:1b6:8f1f:fc8d with SMTP id f17-20020a170902ce9100b001b68f1ffc8dmr2804577plg.0.1687339123052;
-        Wed, 21 Jun 2023 02:18:43 -0700 (PDT)
-Received: from sunil-laptop ([106.51.184.72])
-        by smtp.gmail.com with ESMTPSA id n21-20020a170902969500b001ab1b7bae5asm3007337plp.184.2023.06.21.02.18.38
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 21 Jun 2023 02:18:42 -0700 (PDT)
-Date:   Wed, 21 Jun 2023 14:48:35 +0530
-From:   Sunil V L <sunilvl@ventanamicro.com>
-To:     Song Shuai <songshuaishuai@tinylab.org>
-Cc:     Alexandre Ghiti <alexghiti@rivosinc.com>,
-        Jonathan Corbet <corbet@lwn.net>,
-        Paul Walmsley <paul.walmsley@sifive.com>,
-        Palmer Dabbelt <palmer@dabbelt.com>,
-        Albert Ou <aou@eecs.berkeley.edu>,
-        Conor Dooley <conor.dooley@microchip.com>,
-        linux-doc@vger.kernel.org, linux-riscv@lists.infradead.org,
-        linux-kernel@vger.kernel.org,
-        =?utf-8?B?QmrDtnJuIFTDtnBlbA==?= <bjorn@rivosinc.com>
-Subject: Re: [PATCH v2 2/3] Documentation: riscv: Add early boot document
-Message-ID: <ZJLAa5AdJfHNJyPv@sunil-laptop>
-References: <20230621072234.9900-1-alexghiti@rivosinc.com>
- <20230621072234.9900-2-alexghiti@rivosinc.com>
- <131BBACE35371733+d5902eda-c4ea-b74d-a17c-70fd1a166b6f@tinylab.org>
+        with ESMTP id S232292AbjFUJao (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Wed, 21 Jun 2023 05:30:44 -0400
+Received: from szxga03-in.huawei.com (szxga03-in.huawei.com [45.249.212.189])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 16DB61992;
+        Wed, 21 Jun 2023 02:29:44 -0700 (PDT)
+Received: from canpemm500009.china.huawei.com (unknown [172.30.72.53])
+        by szxga03-in.huawei.com (SkyGuard) with ESMTP id 4QmJ7j0pgszLmlX;
+        Wed, 21 Jun 2023 17:27:45 +0800 (CST)
+Received: from localhost.localdomain (10.50.163.32) by
+ canpemm500009.china.huawei.com (7.192.105.203) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2507.27; Wed, 21 Jun 2023 17:29:42 +0800
+From:   Yicong Yang <yangyicong@huawei.com>
+To:     <mathieu.poirier@linaro.org>, <suzuki.poulose@arm.com>,
+        <jonathan.cameron@huawei.com>, <corbet@lwn.net>,
+        <linux-kernel@vger.kernel.org>, <linux-doc@vger.kernel.org>
+CC:     <alexander.shishkin@linux.intel.com>, <helgaas@kernel.org>,
+        <linux-pci@vger.kernel.org>, <prime.zeng@huawei.com>,
+        <linuxarm@huawei.com>, <yangyicong@hisilicon.com>,
+        <hejunhao3@huawei.com>
+Subject: [PATCH v6 0/5] Improve PTT filter interface and some fixes
+Date:   Wed, 21 Jun 2023 17:27:59 +0800
+Message-ID: <20230621092804.15120-1-yangyicong@huawei.com>
+X-Mailer: git-send-email 2.31.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <131BBACE35371733+d5902eda-c4ea-b74d-a17c-70fd1a166b6f@tinylab.org>
-X-Spam-Status: No, score=-2.1 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_NONE,
-        SPF_HELO_NONE,SPF_PASS,T_SCC_BODY_TEXT_LINE,URIBL_BLOCKED
-        autolearn=ham autolearn_force=no version=3.4.6
+Content-Transfer-Encoding: 7BIT
+Content-Type:   text/plain; charset=US-ASCII
+X-Originating-IP: [10.50.163.32]
+X-ClientProxiedBy: dggems706-chm.china.huawei.com (10.3.19.183) To
+ canpemm500009.china.huawei.com (7.192.105.203)
+X-CFilter-Loop: Reflected
+X-Spam-Status: No, score=-4.2 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_MED,
+        SPF_HELO_NONE,SPF_PASS,T_SCC_BODY_TEXT_LINE autolearn=ham
+        autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Wed, Jun 21, 2023 at 04:15:07PM +0800, Song Shuai wrote:
-> 
-> 
-> 在 2023/6/21 15:22, Alexandre Ghiti 写道:
-> > This document describes the constraints and requirements of the early
-> > boot process in a RISC-V kernel.
-> > 
-> > Signed-off-by: Alexandre Ghiti <alexghiti@rivosinc.com>
-> > Reviewed-by: Björn Töpel <bjorn@rivosinc.com>
-> > ---
-> >   Documentation/riscv/boot-image-header.rst |   3 -
-> >   Documentation/riscv/boot.rst              | 170 ++++++++++++++++++++++
-> >   Documentation/riscv/index.rst             |   1 +
-> >   3 files changed, 171 insertions(+), 3 deletions(-)
-> >   create mode 100644 Documentation/riscv/boot.rst
-> > 
-> > diff --git a/Documentation/riscv/boot-image-header.rst b/Documentation/riscv/boot-image-header.rst
-> > index d7752533865f..a4a45310c4c4 100644
-> > --- a/Documentation/riscv/boot-image-header.rst
-> > +++ b/Documentation/riscv/boot-image-header.rst
-> > @@ -7,9 +7,6 @@ Boot image header in RISC-V Linux
-> >   This document only describes the boot image header details for RISC-V Linux.
-> > -TODO:
-> > -  Write a complete booting guide.
-> > -
-> >   The following 64-byte header is present in decompressed Linux kernel image::
-> >   	u32 code0;		  /* Executable code */
-> > diff --git a/Documentation/riscv/boot.rst b/Documentation/riscv/boot.rst
-> > new file mode 100644
-> > index 000000000000..019ee818686d
-> > --- /dev/null
-> > +++ b/Documentation/riscv/boot.rst
-> > @@ -0,0 +1,170 @@
-> > +.. SPDX-License-Identifier: GPL-2.0
-> > +
-> > +===============================================
-> > +RISC-V Kernel Boot Requirements and Constraints
-> > +===============================================
-> > +
-> > +:Author: Alexandre Ghiti <alexghiti@rivosinc.com>
-> > +:Date: 23 May 2023
-> > +
-> > +This document describes what the RISC-V kernel expects from bootloaders and
-> > +firmware, but also the constraints that any developer must have in mind when
-> > +touching the early boot process. For the purposes of this document, the
-> > +'early boot process' refers to any code that runs before the final virtual
-> > +mapping is set up.
-> > +
-> > +Pre-kernel Requirements and Constraints
-> > +=======================================
-> > +
-> > +The RISC-V kernel expects the following of bootloaders and platform firmware:
-> > +
-> > +Register state
-> > +--------------
-> > +
-> > +The RISC-V kernel expects:
-> > +
-> > +  * `$a0` to contain the hartid of the current core.
-> > +  * `$a1` to contain the address of the devicetree in memory.
-> > +
-> > +CSR state
-> > +---------
-> > +
-> > +The RISC-V kernel expects:
-> > +
-> > +  * `$satp = 0`: the MMU, if present, must be disabled.
-> > +
-> > +Reserved memory for resident firmware
-> > +-------------------------------------
-> > +
-> > +The RISC-V kernel must not map any resident memory, or memory protected with
-> > +PMPs, in the direct mapping, so the firmware must correctly mark those regions
-> > +as per the devicetree specification and/or the UEFI specification.
-> > +
-> > +Kernel location
-> > +---------------
-> > +
-> > +The RISC-V kernel expects to be placed at a PMD boundary (2MB aligned for rv64
-> > +and 4MB aligned for rv32). Note that the EFI stub will physically relocate the
-> > +kernel if that's not the case.
-> > +
-> > +Hardware description
-> > +--------------------
-> > +
-> > +The firmware can pass either a devicetree or ACPI tables to the RISC-V kernel.
-> > +
-> > +The devicetree is either passed directly to the kernel from the previous stage
-> > +using the `$a1` register, or when booting with UEFI, it can be passed using the
-> > +EFI configuration table.
-> > +
-> > +The ACPI tables are passed to the kernel using the EFI configuration table. In
-> > +this case, a tiny devicetree is still created by the EFI stub. Please refer to
-> > +"EFI stub and devicetree" tree section below for details about this devicetree.
-> > +
-> > +Kernel entrance
-> > +---------------
-> > +
-> > +On SMP systems, there are 2 methods to enter the kernel:
-> > +
-> > +- `RISCV_BOOT_SPINWAIT`: the firmware releases all harts in the kernel, one hart
-> > +  wins a lottery and executes the early boot code while the other harts are
-> > +  parked waiting for the initialization to finish. This method is mostly used to
-> > +  support older firmwares without SBI HSM extension and M-mode RISC-V kernel.
-> > +- `Ordered booting`: the firmware releases only one hart that will execute the
-> > +  initialization phase and then will start all other harts using the SBI HSM
-> > +  extension. The ordered booting method is the preferred booting method for
-> > +  booting the RISC-V kernel because it can support cpu hotplug and kexec.
-> > +
-> > +UEFI
-> > +----
-> > +
-> > +UEFI memory map
-> > +~~~~~~~~~~~~~~~
-> > +
-> > +When booting with UEFI, the RISC-V kernel will use only the EFI memory map to
-> > +populate the system memory.
-> > +
-> > +The UEFI firmware must parse the subnodes of the `/reserved-memory` devicetree
-> > +node and abide by the devicetree specification to convert the attributes of
-> > +those subnodes (`no-map` and `reusable`) into their correct EFI equivalent
-> > +(refer to section "3.5.4 /reserved-memory and UEFI" of the devicetree
-> > +specification v0.4-rc1).
-> append this note ?
-> 
-> Note that RISC-V edk2 diverges from the devicetree specification to declare
-> the !no-map regions as EfiReservedMemoryType instead of EfiBootServicesData.
-> > +
-Not required. It will be fixed in EDK2.
+From: Yicong Yang <yangyicong@hisilicon.com>
+
+This series tends to improve the PTT's filter interface in 2 aspects (Patch 2&3):
+- Support dynamically filter updating to response to hotplug
+  Previous the supported filter list is settled down once the driver probed and
+  it maybe out-of-date if hotplug events happen later. User need to reload the
+  driver to update list. Patch 1/2 enable the driver to update the list by
+  registering a PCI bus notifier and the filter list will always be the latest.
+- Export the available filters through sysfs
+  Previous user needs to calculate the filters and filter value using device's
+  BDF number, which requires the user to know the hardware well. Patch 3/3 tends
+  to export the available filter information through sysfs attributes, the filter
+  value will be gotten by reading the file. This will be more user friendly.
+
+In order to support above function, this series also includes a patch 1/4 to factor
+out the allocation and release function of PTT filters.
+
+Also includes an improvement and a fix. Patch 4 tends to set proper PMU capability
+to avoid collecting unnecessary data to save the storage. Patch 5 fix an improper
+use of pci_irq_vector() which have potential problem.
+
+Change since v5:
+- PERF_PMU_CAP_EXCLUSIVE is still needed so keep it as is, thanks Junhao for pointing it
+Link: https://lore.kernel.org/all/01c39cb9-e56a-862b-2d99-024b7ba5a769@huawei.com/
+
+Change since v4:
+- Add tags for Patch 2,3,5 and tweak some comments/docs in Patch 3
+Link: https://lore.kernel.org/all/20230606142244.10939-1-yangyicong@huawei.com/
+
+Change since v3:
+- Addressed the comment from Jonathan. Add tags for Patch 1 and 4. Thanks.
+- Add one bugfix in Patch 5/5
+Link: https://lore.kernel.org/linux-pci/20230523093228.48149-1-yangyicong@huawei.com/
+
+Change since v2:
+- Fix one possible issue for dereferencing a NULL pointer
+Link: https://lore.kernel.org/linux-pci/20230331070310.5465-1-yangyicong@huawei.com/
+
+Change since v1:
+- Drop the patch for handling the cpumask since it seems to be redundant
+- Refine of the codes per Jonathan
+- Add Patch 1/4 for refactor the filters allocation and release
+- Thanks the review of Jonathan.
+Link: https://lore.kernel.org/linux-pci/d496ee4f-641a-a726-ab3f-62b587422b61@huawei.com/T/#m47e4de552d69920035214b3e91080cdc185f61f5
+
+Yicong Yang (5):
+  hwtracing: hisi_ptt: Factor out filter allocation and release
+    operation
+  hwtracing: hisi_ptt: Add support for dynamically updating the filter
+    list
+  hwtracing: hisi_ptt: Export available filters through sysfs
+  hwtracing: hisi_ptt: Advertise PERF_PMU_CAP_NO_EXCLUDE for PTT PMU
+  hwtracing: hisi_ptt: Fix potential sleep in atomic context
+
+ .../ABI/testing/sysfs-devices-hisi_ptt        |  52 ++
+ Documentation/trace/hisi-ptt.rst              |  12 +-
+ drivers/hwtracing/ptt/hisi_ptt.c              | 444 ++++++++++++++++--
+ drivers/hwtracing/ptt/hisi_ptt.h              |  56 +++
+ 4 files changed, 526 insertions(+), 38 deletions(-)
+
+-- 
+2.24.0
+
