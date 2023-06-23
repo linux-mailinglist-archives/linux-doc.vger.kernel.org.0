@@ -2,99 +2,54 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 4BA1F73BB96
-	for <lists+linux-doc@lfdr.de>; Fri, 23 Jun 2023 17:25:16 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 4581973B963
+	for <lists+linux-doc@lfdr.de>; Fri, 23 Jun 2023 16:08:29 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S232392AbjFWPZL (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Fri, 23 Jun 2023 11:25:11 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:41716 "EHLO
+        id S231249AbjFWOI2 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Fri, 23 Jun 2023 10:08:28 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:43030 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S232367AbjFWPZI (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Fri, 23 Jun 2023 11:25:08 -0400
-Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.129.124])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 9F38E212C
-        for <linux-doc@vger.kernel.org>; Fri, 23 Jun 2023 08:24:19 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-        s=mimecast20190719; t=1687533858;
-        h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-         to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-         content-transfer-encoding:content-transfer-encoding:
-         in-reply-to:in-reply-to:references:references;
-        bh=M/S7PlGAxyYZzFvK0bsc5hgdhJYvUxmCp25URDm0iv8=;
-        b=MV2H5bTkmptXE8NO5A/M+kvN0fzA2KfSXujADovC5AFQOZq2NE2nELm+c7hkdF/Qk0pvNe
-        v3tMdLg81i3xDb1T99vGxqvVYtP/1F1aLYPOpbNkMdZBUNF8Uvcx1dwFRcID5lsb0qS3yc
-        ORf188P2ppOqRQ8Zk/l4xEHx3gO35q8=
-Received: from mail-pl1-f197.google.com (mail-pl1-f197.google.com
- [209.85.214.197]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-513-T4GuhXS0OJ-ozzVrXz7_iw-1; Fri, 23 Jun 2023 11:24:17 -0400
-X-MC-Unique: T4GuhXS0OJ-ozzVrXz7_iw-1
-Received: by mail-pl1-f197.google.com with SMTP id d9443c01a7336-1b506eb8798so5407485ad.3
-        for <linux-doc@vger.kernel.org>; Fri, 23 Jun 2023 08:24:16 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1687533856; x=1690125856;
-        h=content-transfer-encoding:in-reply-to:organization:from:references
-         :cc:to:content-language:subject:user-agent:mime-version:date
-         :message-id:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=M/S7PlGAxyYZzFvK0bsc5hgdhJYvUxmCp25URDm0iv8=;
-        b=MPuNfGSRLOBV/Y1TSNj/JU7n33wkKXN17YBEq18w4Oi5Yn7OrRcWaboNnx8t5B9R4+
-         v3uyTsEi5GFIAhs3L7xmEfIh5NZP13VZBxpSyTLT+BvKRyQbm4U4yFDAQPZO9lrV9i1d
-         Y4nr9LjEvVry2U2xdfMqq2PfEXxF6rGOs+TlVEnB/4IrIm8iZ7lUcqSU7GEKoyC2kl4T
-         hvq8XBu+bQBvOFlrwmF7SzuqYvNv7cyOMWZUolzoYB3kPd/tYVWtFbcSq1mamtcuLRVi
-         S2+C9B1rsntkKfY0bkJfm47hgT/iJbWxevpyOL/McZOnDWgQqMvBQ0OGNodpWje1Piwf
-         aJhg==
-X-Gm-Message-State: AC+VfDyoMTfW1ul/pOma7wLEjW5CQuEg9bBVKbV8B/+pBBhI6U1DVh3a
-        zPFvYbbI/4hn6KrNWPWfCf64e9JWRQcb1SQS17b3qoTAUecq3+gszgWfdrSo0u450wq/B6THgQA
-        Op+0HEk9ULa+A/XWbXxTR
-X-Received: by 2002:a17:902:efcb:b0:1b5:11e:e48a with SMTP id ja11-20020a170902efcb00b001b5011ee48amr19497404plb.69.1687533855748;
-        Fri, 23 Jun 2023 08:24:15 -0700 (PDT)
-X-Google-Smtp-Source: ACHHUZ4RurcfAp7lRzkU6veda3yFfLKhnT+ZP/W2E7cRQ76Iy3mMxyblmZ4BOb9jbh0S7Ay8fzqw7w==
-X-Received: by 2002:a17:902:efcb:b0:1b5:11e:e48a with SMTP id ja11-20020a170902efcb00b001b5011ee48amr19497390plb.69.1687533855411;
-        Fri, 23 Jun 2023 08:24:15 -0700 (PDT)
-Received: from ?IPV6:2a02:810d:4b3f:de9c:642:1aff:fe31:a15c? ([2a02:810d:4b3f:de9c:642:1aff:fe31:a15c])
-        by smtp.gmail.com with ESMTPSA id o16-20020a170902779000b001b03cda6389sm7387865pll.10.2023.06.23.08.24.05
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Fri, 23 Jun 2023 08:24:15 -0700 (PDT)
-Message-ID: <d18a4ea5-4e8e-be69-84c3-ca658f5cfd24@redhat.com>
-Date:   Fri, 23 Jun 2023 15:55:24 +0200
+        with ESMTP id S230008AbjFWOI1 (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Fri, 23 Jun 2023 10:08:27 -0400
+Received: from perceval.ideasonboard.com (perceval.ideasonboard.com [213.167.242.64])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 0018C2688;
+        Fri, 23 Jun 2023 07:08:25 -0700 (PDT)
+Received: from pendragon.ideasonboard.com (213-243-189-158.bb.dnainternet.fi [213.243.189.158])
+        by perceval.ideasonboard.com (Postfix) with ESMTPSA id 20409BC;
+        Fri, 23 Jun 2023 16:07:47 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=ideasonboard.com;
+        s=mail; t=1687529267;
+        bh=cpgwXM3+rydqPxFvhazM/zjynkiXWUsuj5v+zaCCGTU=;
+        h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+        b=sVSr0tIsPU0V5Q0U8RG/jWcYnnWS6GISMv0B7y2OZG0AvZHzdci7MRmORYSWcRHm6
+         0GjwBxAhRzvKlsQd0Eb4V6f2itP6bDuq9DHfHQUg3ifFPyI6Kpqrd6VKrcs1UI3cBR
+         tmag2csb5pVvLwCjfs9fsbXRamfUJpwTVahIgjzo=
+Date:   Fri, 23 Jun 2023 17:08:22 +0300
+From:   Laurent Pinchart <laurent.pinchart@ideasonboard.com>
+To:     Geert Uytterhoeven <geert+renesas@glider.be>
+Cc:     Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+        Maxime Ripard <mripard@kernel.org>,
+        Thomas Zimmermann <tzimmermann@suse.de>,
+        David Airlie <airlied@gmail.com>,
+        Daniel Vetter <daniel@ffwll.ch>,
+        Jonathan Corbet <corbet@lwn.net>,
+        Jyri Sarha <jyri.sarha@iki.fi>,
+        Tomi Valkeinen <tomba@kernel.org>,
+        Bagas Sanjaya <bagasdotme@gmail.com>,
+        dri-devel@lists.freedesktop.org, linux-doc@vger.kernel.org,
+        linux-renesas-soc@vger.kernel.org, linux-kernel@vger.kernel.org
+Subject: Re: [PATCH v2 2/4] drm/todo: Convert list of fbconv links to
+ footnotes
+Message-ID: <20230623140822.GC2112@pendragon.ideasonboard.com>
+References: <cover.1686318012.git.geert+renesas@glider.be>
+ <be8d2886f50485c86f74a3c1a117abb1b8718a07.1686318012.git.geert+renesas@glider.be>
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.10.0
-Subject: Re: [PATCH drm-next v5 03/14] drm: manager to keep track of GPUs VA
- mappings
-Content-Language: en-US
-To:     =?UTF-8?Q?Christian_K=c3=b6nig?= <christian.koenig@amd.com>,
-        airlied@gmail.com, daniel@ffwll.ch, tzimmermann@suse.de,
-        mripard@kernel.org, corbet@lwn.net, bskeggs@redhat.com,
-        Liam.Howlett@oracle.com, matthew.brost@intel.com,
-        boris.brezillon@collabora.com, alexdeucher@gmail.com,
-        ogabbay@kernel.org, bagasdotme@gmail.com, willy@infradead.org,
-        jason@jlekstrand.net
-Cc:     dri-devel@lists.freedesktop.org, nouveau@lists.freedesktop.org,
-        linux-doc@vger.kernel.org, linux-mm@kvack.org,
-        linux-kernel@vger.kernel.org,
-        Donald Robson <donald.robson@imgtec.com>,
-        Dave Airlie <airlied@redhat.com>
-References: <20230620004217.4700-1-dakr@redhat.com>
- <20230620004217.4700-4-dakr@redhat.com>
- <cf6846ea-5bd0-0b41-b7e6-901c70701751@amd.com>
- <a8edf75b-e0f7-a6c7-7d29-f0d39923549b@redhat.com>
- <41aecd10-9956-0752-2838-34c97834f0c8@amd.com>
- <bcde7ea3-fbab-3a18-e810-64b6589ddb18@redhat.com>
- <86ef9898-c4b6-f4c0-7ad3-3ffe5358365a@amd.com>
- <c1f05169-dec0-22ee-52fa-c8070678394e@redhat.com>
- <2f502150-c1f8-615c-66d9-c3fb59b8c409@redhat.com>
- <4a52ac7c-19ba-8906-5902-fbf75673bf59@amd.com>
-From:   Danilo Krummrich <dakr@redhat.com>
-Organization: RedHat
-In-Reply-To: <4a52ac7c-19ba-8906-5902-fbf75673bf59@amd.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-Spam-Status: No, score=-2.2 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,NICE_REPLY_A,
-        RCVD_IN_DNSWL_NONE,RCVD_IN_MSPIKE_H5,RCVD_IN_MSPIKE_WL,SPF_HELO_NONE,
-        SPF_NONE,T_SCC_BODY_TEXT_LINE autolearn=ham autolearn_force=no
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+In-Reply-To: <be8d2886f50485c86f74a3c1a117abb1b8718a07.1686318012.git.geert+renesas@glider.be>
+X-Spam-Status: No, score=-2.1 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,SPF_HELO_PASS,SPF_PASS,
+        T_SCC_BODY_TEXT_LINE,URIBL_BLOCKED autolearn=ham autolearn_force=no
         version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
@@ -102,192 +57,70 @@ Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On 6/23/23 09:16, Christian König wrote:
-> Am 22.06.23 um 17:07 schrieb Danilo Krummrich:
->> On 6/22/23 17:04, Danilo Krummrich wrote:
->>> On 6/22/23 16:42, Christian König wrote:
->>>> Am 22.06.23 um 16:22 schrieb Danilo Krummrich:
->>>>> On 6/22/23 15:54, Christian König wrote:
->>>>>> Am 20.06.23 um 14:23 schrieb Danilo Krummrich:
->>>>>>> Hi Christian,
->>>>>>>
->>>>>>> On 6/20/23 08:45, Christian König wrote:
->>>>>>>> Hi Danilo,
->>>>>>>>
->>>>>>>> sorry for the delayed reply. I've trying to dig myself out of a 
->>>>>>>> hole at the moment.
->>>>>>>
->>>>>>> No worries, thank you for taking a look anyway!
->>>>>>>
->>>>>>>>
->>>>>>>> Am 20.06.23 um 02:42 schrieb Danilo Krummrich:
->>>>>>>>> [SNIP]
->>>>>>>>> diff --git a/include/drm/drm_gem.h b/include/drm/drm_gem.h
->>>>>>>>> index bbc721870c13..5ec8148a30ee 100644
->>>>>>>>> --- a/include/drm/drm_gem.h
->>>>>>>>> +++ b/include/drm/drm_gem.h
->>>>>>>>> @@ -36,6 +36,8 @@
->>>>>>>>>   #include <linux/kref.h>
->>>>>>>>>   #include <linux/dma-resv.h>
->>>>>>>>> +#include <linux/list.h>
->>>>>>>>> +#include <linux/mutex.h>
->>>>>>>>>   #include <drm/drm_vma_manager.h>
->>>>>>>>> @@ -379,6 +381,18 @@ struct drm_gem_object {
->>>>>>>>>        */
->>>>>>>>>       struct dma_resv _resv;
->>>>>>>>> +    /**
->>>>>>>>> +     * @gpuva:
->>>>>>>>> +     *
->>>>>>>>> +     * Provides the list of GPU VAs attached to this GEM object.
->>>>>>>>> +     *
->>>>>>>>> +     * Drivers should lock list accesses with the GEMs 
->>>>>>>>> &dma_resv lock
->>>>>>>>> +     * (&drm_gem_object.resv).
->>>>>>>>> +     */
->>>>>>>>> +    struct {
->>>>>>>>> +        struct list_head list;
->>>>>>>>> +    } gpuva;
->>>>>>>>> +
->>>>>>>>>       /**
->>>>>>>>>        * @funcs:
->>>>>>>>>        *
->>>>>>>>
->>>>>>>> I'm pretty sure that it's not a good idea to attach this 
->>>>>>>> directly to the GEM object.
->>>>>>>
->>>>>>> Why do you think so? IMHO having a common way to connect mappings 
->>>>>>> to their backing buffers is a good thing, since every driver 
->>>>>>> needs this connection anyway.
->>>>>>>
->>>>>>> E.g. when a BO gets evicted, drivers can just iterate the list of 
->>>>>>> mappings and, as the circumstances require, invalidate the 
->>>>>>> corresponding mappings or to unmap all existing mappings of a 
->>>>>>> given buffer.
->>>>>>>
->>>>>>> What would be the advantage to let every driver implement a 
->>>>>>> driver specific way of keeping this connection?
->>>>>>
->>>>>> Flexibility. For example on amdgpu the mappings of a BO are groups 
->>>>>> by VM address spaces.
->>>>>>
->>>>>> E.g. the BO points to multiple bo_vm structures which in turn have 
->>>>>> lists of their mappings.
->>>>>
->>>>> Isn't this (almost) the same relationship I introduce with the 
->>>>> GPUVA manager?
->>>>>
->>>>> If you would switch over to the GPUVA manager right now, it would 
->>>>> be that every GEM has a list of it's mappings (the gpuva list). The 
->>>>> mapping is represented by struct drm_gpuva (of course embedded in 
->>>>> driver specific structure(s)) which has a pointer to the VM address 
->>>>> space it is part of, namely the GPUVA manager instance. And the 
->>>>> GPUVA manager keeps a maple tree of it's mappings as well.
->>>>>
->>>>> If you still would like to *directly* (indirectly you already have 
->>>>> that relationship) keep a list of GPUVA managers (VM address 
->>>>> spaces) per GEM, you could still do that in a driver specific way.
->>>>>
->>>>> Do I miss something?
->>>>
->>>> How do you efficiently find only the mappings of a BO in one VM?
->>>
->>> Actually, I think this case should even be more efficient than with a 
->>> BO having a list of GPUVAs (or mappings):
->>
->> *than with a BO having a list of VMs:
->>
->>>
->>> Having a list of GPUVAs per GEM, each GPUVA has a pointer to it's VM. 
->>> Hence, you'd only need to iterate the list of mappings for a given BO 
->>> and check the mappings VM pointer.
+Hi Geert,
+
+Thank you for the patch.
+
+On Fri, Jun 09, 2023 at 03:44:28PM +0200, Geert Uytterhoeven wrote:
+> Convert the references to fbconv links to footnotes, so they can be
+> navigated.
 > 
-> Yeah, and that is extremely time consuming if you have tons of mappings 
-> in different VMs.
+> Signed-off-by: Geert Uytterhoeven <geert+renesas@glider.be>
+> ---
+> v2:
+>   - New.
+> ---
+>  Documentation/gpu/todo.rst | 10 +++++-----
+>  1 file changed, 5 insertions(+), 5 deletions(-)
 > 
->>>
->>> Having a list of VMs per BO, you'd have to iterate the whole VM to 
->>> find the mappings having a pointer to the given BO, right?
-> 
-> No, you don't seem to understand what I'm suggesting.
-> 
-> Currently you have a list of mappings attached to the BO, so when you 
-> need to make sure that a specific BO is up to date in a specific VM you 
-> either need to iterate over the VM or the BO. Neither of that is a good 
-> idea.
-> 
-> What you need is a representation of the data used for each BO+VM 
-> combination. In other words another indirection which allows you to 
-> handle all the mappings of a BO inside a VM at once.
+> diff --git a/Documentation/gpu/todo.rst b/Documentation/gpu/todo.rst
+> index 6c328613c049fc1d..ce1d4e22c327063b 100644
+> --- a/Documentation/gpu/todo.rst
+> +++ b/Documentation/gpu/todo.rst
+> @@ -753,16 +753,16 @@ existing hardware. The new driver's call-back functions are filled from
+>  existing fbdev code.
+>  
+>  More complex fbdev drivers can be refactored step-by-step into a DRM
+> -driver with the help of the DRM fbconv helpers. [1] These helpers provide
+> +driver with the help of the DRM fbconv helpers [4]_. These helpers provide
+>  the transition layer between the DRM core infrastructure and the fbdev
+>  driver interface. Create a new DRM driver on top of the fbconv helpers,
+>  copy over the fbdev driver, and hook it up to the DRM code. Examples for
+> -several fbdev drivers are available at [1] and a tutorial of this process
+> -available at [2]. The result is a primitive DRM driver that can run X11
+> +several fbdev drivers are available at [4]_ and a tutorial of this process
+> +available at [5]_. The result is a primitive DRM driver that can run X11
 
-Ok, after having a quick look at amdgpu, I can see what you mean.
+When using footnotes, the main text must read correctly if you ignore
+the notes. This isn't the case for the second and third footnotes here.
 
-The missing piece for me was that the BO+VM abstraction itself keeps a 
-list of mappings for this specific BO and VM.
+    Examples for several fbdev drivers are available in Thomas
+    Zimmermann's fbconv tree [4]_, as well as a tutorial of this
+    process [5]_.
 
-Just to make it obvious for other people following the discussion, let 
-me quickly sketch up how this approach would look like for the GPUVA 
-manager:
+I'm not making a call on whether that's better or not that's better than
+the current situation.
 
-1. We would need a new structure to represent the BO+VM combination, 
-something like:
+An alternative is to use plain links:
 
-	struct drm_gpuva_mgr_gem {
-     		struct drm_gpuva_manager *mgr;
-		struct drm_gem_object *obj;
-		struct list_head gpuva_list;
-	};
+    Examples for several fbdev drivers are available in 'Thomas
+    Zimmermann's fbconv tree`_, as well as a `tutorial of this
+    process`_.
 
-with a less horrible name, hopefully.
+    .. _Thomas Zimmermann's fbconv tree: https://gitlab.freedesktop.org/tzimmermann/linux/tree/fbconv
+    .. _tutorial of this process: https://gitlab.freedesktop.org/tzimmermann/linux/blob/fbconv/drivers/gpu/drm/drm_fbconv_helper.c
 
-2. Create an instance of struct drm_gpuva_mgr_gem once a GEM becomes 
-associated with a GPUVA manager (VM) and attach it to the GEMs, as by 
-now, "gpuva" list.
+>  and Weston.
+>  
+> - - [1] https://gitlab.freedesktop.org/tzimmermann/linux/tree/fbconv
+> - - [2] https://gitlab.freedesktop.org/tzimmermann/linux/blob/fbconv/drivers/gpu/drm/drm_fbconv_helper.c
+> + .. [4] https://gitlab.freedesktop.org/tzimmermann/linux/tree/fbconv
+> + .. [5] https://gitlab.freedesktop.org/tzimmermann/linux/blob/fbconv/drivers/gpu/drm/drm_fbconv_helper.c
+>  
+>  Contact: Thomas Zimmermann <tzimmermann@suse.de>
+>  
 
-In amdgpu, for example, this seems to be the case once a GEM object is 
-opened, since there is one VM per file_priv.
+-- 
+Regards,
 
-However, for other drivers this could be different, hence drivers would 
-need to take care about this.
-
-
-3. Attach GPUVAs to the new gpuva_list of the corresponding instance of
-struct drm_gpuva_mgr_gem.
-
-4. Drivers would need to clean up the instance of struct 
-drm_gpuva_mgr_gem, once the GEM is not associated with the GPUVA manager 
-anymore.
-
-As pointed out by Christian, this would optimize the "get all mappings 
-backed by a specific BO from a given VM" use case.
-
-The question for me is, do other drivers than amdgpu commonly need this?
-
-And what does amdgpu need this for? Maybe amdgpu does something we're 
-not doing (yet)?
-
-Christian - I know you didn't ask for "do it the way amdgpu does", 
-instead you voted for keeping it entirely driver specific. But I think 
-everyone is pretty close and I'm still optimistic that we could just 
-generalize this.
-
-- Danilo
-
-> 
->>>
->>> I'd think that a single VM potentially has more mapping entries than 
->>> a single BO was mapped in multiple VMs.
->>>
->>> Another case to consider is the case I originally had in mind 
->>> choosing this relationship: finding all mappings for a given BO, 
->>> which I guess all drivers need to do in order to invalidate mappings 
->>> on BO eviction.
->>>
->>> Having a list of VMs per BO, wouldn't you need to iterate all of the 
->>> VMs entirely?
-> 
-> No, see how amdgpu works.
-> 
-> Regards,
-> Christian.
-> 
-
+Laurent Pinchart
