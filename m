@@ -2,121 +2,189 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id C056274116D
-	for <lists+linux-doc@lfdr.de>; Wed, 28 Jun 2023 14:40:28 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 8DECD7411C8
+	for <lists+linux-doc@lfdr.de>; Wed, 28 Jun 2023 14:55:16 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S232214AbjF1MkZ (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 28 Jun 2023 08:40:25 -0400
-Received: from mx0b-0031df01.pphosted.com ([205.220.180.131]:7312 "EHLO
-        mx0b-0031df01.pphosted.com" rhost-flags-OK-OK-OK-OK)
-        by vger.kernel.org with ESMTP id S232208AbjF1Mh5 (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Wed, 28 Jun 2023 08:37:57 -0400
-Received: from pps.filterd (m0279873.ppops.net [127.0.0.1])
-        by mx0a-0031df01.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id 35S8hwfV019656;
-        Wed, 28 Jun 2023 12:37:41 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=quicinc.com; h=from : to : cc :
- subject : date : message-id : in-reply-to : references : mime-version :
- content-type; s=qcppdkim1;
- bh=orV3xaRgOXdBv+EvZhahI6WQdstYeA90CZqOQkv6cLI=;
- b=UkwnUQPzsvBy/N+7oBJ1VdTYqGgjVAQ70vfr1gECSNgCOZRfSiS5hMP42KYlrUYylgD6
- /OJU1KE8h0ljrxHe67E7qXGcUvGotbUze+XittlcOXVHIbyodTjAwG5xNBw1rGX5dLtj
- SU9goPMK1v4ufPtn34pZDdnUxIynyeGoR00i3sfyqXYbs+Q9JPpNzkK0uZD8x2chWaqE
- jt3ZnTU3DNIuOXThieOJ+mkvbntdigmlV1B1dXZFhqKY7fqYD9EQg7SNoBBYNRaMXIW+
- ntX9fQ8bsRl0gb9jW1B5FTBle9vlctw3Sk9AlfZB7pqwcGb2ileF5QCPHd1v3N9XFdbC +Q== 
-Received: from nasanppmta02.qualcomm.com (i-global254.qualcomm.com [199.106.103.254])
-        by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 3rg7x3skw1-1
-        (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
-        Wed, 28 Jun 2023 12:37:40 +0000
-Received: from nasanex01c.na.qualcomm.com (nasanex01c.na.qualcomm.com [10.45.79.139])
-        by NASANPPMTA02.qualcomm.com (8.17.1.5/8.17.1.5) with ESMTPS id 35SCbdFH010228
-        (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
-        Wed, 28 Jun 2023 12:37:39 GMT
-Received: from hu-mojha-hyd.qualcomm.com (10.80.80.8) by
- nasanex01c.na.qualcomm.com (10.45.79.139) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.986.42; Wed, 28 Jun 2023 05:37:33 -0700
-From:   Mukesh Ojha <quic_mojha@quicinc.com>
-To:     <corbet@lwn.net>, <agross@kernel.org>, <andersson@kernel.org>,
-        <konrad.dybcio@linaro.org>, <robh+dt@kernel.org>,
-        <krzysztof.kozlowski+dt@linaro.org>, <conor+dt@kernel.org>,
-        <keescook@chromium.org>, <tony.luck@intel.com>,
-        <gpiccoli@igalia.com>, <mathieu.poirier@linaro.org>,
-        <catalin.marinas@arm.com>, <will@kernel.org>,
-        <linus.walleij@linaro.org>, <andy.shevchenko@gmail.com>
-CC:     <linux-doc@vger.kernel.org>, <linux-kernel@vger.kernel.org>,
-        <linux-arm-msm@vger.kernel.org>, <devicetree@vger.kernel.org>,
-        <linux-hardening@vger.kernel.org>,
-        <linux-remoteproc@vger.kernel.org>,
-        <linux-arm-kernel@lists.infradead.org>,
-        <linux-gpio@vger.kernel.org>,
-        "Mukesh Ojha" <quic_mojha@quicinc.com>
-Subject: [PATCH v4 21/21] firmware: qcom_scm: Add multiple download mode support
-Date:   Wed, 28 Jun 2023 18:04:48 +0530
-Message-ID: <1687955688-20809-22-git-send-email-quic_mojha@quicinc.com>
-X-Mailer: git-send-email 2.7.4
-In-Reply-To: <1687955688-20809-1-git-send-email-quic_mojha@quicinc.com>
-References: <1687955688-20809-1-git-send-email-quic_mojha@quicinc.com>
+        id S229934AbjF1MzG (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 28 Jun 2023 08:55:06 -0400
+Received: from mga07.intel.com ([134.134.136.100]:58763 "EHLO mga07.intel.com"
+        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
+        id S231949AbjF1Mww (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Wed, 28 Jun 2023 08:52:52 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1687956772; x=1719492772;
+  h=date:from:to:cc:subject:message-id:references:
+   mime-version:in-reply-to;
+  bh=V7/fQJ+HZXkDt0pOeY106FEB7wN/9WZJhnYeLYgacr4=;
+  b=QTOXyIeDQJ6w003pbFufKbvW2L00OKKyS8+y8CqQw3JjyCSg/INA092f
+   zRQV8/2ZLkeCShbwT8cYUaZ9ZMQV+41gYhybYPXKQHBGck5/OHMhC5DAT
+   7qRt+PQw/h29vSJnnqNwpp2VOwQpnSc46kCThl9uBFRchkW2HlcbflFj0
+   Y0y+m4kt+ZRL3zYbg4lpnFmiIbkgQ+AZwwY39cH/3hc2DcsUI/aMgmL/S
+   9dFxjvIWF79i6xRSOPTXTkfIC/5exkAyUb/UxSxFx3aKARGnz/V9gj/h2
+   mpt6tv183WzpwGzWo1FLdmEpI5MDdieXrhabf515mORh0bWpHwoaVhoLl
+   w==;
+X-IronPort-AV: E=McAfee;i="6600,9927,10754"; a="427840678"
+X-IronPort-AV: E=Sophos;i="6.01,165,1684825200"; 
+   d="scan'208";a="427840678"
+Received: from orsmga001.jf.intel.com ([10.7.209.18])
+  by orsmga105.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 28 Jun 2023 05:52:50 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=McAfee;i="6600,9927,10754"; a="752247641"
+X-IronPort-AV: E=Sophos;i="6.01,165,1684825200"; 
+   d="scan'208";a="752247641"
+Received: from lkp-server01.sh.intel.com (HELO 783282924a45) ([10.239.97.150])
+  by orsmga001.jf.intel.com with ESMTP; 28 Jun 2023 05:52:41 -0700
+Received: from kbuild by 783282924a45 with local (Exim 4.96)
+        (envelope-from <lkp@intel.com>)
+        id 1qEUf2-000DGN-2m;
+        Wed, 28 Jun 2023 12:52:40 +0000
+Date:   Wed, 28 Jun 2023 20:52:40 +0800
+From:   kernel test robot <lkp@intel.com>
+To:     Nitesh Shetty <nj.shetty@samsung.com>,
+        Jens Axboe <axboe@kernel.dk>, Jonathan Corbet <corbet@lwn.net>,
+        Alasdair Kergon <agk@redhat.com>,
+        Mike Snitzer <snitzer@kernel.org>, dm-devel@redhat.com,
+        Keith Busch <kbusch@kernel.org>,
+        Christoph Hellwig <hch@lst.de>,
+        Sagi Grimberg <sagi@grimberg.me>,
+        Chaitanya Kulkarni <kch@nvidia.com>,
+        Alexander Viro <viro@zeniv.linux.org.uk>,
+        Christian Brauner <brauner@kernel.org>
+Cc:     llvm@lists.linux.dev, oe-kbuild-all@lists.linux.dev,
+        martin.petersen@oracle.com, linux-scsi@vger.kernel.org,
+        willy@infradead.org, hare@suse.de, djwong@kernel.org,
+        bvanassche@acm.org, ming.lei@redhat.com, dlemoal@kernel.org,
+        nitheshshetty@gmail.com, gost.dev@samsung.com,
+        Nitesh Shetty <nj.shetty@samsung.com>,
+        Damien Le Moal <damien.lemoal@opensource.wdc.com>,
+        Anuj Gupta <anuj20.g@samsung.com>,
+        Vincent Fu <vincent.fu@samsung.com>,
+        linux-block@vger.kernel.org, linux-kernel@vger.kernel.org,
+        linux-doc@vger.kernel.org, linux-nvme@lists.infradead.org,
+        linux-fsdevel@vger.kernel.org
+Subject: Re: [PATCH v13 9/9] null_blk: add support for copy offload
+Message-ID: <202306282001.ba1qWTf0-lkp@intel.com>
+References: <20230627183629.26571-10-nj.shetty@samsung.com>
 MIME-Version: 1.0
-Content-Type: text/plain
-X-Originating-IP: [10.80.80.8]
-X-ClientProxiedBy: nasanex01a.na.qualcomm.com (10.52.223.231) To
- nasanex01c.na.qualcomm.com (10.45.79.139)
-X-QCInternal: smtphost
-X-Proofpoint-Virus-Version: vendor=nai engine=6200 definitions=5800 signatures=585085
-X-Proofpoint-ORIG-GUID: 7N0NHCXx1HtIlnlWstC82DtCdSHMY6m1
-X-Proofpoint-GUID: 7N0NHCXx1HtIlnlWstC82DtCdSHMY6m1
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.254,Aquarius:18.0.957,Hydra:6.0.591,FMLib:17.11.176.26
- definitions=2023-06-28_08,2023-06-27_01,2023-05-22_02
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 clxscore=1015 impostorscore=0
- spamscore=0 priorityscore=1501 suspectscore=0 malwarescore=0 mlxscore=0
- adultscore=0 mlxlogscore=999 lowpriorityscore=0 phishscore=0 bulkscore=0
- classifier=spam adjust=0 reason=mlx scancount=1 engine=8.12.0-2305260000
- definitions=main-2306280111
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20230627183629.26571-10-nj.shetty@samsung.com>
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Currently, scm driver only supports full dump when download
-mode is selected. Add support to enable minidump as well as
-enable it along with fulldump.
+Hi Nitesh,
 
-Signed-off-by: Mukesh Ojha <quic_mojha@quicinc.com>
----
- drivers/firmware/qcom_scm.c | 6 +++++-
- 1 file changed, 5 insertions(+), 1 deletion(-)
+kernel test robot noticed the following build warnings:
 
-diff --git a/drivers/firmware/qcom_scm.c b/drivers/firmware/qcom_scm.c
-index 946cb0f76a17..52e3b613a1af 100644
---- a/drivers/firmware/qcom_scm.c
-+++ b/drivers/firmware/qcom_scm.c
-@@ -31,6 +31,8 @@ static u32 download_mode;
- #define SCM_HAS_BUS_CLK		BIT(2)
- 
- #define QCOM_DOWNLOAD_FULLDUMP		 0x1
-+#define QCOM_DOWNLOAD_MINIDUMP		 0x2
-+#define QCOM_DOWNLOAD_BOTHDUMP		 (QCOM_DOWNLOAD_FULLDUMP | QCOM_DOWNLOAD_MINIDUMP)
- #define QCOM_DOWNLOAD_NODUMP		 0x0
- #define QCOM_DOWNLOAD_MODE_SHIFT	   4
- #define QCOM_DOWNLOAD_MODE_MASK		0x30
-@@ -85,6 +87,8 @@ static const char * const qcom_scm_convention_names[] = {
- static const char * const download_mode_name[] = {
- 	[QCOM_DOWNLOAD_NODUMP]	 = "off",
- 	[QCOM_DOWNLOAD_FULLDUMP] = "full",
-+	[QCOM_DOWNLOAD_MINIDUMP] = "mini",
-+	[QCOM_DOWNLOAD_BOTHDUMP] = "full,mini",
- };
- 
- static struct qcom_scm *__scm;
-@@ -1465,7 +1469,7 @@ static const struct kernel_param_ops download_mode_param_ops = {
- 
- module_param_cb(download_mode, &download_mode_param_ops, NULL, 0644);
- MODULE_PARM_DESC(download_mode,
--		"download mode: off/full are acceptable values");
-+		"download mode: off/full/mini/full,mini are acceptable values");
- 
- static int qcom_scm_probe(struct platform_device *pdev)
- {
+[auto build test WARNING on 53cdf865f90ba922a854c65ed05b519f9d728424]
+
+url:    https://github.com/intel-lab-lkp/linux/commits/Nitesh-Shetty/block-Introduce-queue-limits-for-copy-offload-support/20230628-163126
+base:   53cdf865f90ba922a854c65ed05b519f9d728424
+patch link:    https://lore.kernel.org/r/20230627183629.26571-10-nj.shetty%40samsung.com
+patch subject: [PATCH v13 9/9] null_blk: add support for copy offload
+config: i386-randconfig-i006-20230628 (https://download.01.org/0day-ci/archive/20230628/202306282001.ba1qWTf0-lkp@intel.com/config)
+compiler: clang version 15.0.7 (https://github.com/llvm/llvm-project.git 8dfdcc7b7bf66834a761bd8de445840ef68e4d1a)
+reproduce: (https://download.01.org/0day-ci/archive/20230628/202306282001.ba1qWTf0-lkp@intel.com/reproduce)
+
+If you fix the issue in a separate patch/commit (i.e. not just a new version of
+the same patch/commit), kindly add following tags
+| Reported-by: kernel test robot <lkp@intel.com>
+| Closes: https://lore.kernel.org/oe-kbuild-all/202306282001.ba1qWTf0-lkp@intel.com/
+
+All warnings (new ones prefixed by >>):
+
+>> drivers/block/null_blk/main.c:1295:2: warning: variable 'rem' is used uninitialized whenever 'if' condition is false [-Wsometimes-uninitialized]
+           __rq_for_each_bio(bio, req) {
+           ^~~~~~~~~~~~~~~~~~~~~~~~~~~
+   include/linux/blk-mq.h:1012:6: note: expanded from macro '__rq_for_each_bio'
+           if ((rq->bio))                  \
+               ^~~~~~~~~
+   drivers/block/null_blk/main.c:1300:15: note: uninitialized use occurs here
+           if (WARN_ON(!rem))
+                        ^~~
+   include/asm-generic/bug.h:123:25: note: expanded from macro 'WARN_ON'
+           int __ret_warn_on = !!(condition);                              \
+                                  ^~~~~~~~~
+   drivers/block/null_blk/main.c:1295:2: note: remove the 'if' if its condition is always true
+           __rq_for_each_bio(bio, req) {
+           ^
+   include/linux/blk-mq.h:1012:2: note: expanded from macro '__rq_for_each_bio'
+           if ((rq->bio))                  \
+           ^
+   drivers/block/null_blk/main.c:1287:12: note: initialize the variable 'rem' to silence this warning
+           size_t rem, temp;
+                     ^
+                      = 0
+   1 warning generated.
+
+
+vim +1295 drivers/block/null_blk/main.c
+
+  1281	
+  1282	static inline int nullb_setup_copy_write(struct nullb *nullb,
+  1283			struct request *req, bool is_fua)
+  1284	{
+  1285		sector_t sector_in, sector_out;
+  1286		void *in, *out;
+  1287		size_t rem, temp;
+  1288		struct bio *bio;
+  1289		unsigned long offset_in, offset_out;
+  1290		struct nullb_page *t_page_in, *t_page_out;
+  1291		int ret = -EIO;
+  1292	
+  1293		sector_out = blk_rq_pos(req);
+  1294	
+> 1295		__rq_for_each_bio(bio, req) {
+  1296			sector_in = bio->bi_iter.bi_sector;
+  1297			rem = bio->bi_iter.bi_size;
+  1298		}
+  1299	
+  1300		if (WARN_ON(!rem))
+  1301			return BLK_STS_NOTSUPP;
+  1302	
+  1303		spin_lock_irq(&nullb->lock);
+  1304		while (rem > 0) {
+  1305			temp = min_t(size_t, nullb->dev->blocksize, rem);
+  1306			offset_in = (sector_in & SECTOR_MASK) << SECTOR_SHIFT;
+  1307			offset_out = (sector_out & SECTOR_MASK) << SECTOR_SHIFT;
+  1308	
+  1309			if (null_cache_active(nullb) && !is_fua)
+  1310				null_make_cache_space(nullb, PAGE_SIZE);
+  1311	
+  1312			t_page_in = null_lookup_page(nullb, sector_in, false,
+  1313				!null_cache_active(nullb));
+  1314			if (!t_page_in)
+  1315				goto err;
+  1316			t_page_out = null_insert_page(nullb, sector_out,
+  1317				!null_cache_active(nullb) || is_fua);
+  1318			if (!t_page_out)
+  1319				goto err;
+  1320	
+  1321			in = kmap_local_page(t_page_in->page);
+  1322			out = kmap_local_page(t_page_out->page);
+  1323	
+  1324			memcpy(out + offset_out, in + offset_in, temp);
+  1325			kunmap_local(out);
+  1326			kunmap_local(in);
+  1327			__set_bit(sector_out & SECTOR_MASK, t_page_out->bitmap);
+  1328	
+  1329			if (is_fua)
+  1330				null_free_sector(nullb, sector_out, true);
+  1331	
+  1332			rem -= temp;
+  1333			sector_in += temp >> SECTOR_SHIFT;
+  1334			sector_out += temp >> SECTOR_SHIFT;
+  1335		}
+  1336	
+  1337		ret = 0;
+  1338	err:
+  1339		spin_unlock_irq(&nullb->lock);
+  1340		return ret;
+  1341	}
+  1342	
+
 -- 
-2.7.4
-
+0-DAY CI Kernel Test Service
+https://github.com/intel/lkp-tests/wiki
