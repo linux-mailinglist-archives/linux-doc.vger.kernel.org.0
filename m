@@ -2,182 +2,364 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 5C94B740C59
-	for <lists+linux-doc@lfdr.de>; Wed, 28 Jun 2023 11:08:23 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id D452F740B31
+	for <lists+linux-doc@lfdr.de>; Wed, 28 Jun 2023 10:24:23 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S235574AbjF1JH6 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 28 Jun 2023 05:07:58 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:44388 "EHLO
-        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S233582AbjF1Itw (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Wed, 28 Jun 2023 04:49:52 -0400
-Received: from mail-lf1-x12f.google.com (mail-lf1-x12f.google.com [IPv6:2a00:1450:4864:20::12f])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 8F8BD3A9B;
-        Wed, 28 Jun 2023 01:42:34 -0700 (PDT)
-Received: by mail-lf1-x12f.google.com with SMTP id 2adb3069b0e04-4fb863edcb6so2505011e87.0;
-        Wed, 28 Jun 2023 01:42:34 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20221208; t=1687941753; x=1690533753;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=g54qKoeGjWz5wLaqSLQFYfEyGEtCRjTvx7zRiV5BneY=;
-        b=E5/fD6H+BE8e9eM4PW7j8lCTlWH1PJ6wKXBMhLgltNdLZtqhif+dAU6ErCt6xjnO2n
-         blrxZo+o+h9is0Kh3DBqUvRvELDuNGekKV5hEsI3Tm/WeNqOKlEs20l7VWWqw+0nAAnL
-         grS2UbVE9shuMYKdnuHK/3brcfz1oL9AeIqadZ5dFzddSUGtW2zKVrtvqJPyxJtokQVk
-         Hye0cd/ZwA+C20D7/S90adg5AzJhKMqaea+Ra7TKT48x1UhuQVFyTCzUcrS681LR40Aw
-         KG9+s5ZS+kRGfIZsdryvSB1COUaadyrYFTciLbGp3kZYPwYR+cxE6knYrMqPlheuRkYv
-         WQRw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1687941753; x=1690533753;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=g54qKoeGjWz5wLaqSLQFYfEyGEtCRjTvx7zRiV5BneY=;
-        b=LDH6PIcZARUi+vznjMPioFXwrkBuJLmb5e9sQry8G3BCWJhqheaDa51CcQOpfZwMq+
-         onSfvUSJt5DO+2JpzdQpa6ORrqy2jm5vsA7FUGkOtYqiQ9AA0ecj9J20w7Qfav2qLg67
-         4Xo1HGN3e0buKr6+KRzCURColgqiUe+Mxs15Hbdli0L0VQ2rcHXbJDgo+u8mKj9t9+NB
-         7OBgflMGhKJV2w7awuHDYKI8aL4DuzFgUQ2IRSjtVYzDGMbH01tEDBC1X4jNtBjasY0w
-         fpCey9IHFYHVuQgzalLoFr3/hV1Wa+l0eoxkLiAKyO/IjUeLFuAhS3TiAzNdhHyAI7K0
-         TXlQ==
-X-Gm-Message-State: AC+VfDzuemng+0yn6bTQXoowj4hkZrXPjX0WVzfWXLLADe4kVJq0zaBD
-        uGLH/oYT9EwONjoWZ69K15iAafr1wXb7hZrQhb2C+g+V
-X-Google-Smtp-Source: ACHHUZ7VQCn+YpLvmFmYlf+FOQl2niELacwE4Dcgqiq8I8RkRNKRsyCtVuMehnHMGr1vYCdhl+c2sAGOLh6Bb/4fwYA=
-X-Received: by 2002:a05:651c:8f:b0:2b6:a17b:a120 with SMTP id
- 15-20020a05651c008f00b002b6a17ba120mr5672641ljq.22.1687932068929; Tue, 27 Jun
- 2023 23:01:08 -0700 (PDT)
+        id S232326AbjF1IYS (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 28 Jun 2023 04:24:18 -0400
+Received: from dfw.source.kernel.org ([139.178.84.217]:58889 "EHLO
+        dfw.source.kernel.org" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S233068AbjF1ITt (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Wed, 28 Jun 2023 04:19:49 -0400
+Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
+        (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+         key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+        (No client certificate requested)
+        by dfw.source.kernel.org (Postfix) with ESMTPS id 432A96131D;
+        Wed, 28 Jun 2023 06:40:16 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id A55F8C433C8;
+        Wed, 28 Jun 2023 06:40:12 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+        s=k20201202; t=1687934415;
+        bh=oLTq+iKrj17LlqKFqM7yyfd7btM7xW9Ms0g9sXkCcbY=;
+        h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+        b=T5oKMrz5s4Lya00ey+pGe8W728mfu4d6JL3p5TJ4MwKMiW2nPVsQJ6sguljni0uzn
+         s/KOWdJRgJ/9tuYTRItCUhbiuofr0Aevp8UK/HKAT/61ttug8954rIV4mWs4sEhTm9
+         K+hmbdZFCOi3qdFznwL04rC9m75JzBavT1XHr4Rgw/tcbS8/0mqqxnVeqWPIXyA8M6
+         WUDY8NmQcMY4NvocjCw3ik6Ey9HHLLAvYkcUHBOZIIB+QMAm41GGVkDzW2/GmDyfol
+         cMO01CyDc+0Z6K4524H4t7MaSDBHmcZTCtXCnC8xzZotNTl1y1upDdbL+sQYAjO9Di
+         REnD7LeklvfVg==
+Message-ID: <0d05d74e-48c5-2b99-dc28-482dc717e508@kernel.org>
+Date:   Wed, 28 Jun 2023 15:40:11 +0900
 MIME-Version: 1.0
-References: <cover.1687515463.git.haibo1.xu@intel.com> <47f0502d076c071260a87953cbabadfc85d278cf.1687515463.git.haibo1.xu@intel.com>
- <20230627-adcb173b3ee813e2e16353bd@orel>
-In-Reply-To: <20230627-adcb173b3ee813e2e16353bd@orel>
-From:   Haibo Xu <xiaobo55x@gmail.com>
-Date:   Wed, 28 Jun 2023 14:00:57 +0800
-Message-ID: <CAJve8onuBoOOOL4yp3wTTsBMqxf4MZL6uUjgMBjUmWsTO61A2g@mail.gmail.com>
-Subject: Re: [PATCH v4 09/12] KVM: selftests: Only do get/set tests on present
- blessed list
-To:     Andrew Jones <ajones@ventanamicro.com>
-Cc:     Haibo Xu <haibo1.xu@intel.com>, maz@kernel.org,
-        oliver.upton@linux.dev, seanjc@google.com,
-        Paolo Bonzini <pbonzini@redhat.com>,
-        Jonathan Corbet <corbet@lwn.net>,
-        Anup Patel <anup@brainfault.org>,
-        Atish Patra <atishp@atishpatra.org>,
-        Paul Walmsley <paul.walmsley@sifive.com>,
-        Palmer Dabbelt <palmer@dabbelt.com>,
-        Albert Ou <aou@eecs.berkeley.edu>,
-        Shuah Khan <shuah@kernel.org>,
-        James Morse <james.morse@arm.com>,
-        Suzuki K Poulose <suzuki.poulose@arm.com>,
-        Zenghui Yu <yuzenghui@huawei.com>,
-        Ben Gardon <bgardon@google.com>,
-        David Matlack <dmatlack@google.com>,
-        Ricardo Koller <ricarkol@google.com>,
-        Vishal Annapurve <vannapurve@google.com>,
-        Vipin Sharma <vipinsh@google.com>,
-        Colton Lewis <coltonlewis@google.com>, kvm@vger.kernel.org,
-        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
-        kvm-riscv@lists.infradead.org, linux-riscv@lists.infradead.org,
-        linux-kselftest@vger.kernel.org,
-        linux-arm-kernel@lists.infradead.org, kvmarm@lists.linux.dev
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Spam-Status: No, score=-2.1 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_FROM,
-        RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,SPF_PASS,T_SCC_BODY_TEXT_LINE
-        autolearn=ham autolearn_force=no version=3.4.6
-X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
-        lindbergh.monkeyblade.net
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.12.0
+Subject: Re: [PATCH v13 1/9] block: Introduce queue limits for copy-offload
+ support
+Content-Language: en-US
+To:     Nitesh Shetty <nj.shetty@samsung.com>,
+        Jens Axboe <axboe@kernel.dk>, Jonathan Corbet <corbet@lwn.net>,
+        Alasdair Kergon <agk@redhat.com>,
+        Mike Snitzer <snitzer@kernel.org>, dm-devel@redhat.com,
+        Keith Busch <kbusch@kernel.org>,
+        Christoph Hellwig <hch@lst.de>,
+        Sagi Grimberg <sagi@grimberg.me>,
+        Chaitanya Kulkarni <kch@nvidia.com>,
+        Alexander Viro <viro@zeniv.linux.org.uk>,
+        Christian Brauner <brauner@kernel.org>
+Cc:     martin.petersen@oracle.com, linux-scsi@vger.kernel.org,
+        willy@infradead.org, hare@suse.de, djwong@kernel.org,
+        bvanassche@acm.org, ming.lei@redhat.com, nitheshshetty@gmail.com,
+        gost.dev@samsung.com, Kanchan Joshi <joshi.k@samsung.com>,
+        Anuj Gupta <anuj20.g@samsung.com>, linux-block@vger.kernel.org,
+        linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org,
+        linux-nvme@lists.infradead.org, linux-fsdevel@vger.kernel.org
+References: <20230627183629.26571-1-nj.shetty@samsung.com>
+ <CGME20230627184000epcas5p1c7cb01eb1c70bc5a19f76ce21f2ec3f8@epcas5p1.samsung.com>
+ <20230627183629.26571-2-nj.shetty@samsung.com>
+From:   Damien Le Moal <dlemoal@kernel.org>
+Organization: Western Digital Research
+In-Reply-To: <20230627183629.26571-2-nj.shetty@samsung.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Tue, Jun 27, 2023 at 5:11=E2=80=AFPM Andrew Jones <ajones@ventanamicro.c=
-om> wrote:
->
-> On Fri, Jun 23, 2023 at 06:40:11PM +0800, Haibo Xu wrote:
-> > Only do the get/set tests on present and blessed registers
-> > since we don't know the capabilities of any new ones.
-> >
-> > Suggested-by: Andrew Jones <ajones@ventanamicro.com>
-> > Signed-off-by: Haibo Xu <haibo1.xu@intel.com>
-> > ---
-> >  tools/testing/selftests/kvm/get-reg-list.c | 29 ++++++++++++++--------
-> >  1 file changed, 18 insertions(+), 11 deletions(-)
-> >
-> > diff --git a/tools/testing/selftests/kvm/get-reg-list.c b/tools/testing=
-/selftests/kvm/get-reg-list.c
-> > index b956ee410996..3beb6b62de0a 100644
-> > --- a/tools/testing/selftests/kvm/get-reg-list.c
-> > +++ b/tools/testing/selftests/kvm/get-reg-list.c
-> > @@ -52,6 +52,10 @@ extern int vcpu_configs_n;
-> >       for_each_reg_filtered(i)                                         =
-       \
-> >               if (!find_reg(blessed_reg, blessed_n, reg_list->reg[i]))
-> >
-> > +#define for_each_present_blessed_reg(i)                      \
-> > +     for ((i) =3D 0; (i) < blessed_n; ++(i))           \
-> > +             if (find_reg(reg_list->reg, reg_list->n, blessed_reg[i]))
-> > +
-> >  static const char *config_name(struct vcpu_reg_list *c)
-> >  {
-> >       struct vcpu_reg_sublist *s;
-> > @@ -189,6 +193,16 @@ static void run_test(struct vcpu_reg_list *c)
-> >               return;
-> >       }
-> >
-> > +     for_each_sublist(c, s)
-> > +             blessed_n +=3D s->regs_n;
-> > +     blessed_reg =3D calloc(blessed_n, sizeof(__u64));
-> > +
-> > +     n =3D 0;
-> > +     for_each_sublist(c, s) {
-> > +             for (i =3D 0; i < s->regs_n; ++i)
-> > +                     blessed_reg[n++] =3D s->regs[i];
-> > +     }
-> > +
-> >       /*
-> >        * We only test that we can get the register and then write back =
-the
-> >        * same value. Some registers may allow other values to be writte=
-n
-> > @@ -198,8 +212,11 @@ static void run_test(struct vcpu_reg_list *c)
-> >        * be written need to have the other values tested, then we shoul=
-d
-> >        * create a new set of tests for those in a new independent test
-> >        * executable.
-> > +      *
-> > +      * Only do the get/set tests on present, blessed list registers,
-> > +      * since we don't know the capabilities of any new registers.
-> >        */
-> > -     for_each_reg(i) {
-> > +     for_each_present_blessed_reg(i) {
-> >               uint8_t addr[2048 / 8];
-> >               struct kvm_one_reg reg =3D {
-> >                       .id =3D reg_list->reg[i],
-> > @@ -242,16 +259,6 @@ static void run_test(struct vcpu_reg_list *c)
-> >               }
-> >       }
-> >
-> > -     for_each_sublist(c, s)
-> > -             blessed_n +=3D s->regs_n;
-> > -     blessed_reg =3D calloc(blessed_n, sizeof(__u64));
-> > -
-> > -     n =3D 0;
-> > -     for_each_sublist(c, s) {
-> > -             for (i =3D 0; i < s->regs_n; ++i)
-> > -                     blessed_reg[n++] =3D s->regs[i];
-> > -     }
-> > -
-> >       for_each_new_reg(i)
-> >               ++new_regs;
-> >
-> > --
-> > 2.34.1
-> >
->
-> Reviewed-by: Andrew Jones <ajones@ventanamicro.com>
->
-> Thanks,
-> drew
+On 6/28/23 03:36, Nitesh Shetty wrote:
+> Add device limits as sysfs entries,
+>         - copy_offload (RW)
+>         - copy_max_bytes (RW)
+>         - copy_max_bytes_hw (RO)
+> 
+> Above limits help to split the copy payload in block layer.
+> copy_offload: used for setting copy offload(1) or emulation(0).
+> copy_max_bytes: maximum total length of copy in single payload.
+> copy_max_bytes_hw: Reflects the device supported maximum limit.
+> 
+> Reviewed-by: Hannes Reinecke <hare@suse.de>
+> Signed-off-by: Nitesh Shetty <nj.shetty@samsung.com>
+> Signed-off-by: Kanchan Joshi <joshi.k@samsung.com>
+> Signed-off-by: Anuj Gupta <anuj20.g@samsung.com>
+> ---
+>  Documentation/ABI/stable/sysfs-block | 33 +++++++++++++++
+>  block/blk-settings.c                 | 24 +++++++++++
+>  block/blk-sysfs.c                    | 63 ++++++++++++++++++++++++++++
+>  include/linux/blkdev.h               | 12 ++++++
+>  include/uapi/linux/fs.h              |  3 ++
+>  5 files changed, 135 insertions(+)
+> 
+> diff --git a/Documentation/ABI/stable/sysfs-block b/Documentation/ABI/stable/sysfs-block
+> index c57e5b7cb532..3c97303f658b 100644
+> --- a/Documentation/ABI/stable/sysfs-block
+> +++ b/Documentation/ABI/stable/sysfs-block
+> @@ -155,6 +155,39 @@ Description:
+>  		last zone of the device which may be smaller.
+>  
+>  
+> +What:		/sys/block/<disk>/queue/copy_offload
+> +Date:		June 2023
+> +Contact:	linux-block@vger.kernel.org
+> +Description:
+> +		[RW] When read, this file shows whether offloading copy to a
+> +		device is enabled (1) or disabled (0). Writing '0' to this
+> +		file will disable offloading copies for this device.
+> +		Writing any '1' value will enable this feature. If the device
+> +		does not support offloading, then writing 1, will result in an
+> +		error.
 
-Thanks for the review!
+I am still not convinced that this one is really necessary. copy_max_bytes_hw !=
+0 indicates that the devices supports copy offload. And setting copy_max_bytes
+to 0 can be used to disable copy offload (which probably should be the default
+for now).
+
+> +
+> +
+> +What:		/sys/block/<disk>/queue/copy_max_bytes
+> +Date:		June 2023
+> +Contact:	linux-block@vger.kernel.org
+> +Description:
+> +		[RW] This is the maximum number of bytes that the block layer
+> +		will allow for a copy request. This will is always smaller or
+
+will is -> is
+
+> +		equal to the maximum size allowed by the hardware, indicated by
+> +		'copy_max_bytes_hw'. An attempt to set a value higher than
+> +		'copy_max_bytes_hw' will truncate this to 'copy_max_bytes_hw'.
+> +
+> +
+> +What:		/sys/block/<disk>/queue/copy_max_bytes_hw
+
+Nit: In keeping with the spirit of attributes like
+max_hw_sectors_kb/max_sectors_kb, I would call this one copy_max_hw_bytes.
+
+> +Date:		June 2023
+> +Contact:	linux-block@vger.kernel.org
+> +Description:
+> +		[RO] This is the maximum number of bytes that the hardware
+> +		will allow for single data copy request.
+> +		A value of 0 means that the device does not support
+> +		copy offload.
+> +
+> +
+>  What:		/sys/block/<disk>/queue/crypto/
+>  Date:		February 2022
+>  Contact:	linux-block@vger.kernel.org
+> diff --git a/block/blk-settings.c b/block/blk-settings.c
+> index 4dd59059b788..738cd3f21259 100644
+> --- a/block/blk-settings.c
+> +++ b/block/blk-settings.c
+> @@ -59,6 +59,8 @@ void blk_set_default_limits(struct queue_limits *lim)
+>  	lim->zoned = BLK_ZONED_NONE;
+>  	lim->zone_write_granularity = 0;
+>  	lim->dma_alignment = 511;
+> +	lim->max_copy_sectors_hw = 0;
+> +	lim->max_copy_sectors = 0;
+>  }
+>  
+>  /**
+> @@ -82,6 +84,8 @@ void blk_set_stacking_limits(struct queue_limits *lim)
+>  	lim->max_dev_sectors = UINT_MAX;
+>  	lim->max_write_zeroes_sectors = UINT_MAX;
+>  	lim->max_zone_append_sectors = UINT_MAX;
+> +	lim->max_copy_sectors_hw = UINT_MAX;
+> +	lim->max_copy_sectors = UINT_MAX;
+>  }
+>  EXPORT_SYMBOL(blk_set_stacking_limits);
+>  
+> @@ -183,6 +187,22 @@ void blk_queue_max_discard_sectors(struct request_queue *q,
+>  }
+>  EXPORT_SYMBOL(blk_queue_max_discard_sectors);
+>  
+> +/**
+> + * blk_queue_max_copy_sectors_hw - set max sectors for a single copy payload
+> + * @q:  the request queue for the device
+> + * @max_copy_sectors: maximum number of sectors to copy
+> + **/
+> +void blk_queue_max_copy_sectors_hw(struct request_queue *q,
+> +		unsigned int max_copy_sectors)
+> +{
+> +	if (max_copy_sectors > (COPY_MAX_BYTES >> SECTOR_SHIFT))
+> +		max_copy_sectors = COPY_MAX_BYTES >> SECTOR_SHIFT;
+> +
+> +	q->limits.max_copy_sectors_hw = max_copy_sectors;
+> +	q->limits.max_copy_sectors = max_copy_sectors;
+> +}
+> +EXPORT_SYMBOL_GPL(blk_queue_max_copy_sectors_hw);
+> +
+>  /**
+>   * blk_queue_max_secure_erase_sectors - set max sectors for a secure erase
+>   * @q:  the request queue for the device
+> @@ -578,6 +598,10 @@ int blk_stack_limits(struct queue_limits *t, struct queue_limits *b,
+>  	t->max_segment_size = min_not_zero(t->max_segment_size,
+>  					   b->max_segment_size);
+>  
+> +	t->max_copy_sectors = min(t->max_copy_sectors, b->max_copy_sectors);
+> +	t->max_copy_sectors_hw = min(t->max_copy_sectors_hw,
+> +						b->max_copy_sectors_hw);
+> +
+>  	t->misaligned |= b->misaligned;
+>  
+>  	alignment = queue_limit_alignment_offset(b, start);
+> diff --git a/block/blk-sysfs.c b/block/blk-sysfs.c
+> index afc797fb0dfc..43551778d035 100644
+> --- a/block/blk-sysfs.c
+> +++ b/block/blk-sysfs.c
+> @@ -199,6 +199,62 @@ static ssize_t queue_discard_zeroes_data_show(struct request_queue *q, char *pag
+>  	return queue_var_show(0, page);
+>  }
+>  
+> +static ssize_t queue_copy_offload_show(struct request_queue *q, char *page)
+> +{
+> +	return queue_var_show(blk_queue_copy(q), page);
+> +}
+> +
+> +static ssize_t queue_copy_offload_store(struct request_queue *q,
+> +				       const char *page, size_t count)
+> +{
+> +	unsigned long copy_offload;
+> +	ssize_t ret = queue_var_store(&copy_offload, page, count);
+> +
+> +	if (ret < 0)
+> +		return ret;
+> +
+> +	if (copy_offload && !q->limits.max_copy_sectors_hw)
+> +		return -EINVAL;
+> +
+> +	if (copy_offload)
+> +		blk_queue_flag_set(QUEUE_FLAG_COPY, q);
+> +	else
+> +		blk_queue_flag_clear(QUEUE_FLAG_COPY, q);
+> +
+> +	return count;
+> +}
+
+See above. I think we can drop this attribute.
+
+> +
+> +static ssize_t queue_copy_max_hw_show(struct request_queue *q, char *page)
+> +{
+> +	return sprintf(page, "%llu\n", (unsigned long long)
+> +			q->limits.max_copy_sectors_hw << SECTOR_SHIFT);
+> +}
+> +
+> +static ssize_t queue_copy_max_show(struct request_queue *q, char *page)
+> +{
+> +	return sprintf(page, "%llu\n", (unsigned long long)
+> +			q->limits.max_copy_sectors << SECTOR_SHIFT);
+> +}
+> +
+> +static ssize_t queue_copy_max_store(struct request_queue *q,
+> +				       const char *page, size_t count)
+> +{
+> +	unsigned long max_copy;
+> +	ssize_t ret = queue_var_store(&max_copy, page, count);
+> +
+> +	if (ret < 0)
+> +		return ret;
+> +
+> +	if (max_copy & (queue_logical_block_size(q) - 1))
+> +		return -EINVAL;
+> +
+> +	max_copy >>= SECTOR_SHIFT;
+> +	q->limits.max_copy_sectors = min_t(unsigned int, max_copy,
+> +					q->limits.max_copy_sectors_hw);
+> +
+> +	return count;
+> +}
+> +
+>  static ssize_t queue_write_same_max_show(struct request_queue *q, char *page)
+>  {
+>  	return queue_var_show(0, page);
+> @@ -522,6 +578,10 @@ QUEUE_RO_ENTRY(queue_nr_zones, "nr_zones");
+>  QUEUE_RO_ENTRY(queue_max_open_zones, "max_open_zones");
+>  QUEUE_RO_ENTRY(queue_max_active_zones, "max_active_zones");
+>  
+> +QUEUE_RW_ENTRY(queue_copy_offload, "copy_offload");
+> +QUEUE_RO_ENTRY(queue_copy_max_hw, "copy_max_bytes_hw");
+> +QUEUE_RW_ENTRY(queue_copy_max, "copy_max_bytes");
+> +
+>  QUEUE_RW_ENTRY(queue_nomerges, "nomerges");
+>  QUEUE_RW_ENTRY(queue_rq_affinity, "rq_affinity");
+>  QUEUE_RW_ENTRY(queue_poll, "io_poll");
+> @@ -638,6 +698,9 @@ static struct attribute *queue_attrs[] = {
+>  	&queue_discard_max_entry.attr,
+>  	&queue_discard_max_hw_entry.attr,
+>  	&queue_discard_zeroes_data_entry.attr,
+> +	&queue_copy_offload_entry.attr,
+> +	&queue_copy_max_hw_entry.attr,
+> +	&queue_copy_max_entry.attr,
+>  	&queue_write_same_max_entry.attr,
+>  	&queue_write_zeroes_max_entry.attr,
+>  	&queue_zone_append_max_entry.attr,
+> diff --git a/include/linux/blkdev.h b/include/linux/blkdev.h
+> index ed44a997f629..6098665953e6 100644
+> --- a/include/linux/blkdev.h
+> +++ b/include/linux/blkdev.h
+> @@ -309,6 +309,9 @@ struct queue_limits {
+>  	unsigned int		discard_alignment;
+>  	unsigned int		zone_write_granularity;
+>  
+> +	unsigned int		max_copy_sectors_hw;
+> +	unsigned int		max_copy_sectors;
+> +
+>  	unsigned short		max_segments;
+>  	unsigned short		max_integrity_segments;
+>  	unsigned short		max_discard_segments;
+> @@ -554,6 +557,7 @@ struct request_queue {
+>  #define QUEUE_FLAG_NOWAIT       29	/* device supports NOWAIT */
+>  #define QUEUE_FLAG_SQ_SCHED     30	/* single queue style io dispatch */
+>  #define QUEUE_FLAG_SKIP_TAGSET_QUIESCE	31 /* quiesce_tagset skip the queue*/
+> +#define QUEUE_FLAG_COPY		32	/* enable/disable device copy offload */
+>  
+>  #define QUEUE_FLAG_MQ_DEFAULT	((1UL << QUEUE_FLAG_IO_STAT) |		\
+>  				 (1UL << QUEUE_FLAG_SAME_COMP) |	\
+> @@ -574,6 +578,7 @@ bool blk_queue_flag_test_and_set(unsigned int flag, struct request_queue *q);
+>  	test_bit(QUEUE_FLAG_STABLE_WRITES, &(q)->queue_flags)
+>  #define blk_queue_io_stat(q)	test_bit(QUEUE_FLAG_IO_STAT, &(q)->queue_flags)
+>  #define blk_queue_add_random(q)	test_bit(QUEUE_FLAG_ADD_RANDOM, &(q)->queue_flags)
+> +#define blk_queue_copy(q)	test_bit(QUEUE_FLAG_COPY, &(q)->queue_flags)
+>  #define blk_queue_zone_resetall(q)	\
+>  	test_bit(QUEUE_FLAG_ZONE_RESETALL, &(q)->queue_flags)
+>  #define blk_queue_dax(q)	test_bit(QUEUE_FLAG_DAX, &(q)->queue_flags)
+> @@ -891,6 +896,8 @@ extern void blk_queue_chunk_sectors(struct request_queue *, unsigned int);
+>  extern void blk_queue_max_segments(struct request_queue *, unsigned short);
+>  extern void blk_queue_max_discard_segments(struct request_queue *,
+>  		unsigned short);
+> +extern void blk_queue_max_copy_sectors_hw(struct request_queue *q,
+> +		unsigned int max_copy_sectors);
+>  void blk_queue_max_secure_erase_sectors(struct request_queue *q,
+>  		unsigned int max_sectors);
+>  extern void blk_queue_max_segment_size(struct request_queue *, unsigned int);
+> @@ -1210,6 +1217,11 @@ static inline unsigned int bdev_discard_granularity(struct block_device *bdev)
+>  	return bdev_get_queue(bdev)->limits.discard_granularity;
+>  }
+>  
+> +static inline unsigned int bdev_max_copy_sectors(struct block_device *bdev)
+> +{
+> +	return bdev_get_queue(bdev)->limits.max_copy_sectors;
+> +}
+> +
+>  static inline unsigned int
+>  bdev_max_secure_erase_sectors(struct block_device *bdev)
+>  {
+> diff --git a/include/uapi/linux/fs.h b/include/uapi/linux/fs.h
+> index b7b56871029c..dff56813f95a 100644
+> --- a/include/uapi/linux/fs.h
+> +++ b/include/uapi/linux/fs.h
+> @@ -64,6 +64,9 @@ struct fstrim_range {
+>  	__u64 minlen;
+>  };
+>  
+> +/* maximum copy offload length, this is set to 128MB based on current testing */
+> +#define COPY_MAX_BYTES	(1 << 27)
+> +
+>  /* extent-same (dedupe) ioctls; these MUST match the btrfs ioctl definitions */
+>  #define FILE_DEDUPE_RANGE_SAME		0
+>  #define FILE_DEDUPE_RANGE_DIFFERS	1
+
+-- 
+Damien Le Moal
+Western Digital Research
+
