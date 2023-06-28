@@ -2,173 +2,105 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 0ABDE7407AA
-	for <lists+linux-doc@lfdr.de>; Wed, 28 Jun 2023 03:36:26 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 468FD7407FE
+	for <lists+linux-doc@lfdr.de>; Wed, 28 Jun 2023 04:00:40 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S229647AbjF1BgX (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 27 Jun 2023 21:36:23 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:47946 "EHLO
+        id S230145AbjF1CAi (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 27 Jun 2023 22:00:38 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:57542 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S229549AbjF1BgW (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 27 Jun 2023 21:36:22 -0400
-Received: from mail-qt1-x835.google.com (mail-qt1-x835.google.com [IPv6:2607:f8b0:4864:20::835])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 68521199C
-        for <linux-doc@vger.kernel.org>; Tue, 27 Jun 2023 18:36:20 -0700 (PDT)
-Received: by mail-qt1-x835.google.com with SMTP id d75a77b69052e-4007b5bafceso83111cf.1
-        for <linux-doc@vger.kernel.org>; Tue, 27 Jun 2023 18:36:20 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=google.com; s=20221208; t=1687916179; x=1690508179;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=76q3czNHBGF97J8zUfgBzI1kFFF4VkjgowoEBA/iOwY=;
-        b=y26X29gqmEGqKXrFtZryTyXDzQ9ewY6D9loFvzylkwQasUaA3rhMju6tAIXM45FOCP
-         EiMe0MCGmWBUFKrsCbSYBusOLFWu0jf2ch1nvHU2ezj0YlibSSfCAj3pkfhCVHzE1K7H
-         Z7NtUDgJupEmpBLcz2JwUP0Ew4wYs1sF5cUDLma1QWvlN3N/adRlgN+tfnFyRaGsxpnh
-         SbXxUiJzn2QLtTTP3iL+pFTRkz2lk8L1MKva4dy/j5S7MgRwhh1nEATI68dFDXZfdONG
-         FhiCx9DGJTIiGbbLlNXJi17Unkk3M74ZWytzQwiWvh1eVm0Sq9lBTa4tZoll5SdOHuaw
-         8eCA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1687916179; x=1690508179;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=76q3czNHBGF97J8zUfgBzI1kFFF4VkjgowoEBA/iOwY=;
-        b=AhMczQsC0EXib29YRqMM2dtVZ6/UXD6H6hl5a2S27UBA2w1eXeZkPKESC+BFHfCDrB
-         M2ko1tjiCLYeiEVHlKO1SC+nThz4KhkPZxQZQ3xydlqNzVLoHCEvX24Z9YsnYIvIG+PF
-         rCHkrmriJ0Jab+i8eNJMSHi9uhWSVmGYFS7nLA5GFdzc7IgUoiYKtmrKwv2McsUBfa0M
-         XJx5B+9K4tNGVtHOU0NPZe5FIjPXZIhXW3qXsIYxP1iKEAhQwbLvx8cKZtMswstKx3hK
-         KkbTOGkF6TrEBSEECam5x5I+RdPB4jLkJhqQsqebzcChTeFdBeknjJ41uo/3ssluOdws
-         pyrA==
-X-Gm-Message-State: AC+VfDwUUZSfvNsyxE6ZnRZVKU6oVQj21G1D25i1zzo/y4Ql26LSJqEh
-        osuDUMyHmRM4CyEeL652xYNUQk2yNLyvVS5Ex9ZoEQ==
-X-Google-Smtp-Source: ACHHUZ7sVzuwnmV3HryX+9qLq3qI6jRIEjo2b86t4SeBiyuoth4UHt8vts7j6aJsIac12Y3Yp0QqGwhzwhLl3ASLDT8=
-X-Received: by 2002:ac8:5710:0:b0:3ef:343b:fe7e with SMTP id
- 16-20020ac85710000000b003ef343bfe7emr130387qtw.2.1687916179378; Tue, 27 Jun
- 2023 18:36:19 -0700 (PDT)
-MIME-Version: 1.0
-References: <cover.1684048511.git.sathyanarayanan.kuppuswamy@linux.intel.com>
- <972e1d5c5ec53e2757fb17a586558c5385e987dd.1684048511.git.sathyanarayanan.kuppuswamy@linux.intel.com>
- <64876bf6c30e2_1433ac29415@dwillia2-xfh.jf.intel.com.notmuch>
- <64961c3baf8ce_142af829436@dwillia2-xfh.jf.intel.com.notmuch>
- <9437b176-e15a-3cec-e5cb-68ff57dbc25c@linux.intel.com> <CAAH4kHa85hCz0GhQM3f1OQ3wM+=-SfF77ShFAse0-eYGBHvO_A@mail.gmail.com>
- <649b7a9b69cb6_11e68529473@dwillia2-xfh.jf.intel.com.notmuch>
-In-Reply-To: <649b7a9b69cb6_11e68529473@dwillia2-xfh.jf.intel.com.notmuch>
-From:   Dionna Amalie Glaze <dionnaglaze@google.com>
-Date:   Tue, 27 Jun 2023 18:36:07 -0700
-Message-ID: <CAAH4kHY1-N+HOxPON6SuXE3QPowAGnwTjc5H=ZnNZwh7a+msnQ@mail.gmail.com>
-Subject: Re: [PATCH v3 3/3] selftests/tdx: Test GetQuote TDX attestation feature
-To:     Dan Williams <dan.j.williams@intel.com>
-Cc:     Sathyanarayanan Kuppuswamy 
-        <sathyanarayanan.kuppuswamy@linux.intel.com>,
-        Thomas Gleixner <tglx@linutronix.de>,
-        Ingo Molnar <mingo@redhat.com>, Borislav Petkov <bp@alien8.de>,
-        Dave Hansen <dave.hansen@linux.intel.com>, x86@kernel.org,
-        Shuah Khan <shuah@kernel.org>,
+        with ESMTP id S229763AbjF1CAh (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 27 Jun 2023 22:00:37 -0400
+Received: from mga18.intel.com (mga18.intel.com [134.134.136.126])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 53D82297C;
+        Tue, 27 Jun 2023 19:00:36 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1687917636; x=1719453636;
+  h=date:from:to:cc:subject:message-id:references:
+   mime-version:in-reply-to;
+  bh=Kf4OUq5f8e7JmaiUhbLO6qC90pOxyi/ygia+z/UvdLA=;
+  b=EXxteSgoq2ECGLhSoUD0S/aaTJd8aNVCEh1VvCfjCFqzlY+eWPaFqaFg
+   Okn5c993qTpvya1ioV/X/+LFKHtEjL9uZrKFGu3vlMeEfss8+vGjGsOU6
+   di9dls/rNnhSEHzuR16H3tAcYAxH0GbgqeMfreVWz1s9iksSlFlnbubwT
+   73gRuiKo1YGLEB7A1oD52D0tPv+g6LgO7xbyMGl6p8bKlpPRoBXvwNiIk
+   1GAOuXV/iXpBjYna2Qs4J1rPtyyYCVBP+IaTqS0Qm7lV49ckTtnsxhUAk
+   S83H/MBeU2KndrVYfn8kmzA4YnNPQr9mAn2+ezb7x3aXZXZ0sKFfcUp43
+   g==;
+X-IronPort-AV: E=McAfee;i="6600,9927,10754"; a="346489025"
+X-IronPort-AV: E=Sophos;i="6.01,164,1684825200"; 
+   d="scan'208";a="346489025"
+Received: from orsmga004.jf.intel.com ([10.7.209.38])
+  by orsmga106.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 27 Jun 2023 19:00:35 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=McAfee;i="6600,9927,10754"; a="840895500"
+X-IronPort-AV: E=Sophos;i="6.01,164,1684825200"; 
+   d="scan'208";a="840895500"
+Received: from lkp-server01.sh.intel.com (HELO 783282924a45) ([10.239.97.150])
+  by orsmga004.jf.intel.com with ESMTP; 27 Jun 2023 19:00:31 -0700
+Received: from kbuild by 783282924a45 with local (Exim 4.96)
+        (envelope-from <lkp@intel.com>)
+        id 1qEKTu-000CSt-2U;
+        Wed, 28 Jun 2023 02:00:30 +0000
+Date:   Wed, 28 Jun 2023 10:00:18 +0800
+From:   kernel test robot <lkp@intel.com>
+To:     Jim Shargo <jshargo@chromium.org>, mairacanal@riseup.net,
+        Daniel Vetter <daniel@ffwll.ch>,
+        David Airlie <airlied@gmail.com>,
+        Haneen Mohammed <hamohammed.sa@gmail.com>,
         Jonathan Corbet <corbet@lwn.net>,
-        "H . Peter Anvin" <hpa@zytor.com>,
-        "Kirill A . Shutemov" <kirill.shutemov@linux.intel.com>,
-        Tony Luck <tony.luck@intel.com>,
-        Wander Lairson Costa <wander@redhat.com>,
-        Erdem Aktas <erdemaktas@google.com>,
-        Chong Cai <chongc@google.com>, Qinkun Bao <qinkun@apache.org>,
-        Guorui Yu <GuoRui.Yu@linux.alibaba.com>,
-        Du Fan <fan.du@intel.com>, linux-kernel@vger.kernel.org,
-        linux-kselftest@vger.kernel.org, linux-doc@vger.kernel.org,
-        dhowells@redhat.com, brijesh.singh@amd.com, atishp@rivosinc.com,
-        gregkh@linuxfoundation.org, linux-coco@lists.linux.dev,
-        joey.gouly@arm.com
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Spam-Status: No, score=-17.6 required=5.0 tests=BAYES_00,DKIMWL_WL_MED,
-        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,
-        ENV_AND_HDR_SPF_MATCH,RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,SPF_PASS,
-        T_SCC_BODY_TEXT_LINE,URIBL_BLOCKED,USER_IN_DEF_DKIM_WL,
-        USER_IN_DEF_SPF_WL autolearn=ham autolearn_force=no version=3.4.6
+        Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+        Maxime Ripard <mripard@kernel.org>,
+        Melissa Wen <melissa.srw@gmail.com>,
+        Rodrigo Siqueira <rodrigosiqueiramelo@gmail.com>,
+        Thomas Zimmermann <tzimmermann@suse.de>
+Cc:     oe-kbuild-all@lists.linux.dev, Jim Shargo <jshargo@chromium.org>,
+        linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org,
+        linux-doc@vger.kernel.org
+Subject: Re: [PATCH v2 4/6] drm/vkms: Add ConfigFS scaffolding to VKMS
+Message-ID: <202306280759.b1BQCTXw-lkp@intel.com>
+References: <20230623222353.97283-5-jshargo@chromium.org>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20230623222353.97283-5-jshargo@chromium.org>
+X-Spam-Status: No, score=-2.1 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,SPF_HELO_NONE,
+        SPF_NONE,T_SCC_BODY_TEXT_LINE,URIBL_BLOCKED autolearn=ham
+        autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Tue, Jun 27, 2023 at 5:13=E2=80=AFPM Dan Williams <dan.j.williams@intel.=
-com> wrote:
-> [..]
-> >
-> > The VMPL-based separation that will house the supervisor module known
-> > as SVSM can have protocols that implement a TPM command interface, or
-> > an RTMR-extension interface, and will also need to have an
-> > SVSM-specific protocol attestation report format to keep the secure
-> > chain of custody apparent. We'd have different formats and protocols
-> > in the kernel, at least, to speak to each technology.
->
-> That's where I hope the line can be drawn, i.e. that all of this vendor
-> differentiation really only matters inside the kernel in the end.
->
-> > I'm not sure it's worth the trouble of papering over all the... 3-4
-> > technologies with similar but still weirdly different formats and ways
-> > of doing things with an abstracted attestation ABI, especially since
-> > the output all has to be interpreted in an architecture-specific way
-> > anyway.
->
-> This is where I need help. Can you identify where the following
-> assertion falls over:
->
-> "The minimum viable key-server is one that can generically validate a
-> blob with an ECDSA signature".
->
-> I.e. the fact that SEV and TDX send different length blobs is less
-> important than validating that signature.
->
-> If it is always the case that specific fields in the blob need to be
-> decoded then yes, that weakens the assertion. However, maybe that means
-> that kernel code parses the blob and conveys that parsed info along with
-> vendor attestation payload all signed by a Linux key. I.e. still allow
-> for a unified output format + signed vendor blob and provide a path to
-> keep all the vendor specific handling internal to the kernel.
->
+Hi Jim,
 
-All the specific fields of the blob have to be decoded and subjected
-to an acceptance policy. That policy will most always be different
-across different platforms and VM owners. I wrote all of
-github.com/google/go-sev-guest, including the verification and
-validation logic, and it's going to get more complicated, and the
-sources of the data that provide validators with notions of what
-values can be trusted will be varied. The formats are not
-standardized. The Confidential Computing Consortium should be working
-toward that, but it's a slow process. There's IETF RATS. There's
-in-toto.io attestations. There's Azure's JWT thing. There's a signed
-serialized protocol buffer that I've decided is what Google is going
-to produce while we figure out all the "right" formats to use. There
-will be factions and absolute gridlock for multiple years if we
-require solidifying an abstraction for the kernel to manage all this
-logic before passing a report on to user space.
+kernel test robot noticed the following build warnings:
 
-Now, not only are the field contents important, the certificates of
-the keys that signed the report are important. Each platform has its
-own special x509v3 extensions and key hierarchy to express what parts
-of the report should be what value if signed by this key, and in TDX's
-case there are extra endpoints that you need to query to determine if
-there's an active CVE on the associated TCB version. This is how they
-avoid adding every cpu's key to the leaf certificate's CRL.
+[auto build test WARNING on drm-misc/drm-misc-next]
+[also build test WARNING on drm-intel/for-linux-next next-20230627]
+[cannot apply to drm-intel/for-linux-next-fixes drm-tip/drm-tip linus/master v6.4]
+[If your patch is applied to the wrong git tree, kindly drop us a note.
+And when submitting patch, we suggest to use '--base' as documented in
+https://git-scm.com/docs/git-format-patch#_base_tree_information]
 
-You really shouldn't be putting attestation validation logic in the
-kernel. It belongs outside of the VM entirely with the party that will
-only release access keys to the VM if it can prove it's running the
-software it claims, on the platform it claims. I think Windows puts a
-remote procedure call in their guest attestation driver to the Azure
-attestation service, and that is an anti-pattern in my mind.
+url:    https://github.com/intel-lab-lkp/linux/commits/Jim-Shargo/drm-vkms-Back-VKMS-with-DRM-memory-management-instead-of-static-objects/20230624-062659
+base:   git://anongit.freedesktop.org/drm/drm-misc drm-misc-next
+patch link:    https://lore.kernel.org/r/20230623222353.97283-5-jshargo%40chromium.org
+patch subject: [PATCH v2 4/6] drm/vkms: Add ConfigFS scaffolding to VKMS
+config: xtensa-randconfig-r052-20230627 (https://download.01.org/0day-ci/archive/20230628/202306280759.b1BQCTXw-lkp@intel.com/config)
+compiler: xtensa-linux-gcc (GCC) 12.3.0
+reproduce: (https://download.01.org/0day-ci/archive/20230628/202306280759.b1BQCTXw-lkp@intel.com/reproduce)
 
-> > ARM's Confidential Computing Realm Management Extensions (RME) seems
-> > to be going along the lines of a runtime measurement register model
-> > with their hardware enforced security. The number of registers isn't
-> > prescribed in the spec.
-> >
-> > +Joey Gouly +linux-coco@lists.linux.dev as far as RME is concerned, do
-> > you know who would be best to weigh in on this discussion of a unified
-> > attestation model?
+If you fix the issue in a separate patch/commit (i.e. not just a new version of
+the same patch/commit), kindly add following tags
+| Reported-by: kernel test robot <lkp@intel.com>
+| Closes: https://lore.kernel.org/oe-kbuild-all/202306280759.b1BQCTXw-lkp@intel.com/
 
+cocci warnings: (new ones prefixed by >>)
+>> drivers/gpu/drm/vkms/vkms_drv.c:266:9-16: WARNING: ERR_CAST can be used with pdev
 
-
---=20
--Dionna Glaze, PhD (she/her)
+-- 
+0-DAY CI Kernel Test Service
+https://github.com/intel/lkp-tests/wiki
