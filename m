@@ -2,62 +2,97 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id F3E1E74387D
-	for <lists+linux-doc@lfdr.de>; Fri, 30 Jun 2023 11:41:01 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id B9DF2743C03
+	for <lists+linux-doc@lfdr.de>; Fri, 30 Jun 2023 14:37:38 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S232788AbjF3Jk4 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Fri, 30 Jun 2023 05:40:56 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:42300 "EHLO
+        id S231794AbjF3Mhc (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Fri, 30 Jun 2023 08:37:32 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:34650 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S232791AbjF3Jkw (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Fri, 30 Jun 2023 05:40:52 -0400
-Received: from madras.collabora.co.uk (madras.collabora.co.uk [46.235.227.172])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 601502122;
-        Fri, 30 Jun 2023 02:40:50 -0700 (PDT)
-Received: from localhost (unknown [IPv6:2a01:e0a:2c:6930:5cf4:84a1:2763:fe0d])
-        (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-         key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
-        (No client certificate requested)
-        (Authenticated sender: bbrezillon)
-        by madras.collabora.co.uk (Postfix) with ESMTPSA id 319B76606FDE;
-        Fri, 30 Jun 2023 10:40:48 +0100 (BST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=collabora.com;
-        s=mail; t=1688118048;
-        bh=4mCSpl5TSwRT4QEzUD6onxpjF3nWlrpqcwjcv/v8rH4=;
-        h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
-        b=ZdKVvs79F3YjxE7/n3BeI4Q4lUGR3mv0/B1Lv5RcZpK6+KHeh44X9pp4kgFNvHFkP
-         wH8tS94eQ1gR2CO5/oBwTRsLZK7TcYgg5dy+yFbaku81oVaTH/DFpWyINrP2ChJnEC
-         zGV02D6dLnBlGnbG1X9PEjXGyjH1cLD6KjhzFrZyYlNc+4n62qA8Ntn0NE8TVpZGgq
-         uz629+ehC3eVEeomJCDvuPrBcHUBjs7xqEv7fW22vXQZoW3DdouEya2PUYc/bvgz3h
-         Hy2iLVofyC05g1lQcouz1NvOcs5uIN9BeqA2roVNQBhm3b2bphG8UpS2zJC20Ia48k
-         F4GMg7rhMWOVQ==
-Date:   Fri, 30 Jun 2023 11:40:45 +0200
-From:   Boris Brezillon <boris.brezillon@collabora.com>
-To:     Danilo Krummrich <dakr@redhat.com>
-Cc:     airlied@gmail.com, daniel@ffwll.ch, tzimmermann@suse.de,
-        mripard@kernel.org, corbet@lwn.net, christian.koenig@amd.com,
-        bskeggs@redhat.com, Liam.Howlett@oracle.com,
-        matthew.brost@intel.com, alexdeucher@gmail.com, ogabbay@kernel.org,
-        bagasdotme@gmail.com, willy@infradead.org, jason@jlekstrand.net,
-        dri-devel@lists.freedesktop.org, nouveau@lists.freedesktop.org,
-        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
-        Donald Robson <donald.robson@imgtec.com>,
-        Dave Airlie <airlied@redhat.com>
-Subject: Re: [PATCH drm-next v6 02/13] drm: manager to keep track of GPUs VA
- mappings
-Message-ID: <20230630114045.20743fab@collabora.com>
-In-Reply-To: <20230630100252.7ff6421d@collabora.com>
-References: <20230629222651.3196-1-dakr@redhat.com>
-        <20230629222651.3196-3-dakr@redhat.com>
-        <20230630100252.7ff6421d@collabora.com>
-Organization: Collabora
-X-Mailer: Claws Mail 4.1.1 (GTK 3.24.38; x86_64-redhat-linux-gnu)
+        with ESMTP id S230506AbjF3Mhb (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Fri, 30 Jun 2023 08:37:31 -0400
+Received: from NAM11-DM6-obe.outbound.protection.outlook.com (mail-dm6nam11on2073.outbound.protection.outlook.com [40.107.223.73])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 281501B4;
+        Fri, 30 Jun 2023 05:37:29 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=bt245ibCfjZqVop8VQNlf2yxYf/vplLGuYeM+hMxt5a1V1UFkxBSfZGzNdBtBbmVf95ssURSK2YkLOgTjkpDxt+nh5mPTMaq83jDm/ZrxMc3djpSF0Q43sgJKpsOWlC3L8cvpuLOGzR5Yv9j9nAhHLN2PlLX3l7GTvlLL0p0vcSkbPimkUU+AAycz8Q4WW5mK1yl9WL7kvehn0+cCamH7b2wA+pDkYZ9K9lat914bJNsV7iMRRcIHxjpClTdWid/4GiW5y4g483jdDU+hOr6FqOhZwgUoEcrmlY+3BDaHl6Q7SOjN4S8Yq1KLoTfAF3xxMjwXoJfMEv4TjpMmmpqFw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=fvU+4emVaOWoXWU/Y5gen1tfKdOurL2XUOUgchr6ZYY=;
+ b=oEVI1moCp8w0w5O2VYt5Pze5hz11coe3Xdytl4zDR8m2cFQ0g4Kk3ggg7hkJI6j+i/yAHURGGKmFnN1M59HeLm2YMVnzJ+GF0bWwBFsHwbwUxR6/TD4Jy9EGpnrsHwwZAUa1ufb/dWMQrjP5976vuyLh7jYKte/LKeTTrTZx/A3Xua6/PY2i8MIggp7y+Cpc+cvzEaojvfg82PONoi1YwcUK6cCGA9CGIvPogwy+3C5cmOZbZhEcBleHA4XMpEjtQgaX1xJMqvZdubhHJjZ+sv7OU0WoFxDN7EZdIm112LT6HqUf2cOFb9lhmOVymuCyULb7Z351kONx+qFgGatprQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=kernel.org smtp.mailfrom=amd.com; dmarc=pass
+ (p=quarantine sp=quarantine pct=100) action=none header.from=amd.com;
+ dkim=none (message not signed); arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=fvU+4emVaOWoXWU/Y5gen1tfKdOurL2XUOUgchr6ZYY=;
+ b=cuWXpxBd/6m0DlzfDFt3R8Q/BwvXs/XyqKhfmfcU3k58SCkFLhU2dNICXEHbJs+nMIudQWPwaJkM4pBfJ9fLSzS5atKDXIDLX7kJqP/t9YFQZR6C8RECOExKQpqq/A48taMlGvMOoCEUIMHlmqtSBngMa8mjHff0LEN7AMxfS6g=
+Received: from BN8PR03CA0030.namprd03.prod.outlook.com (2603:10b6:408:94::43)
+ by PH7PR12MB7187.namprd12.prod.outlook.com (2603:10b6:510:203::22) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6521.24; Fri, 30 Jun
+ 2023 12:37:26 +0000
+Received: from BN8NAM11FT016.eop-nam11.prod.protection.outlook.com
+ (2603:10b6:408:94:cafe::3b) by BN8PR03CA0030.outlook.office365.com
+ (2603:10b6:408:94::43) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6544.22 via Frontend
+ Transport; Fri, 30 Jun 2023 12:37:25 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
+ smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
+Received: from SATLEXMB04.amd.com (165.204.84.17) by
+ BN8NAM11FT016.mail.protection.outlook.com (10.13.176.97) with Microsoft SMTP
+ Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.20.6500.49 via Frontend Transport; Fri, 30 Jun 2023 12:37:24 +0000
+Received: from SITE-L-T34-2.amd.com (10.180.168.240) by SATLEXMB04.amd.com
+ (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.23; Fri, 30 Jun
+ 2023 07:37:23 -0500
+From:   Mario Limonciello <mario.limonciello@amd.com>
+To:     <ray.huang@amd.com>, <rafael@kernel.org>
+CC:     <linux-pm@vger.kernel.org>, <linux-doc@vger.kernel.org>,
+        <linux-kernel@vger.kernel.org>,
+        Mario Limonciello <mario.limonciello@amd.com>,
+        Wyes Karny <wyes.karny@amd.com>,
+        Perry Yuan <perry.yuan@amd.com>
+Subject: [PATCH] cpufreq: amd-pstate: Add sysfs file for base frequency
+Date:   Thu, 29 Jun 2023 08:54:54 -0500
+Message-ID: <20230629135454.177421-1-mario.limonciello@amd.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: 7bit
-X-Spam-Status: No, score=-2.1 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,SPF_HELO_NONE,SPF_PASS,
-        T_SCC_BODY_TEXT_LINE,URIBL_BLOCKED autolearn=ham autolearn_force=no
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Originating-IP: [10.180.168.240]
+X-ClientProxiedBy: SATLEXMB04.amd.com (10.181.40.145) To SATLEXMB04.amd.com
+ (10.181.40.145)
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: BN8NAM11FT016:EE_|PH7PR12MB7187:EE_
+X-MS-Office365-Filtering-Correlation-Id: a7a3fc03-5868-4ba4-411d-08db7966c1e8
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: HLYF5Mu2mlXM3IA/uVSV/sySXKywfTgnek9V4goeaf6r9GBt3jNGuIGRbMig2GP5ulnLuktHs9lJo368pd5VxU3TrMXtFAUHlpjrUksiG4iLa2JIwCxT0sme2/OvMVI5zawCGTTD1jSXW+oUslvD1BolTLQIiJF8HWpNue6rmsJAO6R9yLj4uapFurQKaTqX/K84+DZeq7C0y+tcbgaq8pHejj3Kl6m9sR/5PGLs8me4LYAE50E9b8mZZt3o1yRGLjnHIkHhxD/+O1BUSxj8afXzUjRoGji5LY8CZ5MC8hfl9nxYvBTNF1vwuL2dCCeUl+5Ys/dMQL8TzI28kOyl1y/1oLjTi7l1lZehFJ16KY4x7KpqGYJyqAkjLIYs4Rdwl0ljdQ9RuwytIOgT96zawc1CGy4/3BLoy3VIiLMytpje09ETN9H6nVr9q72U79bjv5ODoezOWFtx09hVO5QzMbpFo7oulX6Wgih500JtEExGq58Wz46Mi8eppI9GL+fSl1rV5jvCte+WbOsKFJLnbDLTJLtkwgq7uxJPpjBzTJ6A2ySVbM0uPgfmv5HnOvG8cxjggNi4z/UNSG4ChXBYV2uRNtEjvtKfHN6D0UFVB2eLDhglyS8vaDfHOjNo6PlCHPnBdG97+Iklc8zdVkGHIud9rLywXdANNZNnprWFUSNbaIng+HS2SqTlcpETAfMO+QyMjfPa3v9geeAzvxv5vMregPO538IGt9fQhV1l8ZIUAwKsYZeq+fDaWouGS4s2XYSVmxRxJjt6DPkA+I/p1dRRMoZllrhGyiwZckLowss=
+X-Forefront-Antispam-Report: CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB04.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230028)(4636009)(396003)(376002)(136003)(346002)(39860400002)(451199021)(36840700001)(46966006)(40470700004)(82310400005)(1076003)(36860700001)(36756003)(5660300002)(44832011)(356005)(86362001)(47076005)(41300700001)(8676002)(316002)(81166007)(4326008)(70586007)(8936002)(40480700001)(82740400003)(40460700003)(70206006)(2906002)(478600001)(186003)(26005)(16526019)(2616005)(7696005)(336012)(6666004)(426003)(83380400001)(110136005)(54906003)(2101003)(36900700001);DIR:OUT;SFP:1101;
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 30 Jun 2023 12:37:24.9437
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: a7a3fc03-5868-4ba4-411d-08db7966c1e8
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[SATLEXMB04.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource: BN8NAM11FT016.eop-nam11.prod.protection.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH7PR12MB7187
+X-Spam-Status: No, score=-0.1 required=5.0 tests=BAYES_00,DATE_IN_PAST_12_24,
+        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FORGED_SPF_HELO,
+        RCVD_IN_DNSWL_NONE,RCVD_IN_MSPIKE_H2,SPF_HELO_PASS,SPF_NONE,
+        T_SCC_BODY_TEXT_LINE,URIBL_BLOCKED autolearn=no autolearn_force=no
         version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
@@ -65,32 +100,74 @@ Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Fri, 30 Jun 2023 10:02:52 +0200
-Boris Brezillon <boris.brezillon@collabora.com> wrote:
+Some applications may want to query the base frequency to tell when
+a processor is operating in boost.
 
-> In practice, I don't expect things to deadlock, because the VM resv is
-> not supposed to be taken outside the VM context and the locking order
-> is always the same (VM lock first, and then each shared BO
-> taken/released independently), but I'm not super thrilled by this
-> nested lock, and I'm wondering if we shouldn't have a pass collecting
-> locks in a drm_exec context first, and then have
-> the operations executed. IOW, something like that:
-> 
-> 	drm_exec_init(exec, DRM_EXEC_IGNORE_DUPLICATES)
-> 	drm_exec_until_all_locked(exec) {
-> 		// Dummy GEM is the dummy GEM object I use to make the VM
-> 		// participate in the locking without having to teach
-> 		// drm_exec how to deal with raw dma_resv objects.
-> 		ret = drm_exec_lock_obj(exec, vm->dummy_gem);
-> 		drm_exec_retry_on_contention(exec);
-> 		if (ret)
-> 			return ret;
-> 
-> 		// Could take the form of drm_gpuva_sm_[un]map_acquire_locks()
-> 		// helpers
+Tested-by: Wyes Karny <wyes.karny@amd.com>
+Reviewed-by: Wyes Karny <wyes.karny@amd.com>
+Co-developed-by: Perry Yuan <perry.yuan@amd.com>
+Signed-off-by: Perry Yuan <perry.yuan@amd.com>
+Signed-off-by: Mario Limonciello <mario.limonciello@amd.com>
+---
+ Documentation/admin-guide/pm/amd-pstate.rst |  4 ++++
+ drivers/cpufreq/amd-pstate.c                | 15 +++++++++++++++
+ 2 files changed, 19 insertions(+)
 
-Nevermind, I implemented a driver specific acquire_op_locks(), and it's
-fairly simple with the gpuva iter (we just have to iterate over all VAs
-covered by the operation range and call drm_exec_lock_obj() on the GEM
-attached to these VAs), so it's probably not worth providing a generic
-helper for that.
+diff --git a/Documentation/admin-guide/pm/amd-pstate.rst b/Documentation/admin-guide/pm/amd-pstate.rst
+index 1cf40f69278cd..e68267857e859 100644
+--- a/Documentation/admin-guide/pm/amd-pstate.rst
++++ b/Documentation/admin-guide/pm/amd-pstate.rst
+@@ -281,6 +281,10 @@ integer values defined between 0 to 255 when EPP feature is enabled by platform
+ firmware, if EPP feature is disabled, driver will ignore the written value
+ This attribute is read-write.
+ 
++``base_frequency``
++	Shows the base frequency of the CPU. Frequencies above this will be in the
++  ``boost`` range. This attribute is read-only.
++
+ Other performance and frequency values can be read back from
+ ``/sys/devices/system/cpu/cpuX/acpi_cppc/``, see :ref:`cppc_sysfs`.
+ 
+diff --git a/drivers/cpufreq/amd-pstate.c b/drivers/cpufreq/amd-pstate.c
+index 81fba0dcbee99..0fec66b3f7241 100644
+--- a/drivers/cpufreq/amd-pstate.c
++++ b/drivers/cpufreq/amd-pstate.c
+@@ -1037,6 +1037,19 @@ static ssize_t store_status(struct kobject *a, struct kobj_attribute *b,
+ 	return ret < 0 ? ret : count;
+ }
+ 
++static ssize_t show_base_frequency(struct cpufreq_policy *policy, char *buf)
++{
++	struct amd_cpudata *cpudata = policy->driver_data;
++	u32 nominal_freq;
++
++	nominal_freq = amd_get_nominal_freq(cpudata);
++	if (nominal_freq < 0)
++		return nominal_freq;
++
++	return sysfs_emit(buf, "%d\n", nominal_freq);
++}
++
++cpufreq_freq_attr_ro(base_frequency);
+ cpufreq_freq_attr_ro(amd_pstate_max_freq);
+ cpufreq_freq_attr_ro(amd_pstate_lowest_nonlinear_freq);
+ 
+@@ -1049,6 +1062,7 @@ static struct freq_attr *amd_pstate_attr[] = {
+ 	&amd_pstate_max_freq,
+ 	&amd_pstate_lowest_nonlinear_freq,
+ 	&amd_pstate_highest_perf,
++	&base_frequency,
+ 	NULL,
+ };
+ 
+@@ -1058,6 +1072,7 @@ static struct freq_attr *amd_pstate_epp_attr[] = {
+ 	&amd_pstate_highest_perf,
+ 	&energy_performance_preference,
+ 	&energy_performance_available_preferences,
++	&base_frequency,
+ 	NULL,
+ };
+ 
+-- 
+2.34.1
+
