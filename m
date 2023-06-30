@@ -2,123 +2,193 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id A4A897437A8
-	for <lists+linux-doc@lfdr.de>; Fri, 30 Jun 2023 10:42:49 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 0C742743799
+	for <lists+linux-doc@lfdr.de>; Fri, 30 Jun 2023 10:40:19 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S232708AbjF3Ims (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Fri, 30 Jun 2023 04:42:48 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:47496 "EHLO
+        id S232658AbjF3IkQ (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Fri, 30 Jun 2023 04:40:16 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:46586 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S232449AbjF3ImU (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Fri, 30 Jun 2023 04:42:20 -0400
-Received: from mail-lf1-x130.google.com (mail-lf1-x130.google.com [IPv6:2a00:1450:4864:20::130])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 5FFE33C0E
-        for <linux-doc@vger.kernel.org>; Fri, 30 Jun 2023 01:41:55 -0700 (PDT)
-Received: by mail-lf1-x130.google.com with SMTP id 2adb3069b0e04-4faaaa476a9so2625482e87.2
-        for <linux-doc@vger.kernel.org>; Fri, 30 Jun 2023 01:41:55 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=rivosinc-com.20221208.gappssmtp.com; s=20221208; t=1688114513; x=1690706513;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=uDd0P6Z6Y37kRPaqqHaNAC3kQrjxk6Pu8HaK2zooeKg=;
-        b=Y41VrW8/WSTU5UZ0jha3wwL0Ej0Tqd3A2qkgrwAyZodUC/Uz8mWxFXPieMXCL9Qgkc
-         aCxnf9L5pPkNT/eeVpj05gNJZy/aSu0i+l4K1alIFaVSt15uuOkO1E6tqT2Jw85snBkt
-         eBMVD67kXwSAZmYJxN6xoMJp0H+pOyoW3QN4+hUahcRJSus8PGYrRNm9+d7On6kDNC7b
-         g3jjB7S7COhraUHuWtlOaXR0UlBpzLL2bWINQ2J4KfkEAXDJXOOk2OggifnX6rcvyHeG
-         nXSybsUY3tIMMztv3/UeobmrRZ0vqFQvg+NAjIoAuQfRago5a4TDxH3y3gIH4MfF24+s
-         PliA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1688114513; x=1690706513;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=uDd0P6Z6Y37kRPaqqHaNAC3kQrjxk6Pu8HaK2zooeKg=;
-        b=FuVyj5NiuNRmM3K/7+m8a7lWnjOlEd/vL8UfT7OdKd0xVXS1D5sYfgTgDHrFzm1bu2
-         1aSsfOYVfYX/uvbrdH+g9forVvrmHIr3kuX1Lmhrxl8Ew3jKIW7IL/+DrMrWcWimPUKE
-         wCrzl7XOcHRzkwHH+JRiobnAhkDjBoEiKZgrpLV/QO696CuJW/X2SWJentQojS0O+bL1
-         Q+sXTRCHAJqliCZiwQChJM+KPt14J2MYMRSlbYBhG6aab40pQUQE9WfCR7DtNpwJBPYT
-         KjbeLyp/KHNHHBfHBu/ttTqYHRE8ueCQob6KSJN6ZLwb1NHtMoPFCZ0bMaw0RqJYQMQs
-         nODQ==
-X-Gm-Message-State: ABy/qLaH2bgOZIpmvqQV08EHq6VEId0+RS7b+TwnUiNOHXRIHacun7gE
-        UKHyoi/3D5JY1Z+jlfH5ZMQyrA==
-X-Google-Smtp-Source: APBJJlH7485mFBkMkfiINnyjXjrffdesyhHF/v8B35gqPVeTtnbEfcY+mPVgYOVbdZDlPoNQQNysmg==
-X-Received: by 2002:a19:8c19:0:b0:4f1:4cdc:ec03 with SMTP id o25-20020a198c19000000b004f14cdcec03mr1476845lfd.18.1688114513557;
-        Fri, 30 Jun 2023 01:41:53 -0700 (PDT)
-Received: from alex-rivos.ba.rivosinc.com (amontpellier-656-1-456-62.w92-145.abo.wanadoo.fr. [92.145.124.62])
-        by smtp.gmail.com with ESMTPSA id v11-20020adff68b000000b0031424950a99sm649850wrp.81.2023.06.30.01.41.52
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 30 Jun 2023 01:41:53 -0700 (PDT)
-From:   Alexandre Ghiti <alexghiti@rivosinc.com>
-To:     Jonathan Corbet <corbet@lwn.net>,
-        Peter Zijlstra <peterz@infradead.org>,
-        Ingo Molnar <mingo@redhat.com>,
-        Arnaldo Carvalho de Melo <acme@kernel.org>,
-        Mark Rutland <mark.rutland@arm.com>,
-        Alexander Shishkin <alexander.shishkin@linux.intel.com>,
-        Jiri Olsa <jolsa@kernel.org>,
-        Namhyung Kim <namhyung@kernel.org>,
-        Ian Rogers <irogers@google.com>,
-        Paul Walmsley <paul.walmsley@sifive.com>,
-        Palmer Dabbelt <palmer@dabbelt.com>,
-        Albert Ou <aou@eecs.berkeley.edu>,
-        Atish Patra <atishp@atishpatra.org>,
-        Anup Patel <anup@brainfault.org>,
-        Will Deacon <will@kernel.org>, Rob Herring <robh@kernel.org>,
-        Andrew Jones <ajones@ventanamicro.com>,
-        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
-        linux-perf-users@vger.kernel.org, linux-riscv@lists.infradead.org,
-        linux-arm-kernel@lists.infradead.org
-Cc:     Alexandre Ghiti <alexghiti@rivosinc.com>
-Subject: [PATCH v3 10/10] perf: tests: Adapt mmap-basic.c for riscv
-Date:   Fri, 30 Jun 2023 10:30:13 +0200
-Message-Id: <20230630083013.102334-11-alexghiti@rivosinc.com>
-X-Mailer: git-send-email 2.39.2
-In-Reply-To: <20230630083013.102334-1-alexghiti@rivosinc.com>
-References: <20230630083013.102334-1-alexghiti@rivosinc.com>
+        with ESMTP id S232712AbjF3IkC (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Fri, 30 Jun 2023 04:40:02 -0400
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 7CF381BDB;
+        Fri, 30 Jun 2023 01:40:00 -0700 (PDT)
+Received: from pps.filterd (m0279867.ppops.net [127.0.0.1])
+        by mx0a-0031df01.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id 35U6avW6032179;
+        Fri, 30 Jun 2023 08:39:27 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=quicinc.com; h=date : from : to :
+ cc : subject : message-id : references : mime-version : content-type :
+ in-reply-to; s=qcppdkim1; bh=EVK7wrH/nairRxefhzxNFPVusChusvF2s4IQ96xpqQo=;
+ b=Tkr8gLQbHNb9AMhyMbw8GFuuNbLL7NrTntar+prm/+dlR6G9XkS5eBf/RjhpK6FoDVTR
+ SlQGXzulhQM49S4oaYWnl9+Abhr1afCvL0dqrXp1QpxxOtXH7tBbAITHSulj4593PMva
+ zyXqNKSakZmp3o7QRGA3T3Xr8LiLNQ+vKwW5wa6NH5NV9LPEcv2R8o4E9xjil6pS04+r
+ 5VbzQNWDxo04EvKLU/KQJajP/wSrSSygVbjHMO6bsEiuv00cdJMtNvTfJsRpE45etPuh
+ 2wPGKMw5eekmrjeZaze8RUV0GfHho3LOgms5+deSd0DWnBJqcif8Thct+dZQCyinInCz FQ== 
+Received: from nalasppmta04.qualcomm.com (Global_NAT1.qualcomm.com [129.46.96.20])
+        by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 3rha8e2534-1
+        (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+        Fri, 30 Jun 2023 08:39:27 +0000
+Received: from nalasex01a.na.qualcomm.com (nalasex01a.na.qualcomm.com [10.47.209.196])
+        by NALASPPMTA04.qualcomm.com (8.17.1.5/8.17.1.5) with ESMTPS id 35U8d6FZ029555
+        (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+        Fri, 30 Jun 2023 08:39:06 GMT
+Received: from hu-pkondeti-hyd.qualcomm.com (10.80.80.8) by
+ nalasex01a.na.qualcomm.com (10.47.209.196) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.1118.7; Fri, 30 Jun 2023 01:38:58 -0700
+Date:   Fri, 30 Jun 2023 14:08:54 +0530
+From:   Pavan Kondeti <quic_pkondeti@quicinc.com>
+To:     Mukesh Ojha <quic_mojha@quicinc.com>
+CC:     Pavan Kondeti <quic_pkondeti@quicinc.com>, <corbet@lwn.net>,
+        <agross@kernel.org>, <andersson@kernel.org>,
+        <konrad.dybcio@linaro.org>, <robh+dt@kernel.org>,
+        <krzysztof.kozlowski+dt@linaro.org>, <conor+dt@kernel.org>,
+        <keescook@chromium.org>, <tony.luck@intel.com>,
+        <gpiccoli@igalia.com>, <mathieu.poirier@linaro.org>,
+        <catalin.marinas@arm.com>, <will@kernel.org>,
+        <linus.walleij@linaro.org>, <andy.shevchenko@gmail.com>,
+        <linux-doc@vger.kernel.org>, <linux-kernel@vger.kernel.org>,
+        <linux-arm-msm@vger.kernel.org>, <devicetree@vger.kernel.org>,
+        <linux-hardening@vger.kernel.org>,
+        <linux-remoteproc@vger.kernel.org>,
+        <linux-arm-kernel@lists.infradead.org>,
+        <linux-gpio@vger.kernel.org>
+Subject: Re: [PATCH v4 04/21] soc: qcom: Add Qualcomm APSS minidump
+ (frontend) feature support
+Message-ID: <b0b78da5-eec6-4bcc-9eaf-8149e2477f18@quicinc.com>
+References: <1687955688-20809-1-git-send-email-quic_mojha@quicinc.com>
+ <1687955688-20809-5-git-send-email-quic_mojha@quicinc.com>
+ <8f00beed-f07b-43b6-820e-87af719598c6@quicinc.com>
+ <774b0432-a78f-1aec-a31a-51067e33154f@quicinc.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-        DKIM_VALID,RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,SPF_PASS,
-        T_SCC_BODY_TEXT_LINE autolearn=unavailable autolearn_force=no
-        version=3.4.6
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
+In-Reply-To: <774b0432-a78f-1aec-a31a-51067e33154f@quicinc.com>
+X-Originating-IP: [10.80.80.8]
+X-ClientProxiedBy: nasanex01a.na.qualcomm.com (10.52.223.231) To
+ nalasex01a.na.qualcomm.com (10.47.209.196)
+X-QCInternal: smtphost
+X-Proofpoint-Virus-Version: vendor=nai engine=6200 definitions=5800 signatures=585085
+X-Proofpoint-GUID: tMYjS84mXq3GeG-H7WpbMOj0EGPoVrHG
+X-Proofpoint-ORIG-GUID: tMYjS84mXq3GeG-H7WpbMOj0EGPoVrHG
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.254,Aquarius:18.0.957,Hydra:6.0.591,FMLib:17.11.176.26
+ definitions=2023-06-30_05,2023-06-30_01,2023-05-22_02
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 bulkscore=0 phishscore=0
+ mlxlogscore=999 clxscore=1015 impostorscore=0 priorityscore=1501
+ spamscore=0 mlxscore=0 malwarescore=0 suspectscore=0 adultscore=0
+ lowpriorityscore=0 classifier=spam adjust=0 reason=mlx scancount=1
+ engine=8.12.0-2305260000 definitions=main-2306300072
+X-Spam-Status: No, score=-2.8 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_LOW,SPF_HELO_NONE,
+        SPF_PASS,T_SCC_BODY_TEXT_LINE,URIBL_BLOCKED autolearn=ham
+        autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-riscv now supports mmaping hardware counters to userspace so adapt the test
-to run on this architecture.
+On Fri, Jun 30, 2023 at 12:45:13PM +0530, Mukesh Ojha wrote:
+> > > +/**
+> > > + * qcom_minidump_region_register() - Register region in APSS Minidump table.
+> > > + * @region: minidump region.
+> > > + *
+> > > + * Return: On success, it returns 0 and negative error value on failure.
+> > > + */
+> > 
+> > Are we not going to return any cookie upon success which can be passed
+> > to us during unregistration?
+> 
+> e.g, Let's just say if we return the region number as an cookies, the
+> problem i see that, we multiple unregistration is happening we will
+> be shifting the array upwards and that results in the index/cookies does
+> not retain the same for the shifted regions.
+> 
+> So, at the moment, client need to pass the same region for un-registration
+> as they have passed for registration..
+> 
 
-Signed-off-by: Alexandre Ghiti <alexghiti@rivosinc.com>
-Reviewed-by: Andrew Jones <ajones@ventanamicro.com>
----
- tools/perf/tests/mmap-basic.c | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+From a driver user pov, there is no reason for keeping
+qcom_minidump_region struct around after the registration, agree?
+However, the unregistration API expects it again, so the driver needs to
+cache it. The region is no way being used by the minidump core either..so it is
+just there for no reason. Hence I asked this question.
 
-diff --git a/tools/perf/tests/mmap-basic.c b/tools/perf/tests/mmap-basic.c
-index e68ca6229756..f5075ca774f8 100644
---- a/tools/perf/tests/mmap-basic.c
-+++ b/tools/perf/tests/mmap-basic.c
-@@ -284,7 +284,7 @@ static struct test_case tests__basic_mmap[] = {
- 			 "permissions"),
- 	TEST_CASE_REASON("User space counter reading of instructions",
- 			 mmap_user_read_instr,
--#if defined(__i386__) || defined(__x86_64__) || defined(__aarch64__)
-+#if defined(__i386__) || defined(__x86_64__) || defined(__aarch64__) || __riscv_xlen == 64
- 			 "permissions"
- #else
- 			 "unsupported"
-@@ -292,7 +292,7 @@ static struct test_case tests__basic_mmap[] = {
- 		),
- 	TEST_CASE_REASON("User space counter reading of cycles",
- 			 mmap_user_read_cycles,
--#if defined(__i386__) || defined(__x86_64__) || defined(__aarch64__)
-+#if defined(__i386__) || defined(__x86_64__) || defined(__aarch64__) || __riscv_xlen == 64
- 			 "permissions"
- #else
- 			 "unsupported"
--- 
-2.39.2
+Thanks for the explanation about why the region number can't be used as
+cookie. Is it a limitation on the firmware that we need to left shift
+all regions when a region is deleted? I ask this because
+minidump_region::valid is avaialble for Linux to mark a lazy deletion.
+Sure your look up would have to traverse the entire array in worst case,
+but today also you are doing that for duplicate name check.
+If this lazy deletion can be implemented, the region number can be used
+a cookie, right?
 
+> > 
+> > > +int qcom_minidump_region_register(const struct qcom_minidump_region *region)
+> > > +{
+> > > +	int ret;
+> > > +
+> > > +	if (!qcom_minidump_valid_region(region))
+> > > +		return -EINVAL;
+> > > +
+> > > +	mutex_lock(&md_lock);
+> > > +	if (!md) {
+> > > +		mutex_unlock(&md_lock);
+> > > +		pr_err("No backend registered yet, try again..");
+> > > +		return -EPROBE_DEFER;
+> > > +	}
+> > > +
+> > > +	ret = md->ops->md_region_register(md, region);
+> > > +	if (ret)
+> > > +		goto unlock;
+> > > +
+> > 
+> > The md_lock description in the beginning does not seems to be correct.
+> > It is not limited to backend registration. It has much wider usage.
+> > 
+> > You are holding the lock while calling into backend. Basically the
+> > synchronization is done in the front end.
+> 
+> Initially, the thought was to have the backend their own lock but that
+> is irrelevant as all the contention is there in the front end.
+> 
+> So, used the same lock for synchronization as i moved in developement
+> and the later that comment became obsolete.
+> 
+> Thanks for catching this.
+> will fix the comment.
+> 
+
+Sure
+
+> > 
+> > > +	qcom_md_update_elf_header(region);
+> > > +unlock:
+> > > +	mutex_unlock(&md_lock);
+> > > +	return ret;
+> > > +}
+> > > +EXPORT_SYMBOL_GPL(qcom_minidump_region_register);
+> 
+> > 
+> > > +	ret = qcom_minidump_clear_header(region);
+> > > +unlock:
+> > > +	mutex_unlock(&md_lock);
+> > > +	return ret;
+> > > +}
+> > > +EXPORT_SYMBOL_GPL(qcom_minidump_region_unregister);
+> > 
+> > can we create a namespace for exporting these symbols?
+> 
+> Any specific reason, you are suggesting this ?
+> 
+
+My original intention was to mark qcom_minidump_backend_register()
+and qcom_minidump_backend_unregister() under a namespace. Because these
+are not meant for any drivers but only for minidump backend. That serves
+as a clear documentation that minidump implementation is spanned across
+this frontend and backend modules.
+
+Thanks,
+Pavan
