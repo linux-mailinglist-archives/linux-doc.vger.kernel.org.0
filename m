@@ -2,133 +2,158 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id A90C7743E44
-	for <lists+linux-doc@lfdr.de>; Fri, 30 Jun 2023 17:06:34 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id A64C2743E08
+	for <lists+linux-doc@lfdr.de>; Fri, 30 Jun 2023 16:58:38 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S229945AbjF3PGc (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Fri, 30 Jun 2023 11:06:32 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:59030 "EHLO
+        id S232837AbjF3O6g (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Fri, 30 Jun 2023 10:58:36 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:54294 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S232931AbjF3PG3 (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Fri, 30 Jun 2023 11:06:29 -0400
-Received: from mo4-p01-ob.smtp.rzone.de (unknown [81.169.146.166])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 9C04E3C14;
-        Fri, 30 Jun 2023 08:06:19 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1688136804; cv=none;
-    d=strato.com; s=strato-dkim-0002;
-    b=ktQWRloAJVcbtfzrwy7QVJMfZYy4BWWVjmUnPf5NL47XUIoo2h2XF5m496FyVmK59f
-    Jure2X4x2FXITqAPDvytbcGH/plEu0Ir1NS59iS6xm4CYzAFLvY0YXxXdAXgEMD5juCK
-    PLrfx5/wpjEajxzFuEbmd4FnaVdyI4OXDrDqgSQtV1VHeJrqpvhPEvjHvwegTlcG+674
-    cZCcEQJwWuqowQPaiatkm1mIpkqkt67MQGuKt8XDSNOebpyK2CokqgzJ+47LAGskQlZl
-    Ap3eT1iZ/63HV+Kd/I0ZgMMiDRSuU5eLUlLzn5XlUp44nvseCfYudELwf60T6YMFJFR3
-    hlag==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; t=1688136804;
-    s=strato-dkim-0002; d=strato.com;
-    h=Message-Id:Date:Subject:Cc:To:From:Cc:Date:From:Subject:Sender;
-    bh=3v9FwKwabXm3VhIGPqHolyELPsxinvnAmxZlzv2LbiI=;
-    b=sMGy9vkeo4NgzYHgfB0DQFmQqVMbUEs7H2EoBi9KokQIPmhvbogESQxzHlzvV7Yyat
-    z4LNi/ZuvybenLmXsXId/aow0xq4QPXIm8ctX9/ClEOjy0568svuJVZ6uAtHMpZuft+J
-    oHWTfEMG5TyvNd5Qg5X8UG8agVi7PJpphXhdR0N/2g2jeQHn3HhItS6UruFB3zGQeV5a
-    FqNgBj9bVl5GMxWovb3iBcteo9LHcJv890aeg/ZCie0IjJxgO6W9oUH2iW2yDNIW0dbM
-    lh7s6ECZCvhJVSf2p4qRJXk2vKH0+jII4LXuKDffzq1fGmf3Dy70waa93ljo9z3VfNzJ
-    K0/A==
-ARC-Authentication-Results: i=1; strato.com;
-    arc=none;
-    dkim=none
-X-RZG-CLASS-ID: mo01
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; t=1688136804;
-    s=strato-dkim-0002; d=aepfle.de;
-    h=Message-Id:Date:Subject:Cc:To:From:Cc:Date:From:Subject:Sender;
-    bh=3v9FwKwabXm3VhIGPqHolyELPsxinvnAmxZlzv2LbiI=;
-    b=XSuY7hhtLS79JwyA0oJpta5/cIWvSuU1nviL381DYHGxEyGJ4WIsKEm6wF14LU0aIW
-    o33SoVm5T19ssaE+7fXvXsY2ZgSW+HyNN/yEl01exvzsD4myOYzaY7mwJQzMctROmuUz
-    VJrD7vZCJdgR8gN+9Jutem9t1zM/LqqNX6sFQykL+qmVDbxW898b8dx1j82xBxScZr+7
-    IqV0sbEJt2q3ponqcHiknFIk8Fk99xvfkDldewrTB1ahTWDhJNy0yLK0qNEWiymny60M
-    BzeR0FJNCWhtmqcWeaXb8WgLZ63zxXWZztfG9vqCKTxKKRzpUAbmucPeOQdgPdxjzd98
-    EJ4w==
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; t=1688136804;
-    s=strato-dkim-0003; d=aepfle.de;
-    h=Message-Id:Date:Subject:Cc:To:From:Cc:Date:From:Subject:Sender;
-    bh=3v9FwKwabXm3VhIGPqHolyELPsxinvnAmxZlzv2LbiI=;
-    b=F7Gp3a1EBO67LR5zgQEvd/wQ/xgdvjrUUG7VhAM/OOv6ZMCH6AdEZs9KlNJ3YQvGVi
-    6eCAwGpbjiBJbIExRaCA==
-X-RZG-AUTH: ":P2EQZWCpfu+qG7CngxMFH1J+3q8wa/QXkBR9MXjAuzpIG0mv9coXAg4x+1/7Qcst+v+6egNSCv2nSejLpXdlt4RWwKmQOQ=="
-Received: from sender
-    by smtp.strato.de (RZmta 49.6.0 AUTH)
-    with ESMTPSA id y5401az5UErNzMj
-        (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256 bits))
-        (Client did not present a certificate);
-    Fri, 30 Jun 2023 16:53:23 +0200 (CEST)
-From:   Olaf Hering <olaf@aepfle.de>
-To:     Jonathan Corbet <corbet@lwn.net>,
-        "Paul E. McKenney" <paulmck@kernel.org>,
-        Andrew Morton <akpm@linux-foundation.org>,
-        Randy Dunlap <rdunlap@infradead.org>,
-        Catalin Marinas <catalin.marinas@arm.com>,
-        "Steven Rostedt (Google)" <rostedt@goodmis.org>,
-        Kim Phillips <kim.phillips@amd.com>,
-        Wyes Karny <wyes.karny@amd.com>,
-        Tiezhu Yang <yangtiezhu@loongson.cn>,
-        Prarit Bhargava <prarit@redhat.com>,
-        Yasuaki Ishimatsu <isimatu.yasuaki@jp.fujitsu.com>,
-        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
-        rcu@vger.kernel.org, linux-kselftest@vger.kernel.org
-Cc:     Josh Triplett <josh@joshtriplett.org>,
-        Mathieu Desnoyers <mathieu.desnoyers@efficios.com>,
-        Lai Jiangshan <jiangshanlai@gmail.com>,
-        Shuah Khan <shuah@kernel.org>
-Subject: [PATCH v1] Fix documentation of panic_on_warn
-Date:   Fri, 30 Jun 2023 16:53:02 +0200
-Message-Id: <20230630145307.25865-1-olaf@aepfle.de>
-X-Mailer: git-send-email 2.35.3
+        with ESMTP id S232823AbjF3O6a (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Fri, 30 Jun 2023 10:58:30 -0400
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id DD4B81FFA;
+        Fri, 30 Jun 2023 07:58:28 -0700 (PDT)
+Received: from pps.filterd (m0279863.ppops.net [127.0.0.1])
+        by mx0a-0031df01.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id 35UDxH1M024499;
+        Fri, 30 Jun 2023 14:58:07 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=quicinc.com; h=message-id : date :
+ mime-version : subject : to : cc : references : from : in-reply-to :
+ content-type : content-transfer-encoding; s=qcppdkim1;
+ bh=FWsoqs5iDUcCdUn2UKhCC9bwPd9A9e7CbTu4kW+ZpB8=;
+ b=fnmyUWxzzm79znoy8gnBpmXrs3gJhJSXo1UOKD1tZETinx1Ma/+OQH5xFCsuZeMKa3U2
+ lsbATJRcBgbH5IKztfChCgwFtt4FzEehkpFhUBEbM3su+EvQfSW+bwquruzksSQwGth9
+ 5VD+2JC7Fco1kHux2tLE45WUTMAes2EwQ5o9bhvwFNkDwcTngE1vbkPw+0zhV1vNdL0G
+ LEi7nXHToSomg04GA+Z2fTN4VDxtNlHfuCdIO11a7T1IY99SCpm8oydCdOciy2rKIO0V
+ bP+NjZQebj1KwBaAX4S8iYDONyrL3MS3oEwQE2uWj5Px9wIljdjiDFi+r6bdUhf5PxJE AA== 
+Received: from nasanppmta02.qualcomm.com (i-global254.qualcomm.com [199.106.103.254])
+        by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 3rgy1tm5kt-1
+        (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+        Fri, 30 Jun 2023 14:58:06 +0000
+Received: from nasanex01c.na.qualcomm.com (nasanex01c.na.qualcomm.com [10.45.79.139])
+        by NASANPPMTA02.qualcomm.com (8.17.1.5/8.17.1.5) with ESMTPS id 35UEw5n2006969
+        (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+        Fri, 30 Jun 2023 14:58:05 GMT
+Received: from [10.216.37.216] (10.80.80.8) by nasanex01c.na.qualcomm.com
+ (10.45.79.139) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.986.42; Fri, 30 Jun
+ 2023 07:57:57 -0700
+Message-ID: <b13c8010-c7bb-db21-44c5-06e95b341b7c@quicinc.com>
+Date:   Fri, 30 Jun 2023 20:27:53 +0530
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain; charset="us-ascii"
-X-Spam-Status: No, score=-2.8 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_LOW,
-        RCVD_IN_MSPIKE_H3,RCVD_IN_MSPIKE_WL,SPF_HELO_PASS,SPF_NONE,
-        T_SCC_BODY_TEXT_LINE,URIBL_BLOCKED autolearn=ham autolearn_force=no
-        version=3.4.6
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
+ Thunderbird/102.10.0
+Subject: Re: [PATCH v4 19/21] firmware: scm: Modify only the download bits in
+ TCSR register
+Content-Language: en-US
+To:     Konrad Dybcio <konrad.dybcio@linaro.org>, <corbet@lwn.net>,
+        <agross@kernel.org>, <andersson@kernel.org>, <robh+dt@kernel.org>,
+        <krzysztof.kozlowski+dt@linaro.org>, <conor+dt@kernel.org>,
+        <keescook@chromium.org>, <tony.luck@intel.com>,
+        <gpiccoli@igalia.com>, <mathieu.poirier@linaro.org>,
+        <catalin.marinas@arm.com>, <will@kernel.org>,
+        <linus.walleij@linaro.org>, <andy.shevchenko@gmail.com>
+CC:     <linux-doc@vger.kernel.org>, <linux-kernel@vger.kernel.org>,
+        <linux-arm-msm@vger.kernel.org>, <devicetree@vger.kernel.org>,
+        <linux-hardening@vger.kernel.org>,
+        <linux-remoteproc@vger.kernel.org>,
+        <linux-arm-kernel@lists.infradead.org>,
+        <linux-gpio@vger.kernel.org>
+References: <1687955688-20809-1-git-send-email-quic_mojha@quicinc.com>
+ <1687955688-20809-20-git-send-email-quic_mojha@quicinc.com>
+ <d5c5671f-b6a8-9e97-f917-784dffed7f90@linaro.org>
+From:   Mukesh Ojha <quic_mojha@quicinc.com>
+In-Reply-To: <d5c5671f-b6a8-9e97-f917-784dffed7f90@linaro.org>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 7bit
+X-Originating-IP: [10.80.80.8]
+X-ClientProxiedBy: nasanex01a.na.qualcomm.com (10.52.223.231) To
+ nasanex01c.na.qualcomm.com (10.45.79.139)
+X-QCInternal: smtphost
+X-Proofpoint-Virus-Version: vendor=nai engine=6200 definitions=5800 signatures=585085
+X-Proofpoint-ORIG-GUID: LpiivA6ciBvOOGo7KcK_y1r3YaR7Kbj7
+X-Proofpoint-GUID: LpiivA6ciBvOOGo7KcK_y1r3YaR7Kbj7
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.254,Aquarius:18.0.957,Hydra:6.0.591,FMLib:17.11.176.26
+ definitions=2023-06-30_05,2023-06-30_01,2023-05-22_02
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 suspectscore=0 phishscore=0
+ impostorscore=0 mlxlogscore=999 mlxscore=0 malwarescore=0
+ lowpriorityscore=0 clxscore=1015 adultscore=0 priorityscore=1501
+ bulkscore=0 spamscore=0 classifier=spam adjust=0 reason=mlx scancount=1
+ engine=8.12.0-2305260000 definitions=main-2306300126
+X-Spam-Status: No, score=-2.9 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,NICE_REPLY_A,RCVD_IN_DNSWL_LOW,
+        SPF_HELO_NONE,SPF_PASS,T_SCC_BODY_TEXT_LINE,URIBL_BLOCKED
+        autolearn=ham autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-The kernel cmdline option panic_on_warn expects an integer, it is not a
-plain option as documented. A number of uses in the tree figured this
-already, and use panic_on_warn=1 for their purpose.
 
-Adjust a comment which otherwise may mislead people in the future.
 
-Fixes: 9e3961a097 ("kernel: add panic_on_warn")
+On 6/28/2023 8:50 PM, Konrad Dybcio wrote:
+> On 28.06.2023 14:34, Mukesh Ojha wrote:
+>> CrashDump collection is based on the DLOAD bit of TCSR register.
+>> To retain other bits, we read the register and modify only the
+>> DLOAD bit as the other bits have their own significance.
+>>
+>> Co-developed-by: Poovendhan Selvaraj <quic_poovendh@quicinc.com>
+>> Signed-off-by: Mukesh Ojha <quic_mojha@quicinc.com>
+>> ---
+>>   drivers/firmware/qcom_scm.c | 12 ++++++++++--
+>>   1 file changed, 10 insertions(+), 2 deletions(-)
+>>
+>> diff --git a/drivers/firmware/qcom_scm.c b/drivers/firmware/qcom_scm.c
+>> index 104d86e49b97..a9ff77d16c42 100644
+>> --- a/drivers/firmware/qcom_scm.c
+>> +++ b/drivers/firmware/qcom_scm.c
+>> @@ -30,6 +30,11 @@ module_param(download_mode, bool, 0);
+>>   #define SCM_HAS_IFACE_CLK	BIT(1)
+>>   #define SCM_HAS_BUS_CLK		BIT(2)
+>>   
+>> +#define QCOM_DOWNLOAD_FULLDUMP		 0x1
+>> +#define QCOM_DOWNLOAD_NODUMP		 0x0
+>> +#define QCOM_DOWNLOAD_MODE_SHIFT	   4
+>> +#define QCOM_DOWNLOAD_MODE_MASK		0x30
+> GENMASK and then FIELD_PREP below?
 
-Signed-off-by: Olaf Hering <olaf@aepfle.de>
----
- Documentation/admin-guide/kernel-parameters.txt | 2 +-
- tools/testing/selftests/rcutorture/bin/kvm.sh   | 2 +-
- 2 files changed, 2 insertions(+), 2 deletions(-)
+Just checked about FIELD_PREP, it works, thanks.
 
-diff --git a/Documentation/admin-guide/kernel-parameters.txt b/Documentation/admin-guide/kernel-parameters.txt
-index 9e5bab29685f..15196f84df49 100644
---- a/Documentation/admin-guide/kernel-parameters.txt
-+++ b/Documentation/admin-guide/kernel-parameters.txt
-@@ -4049,7 +4049,7 @@
- 			extra details on the taint flags that users can pick
- 			to compose the bitmask to assign to panic_on_taint.
- 
--	panic_on_warn	panic() instead of WARN().  Useful to cause kdump
-+	panic_on_warn=1	panic() instead of WARN().  Useful to cause kdump
- 			on a WARN().
- 
- 	parkbd.port=	[HW] Parallel port number the keyboard adapter is
-diff --git a/tools/testing/selftests/rcutorture/bin/kvm.sh b/tools/testing/selftests/rcutorture/bin/kvm.sh
-index 62f3b0f56e4d..d3cdc2d33d4b 100755
---- a/tools/testing/selftests/rcutorture/bin/kvm.sh
-+++ b/tools/testing/selftests/rcutorture/bin/kvm.sh
-@@ -655,4 +655,4 @@ fi
- # Control buffer size: --bootargs trace_buf_size=3k
- # Get trace-buffer dumps on all oopses: --bootargs ftrace_dump_on_oops
- # Ditto, but dump only the oopsing CPU: --bootargs ftrace_dump_on_oops=orig_cpu
--# Heavy-handed way to also dump on warnings: --bootargs panic_on_warn
-+# Heavy-handed way to also dump on warnings: --bootargs panic_on_warn=1
+FIELD_PREP(GENMASK(5, 4), QCOM_DOWNLOAD_FULLDUMP)
+FIELD_PREP(GENMASK(5, 4), QCOM_DOWNLOAD_NODUMP)
+
+-Mukesh
+
+> 
+>> +
+>>   struct qcom_scm {
+>>   	struct device *dev;
+>>   	struct clk *core_clk;
+>> @@ -440,6 +445,7 @@ static int __qcom_scm_set_dload_mode(struct device *dev, bool enable)
+>>   static void qcom_scm_set_download_mode(bool enable)
+>>   {
+>>   	bool avail;
+>> +	int val;
+> What's wrong with initializing it in the same line as ret?
+> 
+>>   	int ret = 0;
+>>   
+>>   	avail = __qcom_scm_is_call_available(__scm->dev,
+>> @@ -448,8 +454,10 @@ static void qcom_scm_set_download_mode(bool enable)
+>>   	if (avail) {
+>>   		ret = __qcom_scm_set_dload_mode(__scm->dev, enable);
+>>   	} else if (__scm->dload_mode_addr) {
+>> -		ret = qcom_scm_io_writel(__scm->dload_mode_addr,
+>> -				enable ? QCOM_SCM_BOOT_SET_DLOAD_MODE : 0);
+>> +		val = (enable ? QCOM_DOWNLOAD_FULLDUMP : QCOM_DOWNLOAD_NODUMP);
+> unnecessary braces
+> 
+> Konrad
+>> +		val <<= QCOM_DOWNLOAD_MODE_SHIFT;
+>> +		ret = qcom_scm_io_update_field(__scm->dload_mode_addr,
+>> +				QCOM_DOWNLOAD_MODE_MASK, val);
+>>   	} else {
+>>   		dev_err(__scm->dev,
+>>   			"No available mechanism for setting download mode\n");
