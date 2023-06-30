@@ -2,113 +2,91 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id D6CB4743CFD
-	for <lists+linux-doc@lfdr.de>; Fri, 30 Jun 2023 15:50:21 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id A90C7743E44
+	for <lists+linux-doc@lfdr.de>; Fri, 30 Jun 2023 17:06:34 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S231617AbjF3NuU (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Fri, 30 Jun 2023 09:50:20 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:57234 "EHLO
+        id S229945AbjF3PGc (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Fri, 30 Jun 2023 11:06:32 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:59030 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S229522AbjF3NuS (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Fri, 30 Jun 2023 09:50:18 -0400
-Received: from NAM10-MW2-obe.outbound.protection.outlook.com (mail-mw2nam10on2133.outbound.protection.outlook.com [40.107.94.133])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id AA94F30C5;
-        Fri, 30 Jun 2023 06:50:17 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=hx+kzsZNHJTMgUBGoFVO3aG0clNYSJru+RMzvPLBS1vq5OAKwPzZyFNZPJGqVWfIBFGnu0DdnRH7hgXPvMsEuhEusp268d05iYqF8I4F87nfcveWpZ4WckYHQJoqgxlnq419s9RR5EEgjRPy9n5heMBvHR8RJVHhEsasmEZDZMMMI92y3Tyi4PbIEZFf9M163oqdLv+5HHcSrFzTWm7Umz3SfrAl/pt8+OktbvZorrPR9hwxHIkHu01xN2dedUREPDsnb6mabpv93smuNXO2G+j4h2rjdm5KYFdLA0u487KtjTRRFfmcv8xu/OAOEYCHDk6UO5zvZyxD8eBmotRpAw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=Am4wSfgaSMibiFBpj4ClLlfhlxQ3cK4gIn7w+f5wx3M=;
- b=McnrfrMK+M7Ixt0haC4faD+My/KpM2sK+EXGRENMldXyd2+enq2LJ2Jb8SNLXdaKmQUCLEeYiyOp6X/v7tPE5hRSmdMGn8cRPHva3FDqM3yBbGHmH9OkJClOApupQ+eHIkQcipoPu3IhyqRzUojyVzEhF83vYWlGAXVWMPFpHKRrBf5kTsaPb/f+DfTOMvjh/OcF2t+wX51EAquzr1xRzBGLHE6iGjnasu0uC9FlmglZMWr6aPENSaJtRyWnfEHziVO1yWmtEX4SJZjfgFq0mtC2ga9cN/u3f9DXQG3vrHTH34z+BKkF2N/1RAt+vVPI54V6fffTlFo1aEQGihYpiw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=corigine.com; dmarc=pass action=none header.from=corigine.com;
- dkim=pass header.d=corigine.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=corigine.onmicrosoft.com; s=selector2-corigine-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=Am4wSfgaSMibiFBpj4ClLlfhlxQ3cK4gIn7w+f5wx3M=;
- b=QaNZRLadMofefdwmvWrqsqD2l5VsCcLhqG0eWuiecq/UVwfxdNHT9GFa6/pG1iBq2HuzRZ2xUsJ46cpiiYuT15zf05eIBAtf/Foj7c+BmnGXuVoNKhVJwNJs1eG2eN3hy/X/O8s7zlYOBBiAvaZofwMehWiKLTQjMXK9M2nP1Nc=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=corigine.com;
-Received: from PH0PR13MB4842.namprd13.prod.outlook.com (2603:10b6:510:78::6)
- by SA1PR13MB4928.namprd13.prod.outlook.com (2603:10b6:806:1a8::11) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6544.19; Fri, 30 Jun
- 2023 13:50:15 +0000
-Received: from PH0PR13MB4842.namprd13.prod.outlook.com
- ([fe80::eb8f:e482:76e0:fe6e]) by PH0PR13MB4842.namprd13.prod.outlook.com
- ([fe80::eb8f:e482:76e0:fe6e%5]) with mapi id 15.20.6544.019; Fri, 30 Jun 2023
- 13:50:15 +0000
-Date:   Fri, 30 Jun 2023 15:50:09 +0200
-From:   Simon Horman <simon.horman@corigine.com>
-To:     Subash Abhinov Kasiviswanathan <quic_subashab@quicinc.com>
-Cc:     davem@davemloft.net, edumazet@google.com, kuba@kernel.org,
-        pabeni@redhat.com, corbet@lwn.net, netdev@vger.kernel.org,
-        linux-doc@vger.kernel.org, andersson@kernel.org,
-        quic_jhugo@quicinc.com, Sean Tranchetti <quic_stranche@quicinc.com>
-Subject: Re: [PATCH net v2] docs: networking: Update codeaurora references
- for rmnet
-Message-ID: <ZJ7dkT6UpVmNR/vC@corigine.com>
-References: <1688108686-16363-1-git-send-email-quic_subashab@quicinc.com>
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <1688108686-16363-1-git-send-email-quic_subashab@quicinc.com>
-X-ClientProxiedBy: AS4P190CA0047.EURP190.PROD.OUTLOOK.COM
- (2603:10a6:20b:656::11) To PH0PR13MB4842.namprd13.prod.outlook.com
- (2603:10b6:510:78::6)
+        with ESMTP id S232931AbjF3PG3 (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Fri, 30 Jun 2023 11:06:29 -0400
+Received: from mo4-p01-ob.smtp.rzone.de (unknown [81.169.146.166])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 9C04E3C14;
+        Fri, 30 Jun 2023 08:06:19 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1688136804; cv=none;
+    d=strato.com; s=strato-dkim-0002;
+    b=ktQWRloAJVcbtfzrwy7QVJMfZYy4BWWVjmUnPf5NL47XUIoo2h2XF5m496FyVmK59f
+    Jure2X4x2FXITqAPDvytbcGH/plEu0Ir1NS59iS6xm4CYzAFLvY0YXxXdAXgEMD5juCK
+    PLrfx5/wpjEajxzFuEbmd4FnaVdyI4OXDrDqgSQtV1VHeJrqpvhPEvjHvwegTlcG+674
+    cZCcEQJwWuqowQPaiatkm1mIpkqkt67MQGuKt8XDSNOebpyK2CokqgzJ+47LAGskQlZl
+    Ap3eT1iZ/63HV+Kd/I0ZgMMiDRSuU5eLUlLzn5XlUp44nvseCfYudELwf60T6YMFJFR3
+    hlag==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; t=1688136804;
+    s=strato-dkim-0002; d=strato.com;
+    h=Message-Id:Date:Subject:Cc:To:From:Cc:Date:From:Subject:Sender;
+    bh=3v9FwKwabXm3VhIGPqHolyELPsxinvnAmxZlzv2LbiI=;
+    b=sMGy9vkeo4NgzYHgfB0DQFmQqVMbUEs7H2EoBi9KokQIPmhvbogESQxzHlzvV7Yyat
+    z4LNi/ZuvybenLmXsXId/aow0xq4QPXIm8ctX9/ClEOjy0568svuJVZ6uAtHMpZuft+J
+    oHWTfEMG5TyvNd5Qg5X8UG8agVi7PJpphXhdR0N/2g2jeQHn3HhItS6UruFB3zGQeV5a
+    FqNgBj9bVl5GMxWovb3iBcteo9LHcJv890aeg/ZCie0IjJxgO6W9oUH2iW2yDNIW0dbM
+    lh7s6ECZCvhJVSf2p4qRJXk2vKH0+jII4LXuKDffzq1fGmf3Dy70waa93ljo9z3VfNzJ
+    K0/A==
+ARC-Authentication-Results: i=1; strato.com;
+    arc=none;
+    dkim=none
+X-RZG-CLASS-ID: mo01
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; t=1688136804;
+    s=strato-dkim-0002; d=aepfle.de;
+    h=Message-Id:Date:Subject:Cc:To:From:Cc:Date:From:Subject:Sender;
+    bh=3v9FwKwabXm3VhIGPqHolyELPsxinvnAmxZlzv2LbiI=;
+    b=XSuY7hhtLS79JwyA0oJpta5/cIWvSuU1nviL381DYHGxEyGJ4WIsKEm6wF14LU0aIW
+    o33SoVm5T19ssaE+7fXvXsY2ZgSW+HyNN/yEl01exvzsD4myOYzaY7mwJQzMctROmuUz
+    VJrD7vZCJdgR8gN+9Jutem9t1zM/LqqNX6sFQykL+qmVDbxW898b8dx1j82xBxScZr+7
+    IqV0sbEJt2q3ponqcHiknFIk8Fk99xvfkDldewrTB1ahTWDhJNy0yLK0qNEWiymny60M
+    BzeR0FJNCWhtmqcWeaXb8WgLZ63zxXWZztfG9vqCKTxKKRzpUAbmucPeOQdgPdxjzd98
+    EJ4w==
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; t=1688136804;
+    s=strato-dkim-0003; d=aepfle.de;
+    h=Message-Id:Date:Subject:Cc:To:From:Cc:Date:From:Subject:Sender;
+    bh=3v9FwKwabXm3VhIGPqHolyELPsxinvnAmxZlzv2LbiI=;
+    b=F7Gp3a1EBO67LR5zgQEvd/wQ/xgdvjrUUG7VhAM/OOv6ZMCH6AdEZs9KlNJ3YQvGVi
+    6eCAwGpbjiBJbIExRaCA==
+X-RZG-AUTH: ":P2EQZWCpfu+qG7CngxMFH1J+3q8wa/QXkBR9MXjAuzpIG0mv9coXAg4x+1/7Qcst+v+6egNSCv2nSejLpXdlt4RWwKmQOQ=="
+Received: from sender
+    by smtp.strato.de (RZmta 49.6.0 AUTH)
+    with ESMTPSA id y5401az5UErNzMj
+        (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256 bits))
+        (Client did not present a certificate);
+    Fri, 30 Jun 2023 16:53:23 +0200 (CEST)
+From:   Olaf Hering <olaf@aepfle.de>
+To:     Jonathan Corbet <corbet@lwn.net>,
+        "Paul E. McKenney" <paulmck@kernel.org>,
+        Andrew Morton <akpm@linux-foundation.org>,
+        Randy Dunlap <rdunlap@infradead.org>,
+        Catalin Marinas <catalin.marinas@arm.com>,
+        "Steven Rostedt (Google)" <rostedt@goodmis.org>,
+        Kim Phillips <kim.phillips@amd.com>,
+        Wyes Karny <wyes.karny@amd.com>,
+        Tiezhu Yang <yangtiezhu@loongson.cn>,
+        Prarit Bhargava <prarit@redhat.com>,
+        Yasuaki Ishimatsu <isimatu.yasuaki@jp.fujitsu.com>,
+        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
+        rcu@vger.kernel.org, linux-kselftest@vger.kernel.org
+Cc:     Josh Triplett <josh@joshtriplett.org>,
+        Mathieu Desnoyers <mathieu.desnoyers@efficios.com>,
+        Lai Jiangshan <jiangshanlai@gmail.com>,
+        Shuah Khan <shuah@kernel.org>
+Subject: [PATCH v1] Fix documentation of panic_on_warn
+Date:   Fri, 30 Jun 2023 16:53:02 +0200
+Message-Id: <20230630145307.25865-1-olaf@aepfle.de>
+X-Mailer: git-send-email 2.35.3
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: PH0PR13MB4842:EE_|SA1PR13MB4928:EE_
-X-MS-Office365-Filtering-Correlation-Id: 3fe11a3a-e98b-4b5c-3204-08db7970eed3
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: QAeUHZuAPmB6TcxmrSwwShh+spjfFAS9hnWFxuMTIwOxauX7CUG2s8RF0/MfGtQo5W1Q1Xs1h61pl0htEX9laAYGP+ZN/m5bI0SGps93RT0nhcEjm8ireIUboWv+F4uLTRjU7okar5PwckguVSYa6X5FptCompHCPuS5qeCbINxZCAaedDGmkgP73eDltn1CCTmbz0CHdMHZgwdvWwfBmxnL42LgVQQ/fJAstNiTTWZ/vEOSe6nhZdDyHyZt2msWjebPTADtvPbXLjIAfRyfEff//pzozw2X0gTEfzj8cQm5HN4xV0r3IH6qPJY5JAzdMC7gZ4ewp9Zz2nB+tchfRXSilX2iDwyqC744Qr1iz34WPE9TEd25B4EbFjc0zrr7XS9tRpSwsILNXwzAk6vqYwcnrr0XDZWmHnj73d9tUmuY4Vdt/gUfPdaj3i5p5Cgvp6bhmaucfLHzelOqkjjYcjbb3E1/bgCKnLVQRTdLfFlQGBFgaPttKybqBIaumtqFuhVibgdg3ocNmBictj8m7pHySA8m5FmCKpRLz0ZyigEScuXhlzlZVDRbwYLk6RXWWj9Q8STKMPD4QrZdrV4Sr9DZ0+xVP653hgc4tIC7tsI=
-X-Forefront-Antispam-Report: CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:PH0PR13MB4842.namprd13.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230028)(4636009)(396003)(376002)(346002)(366004)(39840400004)(136003)(451199021)(86362001)(8936002)(8676002)(5660300002)(7416002)(6506007)(44832011)(6486002)(478600001)(66946007)(66556008)(66476007)(6916009)(4326008)(6512007)(41300700001)(316002)(6666004)(186003)(2616005)(2906002)(4744005)(83380400001)(36756003)(38100700002);DIR:OUT;SFP:1102;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?FHLxizUK6ZKHCbiXXiOy7UBvWLuthTni4vw1QW8J3ptAhxoqRoceNho6jCtU?=
- =?us-ascii?Q?Ygwpd+yAXPN1NUeZqMJF5c36JMi7twFMqzvvxjsTP1qq4ilSg6zGUn6ZEAiV?=
- =?us-ascii?Q?AvkYl2BD2Uc/9bsIgu5Cot5K6iMt39EM/9m+F2wOpAD5QX3sl6nOiKLumWFB?=
- =?us-ascii?Q?qat6ldcOgJ904NEJNXQ8yChscgOa1Rivkj2YoqbZbfEUnBJVZAWsj1ndfK55?=
- =?us-ascii?Q?ZVkFrVE8FCeh6D+FkJuLcyg9TfXU+iAnVLsPP+0W5x6taCSyZ9oLUa7wPrG8?=
- =?us-ascii?Q?hpot2zl9m5rfbFMUPWbYNgRlAftcYaAWcufoDW9XteFHq5f9pikwbKPK4NOq?=
- =?us-ascii?Q?CiVcBCk079DKd61aUW5RGhXsPYt98jF31fYSX4tQSNB6LlS1FaY5t0zw6VtU?=
- =?us-ascii?Q?AotasmQL43egflKh0U01+gV1lxO21il1lRn4RjPeS/Rum7R93oNX+1MLfVUx?=
- =?us-ascii?Q?lmaRBwVA0tGHHeHLsYUmpUEKqisFM6RJIoIgIdEdpXMYahIhCSO8X+z5vQUg?=
- =?us-ascii?Q?Ga8eL+qZiNnMaanWO1FkicW86Qv5aNEMn4cQ4mg+Wuk0dPmGoooBwRG8AUEe?=
- =?us-ascii?Q?Osw2HfEXhkwuYwYeF1piBXRGLjNz8x6L067tzixyxJ9iIcd3qtdCsk1l4MsN?=
- =?us-ascii?Q?XzfJeEmuoHe1ey6JC/hs82CGsIGdaTL8flBTorsLGobq7u9YlUfbo8hXd6ho?=
- =?us-ascii?Q?iaCOG2o92gyXxAYBCZYBOeXshY4bBF9yMP7fXwktrQIwzlOss1tHSdEJ27tR?=
- =?us-ascii?Q?6py8iVFv0WHP1AmnShWCiLnVXrZqzHdoAiUWqmfRNIkGMoHb3kk+Ic8ki4/Y?=
- =?us-ascii?Q?OK08ZZyR+2ZJuy4u/2kb7b1qzscA/YZVZHhg8JyCsKTw5HnRxItgWGN9bVpL?=
- =?us-ascii?Q?vfaTusOb0iVvU81VrlqgM3o1+dRt8wmXwtM8nLpZ94zPPn3Y1moemNpN2dj5?=
- =?us-ascii?Q?XsUY5w0U3dc16h094VkQZ42BrgL7J8mvxWsJyIKQtX8owq/wYrbKzv5Q7aHg?=
- =?us-ascii?Q?VPZIdxSU/why7JnAfF4yZ5uY/giRGxvFpExhOX+/HXqB+utpxgTTS5Ms/nFJ?=
- =?us-ascii?Q?N0cMxMucyq5kr2tlLdgmK3LVZO00spNc3adtVPfqW7XwGCB0Lmy/nXHSc2j7?=
- =?us-ascii?Q?uta/7xm/T6bPvew2cQ3dMqIdENlGXKVAiFYxAooelXQIRi+rjW0jDUUxGsMh?=
- =?us-ascii?Q?Cxgrt0v9YosCI9G2dJuKRRhPQy1TXKcsT3OMgE/zhZZteK9V7wMfqqZrj6cD?=
- =?us-ascii?Q?gNpqqu+99xfK3qoTYJbRXL/b8ZpSvvSeKVYqKsCoKgL2LDOOI60Zuq4KFlqs?=
- =?us-ascii?Q?FcSijPfwZ5WeB+3FDB7l7iTnYPu1c3Q64uZlOD3QJ3oebyX9Y96sGaWnxYNW?=
- =?us-ascii?Q?QVm73oEO+6BRIqD1gaMlWhtzIsWA2x0aCRiuJQWOK7slyxyIY+cDAPZDe+tE?=
- =?us-ascii?Q?38rqK2E2c5Saf242bM162N2LXuOuVEHPRSOOUfmZ9Kc6GpICdaRBYe6HcQWS?=
- =?us-ascii?Q?eTo1M/uA15cqlc3seSnTyQcjHz5cLGghAdXZXALjX2ZTl1QwfwiC2rN7dozm?=
- =?us-ascii?Q?y3Tzby+Q9IlbsYTiIFoD4bGNyf/Y6WwJit9H34ijIsSYbL56TfBzWRWEdjeh?=
- =?us-ascii?Q?Aub756B09HiAhvHWu+Utb95mOBYxwzbWGGTZNze3kb7fuKxN23zTldm8UDFf?=
- =?us-ascii?Q?dNYAGg=3D=3D?=
-X-OriginatorOrg: corigine.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 3fe11a3a-e98b-4b5c-3204-08db7970eed3
-X-MS-Exchange-CrossTenant-AuthSource: PH0PR13MB4842.namprd13.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 30 Jun 2023 13:50:15.4643
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: fe128f2c-073b-4c20-818e-7246a585940c
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: 9CRuMoNQzjserLsLbJdUUg3OgdqTVbh9sG9M3b5oPnCnsWnLcMBrCE9KjjRjZVhIsTMNgC3YW0W1v6gBHeVbEPDQjiwBvOFJ5v4mJ/C8Zgo=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SA1PR13MB4928
-X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-        DKIM_VALID,RCVD_IN_DNSWL_NONE,RCVD_IN_MSPIKE_H2,SPF_HELO_PASS,SPF_PASS,
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset="us-ascii"
+X-Spam-Status: No, score=-2.8 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_LOW,
+        RCVD_IN_MSPIKE_H3,RCVD_IN_MSPIKE_WL,SPF_HELO_PASS,SPF_NONE,
         T_SCC_BODY_TEXT_LINE,URIBL_BLOCKED autolearn=ham autolearn_force=no
         version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
@@ -117,14 +95,40 @@ Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Fri, Jun 30, 2023 at 01:04:46AM -0600, Subash Abhinov Kasiviswanathan wrote:
-> source.codeaurora.org is no longer accessible and so the reference link
-> in the documentation is not useful. Use iproute2 instead as it has a
-> rmnet module for configuration.
-> 
-> Fixes: ceed73a2cf4a ("drivers: net: ethernet: qualcomm: rmnet: Initial implementation")
-> Signed-off-by: Sean Tranchetti <quic_stranche@quicinc.com>
-> Signed-off-by: Subash Abhinov Kasiviswanathan <quic_subashab@quicinc.com>
+The kernel cmdline option panic_on_warn expects an integer, it is not a
+plain option as documented. A number of uses in the tree figured this
+already, and use panic_on_warn=1 for their purpose.
 
-Reviewed-by: Simon Horman <simon.horman@corigine.com>
+Adjust a comment which otherwise may mislead people in the future.
 
+Fixes: 9e3961a097 ("kernel: add panic_on_warn")
+
+Signed-off-by: Olaf Hering <olaf@aepfle.de>
+---
+ Documentation/admin-guide/kernel-parameters.txt | 2 +-
+ tools/testing/selftests/rcutorture/bin/kvm.sh   | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/Documentation/admin-guide/kernel-parameters.txt b/Documentation/admin-guide/kernel-parameters.txt
+index 9e5bab29685f..15196f84df49 100644
+--- a/Documentation/admin-guide/kernel-parameters.txt
++++ b/Documentation/admin-guide/kernel-parameters.txt
+@@ -4049,7 +4049,7 @@
+ 			extra details on the taint flags that users can pick
+ 			to compose the bitmask to assign to panic_on_taint.
+ 
+-	panic_on_warn	panic() instead of WARN().  Useful to cause kdump
++	panic_on_warn=1	panic() instead of WARN().  Useful to cause kdump
+ 			on a WARN().
+ 
+ 	parkbd.port=	[HW] Parallel port number the keyboard adapter is
+diff --git a/tools/testing/selftests/rcutorture/bin/kvm.sh b/tools/testing/selftests/rcutorture/bin/kvm.sh
+index 62f3b0f56e4d..d3cdc2d33d4b 100755
+--- a/tools/testing/selftests/rcutorture/bin/kvm.sh
++++ b/tools/testing/selftests/rcutorture/bin/kvm.sh
+@@ -655,4 +655,4 @@ fi
+ # Control buffer size: --bootargs trace_buf_size=3k
+ # Get trace-buffer dumps on all oopses: --bootargs ftrace_dump_on_oops
+ # Ditto, but dump only the oopsing CPU: --bootargs ftrace_dump_on_oops=orig_cpu
+-# Heavy-handed way to also dump on warnings: --bootargs panic_on_warn
++# Heavy-handed way to also dump on warnings: --bootargs panic_on_warn=1
