@@ -2,211 +2,144 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id CF3A6745A18
-	for <lists+linux-doc@lfdr.de>; Mon,  3 Jul 2023 12:24:31 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 110EE745A2A
+	for <lists+linux-doc@lfdr.de>; Mon,  3 Jul 2023 12:29:18 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S230323AbjGCKYa (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 3 Jul 2023 06:24:30 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:46142 "EHLO
+        id S231290AbjGCK3P (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 3 Jul 2023 06:29:15 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:47570 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S229585AbjGCKYa (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Mon, 3 Jul 2023 06:24:30 -0400
-Received: from mail-qv1-xf34.google.com (mail-qv1-xf34.google.com [IPv6:2607:f8b0:4864:20::f34])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 07F389B;
-        Mon,  3 Jul 2023 03:24:29 -0700 (PDT)
-Received: by mail-qv1-xf34.google.com with SMTP id 6a1803df08f44-5e5b5da22b8so8701986d6.0;
-        Mon, 03 Jul 2023 03:24:28 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20221208; t=1688379868; x=1690971868;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:from:to:cc:subject:date:message-id:reply-to;
-        bh=2cki6QWqpAbrbrnV4IjvHuqleiOcUiHi1jJzvSuXEVw=;
-        b=ewRqGNVScCYnU8Aq/g7Pf95eMJJMf4qDBGh2SlMsVy35KnB1RqZnhdJIYM0uWJlKXm
-         kS1YSOZ0dhNQmueHhhPInOWzPXUhmA0AYbCX4a4Z+VpdktFABcdQwnammCTvSl7x6ZbQ
-         ICXaQhwpCuWOOQhkeDh8LIJL/2iaji3HwvS25m1874X8xcr1AXcFjB1U8bIr+HQ/Y1lG
-         WzV0HW/coIqGvYlBhRgSXvKb/Mg7WAec0k2/JGPqP6OBbQ2YY4l0LyouQTiki4II4ZU0
-         mRbOSf22GQfz0NJ1z469El+CsLAw71O0m9G2xKxBRRSSMIJssa+fvy2aGSCpgr1gp0dZ
-         uGaw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1688379868; x=1690971868;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=2cki6QWqpAbrbrnV4IjvHuqleiOcUiHi1jJzvSuXEVw=;
-        b=HNp3xVyNv0tv2QGpYOebSUZrSmZ9b1GR4zq30xHWN4MHO/Ap4GeHRck/NY6eYeasS9
-         g4Ne+O3jdslEOdwi5zZQ0rmwTl79cBSbN+mXQPRH4PW+WjC62UTIQP9wfV8fXH1W2zYg
-         CmdPln1PHprETfrtwp3x1LpvqzrXifNWUGL9aX81s5RBiBHXoRmV3fSPG6rxz8IW1zsm
-         0CiR9m2Qsu1FaBe0xN2qrsLrJnab4KoSuAjSzkK8ZKNsNIpiTWOcWOmzbhqxDkdH8IgC
-         qvVP/ztuquxULhDZ9m9vBA2DXZuLqLlylsCfxcXzEs+grHJ9RIIH+LJEIu8pnWZbtKma
-         2xpA==
-X-Gm-Message-State: ABy/qLakDKYdRxgIkLgMdumgwAPC8Xfs6WItD7rxDufju/3Fq7dTzLMR
-        gARBk/gCX6v0iNA4EsDsAA+eeWMhFlflpXaPEEHr79anvc+ThtpH
-X-Google-Smtp-Source: APBJJlGNpOiEwgHJlSYT0hkdI6b1Ql5FVBXYyJMiRNknYcWYjbwzIugXlOG2zzqxCT9KNu+erkXgb+x7iwWXBUMVrMQ=
-X-Received: by 2002:a05:6214:410d:b0:625:aa49:c182 with SMTP id
- kc13-20020a056214410d00b00625aa49c182mr12130438qvb.6.1688379868039; Mon, 03
- Jul 2023 03:24:28 -0700 (PDT)
+        with ESMTP id S231297AbjGCK3N (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Mon, 3 Jul 2023 06:29:13 -0400
+Received: from esa.microchip.iphmx.com (esa.microchip.iphmx.com [68.232.153.233])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 50234C4;
+        Mon,  3 Jul 2023 03:29:11 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=microchip.com; i=@microchip.com; q=dns/txt; s=mchp;
+  t=1688380152; x=1719916152;
+  h=from:to:cc:subject:date:message-id:mime-version:
+   content-transfer-encoding;
+  bh=9gC2ucQs56hznJJn3CZLdBAIp3rcInl7wiNCLwEz1B4=;
+  b=gFGleEuhNogWM0mPa6vxjVkBxC29P0vpWtu5tZgTh0K1AAw4TuBNFMU6
+   PTunUp87HcinLGrmYIBPVhK4DcSvSUK3WfUAP4w3my4Cd4JMUi//HxXLr
+   tj1UtYQVuwyLtWKrmfBWEnLcZksfNeaidc9zX67HlmxU1Db8+XaMbgCps
+   9l3ydfwwDDe91gGQbjYOv5Y5uwtaXlOSnLqDRcc4ZNuRP8qFKdGP4jjuG
+   NBVmaQ16DWgbjrQLyUpvtUbB4pF9LdP7cQTmjdW7Rrg6nKVmLafHW5jOU
+   v0LVz8iFjLqLjvQD1gUvdvQP+mAp/QOilYwNdt+DciFX5xe9q0mVsoYcj
+   A==;
+X-IronPort-AV: E=Sophos;i="6.01,177,1684825200"; 
+   d="scan'208";a="221754598"
+X-Amp-Result: SKIPPED(no attachment in message)
+Received: from unknown (HELO email.microchip.com) ([170.129.1.10])
+  by esa5.microchip.iphmx.com with ESMTP/TLS/AES256-SHA256; 03 Jul 2023 03:29:11 -0700
+Received: from chn-vm-ex03.mchp-main.com (10.10.85.151) by
+ chn-vm-ex02.mchp-main.com (10.10.85.144) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2507.21; Mon, 3 Jul 2023 03:28:57 -0700
+Received: from wendy.microchip.com (10.10.115.15) by chn-vm-ex03.mchp-main.com
+ (10.10.85.151) with Microsoft SMTP Server id 15.1.2507.21 via Frontend
+ Transport; Mon, 3 Jul 2023 03:28:54 -0700
+From:   Conor Dooley <conor.dooley@microchip.com>
+To:     <palmer@dabbelt.com>
+CC:     <conor@kernel.org>, <conor.dooley@microchip.com>,
+        Rob Herring <robh+dt@kernel.org>,
+        Krzysztof Kozlowski <krzysztof.kozlowski+dt@linaro.org>,
+        Paul Walmsley <paul.walmsley@sifive.com>,
+        Albert Ou <aou@eecs.berkeley.edu>,
+        "Jonathan Corbet" <corbet@lwn.net>,
+        Andrew Jones <ajones@ventanamicro.com>,
+        "Heiko Stuebner" <heiko.stuebner@vrull.eu>,
+        Evan Green <evan@rivosinc.com>,
+        Sunil V L <sunilvl@ventanamicro.com>,
+        <linux-doc@vger.kernel.org>, <linux-riscv@lists.infradead.org>,
+        <devicetree@vger.kernel.org>, <linux-kernel@vger.kernel.org>
+Subject: [PATCH v3 00/11] RISC-V: Probe DT extension support using riscv,isa-extensions & riscv,isa-base
+Date:   Mon, 3 Jul 2023 11:27:52 +0100
+Message-ID: <20230703-repayment-vocalist-e4f3eeac2b2a@wendy>
+X-Mailer: git-send-email 2.40.1
 MIME-Version: 1.0
-References: <20230630145831.2988845-1-i.maximets@ovn.org> <CAJ8uoz1TGjWuJKkZ8C9ZrQB0CDasik3A=qJs=xwdQP8cbn97VQ@mail.gmail.com>
- <04ed302e-067e-d372-370b-3fef1cf8c7f2@ovn.org> <c6944b25-7ac4-0b75-75b1-465c8a705d02@ovn.org>
-In-Reply-To: <c6944b25-7ac4-0b75-75b1-465c8a705d02@ovn.org>
-From:   Magnus Karlsson <magnus.karlsson@gmail.com>
-Date:   Mon, 3 Jul 2023 12:24:17 +0200
-Message-ID: <CAJ8uoz0ChXfavPKAkjsj8URKp3sJPPcd_dqiHsxP0iG6NjiVzg@mail.gmail.com>
-Subject: Re: [RFC bpf-next] xsk: honor SO_BINDTODEVICE on bind
-To:     Ilya Maximets <i.maximets@ovn.org>
-Cc:     netdev@vger.kernel.org, bpf@vger.kernel.org,
-        =?UTF-8?B?QmrDtnJuIFTDtnBlbA==?= <bjorn@kernel.org>,
-        Magnus Karlsson <magnus.karlsson@intel.com>,
-        Maciej Fijalkowski <maciej.fijalkowski@intel.com>,
-        "David S. Miller" <davem@davemloft.net>,
-        Eric Dumazet <edumazet@google.com>,
-        Jakub Kicinski <kuba@kernel.org>,
-        Paolo Abeni <pabeni@redhat.com>, linux-doc@vger.kernel.org,
-        linux-kernel@vger.kernel.org, Jason Wang <jasowang@redhat.com>,
-        Stefan Hajnoczi <stefanha@redhat.com>
-Content-Type: text/plain; charset="UTF-8"
-X-Spam-Status: No, score=-2.1 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_FROM,
-        RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,SPF_PASS,T_SCC_BODY_TEXT_LINE
-        autolearn=ham autolearn_force=no version=3.4.6
+X-Developer-Signature: v=1; a=openpgp-sha256; l=2944; i=conor.dooley@microchip.com; h=from:subject:message-id; bh=9gC2ucQs56hznJJn3CZLdBAIp3rcInl7wiNCLwEz1B4=; b=owGbwMvMwCFWscWwfUFT0iXG02pJDCmLFq3c6XLDgcsgL1aUrfGD5vL/W466rspkq/9zR4tna+QZ DpOYjlIWBjEOBlkxRZbE230tUuv/uOxw7nkLM4eVCWQIAxenAExk2x1Ghu8+n1RN27+92X9uocHiE8 6tyyyy+3WtDfe0SiZzPO00KWZkmBIyVe4o6/f1bWeWsrbdyNysnzvNTX42u1DbhL2zj1Q+YQYA
+X-Developer-Key: i=conor.dooley@microchip.com; a=openpgp; fpr=F9ECA03CF54F12CD01F1655722E2C55B37CF380C
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Spam-Status: No, score=-4.4 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_MED,
+        SPF_HELO_PASS,SPF_NONE,T_SCC_BODY_TEXT_LINE autolearn=ham
+        autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Mon, 3 Jul 2023 at 12:13, Ilya Maximets <i.maximets@ovn.org> wrote:
->
-> On 7/3/23 12:06, Ilya Maximets wrote:
-> > On 7/3/23 11:48, Magnus Karlsson wrote:
-> >> On Fri, 30 Jun 2023 at 16:58, Ilya Maximets <i.maximets@ovn.org> wrote:
-> >>>
-> >>> Initial creation of an AF_XDP socket requires CAP_NET_RAW capability.
-> >>> A privileged process might create the socket and pass it to a
-> >>> non-privileged process for later use.  However, that process will be
-> >>> able to bind the socket to any network interface.  Even though it will
-> >>> not be able to receive any traffic without modification of the BPF map,
-> >>> the situation is not ideal.
-> >>>
-> >>> Sockets already have a mechanism that can be used to restrict what
-> >>> interface they can be attached to.  That is SO_BINDTODEVICE.
-> >>>
-> >>> To change the binding the process will need CAP_NET_RAW.
-> >>>
-> >>> Make xsk_bind() honor the SO_BINDTODEVICE in order to allow safer
-> >>> workflow when non-privileged process is using AF_XDP.
-> >>
-> >> Rebinding an AF_XDP socket is not allowed today. Any such attempt will
-> >> return an error from bind. So if I understand the purpose of
-> >> SO_BINDTODEVICE correctly, you could say that this option is always
-> >> set for an AF_XDP socket and it is not possible to toggle it. The only
-> >> way to "rebind" an AF_XDP socket is to close it and open a new one.
-> >> This was a conscious design decision from day one as it would be very
-> >> hard to support this, especially in zero-copy mode.
-> >
-> > Hi, Magnus.
-> >
-> > The purpose of this patch is not to allow re-binding.  The use case is
-> > following:
-> >
-> > 1. First process creates a bare socket with socket(AF_XDP, ...).
-> > 2. First process loads the XSK program to the interface.
-> > 3. First process adds the socket fd to a BPF map.
-> > 4. First process sends socket fd to a second process.
-> > 5. Second process allocates UMEM.
-> > 6. Second process binds socket to the interface.
->
-> 7. Second process sends/receives the traffic. :)
->
-> >
-> > The idea is that the first process will call SO_BINDTODEVICE before
-> > sending socket fd to a second process, so the second process is limited
-> > in to which interface it can bind the socket.
-> >
-> > Does that make sense?
+Hey,
 
-Thanks for explaining this to me. Yes, that makes sense and seems
-useful. Could you please send a v2 and include the flow (1-7) above in
-your commit message? Would be good to add one step with the setsockopt
-SO_BINDTODEVICE before step #4 just to be clear. With those changes
-please feel free to include my ack:
+Based on my latest iteration of deprecating riscv,isa [1], here's an
+implementation of the new properties for Linux. The first few patches,
+up to "RISC-V: split riscv_fill_hwcap() in 3", are all prep work that
+further tames some of the extension related code, on top of my already
+applied series that cleans up the ISA string parser.
+Perhaps "RISC-V: shunt isa_ext_arr to cpufeature.c" is a bit gratuitous,
+but I figured a bit of coalescing of extension related data structures
+would be a good idea. Note that riscv,isa will still be used in the
+absence of the new properties. Palmer suggested adding a Kconfig option
+to turn off the fallback for DT, which I have gone and done. It's locked
+behind the NONPORTABLE option for good reason.
 
- Acked-by: Magnus Karlsson <magnus.karlsson@intel.com>
+In v2, I've also come up with a more reasonable name for the new
+function I added & fixed up various comments from Drew and Evan.
 
-Thank you!
+In v3, there's the new commandline option that Drew suggested. I have
+Also picked up a patch from Palmer that adds more helpful prints where
+harts fail the checks in riscv_early_of_processor_id(), and I've
+sprinkled a few more of those prints in my new additions to the
+function.
 
-> > This workflow allows the second process to have no capabilities
-> > as long as it has sufficient RLIMIT_MEMLOCK.
->
-> Note that steps 1-7 are working just fine today.  i.e. the umem
-> registration, bind, ring mapping and traffic send/receive do not
-> require any extra capabilities.
->
-> We may restrict the bind() call to require CAP_NET_RAW and then
-> allow it for sockets that had SO_BINDTODEVICE as an alternative.
-> But restriction will break the current uAPI.
->
-> >
-> > Best regards, Ilya Maximets.
-> >
-> >>
-> >>> Signed-off-by: Ilya Maximets <i.maximets@ovn.org>
-> >>> ---
-> >>>
-> >>> Posting as an RFC for now to probably get some feedback.
-> >>> Will re-post once the tree is open.
-> >>>
-> >>>  Documentation/networking/af_xdp.rst | 9 +++++++++
-> >>>  net/xdp/xsk.c                       | 6 ++++++
-> >>>  2 files changed, 15 insertions(+)
-> >>>
-> >>> diff --git a/Documentation/networking/af_xdp.rst b/Documentation/networking/af_xdp.rst
-> >>> index 247c6c4127e9..1cc35de336a4 100644
-> >>> --- a/Documentation/networking/af_xdp.rst
-> >>> +++ b/Documentation/networking/af_xdp.rst
-> >>> @@ -433,6 +433,15 @@ start N bytes into the buffer leaving the first N bytes for the
-> >>>  application to use. The final option is the flags field, but it will
-> >>>  be dealt with in separate sections for each UMEM flag.
-> >>>
-> >>> +SO_BINDTODEVICE setsockopt
-> >>> +--------------------------
-> >>> +
-> >>> +This is a generic SOL_SOCKET option that can be used to tie AF_XDP
-> >>> +socket to a particular network interface.  It is useful when a socket
-> >>> +is created by a privileged process and passed to a non-privileged one.
-> >>> +Once the option is set, kernel will refuse attempts to bind that socket
-> >>> +to a different interface.  Updating the value requires CAP_NET_RAW.
-> >>> +
-> >>>  XDP_STATISTICS getsockopt
-> >>>  -------------------------
-> >>>
-> >>> diff --git a/net/xdp/xsk.c b/net/xdp/xsk.c
-> >>> index 5a8c0dd250af..386ff641db0f 100644
-> >>> --- a/net/xdp/xsk.c
-> >>> +++ b/net/xdp/xsk.c
-> >>> @@ -886,6 +886,7 @@ static int xsk_bind(struct socket *sock, struct sockaddr *addr, int addr_len)
-> >>>         struct sock *sk = sock->sk;
-> >>>         struct xdp_sock *xs = xdp_sk(sk);
-> >>>         struct net_device *dev;
-> >>> +       int bound_dev_if;
-> >>>         u32 flags, qid;
-> >>>         int err = 0;
-> >>>
-> >>> @@ -899,6 +900,11 @@ static int xsk_bind(struct socket *sock, struct sockaddr *addr, int addr_len)
-> >>>                       XDP_USE_NEED_WAKEUP))
-> >>>                 return -EINVAL;
-> >>>
-> >>> +       bound_dev_if = READ_ONCE(sk->sk_bound_dev_if);
-> >>> +
-> >>> +       if (bound_dev_if && bound_dev_if != sxdp->sxdp_ifindex)
-> >>> +               return -EINVAL;
-> >>> +
-> >>>         rtnl_lock();
-> >>>         mutex_lock(&xs->mutex);
-> >>>         if (xs->state != XSK_READY) {
-> >>> --
-> >>> 2.40.1
-> >>>
-> >>>
-> >
->
+Cheers,
+Conor.
+
+[1] https://lore.kernel.org/all/20230702-eats-scorebook-c951f170d29f@spud
+
+CC: Rob Herring <robh+dt@kernel.org>
+CC: Krzysztof Kozlowski <krzysztof.kozlowski+dt@linaro.org>
+CC: Paul Walmsley <paul.walmsley@sifive.com>
+CC: Palmer Dabbelt <palmer@dabbelt.com>
+CC: Albert Ou <aou@eecs.berkeley.edu>
+CC: Jonathan Corbet <corbet@lwn.net>
+CC: Andrew Jones <ajones@ventanamicro.com>
+CC: Heiko Stuebner <heiko.stuebner@vrull.eu>
+CC: Evan Green <evan@rivosinc.com>
+CC: Sunil V L <sunilvl@ventanamicro.com>
+CC: linux-doc@vger.kernel.org
+CC: linux-riscv@lists.infradead.org
+CC: devicetree@vger.kernel.org
+CC: linux-kernel@vger.kernel.org
+
+Conor Dooley (9):
+  RISC-V: drop a needless check in print_isa_ext()
+  RISC-V: shunt isa_ext_arr to cpufeature.c
+  RISC-V: repurpose riscv_isa_ext array in riscv_fill_hwcap()
+  RISC-V: add missing single letter extension definitions
+  RISC-V: add single letter extensions to riscv_isa_ext
+  RISC-V: split riscv_fill_hwcap() in 3
+  RISC-V: enable extension detection from new properties
+  RISC-V: try new extension properties in of_early_processor_hartid()
+  RISC-V: provide Kconfig & commandline options to control parsing
+    "riscv,isa"
+
+Heiko Stuebner (1):
+  RISC-V: don't parse dt/acpi isa string to get rv32/rv64
+
+Palmer Dabbelt (1):
+  RISC-V: Provide a more helpful error message on invalid ISA strings
+
+ .../admin-guide/kernel-parameters.txt         |   7 +
+ arch/riscv/Kconfig                            |  18 +
+ arch/riscv/include/asm/hwcap.h                |  17 +-
+ arch/riscv/kernel/cpu.c                       | 177 ++----
+ arch/riscv/kernel/cpufeature.c                | 519 ++++++++++++------
+ 5 files changed, 436 insertions(+), 302 deletions(-)
+
+-- 
+2.40.1
+
