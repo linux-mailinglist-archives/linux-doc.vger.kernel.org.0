@@ -2,440 +2,197 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id A8EC27468E2
-	for <lists+linux-doc@lfdr.de>; Tue,  4 Jul 2023 07:24:11 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 5E010746943
+	for <lists+linux-doc@lfdr.de>; Tue,  4 Jul 2023 07:57:34 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S230209AbjGDFYJ (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 4 Jul 2023 01:24:09 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:33096 "EHLO
+        id S230300AbjGDF5b (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 4 Jul 2023 01:57:31 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:42226 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S230146AbjGDFYJ (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 4 Jul 2023 01:24:09 -0400
-Received: from bombadil.infradead.org (bombadil.infradead.org [IPv6:2607:7c80:54:3::133])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 2C408E52;
-        Mon,  3 Jul 2023 22:24:07 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-        d=infradead.org; s=bombadil.20210309; h=Content-Transfer-Encoding:
-        MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From:Sender
-        :Reply-To:Content-Type:Content-ID:Content-Description;
-        bh=hgDOe718j7PFvCpJQd59expryvQV5xbxa5ErU2Tl+0g=; b=vvkUhJYxFKhGLRj1eLEAWrEuiE
-        TaSOVGomfPOyTrZF6X2dkZfVmMNdFCKxMWAJ0fQzEPLcPdPfLwPCf+tTJyow78fK2LYYsZKKam1wq
-        iraiVXOuh3qbuuU20tji+7dilsg2RxRoYrntnH17ONMNGS6bRZq8dX2muwVNz8PZaRCuL9Thz7Zlt
-        nuB9Z1sEJx/4P0O20+IPs1zZYj0CZKWqlBV1yPLpR7HtEoZh8/cGvcnxzMlXp9zEz3zz9jxFK1iHn
-        GmYdTmO381xpgbIJAPN+PZCBKgyzAOv3ZJiVR9K+pHuU1+M2+gC1TSc19AtS6kG810SUY4NpyrOCF
-        sZQYXn9g==;
-Received: from [2601:1c2:980:9ec0::2764] (helo=bombadil.infradead.org)
-        by bombadil.infradead.org with esmtpsa (Exim 4.96 #2 (Red Hat Linux))
-        id 1qGYWE-00CCEU-2d;
-        Tue, 04 Jul 2023 05:24:06 +0000
-From:   Randy Dunlap <rdunlap@infradead.org>
-To:     linux-kernel@vger.kernel.org
-Cc:     Randy Dunlap <rdunlap@infradead.org>,
-        John Stultz <jstultz@google.com>,
-        Thomas Gleixner <tglx@linutronix.de>,
-        Stephen Boyd <sboyd@kernel.org>,
-        Jonathan Corbet <corbet@lwn.net>, linux-doc@vger.kernel.org
-Subject: [PATCH 3/3] time: add kernel-doc in time.c
-Date:   Mon,  3 Jul 2023 22:24:05 -0700
-Message-ID: <20230704052405.5089-3-rdunlap@infradead.org>
-X-Mailer: git-send-email 2.41.0
-In-Reply-To: <20230704052405.5089-1-rdunlap@infradead.org>
-References: <20230704052405.5089-1-rdunlap@infradead.org>
+        with ESMTP id S230259AbjGDF53 (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 4 Jul 2023 01:57:29 -0400
+Received: from mail-ed1-x52b.google.com (mail-ed1-x52b.google.com [IPv6:2a00:1450:4864:20::52b])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 9263EE64
+        for <linux-doc@vger.kernel.org>; Mon,  3 Jul 2023 22:57:27 -0700 (PDT)
+Received: by mail-ed1-x52b.google.com with SMTP id 4fb4d7f45d1cf-51d80d81d6eso6150966a12.1
+        for <linux-doc@vger.kernel.org>; Mon, 03 Jul 2023 22:57:27 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=linaro.org; s=google; t=1688450245; x=1691042245;
+        h=content-transfer-encoding:in-reply-to:from:references:cc:to
+         :content-language:subject:user-agent:mime-version:date:message-id
+         :from:to:cc:subject:date:message-id:reply-to;
+        bh=ArafajhkK4cFBXCxi4x8GmLW6nX9wjFH15qR/2p7CyM=;
+        b=NtZsucGnDSuql+9fvbmGD0BxyvMogak6Y5smEqXX8YVtwaMtHZZ1C/TGlyDDoMak1a
+         haGaMkG1VU2aV8G9ouvmhF2bUT4R7l4z7IpK6rWEsQOIASdpe/ETlyxhdNMHA1K0IAXI
+         nuqu7D3vk1N5XXGoxqp97McDiFeIx/d2WDA8EXrw/d4mjEHvqQ9Xm/NQoidg4jGB/4tn
+         LQyQINMHJ0B6gUmy6EKdTmk9v8aoK/SbhVsxA7v90azH6n7VT5YSeuUuoLCFlvH9R0G4
+         ovqIMFrBmkbIyBLF5UOq/9OGMltcQdmd2K73ozPB/ooxRpFAkVe78oy5UYKqy/j5tswu
+         V7wA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20221208; t=1688450245; x=1691042245;
+        h=content-transfer-encoding:in-reply-to:from:references:cc:to
+         :content-language:subject:user-agent:mime-version:date:message-id
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=ArafajhkK4cFBXCxi4x8GmLW6nX9wjFH15qR/2p7CyM=;
+        b=L9zWKEiEjY+WquqmoBloguZubAWGangtHHvi8911kyRLvBMrYzXnwjiD9nRl95aAT/
+         zXJufyqfS65uNvi7jVallE50bTM+7zSgb/cKwhPbxgNo8kcut90atuMoinE0f4O09ytb
+         00Fqax7rrhf+olVXi9p/sQWDvo/AkB1/jQEz9YZHC2pSUowJS9MpGeyi+OJi1lktSQqS
+         afvYfbjNtmAUweXxntiNtecGeDziRxhS8B61iLxmeBNn3H37PY+XiV5sl1JFwF6vU4sB
+         OKDb3pXlQn7TppVjj4i/SAVE29mWeGkKgaInQW4wfmDBQrkusY3N6oxegXpNQ3/HNJE7
+         EqGA==
+X-Gm-Message-State: ABy/qLa+mgauVkOKU9XssAPvuG1743+e7Qs7uAi3xEga0K5WG05ig37q
+        ZdGThlJpvNxNmp/isLxeS+O3JA==
+X-Google-Smtp-Source: APBJJlGLdz4OnkPHg9QESQPK4xkTqc+rD1zI9xMSBTVlJ3pUKrE8wYmXdm39x7xyr77A57uxd3eyPg==
+X-Received: by 2002:a05:6402:5149:b0:51d:9bf3:40c5 with SMTP id n9-20020a056402514900b0051d9bf340c5mr8832051edd.20.1688450245125;
+        Mon, 03 Jul 2023 22:57:25 -0700 (PDT)
+Received: from [192.168.1.20] ([178.197.219.26])
+        by smtp.gmail.com with ESMTPSA id i21-20020a05640200d500b0051bfc7763c2sm11462697edu.25.2023.07.03.22.57.22
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Mon, 03 Jul 2023 22:57:24 -0700 (PDT)
+Message-ID: <f0609361-6fb6-a446-4e23-646201943923@linaro.org>
+Date:   Tue, 4 Jul 2023 07:57:21 +0200
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Spam-Status: No, score=-4.4 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_MED,SPF_HELO_NONE,
-        SPF_NONE,T_SCC_BODY_TEXT_LINE,URIBL_BLOCKED autolearn=ham
-        autolearn_force=no version=3.4.6
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.12.0
+Subject: Re: [PATCH v4 08/21] dt-bindings: reserved-memory: Add qcom,ramoops
+ binding
+Content-Language: en-US
+To:     Mukesh Ojha <quic_mojha@quicinc.com>
+Cc:     Rob Herring <robh+dt@kernel.org>, corbet@lwn.net,
+        agross@kernel.org, andersson@kernel.org, konrad.dybcio@linaro.org,
+        conor+dt@kernel.org, keescook@chromium.org, tony.luck@intel.com,
+        gpiccoli@igalia.com, mathieu.poirier@linaro.org,
+        catalin.marinas@arm.com, will@kernel.org, linus.walleij@linaro.org,
+        andy.shevchenko@gmail.com, linux-doc@vger.kernel.org,
+        linux-kernel@vger.kernel.org, linux-arm-msm@vger.kernel.org,
+        devicetree@vger.kernel.org, linux-hardening@vger.kernel.org,
+        linux-remoteproc@vger.kernel.org,
+        linux-arm-kernel@lists.infradead.org, linux-gpio@vger.kernel.org
+References: <1687955688-20809-1-git-send-email-quic_mojha@quicinc.com>
+ <1687955688-20809-9-git-send-email-quic_mojha@quicinc.com>
+ <CAL_JsqJ_TTnGjjB2d8_FKHpWBRG5GHLoWnabCKjsdeZ4QFdNEg@mail.gmail.com>
+ <cacbbb02-732e-076e-50bf-292d20a4d722@quicinc.com>
+ <58a26b9e-a48d-d567-c310-193a2c52521e@linaro.org>
+ <5447f9f8-55b4-8bed-66a6-1c9d62b02c79@quicinc.com>
+ <CAGE=qrq0CuO4J-6yC=YZ4xjL67o9QTqpei0ovX-X_8MLVeEH6g@mail.gmail.com>
+ <ba04bb7b-6599-6f41-09a8-834ee280830d@quicinc.com>
+From:   Krzysztof Kozlowski <krzysztof.kozlowski@linaro.org>
+In-Reply-To: <ba04bb7b-6599-6f41-09a8-834ee280830d@quicinc.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-Spam-Status: No, score=-2.2 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,NICE_REPLY_A,RCVD_IN_DNSWL_NONE,
+        SPF_HELO_NONE,SPF_PASS,T_SCC_BODY_TEXT_LINE,URIBL_BLOCKED
+        autolearn=unavailable autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Add kernel-doc for all APIs that do not already have it.
+On 03/07/2023 17:55, Mukesh Ojha wrote:
+> 
+> 
+> On 7/3/2023 12:50 PM, Krzysztof Kozlowski wrote:
+>> On Mon, 3 Jul 2023 at 08:22, Mukesh Ojha <quic_mojha@quicinc.com> wrote:
+>>> On 7/2/2023 1:42 PM, Krzysztof Kozlowski wrote:
+>>>>>> The big difference is if firmware is not deciding where this log
+>>>>>> lives, then it doesn't need to be in DT. How does anything except the
+>>>>>> kernel that allocates the log find the logs?
+>>>>>
+>>>>> Yes, you are correct, firmware is not deciding where the logs lives
+>>>>> instead here, Kernel has reserved the region where the ramoops region
+>>>>> lives and later with the minidump registration where, physical
+>>>>> address/size/virtual address(for parsing) are passed and that is how
+>>>>> firmware is able to know and dump those region before triggering system
+>>>>> reset.
+>>>>
+>>>> Your explanation does not justify storing all this in DT. Kernel can
+>>>> allocate any memory it wishes, store there logs and pass the address to
+>>>> the firmware. That's it, no need for DT.
+>>>
+>>> If you go through the driver, you will know that what it does, is
+>>
+>> We talk about bindings and I should not be forced to look at the
+>> driver to be able to understand them. Bindings should stand on their
+>> own.
+> 
+> Why can't ramoops binding have one more feature where it can add a flag 
+> *dynamic* to indicate the regions are dynamic and it is for platforms
+> where there is another entity 'minidump' who is interested in these
+> regions.
 
-Signed-off-by: Randy Dunlap <rdunlap@infradead.org>
-Cc: John Stultz <jstultz@google.com>
-Cc: Thomas Gleixner <tglx@linutronix.de>
-Cc: Stephen Boyd <sboyd@kernel.org>
-Cc: Jonathan Corbet <corbet@lwn.net>
-Cc: linux-doc@vger.kernel.org
----
- kernel/time/time.c |  169 ++++++++++++++++++++++++++++++++++++++++---
- 1 file changed, 158 insertions(+), 11 deletions(-)
+Because we do not define dynamic stuff in Devicetree. Dynamic means
+defined by SW or runtime configurable. It is against the entire idea of
+Devicetree which is for non-discoverable hardware.
 
-diff -- a/kernel/time/time.c b/kernel/time/time.c
---- a/kernel/time/time.c
-+++ b/kernel/time/time.c
-@@ -365,11 +365,14 @@ SYSCALL_DEFINE1(adjtimex_time32, struct
- }
- #endif
- 
--/*
-- * Convert jiffies to milliseconds and back.
-+/**
-+ * jiffies_to_msecs - Convert jiffies to milliseconds
-+ * @j: jiffies value
-  *
-  * Avoid unnecessary multiplications/divisions in the
-- * two most common HZ cases:
-+ * two most common HZ cases.
-+ *
-+ * Return: milliseconds value
-  */
- unsigned int jiffies_to_msecs(const unsigned long j)
- {
-@@ -388,6 +391,12 @@ unsigned int jiffies_to_msecs(const unsi
- }
- EXPORT_SYMBOL(jiffies_to_msecs);
- 
-+/**
-+ * jiffies_to_usecs - Convert jiffies to microseconds
-+ * @j: jiffies value
-+ *
-+ * Return: microseconds value
-+ */
- unsigned int jiffies_to_usecs(const unsigned long j)
- {
- 	/*
-@@ -408,8 +417,15 @@ unsigned int jiffies_to_usecs(const unsi
- }
- EXPORT_SYMBOL(jiffies_to_usecs);
- 
--/*
-+/**
-  * mktime64 - Converts date to seconds.
-+ * @year0: year to convert
-+ * @mon0: month to convert
-+ * @day: day to convert
-+ * @hour: hour to convert
-+ * @min: minute to convert
-+ * @sec: second to convert
-+ *
-  * Converts Gregorian date to seconds since 1970-01-01 00:00:00.
-  * Assumes input in normal date format, i.e. 1980-12-31 23:59:59
-  * => year=1980, mon=12, day=31, hour=23, min=59, sec=59.
-@@ -427,6 +443,8 @@ EXPORT_SYMBOL(jiffies_to_usecs);
-  *
-  * An encoding of midnight at the end of the day as 24:00:00 - ie. midnight
-  * tomorrow - (allowable under ISO 8601) is supported.
-+ *
-+ * Return: seconds since the epoch time for the given input date
-  */
- time64_t mktime64(const unsigned int year0, const unsigned int mon0,
- 		const unsigned int day, const unsigned int hour,
-@@ -471,8 +489,7 @@ EXPORT_SYMBOL(ns_to_kernel_old_timeval);
-  * Set seconds and nanoseconds field of a timespec variable and
-  * normalize to the timespec storage format
-  *
-- * Note: The tv_nsec part is always in the range of
-- *	0 <= tv_nsec < NSEC_PER_SEC
-+ * Note: The tv_nsec part is always in the range of 0 <= tv_nsec < NSEC_PER_SEC.
-  * For negative values only the tv_sec field is negative !
-  */
- void set_normalized_timespec64(struct timespec64 *ts, time64_t sec, s64 nsec)
-@@ -501,7 +518,7 @@ EXPORT_SYMBOL(set_normalized_timespec64)
-  * ns_to_timespec64 - Convert nanoseconds to timespec64
-  * @nsec:       the nanoseconds value to be converted
-  *
-- * Returns the timespec64 representation of the nsec parameter.
-+ * Return: the timespec64 representation of the nsec parameter.
-  */
- struct timespec64 ns_to_timespec64(s64 nsec)
- {
-@@ -548,6 +565,8 @@ EXPORT_SYMBOL(ns_to_timespec64);
-  * runtime.
-  * The _msecs_to_jiffies helpers are the HZ dependent conversion
-  * routines found in include/linux/jiffies.h
-+ *
-+ * Return: jiffies value
-  */
- unsigned long __msecs_to_jiffies(const unsigned int m)
- {
-@@ -560,6 +579,12 @@ unsigned long __msecs_to_jiffies(const u
- }
- EXPORT_SYMBOL(__msecs_to_jiffies);
- 
-+/**
-+ * __usecs_to_jiffies: - convert microseconds to jiffies
-+ * @u:	time in milliseconds
-+ *
-+ * Return: jiffies value
-+ */
- unsigned long __usecs_to_jiffies(const unsigned int u)
- {
- 	if (u > jiffies_to_usecs(MAX_JIFFY_OFFSET))
-@@ -568,7 +593,10 @@ unsigned long __usecs_to_jiffies(const u
- }
- EXPORT_SYMBOL(__usecs_to_jiffies);
- 
--/*
-+/**
-+ * timespec64_to_jiffies - convert a timespec64 value to jiffies
-+ * @value: pointer to &struct timespec64
-+ *
-  * The TICK_NSEC - 1 rounds up the value to the next resolution.  Note
-  * that a remainder subtract here would not do the right thing as the
-  * resolution values don't fall on second boundaries.  I.e. the line:
-@@ -582,8 +610,9 @@ EXPORT_SYMBOL(__usecs_to_jiffies);
-  *
-  * The >> (NSEC_JIFFIE_SC - SEC_JIFFIE_SC) converts the scaled nsec
-  * value to a scaled second value.
-+ *
-+ * Return: jiffies value
-  */
--
- unsigned long
- timespec64_to_jiffies(const struct timespec64 *value)
- {
-@@ -601,6 +630,11 @@ timespec64_to_jiffies(const struct times
- }
- EXPORT_SYMBOL(timespec64_to_jiffies);
- 
-+/**
-+ * jiffies_to_timespec64 - convert jiffies value to &struct timespec64
-+ * @jiffies: jiffies value
-+ * @value: pointer to &struct timespec64
-+ */
- void
- jiffies_to_timespec64(const unsigned long jiffies, struct timespec64 *value)
- {
-@@ -618,6 +652,13 @@ EXPORT_SYMBOL(jiffies_to_timespec64);
- /*
-  * Convert jiffies/jiffies_64 to clock_t and back.
-  */
-+
-+/**
-+ * jiffies_to_clock_t - Convert jiffies to clock_t
-+ * @x: jiffies value
-+ *
-+ * Return: jiffies converted to clock_t (CLOCKS_PER_SEC)
-+ */
- clock_t jiffies_to_clock_t(unsigned long x)
- {
- #if (TICK_NSEC % (NSEC_PER_SEC / USER_HZ)) == 0
-@@ -632,6 +673,12 @@ clock_t jiffies_to_clock_t(unsigned long
- }
- EXPORT_SYMBOL(jiffies_to_clock_t);
- 
-+/**
-+ * clock_t_to_jiffies - Convert clock_t to jiffies
-+ * @x: clock_t value
-+ *
-+ * Return: clock_t value converted to jiffies
-+ */
- unsigned long clock_t_to_jiffies(unsigned long x)
- {
- #if (HZ % USER_HZ)==0
-@@ -649,6 +696,12 @@ unsigned long clock_t_to_jiffies(unsigne
- }
- EXPORT_SYMBOL(clock_t_to_jiffies);
- 
-+/**
-+ * jiffies_64_to_clock_t - Convert jiffies_64 to clock_t
-+ * @x: jiffies_64 value
-+ *
-+ * Return: jiffies_64 value converted to 64-bit "clock_t" (CLOCKS_PER_SEC)
-+ */
- u64 jiffies_64_to_clock_t(u64 x)
- {
- #if (TICK_NSEC % (NSEC_PER_SEC / USER_HZ)) == 0
-@@ -671,6 +724,12 @@ u64 jiffies_64_to_clock_t(u64 x)
- }
- EXPORT_SYMBOL(jiffies_64_to_clock_t);
- 
-+/**
-+ * nsec_to_clock_t - Convert nsec value to clock_t
-+ * @x: nsec value
-+ *
-+ * Return: nsec value converted to 64-bit "clock_t" (CLOCKS_PER_SEC)
-+ */
- u64 nsec_to_clock_t(u64 x)
- {
- #if (NSEC_PER_SEC % USER_HZ) == 0
-@@ -687,6 +746,12 @@ u64 nsec_to_clock_t(u64 x)
- #endif
- }
- 
-+/**
-+ * jiffies64_to_nsecs - Convert jiffies64 to nanoseconds
-+ * @j: jiffies64 value
-+ *
-+ * Return: nanoseconds value
-+ */
- u64 jiffies64_to_nsecs(u64 j)
- {
- #if !(NSEC_PER_SEC % HZ)
-@@ -697,6 +762,12 @@ u64 jiffies64_to_nsecs(u64 j)
- }
- EXPORT_SYMBOL(jiffies64_to_nsecs);
- 
-+/**
-+ * jiffies64_to_msecs - Convert jiffies64 to milliseconds
-+ * @j: jiffies64 value
-+ *
-+ * Return: milliseconds value
-+ */
- u64 jiffies64_to_msecs(const u64 j)
- {
- #if HZ <= MSEC_PER_SEC && !(MSEC_PER_SEC % HZ)
-@@ -719,6 +790,8 @@ EXPORT_SYMBOL(jiffies64_to_msecs);
-  * note:
-  *   NSEC_PER_SEC = 10^9 = (5^9 * 2^9) = (1953125 * 512)
-  *   ULLONG_MAX ns = 18446744073.709551615 secs = about 584 years
-+ *
-+ * Return: nsecs converted to jiffies64 value
-  */
- u64 nsecs_to_jiffies64(u64 n)
- {
-@@ -750,6 +823,8 @@ EXPORT_SYMBOL(nsecs_to_jiffies64);
-  * note:
-  *   NSEC_PER_SEC = 10^9 = (5^9 * 2^9) = (1953125 * 512)
-  *   ULLONG_MAX ns = 18446744073.709551615 secs = about 584 years
-+ *
-+ * Return: nsecs converted to jiffies value
-  */
- unsigned long nsecs_to_jiffies(u64 n)
- {
-@@ -757,10 +832,16 @@ unsigned long nsecs_to_jiffies(u64 n)
- }
- EXPORT_SYMBOL_GPL(nsecs_to_jiffies);
- 
--/*
-- * Add two timespec64 values and do a safety check for overflow.
-+/**
-+ * timespec64_add_safe - Add two timespec64 values and do a safety check
-+ * for overflow.
-+ * @lhs: first (left) timespec64 to add
-+ * @rhs: second (right) timespec64 to add
-+ *
-  * It's assumed that both values are valid (>= 0).
-  * And, each timespec64 is in normalized form.
-+ *
-+ * Return: sum of @lhs + @rhs
-  */
- struct timespec64 timespec64_add_safe(const struct timespec64 lhs,
- 				const struct timespec64 rhs)
-@@ -778,6 +859,15 @@ struct timespec64 timespec64_add_safe(co
- 	return res;
- }
- 
-+/**
-+ * get_timespec64 - get user's time value into kernel space
-+ * @ts: destination &struct timespec64
-+ * @uts: user's time value as &struct __kernel_timespec
-+ *
-+ * Handles compat or 32-bit modes.
-+ *
-+ * Return: %0 on success or negative errno on error
-+ */
- int get_timespec64(struct timespec64 *ts,
- 		   const struct __kernel_timespec __user *uts)
- {
-@@ -801,6 +891,14 @@ int get_timespec64(struct timespec64 *ts
- }
- EXPORT_SYMBOL_GPL(get_timespec64);
- 
-+/**
-+ * put_timespec64 - convert timespec64 value to __kernel_timespec format and
-+ * 		    copy the latter to userspace
-+ * @ts: input &struct timespec64
-+ * @uts: user's &struct __kernel_timespec
-+ *
-+ * Return: %0 on success or negative errno on error
-+ */
- int put_timespec64(const struct timespec64 *ts,
- 		   struct __kernel_timespec __user *uts)
- {
-@@ -839,6 +937,15 @@ static int __put_old_timespec32(const st
- 	return copy_to_user(cts, &ts, sizeof(ts)) ? -EFAULT : 0;
- }
- 
-+/**
-+ * get_old_timespec32 - get user's old-format time value into kernel space
-+ * @ts: destination &struct timespec64
-+ * @uts: user's old-format time value (&struct old_timespec32)
-+ *
-+ * Handles X86_X32_ABI compatibility conversion.
-+ *
-+ * Return: %0 on success or negative errno on error
-+ */
- int get_old_timespec32(struct timespec64 *ts, const void __user *uts)
- {
- 	if (COMPAT_USE_64BIT_TIME)
-@@ -848,6 +955,16 @@ int get_old_timespec32(struct timespec64
- }
- EXPORT_SYMBOL_GPL(get_old_timespec32);
- 
-+/**
-+ * put_old_timespec32 - convert timespec64 value to &struct old_timespec32 and
-+ * 			copy the latter to userspace
-+ * @ts: input &struct timespec64
-+ * @uts: user's &struct old_timespec32
-+ *
-+ * Handles X86_X32_ABI compatibility conversion.
-+ *
-+ * Return: %0 on success or negative errno on error
-+ */
- int put_old_timespec32(const struct timespec64 *ts, void __user *uts)
- {
- 	if (COMPAT_USE_64BIT_TIME)
-@@ -857,6 +974,13 @@ int put_old_timespec32(const struct time
- }
- EXPORT_SYMBOL_GPL(put_old_timespec32);
- 
-+/**
-+ * get_itimerspec64 - get user's &struct __kernel_itimerspec into kernel space
-+ * @it: destination &struct itimerspec64
-+ * @uit: user's &struct __kernel_itimerspec
-+ *
-+ * Return: %0 on success or negative errno on error
-+ */
- int get_itimerspec64(struct itimerspec64 *it,
- 			const struct __kernel_itimerspec __user *uit)
- {
-@@ -872,6 +996,14 @@ int get_itimerspec64(struct itimerspec64
- }
- EXPORT_SYMBOL_GPL(get_itimerspec64);
- 
-+/**
-+ * put_itimerspec64 - convert &struct itimerspec64 to __kernel_itimerspec format
-+ * 		      and copy the latter to userspace
-+ * @it: input &struct itimerspec64
-+ * @uit: user's &struct __kernel_itimerspec
-+ *
-+ * Return: %0 on success or negative errno on error
-+ */
- int put_itimerspec64(const struct itimerspec64 *it,
- 			struct __kernel_itimerspec __user *uit)
- {
-@@ -887,6 +1019,13 @@ int put_itimerspec64(const struct itimer
- }
- EXPORT_SYMBOL_GPL(put_itimerspec64);
- 
-+/**
-+ * get_old_itimerspec32 - get user's &struct old_itimerspec32 into kernel space
-+ * @its: destination &struct itimerspec64
-+ * @uits: user's &struct old_itimerspec32
-+ *
-+ * Return: %0 on success or negative errno on error
-+ */
- int get_old_itimerspec32(struct itimerspec64 *its,
- 			const struct old_itimerspec32 __user *uits)
- {
-@@ -898,6 +1037,14 @@ int get_old_itimerspec32(struct itimersp
- }
- EXPORT_SYMBOL_GPL(get_old_itimerspec32);
- 
-+/**
-+ * put_old_itimerspec32 - convert &struct itimerspec64 to &struct
-+ *			  old_itimerspec32 and copy the latter to userspace
-+ * @its: input &struct itimerspec64
-+ * @uits: user's &struct old_itimerspec32
-+ *
-+ * Return: %0 on success or negative errno on error
-+ */
- int put_old_itimerspec32(const struct itimerspec64 *its,
- 			struct old_itimerspec32 __user *uits)
- {
+> 
+>>
+>>> just create platform device for actual ramoops driver to probe and to
+>>
+>> Not really justification for Devicetree anyway. Whatever your driver
+>> is doing, is driver's business, not bindings.
+>>
+>>> provide this it needs exact set of parameters of input what original
+>>> ramoops DT provides, we need to keep it in DT as maintaining this in
+>>> driver will not scale well with different size/parameter size
+>>> requirement for different targets.
+>>
+>> Really? Why? I don't see a problem in scaling. At all.
+> 
+> I had attempted it here,
+> 
+> https://lore.kernel.org/lkml/1683133352-10046-10-git-send-email-quic_mojha@quicinc.com/
+> 
+> but got comments related to hard coding and some in favor of having
+> the same set of properties what ramoops has/provides
+> 
+> https://lore.kernel.org/lkml/e25723bf-be85-b458-a84c-1a45392683bb@gmail.com/
+> 
+> https://lore.kernel.org/lkml/202305161347.80204C1A0E@keescook/
+
+Then you were tricked. I don't get why someone else suggests that
+non-hardware property should be part of Devicetree, but anyway it's the
+call of Devicetree binding maintainers, not someone else. DT is not
+dumping ground for all the system configuration variables.
+
+
+>>
+>>>
+>>>>
+>>>>>
+>>>>> A part of this registration code you can find in 11/21
+>>>>>
+>>>>>> I'm pretty sure I already said all this before.
+>>>>>
+>>>>> Yes, you said this before but that's the reason i came up with vendor
+>>>>> ramoops instead of changing traditional ramoops binding.
+>>>>
+>>>> That's unexpected conclusion. Adding more bindings is not the answer to
+>>>> comment that it should not be in the DTS in the first place.
+>>>
+>>> Please suggest, what is the other way being above text as requirement..
+>>
+>> I do not see any requirement for us there. Forcing me to figure out
+>> how to add non-hardware property to DT is not the way to convince
+>> reviewers. But if you insist - we have ABI for this, called sysfs. If
+>> it is debugging feature, then debugfs.
+> 
+> ramoops already support module params and a way to pass these parameters
+> from bootargs but it also need to know the hard-codes addresses, so, 
+> doing something in sysfs will be again duplication with ramoops driver..
+
+Why do you need hard-coded addresses?
+
+> 
+> If this can be accommodated under ramoops, this will be very small 
+> change, like this
+> 
+> https://lore.kernel.org/lkml/20230622005213.458236-1-isaacmanjarres@google.com/
+
+That's also funny patch - missing bindings updated, missing CC DT
+maintainers.
+
+Best regards,
+Krzysztof
+
