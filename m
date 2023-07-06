@@ -2,228 +2,189 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id DF7BF74A215
-	for <lists+linux-doc@lfdr.de>; Thu,  6 Jul 2023 18:17:48 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 10F6674A251
+	for <lists+linux-doc@lfdr.de>; Thu,  6 Jul 2023 18:39:27 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S229470AbjGFQRq (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 6 Jul 2023 12:17:46 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:34242 "EHLO
+        id S231570AbjGFQjZ (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 6 Jul 2023 12:39:25 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:39850 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S229507AbjGFQRq (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Thu, 6 Jul 2023 12:17:46 -0400
-Received: from madras.collabora.co.uk (madras.collabora.co.uk [IPv6:2a00:1098:0:82:1000:25:2eeb:e5ab])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 557D71BD0;
-        Thu,  6 Jul 2023 09:17:44 -0700 (PDT)
-Received: from localhost (unknown [IPv6:2a01:e0a:2c:6930:5cf4:84a1:2763:fe0d])
+        with ESMTP id S231675AbjGFQjV (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Thu, 6 Jul 2023 12:39:21 -0400
+Received: from dfw.source.kernel.org (dfw.source.kernel.org [IPv6:2604:1380:4641:c500::1])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 0AAB71BD4;
+        Thu,  6 Jul 2023 09:39:18 -0700 (PDT)
+Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
         (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-         key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+         key-exchange X25519 server-signature RSA-PSS (2048 bits))
         (No client certificate requested)
-        (Authenticated sender: bbrezillon)
-        by madras.collabora.co.uk (Postfix) with ESMTPSA id 530526606FC4;
-        Thu,  6 Jul 2023 17:17:42 +0100 (BST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=collabora.com;
-        s=mail; t=1688660262;
-        bh=4cV/8VdwLXH2eQQcsUWFWhhwEQt7rM/qzAqlvLShfgU=;
-        h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
-        b=NnO4ma2CFt85JPIzCSWDPOL/s22MT7Y8TKuN0Mn5aRnPK5LRvyYn6PeGRVh//Oqzi
-         p9c7y2J7vGMdC9Mh6iJmIiE3Q1TQBCGqmcEBmxUkZlLjnSWXcbP8v5q5LOraWPzIM4
-         EyJqNchWG0HPb1FlXXUNA84WBdEJgUFTVcaY2TqdiuY7rtAP3Zcz8D2E8QKzuborXe
-         696gPDul6pbSYLPtRpZ9dR1RcFi4NaGEV1Q9DCgWIANz6C/LWkmTxQIq2UfWIP58rh
-         OZ0RnjjsohZ8pJ2st60CZyt3PCBwQt8ve7sqGAXv3dmJG6XHtEfSCrVgO1ugL6yUJe
-         1a7FEuXKsrHtQ==
-Date:   Thu, 6 Jul 2023 18:17:39 +0200
-From:   Boris Brezillon <boris.brezillon@collabora.com>
-To:     Danilo Krummrich <dakr@redhat.com>
-Cc:     airlied@gmail.com, daniel@ffwll.ch, tzimmermann@suse.de,
-        mripard@kernel.org, corbet@lwn.net, christian.koenig@amd.com,
-        bskeggs@redhat.com, Liam.Howlett@oracle.com,
-        matthew.brost@intel.com, alexdeucher@gmail.com, ogabbay@kernel.org,
-        bagasdotme@gmail.com, willy@infradead.org, jason@jlekstrand.net,
-        dri-devel@lists.freedesktop.org, nouveau@lists.freedesktop.org,
-        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
-        Donald Robson <donald.robson@imgtec.com>,
-        Dave Airlie <airlied@redhat.com>
-Subject: Re: [PATCH drm-next v6 02/13] drm: manager to keep track of GPUs VA
- mappings
-Message-ID: <20230706181739.57afbcfa@collabora.com>
-In-Reply-To: <755b3aeb-8067-2fa5-5173-d889811e954a@redhat.com>
-References: <20230629222651.3196-1-dakr@redhat.com>
-        <20230629222651.3196-3-dakr@redhat.com>
-        <20230630100252.7ff6421d@collabora.com>
-        <755b3aeb-8067-2fa5-5173-d889811e954a@redhat.com>
-Organization: Collabora
-X-Mailer: Claws Mail 4.1.1 (GTK 3.24.38; x86_64-redhat-linux-gnu)
+        by dfw.source.kernel.org (Postfix) with ESMTPS id 817B660F4F;
+        Thu,  6 Jul 2023 16:39:17 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id CD5B4C433C8;
+        Thu,  6 Jul 2023 16:39:16 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+        s=k20201202; t=1688661556;
+        bh=h0OgFh+n1mPvFs2BQeBGKqCup9+gz5oIEYrZdP/kZ1I=;
+        h=Date:From:To:Cc:Subject:Reply-To:References:In-Reply-To:From;
+        b=R0xErIoJDEDCPvtj6yutBpmBjH5+sNN2DTcaezc0n9WR9TmEy1Nr2SEjJS8AccSd3
+         25C6dIotYWq8C5oJ9XdKjIpstBZeJWrrI9E27qO7jpwLOi76bYLKoIyXlH2wfstEMQ
+         tPDpcvtxi4PytZqu0bwUna2NlsoyPW4LBUJOY/NsN0hai4AjwHDjPZzylD8bgAPtdb
+         Cwl4u1kw+cVOCyrTxYlUiTtFJt//p8FjGirDXyUgy4nS8jwMLqoMNQN/rB22Oc6zG4
+         gH6et2pDl9nnxtn2MeaAt2F24E81hxy8q8zy8E74z/IjrpOLVV0NQ5YhU+0Jter5Dd
+         vcGyaW6m9hrYA==
+Received: by paulmck-ThinkPad-P17-Gen-1.home (Postfix, from userid 1000)
+        id 6BCE5CE3BFC; Thu,  6 Jul 2023 09:39:16 -0700 (PDT)
+Date:   Thu, 6 Jul 2023 09:39:16 -0700
+From:   "Paul E. McKenney" <paulmck@kernel.org>
+To:     Frederic Weisbecker <frederic@kernel.org>
+Cc:     Valentin Schneider <vschneid@redhat.com>,
+        linux-kernel@vger.kernel.org, linux-trace-kernel@vger.kernel.org,
+        linux-doc@vger.kernel.org, kvm@vger.kernel.org, linux-mm@kvack.org,
+        bpf@vger.kernel.org, x86@kernel.org,
+        Nicolas Saenz Julienne <nsaenzju@redhat.com>,
+        Steven Rostedt <rostedt@goodmis.org>,
+        Masami Hiramatsu <mhiramat@kernel.org>,
+        Jonathan Corbet <corbet@lwn.net>,
+        Thomas Gleixner <tglx@linutronix.de>,
+        Ingo Molnar <mingo@redhat.com>, Borislav Petkov <bp@alien8.de>,
+        Dave Hansen <dave.hansen@linux.intel.com>,
+        "H. Peter Anvin" <hpa@zytor.com>,
+        Paolo Bonzini <pbonzini@redhat.com>,
+        Wanpeng Li <wanpengli@tencent.com>,
+        Vitaly Kuznetsov <vkuznets@redhat.com>,
+        Andy Lutomirski <luto@kernel.org>,
+        Peter Zijlstra <peterz@infradead.org>,
+        Andrew Morton <akpm@linux-foundation.org>,
+        Uladzislau Rezki <urezki@gmail.com>,
+        Christoph Hellwig <hch@infradead.org>,
+        Lorenzo Stoakes <lstoakes@gmail.com>,
+        Josh Poimboeuf <jpoimboe@kernel.org>,
+        Kees Cook <keescook@chromium.org>,
+        Sami Tolvanen <samitolvanen@google.com>,
+        Ard Biesheuvel <ardb@kernel.org>,
+        Nicholas Piggin <npiggin@gmail.com>,
+        Juerg Haefliger <juerg.haefliger@canonical.com>,
+        Nicolas Saenz Julienne <nsaenz@kernel.org>,
+        "Kirill A. Shutemov" <kirill.shutemov@linux.intel.com>,
+        Nadav Amit <namit@vmware.com>,
+        Dan Carpenter <error27@gmail.com>,
+        Chuang Wang <nashuiliang@gmail.com>,
+        Yang Jihong <yangjihong1@huawei.com>,
+        Petr Mladek <pmladek@suse.com>,
+        "Jason A. Donenfeld" <Jason@zx2c4.com>, Song Liu <song@kernel.org>,
+        Julian Pidancet <julian.pidancet@oracle.com>,
+        Tom Lendacky <thomas.lendacky@amd.com>,
+        Dionna Glaze <dionnaglaze@google.com>,
+        Thomas =?iso-8859-1?Q?Wei=DFschuh?= <linux@weissschuh.net>,
+        Juri Lelli <juri.lelli@redhat.com>,
+        Daniel Bristot de Oliveira <bristot@redhat.com>,
+        Marcelo Tosatti <mtosatti@redhat.com>,
+        Yair Podemsky <ypodemsk@redhat.com>
+Subject: Re: [RFC PATCH 11/14] context-tracking: Introduce work deferral
+ infrastructure
+Message-ID: <4c2cb573-168f-4806-b1d9-164e8276e66a@paulmck-laptop>
+Reply-To: paulmck@kernel.org
+References: <20230705181256.3539027-1-vschneid@redhat.com>
+ <20230705181256.3539027-12-vschneid@redhat.com>
+ <ZKXtfWZiM66dK5xC@localhost.localdomain>
+ <xhsmhttuhuvix.mognet@vschneid.remote.csb>
+ <ZKaoHrm0Fejb7kAl@lothringen>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: 7bit
-X-Spam-Status: No, score=-2.1 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,SPF_HELO_NONE,SPF_PASS,
-        T_SCC_BODY_TEXT_LINE autolearn=ham autolearn_force=no version=3.4.6
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <ZKaoHrm0Fejb7kAl@lothringen>
+X-Spam-Status: No, score=-4.4 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_MED,
+        SPF_HELO_NONE,SPF_PASS,T_SCC_BODY_TEXT_LINE autolearn=ham
+        autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Thu, 6 Jul 2023 17:06:08 +0200
-Danilo Krummrich <dakr@redhat.com> wrote:
-
-> Hi Boris,
+On Thu, Jul 06, 2023 at 01:40:14PM +0200, Frederic Weisbecker wrote:
+> On Thu, Jul 06, 2023 at 12:30:46PM +0100, Valentin Schneider wrote:
+> > >> +		ret = atomic_try_cmpxchg(&ct->work, &old_work, old_work | work);
+> > >> +
+> > >> +	preempt_enable();
+> > >> +	return ret;
+> > >> +}
+> > > [...]
+> > >> @@ -100,14 +158,19 @@ static noinstr void ct_kernel_exit_state(int offset)
+> > >>   */
+> > >>  static noinstr void ct_kernel_enter_state(int offset)
+> > >>  {
+> > >> +	struct context_tracking *ct = this_cpu_ptr(&context_tracking);
+> > >>      int seq;
+> > >> +	unsigned int work;
+> > >>
+> > >> +	work = ct_work_fetch(ct);
+> > >
+> > > So this adds another fully ordered operation on user <-> kernel transition.
+> > > How many such IPIs can we expect?
+> > >
+> > 
+> > Despite having spent quite a lot of time on that question, I think I still
+> > only have a hunch.
+> > 
+> > Poking around RHEL systems, I'd say 99% of the problematic IPIs are
+> > instruction patching and TLB flushes.
+> > 
+> > Staring at the code, there's quite a lot of smp_calls for which it's hard
+> > to say whether the target CPUs can actually be isolated or not (e.g. the
+> > CPU comes from a cpumask shoved in a struct that was built using data from
+> > another struct of uncertain origins), but then again some of them don't
+> > need to hook into context_tracking.
+> > 
+> > Long story short: I /think/ we can consider that number to be fairly small,
+> > but there could be more lurking in the shadows.
 > 
-> On 6/30/23 10:02, Boris Brezillon wrote:
-> > Hi Danilo,
-> > 
-> > On Fri, 30 Jun 2023 00:25:18 +0200
-> > Danilo Krummrich <dakr@redhat.com> wrote:
-> >   
-> >> + *	int driver_gpuva_remap(struct drm_gpuva_op *op, void *__ctx)
-> >> + *	{
-> >> + *		struct driver_context *ctx = __ctx;
-> >> + *
-> >> + *		drm_gpuva_remap(ctx->prev_va, ctx->next_va, &op->remap);
-> >> + *
-> >> + *		drm_gpuva_unlink(op->remap.unmap->va);
-> >> + *		kfree(op->remap.unmap->va);
-> >> + *
-> >> + *		if (op->remap.prev) {
-> >> + *			drm_gpuva_link(ctx->prev_va);  
-> > 
-> > I ended up switching to dma_resv-based locking for the GEMs and I
-> > wonder what the locking is supposed to look like in the async-mapping
-> > case, where we insert/remove the VA nodes in the drm_sched::run_job()
-> > path.  
+> I guess it will still be time to reconsider the design if we ever reach such size.
 > 
-> If you decide to pick the interface where you just call 
-> drm_gpuva_sm_[un]map() and receive a callback for each operation it 
-> takes to fulfill the request, you probably do this because you want to 
-> do everything one shot, updating the VA space, link/unlink GPUVAs 
-> to/from its corresponding backing GEMs, do the actual GPU mappings.
+> > > If this is just about a dozen, can we stuff them in the state like in the
+> > > following? We can potentially add more of them especially on 64 bits we could
+> > > afford 30 different works, this is just shrinking the RCU extended quiescent
+> > > state counter space. Worst case that can happen is that RCU misses 65535
+> > > idle/user <-> kernel transitions and delays a grace period...
+> > >
+> > 
+> > I'm trying to grok how this impacts RCU, IIUC most of RCU mostly cares about the
+> > even/odd-ness of the thing, and rcu_gp_fqs() cares about the actual value
+> > but only to check if it has changed over time (rcu_dynticks_in_eqs_since()
+> > only does a !=).
+> > 
+> > I'm rephrasing here to make sure I get it - is it then that the worst case
+> > here is 2^(dynticks_counter_size) transitions happen between saving the
+> > dynticks snapshot and checking it again, so RCU waits some more?
 > 
-> This has a few advantages over generating a list of operations when the 
-> job is submitted. You've pointed out one of them, when you noticed that 
-> with a list of operations one can't sneak in a synchronous job between 
-> already queued up asynchronous jobs.
-> 
-> However, for the asynchronous path it has the limitation that the 
-> dma-resv lock can't be used to link/unlink GPUVAs to/from its 
-> corresponding backing GEMs, since this would happen in the fence 
-> signalling critical path and we're not allowed to hold the dma-resv lock 
-> there. Hence, as we discussed I added the option for drivers to provide 
-> an external lock for that, just to be able to keep some lockdep checks.
+> That's my understanding as well but I have to defer on Paul to make sure I'm
+> not overlooking something.
 
-Uh, okay, I guess that means I need to go back to a custom lock for VM
-operations then.
+That does look plausible to me.
 
-> 
-> > 
-> > What I have right now is something like:
-> > 
-> > 	dma_resv_lock(vm->resv);
-> > 
-> > 	// split done in drm_gpuva_sm_map(), each iteration
-> > 	// of the loop is a call to the driver ->[re,un]map()
-> > 	// hook
-> > 	for_each_sub_op() {
-> > 		
-> > 		// Private BOs have their resv field pointing to the
-> > 		// VM resv and we take the VM resv lock before calling
-> > 		// drm_gpuva_sm_map()
-> > 		if (vm->resv != gem->resv)
-> > 			dma_resv_lock(gem->resv);
-> > 
-> > 		drm_gpuva_[un]link(va);
-> > 		gem_[un]pin(gem);
-> > 
-> > 		if (vm->resv != gem->resv)
-> > 			dma_resv_unlock(gem->resv);
-> > 	}
-> > 
-> > 	dma_resv_unlock(vm->resv);
-> >   
-> 
-> I'm not sure I get this code right, reading "for_each_sub_op()" and 
-> "drm_gpuva_sm_map()" looks a bit like things are mixed up?
-> 
-> Or do you mean to represent the sum of all callbacks with 
-> "for_each_sub_op()"?
+And yes, RCU really cares about whether its part of this counter has
+been a multiple of two during a given interval of time, because this
+indicates that the CPU has no pre-existing RCU readers still active.
+One way that this can happen is for that value to be a multiple of two
+at some point in time.  The other way that this can happen is for the
+value to have changed.  No matter what the start and end values, if they
+are different, the counter must necessarily have at least passed through
+multiple of two in the meantime, again guaranteeing that any RCU readers
+that around when the count was first fetched have now finished.
 
-That ^.
+But we should take the machine's opinions much more seriously than we
+take any of our own opinions.  Why not adjust RCU_DYNTICKS_IDX so as
+to crank RCU's portion of this counter down to (say) two or three bits
+and let rcutorture have at it on TREE04 or TREE07, both of which have
+nohz_full CPUs?
 
-> In this case I assume this code runs in 
-> drm_sched::run_job() and hence isn't allowed to take the dma-resv lock.
+Maybe also adjust mkinitrd.sh to make the user/kernel transitions more
+frequent?
 
-Yeah, I didn't realize that taking the dma-resv lock in the
-dma-signaling path was forbidden. I think it's fine for the drm_gpuva
-destroy operation (which calls drm_gem_shmem_unpin(), which in turns
-acquires the resv lock) because I can move that to a worker and get it
-out of the dma-signaling path. The problem remains for remap operations
-though. I need to call drm_gem_shmem_pin() so we retain the pages even
-after the unmapped gpuva object that's in the middle of a mapping is
-released. I guess one option would be to use an atomic_t for
-drm_shmem_gem_object::pages_use_count, and
-have something like:
+Please note that I do -not- recommend production use of a three-bit
+(let alone a two-bit) RCU portion because this has a high probability
+of excessively extending grace periods.  But it might be good to keep
+a tiny counter as a debug option so that we regularly rcutorture it.
 
-int drm_gem_shmem_pin(struct drm_gem_shmem_object *shmem)
-{
-	int ret;
-
-	if (atomic_inc_not_zero(&shmem->pages_use_count))
-		return 0;
-
-	dma_resv_lock(shmem->base.resv, NULL);
-	ret = drm_gem_shmem_pin_locked(shmem);
-	dma_resv_unlock(shmem->base.resv);
-
-	return ret;
-}
-
-Given the object already had its pages pinned when we remap, we're sure
-the fast path will be taken, and no dma-resv lock aquired.
-
-> 
-> > In practice, I don't expect things to deadlock, because the VM resv is
-> > not supposed to be taken outside the VM context and the locking order
-> > is always the same (VM lock first, and then each shared BO
-> > taken/released independently), but I'm not super thrilled by this
-> > nested lock, and I'm wondering if we shouldn't have a pass collecting
-> > locks in a drm_exec context first, and then have
-> > the operations executed. IOW, something like that:
-> > 
-> > 	drm_exec_init(exec, DRM_EXEC_IGNORE_DUPLICATES)
-> > 	drm_exec_until_all_locked(exec) {
-> > 		// Dummy GEM is the dummy GEM object I use to make the VM
-> > 		// participate in the locking without having to teach
-> > 		// drm_exec how to deal with raw dma_resv objects.
-> > 		ret = drm_exec_lock_obj(exec, vm->dummy_gem);
-> > 		drm_exec_retry_on_contention(exec);
-> > 		if (ret)
-> > 			return ret;
-> > 
-> > 		// Could take the form of drm_gpuva_sm_[un]map_acquire_locks()
-> > 		// helpers
-> > 		for_each_sub_op() {
-> > 			ret = drm_exec_lock_obj(exec, gem);
-> > 			if (ret)
-> > 				return ret;
-> > 		}
-> > 	}
-> > 
-> > 	// each iteration of the loop is a call to the driver
-> > 	// ->[re,un]map() hook
-> > 	for_each_sub_op() {
-> > 		...
-> > 		gem_[un]pin_locked(gem);
-> > 		drm_gpuva_[un]link(va);
-> > 		...
-> > 	}
-> > 
-> > 	drm_exec_fini(exec);  
-> 
-> I have a follow-up patch (still WIP) in the queue to generalize dma-resv 
-> handling, fence handling and GEM validation within the GPUVA manager as 
-> optional helper functions: 
-> https://gitlab.freedesktop.org/nouvelles/kernel/-/commit/a5fc29f3b1edbf3f96fb5a21b858ffe00a3f2584
-
-Thanks for the heads-up. That's more or less what I have, except I'm
-attaching a dummy_gem object to the VM so it can be passed to drm_exec
-directly (instead of having a separate ww_acquire_ctx).
+							Thanx, Paul
