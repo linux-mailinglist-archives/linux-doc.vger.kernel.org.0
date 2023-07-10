@@ -2,217 +2,174 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id E1FCE74CFDC
-	for <lists+linux-doc@lfdr.de>; Mon, 10 Jul 2023 10:24:27 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 6E74174D071
+	for <lists+linux-doc@lfdr.de>; Mon, 10 Jul 2023 10:43:26 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S232810AbjGJIYZ (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 10 Jul 2023 04:24:25 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:43696 "EHLO
+        id S233023AbjGJInX (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 10 Jul 2023 04:43:23 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:52058 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S233003AbjGJIYI (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Mon, 10 Jul 2023 04:24:08 -0400
-Received: from mail-ej1-x630.google.com (mail-ej1-x630.google.com [IPv6:2a00:1450:4864:20::630])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id F0A1112E
-        for <linux-doc@vger.kernel.org>; Mon, 10 Jul 2023 01:23:57 -0700 (PDT)
-Received: by mail-ej1-x630.google.com with SMTP id a640c23a62f3a-992ace062f3so548624666b.2
-        for <linux-doc@vger.kernel.org>; Mon, 10 Jul 2023 01:23:57 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=resnulli-us.20221208.gappssmtp.com; s=20221208; t=1688977436; x=1691569436;
-        h=in-reply-to:content-disposition:mime-version:references:message-id
-         :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
-        bh=lVVTTcakGIJzotpbfodORieW7nDILC8yQwEKuMOUYLA=;
-        b=v8PbxExQdeZ1rHkHw7LZ/7j9U0WaA1dkJRr1esV51tDnEYnz1yXdBnwheipucQw7iU
-         Dwny0J0H5BLnpfGCG5wzHd2FnzlN2eKCW8gMzeSEoxaUGxTKsnw6EvOsEUU4TK67JfFM
-         Fphyzekktczmyd9ASIWTNFAeo2y/sK6qzV5gvKJEWK5UQrHLGo1bEQy410Gg0pjYZAno
-         l+f8A80ndIBgzckm1LdIX5bAeQYPaJaXuB13ipB3GplwZOJY/GVnmBg1MPjebry6Ueg9
-         L5E9ztuma8giElufrDqCE9zHYDHjDcl1vKgQ9QXsO3zircBl8jFsHwzGNf5dL/40PtRb
-         4zSQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1688977436; x=1691569436;
-        h=in-reply-to:content-disposition:mime-version:references:message-id
-         :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=lVVTTcakGIJzotpbfodORieW7nDILC8yQwEKuMOUYLA=;
-        b=UWq6qLuj2IdyxlbunsAkFpJlXmBBOHF011VAiilFqnsn0coCrkRAgME0UC/VqGF5M1
-         Gl6O4lQS79JC2zDuSxClb8oTAZcPqyJDyzpTuYbiPkcPMEg6taqELRZ3qcEfMBWIWZsj
-         NWbpL3Gjp+TAy0C6A4Q+GNpQQIamGEqlZAFKlH80JnmSYHXrKPxclvjersLnijzfaZob
-         KhMgRf7pLWLTClZsMWV9xIaO+A3oblHvfVHGjzb/+yAZQ6hAO/RWO7In/3wg/ACQAnMj
-         nfsrGmi4njT1y7LSYzqozPnAg2zXNN03V32fibaKBO3QpVL0NVt7smKsooglWe3feMq3
-         yZoQ==
-X-Gm-Message-State: ABy/qLb0GmW5Ou1ggXd+GHK0sMwB+w5tEsuQvv+RDtyvsF6FClDjQiSk
-        2rm6J0xm9bNWefCIrAuEAg6FkQ==
-X-Google-Smtp-Source: APBJJlF/N78SzaPnYo5KIYgXXWBnknej6T2zV2RqWE8pAe5WopCVgqY0xM4CSFkpZNpYhf0+V/cUNg==
-X-Received: by 2002:a17:906:101e:b0:993:fba5:cdf3 with SMTP id 30-20020a170906101e00b00993fba5cdf3mr5110018ejm.6.1688977436009;
-        Mon, 10 Jul 2023 01:23:56 -0700 (PDT)
-Received: from localhost (host-213-179-129-39.customer.m-online.net. [213.179.129.39])
-        by smtp.gmail.com with ESMTPSA id u2-20020a1709063b8200b0098e42bef732sm5733689ejf.183.2023.07.10.01.23.54
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 10 Jul 2023 01:23:55 -0700 (PDT)
-Date:   Mon, 10 Jul 2023 10:23:53 +0200
-From:   Jiri Pirko <jiri@resnulli.us>
-To:     "Kubalewski, Arkadiusz" <arkadiusz.kubalewski@intel.com>
-Cc:     "kuba@kernel.org" <kuba@kernel.org>,
-        "vadfed@meta.com" <vadfed@meta.com>,
-        "jonathan.lemon@gmail.com" <jonathan.lemon@gmail.com>,
-        "pabeni@redhat.com" <pabeni@redhat.com>,
-        "corbet@lwn.net" <corbet@lwn.net>,
-        "davem@davemloft.net" <davem@davemloft.net>,
-        "edumazet@google.com" <edumazet@google.com>,
-        "vadfed@fb.com" <vadfed@fb.com>,
-        "Brandeburg, Jesse" <jesse.brandeburg@intel.com>,
-        "Nguyen, Anthony L" <anthony.l.nguyen@intel.com>,
-        "M, Saeed" <saeedm@nvidia.com>,
-        "leon@kernel.org" <leon@kernel.org>,
-        "richardcochran@gmail.com" <richardcochran@gmail.com>,
-        "sj@kernel.org" <sj@kernel.org>,
-        "javierm@redhat.com" <javierm@redhat.com>,
-        "ricardo.canuelo@collabora.com" <ricardo.canuelo@collabora.com>,
-        "mst@redhat.com" <mst@redhat.com>,
-        "tzimmermann@suse.de" <tzimmermann@suse.de>,
-        "Michalik, Michal" <michal.michalik@intel.com>,
-        "gregkh@linuxfoundation.org" <gregkh@linuxfoundation.org>,
-        "jacek.lawrynowicz@linux.intel.com" 
-        <jacek.lawrynowicz@linux.intel.com>,
-        "airlied@redhat.com" <airlied@redhat.com>,
-        "ogabbay@kernel.org" <ogabbay@kernel.org>,
-        "arnd@arndb.de" <arnd@arndb.de>,
-        "nipun.gupta@amd.com" <nipun.gupta@amd.com>,
-        "axboe@kernel.dk" <axboe@kernel.dk>,
-        "linux@zary.sk" <linux@zary.sk>,
-        "masahiroy@kernel.org" <masahiroy@kernel.org>,
-        "benjamin.tissoires@redhat.com" <benjamin.tissoires@redhat.com>,
-        "geert+renesas@glider.be" <geert+renesas@glider.be>,
-        "Olech, Milena" <milena.olech@intel.com>,
-        "kuniyu@amazon.com" <kuniyu@amazon.com>,
-        "liuhangbin@gmail.com" <liuhangbin@gmail.com>,
-        "hkallweit1@gmail.com" <hkallweit1@gmail.com>,
-        "andy.ren@getcruise.com" <andy.ren@getcruise.com>,
-        "razor@blackwall.org" <razor@blackwall.org>,
-        "idosch@nvidia.com" <idosch@nvidia.com>,
-        "lucien.xin@gmail.com" <lucien.xin@gmail.com>,
-        "nicolas.dichtel@6wind.com" <nicolas.dichtel@6wind.com>,
-        "phil@nwl.cc" <phil@nwl.cc>,
-        "claudiajkang@gmail.com" <claudiajkang@gmail.com>,
-        "linux-doc@vger.kernel.org" <linux-doc@vger.kernel.org>,
-        "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
-        "netdev@vger.kernel.org" <netdev@vger.kernel.org>,
-        "intel-wired-lan@lists.osuosl.org" <intel-wired-lan@lists.osuosl.org>,
-        "linux-rdma@vger.kernel.org" <linux-rdma@vger.kernel.org>,
-        "linux-arm-kernel@lists.infradead.org" 
-        <linux-arm-kernel@lists.infradead.org>, poros <poros@redhat.com>,
-        mschmidt <mschmidt@redhat.com>,
-        "linux-clk@vger.kernel.org" <linux-clk@vger.kernel.org>,
-        "vadim.fedorenko@linux.dev" <vadim.fedorenko@linux.dev>
-Subject: Re: [RFC PATCH v8 08/10] ice: implement dpll interface to control cgu
-Message-ID: <ZKvAGSwbJWEQmESs@nanopsycho>
-References: <20230609121853.3607724-1-arkadiusz.kubalewski@intel.com>
- <20230609121853.3607724-9-arkadiusz.kubalewski@intel.com>
- <ZISmmH0jqxZRB4VX@nanopsycho>
- <DM6PR11MB4657161D2871747A7B404EDD9B5FA@DM6PR11MB4657.namprd11.prod.outlook.com>
- <ZJLtR0c+tvCbUgri@nanopsycho>
- <ZJ0hQRcm6S05r8VE@nanopsycho>
- <DM6PR11MB465726733894C7E64AD3367E9B29A@DM6PR11MB4657.namprd11.prod.outlook.com>
+        with ESMTP id S232932AbjGJIms (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Mon, 10 Jul 2023 04:42:48 -0400
+Received: from szxga01-in.huawei.com (szxga01-in.huawei.com [45.249.212.187])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 35F0B2D41;
+        Mon, 10 Jul 2023 01:41:31 -0700 (PDT)
+Received: from canpemm500009.china.huawei.com (unknown [172.30.72.56])
+        by szxga01-in.huawei.com (SkyGuard) with ESMTP id 4QzyBX1LZqzqVdF;
+        Mon, 10 Jul 2023 16:40:36 +0800 (CST)
+Received: from localhost.localdomain (10.50.163.32) by
+ canpemm500009.china.huawei.com (7.192.105.203) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2507.27; Mon, 10 Jul 2023 16:41:08 +0800
+From:   Yicong Yang <yangyicong@huawei.com>
+To:     <akpm@linux-foundation.org>, <catalin.marinas@arm.com>,
+        <linux-mm@kvack.org>, <linux-arm-kernel@lists.infradead.org>,
+        <x86@kernel.org>, <mark.rutland@arm.com>, <ryan.roberts@arm.com>,
+        <will@kernel.org>, <anshuman.khandual@arm.com>,
+        <linux-doc@vger.kernel.org>
+CC:     <corbet@lwn.net>, <peterz@infradead.org>, <arnd@arndb.de>,
+        <punit.agrawal@bytedance.com>, <linux-kernel@vger.kernel.org>,
+        <darren@os.amperecomputing.com>, <yangyicong@hisilicon.com>,
+        <huzhanyuan@oppo.com>, <lipeifeng@oppo.com>,
+        <zhangshiming@oppo.com>, <guojian@oppo.com>, <realmz6@gmail.com>,
+        <linux-mips@vger.kernel.org>, <openrisc@lists.librecores.org>,
+        <linuxppc-dev@lists.ozlabs.org>, <linux-riscv@lists.infradead.org>,
+        <linux-s390@vger.kernel.org>, Barry Song <21cnbao@gmail.com>,
+        <wangkefeng.wang@huawei.com>, <xhao@linux.alibaba.com>,
+        <prime.zeng@hisilicon.com>, <Jonathan.Cameron@Huawei.com>
+Subject: [PATCH v10 0/4]  arm64: support batched/deferred tlb shootdown during page reclamation/migration
+Date:   Mon, 10 Jul 2023 16:39:10 +0800
+Message-ID: <20230710083914.18336-1-yangyicong@huawei.com>
+X-Mailer: git-send-email 2.31.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <DM6PR11MB465726733894C7E64AD3367E9B29A@DM6PR11MB4657.namprd11.prod.outlook.com>
-X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-        DKIM_VALID,RCVD_IN_DNSWL_BLOCKED,SPF_HELO_NONE,SPF_NONE,
-        T_SCC_BODY_TEXT_LINE autolearn=unavailable autolearn_force=no
-        version=3.4.6
+Content-Transfer-Encoding: 7BIT
+Content-Type:   text/plain; charset=US-ASCII
+X-Originating-IP: [10.50.163.32]
+X-ClientProxiedBy: dggems704-chm.china.huawei.com (10.3.19.181) To
+ canpemm500009.china.huawei.com (7.192.105.203)
+X-CFilter-Loop: Reflected
+X-Spam-Status: No, score=-2.9 required=5.0 tests=BAYES_00,
+        RCVD_IN_DNSWL_BLOCKED,RCVD_IN_MSPIKE_H5,RCVD_IN_MSPIKE_WL,
+        SPF_HELO_NONE,SPF_PASS,T_SCC_BODY_TEXT_LINE autolearn=ham
+        autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Mon, Jul 03, 2023 at 02:37:18PM CEST, arkadiusz.kubalewski@intel.com wrote:
->>From: Jiri Pirko <jiri@resnulli.us>
->>Sent: Thursday, June 29, 2023 8:14 AM
->>
->>Wed, Jun 21, 2023 at 02:29:59PM CEST, jiri@resnulli.us wrote:
->>>Mon, Jun 19, 2023 at 10:34:12PM CEST, arkadiusz.kubalewski@intel.com
->>wrote:
->>>>>From: Jiri Pirko <jiri@resnulli.us>
->>>>>Sent: Saturday, June 10, 2023 6:37 PM
->>>>>
->>>>>Fri, Jun 09, 2023 at 02:18:51PM CEST, arkadiusz.kubalewski@intel.com
->>>>>wrote:
->>>>>
->>>>>[...]
->>>>>
->>>>>
->>>>>>+static int ice_dpll_mode_get(const struct dpll_device *dpll, void *priv,
->>>>>>+			     enum dpll_mode *mode,
->>>>>>+			     struct netlink_ext_ack *extack)
->>>>>>+{
->>>>>>+	*mode = DPLL_MODE_AUTOMATIC;
->>>>>
->>>>>I don't understand how the automatic mode could work with SyncE. The
->>>>>There is one pin exposed for one netdev. The SyncE daemon should select
->>>>>exacly one pin. How do you achieve that?
->>>>>Is is by setting DPLL_PIN_STATE_SELECTABLE on the pin-netdev you want to
->>>>>select and DPLL_PIN_STATE_DISCONNECTED on the rest?
->>>>>
->>>>>
->>>>>[...]
->>>>
->>>>AUTOMATIC mode autoselects highest priority valid signal.
->>>>As you have pointed out, for SyncE selection, the user must be able to
->>>>manually
->>>>select a pin state to enable recovery of signal from particular port.
->>>>
->>>>In "ice" case there are 2 pins for network PHY clock signal recovery, and
->>>>both
->>>>are parent pins (MUX-type). There are also 4 pins assigned to netdevs
->>>>(one per
->>>>port). Thus passing a signal from PHY to the pin is done through the MUX-
->>>>pin,
->>>>by selecting proper state on pin-parent pair (where parent pins is highest
->>>>prio
->>>>pin on dpll).
->>>
->>>Could you show me some examples please?
->>
->>Arkadiusz, could you please reply to this?
->>Thanks!
->>
->
->Sure, sorry for the delays, let's try that.
->
->'ice' use case:
->Enabling a PHY clock recovery for DPLL_MODE_AUTOMATIC dpll (ID#0) with PHY
->recovered clock signals (PIN_ID#13) being muxed using MUX-type pin (PIN_ID#2)
->
->1. Set MUX-type pin to state selectable and highest priority on a dpll device
->(or make sure it is already configured):
->CMD_PIN_SET:
->	PIN_ID			2
->	PIN_PARENT_DEVICE	(nest)
->		ID		0
->		PIN_STATE	SELECTABLE
->		PIN_PRIO	0
->(assume all the other pins have prio >=1)
->
->2. Set connected state on a pin-parent_pin tuple where parent is a pin from #1
->CMD_PIN_SET:
->	PIN_ID			13
->	PIN_PARENT_PIN		(nest)
->		PIN_ID		2
->		PIN_STATE	CONNECTED
+From: Yicong Yang <yangyicong@hisilicon.com>
 
-How does this look from the perspective of a SyncE flow. Let's say you
-have eth0 and eth1, both is connected with a DPLL pin. Could you show
-how you select eth0 and then eth1?
+Though ARM64 has the hardware to do tlb shootdown, the hardware broadcasting is
+not free. A simplest micro benchmark shows even on snapdragon 888 with only
+8 cores, the overhead for ptep_clear_flush is huge even for paging out one page
+mapped by only one process:
+5.36%  a.out    [kernel.kallsyms]  [k] ptep_clear_flush
 
+While pages are mapped by multiple processes or HW has more CPUs, the cost should
+become even higher due to the bad scalability of tlb shootdown. The same benchmark
+can result in 16.99% CPU consumption on ARM64 server with around 100 cores
+according to the test on patch 4/4.
 
+This patchset leverages the existing BATCHED_UNMAP_TLB_FLUSH by
+1. only send tlbi instructions in the first stage -
+	arch_tlbbatch_add_mm()
+2. wait for the completion of tlbi by dsb while doing tlbbatch
+	sync in arch_tlbbatch_flush()
 
->
->Thank you!
->Arkadiusz
->
->>>
->>>
->>>>
->>>>Thank you!
->>>>Arkadiusz
+Testing on snapdragon shows the overhead of ptep_clear_flush is removed by the
+patchset. The micro benchmark becomes 5% faster even for one page mapped by
+single process on snapdragon 888.
+
+Since BATCHED_UNMAP_TLB_FLUSH is implemented only on x86, the patchset does some
+renaming/extension for the current implementation first (Patch 1-3), then add the
+support on arm64 (Patch 4).
+
+-v10:
+1. Enable BATCHED_UNMAP_TLB_FLUSH regardless of CPU numbers, per Catalin.
+2. Split the renaming/extension works in a separate PATCH 2, per Catalin. Since
+   it's split from PATCH 2/2 in v9, so inherit the tags.
+3. Add arch_flush_tlb_batched_pending() to allow arch-specific implementation,
+   per Catalin. Since it's some kind of an optimization on arm64 so a separate
+   Patch 3/4.
+Link: https://lore.kernel.org/linux-mm/20230518065934.12877-1-yangyicong@huawei.com/
+
+-v9:
+1. Using a runtime tunable to control batched TLB flush, per Catalin in v7.
+   Sorry for missing this on v8.
+Link: https://lore.kernel.org/all/20230329035512.57392-1-yangyicong@huawei.com/
+
+-v8:
+1. Rebase on 6.3-rc4
+2. Tested the optimization on page migration and mentioned it in the commit
+3. Thanks the review from Anshuman.
+Link: https://lore.kernel.org/linux-mm/20221117082648.47526-1-yangyicong@huawei.com/
+
+-v7:
+1. rename arch_tlbbatch_add_mm() to arch_tlbbatch_add_pending() as suggested, since it
+   takes an extra address for arm64, per Nadav and Anshuman. Also mentioned in the commit.
+2. add tags from Xin Hao, thanks.
+Link: https://lore.kernel.org/lkml/20221115031425.44640-1-yangyicong@huawei.com/
+
+-v6:
+1. comment we don't defer TLB flush on platforms affected by ARM64_WORKAROUND_REPEAT_TLBI
+2. use cpus_have_const_cap() instead of this_cpu_has_cap()
+3. add tags from Punit, Thanks.
+4. default enable the feature when cpus >= 8 rather than > 8, since the original
+   improvement is observed on snapdragon 888 with 8 cores.
+Link: https://lore.kernel.org/lkml/20221028081255.19157-1-yangyicong@huawei.com/
+
+-v5:
+1. Make ARCH_WANT_BATCHED_UNMAP_TLB_FLUSH depends on EXPERT for this stage on arm64.
+2. Make a threshold of CPU numbers for enabling batched TLP flush on arm64
+Link: https://lore.kernel.org/linux-arm-kernel/20220921084302.43631-1-yangyicong@huawei.com/T/
+
+-v4:
+1. Add tags from Kefeng and Anshuman, Thanks.
+2. Limit the TLB batch/defer on systems with >4 CPUs, per Anshuman
+3. Merge previous Patch 1,2-3 into one, per Anshuman
+Link: https://lore.kernel.org/linux-mm/20220822082120.8347-1-yangyicong@huawei.com/
+
+-v3:
+1. Declare arch's tlbbatch defer support by arch_tlbbatch_should_defer() instead
+   of ARCH_HAS_MM_CPUMASK, per Barry and Kefeng
+2. Add Tested-by from Xin Hao
+Link: https://lore.kernel.org/linux-mm/20220711034615.482895-1-21cnbao@gmail.com/
+
+-v2:
+1. Collected Yicong's test result on kunpeng920 ARM64 server;
+2. Removed the redundant vma parameter in arch_tlbbatch_add_mm()
+   according to the comments of Peter Zijlstra and Dave Hansen
+3. Added ARCH_HAS_MM_CPUMASK rather than checking if mm_cpumask
+   is empty according to the comments of Nadav Amit
+
+Thanks, Peter, Dave and Nadav for your testing or reviewing
+, and comments.
+
+-v1:
+https://lore.kernel.org/lkml/20220707125242.425242-1-21cnbao@gmail.com/
+
+Anshuman Khandual (1):
+  mm/tlbbatch: Introduce arch_tlbbatch_should_defer()
+
+Barry Song (2):
+  mm/tlbbatch: Rename and extend some functions
+  arm64: support batched/deferred tlb shootdown during page
+    reclamation/migration
+
+Yicong Yang (1):
+  mm/tlbbatch: Introduce arch_flush_tlb_batched_pending()
+
+ .../features/vm/TLB/arch-support.txt          |  2 +-
+ arch/arm64/Kconfig                            |  1 +
+ arch/arm64/include/asm/tlbbatch.h             | 12 +++++
+ arch/arm64/include/asm/tlbflush.h             | 48 +++++++++++++++++--
+ arch/x86/include/asm/tlbflush.h               | 22 ++++++++-
+ include/linux/mm_types_task.h                 |  4 +-
+ mm/rmap.c                                     | 23 ++++-----
+ 7 files changed, 90 insertions(+), 22 deletions(-)
+ create mode 100644 arch/arm64/include/asm/tlbbatch.h
+
+-- 
+2.24.0
+
