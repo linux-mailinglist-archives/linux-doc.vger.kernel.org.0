@@ -2,88 +2,118 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 646287509F6
-	for <lists+linux-doc@lfdr.de>; Wed, 12 Jul 2023 15:50:25 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 8E435750B00
+	for <lists+linux-doc@lfdr.de>; Wed, 12 Jul 2023 16:29:10 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S231641AbjGLNuY (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 12 Jul 2023 09:50:24 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:34462 "EHLO
+        id S231977AbjGLO3I (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 12 Jul 2023 10:29:08 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:33284 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S231221AbjGLNuX (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Wed, 12 Jul 2023 09:50:23 -0400
-Received: from dfw.source.kernel.org (dfw.source.kernel.org [IPv6:2604:1380:4641:c500::1])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id E6F25E8;
-        Wed, 12 Jul 2023 06:50:22 -0700 (PDT)
+        with ESMTP id S232375AbjGLO3D (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Wed, 12 Jul 2023 10:29:03 -0400
+Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id D78111BE2;
+        Wed, 12 Jul 2023 07:29:01 -0700 (PDT)
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
         (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
          key-exchange X25519 server-signature RSA-PSS (2048 bits))
         (No client certificate requested)
-        by dfw.source.kernel.org (Postfix) with ESMTPS id 7CA28617C9;
-        Wed, 12 Jul 2023 13:50:22 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPS id E2C1BC433C9;
-        Wed, 12 Jul 2023 13:50:21 +0000 (UTC)
+        by dfw.source.kernel.org (Postfix) with ESMTPS id 69F776181D;
+        Wed, 12 Jul 2023 14:29:01 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id C7056C433CA;
+        Wed, 12 Jul 2023 14:29:00 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-        s=k20201202; t=1689169821;
-        bh=0wFk1A/aNUUTpjvhGUBpRWPsahwPmj+gEshvobF0bE8=;
-        h=Subject:From:Date:References:In-Reply-To:To:Cc:From;
-        b=IMl2jc9KaRv0leEA0CFOdFBQ9YH99BxBnfhVcNFs23Fu66Cp2ebzp2XnMnufb29yX
-         3hzEPYEbhZxoox/hFBTmSFYAo5ERYWdB8FNiZkZB9UBKb8nXr2LIUe1FYqfGvN/pW2
-         RJ9JhghgaHWcbB6YO03g/kstgbfp3za9Q863r1nEO5PCuHByLKKie7VHbwiHrWgbCU
-         KY/8fDMqkw1+o3sjdOJjhJ76bB6tb7xojpdZgEqe9gcWTFfhSY1OHc18VzF8UQV36H
-         p6jEBp5BsB3mYtcypgz9mfMgr5VZVAoV+Puqybqe0gadPB4CbEd4kFgls4+sc5n3xA
-         ghuXJzuEGPOhg==
-Received: from aws-us-west-2-korg-oddjob-1.ci.codeaurora.org (localhost.localdomain [127.0.0.1])
-        by aws-us-west-2-korg-oddjob-1.ci.codeaurora.org (Postfix) with ESMTP id C66C1C04E32;
-        Wed, 12 Jul 2023 13:50:21 +0000 (UTC)
-Content-Type: text/plain; charset="utf-8"
+        s=k20201202; t=1689172140;
+        bh=HQ7aGbV4C7uaZAHLezNUkQSJsAkwtDjgQS3l2fLDv8g=;
+        h=From:To:Cc:Subject:Date:From;
+        b=uRpRe2FBwR2ytkiG/aO3Bgltf6Rdz5u2Hx/03RuV00p8Npi4EuH/K0928b5lJ9oF2
+         RmzOqo+2LMt6zjoDLTjyEwk3SHpJSSq/K4PwkpYk8GRpw2p6oBBeaya0FEt0YM7OXu
+         OKltFvcyQrcfuXzCbVYENGQQvcDJvO8idxR92BNmXt50jz/lHK34Tu2IKAbfo31pG7
+         h5itJpBHiK+TzHHO2zuHsylG65j9wV7cpHkqW7IeFs58fSIuH6nKcuhMew8FdnSWax
+         jUbccFbSCDs6uTd8yLMxYeN+UFu4JFntosz8h7ij9pKeF7lLgDQoQkgQ+FUL2IDcYU
+         QHQH2PQWCwQsA==
+Received: from mchehab by mail.kernel.org with local (Exim 4.96)
+        (envelope-from <mchehab@kernel.org>)
+        id 1qJapt-003bek-1S;
+        Wed, 12 Jul 2023 16:28:57 +0200
+From:   Mauro Carvalho Chehab <mchehab@kernel.org>
+Cc:     Mauro Carvalho Chehab <mchehab@kernel.org>,
+        David Gow <davidgow@google.com>,
+        Shuah Khan <skhan@linuxfoundation.org>,
+        Jonathan Corbet <corbet@lwn.net>,
+        Nikolai Kondrashov <spbnick@gmail.com>,
+        linux-kselftest@vger.kernel.org, kunit-dev@googlegroups.com,
+        mauro.chehab@intel.com, linux-doc@vger.kernel.org,
+        Brendan Higgins <brendanhiggins@google.com>,
+        Rae Moar <rmoar@google.com>, dri-devel@lists.freedesktop.org,
+        linux-kernel@vger.kernel.org
+Subject: [PATCH RFC 0/2] Add support for inlined documentation for kunit and kselftests
+Date:   Wed, 12 Jul 2023 16:28:53 +0200
+Message-Id: <cover.1689171160.git.mchehab@kernel.org>
+X-Mailer: git-send-email 2.40.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Subject: Re: [PATCH] Documentation: RISC-V: hwprobe: Fix a formatting error
-From:   patchwork-bot+linux-riscv@kernel.org
-Message-Id: <168916982180.8919.16048088678378231987.git-patchwork-notify@kernel.org>
-Date:   Wed, 12 Jul 2023 13:50:21 +0000
-References: <20230710193329.2742-1-palmer@rivosinc.com>
-In-Reply-To: <20230710193329.2742-1-palmer@rivosinc.com>
-To:     Palmer Dabbelt <palmer@rivosinc.com>
-Cc:     linux-riscv@lists.infradead.org, corbet@lwn.net,
-        paul.walmsley@sifive.com, palmer@dabbelt.com,
-        aou@eecs.berkeley.edu, conor.dooley@microchip.com,
-        evan@rivosinc.com, heiko@sntech.de, andy.chiu@sifive.com,
-        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
-        linux@rivosinc.com
-X-Spam-Status: No, score=-4.4 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_MED,
-        SPF_HELO_NONE,SPF_PASS,T_SCC_BODY_TEXT_LINE autolearn=ham
-        autolearn_force=no version=3.4.6
+X-Spam-Status: No, score=-7.1 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_HI,
+        SPF_HELO_NONE,SPF_PASS,T_SCC_BODY_TEXT_LINE,URIBL_BLOCKED
+        autolearn=ham autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
+To:     unlisted-recipients:; (no To-header on input)
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Hello:
+This RFC is a follow-up of the discussions taken here:
 
-This patch was applied to riscv/linux.git (fixes)
-by Palmer Dabbelt <palmer@rivosinc.com>:
+   https://lore.kernel.org/linux-doc/20230704132812.02ba97ba@maurocar-mobl2/T/#t
 
-On Mon, 10 Jul 2023 12:33:30 -0700 you wrote:
-> From: Palmer Dabbelt <palmer@rivosinc.com>
-> 
-> I'm not sure what I was trying to do with the ':'s, but they're just
-> rendered to HTML which looks odd.   This makes "fence.i" look like
-> "mvendorid" and such, which is seems reasonable to me.
-> 
-> Signed-off-by: Palmer Dabbelt <palmer@rivosinc.com>
-> 
-> [...]
+It adds a new extension that allows documenting tests using the same tool we're
+using for DRM unit tests at IGT GPU tools: https://gitlab.freedesktop.org/drm/igt-gpu-tools.
 
-Here is the summary with links:
-  - Documentation: RISC-V: hwprobe: Fix a formatting error
-    https://git.kernel.org/riscv/c/d6e724d3ef0b
+While kernel-doc has provided documentation for in-lined functions/struct comments,
+it was not meant to document tests.
 
-You are awesome, thank you!
+Tests need to be grouped by the test functions. It should also be possible to produce
+other outputs from the documentation, to integrate it with test suites. For instance, 
+Internally at Intel, we use the comments to generate DOT files hierarchically grouped
+per feature categories.
+
+This is just an initial RFC to start discussions around the solution. Before being merged
+upstream, we need to define what tags will be used to identify test markups and add
+a simple change at kernel-doc to let it ignore such markups.
+
+On this series, we have:
+
+- patch 1:
+  adding test_list.py as present at the IGT tree, after a patch series to make it
+  more generic: https://patchwork.freedesktop.org/series/120622/
+- patch 2:
+  adds an example about how tests could be documented. This is a really simple
+  example, just to test the feature, specially designed to make easy to build just
+  the test documentation from a single DRM kunit file.
+
+After discussions, my plan is to send a new version addressing the issues, and add
+some documentation for DRM and/or i915 kunit tests.
+
+Mauro Carvalho Chehab (2):
+  docs: add support for documenting kUnit and kSelftests
+  drm: add documentation for drm_buddy_test kUnit test
+
+ Documentation/conf.py                  |    2 +-
+ Documentation/index.rst                |    2 +-
+ Documentation/sphinx/test_kdoc.py      |  108 ++
+ Documentation/sphinx/test_list.py      | 1288 ++++++++++++++++++++++++
+ Documentation/tests/index.rst          |    6 +
+ Documentation/tests/kunit.rst          |    5 +
+ drivers/gpu/drm/tests/drm_buddy_test.c |   12 +
+ 7 files changed, 1421 insertions(+), 2 deletions(-)
+ create mode 100644 Documentation/sphinx/test_kdoc.py
+ create mode 100644 Documentation/sphinx/test_list.py
+ create mode 100644 Documentation/tests/index.rst
+ create mode 100644 Documentation/tests/kunit.rst
+
 -- 
-Deet-doot-dot, I am a bot.
-https://korg.docs.kernel.org/patchwork/pwbot.html
+2.40.1
 
 
