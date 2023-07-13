@@ -2,59 +2,59 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 59252752976
-	for <lists+linux-doc@lfdr.de>; Thu, 13 Jul 2023 19:06:12 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 0EF6B752978
+	for <lists+linux-doc@lfdr.de>; Thu, 13 Jul 2023 19:06:13 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S231567AbjGMRGK (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 13 Jul 2023 13:06:10 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:39502 "EHLO
+        id S231245AbjGMRGM (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 13 Jul 2023 13:06:12 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:39506 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S231873AbjGMRGF (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Thu, 13 Jul 2023 13:06:05 -0400
-Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.129.124])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 306DE2D48
-        for <linux-doc@vger.kernel.org>; Thu, 13 Jul 2023 10:05:03 -0700 (PDT)
+        with ESMTP id S231261AbjGMRGH (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Thu, 13 Jul 2023 13:06:07 -0400
+Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.133.124])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 681CC2D4E
+        for <linux-doc@vger.kernel.org>; Thu, 13 Jul 2023 10:05:07 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-        s=mimecast20190719; t=1689267902;
+        s=mimecast20190719; t=1689267906;
         h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
          to:to:cc:cc:mime-version:mime-version:
          content-transfer-encoding:content-transfer-encoding:
          in-reply-to:in-reply-to:references:references;
-        bh=cJWbnZRk37PbyOPLbQx6TkJaNwAsU77I+1I9gnkS+kQ=;
-        b=SWk0VgTvONjbHwh3NfOAylFxt/c4IncztS3jxsmVfMROo7q2PsDpaCvN90bcG9NgwdPlWN
-        PLbruWSZXnPIPIMzh4BWjYgl5ShRXg4scH8TavVqIFqhMAi5uMXzj+T1kh9Ne41hTnWflj
-        a5WqvK0oNCurMedG/a7HBbRDptIvk3w=
-Received: from mail-ej1-f71.google.com (mail-ej1-f71.google.com
- [209.85.218.71]) by relay.mimecast.com with ESMTP with STARTTLS
+        bh=LEv7G0CEYOPGW2iDjZ4bQ7xPP+mjrUkHdLemyMCnVvw=;
+        b=FJ5UULOH422tP/0ZB/UlTS08v/f5yvx8SY4OCRMZTEeg6E0Qr8f4uxLTP1bhlgXOZ9ZWVt
+        IJ+spYxeLBzEAO2s7a2UNrJIP/ZfVk6ckwrSVqRQj8hnlyaqyibxbFUomCqdIFG/EXy3f9
+        9zltKQlie+MbtzX0Q+WC8cXFSK/hRhA=
+Received: from mail-wr1-f70.google.com (mail-wr1-f70.google.com
+ [209.85.221.70]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-379-w2wRRye-OcOHFUkPH9jhsQ-1; Thu, 13 Jul 2023 13:05:01 -0400
-X-MC-Unique: w2wRRye-OcOHFUkPH9jhsQ-1
-Received: by mail-ej1-f71.google.com with SMTP id a640c23a62f3a-993d41cbc31so57468866b.1
-        for <linux-doc@vger.kernel.org>; Thu, 13 Jul 2023 10:05:00 -0700 (PDT)
+ us-mta-428-Tzo99O8aM3OfG8hggQ3Oqg-1; Thu, 13 Jul 2023 13:05:05 -0400
+X-MC-Unique: Tzo99O8aM3OfG8hggQ3Oqg-1
+Received: by mail-wr1-f70.google.com with SMTP id ffacd0b85a97d-31437f02985so675394f8f.0
+        for <linux-doc@vger.kernel.org>; Thu, 13 Jul 2023 10:05:04 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1689267900; x=1691859900;
+        d=1e100.net; s=20221208; t=1689267904; x=1691859904;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=cJWbnZRk37PbyOPLbQx6TkJaNwAsU77I+1I9gnkS+kQ=;
-        b=GhQ4UWl6pfw6+mq44w9gJodKI4VxCYk0i88cHRRNwTpI9P7ibEe5RZX1FobvXl2bIQ
-         AjYDX13ZBevAoeV4t/UlN0G0Vpx0F+c8I6IEXbQ/iyIkOZMX/BVskblLl6AjH29O7DP7
-         UMs8xTWjK0A69HSxb2g9/2/ILKLuqMhFehaA23SYBfebq6VZ7fdE7Gp3Ey68KTrMI3o2
-         kkLAffaMVJHTWO6+TLNxaz52jTWWzdYdJ2T+1J3gEcEbdp3YojNL2x5U0CnubMk4lbuQ
-         qS4us0mKSnLg0pbD4LfT8wSmnk1E8axDD70qvW7x1zYNOQa4QLNG8qCbeYzzxvxXki8w
-         QvQg==
-X-Gm-Message-State: ABy/qLb2Ar3SUvL5iOQ+qB0+drTLp2Zj/NN7OYhI6NKKDinL+Gzq66wL
-        rSVwMU3k2nk3Mr2dJNbjmmCOTSjiIYcvL1USkgjyBNlbAUwr2Cl93J1yhXajh1iQCOqc3sF+cwX
-        1VBkGjwuqDi5ieSN/iZfD
-X-Received: by 2002:a17:906:113:b0:987:fe18:1c56 with SMTP id 19-20020a170906011300b00987fe181c56mr2115240eje.47.1689267899910;
-        Thu, 13 Jul 2023 10:04:59 -0700 (PDT)
-X-Google-Smtp-Source: APBJJlEGCyQeuogsjgxDVJKFBZEg08N1OVXBkYa73JHbS/zCbYQKSeo62Zql1FBRS0FoBHej2bCLIA==
-X-Received: by 2002:a17:906:113:b0:987:fe18:1c56 with SMTP id 19-20020a170906011300b00987fe181c56mr2115221eje.47.1689267899743;
-        Thu, 13 Jul 2023 10:04:59 -0700 (PDT)
+        bh=LEv7G0CEYOPGW2iDjZ4bQ7xPP+mjrUkHdLemyMCnVvw=;
+        b=LIcEyvqOAeXdBamF8Ka1Rvwbd2f/m5cYRoigk/L0nTSV6/nDTn5NygyMobwNTg3ajx
+         L7Rs1JFfTJjSuLDdqiqXteP9KRmJpgghwShTiL/hR0EystyqOuvxxJCjpNEDwDAqkhpf
+         49NF0aZzB8gmP+rZ/taK2I0LzbjzReaBcepQFyNY4l3GzjxpsenKdlK8NklIZO1+ZFoO
+         oQ8X5qb+KXt39+ohJHC0lyAl8J40W9cq6EkVp4vEDCgY16pKSMEON2dVIi3Z5S/tgS49
+         /mswfS8GTHOizyqoYE19BlIZSiZmiO/33YVTxzKp5eCEp/zYYwC566r7zrSOoygw0PDO
+         /2YQ==
+X-Gm-Message-State: ABy/qLbu6MtFPqCYCme8fnBKTyt+FrDGXBJGkXaKETfVCw9qZ5GXV+h8
+        qyeCbQhDQ8bHDbFpnkGSpQU8sszsBq5/KDnhpwRNBH6HHHCeuoIg4IZEgvSKGiMk2sA+OlLcqBd
+        jGPvsEr5HwLlBi2lCtQ3b
+X-Received: by 2002:a5d:500f:0:b0:314:37a:4d2 with SMTP id e15-20020a5d500f000000b00314037a04d2mr1881497wrt.60.1689267904113;
+        Thu, 13 Jul 2023 10:05:04 -0700 (PDT)
+X-Google-Smtp-Source: APBJJlF056mkLn94E+lKHndYR5EU4ydy3QCAICJDC86xIw557hHcn4RjCQJ4RaRlRWXwLJY/mxbcrA==
+X-Received: by 2002:a5d:500f:0:b0:314:37a:4d2 with SMTP id e15-20020a5d500f000000b00314037a04d2mr1881473wrt.60.1689267903898;
+        Thu, 13 Jul 2023 10:05:03 -0700 (PDT)
 Received: from cassiopeiae.. ([2a02:810d:4b3f:de9c:642:1aff:fe31:a19f])
-        by smtp.gmail.com with ESMTPSA id t9-20020a1709064f0900b00992a8a54f32sm4244576eju.139.2023.07.13.10.04.58
+        by smtp.gmail.com with ESMTPSA id r11-20020a1709067fcb00b009929d998abcsm4194749ejs.209.2023.07.13.10.05.02
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 13 Jul 2023 10:04:59 -0700 (PDT)
+        Thu, 13 Jul 2023 10:05:03 -0700 (PDT)
 From:   Danilo Krummrich <dakr@redhat.com>
 To:     airlied@gmail.com, daniel@ffwll.ch, tzimmermann@suse.de,
         mripard@kernel.org, corbet@lwn.net, christian.koenig@amd.com,
@@ -65,9 +65,9 @@ To:     airlied@gmail.com, daniel@ffwll.ch, tzimmermann@suse.de,
 Cc:     dri-devel@lists.freedesktop.org, nouveau@lists.freedesktop.org,
         linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
         Danilo Krummrich <dakr@redhat.com>
-Subject: [PATCH drm-next v7 06/13] drm/nouveau: bo: initialize GEM GPU VA interface
-Date:   Thu, 13 Jul 2023 19:04:01 +0200
-Message-ID: <20230713170429.2964-7-dakr@redhat.com>
+Subject: [PATCH drm-next v7 07/13] drm/nouveau: move usercopy helpers to nouveau_drv.h
+Date:   Thu, 13 Jul 2023 19:04:02 +0200
+Message-ID: <20230713170429.2964-8-dakr@redhat.com>
 X-Mailer: git-send-email 2.41.0
 In-Reply-To: <20230713170429.2964-1-dakr@redhat.com>
 References: <20230713170429.2964-1-dakr@redhat.com>
@@ -83,33 +83,89 @@ Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Initialize the GEM's DRM GPU VA manager interface in preparation for the
-(u)vmm implementation, provided by subsequent commits, to make use of it.
+Move the usercopy helpers to a common driver header file to make it
+usable for the new API added in subsequent commits.
 
 Signed-off-by: Danilo Krummrich <dakr@redhat.com>
 ---
- drivers/gpu/drm/nouveau/nouveau_bo.c | 3 +++
- 1 file changed, 3 insertions(+)
+ drivers/gpu/drm/nouveau/nouveau_drv.h | 26 ++++++++++++++++++++++++++
+ drivers/gpu/drm/nouveau/nouveau_gem.c | 26 --------------------------
+ 2 files changed, 26 insertions(+), 26 deletions(-)
 
-diff --git a/drivers/gpu/drm/nouveau/nouveau_bo.c b/drivers/gpu/drm/nouveau/nouveau_bo.c
-index 7724fe63067d..057bc995f19b 100644
---- a/drivers/gpu/drm/nouveau/nouveau_bo.c
-+++ b/drivers/gpu/drm/nouveau/nouveau_bo.c
-@@ -215,11 +215,14 @@ nouveau_bo_alloc(struct nouveau_cli *cli, u64 *size, int *align, u32 domain,
- 	nvbo = kzalloc(sizeof(struct nouveau_bo), GFP_KERNEL);
- 	if (!nvbo)
- 		return ERR_PTR(-ENOMEM);
-+
- 	INIT_LIST_HEAD(&nvbo->head);
- 	INIT_LIST_HEAD(&nvbo->entry);
- 	INIT_LIST_HEAD(&nvbo->vma_list);
- 	nvbo->bo.bdev = &drm->ttm.bdev;
+diff --git a/drivers/gpu/drm/nouveau/nouveau_drv.h b/drivers/gpu/drm/nouveau/nouveau_drv.h
+index 81350e685b50..20a7f31b9082 100644
+--- a/drivers/gpu/drm/nouveau/nouveau_drv.h
++++ b/drivers/gpu/drm/nouveau/nouveau_drv.h
+@@ -130,6 +130,32 @@ nouveau_cli(struct drm_file *fpriv)
+ 	return fpriv ? fpriv->driver_priv : NULL;
+ }
  
-+	drm_gem_gpuva_init(&nvbo->bo.base);
++static inline void
++u_free(void *addr)
++{
++	kvfree(addr);
++}
 +
- 	/* This is confusing, and doesn't actually mean we want an uncached
- 	 * mapping, but is what NOUVEAU_GEM_DOMAIN_COHERENT gets translated
- 	 * into in nouveau_gem_new().
++static inline void *
++u_memcpya(uint64_t user, unsigned nmemb, unsigned size)
++{
++	void *mem;
++	void __user *userptr = (void __force __user *)(uintptr_t)user;
++
++	size *= nmemb;
++
++	mem = kvmalloc(size, GFP_KERNEL);
++	if (!mem)
++		return ERR_PTR(-ENOMEM);
++
++	if (copy_from_user(mem, userptr, size)) {
++		u_free(mem);
++		return ERR_PTR(-EFAULT);
++	}
++
++	return mem;
++}
++
+ #include <nvif/object.h>
+ #include <nvif/parent.h>
+ 
+diff --git a/drivers/gpu/drm/nouveau/nouveau_gem.c b/drivers/gpu/drm/nouveau/nouveau_gem.c
+index 45ca4eb98f54..a48f42aaeab9 100644
+--- a/drivers/gpu/drm/nouveau/nouveau_gem.c
++++ b/drivers/gpu/drm/nouveau/nouveau_gem.c
+@@ -613,32 +613,6 @@ nouveau_gem_pushbuf_validate(struct nouveau_channel *chan,
+ 	return 0;
+ }
+ 
+-static inline void
+-u_free(void *addr)
+-{
+-	kvfree(addr);
+-}
+-
+-static inline void *
+-u_memcpya(uint64_t user, unsigned nmemb, unsigned size)
+-{
+-	void *mem;
+-	void __user *userptr = (void __force __user *)(uintptr_t)user;
+-
+-	size *= nmemb;
+-
+-	mem = kvmalloc(size, GFP_KERNEL);
+-	if (!mem)
+-		return ERR_PTR(-ENOMEM);
+-
+-	if (copy_from_user(mem, userptr, size)) {
+-		u_free(mem);
+-		return ERR_PTR(-EFAULT);
+-	}
+-
+-	return mem;
+-}
+-
+ static int
+ nouveau_gem_pushbuf_reloc_apply(struct nouveau_cli *cli,
+ 				struct drm_nouveau_gem_pushbuf *req,
 -- 
 2.41.0
 
