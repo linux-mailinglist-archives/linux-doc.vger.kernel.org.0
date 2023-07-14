@@ -2,80 +2,75 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id DC3ED75355F
-	for <lists+linux-doc@lfdr.de>; Fri, 14 Jul 2023 10:47:47 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id B38E27535A4
+	for <lists+linux-doc@lfdr.de>; Fri, 14 Jul 2023 10:51:20 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S235401AbjGNIrq (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Fri, 14 Jul 2023 04:47:46 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:53996 "EHLO
+        id S235636AbjGNIvT (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Fri, 14 Jul 2023 04:51:19 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:56652 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S235633AbjGNIrh (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Fri, 14 Jul 2023 04:47:37 -0400
-Received: from mail-ed1-x52a.google.com (mail-ed1-x52a.google.com [IPv6:2a00:1450:4864:20::52a])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id D63562708
-        for <linux-doc@vger.kernel.org>; Fri, 14 Jul 2023 01:47:34 -0700 (PDT)
-Received: by mail-ed1-x52a.google.com with SMTP id 4fb4d7f45d1cf-51e5da802afso1958124a12.3
-        for <linux-doc@vger.kernel.org>; Fri, 14 Jul 2023 01:47:34 -0700 (PDT)
+        with ESMTP id S235618AbjGNIvP (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Fri, 14 Jul 2023 04:51:15 -0400
+Received: from mail-lj1-x22b.google.com (mail-lj1-x22b.google.com [IPv6:2a00:1450:4864:20::22b])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 0F24A2700
+        for <linux-doc@vger.kernel.org>; Fri, 14 Jul 2023 01:51:13 -0700 (PDT)
+Received: by mail-lj1-x22b.google.com with SMTP id 38308e7fff4ca-2b6f0508f54so24830391fa.3
+        for <linux-doc@vger.kernel.org>; Fri, 14 Jul 2023 01:51:12 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google; t=1689324453; x=1691916453;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+        d=atishpatra.org; s=google; t=1689324671; x=1691916671;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=Xfnzqz2i7m5w9zMzOs0RqunR9vvDiHlmabhYNl07DtU=;
-        b=QRTexeIsaQuwzZmHHH1qWjMfaVgQohb1jM0TSX3h4pKx34oQYn6cbwXTCromOfGYcL
-         Tta5/ZU3WfrIC8LZEwrhwIv6Fl5UViGAHoX4Z40wOK0wfmiDGYo6M1P6RYRh92tvEm1A
-         lgjoNI1FK4t3XozduDsu/mzKG2HtaKxRew6IKwKC+SHAtHe2meEXKda8QekvCoagcIO6
-         KTWXFl0cFonQ/GYkBq3XXft+Mu0GybbpwqYcmIi8CIbvPujfORGmzQPb5wgTdps6gVYC
-         XOQqon7bQHYJpakPB9YpjonH7WCwfyozV/VhsVBrmvQZoqqXDWTApIdqBkRxZJmpK9Mo
-         jkEA==
+        bh=UVJFUGPgUiZjejGogHmLzYwwKGbHbhdGEjYSUHSjBfo=;
+        b=pYAcX4FPQitZnsDIm6cTcKdm1Ztraq4W2bv6eu94SIYUTBpXculUzJiLK05nDzIZQY
+         X+ajUMzJ4+s3GZVMczZKydx+tBqLXWPIIcNeeaSKxDbOIpV+juiQrp9N9A7oMFbOy0ej
+         Bev1FExTBu9b0hpfG/pxEJkztwcOKTfi7ojBA=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1689324453; x=1691916453;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+        d=1e100.net; s=20221208; t=1689324671; x=1691916671;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=Xfnzqz2i7m5w9zMzOs0RqunR9vvDiHlmabhYNl07DtU=;
-        b=hL6FP1FyttHCUNrUymjHfvSe5npXYkWjROi2W7Cu7XQZkcprWf/po+HjYvg8GYVoA1
-         aLPS5wwoitYotFPKHXt+6lo9zP8hpHj2RSRcLM25J05xU+R6vecceE0LXWSwnb6tyu2e
-         VV58SR2Ud8102ZUAPQN6mEsFI6lHMHys9hPKWlgxXjWfWoe8Yt8jqBg7gUTBgA1pZi0S
-         ZZVFS6CmM1FUCKZ2o9cQmrZsc6pL5mG7TRTrC89LuaumHxpQex1q1CNXaiWwdGmEz65J
-         YjTFk9wVnh5Vhte/GiAnZJBE9CICADBnjzt9uErLrKcSWG1QnXUmHBeK9quQXRf1vZY7
-         7kLg==
-X-Gm-Message-State: ABy/qLYNLSBHaQoyS0uxkzAV7K8i8Q3RvHhSeqWdnsCnJby4phNqdDia
-        Gg8pqFd/8I+c2be2S1qF/j3nxg==
-X-Google-Smtp-Source: APBJJlEuf4i2pzMRoEofkzTMljBMlpAzj4iNGEl1v3hbp1MIkjUaSwOo0LcuFm7jwuef4HKv2BzhmA==
-X-Received: by 2002:aa7:d359:0:b0:51e:4bd6:ce4a with SMTP id m25-20020aa7d359000000b0051e4bd6ce4amr4058266edr.11.1689324453302;
-        Fri, 14 Jul 2023 01:47:33 -0700 (PDT)
-Received: from krzk-bin.. ([178.197.223.104])
-        by smtp.gmail.com with ESMTPSA id w24-20020aa7cb58000000b0051e0f8aac74sm5480662edt.8.2023.07.14.01.47.31
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 14 Jul 2023 01:47:32 -0700 (PDT)
-From:   Krzysztof Kozlowski <krzysztof.kozlowski@linaro.org>
-To:     Conor Dooley <conor@kernel.org>, Rob Herring <robh+dt@kernel.org>,
-        Krzysztof Kozlowski <krzysztof.kozlowski+dt@linaro.org>,
+        bh=UVJFUGPgUiZjejGogHmLzYwwKGbHbhdGEjYSUHSjBfo=;
+        b=HcYBQE/jUFpYWG578N9PK5yUg7nhjZdz8o5aV4IbjVoY9rOrW8zFp08CMVyNneM2Ij
+         2bQemxlNZS0GV6bp55u8Qqqk6SZQDEz7JuTnHd5ISNTzEPr+63+10j3Ne6U1kvvkigng
+         A0mSYakTpLXxuya9NLPFE8+CgcdAes3QoBnibwP9Vdr0TEGxrAjZ7yqFZrw9VL6fSZtg
+         HNo9LbHeBlCfQYikm4puvFltObJ43sKeuNYcyb7cBpxtokpGHzZxJxDb5aU4q1U4xUI7
+         NjZGnqn8qnuiHCOlQ9FnfewOeYopnZkkmQtYI/NcVadgLFyX8vGXlqY1y0rKnFuNeQEY
+         SNeA==
+X-Gm-Message-State: ABy/qLYBmtQxaxul8FVNCPrd83g95KQgSMT5nzIfd2EumKsDHS7DwYQ0
+        cC6sZLYyIbWEj2mLBMCsuWpRleYu0lLFjFH+Itzt
+X-Google-Smtp-Source: APBJJlHjR6JsuaMQbXZar+lmwIZWlDiqDI6I9i3Y4OuSMcqQfvuZ6VyIJunOF1Ue2HAQ0kQfJSL6fyyKFEWspQicjTo=
+X-Received: by 2002:a2e:8611:0:b0:2b6:ee1c:216a with SMTP id
+ a17-20020a2e8611000000b002b6ee1c216amr3436379lji.34.1689324671023; Fri, 14
+ Jul 2023 01:51:11 -0700 (PDT)
+MIME-Version: 1.0
+References: <20230703124647.215952-1-alexghiti@rivosinc.com> <20230703124647.215952-9-alexghiti@rivosinc.com>
+In-Reply-To: <20230703124647.215952-9-alexghiti@rivosinc.com>
+From:   Atish Patra <atishp@atishpatra.org>
+Date:   Fri, 14 Jul 2023 01:50:59 -0700
+Message-ID: <CAOnJCUJGHWicrhGOGPK_aduaD9jXz7THHcbU+i+7tK-ChtQxNg@mail.gmail.com>
+Subject: Re: [PATCH v4 08/10] Documentation: admin-guide: Add riscv sysctl_perf_user_access
+To:     Alexandre Ghiti <alexghiti@rivosinc.com>
+Cc:     Jonathan Corbet <corbet@lwn.net>,
+        Peter Zijlstra <peterz@infradead.org>,
+        Ingo Molnar <mingo@redhat.com>,
+        Arnaldo Carvalho de Melo <acme@kernel.org>,
+        Mark Rutland <mark.rutland@arm.com>,
+        Alexander Shishkin <alexander.shishkin@linux.intel.com>,
+        Jiri Olsa <jolsa@kernel.org>,
+        Namhyung Kim <namhyung@kernel.org>,
+        Ian Rogers <irogers@google.com>,
         Paul Walmsley <paul.walmsley@sifive.com>,
         Palmer Dabbelt <palmer@dabbelt.com>,
         Albert Ou <aou@eecs.berkeley.edu>,
-        Alim Akhtar <alim.akhtar@samsung.com>,
-        Andy Gross <agross@kernel.org>,
-        Bjorn Andersson <andersson@kernel.org>,
-        Konrad Dybcio <konrad.dybcio@linaro.org>,
-        Nishanth Menon <nm@ti.com>, linux-riscv@lists.infradead.org,
-        devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
-        linux-arm-kernel@lists.infradead.org,
-        linux-samsung-soc@vger.kernel.org, linux-arm-msm@vger.kernel.org,
-        Jonathan Corbet <corbet@lwn.net>,
-        Arnd Bergmann <arnd@arndb.de>, Olof Johansson <olof@lixom.net>,
-        soc@kernel.org, workflows@vger.kernel.org,
-        linux-doc@vger.kernel.org
-Cc:     Krzysztof Kozlowski <krzysztof.kozlowski@linaro.org>
-Subject: [PATCH 3/3] MAINTAINER: samsung: document dtbs_check requirement for Samsung
-Date:   Fri, 14 Jul 2023 10:47:25 +0200
-Message-Id: <20230714084725.27847-3-krzysztof.kozlowski@linaro.org>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20230714084725.27847-1-krzysztof.kozlowski@linaro.org>
-References: <20230714084725.27847-1-krzysztof.kozlowski@linaro.org>
-MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+        Anup Patel <anup@brainfault.org>,
+        Will Deacon <will@kernel.org>, Rob Herring <robh@kernel.org>,
+        Andrew Jones <ajones@ventanamicro.com>,
+        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
+        linux-perf-users@vger.kernel.org, linux-riscv@lists.infradead.org,
+        linux-arm-kernel@lists.infradead.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-Spam-Status: No, score=-2.1 required=5.0 tests=BAYES_00,DKIM_SIGNED,
         DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_BLOCKED,
         SPF_HELO_NONE,SPF_PASS,T_SCC_BODY_TEXT_LINE,URIBL_BLOCKED
@@ -86,32 +81,78 @@ Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Samsung ARM/ARM64 SoCs (including legacy S3C64xx and S5PV210) are also
-expected not to bring any new dtbs_check warnings.  In fact this have
-been already enforced and tested since few release.
+On Mon, Jul 3, 2023 at 5:54=E2=80=AFAM Alexandre Ghiti <alexghiti@rivosinc.=
+com> wrote:
+>
+> riscv now uses this sysctl so document its usage for this architecture.
+>
+> Signed-off-by: Alexandre Ghiti <alexghiti@rivosinc.com>
+> ---
+>  Documentation/admin-guide/sysctl/kernel.rst | 27 ++++++++++++++++++---
+>  1 file changed, 23 insertions(+), 4 deletions(-)
+>
+> diff --git a/Documentation/admin-guide/sysctl/kernel.rst b/Documentation/=
+admin-guide/sysctl/kernel.rst
+> index d85d90f5d000..19b627883313 100644
+> --- a/Documentation/admin-guide/sysctl/kernel.rst
+> +++ b/Documentation/admin-guide/sysctl/kernel.rst
+> @@ -941,16 +941,35 @@ enabled, otherwise writing to this file will return=
+ ``-EBUSY``.
+>  The default value is 8.
+>
+>
+> -perf_user_access (arm64 only)
+> -=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D
+> +perf_user_access (arm64 and riscv only)
+> +=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+> +
+> +Controls user space access for reading perf event counters.
+>
+> -Controls user space access for reading perf event counters. When set to =
+1,
+> -user space can read performance monitor counter registers directly.
+> +arm64
+> +=3D=3D=3D=3D=3D
+>
+>  The default value is 0 (access disabled).
+>
+> +When set to 1, user space can read performance monitor counter registers
+> +directly.
+> +
 
-Signed-off-by: Krzysztof Kozlowski <krzysztof.kozlowski@linaro.org>
+For ARM64, 1 also enables reading performance counters via perf interface o=
+nly.
+I don't think there is any way to access the counters directly in ARM64.
 
----
+>  See Documentation/arm64/perf.rst for more information.
+>
+> +riscv
+> +=3D=3D=3D=3D=3D
+> +
+> +When set to 0, user space access is disabled.
+> +
+> +The default value is 1, user space can read performance monitor counter
+> +registers through perf, any direct access without perf intervention will=
+ trigger
+> +an illegal instruction.
+> +
+> +When set to 2, which enables legacy mode (user space has direct access t=
+o cycle
+> +and insret CSRs only). Note that this legacy value is deprecated and wil=
+l be
+> +removed once all user space applications are fixed.
+> +
+> +Note that the time CSR is always directly accessible to all modes.
+>
+>  pid_max
+>  =3D=3D=3D=3D=3D=3D=3D
+> --
+> 2.39.2
+>
 
-Previous idea was here:
-https://lore.kernel.org/all/20230712084131.127982-1-krzysztof.kozlowski@linaro.org/
----
- MAINTAINERS | 1 +
- 1 file changed, 1 insertion(+)
 
-diff --git a/MAINTAINERS b/MAINTAINERS
-index 7405fb6e38c3..9a539af4d775 100644
---- a/MAINTAINERS
-+++ b/MAINTAINERS
-@@ -2632,6 +2632,7 @@ R:	Alim Akhtar <alim.akhtar@samsung.com>
- L:	linux-arm-kernel@lists.infradead.org (moderated for non-subscribers)
- L:	linux-samsung-soc@vger.kernel.org
- S:	Maintained
-+P:	Documentation/process/maintainer-soc-clean-dts.rst
- Q:	https://patchwork.kernel.org/project/linux-samsung-soc/list/
- B:	mailto:linux-samsung-soc@vger.kernel.org
- C:	irc://irc.libera.chat/linux-exynos
--- 
-2.34.1
-
+--=20
+Regards,
+Atish
