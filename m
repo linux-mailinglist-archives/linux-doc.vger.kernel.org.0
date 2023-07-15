@@ -2,53 +2,53 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id BCC937545B3
-	for <lists+linux-doc@lfdr.de>; Sat, 15 Jul 2023 02:51:25 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 0F5767545B4
+	for <lists+linux-doc@lfdr.de>; Sat, 15 Jul 2023 02:51:26 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S229618AbjGOAvX (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Fri, 14 Jul 2023 20:51:23 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:59176 "EHLO
+        id S229675AbjGOAvZ (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Fri, 14 Jul 2023 20:51:25 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:59186 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S229482AbjGOAvX (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Fri, 14 Jul 2023 20:51:23 -0400
-Received: from mail-pf1-x431.google.com (mail-pf1-x431.google.com [IPv6:2607:f8b0:4864:20::431])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 28558E5C;
-        Fri, 14 Jul 2023 17:51:22 -0700 (PDT)
-Received: by mail-pf1-x431.google.com with SMTP id d2e1a72fcca58-668730696a4so1763875b3a.1;
-        Fri, 14 Jul 2023 17:51:22 -0700 (PDT)
+        with ESMTP id S229482AbjGOAvY (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Fri, 14 Jul 2023 20:51:24 -0400
+Received: from mail-pf1-x430.google.com (mail-pf1-x430.google.com [IPv6:2607:f8b0:4864:20::430])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 970CA11C;
+        Fri, 14 Jul 2023 17:51:23 -0700 (PDT)
+Received: by mail-pf1-x430.google.com with SMTP id d2e1a72fcca58-6682909acadso1754766b3a.3;
+        Fri, 14 Jul 2023 17:51:23 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20221208; t=1689382281; x=1691974281;
+        d=gmail.com; s=20221208; t=1689382283; x=1691974283;
         h=to:references:message-id:content-transfer-encoding:cc:date
          :in-reply-to:from:subject:mime-version:from:to:cc:subject:date
          :message-id:reply-to;
         bh=RDRscaBv1w0JWMXd2m8J/EKtFh9sNf9PLS46tboQ92A=;
-        b=lEQpUhXoaQYq3ipsCgvn6ndAkMtqdYR33+sgW68eu0ocD14HS/NNWiGEDopcOs/GdZ
-         2u3CqZCITqL0ZnAClIJdxI0Q+peqW+0I5HCc1e6L6BV/T9JPuZPTAE5j0ZecAzTd3n52
-         FigZHs4dYcWPoX3V6NQkLubQtbgekjg0Sp6XxMwSclMjgd5J/QYZiYxG3oWa6NfhiOw+
-         jh+rB5El0lqLIskBvrlQvRfvxxWahdjB+/TmtSrYMmpe7nXcUXXYdXrRhfCseED2eoVi
-         OqUDB9Pi8Sac3y0ay/97IeIQW0KvxH2Z+/QRClTzZkBmF3P5CnZckthmmIBxym9nlmbs
-         A5iA==
+        b=j8s/v0Kv3LmTFcSJegHsV6RbQ5U1JaLdNDn5BcEMk7PEYru2yl2g5d76GBWE4rDnbA
+         4ChNQ8gYVfFudkF8QjAbHNQFKXZ8Sagv/PCXj4EM5VJktzGoHQQB4JyzBEFOuSQfoYpP
+         VoJY43u3aSH61Vguv0Wvv3s2nHEwEPfiQthzAdH57NLrrJTjZ/9kA81Ex6mBCcs5s66c
+         CRCtY8SxbZ3Pj69v54i/VQa1ocs87zdDYhMfY4vhwcr4wbuDRaWaX6JBCwnM+fMen3F4
+         s4maxPFpOb5ZVd3tZziw1oN8+QlTxizm5VkSoeiVkGTz9wRaXurqyCHW/VDVobH2tapv
+         KNQw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1689382281; x=1691974281;
+        d=1e100.net; s=20221208; t=1689382283; x=1691974283;
         h=to:references:message-id:content-transfer-encoding:cc:date
          :in-reply-to:from:subject:mime-version:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
         bh=RDRscaBv1w0JWMXd2m8J/EKtFh9sNf9PLS46tboQ92A=;
-        b=N24LRDYn8U0tfVxIAID67vmIsLs6EbXNlPNsURU7LlZiG8ZRAXNzf+lU6iabXwumYy
-         0gJHlR0FEydmDQ3XB/+odEQoAZ0E7OaBxv9e6eRfd/VX7Z8qvo310TDvME7y4BWX2iCB
-         gXKqMvOnu5cTdbKrDFcQjZj4C66JZuvO/01XBljY9MarFB0mfT3XRj1t5n8TfxT/cMIL
-         WA9lInY/oTrQhrnkwNxMdR7FzT6PqK71jZ2rUvpa3eY2D+8FCWQXd1ni8oGsnJoKA3pp
-         bl88VMtUT0VfJRAZ14TO1OFbtetLg9GyryiHA6k2iF1EjCO8Y/dGu8iMJGtvIYKyUDJm
-         BZ1A==
-X-Gm-Message-State: ABy/qLYn10PcE+E+YCNbV1u3SzEKnb2XdkQtzBuhIpLXu5ZdLhz/OZCU
-        RVqAxKRR1bQShp9RJvJfyEA=
-X-Google-Smtp-Source: APBJJlHnnok9Mx+f7RYJsZHV8yEum4Sn1wcdAs7XUsX21sDjr1H6pLwz8q+mTssH7RCTpLZGXrDz3g==
-X-Received: by 2002:a05:6a00:392a:b0:668:8596:752f with SMTP id fh42-20020a056a00392a00b006688596752fmr6380571pfb.4.1689382281476;
-        Fri, 14 Jul 2023 17:51:21 -0700 (PDT)
+        b=NyYVwRCHfMTn4mDe+zifevC36LNIWbkCdUYhof+mTagkPxrcI4DaWBEkk7hjUwcHrK
+         VkYVJkpgejDOQ8S7sHND6RUOrAG2e26urX24l2Ip67MEvDF34TqXnq9i24/V2EEsjmM7
+         Bl2o4Hp0XceWcdf1YE6SjAYPxM+7SOdwI79cNVfpIeo6lh7CA4NZyY6XZx6cB7iKlOEC
+         yYoPNc4zR7uEq7BGjkGLd5Duw4cswmu+AwMiKBrfecE7QZ6sKO8dC4E11ccARWVpl6LA
+         UbnOSgU6q7amRXo0oobCf9pZAFZSxX/CKzekvhsRprbpQ591hBtHpP/te1HbWWFo7Svq
+         6/cQ==
+X-Gm-Message-State: ABy/qLZ9G+BlqPmVVrPPTqFC3hUSwmwyVzrikS2U5kNgo37+jT//LDYA
+        n+gwz5KcEqsmLz+4EgQhKog=
+X-Google-Smtp-Source: APBJJlHXsIoACkZfSX/DCI4ZIPzo2xeUjgvBkmnAH0RBWLH4b4W3obEfbvc4jSyufqRTGBGUu0l+ag==
+X-Received: by 2002:a05:6a00:3a1d:b0:680:f6fe:8908 with SMTP id fj29-20020a056a003a1d00b00680f6fe8908mr5573122pfb.9.1689382283020;
+        Fri, 14 Jul 2023 17:51:23 -0700 (PDT)
 Received: from smtpclient.apple ([2402:d0c0:2:a2a::1])
-        by smtp.gmail.com with ESMTPSA id d17-20020aa78691000000b0066a4e561beesm7959658pfo.173.2023.07.14.17.51.17
+        by smtp.gmail.com with ESMTPSA id v15-20020a62a50f000000b00640dbbd7830sm7951128pfm.18.2023.07.14.17.51.18
         (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
-        Fri, 14 Jul 2023 17:51:21 -0700 (PDT)
+        Fri, 14 Jul 2023 17:51:22 -0700 (PDT)
 Content-Type: text/plain;
         charset=utf-8
 Mime-Version: 1.0 (Mac OS X Mail 16.0 \(3731.400.51.1.1\))
@@ -70,8 +70,8 @@ To:     paulmck@kernel.org
 X-Mailer: Apple Mail (2.3731.400.51.1.1)
 X-Spam-Status: No, score=-2.1 required=5.0 tests=BAYES_00,DKIM_SIGNED,
         DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_FROM,
-        RCVD_IN_DNSWL_BLOCKED,SPF_HELO_NONE,SPF_PASS,T_SCC_BODY_TEXT_LINE
-        autolearn=ham autolearn_force=no version=3.4.6
+        RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,SPF_PASS,T_SCC_BODY_TEXT_LINE
+        autolearn=unavailable autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
